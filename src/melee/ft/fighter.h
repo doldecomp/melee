@@ -505,12 +505,75 @@ typedef enum ftCommonAction {
     ASID_BARREL
 } ftCommonAction;
 
+typedef enum _ftPart {
+    TopN,
+    TransN,
+    XRotN,
+    YRotN,
+    HipN,
+    WaistN,
+    LLegJA,
+    LLegJ,
+    LKneeJ,
+    LFootJA,
+    LFootJ,
+    RLegJA,
+    RLegJ,
+    RKneeJ,
+    RFootJA,
+    RFootJ,
+    BustN,
+    LShoulderN,
+    LShoulderJA,
+    LShoulderJ,
+    LArmJ,
+    LHandN,
+    L1stNa,
+    L1stNb,
+    L2ndNa,
+    L2ndNb,
+    L3rdNa,
+    L3rdNb,
+    L4thNa,
+    L4thNb,
+    LThumbNa,
+    LThumbNb,
+    LHandNb,
+    NeckN,
+    HeadN,
+    RShoulderN,
+    RShoulderJA,
+    RShoulderJ,
+    RArmJ,
+    RHandN,
+    R1stNa,
+    R1stNb,
+    R2ndNa,
+    R2ndNb,
+    R3rdNa,
+    R3rdNb,
+    R4thNa,
+    R4thNb,
+    RThumbNa,
+    RThumbNb,
+    RHandNb,
+    ThrowN,
+    TransN2
+} ftPart;
+
 struct RGBA {
     u8 r;
     u8 g;
     u8 b;
     u8 a;
 };
+
+// Table in PlCo.dat
+typedef struct _FighterPartsTable {
+    u8* joint_to_part;
+    u8* part_to_joint;
+    u32 parts_num;
+} FighterPartsTable;
 
 // Points to data in PlCo.dat
 typedef struct _ftCommonData {
@@ -659,6 +722,11 @@ typedef struct _FtCollisionData {
     s32 x30;
     s32 x34;
 } FtCollisionData;
+
+typedef struct _DObjList {
+    u32 count;
+    HSD_DObj** data;
+} DObjList;
 
 struct UnkFloat6_Camera;
 
@@ -1357,8 +1425,7 @@ typedef struct _Fighter {
     /* 0x5A0 */ void* x5C8;
     u8 filler_x5CC[0x5E8 - 0x5CC];
     /* 0x5E8 */ FighterBone* x5E8_fighterBones;
-    u8 filler_x5EC[0x5F0 - 0x5EC];
-    /* 0x5F0 */ HSD_DObj** x5F0;
+    /* 0x5EC */ DObjList x5EC_dobj_list;
     /* 0x5F4 */ s8 x5F4;
     /* 0x5F5 */ s8 x5F5;
     /* 0x5F6 */ s8 x5F6;
@@ -2096,7 +2163,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj,
                                   struct S_TEMP1* argdata);
 u32 Fighter_NewSpawn_80068E40();
 void Fighter_80068E64(HSD_GObj* fighter_gobj);
-HSD_GObj* Fighter_80068E98(struct S_TEMP1* input);
+HSD_GObj* Fighter_Create(struct S_TEMP1* input);
 void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
                                         s32 new_action_state_index, s32 flags,
                                         HSD_GObj* otherObj, f32 animStart,
@@ -2251,5 +2318,6 @@ inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
 
 extern unk_t lbl_804D6520;
 extern ftCommonData* p_ftCommonData;
+extern FighterPartsTable** ftPartsTable;
 
 #endif

@@ -1110,7 +1110,7 @@ void func_8007E5AC(Fighter* fp)
     func_80075CB4(fp, 0, tmp);
 }
 
-void func_8007E620(Fighter* fp, HSD_Joint* joint)
+void Fighter_SetAccessory(Fighter* fp, HSD_Joint* joint)
 {
     if (fp->x20A0_accessory != NULL) {
         OSReport("fighter accessory already exsist!\n");

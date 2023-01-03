@@ -614,13 +614,14 @@ lbl_80364BF4:
     /* 80364BF8 003617D8  80 01 00 54 */	lwz r0, 0x54(r1)
     /* 80364BFC 003617DC  38 21 00 50 */	addi r1, r1, 0x50
     /* 80364C00 003617E0  7C 08 03 A6 */	mtlr r0
-    /* 80364C04 003617E4  4E 80 00 20 */	blr 
+    /* 80364C04 003617E4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 #endif
 
 #pragma push
-asm void HSD_ForeachAnim(void*, ...)
+asm void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask,
+                         void* func, AObj_Arg_Type arg_type, ...)
 { // clang-format off
     nofralloc
     /* 80364C08 003617E8  7C 08 02 A6 */	mflr r0
@@ -664,7 +665,7 @@ lbl_80364C3C:
     /* 80364C9C 0036187C  57 E0 10 3A */	slwi r0, r31, 2
     /* 80364CA0 00361880  7C 03 00 2E */	lwzx r0, r3, r0
     /* 80364CA4 00361884  7C 09 03 A6 */	mtctr r0
-    /* 80364CA8 00361888  4E 80 04 20 */	bctr 
+    /* 80364CA8 00361888  4E 80 04 20 */	bctr
     /* 80364CAC 0036188C  38 61 00 80 */	addi r3, r1, 0x80
     /* 80364CB0 00361890  38 80 00 03 */	li r4, 3
     /* 80364CB4 00361894  4B FB D9 6D */	bl __va_arg
@@ -698,7 +699,7 @@ lbl_80364D0C:
     /* 80364D1C 003618FC  57 80 10 3A */	slwi r0, r28, 2
     /* 80364D20 00361900  7C 03 00 2E */	lwzx r0, r3, r0
     /* 80364D24 00361904  7C 09 03 A6 */	mtctr r0
-    /* 80364D28 00361908  4E 80 04 20 */	bctr 
+    /* 80364D28 00361908  4E 80 04 20 */	bctr
     /* 80364D2C 0036190C  28 1B 00 00 */	cmplwi r27, 0
     /* 80364D30 00361910  40 82 00 14 */	bne lbl_80364D44
     /* 80364D34 00361914  38 6D A6 68 */	addi r3, r13, lbl_804D5D08
@@ -1117,7 +1118,7 @@ lbl_803652F8:
     /* 803652FC 00361EDC  80 01 00 B4 */	lwz r0, 0xb4(r1)
     /* 80365300 00361EE0  38 21 00 B0 */	addi r1, r1, 0xb0
     /* 80365304 00361EE4  7C 08 03 A6 */	mtlr r0
-    /* 80365308 00361EE8  4E 80 00 20 */	blr 
+    /* 80365308 00361EE8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 

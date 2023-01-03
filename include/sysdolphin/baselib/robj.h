@@ -21,7 +21,7 @@ typedef struct _HSD_Rvalue {
 
 typedef struct _HSD_RvalueList {
     u32 flags;
-    struct _HSD_JObjDesc* joint;
+    struct _HSD_Joint* joint;
     struct _HSD_RvalueList* next;
 } HSD_RvalueList;
 
@@ -75,7 +75,7 @@ typedef struct _HSD_RObjDesc {
         struct _HSD_ExpDesc* exp;
         struct _HSD_ByteCodeExpDesc* bcexp;
         struct _HSD_IKHintDesc* ik_hint;
-        struct _HSD_JObjDesc* joint;
+        struct _HSD_Joint* joint;
         f32 limit;
     } u;
 } HSD_RObjDesc;

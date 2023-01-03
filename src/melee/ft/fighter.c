@@ -39,7 +39,7 @@ extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 const Vec3 lbl_803B7488 = { 0.0f, 0.0f, 0.0f };
 const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
 
-HSD_ObjAllocData lbl_80458FD0;
+HSD_ObjAllocData fighter_alloc_data;
 HSD_ObjAllocData lbl_80458FFC;
 HSD_ObjAllocData lbl_80459028;
 HSD_ObjAllocData lbl_80459054;
@@ -72,7 +72,7 @@ unk_t lbl_804D6534 = NULL;
 unk_t lbl_804D6538 = NULL;
 unk_t lbl_804D653C = NULL;
 s32** lbl_804D6540 = NULL;
-unk_t lbl_804D6544 = NULL;
+FighterPartsTable** ftPartsTable = NULL;
 unk_t lbl_804D6548 = NULL;
 unk_t lbl_804D654C = NULL;
 unk_t lbl_804D6550 = NULL;
@@ -94,7 +94,7 @@ void Fighter_800679B0()
     s32 i;
 
     // @WARNING: don't hardcode the allocation sizes
-    HSD_ObjAllocInit(&lbl_80458FD0, sizeof(Fighter), /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_alloc_data, sizeof(Fighter), /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80458FFC, /*size*/ 0x424, /*align*/ 4);
     func_800852B0();
     Fighter_LoadCommonData();
@@ -102,8 +102,8 @@ void Fighter_800679B0()
     func_8009F4A4();
     func_800C8064();
     func_800C8F6C();
-    // @TODO: &lbl_80458FD0+2, +3, +4 are not defined in the fighter.s data
-    // section, how does this work?
+    // @TODO: &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s
+    // data section, how does this work?
     HSD_ObjAllocInit(&lbl_80459028, /*size*/ 0x8c0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80459054, /*size*/ 0x1f0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80459080, /*size*/ 0x80, /*align*/ 4);
@@ -139,7 +139,7 @@ void Fighter_LoadCommonData()
     lbl_804D6550 = pData[1];
     lbl_804D654C = pData[2];
     lbl_804D6548 = pData[3];
-    lbl_804D6544 = pData[4];
+    ftPartsTable = pData[4];
     lbl_804D6540 = pData[5];
     lbl_804D653C = pData[6];
     lbl_804D6538 = pData[7];
@@ -797,11 +797,11 @@ void Fighter_80068E64(HSD_GObj* fighter_gobj)
     }
 }
 
-static void Fighter_80068E98_Inline2(HSD_GObj* fighter_gobj)
+static void Fighter_Create_Inline2(HSD_GObj* fighter_gobj)
 {
     Fighter* fp =
         getFighter(fighter_gobj); // you cant do (void*) here to make it
-                                  // consistent, Fighter_80068E98 wont match
+                                  // consistent, Fighter_Create wont match
     if (fp->x2229_b5_no_normal_motion == 0) {
         fp->x2EC = func_8001E8F8(func_80085E50(fp, 0x23));
         if (fp->x2228_flag.bits.b2 == 0) {
@@ -813,15 +813,15 @@ static void Fighter_80068E98_Inline2(HSD_GObj* fighter_gobj)
     }
 }
 
-HSD_GObj* Fighter_80068E98(struct S_TEMP1* input)
+HSD_GObj* Fighter_Create(struct S_TEMP1* input)
 {
     HSD_GObj* fighter_gobj;
     Fighter* fp;
     HSD_JObj* jobj;
 
-    fighter_gobj = func_803901F0(4, 8, 0);
+    fighter_gobj = GObj_Create(4, 8, 0);
     GObj_SetupGXLink(fighter_gobj, &func_80080E18, 5U, 0U);
-    fp = HSD_ObjAlloc(&lbl_80458FD0);
+    fp = HSD_ObjAlloc(&fighter_alloc_data);
     fp->x2D8_specialAttributes2 = HSD_ObjAlloc(&lbl_80458FFC);
     GObj_InitUserData(fighter_gobj, 4U, &Fighter_Unload_8006DABC, fp);
     func_8008572C(input->fighterKind);
@@ -852,7 +852,7 @@ HSD_GObj* Fighter_80068E98(struct S_TEMP1* input)
         ft_OnLoad[fp->x4_fighterKind](fighter_gobj);
     }
 
-    Fighter_80068E98_Inline2(fighter_gobj);
+    Fighter_Create_Inline2(fighter_gobj);
 
     func_8007B320(fighter_gobj);
     fp->x890_cameraBox = func_80029020();
@@ -3082,8 +3082,8 @@ void Fighter_Unload_8006DABC(void* user_data)
     HSD_ObjFree(&lbl_804590AC, fp->x59C);
     HSD_ObjFree(&lbl_804590AC, fp->x5A0);
     HSD_ObjFree(&lbl_80459028, fp->x5E8_fighterBones);
-    HSD_ObjFree(&lbl_80459054, fp->x5F0);
+    HSD_ObjFree(&lbl_80459054, fp->x5EC_dobj_list.data);
     HSD_ObjFree(&lbl_80459080, fp->x2040);
     HSD_ObjFree(&lbl_80458FFC, fp->x2D8_specialAttributes2);
-    HSD_ObjFree(&lbl_80458FD0, fp);
+    HSD_ObjFree(&fighter_alloc_data, fp);
 }

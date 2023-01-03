@@ -258,6 +258,8 @@ s32* func_8015D084(s32 arg0)
     return &func_8015EDBC()->xB0[arg0 & 0xFF];
 }
 #else
+
+#pragma push
 asm s32* func_8015D084(s32 arg0){
     // clang-format off
     nofralloc
@@ -277,7 +279,7 @@ asm s32* func_8015D084(s32 arg0){
 /* 8015D0B8 00159C98  7C 08 03 A6 */	mtlr r0
 /* 8015D0BC 00159C9C  4E 80 00 20 */	blr
 } // clang-format on
-#pragma peephole on
+#pragma pop
 #endif
 
 s32* func_8015D0C0(u8 arg0)
@@ -425,6 +427,8 @@ s32* func_8015D450(s32 arg0)
     return &func_8015EDBC()->x4C[arg0 & 255];
 }
 #else
+
+#pragma push
 asm s32* func_8015D450(s32 arg0){
     // clang-format off
     nofralloc
@@ -444,7 +448,7 @@ asm s32* func_8015D450(s32 arg0){
 /* 8015D484 0015A064  7C 08 03 A6 */	mtlr r0
 /* 8015D488 0015A068  4E 80 00 20 */	blr
 } // clang-format on
-#pragma peephole on
+#pragma pop
 #endif
 
 s32 func_8015D48C(u8 arg0)
@@ -666,6 +670,8 @@ s32 func_8015D984(s32 arg0)
     return 0;
 }
 #else
+
+#pragma push
 asm s32 func_8015D984(s32 arg0)
 { // clang-format off
     nofralloc
@@ -700,7 +706,7 @@ lbl_8015D9DC:
 /* 8015D9EC 0015A5CC  7C 08 03 A6 */	mtlr r0
 /* 8015D9F0 0015A5D0  4E 80 00 20 */	blr
 } // clang-format on
-#pragma peephole on
+#pragma pop
 #endif
 
 void func_8015D9F4(u32 arg0)
@@ -770,6 +776,8 @@ void func_8015DB2C(u8 arg0, s32 arg2)
     *base = func_8000AF74(*base, 1);
 }
 #else
+
+#pragma push
 asm void func_8015DB2C(u8 arg0, s32 arg2){
     // clang-format off
     nofralloc
@@ -790,7 +798,7 @@ asm void func_8015DB2C(u8 arg0, s32 arg2){
 /* 8015DB64 0015A744  7C 08 03 A6 */	mtlr r0
 /* 8015DB68 0015A748  4E 80 00 20 */	blr
 } // clang-format on
-#pragma peephole on
+#pragma pop
 #endif
 
 u8 func_8015DB6C(u8 arg0)

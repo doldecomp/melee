@@ -6,6 +6,8 @@
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
+#include <melee/sc/scene.h>
+
 enum InternalStageID {
     CASTLE = 0x02,    // Princess Peach's Castle
     RCRUISE = 0x03,   // Rainbow Cruise
@@ -76,11 +78,6 @@ typedef struct _StageBlastZone {
     f32 bottom; // 0x80
 } StageBlastZone;
 
-typedef struct _StageAnim {
-    struct _HSD_Joint* joint;
-    struct _HSD_AnimJoint** anims;
-} StageAnim;
-
 typedef struct _StageInfo {
     StageCameraInfo cam_info;  // 0x00 - 0x70
     StageBlastZone blast_zone; // 0x74 - 0x80
@@ -135,7 +132,7 @@ typedef struct _StageInfo {
     void* x6C0;
     void* x6C4;
     void* x6C8;
-    StageAnim* x6CC;
+    DynamicModelDesc* x6CC;
     s16 x6D0;
     s16 x6D2;
     s16 x6D4;
