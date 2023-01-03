@@ -185,7 +185,7 @@ int CARDRead(CARDFileInfo*, void* buf, u32 length, u32 offset);
 s32 CARDFastOpen(s32 chan, s32 fileno, CARDFileInfo* fileinfo);
 s32 __CARDReadStatus(s32 chan, u8* status);
 s32 __CARDClearStatus(s32 chan);
-s32 Retry(s32 chan);
+static s32 Retry(s32 chan);
 CARDDir* __CARDGetDirBlock(CARDControl*);
 u16* __CARDGetFatBlock(CARDControl* card);
 s32 __CARDUpdateFatBlock(s32 chan, u16* fat, CARDCallback);
