@@ -68,8 +68,6 @@ static void CompleteTransfer(EXIChannel chan)
     }
 }
 
-u32 EXIClearInterrupts(EXIChannel chan, BOOL exi, BOOL tc, BOOL ext);
-
 BOOL EXIImm(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
 {
     EXIControl* exi = &Ecb[chan];
