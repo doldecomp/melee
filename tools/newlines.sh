@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 git ls-files -z |
     sed -z -E '/\.(sha1|png)$/d' |
     while IFS= read -rd '' f; do
