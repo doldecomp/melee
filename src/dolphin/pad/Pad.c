@@ -16,8 +16,6 @@ extern u32 WaitingBits;
 extern u32 CheckingBits;
 extern u32 PendingBits;
 
-void PADTypeAndStatusCallback(s32 chan, u32 type);
-
 static void PADEnable(s32 chan)
 {
     u32 cmd;
@@ -115,8 +113,6 @@ inline void foo(s32 chan)
     SIGetResponse(chan, sp1C + 0xC);
     SISetCommand(chan, AnalogMode | 0x400000);
 }
-
-void PADTypeAndStatusCallback(s32 chan, u32 type);
 
 void PADOriginCallback(s32, s32 arg1)
 {

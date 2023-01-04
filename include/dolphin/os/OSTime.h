@@ -26,11 +26,7 @@ OSTick OSGetTick(void);
 OSTime __OSTimeToSystemTime(OSTime);
 OSTime __OSGetSystemTime(void);
 
-extern u32 __OSBusClock
-#ifndef M2CTX
-    : 0x800000F8
-#endif
-    ;
+extern u32 __OSBusClock AT_ADDRESS(0x800000F8);
 
 #define OS_BUS_CLOCK __OSBusClock
 #define OS_TIMER_CLOCK (OS_BUS_CLOCK / 4)

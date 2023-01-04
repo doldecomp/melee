@@ -23,11 +23,11 @@ typedef struct PADStatus {
 } PADStatus;
 
 void PADControlMotor(int chan, u32 command);
-void SISetSamplingRate(u32 rate);
 void VISetBlack(BOOL);
 u32 VIGetRetraceCount();
 void PADClamp(PADStatus*);
 void PADRead(u8*);
 void PADReset(u32);
+void PADTypeAndStatusCallback(s32 chan, u32 type);
 
 #endif

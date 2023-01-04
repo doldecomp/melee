@@ -4,5 +4,6 @@
 #include <dolphin/types.h>
 
 u32 OSGetPhysicalMemSize(void);
+u32 OSGetConsoleSimulatedMemSize(void);
 
 #endif

@@ -316,18 +316,15 @@ lbl_803432F4:
 extern unk_t __OSEVSetNumber();
 extern unk_t OSExceptionVector();
 extern unk_t __OSEVEnd();
-extern unk_t DriveInfo;
 extern unk_t __OSDBIntegrator();
 extern unk_t __OSDBJump();
 extern unk_t __OSSetExceptionHandler();
 extern unk_t __DBVECTOR();
-extern unk_t BI2DebugFlag;
 extern unk_t OSExceptionTable;
 extern unk_t OSDefaultExceptionHandler();
 extern unk_t __DBIsExceptionMarked();
 extern unk_t ICInvalidateRange();
 extern unk_t DCFlushRangeNoSync();
-extern unk_t memcpy();
 extern unk_t DBPrintf();
 
 #pragma push
@@ -538,8 +535,6 @@ asm unk_t __OSDBJump()
 } // clang-format on
 #pragma pop
 
-extern unk_t OSExceptionTable;
-
 #pragma push
 asm unk_t __OSSetExceptionHandler()
 { // clang-format off
@@ -605,8 +600,6 @@ asm unk_t __DBVECTOR()
 /* 80343648 00340228  7C 7B 03 A6 */	mtspr 0x1b, r3
 } // clang-format on
 #pragma pop
-
-extern unk_t OSDefaultExceptionHandler();
 
 #pragma push
 asm unk_t __OSEVSetNumber()

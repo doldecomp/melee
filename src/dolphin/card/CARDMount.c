@@ -82,7 +82,7 @@ s32 CARDProbeEx(s32 chan, s32* memSize, s32* sectorSize)
 }
 
 void __CARDMountCallback(s32 chan, s32 result);
-void DoUnmount(s32 chan, s32 result);
+static void DoUnmount(s32 chan, s32 result);
 
 s32 DoMount(s32 chan)
 {

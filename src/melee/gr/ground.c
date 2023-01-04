@@ -6,6 +6,7 @@
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
 
+#include <dolphin/os/os.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -717,8 +718,6 @@ void func_801C1074(StructPairWithStageID* pair, s32 arg1)
 {
     lbl_803DFEDC[pair->stage_id]->callback1(arg1);
 }
-
-void OSPanic(const char* file, int line, const char* msg, ...);
 
 void func_801C10B8(s32 arg0, s32 arg1)
 {

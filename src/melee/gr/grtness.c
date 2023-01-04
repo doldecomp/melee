@@ -1,5 +1,6 @@
 #include <melee/gr/grtness.h>
 
+#include <dolphin/os/os.h>
 #include <melee/gr/stage.h>
 
 extern StageInfo stage_info;

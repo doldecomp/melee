@@ -1,5 +1,6 @@
 #include <sysdolphin/baselib/dobj.h>
 
+#include <dolphin/os/os.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/pobj.h>
 

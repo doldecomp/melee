@@ -1,5 +1,7 @@
 #include <melee/gr/grtyoshi.h>
 
+#include <dolphin/os/os.h>
+
 static StageCallbacks lbl_803E9578[4] = {
     { lbl_80223CD4, lbl_80223D00, lbl_80223D08, lbl_80223D0C, 0UL },
     { lbl_80223DA0, lbl_80223DF0, lbl_80223DF8, lbl_80223E18, 0UL },

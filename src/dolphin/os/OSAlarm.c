@@ -11,8 +11,6 @@ static struct OSAlarmQueue {
 } AlarmQueue;
 
 extern unk_t __OSSetExceptionHandler();
-extern unk_t __div2i();
-extern OSTime __OSGetSystemTime();
 
 typedef u8 __OSException;
 typedef void (*__OSExceptionHandler)(__OSException exception,

@@ -1,4 +1,6 @@
 #include <melee/it/item.h>
+
+#include <dolphin/os/os.h>
 #include <common_structs.h>
 
 extern s32 func_8016AE80();

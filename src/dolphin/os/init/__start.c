@@ -111,9 +111,6 @@ asm static void __init_registers(void)
 	blr
 } // clang-format on
 
-extern __rom_copy_info _rom_copy_info[];
-extern __bss_init_info _bss_init_info[];
-
 inline static void __copy_rom_section(void* dst, void* const src, size_t size)
 {
     if (size && (dst != src)) {
