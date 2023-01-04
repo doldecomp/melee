@@ -9,5 +9,6 @@
 
 void _HSD_DispForgetMemory();
 void HSD_ZListInitAllocData(void);
+void HSD_EraseRect();
 
 #endif
