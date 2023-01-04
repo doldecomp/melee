@@ -4,6 +4,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/gm/code_801601C4.h>
 #include <melee/gr/grdatfiles.h>
+#include <melee/gr/grmaterial.h>
 #include <melee/it/itkind.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>

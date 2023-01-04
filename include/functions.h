@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup grmaterial grMaterial
-/// @{
-void func_801C95C4(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup grstage grStage
 /// @{
 s32 Stage_80225194(void);
