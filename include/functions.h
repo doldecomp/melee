@@ -9,16 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup dolphin_mtx PSMTX
-/// @{
-void PSMTXIdentity(Mtx m);
-u32 PSMTXInverse(const Mtx src, Mtx inv);
-void PSMTXRotAxisRad(Mtx m, const Vec* axis, f32 rad);
-void PSMTXTrans(Mtx m, f32 x_trans, f32 y_trans, f32 z_trans);
-void PSMTXScale(Mtx m, f32 x_scale, f32 y_scale, f32 z_scale);
-void PSMTXQuat(Mtx m, const Quaternion* q);
-/// @}
-
 /// @addtogroup dolphin_mtx_mtxvec PSMTXVec
 /// @{
 void PSMTXMUltiVec(Mtx, Vec*, Vec*);
