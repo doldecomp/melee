@@ -1,8 +1,10 @@
+#include <sysdolphin/baselib/jobj.h>
+
 #include <dolphin/os/os.h>
 #include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/robj.h>
+#include <sysdolphin/baselib/spline.h>
 
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };

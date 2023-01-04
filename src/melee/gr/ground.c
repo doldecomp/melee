@@ -1,15 +1,15 @@
 #include <melee/gr/ground.h>
 
+#include <dolphin/os/os.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/it/itkind.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
-
-#include <dolphin/os/os.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>

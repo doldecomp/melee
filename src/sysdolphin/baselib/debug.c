@@ -1,4 +1,4 @@
-#include "global.h"
+#include <sysdolphin/baselib/debug.h>
 
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSContext.h>

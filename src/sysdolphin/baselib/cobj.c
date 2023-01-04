@@ -1,5 +1,7 @@
 #include <sysdolphin/baselib/cobj.h>
 
+#include <sysdolphin/baselib/displayfunc.h>
+
 extern f64 lbl_804DE468; // 0.5
 extern f32 lbl_804DE470; // 0.5f
 extern f32 lbl_804DE474; // 0.01745329252f
@@ -47,7 +49,9 @@ void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
                       enable_color, enable_alpha, enable_depth);
     }
 }
+
 #else
+
 asm void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
                              s32 enable_depth)
 { // clang-format off

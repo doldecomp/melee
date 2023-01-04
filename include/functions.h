@@ -873,63 +873,6 @@ f32 PSVECDotProduct(Vec* a, Vec* b);
 void VIWaitForRetrace(void);
 /// @}
 
-/// @addtogroup hsd_tobj HSD_TObj
-/// @{
-struct _HSD_TObj* allocShadowTObj();
-struct _HSD_ImageDesc* HSD_ImageDescAlloc();
-/// @}
-
-/// @addtogroup hsd_shadow HSD_Shadow
-/// @{
-f32 HSD_CObjGetNear(struct _HSD_CObj*);
-/// @}
-
-/// @addtogroup hsd_cobj HSD_CObj
-/// @{
-f32 HSD_CObjGetFar(struct _HSD_CObj*);
-void HSD_CObjSetScissorx4();
-void HSD_CObjSetViewportfx4();
-u32 HSD_CObjGetProjectionType(struct _HSD_CObj*);
-/// @}
-
-/// @addtogroup hsd_pobj HSD_PObj
-/// @{
-struct _HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
-/// @}
-
-/// @addtogroup hsd_displayfunc HSD_DisplayFunc
-/// @{
-void HSD_EraseRect();
-/// @}
-
-/// @addtogroup hsd_initialize HSD_Initialize
-/// @{
-int HSD_GetHeap(void);
-/// @}
-
-/// @addtogroup hsd_video HSD_Video
-/// @{
-void HSD_VIInit(struct _HSD_VIStatus* vi_status, void* xfb0, void* xfb1,
-                void* xfb2);
-/// @}
-
-/// @addtogroup hsd_rumble HSD_Rumble
-/// @{
-void func_80378280(u8, int);
-/// @}
-
-/// @addtogroup hsd_spline HSD_Spline
-/// @{
-f32 splGetHelmite(f32, f32, f32, f32, f32, f32);
-void splArcLengthPoint(Vec*, struct _HSD_Spline*, f32);
-/// @}
-
-/// @addtogroup hsd_mtx HSD_Mtx
-/// @{
-void func_80379310();
-void HSD_MtxSRT();
-/// @}
-
 /// @addtogroup todo_unk NOT FOUND
 /// @{
 
@@ -944,34 +887,6 @@ void func_8037AD20(struct _HSD_ObjAllocData* data,
 void* func_8037CF98(struct _HSD_IDTable* table, u32 id, u8* success);
 /// @}
 
-/// @addtogroup hsd_id HSD_Id
-/// @{
-void HSD_IDSetup(void);
-/// @}
-
-/// @addtogroup hsd_quatlib HSD_QuatLib
-/// @{
-void func_8037EE0C(Vec*, Quaternion*);
-void func_8037EF28(Quaternion*, Quaternion*, Quaternion*, f32);
-/// @}
-
-/// @addtogroup hsd_debug HSD_Debug
-/// @{
-void func_803881E4(void);
-void HSD_Panic(char*, u32, char*);
-/// @}
-
-/// @addtogroup hsd_gobjproc HSD_GObjProc
-/// @{
-struct _HSD_GObjProc* func_8038FD54(struct _HSD_GObj*,
-                                    void (*)(struct _HSD_GObj*), u8);
-/// @}
-
-/// @addtogroup hsd_gobjplink HSD_GObjPLink
-/// @{
-void func_80390228(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup eflib efLib
 /// @{
 void efLib_PauseAll(struct _HSD_GObj*);
@@ -981,12 +896,6 @@ void efLib_ResumeAll(struct _HSD_GObj*);
 /// @addtogroup efsync efSync
 /// @{
 void ef_Spawn(s32, ...);
-/// @}
-
-/// @addtogroup hsd_random HSD_Random
-/// @{
-f32 HSD_Randf(void);
-s32 HSD_Randi(s32);
 /// @}
 
 #endif

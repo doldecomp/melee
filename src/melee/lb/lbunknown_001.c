@@ -6,6 +6,7 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/pobj.h>
+#include <sysdolphin/baselib/quatlib.h>
 #include <sysdolphin/baselib/robj.h>
 
 static s32 lbl_803B9FC0[] = { 14, 14, 14, 14, 2, 4, 6, 0 };
