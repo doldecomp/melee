@@ -1,5 +1,7 @@
 #include <sysdolphin/baselib/mtx.h>
 
+#include <MSL/trigf.h>
+
 #define EPSILON 0.0000000001f
 #define FLOAT_MIN 1.1754943E-38f
 

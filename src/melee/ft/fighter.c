@@ -16,6 +16,7 @@
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_002.h>
+#include <MSL/trigf.h>
 
 #define HALF_PI 1.5707963267948966
 

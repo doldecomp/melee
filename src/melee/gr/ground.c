@@ -11,6 +11,7 @@
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
+#include <MSL/trigf.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
@@ -20,7 +21,6 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
-
 StageInfo stage_info;
 
 static StageData lbl_803DFEA8 = {

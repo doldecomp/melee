@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
+#include <MSL/trigf.h>
+
 #define HALF_PI32 1.5707963705062866f
 
 // 0x801450A0

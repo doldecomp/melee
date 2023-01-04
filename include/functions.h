@@ -9,13 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup msl_trigf mslTrigF
-/// @{
-f32 tanf(f32);
-f32 cosf(f32);
-f32 sinf(f32);
-/// @}
-
 /// @addtogroup dolphin_mtx PSMTX
 /// @{
 void PSMTXIdentity(Mtx m);
