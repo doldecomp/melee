@@ -9,14 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup lbarchive lbArchive
-/// @{
-/// @todo vararg may start earlier
-void func_80016C64(char*, void**, char*, s32, ...);
-void* func_80016DBC(void*, ...);
-s32 func_800171CC(void*, ...);
-/// @}
-
 /// @addtogroup lbmthp lbMthp
 /// @{
 f32 func_8001E8F8(u32);
