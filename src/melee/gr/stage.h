@@ -1,8 +1,7 @@
 #ifndef _stage_h_
 #define _stage_h_
 
-#include <global.h>
-
+#include <dolphin/gx/types.h>
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 

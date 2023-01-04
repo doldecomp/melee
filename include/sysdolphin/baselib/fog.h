@@ -1,6 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_FOG_H
 #define SYSDOLPHIN_BASELIB_FOG_H
 
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <sysdolphin/baselib/object.h>
 

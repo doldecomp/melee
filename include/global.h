@@ -2,6 +2,5 @@
 #define _global_h_
 
 #include <dolphin/types.h>
-#include <dolphin/gx/types.h>
 
 #endif
