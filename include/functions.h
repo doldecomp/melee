@@ -873,12 +873,6 @@ f32 PSVECDotProduct(Vec* a, Vec* b);
 void VIWaitForRetrace(void);
 /// @}
 
-/// @addtogroup hsd_mtx HSD_Mtx
-/// @{
-void func_80379310();
-void HSD_MtxSRT();
-/// @}
-
 /// @addtogroup todo_unk NOT FOUND
 /// @{
 
