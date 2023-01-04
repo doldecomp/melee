@@ -887,12 +887,6 @@ void func_8037AD20(struct _HSD_ObjAllocData* data,
 void* func_8037CF98(struct _HSD_IDTable* table, u32 id, u8* success);
 /// @}
 
-/// @addtogroup hsd_debug HSD_Debug
-/// @{
-void func_803881E4(void);
-void HSD_Panic(char*, u32, char*);
-/// @}
-
 /// @addtogroup hsd_gobjproc HSD_GObjProc
 /// @{
 struct _HSD_GObjProc* func_8038FD54(struct _HSD_GObj*,

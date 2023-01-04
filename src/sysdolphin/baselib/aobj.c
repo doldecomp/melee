@@ -619,6 +619,8 @@ lbl_80364BF4:
 #pragma pop
 #endif
 
+#include <sysdolphin/baselib/debug.h>
+
 #pragma push
 asm void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask,
                          void* func, AObj_Arg_Type arg_type, ...)

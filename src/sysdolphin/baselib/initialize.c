@@ -80,6 +80,8 @@ static void HSD_DVDInit(void)
 {
 }
 
+#include <sysdolphin/baselib/debug.h>
+
 void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm)
 {
     u32 fb_size;
