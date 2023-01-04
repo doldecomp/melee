@@ -1,6 +1,8 @@
-#include <melee/gr/grfigure1.h>
 #include <melee/gr/grfigure2.h>
+
 #include <dolphin/os/os.h>
+#include <melee/gr/grfigure1.h>
+#include <melee/gr/ground.h>
 
 static StageCallbacks lbl_803E6328[3] = {
     { lbl_8020E3FC, lbl_8020E428, lbl_8020E430, lbl_8020E434, 0UL },

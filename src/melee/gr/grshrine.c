@@ -2,6 +2,7 @@
 
 #include <dolphin/os/os.h>
 #include <math.h>
+#include <melee/gr/ground.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
 

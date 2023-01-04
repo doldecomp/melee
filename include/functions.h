@@ -9,28 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup grground grGround
-/// @{
-f32 func_801C0498(void);
-struct _HSD_GObj* func_801C14D0(s32);
-BOOL func_801C28AC(s32, u32, s32*);
-struct _HSD_GObj* func_801C2BA4(s32);
-struct _HSD_JObj* func_801C2CF4(s32);
-BOOL func_801C2D24(s32, Vec*);
-BOOL func_801C2ED0(struct _HSD_JObj*, s32);
-void func_801C39C0();
-void func_801C3BB4();
-struct _HSD_JObj* func_801C3FA4(struct _HSD_GObj*, s32);
-s32 func_801C4210(void);
-void func_801C42AC();
-
-/// @brief Get stage's "yakumono" ("about"?) param
-void* func_801C49F8(void);
-
-void func_801C5A84();
-void func_801C5AA4();
-/// @}
-
 /// @addtogroup grdisplay grDisplay
 /// @{
 void func_801C5DB0(struct _HSD_GObj*, s32);

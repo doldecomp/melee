@@ -1,5 +1,6 @@
 #include <melee/gr/grlib.h>
 
+#include <melee/gr/ground.h>
 #include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/psappsrt.h>
 
