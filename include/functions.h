@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftness_specialhi ftNess_SpecialHi
-/// @{
-void ftNess_SpecialHiTakeDamage(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup ftpikachu1 ftPikachu1
 /// @{
 void ftPikachu_LoadSpecialAttrs(struct _HSD_GObj*);
