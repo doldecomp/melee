@@ -9,68 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftcommon ftCommon
-/// @{
-void func_8007C930(struct _Fighter*, f32);
-void func_8007CB74(struct _HSD_GObj*);
-void func_8007CC78(struct _Fighter*, f32);
-void func_8007CCA0(struct _Fighter*, f32);
-f32 func_8007CD6C(f32 value, f32 decrement);
-f32 func_8007CDA4(struct _Fighter*);
-f32 func_8007CDF8(struct _Fighter*);
-void func_8007CE4C(struct _Fighter*, f32);
-void func_8007CE94(struct _Fighter*, f32);
-BOOL func_8007CF58(struct _Fighter*);
-void func_8007D344(struct _Fighter*, f32, f32, f32);
-void func_8007D494(struct _Fighter*, f32, f32);
-void func_8007D4B8(struct _Fighter*);
-void func_8007D5BC();
-void func_8007D5D4(struct _Fighter*);
-void func_8007D6A4(struct _Fighter*);
-void func_8007D780(struct _Fighter*);
-void func_8007D7FC(struct _Fighter*);
-void func_8007D92C(struct _HSD_GObj*);
-void func_8007D9FC(struct _Fighter*);
-f32 func_8007DA74(s32, u32, f32);
-void func_8007DB24();
-void func_8007DB58();
-void func_8007E0E4();
-
-void func_8007E2D0(struct _Fighter*, s16, void (*)(struct _HSD_GObj*),
-                   void (*)(struct _HSD_GObj*),
-                   void (*)(struct _HSD_GObj*, struct _HSD_GObj*));
-
-void func_8007E2F4(struct _Fighter*, s16);
-void func_8007E2FC(struct _HSD_GObj*);
-void func_8007E83C(struct _HSD_GObj*, s32, f32 div);
-s32 ftGetParasolStatus(struct _HSD_GObj*);
-void func_8007EA90(struct _Fighter*, s32);
-void func_8007EBAC(struct _Fighter*, u32, u32);
-void func_8007ECD4();
-void func_8007ED50(struct _Fighter*, s32);
-void func_8007EE0C();
-void func_8007EFC0(struct _Fighter*, u32);
-void func_8007F578();
-f32 Fighter_GetModelScale(struct _Fighter*);
-void func_8007F8E8();
-void func_8007F9B4();
-void func_8007FC7C(struct _HSD_GObj*, f32);
-
-/// @todo static
-void func_8007FE84(struct _HSD_GObj*, struct _HSD_GObj*, s32, f32);
-
-void func_8007FF74();
-BOOL func_8007FFD8(struct _Fighter*, f32);
-void func_8008021C();
-void func_8008031C();
-
-/// @todo @c DataOffset_PlayerScale_MultiplyBySomething
-/// @returns <tt>fp->x40*fp->x34</tt>
-f32 func_800804EC(struct _Fighter*);
-
-void func_800804FC();
-/// @}
-
 /// @addtogroup code_80081938 ftUnk1
 /// @{
 void func_800819A8();

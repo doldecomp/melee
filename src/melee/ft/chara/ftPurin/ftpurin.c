@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftPurin/ftpurin.h>
 
+#include <melee/ft/fighter.h>
+
 extern struct UnkCostumeList CostumeListsForeachCharacter[33];
 extern char* lbl_803D05B4[1000]; /// not correct length
 extern HSD_ObjAllocData lbl_80459080;

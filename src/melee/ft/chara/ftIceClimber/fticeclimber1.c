@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 
+#include <melee/ft/fighter.h>
+
 void ftIceClimber_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);

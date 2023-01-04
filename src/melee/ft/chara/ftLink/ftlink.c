@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftLink/ftlink.h>
 
+#include <melee/ft/fighter.h>
 #include <melee/lb/lbmthp.h>
 
 // extern float lbl_804D92E0; // 0.0f

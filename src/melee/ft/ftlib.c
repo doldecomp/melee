@@ -2,6 +2,7 @@
 
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
+#include <melee/ft/ftcommon.h>
 #include <melee/it/itkind.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/jobj.h>

@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
+#include <melee/ft/fighter.h>
+
 void ftZelda_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

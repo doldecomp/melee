@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 
+#include <melee/ft/fighter.h>
+
 void ftPikachu_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
