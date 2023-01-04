@@ -2,6 +2,7 @@
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
+#include <melee/lb/lbheap.h>
 
 extern StageInfo stage_info;
 

@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup lbheap lbHeap
-/// @{
-struct _HSD_Archive* func_80015BD0(s32, s32);
-/// @}
-
 /// @addtogroup lbarchive lbArchive
 /// @{
 /// @todo vararg may start earlier
