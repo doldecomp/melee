@@ -3,6 +3,5 @@
 
 #include <dolphin/types.h>
 #include <dolphin/gx/types.h>
-#include <dolphin/mtx/mtxtypes.h>
 
 #endif
