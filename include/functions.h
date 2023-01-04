@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup dolphin_vi VI
-/// @{
-void VIWaitForRetrace(void);
-/// @}
-
 /// @addtogroup todo_unk NOT FOUND
 /// @{
 
