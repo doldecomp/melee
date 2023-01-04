@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
 
+#include <melee/ft/ftparts.h>
+
 // 0x80116EBC //
 // https://decomp.me/scratch/45pKw //
 BOOL ftNess_CheckSpecialNHold(

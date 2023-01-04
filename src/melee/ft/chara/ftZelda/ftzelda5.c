@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
+#include <melee/ft/ftparts.h>
+
 // 8013B638 - 8013B6D8 (0xA0 bytes)
 // https://decomp.me/scratch/QnXK1
 void ftZelda_SpecialS_StartAction(HSD_GObj* fighter_gobj)

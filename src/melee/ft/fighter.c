@@ -6,6 +6,7 @@
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ftdrawcommon.h>
+#include <melee/ft/ftparts.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbunknown_001.h>

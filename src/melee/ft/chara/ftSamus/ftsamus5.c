@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftSamus_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighterPlus(fighter_gobj);

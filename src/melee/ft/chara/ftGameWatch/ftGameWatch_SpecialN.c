@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
+#include <melee/ft/ftparts.h>
 #include <melee/lb/lbunknown_001.h>
 
 /* https://decomp.me/scratch/P7Z9j - first function of SpecialN.c; terrifying

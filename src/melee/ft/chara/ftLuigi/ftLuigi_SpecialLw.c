@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
+#include <melee/ft/ftparts.h>
+
 // 0x801445C4
 // https://decomp.me/scratch/TTyNT // Luigi Cyclone Rotation Update
 void ftLuigi_SpecialLw_UpdateRot(HSD_GObj* fighter_gobj)
