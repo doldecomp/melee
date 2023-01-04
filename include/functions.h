@@ -9,14 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftkirby ftKirby
-/// @{
-void func_800EED50(s32, s32);
-void func_800F1D24();
-void func_800F5BA4();
-void func_800F5C34();
-/// @}
-
 /// @addtogroup ftness_attacks4 ftNess_AttackS4
 /// @{
 void ftNess_ItemNessBatRemove(struct _HSD_GObj*);
