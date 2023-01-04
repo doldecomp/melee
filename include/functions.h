@@ -9,12 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftmars ftMars
-/// @{
-void ftMars_OnLoadForRoy(struct _Fighter*);
-void ftMars_LoadSpecialAttrs(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup ftclink ftCLink
 /// @{
 void func_80149268(HSD_GObj*);
