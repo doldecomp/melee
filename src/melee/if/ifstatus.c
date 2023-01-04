@@ -1567,6 +1567,8 @@ lbl_802F5EB0:
 } // clang-format on
 #pragma pop
 
+#include <sysdolphin/baselib/gobjproc.h>
+
 extern unk_t func_802F3424();
 extern unk_t func_80390A70();
 
