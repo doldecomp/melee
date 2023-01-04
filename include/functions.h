@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftfox ftFox
-/// @{
-void ftFox_LoadSpecialAttrs(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup ftfox_specialn ftFox_SpecialN
 /// @{
 void ftFox_RemoveBlaster(struct _HSD_GObj*);
