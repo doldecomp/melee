@@ -45,4 +45,6 @@ inline void checkFighter2244(HSD_GObj* gobj)
     }
 }
 
+void func_80149268(HSD_GObj*);
+
 #endif
