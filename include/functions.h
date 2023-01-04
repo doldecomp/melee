@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup plplayer plPlayer
-/// @{
-s32 Player_GetPlayerSlotType(s32);
-/// @}
-
 /// @addtogroup pl_unknown_001 plUnk1
 /// @{
 void func_80037C60();
