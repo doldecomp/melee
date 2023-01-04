@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
+#include <melee/ef/eflib.h>
 #include <MSL/trigf.h>
 
 #define HALF_PI32 1.5707963705062866f

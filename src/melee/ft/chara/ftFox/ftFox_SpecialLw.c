@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
+#include <melee/ef/eflib.h>
 #include <melee/lb/lbunknown_003.h>
 
 // 0x800E83E0

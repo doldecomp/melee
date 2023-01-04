@@ -9,12 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup eflib efLib
-/// @{
-void efLib_PauseAll(struct _HSD_GObj*);
-void efLib_ResumeAll(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup efsync efSync
 /// @{
 void ef_Spawn(s32, ...);

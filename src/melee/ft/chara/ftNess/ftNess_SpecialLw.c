@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
 
 #include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
 
 // 0x80119E14 //
 // https://decomp.me/scratch/LwTKg //

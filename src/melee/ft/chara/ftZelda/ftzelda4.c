@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
+#include <melee/ef/eflib.h>
 #include <melee/ft/fighter.h>
 #include <melee/lb/lbunknown_003.h>
 
