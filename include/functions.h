@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftness_specialn ftNess_SpecialN
-/// @{
-void ftNess_ItemPKFlushSetNULL(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup ftness_specialhi ftNess_SpecialHi
 /// @{
 void ftNess_SpecialHiTakeDamage(struct _HSD_GObj*);
