@@ -9,16 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup lbaudio_ax lbAudioAx
-/// @{
-void func_800236B8(s32);
-u32 func_800237A8(u32, u32, u32);
-void func_80023F28();
-void func_8002438C(s32);
-void func_80024B1C(s32, s32);
-void func_80024B58(s32, s32);
-/// @}
-
 /// @addtogroup cmcamera cmCamera
 /// @{
 struct _CameraBox* func_80029020();

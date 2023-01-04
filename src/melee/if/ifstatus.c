@@ -1,6 +1,7 @@
 #include <melee/if/ifstatus.h>
 
 #include <dolphin/os/os.h>
+#include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
