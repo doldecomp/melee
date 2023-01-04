@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
 #include <melee/lb/lbunknown_001.h>
 

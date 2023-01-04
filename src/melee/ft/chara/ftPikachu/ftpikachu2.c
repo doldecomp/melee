@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 
 #include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_006.h>
 
 void ftPikachu_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {

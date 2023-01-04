@@ -1,7 +1,10 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
+
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/itkind.h>
 #include <sysdolphin/baselib/random.h>
 
-#include <melee/it/itkind.h>
+
 
 void ftMario_SpecialHi_StartAction(HSD_GObj* gobj)
 {

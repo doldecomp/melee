@@ -1,4 +1,6 @@
 #include <melee/ft/chara/ftCaptain/ftCaptain.h>
+
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/it/itkind.h>
 
 extern void efLib_DestroyAll(HSD_GObj*);

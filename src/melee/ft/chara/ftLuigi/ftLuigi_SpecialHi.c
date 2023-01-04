@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
+
 
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action

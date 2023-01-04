@@ -2,6 +2,7 @@
 
 #include <dolphin/os/os.h>
 #include <melee/ef/efasync.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/it/itkind.h>

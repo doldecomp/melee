@@ -1,7 +1,9 @@
 #include <melee/ft/ftlib.h>
 
+
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/it/itkind.h>
 #include <melee/pl/player.h>

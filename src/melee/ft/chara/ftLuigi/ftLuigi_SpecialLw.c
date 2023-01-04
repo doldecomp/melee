@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
 
 // 0x801445C4
