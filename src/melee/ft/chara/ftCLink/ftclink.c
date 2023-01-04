@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftCLink/ftclink.h>
 
 #include <melee/it/itkind.h>
+#include <melee/lb/lbmthp.h>
 
 void ftCLink_OnDeath(HSD_GObj* gobj)
 {

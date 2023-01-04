@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftLink/ftlink.h>
 
+#include <melee/lb/lbmthp.h>
+
 // extern float lbl_804D92E0; // 0.0f
 
 s32 func_800EAD64(HSD_GObj* fighter_gobj)

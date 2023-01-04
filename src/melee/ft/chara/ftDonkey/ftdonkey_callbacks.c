@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
+#include <melee/lb/lbmthp.h>
+
 void ftDonkey_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
