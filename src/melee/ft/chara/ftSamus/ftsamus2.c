@@ -1,3 +1,5 @@
+#include <melee/ft/chara/ftSamus/ftsamus2.h>
+
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
 extern s32 func_8008A9F8(HSD_GObj*);

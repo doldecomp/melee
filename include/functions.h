@@ -9,12 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftsamus2 ftSamus2
-/// @{
-f32 ftSamus_80128AC8(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2);
-void ftSamus_80128B1C(HSD_GObj*, f32, f32, f32);
-/// @}
-
 /// @addtogroup ftmars ftMars
 /// @{
 void ftMars_OnLoadForRoy(struct _Fighter*);
