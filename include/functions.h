@@ -9,20 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup todo_unk NOT FOUND
-/// @{
-
-/// @todo This doesn't exist???
-void* func_8037ABC8(struct _HSD_ObjAllocData* data);
-
-/// @todo This doesn't exist???
-void func_8037AD20(struct _HSD_ObjAllocData* data,
-                   struct _HSD_ObjAllocLink* obj);
-
-/// @todo This doesn't exist???
-void* func_8037CF98(struct _HSD_IDTable* table, u32 id, u8* success);
-/// @}
-
 /// @addtogroup eflib efLib
 /// @{
 void efLib_PauseAll(struct _HSD_GObj*);
