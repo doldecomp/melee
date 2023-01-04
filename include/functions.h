@@ -887,11 +887,6 @@ void func_8037AD20(struct _HSD_ObjAllocData* data,
 void* func_8037CF98(struct _HSD_IDTable* table, u32 id, u8* success);
 /// @}
 
-/// @addtogroup hsd_gobjplink HSD_GObjPLink
-/// @{
-void func_80390228(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup eflib efLib
 /// @{
 void efLib_PauseAll(struct _HSD_GObj*);
