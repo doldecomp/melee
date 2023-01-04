@@ -1,6 +1,7 @@
 #include <melee/gr/grstory.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 #include <melee/it/itkind.h>
