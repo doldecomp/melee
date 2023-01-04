@@ -9,12 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup runtime_runtime runtimeRuntime
-/// @{
-void __cvt_sll_flt(void);
-void __cvt_dbl_usll(void);
-/// @}
-
 /// @addtogroup msl_string mslString
 /// @{
 int __StringRead(void*, int, int);
