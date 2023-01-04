@@ -887,11 +887,6 @@ void func_8037AD20(struct _HSD_ObjAllocData* data,
 void* func_8037CF98(struct _HSD_IDTable* table, u32 id, u8* success);
 /// @}
 
-/// @addtogroup hsd_id HSD_Id
-/// @{
-void HSD_IDSetup(void);
-/// @}
-
 /// @addtogroup hsd_quatlib HSD_QuatLib
 /// @{
 void func_8037EE0C(Vec*, Quaternion*);
