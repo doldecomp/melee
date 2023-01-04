@@ -1,24 +1,24 @@
 #ifndef _fighter_h_
 #define _fighter_h_
 
-#include <dolphin/types.h>
-#include <dolphin/mtx/mtxtypes.h>
-
-#include <functions.h>
-#include <melee/pl/player.h>
-#include <melee/gr/stage.h>
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/controller.h>
-#include <melee/lb/lbrefract.h>
-#include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
+#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/types.h>
+#include <functions.h>
+#include <math.h>
+#include <melee/ft/ftanim.h>
 #include <melee/ft/ftstatevars.h>
+#include <melee/gr/stage.h>
+#include <melee/lb/lbrefract.h>
+#include <melee/pl/player.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 BOOL func_80081298(HSD_GObj* gobj);
 

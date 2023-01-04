@@ -2,6 +2,7 @@
 
 #include <dolphin/os/os.h>
 #include <melee/ef/efasync.h>
+#include <melee/ft/ftanim.h>
 #include <melee/it/itkind.h>
 
 extern char* lbl_804D3E58;
