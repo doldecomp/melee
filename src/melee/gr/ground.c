@@ -2,6 +2,7 @@
 
 #include <dolphin/os/os.h>
 #include <melee/ft/ftlib.h>
+#include <melee/gm/code_801601C4.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/it/itkind.h>
 #include <melee/lb/lbaudio_ax.h>

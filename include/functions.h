@@ -9,17 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup code_801601C4 gmUnk1
-/// @{
-BOOL func_80164840(u8);
-s32 func_8016AEDC(void);
-s32 func_8016B0FC();
-s32 func_8016B1C4();
-s32 func_8016B238(void);
-s32 func_8016B3A0(void);
-s32 func_8016B41C();
-/// @}
-
 /// @addtogroup text_2 unkUnk2
 /// @{
 s32 func_801A45E8(s32);

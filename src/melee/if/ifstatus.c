@@ -1,6 +1,7 @@
 #include <melee/if/ifstatus.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gm/code_801601C4.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
 #include <sysdolphin/baselib/gobjproc.h>
