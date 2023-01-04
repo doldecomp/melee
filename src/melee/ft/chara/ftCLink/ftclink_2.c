@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftCLink/ftclink.h>
 
+#include <melee/it/code_8027CF30.h>
+
 extern void func_800EAF58(HSD_GObj*);
 
 void func_80149354(HSD_GObj* gobj)
