@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup mpcoll mpColl
-/// @{
-void func_8004CBF4(struct _CollData*);
-/// @}
-
 /// @addtogroup mplib mpLib
 /// @{
 s32 func_80051EC8(Vec*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
