@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/it/item.h>
 
 void ftDonkey_800E0698(HSD_GObj* fighter_gobj)
 {

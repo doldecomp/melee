@@ -4,8 +4,6 @@
 #include <melee/it/itkind.h>
 #include <sysdolphin/baselib/random.h>
 
-
-
 void ftMario_SpecialHi_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp;

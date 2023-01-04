@@ -2317,8 +2317,8 @@ void func_8026A8EC(HSD_GObj* item_gobj) // Destroy Item //
     func_80390228(item_gobj);
 }
 
-void func_8026AB54(HSD_GObj* item_gobj, s32 pickupGFX,
-                   s32 pickupSFX) // Make Item Held //
+void func_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickupGFX,
+                   u8 pickupSFX) // Make Item Held //
 {
     void (*cb_OnPickup)(HSD_GObj*);
     Item* item_data;
