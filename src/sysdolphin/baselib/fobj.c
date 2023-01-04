@@ -1,5 +1,7 @@
 #include <sysdolphin/baselib/fobj.h>
 
+#include <sysdolphin/baselib/spline.h>
+
 HSD_ObjAllocData fobj_alloc_data;
 
 HSD_ObjAllocData* HSD_FObjGetAllocData(void)
@@ -168,8 +170,6 @@ void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(),
         fobj->p0 = fobj->p1;
     }
 }
-
-#include <sysdolphin/baselib/spline.h>
 
 void FObjUpdateAnim(HSD_FObj* fobj, void* obj,
                     void (*obj_update)(void*, s32, FObjData*))

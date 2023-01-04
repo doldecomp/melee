@@ -1,6 +1,5 @@
 #include <sysdolphin/baselib/debug.h>
 
-#include "global.h"
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSContext.h>
 

@@ -2,6 +2,7 @@
 
 #include <dolphin/os/os.h>
 #include <melee/lb/lbunknown_001.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
 
 HudIndex* func_802F4910(void)
@@ -1566,8 +1567,6 @@ lbl_802F5EB0:
 /* 802F5EBC 002F2A9C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#include <sysdolphin/baselib/gobjproc.h>
 
 extern unk_t func_802F3424();
 extern unk_t func_80390A70();

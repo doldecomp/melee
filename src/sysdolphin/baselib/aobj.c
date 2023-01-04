@@ -1,8 +1,8 @@
-#include <stdarg.h>
-#include <string.h>
-
 #include <sysdolphin/baselib/aobj.h>
 
+#include <stdarg.h>
+#include <string.h>
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/robj.h>
@@ -618,8 +618,6 @@ lbl_80364BF4:
 } // clang-format on
 #pragma pop
 #endif
-
-#include <sysdolphin/baselib/debug.h>
 
 #pragma push
 asm void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask,
