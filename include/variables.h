@@ -1,11 +1,6 @@
 #ifndef _variables_h_
 #define _variables_h_
 
-/// @addtogroup ftgigakoopa ftGigaKoopa
-/// @{
-extern const s32 lbl_803D3984[];
-/// @}
-
 /// @addtogroup ftfighter ftFighter
 /// @{
 
