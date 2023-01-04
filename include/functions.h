@@ -983,10 +983,4 @@ void efLib_ResumeAll(struct _HSD_GObj*);
 void ef_Spawn(s32, ...);
 /// @}
 
-/// @addtogroup hsd_random HSD_Random
-/// @{
-f32 HSD_Randf(void);
-s32 HSD_Randi(s32);
-/// @}
-
 #endif
