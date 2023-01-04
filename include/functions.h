@@ -9,12 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup lbcollision lbCollision
-/// @{
-void* HSD_JObjUnkMtxPtr();
-s32 func_80008248(s32, struct ftHurt*, void*, f32, f32, f32);
-/// @}
-
 /// @addtogroup lbunknown_001 lbUnk1
 /// @{
 void func_8000B1CC(struct _HSD_JObj*, Vec*, Vec*);
