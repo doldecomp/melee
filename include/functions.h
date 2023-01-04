@@ -873,19 +873,6 @@ f32 PSVECDotProduct(Vec* a, Vec* b);
 void VIWaitForRetrace(void);
 /// @}
 
-/// @addtogroup hsd_shadow HSD_Shadow
-/// @{
-f32 HSD_CObjGetNear(struct _HSD_CObj*);
-/// @}
-
-/// @addtogroup hsd_cobj HSD_CObj
-/// @{
-f32 HSD_CObjGetFar(struct _HSD_CObj*);
-void HSD_CObjSetScissorx4();
-void HSD_CObjSetViewportfx4();
-u32 HSD_CObjGetProjectionType(struct _HSD_CObj*);
-/// @}
-
 /// @addtogroup hsd_pobj HSD_PObj
 /// @{
 struct _HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
