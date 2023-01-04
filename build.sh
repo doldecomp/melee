@@ -100,11 +100,15 @@ build() {
         echo "Build failed at $(build_time)."
     fi
 
+    if [ -f './build/ssbm.us.1.2/GALE01.map' ]; then
+        echo "Parsing map."
+        python "tools/parse_map.py"
+    fi
+
     if [ "$dump" = true ]; then
         echo "Dumping main.dol to dump."
         rm -rf dump
         mkdir -p dump
-        python "tools/parse_map.py"
         dadosod dol "build/ssbm.us.1.2/main.dol" -m "build/map.csv" -o "dump"
     fi
 
