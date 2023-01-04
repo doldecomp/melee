@@ -1,5 +1,7 @@
-#include <dolphin/types.h>
 #include <melee/ft/ftcliffcommon.h>
+
+#include <dolphin/types.h>
+#include <melee/ef/efasync.h>
 #include <melee/ft/code_80081B38.h>
 #include <variables.h>
 

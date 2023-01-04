@@ -2,6 +2,7 @@
 
 #include <dolphin/os/os.h>
 #include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ftdrawcommon.h>

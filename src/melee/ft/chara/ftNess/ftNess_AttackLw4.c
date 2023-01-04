@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
 
+#include <melee/ef/efasync.h>
+
 // 0x8011659C //
 // https://decomp.me/scratch/xVTx7 //
 void ftNess_AttackLw4_Action(

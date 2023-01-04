@@ -9,14 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup efasync efAsync
-/// @{
-void func_8006737C(s8);
-void func_80067624();
-void func_80067688(void*);
-void efAsync_Spawn(struct _HSD_GObj*, void*, u32, u32, void*, ...);
-/// @}
-
 /// @addtogroup ftfighter ftFighter
 /// @{
 void Fighter_UnkProcessDeath_80068354(struct _HSD_GObj*);

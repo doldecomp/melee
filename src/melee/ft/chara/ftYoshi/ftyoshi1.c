@@ -1,4 +1,6 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
+
+#include <melee/ef/efasync.h>
 #include <melee/it/itkind.h>
 
 void func_80092BCC(HSD_GObj* fighter_gobj);
