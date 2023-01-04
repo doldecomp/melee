@@ -28,9 +28,4 @@ extern void* lbl_804D654C;
 extern void* lbl_804D6550;
 /// @}
 
-/// @addtogroup db_unknown_001 dbUnk1
-/// @{
-extern s32 g_debugLevel;
-/// @}
-
 #endif
