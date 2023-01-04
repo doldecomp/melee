@@ -4,7 +4,6 @@
 #include <common_structs.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/types.h>
-#include <functions.h>
 #include <math.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftstatevars.h>

@@ -1,26 +1,24 @@
 #ifndef _item_h_
 #define _item_h_
 
-#include <dolphin/types.h>
-#include <dolphin/mtx/mtxtypes.h>
-#include <functions.h>
-#include <melee/pl/player.h>
-#include <melee/gr/stage.h>
-#include <melee/ft/fighter.h>
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/controller.h>
 #include <common_structs.h>
-
-#include <melee/it/itkind.h>
+#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/types.h>
+#include <math.h>
+#include <melee/ft/fighter.h>
+#include <melee/gr/stage.h>
 #include <melee/it/itCommonItems.h>
+#include <melee/it/itkind.h>
 #include <melee/it/itPKFlash.h>
 #include <melee/it/itPKThunder.h>
 #include <melee/it/itYoyo.h>
+#include <melee/pl/player.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 // Item State Change Flags //
 

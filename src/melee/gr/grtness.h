@@ -1,9 +1,6 @@
 #ifndef _grtness_h_
 #define _grtness_h_
 
-#include <dolphin/types.h>
-#include <functions.h>
-
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 

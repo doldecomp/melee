@@ -5,7 +5,6 @@
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
-#include <functions.h>
 #include <variables.h>
 
 #endif
