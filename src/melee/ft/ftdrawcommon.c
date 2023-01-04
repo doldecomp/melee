@@ -1,4 +1,5 @@
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/mtxvec.h>
 #include <dolphin/types.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>

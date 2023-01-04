@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup dolphin_mtx_mtxvec PSMTXVec
-/// @{
-void PSMTXMUltiVec(Mtx, Vec*, Vec*);
-/// @}
-
 /// @addtogroup dolphin_mtx_vec PSVEC
 /// @{
 void PSVECAdd(Vec* a, Vec* b, Vec* result);
