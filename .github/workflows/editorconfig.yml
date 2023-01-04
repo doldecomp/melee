@@ -5,20 +5,18 @@ permissions: read-all
 on:
   # avoids approving first time contributors
   pull_request_target:
-    branches-ignore:
-      - 'release-**'
 
 jobs:
   tests:
     runs-on: ubuntu-latest
-    if: "github.repository_owner == 'NixOS' && !contains(github.event.pull_request.title, '[skip editorconfig]')"
+    if: "github.repository_owner == 'doldecomp' && !contains(github.event.pull_request.title, '[skip editorconfig]')"
     steps:
     - name: Get list of changed files from PR
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         gh api \
-          repos/NixOS/nixpkgs/pulls/${{github.event.number}}/files --paginate \
+          repos/doldecomp/melee/pulls/${{github.event.number}}/files --paginate \
           | jq '.[] | select(.status != "removed") | .filename' \
           > "$HOME/changed_files"
     - name: print list of changed files
