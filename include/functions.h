@@ -873,12 +873,6 @@ f32 PSVECDotProduct(Vec* a, Vec* b);
 void VIWaitForRetrace(void);
 /// @}
 
-/// @addtogroup hsd_tobj HSD_TObj
-/// @{
-struct _HSD_TObj* allocShadowTObj();
-struct _HSD_ImageDesc* HSD_ImageDescAlloc();
-/// @}
-
 /// @addtogroup hsd_shadow HSD_Shadow
 /// @{
 f32 HSD_CObjGetNear(struct _HSD_CObj*);
