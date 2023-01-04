@@ -9,16 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup mplib mpLib
-/// @{
-s32 func_80051EC8(Vec*, s32, s32, s32, s32, s32, s32, f32, f32, f32, f32);
-void func_80053DA4(u32, f32*);
-void func_80053ECC(u32, f32*);
-void func_80053FF4(s32, Vec*);
-void func_80054158(s32, Vec*);
-s32 func_800567C0(s32 /*wallID?*/, Vec* /*ecb_side_vertex?*/, Vec* result);
-/// @}
-
 /// @addtogroup efasync efAsync
 /// @{
 void func_8006737C(s8);
