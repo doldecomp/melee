@@ -36,6 +36,8 @@ void HSD_WObjAddAnim(HSD_WObj* wobj, HSD_WObjAnim* anim)
     }
 }
 
+#include <sysdolphin/baselib/spline.h>
+
 static void WObjUpdateFunc(void* obj, u32 type, f32* fval)
 {
     HSD_WObj* wobj;

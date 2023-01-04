@@ -653,6 +653,8 @@ lbl_8036FDAC:
 #pragma pop
 #endif
 
+#include <sysdolphin/baselib/spline.h>
+
 typedef void (*ufc_callback)(HSD_JObj*, u32, f32);
 
 void JObjUpdateFunc(void* obj, u32 type, FObjData* val)

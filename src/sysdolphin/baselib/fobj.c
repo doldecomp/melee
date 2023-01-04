@@ -169,6 +169,8 @@ void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(),
     }
 }
 
+#include <sysdolphin/baselib/spline.h>
+
 void FObjUpdateAnim(HSD_FObj* fobj, void* obj,
                     void (*obj_update)(void*, s32, FObjData*))
 {

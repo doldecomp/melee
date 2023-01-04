@@ -873,12 +873,6 @@ f32 PSVECDotProduct(Vec* a, Vec* b);
 void VIWaitForRetrace(void);
 /// @}
 
-/// @addtogroup hsd_spline HSD_Spline
-/// @{
-f32 splGetHelmite(f32, f32, f32, f32, f32, f32);
-void splArcLengthPoint(Vec*, struct _HSD_Spline*, f32);
-/// @}
-
 /// @addtogroup hsd_mtx HSD_Mtx
 /// @{
 void func_80379310();
