@@ -9,14 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftcaptain ftCaptain
-/// @{
-void ftCaptain_OnLoadForGanon(struct _Fighter*);
-
-/// @todo @c ftCaptain prefix
-void ftCFalcon_LoadSpecialAttrs(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup ftfox ftFox
 /// @{
 void ftFox_LoadSpecialAttrs(struct _HSD_GObj*);
