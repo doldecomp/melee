@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup text_4 unkUnk4
-/// @{
-s32 func_80322258(f32 x);
-/// @}
-
 /// @addtogroup runtime_runtime runtimeRuntime
 /// @{
 void __cvt_sll_flt(void);
