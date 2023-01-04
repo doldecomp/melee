@@ -1,4 +1,5 @@
 #include <dolphin/types.h>
+#include <melee/ef/efsync.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/item.h>

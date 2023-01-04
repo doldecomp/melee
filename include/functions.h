@@ -9,9 +9,4 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup efsync efSync
-/// @{
-void ef_Spawn(s32, ...);
-/// @}
-
 #endif

@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
 #include <melee/it/itkind.h>

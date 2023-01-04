@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
 #include <melee/ft/ft_unknown_006.h>
 
 void ftDonkey_SetCallbacks_SpecialN(HSD_GObj* fighter_gobj)

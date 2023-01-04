@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
 #include <melee/ft/ftparts.h>
 
 void ftSamus_SpecialHi_StartAction(HSD_GObj* fighter_gobj)

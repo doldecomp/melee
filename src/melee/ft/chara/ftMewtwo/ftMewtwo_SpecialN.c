@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
+#include <melee/ef/efsync.h>
 #include <melee/ft/ft_unknown_006.h>
 
 // 0x80146CCC

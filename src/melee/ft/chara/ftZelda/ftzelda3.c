@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 
 // 8013A830 - 8013A8AC (0x7C bytes)

@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
+#include <melee/ef/efsync.h>
 #include <melee/ft/ftparts.h>
 
 // 0x8014267C

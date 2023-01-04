@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 
+#include <melee/ef/efsync.h>
 #include <melee/lb/lbunknown_003.h>
 
 // 801389CC 001355AC

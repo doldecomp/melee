@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftCaptain/ftCaptain.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
 #include <melee/lb/lbunknown_003.h>
 #include <MSL/trigf.h>
 

@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
 
+#include <melee/ef/efsync.h>
 #include <melee/ft/ftparts.h>
 #include <MSL/trigf.h>
 

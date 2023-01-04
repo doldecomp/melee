@@ -2,6 +2,7 @@
 
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
 
 void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {

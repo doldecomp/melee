@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
 
 // 0x800E9DF8
 // https://decomp.me/scratch/5Qwzg // Create Fox Illusion / Falco Phantasm GFX
