@@ -1,13 +1,14 @@
 #include <melee/ft/fighter.h>
 
 #include <dolphin/os/os.h>
+#include <melee/cm/camera.h>
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/lb/lbarchive.h>
+#include <melee/lb/lbmthp.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_002.h>
-#include <melee/lb/lbmthp.h>
 
 #define HALF_PI 1.5707963267948966
 

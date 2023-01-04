@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/cm/camera.h>
+
 // 801510B0 14DC90
 // https://decomp.me/scratch/sIqel
 void func_801510B0(HSD_GObj* gobj)
