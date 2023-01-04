@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftness_attacks4 ftNess_AttackS4
-/// @{
-void ftNess_ItemNessBatRemove(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup ftness_attackhi4 ftNess_AttackHi4
 /// @{
 void ftNess_YoyoItemDespawn(struct _HSD_GObj*);
