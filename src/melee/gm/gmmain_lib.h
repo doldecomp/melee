@@ -175,4 +175,12 @@ struct gmm_x1CB0* func_8015CC58(void);
 struct gmm_retval_ED98* func_8015ED98(void);
 struct gmm_retval_EDB0* func_8015EDB0(void);
 
+s8* func_8015CE44(s32, s32);
+
+/// @todo static
+void func_8015D888(u32);
+
+void func_8015D8FC(u32);
+s32 func_8015D94C(u32);
+
 #endif
