@@ -9,13 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftmasterhand_2 ftMasterHand_02
-/// @{
-void func_8014FE10();
-void func_8014FE58();
-void func_80150144(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup ftmasterhand_3 ftMasterHand_03
 /// @{
 void func_80150C8C(struct _HSD_GObj*);
