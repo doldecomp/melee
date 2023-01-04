@@ -2319,5 +2319,13 @@ inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
 extern unk_t lbl_804D6520;
 extern ftCommonData* p_ftCommonData;
 extern FighterPartsTable** ftPartsTable;
+void Fighter_UnkProcessDeath_80068354(struct _HSD_GObj*);
+u32 Fighter_NewSpawn_80068E40();
+
+void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighter_gobj,
+                                        s32 newAction, s32 flags,
+                                        struct _HSD_GObj* otherObj,
+                                        f32 animStart, f32 animSpeed,
+                                        f32 animBlend);
 
 #endif
