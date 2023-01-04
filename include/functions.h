@@ -873,11 +873,6 @@ f32 PSVECDotProduct(Vec* a, Vec* b);
 void VIWaitForRetrace(void);
 /// @}
 
-/// @addtogroup hsd_initialize HSD_Initialize
-/// @{
-int HSD_GetHeap(void);
-/// @}
-
 /// @addtogroup hsd_video HSD_Video
 /// @{
 void HSD_VIInit(struct _HSD_VIStatus* vi_status, void* xfb0, void* xfb1,
