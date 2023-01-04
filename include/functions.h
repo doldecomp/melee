@@ -9,17 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup msl_string mslString
-/// @{
-int __StringRead(void*, int, int);
-char* strchr(const char*, int);
-int strncmp(const char*, const char*, unsigned long);
-int strcmp(const char*, const char*);
-char* strncpy(char* __restrict, const char* __restrict, unsigned long);
-char* strcpy(char* __restrict, const char* __restrict);
-unsigned long strlen(const char*);
-/// @}
-
 /// @addtogroup msl_trigf mslTrigF
 /// @{
 f32 tanf(f32);
