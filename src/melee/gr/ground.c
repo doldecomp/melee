@@ -1,5 +1,6 @@
 #include <melee/gr/ground.h>
 
+#include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gm/code_801601C4.h>
@@ -21,6 +22,7 @@
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/wobj.h>
+
 StageInfo stage_info;
 
 static StageData lbl_803DFEA8 = {

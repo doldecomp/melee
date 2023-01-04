@@ -9,14 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup dolphin_mtx_vec PSVEC
-/// @{
-void PSVECAdd(Vec* a, Vec* b, Vec* result);
-void PSVECScale(Vec* src, Vec* dst, f32 scale);
-f32 PSVECMag(Vec* v);
-f32 PSVECDotProduct(Vec* a, Vec* b);
-/// @}
-
 /// @addtogroup dolphin_vi VI
 /// @{
 void VIWaitForRetrace(void);
