@@ -1,5 +1,6 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/it/item2.h>
 #include <melee/lb/lbunknown_001.h>
 
 static f32 const lbl_804D8320 = 0.0F;

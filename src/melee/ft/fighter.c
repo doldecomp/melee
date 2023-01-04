@@ -11,6 +11,7 @@
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/it/item.h>
+#include <melee/it/item2.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/lb/lbunknown_001.h>

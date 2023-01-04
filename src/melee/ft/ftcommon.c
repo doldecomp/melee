@@ -5,6 +5,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/item.h>
+#include <melee/it/item2.h>
 #include <melee/it/itkind.h>
 
 const Vec3 lbl_803B74A0 = { 0, 0, 0 };

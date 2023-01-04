@@ -779,7 +779,7 @@ inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc,
 /**
  * @brief Transfer item on character transformation (Zelda <-> Sheik)
  */
-void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, s32 arg2)
+void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
 {
     Vec3 sp1C;
     Item* item_data; // r29 //
@@ -835,7 +835,7 @@ void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, s32 arg2)
 #else
 
 #pragma push
-asm void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, s32 arg2)
+asm void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
 { // clang-format off
     nofralloc
 /* 8026B9A8 00000000  7C 08 02 A6 */	mflr r0

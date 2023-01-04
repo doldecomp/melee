@@ -9,21 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup item2 itUnk2
-/// @{
-BOOL func_8026B2B4(struct _HSD_GObj*);
-s32 itGetKind(struct _HSD_GObj*);
-s32 func_8026B30C(struct _HSD_GObj*);
-s32 func_8026B320(struct _HSD_GObj*);
-void func_8026B3F8(struct _Article*, s32);
-f32 func_8026B54C(struct _HSD_GObj*);
-f32 func_8026B560(struct _HSD_GObj*);
-f32 func_8026B574(struct _HSD_GObj*);
-s32 func_8026B588();
-BOOL func_8026B594(struct _HSD_GObj*);
-void func_8026B7F8();
-/// @}
-
 /// @addtogroup code_80266F3C itUnk3
 /// @{
 void func_8027B4A4();

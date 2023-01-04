@@ -1,5 +1,7 @@
 
 #include <melee/mn/mncharsel.h>
+
+#include <melee/it/item2.h>
 #include <melee/mn/mntext.h>
 
 extern GameRules* func_8015CC34();

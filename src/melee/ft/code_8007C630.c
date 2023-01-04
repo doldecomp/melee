@@ -2,6 +2,7 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/item.h>
+#include <melee/it/item2.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/text_2.h>
 

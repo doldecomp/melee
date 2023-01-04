@@ -951,7 +951,7 @@ BOOL func_8026B2B4(HSD_GObj* item_gobj); // Check if item is heavy //
 BOOL func_8026B2D8(HSD_GObj* item_gobj); // Check if item is heavy again? //
 s32 itGetKind(HSD_GObj* item_gobj);      // Get Item ID //
 s32 func_8026B30C(HSD_GObj* item_gobj);  // Return flag from Item Attributes //
-s32 func_8026B320(HSD_GObj* item_gobj);  // Return item hold kind //
+s32 func_8026B320(HSD_GObj* item_gobj);
 f32 func_8026B334(HSD_GObj* item_gobj);  // Return item damage multiplier //
 void func_8026B344(
     HSD_GObj* item_gobj,
