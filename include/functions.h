@@ -9,15 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup lbunknown_003 lbUnk3
-/// @{
-void func_8001044C(void*, void*, s32, f32, s32, s32, s32, s32);
-void func_800119DC(Vec*, s32, f32, f32, f32);
-void func_80011A50(Vec*, s32, f32, f32, f32, f32, f32, f32, f32);
-void func_80014574(u8, s32, s32, s32);
-void func_800145C0(u8);
-/// @}
-
 /// @addtogroup lbheap lbHeap
 /// @{
 struct _HSD_Archive* func_80015BD0(s32, s32);

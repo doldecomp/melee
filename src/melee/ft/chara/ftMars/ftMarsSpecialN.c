@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 
+#include <melee/lb/lbunknown_003.h>
+
 // 80136744 00133324
 // ftMars_SpecialN
 // https://decomp.me/scratch/i9Tn0

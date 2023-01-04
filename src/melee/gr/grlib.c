@@ -1,4 +1,6 @@
 #include <melee/gr/grlib.h>
+
+#include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/psappsrt.h>
 
 extern StageInfo stage_info;
