@@ -1,6 +1,7 @@
 #include <melee/gr/grfigure2.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gr/grdisplay.h>
 #include <melee/gr/grfigure1.h>
 #include <melee/gr/ground.h>
 

@@ -1,6 +1,7 @@
 #include <melee/gr/grtdonkey.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 
 static StageCallbacks lbl_803E8790[4] = {

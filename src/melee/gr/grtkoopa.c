@@ -1,6 +1,7 @@
 #include <melee/gr/grtkoopa.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 
 extern StageInfo stage_info;
