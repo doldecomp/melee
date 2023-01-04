@@ -9,16 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ftlib ftLib
-/// @{
-struct _HSD_GObj* func_8008627C(Vec*, struct _HSD_GObj*);
-void func_800866DC(struct _HSD_GObj*, Vec*);
-void func_800867E8();
-void func_8008688C();
-s32 func_80087120(struct _HSD_GObj*);
-s32 func_800872A4(struct _HSD_GObj*);
-/// @}
-
 /// @addtogroup ft_unknown_006 ftUnk6
 /// @{
 void func_800880D8();

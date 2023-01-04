@@ -2,7 +2,6 @@
 #define _ftlib_h_
 
 #include <melee/ft/fighter.h>
-
 #include <sysdolphin/baselib/gobj.h>
 
 s32 func_800860C4(void);
@@ -102,5 +101,12 @@ void func_8008770C(HSD_GObj*, void* dst);
 void func_80087744(HSD_GObj*, void* dst);
 void func_8008777C(HSD_GObj*);
 BOOL func_800877D4(HSD_GObj*);
+
+struct _HSD_GObj* func_8008627C(Vec*, struct _HSD_GObj*);
+void func_800866DC(struct _HSD_GObj*, Vec*);
+void func_800867E8();
+void func_8008688C();
+s32 func_80087120(struct _HSD_GObj*);
+s32 func_800872A4(struct _HSD_GObj*);
 
 #endif

@@ -1,5 +1,7 @@
-#include <common_structs.h>
 #include <melee/it/item.h>
+
+#include <common_structs.h>
+#include <melee/ft/ftlib.h>
 
 #define FLOAT32_MAX 3.4028234663852886e+38f
 
@@ -336,12 +338,15 @@ HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2,
     return unk_gobj;
 }
 
-extern HSD_GObj* func_80086368(Vec3*, HSD_GObj*);
+extern HSD_GObj* func_80086368(Vec3*, HSD_GObj*, f32);
 
-// 0x8026B634 //
-// https://decomp.me/scratch/4IGbM //
-HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2,
-                        HSD_GObj* item_gobj) // Unknown item camera check 2? //
+#if FALSE
+
+/**
+ * @todo Missing third argument passed to #func_80086368.
+ * @brief Unknown item camera check 2?
+ */
+HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj)
 {
     HSD_GObj* unk_gobj;
 
@@ -352,29 +357,56 @@ HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2,
     return unk_gobj;
 }
 
-extern f32 func_800864A8(Vec3*, s32);
+#else
 
-// 0x8026B684 //
-// https://decomp.me/scratch/2wWfM //
-f32 func_8026B684(
-    Vec3* pos) // Get facing direction of fp (?) with argument 0 //
+#pragma push
+asm HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj)
+{ // clang-format off
+    nofralloc
+/* 8026B634 00000000  7C 08 02 A6 */  mflr r0
+/* 8026B638 00000004  90 01 00 04 */  stw r0, 0x4(r1)
+/* 8026B63C 00000008  94 21 FF E0 */  stwu r1, -0x20(r1)
+/* 8026B640 0000000C  93 E1 00 1C */  stw r31, 0x1c(r1)
+/* 8026B644 00000010  93 C1 00 18 */  stw r30, 0x18(r1)
+/* 8026B648 00000014  3B C4 00 00 */  addi r30, r4, 0x0
+/* 8026B64C 00000018  38 85 00 00 */  addi r4, r5, 0x0
+/* 8026B650 0000001C  4B E1 AD 19 */  bl func_80086368
+/* 8026B654 00000020  7C 7F 1B 79 */  mr. r31, r3
+/* 8026B658 00000024  41 82 00 10 */  beq lbl_8026B668
+/* 8026B65C 00000028  38 7F 00 00 */  addi r3, r31, 0x0
+/* 8026B660 0000002C  38 9E 00 00 */  addi r4, r30, 0x0
+/* 8026B664 00000030  4B E1 B0 79 */  bl func_800866DC
+lbl_8026B668:
+/* 8026B668 00000034  7F E3 FB 78 */  mr r3, r31
+/* 8026B66C 00000038  80 01 00 24 */  lwz r0, 0x24(r1)
+/* 8026B670 0000003C  83 E1 00 1C */  lwz r31, 0x1c(r1)
+/* 8026B674 00000040  83 C1 00 18 */  lwz r30, 0x18(r1)
+/* 8026B678 00000044  38 21 00 20 */  addi r1, r1, 0x20
+/* 8026B67C 00000048  7C 08 03 A6 */  mtlr r0
+/* 8026B680 0000004C  4E 80 00 20 */  blr
+} // clang-format on
+#pragma pop
+
+#endif
+
+extern f32 func_800864A8(Vec3*, HSD_GObj*);
+
+/**
+ * @brief Get facing direction of fighter (?) with #NULL
+ */
+f32 func_8026B684(Vec3* pos)
 {
-    return func_800864A8(pos, 0);
+    return func_800864A8(pos, NULL);
 }
 
-extern f32 func_800864A8(Vec3*, s32);
-
-// 0x8026B6A8 //
-// https://decomp.me/scratch/LJ42K //
-f32 func_8026B6A8(
-    Vec3* pos,
-    s32 arg) // Get facing direction of fp (?) with variable argument //
+/**
+ * @brief Get facing direction of fighter (?) with variable argument
+ */
+f32 func_8026B6A8(Vec3* pos, HSD_GObj* arg1)
 {
-    func_800864A8(pos, arg);
+    func_800864A8(pos, arg1);
 }
 
-// 0x8026B6C8 //
-// https://decomp.me/scratch/Xblue //
 BOOL func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item? //
 {
     s32 itemID;

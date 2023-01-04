@@ -988,7 +988,7 @@ f32 func_8026B684(
     Vec3* pos); // Get facing direction of fp (?) with argument 0 //
 f32 func_8026B6A8(
     Vec3* pos,
-    s32 arg); // Get facing direction of fp (?) with variable argument //
+    HSD_GObj* arg); // Get facing direction of fp (?) with variable argument //
 BOOL func_8026B6C8(HSD_GObj* item_gobj); // Check if item is a stage item? //
 void func_8026B718(HSD_GObj* item_gobj,
                    f32 hitlagFrames);    // Set item's hitlag frames //
