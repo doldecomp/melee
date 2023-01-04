@@ -9,12 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup ifmagnify ifMagnify
-/// @{
-s32 func_802FB6E8(u8);
-s32 func_802FC998();
-/// @}
-
 /// @addtogroup text_4 unkUnk4
 /// @{
 s32 func_80322258(f32 x);
