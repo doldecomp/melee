@@ -9,11 +9,6 @@ typedef struct _Fighter Fighter;
 typedef struct _Item Item;
 typedef struct _Article Article;
 
-/// @addtogroup lbbgflash lbBgFlash
-/// @{
-s32 func_80021C48();
-/// @}
-
 /// @addtogroup lbaudio_ax lbAudioAx
 /// @{
 void func_800236B8(s32);
