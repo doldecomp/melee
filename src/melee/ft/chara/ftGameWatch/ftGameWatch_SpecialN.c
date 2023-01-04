@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
+#include <melee/lb/lbunknown_001.h>
+
 /* https://decomp.me/scratch/P7Z9j - first function of SpecialN.c; terrifying
    code https://decomp.me/scratch/kFkx6 - closer match, but just what is going
    on in this one? temp_fp suggests there is an inline somewhere in the

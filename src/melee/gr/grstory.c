@@ -2,6 +2,7 @@
 
 #include <dolphin/os/os.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_001.h>
 #include <sysdolphin/baselib/random.h>
 
 extern StageInfo stage_info;

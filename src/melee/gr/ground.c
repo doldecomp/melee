@@ -4,6 +4,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdatfiles.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
