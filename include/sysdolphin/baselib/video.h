@@ -27,4 +27,7 @@ typedef struct _HSD_VIStatus {
     u8 update_z;
 } HSD_VIStatus;
 
+void HSD_VIInit(struct _HSD_VIStatus* vi_status, void* xfb0, void* xfb1,
+                void* xfb2);
+
 #endif
