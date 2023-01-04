@@ -1,8 +1,6 @@
 #ifndef _lobj_h_
 #define _lobj_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 #include <dolphin/gx/GXLight.h>
 

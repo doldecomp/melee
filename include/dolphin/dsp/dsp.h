@@ -1,8 +1,6 @@
 #ifndef __DOLPHIN_DSP_H_
 #define __DOLPHIN_DSP_H_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 #include <dolphin/os/OSTime.h>
 #include <dolphin/os/OSInterrupt.h>

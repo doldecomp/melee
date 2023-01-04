@@ -1,8 +1,6 @@
 #ifndef _wobj_h_
 #define _wobj_h_
 
-#include <global.h>
-
 #include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/aobj.h>
 

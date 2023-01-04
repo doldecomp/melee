@@ -1,19 +1,12 @@
 #ifndef _ftness_h_
 #define _ftness_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
-
-#include <sysdolphin/baselib/gobj.h>
-
-#include <melee/lb/lbvector.h>
-
 #include <math.h>
-
 #include <melee/ft/fighter.h>
-
 #include <melee/it/item.h>
+#include <melee/lb/lbvector.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef enum ftNessAction {
     AS_FTCOMMON = 340,

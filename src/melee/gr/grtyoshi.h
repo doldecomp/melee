@@ -1,7 +1,6 @@
 #ifndef _grtyoshi_h_
 #define _grtyoshi_h_
 
-#include <global.h>
 #include <melee/gr/stage.h>
 #include <sysdolphin/baselib/gobj.h>
 

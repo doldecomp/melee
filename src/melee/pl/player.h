@@ -1,8 +1,6 @@
 #ifndef _player_h_
 #define _player_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>

@@ -1,7 +1,6 @@
 #ifndef _UTIL_H_
 #define _UTIL_H_
 
-#include <global.h>
 #include <sysdolphin/baselib/objalloc.h>
 #include <math.h>
 

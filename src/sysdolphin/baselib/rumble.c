@@ -1,8 +1,6 @@
 #include <dolphin/types.h>
 #include <dolphin/pad/pad.h>
 
-#include <global.h>
-
 typedef struct _RumbleCommand {
     u16 op;
     u16 frame;
