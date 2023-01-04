@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 #include <melee/cm/camera.h>
+#include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
 
 // 801510B0 14DC90
