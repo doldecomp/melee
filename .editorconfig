@@ -14,3 +14,6 @@ charset = utf-8
 
 [{*.yml,.clang-format}]
 indent_size = 2
+
+[Makefile]
+indent_style = tab
