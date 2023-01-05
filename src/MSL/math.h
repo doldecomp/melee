@@ -11,7 +11,7 @@ float cos__Ff(float x);
 float sin__Ff(float x);
 float cosf(float x);
 float sinf(float x);
-void __sinit_trigf_c();
-void func_803265A8();
+void __sinit_trigf_c(void);
+void func_803265A8(void);
 
 #endif

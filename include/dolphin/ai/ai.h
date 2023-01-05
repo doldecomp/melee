@@ -4,7 +4,7 @@
 #include <dolphin/types.h>
 
 typedef void (*AISCallback)(u32 count);
-typedef void (*AIDCallback)();
+typedef void (*AIDCallback)(void);
 
 extern vu32 __AIRegs[8] : 0xCC006C00;
 

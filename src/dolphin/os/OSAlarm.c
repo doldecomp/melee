@@ -1,6 +1,9 @@
-#include <dolphin/base/PPCArch.h>
 #include <dolphin/os/OSAlarm.h>
+
+#include <dolphin/base/PPCArch.h>
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
@@ -10,15 +13,7 @@ static struct OSAlarmQueue {
     OSAlarm* tail;
 } AlarmQueue;
 
-extern unk_t __OSSetExceptionHandler();
-
-typedef u8 __OSException;
-typedef void (*__OSExceptionHandler)(__OSException exception,
-                                     OSContext* context);
-extern void DecrementerExceptionHandler(__OSException exception,
-                                        OSContext* context);
-
-extern __OSExceptionHandler __OSGetExceptionHandler(__OSException);
+void DecrementerExceptionHandler(__OSException exception, OSContext* context);
 
 void OSInitAlarm(void)
 {

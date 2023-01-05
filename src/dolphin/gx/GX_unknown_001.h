@@ -45,7 +45,7 @@
 /* 0033CBC8 */ extern void GXSetTevAlphaIn(s32, s32, s32, s32, s32);
 /* 0033CB48 */ extern void GXSetTevColorIn(s32, s32, s32, s32, s32);
 /* 0033C9A4 */ extern void GXSetTevOp(s32, s32);
-/* 0033C86C */ extern void GXSetTevDirect();
+/* 0033C86C */ extern void GXSetTevDirect(void);
 /* 0033C840 */ extern void GXSetNumIndStages(s32);
 /* 0033C708 */ extern void GXSetIndTexOrder(s32, s32, s32);
 /* 0033C534 */ extern void GXSetIndTexCoordScale(s32, s32, s32);

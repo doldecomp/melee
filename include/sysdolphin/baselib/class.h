@@ -15,7 +15,7 @@ typedef struct _HSD_Class {
 } HSD_Class;
 
 typedef struct _HSD_ClassInfoHead {
-    void (*info_init)();
+    void (*info_init)(void);
     u32 flags;
     char* library_name;
     char* class_name;

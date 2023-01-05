@@ -5,8 +5,8 @@
 
 #include <sysdolphin/baselib/jobj.h>
 
-void _HSD_DispForgetMemory();
+void _HSD_DispForgetMemory(void);
 void HSD_ZListInitAllocData(void);
-void HSD_EraseRect();
+void HSD_EraseRect(void);
 
 #endif

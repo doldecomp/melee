@@ -14,10 +14,10 @@ typedef struct _HSD_DList {
     void* data;
 } HSD_DList;
 
-void HSD_ListInitAllocData();
-HSD_ObjAllocData* HSD_SListGetAllocData();
-HSD_ObjAllocData* HSD_DListGetAllocData();
-HSD_SList* HSD_SListAlloc();
+void HSD_ListInitAllocData(void);
+HSD_ObjAllocData* HSD_SListGetAllocData(void);
+HSD_ObjAllocData* HSD_DListGetAllocData(void);
+HSD_SList* HSD_SListAlloc(void);
 HSD_SList* HSD_SListAllocAndAppend(HSD_SList* next, void* data);
 HSD_SList* HSD_SListAllocAndPrepend(HSD_SList* prev, void* data);
 HSD_SList* HSD_SListAppendList(HSD_SList* list, HSD_SList* next);
