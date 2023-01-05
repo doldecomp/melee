@@ -846,7 +846,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
 
     func_80085B10(fp);
     func_80074E58(fp);
-    func_800743E0(fighter_gobj);
+    Fighter_SetupParts(fighter_gobj);
     func_80070308(fighter_gobj);
     func_800C884C(fighter_gobj);
 

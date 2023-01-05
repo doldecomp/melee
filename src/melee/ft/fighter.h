@@ -44,8 +44,6 @@ extern void* lbl_804D654C;
 extern void* lbl_804D6550;
 /// @}
 
-BOOL func_80081298(HSD_GObj* gobj);
-
 typedef enum FighterKind {
     FTKIND_MARIO,
     FTKIND_FOX,
