@@ -153,10 +153,10 @@ lbl_800056C0:
     .4byte 0x0000064C
     .4byte lbl_800056A8
 
-.global lbl_80005918
-lbl_80005918:
+.global _eti_init_info_
+_eti_init_info_:
     .4byte lbl_800056C0
-    .4byte lbl_80005918
+    .4byte _eti_init_info_
     .4byte func_803983A4
     .4byte 0x0001EE8C
     .4byte 0x00000000
