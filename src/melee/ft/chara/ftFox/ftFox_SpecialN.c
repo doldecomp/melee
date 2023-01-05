@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
+
 #include <dolphin/os/os.h>
+#include <melee/ft/ft_unknown_006.h>
 
 // 0x800E5CB0
 // https://decomp.me/scratch/aumQK // Get Fox/Falco's Item Hold Bone Position

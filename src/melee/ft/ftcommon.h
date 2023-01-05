@@ -1,6 +1,12 @@
-#pragma once
+#ifndef MELEE_FT_FTCOMMON_H
+#define MELEE_FT_FTCOMMON_H
 
-#include <melee/ft/fighter.h>
+#include <dolphin/types.h>
+#include <dolphin/mtx.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+
+typedef struct _Fighter Fighter;
 
 void func_8007C930(Fighter*, f32);
 void func_8007C98C(Fighter*, f32, f32, f32);
@@ -112,3 +118,63 @@ void func_80080484(Fighter*);
 void func_800804A0(Fighter*, f32);
 f32 func_800804EC(Fighter*);
 void func_800804FC(Fighter*);
+
+void func_8007CB74(struct _HSD_GObj*);
+void func_8007CC78(Fighter*, f32);
+void func_8007CCA0(Fighter*, f32);
+f32 func_8007CD6C(f32 value, f32 decrement);
+f32 func_8007CDA4(Fighter*);
+f32 func_8007CDF8(Fighter*);
+void func_8007CE4C(Fighter*, f32);
+void func_8007CE94(Fighter*, f32);
+BOOL func_8007CF58(Fighter*);
+void func_8007D344(Fighter*, f32, f32, f32);
+void func_8007D494(Fighter*, f32, f32);
+void func_8007D4B8(Fighter*);
+void func_8007D5BC();
+void func_8007D5D4(Fighter*);
+void func_8007D6A4(Fighter*);
+void func_8007D780(Fighter*);
+void func_8007D7FC(Fighter*);
+void func_8007D92C(struct _HSD_GObj*);
+void func_8007D9FC(Fighter*);
+f32 func_8007DA74(s32, u32, f32);
+void func_8007DB24();
+void func_8007DB58();
+void func_8007E0E4();
+
+void func_8007E2D0(Fighter*, s16, void (*)(struct _HSD_GObj*),
+                   void (*)(struct _HSD_GObj*),
+                   void (*)(struct _HSD_GObj*, struct _HSD_GObj*));
+
+void func_8007E2F4(Fighter*, s16);
+void func_8007E2FC(struct _HSD_GObj*);
+void func_8007E83C(struct _HSD_GObj*, s32, f32 div);
+s32 ftGetParasolStatus(struct _HSD_GObj*);
+void func_8007EA90(Fighter*, s32);
+void func_8007EBAC(Fighter*, u32, u32);
+void func_8007ECD4();
+void func_8007ED50(Fighter*, s32);
+void func_8007EE0C();
+void func_8007EFC0(Fighter*, u32);
+void func_8007F578();
+f32 Fighter_GetModelScale(Fighter*);
+void func_8007F8E8();
+void func_8007F9B4();
+void func_8007FC7C(struct _HSD_GObj*, f32);
+
+/// @todo static
+void func_8007FE84(struct _HSD_GObj*, struct _HSD_GObj*, s32, f32);
+
+void func_8007FF74();
+BOOL func_8007FFD8(Fighter*, f32);
+void func_8008021C();
+void func_8008031C();
+
+/// @todo @c DataOffset_PlayerScale_MultiplyBySomething
+/// @returns <tt>fp->x40*fp->x34</tt>
+f32 func_800804EC(Fighter*);
+
+void func_800804FC();
+
+#endif

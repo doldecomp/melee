@@ -1,8 +1,6 @@
 #ifndef _class_h_
 #define _class_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 #include <sysdolphin/baselib/debug.h>
 

@@ -1,7 +1,7 @@
 #ifndef _grfigure2_h_
 #define _grfigure2_h_
 
-#include <global.h>
+#include <sysdolphin/baselib/gobj.h>
 
 static void func_8020E274(void);
 static void lbl_8020E2E4(void);

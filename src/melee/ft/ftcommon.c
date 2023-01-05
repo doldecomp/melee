@@ -2,7 +2,11 @@
 
 #include <dolphin/os/os.h>
 #include <melee/ft/code_80081B38.h>
-
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/it/item.h>
+#include <melee/it/item2.h>
 #include <melee/it/itkind.h>
 
 const Vec3 lbl_803B74A0 = { 0, 0, 0 };

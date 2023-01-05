@@ -1,8 +1,7 @@
 #ifndef _stage_h_
 #define _stage_h_
 
-#include <global.h>
-
+#include <dolphin/gx/types.h>
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
@@ -267,5 +266,6 @@ void Stage_8022524C();
 void Stage_80225298();
 void Stage_802252E4(s32 idx, s32 unused);
 void Stage_8022532C(s32 idx, s32 arg1);
+s32 Stage_80225194(void);
 
 #endif

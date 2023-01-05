@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 #include <sysdolphin/baselib/random.h>
 
+#include <melee/ef/efsync.h>
 #include <melee/it/itkind.h>
 
 int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos)

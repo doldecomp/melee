@@ -65,4 +65,11 @@ void PSVECCrossProduct(VecPtr a, VecPtr b, VecPtr axb);
 void PSVECSubtract(Vec const* a, Vec const* b, VecPtr ab);
 void PSVECNormalize(VecPtr a, VecPtr b);
 
+void PSMTXIdentity(Mtx m);
+u32 PSMTXInverse(const Mtx src, Mtx inv);
+void PSMTXRotAxisRad(Mtx m, const Vec* axis, f32 rad);
+void PSMTXTrans(Mtx m, f32 x_trans, f32 y_trans, f32 z_trans);
+void PSMTXScale(Mtx m, f32 x_scale, f32 y_scale, f32 z_scale);
+void PSMTXQuat(Mtx m, const Quaternion* q);
+
 #endif

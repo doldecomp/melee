@@ -7,5 +7,6 @@ s32 VIGetTvFormat();
 void VIConfigure(s32);
 void VIFlush();
 void VISetNextFrameBuffer(s32);
+void VIWaitForRetrace(void);
 
 #endif

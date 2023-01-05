@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftPeach/ftpeach.h>
 
 #include <melee/it/itkind.h>
+#include <melee/lb/lbmthp.h>
 
 void ftPeach_OnDeath(HSD_GObj* gobj)
 {

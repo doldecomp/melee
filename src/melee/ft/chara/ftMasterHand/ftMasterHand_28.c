@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/ftbosslib.h>
+
 // 8015521C 151DFC
 // https://decomp.me/scratch/veN50
 void lbl_8015521C(HSD_GObj* gobj)

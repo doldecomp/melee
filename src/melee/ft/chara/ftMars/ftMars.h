@@ -1,7 +1,6 @@
 #ifndef _ftmars_h_
 #define _ftmars_h_
 
-#include <global.h>
 #include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
@@ -153,5 +152,7 @@ void lbl_80139044(HSD_GObj* gobj);
 void func_80139080(HSD_GObj* gobj);
 void func_801390E0(HSD_GObj* gobj);
 void lbl_80139140(HSD_GObj* gobj);
+void ftMars_OnLoadForRoy(struct _Fighter*);
+void ftMars_LoadSpecialAttrs(struct _HSD_GObj*);
 
 #endif

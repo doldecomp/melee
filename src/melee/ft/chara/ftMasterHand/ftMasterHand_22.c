@@ -1,3 +1,5 @@
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_22.h>
+
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 // 80154230 150E10

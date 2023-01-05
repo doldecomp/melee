@@ -38,5 +38,6 @@ unk_t func_800478F4();
 unk_t func_8004B5C4();
 unk_t func_8004CC00();
 unk_t func_8004CA6C();
+void func_8004CBF4(struct _CollData*);
 
 #endif

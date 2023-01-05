@@ -1,7 +1,8 @@
 #include <melee/gr/grtmars.h>
 
 #include <dolphin/os/os.h>
-#include <functions.h>
+#include <melee/gr/grdisplay.h>
+#include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 

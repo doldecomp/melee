@@ -1,4 +1,3 @@
-#include <functions.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
 

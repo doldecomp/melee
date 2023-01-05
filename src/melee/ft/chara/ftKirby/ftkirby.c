@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftKirby/ftkirby.h>
 
+#include <melee/ft/fighter.h>
+
 //// TODO remove externs
 extern struct S_KIRBY1* lbl_803C9FC8[0x21];
 extern s32 lbl_80459B88[0x21];

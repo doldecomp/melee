@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_31.h>
+
 extern const f32 neg1;
 
 // 8015550C 1520EC

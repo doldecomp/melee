@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
+#include <melee/ft/ft_unknown_006.h>
+
 void ftDonkey_800E030C(HSD_GObj* fighter_gobj)
 {
     s32 result = func_80094EA4(fighter_gobj);

@@ -1,8 +1,6 @@
 #ifndef _initialize_h_
 #define _initialize_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/os/OSAlloc.h>

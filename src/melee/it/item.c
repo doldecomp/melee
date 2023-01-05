@@ -1,7 +1,10 @@
 #include <melee/it/item.h>
 
-#include <dolphin/os/os.h>
 #include <common_structs.h>
+#include <dolphin/os/os.h>
+#include <melee/ef/efasync.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/lb/lbunknown_003.h>
 
 extern s32 func_8016AE80();
 
@@ -2314,8 +2317,8 @@ void func_8026A8EC(HSD_GObj* item_gobj) // Destroy Item //
     func_80390228(item_gobj);
 }
 
-void func_8026AB54(HSD_GObj* item_gobj, s32 pickupGFX,
-                   s32 pickupSFX) // Make Item Held //
+void func_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickupGFX,
+                   u8 pickupSFX) // Make Item Held //
 {
     void (*cb_OnPickup)(HSD_GObj*);
     Item* item_data;

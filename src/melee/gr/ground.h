@@ -41,4 +41,23 @@ HSD_GObj* func_801C14D0(s32);
 static void func_801C34AC(s32, struct _HSD_JObj*, struct _HSD_Joint*);
 static void func_801C28CC(void*, s32);
 
+f32 func_801C0498(void);
+struct _HSD_GObj* func_801C14D0(s32);
+BOOL func_801C28AC(s32, u32, s32*);
+struct _HSD_GObj* func_801C2BA4(s32);
+struct _HSD_JObj* func_801C2CF4(s32);
+BOOL func_801C2D24(s32, Vec*);
+BOOL func_801C2ED0(struct _HSD_JObj*, s32);
+void func_801C39C0();
+void func_801C3BB4();
+struct _HSD_JObj* func_801C3FA4(struct _HSD_GObj*, s32);
+s32 func_801C4210(void);
+void func_801C42AC();
+
+/// @brief Get stage's "yakumono" ("about"?) param
+void* func_801C49F8(void);
+
+void func_801C5A84();
+void func_801C5AA4();
+
 #endif

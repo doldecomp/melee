@@ -1,7 +1,11 @@
 #include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftbosslib.h>
+
 void ftCrazyhand_OnDeath(HSD_GObj* fighter_gobj)
 {
+    return;
 }
 
 void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj)

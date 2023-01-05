@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 HERE=$(dirname "$(readlink -f $0)")
 clean=false
 rebuild_pattern=
@@ -9,8 +11,10 @@ frank=0
 clear=false
 log=false
 dump=false
+job_count=1
+format=false
 
-usage="$(basename "$0") [-hcefmnsxld] [-r pattern]
+usage="$(basename "$0") [-hcefmnsxldp] [-r pattern] [-j threads]
 
 where
     -h  help: show this message
@@ -25,9 +29,11 @@ where
     -x  clear: clear the console before executing this script
     -l  log: tee output to build.log
     -d  dump: dump the built dol to asm afterward
-              (requires rust and \"cargo install --git https://github.com/InusualZ/dadosod\""
+              (requires rust and \"cargo install --git https://github.com/InusualZ/dadosod\"
+    -j  jobs: pass a number of threads to make
+    -p  pretty: run \"make format\" before running make"
 
-while getopts ":hcemnsfxldr:" arg; do
+while getopts ":hcemnsfxldpr:j:" arg; do
     case $arg in
     h)
         echo "$usage"
@@ -43,6 +49,8 @@ while getopts ":hcemnsfxldr:" arg; do
     x) clear=true ;;
     l) log=true ;;
     d) dump=true ;;
+    j) job_count=$OPTARG ;;
+    p) format=true ;;
     :)
         printf "missing argument for -%s\n" "$OPTARG" >&2
         echo "$usage" >&2
@@ -69,6 +77,11 @@ build() {
     echo
     echo "Build started at $(build_time)."
 
+    if [ "$format" = true ]; then
+        echo "Formatting."
+        make format
+    fi
+
     if [ "$clean" = true ]; then
         echo "Cleaning."
         make clean
@@ -78,7 +91,7 @@ build() {
         find ./build -iwholename $rebuild_pattern -delete
     fi
 
-    make_flags="NON_MATCHING=$non_matching GENERATE_MAP=$generate_map EPILOGUE_PROCESS=$frank SKIP_CHECK=$skip_check"
+    make_flags="NON_MATCHING=$non_matching GENERATE_MAP=$generate_map EPILOGUE_PROCESS=$frank SKIP_CHECK=$skip_check -j $job_count"
     echo "Running make with $make_flags"
     make $make_flags
     result=$?
@@ -87,11 +100,15 @@ build() {
         echo "Build failed at $(build_time)."
     fi
 
+    if [ -f './build/ssbm.us.1.2/GALE01.map' ]; then
+        echo "Parsing map."
+        python "tools/parse_map.py"
+    fi
+
     if [ "$dump" = true ]; then
         echo "Dumping main.dol to dump."
         rm -rf dump
         mkdir -p dump
-        python "tools/parse_map.py"
         dadosod dol "build/ssbm.us.1.2/main.dol" -m "build/map.csv" -o "dump"
     fi
 

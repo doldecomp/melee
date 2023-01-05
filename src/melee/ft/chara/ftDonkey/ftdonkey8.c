@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
+#include <melee/ft/ft_unknown_006.h>
+
 void ftDonkey_800E0568(HSD_GObj* fighter_gobj)
 {
     if (!func_80094EA4(fighter_gobj)) {

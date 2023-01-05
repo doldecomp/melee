@@ -1,14 +1,9 @@
 #ifndef _ftmario_h_
 #define _ftmario_h_
 
-#include <global.h>
-
-#include <dolphin/types.h>
-
-#include <sysdolphin/baselib/gobj.h>
-
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef enum ftMarioAction {
     AS_FTCOMMON = 340,

@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftSeak/ftseak.h>
 
+#include <melee/ft/fighter.h>
+
 void ftSeak_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

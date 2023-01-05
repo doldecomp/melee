@@ -1,7 +1,6 @@
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
-#include <functions.h>
 #include <melee/pl/player.h>
 #include <melee/gr/stage.h>
 #include <math.h>

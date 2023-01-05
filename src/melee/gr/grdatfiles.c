@@ -1,5 +1,7 @@
 #include <melee/gr/grdatfiles.h>
 
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbheap.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
 

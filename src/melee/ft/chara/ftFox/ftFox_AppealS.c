@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
+#include <melee/it/item2.h>
+
 extern u32 func_800386D8(void*, s32);
 extern BOOL func_801E2D14();
 
