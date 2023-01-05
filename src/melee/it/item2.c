@@ -1,4 +1,4 @@
-#include <melee/it/item.h>
+#include <melee/it/item2.h>
 
 #include <common_structs.h>
 #include <melee/ft/ftlib.h>
@@ -774,8 +774,6 @@ inline void What(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc,
     item_data->x52C_item_script = NULL;
 }
 
-#ifdef NON_MATCHING
-
 /**
  * @brief Transfer item on character transformation (Zelda <-> Sheik)
  */
@@ -831,103 +829,6 @@ void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
         item_data->x52C_item_script = NULL;
     }
 }
-
-#else
-
-#pragma push
-asm void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
-{ // clang-format off
-    nofralloc
-/* 8026B9A8 00000000  7C 08 02 A6 */	mflr r0
-/* 8026B9AC 00000004  90 01 00 04 */	stw r0, 0x4(r1)
-/* 8026B9B0 00000008  94 21 FF C0 */	stwu r1, -0x40(r1)
-/* 8026B9B4 0000000C  BF 41 00 28 */	stmw r26, 0x28(r1)
-/* 8026B9B8 00000010  7C 9A 23 78 */	mr r26, r4
-/* 8026B9BC 00000014  7C BE 2B 78 */	mr r30, r5
-/* 8026B9C0 00000018  7C 7F 1B 78 */	mr r31, r3
-/* 8026B9C4 0000001C  83 A3 00 2C */	lwz r29, 0x2c(r3)
-/* 8026B9C8 00000020  C0 02 CC 78 */	lfs f0, 0.0F
-/* 8026B9CC 00000024  80 9D 00 C4 */	lwz r4, 0xc4(r29)
-/* 8026B9D0 00000028  80 1D 00 28 */	lwz r0, 0x28(r29)
-/* 8026B9D4 0000002C  80 A4 00 0C */	lwz r5, 0xc(r4)
-/* 8026B9D8 00000030  38 81 00 1C */	addi r4, r1, 0x1c
-/* 8026B9DC 00000034  83 63 00 28 */	lwz r27, 0x28(r3)
-/* 8026B9E0 00000038  54 00 20 36 */	slwi r0, r0, 4
-/* 8026B9E4 0000003C  7F 85 02 14 */	add r28, r5, r0
-/* 8026B9E8 00000040  D0 01 00 24 */	stfs f0, 0x24(r1)
-/* 8026B9EC 00000044  D0 01 00 20 */	stfs f0, 0x20(r1)
-/* 8026B9F0 00000048  D0 01 00 1C */	stfs f0, 0x1c(r1)
-/* 8026B9F4 0000004C  48 00 88 A9 */	bl func_8027429C
-/* 8026B9F8 00000050  38 7F 00 00 */	addi r3, r31, 0x0
-/* 8026B9FC 00000054  38 9A 00 00 */	addi r4, r26, 0x0
-/* 8026BA00 00000058  38 BE 00 00 */	addi r5, r30, 0x0
-/* 8026BA04 0000005C  48 00 88 F1 */	bl func_802742F4
-/* 8026BA08 00000060  80 7D 0D 54 */	lwz r3, 0xd54(r29)
-/* 8026BA0C 00000064  3B C0 00 00 */	li r30, 0x0
-/* 8026BA10 00000068  38 03 FF FF */	addi r0, r3, -0x1
-/* 8026BA14 0000006C  90 1D 0D 54 */	stw r0, 0xd54(r29)
-/* 8026BA18 00000070  88 1D 0D CA */	lbz r0, 0xdca(r29)
-/* 8026BA1C 00000074  53 C0 1F 38 */	rlwimi r0, r30, 3, 28, 28
-/* 8026BA20 00000078  98 1D 0D CA */	stb r0, 0xdca(r29)
-/* 8026BA24 0000007C  80 1D 00 28 */	lwz r0, 0x28(r29)
-/* 8026BA28 00000080  2C 00 FF FF */	cmpwi r0, -0x1
-/* 8026BA2C 00000084  41 82 00 9C */	beq lbl_8026BAC8
-/* 8026BA30 00000088  93 9D 00 D0 */	stw r28, 0xd0(r29)
-/* 8026BA34 0000008C  80 1D 00 D0 */	lwz r0, 0xd0(r29)
-/* 8026BA38 00000090  28 00 00 00 */	cmplwi r0, 0x0
-/* 8026BA3C 00000094  41 82 00 70 */	beq lbl_8026BAAC
-/* 8026BA40 00000098  7F 63 DB 78 */	mr r3, r27
-/* 8026BA44 0000009C  48 10 3C 71 */	bl HSD_JObjRemoveAnimAll
-/* 8026BA48 000000A0  80 9D 00 C8 */	lwz r4, 0xc8(r29)
-/* 8026BA4C 000000A4  28 04 00 00 */	cmplwi r4, 0x0
-/* 8026BA50 000000A8  41 82 00 20 */	beq lbl_8026BA70
-/* 8026BA54 000000AC  28 1B 00 00 */	cmplwi r27, 0x0
-/* 8026BA58 000000B0  40 82 00 08 */	bne lbl_8026BA60
-/* 8026BA5C 000000B4  48 00 00 08 */	b lbl_8026BA64
-lbl_8026BA60:
-/* 8026BA60 000000B8  83 DB 00 10 */	lwz r30, 0x10(r27)
-lbl_8026BA64:
-/* 8026BA64 000000BC  7F C3 F3 78 */	mr r3, r30
-/* 8026BA68 000000C0  80 84 00 08 */	lwz r4, 0x8(r4)
-/* 8026BA6C 000000C4  4B D9 FD 99 */	bl func_8000B804
-lbl_8026BA70:
-/* 8026BA70 000000C8  80 DD 00 D0 */	lwz r6, 0xd0(r29)
-/* 8026BA74 000000CC  7F 63 DB 78 */	mr r3, r27
-/* 8026BA78 000000D0  80 86 00 00 */	lwz r4, 0x0(r6)
-/* 8026BA7C 000000D4  80 A6 00 04 */	lwz r5, 0x4(r6)
-/* 8026BA80 000000D8  80 C6 00 08 */	lwz r6, 0x8(r6)
-/* 8026BA84 000000DC  48 10 40 D9 */	bl HSD_JObjAddAnimAll
-/* 8026BA88 000000E0  7F 63 DB 78 */	mr r3, r27
-/* 8026BA8C 000000E4  C0 3D 05 D0 */	lfs f1, 0x5d0(r29)
-/* 8026BA90 000000E8  4B D9 FF 7D */	bl func_8000BA0C
-/* 8026BA94 000000EC  7F 63 DB 78 */	mr r3, r27
-/* 8026BA98 000000F0  C0 22 CC 78 */	lfs f1, 0.0F
-/* 8026BA9C 000000F4  48 10 3E 21 */	bl HSD_JObjReqAnimAll
-/* 8026BAA0 000000F8  38 7D 00 00 */	addi r3, r29, 0x0
-/* 8026BAA4 000000FC  38 9C 00 00 */	addi r4, r28, 0x0
-/* 8026BAA8 00000100  4B FF D3 99 */	bl func_80268E40
-lbl_8026BAAC:
-/* 8026BAAC 00000104  7F 63 DB 78 */	mr r3, r27
-/* 8026BAB0 00000108  48 10 4E 79 */	bl HSD_JObjAnimAll
-/* 8026BAB4 0000010C  7F E3 FB 78 */	mr r3, r31
-/* 8026BAB8 00000110  48 00 E1 29 */	bl func_80279BE0
-/* 8026BABC 00000114  7F E3 FB 78 */	mr r3, r31
-/* 8026BAC0 00000118  48 00 DF 25 */	bl func_802799E4
-/* 8026BAC4 0000011C  48 00 00 10 */	b lbl_8026BAD4
-lbl_8026BAC8:
-/* 8026BAC8 00000120  7F 63 DB 78 */	mr r3, r27
-/* 8026BACC 00000124  48 10 3B E9 */	bl HSD_JObjRemoveAnimAll
-/* 8026BAD0 00000128  93 DD 05 2C */	stw r30, 0x52c(r29)
-lbl_8026BAD4:
-/* 8026BAD4 0000012C  BB 41 00 28 */	lmw r26, 0x28(r1)
-/* 8026BAD8 00000130  80 01 00 44 */	lwz r0, 0x44(r1)
-/* 8026BADC 00000134  38 21 00 40 */	addi r1, r1, 0x40
-/* 8026BAE0 00000138  7C 08 03 A6 */	mtlr r0
-/* 8026BAE4 0000013C  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#endif
 
 // 0x8026BAE8 //
 // https://decomp.me/scratch/iVkPs //
