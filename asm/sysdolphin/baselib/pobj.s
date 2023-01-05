@@ -3796,7 +3796,7 @@ lbl_804066D0:
     .balign 8
 .global mtx_mark
 mtx_mark:
-	.skip 0x10
+    .skip 0x10
 
 
 .section .sdata
@@ -3835,50 +3835,50 @@ lbl_804D5D94:
     .balign 8
 .global lbl_804D7660
 lbl_804D7660:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7664
 lbl_804D7664:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7668
 lbl_804D7668:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D766C
 lbl_804D766C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7670
 lbl_804D7670:
-	.skip 0x4
+    .skip 0x4
 .global prev_vtxdesclist_array
 prev_vtxdesclist_array:
-	.skip 0x4
+    .skip 0x4
 .global prev_vtxdesc
 prev_vtxdesc:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DE4F8
 lbl_804DE4F8:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE500
 lbl_804DE500:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000
 .global lbl_804DE508
 lbl_804DE508:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804DE510
 lbl_804DE510:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE518
 lbl_804DE518:
-	.4byte 0x3FF00000
-	.4byte 0x00000000
+    .4byte 0x3FF00000
+    .4byte 0x00000000
 .global lbl_804DE520
 lbl_804DE520:
-	.4byte 0x3F800000
-	.4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x00000000

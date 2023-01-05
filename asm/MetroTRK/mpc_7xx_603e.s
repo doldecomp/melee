@@ -115,7 +115,7 @@ lbl_8032A9B8:
 /* 8032AA14 003275F4  7F F6 02 A6 */	mfspr r31, 0x16
 /* 8032AA18 003275F8  93 E2 02 78 */	stw r31, 0x278(r2)
 lbl_8032AA1C:
-/* 8032AA1C 003275FC  4E 80 00 20 */	blr 
+/* 8032AA1C 003275FC  4E 80 00 20 */	blr
 
 .global TRKRestoreExtended1Block
 TRKRestoreExtended1Block:
@@ -232,9 +232,9 @@ lbl_8032AB14:
 /* 8032ABC8 003277A8  7F 93 43 A6 */	mtspr 0x113, r28
 /* 8032ABCC 003277AC  7F D2 FB A6 */	mtspr 0x3f2, r30
 /* 8032ABD0 003277B0  7F FA 43 A6 */	mtspr 0x11a, r31
-/* 8032ABD4 003277B4  4E 80 00 20 */	blr 
+/* 8032ABD4 003277B4  4E 80 00 20 */	blr
 
 .global TRKTargetCPUMinorType
 TRKTargetCPUMinorType:
 /* 8032ABD8 003277B8  38 60 00 54 */	li r3, 0x54
-/* 8032ABDC 003277BC  4E 80 00 20 */	blr 
+/* 8032ABDC 003277BC  4E 80 00 20 */	blr

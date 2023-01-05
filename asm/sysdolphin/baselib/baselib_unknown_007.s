@@ -4,7 +4,7 @@
     .balign 8
 
 lbl_80430BD0:
-    .int 38 
+    .int 38
     .int 255
     .int 232
     .int 239
@@ -19,13 +19,13 @@ lbl_80430BD0:
     .int 110
 
 jtbl_80430C04:
-	.4byte lbl_803B2E88
-	.4byte lbl_803B2EB0
-	.4byte lbl_803B2ED8
-	.4byte lbl_803B2F00
-	.4byte lbl_803B2F28
-	.4byte lbl_803B2F50
-	.4byte lbl_803B2F78
+    .4byte lbl_803B2E88
+    .4byte lbl_803B2EB0
+    .4byte lbl_803B2ED8
+    .4byte lbl_803B2F00
+    .4byte lbl_803B2F28
+    .4byte lbl_803B2F50
+    .4byte lbl_803B2F78
 
 .section .text
 
@@ -57,13 +57,13 @@ func_803B2E04:
 /* 803B2E60 003AFA40  80 A3 00 00 */	lwz r5, 0(r3)
 /* 803B2E64 003AFA44  7C C3 22 78 */	xor r3, r6, r4
 /* 803B2E68 003AFA48  7C 63 2A 78 */	xor r3, r3, r5
-/* 803B2E6C 003AFA4C  4D 81 00 20 */	bgtlr 
+/* 803B2E6C 003AFA4C  4D 81 00 20 */	bgtlr
 /* 803B2E70 003AFA50  3C 80 80 43 */	lis r4, jtbl_80430C04@ha
 /* 803B2E74 003AFA54  38 84 0C 04 */	addi r4, r4, jtbl_80430C04@l
 /* 803B2E78 003AFA58  54 00 10 3A */	slwi r0, r0, 2
 /* 803B2E7C 003AFA5C  7C 04 00 2E */	lwzx r0, r4, r0
 /* 803B2E80 003AFA60  7C 09 03 A6 */	mtctr r0
-/* 803B2E84 003AFA64  4E 80 04 20 */	bctr 
+/* 803B2E84 003AFA64  4E 80 04 20 */	bctr
 lbl_803B2E88:
 /* 803B2E88 003AFA68  54 60 1E F6 */	rlwinm r0, r3, 3, 0x1b, 0x1b
 /* 803B2E8C 003AFA6C  50 60 07 FE */	rlwimi r0, r3, 0, 0x1f, 0x1f
@@ -74,7 +74,7 @@ lbl_803B2E88:
 /* 803B2EA0 003AFA80  50 60 EF 38 */	rlwimi r0, r3, 0x1d, 0x1c, 0x1c
 /* 803B2EA4 003AFA84  50 60 06 30 */	rlwimi r0, r3, 0, 0x18, 0x18
 /* 803B2EA8 003AFA88  54 03 06 3E */	clrlwi r3, r0, 0x18
-/* 803B2EAC 003AFA8C  4E 80 00 20 */	blr 
+/* 803B2EAC 003AFA8C  4E 80 00 20 */	blr
 lbl_803B2EB0:
 /* 803B2EB0 003AFA90  54 60 FF FE */	rlwinm r0, r3, 0x1f, 0x1f, 0x1f
 /* 803B2EB4 003AFA94  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
@@ -85,7 +85,7 @@ lbl_803B2EB0:
 /* 803B2EC8 003AFAA8  50 60 0E 30 */	rlwimi r0, r3, 1, 0x18, 0x18
 /* 803B2ECC 003AFAAC  50 60 D7 BC */	rlwimi r0, r3, 0x1a, 0x1e, 0x1e
 /* 803B2ED0 003AFAB0  54 03 06 3E */	clrlwi r3, r0, 0x18
-/* 803B2ED4 003AFAB4  4E 80 00 20 */	blr 
+/* 803B2ED4 003AFAB4  4E 80 00 20 */	blr
 lbl_803B2ED8:
 /* 803B2ED8 003AFAB8  54 60 26 B4 */	rlwinm r0, r3, 4, 0x1a, 0x1a
 /* 803B2EDC 003AFABC  50 60 36 72 */	rlwimi r0, r3, 6, 0x19, 0x19
@@ -96,7 +96,7 @@ lbl_803B2ED8:
 /* 803B2EF0 003AFAD0  50 60 E7 7A */	rlwimi r0, r3, 0x1c, 0x1d, 0x1d
 /* 803B2EF4 003AFAD4  50 60 EE F6 */	rlwimi r0, r3, 0x1d, 0x1b, 0x1b
 /* 803B2EF8 003AFAD8  54 03 06 3E */	clrlwi r3, r0, 0x18
-/* 803B2EFC 003AFADC  4E 80 00 20 */	blr 
+/* 803B2EFC 003AFADC  4E 80 00 20 */	blr
 lbl_803B2F00:
 /* 803B2F00 003AFAE0  54 60 17 38 */	rlwinm r0, r3, 2, 0x1c, 0x1c
 /* 803B2F04 003AFAE4  50 60 0F BC */	rlwimi r0, r3, 1, 0x1e, 0x1e
@@ -107,7 +107,7 @@ lbl_803B2F00:
 /* 803B2F18 003AFAF8  50 60 FE B4 */	rlwimi r0, r3, 0x1f, 0x1a, 0x1a
 /* 803B2F1C 003AFAFC  50 60 FE 72 */	rlwimi r0, r3, 0x1f, 0x19, 0x19
 /* 803B2F20 003AFB00  54 03 06 3E */	clrlwi r3, r0, 0x18
-/* 803B2F24 003AFB04  4E 80 00 20 */	blr 
+/* 803B2F24 003AFB04  4E 80 00 20 */	blr
 lbl_803B2F28:
 /* 803B2F28 003AFB08  54 60 0F 7A */	rlwinm r0, r3, 1, 0x1d, 0x1d
 /* 803B2F2C 003AFB0C  50 60 3E 30 */	rlwimi r0, r3, 7, 0x18, 0x18
@@ -118,7 +118,7 @@ lbl_803B2F28:
 /* 803B2F40 003AFB20  50 60 F6 F6 */	rlwimi r0, r3, 0x1e, 0x1b, 0x1b
 /* 803B2F44 003AFB24  50 60 E7 38 */	rlwimi r0, r3, 0x1c, 0x1c, 0x1c
 /* 803B2F48 003AFB28  54 03 06 3E */	clrlwi r3, r0, 0x18
-/* 803B2F4C 003AFB2C  4E 80 00 20 */	blr 
+/* 803B2F4C 003AFB2C  4E 80 00 20 */	blr
 lbl_803B2F50:
 /* 803B2F50 003AFB30  54 60 2E 72 */	rlwinm r0, r3, 5, 0x19, 0x19
 /* 803B2F54 003AFB34  50 60 2E B4 */	rlwimi r0, r3, 5, 0x1a, 0x1a
@@ -129,7 +129,7 @@ lbl_803B2F50:
 /* 803B2F68 003AFB48  50 60 DF BC */	rlwimi r0, r3, 0x1b, 0x1e, 0x1e
 /* 803B2F6C 003AFB4C  50 60 DF 7A */	rlwimi r0, r3, 0x1b, 0x1d, 0x1d
 /* 803B2F70 003AFB50  54 03 06 3E */	clrlwi r3, r0, 0x18
-/* 803B2F74 003AFB54  4E 80 00 20 */	blr 
+/* 803B2F74 003AFB54  4E 80 00 20 */	blr
 lbl_803B2F78:
 /* 803B2F78 003AFB58  54 60 07 BC */	rlwinm r0, r3, 0, 0x1e, 0x1e
 /* 803B2F7C 003AFB5C  50 60 17 7A */	rlwimi r0, r3, 2, 0x1d, 0x1d
@@ -140,7 +140,7 @@ lbl_803B2F78:
 /* 803B2F90 003AFB70  50 60 D7 FE */	rlwimi r0, r3, 0x1a, 0x1f, 0x1f
 /* 803B2F94 003AFB74  50 60 F6 B4 */	rlwimi r0, r3, 0x1e, 0x1a, 0x1a
 /* 803B2F98 003AFB78  54 03 06 3E */	clrlwi r3, r0, 0x18
-/* 803B2F9C 003AFB7C  4E 80 00 20 */	blr 
+/* 803B2F9C 003AFB7C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/2HBMp // 1864 (46.74%)
 .global func_803B2FA0
@@ -183,19 +183,19 @@ lbl_803B300C:
 /* 803B301C 003AFBFC  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 803B3020 003AFC00  38 21 00 20 */	addi r1, r1, 0x20
 /* 803B3024 003AFC04  7C 08 03 A6 */	mtlr r0
-/* 803B3028 003AFC08  4E 80 00 20 */	blr 
+/* 803B3028 003AFC08  4E 80 00 20 */	blr
 
 .section .data
     .balign 4
 
 jtbl_80430C20:
-	.4byte lbl_803B3074
-	.4byte lbl_803B309C
-	.4byte lbl_803B30C4
-	.4byte lbl_803B30EC
-	.4byte lbl_803B3114
-	.4byte lbl_803B313C
-	.4byte lbl_803B3164
+    .4byte lbl_803B3074
+    .4byte lbl_803B309C
+    .4byte lbl_803B30C4
+    .4byte lbl_803B30EC
+    .4byte lbl_803B3114
+    .4byte lbl_803B313C
+    .4byte lbl_803B3164
     .4byte NULL
 
 .section .text
@@ -218,7 +218,7 @@ func_803B302C:
 /* 803B3064 003AFC44  54 E5 10 3A */	slwi r5, r7, 2
 /* 803B3068 003AFC48  7C A6 28 2E */	lwzx r5, r6, r5
 /* 803B306C 003AFC4C  7C A9 03 A6 */	mtctr r5
-/* 803B3070 003AFC50  4E 80 04 20 */	bctr 
+/* 803B3070 003AFC50  4E 80 04 20 */	bctr
 lbl_803B3074:
 /* 803B3074 003AFC54  54 85 0F 7A */	rlwinm r5, r4, 1, 0x1d, 0x1d
 /* 803B3078 003AFC58  50 85 07 FE */	rlwimi r5, r4, 0, 0x1f, 0x1f
@@ -312,7 +312,7 @@ lbl_803B3188:
 /* 803B31BC 003AFD9C  7C 84 02 78 */	xor r4, r4, r0
 /* 803B31C0 003AFDA0  7C 84 1A 78 */	xor r4, r4, r3
 /* 803B31C4 003AFDA4  38 64 00 00 */	addi r3, r4, 0
-/* 803B31C8 003AFDA8  4E 80 00 20 */	blr 
+/* 803B31C8 003AFDA8  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/vZixu
 .global func_803B31CC
@@ -423,4 +423,4 @@ lbl_803B3330:
 /* 803B3334 003AFF14  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 803B3338 003AFF18  38 21 00 38 */	addi r1, r1, 0x38
 /* 803B333C 003AFF1C  7C 08 03 A6 */	mtlr r0
-/* 803B3340 003AFF20  4E 80 00 20 */	blr 
+/* 803B3340 003AFF20  4E 80 00 20 */	blr

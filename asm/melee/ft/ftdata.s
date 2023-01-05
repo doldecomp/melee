@@ -1078,8 +1078,8 @@ ActionStateTableByCharacter:
     .4byte as_table_roy
     .4byte as_table_masterhand
     .4byte as_table_crazyhand
-	.4byte NULL
-	.4byte NULL
+    .4byte NULL
+    .4byte NULL
     .4byte as_table_gkoopa
     .4byte as_table_sandbag
     .balign 4

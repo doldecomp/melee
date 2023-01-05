@@ -45,14 +45,14 @@ lbl_80323A58:
 /* 80323AA0 00320680  94 0C FF FC */	stwu r0, -4(r12)
 lbl_80323AA4:
 /* 80323AA4 00320684  54 A5 07 BF */	clrlwi. r5, r5, 0x1e
-/* 80323AA8 00320688  4D 82 00 20 */	beqlr 
+/* 80323AA8 00320688  4D 82 00 20 */	beqlr
 /* 80323AAC 0032068C  7D 6B 4A 14 */	add r11, r11, r9
 lbl_80323AB0:
 /* 80323AB0 00320690  8C 0B FF FF */	lbzu r0, -1(r11)
 /* 80323AB4 00320694  34 A5 FF FF */	addic. r5, r5, -1
 /* 80323AB8 00320698  9C 0C FF FF */	stbu r0, -1(r12)
 /* 80323ABC 0032069C  40 82 FF F4 */	bne lbl_80323AB0
-/* 80323AC0 003206A0  4E 80 00 20 */	blr 
+/* 80323AC0 003206A0  4E 80 00 20 */	blr
 
 .global __copy_longs_unaligned
 __copy_longs_unaligned:
@@ -101,7 +101,7 @@ lbl_80323B5C:
 /* 80323B5C 0032073C  54 A5 07 BF */	clrlwi. r5, r5, 0x1e
 /* 80323B60 00320740  38 88 00 03 */	addi r4, r8, 3
 /* 80323B64 00320744  38 66 00 03 */	addi r3, r6, 3
-/* 80323B68 00320748  4D 82 00 20 */	beqlr 
+/* 80323B68 00320748  4D 82 00 20 */	beqlr
 /* 80323B6C 0032074C  20 0B 00 04 */	subfic r0, r11, 4
 /* 80323B70 00320750  7C 80 20 50 */	subf r4, r0, r4
 lbl_80323B74:
@@ -109,7 +109,7 @@ lbl_80323B74:
 /* 80323B78 00320758  34 A5 FF FF */	addic. r5, r5, -1
 /* 80323B7C 0032075C  9C 03 00 01 */	stbu r0, 1(r3)
 /* 80323B80 00320760  40 82 FF F4 */	bne lbl_80323B74
-/* 80323B84 00320764  4E 80 00 20 */	blr 
+/* 80323B84 00320764  4E 80 00 20 */	blr
 
 .global __copy_longs_rev_aligned
 __copy_longs_rev_aligned:
@@ -156,13 +156,13 @@ lbl_80323C08:
 /* 80323C14 003207F4  40 82 FF F4 */	bne lbl_80323C08
 lbl_80323C18:
 /* 80323C18 003207F8  54 A5 07 BF */	clrlwi. r5, r5, 0x1e
-/* 80323C1C 003207FC  4D 82 00 20 */	beqlr 
+/* 80323C1C 003207FC  4D 82 00 20 */	beqlr
 lbl_80323C20:
 /* 80323C20 00320800  8C 04 FF FF */	lbzu r0, -1(r4)
 /* 80323C24 00320804  34 A5 FF FF */	addic. r5, r5, -1
 /* 80323C28 00320808  9C 06 FF FF */	stbu r0, -1(r6)
 /* 80323C2C 0032080C  40 82 FF F4 */	bne lbl_80323C20
-/* 80323C30 00320810  4E 80 00 20 */	blr 
+/* 80323C30 00320810  4E 80 00 20 */	blr
 
 .global __copy_longs_aligned
 __copy_longs_aligned:
@@ -213,10 +213,10 @@ lbl_80323CCC:
 /* 80323CCC 003208AC  54 A5 07 BF */	clrlwi. r5, r5, 0x1e
 /* 80323CD0 003208B0  38 86 00 03 */	addi r4, r6, 3
 /* 80323CD4 003208B4  38 63 00 03 */	addi r3, r3, 3
-/* 80323CD8 003208B8  4D 82 00 20 */	beqlr 
+/* 80323CD8 003208B8  4D 82 00 20 */	beqlr
 lbl_80323CDC:
 /* 80323CDC 003208BC  8C 04 00 01 */	lbzu r0, 1(r4)
 /* 80323CE0 003208C0  34 A5 FF FF */	addic. r5, r5, -1
 /* 80323CE4 003208C4  9C 03 00 01 */	stbu r0, 1(r3)
 /* 80323CE8 003208C8  40 82 FF F4 */	bne lbl_80323CDC
-/* 80323CEC 003208CC  4E 80 00 20 */	blr 
+/* 80323CEC 003208CC  4E 80 00 20 */	blr

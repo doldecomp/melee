@@ -1409,10 +1409,10 @@ HSD_MtxInitAllocData:
     .balign 8
 .global lbl_804C2310
 lbl_804C2310:
-	.skip 0x2C
+    .skip 0x2C
 .global lbl_804C233C
 lbl_804C233C:
-	.skip 0x2C
+    .skip 0x2C
 
 
 .section .sdata
@@ -1435,43 +1435,43 @@ lbl_804D5E9C:
     .balign 8
 .global lbl_804DE658
 lbl_804DE658:
-	.4byte 0x2EDBE6FF
+    .4byte 0x2EDBE6FF
 .global lbl_804DE65C
 lbl_804DE65C:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DE660
 lbl_804DE660:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE668
 lbl_804DE668:
-	.4byte 0x3FE00000
-	.4byte 0x00000000
+    .4byte 0x3FE00000
+    .4byte 0x00000000
 .global lbl_804DE670
 lbl_804DE670:
-	.4byte 0x40080000
-	.4byte 0x00000000
+    .4byte 0x40080000
+    .4byte 0x00000000
 .global lbl_804DE678
 lbl_804DE678:
-	.4byte 0x00800000
+    .4byte 0x00800000
 .global lbl_804DE67C
 lbl_804DE67C:
-	.4byte 0x3FC90FDB
+    .4byte 0x3FC90FDB
 .global lbl_804DE680
 lbl_804DE680:
-	.4byte 0xBF800000
+    .4byte 0xBF800000
 .global lbl_804DE684
 lbl_804DE684:
-	.4byte 0xBFC90FDB
+    .4byte 0xBFC90FDB
 .global lbl_804DE688
 lbl_804DE688:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE690
 lbl_804DE690:
-	.4byte 0xBFF00000
-	.4byte 0x00000000
+    .4byte 0xBFF00000
+    .4byte 0x00000000
 .global lbl_804DE698
 lbl_804DE698:
-	.4byte 0x3FF00000
-	.4byte 0x00000000
+    .4byte 0x3FF00000
+    .4byte 0x00000000

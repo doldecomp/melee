@@ -920,7 +920,7 @@ lbl_803F9798:
 .section .bss, "wa"
     .balign 8
 lbl_804A1340:
-	.skip 0x38
+    .skip 0x38
 
 .section .sdata
     .balign 8
@@ -934,8 +934,8 @@ lbl_804D57D0:
 .section .sdata2
     .balign 8
 lbl_804DDAB0:
-	.double 4503599627370496.0
+    .double 4503599627370496.0
 lbl_804DDAB8:
-	.float 0.0
+    .float 0.0
 lbl_804DDABC:
-	.float 12.0
+    .float 12.0

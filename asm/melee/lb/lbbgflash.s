@@ -2335,10 +2335,10 @@ str_struct_lbBgFlashColAnimData_NULL:
     .balign 8
 
 skip48_80433658:
-	.skip 0x48
+    .skip 0x48
 
 skip30_804336A0:
-	.skip 0x30
+    .skip 0x30
 
 
 .section .sdata
@@ -2348,7 +2348,7 @@ lbl_804D3840:
     .4byte 0x000000FF
 
 lbl_804D3844:
-	.4byte NULL
+    .4byte NULL
 
 lbl_804D3848:
     .4byte 0xFFFFFFFF
@@ -2373,90 +2373,90 @@ str_rotate:
     .balign 8
 
 skip4_804D63D8:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D63DC:
-	.skip 0x4
+    .skip 0x4
 
 skip8_804D63E0:
-	.skip 0x8
+    .skip 0x8
 
 
 .section .sdata2
     .balign 8
 
 lbl_804D7CE8:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 
 lbl_804D7CF0:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000
 
 lbl_804D7CF8:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 
 lbl_804D7D00:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 
 lbl_804D7D04:
-	.4byte 0x44200000
+    .4byte 0x44200000
 
 lbl_804D7D08:
-	.4byte 0xC3F00000
-	.4byte 0x00000000
+    .4byte 0xC3F00000
+    .4byte 0x00000000
 
 lbl_804D7D10:
-	.4byte 0x2EDBE6FF
+    .4byte 0x2EDBE6FF
 
 lbl_804D7D14:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 
 lbl_804D7D18:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 
 lbl_804D7D20:
-	.4byte 0x3FE00000
-	.4byte 0x00000000
+    .4byte 0x3FE00000
+    .4byte 0x00000000
 
 lbl_804D7D28:
-	.4byte 0x40080000
-	.4byte 0x00000000
+    .4byte 0x40080000
+    .4byte 0x00000000
 
 lbl_804D7D30:
-	.4byte 0x3727C5AC
-	.4byte 0x00000000
+    .4byte 0x3727C5AC
+    .4byte 0x00000000
 
 lbl_804D7D38:
-	.4byte 0x400921FB
-	.4byte 0x54442D18
+    .4byte 0x400921FB
+    .4byte 0x54442D18
 
 lbl_804D7D40:
-	.4byte 0x41200000
+    .4byte 0x41200000
 
 lbl_804D7D44:
-	.4byte 0x41300000
+    .4byte 0x41300000
 
 lbl_804D7D48:
-	.4byte 0x40000000
+    .4byte 0x40000000
 
 lbl_804D7D4C:
-	.4byte 0xBF800000
+    .4byte 0xBF800000
 
 lbl_804D7D50:
-	.4byte 0x3FC65718
-	.4byte 0x40000000
+    .4byte 0x3FC65718
+    .4byte 0x40000000
 
 lbl_804D7D58:
-	.4byte 0x4007BC89
-	.4byte 0xD0442D18
+    .4byte 0x4007BC89
+    .4byte 0xD0442D18
 
 lbl_804D7D60:
-	.4byte 0x3F800000
-	.4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x00000000
 
 lbl_804D7D68:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000

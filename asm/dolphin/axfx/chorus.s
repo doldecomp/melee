@@ -110,7 +110,7 @@ lbl_8035D008:
 /* 8035D030 00359C10  90 A3 00 10 */	stw r5, 0x10(r3)
 /* 8035D034 00359C14  BB 41 00 28 */	lmw r26, 0x28(r1)
 /* 8035D038 00359C18  38 21 00 40 */	addi r1, r1, 0x40
-/* 8035D03C 00359C1C  4E 80 00 20 */	blr 
+/* 8035D03C 00359C1C  4E 80 00 20 */	blr
 
 .global do_src2
 do_src2:
@@ -242,7 +242,7 @@ lbl_8035D1EC:
 /* 8035D21C 00359DFC  90 A3 00 10 */	stw r5, 0x10(r3)
 /* 8035D220 00359E00  BB 41 00 28 */	lmw r26, 0x28(r1)
 /* 8035D224 00359E04  38 21 00 40 */	addi r1, r1, 0x40
-/* 8035D228 00359E08  4E 80 00 20 */	blr 
+/* 8035D228 00359E08  4E 80 00 20 */	blr
 
 .global AXFXChorusInit
 AXFXChorusInit:
@@ -257,7 +257,7 @@ AXFXChorusInit:
 /* 8035D24C 00359E2C  7C 7F 1B 78 */	mr r31, r3
 /* 8035D250 00359E30  38 60 16 80 */	li r3, 0x1680
 /* 8035D254 00359E34  7D 88 03 A6 */	mtlr r12
-/* 8035D258 00359E38  4E 80 00 21 */	blrl 
+/* 8035D258 00359E38  4E 80 00 21 */	blrl
 /* 8035D25C 00359E3C  90 7E 00 00 */	stw r3, 0(r30)
 /* 8035D260 00359E40  80 7E 00 00 */	lwz r3, 0(r30)
 /* 8035D264 00359E44  28 03 00 00 */	cmplwi r3, 0
@@ -378,7 +378,7 @@ lbl_8035D414:
 /* 8035D41C 00359FFC  83 C1 00 20 */	lwz r30, 0x20(r1)
 /* 8035D420 0035A000  7C 08 03 A6 */	mtlr r0
 /* 8035D424 0035A004  38 21 00 28 */	addi r1, r1, 0x28
-/* 8035D428 0035A008  4E 80 00 20 */	blr 
+/* 8035D428 0035A008  4E 80 00 20 */	blr
 
 .global AXFXChorusShutdown
 AXFXChorusShutdown:
@@ -393,7 +393,7 @@ AXFXChorusShutdown:
 /* 8035D44C 0035A02C  81 8D A5 D4 */	lwz r12, __AXFXFree@sda21(r13)
 /* 8035D450 0035A030  7C 1F 03 78 */	mr r31, r0
 /* 8035D454 0035A034  7D 88 03 A6 */	mtlr r12
-/* 8035D458 0035A038  4E 80 00 21 */	blrl 
+/* 8035D458 0035A038  4E 80 00 21 */	blrl
 /* 8035D45C 0035A03C  7F E3 FB 78 */	mr r3, r31
 /* 8035D460 0035A040  4B FE 9F 2D */	bl OSRestoreInterrupts
 /* 8035D464 0035A044  38 60 00 01 */	li r3, 1
@@ -401,7 +401,7 @@ AXFXChorusShutdown:
 /* 8035D46C 0035A04C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8035D470 0035A050  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035D474 0035A054  7C 08 03 A6 */	mtlr r0
-/* 8035D478 0035A058  4E 80 00 20 */	blr 
+/* 8035D478 0035A058  4E 80 00 20 */	blr
 
 .global AXFXChorusSettings
 AXFXChorusSettings:
@@ -453,7 +453,7 @@ AXFXChorusSettings:
 /* 8035D530 0035A110  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8035D534 0035A114  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035D538 0035A118  7C 08 03 A6 */	mtlr r0
-/* 8035D53C 0035A11C  4E 80 00 20 */	blr 
+/* 8035D53C 0035A11C  4E 80 00 20 */	blr
 
 .global AXFXChorusCallback
 AXFXChorusCallback:
@@ -683,7 +683,7 @@ lbl_8035D844:
 /* 8035D880 0035A460  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8035D884 0035A464  38 21 00 38 */	addi r1, r1, 0x38
 /* 8035D888 0035A468  7C 08 03 A6 */	mtlr r0
-/* 8035D88C 0035A46C  4E 80 00 20 */	blr 
+/* 8035D88C 0035A46C  4E 80 00 20 */	blr
 
 
 .section .data
@@ -1207,5 +1207,5 @@ rsmpTab12khz:
 .section .sdata2
     .balign 8
 i2fMagic:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000

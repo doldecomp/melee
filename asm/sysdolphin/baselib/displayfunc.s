@@ -1573,41 +1573,41 @@ lbl_804D5DF4:
     .balign 8
 .global lbl_804D7698
 lbl_804D7698:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D769C
 lbl_804D769C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D76A0
 lbl_804D76A0:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D76A4
 lbl_804D76A4:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D76A8
 lbl_804D76A8:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D76AC
 lbl_804D76AC:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D76B0
 lbl_804D76B0:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D76B4
 lbl_804D76B4:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DE578
 lbl_804DE578:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE580
 lbl_804DE580:
-	.4byte 0x3FE00000
-	.4byte 0x00000000
+    .4byte 0x3FE00000
+    .4byte 0x00000000
 .global lbl_804DE588
 lbl_804DE588:
-	.4byte 0x40080000
-	.4byte 0x00000000
+    .4byte 0x40080000
+    .4byte 0x00000000

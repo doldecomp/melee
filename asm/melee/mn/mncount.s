@@ -1755,38 +1755,38 @@ lbl_803EFAAC:
     .4byte 0x00E500E6
 .global jtbl_803EFAE8
 jtbl_803EFAE8:
-	.4byte lbl_80250CB4
-	.4byte lbl_80250CC8
-	.4byte lbl_80250CDC
-	.4byte lbl_80250D2C
-	.4byte lbl_80250D44
-	.4byte lbl_80250D5C
-	.4byte lbl_80250D74
-	.4byte lbl_80250D8C
-	.4byte lbl_80250DA0
-	.4byte lbl_80250DB4
+    .4byte lbl_80250CB4
+    .4byte lbl_80250CC8
+    .4byte lbl_80250CDC
+    .4byte lbl_80250D2C
+    .4byte lbl_80250D44
+    .4byte lbl_80250D5C
+    .4byte lbl_80250D74
+    .4byte lbl_80250D8C
+    .4byte lbl_80250DA0
+    .4byte lbl_80250DB4
 .global jtbl_803EFB10
 jtbl_803EFB10:
-	.4byte lbl_80250E20
-	.4byte lbl_80250E2C
-	.4byte lbl_80250E38
-	.4byte lbl_80250E40
-	.4byte lbl_80250E4C
-	.4byte lbl_80250E58
-	.4byte lbl_80250E64
-	.4byte lbl_80250E6C
-	.4byte lbl_80250E78
-	.4byte lbl_80250E84
-	.4byte lbl_80250E90
-	.4byte lbl_80250E9C
-	.4byte lbl_80250EA8
-	.4byte lbl_80250EB4
-	.4byte lbl_80250EC0
-	.4byte lbl_80250ECC
-	.4byte lbl_80250ED8
-	.4byte lbl_80250F0C
-	.4byte lbl_80250F40
-	.4byte lbl_80250F48
+    .4byte lbl_80250E20
+    .4byte lbl_80250E2C
+    .4byte lbl_80250E38
+    .4byte lbl_80250E40
+    .4byte lbl_80250E4C
+    .4byte lbl_80250E58
+    .4byte lbl_80250E64
+    .4byte lbl_80250E6C
+    .4byte lbl_80250E78
+    .4byte lbl_80250E84
+    .4byte lbl_80250E90
+    .4byte lbl_80250E9C
+    .4byte lbl_80250EA8
+    .4byte lbl_80250EB4
+    .4byte lbl_80250EC0
+    .4byte lbl_80250ECC
+    .4byte lbl_80250ED8
+    .4byte lbl_80250F0C
+    .4byte lbl_80250F40
+    .4byte lbl_80250F48
     .asciz "Can't get user_data.\n"
     .balign 4
     .asciz "mncount.c"
@@ -1806,7 +1806,7 @@ jtbl_803EFB10:
     .balign 8
 .global lbl_804A0948
 lbl_804A0948:
-	.skip 0x10
+    .skip 0x10
 
 
 .section .sdata
@@ -1831,52 +1831,52 @@ lbl_804D5068:
     .balign 8
 .global lbl_804D6C70
 lbl_804D6C70:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DC1D8
 lbl_804DC1D8:
-	.4byte 0xC1500000
+    .4byte 0xC1500000
 .global lbl_804DC1DC
 lbl_804DC1DC:
-	.4byte 0xC0CCCCCD
+    .4byte 0xC0CCCCCD
 .global lbl_804DC1E0
 lbl_804DC1E0:
-	.4byte 0x3FB33333
+    .4byte 0x3FB33333
 .global lbl_804DC1E4
 lbl_804DC1E4:
-	.4byte 0x41880000
+    .4byte 0x41880000
 .global lbl_804DC1E8
 lbl_804DC1E8:
-	.4byte 0x43FA0000
+    .4byte 0x43FA0000
 .global lbl_804DC1EC
 lbl_804DC1EC:
-	.4byte 0x42198D06
+    .4byte 0x42198D06
 .global lbl_804DC1F0
 lbl_804DC1F0:
-	.4byte 0x3CF5C28F
+    .4byte 0x3CF5C28F
 .global lbl_804DC1F4
 lbl_804DC1F4:
-	.4byte 0x41500000
+    .4byte 0x41500000
 .global lbl_804DC1F8
 lbl_804DC1F8:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DC200
 lbl_804DC200:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804DC208
 lbl_804DC208:
-	.4byte 0xC1180000
+    .4byte 0xC1180000
 .global lbl_804DC20C
 lbl_804DC20C:
-	.4byte 0x4111999A
+    .4byte 0x4111999A
 .global lbl_804DC210
 lbl_804DC210:
-	.4byte 0x43B65777
+    .4byte 0x43B65777
 .global lbl_804DC214
 lbl_804DC214:
-	.4byte 0x3D5566CF
+    .4byte 0x3D5566CF

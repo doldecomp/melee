@@ -102,7 +102,7 @@ lbl_80326704:
 /* 80326708 003232E8  FC 20 00 50 */	fneg f1, f0
 lbl_8032670C:
 /* 8032670C 003232EC  38 21 00 28 */	addi r1, r1, 0x28
-/* 80326710 003232F0  4E 80 00 20 */	blr 
+/* 80326710 003232F0  4E 80 00 20 */	blr
 
 
 .section .rodata, "a"
@@ -396,21 +396,21 @@ __sincos_poly:
     .balign 8
 .global lbl_804DE1B0
 lbl_804DE1B0:
-	.4byte 0xBF000030
+    .4byte 0xBF000030
 .global lbl_804DE1B4
 lbl_804DE1B4:
-	.4byte 0x3EAAAA36
+    .4byte 0x3EAAAA36
 .global lbl_804DE1B8
 lbl_804DE1B8:
-	.4byte 0x7FFFFFFF
+    .4byte 0x7FFFFFFF
 .global lbl_804DE1BC
 lbl_804DE1BC:
-	.4byte 0x7F800000
+    .4byte 0x7F800000
 .global lbl_804DE1C0
 lbl_804DE1C0:
-	.4byte 0x3F317218
-	.4byte 0x00000000
+    .4byte 0x3F317218
+    .4byte 0x00000000
 .global lbl_804DE1C8
 lbl_804DE1C8:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000

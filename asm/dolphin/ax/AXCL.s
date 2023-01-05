@@ -5,7 +5,7 @@
 .global __AXGetCommandListCycles
 __AXGetCommandListCycles:
 /* 803592B4 00355E94  80 6D BE 90 */	lwz r3, __AXCommandListCycles@sda21(r13)
-/* 803592B8 00355E98  4E 80 00 20 */	blr 
+/* 803592B8 00355E98  4E 80 00 20 */	blr
 
 .global __AXGetCommandListAddress
 __AXGetCommandListAddress:
@@ -23,7 +23,7 @@ __AXGetCommandListAddress:
 /* 803592E8 00355EC8  1C 00 03 00 */	mulli r0, r0, 0x300
 /* 803592EC 00355ECC  7C 04 02 14 */	add r0, r4, r0
 /* 803592F0 00355ED0  90 0D BE 8C */	stw r0, __AXClWrite@sda21(r13)
-/* 803592F4 00355ED4  4E 80 00 20 */	blr 
+/* 803592F4 00355ED4  4E 80 00 20 */	blr
 
 .global __AXNextFrame
 __AXNextFrame:
@@ -294,7 +294,7 @@ lbl_80359640:
 /* 803596F8 003562D8  7C 08 03 A6 */	mtlr r0
 /* 803596FC 003562DC  83 A1 00 34 */	lwz r29, 0x34(r1)
 /* 80359700 003562E0  38 21 00 40 */	addi r1, r1, 0x40
-/* 80359704 003562E4  4E 80 00 20 */	blr 
+/* 80359704 003562E4  4E 80 00 20 */	blr
 
 .global __AXClInit
 __AXClInit:
@@ -304,7 +304,7 @@ __AXClInit:
 /* 80359714 003562F4  90 8D BE 94 */	stw r4, __AXClMode@sda21(r13)
 /* 80359718 003562F8  90 8D BE 88 */	stw r4, __AXCommandListPosition@sda21(r13)
 /* 8035971C 003562FC  90 0D BE 8C */	stw r0, __AXClWrite@sda21(r13)
-/* 80359720 00356300  4E 80 00 20 */	blr 
+/* 80359720 00356300  4E 80 00 20 */	blr
 
 
 .section .bss, "wa"
@@ -313,20 +313,20 @@ __AXClInit:
     .balign 32
 .global __AXCommandList
 __AXCommandList:
-	.skip 0x600
+    .skip 0x600
 
 
 .section .sbss
     .balign 8
 .global __AXCommandListPosition
 __AXCommandListPosition:
-	.skip 0x4
+    .skip 0x4
 .global __AXClWrite
 __AXClWrite:
-	.skip 0x4
+    .skip 0x4
 .global __AXCommandListCycles
 __AXCommandListCycles:
-	.skip 0x4
+    .skip 0x4
 .global __AXClMode
 __AXClMode:
-	.skip 0x4
+    .skip 0x4

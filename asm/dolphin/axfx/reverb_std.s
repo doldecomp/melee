@@ -80,7 +80,7 @@ lbl_8035C604:
 /* 8035C618 003591F8  7E 63 9B 78 */	mr r3, r19
 /* 8035C61C 003591FC  81 8D A5 D0 */	lwz r12, __AXFXAlloc@sda21(r13)
 /* 8035C620 00359200  7D 88 03 A6 */	mtlr r12
-/* 8035C624 00359204  4E 80 00 21 */	blrl 
+/* 8035C624 00359204  4E 80 00 21 */	blrl
 /* 8035C628 00359208  90 7A 00 84 */	stw r3, 0x84(r26)
 /* 8035C62C 0035920C  38 B3 00 00 */	addi r5, r19, 0
 /* 8035C630 00359210  38 80 00 00 */	li r4, 0
@@ -155,7 +155,7 @@ lbl_8035C718:
 /* 8035C72C 0035930C  7E 63 9B 78 */	mr r3, r19
 /* 8035C730 00359310  81 8D A5 D0 */	lwz r12, __AXFXAlloc@sda21(r13)
 /* 8035C734 00359314  7D 88 03 A6 */	mtlr r12
-/* 8035C738 00359318  4E 80 00 21 */	blrl 
+/* 8035C738 00359318  4E 80 00 21 */	blrl
 /* 8035C73C 0035931C  90 7A 00 0C */	stw r3, 0xc(r26)
 /* 8035C740 00359320  38 B3 00 00 */	addi r5, r19, 0
 /* 8035C744 00359324  38 80 00 00 */	li r4, 0
@@ -245,7 +245,7 @@ lbl_8035C870:
 /* 8035C874 00359454  80 17 01 20 */	lwz r0, 0x120(r23)
 /* 8035C878 00359458  7D 88 03 A6 */	mtlr r12
 /* 8035C87C 0035945C  54 03 10 3A */	slwi r3, r0, 2
-/* 8035C880 00359460  4E 80 00 21 */	blrl 
+/* 8035C880 00359460  4E 80 00 21 */	blrl
 /* 8035C884 00359464  90 74 01 24 */	stw r3, 0x124(r20)
 /* 8035C888 00359468  38 80 00 00 */	li r4, 0
 /* 8035C88C 0035946C  80 17 01 20 */	lwz r0, 0x120(r23)
@@ -284,7 +284,7 @@ lbl_8035C8E0:
 /* 8035C900 003594E0  CB 41 00 78 */	lfd f26, 0x78(r1)
 /* 8035C904 003594E4  CB 21 00 70 */	lfd f25, 0x70(r1)
 /* 8035C908 003594E8  38 21 00 A8 */	addi r1, r1, 0xa8
-/* 8035C90C 003594EC  4E 80 00 20 */	blr 
+/* 8035C90C 003594EC  4E 80 00 20 */	blr
 
 HandleReverb:
 /* 8035C910 003594F0  94 21 FF 70 */	stwu r1, -0x90(r1)
@@ -543,7 +543,7 @@ lbl_8035CC40:
 /* 8035CCB4 00359894  CA 81 00 88 */	lfd f20, 0x88(r1)
 /* 8035CCB8 00359898  BA 21 00 08 */	lmw r17, 8(r1)
 /* 8035CCBC 0035989C  38 21 00 90 */	addi r1, r1, 0x90
-/* 8035CCC0 003598A0  4E 80 00 20 */	blr 
+/* 8035CCC0 003598A0  4E 80 00 20 */	blr
 
 .global ReverbSTDFree
 ReverbSTDFree:
@@ -567,7 +567,7 @@ lbl_8035CCFC:
 /* 8035CCFC 003598DC  80 7F 00 0C */	lwz r3, 0xc(r31)
 /* 8035CD00 003598E0  81 8D A5 D4 */	lwz r12, __AXFXFree@sda21(r13)
 /* 8035CD04 003598E4  7D 88 03 A6 */	mtlr r12
-/* 8035CD08 003598E8  4E 80 00 21 */	blrl 
+/* 8035CD08 003598E8  4E 80 00 21 */	blrl
 /* 8035CD0C 003598EC  3B FF 00 14 */	addi r31, r31, 0x14
 /* 8035CD10 003598F0  3B DE 00 01 */	addi r30, r30, 1
 lbl_8035CD14:
@@ -586,7 +586,7 @@ lbl_8035CD38:
 /* 8035CD38 00359918  80 7F 00 84 */	lwz r3, 0x84(r31)
 /* 8035CD3C 0035991C  81 8D A5 D4 */	lwz r12, __AXFXFree@sda21(r13)
 /* 8035CD40 00359920  7D 88 03 A6 */	mtlr r12
-/* 8035CD44 00359924  4E 80 00 21 */	blrl 
+/* 8035CD44 00359924  4E 80 00 21 */	blrl
 /* 8035CD48 00359928  3B FF 00 14 */	addi r31, r31, 0x14
 /* 8035CD4C 0035992C  3B DE 00 01 */	addi r30, r30, 1
 lbl_8035CD50:
@@ -608,7 +608,7 @@ lbl_8035CD80:
 /* 8035CD80 00359960  80 7F 01 24 */	lwz r3, 0x124(r31)
 /* 8035CD84 00359964  81 8D A5 D4 */	lwz r12, __AXFXFree@sda21(r13)
 /* 8035CD88 00359968  7D 88 03 A6 */	mtlr r12
-/* 8035CD8C 0035996C  4E 80 00 21 */	blrl 
+/* 8035CD8C 0035996C  4E 80 00 21 */	blrl
 /* 8035CD90 00359970  3B FF 00 04 */	addi r31, r31, 4
 /* 8035CD94 00359974  3B DE 00 01 */	addi r30, r30, 1
 lbl_8035CD98:
@@ -622,7 +622,7 @@ lbl_8035CDA4:
 /* 8035CDB0 00359990  7C 08 03 A6 */	mtlr r0
 /* 8035CDB4 00359994  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8035CDB8 00359998  38 21 00 20 */	addi r1, r1, 0x20
-/* 8035CDBC 0035999C  4E 80 00 20 */	blr 
+/* 8035CDBC 0035999C  4E 80 00 20 */	blr
 
 .global AXFXReverbStdInit
 AXFXReverbStdInit:
@@ -652,7 +652,7 @@ AXFXReverbStdInit:
 /* 8035CE1C 003599FC  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8035CE20 00359A00  7C 08 03 A6 */	mtlr r0
 /* 8035CE24 00359A04  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035CE28 00359A08  4E 80 00 20 */	blr 
+/* 8035CE28 00359A08  4E 80 00 20 */	blr
 
 .global AXFXReverbStdShutdown
 AXFXReverbStdShutdown:
@@ -674,7 +674,7 @@ AXFXReverbStdShutdown:
 /* 8035CE68 00359A48  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8035CE6C 00359A4C  7C 08 03 A6 */	mtlr r0
 /* 8035CE70 00359A50  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035CE74 00359A54  4E 80 00 20 */	blr 
+/* 8035CE74 00359A54  4E 80 00 20 */	blr
 
 .global AXFXReverbStdCallback
 AXFXReverbStdCallback:
@@ -690,7 +690,7 @@ lbl_8035CE98:
 /* 8035CE98 00359A78  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8035CE9C 00359A7C  38 21 00 08 */	addi r1, r1, 8
 /* 8035CEA0 00359A80  7C 08 03 A6 */	mtlr r0
-/* 8035CEA4 00359A84  4E 80 00 20 */	blr 
+/* 8035CEA4 00359A84  4E 80 00 20 */	blr
 
 
 .section .data
@@ -707,36 +707,36 @@ lens:
     .balign 8
 .global lbl_804DE3A0
 lbl_804DE3A0:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE3A4
 lbl_804DE3A4:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DE3A8
 lbl_804DE3A8:
-	.4byte 0x3C23D70A
+    .4byte 0x3C23D70A
 .global lbl_804DE3AC
 lbl_804DE3AC:
-	.4byte 0x41200000
+    .4byte 0x41200000
 .global lbl_804DE3B0
 lbl_804DE3B0:
-	.4byte 0x3DCCCCCD
+    .4byte 0x3DCCCCCD
 .global lbl_804DE3B4
 lbl_804DE3B4:
-	.4byte 0x46FA0000
+    .4byte 0x46FA0000
 .global lbl_804DE3B8
 lbl_804DE3B8:
-	.4byte 0x3D4CCCCD
+    .4byte 0x3D4CCCCD
 .global lbl_804DE3BC
 lbl_804DE3BC:
-	.4byte 0x3F4CCCCD
+    .4byte 0x3F4CCCCD
 .global lbl_804DE3C0
 lbl_804DE3C0:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 value0_3:
-	.4byte 0x3E99999A
+    .4byte 0x3E99999A
 value0_6:
-	.4byte 0x3F19999A
+    .4byte 0x3F19999A
 i2fMagic:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000

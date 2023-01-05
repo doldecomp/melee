@@ -71,45 +71,45 @@ lbl_80116530:
 /* 8011658C 0011316C  83 81 00 40 */	lwz r28, 0x40(r1)
 /* 80116590 00113170  38 21 00 50 */	addi r1, r1, 0x50
 /* 80116594 00113174  7C 08 03 A6 */	mtlr r0
-/* 80116598 00113178  4E 80 00 20 */	blr 
+/* 80116598 00113178  4E 80 00 20 */	blr
 
 .section .sdata2
     .balign 8
 .global lbl_804D96C0/*0.0f*/
 lbl_804D96C0/*0.0f*/:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804D96C4/*1.0f*/
 lbl_804D96C4/*1.0f*/:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804D96C8/*0.0039059999398887157f*/
 lbl_804D96C8/*0.0039059999398887157f*/:
-	.4byte 0x3B7FFBCE
+    .4byte 0x3B7FFBCE
 .global lbl_804D96CC/*0.5f*/
 lbl_804D96CC/*0.5f*/:
-	.4byte 0x3F000000
+    .4byte 0x3F000000
 .global lbl_804D96D0/*-1.0f*/
 lbl_804D96D0/*-1.0f*/:
-	.4byte 0xBF800000
+    .4byte 0xBF800000
 .global lbl_804D96D4/*1.5f*/
 lbl_804D96D4/*1.5f*/:
-	.4byte 0x3FC00000
+    .4byte 0x3FC00000
 .global lbl_804D96D8/*60.0f*/
 lbl_804D96D8/*60.0f*/:
-	.4byte 0x42700000
-	.4byte 0x00000000
+    .4byte 0x42700000
+    .4byte 0x00000000
 .global lbl_804D96E0/*magic conversion*/
 lbl_804D96E0/*magic conversion*/:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804D96E8/*12.0f*/
 lbl_804D96E8/*12.0f*/:
-	.4byte 0x41400000
+    .4byte 0x41400000
 .global lbl_804D96EC/*0.10000000149011612f*/
 lbl_804D96EC/*0.10000000149011612f*/:
-	.4byte 0x3DCCCCCD
+    .4byte 0x3DCCCCCD
 .global lbl_804D96F0/*14.0f*/
 lbl_804D96F0/*14.0f*/:
-	.4byte 0x41600000
+    .4byte 0x41600000
 .global lbl_804D96F4/*13.0f*/
 lbl_804D96F4/*13.0f*/:
-	.4byte 0x41500000
+    .4byte 0x41500000

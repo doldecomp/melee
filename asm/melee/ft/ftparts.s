@@ -3267,10 +3267,10 @@ lbl_803C0BD0:
     .balign 8
 .global lbl_804590D8
 lbl_804590D8:
-	.skip 0x168
+    .skip 0x168
 .global lbl_80459240
 lbl_80459240:
-	.skip 0x38
+    .skip 0x38
 
 
 .section .sdata
@@ -3309,7 +3309,7 @@ lbl_804D3A5C:
     .balign 8
 .global lbl_804D82C8
 lbl_804D82C8:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804D82CC
 lbl_804D82CC:
-	.4byte 0x00000000
+    .4byte 0x00000000

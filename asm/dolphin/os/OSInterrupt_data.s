@@ -22,16 +22,16 @@ lbl_80402318:
     .4byte NULL
 .global InterruptHandlerTable
 InterruptHandlerTable:
-	.skip 0x4
+    .skip 0x4
 .global __OSLastInterruptSrr0
 __OSLastInterruptSrr0:
-	.skip 0x4
+    .skip 0x4
 .global __OSLastInterrupt
 __OSLastInterrupt:
-	.skip 0x8
+    .skip 0x8
 .global __OSLastInterruptTime
 __OSLastInterruptTime:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D738C
 lbl_804D738C:
-	.skip 0x4
+    .skip 0x4
