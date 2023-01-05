@@ -17,12 +17,13 @@ void __fini_cpp_exceptions(void)
     }
 }
 
+/**
+ * @todo HACK: #_eti_init_info_ should be @c _eti_init_info, we can't use
+ * the appropriate name yet due to the linker not being able to generate it
+ */
 void __init_cpp_exceptions(void)
 {
     if (fragmentID == -2) {
-        /* HACK: TODO: _eti_init_info_ should be _eti_init_info, we can't use
-         * the appropriate name yet due to the linker not being able to generate
-         * it*/
         fragmentID = __register_fragment(_eti_init_info_, GetR2());
     }
 }
