@@ -1,8 +1,8 @@
 ifneq ($(findstring MINGW,$(shell uname)),)
-  WINDOWS := 1
+	WINDOWS := 1
 endif
 ifneq ($(findstring MSYS,$(shell uname)),)
-  WINDOWS := 1
+	WINDOWS := 1
 endif
 
 GENERATE_MAP ?= 0
@@ -14,7 +14,7 @@ VERBOSE ?= 0
 MAX_ERRORS ?= 0     # 0 = no maximum
 
 ifeq ($(VERBOSE),0)
-  QUIET := @
+	QUIET := @
 endif
 
 #-------------------------------------------------------------------------------
@@ -54,18 +54,18 @@ MWCC_LD_VERSION := 1.1
 
 # Programs
 ifeq ($(WINDOWS),1)
-  WINE :=
+	WINE :=
 else
-  WINE ?= wine
-  # Disable wine debug output for cleanliness
-  export WINEDEBUG ?= -all
-  # Default devkitPPC path
-  DEVKITPPC ?= /opt/devkitpro/devkitPPC
+	WINE ?= wine
+	# Disable wine debug output for cleanliness
+	export WINEDEBUG ?= -all
+	# Default devkitPPC path
+	DEVKITPPC ?= /opt/devkitpro/devkitPPC
 endif
 ifeq ($(shell uname),Darwin)
-  SHA1SUM := shasum
+	SHA1SUM := shasum
 else
-  SHA1SUM := sha1sum
+	SHA1SUM := sha1sum
 endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
@@ -90,7 +90,7 @@ INCLUDES = $(addprefix -i ,$(INCLUDE_DIRS)) -I- $(addprefix -i ,$(SYSTEM_INCLUDE
 ASFLAGS := -mgekko -I include
 LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
-  LDFLAGS += -map $(MAP)
+	LDFLAGS += -map $(MAP)
 endif
 CFLAGS  = -msgstyle gcc -cwd source -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults -inline auto $(INCLUDES) -maxerrors $(MAX_ERRORS)
 ifeq ($(NON_MATCHING),1)
