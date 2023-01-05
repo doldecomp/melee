@@ -13,7 +13,7 @@ void func_800222A4();
 void func_8002247C(HSD_CObj*);
 void func_80022560();
 void func_800225D4();
-s32 func_800226A8(HSD_PObj*);
+s32 lbRefract_PObjLoad(HSD_PObj*);
 void func_80022998(s32, s32);
 void func_80022BB8();
 void func_80022BD0();

@@ -184,7 +184,9 @@ void func_80074B0C(HSD_GObj*, s32, s32);
 void func_80073758();
 void func_80074148();
 void func_80074170();
-void func_800743E0();
+
+void Fighter_SetupParts();
+
 void func_800749CC();
 void func_80074A4C(struct _HSD_GObj*, u32, s32);
 void func_80074A8C();
