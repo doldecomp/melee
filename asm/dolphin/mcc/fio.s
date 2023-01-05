@@ -9,56 +9,56 @@ fioMccChannelEvent:
 /* 8032EA8C 0032B66C  40 80 00 1C */	bge lbl_8032EAA8
 /* 8032EA90 0032B670  2C 04 00 02 */	cmpwi r4, 2
 /* 8032EA94 0032B674  41 82 00 34 */	beq lbl_8032EAC8
-/* 8032EA98 0032B678  4C 80 00 20 */	bgelr 
+/* 8032EA98 0032B678  4C 80 00 20 */	bgelr
 /* 8032EA9C 0032B67C  2C 04 00 01 */	cmpwi r4, 1
 /* 8032EAA0 0032B680  40 80 00 20 */	bge lbl_8032EAC0
-/* 8032EAA4 0032B684  4E 80 00 20 */	blr 
+/* 8032EAA4 0032B684  4E 80 00 20 */	blr
 lbl_8032EAA8:
 /* 8032EAA8 0032B688  2C 04 01 00 */	cmpwi r4, 0x100
 /* 8032EAAC 0032B68C  41 82 00 28 */	beq lbl_8032EAD4
-/* 8032EAB0 0032B690  4C 80 00 20 */	bgelr 
+/* 8032EAB0 0032B690  4C 80 00 20 */	bgelr
 /* 8032EAB4 0032B694  2C 04 00 20 */	cmpwi r4, 0x20
 /* 8032EAB8 0032B698  41 82 00 80 */	beq lbl_8032EB38
-/* 8032EABC 0032B69C  4E 80 00 20 */	blr 
+/* 8032EABC 0032B69C  4E 80 00 20 */	blr
 lbl_8032EAC0:
 /* 8032EAC0 0032B6A0  90 6D BA 34 */	stw r3, gChID@sda21(r13)
-/* 8032EAC4 0032B6A4  4E 80 00 20 */	blr 
+/* 8032EAC4 0032B6A4  4E 80 00 20 */	blr
 lbl_8032EAC8:
 /* 8032EAC8 0032B6A8  38 00 00 00 */	li r0, 0
 /* 8032EACC 0032B6AC  90 0D BA 34 */	stw r0, gChID@sda21(r13)
-/* 8032EAD0 0032B6B0  4E 80 00 20 */	blr 
+/* 8032EAD0 0032B6B0  4E 80 00 20 */	blr
 lbl_8032EAD4:
 /* 8032EAD4 0032B6B4  54 A3 02 16 */	rlwinm r3, r5, 0, 8, 0xb
 /* 8032EAD8 0032B6B8  3C 00 00 F0 */	lis r0, 0xf0
 /* 8032EADC 0032B6BC  7C 03 00 00 */	cmpw r3, r0
 /* 8032EAE0 0032B6C0  41 82 00 2C */	beq lbl_8032EB0C
-/* 8032EAE4 0032B6C4  4C 80 00 20 */	bgelr 
+/* 8032EAE4 0032B6C4  4C 80 00 20 */	bgelr
 /* 8032EAE8 0032B6C8  3C 00 00 20 */	lis r0, 0x20
 /* 8032EAEC 0032B6CC  7C 03 00 00 */	cmpw r3, r0
-/* 8032EAF0 0032B6D0  4C 82 00 20 */	bnelr 
+/* 8032EAF0 0032B6D0  4C 82 00 20 */	bnelr
 /* 8032EAF4 0032B6D4  54 A0 04 3E */	clrlwi r0, r5, 0x10
 /* 8032EAF8 0032B6D8  28 00 01 20 */	cmplwi r0, 0x120
-/* 8032EAFC 0032B6DC  4C 82 00 20 */	bnelr 
+/* 8032EAFC 0032B6DC  4C 82 00 20 */	bnelr
 /* 8032EB00 0032B6E0  38 00 00 01 */	li r0, 1
 /* 8032EB04 0032B6E4  90 0D BA 38 */	stw r0, gQuery@sda21(r13)
-/* 8032EB08 0032B6E8  4E 80 00 20 */	blr 
+/* 8032EB08 0032B6E8  4E 80 00 20 */	blr
 lbl_8032EB0C:
 /* 8032EB0C 0032B6EC  80 0D BA 4C */	lwz r0, bAsyncBusy@sda21(r13)
 /* 8032EB10 0032B6F0  38 60 00 01 */	li r3, 1
 /* 8032EB14 0032B6F4  90 6D A4 DC */	stw r3, gProcDone@sda21(r13)
 /* 8032EB18 0032B6F8  2C 00 00 00 */	cmpwi r0, 0
-/* 8032EB1C 0032B6FC  4D 82 00 20 */	beqlr 
+/* 8032EB1C 0032B6FC  4D 82 00 20 */	beqlr
 /* 8032EB20 0032B700  38 00 00 02 */	li r0, 2
 /* 8032EB24 0032B704  90 0D BA 4C */	stw r0, bAsyncBusy@sda21(r13)
-/* 8032EB28 0032B708  4E 80 00 20 */	blr 
+/* 8032EB28 0032B708  4E 80 00 20 */	blr
 lbl_8032EB2C:
 /* 8032EB2C 0032B70C  38 00 00 10 */	li r0, 0x10
 /* 8032EB30 0032B710  90 0D BA 40 */	stw r0, gStreamReady@sda21(r13)
-/* 8032EB34 0032B714  4E 80 00 20 */	blr 
+/* 8032EB34 0032B714  4E 80 00 20 */	blr
 lbl_8032EB38:
 /* 8032EB38 0032B718  38 00 00 20 */	li r0, 0x20
 /* 8032EB3C 0032B71C  90 0D BA 40 */	stw r0, gStreamReady@sda21(r13)
-/* 8032EB40 0032B720  4E 80 00 20 */	blr 
+/* 8032EB40 0032B720  4E 80 00 20 */	blr
 
 .global FIOInit
 FIOInit:
@@ -112,7 +112,7 @@ lbl_8032EBE8:
 /* 8032EBF0 0032B7D0  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8032EBF4 0032B7D4  7C 08 03 A6 */	mtlr r0
 /* 8032EBF8 0032B7D8  38 21 00 20 */	addi r1, r1, 0x20
-/* 8032EBFC 0032B7DC  4E 80 00 20 */	blr 
+/* 8032EBFC 0032B7DC  4E 80 00 20 */	blr
 
 .global FIOExit
 FIOExit:
@@ -144,7 +144,7 @@ lbl_8032EC5C:
 /* 8032EC5C 0032B83C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032EC60 0032B840  38 21 00 08 */	addi r1, r1, 8
 /* 8032EC64 0032B844  7C 08 03 A6 */	mtlr r0
-/* 8032EC68 0032B848  4E 80 00 20 */	blr 
+/* 8032EC68 0032B848  4E 80 00 20 */	blr
 
 .global FIOQuery
 FIOQuery:
@@ -229,7 +229,7 @@ lbl_8032ED70:
 /* 8032ED7C 0032B95C  7C 08 03 A6 */	mtlr r0
 /* 8032ED80 0032B960  83 A1 00 0C */	lwz r29, 0xc(r1)
 /* 8032ED84 0032B964  38 21 00 18 */	addi r1, r1, 0x18
-/* 8032ED88 0032B968  4E 80 00 20 */	blr 
+/* 8032ED88 0032B968  4E 80 00 20 */	blr
 
 .global FIOFopen
 FIOFopen:
@@ -304,7 +304,7 @@ lbl_8032EE78:
 /* 8032EE84 0032BA64  7C 08 03 A6 */	mtlr r0
 /* 8032EE88 0032BA68  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8032EE8C 0032BA6C  38 21 00 20 */	addi r1, r1, 0x20
-/* 8032EE90 0032BA70  4E 80 00 20 */	blr 
+/* 8032EE90 0032BA70  4E 80 00 20 */	blr
 
 .global FIOFclose
 FIOFclose:
@@ -357,7 +357,7 @@ lbl_8032EF34:
 /* 8032EF38 0032BB18  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8032EF3C 0032BB1C  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032EF40 0032BB20  7C 08 03 A6 */	mtlr r0
-/* 8032EF44 0032BB24  4E 80 00 20 */	blr 
+/* 8032EF44 0032BB24  4E 80 00 20 */	blr
 
 .global FIOFwrite
 FIOFwrite:
@@ -422,7 +422,7 @@ lbl_8032F00C:
 /* 8032F010 0032BBF0  83 E1 00 24 */	lwz r31, 0x24(r1)
 /* 8032F014 0032BBF4  38 21 00 28 */	addi r1, r1, 0x28
 /* 8032F018 0032BBF8  7C 08 03 A6 */	mtlr r0
-/* 8032F01C 0032BBFC  4E 80 00 20 */	blr 
+/* 8032F01C 0032BBFC  4E 80 00 20 */	blr
 
 .global fioPacketMakeHeader
 fioPacketMakeHeader:
@@ -443,7 +443,7 @@ fioPacketMakeHeader:
 /* 8032F058 0032BC38  90 E6 00 00 */	stw r7, 0(r6)
 /* 8032F05C 0032BC3C  B0 86 00 04 */	sth r4, 4(r6)
 /* 8032F060 0032BC40  B0 06 00 06 */	sth r0, 6(r6)
-/* 8032F064 0032BC44  4D 82 00 20 */	beqlr 
+/* 8032F064 0032BC44  4D 82 00 20 */	beqlr
 /* 8032F068 0032BC48  80 A8 00 00 */	lwz r5, 0(r8)
 /* 8032F06C 0032BC4C  54 A0 84 2E */	rlwinm r0, r5, 0x10, 0x10, 0x17
 /* 8032F070 0032BC50  7C 04 46 70 */	srawi r4, r0, 8
@@ -474,7 +474,7 @@ fioPacketMakeHeader:
 /* 8032F0D4 0032BCB4  38 06 00 06 */	addi r0, r6, 6
 /* 8032F0D8 0032BCB8  A0 86 00 06 */	lhz r4, 6(r6)
 /* 8032F0DC 0032BCBC  7C 80 07 2C */	sthbrx r4, 0, r0
-/* 8032F0E0 0032BCC0  4E 80 00 20 */	blr 
+/* 8032F0E0 0032BCC0  4E 80 00 20 */	blr
 
 .global fioPacketSendPacket
 fioPacketSendPacket:
@@ -566,7 +566,7 @@ lbl_8032F214:
 /* 8032F218 0032BDF8  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8032F21C 0032BDFC  38 21 00 28 */	addi r1, r1, 0x28
 /* 8032F220 0032BE00  7C 08 03 A6 */	mtlr r0
-/* 8032F224 0032BE04  4E 80 00 20 */	blr 
+/* 8032F224 0032BE04  4E 80 00 20 */	blr
 
 .global fioPacketReceiveResult
 fioPacketReceiveResult:
@@ -671,13 +671,13 @@ lbl_8032F37C:
 /* 8032F380 0032BF60  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8032F384 0032BF64  38 21 00 30 */	addi r1, r1, 0x30
 /* 8032F388 0032BF68  7C 08 03 A6 */	mtlr r0
-/* 8032F38C 0032BF6C  4E 80 00 20 */	blr 
+/* 8032F38C 0032BF6C  4E 80 00 20 */	blr
 
 .global fioPacketReceiveDone
 fioPacketReceiveDone:
 /* 8032F390 0032BF70  38 00 00 00 */	li r0, 0
 /* 8032F394 0032BF74  90 0D BA 3C */	stw r0, gProcBusy@sda21(r13)
-/* 8032F398 0032BF78  4E 80 00 20 */	blr 
+/* 8032F398 0032BF78  4E 80 00 20 */	blr
 
 .global fioPacketWrite
 fioPacketWrite:
@@ -734,7 +734,7 @@ lbl_8032F448:
 /* 8032F458 0032C038  83 A1 00 5C */	lwz r29, 0x5c(r1)
 /* 8032F45C 0032C03C  83 81 00 58 */	lwz r28, 0x58(r1)
 /* 8032F460 0032C040  38 21 00 68 */	addi r1, r1, 0x68
-/* 8032F464 0032C044  4E 80 00 20 */	blr 
+/* 8032F464 0032C044  4E 80 00 20 */	blr
 
 .global fioPacketResultWrite
 fioPacketResultWrite:
@@ -857,7 +857,7 @@ lbl_8032F614:
 /* 8032F618 0032C1F8  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8032F61C 0032C1FC  38 21 00 38 */	addi r1, r1, 0x38
 /* 8032F620 0032C200  7C 08 03 A6 */	mtlr r0
-/* 8032F624 0032C204  4E 80 00 20 */	blr 
+/* 8032F624 0032C204  4E 80 00 20 */	blr
 /* 8032F628 0032C208  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
 /* 8032F62C 0032C20C  00 00 00 00 */	.4byte 0x00000000  /* unknown instruction */
 
@@ -908,7 +908,7 @@ lbl_80400918:
     .balign 8
 .global gBuf
 gBuf:
-	.skip 0x2000
+    .skip 0x2000
 
 
 .section .sdata
@@ -918,7 +918,7 @@ gmSizeOfBlocks:
     .byte 0x01
 .global gSizeOfBlocks
 gSizeOfBlocks:
-	.byte 0x01
+    .byte 0x01
     .balign 4
 .global gProcDone
 gProcDone:
@@ -929,35 +929,35 @@ gProcDone:
     .balign 8
 .global gmChID
 gmChID:
-	.skip 0x4
+    .skip 0x4
 .global gChID
 gChID:
-	.skip 0x4
+    .skip 0x4
 .global gQuery
 gQuery:
-	.skip 0x4
+    .skip 0x4
 .global gProcBusy
 gProcBusy:
-	.skip 0x4
+    .skip 0x4
 .global gStreamReady
 gStreamReady:
-	.skip 0x4
+    .skip 0x4
 .global gLastErr
 gLastErr:
-	.skip 0x1
+    .skip 0x1
     .balign 4
 .global bAsyncIsRead
 bAsyncIsRead:
-	.skip 0x4
+    .skip 0x4
 .global bAsyncBusy
 bAsyncBusy:
-	.skip 0x4
+    .skip 0x4
 .global bAsyncBuffer
 bAsyncBuffer:
-	.skip 0x4
+    .skip 0x4
 .global gAsyncDataSize
 gAsyncDataSize:
-	.skip 0x4
+    .skip 0x4
 .global gRequestSequenceNumber
 gRequestSequenceNumber:
-	.skip 0x4
+    .skip 0x4

@@ -13,7 +13,7 @@ AXFXAllocFunction:
 /* 8035DD54 0035A934  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8035DD58 0035A938  38 21 00 08 */	addi r1, r1, 8
 /* 8035DD5C 0035A93C  7C 08 03 A6 */	mtlr r0
-/* 8035DD60 0035A940  4E 80 00 20 */	blr 
+/* 8035DD60 0035A940  4E 80 00 20 */	blr
 
 .global AXFXFreeFunction
 AXFXFreeFunction:
@@ -26,13 +26,13 @@ AXFXFreeFunction:
 /* 8035DD7C 0035A95C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8035DD80 0035A960  38 21 00 08 */	addi r1, r1, 8
 /* 8035DD84 0035A964  7C 08 03 A6 */	mtlr r0
-/* 8035DD88 0035A968  4E 80 00 20 */	blr 
+/* 8035DD88 0035A968  4E 80 00 20 */	blr
 
 .global AXFXSetHooks
 AXFXSetHooks:
 /* 8035DD8C 0035A96C  90 6D A5 D0 */	stw r3, __AXFXAlloc@sda21(r13)
 /* 8035DD90 0035A970  90 8D A5 D4 */	stw r4, __AXFXFree@sda21(r13)
-/* 8035DD94 0035A974  4E 80 00 20 */	blr 
+/* 8035DD94 0035A974  4E 80 00 20 */	blr
 
 
 .section .sdata

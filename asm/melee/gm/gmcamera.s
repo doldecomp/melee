@@ -1497,22 +1497,22 @@ lbl_803DA630:
 
 .global jtbl_803DA660
 jtbl_803DA660:
-	.4byte lbl_801A23EC
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24BC
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24D8
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24F4
-	.4byte lbl_801A24A0
+    .4byte lbl_801A23EC
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24BC
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24D8
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24F4
+    .4byte lbl_801A24A0
 
 .global lbl_803DA6A0
 lbl_803DA6A0:
@@ -1522,32 +1522,32 @@ lbl_803DA6A0:
 .global lbl_803DA6B4
 lbl_803DA6B4:
     .4byte 0x01000000
-	.4byte lbl_801A26C0
-	.4byte lbl_801A2798
+    .4byte lbl_801A26C0
+    .4byte lbl_801A2798
     .4byte 0x00000004
-	.4byte lbl_801A2800
-	.4byte lbl_801A28AC
+    .4byte lbl_801A2800
+    .4byte lbl_801A28AC
     .4byte 0x00000002
-	.4byte lbl_801A292C
-	.4byte lbl_801A2AAC
+    .4byte lbl_801A292C
+    .4byte lbl_801A2AAC
     .4byte 0x00000054
     .4byte NULL
-	.4byte lbl_801A2BB0
+    .4byte lbl_801A2BB0
     .4byte 0x00000034
     .4byte NULL
-	.4byte lbl_801A2BB0
+    .4byte lbl_801A2BB0
     .4byte 0x00000094
     .4byte NULL
-	.4byte lbl_801A2BB0
+    .4byte lbl_801A2BB0
     .4byte 0x00001204
-	.4byte lbl_801A2BF0
-	.4byte lbl_801A2D44
+    .4byte lbl_801A2BF0
+    .4byte lbl_801A2D44
     .4byte 0x00001604
-	.4byte lbl_801A2FBC
-	.4byte lbl_801A2FFC
+    .4byte lbl_801A2FBC
+    .4byte lbl_801A2FFC
     .4byte 0x00001A14
     .4byte NULL
-	.4byte lbl_801A2BB0
+    .4byte lbl_801A2BB0
     .balign 4
     .asciz "IfCameraInfo_Top_model_set"
     .balign 4
@@ -1574,10 +1574,10 @@ lbl_803DA758:
     .balign 8
 .global lbl_80479BC8
 lbl_80479BC8:
-	.skip 0x58
+    .skip 0x58
 .global lbl_80479C20
 lbl_80479C20:
-	.skip 0x10
+    .skip 0x10
 
 
 .section .sdata
@@ -1604,33 +1604,33 @@ lbl_804D4260:
     .balign 8
 .global lbl_804DA9B8
 lbl_804DA9B8:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DA9BC
 lbl_804DA9BC:
-	.4byte 0x44200000
+    .4byte 0x44200000
 .global lbl_804DA9C0
 lbl_804DA9C0:
-	.4byte 0x42000000
+    .4byte 0x42000000
 .global lbl_804DA9C4
 lbl_804DA9C4:
-	.4byte 0x40A00000
+    .4byte 0x40A00000
 .global lbl_804DA9C8
 lbl_804DA9C8:
-	.4byte 0xC0A00000
+    .4byte 0xC0A00000
 .global lbl_804DA9CC
 lbl_804DA9CC:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DA9D0
 lbl_804DA9D0:
-	.4byte 0x40000000
-	.4byte 0x00000000
+    .4byte 0x40000000
+    .4byte 0x00000000
 .global lbl_804DA9D8
 lbl_804DA9D8:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DA9DC
 lbl_804DA9DC:
-	.4byte 0x44649249
+    .4byte 0x44649249
 .global lbl_804DA9E0
 lbl_804DA9E0:
-	.4byte 0x42800000
-	.4byte 0x00000000
+    .4byte 0x42800000
+    .4byte 0x00000000

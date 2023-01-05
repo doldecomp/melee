@@ -2531,30 +2531,30 @@ lbl_803EEB60:
     .4byte NULL
 .global jtbl_803EEB78
 jtbl_803EEB78:
-	.4byte lbl_80244364
-	.4byte lbl_80244384
-	.4byte lbl_802443A4
-	.4byte lbl_802443D0
-	.4byte lbl_802443D8
-	.4byte lbl_80244400
-	.4byte lbl_80244428
-	.4byte lbl_80244450
-	.4byte lbl_8024447C
-	.4byte lbl_802444A8
-	.4byte lbl_802444D4
-	.4byte lbl_80244500
-	.4byte lbl_80244528
-	.4byte lbl_80244530
-	.4byte lbl_80244538
-	.4byte lbl_80244560
-	.4byte lbl_80244588
-	.4byte lbl_802445B0
-	.4byte lbl_802445D8
-	.4byte lbl_80244600
-	.4byte lbl_80244628
-	.4byte lbl_80244650
-	.4byte lbl_80244668
-	.4byte lbl_80244680
+    .4byte lbl_80244364
+    .4byte lbl_80244384
+    .4byte lbl_802443A4
+    .4byte lbl_802443D0
+    .4byte lbl_802443D8
+    .4byte lbl_80244400
+    .4byte lbl_80244428
+    .4byte lbl_80244450
+    .4byte lbl_8024447C
+    .4byte lbl_802444A8
+    .4byte lbl_802444D4
+    .4byte lbl_80244500
+    .4byte lbl_80244528
+    .4byte lbl_80244530
+    .4byte lbl_80244538
+    .4byte lbl_80244560
+    .4byte lbl_80244588
+    .4byte lbl_802445B0
+    .4byte lbl_802445D8
+    .4byte lbl_80244600
+    .4byte lbl_80244628
+    .4byte lbl_80244650
+    .4byte lbl_80244668
+    .4byte lbl_80244680
     .asciz "Can't get user_data.\n"
     .balign 4
     .asciz "mndiagram2.c"
@@ -2588,36 +2588,36 @@ lbl_804D4FD0:
     .balign 8
 .global lbl_804D6C18
 lbl_804D6C18:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DBFC8
 lbl_804DBFC8:
-	.4byte 0x3D3851EC
+    .4byte 0x3D3851EC
 .global lbl_804DBFCC
 lbl_804DBFCC:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DBFD0
 lbl_804DBFD0:
-	.4byte 0x43A00000
+    .4byte 0x43A00000
 .global lbl_804DBFD4
 lbl_804DBFD4:
-	.4byte 0x43700000
+    .4byte 0x43700000
 .global lbl_804DBFD8
 lbl_804DBFD8:
-	.4byte 0x41400000
+    .4byte 0x41400000
 .global lbl_804DBFDC
 lbl_804DBFDC:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DBFE0
 lbl_804DBFE0:
-	.4byte 0x3CF5C28F
+    .4byte 0x3CF5C28F
 .global lbl_804DBFE4
 lbl_804DBFE4:
-	.4byte 0x3D0F5C29
+    .4byte 0x3D0F5C29
 .global lbl_804DBFE8
 lbl_804DBFE8:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000

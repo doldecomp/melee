@@ -264,7 +264,7 @@ f32 atanf(f32 x)
         lookup_ptr = &atanf_lookup[lookup_index];
 
         // clang-format off
-        result = result * 
+        result = result *
             result_squared * (
                 result_squared * (
                     result_squared * (

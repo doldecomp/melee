@@ -165,7 +165,7 @@ asm void GXSetTevColorS10(s32, GXColor*)
 /* 803402C4 0033CEA4  98 A4 80 00 */	stb r5, -0x8000(r4)
 /* 803402C8 0033CEA8  90 C4 80 00 */	stw r6, -0x8000(r4)
 /* 803402CC 0033CEAC  B0 03 00 02 */	sth r0, 2(r3)
-/* 803402D0 0033CEB0  4E 80 00 20 */	blr 
+/* 803402D0 0033CEB0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -201,7 +201,7 @@ asm void GXSetTevKColor(GXTevKColorID id, GXColor color)
 /* 80340338 0033CF18  90 04 80 00 */	stw r0, -0x8000(r4)
 /* 8034033C 0033CF1C  38 00 00 00 */	li r0, 0
 /* 80340340 0033CF20  B0 03 00 02 */	sth r0, 2(r3)
-/* 80340344 0033CF24  4E 80 00 20 */	blr 
+/* 80340344 0033CF24  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -238,7 +238,7 @@ lbl_80340390:
 /* 803403A4 0033CF84  80 87 00 00 */	lwz r4, 0(r7)
 /* 803403A8 0033CF88  90 85 80 00 */	stw r4, -0x8000(r5)
 /* 803403AC 0033CF8C  B0 03 00 02 */	sth r0, 2(r3)
-/* 803403B0 0033CF90  4E 80 00 20 */	blr 
+/* 803403B0 0033CF90  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -275,7 +275,7 @@ lbl_803403FC:
 /* 80340410 0033CFF0  80 87 00 00 */	lwz r4, 0(r7)
 /* 80340414 0033CFF4  90 85 80 00 */	stw r4, -0x8000(r5)
 /* 80340418 0033CFF8  B0 03 00 02 */	sth r0, 2(r3)
-/* 8034041C 0033CFFC  4E 80 00 20 */	blr 
+/* 8034041C 0033CFFC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -306,7 +306,7 @@ asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel,
 /* 80340468 0033D048  80 87 00 00 */	lwz r4, 0(r7)
 /* 8034046C 0033D04C  90 85 80 00 */	stw r4, -0x8000(r5)
 /* 80340470 0033D050  B0 03 00 02 */	sth r0, 2(r3)
-/* 80340474 0033D054  4E 80 00 20 */	blr 
+/* 80340474 0033D054  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -356,7 +356,7 @@ asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
 /* 80340508 0033D0E8  80 8A 00 00 */	lwz r4, 0(r10)
 /* 8034050C 0033D0EC  90 88 80 00 */	stw r4, -0x8000(r8)
 /* 80340510 0033D0F0  B0 03 00 02 */	sth r0, 2(r3)
-/* 80340514 0033D0F4  4E 80 00 20 */	blr 
+/* 80340514 0033D0F4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -422,7 +422,7 @@ lbl_803405B4:
 /* 803405E0 0033D1C0  38 00 00 00 */	li r0, 0
 /* 803405E4 0033D1C4  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 803405E8 0033D1C8  B0 04 00 02 */	sth r0, 2(r4)
-/* 803405EC 0033D1CC  4E 80 00 20 */	blr 
+/* 803405EC 0033D1CC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -548,7 +548,7 @@ lbl_8034075C:
 /* 80340780 0033D360  80 03 04 F0 */	lwz r0, 0x4f0(r3)
 /* 80340784 0033D364  60 00 00 01 */	ori r0, r0, 1
 /* 80340788 0033D368  90 03 04 F0 */	stw r0, 0x4f0(r3)
-/* 8034078C 0033D36C  4E 80 00 20 */	blr 
+/* 8034078C 0033D36C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 

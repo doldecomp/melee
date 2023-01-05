@@ -6,7 +6,7 @@
 __AXGetStudio:
 /* 80359D8C 0035696C  3C 60 80 4B */	lis r3, __AXStudio@ha
 /* 80359D90 00356970  38 63 09 A0 */	addi r3, r3, __AXStudio@l
-/* 80359D94 00356974  4E 80 00 20 */	blr 
+/* 80359D94 00356974  4E 80 00 20 */	blr
 
 .global __AXPrintStudio
 __AXPrintStudio:
@@ -299,7 +299,7 @@ lbl_8035A178:
 /* 8035A180 00356D60  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8035A184 00356D64  38 21 00 08 */	addi r1, r1, 8
 /* 8035A188 00356D68  7C 08 03 A6 */	mtlr r0
-/* 8035A18C 00356D6C  4E 80 00 20 */	blr 
+/* 8035A18C 00356D6C  4E 80 00 20 */	blr
 
 .global __AXSPBInit
 __AXSPBInit:
@@ -313,7 +313,7 @@ __AXSPBInit:
 /* 8035A1AC 00356D8C  90 0D BE C0 */	stw r0, __AXSpbAS@sda21(r13)
 /* 8035A1B0 00356D90  90 0D BE BC */	stw r0, __AXSpbAR@sda21(r13)
 /* 8035A1B4 00356D94  90 0D BE B8 */	stw r0, __AXSpbAL@sda21(r13)
-/* 8035A1B8 00356D98  4E 80 00 20 */	blr 
+/* 8035A1B8 00356D98  4E 80 00 20 */	blr
 
 .global __AXDepopVoice
 __AXDepopVoice:
@@ -353,7 +353,7 @@ __AXDepopVoice:
 /* 8035A240 00356E20  A8 03 00 62 */	lha r0, 0x62(r3)
 /* 8035A244 00356E24  7C 04 02 14 */	add r0, r4, r0
 /* 8035A248 00356E28  90 0D BE D8 */	stw r0, __AXSpbABS@sda21(r13)
-/* 8035A24C 00356E2C  4E 80 00 20 */	blr 
+/* 8035A24C 00356E2C  4E 80 00 20 */	blr
 
 
 .section .bss
@@ -362,35 +362,35 @@ __AXDepopVoice:
     .balign 32
 .global __AXStudio
 __AXStudio:
-	.skip 0x36
+    .skip 0x36
 
 
 .section .sbss
     .balign 8
 .global __AXSpbAL
 __AXSpbAL:
-	.skip 0x4
+    .skip 0x4
 .global __AXSpbAR
 __AXSpbAR:
-	.skip 0x4
+    .skip 0x4
 .global __AXSpbAS
 __AXSpbAS:
-	.skip 0x4
+    .skip 0x4
 .global __AXSpbAAL
 __AXSpbAAL:
-	.skip 0x4
+    .skip 0x4
 .global __AXSpbAAR
 __AXSpbAAR:
-	.skip 0x4
+    .skip 0x4
 .global __AXSpbAAS
 __AXSpbAAS:
-	.skip 0x4
+    .skip 0x4
 .global __AXSpbABL
 __AXSpbABL:
-	.skip 0x4
+    .skip 0x4
 .global __AXSpbABR
 __AXSpbABR:
-	.skip 0x4
+    .skip 0x4
 .global __AXSpbABS
 __AXSpbABS:
-	.skip 0x4
+    .skip 0x4

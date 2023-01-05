@@ -139,7 +139,7 @@ lbl_80340868:
 /* 80340964 0033D544  7C 08 03 A6 */	mtlr r0
 /* 80340968 0033D548  83 A1 00 3C */	lwz r29, 0x3c(r1)
 /* 8034096C 0033D54C  38 21 00 48 */	addi r1, r1, 0x48
-/* 80340970 0033D550  4E 80 00 20 */	blr 
+/* 80340970 0033D550  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -264,7 +264,7 @@ lbl_80340ADC:
 /* 80340B2C 0033D70C  83 C1 00 30 */	lwz r30, 0x30(r1)
 /* 80340B30 0033D710  83 A1 00 2C */	lwz r29, 0x2c(r1)
 /* 80340B34 0033D714  38 21 00 80 */	addi r1, r1, 0x80
-/* 80340B38 0033D718  4E 80 00 20 */	blr 
+/* 80340B38 0033D718  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -337,7 +337,7 @@ lbl_80340C00:
 /* 80340C2C 0033D80C  38 00 00 00 */	li r0, 0
 /* 80340C30 0033D810  90 A3 80 00 */	stw r5, -0x8000(r3)
 /* 80340C34 0033D814  B0 04 00 02 */	sth r0, 2(r4)
-/* 80340C38 0033D818  4E 80 00 20 */	blr 
+/* 80340C38 0033D818  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -411,7 +411,7 @@ lbl_80340C54:
 /* 80340D30 0033D910  80 64 01 D0 */	lwz r3, 0x1d0(r4)
 /* 80340D34 0033D914  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 80340D38 0033D918  B0 04 00 02 */	sth r0, 2(r4)
-/* 80340D3C 0033D91C  4E 80 00 20 */	blr 
+/* 80340D3C 0033D91C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -435,7 +435,7 @@ asm unk_t GXSetColorUpdate()
 /* 80340D70 0033D950  80 64 01 D0 */	lwz r3, 0x1d0(r4)
 /* 80340D74 0033D954  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 80340D78 0033D958  B0 04 00 02 */	sth r0, 2(r4)
-/* 80340D7C 0033D95C  4E 80 00 20 */	blr 
+/* 80340D7C 0033D95C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -459,7 +459,7 @@ asm unk_t GXSetAlphaUpdate()
 /* 80340DB0 0033D990  80 64 01 D0 */	lwz r3, 0x1d0(r4)
 /* 80340DB4 0033D994  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 80340DB8 0033D998  B0 04 00 02 */	sth r0, 2(r4)
-/* 80340DBC 0033D99C  4E 80 00 20 */	blr 
+/* 80340DBC 0033D99C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -497,7 +497,7 @@ asm unk_t GXSetZMode()
 /* 80340E28 0033DA08  80 64 01 D8 */	lwz r3, 0x1d8(r4)
 /* 80340E2C 0033DA0C  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 80340E30 0033DA10  B0 04 00 02 */	sth r0, 2(r4)
-/* 80340E34 0033DA14  4E 80 00 20 */	blr 
+/* 80340E34 0033DA14  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -521,7 +521,7 @@ asm unk_t GXSetZCompLoc()
 /* 80340E68 0033DA48  80 64 01 DC */	lwz r3, 0x1dc(r4)
 /* 80340E6C 0033DA4C  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 80340E70 0033DA50  B0 04 00 02 */	sth r0, 2(r4)
-/* 80340E74 0033DA54  4E 80 00 20 */	blr 
+/* 80340E74 0033DA54  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -601,7 +601,7 @@ lbl_80340F78:
 /* 80340F78 0033DB58  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80340F7C 0033DB5C  38 00 00 00 */	li r0, 0
 /* 80340F80 0033DB60  B0 03 00 02 */	sth r0, 2(r3)
-/* 80340F84 0033DB64  4E 80 00 20 */	blr 
+/* 80340F84 0033DB64  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -625,7 +625,7 @@ asm unk_t GXSetDither()
 /* 80340FB8 0033DB98  80 64 01 D0 */	lwz r3, 0x1d0(r4)
 /* 80340FBC 0033DB9C  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 80340FC0 0033DBA0  B0 04 00 02 */	sth r0, 2(r4)
-/* 80340FC4 0033DBA4  4E 80 00 20 */	blr 
+/* 80340FC4 0033DBA4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -654,7 +654,7 @@ asm unk_t GXSetDstAlpha()
 /* 8034100C 0033DBEC  80 64 01 D4 */	lwz r3, 0x1d4(r4)
 /* 80341010 0033DBF0  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 80341014 0033DBF4  B0 04 00 02 */	sth r0, 2(r4)
-/* 80341018 0033DBF8  4E 80 00 20 */	blr 
+/* 80341018 0033DBF8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -676,7 +676,7 @@ asm unk_t GXSetFieldMask()
 /* 80341044 0033DC24  38 00 00 00 */	li r0, 0
 /* 80341048 0033DC28  90 A3 80 00 */	stw r5, -0x8000(r3)
 /* 8034104C 0033DC2C  B0 04 00 02 */	sth r0, 2(r4)
-/* 80341050 0033DC30  4E 80 00 20 */	blr 
+/* 80341050 0033DC30  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -715,6 +715,6 @@ asm unk_t GXSetFieldMode()
 /* 803410C4 0033DCA4  7C 08 03 A6 */	mtlr r0
 /* 803410C8 0033DCA8  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 803410CC 0033DCAC  38 21 00 20 */	addi r1, r1, 0x20
-/* 803410D0 0033DCB0  4E 80 00 20 */	blr 
+/* 803410D0 0033DCB0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop

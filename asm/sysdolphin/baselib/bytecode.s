@@ -1612,7 +1612,7 @@ lbl_80381BB0:
 /* 80381BD4 0037E7B4  CB 01 00 70 */	lfd f24, 0x70(r1)
 /* 80381BD8 0037E7B8  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 80381BDC 0037E7BC  7C 08 03 A6 */	mtlr r0
-/* 80381BE0 0037E7C0  4E 80 00 20 */	blr 
+/* 80381BE0 0037E7C0  4E 80 00 20 */	blr
 
 
 .section .data
@@ -1650,31 +1650,31 @@ lbl_804D5F9C:
     .balign 8
 .global lbl_804DE7A0
 lbl_804DE7A0:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE7A8
 lbl_804DE7A8:
-	.4byte 0x3F91DF46
-	.4byte 0xA2529D39
+    .4byte 0x3F91DF46
+    .4byte 0xA2529D39
 .global lbl_804DE7B0
 lbl_804DE7B0:
-	.4byte 0x404CA5DC
-	.4byte 0x1A63C1F8
+    .4byte 0x404CA5DC
+    .4byte 0x1A63C1F8
 .global lbl_804DE7B8
 lbl_804DE7B8:
-	.4byte 0x3FE00000
-	.4byte 0x00000000
+    .4byte 0x3FE00000
+    .4byte 0x00000000
 .global lbl_804DE7C0
 lbl_804DE7C0:
-	.4byte 0x40080000
-	.4byte 0x00000000
+    .4byte 0x40080000
+    .4byte 0x00000000
 .global lbl_804DE7C8
 lbl_804DE7C8:
-	.4byte 0x42B40000
+    .4byte 0x42B40000
 .global lbl_804DE7CC
 lbl_804DE7CC:
-	.4byte 0xC2B40000
+    .4byte 0xC2B40000
 .global lbl_804DE7D0
 lbl_804DE7D0:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000

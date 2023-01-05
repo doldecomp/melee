@@ -8,7 +8,7 @@ TRKInitializeDispatcher:
 /* 803276AC 0032428C  38 00 00 20 */	li r0, 0x20
 /* 803276B0 00324290  90 03 4B 40 */	stw r0, lbl_804A4B40@l(r3)
 /* 803276B4 00324294  38 60 00 00 */	li r3, 0
-/* 803276B8 00324298  4E 80 00 20 */	blr 
+/* 803276B8 00324298  4E 80 00 20 */	blr
 
 .global TRKDispatchMessage
 TRKDispatchMessage:
@@ -36,7 +36,7 @@ TRKDispatchMessage:
 /* 80327710 003242F0  81 83 00 00 */	lwz r12, 0(r3)
 /* 80327714 003242F4  38 7E 00 00 */	addi r3, r30, 0
 /* 80327718 003242F8  7D 88 03 A6 */	mtlr r12
-/* 8032771C 003242FC  4E 80 00 21 */	blrl 
+/* 8032771C 003242FC  4E 80 00 21 */	blrl
 /* 80327720 00324300  7C 7F 1B 78 */	mr r31, r3
 lbl_80327724:
 /* 80327724 00324304  7F E3 FB 78 */	mr r3, r31
@@ -45,44 +45,44 @@ lbl_80327724:
 /* 80327730 00324310  38 21 00 18 */	addi r1, r1, 0x18
 /* 80327734 00324314  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327738 00324318  7C 08 03 A6 */	mtlr r0
-/* 8032773C 0032431C  4E 80 00 20 */	blr 
+/* 8032773C 0032431C  4E 80 00 20 */	blr
 
 
 .section .data
     .balign 8
 .global lbl_80400788
 lbl_80400788:
-	.4byte lbl_8032785C
-	.4byte lbl_80327884
-	.4byte lbl_803278AC
-	.4byte TRKDoReset
-	.4byte TRKDoVersions
-	.4byte TRKDoSupportMask
-	.4byte TRKDoCPUType
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte TRKDoReadMemory
-	.4byte TRKDoWriteMemory
-	.4byte TRKDoReadRegisters
-	.4byte TRKDoWriteRegisters
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte TRKDoFlushCache
-	.4byte lbl_8032785C
-	.4byte TRKDoContinue
-	.4byte TRKDoStep
-	.4byte TRKDoStop
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
-	.4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_80327884
+    .4byte lbl_803278AC
+    .4byte TRKDoReset
+    .4byte TRKDoVersions
+    .4byte TRKDoSupportMask
+    .4byte TRKDoCPUType
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte TRKDoReadMemory
+    .4byte TRKDoWriteMemory
+    .4byte TRKDoReadRegisters
+    .4byte TRKDoWriteRegisters
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte TRKDoFlushCache
+    .4byte lbl_8032785C
+    .4byte TRKDoContinue
+    .4byte TRKDoStep
+    .4byte TRKDoStop
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
+    .4byte lbl_8032785C
     .4byte NULL
     .4byte NULL
