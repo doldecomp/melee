@@ -48,7 +48,7 @@ lbl_80359784:
 /* 803597C0 003563A0  28 0C 00 00 */	cmplwi r12, 0
 /* 803597C4 003563A4  41 82 00 0C */	beq lbl_803597D0
 /* 803597C8 003563A8  7D 88 03 A6 */	mtlr r12
-/* 803597CC 003563AC  4E 80 00 21 */	blrl 
+/* 803597CC 003563AC  4E 80 00 21 */	blrl
 lbl_803597D0:
 /* 803597D0 003563B0  4B FF 2C 21 */	bl OSGetTime
 /* 803597D4 003563B4  90 9F 07 A4 */	stw r4, 0x7a4(r31)
@@ -106,7 +106,7 @@ lbl_80359894:
 /* 8035989C 0035647C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 803598A0 00356480  7C 08 03 A6 */	mtlr r0
 /* 803598A4 00356484  38 21 00 18 */	addi r1, r1, 0x18
-/* 803598A8 00356488  4E 80 00 20 */	blr 
+/* 803598A8 00356488  4E 80 00 20 */	blr
 
 .global __AXOutAiCallback
 __AXOutAiCallback:
@@ -138,13 +138,13 @@ lbl_80359904:
 /* 80359904 003564E4  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80359908 003564E8  38 21 00 08 */	addi r1, r1, 8
 /* 8035990C 003564EC  7C 08 03 A6 */	mtlr r0
-/* 80359910 003564F0  4E 80 00 20 */	blr 
+/* 80359910 003564F0  4E 80 00 20 */	blr
 
 .global __AXDSPInitCallback
 __AXDSPInitCallback:
 /* 80359914 003564F4  38 00 00 01 */	li r0, 1
 /* 80359918 003564F8  90 0D BE AC */	stw r0, __AXDSPInitFlag@sda21(r13)
-/* 8035991C 003564FC  4E 80 00 20 */	blr 
+/* 8035991C 003564FC  4E 80 00 20 */	blr
 
 .global __AXDSPResumeCallback
 __AXDSPResumeCallback:
@@ -171,13 +171,13 @@ lbl_80359968:
 /* 80359968 00356548  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8035996C 0035654C  38 21 00 08 */	addi r1, r1, 8
 /* 80359970 00356550  7C 08 03 A6 */	mtlr r0
-/* 80359974 00356554  4E 80 00 20 */	blr 
+/* 80359974 00356554  4E 80 00 20 */	blr
 
 .global __AXDSPDoneCallback
 __AXDSPDoneCallback:
 /* 80359978 00356558  38 00 00 01 */	li r0, 1
 /* 8035997C 0035655C  90 0D BE B0 */	stw r0, __AXDSPDoneFlag@sda21(r13)
-/* 80359980 00356560  4E 80 00 20 */	blr 
+/* 80359980 00356560  4E 80 00 20 */	blr
 
 .global __AXOutInitDSP
 __AXOutInitDSP:
@@ -231,7 +231,7 @@ lbl_80359A28:
 /* 80359A38 00356618  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 80359A3C 0035661C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80359A40 00356620  7C 08 03 A6 */	mtlr r0
-/* 80359A44 00356624  4E 80 00 20 */	blr 
+/* 80359A44 00356624  4E 80 00 20 */	blr
 
 .global __AXOutInit
 __AXOutInit:
@@ -443,50 +443,50 @@ lbl_80359BD8:
 /* 80359D74 00356954  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 80359D78 00356958  38 21 00 20 */	addi r1, r1, 0x20
 /* 80359D7C 0035695C  7C 08 03 A6 */	mtlr r0
-/* 80359D80 00356960  4E 80 00 20 */	blr 
+/* 80359D80 00356960  4E 80 00 20 */	blr
 
 .global AXRegisterCallback
 AXRegisterCallback:
 /* 80359D84 00356964  90 6D BE A8 */	stw r3, __AXUserFrameCallback@sda21(r13)
-/* 80359D88 00356968  4E 80 00 20 */	blr 
+/* 80359D88 00356968  4E 80 00 20 */	blr
 
 
 .section .bss
     .balign 8
 .global __AXOutBuffer
 __AXOutBuffer:
-	.skip 0x500
+    .skip 0x500
 .global __AXOutSBuffer
 __AXOutSBuffer:
-	.skip 0x280
+    .skip 0x280
 .global __AXLocalProfile
 __AXLocalProfile:
-	.skip 0x38
+    .skip 0x38
 .global task
 task:
-	.skip 0x50
+    .skip 0x50
 .global ax_dram_image
 ax_dram_image:
-	.skip 0x4000
+    .skip 0x4000
 
 
 .section .sbss
     .balign 8
 .global __AXOutFrame
 __AXOutFrame:
-	.skip 0x4
+    .skip 0x4
 .global __AXOutDspReady
 __AXOutDspReady:
-	.skip 0x4
+    .skip 0x4
 .global __AXOsTime
 __AXOsTime:
-	.skip 0x8
+    .skip 0x8
 .global __AXUserFrameCallback
 __AXUserFrameCallback:
-	.skip 0x4
+    .skip 0x4
 .global __AXDSPInitFlag
 __AXDSPInitFlag:
-	.skip 0x4
+    .skip 0x4
 .global __AXDSPDoneFlag
 __AXDSPDoneFlag:
-	.skip 0x4
+    .skip 0x4

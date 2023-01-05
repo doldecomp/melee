@@ -2621,84 +2621,84 @@ lbl_804D50BC:
     .balign 8
 .global lbl_804D6C90
 lbl_804D6C90:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6C94
 lbl_804D6C94:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6C98
 lbl_804D6C98:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6C9C
 lbl_804D6C9C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6CA0
 lbl_804D6CA0:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6CA4
 lbl_804D6CA4:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6CA8
 lbl_804D6CA8:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6CAC
 lbl_804D6CAC:
-	.skip 0x1
+    .skip 0x1
 .global lbl_804D6CAD
 lbl_804D6CAD:
-	.skip 0x1
+    .skip 0x1
 .global lbl_804D6CAE
 lbl_804D6CAE:
-	.skip 0x1
+    .skip 0x1
 .global lbl_804D6CAF
 lbl_804D6CAF:
-	.skip 0x1
+    .skip 0x1
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DC398
 lbl_804DC398:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804DC3A0
 lbl_804DC3A0:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DC3A4
 lbl_804DC3A4:
-	.4byte 0x41200000
+    .4byte 0x41200000
 .global lbl_804DC3A8
 lbl_804DC3A8:
-	.4byte 0x41A00000
-	.4byte 0x00000000
+    .4byte 0x41A00000
+    .4byte 0x00000000
 .global lbl_804DC3B0
 lbl_804DC3B0:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000
 .global lbl_804DC3B8
 lbl_804DC3B8:
-	.4byte 0x42480000
+    .4byte 0x42480000
 .global lbl_804DC3BC
 lbl_804DC3BC:
-	.4byte 0x42C80000
+    .4byte 0x42C80000
 .global lbl_804DC3C0
 lbl_804DC3C0:
-	.4byte 0x3CF5C28F
+    .4byte 0x3CF5C28F
 .global lbl_804DC3C4
 lbl_804DC3C4:
-	.4byte 0xC1D80000
+    .4byte 0xC1D80000
 .global lbl_804DC3C8
 lbl_804DC3C8:
-	.4byte 0x41D80000
+    .4byte 0x41D80000
 .global lbl_804DC3CC
 lbl_804DC3CC:
-	.4byte 0xC1980000
+    .4byte 0xC1980000
 .global lbl_804DC3D0
 lbl_804DC3D0:
-	.4byte 0x41980000
+    .4byte 0x41980000
 .global lbl_804DC3D4
 lbl_804DC3D4:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DC3D8
 lbl_804DC3D8:
-	.4byte 0x40000000
-	.4byte 0x00000000
+    .4byte 0x40000000
+    .4byte 0x00000000

@@ -26,7 +26,7 @@ TRKInitializeEventQueue:
 /* 803268C8 003234A8  38 21 00 10 */	addi r1, r1, 0x10
 /* 803268CC 003234AC  80 01 00 04 */	lwz r0, 4(r1)
 /* 803268D0 003234B0  7C 08 03 A6 */	mtlr r0
-/* 803268D4 003234B4  4E 80 00 20 */	blr 
+/* 803268D4 003234B4  4E 80 00 20 */	blr
 
 .global __TRK_memcpy
 __TRK_memcpy:
@@ -38,7 +38,7 @@ __TRK_memcpy:
 /* 803268EC 003234CC  38 21 00 08 */	addi r1, r1, 8
 /* 803268F0 003234D0  80 01 00 04 */	lwz r0, 4(r1)
 /* 803268F4 003234D4  7C 08 03 A6 */	mtlr r0
-/* 803268F8 003234D8  4E 80 00 20 */	blr 
+/* 803268F8 003234D8  4E 80 00 20 */	blr
 
 .global TRKGetNextEvent
 TRKGetNextEvent:
@@ -91,7 +91,7 @@ lbl_8032698C:
 /* 803269AC 0032358C  38 21 00 18 */	addi r1, r1, 0x18
 /* 803269B0 00323590  80 01 00 04 */	lwz r0, 4(r1)
 /* 803269B4 00323594  7C 08 03 A6 */	mtlr r0
-/* 803269B8 00323598  4E 80 00 20 */	blr 
+/* 803269B8 00323598  4E 80 00 20 */	blr
 
 .global TRKPostEvent
 TRKPostEvent:
@@ -153,7 +153,7 @@ lbl_80326A6C:
 /* 80326A8C 0032366C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80326A90 00323670  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326A94 00323674  7C 08 03 A6 */	mtlr r0
-/* 80326A98 00323678  4E 80 00 20 */	blr 
+/* 80326A98 00323678  4E 80 00 20 */	blr
 
 .global TRKConstructEvent
 TRKConstructEvent:
@@ -162,7 +162,7 @@ TRKConstructEvent:
 /* 80326AA4 00323684  38 00 FF FF */	li r0, -1
 /* 80326AA8 00323688  90 83 00 04 */	stw r4, 4(r3)
 /* 80326AAC 0032368C  90 03 00 08 */	stw r0, 8(r3)
-/* 80326AB0 00323690  4E 80 00 20 */	blr 
+/* 80326AB0 00323690  4E 80 00 20 */	blr
 
 .global TRKDestructEvent
 TRKDestructEvent:
@@ -174,4 +174,4 @@ TRKDestructEvent:
 /* 80326AC8 003236A8  38 21 00 08 */	addi r1, r1, 8
 /* 80326ACC 003236AC  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326AD0 003236B0  7C 08 03 A6 */	mtlr r0
-/* 80326AD4 003236B4  4E 80 00 20 */	blr 
+/* 80326AD4 003236B4  4E 80 00 20 */	blr

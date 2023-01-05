@@ -38,7 +38,7 @@ asm BOOL lbFile_800161A0()
 /* 800161B4 00012D94  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800161B8 00012D98  38 21 00 08 */	addi r1, r1, 8
 /* 800161BC 00012D9C  7C 08 03 A6 */	mtlr r0
-/* 800161C0 00012DA0  4E 80 00 20 */	blr 
+/* 800161C0 00012DA0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 #endif

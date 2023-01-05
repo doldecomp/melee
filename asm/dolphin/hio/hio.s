@@ -19,7 +19,7 @@ lbl_8032BA98:
 /* 8032BA98 00328678  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032BA9C 0032867C  38 21 00 08 */	addi r1, r1, 8
 /* 8032BAA0 00328680  7C 08 03 A6 */	mtlr r0
-/* 8032BAA4 00328684  4E 80 00 20 */	blr 
+/* 8032BAA4 00328684  4E 80 00 20 */	blr
 
 ExiHandler:
 /* 8032BAA8 00328688  7C 08 02 A6 */	mflr r0
@@ -29,12 +29,12 @@ ExiHandler:
 /* 8032BAB8 00328698  28 0C 00 00 */	cmplwi r12, 0
 /* 8032BABC 0032869C  41 82 00 0C */	beq lbl_8032BAC8
 /* 8032BAC0 003286A0  7D 88 03 A6 */	mtlr r12
-/* 8032BAC4 003286A4  4E 80 00 21 */	blrl 
+/* 8032BAC4 003286A4  4E 80 00 21 */	blrl
 lbl_8032BAC8:
 /* 8032BAC8 003286A8  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032BACC 003286AC  38 21 00 08 */	addi r1, r1, 8
 /* 8032BAD0 003286B0  7C 08 03 A6 */	mtlr r0
-/* 8032BAD4 003286B4  4E 80 00 20 */	blr 
+/* 8032BAD4 003286B4  4E 80 00 20 */	blr
 
 DbgHandler:
 /* 8032BAD8 003286B8  7C 08 02 A6 */	mflr r0
@@ -54,7 +54,7 @@ DbgHandler:
 /* 8032BB10 003286F0  48 01 95 7D */	bl OSSetCurrentContext
 /* 8032BB14 003286F4  81 8D BA 04 */	lwz r12, ExiCallback@sda21(r13)
 /* 8032BB18 003286F8  7D 88 03 A6 */	mtlr r12
-/* 8032BB1C 003286FC  4E 80 00 21 */	blrl 
+/* 8032BB1C 003286FC  4E 80 00 21 */	blrl
 /* 8032BB20 00328700  38 61 00 10 */	addi r3, r1, 0x10
 /* 8032BB24 00328704  48 01 97 31 */	bl OSClearContext
 /* 8032BB28 00328708  7F E3 FB 78 */	mr r3, r31
@@ -64,7 +64,7 @@ lbl_8032BB30:
 /* 8032BB34 00328714  83 E1 02 DC */	lwz r31, 0x2dc(r1)
 /* 8032BB38 00328718  38 21 02 E0 */	addi r1, r1, 0x2e0
 /* 8032BB3C 0032871C  7C 08 03 A6 */	mtlr r0
-/* 8032BB40 00328720  4E 80 00 20 */	blr 
+/* 8032BB40 00328720  4E 80 00 20 */	blr
 
 TxHandler:
 /* 8032BB44 00328724  7C 08 02 A6 */	mflr r0
@@ -78,12 +78,12 @@ TxHandler:
 /* 8032BB64 00328744  28 0C 00 00 */	cmplwi r12, 0
 /* 8032BB68 00328748  41 82 00 0C */	beq lbl_8032BB74
 /* 8032BB6C 0032874C  7D 88 03 A6 */	mtlr r12
-/* 8032BB70 00328750  4E 80 00 21 */	blrl 
+/* 8032BB70 00328750  4E 80 00 21 */	blrl
 lbl_8032BB74:
 /* 8032BB74 00328754  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032BB78 00328758  38 21 00 08 */	addi r1, r1, 8
 /* 8032BB7C 0032875C  7C 08 03 A6 */	mtlr r0
-/* 8032BB80 00328760  4E 80 00 20 */	blr 
+/* 8032BB80 00328760  4E 80 00 20 */	blr
 
 RxHandler:
 /* 8032BB84 00328764  7C 08 02 A6 */	mflr r0
@@ -97,12 +97,12 @@ RxHandler:
 /* 8032BBA4 00328784  28 0C 00 00 */	cmplwi r12, 0
 /* 8032BBA8 00328788  41 82 00 0C */	beq lbl_8032BBB4
 /* 8032BBAC 0032878C  7D 88 03 A6 */	mtlr r12
-/* 8032BBB0 00328790  4E 80 00 21 */	blrl 
+/* 8032BBB0 00328790  4E 80 00 21 */	blrl
 lbl_8032BBB4:
 /* 8032BBB4 00328794  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032BBB8 00328798  38 21 00 08 */	addi r1, r1, 8
 /* 8032BBBC 0032879C  7C 08 03 A6 */	mtlr r0
-/* 8032BBC0 003287A0  4E 80 00 20 */	blr 
+/* 8032BBC0 003287A0  4E 80 00 20 */	blr
 
 .global HIOEnumDevices
 HIOEnumDevices:
@@ -146,7 +146,7 @@ lbl_8032BC1C:
 /* 8032BC44 00328824  39 9E 00 00 */	addi r12, r30, 0
 /* 8032BC48 00328828  7D 88 03 A6 */	mtlr r12
 /* 8032BC4C 0032882C  38 7F 00 00 */	addi r3, r31, 0
-/* 8032BC50 00328830  4E 80 00 21 */	blrl 
+/* 8032BC50 00328830  4E 80 00 21 */	blrl
 /* 8032BC54 00328834  2C 03 00 00 */	cmpwi r3, 0
 /* 8032BC58 00328838  40 82 00 0C */	bne lbl_8032BC64
 /* 8032BC5C 0032883C  38 60 00 01 */	li r3, 1
@@ -162,7 +162,7 @@ lbl_8032BC74:
 /* 8032BC7C 0032885C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8032BC80 00328860  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032BC84 00328864  7C 08 03 A6 */	mtlr r0
-/* 8032BC88 00328868  4E 80 00 20 */	blr 
+/* 8032BC88 00328868  4E 80 00 20 */	blr
 
 .global HIOInit
 HIOInit:
@@ -343,7 +343,7 @@ lbl_8032BF08:
 /* 8032BF10 00328AF0  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8032BF14 00328AF4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8032BF18 00328AF8  7C 08 03 A6 */	mtlr r0
-/* 8032BF1C 00328AFC  4E 80 00 20 */	blr 
+/* 8032BF1C 00328AFC  4E 80 00 20 */	blr
 
 .global HIOReadMailbox
 HIOReadMailbox:
@@ -427,7 +427,7 @@ lbl_8032C038:
 /* 8032C040 00328C20  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8032C044 00328C24  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032C048 00328C28  7C 08 03 A6 */	mtlr r0
-/* 8032C04C 00328C2C  4E 80 00 20 */	blr 
+/* 8032C04C 00328C2C  4E 80 00 20 */	blr
 
 .global HIOWriteMailbox
 HIOWriteMailbox:
@@ -496,7 +496,7 @@ lbl_8032C130:
 /* 8032C134 00328D14  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8032C138 00328D18  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032C13C 00328D1C  7C 08 03 A6 */	mtlr r0
-/* 8032C140 00328D20  4E 80 00 20 */	blr 
+/* 8032C140 00328D20  4E 80 00 20 */	blr
 
 .global HIORead
 HIORead:
@@ -585,7 +585,7 @@ lbl_8032C26C:
 /* 8032C278 00328E58  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 8032C27C 00328E5C  38 21 00 28 */	addi r1, r1, 0x28
 /* 8032C280 00328E60  7C 08 03 A6 */	mtlr r0
-/* 8032C284 00328E64  4E 80 00 20 */	blr 
+/* 8032C284 00328E64  4E 80 00 20 */	blr
 
 .global HIOWrite
 HIOWrite:
@@ -674,7 +674,7 @@ lbl_8032C3B0:
 /* 8032C3BC 00328F9C  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 8032C3C0 00328FA0  38 21 00 28 */	addi r1, r1, 0x28
 /* 8032C3C4 00328FA4  7C 08 03 A6 */	mtlr r0
-/* 8032C3C8 00328FA8  4E 80 00 20 */	blr 
+/* 8032C3C8 00328FA8  4E 80 00 20 */	blr
 
 .global HIOReadAsync
 HIOReadAsync:
@@ -756,7 +756,7 @@ lbl_8032C4D4:
 /* 8032C4E4 003290C4  83 81 00 20 */	lwz r28, 0x20(r1)
 /* 8032C4E8 003290C8  38 21 00 30 */	addi r1, r1, 0x30
 /* 8032C4EC 003290CC  7C 08 03 A6 */	mtlr r0
-/* 8032C4F0 003290D0  4E 80 00 20 */	blr 
+/* 8032C4F0 003290D0  4E 80 00 20 */	blr
 
 .global HIOWriteAsync
 HIOWriteAsync:
@@ -838,7 +838,7 @@ lbl_8032C5FC:
 /* 8032C60C 003291EC  83 81 00 20 */	lwz r28, 0x20(r1)
 /* 8032C610 003291F0  38 21 00 30 */	addi r1, r1, 0x30
 /* 8032C614 003291F4  7C 08 03 A6 */	mtlr r0
-/* 8032C618 003291F8  4E 80 00 20 */	blr 
+/* 8032C618 003291F8  4E 80 00 20 */	blr
 
 .global HIOReadStatus
 HIOReadStatus:
@@ -922,7 +922,7 @@ lbl_8032C734:
 /* 8032C73C 0032931C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8032C740 00329320  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032C744 00329324  7C 08 03 A6 */	mtlr r0
-/* 8032C748 00329328  4E 80 00 20 */	blr 
+/* 8032C748 00329328  4E 80 00 20 */	blr
 
 
 .section .sdata
@@ -936,13 +936,13 @@ Chan:
     .balign 8
 .global Dev
 Dev:
-	.skip 0x4
+    .skip 0x4
 .global ExiCallback
 ExiCallback:
-	.skip 0x4
+    .skip 0x4
 .global TxCallback
 TxCallback:
-	.skip 0x4
+    .skip 0x4
 .global RxCallback
 RxCallback:
-	.skip 0x4
+    .skip 0x4

@@ -66,7 +66,7 @@ lbl_8034EA14:
 /* 8034EA38 0034B618  41 82 00 10 */	beq lbl_8034EA48
 /* 8034EA3C 0034B61C  80 6D BD 80 */	lwz r3, retraceCount@sda21(r13)
 /* 8034EA40 0034B620  7D 88 03 A6 */	mtlr r12
-/* 8034EA44 0034B624  4E 80 00 21 */	blrl 
+/* 8034EA44 0034B624  4E 80 00 21 */	blrl
 lbl_8034EA48:
 /* 8034EA48 0034B628  80 0D BD 84 */	lwz r0, flushFlag@sda21(r13)
 /* 8034EA4C 0034B62C  28 00 00 00 */	cmplwi r0, 0
@@ -145,7 +145,7 @@ lbl_8034EB3C:
 /* 8034EB50 0034B730  81 8D BD 94 */	lwz r12, PostCB@sda21(r13)
 /* 8034EB54 0034B734  80 6D BD 80 */	lwz r3, retraceCount@sda21(r13)
 /* 8034EB58 0034B738  7D 88 03 A6 */	mtlr r12
-/* 8034EB5C 0034B73C  4E 80 00 21 */	blrl 
+/* 8034EB5C 0034B73C  4E 80 00 21 */	blrl
 lbl_8034EB60:
 /* 8034EB60 0034B740  38 6D BD 88 */	addi r3, r13, retraceQueue@sda21
 /* 8034EB64 0034B744  4B FF CF 9D */	bl OSWakeupThread
@@ -158,7 +158,7 @@ lbl_8034EB78:
 /* 8034EB7C 0034B75C  80 01 02 FC */	lwz r0, 0x2fc(r1)
 /* 8034EB80 0034B760  38 21 02 F8 */	addi r1, r1, 0x2f8
 /* 8034EB84 0034B764  7C 08 03 A6 */	mtlr r0
-/* 8034EB88 0034B768  4E 80 00 20 */	blr 
+/* 8034EB88 0034B768  4E 80 00 20 */	blr
 
 .global VISetPreRetraceCallback
 VISetPreRetraceCallback:
@@ -178,7 +178,7 @@ VISetPreRetraceCallback:
 /* 8034EBC0 0034B7A0  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8034EBC4 0034B7A4  7C 08 03 A6 */	mtlr r0
 /* 8034EBC8 0034B7A8  38 21 00 18 */	addi r1, r1, 0x18
-/* 8034EBCC 0034B7AC  4E 80 00 20 */	blr 
+/* 8034EBCC 0034B7AC  4E 80 00 20 */	blr
 
 .global VISetPostRetraceCallback
 VISetPostRetraceCallback:
@@ -198,7 +198,7 @@ VISetPostRetraceCallback:
 /* 8034EC04 0034B7E4  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8034EC08 0034B7E8  7C 08 03 A6 */	mtlr r0
 /* 8034EC0C 0034B7EC  38 21 00 18 */	addi r1, r1, 0x18
-/* 8034EC10 0034B7F0  4E 80 00 20 */	blr 
+/* 8034EC10 0034B7F0  4E 80 00 20 */	blr
 
 .global getTiming
 getTiming:
@@ -211,46 +211,46 @@ getTiming:
 /* 8034EC2C 0034B80C  54 60 10 3A */	slwi r0, r3, 2
 /* 8034EC30 0034B810  7C 04 00 2E */	lwzx r0, r4, r0
 /* 8034EC34 0034B814  7C 09 03 A6 */	mtctr r0
-/* 8034EC38 0034B818  4E 80 04 20 */	bctr 
+/* 8034EC38 0034B818  4E 80 04 20 */	bctr
 lbl_8034EC3C:
 /* 8034EC3C 0034B81C  7C A3 2B 78 */	mr r3, r5
-/* 8034EC40 0034B820  4E 80 00 20 */	blr 
+/* 8034EC40 0034B820  4E 80 00 20 */	blr
 lbl_8034EC44:
 /* 8034EC44 0034B824  38 65 00 26 */	addi r3, r5, 0x26
-/* 8034EC48 0034B828  4E 80 00 20 */	blr 
+/* 8034EC48 0034B828  4E 80 00 20 */	blr
 lbl_8034EC4C:
 /* 8034EC4C 0034B82C  38 65 00 4C */	addi r3, r5, 0x4c
-/* 8034EC50 0034B830  4E 80 00 20 */	blr 
+/* 8034EC50 0034B830  4E 80 00 20 */	blr
 lbl_8034EC54:
 /* 8034EC54 0034B834  38 65 00 72 */	addi r3, r5, 0x72
-/* 8034EC58 0034B838  4E 80 00 20 */	blr 
+/* 8034EC58 0034B838  4E 80 00 20 */	blr
 lbl_8034EC5C:
 /* 8034EC5C 0034B83C  7C A3 2B 78 */	mr r3, r5
-/* 8034EC60 0034B840  4E 80 00 20 */	blr 
+/* 8034EC60 0034B840  4E 80 00 20 */	blr
 lbl_8034EC64:
 /* 8034EC64 0034B844  38 65 00 26 */	addi r3, r5, 0x26
-/* 8034EC68 0034B848  4E 80 00 20 */	blr 
+/* 8034EC68 0034B848  4E 80 00 20 */	blr
 lbl_8034EC6C:
 /* 8034EC6C 0034B84C  38 65 00 98 */	addi r3, r5, 0x98
-/* 8034EC70 0034B850  4E 80 00 20 */	blr 
+/* 8034EC70 0034B850  4E 80 00 20 */	blr
 lbl_8034EC74:
 /* 8034EC74 0034B854  38 65 00 BE */	addi r3, r5, 0xbe
-/* 8034EC78 0034B858  4E 80 00 20 */	blr 
+/* 8034EC78 0034B858  4E 80 00 20 */	blr
 lbl_8034EC7C:
 /* 8034EC7C 0034B85C  38 65 00 E4 */	addi r3, r5, 0xe4
-/* 8034EC80 0034B860  4E 80 00 20 */	blr 
+/* 8034EC80 0034B860  4E 80 00 20 */	blr
 lbl_8034EC84:
 /* 8034EC84 0034B864  38 65 01 0A */	addi r3, r5, 0x10a
-/* 8034EC88 0034B868  4E 80 00 20 */	blr 
+/* 8034EC88 0034B868  4E 80 00 20 */	blr
 lbl_8034EC8C:
 /* 8034EC8C 0034B86C  38 65 00 4C */	addi r3, r5, 0x4c
-/* 8034EC90 0034B870  4E 80 00 20 */	blr 
+/* 8034EC90 0034B870  4E 80 00 20 */	blr
 lbl_8034EC94:
 /* 8034EC94 0034B874  38 65 00 72 */	addi r3, r5, 0x72
-/* 8034EC98 0034B878  4E 80 00 20 */	blr 
+/* 8034EC98 0034B878  4E 80 00 20 */	blr
 lbl_8034EC9C:
 /* 8034EC9C 0034B87C  38 60 00 00 */	li r3, 0
-/* 8034ECA0 0034B880  4E 80 00 20 */	blr 
+/* 8034ECA0 0034B880  4E 80 00 20 */	blr
 
 .global __VIInit
 __VIInit:
@@ -384,7 +384,7 @@ lbl_8034EE80:
 /* 8034EE8C 0034BA6C  7C 08 03 A6 */	mtlr r0
 /* 8034EE90 0034BA70  83 A1 00 24 */	lwz r29, 0x24(r1)
 /* 8034EE94 0034BA74  38 21 00 30 */	addi r1, r1, 0x30
-/* 8034EE98 0034BA78  4E 80 00 20 */	blr 
+/* 8034EE98 0034BA78  4E 80 00 20 */	blr
 
 .global VIInit
 VIInit:
@@ -694,7 +694,7 @@ lbl_8034F23C:
 /* 8034F304 0034BEE4  83 A1 00 0C */	lwz r29, 0xc(r1)
 /* 8034F308 0034BEE8  83 81 00 08 */	lwz r28, 8(r1)
 /* 8034F30C 0034BEEC  38 21 00 18 */	addi r1, r1, 0x18
-/* 8034F310 0034BEF0  4E 80 00 20 */	blr 
+/* 8034F310 0034BEF0  4E 80 00 20 */	blr
 
 .global VIWaitForRetrace
 VIWaitForRetrace:
@@ -719,7 +719,7 @@ lbl_8034F334:
 /* 8034F358 0034BF38  83 C1 00 08 */	lwz r30, 8(r1)
 /* 8034F35C 0034BF3C  7C 08 03 A6 */	mtlr r0
 /* 8034F360 0034BF40  38 21 00 10 */	addi r1, r1, 0x10
-/* 8034F364 0034BF44  4E 80 00 20 */	blr 
+/* 8034F364 0034BF44  4E 80 00 20 */	blr
 
 .global setFbbRegs
 setFbbRegs:
@@ -914,7 +914,7 @@ lbl_8034F514:
 lbl_8034F630:
 /* 8034F630 0034C210  83 E1 00 44 */	lwz r31, 0x44(r1)
 /* 8034F634 0034C214  38 21 00 48 */	addi r1, r1, 0x48
-/* 8034F638 0034C218  4E 80 00 20 */	blr 
+/* 8034F638 0034C218  4E 80 00 20 */	blr
 
 .global setVerticalRegs
 setVerticalRegs:
@@ -1026,7 +1026,7 @@ lbl_8034F730:
 /* 8034F7CC 0034C3AC  83 C1 00 20 */	lwz r30, 0x20(r1)
 /* 8034F7D0 0034C3B0  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 8034F7D4 0034C3B4  38 21 00 28 */	addi r1, r1, 0x28
-/* 8034F7D8 0034C3B8  4E 80 00 20 */	blr 
+/* 8034F7D8 0034C3B8  4E 80 00 20 */	blr
 
 .global VIConfigure
 VIConfigure:
@@ -1565,7 +1565,7 @@ lbl_8034FF30:
 /* 8034FF68 0034CB48  80 01 00 7C */	lwz r0, 0x7c(r1)
 /* 8034FF6C 0034CB4C  38 21 00 78 */	addi r1, r1, 0x78
 /* 8034FF70 0034CB50  7C 08 03 A6 */	mtlr r0
-/* 8034FF74 0034CB54  4E 80 00 20 */	blr 
+/* 8034FF74 0034CB54  4E 80 00 20 */	blr
 
 .global VIFlush
 VIFlush:
@@ -1643,7 +1643,7 @@ lbl_80350054:
 /* 80350084 0034CC64  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 80350088 0034CC68  38 21 00 28 */	addi r1, r1, 0x28
 /* 8035008C 0034CC6C  7C 08 03 A6 */	mtlr r0
-/* 80350090 0034CC70  4E 80 00 20 */	blr 
+/* 80350090 0034CC70  4E 80 00 20 */	blr
 
 .global VISetNextFrameBuffer
 VISetNextFrameBuffer:
@@ -1673,7 +1673,7 @@ VISetNextFrameBuffer:
 /* 803500F0 0034CCD0  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 803500F4 0034CCD4  7C 08 03 A6 */	mtlr r0
 /* 803500F8 0034CCD8  38 21 00 18 */	addi r1, r1, 0x18
-/* 803500FC 0034CCDC  4E 80 00 20 */	blr 
+/* 803500FC 0034CCDC  4E 80 00 20 */	blr
 
 .global VISetBlack
 VISetBlack:
@@ -1707,12 +1707,12 @@ VISetBlack:
 /* 8035016C 0034CD4C  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 80350170 0034CD50  7C 08 03 A6 */	mtlr r0
 /* 80350174 0034CD54  38 21 00 20 */	addi r1, r1, 0x20
-/* 80350178 0034CD58  4E 80 00 20 */	blr 
+/* 80350178 0034CD58  4E 80 00 20 */	blr
 
 .global VIGetRetraceCount
 VIGetRetraceCount:
 /* 8035017C 0034CD5C  80 6D BD 80 */	lwz r3, retraceCount@sda21(r13)
-/* 80350180 0034CD60  4E 80 00 20 */	blr 
+/* 80350180 0034CD60  4E 80 00 20 */	blr
 
 .global getCurrentFieldEvenOdd
 getCurrentFieldEvenOdd:
@@ -1740,10 +1740,10 @@ lbl_80350198:
 /* 803501D4 0034CDB4  7C 03 00 40 */	cmplw r3, r0
 /* 803501D8 0034CDB8  40 80 00 0C */	bge lbl_803501E4
 /* 803501DC 0034CDBC  38 60 00 01 */	li r3, 1
-/* 803501E0 0034CDC0  4E 80 00 20 */	blr 
+/* 803501E0 0034CDC0  4E 80 00 20 */	blr
 lbl_803501E4:
 /* 803501E4 0034CDC4  38 60 00 00 */	li r3, 0
-/* 803501E8 0034CDC8  4E 80 00 20 */	blr 
+/* 803501E8 0034CDC8  4E 80 00 20 */	blr
 
 .global VIGetNextField
 VIGetNextField:
@@ -1791,7 +1791,7 @@ lbl_80350264:
 /* 80350284 0034CE64  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 80350288 0034CE68  38 21 00 20 */	addi r1, r1, 0x20
 /* 8035028C 0034CE6C  7C 08 03 A6 */	mtlr r0
-/* 80350290 0034CE70  4E 80 00 20 */	blr 
+/* 80350290 0034CE70  4E 80 00 20 */	blr
 
 .global VIGetCurrentLine
 VIGetCurrentLine:
@@ -1834,7 +1834,7 @@ lbl_80350310:
 /* 8035031C 0034CEFC  83 C1 00 08 */	lwz r30, 8(r1)
 /* 80350320 0034CF00  7C 08 03 A6 */	mtlr r0
 /* 80350324 0034CF04  38 21 00 10 */	addi r1, r1, 0x10
-/* 80350328 0034CF08  4E 80 00 20 */	blr 
+/* 80350328 0034CF08  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/W2MjR // 120 (96.13%)
 .global VIGetTvFormat
@@ -1874,7 +1874,7 @@ lbl_8035038C:
 /* 80350398 0034CF78  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8035039C 0034CF7C  38 21 00 10 */	addi r1, r1, 0x10
 /* 803503A0 0034CF80  7C 08 03 A6 */	mtlr r0
-/* 803503A4 0034CF84  4E 80 00 20 */	blr 
+/* 803503A4 0034CF84  4E 80 00 20 */	blr
 
 .global VIGetDTVStatus
 VIGetDTVStatus:
@@ -1892,7 +1892,7 @@ VIGetDTVStatus:
 /* 803503D4 0034CFB4  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 803503D8 0034CFB8  38 21 00 10 */	addi r1, r1, 0x10
 /* 803503DC 0034CFBC  7C 08 03 A6 */	mtlr r0
-/* 803503E0 0034CFC0  4E 80 00 20 */	blr 
+/* 803503E0 0034CFC0  4E 80 00 20 */	blr
 
 
 .section .data
@@ -1993,28 +1993,28 @@ taps:
     .balign 4
 .global jtbl_80402E8C
 jtbl_80402E8C:
-	.4byte lbl_8034EC3C
-	.4byte lbl_8034EC44
-	.4byte lbl_8034EC7C
-	.4byte lbl_8034EC84
-	.4byte lbl_8034EC4C
-	.4byte lbl_8034EC54
-	.4byte lbl_8034EC9C
-	.4byte lbl_8034EC9C
-	.4byte lbl_8034EC6C
-	.4byte lbl_8034EC74
-	.4byte lbl_8034EC9C
-	.4byte lbl_8034EC9C
-	.4byte lbl_8034EC9C
-	.4byte lbl_8034EC9C
-	.4byte lbl_8034EC9C
-	.4byte lbl_8034EC9C
-	.4byte lbl_8034EC8C
-	.4byte lbl_8034EC94
-	.4byte lbl_8034EC9C
-	.4byte lbl_8034EC9C
-	.4byte lbl_8034EC5C
-	.4byte lbl_8034EC64
+    .4byte lbl_8034EC3C
+    .4byte lbl_8034EC44
+    .4byte lbl_8034EC7C
+    .4byte lbl_8034EC84
+    .4byte lbl_8034EC4C
+    .4byte lbl_8034EC54
+    .4byte lbl_8034EC9C
+    .4byte lbl_8034EC9C
+    .4byte lbl_8034EC6C
+    .4byte lbl_8034EC74
+    .4byte lbl_8034EC9C
+    .4byte lbl_8034EC9C
+    .4byte lbl_8034EC9C
+    .4byte lbl_8034EC9C
+    .4byte lbl_8034EC9C
+    .4byte lbl_8034EC9C
+    .4byte lbl_8034EC8C
+    .4byte lbl_8034EC94
+    .4byte lbl_8034EC9C
+    .4byte lbl_8034EC9C
+    .4byte lbl_8034EC5C
+    .4byte lbl_8034EC64
     .asciz "***************************************\n"
     .balign 4
     .asciz " ! ! ! C A U T I O N ! ! !             \n"
@@ -2032,66 +2032,66 @@ jtbl_80402E8C:
     .balign 8
 .global regs
 regs:
-	.skip 0x76
+    .skip 0x76
 
     .balign 4
 .global shdwRegs
 shdwRegs:
-	.skip 0x76
+    .skip 0x76
 
     .balign 4
 .global HorVer
 HorVer:
-	.skip 0x58
+    .skip 0x58
 
 
 .section .sbss
     .balign 8
 .global retraceCount
 retraceCount:
-	.skip 0x4
+    .skip 0x4
 .global flushFlag
 flushFlag:
-	.skip 0x4
+    .skip 0x4
 .global retraceQueue
 retraceQueue:
-	.skip 0x8
+    .skip 0x8
 .global PreCB
 PreCB:
-	.skip 0x4
+    .skip 0x4
 .global PostCB
 PostCB:
-	.skip 0x4
+    .skip 0x4
 .global encoderType
 encoderType:
-	.skip 0x4
+    .skip 0x4
 .global displayOffsetH
 displayOffsetH:
-	.skip 0x2
+    .skip 0x2
 .global displayOffsetV
 displayOffsetV:
-	.skip 0x2
+    .skip 0x2
 .global changeMode
 changeMode:
-	.skip 0x8
+    .skip 0x8
 .global changed
 changed:
-	.skip 0x8
+    .skip 0x8
 .global shdwChangeMode
 shdwChangeMode:
-	.skip 0x8
+    .skip 0x8
 .global shdwChanged
 shdwChanged:
-	.skip 0x8
+    .skip 0x8
 .global CurrTiming
 CurrTiming:
-	.skip 0x4
+    .skip 0x4
 .global CurrTvMode
 CurrTvMode:
-	.skip 0x4
+    .skip 0x4
 .global FBSet
 FBSet:
-	.skip 0x4
+    .skip 0x4
 .global message
 message:
-	.skip 0x4
+    .skip 0x4

@@ -38,28 +38,28 @@ ftNess_AttackLw4_Release_Action:
 /* 80116B60 00113740  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80116B64 00113744  38 21 00 18 */	addi r1, r1, 0x18
 /* 80116B68 00113748  7C 08 03 A6 */	mtlr r0
-/* 80116B6C 0011374C  4E 80 00 20 */	blr 
+/* 80116B6C 0011374C  4E 80 00 20 */	blr
 .section .sdata2
     .balign 8
 .global lbl_804D96F8/*0.0f*/
 lbl_804D96F8/*0.0f*/:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804D96FC/*1.0f*/
 lbl_804D96FC/*1.0f*/:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804D9700/*magic conversion*/
 lbl_804D9700/*magic conversion*/:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804D9708/*12.0f*/
 lbl_804D9708/*12.0f*/:
-	.4byte 0x41400000
+    .4byte 0x41400000
 .global lbl_804D970C/*0.20000000298023224f*/
 lbl_804D970C/*0.20000000298023224f*/:
-	.4byte 0x3E4CCCCD
+    .4byte 0x3E4CCCCD
 .global lbl_804D9710/*14.0f*/
 lbl_804D9710/*14.0f*/:
-	.4byte 0x41600000
+    .4byte 0x41600000
 .global lbl_804D9714/*13.0f*/
 lbl_804D9714/*13.0f*/:
-	.4byte 0x41500000
+    .4byte 0x41500000

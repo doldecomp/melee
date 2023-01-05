@@ -50,7 +50,7 @@ lbl_8001E5E4:
 /* 8001E5FC 0001B1DC  BB 61 00 14 */	lmw r27, 0x14(r1)
 /* 8001E600 0001B1E0  38 21 00 28 */	addi r1, r1, 0x28
 /* 8001E604 0001B1E4  7C 08 03 A6 */	mtlr r0
-/* 8001E608 0001B1E8  4E 80 00 20 */	blr 
+/* 8001E608 0001B1E8  4E 80 00 20 */	blr
 
 
 # https://decomp.me/scratch/JF7uV
@@ -110,7 +110,7 @@ lbl_8001E6B0:
 /* 8001E6C8 0001B2A8  BB 61 00 14 */	lmw r27, 0x14(r1)
 /* 8001E6CC 0001B2AC  38 21 00 28 */	addi r1, r1, 0x28
 /* 8001E6D0 0001B2B0  7C 08 03 A6 */	mtlr r0
-/* 8001E6D4 0001B2B4  4E 80 00 20 */	blr 
+/* 8001E6D4 0001B2B4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/FEOFs
 .global func_8001E6D8
@@ -268,4 +268,4 @@ lbl_8001E8E4:
 /* 8001E8E8 0001B4C8  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8001E8EC 0001B4CC  38 21 00 40 */	addi r1, r1, 0x40
 /* 8001E8F0 0001B4D0  7C 08 03 A6 */	mtlr r0
-/* 8001E8F4 0001B4D4  4E 80 00 20 */	blr 
+/* 8001E8F4 0001B4D4  4E 80 00 20 */	blr

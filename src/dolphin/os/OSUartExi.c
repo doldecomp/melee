@@ -177,6 +177,6 @@ lbl_8034CAA8:
 /* 8034CAAC 0034968C  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8034CAB0 00349690  38 21 00 30 */	addi r1, r1, 0x30
 /* 8034CAB4 00349694  7C 08 03 A6 */	mtlr r0
-/* 8034CAB8 00349698  4E 80 00 20 */	blr 
+/* 8034CAB8 00349698  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop

@@ -172,7 +172,7 @@ lbl_8033D658:
 /* 8033D72C 0033A30C  83 C1 00 28 */	lwz r30, 0x28(r1)
 /* 8033D730 0033A310  7C 08 03 A6 */	mtlr r0
 /* 8033D734 0033A314  38 21 00 30 */	addi r1, r1, 0x30
-/* 8033D738 0033A318  4E 80 00 20 */	blr 
+/* 8033D738 0033A318  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -217,7 +217,7 @@ asm unk_t GXSetCopyClamp()
 /* 8033D7D4 0033A3B4  54 00 07 FA */	rlwinm r0, r0, 0, 0x1f, 0x1d
 /* 8033D7D8 0033A3B8  7C 00 33 78 */	or r0, r0, r6
 /* 8033D7DC 0033A3BC  90 03 00 00 */	stw r0, 0(r3)
-/* 8033D7E0 0033A3C0  4E 80 00 20 */	blr 
+/* 8033D7E0 0033A3C0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -272,7 +272,7 @@ asm unk_t GXSetDispCopyYScale()
 /* 8033D890 0033A470  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8033D894 0033A474  38 21 00 28 */	addi r1, r1, 0x28
 /* 8033D898 0033A478  7C 08 03 A6 */	mtlr r0
-/* 8033D89C 0033A47C  4E 80 00 20 */	blr 
+/* 8033D89C 0033A47C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -306,7 +306,7 @@ asm unk_t GXSetCopyClear()
 /* 8033D8F8 0033A4D8  98 C5 80 00 */	stb r6, -0x8000(r5)
 /* 8033D8FC 0033A4DC  90 E5 80 00 */	stw r7, -0x8000(r5)
 /* 8033D900 0033A4E0  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033D904 0033A4E4  4E 80 00 20 */	blr 
+/* 8033D904 0033A4E4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -456,7 +456,7 @@ lbl_8033DB00:
 /* 8033DB20 0033A700  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033DB24 0033A704  BA E1 00 2C */	lmw r23, 0x2c(r1)
 /* 8033DB28 0033A708  38 21 00 50 */	addi r1, r1, 0x50
-/* 8033DB2C 0033A70C  4E 80 00 20 */	blr 
+/* 8033DB2C 0033A70C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -565,7 +565,7 @@ lbl_8033DCAC:
 /* 8033DCAC 0033A88C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 8033DCB0 0033A890  38 00 00 00 */	li r0, 0
 /* 8033DCB4 0033A894  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033DCB8 0033A898  4E 80 00 20 */	blr 
+/* 8033DCB8 0033A898  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -679,7 +679,7 @@ lbl_8033DE3C:
 /* 8033DE3C 0033AA1C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 8033DE40 0033AA20  38 00 00 00 */	li r0, 0
 /* 8033DE44 0033AA24  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033DE48 0033AA28  4E 80 00 20 */	blr 
+/* 8033DE48 0033AA28  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 

@@ -1855,34 +1855,34 @@ lbl_804D4FE0:
     .balign 8
 .global lbl_804D6C20
 lbl_804D6C20:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DBFF0
 lbl_804DBFF0:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000
 .global lbl_804DBFF8
 lbl_804DBFF8:
-	.4byte 0x40D00000
+    .4byte 0x40D00000
 .global lbl_804DBFFC
 lbl_804DBFFC:
-	.4byte 0x43700000
+    .4byte 0x43700000
 .global lbl_804DC000
 lbl_804DC000:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804DC008
 lbl_804DC008:
-	.4byte 0x3D0F5C29
+    .4byte 0x3D0F5C29
 .global lbl_804DC00C
 lbl_804DC00C:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DC010
 lbl_804DC010:
-	.4byte 0x3FC00000
+    .4byte 0x3FC00000
 .global lbl_804DC014
 lbl_804DC014:
-	.4byte 0x3F800000
+    .4byte 0x3F800000

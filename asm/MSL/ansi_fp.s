@@ -284,7 +284,7 @@ lbl_8032343C:
 /* 8032344C 0032002C  83 C1 00 58 */	lwz r30, 0x58(r1)
 /* 80323450 00320030  83 A1 00 54 */	lwz r29, 0x54(r1)
 /* 80323454 00320034  38 21 00 68 */	addi r1, r1, 0x68
-/* 80323458 00320038  4E 80 00 20 */	blr 
+/* 80323458 00320038  4E 80 00 20 */	blr
 
 
 .section .rodata
@@ -399,21 +399,21 @@ lbl_803B8C30:
     .balign 8
 .global lbl_804DE160
 lbl_804DE160:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE168
 lbl_804DE168:
-	.4byte 0x3FF00000
-	.4byte 0x00000000
+    .4byte 0x3FF00000
+    .4byte 0x00000000
 .global lbl_804DE170
 lbl_804DE170:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804DE178
 lbl_804DE178:
-	.4byte 0x3FB99999
-	.4byte 0x9999999A
+    .4byte 0x3FB99999
+    .4byte 0x9999999A
 .global lbl_804DE180
 lbl_804DE180:
-	.4byte 0x40240000
-	.4byte 0x00000000
+    .4byte 0x40240000
+    .4byte 0x00000000

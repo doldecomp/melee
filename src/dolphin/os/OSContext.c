@@ -80,7 +80,7 @@ lbl_80344ED0:
 /* 80344F48 00341B28  CB C4 01 80 */	lfd f30, 0x180(r4)
 /* 80344F4C 00341B2C  CB E4 01 88 */	lfd f31, 0x188(r4)
 lbl_80344F50:
-/* 80344F50 00341B30  4E 80 00 20 */	blr 
+/* 80344F50 00341B30  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -162,7 +162,7 @@ asm unk_t __OSSaveFPUContext()
 /* 80345070 00341C50  F3 C5 02 B8 */	psq_st f30, 696(r5), 0, qr0
 /* 80345074 00341C54  F3 E5 02 C0 */	psq_st f31, 704(r5), 0, qr0
 lbl_80345078:
-/* 80345078 00341C58  4E 80 00 20 */	blr 
+/* 80345078 00341C58  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -201,7 +201,7 @@ asm void OSSetCurrentContext(OSContext*)
 /* 803450B4 00341C94  7C C0 00 A6 */	mfmsr r6
 /* 803450B8 00341C98  60 C6 00 02 */	ori r6, r6, 2
 /* 803450BC 00341C9C  7C C0 01 24 */	mtmsr r6
-/* 803450C0 00341CA0  4E 80 00 20 */	blr 
+/* 803450C0 00341CA0  4E 80 00 20 */	blr
 lbl_803450C4:
 /* 803450C4 00341CA4  80 C3 01 9C */	lwz r6, 0x19c(r3)
 /* 803450C8 00341CA8  54 C6 04 E2 */	rlwinm r6, r6, 0, 0x13, 0x11
@@ -210,8 +210,8 @@ lbl_803450C4:
 /* 803450D4 00341CB4  54 C6 04 E2 */	rlwinm r6, r6, 0, 0x13, 0x11
 /* 803450D8 00341CB8  60 C6 00 02 */	ori r6, r6, 2
 /* 803450DC 00341CBC  7C C0 01 24 */	mtmsr r6
-/* 803450E0 00341CC0  4C 00 01 2C */	isync 
-/* 803450E4 00341CC4  4E 80 00 20 */	blr 
+/* 803450E0 00341CC0  4C 00 01 2C */	isync
+/* 803450E4 00341CC4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -256,7 +256,7 @@ asm BOOL OSSaveContext(OSContext*)
 /* 80345164 00341D44  38 00 00 01 */	li r0, 1
 /* 80345168 00341D48  90 03 00 0C */	stw r0, 0xc(r3)
 /* 8034516C 00341D4C  38 60 00 00 */	li r3, 0
-/* 80345170 00341D50  4E 80 00 20 */	blr 
+/* 80345170 00341D50  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -322,7 +322,7 @@ lbl_803451C8:
 /* 8034523C 00341E1C  7C 9B 03 A6 */	mtspr 0x1b, r4
 /* 80345240 00341E20  80 83 00 10 */	lwz r4, 0x10(r3)
 /* 80345244 00341E24  80 63 00 0C */	lwz r3, 0xc(r3)
-/* 80345248 00341E28  4C 00 00 64 */	rfi 
+/* 80345248 00341E28  4C 00 00 64 */	rfi
 } // clang-format on
 #pragma pop
 
@@ -331,7 +331,7 @@ asm unk_t OSGetStackPointer()
 { // clang-format off
     nofralloc
 /* 8034524C 00341E2C  7C 23 0B 78 */	mr r3, r1
-/* 80345250 00341E30  4E 80 00 20 */	blr 
+/* 80345250 00341E30  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -348,7 +348,7 @@ asm void OSClearContext(OSContext*)
 /* 8034526C 00341E4C  40 82 00 08 */	bne lbl_80345274
 /* 80345270 00341E50  90 A4 00 D8 */	stw r5, 0xd8(r4)
 lbl_80345274:
-/* 80345274 00341E54  4E 80 00 20 */	blr 
+/* 80345274 00341E54  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -602,7 +602,7 @@ lbl_803455C8:
 /* 803455CC 003421AC  80 01 02 FC */	lwz r0, 0x2fc(r1)
 /* 803455D0 003421B0  38 21 02 F8 */	addi r1, r1, 0x2f8
 /* 803455D4 003421B4  7C 08 03 A6 */	mtlr r0
-/* 803455D8 003421B8  4E 80 00 20 */	blr 
+/* 803455D8 003421B8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -613,7 +613,7 @@ asm unk_t OSSwitchFPUContext()
 /* 803455DC 003421BC  7C A0 00 A6 */	mfmsr r5
 /* 803455E0 003421C0  60 A5 20 00 */	ori r5, r5, 0x2000
 /* 803455E4 003421C4  7C A0 01 24 */	mtmsr r5
-/* 803455E8 003421C8  4C 00 01 2C */	isync 
+/* 803455E8 003421C8  4C 00 01 2C */	isync
 /* 803455EC 003421CC  80 A4 01 9C */	lwz r5, 0x19c(r4)
 /* 803455F0 003421D0  60 A5 20 00 */	ori r5, r5, 0x2000
 /* 803455F4 003421D4  7C BB 03 A6 */	mtspr 0x1b, r5
@@ -644,7 +644,7 @@ lbl_8034561C:
 /* 80345650 00342230  80 A4 00 14 */	lwz r5, 0x14(r4)
 /* 80345654 00342234  80 64 00 0C */	lwz r3, 0xc(r4)
 /* 80345658 00342238  80 84 00 10 */	lwz r4, 0x10(r4)
-/* 8034565C 0034223C  4C 00 00 64 */	rfi 
+/* 8034565C 0034223C  4C 00 00 64 */	rfi
 } // clang-format on
 #pragma pop
 
@@ -673,6 +673,6 @@ asm void __OSContextInit(void)
 /* 80345698 00342278  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8034569C 0034227C  38 21 00 08 */	addi r1, r1, 8
 /* 803456A0 00342280  7C 08 03 A6 */	mtlr r0
-/* 803456A4 00342284  4E 80 00 20 */	blr 
+/* 803456A4 00342284  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop

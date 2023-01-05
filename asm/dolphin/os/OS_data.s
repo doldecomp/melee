@@ -91,19 +91,19 @@ DriveInfo:
 
 .global BootInfo
 BootInfo:
-	.skip 0x4
+    .skip 0x4
 .global BI2DebugFlag
 BI2DebugFlag:
-	.skip 0x4
+    .skip 0x4
 .global BI2DebugFlagHolder
 BI2DebugFlagHolder:
-	.skip 0x4
+    .skip 0x4
 .global AreWeInitialized
 AreWeInitialized:
-	.skip 0x4
+    .skip 0x4
 .global OSExceptionTable
 OSExceptionTable:
-	.skip 0x8
+    .skip 0x8
 .global __OSStartTime
 __OSStartTime:
-	.skip 0x8
+    .skip 0x8
