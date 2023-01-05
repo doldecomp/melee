@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
+#include <melee/it/code_8027CF30.h>
+
 s32 ftDonkey_800DFA98(HSD_GObj* fighter_gobj)
 {
     if (ftWalkCommon_800DFC70(fighter_gobj)) {

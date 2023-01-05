@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/ftbosslib.h>
+
 // 80151428 14E008
 // https://decomp.me/scratch/mNdcr
 // probably isCrazyHandLoaded func

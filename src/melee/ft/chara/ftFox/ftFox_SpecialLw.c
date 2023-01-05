@@ -1,5 +1,9 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/lb/lbunknown_003.h>
+
 // 0x800E83E0
 // https://decomp.me/scratch/wfS8S // Create Reflector Loop GFX
 void ftFox_SpecialLw_CreateLoopGFX(HSD_GObj* fighter_gobj)

@@ -1,8 +1,6 @@
 #ifndef _random_h_
 #define _random_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 
 s32 HSD_Rand(void);

@@ -3,14 +3,13 @@
 
 #include <dolphin/types.h>
 
-#include <sysdolphin/baselib/object.h>
-#include <sysdolphin/baselib/list.h>
-
+#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/list.h>
 #include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/pobj.h>
-/*#include <dobj.h>
-#include <robj.h>*/
+#include <melee/lb/lbcollision.h>
 
 #define HSD_A_J_ROTX 1
 #define HSD_A_J_ROTY 2

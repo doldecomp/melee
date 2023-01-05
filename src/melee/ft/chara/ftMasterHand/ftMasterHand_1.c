@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/ftbosslib.h>
+
 // 8014FC68 0014C848
 void ftMasterhand_OnDeath(HSD_GObj* gobj)
 {

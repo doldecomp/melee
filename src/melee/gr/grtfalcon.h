@@ -1,7 +1,6 @@
 #ifndef _grtfalcon_h_
 #define _grtfalcon_h_
 
-#include <global.h>
 #include <melee/gr/stage.h>
 #include <sysdolphin/baselib/gobj.h>
 

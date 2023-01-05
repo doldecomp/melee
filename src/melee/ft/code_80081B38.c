@@ -1,9 +1,11 @@
 #include <dolphin/types.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftwalljump.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
+#include <MSL/trigf.h>
 
 static f32 const lbl_804D83A8 = 10.0F;
 static f32 const lbl_804D83AC = 0.0F;

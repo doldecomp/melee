@@ -1,8 +1,6 @@
 #ifndef _objalloc_h_
 #define _objalloc_h_
 
-#include <global.h>
-
 #include <dolphin/types.h>
 #include <sysdolphin/baselib/debug.h>
 

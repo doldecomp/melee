@@ -1,10 +1,6 @@
 #ifndef _cobj_h_
 #define _cobj_h_
 
-#include <global.h>
-
-#include <dolphin/types.h>
-
 #include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/wobj.h>
@@ -130,5 +126,10 @@ BOOL HSD_CObjSetCurrent(HSD_Obj*, cobj_UnkCallback1);
 HSD_CObj* HSD_CObjGetCurrent(void);
 void HSD_CObjEndCurrent();
 void func_803695F0(unk_t);
+f32 HSD_CObjGetNear(struct _HSD_CObj*);
+f32 HSD_CObjGetFar(struct _HSD_CObj*);
+void HSD_CObjSetScissorx4();
+void HSD_CObjSetViewportfx4();
+u32 HSD_CObjGetProjectionType(struct _HSD_CObj*);
 
 #endif

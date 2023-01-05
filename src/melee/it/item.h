@@ -1,26 +1,24 @@
 #ifndef _item_h_
 #define _item_h_
 
-#include <dolphin/types.h>
-#include <dolphin/mtx/mtxtypes.h>
-#include <functions.h>
-#include <melee/pl/player.h>
-#include <melee/gr/stage.h>
-#include <melee/ft/fighter.h>
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/controller.h>
 #include <common_structs.h>
-
-#include <melee/it/itkind.h>
+#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/types.h>
+#include <math.h>
+#include <melee/ft/fighter.h>
+#include <melee/gr/stage.h>
 #include <melee/it/itCommonItems.h>
+#include <melee/it/itkind.h>
 #include <melee/it/itPKFlash.h>
 #include <melee/it/itPKThunder.h>
 #include <melee/it/itYoyo.h>
+#include <melee/pl/player.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 // Item State Change Flags //
 
@@ -922,8 +920,8 @@ void func_8026A810(HSD_GObj* item_gobj); // Run Item's OnSpawn Callback //
 void func_8026A848(HSD_GObj* item_gobj,
                    HSD_GObj* fighter_gobj); // Remove Item from Player //
 void func_8026A8EC(HSD_GObj* item_gobj);    // Destroy Item //
-void func_8026AB54(HSD_GObj* item_gobj, s32 pickupGFX,
-                   s32 pickupSFX); // Make Item Held //
+void func_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickupGFX,
+                   u8 pickupSFX); // Make Item Held //
 void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32 arg2); // Drop Item //
 void func_8026AC74(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX,
                    f32 arg8); // This is actually another Item Drop function //
@@ -951,7 +949,7 @@ BOOL func_8026B2B4(HSD_GObj* item_gobj); // Check if item is heavy //
 BOOL func_8026B2D8(HSD_GObj* item_gobj); // Check if item is heavy again? //
 s32 itGetKind(HSD_GObj* item_gobj);      // Get Item ID //
 s32 func_8026B30C(HSD_GObj* item_gobj);  // Return flag from Item Attributes //
-s32 func_8026B320(HSD_GObj* item_gobj);  // Return item hold kind //
+s32 func_8026B320(HSD_GObj* item_gobj);
 f32 func_8026B334(HSD_GObj* item_gobj);  // Return item damage multiplier //
 void func_8026B344(
     HSD_GObj* item_gobj,
@@ -988,7 +986,7 @@ f32 func_8026B684(
     Vec3* pos); // Get facing direction of fp (?) with argument 0 //
 f32 func_8026B6A8(
     Vec3* pos,
-    s32 arg); // Get facing direction of fp (?) with variable argument //
+    HSD_GObj* arg); // Get facing direction of fp (?) with variable argument //
 BOOL func_8026B6C8(HSD_GObj* item_gobj); // Check if item is a stage item? //
 void func_8026B718(HSD_GObj* item_gobj,
                    f32 hitlagFrames);    // Set item's hitlag frames //
@@ -1016,9 +1014,6 @@ f32 func_8026B960(
     HSD_GObj* item_gobj); // Return float result of item kind and state checks -
                           // requires -g compiler flag / Frank modifications to
                           // match //
-void func_8026B9A8(
-    HSD_GObj* item_gobj, s32 arg1,
-    s32 arg2); // Transfer item on character swap - used for Zelda <-> Sheik //
 void func_8026BAE8(HSD_GObj* item_gobj,
                    f32 scale_mul);       // Multiply item's scale //
 void func_8026BB20(HSD_GObj* item_gobj); // Clear JObj flags on item model //
@@ -1117,7 +1112,7 @@ void func_80273B50(HSD_GObj*, Vec3*);
 void func_80274198(HSD_GObj*, s32);
 void func_802741F4(HSD_GObj*, s32);
 void func_8027429C(HSD_GObj*, Vec3*);
-void func_802742F4(HSD_GObj*, s32, s32);
+void func_802742F4(HSD_GObj*, HSD_GObj*, u8);
 void func_80274658(HSD_GObj*, f32);
 void func_80274740(HSD_GObj* item_gobj); /* extern */
 void func_80274A64(HSD_GObj* item_gobj); /* extern */
@@ -1130,7 +1125,6 @@ void func_80275158(HSD_GObj* item_gobj, f32 lifetime); // Set item lifetime //
 void func_80275390(HSD_GObj*);
 void func_802753BC(HSD_GObj*, s16);
 void func_802753DC(HSD_GObj*);
-void func_802742F4(HSD_GObj*, s32, s32);
 void func_80274740(HSD_GObj* item_gobj);            /* extern */
 void func_80274A64(HSD_GObj* item_gobj);            /* extern */
 s32 func_80274C78(HSD_GObj* item_gobj);             /* extern */
@@ -1175,5 +1169,6 @@ void func_802799E4(HSD_GObj* item_gobj); // Advance Item Script //
 void func_80279B88(Item* item_data, s32 arg1, s32 arg2);
 void func_80279BBC(Item* item_data);     /* extern */
 void func_80279BE0(HSD_GObj* item_gobj); /* extern */
+void func_8026ABD8(struct _HSD_GObj*, Vec*, f32);
 
 #endif

@@ -1,5 +1,7 @@
 #include <sysdolphin/baselib/fobj.h>
 
+#include <sysdolphin/baselib/spline.h>
+
 HSD_ObjAllocData fobj_alloc_data;
 
 HSD_ObjAllocData* HSD_FObjGetAllocData(void)

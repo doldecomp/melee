@@ -1,5 +1,9 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 
+#include <melee/ef/efasync.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+
 s32 ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

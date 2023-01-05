@@ -1,6 +1,7 @@
 #include <melee/gr/stage.h>
 
 #include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
 
 extern struct _StageInfo stage_info;
 

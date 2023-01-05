@@ -1,7 +1,6 @@
 #ifndef _mtx_h_
 #define _mtx_h_
 
-#include <global.h>
 #include <sysdolphin/baselib/objalloc.h>
 #include <math.h>
 
@@ -33,5 +32,8 @@ inline f32 fabsf_bitwise(f32 v)
     *(u32*) &v &= ~0x80000000;
     return v;
 }
+
+void func_80379310();
+void HSD_MtxSRT();
 
 #endif

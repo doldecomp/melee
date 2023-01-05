@@ -1,5 +1,12 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/lb/lbunknown_003.h>
+#include <MSL/trigf.h>
+
 #define HALF_PI 1.5707963705062866f
 #define DEG_TO_RAD 0.017453292f
 

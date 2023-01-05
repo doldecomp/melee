@@ -1,5 +1,10 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
+
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/fighter.h>
+#include <MSL/trigf.h>
 
 #define HALF_PI 1.5707963705062866f
 #define DEG_TO_RAD 0.017453292f

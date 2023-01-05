@@ -1,7 +1,8 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
-#include <sysdolphin/baselib/random.h>
 
 #include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_003.h>
+#include <sysdolphin/baselib/random.h>
 
 extern HSD_GObj* func_802B2560(HSD_GObj*, f32, Vec3*, long, u32);
 

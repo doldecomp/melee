@@ -817,8 +817,8 @@ func_800740E4:
 /* 80074110 00070CF0  38 7F 00 A0 */	addi r3, r31, 0xa0
 /* 80074114 00070CF4  38 BF 00 E8 */	addi r5, r31, 0xe8
 /* 80074118 00070CF8  48 30 DB 01 */	bl hsdInitClassInfo
-/* 8007411C 00070CFC  3C 60 80 02 */	lis r3, func_800226A8@ha
-/* 80074120 00070D00  38 03 26 A8 */	addi r0, r3, func_800226A8@l
+/* 8007411C 00070CFC  3C 60 80 02 */	lis r3, lbRefract_PObjLoad@ha
+/* 80074120 00070D00  38 03 26 A8 */	addi r0, r3, lbRefract_PObjLoad@l
 /* 80074124 00070D04  3C 60 80 07 */	lis r3, lbl_80074048@ha
 /* 80074128 00070D08  90 1F 00 E4 */	stw r0, 0xe4(r31)
 /* 8007412C 00070D0C  38 03 40 48 */	addi r0, r3, lbl_80074048@l
@@ -1029,8 +1029,8 @@ lbl_800743BC:
 /* 800743D8 00070FB8  7C 08 03 A6 */	mtlr r0
 /* 800743DC 00070FBC  4E 80 00 20 */	blr
 
-.global func_800743E0
-func_800743E0:
+.global Fighter_SetupParts
+Fighter_SetupParts:
 /* 800743E0 00070FC0  7C 08 02 A6 */	mflr r0
 /* 800743E4 00070FC4  3C 80 80 3C */	lis r4, lbl_803C08F8@ha
 /* 800743E8 00070FC8  90 01 00 04 */	stw r0, 4(r1)

@@ -1,26 +1,48 @@
 #ifndef _fighter_h_
 #define _fighter_h_
 
-#include <dolphin/types.h>
-#include <dolphin/mtx/mtxtypes.h>
-
-#include <functions.h>
-#include <melee/pl/player.h>
-#include <melee/gr/stage.h>
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/controller.h>
-#include <melee/lb/lbrefract.h>
-#include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
+#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/types.h>
+#include <math.h>
+#include <melee/ft/ftanim.h>
 #include <melee/ft/ftstatevars.h>
+#include <melee/gr/stage.h>
+#include <melee/it/item2.h>
+#include <melee/lb/lbrefract.h>
+#include <melee/pl/player.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
-BOOL func_80081298(HSD_GObj* gobj);
+/// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in
+///       #Fighter_LoadCommonData, probably all pointers
+extern void* lbl_804D64FC;
+
+extern void* lbl_804D6500;
+extern void* lbl_804D6504;
+extern void* lbl_804D6508;
+extern void* lbl_804D650C;
+extern void* lbl_804D6510;
+extern void* lbl_804D6514;
+extern void* lbl_804D6518;
+extern void* lbl_804D651C;
+extern void* lbl_804D6524;
+extern void* lbl_804D6528;
+extern void* lbl_804D6530;
+extern void* lbl_804D6534;
+extern void* lbl_804D6538;
+extern void* lbl_804D653C;
+extern s32** lbl_804D6540;
+extern void* lbl_804D6548;
+extern void* lbl_804D654C;
+extern void* lbl_804D6550;
+/// @}
 
 typedef enum FighterKind {
     FTKIND_MARIO,
@@ -2319,5 +2341,13 @@ inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
 extern unk_t lbl_804D6520;
 extern ftCommonData* p_ftCommonData;
 extern FighterPartsTable** ftPartsTable;
+void Fighter_UnkProcessDeath_80068354(struct _HSD_GObj*);
+u32 Fighter_NewSpawn_80068E40();
+
+void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighter_gobj,
+                                        s32 newAction, s32 flags,
+                                        struct _HSD_GObj* otherObj,
+                                        f32 animStart, f32 animSpeed,
+                                        f32 animBlend);
 
 #endif

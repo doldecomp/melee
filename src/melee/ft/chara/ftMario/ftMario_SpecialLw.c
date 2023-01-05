@@ -1,7 +1,11 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
-#include <sysdolphin/baselib/random.h>
 
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
 #include <melee/it/itkind.h>
+#include <sysdolphin/baselib/random.h>
 
 // 0x800E2050
 // https://decomp.me/scratch/8zo4V

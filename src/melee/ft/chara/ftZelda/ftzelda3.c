@@ -1,5 +1,9 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+
 // 8013A830 - 8013A8AC (0x7C bytes)
 // https://decomp.me/scratch/6v90P
 void ftZelda_8013A830(HSD_GObj* fighter_gobj)

@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/ft_unknown_006.h>
+
 // 80155A58 152638
 // https://decomp.me/scratch/Q3fan
 void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)

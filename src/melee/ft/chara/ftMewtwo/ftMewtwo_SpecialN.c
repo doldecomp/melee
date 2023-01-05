@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
+#include <melee/ef/efsync.h>
+#include <melee/ft/ft_unknown_006.h>
+
 // 0x80146CCC
 // https://decomp.me/scratch/qxdYd
 s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* fighter_gobj, s32* chargeLevel,

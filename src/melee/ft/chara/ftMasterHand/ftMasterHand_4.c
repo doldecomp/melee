@@ -1,5 +1,9 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/cm/camera.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftlib.h>
+
 // 801510B0 14DC90
 // https://decomp.me/scratch/sIqel
 void func_801510B0(HSD_GObj* gobj)
@@ -70,7 +74,7 @@ void lbl_801511FC(HSD_GObj* gobj)
     case 0:
         tmp_gobj = func_8008627C(&fp->xB0_pos, gobj);
         if (tmp_gobj != 0) {
-            func_8002E6FC(func_80086BE0(tmp_gobj));
+            func_8002E6FC((s32) func_80086BE0(tmp_gobj));
         } else {
             func_8002E6FC(0);
         }

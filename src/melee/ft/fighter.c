@@ -1,9 +1,22 @@
 #include <melee/ft/fighter.h>
 
 #include <dolphin/os/os.h>
-#include <melee/ft/code_80081B38.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/efasync.h>
 #include <melee/ft/code_80081938.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdrawcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/it/item.h>
+#include <melee/it/item2.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/lb/lbunknown_002.h>
+#include <MSL/trigf.h>
 
 #define HALF_PI 1.5707963267948966
 
@@ -54,8 +67,6 @@ u32 lbl_804D64F8 = 0;
 #define g_spawnNumCounter lbl_804D64F8
 
 // the following seems to be an array, initialized in reverse in
-// Fighter_LoadCommonData outcommented because they are in variables.h too.
-// uncomment this when moving data from fighter.s here.
 unk_t lbl_804D64FC = NULL;
 unk_t lbl_804D6500 = NULL;
 unk_t lbl_804D6504 = NULL;
@@ -835,7 +846,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
 
     func_80085B10(fp);
     func_80074E58(fp);
-    func_800743E0(fighter_gobj);
+    Fighter_SetupParts(fighter_gobj);
     func_80070308(fighter_gobj);
     func_800C884C(fighter_gobj);
 

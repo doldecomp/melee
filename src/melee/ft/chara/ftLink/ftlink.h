@@ -1,10 +1,9 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTLINK_FTLINK_H
+#define MELEE_FT_CHARA_FTLINK_FTLINK_H
 
 #include <dolphin/types.h>
-
-#include <sysdolphin/baselib/gobj.h>
-
 #include <melee/ft/ftcommon.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef struct _ftLinkAttributes {
     s32 x0;
@@ -28,3 +27,8 @@ typedef struct _ftLinkAttributes {
 
 void ftLink_OnItemDrop(HSD_GObj* fighter_gobj, BOOL arg1);
 void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool);
+void func_800EC06C();
+void func_800ECD04(HSD_GObj*);
+void func_800ECD58(HSD_GObj*);
+
+#endif

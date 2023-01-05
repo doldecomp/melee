@@ -1,6 +1,5 @@
 #include <melee/cm/cmsnap.h>
 #include <dolphin/types.h>
-#include <global.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 
 extern void func_800122C8();

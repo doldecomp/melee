@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+
 // 80136258 00132E38
 // https://decomp.me/scratch/6RQ5w
 void ftMars_OnDeath(HSD_GObj* gobj)
