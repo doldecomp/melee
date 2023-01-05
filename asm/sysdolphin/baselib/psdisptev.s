@@ -80,14 +80,14 @@ psSetupTevCommon:
 /* 803A3A40 003A0620  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 803A3A44 003A0624  38 21 00 08 */	addi r1, r1, 8
 /* 803A3A48 003A0628  7C 08 03 A6 */	mtlr r0
-/* 803A3A4C 003A062C  4E 80 00 20 */	blr 
+/* 803A3A4C 003A062C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/nBWOl // 0 (100%)
 .global psSetupTevInvalidState
 psSetupTevInvalidState:
 /* 803A3A50 003A0630  38 00 FF FF */	li r0, -1
 /* 803A3A54 003A0634  90 0D C2 B0 */	stw r0, lbl_804D7950@sda21(r13)
-/* 803A3A58 003A0638  4E 80 00 20 */	blr 
+/* 803A3A58 003A0638  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/RAhGZ
 .global psSetupTev
@@ -553,11 +553,11 @@ lbl_803A4128:
 /* 803A4128 003A0D08  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 803A412C 003A0D0C  38 21 00 08 */	addi r1, r1, 8
 /* 803A4130 003A0D10  7C 08 03 A6 */	mtlr r0
-/* 803A4134 003A0D14  4E 80 00 20 */	blr 
+/* 803A4134 003A0D14  4E 80 00 20 */	blr
 
 
 .section .sbss
     .balign 8
 .global lbl_804D7950
 lbl_804D7950:
-	.skip 0x8
+    .skip 0x8

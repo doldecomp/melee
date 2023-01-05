@@ -8416,27 +8416,27 @@ struct_803BCA24:
     .balign 8
 
 skipB4_80433710:
-	.skip 0xB4
+    .skip 0xB4
 
 
 skipE0_804337C4:
-	.skip 0xE0
+    .skip 0xE0
 
 
 skipE0_804338A4:
-	.skip 0xE0
+    .skip 0xE0
 
 
 skipE0_80433984:
-	.skip 0xE0
+    .skip 0xE0
 
 
 skipE0_80433A64:
-	.skip 0xE0
+    .skip 0xE0
 
 
 skip1F124_80433B44:
-	.skip 0x1F124
+    .skip 0x1F124
 
 
 .section .sdata
@@ -8581,111 +8581,111 @@ str_0_804D3930:
     .balign 8
 
 skip4_804D63F0:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D63F4:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D63F8:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D63FC:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6400:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6404:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6408:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D640C:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6410:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6414:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6418:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D641C:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6420:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6424:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6428:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D642C:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6430:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6434:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6438:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D643C:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6440:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6444:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6448:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D644C:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6450:
-	.skip 0x4
+    .skip 0x4
 
 skip4_804D6454:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 
 lbl_804D7DD8:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 
 lbl_804D7DDC:
-	.4byte 0x00000000
+    .4byte 0x00000000
 
 lbl_804D7DE0:
-	.4byte 0x42FE0000
+    .4byte 0x42FE0000
 
 lbl_804D7DE4:
-	.4byte 0x3F6147AE
+    .4byte 0x3F6147AE
 
 lbl_804D7DE8:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 
 lbl_804D7DF0:
-	.4byte 0x3E4CCCCD
+    .4byte 0x3E4CCCCD
 
 lbl_804D7DF4:
-	.4byte 0x42800000
+    .4byte 0x42800000
 
 lbl_804D7DF8:
-	.4byte 0xBF800000
+    .4byte 0xBF800000
 
 lbl_804D7DFC:
-	.4byte 0x3FF0A3D7
+    .4byte 0x3FF0A3D7

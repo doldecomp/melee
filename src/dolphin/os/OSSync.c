@@ -11,15 +11,15 @@ asm void __OSSystemCallVector(void)
 { // clang-format off
     nofralloc
 entry __OSSystemCallVectorStart
-	mfspr r9, DBSR
-	ori r10, r9, 8
-	mtspr DBSR, r10
-	isync
-	sync
-	mtspr DBSR, r9
-	rfi
+    mfspr r9, DBSR
+    ori r10, r9, 8
+    mtspr DBSR, r10
+    isync
+    sync
+    mtspr DBSR, r9
+    rfi
 entry __OSSystemCallVectorEnd
-	nop
+    nop
 } //clang-format on
 
 extern void ICInvalidateRange(void*, u32);

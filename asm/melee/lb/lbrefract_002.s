@@ -22,7 +22,7 @@ struct_803BB0B0:
     .balign 8
 
 skip40_804336D0:
-	.skip 0x40
+    .skip 0x40
 
 .section .text
 
@@ -154,9 +154,9 @@ lbl_80022458:
     .balign 8
 
 lbl_804D7DA8:
-	.float 0.5
+    .float 0.5
 lbl_804D7DAC:
-	.float -0.5
+    .float -0.5
 
 .section .text
 

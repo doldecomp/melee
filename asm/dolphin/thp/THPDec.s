@@ -189,4 +189,4 @@ lbl_8032F824:
 /* 8032F8C4 0032C4A4  90 CD BA C0 */	stw r6, Yachuff@sda21(r13)
 /* 8032F8C8 0032C4A8  90 8D BA E0 */	stw r4, Uachuff@sda21(r13)
 /* 8032F8CC 0032C4AC  90 0D BB 00 */	stw r0, Vachuff@sda21(r13)
-/* 8032F8D0 0032C4B0  4E 80 00 20 */	blr 
+/* 8032F8D0 0032C4B0  4E 80 00 20 */	blr

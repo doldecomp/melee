@@ -1957,80 +1957,80 @@ lbl_803EF108:
     .balign 8
 .global lbl_804A08C8
 lbl_804A08C8:
-	.skip 0x10
+    .skip 0x10
 
 
 .section .sbss
     .balign 8
 .global lbl_804D6C40
 lbl_804D6C40:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6C44
 lbl_804D6C44:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6C48
 lbl_804D6C48:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6C4C
 lbl_804D6C4C:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DC0C0
 lbl_804DC0C0:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DC0C4
 lbl_804DC0C4:
-	.4byte 0x3F666666
+    .4byte 0x3F666666
 .global lbl_804DC0C8
 lbl_804DC0C8:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804DC0D0
 lbl_804DC0D0:
-	.4byte 0x41900000
+    .4byte 0x41900000
 .global lbl_804DC0D4
 lbl_804DC0D4:
-	.4byte 0x43AF0000
+    .4byte 0x43AF0000
 .global lbl_804DC0D8
 lbl_804DC0D8:
-	.4byte 0x41200000
+    .4byte 0x41200000
 .global lbl_804DC0DC
 lbl_804DC0DC:
-	.4byte 0x3D0F5C29
+    .4byte 0x3D0F5C29
 .global lbl_804DC0E0
 lbl_804DC0E0:
-	.4byte 0x3D23D70A
+    .4byte 0x3D23D70A
 .global lbl_804DC0E4
 lbl_804DC0E4:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DC0E8
 lbl_804DC0E8:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000
 .global lbl_804DC0F0
 lbl_804DC0F0:
-	.4byte 0x3CA3D70A
+    .4byte 0x3CA3D70A
 .global lbl_804DC0F4
 lbl_804DC0F4:
-	.4byte 0x3F7AE148
+    .4byte 0x3F7AE148
 .global lbl_804DC0F8
 lbl_804DC0F8:
-	.4byte 0xC1180000
+    .4byte 0xC1180000
 .global lbl_804DC0FC
 lbl_804DC0FC:
-	.4byte 0x4111999A
+    .4byte 0x4111999A
 .global lbl_804DC100
 lbl_804DC100:
-	.4byte 0x41880000
+    .4byte 0x41880000
 .global lbl_804DC104
 lbl_804DC104:
-	.4byte 0x43B65777
+    .4byte 0x43B65777
 .global lbl_804DC108
 lbl_804DC108:
-	.4byte 0x42198D06
+    .4byte 0x42198D06
 .global lbl_804DC10C
 lbl_804DC10C:
-	.4byte 0x3D5566CF
+    .4byte 0x3D5566CF

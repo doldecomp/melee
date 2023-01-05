@@ -59,7 +59,7 @@ lbl_80358FD8:
 /* 8035905C 00355C3C  90 04 00 3C */	stw r0, 0x3c(r4)
 /* 80359060 00355C40  38 84 00 40 */	addi r4, r4, 0x40
 /* 80359064 00355C44  42 00 FF 74 */	bdnz lbl_80358FD8
-/* 80359068 00355C48  4E 80 00 20 */	blr 
+/* 80359068 00355C48  4E 80 00 20 */	blr
 
 .global __AXGetAuxAInput
 __AXGetAuxAInput:
@@ -72,11 +72,11 @@ __AXGetAuxAInput:
 /* 80359084 00355C64  1C 85 07 80 */	mulli r4, r5, 0x780
 /* 80359088 00355C68  7C 00 22 14 */	add r0, r0, r4
 /* 8035908C 00355C6C  90 03 00 00 */	stw r0, 0(r3)
-/* 80359090 00355C70  4E 80 00 20 */	blr 
+/* 80359090 00355C70  4E 80 00 20 */	blr
 lbl_80359094:
 /* 80359094 00355C74  38 00 00 00 */	li r0, 0
 /* 80359098 00355C78  90 03 00 00 */	stw r0, 0(r3)
-/* 8035909C 00355C7C  4E 80 00 20 */	blr 
+/* 8035909C 00355C7C  4E 80 00 20 */	blr
 
 .global __AXGetAuxAOutput
 __AXGetAuxAOutput:
@@ -86,7 +86,7 @@ __AXGetAuxAOutput:
 /* 803590AC 00355C8C  1C 85 07 80 */	mulli r4, r5, 0x780
 /* 803590B0 00355C90  7C 00 22 14 */	add r0, r0, r4
 /* 803590B4 00355C94  90 03 00 00 */	stw r0, 0(r3)
-/* 803590B8 00355C98  4E 80 00 20 */	blr 
+/* 803590B8 00355C98  4E 80 00 20 */	blr
 
 .global __AXGetAuxBInput
 __AXGetAuxBInput:
@@ -99,11 +99,11 @@ __AXGetAuxBInput:
 /* 803590D4 00355CB4  1C 85 07 80 */	mulli r4, r5, 0x780
 /* 803590D8 00355CB8  7C 00 22 14 */	add r0, r0, r4
 /* 803590DC 00355CBC  90 03 00 00 */	stw r0, 0(r3)
-/* 803590E0 00355CC0  4E 80 00 20 */	blr 
+/* 803590E0 00355CC0  4E 80 00 20 */	blr
 lbl_803590E4:
 /* 803590E4 00355CC4  38 00 00 00 */	li r0, 0
 /* 803590E8 00355CC8  90 03 00 00 */	stw r0, 0(r3)
-/* 803590EC 00355CCC  4E 80 00 20 */	blr 
+/* 803590EC 00355CCC  4E 80 00 20 */	blr
 
 .global __AXGetAuxBOutput
 __AXGetAuxBOutput:
@@ -113,7 +113,7 @@ __AXGetAuxBOutput:
 /* 803590FC 00355CDC  1C 85 07 80 */	mulli r4, r5, 0x780
 /* 80359100 00355CE0  7C 00 22 14 */	add r0, r0, r4
 /* 80359104 00355CE4  90 03 00 00 */	stw r0, 0(r3)
-/* 80359108 00355CE8  4E 80 00 20 */	blr 
+/* 80359108 00355CE8  4E 80 00 20 */	blr
 
 .global __AXProcessAux
 __AXProcessAux:
@@ -153,7 +153,7 @@ __AXProcessAux:
 /* 80359190 00355D70  38 61 00 08 */	addi r3, r1, 8
 /* 80359194 00355D74  80 8D BE 60 */	lwz r4, __AXContextAuxA@sda21(r13)
 /* 80359198 00355D78  7D 88 03 A6 */	mtlr r12
-/* 8035919C 00355D7C  4E 80 00 21 */	blrl 
+/* 8035919C 00355D7C  4E 80 00 21 */	blrl
 /* 803591A0 00355D80  80 61 00 08 */	lwz r3, 8(r1)
 /* 803591A4 00355D84  38 80 07 80 */	li r4, 0x780
 /* 803591A8 00355D88  4B FE B6 CD */	bl DCFlushRangeNoSync
@@ -180,7 +180,7 @@ lbl_803591AC:
 /* 803591F8 00355DD8  38 61 00 08 */	addi r3, r1, 8
 /* 803591FC 00355DDC  80 8D BE 64 */	lwz r4, __AXContextAuxB@sda21(r13)
 /* 80359200 00355DE0  7D 88 03 A6 */	mtlr r12
-/* 80359204 00355DE4  4E 80 00 21 */	blrl 
+/* 80359204 00355DE4  4E 80 00 21 */	blrl
 /* 80359208 00355DE8  80 61 00 08 */	lwz r3, 8(r1)
 /* 8035920C 00355DEC  38 80 07 80 */	li r4, 0x780
 /* 80359210 00355DF0  4B FE B6 65 */	bl DCFlushRangeNoSync
@@ -218,19 +218,19 @@ lbl_80359214:
 /* 8035928C 00355E6C  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 80359290 00355E70  38 21 00 20 */	addi r1, r1, 0x20
 /* 80359294 00355E74  7C 08 03 A6 */	mtlr r0
-/* 80359298 00355E78  4E 80 00 20 */	blr 
+/* 80359298 00355E78  4E 80 00 20 */	blr
 
 .global AXRegisterAuxACallback
 AXRegisterAuxACallback:
 /* 8035929C 00355E7C  90 6D BE 58 */	stw r3, __AXCallbackAuxA@sda21(r13)
 /* 803592A0 00355E80  90 8D BE 60 */	stw r4, __AXContextAuxA@sda21(r13)
-/* 803592A4 00355E84  4E 80 00 20 */	blr 
+/* 803592A4 00355E84  4E 80 00 20 */	blr
 
 .global AXRegisterAuxBCallback
 AXRegisterAuxBCallback:
 /* 803592A8 00355E88  90 6D BE 5C */	stw r3, __AXCallbackAuxB@sda21(r13)
 /* 803592AC 00355E8C  90 8D BE 64 */	stw r4, __AXContextAuxB@sda21(r13)
-/* 803592B0 00355E90  4E 80 00 20 */	blr 
+/* 803592B0 00355E90  4E 80 00 20 */	blr
 
 
 .section .bss
@@ -239,46 +239,46 @@ AXRegisterAuxBCallback:
     .balign 32
 .global __AXBufferAuxA
 __AXBufferAuxA:
-	.skip 0x1680
+    .skip 0x1680
 
     .balign 32
 .global __AXBufferAuxB
 __AXBufferAuxB:
-	.skip 0x1680
+    .skip 0x1680
 
 
 .section .sbss
     .balign 8
 .global __AXCallbackAuxA
 __AXCallbackAuxA:
-	.skip 0x4
+    .skip 0x4
 .global __AXCallbackAuxB
 __AXCallbackAuxB:
-	.skip 0x4
+    .skip 0x4
 .global __AXContextAuxA
 __AXContextAuxA:
-	.skip 0x4
+    .skip 0x4
 .global __AXContextAuxB
 __AXContextAuxB:
-	.skip 0x4
+    .skip 0x4
 .global __AXAuxADspWrite
 __AXAuxADspWrite:
-	.skip 0x4
+    .skip 0x4
 .global __AXAuxADspRead
 __AXAuxADspRead:
-	.skip 0x4
+    .skip 0x4
 .global __AXAuxBDspWrite
 __AXAuxBDspWrite:
-	.skip 0x4
+    .skip 0x4
 .global __AXAuxBDspRead
 __AXAuxBDspRead:
-	.skip 0x4
+    .skip 0x4
 .global __AXAuxDspWritePosition
 __AXAuxDspWritePosition:
-	.skip 0x4
+    .skip 0x4
 .global __AXAuxDspReadPosition
 __AXAuxDspReadPosition:
-	.skip 0x4
+    .skip 0x4
 .global __AXAuxCpuReadWritePosition
 __AXAuxCpuReadWritePosition:
-	.skip 0x4
+    .skip 0x4

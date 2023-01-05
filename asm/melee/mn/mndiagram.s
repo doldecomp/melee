@@ -5864,34 +5864,34 @@ lbl_803EE774:
     .balign 8
 .global lbl_804A0750
 lbl_804A0750:
-	.skip 0x1C
+    .skip 0x1C
 .global lbl_804A076C
 lbl_804A076C:
-	.skip 0x78
+    .skip 0x78
 .global lbl_804A07E4
 lbl_804A07E4:
-	.skip 0x10
+    .skip 0x10
 .global lbl_804A07F4
 lbl_804A07F4:
-	.skip 0x10
+    .skip 0x10
 .global lbl_804A0804
 lbl_804A0804:
-	.skip 0x10
+    .skip 0x10
 .global lbl_804A0814
 lbl_804A0814:
-	.skip 0x10
+    .skip 0x10
 .global lbl_804A0824
 lbl_804A0824:
-	.skip 0x10
+    .skip 0x10
 .global lbl_804A0834
 lbl_804A0834:
-	.skip 0x10
+    .skip 0x10
 .global lbl_804A0844
 lbl_804A0844:
-	.skip 0x10
+    .skip 0x10
 .global lbl_804A0854
 lbl_804A0854:
-	.skip 0x14
+    .skip 0x14
 
 
 .section .sdata
@@ -5916,64 +5916,64 @@ lbl_804D4FB0:
     .balign 8
 .global lbl_804D6C10
 lbl_804D6C10:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DBF70
 lbl_804DBF70:
-	.4byte 0x403E7A92
-	.4byte 0xA3055326
+    .4byte 0x403E7A92
+    .4byte 0xA3055326
 .global lbl_804DBF78
 lbl_804DBF78:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000
 .global lbl_804DBF80
 lbl_804DBF80:
-	.4byte 0x42C80000
+    .4byte 0x42C80000
 .global lbl_804DBF84
 lbl_804DBF84:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DBF88
 lbl_804DBF88:
-	.4byte 0x3D5566CF
+    .4byte 0x3D5566CF
 .global lbl_804DBF8C
 lbl_804DBF8C:
-	.4byte 0x3D0F5C29
+    .4byte 0x3D0F5C29
 .global lbl_804DBF90
 lbl_804DBF90:
-	.4byte 0x3D4CCCCD
+    .4byte 0x3D4CCCCD
 .global lbl_804DBF94
 lbl_804DBF94:
-	.4byte 0xBF800000
+    .4byte 0xBF800000
 .global lbl_804DBF98
 lbl_804DBF98:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804DBFA0
 lbl_804DBFA0:
-	.4byte 0x3ECCCCCD
+    .4byte 0x3ECCCCCD
 .global lbl_804DBFA4
 lbl_804DBFA4:
-	.4byte 0x3CA3D70A
+    .4byte 0x3CA3D70A
 .global lbl_804DBFA8
 lbl_804DBFA8:
-	.4byte 0x3CF5C28F
+    .4byte 0x3CF5C28F
 .global lbl_804DBFAC
 lbl_804DBFAC:
-	.4byte 0xBF000000
+    .4byte 0xBF000000
 .global lbl_804DBFB0
 lbl_804DBFB0:
-	.4byte 0xBFA66666
+    .4byte 0xBFA66666
 .global lbl_804DBFB4
 lbl_804DBFB4:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DBFB8
 lbl_804DBFB8:
-	.4byte 0x40120000
-	.4byte 0x00000000
+    .4byte 0x40120000
+    .4byte 0x00000000
 .global lbl_804DBFC0
 lbl_804DBFC0:
-	.4byte 0x3FB99999
-	.4byte 0xA0000000
+    .4byte 0x3FB99999
+    .4byte 0xA0000000

@@ -80,7 +80,7 @@ lbl_8039F888:
 /* 8039F88C 0039C46C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8039F890 0039C470  38 21 00 18 */	addi r1, r1, 0x18
 /* 8039F894 0039C474  7C 08 03 A6 */	mtlr r0
-/* 8039F898 0039C478  4E 80 00 20 */	blr 
+/* 8039F898 0039C478  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/nLP0P
 .global calcTornadoLastPos
@@ -187,7 +187,7 @@ lbl_8039F9F4:
 /* 8039FA18 0039C5F8  CB 01 00 38 */	lfd f24, 0x38(r1)
 /* 8039FA1C 0039C5FC  38 21 00 78 */	addi r1, r1, 0x78
 /* 8039FA20 0039C600  7C 08 03 A6 */	mtlr r0
-/* 8039FA24 0039C604  4E 80 00 20 */	blr 
+/* 8039FA24 0039C604  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/pTZzV
 .global getColorPrimEnv
@@ -273,11 +273,11 @@ lbl_8039FACC:
 /* 8039FB58 0039C738  7C 03 02 14 */	add r0, r3, r0
 /* 8039FB5C 0039C73C  7C 00 86 70 */	srawi r0, r0, 0x10
 /* 8039FB60 0039C740  98 05 00 03 */	stb r0, 3(r5)
-/* 8039FB64 0039C744  4E 80 00 20 */	blr 
+/* 8039FB64 0039C744  4E 80 00 20 */	blr
 lbl_8039FB68:
 /* 8039FB68 0039C748  80 03 00 16 */	lwz r0, 0x16(r3)
 /* 8039FB6C 0039C74C  90 05 00 00 */	stw r0, 0(r5)
-/* 8039FB70 0039C750  4E 80 00 20 */	blr 
+/* 8039FB70 0039C750  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/KZaFJ
 .global getColorMatAmb
@@ -339,7 +339,7 @@ lbl_8039FBF0:
 /* 8039FC44 0039C824  7C 03 02 14 */	add r0, r3, r0
 /* 8039FC48 0039C828  7C 00 86 70 */	srawi r0, r0, 0x10
 /* 8039FC4C 0039C82C  98 05 00 03 */	stb r0, 3(r5)
-/* 8039FC50 0039C830  4E 80 00 20 */	blr 
+/* 8039FC50 0039C830  4E 80 00 20 */	blr
 lbl_8039FC54:
 /* 8039FC54 0039C834  88 03 00 7E */	lbz r0, 0x7e(r3)
 /* 8039FC58 0039C838  98 05 00 02 */	stb r0, 2(r5)
@@ -347,7 +347,7 @@ lbl_8039FC54:
 /* 8039FC60 0039C840  98 05 00 00 */	stb r0, 0(r5)
 /* 8039FC64 0039C844  88 03 00 7F */	lbz r0, 0x7f(r3)
 /* 8039FC68 0039C848  98 05 00 03 */	stb r0, 3(r5)
-/* 8039FC6C 0039C84C  4E 80 00 20 */	blr 
+/* 8039FC6C 0039C84C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/bEJl0
 .global func_8039FC70
@@ -675,7 +675,7 @@ lbl_803A0074:
 /* 803A0078 0039CC58  80 01 00 B4 */	lwz r0, 0xb4(r1)
 /* 803A007C 0039CC5C  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 803A0080 0039CC60  7C 08 03 A6 */	mtlr r0
-/* 803A0084 0039CC64  4E 80 00 20 */	blr 
+/* 803A0084 0039CC64  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/KnkRs
 .global psDispParticles
@@ -4586,7 +4586,7 @@ lbl_803A38C4:
 /* 803A3910 003A04F0  C9 C1 09 10 */	lfd f14, 0x910(r1)
 /* 803A3914 003A04F4  38 21 09 A0 */	addi r1, r1, 0x9a0
 /* 803A3918 003A04F8  7C 08 03 A6 */	mtlr r0
-/* 803A391C 003A04FC  4E 80 00 20 */	blr 
+/* 803A391C 003A04FC  4E 80 00 20 */	blr
 
 
 .section .rodata
@@ -4641,7 +4641,7 @@ lbl_8040C360:
     .balign 8
 .global lbl_804D0FC0
 lbl_804D0FC0:
-	.skip 0xF0
+    .skip 0xF0
 
 
 .section .sdata
@@ -4660,110 +4660,110 @@ lbl_804D6384:
     .balign 8
 .global lbl_804D7908
 lbl_804D7908:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D790C
 lbl_804D790C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7910
 lbl_804D7910:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7914
 lbl_804D7914:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7918
 lbl_804D7918:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D791C
 lbl_804D791C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7920
 lbl_804D7920:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7924
 lbl_804D7924:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7928
 lbl_804D7928:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D792C
 lbl_804D792C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7930
 lbl_804D7930:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7934
 lbl_804D7934:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7938
 lbl_804D7938:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D793C
 lbl_804D793C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7940
 lbl_804D7940:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7944
 lbl_804D7944:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7948
 lbl_804D7948:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DEA10
 lbl_804DEA10:
-	.4byte NULL
+    .4byte NULL
 .global lbl_804DEA14
 lbl_804DEA14:
-	.4byte 0x34000000
+    .4byte 0x34000000
 .global lbl_804DEA18
 lbl_804DEA18:
-	.float 2.0
+    .float 2.0
 .global lbl_804DEA1C
 lbl_804DEA1C:
-	.float 1.0
+    .float 1.0
 .global lbl_804DEA20
 lbl_804DEA20:
-	.float 1.75
-	.4byte NULL
+    .float 1.75
+    .4byte NULL
 .global lbl_804DEA28
 lbl_804DEA28:
-	.float 2.125
-	.4byte NULL
+    .float 2.125
+    .4byte NULL
 .global lbl_804DEA30
 lbl_804DEA30:
-	.4byte 0x40454000
-	.4byte NULL
+    .4byte 0x40454000
+    .4byte NULL
 .global lbl_804DEA38
 lbl_804DEA38:
-	.float 255.0
+    .float 255.0
 .global lbl_804DEA3C
 lbl_804DEA3C:
-	.float 6.0
+    .float 6.0
 .global lbl_804DEA40
 lbl_804DEA40:
-	.float -1.0
+    .float -1.0
 .global lbl_804DEA44
 lbl_804DEA44:
-	.4byte 0x00800000
+    .4byte 0x00800000
 .global lbl_804DEA48
 lbl_804DEA48:
-	.4byte 0x3FC90FDB
+    .4byte 0x3FC90FDB
 .global lbl_804DEA4C
 lbl_804DEA4C:
-	.4byte 0xBFC90FDB
+    .4byte 0xBFC90FDB
 .global lbl_804DEA50
 lbl_804DEA50:
-	.4byte 0x3F847AE1
-	.4byte 0x47AE147B
+    .4byte 0x3F847AE1
+    .4byte 0x47AE147B
 .global lbl_804DEA58
 lbl_804DEA58:
-	.float 0.5
-	.4byte NULL
+    .float 0.5
+    .4byte NULL
 .global lbl_804DEA60
 lbl_804DEA60:
-	.float 176.0
-	.4byte NULL
+    .float 176.0
+    .4byte NULL

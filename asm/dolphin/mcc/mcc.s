@@ -35,12 +35,12 @@ lbl_8032C79C:
 /* 8032C7B0 00329390  90 05 00 10 */	stw r0, 0x10(r5)
 lbl_8032C7B4:
 /* 8032C7B4 00329394  28 04 01 00 */	cmplwi r4, 0x100
-/* 8032C7B8 00329398  4C 82 00 20 */	bnelr 
+/* 8032C7B8 00329398  4C 82 00 20 */	bnelr
 /* 8032C7BC 0032939C  1C 03 00 18 */	mulli r0, r3, 0x18
 /* 8032C7C0 003293A0  7C 66 02 14 */	add r3, r6, r0
 /* 8032C7C4 003293A4  38 00 00 01 */	li r0, 1
 /* 8032C7C8 003293A8  90 03 00 10 */	stw r0, 0x10(r3)
-/* 8032C7CC 003293AC  4E 80 00 20 */	blr 
+/* 8032C7CC 003293AC  4E 80 00 20 */	blr
 
 .global MCCStreamOpen
 MCCStreamOpen:
@@ -74,7 +74,7 @@ lbl_8032C828:
 /* 8032C838 00329418  7C 08 03 A6 */	mtlr r0
 /* 8032C83C 0032941C  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8032C840 00329420  38 21 00 20 */	addi r1, r1, 0x20
-/* 8032C844 00329424  4E 80 00 20 */	blr 
+/* 8032C844 00329424  4E 80 00 20 */	blr
 
 .global MCCStreamClose
 MCCStreamClose:
@@ -91,7 +91,7 @@ MCCStreamClose:
 /* 8032C870 00329450  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032C874 00329454  38 21 00 08 */	addi r1, r1, 8
 /* 8032C878 00329458  7C 08 03 A6 */	mtlr r0
-/* 8032C87C 0032945C  4E 80 00 20 */	blr 
+/* 8032C87C 0032945C  4E 80 00 20 */	blr
 
 .global MCCStreamWrite
 MCCStreamWrite:
@@ -229,7 +229,7 @@ lbl_8032CA4C:
 /* 8032CA50 00329630  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8032CA54 00329634  38 21 00 30 */	addi r1, r1, 0x30
 /* 8032CA58 00329638  7C 08 03 A6 */	mtlr r0
-/* 8032CA5C 0032963C  4E 80 00 20 */	blr 
+/* 8032CA5C 0032963C  4E 80 00 20 */	blr
 
 .global LoadChannelInfo
 LoadChannelInfo:
@@ -310,7 +310,7 @@ lbl_8032CB5C:
 /* 8032CB6C 0032974C  7C 08 03 A6 */	mtlr r0
 /* 8032CB70 00329750  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 8032CB74 00329754  38 21 00 28 */	addi r1, r1, 0x28
-/* 8032CB78 00329758  4E 80 00 20 */	blr 
+/* 8032CB78 00329758  4E 80 00 20 */	blr
 
 .global FlushChannelInfo
 FlushChannelInfo:
@@ -384,12 +384,12 @@ lbl_8032CC64:
 /* 8032CC70 00329850  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8032CC74 00329854  7C 08 03 A6 */	mtlr r0
 /* 8032CC78 00329858  38 21 00 20 */	addi r1, r1, 0x20
-/* 8032CC7C 0032985C  4E 80 00 20 */	blr 
+/* 8032CC7C 0032985C  4E 80 00 20 */	blr
 
 .global SetChannelInfoDirty
 SetChannelInfoDirty:
 /* 8032CC80 00329860  90 6D A4 D0 */	stw r3, gIsChannelinfoDirty@sda21(r13)
-/* 8032CC84 00329864  4E 80 00 20 */	blr 
+/* 8032CC84 00329864  4E 80 00 20 */	blr
 
 .global MakeMemoryMap
 MakeMemoryMap:
@@ -445,7 +445,7 @@ lbl_8032CD18:
 /* 8032CD30 00329910  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8032CD34 00329914  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032CD38 00329918  7C 08 03 A6 */	mtlr r0
-/* 8032CD3C 0032991C  4E 80 00 20 */	blr 
+/* 8032CD3C 0032991C  4E 80 00 20 */	blr
 
 .global SearchFreeBlocks
 SearchFreeBlocks:
@@ -523,7 +523,7 @@ lbl_8032CE28:
 /* 8032CE30 00329A10  83 C1 00 20 */	lwz r30, 0x20(r1)
 /* 8032CE34 00329A14  7C 08 03 A6 */	mtlr r0
 /* 8032CE38 00329A18  38 21 00 28 */	addi r1, r1, 0x28
-/* 8032CE3C 00329A1C  4E 80 00 20 */	blr 
+/* 8032CE3C 00329A1C  4E 80 00 20 */	blr
 
 .global NotifyCompulsorily
 NotifyCompulsorily:
@@ -599,7 +599,7 @@ lbl_8032CF2C:
 /* 8032CF38 00329B18  7C 08 03 A6 */	mtlr r0
 /* 8032CF3C 00329B1C  83 A1 00 2C */	lwz r29, 0x2c(r1)
 /* 8032CF40 00329B20  38 21 00 38 */	addi r1, r1, 0x38
-/* 8032CF44 00329B24  4E 80 00 20 */	blr 
+/* 8032CF44 00329B24  4E 80 00 20 */	blr
 
 .global WaitAMinute
 WaitAMinute:
@@ -644,7 +644,7 @@ lbl_8032CFC4:
 /* 8032CFC8 00329BA8  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8032CFCC 00329BAC  38 21 00 30 */	addi r1, r1, 0x30
 /* 8032CFD0 00329BB0  7C 08 03 A6 */	mtlr r0
-/* 8032CFD4 00329BB4  4E 80 00 20 */	blr 
+/* 8032CFD4 00329BB4  4E 80 00 20 */	blr
 
 .global MailboxCheck
 MailboxCheck:
@@ -730,7 +730,7 @@ lbl_8032D0D4:
 /* 8032D0E8 00329CC8  81 8D BA 10 */	lwz r12, gCallbackSysEvent@sda21(r13)
 /* 8032D0EC 00329CCC  38 7D 00 00 */	addi r3, r29, 0
 /* 8032D0F0 00329CD0  7D 88 03 A6 */	mtlr r12
-/* 8032D0F4 00329CD4  4E 80 00 21 */	blrl 
+/* 8032D0F4 00329CD4  4E 80 00 21 */	blrl
 /* 8032D0F8 00329CD8  48 00 01 54 */	b lbl_8032D24C
 lbl_8032D0FC:
 /* 8032D0FC 00329CDC  7F E3 FB 78 */	mr r3, r31
@@ -774,7 +774,7 @@ lbl_8032D154:
 /* 8032D180 00329D60  38 7E 00 00 */	addi r3, r30, 0
 /* 8032D184 00329D64  38 BD 00 00 */	addi r5, r29, 0
 /* 8032D188 00329D68  38 80 01 00 */	li r4, 0x100
-/* 8032D18C 00329D6C  4E 80 00 21 */	blrl 
+/* 8032D18C 00329D6C  4E 80 00 21 */	blrl
 /* 8032D190 00329D70  48 00 00 BC */	b lbl_8032D24C
 lbl_8032D194:
 /* 8032D194 00329D74  2C 1D 00 10 */	cmpwi r29, 0x10
@@ -814,7 +814,7 @@ lbl_8032D1F0:
 /* 8032D20C 00329DEC  38 7E 00 00 */	addi r3, r30, 0
 /* 8032D210 00329DF0  38 9D 00 00 */	addi r4, r29, 0
 /* 8032D214 00329DF4  38 A0 00 00 */	li r5, 0
-/* 8032D218 00329DF8  4E 80 00 21 */	blrl 
+/* 8032D218 00329DF8  4E 80 00 21 */	blrl
 /* 8032D21C 00329DFC  48 00 00 30 */	b lbl_8032D24C
 lbl_8032D220:
 /* 8032D220 00329E00  57 60 06 3E */	clrlwi r0, r27, 0x18
@@ -827,13 +827,13 @@ lbl_8032D220:
 /* 8032D23C 00329E1C  38 7E 00 00 */	addi r3, r30, 0
 /* 8032D240 00329E20  38 80 00 00 */	li r4, 0
 /* 8032D244 00329E24  38 A0 00 00 */	li r5, 0
-/* 8032D248 00329E28  4E 80 00 21 */	blrl 
+/* 8032D248 00329E28  4E 80 00 21 */	blrl
 lbl_8032D24C:
 /* 8032D24C 00329E2C  BB 41 00 20 */	lmw r26, 0x20(r1)
 /* 8032D250 00329E30  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8032D254 00329E34  38 21 00 38 */	addi r1, r1, 0x38
 /* 8032D258 00329E38  7C 08 03 A6 */	mtlr r0
-/* 8032D25C 00329E3C  4E 80 00 20 */	blr 
+/* 8032D25C 00329E3C  4E 80 00 20 */	blr
 
 .global MCCExiCallback
 MCCExiCallback:
@@ -844,7 +844,7 @@ MCCExiCallback:
 /* 8032D270 00329E50  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032D274 00329E54  38 21 00 08 */	addi r1, r1, 8
 /* 8032D278 00329E58  7C 08 03 A6 */	mtlr r0
-/* 8032D27C 00329E5C  4E 80 00 20 */	blr 
+/* 8032D27C 00329E5C  4E 80 00 20 */	blr
 
 .global MCCTxCallback
 MCCTxCallback:
@@ -854,7 +854,7 @@ MCCTxCallback:
 /* 8032D28C 00329E6C  A0 0D BA 28 */	lhz r0, gAsyncResourceStatus@sda21(r13)
 /* 8032D290 00329E70  60 00 20 00 */	ori r0, r0, 0x2000
 /* 8032D294 00329E74  B0 0D BA 28 */	sth r0, gAsyncResourceStatus@sda21(r13)
-/* 8032D298 00329E78  4E 80 00 20 */	blr 
+/* 8032D298 00329E78  4E 80 00 20 */	blr
 
 .global MCCRxCallback
 MCCRxCallback:
@@ -864,7 +864,7 @@ MCCRxCallback:
 /* 8032D2A8 00329E88  A0 0D BA 28 */	lhz r0, gAsyncResourceStatus@sda21(r13)
 /* 8032D2AC 00329E8C  60 00 20 00 */	ori r0, r0, 0x2000
 /* 8032D2B0 00329E90  B0 0D BA 28 */	sth r0, gAsyncResourceStatus@sda21(r13)
-/* 8032D2B4 00329E94  4E 80 00 20 */	blr 
+/* 8032D2B4 00329E94  4E 80 00 20 */	blr
 
 .global mccInitializeCheck
 mccInitializeCheck:
@@ -1073,7 +1073,7 @@ lbl_8032D5A0:
 /* 8032D5AC 0032A18C  81 8D BA 10 */	lwz r12, gCallbackSysEvent@sda21(r13)
 /* 8032D5B0 0032A190  38 60 00 02 */	li r3, 2
 /* 8032D5B4 0032A194  7D 88 03 A6 */	mtlr r12
-/* 8032D5B8 0032A198  4E 80 00 21 */	blrl 
+/* 8032D5B8 0032A198  4E 80 00 21 */	blrl
 lbl_8032D5BC:
 /* 8032D5BC 0032A19C  38 00 00 01 */	li r0, 1
 /* 8032D5C0 0032A1A0  90 0D BA 1C */	stw r0, gMccInitialized@sda21(r13)
@@ -1087,7 +1087,7 @@ lbl_8032D5D4:
 /* 8032D5D8 0032A1B8  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8032D5DC 0032A1BC  38 21 00 40 */	addi r1, r1, 0x40
 /* 8032D5E0 0032A1C0  7C 08 03 A6 */	mtlr r0
-/* 8032D5E4 0032A1C4  4E 80 00 20 */	blr 
+/* 8032D5E4 0032A1C4  4E 80 00 20 */	blr
 
 .global MCCInit
 MCCInit:
@@ -1271,7 +1271,7 @@ lbl_8032D878:
 /* 8032D87C 0032A45C  80 01 00 64 */	lwz r0, 0x64(r1)
 /* 8032D880 0032A460  38 21 00 60 */	addi r1, r1, 0x60
 /* 8032D884 0032A464  7C 08 03 A6 */	mtlr r0
-/* 8032D888 0032A468  4E 80 00 20 */	blr 
+/* 8032D888 0032A468  4E 80 00 20 */	blr
 
 .global MCCExit
 MCCExit:
@@ -1334,7 +1334,7 @@ lbl_8032D930:
 /* 8032D944 0032A524  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8032D948 0032A528  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032D94C 0032A52C  7C 08 03 A6 */	mtlr r0
-/* 8032D950 0032A530  4E 80 00 20 */	blr 
+/* 8032D950 0032A530  4E 80 00 20 */	blr
 
 .global MCCEnumDevices
 MCCEnumDevices:
@@ -1363,7 +1363,7 @@ lbl_8032D99C:
 /* 8032D99C 0032A57C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032D9A0 0032A580  38 21 00 08 */	addi r1, r1, 8
 /* 8032D9A4 0032A584  7C 08 03 A6 */	mtlr r0
-/* 8032D9A8 0032A588  4E 80 00 20 */	blr 
+/* 8032D9A8 0032A588  4E 80 00 20 */	blr
 
 .global MCCGetFreeBlocks
 MCCGetFreeBlocks:
@@ -1407,12 +1407,12 @@ lbl_8032DA28:
 /* 8032DA2C 0032A60C  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 8032DA30 0032A610  38 21 00 20 */	addi r1, r1, 0x20
 /* 8032DA34 0032A614  7C 08 03 A6 */	mtlr r0
-/* 8032DA38 0032A618  4E 80 00 20 */	blr 
+/* 8032DA38 0032A618  4E 80 00 20 */	blr
 
 .global MCCGetLastError
 MCCGetLastError:
 /* 8032DA3C 0032A61C  88 6D BA 18 */	lbz r3, gLastError@sda21(r13)
-/* 8032DA40 0032A620  4E 80 00 20 */	blr 
+/* 8032DA40 0032A620  4E 80 00 20 */	blr
 
 .global MCCGetChannelInfo
 MCCGetChannelInfo:
@@ -1474,7 +1474,7 @@ lbl_8032DAF8:
 /* 8032DB04 0032A6E4  7C 08 03 A6 */	mtlr r0
 /* 8032DB08 0032A6E8  83 A1 00 24 */	lwz r29, 0x24(r1)
 /* 8032DB0C 0032A6EC  38 21 00 30 */	addi r1, r1, 0x30
-/* 8032DB10 0032A6F0  4E 80 00 20 */	blr 
+/* 8032DB10 0032A6F0  4E 80 00 20 */	blr
 
 .global MCCGetConnectionStatus
 MCCGetConnectionStatus:
@@ -1532,7 +1532,7 @@ lbl_8032DBC0:
 /* 8032DBC4 0032A7A4  83 E1 00 24 */	lwz r31, 0x24(r1)
 /* 8032DBC8 0032A7A8  38 21 00 28 */	addi r1, r1, 0x28
 /* 8032DBCC 0032A7AC  7C 08 03 A6 */	mtlr r0
-/* 8032DBD0 0032A7B0  4E 80 00 20 */	blr 
+/* 8032DBD0 0032A7B0  4E 80 00 20 */	blr
 
 .global MCCNotify
 MCCNotify:
@@ -1598,7 +1598,7 @@ lbl_8032DC98:
 /* 8032DCA0 0032A880  83 C1 00 20 */	lwz r30, 0x20(r1)
 /* 8032DCA4 0032A884  7C 08 03 A6 */	mtlr r0
 /* 8032DCA8 0032A888  38 21 00 28 */	addi r1, r1, 0x28
-/* 8032DCAC 0032A88C  4E 80 00 20 */	blr 
+/* 8032DCAC 0032A88C  4E 80 00 20 */	blr
 
 .global MCCSetChannelEventMask
 MCCSetChannelEventMask:
@@ -1680,7 +1680,7 @@ lbl_8032DD9C:
 /* 8032DDB0 0032A990  83 A1 00 24 */	lwz r29, 0x24(r1)
 /* 8032DDB4 0032A994  83 81 00 20 */	lwz r28, 0x20(r1)
 /* 8032DDB8 0032A998  38 21 00 30 */	addi r1, r1, 0x30
-/* 8032DDBC 0032A99C  4E 80 00 20 */	blr 
+/* 8032DDBC 0032A99C  4E 80 00 20 */	blr
 
 .global MCCOpen
 MCCOpen:
@@ -1822,7 +1822,7 @@ lbl_8032DF74:
 /* 8032DFA4 0032AB84  38 7E 00 00 */	addi r3, r30, 0
 /* 8032DFA8 0032AB88  38 80 00 01 */	li r4, 1
 /* 8032DFAC 0032AB8C  38 A0 00 00 */	li r5, 0
-/* 8032DFB0 0032AB90  4E 80 00 21 */	blrl 
+/* 8032DFB0 0032AB90  4E 80 00 21 */	blrl
 lbl_8032DFB4:
 /* 8032DFB4 0032AB94  38 00 00 00 */	li r0, 0
 /* 8032DFB8 0032AB98  98 0D BA 18 */	stb r0, gLastError@sda21(r13)
@@ -1835,7 +1835,7 @@ lbl_8032DFC8:
 /* 8032DFCC 0032ABAC  80 01 00 5C */	lwz r0, 0x5c(r1)
 /* 8032DFD0 0032ABB0  38 21 00 58 */	addi r1, r1, 0x58
 /* 8032DFD4 0032ABB4  7C 08 03 A6 */	mtlr r0
-/* 8032DFD8 0032ABB8  4E 80 00 20 */	blr 
+/* 8032DFD8 0032ABB8  4E 80 00 20 */	blr
 
 .global MCCClose
 MCCClose:
@@ -1957,7 +1957,7 @@ lbl_8032E134:
 /* 8032E174 0032AD54  38 7F 00 00 */	addi r3, r31, 0
 /* 8032E178 0032AD58  38 80 00 02 */	li r4, 2
 /* 8032E17C 0032AD5C  38 A0 00 00 */	li r5, 0
-/* 8032E180 0032AD60  4E 80 00 21 */	blrl 
+/* 8032E180 0032AD60  4E 80 00 21 */	blrl
 lbl_8032E184:
 /* 8032E184 0032AD64  38 00 00 00 */	li r0, 0
 /* 8032E188 0032AD68  98 0D BA 18 */	stb r0, gLastError@sda21(r13)
@@ -1973,7 +1973,7 @@ lbl_8032E198:
 /* 8032E1A8 0032AD88  83 A1 00 2C */	lwz r29, 0x2c(r1)
 /* 8032E1AC 0032AD8C  83 81 00 28 */	lwz r28, 0x28(r1)
 /* 8032E1B0 0032AD90  38 21 00 38 */	addi r1, r1, 0x38
-/* 8032E1B4 0032AD94  4E 80 00 20 */	blr 
+/* 8032E1B4 0032AD94  4E 80 00 20 */	blr
 
 .global MCCRead
 MCCRead:
@@ -2115,7 +2115,7 @@ lbl_8032E358:
 /* 8032E390 0032AF70  7C 60 03 78 */	or r0, r3, r0
 /* 8032E394 0032AF74  B0 0D BA 28 */	sth r0, gAsyncResourceStatus@sda21(r13)
 /* 8032E398 0032AF78  A0 0D BA 28 */	lhz r0, gAsyncResourceStatus@sda21(r13)
-/* 8032E39C 0032AF7C  60 00 00 00 */	nop 
+/* 8032E39C 0032AF7C  60 00 00 00 */	nop
 /* 8032E3A0 0032AF80  B0 0D BA 28 */	sth r0, gAsyncResourceStatus@sda21(r13)
 /* 8032E3A4 0032AF84  7C 1E E8 AE */	lbzx r0, r30, r29
 /* 8032E3A8 0032AF88  54 00 68 24 */	slwi r0, r0, 0xd
@@ -2205,7 +2205,7 @@ lbl_8032E4A8:
 /* 8032E4CC 0032B0AC  38 79 00 00 */	addi r3, r25, 0
 /* 8032E4D0 0032B0B0  38 80 00 40 */	li r4, 0x40
 /* 8032E4D4 0032B0B4  38 A0 00 00 */	li r5, 0
-/* 8032E4D8 0032B0B8  4E 80 00 21 */	blrl 
+/* 8032E4D8 0032B0B8  4E 80 00 21 */	blrl
 lbl_8032E4DC:
 /* 8032E4DC 0032B0BC  38 00 00 00 */	li r0, 0
 /* 8032E4E0 0032B0C0  98 0D BA 18 */	stb r0, gLastError@sda21(r13)
@@ -2218,7 +2218,7 @@ lbl_8032E4F0:
 /* 8032E4F4 0032B0D4  80 01 00 74 */	lwz r0, 0x74(r1)
 /* 8032E4F8 0032B0D8  38 21 00 70 */	addi r1, r1, 0x70
 /* 8032E4FC 0032B0DC  7C 08 03 A6 */	mtlr r0
-/* 8032E500 0032B0E0  4E 80 00 20 */	blr 
+/* 8032E500 0032B0E0  4E 80 00 20 */	blr
 
 .global MCCWrite
 MCCWrite:
@@ -2457,7 +2457,7 @@ lbl_8032E80C:
 /* 8032E830 0032B410  38 79 00 00 */	addi r3, r25, 0
 /* 8032E834 0032B414  38 80 00 80 */	li r4, 0x80
 /* 8032E838 0032B418  38 A0 00 00 */	li r5, 0
-/* 8032E83C 0032B41C  4E 80 00 21 */	blrl 
+/* 8032E83C 0032B41C  4E 80 00 21 */	blrl
 lbl_8032E840:
 /* 8032E840 0032B420  38 00 00 00 */	li r0, 0
 /* 8032E844 0032B424  98 0D BA 18 */	stb r0, gLastError@sda21(r13)
@@ -2470,7 +2470,7 @@ lbl_8032E854:
 /* 8032E858 0032B438  80 01 00 74 */	lwz r0, 0x74(r1)
 /* 8032E85C 0032B43C  38 21 00 70 */	addi r1, r1, 0x70
 /* 8032E860 0032B440  7C 08 03 A6 */	mtlr r0
-/* 8032E864 0032B444  4E 80 00 20 */	blr 
+/* 8032E864 0032B444  4E 80 00 20 */	blr
 
 .global MCCCheckAsyncDone
 MCCCheckAsyncDone:
@@ -2561,7 +2561,7 @@ lbl_8032E970:
 /* 8032E994 0032B574  38 7E 00 00 */	addi r3, r30, 0
 /* 8032E998 0032B578  38 80 00 40 */	li r4, 0x40
 /* 8032E99C 0032B57C  38 A0 00 00 */	li r5, 0
-/* 8032E9A0 0032B580  4E 80 00 21 */	blrl 
+/* 8032E9A0 0032B580  4E 80 00 21 */	blrl
 /* 8032E9A4 0032B584  48 00 00 C8 */	b lbl_8032EA6C
 lbl_8032E9A8:
 /* 8032E9A8 0032B588  1F 9E 00 18 */	mulli r28, r30, 0x18
@@ -2619,7 +2619,7 @@ lbl_8032EA38:
 /* 8032EA5C 0032B63C  38 7E 00 00 */	addi r3, r30, 0
 /* 8032EA60 0032B640  38 80 00 80 */	li r4, 0x80
 /* 8032EA64 0032B644  38 A0 00 00 */	li r5, 0
-/* 8032EA68 0032B648  4E 80 00 21 */	blrl 
+/* 8032EA68 0032B648  4E 80 00 21 */	blrl
 lbl_8032EA6C:
 /* 8032EA6C 0032B64C  38 60 00 01 */	li r3, 1
 lbl_8032EA70:
@@ -2627,7 +2627,7 @@ lbl_8032EA70:
 /* 8032EA74 0032B654  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8032EA78 0032B658  38 21 00 40 */	addi r1, r1, 0x40
 /* 8032EA7C 0032B65C  7C 08 03 A6 */	mtlr r0
-/* 8032EA80 0032B660  4E 80 00 20 */	blr 
+/* 8032EA80 0032B660  4E 80 00 20 */	blr
 
 
 .section .data
@@ -2668,22 +2668,22 @@ gIsChannelinfoDirty:
     .balign 8
 .global gCallbackSysEvent
 gCallbackSysEvent:
-	.skip 0x4
+    .skip 0x4
 .global gOtherSideInitDone
 gOtherSideInitDone:
-	.skip 0x4
+    .skip 0x4
 .global gLastError
 gLastError:
-	.skip 0x4
+    .skip 0x4
 .global gMccInitialized
 gMccInitialized:
-	.skip 0x4
+    .skip 0x4
 .global gMccSession
 gMccSession:
-	.skip 0x4
+    .skip 0x4
 .global gPingFlag
 gPingFlag:
-	.skip 0x4
+    .skip 0x4
 .global gAsyncResourceStatus
 gAsyncResourceStatus:
-	.skip 0x4
+    .skip 0x4

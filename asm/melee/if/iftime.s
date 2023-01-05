@@ -1022,7 +1022,7 @@ lbl_803F94E8:
     .balign 8
 .global lbl_804A1078
 lbl_804A1078:
-	.skip 0x50
+    .skip 0x50
 
 
 .section .sdata
@@ -1033,7 +1033,7 @@ lbl_804D5788:
     .balign 4
 .global lbl_804D5790
 lbl_804D5790:
-	.4byte NULL
+    .4byte NULL
 .global lbl_804D5794
 lbl_804D5794:
     .asciz "jobj.h"
@@ -1048,9 +1048,9 @@ lbl_804D579C:
     .balign 8
 .global lbl_804DDA38
 lbl_804DDA38:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DDA40
 lbl_804DDA40:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000

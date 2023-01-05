@@ -40,7 +40,7 @@ asm void func_80081938(HSD_GObj* fighter_gobj)
 /* 80081998 0007E578  80 05 19 44 */	lwz r0, 0x1944(r5)
 /* 8008199C 0007E57C  90 05 19 38 */	stw r0, 0x1938(r5)
 /* 800819A0 0007E580  38 21 00 78 */	addi r1, r1, 0x78
-/* 800819A4 0007E584  4E 80 00 20 */	blr 
+/* 800819A4 0007E584  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -69,7 +69,7 @@ asm void func_800819A8(HSD_GObj* fighter_gobj)
 /* 800819F0 0007E5D0  EC 01 00 2A */	fadds f0, f1, f0
 /* 800819F4 0007E5D4  D0 05 19 38 */	stfs f0, 0x1938(r5)
 /* 800819F8 0007E5D8  38 21 00 78 */	addi r1, r1, 0x78
-/* 800819FC 0007E5DC  4E 80 00 20 */	blr 
+/* 800819FC 0007E5DC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -161,6 +161,6 @@ lbl_80081B24:
 /* 80081B28 0007E708  80 01 00 B4 */	lwz r0, 0xb4(r1)
 /* 80081B2C 0007E70C  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 80081B30 0007E710  7C 08 03 A6 */	mtlr r0
-/* 80081B34 0007E714  4E 80 00 20 */	blr 
+/* 80081B34 0007E714  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop

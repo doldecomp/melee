@@ -33,22 +33,22 @@ report_messages:
     .balign 4
 .global jtbl_804022D4
 jtbl_804022D4:
-	.4byte lbl_80345A3C
-	.4byte lbl_80345A3C
-	.4byte lbl_80345994
-	.4byte lbl_803459AC
-	.4byte lbl_80345A3C
-	.4byte lbl_803459C0
-	.4byte lbl_803459D8
-	.4byte lbl_80345A3C
-	.4byte lbl_80345A3C
-	.4byte lbl_80345A3C
-	.4byte lbl_80345A3C
-	.4byte lbl_80345A3C
-	.4byte lbl_80345A3C
-	.4byte lbl_80345A3C
-	.4byte lbl_80345A3C
-	.4byte lbl_803459F0
+    .4byte lbl_80345A3C
+    .4byte lbl_80345A3C
+    .4byte lbl_80345994
+    .4byte lbl_803459AC
+    .4byte lbl_80345A3C
+    .4byte lbl_803459C0
+    .4byte lbl_803459D8
+    .4byte lbl_80345A3C
+    .4byte lbl_80345A3C
+    .4byte lbl_80345A3C
+    .4byte lbl_80345A3C
+    .4byte lbl_80345A3C
+    .4byte lbl_80345A3C
+    .4byte lbl_80345A3C
+    .4byte lbl_80345A3C
+    .4byte lbl_803459F0
 
 .section .sdata
     .balign 8

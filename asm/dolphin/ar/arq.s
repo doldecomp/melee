@@ -74,11 +74,11 @@ lbl_80351FCC:
 /* 80351FCC 0034EBAC  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80351FD0 0034EBB0  38 21 00 08 */	addi r1, r1, 8
 /* 80351FD4 0034EBB4  7C 08 03 A6 */	mtlr r0
-/* 80351FD8 0034EBB8  4E 80 00 20 */	blr 
+/* 80351FD8 0034EBB8  4E 80 00 20 */	blr
 
 .global __ARQCallbackHack
 __ARQCallbackHack:
-/* 80351FDC 0034EBBC  4E 80 00 20 */	blr 
+/* 80351FDC 0034EBBC  4E 80 00 20 */	blr
 
 .global __ARQInterruptServiceRoutine
 __ARQInterruptServiceRoutine:
@@ -90,7 +90,7 @@ __ARQInterruptServiceRoutine:
 /* 80351FF4 0034EBD4  41 82 00 20 */	beq lbl_80352014
 /* 80351FF8 0034EBD8  80 6D BE 38 */	lwz r3, __ARQRequestPendingHi@sda21(r13)
 /* 80351FFC 0034EBDC  7D 88 03 A6 */	mtlr r12
-/* 80352000 0034EBE0  4E 80 00 21 */	blrl 
+/* 80352000 0034EBE0  4E 80 00 21 */	blrl
 /* 80352004 0034EBE4  38 00 00 00 */	li r0, 0
 /* 80352008 0034EBE8  90 0D BE 38 */	stw r0, __ARQRequestPendingHi@sda21(r13)
 /* 8035200C 0034EBEC  90 0D BE 40 */	stw r0, __ARQCallbackHi@sda21(r13)
@@ -101,7 +101,7 @@ lbl_80352014:
 /* 8035201C 0034EBFC  41 82 00 1C */	beq lbl_80352038
 /* 80352020 0034EC00  80 6D BE 3C */	lwz r3, __ARQRequestPendingLo@sda21(r13)
 /* 80352024 0034EC04  7D 88 03 A6 */	mtlr r12
-/* 80352028 0034EC08  4E 80 00 21 */	blrl 
+/* 80352028 0034EC08  4E 80 00 21 */	blrl
 /* 8035202C 0034EC0C  38 00 00 00 */	li r0, 0
 /* 80352030 0034EC10  90 0D BE 3C */	stw r0, __ARQRequestPendingLo@sda21(r13)
 /* 80352034 0034EC14  90 0D BE 44 */	stw r0, __ARQCallbackLo@sda21(r13)
@@ -138,7 +138,7 @@ lbl_8035209C:
 /* 8035209C 0034EC7C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 803520A0 0034EC80  38 21 00 08 */	addi r1, r1, 8
 /* 803520A4 0034EC84  7C 08 03 A6 */	mtlr r0
-/* 803520A8 0034EC88  4E 80 00 20 */	blr 
+/* 803520A8 0034EC88  4E 80 00 20 */	blr
 
 .global ARQInit
 ARQInit:
@@ -168,7 +168,7 @@ lbl_80352100:
 /* 80352104 0034ECE4  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 80352108 0034ECE8  38 21 00 10 */	addi r1, r1, 0x10
 /* 8035210C 0034ECEC  7C 08 03 A6 */	mtlr r0
-/* 80352110 0034ECF0  4E 80 00 20 */	blr 
+/* 80352110 0034ECF0  4E 80 00 20 */	blr
 
 .global ARQPostRequest
 ARQPostRequest:
@@ -271,38 +271,38 @@ lbl_8035224C:
 /* 80352260 0034EE40  7C 08 03 A6 */	mtlr r0
 /* 80352264 0034EE44  83 A1 00 2C */	lwz r29, 0x2c(r1)
 /* 80352268 0034EE48  38 21 00 38 */	addi r1, r1, 0x38
-/* 8035226C 0034EE4C  4E 80 00 20 */	blr 
+/* 8035226C 0034EE4C  4E 80 00 20 */	blr
 
 
 .section .sbss
     .balign 8
 .global __ARQRequestQueueHi
 __ARQRequestQueueHi:
-	.skip 0x4
+    .skip 0x4
 .global __ARQRequestTailHi
 __ARQRequestTailHi:
-	.skip 0x4
+    .skip 0x4
 .global __ARQRequestQueueLo
 __ARQRequestQueueLo:
-	.skip 0x4
+    .skip 0x4
 .global __ARQRequestTailLo
 __ARQRequestTailLo:
-	.skip 0x4
+    .skip 0x4
 .global __ARQRequestPendingHi
 __ARQRequestPendingHi:
-	.skip 0x4
+    .skip 0x4
 .global __ARQRequestPendingLo
 __ARQRequestPendingLo:
-	.skip 0x4
+    .skip 0x4
 .global __ARQCallbackHi
 __ARQCallbackHi:
-	.skip 0x4
+    .skip 0x4
 .global __ARQCallbackLo
 __ARQCallbackLo:
-	.skip 0x4
+    .skip 0x4
 .global __ARQChunkSize
 __ARQChunkSize:
-	.skip 0x4
+    .skip 0x4
 .global __ARQ_init_flag
 __ARQ_init_flag:
-	.skip 0x4
+    .skip 0x4

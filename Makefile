@@ -133,7 +133,7 @@ clean:
 
 ALL_DIRS := $(sort $(dir $(O_FILES)))
 ALL_DIRS += $(patsubst $(BUILD_DIR)/%,$(VANILLA_DIR)/%,$(ALL_DIRS)) \
-            $(patsubst $(BUILD_DIR)/%,$(PROFILE_DIR)/%,$(ALL_DIRS))
+			$(patsubst $(BUILD_DIR)/%,$(PROFILE_DIR)/%,$(ALL_DIRS))
 
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)

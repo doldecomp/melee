@@ -309,7 +309,7 @@ lbl_803432F4:
 /* 803432FC 0033FEDC  83 C1 00 08 */	lwz r30, 8(r1)
 /* 80343300 0033FEE0  7C 08 03 A6 */	mtlr r0
 /* 80343304 0033FEE4  38 21 00 10 */	addi r1, r1, 0x10
-/* 80343308 0033FEE8  4E 80 00 20 */	blr 
+/* 80343308 0033FEE8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -507,7 +507,7 @@ lbl_8034355C:
 /* 8034357C 0034015C  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 80343580 00340160  38 21 00 38 */	addi r1, r1, 0x38
 /* 80343584 00340164  7C 08 03 A6 */	mtlr r0
-/* 80343588 00340168  4E 80 00 20 */	blr 
+/* 80343588 00340168  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -523,7 +523,7 @@ asm unk_t __OSDBIntegrator()
 /* 803435A0 00340180  7C 68 03 A6 */	mtlr r3
 /* 803435A4 00340184  38 60 00 30 */	li r3, 0x30
 /* 803435A8 00340188  7C 60 01 24 */	mtmsr r3
-/* 803435AC 0034018C  4E 80 00 20 */	blr 
+/* 803435AC 0034018C  4E 80 00 20 */	blr
 } // clang-format on
 // pragma pop
 
@@ -545,7 +545,7 @@ asm unk_t __OSSetExceptionHandler()
 /* 803435C0 003401A0  7C A3 02 14 */	add r5, r3, r0
 /* 803435C4 003401A4  80 65 00 00 */	lwz r3, 0(r5)
 /* 803435C8 003401A8  90 85 00 00 */	stw r4, 0(r5)
-/* 803435CC 003401AC  4E 80 00 20 */	blr 
+/* 803435CC 003401AC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -557,7 +557,7 @@ asm unk_t __OSGetExceptionHandler()
 /* 803435D4 003401B4  80 6D BC A8 */	lwz r3, OSExceptionTable(r13)
 /* 803435D8 003401B8  54 00 10 3A */	slwi r0, r0, 2
 /* 803435DC 003401BC  7C 63 00 2E */	lwzx r3, r3, r0
-/* 803435E0 003401C0  4E 80 00 20 */	blr 
+/* 803435E0 003401C0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -594,7 +594,7 @@ asm unk_t OSExceptionVector()
 asm unk_t __DBVECTOR()
 { // clang-format off
     nofralloc
-/* 8034363C 0034021C  60 00 00 00 */	nop 
+/* 8034363C 0034021C  60 00 00 00 */	nop
 /* 80343640 00340220  7C 60 00 A6 */	mfmsr r3
 /* 80343644 00340224  60 63 00 30 */	ori r3, r3, 0x30
 /* 80343648 00340228  7C 7B 03 A6 */	mtspr 0x1b, r3
@@ -612,12 +612,12 @@ asm unk_t __OSEVSetNumber()
 /* 8034365C 0034023C  3C A0 80 34 */	lis r5, OSDefaultExceptionHandler@ha
 /* 80343660 00340240  38 A5 36 80 */	addi r5, r5, OSDefaultExceptionHandler@l
 /* 80343664 00340244  7C BA 03 A6 */	mtspr 0x1a, r5
-/* 80343668 00340248  4C 00 00 64 */	rfi 
+/* 80343668 00340248  4C 00 00 64 */	rfi
 lbl_8034366C:
 /* 8034366C 0034024C  54 65 15 BA */	rlwinm r5, r3, 2, 0x16, 0x1d
 /* 80343670 00340250  80 A5 30 00 */	lwz r5, 0x3000(r5)
 /* 80343674 00340254  7C BA 03 A6 */	mtspr 0x1a, r5
-/* 80343678 00340258  4C 00 00 64 */	rfi 
+/* 80343678 00340258  4C 00 00 64 */	rfi
 } // clang-format on
 #pragma pop
 
@@ -625,7 +625,7 @@ lbl_8034366C:
 asm unk_t __OSEVEnd()
 { // clang-format off
     nofralloc
-/* 8034367C 0034025C  60 00 00 00 */	nop 
+/* 8034367C 0034025C  60 00 00 00 */	nop
 } // clang-format on
 #pragma pop
 
@@ -678,7 +678,7 @@ asm void __OSPSInit(void)
 /* 803436FC 003402DC  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80343700 003402E0  38 21 00 08 */	addi r1, r1, 8
 /* 80343704 003402E4  7C 08 03 A6 */	mtlr r0
-/* 80343708 003402E8  4E 80 00 20 */	blr 
+/* 80343708 003402E8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 

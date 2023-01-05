@@ -3855,7 +3855,7 @@ lbl_804D3A24:
     .balign 8
 .global lbl_804D8298
 lbl_804D8298:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804D829C
 lbl_804D829C:
-	.4byte 0x00000000
+    .4byte 0x00000000

@@ -94,7 +94,7 @@ asm unk_t GXGetTexBufferSize()
 /* 8033E7A4 0033B384  54 A0 10 3A */	slwi r0, r5, 2
 /* 8033E7A8 0033B388  7C 08 00 2E */	lwzx r0, r8, r0
 /* 8033E7AC 0033B38C  7C 09 03 A6 */	mtctr r0
-/* 8033E7B0 0033B390  4E 80 04 20 */	bctr 
+/* 8033E7B0 0033B390  4E 80 04 20 */	bctr
 entry lbl_8033E7B4
 /* 8033E7B4 0033B394  38 00 00 03 */	li r0, 3
 /* 8033E7B8 0033B398  39 00 00 03 */	li r8, 3
@@ -187,7 +187,7 @@ lbl_8033E8D8:
 /* 8033E8D8 0033B4B8  7F E3 FB 78 */	mr r3, r31
 /* 8033E8DC 0033B4BC  83 E1 00 24 */	lwz r31, 0x24(r1)
 /* 8033E8E0 0033B4C0  38 21 00 28 */	addi r1, r1, 0x28
-/* 8033E8E4 0033B4C4  4E 80 00 20 */	blr 
+/* 8033E8E4 0033B4C4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -203,7 +203,7 @@ asm unk_t __GetImageTileCount()
 /* 8033E8F8 0033B4D8  54 60 10 3A */	slwi r0, r3, 2
 /* 8033E8FC 0033B4DC  7C 09 00 2E */	lwzx r0, r9, r0
 /* 8033E900 0033B4E0  7C 09 03 A6 */	mtctr r0
-/* 8033E904 0033B4E4  4E 80 04 20 */	bctr 
+/* 8033E904 0033B4E4  4E 80 04 20 */	bctr
 entry lbl_8033E908
 /* 8033E908 0033B4E8  39 60 00 03 */	li r11, 3
 /* 8033E90C 0033B4EC  39 80 00 03 */	li r12, 3
@@ -255,7 +255,7 @@ lbl_8033E9A4:
 /* 8033E9A4 0033B584  38 00 00 01 */	li r0, 1
 lbl_8033E9A8:
 /* 8033E9A8 0033B588  90 08 00 00 */	stw r0, 0(r8)
-/* 8033E9AC 0033B58C  4E 80 00 20 */	blr 
+/* 8033E9AC 0033B58C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -375,7 +375,7 @@ lbl_8033EAD8:
 /* 8033EB48 0033B728  54 E0 10 3A */	slwi r0, r7, 2
 /* 8033EB4C 0033B72C  7C 05 00 2E */	lwzx r0, r5, r0
 /* 8033EB50 0033B730  7C 09 03 A6 */	mtctr r0
-/* 8033EB54 0033B734  4E 80 04 20 */	bctr 
+/* 8033EB54 0033B734  4E 80 04 20 */	bctr
 entry lbl_8033EB58
 /* 8033EB58 0033B738  38 00 00 01 */	li r0, 1
 /* 8033EB5C 0033B73C  98 1F 00 1E */	stb r0, 0x1e(r31)
@@ -433,7 +433,7 @@ lbl_8033EBCC:
 /* 8033EC14 0033B7F4  BB 01 00 40 */	lmw r24, 0x40(r1)
 /* 8033EC18 0033B7F8  38 21 00 60 */	addi r1, r1, 0x60
 /* 8033EC1C 0033B7FC  7C 08 03 A6 */	mtlr r0
-/* 8033EC20 0033B800  4E 80 00 20 */	blr 
+/* 8033EC20 0033B800  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -459,7 +459,7 @@ asm unk_t GXInitTexObjCI()
 /* 8033EC5C 0033B83C  83 C1 00 28 */	lwz r30, 0x28(r1)
 /* 8033EC60 0033B840  38 21 00 30 */	addi r1, r1, 0x30
 /* 8033EC64 0033B844  7C 08 03 A6 */	mtlr r0
-/* 8033EC68 0033B848  4E 80 00 20 */	blr 
+/* 8033EC68 0033B848  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -578,7 +578,7 @@ lbl_8033EDC4:
 /* 8033EDF0 0033B9D0  38 21 00 38 */	addi r1, r1, 0x38
 /* 8033EDF4 0033B9D4  50 04 44 2E */	rlwimi r4, r0, 8, 0x10, 0x17
 /* 8033EDF8 0033B9D8  90 83 00 04 */	stw r4, 4(r3)
-/* 8033EDFC 0033B9DC  4E 80 00 20 */	blr 
+/* 8033EDFC 0033B9DC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -674,7 +674,7 @@ asm unk_t GXLoadTexObjPreLoaded()
 /* 8033EF3C 0033BB1C  80 7C 00 18 */	lwz r3, 0x18(r28)
 /* 8033EF40 0033BB20  81 84 04 14 */	lwz r12, 0x414(r4)
 /* 8033EF44 0033BB24  7D 88 03 A6 */	mtlr r12
-/* 8033EF48 0033BB28  4E 80 00 21 */	blrl 
+/* 8033EF48 0033BB28  4E 80 00 21 */	blrl
 /* 8033EF4C 0033BB2C  38 8D A5 50 */	addi r4, r13, GXTexTlutIds
 /* 8033EF50 0033BB30  80 A3 00 04 */	lwz r5, 4(r3)
 /* 8033EF54 0033BB34  7C 04 E8 AE */	lbzx r0, r4, r29
@@ -708,7 +708,7 @@ lbl_8033EF70:
 /* 8033EFC0 0033BBA0  83 81 00 18 */	lwz r28, 0x18(r1)
 /* 8033EFC4 0033BBA4  38 21 00 28 */	addi r1, r1, 0x28
 /* 8033EFC8 0033BBA8  7C 08 03 A6 */	mtlr r0
-/* 8033EFCC 0033BBAC  4E 80 00 20 */	blr 
+/* 8033EFCC 0033BBAC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -739,7 +739,7 @@ asm unk_t GXInitTlutObj()
 /* 8033F05C 0033BC3C  64 00 64 00 */	oris r0, r0, 0x6400
 /* 8033F060 0033BC40  90 03 00 04 */	stw r0, 4(r3)
 /* 8033F064 0033BC44  B0 C3 00 08 */	sth r6, 8(r3)
-/* 8033F068 0033BC48  4E 80 00 20 */	blr 
+/* 8033F068 0033BC48  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -758,7 +758,7 @@ asm unk_t GXLoadTlut()
 /* 8033F088 0033BC68  80 AD A5 08 */	lwz r5, __GXContexts(r13)
 /* 8033F08C 0033BC6C  81 85 04 14 */	lwz r12, 0x414(r5)
 /* 8033F090 0033BC70  7D 88 03 A6 */	mtlr r12
-/* 8033F094 0033BC74  4E 80 00 21 */	blrl 
+/* 8033F094 0033BC74  4E 80 00 21 */	blrl
 /* 8033F098 0033BC78  7C 7F 1B 78 */	mr r31, r3
 /* 8033F09C 0033BC7C  48 00 0D 05 */	bl __GXFlushTextureState
 /* 8033F0A0 0033BC80  38 80 00 61 */	li r4, 0x61
@@ -786,7 +786,7 @@ asm unk_t GXLoadTlut()
 /* 8033F0F8 0033BCD8  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8033F0FC 0033BCDC  7C 08 03 A6 */	mtlr r0
 /* 8033F100 0033BCE0  38 21 00 20 */	addi r1, r1, 0x20
-/* 8033F104 0033BCE4  4E 80 00 20 */	blr 
+/* 8033F104 0033BCE4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -877,7 +877,7 @@ lbl_8033F1D4:
 /* 8033F218 0033BDF8  90 A3 00 04 */	stw r5, 4(r3)
 /* 8033F21C 0033BDFC  98 83 00 0C */	stb r4, 0xc(r3)
 /* 8033F220 0033BE00  98 03 00 0D */	stb r0, 0xd(r3)
-/* 8033F224 0033BE04  4E 80 00 20 */	blr 
+/* 8033F224 0033BE04  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -970,7 +970,7 @@ asm unk_t __SetSURegs()
 /* 8033F39C 0033BF7C  80 04 00 D8 */	lwz r0, 0xd8(r4)
 /* 8033F3A0 0033BF80  90 06 80 00 */	stw r0, -0x8000(r6)
 /* 8033F3A4 0033BF84  B0 65 00 02 */	sth r3, 2(r5)
-/* 8033F3A8 0033BF88  4E 80 00 20 */	blr 
+/* 8033F3A8 0033BF88  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -1084,7 +1084,7 @@ lbl_8033F504:
 /* 8033F508 0033C0E8  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8033F50C 0033C0EC  38 21 00 28 */	addi r1, r1, 0x28
 /* 8033F510 0033C0F0  7C 08 03 A6 */	mtlr r0
-/* 8033F514 0033C0F4  4E 80 00 20 */	blr 
+/* 8033F514 0033C0F4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
@@ -1239,6 +1239,6 @@ lbl_8033F748:
 /* 8033F748 0033C328  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8033F74C 0033C32C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8033F750 0033C330  38 21 00 18 */	addi r1, r1, 0x18
-/* 8033F754 0033C334  4E 80 00 20 */	blr 
+/* 8033F754 0033C334  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop

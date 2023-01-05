@@ -12,7 +12,7 @@ PSVECAdd:
 /* 80342D68 0033F948  E0 A4 80 08 */	psq_l f5, 8(r4), 1, qr0
 /* 80342D6C 0033F94C  10 E3 28 2A */	ps_add f7, f3, f5
 /* 80342D70 0033F950  F0 E5 80 08 */	psq_st f7, 8(r5), 1, qr0
-/* 80342D74 0033F954  4E 80 00 20 */	blr 
+/* 80342D74 0033F954  4E 80 00 20 */	blr
 
 .global PSVECSubtract
 PSVECSubtract:
@@ -24,7 +24,7 @@ PSVECSubtract:
 /* 80342D8C 0033F96C  E0 A4 80 08 */	psq_l f5, 8(r4), 1, qr0
 /* 80342D90 0033F970  10 E3 28 28 */	ps_sub f7, f3, f5
 /* 80342D94 0033F974  F0 E5 80 08 */	psq_st f7, 8(r5), 1, qr0
-/* 80342D98 0033F978  4E 80 00 20 */	blr 
+/* 80342D98 0033F978  4E 80 00 20 */	blr
 
 .global PSVECScale
 PSVECScale:
@@ -34,7 +34,7 @@ PSVECScale:
 /* 80342DA8 0033F988  F0 04 00 00 */	psq_st f0, 0(r4), 0, qr0
 /* 80342DAC 0033F98C  10 02 00 58 */	ps_muls0 f0, f2, f1
 /* 80342DB0 0033F990  F0 04 80 08 */	psq_st f0, 8(r4), 1, qr0
-/* 80342DB4 0033F994  4E 80 00 20 */	blr 
+/* 80342DB4 0033F994  4E 80 00 20 */	blr
 
 .global PSVECNormalize
 PSVECNormalize:
@@ -54,7 +54,7 @@ PSVECNormalize:
 /* 80342DEC 0033F9CC  F0 44 00 00 */	psq_st f2, 0(r4), 0, qr0
 /* 80342DF0 0033F9D0  10 63 01 58 */	ps_muls0 f3, f3, f5
 /* 80342DF4 0033F9D4  F0 64 80 08 */	psq_st f3, 8(r4), 1, qr0
-/* 80342DF8 0033F9D8  4E 80 00 20 */	blr 
+/* 80342DF8 0033F9D8  4E 80 00 20 */	blr
 
 .global PSVECMag
 PSVECMag:
@@ -72,7 +72,7 @@ PSVECMag:
 /* 80342E28 0033FA08  EC 02 00 32 */	fmuls f0, f2, f0
 /* 80342E2C 0033FA0C  FC 00 08 2E */	fsel f0, f0, f0, f1
 /* 80342E30 0033FA10  EC 21 00 32 */	fmuls f1, f1, f0
-/* 80342E34 0033FA14  4E 80 00 20 */	blr 
+/* 80342E34 0033FA14  4E 80 00 20 */	blr
 
 .global PSVECDotProduct
 PSVECDotProduct:
@@ -83,7 +83,7 @@ PSVECDotProduct:
 /* 80342E48 0033FA28  E0 84 00 00 */	psq_l f4, 0(r4), 0, qr0
 /* 80342E4C 0033FA2C  10 65 11 3A */	ps_madd f3, f5, f4, f2
 /* 80342E50 0033FA30  10 23 10 94 */	ps_sum0 f1, f3, f2, f2
-/* 80342E54 0033FA34  4E 80 00 20 */	blr 
+/* 80342E54 0033FA34  4E 80 00 20 */	blr
 
 .global PSVECCrossProduct
 PSVECCrossProduct:
@@ -101,14 +101,14 @@ PSVECCrossProduct:
 /* 80342E84 0033FA64  F1 25 80 00 */	psq_st f9, 0(r5), 1, qr0
 /* 80342E88 0033FA68  11 40 50 50 */	ps_neg f10, f10
 /* 80342E8C 0033FA6C  F1 45 00 04 */	psq_st f10, 4(r5), 0, qr0
-/* 80342E90 0033FA70  4E 80 00 20 */	blr 
+/* 80342E90 0033FA70  4E 80 00 20 */	blr
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DE340
 lbl_804DE340:
-	.4byte 0x3F000000
+    .4byte 0x3F000000
 .global lbl_804DE344
 lbl_804DE344:
-	.4byte 0x40400000
+    .4byte 0x40400000
