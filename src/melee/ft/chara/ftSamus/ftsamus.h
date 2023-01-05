@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTSAMUS_FTSAMUS_H
+#define MELEE_FT_CHARA_FTSAMUS_FTSAMUS_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
@@ -102,3 +103,5 @@ inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* fighter_gobj)
         ftSamus_destroyAllEF(fighter_gobj);
     }
 }
+
+#endif
