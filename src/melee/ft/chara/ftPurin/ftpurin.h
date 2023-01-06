@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTPURIN_FTPURIN_H
+#define MELEE_FT_CHARA_FTPURIN_FTPURIN_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
@@ -21,3 +22,5 @@ typedef struct _ftPurinAttributes {
 
 /// functions
 void func_8013C494(HSD_GObj* fighter_gobj);
+
+#endif

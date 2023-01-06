@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTSEAK_FTSEAK_H
+#define MELEE_FT_CHARA_FTSEAK_FTSEAK_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
@@ -21,3 +22,5 @@ typedef struct _ftSeakAttributes {
 } ftSeakAttributes;
 
 // void lbl_8011412C(HSD_GObj* fighter_gobj);
+
+#endif

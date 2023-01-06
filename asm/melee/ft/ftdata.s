@@ -2066,7 +2066,7 @@ lbl_803C20CC:
     .4byte NULL
     .4byte NULL
 
-# Multi-jump function table
+# Character model group (e.g. high poly, low poly, metal) visibility change callbacks
 .global lbl_803C2150
 lbl_803C2150:
     .4byte NULL

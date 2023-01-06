@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTPIKACHU_FTPIKACHU_H
+#define MELEE_FT_CHARA_FTPIKACHU_FTPIKACHU_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
@@ -233,3 +234,5 @@ void ftPikachu_PrepCallActionChange_8012828C(HSD_GObj* fighter_gobj);
 void ftPikachu_PrepCallActionChange_801282B4(HSD_GObj* fighter_gobj);
 void ftPikachu_PrepCallActionChange_801282DC(HSD_GObj* fighter_gobj);
 void ftPikachu_PrepCallActionChange_80128304(HSD_GObj* fighter_gobj);
+
+#endif

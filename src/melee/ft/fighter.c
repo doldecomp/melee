@@ -24,21 +24,23 @@
 typedef void (*ft_callback)(HSD_GObj* gobj);
 typedef void (*fn_ptr_t)(void);
 
-extern ft_callback ft_OnLoad[33];  // One load  callback for every character.
-extern ft_callback ft_OnDeath[33]; // One death callback for every character.
-extern ft_callback ft_OnAbsorb[33];
-extern ft_callback lbl_803C1DB4[33]; // probably ft_OnSomething
-extern ft_callback ft_OnUserDataRemove[33];
+extern ft_callback
+    ft_OnLoad[FTKIND_MAX]; // One load  callback for every character.
+extern ft_callback
+    ft_OnDeath[FTKIND_MAX]; // One death callback for every character.
+extern ft_callback ft_OnAbsorb[FTKIND_MAX];
+extern ft_callback lbl_803C1DB4[FTKIND_MAX]; // probably ft_OnSomething
+extern ft_callback ft_OnUserDataRemove[FTKIND_MAX];
 
-extern fn_ptr_t lbl_803C10D0[33];
+extern fn_ptr_t lbl_803C10D0[FTKIND_MAX];
 
-extern struct UnkCostumeList CostumeListsForeachCharacter[33];
+extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
-extern ftData* gFtDataList[33];
+extern ftData* gFtDataList[FTKIND_MAX];
 extern struct ActionState ActionStateList[341];
-extern struct ActionState* ActionStateTableByCharacter[33];
+extern struct ActionState* ActionStateTableByCharacter[FTKIND_MAX];
 
-extern s8 lbl_803C26FC[33];
+extern s8 lbl_803C26FC[FTKIND_MAX];
 
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
@@ -56,7 +58,7 @@ const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
 
 HSD_ObjAllocData fighter_alloc_data;
 HSD_ObjAllocData lbl_80458FFC;
-HSD_ObjAllocData lbl_80459028;
+HSD_ObjAllocData fighter_bones_alloc_data;
 HSD_ObjAllocData lbl_80459054;
 HSD_ObjAllocData lbl_80459080;
 HSD_ObjAllocData lbl_804590AC;
@@ -117,13 +119,13 @@ void Fighter_800679B0()
     func_800C8F6C();
     // @TODO: &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s
     // data section, how does this work?
-    HSD_ObjAllocInit(&lbl_80459028, /*size*/ 0x8c0, /*align*/ 4);
+    HSD_ObjAllocInit(&fighter_bones_alloc_data, /*size*/ 0x8c0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80459054, /*size*/ 0x1f0, /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80459080, /*size*/ 0x80, /*align*/ 4);
 
     g_spawnNumCounter = 1;
 
-    for (i = 0; i < 33; i++) {
+    for (i = 0; i < FTKIND_MAX; i++) {
         if (lbl_803C10D0[i])
             lbl_803C10D0[i]();
     }
@@ -3094,7 +3096,7 @@ void Fighter_Unload_8006DABC(void* user_data)
 
     HSD_ObjFree(&lbl_804590AC, fp->x59C);
     HSD_ObjFree(&lbl_804590AC, fp->x5A0);
-    HSD_ObjFree(&lbl_80459028, fp->x5E8_fighterBones);
+    HSD_ObjFree(&fighter_bones_alloc_data, fp->x5E8_fighterBones);
     HSD_ObjFree(&lbl_80459054, fp->x5EC_dobj_list.data);
     HSD_ObjFree(&lbl_80459080, fp->x2040);
     HSD_ObjFree(&lbl_80458FFC, fp->x2D8_specialAttributes2);

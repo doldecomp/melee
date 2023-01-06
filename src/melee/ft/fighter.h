@@ -78,8 +78,8 @@ typedef enum FighterKind {
     FTKIND_GIRL,
     FTKIND_GKOOPS,
     FTKIND_SANDBAG,
-    FTKIND_NONE
-
+    FTKIND_NONE,
+    FTKIND_MAX = FTKIND_NONE
 } FighterKind;
 
 typedef enum CharacterKind {
@@ -116,8 +116,8 @@ typedef enum CharacterKind {
     CKIND_CREZYH,    // Crazy Hand (CrezyH) //
     CHKIND_SANDBAG,  // Sandbag //
     CHKIND_POPO,     // Popo //
-    CHKIND_NONE      // None //
-
+    CHKIND_NONE,     // None //
+    CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
 // Action State Change flags
@@ -2349,5 +2349,12 @@ void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighter_gobj,
                                         struct _HSD_GObj* otherObj,
                                         f32 animStart, f32 animSpeed,
                                         f32 animBlend);
+
+extern HSD_ObjAllocData fighter_alloc_data;
+extern HSD_ObjAllocData lbl_80458FFC;
+extern HSD_ObjAllocData fighter_bones_alloc_data;
+extern HSD_ObjAllocData lbl_80459054;
+extern HSD_ObjAllocData lbl_80459080;
+extern HSD_ObjAllocData lbl_804590AC;
 
 #endif

@@ -1,7 +1,11 @@
 #ifndef MELEE_FT_FTDATA_H
 #define MELEE_FT_FTDATA_H
 
-extern void (*lbl_803C20CC[66])(HSD_GObj*, s32, void*);
+#include <sysdolphin/baselib/gobj.h>
+
+extern void (*lbl_803C20CC[FTKIND_MAX])(HSD_GObj*, s32, void*);
+extern void (*lbl_803C2150[FTKIND_MAX])(HSD_GObj*, s32, BOOL);
+
 void func_800855C8();
 void func_8008572C(u32);
 void func_8008578C();

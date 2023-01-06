@@ -8,7 +8,7 @@
 
 void func_80379310(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);
-void func_80379A20(Mtx src, Mtx dest);
+void HSD_MtxInverseTranspose(Mtx src, Mtx dest);
 void HSD_MtxGetRotation(Mtx m, Vec* vec);
 void HSD_MtxGetTranslate(Mtx mat, Vec* vec);
 void HSD_MtxGetScale(Mtx arg0, Vec* arg1);

@@ -11,4 +11,6 @@ void HSD_EraseRect(f32 top_res, f32 bottom_res, f32 left_res, f32 right_res,
                    f32 neg_z_val, BOOL enable_color, BOOL enable_alpha,
                    BOOL enable_depth);
 
+MtxPtr _HSD_mkEnvelopeModelNodeMtx(HSD_JObj* m, MtxPtr mtx);
+
 #endif
