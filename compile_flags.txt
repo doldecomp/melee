@@ -4,13 +4,12 @@
 -nostdinc
 -Isrc
 -Iinclude
--Wnone
 -Wall
 -Wextra
 -Wno-unknown-pragmas
 -Wno-unused-variable
 -Wno-unused-function
--Wno-unused-paramemter
+-Wno-unused-parameter
 -Wno-unused-value
 -Wno-switch
 -Wno-incompatible-library-redeclaration

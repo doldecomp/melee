@@ -49,7 +49,7 @@ typedef jmp_t jtbl_t[];
     typedef struct _##module##_Unk##number module##_Unk##number;
 
 #define CALLBACK_PLACEHOLDER(module, number)                                   \
-    typedef void (*module##_UnkCallback##number)();
+    typedef void (*module##_UnkCallback##number)(void);
 
 #define UNK_FUNC(name) unk_t name()
 

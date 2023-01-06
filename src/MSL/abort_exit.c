@@ -14,9 +14,9 @@ s32 lbl_804D7068;
 s32 lbl_804D7064;
 s32 lbl_804D7060;
 
-void exit(int)
+void exit(int code)
 {
-    void (**dtor)();
+    void (**dtor)(void);
 
     if (lbl_804D7060 == 0) {
         while (lbl_804D7064 > 0) {

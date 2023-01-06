@@ -46,6 +46,6 @@ void HSD_WObjSetPositionX(HSD_WObj*, f32);
 void HSD_WObjSetPositionY(HSD_WObj*, f32);
 void HSD_WObjSetPositionZ(HSD_WObj*, f32);
 void HSD_WObjGetPosition(HSD_WObj*, Vec*);
-HSD_WObj* HSD_WObjAlloc();
+HSD_WObj* HSD_WObjAlloc(void);
 
 #endif

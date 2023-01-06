@@ -3,9 +3,9 @@
 
 #include <dolphin/types.h>
 
-s32 VIGetTvFormat();
+s32 VIGetTvFormat(void);
 void VIConfigure(s32);
-void VIFlush();
+void VIFlush(void);
 void VISetNextFrameBuffer(s32);
 void VIWaitForRetrace(void);
 

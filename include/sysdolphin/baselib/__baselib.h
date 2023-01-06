@@ -41,7 +41,7 @@ extern u8 lbl_804D0C54[0x104];
 
 #pragma region psdisptev
 void psSetupTevCommon(void);
-void psSetupTevInvalidState();
+void psSetupTevInvalidState(void);
 void psSetupTev(unk_t);
 #pragma endregion
 

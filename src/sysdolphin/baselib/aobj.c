@@ -259,45 +259,47 @@ void HSD_AObjFree(HSD_AObj* aobj)
 }
 
 void callbackForeachFunc(struct _HSD_AObj* aobj, void* obj, HSD_Type type,
-                         void (*func)(), AObj_Arg_Type arg_type,
-                         callbackArg* arg)
+                         void* func, AObj_Arg_Type arg_type, callbackArg* arg)
 {
     switch (arg_type) {
     case AOBJ_ARG_A:
-        (*func)(aobj);
+        (*(void (*)(HSD_AObj*)) func)(aobj);
         return;
     case AOBJ_ARG_AF:
-        (*func)(aobj, arg->f);
+        (*(void (*)(HSD_AObj*, f32)) func)(aobj, arg->f);
         return;
     case AOBJ_ARG_AV:
-        (*func)(aobj, arg->v);
+        (*(void (*)(HSD_AObj*, void*)) func)(aobj, arg->v);
         return;
     case AOBJ_ARG_AU:
-        (*func)(aobj, arg->d);
+        (*(void (*)(HSD_AObj*, u32)) func)(aobj, arg->d);
         return;
     case AOBJ_ARG_AO:
-        (*func)(aobj, obj);
+        (*(void (*)(HSD_AObj*, void*)) func)(aobj, obj);
         return;
     case AOBJ_ARG_AOT:
-        (*func)(aobj, obj, type);
+        (*(void (*)(HSD_AObj*, void*, HSD_Type)) func)(aobj, obj, type);
         return;
     case AOBJ_ARG_AOF:
-        (*func)(aobj, obj, arg->f);
+        (*(void (*)(HSD_AObj*, void*, f32)) func)(aobj, obj, arg->f);
         return;
     case AOBJ_ARG_AOV:
-        (*func)(aobj, obj, arg->v);
+        (*(void (*)(HSD_AObj*, void*, void*)) func)(aobj, obj, arg->v);
         return;
     case AOBJ_ARG_AOU:
-        (*func)(aobj, obj, arg->d);
+        (*(void (*)(HSD_AObj*, void*, u32)) func)(aobj, obj, arg->d);
         return;
     case AOBJ_ARG_AOTF:
-        (*func)(aobj, obj, type, arg->f);
+        (*(void (*)(HSD_AObj*, void*, HSD_Type, f32)) func)(aobj, obj, type,
+                                                            arg->f);
         return;
     case AOBJ_ARG_AOTV:
-        (*func)(aobj, obj, type, arg->v);
+        (*(void (*)(HSD_AObj*, void*, HSD_Type, void*)) func)(aobj, obj, type,
+                                                              arg->v);
         return;
     case AOBJ_ARG_AOTU:
-        (*func)(aobj, obj, type, (u32) arg->d);
+        (*(void (*)(HSD_AObj*, void*, HSD_Type, u32)) func)(aobj, obj, type,
+                                                            arg->d);
         return;
     }
 }

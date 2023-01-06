@@ -3,7 +3,7 @@
 
 #include <dolphin/types.h>
 
-void* HSD_JObjUnkMtxPtr();
+void* HSD_JObjUnkMtxPtr(struct _HSD_JObj*);
 s32 func_80008248(s32, struct ftHurt*, void*, f32, f32, f32);
 
 #endif

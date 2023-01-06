@@ -33,7 +33,4 @@ inline f32 fabsf_bitwise(f32 v)
     return v;
 }
 
-void func_80379310();
-void HSD_MtxSRT();
-
 #endif

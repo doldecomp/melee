@@ -113,7 +113,7 @@ HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj);
 HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj);
 void HSD_CObjSetOrtho(HSD_CObj* cobj, f32, f32, f32, f32);
 unk_t func_8036A590(cobj_Unk1*);
-HSD_CObj* HSD_CObjAlloc();
+HSD_CObj* HSD_CObjAlloc(void);
 void func_80368718(HSD_CObj* cobj, s32*);
 void func_803687F0(HSD_CObj* cobj, s32*);
 void func_803699C0(HSD_CObj* cobj, f32);
@@ -124,12 +124,12 @@ void func_8036A058(HSD_CObj* cobj, s16*);
 void func_8036A144(u32);
 BOOL HSD_CObjSetCurrent(HSD_Obj*, cobj_UnkCallback1);
 HSD_CObj* HSD_CObjGetCurrent(void);
-void HSD_CObjEndCurrent();
+void HSD_CObjEndCurrent(void);
 void func_803695F0(unk_t);
 f32 HSD_CObjGetNear(struct _HSD_CObj*);
 f32 HSD_CObjGetFar(struct _HSD_CObj*);
-void HSD_CObjSetScissorx4();
-void HSD_CObjSetViewportfx4();
+void HSD_CObjSetScissorx4(HSD_CObj*, s32, s32, s32, s32);
+void HSD_CObjSetViewportfx4(HSD_CObj*, f32, f32, f32, f32);
 u32 HSD_CObjGetProjectionType(struct _HSD_CObj*);
 
 #endif

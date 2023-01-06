@@ -1,9 +1,11 @@
-#include <common_structs.h>
 #include <dolphin/gx/GXTransform.h>
+
+#include <common_structs.h>
+#include <dolphin/gx/__GX_unknown_001.h>
+#include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
-#include <dolphin/gx/__GXInit.h>
-#include <dolphin/gx/__GX_unknown_001.h>
+#include <dolphin/gx/GXStubs.h>
 
 #pragma push
 asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx,

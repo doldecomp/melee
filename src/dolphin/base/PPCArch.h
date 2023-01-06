@@ -12,7 +12,7 @@
 #define GQR7 0x397
 
 void PPCHalt(void);
-s32 PPCMfhid2();
+s32 PPCMfhid2(void);
 void PPCMthid2(s32);
 
 #endif

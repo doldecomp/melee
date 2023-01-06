@@ -59,7 +59,7 @@ void func_8007DB58(HSD_GObj*);
 void func_8007DBCC(Fighter*, BOOL, f32);
 s32 func_8007DC08(Fighter*, f32);
 void func_8007DD7C(HSD_GObj*, Vec3*);
-void func_8007DFD0();
+void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1);
 void func_8007E0E4(HSD_GObj*);
 HSD_GObj* func_8007E2A4(HSD_GObj*);
 void func_8007E2D0(Fighter*, s16, void (*cb0)(HSD_GObj*),
@@ -109,7 +109,7 @@ void func_8007FE84(HSD_GObj*, HSD_GObj* item_gobj, s32, f32);
 void func_8007FF74(HSD_GObj*);
 BOOL func_8007FFD8(Fighter*, f32);
 BOOL func_80080144(Fighter*);
-void func_80080174();
+void func_80080174(Fighter* fp);
 void func_8008021C(HSD_GObj*);
 void func_8008031C(HSD_GObj*);
 void func_80080460(Fighter*);
@@ -131,7 +131,6 @@ BOOL func_8007CF58(Fighter*);
 void func_8007D344(Fighter*, f32, f32, f32);
 void func_8007D494(Fighter*, f32, f32);
 void func_8007D4B8(Fighter*);
-void func_8007D5BC();
 void func_8007D5D4(Fighter*);
 void func_8007D6A4(Fighter*);
 void func_8007D780(Fighter*);
@@ -139,9 +138,6 @@ void func_8007D7FC(Fighter*);
 void func_8007D92C(struct _HSD_GObj*);
 void func_8007D9FC(Fighter*);
 f32 func_8007DA74(s32, u32, f32);
-void func_8007DB24();
-void func_8007DB58();
-void func_8007E0E4();
 
 void func_8007E2D0(Fighter*, s16, void (*)(struct _HSD_GObj*),
                    void (*)(struct _HSD_GObj*),
@@ -153,28 +149,18 @@ void func_8007E83C(struct _HSD_GObj*, s32, f32 div);
 s32 ftGetParasolStatus(struct _HSD_GObj*);
 void func_8007EA90(Fighter*, s32);
 void func_8007EBAC(Fighter*, u32, u32);
-void func_8007ECD4();
 void func_8007ED50(Fighter*, s32);
-void func_8007EE0C();
 void func_8007EFC0(Fighter*, u32);
-void func_8007F578();
 f32 Fighter_GetModelScale(Fighter*);
-void func_8007F8E8();
-void func_8007F9B4();
 void func_8007FC7C(struct _HSD_GObj*, f32);
 
 /// @todo static
 void func_8007FE84(struct _HSD_GObj*, struct _HSD_GObj*, s32, f32);
 
-void func_8007FF74();
 BOOL func_8007FFD8(Fighter*, f32);
-void func_8008021C();
-void func_8008031C();
 
 /// @todo @c DataOffset_PlayerScale_MultiplyBySomething
 /// @returns <tt>fp->x40*fp->x34</tt>
 f32 func_800804EC(Fighter*);
-
-void func_800804FC();
 
 #endif

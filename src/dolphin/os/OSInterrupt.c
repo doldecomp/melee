@@ -1,4 +1,6 @@
 #include <dolphin/os/OSInterrupt.h>
+
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSThread.h>
 #include <string.h>
 
@@ -62,8 +64,7 @@ OSInterruptHandler __OSGetInterruptHandler(__OSInterrupt id)
     return InterruptHandlerTable[id];
 }
 
-extern unk_t lbl_80347B80();
-extern unk_t __OSSetExceptionHandler();
+static void lbl_80347B80(__OSException exception, OSContext* context);
 
 extern volatile struct {
     u32 x0;
@@ -658,7 +659,7 @@ lbl_80347B5C:
 #pragma pop
 
 #pragma push
-asm unk_t lbl_80347B80()
+static asm void lbl_80347B80(__OSException exception, OSContext* context)
 { // clang-format off
     nofralloc
 /* 80347B80 00344760  90 04 00 00 */	stw r0, 0(r4)
