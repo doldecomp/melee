@@ -1,7 +1,3 @@
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set noexpandtab
 
 set colorcolumn=81
 highlight colorcolumn ctermbg=darkgray
