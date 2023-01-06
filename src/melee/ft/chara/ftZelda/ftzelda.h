@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTZELDA_FTZELDA_H
+#define MELEE_FT_CHARA_FTZELDA_FTZELDA_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
@@ -171,3 +172,5 @@ void ftZelda_8013C148(HSD_GObj* arg0);
 void ftZelda_8013C1B4(HSD_GObj* arg0);
 void ftZelda_8013C220(HSD_GObj* arg0);
 void ftZelda_8013C28C(HSD_GObj* arg0);
+
+#endif
