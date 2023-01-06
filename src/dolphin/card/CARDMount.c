@@ -1,9 +1,9 @@
 #include <dolphin/card.h>
-
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSRtc.h>
 
 u8 GameChoice AT_ADDRESS(0x800030E3);
-void __CARDExiHandler(s32 chan, OSContext* context);
 
 u16 __CARDVendorID = 0xFFFF;
 
@@ -15,7 +15,7 @@ u32 LatencyTable[8] = {
     4, 8, 16, 32, 64, 128, 256, 512,
 };
 
-s32 CARDProbe(s32 chan)
+s32 CARDProbe(EXIChannel chan)
 {
     if (GameChoice & 0x80) {
         return 0;
@@ -23,7 +23,7 @@ s32 CARDProbe(s32 chan)
     return EXIProbe(chan);
 }
 
-s32 CARDProbeEx(s32 chan, s32* memSize, s32* sectorSize)
+s32 CARDProbeEx(EXIChannel chan, s32* memSize, s32* sectorSize)
 {
     u32 id;
     CARDControl* card;
@@ -84,7 +84,7 @@ s32 CARDProbeEx(s32 chan, s32* memSize, s32* sectorSize)
 void __CARDMountCallback(s32 chan, s32 result);
 static void DoUnmount(s32 chan, s32 result);
 
-s32 DoMount(s32 chan)
+s32 DoMount(EXIChannel chan)
 {
     CARDControl* card;
     u32 id;
@@ -246,8 +246,6 @@ void __CARDMountCallback(s32 chan, s32 result)
     callback(chan, result);
 }
 
-void __CARDExtHandler(s32 chan, OSContext* context);
-
 s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
                    CARDCallback attachCallback)
 {
@@ -280,7 +278,8 @@ s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
         attachCallback ? attachCallback : __CARDDefaultApiCallback;
     card->exiCallback = 0;
 
-    if (!card->attached && !EXIAttach(chan, __CARDExtHandler)) {
+    /// @todo eliminate cast to #EXICallback
+    if (!card->attached && !EXIAttach(chan, (EXICallback) __CARDExtHandler)) {
         card->result = CARD_RESULT_NOCARD;
         OSRestoreInterrupts(enabled);
         return CARD_RESULT_NOCARD;
@@ -297,7 +296,8 @@ s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
     OSRestoreInterrupts(enabled);
 
     card->unlockCallback = __CARDMountCallback;
-    if (!EXILock(chan, 0, __CARDUnlockedHandler)) {
+    /// @todo eliminate cast to #EXICallback
+    if (!EXILock(chan, 0, (EXICallback) __CARDUnlockedHandler)) {
         return CARD_RESULT_READY;
     }
     card->unlockCallback = 0;

@@ -179,10 +179,8 @@ typedef struct CARDID {
 } CARDID;
 
 s32 CARDClose(CARDFileInfo*);
-s32 CARDOpen(s32 chan, const char* filename, CARDFileInfo* fileInfo);
 int CARDWrite(CARDFileInfo*, void* buf, s32 length, s32 offset);
 int CARDRead(CARDFileInfo*, void* buf, u32 length, u32 offset);
-s32 CARDFastOpen(s32 chan, s32 fileno, CARDFileInfo* fileinfo);
 s32 __CARDReadStatus(s32 chan, u8* status);
 s32 __CARDClearStatus(s32 chan);
 static s32 Retry(s32 chan);

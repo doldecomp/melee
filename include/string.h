@@ -3,7 +3,6 @@
 
 #include <stddef.h>
 
-void memcpy(void* dst, void* src, size_t num);
 void* memset(void* ptr, int value, size_t num);
 int __StringRead(void*, int, int);
 char* strchr(const char*, int);

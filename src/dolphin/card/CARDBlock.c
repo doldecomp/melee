@@ -1,4 +1,9 @@
 #include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDCheck.h>
+#include <dolphin/card/CARDRdwr.h>
+#include <dolphin/os/OSCache.h>
+#include <Runtime/__mem.h>
 
 u16* __CARDGetFatBlock(CARDControl* card)
 {

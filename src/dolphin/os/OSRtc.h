@@ -28,5 +28,7 @@ typedef struct OSSramEx {
 
 OSSram* __OSLockSram(void);
 OSSramEx* __OSLockSramEx(void);
+void __OSUnlockSram(BOOL commit);
+void __OSUnlockSramEx(BOOL commit);
 
 #endif // DOLPHIN_OS_OSRTC

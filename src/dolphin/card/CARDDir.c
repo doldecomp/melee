@@ -1,4 +1,9 @@
 #include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDCheck.h>
+#include <dolphin/card/CARDRdwr.h>
+#include <dolphin/os/OSCache.h>
+#include <Runtime/__mem.h>
 
 CARDDir* __CARDGetDirBlock(CARDControl* card)
 {
@@ -24,7 +29,6 @@ static void WriteCallback(s32 chan, s32 result)
         }
     }
 
-error:
     if (card->apiCallback == 0) {
         __CARDPutControlBlock(card, result);
     }

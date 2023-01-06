@@ -1,10 +1,11 @@
 #include <dolphin/card.h>
+#include <dolphin/os/OSExi.h>
 
 #define OFFSET(n, a) (((u32) (n)) & ((a) -1))
 
-static void EraseCallback(s32 chan, s32 result);
+static void EraseCallback(EXIChannel chan, s32 result);
 
-static void WriteCallback(s32 chan, s32 result)
+static void WriteCallback(EXIChannel chan, s32 result)
 {
     CARDControl* card;
     CARDCallback callback;
@@ -56,7 +57,7 @@ error:
     callback(chan, result);
 }
 
-static void EraseCallback(s32 chan, s32 result)
+static void EraseCallback(EXIChannel chan, s32 result)
 {
     CARDControl* card;
     CARDCallback callback;

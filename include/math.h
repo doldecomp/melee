@@ -10,6 +10,8 @@
 
 #define FLT_EPSILON 1.00000001335e-10f
 
+extern double __frsqrte(double);
+
 extern inline float sqrtf(float x)
 {
     static const double _half = .5;
@@ -53,6 +55,9 @@ inline s32 __fpclassifyf(float x)
         return FP_NORMAL;
     }
 }
+
+extern int __HI(double);
+extern int __LO(double);
 
 inline s32 __fpclassifyd(double x)
 {

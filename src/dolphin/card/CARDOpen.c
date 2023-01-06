@@ -1,4 +1,5 @@
 #include <dolphin/card.h>
+#include <dolphin/os/OSExi.h>
 
 extern DVDDiskID __CARDDiskNone;
 
@@ -85,7 +86,7 @@ s32 __CARDGetFileNo(CARDControl* card, const char* filename, s32* pfileno)
     return CARD_RESULT_NOFILE;
 }
 
-s32 CARDFastOpen(s32 chan, s32 fileno, CARDFileInfo* fileinfo)
+s32 CARDFastOpen(EXIChannel chan, s32 fileno, CARDFileInfo* fileinfo)
 {
     CARDControl* card;
     CARDDir* dir;
@@ -121,7 +122,7 @@ s32 CARDFastOpen(s32 chan, s32 fileno, CARDFileInfo* fileinfo)
     return __CARDPutControlBlock(card, result);
 }
 
-s32 CARDOpen(s32 chan, const char* filename, CARDFileInfo* fileinfo)
+s32 CARDOpen(EXIChannel chan, const char* filename, CARDFileInfo* fileinfo)
 {
     CARDControl* card;
     CARDDir* dir;
