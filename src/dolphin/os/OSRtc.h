@@ -30,5 +30,6 @@ OSSram* __OSLockSram(void);
 OSSramEx* __OSLockSramEx(void);
 void __OSUnlockSram(BOOL commit);
 void __OSUnlockSramEx(BOOL commit);
+BOOL __OSSyncSram(void);
 
 #endif // DOLPHIN_OS_OSRTC

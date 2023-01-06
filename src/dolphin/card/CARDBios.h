@@ -10,5 +10,8 @@ s32 __CARDGetControlBlock(EXIChannel chan, CARDControl** pcard);
 s32 __CARDEnableInterrupt(EXIChannel chan, BOOL enable);
 void __CARDExiHandler(EXIChannel chan, OSContext* context);
 void __CARDExtHandler(EXIChannel chan, OSContext* context);
+s32 __CARDReadSegment(s32 chan, CARDCallback callback);
+s32 __CARDWritePage(s32 chan, CARDCallback callback);
+s32 __CARDSync(s32 i);
 
 #endif

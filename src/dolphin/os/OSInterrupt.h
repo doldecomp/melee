@@ -60,6 +60,9 @@ extern u32 __OSLastInterruptSrr0;
 extern s16 __OSLastInterrupt;
 extern s64 __OSLastInterruptTime;
 
+/// @sz{4}
+extern unk_t lbl_804D738C;
+
 BOOL OSDisableInterrupts(void);
 BOOL OSEnableInterrupts(void);
 BOOL OSRestoreInterrupts(BOOL);

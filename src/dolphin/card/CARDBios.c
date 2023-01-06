@@ -275,7 +275,9 @@ static void UnlockedCallback(s32 chan, s32 result)
 
     card = &__CARDBlock[chan];
     if (result >= 0) {
-        card->unlockCallback = UnlockedCallback;
+        /// @todo Eliminate cast to #CARDCallback.
+        card->unlockCallback = (CARDCallback) UnlockedCallback;
+
         if (!EXILock(chan, 0, __CARDUnlockedHandler)) {
             result = CARD_RESULT_READY;
         } else {
@@ -325,7 +327,9 @@ s32 __CARDStart(s32 chan, CARDCallback txCallback, CARDCallback exiCallback)
         if (exiCallback) {
             card->exiCallback = exiCallback;
         }
-        card->unlockCallback = UnlockedCallback;
+
+        /// @todo Eliminate cast to #CARDCallback.
+        card->unlockCallback = (CARDCallback) UnlockedCallback;
         if (!EXILock(chan, 0, __CARDUnlockedHandler)) {
             result = CARD_RESULT_BUSY;
         } else {

@@ -21,8 +21,20 @@ typedef struct {
     u8 padding[22];
 } DVDDiskID;
 
+typedef struct {
+    u32 bootFilePosition;
+    u32 FSTPosition;
+    u32 FSTLength;
+    u32 FSTMaxLength;
+    void* FSTAddress;
+    u32 userPosition;
+    u32 userLength;
+    u32 padding0;
+} DVDBuffer;
+
 typedef struct DVDCommandBlock DVDCommandBlock;
 typedef void (*DVDCBCallback)(s32 result, DVDCommandBlock* block);
+
 struct DVDCommandBlock {
     /*0x00*/ DVDCommandBlock* next;
     /*0x04*/ DVDCommandBlock* prev;
@@ -68,6 +80,15 @@ void DVDReset(void);
 s32 DVDCancel(DVDCommandBlock* block);
 s32 DVDGetDriveStatus(void);
 void __CARDSetDiskID(const DVDDiskID* id);
+
+BOOL DVDReadAbsAsyncForBS(DVDCommandBlock* block, void* addr, s32 length,
+                          s32 offset, DVDCBCallback callback);
+
+BOOL DVDReadDiskID(DVDCommandBlock* block, DVDDiskID* diskID,
+                   DVDCBCallback callback);
+BOOL DVDCheckDisk(void);
+void __DVDPrepareResetAsync(DVDCBCallback callback);
+BOOL DVDSetAutoInvalidation(BOOL autoInval);
 
 #define DVDReadAsync(fileInfo, addr, length, offset, callback)                 \
     DVDReadAsyncPrio((fileInfo), (addr), (length), (offset), (callback), 2)

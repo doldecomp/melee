@@ -1,4 +1,10 @@
 #include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDDir.h>
+#include <dolphin/card/CARDOpen.h>
+#include <dolphin/card/CARDRdwr.h>
+#include <dolphin/card/CARDRead.h>
+#include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSExi.h>
 
 #define OFFSET(n, a) (((u32) (n)) & ((a) -1))
@@ -110,7 +116,11 @@ s32 CARDWriteAsync(CARDFileInfo* fileInfo, const void* buf, u32 length,
     }
 
     DCStoreRange((void*) buf, length);
-    card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
+
+    /// @todo Eliminate cast to #CARDCallback.
+    card->apiCallback =
+        callback ? callback : (CARDCallback) __CARDDefaultApiCallback;
+
     card->buffer = (void*) buf;
     result = __CARDEraseSector(
         fileInfo->chan, card->sectorSize * fileInfo->iBlock, EraseCallback);
@@ -122,9 +132,12 @@ s32 CARDWriteAsync(CARDFileInfo* fileInfo, const void* buf, u32 length,
 
 int CARDWrite(CARDFileInfo* info, void* buf, s32 length, s32 offset)
 {
-    int result = CARDWriteAsync(info, buf, length, offset, __CARDSyncCallback);
-    if (result < 0) {
+    /// @todo Eliminate cast to #CARDCallback.
+    int result = CARDWriteAsync(info, buf, length, offset,
+                                (CARDCallback) __CARDSyncCallback);
+
+    if (result < 0)
         return result;
-    }
+
     return __CARDSync(info->chan);
 }

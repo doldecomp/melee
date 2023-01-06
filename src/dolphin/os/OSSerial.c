@@ -1,4 +1,6 @@
+#include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSTime.h>
 
 extern struct {
     s32 status;
@@ -30,10 +32,9 @@ BOOL SIIsChanBusy(s32 arg0)
 
 extern unk_t lbl_804A7EF8;
 extern unk_t lbl_804A7ED8;
-extern unk_t __OSGetSystemTime();
 
 #pragma push
-asm unk_t CompleteTransfer()
+static asm unk_t CompleteTransfer()
 { // clang-format off
     nofralloc
 /* 80349518 003460F8  7C 08 02 A6 */	mflr r0
@@ -913,7 +914,7 @@ extern volatile struct {
     u32 command, x4, x8;
 } SIRegs[] AT_ADDRESS(0xCC006400);
 
-void SISetCommand(s32 index, s32 value)
+void SISetCommand(s32 index, u32 value)
 {
     SIRegs[index].command = value;
 }
@@ -1084,7 +1085,7 @@ lbl_8034A310:
 #pragma pop
 
 #pragma push
-asm unk_t SIGetResponse()
+asm void SIGetResponse(EXIChannel chan, u32 data[2])
 { // clang-format off
     nofralloc
 /* 8034A32C 00346F0C  7C 08 02 A6 */	mflr r0

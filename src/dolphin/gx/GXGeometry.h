@@ -10,5 +10,7 @@ void GXEnableTexOffsets(GXTexCoordID coord, GXBool line_enable,
                         GXBool point_enable);
 void GXSetCullMode(GXCullMode mode);
 void GXSetCoPlanar(GXBool enable);
+void __GXSetDirtyState(void);
+void __GXSendFlushPrim(void);
 
 #endif

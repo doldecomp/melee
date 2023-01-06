@@ -3,7 +3,12 @@
 
 #include <dolphin/types.h>
 
-void DCFlushRange(u8*, s32);
-void DCStoreRange(register void* addr, register size_t nbytes);
+void DCFlushRange(void* addr, size_t nbytes);
+void DCStoreRange(void* addr, size_t nbytes);
+void DCInvalidateRange(void* addr, size_t nbytes);
+void DCFlushRangeNoSync(void* addr, size_t nbytes);
+void ICFlashInvalidate(void);
+void ICInvalidateRange(void* addr, size_t nbytes);
+void LCDisable(void);
 
 #endif

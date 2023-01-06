@@ -1,5 +1,11 @@
+#include <dolphin/card/CARDMount.h>
+
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDCheck.h>
+#include <dolphin/card/CARDUnlock.h>
+#include <dolphin/card/CARDRdwr.h>
+#include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSRtc.h>
 
@@ -64,7 +70,7 @@ s32 CARDProbeEx(EXIChannel chan, s32* memSize, s32* sectorSize)
     } else if (!EXIGetID(chan, 0, &id)) {
         result = CARD_RESULT_BUSY;
     } else if ((id == 0x80000004 && __CARDVendorID != 0xFFFF) ||
-               !(id & 0xFFFF0000) && !(id & 3))
+               (!(id & 0xFFFF0000) && !(id & 3)))
     {
         if (memSize) {
             *memSize = (s32) (id & 0xfc);
@@ -81,7 +87,6 @@ s32 CARDProbeEx(EXIChannel chan, s32* memSize, s32* sectorSize)
     return result;
 }
 
-void __CARDMountCallback(s32 chan, s32 result);
 static void DoUnmount(s32 chan, s32 result);
 
 s32 DoMount(EXIChannel chan)
@@ -101,7 +106,7 @@ s32 DoMount(EXIChannel chan)
         if (EXIGetID(chan, 0, &id) == 0) {
             result = CARD_RESULT_NOCARD;
         } else if ((id == 0x80000004 && __CARDVendorID != 0xFFFF) ||
-                   !(id & 0xFFFF0000) && !(id & 3))
+                   (!(id & 0xFFFF0000) && !(id & 3)))
         {
             result = CARD_RESULT_READY;
         } else {
@@ -193,10 +198,13 @@ s32 DoMount(EXIChannel chan)
     }
 
     step = card->mountStep - 2;
+
+    /// @todo Eliminate cast to #CARDCallback.
     result =
         __CARDRead(chan, (u32) card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE,
                    (u8*) card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step),
-                   __CARDMountCallback);
+                   (CARDCallback) __CARDMountCallback);
+
     if (result < 0) {
         __CARDPutControlBlock(card, result);
     }
@@ -274,9 +282,13 @@ s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
     card->result = CARD_RESULT_BUSY;
     card->workArea = workArea;
     card->extCallback = detachCallback;
-    card->apiCallback =
-        attachCallback ? attachCallback : __CARDDefaultApiCallback;
-    card->exiCallback = 0;
+
+    /// @todo Eliminate cast to #CARDCallback.
+    card->apiCallback = attachCallback
+                            ? attachCallback
+                            : (CARDCallback) __CARDDefaultApiCallback;
+
+    card->exiCallback = NULL;
 
     /// @todo eliminate cast to #EXICallback
     if (!card->attached && !EXIAttach(chan, (EXICallback) __CARDExtHandler)) {
@@ -295,7 +307,9 @@ s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
 
     OSRestoreInterrupts(enabled);
 
-    card->unlockCallback = __CARDMountCallback;
+    /// @todo Eliminate cast to #CARDCallback.
+    card->unlockCallback = (CARDCallback) __CARDMountCallback;
+
     /// @todo eliminate cast to #EXICallback
     if (!EXILock(chan, 0, (EXICallback) __CARDUnlockedHandler)) {
         return CARD_RESULT_READY;

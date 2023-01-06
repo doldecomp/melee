@@ -59,11 +59,13 @@ static void EraseCallback(s32 chan, s32 result)
     fat = __CARDGetFatBlock(card);
     addr = ((u32) fat - (u32) card->workArea) / CARD_SYSTEM_BLOCK_SIZE *
            card->sectorSize;
-    result =
-        __CARDWrite(chan, addr, CARD_SYSTEM_BLOCK_SIZE, fat, WriteCallback);
-    if (result < 0) {
+
+    /// @todo Eliminate cast to #CARDCallback.
+    result = __CARDWrite(chan, addr, CARD_SYSTEM_BLOCK_SIZE, fat,
+                         (CARDCallback) WriteCallback);
+
+    if (result < 0)
         goto error;
-    }
 
     return;
 
@@ -164,7 +166,8 @@ s32 __CARDUpdateFatBlock(s32 chan, u16* fat, CARDCallback callback)
     DCStoreRange(fat, 0x2000);
     card->eraseCallback = callback;
 
+    /// @todo Eliminate cast to #CARDCallback.
     return __CARDEraseSector(
         chan, (((u32) fat - (u32) card->workArea) / 8192u) * card->sectorSize,
-        EraseCallback);
+        (CARDCallback) EraseCallback);
 }
