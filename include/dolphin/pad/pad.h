@@ -24,7 +24,7 @@ typedef struct PADStatus {
 
 void PADControlMotor(int chan, u32 command);
 void VISetBlack(BOOL);
-u32 VIGetRetraceCount();
+u32 VIGetRetraceCount(void);
 void PADClamp(PADStatus*);
 void PADRead(u8*);
 void PADReset(u32);

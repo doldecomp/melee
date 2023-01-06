@@ -22,7 +22,7 @@
 
 // external vars from asm/melee/ft/ft_unknown_005.s
 typedef void (*ft_callback)(HSD_GObj* gobj);
-typedef void (*fn_ptr_t)();
+typedef void (*fn_ptr_t)(void);
 
 extern ft_callback
     ft_OnLoad[FTKIND_MAX]; // One load  callback for every character.
@@ -141,7 +141,7 @@ void Fighter_FirstInitialize_80067A84()
                      /*align*/ 0x20);
 }
 
-void Fighter_LoadCommonData()
+void Fighter_LoadCommonData(void)
 {
     void** pData;
     func_80016C64("PlCo.dat", &pData, "ftLoadCommonData", 0);

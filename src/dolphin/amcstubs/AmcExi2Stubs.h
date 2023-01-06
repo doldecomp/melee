@@ -3,13 +3,13 @@
 
 #include <dolphin/types.h>
 
-void EXI2_Init();
-void EXI2_EnableInterrupts();
-BOOL EXI2_Poll();
-BOOL EXI2_ReadN();
-BOOL EXI2_WriteN();
-void EXI2_Reserve();
-void EXI2_Unreserve();
-BOOL AMC_IsStub();
+void EXI2_Init(void);
+void EXI2_EnableInterrupts(void);
+BOOL EXI2_Poll(void);
+BOOL EXI2_ReadN(void);
+BOOL EXI2_WriteN(void);
+void EXI2_Reserve(void);
+void EXI2_Unreserve(void);
+BOOL AMC_IsStub(void);
 
 #endif

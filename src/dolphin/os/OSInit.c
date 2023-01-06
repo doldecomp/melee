@@ -1,3 +1,5 @@
+#include <dolphin/os/OSInit.h>
+
 #include <dolphin/types.h>
 #include <Runtime/__mem.h>
 #include <dolphin/os/OSArena.h>
@@ -318,7 +320,6 @@ extern unk_t OSExceptionVector();
 extern unk_t __OSEVEnd();
 extern unk_t __OSDBIntegrator();
 extern unk_t __OSDBJump();
-extern unk_t __OSSetExceptionHandler();
 extern unk_t __DBVECTOR();
 extern unk_t OSExceptionTable;
 extern unk_t OSDefaultExceptionHandler();
@@ -536,7 +537,7 @@ asm unk_t __OSDBJump()
 #pragma pop
 
 #pragma push
-asm unk_t __OSSetExceptionHandler()
+asm void __OSSetExceptionHandler(s32, __OSExceptionHandler)
 { // clang-format off
     nofralloc
 /* 803435B4 00340194  54 60 06 3E */	clrlwi r0, r3, 0x18
@@ -550,7 +551,7 @@ asm unk_t __OSSetExceptionHandler()
 #pragma pop
 
 #pragma push
-asm unk_t __OSGetExceptionHandler()
+asm __OSExceptionHandler __OSGetExceptionHandler(__OSException)
 { // clang-format off
     nofralloc
 /* 803435D0 003401B0  54 60 06 3E */	clrlwi r0, r3, 0x18

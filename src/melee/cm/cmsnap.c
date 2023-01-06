@@ -1,8 +1,8 @@
 #include <melee/cm/cmsnap.h>
-#include <dolphin/types.h>
+
+#include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 
-extern void func_800122C8();
 extern void func_800121FC();
 
 typedef struct {

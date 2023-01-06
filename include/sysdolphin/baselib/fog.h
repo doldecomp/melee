@@ -4,6 +4,7 @@
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <sysdolphin/baselib/object.h>
+#include <sysdolphin/baselib/fobj.h>
 
 typedef struct _HSD_FogAdj {
     /* 0x00 */ HSD_Obj parent;
@@ -50,6 +51,6 @@ HSD_FogAdj* HSD_FogAdjLoadDesc(HSD_FogAdjDesc*);
 void HSD_FogInit(HSD_Fog*, HSD_FogDesc*);
 void HSD_FogAdjInit(HSD_FogAdj*, HSD_FogAdjDesc*);
 void HSD_FogReqAnimByFlags(HSD_Fog*, u32 flags, f32 frame);
-void FogUpdateFunc();
+void FogUpdateFunc(HSD_Fog* fog, u32 type, FObjData* fv);
 
 #endif

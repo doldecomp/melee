@@ -3,7 +3,7 @@
 
 #include <dolphin/types.h>
 
-unk_t GXSetTlutRegionCallback();
-unk_t GXSetTexRegionCallback();
+unk_t GXSetTlutRegionCallback(void);
+unk_t GXSetTexRegionCallback(void);
 
 #endif
