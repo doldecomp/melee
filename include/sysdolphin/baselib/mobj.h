@@ -159,6 +159,8 @@ void HSD_MObjReqAnimByFlags(HSD_MObj* mobj, f32 startframe, u32 flags);
 void HSD_MObjReqAnim(HSD_MObj* mobj, f32 startframe);
 void HSD_MObjAnim(HSD_MObj* mobj);
 HSD_MObj* HSD_MObjLoadDesc(HSD_MObjDesc* mobjdesc);
+HSD_TObj* HSD_MObjGetTObj(HSD_MObj* mobj);
+void HSD_MObjRemove(HSD_MObj* mobj);
 HSD_MObj* HSD_MObjAlloc();
 HSD_Material* HSD_MaterialAlloc();
 void HSD_MObjCompileTev(HSD_MObj* mobj);

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTDONKEY_FTDONKEY_H
+#define MELEE_FT_CHARA_FTDONKEY_FTDONKEY_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftwalkcommon.h>
@@ -84,3 +85,5 @@ void ftDonkey_8010E464(HSD_GObj* fighter_gobj);
 void ftDonkey_8010E4EC(HSD_GObj* fighter_gobj);
 
 void ftDonkey_DestroyAllEffects(HSD_GObj* fighter_gobj);
+
+#endif

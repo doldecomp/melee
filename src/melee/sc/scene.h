@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_SC_SCENE_H
+#define MELEE_SC_SCENE_H
 
 // Model with a single animation or no animation
 typedef struct _StaticModelDesc {
@@ -23,3 +24,5 @@ typedef struct _SceneDesc {
     struct _HSD_LObjDesc** lights;
     struct _HSD_FogDesc** fogs;
 } SceneDesc;
+
+#endif

@@ -1,8 +1,8 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI_H
+#define MELEE_FT_CHARA_FTYOSHI_FTYOSHI_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
-
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mobj.h>
 
@@ -39,3 +39,5 @@ struct S_UNK_YOSHI1 {
 void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg);
 void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
                    f32 start_frame);
+
+#endif

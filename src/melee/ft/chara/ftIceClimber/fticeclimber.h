@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER_H
+#define MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
@@ -21,3 +22,5 @@ typedef struct _ftIceClimberAttributes {
     f32 xC8;
     u8 data_filler_2[0x90];
 } ftIceClimberAttributes;
+
+#endif
