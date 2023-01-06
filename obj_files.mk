@@ -220,7 +220,7 @@ TEXT_O_FILES    +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialHi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialLw.c.o\
-    
+
 
 TEXT_O_FILES    +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o\
