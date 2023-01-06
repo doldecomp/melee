@@ -94,15 +94,15 @@ ifeq ($(GENERATE_MAP),1)
 endif
 
 CFLAGS  = -msgstyle gcc \
-          -cwd source \
-          -Cpp_exceptions off \
-          -DGEKKO \
-          -proc gekko -fp hard \
-          -fp_contract on -O4,p \
-          -enum int \
-          -nodefaults \
-          -inline auto $(INCLUDES) \
-          -maxerrors $(MAX_ERRORS)
+		  -cwd source \
+		  -Cpp_exceptions off \
+		  -DGEKKO \
+		  -proc gekko -fp hard \
+		  -fp_contract on -O4,p \
+		  -enum int \
+		  -nodefaults \
+		  -inline auto $(INCLUDES) \
+		  -maxerrors $(MAX_ERRORS)
 
 ifeq ($(NON_MATCHING),1)
 CFLAGS += -DNON_MATCHING
