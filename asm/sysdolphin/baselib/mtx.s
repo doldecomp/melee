@@ -468,8 +468,8 @@ lbl_803799F8:
 /* 80379A18 003765F8  7C 08 03 A6 */	mtlr r0
 /* 80379A1C 003765FC  4E 80 00 20 */	blr
 
-.global func_80379A20
-func_80379A20:
+.global HSD_MtxInverseTranspose
+HSD_MtxInverseTranspose:
 /* 80379A20 00376600  7C 08 02 A6 */	mflr r0
 /* 80379A24 00376604  90 01 00 04 */	stw r0, 4(r1)
 /* 80379A28 00376608  94 21 FF A0 */	stwu r1, -0x60(r1)

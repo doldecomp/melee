@@ -8,5 +8,6 @@
 void _HSD_DispForgetMemory();
 void HSD_ZListInitAllocData(void);
 void HSD_EraseRect();
+MtxPtr _HSD_mkEnvelopeModelNodeMtx(HSD_JObj* m, MtxPtr mtx);
 
 #endif

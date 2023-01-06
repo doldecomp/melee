@@ -629,8 +629,8 @@ lbl_8037428C:
 /* 803742A4 00370E84  7C 08 03 A6 */	mtlr r0
 /* 803742A8 00370E88  4E 80 00 20 */	blr
 
-.global func_803742AC
-func_803742AC:
+.global _HSD_mkEnvelopeModelNodeMtx
+_HSD_mkEnvelopeModelNodeMtx:
 /* 803742AC 00370E8C  7C 08 02 A6 */	mflr r0
 /* 803742B0 00370E90  90 01 00 04 */	stw r0, 4(r1)
 /* 803742B4 00370E94  94 21 FF B0 */	stwu r1, -0x50(r1)
