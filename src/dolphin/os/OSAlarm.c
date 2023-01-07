@@ -26,8 +26,7 @@ void OSInitAlarm(void)
 
 void OSCreateAlarm(OSAlarm* alarm)
 {
-    /// @todo Hack.
-    *((s32*) alarm) = 0;
+    alarm->handler = NULL;
 }
 
 static void SetTimer(OSAlarm* alarm)
