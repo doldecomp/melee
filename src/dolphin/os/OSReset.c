@@ -98,7 +98,7 @@ lbl_80348400:
 
 #else
 
-void Reset(s32 unused)
+static void Reset(s32 unused)
 {
     NOT_IMPLEMENTED(Reset);
 }
