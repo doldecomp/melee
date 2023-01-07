@@ -4,6 +4,7 @@
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSAlarm.h>
+#include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSThread.h>
 
 #define CARD_FAT_CHECKSUM 0
@@ -82,7 +83,7 @@
 #define CARD_ATTR_GLOBAL 0x20
 #define CARD_ATTR_COMPANY 0x40
 
-typedef void (*CARDCallback)(s32 chan, s32 result);
+typedef void (*CARDCallback)(EXIChannel chan, s32 result);
 
 typedef struct CARDFileInfo {
     s32 chan;
@@ -179,12 +180,10 @@ typedef struct CARDID {
 } CARDID;
 
 s32 CARDClose(CARDFileInfo*);
-s32 CARDOpen(s32 chan, const char* filename, CARDFileInfo* fileInfo);
 int CARDWrite(CARDFileInfo*, void* buf, s32 length, s32 offset);
 int CARDRead(CARDFileInfo*, void* buf, u32 length, u32 offset);
-s32 CARDFastOpen(s32 chan, s32 fileno, CARDFileInfo* fileinfo);
-s32 __CARDReadStatus(s32 chan, u8* status);
 s32 __CARDClearStatus(s32 chan);
+s32 __CARDReadStatus(s32 chan, u8* status);
 static s32 Retry(s32 chan);
 CARDDir* __CARDGetDirBlock(CARDControl*);
 u16* __CARDGetFatBlock(CARDControl* card);

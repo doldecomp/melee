@@ -1,7 +1,6 @@
 #include <dolphin/gx/types.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GXFifo.h>
-#include <dolphin/gx/__GXGeometry.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/os/OSInterrupt.h>

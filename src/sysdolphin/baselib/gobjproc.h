@@ -4,7 +4,8 @@
 #include <dolphin/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
-struct _HSD_GObjProc* func_8038FD54(struct _HSD_GObj*,
-                                    void (*)(struct _HSD_GObj*), u8);
+typedef void (*HSD_GObjEvent)(HSD_GObj* gobj);
+
+struct _HSD_GObjProc* func_8038FD54(HSD_GObj*, HSD_GObjEvent, u8);
 
 #endif

@@ -1,4 +1,11 @@
+#include <cstring.h>
 #include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDBlock.h>
+#include <dolphin/card/CARDDir.h>
+#include <dolphin/card/CARDOpen.h>
+#include <Runtime/__mem.h>
+#include <string.h>
 
 #define CARDSetIconSpeed(stat, n, f)                                           \
     ((stat)->iconSpeed =                                                       \
@@ -102,7 +109,10 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size,
         return __CARDPutControlBlock(card, CARD_RESULT_INSSPACE);
     }
 
-    card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
+    /// @todo Eliminate cast to #CARDCallback.
+    card->apiCallback =
+        callback ? callback : (CARDCallback) __CARDDefaultApiCallback;
+
     card->freeNo = freeNo;
     ent = &dir[freeNo];
     ent->length = (u16) (size / card->sectorSize);
@@ -112,9 +122,12 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size,
     fileInfo->chan = chan;
     fileInfo->fileNo = freeNo;
 
-    result = __CARDAllocBlock(chan, size / card->sectorSize, CreateCallbackFat);
-    if (result < 0) {
+    /// @todo Eliminate cast to #CARDCallback.
+    result = __CARDAllocBlock(chan, size / card->sectorSize,
+                              (CARDCallback) CreateCallbackFat);
+
+    if (result < 0)
         return __CARDPutControlBlock(card, result);
-    }
+
     return result;
 }

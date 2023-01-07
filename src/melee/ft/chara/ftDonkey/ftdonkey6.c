@@ -1,5 +1,7 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey7.h>
 
+#include <melee/ft/chara/ftDonkey/ftdonkey.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 
 void ftDonkey_800E030C(HSD_GObj* fighter_gobj)
@@ -19,14 +21,16 @@ void ftDonkey_800E0350(HSD_GObj* fighter_gobj)
     func_80082C74(fighter_gobj, &ftDonkey_800E05E4);
 }
 
-s32 ftDonkey_800E0378(HSD_GObj* fighter_gobj)
+BOOL ftDonkey_800E0378(HSD_GObj* fighter_gobj)
 {
-    s32 result = func_800CAE80(fighter_gobj);
+    BOOL result = func_800CAE80(fighter_gobj);
+
     if (result) {
         ftDonkey_800E04A4(fighter_gobj, result);
-        return 1;
+        return TRUE;
     }
-    return 0;
+
+    return FALSE;
 }
 
 void ftDonkey_800E03C0(HSD_GObj* fighter_gobj)

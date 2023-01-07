@@ -24,9 +24,9 @@ void OSInitAlarm(void)
     }
 }
 
-void OSCreateAlarm(s32* arg0)
+void OSCreateAlarm(OSAlarm* alarm)
 {
-    *arg0 = 0;
+    alarm->handler = NULL;
 }
 
 static void SetTimer(OSAlarm* alarm)
@@ -185,6 +185,8 @@ static void DecrementerExceptionCallback(register __OSException exception,
     OSLoadContext(context);
 }
 
+#if defined(__MWERKS__) && defined(GEKKO)
+
 #pragma push
 asm void DecrementerExceptionHandler(__OSException exception,
                                      OSContext* context)
@@ -211,3 +213,5 @@ asm void DecrementerExceptionHandler(__OSException exception,
 /* 80343E40 00340A20  4B FF FD 88 */	b DecrementerExceptionCallback
 } // clang-format on
 #pragma pop
+
+#endif

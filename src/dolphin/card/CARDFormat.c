@@ -1,7 +1,12 @@
 #include <dolphin/card.h>
 
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDCheck.h>
+#include <dolphin/card/CARDRdwr.h>
+#include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSFont.h>
 #include <dolphin/os/OSRtc.h>
+#include <Runtime/__mem.h>
 
 extern vu16 __VIRegs[59] AT_ADDRESS(0xCC002000);
 
@@ -17,20 +22,24 @@ void FormatCallback(s32 chan, s32 result)
 
     ++card->formatStep;
     if (card->formatStep < CARD_NUM_SYSTEM_BLOCK) {
-        result = __CARDEraseSector(
-            chan, (u32) card->sectorSize * card->formatStep, FormatCallback);
-        if (0 <= result) {
+        /// @todo Eliminate cast to #CARDCallback.
+        result =
+            __CARDEraseSector(chan, (u32) card->sectorSize * card->formatStep,
+                              (CARDCallback) FormatCallback);
+
+        if (0 <= result)
             return;
-        }
     } else if (card->formatStep < 2 * CARD_NUM_SYSTEM_BLOCK) {
         int step = card->formatStep - CARD_NUM_SYSTEM_BLOCK;
+
+        /// @todo Eliminate cast to #CARDCallback.
         result = __CARDWrite(
             chan, (u32) card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE,
             (u8*) card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step),
-            FormatCallback);
-        if (result >= 0) {
+            (CARDCallback) FormatCallback);
+
+        if (result >= 0)
             return;
-        }
     } else {
         card->currentDir = (CARDDir*) ((u8*) card->workArea +
                                        (1 + 0) * CARD_SYSTEM_BLOCK_SIZE);
@@ -121,15 +130,21 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback)
                        &fat[CARD_FAT_CHECKSUM], &fat[CARD_FAT_CHECKSUMINV]);
     }
 
-    card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
+    /// @todo Eliminate cast to #CARDCallback.
+    card->apiCallback =
+        callback ? callback : (CARDCallback) __CARDDefaultApiCallback;
+
     DCStoreRange(card->workArea, CARD_WORKAREA_SIZE);
 
     card->formatStep = 0;
+
+    /// @todo Eliminate cast to #CARDCallback.
     result = __CARDEraseSector(chan, (u32) card->sectorSize * card->formatStep,
-                               FormatCallback);
-    if (result < 0) {
+                               (CARDCallback) FormatCallback);
+
+    if (result < 0)
         __CARDPutControlBlock(card, result);
-    }
+
     return result;
 }
 

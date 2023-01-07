@@ -1,12 +1,18 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
-s32 ftDonkey_800DF938(HSD_GObj* fighter_gobj)
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey6.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey4.h>
+#include <melee/ft/code_80081B38.h>
+
+BOOL ftDonkey_800DF938(HSD_GObj* fighter_gobj)
 {
     if (func_8008A1FC(fighter_gobj)) {
         ftDonkey_800DF980(fighter_gobj);
-        return 1;
+        return TRUE;
     }
-    return 0;
+
+    return FALSE;
 }
 
 void ftDonkey_800DF980(HSD_GObj* fighter_gobj)
@@ -28,9 +34,9 @@ void ftDonkey_800DF9F0(HSD_GObj* fighter_gobj)
         (!ftDonkey_800E0134(fighter_gobj)))
     {
         s32 result = ftDonkey_800DFA98(fighter_gobj);
-        if (result) {
+
+        if (result)
             return;
-        }
     }
 }
 

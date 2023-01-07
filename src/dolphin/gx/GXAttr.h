@@ -3,12 +3,14 @@
 
 #include <dolphin/types.h>
 
-/* 00339758 */ extern void GXSetNumTexGens(s8);
-/* 00339488 */ extern void GXSetTexCoordGen2(u32, s32, u32, s32, s32, s32);
-/* 00339478 */ extern void GXInvalidateVtxCache(void);
-/* 003393EC */ extern void GXSetArray(s32, s32, s8);
-/* 00338FF4 */ extern void GXSetVtxAttrFmt(s8 vertex_format, s32, s32, s32, s8);
-/* 00338FA8 */ extern void GXClearVtxDesc(void);
-/* 00338AE0 */ extern void GXSetVtxDesc(u32, s32);
+void GXSetNumTexGens(s8);
+void GXSetTexCoordGen2(u32, s32, u32, s32, s32, s32);
+void GXInvalidateVtxCache(void);
+void GXSetArray(s32, s32, s8);
+void GXSetVtxAttrFmt(s8 vertex_format, s32, s32, s32, s8);
+void GXClearVtxDesc(void);
+void GXSetVtxDesc(u32, s32);
+void __GXSetVCD(void);
+void __GXSetVAT(void);
 
 #endif

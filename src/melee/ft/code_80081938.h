@@ -1,3 +1,6 @@
+/** @file
+ * @todo Rename to @c ftUnk2.h
+ */
 #ifndef MELEE_FT_CODE_80081938_H
 #define MELEE_FT_CODE_80081938_H
 

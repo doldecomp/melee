@@ -69,9 +69,6 @@ void ftLuigi_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_80084F3C(HSD_GObj*);
-extern void func_80084DB0(HSD_GObj*);
-
 // 0x80142834 - Luigi's grounded Fireball Physics callback
 void ftLuigi_SpecialN_Phys(HSD_GObj* fighter_gobj)
 {

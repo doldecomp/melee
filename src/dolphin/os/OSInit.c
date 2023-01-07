@@ -1,8 +1,13 @@
+/** @file
+ * @todo Should be called @c OS.c.
+ */
 #include <dolphin/os/OSInit.h>
 
 #include <dolphin/types.h>
 #include <Runtime/__mem.h>
 #include <dolphin/os/OSArena.h>
+#include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/os.h>
 #include <dolphin/base/PPCArch.h>
@@ -324,8 +329,6 @@ extern unk_t __DBVECTOR();
 extern unk_t OSExceptionTable;
 extern unk_t OSDefaultExceptionHandler();
 extern unk_t __DBIsExceptionMarked();
-extern unk_t ICInvalidateRange();
-extern unk_t DCFlushRangeNoSync();
 extern unk_t DBPrintf();
 
 #pragma push
@@ -630,8 +633,6 @@ asm unk_t __OSEVEnd()
 } // clang-format on
 #pragma pop
 
-extern unk_t __OSUnhandledException();
-
 #pragma push
 asm unk_t OSDefaultExceptionHandler()
 { // clang-format off
@@ -659,8 +660,6 @@ asm unk_t OSDefaultExceptionHandler()
 /* 803436D0 003402B0  48 00 21 A0 */	b __OSUnhandledException
 } // clang-format on
 #pragma pop
-
-extern unk_t ICFlashInvalidate();
 
 #pragma push
 asm void __OSPSInit(void)

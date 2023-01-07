@@ -1,6 +1,11 @@
-#include <dolphin/card.h>
+#include <dolphin/card/CARDUnlock.h>
 
+#include <dolphin/card.h>
+#include <dolphin/card/CARDMount.h>
 #include <dolphin/os/os.h>
+#include <dolphin/os/OSCache.h>
+#include <MSL/rand.h>
+#include <string.h>
 
 static u8 CardData[] ATTRIBUTE_ALIGN(32) = {
     // clang-format off
@@ -302,8 +307,8 @@ s32 __CARDUnlock(s32 chan, u8 flashID[12])
     DCFlushRange(input, 8);
     DCInvalidateRange(output, 4);
     DCFlushRange(param, sizeof(DecodeParameters));
-
     task->priority = 255;
+
     task->iram_mmem_addr = (u16*) OSPhysicalToCached(CardData);
     task->iram_length = 0x160;
     task->iram_addr = 0;

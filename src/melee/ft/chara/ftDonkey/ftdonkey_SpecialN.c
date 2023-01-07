@@ -2,7 +2,9 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcoll.h>
 
 void ftDonkey_SetCallbacks_SpecialN(HSD_GObj* fighter_gobj)
 {
@@ -144,30 +146,33 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj)
         }
     }
     if (fp->x914[0].x0) {
-        if (fp->x2344_stateVar2_s32 == 0) {
+        if (fp->x2344_stateVar2_s32 == 0)
             fp->x2344_stateVar2_s32 = 1;
-        }
-        if (fp->x2350_stateVar5_s32 == -1) {
+
+        if (fp->x2350_stateVar5_s32 == -1)
             fp->x2350_stateVar5_s32 = fp->x914[0].xC;
-        }
+
         func_8007ABD0(&fp->x914[0],
                       fp->x2350_stateVar5_s32 +
                           (fp->x234C_stateVar4_s32 *
                            donkey_attr->SpecialN.x30_DAMAGE_PER_SWING),
                       fighter_gobj);
-        if (fp->x2354_stateVar6_s32 == -1) {
+
+        if (fp->x2354_stateVar6_s32 == -1)
             fp->x2354_stateVar6_s32 = fp->x914[1].xC;
-        }
+
         func_8007ABD0(&fp->x914[1],
                       fp->x2354_stateVar6_s32 +
                           (fp->x234C_stateVar4_s32 *
                            donkey_attr->SpecialN.x30_DAMAGE_PER_SWING),
                       fighter_gobj);
     }
+
     if (fp->x2344_stateVar2_s32 == 1) {
         fp->x2344_stateVar2_s32 = 2;
         ftDonkey_UpdateDKVelocityAfterPunch(fighter_gobj);
     }
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         fp->sa.dk.x222C = 0;
         ftDonkey_NullCallbacks(fighter_gobj);
@@ -181,10 +186,10 @@ void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj)
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
 
     if (fp->x2200_ftcmd_var0) {
-        if (fp->x2348_stateVar3_s32 == 0) {
+        if (fp->x2348_stateVar3_s32 == 0)
             fp->x2348_stateVar3_s32++;
-        }
     }
+
     if (fp->x2348_stateVar3_s32 == 1) {
         fp->x2348_stateVar3_s32++;
         if (fp->xE0_ground_or_air == GA_Air) {
@@ -195,13 +200,15 @@ void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj)
                      &fp->x2C_facing_direction);
         }
     }
-    if (fp->x914[0].x0 && (fp->x2344_stateVar2_s32 == 0)) {
+
+    if (fp->x914[0].x0 && (fp->x2344_stateVar2_s32 == 0))
         fp->x2344_stateVar2_s32 = 1;
-    }
+
     if (fp->x2344_stateVar2_s32 == 1) {
         fp->x2344_stateVar2_s32 = 2;
         ftDonkey_UpdateDKVelocityAfterPunch(fighter_gobj);
     }
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         fp->sa.dk.x222C = 0;
         ftDonkey_NullCallbacks(fighter_gobj);

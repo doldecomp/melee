@@ -1,9 +1,15 @@
-#include <dolphin/card.h>
+#include <dolphin/card/CARDMount.h>
 
+#include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDCheck.h>
+#include <dolphin/card/CARDUnlock.h>
+#include <dolphin/card/CARDRdwr.h>
+#include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSRtc.h>
 
 u8 GameChoice AT_ADDRESS(0x800030E3);
-void __CARDExiHandler(s32 chan, OSContext* context);
 
 u16 __CARDVendorID = 0xFFFF;
 
@@ -15,7 +21,7 @@ u32 LatencyTable[8] = {
     4, 8, 16, 32, 64, 128, 256, 512,
 };
 
-s32 CARDProbe(s32 chan)
+s32 CARDProbe(EXIChannel chan)
 {
     if (GameChoice & 0x80) {
         return 0;
@@ -23,7 +29,7 @@ s32 CARDProbe(s32 chan)
     return EXIProbe(chan);
 }
 
-s32 CARDProbeEx(s32 chan, s32* memSize, s32* sectorSize)
+s32 CARDProbeEx(EXIChannel chan, s32* memSize, s32* sectorSize)
 {
     u32 id;
     CARDControl* card;
@@ -64,7 +70,7 @@ s32 CARDProbeEx(s32 chan, s32* memSize, s32* sectorSize)
     } else if (!EXIGetID(chan, 0, &id)) {
         result = CARD_RESULT_BUSY;
     } else if ((id == 0x80000004 && __CARDVendorID != 0xFFFF) ||
-               !(id & 0xFFFF0000) && !(id & 3))
+               (!(id & 0xFFFF0000) && !(id & 3)))
     {
         if (memSize) {
             *memSize = (s32) (id & 0xfc);
@@ -81,10 +87,9 @@ s32 CARDProbeEx(s32 chan, s32* memSize, s32* sectorSize)
     return result;
 }
 
-void __CARDMountCallback(s32 chan, s32 result);
 static void DoUnmount(s32 chan, s32 result);
 
-s32 DoMount(s32 chan)
+s32 DoMount(EXIChannel chan)
 {
     CARDControl* card;
     u32 id;
@@ -101,7 +106,7 @@ s32 DoMount(s32 chan)
         if (EXIGetID(chan, 0, &id) == 0) {
             result = CARD_RESULT_NOCARD;
         } else if ((id == 0x80000004 && __CARDVendorID != 0xFFFF) ||
-                   !(id & 0xFFFF0000) && !(id & 3))
+                   (!(id & 0xFFFF0000) && !(id & 3)))
         {
             result = CARD_RESULT_READY;
         } else {
@@ -193,10 +198,13 @@ s32 DoMount(s32 chan)
     }
 
     step = card->mountStep - 2;
+
+    /// @todo Eliminate cast to #CARDCallback.
     result =
         __CARDRead(chan, (u32) card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE,
                    (u8*) card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step),
-                   __CARDMountCallback);
+                   (CARDCallback) __CARDMountCallback);
+
     if (result < 0) {
         __CARDPutControlBlock(card, result);
     }
@@ -246,8 +254,6 @@ void __CARDMountCallback(s32 chan, s32 result)
     callback(chan, result);
 }
 
-void __CARDExtHandler(s32 chan, OSContext* context);
-
 s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
                    CARDCallback attachCallback)
 {
@@ -276,11 +282,16 @@ s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
     card->result = CARD_RESULT_BUSY;
     card->workArea = workArea;
     card->extCallback = detachCallback;
-    card->apiCallback =
-        attachCallback ? attachCallback : __CARDDefaultApiCallback;
-    card->exiCallback = 0;
 
-    if (!card->attached && !EXIAttach(chan, __CARDExtHandler)) {
+    /// @todo Eliminate cast to #CARDCallback.
+    card->apiCallback = attachCallback
+                            ? attachCallback
+                            : (CARDCallback) __CARDDefaultApiCallback;
+
+    card->exiCallback = NULL;
+
+    /// @todo eliminate cast to #EXICallback
+    if (!card->attached && !EXIAttach(chan, (EXICallback) __CARDExtHandler)) {
         card->result = CARD_RESULT_NOCARD;
         OSRestoreInterrupts(enabled);
         return CARD_RESULT_NOCARD;
@@ -296,8 +307,11 @@ s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
 
     OSRestoreInterrupts(enabled);
 
-    card->unlockCallback = __CARDMountCallback;
-    if (!EXILock(chan, 0, __CARDUnlockedHandler)) {
+    /// @todo Eliminate cast to #CARDCallback.
+    card->unlockCallback = (CARDCallback) __CARDMountCallback;
+
+    /// @todo eliminate cast to #EXICallback
+    if (!EXILock(chan, 0, (EXICallback) __CARDUnlockedHandler)) {
         return CARD_RESULT_READY;
     }
     card->unlockCallback = 0;

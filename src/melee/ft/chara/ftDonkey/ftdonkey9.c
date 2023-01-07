@@ -1,7 +1,9 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
+#include <melee/ft/chara/ftDonkey/ftdonkey1.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/item.h>
+#include <melee/ft/code_80081B38.h>
 
 void ftDonkey_800E0698(HSD_GObj* fighter_gobj)
 {
@@ -12,6 +14,8 @@ void ftDonkey_800E06B8(HSD_GObj* fighter_gobj)
 {
     ftDonkey_800DFA70(fighter_gobj);
 }
+
+static BOOL ftDonkey_800E0750(HSD_GObj* fighter_gobj);
 
 void ftDonkey_800E06D8(HSD_GObj* fighter_gobj)
 {
@@ -30,13 +34,13 @@ BOOL ftDonkey_800E0750(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_8008E984(fp)) {
-        return 1;
-    }
-    if (func_8008D8E8(scaleBy154_8008D8D8(fp->dmg.x1850_forceApplied)) < 3) {
-        return 1;
-    }
-    return 0;
+    if (func_8008E984(fp))
+        return TRUE;
+
+    if (func_8008D8E8(scaleBy154_8008D8D8(fp->dmg.x1850_forceApplied)) < 3)
+        return TRUE;
+
+    return FALSE;
 }
 
 void ftDonkey_800E07B0(HSD_GObj* fighter_gobj)

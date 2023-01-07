@@ -103,8 +103,14 @@ Short for "target."
 @section glossary_unk unk
 Short for "unknown."
 
+@section glossary_vec vec
+Short for "vector."
+
 @section glossary_vel vel
 Short for "velocity."
+
+@section glossary_vtx vtx
+Short for "vertex."
 
 @section glossary_zako zako
 Zako (雑魚) is Japanese for "trash mob" in video games, literally "small fish."

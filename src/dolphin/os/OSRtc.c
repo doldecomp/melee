@@ -1,7 +1,10 @@
 #include <dolphin/os/OSRtc.h>
 
-#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/os.h>
+#include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSExi.h>
+#include <dolphin/os/OSInterrupt.h>
 
 #define RTC_CMD_READ 0x20000000
 #define RTC_CMD_WRITE 0xA0000000
@@ -26,9 +29,8 @@ static SramControlBlock Scb ATTRIBUTE_ALIGN(32);
 
 BOOL WriteSram(void* buffer, u32 offset, u32 size);
 
-void WriteSramCallback(void)
+void WriteSramCallback(EXIChannel unused0, OSContext* unused1)
 {
-    s32 unused;
     Scb.sync = WriteSram(&Scb.sram[Scb.offset], Scb.offset, 0x40 - Scb.offset);
     if (Scb.sync) {
         Scb.offset = 0x40;
@@ -67,9 +69,9 @@ BOOL WriteSram(void* buffer, u32 offset, u32 size)
     BOOL err;
     u32 cmd;
 
-    if (!EXILock(RTC_CHAN, RTC_DEV, WriteSramCallback)) {
+    if (!EXILock(RTC_CHAN, RTC_DEV, WriteSramCallback))
         return FALSE;
-    }
+
     if (!EXISelect(RTC_CHAN, RTC_DEV, RTC_FREQ)) {
         EXIUnlock(RTC_CHAN);
         return FALSE;
@@ -87,7 +89,7 @@ BOOL WriteSram(void* buffer, u32 offset, u32 size)
     return !err;
 }
 
-void __OSInitSram()
+void __OSInitSram(void)
 {
     Scb.locked = Scb.enabled = FALSE;
     Scb.sync = ReadSram(Scb.sram);
@@ -109,12 +111,12 @@ static void* LockSram(u32 offset)
     return Scb.sram + offset;
 }
 
-OSSram* __OSLockSram()
+OSSram* __OSLockSram(void)
 {
     return LockSram(0);
 }
 
-OSSramEx* __OSLockSramEx()
+OSSramEx* __OSLockSramEx(void)
 {
     return LockSram(sizeof(OSSram));
 }
@@ -165,17 +167,17 @@ void __OSUnlockSramEx(BOOL commit)
     UnlockSram(commit, 0x14);
 }
 
-BOOL __OSSyncSram()
+BOOL __OSSyncSram(void)
 {
     return Scb.sync;
 }
 
-inline OSSram* __OSLockSramHACK()
+static inline OSSram* __OSLockSramHACK(void)
 {
     return LockSram(0);
 }
 
-u32 OSGetSoundMode()
+u32 OSGetSoundMode(void)
 {
     OSSram* sram = __OSLockSramHACK();
     u32 mode = (sram->flags & 0x4) ? OS_SOUND_MODE_STEREO : OS_SOUND_MODE_MONO;
@@ -200,7 +202,7 @@ void OSSetSoundMode(u32 mode)
     __OSUnlockSram(TRUE);
 }
 
-u32 OSGetProgressiveMode()
+u32 OSGetProgressiveMode(void)
 {
     OSSram* sram = __OSLockSramHACK();
     u32 mode = (sram->flags & 0x80) >> 7;
@@ -225,19 +227,19 @@ void OSSetProgressiveMode(u32 mode)
     __OSUnlockSram(TRUE);
 }
 
-u32 OSGetWirelessID(u32 channel)
+u32 OSGetWirelessID(u32 chan)
 {
     OSSramEx* sram = __OSLockSramEx();
-    u16 id = sram->wirelessPadID[channel];
+    u16 id = sram->wirelessPadID[chan];
     __OSUnlockSramEx(FALSE);
     return id;
 }
 
-void OSSetWirelessID(u32 channel, u16 id)
+void OSSetWirelessID(u32 chan, u16 id)
 {
     OSSramEx* sram = __OSLockSramEx();
-    if (sram->wirelessPadID[channel] != id) {
-        sram->wirelessPadID[channel] = id;
+    if (sram->wirelessPadID[chan] != id) {
+        sram->wirelessPadID[chan] = id;
         __OSUnlockSramEx(TRUE);
     } else {
         __OSUnlockSramEx(FALSE);

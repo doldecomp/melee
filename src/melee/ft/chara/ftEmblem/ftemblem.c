@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftEmblem/ftemblem.h>
 
+#include <melee/ft/chara/ftMars/ftMars.h>
+#include <melee/ft/ftparts.h>
+
 void ftRoy_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

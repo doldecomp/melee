@@ -1,3 +1,6 @@
+/** @file
+ * @todo Rename to @c plUnk1.
+ */
 #ifndef MELEE_PL_PL_UNKNOWN_001_H
 #define MELEE_PL_PL_UNKNOWN_001_H
 
@@ -14,5 +17,7 @@ void func_80040330();
 void func_80040B8C();
 void func_800411C4();
 void func_80041280();
+u32 func_800386D8(void*, s32);
+void func_80040120(u8, s32);
 
 #endif
