@@ -100,7 +100,7 @@ lbl_80348400:
 
 static void Reset(s32 unused)
 {
-    NOT_IMPLEMENTED(Reset);
+    NOT_IMPLEMENTED;
 }
 
 #endif

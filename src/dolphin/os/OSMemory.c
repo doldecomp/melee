@@ -91,7 +91,7 @@ asm void Config24MB(void)
 
 void Config24MB(void)
 {
-    NOT_IMPLEMENTED(Config24MB);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -139,7 +139,7 @@ asm void Config48MB(void)
 
 void Config48MB(void)
 {
-    NOT_IMPLEMENTED(Config48MB);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -161,7 +161,7 @@ asm void RealMode(register void (*)(void))
 
 void RealMode(void (*unused)(void))
 {
-    NOT_IMPLEMENTED(DCZeroRange);
+    NOT_IMPLEMENTED;
 }
 
 #endif

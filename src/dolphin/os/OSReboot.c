@@ -28,7 +28,7 @@ void Run(register void (*callback)(void))
 
 void Run(void (*unused)(void))
 {
-    NOT_IMPLEMENTED(Run);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -181,7 +181,7 @@ lbl_803482E0:
 
 void __OSReboot(u32 resetCode, BOOL forceMenu)
 {
-    NOT_IMPLEMENTED(__OSReboot);
+    NOT_IMPLEMENTED;
 }
 
 #endif

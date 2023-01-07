@@ -310,7 +310,7 @@ lbl_8034613C:
 
 BOOL EXISync(EXIChannel unused)
 {
-    NOT_IMPLEMENTED(EXISync);
+    NOT_IMPLEMENTED;
     return FALSE;
 }
 
@@ -662,7 +662,7 @@ lbl_80346C58:
 
 static void EXTIntrruptHandler(__OSInterrupt unused0, OSContext* unused1)
 {
-    NOT_IMPLEMENTED(EXTIntrruptHandler);
+    NOT_IMPLEMENTED;
 }
 
 #endif

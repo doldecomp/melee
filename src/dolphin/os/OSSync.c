@@ -31,7 +31,7 @@ entry __OSSystemCallVectorEnd
 
 void __OSSystemCallVector(void)
 {
-    NOT_IMPLEMENTED(__OSSystemCallVector);
+    NOT_IMPLEMENTED;
 }
 
 #endif

@@ -35,7 +35,7 @@ asm void DCEnable(void)
 
 void DCEnable(void)
 {
-    NOT_IMPLEMENTED(DCEnable);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -63,7 +63,7 @@ asm void DCInvalidateRange(register void* addr, register size_t nbytes)
 
 void DCInvalidateRange(void* addr, size_t nbytes)
 {
-    NOT_IMPLEMENTED(DCInvalidateRange);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -92,7 +92,7 @@ asm void DCFlushRange(register void* addr, register size_t nbytes)
 
 void DCFlushRange(void* addr, size_t nbytes)
 {
-    NOT_IMPLEMENTED(DCFlushRange);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -121,7 +121,7 @@ asm void DCStoreRange(register void* addr, register size_t nbytes)
 
 void DCStoreRange(void* addr, size_t nbytes)
 {
-    NOT_IMPLEMENTED(DCStoreRange);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -149,7 +149,7 @@ asm void DCFlushRangeNoSync(register void* addr, register size_t nbytes)
 
 void DCFlushRangeNoSync(void* addr, size_t nbytes)
 {
-    NOT_IMPLEMENTED(DCFlushRangeNoSync);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -177,7 +177,7 @@ asm void DCZeroRange(register void* addr, register size_t nbytes)
 
 void DCZeroRange(void* addr, size_t nbytes)
 {
-    NOT_IMPLEMENTED(DCZeroRange);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -207,7 +207,7 @@ asm void ICInvalidateRange(register void* addr, register size_t nbytes)
 
 void ICInvalidateRange(void* addr, size_t nbytes)
 {
-    NOT_IMPLEMENTED(ICInvalidateRange);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -225,7 +225,7 @@ asm void ICFlashInvalidate(void)
 
 void ICFlashInvalidate(void)
 {
-    NOT_IMPLEMENTED(ICFlashInvalidate);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -244,7 +244,7 @@ asm void ICEnable(void)
 
 void ICEnable(void)
 {
-    NOT_IMPLEMENTED(ICEnable);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -311,7 +311,7 @@ lockloop:
 
 void __LCEnable(void)
 {
-    NOT_IMPLEMENTED(__LCEnable);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -343,7 +343,7 @@ asm void LCDisable(void)
 
 void LCDisable(void)
 {
-    NOT_IMPLEMENTED(LCDisable);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -367,7 +367,7 @@ asm void LCStoreBlocks(register void* dst, register void* src,
 
 void LCStoreBlocks(void* dst, void* src, u32 nblocks)
 {
-    NOT_IMPLEMENTED(LCStoreBlocks);
+    NOT_IMPLEMENTED;
 }
 
 #endif
@@ -410,7 +410,7 @@ asm void LCQueueWait(register u32 len)
 
 void LCQueueWait(u32 len)
 {
-    NOT_IMPLEMENTED(LCQueueWait);
+    NOT_IMPLEMENTED;
 }
 
 #endif

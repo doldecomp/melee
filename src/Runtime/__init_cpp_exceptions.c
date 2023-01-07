@@ -42,7 +42,7 @@ void __init_cpp_exceptions(void)
 
 void __init_cpp_exceptions(void)
 {
-    NOT_IMPLEMENTED(__init_cpp_exceptions);
+    NOT_IMPLEMENTED;
 }
 
 #endif

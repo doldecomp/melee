@@ -59,7 +59,7 @@ static void __DBExceptionDestination(void)
 
 static void __DBExceptionDestination(void)
 {
-    NOT_IMPLEMENTED(__DBExceptionDestination);
+    NOT_IMPLEMENTED;
 }
 
 #endif
