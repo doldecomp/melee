@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftFalco/ftfalco.h>
 
+#include <melee/ft/chara/ftFox/ftfox.h>
+#include <melee/ft/ftparts.h>
 #include <melee/it/itkind.h>
 
 void ftFalco_OnDeath(HSD_GObj* gobj)

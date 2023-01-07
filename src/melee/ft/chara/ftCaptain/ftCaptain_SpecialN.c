@@ -2,6 +2,10 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftlib.h>
 #include <melee/lb/lbunknown_003.h>
 #include <MSL/trigf.h>
 

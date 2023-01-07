@@ -1,5 +1,8 @@
+#include <dolphin/os/OSSerial.h>
+
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSRtc.h>
 #include <dolphin/os/OSTime.h>
 
 extern struct {
@@ -671,8 +674,6 @@ lbl_80349D98:
 } // clang-format on
 #pragma pop
 
-extern unk_t SIGetType();
-
 #pragma push
 asm unk_t SIInit()
 { // clang-format off
@@ -938,7 +939,7 @@ s32 SISetXY(u32 arg0, u32 arg1)
 }
 
 #pragma push
-asm unk_t SIEnablePolling()
+asm void SIEnablePolling(u32 chan_mask)
 { // clang-format off
     nofralloc
 /* 8034A150 00346D30  7C 08 02 A6 */	mflr r0
@@ -986,7 +987,7 @@ lbl_8034A1D8:
 #pragma pop
 
 #pragma push
-asm unk_t SIDisablePolling()
+asm void SIDisablePolling(u32 chan_mask)
 { // clang-format off
     nofralloc
 /* 8034A1EC 00346DCC  7C 08 02 A6 */	mflr r0
@@ -1294,10 +1295,6 @@ lbl_8034A5D4:
 } // clang-format on
 #pragma pop
 
-extern unk_t __PADFixBits;
-extern unk_t OSGetWirelessID();
-extern unk_t OSSetWirelessID();
-
 #pragma push
 asm unk_t GetTypeCallback()
 { // clang-format off
@@ -1486,7 +1483,7 @@ lbl_8034A86C:
 extern unk_t lbl_804D73CC;
 
 #pragma push
-asm unk_t SIGetType()
+asm u32 SIGetType(s32)
 { // clang-format off
     nofralloc
 /* 8034A880 00347460  7C 08 02 A6 */	mflr r0
@@ -1614,7 +1611,7 @@ lbl_8034AA30:
 extern unk_t lbl_804A7F18;
 
 #pragma push
-asm unk_t SIGetTypeAsync()
+asm void SIGetTypeAsync(s32, SICallback)
 { // clang-format off
     nofralloc
 /* 8034AA44 00347624  7C 08 02 A6 */	mflr r0

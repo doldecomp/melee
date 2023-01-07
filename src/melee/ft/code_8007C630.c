@@ -1,3 +1,6 @@
+/** @file
+ * @todo Rename to @c ftUnk1.c
+ */
 #include <dolphin/types.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftcoll.h>

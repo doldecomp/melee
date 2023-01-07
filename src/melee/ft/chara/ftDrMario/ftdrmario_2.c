@@ -1,5 +1,11 @@
 #include <melee/ft/chara/ftDrMario/ftdrmario.h>
 
+#include <melee/ft/chara/ftMario/ftmario.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
+
 void func_80149954(HSD_GObj* gobj)
 {
     Vec3 sp18;

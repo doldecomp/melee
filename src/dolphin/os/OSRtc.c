@@ -227,19 +227,19 @@ void OSSetProgressiveMode(u32 mode)
     __OSUnlockSram(TRUE);
 }
 
-u32 OSGetWirelessID(u32 channel)
+u32 OSGetWirelessID(u32 chan)
 {
     OSSramEx* sram = __OSLockSramEx();
-    u16 id = sram->wirelessPadID[channel];
+    u16 id = sram->wirelessPadID[chan];
     __OSUnlockSramEx(FALSE);
     return id;
 }
 
-void OSSetWirelessID(u32 channel, u16 id)
+void OSSetWirelessID(u32 chan, u16 id)
 {
     OSSramEx* sram = __OSLockSramEx();
-    if (sram->wirelessPadID[channel] != id) {
-        sram->wirelessPadID[channel] = id;
+    if (sram->wirelessPadID[chan] != id) {
+        sram->wirelessPadID[chan] = id;
         __OSUnlockSramEx(TRUE);
     } else {
         __OSUnlockSramEx(FALSE);

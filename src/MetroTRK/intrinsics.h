@@ -3,5 +3,6 @@
 
 void __sync(void);
 void __isync(void);
+int __cntlzw(unsigned int);
 
 #endif

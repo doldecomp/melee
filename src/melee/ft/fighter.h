@@ -20,10 +20,11 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
+/// @defgroup FIGHTER_LOADCOMMONDATA_ARRAY Fighter_LoadCommonData Array
 /// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers
+/// @{
 extern void* lbl_804D64FC;
-
 extern void* lbl_804D6500;
 extern void* lbl_804D6504;
 extern void* lbl_804D6508;

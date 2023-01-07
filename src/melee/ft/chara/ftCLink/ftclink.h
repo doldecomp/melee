@@ -4,6 +4,7 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
+/// @todo this is #ftLinkAttributes.
 typedef struct _CLinkAttributes {
     s32 x0_pad[(0xC - 0x0) / 4];
     s32 xC;
