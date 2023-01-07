@@ -23,7 +23,7 @@
 
 #if defined(__MWERKS__) && defined(GEKKO)
 
-asm void DCEnable()
+asm void DCEnable(void)
 { // clang-format off
     sync
     mfspr r3, HID0
