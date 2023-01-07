@@ -63,18 +63,11 @@ typedef jmp_t jtbl_t[];
 #endif
 #endif
 
-#if defined(PERMUTER)
-
 #define AT_ADDRESS(x) = FIXEDADDR(x)
-
 #elif defined(__MWERKS__)
-
 #define AT_ADDRESS(x) : (x)
-
 #else
-
 #define AT_ADDRESS(x)
-
 #endif
 
 #pragma region "macros.inc"
