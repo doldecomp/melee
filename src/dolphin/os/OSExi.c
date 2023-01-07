@@ -121,10 +121,7 @@ BOOL EXIImmEx(EXIChannel chan, void* buf, s32 len, u32 mode)
         if (!EXISync(chan))
             return FALSE;
 
-/// @todo what
-#if defined(__MWERKS__) && defined(GEKKO)
-        (u8*) buf += xLen;
-#endif
+        buf = (u8*) buf + xLen;
 
         len -= xLen;
     }
