@@ -2,7 +2,9 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 
 // 0x801445C4
@@ -13,9 +15,7 @@ void ftLuigi_SpecialLw_UpdateRot(HSD_GObj* fighter_gobj)
     func_8007592C(fp, 0, 0.0f);
 }
 
-extern void func_8007D440(Fighter*, f32);
-
-inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
+static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
@@ -27,14 +27,14 @@ inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
     fp->luigiVars[0].SpecialLw.isUnkColl = FALSE;
 }
 
-inline void ftLuigi_SpecialLw_SetCall(HSD_GObj* fighter_gobj)
+static inline void ftLuigi_SpecialLw_SetCall(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     fp->cb.x21DC_callback_OnTakeDamage = ftLuigi_SpecialLw_UpdateRot;
     fp->cb.x21E4_callback_OnDeath2 = ftLuigi_SpecialLw_UpdateRot;
 }
 
-inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* fighter_gobj)
+static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     HSD_JObj* hsd_obj = fighter_gobj->hsd_obj;
@@ -104,7 +104,7 @@ void ftLuigi_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
     fp2->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
-inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* fighter_gobj)
+static inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
@@ -160,11 +160,7 @@ void ftLuigi_SpecialAirLw_IASA(HSD_GObj* fighter_gobj)
     return;
 }
 
-extern void ftComm_ClampFallSpeed(Fighter*, f32);
-extern void func_8007CADC(Fighter*, f32, f32, f32);
-extern void func_8007D440(Fighter*, f32);
-
-inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
+static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
@@ -210,9 +206,6 @@ void ftLuigi_SpecialLw_Phys(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_8007D3A8(Fighter*, f32, f32, f32);
-extern void func_8007D508(Fighter*, f32, f32);
-
 // 0x80144A74C
 // https://decomp.me/scratch/85hbq // Luigi's aerial Cyclone Physics callback
 void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
@@ -248,13 +241,11 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
                   var);
 }
 
-extern BOOL func_800824A0(HSD_GObj*, ftCollisionBox*);
-extern BOOL func_80082888(HSD_GObj*, ftCollisionBox*);
+static ftCollisionBox ftLuigi_SpecialLw_CollisionBox = {
+    12.0F, 0.0F, { -6.0F, 6.0F }, { 6.0F, 6.0F }
+};
 
-static ftCollisionBox ftLuigi_SpecialLw_CollisionBox = { 12.0F, 0.0F, -6.0F,
-                                                         6.0F,  6.0F, 6.0F };
-
-inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* fighter_gobj)
+static inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (((u32) fp->x220C_ftcmd_var3 != 0U) &&
@@ -297,7 +288,7 @@ void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj)
     ftLuigi_SpecialLw_UnkAngle(fighter_gobj);
 }
 
-inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
+static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;

@@ -181,8 +181,13 @@ void ftFox_AppealS_OnTakeDamage(HSD_GObj* fighter_gobj);
 
 // Neutral Special - Blaster (SpecialN) //
 
+/// Get Fox/Falco's Item Hold Bone Position for Blaster GFX
 void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos);
+
+/// Get Fox/Falco's Item Hold Bone Position for Blaster GFX again?
+/// @remarks Used in Blaster's item code.
 void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos);
+
 void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj);
 BOOL ftFox_CheckRemoveBlaster(HSD_GObj* fighter_gobj);
 s32 ftFox_GetBlasterAction(HSD_GObj* fighter_gobj);

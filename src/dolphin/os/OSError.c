@@ -49,7 +49,7 @@ OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler)
     return prevHandler;
 }
 
-#if !defined(NON_MATCHING) && defined(__MWERKS__) && defined(GEKKO)
+#ifdef MUST_MATCH
 
 /* static */ extern char* lbl_80401FF8;
 /* static */ extern jtbl_t jtbl_804022D4;
@@ -213,7 +213,6 @@ lbl_80345A3C:
 /* 80345A68 00342648  7C 08 03 A6 */	mtlr r0
 /* 80345A6C 0034264C  4E 80 00 20 */	blr
 } // clang-format on
-
 #pragma pop
 
 #else

@@ -1,9 +1,7 @@
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
-
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftparts.h>
 
-/// TODO remove float externs when file is finished and float data is removed
-/// from asm
 extern f32 lbl_804D9898;
 
 void ftNana_OnLoad(HSD_GObj* fighter_gobj)
@@ -34,6 +32,8 @@ void ftNana_OnDeath(HSD_GObj* fighter_gobj)
     fp->sa.nana.x224C = 0;
     fp->sa.nana.x2250 = lbl_804D9898;
 }
+
+/* static */ void func_801238E4(HSD_GObj* fighter_gobj);
 
 void ftNana_80122FAC(HSD_GObj* fighter_gobj)
 {

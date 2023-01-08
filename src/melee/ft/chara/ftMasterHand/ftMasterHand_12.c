@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/code_80081B38.h>
+
 // 80152634 14F214
 // https://decomp.me/scratch/ZAr9B
 void lbl_80152634(HSD_GObj* arg0)
@@ -14,9 +17,8 @@ void lbl_80152634(HSD_GObj* arg0)
 void lbl_80152670(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(arg0);
-    }
 }
 
 // 801526B4 14F294

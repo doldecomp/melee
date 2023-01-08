@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
+
 #include <melee/it/itkind.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/ft_unknown_006.h>
 
 void ftMewtwo_OnDeath(HSD_GObj* gobj)
 {
@@ -29,6 +32,7 @@ void ftMewtwo_OnLoad(HSD_GObj* fighter_gobj)
 
 void ftMewTwo_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
 {
+    return;
 }
 
 void ftMewtwo_OnDeath2(HSD_GObj* fighter_gobj)
@@ -49,10 +53,12 @@ void ftMewTwo_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool)
 
 void ftMewTwo_OnItemInvisible(HSD_GObj* fighter_gobj)
 {
+    return;
 }
 
 void ftMewTwo_OnItemVisible(HSD_GObj* fighter_gobj)
 {
+    return;
 }
 
 void ftMewTwo_80144F58(HSD_GObj* fighter_gobj)
@@ -60,9 +66,9 @@ void ftMewTwo_80144F58(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     ftMewtwoAttributes* attr = fp->x2D4_specialAttributes;
     f32 attr_value = attr->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
-    if (fp->sa.mewtwo.x2234_shadowBallCharge == attr_value) {
+
+    if (fp->sa.mewtwo.x2234_shadowBallCharge == attr_value)
         func_800BFFD0(fp, 0x5C, 0);
-    }
 }
 
 void ftMewTwo_LoadSpecialAttrs(HSD_GObj* fighter_gobj)

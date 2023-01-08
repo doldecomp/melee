@@ -72,7 +72,10 @@ s32 func_80087120(HSD_GObj*);
 void func_80087140(HSD_GObj*);
 void func_800871A8(HSD_GObj*, HSD_GObj*);
 BOOL func_80087284(HSD_GObj*);
+
+/// @todo Returns #FighterKind
 s32 func_800872A4(HSD_GObj*);
+
 void* func_800872B0(HSD_GObj*);
 BOOL func_800872BC(HSD_GObj*);
 s32 func_80087300(HSD_GObj*);
@@ -101,12 +104,5 @@ void func_8008770C(HSD_GObj*, void* dst);
 void func_80087744(HSD_GObj*, void* dst);
 void func_8008777C(HSD_GObj*);
 BOOL func_800877D4(HSD_GObj*);
-
-struct _HSD_GObj* func_8008627C(Vec*, struct _HSD_GObj*);
-void func_800866DC(struct _HSD_GObj*, Vec*);
-void func_800867E8();
-void func_8008688C();
-s32 func_80087120(struct _HSD_GObj*);
-s32 func_800872A4(struct _HSD_GObj*);
 
 #endif

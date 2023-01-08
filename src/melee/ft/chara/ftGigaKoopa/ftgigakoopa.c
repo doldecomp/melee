@@ -1,7 +1,8 @@
-#include <melee/ft/chara/ftKoopa/ftkoopa.h>
 #include <melee/ft/chara/ftGigaKoopa/ftgigakoopa.h>
 
+#include <melee/ft/chara/ftKoopa/ftkoopa.h>
 #include <melee/it/itkind.h>
+#include <melee/ft/ftparts.h>
 
 void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj)
 {
@@ -14,8 +15,6 @@ void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj)
     fp->sa.gkoopa.x222C = koopaAttr->x10;
     fp->sa.gkoopa.x2230 = koopaAttr->x18;
 }
-
-#pragma peephole on
 
 void func_8014F698(HSD_GObj* gobj)
 {
@@ -31,28 +30,28 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     ftKoopa_OnLoadForGKoopa(fp);
     func_8026B3F8(items[0], It_Kind_Koopa_Flame);
 
-    fp->x2226_flag.bits.b1 = 1;
-    fp->x222A_flag.bits.b0 = 1;
+    fp->x2226_flag.bits.b1 = TRUE;
+    fp->x222A_flag.bits.b0 = TRUE;
 }
 
 void ftGKoopa_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(fighter_gobj, bool, TRUE, TRUE);
 }
 
 void ftGKoopa_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, TRUE);
 }
 
 void ftGKoopa_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, TRUE);
 }
 
 void ftGKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, TRUE, TRUE);
 }
 
 void ftGKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -62,12 +61,12 @@ void ftGKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftGKoopa_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, TRUE);
 }
 
 void ftGKoopa_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(gobj, 1);
+    Fighter_OnKnockbackExit(gobj, TRUE);
 }
 
 void func_8014F98C(s32 arg0, s32* arg1, s32* arg2)
@@ -78,9 +77,9 @@ void func_8014F98C(s32 arg0, s32* arg1, s32* arg2)
     }
 }
 
-extern const s32 lbl_803D3984[];
+/* static */ extern const s32 lbl_803D3984[];
 
-// UB warning: this function may use offset uninitialized
+/// @remarks UB warning: this function may use offset uninitialized
 s32 func_8014F9A4(s32 arg0)
 {
     int offset;

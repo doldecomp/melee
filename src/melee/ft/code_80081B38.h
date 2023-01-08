@@ -6,6 +6,7 @@
 
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <melee/ft/fighter.h>
 
 HSD_GObj* func_80082E3C(HSD_GObj* fighter_gobj);
 f32 Stage_GetGroundFrictionMultiplier(struct _Fighter* fp);
@@ -26,5 +27,13 @@ void func_80082C74(HSD_GObj*, HSD_GObjEvent);
 
 /// @todo Name does not follow our conventions.
 BOOL EnvColl_CheckGroundAndLedge(HSD_GObj* fighter_gobj, s32 direction);
+
+void func_80083F88(HSD_GObj* fighter_gobj);
+void func_80085154(HSD_GObj* fighter_gobj);
+void func_80083B68(HSD_GObj* fighter_gobj);
+void func_800831CC(HSD_GObj*, s32 (*)(HSD_GObj*), HSD_GObjEvent);
+BOOL func_800824A0(HSD_GObj*, struct _ftCollisionBox*);
+BOOL func_80082888(HSD_GObj*, struct _ftCollisionBox*);
+void func_80085204(HSD_GObj* fighter_gobj);
 
 #endif

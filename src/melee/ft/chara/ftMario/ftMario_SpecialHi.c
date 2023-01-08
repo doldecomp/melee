@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
 #include <melee/it/itkind.h>
 #include <sysdolphin/baselib/random.h>
 

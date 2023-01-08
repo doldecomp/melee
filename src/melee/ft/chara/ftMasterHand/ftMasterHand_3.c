@@ -1,6 +1,12 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
+
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 
 // 80150C8C 0014D86C
 // https://decomp.me/scratch/Nhsvo
@@ -39,6 +45,10 @@ void func_80150D28(HSD_GObj* gobj)
     }
     r31_fp->sa.masterhand.x2258 = 0x186;
 }
+
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 // 80150DC4 0014D9A4
 // https://decomp.me/scratch/vZOBB

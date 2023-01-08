@@ -204,8 +204,6 @@ void ftGameWatch_AttackS4_Coll(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemManholeSetup(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemManholeRemove(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemManholeOnDamage(HSD_GObj* fighter_gobj);
-void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj* fighter_gobj);
-void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* fighter_gobj);
 BOOL ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj);
@@ -221,7 +219,6 @@ void ftGameWatch_ItemParachuteSetFlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemParachuteRemove(HSD_GObj* fighter_gobj);
 BOOL ftGameWatch_ItemCheckParachuteRemove(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemTurtleSetup(HSD_GObj* fighter_gobj);
-void ftGameWatch_ItemTurtleOnLand(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemTurtleSetFlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemTurtleRemove(HSD_GObj* fighter_gobj);
 BOOL ftGameWatch_ItemCheckTurtleRemove(HSD_GObj* fighter_gobj);
@@ -230,7 +227,6 @@ void ftGameWatch_ItemSparkyOnLand(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemSparkySetFlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemSparkyRemove(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackAir_EnterItemHitlag(HSD_GObj* fighter_gobj);
-void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* fighter_gobj);
 BOOL ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackAir_DecideAction(HSD_GObj* fighter_gobj);
 
@@ -254,7 +250,6 @@ void ftGameWatch_AttackAirHi_IASA(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackAirHi_Phys(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackAirHi_Coll(HSD_GObj* fighter_gobj);
 void ftGameWatch_LandingAirHi_Action(HSD_GObj* fighter_gobj);
-void ftGameWatch_LandingAirN_Init(HSD_GObj* fighter_gobj);
 void ftGameWatch_LandingAirN_Anim(HSD_GObj* fighter_gobj);
 void ftGameWatch_LandingAirN_IASA(HSD_GObj* fighter_gobj);
 void ftGameWatch_LandingAirN_Phys(HSD_GObj* fighter_gobj);
@@ -306,8 +301,6 @@ void ftGameWatch_Attack100End_Coll(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemJudgementRemove(HSD_GObj* fighter_gobj);
-void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fighter_gobj);
-void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj);
 BOOL ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj);
 s32 ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj);
@@ -320,8 +313,6 @@ void ftGameWatch_SpecialS_Phys(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirS_Phys(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialS_Coll(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
-void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj);
-void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj);
 
 // Up Special - Fire Rescue (SpeciialHi) //
 
@@ -329,8 +320,6 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj);
 BOOL ftGameWatch_ItemCheckRescueRemove(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemRescueSetNULL(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemRescueRemove(HSD_GObj* fighter_gobj);
-void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj);
-void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialHi_StartAction(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialHi_Anim(HSD_GObj* fighter_gobj);
@@ -391,7 +380,7 @@ void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* fighter_gobj);
 
 // Neutral Special - Chef (SpecialN/) //
-void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj);
+
 void ftGameWatch_SpecialN_StartAction(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialN_Anim(HSD_GObj* fighter_gobj);

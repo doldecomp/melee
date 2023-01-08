@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftparts.h>
 
 void ftIceClimber_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
 {
@@ -59,6 +60,11 @@ void ftIceClimber_OnDeath(HSD_GObj* fighter_gobj)
     fp->sa.nana.x2250 = 0.0f;
 }
 
+/* static */ void func_8011F190(HSD_GObj* fighter_gobj);
+/* static */ void func_80122898(HSD_GObj* fighter_gobj);
+/* static */ void func_80121164(HSD_GObj* fighter_gobj);
+/* static */ void func_8011F68C(HSD_GObj* fighter_gobj);
+
 void ftIceClimber_8011F060(HSD_GObj* fighter_gobj)
 {
     func_8011F190(fighter_gobj);
@@ -74,10 +80,10 @@ void ftIceClimber_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
 
 void ftIceClimber_OnKnockbackEnter(HSD_GObj* fighter_gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 1);
+    Fighter_OnKnockbackEnter(fighter_gobj, TRUE);
 }
 
 void ftIceClimber_OnKnockbackExit(HSD_GObj* fighter_gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(fighter_gobj, TRUE);
 }

@@ -92,11 +92,11 @@ LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
 	LDFLAGS += -map $(MAP)
 endif
-
 CFLAGS  = -msgstyle gcc \
 		-cwd source \
 		-Cpp_exceptions off \
 		-DGEKKO \
+		-DMWERKS_GEKKO \
 		-proc gekko -fp hard \
 		-fp_contract on -O4,p \
 		-enum int \
@@ -105,7 +105,9 @@ CFLAGS  = -msgstyle gcc \
 		-maxerrors $(MAX_ERRORS)
 
 ifeq ($(NON_MATCHING),1)
-CFLAGS += -DNON_MATCHING
+	CFLAGS += -DNON_MATCHING
+else
+	CFLAGS += -DMUST_MATCH
 endif
 
 

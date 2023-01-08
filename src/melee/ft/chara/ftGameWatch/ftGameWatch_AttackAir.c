@@ -1,6 +1,11 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
-extern HSD_GObj* func_802C6C38(HSD_GObj*, Vec3*, s32, f32);
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
+
+static void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj*);
 
 // 0x8014AFC0
 // https://decomp.me/scratch/wJ5b7 // Create Parachute Item
@@ -28,8 +33,6 @@ void ftGameWatch_ItemParachuteSetup(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-extern void func_802C6E50(HSD_GObj*);
-
 // 0x8014B074
 // https://decomp.me/scratch/TaqkV // Parachute Accessory Callback - Landing Lag
 void ftGameWatch_ItemParachuteOnLand(HSD_GObj* fighter_gobj)
@@ -50,8 +53,6 @@ void ftGameWatch_ItemParachuteOnLand(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj*);
-
 // 0x8014B0F0
 // https://decomp.me/scratch/8jiZT // Parachute item flag update on land + clear
 // pointers
@@ -64,8 +65,6 @@ void ftGameWatch_ItemParachuteSetFlag(HSD_GObj* fighter_gobj)
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
-
-extern void func_802C6D6C(HSD_GObj*);
 
 // 0x8014B12C
 // https://decomp.me/scratch/KYJBx // Remove Parachute item
@@ -86,17 +85,15 @@ void ftGameWatch_ItemParachuteRemove(HSD_GObj* fighter_gobj)
 BOOL ftGameWatch_ItemCheckParachuteRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    s32 ASID = fp->x10_action_state_index;
+    s32 asid = fp->x10_action_state_index;
 
-    if ((ASID >= AS_GAMEWATCH_ATTACKAIRN) && (ASID <= AS_GAMEWATCH_LANDINGAIRN))
-    {
+    if (asid >= AS_GAMEWATCH_ATTACKAIRN && asid <= AS_GAMEWATCH_LANDINGAIRN)
         return FALSE;
-    }
+
     return TRUE;
 }
 
-void ftGameWatch_ItemTurtleOnLand(HSD_GObj*);
-extern HSD_GObj* func_802C6F40(HSD_GObj*, Vec3*, s32, f32);
+static void ftGameWatch_ItemTurtleOnLand(HSD_GObj*);
 
 // 0x8014B1B4
 // https://decomp.me/scratch/1sOUQ // Create Turtle Item
@@ -126,18 +123,17 @@ void ftGameWatch_ItemTurtleSetup(HSD_GObj* fighter_gobj)
 
 // 0x8014B268
 // https://decomp.me/scratch/R20Hy // Turtle Accessory Callback - Landing Lag
-void ftGameWatch_ItemTurtleOnLand(HSD_GObj* fighter_gobj)
+static void ftGameWatch_ItemTurtleOnLand(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
     if (fp->sa.gaw.x225C_turtleGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
-        if (fp->x10_action_state_index ==
-            AS_GAMEWATCH_LANDINGAIRN) // Deliberate ASID mismatch to prevent
-                                      // item animation from freezing???
-        {
+
+        // Deliberate ASID mismatch to prevent item animation from freezing???
+        if (fp->x10_action_state_index == AS_GAMEWATCH_LANDINGAIRN)
             func_802C7158(fp->sa.gaw.x225C_turtleGObj);
-        }
+
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
         fp->cb.x21D4_callback_EnterHitlag =
@@ -159,8 +155,6 @@ void ftGameWatch_ItemTurtleSetFlag(HSD_GObj* fighter_gobj)
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
-
-extern void func_802C7074(HSD_GObj*);
 
 // 0x8014B320
 // https://decomp.me/scratch/jzWrr // Remove Turtle item
@@ -226,9 +220,10 @@ void ftGameWatch_ItemSparkyOnLand(HSD_GObj* fighter_gobj)
 
     if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
-        if (fp->x10_action_state_index == AS_GAMEWATCH_LANDINGAIRN) {
+
+        if (fp->x10_action_state_index == AS_GAMEWATCH_LANDINGAIRN)
             func_802C7424(fp->sa.gaw.x2260_sparkyGObj);
-        }
+
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
         fp->cb.x21D4_callback_EnterHitlag =
@@ -291,7 +286,7 @@ void ftGameWatch_AttackAir_EnterItemHitlag(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014B5CC - Remove hitlag for available AttackAir items
-void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* fighter_gobj)
+static void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -394,8 +389,6 @@ void ftGameWatch_AttackAirN_Phys(HSD_GObj* fighter_gobj)
     func_80084DB0(fighter_gobj);
 }
 
-extern void func_80082C74(HSD_GObj*, void cb_OnLand(HSD_GObj*));
-
 // 0x8014B780
 // https://decomp.me/scratch/aIqYH // Mr. Game & Watch's Neutral Aerial
 // Collision callback
@@ -404,7 +397,7 @@ void ftGameWatch_AttackAirN_Coll(HSD_GObj* fighter_gobj)
     func_80082C74(fighter_gobj, ftGameWatch_LandingAirN_Action);
 }
 
-void ftGameWatch_LandingAirN_Init(HSD_GObj*);
+static void ftGameWatch_LandingAirN_Init(HSD_GObj*);
 
 // 0x8014B7A8
 // https://decomp.me/scratch/Y3A1Z // Mr. Game & Watch - LandingAirN Think
@@ -415,20 +408,21 @@ void ftGameWatch_LandingAirN_Action(HSD_GObj* fighter_gobj)
     HSD_GObj* turtle;
     HSD_GObj* sparky;
 
-    if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
+    if (fp->sa.gaw.x2258_parachuteGObj != NULL)
         func_802C6DD8(fp->sa.gaw.x2258_parachuteGObj);
-    }
-    if (fp->sa.gaw.x225C_turtleGObj != NULL) {
+
+    if (fp->sa.gaw.x225C_turtleGObj != NULL)
         func_802C70E0(fp->sa.gaw.x225C_turtleGObj);
-    }
-    if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
+
+    if (fp->sa.gaw.x2260_sparkyGObj != NULL)
         func_802C73AC(fp->sa.gaw.x2260_sparkyGObj);
-    }
+
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         ftGameWatch_LandingAirN_Init(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemParachuteOnLand;
         return;
     }
+
     func_800D5BF8(fighter_gobj);
     ftGameWatch_OnDamage(fighter_gobj);
 }
@@ -451,8 +445,6 @@ void ftGameWatch_AttackAirB_Anim(HSD_GObj* fighter_gobj)
 {
     func_8008D010(fighter_gobj);
 }
-
-extern void func_8008D29C(HSD_GObj*);
 
 // 0x8014B89C
 // https://decomp.me/scratch/PnNzC // Mr. Game & Watch's Back Aerial IASA
@@ -524,8 +516,6 @@ void ftGameWatch_AttackAirHi_Anim(HSD_GObj* fighter_gobj)
     func_8008D010(fighter_gobj);
 }
 
-extern void func_8008D3A4(HSD_GObj*);
-
 // 0x8014B9F8
 // https://decomp.me/scratch/PnNzC // Mr. Game & Watch's Up Aerial IASA callback
 void ftGameWatch_AttackAirHi_IASA(HSD_GObj* fighter_gobj)
@@ -576,20 +566,16 @@ void ftGameWatch_LandingAirHi_Action(HSD_GObj* fighter_gobj)
     ftGameWatch_OnDamage(fighter_gobj);
 }
 
-extern void func_8008D708(HSD_GObj*, s32, f32);
-
 // 0x8014BAF8
 // https://decomp.me/scratch/8ClCw // Mr. Game & Watch's Neutral Aerial Landing
 // prefunction
-void ftGameWatch_LandingAirN_Init(HSD_GObj* fighter_gobj)
+static void ftGameWatch_LandingAirN_Init(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
     func_8008D708(fighter_gobj, AS_GAMEWATCH_LANDINGAIRN,
                   fp->x110_attr.x1F8_NAirLandingLag);
 }
-
-extern void func_800D5D3C(HSD_GObj*);
 
 // 0x8014BB24
 // https://decomp.me/scratch/xQdJ2 // Mr. Game & Watch's Neutral Aerial Landing
@@ -610,8 +596,6 @@ void ftGameWatch_LandingAirN_IASA(HSD_GObj* fighter_gobj)
     return;
 }
 
-extern void func_800D5F18(HSD_GObj*);
-
 // 0x8014BB74
 // https://decomp.me/scratch/SqMil // Mr. Game & Watch's Neutral Aerial Landing
 // Physics callback
@@ -619,8 +603,6 @@ void ftGameWatch_LandingAirN_Phys(HSD_GObj* fighter_gobj)
 {
     func_800D5F18(fighter_gobj);
 }
-
-extern void func_800D5F38(HSD_GObj*);
 
 // 0x8014BB94
 // https://decomp.me/scratch/2K68T // Mr. Game & Watch's Neutral Aerial Landing

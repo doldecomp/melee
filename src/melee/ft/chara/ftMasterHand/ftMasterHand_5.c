@@ -1,17 +1,19 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbunknown_001.h>
 
-// 80151428 14E008
-// https://decomp.me/scratch/mNdcr
-// probably isCrazyHandLoaded func
 u32 lbl_80151428(Vec* vec)
 {
     HSD_GObj* fetched_gobj;
     // Fighter* ft_userdata;
 
-    fetched_gobj =
-        func_8015C3E8(0x1B); // probably attempt to find crazy hand func.
+    fetched_gobj = func_8015C3E8(0x1B);
+
     // ft_userdata = ((Fighter*) temp_r3->user_data);
     if (fetched_gobj) {
         func_8000B1CC(

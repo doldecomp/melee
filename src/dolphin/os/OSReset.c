@@ -52,7 +52,7 @@ void OSRegisterResetFunction(OSResetFunctionInfo* func)
     tmp->next = func;
 }
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 static asm void Reset(s32)
 { // clang-format off

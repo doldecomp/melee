@@ -2,7 +2,12 @@
 #include <sysdolphin/baselib/random.h>
 
 #include <melee/ef/efsync.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/ft/ftparts.h>
 
 int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos)
 {
@@ -52,19 +57,17 @@ void ftMario_SpecialN_StartAction(HSD_GObj* gobj)
 // 0x800E0E18
 void ftMario_SpecialN_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj))
         func_8008A2BC(gobj);
-    }
 }
 
 // 0x800E0E54
 void ftMario_SpecialN_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    fp = getFighter(gobj);
-    if (fp->x2200_ftcmd_var0 != 0) {
+    Fighter* fp = getFighter(gobj);
+
+    if (fp->x2200_ftcmd_var0 != 0)
         func_8008A4D4(gobj);
-    }
 }
 
 // 0x800E0E84
@@ -76,9 +79,8 @@ void ftMario_SpecialN_Phys(HSD_GObj* gobj)
 // 0x800E0EA4
 void ftMario_SpecialN_Coll(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == FALSE) {
+    if (func_80082708(gobj) == FALSE)
         ftMario_SpecialN_GroundToAir(gobj);
-    }
 }
 
 // 0x800E0EE0
@@ -96,11 +98,11 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
 
     fp = gobj->user_data;
 
-    if (fp->x2210_ThrowFlags.b0 != 0) {
-        fp->x2210_ThrowFlags.b0 = 0;
-        flag_res = 1;
+    if (fp->x2210_ThrowFlags.b0) {
+        fp->x2210_ThrowFlags.b0 = FALSE;
+        flag_res = TRUE;
     } else {
-        flag_res = 0;
+        flag_res = FALSE;
     }
 
     if (flag_res != 0) {

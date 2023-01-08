@@ -10,7 +10,7 @@
 void __OSSystemCallVectorStart(void);
 void __OSSystemCallVectorEnd(void);
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void __OSSystemCallVector(void)
 { // clang-format off

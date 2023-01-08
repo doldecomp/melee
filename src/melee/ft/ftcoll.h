@@ -57,5 +57,7 @@ void func_8007B8A8(Hitbox*, Vec3*);
 
 void func_8007AEF8(HSD_GObj*);
 void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, HSD_GObjEvent on_reflect);
+void ftColl_CreateAbsorbHit(HSD_GObj*, AbsorbDesc*);
+void func_8007AF10(HSD_GObj*);
 
 #endif

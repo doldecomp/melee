@@ -1,4 +1,9 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftcoll.h>
 
 // 0x8014665C
 // https://decomp.me/scratch/ktG8y // Set flags
@@ -12,11 +17,15 @@ void ftMewtwo_SpecialS_SetFlags(HSD_GObj* fighter_gobj)
     fp->x2222_flag.bits.b2 = 1;
 }
 
-extern void func_800BCF18(HSD_GObj*, HSD_GObj*);
-
-inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
+static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
 {
+/// @todo Fix double assignment.
+#ifdef MUST_MATCH
     Fighter* fp = fp = getFighter(fighter_gobj);
+#else
+    Fighter* fp = getFighter(fighter_gobj);
+#endif
+
     if (fp->x1A58_interactedFighter == NULL) {
         func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
                       func_800BCF18);
@@ -47,11 +56,15 @@ void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialS_ReflectThink;
 }
 
-extern void func_800BD000(HSD_GObj*, HSD_GObj*);
-
-inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
+static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
 {
+/// @todo Fix double assignment.
+#ifdef MUST_MATCH
     Fighter* fp = fp = getFighter(fighter_gobj);
+#else
+    Fighter* fp = getFighter(fighter_gobj);
+#endif
+
     if (fp->x1A58_interactedFighter == NULL) {
         func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
                       func_800BD000);
@@ -65,7 +78,13 @@ inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
 // handler
 void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
+/// @todo Fix double assignment.
+#ifdef MUST_MATCH
     Fighter* fp = fp = getFighter(fighter_gobj);
+#else
+    Fighter* fp = getFighter(fighter_gobj);
+#endif
+
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
     f32 var;
 
@@ -87,9 +106,7 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialS_ReflectThink;
 }
 
-extern void func_80090780(HSD_GObj*);
-
-inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
+static inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     HSD_GObj* victimGObj;
@@ -111,9 +128,9 @@ inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SetGrabVictim(fighter_gobj);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 // 0x801468EC
@@ -122,9 +139,9 @@ void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SetGrabVictim(fighter_gobj);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_800CC730(fighter_gobj);
-    }
 }
 
 // 0x80146980 - Mewtwo's grounded Confusion IASA callback
@@ -138,8 +155,6 @@ void ftMewtwo_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
 {
     return;
 }
-
-extern void func_8007AEF8(HSD_GObj* fighter_gobj);
 
 // 0x80146988
 // https://decomp.me/scratch/o5TC6 // Mewtwo's grounded Confusion Physics
@@ -158,7 +173,7 @@ void ftMewtwo_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
     func_8007AEF8(fighter_gobj);
 }
 
-inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* fighter_gobj)
+static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (fp->mewtwoVars[0].SpecialS.isConfusionReflect != FALSE) {
@@ -167,8 +182,6 @@ inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* fighter_gobj)
         fp->cb.x21C8_callback_OnReflectHit = ftMewtwo_SpecialS_OnReflect;
     }
 }
-
-extern void func_8007D468(Fighter*);
 
 // 0x801469F0
 // https://decomp.me/scratch/W9wyx // Mewtwo's ground -> air Confusion Action
@@ -213,9 +226,6 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialS_SetReflect(fighter_gobj);
 }
 
-extern void func_8008403C(HSD_GObj*, void (*cb)(HSD_GObj*));
-extern void func_80082C74(HSD_GObj*, void (*cb)(HSD_GObj*));
-
 // 0x80146BB8 - Mewtwo's grounded Confusion Collision callback
 void ftMewtwo_SpecialS_Coll(HSD_GObj* fighter_gobj)
 {
@@ -227,9 +237,6 @@ void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
 {
     func_80082C74(fighter_gobj, ftMewtwo_SpecialAirS_AirToGround);
 }
-
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*,
-                                    void (*cb_OnReflect)(HSD_GObj*));
 
 // 0x80146C08
 // https://decomp.me/scratch/BDCzb // Confusion Reflect think function

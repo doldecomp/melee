@@ -1,6 +1,9 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
-extern HSD_GObj* func_802C61F4(HSD_GObj*, Vec3*, s32, f32);
+#include <melee/lb/lbunknown_001.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/code_8027CF30.h>
 
 // 0x8014BDB0
 // https://decomp.me/scratch/7BADg // Create Insecticide Spray Item
@@ -31,11 +34,6 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj)
     }
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
-
-void func_802C6430(HSD_GObj*);
-void func_802C6458(HSD_GObj*);
-void func_802C6480(HSD_GObj*);
-void func_802C64A8(HSD_GObj*);
 
 // 0x8014BE84
 // https://decomp.me/scratch/H3n4O // Decide Jab attack
@@ -80,8 +78,6 @@ void ftGameWatch_ItemGreenhouseSetFlag(HSD_GObj* fighter_gobj)
     fp->sa.gaw.x224C_greenhouseGObj = NULL;
 }
 
-extern void func_802C6328(HSD_GObj*);
-
 // 0x8014BF7C
 // https://decomp.me/scratch/2RDRo // Remove Mr. Game & Watch's Insecticide
 // Sprayer
@@ -95,9 +91,6 @@ void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* fighter_gobj)
         ftGameWatch_ItemGreenhouseSetFlag(fighter_gobj);
     }
 }
-
-extern void func_802C6374(HSD_GObj*);
-extern void func_802C6394(HSD_GObj*);
 
 // 0x8014BFD4
 // https://decomp.me/scratch/zVtUN // Apply hitlag to Mr. Game & Watch's
@@ -143,8 +136,6 @@ BOOL ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
     return FALSE;
 }
 
-extern BOOL func_80094790(HSD_GObj*);
-
 // 0x8014C07C
 // https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Action State
 // handler
@@ -180,8 +171,6 @@ void ftGameWatch_Attack11_Anim(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_8008ACD8(HSD_GObj*);
-
 // 0x8014C174 - Mr. Game & Watch's Jab IASA callback
 void ftGameWatch_Attack11_IASA(HSD_GObj* fighter_gobj)
 {
@@ -193,8 +182,6 @@ void ftGameWatch_Attack11_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084FA8(fighter_gobj);
 }
-
-extern void func_80084104(HSD_GObj*);
 
 // 0x8014C1B4 - Mr. Game & Watch's Jab Collision callback
 void ftGameWatch_Attack11_Coll(HSD_GObj* fighter_gobj)

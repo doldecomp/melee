@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcommon.h>
 
 // 80155D1C 1528FC
 // https://decomp.me/scratch/YDeLe

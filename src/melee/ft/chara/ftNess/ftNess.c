@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftNess_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -75,15 +77,12 @@ void ftNess_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftNessAttributes);
 }
 
-void ftNess_OnKnockbackEnter(
-    HSD_GObj* gobj) // Change model's MatAnim frames to hurt textures //
+void ftNess_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftNess_OnKnockbackExit(
-    HSD_GObj*
-        fighter_gobj) // Change model's MatAnim frames to normal textures //
+void ftNess_OnKnockbackExit(HSD_GObj* fighter_gobj)
 {
     Fighter_OnKnockbackExit(fighter_gobj, 1);
 }

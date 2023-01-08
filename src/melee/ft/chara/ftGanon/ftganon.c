@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftGanon/ftganon.h>
 
+#include <melee/ft/chara/ftCaptain/ftCaptain.h>
+#include <melee/ft/ftparts.h>
+
 void ftGanon_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -11,22 +14,22 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
 
 void ftGanon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(fighter_gobj, bool, TRUE, TRUE);
 }
 
 void ftGanon_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, TRUE);
 }
 
 void ftGanon_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, TRUE);
 }
 
 void ftGanon_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, TRUE, TRUE);
 }
 
 void ftGanon_OnLoad(HSD_GObj* gobj)

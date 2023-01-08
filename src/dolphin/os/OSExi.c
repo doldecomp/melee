@@ -157,7 +157,7 @@ BOOL EXIDma(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
 
 extern u32 __OSGetDIConfig(void);
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm BOOL EXISync(EXIChannel)
@@ -598,7 +598,7 @@ static void TCIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
     }
 }
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 #pragma push
 static asm void EXTIntrruptHandler(__OSInterrupt, OSContext*)

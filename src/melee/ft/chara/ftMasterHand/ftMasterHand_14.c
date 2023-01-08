@@ -1,6 +1,11 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_14.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbunknown_001.h>
 
 // 80152BC8 14F7A8
 void lbl_80152BC8(HSD_GObj* gobj)
@@ -26,9 +31,8 @@ void lbl_80152BCC(HSD_GObj* arg0)
 // https://decomp.me/scratch/Whi0Q
 void lbl_80152C34(HSD_GObj* arg0)
 {
-    if (!ftAnim_IsFramesRemaining(arg0)) {
+    if (!ftAnim_IsFramesRemaining(arg0))
         func_80152CD8(arg0);
-    }
 }
 
 // 80152C70 14F850
@@ -36,9 +40,8 @@ void lbl_80152C34(HSD_GObj* arg0)
 void lbl_80152C70(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(arg0);
-    }
 }
 
 // 80152CB4 14F894

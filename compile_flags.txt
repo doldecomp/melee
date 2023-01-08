@@ -6,7 +6,6 @@
 -Iinclude
 -Wall
 -Wextra
--Wno-unknown-pragmas
 -Wno-unused-variable
 -Wno-unused-but-set-variable
 -Wno-unused-function

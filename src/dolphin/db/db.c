@@ -34,7 +34,7 @@ static void __DBExceptionDestinationAux(void)
     PPCHalt();
 }
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 static asm void __DBExceptionDestination(void)
 { // clang-format off

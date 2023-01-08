@@ -3,6 +3,4 @@
 
 #include <dolphin/types.h>
 
-void func_80153910(struct _HSD_GObj*);
-
 #endif

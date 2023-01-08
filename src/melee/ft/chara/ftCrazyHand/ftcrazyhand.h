@@ -77,5 +77,6 @@ void func_80155FCC(void);
 void func_80156014(void);
 void func_8015A2B0(HSD_GObj*);
 void func_8015A3F4(HSD_GObj*);
+void func_8015A560(HSD_GObj*);
 
 #endif

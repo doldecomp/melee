@@ -7,5 +7,6 @@
 void func_801542E0(struct _HSD_GObj*);
 void func_801545A0(struct _HSD_GObj*);
 void func_801546D8(HSD_GObj*);
+void func_8015483C(HSD_GObj* gobj);
 
 #endif

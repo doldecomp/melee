@@ -2,6 +2,8 @@
 
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/code_80081B38.h>
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F

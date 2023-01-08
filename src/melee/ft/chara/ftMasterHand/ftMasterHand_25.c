@@ -1,18 +1,25 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_22.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_23.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcommon.h>
+
 // 80154D78 151958
 // https://decomp.me/scratch/DzZiN
 void lbl_80154D78(HSD_GObj* gobj)
 {
-    Fighter* fp;
     s32 unused[2];
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp = gobj->user_data;
-        if (fp->x2360 == 1) {
+        Fighter* fp = gobj->user_data;
+
+        if (fp->x2360 == 1)
             func_80154A78(gobj);
-        } else {
+        else
             func_801546D8(gobj);
-        }
     }
 }
 
@@ -21,9 +28,8 @@ void lbl_80154D78(HSD_GObj* gobj)
 void lbl_80154DD0(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(arg0);
-    }
 }
 
 // 80154E14 1519F4

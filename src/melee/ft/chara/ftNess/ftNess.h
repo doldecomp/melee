@@ -49,23 +49,23 @@ typedef enum ftNessAction {
 
 } ftNessAction;
 
-// Flags used by Ness in Action State Change //
+// Flags used by Ness in Action State Change
 
-// SpecialN/SpecialAirN (PK Flash) //
+// SpecialN/SpecialAirN (PK Flash)
 #define FTNESS_SPECIALN_COLL_FLAG                                              \
     FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | \
         FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
         FIGHTER_UNK_0x2227
 
-// SpecialHi/SpecialAirHi (PK Thunder) //
+// SpecialHi/SpecialAirHi (PK Thunder)
 #define FTNESS_SPECIALHI_COLL_FLAG                                             \
     FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | \
         FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
         FIGHTER_UNK_0x2227
 
-// SpecialHi Jibaku (PK Thunder 2 Self-Hit) //
+// SpecialHi Jibaku (PK Thunder 2 Self-Hit)
 #define FTNESS_JIBAKU_COLL_FLAG                                                \
     FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
         FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
@@ -73,7 +73,7 @@ typedef enum ftNessAction {
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
         FIGHTER_UNK_0x2227
 
-// SpecialLw (PSI Magnet) //
+// SpecialLw (PSI Magnet)
 #define FTNESS_SPECIALLW_COLL_FLAG                                             \
     FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE |                          \
         FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
@@ -87,7 +87,7 @@ typedef enum ftNessAction {
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
         FIGHTER_UNK_0x2227
 
-// Special Attributes //
+// Special Attributes
 
 typedef struct ftNessAttributes {
     // Neutral Special - PK Flash
@@ -148,20 +148,20 @@ typedef struct ftNessAttributes {
     f32 x8C_PSI_MAGNET_FALL_ACCEL;
     f32 x90_PSI_MAGNET_UNK4;     // Unused.
     f32 x94_PSI_MAGNET_HEAL_MUL; // Multiplies projectile damage by this value
-                                 // and heals result //
+                                 // and heals result
     AbsorbDesc x98_PSI_MAGNET_ABSORPTION;
     // Up/Down Smash - Yo-Yo
-    f32 xAC_YOYO_CHARGE_DURATION; // Amount of frames Yo-Yo can be charged //
+    f32 xAC_YOYO_CHARGE_DURATION; // Amount of frames Yo-Yo can be charged
     f32 xB0_YOYO_DAMAGE_MUL; // Charged Yo-Yo damage multiplier; 350 by default,
-                             // identical to the Smash Charge standard //
+                             // identical to the Smash Charge standard
     f32 xB4_YOYO_REHIT_RATE; // Amount of frames needed for the Yo-Yo to hit
-                             // again after colliding with a hurtbox //
+                             // again after colliding with a hurtbox
     // Forward Smash - Baseball Bat
     ReflectDesc xB8_BASEBALL_BAT;
 
 } ftNessAttributes;
 
-// Ness functions //
+// Ness functions
 
 void ftNess_OnDeath(HSD_GObj* gobj);
 void ftNess_OnLoad(HSD_GObj* gobj);
@@ -173,10 +173,14 @@ void ftNess_OnItemInvisible(HSD_GObj* gobj);
 void ftNess_OnItemVisible(HSD_GObj* gobj);
 void ftNess_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag);
 void ftNess_LoadSpecialAttrs(HSD_GObj* gobj);
+
+/// Change model's MatAnim frames to hurt textures
 void ftNess_OnKnockbackEnter(HSD_GObj* gobj);
+
+/// Change model's MatAnim frames to normal textures
 void ftNess_OnKnockbackExit(HSD_GObj* gobj);
 
-// Forward Smash (AttackS4) //
+// Forward Smash (AttackS4)
 
 void ftNess_AttackS4_OnReflect(HSD_GObj* gobj);
 BOOL ftNess_CheckNessBatRemove(HSD_GObj* gobj);
@@ -188,40 +192,70 @@ void ftNess_AttackS4_IASA(HSD_GObj* gobj);
 void ftNess_AttackS4_Phys(HSD_GObj* gobj);
 void ftNess_AttackS4_Coll(HSD_GObj* gobj);
 
-// Yo-Yo item setup & math //
+// Yo-Yo item setup & math
 
+/// Ness Yo-Yo Hitbox Position Update
 void ftNess_YoyoUpdateHitPos(HSD_GObj* gobj);
+
+/// Ness D-Smash Hitbox Refresh Timer
 void ftNess_YoyoCheckTimedRehit(HSD_GObj* gobj);
-void ftNess_YoyoApplyDamage(f32 unk_float,
-                            HSD_GObj* gobj); // Used by Down Smash //
+
+/// Check collision of Bone (Yo-Yo attach bone)
+/// @remarks Also used by Sheik???
 s32 ftNess_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
                             f32 float_unk);
+
 void ftNess_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* arg1);
+
+/// Set Yo-Yo hitbox position?
 void ftNess_YoyoSetHitPos(HSD_GObj* gobj);
+
 void ftNess_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 arg8);
+
+/// Check if Yo-Yo is colliding with an obstacle (wall / air)
 BOOL ftNess_YoyoCheckNoObstruct(HSD_GObj* gobj);
+
+/// Set ftcmd-, fp- and stateVars
 void ftNess_YoyoSetVarAll(HSD_GObj* gobj);
+
+/// Applies Smash Charge attributes to Ness's Up/Down Smash
 void ftNess_YoyoApplySmash(HSD_GObj* gobj);
-void ftNess_YoyoSetChargeDamage(HSD_GObj* gobj); // Used by Up Smash //
+
+void ftNess_YoyoSetChargeDamage(HSD_GObj* gobj); // Used by Up Smash
+
+/// Ness Yo-Yo Think
 BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* gobj);
+
+/// Calculates Yo-Yo texture rotation speed?
 void ftNess_YoyoSetUnkRate(HSD_GObj* gobj);
+
+/// Creates Yo-Yo item and sets up callbacks
 void ftNess_YoyoCreateItem(HSD_GObj* gobj);
+
+/// Something to do with Yo-Yo flags
 void ftNess_YoyoItemSetFlag(HSD_GObj* gobj);
+
+/// Despawn Yo-Yo item
 void ftNess_YoyoItemDespawn(HSD_GObj* gobj);
+
 void ftNess_YoyoItemSetUnk(HSD_GObj* gobj);
 void ftNess_YoyoItemSetUnk2(HSD_GObj* gobj);
 
-// Up Smash Action State hook //
+// Up Smash Action State hook
 
+/// Ness's Up Smash Action State handler
 void ftNess_AttackHi4_Action(HSD_GObj* gobj);
 
-// Start rehit timer if target is hit //
+// Start rehit timer if target is hit
 
+/// Initiates rehit timer for Yo-Yo hitbox
 void ftNess_YoyoStartTimedRehit(HSD_GObj* gobj);
 
-// Up Smash callbacks (AttackHi4) //
+// Up Smash callbacks (AttackHi4)
 
+/// Ness's Up Smash Animation Callback
 void ftNess_AttackHi4_Anim(HSD_GObj* gobj);
+
 void ftNess_AttackHi4_IASA(HSD_GObj* gobj);
 void ftNess_AttackHi4_Phys(HSD_GObj* gobj);
 void ftNess_AttackHi4_Coll(HSD_GObj* gobj);
@@ -234,9 +268,11 @@ void ftNess_AttackHi4_Release_Anim(HSD_GObj* gobj);
 void ftNess_AttackHi4_Release_IASA(HSD_GObj* gobj);
 void ftNess_AttackHi4_Release_Phys(HSD_GObj* gobj);
 void ftNess_AttackHi4_Release_Coll(HSD_GObj* gobj);
+
+/// Ness's Up Smash Post-Charge Action State handler
 void ftNess_AttackHi4_Release_Action(HSD_GObj* gobj);
 
-// Down Smash callbacks (AttackLw4) //
+// Down Smash callbacks (AttackLw4)
 
 void ftNess_AttackLw4_Action(HSD_GObj* gobj);
 void ftNess_AttackLw4_Anim(HSD_GObj* gobj);
@@ -254,7 +290,7 @@ void ftNess_AttackLw4_Release_Phys(HSD_GObj* gobj);
 void ftNess_AttackLw4_Release_Coll(HSD_GObj* gobj);
 void ftNess_AttackLw4_Release_Action(HSD_GObj* gobj);
 
-// PK Fire callbacks (SpecialS) //
+// PK Fire callbacks (SpecialS)
 
 void ftNess_ItemPKFireSpawn(HSD_GObj* gobj);
 void ftNess_SpecialS_StartAction(HSD_GObj* gobj);
@@ -266,7 +302,7 @@ void ftNess_SpecialAirS_Phys(HSD_GObj* gobj);
 void ftNess_SpecialS_Coll(HSD_GObj* gobj);
 void ftNess_SpecialAirS_Coll(HSD_GObj* gobj);
 
-// PK Flash callbacks (SpecialN) //
+// PK Flash callbacks (SpecialN)
 
 BOOL ftNess_CheckSpecialNHold(HSD_GObj* gobj);
 void ftNess_SpecialNSetNULL(HSD_GObj* gobj);
@@ -298,7 +334,7 @@ void ftNess_SpecialAirNStart_Coll(HSD_GObj* gobj);
 void ftNess_SpecialAirNHold_Coll(HSD_GObj* gobj);
 void ftNess_SpecialAirNEnd_Coll(HSD_GObj* gobj);
 
-// PK Thunder callbacks (SpecialHi) //
+// PK Thunder callbacks (SpecialHi)
 
 void ftNess_SpecialHiStopGFX(HSD_GObj* gobj);
 BOOL ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj);

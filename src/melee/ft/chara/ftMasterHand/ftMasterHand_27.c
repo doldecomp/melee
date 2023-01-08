@@ -1,6 +1,11 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcommon.h>
 
 // 80155074 151C54
 // https://decomp.me/scratch/GL82m

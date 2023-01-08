@@ -10,7 +10,7 @@ static unk_t SaveStart;
 static unk_t SaveEnd;
 static BOOL Prepared;
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 void Run(register void (*callback)(void))
 {
@@ -38,7 +38,7 @@ static void Callback(void)
     Prepared = TRUE;
 }
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm __OSReboot(u32 resetCode, BOOL forceMenu)

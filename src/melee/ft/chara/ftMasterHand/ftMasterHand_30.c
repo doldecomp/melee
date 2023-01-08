@@ -1,19 +1,21 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_31.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcommon.h>
 
+/// @todo Fix weird forward declaration
 extern const f32 neg1;
 
 // 8015550C 1520EC
 // https://decomp.me/scratch/wrO5N
 void lbl_8015550C(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) ||
-        (!ftAnim_IsFramesRemaining(gobj)))
-    {
-        fp = gobj->user_data;
+    if (func_8015C31C() || func_8015C3A0() || !ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         fp->x1A5C = 0;
         func_80151018(gobj);
@@ -24,9 +26,8 @@ void lbl_8015550C(HSD_GObj* gobj)
 void lbl_80155580(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(gobj);
-    }
 }
 
 // 801555C4 1521A4
@@ -45,12 +46,8 @@ void lbl_801555E4(HSD_GObj* gobj)
 // https://decomp.me/scratch/mvCUe
 void lbl_801555E8(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) ||
-        (!ftAnim_IsFramesRemaining(gobj)))
-    {
-        fp = gobj->user_data;
+    if (func_8015C31C() || func_8015C3A0() || !ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         fp->x1A5C = 0;
         func_80155818(gobj);
@@ -61,9 +58,8 @@ void lbl_801555E8(HSD_GObj* gobj)
 void lbl_8015565C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(gobj);
-    }
 }
 
 // 801556A0 152280
@@ -113,9 +109,8 @@ void lbl_801556C4(HSD_GObj* gobj)
 void lbl_801557B0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(gobj);
-    }
 }
 
 // 801557F4 1523D4
@@ -142,18 +137,16 @@ void func_80155818(HSD_GObj* gobj)
 // https://decomp.me/scratch/ln57J
 void lbl_80155864(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj))
         func_80151018(gobj);
-    }
 }
 
 // 801558A0 152480
 void lbl_801558A0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(gobj);
-    }
 }
 
 // 801558E4 1524C4
@@ -172,36 +165,30 @@ void lbl_80155904(HSD_GObj* gobj)
 // https://decomp.me/scratch/jo0OK
 void lbl_80155908(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
-    fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if ((--fp->x2364 <= 0.0f) && (fp->x2200_ftcmd_var0 != 0)) {
         func_80155D1C(fp->x1A58_interactedFighter);
         fp->x2200_ftcmd_var0 = 0;
     }
-    if (!ftAnim_IsFramesRemaining(gobj)) {
+
+    if (!ftAnim_IsFramesRemaining(gobj))
         func_80151018(gobj);
-    }
 }
 
 // 80155990 152570
 void lbl_80155990(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(gobj);
-    }
 }
 
 // 801559D4 1525B4
 // https://decomp.me/scratch/cRlBe
 void lbl_801559D4(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    MasterHandAttributes* attr;
-
-    fp = gobj->user_data;
-    attr = fp->x10C_ftData->ext_attr;
+    Fighter* fp = gobj->user_data;
+    MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
     func_80085134(gobj);
     func_8015BE40(gobj, &fp->x234C_pos, &fp->x2358_stateVar7, attr->x2C,
                   attr->x28);
@@ -211,9 +198,8 @@ void lbl_801559D4(HSD_GObj* gobj)
 // https://decomp.me/scratch/OedGK
 void lbl_80155A34(HSD_GObj* gobj)
 {
-    Fighter* fp;
+    Fighter* fp = gobj->user_data;
 
-    fp = gobj->user_data;
     if (fp->x2358_stateVar7 == 0.0f) {
         fp->x80_self_vel.z = 0.0f;
         fp->x80_self_vel.y = 0.0f;

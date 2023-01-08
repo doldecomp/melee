@@ -21,7 +21,7 @@
 #define HID2_DCMERR 0x00200000
 #define HID2_DQOERR 0x00100000
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void DCEnable(void)
 { // clang-format off
@@ -40,7 +40,7 @@ void DCEnable(void)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void DCInvalidateRange(register void* addr, register size_t nbytes)
 { // clang-format off
@@ -68,7 +68,7 @@ void DCInvalidateRange(void* addr, size_t nbytes)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void DCFlushRange(register void* addr, register size_t nbytes)
 { // clang-format off
@@ -97,7 +97,7 @@ void DCFlushRange(void* addr, size_t nbytes)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void DCStoreRange(register void* addr, register size_t nbytes)
 { // clang-format off
@@ -126,7 +126,7 @@ void DCStoreRange(void* addr, size_t nbytes)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void DCFlushRangeNoSync(register void* addr, register size_t nbytes)
 { // clang-format off
@@ -154,7 +154,7 @@ void DCFlushRangeNoSync(void* addr, size_t nbytes)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void DCZeroRange(register void* addr, register size_t nbytes)
 { // clang-format off
@@ -182,7 +182,7 @@ void DCZeroRange(void* addr, size_t nbytes)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void ICInvalidateRange(register void* addr, register size_t nbytes)
 { // clang-format off
@@ -212,7 +212,7 @@ void ICInvalidateRange(void* addr, size_t nbytes)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void ICFlashInvalidate(void)
 { // clang-format off
@@ -230,7 +230,7 @@ void ICFlashInvalidate(void)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void ICEnable(void)
 { // clang-format off
@@ -249,7 +249,7 @@ void ICEnable(void)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void __LCEnable(void)
 { // clang-format off
@@ -323,7 +323,7 @@ void LCEnable(void)
     OSRestoreInterrupts(enabled);
 }
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void LCDisable(void)
 { // clang-format off
@@ -348,7 +348,7 @@ void LCDisable(void)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void LCStoreBlocks(register void* dst, register void* src,
                        register u32 nblocks)
@@ -392,7 +392,7 @@ u32 LCStoreData(void* destAddr, void* srcAddr, u32 nBytes)
     return numTransactions;
 }
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void LCQueueWait(register u32 len)
 { // clang-format off

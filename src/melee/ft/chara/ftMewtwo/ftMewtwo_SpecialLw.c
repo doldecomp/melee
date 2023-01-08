@@ -1,4 +1,8 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
 
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
@@ -6,8 +10,6 @@ void ftMewtwo_SpecialLw_ClearDisableGObj(HSD_GObj* fighter_gobj)
 {
     getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj = NULL;
 }
-
-extern void func_802C49E0(HSD_GObj*);
 
 // 0x801461A8
 // https://decomp.me/scratch/d5gF6 // Remove Disable projectile
@@ -69,6 +71,7 @@ void ftMewtwo_SpecialLw_Anim(HSD_GObj* fighter_gobj)
                 getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj);
             getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj = NULL;
         }
+
         func_8008A2BC(fighter_gobj);
     }
 }

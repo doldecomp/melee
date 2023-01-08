@@ -1,14 +1,13 @@
 #include <melee/ft/chara/ftKoopa/ftkoopa.h>
 
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
 #include <melee/it/itkind.h>
 
-extern void func_800BC7E0(HSD_GObj*, HSD_GObj*);
-extern void func_800BC8D4(HSD_GObj*, HSD_GObj*);
-extern void func_800DE7C0(HSD_GObj*, s32, s32);
-extern void func_800DE2A8(HSD_GObj*, HSD_GObj*);
-
-extern const f32 lbl_804D9ADC; // 1.0
-extern const f32 lbl_804D9AD8; // 0.0
+/* static */ extern const f32 lbl_804D9ADC; // = 1.0F
+/* static */ extern const f32 lbl_804D9AD8; // = 0.0F
 
 void ftKoopa_OnDeath(HSD_GObj* gobj)
 {
@@ -26,6 +25,8 @@ void ftKoopa_OnDeath(HSD_GObj* gobj)
     ftVars->x0 = koopaAttr->x10;
     ftVars->x4 = koopaAttr->x18;
 }
+
+/* static */ void func_80134D78(HSD_GObj* gobj);
 
 void func_80132A64(HSD_GObj* gobj)
 {
@@ -62,22 +63,22 @@ void func_80132B38(void)
 
 void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(fighter_gobj, bool, TRUE, TRUE);
 }
 
 void ftKoopa_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, TRUE);
 }
 
 void ftKoopa_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, TRUE);
 }
 
 void ftKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, TRUE, TRUE);
 }
 
 void ftKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -87,12 +88,12 @@ void ftKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftKoopa_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, TRUE);
 }
 
 void ftKoopa_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(gobj, 1);
+    Fighter_OnKnockbackExit(gobj, TRUE);
 }
 
 f32 func_80132DC0(HSD_GObj* gobj)
@@ -187,8 +188,6 @@ void ftKoopa_SpecialS_StartAction(HSD_GObj* gobj)
 
     fp->x2340_stateVar1 = 0;
     fp->x2348_stateVar3 = 0;
-
-    return;
 }
 
 void ftKoopa_SpecialAirS_StartAction(HSD_GObj* gobj)
@@ -213,8 +212,6 @@ void ftKoopa_SpecialAirS_StartAction(HSD_GObj* gobj)
 
     fp->x2340_stateVar1 = 0;
     fp->x2348_stateVar3 = 0;
-
-    return;
 }
 
 void func_8013302C(HSD_GObj* gobj)
@@ -233,7 +230,6 @@ void func_8013302C(HSD_GObj* gobj)
     func_8007E2FC(gobj);
     fp->x2340_stateVar1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    return;
 }
 
 void func_801330E4(HSD_GObj* gobj)
@@ -248,6 +244,7 @@ void func_801330E4(HSD_GObj* gobj)
         Fighter_ActionStateChange_800693AC(gobj, 0x162, 0, 0, lbl_804D9AD8,
                                            lbl_804D9ADC, lbl_804D9AD8);
     }
+
     fp->x2222_flag.bits.b2 = 1;
     func_8007E2F4(fp, 0x1FF);
     func_8007E2FC(gobj);
@@ -281,9 +278,11 @@ void func_8013322C(HSD_GObj* gobj)
 
     ft2 = gobj->user_data;
     func_8007D7FC(ft2);
+
     Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0x0C4C5088, 0,
                                        ft2->x894_currentAnimFrame, lbl_804D9ADC,
                                        lbl_804D9AD8);
+
     ft1 = gobj->user_data;
     func_8007E2D0(ft1, 8, func_8013302C, NULL, func_800BC7E0);
     ft1->x2340_stateVar1 = 0;
@@ -300,50 +299,54 @@ void func_801332C4(HSD_GObj* gobj)
     fp = gobj->user_data;
     temp_r31 = fp->x1A58_interactedFighter;
     func_8007D5D4(fp);
-    if (temp_r31 != 0) {
+
+    if (temp_r31 != NULL) {
         func_800DC920(gobj, temp_r31);
         func_800CC730(temp_r31);
     }
+
     func_800CC730(gobj);
 }
 
 void func_80133324(HSD_GObj* gobj)
 {
-    Fighter* fp;
+    Fighter* fp = gobj->user_data;
 
-    fp = gobj->user_data;
     func_8007D7FC(fp);
+
     Fighter_ActionStateChange_800693AC(gobj, 0x15C, 0x0C4C5088, 0,
                                        fp->x894_currentAnimFrame, lbl_804D9ADC,
                                        lbl_804D9AD8);
+
     func_8007E2F4(fp, 0x1FF);
     func_8007E2FC(gobj);
 }
 
 void func_80133398(HSD_GObj* gobj)
 {
-    HSD_GObj* unk_gobj;
-    Fighter* fp;
+    Fighter* fp = gobj->user_data;
+    HSD_GObj* unk_gobj = fp->x1A58_interactedFighter;
 
-    fp = gobj->user_data;
-    unk_gobj = fp->x1A58_interactedFighter;
     func_8007D5D4(fp);
-    if (unk_gobj != 0) {
+
+    if (unk_gobj != NULL) {
         func_800DC920(gobj, unk_gobj);
         func_800CC730(unk_gobj);
     }
+
     func_800CC730(gobj);
 }
 
 void func_801333F8(HSD_GObj* gobj)
 {
-    Fighter* fp;
+    Fighter* fp = gobj->user_data;
 
-    fp = gobj->user_data;
     func_8007D7FC(fp);
+
     Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x044C1080, 0,
                                        fp->x894_currentAnimFrame, lbl_804D9ADC,
                                        lbl_804D9AD8);
+
     func_8007E2F4(fp, 0x1FF);
     func_8007E2FC(gobj);
     func_8006F0FC(gobj, lbl_804D9AD8);
@@ -353,80 +356,75 @@ void func_801333F8(HSD_GObj* gobj)
 
 void func_80133484(HSD_GObj* gobj)
 {
-    HSD_GObj* unk_gobj;
-    Fighter* fp;
+    Fighter* fp = gobj->user_data;
+    HSD_GObj* unk_gobj = fp->x1A58_interactedFighter;
 
-    fp = gobj->user_data;
-    unk_gobj = fp->x1A58_interactedFighter;
     func_8007D5D4(fp);
-    if (unk_gobj != 0) {
+
+    if (unk_gobj != NULL) {
         func_800DC920(gobj, unk_gobj);
         func_800CC730(unk_gobj);
     }
+
     func_800CC730(gobj);
 }
 
 void func_801334E4(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
     u32 x = 0;
-
-    fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
     func_8007D7FC(fp);
 
-    if ((s32) fp->x234C_stateVar4 != 0) {
+    if ((s32) fp->x234C_stateVar4 != 0)
         fp->x2C_facing_direction = -fp->x2C_facing_direction;
-    }
+
     Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0x0C4C5088, 0,
                                        fp->x894_currentAnimFrame, lbl_804D9ADC,
                                        lbl_804D9AD8);
 
-    if ((s32) fp->x234C_stateVar4 != 0) {
+    if ((s32) fp->x234C_stateVar4 != 0)
         fp->x2C_facing_direction = -fp->x2C_facing_direction;
-    }
-    if (fp->x1A58_interactedFighter != 0) {
+
+    if (fp->x1A58_interactedFighter != 0)
         func_800BCE64(fp->x1A58_interactedFighter, 0x119);
-    }
+
     func_8007E2F4(fp, 0x1FF);
     func_8007E2FC(gobj);
 }
 
 void func_8013359C(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
-    fp = gobj->user_data;
+    Fighter* fp = gobj->user_data;
     func_8007D7FC(fp);
-    if ((s32) fp->x234C_stateVar4 != 0) {
+
+    if ((s32) fp->x234C_stateVar4 != 0)
         fp->x2C_facing_direction = -fp->x2C_facing_direction;
-    }
+
     Fighter_ActionStateChange_800693AC(gobj, 0x160, 0x0C4C5088, 0,
                                        fp->x894_currentAnimFrame, lbl_804D9ADC,
                                        lbl_804D9AD8);
-    if ((s32) fp->x234C_stateVar4 != 0) {
+
+    if ((s32) fp->x234C_stateVar4 != 0)
         fp->x2C_facing_direction = -fp->x2C_facing_direction;
-    }
-    if (fp->x1A58_interactedFighter != 0U) {
+
+    if (fp->x1A58_interactedFighter != NULL)
         func_800BCE64(fp->x1A58_interactedFighter, 0x11A);
-    }
+
     func_8007E2F4(fp, 0x1FF);
     func_8007E2FC(gobj);
 }
 
 void func_80133654(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj))
         func_8008A2BC(gobj);
-    }
 }
 
 void func_80133690(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj))
         func_800CC730(gobj);
-    }
 }
 
 void func_801336CC(HSD_GObj* gobj)
@@ -445,6 +443,7 @@ void func_801336CC(HSD_GObj* gobj)
         func_8007ABD0(&fp->x914[0], koopaAttr->x2C, gobj);
         fp->x2200_ftcmd_var0 = 0;
     }
+
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((s32) fp->x2340_stateVar1 != 0) {
             fp->x2344_stateVar2 = 1;
@@ -458,7 +457,7 @@ void func_801336CC(HSD_GObj* gobj)
                                                    lbl_804D9AD8, lbl_804D9ADC,
                                                    lbl_804D9AD8);
             }
-            ft_temp->x2222_flag.bits.b2 = 1;
+            ft_temp->x2222_flag.bits.b2 = TRUE;
             func_8007E2F4(ft_temp, 0x1FF);
             func_8007E2FC(gobj);
             ft_temp->x2340_stateVar1 = 0;
@@ -466,10 +465,12 @@ void func_801336CC(HSD_GObj* gobj)
             func_800BC9C8(fp->x1A58_interactedFighter);
             return;
         }
+
         fp = gobj->user_data;
         Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0x80080, 0,
                                            fp->x894_currentAnimFrame,
                                            lbl_804D9ADC, lbl_804D9AD8);
+
         func_8006F0FC(gobj, lbl_804D9AD8);
         fp->x2340_stateVar1 = 0;
         fp->x2200_ftcmd_var0 = 0;

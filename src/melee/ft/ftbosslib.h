@@ -2,9 +2,14 @@
 #define MELEE_FT_FTBOSSLIB_H
 
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
 
-HSD_GObj* func_8015C3E8(s32); // func_8015C3E8(FighterKind)
-s32 func_8015C44C(s32);       // func_8015C44C(FighterKind)
+/// Probably attempt to find Crazy Hand func.
+/// @todo @c arg0 is #FighterKind.
+HSD_GObj* func_8015C3E8(s32 arg0);
+
+/// @todo @c arg0 is #FighterKind.
+s32 func_8015C44C(s32 arg0);
 
 void func_8015BD20(struct _HSD_GObj*);
 void func_8015BD24(s32, f32*, f32, s32, s32, s32);

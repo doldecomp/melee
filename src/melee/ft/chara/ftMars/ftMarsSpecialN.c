@@ -1,8 +1,13 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/ft/ftparts.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/lb/lbunknown_003.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcommon.h>
 
 // 80136744 00133324
 // ftMars_SpecialN
@@ -47,11 +52,11 @@ void lbl_80136844(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80136E74(gobj);
-        if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
+
+        if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS)
             func_800BFFD0(gobj->user_data, 0x63, 0);
-        } else {
+        else
             func_800BFFD0(gobj->user_data, 0x64, 0);
-        }
     }
 }
 
@@ -61,22 +66,24 @@ void lbl_801368AC(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80136EAC(gobj);
-        if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
+
+        if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS)
             func_800BFFD0(gobj->user_data, 0x63, 0);
-        } else {
+        else
             func_800BFFD0(gobj->user_data, 0x64, 0);
-        }
     }
 }
 
 // 80136914 001334F4
 void lbl_80136914(HSD_GObj* gobj)
 {
+    return;
 }
 
 // 80136918 001334F8
 void lbl_80136918(HSD_GObj* gobj)
 {
+    return;
 }
 
 // 8013691C 001334FC
@@ -107,18 +114,16 @@ void lbl_8013695C(HSD_GObj* gobj)
 // https://decomp.me/scratch/bR5HF
 void lbl_801369A4(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == 0) {
+    if (!func_80082708(gobj))
         func_80136A1C(gobj);
-    }
 }
 
 // 801369E0 001335C0
 // https://decomp.me/scratch/cCPAH
 void lbl_801369E0(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != 0) {
+    if (func_80081D0C(gobj))
         func_80136A7C(gobj);
-    }
 }
 
 // 80136A1C 001335FC
@@ -126,8 +131,8 @@ void lbl_801369E0(HSD_GObj* gobj)
 void func_80136A1C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-
     func_8007D5D4(fp);
+
     Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x0C4C5084, 0,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
@@ -137,8 +142,8 @@ void func_80136A1C(HSD_GObj* gobj)
 void func_80136A7C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-
     func_8007D7FC(fp);
+
     Fighter_ActionStateChange_800693AC(gobj, 0x155, 0x0C4C5084, 0,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
@@ -151,14 +156,17 @@ void lbl_80136ADC(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     s32* specialAttrs = fp->x2D4_specialAttributes;
     Vec3 sp28;
+    /// @todo Fake unused
     s32 unused[7];
 
-    if ((s32) fp->x2340_stateVar1 % 30 == 0) {
+    if (fp->x2340_stateVar1 % 30 == 0) {
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
                       &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
+
     fp->x2340_stateVar1++;
+
     if ((s32) fp->x2340_stateVar1 > *specialAttrs * 30) {
         fp->x2200_ftcmd_var0 = 1;
         func_80137354(gobj);
@@ -296,7 +304,13 @@ void lbl_80136EE4(HSD_GObj* gobj)
             if (*(s32*) (hb + 0x914) == 1) {
                 func_8007ABD0(
                     (Hitbox*) (hb + 0x914),
+
+#if MUST_MATCH
                     (f32) (attr->x4 + fp->x2340_stateVar1 / 30 * attr->x8),
+#else
+                    attr->x4 + fp->x2340_stateVar1 / 30.0F * attr->x8,
+#endif
+
                     gobj);
             }
             ndx++;
@@ -347,10 +361,16 @@ void lbl_80137010(HSD_GObj* gobj)
         ndx = 0;
         while (ndx < 4) {
             if (*(s32*) (hb + 0x914) == 1) {
-                func_8007ABD0((Hitbox*) (hb + 0x914),
-                              (f32) (attr->x4 +
-                                     (s32) fp->x2340_stateVar1 / 30 * attr->x8),
-                              gobj);
+                func_8007ABD0(
+                    (Hitbox*) (hb + 0x914),
+
+#if MUST_MATCH
+                    (f32) (attr->x4 + fp->x2340_stateVar1 / 30 * attr->x8),
+#else
+                    attr->x4 + fp->x2340_stateVar1 / 30.0F * attr->x8,
+#endif
+
+                    gobj);
             }
             ndx++;
             hb += 0x138;

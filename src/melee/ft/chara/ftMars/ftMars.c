@@ -2,6 +2,8 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/ftparts.h>
 
 // 80136258 00132E38
 // https://decomp.me/scratch/6RQ5w

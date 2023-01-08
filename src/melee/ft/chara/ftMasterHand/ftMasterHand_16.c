@@ -1,21 +1,22 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/code_80081B38.h>
+
 // 8015377C 15035C
 // https://decomp.me/scratch/003fu
 void lbl_8015377C(HSD_GObj* arg0)
 {
-    if (!ftAnim_IsFramesRemaining(arg0)) {
+    if (!ftAnim_IsFramesRemaining(arg0))
         func_80151018(arg0);
-    }
 }
 
 // 801537B8 150398
 void lbl_801537B8(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(arg0);
-    }
 }
 
 // 801537FC 1503DC

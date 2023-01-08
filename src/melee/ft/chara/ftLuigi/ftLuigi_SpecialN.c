@@ -1,7 +1,11 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
 
 // 0x8014267C
 // https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Action State
@@ -36,37 +40,30 @@ void ftLuigi_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialN_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 // 0x80142798 - Luigi's aerial Fireball Animation callback
 void ftLuigi_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_800CC730(fighter_gobj);
-    }
 }
-
-extern void func_8008A4D4(HSD_GObj*);
-extern void func_800CCAAC(HSD_GObj*);
 
 // 0x801427D4
 // https://decomp.me/scratch/JesBp // Luigi's grounded Fireball IASA callback
 void ftLuigi_SpecialN_IASA(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->x2200_ftcmd_var0 != 0U) {
+    if (getFighter(fighter_gobj)->x2200_ftcmd_var0 != 0U)
         func_8008A4D4(fighter_gobj);
-    }
 }
 
 // 0x80142804 - Luigi's aerial Fireball IASA callback
 void ftLuigi_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->x2200_ftcmd_var0 != 0U) {
+    if (getFighter(fighter_gobj)->x2200_ftcmd_var0 != 0U)
         func_800CCAAC(fighter_gobj);
-    }
 }
 
 // 0x80142834 - Luigi's grounded Fireball Physics callback
@@ -80,8 +77,6 @@ void ftLuigi_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084DB0(fighter_gobj);
 }
-
-// func_80081D0C
 
 // 0x80142874
 // https://decomp.me/scratch/xtPSc // Luigi's grounded Fireball Collision
@@ -114,8 +109,6 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
         fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
     }
 }
-
-extern void func_802C01AC(HSD_GObj*, Vec3*, s32, f32);
 
 // 0x8014295C
 // https://decomp.me/scratch/6miNL // Luigi's Fireball Spawn callback
