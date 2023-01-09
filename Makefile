@@ -88,10 +88,15 @@ INCLUDES = $(addprefix -i ,$(INCLUDE_DIRS)) -I- $(addprefix -i ,$(SYSTEM_INCLUDE
 
 
 ASFLAGS := -mgekko -I include
+ifneq ($(NON_MATCHING),1)
+	ASFLAGS += --defsym MUST_MATCH=1
+endif
+
 LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
 	LDFLAGS += -map $(MAP)
 endif
+
 CFLAGS  = -msgstyle gcc \
 		-cwd source \
 		-Cpp_exceptions off \
@@ -104,9 +109,7 @@ CFLAGS  = -msgstyle gcc \
 		-inline auto $(INCLUDES) \
 		-maxerrors $(MAX_ERRORS)
 
-ifeq ($(NON_MATCHING),1)
-	CFLAGS += -DNON_MATCHING
-else
+ifneq ($(NON_MATCHING),1)
 	CFLAGS += -DMUST_MATCH
 endif
 

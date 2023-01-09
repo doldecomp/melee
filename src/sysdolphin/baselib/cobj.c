@@ -9,50 +9,9 @@ extern f32 lbl_804DE474; // 0.01745329252f
 
 #define DegToRad(a) ((a) *0.01745329252f)
 
-// Only NON_MATCHING because there's a swapped lfs operation if using extern on
-// the float constants
-#ifdef NON_MATCHING
-void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
-                         s32 enable_depth)
-{
-    f32 m_val, z_val, left_res, right_res, top_res, bottom_res;
+#ifdef MUST_MATCH
 
-    if (cobj != NULL &&
-        ((enable_color != 0 || enable_alpha != 0 || enable_depth == 0)))
-    {
-        z_val = (0.5 * (HSD_CObjGetNear(cobj) + HSD_CObjGetFar(cobj)));
-
-        switch (HSD_CObjGetProjectionType(cobj)) {
-        case PROJ_PERSPECTIVE:
-            top_res =
-                (z_val *
-                 tanf(0.5f * DegToRad(cobj->projection_param.perspective.fov)));
-            bottom_res = -top_res;
-            right_res = top_res * cobj->projection_param.perspective.aspect;
-            left_res = -right_res;
-            break;
-        case PROJ_FRUSTRUM:
-            m_val = z_val / HSD_CObjGetNear(cobj);
-            right_res = m_val * cobj->projection_param.frustrum.right;
-            left_res = m_val * cobj->projection_param.frustrum.left;
-            top_res = m_val * cobj->projection_param.frustrum.top;
-            bottom_res = m_val * cobj->projection_param.frustrum.bottom;
-            break;
-        case PROJ_ORTHO:
-            right_res = cobj->projection_param.ortho.right;
-            left_res = cobj->projection_param.ortho.left;
-            top_res = cobj->projection_param.ortho.top;
-            bottom_res = cobj->projection_param.ortho.bottom;
-            break;
-        }
-
-        HSD_EraseRect(top_res, bottom_res, left_res, right_res, -z_val,
-                      enable_color, enable_alpha, enable_depth);
-    }
-}
-
-#else
-
+#pragma push
 asm void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
                              s32 enable_depth)
 { // clang-format off
@@ -160,17 +119,59 @@ lbl_80367840:
 /* 8036786C 0036444C  7C 08 03 A6 */	mtlr r0
 /* 80367870 00364450  4E 80 00 20 */	blr
 } // clang-format on
+#pragma pop
+
+#else
+
+// Only non-matching because there's a swapped lfs operation if using extern on
+// the float constants
+void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
+                         s32 enable_depth)
+{
+    f32 m_val, z_val, left_res, right_res, top_res, bottom_res;
+
+    if (cobj != NULL &&
+        ((enable_color != 0 || enable_alpha != 0 || enable_depth == 0)))
+    {
+        z_val = (0.5 * (HSD_CObjGetNear(cobj) + HSD_CObjGetFar(cobj)));
+
+        switch (HSD_CObjGetProjectionType(cobj)) {
+        case PROJ_PERSPECTIVE:
+            top_res =
+                (z_val *
+                 tanf(0.5f * DegToRad(cobj->projection_param.perspective.fov)));
+            bottom_res = -top_res;
+            right_res = top_res * cobj->projection_param.perspective.aspect;
+            left_res = -right_res;
+            break;
+        case PROJ_FRUSTRUM:
+            m_val = z_val / HSD_CObjGetNear(cobj);
+            right_res = m_val * cobj->projection_param.frustrum.right;
+            left_res = m_val * cobj->projection_param.frustrum.left;
+            top_res = m_val * cobj->projection_param.frustrum.top;
+            bottom_res = m_val * cobj->projection_param.frustrum.bottom;
+            break;
+        case PROJ_ORTHO:
+            right_res = cobj->projection_param.ortho.right;
+            left_res = cobj->projection_param.ortho.left;
+            top_res = cobj->projection_param.ortho.top;
+            bottom_res = cobj->projection_param.ortho.bottom;
+            break;
+        }
+
+        HSD_EraseRect(top_res, bottom_res, left_res, right_res, -z_val,
+                      enable_color, enable_alpha, enable_depth);
+    }
+}
+
 #endif
 
-#pragma push
-#pragma peephole on
 void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
 {
     HSD_WObj* wobj;
 
-    if (cobj == NULL) {
+    if (cobj == NULL)
         return;
-    }
 
     HSD_AObjRemove(cobj->aobj);
     cobj->aobj = NULL;
@@ -182,10 +183,8 @@ void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
 
 void HSD_CObjRemoveAnim(HSD_CObj* cobj)
 {
-    if (cobj == NULL) {
+    if (cobj == NULL)
         return;
-    }
 
     HSD_CObjRemoveAnimByFlags(cobj, 0x7FF);
 }
-#pragma pop

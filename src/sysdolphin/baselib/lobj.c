@@ -845,27 +845,11 @@ void func_803668EC(HSD_LObj* lobj)
     LObjReplaceAll(lobj);
 }
 
-// Broken by frank
-// (Profile compiler does not generate beqlr, so instructions do not match)
-// https://decomp.me/scratch/3kqzi
-#ifdef NON_MATCHING
-HSD_LObj* HSD_LObjGetCurrentByType(u16 flags)
-{
-    HSD_SList* cur = current_lights;
-    u32 type = flags & LOBJ_TYPE_MASK;
-    while (cur != NULL) {
-        HSD_LObj* lobj = cur->data;
-        if (type == (lobj->flags & LOBJ_TYPE_MASK)) {
-            return lobj;
-        }
-        cur = cur->next;
-    }
-    return NULL;
-}
-#else
+#ifdef MUST_MATCH
+
 #pragma push
-asm HSD_LObj* HSD_LObjGetCurrentByType(u16 type){
-    // clang-format off
+asm HSD_LObj* HSD_LObjGetCurrentByType(u16 type)
+{ // clang-format off
     nofralloc
 /* 80366A44 00363624  80 8D BF 9C */	lwz r4, current_lights(r13)
 /* 80366A48 00363628  54 65 07 BE */	clrlwi r5, r3, 0x1e
@@ -884,6 +868,25 @@ lbl_80366A68:
 /* 80366A74 00363654  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+/// @todo Broken by frank.
+/// (Profile compiler does not generate beqlr, so instructions do not match)
+HSD_LObj* HSD_LObjGetCurrentByType(u16 flags)
+{
+    HSD_SList* cur = current_lights;
+    u32 type = flags & LOBJ_TYPE_MASK;
+    while (cur != NULL) {
+        HSD_LObj* lobj = cur->data;
+        if (type == (lobj->flags & LOBJ_TYPE_MASK)) {
+            return lobj;
+        }
+        cur = cur->next;
+    }
+    return NULL;
+}
+
 #endif
 
 s32 HSD_LightID2Index(GXLightID arg0)

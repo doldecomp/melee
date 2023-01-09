@@ -251,16 +251,11 @@ s32* func_8015D06C(u8 arg0)
     return &base[arg0].x84;
 }
 
-#ifdef NON_MATCHING
-// needs a @frank patch
-s32* func_8015D084(s32 arg0)
-{
-    return &func_8015EDBC()->xB0[arg0 & 0xFF];
-}
-#else
+#ifdef MUST_MATCH
 
 #pragma push
-asm s32* func_8015D084(s32 arg0){
+asm s32* func_8015D084(s32 arg0)
+{
     // clang-format off
     nofralloc
 /* 8015D084 00159C64  7C 08 02 A6 */	mflr r0
@@ -280,6 +275,15 @@ asm s32* func_8015D084(s32 arg0){
 /* 8015D0BC 00159C9C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+// needs a @frank patch
+s32* func_8015D084(s32 arg0)
+{
+    return &func_8015EDBC()->xB0[arg0 & 0xFF];
+}
+
 #endif
 
 s32* func_8015D0C0(u8 arg0)
@@ -420,16 +424,11 @@ s32* func_8015D438(u8 arg0)
     return &base[arg0].x94;
 }
 
-#ifdef NON_MATCHING
-// needs a @frank patch
-s32* func_8015D450(s32 arg0)
-{
-    return &func_8015EDBC()->x4C[arg0 & 255];
-}
-#else
+#ifdef MUST_MATCH
 
 #pragma push
-asm s32* func_8015D450(s32 arg0){
+asm s32* func_8015D450(s32 arg0)
+{
     // clang-format off
     nofralloc
 /* 8015D450 0015A030  7C 08 02 A6 */	mflr r0
@@ -449,6 +448,15 @@ asm s32* func_8015D450(s32 arg0){
 /* 8015D488 0015A068  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+// needs a @frank patch
+s32* func_8015D450(s32 arg0)
+{
+    return &func_8015EDBC()->x4C[arg0 & 255];
+}
+
 #endif
 
 s32 func_8015D48C(u8 arg0)
@@ -652,24 +660,8 @@ s32* func_8015D970(s32 arg0)
 s32 func_8015DA90(u32 arg0);
 void func_8015D9F4(u32 arg0);
 void func_8015DA40(u32 arg0);
-#ifdef NON_MATCHING
-// https://decomp.me/scratch/CJy8X
-// register swap
-s32 func_8015D984(s32 arg0)
-{
-    s32 unused[4];
-    if (func_8015DA90(arg0) == 0) {
-        s32* base = &lbl_804D3EE0->x6C[0];
-        s32* qwe = &base[arg0];
-        *qwe = func_8000AFBC();
 
-        func_8015D9F4(arg0);
-        func_8015DA40(arg0);
-        return 1;
-    }
-    return 0;
-}
-#else
+#ifdef MUST_MATCH
 
 #pragma push
 asm s32 func_8015D984(s32 arg0)
@@ -707,6 +699,26 @@ lbl_8015D9DC:
 /* 8015D9F0 0015A5D0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+// https://decomp.me/scratch/CJy8X
+// register swap
+s32 func_8015D984(s32 arg0)
+{
+    s32 unused[4];
+    if (func_8015DA90(arg0) == 0) {
+        s32* base = &lbl_804D3EE0->x6C[0];
+        s32* qwe = &base[arg0];
+        *qwe = func_8000AFBC();
+
+        func_8015D9F4(arg0);
+        func_8015DA40(arg0);
+        return 1;
+    }
+    return 0;
+}
+
 #endif
 
 void func_8015D9F4(u32 arg0)
@@ -767,18 +779,11 @@ void func_8015DB18(void)
     lbl_804D3EE0->x1 += 1;
 }
 
-#ifdef NON_MATCHING
-// regswap and extra useless addi
-// https://decomp.me/scratch/emRDP
-void func_8015DB2C(u8 arg0, s32 arg2)
-{
-    u8* base = &lbl_804D3EE0->x39[arg0];
-    *base = func_8000AF74(*base, 1);
-}
-#else
+#ifdef MUST_MATCH
 
 #pragma push
-asm void func_8015DB2C(u8 arg0, s32 arg2){
+asm void func_8015DB2C(u8 arg0, s32 arg2)
+{
     // clang-format off
     nofralloc
 /* 8015DB2C 0015A70C  7C 08 02 A6 */	mflr r0
@@ -799,6 +804,17 @@ asm void func_8015DB2C(u8 arg0, s32 arg2){
 /* 8015DB68 0015A748  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+// regswap and extra useless addi
+// https://decomp.me/scratch/emRDP
+void func_8015DB2C(u8 arg0, s32 arg2)
+{
+    u8* base = &lbl_804D3EE0->x39[arg0];
+    *base = func_8000AF74(*base, 1);
+}
+
 #endif
 
 u8 func_8015DB6C(u8 arg0)

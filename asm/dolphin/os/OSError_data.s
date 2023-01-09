@@ -1,6 +1,6 @@
 .include "macros.inc"
 
-.ifndef NON_MATCHING
+.ifdef MUST_MATCH
 
 .section .data
 

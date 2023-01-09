@@ -52,23 +52,13 @@ f32 atan2f(f32 y, f32 x)
     return y;
 }
 
-f32 local_80022DF8(f32);
+static f32 local_80022DF8(f32);
 f32 atanf(f32);
 
-#if NON_MATCHING
+#if MUST_MATCH
 
-f32 acosf(f32 x)
-{
-    f32 result = -(x * x - ONE);
-    result = local_80022DF8(result) * x;
-    result = atanf(result);
-    result = PI_2 - result;
-    return result;
-}
-
-#else
-
-// https://decomp.me/scratch/TeCho // 120 (97%) @frank
+#pragma push
+/// @todo @frank
 asm f32 acosf(f32)
 { // clang-format off
     nofralloc
@@ -116,7 +106,18 @@ lbl_80022D9C:
 /* 80022DB4 0001F994  7C 08 03 A6 */	mtlr r0
 /* 80022DB8 0001F998  4E 80 00 20 */	blr
 } // clang-format on
-#pragma peephole on
+#pragma pop
+
+#else
+
+f32 acosf(f32 x)
+{
+    f32 result = -(x * x - ONE);
+    result = local_80022DF8(result) * x;
+    result = atanf(result);
+    result = PI_2 - result;
+    return result;
+}
 
 #endif
 
@@ -125,7 +126,7 @@ f32 func_80022DBC(f32 x)
     return atanf(x * local_80022DF8(-(x * x - ONE)));
 }
 
-inline f32 local_80022DF8(f32 x)
+static inline f32 local_80022DF8(f32 x)
 {
     if (x > ZERO) {
         f32 guess;

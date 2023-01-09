@@ -21,3 +21,4 @@
 -Werror=implicit-int
 -Werror=c2x-extensions
 -Werror=missing-field-initializers
+-Werror=unknown-pragmas

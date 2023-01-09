@@ -295,130 +295,7 @@ s32 func_80087C70(Fighter* fp, s32 arg1)
     return var_r4;
 }
 
-#ifdef NON_MATCHING
-
-// https://decomp.me/scratch/QCKGz
-s32 func_80087D0C(Fighter* fighter, s32 arg1)
-{
-    s32 sp18;
-    s32 sp14;
-    enum FighterKind ftKind;
-    s32 var_r30;
-    s32 sfx_id;
-    int new_var;
-    s32 ssm_id;
-    s32 var_r4;
-
-    sfx_id = func_800233EC(arg1);
-    ssm_id = func_80023130();
-    switch (ssm_id) {
-    case 0:
-        switch (sfx_id) {
-        case 0x197:
-        case 0x1D3:
-        case 0x1F7:
-        case 0x203:
-        case 0x46D03:
-        case 0x1FD:
-        case 0x1E5:
-        case 0x1EB:
-        case 0x1DF:
-        case 0x1D9:
-        case 0x1B5:
-        case 0x1C7:
-        case 0x1CD:
-        case 0x1C1:
-        case 0x1BB:
-        case 0x1A9:
-        case 0x1AF:
-        case 0x1A3:
-        case 0x19D:
-        case 0x179:
-        case 0x18B:
-        case 0x191:
-        case 0x185:
-        case 0x17F:
-        case 0x173:
-            sfx_id = func_80087C70(
-                fighter,
-                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
-            if (fighter->x2223_flag.bits.b7) {
-                sfx_id += 3;
-            }
-            break;
-        case 0x167:
-        case 0x170:
-        case 0x16D:
-        case 0x16A:
-        case 0x158:
-        case 0x161:
-        case 0x164:
-        case 0x15E:
-        case 0x15B:
-        case 0x152:
-        case 0x155:
-        case 0x14F:
-        case 0x14C:
-            sfx_id = func_80087C70(
-                fighter,
-                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
-            break;
-        }
-        break;
-    case 13:
-        ftKind = fighter->x4_fighterKind;
-        if ((ftKind < 0xc) && (10 > ftKind)) {
-            if ((0x1fbfd < sfx_id) &&
-                ((sfx_id < 0x1fc62 && (func_80080144(fighter) == 1))))
-            {
-                sfx_id += 0x66;
-            }
-            if (((0x1fc63 < sfx_id) && (sfx_id < 0x1fcc8)) &&
-                (func_80080144(fighter) != 1))
-            {
-                sfx_id -= 0x66;
-            }
-        }
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 14:
-    case 15:
-    case 16:
-    case 17:
-    case 18:
-    case 19:
-    case 20:
-    case 21:
-    case 22:
-    case 23:
-    case 24:
-    case 25:
-    case 26:
-    case 27:
-    case 28:
-    case 29:
-    case 30:
-    case 31:
-    case 33:
-        if ((func_800230C8(ssm_id, &sp18, &sp14) == 0) &&
-            (sfx_id >= ((s32) (sp18 + func_80023220(ssm_id)))))
-        {
-            sfx_id = func_80087C70(fighter, sfx_id);
-        }
-        break;
-    default:
-        break;
-    }
-
-    return sfx_id;
-}
-
-#else
+#ifdef MUST_MATCH
 
 #pragma push
 asm s32 func_80087D0C(Fighter* fighter, s32 arg1)
@@ -663,6 +540,129 @@ lbl_8008803C:
 /* 80088058 00084C38  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+// https://decomp.me/scratch/QCKGz
+s32 func_80087D0C(Fighter* fighter, s32 arg1)
+{
+    s32 sp18;
+    s32 sp14;
+    enum FighterKind ftKind;
+    s32 var_r30;
+    s32 sfx_id;
+    int new_var;
+    s32 ssm_id;
+    s32 var_r4;
+
+    sfx_id = func_800233EC(arg1);
+    ssm_id = func_80023130();
+    switch (ssm_id) {
+    case 0:
+        switch (sfx_id) {
+        case 0x197:
+        case 0x1D3:
+        case 0x1F7:
+        case 0x203:
+        case 0x46D03:
+        case 0x1FD:
+        case 0x1E5:
+        case 0x1EB:
+        case 0x1DF:
+        case 0x1D9:
+        case 0x1B5:
+        case 0x1C7:
+        case 0x1CD:
+        case 0x1C1:
+        case 0x1BB:
+        case 0x1A9:
+        case 0x1AF:
+        case 0x1A3:
+        case 0x19D:
+        case 0x179:
+        case 0x18B:
+        case 0x191:
+        case 0x185:
+        case 0x17F:
+        case 0x173:
+            sfx_id = func_80087C70(
+                fighter,
+                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
+            if (fighter->x2223_flag.bits.b7) {
+                sfx_id += 3;
+            }
+            break;
+        case 0x167:
+        case 0x170:
+        case 0x16D:
+        case 0x16A:
+        case 0x158:
+        case 0x161:
+        case 0x164:
+        case 0x15E:
+        case 0x15B:
+        case 0x152:
+        case 0x155:
+        case 0x14F:
+        case 0x14C:
+            sfx_id = func_80087C70(
+                fighter,
+                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
+            break;
+        }
+        break;
+    case 13:
+        ftKind = fighter->x4_fighterKind;
+        if ((ftKind < 0xc) && (10 > ftKind)) {
+            if ((0x1fbfd < sfx_id) &&
+                ((sfx_id < 0x1fc62 && (func_80080144(fighter) == 1))))
+            {
+                sfx_id += 0x66;
+            }
+            if (((0x1fc63 < sfx_id) && (sfx_id < 0x1fcc8)) &&
+                (func_80080144(fighter) != 1))
+            {
+                sfx_id -= 0x66;
+            }
+        }
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 20:
+    case 21:
+    case 22:
+    case 23:
+    case 24:
+    case 25:
+    case 26:
+    case 27:
+    case 28:
+    case 29:
+    case 30:
+    case 31:
+    case 33:
+        if ((func_800230C8(ssm_id, &sp18, &sp14) == 0) &&
+            (sfx_id >= ((s32) (sp18 + func_80023220(ssm_id)))))
+        {
+            sfx_id = func_80087C70(fighter, sfx_id);
+        }
+        break;
+    default:
+        break;
+    }
+
+    return sfx_id;
+}
 
 #endif
 
