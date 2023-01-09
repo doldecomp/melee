@@ -1,6 +1,8 @@
 #ifndef ___mem_
 #define ___mem_
 
+#include <Runtime/platform.h>
+
 #ifdef MWERKS_GEKKO
 __declspec(section ".init")
 #endif

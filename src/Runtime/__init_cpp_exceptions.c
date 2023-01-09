@@ -1,6 +1,7 @@
 #include <Runtime/Gecko_ExceptionPPC.h>
 
 #include <placeholder.h>
+#include <Runtime/platform.h>
 
 static int fragmentID = -2;
 

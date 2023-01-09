@@ -337,7 +337,6 @@ lbl_80326560:
 } // clang-format on
 #pragma pop
 
-
 #else
 
 float sinf(float x)
