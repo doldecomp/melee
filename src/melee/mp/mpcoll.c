@@ -718,20 +718,10 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2)
     }
 }
 
-// 80043558
+#ifdef MUST_MATCH
+
 void func_80043558(CollData* arg0, s32 arg1)
 {
-#ifdef NON_MATCHING // TODO: dummy stack in func_80043324_inline2 breaks this
-                    // function
-    s32 temp_r3;
-
-    temp_r3 = func_80054C6C(arg1);
-    if (temp_r3 == 1) {
-        func_80043268(arg0, arg1, 0, 0.0f);
-    } else if (temp_r3 == 2) {
-        func_80043324_inline2(arg0, arg1, 0, 0.0f);
-    }
-#else
     s32 sp1C;
     void (*sp18)(s32, s32, CollData*, s32, s32, f32);
     s32 sp14;
@@ -760,8 +750,24 @@ void func_80043558(CollData* arg0, s32 arg1)
             }
         }
     }
-#endif
 }
+
+#else
+
+/// @todo dummy stack in func_80043324_inline2 breaks this function
+void func_80043558(CollData* arg0, s32 arg1)
+{
+    s32 temp_r3;
+
+    temp_r3 = func_80054C6C(arg1);
+    if (temp_r3 == 1) {
+        func_80043268(arg0, arg1, 0, 0.0f);
+    } else if (temp_r3 == 2) {
+        func_80043324_inline2(arg0, arg1, 0, 0.0f);
+    }
+}
+
+#endif
 
 // 80043670
 void func_80043670(CollData* arg0)
@@ -975,81 +981,10 @@ s32 func_80043BBC(CollData* arg0, s32* arg1)
     return 0;
 }
 
-// 80043C6C
-#ifdef NON_MATCHING
-void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
-{
-    f32 sp30;
-    f32 sp24;
-    f32 sp20;
-    s32 sp1C;
-    s32 sp8;
-    f32 temp_f1;
-    f32 temp_f1_2;
-    f32 temp_f1_3;
-    f32 temp_f2;
-    f32 temp_f4;
-    f32 var_f31;
+#ifdef MUST_MATCH
 
-    temp_f1 = arg0->xA4_ecbCurrCorrect.right.x;
-    if (temp_f1 < 0.0f) {
-        var_f31 = -temp_f1;
-    } else {
-        var_f31 = temp_f1;
-    }
-    sp20 = arg0->x4_vec.x + temp_f1;
-    temp_f1_2 = arg0->x4_vec.y;
-    sp24 = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
-    if (func_8004E398(arg1, &sp20, 0, 0, 0, temp_f1_2) != -1) {
-        if (func_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48, arg0->x4C,
-                          -((arg0->x14C_ground.normal.y * var_f31) - sp20),
-                          (arg0->x14C_ground.normal.x * var_f31) + sp24) != 0)
-        {
-            sp20 = arg0->x140.x - var_f31;
-            if (arg2 != 0) {
-                sp24 = arg0->x4_vec.y;
-            } else {
-                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
-            }
-            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30,
-                              &arg0->x14C_ground.unk,
-                              &arg0->x14C_ground.normal) != -1)
-            {
-                arg0->x4_vec.y += sp30;
-                arg0->x4_vec.x = sp20;
-            }
-        }
-    } else {
-        func_80054584(arg1, &sp20);
-        temp_f4 = 2.0f;
-        temp_f2 = sp24;
-        temp_f1_3 = sp20 - temp_f4;
-        sp20 = -((temp_f4 * var_f31) - temp_f1_3);
-        sp24 = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y -
-                             arg0->xA4_ecbCurrCorrect.bottom.y)) -
-                 temp_f2);
-        sp8 = 0;
-        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C,
-                          0, temp_f1_3, temp_f2, sp20, sp24, 0.0f) != 0)
-        {
-            sp20 = arg0->x140.x;
-            if (arg2 != 0) {
-                sp24 = arg0->x4_vec.y;
-            } else {
-                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
-            }
-            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30,
-                              &arg0->x14C_ground.unk,
-                              &arg0->x14C_ground.normal) != -1)
-            {
-                arg0->x4_vec.y += sp30;
-                arg0->x4_vec.x = sp20;
-            }
-        }
-    }
-}
-#else
-asm void func_80043C6C()
+#pragma push
+asm void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
 { // clang-format off
     nofralloc
 /* 80043C6C 0004084C  7C 08 02 A6 */	mflr r0
@@ -1198,78 +1133,83 @@ lbl_80043E70:
 /* 80043E88 00040A68  7C 08 03 A6 */	mtlr r0
 /* 80043E8C 00040A6C  4E 80 00 20 */	blr
 } // clang-format on
-#pragma peephole on
-#endif
+#pragma pop
 
-// 80043E90
-// 80043F40
-// 80044164
-// 800443C4
-// 80044628
-// 80044838
-// 80044948
-// 80044AD8
-// 80044C74
-// 80044E10
-// 800454A4
-// 80045B74
-// 80046224
-// 80046904
-// 800471F8
-// 8004730C
-// 800473CC
-// 800474E0
-// 800475F4
-// 800476B4
-// 800477E0
-// 800478F4
-// 80047A08
-// 80047AC8
-// 80047BF4
-// 80047D20
-// 80047E14
-// 80047F40
-// 8004806C
-// 80048160
-// 80048274
-// 80048388
-// 80048464
-// 80048578
-// 80048654
-// 80048768
-// 80048844
-// 800488F4
-// 80048AB0
-// 800491C8
-// 80049778
-// 80049EAC
-// 8004A45C
-// 8004A678
-// 8004A908
-// 8004AB80
-// 8004B108
-// 8004B21C
-// 8004B2DC
-// 8004B3F0
-// 8004B4B0
-// 8004B5C4
-// 8004B6D8
-// 8004B894
-// 8004BDD4
-// 8004C328
-// 8004C750
-// 8004C864
-// 8004C91C
-// 8004CA6C
-// 8004CAA0
-// 8004CAE8
-// 8004CB30
-// 8004CB78
-// 8004CBC0
-// 8004CBE8
-// 8004CBF4
-// 8004CC00
-// 8004D024
+#else
+
+void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
+{
+    f32 sp30;
+    f32 sp24;
+    f32 sp20;
+    s32 sp1C;
+    s32 sp8;
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 temp_f1_3;
+    f32 temp_f2;
+    f32 temp_f4;
+    f32 var_f31;
+
+    temp_f1 = arg0->xA4_ecbCurrCorrect.right.x;
+    if (temp_f1 < 0.0f) {
+        var_f31 = -temp_f1;
+    } else {
+        var_f31 = temp_f1;
+    }
+    sp20 = arg0->x4_vec.x + temp_f1;
+    temp_f1_2 = arg0->x4_vec.y;
+    sp24 = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
+    if (func_8004E398(arg1, &sp20, 0, 0, 0, temp_f1_2) != -1) {
+        if (func_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48, arg0->x4C,
+                          -((arg0->x14C_ground.normal.y * var_f31) - sp20),
+                          (arg0->x14C_ground.normal.x * var_f31) + sp24) != 0)
+        {
+            sp20 = arg0->x140.x - var_f31;
+            if (arg2 != 0) {
+                sp24 = arg0->x4_vec.y;
+            } else {
+                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
+            }
+            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30,
+                              &arg0->x14C_ground.unk,
+                              &arg0->x14C_ground.normal) != -1)
+            {
+                arg0->x4_vec.y += sp30;
+                arg0->x4_vec.x = sp20;
+            }
+        }
+    } else {
+        func_80054584(arg1, &sp20);
+        temp_f4 = 2.0f;
+        temp_f2 = sp24;
+        temp_f1_3 = sp20 - temp_f4;
+        sp20 = -((temp_f4 * var_f31) - temp_f1_3);
+        sp24 = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y -
+                             arg0->xA4_ecbCurrCorrect.bottom.y)) -
+                 temp_f2);
+        sp8 = 0;
+        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C,
+                          0, temp_f1_3, temp_f2, sp20, sp24, 0.0f) != 0)
+        {
+            sp20 = arg0->x140.x;
+            if (arg2 != 0) {
+                sp24 = arg0->x4_vec.y;
+            } else {
+                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
+            }
+            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30,
+                              &arg0->x14C_ground.unk,
+                              &arg0->x14C_ground.normal) != -1)
+            {
+                arg0->x4_vec.y += sp30;
+                arg0->x4_vec.x = sp20;
+            }
+        }
+    }
+}
+
+#endif
 
 const f32 flt_804D7FF8 = 5.0f;
 const f64 flt_804D8000 = -0.75;

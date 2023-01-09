@@ -1,11 +1,15 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ftparts.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
 
-extern HSD_GObj* func_802C8038(HSD_GObj*, Vec3*, s32, s32, f32, f32);
-void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj);
-void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj);
+static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj);
+static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj);
 
 // 0x8014DEF0
 // https://decomp.me/scratch/6Vtu9 // Create Fire Rescue item
@@ -79,7 +83,7 @@ extern void func_802C81C8(HSD_GObj*);
 extern void func_802C81E8(HSD_GObj*);
 
 // 0x8014E04C - Apply hitlag to Fire Rescue item
-void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj)
+static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
@@ -89,7 +93,7 @@ void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014E06C - Remove hitlag for Fire Rescue item
-void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj)
+static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
@@ -98,10 +102,7 @@ void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_8007D60C(Fighter*);
-extern void func_80088510(Fighter*, s32, u8, u8);
-
-inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
+static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     fp->x220C_ftcmd_var3 = 0;
@@ -183,8 +184,6 @@ void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftGameWatch_SpecialAirHi_IASA(HSD_GObj*);
-
 // 0x8014E290 - Mr. Game & Watch's grounded Fire Rescue IASA callback
 void ftGameWatch_SpecialHi_IASA(HSD_GObj* fighter_gobj)
 {
@@ -242,10 +241,6 @@ void ftGameWatch_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 {
     ftGameWatch_SpecialAirHi_Coll(fighter_gobj);
 }
-
-extern BOOL EnvColl_CheckGroundAndLedge(HSD_GObj*, s32);
-extern BOOL func_80081298(HSD_GObj*);
-extern void func_80081370(HSD_GObj*);
 
 // 0x8014E3D4
 // https://decomp.me/scratch/4IC4C // Mr. Game & Watch's aerial Fire Rescue

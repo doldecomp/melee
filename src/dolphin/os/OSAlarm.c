@@ -1,12 +1,13 @@
 #include <dolphin/os/OSAlarm.h>
 
 #include <dolphin/base/PPCArch.h>
-#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSError.h>
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
+#include <placeholder.h>
 
 static struct OSAlarmQueue {
     OSAlarm* head;
@@ -185,7 +186,7 @@ static void DecrementerExceptionCallback(register __OSException exception,
     OSLoadContext(context);
 }
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void DecrementerExceptionHandler(__OSException exception,
@@ -213,5 +214,12 @@ asm void DecrementerExceptionHandler(__OSException exception,
 /* 80343E40 00340A20  4B FF FD 88 */	b DecrementerExceptionCallback
 } // clang-format on
 #pragma pop
+
+#else
+
+void DecrementerExceptionHandler(__OSException exception, OSContext* context)
+{
+    NOT_IMPLEMENTED;
+}
 
 #endif

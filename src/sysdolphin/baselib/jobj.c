@@ -285,41 +285,8 @@ void JObjSortAnim(HSD_AObj* aobj)
     }
 }
 
-// https://decomp.me/scratch/uPtWK
-#ifdef NON_MATCHING
-void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
-                     HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint)
-{
-    u32 unused;
-    BOOL has_dobj;
+#ifdef MUST_MATCH
 
-    if (jobj != NULL) {
-        if (an_joint != NULL) {
-            if (jobj->aobj != NULL) {
-                HSD_AObjRemove(jobj->aobj);
-            }
-            jobj->aobj = HSD_AObjLoadDesc(an_joint->aobjdesc);
-            JObjSortAnim(jobj->aobj);
-            HSD_RObjAddAnimAll(jobj->robj, an_joint->robj_anim);
-            if (an_joint->flags & 1) {
-                HSD_JObjSetFlags(jobj, JOBJ_CLASSICAL_SCALE);
-            } else {
-                HSD_JObjClearFlags(jobj, JOBJ_CLASSICAL_SCALE);
-            }
-        }
-        if (jobj->flags & (JOBJ_PTCL | JOBJ_SPLINE)) {
-            has_dobj = FALSE;
-        } else {
-            has_dobj = TRUE;
-        }
-        if (has_dobj) {
-            HSD_DObjAddAnimAll(
-                jobj->u.dobj, mat_joint != NULL ? mat_joint->matanim : NULL,
-                sh_joint != NULL ? sh_joint->shapeanimdobj : NULL);
-        }
-    }
-}
-#else
 #pragma push
 asm void HSD_JObjAddAnim(HSD_JObj*, HSD_AnimJoint* an_joint,
                          HSD_MatAnimJoint* mat_joint,
@@ -425,37 +392,46 @@ lbl_8036FB3C:
 /* 8036FB58 0036C738  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-#endif
 
-// This should match once HSD_JObjAddAnim matches.
-// https://decomp.me/scratch/MYXYk
-#ifdef NON_MATCHING
-void HSD_JObjAddAnimAll(HSD_JObj* jobj, HSD_AnimJoint* arg1,
-                        HSD_MatAnimJoint* arg2, HSD_ShapeAnimJoint* arg3)
+#else
+
+void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
+                     HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint)
 {
-    HSD_JObj* var_r31;
-    HSD_AnimJoint* var_r26;
-    HSD_MatAnimJoint* var_r25;
-    HSD_ShapeAnimJoint* var_r24;
+    u32 unused;
+    BOOL has_dobj;
 
     if (jobj != NULL) {
-        HSD_JObjAddAnim(jobj, arg1, arg2, arg3);
-        if (!(jobj->flags & JOBJ_INSTANCE)) {
-            var_r31 = jobj->child;
-            var_r26 = arg1 != NULL ? arg1->child : NULL;
-            var_r25 = arg2 != NULL ? arg2->child : NULL;
-            var_r24 = arg3 != NULL ? arg3->child : NULL;
-            while (var_r31 != NULL) {
-                HSD_JObjAddAnimAll(var_r31, var_r26, var_r25, var_r24);
-                var_r31 = var_r31->next;
-                var_r26 = var_r26 != NULL ? var_r26->next : NULL;
-                var_r25 = var_r25 != NULL ? var_r25->next : NULL;
-                var_r24 = var_r24 != NULL ? var_r24->next : NULL;
+        if (an_joint != NULL) {
+            if (jobj->aobj != NULL) {
+                HSD_AObjRemove(jobj->aobj);
             }
+            jobj->aobj = HSD_AObjLoadDesc(an_joint->aobjdesc);
+            JObjSortAnim(jobj->aobj);
+            HSD_RObjAddAnimAll(jobj->robj, an_joint->robj_anim);
+            if (an_joint->flags & 1) {
+                HSD_JObjSetFlags(jobj, JOBJ_CLASSICAL_SCALE);
+            } else {
+                HSD_JObjClearFlags(jobj, JOBJ_CLASSICAL_SCALE);
+            }
+        }
+        if (jobj->flags & (JOBJ_PTCL | JOBJ_SPLINE)) {
+            has_dobj = FALSE;
+        } else {
+            has_dobj = TRUE;
+        }
+        if (has_dobj) {
+            HSD_DObjAddAnimAll(
+                jobj->u.dobj, mat_joint != NULL ? mat_joint->matanim : NULL,
+                sh_joint != NULL ? sh_joint->shapeanimdobj : NULL);
         }
     }
 }
-#else
+
+#endif
+
+#ifdef MUST_MATCH
+
 #pragma push
 asm void HSD_JObjAddAnimAll(HSD_JObj*, HSD_AnimJoint*, HSD_MatAnimJoint*,
                             HSD_ShapeAnimJoint*)
@@ -654,6 +630,36 @@ lbl_8036FDAC:
 /* 8036FDBC 0036C99C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+/// @todo This should match once #HSD_JObjAddAnim matches.
+void HSD_JObjAddAnimAll(HSD_JObj* jobj, HSD_AnimJoint* arg1,
+                        HSD_MatAnimJoint* arg2, HSD_ShapeAnimJoint* arg3)
+{
+    HSD_JObj* var_r31;
+    HSD_AnimJoint* var_r26;
+    HSD_MatAnimJoint* var_r25;
+    HSD_ShapeAnimJoint* var_r24;
+
+    if (jobj != NULL) {
+        HSD_JObjAddAnim(jobj, arg1, arg2, arg3);
+        if (!(jobj->flags & JOBJ_INSTANCE)) {
+            var_r31 = jobj->child;
+            var_r26 = arg1 != NULL ? arg1->child : NULL;
+            var_r25 = arg2 != NULL ? arg2->child : NULL;
+            var_r24 = arg3 != NULL ? arg3->child : NULL;
+            while (var_r31 != NULL) {
+                HSD_JObjAddAnimAll(var_r31, var_r26, var_r25, var_r24);
+                var_r31 = var_r31->next;
+                var_r26 = var_r26 != NULL ? var_r26->next : NULL;
+                var_r25 = var_r25 != NULL ? var_r25->next : NULL;
+                var_r24 = var_r24 != NULL ? var_r24->next : NULL;
+            }
+        }
+    }
+}
+
 #endif
 
 typedef void (*ufc_callback)(HSD_JObj*, u32, f32);
@@ -985,19 +991,24 @@ HSD_JObj* HSD_JObjLoadJoint(HSD_Joint* arg0)
     return jobj;
 }
 
+#if MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused1[] = "jobj_root";
 static char unused2[] = "jobj_root == NULL";
 #pragma pop
+#endif
 
 static char jobj_child[] = "jobj->child";
 
-// Remove once no more inline asm needs this "object.h" literal
+/// @todo Remove once no more inline asm needs this "object.h" literal
 char lbl_804068E4[] = "object.h";
-#ifndef NON_MATCHING
+
+#ifdef MUST_MATCH
+
 #define ref_INC ref_INC_alt
-inline void ref_INC_alt(void* o)
+
+static inline void ref_INC_alt(void* o)
 {
     if (o != NULL) {
         HSD_OBJ(o)->ref_count++;
@@ -1007,14 +1018,16 @@ inline void ref_INC_alt(void* o)
         }
     }
 }
+
 #endif
 
 void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 {
     u32 unused;
-    if (jobj == NULL || joint == NULL) {
+
+    if (jobj == NULL || joint == NULL)
         return;
-    }
+
     HSD_RObjResolveRefsAll(jobj->robj, joint->robjdesc);
     if (!!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObjUnref(jobj->child);
@@ -1043,7 +1056,8 @@ void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
 }
 
 char lbl_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
-inline int iref_INC(void* o)
+
+static inline int iref_INC(void* o)
 {
     HSD_OBJ(o)->ref_count_individual += 1;
     HSD_OBJ(o)->ref_count_individual != 0
@@ -1051,7 +1065,7 @@ inline int iref_INC(void* o)
         : __assert(lbl_804068E4, 0x9E, lbl_80406918);
 }
 
-inline BOOL iref_none(void* o)
+static inline BOOL iref_none(void* o)
 {
     return HSD_OBJ(o)->ref_count_individual == 0;
 }
@@ -1059,7 +1073,7 @@ inline BOOL iref_none(void* o)
 // Alternate form to match HSD_JObjUnrefThis
 // (Original version causes regswap)
 // TODO merge with object.h iref_DEC
-inline BOOL iref_DEC_alt(void* o)
+static inline BOOL iref_DEC_alt(void* o)
 {
     BOOL ret = iref_none(o);
     if (ret)
@@ -1134,32 +1148,8 @@ HSD_JObj* HSD_JObjRemove(HSD_JObj* jobj)
     return child;
 }
 
-// Regswaps
-// https://decomp.me/scratch/D9q7a
-#ifdef NON_MATCHING
-void HSD_JObjRemoveAll(HSD_JObj* jobj)
-{
-    HSD_JObj* next;
-    if (jobj == NULL) {
-        return;
-    }
-    if (jobj->parent != NULL) {
-        HSD_JObj* prev = HSD_JObjGetPrev(jobj);
-        if (prev != NULL) {
-            prev->next = NULL;
-        } else {
-            jobj->parent->child = NULL;
-        }
-    }
-    while (jobj != NULL) {
-        next = jobj->next;
-        jobj->parent = NULL;
-        jobj->next = NULL;
-        HSD_JObjUnref(jobj);
-        jobj = next;
-    }
-}
-#else
+#ifdef MUST_MATCH
+
 #pragma push
 asm void HSD_JObjRemoveAll()
 { // clang-format off
@@ -1290,6 +1280,33 @@ lbl_8037173C:
 /* 8037174C 0036E32C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+/// @todo Regswaps
+void HSD_JObjRemoveAll(HSD_JObj* jobj)
+{
+    HSD_JObj* next;
+    if (jobj == NULL) {
+        return;
+    }
+    if (jobj->parent != NULL) {
+        HSD_JObj* prev = HSD_JObjGetPrev(jobj);
+        if (prev != NULL) {
+            prev->next = NULL;
+        } else {
+            jobj->parent->child = NULL;
+        }
+    }
+    while (jobj != NULL) {
+        next = jobj->next;
+        jobj->parent = NULL;
+        jobj->next = NULL;
+        HSD_JObjUnref(jobj);
+        jobj = next;
+    }
+}
+
 #endif
 
 void RecalcParentTrspBits(HSD_JObj* jobj)

@@ -1,6 +1,12 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_22.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_24.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/lb/lbvector.h>
 
 // 80154230 150E10
 // https://decomp.me/scratch/dpg50

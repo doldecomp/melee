@@ -2,6 +2,7 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
 #include <melee/it/itkind.h>
@@ -274,8 +275,9 @@ void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj)
     }
 }
 
-static ftCollisionBox ftMario_SpecialLw_CollisionBox = { 12.0F, 0.0F, -6.0F,
-                                                         6.0F,  6.0F, 6.0F };
+static ftCollisionBox ftMario_SpecialLw_CollisionBox = {
+    12.0F, 0.0F, { -6.0F, 6.0F }, { 6.0F, 6.0F }
+};
 
 // 0x800E25C4
 // https://decomp.me/scratch/ykJHP

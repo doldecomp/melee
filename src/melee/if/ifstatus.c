@@ -1774,42 +1774,7 @@ lbl_802F6158:
 } // clang-format on
 #pragma pop
 
-#ifdef NON_MATCHING
-
-inline HSD_GObj* nth_node(HSD_GObj* node, s32 n)
-{
-    s32 i;
-    HSD_GObj* cur = node;
-    for (i = 0; i < n && node; i++) {
-        if (cur == NULL) { // if (node == NULL)
-            cur = NULL;
-        } else {
-            cur = node->next;
-        }
-        node = cur;
-    }
-    return node;
-}
-
-// 99.81% match
-// https://decomp.me/scratch/XGFpw
-HSD_GObj* func_802F6194(HSD_GObj* node, s32 n)
-{
-    HSD_GObj* gx;
-
-    if ((node == NULL) || (n < 0)) {
-        return NULL;
-    }
-    if (node == NULL) {
-        gx = NULL;
-    } else {
-        gx = node->next_gx;
-    }
-    gx = nth_node(gx, n);
-    return gx;
-}
-
-#else
+#ifdef MUST_MATCH
 
 #pragma push
 asm HSD_GObj* func_802F6194(HSD_GObj*, s32)
@@ -1851,6 +1816,41 @@ lbl_802F61E8:
 /* 802F61F8 002F2DD8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+static inline HSD_GObj* nth_node(HSD_GObj* node, s32 n)
+{
+    s32 i;
+    HSD_GObj* cur = node;
+    for (i = 0; i < n && node; i++) {
+        if (cur == NULL) { // if (node == NULL)
+            cur = NULL;
+        } else {
+            cur = node->next;
+        }
+        node = cur;
+    }
+    return node;
+}
+
+// 99.81% match
+// https://decomp.me/scratch/XGFpw
+HSD_GObj* func_802F6194(HSD_GObj* node, s32 n)
+{
+    HSD_GObj* gx;
+
+    if ((node == NULL) || (n < 0)) {
+        return NULL;
+    }
+    if (node == NULL) {
+        gx = NULL;
+    } else {
+        gx = node->next_gx;
+    }
+    gx = nth_node(gx, n);
+    return gx;
+}
 
 #endif
 

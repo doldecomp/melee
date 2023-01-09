@@ -1,10 +1,11 @@
 #include <Runtime/Gecko_ExceptionPPC.h>
 
 #include <placeholder.h>
+#include <Runtime/platform.h>
 
 static int fragmentID = -2;
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 __declspec(section ".init")
 #endif
     /**
@@ -13,7 +14,7 @@ __declspec(section ".init")
      */
     extern __eti_init_info _eti_init_info_[];
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 static asm char* GetR2(void)
 { // clang-format off
@@ -30,7 +31,7 @@ void __fini_cpp_exceptions(void)
     }
 }
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 void __init_cpp_exceptions(void)
 {

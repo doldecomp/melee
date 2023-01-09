@@ -132,7 +132,7 @@ void GXSetCPUFifo(GXFifoObj* fifo)
 // Despite this obviously being dead code, it still is needed to match the
 // function.
 /// @todo: This is weird; try to match without it.
-#if !defined(NON_MATCHING) && defined(__MWERKS__) && defined(GEKKO)
+#ifdef MUST_MATCH
 #pragma push
     asm {nop}
 #pragma pop

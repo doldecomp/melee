@@ -1,6 +1,8 @@
 #ifndef __TYPES_H__
 #define __TYPES_H__
 
+#include <Runtime/platform.h>
+
 typedef signed char s8;
 typedef signed short s16;
 typedef signed long s32;
@@ -39,47 +41,21 @@ typedef jmp_t jtbl_t[];
 
 #define NULL ((void*) 0)
 
-#define FLT_MAX 3.4028235E38
+#define FLT_MAX (3.4028235E38)
 
 #define assert_line(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))
 
+/// @todo Remove.
 #define STRUCT_PLACEHOLDER(module, number)                                     \
     extern struct _##module##_Unk##number;                                     \
     typedef struct _##module##_Unk##number module##_Unk##number;
 
+/// @todo Remove.
 #define CALLBACK_PLACEHOLDER(module, number)                                   \
     typedef void (*module##_UnkCallback##number)(void);
 
+/// @todo Remove.
 #define UNK_FUNC(name) unk_t name()
-
-#ifndef ATTRIBUTE_ALIGN
-#if defined(__MWERKS__) || defined(__GNUC__)
-#define ATTRIBUTE_ALIGN(num) __attribute__((aligned(num)))
-#elif defined(_MSC_VER)
-#define ATTRIBUTE_ALIGN(num)
-#else
-#error unknown compiler
-#endif
-#endif
-
-#if defined(PERMUTER)
-#define AT_ADDRESS(x) = FIXEDADDR(x)
-#elif defined(__MWERKS__)
-#define AT_ADDRESS(x) : (x)
-#else
-#define AT_ADDRESS(x)
-#endif
-
-#pragma region "macros.inc"
-#define qr0 0
-#define qr1 1
-#define qr2 2
-#define qr3 3
-#define qr4 4
-#define qr5 5
-#define qr6 6
-#define qr7 7
-#pragma endregion
 
 #endif

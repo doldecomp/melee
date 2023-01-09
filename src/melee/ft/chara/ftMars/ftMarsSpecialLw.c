@@ -1,6 +1,13 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/ftparts.h>
+#include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
 
 // 801389CC 001355AC

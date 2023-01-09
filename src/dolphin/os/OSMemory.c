@@ -48,7 +48,7 @@ static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
     __OSUnhandledException(OS_ERROR_PROTECTION, context, cause, addr);
 }
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void Config24MB(void)
 { // clang-format off
@@ -96,7 +96,7 @@ void Config24MB(void)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void Config48MB(void)
 { // clang-format off
@@ -144,7 +144,7 @@ void Config48MB(void)
 
 #endif
 
-#if defined(__MWERKS__) && defined(GEKKO)
+#ifdef MWERKS_GEKKO
 
 asm void RealMode(register void (*)(void))
 { // clang-format off

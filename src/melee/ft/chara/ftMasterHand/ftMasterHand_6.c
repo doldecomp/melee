@@ -1,15 +1,17 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_6.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/mp/mplib.h>
 
 // 801517B0 14E390
 // https://decomp.me/scratch/ayfDz
 void lbl_801517B0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
+    if (!Player_GetPlayerSlotType(fp->xC_playerID))
         func_8015BD20(gobj);
-    }
 }
 
 // 801517F4 14E3D4
@@ -43,9 +45,8 @@ void lbl_80151828(HSD_GObj* arg0)
 // https://decomp.me/scratch/AmIC0
 void lbl_80151874(HSD_GObj* arg0)
 {
-    if (!ftAnim_IsFramesRemaining(arg0)) {
+    if (!ftAnim_IsFramesRemaining(arg0))
         func_80151918(arg0);
-    }
 }
 
 // 801518B0 14E490
@@ -69,6 +70,7 @@ void lbl_801518F4(HSD_GObj* arg0)
 // https://decomp.me/scratch/BYVIT
 void lbl_80151914(void)
 {
+    return;
 }
 
 // 80151918 14E4F8

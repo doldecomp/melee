@@ -3,6 +3,9 @@
 #include <melee/cm/camera.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
+#include <melee/ft/ft_unknown_006.h>
+
+static void lbl_801511FC(HSD_GObj* gobj);
 
 // 801510B0 14DC90
 // https://decomp.me/scratch/sIqel
@@ -20,10 +23,11 @@ void func_801510B0(HSD_GObj* gobj)
     r31_fp->xB0_pos.z = 0.0f;
     r31_fp->cb.x21BC_callback_Accessory4 = &lbl_801511FC;
     r31_fp->x2340_stateVar1 = 0;
-    func_800881D8(r31_fp, 0x4E201, 0x7F,
-                  0x40 /*, lbl_801511FC */); // probs same file if lbl_801511FC
-                                             // is getting implicitly passed.
+
+    /// @todo Probably same file if #lbl_801511FC is getting implicitly passed.
+    func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, lbl_801511FC */);
     // func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, lbl_801511FC);
+
     func_8015C09C(gobj, -1.0f);
 }
 
@@ -47,25 +51,26 @@ void lbl_801511B0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
+    if (!Player_GetPlayerSlotType(fp->xC_playerID))
         func_8015BD20(gobj);
-    }
 }
 
 // 801511F4 14DDD4
 // https://decomp.me/scratch/xs8Nh
 void lbl_801511F4(HSD_GObj* gobj)
 {
+    return;
 }
 
 // 801511F8 14DDD8
 // https://decomp.me/scratch/5Mb62
 void lbl_801511F8(HSD_GObj* gobj)
 {
+    return;
 }
 
 // 801511FC 14DDDC
-void lbl_801511FC(HSD_GObj* gobj)
+static void lbl_801511FC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     HSD_GObj* tmp_gobj;

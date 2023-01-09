@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/lb/lbunknown_001.h>
 #include <melee/ft/ft_unknown_006.h>
 
 // 0x80146CCC
@@ -228,8 +230,15 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj)
     f64 facingDir;
     f32 unused[4];
 
+/// @todo Missing @c inline function(s).
+#ifdef MUST_MATCH
     fp = fp = getFighter(fighter_gobj);
     mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
+#else
+    fp = getFighter(fighter_gobj);
+    mewtwoAttrs = getFtSpecialAttrsD(fp);
+#endif
+
     if (((u32) fp->x2204_ftcmd_var1 == 1U) &&
         (fp->sa.mewtwo.x2230_shadowHeldGObj != NULL))
     {
@@ -249,12 +258,24 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj)
         ftMewtwo_SpecialN_SetRecoil(fighter_gobj);
         fp->sa.mewtwo.x2234_shadowBallCharge = 0;
         if (fighter_gobj != NULL) {
+/// @todo Missing @c inline function(s).
+#ifdef MUST_MATCH
             temp_fp = temp_fp = getFighter(fighter_gobj);
+#else
+            temp_fp = getFighter(fighter_gobj);
+#endif
+
             if (temp_fp->sa.mewtwo.x2230_shadowHeldGObj != NULL) {
                 temp_fp->sa.mewtwo.x2230_shadowHeldGObj = NULL;
             }
             if (fighter_gobj != NULL) {
+/// @todo Missing @c inline function(s).
+#ifdef MUST_MATCH
                 fp2 = fp2 = getFighter(fighter_gobj);
+#else
+                fp2 = getFighter(fighter_gobj);
+#endif
+
                 if (fp2->sa.mewtwo.x2238_shadowBallGObj != NULL) {
                     efLib_DestroyAll(fighter_gobj);
                     fp2->sa.mewtwo.x2238_shadowBallGObj = NULL;
@@ -271,8 +292,6 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj)
         func_80088148(fp, 0x30DB3U, SFX_VOLUME_MAX, SFX_PAN_MID);
     }
 }
-
-extern void func_80088510(Fighter*, u32, u8, u8);
 
 // 0x801471C8
 // https://decomp.me/scratch/QGj1l // Play Shadow Ball Charge SFX

@@ -4,18 +4,21 @@
 #include <melee/ef/efsync.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftparts.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/ft/ftparts.h>
+#include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
 
 void ftFox_SpecialLw_CreateLoopGFX(HSD_GObj* fighter_gobj)
 {
+    /// @todo Shared @c inline with #ftFox_SpecialLw_CreateStartGFX.
     Fighter* fp = fighter_gobj->user_data;
 
-    if (fp->x2219_flag.bits.b0 == 0) {
+    if (fp->x2219_flag.bits.b0 == FALSE) {
         ef_Spawn(0x488, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
-        fp->x2219_flag.bits.b0 = 1;
+        fp->x2219_flag.bits.b0 = TRUE;
     }
+
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21BC_callback_Accessory4 = NULL;
@@ -860,6 +863,7 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* fighter_gobj)
 
     func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, NULL,
                   &sp14);
+
     func_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f, 1.0471975803375244f);
 
     if ((s32) fp->xE0_ground_or_air == GA_Ground) {

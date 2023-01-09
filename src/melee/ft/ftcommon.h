@@ -3,7 +3,7 @@
 
 #include <dolphin/types.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 
 typedef struct _Fighter Fighter;
@@ -62,8 +62,6 @@ void func_8007DD7C(HSD_GObj*, Vec3*);
 void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1);
 void func_8007E0E4(HSD_GObj*);
 HSD_GObj* func_8007E2A4(HSD_GObj*);
-void func_8007E2D0(Fighter*, s16, void (*cb0)(HSD_GObj*),
-                   void (*cb1)(HSD_GObj*), void (*cb2)(HSD_GObj*, HSD_GObj*));
 void func_8007E2F4(Fighter*, s16 val);
 void func_8007E2FC(HSD_GObj*);
 void func_8007E358(HSD_GObj*);
@@ -139,16 +137,13 @@ void func_8007D92C(struct _HSD_GObj*);
 void func_8007D9FC(Fighter*);
 f32 func_8007DA74(s32, u32, f32);
 
-void func_8007E2D0(Fighter*, s16, void (*)(struct _HSD_GObj*),
-                   void (*)(struct _HSD_GObj*),
-                   void (*)(struct _HSD_GObj*, struct _HSD_GObj*));
+void func_8007E2D0(Fighter*, s16, HSD_GObjEvent, HSD_GObjEvent,
+                   void (*)(HSD_GObj*, HSD_GObj*));
 
-void func_8007E2F4(Fighter*, s16);
 void func_8007E2FC(struct _HSD_GObj*);
 void func_8007E83C(struct _HSD_GObj*, s32, f32 div);
 s32 ftGetParasolStatus(struct _HSD_GObj*);
 void func_8007EA90(Fighter*, s32);
-void func_8007EBAC(Fighter*, u32, u32);
 void func_8007ED50(Fighter*, s32);
 void func_8007EFC0(Fighter*, u32);
 f32 Fighter_GetModelScale(Fighter*);

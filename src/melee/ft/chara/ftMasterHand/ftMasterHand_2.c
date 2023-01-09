@@ -1,5 +1,14 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_13.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_15.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_16.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_21.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_22.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/mp/mplib.h>
+
 // 8014FDD0 0014C9B0
 // https://decomp.me/scratch/HWef2
 void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj)

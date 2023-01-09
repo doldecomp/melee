@@ -27,8 +27,10 @@ typedef struct _ftKirbyAttributes {
 } ftKirbyAttributes;
 
 void func_800EED50(s32, s32);
-void func_800F1D24();
-void func_800F5BA4();
-void func_800F5C34();
+void func_800F1D24(void);
+void func_800F5BA4(void);
+void func_800F5C34(void);
+void func_800F5D04(HSD_GObj* fighter_gobj, BOOL);
+void ftKirby_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool);
 
 #endif

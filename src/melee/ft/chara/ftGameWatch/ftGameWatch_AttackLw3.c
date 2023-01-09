@@ -1,9 +1,12 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
-extern void func_8007E6DC(HSD_GObj*, HSD_GObj*, s32);
-extern HSD_GObj* func_802C65E4(HSD_GObj*, Vec3*, s32, f32);
-extern void ftGameWatch_ItemManholeExitHitlag(HSD_GObj*);
-extern void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj*);
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
+
+static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj*);
+static void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj*);
 
 // 0x8014AB48
 // https://decomp.me/scratch/x73Hx // Create Manhole Item
@@ -81,7 +84,7 @@ extern void func_802C6784(HSD_GObj*);
 
 // 0x8014AD38
 // https://decomp.me/scratch/Kw1d3 // Apply hitlag to Manhole item
-void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj* fighter_gobj)
+static void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (fp->sa.gaw.x2250_manholeGObj2 != NULL) {
@@ -90,7 +93,7 @@ void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014AD68 - Remove hitlag from Manhole item
-void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* fighter_gobj)
+static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (fp->sa.gaw.x2250_manholeGObj2 != NULL) {

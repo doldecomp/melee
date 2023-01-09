@@ -6,7 +6,6 @@
 -Iinclude
 -Wall
 -Wextra
--Wno-unknown-pragmas
 -Wno-unused-variable
 -Wno-unused-but-set-variable
 -Wno-unused-function
@@ -22,3 +21,4 @@
 -Werror=implicit-int
 -Werror=c2x-extensions
 -Werror=missing-field-initializers
+-Werror=unknown-pragmas

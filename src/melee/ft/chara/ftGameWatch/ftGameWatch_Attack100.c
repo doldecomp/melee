@@ -1,6 +1,6 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
-
-extern void func_800D6B00(HSD_GObj*, s32);
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 
 // 0x8014C1E8
 // https://decomp.me/scratch/AyScb // Mr. Game & Watch's Rapid Jab Start Action
@@ -18,9 +18,8 @@ void ftGameWatch_Attack100Start_Action(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftGameWatch_Attack100Start_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         ftGameWatch_Attack100Loop_Action(fighter_gobj);
-    }
 }
 
 // 0x8014C260 - Mr. Game & Watch's Rapid Jab Start IASA callback
