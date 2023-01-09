@@ -82,4 +82,9 @@ typedef jmp_t jtbl_t[];
 #define qr7 7
 #pragma endregion
 
+/// @todo Move somwhere more appropriate.
+#if defined(__MWERKS__) && defined(GEKKO)
+#define MWERKS_GEKKO
+#endif
+
 #endif

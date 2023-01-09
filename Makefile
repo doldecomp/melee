@@ -101,7 +101,6 @@ CFLAGS  = -msgstyle gcc \
 		-cwd source \
 		-Cpp_exceptions off \
 		-DGEKKO \
-		-DMWERKS_GEKKO \
 		-proc gekko -fp hard \
 		-fp_contract on -O4,p \
 		-enum int \

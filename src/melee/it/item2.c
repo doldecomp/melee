@@ -673,7 +673,7 @@ f32 func_8026B960(register HSD_GObj* item_gobj)
 
     item_data = item_gobj->user_data;
     itemID = item_data->x10_item_kind;
-    
+
     asm {
         cmpwi itemID, It_Kind_Link_Bomb
         beq- lbl_block
@@ -691,7 +691,7 @@ lbl_block:
     if (item_data->x24_item_state_index != 0x5) {
         return unk_timer = item_data->xD44_lifeTimer;
     }
-    
+
     return unk_timer;
 } // clang-format on
 #pragma pop
