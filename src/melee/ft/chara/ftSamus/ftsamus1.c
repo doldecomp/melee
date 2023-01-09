@@ -1,5 +1,11 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
+#include <melee/ft/chara/ftSamus/ftsamus3.h>
+#include <melee/ft/chara/ftSamus/ftsamus4.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
+#include <melee/lb/lbunknown_001.h>
+
 void ftSamus_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;

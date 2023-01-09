@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/code_80081B38.h>
+
 void ftSamus_ClearThrowFlagsUnk(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -91,25 +94,22 @@ void ftSamus_8012A468(HSD_GObj* fighter_gobj)
 
 void ftSamus_8012A4A4(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj)) {
+    if (func_80081D0C(fighter_gobj))
         func_80082B1C(fighter_gobj);
-    }
 }
 
 void ftSamus_8012A4E0(HSD_GObj* fighter_gobj)
 {
     s32 unused[2];
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 void ftSamus_8012A51C(HSD_GObj* fighter_gobj)
 {
     s32 unused[2];
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_800CC730(fighter_gobj);
-    }
 }
 
 void ftSamus_8012A558(HSD_GObj* fighter_gobj)

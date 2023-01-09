@@ -2,6 +2,12 @@
 
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/pl/pl_unknown_001.h>
 
 // 0x80119E14 //
 // https://decomp.me/scratch/LwTKg //
@@ -208,8 +214,6 @@ void ftNess_SpecialLwStart_GroundToAir(
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-extern void func_8007D468(Fighter*);
-
 // 0x8011A240 //
 // https://decomp.me/scratch/153K2 //
 void ftNess_SpecialAirLwStart_AirToGround(
@@ -225,8 +229,6 @@ void ftNess_SpecialAirLwStart_AirToGround(
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fp);
 }
-
-extern void func_80088478(Fighter*, s32, s32, s32);
 
 // 0x8011A2A8 //
 // https://decomp.me/scratch/Wlutx //
@@ -319,8 +321,6 @@ void ftNess_SpecialAirLwHold_IASA(
     return;
 }
 
-extern void func_8007AF10(HSD_GObj*);
-
 // 0x8011A440 //
 // https://decomp.me/scratch/knaIL //
 void ftNess_SpecialLwHold_Phys(
@@ -378,9 +378,6 @@ void ftNess_SpecialAirLwHold_Coll(
         ftNess_SpecialAirLwHold_AirToGround(fighter_gobj);
     }
 }
-
-extern void ftColl_CreateAbsorbHit(HSD_GObj*,
-                                   AbsorbDesc*); // Create Absorb Bubble //
 
 // 0x8011A560 //
 // https://decomp.me/scratch/noqpv //
@@ -459,14 +456,12 @@ void ftNess_SpecialAirLwHold_Action(
     ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
-extern f32 func_80075F48(Fighter*, s32);
-
-inline f32 returnStateVar(s32 stateVar)
+static inline f32 returnStateVar(s32 stateVar)
 {
     return (f32) stateVar;
 }
 
-inline void GetAttrStuff(HSD_GObj* arg0)
+static inline void GetAttrStuff(HSD_GObj* arg0)
 {
     Fighter* temp_r30 = arg0->user_data;
     ftNessAttributes* temp_r31 = temp_r30->x2D4_specialAttributes;

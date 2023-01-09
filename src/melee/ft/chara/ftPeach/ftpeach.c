@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftPeach/ftpeach.h>
 
 #include <melee/it/itkind.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftparts.h>
 #include <melee/lb/lbmthp.h>
 
 void ftPeach_OnDeath(HSD_GObj* gobj)
@@ -53,6 +55,10 @@ void ftPeach_OnLoad(HSD_GObj* gobj)
     func_8026B3F8(items[4], It_Kind_Peach_ToadSpore);
 }
 
+/* static */ void ftPeach_8011D598(HSD_GObj* fighter_gobj);
+/* static */ void ftPeach_8011E2E8(HSD_GObj* fighter_gobj);
+/* static */ void ftPeach_8011CFA0(HSD_GObj* fighter_gobj);
+
 void ftPeach_8011B704(HSD_GObj* fighter_gobj)
 {
     ftPeach_8011D598(fighter_gobj);
@@ -89,11 +95,11 @@ void ftPeach_8011B93C(HSD_GObj* fighter_gobj)
 {
     s32 unused[2];
     s32 result = func_80074A74(fighter_gobj, 2);
-    if (result == -1) {
+
+    if (result == -1)
         func_80074A4C(fighter_gobj, 2, 0);
-    } else {
+    else
         func_80074A4C(fighter_gobj, 2, -1);
-    }
 }
 
 void ftPeach_OnKnockbackEnter(HSD_GObj* fighter_gobj)

@@ -4,8 +4,11 @@
 #ifndef MELEE_FT_FT_UNKNOWN_006_H
 #define MELEE_FT_FT_UNKNOWN_006_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/ft/fighter.h>
+
+/// @remarks Only used by Purin.
+extern HSD_Joint* lbl_8045A1E0[6];
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1);
 s32 func_80087818(HSD_GObj* fighter_gobj, s32 arg1);
@@ -79,7 +82,7 @@ u32 func_80090690(struct _Fighter*, struct _Vec2*);
 void func_80090718(struct _Fighter*);
 f32 func_80092ED8(s32, void*, f32);
 s32 func_80093694(void);
-s32 func_8009515C(s32);
+s32 func_8009515C(HSD_GObj*);
 void func_80095744(struct _HSD_GObj*, BOOL);
 s32 func_800964FC(struct _Fighter*);
 void func_800968C8(struct _HSD_GObj*);
@@ -88,7 +91,7 @@ void func_8009750C(HSD_GObj*);
 void func_80098B20(struct _HSD_GObj*);
 void func_80098C9C(struct _HSD_GObj*);
 void func_80099D9C(struct _HSD_GObj*);
-s32 func_8009A080(s32);
+BOOL func_8009A080(HSD_GObj*);
 void func_8009A804(struct _HSD_GObj*);
 void func_8009CF84(struct _Fighter*);
 void func_8009E0A8(struct _HSD_GObj*);
@@ -201,7 +204,10 @@ void func_800D5D3C(HSD_GObj*);
 void func_8008D708(HSD_GObj*, s32, f32);
 void func_8008D3A4(HSD_GObj*);
 void func_8008D29C(HSD_GObj*);
+
+/// Interrupt_Wait
 void func_8008A4D4(HSD_GObj*);
+
 void func_80088510(Fighter*, s32, u8, u8);
 void func_800BC7E0(HSD_GObj*, HSD_GObj*);
 void func_800BC8D4(HSD_GObj*, HSD_GObj*);
@@ -215,5 +221,53 @@ void func_8008A2BC(HSD_GObj*);
 void func_800BCF18(HSD_GObj*, HSD_GObj*);
 void func_800BD000(HSD_GObj*, HSD_GObj*);
 void func_80090780(HSD_GObj*);
+void func_80097D40(HSD_GObj*);
+void func_800969D8(HSD_GObj*, s32, s32, s32, f32, f32, f32);
+void func_80088478(Fighter*, s32, s32, s32);
+void func_8009DC54(Fighter*);
+unk_t func_80091D58(void);
+unk_t func_80092450(void);
+void func_80092BCC(HSD_GObj* fighter_gobj);
+BOOL func_80099794(HSD_GObj*);
+BOOL func_800D8990(HSD_GObj*);
+BOOL func_800925A4(HSD_GObj* fighter_gobj);
+void func_800928CC(HSD_GObj* fighter_gobj);
+void func_80092870(void);
+void func_800928AC(void);
+void func_80094818(HSD_GObj* fighter_gobj, BOOL);
+void func_800D6C60(HSD_GObj*, HSD_GObjEvent callback);
+void func_800D6E70(HSD_GObj* fighter_gobj);
+void func_800D6E34(HSD_GObj* fighter_gobj);
+s32 func_8008CE68(Fighter*);
+void func_8008CFAC(HSD_GObj*, s32);
+void func_800D638C(HSD_GObj*);
+BOOL func_8008A9F8(HSD_GObj*);
+BOOL func_8008B658(HSD_GObj*);
+BOOL func_8008B980(HSD_GObj*);
+BOOL func_8008BB44(HSD_GObj*);
+BOOL func_8008BFC4(HSD_GObj*);
+BOOL func_8008C830(HSD_GObj*);
+BOOL func_8008CB44(HSD_GObj*);
+BOOL func_800C9468(HSD_GObj*);
+BOOL func_800C97DC(HSD_GObj*);
+BOOL func_800CA094(HSD_GObj*);
+BOOL func_800CAED0(HSD_GObj*);
+BOOL func_800D5F58(HSD_GObj*);
+BOOL func_8008A9F8(HSD_GObj*);
+BOOL func_8008B658(HSD_GObj*);
+BOOL func_8008B980(HSD_GObj*);
+BOOL func_8008BB44(HSD_GObj*);
+BOOL func_8008BFC4(HSD_GObj*);
+BOOL func_8008C830(HSD_GObj*);
+BOOL func_8008CB44(HSD_GObj*);
+BOOL func_80096540(HSD_GObj*);
+void func_800D638C(HSD_GObj*);
+BOOL func_800D6824(HSD_GObj*);
+BOOL func_800D68C0(HSD_GObj*);
+BOOL func_800D695C(HSD_GObj*);
+BOOL func_8007B868(HSD_GObj*);
+void func_8008D010(HSD_GObj*);
+void func_8008D08C(HSD_GObj*);
+void func_800D9C98(HSD_GObj* fighter_gobj);
 
 #endif

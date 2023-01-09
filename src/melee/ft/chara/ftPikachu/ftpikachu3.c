@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 
 #include <melee/ft/ftcoll.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/code_80081B38.h>
 
 void ftPikachu_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
@@ -55,12 +57,14 @@ void ftPikachu_80124FA0(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_80124FDC()
+void ftPikachu_Stub_80124FDC(void)
 {
+    return;
 }
 
-void ftPikachu_Stub_80124FE0()
+void ftPikachu_Stub_80124FE0(void)
 {
+    return;
 }
 
 void ftPikachu_80124FE4(HSD_GObj* fighter_gobj)
@@ -260,12 +264,14 @@ void ftPikachu_8012561C(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_801256B4()
+void ftPikachu_Stub_801256B4(void)
 {
+    return;
 }
 
-void ftPikachu_Stub_801256B8()
+void ftPikachu_Stub_801256B8(void)
 {
+    return;
 }
 
 void ftPikachu_801256BC(HSD_GObj* fighter_gobj)
@@ -332,8 +338,9 @@ void ftPikachu_ActionChange_801258A0(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124D2C;
 }
 
-void ftPikachu_Stub_8012590C()
+void ftPikachu_Stub_8012590C(void)
 {
+    return;
 }
 
 void ftPikachu_80125910(HSD_GObj* fighter_gobj)
@@ -343,16 +350,19 @@ void ftPikachu_80125910(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_8012594C()
+void ftPikachu_Stub_8012594C(void)
 {
+    return;
 }
 
-void ftPikachu_Stub_80125950()
+void ftPikachu_Stub_80125950(void)
 {
+    return;
 }
 
-void ftPikachu_Stub_80125954()
+void ftPikachu_Stub_80125954(void)
 {
+    return;
 }
 
 void ftPikachu_80125958(HSD_GObj* fighter_gobj)
@@ -372,8 +382,9 @@ void ftPikachu_80125958(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_801259D4()
+void ftPikachu_Stub_801259D4(void)
 {
+    return;
 }
 
 void ftPikachu_801259D8(HSD_GObj* fighter_gobj)
@@ -426,12 +437,14 @@ void ftPikachu_80125B70(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_80125BAC()
+void ftPikachu_Stub_80125BAC(void)
 {
+    return;
 }
 
-void ftPikachu_Stub_80125BB0()
+void ftPikachu_Stub_80125BB0(void)
 {
+    return;
 }
 
 void ftPikachu_80125BB4(HSD_GObj* fighter_gobj)

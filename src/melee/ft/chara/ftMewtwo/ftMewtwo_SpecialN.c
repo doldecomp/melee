@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
+#include <melee/ef/eflib.h>
+#include <melee/it/code_8027CF30.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/lb/lbunknown_001.h>
@@ -86,9 +88,7 @@ BOOL ftMewtwo_SpecialN_CheckShadowBallCancel(HSD_GObj* fighter_gobj)
         return TRUE;
 }
 
-extern void efLib_DestroyAll(HSD_GObj*);
-
-inline void ftMewtwo_SpecialN_ClearGObj(HSD_GObj* fighter_gobj)
+static inline void ftMewtwo_SpecialN_ClearGObj(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj != NULL) {
         Fighter* fp = getFighter(fighter_gobj);
@@ -113,9 +113,8 @@ void ftMewtwo_SpecialN_SetNULL(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_802C573C(HSD_GObj*);
-
-inline void ftMewtwo_SpecialN_RemoveHeldShadowBall(HSD_GObj* fighter_gobj)
+static inline void
+ftMewtwo_SpecialN_RemoveHeldShadowBall(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     Fighter* fp2 = fp = getFighter(fighter_gobj);
@@ -215,8 +214,6 @@ void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* fighter_gobj)
              (f32) fp->sa.mewtwo.x2234_shadowBallCharge);
     }
 }
-
-void func_802C53F0(HSD_GObj*, Vec3*, f32, f32, f32);
 
 // 0x80146FA8
 // https://decomp.me/scratch/6f5xe // Shoot Shadow Ball
@@ -441,8 +438,6 @@ void ftMewtwo_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SpecialAirN_ChangeAction(fighter_gobj);
 }
-
-extern HSD_GObj* func_802C5000(HSD_GObj*, Vec3*, s32, s32, f32);
 
 // 0x801474C0
 // https://decomp.me/scratch/KY0xt // Mewtwo's grounded Shadow Ball Start
@@ -1167,9 +1162,7 @@ void ftMewtwo_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_802C519C(HSD_GObj*, Vec3*, s32, s32, f32, f32);
-
-inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* fighter_gobj)
+static inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* fighter_gobj)
 {
     Vec3 sp20;
     Vec3 sp2C;

@@ -20,5 +20,6 @@ void func_8002F474(void);
 void* func_80030A50(void);
 BOOL func_80030CFC(struct _CameraBox*, f32);
 f32 func_80031144(void);
+void func_80030E44(s32, Vec3*);
 
 #endif

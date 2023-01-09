@@ -64,8 +64,6 @@ void ftGameWatch_ItemRescueSetNULL(HSD_GObj* fighter_gobj)
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-extern void func_802C8158(HSD_GObj*);
-
 // 0x8014DFFC - Remove Fire Rescue item
 void ftGameWatch_ItemRescueRemove(HSD_GObj* fighter_gobj)
 {
@@ -78,9 +76,6 @@ void ftGameWatch_ItemRescueRemove(HSD_GObj* fighter_gobj)
         ftGameWatch_ItemRescueSetNULL(fighter_gobj);
     }
 }
-
-extern void func_802C81C8(HSD_GObj*);
-extern void func_802C81E8(HSD_GObj*);
 
 // 0x8014E04C - Apply hitlag to Fire Rescue item
 static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj)

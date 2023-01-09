@@ -194,10 +194,10 @@ void ftPikachu_ActionChangeUpdateVel_801274AC(HSD_GObj* fighter_gobj);
 void ftPikachu_ActionChangeUpdateVel_80127534(HSD_GObj* fighter_gobj);
 
 // pika5
-s32 ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj);
+BOOL ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj);
 void ftPikachu_80127608(HSD_GObj* fighter_gobj);
 void ftPikachu_SetState_8012764C(HSD_GObj* fighter_gobj);
-s32 ftPikachu_8012765C(HSD_GObj* fighter_gobj);
+BOOL ftPikachu_8012765C(HSD_GObj* fighter_gobj);
 void ftPikachu_SetState_8012779C(HSD_GObj* fighter_gobj);
 void ftPikachu_EfSpawn_801277AC(HSD_GObj* fighter_gobj);
 void ftPikachu_SpecialLw_StartAction(HSD_GObj* fighter_gobj);

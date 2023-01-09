@@ -1,11 +1,13 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
 
 #include <dolphin/os/os.h>
+#include <melee/ft/ftparts.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/it/itkind.h>
+#include <placeholder.h>
 
 extern char* lbl_804D3E58;
 extern char* lbl_804D3E60;
@@ -146,6 +148,9 @@ void ftYoshi_OnLoad(HSD_GObj* fighter_gobj)
     fp->x2226_flag.bits.b1 = 1;
 }
 
+/* static */ void func_8012E270(HSD_GObj* fighter_gobj);
+/* static */ void func_8012DF18(HSD_GObj* fighter_gobj);
+
 void ftYoshi_8012BA8C(HSD_GObj* fighter_gobj)
 {
     func_8012E270(fighter_gobj);
@@ -197,16 +202,15 @@ void ftYoshi_OnKnockbackExit(HSD_GObj* fighter_gobj)
     ftAnim_ApplyPartAnim(fighter_gobj, 4, 2, 0.0f);
 }
 
-extern f32 lbl_804D9A28;
-void func_8007B5AC(void* arg0, void* arg1, void* arg2);
+/* static */ extern f32 const lbl_804D9A28;
+/* static */ extern u8 lbl_803B75C0[];
 
-extern u8 lbl_803B75C0[];
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t func_8012BDA0()
+asm unk_t func_8012BDA0(void)
 { // clang-format off
     nofralloc
-func_8012BDA0:
 /* 8012BDA0 00128980  7C 08 02 A6 */	mflr r0
 /* 8012BDA4 00128984  38 80 00 02 */	li r4, 2
 /* 8012BDA8 00128988  90 01 00 04 */	stw r0, 4(r1)
@@ -249,6 +253,15 @@ func_8012BDA0:
 }
 #pragma pop
 
+#else
+
+unk_t func_8012BDA0(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void func_8012BE3C(HSD_GObj* fighter_gobj) {
     s32* x1CC;
     Fighter* fp = fighter_gobj->user_data;
@@ -266,13 +279,13 @@ void func_8012BE3C(HSD_GObj* fighter_gobj) {
     efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
 }
 
-extern f32 lbl_804D9A2C;
-extern f32 lbl_804D9A28;
-extern void func_80091D58();
-extern void func_80092450();
+#ifdef MWERKS_GEKKO
+
+/* static */ extern f32 const lbl_804D9A2C;
+/* static */ extern f32 const lbl_804D9A28;
 
 #pragma push
-asm unk_t func_8012BECC()
+asm unk_t func_8012BECC(void)
 { // clang-format off
     nofralloc
 func_8012BECC:
@@ -372,22 +385,41 @@ lbl_8012BFF0:
 } // clang-format on
 #pragma pop
 
-// extern void lbl_8012CACC();
+#else
 
-// void func_8012C850(HSD_GObj* fighter_gobj) {
-//     ftCommonData* temp_r5;
-//     Fighter* fp;
+unk_t func_8012BECC(void)
+{
+    NOT_IMPLEMENTED;
+}
 
-//     fp = getFighter(fighter_gobj);
-//     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x10, NULL,
-//     fp->x894_currentAnimFrame, 1.0f, 0.0f); fp->x672_input_timer_counter =
-//     0xFE; fp->x221A_flag.bits.b7 = 0; fp->x221B_flag.bits.b0 = 0;
-//     fp->x221C_flag.bits.b3 = 1;
-//     fp->x221C_flag.bits.b1 = 1;
-//     fp->x221C_flag.bits.b2 = 1;
+#endif
 
-//     fp->x2354_stateVar6 = (f32) p_ftCommonData->x2A4;
-//     temp_r5 = p_ftCommonData;
-//     fp->x2358_stateVar7 = (f32) temp_r5->x2B4;
-//     func_8009370C(fighter_gobj, &lbl_8012CACC, temp_r5);
-// }
+/** @fn func_8012C850
+ * @todo Matching(?) but not moved from asm.
+ */
+#if FALSE
+
+/* static */ void lbl_8012CACC(HSD_GObj*);
+
+void func_8012C850(HSD_GObj* fighter_gobj)
+{
+    ftCommonData* temp_r5;
+    Fighter* fp;
+
+    fp = getFighter(fighter_gobj);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x10, NULL,
+                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    fp->x672_input_timer_counter = 0xFE;
+    fp->x221A_flag.bits.b7 = FALSE;
+    fp->x221B_flag.bits.b0 = FALSE;
+    fp->x221C_flag.bits.b3 = TRUE;
+    fp->x221C_flag.bits.b1 = TRUE;
+    fp->x221C_flag.bits.b2 = TRUE;
+
+    fp->x2354_stateVar6 = (f32) p_ftCommonData->x2A4;
+    temp_r5 = p_ftCommonData;
+    fp->x2358_stateVar7 = (f32) temp_r5->x2B4;
+    func_8009370C(fighter_gobj, &lbl_8012CACC, temp_r5);
+}
+
+#endif

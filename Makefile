@@ -91,7 +91,6 @@ ASFLAGS := -mgekko -I include
 ifneq ($(NON_MATCHING),1)
 	ASFLAGS += --defsym MUST_MATCH=1
 endif
-
 LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
 	LDFLAGS += -map $(MAP)

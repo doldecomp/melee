@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftSeak/ftseak.h>
 
 #include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
 
 void ftSeak_OnDeath(HSD_GObj* fighter_gobj)
 {
@@ -26,6 +28,9 @@ void ftSeak_OnLoad(HSD_GObj* fighter_gobj)
     func_8026B3F8(item_list[2], 0x55U);
     func_8026B3F8(item_list[3], 0x61U);
 }
+
+/* static */ void func_80111FBC(HSD_GObj* fighter_gobj);
+/* static */ void func_80110E88(HSD_GObj* fighter_gobj);
 
 void ftSeak_80110198(HSD_GObj* fighter_gobj)
 {

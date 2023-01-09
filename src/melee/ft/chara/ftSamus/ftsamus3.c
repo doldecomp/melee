@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/lb/lbunknown_001.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/code_8027CF30.h>
@@ -38,7 +40,7 @@ s32 ftSamus_801292E4(HSD_GObj* fighter_gobj)
     Vec vec1;
     Vec vec2;
 
-    u32 result;
+    HSD_GObj* result;
     Fighter* fp = getFighter(fighter_gobj);
 
     if ((fp->x2200_ftcmd_var0 == 1U) && (!fp->sa.samus.x222C)) {
@@ -51,7 +53,7 @@ s32 ftSamus_801292E4(HSD_GObj* fighter_gobj)
         result = func_802B55C8(fighter_gobj, &vec1, 0x32, 0x5E,
                                fp->x2C_facing_direction);
         fp->sa.samus.x222C = result;
-        if (result) {
+        if (result != NULL) {
             ftSamus_updateDamageDeathCBs(fighter_gobj);
         } else {
             fp->sa.samus.x222C = 0U;
@@ -417,6 +419,7 @@ void ftSamus_8012A074(HSD_GObj* fighter_gobj)
         fp->sa.samus.x2238++;
         func_8000B1CC(fp->x5E8_fighterBones[56].x0_jobj, NULL, &position);
         position.x += (samus_attr->x34 * fp->x2C_facing_direction);
+
         if ((fp->x10_action_state_index == 0x15D) ||
             (fp->x10_action_state_index == 0x15F))
         {
@@ -424,6 +427,7 @@ void ftSamus_8012A074(HSD_GObj* fighter_gobj)
         } else {
             func_802B62D0(fighter_gobj, &position, 1, fp->x2C_facing_direction);
         }
+
         ftSamus_8012A168(fighter_gobj, &position);
         fp->cb.x21BC_callback_Accessory4 = 0;
     }

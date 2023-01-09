@@ -1,14 +1,23 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/ftcliffcommon.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <MSL/trigf.h>
 
-#define HALF_PI 1.5707963705062866f
-#define DEG_TO_RAD 0.017453292f
-#define MAX_STICK_MAG 0.999f
+/// @todo Move elsewhere.
+#define HALF_PI (1.5707963705062866f)
+
+/// @todo Move elsewhere.
+#define DEG_TO_RAD (0.017453292f)
+
+/// @todo Move elsewhere.
+#define MAX_STICK_MAG (0.999f)
 
 // points velocity toward facing direction
 void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighter_gobj)
@@ -71,12 +80,14 @@ void ftPikachu_80125F14(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_80125F50()
+void ftPikachu_Stub_80125F50(void)
 {
+    return;
 }
 
-void ftPikachu_Stub_80125F54()
+void ftPikachu_Stub_80125F54(void)
 {
+    return;
 }
 
 void ftPikachu_80125F58(HSD_GObj* fighter_gobj)
@@ -213,12 +224,14 @@ void ftPikachu_801262B4(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_80126424()
+void ftPikachu_Stub_80126424(void)
 {
+    return;
 }
 
-void ftPikachu_Stub_80126428()
+void ftPikachu_Stub_80126428(void)
 {
+    return;
 }
 
 void ftPikachu_8012642C(HSD_GObj* fighter_gobj)
@@ -259,12 +272,19 @@ void ftPikachu_801265D4(HSD_GObj* fighter_gobj)
     func_8007CB74(fighter_gobj);
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
+
 void ftPikachu_801265F4(HSD_GObj* fighter_gobj)
 {
     ftPikachu_8012642C(fighter_gobj);
 }
-#pragma dont_inline off
+
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 void ftPikachu_80126614(HSD_GObj* fighter_gobj)
 {
@@ -386,7 +406,11 @@ void ftPikachu_801267C8(HSD_GObj* fighter_gobj)
     }
 }
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
+
 void ftPikachu_ActionChange_80126A2C(HSD_GObj* fighter_gobj)
 {
     s32 unused[2];
@@ -397,7 +421,10 @@ void ftPikachu_ActionChange_80126A2C(HSD_GObj* fighter_gobj)
     fp->x2223_flag.bits.b4 = 1;
     ftPikachu_8012642C(fighter_gobj);
 }
-#pragma dont_inline off
+
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
 void ftPikachu_ActionChange_80126AA4(HSD_GObj* fighter_gobj)
 {
@@ -436,7 +463,7 @@ void ftPikachu_ActionChange_80126AA4(HSD_GObj* fighter_gobj)
     HSD_JObjSetScale(jobj, &scale);
 }
 
-inline float get_max_and_fill_stack()
+static inline float get_max_and_fill_stack(void)
 {
     float stack[9];
     stack[0] = MAX_STICK_MAG;
@@ -601,7 +628,7 @@ void ftPikachu_80126E1C(HSD_GObj* fighter_gobj)
     fp->cb.x21F8_callback = &ftPikachu_UpdateVel_80125D80;
 }
 
-inline s32 return_and_fill_stack()
+static inline s32 return_and_fill_stack(void)
 {
     float stack[1];
     stack[0] = MAX_STICK_MAG;
@@ -691,12 +718,14 @@ void ftPikachu_80127228(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_801272D8()
+void ftPikachu_Stub_801272D8(void)
 {
+    return;
 }
 
-void ftPikachu_Stub_801272DC()
+void ftPikachu_Stub_801272DC(void)
 {
+    return;
 }
 
 void ftPikachu_801272E0(HSD_GObj* fighter_gobj)

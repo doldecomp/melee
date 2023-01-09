@@ -190,8 +190,6 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj)
     func_80084FA8(fighter_gobj);
 }
 
-extern void func_80084DB0(HSD_GObj*);
-
 // 0x800E3018
 // https://decomp.me/scratch/CiZfS // Captain Falcon & Ganondorf's aerial
 // Falcon/Warlock Punch Physics callback
@@ -243,8 +241,6 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
         func_80084DB0(fighter_gobj);
     }
 }
-
-extern void func_8007D468(Fighter*);
 
 // 0x800E3168
 // https://decomp.me/scratch/34fFe // Captain Falcon & Ganondorf's grounded

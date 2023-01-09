@@ -1,19 +1,19 @@
 #include <melee/ft/chara/ftPurin/ftpurin.h>
 
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/ft_unknown_005.h>
+#include <melee/ft/ft_unknown_006.h>
 
-extern struct UnkCostumeList CostumeListsForeachCharacter[33];
-extern char* lbl_803D05B4[1000]; /// not correct length
-extern HSD_ObjAllocData lbl_80459080;
-extern HSD_Joint* lbl_8045A1E0[1000]; /// not correct length
+/* static */ extern char* lbl_803D05B4[5];
 
-void func_8013C2F8()
+void func_8013C2F8(void)
 {
-    lbl_8045A1E0[0] = 0;
-    lbl_8045A1E0[1] = 0;
-    lbl_8045A1E0[2] = 0;
-    lbl_8045A1E0[3] = 0;
-    lbl_8045A1E0[4] = 0;
+    lbl_8045A1E0[0] = NULL;
+    lbl_8045A1E0[1] = NULL;
+    lbl_8045A1E0[2] = NULL;
+    lbl_8045A1E0[3] = NULL;
+    lbl_8045A1E0[4] = NULL;
 }
 
 void ftPurin_OnDeath(HSD_GObj* fighter_gobj)
@@ -57,6 +57,7 @@ void func_8013C360(HSD_GObj* fighter_gobj)
         func_8009DC54(fp);
         return;
     }
+
     fp->sa.purin.x223C = 0;
 }
 
@@ -73,7 +74,7 @@ void func_8013C494(HSD_GObj* fighter_gobj)
     }
 }
 
-void func_8013C4F0(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2)
+void func_8013C4F0(HSD_GObj* fighter_gobj, s32 arg1, Mtx vmtx)
 {
     s32 unused[2];
 
@@ -90,7 +91,7 @@ void func_8013C4F0(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2)
         jobj->flags |= 0x03800000;
         HSD_JObjSetMtxDirty(jobj);
 
-        HSD_JObjDispAll(fp->sa.purin.x223C, arg2, func_80390EB8(arg1), 0);
+        HSD_JObjDispAll(fp->sa.purin.x223C, vmtx, func_80390EB8(arg1), 0);
     }
 }
 
@@ -101,6 +102,7 @@ void func_8013C614(Fighter* fp, s32 arg1, s32 arg2)
             func_80074CA0(&fp->sa.purin.x2248, arg1, &fp->sa.purin.x2240);
             return;
         }
+
         func_80074D7C(&fp->sa.purin.x2248, arg1, &fp->sa.purin.x2240);
     }
 }
@@ -108,9 +110,10 @@ void func_8013C614(Fighter* fp, s32 arg1, s32 arg2)
 void* func_8013C664(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    if (fp->sa.purin.x223C) {
+
+    if (fp->sa.purin.x223C)
         return fp->sa.purin.x223C;
-    }
+
     return fighter_gobj;
 }
 

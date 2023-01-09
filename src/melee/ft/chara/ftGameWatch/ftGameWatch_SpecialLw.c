@@ -313,8 +313,6 @@ void ftGameWatch_SpecialLw_Phys(HSD_GObj* fighter_gobj)
     func_8007AF10(fighter_gobj);
 }
 
-void func_8007AF10(HSD_GObj*);
-
 // 0x8014D350
 // https://decomp.me/scratch/3eki5 // Mr. Game & Watch's aerial Oil Panic Loop
 // Physics callback

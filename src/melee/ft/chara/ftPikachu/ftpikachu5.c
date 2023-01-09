@@ -1,10 +1,14 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 
+#include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/code_8027CF30.h>
 
-s32 ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj)
+BOOL ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
@@ -23,9 +27,9 @@ s32 ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj)
     case 11:
     case 12:
     case 13:
-        return 1;
+        return TRUE;
     default:
-        return 0;
+        return FALSE;
     }
 }
 
@@ -42,32 +46,29 @@ void ftPikachu_SetState_8012764C(HSD_GObj* fighter_gobj)
     fp->x2344_stateVar2 = 3;
 }
 
-inline f32 nested_sum_fabs(f32 fighter_pos_y, f32 pika_attr_xBC,
-                           f32 pika_attr_xBC_abs, f32 vec_y)
+static inline f32 nested_sum_fabs(f32 fighter_pos_y, f32 pika_attr_xBC,
+                                  f32 pika_attr_xBC_abs, f32 vec_y)
 {
-    if (fighter_pos_y + pika_attr_xBC_abs - vec_y < 0.0f) {
+    if (fighter_pos_y + pika_attr_xBC_abs - vec_y < 0.0f)
         return -(fighter_pos_y + fabs_inline(pika_attr_xBC) - vec_y);
-    } else {
+    else
         return fighter_pos_y + fabs_inline(pika_attr_xBC) - vec_y;
-    }
 }
 
-s32 ftPikachu_8012765C(HSD_GObj* fighter_gobj)
+BOOL ftPikachu_8012765C(HSD_GObj* fighter_gobj)
 {
     Vec vec;
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
     u32 state_var = fp->x2340_stateVar1_u32;
 
-    if (!fp->x2344_stateVar2_s32) {
-        return 0;
-    }
+    if (!fp->x2344_stateVar2_s32)
+        return FALSE;
 
-    if (state_var) {
+    if (state_var)
         func_802B1FE8(state_var, &vec);
-    } else {
-        return 0;
-    }
+    else
+        return FALSE;
 
     if (fabs_inline(fp->xB0_pos.x - vec.x) < fabs_inline(pika_attr->xC4)) {
         f32 final_y_pos = nested_sum_fabs(fp->xB0_pos.y, pika_attr->xBC,
@@ -77,11 +78,11 @@ s32 ftPikachu_8012765C(HSD_GObj* fighter_gobj)
             !func_802B1DEC(fp->x2340_stateVar1_u32))
         {
             func_802B1FC8(fp->x2340_stateVar1_u32);
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 void ftPikachu_SetState_8012779C(HSD_GObj* fighter_gobj)
@@ -327,16 +328,14 @@ void ftPikachu_ActionChange_80128000(HSD_GObj* fighter_gobj)
 
 void ftPikachu_80128050(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 void ftPikachu_8012808C(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_800CC730(fighter_gobj);
-    }
 }
 
 void ftPikachu_801280C8(HSD_GObj* fighter_gobj)

@@ -25,7 +25,6 @@ extern s32 lbl_804D8370[2];
 extern unk_t func_800750C8();
 extern unk_t func_8009F7F8();
 extern unk_t func_800C8AF0();
-extern unk_t HSD_JObjDispAll();
 extern unk_t func_8009F5AC();
 extern unk_t func_80369808();
 extern unk_t func_800310B8();

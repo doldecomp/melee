@@ -1,6 +1,12 @@
 #include <melee/ft/fighter.h>
 
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <melee/ft/code_8007C630.h>
+#include <melee/ft/code_8007C114.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_005.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/code_80081938.h>
@@ -104,7 +110,7 @@ inline HSD_JObj* getHSDJObj(HSD_GObj* hsd_gobj)
 }
 // --------------------------------------------
 
-void Fighter_800679B0()
+void Fighter_800679B0(void)
 {
     s32 i;
 
@@ -131,7 +137,7 @@ void Fighter_800679B0()
     }
 }
 
-void Fighter_FirstInitialize_80067A84()
+void Fighter_FirstInitialize_80067A84(void)
 {
     Fighter_800679B0();
     // TODO: size parameter too large to be only the size. maybe this contains
@@ -144,7 +150,7 @@ void Fighter_FirstInitialize_80067A84()
 void Fighter_LoadCommonData(void)
 {
     void** pData;
-    func_80016C64("PlCo.dat", &pData, "ftLoadCommonData", 0);
+    func_80016C64("PlCo.dat", (unk_t) &pData, "ftLoadCommonData", 0);
 
     // copy 23 4-byte chunks from pData to p_ftCommonData in reverse order,
     // equivalent to this: for(i=0; i<23; i++)

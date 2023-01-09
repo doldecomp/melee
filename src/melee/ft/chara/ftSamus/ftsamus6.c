@@ -1,4 +1,10 @@
+#include "melee/ft/fighter.h"
 #include <melee/ft/chara/ftSamus/ftsamus.h>
+
+#include <melee/lb/lbunknown_001.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/code_80081B38.h>
 
 void ftSamus_8012ADF0(HSD_GObj* fighter_gobj)
 {
@@ -182,7 +188,10 @@ void ftSamus_8012B488(HSD_GObj* fighter_gobj)
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
 
     if (fp->x2200_ftcmd_var0) {
-        if (!func_80082888(fighter_gobj, &samus_attr->height_attributes)) {
+        /// @todo Remove cast
+        if (!func_80082888(fighter_gobj,
+                           (ftCollisionBox*) &samus_attr->height_attributes))
+        {
             ftSamus_8012B570(fighter_gobj);
         }
     } else if (!func_800827A0(fighter_gobj)) {
@@ -196,7 +205,10 @@ void ftSamus_8012B4FC(HSD_GObj* fighter_gobj)
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
 
     if (fp->x2200_ftcmd_var0) {
-        if (func_800824A0(fighter_gobj, &samus_attr->height_attributes)) {
+        /// @todo Remove cast
+        if (func_800824A0(fighter_gobj,
+                          (ftCollisionBox*) &samus_attr->height_attributes))
+        {
             ftSamus_8012B668(fighter_gobj);
         }
     } else if (func_80081D0C(fighter_gobj)) {

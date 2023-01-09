@@ -442,9 +442,12 @@ static void ftFox_SpecialAirLwLoop_Action(HSD_GObj* fighter_gobj)
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
 
-#pragma push
 /// @todo This @c pragma is fake. Probably an @c inline depth issue.
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
+
 /// Fox & Falco's Reflector Turn function
 static void ftFox_SpecialLw_Turn(HSD_GObj* fighter_gobj)
 {
@@ -465,7 +468,10 @@ static void ftFox_SpecialLw_Turn(HSD_GObj* fighter_gobj)
                      (180.0f / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) -
                     func_80075F48(fp, 0)));
 }
+
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /// Fox & Falco's Reflector Turn function
 static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* fighter_gobj)
@@ -632,8 +638,6 @@ inline void ftFox_SpecialLwTurn_SetVarAll(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 0;
     ftFox_SpecialLw_Turn(fighter_gobj);
 }
-
-extern BOOL func_800C97A8(HSD_GObj*);
 
 // 0x800E942C
 // https://decomp.me/scratch/Hr5UW // Fox & Falco's Reflector Turn Action State
