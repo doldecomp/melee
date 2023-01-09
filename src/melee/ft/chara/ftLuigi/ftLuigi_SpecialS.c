@@ -1,11 +1,11 @@
-#include "sysdolphin/baselib/gobjproc.h"
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftcoll.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcoll.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 // 0x80142A24
 // https://decomp.me/scratch/TEGVv // Luigi's Green Missile GFX callback
