@@ -1,8 +1,17 @@
 #include <dolphin/dvd/dvd.h>
 
-#include <dolphin/os/OSAlarm.h>
-#include <dolphin/os/OSThread.h>
+#include <cstring.h>
+#include <dolphin/dvd/dvderror.h>
+#include <dolphin/dvd/dvdfs.h>
+#include <dolphin/dvd/dvdlow.h>
+#include <dolphin/dvd/dvdqueue.h>
+#include <dolphin/dvd/fstload.h>
 #include <dolphin/os/os.h>
+#include <dolphin/os/OSAlarm.h>
+#include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSThread.h>
+#include <Runtime/__mem.h>
 
 // Callback / state-change function declarations
 static void cbForCancelAllSync(s32, DVDCommandBlock*);
@@ -45,16 +54,8 @@ extern volatile struct _IO {
     u32 error;
 } IO AT_ADDRESS(0xCC006000);
 
-static struct {
-    u32 bootFilePosition;
-    u32 FSTPosition;
-    u32 FSTLength;
-    u32 FSTMaxLength;
-    void* FSTAddress;
-    u32 userPosition;
-    u32 userLength;
-    u32 padding0;
-} tmpBuffer;
+static DVDBuffer tmpBuffer;
+
 static u8 pad[0x60];
 DVDCommandBlock DummyCommandBlock;
 OSAlarm ResetAlarm;
@@ -81,7 +82,6 @@ static void (*LastState)(DVDCommandBlock*);
 
 static BOOL autoInvalidation = TRUE;
 
-void __DVDInterruptHandler(void);
 extern OSThreadQueue __DVDThreadQueue;
 DVDCommandBlock* __DVDPopWaitingQueue(void);
 
@@ -95,7 +95,8 @@ void DVDInit(void)
         __DVDInitWA();
         bootInfo = (void*) 0x80000000;
         currID = (void*) 0x80000000;
-        __OSSetInterruptHandler(0x15, __DVDInterruptHandler);
+        __OSSetInterruptHandler(0x15,
+                                (OSInterruptHandler) __DVDInterruptHandler);
         __OSUnmaskInterrupts(0x400);
         OSInitThreadQueue(&__DVDThreadQueue);
         IO.unk0 = 0x2A;
@@ -113,7 +114,7 @@ void DVDInit(void)
     }
 }
 
-static void stateReadingFST(DVDCommandBlock*)
+static void stateReadingFST(DVDCommandBlock* unused)
 {
     LastState = stateReadingFST;
     DVDLowRead(bootInfo->fst_start, OSRoundUp32B(tmpBuffer.FSTLength),
@@ -413,12 +414,12 @@ static void stateCheckID(void)
     }
 }
 
-static void stateCheckID3(DVDCommandBlock*)
+static void stateCheckID3(DVDCommandBlock* unused)
 {
     DVDLowAudioBufferConfig(currID->streaming, 10, cbForStateCheckID3);
 }
 
-static void stateCheckID2(DVDCommandBlock*)
+static void stateCheckID2(DVDCommandBlock* unused)
 {
     DVDLowRead(&tmpBuffer, sizeof(tmpBuffer), 0x420, cbForStateCheckID2);
 }
@@ -480,7 +481,7 @@ static void cbForStateCheckID3(u32 intType)
     }
 }
 
-static void AlarmHandler(OSAlarm*, OSContext*)
+static void AlarmHandler(OSAlarm* unused0, OSContext* unused1)
 {
     DVDReset();
     DCInvalidateRange(&tmpBuffer, 0x20);
@@ -545,7 +546,7 @@ static void cbForStateMotorStopped(u32 intType)
     stateCoverClosed();
 }
 
-static void stateReady()
+static void stateReady(void)
 {
     DVDCommandBlock* finished;
 

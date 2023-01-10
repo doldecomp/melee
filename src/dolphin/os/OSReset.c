@@ -1,7 +1,15 @@
-#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSReset.h>
-#include <dolphin/os/OSThread.h>
+
 #include <dolphin/os/os.h>
+#include <dolphin/os/OSAudioSystem.h>
+#include <dolphin/os/OSCache.h>
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSReboot.h>
+#include <dolphin/os/OSRtc.h>
+#include <dolphin/os/OSThread.h>
+#include <dolphin/pad/Pad.h>
+#include <placeholder.h>
+#include <Runtime/__mem.h>
 
 typedef struct OSResetQueue {
     OSResetFunctionInfo* first;
@@ -44,7 +52,9 @@ void OSRegisterResetFunction(OSResetFunctionInfo* func)
     tmp->next = func;
 }
 
-static asm unk_t Reset()
+#ifdef MWERKS_GEKKO
+
+static asm void Reset(s32)
 { // clang-format off
     nofralloc
 /* 80348394 00344F74  48 00 00 20 */	b lbl_803483B4
@@ -86,24 +96,21 @@ lbl_80348400:
 /* 80348400 00344FE0  4B FF FF 98 */	b lbl_80348398
 } // clang-format on
 
+#else
+
+static void Reset(s32 unused)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 typedef struct Unk2 {
     u16 _0;
     u16 _2;
 } Unk2;
 
 extern volatile Unk2 DAT_cc002000 AT_ADDRESS(0xCC002000);
-
-typedef struct OSSram {
-    u16 checkSum;
-    u16 checkSumInv;
-    u32 ead0;
-    u32 ead1;
-    u32 counterBias;
-    s8 displayOffsetH;
-    u8 ntd;
-    u8 language;
-    u8 flags;
-} OSSram;
 
 extern OSSram* __OSLockSram(void);
 
@@ -118,10 +125,8 @@ BOOL __OSCallResetFunctions(u32 arg0)
         retCode |= !iter->func(arg0);
     }
     retCode |= !__OSSyncSram();
-    if (retCode) {
-        return 0;
-    }
-    return 1;
+
+    return retCode ? FALSE : TRUE;
 }
 
 static void KillThreads(void)

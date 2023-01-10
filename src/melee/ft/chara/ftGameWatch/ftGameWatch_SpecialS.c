@@ -1,9 +1,13 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
-void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj);
-extern void func_8028FAF4(HSD_GObj*, Vec3*);
-extern HSD_GObj* func_802C7774(f32, HSD_GObj*, Vec3*, s32, u32);
-void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fighter_gobj);
+#include <melee/ft/ftparts.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/ft/ft_unknown_006.h>
+
+static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj);
+static void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fighter_gobj);
 
 // 0x8014C46C
 // https://decomp.me/scratch/ohXu0 // Create Judgement item
@@ -53,8 +57,6 @@ void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* fighter_gobj)
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-extern void func_802C7A84(HSD_GObj*);
-
 // 0x8014C5CC
 // https://decomp.me/scratch/jU9ji // Remove Judgement item
 void ftGameWatch_ItemJudgementRemove(HSD_GObj* fighter_gobj)
@@ -69,26 +71,21 @@ void ftGameWatch_ItemJudgementRemove(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_802C7AD0(HSD_GObj*);
-extern void func_802C7AF0(HSD_GObj*);
-
 // 0x8014C62C
 // https://decomp.me/scratch/vFist // Apply hitlag to Judgement item
-void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fighter_gobj)
+static void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    if (fp->sa.gaw.x2264_judgementGObj != NULL) {
+    if (fp->sa.gaw.x2264_judgementGObj != NULL)
         func_802C7AD0(fp->sa.gaw.x2264_judgementGObj);
-    }
 }
 
 // 0x8014C65C - Remove hitlag for Judgement item
-void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj)
+static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    if (fp->sa.gaw.x2264_judgementGObj != NULL) {
+    if (fp->sa.gaw.x2264_judgementGObj != NULL)
         func_802C7AF0(fp->sa.gaw.x2264_judgementGObj);
-    }
 }
 
 // 0x8014C68C
@@ -96,13 +93,12 @@ void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj)
 // SpecialS Action States
 BOOL ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj)
 {
-    s32 ASID;
+    /// @todo @c enum
+    s32 asid = getFighter(fighter_gobj)->x10_action_state_index;
 
-    ASID = getFighter(fighter_gobj)->x10_action_state_index;
-    if ((ASID >= AS_GAMEWATCH_SPECIALS1) && (ASID <= AS_GAMEWATCH_SPECIALAIRS9))
-    {
+    if (asid >= AS_GAMEWATCH_SPECIALS1 && asid <= AS_GAMEWATCH_SPECIALAIRS9)
         return FALSE;
-    }
+
     return TRUE;
 }
 
@@ -142,7 +138,7 @@ s32 ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj)
     return returnRNG;
 }
 
-inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* fighter_gobj)
+static inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     fp->x2204_ftcmd_var1 = 0;
@@ -155,9 +151,11 @@ inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* fighter_gobj)
 void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    s32 ASID;
+    s32 asid;
 
     getFighter(fighter_gobj)->x80_self_vel.y = 0.0f;
+
+    /// @todo Shared @c inline with #ftGameWatch_SpecialAirS_StartAction.
     ftGameWatch_SpecialS_GetRandomInt(fighter_gobj);
     Fighter_ActionStateChange_800693AC(
         fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1, 0,
@@ -172,10 +170,11 @@ void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
-    s32 ASID;
+    s32 asid;
 
     getFighter(fighter_gobj)->x80_self_vel.x /=
         gawAttrs->x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE;
+
     ftGameWatch_SpecialS_GetRandomInt(fighter_gobj);
     Fighter_ActionStateChange_800693AC(
         fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1, 0,
@@ -189,19 +188,15 @@ void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftGameWatch_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
-
-extern void func_800CC730(HSD_GObj* fighter_gobj);
 
 // 0x8014C8F8 - Mr. Game & Watch's Aerial Judgement Animation callback
 void ftGameWatch_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_800CC730(fighter_gobj);
-    }
 }
 
 // 0x8014C934 - Mr. Game & Watch's Grounded Judgement IASA callback
@@ -223,9 +218,9 @@ void ftGameWatch_SpecialS_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if ((u32) fp->x2200_ftcmd_var0 == 1U) {
+    if ((u32) fp->x2200_ftcmd_var0 == 1U)
         fp->x2200_ftcmd_var0 = 2U;
-    }
+
     func_80084F3C(fighter_gobj);
 }
 
@@ -256,34 +251,34 @@ void ftGameWatch_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
     func_8007CE94(fp, gawAttrs->x24_GAMEWATCH_JUDGE_MOMENTUM_MUL);
 }
 
-void ftGameWatch_SpecialS_GroundToAir(HSD_GObj*); /* extern */
-void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj*);
+static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj*);
+static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj*);
 
 // 0x8014CA10
 // https://decomp.me/scratch/G9OvA // Mr. Game & Watch's Grounded Judgement
 // Collision callback
 void ftGameWatch_SpecialS_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_800827A0(fighter_gobj) == FALSE) {
+    if (func_800827A0(fighter_gobj) == FALSE)
         ftGameWatch_SpecialS_GroundToAir(fighter_gobj);
-    }
 }
 
 // 0x8014CA4C - Mr. Game & Watch's Aerial Judgement Collision callback
 void ftGameWatch_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != FALSE) {
+    if (func_80081D0C(fighter_gobj) != FALSE)
         ftGameWatch_SpecialAirS_AirToGround(fighter_gobj);
-    }
 }
 
-inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* fighter_gobj)
+static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
+
     if (fp->sa.gaw.x2264_judgementGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
     }
+
     fp->cb.x21D4_callback_EnterHitlag = ftGameWatch_ItemJudgementEnterHitlag;
     fp->cb.x21D8_callback_ExitHitlag = ftGameWatch_ItemJudgementExitHitlag;
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemJudgementSetup;
@@ -292,7 +287,7 @@ inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* fighter_gobj)
 // 0x8014CA88
 // https://decomp.me/scratch/FPdQK // Mr. Game & Watch's ground -> air Judgement
 // Acion State handler
-void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
+static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     s32 ASID;
@@ -310,7 +305,7 @@ void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014CB44 - Mr. Game & Watch's air -> ground Judgement Action State Handler
-void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
+static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     s32 ASID;

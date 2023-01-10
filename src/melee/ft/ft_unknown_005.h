@@ -1,3 +1,6 @@
+/** @file
+ * @todo Rename to @c ftUnk5.h
+ */
 #ifndef MELEE_FT_FT_UNKNOWN_005_H
 #define MELEE_FT_FT_UNKNOWN_005_H
 

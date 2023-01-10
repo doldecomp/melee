@@ -55,5 +55,8 @@ typedef struct _ftKoopaVars {
 void ftKoopa_SpecialS_StartAction(HSD_GObj* gobj);
 void func_8013302C(HSD_GObj* gobj);
 void func_801330E4(HSD_GObj* gobj);
+void func_80132A64(HSD_GObj* gobj);
+void ftKoopa_OnLoadForGKoopa(Fighter* fp);
+void ftKoopa_LoadSpecialAttrs(HSD_GObj* gobj);
 
 #endif

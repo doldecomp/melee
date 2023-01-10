@@ -1,7 +1,9 @@
+#include <dolphin/os/OSMemory.h>
+
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSReset.h>
+#include <placeholder.h>
 
 extern volatile u32 Mem_Size AT_ADDRESS(0x80000028);
 extern volatile u32 Simulated_Mem AT_ADDRESS(0x800000F0);
@@ -9,7 +11,8 @@ extern volatile u16 __MEMRegs[64] AT_ADDRESS(0xCC004000);
 extern OSErrorHandler __OSErrorTable[];
 
 static BOOL OnReset(BOOL);
-static OSResetFunctionInfo lbl_80402348 = { OnReset, 127 };
+
+static OSResetFunctionInfo lbl_80402348 = { OnReset, 127, NULL, NULL };
 
 u32 OSGetPhysicalMemSize(void)
 {
@@ -44,6 +47,8 @@ static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
 
     __OSUnhandledException(OS_ERROR_PROTECTION, context, cause, addr);
 }
+
+#ifdef MWERKS_GEKKO
 
 asm void Config24MB(void)
 { // clang-format off
@@ -82,6 +87,17 @@ asm void Config24MB(void)
     rfi
 } // clang-format on
 
+#else
+
+void Config24MB(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void Config48MB(void)
 { // clang-format off
     nofralloc
@@ -119,6 +135,17 @@ asm void Config48MB(void)
     rfi
 } // clang-format on
 
+#else
+
+void Config48MB(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void RealMode(register void (*)(void))
 { // clang-format off
     nofralloc
@@ -129,6 +156,15 @@ asm void RealMode(register void (*)(void))
     mtsrr1 r3
     rfi
 } // clang-format on
+
+#else
+
+void RealMode(void (*unused)(void))
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 void __OSInitMemoryProtection(void)
 {

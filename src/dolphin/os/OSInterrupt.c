@@ -359,7 +359,6 @@ lbl_80347784:
 #pragma pop
 
 extern unk_t lbl_80402318;
-extern unk_t lbl_804D738C;
 extern unk_t OSGetTime();
 
 #pragma push

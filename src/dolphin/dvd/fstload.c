@@ -1,13 +1,15 @@
-#include <dolphin/types.h>
+#include <dolphin/dvd/fstload.h>
+
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSArena.h>
+#include <Runtime/__mem.h>
 
 static u32 status;
 static struct bb2struct* bb2;
 static DVDDiskID* idTmp;
 static u8 bb2Buf[64];
-static u8 block[48];
+static DVDCommandBlock _block;
 
 struct DiskInfo {
     DVDDiskID diskId;
@@ -49,9 +51,10 @@ void __fstLoad(void)
     idTmp = (void*) OSRoundUp32B(auStack64);
     bb2 = (void*) OSRoundUp32B(bb2Buf);
     DVDReset();
-    DVDReadDiskID(&block, idTmp, cb);
+    DVDReadDiskID(&_block, idTmp, cb);
+
     while (DVDGetDriveStatus() != 0)
-        ;
+        continue;
 
     info = (void*) 0x80000000;
     info->FSTLocationInRam = bb2->FSTLocationInRam;

@@ -1,6 +1,9 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
-extern HSD_GObj* func_802C68F8(HSD_GObj*, Vec3*, s32, f32);
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
 
 // 0x8014A848 //
 // https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up
@@ -37,8 +40,6 @@ void ftGameWatch_ItemTorchSetFlag(HSD_GObj* fighter_gobj)
     fp->sa.gaw.x2254_fireGObj = NULL;
 }
 
-extern void func_802C6A2C(HSD_GObj*);
-
 // 0x8014A938 //
 // https://decomp.me/scratch/mIWB3 // Remove Mr. Game & Watch's Torch //
 void ftGameWatch_ItemTorchOnDamage(HSD_GObj* fighter_gobj)
@@ -51,9 +52,6 @@ void ftGameWatch_ItemTorchOnDamage(HSD_GObj* fighter_gobj)
         ftGameWatch_ItemTorchSetFlag(fighter_gobj);
     }
 }
-
-extern void func_802C6A78(HSD_GObj*);
-extern void func_802C6A98(HSD_GObj*);
 
 // 0x8014A990
 // https://decomp.me/scratch/Y9bAE // Apply hitlag to Mr. Game & Watch's item
@@ -81,9 +79,10 @@ void ftGameWatch_ItemTorchExitHitlag(HSD_GObj* fighter_gobj)
 BOOL ftGameWatch_ItemCheckTorchRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    if (fp->x10_action_state_index == AS_GAMEWATCH_ATTACKS4) {
+
+    if (fp->x10_action_state_index == AS_GAMEWATCH_ATTACKS4)
         return FALSE;
-    }
+
     return TRUE;
 }
 
@@ -108,12 +107,9 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_AttackS4_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
-
-extern void func_8008A4D4(HSD_GObj*);
 
 // 0x8014AAC4
 // https://decomp.me/scratch/njlQ8 // Mr. Game & Watch's Forward Smash IASA
@@ -121,9 +117,9 @@ extern void func_8008A4D4(HSD_GObj*);
 void ftGameWatch_AttackS4_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    if (fp->x2218_flag.bits.b0 != 0) {
+
+    if (fp->x2218_flag.bits.b0 != FALSE)
         func_8008A4D4(fighter_gobj);
-    }
 }
 
 // 0x8014AAF4
@@ -136,9 +132,8 @@ void ftGameWatch_AttackS4_Phys(HSD_GObj* fighter_gobj)
 
 // 0x8014AB14
 // https://decomp.me/scratch/OHANe
-void ftGameWatch_AttackS4_Coll(
-    HSD_GObj*
-        fighter_gobj) // Mr. Game & Watch's Forward Smash Collision callback
+// Mr. Game & Watch's Forward Smash Collision callback
+void ftGameWatch_AttackS4_Coll(HSD_GObj* fighter_gobj)
 {
     func_80084104(fighter_gobj);
     ftGameWatch_8014A538(fighter_gobj);

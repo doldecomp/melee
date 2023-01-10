@@ -5,8 +5,6 @@
 
 #ifndef M2CTX
 
-typedef Vec Vec3;
-
 BOOL func_8000B074(struct _HSD_JObj*);
 BOOL func_8000B09C(struct _HSD_JObj*);
 BOOL func_8000B134(struct _HSD_JObj*);
@@ -55,7 +53,6 @@ struct _HSD_LObj* func_8000CDC0(struct _HSD_LObj*);
 void func_8000CE30(struct _HSD_DObj*, struct _HSD_DObj*);
 void func_8000CE40(struct _HSD_JObj*, struct _HSD_DObj*);
 
-void func_8000B1CC(struct _HSD_JObj*, Vec*, Vec*);
 f32 func_8000BDB4(struct _HSD_JObj*);
 void func_8000C1C0(struct _HSD_JObj*, struct _HSD_JObj*);
 void func_8000C228(struct _HSD_JObj*, struct _HSD_JObj*);

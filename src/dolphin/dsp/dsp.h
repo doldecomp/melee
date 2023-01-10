@@ -45,5 +45,6 @@ void __DSPHandler(__OSInterrupt intr, OSContext* ctx);
 void __DSP_boot_task(DSPTaskInfo* task);
 void __DSP_insert_task(DSPTaskInfo* task);
 void __DSP_remove_task(DSPTaskInfo* task);
+DSPTaskInfo* DSPAddTask(DSPTaskInfo* task);
 
 #endif

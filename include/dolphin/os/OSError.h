@@ -25,5 +25,6 @@ typedef void (*OSErrorHandler)(OSError error, OSContext* context, ...);
 #define OS_ERROR_MAX (OS_ERROR_THERMAL_INTERRUPT + 1)
 
 OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler);
+void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar);
 
 #endif

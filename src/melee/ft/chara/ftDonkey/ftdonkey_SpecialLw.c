@@ -3,6 +3,8 @@
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 
 void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
@@ -32,9 +34,8 @@ void ftDonkey_8010DD18(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DD38(HSD_GObj* fighter_gobj)
 {
-    if (!func_80082708(fighter_gobj)) {
+    if (!func_80082708(fighter_gobj))
         func_800CC730(fighter_gobj);
-    }
 }
 
 void ftDonkey_8010DD74(HSD_GObj* fighter_gobj)

@@ -1,5 +1,8 @@
 #include <dolphin/card.h>
 
+#include <dolphin/card/CARDMount.h>
+#include <dolphin/os/OSAlarm.h>
+#include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSReset.h>
 
 CARDControl __CARDBlock[2];
@@ -17,7 +20,7 @@ void __CARDSyncCallback(s32 i, s32)
     OSWakeupThread(&__CARDBlock[i].threadQueue);
 }
 
-void __CARDExtHandler(s32 chan, OSContext* context)
+void __CARDExtHandler(EXIChannel chan, OSContext* context)
 {
     CARDControl* card;
     CARDCallback callback;
@@ -46,7 +49,7 @@ void __CARDExtHandler(s32 chan, OSContext* context)
     }
 }
 
-void __CARDExiHandler(s32 chan, OSContext* context)
+void __CARDExiHandler(EXIChannel chan, OSContext* context)
 {
     CARDControl* card;
     CARDCallback callback;
@@ -94,7 +97,7 @@ fatal:
     }
 }
 
-void __CARDTxHandler(s32 chan, OSContext* context)
+void __CARDTxHandler(EXIChannel chan, OSContext* context)
 {
     CARDControl* card;
     CARDCallback callback;
@@ -111,7 +114,7 @@ void __CARDTxHandler(s32 chan, OSContext* context)
     }
 }
 
-void __CARDUnlockedHandler(s32 chan, OSContext* context)
+void __CARDUnlockedHandler(EXIChannel chan, OSContext* context)
 {
     CARDControl* card;
     CARDCallback callback;
@@ -272,7 +275,9 @@ static void UnlockedCallback(s32 chan, s32 result)
 
     card = &__CARDBlock[chan];
     if (result >= 0) {
-        card->unlockCallback = UnlockedCallback;
+        /// @todo Eliminate cast to #CARDCallback.
+        card->unlockCallback = (CARDCallback) UnlockedCallback;
+
         if (!EXILock(chan, 0, __CARDUnlockedHandler)) {
             result = CARD_RESULT_READY;
         } else {
@@ -322,7 +327,9 @@ s32 __CARDStart(s32 chan, CARDCallback txCallback, CARDCallback exiCallback)
         if (exiCallback) {
             card->exiCallback = exiCallback;
         }
-        card->unlockCallback = UnlockedCallback;
+
+        /// @todo Eliminate cast to #CARDCallback.
+        card->unlockCallback = (CARDCallback) UnlockedCallback;
         if (!EXILock(chan, 0, __CARDUnlockedHandler)) {
             result = CARD_RESULT_BUSY;
         } else {

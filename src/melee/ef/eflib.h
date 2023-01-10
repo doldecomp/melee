@@ -1,9 +1,10 @@
 #ifndef MELEE_EF_EFLIB_H
 #define MELEE_EF_EFLIB_H
 
-#include <dolphin/types.h>
+#include <sysdolphin/baselib/gobj.h>
 
-void efLib_PauseAll(struct _HSD_GObj*);
-void efLib_ResumeAll(struct _HSD_GObj*);
+void efLib_PauseAll(HSD_GObj*);
+void efLib_ResumeAll(HSD_GObj*);
+void efLib_DestroyAll(HSD_GObj*);
 
 #endif

@@ -1,4 +1,8 @@
 #include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDDir.h>
+#include <dolphin/card/CARDOpen.h>
+#include <Runtime/__mem.h>
 
 #define CARDGetBannerFormat(stat)                                              \
     (((stat)->bannerFormat) & CARD_STAT_BANNER_MASK)

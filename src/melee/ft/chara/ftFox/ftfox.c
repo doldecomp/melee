@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
+#include <melee/ft/ftparts.h>
+
 BOOL func_800E5534(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;

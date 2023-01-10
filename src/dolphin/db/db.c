@@ -1,11 +1,12 @@
-#include <dolphin/db/db.h>
 #include <dolphin/base/PPCArch.h>
+#include <dolphin/db/db.h>
 #include <dolphin/os/os.h>
+#include <placeholder.h>
 
 static DBInterface* __DBInterface;
 static int DBVerbose;
 
-static void __DBExceptionDestination();
+static void __DBExceptionDestination(void);
 
 void DBInit(void)
 {
@@ -33,7 +34,8 @@ static void __DBExceptionDestinationAux(void)
     PPCHalt();
 }
 
-#ifdef __MWERKS__
+#ifdef MWERKS_GEKKO
+
 static asm void __DBExceptionDestination(void)
 { // clang-format off
     nofralloc
@@ -42,7 +44,9 @@ static asm void __DBExceptionDestination(void)
     mtmsr r3
     b __DBExceptionDestinationAux
 } // clang-format on
-#else
+
+#elif defined(__GNUC__) && defined(GEKKO)
+
 static void __DBExceptionDestination(void)
 {
     asm("mfmsr %r3\n"
@@ -50,6 +54,14 @@ static void __DBExceptionDestination(void)
         "mtmsr %r3\n"
         "b __DBExceptionDestinationAux\n");
 }
+
+#else
+
+static void __DBExceptionDestination(void)
+{
+    NOT_IMPLEMENTED;
+}
+
 #endif
 
 int __DBIsExceptionMarked(u8 a)

@@ -6,8 +6,8 @@
 -Iinclude
 -Wall
 -Wextra
--Wno-unknown-pragmas
 -Wno-unused-variable
+-Wno-unused-but-set-variable
 -Wno-unused-function
 -Wno-unused-parameter
 -Wno-unused-value
@@ -16,3 +16,9 @@
 -Werror=strict-prototypes
 -Werror=implicit-function-declaration
 -Werror=typedef-redefinition
+-Werror=incompatible-pointer-types
+-Werror=pointer-type-mismatch
+-Werror=implicit-int
+-Werror=c2x-extensions
+-Werror=missing-field-initializers
+-Werror=unknown-pragmas

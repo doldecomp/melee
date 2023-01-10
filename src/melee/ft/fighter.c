@@ -1710,7 +1710,7 @@ void Fighter_8006A360(HSD_GObj* fighter_gobj)
 void Fighter_8006ABA0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    if (!fp->x221F_flag.bits.b3 && func_800A2040()) {
+    if (!fp->x221F_flag.bits.b3 && func_800A2040(fp)) {
         func_800B3900(fighter_gobj);
     }
 }
@@ -1720,7 +1720,7 @@ void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if (func_800CAE80()) {
+    if (func_800CAE80(fighter_gobj)) {
         fp->x68A = fp->x685;
         fp->x685 = 0;
     } else if (fp->x685 < 0xFF) {

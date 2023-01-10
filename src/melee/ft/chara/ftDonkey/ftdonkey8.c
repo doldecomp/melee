@@ -1,12 +1,13 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
+#include <melee/ft/chara/ftDonkey/ftdonkey1.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 
 void ftDonkey_800E0568(HSD_GObj* fighter_gobj)
 {
-    if (!func_80094EA4(fighter_gobj)) {
+    if (!func_80094EA4(fighter_gobj))
         func_800CB59C(fighter_gobj);
-    }
 }
 
 void ftDonkey_800E05A4(HSD_GObj* fighter_gobj)
@@ -33,8 +34,9 @@ void ftDonkey_800E05E4(HSD_GObj* fighter_gobj)
 void ftDonkey_800E0648(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    if (fp->x2344_f32 <= 0.0f) {
+
+    if (fp->x2344_f32 <= 0.0f)
         ftDonkey_800DF980(fighter_gobj);
-    }
+
     fp->x2344_f32 -= 1.0f;
 }

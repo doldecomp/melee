@@ -1,11 +1,18 @@
+#include <dolphin/dvd/dvd.h>
+#include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSReset.h>
+#include <MetroTRK/intrinsics.h>
+#include <placeholder.h>
 
 static unk_t Header[0x20 / sizeof(unk_t)];
 static unk_t SaveStart;
 static unk_t SaveEnd;
 static BOOL Prepared;
 
-void Run(register void (*callback)())
+#ifdef MWERKS_GEKKO
+
+void Run(register void (*callback)(void))
 {
     OSDisableInterrupts();
     ICFlashInvalidate();
@@ -17,21 +24,24 @@ void Run(register void (*callback)())
     }
 }
 
+#else
+
+void Run(void (*unused)(void))
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 static void Callback(void)
 {
     Prepared = TRUE;
 }
 
-extern void ICInvalidateRange(void*, u32);
-extern unk_t DVDReadAbsAsyncForBS();
-extern unk_t __OSDoHotReset();
-extern unk_t DVDCheckDisk();
-extern unk_t __DVDPrepareResetAsync();
-extern unk_t DVDSetAutoInvalidation();
-extern unk_t DVDInit();
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t __OSReboot()
+asm __OSReboot(u32 resetCode, BOOL forceMenu)
 { // clang-format off
     nofralloc
 /* 80348144 00344D24  7C 08 02 A6 */	mflr r0
@@ -166,3 +176,12 @@ lbl_803482E0:
 /* 8034830C 00344EEC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __OSReboot(u32 resetCode, BOOL forceMenu)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

@@ -49,83 +49,23 @@ OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler)
     return prevHandler;
 }
 
-#ifdef NON_MATCHING
+#ifdef MUST_MATCH
 
-void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar)
-{
-    if (!(context->srr1 & (1 << 1)))
-        OSReport("Non-recoverable Exception %d", error);
-    else {
-        if (__OSErrorTable[error] != NULL) {
-            OSDisableScheduler();
-            __OSErrorTable[error](error, context, dsisr, dar);
-            OSEnableScheduler();
-            __OSReschedule();
-            OSLoadContext(context);
-        }
-        if (error == OS_ERROR_DECREMENTER)
-            OSLoadContext(context);
-        OSReport("Unhandled Exception %d", error);
-    }
-
-    OSReport("\n");
-    OSDumpContext(context);
-    OSReport("\nDSISR= 0x%08x                   DAR  = 0x%08x\n", dsisr, dar);
-    {
-        u64 time = OSGetTime();
-        OSReport("", time, (u32) time);
-    }
-    switch (error) {
-    case OS_ERROR_DSI:
-        OSReport("\nInstruction at 0x%x (read from SRR0) attempted to access "
-                 "invalid address 0x%x (read from DAR)\n",
-                 context->srr0, dar);
-        break;
-    case OS_ERROR_ISI:
-        OSReport("\nAttempted to fetch instruction from invalid address 0x%x "
-                 "(read from SRR0)\n",
-                 context->srr0);
-        break;
-    case OS_ERROR_ALIGNMENT:
-        OSReport("\nInstruction at 0x%x (read from SRR0) attempted to access "
-                 "unaligned address 0x%x (read from DAR)\n",
-                 context->srr0, dar);
-        break;
-    case OS_ERROR_PROGRAM:
-        OSReport("\nProgram exception : Possible illegal instruction/operation "
-                 "at or around 0x%x (read from SRR0)\n",
-                 context->srr0, dar);
-        break;
-    case 15:
-        OSReport("\n");
-        OSReport("AI DMA Address =   0x%04x%04x\n", *(u16*) 0xCC005030,
-                 *(u16*) 0xCC005032);
-        OSReport("ARAM DMA Address = 0x%04x%04x\n",
-                 (*(u16*) ((s8*) ((void*) 0xCC005000) + (0x20))),
-                 (*(u16*) ((s8*) ((void*) 0xCC005000) + (0x22))));
-        OSReport("DI DMA Address =   0x%08x\n", *(u16*) 0xCC006014);
-        break;
-    }
-    OSReport("\nLast interrupt (%d): SRR0 = 0x%08x  TB = 0x%016llx\n",
-             __OSLastInterrupt, __OSLastInterruptSrr0);
-    PPCHalt();
-}
-
-#else
-
-extern char* lbl_80401FF8;
-extern jtbl_t jtbl_804022D4;
-extern char* lbl_804D5C18;
+/* static */ extern char* lbl_80401FF8;
+/* static */ extern jtbl_t jtbl_804022D4;
+/* static */ extern char* lbl_804D5C18;
 extern void* lbl_804D738C;
-void lbl_803459C0();
-void lbl_803459D8();
-void lbl_80345A3C();
-void lbl_803459F0();
-void lbl_80345994();
-void lbl_803459AC();
+
+static void lbl_803459C0(void);
+static void lbl_803459D8(void);
+static void lbl_80345A3C(void);
+static void lbl_803459F0(void);
+static void lbl_80345994(void);
+static void lbl_803459AC(void);
 
 #pragma push
-asm void __OSUnhandledException()
+asm void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr,
+                                u32 dar)
 { // clang-format off
     nofralloc
 /* 80345870 00342450  7C 08 02 A6 */	mflr r0
@@ -273,7 +213,67 @@ lbl_80345A3C:
 /* 80345A68 00342648  7C 08 03 A6 */	mtlr r0
 /* 80345A6C 0034264C  4E 80 00 20 */	blr
 } // clang-format on
-
 #pragma pop
 
+#else
+
+void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar)
+{
+    if (!(context->srr1 & (1 << 1)))
+        OSReport("Non-recoverable Exception %d", error);
+    else {
+        if (__OSErrorTable[error] != NULL) {
+            OSDisableScheduler();
+            __OSErrorTable[error](error, context, dsisr, dar);
+            OSEnableScheduler();
+            __OSReschedule();
+            OSLoadContext(context);
+        }
+        if (error == OS_ERROR_DECREMENTER)
+            OSLoadContext(context);
+        OSReport("Unhandled Exception %d", error);
+    }
+
+    OSReport("\n");
+    OSDumpContext(context);
+    OSReport("\nDSISR= 0x%08x                   DAR  = 0x%08x\n", dsisr, dar);
+    {
+        u64 time = OSGetTime();
+        OSReport("", time, (u32) time);
+    }
+    switch (error) {
+    case OS_ERROR_DSI:
+        OSReport("\nInstruction at 0x%x (read from SRR0) attempted to access "
+                 "invalid address 0x%x (read from DAR)\n",
+                 context->srr0, dar);
+        break;
+    case OS_ERROR_ISI:
+        OSReport("\nAttempted to fetch instruction from invalid address 0x%x "
+                 "(read from SRR0)\n",
+                 context->srr0);
+        break;
+    case OS_ERROR_ALIGNMENT:
+        OSReport("\nInstruction at 0x%x (read from SRR0) attempted to access "
+                 "unaligned address 0x%x (read from DAR)\n",
+                 context->srr0, dar);
+        break;
+    case OS_ERROR_PROGRAM:
+        OSReport("\nProgram exception : Possible illegal instruction/operation "
+                 "at or around 0x%x (read from SRR0)\n",
+                 context->srr0, dar);
+        break;
+    case 15:
+        OSReport("\n");
+        OSReport("AI DMA Address =   0x%04x%04x\n", *(u16*) 0xCC005030,
+                 *(u16*) 0xCC005032);
+        OSReport("ARAM DMA Address = 0x%04x%04x\n",
+                 (*(u16*) ((s8*) ((void*) 0xCC005000) + (0x20))),
+                 (*(u16*) ((s8*) ((void*) 0xCC005000) + (0x22))));
+        OSReport("DI DMA Address =   0x%08x\n", *(u16*) 0xCC006014);
+        break;
+    }
+    OSReport("\nLast interrupt (%d): SRR0 = 0x%08x  TB = 0x%016llx\n",
+             __OSLastInterrupt, __OSLastInterruptSrr0);
+    PPCHalt();
+}
 #endif

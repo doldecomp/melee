@@ -23,7 +23,6 @@
 /// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers
 extern void* lbl_804D64FC;
-
 extern void* lbl_804D6500;
 extern void* lbl_804D6504;
 extern void* lbl_804D6508;
@@ -42,7 +41,6 @@ extern s32** lbl_804D6540;
 extern void* lbl_804D6548;
 extern void* lbl_804D654C;
 extern void* lbl_804D6550;
-/// @}
 
 typedef enum FighterKind {
     FTKIND_MARIO,
@@ -891,15 +889,6 @@ typedef struct _FighterBone {
     /* 0x5 */ UnkFlagStruct flags;
     /* 0x6 */ u8 filler_x6[7];
 } FighterBone;
-
-typedef struct _Hitbox {
-    s32 x0;
-    s32 x4;
-    s32 x8;
-    f32 xC;
-    u8 filler[0x128]; // slightly more detail, f32 needed for 'manual' mods to
-                      // hitbox damage //
-} Hitbox;
 
 typedef struct _CameraBox {
     u32 data_filler[2];

@@ -1,14 +1,15 @@
-#include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GXFifo.h>
+#include <dolphin/gx/__GXInit.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
+#include <MetroTRK/intrinsics.h>
 
 static GXFifoObj* CPUFifo;
 static GXFifoObj* GPFifo;
 static OSThread* __GXCurrentThread;
 static GXBool CPGPLinked;
 static BOOL GXOverflowSuspendInProgress;
-static void (*BreakPointCB)();
+static void (*BreakPointCB)(void);
 static s32 __GXOverflowCount;
 
 static void __GXWriteFifoIntReset(u8 arg0, u8 arg1);
@@ -16,8 +17,8 @@ static void GXInitFifoPtrs(GXFifoObj* fifo, void* readPtr, void* writePtr);
 static void GXInitFifoLimits(GXFifoObj* fifo, u32 hiWaterMark, u32 loWaterMark);
 static void __GXWriteFifoIntEnable(GXBool flag0, GXBool flag1);
 static void __GXFifoLink(GXBool flag);
-static void __GXFifoReadEnable();
-static void __GXFifoReadDisable();
+static void __GXFifoReadEnable(void);
+static void __GXFifoReadDisable(void);
 
 static void GXCPInterruptHandler(__OSInterrupt unused, OSContext* ctx)
 {
@@ -129,10 +130,12 @@ void GXSetCPUFifo(GXFifoObj* fifo)
     return;
 
 // Despite this obviously being dead code, it still is needed to match the
-// function. todo: This is weird; try to match without it.
-#ifndef NON_MATCHING
+// function.
+/// @todo: This is weird; try to match without it.
+#ifdef MUST_MATCH
+#pragma push
     asm {nop}
-#pragma peephole on
+#pragma pop
 #endif
 }
 
@@ -176,7 +179,7 @@ void GXSetGPFifo(GXFifoObj* fifo)
     OSRestoreInterrupts(intrEnabled);
 }
 
-void __GXFifoInit()
+void __GXFifoInit(void)
 {
     __OSSetInterruptHandler(OS_INTR_PI_CP, GXCPInterruptHandler);
     __OSUnmaskInterrupts(0x4000);
@@ -186,7 +189,7 @@ void __GXFifoInit()
     GPFifo = NULL;
 }
 
-static void __GXFifoReadEnable()
+static void __GXFifoReadEnable(void)
 {
     u32* x8 = (u32*) &__GXContexts.main->x8;
     INSERT_FIELD(*x8, 1, 1, 0);
@@ -194,7 +197,7 @@ static void __GXFifoReadEnable()
     __cpReg[1] = *x8;
 }
 
-static void __GXFifoReadDisable()
+static void __GXFifoReadDisable(void)
 {
     u32* x8 = (u32*) &__GXContexts.main->x8;
     INSERT_FIELD(*x8, 0, 1, 0);

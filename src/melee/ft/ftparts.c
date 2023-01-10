@@ -33,9 +33,9 @@ void Fighter_JObjInfoInit(void);
 void Fighter_IntpJObjInfoInit(void);
 void Fighter_PObjInfoInit(void);
 
-HSD_JObjInfo ftJObj     = { Fighter_JObjInfoInit };
+HSD_JObjInfo ftJObj = { Fighter_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { Fighter_IntpJObjInfoInit };
-HSD_PObjInfo ftPObj     = { Fighter_PObjInfoInit };
+HSD_PObjInfo ftPObj = { Fighter_PObjInfoInit };
 
 // .data
 static char lbl_803C09E0[] = "fighter_class_library";
@@ -2281,7 +2281,7 @@ lbl_800753C0:
 #pragma pop
 
 #pragma push
-asm unk_t func_800753D4()
+asm void func_800753D4(struct _Fighter*, s32, unk_t)
 { // clang-format off
     nofralloc
 /* 800753D4 00071FB4  7C 08 02 A6 */	mflr r0
@@ -3150,7 +3150,7 @@ lbl_80075F2C:
 #pragma pop
 
 #pragma push
-asm unk_t func_80075F48()
+asm f32 func_80075F48(Fighter*, s32)
 { // clang-format off
     nofralloc
 /* 80075F48 00072B28  7C 08 02 A6 */	mflr r0

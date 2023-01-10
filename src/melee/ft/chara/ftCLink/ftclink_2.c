@@ -1,8 +1,11 @@
 #include <melee/ft/chara/ftCLink/ftclink.h>
 
+#include <melee/ft/chara/ftLink/ftlink.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftparts.h>
 #include <melee/it/code_8027CF30.h>
-
-extern void func_800EAF58(HSD_GObj*);
 
 void func_80149354(HSD_GObj* gobj)
 {

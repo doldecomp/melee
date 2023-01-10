@@ -1,5 +1,10 @@
 #include <melee/ft/chara/ftDrMario/ftdrmario.h>
 
+#include <melee/ft/chara/ftMario/ftmario.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
+#include <melee/it/code_8027CF30.h>
+
 void ftDrMario_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;

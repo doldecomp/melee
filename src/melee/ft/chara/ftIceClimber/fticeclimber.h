@@ -23,4 +23,6 @@ typedef struct _ftIceClimberAttributes {
     u8 data_filler_2[0x90];
 } ftIceClimberAttributes;
 
+void ftIceClimber_OnLoadForNana(Fighter* fp);
+
 #endif

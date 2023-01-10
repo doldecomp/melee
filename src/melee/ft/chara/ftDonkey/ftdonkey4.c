@@ -2,13 +2,14 @@
 
 #include <melee/ft/ft_unknown_006.h>
 
-s32 ftDonkey_800E0134(HSD_GObj* fighter_gobj)
+BOOL ftDonkey_800E0134(HSD_GObj* fighter_gobj)
 {
     if (func_800C97A8(fighter_gobj)) {
         ftDonkey_800E017C(fighter_gobj);
-        return 1;
+        return TRUE;
     }
-    return 0;
+
+    return FALSE;
 }
 
 void ftDonkey_800E017C(HSD_GObj* fighter_gobj)

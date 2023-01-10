@@ -1,10 +1,15 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 
 #include <melee/it/itkind.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/random.h>
-
-extern HSD_GObj* func_802B2560(HSD_GObj*, f32, Vec3*, long, u32);
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/it/code_8027CF30.h>
 
 void ftMario_SpecialS_SetCall(Fighter* fp)
 {
@@ -12,6 +17,7 @@ void ftMario_SpecialS_SetCall(Fighter* fp)
         fp->cb.x21E4_callback_OnDeath2 = ftMario_OnTakeDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftMario_OnTakeDamage;
     }
+
     fp->cb.x21D4_callback_EnterHitlag = ftMario_SpecialS_EnterHitlag;
     fp->cb.x21D8_callback_ExitHitlag = ftMario_SpecialS_ExitHitlag;
 }
@@ -68,18 +74,16 @@ void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj)
 void ftMario_SpecialS_EnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    if (fp->sa.mario.x223C_capeGObj != NULL) {
+    if (fp->sa.mario.x223C_capeGObj != NULL)
         func_802B26C0(fp->sa.mario.x223C_capeGObj);
-    }
 }
 
 // 0x800E13F8
 void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    if (fp->sa.mario.x223C_capeGObj != NULL) {
+    if (fp->sa.mario.x223C_capeGObj != NULL)
         func_802B26E0(fp->sa.mario.x223C_capeGObj);
-    }
 }
 
 // 0x800E1428
@@ -87,13 +91,12 @@ BOOL ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    s32 var0 = fp->x10_action_state_index;
+    s32 asid = fp->x10_action_state_index;
 
-    if ((var0 >= AS_MARIO_SPECIALS) && (var0 <= AS_MARIO_SPECIALAIRS)) {
+    if ((asid >= AS_MARIO_SPECIALS) && (asid <= AS_MARIO_SPECIALAIRS))
         return FALSE;
-    } else {
-        return TRUE;
-    }
+
+    return TRUE;
 }
 
 void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, s32 new_action_state_index)
@@ -134,17 +137,15 @@ void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
 // 0x800E1550
 void ftMario_SpecialS_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj))
         func_8008A2BC(gobj);
-    }
 }
 
 // 0x800E158C
 void ftMario_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj))
         func_800CC730(gobj);
-    }
 }
 
 // 0x800E15C8
@@ -158,9 +159,6 @@ void ftMario_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     return;
 }
-
-extern void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*,
-                                    void (*cb_OnReflect)(HSD_GObj*));
 
 void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
 {
@@ -178,9 +176,11 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
         fp->marioVars[0].SpecialS.isReflect = FALSE;
         fp->x2218_flag.bits.b3 = 0;
     }
+
     func_8007AEF8(gobj);
 }
 
+/// @todo Move elsewhere.
 #define PI_3 (3.14159265359f / 3.0f)
 
 // 0x800E15D0

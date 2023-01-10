@@ -1,28 +1,29 @@
-#include <melee/ft/chara/ftFox/ftfox.h>
-
 #include <dolphin/os/os.h>
+#include <melee/ft/chara/ftFox/ftfox.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/ftparts.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/it/item.h>
+#include <melee/lb/lbunknown_001.h>
 
-// 0x800E5CB0
-// https://decomp.me/scratch/aumQK // Get Fox/Falco's Item Hold Bone Position
-// for Blaster GFX - used in Fox's fp code
 void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 {
+    /// @todo Shared @c inline with #ftFox_ItGetHoldJoint.
     Vec3 sp14;
-    Fighter* fp = fp =
-        getFighter(fighter_gobj); // Double fp init otherwise this will not
-                                  // match when inlined O_O
+
+    // Double fp init otherwise this will not match when inlined
+    Fighter* fp = fp = getFighter(fighter_gobj);
 
     sp14.x = 0.0f;
     sp14.y = 1.2325000762939453f;
     sp14.z = 4.263599872589111f;
+
     func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj, &sp14,
                   pos);
 }
 
-// 0x800E5D20
-// https://decomp.me/scratch/x2JfZ // Get Fox/Falco's Item Hold Bone Position
-// for Blaster GFX again? - used in Blaster's item code
 void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 {
     Vec3 sp14;
@@ -31,6 +32,7 @@ void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
     sp14.x = 0.0f;
     sp14.y = 1.2325000762939453f;
     sp14.z = 0.013600001111626625f;
+
     func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj, &sp14,
                   pos);
 }
@@ -135,8 +137,6 @@ void ftFox_ClearBlaster(HSD_GObj* fighter_gobj)
     ftFox_SpecialN_SetNULL(fighter_gobj);
 }
 
-extern void func_802AEAB4(HSD_GObj*);
-
 // 0x800E5EBC
 // https://decomp.me/scratch/WglAb // Remove Blaster item
 void ftFox_RemoveBlaster(HSD_GObj* fighter_gobj)
@@ -153,9 +153,6 @@ void ftFox_RemoveBlaster(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_8029C6A4(f32, f32, HSD_GObj*, Vec3*, s32);
-extern void func_802AE1D0(HSD_GObj*);
-
 u32 foxSFX[2] = { 0x1AE17, 0x1AE1A };
 u32 falcoSFX[2] = { 0x18703, 0x18706 };
 
@@ -163,6 +160,9 @@ u32 falcoSFX[2] = { 0x18703, 0x18706 };
 // https://decomp.me/scratch/iPgDc // Create Blaster Shot Item
 void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
 {
+    /** @todo Shared @c inline with #ftFox_SpecialNLoop_Anim and
+     * #ftFox_SpecialAirNLoop_Anim.
+     */
     Vec3 sp2C;
     s32 unused;
     ftFoxAttributes* foxAttrs;
@@ -170,23 +170,31 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
     f64 launchAngle;
     s32 ftKind;
 
+#ifdef MUST_MATCH
+    /// @todo Seems fake, probably one or more missing @c inline functions.
     fp = fp = getFighter(fighter_gobj);
+#else
+    fp = getFighter(fighter_gobj);
+#endif
+
     foxAttrs = getFtSpecialAttrs(fp);
+
     if ((u32) fp->x2208_ftcmd_var2 != 0U) {
         fp->x2208_ftcmd_var2 = 0U;
         ftFox_FtGetHoldJoint(fighter_gobj, &sp2C);
         sp2C.z = 0.0f;
 
-        if (1.0f == fp->x2C_facing_direction) {
+        if (1.0f == fp->x2C_facing_direction)
             launchAngle = foxAttrs->x10_FOX_BLASTER_ANGLE;
-        } else {
+        else
             launchAngle = M_PI - foxAttrs->x10_FOX_BLASTER_ANGLE;
-        }
 
         func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj,
                       &sp2C, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
+
         func_802AE1D0(fp->sa.fox.x222C_blasterGObj);
         ftKind = func_800872A4(fighter_gobj);
+
         switch (ftKind) {
         case FTKIND_FOX:
             func_80088148(fp, foxSFX[-1.0f == fp->x2C_facing_direction],
@@ -200,10 +208,6 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
         }
     }
 }
-
-extern void func_8026BAE8(HSD_GObj*, f32);
-extern HSD_GObj* func_802AE8A8(f32, HSD_GObj*, Vec3*, s32, s32);
-extern void func_800E5588(HSD_GObj*);
 
 inline void ftFox_SpecialN_SetCall(HSD_GObj* fighter_gobj)
 {
@@ -290,9 +294,6 @@ void ftFox_SpecialAirN_StartAction(
     __assert("ftfoxspecialn.c", 333, "0");
 }
 
-extern void func_802ADDD0(HSD_GObj*, s32);
-extern void func_802AE538(HSD_GObj*);
-
 // 0x800E62A4
 // https://decomp.me/scratch/ZOB3l // Fox & Falco's grounded Blaster Start
 // Animation callback
@@ -363,7 +364,12 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
         f64 launchAngle;
         s32 ftKind;
 
+#ifdef MUST_MATCH
         fp = fp = getFighter(fighter_gobj);
+#else
+        fp = getFighter(fighter_gobj);
+#endif
+
         foxAttrs = getFtSpecialAttrs(fp);
         unused = getFighter(fighter_gobj);
 
@@ -507,7 +513,12 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
         ftFoxAttributes* foxAttrs;
         Fighter* fp;
 
+#ifdef MUST_MATCH
         fp = fp = getFighter(fighter_gobj);
+#else
+        fp = getFighter(fighter_gobj);
+#endif
+
         foxAttrs = getFtSpecialAttrs(fp);
         unused = getFighter(fighter_gobj);
 
@@ -716,10 +727,8 @@ void ftFox_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj)
 
 extern void func_80094818(HSD_GObj*, s32);
 extern void func_8026BAE8(HSD_GObj*, f32);
-extern void func_8029C6A4(f32, f32, HSD_GObj*, Vec3*, s32);
 extern void func_8029C6CC(f32, f32, HSD_GObj*, Vec3*, s32);
 extern void func_802ADDD0(HSD_GObj*, s32);
-extern void func_802AE1D0(HSD_GObj*);
 extern void func_802AE538(HSD_GObj*);
 extern void func_802AE608(HSD_GObj*);
 extern HSD_GObj* func_802AE8A8(f32, HSD_GObj*, Vec3*, s32, s32);

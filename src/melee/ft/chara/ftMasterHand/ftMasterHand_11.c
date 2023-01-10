@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_11.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/code_80081B38.h>
 
 // 8015236C 14EF4C
 // https://decomp.me/scratch/kPOjS
@@ -24,9 +26,9 @@ void lbl_801523BC(HSD_GObj* gobj)
     Fighter* r31_fp;
     MasterHandAttributes* r30_attributes;
 
-    if (ftAnim_IsFramesRemaining(gobj)) {
+    if (ftAnim_IsFramesRemaining(gobj))
         return;
-    }
+
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
     func_8015247C(gobj);

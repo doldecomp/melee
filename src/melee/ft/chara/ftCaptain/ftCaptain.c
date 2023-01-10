@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftCaptain/ftCaptain.h>
 
+#include <melee/ft/ftparts.h>
+
 // ftCaptain_OnDeath
 // OnRespawn/OnDeath (same function I've seen called differently)
 // https://decomp.me/scratch/XZ1Jx

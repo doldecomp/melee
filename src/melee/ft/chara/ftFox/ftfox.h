@@ -155,19 +155,39 @@ void ftFox_OnItemDrop(HSD_GObj* gobj, BOOL arg1);
 
 // Special Taunt (AppealS) //
 
+/// Check if Special Taunt has already been performed
 BOOL ftFox_AppealS_CheckIfUsed(Fighter* fp);
+
+/// Check if Fox/Falco has pressed D-Pad Down
 BOOL ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's Special Taunt Action State handler
 void ftFox_AppealS_Action(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's Special Taunt Start Animation callback
 void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's Special Taunt Start IASA callback
 void ftFox_AppealS_IASA(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's Special Taunt Physics callback
 void ftFox_AppealS_Phys(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's Special Taunt Collision callback
 void ftFox_AppealS_Coll(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback
 void ftFox_AppealS_OnTakeDamage(HSD_GObj* fighter_gobj);
 
 // Neutral Special - Blaster (SpecialN) //
 
+/// Get Fox/Falco's Item Hold Bone Position for Blaster GFX
 void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos);
+
+/// Get Fox/Falco's Item Hold Bone Position for Blaster GFX again?
+/// @remarks Used in Blaster's item code.
 void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos);
+
 void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj);
 BOOL ftFox_CheckRemoveBlaster(HSD_GObj* fighter_gobj);
 s32 ftFox_GetBlasterAction(HSD_GObj* fighter_gobj);
@@ -208,31 +228,80 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj);
 
 // Up Special - Firefox (SpecialHi) //
 
+/// Create Firefox/Firebird Launch GFX
 void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* fighter_gobj);
+
+/// Create Firefox/Firebird Charge GFX
 void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Firefox/Firebird Start Action State handler
 void ftFox_SpecialHi_StartAction(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Firefox/Firebird Start Action State handler
 void ftFox_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj);
+
 void ftFox_SpecialHi_RotateModel(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Firefox/Firebird Start Animation callback
 void ftFox_SpecialHiHold_Anim(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Firefox/Firebird Start Animation callback
 void ftFox_SpecialHiHoldAir_Anim(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Firefox/Firebird Start IASA callback
 void ftFox_SpecialHiHold_IASA(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Firefox/Firebird Start IASA callback
 void ftFox_SpecialHiHoldAir_IASA(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grorunded Firefox/Firebird Start Physics callback
 void ftFox_SpecialHiHold_Phys(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Firefox/Firebird Start Physics callback
 void ftFox_SpecialHiHoldAir_Phys(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Firerfox/Firebird Start Collision callback
 void ftFox_SpecialHiHold_Coll(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Firefox/Firebird Start Collision callback
 void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's ground -> air Firefox/Firebird Start Action State handler
 void ftFox_SpecialHiHold_GroundToAir(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's air -> ground Firefox/Firebird Start Action State handler
 void ftFox_SpecialHiHoldAir_AirToGround(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Firefox/Firebird Launch Animation callback
 void ftFox_SpecialHi_Anim(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Firefox/Firebird Launch Animation callback
 void ftFox_SpecialAirHi_Anim(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Firefox/Firebird Launch IASA callback
 void ftFox_SpecialHi_IASA(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Firerfox/Firebird Launch IASA callback
 void ftFox_SpecialAirHi_IASA(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Firefox/Firebird Launch Physics callback
 void ftFox_SpecialHi_Phys(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Firefox/Firebird Launch Physics callback
 void ftFox_SpecialAirHi_Phys(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Firefox/Firebird Launch Collision callback
 void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Firefox/Firebird Launch Collision callback
 void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's Firefox/Firebird Launch ground -> air Action State handler
 void ftFox_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Firefox/Firebird Launch Action State handler
 void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj);
+
 void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj);
 void ftFox_SpecialHiLanding_Anim(HSD_GObj* fighter_gobj);
 void ftFox_SpecialHiFall_Anim(HSD_GObj* fighter_gobj);
@@ -253,41 +322,79 @@ void ftFox_SpecialHiBound_Action(HSD_GObj* fighter_gobj);
 
 // Down Special - Reflector (SpecialLw) //
 
+/// Create Reflector Loop GFX
 void ftFox_SpecialLw_CreateLoopGFX(HSD_GObj* fighter_gobj);
+
 void ftFox_SpecialLw_CreateStartGFX(HSD_GObj* fighter_gobj);
+
+/// Create Reflector Deflect GFX
 void ftFox_SpecialLw_CreateReflectGFX(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Reflector Start Action State handler
 void ftFox_SpecialLw_StartAction(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Reflector Start Action State handler
 void ftFox_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj);
+
 void ftFox_SpecialLwStart_Anim(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj);
 void ftFox_SpecialLwStart_IASA(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirLwStart_IASA(HSD_GObj* fighter_gobj);
+
+/// Check for drop-through platform while in @c SpecialLwStart
 BOOL ftFox_SpecialLwStart_CheckPass(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's Reflector Start Platform Drop Action State handler
 void ftFox_SpecialLwStart_Pass(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's Reflector Start Physics callback
 void ftFox_SpecialLwStart_Phys(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Reflector Start Physics callback
 void ftFox_SpecialAirLwStart_Phys(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Reflector Start Collision callback
 void ftFox_SpecialLwStart_Coll(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Reflector Start Collision callback
 void ftFox_SpecialAirLwStart_Coll(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's ground -> air Reflector Start Action State handler
 void ftFox_SpecialLwStart_GroundToAir(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's air -> ground Reflector Start Action State handler
 void ftFox_SpecialAirLwStart_AirToGround(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Reflector Loop Animation callback
 void ftFox_SpecialLwLoop_Anim(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Reflector Loop Animation callback
 void ftFox_SpecialAirLwLoop_Anim(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Reflector Loop IASA callback
 void ftFox_SpecialLwLoop_IASA(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Reflector Loop IASA callback
 void ftFox_SpecialAirLwLoop_IASA(HSD_GObj* fighter_gobj);
-BOOL ftFox_SpecialLwLoop_CheckPass(HSD_GObj* fighter_gobj);
-void ftFox_SpecialLwLoop_Pass(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Reflector Loop Physics callback
 void ftFox_SpecialLwLoop_Phys(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Reflector Loop Physics callback
 void ftFox_SpecialAirLwLoop_Phys(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Reflector Loop Collision callback
 void ftFox_SpecialLwLoop_Coll(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Reflector Loop Collision callback
 void ftFox_SpecialAirLwLoop_Coll(HSD_GObj* fighter_gobj);
-void ftFox_SpecialLwLoop_GroundToAir(HSD_GObj* fighter_gobj);
-void ftFox_SpecialAirLwLoop_AirToGround(HSD_GObj* fighter_gobj);
-void ftFox_SpecialLw_CreateReflectHit(HSD_GObj* fighter_gobj);
-void ftFox_SpecialLwLoop_Action(HSD_GObj* fighter_gobj);
-void ftFox_SpecialAirLwLoop_Action(HSD_GObj* fighter_gobj);
-void ftFox_SpecialLw_Turn(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's grounded Reflector Turn Animation callback
 void ftFox_SpecialLwTurn_Anim(HSD_GObj* fighter_gobj);
+
+/// Fox & Falco's aerial Reflector Turn Animation callback
 void ftFox_SpecialAirLwTurn_Anim(HSD_GObj* fighter_gobj);
+
 void ftFox_SpecialLwTurn_IASA(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirLwTurn_IASA(HSD_GObj* fighter_gobj);
 void ftFox_SpecialLwTurn_Phys(HSD_GObj* fighter_gobj);
@@ -366,5 +473,6 @@ void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj);
 void ftFox_SpecialSEnd_Action(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirSEnd_Action(HSD_GObj* fighter_gobj);
 void ftFox_LoadSpecialAttrs(struct _HSD_GObj*);
+void ftFox_OnLoadForFalco(Fighter* fp);
 
 #endif

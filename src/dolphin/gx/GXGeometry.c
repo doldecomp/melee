@@ -1,10 +1,14 @@
-#include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXGeometry.h>
+
 #include <dolphin/gx/__GXInit.h>
-#include <dolphin/gx/__GXGeometry.h>
+#include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXBump.h>
+#include <dolphin/gx/GXTexture.h>
 
-static void __GXSetGenMode();
+static void __GXSetGenMode(void);
 
-void __GXSetDirtyState()
+void __GXSetDirtyState(void)
 {
     if (__GXContexts.main->x4F0_flags & 1)
         __GXSetSUTexSize();
@@ -29,7 +33,7 @@ void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts)
     WGPIPE.u16 = nverts;
 }
 
-void __GXSendFlushPrim()
+void __GXSendFlushPrim(void)
 {
     u32 size;
     u32 i;
@@ -97,7 +101,7 @@ void GXSetCoPlanar(GXBool enable)
     GX_WRITE_U32(__GXContexts.main->x204);
 }
 
-static void __GXSetGenMode()
+static void __GXSetGenMode(void)
 {
     WGPIPE.u8 = GX_LOAD_BP_REG;
     GX_WRITE_U32(__GXContexts.main->x204);

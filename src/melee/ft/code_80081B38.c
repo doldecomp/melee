@@ -1,3 +1,5 @@
+#include <melee/ft/code_80081B38.h>
+
 #include <dolphin/types.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcliffcommon.h>
@@ -150,7 +152,7 @@ lbl_80081CE0:
 extern unk_t func_80081A00();
 
 #pragma push
-asm BOOL func_80081D0C(HSD_GObj fighter_gobj)
+asm BOOL func_80081D0C(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80081D0C 0007E8EC  7C 08 02 A6 */	mflr r0
@@ -729,7 +731,7 @@ lbl_8008248C:
 #pragma pop
 
 #pragma push
-asm unk_t func_800824A0()
+asm BOOL func_800824A0(HSD_GObj*, ftCollisionBox*)
 { // clang-format off
     nofralloc
 /* 800824A0 0007F080  7C 08 02 A6 */	mflr r0
@@ -1035,7 +1037,7 @@ lbl_80082880:
 #pragma pop
 
 #pragma push
-asm unk_t func_80082888()
+asm BOOL func_80082888(HSD_GObj*, ftCollisionBox*)
 { // clang-format off
     nofralloc
 /* 80082888 0007F468  7C 08 02 A6 */	mflr r0
@@ -1338,7 +1340,7 @@ lbl_80082C54:
 #pragma pop
 
 #pragma push
-asm unk_t func_80082C74()
+asm void func_80082C74(HSD_GObj*, HSD_GObjEvent)
 { // clang-format off
     nofralloc
 /* 80082C74 0007F854  7C 08 02 A6 */	mflr r0
@@ -2861,7 +2863,7 @@ lbl_80084020:
 #pragma pop
 
 #pragma push
-asm unk_t func_8008403C()
+asm void func_8008403C(HSD_GObj*, HSD_GObjEvent)
 { // clang-format off
     nofralloc
 /* 8008403C 00080C1C  7C 08 02 A6 */	mflr r0
@@ -3036,7 +3038,7 @@ lbl_80084260:
 #pragma pop
 
 #pragma push
-asm unk_t func_80084280()
+asm void func_80084280(struct _HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80084280 00080E60  7C 08 02 A6 */	mflr r0
@@ -3924,7 +3926,7 @@ lbl_80084DA0:
 #pragma pop
 
 #pragma push
-asm unk_t func_80084DB0()
+asm void func_80084DB0(struct _HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80084DB0 00081990  7C 08 02 A6 */	mflr r0

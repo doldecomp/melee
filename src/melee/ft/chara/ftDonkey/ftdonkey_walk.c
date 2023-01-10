@@ -1,14 +1,18 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
-
+#include <melee/ft/chara/ftDonkey/ftdonkey1.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey6.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftwalkcommon.h>
 #include <melee/it/code_8027CF30.h>
 
-s32 ftDonkey_800DFA98(HSD_GObj* fighter_gobj)
+BOOL ftDonkey_800DFA98(HSD_GObj* fighter_gobj)
 {
     if (ftWalkCommon_800DFC70(fighter_gobj)) {
         ftDonkey_800DFAE4(fighter_gobj, 0.0f);
-        return 1;
+        return TRUE;
     }
-    return 0;
+
+    return FALSE;
 }
 
 void ftDonkey_800DFAE4(HSD_GObj* fighter_gobj, f32 argf)

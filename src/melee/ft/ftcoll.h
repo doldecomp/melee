@@ -1,6 +1,7 @@
 #ifndef _ftcoll_h_
 #define _ftcoll_h_
 
+#include "sysdolphin/baselib/gobjproc.h"
 #include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
 
@@ -22,35 +23,41 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim,
                   f32 unk_floatvar); // Unk knockback related ? //
 BOOL func_8007B868(HSD_GObj* fighter_gobj);
 
-void func_800764DC();
 void func_80076528(struct _HSD_GObj*);
-void func_800765AC();
-void func_800765E0();
-void func_80078754();
-void func_80078A2C();
-void func_80078C70();
-void func_8007925C();
-void func_8007AB48();
-void func_8007AB80();
+void func_800765E0(void);
+void func_80078754(struct _HSD_GObj*, struct _HSD_GObj*, BOOL);
+void func_80078A2C(struct _HSD_GObj*);
+void func_80078C70(struct _HSD_GObj*);
+void func_8007925C(struct _HSD_GObj*);
+void func_8007AB48(struct _HSD_GObj*);
+void func_8007AB80(struct _HSD_GObj*);
 void func_8007ABD0(struct _Hitbox*, u32 damageAmount, struct _HSD_GObj*);
-void func_8007AE80();
+void func_8007AE80(struct _HSD_GObj*);
 void func_8007AEE0(struct _HSD_GObj*);
 void func_8007AF28(struct _HSD_GObj* fighter_gobj);
 void func_8007AFF8(struct _HSD_GObj*);
 void func_8007B0C0(struct _HSD_GObj*, s32);
 void func_8007B1B8(struct _HSD_GObj*, f32*, void (*)(struct _HSD_GObj*));
-void func_8007B320();
-void func_8007B4E0();
-void func_8007B62C();
-void func_8007B6EC();
-void func_8007B760();
-void func_8007B8CC();
-void func_8007B8E8();
+void func_8007B320(struct _HSD_GObj*);
+void func_8007B4E0(struct _HSD_GObj*);
+void func_8007B62C(struct _HSD_GObj*, BOOL);
+void func_8007B6EC(struct _HSD_GObj*);
+void func_8007B760(struct _HSD_GObj*, s32);
+void func_8007B8CC(struct _Fighter*, struct _HSD_GObj*);
+void func_8007B8E8(struct _HSD_GObj*);
 void func_getWindOffsetVec_8007B924(struct _HSD_GObj*, Vec* out_wind);
-void func_8007BA0C();
-void func_8007BAC0();
+void func_8007BA0C(struct _HSD_GObj*);
+void func_8007BAC0(struct _HSD_GObj*);
 f32 func_8007BBCC(struct _HSD_GObj*);
-void func_8007BC90();
+void func_8007BC90(struct _HSD_GObj*);
 void func_8007BE3C(struct _HSD_GObj*);
+
+///  Update hitbox positions
+void func_8007B8A8(Hitbox*, Vec3*);
+
+void func_8007AEF8(HSD_GObj*);
+void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, HSD_GObjEvent on_reflect);
+void ftColl_CreateAbsorbHit(HSD_GObj*, AbsorbDesc*);
+void func_8007AF10(HSD_GObj*);
 
 #endif

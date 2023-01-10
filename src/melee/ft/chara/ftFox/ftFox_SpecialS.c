@@ -2,6 +2,9 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcliffcommon.h>
 
 // 0x800E9DF8
 // https://decomp.me/scratch/5Qwzg // Create Fox Illusion / Falco Phantasm GFX
@@ -9,11 +12,12 @@ void ftFox_SpecialS_CreateGFX(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (fp->x2219_flag.bits.b0 == 0) {
+    if (fp->x2219_flag.bits.b0 == FALSE) {
         ef_Spawn(0x48D, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj,
                  &fp->x2C_facing_direction);
-        fp->x2219_flag.bits.b0 = 1;
+        fp->x2219_flag.bits.b0 = TRUE;
     }
+
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21BC_callback_Accessory4 = NULL;
@@ -24,11 +28,12 @@ void ftFox_SpecialS_CreateGFX(HSD_GObj* fighter_gobj)
 // Illusion/Phantasm Action States
 BOOL ftFox_SpecialS_CheckGhostRemove(HSD_GObj* fighter_gobj)
 {
-    s32 ASID = getFighter(fighter_gobj)->x10_action_state_index;
+    /// @todo @c enum
+    s32 asid = getFighter(fighter_gobj)->x10_action_state_index;
 
-    if ((ASID >= AS_FOX_SPECIALS_START) && (ASID <= AS_FOX_SPECIALAIRS_END)) {
+    if (asid >= AS_FOX_SPECIALS_START && asid <= AS_FOX_SPECIALAIRS_END)
         return FALSE;
-    }
+
     return TRUE;
 }
 
@@ -192,10 +197,12 @@ void ftFox_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
     } else {
         cliffCatchDir = 1;
     }
+
     if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != FALSE) {
         ftFox_SpecialAirSStart_AirToGround(fighter_gobj);
         return;
     }
+
     if (func_80081298(fighter_gobj))
         return;
 }
@@ -468,9 +475,8 @@ void ftFox_SpecialAirS_Action(HSD_GObj* fighter_gobj)
 // End Animation callback
 void ftFox_SpecialSEnd_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 // 0x800EA944

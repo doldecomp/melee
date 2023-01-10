@@ -1,14 +1,19 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_9.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_8.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftlib.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
 
 // 80151D20 14E900
 // https://decomp.me/scratch/wVowU
 void lbl_80151D20(HSD_GObj* arg0)
 {
-    if (!ftAnim_IsFramesRemaining(arg0)) {
+    if (!ftAnim_IsFramesRemaining(arg0))
         func_80151018(arg0);
-    }
 }
 
 // 80151D5C 14E93C
@@ -16,9 +21,8 @@ void lbl_80151D20(HSD_GObj* arg0)
 void lbl_80151D5C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(gobj);
-    }
 }
 
 // 80151DA0 14E980
@@ -47,9 +51,8 @@ void lbl_80151DC4(HSD_GObj* arg0)
 // https://decomp.me/scratch/acoIs
 void lbl_80151E10(HSD_GObj* arg0)
 {
-    if (!ftAnim_IsFramesRemaining(arg0)) {
+    if (!ftAnim_IsFramesRemaining(arg0))
         func_80151EB4(arg0);
-    }
 }
 
 // 80151E4C 14EA2C
@@ -57,9 +60,8 @@ void lbl_80151E10(HSD_GObj* arg0)
 void lbl_80151E4C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(gobj);
-    }
 }
 
 // 80151E90 14EA70
@@ -123,13 +125,15 @@ void lbl_80151F00(HSD_GObj* gobj)
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
     func_800866DC(func_8015C244(gobj, &r31_fp->xB0_pos), &sp28);
     lbvector_Diff(&sp28, &r31_fp->xB0_pos, &sp1C_resultVector);
-    if (my_lbvector_Len(&sp1C_resultVector) < r30_attributes->x4C) {
+
+    if (my_lbvector_Len(&sp1C_resultVector) < r30_attributes->x4C)
         func_80151CA8(gobj);
-    }
+
     func_80054158(0, &sp28);
-    if (r31_fp->xB0_pos.x < sp28.x) {
+
+    if (r31_fp->xB0_pos.x < sp28.x)
         func_801520D8(gobj);
-    }
+
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);

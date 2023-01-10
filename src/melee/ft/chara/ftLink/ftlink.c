@@ -1,26 +1,30 @@
 #include <melee/ft/chara/ftLink/ftlink.h>
 
+#include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftparts.h>
 #include <melee/lb/lbmthp.h>
 
-// extern float lbl_804D92E0; // 0.0f
-
-s32 func_800EAD64(HSD_GObj* fighter_gobj)
+BOOL func_800EAD64(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    if (fp->sa.link.x2234) {
-        return 1;
-    }
-    return 0;
+
+    if (fp->sa.link.x2234)
+        return TRUE;
+
+    return FALSE;
 }
 
 void ftLink_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
+
     func_80074A4C(fighter_gobj, 0, 0);
     func_80074A4C(fighter_gobj, 1, 0);
     func_80074A4C(fighter_gobj, 2, 0);
+
     fp->sa.link.x222C = 0;
     fp->sa.link.x2234 = 0;
     fp->sa.link.x2238 = 0;
@@ -52,7 +56,7 @@ void ftLink_OnLoad(HSD_GObj* fighter_gobj)
     func_800753D4(fp, *lbl_804D6540[fp->x4_fighterKind], item_list[6]);
 }
 
-void func_800EAF38()
+void func_800EAF38(void)
 {
     func_800EC06C();
 }

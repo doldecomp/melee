@@ -1,9 +1,11 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftLuigi_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    func_80074A4C(fighter_gobj, 0, 0);
+    func_80074A4C(fighter_gobj, 0, FALSE);
     fp->sa.luigi.x2234 = 0;
 }
 

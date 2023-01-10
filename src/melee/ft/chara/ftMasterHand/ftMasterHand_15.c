@@ -1,23 +1,27 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_15.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftlib.h>
+#include <melee/lb/lbvector.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/it/code_8027CF30.h>
 
 // 80153000 14FBE0
 // https://decomp.me/scratch/erd6U
 void lbl_80153000(HSD_GObj* arg0)
 {
-    if (!ftAnim_IsFramesRemaining(arg0)) {
+    if (!ftAnim_IsFramesRemaining(arg0))
         func_80151018(arg0);
-    }
 }
 
 // 8015303C 14FC1C
 void lbl_8015303C(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(arg0);
-    }
 }
 
 // 80153080 14FC60
@@ -72,11 +76,12 @@ void lbl_80153160(HSD_GObj* gobj)
             ftData = fp->x10C_ftData;
             temp_r29 = ftData->ext_attr;
             func_801533CC(gobj);
-            if (func_80087120(gobj) > temp_r29->xEC) {
-                fp->x2394 = (s32) temp_r29->xF0;
-            } else {
+
+            if (func_80087120(gobj) > temp_r29->xEC)
+                fp->x2394 = temp_r29->xF0;
+            else
                 fp->x2394 = 1;
-            }
+
             fp->x2208_ftcmd_var2 = 0;
         }
     }
@@ -87,9 +92,8 @@ void lbl_80153160(HSD_GObj* gobj)
 void lbl_80153210(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(arg0);
-    }
 }
 
 // 80153254 14FE34
@@ -110,6 +114,7 @@ static inline float my_sqrtf(float x)
     }
     return x;
 }
+
 static inline float my_lbvector_Len(Vec3* vec)
 {
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
@@ -177,7 +182,7 @@ void func_801533CC(HSD_GObj* arg0)
 
 // 8015346C 15004C
 // https://decomp.me/scratch/6Hvy9
-inline void lbl_8015346C_inline(HSD_GObj* gobj)
+static inline void lbl_8015346C_inline(HSD_GObj* gobj)
 {
     Fighter* ft30 = gobj->user_data;
     MasterHandAttributes* attr = ft30->x10C_ftData->ext_attr;
@@ -212,9 +217,8 @@ void lbl_8015346C(HSD_GObj* gobj)
 void lbl_80153548(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(arg0);
-    }
 }
 
 // 8015358C 15016C
@@ -268,9 +272,10 @@ void func_8015364C(HSD_GObj* arg0, HSD_JObj* arg1, f32 arg2, f32 arg3)
     sp1C_carrot = sp28_leek;
     sp28_leek.x += arg2;
     sp28_leek.y += arg3;
-    if (func_80087120(arg0) > attr->xEC) {
+
+    if (func_80087120(arg0) > attr->xEC)
         phi_r29 = 1;
-    }
+
     func_802F0AE0(arg0, &sp28_leek, &sp1C_carrot, 0x7E, phi_r29,
                   fp->x2C_facing_direction, attr->xD4, attr->xD8);
 }

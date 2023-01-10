@@ -280,7 +280,10 @@ void ftPikachu_80126614(HSD_GObj* fighter_gobj)
 
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
 
-    if (!func_80082888(fighter_gobj, &pika_attr->height_attributes)) {
+    /// @todo Eliminate cast (by changing type of field)
+    if (!func_80082888(fighter_gobj,
+                       (ftCollisionBox*) &pika_attr->height_attributes))
+    {
         if ((collData->x134_envFlags & 0x3F) ||
             (collData->x134_envFlags & 0xFC0))
         {
@@ -723,7 +726,11 @@ void ftPikachu_8012738C(HSD_GObj* fighter_gobj)
     s32 unused[2];
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
-    if (!func_80082888(fighter_gobj, &pika_attr->height_attributes)) {
+
+    /// @todo Eliminate cast (by changing type of field)
+    if (!func_80082888(fighter_gobj,
+                       (ftCollisionBox*) &pika_attr->height_attributes))
+    {
         ftPikachu_ActionChange_8012744C(fighter_gobj);
     }
 }

@@ -1,7 +1,10 @@
 #include <dolphin/pad/pad.h>
 
 #include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSRtc.h>
 #include <dolphin/os/OSSerial.h>
+#include <MetroTRK/intrinsics.h>
+#include <Runtime/__mem.h>
 
 #define PAD_CHAN0_BIT 0x80000000
 
@@ -108,13 +111,14 @@ void UpdateOrigin(s32 arg0)
 
 inline void foo(s32 chan)
 {
-    u8 sp1C[0x18];
+    /// @todo @c sp1C is a struct.
+    u32 sp1C[6];
     EnabledBits |= PAD_CHAN0_BIT >> chan;
-    SIGetResponse(chan, sp1C + 0xC);
+    SIGetResponse(chan, sp1C + 3);
     SISetCommand(chan, AnalogMode | 0x400000);
 }
 
-void PADOriginCallback(s32, s32 arg1)
+void PADOriginCallback(s32 unused0, s32 arg1)
 {
     if (!(arg1 & 0xF)) {
         UpdateOrigin(ResettingChan);
@@ -132,9 +136,8 @@ void PADOriginCallback(s32, s32 arg1)
 
 void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context)
 {
-    if (!(EnabledBits & (PAD_CHAN0_BIT >> chan))) {
+    if (!(EnabledBits & (PAD_CHAN0_BIT >> chan)))
         return;
-    }
 
     if (!(error & (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN |
                    SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)))
@@ -142,9 +145,8 @@ void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context)
         UpdateOrigin(chan);
     }
 
-    if (error & SI_ERROR_NO_RESPONSE) {
+    if (error & SI_ERROR_NO_RESPONSE)
         PADDisable(chan);
-    }
 }
 
 void PADProbeCallback(s32 chan, u32 error, OSContext* context)

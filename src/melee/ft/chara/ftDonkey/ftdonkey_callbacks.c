@@ -1,6 +1,13 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
+#include <melee/mp/mplib.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialN.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.h>
 
 void ftDonkey_OnDeath(HSD_GObj* fighter_gobj)
 {
@@ -39,9 +46,9 @@ void func_8010D96C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     ftDonkeyAttributes* attr = fp->x2D4_specialAttributes;
-    if (fp->sa.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS) {
+
+    if (fp->sa.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS)
         func_800BFFD0(fp, 0x39, 0);
-    }
 }
 
 void ftDonkey_OnLoad(HSD_GObj* fighter_gobj)

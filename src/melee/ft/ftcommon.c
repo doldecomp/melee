@@ -200,7 +200,7 @@ f32 func_8007CD6C(f32 value, f32 decrement)
 }
 
 // These do not match due to unpatched epilogue scheduling
-#ifndef NON_MATCHING
+#ifdef MUST_MATCH
 char lbl_803C0D58[] = "ftcommon.c";
 char lbl_803C0D64[] = "fp->kind == Ft_Kind_Sandbag";
 
@@ -264,6 +264,7 @@ lbl_8007CE30:
 /* 8007CE48 00079A28  4E 80 00 20 */	blr
 } // clang-format on
 #pragma peephole on
+
 #else
 
 // to match assert statement

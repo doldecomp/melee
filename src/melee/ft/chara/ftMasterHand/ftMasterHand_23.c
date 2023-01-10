@@ -1,5 +1,12 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_25.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_26.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_32.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcommon.h>
+
 // 80154A78 151658
 // https://decomp.me/scratch/ci0xf
 void func_80154A78(HSD_GObj* gobj)

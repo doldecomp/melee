@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ftbosslib.h>
 
 // 80155388 151F68
@@ -56,9 +58,10 @@ void lbl_80155484(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     gobj_2 = func_8015C3E8(0x1CU);
-    if (func_8015C31C() == 0) {
+
+    if (func_8015C31C() == 0)
         func_8015A560(gobj_2);
-    }
+
     fp->x1A5C = gobj_2;
     Fighter_ActionStateChange_800693AC(gobj, 0x180, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);

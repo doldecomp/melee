@@ -1,6 +1,9 @@
 #include <dolphin/os/OSExi.h>
 
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSTime.h>
+#include <placeholder.h>
+#include <cstring.h>
 
 #define REG_MAX 5
 #define EXI_FREQ_1M 0
@@ -22,7 +25,7 @@ void SetExiInterruptMask(EXIChannel chan, volatile EXIControl* exi)
 
     switch (chan) {
     case EXI_CHAN_0:
-        if (exi->exiCallback == NULL && exi2->exiCallback == NULL ||
+        if ((exi->exiCallback == NULL && exi2->exiCallback == NULL) ||
             exi->state & EXI_STATE_LOCKED)
         {
             __OSMaskInterrupts(OS_INTRMASK_EXI_0_EXI | OS_INTRMASK_EXI_2_EXI);
@@ -111,17 +114,18 @@ BOOL EXIImmEx(EXIChannel chan, void* buf, s32 len, u32 mode)
 {
     while (len) {
         s32 xLen = (len < 4) ? len : 4;
-        if (!EXIImm(chan, buf, xLen, mode, NULL)) {
-            return FALSE;
-        }
 
-        if (!EXISync(chan)) {
+        if (!EXIImm(chan, buf, xLen, mode, NULL))
             return FALSE;
-        }
 
-        (u8*) buf += xLen;
+        if (!EXISync(chan))
+            return FALSE;
+
+        buf = (u8*) buf + xLen;
+
         len -= xLen;
     }
+
     return TRUE;
 }
 
@@ -152,6 +156,8 @@ BOOL EXIDma(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
 }
 
 extern u32 __OSGetDIConfig(void);
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm BOOL EXISync(EXIChannel)
@@ -299,6 +305,16 @@ lbl_8034613C:
 /* 80346150 00342D30  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+BOOL EXISync(EXIChannel unused)
+{
+    NOT_IMPLEMENTED;
+    return FALSE;
+}
+
+#endif
 
 u32 EXIClearInterrupts(EXIChannel chan, BOOL exi, BOOL tc, BOOL ext)
 {
@@ -469,9 +485,9 @@ BOOL EXISelect(EXIChannel chan, u32 dev, u32 freq)
     BOOL enabled = OSDisableInterrupts();
 
     if ((exi->state & EXI_STATE_SELECTED) ||
-        chan != 2 && (dev == 0 && !(exi->state & EXI_STATE_ATTACHED) &&
-                          !__EXIProbe(chan) ||
-                      !(exi->state & EXI_STATE_LOCKED) || (exi->dev != dev)))
+        (chan != 2 && ((dev == 0 && !(exi->state & EXI_STATE_ATTACHED) &&
+                        !__EXIProbe(chan)) ||
+                       !(exi->state & EXI_STATE_LOCKED) || exi->dev != dev)))
     {
         OSRestoreInterrupts(enabled);
         return FALSE;
@@ -582,6 +598,8 @@ static void TCIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
     }
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
 static asm void EXTIntrruptHandler(__OSInterrupt, OSContext*)
 { // clang-format off
@@ -639,6 +657,15 @@ lbl_80346C58:
 /* 80346C68 00343848  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+static void EXTIntrruptHandler(__OSInterrupt unused0, OSContext* unused1)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 void EXIInit(void)
 {
