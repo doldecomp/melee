@@ -3835,6 +3835,12 @@ lbl_803C06CC:
     .balign 4
 
 
+.section .bss
+.global lbl_804590D8
+lbl_804590D8:
+    .skip 0x168
+
+
 .section .sdata
     .balign 8
 .global lbl_804D3A18
