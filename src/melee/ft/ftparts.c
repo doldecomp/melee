@@ -75,19 +75,22 @@ static char lbl_804D3A50[] = "ft_pobj";
 static char lbl_804D3A58[] = "0";
 static char lbl_804D3A5C[] = "rotate";
 
-inline f32 _HSD_JObjGetScaleX(HSD_JObj* jobj)
+/// @todo Remove when strings can be reused
+static inline f32 _HSD_JObjGetScaleX(HSD_JObj* jobj)
 {
     ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 875, lbl_804D3A38));
     return jobj->scale.x;
 }
 
-inline f32 _HSD_JObjGetScaleY(HSD_JObj* jobj)
+/// @todo Remove when strings can be reused
+static inline f32 _HSD_JObjGetScaleY(HSD_JObj* jobj)
 {
     ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 888, lbl_804D3A38));
     return jobj->scale.y;
 }
 
-inline f32 _HSD_JObjGetScaleZ(HSD_JObj* jobj)
+/// @todo Remove when strings can be reused
+static inline f32 _HSD_JObjGetScaleZ(HSD_JObj* jobj)
 {
     ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 901, lbl_804D3A38));
     return jobj->scale.z;
