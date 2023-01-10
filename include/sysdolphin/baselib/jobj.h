@@ -281,6 +281,24 @@ inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec* scale)
     *scale = jobj->scale;
 }
 
+inline f32 HSD_JObjGetScaleX(HSD_JObj* jobj)
+{
+    assert_line(875, jobj);
+    return jobj->scale.x;
+}
+
+inline f32 HSD_JObjGetScaleY(HSD_JObj* jobj)
+{
+    assert_line(888, jobj);
+    return jobj->scale.y;
+}
+
+inline f32 HSD_JObjGetScaleZ(HSD_JObj* jobj)
+{
+    assert_line(901, jobj);
+    return jobj->scale.x;
+}
+
 inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* translate)
 {
     assert_line(916, jobj);

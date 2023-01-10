@@ -18,7 +18,7 @@ inline f32 HSD_CalcDeterminantMatrix3x4(Mtx m)
            m[1][0] * m[0][1] * m[2][2] - m[0][0] * m[2][1] * m[1][2];
 }
 
-void func_80379310(Mtx src, Mtx dest)
+void HSD_MtxInverse(Mtx src, Mtx dest)
 {
     Mtx tempMatrix;
     Mtx* m;
@@ -176,7 +176,7 @@ void HSD_MtxInverseTranspose(Mtx src, Mtx dest)
 
         det = 1.0f / det;
 
-        // This needs to be in a different order than in func_80379310 for some
+        // This needs to be in a different order than in HSD_MtxInverse for some
         // reason
         dest[0][0] =
             (((*m)[1][1] * (*m)[2][2]) - ((*m)[2][1] * (*m)[1][2])) * det;
