@@ -79,56 +79,6 @@ void ftZelda_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A8AC;
 }
 
-#ifdef MUST_MATCH
-
-#pragma push
-asm void ftZelda_8013AA38(HSD_GObj* fighter_gobj)
-{ // clang-format off
-    nofralloc
-/* 8013AA38 00000000  7C 08 02 A6 */	mflr r0
-/* 8013AA3C 00000004  90 01 00 04 */	stw r0, 0x4(r1)
-/* 8013AA40 00000008  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 8013AA44 0000000C  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 8013AA48 00000010  93 C1 00 20 */	stw r30, 0x20(r1)
-/* 8013AA4C 00000014  7C 7E 1B 78 */	mr r30, r3
-/* 8013AA50 00000018  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 8013AA54 0000001C  80 1F 22 00 */	lwz r0, 0x2200(r31)
-/* 8013AA58 00000020  80 9F 02 D4 */	lwz r4, 0x2d4(r31)
-/* 8013AA5C 00000024  28 00 00 01 */	cmplwi r0, 0x1
-/* 8013AA60 00000028  40 82 00 20 */	bne lbl_8013AA80
-/* 8013AA64 0000002C  38 00 00 02 */	li r0, 0x2
-/* 8013AA68 00000030  3C 60 80 14 */	lis r3, ftZelda_8013ADB0@ha
-/* 8013AA6C 00000034  90 1F 22 00 */	stw r0, 0x2200(r31)
-/* 8013AA70 00000038  38 A3 AD B0 */	addi r5, r3, ftZelda_8013ADB0@l
-/* 8013AA74 0000003C  38 7E 00 00 */	addi r3, r30, 0x0
-/* 8013AA78 00000040  38 84 00 84 */	addi r4, r4, 0x84
-/* 8013AA7C 00000044  4B F4 07 C1 */	bl ftColl_CreateReflectHit
-lbl_8013AA80:
-/* 8013AA80 00000048  80 1F 22 00 */	lwz r0, 0x2200(r31)
-/* 8013AA84 0000004C  28 00 00 00 */	cmplwi r0, 0x0
-/* 8013AA88 00000050  40 82 00 14 */	bne lbl_8013AA9C
-/* 8013AA8C 00000054  88 1F 22 18 */	lbz r0, 0x2218(r31)
-/* 8013AA90 00000058  38 60 00 00 */	li r3, 0x0
-/* 8013AA94 0000005C  50 60 26 F6 */	rlwimi r0, r3, 4, 27, 27
-/* 8013AA98 00000060  98 1F 22 18 */	stb r0, 0x2218(r31)
-lbl_8013AA9C:
-/* 8013AA9C 00000064  7F C3 F3 78 */	mr r3, r30
-/* 8013AAA0 00000068  4B F3 47 99 */	bl ftAnim_IsFramesRemaining
-/* 8013AAA4 0000006C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8013AAA8 00000070  40 82 00 0C */	bne lbl_8013AAB4
-/* 8013AAAC 00000074  7F C3 F3 78 */	mr r3, r30
-/* 8013AAB0 00000078  4B F4 F8 0D */	bl func_8008A2BC
-lbl_8013AAB4:
-/* 8013AAB4 0000007C  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 8013AAB8 00000080  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 8013AABC 00000084  83 C1 00 20 */	lwz r30, 0x20(r1)
-/* 8013AAC0 00000088  38 21 00 28 */	addi r1, r1, 0x28
-/* 8013AAC4 0000008C  7C 08 03 A6 */	mtlr r0
-/* 8013AAC8 00000090  4E 80 00 20 */	blr
-} // clang-format on
-
-#else
-
 void ftZelda_8013AA38(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
@@ -150,58 +100,6 @@ void ftZelda_8013AA38(HSD_GObj* fighter_gobj)
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
 }
-
-#endif
-
-#ifdef MUST_MATCH
-
-asm void ftZelda_8013AACC(HSD_GObj* fighter_gobj)
-{ // clang-format off
-    nofralloc
-/* 8013AACC 00000000  7C 08 02 A6 */	mflr r0
-/* 8013AAD0 00000004  90 01 00 04 */	stw r0, 0x4(r1)
-/* 8013AAD4 00000008  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 8013AAD8 0000000C  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 8013AADC 00000010  93 C1 00 20 */	stw r30, 0x20(r1)
-/* 8013AAE0 00000014  7C 7E 1B 78 */	mr r30, r3
-/* 8013AAE4 00000018  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 8013AAE8 0000001C  80 1F 22 00 */	lwz r0, 0x2200(r31)
-/* 8013AAEC 00000020  80 9F 02 D4 */	lwz r4, 0x2d4(r31)
-/* 8013AAF0 00000024  28 00 00 01 */	cmplwi r0, 0x1
-/* 8013AAF4 00000028  40 82 00 20 */	bne lbl_8013AB14
-/* 8013AAF8 0000002C  38 00 00 02 */	li r0, 0x2
-/* 8013AAFC 00000030  3C 60 80 14 */	lis r3, ftZelda_8013ADB0@ha
-/* 8013AB00 00000034  90 1F 22 00 */	stw r0, 0x2200(r31)
-/* 8013AB04 00000038  38 A3 AD B0 */	addi r5, r3, ftZelda_8013ADB0@l
-/* 8013AB08 0000003C  38 7E 00 00 */	addi r3, r30, 0x0
-/* 8013AB0C 00000040  38 84 00 84 */	addi r4, r4, 0x84
-/* 8013AB10 00000044  4B F4 07 2D */	bl ftColl_CreateReflectHit
-lbl_8013AB14:
-/* 8013AB14 00000048  80 1F 22 00 */	lwz r0, 0x2200(r31)
-/* 8013AB18 0000004C  28 00 00 00 */	cmplwi r0, 0x0
-/* 8013AB1C 00000050  40 82 00 14 */	bne lbl_8013AB30
-/* 8013AB20 00000054  88 1F 22 18 */	lbz r0, 0x2218(r31)
-/* 8013AB24 00000058  38 60 00 00 */	li r3, 0x0
-/* 8013AB28 0000005C  50 60 26 F6 */	rlwimi r0, r3, 4, 27, 27
-/* 8013AB2C 00000060  98 1F 22 18 */	stb r0, 0x2218(r31)
-lbl_8013AB30:
-/* 8013AB30 00000064  7F C3 F3 78 */	mr r3, r30
-/* 8013AB34 00000068  4B F3 47 05 */	bl ftAnim_IsFramesRemaining
-/* 8013AB38 0000006C  2C 03 00 00 */	cmpwi r3, 0x0
-/* 8013AB3C 00000070  40 82 00 0C */	bne lbl_8013AB48
-/* 8013AB40 00000074  7F C3 F3 78 */	mr r3, r30
-/* 8013AB44 00000078  4B F9 1B ED */	bl func_800CC730
-lbl_8013AB48:
-/* 8013AB48 0000007C  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 8013AB4C 00000080  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 8013AB50 00000084  83 C1 00 20 */	lwz r30, 0x20(r1)
-/* 8013AB54 00000088  38 21 00 28 */	addi r1, r1, 0x28
-/* 8013AB58 0000008C  7C 08 03 A6 */	mtlr r0
-/* 8013AB5C 00000090  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#else
 
 // 8013AACC - 8013AB60 (0x94 bytes)
 // https://decomp.me/scratch/ttWvN
@@ -228,8 +126,6 @@ void ftZelda_8013AACC(HSD_GObj* fighter_gobj)
         func_800CC730(fighter_gobj);
     }
 }
-
-#endif
 
 void ftZelda_8013AB60(HSD_GObj* fighter_gobj)
 {
