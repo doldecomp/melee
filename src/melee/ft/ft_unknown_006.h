@@ -177,7 +177,8 @@ void func_800DF0D0(struct _HSD_GObj*);
 s32 func_80096CC8(struct _HSD_GObj*);
 
 /// @todo enum params
-void func_800DEAE8(struct _HSD_GObj* gobj, s32 asid0, s32 asid1);
+void func_800DEAE8(struct _HSD_GObj* gobj, enum_t asid0, enum_t asid1);
+
 void func_800DED30(struct _HSD_GObj*);
 BOOL func_8008A1FC(struct _HSD_GObj*);
 BOOL func_80094EA4(struct _HSD_GObj*);

@@ -85,7 +85,7 @@ void ftGameWatch_ItemPanicExitHitlag(HSD_GObj* fighter_gobj)
 BOOL ftGameWatch_ItemCheckPanicRemove(HSD_GObj* fighter_gobj)
 {
     /// @todo @c enum
-    s32 asid = ((Fighter*) fighter_gobj->user_data)->x10_action_state_index;
+    enum_t asid = ((Fighter*) fighter_gobj->user_data)->x10_action_state_index;
 
     if ((asid >= AS_GAMEWATCH_SPECIALLW_SHOOT) &&
         (asid <= AS_GAMEWATCH_SPECIALAIRLW_SHOOT))
@@ -542,7 +542,7 @@ void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     /// @todo @c enum
-    s32 asid;
+    enum_t asid;
 
     fp->sa.gaw.x2238_panicCharge += fp->AbsorbAttr.x1A48_hitsTaken;
     fp->sa.gaw.x223C_panicDamage += fp->AbsorbAttr.x1A44_damageTaken;

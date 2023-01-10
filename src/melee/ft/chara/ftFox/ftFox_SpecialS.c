@@ -31,7 +31,7 @@ void ftFox_SpecialS_CreateGFX(HSD_GObj* fighter_gobj)
 BOOL ftFox_SpecialS_CheckGhostRemove(HSD_GObj* fighter_gobj)
 {
     /// @todo @c enum
-    s32 asid = getFighter(fighter_gobj)->x10_action_state_index;
+    enum_t asid = getFighter(fighter_gobj)->x10_action_state_index;
 
     if (asid >= AS_FOX_SPECIALS_START && asid <= AS_FOX_SPECIALAIRS_END)
         return FALSE;
