@@ -26,7 +26,6 @@ extern HSD_MObjInfo ftMObj;
 BOOL hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p);
 
 unk_t func_80074ACC();
-unk_t func_80074D7C();
 u32 func_8007506C(s32 ftkind, u32 part);
 
 void Fighter_JObjInfoInit(void);
@@ -1307,7 +1306,7 @@ asm unk_t func_8007482C()
 #pragma pop
 
 #pragma push
-asm unk_t func_8007487C()
+asm void func_8007487C(unk_t item, u32*, u8 costume_id, u32*, u32*)
 { // clang-format off
     nofralloc
 /* 8007487C 0007145C  7C 08 02 A6 */	mflr r0
@@ -1465,7 +1464,7 @@ asm void func_80074A4C(struct _HSD_GObj*, u32, s32)
 #pragma pop
 
 #pragma push
-asm unk_t func_80074A74()
+asm s32 func_80074A74(HSD_GObj*, s32)
 { // clang-format off
     nofralloc
 /* 80074A74 00071654  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -1655,7 +1654,7 @@ lbl_80074C8C:
 #pragma pop
 
 #pragma push
-asm unk_t func_80074CA0()
+asm void func_80074CA0(u32*, s32, u32*)
 { // clang-format off
     nofralloc
 /* 80074CA0 00071880  7C 08 02 A6 */	mflr r0
@@ -1724,7 +1723,7 @@ lbl_80074D68:
 #pragma pop
 
 #pragma push
-asm unk_t func_80074D7C()
+asm void func_80074D7C(u32*, s32, u32*)
 { // clang-format off
     nofralloc
 /* 80074D7C 0007195C  7C 08 02 A6 */	mflr r0
@@ -2407,7 +2406,7 @@ asm unk_t func_800755E8()
 #pragma pop
 
 #pragma push
-asm unk_t func_80075650()
+asm void func_80075650(HSD_GObj* fighter_gobj, HSD_JObj*, u32*)
 { // clang-format off
     nofralloc
 /* 80075650 00072230  7C 08 02 A6 */	mflr r0
@@ -3034,7 +3033,7 @@ lbl_80075E54:
 #pragma pop
 
 #pragma push
-asm unk_t func_80075E78()
+asm f32 func_80075E78(Fighter*, BOOL)
 { // clang-format off
     nofralloc
 /* 80075E78 00072A58  7C 08 02 A6 */	mflr r0

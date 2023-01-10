@@ -9,6 +9,7 @@
 #include <melee/ft/ftstatevars.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item2.h>
+#include <melee/lb/lbcollision.h>
 #include <melee/lb/lbrefract.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/archive.h>
@@ -994,28 +995,6 @@ typedef struct _CollData {
     /* 0x19C */ s32 x19C;
 } CollData;
 
-typedef struct ftHurt {
-    u32 x0_bone_state;     // 0x0, whether or not this hurtbox can be hit
-    Vec3 x4_hurt1_offset;  // 0x4
-    Vec3 x10_hurt2_offset; // 0x10
-    f32 x1C_scale;         // 0x1c
-    HSD_JObj* x20_jobj;    // 0x20
-    unsigned char
-        x24_1_is_updated : 1; // 0x24, 0x80, if enabled, wont update position
-    unsigned char x24_2 : 1;  // 0x24 0x40
-    unsigned char x24_3 : 1;  // 0x24 0x20
-    unsigned char x24_4 : 1;  // 0x24 0x10
-    unsigned char x24_5 : 1;  // 0x24 0x08
-    unsigned char x24_6 : 1;  // 0x24 0x04
-    unsigned char x24_7 : 1;  // 0x24 0x02
-    unsigned char x24_8 : 1;  // 0x24 0x01
-    Vec3 x28_hurt1_pos;       // 0x28
-    Vec3 x34_hurt2_pos;       // 0x34
-    u32 x40_bone_index;       // 0x40
-    u32 x44_hurt_kind;        // 0x44. 0 = low, 1 = mid, 2 = high
-    u32 x48_is_grabbable;     // 0x48
-} ftHurt;
-
 typedef struct _SmashAttr {
     s32 x2114_state;     // 0x2114 0 = none, 1 = pre-charge, 2 = charging, 3 =
                          // release
@@ -1216,7 +1195,7 @@ struct SpecialAttrs_Pikachu {
 };
 
 struct SpecialAttrs_Samus {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ HSD_GObj* x222C;
     /* 0x2230 */ s32 x2230;
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
@@ -1270,7 +1249,7 @@ struct SpecialAttrs_Mars {
 };
 
 struct SpecialAttrs_Zelda {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ HSD_GObj* x222C;
 };
 
 struct SpecialAttrs_CLink {

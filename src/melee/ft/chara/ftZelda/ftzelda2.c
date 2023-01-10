@@ -1,14 +1,22 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
+#include <melee/ft/ftcoll.h>
 #include <melee/ef/eflib.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/ftparts.h>
 #include <melee/ft/fighter.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
 #include <MSL/trigf.h>
 
-#define HALF_PI 1.5707963705062866f
-#define DEG_TO_RAD 0.017453292f
+/// @todo Move elsewhere.
+#define HALF_PI (1.5707963705062866f)
+
+/// @todo Move elsewhere.
+#define DEG_TO_RAD (0.017453292f)
 
 // 801396AC - 801396E0 (0x34 bytes)
 // https://decomp.me/scratch/UHxFc
@@ -74,7 +82,10 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
     s32 unused[1];
     Vec sp24;
 
-    unused[0] = 1.5; // Trick to use more stack space
+#ifdef MUST_MATCH
+    // Trick to use more stack space
+    unused[0] = 1.5;
+#endif
 
     boneIndex = func_8007500C(fp, 4);
     jObj = fp->x5E8_fighterBones[boneIndex].x0_jobj;
@@ -214,11 +225,8 @@ void ftZelda_80139AD4(HSD_GObj* fighter_gobj)
 
     if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledgeGrabDir) != 0) {
         ftZelda_80139BB0(fighter_gobj);
-    } else {
-        result = func_80081298(fighter_gobj);
-        if (result == 0) {
-            return;
-        }
+    } else if (!func_80081298(fighter_gobj)) {
+        return;
     }
 }
 
@@ -226,9 +234,7 @@ void ftZelda_80139AD4(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/XI2m5
 void ftZelda_80139B44(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-
-    fp = fighter_gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     func_8007D60C(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x160, 0x0C4C508E, NULL,
                                        fp->x894_currentAnimFrame, 1.0,
@@ -240,9 +246,7 @@ void ftZelda_80139B44(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/KOA33
 void ftZelda_80139BB0(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-
-    fp = fighter_gobj->user_data;
+    Fighter* fp = fighter_gobj->user_data;
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15D, 0x0C4C508E, NULL,
                                        fp->x894_currentAnimFrame, 1.0,
@@ -254,9 +258,7 @@ void ftZelda_80139BB0(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/VCHRF
 void ftZelda_80139C1C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-
-    fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(fighter_gobj);
     fp->x2340_stateVar1 -= 1;
     if (fp->x2340_stateVar1 <= 0) {
         ftZelda_8013A6A8(fighter_gobj);
@@ -335,13 +337,12 @@ BOOL ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj)
     fighter2 = getFighter(fighter_gobj);
     attributes2 = fighter2->x2D4_specialAttributes;
 
-    if (fighter2->x234C_stateVar4_s32 >= attributes2->x4C) {
-        var_r0 = 1;
-    } else if (func_8009A134(fighter_gobj) != 0) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 1;
-    }
+    if (fighter2->x234C_stateVar4_s32 >= attributes2->x4C)
+        var_r0 = TRUE;
+    else if (func_8009A134(fighter_gobj))
+        var_r0 = FALSE;
+    else
+        var_r0 = TRUE;
 
     return var_r0;
 }
@@ -525,7 +526,7 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj)
                 fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
                 fp->x2223_flag.bits.b4 = 1;
 
-                func_8007B62C(fighter_gobj, 2, attributes);
+                func_8007B62C(fighter_gobj, 2);
                 fp->x221E_flag.bits.b0 = 1;
                 return;
             }
@@ -619,7 +620,7 @@ void ftZelda_8013A244(HSD_GObj* fighter_gobj)
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     fp->x2223_flag.bits.b4 = 1;
 
-    func_8007B62C(fighter_gobj, 2, attributes);
+    func_8007B62C(fighter_gobj, 2);
 
     fp->x221E_flag.bits.b0 = 1;
 }

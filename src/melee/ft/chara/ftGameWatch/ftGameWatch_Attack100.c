@@ -53,8 +53,6 @@ void ftGameWatch_Attack100Loop_Action(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_Attack11_DecideAction;
 }
 
-extern void func_800D6C60(HSD_GObj*, void (*callback)(HSD_GObj*));
-
 // 0x8014C308
 // https://decomp.me/scratch/39K2l // Mr. Game & Watch's Rapid Jab Loop
 // Animation callback
@@ -62,8 +60,6 @@ void ftGameWatch_Attack100Loop_Anim(HSD_GObj* fighter_gobj)
 {
     func_800D6C60(fighter_gobj, ftGameWatch_Attack100End_Action);
 }
-
-extern void func_800D6E70(HSD_GObj* fighter_gobj);
 
 // 0x8014C330 - Mr. Game & Watch's Rapid Jab Loop IASA callback
 void ftGameWatch_Attack100Loop_IASA(HSD_GObj* fighter_gobj)
@@ -93,8 +89,6 @@ void ftGameWatch_Attack100End_Action(HSD_GObj* fighter_gobj)
                                        0, NULL, 0.0f, 1.0f, 0.0f);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_Attack11_DecideAction;
 }
-
-extern void func_800D6E34(HSD_GObj* fighter_gobj);
 
 // 0x8014C3F4 - Mr. Game & Watch's Rapid Jab End Animation callback
 void ftGameWatch_Attack100End_Anim(HSD_GObj* fighter_gobj)

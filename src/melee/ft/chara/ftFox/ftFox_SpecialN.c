@@ -404,10 +404,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_80094818(HSD_GObj*, s32);
-extern void func_802AE608(HSD_GObj*);
-
-inline void ftFox_SpecialN_RemoveBlasterNULL(HSD_GObj* fighter_gobj)
+static inline void ftFox_SpecialN_RemoveBlasterNULL(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -426,9 +423,10 @@ void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
     HSD_GObj* blasterGObj;
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, fp->x2204_ftcmd_var1);
-    if ((u32) fp->x2204_ftcmd_var1 == 2U) {
+
+    if ((u32) fp->x2204_ftcmd_var1 == 2U)
         func_80094818(fighter_gobj, 0);
-    }
+
     if (((u32) fp->x220C_ftcmd_var3 == 2U) &&
         (fp->sa.fox.x222C_blasterGObj != NULL))
     {
@@ -667,8 +665,6 @@ void ftFox_SpecialNEnd_Phys(HSD_GObj* fighter_gobj)
     func_80084F3C(fighter_gobj);
 }
 
-extern void func_80084DB0(HSD_GObj*);
-
 // 0x800E6BBC - Fox & Falco's aerial Blaster Start Physics callback
 void ftFox_SpecialAirNStart_Phys(HSD_GObj* fighter_gobj)
 {
@@ -705,8 +701,6 @@ void ftFox_SpecialNEnd_Coll(HSD_GObj* fighter_gobj)
     func_80083F88(fighter_gobj);
 }
 
-extern void func_80082B78(HSD_GObj*);
-
 // 0x800E6C7C - Fox & Falco's aerial Blaster Start Collision callback
 void ftFox_SpecialAirNStart_Coll(HSD_GObj* fighter_gobj)
 {
@@ -724,15 +718,6 @@ void ftFox_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj)
 {
     func_80082B78(fighter_gobj);
 }
-
-extern void func_80094818(HSD_GObj*, s32);
-extern void func_8026BAE8(HSD_GObj*, f32);
-extern void func_8029C6CC(f32, f32, HSD_GObj*, Vec3*, s32);
-extern void func_802ADDD0(HSD_GObj*, s32);
-extern void func_802AE538(HSD_GObj*);
-extern void func_802AE608(HSD_GObj*);
-extern HSD_GObj* func_802AE8A8(f32, HSD_GObj*, Vec3*, s32, s32);
-extern void func_800E5588(HSD_GObj*);
 
 // 0x800E6CDC
 // https://decomp.me/scratch/G1jsj // Fox & Falco's Throw Animation callback -

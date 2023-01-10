@@ -1,6 +1,8 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/ft/ftparts.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
@@ -233,9 +235,7 @@ void ftFox_SpecialAirSStart_AirToGround(HSD_GObj* fighter_gobj)
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-extern HSD_GObj* func_8029CEB4(HSD_GObj*, Vec3*, s32, f32);
-
-inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* fighter_gobj)
+static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     HSD_GObj* ghostGObj;
@@ -314,10 +314,7 @@ void ftFox_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
     }
 }
 
-extern f32 func_80075E78(Fighter*, s32);
-extern void func_80085088(HSD_GObj*);
-
-inline void ftFox_SpecialS_SetPhys(HSD_GObj* fighter_gobj)
+static inline void ftFox_SpecialS_SetPhys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 

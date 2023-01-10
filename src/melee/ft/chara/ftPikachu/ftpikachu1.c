@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
 
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftparts.h>
 
 void ftPikachu_OnLoadForPichu(Fighter* fp)
 {

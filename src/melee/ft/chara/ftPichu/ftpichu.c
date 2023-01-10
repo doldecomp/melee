@@ -1,5 +1,8 @@
 #include <melee/ft/chara/ftPichu/ftpichu.h>
 
+#include <melee/ft/chara/ftPikachu/ftpikachu.h>
+#include <melee/ft/ftparts.h>
+
 void ftPichu_OnLoad(HSD_GObj* gobj)
 {
     ftPichuAttributes* attrs;

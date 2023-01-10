@@ -176,9 +176,6 @@ void ftFox_AppealS_Phys(HSD_GObj* fighter_gobj);
 /// Fox & Falco's Special Taunt Collision callback
 void ftFox_AppealS_Coll(HSD_GObj* fighter_gobj);
 
-/// Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback
-void ftFox_AppealS_OnTakeDamage(HSD_GObj* fighter_gobj);
-
 // Neutral Special - Blaster (SpecialN) //
 
 /// Get Fox/Falco's Item Hold Bone Position for Blaster GFX

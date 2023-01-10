@@ -2,8 +2,12 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/ftparts.h>
+#include <melee/it/code_8027CF30.h>
 
 void ftPikachu_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
@@ -103,12 +107,14 @@ void ftPikachu_80124A20(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_80124B6C()
+void ftPikachu_Stub_80124B6C(void)
 {
+    return;
 }
 
-void ftPikachu_Stub_80124B70()
+void ftPikachu_Stub_80124B70(void)
 {
+    return;
 }
 
 void ftPikachu_80124B74(HSD_GObj* fighter_gobj)

@@ -9,7 +9,6 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/pobj.h>
-#include <melee/lb/lbcollision.h>
 
 #define HSD_A_J_ROTX 1
 #define HSD_A_J_ROTY 2
@@ -160,6 +159,7 @@ HSD_JObj* HSD_JObjAlloc(void);
 void HSD_JObjSetCurrent(HSD_JObj* jobj);
 HSD_JObj* HSD_JObjGetCurrent(void);
 void HSD_JObjResolveRefsAll(HSD_JObj*, HSD_Joint*);
+void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode);
 
 inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
@@ -354,6 +354,10 @@ inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
     assert_line(1006, jobj);
     return jobj->translate.y;
 }
+
+/// @todo This is misplaced or something; @c jobj.h must not include @c
+///       lbcollision.
+void* HSD_JObjUnkMtxPtr(struct _HSD_JObj*);
 
 inline void HSD_JObjGetMtx(HSD_JObj* jobj)
 {

@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftSandbag/ftsandbag.h>
 
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftcommon.h>
 #include <melee/lb/lbunknown_001.h>
 
 typedef struct _ftSandbagAttributes {
@@ -59,12 +61,14 @@ void ftSandbag_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftSandbagAttributes);
 }
 
-void ftSandbag_OnKnockbackEnter()
+void ftSandbag_OnKnockbackEnter(void)
 {
+    return;
 }
 
-void ftSandbag_OnKnockbackExit()
+void ftSandbag_OnKnockbackExit(void)
 {
+    return;
 }
 
 void func_8014FBA4(HSD_GObj* gobj)

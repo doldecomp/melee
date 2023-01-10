@@ -93,7 +93,8 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
                                        NULL, 0.0f, 1.0f, 0.0f);
 }
 
-extern void ftFox_AppealS_OnTakeDamage(HSD_GObj*);
+/// Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback
+static void ftFox_AppealS_OnTakeDamage(HSD_GObj*);
 
 void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
 {
@@ -152,14 +153,12 @@ void ftFox_AppealS_Phys(HSD_GObj* fighter_gobj)
     func_80084F3C(fighter_gobj);
 }
 
-extern void func_80084280(HSD_GObj*);
-
 void ftFox_AppealS_Coll(HSD_GObj* fighter_gobj)
 {
     func_80084280(fighter_gobj);
 }
 
-void ftFox_AppealS_OnTakeDamage(HSD_GObj* fighter_gobj)
+static void ftFox_AppealS_OnTakeDamage(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 

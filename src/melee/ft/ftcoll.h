@@ -55,9 +55,12 @@ void func_8007BE3C(struct _HSD_GObj*);
 ///  Update hitbox positions
 void func_8007B8A8(Hitbox*, Vec3*);
 
+/// Enable Reflect Bubble Update
 void func_8007AEF8(HSD_GObj*);
+
 void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, HSD_GObjEvent on_reflect);
 void ftColl_CreateAbsorbHit(HSD_GObj*, AbsorbDesc*);
 void func_8007AF10(HSD_GObj*);
+void func_8007B5AC(void* arg0, void* arg1, void* arg2);
 
 #endif

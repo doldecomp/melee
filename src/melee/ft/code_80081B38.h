@@ -17,7 +17,10 @@ void func_80084EEC(HSD_GObj* fighter_gobj);
 BOOL func_800827A0(HSD_GObj* fighter_gobj);
 BOOL func_80081D0C(HSD_GObj* fighter_gobj);
 void func_80085134(HSD_GObj* fighter_gobj);
+
+/// CollisionCheck_StopLedge
 void func_80084104(HSD_GObj* fighter_gobj);
+
 BOOL func_80082708(HSD_GObj* fighter_gobj);
 void func_80084F3C(HSD_GObj* fighter_gobj);
 void func_80084280(struct _HSD_GObj*);
@@ -35,5 +38,11 @@ void func_800831CC(HSD_GObj*, s32 (*)(HSD_GObj*), HSD_GObjEvent);
 BOOL func_800824A0(HSD_GObj*, struct _ftCollisionBox*);
 BOOL func_80082888(HSD_GObj*, struct _ftCollisionBox*);
 void func_80085204(HSD_GObj* fighter_gobj);
+void func_80082B1C(HSD_GObj* fighter_gobj);
+void func_80081B38(HSD_GObj* fighter_gobj);
+BOOL func_80082A68(HSD_GObj* fighter_gobj);
+void func_800851C0(HSD_GObj*);
+void func_80082B78(HSD_GObj*);
+void func_80085088(HSD_GObj*);
 
 #endif

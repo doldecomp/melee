@@ -1,5 +1,7 @@
 #include <melee/ft/chara/ftZakoBoy/ftzakoboy.h>
 
+#include <melee/ft/ftparts.h>
+
 void ftZakoBoy_OnDeath(HSD_GObj* gobj)
 {
     func_80074A4C(gobj, 0, 0);

@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftparts.h>
 
 void ftZelda_OnDeath(HSD_GObj* fighter_gobj)
 {

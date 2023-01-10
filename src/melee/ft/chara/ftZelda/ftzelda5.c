@@ -1,5 +1,9 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
+#include <melee/it/code_8027CF30.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/it/code_8027CF30.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
@@ -73,7 +77,7 @@ void ftZelda_8013B780(HSD_GObj* fighter_gobj)
     Point3d sp24;
     f32 temp_f1;
     f32 temp_f2;
-    u32 temp_r3;
+    HSD_GObj* temp_r3;
     ftZeldaAttributes* attributes; // r31
     Fighter* fp;                   // r30
     f32 unused[6];
@@ -118,8 +122,8 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
     Fighter* fp; // r30
     f32 temp_f1;
     f32 temp_f2;
-    s32 temp_r3;
-    u32 temp_r3_u32;
+    HSD_GObj* temp_r3;
+    HSD_GObj* temp_r3_u32;
     f32 unused[5];
 
     fp = fighter_gobj->user_data;
@@ -154,7 +158,7 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
     }
 
     temp_r3_u32 = fp->sa.zelda.x222C;
-    if (temp_r3_u32 == 0) {
+    if (temp_r3_u32 == NULL) {
         if (fp->x2340_stateVar1 <= 0 && fp->x2344_stateVar2_s32 <= 0) {
             temp_f1 = 0;
             Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0, NULL,
@@ -162,9 +166,9 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
         }
     } else {
         temp_r3 = func_802C3AF0(fp->sa.zelda.x222C);
-        if (temp_r3 != (u32) fighter_gobj) {
-            fp->sa.zelda.x222C = 0;
-        }
+
+        if (temp_r3 != fighter_gobj)
+            fp->sa.zelda.x222C = NULL;
     }
 }
 
@@ -203,7 +207,7 @@ void ftZelda_8013BA8C(HSD_GObj* fighter_gobj)
     f32 temp_f1;
     f32 temp_f2;
     s32 temp_cr0_eq;
-    u32 temp_r3;
+    HSD_GObj* temp_r3;
     ftZeldaAttributes* attributes; // r31
     Fighter* fp;                   // r30
     s32 unused[5];
@@ -245,7 +249,7 @@ void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
     Point3d sp20;
     f32 temp_f1;
     f32 temp_f2;
-    u32 temp_r3;
+    HSD_GObj* temp_r3;
     ftZeldaAttributes* attributes; // r31
     Fighter* fp;                   // r30
     s32 unused[5];
@@ -289,9 +293,9 @@ void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
         }
     } else {
         temp_r3 = func_802C3AF0(fp->sa.zelda.x222C);
-        if (temp_r3 != (u32) fighter_gobj) {
-            fp->sa.zelda.x222C = 0;
-        }
+
+        if (temp_r3 != fighter_gobj)
+            fp->sa.zelda.x222C = NULL;
     }
 }
 

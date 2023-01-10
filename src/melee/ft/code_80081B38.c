@@ -1265,7 +1265,7 @@ lbl_80082B60:
 #pragma pop
 
 #pragma push
-asm unk_t func_80082B78()
+asm void func_80082B78(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80082B78 0007F758  7C 08 02 A6 */	mflr r0
@@ -4176,7 +4176,7 @@ unk_t func_80085030();
 unk_t func_800850E0();
 
 #pragma push
-asm unk_t func_80085088()
+asm void func_80085088(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80085088 00081C68  7C 08 02 A6 */	mflr r0
@@ -4291,7 +4291,7 @@ asm void func_80085154(HSD_GObj* fighter_gobj)
 #pragma pop
 
 #pragma push
-asm unk_t func_800851C0()
+asm void func_800851C0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 800851C0 00081DA0  80 63 00 2C */	lwz r3, 0x2c(r3)

@@ -1,108 +1,117 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
 
+#include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
+#include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
 
 // Setup float order //
-f32 return_float1(void) // -0x62B0 //
+static f32 return_float1(void) // -0x62B0 //
 {
     return 5.0f;
 }
 
-f32 return_float2(void) // -0x62AC //
+static f32 return_float2(void) // -0x62AC //
 {
     return 0.0f;
 }
 
-f32 return_float3(void) // -0x62A8 //
+static f32 return_float3(void) // -0x62A8 //
 {
     return 8.333333015441895f;
 }
 
-f32 return_float4(void) // -0x62A4 //
+static f32 return_float4(void) // -0x62A4 //
 {
     return 12.333333015441895f;
 }
 
-f32 return_float5(void) // -0x62A0 //
+static f32 return_float5(void) // -0x62A0 //
 {
     return M_PI / 2;
 }
 
-f64 return_float6(void) // -0x6294 //
+static f64 return_float6(void) // -0x6294 //
 {
     return 2 * M_PI;
 }
 
-f64 return_float7(void) // -0x628C //
+static f64 return_float7(void) // -0x628C //
 {
     return M_PI;
 }
 
-f64 return_float8(void) // -0x6284 //
+static f64 return_float8(void) // -0x6284 //
 {
     return M_PI / 2;
 }
 
-f32 return_float9(void) // -0x6280 //
+static f32 return_float9(void) // -0x6280 //
 {
     return 1.0f;
 }
 
-f64 return_float10(void) // -0x6278 //
+static f64 return_float10(void) // -0x6278 //
 {
     return 0.0;
 }
 
-f32 return_float12(void) // -0x6270 //
+static f32 return_float12(void) // -0x6270 //
 {
     return M_PI / 180;
 }
 
-f32 return_float13(void)
+static f32 return_float13(void)
 {
     return 90.0f;
 }
 
-f32 return_float14(void)
+static f32 return_float14(void)
 {
     return -1.0f;
 }
 
-f32 return_float15(void)
+static f32 return_float15(void)
 {
     return 0.5f;
 }
 
-f64 return_float16(void)
+static f64 return_float16(void)
 {
     return 0.5;
 }
 
-f64 return_float17(void)
+static f64 return_float17(void)
 {
     return 3.0;
 }
 
-f32 return_float18(void)
+static f32 return_float18(void)
 {
     return 1e-4F;
 }
 
-f32 return_float19(void)
+static f32 return_float19(void)
 {
     return -1e-4F;
 }
 
-f64 return_float20(void)
+static f64 return_float20(void)
 {
     return -M_PI / 2;
 }
 
-extern void efLib_DestroyAll(HSD_GObj*);
-
+#ifdef MUST_MATCH
+#pragma push
 #pragma dont_inline on
+#endif
 
 // 0x80117B70 //
 // https://decomp.me/scratch/242L6 //
@@ -130,11 +139,11 @@ void ftNess_SpecialHiStopGFX(HSD_GObj* fighter_gobj) // Removes GFX //
     }
 }
 
-#pragma dont_inline off
+#ifdef MUST_MATCH
+#pragma pop
+#endif
 
-extern void func_802AB3F0(HSD_GObj*, void*, s32);
-
-inline f32 fabs_inline_ness(f32 x)
+static inline f32 fabs_inline_ness(f32 x)
 {
     if (x < 0) {
         return -x;
@@ -264,8 +273,6 @@ void ftNess_ItemPKThunderRemove(HSD_GObj* fighter_gobj) // OnTakeDamage? //
         func_8007592C(temp_fp, 0, 0.0f);
     }
 }
-
-extern void func_802AB9C0(HSD_GObj*);
 
 // 0x80117E60 //
 // https://decomp.me/scratch/MTTJq //
@@ -520,12 +527,7 @@ void ftNess_SpecialAirHiStart_Action(
     func_8006EBA4(fighter_gobj);
 }
 
-extern void func_8007D60C(Fighter*);
-extern void func_80097D40(HSD_GObj*);
-
-// 0x80118384 //
-// https://decomp.me/scratch/nOcOo // The link itself agrees with how ramen
-// noodles this function is //
+/// @todo Rewrite this.
 void ftNess_SpecialHi_Action(
     HSD_GObj*
         fighter_gobj) // Ness's grounded PK Thunder 2 Action State handler //
@@ -607,7 +609,12 @@ void ftNess_SpecialHi_Action(
     return;
 
 block_stuff:
+#ifdef MUST_MATCH
     fighter_data3 = fighter_data3 = getFighter(fighter_gobj);
+#else
+    fighter_data3 = getFighter(fighter_gobj);
+#endif
+
     ASID = fighter_data3->x10_action_state_index;
     switch (ASID) {
     case AS_NESS_SPECIALHI_START:
@@ -696,8 +703,6 @@ void ftNess_SpecialAirHi_Action(
     fighter_data2->x1968_jumpsUsed = fighter_data2->x110_attr.x168_MaxJumps;
 }
 
-extern HSD_GObj* func_802AB58C(HSD_GObj*, Vec3*, f32);
-
 // 0x801186B0 //
 // https://decomp.me/scratch/B2vQL //
 void ftNess_SpecialHiStart_Anim(
@@ -745,8 +750,6 @@ void ftNess_SpecialHiStart_Anim(
         fp->sa.ness.x224C_thunderGFX = TRUE;
     }
 }
-
-extern HSD_GObj* func_802AB568(HSD_GObj*);
 
 // 0x801187A4 //
 // https://decomp.me/scratch/Xm3tt //
@@ -829,9 +832,8 @@ void ftNess_SpecialHiEnd_Anim(
         fighter_gobj) // Ness's grounded PK Thunder End Animation callback //
 {
     s32 filler[2];
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 // 0x8011893C //
@@ -1019,8 +1021,6 @@ void ftNess_SpecialAirHiHold_Anim(
         }
     }
 }
-
-extern void func_800969D8(HSD_GObj*, s32, s32, s32, f32, f32, f32);
 
 // 0x80118D60 //
 // https://decomp.me/scratch/JyNWd //
@@ -1329,8 +1329,6 @@ block_friction:
     func_8007CE94(fp, friction);
 }
 
-extern f32 sqrtf__Ff(f32 arg0);
-
 inline void ftNess_atan2(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter_data2 = getFighter(fighter_gobj);
@@ -1633,11 +1631,6 @@ void ftNess_SpecialAirHiEnd_Coll(
             NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
-
-extern BOOL func_80081298(HSD_GObj*);
-extern void func_80081370(HSD_GObj*);
-
-extern void func_8007D440(Fighter*, f32);
 
 void ftNess_SpecialAirHi_Coll(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Thunder 2 Collision callback //

@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/it/code_8027CF30.h>
 #include <melee/lb/lbunknown_001.h>
@@ -42,8 +43,6 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-extern void func_80094818(HSD_GObj*, s32);
-
 // 0x8014AC40
 // https://decomp.me/scratch/JEvaL // Swap item GObj pointers
 void ftGameWatch_ItemManholeRemove(HSD_GObj* fighter_gobj)
@@ -63,8 +62,6 @@ void ftGameWatch_ItemManholeRemove(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_802C6718(HSD_GObj*);
-
 // 0x8014ACB0
 // https://decomp.me/scratch/09CUB // Remove Manhole on damage
 void ftGameWatch_ItemManholeOnDamage(HSD_GObj* fighter_gobj)
@@ -78,9 +75,6 @@ void ftGameWatch_ItemManholeOnDamage(HSD_GObj* fighter_gobj)
         ftGameWatch_ItemManholeRemove(fighter_gobj);
     }
 }
-
-extern void func_802C6764(HSD_GObj*);
-extern void func_802C6784(HSD_GObj*);
 
 // 0x8014AD38
 // https://decomp.me/scratch/Kw1d3 // Apply hitlag to Manhole item
@@ -113,8 +107,6 @@ BOOL ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
-extern BOOL func_80094790(HSD_GObj*);
-
 // 0x8014ADB8
 // https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Action State
 // Handler
@@ -131,8 +123,6 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_800D638C(HSD_GObj*);
-
 // 0x8014AE3C
 // https://decomp.me/scratch/h03Ja // Mr. Game & Watch's Down Tilt Animation
 // callback
@@ -144,19 +134,6 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
         func_800D638C(fighter_gobj);
     }
 }
-
-extern BOOL func_8008A9F8(HSD_GObj*);
-extern BOOL func_8008B658(HSD_GObj*);
-extern BOOL func_8008B980(HSD_GObj*);
-extern BOOL func_8008BB44(HSD_GObj*);
-extern BOOL func_8008BFC4(HSD_GObj*);
-extern BOOL func_8008C830(HSD_GObj*);
-extern BOOL func_8008CB44(HSD_GObj*);
-extern BOOL func_800C9468(HSD_GObj*);
-extern BOOL func_800C97DC(HSD_GObj*);
-extern BOOL func_800CA094(HSD_GObj*);
-extern BOOL func_800CAED0(HSD_GObj*);
-extern BOOL func_800D5F58(HSD_GObj*);
 
 // 0x8014AE78
 // https://decomp.me/scratch/qzCi0 // Mr. Game & Watch's Down Tilt IASA callback

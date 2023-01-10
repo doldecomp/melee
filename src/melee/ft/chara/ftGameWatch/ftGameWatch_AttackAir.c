@@ -184,8 +184,6 @@ BOOL ftGameWatch_ItemCheckTurtleRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
-extern HSD_GObj* func_802C720C(HSD_GObj*, Vec3*, s32, f32);
-
 // 0x8014B3A8
 // https://decomp.me/scratch/Ax8pD // Create Sparky Item
 void ftGameWatch_ItemSparkySetup(HSD_GObj* fighter_gobj)
@@ -246,8 +244,6 @@ void ftGameWatch_ItemSparkySetFlag(HSD_GObj* fighter_gobj)
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-extern void func_802C7340(HSD_GObj*);
-
 // 0x8014B514
 // https://decomp.me/scratch/xkjj4 // Remove Sparky item
 void ftGameWatch_ItemSparkyRemove(HSD_GObj* fighter_gobj)
@@ -260,13 +256,6 @@ void ftGameWatch_ItemSparkyRemove(HSD_GObj* fighter_gobj)
         ftGameWatch_ItemSparkySetFlag(fighter_gobj);
     }
 }
-
-extern void func_802C6DB8(HSD_GObj*);
-extern void func_802C70C0(HSD_GObj*);
-extern void func_802C738C(HSD_GObj*);
-extern void func_802C6DD8(HSD_GObj*);
-extern void func_802C70E0(HSD_GObj*);
-extern void func_802C73AC(HSD_GObj*);
 
 // 0x8014B574
 // https://decomp.me/scratch/EsqL3 // Apply hitlag for available AttackAir items
@@ -317,10 +306,8 @@ BOOL ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj)
     return TRUE;
 }
 
-extern s32 func_8008CE68(Fighter*);
-extern void func_8008CFAC(HSD_GObj*, s32);
-extern void ftGameWatch_AttackAirB_Action(HSD_GObj*, s32);
-extern void ftGameWatch_AttackAirHi_Action(HSD_GObj*, s32);
+static void ftGameWatch_AttackAirB_Action(HSD_GObj*, s32);
+static void ftGameWatch_AttackAirHi_Action(HSD_GObj*, s32);
 
 // 0x8014B64C
 // https://decomp.me/scratch/Ads9W // Decide Mr. Game & Watch's Aerial Attack
@@ -359,8 +346,6 @@ void ftGameWatch_AttackAirN_Action(HSD_GObj* fighter_gobj, s32 ASID)
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemParachuteSetup;
 }
 
-extern void func_8008D010(HSD_GObj*);
-
 // 0x8014B720
 // https://decomp.me/scratch/AxMcb // Mr. Game & Watch's Neutral Aerial
 // Animation callback
@@ -369,8 +354,6 @@ void ftGameWatch_AttackAirN_Anim(HSD_GObj* fighter_gobj)
     func_8008D010(fighter_gobj);
 }
 
-extern void func_8008D08C(HSD_GObj*);
-
 // 0x8014B740
 // https://decomp.me/scratch/PnNzC // Mr. Game & Watch's Neutral Aerial IASA
 // callback
@@ -378,8 +361,6 @@ void ftGameWatch_AttackAirN_IASA(HSD_GObj* fighter_gobj)
 {
     func_8008D08C(fighter_gobj);
 }
-
-extern void func_80084DB0(HSD_GObj*);
 
 // 0x8014B760
 // https://decomp.me/scratch/EBIVr // Mr. Game & Watch's Neutral Aerial Physics
@@ -430,7 +411,7 @@ void ftGameWatch_LandingAirN_Action(HSD_GObj* fighter_gobj)
 // 0x8014B840
 // https://decomp.me/scratch/iunEP // Mr. Game & Watch's Back Aerial Action
 // State handler
-void ftGameWatch_AttackAirB_Action(HSD_GObj* fighter_gobj, s32 ASID)
+static void ftGameWatch_AttackAirB_Action(HSD_GObj* fighter_gobj, s32 ASID)
 {
     Fighter* fp = fighter_gobj->user_data;
 
@@ -500,7 +481,7 @@ void ftGameWatch_LandingAirB_Action(HSD_GObj* fighter_gobj)
 // 0x8014B99C
 // https://decomp.me/scratch/iunEP // Mr. Game & Watch's Up Aerial Action State
 // handler
-void ftGameWatch_AttackAirHi_Action(HSD_GObj* fighter_gobj, s32 ASID)
+static void ftGameWatch_AttackAirHi_Action(HSD_GObj* fighter_gobj, s32 ASID)
 {
     Fighter* fp = fighter_gobj->user_data;
 

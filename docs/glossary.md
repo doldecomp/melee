@@ -15,6 +15,9 @@ Short for "attack."
 @section glossary_cam cam
 Short for "camera."
 
+@section glossary_chan chan
+Short for "channel."
+
 @section glossary_coll coll
 Short for "collision(s)."
 
@@ -39,6 +42,9 @@ Stands for "environmental collision box."
 
 @section glossary_ft ft
 Short for "fighter."
+
+@section glossary_id id
+Short for "identifier." Not an acronym.
 
 @section glossary_idx idx
 Short for "index."

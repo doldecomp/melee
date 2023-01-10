@@ -2,6 +2,7 @@
 #define MELEE_IT_CODE_8027CF30_H
 
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/it/itkind.h>
 
 void func_80294E78(struct _HSD_GObj*, f32);
 struct _HSD_GObj* func_8029A748(struct _HSD_GObj*, Vec*, u8, f32);
@@ -11,7 +12,7 @@ s32 func_802B1DEC(u32);
 u32 func_802B1DF8(HSD_GObj*, Vec*, Vec*, s32, s32, s32);
 s32 func_802B1FC8(u32);
 void func_802B1FE8(u32, Vec*);
-void func_802B56E4(u32, Vec*, f32, f32, f32);
+void func_802B56E4(HSD_GObj*, Vec*, f32, f32, f32);
 void* func_802C8B28(struct _HSD_GObj*, Vec*, u32, f32);
 void func_802D8618(s32, Vec*, s32, s32);
 u32 func_802F0340(struct _HSD_GObj*, Vec*, Vec*, u32, u32, f32);
@@ -76,5 +77,53 @@ void func_802BFEC4(void*);
 HSD_GObj* func_802BE9D8(f32, HSD_GObj*, Vec3*, s32);
 void func_802BE598(HSD_GObj*);
 void func_802BE5B8(HSD_GObj*);
+HSD_GObj* func_802AD478(HSD_GObj*, Vec3*, s32, f32);
+void func_802AD6B8(HSD_GObj*);
+void func_802AB3F0(HSD_GObj*, void*, s32);
+
+/// Spawn an item
+HSD_GObj* func_802AB58C(HSD_GObj* owner, Vec3* pos, f32 facing_dir);
+
+void func_802AB9C0(HSD_GObj*);
+HSD_GObj* func_802AB568(HSD_GObj*);
+void func_802AAA50(HSD_GObj*);
+HSD_GObj* func_802AA8C0(HSD_GObj*, Vec3*, s32, f32);
+HSD_GObj* func_802AA7E4(HSD_GObj*);
+s32 func_802AA7F0(HSD_GObj*);
+void func_802AA054(HSD_GObj*, Vec3*, Vec3*, f32, f32);
+void func_802B338C(HSD_GObj*, Vec3*, f32 facing_dir, u32);
+void func_802B5974(HSD_GObj*);
+HSD_GObj* func_802B55C8(HSD_GObj* owner, Vec3*, s32, s32, f32 facing_dir);
+void func_802B62D0(HSD_GObj*, Vec3* pos, BOOL, f32 facing_dir);
+
+/// Destroys an item?
+void func_802C3D44(HSD_GObj*);
+HSD_GObj* func_802C3BAC(HSD_GObj*, Vec3*, f32 facing_dir, f32);
+
+/// Clones an entity?
+HSD_GObj* func_802C3AF0(HSD_GObj*);
+void func_802AE608(HSD_GObj*);
+void func_8029C6CC(f32 radians, f32 vel, HSD_GObj* owner, Vec3*, ITKIND);
+HSD_GObj* func_8029CEB4(HSD_GObj*, Vec3*, s32, f32 facing_dir);
+HSD_GObj* func_802C720C(HSD_GObj*, Vec3*, s32, f32);
+void func_802C7340(HSD_GObj*);
+void func_802C6DB8(HSD_GObj*);
+void func_802C70C0(HSD_GObj*);
+void func_802C738C(HSD_GObj*);
+void func_802C6DD8(HSD_GObj*);
+void func_802C70E0(HSD_GObj*);
+void func_802C73AC(HSD_GObj*);
+void func_802C6718(HSD_GObj*);
+void func_802C6764(HSD_GObj*);
+void func_802C6784(HSD_GObj*);
+void func_802C8158(HSD_GObj*);
+void func_802C81C8(HSD_GObj*);
+void func_802C81E8(HSD_GObj*);
+HSD_GObj* func_802C4A40(HSD_GObj*, Vec3*, f32);
+void func_802C573C(HSD_GObj*);
+HSD_GObj* func_802C5000(HSD_GObj*, Vec3*, s32, s32, f32);
+void func_802C519C(HSD_GObj*, Vec3*, s32, s32, f32, f32);
+void func_802B4AC8(HSD_GObj* fighter_gobj, Vec3*, f32 facing_dir, f32 x);
+void func_802C53F0(HSD_GObj*, Vec3*, f32, f32, f32);
 
 #endif

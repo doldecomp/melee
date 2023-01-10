@@ -3,6 +3,7 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/code_8027CF30.h>
 #include <melee/lb/lbunknown_001.h>
+#include <melee/ft/ftcommon.h>
 
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
@@ -129,8 +130,6 @@ inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* fighter_gobj)
     }
 }
 
-extern void func_8007D468(Fighter* fp);
-
 // 0x80146410
 // https://decomp.me/scratch/ktqvT // Mewtwo's ground -> air Disable Action
 // State handler
@@ -173,9 +172,6 @@ void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialLw_SetCall(fighter_gobj);
 }
 
-extern void func_8008403C(HSD_GObj*, void (*cb_Coll)(HSD_GObj*));
-extern void func_80082C74(HSD_GObj*, void (*cb_Coll)(HSD_GObj*));
-
 // 0x80146544 - Mewtwo's grounded Disable Collision callback
 void ftMewtwo_SpecialLw_Coll(HSD_GObj* fighter_gobj)
 {
@@ -187,8 +183,6 @@ void ftMewtwo_SpecialAirLw_Coll(HSD_GObj* fighter_gobj)
 {
     func_80082C74(fighter_gobj, ftMewtwo_SpecialAirLw_AirToGround);
 }
-
-extern HSD_GObj* func_802C4A40(HSD_GObj*, Vec3*, f32);
 
 // 0x80146594
 // https://decomp.me/scratch/rAoIe // Create Disable projectile

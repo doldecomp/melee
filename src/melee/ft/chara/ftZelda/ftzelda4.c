@@ -1,9 +1,14 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
 #include <melee/ef/eflib.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/lb/lbunknown_001.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/fighter.h>
 #include <melee/lb/lbunknown_003.h>
+#include <melee/ft/chara/ftSeak/ftseak.h>
 
 // 8013ADB4 - 8013AE30 (0x7C bytes)
 // https://decomp.me/scratch/LbMVE
@@ -42,7 +47,6 @@ void ftZelda_8013AE30(HSD_GObj* fighter_gobj)
 // Zelda_TransformToSubcharacter
 // 8013AEAC - 8013AEE0 (0x34 bytes)
 // https://decomp.me/scratch/iINH1
-void func_80114758(HSD_GObj*); /* extern */
 void ftZelda_8013AEAC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
@@ -376,12 +380,11 @@ void ftZelda_8013B5C4(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/8QoCa
 void ftZelda_8013B5EC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
+    Fighter* fp = fighter_gobj->user_data;
 
-    fp = fighter_gobj->user_data;
-    if (fp->sa.zelda.x222C != 0) {
+    if (fp->sa.zelda.x222C != NULL) {
         func_802C3D44(fp->sa.zelda.x222C);
-        fp->sa.zelda.x222C = 0;
+        fp->sa.zelda.x222C = NULL;
     }
 
     fp->cb.x21E4_callback_OnDeath2 = 0;

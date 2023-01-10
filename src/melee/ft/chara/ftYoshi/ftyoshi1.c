@@ -1,12 +1,13 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
 
 #include <melee/ef/efasync.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftparts.h>
 #include <melee/ft/fighter.h>
 #include <melee/it/itkind.h>
+#include <melee/ft/ft_unknown_006.h>
 
-void func_80092BCC(HSD_GObj* fighter_gobj);
-
-extern f32 lbl_804D9A28;
+/* static */ extern f32 const lbl_804D9A28;
 
 void lbl_8012C030(HSD_GObj* fighter_gobj)
 {
@@ -20,7 +21,7 @@ void lbl_8012C030(HSD_GObj* fighter_gobj)
     fp = getFighter(fighter_gobj);
     fp->x2340_f32 += lbl_804D9A28;
     func_80092BCC(fighter_gobj);
-    if (func_800925A4(fighter_gobj) != 0) {
+    if (func_800925A4(fighter_gobj)) {
         fp = getFighter(fighter_gobj);
         func_80074B0C(fighter_gobj, 0, 0);
         func_8007B0C0(fighter_gobj, 0);
@@ -38,7 +39,7 @@ void lbl_8012C030(HSD_GObj* fighter_gobj)
     }
 }
 
-void lbl_8012C114(s32 fighter_gobj)
+void lbl_8012C114(HSD_GObj* fighter_gobj)
 {
     if (!func_80093694() && !func_8009515C(fighter_gobj) &&
         !func_80099794(fighter_gobj) && !func_8009917C(fighter_gobj) &&

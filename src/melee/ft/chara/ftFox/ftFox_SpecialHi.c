@@ -585,8 +585,6 @@ void ftFox_SpecialHiLanding_Phys(HSD_GObj* fighter_gobj)
     func_8007CB74(fighter_gobj);
 }
 
-extern void func_80084DB0(HSD_GObj*);
-
 // 0x800E7F20 - Fox & Falco's aerial Firefox/Firebird End Physics callback
 void ftFox_SpecialHiFall_Phys(HSD_GObj* fighter_gobj)
 {
@@ -705,8 +703,6 @@ void ftFox_SpecialHiBound_IASA(HSD_GObj* fighter_gobj)
 {
     return;
 }
-
-extern void func_800851C0(HSD_GObj*);
 
 // 0x800E8200
 // https://decomp.me/scratch/nIsRU // Fox & Falco's Firefox/Firebird Rebound

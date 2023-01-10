@@ -1,10 +1,11 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
 
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
 #include <MSL/trigf.h>
 
-extern void func_802AA054(HSD_GObj*, Vec3*, Vec3*, f32, f32);
-
-// 0x80116B70 //
 // https://decomp.me/scratch/apf7Y //
 void ftNess_ItemPKFireSpawn(
     HSD_GObj*

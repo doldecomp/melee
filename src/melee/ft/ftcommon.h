@@ -127,7 +127,6 @@ void func_8007CE4C(Fighter*, f32);
 void func_8007CE94(Fighter*, f32);
 BOOL func_8007CF58(Fighter*);
 void func_8007D344(Fighter*, f32, f32, f32);
-void func_8007D494(Fighter*, f32, f32);
 void func_8007D4B8(Fighter*);
 void func_8007D5D4(Fighter*);
 void func_8007D6A4(Fighter*);

@@ -7,8 +7,6 @@
 #include <melee/ft/ftlib.h>
 #include <melee/it/itkind.h>
 
-extern void efLib_DestroyAll(HSD_GObj*);
-
 // 0x800E3278
 // https://decomp.me/scratch/yi9xr // Remove all GFX and set GFX flags to FALSE
 void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
@@ -73,8 +71,6 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.x = 0.0f;
     fp->xEC_ground_vel = 0.0f;
 }
-
-extern void func_8007D60C(Fighter*);
 
 // 0x800E350C
 // https://decomp.me/scratch/EYc4a // Captain Falcon & Ganondorf's aerial Raptor
@@ -413,8 +409,6 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
     }
     fp->x80_self_vel.y = fp->captainVars[0].SpecialS.gravity;
 }
-
-extern void func_8007D468(Fighter*);
 
 // 0x800E3C38
 // https://decomp.me/scratch/wfD9m // Captain Falcon & Ganondorf's grounded
