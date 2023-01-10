@@ -134,7 +134,6 @@ typedef struct _HSD_PObjInfo {
     void (*disp)(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
     void (*setup_mtx)(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
     s32 (*load)(HSD_PObj* pobj, HSD_PObjDesc* desc);
-    void (*update)(void* obj, u32 type, FObjData* val);
 } HSD_PObjInfo;
 
 extern HSD_PObjInfo hsdPObj;

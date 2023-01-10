@@ -1,5 +1,4 @@
 #include <melee/ft/fighter.h>
-
 #include <dolphin/os/os.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <melee/ft/code_8007C630.h>
@@ -1311,8 +1310,8 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
                         fp->x5E8_fighterBones[bone_index].x0_jobj,
                         &translation);
                     HSD_JObjGetRotation(temp_joint, &quat);
-                    func_8007584C(fp->x5E8_fighterBones[bone_index].x0_jobj,
-                                  &quat);
+                    Fighter_JObjSetRotation(
+                        fp->x5E8_fighterBones[bone_index].x0_jobj, &quat);
                 }
 
                 if (fp->x594_animCurrFlags1.bits.b0 != 0U) {
@@ -2212,6 +2211,8 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
                 func_8007CCA0(fp,
                               /*effective friction - ground multiplier is
                                  usually 1. last factor was 1 when I looked*/
+                              /*effective friction - ground multiplier is
+                                 usually 1. last factor was 1 when I looked*/
                               Stage_GetGroundFrictionMultiplier(fp) *
                                   pAttr->x128_GroundFriction *
                                   p_ftCommonData->x200);
@@ -2269,7 +2270,8 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
                     Stage_GetGroundFrictionMultiplier(fp) *
                         pAttr->x128_GroundFriction *
                         p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
-
+                /* effectiveFriction - the last constant variable differs from
+                 * the one for the knockback friction above*/
                 pAtkShieldKB->x =
                     pNormal->y * fp->xF4_ground_attacker_shield_kb_vel;
                 pAtkShieldKB->y =
@@ -2427,7 +2429,7 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
 inline HSD_JObj* Fighter_UnkApplyTransformation_8006C0F0_Inner1(HSD_JObj* jobj,
                                                                 Mtx* mtx)
 {
-    func_80379310(&jobj->mtx, mtx);
+    HSD_MtxInverse(&jobj->mtx, mtx);
     return jobj;
 }
 

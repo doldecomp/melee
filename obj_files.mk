@@ -72,7 +72,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/fighter.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftanim.s.o\
     $(BUILD_DIR)/asm/melee/ft/ftaction.s.o\
-    $(BUILD_DIR)/asm/melee/ft/ftparts.s.o\
+    $(BUILD_DIR)/src/melee/ft/ftparts.c.o\
     $(BUILD_DIR)/src/melee/ft/ftcamera.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftcoll.s.o\
     $(BUILD_DIR)/src/melee/ft/code_8007C114.c.o\

@@ -17,7 +17,7 @@ void func_80074E58(struct _Fighter*);
 /// @returns A bone index.
 s32 func_8007500C(struct _Fighter*, s32);
 
-void func_8007584C(struct _HSD_JObj*, Quaternion*);
+void Fighter_JObjSetRotation(struct _HSD_JObj*, Quaternion*);
 void func_8007592C(struct _Fighter*, s32, f32);
 void func_80075AF0(struct _Fighter*, s32, f32);
 void func_80075CB4(struct _Fighter*, s32, f32);
