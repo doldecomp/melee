@@ -397,7 +397,6 @@ void ftNess_SpecialAirNEnd_Anim(
 void ftNess_SpecialNStart_IASA(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Start IASA callback
 {
-    return;
 }
 
 // 0x8011764C
@@ -437,7 +436,6 @@ void ftNess_SpecialNHold_IASA(
 void ftNess_SpecialNEnd_IASA(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Release IASA callback
 {
-    return;
 }
 
 // 0x801176CC
@@ -445,7 +443,6 @@ void ftNess_SpecialNEnd_IASA(
 void ftNess_SpecialAirNStart_IASA(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Start IASA callback
 {
-    return;
 }
 
 // 0x801176D0
@@ -486,7 +483,6 @@ void ftNess_SpecialAirNHold_IASA(
 void ftNess_SpecialAirNEnd_IASA(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Release IASA callback
 {
-    return;
 }
 
 inline void GravityDelay(HSD_GObj* fighter_gobj) // Inline to set remaining
