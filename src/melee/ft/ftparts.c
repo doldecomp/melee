@@ -75,10 +75,6 @@ static char lbl_804D3A50[] = "ft_pobj";
 static char lbl_804D3A58[] = "0";
 static char lbl_804D3A5C[] = "rotate";
 
-// .sdata2
-static const f32 lbl_804D82C8 = 1.0F;
-static const f32 lbl_804D82CC = 0.0F;
-
 inline f32 _HSD_JObjGetScaleX(HSD_JObj* jobj)
 {
     ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 875, lbl_804D3A38));
@@ -121,7 +117,7 @@ asm void Fighter_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
 /* 80073600 000701E0  7D 88 03 A6 */	mtlr r12
 /* 80073604 000701E4  83 C7 00 2C */	lwz r30, 0x2c(r7)
 /* 80073608 000701E8  4E 80 00 21 */	blrl
-/* 8007360C 000701EC  C0 22 88 E8 */	lfs f1, lbl_804D82C8(r2)
+/* 8007360C 000701EC  C0 22 88 E8 */	lfs f1, 1.0F
 /* 80073610 000701F0  C0 1E 00 3C */	lfs f0, 0x3c(r30)
 /* 80073614 000701F4  FC 01 00 00 */	fcmpu cr0, f1, f0
 /* 80073618 000701F8  41 82 00 B0 */	beq lbl_800736C8
@@ -148,7 +144,7 @@ lbl_80073650:
 /* 80073664 00070244  38 AD 83 98 */	addi r5, r13, lbl_804D3A38
 /* 80073668 00070248  48 31 4B B9 */	bl __assert
 lbl_8007366C:
-/* 8007366C 0007024C  C0 02 88 E8 */	lfs f0, lbl_804D82C8(r2)
+/* 8007366C 0007024C  C0 02 88 E8 */	lfs f0, 1.0F
 /* 80073670 00070250  38 61 00 2C */	addi r3, r1, 0x2c
 /* 80073674 00070254  C0 3C 00 2C */	lfs f1, 0x2c(r28)
 /* 80073678 00070258  EC 40 F0 24 */	fdivs f2, f0, f30
@@ -624,9 +620,9 @@ lbl_80073D34:
 /* 80073D40 00070920  3C 80 80 46 */	lis r4, ft_jobj_scale@ha
 /* 80073D44 00070924  82 D2 00 14 */	lwz r22, 0x14(r18)
 /* 80073D48 00070928  3B C4 92 40 */	addi r30, r4, ft_jobj_scale@l
-/* 80073D4C 0007092C  C3 E2 88 EC */	lfs f31, lbl_804D82CC(r2)
+/* 80073D4C 0007092C  C3 E2 88 EC */	lfs f31, 0.0F
 /* 80073D50 00070930  3C 80 80 40 */	lis r4, HSD_PerfCurrentStat@ha
-/* 80073D54 00070934  C3 C2 88 E8 */	lfs f30, lbl_804D82C8(r2)
+/* 80073D54 00070934  C3 C2 88 E8 */	lfs f30, 1.0F
 /* 80073D58 00070938  38 84 72 18 */	addi r4, r4, HSD_PerfCurrentStat@l
 /* 80073D5C 0007093C  3A 83 00 00 */	addi r20, r3, 0
 /* 80073D60 00070940  56 3C 07 FE */	clrlwi r28, r17, 0x1f
