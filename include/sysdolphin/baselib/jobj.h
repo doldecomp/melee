@@ -296,7 +296,7 @@ inline f32 HSD_JObjGetScaleY(HSD_JObj* jobj)
 inline f32 HSD_JObjGetScaleZ(HSD_JObj* jobj)
 {
     assert_line(901, jobj);
-    return jobj->scale.x;
+    return jobj->scale.z;
 }
 
 inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* translate)

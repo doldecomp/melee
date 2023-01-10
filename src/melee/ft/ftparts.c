@@ -90,7 +90,7 @@ inline f32 _HSD_JObjGetScaleY(HSD_JObj* jobj)
 inline f32 _HSD_JObjGetScaleZ(HSD_JObj* jobj)
 {
     ((jobj) ? ((void) 0) : __assert(lbl_804D3A30, 901, lbl_804D3A38));
-    return jobj->scale.x;
+    return jobj->scale.z;
 }
 
 #pragma push
