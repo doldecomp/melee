@@ -182,5 +182,7 @@ void func_8015D888(u32);
 
 void func_8015D8FC(u32);
 s32 func_8015D94C(u32);
+void func_8015FCC0(void);
+void func_8015FBA4(void);
 
 #endif

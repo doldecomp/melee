@@ -8,5 +8,6 @@ void VIConfigure(s32);
 void VIFlush(void);
 void VISetNextFrameBuffer(s32);
 void VIWaitForRetrace(void);
+void VIInit(void);
 
 #endif

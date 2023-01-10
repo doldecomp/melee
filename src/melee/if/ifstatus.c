@@ -1860,7 +1860,6 @@ extern f32 lbl_804DDA9C;
 extern f64 lbl_804DDAA0;
 extern unk_t func_80160968();
 extern unk_t func_80160854();
-extern unk_t func_8016B168();
 extern unk_t func_80168B34();
 extern unk_t func_802F3690();
 extern unk_t func_802F98E8();

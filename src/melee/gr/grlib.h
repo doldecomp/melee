@@ -27,5 +27,6 @@ s16 func_801C9E40(void);
 void func_801C9E50(s16);
 BOOL func_801C9E60(Vec*);
 BOOL func_801C9EE8();
+Vec* func_801C9A10(void);
 
 #endif

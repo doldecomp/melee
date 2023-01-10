@@ -1,29 +1,50 @@
 #include <melee/ft/fighter.h>
+
+#include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <melee/ft/code_8007C630.h>
-#include <melee/ft/code_8007C114.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_005.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
+#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
+#include <melee/ft/chara/ftKirby/ftkirby.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_2.h>
+#include <melee/ft/code_8007C114.h>
+#include <melee/ft/code_8007C630.h>
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_005.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftaction.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/ftdrawcommon.h>
+#include <melee/ft/ftlib.h>
 #include <melee/ft/ftparts.h>
+#include <melee/gm/code_801601C4.h>
+#include <melee/if/ifmagnify.h>
+#include <melee/it/code_80266F3C.h>
 #include <melee/it/item.h>
 #include <melee/it/item2.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/lb/lbshadow.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_002.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/pl_unknown_001.h>
+#include <melee/text_2.h>
+#include <melee/text_4.h>
 #include <MSL/trigf.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/mtx.h>
 
-#define HALF_PI 1.5707963267948966
+/// @todo Move elsewhere.
+#define HALF_PI (1.5707963267948966)
 
 // external vars from asm/melee/ft/ft_unknown_005.s
 typedef void (*ft_callback)(HSD_GObj* gobj);
@@ -139,11 +160,7 @@ void Fighter_800679B0(void)
 void Fighter_FirstInitialize_80067A84(void)
 {
     Fighter_800679B0();
-    // TODO: size parameter too large to be only the size. maybe this contains
-    // flags. In other function calls, size only looks plausible. Or is this
-    // virtual memory?
-    HSD_ObjAllocInit(&lbl_804590AC, /*size*/ 0x0000800000008000,
-                     /*align*/ 0x20);
+    HSD_ObjAllocInit(&lbl_804590AC, 0x8000, 0x20);
 }
 
 void Fighter_LoadCommonData(void)
@@ -795,7 +812,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj,
 
 // increments the spawn number, returns the spawn number value before
 // incrementing
-u32 Fighter_NewSpawn_80068E40()
+u32 Fighter_NewSpawn_80068E40(void)
 {
     u32 spawnNum = g_spawnNumCounter++;
     if (g_spawnNumCounter == 0)
@@ -1824,7 +1841,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
             if (func_800A2040(fp)) {
                 SET_STICKS(fp->input.x620_lstick_x, fp->input.x624_lstick_y,
                            func_800A17E4(fp), func_800A1874(fp));
-                if (g_debugLevel < 3 && func_8016B41C() == 0) {
+                if (g_debugLevel < 3 && !func_8016B41C()) {
                     SET_STICKS(fp->input.x638_lsubStick_x,
                                fp->input.x63C_lsubStick_y, func_800A1994(fp),
                                func_800A1A24(fp));
@@ -2270,6 +2287,7 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
                     Stage_GetGroundFrictionMultiplier(fp) *
                         pAttr->x128_GroundFriction *
                         p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
+
                 /* effectiveFriction - the last constant variable differs from
                  * the one for the knockback friction above*/
                 pAtkShieldKB->x =
@@ -2334,11 +2352,12 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
             } else
                 bit = 0;
 
+            /// @todo @c incompatible-pointer-types because bad headers
             if (bit || func_80070FD0(fp) || fp->x594_animCurrFlags1.bits.b7) {
                 // fp->xB0_position += fp->xD4_unk_vel
                 PSVECAdd(&fp->xB0_pos, &fp->xD4_unk_vel, &fp->xB0_pos);
-                // TODO: we set this velocity to 0 after applying it -> Is this
-                // SDI or ASDI?
+                /// @todo We set this velocity to 0 after applying it.
+                ///       Is this SDI or ASDI?
                 VEC_CLEAR(fp->xD4_unk_vel);
             }
             // fp->xB0_position += *pAtkShieldKB
@@ -2427,9 +2446,9 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
 }
 
 inline HSD_JObj* Fighter_UnkApplyTransformation_8006C0F0_Inner1(HSD_JObj* jobj,
-                                                                Mtx* mtx)
+                                                                Mtx mtx)
 {
-    HSD_MtxInverse(&jobj->mtx, mtx);
+    HSD_MtxInverse(jobj->mtx, mtx);
     return jobj;
 }
 
@@ -2448,15 +2467,14 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj)
         HSD_JObjSetupMatrix(jobj);
         HSD_JObjGetMtx(jobj);
         HSD_JObjGetScale(
-            Fighter_UnkApplyTransformation_8006C0F0_Inner1(jobj, &mtx1),
-            &scale);
+            Fighter_UnkApplyTransformation_8006C0F0_Inner1(jobj, mtx1), &scale);
 
         scale.x = Fighter_GetModelScale(fp);
 
         HSD_JObjGetRotation(jobj, &rotation);
         HSD_JObjGetTranslation(jobj, &translation);
 
-        HSD_MtxSRT(&mtx2, &scale, &rotation, &translation, 0);
+        HSD_MtxSRT(mtx2, &scale, (Vec3*) &rotation, &translation, 0);
         PSMTXConcat(mtx2, mtx1, fp->x44_mtx);
     }
 }
@@ -2676,8 +2694,8 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
                    func_8008E984(fp)));
     vec = vec3_803B7494;
 
-    if ((fp->x10_action_state_index) != 0x145 &&
-        ((fp->x10_action_state_index - 0x122) > 1U) &&
+    if (fp->x10_action_state_index != 0x145 &&
+        (unsigned) fp->x10_action_state_index - 0x122 > 1 &&
         fp->dmg.x1860_dealt != 0xAU && !fp->x2226_flag.bits.b2)
     {
         if ( ///// giant if condition

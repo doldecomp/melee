@@ -31,6 +31,10 @@ typedef struct {
     f32 x, y, z, w;
 } Quaternion, *QuaternionPtr, Qtrn, *QtrnPtr;
 
+typedef struct _S32Pair {
+    s32 x, y;
+} S32Pair;
+
 typedef f32 Mtx[3][4];
 typedef f32 (*MtxPtr)[4];
 

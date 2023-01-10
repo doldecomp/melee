@@ -2,10 +2,10 @@
 #define MELEE_MP_MPLIB_H
 
 #include <dolphin/mtx/mtxtypes.h>
+#include <melee/ft/fighter.h>
 
 unk_t func_80054F68(void);
-unk_t func_80054ED8(void);
-unk_t func_80054ED8(void);
+BOOL func_80054ED8(s32);
 unk_t func_80056B34(void);
 unk_t func_80056AC4(void);
 unk_t func_80056A54(void);
@@ -29,9 +29,17 @@ void func_80053FF4(s32, Vec*);
 void func_80054158(s32, Vec*);
 
 /// @todo Params not confirmed.
-s32 func_800567C0(s32 wall_id, Vec* ecb_side_vtx, Vec* result);
+BOOL func_800567C0(s32 wall_id, Vec* ecb_side_vtx, Vec* result);
 
 BOOL func_80056C54(s32 idx, Vec3* pos, BOOL, Vec3*, BOOL, BOOL, f32, f32, f32,
                    f32);
+
+void func_8005811C(CollData*, s32 ledge_id);
+
+/// @returns A ground index.
+s32 func_8004DB78(s32 gr_idx);
+
+/// @returns A ground index.
+s32 func_8004DC04(s32 gr_idx);
 
 #endif

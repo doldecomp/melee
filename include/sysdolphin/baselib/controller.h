@@ -112,5 +112,6 @@ typedef struct _PadLibData {
 
 u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);
+void HSD_PadInit(s32, u8*, s32, HSD_PadRumbleListData*);
 
 #endif

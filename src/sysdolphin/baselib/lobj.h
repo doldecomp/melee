@@ -170,5 +170,6 @@ void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
 s32 HSD_LightID2Index(GXLightID);
 void HSD_LObjDeleteCurrent(HSD_LObj* lobj);
 s32 HSD_Index2LightID(u32);
+void HSD_LObjRemoveAll(HSD_LObj* lobj);
 
 #endif

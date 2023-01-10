@@ -269,5 +269,10 @@ BOOL func_8007B868(HSD_GObj*);
 void func_8008D010(HSD_GObj*);
 void func_8008D08C(HSD_GObj*);
 void func_800D9C98(HSD_GObj* fighter_gobj);
+void func_80088770(Fighter*);
+BOOL func_800C5240(HSD_GObj*);
+void func_800C5500(HSD_GObj*);
+void func_800C0358(Fighter*, Fighter*, s32);
+void func_800C88D4(HSD_GObj*, s32, BOOL);
 
 #endif

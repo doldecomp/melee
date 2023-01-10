@@ -13,5 +13,6 @@ void __CARDExtHandler(EXIChannel chan, OSContext* context);
 s32 __CARDReadSegment(s32 chan, CARDCallback callback);
 s32 __CARDWritePage(s32 chan, CARDCallback callback);
 s32 __CARDSync(s32 i);
+void CARDInit(void);
 
 #endif

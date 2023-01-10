@@ -1650,8 +1650,6 @@ void func_80269978(HSD_GObj* item_gobj) // Item Think - Collision //
     func_8026C368(item_gobj);
 }
 
-extern void func_80067624(HSD_GObj*, void*);
-
 // 0x80269A9C //
 // https://decomp.me/scratch/uI7DN //
 void lbl_80269A9C(HSD_GObj* item_gobj) // Item Think - Accessory + Camera Box //

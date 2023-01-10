@@ -23,7 +23,7 @@ void func_80070CC4(struct _HSD_GObj*, s32);
 void func_80070E74(struct _HSD_GObj*);
 void func_80070F28(struct _HSD_GObj*);
 void func_80070FB4(struct _HSD_GObj*, s32, s32);
-s32 func_80070FD0(struct _Fighter*);
+BOOL func_80070FD0(struct _Fighter*);
 void Fighter_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);
 
 #endif

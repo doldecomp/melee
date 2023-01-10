@@ -130,7 +130,7 @@ inline void removeAll(HSD_ObjAllocData* data)
     }
 }
 
-void HSD_ObjAllocInit(HSD_ObjAllocData* data, u32 size, u32 align)
+void HSD_ObjAllocInit(HSD_ObjAllocData* data, size_t size, u32 align)
 {
     assert_line(0x185, data);
     if (data != NULL) {

@@ -14,5 +14,6 @@ typedef void (*__OSExceptionHandler)(__OSException exception,
 __OSExceptionHandler __OSGetExceptionHandler(__OSException);
 void __OSSetExceptionHandler(s32, __OSExceptionHandler);
 u32 OSGetConsoleType(void);
+void OSInit(void);
 
 #endif

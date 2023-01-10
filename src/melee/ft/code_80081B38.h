@@ -44,5 +44,9 @@ BOOL func_80082A68(HSD_GObj* fighter_gobj);
 void func_800851C0(HSD_GObj*);
 void func_80082B78(HSD_GObj*);
 void func_80085088(HSD_GObj*);
+BOOL func_800821DC(void);
+BOOL func_80084A18(HSD_GObj*);
+void func_800849EC(Fighter*, Fighter*);
+void func_80081C88(HSD_GObj* dst_gobj, f32 scl_y);
 
 #endif

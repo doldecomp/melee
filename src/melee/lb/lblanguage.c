@@ -1,7 +1,7 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/gm/gmmain_lib.h>
 
-u8 lbLang_GetLanguageSetting(void)
+int lbLang_GetLanguageSetting(void)
 {
     return lbl_804D3EE0->language;
 }
@@ -11,6 +11,8 @@ int lbLang_SetLanguageSetting(int language)
     if (language >= 0 && language < 2) {
         lbl_804D3EE0->language = language;
     }
+
+    return language;
 }
 
 int lbLang_IsSettingJP(void)
@@ -23,7 +25,7 @@ int lbLang_IsSettingUS(void)
     return (lbl_804D3EE0->language) == 1 ? 1 : 0;
 }
 
-u8 lbLang_GetSavedLanguage()
+int lbLang_GetSavedLanguage(void)
 {
     return func_8015CC58()->saved_language;
 }

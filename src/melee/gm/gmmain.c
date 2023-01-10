@@ -1,8 +1,34 @@
-#include <dolphin/os/os.h>
-#include <sysdolphin/baselib/controller.h> // hehe
-#include <sysdolphin/baselib/initialize.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/dvd/dvd.h>
 #include <dolphin/gx/GXInit.h>
+#include <dolphin/gx/GXMisc.h>
+#include <dolphin/os/os.h>
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSMemory.h>
+#include <dolphin/pad/Pad.h>
+#include <dolphin/vi/vi.h>
+#include <melee/db/db_unknown_001.h>
+#include <melee/gm/code_801601C4.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lbarq.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbheap.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbmemory.h>
+#include <melee/lb/lbmthp.h>
+#include <melee/lb/lbsnap.h>
+#include <melee/lb/lbtime.h>
+#include <melee/lb/lbunknown_005.h>
+#include <melee/text_2.h>
+#include <placeholder.h>
+#include <sysdolphin/baselib/baselib_unknown_002.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/initialize.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/video.h>
 
 extern s32 g_debugLevel; // debug level
 extern BOOL lbl_804D6B20;
@@ -12,9 +38,6 @@ extern GXRenderModeObj GXNtsc480IntDf;
 extern PadLibData HSD_PadLibData;
 extern char lbl_803EA6C8[]; // build timestamp string
 extern s32* seed_ptr;
-extern void lbl_8015FD24();
-extern void lbl_803762C4();
-extern void func_801692E8(int, struct datetime* datetime);
 
 enum {
     DbLKind_Master = 0,
@@ -22,11 +45,6 @@ enum {
     DbLKind_DebugDevelop = 2,
     DbLKind_DebugRom = 3,
     DbLKind_Develop = 4,
-};
-
-struct datetime {
-    u16 year;
-    u8 month, day, hour, minute, second;
 };
 
 static u32 arena_size;
@@ -100,7 +118,9 @@ static void func_8015FDA4(void)
     }
 }
 
-inline void init_spr_unk()
+#ifdef MWERKS_GEKKO
+
+static inline void init_spr_unk(void)
 {
 #define MTSPR(spr, val)                                                        \
     asm { li r3, val }                                                         \
@@ -115,11 +135,23 @@ inline void init_spr_unk()
     MTSPR(0x394, 6);
     MTSPR(0x395, 7);
 }
+#else
 
-void main(void)
+/// @remarks Might not do anything relevant to a port, but should still
+///          understand its purpose before ignoring it.
+static inline void init_spr_unk(void)
 {
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+int main(void)
+{
+#ifdef MUST_MATCH
     char* unused_format_string = "Data %lx\n";
     u32 unused[2];
+#endif
 
     OSInit();
     VIInit();
@@ -159,6 +191,7 @@ void main(void)
     func_8001F87C();
     func_803A6048(0xC000);
     func_8015FBA4();
+
     if (g_debugLevel != DbLKind_Master && lbl_804D6B30 & 0x20 &&
         func_803931A4(-1))
     {
@@ -168,6 +201,7 @@ void main(void)
             func_80392E80();
         }
     }
+
     func_8022886C();
     OSReport("# ---------------------------------------------\n");
     OSReport("#    Super Smash Bros. Melee\n");

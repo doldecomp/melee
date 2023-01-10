@@ -62,5 +62,6 @@ void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, HSD_GObjEvent on_reflect);
 void ftColl_CreateAbsorbHit(HSD_GObj*, AbsorbDesc*);
 void func_8007AF10(HSD_GObj*);
 void func_8007B5AC(void* arg0, void* arg1, void* arg2);
+void func_8007B7FC(Fighter*, s32);
 
 #endif
