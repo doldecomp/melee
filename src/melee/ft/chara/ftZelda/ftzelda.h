@@ -39,10 +39,7 @@ typedef struct _ftZeldaAttributes {
     f32 x78; // Type confirmed
     f32 x7C; // Type confirmed
     f32 x80; // Type confirmed
-    ReflectDesc* x84;
-    f32 x88;
-    f32 x8C;
-    u8 data_filler_1[0x18];
+    ReflectDesc x84;
 } ftZeldaAttributes;
 
 // ftzelda 1
