@@ -52,9 +52,7 @@ StageData lbl_803E274C = {
     func_801E36D0, func_801E36D8, 0x00000001,
 };
 
-static void func_801E302C(s32)
-{
-}
+static void func_801E302C(s32) {}
 
 void func_801E3030(void)
 {
@@ -69,9 +67,7 @@ void func_801E3030(void)
     func_801C3BB4();
 }
 
-void func_801E30A8(void)
-{
-}
+void func_801E30A8(void) {}
 
 void func_801E30AC(void)
 {
@@ -126,13 +122,9 @@ s32 func_801E3224(void)
     return 0;
 }
 
-void func_801E322C(HSD_GObj*)
-{
-}
+void func_801E322C(HSD_GObj*) {}
 
-void func_801E3230(void)
-{
-}
+void func_801E3230(void) {}
 
 inline s32 randi(s32 max)
 {
@@ -164,9 +156,7 @@ void func_801E3334(HSD_GObj* gobj)
     func_800115F4();
 }
 
-void func_801E336C()
-{
-}
+void func_801E336C() {}
 
 typedef struct {
     u8 x0_fill[0x14];
@@ -197,9 +187,7 @@ void func_801E33E0(HSD_GObj* gobj)
     func_801E366C(gobj);
 }
 
-void func_801E3414(void)
-{
-}
+void func_801E3414(void) {}
 
 // floating point random number centered at 0
 // with an amplitude of 1

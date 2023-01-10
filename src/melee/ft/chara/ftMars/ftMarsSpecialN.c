@@ -395,14 +395,10 @@ void lbl_80137010(HSD_GObj* gobj)
 }
 
 // 8013713C 00133D1C
-void lbl_8013713C(HSD_GObj* gobj)
-{
-}
+void lbl_8013713C(HSD_GObj* gobj) {}
 
 // 80137140 00133D20
-void lbl_80137140(HSD_GObj* gobj)
-{
-}
+void lbl_80137140(HSD_GObj* gobj) {}
 
 // 80137144 00133D24
 // https://decomp.me/scratch/ZIl0O

@@ -10,9 +10,7 @@ static ProcessInfo fragment_info[1];
 
 #ifdef MUST_MATCH
 /// unused asm function to trigger peephole off bug
-static asm void unused(void)
-{
-}
+static asm void unused(void) {}
 #endif
 
 void __unregister_fragment(int fragmentID)

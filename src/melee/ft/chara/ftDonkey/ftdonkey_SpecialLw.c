@@ -23,9 +23,7 @@ void ftDonkey_8010DCD8(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010DD14(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010DD14(HSD_GObj* fighter_gobj) {}
 
 void ftDonkey_8010DD18(HSD_GObj* fighter_gobj)
 {
@@ -108,9 +106,7 @@ void ftDonkey_8010DF5C(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010DF98(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010DF98(HSD_GObj* fighter_gobj) {}
 
 void ftDonkey_8010DF9C(HSD_GObj* fighter_gobj)
 {
@@ -137,9 +133,7 @@ void ftDonkey_8010E030(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010E06C(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010E06C(HSD_GObj* fighter_gobj) {}
 
 void ftDonkey_8010E070(HSD_GObj* fighter_gobj)
 {

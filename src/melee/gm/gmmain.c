@@ -68,9 +68,7 @@ static void lbl_8015FD24(void)
     HSD_PadLibData.scale_analogLR = 140;
 }
 
-static void lbl_8015FDA0(void)
-{
-}
+static void lbl_8015FDA0(void) {}
 
 // set debug level
 static void func_8015FDA4(void)

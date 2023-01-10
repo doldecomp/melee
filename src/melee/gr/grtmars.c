@@ -34,9 +34,7 @@ StageData lbl_803E8F0C = {
     GrTMars_802221C8, GrTMars_802221D0, 0x00000001,
 };
 
-static void GrTMars_80221EF4(s32)
-{
-}
+static void GrTMars_80221EF4(s32) {}
 
 static void GrTMars_80221EF8(void)
 {
@@ -134,9 +132,7 @@ static void GrTMars_80222114(HSD_GObj* gobj)
     func_801C2FE0(gobj);
 }
 
-static void GrTMars_80222148(void)
-{
-}
+static void GrTMars_80222148(void) {}
 
 static void GrTMars_8022214C(HSD_GObj* gobj)
 {
@@ -156,9 +152,7 @@ static void GrTMars_802221A4(HSD_GObj* gobj)
     func_801C2FE0(gobj);
 }
 
-static void GrTMars_802221C4(void)
-{
-}
+static void GrTMars_802221C4(void) {}
 
 static BOOL GrTMars_802221C8(s32)
 {

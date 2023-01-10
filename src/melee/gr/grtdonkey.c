@@ -19,9 +19,7 @@ extern StageData lbl_803E87EC = { 0x0000002B,   lbl_803E8790,  "/GrTDk.dat",
 
 extern StageInfo stage_info;
 
-static void func_80220228(long)
-{
-}
+static void func_80220228(long) {}
 static void lbl_8022022C(void)
 {
     stage_info.unk8C.b4 = 0;
@@ -34,9 +32,7 @@ static void lbl_8022022C(void)
     func_801C4210();
     func_801C42AC();
 }
-static void lbl_8022029C(void)
-{
-}
+static void lbl_8022029C(void) {}
 static void lbl_802202A0(void)
 {
     func_801CAE04(0);
@@ -81,12 +77,8 @@ static s32 lbl_802203E0(void)
 {
     return 0;
 }
-static void lbl_802203E8(HSD_GObj*)
-{
-}
-static void lbl_802203EC(void)
-{
-}
+static void lbl_802203E8(HSD_GObj*) {}
+static void lbl_802203EC(void) {}
 static void lbl_802203F0(HSD_GObj* gobj)
 {
     u32 unused[2];
@@ -103,9 +95,7 @@ static void lbl_80220448(HSD_GObj* gobj)
     func_800115F4();
     func_801C2FE0(gobj);
 }
-static void lbl_8022047C(void)
-{
-}
+static void lbl_8022047C(void) {}
 static void lbl_80220480(HSD_GObj* gobj)
 {
     u32 unused[2];
@@ -121,9 +111,7 @@ static void lbl_802204D8(HSD_GObj*)
 {
     func_801C2FE0();
 }
-static void lbl_802204F8(void)
-{
-}
+static void lbl_802204F8(void) {}
 static int lbl_802204FC(long)
 {
     return 0;

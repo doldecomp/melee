@@ -76,9 +76,7 @@ void HSD_GXSetFifoObj(GXFifoObj* fifo)
     DefaultFifoObj = fifo;
 }
 
-static void HSD_DVDInit(void)
-{
-}
+static void HSD_DVDInit(void) {}
 
 void** HSD_AllocateXFB(s32 nbuffer, GXRenderModeObj* rm)
 {

@@ -94,14 +94,10 @@ void lbl_80138B64(HSD_GObj* gobj)
 }
 
 // 80138C20 00135800
-void lbl_80138C20(HSD_GObj* gobj)
-{
-}
+void lbl_80138C20(HSD_GObj* gobj) {}
 
 // 80138C24 00135804
-void lbl_80138C24(HSD_GObj* gobj)
-{
-}
+void lbl_80138C24(HSD_GObj* gobj) {}
 
 // 80138C28 00135808
 // https://decomp.me/scratch/14xar
@@ -265,14 +261,10 @@ void lbl_80138F14(HSD_GObj* gobj)
 }
 
 // 80138FC0 00135BA0
-void lbl_80138FC0(HSD_GObj* gobj)
-{
-}
+void lbl_80138FC0(HSD_GObj* gobj) {}
 
 // 80138FC4 00135BA4
-void lbl_80138FC4(HSD_GObj* gobj)
-{
-}
+void lbl_80138FC4(HSD_GObj* gobj) {}
 
 // 80138FC8 00135BA8
 // https://decomp.me/scratch/u66PG

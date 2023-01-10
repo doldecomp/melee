@@ -150,9 +150,7 @@ void ftSamus_8012B358(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSamus_8012B3A4(HSD_GObj* fighter_gobj)
-{
-}
+void ftSamus_8012B3A4(HSD_GObj* fighter_gobj) {}
 
 void ftSamus_8012B3A8(HSD_GObj* fighter_gobj)
 {

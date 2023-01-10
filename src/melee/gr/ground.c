@@ -73,13 +73,9 @@ static StageData* lbl_803DFEDC[] = {
 
 static u8* lbl_804D6950;
 
-static void func_801BFFA8(void)
-{
-}
+static void func_801BFFA8(void) {}
 
-static void func_801BFFAC(s32)
-{
-}
+static void func_801BFFAC(s32) {}
 
 void func_801BFFB0(void)
 {
@@ -745,9 +741,7 @@ void func_801C10B8(s32 arg0, s32 arg1)
     }
 }
 
-void func_801C1154()
-{
-}
+void func_801C1154() {}
 
 void func_801C1158(void)
 {
