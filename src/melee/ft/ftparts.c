@@ -60,7 +60,7 @@ static char lbl_803C0BD0[] = "cant get fighter rot y!\n";
 static char lbl_803C0BEC[] = "cant get fighter rot z!\n";
 
 // .bss
-u8 lbl_80459240[0x38];
+u8 ft_jobj_scale[0x38];
 u8 lbl_804590D8[0x168];
 
 // .sdata
@@ -94,9 +94,9 @@ asm void Fighter_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
 /* 800735E8 000701C8  93 81 00 60 */	stw r28, 0x60(r1)
 /* 800735EC 000701CC  3B 83 00 00 */	addi r28, r3, 0
 /* 800735F0 000701D0  81 86 00 44 */	lwz r12, 0x44(r6)
-/* 800735F4 000701D4  3C C0 80 46 */	lis r6, lbl_80459240@ha
+/* 800735F4 000701D4  3C C0 80 46 */	lis r6, ft_jobj_scale@ha
 /* 800735F8 000701D8  80 ED C1 74 */	lwz r7, lbl_804D7814(r13)
-/* 800735FC 000701DC  3B E6 92 40 */	addi r31, r6, lbl_80459240@l
+/* 800735FC 000701DC  3B E6 92 40 */	addi r31, r6, ft_jobj_scale@l
 /* 80073600 000701E0  7D 88 03 A6 */	mtlr r12
 /* 80073604 000701E4  83 C7 00 2C */	lwz r30, 0x2c(r7)
 /* 80073608 000701E8  4E 80 00 21 */	blrl
@@ -296,8 +296,8 @@ lbl_800738F4:
 lbl_8007390C:
 /* 8007390C 000704EC  57 80 07 FF */	clrlwi. r0, r28, 0x1f
 /* 80073910 000704F0  41 82 00 88 */	beq lbl_80073998
-/* 80073914 000704F4  3C 60 80 46 */	lis r3, lbl_80459240@ha
-/* 80073918 000704F8  38 63 92 40 */	addi r3, r3, lbl_80459240@l
+/* 80073914 000704F4  3C 60 80 46 */	lis r3, ft_jobj_scale@ha
+/* 80073918 000704F8  38 63 92 40 */	addi r3, r3, ft_jobj_scale@l
 /* 8007391C 000704FC  88 03 00 30 */	lbz r0, 0x30(r3)
 /* 80073920 00070500  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 80073924 00070504  41 82 00 20 */	beq lbl_80073944
@@ -349,11 +349,11 @@ asm unk_t func_800739B8()
 { // clang-format off
     nofralloc
 /* 800739B8 00070598  7C 08 02 A6 */	mflr r0
-/* 800739BC 0007059C  3C E0 80 46 */	lis r7, lbl_80459240@ha
+/* 800739BC 0007059C  3C E0 80 46 */	lis r7, ft_jobj_scale@ha
 /* 800739C0 000705A0  90 01 00 04 */	stw r0, 4(r1)
 /* 800739C4 000705A4  94 21 FE C8 */	stwu r1, -0x138(r1)
 /* 800739C8 000705A8  BF 21 01 1C */	stmw r25, 0x11c(r1)
-/* 800739CC 000705AC  3B E7 92 40 */	addi r31, r7, lbl_80459240@l
+/* 800739CC 000705AC  3B E7 92 40 */	addi r31, r7, ft_jobj_scale@l
 /* 800739D0 000705B0  3B 23 00 00 */	addi r25, r3, 0
 /* 800739D4 000705B4  3B 44 00 00 */	addi r26, r4, 0
 /* 800739D8 000705B8  3B 65 00 00 */	addi r27, r5, 0
@@ -600,9 +600,9 @@ lbl_80073D34:
 /* 80073D34 00070914  38 77 00 00 */	addi r3, r23, 0
 /* 80073D38 00070918  38 81 00 AC */	addi r4, r1, 0xac
 /* 80073D3C 0007091C  48 30 05 71 */	bl _HSD_mkEnvelopeModelNodeMtx
-/* 80073D40 00070920  3C 80 80 46 */	lis r4, lbl_80459240@ha
+/* 80073D40 00070920  3C 80 80 46 */	lis r4, ft_jobj_scale@ha
 /* 80073D44 00070924  82 D2 00 14 */	lwz r22, 0x14(r18)
-/* 80073D48 00070928  3B C4 92 40 */	addi r30, r4, lbl_80459240@l
+/* 80073D48 00070928  3B C4 92 40 */	addi r30, r4, ft_jobj_scale@l
 /* 80073D4C 0007092C  C3 E2 88 EC */	lfs f31, lbl_804D82CC(r2)
 /* 80073D50 00070930  3C 80 80 40 */	lis r4, HSD_PerfCurrentStat@ha
 /* 80073D54 00070934  C3 C2 88 E8 */	lfs f30, lbl_804D82C8(r2)
@@ -826,9 +826,9 @@ asm void Fighter_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
 { // clang-format off
     nofralloc
 /* 80074048 00070C28  7C 08 02 A6 */	mflr r0
-/* 8007404C 00070C2C  3C E0 80 46 */	lis r7, lbl_80459240@ha
+/* 8007404C 00070C2C  3C E0 80 46 */	lis r7, ft_jobj_scale@ha
 /* 80074050 00070C30  90 01 00 04 */	stw r0, 4(r1)
-/* 80074054 00070C34  38 E7 92 40 */	addi r7, r7, lbl_80459240@l
+/* 80074054 00070C34  38 E7 92 40 */	addi r7, r7, ft_jobj_scale@l
 /* 80074058 00070C38  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8007405C 00070C3C  88 07 00 30 */	lbz r0, 0x30(r7)
 /* 80074060 00070C40  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
