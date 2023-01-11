@@ -112,6 +112,16 @@ typedef void (*Event)(void);
 #endif
 #endif
 
+#ifndef ATTRIBUTE_NORETURN
+#ifdef __MWERKS__
+#define ATTRIBUTE_NORETURN
+#elif defined(__clang__)
+#define ATTRIBUTE_NORETURN __attribute__((noreturn))
+#else
+#error unknown compiler
+#endif
+#endif
+
 #ifdef PERMUTER
 #define AT_ADDRESS(x) = FIXEDADDR(x)
 #elif defined(__MWERKS__)

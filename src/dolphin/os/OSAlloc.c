@@ -4,20 +4,20 @@
 #include <dolphin/os/os.h>
 
 static Heap* HeapArray;
-static int NumHeaps;
-static void* ArenaStart;
-static void* ArenaEnd;
+static ssize_t NumHeaps;
+static any_t ArenaStart;
+static any_t ArenaEnd;
 volatile OSHeapHandle __OSCurrHeap = -1;
 
 #define InRange(addr, start, end)                                              \
     ((u8*) (start) <= (u8*) (addr) && (u8*) (addr) < (u8*) (end))
 #define OFFSET(addr, align) (((uintptr_t) (addr) & ((align) -1)))
 
-#define ALIGNMENT (32)
-#define MINOBJSIZE (64)
+#define ALIGNMENT 32
+#define MINOBJSIZE 64
 
-/* inserts 'cell' before 'neighbor' and returns 'cell' */
-void* DLAddFront(HeapCell* neighbor, HeapCell* cell)
+/// Inserts @p cell before @p neighbor and returns @p cell.
+static any_t DLAddFront(HeapCell* neighbor, HeapCell* cell)
 {
     cell->next = neighbor;
     cell->prev = NULL;
@@ -26,8 +26,8 @@ void* DLAddFront(HeapCell* neighbor, HeapCell* cell)
     return cell;
 }
 
-/* removes 'cell' from 'list' and returns 'list' */
-HeapCell* DLExtract(HeapCell* list, HeapCell* cell)
+/// Removes @p cell from @p list and returns @p list. */
+static HeapCell* DLExtract(HeapCell* list, HeapCell* cell)
 {
     if (cell->next != NULL)
         cell->next->prev = cell->prev;
@@ -35,11 +35,12 @@ HeapCell* DLExtract(HeapCell* list, HeapCell* cell)
         list = cell->next;
     else
         cell->prev->next = cell->next;
+
     return list;
 }
 
-HeapCell* DLInsert(HeapCell* list, HeapCell* cell,
-                   void* unused /* needed to match OSFreeToHeap */)
+/// @param unused Needed to match #OSFreeToHeap.
+static HeapCell* DLInsert(HeapCell* list, HeapCell* cell, unk_t unused)
 {
     HeapCell* before = NULL;
     HeapCell* after = list;
@@ -143,7 +144,7 @@ OSHeapHandle OSSetCurrentHeap(OSHeapHandle heap)
     return old;
 }
 
-void* OSInitAlloc(void* arenaStart, void* arenaEnd, int maxHeaps)
+any_t OSInitAlloc(any_t arenaStart, any_t arenaEnd, int maxHeaps)
 {
     u32 totalSize = maxHeaps * sizeof(Heap);
     int i;
@@ -161,20 +162,20 @@ void* OSInitAlloc(void* arenaStart, void* arenaEnd, int maxHeaps)
     __OSCurrHeap = -1;
 
     arenaStart = (u8*) HeapArray + totalSize;
-    arenaStart = (void*) OSRoundUp32B(arenaStart);
+    arenaStart = (any_t) OSRoundUp32B(arenaStart);
 
     ArenaStart = arenaStart;
-    ArenaEnd = (void*) OSRoundDown32B(arenaEnd);
+    ArenaEnd = (any_t) OSRoundDown32B(arenaEnd);
 
     return arenaStart;
 }
 
-OSHeapHandle OSCreateHeap(void* start, void* end)
+OSHeapHandle OSCreateHeap(any_t start, any_t end)
 {
     int i;
-    HeapCell* cell = (void*) OSRoundUp32B(start);
+    HeapCell* cell = (any_t) OSRoundUp32B(start);
 
-    end = (void*) OSRoundDown32B(end);
+    end = (any_t) OSRoundDown32B(end);
     for (i = 0; i < NumHeaps; i++) {
         Heap* hd = &HeapArray[i];
 
@@ -203,11 +204,10 @@ size_t OSCheckHeap(OSHeapHandle heap)
     int total = 0;
     int totalFree = 0;
 
-    // clang-format off
-#define CHECK(line, condition)                                      \
-    if (!(condition)) {                                             \
-        OSReport("OSCheckHeap: Failed " #condition " in %d", line); \
-        return -1;                                                  \
+#define CHECK(line, condition)                                                 \
+    if (!(condition)) {                                                        \
+        OSReport("OSCheckHeap: Failed " #condition " in %d", line);            \
+        return -1;                                                             \
     }
 
     CHECK(893, HeapArray)
@@ -233,7 +233,8 @@ size_t OSCheckHeap(OSHeapHandle heap)
         CHECK(922, cell->next == NULL || cell->next->prev == cell)
         CHECK(923, MINOBJSIZE <= cell->size)
         CHECK(924, OFFSET(cell->size, ALIGNMENT) == 0)
-        CHECK(925, cell->next == NULL || (char*) cell + cell->size < (char*) cell->next)
+        CHECK(925, cell->next == NULL ||
+                       (char*) cell + cell->size < (char*) cell->next)
         total += cell->size;
         totalFree += cell->size - 32;
         CHECK(929, 0 < total && total <= hd->size)
@@ -242,18 +243,18 @@ size_t OSCheckHeap(OSHeapHandle heap)
     CHECK(936, total == hd->size);
 
 #undef CHECK
-    // clang-format on
 
     return totalFree;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-static char string__nOSDumpHeap__d___n[] = "\nOSDumpHeap(%d):\n";
-static char string_________Inactive_n[] = "--------Inactive\n";
-static char string_addr_tsize_t_tend_tprev_tnext_n[] =
-    "addr\tsize\t\tend\tprev\tnext\n";
-static char string_________Allocated_n[] = "--------Allocated\n";
-static char string__x_t_d_t_x_t_x_t_x_n[] = "%x\t%d\t%x\t%x\t%x\n";
-static char string_________Free_n[] = "--------Free\n";
+static char _unused_str0[] = "\nOSDumpHeap(%d):\n";
+static char _unused_str1[] = "--------Inactive\n";
+static char _unused_str2[] = "addr\tsize\t\tend\tprev\tnext\n";
+static char _unused_str3[] = "--------Allocated\n";
+static char _unused_str4[] = "%x\t%d\t%x\t%x\t%x\n";
+static char _unused_str5[] = "--------Free\n";
 #pragma pop
+#endif

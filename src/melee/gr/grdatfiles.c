@@ -2,8 +2,10 @@
 
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbheap.h>
+#include <melee/lb/lbunknown_001.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/psstructs.h>
 
 extern StageInfo stage_info;
 
@@ -12,10 +14,13 @@ typedef struct _UnkStageDatInternal {
     u32 unk4; // flags
 } UnkStageDatInternal;
 
-extern UnkStage6B0 lbl_803E0848;
+/// @todo Bad split?
+/* static */ extern UnkStage6B0 lbl_803E0848;
 
 static UnkArchiveStruct lbl_8049EE10[4];
-extern UnkStageDat lbl_803E0924;
+
+/// @todo Bad split?
+/* static */ extern UnkStageDat lbl_803E0924;
 
 void func_801C5FC0(HSD_Archive* archive, void* data, u32 length)
 {
@@ -24,9 +29,9 @@ void func_801C5FC0(HSD_Archive* archive, void* data, u32 length)
     lbArchive_InitializeDAT(archive, data, length);
     map_ptcl = HSD_ArchiveGetPublicAddress(archive, "map_ptcl");
     map_texg = HSD_ArchiveGetPublicAddress(archive, "map_texg");
-    if (map_ptcl != NULL && map_texg != NULL) {
-        psInitDataBankLocate(map_ptcl, map_texg, 0);
-    }
+
+    if (map_ptcl != NULL && map_texg != NULL)
+        psInitDataBankLocate(map_ptcl, map_texg, NULL);
 }
 
 void func_801C6038(void* arg0, s32 arg1, s32 arg2)
@@ -153,7 +158,9 @@ UnkArchiveStruct* func_801C6478(void* data, s32 length)
     return arc;
 }
 
-static UnkBgmStruct lbl_803E07E4 = { 0, -1, -1 };
+static UnkBgmStruct lbl_803E07E4 = {
+    0, -1, -1, 0, 0, 0, 0, 0, { 0 },
+};
 
 static UnkStage6B0 lbl_803E0848 = {
     1,  0x80, {}, 0x1E,          0,  1,  0x8000, 10, 0,     0, 1, 1, 1,  {},

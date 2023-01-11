@@ -4,7 +4,6 @@
 #include <dolphin/mtx/mtxtypes.h>
 #include <melee/ft/fighter.h>
 
-unk_t func_80054F68(void);
 BOOL func_80054ED8(s32);
 unk_t func_80056B34(void);
 unk_t func_80056AC4(void);
@@ -50,5 +49,6 @@ void func_8004D17C(void);
 void func_80057424(s16);
 void func_80057638(s16);
 void func_80057BC0(s16);
+BOOL func_80054F68(s32, s32);
 
 #endif
