@@ -2859,8 +2859,6 @@ static void func_801C34AC(s32 arg0, HSD_JObj* arg1, HSD_Joint* arg2)
 
 #ifdef MWERKS_GEKKO
 
-#ifdef MWERKS_GEKKO
-
 #pragma push
 asm void func_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
 { // clang-format off
@@ -2983,15 +2981,6 @@ lbl_801C3860:
 /* 801C387C 001C045C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
-{
-    NOT_IMPLEMENTED;
-}
-
-#endif
 
 #else
 
