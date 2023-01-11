@@ -3,8 +3,8 @@
 
 #include <dolphin/types.h>
 
-#include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/texp.h>
 #include <sysdolphin/baselib/tobj.h>
 

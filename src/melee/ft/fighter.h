@@ -2,7 +2,6 @@
 #define _fighter_h_
 
 #include <common_structs.h>
-#include <sysdolphin/baselib/lobj.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/types.h>
 #include <math.h>
@@ -20,6 +19,7 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
 
 /// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in

@@ -1,7 +1,7 @@
 #include <sysdolphin/baselib/tobj.h>
 
-#include <math.h>
 #include <dolphin/mtx.h>
+#include <math.h>
 
 #include <sysdolphin/baselib/aobj.h>
 

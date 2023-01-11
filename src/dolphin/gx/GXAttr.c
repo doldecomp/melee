@@ -1,5 +1,5 @@
-#include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GX_unknown_001.h>
+#include <dolphin/gx/__GXInit.h>
 #include <dolphin/types.h>
 
 static u32 lbl_804D5BB0 = 0x00040102;

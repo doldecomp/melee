@@ -3,8 +3,8 @@
 
 #include <dolphin/types.h>
 
-#include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/objalloc.h>
+#include <sysdolphin/baselib/object.h>
 
 #define HSD_A_OP_NONE 0
 #define HSD_A_OP_CON 1

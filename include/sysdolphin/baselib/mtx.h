@@ -1,8 +1,8 @@
 #ifndef _mtx_h_
 #define _mtx_h_
 
-#include <sysdolphin/baselib/objalloc.h>
 #include <math.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 #include <melee/lb/lbrefract.h>
 

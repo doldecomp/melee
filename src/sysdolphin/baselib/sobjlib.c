@@ -1,19 +1,18 @@
 #include <sysdolphin/baselib/__baselib.h>
 #include <sysdolphin/baselib/sobjlib.h>
 
-#include <sysdolphin/baselib/gobjgxlink.h>
+#include <dolphin/gx/GX_unknown_001.h>
+#include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXMisc.h>
+#include <dolphin/os/os.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/pobj.h>
-#include <dolphin/gx/GXMisc.h>
-#include <dolphin/gx/GXAttr.h>
-#include <sysdolphin/baselib/tev.h>
-#include <dolphin/gx/GX_unknown_001.h>
-#include <dolphin/os/os.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
-#include <sysdolphin/baselib/objalloc.h>
-#include <sysdolphin/baselib/gobjobject.h>
 
 /* 004DB670 */ extern const s32 lbl_804DEA90;
 /* 004DB66C */ extern const s32 lbl_804DEA8C;

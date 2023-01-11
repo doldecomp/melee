@@ -1,6 +1,6 @@
+#include <dolphin/os/os.h>
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/os/os.h>
 
 #pragma push
 asm unk_t __OSLoadFPUContext()

@@ -1,6 +1,6 @@
+#include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/types.h>
 #include <math.h>
-#include <dolphin/mtx/mtxtypes.h>
 #include <sysdolphin/baselib/debug.h>
 
 typedef Vec3 Vec3;

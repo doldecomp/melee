@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_FTCOMMON_H
 #define MELEE_FT_FTCOMMON_H
 
-#include <dolphin/types.h>
 #include <dolphin/mtx.h>
+#include <dolphin/types.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 

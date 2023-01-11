@@ -24,7 +24,6 @@
 #include <placeholder.h>
 #include <sysdolphin/baselib/baselib_unknown_002.h>
 #include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/sislib.h>

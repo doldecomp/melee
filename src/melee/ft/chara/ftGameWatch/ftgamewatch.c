@@ -1,7 +1,7 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
-#include <melee/ft/ftparts.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
 
 void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj)
 {

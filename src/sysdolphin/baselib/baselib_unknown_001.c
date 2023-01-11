@@ -1,9 +1,9 @@
-#include <sysdolphin/baselib/baselib_unknown_001.h>
-#include <dolphin/gecko.h>
-#include <string.h>
-#include <dolphin/card.h>
-#include <dolphin/os/OSInterrupt.h>
 #include <cstring.h>
+#include <dolphin/card.h>
+#include <dolphin/gecko.h>
+#include <dolphin/os/OSInterrupt.h>
+#include <string.h>
+#include <sysdolphin/baselib/baselib_unknown_001.h>
 
 /* 004DB76C */ extern u32 lbl_804DEB8C;
 /* 004DB768 */ extern u32 lbl_804DEB88;

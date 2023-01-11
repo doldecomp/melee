@@ -1,9 +1,9 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
-#include <melee/it/item2.h>
-#include <melee/gr/grcorneria.h>
-#include <melee/pl/pl_unknown_001.h>
-#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/gr/grcorneria.h>
+#include <melee/it/item2.h>
+#include <melee/pl/pl_unknown_001.h>
 
 BOOL ftFox_AppealS_CheckIfUsed(Fighter* fp)
 {

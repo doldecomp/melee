@@ -1,10 +1,10 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
-#include <melee/ft/ftparts.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
 #include <melee/it/code_8027CF30.h>
 #include <melee/lb/lbunknown_001.h>
-#include <melee/ft/ft_unknown_006.h>
 
 static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj);
 static void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fighter_gobj);

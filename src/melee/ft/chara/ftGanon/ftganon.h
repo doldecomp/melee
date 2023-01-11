@@ -1,8 +1,8 @@
 #ifndef _ftganon_h_
 #define _ftganon_h_
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftGanon_OnDeath(HSD_GObj*);
 void ftGanon_OnItemPickup(HSD_GObj*, BOOL);

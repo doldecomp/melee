@@ -1,8 +1,8 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftbosslib.h>
-#include <melee/ft/code_80081B38.h>
 #include <melee/lb/lbvector.h>
 
 // 8015287C 14F45C

@@ -1,20 +1,20 @@
-#include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/types.h>
 
-#include <melee/pl/player.h>
-#include <melee/gr/stage.h>
-#include <math.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/archive.h>
 #include <common_structs.h>
+#include <math.h>
 #include <melee/ft/fighter.h>
+#include <melee/gr/stage.h>
 #include <melee/it/item.h>
+#include <melee/pl/player.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 // 0x800763C0 //
 // https://decomp.me/scratch/zSqbD //

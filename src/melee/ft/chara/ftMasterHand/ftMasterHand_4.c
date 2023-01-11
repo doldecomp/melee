@@ -1,9 +1,9 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 #include <melee/cm/camera.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
-#include <melee/ft/ft_unknown_006.h>
 
 static void lbl_801511FC(HSD_GObj* gobj);
 

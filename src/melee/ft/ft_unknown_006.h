@@ -4,8 +4,8 @@
 #ifndef MELEE_FT_FT_UNKNOWN_006_H
 #define MELEE_FT_FT_UNKNOWN_006_H
 
-#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /// @remarks Only used by Purin.
 extern HSD_Joint* lbl_8045A1E0[6];

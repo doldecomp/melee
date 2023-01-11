@@ -1,8 +1,8 @@
 #ifndef _ftgigakoopa_h_
 #define _ftgigakoopa_h_
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftGKoopa_OnDeath(HSD_GObj*);
 void func_8014F698(HSD_GObj*);

@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_FTANIM_H
 #define MELEE_FT_FTANIM_H
 
-#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 void func_8006E9B4(struct _HSD_GObj*);
 void func_8006EBA4(struct _HSD_GObj*);

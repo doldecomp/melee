@@ -1,12 +1,12 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_15.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/ftbosslib.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftlib.h>
-#include <melee/lb/lbvector.h>
-#include <melee/lb/lbunknown_001.h>
 #include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/lb/lbvector.h>
 
 // 80153000 14FBE0
 // https://decomp.me/scratch/erd6U

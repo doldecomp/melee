@@ -1,8 +1,8 @@
 #ifndef _ftemblem_h_
 #define _ftemblem_h_
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftRoy_OnDeath(HSD_GObj*);
 void ftRoy_OnItemPickup(HSD_GObj*, BOOL);
