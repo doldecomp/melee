@@ -344,7 +344,6 @@ s32* func_801C06A4(void)
     return &x->xC8;
 }
 
-/// @todo Needs to return @c #StageData*. There may be more parameters.
 void func_801C06B8(InternalStageID arg0)
 {
     if (lbl_803DFEDC[arg0] == NULL)
