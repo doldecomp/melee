@@ -4,10 +4,10 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
 
+#include <common_structs.h>
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
 #include <melee/it/itkind.h>
-#include <common_structs.h>
 
 #define FTFOX_APPEALS_ATTACKID 0x72
 

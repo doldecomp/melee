@@ -1,5 +1,5 @@
-#include <melee/lb/lbvector.h>
 #include <math.h>
+#include <melee/lb/lbvector.h>
 
 // exactly the same as the one from math.h, but with one extra iteration
 extern inline float sqrtf_accurate(float x)

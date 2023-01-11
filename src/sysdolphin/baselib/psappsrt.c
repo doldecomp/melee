@@ -1,7 +1,7 @@
-#include <sysdolphin/baselib/psappsrt.h>
-#include <sysdolphin/baselib/objalloc.h>
-#include <sysdolphin/baselib/__baselib.h>
 #include <string.h>
+#include <sysdolphin/baselib/__baselib.h>
+#include <sysdolphin/baselib/objalloc.h>
+#include <sysdolphin/baselib/psappsrt.h>
 #include <sysdolphin/baselib/psstructs.h>
 
 /* 004D4538 */ extern u16 lbl_804D7958[4];

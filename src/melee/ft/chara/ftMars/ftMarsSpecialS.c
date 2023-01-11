@@ -1,7 +1,7 @@
 #include <melee/ft/chara/ftMars/ftMars.h>
 
-#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
 
 // 8013741C 00133FFC

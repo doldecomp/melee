@@ -1,8 +1,8 @@
 #ifndef _ftzakogirl_h_
 #define _ftzakogirl_h_
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftZakoGirl_OnDeath(HSD_GObj*);
 void ftZakoGirl_OnLoad(HSD_GObj*);

@@ -1,5 +1,5 @@
-#include <dolphin/types.h>
 #include <dolphin/pad/pad.h>
+#include <dolphin/types.h>
 
 typedef struct _RumbleCommand {
     u16 op;

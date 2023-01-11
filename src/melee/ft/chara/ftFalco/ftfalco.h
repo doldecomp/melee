@@ -1,8 +1,8 @@
 #ifndef _ftfalco_h_
 #define _ftfalco_h_
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftFalco_OnDeath(HSD_GObj*);
 void ftFalco_OnItemPickup(HSD_GObj*, BOOL);

@@ -1,9 +1,9 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
 #include <melee/ft/chara/ftDonkey/ftdonkey1.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/item.h>
-#include <melee/ft/code_80081B38.h>
 
 void ftDonkey_800E0698(HSD_GObj* fighter_gobj)
 {

@@ -3,9 +3,9 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/it/code_8027CF30.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>
-#include <melee/it/code_8027CF30.h>
 
 typedef struct _ftSamusAttributes {
     f32 x0;

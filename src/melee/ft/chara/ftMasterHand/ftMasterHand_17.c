@@ -1,9 +1,9 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_17.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/code_80081B38.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_18.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
 
 static void func_80153910(struct _HSD_GObj*);
 

@@ -1,7 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
-#include <melee/ft/ftbosslib.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
 
 // 80152138 14ED18
 // https://decomp.me/scratch/NAMEj

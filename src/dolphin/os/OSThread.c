@@ -1,7 +1,7 @@
+#include <dolphin/os/os.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMutex.h>
 #include <dolphin/os/OSThread.h>
-#include <dolphin/os/os.h>
 
 extern unk_t _stack_end;
 extern unk_t _db_stack_end;

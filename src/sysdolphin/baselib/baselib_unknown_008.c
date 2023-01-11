@@ -1,6 +1,6 @@
-#include <sysdolphin/baselib/__baselib.h>
 #include <dolphin/gecko.h>
 #include <string.h>
+#include <sysdolphin/baselib/__baselib.h>
 
 void func_803B3344(u8 byte)
 {

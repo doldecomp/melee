@@ -1,23 +1,22 @@
 #include <melee/ft/ftlib.h>
 
+#include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 #include <melee/ft/chara/ftKirby/ftkirby.h>
-#include <melee/pl/pl_unknown_001.h>
 #include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftdata.h>
-#include <sysdolphin/baselib/rumble.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/cm/camera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ef/efasync.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftparts.h>
 #include <melee/gm/code_801601C4.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/lb/lbunknown_003.h>
+#include <melee/pl/pl_unknown_001.h>
 #include <melee/pl/player.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/rumble.h>
 
 extern struct {
     void* unk0;

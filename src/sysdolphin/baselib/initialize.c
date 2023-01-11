@@ -1,9 +1,9 @@
 #include <sysdolphin/baselib/initialize.h>
 
 #include <dolphin/gx/GXLight.h>
+#include <dolphin/os/os.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
-#include <dolphin/os/os.h>
 #include <stdarg.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/debug.h>

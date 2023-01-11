@@ -1,8 +1,8 @@
 #ifndef DOLPHIN_CARD_CARDOPEN_H
 #define DOLPHIN_CARD_CARDOPEN_H
 
-#include <dolphin/os/OSExi.h>
 #include <dolphin/card.h>
+#include <dolphin/os/OSExi.h>
 
 BOOL __CARDCompareFileName(CARDDir* ent, const char* filename);
 s32 __CARDAccess(CARDControl* card, CARDDir* ent);

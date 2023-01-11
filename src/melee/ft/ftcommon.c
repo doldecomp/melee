@@ -1,25 +1,24 @@
 #include <melee/ft/ftcommon.h>
 
-#include <sysdolphin/baselib/rumble.h>
-#include <melee/text_4.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/ft/ftparts.h>
 #include <dolphin/os/os.h>
-#include <melee/mp/mplib.h>
-#include <melee/ft/ftlib.h>
 #include <melee/ef/eflib.h>
-#include <melee/text_4.h>
-#include <melee/pl/pl_unknown_001.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ft/ftparts.h>
+#include <melee/gm/code_801601C4.h>
 #include <melee/it/code_8027CF30.h>
 #include <melee/it/item.h>
 #include <melee/it/item2.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_003.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/pl_unknown_001.h>
+#include <melee/text_4.h>
+#include <sysdolphin/baselib/rumble.h>
 
 const Vec3 lbl_803B74A0 = { 0, 0, 0 };
 

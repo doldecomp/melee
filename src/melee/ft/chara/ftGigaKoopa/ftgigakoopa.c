@@ -1,8 +1,8 @@
 #include <melee/ft/chara/ftGigaKoopa/ftgigakoopa.h>
 
 #include <melee/ft/chara/ftKoopa/ftkoopa.h>
-#include <melee/it/itkind.h>
 #include <melee/ft/ftparts.h>
+#include <melee/it/itkind.h>
 
 void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj)
 {

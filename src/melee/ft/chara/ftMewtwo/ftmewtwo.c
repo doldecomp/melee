@@ -1,8 +1,8 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
-#include <melee/it/itkind.h>
-#include <melee/ft/ftparts.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
+#include <melee/it/itkind.h>
 
 void ftMewtwo_OnDeath(HSD_GObj* gobj)
 {

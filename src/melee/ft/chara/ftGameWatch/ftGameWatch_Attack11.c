@@ -1,9 +1,9 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 
-#include <melee/lb/lbunknown_001.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
 
 // 0x8014BDB0
 // https://decomp.me/scratch/7BADg // Create Insecticide Spray Item

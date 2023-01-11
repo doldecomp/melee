@@ -11,7 +11,6 @@
 #include <melee/ft/code_8007C630.h>
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
-#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_005.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftaction.h>

@@ -4,8 +4,8 @@
 #ifndef DOLPHIN_OS_OS_H
 #define DOLPHIN_OS_OS_H
 
-#include <dolphin/types.h>
 #include <dolphin/os/OSContext.h>
+#include <dolphin/types.h>
 
 typedef u8 __OSException;
 typedef void (*__OSExceptionHandler)(__OSException exception,

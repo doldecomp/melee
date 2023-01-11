@@ -1,9 +1,9 @@
 #include <dolphin/os/OSExi.h>
 
+#include <cstring.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSTime.h>
 #include <placeholder.h>
-#include <cstring.h>
 
 #define REG_MAX 5
 #define EXI_FREQ_1M 0
