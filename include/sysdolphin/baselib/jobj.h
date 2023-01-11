@@ -163,13 +163,13 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode);
 void HSD_JObjRemoveAnim(HSD_JObj* jobj);
 void HSD_JObjAddNext(HSD_JObj* jobj, HSD_JObj* next);
 
-inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
+static inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
     HSD_ASSERT(405, jobj);
     return jobj->robj;
 }
 
-inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
+static inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
 {
     BOOL result;
     HSD_ASSERT(564, jobj);
@@ -180,7 +180,7 @@ inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
     return result;
 }
 
-inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
+static inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 {
     if (jobj != NULL && HSD_JObjMtxIsDirty(jobj)) {
         HSD_JObjSetupMatrixSub(jobj);
@@ -195,7 +195,7 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
         }                                                                      \
     }
 
-inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
+static inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
     HSD_ASSERT(618, jobj);
     jobj->rotate = *quat;
@@ -204,7 +204,7 @@ inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
     }
 }
 
-inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
+static inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
 {
     HSD_ASSERT(0x27F, jobj);
     HSD_ASSERT(0x280, !(jobj->flags & JOBJ_USE_QUATERNION));
@@ -214,7 +214,7 @@ inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
     }
 }
 
-inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
+static inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 {
     HSD_ASSERT(0x294, jobj);
     HSD_ASSERT(0x295, !(jobj->flags & JOBJ_USE_QUATERNION));
@@ -224,7 +224,7 @@ inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
     }
 }
 
-inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
+static inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
 {
     HSD_ASSERT(0x2A9, jobj);
     HSD_ASSERT(0x2AA, !(jobj->flags & JOBJ_USE_QUATERNION));
@@ -234,13 +234,13 @@ inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
     }
 }
 
-inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
+static inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
     HSD_ASSERT(699, jobj);
     *quat = jobj->rotate;
 }
 
-inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
+static inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
 {
     HSD_ASSERT(760, jobj);
     HSD_ASSERT(761, scale);
@@ -250,7 +250,7 @@ inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
     }
 }
 
-inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
+static inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 {
     HSD_ASSERT(0x308, jobj);
     jobj->scale.x = x;
@@ -259,7 +259,7 @@ inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
     }
 }
 
-inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
+static inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 {
     HSD_ASSERT(0x317, jobj);
     jobj->scale.y = y;
@@ -268,7 +268,7 @@ inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
     }
 }
 
-inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
+static inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 {
     HSD_ASSERT(0x326, jobj);
     jobj->scale.z = z;
@@ -277,31 +277,31 @@ inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
     }
 }
 
-inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec3* scale)
+static inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec3* scale)
 {
     HSD_ASSERT(823, jobj);
     *scale = jobj->scale;
 }
 
-inline f32 HSD_JObjGetScaleX(HSD_JObj* jobj)
+static inline f32 HSD_JObjGetScaleX(HSD_JObj* jobj)
 {
     HSD_ASSERT(875, jobj);
     return jobj->scale.x;
 }
 
-inline f32 HSD_JObjGetScaleY(HSD_JObj* jobj)
+static inline f32 HSD_JObjGetScaleY(HSD_JObj* jobj)
 {
     HSD_ASSERT(888, jobj);
     return jobj->scale.y;
 }
 
-inline f32 HSD_JObjGetScaleZ(HSD_JObj* jobj)
+static inline f32 HSD_JObjGetScaleZ(HSD_JObj* jobj)
 {
     HSD_ASSERT(901, jobj);
     return jobj->scale.z;
 }
 
-inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
+static inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 {
     HSD_ASSERT(916, jobj);
     HSD_ASSERT(917, translate);
@@ -311,7 +311,7 @@ inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
     }
 }
 
-inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
+static inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 {
     HSD_ASSERT(0x3A4, jobj);
     jobj->translate.x = x;
@@ -320,7 +320,7 @@ inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
     }
 }
 
-inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
+static inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 {
     HSD_ASSERT(0x3B3, jobj);
     jobj->translate.y = y;
@@ -329,7 +329,7 @@ inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
     }
 }
 
-inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
+static inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
 {
     HSD_ASSERT(0x3C2, jobj);
     jobj->translate.z = z;
@@ -338,20 +338,20 @@ inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
     }
 }
 
-inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec3* translate)
+static inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec3* translate)
 {
     HSD_ASSERT(979, jobj);
     HSD_ASSERT(980, translate);
     *translate = jobj->translate;
 }
 
-inline f32 HSD_JObjGetTranslationX(HSD_JObj* jobj)
+static inline f32 HSD_JObjGetTranslationX(HSD_JObj* jobj)
 {
     HSD_ASSERT(993, jobj);
     return jobj->translate.x;
 }
 
-inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
+static inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
 {
     HSD_ASSERT(1006, jobj);
     return jobj->translate.y;
@@ -361,13 +361,13 @@ inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
 ///       lbcollision.
 void* HSD_JObjUnkMtxPtr(struct _HSD_JObj*);
 
-inline void HSD_JObjGetMtx(HSD_JObj* jobj)
+static inline void HSD_JObjGetMtx(HSD_JObj* jobj)
 {
     HSD_ASSERT(1144, jobj);
     HSD_JObjUnkMtxPtr(jobj);
 }
 
-inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
+static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
 {
     HSD_ASSERT(1170, jobj);
     HSD_ASSERT(1171, mtx);

@@ -37,21 +37,21 @@ typedef struct _HSD_ObjAllocInfo {
     char* name;
 } HSD_ObjAllocInfo;
 
-inline u32 HSD_ObjAllocUsed(HSD_ObjAllocInfo* info)
+static inline u32 HSD_ObjAllocUsed(HSD_ObjAllocInfo* info)
 {
     HSD_ObjAllocData* data = info->getData();
     HSD_ASSERT(205, data);
     return data->used;
 }
 
-inline u32 HSD_ObjAllocFree(HSD_ObjAllocInfo* info)
+static inline u32 HSD_ObjAllocFree(HSD_ObjAllocInfo* info)
 {
     HSD_ObjAllocData* data = info->getData();
     HSD_ASSERT(221, data);
     return data->free;
 }
 
-inline u32 HSD_ObjAllocPeak(HSD_ObjAllocInfo* info)
+static inline u32 HSD_ObjAllocPeak(HSD_ObjAllocInfo* info)
 {
     HSD_ObjAllocData* data = info->getData();
     HSD_ASSERT(237, data);

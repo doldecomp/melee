@@ -66,12 +66,12 @@ extern HSD_ClassInfo hsdObj;
 
 void ObjInfoInit(void);
 
-inline int iref_CNT(void* o)
+static inline int iref_CNT(void* o)
 {
     return HSD_OBJ(o)->ref_count_individual;
 }
 
-inline int ref_CNT(void* o)
+static inline int ref_CNT(void* o)
 {
     if (HSD_OBJ(o)->ref_count == HSD_OBJ_NOREF) {
         return -1;
@@ -80,7 +80,7 @@ inline int ref_CNT(void* o)
     }
 }
 
-inline BOOL ref_DEC(void* o)
+static inline BOOL ref_DEC(void* o)
 {
     BOOL ret = (u64) (HSD_OBJ(o)->ref_count == HSD_OBJ_NOREF);
     if (ret)
@@ -88,7 +88,7 @@ inline BOOL ref_DEC(void* o)
     return HSD_OBJ(o)->ref_count-- == 0;
 }
 
-inline BOOL iref_DEC(void* o)
+static inline BOOL iref_DEC(void* o)
 {
     BOOL ret = (u64) (HSD_OBJ(o)->ref_count_individual == 0);
     if (ret)
@@ -97,7 +97,7 @@ inline BOOL iref_DEC(void* o)
     return HSD_OBJ(o)->ref_count_individual == 0;
 }
 
-inline void ref_INC(void* o)
+static inline void ref_INC(void* o)
 {
     if (o != NULL) {
         HSD_OBJ(o)->ref_count++;
