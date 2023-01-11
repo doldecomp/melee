@@ -27,7 +27,7 @@ void HSD_VecInitAllocData(void);
 HSD_ObjAllocData* HSD_MtxGetAllocData(void);
 void HSD_MtxInitAllocData(void);
 
-inline f32 fabsf_bitwise(f32 v)
+static inline f32 fabsf_bitwise(f32 v)
 {
     *(u32*) &v &= ~0x80000000;
     return v;
