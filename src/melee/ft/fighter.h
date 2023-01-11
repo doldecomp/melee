@@ -2,6 +2,7 @@
 #define _fighter_h_
 
 #include <common_structs.h>
+#include <sysdolphin/baselib/lobj.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/types.h>
 #include <math.h>
@@ -1030,10 +1031,6 @@ typedef struct _itPickup // 0x294
     Vec2 x28;                     // 0x2BC
 } itPickup;
 
-typedef struct _S32Pair {
-    s32 x, y;
-} S32Pair;
-
 typedef struct {
     HSD_Joint* joint;
     u8 padding[0x10];
@@ -1392,7 +1389,7 @@ typedef struct _Fighter {
     /* 0x3EC */ s32 x3EC;
     /* 0x3F0 */ s32 x3F0;
     u8 filler_x3F4[0x588 - 0x3F4];
-    /* 0x588 */ s32 x588;
+    /* 0x588 */ HSD_LObj* x588;
     /* 0x58C */ s32 x58C;
     /* 0x590 */ s32 x590;
     /* 0x594 */ union {

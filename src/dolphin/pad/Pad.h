@@ -4,5 +4,7 @@
 #include <dolphin/types.h>
 
 BOOL __PADDisableRecalibration(BOOL);
+void PADSetSpec(s32);
+void PADInit(void);
 
 #endif

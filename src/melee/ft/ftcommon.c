@@ -1,6 +1,18 @@
 #include <melee/ft/ftcommon.h>
 
+#include <sysdolphin/baselib/rumble.h>
+#include <melee/text_4.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/gm/code_801601C4.h>
+#include <melee/lb/lbunknown_003.h>
+#include <melee/ft/ftparts.h>
 #include <dolphin/os/os.h>
+#include <melee/mp/mplib.h>
+#include <melee/ft/ftlib.h>
+#include <melee/ef/eflib.h>
+#include <melee/text_4.h>
+#include <melee/pl/pl_unknown_001.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
@@ -775,7 +787,7 @@ void func_8007DB24(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->x2219_flag.bits.b0 = 0;
-    efLib_DestroyAll(gobj, fp);
+    efLib_DestroyAll(gobj);
 }
 
 void func_8007DB58(HSD_GObj* gobj)
@@ -1664,7 +1676,7 @@ void func_8007FA00(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     vec = &fp->x110_attr.x224;
-    func_80294EB0(fp->x197C, &vec[1], vec);
+    func_80294EB0(fp->x197C, &vec[1], &vec[0]);
     func_80294E78(fp->x197C, fp->x34_scale.y * vec[2].x);
 }
 
@@ -1876,10 +1888,10 @@ void func_8008021C(HSD_GObj* gobj)
 void func_8008031C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fabs_inline(fp->input.x620_lstick_x) >= p_ftCommonData->x7B8 &&
-            fp->x679_x < p_ftCommonData->x7C0 ||
-        fabs_inline(fp->input.x624_lstick_y) >= p_ftCommonData->x7B8 &&
-            fp->x67A_y < p_ftCommonData->x7C0)
+    if ((fabs_inline(fp->input.x620_lstick_x) >= p_ftCommonData->x7B8 &&
+         fp->x679_x < p_ftCommonData->x7C0) ||
+        (fabs_inline(fp->input.x624_lstick_y) >= p_ftCommonData->x7B8 &&
+         fp->x67A_y < p_ftCommonData->x7C0))
     {
         Player_UpdateJoystickCountByIndex((s32) fp->xC_playerID,
                                           fp->x221F_flag.bits.b4);

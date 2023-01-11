@@ -108,7 +108,7 @@ lbl_80081C6C:
 #pragma pop
 
 #pragma push
-asm void func_80081C88(HSD_GObj* dst_gobj, f32 scale_y)
+asm void func_80081C88(HSD_GObj* dst_gobj, f32 scl_y)
 { // clang-format off
     nofralloc
 /* 80081C88 0007E868  80 83 00 2C */	lwz r4, 0x2c(r3)
@@ -3600,7 +3600,7 @@ lbl_800849CC:
 #pragma pop
 
 #pragma push
-asm unk_t func_800849EC()
+asm void func_800849EC(Fighter*, Fighter*)
 { // clang-format off
     nofralloc
 /* 800849EC 000815CC  7C 08 02 A6 */	mflr r0
@@ -3618,7 +3618,7 @@ asm unk_t func_800849EC()
 #pragma pop
 
 #pragma push
-asm unk_t func_80084A18()
+asm BOOL func_80084A18(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80084A18 000815F8  7C 08 02 A6 */	mflr r0

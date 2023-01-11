@@ -125,5 +125,10 @@ HSD_GObj* func_802C5000(HSD_GObj*, Vec3*, s32, s32, f32);
 void func_802C519C(HSD_GObj*, Vec3*, s32, s32, f32, f32);
 void func_802B4AC8(HSD_GObj* fighter_gobj, Vec3*, f32 facing_dir, f32 x);
 void func_802C53F0(HSD_GObj*, Vec3*, f32, f32, f32);
+s32 func_802E5F8C(HSD_GObj*, Vec3*, s32, BOOL, f32, f32);
+void func_80284FC4(HSD_GObj*, s32, f32);
+void func_80285024(HSD_GObj*, s32);
+void func_802950D4(HSD_GObj*, BOOL);
+void func_80294EB0(HSD_GObj*, Vec*, Vec*);
 
 #endif

@@ -2,14 +2,11 @@
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/lb/lbaudio_ax.h>
 
 #define TEST(expr) (expr) ? TRUE : FALSE
 
-extern s32 func_80023220(s32);
-extern s32 func_800230C8(s32, s32*, s32*);
-extern s32 func_80023130();
-extern s32 func_800233EC(s32);
-extern s32 func_800C06B4(struct _Fighter*);
+/* static */ s32 func_800C06B4(struct _Fighter*);
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1)
 {
@@ -226,7 +223,7 @@ void func_80087BEC(HSD_GObj* fighter_gobj, u8 arg1)
     func_800A101C(fp, var0, arg1, fp->x1A9C);
 }
 
-s32 func_80087C1C()
+s32 func_80087C1C(void)
 {
     HSD_GObj* fighter_gobj;
     s32 ftKind;

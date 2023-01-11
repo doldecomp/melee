@@ -1,6 +1,16 @@
 #include <melee/ft/ftlib.h>
 
+#include <melee/ef/efasync.h>
+#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include <melee/ft/chara/ftKirby/ftkirby.h>
+#include <melee/pl/pl_unknown_001.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftdata.h>
+#include <sysdolphin/baselib/rumble.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/lb/lbunknown_003.h>
 #include <melee/cm/camera.h>
+#include <melee/ft/ftparts.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
@@ -117,8 +127,8 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
         }
         cur_fp = cur->user_data;
         // skip if same team
-        if (cur_fp->x221F_flag.bits.b3 ||
-            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team)
+        if (cur_fp->x221F_flag.bits.b3 || (func_8016B168() && fp != NULL &&
+                                           cur_fp->x61B_team == fp->x61B_team))
         {
             continue;
         }
@@ -159,13 +169,15 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
             continue;
         }
         cur_fp = cur->user_data;
-        if (cur_fp->x221F_flag.bits.b3 ||
-            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team)
+        if (cur_fp->x221F_flag.bits.b3 || (func_8016B168() && fp != NULL &&
+                                           cur_fp->x61B_team == fp->x61B_team))
         {
             continue;
         }
         func_800866DC(cur, &sp24);
-        if (arg8 == -1.0f && sp24.x > v->x || arg8 == +1.0f && sp24.x < v->x) {
+        if ((arg8 == -1.0f && sp24.x > v->x) ||
+            (arg8 == +1.0f && sp24.x < v->x))
+        {
             continue;
         }
 
@@ -211,8 +223,8 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
             continue;
         }
         cur_fp = cur->user_data;
-        if (cur_fp->x221F_flag.bits.b3 ||
-            func_8016B168() && fp != NULL && cur_fp->x61B_team == fp->x61B_team)
+        if (cur_fp->x221F_flag.bits.b3 || (func_8016B168() && fp != NULL &&
+                                           cur_fp->x61B_team == fp->x61B_team))
         {
             continue;
         }
@@ -383,7 +395,7 @@ BOOL func_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
         return 1;
     }
     if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b5 ||
-        !fp->x221E_flag.bits.b3 && fp->x1974_heldItem == arg1 ||
+        (!fp->x221E_flag.bits.b3 && fp->x1974_heldItem == arg1) ||
         (!fp->x221E_flag.bits.b4 && (fp->x197C == arg1 || fp->x1980 == arg1)))
     {
         return 0;
@@ -850,9 +862,9 @@ HSD_GObj* func_8008741C(u32 i)
     HSD_GObj* cur;
     for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         Fighter* fp = cur->user_data;
-        if (fp->x8_spawnNum == i) {
+        /// @todo Is @c i really #u32?
+        if ((unsigned) fp->x8_spawnNum == i)
             return cur;
-        }
     }
     return NULL;
 }

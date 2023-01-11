@@ -14,7 +14,9 @@
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/util.h>
 
-#define MAX_FT_PARTS 140
+#include <dolphin/os/os.h>
+
+#define MAX_FT_PARTS (140)
 
 #define JOBJ_NEXT(jobj) ((jobj) == NULL ? NULL : (jobj)->next)
 #define JOBJ_PARENT(jobj) ((jobj) == NULL ? NULL : (jobj)->parent)

@@ -36,6 +36,8 @@ typedef void* unk_t;
 typedef void (*jmp_t)(void);
 typedef jmp_t jtbl_t[];
 
+typedef void (*Event)(void);
+
 #define TRUE (1)
 #define FALSE (0)
 

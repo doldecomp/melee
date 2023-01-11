@@ -1,5 +1,8 @@
 #include <melee/gr/grbattle.h>
 
+#include <melee/gr/grzakogenerator.h>
+#include <melee/gr/grlib.h>
+#include <melee/gm/code_801601C4.h>
 #include <dolphin/os/os.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
@@ -69,25 +72,37 @@ static StageCallbacks lbl_803E7DA0[7] = {
     },
 };
 
+/// @todo Not ideal @c clang-format behavior.
+/// Removing the trailing comma is arguably worse.
 StageData lbl_803E7E38 = {
-    0x00000024,    lbl_803E7DA0,  "/GrNBa.dat",  func_80219CA4,
-    func_80219C98, func_80219D54, func_80219D58, func_80219D7C,
-    func_8021A610, func_8021A618, 0x00000001,
+    0x00000024,
+    lbl_803E7DA0,
+    "/GrNBa.dat",
+    func_80219CA4,
+    func_80219C98,
+    func_80219D54,
+    func_80219D58,
+    func_80219D7C,
+    func_8021A610,
+    func_8021A618,
+    0x00000001,
+    NULL,
+    0,
 };
 
-static void func_80219C98()
+static void func_80219C98(void)
 {
     lbl_804D6AC8 = 1;
 }
 
-static void func_80219CA4()
+static void func_80219CA4(void)
 {
     lbl_804D6ACC = func_801C49F8();
     stage_info.unk8C.b4 = 1;
     stage_info.unk8C.b5 = 1;
 
     func_80219D84(0);
-    if (func_8016B3D8() != 0 || Stage_80225194() == 0x111 ||
+    if (func_8016B3D8() || Stage_80225194() == 0x111 ||
         Stage_80225194() == 0xF5)
     {
         func_80219D84(5);
@@ -102,16 +117,16 @@ static void func_80219CA4()
     lbl_804D6AC8 = 0;
 }
 
-static void func_80219D54()
+static void func_80219D54(void)
 {
 }
 
-static void func_80219D58()
+static void func_80219D58(void)
 {
     func_801CAE04(0);
 }
 
-static s32 func_80219D7C()
+static s32 func_80219D7C(void)
 {
     return 0;
 }

@@ -1,5 +1,7 @@
+#include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/base/PPCArch.h>
@@ -30,14 +32,14 @@ static inline void GXSetMisc_inline_1(u16 arg0)
     __GXContexts.main->x4 = arg0;
 }
 
-static inline void GXSetMisc_inline_2()
+static inline void GXSetMisc_inline_2(void)
 {
     GXContext* gx = __GXContexts.main;
     gx->x0.u16[0] = !gx->x4;
     set_x2(GX_TRUE);
 }
 
-static inline void GXSetMisc_inline_3()
+static inline void GXSetMisc_inline_3(void)
 {
     GXContext* gx = __GXContexts.main;
 
@@ -61,7 +63,7 @@ void GXSetMisc(s32 arg0, u32 arg1)
     }
 }
 
-void GXSetDrawDone()
+void GXSetDrawDone(void)
 {
     u16 i;
     BOOL interrupt_enabled = OSDisableInterrupts();
@@ -79,7 +81,7 @@ void GXSetDrawDone()
     OSRestoreInterrupts(interrupt_enabled);
 }
 
-void GXWaitDrawDone()
+void GXWaitDrawDone(void)
 {
     u32 interrupt_enabled = OSDisableInterrupts();
 
@@ -89,7 +91,7 @@ void GXWaitDrawDone()
     OSRestoreInterrupts(interrupt_enabled);
 }
 
-void GXPixModeSync()
+void GXPixModeSync(void)
 {
     WGPIPE.u8 = GX_LOAD_BP_REG;
     GX_WRITE_U32(__GXContexts.main->x1D0[3]);
@@ -137,7 +139,7 @@ void GXPokeAlphaUpdate(BOOL update_enable)
     u16 old = __peReg[PE_POKE_CMODE0_ID];
 
     // PEReg[2].bit11 = update_enable (PowerPC bit-ordering)
-    __peReg[PE_POKE_CMODE0_ID] = old & ~0x10 | (update_enable << 4) & 0xFF0;
+    __peReg[PE_POKE_CMODE0_ID] = (old & ~0x10) | ((update_enable << 4) & 0xFF0);
 }
 
 /*
@@ -182,7 +184,7 @@ void GXPokeColorUpdate(BOOL update_enable)
     u16 old = __peReg[PE_POKE_CMODE0_ID];
 
     // PEReg[2].bit12 = update_enable (PowerPC bit-ordering)
-    __peReg[PE_POKE_CMODE0_ID] = (old & ~8) | ((update_enable) << 3) & 0x7F8;
+    __peReg[PE_POKE_CMODE0_ID] = (old & ~8) | (((update_enable) << 3) & 0x7F8);
 }
 
 /*
@@ -195,7 +197,7 @@ void GXPokeColorUpdate(BOOL update_enable)
  */
 void GXPokeDstAlpha(BOOL enable, u8 alpha)
 {
-    __peReg[PE_POKE_CMODE1_ID] = alpha | (enable << 8) & 0xFF00 & ~0xFF;
+    __peReg[PE_POKE_CMODE1_ID] = alpha | ((enable << 8) & 0xFF00 & ~0xFF);
 }
 
 /*
@@ -210,7 +212,7 @@ void GXPokeDither(s32 dither)
     u16 old = __peReg[PE_POKE_CMODE0_ID];
 
     // PEReg[2].bit13 = dither (PowerPC bit-ordering)
-    __peReg[PE_POKE_CMODE0_ID] = (old & ~4) | (dither << 2) & 0x3FC;
+    __peReg[PE_POKE_CMODE0_ID] = (old & ~4) | ((dither << 2) & 0x3FC);
 }
 
 /*
@@ -231,7 +233,7 @@ void GXPokeDither(s32 dither)
 void GXPokeZMode(BOOL compare_enable, GXCompare func, BOOL update_enable)
 {
     __peReg[PE_POKE_ZMODE_ID] =
-        ((u8) compare_enable & ~0xE | (func << 1)) & ~0x10 |
+        ((((u8) compare_enable & ~0xE) | (func << 1)) & ~0x10) |
         ((update_enable * 0x10) & 0xFF0);
 }
 
@@ -246,7 +248,7 @@ void GXTokenInterruptHandler(__OSInterrupt unused, OSContext* current_ctx)
         OSClearContext(&temp_ctx);
         OSSetCurrentContext(current_ctx);
     }
-    __peReg[5] = __peReg[5] & ~4 | 4;
+    __peReg[5] = (__peReg[5] & ~4) | 4;
 }
 
 GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb)
@@ -260,7 +262,7 @@ GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb)
 
 void GXFinishInterruptHandler(__OSInterrupt unused, OSContext* current_ctx)
 {
-    __peReg[5] = __peReg[5] & ~8 | 8;
+    __peReg[5] = (__peReg[5] & ~8) | 8;
     lbl_804D7328[0] = GX_TRUE;
     if (lbl_804D7324 != NULL) {
         OSContext temp_ctx;
@@ -280,5 +282,5 @@ void __GXPEInit(void)
     OSInitThreadQueue(&GXDrawDoneThreadQueue);
     __OSUnmaskInterrupts(0x2000);
     __OSUnmaskInterrupts(0x1000);
-    __peReg[5] = ((((__peReg[5] & ~4 | 4) & ~8 | 8) & ~1 | 1) & ~2 | 2);
+    __peReg[5] = ((((((((__peReg[5] & ~4) | 4) & ~8) | 8) & ~1) | 1) & ~2) | 2);
 }

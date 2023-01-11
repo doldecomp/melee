@@ -1,9 +1,14 @@
+#include <melee/ft/ftbosslib.h>
+
 #include <dolphin/os/os.h>
+#include <melee/cm/camera.h>
+#include <melee/it/item.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/mp/mplib.h>
 #include <melee/lb/lbvector.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/ftbosslib.h>
 
 typedef enum {
     Gm_PKind_Human,
@@ -13,7 +18,7 @@ typedef enum {
     Gm_PKind_Boss,
 } Gm_PKind;
 
-static float get_zero()
+static float get_zero(void)
 { // float reorder hack until hopefully fixing sqrtf fixes it
     return 0.0f;
 }
@@ -25,7 +30,7 @@ void func_8015BD20(HSD_GObj* gobj)
 
 void func_8015BD24(s32 arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5)
 {
-    *arg1 = ((arg3 / arg0) + HSD_Randi(arg4 - arg5) + arg5) / arg2;
+    *arg1 = ((s32) (arg3 / arg0) + HSD_Randi(arg4 - arg5) + arg5) / arg2;
 }
 
 void func_8015BDB4(HSD_GObj* arg0)

@@ -21,6 +21,7 @@ void Fighter_JObjSetRotation(struct _HSD_JObj*, Quaternion*);
 void func_8007592C(struct _Fighter*, s32, f32);
 void func_80075AF0(struct _Fighter*, s32, f32);
 void func_80075CB4(struct _Fighter*, s32, f32);
+s32 func_8007500C(struct _Fighter*, s32);
 void func_800753D4(struct _Fighter*, s32, unk_t);
 f32 func_80075F48(Fighter*, s32);
 s32 func_80074A74(HSD_GObj*, s32);
@@ -28,6 +29,7 @@ void func_80075650(HSD_GObj* fighter_gobj, HSD_JObj*, u32*);
 void func_8007487C(unk_t item, u32*, u8 costume_id, u32*, u32*);
 void func_80074CA0(u32*, s32, u32*);
 void func_80074D7C(u32*, s32, u32*);
+void Fighter_SetupParts(HSD_GObj* fighter_obj);
 
 /// @returns Blend frames.
 f32 func_80075E78(Fighter*, BOOL);
