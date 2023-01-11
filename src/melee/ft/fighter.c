@@ -899,8 +899,8 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     func_8038FD54(fighter_gobj, &Fighter_8006A360, 1);
     func_8038FD54(fighter_gobj, &Fighter_8006ABA0, 2);
     func_8038FD54(fighter_gobj, &Fighter_Spaghetti_8006AD10, 3);
-    func_8038FD54(fighter_gobj, (void*) &Fighter_procUpdate, 4);
-    func_8038FD54(fighter_gobj, (void*) &Fighter_8006C27C, 6);
+    func_8038FD54(fighter_gobj, &Fighter_procUpdate, 4);
+    func_8038FD54(fighter_gobj, &Fighter_8006C27C, 6);
     func_8038FD54(fighter_gobj, &Fighter_8006C5F4, 7);
     func_8038FD54(fighter_gobj, &Fighter_CallAcessoryCallbacks_8006C624, 8);
     func_8038FD54(fighter_gobj, &Fighter_8006C80C, 9);
@@ -2160,9 +2160,9 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
         vecLocal->x = vecLocal->y = vecLocal->z = c;                           \
     } while (0)
 
-void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy)
+void Fighter_procUpdate(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = (Fighter*) HSD_GobjGetUserData(fighter_gobj);
     Vec3 windOffset;
 
     if (fp->x221F_flag.bits.b3) {
@@ -2478,14 +2478,23 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj)
     }
 }
 
-void Fighter_8006C27C(HSD_GObj* fighter_gobj, s32 unused, s32 unused2,
-                      s32 unused3)
+static inline float Fighter_GetPosX(Fighter* fp)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    return fp->xB0_pos.x;
+}
+
+static inline float Fighter_GetPosY(Fighter* fp)
+{
+    return fp->xB0_pos.y;
+}
+
+void Fighter_8006C27C(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = (Fighter*) HSD_GobjGetUserData(fighter_gobj);
 
     if (!fp->x221F_flag.bits.b3) {
         if (fp->x6F0_collData.x19C) {
-            fp->x6F0_collData.x19C = fp->x6F0_collData.x19C - 1;
+            fp->x6F0_collData.x19C--;
             if (!fp->x6F0_collData.x19C) {
                 func_8007D5BC(fp);
             }
@@ -2509,9 +2518,11 @@ void Fighter_8006C27C(HSD_GObj* fighter_gobj, s32 unused, s32 unused2,
                 fpclassify(fp->xB0_pos.y) == FP_NAN ||
                 fpclassify(fp->xB0_pos.z) == FP_NAN)
             {
-                OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n",
-                         fp->xB0_pos.x, fp->xB0_pos.y);
-                __assert(__FILE__, 2590, "0");
+                f32 x = Fighter_GetPosX(fp);
+                f32 y = Fighter_GetPosY(fp);
+                OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", x,
+                         y);
+                __assert("fighter.c", 2590, "0");
             }
         }
 

@@ -2160,10 +2160,9 @@ void Fighter_8006A360(HSD_GObj* fighter_gobj);
 void Fighter_8006ABA0(HSD_GObj* fighter_gobj);
 void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighter_gobj);
 void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj);
-void Fighter_procUpdate(HSD_GObj* fighter_gobj, s32 dummy);
+void Fighter_procUpdate(HSD_GObj* fighter_gobj);
 void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj);
-void Fighter_8006C27C(HSD_GObj* fighter_gobj, s32 unused, s32 unused2,
-                      s32 unused3);
+void Fighter_8006C27C(HSD_GObj* fighter_gobj);
 void Fighter_8006C5F4(HSD_GObj* fighter_gobj);
 void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighter_gobj);
 void Fighter_8006C80C(HSD_GObj* fighter_gobj);
