@@ -3,7 +3,7 @@
 
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 // Most of these should be moved to independent headers once they are created //
 

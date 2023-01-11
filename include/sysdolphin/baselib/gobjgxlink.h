@@ -1,7 +1,7 @@
 #ifndef _gobjgxlink_h_
 #define _gobjgxlink_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/gobj.h>
 

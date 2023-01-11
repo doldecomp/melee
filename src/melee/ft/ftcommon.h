@@ -2,7 +2,7 @@
 #define MELEE_FT_FTCOMMON_H
 
 #include <dolphin/mtx.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 

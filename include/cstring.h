@@ -1,7 +1,7 @@
 #ifndef __CSTRING_H__
 #define __CSTRING_H__
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 #include <stddef.h>
 
 int func_8032388C(void* dst, const void* src, size_t len);

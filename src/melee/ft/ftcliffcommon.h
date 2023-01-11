@@ -1,8 +1,8 @@
 #ifndef _ftcliffcommon_h_
 #define _ftcliffcommon_h_
 
-#include <dolphin/types.h>
 #include <melee/ft/fighter.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 BOOL func_80081298(HSD_GObj* gobj);

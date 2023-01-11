@@ -1,6 +1,5 @@
 #include <melee/ft/ftcliffcommon.h>
 
-#include <dolphin/types.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
@@ -8,6 +7,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/mp/mplib.h>
 #include <melee/pl/pl_unknown_001.h>
+#include <Runtime/platform.h>
 
 BOOL func_80081298(HSD_GObj* gobj)
 {

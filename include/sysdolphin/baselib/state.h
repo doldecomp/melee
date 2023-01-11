@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_S
 #define SYSDOLPHIN_BASELIB_S
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 void HSD_StateSetZMode(u32, u32, u32);
 void HSD_StateInvalidate(s32);

@@ -1,7 +1,7 @@
 #ifndef _BUFFER_IO_H_
 #define _BUFFER_IO_H_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 typedef struct _BufferIoUnkFlagStruct {
     /* 0x00 */ struct {

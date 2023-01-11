@@ -2,7 +2,7 @@
 #define _mncharsel_h_
 
 #include <common_structs.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 typedef enum _Mode {
     Mode_Time,

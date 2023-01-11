@@ -16,7 +16,7 @@ HSD_GObj* func_80390A3C(u16 id, u8 arg1)
 
 void func_80390A70(HSD_GObj* gobj, u8 kind, unk_t obj)
 {
-    assert_line(42, gobj->obj_kind == HSD_GOBJ_OBJ_NONE);
+    HSD_ASSERT(42, gobj->obj_kind == HSD_GOBJ_OBJ_NONE);
     gobj->obj_kind = kind;
     gobj->hsd_obj = obj;
 }

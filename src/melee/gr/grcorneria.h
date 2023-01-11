@@ -1,7 +1,7 @@
 #ifndef MELEE_GR_GRCORNERIA_H
 #define MELEE_GR_GRCORNERIA_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 BOOL func_801E2D14(void);
 BOOL func_801E2CE8(void);

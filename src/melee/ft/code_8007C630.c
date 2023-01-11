@@ -1,7 +1,6 @@
 /** @file
  * @todo Rename to @c ftUnk1.c
  */
-#include <dolphin/types.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftlib.h>
@@ -9,6 +8,7 @@
 #include <melee/it/item2.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/text_2.h>
+#include <Runtime/platform.h>
 
 static f32 const lbl_804D8328 = 0.0F;
 static f32 const lbl_804D832C = 1.0F;

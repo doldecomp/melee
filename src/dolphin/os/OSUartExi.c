@@ -1,4 +1,4 @@
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 static u32 Enabled[2];
 

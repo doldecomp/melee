@@ -31,7 +31,7 @@ void GObj_SetupGXLink(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32),
     HSD_GObj* i;
     HSD_GObj* prev;
 
-    assert_line(167, gx_link <= HSD_GObjLibInitData.gx_link_max);
+    HSD_ASSERT(167, gx_link <= HSD_GObjLibInitData.gx_link_max);
     gobj->render_cb = render_cb;
     gobj->gx_link = gx_link;
     gobj->render_priority = priority;
@@ -98,7 +98,7 @@ void func_8039084C(HSD_GObj* gobj)
     HSD_GObj* prev;
     HSD_GObj* next;
 
-    assert_line(415, gobj->gx_link != HSD_GOBJ_GXLINK_NONE);
+    HSD_ASSERT(415, gobj->gx_link != HSD_GOBJ_GXLINK_NONE);
 
     prev = gobj->prev_gx;
     if (prev != NULL) {
@@ -130,7 +130,7 @@ inline HSD_GObj* get_by_prio(HSD_GObj* gobj)
 void func_80390908(HSD_GObj* gobj, u8 gx_link, u8 priority)
 {
     HSD_GObj* cur;
-    assert_line(535, gx_link <= HSD_GObjLibInitData.gx_link_max);
+    HSD_ASSERT(535, gx_link <= HSD_GObjLibInitData.gx_link_max);
     func_8039084C(gobj);
     gobj->gx_link = gx_link;
     gobj->render_priority = priority;

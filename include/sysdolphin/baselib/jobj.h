@@ -1,7 +1,7 @@
 #ifndef _jobj_h_
 #define _jobj_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/aobj.h>
@@ -165,14 +165,14 @@ void HSD_JObjAddNext(HSD_JObj* jobj, HSD_JObj* next);
 
 inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
-    assert_line(405, jobj);
+    HSD_ASSERT(405, jobj);
     return jobj->robj;
 }
 
 inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
 {
     BOOL result;
-    assert_line(564, jobj);
+    HSD_ASSERT(564, jobj);
     result = FALSE;
     if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
         result = TRUE;
@@ -197,7 +197,7 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 
 inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
-    assert_line(618, jobj);
+    HSD_ASSERT(618, jobj);
     jobj->rotate = *quat;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -206,8 +206,8 @@ inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 
 inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
 {
-    assert_line(0x27F, jobj);
-    assert_line(0x280, !(jobj->flags & JOBJ_USE_QUATERNION));
+    HSD_ASSERT(0x27F, jobj);
+    HSD_ASSERT(0x280, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -216,8 +216,8 @@ inline void HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
 
 inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 {
-    assert_line(0x294, jobj);
-    assert_line(0x295, !(jobj->flags & JOBJ_USE_QUATERNION));
+    HSD_ASSERT(0x294, jobj);
+    HSD_ASSERT(0x295, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -226,8 +226,8 @@ inline void HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 
 inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
 {
-    assert_line(0x2A9, jobj);
-    assert_line(0x2AA, !(jobj->flags & JOBJ_USE_QUATERNION));
+    HSD_ASSERT(0x2A9, jobj);
+    HSD_ASSERT(0x2AA, !(jobj->flags & JOBJ_USE_QUATERNION));
     jobj->rotate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -236,14 +236,14 @@ inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
 
 inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
-    assert_line(699, jobj);
+    HSD_ASSERT(699, jobj);
     *quat = jobj->rotate;
 }
 
 inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
 {
-    assert_line(760, jobj);
-    assert_line(761, scale);
+    HSD_ASSERT(760, jobj);
+    HSD_ASSERT(761, scale);
     jobj->scale = *scale;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -252,7 +252,7 @@ inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
 
 inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 {
-    assert_line(0x308, jobj);
+    HSD_ASSERT(0x308, jobj);
     jobj->scale.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -261,7 +261,7 @@ inline void HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 
 inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 {
-    assert_line(0x317, jobj);
+    HSD_ASSERT(0x317, jobj);
     jobj->scale.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -270,7 +270,7 @@ inline void HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 
 inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 {
-    assert_line(0x326, jobj);
+    HSD_ASSERT(0x326, jobj);
     jobj->scale.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -279,32 +279,32 @@ inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 
 inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec3* scale)
 {
-    assert_line(823, jobj);
+    HSD_ASSERT(823, jobj);
     *scale = jobj->scale;
 }
 
 inline f32 HSD_JObjGetScaleX(HSD_JObj* jobj)
 {
-    assert_line(875, jobj);
+    HSD_ASSERT(875, jobj);
     return jobj->scale.x;
 }
 
 inline f32 HSD_JObjGetScaleY(HSD_JObj* jobj)
 {
-    assert_line(888, jobj);
+    HSD_ASSERT(888, jobj);
     return jobj->scale.y;
 }
 
 inline f32 HSD_JObjGetScaleZ(HSD_JObj* jobj)
 {
-    assert_line(901, jobj);
+    HSD_ASSERT(901, jobj);
     return jobj->scale.z;
 }
 
 inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 {
-    assert_line(916, jobj);
-    assert_line(917, translate);
+    HSD_ASSERT(916, jobj);
+    HSD_ASSERT(917, translate);
     jobj->translate = *translate;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -313,7 +313,7 @@ inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 
 inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 {
-    assert_line(0x3A4, jobj);
+    HSD_ASSERT(0x3A4, jobj);
     jobj->translate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -322,7 +322,7 @@ inline void HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 
 inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 {
-    assert_line(0x3B3, jobj);
+    HSD_ASSERT(0x3B3, jobj);
     jobj->translate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -331,7 +331,7 @@ inline void HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 
 inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
 {
-    assert_line(0x3C2, jobj);
+    HSD_ASSERT(0x3C2, jobj);
     jobj->translate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -340,20 +340,20 @@ inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
 
 inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec3* translate)
 {
-    assert_line(979, jobj);
-    assert_line(980, translate);
+    HSD_ASSERT(979, jobj);
+    HSD_ASSERT(980, translate);
     *translate = jobj->translate;
 }
 
 inline f32 HSD_JObjGetTranslationX(HSD_JObj* jobj)
 {
-    assert_line(993, jobj);
+    HSD_ASSERT(993, jobj);
     return jobj->translate.x;
 }
 
 inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
 {
-    assert_line(1006, jobj);
+    HSD_ASSERT(1006, jobj);
     return jobj->translate.y;
 }
 
@@ -363,14 +363,14 @@ void* HSD_JObjUnkMtxPtr(struct _HSD_JObj*);
 
 inline void HSD_JObjGetMtx(HSD_JObj* jobj)
 {
-    assert_line(1144, jobj);
+    HSD_ASSERT(1144, jobj);
     HSD_JObjUnkMtxPtr(jobj);
 }
 
 inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
 {
-    assert_line(1170, jobj);
-    assert_line(1171, mtx);
+    HSD_ASSERT(1170, jobj);
+    HSD_ASSERT(1171, mtx);
     PSMTXCopy(mtx, jobj->mtx);
 }
 

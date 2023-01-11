@@ -1,7 +1,7 @@
 #ifndef _lbcommands_h_
 #define _lbcommands_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 typedef struct _Command_04_Struct {
     u32* ptr[1];

@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_SISLIB_H
 #define SYSDOLPHIN_BASELIB_SISLIB_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 void func_803A6048(size_t);
 

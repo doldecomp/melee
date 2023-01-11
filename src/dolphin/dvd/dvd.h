@@ -1,7 +1,7 @@
 #ifndef __DOLPHIN_DVD_H_
 #define __DOLPHIN_DVD_H_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 struct bb2struct {
     u32 _00;

@@ -1,7 +1,7 @@
 #ifndef MELEE_IF_IFALL_H
 #define MELEE_IF_IFALL_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 void func_802F3424(void);
 void func_802F3690(void);

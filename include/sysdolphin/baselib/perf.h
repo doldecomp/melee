@@ -1,7 +1,7 @@
 #ifndef _hsd_perf_h_
 #define _hsd_perf_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 typedef struct _HSD_PerfStat {
     f32 cpu_time;

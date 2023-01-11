@@ -1,8 +1,8 @@
 #ifndef _ftdrmario_h_
 #define _ftdrmario_h_
 
-#include <dolphin/types.h>
 #include <melee/ft/fighter.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct _ftDrMarioAttributes {

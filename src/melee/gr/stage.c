@@ -1,5 +1,8 @@
 #include <melee/gr/stage.h>
 
+#include <melee/gm/code_801601C4.h>
+#include <melee/gr/ground.h>
+#include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
 
@@ -19,92 +22,92 @@ struct StructNumberAndStage unk_struct_804D49E8 = { 2, NULL };
 StructPairWithStageID unk_struct_804D49F0 = { 12, 2 };
 extern struct StructStageIDWithUnks unk_arr_803E9960[];
 
-f32 Stage_GetCamBoundsLeftOffset()
+f32 Stage_GetCamBoundsLeftOffset(void)
 {
     return stage_info.cam_info.cam_bounds_left +
            stage_info.cam_info.cam_x_offset;
 }
 
-f32 Stage_GetCamBoundsRightOffset()
+f32 Stage_GetCamBoundsRightOffset(void)
 {
     return stage_info.cam_info.cam_bounds_right +
            stage_info.cam_info.cam_x_offset;
 }
 
-f32 Stage_GetCamBoundsTopOffset()
+f32 Stage_GetCamBoundsTopOffset(void)
 {
     return stage_info.cam_info.cam_bounds_top +
            stage_info.cam_info.cam_y_offset;
 }
 
-f32 Stage_GetCamBoundsBottomOffset()
+f32 Stage_GetCamBoundsBottomOffset(void)
 {
     return stage_info.cam_info.cam_bounds_bottom +
            stage_info.cam_info.cam_y_offset;
 }
 
-f32 Stage_GetCamPanAngleRadians()
+f32 Stage_GetCamPanAngleRadians(void)
 {
     return 0.0174532923847F * stage_info.cam_info.cam_pan_degrees;
 }
 
-f32 Stage_GetCamMaxDepth()
+f32 Stage_GetCamMaxDepth(void)
 {
     return stage_info.cam_info.cam_max_depth;
 }
 
-f32 Stage_GetCamZoomRate()
+f32 Stage_GetCamZoomRate(void)
 {
     return stage_info.cam_info.cam_zoom_rate;
 }
 
-f32 Stage_GetCamInfoX20()
+f32 Stage_GetCamInfoX20(void)
 {
     return stage_info.cam_info.x20;
 }
 
-f32 Stage_GetCamInfoX24()
+f32 Stage_GetCamInfoX24(void)
 {
     return stage_info.cam_info.x24;
 }
 
-f32 Stage_GetCamFixedZoom()
+f32 Stage_GetCamFixedZoom(void)
 {
     return stage_info.cam_info.cam_fixed_zoom;
 }
 
-f32 Stage_GetCamTrackRatio()
+f32 Stage_GetCamTrackRatio(void)
 {
     return stage_info.cam_info.cam_track_ratio;
 }
 
-f32 Stage_GetCamTrackSmooth()
+f32 Stage_GetCamTrackSmooth(void)
 {
     return stage_info.cam_info.cam_track_smooth;
 }
 
-f32 Stage_GetBlastZoneRightOffset()
+f32 Stage_GetBlastZoneRightOffset(void)
 {
     return stage_info.blast_zone.right + stage_info.cam_info.cam_x_offset;
 }
 
-f32 Stage_GetBlastZoneLeftOffset()
+f32 Stage_GetBlastZoneLeftOffset(void)
 {
     return stage_info.blast_zone.left + stage_info.cam_info.cam_x_offset;
 }
 
 // named stGetPlyDeadUp according to an assert in ftcamera.c
-f32 Stage_GetBlastZoneTopOffset()
+f32 Stage_GetBlastZoneTopOffset(void)
 {
     return stage_info.blast_zone.top + stage_info.cam_info.cam_y_offset;
 }
 
-f32 Stage_GetBlastZoneBottomOffset()
+f32 Stage_GetBlastZoneBottomOffset(void)
 {
     return stage_info.blast_zone.bottom + stage_info.cam_info.cam_y_offset;
 }
 
-f32 Stage_CalcUnkCamY()
+f32 Stage_CalcUnkCamY(void)
 {
     f32 cam_y_offset = stage_info.cam_info.cam_y_offset;
     f32 y_pos = stage_info.cam_info.cam_bounds_bottom + cam_y_offset +
@@ -112,7 +115,7 @@ f32 Stage_CalcUnkCamY()
     return 0.5F * y_pos;
 }
 
-f32 Stage_CalcUnkCamYBounds()
+f32 Stage_CalcUnkCamYBounds(void)
 {
     f32 cam_offset = (stage_info.cam_info.cam_bounds_bottom +
                       stage_info.cam_info.cam_y_offset);
@@ -132,37 +135,37 @@ void Stage_UnkSetVec3TCam_Offset(Vec3* vec3)
     vec3->z = 0.0F;
 }
 
-f32 Stage_GetPauseCamZPosMin()
+f32 Stage_GetPauseCamZPosMin(void)
 {
     return stage_info.cam_info.pausecam_zpos_min;
 }
 
-f32 Stage_GetPauseCamZPosInit()
+f32 Stage_GetPauseCamZPosInit(void)
 {
     return stage_info.cam_info.pausecam_zpos_init;
 }
 
-f32 Stage_GetPauseCamZPosMax()
+f32 Stage_GetPauseCamZPosMax(void)
 {
     return stage_info.cam_info.pausecam_zpos_max;
 }
 
-f32 Stage_GetCamAngleRadiansUp()
+f32 Stage_GetCamAngleRadiansUp(void)
 {
     return 0.0174532923847F * stage_info.cam_info.cam_angle_up;
 }
 
-f32 Stage_GetCamAngleRadiansDown()
+f32 Stage_GetCamAngleRadiansDown(void)
 {
     return 0.0174532923847F * stage_info.cam_info.cam_angle_down;
 }
 
-f32 Stage_GetCamAngleRadiansLeft()
+f32 Stage_GetCamAngleRadiansLeft(void)
 {
     return 0.0174532923847F * stage_info.cam_info.cam_angle_left;
 }
 
-f32 Stage_GetCamAngleRadiansRight()
+f32 Stage_GetCamAngleRadiansRight(void)
 {
     return 0.0174532923847F * stage_info.cam_info.cam_angle_right;
 }
@@ -196,7 +199,7 @@ void Stage_SetVecToFixedCamPos(Vec3* arg0)
     *arg0 = stage_info.cam_info.fixed_cam_pos;
 }
 
-f32 Stage_GetCamFixedFov()
+f32 Stage_GetCamFixedFov(void)
 {
     return stage_info.cam_info.fixed_cam_fov;
 }
@@ -212,7 +215,7 @@ void Stage_80224E38(Vec3* arg0, s32 arg1)
     func_801C2D24(arg1 + 4, arg0);
 }
 
-void Stage_80224E64(s32 arg0, Vec3* arg_vec)
+void Stage_80224E64(enum_t arg0, Vec3* arg_vec)
 {
     BOOL bool1;
 
@@ -326,22 +329,22 @@ s32 Stage_80225074(s32 arg0)
     return arg0;
 }
 
-s32 Stage_80225194()
+s32 Stage_80225194(void)
 {
     return unk_struct_804D49E8.list_idx;
 }
 
-s32 Stage_8022519C(s32 idx)
+s32 Stage_8022519C(InternalStageID idx)
 {
     return unk_arr_803E9960[idx].stage_id;
 }
 
-s32 Stage_802251B4(s32 idx, s32 arg1)
+StageData* Stage_802251B4(InternalStageID idx, s32 arg1)
 {
     return func_801C06B8(unk_arr_803E9960[idx].stage_id);
 }
 
-void Stage_802251E8(s32 idx, s32* unused)
+void Stage_802251E8(InternalStageID idx, s32* unused)
 {
     StructPairWithStageID local_data;
 
@@ -356,7 +359,7 @@ void Stage_802251E8(s32 idx, s32* unused)
     func_801C0754(&local_data);
 }
 
-void Stage_8022524C()
+void Stage_8022524C(void)
 {
     StructPairWithStageID local_data;
 
@@ -368,7 +371,7 @@ void Stage_8022524C()
     func_801C0800(&local_data);
 }
 
-void Stage_80225298()
+void Stage_80225298(void)
 {
     StructPairWithStageID local_data;
 
@@ -380,7 +383,7 @@ void Stage_80225298()
     func_801C0F78(&local_data);
 }
 
-void Stage_802252E4(s32 idx, s32 unused)
+void Stage_802252E4(InternalStageID idx, s32 unused)
 {
     StructPairWithStageID local_data;
 
@@ -392,7 +395,7 @@ void Stage_802252E4(s32 idx, s32 unused)
     func_801C0FB8(&local_data);
 }
 
-void Stage_8022532C(s32 idx, s32 arg1)
+void Stage_8022532C(InternalStageID idx, s32 arg1)
 {
     StructPairWithStageID local_data;
 

@@ -84,7 +84,7 @@ void HSD_JObjWalkTree0(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32),
     if (jobj == NULL) {
         return;
     }
-    assert_line(0xAE, jobj->parent);
+    HSD_ASSERT(0xAE, jobj->parent);
     type = jobj->parent->child == jobj ? 1 : 2;
     if (cb != NULL) {
         cb(jobj, args, type);
@@ -682,10 +682,10 @@ void JObjUpdateFunc(void* obj, u32 type, FObjData* val)
             if (1.0L < val->fv) {
                 val->fv = 1.0F;
             }
-            assert_line(0x24B, jobj->aobj);
+            HSD_ASSERT(0x24B, jobj->aobj);
             jp = (HSD_JObj*) jobj->aobj->hsd_obj;
-            assert_line(0x24D, jp);
-            assert_line(0x24E, jp->u.spline);
+            HSD_ASSERT(0x24D, jp);
+            HSD_ASSERT(0x24E, jp->u.spline);
             splArcLengthPoint(&p, jp->u.spline, val->fv);
             HSD_JObjSetTranslateX(jobj, p.x);
             HSD_JObjSetTranslateY(jobj, p.y);
@@ -900,7 +900,7 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
                 PSMTXInverse(jobj->child->mtx, mtx);
                 PSMTXConcat(jobj->mtx, mtx, mtx);
                 cobj = HSD_CObjGetCurrent();
-                assert_line(0x355, cobj);
+                HSD_ASSERT(0x355, cobj);
                 PSMTXConcat(HSD_CObjGetViewMtx(cobj), mtx, mtx);
                 HSD_JObjDispAll(jobj->child, mtx, flags, rendermode);
             }
@@ -922,7 +922,7 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
 void HSD_JObjSetDefaultClass(HSD_JObjInfo* info)
 {
     if (info != NULL) {
-        assert_line(0x3A5, hsdIsDescendantOf(info, &hsdJObj));
+        HSD_ASSERT(0x3A5, hsdIsDescendantOf(info, &hsdJObj));
     }
     default_class = info;
 }
@@ -940,7 +940,7 @@ inline HSD_JObj* JObjLoadJointSub(HSD_Joint* joint, HSD_JObj* parent)
         jobj = HSD_JObjAlloc();
     } else {
         jobj = hsdNew(info);
-        assert_line(0x3CC, jobj);
+        HSD_ASSERT(0x3CC, jobj);
     }
     HSD_JOBJ_METHOD(jobj)->load(jobj, joint, parent);
     return jobj;
@@ -1126,7 +1126,7 @@ HSD_JObj* HSD_JObjRemove(HSD_JObj* jobj)
     }
     child = jobj->child;
     if (child != NULL) {
-        assert_line(0x4C0, child->next == NULL);
+        HSD_ASSERT(0x4C0, child->next == NULL);
     }
 
     next = child != NULL ? child : jobj->next;
@@ -1355,10 +1355,10 @@ void HSD_JObjAddChild(HSD_JObj* jobj, HSD_JObj* child)
     if (jobj->child == NULL) {
         jobj->child = child;
     } else {
-        assert_line(0x54D, !(jobj->flags & JOBJ_INSTANCE));
+        HSD_ASSERT(0x54D, !(jobj->flags & JOBJ_INSTANCE));
         last = jobj->child;
         while (last->next != NULL) {
-            assert_line(0x550, last != child);
+            HSD_ASSERT(0x550, last != child);
             last = last->next;
         }
         last->next = child;
@@ -1380,7 +1380,7 @@ HSD_JObj* HSD_JObjReparent(HSD_JObj* jobj, HSD_JObj* parent)
             jobj->parent->child = next;
         } else {
             HSD_JObj* prev = HSD_JObjGetPrev(jobj);
-            assert_line(0x56F, prev);
+            HSD_ASSERT(0x56F, prev);
             prev->next = next;
         }
         RecalcParentTrspBits(jobj->parent);
@@ -1562,7 +1562,7 @@ HSD_JObj* HSD_JObjAlloc(void)
 {
     HSD_JObj* jobj = hsdNew(
         (HSD_ClassInfo*) (default_class != NULL ? default_class : &hsdJObj));
-    assert_line(0x7D3, jobj);
+    HSD_ASSERT(0x7D3, jobj);
     return jobj;
 }
 
@@ -1605,7 +1605,7 @@ inline HSD_JObj* jobj_get_effector(HSD_JObj* jobj)
 HSD_JObj* jobj_get_effector_checked(HSD_JObj* eff)
 {
     eff = jobj_get_effector(eff);
-    assert_line(0x824, eff);
+    HSD_ASSERT(0x824, eff);
     if (HSD_RObjGetByType(eff->robj, REFTYPE_JOBJ, 1) != NULL) {
         return eff;
     } else {
@@ -1663,13 +1663,13 @@ void resolveIKJoint1(HSD_JObj* jobj)
         spBC = *temp_r4;
     }
     robj = HSD_RObjGetByType(jobj->robj, REFTYPE_IKHINT, 0);
-    assert_line(0x853, robj);
+    HSD_ASSERT(0x853, robj);
     new_var = &robj->u.ik_hint;
     temp_f26 = new_var->rotate_x;
     temp_f30 = new_var->bone_length * spBC.x;
     if (var_r31 != NULL) {
         robj = HSD_RObjGetByType(var_r31->robj, REFTYPE_IKHINT, 0);
-        assert_line(0x85E, robj);
+        HSD_ASSERT(0x85E, robj);
         var_f29 = robj->u.ik_hint.bone_length * var_r31->scale.x * spBC.x;
         var_r30 = robj->flags & 4 ? 1 : 0;
         var_r28 = jobj_get_effector_checked(var_r31->child);
@@ -1816,7 +1816,7 @@ void resolveIKJoint2(HSD_JObj* jobj)
         var_f31 = jobj->parent->scl->x;
     }
     robj = HSD_RObjGetByType(jobj->parent->robj, REFTYPE_IKHINT, 0);
-    assert_line(0x8FC, robj);
+    HSD_ASSERT(0x8FC, robj);
     PSVECScale(&sp7C, &sp7C, robj->u.ik_hint.bone_length * var_f31);
     PSVECAdd(&sp88, &sp7C, &sp94);
     PSVECSubtract(&var_r29->translate, &sp94, &sp7C);
@@ -1827,7 +1827,7 @@ void resolveIKJoint2(HSD_JObj* jobj)
     if ((temp_r28 != NULL) || (temp_r29 != NULL)) {
         var_r27 = 0;
         robj = HSD_RObjGetByType(jobj->robj, REFTYPE_IKHINT, 0);
-        assert_line(0x91E, robj);
+        HSD_ASSERT(0x91E, robj);
         var_r30 = robj->flags & 4 ? 1 : 0;
         {
             MtxPtr mtx = jobj->parent->mtx;

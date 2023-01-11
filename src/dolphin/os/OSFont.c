@@ -1,4 +1,4 @@
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 static s16 lbl_804D5C20[] = { -1, 0, 0, 0 };
 

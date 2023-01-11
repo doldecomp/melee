@@ -1,7 +1,7 @@
 #ifndef _mobj_h_
 #define _mobj_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/class.h>

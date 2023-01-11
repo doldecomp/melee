@@ -1,7 +1,7 @@
 #ifndef _player_h_
 #define _player_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 

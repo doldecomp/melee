@@ -227,7 +227,7 @@ void func_801C04BC(f32 arg8)
     if (temp_r3 != NULL)
         temp_r3->x0 = arg8;
     else
-        assert_line(521, 0);
+        HSD_ASSERT(521, 0);
 }
 
 s32 func_801C0508(void)
@@ -344,11 +344,65 @@ s32* func_801C06A4(void)
     return &x->xC8;
 }
 
-/// @todo Uses stage type enum
-void func_801C06B8(enum_t arg0)
+#ifdef MUST_MATCH
+
+#pragma push
+asm StageData* func_801C06B8(InternalStageID arg0)
+{ // clang-format off
+    nofralloc
+/* 801C06B8 00000000  7C 08 02 A6 */	mflr r0
+/* 801C06BC 00000004  90 01 00 04 */	stw r0, 0x4(r1)
+/* 801C06C0 00000008  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 801C06C4 0000000C  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 801C06C8 00000010  3B E3 00 00 */	addi r31, r3, 0x0
+/* 801C06CC 00000014  3C 60 80 3E */	lis r3, lbl_803DFEDC@ha
+/* 801C06D0 00000018  57 E4 10 3A */	slwi r4, r31, 2
+/* 801C06D4 0000001C  38 03 FE DC */	addi r0, r3, lbl_803DFEDC@l
+/* 801C06D8 00000020  7C 60 22 14 */	add r3, r0, r4
+/* 801C06DC 00000024  80 63 00 00 */	lwz r3, 0x0(r3)
+/* 801C06E0 00000028  28 03 00 00 */	cmplwi r3, 0x0
+/* 801C06E4 0000002C  41 82 00 5C */	beq lbl_801C0740
+/* 801C06E8 00000030  80 83 00 08 */	lwz r4, 0x8(r3)
+/* 801C06EC 00000034  28 04 00 00 */	cmplwi r4, 0x0
+/* 801C06F0 00000038  41 82 00 2C */	beq lbl_801C071C
+/* 801C06F4 0000003C  38 00 00 00 */	li r0, 0x0
+/* 801C06F8 00000040  90 01 00 08 */	stw r0, 0x8(r1)
+/* 801C06FC 00000044  38 60 00 04 */	li r3, 0x4
+/* 801C0700 00000048  38 A0 00 04 */	li r5, 0x4
+/* 801C0704 0000004C  38 C0 00 04 */	li r6, 0x4
+/* 801C0708 00000050  38 E0 00 00 */	li r7, 0x0
+/* 801C070C 00000054  39 00 00 01 */	li r8, 0x1
+/* 801C0710 00000058  39 20 00 07 */	li r9, 0x7
+/* 801C0714 0000005C  39 40 00 10 */	li r10, 0x10
+/* 801C0718 00000060  4B E5 71 D1 */	bl func_800178E8
+lbl_801C071C:
+/* 801C071C 00000064  2C 1F 00 10 */	cmpwi r31, 0x10
+/* 801C0720 00000068  41 82 00 1C */	beq lbl_801C073C
+/* 801C0724 0000006C  40 80 00 1C */	bge lbl_801C0740
+/* 801C0728 00000070  2C 1F 00 0C */	cmpwi r31, 0xc
+/* 801C072C 00000074  41 82 00 08 */	beq lbl_801C0734
+/* 801C0730 00000078  48 00 00 10 */	b lbl_801C0740
+lbl_801C0734:
+/* 801C0734 0000007C  48 00 CB A1 */	bl func_801CD2D4
+/* 801C0738 00000080  48 00 00 08 */	b lbl_801C0740
+lbl_801C073C:
+/* 801C073C 00000084  48 01 49 E1 */	bl func_801D511C
+lbl_801C0740:
+/* 801C0740 00000088  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 801C0744 0000008C  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 801C0748 00000090  38 21 00 20 */	addi r1, r1, 0x20
+/* 801C074C 00000094  7C 08 03 A6 */	mtlr r0
+/* 801C0750 00000098  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+
+#else
+
+/// @todo Needs to return @c #StageData*. There may be more parameters.
+StageData* func_801C06B8(InternalStageID arg0)
 {
     if (lbl_803DFEDC[arg0] == NULL)
-        return;
+        return NULL;
 
     if (lbl_803DFEDC[arg0]->data1 != NULL)
         func_800178E8(4, lbl_803DFEDC[arg0]->data1, 4, 4, 0, 1, 7, 16, 0);
@@ -362,6 +416,8 @@ void func_801C06B8(enum_t arg0)
         break;
     }
 }
+
+#endif
 
 void func_801C0754(StructPairWithStageID* pair)
 {
@@ -1992,7 +2048,7 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
         }
     }
 
-    assert_line(2242, bgm!=BGM_Undefined);
+    HSD_ASSERT(2242, bgm!=BGM_Undefined);
 
     if (bgm == -2)
         *arg2 = func_8002305C(Player_GetPlayerCharacter(0), HSD_Randi(2));
@@ -2220,7 +2276,7 @@ static void func_801C2BD4(void* arg0)
             break;
         }
     }
-    assert_line(0x94D, i!=Gr_CObj_Max);
+    HSD_ASSERT(0x94D, i!=Gr_CObj_Max);
 }
 
 BOOL func_801C2C8C(void* arg0)
@@ -3614,7 +3670,7 @@ BOOL func_801C43C4(void* arg0)
             }
         }
 
-        assert_line(3652, 0);
+        HSD_ASSERT(3652, 0);
     }
 
     return FALSE;

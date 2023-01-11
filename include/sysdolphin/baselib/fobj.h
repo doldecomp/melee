@@ -1,7 +1,7 @@
 #ifndef _fobj_h_
 #define _fobj_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/object.h>

@@ -1,7 +1,7 @@
 #ifndef _shadow_h_
 #define _shadow_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/list.h>

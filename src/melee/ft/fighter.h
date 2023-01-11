@@ -3,7 +3,6 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx/mtxtypes.h>
-#include <dolphin/types.h>
 #include <math.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftstatevars.h>
@@ -12,6 +11,7 @@
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbrefract.h>
 #include <melee/pl/player.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>

@@ -1,4 +1,4 @@
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 s32 InitializeUART(u32);
 s32 WriteUARTN(s32, s32);

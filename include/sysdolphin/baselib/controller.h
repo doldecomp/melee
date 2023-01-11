@@ -2,7 +2,7 @@
 #define _controller_h_
 
 #include <dolphin/pad/pad.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 typedef enum _HSD_FlushType {
     HSD_PAD_FLUSH_QUEUE_MERGE = 0,
