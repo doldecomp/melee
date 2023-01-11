@@ -116,4 +116,9 @@ u8 func_803912A8(GObjUnkStruct*, GObjFuncs*);
 HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority);
 void func_80391070(HSD_GObj* gobj, s32 arg1);
 
+static inline void* HSD_GObjGetUserData(HSD_GObj* gobj)
+{
+    return gobj->user_data;
+}
+
 #endif
