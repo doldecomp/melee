@@ -3,8 +3,6 @@
 #include <math.h>
 #include <sysdolphin/baselib/debug.h>
 
-typedef Vec3 Vec3;
-
 typedef struct _UnkStruct {
     struct _UnkStruct* next;
     s32 unk4;
