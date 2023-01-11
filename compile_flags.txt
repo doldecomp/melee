@@ -3,7 +3,6 @@
 -std=c99
 -nostdinc
 -Isrc
--Iinclude
 -Wall
 -Wextra
 -Werror
