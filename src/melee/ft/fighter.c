@@ -2162,7 +2162,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
 
 void Fighter_procUpdate(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = (Fighter*) HSD_GobjGetUserData(fighter_gobj);
+    Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
     Vec3 windOffset;
 
     if (fp->x221F_flag.bits.b3) {
@@ -2490,7 +2490,7 @@ static inline float Fighter_GetPosY(Fighter* fp)
 
 void Fighter_8006C27C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = (Fighter*) HSD_GobjGetUserData(fighter_gobj);
+    Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
 
     if (!fp->x221F_flag.bits.b3) {
         if (fp->x6F0_collData.x19C) {
