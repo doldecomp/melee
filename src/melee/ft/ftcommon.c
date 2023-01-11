@@ -885,7 +885,7 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
     HSD_GObj* cur;
     BOOL phi_r28;
     Vec2* vtmp;
-    char unused[0x14];
+    u8 unused[0x14];
 
     arg_ft = gobj->user_data;
     phi_r28 = FALSE;
@@ -952,7 +952,7 @@ void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
     s32 temp_r0;
     s32 temp_r30;
     Vec2* tmp;
-    char unused[0xC];
+    u8 unused[0xC];
 
     fp = gobj->user_data;
     temp_r31 = &fp->x2C4;

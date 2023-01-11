@@ -2062,7 +2062,7 @@ s32 Player_80036EA0(s32 slot)
 void Player_80036F34(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
-    char unused;
+    u8 unused;
 
     StaticPlayer* player;
 
@@ -2090,7 +2090,7 @@ void Player_80036F34(s32 slot, s32 arg1)
 void Player_80037054(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
-    char unused;
+    u8 unused;
 
     StaticPlayer* player;
 

@@ -845,7 +845,7 @@ void func_803668EC(HSD_LObj* lobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    char unused[4];
+    u8 unused[4];
 #endif
 
     LObjReplaceAll(lobj);

@@ -264,7 +264,7 @@ static void HSD_ObjInit(void)
     HSD_ZListInitAllocData();
 }
 
-static char unused[] = "pix_fmt != GX_PF_RGB565_Z16";
+static u8 unused[] = "pix_fmt != GX_PF_RGB565_Z16";
 
 void HSD_ObjDumpStat(void)
 {

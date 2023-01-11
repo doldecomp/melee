@@ -2307,7 +2307,7 @@ BOOL func_801C2ED0(HSD_JObj* jobj, s32 arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    char unused[4];
+    u8 unused[4];
 #endif
 
     BOOL result = FALSE;
@@ -2532,7 +2532,7 @@ s32 func_801C32D4(s32 arg0, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    char unused[4];
+    u8 unused[4];
 #endif
 
     s32 result;
@@ -2579,7 +2579,7 @@ s32 func_801C33C0(s32 arg0, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    char unused[4];
+    u8 unused[4];
 #endif
 
     s32 result;
@@ -3215,7 +3215,7 @@ void func_801C3BB4(void)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    char unused[8];
+    u8 unused[8];
 #endif
 
     f32 lft;
@@ -3538,7 +3538,7 @@ s32 func_801C4210(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    char unused[8];
+    u8 unused[8];
 #endif
 
     /// @todo With a hard-coded range for @c i, very unlikely it's not returning
@@ -3641,7 +3641,7 @@ void func_801C445C(HSD_LObj* lobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    char unused[4];
+    u8 unused[4];
 #endif
 
     HSD_WObj* wobj;
@@ -3997,7 +3997,7 @@ void func_801C4A08(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    char unused[24];
+    u8 unused[24];
 #endif
 
     if (gobj == NULL)
@@ -4714,7 +4714,7 @@ int func_801C5940(void)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    char unused[4];
+    u8 unused[4];
 #endif
 
     int vals[vals_count];

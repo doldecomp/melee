@@ -22,7 +22,7 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMarioAttributes* sa;
-    char unused[4];
+    u8 unused[4];
 
     fp = getFighter(gobj);
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
@@ -53,7 +53,7 @@ void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
 // 0x800E1B84
 void ftMario_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
-    char unused[8];
+    u8 unused[8];
     ftMario_SpecialHi_Anim(gobj);
 }
 
