@@ -1497,13 +1497,13 @@ typedef struct _Fighter {
     /* 0x68A */ u8 x68A;
     /* 0x68B */ u8 x68B;
 
-    /* 0x68C */ Vec x68C_transNPos;
-    /* 0x698 */ Vec x698;
+    /* 0x68C */ Vec3 x68C_transNPos;
+    /* 0x698 */ Vec3 x698;
     /* 0x6A4 */ Vec3 x6A4_transNOffset;
     /* 0x6B0 */ Vec3 x6B0;
     /* 0x6BC */ f32 x6BC_inputStickangle;
-    /* 0x6C0 */ Vec x6C0;
-    /* 0x6CC */ Vec x6CC;
+    /* 0x6C0 */ Vec3 x6C0;
+    /* 0x6CC */ Vec3 x6CC;
     /* 0x6D8 */ Vec3 x6D8;
     /* 0x6E4 */ Vec3 x6E4;
     /* 0x6F0 */ CollData x6F0_collData;
@@ -1686,8 +1686,8 @@ typedef struct _Fighter {
     /* 0x1A68 */ s16 x1A68;
     /* 0x1A6A */ s16 x1A6A;
     /* 0x1A6C */ f32 x1A6C;
-    /* 0x1A70 */ Vec x1A70;
-    /* 0x1A7C */ Vec x1A7C;
+    /* 0x1A70 */ Vec3 x1A70;
+    /* 0x1A7C */ Vec3 x1A7C;
     u8 filler_x1A7C[0x1A94 - 0x1A88];
     /* 0x1A94 */ u32 x1A94;
     /* 0x1A98 */ u32 x1A98;
@@ -1776,7 +1776,7 @@ typedef struct _Fighter {
     u8 filler_x2174[0x2180 - 0x2174];
     /* 0x2180 */ s32 x2180;
     /* 0x2184 */ HSD_JObj* x2184;
-    /* 0x2188 */ S32Pair x2188;
+    /* 0x2188 */ S32Vec2 x2188;
     // callback struct. Not all of them used by fighter.c, but I'm leaving them
     // in for now.
     struct cb {

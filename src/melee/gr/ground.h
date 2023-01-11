@@ -26,7 +26,7 @@ void func_801C39A0(f32 left);
 void func_801C39B0(f32 right);
 static void func_801C1E2C(HSD_GObj*);
 static BOOL func_801C0A70(Vec3* pos);
-static void func_801C0C2C();
+static void func_801C0C2C(HSD_GObj*);
 static BOOL func_801C24F8(s32, u32, s32*);
 void func_801C5544(Map*, s32);
 static void func_801C55AC(Map*);
@@ -46,18 +46,25 @@ struct _HSD_GObj* func_801C14D0(s32);
 BOOL func_801C28AC(s32, u32, s32*);
 struct _HSD_GObj* func_801C2BA4(s32);
 struct _HSD_JObj* func_801C2CF4(s32);
-BOOL func_801C2D24(s32, Vec*);
+BOOL func_801C2D24(enum_t, Vec3*);
 BOOL func_801C2ED0(struct _HSD_JObj*, s32);
-void func_801C39C0();
-void func_801C3BB4();
+void func_801C39C0(void);
+void func_801C3BB4(void);
 struct _HSD_JObj* func_801C3FA4(struct _HSD_GObj*, s32);
 s32 func_801C4210(void);
-void func_801C42AC();
+void func_801C42AC(void);
 
-/// @brief Get stage's "yakumono" ("about"?) param
+/// Get stage's "yakumono" ("about"?) param
 void* func_801C49F8(void);
 
-void func_801C5A84();
-void func_801C5AA4();
+void func_801C5A84(s32 arg0);
+void func_801C5AA4(BOOL arg0);
+BOOL func_801C3214(int arg0);
+
+/// @param[in] arg0
+/// @param[in] arg1
+/// @param[out] result
+/// @param[in] arg3
+void func_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg3);
 
 #endif

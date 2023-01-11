@@ -116,7 +116,7 @@ static int lbl_802204FC(long)
 {
     return 0;
 }
-static s32 lbl_80220504(Vec*, s32, struct _HSD_JObj*)
+static s32 lbl_80220504(Vec3*, s32, struct _HSD_JObj*)
 {
     return 1;
 }

@@ -12,8 +12,8 @@ typedef struct _GXLightObj {
     f32 ka;        // at 0x1C
     f32 kb;        // at 0x20
     f32 kc;        // at 0x24
-    Vec pos;       // at 0x28
-    Vec dir;       // at 0x34
+    Vec3 pos;      // at 0x28
+    Vec3 dir;      // at 0x34
 } GXLightObj;
 
 void GXInitLightAttn(GXLightObj* light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb,

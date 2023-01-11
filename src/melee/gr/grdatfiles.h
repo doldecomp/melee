@@ -58,7 +58,7 @@ typedef struct _UnkStageDat {
     struct {
         struct _HSD_Joint* unk0;
         u8 x4_fill[0x20 - 0x4];
-        S16Vec* unk20;
+        S16Vec3* unk20;
         s32 unk24; // size of unk20 array
         u8 x28_fill[0x34 - 0x28];
     }* unk8;

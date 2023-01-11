@@ -1123,7 +1123,7 @@ void func_8007E3EC(HSD_GObj* gobj)
 
 void func_8007E5AC(Fighter* fp)
 {
-    Vec* ground_normal = &fp->x6F0_collData.x14C_ground.normal;
+    Vec3* ground_normal = &fp->x6F0_collData.x14C_ground.normal;
     f32 tmp = -atan2f(ground_normal->x, ground_normal->y);
     assert_line(1146, fp->ground_or_air == GA_Ground);
     func_80075CB4(fp, 0, tmp);

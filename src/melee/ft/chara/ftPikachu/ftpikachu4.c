@@ -150,8 +150,8 @@ void ftPikachu_ActionChange_801260E4(HSD_GObj* fighter_gobj)
 
 void ftPikachu_80126144(HSD_GObj* fighter_gobj)
 {
-    Vec vec;
-    Vec vec2;
+    Vec3 vec;
+    Vec3 vec2;
     s32 unused[5];
 
     Fighter* fp = fighter_gobj->user_data;
@@ -188,8 +188,8 @@ void ftPikachu_80126144(HSD_GObj* fighter_gobj)
 
 void ftPikachu_801262B4(HSD_GObj* fighter_gobj)
 {
-    Vec vec;
-    Vec vec2;
+    Vec3 vec;
+    Vec3 vec2;
     s32 unused[5];
 
     Fighter* fp = fighter_gobj->user_data;
@@ -236,7 +236,7 @@ void ftPikachu_Stub_80126428(void)
 
 void ftPikachu_8012642C(HSD_GObj* fighter_gobj)
 {
-    Vec scale;
+    Vec3 scale;
     Vec3 velocity_vec;
     s32 unused;
 
@@ -288,7 +288,7 @@ void ftPikachu_801265F4(HSD_GObj* fighter_gobj)
 
 void ftPikachu_80126614(HSD_GObj* fighter_gobj)
 {
-    Vec scale;
+    Vec3 scale;
     s32 unused[7];
 
     Fighter* fighter2;
@@ -428,7 +428,7 @@ void ftPikachu_ActionChange_80126A2C(HSD_GObj* fighter_gobj)
 
 void ftPikachu_ActionChange_80126AA4(HSD_GObj* fighter_gobj)
 {
-    Vec scale;
+    Vec3 scale;
     s32 unused[6];
 
     CollData* collData;
@@ -489,7 +489,7 @@ void ftPikachu_80126C0C(HSD_GObj* fighter_gobj)
     }
 
     if (!(stick_mag < pika_attr->x8C)) {
-        Vec lstick_direction;
+        Vec3 lstick_direction;
 
         lstick_direction.x = fp->input.x620_lstick_x;
         lstick_direction.y = fp->input.x624_lstick_y;
@@ -638,8 +638,8 @@ static inline s32 return_and_fill_stack(void)
 // seems to check whether to perform a second up b zip
 s32 ftPikachu_80127064(HSD_GObj* fighter_gobj)
 {
-    Vec vec1;
-    Vec vec2;
+    Vec3 vec1;
+    Vec3 vec2;
 
     Fighter* fp = fighter_gobj->user_data;
 

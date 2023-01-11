@@ -41,7 +41,7 @@ void HSD_WObjAddAnim(HSD_WObj* wobj, HSD_WObjAnim* anim)
 static void WObjUpdateFunc(void* obj, u32 type, f32* fval)
 {
     HSD_WObj* wobj;
-    Vec p;
+    Vec3 p;
     HSD_JObj* jp;
 
     wobj = obj;
@@ -142,7 +142,7 @@ HSD_WObj* HSD_WObjLoadDesc(HSD_WObjDesc* desc)
     return NULL;
 }
 
-void HSD_WObjSetPosition(HSD_WObj* wobj, Vec* pos)
+void HSD_WObjSetPosition(HSD_WObj* wobj, Vec3* pos)
 {
     if (wobj == NULL || pos == NULL) {
         return;
@@ -207,7 +207,7 @@ void HSD_WObjSetPositionZ(HSD_WObj* wobj, f32 val)
     }
 }
 
-void HSD_WObjGetPosition(HSD_WObj* wobj, Vec* vec)
+void HSD_WObjGetPosition(HSD_WObj* wobj, Vec3* vec)
 {
     HSD_JObj* jp;
 

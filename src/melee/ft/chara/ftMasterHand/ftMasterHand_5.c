@@ -7,7 +7,7 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
 
-u32 lbl_80151428(Vec* vec)
+u32 lbl_80151428(Vec3* vec)
 {
     HSD_GObj* fetched_gobj;
     // Fighter* ft_userdata;

@@ -23,6 +23,6 @@ static s32 lbl_80223DF0(void);
 static void lbl_80223DF8(HSD_GObj*);
 static void lbl_80223E18(void);
 static int lbl_80223E1C(long);
-static s32 lbl_80223E24(Vec*, s32, struct _HSD_JObj*);
+static s32 lbl_80223E24(Vec3*, s32, struct _HSD_JObj*);
 
 #endif

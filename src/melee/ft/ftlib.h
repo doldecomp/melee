@@ -40,7 +40,7 @@ f32 func_800869F8(HSD_GObj*);
 f32 func_80086A0C(HSD_GObj*);
 BOOL func_80086A18(HSD_GObj*);
 void func_80086A4C(HSD_GObj*, f32);
-BOOL func_80086A58(HSD_GObj*, S32Pair*);
+BOOL func_80086A58(HSD_GObj*, S32Vec2*);
 BOOL func_80086A8C(HSD_GObj*);
 BOOL func_80086B64(HSD_GObj*);
 CameraBox* func_80086B74(HSD_GObj*);

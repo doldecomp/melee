@@ -95,10 +95,10 @@ typedef struct _HSD_JObj {
         struct _HSD_Spline* spline;
     } u;
     /* 0x1C */ Quaternion rotate;
-    /* 0x2C */ Vec scale;
-    /* 0x38 */ Vec translate;
+    /* 0x2C */ Vec3 scale;
+    /* 0x38 */ Vec3 translate;
     /* 0x44 */ Mtx mtx;
-    /* 0x74 */ Vec* scl;
+    /* 0x74 */ Vec3* scl;
     /* 0x78 */ MtxPtr envelopemtx;
     /* 0x7C */ struct _HSD_AObj* aobj;
     /* 0x80 */ struct _HSD_RObj* robj;
@@ -115,9 +115,9 @@ typedef struct _HSD_Joint {
         struct _HSD_Spline* spline;
         struct _HSD_SList* ptcl;
     } u;
-    Vec rotation;
-    Vec scale;
-    Vec position;
+    Vec3 rotation;
+    Vec3 scale;
+    Vec3 position;
     MtxPtr mtx;
     struct _HSD_RObjDesc* robjdesc;
 } HSD_Joint;
@@ -160,6 +160,8 @@ void HSD_JObjSetCurrent(HSD_JObj* jobj);
 HSD_JObj* HSD_JObjGetCurrent(void);
 void HSD_JObjResolveRefsAll(HSD_JObj*, HSD_Joint*);
 void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode);
+void HSD_JObjRemoveAnim(HSD_JObj* jobj);
+void HSD_JObjAddNext(HSD_JObj* jobj, HSD_JObj* next);
 
 inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
@@ -238,7 +240,7 @@ inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
     *quat = jobj->rotate;
 }
 
-inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec* scale)
+inline void HSD_JObjSetScale(HSD_JObj* jobj, Vec3* scale)
 {
     assert_line(760, jobj);
     assert_line(761, scale);
@@ -275,7 +277,7 @@ inline void HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
     }
 }
 
-inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec* scale)
+inline void HSD_JObjGetScale(HSD_JObj* jobj, Vec3* scale)
 {
     assert_line(823, jobj);
     *scale = jobj->scale;
@@ -299,7 +301,7 @@ inline f32 HSD_JObjGetScaleZ(HSD_JObj* jobj)
     return jobj->scale.z;
 }
 
-inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec* translate)
+inline void HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 {
     assert_line(916, jobj);
     assert_line(917, translate);
@@ -336,7 +338,7 @@ inline void HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
     }
 }
 
-inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec* translate)
+inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec3* translate)
 {
     assert_line(979, jobj);
     assert_line(980, translate);

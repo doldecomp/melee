@@ -24,7 +24,7 @@ typedef struct _HSD_CObj {
     struct _HSD_WObj* interest;     // 0x28
     union {
         f32 roll; // 0x2C
-        Vec up;   // 0x2C - 0x34
+        Vec3 up;  // 0x2C - 0x34
     } u;
     f32 near; // 0x38
     f32 far;  // 0x3C
@@ -67,7 +67,7 @@ typedef struct _HSD_CObjDesc {
     struct _HSD_WObjDesc* eye_desc;      // 0x18
     struct _HSD_WObjDesc* interest_desc; // 0x1C
     f32 roll;                            // 0x20
-    Vec* vector;                         // 0x24
+    Vec3* vector;                        // 0x24
     f32 near;                            // 0x28
     f32 far;                             // 0x2C
     union {
@@ -131,5 +131,7 @@ f32 HSD_CObjGetFar(struct _HSD_CObj*);
 void HSD_CObjSetScissorx4(HSD_CObj*, s32, s32, s32, s32);
 void HSD_CObjSetViewportfx4(HSD_CObj*, f32, f32, f32, f32);
 u32 HSD_CObjGetProjectionType(struct _HSD_CObj*);
+void func_80368784(HSD_CObj* cobj, Vec3* cam_pos);
+void func_8036885C(void);
 
 #endif

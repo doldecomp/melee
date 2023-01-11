@@ -1,11 +1,23 @@
 #include <melee/if/ifstatus.h>
 
+#include <melee/lb/lbunknown_003.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <melee/if/ifstock.h>
+#include <melee/text_4.h>
+#include <melee/lb/lbarchive.h>
+#include <sysdolphin/baselib/gobjobject.h>
 #include <dolphin/os/os.h>
+#include <melee/if/ifall.h>
+#include <melee/gm/code_801601C4.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <melee/text_3.h>
 #include <melee/gm/code_801601C4.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
+#include <placeholder.h>
 
 HudIndex* func_802F4910(void)
 {
@@ -32,8 +44,10 @@ extern f32 lbl_804DDA48;
 extern f32 lbl_804DDA4C;
 extern f32 lbl_804DDA50;
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_802F491C()
+asm void func_802F491C(void)
 { // clang-format off
     nofralloc
 /* 802F491C 002F14FC  7C 08 02 A6 */	mflr r0
@@ -210,10 +224,21 @@ lbl_802F4B60:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_802F491C(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 extern f32 lbl_804DDA4C;
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_802F4B84()
+asm void func_802F4B84(void)
 { // clang-format off
     nofralloc
 /* 802F4B84 002F1764  7C 08 02 A6 */	mflr r0
@@ -459,6 +484,15 @@ lbl_802F4EA0:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_802F4B84(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 extern s32 lbl_804D57A8;
 extern unk_t lbl_804D57AC;
 extern f64 lbl_804DDA60;
@@ -467,11 +501,11 @@ extern f32 lbl_804DDA6C;
 extern f32 lbl_804DDA70;
 extern s8 lbl_804D6D60;
 extern f32 lbl_804DDA98;
-extern unk_t func_8022F3D8();
-extern unk_t HSD_JObjRemoveAnim();
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t func_802F4EDC()
+asm void func_802F4EDC(void)
 { // clang-format off
     nofralloc
 /* 802F4EDC 002F1ABC  7C 08 02 A6 */	mflr r0
@@ -1316,13 +1350,22 @@ lbl_802F5B28:
 } // clang-format on
 #pragma pop
 
-extern unk_t func_80391070();
-extern unk_t func_8016AE44();
+#else
+
+void func_802F4EDC(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 extern u8 lbl_804D7849;
 extern char* lbl_803F95C0;
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_802F5B48()
+asm void func_802F5B48(void)
 { // clang-format off
     nofralloc
 /* 802F5B48 002F2728  7C 08 02 A6 */	mflr r0
@@ -1513,6 +1556,15 @@ lbl_802F5DCC:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_802F5B48(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
 {
     s32 var_ctr;
@@ -1524,15 +1576,16 @@ inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
     return NULL;
 }
 
-void lbl_802F5DE0(HSD_GObj* player, void* unk)
+void lbl_802F5DE0(HSD_GObj* player, s32 arg1)
 {
-    if (!getPlayerByHUDParent(player)->flags.hide_all_digits) {
-        func_80391070(player, unk);
-    }
+    if (!getPlayerByHUDParent(player)->flags.hide_all_digits)
+        func_80391070(player, arg1);
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t lbl_802F5E50()
+asm void lbl_802F5E50(void)
 { // clang-format off
     nofralloc
 /* 802F5E50 002F2A30  7C 08 02 A6 */	mflr r0
@@ -1570,11 +1623,19 @@ lbl_802F5EB0:
 } // clang-format on
 #pragma pop
 
-extern unk_t func_802F3424();
-extern unk_t func_80390A70();
+#else
+
+void lbl_802F5E50(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t func_802F5EC0()
+asm void func_802F5EC0(void)
 { // clang-format off
     nofralloc
 /* 802F5EC0 002F2AA0  7C 08 02 A6 */	mflr r0
@@ -1774,11 +1835,21 @@ lbl_802F6158:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_802F5EC0(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 #ifdef MUST_MATCH
 
 #pragma push
 asm HSD_GObj* func_802F6194(HSD_GObj*, s32)
-{ // clang-format off
+{
+    // clang-format off
     nofralloc
 /* 802F6194 002F2D74  28 03 00 00 */	cmplwi r3, 0
 /* 802F6198 002F2D78  41 82 00 0C */	beq lbl_802F61A4
@@ -1858,15 +1929,11 @@ extern char* lbl_803F9598;
 extern char* lbl_804D57C0;
 extern f32 lbl_804DDA9C;
 extern f64 lbl_804DDAA0;
-extern unk_t func_80160968();
-extern unk_t func_80160854();
-extern unk_t func_80168B34();
-extern unk_t func_802F3690();
-extern unk_t func_802F98E8();
-extern unk_t func_802FF364();
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t func_802F61FC()
+asm void func_802F61FC(void)
 { // clang-format off
     nofralloc
 /* 802F61FC 002F2DDC  7C 08 02 A6 */	mflr r0
@@ -2084,6 +2151,17 @@ lbl_802F64C4:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_802F61FC(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void func_802F6508(s32)
 { // clang-format off
@@ -2181,6 +2259,15 @@ lbl_802F663C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_802F6508(s32 arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 extern s8 lbl_804D6D60;
 
 void func_802F665C(s8 arg0)
@@ -2195,10 +2282,11 @@ void func_802F665C(s8 arg0)
 }
 
 extern char* lbl_803F95AC;
-extern unk_t func_80016AF0();
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t func_802F66A4()
+asm void func_802F66A4(void)
 { // clang-format off
     nofralloc
 /* 802F66A4 002F3284  7C 08 02 A6 */	mflr r0
@@ -2262,6 +2350,15 @@ lbl_802F6770:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_802F66A4(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void func_802F6788(s32 player_idx)
 {
     HudValue* player_hud;
@@ -2300,7 +2397,7 @@ void func_802F6804(void)
 }
 
 // Hide Percentage Digits
-void func_802F6898()
+void func_802F6898(void)
 {
     s32 i;
     HudIndex* v = &lbl_804A10C8;
@@ -2368,8 +2465,10 @@ void func_802F69C0(s32 player_idx, s32 arg1)
     {
         func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
+
+    /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (func_802F7BB4 != NULL))
+        (&func_802F7BB4 != NULL))
     {
         func_802F7BB4(player_idx);
     }
@@ -2401,8 +2500,10 @@ void func_802F6AF8(s32 player_idx)
     {
         func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
+
+    /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (func_802F7AF8 != NULL))
+        (&func_802F7AF8 != NULL))
     {
         func_802F7AF8(player_idx);
     }
@@ -2434,8 +2535,10 @@ void func_802F6C04(s32 player_idx)
     {
         func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
+
+    /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (func_802F7C30 != NULL))
+        (&func_802F7C30 != NULL))
     {
         func_802F7C30(player_idx);
     }
@@ -2467,8 +2570,10 @@ void func_802F6D10(s32 player_idx)
     {
         func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
+
+    /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (func_802F7D08 != NULL))
+        (&func_802F7D08 != NULL))
     {
         func_802F7D08(player_idx);
     }
@@ -2495,10 +2600,11 @@ void func_802F6E3C(s32 player_num)
 
 extern Thing_803F9628 lbl_803F9628;
 extern f64 lbl_804DDAA8;
-extern unk_t func_80011C18();
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t func_802F6EA4()
+asm void func_802F6EA4(void)
 { // clang-format off
     nofralloc
 /* 802F6EA4 002F3A84  7C 08 02 A6 */	mflr r0
@@ -2611,8 +2717,19 @@ lbl_802F7020:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_802F6EA4(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_802F7034()
+asm void func_802F7034(void)
 { // clang-format off
     nofralloc
 /* 802F7034 002F3C14  7C 08 02 A6 */	mflr r0
@@ -2693,8 +2810,19 @@ lbl_802F7120:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_802F7034(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_802F7134()
+asm void func_802F7134(void)
 { // clang-format off
     nofralloc
 /* 802F7134 002F3D14  7C 08 02 A6 */	mflr r0
@@ -2758,6 +2886,15 @@ asm unk_t func_802F7134()
 /* 802F721C 002F3DFC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_802F7134(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 // free
 void func_802F7220(void)

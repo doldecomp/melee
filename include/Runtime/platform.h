@@ -72,7 +72,7 @@ typedef int enum_t;
 typedef int intptr_t;
 typedef unsigned int uintptr_t;
 typedef unsigned long size_t;
-typedef signed long ptrdiff_t;
+typedef signed long ssize_t;
 
 /// A pointer to an unknown type
 typedef void* unk_t;

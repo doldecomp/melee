@@ -35,7 +35,7 @@ void ftPikachu_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 
 void ftPikachu_80124908(HSD_GObj* fighter_gobj)
 {
-    Vec sp14;
+    Vec3 sp14;
     s32 stack_buffer[2];
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
@@ -70,7 +70,7 @@ void ftPikachu_80124908(HSD_GObj* fighter_gobj)
 
 void ftPikachu_80124A20(HSD_GObj* fighter_gobj)
 {
-    Vec sp14;
+    Vec3 sp14;
     s32 stack_buffer[2];
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;

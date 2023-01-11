@@ -24,8 +24,8 @@
 /* 004CDCC0 */ extern HSD_ObjAllocData lbl_804D10E0;
 /* 00408F90 */ extern s8 lbl_8040C3B0[10];
 /* 00408F80 */ extern unk_t lbl_8040C3A0;
-/* 003B6244 */ extern Vec lbl_803B9664;
-/* 003B6238 */ extern Vec lbl_803B9658;
+/* 003B6244 */ extern Vec3 lbl_803B9664;
+/* 003B6238 */ extern Vec3 lbl_803B9658;
 /* 003A21BC */ extern void func_803A55DC(HSD_GObj*, u16, s16, u32);
 /* 003A20CC */ extern void func_803A54EC(HSD_GObj*, s32);
 /* 003A1648 */ extern void func_803A4A68(unk_t);

@@ -21,8 +21,8 @@ BOOL func_8008169C(HSD_GObj* pPlayerEntityStruct /*r3*/)
     f32 deltaX_f1;
     f32 wallSide_f31;
 
-    Vec wallPos_sp24;
-    Vec ecb_sp18;
+    Vec3 wallPos_sp24;
+    Vec3 ecb_sp18;
     s32 dummy3[3];
 
     // is a walljump character? is airborne?

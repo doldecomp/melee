@@ -275,5 +275,6 @@ BOOL func_800C5240(HSD_GObj*);
 void func_800C5500(HSD_GObj*);
 void func_800C0358(Fighter*, Fighter*, s32);
 void func_800C88D4(HSD_GObj*, s32, BOOL);
+void func_800C06C0(void);
 
 #endif

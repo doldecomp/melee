@@ -74,7 +74,7 @@ void ftZelda_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/g2bK5
 void ftZelda_8013B780(HSD_GObj* fighter_gobj)
 {
-    Point3d sp24;
+    Vec3 sp24;
     f32 temp_f1;
     f32 temp_f2;
     HSD_GObj* temp_r3;
@@ -117,7 +117,7 @@ void ftZelda_8013B780(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/uGOsz
 void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
 {
-    Point3d sp20;
+    Vec3 sp20;
     ftZeldaAttributes* attributes;
     Fighter* fp; // r30
     f32 temp_f1;
@@ -203,7 +203,7 @@ void ftZelda_8013BA04(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/9hYY3
 void ftZelda_8013BA8C(HSD_GObj* fighter_gobj)
 {
-    Point3d sp24;
+    Vec3 sp24;
     f32 temp_f1;
     f32 temp_f2;
     s32 temp_cr0_eq;
@@ -246,7 +246,7 @@ void ftZelda_8013BA8C(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/llKUS
 void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
 {
-    Point3d sp20;
+    Vec3 sp20;
     f32 temp_f1;
     f32 temp_f2;
     HSD_GObj* temp_r3;

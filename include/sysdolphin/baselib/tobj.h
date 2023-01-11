@@ -131,8 +131,8 @@ typedef struct _HSD_TObj {
     u32 src; // GXTexGenSrc
     GXTexMtx mtxid;
     Quaternion rotate;
-    Vec scale;
-    Vec translate;
+    Vec3 scale;
+    Vec3 translate;
     u32 wrap_s; // GXTexWrapMode
     s32 wrap_t; // GXTexWrapMode
     u8 repeat_s;
@@ -157,9 +157,9 @@ typedef struct _HSD_TObjDesc {
     struct _HSD_TObjDesc* next;
     u32 id;  // GXTexMapID
     u32 src; // GXTexGenSrc
-    Vec rotate;
-    Vec scale;
-    Vec translate;
+    Vec3 rotate;
+    Vec3 scale;
+    Vec3 translate;
     u32 wrap_s; // GXTexWrapMode
     u32 wrap_t; // GXTexWrapMode
     u8 repeat_s;

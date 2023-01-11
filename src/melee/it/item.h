@@ -646,7 +646,7 @@ typedef struct UnkItemArticles3 {
 
 typedef struct BobOmbRain {
     s32 x0;
-    s32 x4;
+    HSD_JObj* x4;
     Vec3 x8_vec;
     s32 x14;
     s32 x18;
@@ -1154,7 +1154,7 @@ HSD_GObj* func_80284D54(Vec3*);
 HSD_GObj* func_80286088(s32);
 HSD_GObj* func_802896CC(Vec3*);
 void func_8028FE90(HSD_GObj*);
-HSD_GObj* func_80290938(s32);
+HSD_GObj* func_80290938(HSD_JObj*);
 HSD_GObj* func_80291BE0(Vec3*);
 HSD_GObj* func_80292D48(Vec3*);
 HSD_GObj* func_80294DC0(Vec3*);
@@ -1164,6 +1164,6 @@ void func_802799E4(HSD_GObj* item_gobj); // Advance Item Script
 void func_80279B88(Item* item_data, s32 arg1, s32 arg2);
 void func_80279BBC(Item* item_data);     /* extern */
 void func_80279BE0(HSD_GObj* item_gobj); /* extern */
-void func_8026ABD8(struct _HSD_GObj*, Vec*, f32);
+void func_8026ABD8(struct _HSD_GObj*, Vec3*, f32);
 
 #endif

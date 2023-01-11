@@ -1,4 +1,5 @@
 #include <sysdolphin/baselib/lobj.h>
+
 #include <dolphin/mtx.h>
 
 void LObjInfoInit(void);
@@ -197,13 +198,13 @@ void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe)
     }
 }
 
-Vec const lbl_803B94A0 = { 0.0F, 0.0F, 0.0F };
-Vec const lbl_803B94AC = { 0.0F, 0.0F, 0.0F };
+Vec3 const lbl_803B94A0 = { 0.0F, 0.0F, 0.0F };
+Vec3 const lbl_803B94AC = { 0.0F, 0.0F, 0.0F };
 
-void HSD_LObjGetLightVector(HSD_LObj* lobj, VecPtr dir)
+void HSD_LObjGetLightVector(HSD_LObj* lobj, Vec3* dir)
 {
-    Vec position = lbl_803B94A0;
-    Vec interest = lbl_803B94AC;
+    Vec3 position = lbl_803B94A0;
+    Vec3 interest = lbl_803B94AC;
 
     if (lobj == NULL)
         return;
@@ -264,8 +265,8 @@ void HSD_LObjSetupSpecularInit(Mtx pmtx)
 {
     int i;
     s32 num;
-    Vec cdir;
-    Vec jpos;
+    Vec3 cdir;
+    Vec3 jpos;
 
     jpos.x = pmtx[0][3];
     jpos.y = pmtx[1][3];
@@ -274,7 +275,7 @@ void HSD_LObjSetupSpecularInit(Mtx pmtx)
 
     num = HSD_LObjGetNbActive();
     for (i = 0; i < num; i++) {
-        Vec half, ldir;
+        Vec3 half, ldir;
         HSD_LObj* lobj = HSD_LObjGetActiveByIndex(i);
 
         if (lobj->spec_id == GX_LIGHT_NULL) {
@@ -334,7 +335,7 @@ void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
 
 void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx)
 {
-    Vec lpos;
+    Vec3 lpos;
     GXInitLightColor(&lobj->lightobj, lobj->color);
     lobj->hw_color = lobj->color;
     HSD_LObjGetPosition(lobj, &lpos);
@@ -356,8 +357,8 @@ void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx)
 
 void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
 {
-    Vec lpos;
-    Vec ldir;
+    Vec3 lpos;
+    Vec3 ldir;
     HSD_LObjGetPosition(lobj, &lpos);
     PSMTXMUltiVec(mtx, &lpos, &lpos);
     HSD_LObjGetLightVector(lobj, &ldir);
@@ -384,8 +385,9 @@ void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
 }
 
 extern char lbl_804D5D24[4];
+
 #pragma push
-asm void HSD_LObjSetupInit()
+asm void HSD_LObjSetupInit(HSD_CObj* arg0)
 { // clang-format off
     nofralloc
 /* 80365F28 00362B08  7C 08 02 A6 */	mflr r0
@@ -841,7 +843,11 @@ inline void LObjReplaceAll(HSD_LObj* lobj)
 
 void func_803668EC(HSD_LObj* lobj)
 {
-    u32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     LObjReplaceAll(lobj);
 }
 
@@ -996,7 +1002,7 @@ void func_80366CD0(HSD_LObj* lobj, f32 ref_dist, f32 ref_br, s32 dist_func)
 
 extern char lbl_80406190[10];
 
-void HSD_LObjSetPosition(HSD_LObj* lobj, Vec* position)
+void HSD_LObjSetPosition(HSD_LObj* lobj, Vec3* position)
 {
     if (lobj == NULL) {
         __assert(lbl_804D5D18, 0x559, lbl_804D5D24);
@@ -1010,7 +1016,7 @@ void HSD_LObjSetPosition(HSD_LObj* lobj, Vec* position)
     HSD_WObjSetPosition(lobj->position, position);
 }
 
-BOOL HSD_LObjGetPosition(HSD_LObj* lobj, Vec* position)
+BOOL HSD_LObjGetPosition(HSD_LObj* lobj, Vec3* position)
 {
     if (lobj != NULL && lobj->position != NULL) {
         HSD_WObjGetPosition(lobj->position, position);
@@ -1019,7 +1025,7 @@ BOOL HSD_LObjGetPosition(HSD_LObj* lobj, Vec* position)
     return FALSE;
 }
 
-void HSD_LObjSetInterest(HSD_LObj* lobj, Vec* interest)
+void HSD_LObjSetInterest(HSD_LObj* lobj, Vec3* interest)
 {
     if (lobj == NULL) {
         __assert(lbl_804D5D18, 0x57D, lbl_804D5D24);
@@ -1033,7 +1039,7 @@ void HSD_LObjSetInterest(HSD_LObj* lobj, Vec* interest)
     HSD_WObjSetPosition(lobj->interest, interest);
 }
 
-BOOL HSD_LObjGetInterest(HSD_LObj* lobj, Point3d* interest)
+BOOL HSD_LObjGetInterest(HSD_LObj* lobj, Vec3* interest)
 {
     if (lobj != NULL && lobj->interest != NULL) {
         HSD_WObjGetPosition(lobj->interest, interest);

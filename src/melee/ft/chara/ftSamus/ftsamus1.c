@@ -93,7 +93,7 @@ void ftSamus_CreateThrowGrappleBeam(HSD_GObj* fighter_gobj, s32 action_state,
                                     f32 anim_speed)
 {
     Fighter* fighter_copy;
-    Vec scale;
+    Vec3 scale;
 
     Fighter* fp = getFighter(fighter_gobj);
     void** item_list = fp->x10C_ftData->x48_items;

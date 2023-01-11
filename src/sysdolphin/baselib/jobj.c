@@ -126,7 +126,7 @@ inline BOOL has_scl(HSD_JObj* jobj)
 
 void HSD_JObjMakeMatrix(HSD_JObj* jobj)
 {
-    Vec* scl;
+    Vec3* scl;
 
     HSD_JObjSetupMatrix(jobj->parent);
     if (jobj->flags & 8) {
@@ -167,14 +167,14 @@ void HSD_JObjMakeMatrix(HSD_JObj* jobj)
         } else {
             scl = NULL;
         }
-        HSD_MtxSRT(jobj->mtx, &jobj->scale, (Vec*) &jobj->rotate,
+        HSD_MtxSRT(jobj->mtx, &jobj->scale, (Vec3*) &jobj->rotate,
                    &jobj->translate, scl);
     }
     if (jobj->parent != NULL) {
         PSMTXConcat(jobj->parent->mtx, jobj->mtx, jobj->mtx);
     }
     if (jobj->aobj != NULL && jobj->aobj->hsd_obj != NULL) {
-        Vec vec;
+        Vec3 vec;
         HSD_JObj* aobj_jobj = (HSD_JObj*) jobj->aobj->hsd_obj;
         HSD_JObjSetupMatrix((HSD_JObj*) jobj->aobj->hsd_obj);
         PSMTXMUltiVec(aobj_jobj->mtx, &jobj->translate, &vec);
@@ -668,7 +668,7 @@ void JObjUpdateFunc(void* obj, u32 type, FObjData* val)
 {
     HSD_JObj* jobj = obj;
     ufc_callback cb;
-    Vec p;
+    Vec3 p;
     HSD_JObj* jp;
     struct _HSD_RObj* robj;
     Mtx mtx;
@@ -834,7 +834,7 @@ void JObjUpdateFunc(void* obj, u32 type, FObjData* val)
                 HSD_MtxGetTranslate(mtx, &jobj->translate);
             }
             if (type == 0x36 || type == 0x37) {
-                HSD_MtxGetRotation(mtx, (Vec*) &jobj->rotate);
+                HSD_MtxGetRotation(mtx, (Vec3*) &jobj->rotate);
             }
             if (type == 0x36 || type == 0x39) {
                 HSD_MtxGetScale(mtx, &jobj->scale);
@@ -1613,21 +1613,21 @@ HSD_JObj* jobj_get_effector_checked(HSD_JObj* eff)
     }
 }
 
-extern const Vec lbl_803B94C4;
+extern const Vec3 lbl_803B94C4;
 
 void resolveIKJoint1(HSD_JObj* jobj)
 {
     HSD_JObj* robj_4;
     HSD_JObj* var_r28;
     HSD_JObj* var_r31;
-    Vec* temp_r4;
+    Vec3* temp_r4;
     f32 temp_f1_7;
     f32 temp_f1_8;
     f32 temp_f31;
     f32 temp_f30;
     f32 temp_f5;
     f32 temp_f5_2;
-    Vec spBC = { 1.0F, 1.0F, 1.0F };
+    Vec3 spBC = { 1.0F, 1.0F, 1.0F };
     f32 var_f1;
     f32 var_f29;
     f32 var_f29_2;
@@ -1636,21 +1636,21 @@ void resolveIKJoint1(HSD_JObj* jobj)
     f32 temp_f26;
     f32 var_f4;
     f32 var_f4_2;
-    Vec spB0;
+    Vec3 spB0;
     f32 tmp;
     f32 var_f4_3;
     f32 var_f4_4;
     f32 var_f5;
     s32 var_r30;
     HSD_RObj* robj;
-    Vec sp98;
-    Vec sp8C;
-    Vec sp80;
+    Vec3 sp98;
+    Vec3 sp8C;
+    Vec3 sp80;
     struct _HSD_IKHint* new_var;
-    Vec sp74;
-    Vec sp68;
-    Vec sp5C;
-    Vec sp50;
+    Vec3 sp74;
+    Vec3 sp68;
+    Vec3 sp5C;
+    Vec3 sp50;
     Mtx sp20;
 
     var_r30 = 0;
@@ -1762,20 +1762,20 @@ void resolveIKJoint1(HSD_JObj* jobj)
     }
 }
 
-const Vec lbl_803B94C4 = { 0.0F, 0.0F, 0.0F };
-const Vec lbl_803B94D0 = { 1.0F, 1.0F, 1.0F };
+const Vec3 lbl_803B94C4 = { 0.0F, 0.0F, 0.0F };
+const Vec3 lbl_803B94D0 = { 1.0F, 1.0F, 1.0F };
 
 void resolveIKJoint2(HSD_JObj* jobj)
 {
-    Vec spA0;
-    Vec sp94;
-    Vec sp88;
-    Vec sp7C;
-    Vec sp70;
-    Vec sp64;
+    Vec3 spA0;
+    Vec3 sp94;
+    Vec3 sp88;
+    Vec3 sp7C;
+    Vec3 sp70;
+    Vec3 sp64;
     Mtx sp34;
-    Vec sp28;
-    Vec sp1C;
+    Vec3 sp28;
+    Vec3 sp1C;
     HSD_JObj* temp_r5;
     HSD_JObj* var_r29;
     f32 temp_f1_4;
@@ -1893,9 +1893,9 @@ void resolveIKJoint2(HSD_JObj* jobj)
 
 void HSD_JObjSetupMatrixSub(HSD_JObj* jobj)
 {
-    Vec sp28;
-    Vec sp1C;
-    Vec sp10;
+    Vec3 sp28;
+    Vec3 sp1C;
+    Vec3 sp10;
     HSD_JObj* parent;
     HSD_RObj* robj;
     f32 x_scale;

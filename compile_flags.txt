@@ -6,7 +6,7 @@
 -Iinclude
 -Wall
 -Wextra
--Wno-unused-variable
+-Werror
 -Wno-unused-but-set-variable
 -Wno-unused-function
 -Wno-unused-parameter

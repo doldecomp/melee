@@ -1,14 +1,13 @@
 #include <melee/ft/ftcliffcommon.h>
 
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/mp/mplib.h>
 #include <dolphin/types.h>
-#include <melee/pl/pl_unknown_001.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/mp/mplib.h>
+#include <melee/pl/pl_unknown_001.h>
 
 BOOL func_80081298(HSD_GObj* gobj)
 {
@@ -97,7 +96,7 @@ void func_80081504(HSD_GObj* gobj)
     }
 }
 
-void func_80081540() {}
+void func_80081540(void) {}
 
 void func_80081544(HSD_GObj* gobj)
 {

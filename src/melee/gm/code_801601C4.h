@@ -19,5 +19,12 @@ BOOL func_8016B0B4(void);
 BOOL func_8016B168(void);
 void func_801692E8(int, struct datetime* datetime);
 BOOL func_8016B3D8(void);
+void func_8016AE44(void);
+void func_80160968(void);
+void func_80160854(void);
+void func_80168B34(void);
+void func_8016B498(void);
+BOOL func_80164600(void);
+BOOL func_80164ABC(void);
 
 #endif

@@ -1,3 +1,4 @@
+#include "Runtime/platform.h"
 #include <dolphin/os/OSAlloc.h>
 
 #include <dolphin/os/os.h>
@@ -12,8 +13,8 @@ volatile OSHeapHandle __OSCurrHeap = -1;
     ((u8*) (start) <= (u8*) (addr) && (u8*) (addr) < (u8*) (end))
 #define OFFSET(addr, align) (((uintptr_t) (addr) & ((align) -1)))
 
-#define ALIGNMENT 32
-#define MINOBJSIZE 64
+#define ALIGNMENT (32)
+#define MINOBJSIZE (64)
 
 /* inserts 'cell' before 'neighbor' and returns 'cell' */
 void* DLAddFront(HeapCell* neighbor, HeapCell* cell)
@@ -74,19 +75,18 @@ HeapCell* DLInsert(HeapCell* list, HeapCell* cell,
     return cell;
 }
 
-void* OSAllocFromHeap(OSHeapHandle heap, u32 size)
+any_t OSAllocFromHeap(OSHeapHandle heap, size_t size)
 {
     Heap* hd = &HeapArray[heap];
-    s32 sizeAligned = OSRoundUp32B(32 + size);
+    size_t sizeAligned = OSRoundUp32B(ALIGNMENT + size);
     HeapCell* cell;
-    HeapCell* oldTail;
-    u32 leftoverSpace;
+    size_t leftoverSpace;
 
     // find first cell with enough capacity
-    for (cell = hd->free; cell != NULL; cell = cell->next) {
-        if (sizeAligned <= (s32) cell->size)
+    for (cell = hd->free; cell != NULL; cell = cell->next)
+        if ((signed) sizeAligned <= (signed) cell->size)
             break;
-    }
+
     if (cell == NULL)
         return NULL;
 
@@ -97,7 +97,7 @@ void* OSAllocFromHeap(OSHeapHandle heap, u32 size)
     } else {
         // remove this cell from the free list and make a new cell out of the
         // remaining space
-        HeapCell* newcell = (void*) ((u8*) cell + sizeAligned);
+        HeapCell* newcell = (any_t) ((u8*) cell + sizeAligned);
         cell->size = sizeAligned;
         newcell->size = leftoverSpace;
         newcell->prev = cell->prev;
@@ -113,12 +113,12 @@ void* OSAllocFromHeap(OSHeapHandle heap, u32 size)
     // add the cell to the beginning of the allocated list
     hd->allocated = DLAddFront(hd->allocated, cell);
 
-    return (u8*) cell + 32;
+    return (u8*) cell + ALIGNMENT;
 }
 
-void OSFreeToHeap(OSHeapHandle heap, void* ptr)
+void OSFreeToHeap(OSHeapHandle heap, any_t ptr)
 {
-    HeapCell* cell = (void*) ((u8*) ptr - 32);
+    HeapCell* cell = (any_t) ((u8*) ptr - ALIGNMENT);
     Heap* hd = &HeapArray[heap];
     HeapCell* list = hd->allocated;
 
@@ -130,6 +130,7 @@ void OSFreeToHeap(OSHeapHandle heap, void* ptr)
         list = cell->next;
     else
         cell->prev->next = cell->next;
+
     hd->allocated = list;
     hd->free = DLInsert(hd->free, cell, list);
 }

@@ -19,5 +19,9 @@ void func_80024FF4(void);
 void func_8002500C(s32);
 void func_80025038(s32);
 void func_8002838C(void);
+BOOL func_80023710(s32);
+BOOL func_80023710(s32);
+void func_80023870(unk_t, s32, s32, s32);
+s32 func_8002305C(s32, s32);
 
 #endif

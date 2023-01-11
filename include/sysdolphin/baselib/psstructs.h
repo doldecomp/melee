@@ -186,9 +186,9 @@ struct _psAppSRT {
 
     struct _generator* gp; /* 0x4 */
 
-    Vec tra;        /* 0x8 */
+    Vec3 tra;       /* 0x8 */
     Quaternion rot; /* 0x14 */
-    Vec sca;        /* 0x24 */
+    Vec3 sca;       /* 0x24 */
 
     u8 status; /* 0x30 */
 

@@ -38,7 +38,7 @@ struct DemoMotionFiles {
     struct DemoMotionSymbols* x0_demoMotionPtr[14];
 };
 
-typedef Vec Vec3;
+typedef Vec3 Vec3;
 
 typedef union _UnkFlagStruct {
     u8 u8;

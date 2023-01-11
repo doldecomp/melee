@@ -917,7 +917,7 @@ void func_800439FC(CollData* arg0)
     {
         sp10.x = arg0->x140.x - var_f31;
         sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (func_8004E090(arg0->x188_ceiling.index, (Point3d*) &sp10, &spC,
+        if (func_8004E090(arg0->x188_ceiling.index, (Vec3*) &sp10, &spC,
                           (u32*) &arg0->x188_ceiling.unk,
                           &arg0->x188_ceiling.normal) != -1)
         {

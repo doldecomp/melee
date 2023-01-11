@@ -97,7 +97,7 @@ void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj)
     }
 
     if ((bool1) && ((colldata->x134_envFlags & 0x18000))) {
-        Vec vec_list[4];
+        Vec3 vec_list[4];
 
         s32 i;
         for (i = 0; i < 4; i++) {
