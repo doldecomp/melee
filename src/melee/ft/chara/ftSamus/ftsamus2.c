@@ -12,12 +12,12 @@ void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
     ftSamusAttributes* attr = getFtSpecialAttrs(fp);
     f32 float_result = ftSamus_80128AC8(fighter_gobj, farg1, farg2);
     if (!func_8007B868(fighter_gobj)) {
-        switch (fp->x2071_b0_3) {
+        switch (fp->x2070.x2071_b0_3) {
         case 0:
         case 2:
         case 3:
         case 4:
-            if ((fp->x2073 == 0x14) || ((fp->x2071_b5) == 0)) {
+            if (fp->x2070.x2073 == 0x14 || fp->x2070.x2071_b5 == 0) {
                 if (fp->x5F5 == 2) {
                     ftSamus_80128B1C(fighter_gobj, float_result, attr->x0,
                                      1.0f);
@@ -268,7 +268,7 @@ s32 ftSamus_80129158(HSD_GObj* fighter_gobj)
         case 0x15A:
         case 0x15B:
         case 0x15C:
-            if (fp->x2071_b6) {
+            if (fp->x2070.x2071_b6) {
                 return 1;
             }
             return 0;

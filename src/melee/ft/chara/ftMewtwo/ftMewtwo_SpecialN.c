@@ -50,7 +50,7 @@ BOOL ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* fighter_gobj)
         case AS_MEWTWO_SPECIALAIRN_CANCEL:
         case AS_MEWTWO_SPECIALAIRN_END:
 
-            if (fp->x2071_b6 != FALSE) {
+            if (fp->x2070.x2071_b6 != FALSE) {
                 return TRUE;
             }
             return FALSE;

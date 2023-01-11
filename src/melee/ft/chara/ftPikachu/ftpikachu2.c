@@ -203,7 +203,7 @@ void ftPikachu_80124DC8(HSD_GObj* fighter_gobj)
     pika_attr_1C = pika_attr->x1C;
     if (fighter_x673_byte < pika_attr_1C) {
         fp->x2340_stateVar1 = pika_attr->x20;
-        fp->x2072_b4 = 1;
+        fp->x2070.x2072_b4 = 1;
     } else {
         fp->x2340_stateVar1 = 0;
     }

@@ -1215,16 +1215,16 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
     // TODO: There has to be some way to get rid of this while maintaining the
     // effect it has on the stack.
     if (1) {
-        volatile s32 volatile_integer = fp->x2070_int;
+        volatile s32 volatile_integer = fp->x2070.x2070_int;
         func_800890D0(fp, new_action_state->move_id);
         func_800895E0(fp, new_action_state->x4_flags);
         fp->x2225_flag.bits.b3 = new_action_state->x9_flags.bits.b0;
 
         if (fp->x2226_flag.bits.b4 != 0U) {
-            if (fp->x2071_b5 != 0U) {
+            if (fp->x2070.x2071_b5 != 0U) {
                 func_800C8B2C(fp, 0x7E, 0);
             }
-            if (fp->x2071_b6 != 0U) {
+            if (fp->x2070.x2071_b6 != 0U) {
                 func_800C8B2C(fp, 0x7F, 0);
             }
         }
@@ -2941,7 +2941,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
                 fp->cb.x21C0_callback_OnGiveDamage(fighter_gobj);
             }
             bool1 = fp->dmg.x1914;
-            if (fp->x2073 == 0x46U) {
+            if (fp->x2070.x2073 == 0x46U) {
                 func_8007EBAC(fp, 0xE, 0);
             } else {
                 func_8007EE0C(fp, fp->dmg.x1914);
