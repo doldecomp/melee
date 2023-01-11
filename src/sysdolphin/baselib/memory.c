@@ -10,7 +10,7 @@ void HSD_Free(any_t ptr)
     OSFreeToHeap(HSD_GetHeap(), ptr);
 }
 
-any_t HSD_MemAlloc(ptrdiff_t size)
+any_t HSD_MemAlloc(ssize_t size)
 {
     any_t adr;
 

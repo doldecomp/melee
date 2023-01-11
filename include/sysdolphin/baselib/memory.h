@@ -5,6 +5,6 @@
 #include <dolphin/types.h>
 
 void HSD_Free(any_t ptr);
-void* HSD_MemAlloc(ptrdiff_t size);
+void* HSD_MemAlloc(ssize_t size);
 
 #endif
