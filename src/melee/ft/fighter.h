@@ -2074,61 +2074,61 @@ typedef struct _Fighter {
     u8 filler_x23B8[0x23E8 - 0x23B8];
 } Fighter;
 
-inline Fighter* getFighter(HSD_GObj* fighter_gobj)
+static inline Fighter* getFighter(HSD_GObj* fighter_gobj)
 {
     return fighter_gobj->user_data;
 }
 
-inline Fighter*
+static inline Fighter*
 getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space //
 {
     Fighter* fp = fighter_gobj->user_data;
     return fp;
 }
 
-inline void* getFtSpecialAttrs(Fighter* fp)
+static inline void* getFtSpecialAttrs(Fighter* fp)
 {
     void* fighter_attr = fp->x2D4_specialAttributes;
     return fighter_attr;
 }
 
-inline void* getFtSpecialAttrsD(Fighter* fp) // Direct
+static inline void* getFtSpecialAttrsD(Fighter* fp) // Direct
 {
     return fp->x2D4_specialAttributes;
 }
 
-inline s32 ftGetKind(Fighter* fp)
+static inline s32 ftGetKind(Fighter* fp)
 {
     return fp->x4_fighterKind;
 }
 
-inline s32 ftGetAction(Fighter* fp)
+static inline s32 ftGetAction(Fighter* fp)
 {
     return fp->x10_action_state_index;
 }
 
-inline void* getFtSpecialAttrs2CC(Fighter* fp)
+static inline void* getFtSpecialAttrs2CC(Fighter* fp)
 {
     void* fighter_attr = fp->x2CC;
     return fighter_attr;
 }
 
-inline attr* getFtAttrs(Fighter* fp)
+static inline attr* getFtAttrs(Fighter* fp)
 {
     return &fp->x110_attr;
 }
 
-inline CollData* getFtColl(Fighter* fp)
+static inline CollData* getFtColl(Fighter* fp)
 {
     return &fp->x6F0_collData;
 }
 
-inline BOOL ftGetGroundAir(Fighter* fp)
+static inline BOOL ftGetGroundAir(Fighter* fp)
 {
     return fp->xE0_ground_or_air;
 }
 
-inline f32 stickGetDir(f32 x1, f32 x2)
+static inline f32 stickGetDir(f32 x1, f32 x2)
 {
     if (x1 < x2) {
         return -x1;
@@ -2235,7 +2235,7 @@ void Fighter_Unload_8006DABC(void* user_data);
     }
 
 /// used for all fighters except Kirby and Purin
-inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag,
+static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag,
                                  BOOL bool2, BOOL bool3)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -2260,7 +2260,7 @@ inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag,
     }
 }
 
-inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
+static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
 {
     Fighter* fp = getFighter(gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
@@ -2268,7 +2268,7 @@ inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
     }
 }
 
-inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
+static inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
 {
     Fighter* fp = getFighter(gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
@@ -2276,7 +2276,7 @@ inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
     }
 }
 
-inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2,
+static inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2,
                                BOOL bool3)
 {
     func_80070FB4(gobj, bool2, -1);
@@ -2285,19 +2285,19 @@ inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2,
     }
 }
 
-inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1)
+static inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1)
 {
     func_800704F0(gobj, arg1, 3.0f);
     func_800704F0(gobj, 0, 3.0f);
 }
 
-inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1)
+static inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1)
 {
     func_800704F0(gobj, arg1, 0.0f);
     func_800704F0(gobj, 0, 0.0f);
 }
 
-inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
+static inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     fp->x2200_ftcmd_var0 = 0;
