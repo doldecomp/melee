@@ -7,7 +7,6 @@ void __assert(char*, u32, char*);
 void func_803881E4(void);
 void HSD_Panic(char*, u32, char*);
 
-/// @todo This is @c HSD_ASSERT and belongs in @c baselib/debug.h.
 /// @todo Take @c file as another arg, ignore it if @c !MUST_MATCH.
 /// @todo Add another variant that takes a string for @c cond.
 #ifdef MUST_MATCH
