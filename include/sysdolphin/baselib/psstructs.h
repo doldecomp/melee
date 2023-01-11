@@ -250,10 +250,11 @@ static inline void setupTevReg(struct _particle* pp);
 static inline void psSetCurrentMtx(GXPosNrmMtx idx);
 static inline struct _particle* psDispSubPoint(struct _particle* pp);
 static inline struct _particle* psDispSubPointTrail(struct _particle* pp);
-static inline void psDispSubMakePolygon(struct _particle* pp, u8* texform, float x,
-                                 float y, float z, float ppvx, float ppvy,
-                                 float ppvz, float x0, float y0, float z0,
-                                 float x1, float y1, float z1);
+static inline void psDispSubMakePolygon(struct _particle* pp, u8* texform,
+                                        float x, float y, float z, float ppvx,
+                                        float ppvy, float ppvz, float x0,
+                                        float y0, float z0, float x1, float y1,
+                                        float z1);
 
 static inline void psDispSub(struct _particle* pp, u8* texform);
 

@@ -339,9 +339,9 @@ s32 Stage_8022519C(InternalStageID idx)
     return unk_arr_803E9960[idx].stage_id;
 }
 
-StageData* Stage_802251B4(InternalStageID idx, s32 arg1)
+void Stage_802251B4(InternalStageID idx, s32 arg1)
 {
-    return func_801C06B8(unk_arr_803E9960[idx].stage_id);
+    func_801C06B8(unk_arr_803E9960[idx].stage_id);
 }
 
 void Stage_802251E8(InternalStageID idx, s32* unused)

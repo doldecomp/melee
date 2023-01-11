@@ -43,7 +43,7 @@ s32 Stage_80224FDC(Vec3* arg0);
 s32 Stage_80225074(s32 arg0);
 s32 Stage_80225194(void);
 s32 Stage_8022519C(InternalStageID idx);
-StageData* Stage_802251B4(InternalStageID idx, s32 arg1);
+void Stage_802251B4(InternalStageID idx, s32 arg1);
 void Stage_802251E8(InternalStageID idx, s32* unused);
 void Stage_8022524C(void);
 void Stage_80225298(void);

@@ -71,6 +71,6 @@ void func_801C0800(StructPairWithStageID* pair);
 void func_801C0F78(StructPairWithStageID* pair);
 void func_801C0FB8(StructPairWithStageID* pair);
 void func_801C1074(StructPairWithStageID* pair, s32 arg1);
-StageData* func_801C06B8(InternalStageID arg0);
+void func_801C06B8(InternalStageID arg0);
 
 #endif
