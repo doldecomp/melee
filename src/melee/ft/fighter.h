@@ -3,7 +3,6 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx/mtxtypes.h>
-#include <dolphin/types.h>
 #include <math.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftstatevars.h>
@@ -12,6 +11,7 @@
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbrefract.h>
 #include <melee/pl/player.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -2234,8 +2234,9 @@ void Fighter_Unload_8006DABC(void* user_data);
     }
 
 /// used for all fighters except Kirby and Purin
-static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag,
-                                 BOOL bool2, BOOL bool3)
+static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
+                                        BOOL catchItemFlag, BOOL bool2,
+                                        BOOL bool3)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
@@ -2275,8 +2276,8 @@ static inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
     }
 }
 
-static inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag, BOOL bool2,
-                               BOOL bool3)
+static inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag,
+                                      BOOL bool2, BOOL bool3)
 {
     func_80070FB4(gobj, bool2, -1);
     if (dropItemFlag) {

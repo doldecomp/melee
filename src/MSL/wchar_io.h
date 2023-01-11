@@ -1,7 +1,7 @@
 #ifndef _WCHAR_IO_H_
 #define _WCHAR_IO_H_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 enum __file_kinds {
     __closed_file,

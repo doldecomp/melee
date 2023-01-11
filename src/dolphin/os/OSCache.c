@@ -4,9 +4,9 @@
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/types.h>
 #include <MetroTRK/intrinsics.h>
 #include <placeholder.h>
+#include <Runtime/platform.h>
 
 #define MSR_IR 0x00000020
 #define MSR_DR 0x00000010

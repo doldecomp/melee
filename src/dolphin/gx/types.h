@@ -2,7 +2,7 @@
 #define DOLPHIN_GX_TYPES_H
 
 #include <dolphin/gx/GXEnum.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #define GX_FIFO_OBJSIZE 128
 typedef struct _GXFifoObj {

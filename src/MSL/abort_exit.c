@@ -1,4 +1,4 @@
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 void _ExitProcess(void);
 void __destroy_global_chain(void);

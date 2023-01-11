@@ -1,7 +1,7 @@
 #ifndef _lblanguage_h_
 #define _lblanguage_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 enum_t lbLang_GetLanguageSetting(void);
 enum_t lbLang_SetLanguageSetting(enum_t language);

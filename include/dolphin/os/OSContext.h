@@ -2,7 +2,7 @@
 
 #ifndef DOLPHIN_OS_OSCONTEXT_H
 #define DOLPHIN_OS_OSCONTEXT_H
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 typedef struct OSContext {
     u32 gprs[32];                  // at 0x0

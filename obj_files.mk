@@ -821,7 +821,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_009.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_010.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_011.s.o\
-    $(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_002.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_002.s.o\
 
 TEXT_O_FILES +=\
@@ -858,5 +857,4 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_008.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_001.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_001.s.o\

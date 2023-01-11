@@ -1,7 +1,7 @@
 #ifndef _objalloc_h_
 #define _objalloc_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 
 #include <common_structs.h>
@@ -40,21 +40,21 @@ typedef struct _HSD_ObjAllocInfo {
 static inline u32 HSD_ObjAllocUsed(HSD_ObjAllocInfo* info)
 {
     HSD_ObjAllocData* data = info->getData();
-    assert_line(205, data);
+    HSD_ASSERT(205, data);
     return data->used;
 }
 
 static inline u32 HSD_ObjAllocFree(HSD_ObjAllocInfo* info)
 {
     HSD_ObjAllocData* data = info->getData();
-    assert_line(221, data);
+    HSD_ASSERT(221, data);
     return data->free;
 }
 
 static inline u32 HSD_ObjAllocPeak(HSD_ObjAllocInfo* info)
 {
     HSD_ObjAllocData* data = info->getData();
-    assert_line(237, data);
+    HSD_ASSERT(237, data);
     return data->peak;
 }
 

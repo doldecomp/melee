@@ -163,7 +163,7 @@ HSD_MObj* HSD_MObjLoadDesc(HSD_MObjDesc* mobjdesc)
             mobj = HSD_MObjAlloc();
         } else {
             mobj = hsdNew(info);
-            assert_line(353, mobj);
+            HSD_ASSERT(353, mobj);
         }
 
         HSD_MOBJ_METHOD(mobj)->load(mobj, mobjdesc);
@@ -183,7 +183,7 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
     u32 done = 0;
     u32 unused[5];
 
-    assert_line(416, list);
+    HSD_ASSERT(416, list);
     *list = NULL;
     for (tobj = tobj_top; tobj != NULL; tobj = tobj->next) {
         if (tobj_coord(tobj) == TEX_COORD_TOON) {
@@ -364,7 +364,7 @@ static char unused1[] = "hsdIsDescendantOf(info, &hsdMObj)";
 
 void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2)
 {
-    assert_line(624, mobj->tevdesc);
+    HSD_ASSERT(624, mobj->tevdesc);
     HSD_TExpSetupTev(mobj->tevdesc, mobj->texp);
     HSD_TObjSetupVolatileTev(tobj, arg2);
 }
@@ -474,14 +474,14 @@ HSD_MObj* HSD_MObjAlloc(void)
 {
     HSD_MObj* mobj = hsdNew(
         (HSD_ClassInfo*) (default_class != NULL ? default_class : &hsdMObj));
-    assert_line(915, mobj);
+    HSD_ASSERT(915, mobj);
     return mobj;
 }
 
 HSD_Material* HSD_MaterialAlloc(void)
 {
     HSD_Material* mat = hsdAllocMemPiece(sizeof(HSD_Material));
-    assert_line(943, mat);
+    HSD_ASSERT(943, mat);
     memset(mat, 0, sizeof(HSD_Material));
     mat->alpha = 1.0F;
     return mat;
@@ -490,7 +490,7 @@ HSD_Material* HSD_MaterialAlloc(void)
 void HSD_MObjAddShadowTexture(HSD_TObj* tobj)
 {
     HSD_TObj* cur;
-    assert_line(990, tobj);
+    HSD_ASSERT(990, tobj);
     for (cur = tobj_shadows; cur != NULL; cur = cur->next) {
         if (cur == tobj) {
             return;

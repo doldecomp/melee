@@ -12,8 +12,8 @@
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
-#include <dolphin/types.h>
 #include <Runtime/__mem.h>
+#include <Runtime/platform.h>
 
 typedef struct OSBootInfo {
     char UNK_0x0[0x2C];

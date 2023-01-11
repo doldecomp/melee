@@ -55,10 +55,10 @@ static void WObjUpdateFunc(void* obj, u32 type, f32* fval)
                 *fval = 1.0;
             }
 
-            assert_line(148, wobj->aobj);
+            HSD_ASSERT(148, wobj->aobj);
             jp = (HSD_JObj*) wobj->aobj->hsd_obj;
-            assert_line(150, jp);
-            assert_line(151, jp->u.spline);
+            HSD_ASSERT(150, jp);
+            HSD_ASSERT(151, jp->u.spline);
 
             splArcLengthPoint(&p, jp->u.spline, *fval);
             HSD_WObjSetPosition(wobj, &p);
@@ -116,9 +116,9 @@ void HSD_WObjInit(HSD_WObj* wobj, HSD_WObjDesc* desc)
 void HSD_WObjSetDefaultClass(HSD_WObjInfo* info)
 {
     if (info) {
-        assert_line(221, hsdIsDescendantOf(info, &hsdWObj)); // The line number here is totally made
-                                         // up, this function is removed in
-                                         // practice but the string isn't
+        HSD_ASSERT(221, hsdIsDescendantOf(info, &hsdWObj)); // The line number here is totally made
+                                        // up, this function is removed in
+                                        // practice but the string isn't
     }
     default_class = info;
 }
@@ -134,7 +134,7 @@ HSD_WObj* HSD_WObjLoadDesc(HSD_WObjDesc* desc)
             wobj = HSD_WObjAlloc();
         } else {
             wobj = hsdNew(info);
-            assert_line(252, wobj);
+            HSD_ASSERT(252, wobj);
         }
         HSD_WOBJ_METHOD(wobj)->load(wobj, desc);
         return wobj;
@@ -229,7 +229,7 @@ HSD_WObj* HSD_WObjAlloc(void)
 {
     HSD_WObj* wobj = (HSD_WObj*) hsdNew(
         (HSD_ClassInfo*) (default_class ? default_class : &hsdWObj));
-    assert_line(591, wobj);
+    HSD_ASSERT(591, wobj);
     return wobj;
 }
 

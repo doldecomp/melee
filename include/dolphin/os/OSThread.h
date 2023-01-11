@@ -4,7 +4,7 @@
 #define _OSTHREAD_H_
 
 #include <dolphin/os/OSContext.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #define OS_PRIORITY_MIN 0
 #define OS_PRIORITY_MAX 31
@@ -65,10 +65,10 @@ typedef void (*OSSwitchThreadCallback)(OSThread*, OSThread*);
 extern OSThreadQueue OS_THREAD_QUEUE AT_ADDRESS(0x800000DC);
 extern OSThread* OS_CURRENT_THREAD AT_ADDRESS(0x800000E4);
 
-STRUCT_PLACEHOLDER(OSThread, 1)
-STRUCT_PLACEHOLDER(OSThread, 2)
-STRUCT_PLACEHOLDER(OSThread, 3)
-STRUCT_PLACEHOLDER(OSThread, 4)
+typedef struct _OSThread_Unk1 OSThread_Unk1;
+typedef struct _OSThread_Unk2 OSThread_Unk2;
+typedef struct _OSThread_Unk3 OSThread_Unk3;
+typedef struct _OSThread_Unk4 OSThread_Unk4;
 
 typedef OSThread_Unk3* (*OSThreadFunc)(OSThread_Unk4*);
 OSSwitchThreadCallback OSSetSwitchThreadCallback(OSSwitchThreadCallback);

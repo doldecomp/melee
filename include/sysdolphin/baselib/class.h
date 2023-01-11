@@ -1,7 +1,7 @@
 #ifndef _class_h_
 #define _class_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 
 #define HSD_CLASS_INFO(o) ((HSD_ClassInfo*) o)

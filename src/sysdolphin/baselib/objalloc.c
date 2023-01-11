@@ -23,7 +23,7 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
     int i;
     u32 unused;
 
-    assert_line(0xEE, data);
+    HSD_ASSERT(0xEE, data);
     pool_size = data->size * num;
     if (obj_heap.top != 0) {
         pool_end = obj_heap.top + obj_heap.size;
@@ -132,7 +132,7 @@ inline void removeAll(HSD_ObjAllocData* data)
 
 void HSD_ObjAllocInit(HSD_ObjAllocData* data, size_t size, u32 align)
 {
-    assert_line(0x185, data);
+    HSD_ASSERT(0x185, data);
     if (data != NULL) {
         removeAll(data);
     } else {

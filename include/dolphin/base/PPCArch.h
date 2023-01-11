@@ -2,7 +2,7 @@
 #ifndef DOLPHIN_BASE_PPCARCH_H
 #define DOLPHIN_BASE_PPCARCH_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 // GEKKO registers
 #define GQR0 0x390

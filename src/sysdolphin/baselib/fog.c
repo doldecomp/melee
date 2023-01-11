@@ -81,14 +81,14 @@ void HSD_FogSet(HSD_Fog* fog)
 HSD_Fog* HSD_FogAlloc(void)
 {
     HSD_Fog* fog = hsdNew((HSD_ClassInfo*) &hsdFog);
-    assert_line(0x8C, fog);
+    HSD_ASSERT(0x8C, fog);
     return fog;
 }
 
 HSD_Fog* HSD_FogLoadDesc(HSD_FogDesc* desc)
 {
     HSD_Fog* fog = HSD_FogAlloc();
-    assert_line(0x99, fog);
+    HSD_ASSERT(0x99, fog);
     HSD_FogInit(fog, desc);
     if (desc->fogadjdesc != NULL) {
         fog->fog_adj = HSD_FogAdjLoadDesc(desc->fogadjdesc);
@@ -121,14 +121,14 @@ void HSD_FogInit(HSD_Fog* fog, HSD_FogDesc* desc)
 HSD_FogAdj* HSD_FogAdjAlloc(void)
 {
     HSD_FogAdj* adj = hsdNew(&hsdFogAdj);
-    assert_line(0xD6, adj);
+    HSD_ASSERT(0xD6, adj);
     return adj;
 }
 
 HSD_FogAdj* HSD_FogAdjLoadDesc(HSD_FogAdjDesc* desc)
 {
     HSD_FogAdj* adj = HSD_FogAdjAlloc();
-    assert_line(0xE6, adj);
+    HSD_ASSERT(0xE6, adj);
     HSD_FogAdjInit(adj, desc);
     return adj;
 }
