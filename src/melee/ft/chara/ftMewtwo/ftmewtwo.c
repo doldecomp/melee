@@ -47,9 +47,7 @@ void ftMewtwo_OnTakeDamage(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialN_OnDeath(fighter_gobj);
 }
 
-void ftMewTwo_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool)
-{
-}
+void ftMewTwo_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool) {}
 
 void ftMewTwo_OnItemInvisible(HSD_GObj* fighter_gobj)
 {

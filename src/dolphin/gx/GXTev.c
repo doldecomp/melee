@@ -360,9 +360,7 @@ asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
 } // clang-format on
 #pragma pop
 
-void GXSetTevClampMode(s32, s32)
-{
-}
+void GXSetTevClampMode(s32, s32) {}
 
 void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1,
                        u8 ref1)

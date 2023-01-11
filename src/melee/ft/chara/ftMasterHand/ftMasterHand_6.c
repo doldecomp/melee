@@ -29,9 +29,7 @@ void lbl_801517F4(HSD_GObj* gobj)
 
 // 80151824 14E404
 // https://decomp.me/scratch/xfY30
-void lbl_80151824(void)
-{
-}
+void lbl_80151824(void) {}
 
 // 80151828 14E408
 // https://decomp.me/scratch/rsfpE

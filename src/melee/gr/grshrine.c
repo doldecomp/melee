@@ -37,9 +37,7 @@ StageData lbl_803E5130 = {
     func_80201F44, func_80201F4C, 0x00000001,
 };
 
-static void func_80201C60()
-{
-}
+static void func_80201C60() {}
 
 static void func_80201C64()
 {
@@ -59,9 +57,7 @@ static void func_80201C64()
     }
 }
 
-static void func_80201CF0()
-{
-}
+static void func_80201CF0() {}
 
 static void func_80201CF4()
 {
@@ -111,13 +107,9 @@ static s32 func_80201E34()
     return 0;
 }
 
-static void func_80201E3C()
-{
-}
+static void func_80201E3C() {}
 
-static void func_80201E40()
-{
-}
+static void func_80201E40() {}
 
 static void func_80201E44(HSD_GObj* gobj)
 {
@@ -131,17 +123,11 @@ static s32 func_80201E88()
     return 0;
 }
 
-static void func_80201E90()
-{
-}
+static void func_80201E90() {}
 
-static void func_80201E94()
-{
-}
+static void func_80201E94() {}
 
-static void func_80201E98()
-{
-}
+static void func_80201E98() {}
 
 static void func_80201E9C(HSD_GObj* gobj)
 {
@@ -165,9 +151,7 @@ static void func_80201F1C()
     func_800115F4();
 }
 
-static void func_80201F40()
-{
-}
+static void func_80201F40() {}
 
 static BOOL func_80201F44(s32)
 {

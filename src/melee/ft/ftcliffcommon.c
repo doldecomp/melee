@@ -97,10 +97,7 @@ void func_80081504(HSD_GObj* gobj)
     }
 }
 
-void func_80081540(void)
-{
-    return;
-}
+void func_80081540() {}
 
 void func_80081544(HSD_GObj* gobj)
 {

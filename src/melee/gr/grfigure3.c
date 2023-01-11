@@ -20,9 +20,7 @@ void* lbl_804D6A80;
 
 extern StageInfo stage_info;
 
-static void func_8020E504(s32 number)
-{
-}
+static void func_8020E504(s32 number) {}
 static void lbl_8020E508(void)
 {
     lbl_804D6A80 = func_801C49F8();
@@ -34,9 +32,7 @@ static void lbl_8020E508(void)
     func_801C39C0();
     func_801C3BB4();
 }
-static void lbl_8020E578(void)
-{
-}
+static void lbl_8020E578(void) {}
 static void lbl_8020E57C(void)
 {
     func_801CAE04(0);
@@ -80,12 +76,8 @@ static s32 lbl_8020E6BC(void)
 {
     return 0;
 }
-static void lbl_8020E6C4(HSD_GObj* gobj)
-{
-}
-static void lbl_8020E6C8()
-{
-}
+static void lbl_8020E6C4(HSD_GObj* gobj) {}
+static void lbl_8020E6C8() {}
 static void lbl_8020E6CC(HSD_GObj* gobj)
 {
     Map* map = gobj->user_data;
@@ -100,9 +92,7 @@ static void lbl_8020E700(HSD_GObj* gobj)
     func_801C2FE0(gobj);
     func_800115F4();
 }
-static void lbl_8020E724()
-{
-}
+static void lbl_8020E724() {}
 static void lbl_8020E728(HSD_GObj* gobj)
 {
     u32 unused[2];
@@ -114,12 +104,8 @@ static s32 lbl_8020E778(void)
 {
     return 0;
 }
-static void lbl_8020E780(HSD_GObj* gobj)
-{
-}
-static void lbl_8020E784()
-{
-}
+static void lbl_8020E780(HSD_GObj* gobj) {}
+static void lbl_8020E784() {}
 static int lbl_8020E788(s32 number)
 {
     return 0;

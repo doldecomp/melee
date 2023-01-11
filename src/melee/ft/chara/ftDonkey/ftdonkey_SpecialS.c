@@ -40,13 +40,9 @@ void ftDonkey_8010E2F8(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010E334(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010E334(HSD_GObj* fighter_gobj) {}
 
-void ftDonkey_8010E338(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010E338(HSD_GObj* fighter_gobj) {}
 
 void ftDonkey_8010E33C(HSD_GObj* fighter_gobj)
 {

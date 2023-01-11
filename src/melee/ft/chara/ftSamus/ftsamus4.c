@@ -61,13 +61,9 @@ void ftSamus_8012A3BC(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSamus_8012A3F8(HSD_GObj* fighter_gobj)
-{
-}
+void ftSamus_8012A3F8(HSD_GObj* fighter_gobj) {}
 
-void ftSamus_8012A3FC(HSD_GObj* fighter_gobj)
-{
-}
+void ftSamus_8012A3FC(HSD_GObj* fighter_gobj) {}
 
 void ftSamus_8012A400(HSD_GObj* fighter_gobj)
 {
@@ -112,13 +108,9 @@ void ftSamus_8012A51C(HSD_GObj* fighter_gobj)
         func_800CC730(fighter_gobj);
 }
 
-void ftSamus_8012A558(HSD_GObj* fighter_gobj)
-{
-}
+void ftSamus_8012A558(HSD_GObj* fighter_gobj) {}
 
-void ftSamus_8012A55C(HSD_GObj* fighter_gobj)
-{
-}
+void ftSamus_8012A55C(HSD_GObj* fighter_gobj) {}
 
 void ftSamus_8012A560(HSD_GObj* fighter_gobj)
 {

@@ -336,9 +336,7 @@ void ftDonkey_8010EF7C(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010F094(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010F094(HSD_GObj* fighter_gobj) {}
 
 void ftDonkey_8010F098(HSD_GObj* fighter_gobj)
 {
@@ -364,21 +362,13 @@ void ftDonkey_8010F098(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010F1D8(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010F1D8(HSD_GObj* fighter_gobj) {}
 
-void ftDonkey_8010F1DC(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010F1DC(HSD_GObj* fighter_gobj) {}
 
-void ftDonkey_8010F1E0(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010F1E0(HSD_GObj* fighter_gobj) {}
 
-void ftDonkey_8010F1E4(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010F1E4(HSD_GObj* fighter_gobj) {}
 
 void ftDonkey_8010F1E8(HSD_GObj* fighter_gobj)
 {
@@ -402,17 +392,11 @@ void ftDonkey_8010F1E8(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010F31C(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010F31C(HSD_GObj* fighter_gobj) {}
 
-void ftDonkey_8010F320(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010F320(HSD_GObj* fighter_gobj) {}
 
-void ftDonkey_8010F324(HSD_GObj* fighter_gobj)
-{
-}
+void ftDonkey_8010F324(HSD_GObj* fighter_gobj) {}
 
 void ftDonkey_8010F328(HSD_GObj* fighter_gobj)
 {

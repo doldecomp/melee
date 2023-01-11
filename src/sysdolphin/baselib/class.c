@@ -252,9 +252,7 @@ int _hsdClassInit(HSD_Class*)
     return 0;
 }
 
-void _hsdClassRelease(HSD_Class*)
-{
-}
+void _hsdClassRelease(HSD_Class*) {}
 
 void _hsdClassDestroy(HSD_Class* cls)
 {

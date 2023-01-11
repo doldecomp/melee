@@ -117,9 +117,7 @@ static void func_80219CA4(void)
     lbl_804D6AC8 = 0;
 }
 
-static void func_80219D54(void)
-{
-}
+static void func_80219D54(void) {}
 
 static void func_80219D58(void)
 {
@@ -186,13 +184,9 @@ static s32 func_8021A10C()
     return 0;
 }
 
-static void func_8021A114()
-{
-}
+static void func_8021A114() {}
 
-static void func_8021A118()
-{
-}
+static void func_8021A118() {}
 
 static void func_8021A11C(HSD_GObj* gobj)
 {
@@ -213,9 +207,7 @@ static void func_8021A174(HSD_GObj* gobj)
     func_800115F4();
 }
 
-static void func_8021A198()
-{
-}
+static void func_8021A198() {}
 
 static void func_8021A19C(HSD_GObj* gobj)
 {
@@ -231,13 +223,9 @@ static s32 func_8021A1FC()
     return 0;
 }
 
-static void func_8021A204()
-{
-}
+static void func_8021A204() {}
 
-static void func_8021A208()
-{
-}
+static void func_8021A208() {}
 
 static void func_8021A20C(HSD_GObj* gobj)
 {
@@ -254,13 +242,9 @@ static s32 func_8021A264()
     return 0;
 }
 
-static void func_8021A26C()
-{
-}
+static void func_8021A26C() {}
 
-static void func_8021A270()
-{
-}
+static void func_8021A270() {}
 
 static void func_8021A274(HSD_GObj* gobj)
 {
@@ -277,13 +261,9 @@ static s32 func_8021A2CC()
     return 0;
 }
 
-static void func_8021A2D4()
-{
-}
+static void func_8021A2D4() {}
 
-static void func_8021A2D8()
-{
-}
+static void func_8021A2D8() {}
 
 static void func_8021A2DC(HSD_GObj* gobj)
 {
@@ -301,13 +281,9 @@ static s32 func_8021A334()
     return 0;
 }
 
-static void func_8021A33C()
-{
-}
+static void func_8021A33C() {}
 
-static void func_8021A340()
-{
-}
+static void func_8021A340() {}
 
 static void func_8021A344(HSD_GObj* gobj)
 {
@@ -387,9 +363,7 @@ static void func_8021A3BC(HSD_GObj* gobj)
     }
 }
 
-static void func_8021A60C()
-{
-}
+static void func_8021A60C() {}
 
 static BOOL func_8021A610(s32)
 {

@@ -32,9 +32,7 @@ static void func_8020E274(void)
     func_801C39C0();
     func_801C3BB4();
 }
-static void lbl_8020E2E4(void)
-{
-}
+static void lbl_8020E2E4(void) {}
 static void lbl_8020E2E8(void)
 {
     func_801CAE04(0);
@@ -78,12 +76,8 @@ static s32 lbl_8020E428(void)
 {
     return 0;
 }
-static void lbl_8020E430(HSD_GObj* gobj)
-{
-}
-static void lbl_8020E434()
-{
-}
+static void lbl_8020E430(HSD_GObj* gobj) {}
+static void lbl_8020E434() {}
 static void lbl_8020E438(HSD_GObj* gobj)
 {
     Map* map = gobj->user_data;
@@ -98,9 +92,7 @@ static void lbl_8020E46C(HSD_GObj* gobj)
     func_801C2FE0(gobj);
     func_800115F4();
 }
-static void lbl_8020E490()
-{
-}
+static void lbl_8020E490() {}
 static void lbl_8020E494(HSD_GObj* gobj)
 {
     u32 unused[2];
@@ -112,12 +104,8 @@ static s32 lbl_8020E4E4(void)
 {
     return 0;
 }
-static void lbl_8020E4EC(HSD_GObj* gobj)
-{
-}
-static void lbl_8020E4F0()
-{
-}
+static void lbl_8020E4EC(HSD_GObj* gobj) {}
+static void lbl_8020E4F0() {}
 static int lbl_8020E4F4(s32 number)
 {
     return 0;

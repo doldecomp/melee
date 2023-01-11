@@ -6,7 +6,7 @@
   TabWidth: 4,
   BreakBeforeBraces: Custom,
   BraceWrapping: { AfterFunction: true, AfterControlStatement: MultiLine },
-  AllowShortFunctionsOnASingleLine: false,
+  AllowShortFunctionsOnASingleLine: Empty,
   AllowShortIfStatementsOnASingleLine: false,
   AllowShortEnumsOnASingleLine: false,
   IndentCaseLabels: false,

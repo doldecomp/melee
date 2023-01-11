@@ -3,13 +3,13 @@
 
 #include <dolphin/types.h>
 
-int lbLang_GetLanguageSetting(void);
-int lbLang_SetLanguageSetting(int language);
-int lbLang_IsSettingJP(void);
-int lbLang_IsSettingUS(void);
-int lbLang_GetSavedLanguage(void);
-void lbLang_SetSavedLanguage(int language);
-int lbLang_IsSavedLanguageJP(void);
-int lbLang_IsSavedLanguageUS(void);
+enum_t lbLang_GetLanguageSetting(void);
+enum_t lbLang_SetLanguageSetting(enum_t language);
+enum_t lbLang_IsSettingJP(void);
+enum_t lbLang_IsSettingUS(void);
+enum_t lbLang_GetSavedLanguage(void);
+void lbLang_SetSavedLanguage(enum_t language);
+enum_t lbLang_IsSavedLanguageJP(void);
+enum_t lbLang_IsSavedLanguageUS(void);
 
 #endif
