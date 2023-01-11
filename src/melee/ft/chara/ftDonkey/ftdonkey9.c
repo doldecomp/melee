@@ -19,7 +19,7 @@ static BOOL ftDonkey_800E0750(HSD_GObj* fighter_gobj);
 
 void ftDonkey_800E06D8(HSD_GObj* fighter_gobj)
 {
-    Vec vec;
+    Vec3 vec;
     Fighter* fp = getFighter(fighter_gobj);
     if (ftDonkey_800E0750(fighter_gobj)) {
         ftDonkey_800E07B0(fighter_gobj);

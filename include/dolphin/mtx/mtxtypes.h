@@ -1,39 +1,98 @@
 #ifndef _MTXTYPES_h_
 #define _MTXTYPES_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
-/// @todo Remove @c Vec (in favor of @c Vec3).
-/// @todo Remove @c Point3d.
-/// @todo Remove pointer alias.
-typedef struct {
-    f32 x, y, z;
-} Vec3, Vec, *VecPtr, Point3d, *Point3dPtr;
+/// @sz{C}
+typedef struct Vec3 {
+    /// @at{0} @sz{4}
+    /// @brief The @e x component.
+    f32 x;
 
-/// @todo Remove pointer alias.
-typedef struct {
-    s16 x, y, z;
-} S16Vec, *S16VecPtr;
+    /// @at{4} @sz{4}
+    /// @brief The @e y component.
+    f32 y;
 
-/// @todo Remove pointer alias.
-typedef struct {
-    s8 x, y, z;
-} S8Vec, *S8VecPtr;
+    /// @at{8} @sz{4}
+    /// @brief The @e z component.
+    f32 z;
+} Vec3;
 
-/// @todo Remove pointer alias.
-typedef struct {
-    s32 x, y, z;
-} S32Vec, *S32VecPtr;
+/// @sz{10}
+typedef struct Vec4 {
+    /// @at{0} @sz{4}
+    /// @brief The @e x component.
+    f32 x;
 
-/// @todo Base name should be @c Vec4 with @c Quaternion as an alias.
-/// @todo Remove pointer alias.
-typedef struct {
-    f32 x, y, z, w;
-} Quaternion, *QuaternionPtr, Qtrn, *QtrnPtr;
+    /// @at{4} @sz{4}
+    /// @brief The @e y component.
+    f32 y;
 
-typedef struct _S32Pair {
-    s32 x, y;
-} S32Pair;
+    /// @at{8} @sz{4}
+    /// @brief The @e z component.
+    f32 z;
+
+    /// @at{C} @sz{4}
+    /// @brief The @e w component.
+    f32 w;
+
+} Quaternion, Vec4;
+// Don't change the order of the typedefs; it affects Doxygen.
+
+/// @sz{3}
+typedef struct S8Vec3 {
+    /// @at{0} @sz1
+    /// @brief The @e x component.
+    s8 x;
+
+    /// @at{1} @sz1
+    /// @brief The @e y component.
+    s8 y;
+
+    /// @at{2} @sz1
+    /// @brief The @e z component.
+    s8 z;
+} S8Vec3;
+
+typedef struct S16Vec3 {
+    /// @at{0} @sz{2}
+    /// @brief The @e x component.
+    s16 x;
+
+    /// @at{2} @sz{2}
+    /// @brief The @e y component.
+    s16 y;
+
+    /// @at{4} @sz{2}
+    /// @brief The @e z component.
+    s16 z;
+} S16Vec3;
+
+/// @sz{8}
+typedef struct S32Vec2 {
+    /// @at{0} @sz{4}
+    /// @brief The @e x component.
+    s32 x;
+
+    /// @at{1} @sz{4}
+    /// @brief The @e y component.
+    s32 y;
+} S32Vec2;
+
+/// @sz{C}
+typedef struct S32Vec3 {
+    /// @at{0} @sz{4}
+    /// @brief The @e x component.
+    s32 x;
+
+    /// @at{1} @sz{4}
+    /// @brief The @e y component.
+    s32 y;
+
+    /// @at{2} @sz{4}
+    /// @brief The @e z component.
+    s32 z;
+} S32Vec3;
 
 typedef f32 Mtx[3][4];
 typedef f32 (*MtxPtr)[4];

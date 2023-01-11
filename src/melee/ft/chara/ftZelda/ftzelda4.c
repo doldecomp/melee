@@ -61,7 +61,7 @@ void ftZelda_8013AEAC(HSD_GObj* fighter_gobj)
 // ftZelda_SpecialAirLw_StartAction
 void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* fighter_gobj)
 {
-    Point3d sp20;
+    Vec3 sp20;
     Fighter* fp;                   // r31
     ftZeldaAttributes* attributes; // r3
 

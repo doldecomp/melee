@@ -125,7 +125,7 @@ void lbl_801511F8(HSD_GObj* gobj);
 // ftMasterHand_5
 
 /// Probably isCrazyHandLoaded func.
-u32 lbl_80151428(Vec* vec);
+u32 lbl_80151428(Vec3* vec);
 
 // ftMasterHand_14
 void lbl_80152E28(HSD_GObj* gobj);

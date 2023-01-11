@@ -3,9 +3,9 @@
 
 #include <dolphin/mtx/mtxtypes.h>
 
-void PSVECAdd(Vec* a, Vec* b, Vec* result);
-void PSVECScale(Vec* src, Vec* dst, f32 scale);
-f32 PSVECMag(Vec* v);
-f32 PSVECDotProduct(Vec* a, Vec* b);
+void PSVECAdd(Vec3* a, Vec3* b, Vec3* result);
+void PSVECScale(Vec3* src, Vec3* dst, f32 scale);
+f32 PSVECMag(Vec3* v);
+f32 PSVECDotProduct(Vec3* a, Vec3* b);
 
 #endif

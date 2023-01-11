@@ -125,7 +125,7 @@ f32 Stage_CalcUnkCamYBounds()
     return 0.5F * (cam_offset + y_pos_product);
 }
 
-void Stage_UnkSetVec3TCam_Offset(Vec* vec3)
+void Stage_UnkSetVec3TCam_Offset(Vec3* vec3)
 {
     vec3->x = stage_info.cam_info.cam_x_offset;
     vec3->y = stage_info.cam_info.cam_y_offset;
@@ -167,10 +167,10 @@ f32 Stage_GetCamAngleRadiansRight()
     return 0.0174532923847F * stage_info.cam_info.cam_angle_right;
 }
 
-void Stage_80224CAC(Vec* arg0)
+void Stage_80224CAC(Vec3* arg0)
 {
-    Vec another_vec = { 0, 0, -100.0F };
-    Vec rot_vec;
+    Vec3 another_vec = { 0, 0, -100.0F };
+    Vec3 rot_vec;
 
     *arg0 = stage_info.cam_info.fixed_cam_pos;
 
@@ -181,7 +181,7 @@ void Stage_80224CAC(Vec* arg0)
     lbvector_ApplyEulerRotation(&another_vec, &rot_vec);
 
     {
-        Vec last_vec;
+        Vec3 last_vec;
         f32 temp_f4 = (arg0->z / -another_vec.z);
 
         last_vec.x = (another_vec.x * temp_f4) + arg0->x;
@@ -191,7 +191,7 @@ void Stage_80224CAC(Vec* arg0)
     }
 }
 
-void Stage_SetVecToFixedCamPos(Vec* arg0)
+void Stage_SetVecToFixedCamPos(Vec3* arg0)
 {
     *arg0 = stage_info.cam_info.fixed_cam_pos;
 }
@@ -207,17 +207,17 @@ BOOL Stage_80224DC8(s32 arg)
             arg == 0x4c) != 0;
 }
 
-void Stage_80224E38(Vec* arg0, s32 arg1)
+void Stage_80224E38(Vec3* arg0, s32 arg1)
 {
     func_801C2D24(arg1 + 4, arg0);
 }
 
-void Stage_80224E64(s32 arg0, Vec* arg_vec)
+void Stage_80224E64(s32 arg0, Vec3* arg_vec)
 {
     BOOL bool1;
 
     f32 counter_f;
-    Vec internal_vec;
+    Vec3 internal_vec;
 
     if (arg0 == -1) {
         __assert(__FILE__, 360, "no!=St_Player_InitPos_None\0");
@@ -260,7 +260,7 @@ void Stage_80224E64(s32 arg0, Vec* arg_vec)
     func_801C2D24(arg0, arg_vec);
 }
 
-s32 Stage_80224FDC(Vec* arg0)
+s32 Stage_80224FDC(Vec3* arg0)
 {
     s32 rand_output;
     s32 counter = 0x15;

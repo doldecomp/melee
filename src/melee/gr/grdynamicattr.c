@@ -3,7 +3,7 @@
 #include <dolphin/mtx/mtxtypes.h>
 #include <sysdolphin/baselib/debug.h>
 
-typedef Vec Vec3;
+typedef Vec3 Vec3;
 
 typedef struct _UnkStruct {
     struct _UnkStruct* next;

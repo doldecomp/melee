@@ -197,7 +197,7 @@ void Fighter_LoadCommonData(void)
     lbl_804D64FC = pData[22];
 }
 
-inline void Fighter_InitScale(Fighter* fp, Vec* scale, f32 modelScale)
+inline void Fighter_InitScale(Fighter* fp, Vec3* scale, f32 modelScale)
 {
     if (fp->x34_scale.z != 1.0f)
         scale->x = fp->x34_scale.z;
@@ -213,7 +213,7 @@ void Fighter_UpdateModelScale(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     HSD_JObj* jobj = getHSDJObj(fighter_gobj);
     f32 modelScale_f1 = Fighter_GetModelScale(fp);
-    Vec scale;
+    Vec3 scale;
 
     Fighter_InitScale(fp, &scale, modelScale_f1);
     HSD_JObjSetScale(jobj, &scale);
@@ -575,8 +575,8 @@ void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighter_gobj)
 
 void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
 {
-    Vec vec;
-    Vec vec2;
+    Vec3 vec;
+    Vec3 vec2;
     HSD_JObj* jobj = fp->x5E8_fighterBones[func_8007500C(fp, 2)].x0_jobj;
 
     HSD_JObjGetTranslation(jobj, &vec);
@@ -1255,7 +1255,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
         }
 
         if (fp->x14_action_id != -1) {
-            Vec translation;
+            Vec3 translation;
             Quaternion quat;
 
             bone_index = fp->x596_bits.x7;
@@ -1469,7 +1469,7 @@ void Fighter_8006A1BC(HSD_GObj* fighter_gobj)
 
 void Fighter_8006A360(HSD_GObj* fighter_gobj)
 {
-    Vec vec1;
+    Vec3 vec1;
     Fighter* fp = fighter_gobj->user_data;
 
     if (!fp->x221F_flag.bits.b3) {
@@ -2156,7 +2156,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
 //// https://decomp.me/scratch/oFu1o
 #define VEC_CLEAR(vec)                                                         \
     do {                                                                       \
-        Vec* vecLocal = (void*) &vec;                                          \
+        Vec3* vecLocal = (void*) &vec;                                         \
         f32 c = 0;                                                             \
         vecLocal->x = vecLocal->y = vecLocal->z = c;                           \
     } while (0)
@@ -2460,8 +2460,8 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj)
         HSD_JObj* jobj = fighter_gobj->hsd_obj;
         Mtx mtx1;
         Mtx mtx2;
-        Vec scale;
-        Vec translation;
+        Vec3 scale;
+        Vec3 translation;
         Quaternion rotation;
 
         HSD_JObjSetupMatrix(jobj);
@@ -2552,7 +2552,7 @@ void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighter_gobj)
     }
 }
 
-inline float Fighter_8006C80C_Inline_1(Fighter* fp, Vec* cam_offset)
+inline float Fighter_8006C80C_Inline_1(Fighter* fp, Vec3* cam_offset)
 {
     return fp->xB0_pos.y + cam_offset->y;
 }
@@ -2583,7 +2583,7 @@ void Fighter_8006C80C(HSD_GObj* fighter_gobj)
             fp->xB0_pos.y < Stage_GetCamBoundsBottomOffset())
         {
             if (func_802FB6E8(fp->xC_playerID) == 3) {
-                Vec cam_offset;
+                Vec3 cam_offset;
                 Stage_UnkSetVec3TCam_Offset(&cam_offset);
 
                 if (Fighter_8006C80C_Inline_1(fp, &cam_offset) < fp->x2140) {
@@ -2684,7 +2684,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
 {
     BOOL temp_bool;
     BOOL hold_item_bool = 0;
-    Vec vec;
+    Vec3 vec;
 
     if (fp->x1974_heldItem && !func_8026B2B4(fp->x1974_heldItem)) {
         hold_item_bool = 1;

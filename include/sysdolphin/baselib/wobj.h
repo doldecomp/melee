@@ -7,14 +7,14 @@
 typedef struct _HSD_WObj {
     HSD_Obj parent;
     u32 flags;
-    Vec pos;
+    Vec3 pos;
     struct _HSD_AObj* aobj;
     struct _HSD_RObj* robj;
 } HSD_WObj;
 
 typedef struct _HSD_WObjDesc {
     char* class_name;
-    Vec pos;
+    Vec3 pos;
     struct _HSD_RObjDesc* robjdesc;
     struct _HSD_WObjDesc* next;
 } HSD_WObjDesc;
@@ -41,11 +41,11 @@ void HSD_WObjInterpretAnim(HSD_WObj* wobj);
 void HSD_WObjInit(HSD_WObj* wobj, HSD_WObjDesc* desc);
 HSD_WObj* HSD_WObjLoadDesc(HSD_WObjDesc* desc);
 void WObjSetupPosition(HSD_WObj* wobj);
-void HSD_WObjSetPosition(HSD_WObj*, Vec*);
+void HSD_WObjSetPosition(HSD_WObj*, Vec3*);
 void HSD_WObjSetPositionX(HSD_WObj*, f32);
 void HSD_WObjSetPositionY(HSD_WObj*, f32);
 void HSD_WObjSetPositionZ(HSD_WObj*, f32);
-void HSD_WObjGetPosition(HSD_WObj*, Vec*);
+void HSD_WObjGetPosition(HSD_WObj*, Vec3*);
 HSD_WObj* HSD_WObjAlloc(void);
 
 #endif

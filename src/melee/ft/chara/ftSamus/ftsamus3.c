@@ -37,8 +37,8 @@ void ftSamus_80129258(HSD_GObj* fighter_gobj)
 
 s32 ftSamus_801292E4(HSD_GObj* fighter_gobj)
 {
-    Vec vec1;
-    Vec vec2;
+    Vec3 vec1;
+    Vec3 vec2;
 
     HSD_GObj* result;
     Fighter* fp = getFighter(fighter_gobj);
@@ -75,7 +75,7 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj)
     samus_attr = getFtSpecialAttrs(fp);
 
     if ((fp->x2204_ftcmd_var1 == 1) && (fp->sa.samus.x222C)) {
-        Vec vec1;
+        Vec3 vec1;
         u32 x2230;
 
         fp->x2204_ftcmd_var1 = 2;
@@ -105,7 +105,7 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj)
 
 void ftSamus_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Vec* self_vel;
+    Vec3* self_vel;
     Fighter* fp = getFighter(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
@@ -405,7 +405,7 @@ void ftSamus_8012A074(HSD_GObj* fighter_gobj)
         bool1 = 0;
     }
     if (bool1) {
-        Vec position;
+        Vec3 position;
         fp->sa.samus.x2238++;
         func_8000B1CC(fp->x5E8_fighterBones[56].x0_jobj, NULL, &position);
         position.x += (samus_attr->x34 * fp->x2C_facing_direction);
@@ -423,7 +423,7 @@ void ftSamus_8012A074(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSamus_8012A168(HSD_GObj* fighter_gobj, Vec* spawnlocation)
+void ftSamus_8012A168(HSD_GObj* fighter_gobj, Vec3* spawnlocation)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (!fp->x2219_flag.bits.b0) {

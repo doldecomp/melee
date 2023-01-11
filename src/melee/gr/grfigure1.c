@@ -110,7 +110,7 @@ static int lbl_8020E260(s32 n)
 {
     return 0;
 }
-static s32 lbl_8020E268(Vec* v, s32 n, struct _HSD_JObj* o)
+static s32 lbl_8020E268(Vec3* v, s32 n, struct _HSD_JObj* o)
 {
     return 1;
 }

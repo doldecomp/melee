@@ -17,14 +17,14 @@ typedef struct _StaticPlayer {
 
     union {
         struct {
-            /*0x10-0x1B*/ Vec
+            /*0x10-0x1B*/ Vec3
                 nametag_pos; /// Horizontal, Vertical, Depth (floats)
-            /*0x1C-0x27*/ Vec transformed_player_pos;
-            /*0x28-0x33*/ Vec spawn_platform_final_pos;
-            /*0x34-0x3f*/ Vec some_other_player_pos;
+            /*0x1C-0x27*/ Vec3 transformed_player_pos;
+            /*0x28-0x33*/ Vec3 spawn_platform_final_pos;
+            /*0x34-0x3f*/ Vec3 some_other_player_pos;
         } byVecName;
 
-        Vec byIndex[4];
+        Vec3 byIndex[4];
     } player_poses;
 
     /*0x40*/ f32 facing_direction;
@@ -173,18 +173,18 @@ s32 Player_8003248C(s32 slot, BOOL arg1);
 void Player_SetSlottype(s32 slot, s32 value);
 s8 Player_800325C8(s32 slot, BOOL b);
 s8 Player_80032610(s32 slot, BOOL arg1);
-void Player_LoadPlayerCoords(s32 slot, Vec* out_vec);
-void Player_80032768(s32 slot, Vec* arg_vec);
-void Player_80032828(s32 slot, s32 index, Vec* arg_vec);
-void Player_800328D4(s32 slot, Vec* arg_vec);
-void Player_80032A04(s32 slot, Vec* arg_vec);
+void Player_LoadPlayerCoords(s32 slot, Vec3* out_vec);
+void Player_80032768(s32 slot, Vec3* arg_vec);
+void Player_80032828(s32 slot, s32 index, Vec3* arg_vec);
+void Player_800328D4(s32 slot, Vec3* arg_vec);
+void Player_80032A04(s32 slot, Vec3* arg_vec);
 void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 direction);
 f32 Player_80032BB0(s32 slot);
 void Player_SetScale(s32 slot, f32 scale);
-void Player_GetSpawnPlatformPos(s32 slot, Vec* arg_vec);
-void Player_SetSpawnPlatformPos(s32 slot, Vec* arg_vec);
-void Player_GetSomePos(s32 slot, Vec* arg_vec);
-void Player_SetSomePos(s32 slot, Vec* arg_vec);
+void Player_GetSpawnPlatformPos(s32 slot, Vec3* arg_vec);
+void Player_SetSpawnPlatformPos(s32 slot, Vec3* arg_vec);
+void Player_GetSomePos(s32 slot, Vec3* arg_vec);
+void Player_SetSomePos(s32 slot, Vec3* arg_vec);
 s32 Player_80032F30(s32 slot);
 void Player_80032FA4(s32 slot, s32 arg);
 f32 Player_GetFacingDirection(s32 slot);

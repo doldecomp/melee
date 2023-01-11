@@ -47,7 +47,7 @@ struct plAllocInfo2 {
 struct Unk_Struct_w_Array {
     char some_str[8 + 4]; //"PdPm.dat"
     char another_str[16 + 4];
-    S8Vec vec_arr[30]; /// ftMapping_list
+    S8Vec3 vec_arr[30]; /// ftMapping_list
 };
 
 //// .data
@@ -509,10 +509,10 @@ s8 Player_80032610(s32 slot, BOOL arg1)
     return error_value;
 }
 
-void Player_LoadPlayerCoords(s32 slot, Vec* arg_vec)
+void Player_LoadPlayerCoords(s32 slot, Vec3* arg_vec)
 {
     StaticPlayer* player;
-    Vec* player_vecs;
+    Vec3* player_vecs;
 
     Player_CheckSlot(slot);
 
@@ -521,13 +521,13 @@ void Player_LoadPlayerCoords(s32 slot, Vec* arg_vec)
     *arg_vec = player_vecs[player->transformed[0]];
 }
 
-void Player_80032768(s32 slot, Vec* arg_vec)
+void Player_80032768(s32 slot, Vec3* arg_vec)
 {
     StaticPlayer* player;
-    Vec* player_vecs;
+    Vec3* player_vecs;
 
-    Vec* dst_vec;
-    Vec* dst_vec2;
+    Vec3* dst_vec;
+    Vec3* dst_vec2;
 
     Player_CheckSlot(slot);
 
@@ -542,10 +542,10 @@ void Player_80032768(s32 slot, Vec* arg_vec)
     *dst_vec2 = *arg_vec;
 }
 
-void Player_80032828(s32 slot, s32 index, Vec* arg_vec)
+void Player_80032828(s32 slot, s32 index, Vec3* arg_vec)
 {
     StaticPlayer* player;
-    Vec* player_vecs;
+    Vec3* player_vecs;
 
     Player_CheckSlot(slot);
 
@@ -555,17 +555,17 @@ void Player_80032828(s32 slot, s32 index, Vec* arg_vec)
     player_vecs[player->transformed[index]] = *arg_vec;
 }
 
-void Player_800328D4(s32 slot, Vec* arg_vec)
+void Player_800328D4(s32 slot, Vec3* arg_vec)
 {
     StaticPlayer* player;
     s32 i;
-    Vec* player_vecs;
-    Vec* player_vecs2;
+    Vec3* player_vecs;
+    Vec3* player_vecs2;
 
-    Vec* dst_vec;
-    Vec* dst_vec2;
+    Vec3* dst_vec;
+    Vec3* dst_vec2;
 
-    Vec* unused;
+    Vec3* unused;
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -586,7 +586,7 @@ void Player_800328D4(s32 slot, Vec* arg_vec)
     }
 }
 
-void Player_80032A04(s32 slot, Vec* arg_vec)
+void Player_80032A04(s32 slot, Vec3* arg_vec)
 {
     StaticPlayer* player;
     s32 i;
@@ -647,7 +647,7 @@ void Player_SetScale(s32 slot, f32 scale)
     }
 }
 
-void Player_GetSpawnPlatformPos(s32 slot, Vec* arg_vec)
+void Player_GetSpawnPlatformPos(s32 slot, Vec3* arg_vec)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -655,7 +655,7 @@ void Player_GetSpawnPlatformPos(s32 slot, Vec* arg_vec)
     *arg_vec = player->player_poses.byVecName.spawn_platform_final_pos;
 }
 
-void Player_SetSpawnPlatformPos(s32 slot, Vec* arg_vec)
+void Player_SetSpawnPlatformPos(s32 slot, Vec3* arg_vec)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -663,7 +663,7 @@ void Player_SetSpawnPlatformPos(s32 slot, Vec* arg_vec)
     player->player_poses.byVecName.spawn_platform_final_pos = *arg_vec;
 }
 
-void Player_GetSomePos(s32 slot, Vec* arg_vec)
+void Player_GetSomePos(s32 slot, Vec3* arg_vec)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -671,7 +671,7 @@ void Player_GetSomePos(s32 slot, Vec* arg_vec)
     *arg_vec = player->player_poses.byVecName.some_other_player_pos;
 }
 
-void Player_SetSomePos(s32 slot, Vec* arg_vec)
+void Player_SetSomePos(s32 slot, Vec3* arg_vec)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -2062,7 +2062,7 @@ s32 Player_80036EA0(s32 slot)
 void Player_80036F34(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
-    u8 unused;
+    char unused;
 
     StaticPlayer* player;
 
@@ -2090,7 +2090,7 @@ void Player_80036F34(s32 slot, s32 arg1)
 void Player_80037054(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
-    u8 unused;
+    char unused;
 
     StaticPlayer* player;
 

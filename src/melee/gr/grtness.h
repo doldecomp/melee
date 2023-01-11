@@ -23,6 +23,6 @@ static s32 GrTNess_80222878(void);
 static void GrTNess_80222880(HSD_GObj* gobj);
 static void GrTNess_802228A0(void);
 static BOOL GrTNess_802228A4(s32);
-static s32 GrTNess_802228AC(Vec*, s32, struct _HSD_JObj*);
+static s32 GrTNess_802228AC(Vec3*, s32, struct _HSD_JObj*);
 
 #endif

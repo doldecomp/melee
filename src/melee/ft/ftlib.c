@@ -419,7 +419,7 @@ CollData* func_80086984(HSD_GObj* gobj)
     return &fp->x6F0_collData;
 }
 
-inline void vector_add(Vec* dst, Vec* src, f32 x, f32 y, f32 z)
+inline void vector_add(Vec3* dst, Vec3* src, f32 x, f32 y, f32 z)
 {
     dst->x = src->x + x;
     dst->y = src->y + y;
@@ -470,7 +470,7 @@ void func_80086A4C(HSD_GObj* gobj, f32 val)
     fp->dmg.x1958 = val;
 }
 
-BOOL func_80086A58(HSD_GObj* gobj, S32Pair* x)
+BOOL func_80086A58(HSD_GObj* gobj, S32Vec2* x)
 {
     Fighter* fp = gobj->user_data;
     if (!fp->x2229_b3 && !fp->x2220_flag.bits.b7) {

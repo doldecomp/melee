@@ -31,7 +31,7 @@ void ftZelda_801396AC(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/ZIrBS
 void ftZelda_801396E0(HSD_GObj* fighter_gobj)
 {
-    Point3d sp10;
+    Vec3 sp10;
     Fighter* fp = getFighter(fighter_gobj);
     u8 flag = fp->x2219_flag.bits.b0;
 
@@ -54,7 +54,7 @@ void ftZelda_801396E0(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/yRI2F
 void ftZelda_8013979C(HSD_GObj* fighter_gobj)
 {
-    Point3d sp10;
+    Vec3 sp10;
     u8 flag;
     Fighter* fp = getFighter(fighter_gobj);
 
@@ -80,7 +80,7 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
     HSD_JObj* jObj;
     s32 boneIndex;
     s32 unused[1];
-    Vec sp24;
+    Vec3 sp24;
 
 #ifdef MUST_MATCH
     // Trick to use more stack space
@@ -120,7 +120,7 @@ void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/9NUks
 void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
-    Point3d sp28;
+    Vec3 sp28;
     s32 unused[7];
     s32 boneIndex;
     Fighter* fp = getFighter(fighter_gobj);
@@ -443,8 +443,8 @@ void ftZelda_80139FE8(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/ruApT
 void ftZelda_8013A058(HSD_GObj* fighter_gobj)
 {
-    Vec inputVector;
-    Vec* groundVector;
+    Vec3 inputVector;
+    Vec3* groundVector;
     volatile float y;
     f64 _three;
     f64 _half;
@@ -497,8 +497,7 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj)
         inputVector.y = fp->input.x624_lstick_y;
         inputVector.z = 0;
 
-        if (!(lbvector_AngleXY(groundVector, (Point3d*) &inputVector.x) <
-              HALF_PI))
+        if (!(lbvector_AngleXY(groundVector, (Vec3*) &inputVector.x) < HALF_PI))
         {
             if (func_8009A134(fighter_gobj) == 0) {
                 func_8007D9FC(fp);

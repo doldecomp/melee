@@ -116,7 +116,7 @@ void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, s32 new_action_state_index)
 void ftMario_SpecialS_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp;
-    u8 unused[8];
+    char unused[8];
     fp = getFighter(gobj);
     fp->x80_self_vel.y = 0.0f;
 
@@ -127,7 +127,7 @@ void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftMarioAttributes* sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
-    u8 unused[8];
+    char unused[8];
 
     fp->x80_self_vel.x = (fp->x80_self_vel.x / ((Vec3*) (sa))->x);
 
@@ -275,7 +275,7 @@ void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj)
 void ftMario_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp;
-    u8 unused[4];
+    char unused[4];
 
     fp = getFighter(gobj);
     func_8007D5D4(fp);
@@ -293,7 +293,7 @@ void ftMario_SpecialS_GroundToAir(HSD_GObj* gobj)
 void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp;
-    u8 unused[4];
+    char unused[4];
 
     fp = gobj->user_data;
     fp->sa.mario.x2238_isCapeBoost = FALSE;

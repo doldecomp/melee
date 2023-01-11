@@ -1,16 +1,18 @@
+#include "Runtime/platform.h"
 #include <sysdolphin/baselib/memory.h>
 
 #include <dolphin/os/OSAlloc.h>
 #include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/initialize.h>
 
-void HSD_Free(void* ptr)
+void HSD_Free(any_t ptr)
 {
     OSFreeToHeap(HSD_GetHeap(), ptr);
 }
 
-void* HSD_MemAlloc(s32 size)
+any_t HSD_MemAlloc(ptrdiff_t size)
 {
-    void* adr;
+    any_t adr;
 
     if (size <= 0)
         return NULL;

@@ -37,7 +37,7 @@ typedef struct _ftSamusAttributes {
     f32 x68;
     f32 x6C;
     f32 x70;
-    Vec x74_vec;
+    Vec3 x74_vec;
     f32 x80;
     f32 height_attributes[6];
     u8 data_filler_4[0xD4 - 0x9C];
@@ -52,9 +52,9 @@ struct UNK_SAMUS_S1 {
 };
 
 struct UNK_SAMUS_S2 {
-    S32Vec intvec;
-    Vec vec1;
-    Vec vec2;
+    S32Vec3 intvec;
+    Vec3 vec1;
+    Vec3 vec2;
     f32 single_float;
 };
 
@@ -62,7 +62,7 @@ void ftSamus_80128428(HSD_GObj* fighter_gobj);
 void ftSamus_80129048(HSD_GObj* fighter_gobj);
 void ftSamus_801290A4(HSD_GObj* fighter_gobj);
 void ftSamus_801291F0(HSD_GObj* fighter_gobj);
-void ftSamus_8012A168(HSD_GObj* fighter_gobj, Vec* spawnlocation);
+void ftSamus_8012A168(HSD_GObj* fighter_gobj, Vec3* spawnlocation);
 void ftSamus_8012A074(HSD_GObj* fighter_gobj);
 void ftSamus_8012B570(HSD_GObj* fighter_gobj);
 void ftSamus_8012B5F0(HSD_GObj* fighter_gobj);

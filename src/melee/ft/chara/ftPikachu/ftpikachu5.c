@@ -57,7 +57,7 @@ static inline f32 nested_sum_fabs(f32 fighter_pos_y, f32 pika_attr_xBC,
 
 BOOL ftPikachu_8012765C(HSD_GObj* fighter_gobj)
 {
-    Vec vec;
+    Vec3 vec;
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
     u32 state_var = fp->x2340_stateVar1_u32;
@@ -94,9 +94,9 @@ void ftPikachu_SetState_8012779C(HSD_GObj* fighter_gobj)
 void ftPikachu_EfSpawn_801277AC(HSD_GObj* fighter_gobj)
 {
     s32 unused;
-    Vec vec1;
-    Vec vec2;
-    Vec vec3;
+    Vec3 vec1;
+    Vec3 vec2;
+    Vec3 vec3;
     s32 unused2[2];
 
     Fighter* fp;

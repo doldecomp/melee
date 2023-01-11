@@ -362,9 +362,9 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 
 /*static*/ void MakeTextureMtx(HSD_TObj* tobj)
 {
-    Vec scale;
+    Vec3 scale;
     Mtx m;
-    Vec trans;
+    Vec3 trans;
     Quaternion rot;
     u32 unused[2];
     BOOL no_assert = FALSE;

@@ -6,7 +6,7 @@
 
 typedef struct _UnkGeneratorMember { // MexTK: GeneratorAppSRT
     u32 x0_fill[2];
-    S32Vec x8;
+    S32Vec3 x8;
     u8 x14_fill[0x10];
     f32 x24;
     f32 x28;

@@ -5,19 +5,19 @@
 #include <melee/it/itkind.h>
 
 void func_80294E78(struct _HSD_GObj*, f32);
-struct _HSD_GObj* func_8029A748(struct _HSD_GObj*, Vec*, u8, f32);
+struct _HSD_GObj* func_8029A748(struct _HSD_GObj*, Vec3*, u8, f32);
 void func_8029A89C(struct _HSD_GObj*, f32);
-void func_8029A8F4(struct _HSD_GObj*, Vec*, f32);
+void func_8029A8F4(struct _HSD_GObj*, Vec3*, f32);
 s32 func_802B1DEC(u32);
-u32 func_802B1DF8(HSD_GObj*, Vec*, Vec*, s32, s32, s32);
+u32 func_802B1DF8(HSD_GObj*, Vec3*, Vec3*, s32, s32, s32);
 s32 func_802B1FC8(u32);
-void func_802B1FE8(u32, Vec*);
-void func_802B56E4(HSD_GObj*, Vec*, f32, f32, f32);
-void* func_802C8B28(struct _HSD_GObj*, Vec*, u32, f32);
-void func_802D8618(s32, Vec*, s32, s32);
-u32 func_802F0340(struct _HSD_GObj*, Vec*, Vec*, u32, u32, f32);
+void func_802B1FE8(u32, Vec3*);
+void func_802B56E4(HSD_GObj*, Vec3*, f32, f32, f32);
+void* func_802C8B28(struct _HSD_GObj*, Vec3*, u32, f32);
+void func_802D8618(s32, Vec3*, s32, s32);
+u32 func_802F0340(struct _HSD_GObj*, Vec3*, Vec3*, u32, u32, f32);
 void func_802F046C(s32);
-void func_802F0AE0(struct _HSD_GObj*, Vec*, Vec*, s32, s32, f32, f32, f32);
+void func_802F0AE0(struct _HSD_GObj*, Vec3*, Vec3*, s32, s32, f32, f32, f32);
 
 /// @todo @c arg0 is likely a @c HSD_GObj*.
 void func_802C0DBC(u32 arg0);
@@ -63,7 +63,7 @@ void func_802C7AD0(HSD_GObj*);
 void func_802C7AF0(HSD_GObj*);
 void func_802C01AC(HSD_GObj*, Vec3*, s32, f32);
 void func_8029B6F8(f32 facing_dir, HSD_GObj*, Vec3*, s32);
-void func_802C0510(HSD_GObj*, Vec*, s32, s32, f32 facing_dir);
+void func_802C0510(HSD_GObj*, Vec3*, s32, s32, f32 facing_dir);
 HSD_GObj* func_802B2560(HSD_GObj*, f32, Vec3*, long, u32);
 void func_802B2674(HSD_GObj*);
 void func_802B26C0(HSD_GObj*);
@@ -129,6 +129,7 @@ s32 func_802E5F8C(HSD_GObj*, Vec3*, s32, BOOL, f32, f32);
 void func_80284FC4(HSD_GObj*, s32, f32);
 void func_80285024(HSD_GObj*, s32);
 void func_802950D4(HSD_GObj*, BOOL);
-void func_80294EB0(HSD_GObj*, Vec*, Vec*);
+void func_80294EB0(HSD_GObj*, Vec3*, Vec3*);
+s32 func_802F2094(s32, Vec3*, s32, s32);
 
 #endif

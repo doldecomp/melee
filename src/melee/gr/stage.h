@@ -2,44 +2,105 @@
 #define _stage_h_
 
 #include <dolphin/gx/types.h>
-#include <dolphin/types.h>
 #include <dolphin/mtx/mtxtypes.h>
-
+#include <dolphin/types.h>
 #include <melee/sc/scene.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
-enum InternalStageID {
-    CASTLE = 0x02,    // Princess Peach's Castle
-    RCRUISE = 0x03,   // Rainbow Cruise
-    KONGO = 0x04,     // Kongo Jungle
-    GARDEN = 0x05,    // Jungle Japes
-    GREATBAY = 0x06,  // Great Bay
-    SHRINE = 0x07,    // Hyrule Temple
-    ZEBES = 0x08,     // Brinstar
-    KRAID = 0x09,     // Brinstar Depths
-    STORY = 0x0A,     // Yoshi's Story
-    YORSTER = 0x0B,   // Yoshi's Island
-    IZUMI = 0x0C,     // Fountain of Dreams
-    GREENS = 0x0D,    // Green Greens
-    CORNERIA = 0x0E,  // Corneria
-    VENOM = 0x0F,     // Venom
-    PSTADIUM = 0x10,  // Pokemon Stadium
-    PURA = 0x11,      // Poke Floats
-    MUTECITY = 0x12,  // Mute City
-    BIGBLUE = 0x13,   // Big Blue
-    ONETT = 0x14,     // Onett
-    FOURSIDE = 0x15,  // Fourside
-    ICEMTN = 0x16,    // Icicle Mountain
-    INISHIE1 = 0x18,  // Mushroom Kingdom
-    INISHIE2 = 0x19,  // Mushroom Kingdom II
-    FLATZONE = 0x1B,  // Flat Zone
-    OLDPUPUPU = 0x1C, // Dream Land
-    OLDYOSHI = 0x1D,  // Yoshi's Island (64)
-    OLDKONGO = 0x1E,  // Kongo Jungle (64)
-};
+/// @todo Finish values, use @c PascalCase
+typedef enum InternalStageID {
+    InternalStageID_Unk00,
+    InternalStageID_Unk01,
 
-// This struct is based in part on the datasheet
-// however the info there is likely incorrect as this doesn't quite match
-// grGroundParam
+    /// Princess Peach's Castle
+    CASTLE,
+
+    /// Rainbow Cruise
+    RCRUISE,
+
+    /// Kongo Jungle
+    KONGO,
+
+    /// Jungle Japes
+    GARDEN,
+
+    /// Great Bay
+    GREATBAY,
+
+    /// Hyrule Temple
+    SHRINE,
+
+    /// Brinstar
+    ZEBES,
+
+    /// Brinstar Depths
+    KRAID,
+
+    /// Yoshi's Story
+    STORY,
+
+    /// Yoshi's Island
+    YORSTER,
+
+    /// Fountain of Dreams
+    IZUMI,
+
+    /// Green Greens
+    GREENS,
+
+    /// Corneria
+    CORNERIA,
+
+    /// Venom
+    VENOM,
+
+    /// Pokemon Stadium
+    PSTADIUM,
+
+    /// Poke Floats
+    PURA,
+
+    /// Mute City
+    MUTECITY,
+
+    /// Big Blue
+    BIGBLUE,
+
+    /// Onett
+    ONETT,
+
+    /// Fourside
+    FOURSIDE,
+
+    /// Icicle Mountain
+    ICEMTN,
+
+    InternalStageID_Unk23,
+
+    /// Mushroom Kingdom
+    INISHIE1,
+
+    /// Mushroom Kingdom II
+    INISHIE2,
+
+    InternalStageID_Unk26,
+
+    /// Flat Zone
+    FLATZONE,
+
+    /// Dream Land
+    OLDPUPUPU,
+
+    /// Yoshi's Island (64)
+    OLDYOSHI,
+
+    /// Kongo Jungle (64)
+    OLDKONGO,
+} InternalStageID;
+
+/// @remarks This struct is based in part on the datasheet however the info
+///          there is likely incorrect as this doesn't quite match @c
+///          grGroundParam.
 typedef struct _StageCameraInfo {
     f32 cam_bounds_left;      // 0x0
     f32 cam_bounds_right;     // 0x4
@@ -64,7 +125,7 @@ typedef struct _StageCameraInfo {
     f32 cam_angle_down;       // 0x50
     f32 cam_angle_left;       // 0x54
     f32 cam_angle_right;      // 0x58
-    Vec fixed_cam_pos;        // 0x5C - 0x64
+    Vec3 fixed_cam_pos;       // 0x5C - 0x64
     f32 fixed_cam_fov;        // 0x68
     f32 fixed_cam_vert_angle; // 0x6C
     f32 fixed_cam_horz_angle; // 0x70
@@ -83,7 +144,7 @@ typedef struct _StageInfo {
 
     u32 x84; // 0x84
 
-    s32 internal_stage_id; // 0x88
+    InternalStageID internal_stage_id; // 0x88
 
     struct {
         u8 b0 : 1;
@@ -110,7 +171,7 @@ typedef struct _StageInfo {
             GXColor color;
         }* ptr;
     }* x12C;
-    Vec x130, x13C, x148, x154, x160, x16C;
+    Vec3 x130, x13C, x148, x154, x160, x16C;
     BOOL(*x178)
     (s32);
     void* x17C;
@@ -121,7 +182,7 @@ typedef struct _StageInfo {
     void* x6A4;
     struct {
         s32 unk0;
-        s32 unk4;
+        struct _Article* unk4;
     }** x6A8;
     void* x6AC;
     struct _UnkStage6B0* x6B0;
@@ -152,7 +213,7 @@ typedef struct _StageInfo {
     f32 x724;
     f32 x728;
     s32 x72C;
-    Vec x730;
+    Vec3 x730;
     f32 x73C;
     s32 x740;
     u8 x744_pad[0x748 - 0x744];
@@ -177,9 +238,9 @@ typedef struct _StageData {
     s32 (*callback4)();
     BOOL(*callback5)
     (s32);
-    s32 (*callback6)(Vec*, s32, struct _HSD_JObj*);
+    s32 (*callback6)(Vec3*, s32, struct _HSD_JObj*);
     u32 flags2;
-    S16Vec* x2C;
+    S16Vec3* x2C;
     s32 x30; // size of x2C array
 } StageData;
 
@@ -189,10 +250,10 @@ typedef struct _StructPairWithStageID {
 } StructPairWithStageID;
 
 typedef struct _Map {
-    int x0;                                 // 0x0
-    struct _HSD_GObj* gobj;                 // 0x4
-    void (*x8_callback)(struct _HSD_GObj*); // 0x8
-    void (*xC_callback)(struct _HSD_GObj*); // 0xC
+    int x0;         // 0x0
+    HSD_GObj* gobj; // 0x4
+    HSD_GObjEvent x8_callback;
+    HSD_GObjEvent xC_callback;
     struct {
         u8 b0 : 1;
         u8 b1 : 1;
@@ -212,9 +273,9 @@ typedef struct _Map {
         u8 b7 : 1;
     } x11_flags;
 
-    int map_id;            // 0x14
-    struct _HSD_GObj* x18; // 0x18
-    void (*x1C_callback)(struct _HSD_GObj*);
+    int map_id;    // 0x14
+    HSD_GObj* x18; // 0x18
+    HSD_GObjEvent x1C_callback;
     s32 x20[8];
     u8 x40_pad[0xC4 - 0x40];
     s32 xC4;
@@ -242,7 +303,7 @@ f32 Stage_GetBlastZoneTopOffset();
 f32 Stage_GetBlastZoneBottomOffset();
 f32 Stage_CalcUnkCamY();
 f32 Stage_CalcUnkCamYBounds();
-void Stage_UnkSetVec3TCam_Offset(Vec* vec3);
+void Stage_UnkSetVec3TCam_Offset(Vec3* vec3);
 f32 Stage_GetPauseCamZPosMin();
 f32 Stage_GetPauseCamZPosInit();
 f32 Stage_GetPauseCamZPosMax();
@@ -250,13 +311,13 @@ f32 Stage_GetCamAngleRadiansUp();
 f32 Stage_GetCamAngleRadiansDown();
 f32 Stage_GetCamAngleRadiansLeft();
 f32 Stage_GetCamAngleRadiansRight();
-void Stage_80224CAC(Vec* arg0);
-void Stage_SetVecToFixedCamPos(Vec* arg0);
+void Stage_80224CAC(Vec3* arg0);
+void Stage_SetVecToFixedCamPos(Vec3* arg0);
 f32 Stage_GetCamFixedFov();
 BOOL Stage_80224DC8(s32 arg);
-void Stage_80224E38(Vec* arg0, s32 arg1);
-void Stage_80224E64(s32 arg0, Vec* arg_vec);
-s32 Stage_80224FDC(Vec* arg0);
+void Stage_80224E38(Vec3* arg0, s32 arg1);
+void Stage_80224E64(s32 arg0, Vec3* arg_vec);
+s32 Stage_80224FDC(Vec3* arg0);
 s32 Stage_80225074(s32 arg0);
 s32 Stage_80225194();
 s32 Stage_8022519C(s32 idx);

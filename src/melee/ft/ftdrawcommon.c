@@ -44,7 +44,7 @@ extern unk_t func_8000A244();
 extern unk_t func_8000A584();
 extern unk_t func_80009F54();
 
-static inline mtx_thing(MtxPtr mtx, Vec* ptr, f32 val, f32 val2)
+static inline mtx_thing(MtxPtr mtx, Vec3* ptr, f32 val, f32 val2)
 {
     mtx[0][3] = ptr->x + val;
     mtx[1][3] = ptr->y + val;
@@ -55,7 +55,7 @@ MtxPtr func_8008051C(HSD_GObj* arg1, MtxPtr arg2)
 {
     u8 pad2[0x4];
 
-    Vec sp54;
+    Vec3 sp54;
 
     u8 pad1[0xC];
 
@@ -558,7 +558,7 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 
     u8 padding1[0xC];
 
-    Vec sp30;
+    Vec3 sp30;
 
     u8 padding0[0x14];
 
@@ -566,7 +566,7 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
     s32 spAC;
     f32 temp_f0;
     f32 temp_f31;
-    Vec* temp_r4;
+    Vec3* temp_r4;
     MtxPtr temp_r29;
     s32 fighter_2;
     u32 temp_r25;
@@ -953,7 +953,7 @@ void func_80080C28(HSD_GObj* gobj, s32 arg1)
 
     u8 pad0[0xC];
 
-    Vec sp30;
+    Vec3 sp30;
 
     Fighter* fighter;
 

@@ -885,7 +885,7 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
     HSD_GObj* cur;
     BOOL phi_r28;
     Vec2* vtmp;
-    u8 unused[0x14];
+    char unused[0x14];
 
     arg_ft = gobj->user_data;
     phi_r28 = FALSE;
@@ -952,7 +952,7 @@ void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
     s32 temp_r0;
     s32 temp_r30;
     Vec2* tmp;
-    u8 unused[0xC];
+    char unused[0xC];
 
     fp = gobj->user_data;
     temp_r31 = &fp->x2C4;
@@ -1123,7 +1123,7 @@ void func_8007E3EC(HSD_GObj* gobj)
 
 void func_8007E5AC(Fighter* fp)
 {
-    Vec* ground_normal = &fp->x6F0_collData.x14C_ground.normal;
+    Vec3* ground_normal = &fp->x6F0_collData.x14C_ground.normal;
     f32 tmp = -atan2f(ground_normal->x, ground_normal->y);
     assert_line(1146, fp->ground_or_air == GA_Ground);
     func_80075CB4(fp, 0, tmp);

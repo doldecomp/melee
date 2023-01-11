@@ -1,27 +1,26 @@
 #ifndef _lobj_h_
 #define _lobj_h_
 
-#include <dolphin/types.h>
 #include <dolphin/gx/GXLight.h>
-
-#include <sysdolphin/baselib/object.h>
+#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/wobj.h>
 
-#define HSD_A_L_LITC_R 9
-#define HSD_A_L_LITC_G 10
-#define HSD_A_L_LITC_B 11
-#define HSD_A_L_VIS 12
-#define HSD_A_L_A0 13
-#define HSD_A_L_A1 14
-#define HSD_A_L_A2 15
-#define HSD_A_L_K0 16
-#define HSD_A_L_K1 17
-#define HSD_A_L_K2 18
-#define HSD_A_L_CUTOFF 19
-#define HSD_A_L_REFDIST 20
-#define HSD_A_L_REFBRIGHT 21
-#define HSD_A_L_LITC_A 22
+#define HSD_A_L_LITC_R (9)
+#define HSD_A_L_LITC_G (10)
+#define HSD_A_L_LITC_B (11)
+#define HSD_A_L_VIS (12)
+#define HSD_A_L_A0 (13)
+#define HSD_A_L_A1 (14)
+#define HSD_A_L_A2 (15)
+#define HSD_A_L_K0 (16)
+#define HSD_A_L_K1 (17)
+#define HSD_A_L_K2 (18)
+#define HSD_A_L_CUTOFF (19)
+#define HSD_A_L_REFDIST (20)
+#define HSD_A_L_REFBRIGHT (21)
+#define HSD_A_L_LITC_A (22)
 
 #define LOBJ_AMBIENT (0 << 0)
 #define LOBJ_INFINITE (1 << 0)
@@ -35,10 +34,10 @@
 #define LOBJ_DIFF_DIRTY (1 << 7)
 #define LOBJ_SPEC_DIRTY (1 << 8)
 
-#define LOBJ_TYPE_MASK 3
+#define LOBJ_TYPE_MASK (3)
 
-#define LOBJ_LIGHT_ATTN_NONE 0
-#define LOBJ_LIGHT_ATTN 1
+#define LOBJ_LIGHT_ATTN_NONE (0)
+#define LOBJ_LIGHT_ATTN (1)
 
 typedef struct _HSD_LightPoint {
     f32 cutoff;
@@ -96,7 +95,7 @@ typedef struct _HSD_LObj {
         HSD_LightAttn attn;
     } u;
     /* 0x38 */ f32 shininess;
-    /* 0x3C - 0x44 */ Vec lvec;
+    /* 0x3C - 0x44 */ Vec3 lvec;
     /* 0x48 */ struct _HSD_AObj* aobj;
     /* 0x4C */ GXLightID id;
     /* 0x50 */ GXLightObj lightobj;
@@ -156,11 +155,11 @@ void HSD_LObjAnim(HSD_LObj* lobj);
 void HSD_LObjAnimAll(HSD_LObj* lobj);
 void HSD_LObjReqAnim(HSD_LObj* lobj, f32 startframe);
 void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
-void HSD_LObjGetLightVector(HSD_LObj* lobj, VecPtr dir);
+void HSD_LObjGetLightVector(HSD_LObj* lobj, Vec3* dir);
 void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess);
 
-BOOL HSD_LObjGetPosition(HSD_LObj*, Vec*);
-BOOL HSD_LObjGetInterest(HSD_LObj*, Vec*);
+BOOL HSD_LObjGetPosition(HSD_LObj*, Vec3*);
+BOOL HSD_LObjGetInterest(HSD_LObj*, Vec3*);
 
 HSD_WObj* HSD_LObjGetPositionWObj(HSD_LObj* lobj);
 HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj);
@@ -171,5 +170,9 @@ s32 HSD_LightID2Index(GXLightID);
 void HSD_LObjDeleteCurrent(HSD_LObj* lobj);
 s32 HSD_Index2LightID(u32);
 void HSD_LObjRemoveAll(HSD_LObj* lobj);
+void HSD_LObjSetPosition(HSD_LObj* lobj, Vec3* position);
+void HSD_LObjSetInterest(HSD_LObj* lobj, Vec3* interest);
+void func_803668EC(HSD_LObj* lobj);
+void HSD_LObjSetupInit(HSD_CObj* arg0);
 
 #endif

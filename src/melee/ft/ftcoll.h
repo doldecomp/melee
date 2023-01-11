@@ -45,7 +45,7 @@ void func_8007B6EC(struct _HSD_GObj*);
 void func_8007B760(struct _HSD_GObj*, s32);
 void func_8007B8CC(struct _Fighter*, struct _HSD_GObj*);
 void func_8007B8E8(struct _HSD_GObj*);
-void func_getWindOffsetVec_8007B924(struct _HSD_GObj*, Vec* out_wind);
+void func_getWindOffsetVec_8007B924(struct _HSD_GObj*, Vec3* out_wind);
 void func_8007BA0C(struct _HSD_GObj*);
 void func_8007BAC0(struct _HSD_GObj*);
 f32 func_8007BBCC(struct _HSD_GObj*);

@@ -4,5 +4,6 @@
 #include <dolphin/types.h>
 
 void func_801C5DB0(struct _HSD_GObj*, s32);
+void lbl_801C5F60(void);
 
 #endif

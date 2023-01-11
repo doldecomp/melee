@@ -52,5 +52,6 @@ void HSD_FogInit(HSD_Fog*, HSD_FogDesc*);
 void HSD_FogAdjInit(HSD_FogAdj*, HSD_FogAdjDesc*);
 void HSD_FogReqAnimByFlags(HSD_Fog*, u32 flags, f32 frame);
 void FogUpdateFunc(HSD_Fog* fog, u32 type, FObjData* fv);
+HSD_Fog* HSD_FogLoadDesc(HSD_FogDesc* desc);
 
 #endif

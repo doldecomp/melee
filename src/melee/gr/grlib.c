@@ -9,7 +9,7 @@ extern StageInfo stage_info;
 extern u8 lbl_804D7849;
 extern struct _UnkEffectStruct* lbl_804D78FC;
 
-static Vec lbl_8049EF58[6];
+static Vec3 lbl_8049EF58[6];
 
 BOOL func_801C96E8(HSD_GObj* arg0)
 {
@@ -20,7 +20,7 @@ BOOL func_801C96E8(HSD_GObj* arg0)
 UnkGeneratorStruct* func_8039F05C(s8, s8, s32);
 UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 
-UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec* arg2)
+UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
 {
     UnkGeneratorStruct* temp_r3;
     UnkGeneratorMember* phi_r30;
@@ -152,7 +152,7 @@ void func_801C99C0(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
     }
 }
 
-Vec* func_801C9A10(void)
+Vec3* func_801C9A10(void)
 {
     func_801C2D24(0, &lbl_8049EF58[0]);
     func_801C2D24(1, &lbl_8049EF58[1]);
@@ -161,7 +161,7 @@ Vec* func_801C9A10(void)
     return lbl_8049EF58;
 }
 
-void func_801C9A70(s32 arg0, Vec* v)
+void func_801C9A70(s32 arg0, Vec3* v)
 {
     s32 i;
     switch (arg0) {
@@ -275,7 +275,7 @@ void func_801C9E50(s16 val)
     stage_info.x708 = val;
 }
 
-BOOL func_801C9E60(Vec* v)
+BOOL func_801C9E60(Vec3* v)
 {
     s32 id = stage_info.internal_stage_id;
     if (id == RCRUISE) {

@@ -44,6 +44,6 @@ void func_803755A8(void);
 static void HSD_ObjInit(void);
 void HSD_ObjDumpStat(void);
 BOOL HSD_SetInitParameter(HSD_InitParam param, ...);
-int HSD_GetHeap(void);
+OSHeapHandle HSD_GetHeap(void);
 
 #endif

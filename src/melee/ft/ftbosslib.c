@@ -74,7 +74,7 @@ static inline float my_lbvector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void func_8015BE40(HSD_GObj* gobj, Point3d* arg1, f32* arg2, f32 arg3, f32 arg4)
+void func_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3, f32 arg4)
 {
     Fighter* fp;
     Vec3 diff;
@@ -184,7 +184,7 @@ void func_8015C208(HSD_GObj* arg0, Vec3* arg1)
     func_80086644(gobj, arg1);
 }
 
-HSD_GObj* func_8015C244(HSD_GObj* arg0, Point3d* arg1)
+HSD_GObj* func_8015C244(HSD_GObj* arg0, Vec3* arg1)
 {
     return func_8008627C(arg1, arg0);
 }

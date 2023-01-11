@@ -32,9 +32,9 @@ typedef struct _ftPikachuAttributes {
     s32 x60; // up b zip duration
     f32 x64;
     f32 x68; // up b angle offset 1
-    Vec x6C_scale;
+    Vec3 x6C_scale;
     f32 x78; // up b angle offset 2
-    Vec x7C_scale;
+    Vec3 x7C_scale;
     f32 x88;
     f32 x8C; // up b minimum stick magnitude
 
