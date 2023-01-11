@@ -1,9 +1,9 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcommon.h>
 #include <melee/it/code_8027CF30.h>
 #include <melee/lb/lbunknown_001.h>
-#include <melee/ft/ftcommon.h>
 
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag

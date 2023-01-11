@@ -1,11 +1,11 @@
 #include <melee/ft/chara/ftSamus/ftsamus.h>
 
 #include <melee/ef/eflib.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/lb/lbunknown_001.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
 
 void ftSamus_801293BC_inner(HSD_GObj* fighter_gobj)
 {

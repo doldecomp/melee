@@ -1,23 +1,22 @@
 #include <melee/if/ifstatus.h>
 
-#include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <melee/if/ifstock.h>
-#include <melee/text_4.h>
-#include <melee/lb/lbarchive.h>
-#include <sysdolphin/baselib/gobjobject.h>
 #include <dolphin/os/os.h>
+#include <melee/gm/code_801601C4.h>
 #include <melee/if/ifall.h>
-#include <melee/gm/code_801601C4.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <melee/text_3.h>
-#include <melee/gm/code_801601C4.h>
+#include <melee/if/ifstock.h>
+#include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/random.h>
+#include <melee/lb/lbunknown_003.h>
+#include <melee/text_3.h>
+#include <melee/text_4.h>
 #include <placeholder.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 
 HudIndex* func_802F4910(void)
 {

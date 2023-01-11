@@ -1,11 +1,11 @@
 #include <melee/gr/grbattle.h>
 
-#include <melee/gr/grzakogenerator.h>
-#include <melee/gr/grlib.h>
-#include <melee/gm/code_801601C4.h>
 #include <dolphin/os/os.h>
+#include <melee/gm/code_801601C4.h>
 #include <melee/gr/grdisplay.h>
+#include <melee/gr/grlib.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 

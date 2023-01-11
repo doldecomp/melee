@@ -13,7 +13,6 @@
 #include <melee/gr/grizumi.h>
 #include <melee/gr/grkongo.h>
 #include <melee/gr/grmaterial.h>
-#include <melee/gr/grmaterial.h>
 #include <melee/gr/groldkongo.h>
 #include <melee/gr/grstadium.h>
 #include <melee/gr/grzebes.h>

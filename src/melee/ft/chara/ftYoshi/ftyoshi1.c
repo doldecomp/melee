@@ -1,11 +1,11 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi.h>
 
 #include <melee/ef/efasync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftparts.h>
-#include <melee/ft/fighter.h>
 #include <melee/it/itkind.h>
-#include <melee/ft/ft_unknown_006.h>
 
 /* static */ extern f32 const lbl_804D9A28;
 

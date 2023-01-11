@@ -1,8 +1,8 @@
 #ifndef _UTIL_H_
 #define _UTIL_H_
 
-#include <sysdolphin/baselib/objalloc.h>
 #include <math.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 // functions
 void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest);

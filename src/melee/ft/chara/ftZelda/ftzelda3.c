@@ -2,10 +2,10 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcoll.h>
 
 void ftZelda_8013A830(HSD_GObj* fighter_gobj)
 {

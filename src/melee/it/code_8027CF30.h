@@ -1,8 +1,8 @@
 #ifndef MELEE_IT_CODE_8027CF30_H
 #define MELEE_IT_CODE_8027CF30_H
 
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/it/itkind.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void func_80294E78(struct _HSD_GObj*, f32);
 struct _HSD_GObj* func_8029A748(struct _HSD_GObj*, Vec3*, u8, f32);

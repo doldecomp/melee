@@ -1,7 +1,7 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
-#include <melee/ft/ftbosslib.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
 
 // 80153AEC 1506CC
 void lbl_80153AEC(HSD_GObj* gobj)

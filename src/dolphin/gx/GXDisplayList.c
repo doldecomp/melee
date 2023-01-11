@@ -1,5 +1,5 @@
-#include <dolphin/gx/__types.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXGeometry.h>
 
 void GXCallDisplayList(s32 arg0, s32 arg1)

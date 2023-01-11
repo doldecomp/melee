@@ -1,15 +1,14 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 
-#include <melee/it/itkind.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftparts.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/it/itkind.h>
+#include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/random.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/it/code_8027CF30.h>
 
 void ftMario_SpecialS_SetCall(Fighter* fp)
 {

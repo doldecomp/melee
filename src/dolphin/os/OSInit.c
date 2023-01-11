@@ -3,17 +3,17 @@
  */
 #include <dolphin/os/OSInit.h>
 
-#include <dolphin/types.h>
-#include <Runtime/__mem.h>
+#include <dolphin/base/PPCArch.h>
+#include <dolphin/os/init/__start.h>
+#include <dolphin/os/os.h>
 #include <dolphin/os/OSArena.h>
+#include <dolphin/os/OSAudioSystem.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/os/os.h>
-#include <dolphin/base/PPCArch.h>
-#include <dolphin/os/OSAudioSystem.h>
 #include <dolphin/os/OSThread.h>
-#include <dolphin/os/init/__start.h>
+#include <dolphin/types.h>
+#include <Runtime/__mem.h>
 
 typedef struct OSBootInfo {
     char UNK_0x0[0x2C];

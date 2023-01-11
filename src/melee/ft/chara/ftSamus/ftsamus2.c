@@ -1,10 +1,10 @@
 #include <melee/ft/chara/ftSamus/ftsamus2.h>
 
 #include <melee/ft/chara/ftSamus/ftsamus.h>
-#include <melee/ft/code_80081B38.h>
 #include <melee/ft/chara/ftSamus/ftsamus6.h>
-#include <MSL/trigf.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <MSL/trigf.h>
 
 void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
 {

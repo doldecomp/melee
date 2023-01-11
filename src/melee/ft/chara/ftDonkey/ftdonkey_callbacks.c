@@ -1,13 +1,13 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 
-#include <melee/mp/mplib.h>
-#include <melee/ft/ftparts.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialN.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftdata.h>
-#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftparts.h>
 #include <melee/lb/lbmthp.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialN.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.h>
+#include <melee/mp/mplib.h>
 
 void ftDonkey_OnDeath(HSD_GObj* fighter_gobj)
 {

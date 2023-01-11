@@ -1,8 +1,8 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 
-#include <sysdolphin/baselib/random.h>
-#include <melee/it/itkind.h>
 #include <melee/ft/ftparts.h>
+#include <melee/it/itkind.h>
+#include <sysdolphin/baselib/random.h>
 
 extern s32 lbl_803C5A20[];
 

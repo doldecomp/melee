@@ -1,16 +1,16 @@
 #include <dolphin/base/PPCArch.h>
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXGeometry.h>
-#include <dolphin/gx/GXLight.h>
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/gx/GX_unknown_001.h>
+#include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXBump.h>
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/gx/__GXFrameBuf.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GXMisc.h>
 #include <dolphin/gx/__GXTexture.h>
-#include <dolphin/gx/__GX_unknown_001.h>
+#include <dolphin/gx/GX_unknown_001.h>
+#include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXLight.h>
+#include <dolphin/gx/GXTransform.h>
 #include <dolphin/vi/vi.h>
 
 GXContext __GXContext;

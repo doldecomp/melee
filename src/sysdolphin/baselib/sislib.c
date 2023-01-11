@@ -1,12 +1,12 @@
 #include <sysdolphin/baselib/sislib.h>
 
+#include <dolphin/os/os.h>
 #include <melee/lb/lbarchive.h>
 #include <MSL.h>
-#include <dolphin/os/os.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 #include <Runtime/runtime.h>
 #include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 typedef struct {
     unk_t x0;
     unk_t x4;

@@ -1,9 +1,9 @@
 #ifndef _common_structs_h_
 #define _common_structs_h_
 
-#include <dolphin/types.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/types.h>
 
 // Most of these should be moved to independent headers once they are created //
 

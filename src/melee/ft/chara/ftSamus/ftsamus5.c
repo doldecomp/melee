@@ -2,10 +2,10 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftparts.h>
 
 void ftSamus_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {

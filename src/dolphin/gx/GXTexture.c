@@ -1,7 +1,7 @@
-#include <Runtime/__mem.h>
 #include <common_structs.h>
 #include <dolphin/gx/__GXBump.h>
 #include <dolphin/gx/__GXInit.h>
+#include <Runtime/__mem.h>
 
 static Vec2 const lbl_804DE268 = { 16.0F, 0.0F };
 static f64 const lbl_804DE270 = 4503599627370496.0L;

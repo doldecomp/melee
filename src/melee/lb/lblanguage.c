@@ -1,5 +1,5 @@
-#include <melee/lb/lblanguage.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lblanguage.h>
 
 enum_t lbLang_GetLanguageSetting(void)
 {

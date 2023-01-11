@@ -1,8 +1,8 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_11.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/ftbosslib.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftbosslib.h>
 
 // 8015236C 14EF4C
 // https://decomp.me/scratch/kPOjS

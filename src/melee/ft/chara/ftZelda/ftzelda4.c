@@ -1,14 +1,14 @@
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 
 #include <melee/ef/eflib.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/lb/lbunknown_001.h>
 #include <melee/ef/efsync.h>
-#include <melee/ft/fighter.h>
-#include <melee/lb/lbunknown_003.h>
 #include <melee/ft/chara/ftSeak/ftseak.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/lb/lbunknown_003.h>
 
 // 8013ADB4 - 8013AE30 (0x7C bytes)
 // https://decomp.me/scratch/LbMVE

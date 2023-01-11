@@ -2,13 +2,13 @@
 
 #include <dolphin/os/os.h>
 #include <melee/cm/camera.h>
-#include <melee/it/item.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
-#include <melee/mp/mplib.h>
-#include <melee/lb/lbvector.h>
 #include <melee/ft/ftlib.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/it/item.h>
+#include <melee/lb/lbvector.h>
+#include <melee/mp/mplib.h>
 
 typedef enum {
     Gm_PKind_Human,

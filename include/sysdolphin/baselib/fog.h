@@ -3,8 +3,8 @@
 
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/mtxtypes.h>
-#include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/object.h>
 
 typedef struct _HSD_FogAdj {
     /* 0x00 */ HSD_Obj parent;

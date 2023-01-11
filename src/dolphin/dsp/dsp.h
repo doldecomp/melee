@@ -1,9 +1,9 @@
 #ifndef __DOLPHIN_DSP_H_
 #define __DOLPHIN_DSP_H_
 
-#include <dolphin/types.h>
-#include <dolphin/os/OSTime.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSTime.h>
+#include <dolphin/types.h>
 
 #define HW_REG(reg, type) *(volatile type*) (uintptr_t) (reg)
 extern volatile u16 __DSPRegs[] AT_ADDRESS(0xCC005000);

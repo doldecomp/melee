@@ -1,12 +1,12 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
 
 #include <melee/ef/eflib.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/ft/ftparts.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/it/code_8027CF30.h>
 
 // 0x800E9DF8
 // https://decomp.me/scratch/5Qwzg // Create Fox Illusion / Falco Phantasm GFX

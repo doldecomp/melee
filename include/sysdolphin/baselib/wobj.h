@@ -1,8 +1,8 @@
 #ifndef _wobj_h_
 #define _wobj_h_
 
-#include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/object.h>
 
 typedef struct _HSD_WObj {
     HSD_Obj parent;

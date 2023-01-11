@@ -1,8 +1,8 @@
 #ifndef _lbvector_h_
 #define _lbvector_h_
 
-#include <dolphin/mtx/mtxtypes.h>
 #include <dolphin/gx/GXTransform.h>
+#include <dolphin/mtx/mtxtypes.h>
 #include <melee/lb/lbrefract.h>
 
 #include <sysdolphin/baselib/cobj.h>

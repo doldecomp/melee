@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTSEAK_FTSEAK_H
 #define MELEE_FT_CHARA_FTSEAK_FTSEAK_H
 
+#include <melee/ft/chara/ftZelda/ftzelda.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
-#include <melee/ft/chara/ftZelda/ftzelda.h>
 
 typedef struct _ftSeakAttributes {
     f32 x0;

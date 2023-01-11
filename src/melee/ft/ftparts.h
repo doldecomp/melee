@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_FTPARTS_H
 #define MELEE_FT_FTPARTS_H
 
-#include <melee/ft/fighter.h>
 #include <dolphin/mtx/mtxtypes.h>
+#include <melee/ft/fighter.h>
 
 void func_80074B0C(struct _HSD_GObj*, s32, s32);
 void func_80073758(struct _HSD_JObj*);

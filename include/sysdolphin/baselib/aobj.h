@@ -4,8 +4,8 @@
 #include <dolphin/types.h>
 
 #include <sysdolphin/baselib/id.h>
-#include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/objalloc.h>
+#include <sysdolphin/baselib/object.h>
 
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/list.h>

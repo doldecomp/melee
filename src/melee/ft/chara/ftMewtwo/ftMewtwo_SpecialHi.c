@@ -1,12 +1,12 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 
 #include <melee/ef/eflib.h>
-#include <melee/ft/ftcoll.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ftcoll.h>
 #include <melee/lb/lbunknown_001.h>
-#include <melee/ef/efsync.h>
 #include <MSL/trigf.h>
 
 /// @todo Move elsewhere.
