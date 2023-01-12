@@ -20,4 +20,6 @@ def apply(config, args):
     config["map_format"] = "mw" # gnu, mw, ms
     config["build_dir"] = "build/ssbm.us.1.2/src" # only needed for mw and ms map format
     # config["makeflags"] = []
-    config["objdump_executable"] = f"{os.environ['DEVKITPRO']}/devkitPPC/bin/powerpc-eabi-objdump{get_exe_suffix()}"
+    devkitpro = os.environ.get("DEVKITPRO", "/opt/devkitpro")
+    devkitppc = os.environ.get("DEVKITPPC", f"{devkitpro}/devkitPPC")
+    config["objdump_executable"] = f"{devkitppc}/bin/powerpc-eabi-objdump{get_exe_suffix()}"
