@@ -118,12 +118,6 @@ static inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
     }
 }
 
-/// @todo move to gobj.h
-static inline void* HSD_GObjGetHSDObj(HSD_GObj* item_gobj)
-{
-    return item_gobj->hsd_obj;
-}
-
 static inline void ItUnkHoldKind(HSD_GObj* item_gobj)
 {
     Item* it = (Item*) HSD_GObjGetUserData(item_gobj);

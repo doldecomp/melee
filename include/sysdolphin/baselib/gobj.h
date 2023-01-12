@@ -121,4 +121,9 @@ static inline void* HSD_GObjGetUserData(HSD_GObj* gobj)
     return gobj->user_data;
 }
 
+static inline void* HSD_GObjGetHSDObj(HSD_GObj* item_gobj)
+{
+    return item_gobj->hsd_obj;
+}
+
 #endif
