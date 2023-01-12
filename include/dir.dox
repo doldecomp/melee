@@ -1,4 +1,0 @@
-/** @dir
- * @todo Move the contents of this to @c src and then delete it. Make sure tools
- * that reference this (such as @c Makefile) no longer do so.
- */

@@ -1,4 +1,4 @@
-#include <dolphin/pad/pad.h>
+#include <dolphin/pad/Pad.h>
 
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSRtc.h>

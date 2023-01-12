@@ -1,7 +1,7 @@
 #ifndef _controller_h_
 #define _controller_h_
 
-#include <dolphin/pad/pad.h>
+#include <dolphin/pad/Pad.h>
 #include <Runtime/platform.h>
 
 typedef enum _HSD_FlushType {
