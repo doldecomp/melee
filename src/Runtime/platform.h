@@ -99,9 +99,6 @@ typedef void (*Event)(void);
 /// #BOOL false
 #define FALSE 0
 
-/// A null pointer
-#define NULL ((any_t) 0)
-
 #if defined(__MWERKS__) && defined(GEKKO)
 #define MWERKS_GEKKO
 #endif
