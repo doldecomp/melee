@@ -65,14 +65,14 @@ struct ItemLogicTable {
     void (*xC_callback_OnPickup)(HSD_GObj* item);
     void (*x10_callback_OnDrop)(HSD_GObj* item);
     void (*x14_callback_OnThrow)(HSD_GObj* item);
-    s32 (*x18_callback_OnGiveDamage)(HSD_GObj* item);
-    s32 (*x1C_callback_OnTakeDamage)(HSD_GObj* item);
+    BOOL (*x18_callback_OnGiveDamage)(HSD_GObj* item);
+    BOOL (*x1C_callback_OnTakeDamage)(HSD_GObj* item);
     void (*x20_callback_EnterAir)(HSD_GObj* item);
-    s32 (*x24_callback_OnReflect)(HSD_GObj* item);
-    s32 (*x28_callback_OnClank)(HSD_GObj* item);
-    s32 (*x2C_callback_OnAbsorb)(HSD_GObj* item);
-    s32 (*x30_callback_OnShieldBounce)(HSD_GObj* item);
-    s32 (*x34_callback_OnHitShield)(HSD_GObj* item);
+    BOOL (*x24_callback_OnReflect)(HSD_GObj* item);
+    BOOL (*x28_callback_OnClank)(HSD_GObj* item);
+    BOOL (*x2C_callback_OnAbsorb)(HSD_GObj* item);
+    BOOL (*x30_callback_OnShieldBounce)(HSD_GObj* item);
+    BOOL (*x34_callback_OnHitShield)(HSD_GObj* item);
     void (*x38_callback_OnUnknown)(HSD_GObj* item, HSD_GObj* fighter);
 };
 
@@ -125,7 +125,7 @@ typedef struct flag32 {
 } flag32;
 
 typedef struct DynamicBoneTable {
-    HSD_JObj* x0_jobj[33]; // Rough estimate
+    HSD_JObj* x0_jobj[100];
 } DynamicBoneTable;
 
 typedef struct DynamicBones {
@@ -232,7 +232,7 @@ typedef struct ItemStateArray {
 
 typedef struct ItemModelDesc {
     HSD_Joint* x0_joint;
-    s32 x4_bone_count;
+    u32 x4_bone_count;
     s32 x8_bone_attach_id;
     s32 xC_bit_field;
 } ItemModelDesc;
@@ -271,7 +271,7 @@ typedef struct itHitVictim {
 } itHitVictim;
 
 typedef struct itHit {
-    s32 x0_toggle; // Toggles hitbox on/off.
+    BOOL x0_toggle; // Toggles hitbox on/off.
     s32 x4_unk;
     s32 x8_damage;        // Projected damage
     f32 xC_damage_staled; // Staled damage, actually applied
@@ -311,13 +311,17 @@ typedef struct itHit {
     s32 x138;
 } itHit;
 
+typedef enum ItSfx {
+    ItSfxNone = -1,
+} ItSfx;
+
 typedef struct _Item {
     void* x0;
     HSD_GObj* x4_GObj;
     s32 x8;
     s32 xC_spawn_kind;
     s32 x10_item_kind;
-    s32 x14_hold_kind;
+    enum_t x14_hold_kind;
     s32 x18;
     s32 x1C;
     u8 x20_team_id;
@@ -472,39 +476,32 @@ typedef struct _Item {
     HSD_GObj* xCF4_fighterGObjUnk;
     HSD_GObj*
         xCF8_detectGObj; // GObj that was detected by this item's inert hitbox
-    s32 xCFC;
+    u32 xCFC;
     HSD_GObj* xD00_grabGObj;    // GObj that got grabbed by this item
     HSD_GObj* xD04_atkCollItem; // GObj that collided with this item's hitbox?
     u8 xD08;
     u8 xD09;
     u8 xD0A;
     u8 xD0B;
-    u32 xD0C;
+    s32 xD0C;
     s32 xD10;
     struct itcb {
-        s32 (*xD14_callback_Anim)(HSD_GObj* item);       // 0xd14
+        BOOL (*xD14_callback_Anim)(HSD_GObj* item);      // 0xd14
         void (*xD18_callback_Phys)(HSD_GObj* item);      // 0xd18
-        s32 (*xD1C_callback_Coll)(HSD_GObj* item);       // 0xd1c
+        BOOL (*xD1C_callback_Coll)(HSD_GObj* item);      // 0xd1c
         void (*xD20_callback_Accessory)(HSD_GObj* item); // 0xd20
-        s32 (*xD24_callback_Inert)(
-            HSD_GObj* item); // 0xd24, runs when a GObj is detected by this
-                             // item's inert hibox
-        void (*xD28_callback_EnterHitlag)(
-            HSD_GObj* item); // 0xd28, runs after applying hitlag in damage
-                             // apply proc 8026a62c
-        void (*xD2C_callback_ExitHitlag)(
-            HSD_GObj* item); // 0xd2c, runs after exiting hitlag in hitlag
-                             // update proc 8026a200
-        s32 (*xD30_callback_JumpedOn)(
-            HSD_GObj*
-                item); // 0xd30, runs when the item is "jumped on", 80269bac
-        void (*xD34_callback_Grab_ItemCB)(
-            HSD_GObj*
-                item); // 0xd34, when grabbing a fp, run this function on self
-        void (*xD38_callback_Grab_VictimCB)(
-            HSD_GObj* victim,
-            HSD_GObj*
-                item); // 0xd38, when grabbing a fp, run this function on fp
+        // 0xd24, runs when a GObj is detected by this item's inert hibox
+        BOOL (*xD24_callback_Inert)(HSD_GObj* item);
+        // 0xd28, runs after applying hitlag in damage, apply proc 8026a62c
+        void (*xD28_callback_EnterHitlag)(HSD_GObj* item);
+        // 0xd2c, runs after exiting hitlag in hitlag, update proc 8026a200
+        void (*xD2C_callback_ExitHitlag)(HSD_GObj* item);
+        // 0xd30, runs when the item is "jumped on", 80269bac
+        BOOL (*xD30_callback_JumpedOn)(HSD_GObj* item);
+        // 0xd34, when grabbing a fp, run this function on self
+        void (*xD34_callback_Grab_ItemCB)(HSD_GObj* item);
+        // 0xd38, when grabbing a fp, run this function on fp
+        void (*xD38_callback_Grab_VictimCB)(HSD_GObj* victim, HSD_GObj* item);
     } itcb;
     f32 xD3C_spinSpeed;
     f32 xD40;
@@ -516,9 +513,9 @@ typedef struct _Item {
     s32 xD54_throwNum; // Number of times this item has been thrown
     s32 xD58;
     s32 xD5C;
-    s32 xD60; // Something to do with OnDestroy GFX?
-    s32 xD64;
-    s32 xD68;
+    enum_t xD60_destroyType; // has to do with OnDestroy GFX?
+    enum_t xD64;             // item SFX ID
+    enum_t xD68;             // item SFX ID
     s32 xD6C;
     s32 xD70;
     s32 xD74;
@@ -706,7 +703,7 @@ typedef struct ItemCommonData {
     u32 x24;
     u32 x28;
     u32 x2C;
-    s32 x30;
+    u32 x30;
     u32 x34;
     s32 x38_float;
     s32 x3C_float;
@@ -750,8 +747,8 @@ typedef struct ItemCommonData {
 extern s8 lbl_804D6D00;
 extern s32 lbl_804D6D08;
 extern s32 lbl_804D6D0C;
-extern s32 lbl_804D6D10;
-extern s32 lbl_804D6D14;
+extern u32 lbl_804D6D10;
+extern u32 lbl_804D6D14;
 extern ItemCommonData* lbl_804D6D28;
 
 typedef struct Item_r13_Data {
@@ -764,64 +761,45 @@ typedef struct Item_r13_Data {
 } Item_r13_Data;
 
 typedef struct HSD_ObjAllocUnk2 {
-    u8 x0_filler[0x144];
-    u32 x144;
+    u8 x0_filler[0x148];
     u32 x148;
     u32 x14C;
-    UnkFlagStruct x150;
-    u32 x154;
-    u32 x158;
-    u32 x15C;
+    u32 x150;
+    UnkFlagStruct x154;
 } HSD_ObjAllocUnk2;
 
 typedef struct x1C_struct {
-    u32 x1C;
+    s32 x1C;
 } x1C_struct;
 
 typedef struct HSD_ObjAllocUnk {
-    u32 x0;
-    u32 x4;
-    u32 x8;
-    u32 xC;
-    u32 x10;
-    u32 x14;
+    s32 x0;
+    s32 x4;
+    s32 x8;
+    s32 xC;
+    s32 x10;
+    s32 x14;
     u32 x18;
-    x1C_struct x1C_struct;
-    u32 x20;
-    u32 x24;
-    u32 x28;
+    s32 x1C;
+    s32 x20;
+    s32 x24;
+    s32 x28;
     u32 x2C;
     u32 x30;
-    u32 x34;
-    u32 x38;
-    u32 x3C;
-    u32 x40;
-    u32 x44;
-    u32 x48;
-    u32 x4C;
-    u32 x50;
-    u32 x54;
-    u32 x58;
-    u32 x5C;
+    s32 x34;
+    s32 x38;
+    s32 x3C;
+    s32 x40;
+    s32 x44;
+    s32 x48;
+    s32 x4C;
+    s32 x50;
+    s32 x54;
+    s32 x58;
+    s32 x5C;
     u32 x60;
     u32 x64;
-    u32 x68;
 } HSD_ObjAllocUnk;
-
-typedef struct HSD_ObjAllocUnkStruct {
-    HSD_ObjAllocData x0;
-    HSD_ObjAllocData x2C;
-    HSD_ObjAllocData x58;
-    HSD_ObjAllocUnk x84;
-    HSD_ObjAllocUnk2 xEC;
-} HSD_ObjAllocUnkStruct;
-
-typedef struct HSD_ObjAllocUnk3 {
-    u32 x0;
-    u32 x4;
-    u32 x8;
-    u32 xC;
-} HSD_ObjAllocUnk3;
 
 typedef struct HSD_ObjAllocUnk4 {
     u8 x0;
@@ -834,6 +812,7 @@ typedef struct HSD_ObjAllocUnk4 {
     u16 xA;
     u16 xC;
     u32 x10;
+    u8 pad[0x20 - 0x10];
 } HSD_ObjAllocUnk4;
 
 typedef struct HSD_ObjAllocUnk5 {
@@ -853,7 +832,7 @@ typedef struct HSD_ObjAllocUnk6 {
 } HSD_ObjAllocUnk6;
 
 // FUNCTIONS
-s32 func_80266F3C(void);  // Check if items are enabled
+BOOL func_80266F3C(void); // Check if items are enabled
 void func_80266F70(void); // Check to load ItCo.dat/usd
 void func_80266FA8(void); // ItCo prefunction with 0
 void func_8027870C(s32);  // Load ItCo.dat/usd
@@ -864,7 +843,7 @@ void func_80267454(HSD_GObj* item_gobj);  // Remove Camera Box
 void func_802674AC(SpawnItem* spawnItem); // Set Item Hold kind
 void func_802675A8(HSD_GObj* item_gobj);
 void func_802676F4(HSD_GObj* item_gobj);
-s32 func_8026784C(
+BOOL func_8026784C(
     s32 dropItem,
     s32 unused); // Decide drop item; 0x8026862C loads two integers into this,
                  // but the second one goes unused?
@@ -873,7 +852,7 @@ void func_80267AA8(HSD_GObj* item_gobj,
                    SpawnItem* spawnItem);      // Initialize item variables
 void func_802680CC(HSD_GObj* item_gobj);       // Setup Item JObj
 void func_8026814C(HSD_GObj* item_gobj);       // Setup item render objects?
-s32 func_802682F0(HSD_GObj* item_gobj);        // Initialize item bones
+BOOL func_802682F0(HSD_GObj* item_gobj);       // Initialize item bones
 void func_8026849C(HSD_GObj* item_gobj);       // Set item model scale
 void func_80268560(HSD_GObj* item_gobj);       // Setup item dynamics
 HSD_GObj* func_8026862C(SpawnItem* spawnItem); // Create Item
@@ -897,7 +876,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID,
 void lbl_802693E4(HSD_GObj* item_gobj);  // Item Think - Hitlag
 void func_802694CC(HSD_GObj* item_gobj); // Advance item animation + script?
 void lbl_80269528(HSD_GObj* item_gobj);  // Item Think - Animation
-s32 func_802696CC(HSD_GObj* item_gobj);  // Item Think - Check for Blast Zones
+BOOL func_802696CC(HSD_GObj* item_gobj); // Item Think - Check for Blast Zones
 void func_802697D4(HSD_GObj* item_gobj); // Item Think - Physics
 void func_80269978(HSD_GObj* item_gobj); // Item Think - Collision
 void lbl_80269A9C(HSD_GObj* item_gobj);  // Item Think - Accessory + Camera Box
@@ -907,8 +886,8 @@ void lbl_80269BE4(HSD_GObj* item_gobj); // Item Think - Grab
 void lbl_80269C5C(HSD_GObj* item_gobj); // Item Think - Hit Collision Logic
 void func_80269CA0(Item* item_data, s32 damage); // Set damage taken
 void func_80269CC4(HSD_GObj* item_gobj);         // Set damage struct
-s32 func_80269DC8(HSD_GObj* item_gobj);  // Item Think - Shield Collision
-s32 func_80269F14(HSD_GObj* item_gobj);  // Item Think - On Reflect
+BOOL func_80269DC8(HSD_GObj* item_gobj); // Item Think - Shield Collision
+BOOL func_80269F14(HSD_GObj* item_gobj); // Item Think - On Reflect
 void func_8026A0A0(HSD_GObj* item_gobj); // Item Think - Exit Hitlag Check
 void func_8026A0FC(HSD_GObj* item_gobj); // Item Think - Exit Hitlag Check 2
 void func_8026A158(HSD_GObj* item_gobj); // Item Think - Enter Hitlag
@@ -927,18 +906,15 @@ void func_8026AC74(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX,
 void func_8026AD20(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX,
                    f32 arg8);            // Throw Item
 void func_8026ADC0(HSD_GObj* item_gobj); // Make Item Airborne
-void lbl_8026AE10(Item* item_data);      // Clear Item Struct ?
+void lbl_8026AE10(void* item_data);      // Clear Item Struct ?
 u32 func_8026AE60(void);                 // Increment something
-void func_8026AE84(Item* item_data, s32 sfxID, u8 pan,
-                   u8 volume); // Play Item SFX
-void func_8026AF0C(Item* item_data, s32 sfxID, u8 pan,
-                   u8 volume); // Play Item SFX 2
-void func_8026AFA0(Item* item_data, s32 sfxID, u8 pan,
-                   u8 volume);           // Play Item SFX 3
+void func_8026AE84(Item* item_data, enum_t sfxID, u8 pan, u8 volume);
+void func_8026AF0C(Item* item_data, enum_t sfxID, u8 pan, u8 volume);
+void func_8026AFA0(Item* item_data, enum_t sfxID, u8 pan, u8 volume);
 void func_8026B034(Item* item_data);     // Stop Item SFX
 void func_8026B074(Item* item_data);     // Stop Item SFX 2
 void func_8026B0B4(HSD_GObj* item_gobj); // Stop All Item SFX
-s32 func_8026B1A4(HSD_GObj* item_gobj);  // Check if item is grabbable
+BOOL func_8026B1A4(HSD_GObj* item_gobj); // Check if item is grabbable
 f32 func_8026B1D4(
     HSD_GObj* item_gobj,
     itHit* itemHitboxUnk); // Apply Item Damage -  may not be itHit* ???
@@ -1088,13 +1064,10 @@ void func_80272784(HSD_GObj* item_gobj);
 void func_802728C8(HSD_GObj* item_gobj);
 void func_80272A18(HSD_JObj* item_jobj);
 void func_80272A3C(HSD_JObj* item_jobj);
-s32 func_80272D1C(
-    HSD_GObj* item_gobj); // Check if GObj entity class = 0x6 (item)
+BOOL func_80272D1C(HSD_GObj* item_gobj); // Check if GObj is Item class
 s32 func_80272D40(HSD_GObj* item_gobj); // Check GObj entity class
 void func_80272F7C(HSD_JObj*, f32);
 void func_802728C8(HSD_GObj* item_gobj);
-s32 func_80272D1C(
-    HSD_GObj* item_gobj); // Check if GObj entity class = 0x6 (item)
 void func_80273168(HSD_GObj* item_gobj);
 void func_802731A4(HSD_GObj*);
 void func_802731E0(HSD_GObj*);
@@ -1111,7 +1084,7 @@ void func_802742F4(HSD_GObj*, HSD_GObj*, u8);
 void func_80274658(HSD_GObj*, f32);
 void func_80274740(HSD_GObj* item_gobj); /* extern */
 void func_80274A64(HSD_GObj* item_gobj); /* extern */
-s32 func_80274C78(HSD_GObj* item_gobj);  /* extern */
+BOOL func_80274C78(HSD_GObj* item_gobj);
 void func_80274DAC(HSD_GObj*);
 void func_8027737C(HSD_GObj* item_gobj, Vec3* pos); /* extern */
 void func_80274EF8(HSD_GObj* item_gobj);            // Toggle flag in 0xDC8 off
@@ -1122,7 +1095,6 @@ void func_802753BC(HSD_GObj*, s16);
 void func_802753DC(HSD_GObj*);
 void func_80274740(HSD_GObj* item_gobj);            /* extern */
 void func_80274A64(HSD_GObj* item_gobj);            /* extern */
-s32 func_80274C78(HSD_GObj* item_gobj);             /* extern */
 void func_8027737C(HSD_GObj* item_gobj, Vec3* pos); /* extern */
 void func_80274EF8(HSD_GObj* item_gobj);            // Toggle flag in 0xDC8 off
 void func_80275158(HSD_GObj* item_gobj, f32 lifetime); // Set item lifetime
