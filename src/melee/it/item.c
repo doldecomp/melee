@@ -111,7 +111,7 @@ extern void func_802762BC(Item*);
 extern void func_80279B64(Item*);
 extern void func_8027B0C4(HSD_GObj*, SpawnItem*);
 
-inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
+static inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
 {
     if (it->xDC8_word.flags.x19 == 1) {
         HSD_JObjSetRotationY(jobj, M_PI / 2 * it->x2C_facing_direction);
@@ -119,12 +119,12 @@ inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
 }
 
 // TODO move to gobj.h
-inline void* HSD_GObjGetHSDObj(HSD_GObj* item_gobj)
+static inline void* HSD_GObjGetHSDObj(HSD_GObj* item_gobj)
 {
     return item_gobj->hsd_obj;
 }
 
-inline void ItUnkHoldKind(HSD_GObj* item_gobj)
+static inline void ItUnkHoldKind(HSD_GObj* item_gobj)
 {
     Item* it = (Item*) HSD_GObjGetUserData(item_gobj);
     s32 temp_r3;
@@ -1095,7 +1095,7 @@ void func_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 
 extern struct r13_ColAnimStruct* lbl_804D6D04;
 
-inline void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl)
+static inline void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl)
 {
     scl->x = scl->y = scl->z = it->x38_scale;
     HSD_JObjSetScale(jobj, scl);
@@ -1642,7 +1642,7 @@ void func_8026A0FC(HSD_GObj* item_gobj)
     }
 }
 
-inline void func_8026A158_helper(HSD_GObj* atkCollGObj)
+static inline void func_8026A158_helper(HSD_GObj* atkCollGObj)
 {
     Item* temp_item = (Item*) HSD_GObjGetUserData(atkCollGObj);
     temp_item->xDC8_word.flags.x8 = 1;
@@ -1693,7 +1693,7 @@ void func_8026A1E8(HSD_GObj* item_gobj)
     }
 }
 
-inline BOOL processCallback(BOOL (*cb)(HSD_GObj*), HSD_GObj* item_gobj,
+static inline BOOL processCallback(BOOL (*cb)(HSD_GObj*), HSD_GObj* item_gobj,
                             Item* item_data)
 {
     if (cb && cb(item_gobj)) {
@@ -1704,7 +1704,7 @@ inline BOOL processCallback(BOOL (*cb)(HSD_GObj*), HSD_GObj* item_gobj,
     return FALSE;
 }
 
-inline BOOL OnTakeDamageThink(HSD_GObj* item_gobj, Item* item_data)
+static inline BOOL OnTakeDamageThink(HSD_GObj* item_gobj, Item* item_data)
 {
     item_data->itdmg.xC9C += item_data->itdmg.xCA0;
     if (item_data->itdmg.xC9C > 999) {
@@ -1717,7 +1717,7 @@ inline BOOL OnTakeDamageThink(HSD_GObj* item_gobj, Item* item_data)
         item_data);
 }
 
-inline BOOL OnClankThink(HSD_GObj* item_gobj, Item* item_data)
+static inline BOOL OnClankThink(HSD_GObj* item_gobj, Item* item_data)
 {
     BOOL(*cb_OnClank)
     (HSD_GObj*) = item_data->xB8_itemLogicTable->x28_callback_OnClank;
@@ -1727,7 +1727,7 @@ inline BOOL OnClankThink(HSD_GObj* item_gobj, Item* item_data)
     return processCallback(cb_OnClank, item_gobj, item_data);
 }
 
-inline BOOL OnGiveDamageThink(HSD_GObj* item_gobj, Item* item_data)
+static inline BOOL OnGiveDamageThink(HSD_GObj* item_gobj, Item* item_data)
 {
     BOOL(*cb_OnGiveDamage)
     (HSD_GObj*) = item_data->xB8_itemLogicTable->x18_callback_OnGiveDamage;
@@ -1737,7 +1737,7 @@ inline BOOL OnGiveDamageThink(HSD_GObj* item_gobj, Item* item_data)
     return processCallback(cb_OnGiveDamage, item_gobj, item_data);
 }
 
-inline void EnterHitlagThink(HSD_GObj* item_gobj, Item* item_data)
+static inline void EnterHitlagThink(HSD_GObj* item_gobj, Item* item_data)
 {
     if (!item_data->xDC8_word.flags.x9) {
         item_data = GetItemData(item_gobj);
@@ -1754,7 +1754,7 @@ inline void EnterHitlagThink(HSD_GObj* item_gobj, Item* item_data)
     }
 }
 
-inline void checkHitLag(f32 min_value, Item* item_data)
+static inline void checkHitLag(f32 min_value, Item* item_data)
 {
     if (item_data->itdmg.xCBC_hitlagFrames < min_value) {
         item_data->itdmg.xCBC_hitlagFrames = min_value;
@@ -1872,7 +1872,7 @@ extern HSD_GObj* func_800867CC(HSD_GObj*);
 extern s32 func_80086960(HSD_GObj*);
 extern void func_80087050(s32);
 
-inline void DestroyItemInline(HSD_GObj* item_gobj, Item* item_data)
+static inline void DestroyItemInline(HSD_GObj* item_gobj, Item* item_data)
 {
     Item* item_data3 = item_gobj->user_data;
     HSD_GObj* temp_gobj = item_data->x518_ownerGObj;
@@ -1888,7 +1888,7 @@ inline void DestroyItemInline(HSD_GObj* item_gobj, Item* item_data)
     }
 }
 
-inline void ItemSwitch(HSD_GObj* item_gobj)
+static inline void ItemSwitch(HSD_GObj* item_gobj)
 {
     Item* temp_item = item_gobj->user_data;
     s32 destroyType = temp_item->xD60_destroyType;
@@ -1910,7 +1910,7 @@ inline void ItemSwitch(HSD_GObj* item_gobj)
     }
 }
 
-inline void RunCallback(HSD_GObj* item_gobj, void (*cb_Process)(HSD_GObj*))
+static inline void RunCallback(HSD_GObj* item_gobj, void (*cb_Process)(HSD_GObj*))
 {
     if (cb_Process != NULL) {
         cb_Process(item_gobj);
