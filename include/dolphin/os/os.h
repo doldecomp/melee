@@ -1,5 +1,5 @@
 #ifndef _OS_H__
-#define _OS_H_
+#define _OS_H__
 
 #include <dolphin/os/OSAlloc.h>
 #include <dolphin/os/OSArena.h>
@@ -10,7 +10,8 @@
 #define OS_SOUND_MODE_STEREO 1
 
 void OSReport(char*, ...);
-void OSPanic(char* file, int line, char* msg, ...);
+
+ATTRIBUTE_NORETURN void OSPanic(char* file, int line, char* msg, ...);
 
 #define OSRoundUp32B(x) (((u32) (x) + 32 - 1) & ~(32 - 1))
 #define OSRoundDown32B(x) (((u32) (x)) & ~(32 - 1))

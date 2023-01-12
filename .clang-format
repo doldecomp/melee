@@ -19,4 +19,4 @@
   Cpp11BracedListStyle: false,
   KeepEmptyLinesAtTheStartOfBlocks: false,
   SortIncludes: CaseInsensitive,
-  WhitespaceSensitiveMacros: ['HSD_ASSERT'] }
+  WhitespaceSensitiveMacros: ['HSD_ASSERT', 'CHECK'] }

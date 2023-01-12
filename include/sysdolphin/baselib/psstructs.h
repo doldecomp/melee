@@ -3,6 +3,7 @@
 
 #include <dolphin/mtx/mtxtypes.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/jobj.h>
 
 typedef unk_t HSD_PSAppSRT;
@@ -269,7 +270,8 @@ void psDispParticles(u32 target_link, u32 sw);
 void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
                         int* formBank);
 
-void psInitDataBankLocate(int* cmdBank, int* texBank, int* formBank);
+void psInitDataBankLocate(HSD_Archive* cmdBank, HSD_Archive* texBank,
+                          int* formBank);
 
 void psInitDataBankRelocate(int* cmdBank, int* texBank, int* formBank,
                             int* newCmdBank, int* newTexBank, int* newFormBank);

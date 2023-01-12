@@ -790,7 +790,6 @@ void func_8026849C(HSD_GObj* item_gobj)
     HSD_JObjSetScale(temp_jobj, &sp14);
 }
 
-extern void func_8000FD48(HSD_JObj*, void*, s32);
 extern void func_80011710(void*, void*);
 
 // Setup item dynamic bones
