@@ -216,7 +216,7 @@ void func_802F69C0(s32, s32);
 void func_802F6AF8(s32);
 void func_802F6C04(s32);
 void func_802F6D10(s32);
-void func_802F6E1C(s32);
+void func_802F6E1C(int slot);
 void func_802F6E3C(s32);
 void func_802F7220(void);
 

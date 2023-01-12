@@ -1,6 +1,12 @@
 #ifndef INCLUDE_RUNTIME_PLATFORM_H
 #define INCLUDE_RUNTIME_PLATFORM_H
 
+#if defined(__MWERKS__) || defined(__GNUC__)
+#define MWERKS_GNUC
+#endif
+
+#include <stddef.h>
+
 /// A signed 8-bit integer
 typedef signed char s8;
 
@@ -24,6 +30,9 @@ typedef unsigned long u32;
 
 /// An unsigned 64-bit integer
 typedef unsigned long long u64;
+
+/// An unsigned integer of platform-dependent size
+typedef unsigned int uint;
 
 /// A volatile, unsigned 8-bit integer
 typedef volatile u8 vu8;
@@ -69,11 +78,6 @@ typedef int BOOL;
 /// The underlying type of an @c enum, used as a placeholder
 typedef int enum_t;
 
-typedef int intptr_t;
-typedef unsigned int uintptr_t;
-typedef unsigned long size_t;
-typedef signed long ssize_t;
-
 /// A pointer to an unknown type
 typedef void* unk_t;
 
@@ -90,13 +94,10 @@ typedef jmp_t jtbl_t[];
 typedef void (*Event)(void);
 
 /// #BOOL true
-#define TRUE (1)
+#define TRUE 1
 
 /// #BOOL false
-#define FALSE (0)
-
-/// A null pointer
-#define NULL ((any_t) 0)
+#define FALSE 0
 
 #if defined(__MWERKS__) && defined(GEKKO)
 #define MWERKS_GEKKO
@@ -139,6 +140,9 @@ typedef void (*Event)(void);
 #define qr7 7
 #endif
 
-#define FLT_MAX (3.4028235E38)
+#define U8_MAX 0xFF
+#define U16_MAX 0xFFFF
+#define U32_MAX 0xFFFFFFFF
+#define F32_MAX 3.4028235E38
 
 #endif

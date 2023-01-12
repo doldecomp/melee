@@ -112,7 +112,7 @@ static void lbl_802204D8(HSD_GObj*)
     func_801C2FE0();
 }
 static void lbl_802204F8(void) {}
-static int lbl_802204FC(long)
+static BOOL lbl_802204FC(long)
 {
     return 0;
 }

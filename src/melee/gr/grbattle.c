@@ -2,10 +2,12 @@
 
 #include <dolphin/os/os.h>
 #include <melee/gm/code_801601C4.h>
+#include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/grlib.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
@@ -19,6 +21,8 @@ struct {
 static u8 lbl_804D6AC8;
 
 static const int BATTLE_BG_MAX = 3;
+
+static s32 func_8021A10C();
 
 static StageCallbacks lbl_803E7DA0[7] = {
     {
@@ -135,23 +139,26 @@ static HSD_GObj* func_80219D84(s32 arg0)
     StageCallbacks* callbacks = &lbl_803E7DA0[arg0];
 
     gobj = func_801C14D0(arg0);
+
     if (gobj != NULL) {
         Map* map = gobj->user_data;
         map->x8_callback = NULL;
         map->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
+
+        if (callbacks->callback3 != NULL)
             map->x1C_callback = callbacks->callback3;
-        }
-        if (callbacks->callback0 != NULL) {
+
+        if (callbacks->callback0 != NULL)
             callbacks->callback0(gobj);
-        }
-        if (callbacks->callback2 != NULL) {
+
+        if (callbacks->callback2 != NULL)
             func_8038FD54(gobj, callbacks->callback2, 4);
-        }
+
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 232, arg0);
     }
+
     return gobj;
 }
 
@@ -159,12 +166,12 @@ static void func_80219E6C(HSD_GObj* gobj)
 {
     Vec3 v;
     Map* map = gobj->user_data;
-    int id = map->map_id;
+    enum_t id = map->map_id;
 
     func_801C8138(gobj, id, 0);
-    if (lbl_804D6AC8 == 0) {
+
+    if (lbl_804D6AC8 == 0)
         return;
-    }
 
     func_801C9A70(0, &v);
     HSD_JObjSetTranslate(func_801C2CF4(0), &v);
@@ -179,9 +186,9 @@ static void func_80219E6C(HSD_GObj* gobj)
     HSD_JObjSetTranslate(func_801C2CF4(3), &v);
 }
 
-static s32 func_8021A10C()
+static s32 func_8021A10C(void)
 {
-    return 0;
+    return FALSE;
 }
 
 static void func_8021A114() {}
@@ -196,9 +203,9 @@ static void func_8021A11C(HSD_GObj* gobj)
     func_801C8138(gobj, map->map_id, 0);
 }
 
-static s32 func_8021A16C()
+static s32 func_8021A16C(void)
 {
-    return 0;
+    return FALSE;
 }
 
 static void func_8021A174(HSD_GObj* gobj)

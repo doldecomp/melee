@@ -7,9 +7,9 @@
 extern void (*lbl_803C20CC[FTKIND_MAX])(HSD_GObj*, s32, void*);
 extern void (*lbl_803C2150[FTKIND_MAX])(HSD_GObj*, s32, BOOL);
 
-void func_800855C8(void);
+void func_800855C8(enum_t id, int slot);
 void func_8008572C(s32);
-void func_8008578C(void);
+void func_8008578C(enum_t id, int slot);
 void func_800857E0(BOOL);
 void func_80085820(FighterKind, s32 costume_id);
 void func_800859A8(Fighter*);

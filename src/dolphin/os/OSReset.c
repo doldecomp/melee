@@ -116,17 +116,17 @@ extern OSSram* __OSLockSram(void);
 
 extern OSThreadQueue __OSActiveThreadQueue AT_ADDRESS(0x800000DC);
 
-BOOL __OSCallResetFunctions(u32 arg0)
+BOOL __OSCallResetFunctions(BOOL funcs_arg)
 {
     OSResetFunctionInfo* iter;
-    s32 retCode = 0;
+    BOOL anyReset = FALSE;
 
-    for (iter = ResetFunctionQueue.first; iter != NULL; iter = iter->next) {
-        retCode |= !iter->func(arg0);
-    }
-    retCode |= !__OSSyncSram();
+    for (iter = ResetFunctionQueue.first; iter != NULL; iter = iter->next)
+        anyReset |= !iter->func(funcs_arg);
 
-    return retCode ? FALSE : TRUE;
+    anyReset |= !__OSSyncSram();
+
+    return anyReset ? FALSE : TRUE;
 }
 
 static void KillThreads(void)
@@ -140,9 +140,9 @@ static void KillThreads(void)
         case 1:
         case 4:
             OSCancelThread(thread);
-            break;
+            continue;
         default:
-            break;
+            continue;
         }
     }
 }
@@ -157,32 +157,36 @@ void __OSDoHotReset(s32 arg0)
 
 void OSResetSystem(int reset, u32 resetCode, BOOL forceMenu)
 {
-    BOOL rc;
+#ifdef MUST_MATCH
+    u8 unused[12];
+#endif
+
+    // Not initialized in all branches?
     BOOL disableRecalibration;
-    u32 unk[3];
+
     OSDisableScheduler();
     __OSStopAudioSystem();
 
-    if (reset == OS_RESET_SHUTDOWN) {
+    if (reset == OS_RESET_SHUTDOWN)
         disableRecalibration = __PADDisableRecalibration(TRUE);
-    }
 
-    while (!__OSCallResetFunctions(FALSE)) {
-    }
+    while (!__OSCallResetFunctions(FALSE))
+        continue;
 
     if (reset == OS_RESET_HOTRESET && forceMenu) {
-        OSSram* sram;
+        OSSram* sram = __OSLockSram();
+        sram->flags |= (1 << 6);
 
-        sram = __OSLockSram();
-        sram->flags |= 0x40;
         __OSUnlockSram(TRUE);
 
-        while (!__OSSyncSram()) {
-        }
+        while (!__OSSyncSram())
+            continue;
     }
+
     OSDisableInterrupts();
     __OSCallResetFunctions(TRUE);
     LCDisable();
+
     if (reset == OS_RESET_HOTRESET) {
         __OSDoHotReset(resetCode);
     } else if (reset == OS_RESET_RESTART) {
@@ -190,27 +194,30 @@ void OSResetSystem(int reset, u32 resetCode, BOOL forceMenu)
         OSEnableScheduler();
         __OSReboot(resetCode, forceMenu);
     }
+
     KillThreads();
-    memset(OSPhysicalToCached(0x40), 0, 0xcc - 0x40);
-    memset(OSPhysicalToCached(0xd4), 0, 0xe8 - 0xd4);
-    memset(OSPhysicalToCached(0xf4), 0, 0xf8 - 0xf4);
-    memset(OSPhysicalToCached(0x3000), 0, 0xc0);
-    memset(OSPhysicalToCached(0x30c8), 0, 0xd4 - 0xc8);
+    memset(OSPhysicalToCached(0x40), 0, 0xCC - 0x40);
+    memset(OSPhysicalToCached(0xD4), 0, 0xE8 - 0xD4);
+    memset(OSPhysicalToCached(0xF4), 0, 0xF8 - 0xF4);
+    memset(OSPhysicalToCached(0x3000), 0, 0xC0);
+    memset(OSPhysicalToCached(0x30C8), 0, 0xD4 - 0xC8);
 
     __PADDisableRecalibration(disableRecalibration);
 }
 
 extern volatile u8 DAT_800030e2 AT_ADDRESS(0x800030E2);
+
 typedef struct Unk {
     u8 pad[0x24];
     u32 resetCode;
 } Unk;
+
 extern volatile Unk DAT_cc003000 AT_ADDRESS(0xCC003000);
 
 u32 OSGetResetCode(void)
 {
-    if (DAT_800030e2 != 0) {
+    if (DAT_800030e2 != 0)
         return 0x80000000;
-    }
+
     return ((DAT_cc003000.resetCode & ~7) >> 3);
 }

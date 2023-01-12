@@ -18,8 +18,8 @@ void OSRegisterResetFunction(OSResetFunctionInfo* func);
 void __OSDoHotReset(s32 arg0);
 
 /// @todo @c enum
-#define OS_RESET_RESTART (0)
-#define OS_RESET_HOTRESET (1)
-#define OS_RESET_SHUTDOWN (2)
+#define OS_RESET_RESTART 0
+#define OS_RESET_HOTRESET 1
+#define OS_RESET_SHUTDOWN 2
 
 #endif

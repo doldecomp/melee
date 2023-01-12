@@ -98,7 +98,7 @@ typedef enum InternalStageId {
 /// @remarks This struct is based in part on the datasheet however the info
 ///          there is likely incorrect as this doesn't quite match @c
 ///          grGroundParam.
-typedef struct _StageCameraInfo {
+typedef struct StageCameraInfo {
     f32 cam_bounds_left;      // 0x0
     f32 cam_bounds_right;     // 0x4
     f32 cam_bounds_top;       // 0x8
@@ -128,14 +128,14 @@ typedef struct _StageCameraInfo {
     f32 fixed_cam_horz_angle; // 0x70
 } StageCameraInfo;
 
-typedef struct _StageBlastZone {
+typedef struct StageBlastZone {
     f32 left;   // 0x74
     f32 right;  // 0x78
     f32 top;    // 0x7C
     f32 bottom; // 0x80
 } StageBlastZone;
 
-typedef struct _StageInfo {
+typedef struct StageInfo {
     StageCameraInfo cam_info;  // 0x00 - 0x70
     StageBlastZone blast_zone; // 0x74 - 0x80
 
@@ -216,7 +216,7 @@ typedef struct _StageInfo {
     u8 x744_pad[0x748 - 0x744];
 } StageInfo;
 
-typedef struct {
+typedef struct StageCallbacks {
     void (*callback0)(struct _HSD_GObj*);
     s32 (*callback1)();
     void (*callback2)(struct _HSD_GObj*);
@@ -224,7 +224,7 @@ typedef struct {
     u32 flags;
 } StageCallbacks;
 
-typedef struct _StageData {
+typedef struct StageData {
     u32 flags1;
     StageCallbacks* callbacks;
     char* data1;
@@ -241,12 +241,12 @@ typedef struct _StageData {
     s32 x30; // size of x2C array
 } StageData;
 
-typedef struct _StructPairWithStageID {
+typedef struct StructPairWithStageID {
     s32 stage_id;
     s32 list_idx;
 } StructPairWithStageID;
 
-typedef struct _Map {
+typedef struct Map {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
     HSD_GObjEvent x8_callback;

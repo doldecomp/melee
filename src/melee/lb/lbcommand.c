@@ -77,7 +77,7 @@ void Command_07(CommandInfo* info)
 void Command_08(CommandInfo* info)
 {
     info->u.data_position += 1;
-    info->timer = FLT_MAX;
+    info->timer = F32_MAX;
 }
 
 void Command_09(CommandInfo* info)

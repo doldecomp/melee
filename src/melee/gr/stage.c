@@ -6,7 +6,7 @@
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
 
-extern struct _StageInfo stage_info;
+extern struct StageInfo stage_info;
 
 struct StructStageIDWithUnks {
     s32 stage_id;
@@ -383,7 +383,7 @@ void Stage_80225298(void)
     func_801C0F78(&local_data);
 }
 
-void Stage_802252E4(InternalStageId idx, s32 unused)
+void Stage_802252E4(InternalStageId idx, HSD_GObj* unused)
 {
     StructPairWithStageID local_data;
 
