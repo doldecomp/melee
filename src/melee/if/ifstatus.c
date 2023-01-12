@@ -2578,9 +2578,9 @@ void func_802F6D10(s32 player_idx)
     }
 }
 
-void func_802F6E1C(s32 player_num)
+void func_802F6E1C(int slot)
 {
-    func_802F6508(player_num);
+    func_802F6508(slot);
 }
 
 void func_802F6E3C(s32 player_num)

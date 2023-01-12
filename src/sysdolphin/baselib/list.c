@@ -1,5 +1,4 @@
 #include <Runtime/platform.h>
-#include <stddef.h>
 #include <string.h>
 #include <sysdolphin/baselib/list.h>
 

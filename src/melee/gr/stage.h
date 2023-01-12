@@ -47,7 +47,7 @@ void Stage_802251B4(InternalStageId idx, s32 arg1);
 void Stage_802251E8(InternalStageId idx, s32* unused);
 void Stage_8022524C(void);
 void Stage_80225298(void);
-void Stage_802252E4(InternalStageId idx, s32 unused);
+void Stage_802252E4(InternalStageId idx, HSD_GObj* unused);
 void Stage_8022532C(InternalStageId idx, s32 arg1);
 s32 Stage_80225194(void);
 

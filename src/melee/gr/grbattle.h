@@ -12,7 +12,6 @@ static void func_80219D58();
 static s32 func_80219D7C();
 static HSD_GObj* func_80219D84(s32);
 static void func_80219E6C(HSD_GObj*);
-static s32 func_8021A10C();
 static void func_8021A114();
 static void func_8021A118();
 static void func_8021A11C(HSD_GObj*);

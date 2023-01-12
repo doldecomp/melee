@@ -106,7 +106,7 @@ static s32 lbl_8020E4E4(void)
 }
 static void lbl_8020E4EC(HSD_GObj* gobj) {}
 static void lbl_8020E4F0() {}
-static int lbl_8020E4F4(s32 number)
+static BOOL lbl_8020E4F4(s32 number)
 {
     return 0;
 }

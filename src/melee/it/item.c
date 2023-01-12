@@ -1695,7 +1695,7 @@ void func_8026A1E8(HSD_GObj* item_gobj)
 }
 
 static inline BOOL processCallback(BOOL (*cb)(HSD_GObj*), HSD_GObj* item_gobj,
-                            Item* item_data)
+                                   Item* item_data)
 {
     if (cb && cb(item_gobj)) {
         item_data->xD60_destroyType = 2;
@@ -1913,7 +1913,8 @@ static inline void ItemSwitch(HSD_GObj* item_gobj)
     }
 }
 
-static inline void RunCallback(HSD_GObj* item_gobj, void (*cb_Process)(HSD_GObj*))
+static inline void RunCallback(HSD_GObj* item_gobj,
+                               void (*cb_Process)(HSD_GObj*))
 {
     if (cb_Process != NULL) {
         cb_Process(item_gobj);

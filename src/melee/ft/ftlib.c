@@ -110,7 +110,7 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
     HSD_GObj* result;
     u32 unused[4];
 
-    f32 min_dist = FLT_MAX;
+    f32 min_dist = F32_MAX;
 
     if (gobj != NULL) {
         fp = gobj->user_data;
@@ -154,7 +154,7 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
     HSD_GObj* result;
     u32 unused[4];
 
-    f32 min_diff = FLT_MAX;
+    f32 min_diff = F32_MAX;
 
     if (gobj != NULL) {
         fp = gobj->user_data;

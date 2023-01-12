@@ -1,15 +1,23 @@
 #ifndef _player_h_
 #define _player_h_
 
+#include <melee/pl/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
 typedef struct _StaticPlayer {
-    /*0x00*/ s32 player_state; // 0x02 In-Game (includes dead). 0x00 Otherwise.
-    /*0x04*/ s32 player_character; //(External ID)
-    /*0x08*/ s32 slot_type; // (0x0000000 is HMN, 0x00000001 is CPU, 0x00000002
-                            // is Demo, 0x00000003 n/a)
+    /// @at{0} @sz{4}
+    /// @todo 0x02 In-Game (includes dead). 0x00 Otherwise.
+    enum_t player_state;
+
+    /// @at{4} @sz{4}
+    /// @todo External ID.
+    enum_t player_character;
+
+    /// @at{8} @sz{4}
+    /// @todo 0 is HMN, 1 is CPU, 2 is Demo, 3 n/a
+    enum_t slot_type;
 
     /*0x0C*/ u8 transformed[2]; // 0x0001 for normal, 0x0100 for transformed
                                 // (Probably Zelda/Sheik only)
@@ -50,6 +58,7 @@ typedef struct _StaticPlayer {
     /*0x58*/ f32 defense_ratio;
 
     /*0x5C*/ f32 model_scale;
+
     union {
         struct {
             /*0x60*/ s16 damage_percent;
@@ -62,16 +71,18 @@ typedef struct _StaticPlayer {
 
     /*0x68 - 0x6C*/ s32 falls[2]; /// other index for nana falls
 
-    /*0x70-0x84*/ s32 kos_by_player[6];
+    /*0x70-0x84*/ uint kos_by_player[6];
 
-    /*0x88*/ u32 match_frame_count; // If -1 in zz_0035184, then it's set to
-                                    // MatchInfo->frame_count
+    /// @at{88} @sz{4}
+    /// @remarks If -1 in zz_0035184, then it's set to MatchInfo->frame_count
+    uint match_frame_count;
+
     /*0x8C*/ u16 suicide_count;
 
     /*0x8E*/ s8 stocks;
     /*0x8F*/ s8 unk8F;
 
-    /*0x90*/ s32 current_coins;
+    /*0x90*/ int current_coins;
     /*0x94*/ s32 total_coins;
 
     /*0x98*/ s32 unk98;
@@ -82,7 +93,7 @@ typedef struct _StaticPlayer {
                                            // the joystick a different direction
                                            // from neutral.
 
-    /*0xA8*/ s32 nametag_slot_id;
+    /*0xA8*/ int nametag_slot_id;
 
     /*0xAC*/ struct {
         u8 b0 : 1;
@@ -150,23 +161,23 @@ typedef struct _StaticPlayer {
 
 } StaticPlayer;
 
-StaticPlayer* Player_GetPtrForSlot(s32 slot);
-void Player_80031790(s32 slot);
-void Player_80031848(s32 slot);
+StaticPlayer* Player_GetPtrForSlot(int slot);
+void Player_80031790(int slot);
+void Player_80031848(int slot);
 void Player_80031900();
-BOOL Player_800319C4(s32 slot, BOOL arg1);
-void Player_80031AD0(s32 slot);
-void Player_80031CB0(s32 id, s32 slot);
-void Player_80031D2C(s32 id, s32 slot);
+BOOL Player_800319C4(int slot, BOOL arg1);
+void Player_80031AD0(int slot);
+void Player_80031CB0(enum_t id, int slot);
+void Player_80031D2C(enum_t id, int slot);
 void Player_80031DA8(s32 param_1, s32 param_2);
 void Player_80031DC8(void func_arg(s32, s32));
-void Player_80031EBC(s32 slot);
-void Player_80031FB0(s32 slot, s32 entity_index);
-void Player_80032070(s32 slot, BOOL bool_arg);
-void Player_8003219C(s32 slot);
-BOOL Player_8003221C(s32 slot);
+void Player_80031EBC(int slot);
+void Player_80031FB0(int slot, s32 entity_index);
+void Player_80032070(int slot, BOOL bool_arg);
+void Player_8003219C(int slot);
+BOOL Player_8003221C(int slot);
 s32 Player_GetPlayerState(s32 slot);
-s32 Player_GetPlayerCharacter(s32 slot);
+enum_t Player_GetPlayerCharacter(int slot);
 void Player_SetPlayerCharacter(s32 slot, s32 value);
 s32 Player_GetPlayerSlotType(s32 slot);
 s32 Player_8003248C(s32 slot, BOOL arg1);
@@ -176,8 +187,8 @@ s8 Player_80032610(s32 slot, BOOL arg1);
 void Player_LoadPlayerCoords(s32 slot, Vec3* out_vec);
 void Player_80032768(s32 slot, Vec3* arg_vec);
 void Player_80032828(s32 slot, s32 index, Vec3* arg_vec);
-void Player_800328D4(s32 slot, Vec3* arg_vec);
-void Player_80032A04(s32 slot, Vec3* arg_vec);
+void Player_800328D4(int slot, Vec3* arg_vec);
+void Player_80032A04(int slot, Vec3* arg_vec);
 void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 direction);
 f32 Player_80032BB0(s32 slot);
 void Player_SetScale(s32 slot, f32 scale);
@@ -190,35 +201,35 @@ void Player_80032FA4(s32 slot, s32 arg);
 f32 Player_GetFacingDirection(s32 slot);
 void Player_SetFacingDirection(s32 slot, f32 direction);
 void Player_SetFacingDirectionConditional(s32 slot, BOOL b, f32 direction);
-u32 Player_GetCostumeId(s32 slot);
-void Player_SetCostumeId(s32 slot, s8 costume_id);
-u8 Player_GetControllerIndex(s32 slot);
-void Player_SetControllerIndex(s32 slot, s8 controller_index);
-s8 Player_GetTeam(s32 slot);
-void Player_SetTeam(s32 slot, s8 unk_color);
-s8 Player_GetPlayerId(s32 slot);
-void Player_SetPlayerId(s32 slot, s8 player_id);
-s8 Player_GetCpuLevel(s32 slot);
-void Player_SetPlayerAndEntityCpuLevel(s32 slot, s8 cpu_level);
-s8 Player_GetCpuType(s32 slot);
-void Player_SetPlayerAndEntityCpuType(s32 slot, s8 cpu_type);
-s8 Player_GetHandicap(s32 slot);
-void Player_SetHandicap(s32 slot, s8 handicap);
-f32 Player_GetUnk50(s32 slot);
-f32 Player_GetAttackRatio(s32 slot);
-void Player_SetAttackRatio(s32 slot, f32 attack_ratio);
-f32 Player_GetDefenseRatio(s32 slot);
-void Player_SetDefenseRatio(s32 slot, f32 defense_ratio);
-f32 Player_GetModelScale(s32 slot);
-void Player_SetModelScale(s32 slot, f32 model_scale);
-s32 Player_GetStocks(s32 slot);
-s32 Player_GetP1Stock();
-void Player_SetStocks(s32 slot, s32 stocks);
-void Player_LoseStock(s32 slot);
-s32 Player_GetCoins(s32 slot);
-void Player_SetCoins(s32 slot, s32 current_coins);
-s32 Player_GetTotalCoins(s32 slot);
-void Player_SetTotalCoins(s32 slot, s32 coins);
+u32 Player_GetCostumeId(int slot);
+void Player_SetCostumeId(int slot, s8 costume_id);
+u8 Player_GetControllerIndex(int slot);
+void Player_SetControllerIndex(int slot, s8 controller_index);
+s8 Player_GetTeam(int slot);
+void Player_SetTeam(int slot, s8 unk_color);
+s8 Player_GetPlayerId(int slot);
+void Player_SetPlayerId(int slot, s8 player_id);
+s8 Player_GetCpuLevel(int slot);
+void Player_SetPlayerAndEntityCpuLevel(int slot, s8 cpu_level);
+s8 Player_GetCpuType(int slot);
+void Player_SetPlayerAndEntityCpuType(int slot, s8 cpu_type);
+s8 Player_GetHandicap(int slot);
+void Player_SetHandicap(int slot, s8 handicap);
+f32 Player_GetUnk50(int slot);
+f32 Player_GetAttackRatio(int slot);
+void Player_SetAttackRatio(int slot, f32 attack_ratio);
+f32 Player_GetDefenseRatio(int slot);
+void Player_SetDefenseRatio(int slot, f32 defense_ratio);
+f32 Player_GetModelScale(int slot);
+void Player_SetModelScale(int slot, f32 model_scale);
+s32 Player_GetStocks(int slot);
+int Player_GetP1Stock(void);
+void Player_SetStocks(int slot, int stocks);
+void Player_LoseStock(int slot);
+int Player_GetCoins(int slot);
+void Player_SetCoins(int slot, int current_coins);
+int Player_GetTotalCoins(int slot);
+void Player_SetTotalCoins(int slot, int coins);
 s32 Player_GetUnk98(s32 slot);
 void Player_SetUnk98(s32 slot, s32 unk98);
 s32 Player_GetUnk9C(s32 slot);
@@ -245,23 +256,23 @@ u8 Player_GetFlagsAEBit0(s32 slot);
 u32 Player_GetRemainingHPByIndex(s32 slot, s32 index);
 s32 Player_GetFalls(s32 slot);
 s32 Player_GetFallsByIndex(s32 slot, s32 index);
-void Player_SetFalls(s32 slot, s32 falls);
-void Player_SetFallsByIndex(s32 slot, s32 index, s32 falls);
-s32 Player_GetKOsByPlayerIndex(s32 slot, s32 index);
-void Player_UpdateKOsBySlot(s32 slot, BOOL bool_arg, s32 other_slot);
-u32 Player_GetMatchFrameCount(s32 slot);
-void Player_UpdateMatchFrameCount(s32 slot, BOOL condition);
-u16 Player_GetSuicideCount(s32 slot);
+void Player_SetFalls(int slot, s32 falls);
+void Player_SetFallsByIndex(int slot, enum_t index, s32 falls);
+s32 Player_GetKOsByPlayerIndex(int slot, int idx);
+void Player_UpdateKOsBySlot(int slot, BOOL bool_arg, int other_slot);
+uint Player_GetMatchFrameCount(int slot);
+void Player_UpdateMatchFrameCount(int slot, BOOL condition);
+uint Player_GetSuicideCount(int slot);
 void Player_SetSuicideCount(s32 slot, u32 suicide_count);
 void Player_IncSuicideCount(s32 slot, s32 condition);
 BOOL Player_800353BC(s32 slot);
 BOOL Player_8003544C(s32 slot, BOOL condition);
-void Player_SetFlagsBit0(s32 slot, s32 bit0);
-s8 Player_GetNametagSlotID(s32 slot);
-void Player_SetNametagSlotID(s32 slot, s32 nametag_slot_id);
+void Player_SetFlagsBit0(int slot, BOOL bit0);
+u8 Player_GetNametagSlotID(int slot);
+void Player_SetNametagSlotID(int slot, int nametag_slot_id);
 s32 Player_GetFlagsBit1(s32 slot);
 void Player_SetFlagsBit1(s32 slot);
-void Player_UnsetFlagsBit1(s32 slot);
+void Player_UnsetFlagsBit1(int slot);
 s32 Player_GetFlagsBit3(s32 slot);
 void Player_SetFlagsBit3(s32 slot, u8 bit3);
 u8 Player_GetFlagsBit4(s32 slot);

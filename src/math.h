@@ -6,7 +6,10 @@
 #define M_PI 3.14159265358979323846
 #define M_PI_2 1.57079632679489655799
 
+#ifdef __MWERKS__
+#pragma push
 #pragma cplusplus on
+#endif
 
 #define FLT_EPSILON 1.00000001335e-10f
 
@@ -31,7 +34,9 @@ extern inline float sqrtf(float x)
     return x;
 }
 
-#pragma cplusplus reset
+#ifdef __MWERKS__
+#pragma pop
+#endif
 
 enum FloatType {
     FP_NAN = 1,

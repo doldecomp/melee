@@ -1,8 +1,8 @@
 #ifndef __CSTRING_H__
 #define __CSTRING_H__
 
+#include <MSL/stddef.h>
 #include <Runtime/platform.h>
-#include <stddef.h>
 
 int func_8032388C(void* dst, const void* src, size_t len);
 int memcmp(const void* str1, const void* str2, size_t len);

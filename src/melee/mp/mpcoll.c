@@ -110,8 +110,8 @@ void func_80041DD0(CollData* cd, u32 flags)
 }
 
 // TODO: float order hack
-const f32 lbl_804D7F9C = -FLT_MAX;
-const f32 lbl_804D7FA0 = FLT_MAX;
+const f32 lbl_804D7F9C = -F32_MAX;
+const f32 lbl_804D7FA0 = F32_MAX;
 
 // 80041EE4 https://decomp.me/scratch/j2TXK
 // CollDataInit

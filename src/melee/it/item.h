@@ -1065,7 +1065,7 @@ void func_802728C8(HSD_GObj* item_gobj);
 void func_80272A18(HSD_JObj* item_jobj);
 void func_80272A3C(HSD_JObj* item_jobj);
 BOOL func_80272D1C(HSD_GObj* item_gobj); // Check if GObj is Item class
-s32 func_80272D40(HSD_GObj* item_gobj); // Check GObj entity class
+s32 func_80272D40(HSD_GObj* item_gobj);  // Check GObj entity class
 void func_80272F7C(HSD_JObj*, f32);
 void func_802728C8(HSD_GObj* item_gobj);
 void func_80273168(HSD_GObj* item_gobj);

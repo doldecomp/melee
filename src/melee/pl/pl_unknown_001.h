@@ -24,5 +24,7 @@ void func_800402D0(u8 slot, BOOL, s32);
 void func_8003EA08(u8 slot, BOOL);
 void func_80040460(u8 slot, BOOL);
 void func_8003E4A4(u8 slot, BOOL, s32, s32);
+void func_8003891C(int slot);
+void func_80038F10(int slot);
 
 #endif
