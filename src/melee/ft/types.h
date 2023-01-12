@@ -492,7 +492,8 @@ typedef enum ftCommonAction {
     ASID_CAPTUREDAMAGECRAZYHAND,
     ASID_CAPTUREWAITCRAZYHAND,
     ASID_THROWNCRAZYHAND,
-    ASID_BARREL
+    ASID_BARREL,
+  ASID_MAX
 } ftCommonAction;
 
 typedef enum _ftPart {

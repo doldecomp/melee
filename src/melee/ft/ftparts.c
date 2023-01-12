@@ -1,5 +1,6 @@
 #include <melee/ft/ftparts.h>
 
+#include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/mtx.h>
 #include <melee/ft/fighter.h>
@@ -13,10 +14,9 @@
 #include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/util.h>
-
 #include <dolphin/os/os.h>
 
-#define MAX_FT_PARTS (140)
+#define MAX_FT_PARTS 140
 
 #define JOBJ_NEXT(jobj) ((jobj) == NULL ? NULL : (jobj)->next)
 #define JOBJ_PARENT(jobj) ((jobj) == NULL ? NULL : (jobj)->parent)

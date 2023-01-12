@@ -10,8 +10,7 @@
 #include <melee/it/itkind.h>
 
 typedef enum ftLuigiAction {
-    AS_FTCOMMON = 340,
-    AS_LUIGI_SPECIALN,
+    AS_LUIGI_SPECIALN = ASID_MAX,
     AS_LUIGI_SPECIALAIRN,
     AS_LUIGI_SPECIALS_START,
     AS_LUIGI_SPECIALS_HOLD,
