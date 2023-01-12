@@ -137,6 +137,14 @@ typedef void (*Event)(void);
 #define AT_ADDRESS(x)
 #endif
 
+#ifndef UNK_SIZE_ARRAY
+#if defined(__MWERKS__) && !defined(M2CTX)
+#define UNK_SIZE_ARRAY []
+#else
+#define UNK_SIZE_ARRAY [0]
+#endif
+#endif
+
 #ifdef GEKKO
 #define qr0 0
 #define qr1 1

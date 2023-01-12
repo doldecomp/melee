@@ -17,11 +17,7 @@
 
 extern void InitMetroTRK(void);
 
-u16 Pad3Button
-#ifndef M2CTX
-    : PAD3_BUTTON_ADDR
-#endif
-      ;
+u16 Pad3Button AT_ADDRESS(PAD3_BUTTON_ADDR);
 
 static u8 Debug_BBA = 0;
 

@@ -51,11 +51,7 @@ struct ItemStateTable {
 };
 
 struct ItemStateContainer {
-    struct ItemStateTable stateTable[
-#ifdef M2CTX
-        0
-#endif
-    ];
+    struct ItemStateTable stateTable UNK_SIZE_ARRAY;
 };
 
 struct ItemLogicTable {
@@ -622,19 +618,11 @@ typedef struct CommonItemArticles {
 } CommonItemArticles;
 
 typedef struct UnkItemArticles {
-    void* unkptr[
-#ifdef M2CTX
-        0
-#endif
-    ];
+    void* unkptr UNK_SIZE_ARRAY;
 } UnkItemArticles;
 
 typedef struct UnkItemArticles2 {
-    void* unkptr[
-#ifdef M2CTX
-        0
-#endif
-    ];
+    void* unkptr UNK_SIZE_ARRAY;
 } UnkItemArticles2;
 
 typedef struct UnkItemArticles3 {
