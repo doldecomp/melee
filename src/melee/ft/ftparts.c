@@ -1,8 +1,9 @@
 #include <melee/ft/ftparts.h>
 
-#include <dolphin/gx/GXTransform.h>
 #include <dolphin/gx/GX_unknown_001.h>
+#include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
+#include <dolphin/os/os.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftdata.h>
@@ -14,7 +15,6 @@
 #include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/util.h>
-#include <dolphin/os/os.h>
 
 #define MAX_FT_PARTS 140
 

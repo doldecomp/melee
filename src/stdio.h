@@ -3,7 +3,6 @@
 
 #include <stdarg.h>
 
-
 int puts(const char* s);
 int printf(const char*, ...);
 int sprintf(char* s, const char* format, ...);
