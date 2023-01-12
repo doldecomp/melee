@@ -113,9 +113,9 @@ typedef void (*Event)(void);
 #endif
 
 #ifndef ATTRIBUTE_NORETURN
-#if defined(__MWERKS__) || defined(__GNUC__)
+#if defined(__MWERKS__)
 #define ATTRIBUTE_NORETURN
-#elif defined(__clang__)
+#elif defined(__clang__) || defined(__GNUC__)
 #define ATTRIBUTE_NORETURN __attribute__((noreturn))
 #else
 #error unknown compiler
