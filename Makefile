@@ -82,12 +82,14 @@ FRANK := tools/frank.py
 
 # Options
 INCLUDE_DIRS = $(*D)
-SYSTEM_INCLUDE_DIRS := include include/dolphin src
-#INCLUDES = -i $(*D) -I- -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
+# TODO dolphin and sysdolphin as system includes
+#      Then fix include statements to use quotes for other paths
+#      And make sure that all tools understand this distinction.
+SYSTEM_INCLUDE_DIRS := src
 INCLUDES = $(addprefix -i ,$(INCLUDE_DIRS)) -I- $(addprefix -i ,$(SYSTEM_INCLUDE_DIRS))
 
 
-ASFLAGS := -mgekko -I include
+ASFLAGS := -mgekko -I src
 ifneq ($(NON_MATCHING),1)
 	ASFLAGS += --defsym MUST_MATCH=1
 endif
@@ -139,7 +141,7 @@ endif
 
 # clang-format all source files
 format:
-	$(QUIET) find src include -type f \( -name '*.c' -o -name '*.h' \) -exec $(FORMAT) {} +
+	$(QUIET) find src -type f \( -name '*.c' -o -name '*.h' \) -exec $(FORMAT) {} +
 	$(QUIET) tools/newlines.sh
 
 clean:

@@ -1,4 +1,4 @@
-#include <dolphin/pad/pad.h>
+#include <dolphin/pad/Pad.h>
 #include <Runtime/platform.h>
 
 typedef struct _RumbleCommand {
