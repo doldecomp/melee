@@ -19,7 +19,7 @@ BOOL func_80266F3C(void)
     return FALSE;
 }
 
-// Check to load ItCo.dat/usd
+/// Check to load ItCo.dat/usd
 void func_80266F70(void)
 {
     func_8027870C(func_80266F3C());
@@ -214,7 +214,7 @@ void func_80267454(HSD_GObj* item_gobj)
 // Set Item Hold kind
 void func_802674AC(SpawnItem* spawnItem)
 {
-    s32 ItemID = spawnItem->x8_item_id;
+    ITKIND ItemID = spawnItem->x8_item_id;
     if (ItemID == 0x12) {
         spawnItem->xC_hold_kind = 2;
         return;
@@ -671,7 +671,9 @@ extern void* lbl_803F1F90[];
 // Setup item render objects?
 void func_8026814C(HSD_GObj* item_gobj)
 {
-    s32 filler[2];
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
     HSD_MObj* temp_r0;
     HSD_DObj* var_r0;
     HSD_JObj* var_r0_2;
@@ -725,7 +727,8 @@ void func_8026814C(HSD_GObj* item_gobj)
     }
 }
 
-BOOL func_802682F0(HSD_GObj* item_gobj) // needs some serious cleaning
+/// @todo Needs some serious cleaning.
+BOOL func_802682F0(HSD_GObj* item_gobj)
 {
     s32 var_r4;
     Item* item_data;
@@ -774,7 +777,7 @@ BOOL func_802682F0(HSD_GObj* item_gobj) // needs some serious cleaning
             }
         }
     } else {
-        item_data->xBBC_dynamicBoneTable = 0;
+        item_data->xBBC_dynamicBoneTable = NULL;
     }
     return TRUE;
 }
@@ -948,7 +951,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem)
     return gobj;
 }
 
-// Item spawn prefunction - spawn airborne
+/// Item spawn prefunction - spawn airborne
 void func_80268B18(SpawnItem* spawnItem)
 {
     spawnItem->x48_ground_or_air = GA_Air;
@@ -957,7 +960,7 @@ void func_80268B18(SpawnItem* spawnItem)
     func_8026862C(spawnItem);
 }
 
-// Item spawn prefunction - spawn grounded
+/// Item spawn prefunction - spawn grounded
 void func_80268B5C(SpawnItem* spawnItem)
 {
     spawnItem->x48_ground_or_air = GA_Ground;
@@ -966,7 +969,7 @@ void func_80268B5C(SpawnItem* spawnItem)
     func_8026862C(spawnItem);
 }
 
-// Item spawn prefunction - spawn grounded and toggle unknown true
+/// Item spawn prefunction - spawn grounded and toggle unknown true
 void func_80268B9C(SpawnItem* spawnItem)
 {
     spawnItem->x48_ground_or_air = GA_Ground;
@@ -977,7 +980,7 @@ void func_80268B9C(SpawnItem* spawnItem)
 
 extern void HSD_JObjAddAnim(void*, void*, void*, void*);
 
-// Adds AObjs to item model
+/// Adds #HSD_AObj instances to item model
 void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
                    HSD_MatAnimJoint* matanim_joint, ItemState_ParamStruct* arg3,
                    Item* item_data)
@@ -1050,14 +1053,14 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
     }
 }
 
-// Unk Item AObj-related function
+/// Unk Item AObj-related function
 void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc)
 {
     HSD_JObj* item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
     HSD_JObjRemoveAnimAll(item_jobj);
     if (item_data->xC8_joint != NULL) {
-        void* bonestruct_arg;
+        unk_t bonestruct_arg;
         if (item_jobj == NULL) {
             bonestruct_arg = NULL;
         } else {
@@ -1072,7 +1075,7 @@ void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc)
     HSD_JObjReqAnimAll(item_jobj, 0.0f);
 }
 
-// Advance item animation?
+/// Advance item animation?
 void func_80268DD4(HSD_GObj* item_gobj, f32 frame)
 {
     HSD_JObj* item_jobj;
@@ -1084,7 +1087,7 @@ void func_80268DD4(HSD_GObj* item_gobj, f32 frame)
     item_data->x5CC_currentAnimFrame = func_8000BDB4(item_jobj);
 }
 
-// Copy item script
+/// Copy item script
 void func_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 {
     item_data->x52C_item_script = itemStateDesc->xC_script;
@@ -1100,7 +1103,7 @@ static inline void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl)
     HSD_JObjSetScale(jobj, scl);
 }
 
-// Item State Change
+/// Item State Change
 void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags)
 {
     Vec3 sp4C;
@@ -1211,7 +1214,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags)
     func_802714C0(item_gobj);
 }
 
-// Item Think - Hitlag
+/// Item Think - Hitlag
 void lbl_802693E4(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
@@ -1248,10 +1251,12 @@ void func_802694CC(HSD_GObj* item_gobj)
     func_802799E4(item_gobj);
 }
 
-// Item Think - Animation
+/// Item Think - Animation
 void lbl_80269528(HSD_GObj* item_gobj)
 {
-    s32 filler[2];
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
     if (item_data->xDC8_word.flags.x9 == 0) {
         func_802694CC(item_gobj);
@@ -1293,7 +1298,7 @@ void lbl_80269528(HSD_GObj* item_gobj)
     func_80279BE0(item_gobj);
 }
 
-// Item Think - Check for Blast Zones
+/// Item Think - Check for Blast Zones
 BOOL func_802696CC(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -1326,11 +1331,13 @@ BOOL func_802696CC(HSD_GObj* item_gobj)
     return FALSE;
 }
 
-// Item Think - Physics
+/// Item Think - Physics
 void func_802697D4(HSD_GObj* item_gobj)
 {
     Vec3 sp1C;
-    s32 filler[3];
+#ifdef MUST_MATCH
+    u8 unused[12];
+#endif
 
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
     if (item_data->xDC8_word.flags.x9 == 0 &&
@@ -1380,7 +1387,7 @@ void func_802697D4(HSD_GObj* item_gobj)
     func_802714C0(item_gobj);
 }
 
-// Item Think - Collision
+/// Item Think - Collision
 void func_80269978(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -1397,7 +1404,7 @@ void func_80269978(HSD_GObj* item_gobj)
     }
 }
 
-// Item Think - Accessory + Camera Box
+/// Item Think - Accessory + Camera Box
 void lbl_80269A9C(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -1420,7 +1427,7 @@ void lbl_80269A9C(HSD_GObj* item_gobj)
     func_802722B0(item_gobj);
 }
 
-// Item Think - Yellow Bar Collision (cb_JumpedOn)
+/// Item Think - Yellow Bar Collision (cb_JumpedOn)
 void lbl_80269B60(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
@@ -1452,7 +1459,7 @@ void lbl_80269BE4(HSD_GObj* item_gobj)
     }
 }
 
-// Item Think - Hit Collision Logic
+/// Item Think - Hit Collision Logic
 void lbl_80269C5C(HSD_GObj* item_gobj)
 {
     s32 filler[2];
@@ -1462,7 +1469,7 @@ void lbl_80269C5C(HSD_GObj* item_gobj)
     func_80270E30(item_gobj);
 }
 
-// Add to damage taken
+/// Add to damage taken
 void func_80269CA0(Item* item_data, s32 damage)
 {
     item_data->itdmg.xC9C += damage;
@@ -1471,7 +1478,7 @@ void func_80269CA0(Item* item_data, s32 damage)
     }
 }
 
-// Set damage struct
+/// Set damage struct
 void func_80269CC4(HSD_GObj* item_gobj)
 {
     Item* temp_item;
@@ -1561,7 +1568,7 @@ BOOL func_80269DC8(HSD_GObj* item_gobj)
     return FALSE;
 }
 
-// Item Think - On Reflect
+/// Item Think - On Reflect
 BOOL func_80269F14(HSD_GObj* item_gobj)
 {
     f32 temp_f30;
@@ -1834,7 +1841,8 @@ void lbl_8026A788(HSD_GObj* item_gobj) // Item Think - Process Dynamic Bones
     }
 }
 
-void func_8026A810(HSD_GObj* item_gobj) // Item Think - Spawn
+/// Item Think - Spawn
+void func_8026A810(HSD_GObj* item_gobj)
 {
     Item* temp_item = item_gobj->user_data;
     if (temp_item->xB8_itemLogicTable->x4_callback_OnSpawn != NULL) {
@@ -1942,7 +1950,7 @@ static inline void func_8026A8EC_inline3(HSD_GObj* item_gobj)
     }
 }
 
-// Destroy Item
+/// Destroy Item
 void func_8026A8EC(HSD_GObj* item_gobj)
 {
     s32 i;
@@ -1979,7 +1987,7 @@ void func_8026A8EC(HSD_GObj* item_gobj)
     func_80390228(item_gobj);
 }
 
-// Make Item Held
+/// Make Item Held
 void func_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickupGFX, u8 pickupSFX)
 {
     s32 filler[4];
@@ -1991,7 +1999,7 @@ void func_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickupGFX, u8 pickupSFX)
     func_8026B074(item_data);
 }
 
-// Drop Item
+/// Drop Item
 void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32 arg2)
 {
     s32 filler[2];
@@ -2008,7 +2016,7 @@ void func_8026ABD8(HSD_GObj* item_gobj, Vec3* pos, f32 arg2)
     }
 }
 
-// This is actually another Item Drop function
+/// This is actually another Item Drop function
 void func_8026AC74(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8)
 {
     Item* item_data = GetItemData(item_gobj);
@@ -2023,7 +2031,7 @@ void func_8026AC74(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8)
     }
 }
 
-// Throw Item
+/// Throw Item
 void func_8026AD20(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8)
 {
     Item* item_data = GetItemData(item_gobj);
@@ -2035,7 +2043,7 @@ void func_8026AD20(HSD_GObj* item_gobj, s32 dropGFX, s32 dropSFX, f32 arg8)
     func_802754D4(item_gobj);
 }
 
-// Make Item Airborne
+/// Make Item Airborne
 void func_8026ADC0(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -2045,7 +2053,7 @@ void func_8026ADC0(HSD_GObj* item_gobj)
     }
 }
 
-// Clear Item Struct ?
+/// Clear Item Struct ?
 void lbl_8026AE10(void* user_data)
 {
     Item* item_data = (Item*) user_data;
@@ -2066,7 +2074,7 @@ u32 func_8026AE60(void)
 
 extern u32 func_800233EC(s32);
 
-// Play Item SFX
+/// Play Item SFX
 void func_8026AE84(Item* item_data, enum_t sfxID, u8 pan, u8 volume)
 {
     if (sfxID != 0x83D60) {
@@ -2078,7 +2086,7 @@ void func_8026AE84(Item* item_data, enum_t sfxID, u8 pan, u8 volume)
     }
 }
 
-// Play Item SFX 2
+/// Play Item SFX 2
 void func_8026AF0C(Item* item_data, enum_t sfxID, u8 pan, u8 volume)
 {
     if (sfxID != 0x83D60) {
@@ -2093,7 +2101,7 @@ void func_8026AF0C(Item* item_data, enum_t sfxID, u8 pan, u8 volume)
     }
 }
 
-// Play Item SFX 3
+/// Play Item SFX 3
 void func_8026AFA0(Item* item_data, enum_t sfxID, u8 pan, u8 volume)
 {
     if (sfxID != 0x83D60) {
@@ -2108,7 +2116,7 @@ void func_8026AFA0(Item* item_data, enum_t sfxID, u8 pan, u8 volume)
     }
 }
 
-// Stop Item SFX
+/// Stop Item SFX
 void func_8026B034(Item* item_data)
 {
     if (item_data->xD64 != -1) {
@@ -2117,7 +2125,7 @@ void func_8026B034(Item* item_data)
     item_data->xD64 = -1;
 }
 
-// Stop Item SFX 2
+/// Stop Item SFX 2
 void func_8026B074(Item* item_data)
 {
     if (item_data->xD68 != -1) {
@@ -2129,10 +2137,10 @@ void func_8026B074(Item* item_data)
 extern void func_80026510(HSD_GObj*);
 extern s32 func_800265C4(HSD_GObj*, s32);
 
-// TODO create enum for SFX IDs
+/// @todo Create an @c enum for SFX IDs.
 #define SFX_NONE -1
 
-// Stop All Item SFX
+/// Stop All Item SFX
 void func_8026B0B4(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -2168,7 +2176,7 @@ void func_8026B0B4(HSD_GObj* item_gobj)
     item_data->xD6C = SFX_NONE;
 }
 
-// Check if item is grabbable
+/// Check if item is grabbable
 BOOL func_8026B1A4(HSD_GObj* item_gobj)
 {
     Item* temp_item;
