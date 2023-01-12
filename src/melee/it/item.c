@@ -10,7 +10,7 @@
 
 extern s32 func_8016AE80(void);
 
-// Check if items are enabled
+/// Check if items are enabled
 BOOL func_80266F3C(void)
 {
     if (func_8016AE80() != -1) {
@@ -25,7 +25,7 @@ void func_80266F70(void)
     func_8027870C(func_80266F3C());
 }
 
-// ItCo prefunction with 0
+/// ItCo prefunction with 0
 void func_80266FA8(void)
 {
     func_8027870C(FALSE);
@@ -43,7 +43,7 @@ extern HSD_ObjAllocUnk5 lbl_804A0E50;
 extern HSD_ObjAllocUnk6 lbl_804A0E60;
 extern ItemCommonData* lbl_804D6D28;
 
-// Init item struct?
+/// Init item struct?
 void func_80266FCC(void)
 {
     HSD_ObjAllocInit(&lbl_804A0BE0, sizeof(Item), 4);
@@ -118,7 +118,7 @@ static inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
     }
 }
 
-// TODO move to gobj.h
+/// @todo move to gobj.h
 static inline void* HSD_GObjGetHSDObj(HSD_GObj* item_gobj)
 {
     return item_gobj->hsd_obj;
@@ -198,7 +198,7 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     ItUnkHoldKind(item_gobj);
 }
 
-// Remove Camera Box
+/// Remove Camera Box
 void func_80267454(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
@@ -211,7 +211,7 @@ void func_80267454(HSD_GObj* item_gobj)
     }
 }
 
-// Set Item Hold kind
+/// Set Item Hold kind
 void func_802674AC(SpawnItem* spawnItem)
 {
     ITKIND ItemID = spawnItem->x8_item_id;
@@ -368,7 +368,8 @@ void func_802676F4(HSD_GObj* item_gobj)
     }
 }
 
-BOOL func_8026784C(s32 dropItem, s32 unused) // Decide drop item
+/// Decide drop item
+BOOL func_8026784C(s32 dropItem, s32 unused)
 {
     BOOL result = FALSE;
     switch (dropItem) {
@@ -448,7 +449,7 @@ extern struct ItemLogicTable lbl_803F23CC[];
 
 extern struct ItemLogicTable lbl_803F4D20[];
 
-// Store Item Pointers
+/// Store Item Pointers
 void func_80267978(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
@@ -485,7 +486,7 @@ extern s32 func_80086960(HSD_GObj*);
 extern u8 func_80086EB4(HSD_GObj*);
 extern u32 func_80225B20();
 
-// Initialize item variables
+/// Initialize item variables
 void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
 {
     ItemAttr* item_attr;
@@ -650,7 +651,7 @@ extern HSD_JObj* HSD_JObjAlloc(); /* extern */
 extern void PSMTXIdentity(Mtx);   /* extern */
 extern u8 lbl_804D7849;
 
-// Setup Item JObj
+/// Setup Item JObj
 void func_802680CC(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -668,7 +669,7 @@ void func_802680CC(HSD_GObj* item_gobj)
 extern HSD_DObj* HSD_JObjGetDObj(HSD_JObj*);
 extern void* lbl_803F1F90[];
 
-// Setup item render objects?
+/// Setup item render objects?
 void func_8026814C(HSD_GObj* item_gobj)
 {
 #ifdef MUST_MATCH
@@ -782,7 +783,7 @@ BOOL func_802682F0(HSD_GObj* item_gobj)
     return TRUE;
 }
 
-// Set item model scale
+/// Set item model scale
 void func_8026849C(HSD_GObj* item_gobj)
 {
     HSD_JObj* temp_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
@@ -795,7 +796,7 @@ void func_8026849C(HSD_GObj* item_gobj)
 
 extern void func_80011710(void*, void*);
 
-// Setup item dynamic bones
+/// Setup item dynamic bones
 void func_80268560(HSD_GObj* item_gobj)
 {
     int i;
@@ -885,7 +886,7 @@ void foobar3(HSD_GObj* gobj)
     }
 }
 
-// Create Item
+/// Create Item
 HSD_GObj* func_8026862C(SpawnItem* spawnItem)
 {
     HSD_GObj* gobj;
@@ -1241,7 +1242,7 @@ void lbl_802693E4(HSD_GObj* item_gobj)
     }
 }
 
-// Advance item animation + script?
+/// Advance item animation + script?
 void func_802694CC(HSD_GObj* item_gobj)
 {
     HSD_JObj* item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
@@ -1443,9 +1444,9 @@ void lbl_80269B60(HSD_GObj* item_gobj)
     func_8027146C(item_gobj);
 }
 
-// Item Think - Grab
-// Somewhat arbitrary. Does not run on Hook Shot / Grapple Beam, rather items
-// such as the Barrel Cannon.
+/// Item Think - Grab
+/// Somewhat arbitrary. Does not run on Hook Shot / Grapple Beam, rather items
+/// such as the Barrel Cannon.
 void lbl_80269BE4(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
@@ -1527,7 +1528,7 @@ void func_80269CC4(HSD_GObj* item_gobj)
     temp_item->xDCE_flag.bits.b6 = 0;
 }
 
-// Item Think - Shield Collision
+/// Item Think - Shield Collision
 BOOL func_80269DC8(HSD_GObj* item_gobj)
 {
     BOOL (*cb_OnShieldBounce)(HSD_GObj*);
@@ -1620,7 +1621,7 @@ BOOL func_80269F14(HSD_GObj* item_gobj)
     return FALSE;
 }
 
-// Item Think - Exit Hitlag Check
+/// Item Think - Exit Hitlag Check
 void func_8026A0A0(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -1634,7 +1635,7 @@ void func_8026A0A0(HSD_GObj* item_gobj)
     }
 }
 
-// Item Think - Exit Hitlag Check 2
+/// Item Think - Exit Hitlag Check 2
 void func_8026A0FC(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -1683,7 +1684,7 @@ void func_8026A1E8_inline(HSD_GObj* atkCollGObj)
     }
 }
 
-// Item Think - Exit Hitlag
+/// Item Think - Exit Hitlag
 void func_8026A1E8(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -1768,7 +1769,7 @@ static inline void checkHitLag(f32 min_value, Item* item_data)
     item_data->xDC8_word.flags.xA = 1;
 }
 
-// Item Think - Hit Collision
+/// Item Think - Hit Collision
 void lbl_8026A294(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -1826,7 +1827,8 @@ void lbl_8026A294(HSD_GObj* item_gobj)
     func_80269CC4(item_gobj);
 }
 
-void lbl_8026A788(HSD_GObj* item_gobj) // Item Think - Process Dynamic Bones
+/// Item Think - Process Dynamic Bones
+void lbl_8026A788(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
     int dynamicBonesNum = item_data->x374_dynamicBonesNum;
@@ -1854,8 +1856,8 @@ extern void func_80086724(HSD_GObj*, HSD_GObj*);
 extern void func_80086764(HSD_GObj*);
 extern HSD_GObj* func_800867CC(HSD_GObj*);
 
-void func_8026A848(HSD_GObj* item_gobj,
-                   HSD_GObj* fighter_gobj) // Remove Item from Player
+/// Remove Item from Player
+void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj)
 {
     Item* temp_item = GetItemDirect(item_gobj);
 
