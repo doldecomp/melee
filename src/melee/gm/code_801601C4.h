@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_CODE_801601C4_H
 #define MELEE_GM_CODE_801601C4_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 struct datetime {
     u16 year;

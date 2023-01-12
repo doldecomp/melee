@@ -384,10 +384,10 @@ Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
     MtxPtr mvMtx; // modelview matrix
     float f1;
 
-    assert_line(676, pos3d);
-    assert_line(677, pos3d->x>-50000.0F&&pos3d->x<50000.0F);
-    assert_line(678, pos3d->y>-50000.0F&&pos3d->y<50000.0F);
-    assert_line(679, pos3d->z>-50000.0F&&pos3d->z<50000.0F);
+    HSD_ASSERT(676, pos3d);
+    HSD_ASSERT(677, pos3d->x>-50000.0F&&pos3d->x<50000.0F);
+    HSD_ASSERT(678, pos3d->y>-50000.0F&&pos3d->y<50000.0F);
+    HSD_ASSERT(679, pos3d->z>-50000.0F&&pos3d->z<50000.0F);
 
     point = *pos3d;
     switch (HSD_CObjGetProjectionType(cobj)) {

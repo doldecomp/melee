@@ -103,8 +103,9 @@ typedef struct _HSD_CameraAnim {
     struct _HSD_WObjAnim* interest_anim;
 } HSD_CameraAnim;
 
-STRUCT_PLACEHOLDER(cobj, 1)
-CALLBACK_PLACEHOLDER(cobj, 1)
+typedef struct _cobj_Unk1 cobj_Unk1;
+
+typedef void (*cobj_UnkCallback1)(void);
 
 void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
                          s32 enable_depth);

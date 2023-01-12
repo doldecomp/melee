@@ -1,7 +1,7 @@
 #ifndef _gobj_h_
 #define _gobj_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/objalloc.h>
 

@@ -3,7 +3,6 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx/mtxtypes.h>
-#include <dolphin/types.h>
 #include <math.h>
 #include <melee/ft/fighter.h>
 #include <melee/gr/stage.h>
@@ -13,6 +12,7 @@
 #include <melee/it/itPKThunder.h>
 #include <melee/it/itYoyo.h>
 #include <melee/pl/player.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -679,13 +679,13 @@ typedef struct ItemModStruct {
 
 } ItemModStruct;
 
-inline Item* GetItemData(HSD_GObj* item_gobj)
+static inline Item* GetItemData(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
     return item_data;
 }
 
-inline Item* GetItemDirect(HSD_GObj* item_gobj)
+static inline Item* GetItemDirect(HSD_GObj* item_gobj)
 {
     return item_gobj->user_data;
 }

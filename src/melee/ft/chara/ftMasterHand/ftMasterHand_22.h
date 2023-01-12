@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_22_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_22_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 void func_801542E0(struct _HSD_GObj*);

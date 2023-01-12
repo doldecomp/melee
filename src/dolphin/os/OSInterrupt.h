@@ -3,7 +3,7 @@
 #ifndef _OS_INTERRUPT_H_
 #define _OS_INTERRUPT_H_
 #include <dolphin/os/OSContext.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 typedef s16 __OSInterrupt;
 

@@ -51,7 +51,7 @@ HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority,
 {
     HSD_GObj* gobj;
 
-    assert_line(0xA8, p_link <= HSD_GObjLibInitData.p_link_max);
+    HSD_ASSERT(0xA8, p_link <= HSD_GObjLibInitData.p_link_max);
     if ((gobj = gobj_allocate()) == NULL) {
         return NULL;
     }
@@ -96,7 +96,7 @@ extern HSD_GObj* lbl_804D781C;
 
 void func_80390228(HSD_GObj* gobj)
 {
-    assert_line(0x171, gobj);
+    HSD_ASSERT(0x171, gobj);
     if (!lbl_804CE3E4.b0 && gobj == lbl_804D781C) {
         lbl_804CE3E4.b1 = 1;
         return;
@@ -132,7 +132,7 @@ void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
     s32 flags_new;
     u32 unused[2];
 
-    assert_line(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
+    HSD_ASSERT(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
     if (!lbl_804CE3E4.b0 && gobj == lbl_804D781C) {
         lbl_804CE3E4.b3 = 1;
         lbl_804CE3E4.type = arg0;

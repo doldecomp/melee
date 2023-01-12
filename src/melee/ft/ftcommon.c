@@ -217,8 +217,8 @@ char lbl_803C0D64[] = "fp->kind == Ft_Kind_Sandbag";
 
 // Not sure why this is needed
 // Maybe __FILE__ is allocated separate from ordinary string literals?
-#undef assert_line
-#define assert_line(line, cond)                                                \
+#undef HSD_ASSERT
+#define HSD_ASSERT(line, cond)                                                 \
     ((cond) ? ((void) 0) : __assert(lbl_803C0D58, line, #cond))
 
 asm f32 func_8007CDA4(Fighter*)
@@ -284,13 +284,13 @@ lbl_8007CE30:
 static const int Ft_Kind_Sandbag = 0x20;
 f32 func_8007CDA4(Fighter* fp)
 {
-    assert_line(299, fp->kind == Ft_Kind_Sandbag);
+    HSD_ASSERT(299, fp->kind == Ft_Kind_Sandbag);
     return ((f32*) fp->x2D4_specialAttributes)[0];
 }
 
 f32 func_8007CDF8(Fighter* fp)
 {
-    assert_line(308, fp->kind == Ft_Kind_Sandbag);
+    HSD_ASSERT(308, fp->kind == Ft_Kind_Sandbag);
     return ((f32*) fp->x2D4_specialAttributes)[1];
 }
 #endif
@@ -665,7 +665,7 @@ void func_8007D6A4(Fighter* fp)
     if (!func_80084A18(fp->x0_fighter)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID,
                  fp->x10_action_state_index);
-        assert_line(686, 0);
+        HSD_ASSERT(686, 0);
     }
 }
 
@@ -717,7 +717,7 @@ void func_8007D7FC(Fighter* fp)
     if (!func_80084A18(fp->x0_fighter)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID,
                  fp->x10_action_state_index);
-        assert_line(0x2AE, 0);
+        HSD_ASSERT(0x2AE, 0);
     }
 }
 
@@ -1124,7 +1124,7 @@ void func_8007E5AC(Fighter* fp)
 {
     Vec3* ground_normal = &fp->x6F0_collData.x14C_ground.normal;
     f32 tmp = -atan2f(ground_normal->x, ground_normal->y);
-    assert_line(1146, fp->ground_or_air == GA_Ground);
+    HSD_ASSERT(1146, fp->ground_or_air == GA_Ground);
     func_80075CB4(fp, 0, tmp);
 }
 
@@ -1132,7 +1132,7 @@ void Fighter_SetAccessory(Fighter* fp, HSD_Joint* joint)
 {
     if (fp->x20A0_accessory != NULL) {
         OSReport("fighter accessory already exsist!\n");
-        assert_line(0x486, 0);
+        HSD_ASSERT(0x486, 0);
     }
     fp->x20A0_accessory = HSD_JObjLoadJoint(joint);
 }
@@ -1221,7 +1221,7 @@ void func_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
     f32 val;
 
     Fighter* fp = gobj->user_data;
-    assert_line(0x4FC, ftGetParasolStatus(gobj) != FtParasol_None);
+    HSD_ASSERT(0x4FC, ftGetParasolStatus(gobj) != FtParasol_None);
     if (div == 0) {
         val = fp->x89C_frameSpeedMul;
     } else if (itGetKind(fp->x1974_heldItem) == It_Kind_Parasol) {

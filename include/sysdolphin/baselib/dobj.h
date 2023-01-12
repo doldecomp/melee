@@ -1,7 +1,7 @@
 #ifndef _dobj_h_
 #define _dobj_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/fobj.h>

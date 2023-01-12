@@ -1,5 +1,5 @@
 #include <dolphin/pad/pad.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 typedef struct PADClampRegion {
     u8 minTrigger;

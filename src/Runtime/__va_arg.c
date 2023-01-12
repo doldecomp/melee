@@ -1,4 +1,4 @@
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 #include <stdarg.h>
 
 #define ALIGN(addr, size) (((uintptr_t) (addr) + ((size) -1)) & ~((size) -1))

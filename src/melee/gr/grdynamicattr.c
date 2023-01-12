@@ -1,6 +1,6 @@
 #include <dolphin/mtx/mtxtypes.h>
-#include <dolphin/types.h>
 #include <math.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
 
 typedef struct _UnkStruct {
@@ -36,7 +36,7 @@ UnkStruct* func_801CA0F8(s32 arg0, Vec3* v, s32 floor_id, f32 f, s32 arg3)
 {
     UnkStruct* tmp;
     u32 unused[2];
-    assert_line(55, floor_id!=GC_Id_None);
+    HSD_ASSERT(55, floor_id!=GC_Id_None);
     if ((tmp = lbl_804D6964) != NULL) {
         lbl_804D6964 = tmp->next;
         tmp->next = lbl_804D6960;

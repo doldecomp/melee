@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_GXENUM_H
 #define DOLPHIN_GXENUM_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 typedef u8 GXBool;
 
@@ -703,7 +703,7 @@ typedef enum {
 
 // todo: clean up invocations via defines or inlines
 /* for example,
-inline void WriteBP(u32 i) {
+static inline void WriteBP(u32 i) {
    WGPIPE.u8 = GX_LOAD_BP_REG;
    WGPIPE.u32 = i;
 } */

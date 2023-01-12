@@ -1,7 +1,7 @@
 #ifndef _hsd_tobj_h_
 #define _hsd_tobj_h_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #include <sysdolphin/baselib/object.h>
 

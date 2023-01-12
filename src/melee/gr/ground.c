@@ -227,7 +227,7 @@ void func_801C04BC(f32 arg8)
     if (temp_r3 != NULL)
         temp_r3->x0 = arg8;
     else
-        assert_line(521, 0);
+        HSD_ASSERT(521, 0);
 }
 
 s32 func_801C0508(void)
@@ -344,8 +344,7 @@ s32* func_801C06A4(void)
     return &x->xC8;
 }
 
-/// @todo Uses stage type enum
-void func_801C06B8(enum_t arg0)
+void func_801C06B8(InternalStageID arg0)
 {
     if (lbl_803DFEDC[arg0] == NULL)
         return;
@@ -354,12 +353,12 @@ void func_801C06B8(enum_t arg0)
         func_800178E8(4, lbl_803DFEDC[arg0]->data1, 4, 4, 0, 1, 7, 16, 0);
 
     switch (arg0) {
-    case 12:
+    case IZUMI:
         func_801CD2D4();
-        break;
-    case 16:
+        return;
+    case PSTADIUM:
         func_801D511C();
-        break;
+        return;
     }
 }
 
@@ -1992,7 +1991,7 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
         }
     }
 
-    assert_line(2242, bgm!=BGM_Undefined);
+    HSD_ASSERT(2242, bgm!=BGM_Undefined);
 
     if (bgm == -2)
         *arg2 = func_8002305C(Player_GetPlayerCharacter(0), HSD_Randi(2));
@@ -2220,7 +2219,7 @@ static void func_801C2BD4(void* arg0)
             break;
         }
     }
-    assert_line(0x94D, i!=Gr_CObj_Max);
+    HSD_ASSERT(0x94D, i!=Gr_CObj_Max);
 }
 
 BOOL func_801C2C8C(void* arg0)
@@ -3614,7 +3613,7 @@ BOOL func_801C43C4(void* arg0)
             }
         }
 
-        assert_line(3652, 0);
+        HSD_ASSERT(3652, 0);
     }
 
     return FALSE;

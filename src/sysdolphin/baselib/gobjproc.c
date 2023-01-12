@@ -52,7 +52,7 @@ void func_8038FCE4(HSD_GObjProc* gproc)
 
 inline void assertProc(HSD_GObjProc* gproc)
 {
-    assert_line(31, gproc);
+    HSD_ASSERT(31, gproc);
 }
 
 HSD_GObjProc* func_8038FD54(HSD_GObj* gobj, void (*func)(HSD_GObj*), u8 pri)
@@ -62,7 +62,7 @@ HSD_GObjProc* func_8038FD54(HSD_GObj* gobj, void (*func)(HSD_GObj*), u8 pri)
 
     gproc = HSD_ObjAlloc(&gobjproc_alloc_data);
     assertProc(gproc);
-    assert_line(216, pri <= HSD_GObjLibInitData.gproc_pri_max);
+    HSD_ASSERT(216, pri <= HSD_GObjLibInitData.gproc_pri_max);
     gproc->s_link = pri;
     gproc->flags_1 = gproc->flags_2 = 0;
     gproc->flags_3 = 3;

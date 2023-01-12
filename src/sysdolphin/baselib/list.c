@@ -1,4 +1,4 @@
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 #include <stddef.h>
 #include <string.h>
 #include <sysdolphin/baselib/list.h>
@@ -27,7 +27,7 @@ HSD_SList* HSD_SListAlloc()
     HSD_SList* list;
 
     list = HSD_ObjAlloc(&slist_alloc_data);
-    assert_line(76, list);
+    HSD_ASSERT(76, list);
 
     memset(list, 0, sizeof(HSD_SList));
     return list;
@@ -55,7 +55,7 @@ HSD_SList* HSD_SListAllocAndPrepend(HSD_SList* next, void* data)
 
 HSD_SList* HSD_SListAppendList(HSD_SList* list, HSD_SList* next)
 {
-    assert_line(179, next);
+    HSD_ASSERT(179, next);
 
     if (list != NULL) {
         next->next = list->next;
@@ -69,7 +69,7 @@ HSD_SList* HSD_SListAppendList(HSD_SList* list, HSD_SList* next)
 
 HSD_SList* HSD_SListPrependList(HSD_SList* list, HSD_SList* prev)
 {
-    assert_line(202, prev);
+    HSD_ASSERT(202, prev);
     prev->next = list;
     return prev;
 }

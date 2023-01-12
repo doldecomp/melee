@@ -110,7 +110,7 @@ static UnkArchiveStruct* func_801C62B4(void)
             return &lbl_8049EE10[i];
         }
     }
-    assert_line(229, 0);
+    HSD_ASSERT(229, 0);
 }
 
 UnkArchiveStruct* func_801C6324(void)
@@ -143,7 +143,7 @@ UnkArchiveStruct* func_801C6478(void* data, s32 length)
     HSD_Archive* archive = func_80015BD0(0, 0x44);
     lbArchive_InitializeDAT(archive, data, length);
     arc = func_801C62B4();
-    assert_line(290, arc);
+    HSD_ASSERT(290, arc);
     arc->unk0 = archive;
     arc->unk4 = HSD_ArchiveGetPublicAddress(archive, "map_head");
     arc->unk8 = 1;

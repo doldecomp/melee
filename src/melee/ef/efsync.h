@@ -1,7 +1,7 @@
 #ifndef MELEE_EF_EFSYNC_H
 #define MELEE_EF_EFSYNC_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 void ef_Spawn(s32, ...);
 

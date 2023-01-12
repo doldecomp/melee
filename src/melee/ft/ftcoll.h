@@ -3,7 +3,7 @@
 
 #include "sysdolphin/baselib/gobjproc.h"
 #include <dolphin/mtx/mtxtypes.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #include <melee/ft/fighter.h>
 

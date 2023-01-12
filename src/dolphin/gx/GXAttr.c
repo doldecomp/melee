@@ -1,6 +1,6 @@
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 static u32 lbl_804D5BB0 = 0x00040102;
 static u32 lbl_804D5BB4 = 0x00080102;

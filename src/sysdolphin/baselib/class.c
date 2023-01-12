@@ -40,8 +40,8 @@ void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
         if ((parent_info->head.flags & 1) == 0) {
             (*parent_info->head.info_init)();
         }
-        assert_line(94, class_info->head.obj_size >= parent_info->head.obj_size);
-        assert_line(95, class_info->head.info_size >= parent_info->head.info_size);
+        HSD_ASSERT(94, class_info->head.obj_size >= parent_info->head.obj_size);
+        HSD_ASSERT(95, class_info->head.info_size >= parent_info->head.info_size);
         memcpy(&class_info->alloc, &parent_info->alloc,
                parent_info->head.info_size - 0x28);
         class_info->head.next = parent_info->head.child;
@@ -68,7 +68,7 @@ static char unused4[] = "  nb_alloc %d nb_free %d\n";
 
 HSD_MemoryEntry* GetMemoryEntry(s32 idx)
 {
-    assert_line(171, idx >= 0);
+    HSD_ASSERT(171, idx >= 0);
 
     if (idx >= nb_memory_list) {
         if (nb_memory_list == 0)
@@ -321,8 +321,8 @@ inline BOOL hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
     HSD_ClassInfo* var_r29;
     HSD_ClassInfo* var_r28;
 
-    assert_line(0x249, object);
-    assert_line(0x24A, class_info);
+    HSD_ASSERT(0x249, object);
+    HSD_ASSERT(0x24A, class_info);
     var_r29 = HSD_GetClassInfo(object);
     !var_r29;
     var_r28 = HSD_PushClassInfo(class_info);

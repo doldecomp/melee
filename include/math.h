@@ -1,7 +1,7 @@
 #ifndef __MATH_H__
 #define __MATH_H__
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #define M_PI 3.14159265358979323846
 #define M_PI_2 1.57079632679489655799
@@ -41,7 +41,7 @@ enum FloatType {
     FP_SUBNORMAL = 5
 };
 
-inline s32 __fpclassifyf(float x)
+static inline s32 __fpclassifyf(float x)
 {
     const s32 exp_mask = 0b01111111100000000000000000000000; // = 0x7F800000
     const s32 mantissa_mask =
@@ -59,7 +59,7 @@ inline s32 __fpclassifyf(float x)
 extern int __HI(double);
 extern int __LO(double);
 
-inline s32 __fpclassifyd(double x)
+static inline s32 __fpclassifyd(double x)
 {
     switch (__HI(x) & 0x7ff00000) {
     case 0x7ff00000:
@@ -77,7 +77,7 @@ inline s32 __fpclassifyd(double x)
     ((sizeof(x) == sizeof(float)) ? __fpclassifyf((float) (x))                 \
                                   : __fpclassifyd((double) (x)))
 
-inline f32 fabs_inline(f32 x)
+static inline f32 fabs_inline(f32 x)
 {
     if (x < 0) {
         return -x;

@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_GOBJPROC_H
 #define SYSDOLPHIN_BASELIB_GOBJPROC_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 typedef void (*HSD_GObjEvent)(HSD_GObj* gobj);

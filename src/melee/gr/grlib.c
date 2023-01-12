@@ -178,7 +178,7 @@ void func_801C9A70(s32 arg0, Vec3* v)
         i = 3;
         break;
     default:
-        assert_line(290, 0);
+        HSD_ASSERT(290, 0);
     }
     *v = lbl_8049EF58[i];
 }

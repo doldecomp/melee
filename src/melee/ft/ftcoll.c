@@ -1,5 +1,5 @@
 #include <dolphin/mtx/mtxtypes.h>
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 #include <common_structs.h>
 #include <math.h>

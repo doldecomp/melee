@@ -1,7 +1,7 @@
 #ifndef MELEE_TEXT_2_H
 #define MELEE_TEXT_2_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 unk_t func_801A4BB8(void);
 BOOL func_801A45E8(s32);

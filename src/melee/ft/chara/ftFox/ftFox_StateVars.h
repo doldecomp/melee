@@ -1,7 +1,7 @@
 #ifndef _FTFOX_STATEVARS_H_
 #define _FTFOX_STATEVARS_H_
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftFoxSpecialN {

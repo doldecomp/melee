@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_BASELIB_UNKNOWN_002_H
 #define SYSDOLPHIN_BASELIB_BASELIB_UNKNOWN_002_H
 
-#include <dolphin/types.h>
+#include <Runtime/platform.h>
 
 BOOL func_803931A4(s32);
 void func_80393A54(BOOL);

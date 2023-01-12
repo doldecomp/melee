@@ -332,7 +332,7 @@ static void func_8021A3BC(HSD_GObj* gobj)
                         break;
                     }
                 }
-                assert_line(527, i<BATTLE_BG_MAX);
+                HSD_ASSERT(527, i<BATTLE_BG_MAX);
             }
             map->xCC = map->xC8;
             do {
@@ -340,11 +340,11 @@ static void func_8021A3BC(HSD_GObj* gobj)
             } while ((tmp = map->xCC) == (map->xC8 = temp_r0_2));
 
             bg_gobj = func_801C2BA4(tmp);
-            assert_line(535, bg_gobj);
+            HSD_ASSERT(535, bg_gobj);
             func_801C9604(bg_gobj, lbl_804D6ACC->unk4, 0);
 
             bg_gobj = func_80219D84(map->xC8);
-            assert_line(539, bg_gobj);
+            HSD_ASSERT(539, bg_gobj);
             func_801C9604(bg_gobj, lbl_804D6ACC->unk0, 0);
 
             map->xC4 = 2;
@@ -352,7 +352,7 @@ static void func_8021A3BC(HSD_GObj* gobj)
         break;
     case 2:
         bg_gobj = func_801C2BA4(map->xCC);
-        assert_line(546, bg_gobj);
+        HSD_ASSERT(546, bg_gobj);
         if (func_801C96E8(bg_gobj)) {
             func_801C4A08(bg_gobj);
             HSD_JObjSetFlagsAll(jobj, 0x10);

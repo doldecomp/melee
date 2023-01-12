@@ -2,8 +2,8 @@
 #define DOLPHIN_OS_INIT___START_H
 
 #include <dolphin/os/OSReset.h>
-#include <dolphin/types.h>
 #include <Runtime/__mem.h>
+#include <Runtime/platform.h>
 
 #define PAD3_BUTTON_ADDR 0x800030E4
 #define EXCEPTIONMASK_ADDR 0x80000044

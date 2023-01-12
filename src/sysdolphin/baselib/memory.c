@@ -18,7 +18,7 @@ any_t HSD_MemAlloc(ssize_t size)
         return NULL;
 
     adr = OSAllocFromHeap(HSD_GetHeap(), size);
-    assert_line(52, adr);
+    HSD_ASSERT(52, adr);
 
     return adr;
 }
