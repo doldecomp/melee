@@ -42,13 +42,13 @@ void Stage_80224E64(enum_t arg0, Vec3* arg_vec);
 s32 Stage_80224FDC(Vec3* arg0);
 s32 Stage_80225074(s32 arg0);
 s32 Stage_80225194(void);
-s32 Stage_8022519C(InternalStageID idx);
-void Stage_802251B4(InternalStageID idx, s32 arg1);
-void Stage_802251E8(InternalStageID idx, s32* unused);
+s32 Stage_8022519C(InternalStageId idx);
+void Stage_802251B4(InternalStageId idx, s32 arg1);
+void Stage_802251E8(InternalStageId idx, s32* unused);
 void Stage_8022524C(void);
 void Stage_80225298(void);
-void Stage_802252E4(InternalStageID idx, s32 unused);
-void Stage_8022532C(InternalStageID idx, s32 arg1);
+void Stage_802252E4(InternalStageId idx, s32 unused);
+void Stage_8022532C(InternalStageId idx, s32 arg1);
 s32 Stage_80225194(void);
 
 #endif

@@ -876,9 +876,6 @@ void func_8026849C(HSD_GObj* item_gobj) // Set item model scale //
     HSD_JObjSetScale(temp_jobj, &sp14);
 }
 
-extern void func_8000FD48(HSD_JObj*, void*, s32);
-extern void func_80011710(void*, void*);
-
 // 0x80268560 //
 // https://decomp.me/scratch/d3ZmY //
 void func_80268560(HSD_GObj* item_gobj) // Setup item dynamic bones //
@@ -2199,7 +2196,6 @@ void func_8026A848(HSD_GObj* item_gobj,
 }
 
 extern void efLib_DestroyAll(HSD_GObj*);
-extern void func_8000FD18(void*);
 extern void func_80086724(HSD_GObj*, HSD_GObj*);
 extern void func_80086764(HSD_GObj*);
 extern s32 func_800867A0(HSD_GObj*, HSD_GObj*);
