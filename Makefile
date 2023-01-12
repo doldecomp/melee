@@ -85,7 +85,7 @@ INCLUDE_DIRS = $(*D)
 # TODO dolphin and sysdolphin as system includes
 #      Then fix include statements to use quotes for other paths
 #      And make sure that all tools understand this distinction.
-SYSTEM_INCLUDE_DIRS := src
+SYSTEM_INCLUDE_DIRS := src src/MSL
 INCLUDES = $(addprefix -i ,$(INCLUDE_DIRS)) -I- $(addprefix -i ,$(SYSTEM_INCLUDE_DIRS))
 
 

@@ -1,7 +1,7 @@
 #ifndef __STRING_H__
 #define __STRING_H__
 
-#include <MSL/stddef.h>
+#include <stddef.h>
 #include <Runtime/__mem.h>
 
 void* memset(void* ptr, int value, size_t num);

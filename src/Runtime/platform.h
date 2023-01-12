@@ -5,12 +5,7 @@
 #define MWERKS_GNUC
 #endif
 
-/// @todo Proper GCC header
-#ifdef MWERKS_GNUC
-#include <MSL/stddef.h>
-#else
-#error unknown compiler
-#endif
+#include <stddef.h>
 
 /// A signed 8-bit integer
 typedef signed char s8;
