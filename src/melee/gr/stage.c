@@ -334,17 +334,17 @@ s32 Stage_80225194(void)
     return unk_struct_804D49E8.list_idx;
 }
 
-s32 Stage_8022519C(InternalStageID idx)
+s32 Stage_8022519C(InternalStageId idx)
 {
     return unk_arr_803E9960[idx].stage_id;
 }
 
-void Stage_802251B4(InternalStageID idx, s32 arg1)
+void Stage_802251B4(InternalStageId idx, s32 arg1)
 {
     func_801C06B8(unk_arr_803E9960[idx].stage_id);
 }
 
-void Stage_802251E8(InternalStageID idx, s32* unused)
+void Stage_802251E8(InternalStageId idx, s32* unused)
 {
     StructPairWithStageID local_data;
 
@@ -383,7 +383,7 @@ void Stage_80225298(void)
     func_801C0F78(&local_data);
 }
 
-void Stage_802252E4(InternalStageID idx, s32 unused)
+void Stage_802252E4(InternalStageId idx, s32 unused)
 {
     StructPairWithStageID local_data;
 
@@ -395,7 +395,7 @@ void Stage_802252E4(InternalStageID idx, s32 unused)
     func_801C0FB8(&local_data);
 }
 
-void Stage_8022532C(InternalStageID idx, s32 arg1)
+void Stage_8022532C(InternalStageId idx, s32 arg1)
 {
     StructPairWithStageID local_data;
 

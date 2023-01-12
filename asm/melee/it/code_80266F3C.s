@@ -27825,24 +27825,6 @@ lbl_803F94A0:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804A0BE0
-lbl_804A0BE0:
-    .skip 0x2C
-.global lbl_804A0C0C
-lbl_804A0C0C:
-    .skip 0x2C
-.global lbl_804A0C38
-lbl_804A0C38:
-    .skip 0x2C
-.global lbl_804A0C64
-lbl_804A0C64:
-    .skip 0x68
-.global lbl_804A0CCC
-lbl_804A0CCC:
-    .skip 0x158
-.global lbl_804A0E24
-lbl_804A0E24:
-    .skip 0xC
 .global lbl_804A0E30
 lbl_804A0E30:
     .skip 0x20

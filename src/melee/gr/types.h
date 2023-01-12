@@ -5,7 +5,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 
 /// @todo Finish values, use @c PascalCase
-typedef enum InternalStageID {
+typedef enum InternalStageId {
     InternalStageID_Unk00,
     InternalStageID_Unk01,
 
@@ -93,7 +93,7 @@ typedef enum InternalStageID {
 
     /// Kongo Jungle (64)
     OLDKONGO,
-} InternalStageID;
+} InternalStageId;
 
 /// @remarks This struct is based in part on the datasheet however the info
 ///          there is likely incorrect as this doesn't quite match @c
@@ -141,7 +141,7 @@ typedef struct _StageInfo {
 
     u32 x84; // 0x84
 
-    InternalStageID internal_stage_id; // 0x88
+    InternalStageId internal_stage_id; // 0x88
 
     struct {
         u8 b0 : 1;

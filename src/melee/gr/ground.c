@@ -344,7 +344,7 @@ s32* func_801C06A4(void)
     return &x->xC8;
 }
 
-void func_801C06B8(InternalStageID arg0)
+void func_801C06B8(InternalStageId arg0)
 {
     if (lbl_803DFEDC[arg0] == NULL)
         return;
@@ -432,7 +432,7 @@ void func_801C0800(StructPairWithStageID* pair)
 static BOOL func_801C0A70(Vec3* pos)
 {
     if (HSD_Randi(2) != 0) {
-        InternalStageID enabled_stages[] = {
+        InternalStageId enabled_stages[] = {
             CASTLE,
             RCRUISE,
             KONGO,
@@ -477,7 +477,7 @@ static BOOL func_801C0A70(Vec3* pos)
 
         size_t i;
 
-        InternalStageID stage_id = stage_info.internal_stage_id;
+        InternalStageId stage_id = stage_info.internal_stage_id;
 
         for (i = 0; i < nstages; i++)
             if (stage_id == enabled_stages[i])
@@ -4101,7 +4101,7 @@ BOOL func_801C4DA0(Vec3* arg0, f32* arg1)
 
 BOOL func_801C4DD0(void)
 {
-    InternalStageID stage_id = stage_info.internal_stage_id;
+    InternalStageId stage_id = stage_info.internal_stage_id;
 
     if (stage_id == KONGO)
         func_801D8270(stage_info.x72C);
@@ -4113,7 +4113,7 @@ BOOL func_801C4DD0(void)
 
 BOOL func_801C4E20(void)
 {
-    InternalStageID stage_id = stage_info.internal_stage_id;
+    InternalStageId stage_id = stage_info.internal_stage_id;
 
     if (stage_id == KONGO)
         func_801D828C(stage_info.x72C);

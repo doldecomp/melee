@@ -1384,7 +1384,7 @@ void func_8026C368(HSD_GObj* item_gobj) // Run bomb item explosion callbacks
             return;
 
         default:
-            item_data->xD60 = 0;
+            item_data->xD60_destroyType = 0;
             func_8026A8EC(item_gobj);
         }
     }
