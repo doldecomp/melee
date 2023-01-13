@@ -3,8 +3,6 @@
 
 #include <dolphin/mtx/mtxtypes.h>
 
-#ifndef M2CTX
-
 bool func_8000B074(struct _HSD_JObj*);
 bool func_8000B09C(struct _HSD_JObj*);
 bool func_8000B134(struct _HSD_JObj*);
@@ -57,7 +55,5 @@ f32 func_8000BDB4(struct _HSD_JObj*);
 void func_8000C1C0(struct _HSD_JObj*, struct _HSD_JObj*);
 void func_8000C228(struct _HSD_JObj*, struct _HSD_JObj*);
 void func_8000C420(struct _HSD_JObj*, u32, f32);
-
-#endif
 
 #endif

@@ -1,5 +1,7 @@
 #include <MSL/wchar_io.h>
 
+#include <stdio.h>
+
 int fwide(FILE* stream, int mode)
 {
     int orientation;

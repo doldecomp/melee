@@ -9,8 +9,7 @@
 #include <melee/it/itkind.h>
 
 typedef enum ftMewtwoAction {
-    AS_FTCOMMON = 340,
-    AS_MEWTWO_SPECIALN_START,
+    AS_MEWTWO_SPECIALN_START = ASID_MAX,
     AS_MEWTWO_SPECIALN_LOOP,
     AS_MEWTWO_SPECIALN_FULL,
     AS_MEWTWO_SPECIALN_CANCEL,

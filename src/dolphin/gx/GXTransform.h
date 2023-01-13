@@ -13,5 +13,11 @@ void GXProject(f32 x, // model coordinates
 void GXSetViewportJitter(f32 left, f32 top, f32 wd, f32 ht, f32 nearz, f32 farz,
                          u32 field);
 void GXSetViewport(f32, f32, f32, f32, f32, f32);
+void GXLoadTexMtxImm(void* arg0, u32 arg1, s32 arg2);
+void GXSetCurrentMtx(s32 arg0);
+void GXLoadNrmMtxImm(unk_t, s32);
+void GXLoadPosMtxImm(unk_t, s32);
+void GXSetScissor(s32 left, s32 top, s32 width, s32 height);
+void GXSetScissorBoxOffset(u32 x_off, u32 y_off);
 
 #endif

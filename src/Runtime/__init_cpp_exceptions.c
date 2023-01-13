@@ -5,14 +5,11 @@
 
 static int fragmentID = -2;
 
-#ifdef MWERKS_GEKKO
-__declspec(section ".init")
-#endif
-    /**
-     * @todo HACK: Should be @c _eti_init_info. We can't use the appropriate
-     * name yet due to the linker not being able to generate it.
-     */
-    extern __eti_init_info _eti_init_info_[];
+/**
+ * @todo HACK: Should be @c _eti_init_info. We can't use the appropriate
+ * name yet due to the linker not being able to generate it.
+ */
+SECTION_INIT extern __eti_init_info _eti_init_info_[];
 
 #ifdef MWERKS_GEKKO
 
