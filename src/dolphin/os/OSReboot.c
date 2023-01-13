@@ -8,7 +8,7 @@
 static unk_t Header[0x20 / sizeof(unk_t)];
 static unk_t SaveStart;
 static unk_t SaveEnd;
-static BOOL Prepared;
+static bool Prepared;
 
 #ifdef MWERKS_GEKKO
 
@@ -35,13 +35,13 @@ void Run(void (*unused)(void))
 
 static void Callback(void)
 {
-    Prepared = TRUE;
+    Prepared = true;
 }
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm __OSReboot(u32 resetCode, BOOL forceMenu)
+asm __OSReboot(u32 resetCode, bool forceMenu)
 { // clang-format off
     nofralloc
 /* 80348144 00344D24  7C 08 02 A6 */	mflr r0
@@ -179,7 +179,7 @@ lbl_803482E0:
 
 #else
 
-void __OSReboot(u32 resetCode, BOOL forceMenu)
+void __OSReboot(u32 resetCode, bool forceMenu)
 {
     NOT_IMPLEMENTED;
 }

@@ -38,7 +38,7 @@ static void func_8021A344(HSD_GObj*);
 static s32 func_8021A3B4();
 static void func_8021A3BC(HSD_GObj*);
 static void func_8021A60C();
-static BOOL func_8021A610(s32);
+static bool func_8021A610(s32);
 static s32 func_8021A618();
 
 #endif

@@ -334,7 +334,7 @@ void func_8007CEF4(Fighter* fp)
     fp->x74_anim_vel.x = result;
 }
 
-BOOL func_8007CF58(Fighter* fp)
+bool func_8007CF58(Fighter* fp)
 {
     f32 temp_f3;
     f32 phi_f1;
@@ -354,7 +354,7 @@ BOOL func_8007CF58(Fighter* fp)
             phi_f2 = -p_ftCommonData->x1FC;
         }
         fp->x74_anim_vel.x = phi_f2;
-        return TRUE;
+        return true;
     } else {
         phi_f2 = fp->x110_attr.x180_AerialFriction;
         phi_f1 = fabs_inline(temp_f3);
@@ -365,11 +365,11 @@ BOOL func_8007CF58(Fighter* fp)
             phi_f2 = -fp->x110_attr.x180_AerialFriction;
         }
         fp->x74_anim_vel.x = phi_f2;
-        return FALSE;
+        return false;
     }
 }
 
-BOOL func_8007D050(Fighter* fp, f32 val)
+bool func_8007D050(Fighter* fp, f32 val)
 {
     f32 temp_f2;
     f32 temp_f3;
@@ -592,7 +592,7 @@ void func_8007D508(Fighter* fp, f32 arg8, f32 arg9)
     }
 }
 
-BOOL func_8007D528(Fighter* fp)
+bool func_8007D528(Fighter* fp)
 {
     if (!fp->x221A_flag.bits.b4 && fp->x80_self_vel.y < 0 &&
         fp->input.x624_lstick_y <= -p_ftCommonData->x88 &&
@@ -601,9 +601,9 @@ BOOL func_8007D528(Fighter* fp)
         fp->x221A_flag.bits.b4 = 1;
         fp->x671_timer_lstick_tilt_y = 0xFE;
         func_80088148(fp, 0x96, 0x7F, 0x40);
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 void func_8007D5BC(Fighter* fp)
@@ -807,7 +807,7 @@ extern struct {
     s32 x4;
 }* lbl_804D652C;
 
-void func_8007DBCC(Fighter* fp, BOOL arg1, f32 arg8)
+void func_8007DBCC(Fighter* fp, bool arg1, f32 arg8)
 {
     fp->x1A4C = arg8;
     fp->x1A51 = 0;
@@ -882,12 +882,12 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
     s32 arg_gnd;
     s32 cur_gnd;
     HSD_GObj* cur;
-    BOOL phi_r28;
+    bool phi_r28;
     Vec2* vtmp;
     u8 unused[0x14];
 
     arg_ft = gobj->user_data;
-    phi_r28 = FALSE;
+    phi_r28 = false;
     for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         temp_r31 = &arg_ft->x2C4;
         if (cur != gobj && !func_80086FD4(cur, gobj)) {
@@ -933,7 +933,7 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
                 }
             }
         } else {
-            phi_r28 = TRUE;
+            phi_r28 = true;
         }
     }
 }
@@ -1784,14 +1784,14 @@ void func_8007FF74(HSD_GObj* gobj)
     func_80040460(fp->xC_playerID, fp->x221F_flag.bits.b4);
 }
 
-BOOL func_8007FFD8(Fighter* fp, f32 arg8)
+bool func_8007FFD8(Fighter* fp, f32 arg8)
 {
     s32 phi_r31;
     s8 b0, b1;
-    phi_r31 = FALSE;
+    phi_r31 = false;
     if ((fp->input.x668 & 0x80000F00) != 0) {
         fp->x2018 -= arg8;
-        phi_r31 = TRUE;
+        phi_r31 = true;
     }
     b0 = fp->x2020;
     b1 = fp->x2021;
@@ -1809,21 +1809,21 @@ BOOL func_8007FFD8(Fighter* fp, f32 arg8)
     }
     if (b0 != fp->x2020 || b1 != fp->x2021) {
         fp->x2018 = fp->x2018 - arg8;
-        phi_r31 = TRUE;
+        phi_r31 = true;
     }
     func_800402D0(fp->xC_playerID, fp->x221F_flag.bits.b4, phi_r31);
     return phi_r31;
 }
 
-BOOL func_80080144(Fighter* fp)
+bool func_80080144(Fighter* fp)
 {
     int kind = fp->x4_fighterKind;
     if ((kind == FTKIND_POPO || kind == FTKIND_NANA) &&
         fp->x619_costume_id >= 2)
     {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 // https://decomp.me/scratch/Jjkwx
@@ -1903,7 +1903,7 @@ void func_8008031C(HSD_GObj* gobj)
 
 void func_80080460(Fighter* fp)
 {
-    fp->x2225_flag.bits.b6 = TRUE;
+    fp->x2225_flag.bits.b6 = true;
 }
 
 void func_80080474(Fighter* fp)

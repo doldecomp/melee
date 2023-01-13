@@ -11,12 +11,12 @@ extern struct {
     s32 unused[0x20 - 0x8];
 } lbl_80402358;
 
-BOOL SIBusy(void)
+bool SIBusy(void)
 {
     if (lbl_80402358.status != -1) {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 extern struct {
@@ -24,11 +24,11 @@ extern struct {
     u8 pad[32 - 4];
 } Packet[];
 
-BOOL SIIsChanBusy(s32 arg0)
+bool SIIsChanBusy(s32 arg0)
 {
-    BOOL var_r5 = TRUE;
+    bool var_r5 = true;
     if (Packet[arg0].x0 == -1 && lbl_80402358.status != arg0) {
-        var_r5 = FALSE;
+        var_r5 = false;
     }
     return var_r5;
 }
@@ -927,7 +927,7 @@ void SITransferCommands(void)
 
 s32 SISetXY(u32 arg0, u32 arg1)
 {
-    BOOL intr;
+    bool intr;
     u32 temp_r4 = (arg0 << 0x10);
     temp_r4 |= (arg1 << 8);
     intr = OSDisableInterrupts();

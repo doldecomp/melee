@@ -88,7 +88,7 @@ u32 bitrev(u32 data)
 s32 ReadArrayUnlock(s32 chan, u32 data, void* rbuf, s32 rlen, s32 mode)
 {
     CARDControl* card;
-    BOOL err;
+    bool err;
     u8 cmd[5];
 
     card = &__CARDBlock[chan];
@@ -109,7 +109,7 @@ s32 ReadArrayUnlock(s32 chan, u32 data, void* rbuf, s32 rlen, s32 mode)
         cmd[2] = (u8) ((data & 0x00FF0000) >> 16);
     }
 
-    err = FALSE;
+    err = false;
     err |= !EXIImmEx(chan, cmd, 5, 1);
     err |= !EXIImmEx(chan, (u8*) card->workArea + (u32) sizeof(CARDID),
                      card->latency, 1);

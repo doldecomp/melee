@@ -4,8 +4,8 @@
 #include <dolphin/dvd/dvd.h>
 
 void __DVDClearWaitingQueue(void);
-BOOL __DVDCheckWaitingQueue(void);
+bool __DVDCheckWaitingQueue(void);
 int __DVDPushWaitingQueue(int a, DVDCommandBlock* b);
-BOOL __DVDDequeueWaitingQueue(DVDCommandBlock* a);
+bool __DVDDequeueWaitingQueue(DVDCommandBlock* a);
 
 #endif

@@ -25,11 +25,11 @@ static void func_801C9C40(HSD_GObj*);
 HSD_GObj* func_801C9CEC(s32);
 s16 func_801C9E40(void);
 void func_801C9E50(s16);
-BOOL func_801C9E60(Vec3*);
-BOOL func_801C9EE8(void);
+bool func_801C9E60(Vec3*);
+bool func_801C9EE8(void);
 Vec3* func_801C9A10(void);
 
 /// @remarks Only called from yorster and inishie1
-BOOL func_801C9EE8(void);
+bool func_801C9EE8(void);
 
 #endif

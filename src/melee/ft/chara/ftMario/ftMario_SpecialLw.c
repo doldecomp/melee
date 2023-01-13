@@ -236,7 +236,7 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
     fp = getFighter(gobj);
     sa = fp->x2D4_specialAttributes;
 
-    if (((s32) fp->sa.mario.x2234_tornadoCharge == FALSE) &&
+    if (((s32) fp->sa.mario.x2234_tornadoCharge == false) &&
         ((u32) fp->x2208_ftcmd_var2 != 0U) &&
         ((fp->input.x668 & HSD_BUTTON_B) != 0))
     {
@@ -286,18 +286,18 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (fp->xE0_ground_or_air == GA_Ground) {
-        if (func_80082888(gobj, &ftMario_SpecialLw_CollisionBox) == FALSE) {
+        if (func_80082888(gobj, &ftMario_SpecialLw_CollisionBox) == false) {
             _ftMario_800E23E4_800E25C4_helper_0(gobj);
-            fp->marioVars[0].SpecialLw.isUnkColl = FALSE;
+            fp->marioVars[0].SpecialLw.isUnkColl = false;
         } else {
-            fp->marioVars[0].SpecialLw.isUnkColl = TRUE;
+            fp->marioVars[0].SpecialLw.isUnkColl = true;
         }
     } else {
-        if (func_800824A0(gobj, &ftMario_SpecialLw_CollisionBox) == FALSE) {
+        if (func_800824A0(gobj, &ftMario_SpecialLw_CollisionBox) == false) {
             _ftMario_800E23E4_800E25C4_helper_0(gobj);
-            fp->marioVars[0].SpecialLw.isUnkColl = FALSE;
+            fp->marioVars[0].SpecialLw.isUnkColl = false;
         } else {
-            fp->marioVars[0].SpecialLw.isUnkColl = TRUE;
+            fp->marioVars[0].SpecialLw.isUnkColl = true;
         }
     }
 

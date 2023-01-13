@@ -104,7 +104,7 @@ static inline CollData* getFtColl(Fighter* fp)
     return &fp->x6F0_collData;
 }
 
-static inline BOOL ftGetGroundAir(Fighter* fp)
+static inline bool ftGetGroundAir(Fighter* fp)
 {
     return fp->xE0_ground_or_air;
 }
@@ -190,7 +190,7 @@ void Fighter_Unload_8006DABC(void* user_data);
 
 // Works but unused decided to go with inline instead
 #define MACRO_ft_OnItemPickup(FTNAME, param1, param2)                          \
-    void FTNAME##_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)              \
+    void FTNAME##_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)              \
     {                                                                          \
         Fighter* fp = getFighter(fighter_gobj);                                \
         if (!func_8026B2B4(fp->x1974_heldItem)) {                              \
@@ -216,8 +216,8 @@ void Fighter_Unload_8006DABC(void* user_data);
 
 /// used for all fighters except Kirby and Purin
 static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
-                                        BOOL catchItemFlag, BOOL bool2,
-                                        BOOL bool3)
+                                        bool catchItemFlag, bool bool2,
+                                        bool bool3)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
@@ -241,7 +241,7 @@ static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
     }
 }
 
-static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
+static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
 {
     Fighter* fp = getFighter(gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
@@ -249,7 +249,7 @@ static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, BOOL bool)
     }
 }
 
-static inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
+static inline void Fighter_OnItemVisible(HSD_GObj* gobj, bool bool)
 {
     Fighter* fp = getFighter(gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
@@ -257,8 +257,8 @@ static inline void Fighter_OnItemVisible(HSD_GObj* gobj, BOOL bool)
     }
 }
 
-static inline void Fighter_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag,
-                                      BOOL bool2, BOOL bool3)
+static inline void Fighter_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag,
+                                      bool bool2, bool bool3)
 {
     func_80070FB4(gobj, bool2, -1);
     if (dropItemFlag) {

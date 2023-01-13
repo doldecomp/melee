@@ -27,7 +27,7 @@ void ftZelda_801393AC(HSD_GObj* fighter_gobj)
     ftZelda_8013B5EC(fighter_gobj);
 }
 
-void ftZelda_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftZelda_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -42,7 +42,7 @@ void ftZelda_OnItemVisible(HSD_GObj* fighter_gobj)
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftZelda_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1)
+void ftZelda_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
 {
     Fighter_OnItemDrop(fighter_gobj, bool1, 1, 1);
 }

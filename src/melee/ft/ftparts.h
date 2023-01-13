@@ -32,6 +32,6 @@ void func_80074D7C(u32*, s32, u32*);
 void Fighter_SetupParts(HSD_GObj* fighter_obj);
 
 /// @returns Blend frames.
-f32 func_80075E78(Fighter*, BOOL);
+f32 func_80075E78(Fighter*, bool);
 
 #endif

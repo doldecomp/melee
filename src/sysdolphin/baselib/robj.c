@@ -30,7 +30,7 @@ void HSD_RObjSetFlags(HSD_RObj* robj, u32 flags)
 
 HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype)
 {
-    BOOL has_type;
+    bool has_type;
     HSD_RObj* curr;
 
     if (robj == NULL)
@@ -38,9 +38,9 @@ HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype)
 
     for (curr = robj; curr != NULL; curr = curr->next) {
         if (curr->flags & 0x80000000) {
-            has_type = TRUE;
+            has_type = true;
         } else {
-            has_type = FALSE;
+            has_type = false;
         }
 
         if (has_type) {

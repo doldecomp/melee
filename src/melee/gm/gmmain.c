@@ -29,7 +29,7 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
 
-extern BOOL lbl_804D6B20;
+extern bool lbl_804D6B20;
 extern u16 lbl_804D6B30; // debug flags
 
 extern GXRenderModeObj GXNtsc480IntDf;
@@ -46,7 +46,7 @@ enum {
 };
 
 static u32 arena_size;
-static BOOL lbl_804D6594;
+static bool lbl_804D6594;
 
 static u8 lbl_8046B108[0xF0];
 static HSD_PadRumbleListData lbl_8046B1F8[12];
@@ -72,7 +72,7 @@ static void lbl_8015FDA0(void) {}
 static void func_8015FDA4(void)
 {
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {
-        lbl_804D6B20 = TRUE;
+        lbl_804D6B20 = true;
         if (lbl_804D6B30 & 0x400) {
             int level = g_debugLevel;
             switch (level) {
@@ -104,7 +104,7 @@ static void func_8015FDA4(void)
                 break;
             }
             g_debugLevel = level;
-            lbl_804D6B20 = FALSE;
+            lbl_804D6B20 = false;
         }
     } else {
         if (g_debugLevel != DbLKind_NoDebugRom) {
@@ -223,7 +223,7 @@ int main(void)
                  dt.second);
     }
     OSReport("#\n\n");
-    lbl_804D6594 = FALSE;
+    lbl_804D6594 = false;
     if (lbl_804D6594) {
         func_80225D2C();
     } else {

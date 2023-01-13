@@ -37,7 +37,7 @@ u32 DSPCheckMailFromDSP(void);
 u32 DSPReadMailFromDSP(void);
 void DSPSendMailToDSP(u32 mail);
 void DSPInit(void);
-BOOL DSPCheckInit(void);
+bool DSPCheckInit(void);
 
 void __DSP_debug_printf(const char* fmt, ...);
 

@@ -15,6 +15,6 @@ void OSInitMutex(OSMutex*);
 void OSLockMutex(OSMutex*);
 void OSUnlockMutex(OSMutex*);
 void __OSUnlockAllMutex(OSThread*);
-BOOL OSTryLockMutex(OSMutex*);
+bool OSTryLockMutex(OSMutex*);
 
 #endif

@@ -67,7 +67,7 @@ void HSD_InitComponent(void)
     VIWaitForRetrace();
     HSD_ObjInit();
     func_803881E4();
-    init_done = TRUE;
+    init_done = true;
 }
 
 void HSD_GXSetFifoObj(GXFifoObj* fifo)
@@ -332,18 +332,18 @@ void HSD_ObjDumpStat(void)
     }
 }
 
-BOOL HSD_SetInitParameter(HSD_InitParam param, ...)
+bool HSD_SetInitParameter(HSD_InitParam param, ...)
 {
     va_list ap;
-    BOOL ok = FALSE;
+    bool ok = false;
 
     if (init_done) {
         if (!shown) {
             OSReport(
                 "init parameter should be set before invoking HSD_Init().\n");
-            shown = TRUE;
+            shown = true;
         }
-        return FALSE;
+        return false;
     }
 
     va_start(ap, param);
@@ -352,7 +352,7 @@ BOOL HSD_SetInitParameter(HSD_InitParam param, ...)
         u32 fifo_size = va_arg(ap, u32);
         if (fifo_size > 0) {
             iparam_fifo_size = fifo_size;
-            ok = TRUE;
+            ok = true;
         }
     } break;
 
@@ -360,7 +360,7 @@ BOOL HSD_SetInitParameter(HSD_InitParam param, ...)
         u32 xfb_max_num = va_arg(ap, u32);
         if (xfb_max_num > 0) {
             iparam_xfb_max_num = xfb_max_num;
-            ok = TRUE;
+            ok = true;
         }
     } break;
 
@@ -368,7 +368,7 @@ BOOL HSD_SetInitParameter(HSD_InitParam param, ...)
         u32 heap_size = va_arg(ap, u32);
         if (heap_size > 0) {
             iparam_heap_max_num = heap_size;
-            ok = TRUE;
+            ok = true;
         }
     } break;
 
@@ -376,7 +376,7 @@ BOOL HSD_SetInitParameter(HSD_InitParam param, ...)
         u32 heap_size = va_arg(ap, u32);
         if (heap_size > 0) {
             iparam_audio_heap_size = heap_size;
-            ok = TRUE;
+            ok = true;
         }
     } break;
 

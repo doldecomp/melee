@@ -30,28 +30,28 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     ftKoopa_OnLoadForGKoopa(fp);
     func_8026B3F8(items[0], It_Kind_Koopa_Flame);
 
-    fp->x2226_flag.bits.b1 = TRUE;
-    fp->x222A_flag.bits.b0 = TRUE;
+    fp->x2226_flag.bits.b1 = true;
+    fp->x222A_flag.bits.b0 = true;
 }
 
-void ftGKoopa_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftGKoopa_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, TRUE, TRUE);
+    Fighter_OnItemPickup(fighter_gobj, bool, true, true);
 }
 
 void ftGKoopa_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, TRUE);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftGKoopa_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, TRUE);
+    Fighter_OnItemVisible(gobj, true);
 }
 
-void ftGKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftGKoopa_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, TRUE, TRUE);
+    Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
 void ftGKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -61,12 +61,12 @@ void ftGKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftGKoopa_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(gobj, TRUE);
+    Fighter_OnKnockbackEnter(gobj, true);
 }
 
 void ftGKoopa_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(gobj, TRUE);
+    Fighter_OnKnockbackExit(gobj, true);
 }
 
 void func_8014F98C(s32 arg0, s32* arg1, s32* arg2)

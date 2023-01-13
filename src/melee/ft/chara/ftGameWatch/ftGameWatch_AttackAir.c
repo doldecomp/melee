@@ -82,15 +82,15 @@ void ftGameWatch_ItemParachuteRemove(HSD_GObj* fighter_gobj)
 // 0x8014B18C
 // https://decomp.me/scratch/hJ3U1 // Check if Mr. Game & Watch is performing
 // Neutral Aerial / Neutral Aerial landing
-BOOL ftGameWatch_ItemCheckParachuteRemove(HSD_GObj* fighter_gobj)
+bool ftGameWatch_ItemCheckParachuteRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     s32 asid = fp->x10_action_state_index;
 
     if (asid >= AS_GAMEWATCH_ATTACKAIRN && asid <= AS_GAMEWATCH_LANDINGAIRN)
-        return FALSE;
+        return false;
 
-    return TRUE;
+    return true;
 }
 
 static void ftGameWatch_ItemTurtleOnLand(HSD_GObj*);
@@ -172,16 +172,16 @@ void ftGameWatch_ItemTurtleRemove(HSD_GObj* fighter_gobj)
 // 0x8014B380
 // https://decomp.me/scratch/xFOBA // Check if Mr. Game & Watch is performing
 // Back Aerial / Back Aerial Landing Lag
-BOOL ftGameWatch_ItemCheckTurtleRemove(HSD_GObj* fighter_gobj)
+bool ftGameWatch_ItemCheckTurtleRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     s32 ASID = fp->x10_action_state_index;
 
     if ((ASID >= AS_GAMEWATCH_ATTACKAIRB) && (ASID <= AS_GAMEWATCH_LANDINGAIRB))
     {
-        return FALSE;
+        return false;
     }
-    return TRUE;
+    return true;
 }
 
 // 0x8014B3A8
@@ -293,7 +293,7 @@ static void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* fighter_gobj)
 // 0x8014B624
 // https://decomp.me/scratch/vpCdl // Check if Mr. Game & Watch is performing Up
 // Aerial / Up Aerial Landing Lag
-BOOL ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj)
+bool ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     s32 ASID = fp->x10_action_state_index;
@@ -301,9 +301,9 @@ BOOL ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj)
     if ((ASID >= AS_GAMEWATCH_ATTACKAIRHI) &&
         (ASID <= AS_GAMEWATCH_LANDINGAIRHI))
     {
-        return FALSE;
+        return false;
     }
-    return TRUE;
+    return true;
 }
 
 static void ftGameWatch_AttackAirB_Action(HSD_GObj*, s32);

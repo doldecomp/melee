@@ -8,7 +8,7 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/code_8027CF30.h>
 
-BOOL ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj)
+bool ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
@@ -27,9 +27,9 @@ BOOL ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj)
     case 11:
     case 12:
     case 13:
-        return TRUE;
+        return true;
     default:
-        return FALSE;
+        return false;
     }
 }
 
@@ -55,7 +55,7 @@ static inline f32 nested_sum_fabs(f32 fighter_pos_y, f32 pika_attr_xBC,
         return fighter_pos_y + fabs_inline(pika_attr_xBC) - vec_y;
 }
 
-BOOL ftPikachu_8012765C(HSD_GObj* fighter_gobj)
+bool ftPikachu_8012765C(HSD_GObj* fighter_gobj)
 {
     Vec3 vec;
     Fighter* fp = fighter_gobj->user_data;
@@ -63,12 +63,12 @@ BOOL ftPikachu_8012765C(HSD_GObj* fighter_gobj)
     u32 state_var = fp->x2340_stateVar1_u32;
 
     if (!fp->x2344_stateVar2_s32)
-        return FALSE;
+        return false;
 
     if (state_var)
         func_802B1FE8(state_var, &vec);
     else
-        return FALSE;
+        return false;
 
     if (fabs_inline(fp->xB0_pos.x - vec.x) < fabs_inline(pika_attr->xC4)) {
         f32 final_y_pos = nested_sum_fabs(fp->xB0_pos.y, pika_attr->xBC,
@@ -78,11 +78,11 @@ BOOL ftPikachu_8012765C(HSD_GObj* fighter_gobj)
             !func_802B1DEC(fp->x2340_stateVar1_u32))
         {
             func_802B1FC8(fp->x2340_stateVar1_u32);
-            return TRUE;
+            return true;
         }
     }
 
-    return FALSE;
+    return false;
 }
 
 void ftPikachu_SetState_8012779C(HSD_GObj* fighter_gobj)
@@ -101,7 +101,7 @@ void ftPikachu_EfSpawn_801277AC(HSD_GObj* fighter_gobj)
 
     Fighter* fp;
     ftPikachuAttributes* pika_attr;
-    BOOL flag_check;
+    bool flag_check;
 
     fp = fighter_gobj->user_data;
     pika_attr = fp->x2D4_specialAttributes;

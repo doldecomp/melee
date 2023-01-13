@@ -22,7 +22,7 @@ void __DVDClearWaitingQueue(void)
 
 int __DVDPushWaitingQueue(int a, DVDQueue_sub* b)
 {
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
     DVDQueue_sub* r5 = &WaitingQueue[a];
 
     r5->unk4->unk0 = b;
@@ -35,7 +35,7 @@ int __DVDPushWaitingQueue(int a, DVDQueue_sub* b)
 
 DVDQueue_sub* __DVDPopWaitingQueue(void)
 {
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
     int i;
 
     for (i = 0; i < 4; i++) {
@@ -59,33 +59,33 @@ DVDQueue_sub* __DVDPopWaitingQueue(void)
     return NULL;
 }
 
-BOOL __DVDCheckWaitingQueue(void)
+bool __DVDCheckWaitingQueue(void)
 {
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
     int i;
 
     for (i = 0; i < 4; i++) {
         if (WaitingQueue[i].unk0 != &WaitingQueue[i]) {
             OSRestoreInterrupts(intrEnabled);
-            return TRUE;
+            return true;
         }
     }
     OSRestoreInterrupts(intrEnabled);
-    return FALSE;
+    return false;
 }
 
-BOOL __DVDDequeueWaitingQueue(DVDQueue_sub* a)
+bool __DVDDequeueWaitingQueue(DVDQueue_sub* a)
 {
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
     DVDQueue_sub* r4 = a->unk4;
     DVDQueue_sub* r5 = a->unk0;
 
     if (r4 == NULL || r5 == NULL) {
         OSRestoreInterrupts(intrEnabled);
-        return FALSE;
+        return false;
     }
     r4->unk0 = r5;
     r5->unk4 = r4;
     OSRestoreInterrupts(intrEnabled);
-    return TRUE;
+    return true;
 }

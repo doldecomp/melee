@@ -14,10 +14,10 @@ typedef struct _ftPichuAttributes {
 
 void ftPichu_OnLoad(HSD_GObj*);
 void ftPichu_OnDeath(HSD_GObj*);
-void ftPichu_OnItemPickup(HSD_GObj*, BOOL);
+void ftPichu_OnItemPickup(HSD_GObj*, bool);
 void ftPichu_OnItemInvisible(HSD_GObj*);
 void ftPichu_OnItemVisible(HSD_GObj*);
-void ftPichu_OnItemDrop(HSD_GObj*, BOOL);
+void ftPichu_OnItemDrop(HSD_GObj*, bool);
 void ftPichu_LoadSpecialAttrs(HSD_GObj*);
 void ftPichu_OnKnockbackEnter(HSD_GObj*);
 void ftPichu_OnKnockbackExit(HSD_GObj*);

@@ -40,6 +40,6 @@ void Command_06(CommandInfo* info);
 void Command_07(CommandInfo* info);
 void Command_08(CommandInfo* info);
 void Command_09(CommandInfo* info);
-BOOL Command_Execute(CommandInfo* info, u32 command);
+bool Command_Execute(CommandInfo* info, u32 command);
 
 #endif

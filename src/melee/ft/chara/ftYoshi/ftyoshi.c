@@ -163,7 +163,7 @@ f32 ftYoshi_8012BAC0(Fighter* fp)
     return attr->x120;
 }
 
-void ftYoshi_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftYoshi_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -178,7 +178,7 @@ void ftYoshi_OnItemVisible(HSD_GObj* fighter_gobj)
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftYoshi_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1)
+void ftYoshi_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
 {
     Fighter_OnItemDrop(fighter_gobj, bool1, 1, 1);
 }
@@ -397,7 +397,7 @@ unk_t func_8012BECC(void)
 /** @fn func_8012C850
  * @todo Matching(?) but not moved from asm.
  */
-#if FALSE
+#if false
 
 /* static */ void lbl_8012CACC(HSD_GObj*);
 
@@ -410,11 +410,11 @@ void func_8012C850(HSD_GObj* fighter_gobj)
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x10, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x672_input_timer_counter = 0xFE;
-    fp->x221A_flag.bits.b7 = FALSE;
-    fp->x221B_flag.bits.b0 = FALSE;
-    fp->x221C_flag.bits.b3 = TRUE;
-    fp->x221C_flag.bits.b1 = TRUE;
-    fp->x221C_flag.bits.b2 = TRUE;
+    fp->x221A_flag.bits.b7 = false;
+    fp->x221B_flag.bits.b0 = false;
+    fp->x221C_flag.bits.b3 = true;
+    fp->x221C_flag.bits.b1 = true;
+    fp->x221C_flag.bits.b2 = true;
 
     fp->x2354_stateVar6 = (f32) p_ftCommonData->x2A4;
     temp_r5 = p_ftCommonData;

@@ -10,7 +10,7 @@ extern volatile u32 Simulated_Mem AT_ADDRESS(0x800000F0);
 extern volatile u16 __MEMRegs[64] AT_ADDRESS(0xCC004000);
 extern OSErrorHandler __OSErrorTable[];
 
-static BOOL OnReset(BOOL);
+static bool OnReset(bool);
 
 static OSResetFunctionInfo lbl_80402348 = { OnReset, 127, NULL, NULL };
 
@@ -24,13 +24,13 @@ u32 OSGetConsoleSimulatedMemSize(void)
     return Simulated_Mem;
 }
 
-static BOOL OnReset(BOOL final)
+static bool OnReset(bool final)
 {
     if (final) {
         __MEMRegs[8] = 0xFF;
         __OSMaskInterrupts(0xF0000000);
     }
-    return TRUE;
+    return true;
 }
 
 static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
@@ -170,7 +170,7 @@ void __OSInitMemoryProtection(void)
 {
     u32 unused[10];
     size_t simulated_mem = OSGetConsoleSimulatedMemSize();
-    BOOL intr = OSDisableInterrupts();
+    bool intr = OSDisableInterrupts();
     if (simulated_mem <= 24 * 1024 * 1024) {
         RealMode(Config24MB);
     } else if (simulated_mem <= 48 * 1024 * 1024) {

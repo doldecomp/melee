@@ -23,8 +23,8 @@ f32 func_8007CDF8(Fighter*);
 void func_8007CE4C(Fighter*, f32);
 void func_8007CE94(Fighter*, f32);
 void func_8007CEF4(Fighter*);
-BOOL func_8007CF58(Fighter*);
-BOOL func_8007D050(Fighter*, f32);
+bool func_8007CF58(Fighter*);
+bool func_8007D050(Fighter*, f32);
 void func_8007D140(Fighter*, f32, f32, f32);
 void func_8007D174(Fighter*, f32, f32, f32, f32);
 void func_8007D268(Fighter*);
@@ -39,7 +39,7 @@ void func_8007D4B8(Fighter*);
 void func_8007D4E4(Fighter*);
 void ftComm_ClampFallSpeed(Fighter*, f32);
 void func_8007D508(Fighter*, f32, f32);
-BOOL func_8007D528(Fighter*);
+bool func_8007D528(Fighter*);
 void func_8007D5BC(Fighter*);
 void func_8007D5D4(Fighter*);
 void func_8007D60C(Fighter*);
@@ -56,7 +56,7 @@ void func_8007DA24(Fighter*);
 f32 func_8007DA74(s32, u32, f32);
 void func_8007DB24(HSD_GObj*);
 void func_8007DB58(HSD_GObj*);
-void func_8007DBCC(Fighter*, BOOL, f32);
+void func_8007DBCC(Fighter*, bool, f32);
 s32 func_8007DC08(Fighter*, f32);
 void func_8007DD7C(HSD_GObj*, Vec3*);
 void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1);
@@ -105,8 +105,8 @@ void func_8007FC7C(HSD_GObj*, f32);
 void func_8007FDA0(HSD_GObj*);
 void func_8007FE84(HSD_GObj*, HSD_GObj* item_gobj, s32, f32);
 void func_8007FF74(HSD_GObj*);
-BOOL func_8007FFD8(Fighter*, f32);
-BOOL func_80080144(Fighter*);
+bool func_8007FFD8(Fighter*, f32);
+bool func_80080144(Fighter*);
 void func_80080174(Fighter* fp);
 void func_8008021C(HSD_GObj*);
 void func_8008031C(HSD_GObj*);
@@ -125,7 +125,7 @@ f32 func_8007CDA4(Fighter*);
 f32 func_8007CDF8(Fighter*);
 void func_8007CE4C(Fighter*, f32);
 void func_8007CE94(Fighter*, f32);
-BOOL func_8007CF58(Fighter*);
+bool func_8007CF58(Fighter*);
 void func_8007D344(Fighter*, f32, f32, f32);
 void func_8007D4B8(Fighter*);
 void func_8007D5D4(Fighter*);
@@ -151,7 +151,7 @@ void func_8007FC7C(struct _HSD_GObj*, f32);
 /// @todo static
 void func_8007FE84(struct _HSD_GObj*, struct _HSD_GObj*, s32, f32);
 
-BOOL func_8007FFD8(Fighter*, f32);
+bool func_8007FFD8(Fighter*, f32);
 
 /// @todo @c DataOffset_PlayerScale_MultiplyBySomething
 /// @returns <tt>fp->x40*fp->x34</tt>

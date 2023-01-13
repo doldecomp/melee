@@ -43,7 +43,7 @@ void HSD_StartRender(HSD_RenderPass pass);
 void func_803755A8(void);
 static void HSD_ObjInit(void);
 void HSD_ObjDumpStat(void);
-BOOL HSD_SetInitParameter(HSD_InitParam param, ...);
+bool HSD_SetInitParameter(HSD_InitParam param, ...);
 OSHeapHandle HSD_GetHeap(void);
 
 #endif

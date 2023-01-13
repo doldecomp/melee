@@ -98,10 +98,10 @@ typedef struct _ftCaptainAttributes {
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj);
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj);
 void lbl_800E28C8(HSD_GObj* fighter_gobj);
-void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL unk_var);
+void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, bool unk_var);
 void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj);
 void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj);
-void ftCFalcon_OnItemDrop(HSD_GObj* fighter_gobj, BOOL unk1);
+void ftCFalcon_OnItemDrop(HSD_GObj* fighter_gobj, bool unk1);
 void ftCFalcon_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 
 // Neutral Special - Falcon/Warlock Punch (SpecialN) //

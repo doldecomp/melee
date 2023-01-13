@@ -24,7 +24,7 @@ static void func_80201E9C(HSD_GObj*);
 static s32 func_80201F14();
 static void func_80201F1C();
 static void func_80201F40();
-static BOOL func_80201F44(s32);
+static bool func_80201F44(s32);
 static s32 func_80201F4C(Vec3*, s32, struct _HSD_JObj*);
 
 #endif

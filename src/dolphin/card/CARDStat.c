@@ -41,7 +41,7 @@ typedef struct CARDStat {
 static void UpdateIconOffsets(CARDDir* ent, CARDStat* stat)
 {
     u32 offset;
-    BOOL iconTlut;
+    bool iconTlut;
     int i;
 
     offset = ent->iconAddr;
@@ -52,7 +52,7 @@ static void UpdateIconOffsets(CARDDir* ent, CARDStat* stat)
         offset = 0;
     }
 
-    iconTlut = FALSE;
+    iconTlut = false;
     switch (CARDGetBannerFormat(ent)) {
     case CARD_STAT_BANNER_C8:
         stat->offsetBanner = offset;
@@ -75,7 +75,7 @@ static void UpdateIconOffsets(CARDDir* ent, CARDStat* stat)
         case CARD_STAT_ICON_C8:
             stat->offsetIcon[i] = offset;
             offset += CARD_ICON_WIDTH * CARD_ICON_HEIGHT;
-            iconTlut = TRUE;
+            iconTlut = true;
             break;
         case CARD_STAT_ICON_RGB5A3:
             stat->offsetIcon[i] = offset;

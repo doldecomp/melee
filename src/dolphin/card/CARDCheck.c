@@ -57,13 +57,13 @@ static s32 VerifyID(CARDControl* card)
         if (id->serial[i] !=
             (u8) (sramEx->flashID[card - __CARDBlock][i] + rand))
         {
-            __OSUnlockSramEx(FALSE);
+            __OSUnlockSramEx(false);
             return CARD_RESULT_BROKEN;
         }
         rand = ((rand * 1103515245 + 12345) >> 16) & 0x7FFF;
     }
 
-    __OSUnlockSramEx(FALSE);
+    __OSUnlockSramEx(false);
 
     return CARD_RESULT_READY;
 }
@@ -213,9 +213,9 @@ s32 CARDCheckExAsync(s32 chan, s32* xferBytes, CARDCallback callback)
     u16 iBlock;
     u16 cBlock;
     u16 cFree;
-    BOOL updateFat = FALSE;
-    BOOL updateDir = FALSE;
-    BOOL updateOrphan = FALSE;
+    bool updateFat = false;
+    bool updateDir = false;
+    bool updateOrphan = false;
 
     if (xferBytes) {
         *xferBytes = 0;
@@ -252,12 +252,12 @@ s32 CARDCheckExAsync(s32 chan, s32* xferBytes, CARDCallback callback)
             card->currentDir = dir[currentDir];
             memcpy(dir[currentDir], dir[currentDir ^ 1],
                    CARD_SYSTEM_BLOCK_SIZE);
-            updateDir = TRUE;
+            updateDir = true;
         } else {
             card->currentFat = fat[currentFat];
             memcpy(fat[currentFat], fat[currentFat ^ 1],
                    CARD_SYSTEM_BLOCK_SIZE);
-            updateFat = TRUE;
+            updateFat = true;
         }
         break;
     }
@@ -294,7 +294,7 @@ s32 CARDCheckExAsync(s32 chan, s32* xferBytes, CARDCallback callback)
         if (map[iBlock] == 0) {
             if (nextBlock != CARD_FAT_AVAIL) {
                 card->currentFat[iBlock] = CARD_FAT_AVAIL;
-                updateOrphan = TRUE;
+                updateOrphan = true;
             }
             cFree++;
         } else if (!CARDIsValidBlockNo(card, nextBlock) && nextBlock != 0xFFFF)
@@ -304,7 +304,7 @@ s32 CARDCheckExAsync(s32 chan, s32* xferBytes, CARDCallback callback)
     }
     if (cFree != card->currentFat[CARD_FAT_FREEBLOCKS]) {
         card->currentFat[CARD_FAT_FREEBLOCKS] = cFree;
-        updateOrphan = TRUE;
+        updateOrphan = true;
     }
     if (updateOrphan) {
         __CARDCheckSum(&card->currentFat[CARD_FAT_CHECKCODE],
@@ -331,7 +331,7 @@ s32 CARDCheckExAsync(s32 chan, s32* xferBytes, CARDCallback callback)
 
     __CARDPutControlBlock(card, CARD_RESULT_READY);
     if (callback) {
-        BOOL enabled = OSDisableInterrupts();
+        bool enabled = OSDisableInterrupts();
         callback(chan, CARD_RESULT_READY);
         OSRestoreInterrupts(enabled);
     }

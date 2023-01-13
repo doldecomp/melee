@@ -79,7 +79,7 @@ void ftMario_SpecialN_Phys(HSD_GObj* gobj)
 // 0x800E0EA4
 void ftMario_SpecialN_Coll(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == FALSE)
+    if (func_80082708(gobj) == false)
         ftMario_SpecialN_GroundToAir(gobj);
 }
 
@@ -99,10 +99,10 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
     fp = gobj->user_data;
 
     if (fp->x2210_ThrowFlags.b0) {
-        fp->x2210_ThrowFlags.b0 = FALSE;
-        flag_res = TRUE;
+        fp->x2210_ThrowFlags.b0 = false;
+        flag_res = true;
     } else {
-        flag_res = FALSE;
+        flag_res = false;
     }
 
     if (flag_res != 0) {
@@ -158,7 +158,7 @@ void ftMario_SpecialAirN_Phys(HSD_GObj* gobj)
 // 0x800E113C
 void ftMario_SpecialAirN_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != FALSE) {
+    if (func_80081D0C(gobj) != false) {
         ftMario_SpecialAirN_AirToGround(gobj);
     }
 }

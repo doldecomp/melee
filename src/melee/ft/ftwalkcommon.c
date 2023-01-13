@@ -44,15 +44,15 @@ static inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
     }
 }
 
-BOOL ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
+bool ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
     if ((fp->input.x620_lstick_x * fp->facing_dir) >= p_ftCommonData->x24) {
-        return TRUE;
+        return true;
     }
 
-    return FALSE;
+    return false;
 }
 
 void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8,

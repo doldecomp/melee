@@ -20,7 +20,7 @@ extern volatile OSTime OS_SYSTEM_TIME AT_ADDRESS(0x800030D8);
 OSTime __OSGetSystemTime(void)
 {
     s32 pad;
-    BOOL intr = OSDisableInterrupts();
+    bool intr = OSDisableInterrupts();
     OSTime time = OSGetTime() + OS_SYSTEM_TIME;
     OSRestoreInterrupts(intr);
     return time;
@@ -29,7 +29,7 @@ OSTime __OSGetSystemTime(void)
 OSTime __OSTimeToSystemTime(s64 time)
 {
     s32 pad;
-    BOOL intr = OSDisableInterrupts();
+    bool intr = OSDisableInterrupts();
     OSTime sysTime = OS_SYSTEM_TIME + time;
     OSRestoreInterrupts(intr);
     return sysTime;
@@ -44,7 +44,7 @@ static s32 YearDays[12] = { 0,   31,  59,  90,  120, 151,
 static s32 LeapYearDays[12] = { 0,   31,  60,  91,  121, 152,
                                 182, 213, 244, 274, 305, 335 };
 
-static BOOL IsLeapYear(s32 year)
+static bool IsLeapYear(s32 year)
 {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }

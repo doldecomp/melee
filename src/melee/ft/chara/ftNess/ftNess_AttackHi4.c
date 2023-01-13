@@ -14,7 +14,7 @@ void ftNess_YoyoUpdateHitPos(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     Hitbox* hitbox_data = &fp->x914[0];
 
-    if (hitbox_data->x0 != FALSE) {
+    if (hitbox_data->x0 != false) {
         if (fp->sa.ness.x2230_yoyoHitboxPos.x != 0.0f ||
             fp->sa.ness.x2230_yoyoHitboxPos.y != 0.0f)
         {
@@ -55,7 +55,7 @@ static void ftNess_YoyoApplyDamage(f32 unk_float, HSD_GObj* fighter_gobj)
     f32 final_damage;
 
     if (unk_float != 0.0f) {
-        if (fp->x914->x0 == TRUE) // Check if hitbox 0 is active
+        if (fp->x914->x0 == true) // Check if hitbox 0 is active
         {
             // Likely 1/256 but won't match.
             // ((f32) 1 / 256.0) does not match either.
@@ -244,7 +244,7 @@ void ftNess_YoyoSetHitPosUnk(HSD_GObj* fighter_gobj, f32 pos_unk)
         (f32) ((sp3C.z * pos_unk) + (sp30.z * pos_update));
 }
 
-BOOL ftNess_YoyoCheckNoObstruct(HSD_GObj* fighter_gobj)
+bool ftNess_YoyoCheckNoObstruct(HSD_GObj* fighter_gobj)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -272,11 +272,11 @@ BOOL ftNess_YoyoCheckNoObstruct(HSD_GObj* fighter_gobj)
         if ((ftNess_YoyoCheckEnvColl(fighter_gobj, &sp20, &sp14, 1.5f) &
              MPCOLL_GRPUSH) != 0)
         {
-            return TRUE;
+            return true;
         }
     }
 
-    return FALSE;
+    return false;
 }
 
 void ftNess_YoyoSetVarAll(HSD_GObj* fighter_gobj)
@@ -286,7 +286,7 @@ void ftNess_YoyoSetVarAll(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->nessVars[0].AttackHi4.yoyoCurrentFrame = 1;
     fp->nessVars[0].AttackHi4.yoyoRehitTimer = 0;
-    fp->nessVars[0].AttackHi4.isPosUpdateMod = TRUE;
+    fp->nessVars[0].AttackHi4.isPosUpdateMod = true;
     fp->sa.ness.x2230_yoyoHitboxPos.z = 0.0f;
     fp->sa.ness.x2230_yoyoHitboxPos.y = 0.0f;
     fp->sa.ness.x2230_yoyoHitboxPos.x = 0.0f;
@@ -388,7 +388,7 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* fighter_gobj)
     fighter_data2 = getFighterPlus(fighter_gobj);
     ness_attr = getFtSpecialAttrs(fighter_data2);
 
-    if ((0.0f != smashChargeFrames) && ((s32) fighter_data2->x914->x0 == TRUE))
+    if ((0.0f != smashChargeFrames) && ((s32) fighter_data2->x914->x0 == true))
     {
         func_8007ABD0(fighter_data2->x914,
                       (u32) (fighter_data2->x914->xC *
@@ -404,7 +404,7 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* fighter_gobj)
 
 static Vec3 const YoyoThinkPos = { 0 };
 
-BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj)
+bool ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj)
 {
     s32 ASID;
     s32 yoyoSmashFrameCurr;
@@ -485,10 +485,10 @@ BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj)
         ftNess_YoyoCreateItem(fighter_gobj);
         if (fp->sa.ness.x222C_yoyoGObj == NULL) {
             func_8008A2BC(fighter_gobj);
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
 void ftNess_YoyoSetUnkRate(HSD_GObj* fighter_gobj)
@@ -586,7 +586,7 @@ void ftNess_AttackHi4_Action(HSD_GObj* fighter_gobj)
 
     fp = getFighter(fighter_gobj);
     fp->x2218_flag.bits.b0 = 0;
-    fp->nessVars[0].AttackHi4.isChargeDisable = FALSE;
+    fp->nessVars[0].AttackHi4.isChargeDisable = false;
 
     temp_fp = getFighter(fighter_gobj);
     temp_fp->x2204_ftcmd_var1 = 0;
@@ -642,7 +642,7 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj)
     fighter_data2 = fighter_gobj->user_data;
     yoyoSmashFrameCurr = fighter_data2->nessVars[0].AttackHi4.yoyoCurrentFrame;
     fp->nessVars[0].AttackHi4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
-    if (ftNess_YoyoThink_IsRemove(fighter_gobj) == FALSE) {
+    if (ftNess_YoyoThink_IsRemove(fighter_gobj) == false) {
         fp = fighter_gobj->user_data;
         if ((u32) fp->x2200_ftcmd_var0 == 0U) {
             yoyoRehitTimer = fp->nessVars[0].AttackHi4.yoyoRehitTimer;
@@ -658,7 +658,7 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj)
         if (((s32) fighter_data2->nessVars[0].AttackHi4.yoyoCurrentFrame ==
              13) &&
             ((s32) fighter_data2->nessVars[0].AttackHi4.isChargeDisable ==
-             FALSE))
+             false))
         {
             fighter_data2 = getFighterPlus(fighter_gobj);
             sp18.x = 0.0f;
@@ -678,11 +678,11 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj)
                  (((ftNess_YoyoCheckEnvColl(fighter_gobj, &sp18, &sp24, 1.5f) &
                     MPCOLL_GRPUSH) == 0) == 0)))
             {
-                phi_r0 = TRUE;
+                phi_r0 = true;
             } else {
-                phi_r0 = FALSE;
+                phi_r0 = false;
             }
-            if (phi_r0 != FALSE) {
+            if (phi_r0 != false) {
                 ftNess_AttackHi4_Charge_Action(fighter_gobj);
             }
         }
@@ -699,9 +699,9 @@ void ftNess_AttackHi4_IASA(
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_A) == FALSE) {
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_A) == false) {
         fp->nessVars[0].AttackHi4.isChargeDisable =
-            TRUE; // Toggle flag to disallow Yo-Yo charge until next Up Smash
+            true; // Toggle flag to disallow Yo-Yo charge until next Up Smash
                   // instance
     }
 
@@ -820,7 +820,7 @@ void ftNess_AttackHi4_Charge_IASA(
     HSD_GObj* fighter_gobj) // Ness's Up Smash Charge IASA callback
 {
     Fighter* fp = getFighter(fighter_gobj);
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_A) == FALSE) {
+    if ((fp->input.x65C_heldInputs & HSD_BUTTON_A) == false) {
         ftNess_AttackHi4_Release_Action(fighter_gobj);
     }
 }
@@ -889,7 +889,7 @@ void ftNess_AttackHi4_Release_Anim(
     yoyoSmashFrameCurr = temp_fp->nessVars[0].AttackHi4.yoyoCurrentFrame;
     temp_fp->nessVars[0].AttackHi4.yoyoCurrentFrame =
         (s32) (yoyoSmashFrameCurr + 1);
-    if (ftNess_YoyoThink_IsRemove(fighter_gobj) == FALSE) {
+    if (ftNess_YoyoThink_IsRemove(fighter_gobj) == false) {
         fp = getFighter(fighter_gobj);
         if ((u32) fp->x2200_ftcmd_var0 == 0U) {
             yoyoRehitTimer = fp->nessVars[0].AttackHi4.yoyoRehitTimer;

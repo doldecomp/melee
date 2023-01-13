@@ -7,7 +7,7 @@
 void lbl_80347374(void);
 
 #pragma push
-asm BOOL OSDisableInterrupts(void)
+asm bool OSDisableInterrupts(void)
 { // clang-format off
     nofralloc
 /* 80347364 00343F44  7C 60 00 A6 */	mfmsr r3
@@ -20,7 +20,7 @@ entry lbl_80347374
 #pragma pop
 
 #pragma push
-asm BOOL OSEnableInterrupts(void)
+asm bool OSEnableInterrupts(void)
 { // clang-format off
     nofralloc
 /* 80347378 00343F58  7C 60 00 A6 */	mfmsr r3
@@ -32,7 +32,7 @@ asm BOOL OSEnableInterrupts(void)
 #pragma pop
 
 #pragma push
-asm BOOL OSRestoreInterrupts(BOOL)
+asm bool OSRestoreInterrupts(bool)
 { // clang-format off
     nofralloc
 /* 8034738C 00343F6C  2C 03 00 00 */	cmpwi r3, 0

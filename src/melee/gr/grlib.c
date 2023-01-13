@@ -19,7 +19,7 @@ extern struct _UnkGeneratorStruct* lbl_804D78FC;
 
 static Vec3 lbl_8049EF58[6];
 
-BOOL func_801C96E8(HSD_GObj* arg0)
+bool func_801C96E8(HSD_GObj* arg0)
 {
     Map* map = arg0->user_data;
     return map->x10_flags.b4;
@@ -274,37 +274,38 @@ void func_801C9E50(s16 val)
     stage_info.x708 = val;
 }
 
-BOOL func_801C9E60(Vec3* v)
+bool func_801C9E60(Vec3* v)
 {
     InternalStageId id = stage_info.internal_stage_id;
 
     if (id == RCRUISE) {
         func_80201918(v);
-        return TRUE;
+        return true;
     }
 
     if (id == BIGBLUE) {
         func_801EF7D8(v);
-        return TRUE;
+        return true;
     }
 
     if (id == ICEMTN) {
         func_801FA728(v);
-        return TRUE;
+        return true;
     }
 
     v->z = 0.0F;
     v->y = 0.0F;
     v->x = 0.0F;
 
-    return FALSE;
+    return false;
 }
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
 /// @todo @c clang-format why
-asm BOOL func_801C9EE8(void){
+asm bool func_801C9EE8(void)
+{
     // clang-format off
     nofralloc
 /* 801C9EE8 001C6AC8  7C 08 02 A6 */	mflr r0
@@ -444,7 +445,7 @@ lbl_801CA090:
 
 #else
 
-BOOL func_801C9EE8(void)
+bool func_801C9EE8(void)
 {
     NOT_IMPLEMENTED;
 }

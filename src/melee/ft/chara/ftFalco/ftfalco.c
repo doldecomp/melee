@@ -11,7 +11,7 @@ void ftFalco_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
 }
 
-void ftFalco_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftFalco_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -26,7 +26,7 @@ void ftFalco_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftFalco_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftFalco_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }

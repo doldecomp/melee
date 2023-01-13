@@ -4,6 +4,6 @@
 #include <Runtime/platform.h>
 
 int __setjmp(unk_t env, unk_t, unk_t);
-void longjmp(unk_t env, BOOL);
+void longjmp(unk_t env, bool);
 
 #endif

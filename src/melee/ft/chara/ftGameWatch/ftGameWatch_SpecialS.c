@@ -91,15 +91,15 @@ static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj)
 // 0x8014C68C
 // https://decomp.me/scratch/MTdOC // Check if Mr. Game & Watch is in any of his
 // SpecialS Action States
-BOOL ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj)
+bool ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj)
 {
     /// @todo @c enum
     enum_t asid = getFighter(fighter_gobj)->x10_action_state_index;
 
     if (asid >= AS_GAMEWATCH_SPECIALS1 && asid <= AS_GAMEWATCH_SPECIALAIRS9)
-        return FALSE;
+        return false;
 
-    return TRUE;
+    return true;
 }
 
 // 0x8014C6B4 - shououts to EstexNT
@@ -259,14 +259,14 @@ static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj*);
 // Collision callback
 void ftGameWatch_SpecialS_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_800827A0(fighter_gobj) == FALSE)
+    if (func_800827A0(fighter_gobj) == false)
         ftGameWatch_SpecialS_GroundToAir(fighter_gobj);
 }
 
 // 0x8014CA4C - Mr. Game & Watch's Aerial Judgement Collision callback
 void ftGameWatch_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != FALSE)
+    if (func_80081D0C(fighter_gobj) != false)
         ftGameWatch_SpecialAirS_AirToGround(fighter_gobj);
 }
 

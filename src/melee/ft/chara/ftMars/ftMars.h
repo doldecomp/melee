@@ -36,10 +36,10 @@ typedef struct _MarsAttributes {
 } MarsAttributes;
 
 void ftMars_OnDeath(HSD_GObj* gobj);
-void ftMars_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
+void ftMars_OnItemPickup(HSD_GObj* gobj, bool arg1);
 void ftMars_OnItemInvisible(HSD_GObj* gobj);
 void ftMars_OnItemVisible(HSD_GObj* gobj);
-void ftMars_OnItemDrop(HSD_GObj* gobj, BOOL arg1);
+void ftMars_OnItemDrop(HSD_GObj* gobj, bool arg1);
 void ftMars_OnLoadForRoy(Fighter* fp);
 void ftMars_OnLoad(HSD_GObj* gobj);
 void ftMars_LoadSpecialAttrs(HSD_GObj* gobj);

@@ -73,10 +73,10 @@
 
 #define JOBJ_ROOT_MASK (JOBJ_ROOT_OPA | JOBJ_ROOT_TEXEDGE | JOBJ_ROOT_XLU)
 
-#define union_type_ptcl(o) ((o)->flags & JOBJ_PTCL ? TRUE : FALSE)
-#define union_type_spline(o) ((o)->flags & JOBJ_SPLINE ? TRUE : FALSE)
+#define union_type_ptcl(o) ((o)->flags & JOBJ_PTCL ? true : false)
+#define union_type_spline(o) ((o)->flags & JOBJ_SPLINE ? true : false)
 #define union_type_dobj(o)                                                     \
-    ((o)->flags & (JOBJ_PTCL | JOBJ_SPLINE) ? FALSE : TRUE)
+    ((o)->flags & (JOBJ_PTCL | JOBJ_SPLINE) ? false : true)
 
 #define HSD_JOBJ_INFO(i) ((HSD_JObjInfo*) (i))
 #define HSD_JOBJ_METHOD(o) HSD_JOBJ_INFO((o)->object.parent.class_info)
@@ -169,13 +169,13 @@ static inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
     return jobj->robj;
 }
 
-static inline BOOL HSD_JObjMtxIsDirty(HSD_JObj* jobj)
+static inline bool HSD_JObjMtxIsDirty(HSD_JObj* jobj)
 {
-    BOOL result;
+    bool result;
     HSD_ASSERT(564, jobj);
-    result = FALSE;
+    result = false;
     if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
-        result = TRUE;
+        result = true;
     }
     return result;
 }

@@ -9,7 +9,7 @@ void func_8006EBA4(struct _HSD_GObj*);
 void func_8006EBE8(struct _HSD_GObj* fighter_gobj, f32, f32, f32);
 void func_8006F0FC(struct _HSD_GObj* fighter_gobj, f32);
 void ftAnim_SetAnimRate(struct _HSD_GObj*, f32);
-BOOL ftAnim_IsFramesRemaining(struct _HSD_GObj*);
+bool ftAnim_IsFramesRemaining(struct _HSD_GObj*);
 f32 func_8006F484(void*);
 void func_8006FE48(struct _HSD_GObj*);
 void func_80070308(struct _HSD_GObj*);
@@ -23,7 +23,7 @@ void func_80070CC4(struct _HSD_GObj*, s32);
 void func_80070E74(struct _HSD_GObj*);
 void func_80070F28(struct _HSD_GObj*);
 void func_80070FB4(struct _HSD_GObj*, s32, s32);
-BOOL func_80070FD0(struct _Fighter*);
+bool func_80070FD0(struct _Fighter*);
 void Fighter_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);
 
 #endif

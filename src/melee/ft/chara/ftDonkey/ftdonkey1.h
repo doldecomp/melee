@@ -4,6 +4,6 @@
 #include <sysdolphin/baselib/gobj.h>
 
 void ftDonkey_800DFA70(HSD_GObj* fighter_gobj);
-BOOL ftDonkey_800DF938(HSD_GObj* fighter_gobj);
+bool ftDonkey_800DF938(HSD_GObj* fighter_gobj);
 
 #endif

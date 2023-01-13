@@ -5,14 +5,14 @@
 #include <melee/ft/ftwalkcommon.h>
 #include <melee/it/code_8027CF30.h>
 
-BOOL ftDonkey_800DFA98(HSD_GObj* fighter_gobj)
+bool ftDonkey_800DFA98(HSD_GObj* fighter_gobj)
 {
     if (ftWalkCommon_800DFC70(fighter_gobj)) {
         ftDonkey_800DFAE4(fighter_gobj, 0.0f);
-        return TRUE;
+        return true;
     }
 
-    return FALSE;
+    return false;
 }
 
 void ftDonkey_800DFAE4(HSD_GObj* fighter_gobj, f32 argf)

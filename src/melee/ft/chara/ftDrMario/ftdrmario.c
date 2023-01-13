@@ -10,7 +10,7 @@ void ftDrMario_OnDeath(HSD_GObj* gobj)
     Fighter* fp = (Fighter*) gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     fp->sa.mario.x2234_tornadoCharge = 0;
-    fp->sa.mario.x2238_isCapeBoost = FALSE;
+    fp->sa.mario.x2238_isCapeBoost = false;
     fp->sa.mario.x223C_capeGObj = NULL;
     fp->sa.mario.x2240 = 0;
 }
@@ -35,7 +35,7 @@ void func_80149540(HSD_GObj* gobj)
     func_801497CC(gobj);
 }
 
-void ftDrMario_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftDrMario_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -50,7 +50,7 @@ void ftDrMario_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftDrMario_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftDrMario_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
@@ -92,26 +92,26 @@ void func_801497CC(HSD_GObj* gobj)
     }
 }
 
-BOOL func_80149844(HSD_GObj* gobj)
+bool func_80149844(HSD_GObj* gobj)
 {
     s32 tmp;
     Fighter* fp;
 
     if (gobj == NULL) {
-        return TRUE;
+        return true;
     }
     fp = gobj->user_data;
     if (fp == NULL) {
-        return TRUE;
+        return true;
     }
     tmp = fp->x10_action_state_index;
     if (tmp != 0x155 && tmp != 0x156) {
-        return TRUE;
+        return true;
     }
     if (fp->sa.mario.x2240 == 0) {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 void func_801498A0(HSD_GObj* gobj)

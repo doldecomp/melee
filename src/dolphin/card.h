@@ -122,7 +122,7 @@ typedef struct CARDDirCheck {
 } CARDDirCheck;
 
 typedef struct CARDControl {
-    BOOL attached;
+    bool attached;
     s32 result;
     u16 size;
     u16 pageSize;

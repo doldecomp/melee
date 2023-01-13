@@ -17,7 +17,7 @@ void ftDonkey_800E0200(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (fp->x2340_stateVar1 && !func_80094EA4(fighter_gobj)) {
-        BOOL result = ftDonkey_800E0378(fighter_gobj);
+        bool result = ftDonkey_800E0378(fighter_gobj);
 
         if (result)
             return;

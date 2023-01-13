@@ -61,24 +61,24 @@ void func_80132B38(void)
     return;
 }
 
-void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, TRUE, TRUE);
+    Fighter_OnItemPickup(fighter_gobj, bool, true, true);
 }
 
 void ftKoopa_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, TRUE);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftKoopa_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, TRUE);
+    Fighter_OnItemVisible(gobj, true);
 }
 
-void ftKoopa_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftKoopa_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, TRUE, TRUE);
+    Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
 void ftKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -88,12 +88,12 @@ void ftKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftKoopa_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(gobj, TRUE);
+    Fighter_OnKnockbackEnter(gobj, true);
 }
 
 void ftKoopa_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(gobj, TRUE);
+    Fighter_OnKnockbackExit(gobj, true);
 }
 
 f32 func_80132DC0(HSD_GObj* gobj)
@@ -142,16 +142,16 @@ void func_80132E30(HSD_GObj* gobj)
 {
     Fighter* fp;
     HSD_GObj* temp;
-    BOOL flag_set;
+    bool flag_set;
 
     fp = gobj->user_data;
     if (fp->x2210_ThrowFlags.b4 != 0) {
         fp->x2210_ThrowFlags.b4 = 0;
-        flag_set = TRUE;
+        flag_set = true;
     } else {
-        flag_set = FALSE;
+        flag_set = false;
     }
-    if (flag_set != FALSE) {
+    if (flag_set != false) {
         fp->facing_dir = -fp->facing_dir;
         fp->x234C_stateVar4 = 1;
     }
@@ -457,7 +457,7 @@ void func_801336CC(HSD_GObj* gobj)
                                                    lbl_804D9AD8, lbl_804D9ADC,
                                                    lbl_804D9AD8);
             }
-            ft_temp->x2222_flag.bits.b2 = TRUE;
+            ft_temp->x2222_flag.bits.b2 = true;
             func_8007E2F4(ft_temp, 0x1FF);
             func_8007E2FC(gobj);
             ft_temp->x2340_stateVar1 = 0;

@@ -8,28 +8,28 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, -1);
-    fp->sa.captain.x2230_isSpecialSGFX = FALSE;
-    fp->sa.captain.x222C_isSpecialSStartGFX = FALSE;
+    fp->sa.captain.x2230_isSpecialSGFX = false;
+    fp->sa.captain.x222C_isSpecialSStartGFX = false;
 }
 
-void ftGanon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftGanon_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, TRUE, TRUE);
+    Fighter_OnItemPickup(fighter_gobj, bool, true, true);
 }
 
 void ftGanon_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, TRUE);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftGanon_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, TRUE);
+    Fighter_OnItemVisible(gobj, true);
 }
 
-void ftGanon_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftGanon_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(gobj, bool1, TRUE, TRUE);
+    Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
 void ftGanon_OnLoad(HSD_GObj* gobj)

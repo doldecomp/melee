@@ -13,7 +13,7 @@ extern ftCommonData* p_ftCommonData; // defined in fighter.s
 // https://decomp.me/scratch/f74Cl
 // UnclePunch Map file: Interrupt_Walljump
 // @Returns: true if this function started a walljump
-BOOL func_8008169C(HSD_GObj* pPlayerEntityStruct /*r3*/)
+bool func_8008169C(HSD_GObj* pPlayerEntityStruct /*r3*/)
 {
     Fighter* fp_r31 = (Fighter*) pPlayerEntityStruct->user_data;
     CollData* pCollData_r6;

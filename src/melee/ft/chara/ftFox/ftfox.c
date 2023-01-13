@@ -2,11 +2,11 @@
 
 #include <melee/ft/ftparts.h>
 
-BOOL func_800E5534(HSD_GObj* gobj)
+bool func_800E5534(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
 
-    return fp->sa.fox.x222C_blasterGObj ? TRUE : FALSE;
+    return fp->sa.fox.x222C_blasterGObj ? true : false;
 }
 
 void ftFox_OnDeath(HSD_GObj* gobj)
@@ -22,7 +22,7 @@ void func_800E5588(HSD_GObj* gobj)
     ftFox_RemoveBlaster(gobj);
 }
 
-void ftFox_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftFox_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -37,7 +37,7 @@ void ftFox_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftFox_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftFox_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }

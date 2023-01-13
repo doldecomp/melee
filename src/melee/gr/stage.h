@@ -36,7 +36,7 @@ f32 Stage_GetCamAngleRadiansRight(void);
 void Stage_80224CAC(Vec3* arg0);
 void Stage_SetVecToFixedCamPos(Vec3* arg0);
 f32 Stage_GetCamFixedFov(void);
-BOOL Stage_80224DC8(s32 arg);
+bool Stage_80224DC8(s32 arg);
 void Stage_80224E38(Vec3* arg0, s32 arg1);
 void Stage_80224E64(enum_t arg0, Vec3* arg_vec);
 s32 Stage_80224FDC(Vec3* arg0);

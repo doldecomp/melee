@@ -71,19 +71,19 @@ static void CompleteTransfer(EXIChannel chan)
     }
 }
 
-BOOL EXIImm(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
+bool EXIImm(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
 {
     EXIControl* exi = &Ecb[chan];
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
 
     if ((exi->state & EXI_STATE_BUSY) || !(exi->state & EXI_STATE_SELECTED)) {
         OSRestoreInterrupts(enabled);
-        return FALSE;
+        return false;
     }
 
     exi->tcCallback = callback;
     if (exi->tcCallback) {
-        EXIClearInterrupts(chan, FALSE, TRUE, FALSE);
+        EXIClearInterrupts(chan, false, true, false);
         __OSUnmaskInterrupts(OS_INTRMASK_EXI_0_TC >> (3 * chan));
     }
 
@@ -107,40 +107,40 @@ BOOL EXIImm(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
 
     OSRestoreInterrupts(enabled);
 
-    return TRUE;
+    return true;
 }
 
-BOOL EXIImmEx(EXIChannel chan, void* buf, s32 len, u32 mode)
+bool EXIImmEx(EXIChannel chan, void* buf, s32 len, u32 mode)
 {
     while (len) {
         s32 xLen = (len < 4) ? len : 4;
 
         if (!EXIImm(chan, buf, xLen, mode, NULL))
-            return FALSE;
+            return false;
 
         if (!EXISync(chan))
-            return FALSE;
+            return false;
 
         buf = (u8*) buf + xLen;
 
         len -= xLen;
     }
 
-    return TRUE;
+    return true;
 }
 
-BOOL EXIDma(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
+bool EXIDma(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
 {
     EXIControl* exi = &Ecb[chan];
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
     if ((exi->state & EXI_STATE_BUSY) || !(exi->state & EXI_STATE_SELECTED)) {
         OSRestoreInterrupts(enabled);
-        return FALSE;
+        return false;
     }
 
     exi->tcCallback = callback;
     if (exi->tcCallback) {
-        EXIClearInterrupts(chan, FALSE, TRUE, FALSE);
+        EXIClearInterrupts(chan, false, true, false);
         __OSUnmaskInterrupts(OS_INTRMASK_EXI_0_TC >> (3 * chan));
     }
 
@@ -152,7 +152,7 @@ BOOL EXIDma(EXIChannel chan, void* buf, s32 len, u32 type, EXICallback callback)
 
     OSRestoreInterrupts(enabled);
 
-    return TRUE;
+    return true;
 }
 
 extern u32 __OSGetDIConfig(void);
@@ -160,7 +160,7 @@ extern u32 __OSGetDIConfig(void);
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm BOOL EXISync(EXIChannel)
+asm bool EXISync(EXIChannel)
 { // clang-format off
     nofralloc
 /* 80345F4C 00342B2C  7C 08 02 A6 */	mflr r0
@@ -308,15 +308,15 @@ lbl_8034613C:
 
 #else
 
-BOOL EXISync(EXIChannel unused)
+bool EXISync(EXIChannel unused)
 {
     NOT_IMPLEMENTED;
-    return FALSE;
+    return false;
 }
 
 #endif
 
-u32 EXIClearInterrupts(EXIChannel chan, BOOL exi, BOOL tc, BOOL ext)
+u32 EXIClearInterrupts(EXIChannel chan, bool exi, bool tc, bool ext)
 {
     u32 cpr = REG(chan, 0);
     u32 prev = cpr;
@@ -338,7 +338,7 @@ EXICallback EXISetExiCallback(EXIChannel chan, EXICallback exiCallback)
 {
     EXIControl* exi = &Ecb[chan];
     EXICallback prev;
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
 
     prev = exi->exiCallback;
     exi->exiCallback = exiCallback;
@@ -353,24 +353,24 @@ EXICallback EXISetExiCallback(EXIChannel chan, EXICallback exiCallback)
     return prev;
 }
 
-static BOOL __EXIProbe(EXIChannel chan)
+static bool __EXIProbe(EXIChannel chan)
 {
     EXIControl* exi = &Ecb[chan];
-    BOOL enabled;
-    BOOL rc;
+    bool enabled;
+    bool rc;
     u32 cpr;
     s32 t;
 
     if (chan == 2) {
-        return TRUE;
+        return true;
     }
 
-    rc = TRUE;
+    rc = true;
     enabled = OSDisableInterrupts();
     cpr = REG(chan, 0);
     if (!(exi->state & EXI_STATE_ATTACHED)) {
         if (cpr & 0x800) {
-            EXIClearInterrupts(chan, FALSE, FALSE, TRUE);
+            EXIClearInterrupts(chan, false, false, true);
             __EXIProbeStartTime[chan] = exi->idTime = 0;
         }
 
@@ -380,30 +380,30 @@ static BOOL __EXIProbe(EXIChannel chan)
                 __EXIProbeStartTime[chan] = t;
             }
             if (t - __EXIProbeStartTime[chan] < 300 / 100) {
-                rc = FALSE;
+                rc = false;
             }
         } else {
             __EXIProbeStartTime[chan] = exi->idTime = 0;
-            rc = FALSE;
+            rc = false;
         }
     } else if (!(cpr & 0x1000) || (cpr & 0x800)) {
         __EXIProbeStartTime[chan] = exi->idTime = 0;
-        rc = FALSE;
+        rc = false;
     }
     OSRestoreInterrupts(enabled);
 
     return rc;
 }
 
-BOOL EXIProbe(EXIChannel chan)
+bool EXIProbe(EXIChannel chan)
 {
     EXIControl* exi = &Ecb[chan];
-    BOOL rc;
+    bool rc;
     u32 id;
 
     rc = __EXIProbe(chan);
     if (rc && exi->idTime == 0) {
-        rc = EXIGetID(chan, 0, &id) ? TRUE : FALSE;
+        rc = EXIGetID(chan, 0, &id) ? true : false;
     }
     return rc;
 }
@@ -419,55 +419,55 @@ s32 EXIProbeEx(EXIChannel chan)
     }
 }
 
-static BOOL __EXIAttach(EXIChannel chan, EXICallback extCallback)
+static bool __EXIAttach(EXIChannel chan, EXICallback extCallback)
 {
     EXIControl* exi = &Ecb[chan];
-    BOOL enabled = OSDisableInterrupts();
-    if ((exi->state & EXI_STATE_ATTACHED) || __EXIProbe(chan) == FALSE) {
+    bool enabled = OSDisableInterrupts();
+    if ((exi->state & EXI_STATE_ATTACHED) || __EXIProbe(chan) == false) {
         OSRestoreInterrupts(enabled);
-        return FALSE;
+        return false;
     }
 
-    EXIClearInterrupts(chan, TRUE, FALSE, FALSE);
+    EXIClearInterrupts(chan, true, false, false);
 
     exi->extCallback = extCallback;
     __OSUnmaskInterrupts(OS_INTRMASK_EXI_0_EXT >> (3 * chan));
     exi->state |= EXI_STATE_ATTACHED;
     OSRestoreInterrupts(enabled);
 
-    return TRUE;
+    return true;
 }
 
-BOOL EXIAttach(EXIChannel chan, EXICallback extCallback)
+bool EXIAttach(EXIChannel chan, EXICallback extCallback)
 {
     EXIControl* exi = &Ecb[chan];
-    BOOL enabled;
+    bool enabled;
 
     EXIProbe(chan);
 
     enabled = OSDisableInterrupts();
     if (exi->idTime == 0) {
         OSRestoreInterrupts(enabled);
-        return FALSE;
+        return false;
     } else {
-        BOOL rc = __EXIAttach(chan, extCallback);
+        bool rc = __EXIAttach(chan, extCallback);
         OSRestoreInterrupts(enabled);
         return rc;
     }
 }
 
-BOOL EXIDetach(EXIChannel chan)
+bool EXIDetach(EXIChannel chan)
 {
     EXIControl* exi = &Ecb[chan];
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
 
     if (!(exi->state & EXI_STATE_ATTACHED)) {
         OSRestoreInterrupts(enabled);
-        return TRUE;
+        return true;
     }
     if ((exi->state & EXI_STATE_LOCKED) && exi->dev == 0) {
         OSRestoreInterrupts(enabled);
-        return FALSE;
+        return false;
     }
 
     exi->state &= ~EXI_STATE_ATTACHED;
@@ -475,14 +475,14 @@ BOOL EXIDetach(EXIChannel chan)
                         OS_INTRMASK_EXI_0_EXI) >>
                        (3 * chan));
     OSRestoreInterrupts(enabled);
-    return TRUE;
+    return true;
 }
 
-BOOL EXISelect(EXIChannel chan, u32 dev, u32 freq)
+bool EXISelect(EXIChannel chan, u32 dev, u32 freq)
 {
     EXIControl* exi = &Ecb[chan];
     u32 cpr;
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
 
     if ((exi->state & EXI_STATE_SELECTED) ||
         (chan != 2 && ((dev == 0 && !(exi->state & EXI_STATE_ATTACHED) &&
@@ -490,7 +490,7 @@ BOOL EXISelect(EXIChannel chan, u32 dev, u32 freq)
                        !(exi->state & EXI_STATE_LOCKED) || exi->dev != dev)))
     {
         OSRestoreInterrupts(enabled);
-        return FALSE;
+        return false;
     }
 
     exi->state |= EXI_STATE_SELECTED;
@@ -511,18 +511,18 @@ BOOL EXISelect(EXIChannel chan, u32 dev, u32 freq)
     }
 
     OSRestoreInterrupts(enabled);
-    return TRUE;
+    return true;
 }
 
-BOOL EXIDeselect(EXIChannel chan)
+bool EXIDeselect(EXIChannel chan)
 {
     EXIControl* exi = &Ecb[chan];
     u32 cpr;
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
 
     if (!(exi->state & EXI_STATE_SELECTED)) {
         OSRestoreInterrupts(enabled);
-        return FALSE;
+        return false;
     }
     exi->state &= ~EXI_STATE_SELECTED;
     cpr = REG(chan, 0);
@@ -542,10 +542,10 @@ BOOL EXIDeselect(EXIChannel chan)
     OSRestoreInterrupts(enabled);
 
     if (chan != 2 && (cpr & CPR_CS(0))) {
-        return __EXIProbe(chan) ? TRUE : FALSE;
+        return __EXIProbe(chan) ? true : false;
     }
 
-    return TRUE;
+    return true;
 }
 
 static void EXIIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
@@ -556,7 +556,7 @@ static void EXIIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
 
     chan = (interrupt - OS_INTR_EXI_0_EXI) / 3;
     exi = &Ecb[chan];
-    EXIClearInterrupts(chan, TRUE, FALSE, FALSE);
+    EXIClearInterrupts(chan, true, false, false);
     callback = exi->exiCallback;
 
     if (exi->exiCallback) {
@@ -582,7 +582,7 @@ static void TCIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
     chan = (interrupt - OS_INTR_EXI_0_TC) / 3;
     exi = &Ecb[chan];
     __OSMaskInterrupts(0x80000000U >> interrupt);
-    EXIClearInterrupts(chan, FALSE, TRUE, FALSE);
+    EXIClearInterrupts(chan, false, true, false);
     callback = exi->tcCallback;
     if (callback) {
         exi->tcCallback = 0;
@@ -697,17 +697,17 @@ void EXIInit(void)
     }
 }
 
-BOOL EXILock(EXIChannel chan, u32 dev, EXICallback unlockedCallback)
+bool EXILock(EXIChannel chan, u32 dev, EXICallback unlockedCallback)
 {
     EXIControl* exi = &Ecb[chan];
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
     if (exi->state & EXI_STATE_LOCKED) {
         if (unlockedCallback) {
             int i;
             for (i = 0; i < exi->items; i++) {
                 if (exi->queue[i].dev == dev) {
                     OSRestoreInterrupts(enabled);
-                    return FALSE;
+                    return false;
                 }
             }
             exi->queue[exi->items].callback = unlockedCallback;
@@ -715,7 +715,7 @@ BOOL EXILock(EXIChannel chan, u32 dev, EXICallback unlockedCallback)
             exi->items++;
         }
         OSRestoreInterrupts(enabled);
-        return FALSE;
+        return false;
     }
 
     exi->state |= EXI_STATE_LOCKED;
@@ -723,19 +723,19 @@ BOOL EXILock(EXIChannel chan, u32 dev, EXICallback unlockedCallback)
     SetExiInterruptMask(chan, exi);
 
     OSRestoreInterrupts(enabled);
-    return TRUE;
+    return true;
 }
 
-BOOL EXIUnlock(EXIChannel chan)
+bool EXIUnlock(EXIChannel chan)
 {
     EXIControl* exi = &Ecb[chan];
-    BOOL enabled;
+    bool enabled;
     EXICallback unlockedCallback;
 
     enabled = OSDisableInterrupts();
     if (!(exi->state & EXI_STATE_LOCKED)) {
         OSRestoreInterrupts(enabled);
-        return FALSE;
+        return false;
     }
     exi->state &= ~EXI_STATE_LOCKED;
     SetExiInterruptMask(chan, exi);
@@ -750,7 +750,7 @@ BOOL EXIUnlock(EXIChannel chan)
     }
 
     OSRestoreInterrupts(enabled);
-    return TRUE;
+    return true;
 }
 
 u32 EXIGetState(EXIChannel chan)
@@ -768,7 +768,7 @@ static void UnlockedHandler(EXIChannel chan, OSContext* context)
 s32 EXIGetID(EXIChannel chan, u32 dev, u32* id)
 {
     EXIControl* exi = &Ecb[chan];
-    BOOL err;
+    bool err;
     u32 cmd;
     s32 startTime;
 
@@ -804,7 +804,7 @@ s32 EXIGetID(EXIChannel chan, u32 dev, u32* id)
     }
 
     if (chan < 2 && dev == 0) {
-        BOOL enabled;
+        bool enabled;
         EXIDetach(chan);
         enabled = OSDisableInterrupts();
         err |= (startTime != __EXIProbeStartTime[chan]);

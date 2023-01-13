@@ -69,11 +69,11 @@ typedef void (*DVDLowCallback)(u32 intType);
 DVDLowCallback DVDLowClearCallback(void);
 
 void DVDInit(void);
-BOOL DVDOpen(char*, DVDFileInfo*);
-BOOL DVDClose(DVDFileInfo*);
-BOOL DVDChangeDir(char*);
-BOOL DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo);
-BOOL DVDReadAsyncPrio(DVDFileInfo* fileInfo, void* addr, s32 length, s32 offset,
+bool DVDOpen(char*, DVDFileInfo*);
+bool DVDClose(DVDFileInfo*);
+bool DVDChangeDir(char*);
+bool DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo);
+bool DVDReadAsyncPrio(DVDFileInfo* fileInfo, void* addr, s32 length, s32 offset,
                       DVDCallback callback, s32 prio);
 s32 DVDConvertPathToEntrynum(const char* pathPtr);
 void DVDReset(void);
@@ -81,14 +81,14 @@ s32 DVDCancel(DVDCommandBlock* block);
 s32 DVDGetDriveStatus(void);
 void __CARDSetDiskID(const DVDDiskID* id);
 
-BOOL DVDReadAbsAsyncForBS(DVDCommandBlock* block, void* addr, s32 length,
+bool DVDReadAbsAsyncForBS(DVDCommandBlock* block, void* addr, s32 length,
                           s32 offset, DVDCBCallback callback);
 
-BOOL DVDReadDiskID(DVDCommandBlock* block, DVDDiskID* diskID,
+bool DVDReadDiskID(DVDCommandBlock* block, DVDDiskID* diskID,
                    DVDCBCallback callback);
-BOOL DVDCheckDisk(void);
+bool DVDCheckDisk(void);
 void __DVDPrepareResetAsync(DVDCBCallback callback);
-BOOL DVDSetAutoInvalidation(BOOL autoInval);
+bool DVDSetAutoInvalidation(bool autoInval);
 
 #define DVDReadAsync(fileInfo, addr, length, offset, callback)                 \
     DVDReadAsyncPrio((fileInfo), (addr), (length), (offset), (callback), 2)

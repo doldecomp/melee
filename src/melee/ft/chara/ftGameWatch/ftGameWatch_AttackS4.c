@@ -76,14 +76,14 @@ void ftGameWatch_ItemTorchExitHitlag(HSD_GObj* fighter_gobj)
 // 0x8014A9F0
 // https://decomp.me/scratch/cYfwo // Check if Mr. Game & Watch is performing
 // Forward Smash
-BOOL ftGameWatch_ItemCheckTorchRemove(HSD_GObj* fighter_gobj)
+bool ftGameWatch_ItemCheckTorchRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
     if (fp->x10_action_state_index == AS_GAMEWATCH_ATTACKS4)
-        return FALSE;
+        return false;
 
-    return TRUE;
+    return true;
 }
 
 // 0x8014AA10
@@ -118,7 +118,7 @@ void ftGameWatch_AttackS4_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (fp->x2218_flag.bits.b0 != FALSE)
+    if (fp->x2218_flag.bits.b0 != false)
         func_8008A4D4(fighter_gobj);
 }
 

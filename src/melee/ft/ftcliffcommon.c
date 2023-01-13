@@ -9,7 +9,7 @@
 #include <melee/pl/pl_unknown_001.h>
 #include <Runtime/platform.h>
 
-BOOL func_80081298(HSD_GObj* gobj)
+bool func_80081298(HSD_GObj* gobj)
 {
     Fighter* other_fp;
     HSD_GObj* other_gobj;
@@ -17,7 +17,7 @@ BOOL func_80081298(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
     if (fp->input.x624_lstick_y <= -p_ftCommonData->x480) {
-        return FALSE;
+        return false;
     }
     if (((fp->x6F0_collData.x134_envFlags & 0x03000000) != 0) &&
         (((fp->x2228_flag.bits.b2 & 1) == 0)))
@@ -26,16 +26,16 @@ BOOL func_80081298(HSD_GObj* gobj)
         if (other_gobj == NULL) {
             func_80040048(fp->xC_playerID, fp->x221F_flag.bits.b4);
             func_80081370(gobj);
-            return TRUE;
+            return true;
         }
         other_fp = other_gobj->user_data;
         func_8003FFDC(other_fp->xC_playerID, other_fp->x221F_flag.bits.b4,
                       fp->xC_playerID, fp->x221F_flag.bits.b4,
                       other_fp->commonVars[0].CliffCommon.ledgeID);
         fp->x213C = other_fp->commonVars[0].CliffCommon.ledgeID;
-        return FALSE;
+        return false;
     }
-    return FALSE;
+    return false;
 }
 
 typedef struct _UnkParameterStruct {

@@ -204,7 +204,7 @@ f32 Stage_GetCamFixedFov(void)
     return stage_info.cam_info.fixed_cam_fov;
 }
 
-BOOL Stage_80224DC8(s32 arg)
+bool Stage_80224DC8(s32 arg)
 {
     return (arg == 0x3b || arg == 0x3f || arg == 0x42 || arg == 0x49 ||
             arg == 0x4c) != 0;
@@ -217,7 +217,7 @@ void Stage_80224E38(Vec3* arg0, s32 arg1)
 
 void Stage_80224E64(enum_t arg0, Vec3* arg_vec)
 {
-    BOOL bool1;
+    bool bool1;
 
     f32 counter_f;
     Vec3 internal_vec;
@@ -294,7 +294,7 @@ s32 Stage_80225074(s32 arg0)
 {
     s32 r31;
     s32 spC;
-    BOOL tmp;
+    bool tmp;
 
     if (func_8016B238() != 0) {
         if (stage_info.unk8C.b0 || arg0 == 2) {

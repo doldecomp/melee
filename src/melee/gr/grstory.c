@@ -286,9 +286,9 @@ void func_801E366C(HSD_GObj* gobj)
     }
 }
 
-static BOOL func_801E36D0(s32)
+static bool func_801E36D0(s32)
 {
-    return FALSE;
+    return false;
 }
 
 s32 func_801E36D8(Vec3* a, s32 unused, struct _HSD_JObj* joint)
@@ -297,9 +297,9 @@ s32 func_801E36D8(Vec3* a, s32 unused, struct _HSD_JObj* joint)
     func_8000B1CC(joint, NULL, &b);
 
     if (a->y + 1.0f > b.y) {
-        return TRUE;
+        return true;
     } else {
-        return FALSE;
+        return false;
     }
 }
 

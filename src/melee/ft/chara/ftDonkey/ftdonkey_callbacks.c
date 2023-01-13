@@ -22,7 +22,7 @@ void ftDonkey_8010D774(HSD_GObj* fighter_gobj)
     ftDonkey_DestroyAllEffects_SpecialHi(fighter_gobj);
 }
 
-void ftDonkey_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftDonkey_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -37,7 +37,7 @@ void ftDonkey_OnItemVisible(HSD_GObj* fighter_gobj)
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftDonkey_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftDonkey_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
@@ -84,7 +84,7 @@ void ftDonkey_OnKnockbackExit(HSD_GObj* fighter_gobj)
 void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj)
 {
     s32 unused[2]; /// can't remove with get inlines
-    BOOL bool1;
+    bool bool1;
     Fighter* fp = fighter_gobj->user_data;
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     CollData* colldata = &fp->x6F0_collData;

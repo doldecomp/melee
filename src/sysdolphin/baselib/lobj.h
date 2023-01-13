@@ -158,8 +158,8 @@ void HSD_LObjReqAnimAll(HSD_LObj* lobj, f32 startframe);
 void HSD_LObjGetLightVector(HSD_LObj* lobj, Vec3* dir);
 void HSD_LObjSetup(HSD_LObj* lobj, GXColor color, f32 shininess);
 
-BOOL HSD_LObjGetPosition(HSD_LObj*, Vec3*);
-BOOL HSD_LObjGetInterest(HSD_LObj*, Vec3*);
+bool HSD_LObjGetPosition(HSD_LObj*, Vec3*);
+bool HSD_LObjGetInterest(HSD_LObj*, Vec3*);
 
 HSD_WObj* HSD_LObjGetPositionWObj(HSD_LObj* lobj);
 HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj);

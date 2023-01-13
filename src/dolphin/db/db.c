@@ -16,13 +16,13 @@ void DBInit(void)
     return;
 }
 
-BOOL DBIsDebuggerPresent(void)
+bool DBIsDebuggerPresent(void)
 {
     if (__DBInterface == NULL) {
         return 0;
     }
 
-    return (BOOL) __DBInterface->bPresent;
+    return (bool) __DBInterface->bPresent;
 }
 
 static void __DBExceptionDestinationAux(void)

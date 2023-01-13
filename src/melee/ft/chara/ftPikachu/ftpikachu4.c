@@ -336,7 +336,7 @@ void ftPikachu_80126614(HSD_GObj* fighter_gobj)
     }
 }
 
-BOOL ftPikachu_GetBool(HSD_GObj* fighter_gobj)
+bool ftPikachu_GetBool(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter2 = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr2 = fighter2->x2D4_specialAttributes;
@@ -352,7 +352,7 @@ BOOL ftPikachu_GetBool(HSD_GObj* fighter_gobj)
 void ftPikachu_801267C8(HSD_GObj* fighter_gobj)
 {
     s32 unused[5];
-    BOOL bool0;
+    bool bool0;
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
     CollData* collData = &fp->x6F0_collData;

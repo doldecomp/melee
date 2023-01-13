@@ -152,7 +152,7 @@ lbl_80081CE0:
 extern unk_t func_80081A00();
 
 #pragma push
-asm BOOL func_80081D0C(HSD_GObj* fighter_gobj)
+asm bool func_80081D0C(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80081D0C 0007E8EC  7C 08 02 A6 */	mflr r0
@@ -515,7 +515,7 @@ lbl_800821BC:
 #pragma pop
 
 #pragma push
-asm BOOL func_800821DC()
+asm bool func_800821DC()
 { // clang-format off
     nofralloc
 /* 800821DC 0007EDBC  7C 08 02 A6 */	mflr r0
@@ -575,7 +575,7 @@ lbl_80082284:
 #pragma pop
 
 #pragma push
-asm BOOL EnvColl_CheckGroundAndLedge(HSD_GObj* fighter_gobj, s32 direction){
+asm bool EnvColl_CheckGroundAndLedge(HSD_GObj* fighter_gobj, s32 direction){
     // clang-format off
     nofralloc
 /* 800822A4 0007EE84  7C 08 02 A6 */	mflr r0
@@ -652,7 +652,7 @@ lbl_8008237C:
 unk_t func_80082838();
 
 #pragma push
-asm BOOL func_8008239C(HSD_GObj* fighter_gobj, s32 facing_direction,
+asm bool func_8008239C(HSD_GObj* fighter_gobj, s32 facing_direction,
                        f32* height_attributes)
 { // clang-format off
     nofralloc
@@ -731,7 +731,7 @@ lbl_8008248C:
 #pragma pop
 
 #pragma push
-asm BOOL func_800824A0(HSD_GObj*, ftCollisionBox*)
+asm bool func_800824A0(HSD_GObj*, ftCollisionBox*)
 { // clang-format off
     nofralloc
 /* 800824A0 0007F080  7C 08 02 A6 */	mflr r0
@@ -915,7 +915,7 @@ lbl_800826EC:
 #pragma pop
 
 #pragma push
-asm BOOL func_80082708(HSD_GObj* fighter_gobj)
+asm bool func_80082708(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80082708 0007F2E8  7C 08 02 A6 */	mflr r0
@@ -962,7 +962,7 @@ lbl_80082788:
 #pragma pop
 
 #pragma push
-asm BOOL func_800827A0(HSD_GObj* fighter_gobj)
+asm bool func_800827A0(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 800827A0 0007F380  7C 08 02 A6 */	mflr r0
@@ -1037,7 +1037,7 @@ lbl_80082880:
 #pragma pop
 
 #pragma push
-asm BOOL func_80082888(HSD_GObj*, ftCollisionBox*)
+asm bool func_80082888(HSD_GObj*, ftCollisionBox*)
 { // clang-format off
     nofralloc
 /* 80082888 0007F468  7C 08 02 A6 */	mflr r0
@@ -1179,7 +1179,7 @@ lbl_80082A50:
 #pragma pop
 
 #pragma push
-asm BOOL func_80082A68(HSD_GObj* fighter_gobj)
+asm bool func_80082A68(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80082A68 0007F648  7C 08 02 A6 */	mflr r0
@@ -3618,7 +3618,7 @@ asm void func_800849EC(Fighter*, Fighter*)
 #pragma pop
 
 #pragma push
-asm BOOL func_80084A18(HSD_GObj*)
+asm bool func_80084A18(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80084A18 000815F8  7C 08 02 A6 */	mflr r0

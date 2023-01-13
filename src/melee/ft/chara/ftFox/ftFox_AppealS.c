@@ -5,19 +5,19 @@
 #include <melee/it/item2.h>
 #include <melee/pl/pl_unknown_001.h>
 
-BOOL ftFox_AppealS_CheckIfUsed(Fighter* fp)
+bool ftFox_AppealS_CheckIfUsed(Fighter* fp)
 {
     s32* attackCount = Player_GetTotalAttackCountPtr((s32) fp->xC_playerID);
     if ((func_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0U) &&
-        (func_801E2D14() != FALSE))
+        (func_801E2D14() != false))
     {
-        return TRUE;
+        return true;
     }
 
-    return FALSE;
+    return false;
 }
 
-static inline BOOL ftFox_CheckAppealSCount(void)
+static inline bool ftFox_CheckAppealSCount(void)
 {
     int i;
     s32* attackCount;
@@ -26,30 +26,30 @@ static inline BOOL ftFox_CheckAppealSCount(void)
         attackCount = Player_GetTotalAttackCountPtr(i);
 
         if (func_800386D8(attackCount, 0x72))
-            return TRUE;
+            return true;
     }
 
-    return FALSE;
+    return false;
 }
 
-BOOL ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
+bool ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     s32 ftKind = fp->x4_fighterKind;
 
     if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) &&
-        (func_801E2CE8() != FALSE) &&
-        ((fp->input.x65C_heldInputs & HSD_BUTTON_DPAD_DOWN) == FALSE) &&
-        ((u8) fp->x682 == TRUE))
+        (func_801E2CE8() != false) &&
+        ((fp->input.x65C_heldInputs & HSD_BUTTON_DPAD_DOWN) == false) &&
+        ((u8) fp->x682 == true))
     {
         if (ftFox_CheckAppealSCount() == 0) {
             ftFox_AppealS_Action(fighter_gobj);
             func_80040120(fp->xC_playerID, fp->x221F_flag.bits.b4);
-            return TRUE;
+            return true;
         }
     }
 
-    return FALSE;
+    return false;
 }
 
 f32 setFloatOrder(void)
@@ -62,9 +62,9 @@ f32 setFloatOrder2(void)
     return 1.0f;
 }
 
-static inline BOOL ftFox_AppealS_GetLR(f32 x1, f32 x2)
+static inline bool ftFox_AppealS_GetLR(f32 x1, f32 x2)
 {
-    return x1 == x2 ? FALSE : TRUE;
+    return x1 == x2 ? false : true;
 }
 
 static s32 ASID_AppealS[2][3] = {
@@ -106,23 +106,23 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
 
     if (fp->x2210_ThrowFlags.b3 != 0) {
         fp->x2210_ThrowFlags.b3 = 0;
-        flag = TRUE;
+        flag = true;
     } else {
-        flag = FALSE;
+        flag = false;
     }
 
-    if (flag != FALSE) {
+    if (flag != false) {
         ftKind = fp->x4_fighterKind;
 
         switch (ftKind) {
         case FTKIND_FOX:
-            if (func_801E2B80() != FALSE)
+            if (func_801E2B80() != false)
                 fp->cb.x21E0_callback_OnDeath = ftFox_AppealS_OnTakeDamage;
 
             break;
 
         case FTKIND_FALCO:
-            if (func_801E2C34() != FALSE)
+            if (func_801E2C34() != false)
                 fp->cb.x21E0_callback_OnDeath = ftFox_AppealS_OnTakeDamage;
 
             break;

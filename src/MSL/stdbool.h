@@ -6,12 +6,12 @@
 /// A signed integer used to contain boolean values
 /// @todo Rename to @c bool.
 /// @todo Maybe some versions of MetroWerks support @c _Bool?
-typedef int BOOL;
+typedef int bool;
 
-/// #BOOL true
-#define TRUE 1
+/// #bool true
+#define true 1
 
-/// #BOOL false
-#define FALSE 0
+/// #bool false
+#define false 0
 
 #endif

@@ -38,7 +38,7 @@ void func_8015BDB4(HSD_GObj* arg0)
     Fighter* fp = arg0->user_data;
     Gm_PKind kind = Player_GetPlayerSlotType(fp->xC_playerID);
     { // TODO: assert macro
-        BOOL bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss ||
+        bool bad = (kind == Gm_PKind_Human || kind == Gm_PKind_Boss ||
                     kind == Gm_PKind_Cpu);
         if (!bad) {
             OSReport("boss is human or boss!\n");
@@ -189,7 +189,7 @@ HSD_GObj* func_8015C244(HSD_GObj* arg0, Vec3* arg1)
     return func_8008627C(arg1, arg0);
 }
 
-BOOL func_8015C270(void)
+bool func_8015C270(void)
 {
     if (func_8015C44C(FTKIND_MASTERH) == 0x157) {
         return 1;
@@ -197,7 +197,7 @@ BOOL func_8015C270(void)
     return 0;
 }
 
-BOOL func_8015C2A8(void)
+bool func_8015C2A8(void)
 {
     if (func_8015C44C(FTKIND_CREZYH) == 0x183) {
         return 1;
@@ -205,7 +205,7 @@ BOOL func_8015C2A8(void)
     return 0;
 }
 
-BOOL func_8015C2E0(void)
+bool func_8015C2E0(void)
 {
     s32 x = func_8015C44C(FTKIND_MASTERH);
     if (x == 0x158 || x == 0x159) {
@@ -214,7 +214,7 @@ BOOL func_8015C2E0(void)
     return 0;
 }
 
-BOOL func_8015C31C(void)
+bool func_8015C31C(void)
 {
     s32 x = func_8015C44C(FTKIND_CREZYH);
     if (x == 0x181 || x == 0x182) {
@@ -223,7 +223,7 @@ BOOL func_8015C31C(void)
     return 0;
 }
 
-BOOL func_8015C358(void)
+bool func_8015C358(void)
 {
     HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
     if (gobj && ((Fighter*) gobj->user_data)->x221F_flag.bits.b3) {
@@ -232,7 +232,7 @@ BOOL func_8015C358(void)
     return 0;
 }
 
-BOOL func_8015C3A0(void)
+bool func_8015C3A0(void)
 {
     HSD_GObj* gobj = func_8015C3E8(FTKIND_CREZYH);
     if (gobj && ((Fighter*) gobj->user_data)->x221F_flag.bits.b3) {

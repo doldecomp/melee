@@ -33,7 +33,7 @@ s32 CARDProbeEx(EXIChannel chan, s32* memSize, s32* sectorSize)
 {
     u32 id;
     CARDControl* card;
-    BOOL enabled;
+    bool enabled;
     s32 result;
     int probe;
 
@@ -153,7 +153,7 @@ s32 DoMount(EXIChannel chan)
                 checkSum += card->id[i];
             }
             sram->flashIDCheckSum[chan] = (u8) ~checkSum;
-            __OSUnlockSramEx(TRUE);
+            __OSUnlockSramEx(true);
 
             return result;
         } else {
@@ -164,7 +164,7 @@ s32 DoMount(EXIChannel chan)
             for (i = 0; i < 12; i++) {
                 checkSum += sram->flashID[chan][i];
             }
-            __OSUnlockSramEx(FALSE);
+            __OSUnlockSramEx(false);
             if (sram->flashIDCheckSum[chan] != (u8) ~checkSum) {
                 result = CARD_RESULT_IOERROR;
                 goto error;
@@ -178,7 +178,7 @@ s32 DoMount(EXIChannel chan)
 
             sram = __OSLockSramEx();
             vendorID = *(u16*) sram->flashID[chan];
-            __OSUnlockSramEx(FALSE);
+            __OSUnlockSramEx(false);
 
             if (__CARDVendorID == 0xFFFF || vendorID != __CARDVendorID) {
                 result = CARD_RESULT_WRONGDEVICE;
@@ -187,7 +187,7 @@ s32 DoMount(EXIChannel chan)
         }
         card->mountStep = 2;
 
-        result = __CARDEnableInterrupt(chan, TRUE);
+        result = __CARDEnableInterrupt(chan, true);
         if (result < 0) {
             goto error;
         }
@@ -258,7 +258,7 @@ s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
                    CARDCallback attachCallback)
 {
     CARDControl* card;
-    BOOL enabled;
+    bool enabled;
 
     if (chan < 0 || 2 <= chan) {
         return CARD_RESULT_FATAL_ERROR;
@@ -298,7 +298,7 @@ s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
     }
 
     card->mountStep = 0;
-    card->attached = TRUE;
+    card->attached = true;
     EXISetExiCallback(chan, 0);
     OSCancelAlarm(&card->alarm);
 
@@ -322,7 +322,7 @@ s32 CARDMountAsync(s32 chan, void* workArea, CARDCallback detachCallback,
 static void DoUnmount(s32 chan, s32 result)
 {
     CARDControl* card;
-    BOOL enabled;
+    bool enabled;
 
     card = &__CARDBlock[chan];
     enabled = OSDisableInterrupts();
@@ -330,7 +330,7 @@ static void DoUnmount(s32 chan, s32 result)
         EXISetExiCallback(chan, 0);
         EXIDetach(chan);
         OSCancelAlarm(&card->alarm);
-        card->attached = FALSE;
+        card->attached = false;
         card->result = result;
         card->mountStep = 0;
     }

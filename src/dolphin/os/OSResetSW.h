@@ -5,7 +5,7 @@
 #include <Runtime/platform.h>
 
 struct _OSResetSW_Unk1;
-typedef BOOL (*OSResetSW_Predicate)(struct _OSResetSW_Unk1*);
+typedef bool (*OSResetSW_Predicate)(struct _OSResetSW_Unk1*);
 typedef union {
     OSResetSW_Predicate predicate;
     struct {
@@ -44,13 +44,13 @@ typedef struct _OSResetSW_Unk1 {
     u8 xB8_pad[0xBC - 0xB8];
     u32 xBC_flags;
     u8 xC0_pad[0xC4 - 0xC0];
-    BOOL xC4;
+    bool xC4;
     u8 xCC_pad[0xD0 - 0xCC];
-    BOOL xD0;
+    bool xD0;
     OSResetSW_Predicate xD4_predicate;
 } OSResetSW_Unk1;
 
-typedef BOOL (*OSResetSW_MulticastPredicate)(OSResetSW_Predicate*);
-BOOL OSGetResetSwitchState(void);
+typedef bool (*OSResetSW_MulticastPredicate)(OSResetSW_Predicate*);
+bool OSGetResetSwitchState(void);
 
 #endif

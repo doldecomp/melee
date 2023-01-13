@@ -8,7 +8,7 @@ static GXFifoObj* CPUFifo;
 static GXFifoObj* GPFifo;
 static OSThread* __GXCurrentThread;
 static GXBool CPGPLinked;
-static BOOL GXOverflowSuspendInProgress;
+static bool GXOverflowSuspendInProgress;
 static void (*BreakPointCB)(void);
 static s32 __GXOverflowCount;
 
@@ -73,7 +73,7 @@ void GXInitFifoBase(GXFifoObj* fifo, void* base, u32 size)
 void GXInitFifoPtrs(GXFifoObj* fifo, void* readPtr, void* writePtr)
 {
     __GXFifoObj* __fifo = (__GXFifoObj*) fifo;
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
 
     __fifo->readPtr = readPtr;
     __fifo->writePtr = writePtr;
@@ -94,7 +94,7 @@ void GXInitFifoLimits(GXFifoObj* fifo, u32 hiWaterMark, u32 loWaterMark)
 void GXSetCPUFifo(GXFifoObj* fifo)
 {
     __GXFifoObj* __fifo = (__GXFifoObj*) fifo;
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
 
     CPUFifo = fifo;
     if (fifo == GPFifo) {
@@ -114,7 +114,7 @@ void GXSetCPUFifo(GXFifoObj* fifo)
 
         if (CPGPLinked) {
             __GXFifoLink(0);
-            CPGPLinked = FALSE;
+            CPGPLinked = false;
         }
         __GXWriteFifoIntEnable(0, 0);
 
@@ -142,7 +142,7 @@ void GXSetCPUFifo(GXFifoObj* fifo)
 void GXSetGPFifo(GXFifoObj* fifo)
 {
     __GXFifoObj* __fifo = (__GXFifoObj*) fifo;
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
 
     __GXFifoReadDisable();
     __GXWriteFifoIntEnable(0, 0);
@@ -166,11 +166,11 @@ void GXSetGPFifo(GXFifoObj* fifo)
     __sync();
 
     if (CPUFifo == GPFifo) {
-        CPGPLinked = TRUE;
+        CPGPLinked = true;
         __GXWriteFifoIntEnable(1, 0);
         __GXFifoLink(1);
     } else {
-        CPGPLinked = FALSE;
+        CPGPLinked = false;
         __GXWriteFifoIntEnable(0, 0);
         __GXFifoLink(0);
     }
@@ -184,7 +184,7 @@ void __GXFifoInit(void)
     __OSSetInterruptHandler(OS_INTR_PI_CP, GXCPInterruptHandler);
     __OSUnmaskInterrupts(0x4000);
     __GXCurrentThread = OSGetCurrentThread();
-    GXOverflowSuspendInProgress = FALSE;
+    GXOverflowSuspendInProgress = false;
     CPUFifo = NULL;
     GPFifo = NULL;
 }
@@ -207,7 +207,7 @@ static void __GXFifoReadDisable(void)
 
 static void __GXFifoLink(GXBool flag)
 {
-    BOOL flag32 = flag ? TRUE : FALSE;
+    bool flag32 = flag ? true : false;
     u32* x8 = (u32*) &__GXContexts.main->x8;
     INSERT_FIELD(*x8, flag32, 1, 4);
     x8 = (u32*) &__GXContexts.main->x8;

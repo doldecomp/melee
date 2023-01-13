@@ -25,7 +25,7 @@
 extern HSD_GObj* lbl_804D7814;
 extern HSD_PerfStat HSD_PerfCurrentStat;
 extern HSD_MObjInfo ftMObj;
-BOOL hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p);
+bool hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p);
 
 unk_t func_80074ACC();
 u32 func_8007506C(s32 ftkind, u32 part);
@@ -112,9 +112,9 @@ void Fighter_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
         PSMTXConcat(rmtx, temp_mtx, ft_jobj_scale.mtx);
         HSD_MtxInverse(rmtx, temp_mtx);
         PSMTXConcat(ft_jobj_scale.mtx, temp_mtx, ft_jobj_scale.mtx);
-        ft_jobj_scale.has_z_scale = TRUE;
+        ft_jobj_scale.has_z_scale = true;
     } else {
-        ft_jobj_scale.has_z_scale = FALSE;
+        ft_jobj_scale.has_z_scale = false;
     }
 }
 
@@ -1086,7 +1086,7 @@ void Fighter_SetupParts(HSD_GObj* fighter_obj)
             continue;
         }
 
-        while (TRUE) {
+        while (true) {
             if (JOBJ_PARENT(jobj) == NULL) {
                 // Finished
                 jobj = NULL;
@@ -3035,7 +3035,7 @@ lbl_80075E54:
 #pragma pop
 
 #pragma push
-asm f32 func_80075E78(Fighter*, BOOL)
+asm f32 func_80075E78(Fighter*, bool)
 { // clang-format off
     nofralloc
 /* 80075E78 00072A58  7C 08 02 A6 */	mflr r0

@@ -3,7 +3,7 @@
 
 #include <Runtime/platform.h>
 
-typedef BOOL (*OSResetFunction)(BOOL);
+typedef bool (*OSResetFunction)(bool);
 
 typedef struct OSResetFunctionInfo OSResetFunctionInfo;
 struct OSResetFunctionInfo {
@@ -13,7 +13,7 @@ struct OSResetFunctionInfo {
     OSResetFunctionInfo* prev;
 };
 
-void OSResetSystem(BOOL reset, u32 resetCode, BOOL forceMenu);
+void OSResetSystem(bool reset, u32 resetCode, bool forceMenu);
 void OSRegisterResetFunction(OSResetFunctionInfo* func);
 void __OSDoHotReset(s32 arg0);
 

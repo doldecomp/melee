@@ -22,9 +22,9 @@ typedef struct ftMewtwoSpecialS {
 } ftMewtwoSpecialS;
 
 typedef struct ftMewtwoSpecialN {
-    BOOL isFull;
+    bool isFull;
     s32 x2344;
-    BOOL x2348;
+    bool x2348;
     s32 releaseLag;
     f32 chargeLevel; // 0x2350 - Charge level of Shadow Ball
 

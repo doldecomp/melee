@@ -10,19 +10,19 @@ void EXI2_EnableInterrupts()
     return;
 }
 
-BOOL EXI2_Poll()
+bool EXI2_Poll()
 {
-    return FALSE;
+    return false;
 }
 
-BOOL EXI2_ReadN()
+bool EXI2_ReadN()
 {
-    return FALSE;
+    return false;
 }
 
-BOOL EXI2_WriteN()
+bool EXI2_WriteN()
 {
-    return FALSE;
+    return false;
 }
 
 void EXI2_Reserve()
@@ -35,7 +35,7 @@ void EXI2_Unreserve()
     return;
 }
 
-BOOL AMC_IsStub()
+bool AMC_IsStub()
 {
-    return TRUE;
+    return true;
 }

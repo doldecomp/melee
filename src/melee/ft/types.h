@@ -1050,8 +1050,8 @@ struct S_TEMP4 {
 struct SpecialAttrs_Mario {
     /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo //
     /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo //
-    /* 0x2234 */ BOOL x2234_tornadoCharge;
-    /* 0x2238 */ BOOL x2238_isCapeBoost;
+    /* 0x2234 */ bool x2234_tornadoCharge;
+    /* 0x2238 */ bool x2238_isCapeBoost;
     /* 0x223C */ HSD_GObj* x223C_capeGObj;
     /* 0x2240 */ u32 x2240;
 };
@@ -1061,8 +1061,8 @@ struct SpecialAttrs_Fox {
 };
 
 struct SpecialAttrs_Captain {
-    /* 0x222C */ BOOL x222C_isSpecialSStartGFX;
-    /* 0x2230 */ BOOL x2230_isSpecialSGFX;
+    /* 0x222C */ bool x222C_isSpecialSStartGFX;
+    /* 0x2230 */ bool x2230_isSpecialSGFX;
 };
 
 struct SpecialAttrs_DK {
@@ -1200,11 +1200,11 @@ struct SpecialAttrs_Mewtwo {
     /* 0x2234 */ s32
         x2234_shadowBallCharge; // Number of cycles Shadow Ball has been charged
     /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
-    /* 0x223C */ BOOL x223C_isConfusionBoost;
+    /* 0x223C */ bool x223C_isConfusionBoost;
 };
 
 struct SpecialAttrs_Luigi {
-    /* 0x222C */ BOOL x222C_cycloneCharge;
+    /* 0x222C */ bool x222C_cycloneCharge;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
 };

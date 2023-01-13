@@ -34,7 +34,7 @@ typedef struct _UnkStage6B0 {
     s32 x34;
     s32 x38;
     f32 x3C, x40, x44, x48;
-    BOOL x4C_fixed_cam;
+    bool x4C_fixed_cam;
     f32 x50, x54, x58, x5C, x60, x64;
     s16 x68;
     u8 x6C_pad[0xB0 - 0x6A];

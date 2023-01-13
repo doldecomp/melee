@@ -7,14 +7,14 @@
 #include <melee/ft/ftparts.h>
 #include <melee/lb/lbmthp.h>
 
-BOOL func_800EAD64(HSD_GObj* fighter_gobj)
+bool func_800EAD64(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
     if (fp->sa.link.x2234)
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 void ftLink_OnDeath(HSD_GObj* fighter_gobj)
@@ -90,7 +90,7 @@ void ftLink_OnItemVisible(HSD_GObj* fighter_gobj)
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, BOOL arg1)
+void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, bool arg1)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (func_8026B2B4(fp->x1974_heldItem) == 1) {
@@ -100,12 +100,12 @@ void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, BOOL arg1)
     ftLink_OnItemDrop(fighter_gobj, arg1);
 }
 
-void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
-void ftLink_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter* fp = getFighter(gobj);
     Fighter_OnItemDrop(gobj, bool1, 1, 1);

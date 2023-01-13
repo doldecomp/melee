@@ -5,7 +5,7 @@
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftFoxSpecialN {
-    BOOL isBlasterLoop; // 0x2340 - Check to allow repeated blaster shots
+    bool isBlasterLoop; // 0x2340 - Check to allow repeated blaster shots
 
 } ftFoxSpecialN;
 
@@ -36,14 +36,14 @@ typedef struct ftFoxSpecialLw {
                     // with no lag once these frames have passed
     s32 turnFrames; // 0x2344 - Number of frames it takes Fox/Falco to turn
                     // around on command
-    BOOL isRelease; // 0x2348 - Check if Fox/Falco is no longer holding B
+    bool isRelease; // 0x2348 - Check if Fox/Falco is no longer holding B
     s32 gravityDelay; // 0x234C - Number of frames to pass before gravity takes
                       // effect
 
 } ftFoxSpecialLw;
 
 typedef struct ftFoxAppealS {
-    BOOL facingDir; // 0x2340 - Fox/Falco's facing direction as a boolean
+    bool facingDir; // 0x2340 - Fox/Falco's facing direction as a boolean
                     // variable, used to load indexed ASIDs from the AppealS
                     // struct
     s32 animCount; // 0x2344 - Incremented every time one of the three stages of

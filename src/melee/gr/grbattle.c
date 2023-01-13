@@ -188,7 +188,7 @@ static void func_80219E6C(HSD_GObj* gobj)
 
 static s32 func_8021A10C(void)
 {
-    return FALSE;
+    return false;
 }
 
 static void func_8021A114() {}
@@ -205,7 +205,7 @@ static void func_8021A11C(HSD_GObj* gobj)
 
 static s32 func_8021A16C(void)
 {
-    return FALSE;
+    return false;
 }
 
 static void func_8021A174(HSD_GObj* gobj)
@@ -372,9 +372,9 @@ static void func_8021A3BC(HSD_GObj* gobj)
 
 static void func_8021A60C() {}
 
-static BOOL func_8021A610(s32)
+static bool func_8021A610(s32)
 {
-    return FALSE;
+    return false;
 }
 
 static s32 func_8021A618()

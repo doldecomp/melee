@@ -10,11 +10,11 @@ typedef struct ftNessYoyo {
     s32 yoyoRehitTimer;   // 0x2344 - Frames until Up/Down Smash hitbox
                         // automatically refreshes; part of why the Yo-Yo Glitch
                         // occurs
-    BOOL isChargeDisable; // 0x2348 - BOOL to indicate whether Ness can charge
+    bool isChargeDisable; // 0x2348 - bool to indicate whether Ness can charge
                           // the Yo-Yo
-    BOOL isPosUpdateMod;  // 0x234C - BOOL to indicate whether Yo-Yo hitbox
+    bool isPosUpdateMod;  // 0x234C - bool to indicate whether Yo-Yo hitbox
                           // position should update based on raw Vec3 input
-                          // (FALSE) or modified calculations (TRUE)
+                          // (false) or modified calculations (true)
 
 } ftNessYoyo;
 
@@ -47,7 +47,7 @@ typedef struct ftNessSpecialHi {
     f32 facingDir;    // 0x2370 - Facing direction change frorm PK Thunder
                       // collision
     Vec3 unkVector1;  // 0x2374 through 0x237C - Unused vector
-    s32 jibakuGFX; // 0x2380 - BOOL used in a weird way to switch to PK Thunder
+    s32 jibakuGFX; // 0x2380 - bool used in a weird way to switch to PK Thunder
                    // 2 GFX
     f32 fallAccel; // 0x2384 - Fall acceleration of PK Thunder 2 (Self-Hit)
     f32 unkVar3;   // 0x2388 - Set various times but never actually used?
@@ -60,7 +60,7 @@ typedef struct ftNessSpecialLw {
                     // B is not being held; PSI Magnet is immediately released
                     // with no lag once these frames have passed
     s32 turnFrames; // 0x2344 - Unused turnaround timer
-    BOOL isRelease; // 0x2348 - Check if Ness is no longer holding B
+    bool isRelease; // 0x2348 - Check if Ness is no longer holding B
     s32 gravityDelay; // 0x234C - Number of frames to pass before gravity takes
                       // effect
 

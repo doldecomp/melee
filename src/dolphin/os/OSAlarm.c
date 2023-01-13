@@ -99,7 +99,7 @@ void OSSetAlarm(OSAlarm* alarm, OSTime tick, OSAlarmHandler handler)
 void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period,
                         OSAlarmHandler handler)
 {
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
     alarm->period = period;
     alarm->start = __OSTimeToSystemTime(start);
     InsertAlarm(alarm, 0, handler);
@@ -109,7 +109,7 @@ void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period,
 void OSCancelAlarm(OSAlarm* alarm)
 {
     OSAlarm* next;
-    BOOL enabled;
+    bool enabled;
 
     enabled = OSDisableInterrupts();
 

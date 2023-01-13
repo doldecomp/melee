@@ -70,10 +70,10 @@ typedef struct _ftPikachuAttributes {
 void ftPikachu_OnLoadForPichu(Fighter* fp);
 void ftPikachu_OnLoad(HSD_GObj* fighter_gobj);
 void ftPikachu_OnDeath(HSD_GObj* fighter_gobj);
-void ftPikachu_OnItemPickup(HSD_GObj* fighter_gobj, BOOL arg1);
+void ftPikachu_OnItemPickup(HSD_GObj* fighter_gobj, bool arg1);
 void ftPikachu_OnItemInvisible(HSD_GObj* fighter_gobj);
 void ftPikachu_OnItemVisible(HSD_GObj* fighter_gobj);
-void ftPikachu_OnItemDrop(HSD_GObj* fighter_gobj, BOOL arg1);
+void ftPikachu_OnItemDrop(HSD_GObj* fighter_gobj, bool arg1);
 void ftPikachu_8012467C(HSD_GObj* fighter_gobj);
 void ftPikachu_801246C0(HSD_GObj* fighter_gobj);
 void ftPikachu_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
@@ -194,10 +194,10 @@ void ftPikachu_ActionChangeUpdateVel_801274AC(HSD_GObj* fighter_gobj);
 void ftPikachu_ActionChangeUpdateVel_80127534(HSD_GObj* fighter_gobj);
 
 // pika5
-BOOL ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj);
+bool ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj);
 void ftPikachu_80127608(HSD_GObj* fighter_gobj);
 void ftPikachu_SetState_8012764C(HSD_GObj* fighter_gobj);
-BOOL ftPikachu_8012765C(HSD_GObj* fighter_gobj);
+bool ftPikachu_8012765C(HSD_GObj* fighter_gobj);
 void ftPikachu_SetState_8012779C(HSD_GObj* fighter_gobj);
 void ftPikachu_EfSpawn_801277AC(HSD_GObj* fighter_gobj);
 void ftPikachu_SpecialLw_StartAction(HSD_GObj* fighter_gobj);

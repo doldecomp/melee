@@ -35,7 +35,7 @@ static void PADEnable(s32 chan)
 
 static void PADDisable(s32 chan)
 {
-    BOOL enabled;
+    bool enabled;
     u32 chanBit;
 
     enabled = OSDisableInterrupts();

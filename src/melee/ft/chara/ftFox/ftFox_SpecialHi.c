@@ -19,11 +19,11 @@ void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if (fp->x2219_flag.bits.b0 == FALSE) {
+    if (fp->x2219_flag.bits.b0 == false) {
         ef_Spawn(0x48C, fighter_gobj,
                  fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj);
 
-        fp->x2219_flag.bits.b0 = TRUE;
+        fp->x2219_flag.bits.b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -35,11 +35,11 @@ void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if (fp->x2219_flag.bits.b0 == FALSE) {
+    if (fp->x2219_flag.bits.b0 == false) {
         ef_Spawn(0x48B, fighter_gobj,
                  fp->x5E8_fighterBones[func_8007500C(fp, 1)].x0_jobj);
 
-        fp->x2219_flag.bits.b0 = TRUE;
+        fp->x2219_flag.bits.b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -151,7 +151,7 @@ void ftFox_SpecialHiHoldAir_Phys(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHiHold_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == FALSE) {
+    if (func_80082708(fighter_gobj) == false) {
         ftFox_SpecialHiHold_GroundToAir(fighter_gobj);
     }
 }
@@ -167,7 +167,7 @@ void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* fighter_gobj)
     else
         facingDir = 1;
 
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, facingDir) != FALSE) {
+    if (EnvColl_CheckGroundAndLedge(fighter_gobj, facingDir) != false) {
         ftFox_SpecialHiHoldAir_AirToGround(fighter_gobj);
         return;
     }
@@ -285,7 +285,7 @@ void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 
     fp->foxVars[0].SpecialHi.unk2 += 1;
 
-    if (func_80082708(fighter_gobj) == FALSE) {
+    if (func_80082708(fighter_gobj) == false) {
         ftFox_SpecialHi_GroundToAir(fighter_gobj);
         return;
     }
@@ -298,17 +298,17 @@ void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     }
 }
 
-static inline BOOL ftFox_SpecialHi_IsBound(HSD_GObj* fighter_gobj)
+static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (fp->foxVars[0].SpecialHi.unk2 >= foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR)
-        return TRUE;
-    else if (func_8009A134(fighter_gobj) != FALSE)
-        return FALSE;
+        return true;
+    else if (func_8009A134(fighter_gobj) != false)
+        return false;
     else
-        return TRUE;
+        return true;
 }
 
 /// @todo Rework this entire match.
@@ -320,8 +320,8 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
     ftFoxAttributes* foxAttrs = foxAttrs = getFtSpecialAttrs(fp);
     CollData* collData = collData = getFtColl(fp);
 
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_BOTH) != FALSE) {
-        if (ftFox_SpecialHi_IsBound(fighter_gobj) != FALSE) {
+    if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_BOTH) != false) {
+        if (ftFox_SpecialHi_IsBound(fighter_gobj) != false) {
             if ((!(collData->x134_envFlags & 0x18000)) ||
                 (!(lbvector_AngleXY(&collData->x14C_ground.normal,
                                     &fp->x80_self_vel) <
@@ -340,7 +340,7 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
      * sliver of sense but it matches so whatever :D
      * @todo This match is definitely fake.
      */
-    if (func_80081298(fighter_gobj) == FALSE) {
+    if (func_80081298(fighter_gobj) == false) {
         s32 envFlags = collData->x134_envFlags;
         f32 var;
         do {
@@ -368,7 +368,7 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
             else
                 continue;
 
-        } while (FALSE); // What?
+        } while (false); // What?
 
         return;
 
@@ -402,7 +402,7 @@ void ftFox_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj)
         (FIGHTER_HIT_NOUPDATE | FTFOX_SPECIALHI_COLL_FLAG), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    fp->x2223_flag.bits.b4 = TRUE;
+    fp->x2223_flag.bits.b4 = true;
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateLaunchGFX;
 }
 
@@ -439,7 +439,7 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
 
         if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &sp20) <
               HALF_PI32) &&
-            (func_8009A134(fighter_gobj) == FALSE))
+            (func_8009A134(fighter_gobj) == false))
         {
             func_8007D9FC(fp);
 
@@ -597,7 +597,7 @@ void ftFox_SpecialHiLanding_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
-    if (func_80082708(fighter_gobj) == FALSE) {
+    if (func_80082708(fighter_gobj) == false) {
         func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
                       foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                       foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
@@ -611,7 +611,7 @@ void ftFox_SpecialHiFall_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_BOTH) != FALSE) {
+    if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_BOTH) != false) {
         ftFox_SpecialHiFall_Action(fighter_gobj);
         return;
     }
@@ -708,7 +708,7 @@ void ftFox_SpecialHiBound_IASA(HSD_GObj* fighter_gobj)
 void ftFox_SpecialHiBound_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    BOOL ground_or_air = ftGetGroundAir(fp);
+    bool ground_or_air = ftGetGroundAir(fp);
 
     if (ground_or_air == GA_Air) {
         func_800851C0(fighter_gobj);
@@ -733,12 +733,12 @@ void ftFox_SpecialHiBound_Coll(HSD_GObj* fighter_gobj)
             cliffCatchDir = 1;
         }
 
-        if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != FALSE) {
+        if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != false) {
             func_8007D7FC(fp);
             return;
         }
 
-        if (func_80081298(fighter_gobj) != FALSE) {
+        if (func_80081298(fighter_gobj) != false) {
             return;
         }
     }

@@ -24,7 +24,7 @@ void HSD_JObjCheckDepend(HSD_JObj* jobj)
     }
 
     switch (HSD_JObjMtxIsDirty(jobj)) {
-    case FALSE:
+    case false:
         if ((jobj->flags & JOBJ_USER_DEF_MTX)) {
             if (!(jobj->flags & JOBJ_MTX_INDEP_PARENT) &&
                 jobj->parent != NULL && HSD_JObjMtxIsDirty(jobj->parent))
@@ -116,11 +116,11 @@ void HSD_JObjWalkTree(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32),
     }
 }
 
-inline BOOL has_scl(HSD_JObj* jobj)
+inline bool has_scl(HSD_JObj* jobj)
 {
-    BOOL result = FALSE;
+    bool result = false;
     if (jobj != NULL && jobj->scl != NULL)
-        result = TRUE;
+        result = true;
     return result;
 }
 
@@ -224,15 +224,15 @@ void HSD_JObjRemoveAnimAll(HSD_JObj* jobj)
 
 void HSD_JObjReqAnimByFlags(HSD_JObj* jobj, u32 flags, f32 frame)
 {
-    BOOL has_dobj;
+    bool has_dobj;
     if (jobj != NULL) {
         if (flags & 1) {
             HSD_AObjReqAnim(jobj->aobj, frame);
         }
         if (jobj->flags & (JOBJ_PTCL | JOBJ_SPLINE)) {
-            has_dobj = FALSE;
+            has_dobj = false;
         } else {
-            has_dobj = TRUE;
+            has_dobj = true;
         }
         if (has_dobj) {
             HSD_DObjReqAnimAllByFlags(jobj->u.dobj, frame, flags);
@@ -399,7 +399,7 @@ void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
                      HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint)
 {
     u32 unused;
-    BOOL has_dobj;
+    bool has_dobj;
 
     if (jobj != NULL) {
         if (an_joint != NULL) {
@@ -416,9 +416,9 @@ void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
             }
         }
         if (jobj->flags & (JOBJ_PTCL | JOBJ_SPLINE)) {
-            has_dobj = FALSE;
+            has_dobj = false;
         } else {
-            has_dobj = TRUE;
+            has_dobj = true;
         }
         if (has_dobj) {
             HSD_DObjAddAnimAll(
@@ -1065,7 +1065,7 @@ static inline int iref_INC(void* o)
         : __assert(lbl_804068E4, 0x9E, lbl_80406918);
 }
 
-static inline BOOL iref_none(void* o)
+static inline bool iref_none(void* o)
 {
     return HSD_OBJ(o)->ref_count_individual == 0;
 }
@@ -1073,9 +1073,9 @@ static inline BOOL iref_none(void* o)
 // Alternate form to match HSD_JObjUnrefThis
 // (Original version causes regswap)
 // TODO merge with object.h iref_DEC
-static inline BOOL iref_DEC_alt(void* o)
+static inline bool iref_DEC_alt(void* o)
 {
-    BOOL ret = iref_none(o);
+    bool ret = iref_none(o);
     if (ret)
         return ret;
     HSD_OBJ(o)->ref_count_individual -= 1;

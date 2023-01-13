@@ -5,7 +5,7 @@
 void ftLuigi_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    func_80074A4C(fighter_gobj, 0, FALSE);
+    func_80074A4C(fighter_gobj, 0, false);
     fp->sa.luigi.x2234 = 0;
 }
 
@@ -19,7 +19,7 @@ void ftLuigi_OnLoad(HSD_GObj* fighter_gobj)
     func_8026B3F8(item_list[0], It_Kind_Luigi_Fire);
 }
 
-void ftLuigi_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftLuigi_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -34,7 +34,7 @@ void ftLuigi_OnItemVisible(HSD_GObj* fighter_gobj)
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftLuigi_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1)
+void ftLuigi_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
 {
     Fighter_OnItemDrop(fighter_gobj, bool1, 1, 1);
 }

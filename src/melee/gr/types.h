@@ -169,8 +169,7 @@ typedef struct StageInfo {
         }* ptr;
     }* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
-    BOOL(*x178)
-    (s32);
+    bool (*x178)(s32);
     void* x17C;
     struct _HSD_GObj* x180[4];
     u8 x190_pad[0x280 - 0x190];
@@ -233,8 +232,7 @@ typedef struct StageData {
     void (*callback2)(void);
     void (*callback3)(void);
     s32 (*callback4)();
-    BOOL(*callback5)
-    (s32);
+    bool (*callback5)(s32);
     s32 (*callback6)(Vec3*, s32, struct _HSD_JObj*);
     u32 flags2;
     S16Vec3* x2C;

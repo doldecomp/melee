@@ -12,8 +12,8 @@ void ftMario_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
     fp->sa.mario.x222C_vitaminCurr = 9;
     fp->sa.mario.x2230_vitaminPrev = 9;
-    fp->sa.mario.x2234_tornadoCharge = FALSE;
-    fp->sa.mario.x2238_isCapeBoost = FALSE;
+    fp->sa.mario.x2234_tornadoCharge = false;
+    fp->sa.mario.x2238_isCapeBoost = false;
     fp->sa.mario.x223C_capeGObj = NULL;
     fp->sa.mario.x2240 = 0;
 }
@@ -48,7 +48,7 @@ void ftMario_OnTakeDamage(HSD_GObj* gobj)
     ftMario_SpecialS_RemoveCape(gobj);
 }
 
-void ftMario_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftMario_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -63,7 +63,7 @@ void ftMario_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftMario_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftMario_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }

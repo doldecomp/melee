@@ -1,13 +1,13 @@
 #include <dolphin/dsp/dsp.h>
 
-BOOL __DSP_init_flag;
+bool __DSP_init_flag;
 
 extern DSPTaskInfo* __DSP_curr_task;
 extern DSPTaskInfo* __DSP_first_task;
 extern DSPTaskInfo* __DSP_last_task;
 extern DSPTaskInfo* __DSP_tmp_task;
 extern DSPTaskInfo* __DSP_rude_task;
-extern BOOL __DSP_rude_task_pending;
+extern bool __DSP_rude_task_pending;
 
 u32 DSPCheckMailToDSP(void)
 {
@@ -32,13 +32,13 @@ void DSPSendMailToDSP(u32 mail)
 
 void DSPInit(void)
 {
-    BOOL intr;
+    bool intr;
     u16 tmp;
 
     __DSP_debug_printf("DSPInit(): Build Date: %s %s\n", "Sep  8 2001",
                        "01:51:48"); // __DATE__, __TIME__
 
-    if (__DSP_init_flag == TRUE) {
+    if (__DSP_init_flag == true) {
         return;
     }
 
@@ -55,19 +55,19 @@ void DSPInit(void)
     __DSP_curr_task = NULL;
     __DSP_last_task = NULL;
     __DSP_first_task = NULL;
-    __DSP_init_flag = TRUE;
+    __DSP_init_flag = true;
 
     OSRestoreInterrupts(intr);
 }
 
-BOOL DSPCheckInit(void)
+bool DSPCheckInit(void)
 {
     return __DSP_init_flag;
 }
 
 DSPTaskInfo* DSPAddTask(DSPTaskInfo* task)
 {
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
 
     __DSP_insert_task(task);
     task->state = 0;
@@ -84,14 +84,14 @@ DSPTaskInfo* DSPAddTask(DSPTaskInfo* task)
 // Similar to DSPReset, DSPHalt
 void DSPSomething(void)
 {
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
     __DSPRegs[5] = (__DSPRegs[5] & ~0xA8) | 2;
     OSRestoreInterrupts(enabled);
 }
 
 void* DSPAssertTask(DSPTaskInfo* task)
 {
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
     if (__DSP_curr_task == task) {
         __DSP_rude_task = task;
         __DSP_rude_task_pending = 1;

@@ -84,7 +84,7 @@ extern s32 lbl_804D6470;
 
 /// @todo This can be used in more places when functions are fixed to use
 ///       correct structs.
-static inline BOOL hasExtraFighterId(ftMapping* data)
+static inline bool hasExtraFighterId(ftMapping* data)
 {
     return data->extra_internal_id != -1;
 }
@@ -166,7 +166,7 @@ void Player_80031900(void)
     }
 }
 
-BOOL Player_800319C4(int slot, BOOL arg1)
+bool Player_800319C4(int slot, bool arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -182,16 +182,16 @@ BOOL Player_800319C4(int slot, BOOL arg1)
     if (arg1) {
         for (i = 0; i < 2; i++)
             if (!player->player_entity[player->transformed[i]])
-                return FALSE;
+                return false;
 
-        return TRUE;
+        return true;
     }
 
     for (i = 0; i < 2; i++)
         if (player->player_entity[player->transformed[i]])
-            return FALSE;
+            return false;
 
-    return TRUE;
+    return true;
 }
 
 void Player_80031AD0(int slot)
@@ -223,15 +223,15 @@ void Player_80031AD0(int slot)
     offset_arr = (s8*) (&ftMapping_list[0].extra_internal_id);
 
     if (offset_arr[player->player_character * sizeof(ftMapping)] != -1)
-        player->flags.b2 = TRUE;
+        player->flags.b2 = true;
 
     internal_id = ftMapping_list[player->player_character].internal_id;
     Player_CheckSlot(slot);
 
     first_struct.internal_id = internal_id;
     first_struct.slot = slot;
-    first_struct.bits.b0 = FALSE;
-    first_struct.bits.has_transformation = FALSE;
+    first_struct.bits.b0 = false;
+    first_struct.bits.has_transformation = false;
     first_struct.unk8 = -1;
 
     /// @todo Eliminate cast.
@@ -249,7 +249,7 @@ void Player_80031AD0(int slot)
 
         second_struct.internal_id = internal_id;
         second_struct.slot = slot;
-        second_struct.bits.b0 = TRUE;
+        second_struct.bits.b0 = true;
         second_struct.bits.has_transformation = has_transformation;
         second_struct.unk8 = -1;
 
@@ -339,13 +339,13 @@ void Player_80031FB0(int slot, s32 entity_index)
     player = &player_slots[slot];
     player->player_entity[player->transformed[entity_index]] = NULL;
 
-    if (player->flags.b2 == FALSE || Player_800319C4(slot, 0))
+    if (player->flags.b2 == false || Player_800319C4(slot, 0))
         player->player_state = 0;
 }
 
 /// new match decomp.me/scratch/oHfiV  TODO
 //// old match decomp.me/scratch/8otnq
-void Player_80032070(int slot, BOOL bool_arg)
+void Player_80032070(int slot, bool bool_arg)
 {
     StaticPlayer* player;
     struct Unk_Struct_w_Array* unkStruct =
@@ -379,7 +379,7 @@ void Player_8003219C(int slot)
     func_8008701C(player->player_entity[player->transformed[0]]);
 }
 
-BOOL Player_8003221C(int slot)
+bool Player_8003221C(int slot)
 {
     StaticPlayer* player;
 
@@ -388,10 +388,10 @@ BOOL Player_8003221C(int slot)
         player = &player_slots[slot];
 
         if (!func_8008701C(player->player_entity[player->transformed[0]]))
-            return TRUE;
+            return true;
     }
 
-    return FALSE;
+    return false;
 }
 
 s32 Player_GetPlayerState(s32 slot)
@@ -435,7 +435,7 @@ s32 Player_GetPlayerSlotType(s32 slot)
     return slot_type;
 }
 
-s32 Player_8003248C(s32 slot, BOOL arg1)
+s32 Player_8003248C(s32 slot, bool arg1)
 { /// decomp.me/scratch/3yC1W
 
     s32 slot_type;
@@ -467,7 +467,7 @@ void Player_SetSlottype(s32 slot, s32 value)
     player->slot_type = value;
 }
 
-s8 Player_800325C8(s32 slot, BOOL b)
+s8 Player_800325C8(s32 slot, bool b)
 {
     if (!b) {
         return ftMapping_list[slot].internal_id;
@@ -478,7 +478,7 @@ s8 Player_800325C8(s32 slot, BOOL b)
     return -1;
 }
 
-s8 Player_80032610(s32 slot, BOOL arg1)
+s8 Player_80032610(s32 slot, bool arg1)
 { //// decomp.me/scratch/pHTx2
 
     struct Unk_Struct_w_Array* some_struct =
@@ -714,7 +714,7 @@ void Player_SetFacingDirection(s32 slot, f32 direction)
     player->facing_direction = direction;
 }
 
-void Player_SetFacingDirectionConditional(s32 slot, BOOL b, f32 direction)
+void Player_SetFacingDirectionConditional(s32 slot, bool b, f32 direction)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1346,7 +1346,7 @@ s32 Player_GetKOsByPlayerIndex(int slot, int idx)
     return player->kos_by_player[idx];
 }
 
-void Player_UpdateKOsBySlot(int slot, BOOL bool_arg, int other_slot)
+void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
 {
     StaticPlayer* player;
     StaticPlayer* other_player;
@@ -1400,7 +1400,7 @@ uint Player_GetMatchFrameCount(int slot)
     return count;
 }
 
-void Player_UpdateMatchFrameCount(int slot, BOOL condition)
+void Player_UpdateMatchFrameCount(int slot, bool condition)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1454,7 +1454,7 @@ void Player_IncSuicideCount(s32 slot, s32 condition)
     }
 }
 
-BOOL Player_800353BC(s32 slot)
+bool Player_800353BC(s32 slot)
 {
     StaticPlayer* player;
 
@@ -1468,7 +1468,7 @@ BOOL Player_800353BC(s32 slot)
     return 0;
 }
 
-BOOL Player_8003544C(s32 slot, BOOL condition)
+bool Player_8003544C(s32 slot, bool condition)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1482,13 +1482,13 @@ BOOL Player_8003544C(s32 slot, BOOL condition)
         player = &player_slots[slot];
 
         if (player->player_state == 2 && player->flags.b0)
-            return TRUE;
+            return true;
     }
 
-    return FALSE;
+    return false;
 }
 
-void Player_SetFlagsBit0(int slot, BOOL bit0)
+void Player_SetFlagsBit0(int slot, bool bit0)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -1543,7 +1543,7 @@ void Player_UnsetFlagsBit1(int slot)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    player->flags.b1 = FALSE;
+    player->flags.b1 = false;
 }
 
 s32 Player_GetFlagsBit3(s32 slot)
