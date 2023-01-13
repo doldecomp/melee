@@ -4,6 +4,7 @@
 #include <melee/ft/ft_unknown_005.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
+#include <melee/it/item2.h>
 
 /* static */ extern char* lbl_803D05B4[5];
 

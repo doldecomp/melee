@@ -584,7 +584,7 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         case 0x173:
             sfx_id = func_80087C70(
                 fighter,
-                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
+                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx_id)
             if (fighter->x2223_flag.bits.b7) {
                 sfx_id += 3;
             }
@@ -604,7 +604,7 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         case 0x14C:
             sfx_id = func_80087C70(
                 fighter,
-                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
+                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx_id)
             break;
         }
         break;

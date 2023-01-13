@@ -2,6 +2,8 @@
 
 #include <common_structs.h>
 #include <melee/ft/ftlib.h>
+#include <melee/it/code_80266F3C.h>
+#include <melee/it/code_8027CF30.h>
 #include <melee/it/item.h>
 
 #define FLOAT32_MAX 3.4028234663852886e+38f
