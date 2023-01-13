@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 here = Path(__file__).parent
-root = here / '../../'
+root = (here / '../../').resolve()
 mwcc_command = root / "tools/mwcc_compiler/1.2.5e/mwcceppc.exe"
 
 MWCC_FLAGS = [
@@ -26,17 +26,9 @@ MWCC_FLAGS = [
 ]
 
 
-def normalize_path(p: str) -> str:
-    p = Path(p)
-    if not p.is_relative_to(root):
-        p = root / p
-    p = p.resolve().relative_to(root.resolve())
-    return str(p)
-
-
 def import_c_file(in_file: str) -> str:
-    in_file = normalize_path(root / in_file)
-    c_command = [normalize_path(mwcc_command), *MWCC_FLAGS, "-E", in_file]
+    in_file = root / in_file
+    c_command = [str(mwcc_command), *MWCC_FLAGS, "-E", in_file]
 
     try:
         out_text = subprocess.check_output(c_command, cwd=root, encoding="utf8")
