@@ -466,8 +466,8 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* fighter_gobj)
 void ftLuigi_SpecialSLaunch_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    HSD_GObjEvent on_enter_hitlag;
-    HSD_GObjEvent on_exit_hitlag;
+    HSD_GObjEvent entered_hitlag;
+    HSD_GObjEvent exited_hitlag;
     s32 stateVar;
 
     if (fp->luigiVars[0].SpecialS.isMisfire) {
