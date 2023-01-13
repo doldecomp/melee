@@ -52,13 +52,13 @@ void func_8026B390(HSD_GObj* item_gobj);
 void func_8026B3A8(HSD_GObj* item_gobj);
 
 /// Count item entities of identical kind?
-u32 func_8026B3C0(s32 itemID);
+u32 func_8026B3C0(s32 kind);
 
 /// Store Item article pointer to table
-void func_8026B3F8(Article* article, s32 itemID);
+void func_8026B3F8(Article* article, s32 kind);
 
 /// Store Stage Item article pointer to table
-void func_8026B40C(Article* article, s32 itemID);
+void func_8026B40C(Article* article, s32 kind);
 
 /// Item Damage Math
 f32 func_8026B424(s32 damage);

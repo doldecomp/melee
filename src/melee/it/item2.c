@@ -165,7 +165,7 @@ void func_8026B3A8(
 
 // 0x8026B3C0
 // https://decomp.me/scratch/umbPP
-u32 func_8026B3C0(s32 itemID) // Count identical item GObj entities?
+u32 func_8026B3C0(s32 kind) // Count identical item GObj entities?
 {
     Item* temp_item;
     HSD_GObj* unkItemGObj;
@@ -175,7 +175,7 @@ u32 func_8026B3C0(s32 itemID) // Count identical item GObj entities?
     unkItemGObj = lbl_804D782C->x24_items;
     while (unkItemGObj != NULL) {
         temp_item = unkItemGObj->user_data;
-        if ((s32) temp_item->x10_item_kind == itemID) {
+        if ((s32) temp_item->x10_item_kind == kind) {
             i += 1;
         }
         unkItemGObj = unkItemGObj->next;
@@ -188,9 +188,9 @@ extern struct r13_ItemTable* lbl_804D6D38;
 // 0x8026B3F8
 // https://decomp.me/scratch/lHHnR
 void func_8026B3F8(Article* article,
-                   s32 itemID) // Store Item article pointer to table
+                   s32 kind) // Store Item article pointer to table
 {
-    lbl_804D6D38->x0_article[itemID - It_Kind_Leadead] =
+    lbl_804D6D38->x0_article[kind - It_Kind_Leadead] =
         article; // This feels very wrong
 }
 
@@ -199,9 +199,9 @@ extern UnkItemArticles3 lbl_804A0F60[];
 // 0x8026B40C
 // https://decomp.me/scratch/QbeU5
 void func_8026B40C(Article* article,
-                   s32 itemID) // Store Stage Item article pointer to table
+                   s32 kind) // Store Stage Item article pointer to table
 {
-    *lbl_804A0F60[itemID - It_Kind_Old_Kuri].unkptr = article;
+    *lbl_804A0F60[kind - It_Kind_Old_Kuri].unkptr = article;
 }
 
 // 0x8026B424
@@ -217,12 +217,12 @@ f32 func_8026B424(s32 damage) // Item Damage Math
 // https://decomp.me/scratch/nSjIi
 s32 func_8026B47C(HSD_GObj* item_gobj) // Get heal value of healing items
 {
-    s32 itemID;
+    s32 kind;
     Item* temp_item;
 
     temp_item = item_gobj->user_data;
-    itemID = temp_item->x10_item_kind;
-    switch (itemID) {
+    kind = temp_item->x10_item_kind;
+    switch (kind) {
     case It_Kind_Heart:
         return temp_item->xDD4_itemVar.HeartContainer.xDD4_heal;
     case It_Kind_Tomato:
@@ -242,12 +242,12 @@ s32 func_8026B47C(HSD_GObj* item_gobj) // Get heal value of healing items
 // https://decomp.me/scratch/uNMc0
 bool func_8026B4F0(HSD_GObj* item_gobj) // Check if item is a healing item
 {
-    s32 itemID;
+    s32 kind;
     Item* temp_item;
 
     temp_item = item_gobj->user_data;
-    itemID = temp_item->x10_item_kind;
-    switch (itemID) {
+    kind = temp_item->x10_item_kind;
+    switch (kind) {
     case It_Kind_Heart:           // Heart Container
     case It_Kind_Tomato:          // Maxim Tomato
     case It_Kind_Foods:           // Food
@@ -305,12 +305,12 @@ s32 func_8026B588(void) // Get unknown integer from itCommonData
 // https://decomp.me/scratch/rBoew
 bool func_8026B594(HSD_GObj* item_gobj) // Check if item can fire projectiles
 {
-    s32 itemID;
+    s32 kind;
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    itemID = item_data->x10_item_kind;
-    switch (itemID) {
+    kind = item_data->x10_item_kind;
+    switch (kind) {
     case It_Kind_L_Gun:
     case It_Kind_S_Scope:
     case It_Kind_StarRod:
@@ -411,14 +411,14 @@ f32 func_8026B6A8(Vec3* pos, HSD_GObj* arg1)
 
 bool func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item?
 {
-    s32 itemID;
+    s32 kind;
     s32 itemID_2;
     s32 itemID_3;
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    itemID = item_data->x10_item_kind;
-    if (((itemID >= It_Kind_Kuriboh) && (itemID < It_Kind_Octarock_Stone)) ||
+    kind = item_data->x10_item_kind;
+    if (((kind >= It_Kind_Kuriboh) && (kind < It_Kind_Octarock_Stone)) ||
         ((itemID_2 = item_data->x10_item_kind,
           ((itemID_2 < It_Kind_Old_Kuri) == false)) &&
          (itemID_2 < It_Kind_Arwing_Laser)))
@@ -638,14 +638,14 @@ lbl_getVar:
 /// @todo Requires @c -g compiler flag / Frank modifications to match.
 s32 func_8026B924(HSD_GObj* item_gobj)
 {
-    s32 itemID;
+    s32 kind;
     s32 ret;
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    itemID = item_data->x10_item_kind;
+    kind = item_data->x10_item_kind;
     ret = -1;
-    switch (itemID) {
+    switch (kind) {
     case It_Kind_Freeze:
     case It_Kind_Foods:
     case It_Kind_MSBomb:
@@ -669,21 +669,21 @@ s32 func_8026B924(HSD_GObj* item_gobj)
 #pragma push
 f32 func_8026B960(register HSD_GObj* item_gobj)
 { // clang-format off
-    register s32 itemID;
+    register s32 kind;
     register Item* item_data;
     register f32 unk_timer = -1.0f;
 
     item_data = item_gobj->user_data;
-    itemID = item_data->x10_item_kind;
+    kind = item_data->x10_item_kind;
 
     asm {
-        cmpwi itemID, It_Kind_Link_Bomb
+        cmpwi kind, It_Kind_Link_Bomb
         beq- lbl_block
         bgelr-
-        cmpwi itemID, It_Kind_BombHei
+        cmpwi kind, It_Kind_BombHei
         bnelr-
-        lwz itemID, 0x24(item_data);
-        cmpwi itemID, 0xB;
+        lwz kind, 0x24(item_data);
+        cmpwi kind, 0xB;
         beqlr-
     }
 
@@ -704,13 +704,13 @@ lbl_block:
 /// @todo Requires @c -g compiler flag / Frank modifications to match.
 f32 func_8026B960(HSD_GObj* item_gobj)
 {
-    s32 itemID;
+    s32 kind;
     f32 unk_timer = -1.0f;
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    itemID = item_data->x10_item_kind;
-    switch (itemID) {
+    kind = item_data->x10_item_kind;
+    switch (kind) {
     case It_Kind_BombHei:
         if ((s32) item_data->x24_item_state_index != 0xB) {
             unk_timer = item_data->xDD4_itemVar.BobOmb.xDEC;
@@ -1075,7 +1075,7 @@ extern s32 func_8026D324(s32);
 void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch
 {
     s32 bobOmbID;
-    s32 itemID;
+    s32 kind;
     s32 itemID2;
     Item* item_data;
     Item* item_data_2;
@@ -1104,9 +1104,11 @@ void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch
         bobOmbGObj =
             func_80283AE4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
         if (bobOmbGObj != NULL) {
+            /// @todo #HSD_GObjGetUserData cast does not match here, likely
+            ///       because there is a missing inline with the case below.
             item_data = GetItemData(bobOmbGObj);
-            itemID = item_data->x10_item_kind;
-            switch (itemID) {
+            kind = item_data->x10_item_kind;
+            switch (kind) {
             case It_Kind_Heart:
                 func_80283BD4(bobOmbGObj);
                 break;
@@ -1278,7 +1280,7 @@ bool func_8026C1E8(HSD_GObj* item_gobj) // Check if item has grabbed a GObj?
 void func_8026C220(HSD_GObj* item_gobj,
                    HSD_GObj* fighter_gobj) // Get item owner's port number
 {
-    Item* item_data = GetItemDirect(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
     item_data->xCB0_source_ply = (u8) func_80086BE0(fighter_gobj);
 }
 
@@ -1357,13 +1359,13 @@ void func_8026C334(HSD_GObj* item_gobj,
 // https://decomp.me/scratch/f1P2c
 void func_8026C368(HSD_GObj* item_gobj) // Run bomb item explosion callbacks
 {
-    s32 itemID;
+    s32 kind;
     Item* item_data;
 
     item_data = item_gobj->user_data;
     if (item_data->x378_itemColl.x34_flags.bits.b7 != 0) {
-        itemID = item_data->x10_item_kind;
-        switch (itemID) {
+        kind = item_data->x10_item_kind;
+        switch (kind) {
         case It_Kind_BombHei: // Bob-Omb
             func_8027D730(item_gobj);
             return;
@@ -1382,7 +1384,7 @@ void func_8026C368(HSD_GObj* item_gobj) // Run bomb item explosion callbacks
             return;
 
         default:
-            item_data->xD60_destroyType = 0;
+            item_data->destroy_type = 0;
             func_8026A8EC(item_gobj);
         }
     }

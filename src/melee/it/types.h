@@ -177,26 +177,34 @@ typedef struct ItemAttr {
     Vec2 x30_unk;        // 0x34
     Vec2 x38_grab_range; // 0x38
     ECB x40;
-    s32 x50;             // 0x50
-    s32 x54;             // 0x54
-    s32 x58;             // 0x58
-    s32 x5c;             // 0x5c
-    f32 x60_scale;       // 0x60, does not affect hitboxes
-    s32 x64_destroy_gfx; // 0x64, ID of a gfx to play on destroy
-    s32 x68;             // 0x68
-    s32 x6C;             // 0x6c
-    s32 x70;             // 0x70
-    s32 x74;             // 0x74
-    s32 x78_destroySFX;  // 0x78
-    s32 x7C;             // 0x7c
-    s32 x80;             // 0x80
-    s32 x84;             // 0x84
-    s32 x88;             // 0x88
-    s32 x8C;             // 0x8c
-    s32 x90;             // 0x90
-    s32 x94;             // 0x94
-    s32 x98;             // 0x98
-    s32 x9C;             // 0x9c
+    s32 x50;       // 0x50
+    s32 x54;       // 0x54
+    s32 x58;       // 0x58
+    s32 x5c;       // 0x5c
+    f32 x60_scale; // 0x60, does not affect hitboxes
+
+    /// @at{64} @sz{4}
+    /// @brief GFX to play on destroy.
+    enum_t destroy_gfx;
+
+    s32 x68; // 0x68
+    s32 x6C; // 0x6c
+    s32 x70; // 0x70
+    s32 x74; // 0x74
+
+    /// @at{78} @sz{4}
+    /// @brief SFX that plays when this item is destroyed
+    enum_t destroy_sfx;
+
+    s32 x7C; // 0x7c
+    s32 x80; // 0x80
+    s32 x84; // 0x84
+    s32 x88; // 0x88
+    s32 x8C; // 0x8c
+    s32 x90; // 0x90
+    s32 x94; // 0x94
+    s32 x98; // 0x98
+    s32 x9C; // 0x9c
 } ItemAttr;
 
 typedef struct ItemDynamicsDesc {
@@ -563,14 +571,21 @@ typedef struct Item {
     s32 xD54_throwNum; // Number of times this item has been thrown
     s32 xD58;
     s32 xD5C;
-    enum_t xD60_destroyType; // has to do with OnDestroy GFX?
-    enum_t xD64;             // item SFX ID
-    enum_t xD68;             // item SFX ID
+
+    /// @at{D60} @sz{4}
+    enum_t destroy_type;
+
+    enum_t sfx_unk1; // item SFX ID
+    enum_t sfx_unk2; // item SFX ID
     s32 xD6C;
     s32 xD70;
     s32 xD74;
     s32 xD78;
-    s32 xD7C_destroySFX; // SFX that plays when this item is destroyed
+
+    /// @at{D7C} @sz{4}
+    /// @brief SFX that plays when this item is destroyed
+    enum_t destroy_sfx;
+
     s32 xD80;
     s32 xD84;
     s32 xD88_attackID; // ???
