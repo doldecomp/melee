@@ -340,7 +340,10 @@ typedef struct Item {
     f32 x38_scale;
     f32 x3C;
     Vec3 x40_vel;
+
+    /// @at{4C} @sz{C}
     Vec3 pos;
+
     Vec3 x58_vec_unk;
     Vec3 x64_vec_unk2;
     Vec3 x70_nudge;
