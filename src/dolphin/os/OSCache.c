@@ -318,7 +318,7 @@ void __LCEnable(void)
 
 void LCEnable(void)
 {
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
     __LCEnable();
     OSRestoreInterrupts(enabled);
 }

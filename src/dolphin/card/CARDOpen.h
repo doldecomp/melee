@@ -4,9 +4,9 @@
 #include <dolphin/card.h>
 #include <dolphin/os/OSExi.h>
 
-BOOL __CARDCompareFileName(CARDDir* ent, const char* filename);
+bool __CARDCompareFileName(CARDDir* ent, const char* filename);
 s32 __CARDAccess(CARDControl* card, CARDDir* ent);
-BOOL __CARDIsOpened(CARDControl* card, s32 fileno);
+bool __CARDIsOpened(CARDControl* card, s32 fileno);
 s32 __CARDGetFileNo(CARDControl* card, const char* filename, s32* pfileno);
 s32 CARDFastOpen(EXIChannel chan, s32 fileno, CARDFileInfo* fileinfo);
 s32 CARDOpen(EXIChannel chan, const char* filename, CARDFileInfo* fileInfo);

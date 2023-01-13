@@ -87,11 +87,11 @@ void Command_09(CommandInfo* info)
     info->u.data_position += 1;
 }
 
-BOOL Command_Execute(CommandInfo* info, u32 command)
+bool Command_Execute(CommandInfo* info, u32 command)
 {
     if (command < 10) {
         lbl_803B9840[command](info);
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }

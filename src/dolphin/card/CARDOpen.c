@@ -8,7 +8,7 @@ extern DVDDiskID __CARDDiskNone;
 #define CARDIsValidBlockNo(card, iBlock)                                       \
     (CARD_NUM_SYSTEM_BLOCK <= (iBlock) && (iBlock) < (card)->cBlock)
 
-BOOL __CARDCompareFileName(CARDDir* ent, const char* filename)
+bool __CARDCompareFileName(CARDDir* ent, const char* filename)
 {
     char* entName;
     char c1;
@@ -19,17 +19,17 @@ BOOL __CARDCompareFileName(CARDDir* ent, const char* filename)
     n = CARD_FILENAME_MAX;
     while (0 <= --n) {
         if ((c1 = *entName++) != (c2 = *filename++)) {
-            return FALSE;
+            return false;
         } else if (c2 == '\0') {
-            return TRUE;
+            return true;
         }
     }
 
     if (*filename == '\0') {
-        return TRUE;
+        return true;
     }
 
-    return FALSE;
+    return false;
 }
 
 s32 __CARDAccess(CARDControl* card, CARDDir* ent)
@@ -167,7 +167,7 @@ s32 CARDClose(CARDFileInfo* fileinfo)
     return __CARDPutControlBlock(card, CARD_RESULT_READY);
 }
 
-BOOL __CARDIsOpened(CARDControl* card, s32 fileno)
+bool __CARDIsOpened(CARDControl* card, s32 fileno)
 {
-    return FALSE;
+    return false;
 }

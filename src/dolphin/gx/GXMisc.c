@@ -65,7 +65,7 @@ void GXSetMisc(s32 arg0, u32 arg1)
 void GXSetDrawDone(void)
 {
     u16 i;
-    BOOL interrupt_enabled = OSDisableInterrupts();
+    bool interrupt_enabled = OSDisableInterrupts();
     WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = 0x45000002;
 
@@ -133,7 +133,7 @@ void GXPokeAlphaRead(s32 mode)
  * This function enables or disables alpha-buffer updates for GXPoke* functions.
  * The normal rendering state (GXSetAlphaUpdate) is not effected.
  */
-void GXPokeAlphaUpdate(BOOL update_enable)
+void GXPokeAlphaUpdate(bool update_enable)
 {
     u16 old = __peReg[PE_POKE_CMODE0_ID];
 
@@ -178,7 +178,7 @@ void GXPokeBlendMode(GXBlendMode type, GXBlendFactor src_factor,
  * Embedded Frame Buffer (EFB) using the GXPoke* functions.  The GXPoke*
  * functions allow direct access the the EFB by the CPU.
  */
-void GXPokeColorUpdate(BOOL update_enable)
+void GXPokeColorUpdate(bool update_enable)
 {
     u16 old = __peReg[PE_POKE_CMODE0_ID];
 
@@ -194,7 +194,7 @@ void GXPokeColorUpdate(BOOL update_enable)
  * (see GXPokeBlendMode) still use source alpha but when writing the pixel
  * color, the constant alpha will replace the pixel alpha in the EFB.
  */
-void GXPokeDstAlpha(BOOL enable, u8 alpha)
+void GXPokeDstAlpha(bool enable, u8 alpha)
 {
     __peReg[PE_POKE_CMODE1_ID] = alpha | ((enable << 8) & 0xFF00 & ~0xFF);
 }
@@ -229,7 +229,7 @@ void GXPokeDither(s32 dither)
  * Z value after a comparison is performed. The normal rendering Z mode
  * (GXSetZMode) is not affected by this function.
  */
-void GXPokeZMode(BOOL compare_enable, GXCompare func, BOOL update_enable)
+void GXPokeZMode(bool compare_enable, GXCompare func, bool update_enable)
 {
     __peReg[PE_POKE_ZMODE_ID] =
         ((((u8) compare_enable & ~0xE) | (func << 1)) & ~0x10) |
@@ -253,7 +253,7 @@ void GXTokenInterruptHandler(__OSInterrupt unused, OSContext* current_ctx)
 GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb)
 {
     GXDrawDoneCallback previous = lbl_804D7324;
-    BOOL intr = OSDisableInterrupts();
+    bool intr = OSDisableInterrupts();
     lbl_804D7324 = cb;
     OSRestoreInterrupts(intr);
     return previous;

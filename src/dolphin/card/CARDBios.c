@@ -8,7 +8,7 @@
 CARDControl __CARDBlock[2];
 DVDDiskID __CARDDiskNone;
 
-static BOOL OnReset(BOOL f);
+static bool OnReset(bool f);
 static OSResetFunctionInfo ResetFunctionInfo = { OnReset, 127 };
 
 void __CARDDefaultApiCallback(s32 chan, s32 result) {}
@@ -25,7 +25,7 @@ void __CARDExtHandler(EXIChannel chan, OSContext* context)
 
     card = &__CARDBlock[chan];
     if (card->attached) {
-        card->attached = FALSE;
+        card->attached = false;
         EXISetExiCallback(chan, 0);
         OSCancelAlarm(&card->alarm);
         callback = card->exiCallback;
@@ -99,7 +99,7 @@ void __CARDTxHandler(EXIChannel chan, OSContext* context)
 {
     CARDControl* card;
     CARDCallback callback;
-    BOOL err;
+    bool err;
 
     card = &__CARDBlock[chan];
     err = !EXIDeselect(chan);
@@ -126,9 +126,9 @@ void __CARDUnlockedHandler(EXIChannel chan, OSContext* context)
     }
 }
 
-s32 __CARDEnableInterrupt(s32 chan, BOOL enable)
+s32 __CARDEnableInterrupt(s32 chan, bool enable)
 {
-    BOOL err;
+    bool err;
     u32 cmd;
 
     if (!EXISelect(chan, 0, 4)) {
@@ -136,7 +136,7 @@ s32 __CARDEnableInterrupt(s32 chan, BOOL enable)
     }
 
     cmd = enable ? 0x81010000 : 0x81000000;
-    err = FALSE;
+    err = false;
     err |= !EXIImm(chan, &cmd, 2, 1, NULL);
     err |= !EXISync(chan);
     err |= !EXIDeselect(chan);
@@ -145,7 +145,7 @@ s32 __CARDEnableInterrupt(s32 chan, BOOL enable)
 
 s32 __CARDReadStatus(s32 chan, u8* status)
 {
-    BOOL err;
+    bool err;
     u32 cmd;
 
     if (!EXISelect(chan, 0, 4)) {
@@ -153,7 +153,7 @@ s32 __CARDReadStatus(s32 chan, u8* status)
     }
 
     cmd = 0x83000000;
-    err = FALSE;
+    err = false;
     err |= !EXIImm(chan, &cmd, 2, 1, NULL);
     err |= !EXISync(chan);
     err |= !EXIImm(chan, status, 1, 0, NULL);
@@ -164,7 +164,7 @@ s32 __CARDReadStatus(s32 chan, u8* status)
 
 s32 __CARDClearStatus(s32 chan)
 {
-    BOOL err;
+    bool err;
     u32 cmd;
 
     if (!EXISelect(chan, 0, 4)) {
@@ -172,7 +172,7 @@ s32 __CARDClearStatus(s32 chan)
     }
 
     cmd = 0x89000000;
-    err = FALSE;
+    err = false;
     err |= !EXIImm(chan, &cmd, 1, 1, 0);
     err |= !EXISync(chan);
     err |= !EXIDeselect(chan);
@@ -309,7 +309,7 @@ static void UnlockedCallback(s32 chan, s32 result)
 
 s32 __CARDStart(s32 chan, CARDCallback txCallback, CARDCallback exiCallback)
 {
-    BOOL enabled;
+    bool enabled;
     CARDControl* card;
     s32 result;
 
@@ -484,7 +484,7 @@ void __CARDSetDiskID(const DVDDiskID* id)
 
 s32 __CARDGetControlBlock(s32 chan, CARDControl** pcard)
 {
-    BOOL enabled;
+    bool enabled;
     s32 result;
     CARDControl* card;
 
@@ -510,7 +510,7 @@ s32 __CARDGetControlBlock(s32 chan, CARDControl** pcard)
 
 s32 __CARDPutControlBlock(CARDControl* card, s32 result)
 {
-    BOOL enabled;
+    bool enabled;
 
     enabled = OSDisableInterrupts();
     if (card->attached) {
@@ -573,7 +573,7 @@ s32 CARDGetSectorSize(s32 chan, u32* size)
 {
     CARDControl* sp10;
     s32 status;
-    BOOL enabled;
+    bool enabled;
     CARDControl* tmp;
 
     status = __CARDGetControlBlock(chan, &sp10);
@@ -607,15 +607,15 @@ s32 __CARDSync(s32 i)
     return result;
 }
 
-static BOOL OnReset(BOOL f)
+static bool OnReset(bool f)
 {
     if (!f) {
         if (CARDUnmount(0) == CARD_RESULT_BUSY ||
             CARDUnmount(1) == CARD_RESULT_BUSY)
         {
-            return FALSE;
+            return false;
         }
     }
 
-    return TRUE;
+    return true;
 }

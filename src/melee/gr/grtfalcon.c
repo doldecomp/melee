@@ -112,7 +112,7 @@ static void lbl_8021FF10(HSD_GObj*)
     func_801C2FE0();
 }
 static void lbl_8021FF30(void) {}
-static BOOL lbl_8021FF34(long)
+static bool lbl_8021FF34(long)
 {
     return 0;
 }

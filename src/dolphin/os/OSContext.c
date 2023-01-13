@@ -222,7 +222,7 @@ OSContext* OSGetCurrentContext(void)
 
 // https://decomp.me/scratch/bNK5a // 0 (100%)
 #pragma push
-asm BOOL OSSaveContext(OSContext*)
+asm bool OSSaveContext(OSContext*)
 { // clang-format off
     nofralloc
 /* 803450F4 00341CD4  BD A3 00 34 */	stmw r13, 0x34(r3)

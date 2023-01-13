@@ -17,7 +17,7 @@ void ftMars_OnDeath(HSD_GObj* gobj)
 
 // 801362B0 00132E90
 // ftMars_OnItemPickup
-void ftMars_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftMars_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 0, 1);
 }
@@ -41,7 +41,7 @@ void ftMars_OnItemVisible(HSD_GObj* gobj)
 // 80136420 00133000
 // ftMars_OnItemDrop
 // https://decomp.me/scratch/Ws8ow
-void ftMars_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftMars_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 0, 1);
 }

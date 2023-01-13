@@ -21,11 +21,11 @@ void func_800765AC(HSD_GObj* victim); // Clear victim pointer from attacker upon
 void func_800765E0(void); // Reset hitbox and phantom collision count? //
 f32 func_800765F0(Fighter* fp, HSD_GObj* victim,
                   f32 unk_floatvar); // Unk knockback related ? //
-BOOL func_8007B868(HSD_GObj* fighter_gobj);
+bool func_8007B868(HSD_GObj* fighter_gobj);
 
 void func_80076528(struct _HSD_GObj*);
 void func_800765E0(void);
-void func_80078754(struct _HSD_GObj*, struct _HSD_GObj*, BOOL);
+void func_80078754(struct _HSD_GObj*, struct _HSD_GObj*, bool);
 void func_80078A2C(struct _HSD_GObj*);
 void func_80078C70(struct _HSD_GObj*);
 void func_8007925C(struct _HSD_GObj*);
@@ -40,7 +40,7 @@ void func_8007B0C0(struct _HSD_GObj*, s32);
 void func_8007B1B8(struct _HSD_GObj*, f32*, void (*)(struct _HSD_GObj*));
 void func_8007B320(struct _HSD_GObj*);
 void func_8007B4E0(struct _HSD_GObj*);
-void func_8007B62C(struct _HSD_GObj*, BOOL);
+void func_8007B62C(struct _HSD_GObj*, bool);
 void func_8007B6EC(struct _HSD_GObj*);
 void func_8007B760(struct _HSD_GObj*, s32);
 void func_8007B8CC(struct _Fighter*, struct _HSD_GObj*);

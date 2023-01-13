@@ -24,9 +24,9 @@ void func_801C3990(f32 bottom);
 void func_801C39A0(f32 left);
 void func_801C39B0(f32 right);
 static void func_801C1E2C(HSD_GObj*);
-static BOOL func_801C0A70(Vec3* pos);
+static bool func_801C0A70(Vec3* pos);
 static void func_801C0C2C(HSD_GObj*);
-static BOOL func_801C24F8(s32, u32, s32*);
+static bool func_801C24F8(s32, u32, s32*);
 void func_801C5544(Map*, s32);
 static void func_801C55AC(Map*);
 HSD_GObj* func_801C57A4(void);
@@ -42,11 +42,11 @@ static void func_801C28CC(void*, s32);
 
 f32 func_801C0498(void);
 struct _HSD_GObj* func_801C14D0(s32);
-BOOL func_801C28AC(s32, u32, s32*);
+bool func_801C28AC(s32, u32, s32*);
 struct _HSD_GObj* func_801C2BA4(s32);
 struct _HSD_JObj* func_801C2CF4(s32);
-BOOL func_801C2D24(enum_t, Vec3*);
-BOOL func_801C2ED0(struct _HSD_JObj*, s32);
+bool func_801C2D24(enum_t, Vec3*);
+bool func_801C2ED0(struct _HSD_JObj*, s32);
 void func_801C39C0(void);
 void func_801C3BB4(void);
 struct _HSD_JObj* func_801C3FA4(struct _HSD_GObj*, s32);
@@ -57,8 +57,8 @@ void func_801C42AC(void);
 void* func_801C49F8(void);
 
 void func_801C5A84(s32 arg0);
-void func_801C5AA4(BOOL arg0);
-BOOL func_801C3214(int arg0);
+void func_801C5AA4(bool arg0);
+bool func_801C3214(int arg0);
 
 /// @param[in] arg0
 /// @param[in] arg1

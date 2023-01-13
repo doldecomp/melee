@@ -1016,13 +1016,13 @@ void HSD_LObjSetPosition(HSD_LObj* lobj, Vec3* position)
     HSD_WObjSetPosition(lobj->position, position);
 }
 
-BOOL HSD_LObjGetPosition(HSD_LObj* lobj, Vec3* position)
+bool HSD_LObjGetPosition(HSD_LObj* lobj, Vec3* position)
 {
     if (lobj != NULL && lobj->position != NULL) {
         HSD_WObjGetPosition(lobj->position, position);
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 void HSD_LObjSetInterest(HSD_LObj* lobj, Vec3* interest)
@@ -1039,13 +1039,13 @@ void HSD_LObjSetInterest(HSD_LObj* lobj, Vec3* interest)
     HSD_WObjSetPosition(lobj->interest, interest);
 }
 
-BOOL HSD_LObjGetInterest(HSD_LObj* lobj, Vec3* interest)
+bool HSD_LObjGetInterest(HSD_LObj* lobj, Vec3* interest)
 {
     if (lobj != NULL && lobj->interest != NULL) {
         HSD_WObjGetPosition(lobj->interest, interest);
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 HSD_WObj* HSD_LObjGetPositionWObj(HSD_LObj* lobj)

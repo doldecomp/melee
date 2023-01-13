@@ -162,12 +162,12 @@ static void GrTNess_802228A0(void)
     return;
 }
 
-static BOOL GrTNess_802228A4(s32)
+static bool GrTNess_802228A4(s32)
 {
-    return FALSE;
+    return false;
 }
 
 static s32 GrTNess_802228AC(Vec3*, s32, struct _HSD_JObj*)
 {
-    return TRUE;
+    return true;
 }

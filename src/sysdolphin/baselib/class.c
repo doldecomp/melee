@@ -117,7 +117,7 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
     {
         s32 i;
         u32 size;
-        BOOL found;
+        bool found;
         HSD_MemoryEntry* entry;
 
         size = idx * 4;
@@ -130,16 +130,16 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
             entry->size = (idx + 1) * 32;
             memory_list[idx] = entry;
 
-            found = FALSE;
+            found = false;
             for (i = idx - 1; i >= 0; --i) {
                 if (memory_list[i] != NULL) {
-                    found = TRUE;
+                    found = true;
                     entry->next = memory_list[i]->next;
                     memory_list[i]->next = entry;
                     break;
                 }
             }
-            if (found == FALSE) {
+            if (found == false) {
                 for (i = idx + 1; i < nb_memory_list; i++) {
                     if (memory_list[i] != NULL) {
                         entry->next = memory_list[i];
@@ -316,7 +316,7 @@ inline HSD_ClassInfo* HSD_PushClassInfo(HSD_ClassInfo* class_info)
     return ret = class_info;
 }
 
-inline BOOL hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
+inline bool hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo* var_r29;
     HSD_ClassInfo* var_r28;
@@ -330,7 +330,7 @@ inline BOOL hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
         var_r28->head.info_init();
     }
     if (var_r29->head.obj_size != var_r28->head.obj_size)
-        return FALSE;
+        return false;
     while (var_r29->head.parent != NULL &&
            var_r29->head.parent->head.obj_size == var_r29->head.obj_size)
     {
@@ -348,22 +348,22 @@ inline BOOL hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
             class_info->head.nb_peak = class_info->head.nb_exist;
         }
         object->parent.class_info = class_info;
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
-BOOL hsdChangeClass(void* object, void* class_info)
+bool hsdChangeClass(void* object, void* class_info)
 {
     return hsdChangeClass_inline(object, class_info);
 }
 
-BOOL hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p)
+bool hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p)
 {
     HSD_ClassInfo* var_r31;
 
     if (info == NULL || p == NULL) {
-        return FALSE;
+        return false;
     }
     var_r31 = var_r31 = info;
     if (!(info->head.flags & 1)) {
@@ -374,19 +374,19 @@ BOOL hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p)
     }
     while (var_r31 != NULL) {
         if (var_r31 == p) {
-            return TRUE;
+            return true;
         }
         var_r31 = var_r31->head.parent;
     }
-    return FALSE;
+    return false;
 }
 
-BOOL hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
+bool hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
 {
     HSD_ClassInfo* info;
 
     if (o == NULL || p == NULL) {
-        return FALSE;
+        return false;
     }
     info = o->parent.class_info;
     if (!(p->head.flags & 1)) {
@@ -394,11 +394,11 @@ BOOL hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
     }
     while (info != NULL) {
         if (info == p) {
-            return TRUE;
+            return true;
         }
         info = info->head.parent;
     }
-    return FALSE;
+    return false;
 }
 
 void class_set_flags(HSD_ClassInfo* class_info, s32 set, s32 reset)
@@ -476,17 +476,17 @@ void DumpClassStat(HSD_ClassInfo* info, s32 level)
              info->head.nb_peak);
 }
 
-void hsdDumpClassStat(HSD_ClassInfo* info, BOOL recursive, s32 level)
+void hsdDumpClassStat(HSD_ClassInfo* info, bool recursive, s32 level)
 {
     if (info == NULL) {
-        hsdDumpClassStat(&hsdClass, TRUE, level);
+        hsdDumpClassStat(&hsdClass, true, level);
     } else if (info->head.flags & 1) {
         DumpClassStat(info, level);
         if (recursive) {
             level += 2;
             info = info->head.child;
             while (info != NULL) {
-                hsdDumpClassStat(info, TRUE, level);
+                hsdDumpClassStat(info, true, level);
                 info = info->head.next;
             }
         }

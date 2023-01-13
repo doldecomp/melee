@@ -98,13 +98,13 @@ static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* fighter_gobj)
 // 0x8014AD98
 // https://decomp.me/scratch/IERdX // Check if Mr. Game & Watch is performing
 // Down Tilt - remove if returns true
-BOOL ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
+bool ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (fp->x10_action_state_index == AS_GAMEWATCH_ATTACKLW3) {
-        return FALSE;
+        return false;
     }
-    return TRUE;
+    return true;
 }
 
 // 0x8014ADB8
@@ -114,7 +114,7 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80094790(fighter_gobj) == FALSE) {
+    if (func_80094790(fighter_gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACKLW3,
                                            0, NULL, 0.0f, 1.0f, 0.0f);
@@ -142,29 +142,29 @@ void ftGameWatch_AttackLw3_IASA(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     if (fp->x2218_flag.bits.b0 == 0)
         return;
-    if (func_8008BFC4(fighter_gobj) != FALSE)
+    if (func_8008BFC4(fighter_gobj) != false)
         return;
-    if (func_8008C830(fighter_gobj) != FALSE)
+    if (func_8008C830(fighter_gobj) != false)
         return;
-    if (func_8008CB44(fighter_gobj) != FALSE)
+    if (func_8008CB44(fighter_gobj) != false)
         return;
-    if (func_8008B658(fighter_gobj) != FALSE)
+    if (func_8008B658(fighter_gobj) != false)
         return;
-    if (func_8008B980(fighter_gobj) != FALSE)
+    if (func_8008B980(fighter_gobj) != false)
         return;
-    if (func_8008BB44(fighter_gobj) != FALSE)
+    if (func_8008BB44(fighter_gobj) != false)
         return;
-    if (func_8008A9F8(fighter_gobj) != FALSE)
+    if (func_8008A9F8(fighter_gobj) != false)
         return;
-    if (func_800CAED0(fighter_gobj) != FALSE)
+    if (func_800CAED0(fighter_gobj) != false)
         return;
-    if (func_800CA094(fighter_gobj) != FALSE)
+    if (func_800CA094(fighter_gobj) != false)
         return;
-    if (func_800D5F58(fighter_gobj) != FALSE)
+    if (func_800D5F58(fighter_gobj) != false)
         return;
-    if (func_800C97DC(fighter_gobj) != FALSE)
+    if (func_800C97DC(fighter_gobj) != false)
         return;
-    if (func_800C9468(fighter_gobj) != FALSE)
+    if (func_800C9468(fighter_gobj) != false)
         return;
 }
 

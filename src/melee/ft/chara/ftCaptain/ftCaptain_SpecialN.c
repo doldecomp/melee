@@ -165,11 +165,11 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj)
     fp = getFighter(fighter_gobj);
     if (fp->x2210_ThrowFlags.b1 != 0) {
         fp->x2210_ThrowFlags.b1 = 0;
-        flag = TRUE;
+        flag = true;
     } else {
-        flag = FALSE;
+        flag = false;
     }
-    if (flag != FALSE) {
+    if (flag != false) {
         if (fp->x2219_flag.bits.b0 == 0) {
             ftKind = func_800872A4(fighter_gobj);
             switch (ftKind) {
@@ -203,11 +203,11 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
 
     if (fp->x2210_ThrowFlags.b1 != 0) {
         fp->x2210_ThrowFlags.b1 = 0;
-        flag = TRUE;
+        flag = true;
     } else {
-        flag = FALSE;
+        flag = false;
     }
-    if (flag != FALSE) {
+    if (flag != false) {
         if (fp->x2219_flag.bits.b0 == 0) {
             ftKind = func_800872A4(fighter_gobj);
             switch (ftKind) {
@@ -247,7 +247,7 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
 // Falcon/Warlock Punch Collision callback
 void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_800827A0(fighter_gobj) == FALSE) {
+    if (func_800827A0(fighter_gobj) == false) {
         Fighter* fp = fighter_gobj->user_data;
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
@@ -264,7 +264,7 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
 // Falcon/Warlock Punch Collision callback
 void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != FALSE) {
+    if (func_80081D0C(fighter_gobj) != false) {
         Fighter* fp = fighter_gobj->user_data;
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(

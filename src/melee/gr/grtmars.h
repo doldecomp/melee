@@ -22,7 +22,7 @@ static void GrTMars_8022214C(HSD_GObj*);
 static s32 GrTMars_8022219C(void);
 static void GrTMars_802221A4(HSD_GObj*);
 static void GrTMars_802221C4(void);
-static BOOL GrTMars_802221C8(s32);
+static bool GrTMars_802221C8(s32);
 static s32 GrTMars_802221D0(Vec3*, s32, struct _HSD_JObj*);
 
 #endif

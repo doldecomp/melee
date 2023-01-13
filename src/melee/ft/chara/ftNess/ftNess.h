@@ -167,10 +167,10 @@ void ftNess_OnLoad(HSD_GObj* gobj);
 void ftNess_OnDamage(HSD_GObj* gobj);
 void ftNess_OnAbsorb(HSD_GObj* gobj);
 f32 ftNess_GetAbsorbHeal(Fighter* fp);
-void ftNess_OnItemPickup(HSD_GObj* gobj, BOOL catchItemFlag);
+void ftNess_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag);
 void ftNess_OnItemInvisible(HSD_GObj* gobj);
 void ftNess_OnItemVisible(HSD_GObj* gobj);
-void ftNess_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag);
+void ftNess_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag);
 void ftNess_LoadSpecialAttrs(HSD_GObj* gobj);
 
 /// Change model's MatAnim frames to hurt textures
@@ -182,7 +182,7 @@ void ftNess_OnKnockbackExit(HSD_GObj* gobj);
 // Forward Smash (AttackS4)
 
 void ftNess_AttackS4_OnReflect(HSD_GObj* gobj);
-BOOL ftNess_CheckNessBatRemove(HSD_GObj* gobj);
+bool ftNess_CheckNessBatRemove(HSD_GObj* gobj);
 void ftNess_ItemNessBatRemove(HSD_GObj* gobj);
 void ftNess_ItemNessBatSetNULL(HSD_GObj* gobj);
 
@@ -212,7 +212,7 @@ void ftNess_YoyoSetHitPos(HSD_GObj* gobj);
 void ftNess_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 arg8);
 
 /// Check if Yo-Yo is colliding with an obstacle (wall / air)
-BOOL ftNess_YoyoCheckNoObstruct(HSD_GObj* gobj);
+bool ftNess_YoyoCheckNoObstruct(HSD_GObj* gobj);
 
 /// Set ftcmd-, fp- and stateVars
 void ftNess_YoyoSetVarAll(HSD_GObj* gobj);
@@ -223,7 +223,7 @@ void ftNess_YoyoApplySmash(HSD_GObj* gobj);
 void ftNess_YoyoSetChargeDamage(HSD_GObj* gobj); // Used by Up Smash
 
 /// Ness Yo-Yo Think
-BOOL ftNess_YoyoThink_IsRemove(HSD_GObj* gobj);
+bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj);
 
 /// Calculates Yo-Yo texture rotation speed?
 void ftNess_YoyoSetUnkRate(HSD_GObj* gobj);
@@ -303,7 +303,7 @@ void ftNess_SpecialAirS_Coll(HSD_GObj* gobj);
 
 // PK Flash callbacks (SpecialN)
 
-BOOL ftNess_CheckSpecialNHold(HSD_GObj* gobj);
+bool ftNess_CheckSpecialNHold(HSD_GObj* gobj);
 void ftNess_SpecialNSetNULL(HSD_GObj* gobj);
 void ftNess_ItemPKFlushSetNULL(HSD_GObj* gobj);
 void ftNess_SpecialNStart_Action(HSD_GObj* gobj);
@@ -336,8 +336,8 @@ void ftNess_SpecialAirNEnd_Coll(HSD_GObj* gobj);
 // PK Thunder callbacks (SpecialHi)
 
 void ftNess_SpecialHiStopGFX(HSD_GObj* gobj);
-BOOL ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj);
-BOOL ftNess_CheckSpecialHiHold(HSD_GObj* gobj);
+bool ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj);
+bool ftNess_CheckSpecialHiHold(HSD_GObj* gobj);
 void ftNess_ItemPKThunderRemove(HSD_GObj* gobj);
 void ftNess_SpecialHiTakeDamage(HSD_GObj* gobj);
 void ftNess_ItemPKThunderCheckOwn(HSD_GObj* gobj, HSD_GObj* gobj2);
@@ -416,7 +416,7 @@ void ftNess_SpecialLwTurn_Coll(HSD_GObj* gobj);
 void ftNess_SpecialAirLwTurn_Coll(HSD_GObj* gobj);
 void ftNess_SpecialLwTurn_GroundToAir(HSD_GObj* gobj);
 void ftNess_SpecialAirLwTurn_AirToGround(HSD_GObj* gobj);
-BOOL ftNess_SpecialLwHold_GroundOrAir(HSD_GObj* gobj);
+bool ftNess_SpecialLwHold_GroundOrAir(HSD_GObj* gobj);
 void ftNess_SpecialLwHit_Anim(HSD_GObj* gobj);
 void ftNess_SpecialAirLwHit_Anim(HSD_GObj* gobj);
 void ftNess_SpecialLwHit_IASA(HSD_GObj* gobj);

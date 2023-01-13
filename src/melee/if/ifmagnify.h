@@ -4,6 +4,6 @@
 #include <Runtime/platform.h>
 
 s32 func_802FB6E8(u8);
-BOOL func_802FC998(u8 ply_slot);
+bool func_802FC998(u8 ply_slot);
 
 #endif

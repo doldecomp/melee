@@ -23,7 +23,7 @@ void lbl_800E28C8(HSD_GObj* fighter_gobj)
 // func_800e28e8
 // Used for both OnItemPickup and OnItemCatch
 // https://decomp.me/scratch/MeDCx
-void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -47,7 +47,7 @@ void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj)
 // ftCFalcon_OnItemDrop
 // Used for both OnItemRelease and OnUnknownItemRelated
 // https://decomp.me/scratch/PCT5B
-void ftCFalcon_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftCFalcon_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }

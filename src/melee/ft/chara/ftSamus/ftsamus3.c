@@ -394,7 +394,7 @@ s32 ftSamus_8012A068(HSD_GObj* fighter_gobj)
 
 void ftSamus_8012A074(HSD_GObj* fighter_gobj)
 {
-    BOOL bool1;
+    bool bool1;
     Fighter* fp = getFighterPlus(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
     if (fp->x2210_ThrowFlags.b0) {

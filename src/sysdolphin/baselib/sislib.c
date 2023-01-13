@@ -39,7 +39,7 @@ typedef struct {
 /* 003A40D0 */ extern void func_803A74F0(unk_t, unk_t);
 /* 003A404C */ extern void func_803A746C(unk_t, s32, f32, f32);
 /* 003A3C80 */ extern s32 func_803A70A0(s32, unk_t, unk_t);
-/* 003A3BCC */ extern u32 lbl_803A6FEC(s32, s32, BOOL);
+/* 003A3BCC */ extern u32 lbl_803A6FEC(s32, s32, bool);
 /* 003A3778 */ extern void func_803A6B98(unk_t, u32, s32, s32, s32, s32, s32,
                                          s32, f64, f64, f64, f64, f64, f64, f64,
                                          f64);

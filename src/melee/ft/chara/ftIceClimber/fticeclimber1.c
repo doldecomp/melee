@@ -3,7 +3,7 @@
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftparts.h>
 
-void ftIceClimber_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftIceClimber_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
@@ -18,7 +18,7 @@ void ftIceClimber_OnItemVisible(HSD_GObj* fighter_gobj)
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftIceClimber_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftIceClimber_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
@@ -80,10 +80,10 @@ void ftIceClimber_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
 
 void ftIceClimber_OnKnockbackEnter(HSD_GObj* fighter_gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, TRUE);
+    Fighter_OnKnockbackEnter(fighter_gobj, true);
 }
 
 void ftIceClimber_OnKnockbackExit(HSD_GObj* fighter_gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, TRUE);
+    Fighter_OnKnockbackExit(fighter_gobj, true);
 }

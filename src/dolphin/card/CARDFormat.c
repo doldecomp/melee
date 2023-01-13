@@ -88,7 +88,7 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback)
     sram = __OSLockSram();
     *(u32*) &id->serial[20] = sram->counterBias;
     *(u32*) &id->serial[24] = sram->language;
-    __OSUnlockSram(FALSE);
+    __OSUnlockSram(false);
 
     rand = time = OSGetTime();
 
@@ -98,7 +98,7 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback)
         id->serial[i] = (u8) (sramEx->flashID[chan][i] + rand);
         rand = ((rand * 1103515245 + 12345) >> 16) & 0x7FFF;
     }
-    __OSUnlockSramEx(FALSE);
+    __OSUnlockSramEx(false);
 
     *(u32*) &id->serial[28] = viDTVStatus;
     *(OSTime*) &id->serial[12] = time;

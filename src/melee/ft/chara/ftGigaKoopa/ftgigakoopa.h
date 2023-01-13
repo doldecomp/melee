@@ -7,10 +7,10 @@
 void ftGKoopa_OnDeath(HSD_GObj*);
 void func_8014F698(HSD_GObj*);
 void ftGKoopa_OnLoad(HSD_GObj*);
-void ftGKoopa_OnItemPickup(HSD_GObj*, BOOL);
+void ftGKoopa_OnItemPickup(HSD_GObj*, bool);
 void ftGKoopa_OnItemInvisible(HSD_GObj*);
 void ftGKoopa_OnItemVisible(HSD_GObj*);
-void ftGKoopa_OnItemDrop(HSD_GObj*, BOOL);
+void ftGKoopa_OnItemDrop(HSD_GObj*, bool);
 void ftGKoopa_LoadSpecialAttrs(HSD_GObj*);
 void ftGKoopa_OnKnockbackEnter(HSD_GObj*);
 void ftGKoopa_OnKnockbackExit(HSD_GObj*);

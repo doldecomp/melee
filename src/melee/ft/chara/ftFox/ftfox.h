@@ -144,21 +144,21 @@ typedef struct _ftFoxAttributes {
 
 // Fox & Falco Functions //
 
-BOOL func_800E5534(HSD_GObj* gobj);
+bool func_800E5534(HSD_GObj* gobj);
 void ftFox_OnDeath(HSD_GObj* gobj);
 void func_800E5588(HSD_GObj* gobj);
-void ftFox_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
+void ftFox_OnItemPickup(HSD_GObj* gobj, bool arg1);
 void ftFox_OnItemInvisible(HSD_GObj* gobj);
 void ftFox_OnItemVisible(HSD_GObj* gobj);
-void ftFox_OnItemDrop(HSD_GObj* gobj, BOOL arg1);
+void ftFox_OnItemDrop(HSD_GObj* gobj, bool arg1);
 
 // Special Taunt (AppealS) //
 
 /// Check if Special Taunt has already been performed
-BOOL ftFox_AppealS_CheckIfUsed(Fighter* fp);
+bool ftFox_AppealS_CheckIfUsed(Fighter* fp);
 
 /// Check if Fox/Falco has pressed D-Pad Down
-BOOL ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj);
+bool ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj);
 
 /// Fox & Falco's Special Taunt Action State handler
 void ftFox_AppealS_Action(HSD_GObj* fighter_gobj);
@@ -185,9 +185,9 @@ void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos);
 void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos);
 
 void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj);
-BOOL ftFox_CheckRemoveBlaster(HSD_GObj* fighter_gobj);
+bool ftFox_CheckRemoveBlaster(HSD_GObj* fighter_gobj);
 s32 ftFox_GetBlasterAction(HSD_GObj* fighter_gobj);
-BOOL ftFox_CheckBlasterAction(HSD_GObj* fighter_gobj);
+bool ftFox_CheckBlasterAction(HSD_GObj* fighter_gobj);
 void ftFox_ClearBlaster(HSD_GObj* fighter_gobj);
 void ftFox_RemoveBlaster(HSD_GObj* fighter_gobj);
 void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj);
@@ -338,7 +338,7 @@ void ftFox_SpecialLwStart_IASA(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirLwStart_IASA(HSD_GObj* fighter_gobj);
 
 /// Check for drop-through platform while in @c SpecialLwStart
-BOOL ftFox_SpecialLwStart_CheckPass(HSD_GObj* fighter_gobj);
+bool ftFox_SpecialLwStart_CheckPass(HSD_GObj* fighter_gobj);
 
 /// Fox & Falco's Reflector Start Platform Drop Action State handler
 void ftFox_SpecialLwStart_Pass(HSD_GObj* fighter_gobj);
@@ -399,8 +399,8 @@ void ftFox_SpecialLwTurn_Coll(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirLwTurn_Coll(HSD_GObj* fighter_gobj);
 void ftFox_SpecialLwTurn_GroundToAir(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirLwTurn_GroundToAir(HSD_GObj* fighter_gobj);
-BOOL ftFox_SpecialLwTurn_Check(HSD_GObj* fighter_gobj);
-BOOL ftFox_SpecialLwHit_Check(HSD_GObj* fighter_gobj);
+bool ftFox_SpecialLwTurn_Check(HSD_GObj* fighter_gobj);
+bool ftFox_SpecialLwHit_Check(HSD_GObj* fighter_gobj);
 void ftFox_SpecialLwHit_Anim(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirLwHit_Anim(HSD_GObj* fighter_gobj);
 void ftFox_SpecialLwHit_IASA(HSD_GObj* fighter_gobj);
@@ -429,7 +429,7 @@ void ftFox_SpecialAirLwEnd_Action(HSD_GObj* fighter_gobj);
 // Side Special - Fox Illusion/Falco Phantasm (SpecialS) //
 
 void ftFox_SpecialS_CreateGFX(HSD_GObj* fighter_gobj);
-BOOL ftFox_SpecialS_CheckGhostRemove(HSD_GObj* fighter_gobj);
+bool ftFox_SpecialS_CheckGhostRemove(HSD_GObj* fighter_gobj);
 u32 ftFox_SpecialS_GetCmdVar2(HSD_GObj* fighter_gobj);
 void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index,
                                         Vec3* ghostPos);

@@ -13,7 +13,7 @@ void func_803B3344(u8 byte)
         return;
     }
 
-    longjmp(&lbl_804D2648, TRUE);
+    longjmp(&lbl_804D2648, true);
 }
 
 void func_803B3398(void* src, size_t size)
@@ -26,5 +26,5 @@ void func_803B3398(void* src, size_t size)
         return;
     }
 
-    longjmp(&lbl_804D2648, TRUE);
+    longjmp(&lbl_804D2648, true);
 }

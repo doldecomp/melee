@@ -13,8 +13,8 @@ void ftLuigi_SpecialS_SetGFX(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (fp->x2219_flag.bits.b0 == FALSE)
-        fp->x2219_flag.bits.b0 = TRUE;
+    if (fp->x2219_flag.bits.b0 == false)
+        fp->x2219_flag.bits.b0 = true;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
@@ -31,15 +31,15 @@ void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj)
     if (fp->x673 < luigiAttrs->x4_LUIGI_GREENMISSILE_SMASH) {
         fp->luigiVars[0].SpecialS.chargeFrames =
             luigiAttrs->x8_LUIGI_GREENMISSILE_CHARGE_RATE;
-        fp->x2072_b4 = TRUE;
+        fp->x2072_b4 = true;
     } else {
         fp->luigiVars[0].SpecialS.chargeFrames = 0;
     }
 
     if (HSD_Randi(luigiAttrs->x44_LUIGI_GREENMISSILE_MISFIRE_CHANCE) == 0)
-        fp->luigiVars[0].SpecialS.isMisfire = TRUE;
+        fp->luigiVars[0].SpecialS.isMisfire = true;
     else
-        fp->luigiVars[0].SpecialS.isMisfire = FALSE;
+        fp->luigiVars[0].SpecialS.isMisfire = false;
 }
 
 // 0x80142B14
@@ -451,9 +451,9 @@ static inline void ftLuigi_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
 static inline void ftLuigi_SpecialS_Setup(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    if (fp->x2219_flag.bits.b0 == FALSE) {
+    if (fp->x2219_flag.bits.b0 == false) {
         ef_Spawn(0x50A, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
-        fp->x2219_flag.bits.b0 = TRUE;
+        fp->x2219_flag.bits.b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

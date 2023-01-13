@@ -25,7 +25,7 @@ void ftNess_AttackS4_Action(
 
     fp->x2218_flag.bits.b0 = 0;
 
-    fp->x2200_ftcmd_var0 = FALSE;
+    fp->x2200_ftcmd_var0 = false;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKS4, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
@@ -45,21 +45,21 @@ void ftNess_AttackS4_Action(
 
 // 0x80114CC0
 // https://decomp.me/scratch/E8Nsh
-BOOL ftNess_CheckNessBatRemove(
+bool ftNess_CheckNessBatRemove(
     HSD_GObj*
         fighter_gobj) // Check if Ness is in F-Smash + has Baseball Bat item
 {
     Fighter* fp = fighter_gobj->user_data;
 
     if (fp->x10_action_state_index != AS_NESS_ATTACKS4) {
-        return TRUE;
+        return true;
     }
 
     if (fp->sa.ness.x2248_baseballBatGObj == NULL) {
-        return TRUE;
+        return true;
     }
 
-    return FALSE;
+    return false;
 };
 
 // 0x80114CF4
@@ -97,7 +97,7 @@ void ftNess_AttackS4_Anim(
 
     if (fighter_data1->x2218_flag.bits.b3 == 0) {
         if (fighter_data1->x2200_ftcmd_var0 !=
-            FALSE) // Check if reflect bubble flag is enabled in fp script
+            false) // Check if reflect bubble flag is enabled in fp script
         {
             ness_attr = fighter_data1->x2D4_specialAttributes;
             ftColl_CreateReflectHit(
@@ -106,7 +106,7 @@ void ftNess_AttackS4_Anim(
         }
     }
 
-    else if (fighter_data1->x2200_ftcmd_var0 == FALSE)
+    else if (fighter_data1->x2200_ftcmd_var0 == false)
     {
         fighter_data1->x2218_flag.bits.b3 = 0; // Toggle reflect bubble OFF//
     }

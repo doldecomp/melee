@@ -23,5 +23,5 @@ s32 HSD_PadGetResetSwitch(void)
 {
     PadLibData* p = &HSD_PadLibData;
 
-    return (p->reset_switch != 0) ? TRUE : FALSE;
+    return (p->reset_switch != 0) ? true : false;
 }

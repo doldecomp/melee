@@ -30,8 +30,8 @@ void func_800EED50(s32, s32);
 void func_800F1D24(HSD_GObj*);
 void func_800F5BA4(struct _Fighter*);
 void func_800F5C34(struct _Fighter*);
-void func_800F5D04(HSD_GObj* fighter_gobj, BOOL);
-void ftKirby_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool);
+void func_800F5D04(HSD_GObj* fighter_gobj, bool);
+void ftKirby_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
 void func_800EEB00(HSD_GObj*, void*);
 void func_800EEB1C(HSD_GObj*, void*);
 

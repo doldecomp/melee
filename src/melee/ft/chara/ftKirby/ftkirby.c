@@ -62,7 +62,7 @@ void func_800EE528(void)
     }
 }
 
-/* static */ s32 func_800F1BAC(HSD_GObj* fighter_gobj, s32, BOOL);
+/* static */ s32 func_800F1BAC(HSD_GObj* fighter_gobj, s32, bool);
 
 void ftKirby_OnDeath(HSD_GObj* fighter_gobj)
 {
@@ -113,7 +113,7 @@ void ftKirby_800EE74C(HSD_GObj* fighter_gobj)
     func_800F5318(fighter_gobj);
     func_800F9090(fighter_gobj);
     func_800F19AC(fighter_gobj);
-    func_800F5D04(fighter_gobj, FALSE);
+    func_800F5D04(fighter_gobj, false);
     fp->cb.x21E8_callback_OnDeath3 = NULL;
 }
 
@@ -133,7 +133,7 @@ void ftKirby_800EE7B8(HSD_GObj* fighter_gobj)
 /// @file
 /// @todo Matching, but needs more data moved over for DOL match
 
-#if FALSE
+#if false
 
 void func_800EE818(HSD_GObj* fighter_gobj)
 {
@@ -175,7 +175,7 @@ void ftKirby_OnItemVisible(HSD_GObj* fighter_gobj)
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftKirby_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftKirby_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }

@@ -56,24 +56,24 @@ void func_8026B294(HSD_GObj* item_gobj,
 
 // 0x8026B2B4
 // https://decomp.me/scratch/jaDrt
-BOOL func_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy
+bool func_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy
 {
     Item* temp_item = item_gobj->user_data;
     if (temp_item->xCC_item_attr->x0_is_heavy != 0) {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 // 0x8026B2D8
 // https://decomp.me/scratch/cGHw4
-BOOL func_8026B2D8(HSD_GObj* item_gobj) // Check if item is heavy again?
+bool func_8026B2D8(HSD_GObj* item_gobj) // Check if item is heavy again?
 {
     Item* temp_item = item_gobj->user_data;
     if (temp_item->xCC_item_attr->x0_is_heavy == 1) {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 // 0x8026B300
@@ -238,7 +238,7 @@ s32 func_8026B47C(HSD_GObj* item_gobj) // Get heal value of healing items
 
 // 0x8026B4F0
 // https://decomp.me/scratch/uNMc0
-BOOL func_8026B4F0(HSD_GObj* item_gobj) // Check if item is a healing item
+bool func_8026B4F0(HSD_GObj* item_gobj) // Check if item is a healing item
 {
     s32 itemID;
     Item* temp_item;
@@ -252,9 +252,9 @@ BOOL func_8026B4F0(HSD_GObj* item_gobj) // Check if item is a healing item
     case It_Kind_Coin:            // Coin ???
     case Pokemon_Lucky_Egg:       // Chansey's Healing Egg
     case It_Kind_WhispyHealApple: // Healing Whispy Apple
-        return TRUE;
+        return true;
     default:
-        return FALSE;
+        return false;
     }
 }
 
@@ -301,7 +301,7 @@ s32 func_8026B588(void) // Get unknown integer from itCommonData
 
 // 0x8026B594
 // https://decomp.me/scratch/rBoew
-BOOL func_8026B594(HSD_GObj* item_gobj) // Check if item can fire projectiles
+bool func_8026B594(HSD_GObj* item_gobj) // Check if item can fire projectiles
 {
     s32 itemID;
     Item* item_data;
@@ -315,12 +315,12 @@ BOOL func_8026B594(HSD_GObj* item_gobj) // Check if item can fire projectiles
     case It_Kind_LipStick:
     case It_Kind_F_Flower:
         if ((s32) item_data->xD4C <= 0) {
-            return TRUE;
+            return true;
         }
 
     default:
     case It_Kind_Harisen: // Why though
-        return FALSE;
+        return false;
     }
 }
 
@@ -340,7 +340,7 @@ HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2,
 
 extern HSD_GObj* func_80086368(Vec3*, HSD_GObj*, f32);
 
-#if FALSE
+#if false
 
 /**
  * @todo Missing third argument passed to #func_80086368.
@@ -407,7 +407,7 @@ f32 func_8026B6A8(Vec3* pos, HSD_GObj* arg1)
     func_800864A8(pos, arg1);
 }
 
-BOOL func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item?
+bool func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item?
 {
     s32 itemID;
     s32 itemID_2;
@@ -418,17 +418,17 @@ BOOL func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item?
     itemID = item_data->x10_item_kind;
     if (((itemID >= It_Kind_Kuriboh) && (itemID < It_Kind_Octarock_Stone)) ||
         ((itemID_2 = item_data->x10_item_kind,
-          ((itemID_2 < It_Kind_Old_Kuri) == FALSE)) &&
+          ((itemID_2 < It_Kind_Old_Kuri) == false)) &&
          (itemID_2 < It_Kind_Arwing_Laser)))
     {
         itemID_3 = item_data->x10_item_kind;
         if ((itemID_3 != It_Kind_Kyasarin_Egg) &&
             (itemID_3 != It_Kind_WhispyApple))
         {
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
 // 0x8026B718
@@ -467,15 +467,15 @@ void func_8026B73C(HSD_GObj* item_gobj) // Toggle bits in 0xDC8 word
 
 // 0x8026B774
 // https://decomp.me/scratch/MGx2T
-BOOL func_8026B774(HSD_GObj* item_gobj,
+bool func_8026B774(HSD_GObj* item_gobj,
                    u8 arg1) // Bitwise operations in 0xDC8 word
 {
     Item* item_data = item_gobj->user_data;
 
     if (((item_data->xDC8_word.word >> 0xDU) & 0xF & (1 << arg1)) != 0) {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 // 0x8026B7A4
@@ -571,11 +571,11 @@ void func_8026B7F8(HSD_GObj* fighter_gobj) // Remove item from player on death?
 
 // 0x8026B894
 // https://decomp.me/scratch/4J9JB
-BOOL func_8026B894(HSD_GObj* item_gobj,
+bool func_8026B894(HSD_GObj* item_gobj,
                    HSD_GObj* referenced_gobj) // Remove all GObj interaction
                                               // references from item
 {
-    BOOL ret;
+    bool ret;
     Item* temp_item;
 
     temp_item = item_gobj->user_data;
@@ -894,7 +894,7 @@ void func_8026BBCC(HSD_GObj* item_gobj,
     pos->z = collData->x1C_vec.z + temp_float;
 }
 
-extern BOOL func_80086960(HSD_GObj*);
+extern bool func_80086960(HSD_GObj*);
 extern void func_80086A4C(HSD_GObj*, f32);
 
 // 0x8026BC14
@@ -906,7 +906,7 @@ void func_8026BC14(
 
     item_data = item_gobj->user_data;
     if ((item_data->owner != NULL) &&
-        (func_80086960(item_data->owner) != FALSE))
+        (func_80086960(item_data->owner) != false))
     {
         func_80086A4C(item_data->owner, item_data->xCBC_hitlagFrames - 1.0f);
     }
@@ -930,7 +930,7 @@ HSD_GObj* func_8026BC78(HSD_GObj* item_gobj) // Get item owner
 
 // 0x8026BC84
 // https://decomp.me/scratch/s3W5l // Get item attack kind
-BOOL func_8026BC84(HSD_GObj* item_gobj)
+bool func_8026BC84(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
     return item_data->xD88_attackID;
@@ -946,7 +946,7 @@ void func_8026BC90(HSD_GObj* item_gobj,
     pos->z = 0.0f;
     pos->y = 0.0f;
     pos->x = 0.0f;
-    if ((item_gobj != NULL) && (func_80086960(item_gobj) != FALSE)) {
+    if ((item_gobj != NULL) && (func_80086960(item_gobj) != false)) {
         func_80086644(item_gobj, pos);
     }
 }
@@ -1227,7 +1227,7 @@ CollData* func_8026C100(HSD_GObj* item_gobj) // Get item's CollData pointer
 // https://decomp.me/scratch/vvPkf
 void func_8026C16C(
     HSD_GObj* item_gobj,
-    BOOL isHeadless) // Check if Hammer item's head should break off
+    bool isHeadless) // Check if Hammer item's head should break off
 {
     Item* item_data = item_gobj->user_data;
     if ((s32) item_data->xD4C <= 0) {
@@ -1259,7 +1259,7 @@ u32 func_8026C1D4(void) // Get unknown var from r13 pointer
 
 // 0x8026C1E8
 // https://decomp.me/scratch/e6IVC
-BOOL func_8026C1E8(HSD_GObj* item_gobj) // Check if item has grabbed a GObj?
+bool func_8026C1E8(HSD_GObj* item_gobj) // Check if item has grabbed a GObj?
 {
     Item* item_data = item_gobj->user_data;
 

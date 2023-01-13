@@ -66,14 +66,14 @@ struct ItemLogicTable {
     void (*xC_callback_OnPickup)(HSD_GObj* item);
     void (*x10_callback_OnDrop)(HSD_GObj* item);
     void (*x14_callback_OnThrow)(HSD_GObj* item);
-    BOOL (*x18_callback_OnGiveDamage)(HSD_GObj* item);
-    BOOL (*x1C_callback_OnTakeDamage)(HSD_GObj* item);
+    bool (*x18_callback_OnGiveDamage)(HSD_GObj* item);
+    bool (*x1C_callback_OnTakeDamage)(HSD_GObj* item);
     void (*x20_callback_EnterAir)(HSD_GObj* item);
-    BOOL (*x24_callback_OnReflect)(HSD_GObj* item);
-    BOOL (*x28_callback_OnClank)(HSD_GObj* item);
-    BOOL (*x2C_callback_OnAbsorb)(HSD_GObj* item);
-    BOOL (*x30_callback_OnShieldBounce)(HSD_GObj* item);
-    BOOL (*x34_callback_OnHitShield)(HSD_GObj* item);
+    bool (*x24_callback_OnReflect)(HSD_GObj* item);
+    bool (*x28_callback_OnClank)(HSD_GObj* item);
+    bool (*x2C_callback_OnAbsorb)(HSD_GObj* item);
+    bool (*x30_callback_OnShieldBounce)(HSD_GObj* item);
+    bool (*x34_callback_OnHitShield)(HSD_GObj* item);
     void (*x38_callback_OnUnknown)(HSD_GObj* item, HSD_GObj* fighter);
 };
 
@@ -272,7 +272,7 @@ typedef struct itHitVictim {
 } itHitVictim;
 
 typedef struct itHit {
-    BOOL x0_toggle; // Toggles hitbox on/off.
+    bool x0_toggle; // Toggles hitbox on/off.
     s32 x4_unk;
     s32 x8_damage;        // Projected damage
     f32 xC_damage_staled; // Staled damage, actually applied

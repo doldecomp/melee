@@ -16,7 +16,7 @@ typedef struct _HSD_Shadow {
     f32 scaleT;                 // 0x10
     f32 transS;                 // 0x14
     f32 transT;                 // 0x18
-    BOOL active;                // 0x1C
+    bool active;                // 0x1C
     u8 intensity;               // 0x20
     void* user_data;            // 0x24
 } HSD_Shadow;

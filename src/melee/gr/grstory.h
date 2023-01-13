@@ -25,7 +25,7 @@ void func_801E33E0(HSD_GObj*);
 void func_801E3414(void);
 void func_801E3418(HSD_GObj*);
 void func_801E366C(HSD_GObj*);
-static BOOL func_801E36D0(s32);
+static bool func_801E36D0(s32);
 s32 func_801E36D8(Vec3*, s32, struct _HSD_JObj*);
 
 #endif

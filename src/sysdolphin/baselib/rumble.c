@@ -81,7 +81,7 @@ struct Struct804C22E0 lbl_804C22E0[4];
 
 void HSD_PadRumbleOn(u8 a)
 {
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
     struct Struct804C22E0* r5 = &lbl_804C22E0[a];
 
     r5->unk2 = 1;
@@ -90,7 +90,7 @@ void HSD_PadRumbleOn(u8 a)
 
 void func_803780DC(u8 a)
 {
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
     struct Struct804C22E0* r5 = &lbl_804C22E0[a];
 
     r5->unk2 = 0;
@@ -113,7 +113,7 @@ void func_80378128(struct Struct804C22E0* a, HSD_PadRumbleListData* b)
 void func_80378170(u8 a)
 {
     struct Struct804C22E0* r28 = &lbl_804C22E0[a];
-    BOOL r29 = OSDisableInterrupts();
+    bool r29 = OSDisableInterrupts();
     HSD_PadRumbleListData* r4 = r28->unk8;
 
     while (r4 != NULL) {
@@ -135,7 +135,7 @@ void func_80378208(void)
 void func_80378280(u8 a, int b)
 {
     struct Struct804C22E0* r31 = &lbl_804C22E0[a];
-    BOOL r3 = OSDisableInterrupts();
+    bool r3 = OSDisableInterrupts();
     struct _HSD_PadRumbleListData* r7 = r31->unk8;
 
     while (r7 != NULL) {
@@ -149,7 +149,7 @@ void func_80378280(u8 a, int b)
 
 void func_80378330_inline(u8 a, int b)
 {
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
     struct _HSD_PadRumbleListData* r4 = lbl_804C22E0[a].unk8;
 
     while (r4 != NULL) {
@@ -194,7 +194,7 @@ int func_80378430(u8 a, int b, int c, int d, void* e)
     struct _RumbleInfo* r31 = &HSD_PadLibData.rumble_info;
     struct Struct804C22E0* r30 = &lbl_804C22E0[a];
     int r29 = 0;
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
     HSD_PadRumbleListData* r7 = r31->listdatap;
 
     if (r7 != NULL && r30->unk4 < r31->max_list) {
@@ -219,7 +219,7 @@ int func_80378430(u8 a, int b, int c, int d, void* e)
 
 void func_80378524(int a)
 {
-    BOOL intrEnabled = OSDisableInterrupts();
+    bool intrEnabled = OSDisableInterrupts();
 
     HSD_PadLibData.rumble_info.unk2 = a;
     OSRestoreInterrupts(intrEnabled);

@@ -328,9 +328,9 @@ void ftZelda_80139CC0(HSD_GObj* fighter_gobj)
 // 80139D60 - 80139F6C (0x20C bytes)
 // https://decomp.me/scratch/LfvOU (with helper)
 // https://decomp.me/scratch/OJ62l (single function)
-BOOL ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj)
+bool ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj)
 {
-    BOOL var_r0;
+    bool var_r0;
     Fighter* fighter2;
     ftZeldaAttributes* attributes2;
 
@@ -338,18 +338,18 @@ BOOL ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj)
     attributes2 = fighter2->x2D4_specialAttributes;
 
     if (fighter2->x234C_stateVar4_s32 >= attributes2->x4C)
-        var_r0 = TRUE;
+        var_r0 = true;
     else if (func_8009A134(fighter_gobj))
-        var_r0 = FALSE;
+        var_r0 = false;
     else
-        var_r0 = TRUE;
+        var_r0 = true;
 
     return var_r0;
 }
 void ftZelda_80139D60(HSD_GObj* fighter_gobj)
 {
     s32 ledgeGrabDir;
-    BOOL returnVar;
+    bool returnVar;
     f32 angle1, angle2, angle3;
     Fighter* fp;                   // r31
     ftZeldaAttributes* attributes; // r30
@@ -708,7 +708,7 @@ void ftZelda_8013A5C4(HSD_GObj* fighter_gobj)
     Fighter* fp;                   // r3
     ftZeldaAttributes* attributes; // r31
     s32 ledgeGrabDir;
-    BOOL result;
+    bool result;
     s32 unused[2];
 
     fp = fighter_gobj->user_data;

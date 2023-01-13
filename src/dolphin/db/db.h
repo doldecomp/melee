@@ -11,6 +11,6 @@ typedef struct {
 } DBInterface;
 
 void DBInit(void);
-BOOL DBIsDebuggerPresent(void);
+bool DBIsDebuggerPresent(void);
 
 #endif

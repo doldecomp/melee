@@ -4,7 +4,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbaudio_ax.h>
 
-#define TEST(expr) (expr) ? TRUE : FALSE
+#define TEST(expr) (expr) ? true : false
 
 /* static */ s32 func_800C06B4(struct _Fighter*);
 
@@ -38,9 +38,9 @@ s32 func_80087878(HSD_GObj* fighter_gobj, s32 arg1)
 
     if ((fp->x1968_jumpsUsed <= 1) && (fp->x10_action_state_index == 0) &&
         (arg1 != 0x23) && (arg1 != 0x24) && (arg1 != 0x25))
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_800878BC(HSD_GObj* fighter_gobj)
@@ -49,9 +49,9 @@ s32 func_800878BC(HSD_GObj* fighter_gobj)
 
     if ((fp->x1974_heldItem != NULL) &&
         (func_8026B2B4(fp->x1974_heldItem) == 1))
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_80087900(HSD_GObj* fighter_gobj)
@@ -59,9 +59,9 @@ s32 func_80087900(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     if ((fp->x1974_heldItem != NULL) && (itGetKind(fp->x1974_heldItem) == 0x1E))
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_80087944(HSD_GObj* fighter_gobj)
@@ -69,18 +69,18 @@ s32 func_80087944(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     if ((fp->x1974_heldItem != NULL) && (itGetKind(fp->x1974_heldItem) == 0x7))
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_80087988(HSD_GObj* fighter_gobj)
 {
     if ((ftGetParasolStatus(fighter_gobj) == 4) ||
         (ftGetParasolStatus(fighter_gobj) == 5))
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_800879D8(HSD_GObj* fighter_gobj)
@@ -88,9 +88,9 @@ s32 func_800879D8(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     if (fp->x1980 != 0)
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_800879F8(HSD_GObj* fighter_gobj)
@@ -98,9 +98,9 @@ s32 func_800879F8(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     if (fp->x221D_flag.bits.b6 & 1)
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_80087A18(HSD_GObj* fighter_gobj)
@@ -111,9 +111,9 @@ s32 func_80087A18(HSD_GObj* fighter_gobj)
     if ((fp->x2226_flag.bits.b4) &&
         ((var1 = func_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) &&
         ((fp->x2226_flag.bits.b5)))
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 u8 func_80087A80(HSD_GObj* fighter_gobj)
@@ -153,9 +153,9 @@ void func_80087AC0(HSD_GObj* fighter_gobj, s32 arg1)
     u8 var2;
     Fighter* fp = getFighter(fighter_gobj);
     if (arg1 != 0) {
-        var1 = FALSE;
+        var1 = false;
     } else {
-        var1 = TRUE;
+        var1 = true;
     }
     var0 = var1;
     var2 = fp->x221E_flag.bits.b7;
@@ -170,9 +170,9 @@ s32 func_80087AEC(HSD_GObj* fighter_gobj)
     if ((fp->x34_scale.y != fp->x34_scale.x) ||
         ((fp->x2226_flag.bits.b4) || (fp->x2223_flag.bits.b7) ||
          (fp->x197C != 0)))
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_80087B34(HSD_GObj* fighter_gobj)

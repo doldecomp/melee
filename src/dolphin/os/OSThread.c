@@ -107,7 +107,7 @@ OSThread* OSGetCurrentThread(void)
 
 s32 OSDisableScheduler(void)
 {
-    BOOL intr = OSDisableInterrupts();
+    bool intr = OSDisableInterrupts();
     s32 ret = Reschedule;
     Reschedule = ret + 1;
     OSRestoreInterrupts(intr);
@@ -116,7 +116,7 @@ s32 OSDisableScheduler(void)
 
 s32 OSEnableScheduler(void)
 {
-    BOOL intr = OSDisableInterrupts();
+    bool intr = OSDisableInterrupts();
     s32 ret = Reschedule;
     Reschedule = ret - 1;
     OSRestoreInterrupts(intr);
@@ -478,7 +478,7 @@ lbl_8034B24C:
 #pragma pop
 
 #pragma push
-asm BOOL OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*, OSThread_Unk2*,
+asm bool OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*, OSThread_Unk2*,
                         u32, s32, u16)
 { // clang-format off
     nofralloc

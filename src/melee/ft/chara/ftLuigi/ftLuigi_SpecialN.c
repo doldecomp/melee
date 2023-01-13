@@ -85,7 +85,7 @@ void ftLuigi_SpecialN_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    if (func_80082708(fighter_gobj) == FALSE) {
+    if (func_80082708(fighter_gobj) == false) {
         fp = getFighter(fighter_gobj);
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
@@ -100,7 +100,7 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    if (func_80081D0C(fighter_gobj) != FALSE) {
+    if (func_80081D0C(fighter_gobj) != false) {
         fp = getFighter(fighter_gobj);
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(
@@ -117,15 +117,15 @@ void ftLuigi_SpecialN_FireSpawn(HSD_GObj* fighter_gobj)
     Vec3 sp10;
     Fighter* fp = fighter_gobj->user_data;
     s32 unused;
-    BOOL flag;
+    bool flag;
 
     if (fp->x2210_ThrowFlags.b0 != 0) {
         fp->x2210_ThrowFlags.b0 = 0;
-        flag = TRUE;
+        flag = true;
     } else
-        flag = FALSE;
+        flag = false;
 
-    if (flag != FALSE) {
+    if (flag != false) {
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x17)].x0_jobj,
                       NULL, &sp10);
         func_802C01AC(fighter_gobj, &sp10, It_Kind_Luigi_Fire, fp->facing_dir);

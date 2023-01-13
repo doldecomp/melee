@@ -46,21 +46,21 @@ typedef struct EXIControl {
 } EXIControl;
 
 void SetExiInterruptMask(EXIChannel, volatile EXIControl*);
-BOOL EXIImm(EXIChannel, void* buf, s32 len, u32 type, EXICallback);
-BOOL EXIImmEx(EXIChannel, void* buf, s32 len, u32 mode);
-BOOL EXIDma(EXIChannel, void* buf, s32 len, u32 type, EXICallback);
-BOOL EXISync(EXIChannel);
-u32 EXIClearInterrupts(EXIChannel, BOOL exi, BOOL tc, BOOL ext);
+bool EXIImm(EXIChannel, void* buf, s32 len, u32 type, EXICallback);
+bool EXIImmEx(EXIChannel, void* buf, s32 len, u32 mode);
+bool EXIDma(EXIChannel, void* buf, s32 len, u32 type, EXICallback);
+bool EXISync(EXIChannel);
+u32 EXIClearInterrupts(EXIChannel, bool exi, bool tc, bool ext);
 EXICallback EXISetExiCallback(EXIChannel, EXICallback exiCallback);
-BOOL EXIProbe(EXIChannel);
+bool EXIProbe(EXIChannel);
 s32 EXIProbeEx(EXIChannel);
-BOOL EXIAttach(EXIChannel, EXICallback);
-BOOL EXIDetach(EXIChannel);
-BOOL EXISelect(EXIChannel, u32 dev, u32 freq);
-BOOL EXIDeselect(EXIChannel);
+bool EXIAttach(EXIChannel, EXICallback);
+bool EXIDetach(EXIChannel);
+bool EXISelect(EXIChannel, u32 dev, u32 freq);
+bool EXIDeselect(EXIChannel);
 void EXIInit(void);
-BOOL EXILock(EXIChannel, u32 dev, EXICallback unlockedCallback);
-BOOL EXIUnlock(EXIChannel);
+bool EXILock(EXIChannel, u32 dev, EXICallback unlockedCallback);
+bool EXIUnlock(EXIChannel);
 u32 EXIGetState(EXIChannel);
 s32 EXIGetID(EXIChannel, u32 dev, u32* id);
 

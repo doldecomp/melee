@@ -75,7 +75,7 @@ HSD_GObjProc* func_8038FD54(HSD_GObj* gobj, void (*func)(HSD_GObj*), u8 pri)
 void func_8038FE24(HSD_GObjProc* gproc)
 {
     if (!lbl_804CE3E4.b0 && gproc == lbl_804D7838) {
-        lbl_804CE3E4.b2 = TRUE;
+        lbl_804CE3E4.b2 = true;
     } else {
         func_8038FCE4(gproc);
         HSD_ObjFree(&gobjproc_alloc_data, gproc);

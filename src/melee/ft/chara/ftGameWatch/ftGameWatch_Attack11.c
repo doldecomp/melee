@@ -115,25 +115,25 @@ void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* fighter_gobj)
 // 0x8014C034
 // https://decomp.me/scratch/Nkgz4 // Check if Mr. Game & Watch is in any of his
 // jab action states
-BOOL ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
+bool ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 {
     s32 ASID = getFighter(fighter_gobj)->x10_action_state_index;
     if ((ASID >= AS_GAMEWATCH_ATTACK11) && (ASID <= AS_GAMEWATCH_ATTACK100END))
     {
-        return FALSE;
+        return false;
     }
-    return TRUE;
+    return true;
 }
 
 // 0x8014C05C - Check if Mr. Game & Watch is performing Jab 1 (Attack11)
-BOOL ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
+bool ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
 {
     if (getFighter(fighter_gobj)->x10_action_state_index !=
         AS_GAMEWATCH_ATTACK11)
     {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 // 0x8014C07C
@@ -144,7 +144,7 @@ void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     s32 unused;
 
-    if (func_80094790(fighter_gobj) == FALSE) {
+    if (func_80094790(fighter_gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
         fp->x2218_flag.bits.b1 = 0;
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACK11,

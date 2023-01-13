@@ -123,7 +123,7 @@ void func_80369FC8(HSD_CObj* cobj, f32);
 void func_80369FF4(HSD_CObj* cobj, s16*);
 void func_8036A058(HSD_CObj* cobj, s16*);
 void func_8036A144(u32);
-BOOL HSD_CObjSetCurrent(HSD_Obj*, cobj_UnkCallback1);
+bool HSD_CObjSetCurrent(HSD_Obj*, cobj_UnkCallback1);
 HSD_CObj* HSD_CObjGetCurrent(void);
 void HSD_CObjEndCurrent(void);
 void func_803695F0(unk_t);

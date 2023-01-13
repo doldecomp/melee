@@ -77,12 +77,12 @@ void ftCLink_OnItemDropExt(HSD_GObj* gobj, s32 arg1)
     ftCLink_OnItemDrop(gobj, arg1);
 }
 
-void ftCLink_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftCLink_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
-void ftCLink_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftCLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter* fp = getFighter(gobj);
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
@@ -133,26 +133,26 @@ void func_8014919C(HSD_GObj* gobj)
     }
 }
 
-BOOL func_8014920C(HSD_GObj* gobj)
+bool func_8014920C(HSD_GObj* gobj)
 {
     s32 temp_r0;
     Fighter* fp;
 
     if (gobj == NULL) {
-        return TRUE;
+        return true;
     }
     fp = gobj->user_data;
     if (fp == NULL) {
-        return TRUE;
+        return true;
     }
     temp_r0 = fp->x10_action_state_index;
     if (temp_r0 != 0x156 && temp_r0 != 0x157) {
-        return TRUE;
+        return true;
     }
     if (fp->sa.clink.x2244 == 0) {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 void func_80149268(HSD_GObj* gobj)

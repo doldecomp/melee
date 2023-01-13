@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void __OSReboot(u32 resetCode, BOOL forceMenu);
+void __OSReboot(u32 resetCode, bool forceMenu);
 
 #endif

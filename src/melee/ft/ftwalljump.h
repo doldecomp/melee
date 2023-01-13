@@ -3,6 +3,6 @@
 
 #include <sysdolphin/baselib/gobj.h>
 
-BOOL func_8008169C(HSD_GObj* pPlayerEntityStruct /*r3*/);
+bool func_8008169C(HSD_GObj* pPlayerEntityStruct /*r3*/);
 
 #endif

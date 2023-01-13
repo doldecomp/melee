@@ -63,7 +63,7 @@ typedef struct _ftDonkeyAttributes {
 
 void ftDonkey_800DF980(HSD_GObj* fighter_gobj);
 
-BOOL ftDonkey_800DFA98(HSD_GObj* fighter_gobj);
+bool ftDonkey_800DFA98(HSD_GObj* fighter_gobj);
 
 void ftDonkey_800DFAE4(HSD_GObj* fighter_gobj, f32);
 void ftDonkey_800DFB54(HSD_GObj* fighter_gobj);

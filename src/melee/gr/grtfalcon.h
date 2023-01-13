@@ -22,7 +22,7 @@ static void lbl_8021FEB8(HSD_GObj* gobj);
 static s32 lbl_8021FF08(void);
 static void lbl_8021FF10(HSD_GObj*);
 static void lbl_8021FF30(void);
-static BOOL lbl_8021FF34(long);
+static bool lbl_8021FF34(long);
 static s32 lbl_8021FF3C(Vec3*, s32, struct _HSD_JObj*);
 
 #endif

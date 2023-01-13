@@ -15,12 +15,12 @@
 #include <melee/mp/mpcoll.h>
 
 /// Check if items are enabled
-BOOL func_80266F3C(void)
+bool func_80266F3C(void)
 {
     if (func_8016AE80() != -1)
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 /// Check to load ItCo.dat/usd
@@ -32,7 +32,7 @@ void func_80266F70(void)
 /// ItCo prefunction with 0
 void func_80266FA8(void)
 {
-    func_8027870C(FALSE);
+    func_8027870C(false);
 }
 
 static HSD_ObjAllocData unkAllocData0;
@@ -78,7 +78,7 @@ void func_80266FCC(void)
     lbl_804A0C64.x5C = lbl_804D6D28->x28;
     lbl_804A0C64.x64 = lbl_804D6D28->x148;
 
-    lbl_804A0CCC.x154.bits.b0 = TRUE;
+    lbl_804A0CCC.x154.bits.b0 = true;
     lbl_804A0CCC.x150 = 1;
 
     lbl_804A0E24.x = -1;
@@ -101,7 +101,7 @@ void func_80266FCC(void)
 
 static inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
 {
-    if (it->xDC8_word.flags.x19 == TRUE)
+    if (it->xDC8_word.flags.x19 == true)
         HSD_JObjSetRotationY(jobj, M_PI / 2 * it->facing_dir);
 }
 
@@ -152,13 +152,13 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     func_802753DC(item_gobj);
 
     item_data->xC64_reflectGObj = NULL;
-    item_data->xDCC_flag.b0 = FALSE;
+    item_data->xDCC_flag.b0 = false;
 
     item_data->xC90_absorbGObj = NULL;
     item_data->xD0C = 0;
 
     func_8026B390(item_gobj);
-    item_data->xDC8_word.flags.x13 = FALSE;
+    item_data->xDC8_word.flags.x13 = false;
 
     if (spawnItem->x48_ground_or_air == GA_Air)
         func_802762BC(item_data);
@@ -374,70 +374,70 @@ void func_802676F4(HSD_GObj* item_gobj)
 
 /// @remarks #func_8026862C loads two integers into this,
 /// but the second one goes unused?
-BOOL func_8026784C(enum_t dropItem, int unused)
+bool func_8026784C(enum_t dropItem, int unused)
 {
-    BOOL result = FALSE;
+    bool result = false;
 
     switch (dropItem) {
     case 0:
         if (lbl_804A0C64.x0 >= lbl_804A0C64.x4)
-            result = TRUE;
+            result = true;
 
         break;
 
     case 1:
         if (lbl_804A0C64.x8 >= lbl_804A0C64.xC)
-            result = TRUE;
+            result = true;
 
         break;
 
     case 2:
         if (lbl_804A0C64.x10 >= lbl_804A0C64.x14)
-            result = TRUE;
+            result = true;
 
         break;
 
     case 3:
         if (lbl_804A0C64.x58 >= lbl_804A0C64.x5C)
-            result = TRUE;
+            result = true;
 
         break;
 
     case 5:
         if (lbl_804A0C64.x40 >= lbl_804A0C64.x44)
-            result = TRUE;
+            result = true;
 
         break;
 
     case 7:
         if (lbl_804A0C64.x34 >= lbl_804A0C64.x38)
-            result = TRUE;
+            result = true;
 
         break;
 
     case 9:
         if (lbl_804A0C64.x1C > lbl_804A0C64.x20) {
             lbl_804A0C64.x1C--;
-            result = TRUE;
+            result = true;
         }
 
         break;
 
     case 10:
         if (lbl_804A0C64.x24 >= lbl_804A0C64.x28)
-            result = TRUE;
+            result = true;
 
         break;
 
     case 11:
         if (lbl_804A0C64.x48 >= lbl_804A0C64.x4C)
-            result = TRUE;
+            result = true;
 
         break;
 
     case 12:
         if (lbl_804A0C64.x50 >= lbl_804A0C64.x54)
-            result = TRUE;
+            result = true;
     }
 
     return result;
@@ -538,7 +538,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->xC68 = 0.0f;
     item_data->xCD0 = 0.0f;
     func_80275158(item_gobj, lbl_804D6D28->x30);
-    item_data->xDD0_flag.bits.b3 = FALSE;
+    item_data->xDD0_flag.bits.b3 = false;
     item_data->x34_spin_speed = item_data->xCC_item_attr->xC_spin_speed;
     item_data->xDC8_word.flags.x19 = item_data->xCC_item_attr->x1_3;
     item_data->xDC8_word.flags.x17 = item_data->xCC_item_attr->x1_1;
@@ -594,21 +594,21 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->xC70 = 1.0f;
     item_data->xC6C = 1.0f;
     item_data->xDCC_flag.b2 = 0;
-    item_data->xDD0_flag.bits.b0 = FALSE;
-    item_data->xDCE_flag.bits.b6 = FALSE;
-    item_data->xDCF_flag.bits.b0 = FALSE;
-    item_data->xDCF_flag.bits.b1 = FALSE;
-    item_data->xDCF_flag.bits.b2 = FALSE;
-    item_data->xDD1_flag.bits.b0 = FALSE;
+    item_data->xDD0_flag.bits.b0 = false;
+    item_data->xDCE_flag.bits.b6 = false;
+    item_data->xDCF_flag.bits.b0 = false;
+    item_data->xDCF_flag.bits.b1 = false;
+    item_data->xDCF_flag.bits.b2 = false;
+    item_data->xDD1_flag.bits.b0 = false;
     item_data->xDCE_flag.bits.b7 = 1;
     item_data->x38_scale = item_data->xCC_item_attr->x60_scale;
     item_data->x3C = 0.0f;
-    item_data->xDCD_flag.bits.b3 = FALSE;
-    item_data->xDCD_flag.bits.b4 = FALSE;
-    item_data->xDD0_flag.bits.b7 = FALSE;
+    item_data->xDCD_flag.bits.b3 = false;
+    item_data->xDCD_flag.bits.b4 = false;
+    item_data->xDD0_flag.bits.b7 = false;
     item_data->xBC0 = 0;
-    item_data->xDD1_flag.bits.b1 = FALSE;
-    item_data->xDCD_flag.bits.b2 = FALSE;
+    item_data->xDD1_flag.bits.b1 = false;
+    item_data->xDCD_flag.bits.b2 = false;
     item_data->xD6C = -1;
     item_data->xD68 = -1;
     item_data->xD64 = -1;
@@ -625,9 +625,9 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     func_80274EF8(item_gobj);
 
     if (func_80086960(spawnItem->x0_parent_gobj))
-        item_data->xDC8_word.flags.x1 = FALSE;
+        item_data->xDC8_word.flags.x1 = false;
     else
-        item_data->xDC8_word.flags.x1 = TRUE;
+        item_data->xDC8_word.flags.x1 = true;
 
     item_data->x5C8 = 0;
     item_data->xBC7 = 0;
@@ -638,14 +638,14 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
 
     func_80279B64(item_data);
 
-    item_data->xDCF_flag.bits.b3 = FALSE;
-    item_data->xDCF_flag.bits.b4 = FALSE;
-    item_data->xDCF_flag.bits.b5 = FALSE;
+    item_data->xDCF_flag.bits.b3 = false;
+    item_data->xDCF_flag.bits.b4 = false;
+    item_data->xDCF_flag.bits.b5 = false;
 
     item_data->xDAA_byte = 1;
 
     if (func_80225B20() != NULL)
-        item_data->xDAA_flag.bits.b4 = TRUE;
+        item_data->xDAA_flag.bits.b4 = true;
 
     if (spawnItem->x0_parent_gobj == NULL) {
         item_data->x20_team_id = -1;
@@ -741,7 +741,7 @@ void func_8026814C(HSD_GObj* item_gobj)
 }
 
 /// @todo Needs some serious cleaning.
-BOOL func_802682F0(HSD_GObj* item_gobj)
+bool func_802682F0(HSD_GObj* item_gobj)
 {
     s32 var_r4;
     Item* item_data;
@@ -754,7 +754,7 @@ BOOL func_802682F0(HSD_GObj* item_gobj)
     if (item_data->xC4_article_data->x10_modelDesc->x4_bone_count != 0) {
         item_data->xBBC_dynamicBoneTable = HSD_ObjAlloc(&unkAllocData1);
         if (item_data->xBBC_dynamicBoneTable == NULL) {
-            return FALSE;
+            return false;
         }
         var_r5 = item_gobj->hsd_obj;
         var_r4 = 0;
@@ -792,7 +792,7 @@ BOOL func_802682F0(HSD_GObj* item_gobj)
     } else {
         item_data->xBBC_dynamicBoneTable = NULL;
     }
-    return TRUE;
+    return true;
 }
 
 /// Set item model scale
@@ -935,7 +935,7 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem)
     GObj_InitUserData(gobj, 6, lbl_8026AE10, user_data);
     func_80267AA8(gobj, spawnItem);
     func_802680CC(gobj);
-    if (func_802682F0(gobj) != FALSE) {
+    if (func_802682F0(gobj) != false) {
         func_8026814C(gobj);
         func_8026849C(gobj);
         func_8027163C(gobj);
@@ -1309,7 +1309,7 @@ void lbl_80269528(HSD_GObj* item_gobj)
 }
 
 /// Item Think - Check for Blast Zones
-BOOL func_802696CC(HSD_GObj* item_gobj)
+bool func_802696CC(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
     if ((item_data->xDCC_flag.b4567 & 8) &&
@@ -1317,28 +1317,28 @@ BOOL func_802696CC(HSD_GObj* item_gobj)
     {
         item_data->xD60_destroyType = 3;
         func_8026A8EC(item_gobj);
-        return TRUE;
+        return true;
     }
     if ((item_data->xDCC_flag.b4567 & 4) &&
         item_data->pos.x < Stage_GetBlastZoneLeftOffset())
     {
         item_data->xD60_destroyType = 3;
         func_8026A8EC(item_gobj);
-        return TRUE;
+        return true;
     }
     if ((item_data->xDCC_flag.b4567 & 1) && item_data->pos.y > 10000.0f) {
         item_data->xD60_destroyType = 3;
         func_8026A8EC(item_gobj);
-        return TRUE;
+        return true;
     }
     if ((item_data->xDCC_flag.b4567 & 2) &&
         item_data->pos.y < Stage_GetBlastZoneBottomOffset())
     {
         item_data->xD60_destroyType = 3;
         func_8026A8EC(item_gobj);
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 /// Item Think - Physics
@@ -1532,10 +1532,10 @@ void func_80269CC4(HSD_GObj* item_gobj)
 }
 
 /// Item Think - Shield Collision
-BOOL func_80269DC8(HSD_GObj* item_gobj)
+bool func_80269DC8(HSD_GObj* item_gobj)
 {
-    BOOL (*cb_OnShieldBounce)(HSD_GObj*);
-    BOOL (*cb_OnHitShield)(HSD_GObj*);
+    bool (*cb_OnShieldBounce)(HSD_GObj*);
+    bool (*cb_OnHitShield)(HSD_GObj*);
     Item* item_data;
 
     item_data = item_gobj->user_data;
@@ -1555,7 +1555,7 @@ BOOL func_80269DC8(HSD_GObj* item_gobj)
         if (cb_OnShieldBounce != NULL && cb_OnShieldBounce(item_gobj)) {
             item_data->xD60_destroyType = 2;
             func_8026A8EC(item_gobj);
-            return TRUE;
+            return true;
         }
     } else {
         cb_OnHitShield =
@@ -1566,17 +1566,17 @@ BOOL func_80269DC8(HSD_GObj* item_gobj)
         if (cb_OnHitShield != NULL && cb_OnHitShield(item_gobj)) {
             item_data->xD60_destroyType = 2;
             func_8026A8EC(item_gobj);
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
 /// Item Think - On Reflect
-BOOL func_80269F14(HSD_GObj* item_gobj)
+bool func_80269F14(HSD_GObj* item_gobj)
 {
     f32 temp_f30;
-    BOOL (*cb_OnReflect)(HSD_GObj*);
+    bool (*cb_OnReflect)(HSD_GObj*);
     s32 i;
     u32 var_r27;
     Item* temp_item = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -1602,7 +1602,7 @@ BOOL func_80269F14(HSD_GObj* item_gobj)
     if (cb_OnReflect != NULL && cb_OnReflect(item_gobj)) {
         temp_item->xD60_destroyType = 2;
         func_8026A8EC(item_gobj);
-        return TRUE;
+        return true;
     }
     if (temp_item->xDCC_flag.b0 == 0) {
         for (i = 0; i < 4; i++) // 4 here is the maximum amount of hitboxes
@@ -1620,7 +1620,7 @@ BOOL func_80269F14(HSD_GObj* item_gobj)
             }
         }
     }
-    return FALSE;
+    return false;
 }
 
 /// Item Think - Exit Hitlag Check
@@ -1700,18 +1700,18 @@ void func_8026A1E8(HSD_GObj* item_gobj)
     }
 }
 
-static inline BOOL processCallback(BOOL (*cb)(HSD_GObj*), HSD_GObj* item_gobj,
+static inline bool processCallback(bool (*cb)(HSD_GObj*), HSD_GObj* item_gobj,
                                    Item* item_data)
 {
     if (cb && cb(item_gobj)) {
         item_data->xD60_destroyType = 2;
         func_8026A8EC(item_gobj);
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
-static inline BOOL OnTakeDamageThink(HSD_GObj* item_gobj, Item* item_data)
+static inline bool OnTakeDamageThink(HSD_GObj* item_gobj, Item* item_data)
 {
     item_data->xC9C += item_data->xCA0;
     if (item_data->xC9C > 999) {
@@ -1724,20 +1724,20 @@ static inline BOOL OnTakeDamageThink(HSD_GObj* item_gobj, Item* item_data)
         item_data);
 }
 
-static inline BOOL OnClankThink(HSD_GObj* item_gobj, Item* item_data)
+static inline bool OnClankThink(HSD_GObj* item_gobj, Item* item_data)
 {
-    BOOL(*cb_OnClank)
-    (HSD_GObj*) = item_data->xB8_itemLogicTable->x28_callback_OnClank;
+    bool (*cb_OnClank)(HSD_GObj*) =
+        item_data->xB8_itemLogicTable->x28_callback_OnClank;
     if (func_80274C78(item_gobj)) {
         item_data->xCA8 = item_data->xC48;
     }
     return processCallback(cb_OnClank, item_gobj, item_data);
 }
 
-static inline BOOL OnGiveDamageThink(HSD_GObj* item_gobj, Item* item_data)
+static inline bool OnGiveDamageThink(HSD_GObj* item_gobj, Item* item_data)
 {
-    BOOL(*cb_OnGiveDamage)
-    (HSD_GObj*) = item_data->xB8_itemLogicTable->x18_callback_OnGiveDamage;
+    bool (*cb_OnGiveDamage)(HSD_GObj*) =
+        item_data->xB8_itemLogicTable->x18_callback_OnGiveDamage;
     if (func_80274C78(item_gobj)) {
         item_data->xCA8 = item_data->xC34_damageDealt;
     }
@@ -2174,7 +2174,7 @@ void func_8026B0B4(HSD_GObj* item_gobj)
 }
 
 /// Check if item is grabbable
-BOOL func_8026B1A4(HSD_GObj* item_gobj)
+bool func_8026B1A4(HSD_GObj* item_gobj)
 {
     Item* temp_item;
 
@@ -2182,7 +2182,7 @@ BOOL func_8026B1A4(HSD_GObj* item_gobj)
     if ((temp_item->xDC8_word.flags.x15 != 0) &&
         (temp_item->xB8_itemLogicTable->xC_callback_OnPickup != NULL))
     {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }

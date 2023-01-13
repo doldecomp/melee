@@ -210,13 +210,13 @@ f32 atanf(f32 x)
     f32 result;
     const f32* lookup_ptr;
     s32 lookup_index = -1;
-    BOOL x_ge_ratio = FALSE;
+    bool x_ge_ratio = false;
     s32 sign_bit_x = BITWISE(x) & SIGN_BIT;
 
     BITWISE(x) &= ~SIGN_BIT;
 
     if (x >= SILVER_RATIO_1) {
-        x_ge_ratio = TRUE;
+        x_ge_ratio = true;
         result = ONE / x;
     } else if (SILVER_RATIO_1_CONJUGATE < x) {
         lookup_index = 0;

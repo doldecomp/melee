@@ -367,10 +367,10 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     Vec3 trans;
     Quaternion rot;
     u32 unused[2];
-    BOOL no_assert = FALSE;
+    bool no_assert = false;
 
     if (tobj->repeat_s && tobj->repeat_t) {
-        no_assert = TRUE;
+        no_assert = true;
     }
 
     if (!no_assert) {

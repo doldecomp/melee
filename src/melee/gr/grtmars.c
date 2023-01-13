@@ -100,7 +100,7 @@ static void GrTMars_80222080(HSD_GObj* gobj)
 
 static s32 GrTMars_802220AC(void)
 {
-    return FALSE;
+    return false;
 }
 
 static void GrTMars_802220B4(HSD_GObj*)
@@ -154,9 +154,9 @@ static void GrTMars_802221A4(HSD_GObj* gobj)
 
 static void GrTMars_802221C4(void) {}
 
-static BOOL GrTMars_802221C8(s32)
+static bool GrTMars_802221C8(s32)
 {
-    return FALSE;
+    return false;
 }
 
 static s32 GrTMars_802221D0(Vec3*, s32, struct _HSD_JObj*)

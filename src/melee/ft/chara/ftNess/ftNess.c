@@ -10,7 +10,7 @@ void ftNess_OnDeath(HSD_GObj* gobj)
     fp->sa.ness.x2244_pkThunderGObj = NULL;
     fp->sa.ness.x2248_baseballBatGObj = NULL;
     fp->sa.ness.x222C_yoyoGObj = NULL;
-    fp->sa.ness.x224C_thunderGFX = FALSE;
+    fp->sa.ness.x224C_thunderGFX = false;
 }
 
 void ftNess_OnLoad(HSD_GObj* gobj)
@@ -52,7 +52,7 @@ f32 ftNess_GetAbsorbHeal(Fighter* fp)
         ->x94_PSI_MAGNET_HEAL_MUL;
 }
 
-void ftNess_OnItemPickup(HSD_GObj* fighter_gobj, BOOL catchItemFlag)
+void ftNess_OnItemPickup(HSD_GObj* fighter_gobj, bool catchItemFlag)
 {
     Fighter_OnItemPickup(fighter_gobj, catchItemFlag, 1, 1);
 }
@@ -67,7 +67,7 @@ void ftNess_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftNess_OnItemDrop(HSD_GObj* gobj, BOOL dropItemFlag)
+void ftNess_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag)
 {
     Fighter_OnItemDrop(gobj, dropItemFlag, 1, 1);
 }

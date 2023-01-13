@@ -947,7 +947,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
     struct S_TEMP4* unk_struct_x18;
     s32 bone_index;
     u8* unk_byte_ptr;
-    BOOL animflags_bool;
+    bool animflags_bool;
 
     fp->x10_action_state_index = new_action_state_index;
     fp->x30_facingDirectionRepeated = fp->facing_dir;
@@ -1246,9 +1246,9 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
         if ((fp->x594_animCurrFlags1.bits.b0) ||
             (fp->x594_animCurrFlags1.bits.b5))
         {
-            animflags_bool = TRUE;
+            animflags_bool = true;
         } else {
-            animflags_bool = FALSE;
+            animflags_bool = false;
         }
 
         if (fp->x14_action_id != -1) {
@@ -2689,8 +2689,8 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
 /// https://decomp.me/scratch/9QvFG
 void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
 {
-    BOOL temp_bool;
-    BOOL hold_item_bool = 0;
+    bool temp_bool;
+    bool hold_item_bool = 0;
     Vec3 vec;
 
     if (fp->x1974_heldItem && !func_8026B2B4(fp->x1974_heldItem)) {
@@ -2819,11 +2819,11 @@ void Fighter_8006D10C(HSD_GObj* fighter_gobj)
 void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    BOOL bool1 = 0;
+    bool bool1 = 0;
     s32 action_state_index = fp->x10_action_state_index;
-    BOOL bool2 = 0;
-    BOOL bool3 = 0;
-    BOOL bool4 = 0;
+    bool bool2 = 0;
+    bool bool3 = 0;
+    bool bool4 = 0;
     f32 forceAppliedOnHit;
 
     if (!fp->x221F_flag.bits.b3) {
@@ -2871,7 +2871,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
         forceAppliedOnHit = fp->dmg.x1850_forceApplied;
         if (forceAppliedOnHit) {
             s32 ground_or_air = fp->xE0_ground_or_air;
-            BOOL damage_bool;
+            bool damage_bool;
 
             fp->dmg.x189C_unk_num_frames = 0.0f;
             Fighter_UnkTakeDamage_8006CC30(fp, fp->dmg.x1838_percentTemp);

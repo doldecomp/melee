@@ -63,9 +63,9 @@ extern s64 __OSLastInterruptTime;
 /// @sz{4}
 extern unk_t lbl_804D738C;
 
-BOOL OSDisableInterrupts(void);
-BOOL OSEnableInterrupts(void);
-BOOL OSRestoreInterrupts(BOOL);
+bool OSDisableInterrupts(void);
+bool OSEnableInterrupts(void);
+bool OSRestoreInterrupts(bool);
 
 OSInterruptHandler __OSSetInterruptHandler(__OSInterrupt, OSInterruptHandler);
 OSInterruptHandler __OSGetInterruptHandler(__OSInterrupt);

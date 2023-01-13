@@ -4,14 +4,14 @@
 #include <dolphin/gx/__types.h>
 
 /* 00339BB0 */ extern void __GXPEInit(void);
-void GXPokeZMode(BOOL compare_enable, GXCompare func, BOOL update_enable);
-void GXPokeDstAlpha(BOOL enable, u8 alpha);
+void GXPokeZMode(bool compare_enable, GXCompare func, bool update_enable);
+void GXPokeDstAlpha(bool enable, u8 alpha);
 void GXPokeAlphaRead(s32 mode);
 void GXPokeAlphaMode(GXCompare func, u8 threshold);
 void GXPokeBlendMode(GXBlendMode type, GXBlendFactor src_factor,
                      GXBlendFactor dst_factor, GXLogicOp op);
 void GXPokeDither(s32 dither);
-void GXPokeAlphaUpdate(BOOL update_enable);
-void GXPokeColorUpdate(BOOL update_enable);
+void GXPokeAlphaUpdate(bool update_enable);
+void GXPokeColorUpdate(bool update_enable);
 
 #endif

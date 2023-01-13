@@ -15,4 +15,4 @@ psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 /* 003A0E3C */ extern void func_803A425C(unk_t, s32);
 /* 003A0D58 */ extern s32 psAddGeneratorAppSRT(s32, u16);
 /* 003A0D58 */ extern s32 psAddGeneratorAppSRT(s32, u16);
-/* 003A0D18 */ extern BOOL psInitAppSRT(u16);
+/* 003A0D18 */ extern bool psInitAppSRT(u16);

@@ -63,10 +63,10 @@ OSAlarm ResetAlarm;
 static DVDCommandBlock* executing;
 static DVDDiskID* currID;
 static OSBootInfo* bootInfo;
-static volatile BOOL PauseFlag;
-static volatile BOOL PausingFlag;
-static BOOL AutoFinishing;
-static volatile BOOL FatalErrorFlag;
+static volatile bool PauseFlag;
+static volatile bool PausingFlag;
+static bool AutoFinishing;
+static volatile bool FatalErrorFlag;
 static vu32 CurrCommand;
 static vu32 Canceling;
 static DVDCBCallback CancelCallback;
@@ -74,13 +74,13 @@ static vu32 ResumeFromHere;
 static vu32 CancelLastError;
 static vu32 LastError;
 static vs32 NumInternalRetry;
-static volatile BOOL ResetRequired;
-static volatile BOOL CancelAllSyncComplete;
-static BOOL FirstTimeInBootrom;
-static BOOL DVDInitialized;
+static volatile bool ResetRequired;
+static volatile bool CancelAllSyncComplete;
+static bool FirstTimeInBootrom;
+static bool DVDInitialized;
 static void (*LastState)(DVDCommandBlock*);
 
-static BOOL autoInvalidation = TRUE;
+static bool autoInvalidation = true;
 
 extern OSThreadQueue __DVDThreadQueue;
 DVDCommandBlock* __DVDPopWaitingQueue(void);
@@ -89,7 +89,7 @@ void DVDInit(void)
 {
     if (!DVDInitialized) {
         OSInitAlarm();
-        DVDInitialized = TRUE;
+        DVDInitialized = true;
         __DVDFSInit();
         __DVDClearWaitingQueue();
         __DVDInitWA();
@@ -108,7 +108,7 @@ void DVDInit(void)
         } else if (bootInfo->magic == 0xD15EA5E) {
             OSReport("app booted from bootrom\n");
         } else {
-            FirstTimeInBootrom = TRUE;
+            FirstTimeInBootrom = true;
             OSReport("bootrom\n");
         }
     }
@@ -161,7 +161,7 @@ static void cbForStateError(u32 intType)
         return;
     }
 
-    FatalErrorFlag = TRUE;
+    FatalErrorFlag = true;
     finished = executing;
     executing = &DummyCommandBlock;
     if (finished->callback) {
@@ -169,7 +169,7 @@ static void cbForStateError(u32 intType)
     }
 
     if (Canceling) {
-        Canceling = FALSE;
+        Canceling = false;
         if (CancelCallback)
             (CancelCallback)(0, finished);
     }
@@ -221,13 +221,13 @@ u32 CategorizeError(u32 error)
     }
 }
 
-inline BOOL CheckCancel(u32 resume)
+inline bool CheckCancel(u32 resume)
 {
     DVDCommandBlock* finished;
 
     if (Canceling) {
         ResumeFromHere = resume;
-        Canceling = FALSE;
+        Canceling = false;
 
         finished = executing;
         executing = &DummyCommandBlock;
@@ -238,9 +238,9 @@ inline BOOL CheckCancel(u32 resume)
         if (CancelCallback)
             CancelCallback(0, finished);
         stateReady();
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 static void cbForStateGettingError(u32 intType)
@@ -379,7 +379,7 @@ static void cbForStateGoToRetry(u32 intType)
     if (CurrCommand == 4 || CurrCommand == 5 || CurrCommand == 13 ||
         CurrCommand == 15)
     {
-        ResetRequired = TRUE;
+        ResetRequired = true;
     }
 
     if (!CheckCancel(2)) {
@@ -556,7 +556,7 @@ static void stateReady(void)
     }
 
     if (PauseFlag) {
-        PausingFlag = TRUE;
+        PausingFlag = true;
         executing = (DVDCommandBlock*) NULL;
         return;
     }
@@ -659,7 +659,7 @@ static void stateBusy(DVDCommandBlock* block)
         break;
     case 8:
         IO.unk4 = IO.unk4;
-        AutoFinishing = TRUE;
+        AutoFinishing = true;
         DVDLowAudioStream(0, 0, 0, cbForStateBusy);
         break;
     case 9:
@@ -710,7 +710,7 @@ static void cbForStateBusy(u32 intType)
         NumInternalRetry = 0;
 
         if (CurrCommand == 15) {
-            ResetRequired = TRUE;
+            ResetRequired = true;
         }
 
         if (CheckCancel(7)) {
@@ -729,7 +729,7 @@ static void cbForStateBusy(u32 intType)
     }
 
     if (intType & 8) {
-        Canceling = FALSE;
+        Canceling = false;
         finished = executing;
         executing = &DummyCommandBlock;
 
@@ -795,7 +795,7 @@ static void cbForStateBusy(u32 intType)
                     }
                     stateReady();
                 } else {
-                    AutoFinishing = FALSE;
+                    AutoFinishing = false;
                     executing->currTransferSize = 1;
                     DVDLowAudioStream(0, executing->length, executing->offset,
                                       cbForStateBusy);
@@ -848,10 +848,10 @@ static void cbForStateBusy(u32 intType)
     }
 }
 
-static BOOL issueCommand(s32 prio, DVDCommandBlock* block)
+static bool issueCommand(s32 prio, DVDCommandBlock* block)
 {
-    BOOL level;
-    BOOL result;
+    bool level;
+    bool result;
 
     if (autoInvalidation && (block->command == 1 || block->command == 4 ||
                              block->command == 5 || block->command == 14))
@@ -864,7 +864,7 @@ static BOOL issueCommand(s32 prio, DVDCommandBlock* block)
     block->state = 2;
     result = __DVDPushWaitingQueue(prio, block);
 
-    if ((executing == (DVDCommandBlock*) NULL) && (PauseFlag == FALSE)) {
+    if ((executing == (DVDCommandBlock*) NULL) && (PauseFlag == false)) {
         stateReady();
     }
 
@@ -873,10 +873,10 @@ static BOOL issueCommand(s32 prio, DVDCommandBlock* block)
     return result;
 }
 
-BOOL DVDReadAbsAsyncPrio(DVDCommandBlock* block, void* addr, s32 length,
+bool DVDReadAbsAsyncPrio(DVDCommandBlock* block, void* addr, s32 length,
                          s32 offset, DVDCBCallback callback, s32 prio)
 {
-    BOOL idle;
+    bool idle;
     block->command = 1;
     block->addr = addr;
     block->length = length;
@@ -888,10 +888,10 @@ BOOL DVDReadAbsAsyncPrio(DVDCommandBlock* block, void* addr, s32 length,
     return idle;
 }
 
-BOOL DVDSeekAbsAsyncPrio(DVDCommandBlock* block, u32 offset,
+bool DVDSeekAbsAsyncPrio(DVDCommandBlock* block, u32 offset,
                          DVDCBCallback callback, s32 prio)
 {
-    BOOL idle;
+    bool idle;
     block->command = 2;
     block->offset = offset;
     block->callback = callback;
@@ -900,10 +900,10 @@ BOOL DVDSeekAbsAsyncPrio(DVDCommandBlock* block, u32 offset,
     return idle;
 }
 
-BOOL DVDReadAbsAsyncForBS(DVDCommandBlock* block, void* addr, s32 length,
+bool DVDReadAbsAsyncForBS(DVDCommandBlock* block, void* addr, s32 length,
                           s32 offset, DVDCBCallback callback)
 {
-    BOOL idle;
+    bool idle;
     block->command = 4;
     block->addr = addr;
     block->length = length;
@@ -915,10 +915,10 @@ BOOL DVDReadAbsAsyncForBS(DVDCommandBlock* block, void* addr, s32 length,
     return idle;
 }
 
-BOOL DVDReadDiskID(DVDCommandBlock* block, DVDDiskID* diskID,
+bool DVDReadDiskID(DVDCommandBlock* block, DVDDiskID* diskID,
                    DVDCBCallback callback)
 {
-    BOOL idle;
+    bool idle;
     block->command = 5;
     block->addr = diskID;
     block->length = sizeof(DVDDiskID);
@@ -931,10 +931,10 @@ BOOL DVDReadDiskID(DVDCommandBlock* block, DVDDiskID* diskID,
     return idle;
 }
 
-BOOL DVDPrepareStreamAbsAsync(DVDCommandBlock* block, u32 length, u32 offset,
+bool DVDPrepareStreamAbsAsync(DVDCommandBlock* block, u32 length, u32 offset,
                               DVDCBCallback callback)
 {
-    BOOL idle;
+    bool idle;
     block->command = 6;
     block->length = length;
     block->offset = offset;
@@ -944,9 +944,9 @@ BOOL DVDPrepareStreamAbsAsync(DVDCommandBlock* block, u32 length, u32 offset,
     return idle;
 }
 
-BOOL DVDCancelStreamAsync(DVDCommandBlock* block, DVDCBCallback callback)
+bool DVDCancelStreamAsync(DVDCommandBlock* block, DVDCBCallback callback)
 {
-    BOOL idle;
+    bool idle;
     block->command = 7;
     block->callback = callback;
     idle = issueCommand(1, block);
@@ -955,15 +955,15 @@ BOOL DVDCancelStreamAsync(DVDCommandBlock* block, DVDCBCallback callback)
 
 int DVDCancelStream(DVDCommandBlock* block)
 {
-    BOOL enabled;
+    bool enabled;
     int xferred;
-    BOOL result = DVDCancelStreamAsync(block, cbForCancelStreamSync);
+    bool result = DVDCancelStreamAsync(block, cbForCancelStreamSync);
 
     if (!result) {
         return -1;
     }
     enabled = OSDisableInterrupts();
-    while (TRUE) {
+    while (true) {
         s32 state = ((volatile DVDCommandBlock*) block)->state;
 
         if (state == 0 || state == -1 || state == 10) {
@@ -984,9 +984,9 @@ static void cbForCancelStreamSync(s32 result, DVDCommandBlock* block)
     OSWakeupThread(&__DVDThreadQueue);
 }
 
-BOOL DVDStopStreamAtEndAsync(DVDCommandBlock* block, DVDCBCallback callback)
+bool DVDStopStreamAtEndAsync(DVDCommandBlock* block, DVDCBCallback callback)
 {
-    BOOL idle;
+    bool idle;
     block->command = 8;
     block->callback = callback;
 
@@ -994,9 +994,9 @@ BOOL DVDStopStreamAtEndAsync(DVDCommandBlock* block, DVDCBCallback callback)
     return idle;
 }
 
-BOOL DVDInquiryAsync(DVDCommandBlock* block, void* addr, DVDCBCallback callback)
+bool DVDInquiryAsync(DVDCommandBlock* block, void* addr, DVDCBCallback callback)
 {
-    BOOL idle;
+    bool idle;
     block->command = 14;
     block->addr = addr;
     block->length = 0x20;
@@ -1012,13 +1012,13 @@ void DVDReset(void)
     DVDLowReset();
     IO.unk0 = 0x2A;
     IO.unk4 = IO.unk4;
-    ResetRequired = FALSE;
+    ResetRequired = false;
     ResumeFromHere = 0;
 }
 
 s32 DVDGetCommandBlockStatus(const DVDCommandBlock* block)
 {
-    BOOL enabled;
+    bool enabled;
     s32 retVal;
 
     enabled = OSDisableInterrupts();
@@ -1036,7 +1036,7 @@ s32 DVDGetCommandBlockStatus(const DVDCommandBlock* block)
 
 s32 DVDGetDriveStatus(void)
 {
-    BOOL enabled;
+    bool enabled;
     s32 retVal;
 
     enabled = OSDisableInterrupts();
@@ -1060,37 +1060,37 @@ s32 DVDGetDriveStatus(void)
     return retVal;
 }
 
-BOOL DVDSetAutoInvalidation(BOOL autoInval)
+bool DVDSetAutoInvalidation(bool autoInval)
 {
-    BOOL prev = autoInvalidation;
+    bool prev = autoInvalidation;
     autoInvalidation = autoInval;
     return prev;
 }
 
 inline void DVDPause(void)
 {
-    BOOL enabled = OSDisableInterrupts();
-    PauseFlag = TRUE;
+    bool enabled = OSDisableInterrupts();
+    PauseFlag = true;
     if (executing == (DVDCommandBlock*) NULL) {
-        PausingFlag = TRUE;
+        PausingFlag = true;
     }
     OSRestoreInterrupts(enabled);
 }
 
 inline void DVDResume(void)
 {
-    BOOL enabled = OSDisableInterrupts();
-    PauseFlag = FALSE;
+    bool enabled = OSDisableInterrupts();
+    PauseFlag = false;
     if (PausingFlag) {
-        PausingFlag = FALSE;
+        PausingFlag = false;
         stateReady();
     }
     OSRestoreInterrupts(enabled);
 }
 
-BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback)
+bool DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback)
 {
-    BOOL enabled;
+    bool enabled;
     DVDLowCallback old;
 
     enabled = OSDisableInterrupts();
@@ -1106,10 +1106,10 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback)
     case 1:
         if (Canceling) {
             OSRestoreInterrupts(enabled);
-            return FALSE;
+            return false;
         }
 
-        Canceling = TRUE;
+        Canceling = true;
         CancelCallback = callback;
         if (block->command == 4 || block->command == 1) {
             DVDLowBreak();
@@ -1138,9 +1138,9 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback)
         default:
             if (Canceling) {
                 OSRestoreInterrupts(enabled);
-                return FALSE;
+                return false;
             }
-            Canceling = TRUE;
+            Canceling = true;
             CancelCallback = callback;
             break;
         }
@@ -1154,7 +1154,7 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback)
         old = DVDLowClearCallback();
         if (old != cbForStateMotorStopped) {
             OSRestoreInterrupts(enabled);
-            return FALSE;
+            return false;
         }
 
         if (block->state == 4)
@@ -1180,16 +1180,16 @@ BOOL DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback)
     }
 
     OSRestoreInterrupts(enabled);
-    return TRUE;
+    return true;
 }
 
 s32 DVDCancel(DVDCommandBlock* block)
 {
     s32 state;
     u32 command;
-    BOOL enabled;
+    bool enabled;
 
-    if (DVDCancelAsync(block, cbForCancelSync) == FALSE) {
+    if (DVDCancelAsync(block, cbForCancelSync) == false) {
         return -1;
     }
 
@@ -1223,11 +1223,11 @@ static void cbForCancelSync(s32 result, DVDCommandBlock* block)
     OSWakeupThread(&__DVDThreadQueue);
 }
 
-inline BOOL DVDCancelAllAsync(DVDCBCallback callback)
+inline bool DVDCancelAllAsync(DVDCBCallback callback)
 {
-    BOOL enabled;
+    bool enabled;
     DVDCommandBlock* p;
-    BOOL retVal;
+    bool retVal;
 
     enabled = OSDisableInterrupts();
     DVDPause();
@@ -1239,7 +1239,7 @@ inline BOOL DVDCancelAllAsync(DVDCBCallback callback)
     if (executing)
         retVal = DVDCancelAsync(executing, callback);
     else {
-        retVal = TRUE;
+        retVal = true;
         if (callback)
             callback(0, NULL);
     }
@@ -1251,15 +1251,15 @@ inline BOOL DVDCancelAllAsync(DVDCBCallback callback)
 
 int DVDCancelAll(void)
 {
-    BOOL result;
-    BOOL enabled;
+    bool result;
+    bool enabled;
 
     enabled = OSDisableInterrupts();
-    CancelAllSyncComplete = FALSE;
+    CancelAllSyncComplete = false;
 
     result = DVDCancelAllAsync(cbForCancelAllSync);
 
-    if (result == FALSE) {
+    if (result == false) {
         OSRestoreInterrupts(enabled);
         return -1;
     }
@@ -1277,7 +1277,7 @@ int DVDCancelAll(void)
 
 static void cbForCancelAllSync(s32 result, DVDCommandBlock* block)
 {
-    CancelAllSyncComplete = TRUE;
+    CancelAllSyncComplete = true;
     OSWakeupThread(&__DVDThreadQueue);
 }
 
@@ -1286,9 +1286,9 @@ DVDDiskID* DVDGetCurrentDiskID(void)
     return (DVDDiskID*) OSPhysicalToCached(0);
 }
 
-BOOL DVDCheckDisk(void)
+bool DVDCheckDisk(void)
 {
-    BOOL enabled;
+    bool enabled;
     s32 retVal;
     s32 state;
     u32 coverReg;
@@ -1314,7 +1314,7 @@ BOOL DVDCheckDisk(void)
     case 9:
     case 10:
     case 2:
-        retVal = TRUE;
+        retVal = true;
         break;
 
     case -1:
@@ -1324,16 +1324,16 @@ BOOL DVDCheckDisk(void)
     case 4:
     case 5:
     case 6:
-        retVal = FALSE;
+        retVal = false;
         break;
 
     case 0:
     case 8:
         coverReg = IO.unk4;
         if (((coverReg >> 2) & 1) || (coverReg & 1)) {
-            retVal = FALSE;
+            retVal = false;
         } else {
-            retVal = TRUE;
+            retVal = true;
         }
     }
 
@@ -1344,7 +1344,7 @@ BOOL DVDCheckDisk(void)
 
 void __DVDPrepareResetAsync(DVDCBCallback callback)
 {
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
 
     __DVDClearWaitingQueue();
 

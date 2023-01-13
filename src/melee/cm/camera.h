@@ -18,14 +18,14 @@ s32 func_8002F260(void);
 void func_8002F274(void);
 void func_8002F474(void);
 void* func_80030A50(void);
-BOOL func_80030CFC(struct _CameraBox*, f32);
+bool func_80030CFC(struct _CameraBox*, f32);
 f32 func_80031144(void);
 void func_80030E44(s32, Vec3*);
 void func_8002EA64(Vec3*);
 void func_8002E818(Vec3*);
-BOOL func_80030CD8(struct _CameraBox*, S32Vec2*);
+bool func_80030CD8(struct _CameraBox*, S32Vec2*);
 void func_80031154(Vec3*);
-BOOL func_80030A78(void);
+bool func_80030A78(void);
 
 /// @param r The red component.
 /// @param g The green component.

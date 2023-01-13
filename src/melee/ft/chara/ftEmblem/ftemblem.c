@@ -12,7 +12,7 @@ void ftRoy_OnDeath(HSD_GObj* gobj)
     fp->sa.mars.x222C = 0;
 }
 
-void ftRoy_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftRoy_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 0, 1);
 }
@@ -27,7 +27,7 @@ void ftRoy_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 0);
 }
 
-void ftRoy_OnItemDrop(HSD_GObj* gobj, BOOL bool1)
+void ftRoy_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 0, 1);
 }

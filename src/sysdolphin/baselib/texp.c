@@ -24,7 +24,7 @@ void HSD_TExpRef(HSD_TExp* texp, u8 sel)
         if (type != HSD_TE_TEV) {
             return;
         }
-        if (sel == TRUE) {
+        if (sel == true) {
             texp->tev.c_ref += 1;
             return;
         } else {
@@ -45,7 +45,7 @@ void HSD_TExpUnref(HSD_TExp* texp, u8 sel)
         if (type >= HSD_TE_CNST || type != HSD_TE_TEV) {
             return;
         }
-        if (sel == TRUE) {
+        if (sel == true) {
             if (texp->tev.c_ref != 0) {
                 texp->tev.c_ref -= 1;
             }

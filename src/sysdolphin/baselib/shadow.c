@@ -60,11 +60,11 @@ HSD_Shadow* HSD_ShadowAlloc(void)
     return shadow;
 }
 
-inline BOOL dec_refcount(u16* ref_count)
+inline bool dec_refcount(u16* ref_count)
 {
     u16 current = *ref_count;
     s32 cond = current == (u16) HSD_OBJ_NOREF;
-    if (cond != FALSE) {
+    if (cond != false) {
         return cond;
     }
     *ref_count = current - 1;

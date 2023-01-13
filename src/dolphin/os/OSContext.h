@@ -28,7 +28,7 @@ extern OSContext* OS_CURRENT_FPU_CONTEXT AT_ADDRESS(0x800000D8);
 void OSSaveFPUContext(OSContext*);
 void OSSetCurrentContext(OSContext*);
 OSContext* OSGetCurrentContext(void);
-BOOL OSSaveContext(OSContext*);
+bool OSSaveContext(OSContext*);
 void OSLoadContext(OSContext*);
 void* OSGetStackPointer(void);
 void OSSwitchFiber(void*, void*);

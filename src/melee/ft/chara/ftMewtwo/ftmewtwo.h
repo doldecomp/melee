@@ -214,8 +214,8 @@ void ftMewtwo_SpecialS_OnReflect(HSD_GObj* fighter_gobj);
 
 s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* fighter_gobj, s32* chargeLevel,
                                      s32* chargeCycles);
-BOOL ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* fighter_gobj);
-BOOL ftMewtwo_SpecialN_CheckShadowBallCancel(HSD_GObj* fighter_gobj);
+bool ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* fighter_gobj);
+bool ftMewtwo_SpecialN_CheckShadowBallCancel(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialN_SetNULL(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialN_OnTakeDamage(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialN_OnDeath(HSD_GObj* fighter_gobj);

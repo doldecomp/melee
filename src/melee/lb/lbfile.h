@@ -3,7 +3,7 @@
 
 #include <Runtime/platform.h>
 
-void lbFile_8001615C(s32 r3, s32 r4, s32 r5, BOOL cancelflag);
-BOOL lbFile_800161A0();
+void lbFile_8001615C(s32 r3, s32 r4, s32 r5, bool cancelflag);
+bool lbFile_800161A0();
 
 #endif

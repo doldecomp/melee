@@ -14,7 +14,7 @@ void ftNess_ItemPKFireSpawn(
 {
     Fighter* fp = getFighter(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
-    BOOL FlagResult;
+    bool FlagResult;
     Vec3 ItemBonePos;
     Vec3 PKFireVelStruct;
     f32 PKFireLaunchNew;
@@ -26,12 +26,12 @@ void ftNess_ItemPKFireSpawn(
 
     if (fp->x2210_ThrowFlags.b0 != 0) {
         fp->x2210_ThrowFlags.b0 = 0;
-        FlagResult = TRUE;
+        FlagResult = true;
     } else {
-        FlagResult = FALSE;
+        FlagResult = false;
     }
 
-    if (FlagResult != FALSE) {
+    if (FlagResult != false) {
         func_8000B1CC(fp->x5E8_fighterBones[42].x0_jobj, NULL, &ItemBonePos);
 
         ItemBonePos.x += ness_attr->x30_PKFIRE_SPAWN_X * fp->facing_dir;
@@ -135,7 +135,7 @@ void ftNess_SpecialAirS_Phys(
 void ftNess_SpecialS_Coll(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Collision callback //
 {
-    if (func_800827A0(fighter_gobj) == FALSE) {
+    if (func_800827A0(fighter_gobj) == false) {
         func_800CC730(fighter_gobj);
     }
 }
@@ -149,7 +149,7 @@ void ftNess_SpecialAirS_Coll(
     ftNessAttributes* ness_attr;
 
     ness_attr = fp->x2D4_specialAttributes;
-    if (func_80081D0C(fighter_gobj) != FALSE) {
+    if (func_80081D0C(fighter_gobj) != false) {
         func_800D5CB0(fighter_gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
     }
 }

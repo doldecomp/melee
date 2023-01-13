@@ -56,7 +56,7 @@ void func_80076444(HSD_GObj* attacker,
     func_800763C0(attacker, victim, fp->x2068_attackID);
 }
 
-extern BOOL func_80086960(HSD_GObj*);
+extern bool func_80086960(HSD_GObj*);
 
 // 0x8007646C //
 // https://decomp.me/scratch/TDdx4 //
@@ -66,7 +66,7 @@ void func_8007646C(HSD_GObj* attackItem,
     HSD_GObj* itemOwner = func_8026BC78(attackItem);
     s32 attackID = func_8026BC84(attackItem);
 
-    if (func_80086960(itemOwner) != FALSE) // Check if item's owner is a fp //
+    if (func_80086960(itemOwner) != false) // Check if item's owner is a fp //
     {
         func_800763C0(itemOwner, victim, attackID);
     }

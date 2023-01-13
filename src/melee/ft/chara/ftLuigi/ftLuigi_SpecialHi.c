@@ -88,7 +88,7 @@ void ftLuigi_SpecialHi_IASA(HSD_GObj* fighter_gobj)
     f32 stick_range;
     f32 stick_range_2;
     f32 stick_angle;
-    BOOL flag;
+    bool flag;
 
     fp = fighter_gobj->user_data;
     stick_x = fp->input.x620_lstick_x;
@@ -124,11 +124,11 @@ void ftLuigi_SpecialHi_IASA(HSD_GObj* fighter_gobj)
     }
     if (fp->x2210_ThrowFlags.b3 != 0) {
         fp->x2210_ThrowFlags.b3 = 0;
-        flag = TRUE;
+        flag = true;
     } else {
-        flag = FALSE;
+        flag = false;
     }
-    if (flag != FALSE) {
+    if (flag != false) {
         control = fp->input.x620_lstick_x;
         if (control < 0.0f) {
             control = -control;
@@ -159,7 +159,7 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
     f32 range2;
     f32 range3;
     f32 range4;
-    BOOL flag;
+    bool flag;
 
     fp = fighter_gobj->user_data;
     stick_x = fp->input.x620_lstick_x;
@@ -195,11 +195,11 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
     }
     if (fp->x2210_ThrowFlags.b3 != 0) {
         fp->x2210_ThrowFlags.b3 = 0;
-        flag = TRUE;
+        flag = true;
     } else {
-        flag = FALSE;
+        flag = false;
     }
-    if (flag != FALSE) {
+    if (flag != false) {
         control = fp->input.x620_lstick_x;
         if (control < 0.0f) {
             control = -control;

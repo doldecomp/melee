@@ -41,16 +41,16 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
 // 0x8014DFB8
 // https://decomp.me/scratch/Wu4WV // Check if Mr. Game & Watch is performing
 // Fire Rescue
-BOOL ftGameWatch_ItemCheckRescueRemove(HSD_GObj* fighter_gobj)
+bool ftGameWatch_ItemCheckRescueRemove(HSD_GObj* fighter_gobj)
 {
     s32 ASID = ((Fighter*) fighter_gobj->user_data)->x10_action_state_index;
 
     switch (ASID) {
     case AS_GAMEWATCH_SPECIALHI:
     case AS_GAMEWATCH_SPECIALAIRHI:
-        return FALSE;
+        return false;
     default:
-        return TRUE;
+        return true;
     }
 }
 
@@ -251,7 +251,7 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
     gawAttrs = getFtSpecialAttrs(fp);
     if (fp->x894_currentAnimFrame > 4.0f) {
         if (fp->x80_self_vel.y >= 0.0f) {
-            if (func_80081D0C(fighter_gobj) != FALSE) {
+            if (func_80081D0C(fighter_gobj) != false) {
                 ftGameWatch_ItemRescueRemove(fighter_gobj);
                 func_8007D7FC(fp);
                 func_800D5CB0(fighter_gobj, 0,
@@ -265,13 +265,13 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
             } else
                 ledgeGrabDir = -1;
             if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledgeGrabDir) !=
-                FALSE)
+                false)
             {
                 func_800D5CB0(fighter_gobj, 0,
                               gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 return;
             }
-            if (func_80081298(fighter_gobj) != FALSE) {
+            if (func_80081298(fighter_gobj) != false) {
                 func_80081370(fighter_gobj);
             }
         }

@@ -9,7 +9,7 @@
 void ftSamus_8012ADF0(HSD_GObj* fighter_gobj)
 {
     Vec3 vec;
-    BOOL bool1;
+    bool bool1;
     Fighter* fp = getFighterPlus(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 

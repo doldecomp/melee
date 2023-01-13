@@ -126,7 +126,7 @@ void ftPurin_OnLoad(HSD_GObj* fighter_gobj)
     func_8013C360(fighter_gobj);
 }
 
-void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, BOOL bool)
+void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter* fp = getFighter(fighter_gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
@@ -168,7 +168,7 @@ void ftPurin_OnItemVisible(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPurin_OnItemDrop(HSD_GObj* fighter_gobj, BOOL bool1)
+void ftPurin_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
 {
     Fighter_OnItemDrop(fighter_gobj, bool1, 0, 0);
 }

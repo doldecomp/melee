@@ -116,17 +116,17 @@ extern OSSram* __OSLockSram(void);
 
 extern OSThreadQueue __OSActiveThreadQueue AT_ADDRESS(0x800000DC);
 
-BOOL __OSCallResetFunctions(BOOL funcs_arg)
+bool __OSCallResetFunctions(bool funcs_arg)
 {
     OSResetFunctionInfo* iter;
-    BOOL anyReset = FALSE;
+    bool anyReset = false;
 
     for (iter = ResetFunctionQueue.first; iter != NULL; iter = iter->next)
         anyReset |= !iter->func(funcs_arg);
 
     anyReset |= !__OSSyncSram();
 
-    return anyReset ? FALSE : TRUE;
+    return anyReset ? false : true;
 }
 
 static void KillThreads(void)
@@ -155,36 +155,36 @@ void __OSDoHotReset(s32 arg0)
     Reset(arg0 * 8);
 }
 
-void OSResetSystem(int reset, u32 resetCode, BOOL forceMenu)
+void OSResetSystem(int reset, u32 resetCode, bool forceMenu)
 {
 #ifdef MUST_MATCH
     u8 unused[12];
 #endif
 
     // Not initialized in all branches?
-    BOOL disableRecalibration;
+    bool disableRecalibration;
 
     OSDisableScheduler();
     __OSStopAudioSystem();
 
     if (reset == OS_RESET_SHUTDOWN)
-        disableRecalibration = __PADDisableRecalibration(TRUE);
+        disableRecalibration = __PADDisableRecalibration(true);
 
-    while (!__OSCallResetFunctions(FALSE))
+    while (!__OSCallResetFunctions(false))
         continue;
 
     if (reset == OS_RESET_HOTRESET && forceMenu) {
         OSSram* sram = __OSLockSram();
         sram->flags |= (1 << 6);
 
-        __OSUnlockSram(TRUE);
+        __OSUnlockSram(true);
 
         while (!__OSSyncSram())
             continue;
     }
 
     OSDisableInterrupts();
-    __OSCallResetFunctions(TRUE);
+    __OSCallResetFunctions(true);
     LCDisable();
 
     if (reset == OS_RESET_HOTRESET) {

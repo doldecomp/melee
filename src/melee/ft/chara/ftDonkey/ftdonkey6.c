@@ -21,16 +21,16 @@ void ftDonkey_800E0350(HSD_GObj* fighter_gobj)
     func_80082C74(fighter_gobj, &ftDonkey_800E05E4);
 }
 
-BOOL ftDonkey_800E0378(HSD_GObj* fighter_gobj)
+bool ftDonkey_800E0378(HSD_GObj* fighter_gobj)
 {
-    BOOL result = func_800CAE80(fighter_gobj);
+    bool result = func_800CAE80(fighter_gobj);
 
     if (result) {
         ftDonkey_800E04A4(fighter_gobj, result);
-        return TRUE;
+        return true;
     }
 
-    return FALSE;
+    return false;
 }
 
 void ftDonkey_800E03C0(HSD_GObj* fighter_gobj)

@@ -28,9 +28,9 @@ typedef struct OSSramEx {
 
 OSSram* __OSLockSram(void);
 OSSramEx* __OSLockSramEx(void);
-void __OSUnlockSram(BOOL commit);
-void __OSUnlockSramEx(BOOL commit);
-BOOL __OSSyncSram(void);
+void __OSUnlockSram(bool commit);
+void __OSUnlockSramEx(bool commit);
+bool __OSSyncSram(void);
 u32 OSGetWirelessID(u32 chan);
 void OSSetWirelessID(u32 chan, u16 id);
 

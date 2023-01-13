@@ -14,10 +14,10 @@ void ftFox_SpecialS_CreateGFX(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (fp->x2219_flag.bits.b0 == FALSE) {
+    if (fp->x2219_flag.bits.b0 == false) {
         ef_Spawn(0x48D, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj,
                  &fp->facing_dir);
-        fp->x2219_flag.bits.b0 = TRUE;
+        fp->x2219_flag.bits.b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -28,15 +28,15 @@ void ftFox_SpecialS_CreateGFX(HSD_GObj* fighter_gobj)
 // 0x800E9E78
 // https://decomp.me/scratch/Er9l6 // Check if Fox or Falco are in any of their
 // Illusion/Phantasm Action States
-BOOL ftFox_SpecialS_CheckGhostRemove(HSD_GObj* fighter_gobj)
+bool ftFox_SpecialS_CheckGhostRemove(HSD_GObj* fighter_gobj)
 {
     /// @todo @c enum
     enum_t asid = getFighter(fighter_gobj)->x10_action_state_index;
 
     if (asid >= AS_FOX_SPECIALS_START && asid <= AS_FOX_SPECIALAIRS_END)
-        return FALSE;
+        return false;
 
-    return TRUE;
+    return true;
 }
 
 // 0x800E9EA0
@@ -181,7 +181,7 @@ void ftFox_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 // Start Collision callback
 void ftFox_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == FALSE) {
+    if (func_80082708(fighter_gobj) == false) {
         ftFox_SpecialSStart_GroundToAir(fighter_gobj);
     }
 }
@@ -200,7 +200,7 @@ void ftFox_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
         cliffCatchDir = 1;
     }
 
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != FALSE) {
+    if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != false) {
         ftFox_SpecialAirSStart_AirToGround(fighter_gobj);
         return;
     }
@@ -289,7 +289,7 @@ void ftFox_SpecialS_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if ((fp->input.x668 & HSD_BUTTON_B) != FALSE) {
+    if ((fp->input.x668 & HSD_BUTTON_B) != false) {
         if ((s32) fp->xE0_ground_or_air == GA_Air) {
             ftFox_SpecialAirSEnd_Action(fighter_gobj);
             return;
@@ -305,7 +305,7 @@ void ftFox_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if ((fp->input.x668 & HSD_BUTTON_B) != FALSE) {
+    if ((fp->input.x668 & HSD_BUTTON_B) != false) {
         if ((s32) fp->xE0_ground_or_air == GA_Air) {
             ftFox_SpecialAirSEnd_Action(fighter_gobj);
             return;
@@ -363,7 +363,7 @@ void ftFox_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 // Dash Collision callback
 void ftFox_SpecialS_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == FALSE) {
+    if (func_80082708(fighter_gobj) == false) {
         ftFox_SpecialS_GroundToAir(fighter_gobj);
     }
 }
@@ -381,7 +381,7 @@ void ftFox_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
     } else {
         cliffCatchDir = 1;
     }
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != FALSE) {
+    if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != false) {
         ftFox_SpecialAirS_AirToGround(fighter_gobj);
         return;
     }
@@ -544,7 +544,7 @@ void ftFox_SpecialSEnd_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_800827A0(fighter_gobj) == FALSE) {
+    if (func_800827A0(fighter_gobj) == false) {
         func_800CC730(fighter_gobj);
     }
 }
@@ -563,7 +563,7 @@ void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj)
     } else {
         cliffCatchDir = 1;
     }
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != FALSE) {
+    if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != false) {
         func_800D5CB0(fighter_gobj, 0, foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
         return;
     }

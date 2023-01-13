@@ -189,7 +189,7 @@ u8 AIGetStreamVolRight(void)
 
 void AIInit(u8* stack)
 {
-    if (__AI_init_flag == TRUE) {
+    if (__AI_init_flag == true) {
         return;
     }
 
@@ -212,7 +212,7 @@ void AIInit(u8* stack)
     __OSUnmaskInterrupts(0x04000000);
     __OSSetInterruptHandler(8, __AISHandler);
     __OSUnmaskInterrupts(0x800000);
-    __AI_init_flag = TRUE;
+    __AI_init_flag = true;
 }
 
 static void __AISHandler(__OSInterrupt interrupt, OSContext* context)

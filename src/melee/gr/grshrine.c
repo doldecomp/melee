@@ -153,9 +153,9 @@ static void func_80201F1C()
 
 static void func_80201F40() {}
 
-static BOOL func_80201F44(s32)
+static bool func_80201F44(s32)
 {
-    return FALSE;
+    return false;
 }
 
 static s32 func_80201F4C(Vec3* a, s32 unused, struct _HSD_JObj* joint)
@@ -164,8 +164,8 @@ static s32 func_80201F4C(Vec3* a, s32 unused, struct _HSD_JObj* joint)
     func_8000B1CC(joint, 0, &b);
 
     if (a->y > b.y) {
-        return TRUE;
+        return true;
     } else {
-        return FALSE;
+        return false;
     }
 }

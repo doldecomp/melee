@@ -15,7 +15,7 @@ void ftDonkey_800E06B8(HSD_GObj* fighter_gobj)
     ftDonkey_800DFA70(fighter_gobj);
 }
 
-static BOOL ftDonkey_800E0750(HSD_GObj* fighter_gobj);
+static bool ftDonkey_800E0750(HSD_GObj* fighter_gobj);
 
 void ftDonkey_800E06D8(HSD_GObj* fighter_gobj)
 {
@@ -30,17 +30,17 @@ void ftDonkey_800E06D8(HSD_GObj* fighter_gobj)
     }
 }
 
-BOOL ftDonkey_800E0750(HSD_GObj* fighter_gobj)
+bool ftDonkey_800E0750(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
 
     if (func_8008E984(fp))
-        return TRUE;
+        return true;
 
     if (func_8008D8E8(scaleBy154_8008D8D8(fp->dmg.x1850_forceApplied)) < 3)
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 void ftDonkey_800E07B0(HSD_GObj* fighter_gobj)

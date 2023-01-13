@@ -112,11 +112,11 @@ static void lbl_80222E48(HSD_GObj*)
     func_801C2FE0();
 }
 static void lbl_80222E68(void) {}
-static BOOL lbl_80222E6C(long)
+static bool lbl_80222E6C(long)
 {
-    return FALSE;
+    return false;
 }
 static s32 lbl_80222E74(Vec3*, s32, struct _HSD_JObj*)
 {
-    return TRUE;
+    return true;
 }

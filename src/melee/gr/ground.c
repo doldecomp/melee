@@ -429,7 +429,7 @@ void func_801C0800(StructPairWithStageID* pair)
     stage_data->callback0();
 }
 
-static BOOL func_801C0A70(Vec3* pos)
+static bool func_801C0A70(Vec3* pos)
 {
     if (HSD_Randi(2) != 0) {
         InternalStageId enabled_stages[] = {
@@ -491,15 +491,15 @@ static BOOL func_801C0A70(Vec3* pos)
                 pos->y = -5.0f + Stage_GetBlastZoneTopOffset();
                 xoff = HSD_Randi(0x64) - 0x32;
                 pos->x += xoff;
-                return TRUE;
+                return true;
             }
         }
     }
 
     if (Stage_80224FDC(pos) != 0)
-        return TRUE;
+        return true;
     else
-        return FALSE;
+        return false;
 }
 
 extern u32 lbl_803B7DEC[];
@@ -1321,7 +1321,7 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
     if (temp_r3_4 == NULL) {
         OSReport(get_jobj, __FILE__, 0x4C4);
 
-        while (TRUE)
+        while (true)
             continue;
     }
     HSD_JObjAddNext(temp_r29, temp_r3_4);
@@ -1413,7 +1413,7 @@ s32 func_801C1E18(void)
 
 static void func_801C1E2C(HSD_GObj* gobj)
 {
-    BOOL stage_is_something;
+    bool stage_is_something;
     HSD_JObj* jobj;
 
     if (func_80030A78())
@@ -1573,15 +1573,15 @@ void func_801C205C(GXColor* color)
     }
 }
 
-BOOL func_801C2090(GXColor* color)
+bool func_801C2090(GXColor* color)
 {
     if (stage_info.x12C != NULL && color != NULL &&
         stage_info.x12C->ptr != NULL)
     {
         *color = stage_info.x12C->ptr->color;
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
 f32 func_801C20D0(void)
@@ -1854,16 +1854,16 @@ static const int BGM_Undefined = -1;
 
 #define RANDI_MAX (100)
 
-static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
+static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
 {
-    BOOL temp_r25;
+    bool temp_r25;
 
     /// @todo @c phi_r30 probably belongs to an @c inline.
     UnkBgmStruct* phi_r30;
 
     UnkBgmStruct* phi_r30_0 = stage_info.x6B0->xB0;
     enum_t bgm = BGM_Undefined;
-    BOOL result = FALSE;
+    bool result = false;
 
     int i;
 
@@ -1954,7 +1954,7 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     ///       neither does typing #BGM_Undefined as @c unsigned.
                     if (phi_r30->x10 != (unsigned) BGM_Undefined) {
                         bgm = phi_r30->x10;
-                        result = TRUE;
+                        result = true;
                     } else {
                         bgm = phi_r30->xC;
                     }
@@ -1962,29 +1962,29 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
             } else if (arg1 & 0x20) {
                 if (arg1 & 1) {
                     bgm = phi_r30->xC;
-                    stage_info.unk8C.b0 = FALSE;
+                    stage_info.unk8C.b0 = false;
                 } else if (arg1 & 2) {
                     if (phi_r30->x10 != (unsigned) BGM_Undefined) {
                         bgm = phi_r30->x10;
-                        stage_info.unk8C.b0 = TRUE;
-                        result = TRUE;
+                        stage_info.unk8C.b0 = true;
+                        result = true;
                     } else {
                         bgm = phi_r30->xC;
-                        stage_info.unk8C.b0 = FALSE;
+                        stage_info.unk8C.b0 = false;
                     }
                 }
             } else if (arg1 & 1) {
                 bgm = phi_r30->x4;
-                stage_info.unk8C.b0 = FALSE;
+                stage_info.unk8C.b0 = false;
             } else if (arg1 & 2) {
                 /// @todo Even weirder.
                 if ((unsigned) phi_r30->x8 != (unsigned) BGM_Undefined) {
                     bgm = phi_r30->x8;
-                    stage_info.unk8C.b0 = TRUE;
-                    result = TRUE;
+                    stage_info.unk8C.b0 = true;
+                    result = true;
                 } else {
                     bgm = phi_r30->x4;
-                    stage_info.unk8C.b0 = FALSE;
+                    stage_info.unk8C.b0 = false;
                 }
             }
             break;
@@ -2001,7 +2001,7 @@ static BOOL func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
     return result;
 }
 
-BOOL func_801C28AC(s32 arg0, u32 arg1, s32* arg2)
+bool func_801C28AC(s32 arg0, u32 arg1, s32* arg2)
 {
     return func_801C24F8(arg0, arg1, arg2);
 }
@@ -2222,15 +2222,15 @@ static void func_801C2BD4(void* arg0)
     HSD_ASSERT(0x94D, i!=Gr_CObj_Max);
 }
 
-BOOL func_801C2C8C(void* arg0)
+bool func_801C2C8C(void* arg0)
 {
     int i;
     for (i = 0; i < 4; i++) {
         if (stage_info.x694[i] == arg0) {
-            return TRUE;
+            return true;
         }
     }
-    return FALSE;
+    return false;
 }
 
 HSD_JObj* func_801C2CF4(s32 i)
@@ -2243,7 +2243,7 @@ void func_801C2D0C(s32 i, HSD_JObj* jobj)
     stage_info.x280[i] = jobj;
 }
 
-BOOL func_801C2D24(enum_t arg0, Vec3* arg1)
+bool func_801C2D24(enum_t arg0, Vec3* arg1)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -2260,7 +2260,7 @@ BOOL func_801C2D24(enum_t arg0, Vec3* arg1)
         arg1->x *= 0.5f;
         arg1->y *= 0.5f;
         arg1->z *= 0.5f;
-        return TRUE;
+        return true;
     }
 
     if (arg0 == 9) {
@@ -2270,12 +2270,12 @@ BOOL func_801C2D24(enum_t arg0, Vec3* arg1)
         arg1->x *= 0.5f;
         arg1->y *= 0.5f;
         arg1->z *= 0.5f;
-        return TRUE;
+        return true;
     }
 
     if (stage_info.x280[arg0] != NULL) {
         func_8000B1CC(stage_info.x280[arg0], NULL, arg1);
-        return TRUE;
+        return true;
     }
 
     if ((unsigned) arg0 - 1 <= 2)
@@ -2287,7 +2287,7 @@ BOOL func_801C2D24(enum_t arg0, Vec3* arg1)
     if (arg0 == 0x7F) {
         if (func_801C2D24(0x94, arg1)) {
             arg1->y += 50;
-            return TRUE;
+            return true;
         }
 
         return func_801C2D24(0, arg1);
@@ -2295,20 +2295,20 @@ BOOL func_801C2D24(enum_t arg0, Vec3* arg1)
 
     if (arg0 == 4) {
         Stage_UnkSetVec3TCam_Offset(arg1);
-        return TRUE;
+        return true;
     }
 
-    return FALSE;
+    return false;
 }
 
-BOOL func_801C2ED0(HSD_JObj* jobj, s32 arg1)
+bool func_801C2ED0(HSD_JObj* jobj, s32 arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 unused[4];
 #endif
 
-    BOOL result = FALSE;
+    bool result = false;
     UnkArchiveStruct* temp_r3 = func_801C6330(arg1);
 
     S16Vec3* cur;
@@ -2323,7 +2323,7 @@ BOOL func_801C2ED0(HSD_JObj* jobj, s32 arg1)
             func_800552B0(cur->x, jobj, cur->z);
             func_80055E9C(cur->x);
             func_80057424(cur->x);
-            result = TRUE;
+            result = true;
         }
     }
 
@@ -2335,7 +2335,7 @@ BOOL func_801C2ED0(HSD_JObj* jobj, s32 arg1)
             func_800552B0(cur->x, jobj, cur->z);
             func_80055E9C(cur->x);
             func_80057424(cur->x);
-            result = TRUE;
+            result = true;
         }
     }
 
@@ -2454,17 +2454,17 @@ void func_801C2FE0(void)
 
 #endif
 
-BOOL func_801C3128(s32 arg0, void (*arg1)(s16))
+bool func_801C3128(s32 arg0, void (*arg1)(s16))
 {
     /// @todo Unused variable; is this an argument?
 #ifdef MUST_MATCH
     StageData* stage_data;
 #endif
 
-    BOOL result;
+    bool result;
 
     func_8004D17C();
-    result = FALSE;
+    result = false;
 
     {
         /// @todo @c cur cannot be swapped below @c max, hinting at a missing
@@ -2478,7 +2478,7 @@ BOOL func_801C3128(s32 arg0, void (*arg1)(s16))
             for (i = 0; i < max; i++, cur++) {
                 if (cur->y == arg0) {
                     arg1(cur->x);
-                    result = TRUE;
+                    result = true;
                 }
             }
 
@@ -2490,7 +2490,7 @@ BOOL func_801C3128(s32 arg0, void (*arg1)(s16))
                     max = tmp->unk4->unk8[arg0].unk24;
                     for (i = 0; i < max; i++, cur++) {
                         arg1(cur->x);
-                        result = TRUE;
+                        result = true;
                     }
                 }
             }
@@ -2500,23 +2500,23 @@ BOOL func_801C3128(s32 arg0, void (*arg1)(s16))
     return result;
 }
 
-BOOL func_801C3214(int arg0)
+bool func_801C3214(int arg0)
 {
     if (lbl_804D6950[arg0] == 1) {
         lbl_804D6950[arg0] = 0;
         return func_801C3128(arg0, func_80057638);
     }
 
-    return FALSE;
+    return false;
 }
 
-BOOL func_801C3260(s32 arg0)
+bool func_801C3260(s32 arg0)
 {
     if (lbl_804D6950[arg0] == 0) {
         lbl_804D6950[arg0] = 1;
         return func_801C3128(arg0, func_80057BC0);
     }
-    return FALSE;
+    return false;
 }
 
 void func_801C32AC(s32 arg0)
@@ -3510,7 +3510,7 @@ HSD_JObj* func_801C4100(HSD_JObj* jobj)
     if (jobjGetNext(jobj) != NULL)
         return jobjGetNext(jobj);
 
-    while (TRUE) {
+    while (true) {
         if (jobjGetParent(jobj) == NULL)
             return NULL;
 
@@ -3559,7 +3559,7 @@ void func_801C42AC(void)
         if (jobj != NULL) {
             sp8.x14 = 0x14;
             sp8.x4 = jobj;
-            sp8.x1C.bits.b0 = TRUE;
+            sp8.x1C.bits.b0 = true;
             func_8026BE84(&sp8);
         }
     }
@@ -3590,7 +3590,7 @@ void func_801C43A4(unk_t arg0)
     func_801DA3F4(arg0);
 }
 
-BOOL func_801C43C4(void* arg0)
+bool func_801C43C4(void* arg0)
 {
     UnkStageDat* tmp;
     int max;
@@ -3607,16 +3607,16 @@ BOOL func_801C43C4(void* arg0)
         for (i = 0; i != max; i++, phi_r4++) {
             if (phi_r4->unk0 == arg0) {
                 if (phi_r4->flag)
-                    return TRUE;
+                    return true;
                 else
-                    return FALSE;
+                    return false;
             }
         }
 
         HSD_ASSERT(3652, 0);
     }
 
-    return FALSE;
+    return false;
 }
 
 void func_801C445C(HSD_LObj* lobj)
@@ -4084,22 +4084,22 @@ void func_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
     result->z = result_z;
 }
 
-BOOL func_801C4D70(s32 arg0, Vec3* arg1, f32 arg8)
+bool func_801C4D70(s32 arg0, Vec3* arg1, f32 arg8)
 {
     stage_info.x72C = arg0;
     stage_info.x730 = *arg1;
     stage_info.x73C = arg8;
-    return TRUE;
+    return true;
 }
 
-BOOL func_801C4DA0(Vec3* arg0, f32* arg1)
+bool func_801C4DA0(Vec3* arg0, f32* arg1)
 {
     *arg0 = stage_info.x730;
     *arg1 = stage_info.x73C;
-    return TRUE;
+    return true;
 }
 
-BOOL func_801C4DD0(void)
+bool func_801C4DD0(void)
 {
     InternalStageId stage_id = stage_info.internal_stage_id;
 
@@ -4108,10 +4108,10 @@ BOOL func_801C4DD0(void)
     else if (stage_id == OLDKONGO)
         func_802105AC(stage_info.x72C);
 
-    return TRUE;
+    return true;
 }
 
-BOOL func_801C4E20(void)
+bool func_801C4E20(void)
 {
     InternalStageId stage_id = stage_info.internal_stage_id;
 
@@ -4120,14 +4120,14 @@ BOOL func_801C4E20(void)
     else if (stage_id == OLDKONGO)
         func_802105C8(stage_info.x72C);
 
-    return TRUE;
+    return true;
 }
 
 void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
                    HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5)
 {
     Vec3 vec;
-    stage_info.unk8C.b3 = TRUE;
+    stage_info.unk8C.b3 = true;
 
     func_8000B1CC(arg0, NULL, &vec);
     stage_info.x130 = vec;
@@ -4492,15 +4492,15 @@ void func_801C5440(Map* gp, s32 i, u32 arg2)
     }
 }
 
-BOOL func_801C54DC(Map* gp, s32 i)
+bool func_801C54DC(Map* gp, s32 i)
 {
     if (i < 0 || i >= 8)
-        return FALSE;
+        return false;
 
     if (gp != NULL && gp->x20[i] != -1 && func_80023710(gp->x20[i]))
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 void func_801C5544(Map* gp, s32 i)
@@ -4550,12 +4550,12 @@ void func_801C5694(Map* gp, s32 i, f32 val)
     }
 }
 
-BOOL func_801C5700(s32 i)
+bool func_801C5700(s32 i)
 {
     if (stage_info.x178 != NULL) {
         return stage_info.x178(i);
     }
-    return FALSE;
+    return false;
 }
 
 void func_801C5740(s32 arg0)
@@ -4753,12 +4753,12 @@ s32 func_801C5A94(void)
     return stage_info.x98;
 }
 
-void func_801C5AA4(BOOL arg0)
+void func_801C5AA4(bool arg0)
 {
     stage_info.unk8C.b1 = arg0;
 }
 
-BOOL func_801C5ABC(void)
+bool func_801C5ABC(void)
 {
     return stage_info.unk8C.b1;
 }

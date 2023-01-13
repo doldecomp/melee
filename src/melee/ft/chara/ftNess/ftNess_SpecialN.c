@@ -9,7 +9,7 @@
 
 // 0x80116EBC
 // https://decomp.me/scratch/45pKw
-BOOL ftNess_CheckSpecialNHold(
+bool ftNess_CheckSpecialNHold(
     HSD_GObj* fighter_gobj) // Ness PK Flash Charge ASID check
 {
     Fighter* fp;
@@ -23,12 +23,12 @@ BOOL ftNess_CheckSpecialNHold(
                 if (ASID == AS_NESS_SPECIALN_HOLD ||
                     ASID == AS_NESS_SPECIALAIRN_HOLD)
                 {
-                    return TRUE;
+                    return true;
                 }
             }
         }
     }
-    return FALSE;
+    return false;
 }
 
 // 0x80116F00
@@ -240,7 +240,7 @@ void ftNess_SpecialNHold_Anim(
             fp->sa.ness.x2240_flashGObj = NULL;
             return;
         }
-        if ((func_802AA7F0(fp->sa.ness.x2240_flashGObj) == TRUE) &&
+        if ((func_802AA7F0(fp->sa.ness.x2240_flashGObj) == true) &&
             ((s32) fp->x10_action_state_index != AS_NESS_SPECIALN_HOLD_RELEASE))
         {
             Fighter_ActionStateChange_800693AC(
@@ -358,7 +358,7 @@ void ftNess_SpecialAirNHold_Anim(
             fp->sa.ness.x2240_flashGObj = NULL;
             return;
         }
-        if ((func_802AA7F0(fp->sa.ness.x2240_flashGObj) == TRUE) &&
+        if ((func_802AA7F0(fp->sa.ness.x2240_flashGObj) == true) &&
             ((s32) fp->x10_action_state_index !=
              AS_NESS_SPECIALAIRN_HOLD_RELEASE))
         {
@@ -412,12 +412,12 @@ void ftNess_SpecialNHold_IASA(
     fp->nessVars[0].SpecialN.flashTimerMin--;
     if ((s32) fp->nessVars[0].SpecialN.flashTimerMin <= 0) {
         fp->nessVars[0].SpecialN.flashTimerMin = 0;
-        phi_r0 = TRUE;
+        phi_r0 = true;
     } else {
-        phi_r0 = FALSE;
+        phi_r0 = false;
     }
-    if ((phi_r0 == TRUE) &&
-        ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE) &&
+    if ((phi_r0 == true) &&
+        ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) &&
         (fighter_gobj != NULL))
     {
         fp = fighter_gobj->user_data;
@@ -459,12 +459,12 @@ void ftNess_SpecialAirNHold_IASA(
         (s32) (fp->nessVars[0].SpecialN.flashTimerMin - 1);
     if ((s32) fp->nessVars[0].SpecialN.flashTimerMin <= 0) {
         fp->nessVars[0].SpecialN.flashTimerMin = 0;
-        phi_r0 = TRUE;
+        phi_r0 = true;
     } else {
-        phi_r0 = FALSE;
+        phi_r0 = false;
     }
-    if ((phi_r0 == TRUE) &&
-        ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == FALSE) &&
+    if ((phi_r0 == true) &&
+        ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) &&
         (fighter_gobj != NULL))
     {
         fp = fighter_gobj->user_data;
@@ -590,7 +590,7 @@ void ftNess_SpecialNStart_Coll(
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80082708(fighter_gobj) == FALSE) {
+    if (func_80082708(fighter_gobj) == false) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_NESS_SPECIALAIRN_START, FTNESS_SPECIALN_COLL_FLAG,
@@ -606,7 +606,7 @@ void ftNess_SpecialNHold_Coll(
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80082708(fighter_gobj) == FALSE) {
+    if (func_80082708(fighter_gobj) == false) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_NESS_SPECIALAIRN_HOLD, FTNESS_SPECIALN_COLL_FLAG,
@@ -622,7 +622,7 @@ void ftNess_SpecialNEnd_Coll(
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80082708(fighter_gobj) == FALSE) {
+    if (func_80082708(fighter_gobj) == false) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_NESS_SPECIALAIRN_END, FTNESS_SPECIALN_COLL_FLAG,
@@ -637,7 +637,7 @@ void ftNess_SpecialAirNStart_Coll(
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80081D0C(fighter_gobj) != FALSE) {
+    if (func_80081D0C(fighter_gobj) != false) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_NESS_SPECIALN_START, FTNESS_SPECIALN_COLL_FLAG,
@@ -652,7 +652,7 @@ void ftNess_SpecialAirNHold_Coll(
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80081D0C(fighter_gobj) != FALSE) {
+    if (func_80081D0C(fighter_gobj) != false) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_NESS_SPECIALN_HOLD, FTNESS_SPECIALN_COLL_FLAG,
@@ -667,7 +667,7 @@ void ftNess_SpecialAirNEnd_Coll(
 {
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (func_80081D0C(fighter_gobj) != FALSE) {
+    if (func_80081D0C(fighter_gobj) != false) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_NESS_SPECIALN_END, FTNESS_SPECIALN_COLL_FLAG, NULL,

@@ -94,7 +94,7 @@ void func_802AA054(HSD_GObj*, Vec3*, Vec3*, f32, f32);
 void func_802B338C(HSD_GObj*, Vec3*, f32 facing_dir, u32);
 void func_802B5974(HSD_GObj*);
 HSD_GObj* func_802B55C8(HSD_GObj* owner, Vec3*, s32, s32, f32 facing_dir);
-void func_802B62D0(HSD_GObj*, Vec3* pos, BOOL, f32 facing_dir);
+void func_802B62D0(HSD_GObj*, Vec3* pos, bool, f32 facing_dir);
 
 /// Destroys an item?
 void func_802C3D44(HSD_GObj*);
@@ -125,10 +125,10 @@ HSD_GObj* func_802C5000(HSD_GObj*, Vec3*, s32, s32, f32);
 void func_802C519C(HSD_GObj*, Vec3*, s32, s32, f32, f32);
 void func_802B4AC8(HSD_GObj* fighter_gobj, Vec3*, f32 facing_dir, f32 x);
 void func_802C53F0(HSD_GObj*, Vec3*, f32, f32, f32);
-s32 func_802E5F8C(HSD_GObj*, Vec3*, s32, BOOL, f32, f32);
+s32 func_802E5F8C(HSD_GObj*, Vec3*, s32, bool, f32, f32);
 void func_80284FC4(HSD_GObj*, s32, f32);
 void func_80285024(HSD_GObj*, s32);
-void func_802950D4(HSD_GObj*, BOOL);
+void func_802950D4(HSD_GObj*, bool);
 void func_80294EB0(HSD_GObj*, Vec3*, Vec3*);
 s32 func_802F2094(s32, Vec3*, s32, s32);
 

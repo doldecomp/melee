@@ -16,25 +16,25 @@ static s32 lbl_803BA000[] = { 6, 6, 6, 6, 1, 2, 3, 0 };
 static s32 lbl_803BA020[] = { 28, 29, 30, 31 };
 static s32 lbl_803BA030[] = { 7, 4, 5, 6 };
 
-BOOL func_8000B074(HSD_JObj* jobj)
+bool func_8000B074(HSD_JObj* jobj)
 {
     HSD_AObj* aobj = jobj->aobj;
     if (aobj != NULL && !(aobj->flags & AOBJ_NO_ANIM)) {
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
-BOOL func_8000B09C(HSD_JObj* jobj)
+bool func_8000B09C(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
         if (jobj->aobj != NULL && !(jobj->aobj->flags & AOBJ_NO_ANIM)) {
-            return TRUE;
+            return true;
         }
         if (jobj->child == NULL && jobj->next == NULL ||
             (jobj->flags & JOBJ_INSTANCE))
         {
-            while (TRUE) {
+            while (true) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
                     break;
@@ -51,19 +51,19 @@ BOOL func_8000B09C(HSD_JObj* jobj)
             jobj = jobj->next;
         }
     }
-    return FALSE;
+    return false;
 }
 
-BOOL func_8000B134(HSD_JObj* jobj)
+bool func_8000B134(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
         if (jobj->aobj != NULL && (jobj->aobj->flags & AOBJ_REWINDED)) {
-            return TRUE;
+            return true;
         }
         if (jobj->child == NULL && jobj->next == NULL ||
             (jobj->flags & JOBJ_INSTANCE))
         {
-            while (TRUE) {
+            while (true) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
                     break;
@@ -80,7 +80,7 @@ BOOL func_8000B134(HSD_JObj* jobj)
             jobj = jobj->next;
         }
     }
-    return FALSE;
+    return false;
 }
 
 inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
@@ -912,26 +912,26 @@ lbl_8000CB3C:
 static s32 lbGetFreeColorRegImpl(s32 i0, HSD_TevDesc* tevdesc, HSD_TExp* texp1,
                                  HSD_TExp* texp2)
 {
-    BOOL register_used[8];
+    bool register_used[8];
     int i;
 
     for (i = 0; i < 8; i++) {
-        register_used[i] = FALSE;
+        register_used[i] = false;
     }
     while (texp1 != NULL) {
         if (texp1->cnst.reg < 8) {
-            register_used[texp1->cnst.reg] = TRUE;
+            register_used[texp1->cnst.reg] = true;
         }
         texp1 = texp1->cnst.next;
     }
     while (tevdesc != NULL) {
         s32 idx = lbl_803B9FF0[tevdesc->u.tevconf.clr_out_reg];
-        register_used[idx] = TRUE;
+        register_used[idx] = true;
         tevdesc = tevdesc->next;
     }
     while (texp2 != NULL) {
         if (texp2->cnst.reg < 8) {
-            register_used[texp2->cnst.reg] = TRUE;
+            register_used[texp2->cnst.reg] = true;
         }
         texp2 = texp2->cnst.next;
     }
@@ -961,15 +961,15 @@ s32 func_8000CCA4(s32 i)
 
 static s32 lbGetFreeAlphaRegImpl(s32 i0, HSD_TevDesc* cur, HSD_TExp*, HSD_TExp*)
 {
-    BOOL register_used[8];
+    bool register_used[8];
     int i;
 
     for (i = 0; i < 8; i++) {
-        register_used[i] = FALSE;
+        register_used[i] = false;
     }
     while (cur != NULL) {
         s32 idx = lbl_803BA030[cur->u.tevconf.alpha_out_reg];
-        register_used[idx] = TRUE;
+        register_used[idx] = true;
         cur = cur->next;
     }
     for (i = i0; i < 7; i++) {
