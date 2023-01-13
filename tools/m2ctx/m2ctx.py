@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -29,6 +30,10 @@ MWCC_FLAGS = [
 def import_c_file(in_file: str) -> str:
     in_file = root / in_file
     c_command = [str(mwcc_command), *MWCC_FLAGS, "-E", in_file]
+
+    if sys.platform != "win32":
+        wine = os.environ.get("WINE", "wine")
+        c_command = [wine] + c_command
 
     try:
         out_text = subprocess.check_output(c_command, cwd=root, encoding="utf8")
