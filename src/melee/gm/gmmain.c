@@ -29,7 +29,6 @@
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/video.h>
 
-extern s32 g_debugLevel; // debug level
 extern BOOL lbl_804D6B20;
 extern u16 lbl_804D6B30; // debug flags
 

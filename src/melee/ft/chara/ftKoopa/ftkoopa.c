@@ -152,7 +152,7 @@ void func_80132E30(HSD_GObj* gobj)
         flag_set = FALSE;
     }
     if (flag_set != FALSE) {
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_dir = -fp->facing_dir;
         fp->x234C_stateVar4 = 1;
     }
     if ((u32) fp->x2200_ftcmd_var0 != 0) {
@@ -377,14 +377,14 @@ void func_801334E4(HSD_GObj* gobj)
     func_8007D7FC(fp);
 
     if ((s32) fp->x234C_stateVar4 != 0)
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_dir = -fp->facing_dir;
 
     Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0x0C4C5088, 0,
                                        fp->x894_currentAnimFrame, lbl_804D9ADC,
                                        lbl_804D9AD8);
 
     if ((s32) fp->x234C_stateVar4 != 0)
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_dir = -fp->facing_dir;
 
     if (fp->x1A58_interactedFighter != 0)
         func_800BCE64(fp->x1A58_interactedFighter, 0x119);
@@ -399,14 +399,14 @@ void func_8013359C(HSD_GObj* gobj)
     func_8007D7FC(fp);
 
     if ((s32) fp->x234C_stateVar4 != 0)
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_dir = -fp->facing_dir;
 
     Fighter_ActionStateChange_800693AC(gobj, 0x160, 0x0C4C5088, 0,
                                        fp->x894_currentAnimFrame, lbl_804D9ADC,
                                        lbl_804D9AD8);
 
     if ((s32) fp->x234C_stateVar4 != 0)
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_dir = -fp->facing_dir;
 
     if (fp->x1A58_interactedFighter != NULL)
         func_800BCE64(fp->x1A58_interactedFighter, 0x11A);

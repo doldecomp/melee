@@ -1,6 +1,7 @@
 #ifndef _gmmain_lib_h_
 #define _gmmain_lib_h_
 
+#include <common_structs.h>
 #include <Runtime/platform.h>
 
 struct gmm_x1CB0 {
@@ -8,20 +9,6 @@ struct gmm_x1CB0 {
     /* 0x1CC6 0x16 */ u8 saved_language;
     u8 padding_x16[0x20 - 0x16 - 1];
 };
-
-typedef union _UnkFlagStruct {
-    struct {
-        u8 b0 : 1;
-        u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
-        u8 b4 : 1;
-        u8 b5 : 1;
-        u8 b6 : 1;
-        u8 b7 : 1;
-    } bits;
-    u8 flags;
-} UnkFlagStruct;
 
 typedef union _UnkFlagStruct2 {
     struct {

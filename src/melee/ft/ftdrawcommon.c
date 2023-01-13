@@ -706,19 +706,19 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         if (fighter->xE0_ground_or_air == GA_Ground) {
             if (func_8001E2F8(&temp_r24->x0_ground_light_offset,
                               &fighter->xB0_pos, &lbl_804D3A88, arg1,
-                              fighter->x2C_facing_direction) != 0)
+                              fighter->facing_dir) != 0)
             {
                 phi_r30 = 1U;
             }
             if (func_8001E2F8(&temp_r24->x10_ground_heavy_offset,
                               &fighter->xB0_pos, &lbl_804D3A90, arg1,
-                              fighter->x2C_facing_direction) != 0)
+                              fighter->facing_dir) != 0)
             {
                 phi_r30 = 1U;
             }
         } else if (func_8001E2F8(&temp_r24->x20_air_light_offset,
                                  &fighter->xB0_pos, &lbl_804D3A8C, arg1,
-                                 fighter->x2C_facing_direction) != 0)
+                                 fighter->facing_dir) != 0)
         {
             phi_r30 = 1U;
         }

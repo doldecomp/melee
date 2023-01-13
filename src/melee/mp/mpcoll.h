@@ -20,7 +20,7 @@ void func_80048274(CollData*);
 void func_80048578(CollData*);
 void func_80048768(CollData*);
 void func_80048388(CollData*);
-void func_800436D8(CollData*, s32);
+void func_800436D8(CollData*, int facing_dir);
 void func_800475F4(CollData*);
 void func_8004730C(CollData*, f32 (*x)[6]);
 void func_80047A08(CollData*);

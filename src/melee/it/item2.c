@@ -51,7 +51,7 @@ void func_8026B294(HSD_GObj* item_gobj,
     Item* temp_item;
 
     temp_item = item_gobj->user_data;
-    *pos = temp_item->x4C_pos;
+    *pos = temp_item->pos;
 }
 
 // 0x8026B2B4
@@ -117,10 +117,10 @@ void func_8026B344(
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    pos->x = (f32) ((item_data->x2C_facing_direction * item_data->xBCC_unk.x) +
-                    item_data->x4C_pos.x);
-    pos->y = (f32) (item_data->x4C_pos.y + item_data->xBCC_unk.y);
-    pos->z = (f32) item_data->x4C_pos.z;
+    pos->x = (f32) ((item_data->facing_dir * item_data->xBCC_unk.x) +
+                    item_data->pos.x);
+    pos->y = (f32) (item_data->pos.y + item_data->xBCC_unk.y);
+    pos->z = (f32) item_data->pos.z;
 }
 
 // 0x8026B378
@@ -437,7 +437,7 @@ void func_8026B718(HSD_GObj* item_gobj,
                    f32 hitlagFrames) // Set item's hitlag frames
 {
     Item* item_data = item_gobj->user_data;
-    item_data->itdmg.xCBC_hitlagFrames = hitlagFrames;
+    item_data->xCBC_hitlagFrames = hitlagFrames;
 }
 
 // 0x8026B724
@@ -557,7 +557,7 @@ void func_8026B7F8(HSD_GObj* fighter_gobj) // Remove item from player on death?
     enumGObj = lbl_804D782C->x24_items;
     while (enumGObj != NULL) {
         item_data = enumGObj->user_data;
-        itemOwner = item_data->x518_ownerGObj;
+        itemOwner = item_data->owner;
         RunCallbackUnk(item_data->xB8_itemLogicTable->x38_callback_OnUnknown,
                        enumGObj, fighter_gobj);
         if ((item_data->xDC8_word.flags.x13 != 0) &&
@@ -581,25 +581,25 @@ BOOL func_8026B894(HSD_GObj* item_gobj,
     temp_item = item_gobj->user_data;
     ret = 0;
 
-    if (temp_item->x518_ownerGObj == referenced_gobj) {
-        temp_item->x518_ownerGObj = NULL;
+    if (temp_item->owner == referenced_gobj) {
+        temp_item->owner = NULL;
         ret = 1;
     }
-    if (temp_item->itdmg.xC64_reflectGObj == referenced_gobj) {
-        temp_item->itdmg.xC64_reflectGObj = NULL;
+    if (temp_item->xC64_reflectGObj == referenced_gobj) {
+        temp_item->xC64_reflectGObj = NULL;
     }
-    if (temp_item->itdmg.xC90_absorbGObj == referenced_gobj) {
-        temp_item->itdmg.xC90_absorbGObj = NULL;
+    if (temp_item->xC90_absorbGObj == referenced_gobj) {
+        temp_item->xC90_absorbGObj = NULL;
     }
-    if (temp_item->itdmg.xCEC_fighterGObj == referenced_gobj) {
-        temp_item->itdmg.xCEC_fighterGObj = NULL;
-        temp_item->itdmg.xCB0_source_ply = 6;
+    if (temp_item->xCEC_fighterGObj == referenced_gobj) {
+        temp_item->xCEC_fighterGObj = NULL;
+        temp_item->xCB0_source_ply = 6;
     }
     if (temp_item->xCF4_fighterGObjUnk == referenced_gobj) {
         temp_item->xCF4_fighterGObjUnk = NULL;
     }
-    if (temp_item->xCF8_detectGObj == referenced_gobj) {
-        temp_item->xCF8_detectGObj = NULL;
+    if (temp_item->toucher == referenced_gobj) {
+        temp_item->toucher = NULL;
         return ret;
     }
     return ret;
@@ -872,9 +872,9 @@ void func_8026BB88(HSD_GObj* item_gobj,
 
     temp_float = 0.5f * (item_data->x378_itemColl.xA4_ecbCurrCorrect.top.y +
                          item_data->x378_itemColl.xA4_ecbCurrCorrect.bottom.y);
-    pos->x = item_data->x4C_pos.x + temp_float2;
-    pos->y = item_data->x4C_pos.y + temp_float;
-    pos->z = item_data->x4C_pos.z + temp_float2;
+    pos->x = item_data->pos.x + temp_float2;
+    pos->y = item_data->pos.y + temp_float;
+    pos->z = item_data->pos.z + temp_float2;
 }
 
 // 0x8026BBCC
@@ -905,11 +905,10 @@ void func_8026BC14(
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    if ((item_data->x518_ownerGObj != NULL) &&
-        (func_80086960(item_data->x518_ownerGObj) != FALSE))
+    if ((item_data->owner != NULL) &&
+        (func_80086960(item_data->owner) != FALSE))
     {
-        func_80086A4C(item_data->x518_ownerGObj,
-                      item_data->itdmg.xCBC_hitlagFrames - 1.0f);
+        func_80086A4C(item_data->owner, item_data->xCBC_hitlagFrames - 1.0f);
     }
 }
 
@@ -926,7 +925,7 @@ s32 func_8026BC68(HSD_GObj* item_gobj) // Return bit 0 of 0xDD0
 HSD_GObj* func_8026BC78(HSD_GObj* item_gobj) // Get item owner
 {
     Item* item_data = item_gobj->user_data;
-    return item_data->x518_ownerGObj;
+    return item_data->owner;
 }
 
 // 0x8026BC84
@@ -1264,9 +1263,8 @@ BOOL func_8026C1E8(HSD_GObj* item_gobj) // Check if item has grabbed a GObj?
 {
     Item* item_data = item_gobj->user_data;
 
-    if ((item_data->xD00_grabGObj != NULL) ||
-        (item_data->xDC8_word.flags.x13 != 0) &&
-            (item_data->x518_ownerGObj != NULL))
+    if ((item_data->grab_victim != NULL) ||
+        (item_data->xDC8_word.flags.x13 != 0) && (item_data->owner != NULL))
     {
         return 0;
     }
@@ -1279,7 +1277,7 @@ void func_8026C220(HSD_GObj* item_gobj,
                    HSD_GObj* fighter_gobj) // Get item owner's port number
 {
     Item* item_data = GetItemDirect(item_gobj);
-    item_data->itdmg.xCB0_source_ply = (u8) func_80086BE0(fighter_gobj);
+    item_data->xCB0_source_ply = (u8) func_80086BE0(fighter_gobj);
 }
 
 // Shoutouts to CelestialAmber for helping clean up this next one
@@ -1307,25 +1305,23 @@ HSD_GObj* func_8026C258(
 
     while (item_gobj != NULL) {
         item_data = item_gobj->user_data;
-        holdKind =
-            item_data->x14_hold_kind; // Might not actually be (exclusively)
-                                      // hold kind in the end???
+        holdKind = item_data->hold_kind; // Might not actually be (exclusively)
+                                         // hold kind in the end???
         if (((int) holdKind == ITEM_UNK_MATO) || (int) (holdKind == 5) ||
             (short) (holdKind == ITEM_UNK_ENEMY) ||
             (int) (holdKind == 7)) // Decide lock-on type for Samus Missile?
         {
-            if (item_data->xD00_grabGObj == NULL) {
+            if (item_data->grab_victim == NULL) {
                 if (item_data->xDC8_word.flags.x13 == 0 ||
-                    item_data->x518_ownerGObj == NULL)
+                    item_data->owner == NULL)
                 {
-                    if ((facingDir != -1.0f) ||
-                        !(item_data->x4C_pos.x > vector->x))
+                    if ((facingDir != -1.0f) || !(item_data->pos.x > vector->x))
                     {
                         if ((facingDir != 1.0f) ||
-                            !(item_data->x4C_pos.x < vector->x))
+                            !(item_data->pos.x < vector->x))
                         {
-                            xDist = vector->x - item_data->x4C_pos.x;
-                            yDist = vector->y - item_data->x4C_pos.y;
+                            xDist = vector->x - item_data->pos.x;
+                            yDist = vector->y - item_data->pos.y;
                             magnitude = (xDist * xDist) + (yDist * yDist);
                             if (magnitude < minMagnitude) {
                                 minMagnitude = magnitude;
@@ -1350,9 +1346,9 @@ void func_8026C334(HSD_GObj* item_gobj,
     f32 temp_ECBvar = item_data->x378_itemColl.xA4_ecbCurrCorrect.bottom.y;
     f32 temp_zero = 0.0f;
 
-    pos->x = item_data->x4C_pos.x + temp_zero;
-    pos->y = item_data->x4C_pos.y + temp_ECBvar;
-    pos->z = item_data->x4C_pos.z + temp_zero;
+    pos->x = item_data->pos.x + temp_zero;
+    pos->y = item_data->pos.y + temp_ECBvar;
+    pos->z = item_data->pos.z + temp_zero;
 }
 
 // 0x8026C368

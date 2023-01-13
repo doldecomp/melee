@@ -20,7 +20,7 @@ void ftGameWatch_ItemParachuteSetup(HSD_GObj* fighter_gobj)
     } else {
         func_8000B1CC(fp->x5E8_fighterBones[0x1].x0_jobj, NULL, &sp10);
         fp->sa.gaw.x2258_parachuteGObj =
-            func_802C6C38(fighter_gobj, &sp10, 1, fp->x2C_facing_direction);
+            func_802C6C38(fighter_gobj, &sp10, 1, fp->facing_dir);
         if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
@@ -108,7 +108,7 @@ void ftGameWatch_ItemTurtleSetup(HSD_GObj* fighter_gobj)
     } else {
         func_8000B1CC(fp->x5E8_fighterBones[0x11].x0_jobj, NULL, &sp10);
         fp->sa.gaw.x225C_turtleGObj =
-            func_802C6F40(fighter_gobj, &sp10, 0x11, fp->x2C_facing_direction);
+            func_802C6F40(fighter_gobj, &sp10, 0x11, fp->facing_dir);
         if (fp->sa.gaw.x225C_turtleGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
@@ -197,7 +197,7 @@ void ftGameWatch_ItemSparkySetup(HSD_GObj* fighter_gobj)
     } else {
         func_8000B1CC(fp->x5E8_fighterBones[0x15].x0_jobj, NULL, &sp10);
         fp->sa.gaw.x2260_sparkyGObj =
-            func_802C720C(fighter_gobj, &sp10, 0x15, fp->x2C_facing_direction);
+            func_802C720C(fighter_gobj, &sp10, 0x15, fp->facing_dir);
         if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;

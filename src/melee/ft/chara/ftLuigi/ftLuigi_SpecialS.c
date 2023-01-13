@@ -729,7 +729,7 @@ void ftLuigi_SpecialSFly_Action(HSD_GObj* fighter_gobj)
                                  fp->luigiVars[0].SpecialS.chargeFrames +
                              luigiAttrs->x24_LUIGI_GREENMISSILE_VEL_X;
     }
-    fp->x80_self_vel.x *= fp->x2C_facing_direction;
+    fp->x80_self_vel.x *= fp->facing_dir;
     if (fp->luigiVars[0].SpecialS.isMisfire) {
         fp->x80_self_vel.y = luigiAttrs->x4C_LUIGI_GREENMISSILE_MISFIRE_VEL_Y;
     } else {

@@ -412,7 +412,7 @@ void ftPikachu_ActionChange_80125A54(HSD_GObj* fighter_gobj)
 
     fp->x80_self_vel.x =
         (pika_attr->x40 * fp->x2340_stateVar1) + pika_attr->x3C;
-    fp->x80_self_vel.x *= fp->x2C_facing_direction;
+    fp->x80_self_vel.x *= fp->facing_dir;
 
     fp->x80_self_vel.y =
         (0.5f * pika_attr->x44) +

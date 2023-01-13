@@ -18,7 +18,7 @@ void func_80149354(HSD_GObj* gobj)
 
     if (fp->x2204_ftcmd_var1 == 1 && fp->sa.clink.x2244 == 0) {
         temp_r3 = func_802C8B28(gobj, &fp->xB0_pos, func_8007500C(ft2, 0x1F),
-                                fp->x2C_facing_direction);
+                                fp->facing_dir);
         fp->sa.clink.x2244 = (u32) temp_r3;
         if (temp_r3 != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = func_800EAF58;

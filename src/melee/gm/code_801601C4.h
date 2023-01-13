@@ -27,5 +27,8 @@ void func_8016B498(void);
 BOOL func_80164600(void);
 BOOL func_80164ABC(void);
 BOOL func_8016C5C0(int pl_slot);
+BOOL func_8017E068(void);
+BOOL func_8016AE80(void);
+BOOL func_8018841C(void);
 
 #endif

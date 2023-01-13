@@ -472,7 +472,7 @@ static inline void GetAttrStuff(HSD_GObj* arg0)
          temp_r31->x78_PSI_MAGNET_UNK1))
     {
         temp_r30->x2200_ftcmd_var0 = 1;
-        temp_r30->x2C_facing_direction = -temp_r30->x2C_facing_direction;
+        temp_r30->facing_dir = -temp_r30->facing_dir;
     }
     func_80075AF0(
         temp_r30, 0,
@@ -942,8 +942,7 @@ void ftNess_AbsorbThink_DecideAction(
                         (s32) temp_r31->dmg.x1830_percent);
     func_80040B8C(temp_r31->xC_playerID, temp_r31->x221F_flag.bits.b4,
                   (s32) temp_f31);
-    temp_r31->x2C_facing_direction =
-        (f32) temp_r31->AbsorbAttr.x1A40_absorbHitDirection;
+    temp_r31->facing_dir = (f32) temp_r31->AbsorbAttr.x1A40_absorbHitDirection;
     temp_r0 = temp_r31->x10_action_state_index;
 
     if (((temp_r0 != AS_NESS_SPECIALLW_HIT) &&

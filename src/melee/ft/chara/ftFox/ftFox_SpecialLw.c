@@ -461,7 +461,7 @@ static void ftFox_SpecialLw_Turn(HSD_GObj* fighter_gobj)
          foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES))
     {
         fp->x2200_ftcmd_var0 = 1;
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_dir = -fp->facing_dir;
     }
     func_80075AF0(fp, 0,
                   -((0.01745329238474369f *
@@ -485,7 +485,7 @@ static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* fighter_gobj)
             foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)
     {
         fp->x2200_ftcmd_var0 = TRUE;
-        fp->x2C_facing_direction = -fp->x2C_facing_direction;
+        fp->facing_dir = -fp->facing_dir;
     }
 
     /// @todo Degrees-to-radians constant.
@@ -863,7 +863,7 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = getFighter(fighter_gobj);
     s32 ASID;
 
-    fp->x2C_facing_direction = fp->ReflectAttr.x1A2C_reflectHitDirection;
+    fp->facing_dir = fp->ReflectAttr.x1A2C_reflectHitDirection;
 
     func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, NULL,
                   &sp14);

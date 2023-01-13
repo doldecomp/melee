@@ -80,7 +80,7 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     fp->foxVars[0].AppealS.animCount = 0;
-    facingDir = ftFox_AppealS_GetLR(1.0f, fp->x2C_facing_direction);
+    facingDir = ftFox_AppealS_GetLR(1.0f, fp->facing_dir);
 
     fp->foxVars[0].AppealS.facingDir = facingDir;
     fp->x2210_ThrowFlags.flags = 0;
