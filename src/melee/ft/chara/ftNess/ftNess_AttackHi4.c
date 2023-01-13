@@ -327,7 +327,7 @@ void ftNess_YoyoApplySmash(HSD_GObj* fighter_gobj)
         sp18 = AttackHi4Pos;
         sp18.x = yoyo_attr->x24_YOYO_RELEASE_VEL_X;
         posX = sp18.x;
-        sp18.x = posX * fp->x2C_facing_direction;
+        sp18.x = posX * fp->facing_dir;
         sp18.y = yoyo_attr->x30_YOYO_RELEASE_VEL_Y;
         func_802BFE5C(temp_yoyo, &sp18, posX);
     }
@@ -528,9 +528,8 @@ void ftNess_YoyoCreateItem(HSD_GObj* fighter_gobj)
 
     fp = fighter_gobj->user_data;
     func_8000B1CC(fp->x5E8_fighterBones[0x2A].x0_jobj, NULL, &sp10);
-    fp->sa.ness.x222C_yoyoGObj =
-        func_802BE9D8(fp->x2C_facing_direction, fighter_gobj, &sp10,
-                      fp->x10_action_state_index);
+    fp->sa.ness.x222C_yoyoGObj = func_802BE9D8(
+        fp->facing_dir, fighter_gobj, &sp10, fp->x10_action_state_index);
     fp->x1984_heldItemSpec = fp->sa.ness.x222C_yoyoGObj;
     if (fp->sa.ness.x222C_yoyoGObj != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {

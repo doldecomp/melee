@@ -106,7 +106,7 @@ void lbl_801383A8(HSD_GObj* gobj)
     if (phi_r0 != 0) {
         if (abs(fp->input.x620_lstick_x) > attr->x30) {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (HALF_PI * fp->x2C_facing_direction));
+            func_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
         }
     }
 }
@@ -142,7 +142,7 @@ void lbl_801384F0(HSD_GObj* gobj)
     if (phi_r0 != 0) {
         if (abs(fp->input.x620_lstick_x) > attr->x30) {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (HALF_PI * fp->x2C_facing_direction));
+            func_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
         }
     }
 }
@@ -168,7 +168,7 @@ void lbl_80138638(HSD_GObj* gobj)
             } else {
                 num = 1;
             }
-            if (fp->x2C_facing_direction != num) {
+            if (fp->facing_dir != num) {
                 fp->x80_self_vel.x *= -1.0f;
             }
             if (fp->x6A4_transNOffset.y < 0.0f) {
@@ -208,7 +208,7 @@ void lbl_8013873C(HSD_GObj* gobj)
             } else {
                 num = 1;
             }
-            if (fp->x2C_facing_direction != num) {
+            if (fp->facing_dir != num) {
                 fp->x80_self_vel.x *= -1.0f;
             }
             if (fp->x6A4_transNOffset.y < 0.0f) {

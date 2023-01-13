@@ -18,7 +18,7 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj)
     } else {
         func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
         fp->sa.gaw.x224C_greenhouseGObj =
-            func_802C61F4(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
+            func_802C61F4(fighter_gobj, &sp10, 0x20, fp->facing_dir);
         if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
             if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
                 fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;

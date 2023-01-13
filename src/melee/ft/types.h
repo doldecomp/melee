@@ -1307,7 +1307,7 @@ typedef struct _Fighter {
     /* 0x20 */ struct ActionState* x20_actionStateList;
     /* 0x24 */ struct S_TEMP4* x24;
     /* 0x28 */ u8* x28;
-    /* 0x2C */ f32 x2C_facing_direction;
+    /* 0x2C */ f32 facing_dir;
     /* 0x30 */ f32 x30_facingDirectionRepeated;
     /* 0x34 */ Vec3 x34_scale;
     /* 0x40 */ f32 x40;

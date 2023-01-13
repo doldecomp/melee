@@ -28,7 +28,7 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* fighter_gobj)
             func_8007E6DC(fighter_gobj, fp->x1974_heldItem, 1);
         }
         fp->sa.gaw.x2250_manholeGObj2 =
-            func_802C65E4(fighter_gobj, &sp10, 0x20, fp->x2C_facing_direction);
+            func_802C65E4(fighter_gobj, &sp10, 0x20, fp->facing_dir);
     }
     if (fp->sa.gaw.x2250_manholeGObj2 != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {

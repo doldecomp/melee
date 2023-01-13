@@ -162,7 +162,7 @@ void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* fighter_gobj)
     s32 facingDir;
 
     /// @todo Ternary operator should be possible here somehow.
-    if (fp->x2C_facing_direction < 0.0f)
+    if (fp->facing_dir < 0.0f)
         facingDir = -1;
     else
         facingDir = 1;
@@ -268,10 +268,10 @@ void ftFox_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
 
     if (fp->foxVars[0].SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END)
     {
-        fp->x80_self_vel.x = -((fp->x2C_facing_direction *
-                                (foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL *
+        fp->x80_self_vel.x =
+            -((fp->facing_dir * (foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL *
                                  cosf(fp->foxVars[0].SpecialHi.rotateModel))) -
-                               fp->x80_self_vel.x);
+              fp->x80_self_vel.x);
         fp->x80_self_vel.y = -((foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL *
                                 sinf(fp->foxVars[0].SpecialHi.rotateModel)) -
                                fp->x80_self_vel.y);
@@ -292,7 +292,7 @@ void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 
     if (collData->x134_envFlags & 0x18000) {
         fp->foxVars[0].SpecialHi.rotateModel =
-            atan2f(-collData->x14C_ground.normal.x * fp->x2C_facing_direction,
+            atan2f(-collData->x14C_ground.normal.x * fp->facing_dir,
                    collData->x14C_ground.normal.y);
         ftFox_SpecialHi_RotateModel(fighter_gobj);
     }
@@ -379,10 +379,9 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
             else
                 facingDir = -1.0f;
 
-            fp->x2C_facing_direction = facingDir;
+            fp->facing_dir = facingDir;
             fp->foxVars[0].SpecialHi.rotateModel =
-                atan2f(fp->x80_self_vel.y,
-                       fp->x80_self_vel.x * fp->x2C_facing_direction);
+                atan2f(fp->x80_self_vel.y, fp->x80_self_vel.x * fp->facing_dir);
             ftFox_SpecialHi_RotateModel(fighter_gobj);
         }
     }
@@ -457,11 +456,11 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
             fp->foxVars[0].SpecialHi.unk2 = 0.0f;
 
             fp->xEC_ground_vel =
-                foxAttrs->x74_FOX_FIREFOX_SPEED * fp->x2C_facing_direction;
+                foxAttrs->x74_FOX_FIREFOX_SPEED * fp->facing_dir;
 
-            fp->foxVars[0].SpecialHi.rotateModel = atan2f(
-                -collData->x14C_ground.normal.x * fp->x2C_facing_direction,
-                collData->x14C_ground.normal.y);
+            fp->foxVars[0].SpecialHi.rotateModel =
+                atan2f(-collData->x14C_ground.normal.x * fp->facing_dir,
+                       collData->x14C_ground.normal.y);
 
             ftFox_SpecialHi_RotateModel(fighter_gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateLaunchGFX;
@@ -505,9 +504,8 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
         if (temp_stick > foxAttrs->x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN) {
             func_8007D9FC(fp);
         }
-        fp->foxVars[0].SpecialHi.rotateModel =
-            atan2f(fp->input.x624_lstick_y,
-                   fp->input.x620_lstick_x * fp->x2C_facing_direction);
+        fp->foxVars[0].SpecialHi.rotateModel = atan2f(
+            fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->facing_dir);
     } else {
         fp->foxVars[0].SpecialHi.rotateModel = HALF_PI32;
     }
@@ -524,8 +522,8 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
     fp->foxVars[0].SpecialHi.unk2 = 0;
 
     fp->x80_self_vel.x =
-        fp->x2C_facing_direction * (foxAttrs->x74_FOX_FIREFOX_SPEED *
-                                    cosf(fp->foxVars[0].SpecialHi.rotateModel));
+        fp->facing_dir * (foxAttrs->x74_FOX_FIREFOX_SPEED *
+                          cosf(fp->foxVars[0].SpecialHi.rotateModel));
     fp->x80_self_vel.y = foxAttrs->x74_FOX_FIREFOX_SPEED *
                          sinf(fp->foxVars[0].SpecialHi.rotateModel);
     ftFox_SpecialHi_RotateModel(fighter_gobj);
@@ -729,7 +727,7 @@ void ftFox_SpecialHiBound_Coll(HSD_GObj* fighter_gobj)
     s32 cliffCatchDir;
 
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
-        if (fp->x2C_facing_direction < 0.0f) {
+        if (fp->facing_dir < 0.0f) {
             cliffCatchDir = -1;
         } else {
             cliffCatchDir = 1;

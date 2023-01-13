@@ -103,7 +103,7 @@ void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj)
         for (i = 0; i < 4; i++) {
             f32 temp_f5 = (donkey_attr->SpecialLw.x68 * i) -
                           (donkey_attr->SpecialLw.x68 * 1.5f);
-            f32 temp_f3 = donkey_attr->SpecialLw.x6C * fp->x2C_facing_direction;
+            f32 temp_f3 = donkey_attr->SpecialLw.x6C * fp->facing_dir;
             f32 temp_f6 = temp_f5 + temp_f3;
 
             if (!func_80056C54(colldata->x14C_ground.index, &fp->xB0_pos, 0,

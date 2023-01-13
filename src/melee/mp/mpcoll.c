@@ -785,7 +785,7 @@ void func_80043680(CollData* arg0, Vec3* arg1)
 }
 
 // 800436D8
-void func_800436D8(CollData* arg0, s32 arg1)
+void func_800436D8(CollData* arg0, int arg1)
 {
     arg0->x36 = arg1;
 }

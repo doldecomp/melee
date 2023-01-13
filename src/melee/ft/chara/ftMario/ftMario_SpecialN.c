@@ -109,14 +109,14 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x17)].x0_jobj,
                       NULL, &coords);
         if (fp->x4_fighterKind == FTKIND_MARIO) {
-            func_8029B6F8(fp->x2C_facing_direction, gobj, &coords, 0x30);
+            func_8029B6F8(fp->facing_dir, gobj, &coords, 0x30);
             ef_Spawn(0x47a, gobj,
                      fp->x5E8_fighterBones[func_8007500C(fp, 0x17)].x0_jobj,
-                     &fp->x2C_facing_direction);
+                     &fp->facing_dir);
         } else {
             rand_val_800E0D1C = ftMario_SpecialN_VitaminRandom(gobj);
             func_802C0510(gobj, &coords, rand_val_800E0D1C, 0x31,
-                          fp->x2C_facing_direction);
+                          fp->facing_dir);
         }
     }
 }

@@ -105,13 +105,13 @@ void ftSamus_8012A96C(HSD_GObj* fighter_gobj)
             mag = lstick_x;
         }
         if (mag > samus_attr->x4C) {
-            if (((fp->x2C_facing_direction == 1.0f) && (lstick_x < 0.0f)) ||
-                ((fp->x2C_facing_direction == -1.0f) && (lstick_x > 0.0f)))
+            if (((fp->facing_dir == 1.0f) && (lstick_x < 0.0f)) ||
+                ((fp->facing_dir == -1.0f) && (lstick_x > 0.0f)))
             {
                 fp->x2204_ftcmd_var1 = 1;
                 fp->x2340_stateVar1 = 1;
                 func_8007D9FC(fp);
-                func_80075AF0(fp, 0, M_PI_2 * fp->x2C_facing_direction);
+                func_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }
         }
     }
@@ -130,13 +130,13 @@ void ftSamus_8012AA3C(HSD_GObj* fighter_gobj)
             mag = lstick_x;
         }
         if (mag > samus_attr->x4C) {
-            if (((fp->x2C_facing_direction == 1.0f) && (lstick_x < 0.0f)) ||
-                ((fp->x2C_facing_direction == -1.0f) && (lstick_x > 0.0f)))
+            if (((fp->facing_dir == 1.0f) && (lstick_x < 0.0f)) ||
+                ((fp->facing_dir == -1.0f) && (lstick_x > 0.0f)))
             {
                 fp->x2204_ftcmd_var1 = 1;
                 fp->x2340_stateVar1 = 1;
                 func_8007D9FC(fp);
-                func_80075AF0(fp, 0, M_PI_2 * fp->x2C_facing_direction);
+                func_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }
         }
     }
@@ -150,7 +150,7 @@ void ftSamus_8012AB0C(HSD_GObj* fighter_gobj)
     if (fp->x2200_ftcmd_var0) {
         func_8007D60C(fp);
         fp->x2200_ftcmd_var0 = 0;
-        fp->x80_self_vel.x = samus_attr->x38 * fp->x2C_facing_direction;
+        fp->x80_self_vel.x = samus_attr->x38 * fp->facing_dir;
     }
     if (fp->xE0_ground_or_air == 1) {
         func_800851C0(fighter_gobj);
@@ -181,7 +181,7 @@ void ftSamus_8012AC00(HSD_GObj* fighter_gobj)
             func_80081D0C(fighter_gobj);
             return;
         }
-        if (fp->x2C_facing_direction == 1.0f) {
+        if (fp->facing_dir == 1.0f) {
             direction = 1;
         } else {
             direction = -1;
@@ -212,7 +212,7 @@ void ftSamus_8012ACF8(HSD_GObj* fighter_gobj)
             func_80081D0C(fighter_gobj);
             return;
         }
-        if (fp->x2C_facing_direction == 1.0f) {
+        if (fp->facing_dir == 1.0f) {
             direction = 1;
         } else {
             direction = -1;

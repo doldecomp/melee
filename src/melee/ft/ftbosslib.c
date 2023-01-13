@@ -151,8 +151,8 @@ void func_8015C09C(HSD_GObj* arg0, f32 arg1)
     Quaternion quat = { 0 };
     s32 unused[2];
 
-    fp->x2C_facing_direction = arg1;
-    quat.y = M_PI / 2 * fp->x2C_facing_direction;
+    fp->facing_dir = arg1;
+    quat.y = M_PI / 2 * fp->facing_dir;
     HSD_JObjSetRotation(jobj, &quat);
 }
 

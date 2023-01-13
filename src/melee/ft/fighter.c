@@ -3,6 +3,7 @@
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
 #include <melee/cm/camera.h>
+#include <melee/db/db_unknown_001.h>
 #include <melee/ef/efasync.h>
 #include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 #include <melee/ft/chara/ftKirby/ftkirby.h>
@@ -70,8 +71,6 @@ extern s8 lbl_803C26FC[FTKIND_MAX];
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
 extern StageInfo stage_info; // from asm/melee/text_2.s
-
-extern s32 g_debugLevel; // asm/melee/db/db_unknown_001.s
 
 extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 
@@ -225,10 +224,9 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x8_spawnNum = Fighter_NewSpawn_80068E40();
     Player_LoadPlayerCoords(fp->xC_playerID, &player_coords);
-    fp->x2C_facing_direction = Player_GetFacingDirection(fp->xC_playerID);
+    fp->facing_dir = Player_GetFacingDirection(fp->xC_playerID);
 
-    player_coords.x =
-        fp->x2C_facing_direction * func_800804EC(fp) + player_coords.x;
+    player_coords.x = fp->facing_dir * func_800804EC(fp) + player_coords.x;
     x = player_coords.x;
     fp->xB0_pos.x = x;
     fp->xBC_prevPos.x = x;
@@ -241,7 +239,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->xB0_pos.z = z;
     fp->xBC_prevPos.z = z;
 
-    fp->x30_facingDirectionRepeated = fp->x2C_facing_direction;
+    fp->x30_facingDirectionRepeated = fp->facing_dir;
     fp->x34_scale.y = fp->x34_scale.x;
 
     fp->x2220_flag.bits.b5 = 0;
@@ -952,7 +950,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
     BOOL animflags_bool;
 
     fp->x10_action_state_index = new_action_state_index;
-    fp->x30_facingDirectionRepeated = fp->x2C_facing_direction;
+    fp->x30_facingDirectionRepeated = fp->facing_dir;
 
     HSD_JObjSetTranslate(jobj, &fp->xB0_pos);
     func_80067624(fighter_gobj, &fp->x60C);
@@ -1187,7 +1185,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
     fp->x6BC_inputStickangle = 0.0f;
 
     func_8007592C(fp, 0, 0.0f);
-    func_80075AF0(fp, 0, (HALF_PI * fp->x2C_facing_direction));
+    func_80075AF0(fp, 0, (HALF_PI * fp->facing_dir));
     func_80075CB4(fp, 0, 0.0f);
 
     if (new_action_state_index >= fp->x18) {
@@ -1340,8 +1338,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
                     } else if (((arg2 & FIGHTER_ANIMVEL_NOUPDATE) == 0) &&
                                (fp->xE0_ground_or_air == GA_Ground))
                     {
-                        f32 temp_vel =
-                            fp->x6A4_transNOffset.z * fp->x2C_facing_direction;
+                        f32 temp_vel = fp->x6A4_transNOffset.z * fp->facing_dir;
                         fp->x80_self_vel.x = temp_vel;
                         fp->xEC_ground_vel = temp_vel;
                     }
@@ -1356,7 +1353,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
                     } else if (((arg2 & FIGHTER_ANIMVEL_NOUPDATE) == 0) &&
                                (fp->xE0_ground_or_air == GA_Ground))
                     {
-                        f32 temp_vel = fp->x6D8.z * fp->x2C_facing_direction;
+                        f32 temp_vel = fp->x6D8.z * fp->facing_dir;
                         fp->x80_self_vel.x = temp_vel;
                         fp->xEC_ground_vel = temp_vel;
                     }
@@ -3099,7 +3096,7 @@ void Fighter_8006DA4C(HSD_GObj* fighter_gobj)
     if (!fp->x221F_flag.bits.b3) {
         Player_80032828(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->xB0_pos);
         Player_SetFacingDirectionConditional(
-            fp->xC_playerID, fp->x221F_flag.bits.b4, fp->x2C_facing_direction);
+            fp->xC_playerID, fp->x221F_flag.bits.b4, fp->facing_dir);
         func_8003FAA8(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->xB0_pos,
                       &fp->xBC_prevPos);
     }

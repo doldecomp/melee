@@ -194,7 +194,7 @@ void ftNess_SpecialNStart_Anim(
             sp28.y += 3.0f * fighter_data2->x34_scale.y;
             flash_GObj =
                 func_802AA8C0(fighter_gobj, &sp28, It_Kind_Ness_PKFlush,
-                              fighter_data2->x2C_facing_direction);
+                              fighter_data2->facing_dir);
             fighter_data2->sa.ness.x2240_flashGObj = flash_GObj;
             if (flash_GObj != NULL) {
                 fighter_data2->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;
@@ -311,7 +311,7 @@ void ftNess_SpecialAirNStart_Anim(
             sp28.y += 3.0f * fighter_data2->x34_scale.y;
             flash_GObj =
                 func_802AA8C0(fighter_gobj, &sp28, It_Kind_Ness_PKFlush,
-                              fighter_data2->x2C_facing_direction);
+                              fighter_data2->facing_dir);
             fighter_data2->sa.ness.x2240_flashGObj = flash_GObj;
             if (flash_GObj != NULL) {
                 fighter_data2->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;
