@@ -23,7 +23,7 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj)
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj,
                       NULL, &sp20);
         fp->sa.gaw.x2264_judgementGObj =
-            func_802C7774(fp->x2C_facing_direction, fighter_gobj, &sp20,
+            func_802C7774(fp->facing_dir, fighter_gobj, &sp20,
                           func_8007500C(fp, 0x31), fp->sa.gaw.x222C_judgeVar1);
         if ((s32) fp->sa.gaw.x222C_judgeVar1 == 6) {
             sp14.z = 0.0f;

@@ -248,7 +248,7 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
 f32 func_800865C0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x2C_facing_direction;
+    return fp->facing_dir;
 }
 
 s32 func_800865CC(HSD_GObj* gobj)

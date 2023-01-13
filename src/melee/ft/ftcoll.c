@@ -105,7 +105,7 @@ inline void comboCount_Push(Fighter* fp)
     } else {
         var_f2 = p_ftCommonData->x4D4;
     }
-    temp_f2 = fp->x2C_facing_direction * var_f2;
+    temp_f2 = fp->facing_dir * var_f2;
     fp->xB0_pos.x = -((pos->y * temp_f2) - fp->xB0_pos.x);
     fp->xB0_pos.y = -((-pos->x * temp_f2) - fp->xB0_pos.y);
 }

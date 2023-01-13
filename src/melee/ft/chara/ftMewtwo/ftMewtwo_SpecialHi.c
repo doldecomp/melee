@@ -449,12 +449,12 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* fighter_gobj)
             func_8007D9FC(fp);
 
             vel = atan2f(fp->input.x624_lstick_y,
-                         fp->input.x620_lstick_x * fp->x2C_facing_direction);
+                         fp->input.x620_lstick_x * fp->facing_dir);
 
             fp->mewtwoVars[0].SpecialHi.stickX = stickVec.x;
             fp->mewtwoVars[0].SpecialHi.stickY = stickVec.y;
             fp->xEC_ground_vel =
-                fp->x2C_facing_direction *
+                fp->facing_dir *
                 (((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick) +
                   mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
                  cosf(vel));
@@ -512,7 +512,7 @@ void ftMewtwo_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
             func_8007D9FC(fp);
 
         floatVar = atan2f(fp->input.x624_lstick_y,
-                          fp->input.x620_lstick_x * fp->x2C_facing_direction);
+                          fp->input.x620_lstick_x * fp->facing_dir);
         fp->mewtwoVars[0].SpecialHi.stickX = fp->input.x620_lstick_x;
         fp->mewtwoVars[0].SpecialHi.stickY = fp->input.x624_lstick_y;
     } else {
@@ -523,7 +523,7 @@ void ftMewtwo_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
     }
 
     fp->x80_self_vel.x =
-        fp->x2C_facing_direction *
+        fp->facing_dir *
         (((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick) +
           mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
          cosf(floatVar));

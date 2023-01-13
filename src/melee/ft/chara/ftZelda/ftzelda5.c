@@ -90,11 +90,10 @@ void ftZelda_8013B780(HSD_GObj* fighter_gobj)
 
         sp24.z = 0;
         temp_f2 = attributes->x20;
-        sp24.x = (temp_f2 * fp->x2C_facing_direction) + sp24.x;
+        sp24.x = (temp_f2 * fp->facing_dir) + sp24.x;
         sp24.y += attributes->x24;
 
-        temp_r3 = func_802C3BAC(fighter_gobj, &sp24, fp->x2C_facing_direction,
-                                temp_f2);
+        temp_r3 = func_802C3BAC(fighter_gobj, &sp24, fp->facing_dir, temp_f2);
         fp->sa.zelda.x222C = temp_r3;
 
         if (temp_r3 != 0) {
@@ -134,11 +133,11 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
 
         sp20.z = 0;
         temp_f2 = attributes->x20;
-        sp20.x = (temp_f2 * fp->x2C_facing_direction) + sp20.x;
+        sp20.x = (temp_f2 * fp->facing_dir) + sp20.x;
         sp20.y += attributes->x24;
 
-        temp_r3_u32 = func_802C3BAC(fighter_gobj, &sp20,
-                                    fp->x2C_facing_direction, temp_f2);
+        temp_r3_u32 =
+            func_802C3BAC(fighter_gobj, &sp20, fp->facing_dir, temp_f2);
         fp->sa.zelda.x222C = temp_r3_u32;
 
         if (temp_r3_u32 != 0) {
@@ -219,11 +218,10 @@ void ftZelda_8013BA8C(HSD_GObj* fighter_gobj)
 
         sp24.z = 0;
         temp_f2 = attributes->x20;
-        sp24.x = (temp_f2 * fp->x2C_facing_direction) + sp24.x;
+        sp24.x = (temp_f2 * fp->facing_dir) + sp24.x;
         sp24.y += attributes->x24;
 
-        temp_r3 = func_802C3BAC(fighter_gobj, &sp24, fp->x2C_facing_direction,
-                                temp_f2);
+        temp_r3 = func_802C3BAC(fighter_gobj, &sp24, fp->facing_dir, temp_f2);
         fp->sa.zelda.x222C = temp_r3;
 
         if (temp_r3 != 0) {
@@ -262,11 +260,10 @@ void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
 
         sp20.z = 0;
         temp_f2 = attributes->x20;
-        sp20.x = temp_f2 * fp->x2C_facing_direction + sp20.x;
+        sp20.x = temp_f2 * fp->facing_dir + sp20.x;
         sp20.y += attributes->x24;
 
-        temp_r3 = func_802C3BAC(fighter_gobj, &sp20, fp->x2C_facing_direction,
-                                temp_f2);
+        temp_r3 = func_802C3BAC(fighter_gobj, &sp20, fp->facing_dir, temp_f2);
         fp->sa.zelda.x222C = temp_r3;
 
         if (temp_r3 != 0) {

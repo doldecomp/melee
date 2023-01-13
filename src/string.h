@@ -1,8 +1,8 @@
 #ifndef __STRING_H__
 #define __STRING_H__
 
-#include <stddef.h>
 #include <Runtime/__mem.h>
+#include <stddef.h>
 
 void* memset(void* ptr, int value, size_t num);
 int __StringRead(void*, int, int);

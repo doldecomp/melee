@@ -17,7 +17,7 @@ void func_80149954(HSD_GObj* gobj)
     if (fp->x2200_ftcmd_var0 == 1 && fp->sa.mario.x2240 == 0U) {
         func_8000B1CC(fp->x5E8_fighterBones->x0_jobj, 0, &sp18);
         tmp = ftMario_SpecialN_VitaminRandom(gobj);
-        tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->x2C_facing_direction);
+        tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
         fp->sa.mario.x2240 = tmp;
         if (tmp != 0) {
             fp->cb.x21E4_callback_OnDeath2 = func_80149540;

@@ -32,9 +32,8 @@ void ftNess_AttackS4_Action(
 
     func_8006EBA4(fighter_gobj);
 
-    baseballBatGObj =
-        func_802AD478(fighter_gobj, &fp->xB0_pos, 0x2A /* Item Hold Bone */,
-                      fp->x2C_facing_direction);
+    baseballBatGObj = func_802AD478(fighter_gobj, &fp->xB0_pos,
+                                    0x2A /* Item Hold Bone */, fp->facing_dir);
 
     fp->sa.ness.x2248_baseballBatGObj = baseballBatGObj;
 

@@ -23,11 +23,9 @@
 void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    fp->xEC_ground_vel =
-        fp->x2C_facing_direction * fabs_inline(fp->xEC_ground_vel);
-    fp->x80_self_vel.x =
-        fp->x2C_facing_direction * fabs_inline(fp->x80_self_vel.x);
-    fp->x234C_pos.y = fp->x2C_facing_direction * fabs_inline(fp->x234C_pos.y);
+    fp->xEC_ground_vel = fp->facing_dir * fabs_inline(fp->xEC_ground_vel);
+    fp->x80_self_vel.x = fp->facing_dir * fabs_inline(fp->x80_self_vel.x);
+    fp->x234C_pos.y = fp->facing_dir * fabs_inline(fp->x234C_pos.y);
 }
 
 void ftPikachu_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
@@ -122,7 +120,7 @@ void ftPikachu_80126014(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     if (EnvColl_CheckGroundAndLedge(fighter_gobj,
-                                    fp->x2C_facing_direction < 0.0f ? -1 : 1))
+                                    fp->facing_dir < 0.0f ? -1 : 1))
     {
         ftPikachu_ActionChange_801260E4(fighter_gobj);
     } else {
@@ -245,9 +243,9 @@ void ftPikachu_8012642C(HSD_GObj* fighter_gobj)
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
 
     f32 half_pi = HALF_PI;
-    f32 tempf = (fp->x2C_facing_direction *
-                 atan2f(fp->x80_self_vel.x, fp->x80_self_vel.y)) +
-                (pika_attr->x78 - half_pi);
+    f32 tempf =
+        (fp->facing_dir * atan2f(fp->x80_self_vel.x, fp->x80_self_vel.y)) +
+        (pika_attr->x78 - half_pi);
 
     func_8007592C(fp, func_8007500C(fp, 2), tempf);
     scale.x = pika_attr->x7C_scale.x;
@@ -323,8 +321,7 @@ void ftPikachu_80126614(HSD_GObj* fighter_gobj)
         if (collData->x134_envFlags & 0x18000) {
             f32 angle = atan2f(collData->x14C_ground.normal.x,
                                collData->x14C_ground.normal.y);
-            f32 angle2 =
-                (fighter2->x2C_facing_direction * angle) + pika_attr->x68;
+            f32 angle2 = (fighter2->facing_dir * angle) + pika_attr->x68;
             func_8007592C(fighter2, func_8007500C(fighter2, 2), angle2);
         }
         scale.x = pika_attr->x6C_scale.x;
@@ -362,7 +359,7 @@ void ftPikachu_801267C8(HSD_GObj* fighter_gobj)
 
     fp->x2358_stateVar7_s32++;
     if (EnvColl_CheckGroundAndLedge(fighter_gobj,
-                                    fp->x2C_facing_direction < 0.0f ? -1 : 1))
+                                    fp->facing_dir < 0.0f ? -1 : 1))
     {
         bool0 = ftPikachu_GetBool(fighter_gobj);
 
@@ -449,9 +446,8 @@ void ftPikachu_ActionChange_80126AA4(HSD_GObj* fighter_gobj)
     collData = &fp->x6F0_collData;
     pika_attr = fp->x2D4_specialAttributes;
     if (fp->x6F0_collData.x134_envFlags & 0x18000) {
-        f32 angle = (fp->x2C_facing_direction *
-                     atan2f(collData->x14C_ground.normal.x,
-                            collData->x14C_ground.normal.y)) +
+        f32 angle = (fp->facing_dir * atan2f(collData->x14C_ground.normal.x,
+                                             collData->x14C_ground.normal.y)) +
                     pika_attr->x68;
         func_8007592C(fp, func_8007500C(fp, 2), angle);
     }
@@ -518,7 +514,7 @@ void ftPikachu_80126C0C(HSD_GObj* fighter_gobj)
             // set ground velocity to (zip_slope * stick_mag) + zip_intercept
             // and then flip based on facing direction
             fp->xEC_ground_vel = (pika_attr->x90 * stick_mag) + pika_attr->x94;
-            fp->xEC_ground_vel *= fp->x2C_facing_direction;
+            fp->xEC_ground_vel *= fp->facing_dir;
 
             // if second zip
             if (fp->x2348_stateVar3_s32) {
@@ -573,7 +569,7 @@ void ftPikachu_80126E1C(HSD_GObj* fighter_gobj)
 
         // zip angle = atan2(stick_y, stick_x * facing_direction)
         some_angle = atan2f(fp->input.x624_lstick_y,
-                            fp->input.x620_lstick_x * fp->x2C_facing_direction);
+                            fp->input.x620_lstick_x * fp->facing_dir);
 
         // store stick angle to compare during zip2 check
         fp->x234C_pos.y = fp->input.x620_lstick_x;
@@ -604,7 +600,7 @@ void ftPikachu_80126E1C(HSD_GObj* fighter_gobj)
     // x velocity is the same but flips based on facing direction
     temp_f2_2 = ((pika_attr->x90 * final_stick_mag) + pika_attr->x94) *
                 cosf(some_angle);
-    fp->x80_self_vel.x = fp->x2C_facing_direction * temp_f2_2;
+    fp->x80_self_vel.x = fp->facing_dir * temp_f2_2;
     fp->x80_self_vel.y = ((pika_attr->x90 * final_stick_mag) + pika_attr->x94) *
                          sinf(some_angle);
 
@@ -769,7 +765,7 @@ void ftPikachu_801273D4(HSD_GObj* fighter_gobj)
     s32 unused[2];
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
-    if (func_8008239C(fighter_gobj, fp->x2C_facing_direction,
+    if (func_8008239C(fighter_gobj, fp->facing_dir,
                       pika_attr->height_attributes))
     {
         func_800D5CB0(fighter_gobj, 0, pika_attr->xB0);

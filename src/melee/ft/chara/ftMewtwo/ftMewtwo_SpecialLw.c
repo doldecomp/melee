@@ -198,12 +198,11 @@ void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* fighter_gobj)
 
         func_8000B1CC(fp->x5E8_fighterBones[0x1B].x0_jobj, NULL, &sp18);
 
-        sp18.x += (mewtwoAttrs->x80_MEWTWO_DISABLE_OFFSET_X *
-                   fp->x2C_facing_direction);
+        sp18.x += (mewtwoAttrs->x80_MEWTWO_DISABLE_OFFSET_X * fp->facing_dir);
         sp18.y += mewtwoAttrs->x84_MEWTWO_DISABLE_OFFSET_Y;
 
         fp->sa.mewtwo.x222C_disableGObj =
-            func_802C4A40(fighter_gobj, &sp18, fp->x2C_facing_direction);
+            func_802C4A40(fighter_gobj, &sp18, fp->facing_dir);
 
         ftMewtwo_SpecialLw_SetCall(fighter_gobj);
 

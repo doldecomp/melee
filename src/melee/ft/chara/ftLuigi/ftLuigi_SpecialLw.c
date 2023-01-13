@@ -252,7 +252,7 @@ static inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* fighter_gobj)
         ((s32) fp->luigiVars[0].SpecialLw.isUnkColl != FALSE))
     {
         func_8007592C(fp, 0,
-                      fp->x2C_facing_direction *
+                      fp->facing_dir *
                           atan2f(fp->x6F0_collData.x14C_ground.normal.x,
                                  fp->x6F0_collData.x14C_ground.normal.y));
         return;

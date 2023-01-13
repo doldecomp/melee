@@ -24,7 +24,7 @@ void ftGameWatch_ItemPanicSetup(HSD_GObj* fighter_gobj)
         func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp1C);
 
         fp->sa.gaw.x2268_panicGObj =
-            func_802C7D60(fighter_gobj, &sp1C, 0, fp->x2C_facing_direction);
+            func_802C7D60(fighter_gobj, &sp1C, 0, fp->facing_dir);
     }
     if (fp->sa.gaw.x2268_panicGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -256,9 +256,9 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* fighter_gobj)
             stick_range = -stick_range;
         }
         if (stick_range > p_ftCommonData->x0) {
-            facingDir = fp->x2C_facing_direction;
+            facingDir = fp->facing_dir;
             func_8007D9FC(fp);
-            if (facingDir != fp->x2C_facing_direction) {
+            if (facingDir != fp->facing_dir) {
                 fp->gameWatchVars[0].SpecialLw.turnFrames =
                     (s32) gawAttrs->x7C_GAMEWATCH_PANIC_TURN_FRAMES;
             }
@@ -291,9 +291,9 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* fighter_gobj)
             stick_range = -stick_range;
         }
         if (stick_range > p_ftCommonData->x0) {
-            facingDir = fp->x2C_facing_direction;
+            facingDir = fp->facing_dir;
             func_8007D9FC(fp);
-            if (facingDir != fp->x2C_facing_direction) {
+            if (facingDir != fp->facing_dir) {
                 fp->gameWatchVars[0].SpecialLw.turnFrames =
                     (s32) gawAttrs->x7C_GAMEWATCH_PANIC_TURN_FRAMES;
             }

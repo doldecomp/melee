@@ -148,7 +148,7 @@ void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
             (f32) (captainAttrs->xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X * sinf(vel));
         fp->x80_self_vel.x =
             (f32) (captainAttrs->xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X *
-                   (fp->x2C_facing_direction * cosf(vel)));
+                   (fp->facing_dir * cosf(vel)));
     }
 }
 

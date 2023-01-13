@@ -48,12 +48,12 @@ extern void* lbl_804D6550;
 // Ternary macro for fcmpo-based facing direction check
 
 #define CLIFFCATCH_O(fp)                                                       \
-    ((fp)->x2C_facing_direction < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
+    ((fp)->facing_dir < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
 // Ternary macro for fcmpu-based facing direction check
 
 #define CLIFFCATCH_U(fp)                                                       \
-    ((fp)->x2C_facing_direction != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
+    ((fp)->facing_dir != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
 static inline Fighter* getFighter(HSD_GObj* fighter_gobj)
 {

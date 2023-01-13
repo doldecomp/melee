@@ -48,9 +48,7 @@ BOOL ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if ((fp->input.x620_lstick_x * fp->x2C_facing_direction) >=
-        p_ftCommonData->x24)
-    {
+    if ((fp->input.x620_lstick_x * fp->facing_dir) >= p_ftCommonData->x24) {
         return TRUE;
     }
 
@@ -94,7 +92,7 @@ void ftWalkCommon_800DFDDC(HSD_GObj* fighter_gobj)
     } else {
         velocity_f2 = fp->xEC_ground_vel;
     }
-    if ((velocity_f2 * fp->x2C_facing_direction) <= 0.0f) {
+    if ((velocity_f2 * fp->facing_dir) <= 0.0f) {
         anim_rate = 0.0f;
     } else {
         velocity_f2 = fabs_inline(velocity_f2);

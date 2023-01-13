@@ -37,7 +37,7 @@ void ftMario_SpecialS_CreateCape(HSD_GObj* gobj)
                       NULL, &coords);
 
         gobj2 =
-            func_802B2560(gobj, fp->x2C_facing_direction, &coords,
+            func_802B2560(gobj, fp->facing_dir, &coords,
                           func_8007500C(fp, 0x31), sa->x14_MARIO_CAPE_IT_KIND);
 
         fp->sa.mario.x223C_capeGObj = gobj2;
@@ -196,7 +196,7 @@ void ftMario_SpecialS_Phys(HSD_GObj* gobj)
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x4)].x0_jobj,
                       NULL, &coords);
 
-        coords.x += 3.0f * fp->x2C_facing_direction;
+        coords.x += 3.0f * fp->facing_dir;
         func_800119DC(&coords, 0x78, 0.9f, 0.02f, PI_3);
     }
 
@@ -232,7 +232,7 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
             }
             func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x4)].x0_jobj,
                           NULL, &coords);
-            coords.x += 3.0f * fp->x2C_facing_direction;
+            coords.x += 3.0f * fp->facing_dir;
             func_800119DC(&coords, 0x78, 3.0f, 0.1f, PI_3);
         }
         func_8007D494(fp, sa->xC_MARIO_CAPE_GRAVITY,
