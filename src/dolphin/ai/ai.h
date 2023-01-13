@@ -6,7 +6,7 @@
 typedef void (*AISCallback)(u32 count);
 typedef void (*AIDCallback)(void);
 
-extern vu32 __AIRegs[8] : 0xCC006C00;
+extern vu32 __AIRegs[8] AT_ADDRESS(0xCC006C00);
 
 AIDCallback AIRegisterDMACallback(AIDCallback);
 void AIInitDMA(u32 addr, u32 length);

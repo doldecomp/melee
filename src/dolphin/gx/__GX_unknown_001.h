@@ -9,7 +9,6 @@
 /* 0033E4DC */ extern void GXSetGPMetric(u32, u32);
 /* 0033E458 */ extern void __GXSetMatrixIndex(s32);
 /* 0033E430 */ extern void GXSetClipMode(s32);
-/* 0033E3EC */ extern void GXSetScissorBoxOffset(u32 x_off, u32 y_off);
 /* 0033DBFC */ extern void GXSetFieldMask(s32, s8);
 /* 0033C0F8 */ extern void __GXSetTmemConfig(s32);
 /* 0033BE50 */ extern void GXInvalidateTexAll(GXContext*, s32, u8*);

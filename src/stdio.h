@@ -1,28 +1,44 @@
 #ifndef _STDIO_H_
 #define _STDIO_H_
 
+#include <Runtime/platform.h>
 #include <stdarg.h>
 
 typedef struct {
-    int unk0;
-    unsigned short unk4b0 : 7;
-    unsigned short unk4b7 : 3;
-    unsigned short unk4b10 : 2;
-    unsigned short unk4b12 : 1;
-    unsigned char filler6[0x14 - 0x6];
-    int unk14;
-    int unk18;
-    int unk1C;
-    int unk20;
-    int unk24;
-    int unk28;
-    unsigned char filler2C[0x30 - 0x2C];
-    int unk30;
-    unsigned char filler34[0x3C - 0x34];
-    int (*unk3C)(void);
-    unsigned char filler40[4];
-    int unk44;
-} FILE;
+    uint open_mode : 2;
+    uint io_mode : 3;
+    uint buffer_mode : 2;
+    uint file_kind : 3;
+    uint file_orientation : 2;
+    uint binary_io : 1;
+} __file_modes;
+
+typedef struct FILE FILE;
+
+struct FILE {
+    int handle;
+    __file_modes mode;
+    int state;
+    unsigned char is_dynamically_allocated;
+    unsigned char char_buffer;
+    unsigned char char_buffer_overflow;
+    unsigned char ungetc_buffer[2];
+    wchar_t ungetwc_buffer[2];
+    unsigned long position;
+    unsigned char* buffer;
+    unsigned long buffer_size;
+    unsigned char* buffer_ptr;
+    unsigned long buffer_len;
+    unsigned long buffer_alignment;
+    unsigned long saved_buffer_len;
+    unsigned long buffer_pos;
+    int position_proc;
+    int read_proc;
+    int write_proc;
+    int close_proc;
+    int idle_proc;
+    FILE* next_file_struct;
+};
 
 int puts(const char* s);
 int printf(const char*, ...);

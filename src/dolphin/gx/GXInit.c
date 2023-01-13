@@ -1,3 +1,5 @@
+#include <dolphin/gx/GXInit.h>
+
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXBump.h>
@@ -10,6 +12,8 @@
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXLight.h>
+#include <dolphin/gx/GXPixel.h>
+#include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/vi/vi.h>
 
@@ -82,11 +86,11 @@ void* __GXDefaultTlutRegionCallback(u32 arg0)
     }
 }
 
-unk_t __GXInitGX();
+static void __GXInitGX(void);
 
 // https://decomp.me/scratch/gAywS // 49600 (0%)
 #pragma push
-asm unk_t GXInit()
+asm GXFifoObj* GXInit(GXFifoObj* fifo, u32 size)
 { // clang-format off
     nofralloc
 /* 8033A780 00337360  7C 08 02 A6 */	mflr r0
@@ -611,7 +615,7 @@ lbl_8033AE6C:
 
 // https://decomp.me/scratch/zVpOX // 7812 (85.26%)
 #pragma push
-asm unk_t __GXInitGX()
+asm void __GXInitGX(void)
 { // clang-format off
     nofralloc
 /* 8033AF40 00337B20  7C 08 02 A6 */	mflr r0

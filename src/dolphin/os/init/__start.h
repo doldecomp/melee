@@ -17,11 +17,7 @@
 
 extern void InitMetroTRK(void);
 
-u16 Pad3Button
-#ifndef M2CTX
-    : PAD3_BUTTON_ADDR
-#endif
-      ;
+u16 Pad3Button AT_ADDRESS(PAD3_BUTTON_ADDR);
 
 static u8 Debug_BBA = 0;
 
@@ -33,50 +29,16 @@ extern void DBInit(void);
 extern void __OSCacheInit(void);
 extern void __OSPSInit(void);
 
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    void __check_pad3(void);
+SECTION_INIT void __check_pad3(void);
+SECTION_INIT void __start(void);
+SECTION_INIT void __init_registers(void);
+SECTION_INIT void __init_data(void);
+SECTION_INIT void __init_hardware(void);
+SECTION_INIT void __flush_cache(void* address, size_t size);
 
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    void __start(void);
-
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    void __init_registers(void);
-
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    void __init_data(void);
-
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    void __init_hardware(void);
-
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    void __flush_cache(void* address, size_t size);
-
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    extern u8 _stack_addr[];
-
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    extern u8 _SDA_BASE_[];
-
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    extern u8 _SDA2_BASE_[];
+SECTION_INIT extern u8 _stack_addr[];
+SECTION_INIT extern u8 _SDA_BASE_[];
+SECTION_INIT extern u8 _SDA2_BASE_[];
 
 typedef struct __rom_copy_info {
     u8* rom;
@@ -84,19 +46,13 @@ typedef struct __rom_copy_info {
     size_t size;
 } __rom_copy_info;
 
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    extern __rom_copy_info _rom_copy_info[];
+SECTION_INIT extern __rom_copy_info _rom_copy_info[];
 
 typedef struct __bss_init_info {
     void* addr;
     size_t size;
 } __bss_init_info;
 
-#ifndef M2CTX
-__declspec(section ".init")
-#endif
-    extern __bss_init_info _bss_init_info[];
+SECTION_INIT extern __bss_init_info _bss_init_info[];
 
 #endif

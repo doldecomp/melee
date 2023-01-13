@@ -3,6 +3,6 @@
 
 #include <dolphin/gx/types.h>
 
-/* 00337360 */ extern GXFifoObj* GXInit(GXFifoObj* fifo, u32 size);
+GXFifoObj* GXInit(GXFifoObj* fifo, u32 size);
 
 #endif

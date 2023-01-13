@@ -113,6 +113,14 @@ typedef void (*Event)(void);
 #endif
 #endif
 
+#ifndef SECTION_INIT
+#if defined(__MWERKS__) && !defined(M2CTX)
+#define SECTION_INIT __declspec(section ".init")
+#else
+#define SECTION_INIT
+#endif
+#endif
+
 #ifndef ATTRIBUTE_NORETURN
 #if defined(__clang__) || defined(__GNUC__)
 #define ATTRIBUTE_NORETURN __attribute__((noreturn))
@@ -123,10 +131,18 @@ typedef void (*Event)(void);
 
 #ifdef PERMUTER
 #define AT_ADDRESS(x) = FIXEDADDR(x)
-#elif defined(__MWERKS__)
+#elif defined(__MWERKS__) && !defined(M2CTX)
 #define AT_ADDRESS(x) : (x)
 #else
 #define AT_ADDRESS(x)
+#endif
+
+#ifndef UNK_SIZE_ARRAY
+#if defined(__MWERKS__) && !defined(M2CTX)
+#define UNK_SIZE_ARRAY []
+#else
+#define UNK_SIZE_ARRAY [0]
+#endif
 #endif
 
 #ifdef GEKKO

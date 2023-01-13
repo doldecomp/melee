@@ -681,7 +681,7 @@ asm unk_t GXSetFieldMask()
 #pragma pop
 
 #pragma push
-asm unk_t GXSetFieldMode()
+asm void GXSetFieldMode(s8, s32)
 { // clang-format off
     nofralloc
 /* 80341054 0033DC34  7C 08 02 A6 */	mflr r0

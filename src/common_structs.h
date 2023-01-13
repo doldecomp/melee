@@ -1,3 +1,5 @@
+/// @file
+/// @todo Delete this.
 #ifndef _common_structs_h_
 #define _common_structs_h_
 
