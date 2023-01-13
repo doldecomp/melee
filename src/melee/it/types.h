@@ -335,7 +335,9 @@ typedef struct Item {
     /// @at{2C} @sz{4}
     f32 facing_dir;
 
+    /// @at{30} @sz{4}
     f32 init_facing_dir;
+
     f32 x34_spin_speed;
     f32 x38_scale;
     f32 x3C;
@@ -362,7 +364,11 @@ typedef struct Item {
     ItemDynamicBones xD4_dynamicBones[24];
     s32 x374_dynamicBonesNum;
     CollData x378_itemColl;
-    HSD_GObj* owner; // Item's current owner
+
+    /// @at{518} @sz{4}
+    /// @brief Item's current owner
+    HSD_GObj* owner;
+
     s32 x51C;
     CameraBox* x520_cameraBox; // CameraBox
     f32 x524;
@@ -700,13 +706,26 @@ typedef struct SpawnItem {
         x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness' PK Fire
                          // Pillar has this set to PK Fire Spark's item GObj
     ITKIND kind;         // 0x8, ID of the item to spawn
-    enum_t hold_kind;    // Defines the behavior of the item, such as thrown and
-                         // pickup. 0 = capsule
+
+    /// @at{C} @sz{4}
+    /// @brief Defines the behavior of the item, such as thrown and pickup.
+    /// @todo 0 = capsule.
+    enum_t hold_kind;
+
     s32 x10;
+
+    /// @at{14} @sz{C}
     Vec3 pos;
+
+    /// @at{20} @sz{C}
     Vec3 prev_pos;
+
+    /// @at{2C} @sz{C}
     Vec3 vel;
+
+    /// @at{38} @sz{4}
     f32 facing_dir;
+
     s16 x3C_damage;
     s16 x3E;
     s32 x40;                // 0x1 = correct initial position
