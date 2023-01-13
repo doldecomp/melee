@@ -1,11 +1,10 @@
 #ifndef MELEE_IT_TYPES_H
 #define MELEE_IT_TYPES_H
 
-#include "sysdolphin/baselib/gobjproc.h"
 #include <common_structs.h>
 #include <dolphin/mtx/mtxtypes.h>
 #include <math.h>
-#include <melee/ft/fighter.h>
+#include <melee/ft/types.h>
 #include <melee/gr/stage.h>
 #include <melee/it/itCommonItems.h>
 #include <melee/it/itkind.h>
@@ -17,6 +16,7 @@
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>

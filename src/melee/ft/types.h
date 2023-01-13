@@ -7,7 +7,6 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftstatevars.h>
 #include <melee/gr/stage.h>
-#include <melee/it/item2.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbrefract.h>
 #include <melee/pl/player.h>

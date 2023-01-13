@@ -3,6 +3,26 @@
 
 #include <melee/it/itkind.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
+
+void func_8027D730(HSD_GObj*);
+HSD_GObj* func_80283AE4(s32, Vec3*, s32);
+HSD_GObj* func_802841B4(s32, Vec3*, s32);
+HSD_GObj* func_80284854(Vec3*);
+HSD_GObj* func_802896CC(Vec3*);
+void func_8028FE90(HSD_GObj*);
+
+HSD_GObj* func_80284D54(Vec3*);
+void func_8028428C(HSD_GObj*);
+void func_80283BD4(HSD_GObj*);
+HSD_GObj* func_80286088(s32);
+HSD_GObj* func_80290938(HSD_JObj*);
+HSD_GObj* func_80291BE0(Vec3*);
+HSD_GObj* func_80292D48(Vec3*);
+void func_8029D968(HSD_GObj*);
+void func_802D09D0(HSD_GObj*);
+
+/// @attention Above this line, symbols are placed correctly.
 
 void func_80294E78(struct _HSD_GObj*, f32);
 struct _HSD_GObj* func_8029A748(struct _HSD_GObj*, Vec3*, u8, f32);
@@ -21,6 +41,7 @@ void func_802F0AE0(struct _HSD_GObj*, Vec3*, Vec3*, s32, s32, f32, f32, f32);
 
 /// @todo @c arg0 is likely a @c HSD_GObj*.
 void func_802C0DBC(u32 arg0);
+
 u32 func_802C0850(HSD_GObj*, Vec3*, u32, s32, f32 facing_direction);
 void func_802C8C34(u32);
 
@@ -131,5 +152,6 @@ void func_80285024(HSD_GObj*, s32);
 void func_802950D4(HSD_GObj*, bool);
 void func_80294EB0(HSD_GObj*, Vec3*, Vec3*);
 s32 func_802F2094(s32, Vec3*, s32, s32);
+HSD_GObj* func_80294DC0(Vec3*);
 
 #endif
