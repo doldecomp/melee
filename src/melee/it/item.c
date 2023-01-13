@@ -174,10 +174,10 @@ static void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     func_80272280(item_gobj);
 
     item_data->on_accessory = NULL;
-    item_data->if_touched = NULL;
-    item_data->on_enter_hitlag = NULL;
-    item_data->on_exit_hitlag = NULL;
-    item_data->if_jumped_on = NULL;
+    item_data->touched = NULL;
+    item_data->entered_hitlag = NULL;
+    item_data->exited_hitlag = NULL;
+    item_data->jumped_on = NULL;
 
     if (item_data->owner != NULL)
         func_80225DD8(item_gobj, item_data->owner);
@@ -1244,14 +1244,14 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags)
         HSD_JObjRemoveAnimAll(item_jobj);
         item_data->x52C_item_script = NULL;
     }
-    item_data->if_anim = temp_r30->x4_callback_anim;
-    item_data->on_phys = temp_r30->x8_callback_phys;
-    item_data->if_coll = temp_r30->xC_callback_coll;
+    item_data->animated = temp_r30->x4_callback_anim;
+    item_data->physics_updated = temp_r30->x8_callback_phys;
+    item_data->collided = temp_r30->xC_callback_coll;
     item_data->on_accessory = NULL;
-    item_data->if_touched = NULL;
-    item_data->on_enter_hitlag = NULL;
-    item_data->on_exit_hitlag = NULL;
-    item_data->if_jumped_on = NULL;
+    item_data->touched = NULL;
+    item_data->entered_hitlag = NULL;
+    item_data->exited_hitlag = NULL;
+    item_data->jumped_on = NULL;
     item_data->xDD0_flag.bits.b5 = 0;
     item_data->xD09 = 0;
     func_802714C0(item_gobj);
@@ -1310,7 +1310,7 @@ static void lbl_80269528(HSD_GObj* item_gobj)
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
     if (item_data->xDC8_word.flags.x9 == 0) {
         func_802694CC(item_gobj);
-        if (item_data->if_anim != NULL && item_data->if_anim(item_gobj)) {
+        if (item_data->animated != NULL && item_data->animated(item_gobj)) {
             item_data->xD60_destroyType = 0;
             func_8026A8EC(item_gobj);
             return;
@@ -1387,8 +1387,10 @@ void func_802697D4(HSD_GObj* item_gobj)
 #endif
 
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    if (item_data->xDC8_word.flags.x9 == 0 && item_data->on_phys != NULL) {
-        item_data->on_phys(item_gobj);
+    if (item_data->xDC8_word.flags.x9 == 0 &&
+        item_data->physics_updated != NULL)
+    {
+        item_data->physics_updated(item_gobj);
     }
     if (item_data->xDC8_word.flags.x13 == 0) {
         if (item_data->xDC8_word.flags.x9 == 0) {
@@ -1434,7 +1436,7 @@ void func_802697D4(HSD_GObj* item_gobj)
 void func_80269978(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    if (item_data->if_coll != NULL && item_data->if_coll(item_gobj)) {
+    if (item_data->collided != NULL && item_data->collided(item_gobj)) {
         item_data->xD60_destroyType = 1;
         func_8026A8EC(item_gobj);
     } else {
@@ -1470,8 +1472,8 @@ static void lbl_80269A9C(HSD_GObj* item_gobj)
 static void lbl_80269B60(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
-    if (item_data->xCFC != 0 && item_data->if_jumped_on != NULL &&
-        item_data->if_jumped_on(item_gobj))
+    if (item_data->xCFC != 0 && item_data->jumped_on != NULL &&
+        item_data->jumped_on(item_gobj))
     {
         item_data->xD60_destroyType = 2;
         func_8026A8EC(item_gobj);
@@ -1490,8 +1492,8 @@ static void lbl_80269BE4(HSD_GObj* this)
         func_802701BC(this);
 
         if (item_data->grab_victim != NULL) {
-            item_data->on_grab(this);
-            item_data->on_grabbed_for_victim(item_data->grab_victim, this);
+            item_data->grab_dealt(this);
+            item_data->grabbed_for_victim(item_data->grab_victim, this);
         }
     }
 }
@@ -1694,8 +1696,8 @@ static inline void func_8026A158_helper(HSD_GObj* atkCollGObj)
 static void func_8026A158(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    if (item_data->on_enter_hitlag != NULL) {
-        item_data->on_enter_hitlag(item_gobj);
+    if (item_data->entered_hitlag != NULL) {
+        item_data->entered_hitlag(item_gobj);
     }
     item_data->xDC8_word.flags.x9 = 1;
     if (item_data->atk_victim != NULL && func_80272D1C(item_data->atk_victim) &&
@@ -1722,8 +1724,8 @@ void func_8026A1E8_inline(HSD_GObj* atkCollGObj)
 static void func_8026A1E8(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    if (item_data->on_exit_hitlag != NULL) {
-        item_data->on_exit_hitlag(item_gobj);
+    if (item_data->exited_hitlag != NULL) {
+        item_data->exited_hitlag(item_gobj);
     }
     item_data->xDC8_word.flags.x9 = 0;
     if (item_data->atk_victim != NULL && func_80272D1C(item_data->atk_victim) &&
@@ -1781,8 +1783,8 @@ static inline void EnterHitlagThink(HSD_GObj* item_gobj, Item* item_data)
 {
     if (!item_data->xDC8_word.flags.x9) {
         item_data = GetItemData(item_gobj);
-        if (item_data->on_enter_hitlag)
-            item_data->on_enter_hitlag(item_gobj);
+        if (item_data->entered_hitlag)
+            item_data->entered_hitlag(item_gobj);
         item_data->xDC8_word.flags.x9 = 1;
 
         if ((item_data->atk_victim) && func_80272D1C(item_data->atk_victim) &&
@@ -1828,7 +1830,7 @@ static void lbl_8026A294(HSD_GObj* item_gobj)
             return;
         }
     } else if (item_data->xDCE_flag.bits.b6) {
-        if (processCallback(item_data->if_touched, item_gobj, item_data)) {
+        if (processCallback(item_data->touched, item_gobj, item_data)) {
             return;
         }
     }

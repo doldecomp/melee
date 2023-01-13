@@ -512,13 +512,13 @@ typedef struct Item {
     s32 xD10;
 
     /// @at{D14} @sz{4}
-    HSD_GObjPredicate if_anim;
+    HSD_GObjPredicate animated;
 
     /// @at{D18} @sz{4}
-    HSD_GObjEvent on_phys;
+    HSD_GObjEvent physics_updated;
 
     /// @at{D1C} @sz{4}
-    HSD_GObjPredicate if_coll;
+    HSD_GObjPredicate collided;
 
     /// @at{D20} @sz{4}
     /// @todo What does this mean?
@@ -526,24 +526,24 @@ typedef struct Item {
 
     /// @at{D24} @sz{4}
     /// @brief Runs when an entity is detected by this item's inert hibox.
-    HSD_GObjPredicate if_touched;
+    HSD_GObjPredicate touched;
 
     /// @at{D28} @sz{4}
     /// @brief Runs after applying hitlag in damage.
     /// @todo What function is @c 8026a62c?
-    HSD_GObjEvent on_enter_hitlag;
+    HSD_GObjEvent entered_hitlag;
 
     // 0xd2c, runs after exiting hitlag in hitlag, update proc 8026a200
-    HSD_GObjEvent on_exit_hitlag;
+    HSD_GObjEvent exited_hitlag;
 
     /// @at{D28} @sz{4}
     /// @brief Runs when the item is jumped on.
     /// @todo What function is @c 80269bac?
-    HSD_GObjPredicate if_jumped_on;
+    HSD_GObjPredicate jumped_on;
 
     /// @at{D34} @sz{4}
     /// @brief When grabbing a fighter, run this function on self.
-    HSD_GObjEvent on_grab;
+    HSD_GObjEvent grab_dealt;
 
     /** @at{D38} @sz{4}
      * @brief When grabbing a fighter, run this function on them.
@@ -551,7 +551,7 @@ typedef struct Item {
      * @p gobj0 - The victim of the grab. \n
      * @p gobj1 - This item's entity.
      */
-    HSD_GObjInteraction on_grabbed_for_victim;
+    HSD_GObjInteraction grabbed_for_victim;
 
     f32 xD3C_spinSpeed;
     f32 xD40;
