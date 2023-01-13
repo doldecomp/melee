@@ -5,6 +5,7 @@
 #define MWERKS_GNUC
 #endif
 
+#include <stdbool.h>
 #include <stddef.h>
 
 /// A signed 8-bit integer
@@ -70,11 +71,6 @@ typedef volatile f32 vf32;
 /// A volatile 64-bit floating-point number
 typedef volatile f64 vf64;
 
-/// A signed integer used to contain boolean values
-/// @todo Rename to @c bool.
-///       C++ can use its native type via preprocessor conditions.
-typedef int BOOL;
-
 /// The underlying type of an @c enum, used as a placeholder
 typedef int enum_t;
 
@@ -92,12 +88,6 @@ typedef jmp_t jtbl_t[];
 
 /// A @c void callback with no arguments.
 typedef void (*Event)(void);
-
-/// #BOOL true
-#define TRUE 1
-
-/// #BOOL false
-#define FALSE 0
 
 #if defined(__MWERKS__) && defined(GEKKO)
 #define MWERKS_GEKKO
