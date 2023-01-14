@@ -1,6 +1,7 @@
 #ifndef MELEE_GR_TYPES_H
 #define MELEE_GR_TYPES_H
 
+#include <melee/it/forward.h>
 #include <melee/sc/scene.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
@@ -178,7 +179,7 @@ typedef struct StageInfo {
     void* x6A4;
     struct {
         s32 unk0;
-        struct _Article* unk4;
+        Article* unk4;
     }** x6A8;
     void* x6AC;
     struct _UnkStage6B0* x6B0;

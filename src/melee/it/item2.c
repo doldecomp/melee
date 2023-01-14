@@ -61,9 +61,10 @@ void func_8026B294(HSD_GObj* item_gobj,
 bool func_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy
 {
     Item* temp_item = item_gobj->user_data;
-    if (temp_item->xCC_item_attr->x0_is_heavy != 0) {
+
+    if (temp_item->xCC_item_attr->x0_is_heavy != 0)
         return true;
-    }
+
     return false;
 }
 
@@ -560,8 +561,8 @@ void func_8026B7F8(HSD_GObj* fighter_gobj) // Remove item from player on death?
     while (enumGObj != NULL) {
         item_data = enumGObj->user_data;
         itemOwner = item_data->owner;
-        RunCallbackUnk(item_data->xB8_itemLogicTable->x38_callback_OnUnknown,
-                       enumGObj, fighter_gobj);
+        RunCallbackUnk(item_data->xB8_itemLogicTable->evt_unk, enumGObj,
+                       fighter_gobj);
         if ((item_data->xDC8_word.flags.x13 != 0) &&
             (itemOwner == fighter_gobj))
         {

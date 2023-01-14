@@ -37,6 +37,9 @@ Short for "damage."
 @section glossary_dst dst
 Short for "destination."
 
+@section glossary_dyn dyn
+Short for "dynamic."
+
 @section glossary_ecb ECB
 Stands for "environmental collision box."
 
