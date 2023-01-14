@@ -133,11 +133,7 @@ void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl)
 }
 
 /// @private
-#ifdef MUST_MATCH
-inline
-#endif
-    void
-    HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
+inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
 {
     if (it->xDC8_word.flags.x19 == true)
         HSD_JObjSetRotationY(jobj, M_PI / 2 * it->facing_dir);
