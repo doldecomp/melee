@@ -575,8 +575,12 @@ typedef struct Item {
     /// @at{D60} @sz{4}
     enum_t destroy_type;
 
-    enum_t sfx_unk1; // item SFX ID
-    enum_t sfx_unk2; // item SFX ID
+    /// @at{D64} @sz{4}
+    enum_t sfx_unk1;
+
+    /// @at{D68} @sz{4}
+    enum_t sfx_unk2;
+
     s32 xD6C;
     s32 xD70;
     s32 xD74;
