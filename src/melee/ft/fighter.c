@@ -5,6 +5,8 @@
 
 #define HALF_PI 1.5707963267948966
 
+// ---------------------------------------
+
 // external vars from asm/melee/ft/ft_unknown_005.s
 typedef void (*ft_callback)(HSD_GObj* gobj);
 typedef void (*fn_ptr_t)();
@@ -80,10 +82,6 @@ ftCommonData* p_ftCommonData;
 // ==== fighter.c functions ====
 // =============================
 
-inline HSD_JObj *getHSDJObj(HSD_GObj* hsd_gobj) {
-    return hsd_gobj->hsd_obj;
-}
-
 void Fighter_800679B0()
 { 
 	s32 i;
@@ -150,30 +148,23 @@ void Fighter_LoadCommonData()
 	lbl_804D6504 = pData[20];
 	lbl_804D6500 = pData[21];
 	lbl_804D64FC = pData[22];
-} 
-
-inline void Fighter_InitScale(Fighter *fp, Vec *scale, f32 modelScale) {
-    if (fp->x34_scale.z != 1.0f)
-        scale->x = fp->x34_scale.z;
-    else
-        scale->x = modelScale;
-    
-    scale->y = modelScale;
-    scale->z = modelScale;
-}
-
-inline float _Fighter_GetModelScale(void *ft) {
-    return Fighter_GetModelScale(ft);
 }
 
 void Fighter_UpdateModelScale(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
-    HSD_JObj* jobj = fighter_gobj->hsd_obj;
+    HSD_JObj* jobj = GET_HSDOBJ(fighter_gobj);
     Vec scale;
-    f32 modelScale = _Fighter_GetModelScale(fp);
+    f32 modelScale = Fighter_GetModelScale(fp);
 
-    Fighter_InitScale(fp, &scale, modelScale);
+    if (fp->x34_scale.z != 1.0f)
+        scale.x = fp->x34_scale.z;
+    else
+        scale.x = modelScale;
+    
+    scale.y = modelScale;
+    scale.z = modelScale;
+
     HSD_JObjSetScale(jobj, &scale);
 }
 
@@ -476,7 +467,7 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighter_gobj) {
     Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
     
     Fighter_UnkInitReset_80067C98(fp);
-    HSD_JObjSetTranslate(fighter_gobj->hsd_obj, &fp->xB0_pos);
+    HSD_JObjSetTranslate((HSD_JObj*)HSD_GObjGetHSDObj(fighter_gobj), &fp->xB0_pos);
 
     func_800D105C(fighter_gobj);
     func_800C09B4(fighter_gobj);
@@ -498,7 +489,7 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighter_gobj) {
         func_8007D5D4(fp);
     func_80076064(fp);
     
-    HSD_JObjSetTranslate(fighter_gobj->hsd_obj, &fp->xB0_pos);
+    HSD_JObjSetTranslate((HSD_JObj*)HSD_GObjGetHSDObj(fighter_gobj), &fp->xB0_pos);
     Fighter_UnkApplyTransformation_8006C0F0(fighter_gobj);
     Fighter_UpdateModelScale(fighter_gobj);
 
@@ -861,7 +852,7 @@ HSD_GObj* Fighter_80068E98(struct S_TEMP1* input) {
     func_8007B320(fighter_gobj);
     fp->x890_cameraBox = func_80029020();
 
-    jobj = (void*)getHSDJObj(fighter_gobj);
+    jobj = (HSD_JObj*)HSD_GObjGetHSDObj(fighter_gobj);
     func_8000ED54(&fp->x20A4, jobj);
     func_8038FD54(fighter_gobj, &Fighter_8006A1BC, 0);
     func_8038FD54(fighter_gobj, &Fighter_8006A360, 1);
@@ -905,7 +896,7 @@ HSD_GObj* Fighter_80068E98(struct S_TEMP1* input) {
 }
 
 void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 new_action_state_index, s32 arg2, HSD_GObj* otherObj, f32 arg8, f32 arg9, f32 argA) {
-    HSD_JObj* jobj = fighter_gobj->hsd_obj;
+    HSD_JObj* jobj = GET_HSDOBJ(fighter_gobj);
     Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
     struct ActionState* new_action_state;
     struct S_TEMP4* unk_struct_x18;
@@ -1216,21 +1207,18 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 new_action_s
         }
     
         if (otherObj != NULL) {
-            Fighter *newFp = GET_FIGHTER_NEW(otherObj);
-            unk_struct_x18 = &newFp->x24[fp->x14_action_id];
-            unk_byte_ptr = &newFp->x28[fp->x14_action_id << 1];
+            unk_struct_x18 = &(GET_FIGHTER_NEW(otherObj))->x24[fp->x14_action_id];
+            unk_byte_ptr = &(GET_FIGHTER_NEW(otherObj))->x28[fp->x14_action_id << 1];
         } else {
-            Fighter *newFp = fp;
-            unk_struct_x18 = &newFp->x24[fp->x14_action_id];
-            unk_byte_ptr = &newFp->x28[fp->x14_action_id << 1];
+            unk_struct_x18 = &fp->x24[fp->x14_action_id];
+            unk_byte_ptr = &fp->x28[fp->x14_action_id << 1];
         }
         fp->x594_s32 = unk_struct_x18->x10_animCurrFlags;
         func_8009E7B4(fp, unk_byte_ptr);
         if ((arg2 & FIGHTER_ANIM_NOUPDATE) == 0) {
     
             if (otherObj != 0U) {
-                Fighter *newFp = GET_FIGHTER_NEW(otherObj);
-                func_80085CD8(fp, newFp, fp->x14_action_id);
+                func_80085CD8(fp, GET_FIGHTER_NEW(otherObj), fp->x14_action_id);
                 func_8007B8CC(fp, otherObj);
             } else {
                 func_80085CD8(fp, fp, fp->x14_action_id);
@@ -2312,46 +2300,35 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj) {
     }
 }
 
-inline HSD_JObj* Fighter_UnkApplyTransformation_8006C0F0_Inner1(HSD_JObj* jobj, Mtx *mtx)
+void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighterObj) 
 {
-    func_80379310(&jobj->mtx, mtx);
-    return jobj;
-}
+    Fighter* fighter = (Fighter*)HSD_GObjGetUserData(fighterObj);
 
-void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj) 
-{
-    Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
-
-    if (fp->x34_scale.z != 1.0f) {
-        HSD_JObj* jobj = fighter_gobj->hsd_obj;
+    if (fighter->x34_scale.z != 1.0f) {
+        HSD_JObj* jobj = (HSD_JObj*)HSD_GObjGetHSDObj(fighterObj);
         Mtx mtx1;
         Mtx mtx2;
         Vec scale;
         Vec translation;
         Quaternion rotation;
 
+        // this is weird. this usually implies an inline, but inlines reserve more stack (usually
+        // in 8 byte increments) than a single allocation (removed) like this.
+        jobj = (HSD_JObj*)HSD_GObjGetHSDObj(fighterObj);
+
         HSD_JObjSetupMatrix(jobj);
         HSD_JObjGetMtx(jobj);
-        jobj = Fighter_UnkApplyTransformation_8006C0F0_Inner1(jobj, &mtx1);
+        func_80379310(&jobj->mtx, &mtx1);
         HSD_JObjGetScale(jobj, &scale);
 
-        scale.x = Fighter_GetModelScale(fp);
+        scale.x = Fighter_GetModelScale(fighter);
 
         HSD_JObjGetRotation(jobj, &rotation);
         HSD_JObjGetTranslation(jobj, &translation);
 
         HSD_MtxSRT(&mtx2, &scale, &rotation, &translation, 0);
-        PSMTXConcat(mtx2, mtx1, fp->x44_mtx);
+        PSMTXConcat(&mtx2, &mtx1, &fighter->x44_mtx);
     }
-}
-
-// Kinda silly but helps get rid of dummy fake args so its whatevs.
-inline float Fighter_GetPosX(Fighter* fp) {
-    return fp->xB0_pos.x;
-}
-
-inline float Fighter_GetPosY(Fighter* fp) {
-    return fp->xB0_pos.y;
 }
 
 void Fighter_8006C27C(HSD_GObj* fighter_gobj) {
@@ -2367,7 +2344,7 @@ void Fighter_8006C27C(HSD_GObj* fighter_gobj) {
 
         fp->x2223_flag.bits.b5 = 0;
 
-        HSD_JObjSetTranslate(fighter_gobj->hsd_obj, &fp->xB0_pos);
+        HSD_JObjSetTranslate(GET_HSDOBJ(fighter_gobj), &fp->xB0_pos);
 
         if (fp->cb.x21A8_callback_Coll) {
             fp->cb.x21A8_callback_Coll(fighter_gobj);
@@ -2383,14 +2360,12 @@ void Fighter_8006C27C(HSD_GObj* fighter_gobj) {
                 fpclassify(fp->xB0_pos.y) == FP_NAN ||
                 fpclassify(fp->xB0_pos.z) == FP_NAN)
             {
-                f32 x = Fighter_GetPosX(fp);
-                f32 y = Fighter_GetPosY(fp);
-                OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", x, y);
+                OSReport("fighter procMap pos error.\tpos.x=%f\tpos.y=%f\n", fp->xB0_pos.x, fp->xB0_pos.y);
                 __assert(__FILE__, 2590, "0");
             }
         }
 
-        HSD_JObjSetTranslate(fighter_gobj->hsd_obj, &fp->xB0_pos);
+        HSD_JObjSetTranslate(GET_HSDOBJ(fighter_gobj), &fp->xB0_pos);
     }
 }
 
@@ -2403,11 +2378,9 @@ void Fighter_8006C5F4(HSD_GObj* fighter_gobj)
 
 void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighterObj) {
     Fighter* fp = GET_FIGHTER_NEW(fighterObj);
-    s32 bit = fp->x221F_flag.bits.b3;
 
-    if (!bit) {
-        s32 bit = fp->x2219_flag.bits.b5;
-        if (bit) {
+    if (!fp->x221F_flag.bits.b3) {
+        if (fp->x2219_flag.bits.b5) {
             if (fp->cb.x21B8_callback_Accessory3) {
                 fp->cb.x21B8_callback_Accessory3(fighterObj);
             }
@@ -2415,12 +2388,12 @@ void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighterObj) {
         }
         if (fp->cb.x21B4_callback_Accessory2) {
             fp->cb.x21B4_callback_Accessory2(fighterObj);
-            HSD_JObjSetTranslate(fighterObj->hsd_obj, &fp->xB0_pos);
+            HSD_JObjSetTranslate((HSD_JObj*)HSD_GObjGetHSDObj(fighterObj), &fp->xB0_pos);
         }
 
         if (fp->cb.x21B0_callback_Accessory1) {
             fp->cb.x21B0_callback_Accessory1(fighterObj);
-            HSD_JObjSetTranslate(fighterObj->hsd_obj, &fp->xB0_pos);
+            HSD_JObjSetTranslate((HSD_JObj*)HSD_GObjGetHSDObj(fighterObj), &fp->xB0_pos);
         }
     }
 }

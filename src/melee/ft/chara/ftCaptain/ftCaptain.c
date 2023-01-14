@@ -5,7 +5,7 @@
 // https://decomp.me/scratch/XZ1Jx
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = (Fighter*)fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
     func_80074A4C(fighter_gobj,0,0);
     fp->sa.captain.x2230_isSpecialSGFX = 0;
     fp->sa.captain.x222C_isSpecialSStartGFX = 0;
@@ -59,10 +59,9 @@ void ftCaptain_OnLoadForGanon(Fighter* fp) {
 // https://decomp.me/scratch/aZ4Wn
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
+    Fighter* fp = GET_FIGHTER_NEW(fighter_gobj);
     ftCaptainAttributes *sA2;
 
-    fp = (Fighter*)fighter_gobj->user_data;
     fp->x2224_flag.bits.b7 = 1;
 
     PUSH_ATTRS(fp, ftCaptainAttributes);

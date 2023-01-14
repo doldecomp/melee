@@ -2125,6 +2125,9 @@ void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighter_gobj);
 void Fighter_8006DA4C(HSD_GObj* fighter_gobj);
 void Fighter_Unload_8006DABC(void* user_data);
 
+// Todo: Move everything to this access or the other one.
+#define GET_FIGHTER_NEW(gobj) \
+    ((Fighter*)HSD_GObjGetUserData(gobj))
 
 ///// Shared Fighter Code
 
@@ -2138,7 +2141,7 @@ void Fighter_Unload_8006DABC(void* user_data);
     } while(0)
 
 #define COPY_ATTRS(gobj, attributeName)                                          \
-    Fighter* fp = gobj->user_data;                                               \
+    Fighter* fp = GET_FIGHTER_NEW(gobj);                                         \
     attributeName* sA2 = (attributeName*)fp->x2D4_specialAttributes;             \
     attributeName* ext_attr = (attributeName*)fp->x10C_ftData->ext_attr;         \
     *sA2 = *ext_attr;                                                            \
@@ -2242,15 +2245,5 @@ inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj) {
 
 extern unk_t lbl_804D6520;
 extern ftCommonData* p_ftCommonData;
-
-// Todo: Move everything to this access or the other one.
-#define GET_FIGHTER_NEW(gobj) \
-    ((Fighter*)HSD_GobjGetUserData(gobj))
-
-// This probably shouldnt exist, but some functions are just stubborn
-// motherfuckers that wont match without a direct access. TODO: Can we
-// get rid of every one of these?
-#define GET_FIGHTER_NEW_DIRECT(gobj) \
-    ((Fighter*)gobj->user_data)
 
 #endif
