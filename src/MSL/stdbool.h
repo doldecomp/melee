@@ -1,5 +1,5 @@
 /// @file
-/// @todo Assumes @c GEKKO.
+/// @todo Assumes @c __PPCGEKKO__.
 #ifndef STDBOOL_H
 #define STDBOOL_H
 

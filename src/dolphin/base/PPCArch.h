@@ -3,7 +3,7 @@
 
 #include <Runtime/platform.h>
 
-// GEKKO registers
+// Gekko registers
 #define GQR0 0x390
 #define GQR1 0x391
 #define GQR2 0x392
