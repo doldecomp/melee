@@ -6,7 +6,6 @@
 #define MELEE_IT_ITEM_H
 
 #include <dolphin/mtx/mtxtypes.h>
-#include <melee/it/inlines.h>
 #include <melee/it/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -232,6 +231,13 @@ void func_8026A8EC_inline3(HSD_GObj* item_gobj);
 void func_8026B0B4(HSD_GObj* item_gobj);
 
 void Item_OnUserDataRemove(any_t user_data);
+void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it);
+
+static inline Item* GetItemData(HSD_GObj* item_gobj)
+{
+    Item* item_data = item_gobj->user_data;
+    return item_data;
+}
 
 #endif
 /// @}
