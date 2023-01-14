@@ -101,7 +101,6 @@ endif
 CFLAGS  = -msgstyle gcc \
 		-cwd source \
 		-Cpp_exceptions off \
-		-DGEKKO \
 		-proc gekko -fp hard \
 		-fp_contract on -O4,p \
 		-enum int \

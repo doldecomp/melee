@@ -14,7 +14,6 @@ MWCC_FLAGS = [
     "-EP",
     "-Cpp_exceptions", "off",
     "-proc", "gekko",
-    "-DGEKKO",
     "-fp", "hard",
     "-fp_contract", "on",
     "-O4,p",

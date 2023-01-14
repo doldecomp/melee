@@ -45,7 +45,7 @@ static asm void __DBExceptionDestination(void)
     b __DBExceptionDestinationAux
 } // clang-format on
 
-#elif defined(__GNUC__) && defined(GEKKO)
+#elif defined(__GNUC__) && defined(__PPCGEKKO__)
 
 static void __DBExceptionDestination(void)
 {
