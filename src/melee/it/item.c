@@ -502,8 +502,7 @@ void func_80267978(HSD_GObj* item_gobj)
             __assert("item.c", 686, "0");
         }
     }
-    item_data->xBC_itemStateContainer =
-        item_data->xB8_itemLogicTable->x0_itemStatePtr;
+    item_data->xBC_itemStateContainer = item_data->xB8_itemLogicTable->states;
 }
 
 extern unk_t func_80225B20(void);
@@ -844,12 +843,12 @@ void func_80268560(HSD_GObj* item_gobj)
         HSD_JObj* jobj;
         desc = &article_data->x14_dynamics->x4_dynamicsDesc[i];
         jobj = item_data->xBBC_dynamicBoneTable->x0_jobj[desc->x0_boneID];
-        func_8000FD48(jobj, &item_data->xD4_dynamicBones[i].x8_dynamicBones,
+        func_8000FD48(jobj, &item_data->xD4_dynamicBones[i].unk_ptr,
                       desc->x8_num);
-        item_data->xD4_dynamicBones[i].x4_root_jobj = jobj;
-        item_data->xD4_dynamicBones[i].x0_apply_phys_num = 0;
+        item_data->xD4_dynamicBones[i].skeleton = jobj;
+        item_data->xD4_dynamicBones[i].flags = 0;
         func_80011710(&article_data->x14_dynamics->x4_dynamicsDesc[i].x4_params,
-                      &item_data->xD4_dynamicBones[i].x8_dynamicBones);
+                      &item_data->xD4_dynamicBones[i].unk_ptr);
     }
 }
 
@@ -1025,8 +1024,7 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
         if (anim_joint != NULL) {
             for (temp_r0 = 0; temp_r0 < item_data->x374_dynamicBonesNum;
                  temp_r0++)
-                if (item_jobj ==
-                    item_data->xD4_dynamicBones[temp_r0].x4_root_jobj)
+                if (item_jobj == item_data->xD4_dynamicBones[temp_r0].skeleton)
                 {
                     if (anim_joint->next != NULL) {
                         functionArg1 = NULL;
@@ -1184,7 +1182,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags)
     item_data->xCC8_knockback = 0.0f;
     temp_r30 =
         (new_var = &item_data->xBC_itemStateContainer->stateTable[itemStateID]);
-    item_data->x28_item_anim_index = temp_r30->x0_state_id;
+    item_data->x28_item_anim_index = temp_r30->asid;
     item_data->x5CC_currentAnimFrame = 0.0f;
     temp_r0 = item_data->x28_item_anim_index;
     if (temp_r0 != -1) {
@@ -1225,9 +1223,9 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags)
         HSD_JObjRemoveAnimAll(item_jobj);
         item_data->x52C_item_script = NULL;
     }
-    item_data->animated = temp_r30->x4_callback_anim;
-    item_data->physics_updated = temp_r30->x8_callback_phys;
-    item_data->collided = temp_r30->xC_callback_coll;
+    item_data->animated = temp_r30->animated;
+    item_data->physics_updated = temp_r30->physics_updated;
+    item_data->collided = temp_r30->collided;
     item_data->on_accessory = NULL;
     item_data->touched = NULL;
     item_data->entered_hitlag = NULL;
@@ -1561,16 +1559,14 @@ bool func_80269DC8(HSD_GObj* item_gobj)
                 item_data->xC54 = 0.0f;
             }
         }
-        cb_OnShieldBounce =
-            item_data->xB8_itemLogicTable->x30_callback_OnShieldBounce;
+        cb_OnShieldBounce = item_data->xB8_itemLogicTable->shield_bounced;
         if (cb_OnShieldBounce != NULL && cb_OnShieldBounce(item_gobj)) {
             item_data->destroy_type = 2;
             func_8026A8EC(item_gobj);
             return true;
         }
     } else {
-        cb_OnHitShield =
-            item_data->xB8_itemLogicTable->x34_callback_OnHitShield;
+        cb_OnHitShield = item_data->xB8_itemLogicTable->hit_shield;
         if (func_80274C78(item_gobj)) {
             item_data->xCA8 = item_data->xC50;
         }
@@ -1609,7 +1605,7 @@ bool func_80269F14(HSD_GObj* item_gobj)
     temp_item->xD9C = temp_item->xC80;
     temp_item->xDA4_word = temp_item->xC88;
     temp_item->xDA8_short = temp_item->xC8C;
-    cb_OnReflect = temp_item->xB8_itemLogicTable->x24_callback_OnReflect;
+    cb_OnReflect = temp_item->xB8_itemLogicTable->reflected;
     if (cb_OnReflect != NULL && cb_OnReflect(item_gobj)) {
         temp_item->destroy_type = 2;
         func_8026A8EC(item_gobj);
@@ -1734,16 +1730,14 @@ bool OnTakeDamageThink(HSD_GObj* item_gobj, Item* item_data)
     }
     item_data->xCA8 = item_data->xCA0;
     item_data->xDC8_word.flags.xB = 1;
-    return processCallback(
-        item_data->xB8_itemLogicTable->x1C_callback_OnTakeDamage, item_gobj,
-        item_data);
+    return processCallback(item_data->xB8_itemLogicTable->dmg_received,
+                           item_gobj, item_data);
 }
 
 /// @private
 bool OnClankThink(HSD_GObj* item_gobj, Item* item_data)
 {
-    bool (*cb_OnClank)(HSD_GObj*) =
-        item_data->xB8_itemLogicTable->x28_callback_OnClank;
+    bool (*cb_OnClank)(HSD_GObj*) = item_data->xB8_itemLogicTable->clanked;
     if (func_80274C78(item_gobj)) {
         item_data->xCA8 = item_data->xC48;
     }
@@ -1754,7 +1748,7 @@ bool OnClankThink(HSD_GObj* item_gobj, Item* item_data)
 bool OnGiveDamageThink(HSD_GObj* item_gobj, Item* item_data)
 {
     bool (*cb_OnGiveDamage)(HSD_GObj*) =
-        item_data->xB8_itemLogicTable->x18_callback_OnGiveDamage;
+        item_data->xB8_itemLogicTable->dmg_dealt;
     if (func_80274C78(item_gobj)) {
         item_data->xCA8 = item_data->xC34_damageDealt;
     }
@@ -1808,9 +1802,8 @@ void lbl_8026A294(HSD_GObj* item_gobj)
         if (func_80269F14(item_gobj))
             return;
     } else if (item_data->xC90_absorbGObj != NULL) {
-        if (processCallback(
-                item_data->xB8_itemLogicTable->x2C_callback_OnAbsorb, item_gobj,
-                item_data))
+        if (processCallback(item_data->xB8_itemLogicTable->absorbed, item_gobj,
+                            item_data))
         {
             return;
         }
@@ -1848,14 +1841,13 @@ void lbl_8026A788(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
     int dynamicBonesNum = item_data->x374_dynamicBonesNum;
-    ItemDynamicBones* dynamicBones = item_data->xD4_dynamicBones;
+    Item_DynamicBones* dynamicBones = item_data->xD4_dynamicBones;
     int i;
 
     func_80272304(item_gobj);
     for (i = 0; i < dynamicBonesNum; i++, dynamicBones++) {
-        func_8001044C(&dynamicBones->x8_dynamicBones, &item_data->xB6C,
-                      item_data->xB68, 0.0f, 0, dynamicBones->x0_apply_phys_num,
-                      0, 1);
+        func_8001044C(&dynamicBones->unk_ptr, &item_data->xB6C, item_data->xB68,
+                      0.0f, 0, dynamicBones->flags, 0, 1);
     }
 }
 
@@ -1864,8 +1856,8 @@ void func_8026A810(HSD_GObj* item_gobj)
 {
     Item* temp_item = (Item*) HSD_GObjGetUserData(item_gobj);
 
-    if (temp_item->xB8_itemLogicTable->x4_callback_OnSpawn != NULL)
-        temp_item->xB8_itemLogicTable->x4_callback_OnSpawn(item_gobj);
+    if (temp_item->xB8_itemLogicTable->spawned != NULL)
+        temp_item->xB8_itemLogicTable->spawned(item_gobj);
 }
 
 void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj)
@@ -1948,7 +1940,7 @@ void func_8026A8EC_inline1(HSD_GObj* this)
 void func_8026A8EC_inline2(HSD_GObj* item_gobj)
 {
     Item* it = (Item*) HSD_GObjGetUserData(item_gobj);
-    RunCallback(item_gobj, it->xB8_itemLogicTable->x8_callback_OnDestroy);
+    RunCallback(item_gobj, it->xB8_itemLogicTable->destroyed);
 }
 
 /// @private
@@ -1997,7 +1989,7 @@ void func_8026A8EC(HSD_GObj* this)
     {
         int i;
         for (i = 0; i < ip->x374_dynamicBonesNum; i++)
-            func_8000FD18(&ip->xD4_dynamicBones[i].x8_dynamicBones);
+            func_8000FD18(&ip->xD4_dynamicBones[i].unk_ptr);
     }
 
     func_8026B0B4(this);
@@ -2016,7 +2008,7 @@ void func_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
 
     func_80273168(item_gobj);
     func_802742F4(item_gobj, pickup_gfx, pickup_sfx);
-    RunCallback(item_gobj, item_data->xB8_itemLogicTable->xC_callback_OnPickup);
+    RunCallback(item_gobj, item_data->xB8_itemLogicTable->picked_up);
     func_8026B074(item_data);
 }
 
@@ -2031,7 +2023,7 @@ void func_8026ABD8(HSD_GObj* this, Vec3* pos, f32 arg2)
     item_data->xC44 = arg2;
     func_802731A4(this);
     func_80273B50(this, pos);
-    RunCallback(this, item_data->xB8_itemLogicTable->x10_callback_OnDrop);
+    RunCallback(this, item_data->xB8_itemLogicTable->dropped);
     func_80274198(this, 1);
     func_802754D4(this);
 
@@ -2045,7 +2037,7 @@ void func_8026AC74(HSD_GObj* this, enum_t drop_gfx, enum_t drop_sfx, f32 arg3)
     item_data->xC44 = arg3;
     func_802731A4(this);
     func_80273748(this, drop_gfx, drop_sfx);
-    RunCallback(this, item_data->xB8_itemLogicTable->x10_callback_OnDrop);
+    RunCallback(this, item_data->xB8_itemLogicTable->dropped);
     func_802741F4(this, 1);
     func_802754D4(this);
 
@@ -2059,7 +2051,7 @@ void func_8026AD20(HSD_GObj* this, s32 drop_gfx, s32 drop_sfx, f32 arg8)
     func_802731E0(this);
     item_data->xC44 = arg8;
     func_80273748(this, drop_gfx, drop_sfx);
-    RunCallback(this, item_data->xB8_itemLogicTable->x14_callback_OnThrow);
+    RunCallback(this, item_data->xB8_itemLogicTable->thrown);
     func_802741F4(this, 1);
     func_802754D4(this);
 }
@@ -2067,8 +2059,8 @@ void func_8026AD20(HSD_GObj* this, s32 drop_gfx, s32 drop_sfx, f32 arg8)
 void func_8026ADC0(HSD_GObj* this)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(this);
-    if (item_data->xB8_itemLogicTable->x20_callback_EnterAir != NULL) {
-        item_data->xB8_itemLogicTable->x20_callback_EnterAir(this);
+    if (item_data->xB8_itemLogicTable->entered_air != NULL) {
+        item_data->xB8_itemLogicTable->entered_air(this);
         item_data->xDC8_word.flags.x1F = true;
     }
 }
@@ -2198,7 +2190,7 @@ bool Item_IsGrabbable(HSD_GObj* item_gobj)
     temp_item = item_gobj->user_data;
 
     if ((temp_item->xDC8_word.flags.x15 != 0) &&
-        (temp_item->xB8_itemLogicTable->xC_callback_OnPickup != NULL))
+        (temp_item->xB8_itemLogicTable->picked_up != NULL))
     {
         return true;
     }

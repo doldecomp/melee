@@ -6,6 +6,7 @@
 #include <math.h>
 #include <melee/ft/types.h>
 #include <melee/gr/stage.h>
+#include <melee/it/forward.h>
 #include <melee/it/itCommonItems.h>
 #include <melee/it/itkind.h>
 #include <melee/it/itPKFlash.h>
@@ -23,18 +24,31 @@
 
 // Item State Change Flags
 
-// Apparently there's no 0x1 flag
-#define ITEM_ANIM_UPDATE                                                       \
-    0x2 // Updates item model with target Item State's AnimJoint, MatAnimJoint
-        // and extra HSD archive node if available
-#define ITEM_DROP_UPDATE 0x4       // Copies 0xC44 to 0xC40 if toggled ON
-#define ITEM_MODEL_UPDATE 0x8      // Runs some JObj function
-#define ITEM_HIT_PRESERVE 0x10     // Keep current hitboxes
-#define ITEM_SFX_PRESERVE 0x20     // Keep current SFX
-#define ITEM_COLANIM_PRESERVE 0x40 // Keep current Color Overlay
-#define ITEM_UNK_UPDATE 0x80       // ???
-#define ITEM_CMD_UPDATE                                                        \
-    0x100 // Run item's Subaction Events up to its current animation frame
+#define ITEM_UNK_0x1 (1 << 0)
+
+/// Updates item model with target Item State's AnimJoint, MatAnimJoint and
+/// extra HSD archive node if available
+#define ITEM_ANIM_UPDATE (1 << 1)
+
+/// Copies #Item::xC44 to #Item::xC40 if enabled
+#define ITEM_DROP_UPDATE (1 << 2)
+
+/// Runs some #HSD_JObj function
+#define ITEM_MODEL_UPDATE (1 << 3)
+
+/// Keep current hitboxes
+#define ITEM_HIT_PRESERVE (1 << 4)
+
+/// Keep current SFX
+#define ITEM_SFX_PRESERVE (1 << 5)
+
+/// Keep current color overlay
+#define ITEM_COLANIM_PRESERVE (1 << 6)
+
+#define ITEM_UNK_UPDATE (1 << 7)
+
+/// Run item's Subaction Events up to its current animation frame
+#define ITEM_CMD_UPDATE (1 << 8)
 
 // Item Unk Kinds
 
@@ -44,40 +58,75 @@
 #define ITEM_UNK_LOCKON 5
 #define ITEM_UNK_ENEMY 6 // Item type: Stage Enemy (Goomba, Koopa Troopa, etc.)
 
+/// @todo Size unknown.
 struct ItemStateTable {
-    s32 x0_state_id;
-    void* x4_callback_anim;
-    void* x8_callback_phys;
-    void* xC_callback_coll;
+    /// @at{0} @sz{4}
+    enum_t asid;
+
+    /// @at{4} @sz{4}
+    HSD_GObjPredicate animated;
+
+    /// @at{8} @sz{4}
+    HSD_GObjEvent physics_updated;
+
+    /// @at{C} @sz{4}
+    HSD_GObjPredicate collided;
 };
 
+/// @todo Size unknown.
 struct ItemStateContainer {
-    struct ItemStateTable stateTable[
-#ifdef M2CTX
-        0
-#endif
-    ];
+    /// @at{0}
+    struct ItemStateTable stateTable UNK_SIZE_ARRAY;
 };
 
 struct ItemLogicTable {
-    struct ItemStateContainer* x0_itemStatePtr;
-    void (*x4_callback_OnSpawn)(HSD_GObj* item);
-    void (*x8_callback_OnDestroy)(HSD_GObj* item);
-    void (*xC_callback_OnPickup)(HSD_GObj* item);
-    void (*x10_callback_OnDrop)(HSD_GObj* item);
-    void (*x14_callback_OnThrow)(HSD_GObj* item);
-    bool (*x18_callback_OnGiveDamage)(HSD_GObj* item);
-    bool (*x1C_callback_OnTakeDamage)(HSD_GObj* item);
-    void (*x20_callback_EnterAir)(HSD_GObj* item);
-    bool (*x24_callback_OnReflect)(HSD_GObj* item);
-    bool (*x28_callback_OnClank)(HSD_GObj* item);
-    bool (*x2C_callback_OnAbsorb)(HSD_GObj* item);
-    bool (*x30_callback_OnShieldBounce)(HSD_GObj* item);
-    bool (*x34_callback_OnHitShield)(HSD_GObj* item);
-    void (*x38_callback_OnUnknown)(HSD_GObj* item, HSD_GObj* fighter);
+    /// @at{0} @sz{4}
+    struct ItemStateContainer* states;
+
+    /// @at{4} @sz{4}
+    void (*spawned)(HSD_GObj* item);
+
+    /// @at{8} @sz{4}
+    void (*destroyed)(HSD_GObj* item);
+
+    /// @at{C} @sz{4}
+    void (*picked_up)(HSD_GObj* item);
+
+    /// @at{10} @sz{4}
+    void (*dropped)(HSD_GObj* item);
+
+    /// @at{14} @sz{4}
+    void (*thrown)(HSD_GObj* item);
+
+    /// @at{18} @sz{4}
+    bool (*dmg_dealt)(HSD_GObj* item);
+
+    /// @at{1C} @sz{4}
+    bool (*dmg_received)(HSD_GObj* item);
+
+    /// @at{20} @sz{4}
+    void (*entered_air)(HSD_GObj* item);
+
+    /// @at{24} @sz{4}
+    bool (*reflected)(HSD_GObj* item);
+
+    /// @at{28} @sz{4}
+    bool (*clanked)(HSD_GObj* item);
+
+    /// @at{2C} @sz{4}
+    bool (*absorbed)(HSD_GObj* item);
+
+    /// @at{30} @sz{4}
+    bool (*shield_bounced)(HSD_GObj* item);
+
+    /// @at{34} @sz{4}
+    bool (*hit_shield)(HSD_GObj* item);
+
+    /// @at{38} @sz{4}
+    void (*evt_unk)(HSD_GObj* item, HSD_GObj* fighter);
 };
 
-typedef struct _CameraBoxFlags {
+struct CameraBoxFlags {
     struct {
         u8 b01 : 2;
         u8 b2 : 1;
@@ -87,9 +136,9 @@ typedef struct _CameraBoxFlags {
         u8 b6 : 1;
         u8 b7 : 1;
     } bits;
-} CameraBoxFlags;
+};
 
-typedef struct flag32 {
+struct flag32 {
     union {
         struct {
             u32 x0 : 1;
@@ -123,37 +172,42 @@ typedef struct flag32 {
         } flags;
         u32 word;
     };
-} flag32;
+};
 
-typedef struct DynamicBoneTable {
+struct DynamicBoneTable {
     HSD_JObj* x0_jobj[100];
-} DynamicBoneTable;
+};
 
-typedef struct DynamicBones {
-    void* x0_ptr;    // is stored @ 8000fdd4, comes from a nonstandard heap @
-                     // -0x52fc(r13)
-    s32 x4_jobj_num; // number of bones in this boneset
-    f32 x8;          // stored @ 80011718, 0x8 of dynamicdesc
-    f32 xc;          // stored @ 80011720, 0xC of dynamicdesc
-    f32 x10;         // stored @ 80011728, 0x10 of dynamicdesc
-} DynamicBones;
+/// @sz{1C}
+struct Item_DynamicBones {
+    /// @todo If this is 256, dynamics are not processed
+    /// @at{0} @sz{4}
+    int flags;
 
-typedef struct ItemDynamicBones {
-    s32 x0_apply_phys_num; // If this is 256, dyanmics are not processed
-    HSD_JObj* x4_root_jobj;
-    DynamicBones x8_dynamicBones; // This will be a dynamic bone struct once
-                                  // they're defined
+    /// @at{4} @sz{4}
+    HSD_JObj* skeleton;
 
-} ItemDynamicBones;
+    /// @at{8} @sz{4}
+    /// @todo Stored at @c 8000FDD4, comes from a nonstandard heap at
+    ///       @c -0x52fc(r13)
+    unk_t unk_ptr;
 
-typedef struct {
+    /// @at{C} @sz{4}
+    /// @brief The number of bones in this bone set.
+    int count;
+
+    /// @at{10} @sz{C}
+    Vec3 unk_vec;
+};
+
+struct ECB {
     f32 x0_ecbTop;
     f32 x4_ecbBottom;
     f32 x8_ecbRight;
     f32 xC_ecbLeft;
-} ECB;
+};
 
-typedef struct ItemAttr {
+struct ItemAttr {
     u8 x0_is_heavy : 1;     // 0x0, bit 0x80, is heavy item (crate)
     u8 x0_78 : 4;           // unk, might be lock-on behavior? (Samus Missile)
     u8 x0_hold_kind : 3;    // defines hand hold behavior
@@ -205,28 +259,28 @@ typedef struct ItemAttr {
     s32 x94; // 0x94
     s32 x98; // 0x98
     s32 x9C; // 0x9c
-} ItemAttr;
+};
 
-typedef struct ItemDynamicsDesc {
+struct ItemDynamicsDesc {
     s32 x0_boneID;   // bone index;
     void* x4_params; // dynamics params;
     s32 x8_num;      // number of children bones to make dynamic
     f32 xC;
     f32 x10;
     f32 x14;
-} ItemDynamicsDesc;
+};
 
-typedef struct ItemDynamics {
+struct ItemDynamics {
     s32 x0_dynamics_num; // 0x8 number of dynamic bonesets for this fp
     ItemDynamicsDesc*
         x4_dynamicsDesc; // 0x4 boneset data array (one for each boneset)
-} ItemDynamics;
+};
 
-typedef struct ItemState_ParamStruct {
+struct ItemState_ParamStruct {
     void* x0_unk;
     void* x4_unk;
     void* x8_unk;
-} ItemState_ParamStruct;
+};
 
 struct ItemStateDesc {
     void* x0_anim_joint;
@@ -235,27 +289,27 @@ struct ItemStateDesc {
     void* xC_script;
 };
 
-typedef struct ItemStateArray {
+struct ItemStateArray {
     struct ItemStateDesc x0_itemStateDesc[8];
-} ItemStateArray;
+};
 
-typedef struct ItemModelDesc {
+struct ItemModelDesc {
     HSD_Joint* x0_joint;
     u32 x4_bone_count;
     s32 x8_bone_attach_id;
     s32 xC_bit_field;
-} ItemModelDesc;
+};
 
-typedef struct _Article {
+struct Article {
     ItemAttr* x0_common_attr;
     void* x4_specialAttributes;
     void* x8_hurtbox;
     ItemStateArray* xC_itemStates;
     ItemModelDesc* x10_modelDesc;
     ItemDynamics* x14_dynamics;
-} Article;
+};
 
-typedef struct itHurt {
+struct itHurt {
     s32 x0_bone_state; // 0x0 = normral; 0x1 = invincible; 0x2 = intangible;
     Vec3 x4_hurt1_offset;
     Vec3 x10_hurt2_offset;
@@ -269,17 +323,16 @@ typedef struct itHurt {
     Vec3 x28_hurt1_pos;
     Vec3 x34_hurt2_pos;
     s32 x40_bone_index;
+};
 
-} itHurt;
-
-typedef struct itHitVictim {
+struct itHitVictim {
     void* x0_victim;   // m-ex header says this is a user_data pointer but
                        // proceeds to call it a GObj in the comment below it
     s32 x4_timedRehit; // number of frames needed to pass before this entity can
                        // be hit again; 0 = can't rehit
-} itHitVictim;
+};
 
-typedef struct itHit {
+struct itHit {
     bool x0_toggle; // Toggles hitbox on/off.
     s32 x4_unk;
     s32 x8_damage;        // Projected damage
@@ -318,13 +371,9 @@ typedef struct itHit {
     itHitVictim xD4_damageLog[12];
     s32 x134;
     s32 x138;
-} itHit;
+};
 
-typedef enum ItSfx {
-    ItSfxNone = -1,
-} ItSfx;
-
-typedef struct Item {
+struct Item {
     void* x0;
     HSD_GObj* x4_GObj;
     s32 x8;
@@ -369,7 +418,7 @@ typedef struct Item {
     };
     ItemAttr* xCC_item_attr;
     struct ItemStateDesc* xD0_itemStateDesc;
-    ItemDynamicBones xD4_dynamicBones[24];
+    Item_DynamicBones xD4_dynamicBones[24];
     s32 x374_dynamicBonesNum;
     CollData x378_itemColl;
 
@@ -644,7 +693,7 @@ typedef struct Item {
         PKThunderVars PKThunderVars;
         u8 padding[0xFCC - 0xDD4];
     } xDD4_itemVar;
-} Item;
+};
 
 typedef struct ItemLink // user_data struct of GObj class 7
 {
@@ -691,35 +740,27 @@ typedef struct CommonItemArticles {
 } CommonItemArticles;
 
 typedef struct UnkItemArticles {
-    void* unkptr[
-#ifdef M2CTX
-        0
-#endif
-    ];
+    void* unkptr UNK_SIZE_ARRAY;
 } UnkItemArticles;
 
 typedef struct UnkItemArticles2 {
-    void* unkptr[
-#ifdef M2CTX
-        0
-#endif
-    ];
+    void* unkptr UNK_SIZE_ARRAY;
 } UnkItemArticles2;
 
-typedef struct UnkItemArticles3 {
+struct UnkItemArticles3 {
     void* unkptr[1];
-} UnkItemArticles3;
+};
 
-typedef struct BobOmbRain {
+struct BobOmbRain {
     s32 x0;
     HSD_JObj* x4;
     Vec3 x8_vec;
     s32 x14;
     s32 x18;
     UnkFlagStruct x1C;
-} BobOmbRain;
+};
 
-typedef struct SpawnItem {
+struct SpawnItem {
     HSD_GObj* x0_parent_gobj; // Primary owner of the item; usually a fp GObj
     HSD_GObj*
         x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness' PK Fire
@@ -753,14 +794,13 @@ typedef struct SpawnItem {
     UnkFlagStruct x46_flag;
     UnkFlagStruct x47_flag;
     GroundOrAir x48_ground_or_air; // 0x0 = stationary, 0x1 = air (?)
+};
 
-} SpawnItem;
-
-typedef struct ItemModStruct {
+struct ItemModStruct {
     s32 x0_unk;
-} ItemModStruct;
+};
 
-typedef struct ItemCommonData {
+struct ItemCommonData {
     u32 x0;
     u32 x4;
     u32 x8;
@@ -812,29 +852,30 @@ typedef struct ItemCommonData {
     f32 x154;
     f32 x158;
     f32 x15C;
-} ItemCommonData;
-typedef struct Item_r13_Data {
+};
+
+struct Item_r13_Data {
     ItemCommonData* item_common;
     void** common_items;
     void** adventure_items;
     void** pokeball_items;
     s32 x10;
     s32 x14;
-} Item_r13_Data;
+};
 
-typedef struct HSD_ObjAllocUnk2 {
+struct HSD_ObjAllocUnk2 {
     u8 x0_filler[0x148];
     u32 x148;
     u32 x14C;
     u32 x150;
     UnkFlagStruct x154;
-} HSD_ObjAllocUnk2;
+};
 
-typedef struct x1C_struct {
+struct x1C_struct {
     s32 x1C;
-} x1C_struct;
+};
 
-typedef struct HSD_ObjAllocUnk {
+struct HSD_ObjAllocUnk {
     s32 x0;
     s32 x4;
     s32 x8;
@@ -861,9 +902,9 @@ typedef struct HSD_ObjAllocUnk {
     s32 x5C;
     u32 x60;
     u32 x64;
-} HSD_ObjAllocUnk;
+};
 
-typedef struct HSD_ObjAllocUnk4 {
+struct HSD_ObjAllocUnk4 {
     u8 x0;
     u8 x1;
     u8 x2;
@@ -875,21 +916,21 @@ typedef struct HSD_ObjAllocUnk4 {
     u16 xC;
     u32 x10;
     u8 pad[0x20 - 0x10];
-} HSD_ObjAllocUnk4;
+};
 
-typedef struct HSD_ObjAllocUnk5 {
+struct HSD_ObjAllocUnk5 {
     u8 x0;
     u32 x4;
     u16 x8;
     u16 xA;
     u16 xC;
-} HSD_ObjAllocUnk5;
+};
 
-typedef struct HSD_ObjAllocUnk6 {
+struct HSD_ObjAllocUnk6 {
     u8 x0;
     u32 x4;
     u16 x8;
     u16 xA;
     u16 xC;
-} HSD_ObjAllocUnk6;
+};
 #endif
