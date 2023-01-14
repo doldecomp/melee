@@ -547,16 +547,16 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
     s32 sp14;
     enum FighterKind ftKind;
     s32 var_r30;
-    s32 sfx_id;
+    s32 sfx;
     int new_var;
     s32 ssm_id;
     s32 var_r4;
 
-    sfx_id = func_800233EC(arg1);
+    sfx = func_800233EC(arg1);
     ssm_id = func_80023130();
     switch (ssm_id) {
     case 0:
-        switch (sfx_id) {
+        switch (sfx) {
         case 0x197:
         case 0x1D3:
         case 0x1F7:
@@ -582,11 +582,11 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         case 0x185:
         case 0x17F:
         case 0x173:
-            sfx_id = func_80087C70(
+            sfx = func_80087C70(
                 fighter,
-                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx_id)
+                sfx); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
             if (fighter->x2223_flag.bits.b7) {
-                sfx_id += 3;
+                sfx += 3;
             }
             break;
         case 0x167:
@@ -602,24 +602,24 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         case 0x155:
         case 0x14F:
         case 0x14C:
-            sfx_id = func_80087C70(
+            sfx = func_80087C70(
                 fighter,
-                sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx_id)
+                sfx); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
             break;
         }
         break;
     case 13:
         ftKind = fighter->x4_fighterKind;
         if ((ftKind < 0xc) && (10 > ftKind)) {
-            if ((0x1fbfd < sfx_id) &&
-                ((sfx_id < 0x1fc62 && (func_80080144(fighter) == 1))))
+            if ((0x1fbfd < sfx) &&
+                ((sfx < 0x1fc62 && (func_80080144(fighter) == 1))))
             {
-                sfx_id += 0x66;
+                sfx += 0x66;
             }
-            if (((0x1fc63 < sfx_id) && (sfx_id < 0x1fcc8)) &&
+            if (((0x1fc63 < sfx) && (sfx < 0x1fcc8)) &&
                 (func_80080144(fighter) != 1))
             {
-                sfx_id -= 0x66;
+                sfx -= 0x66;
             }
         }
     case 6:
@@ -649,16 +649,16 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
     case 31:
     case 33:
         if ((func_800230C8(ssm_id, &sp18, &sp14) == 0) &&
-            (sfx_id >= ((s32) (sp18 + func_80023220(ssm_id)))))
+            (sfx >= ((s32) (sp18 + func_80023220(ssm_id)))))
         {
-            sfx_id = func_80087C70(fighter, sfx_id);
+            sfx = func_80087C70(fighter, sfx);
         }
         break;
     default:
         break;
     }
 
-    return sfx_id;
+    return sfx;
 }
 
 #endif

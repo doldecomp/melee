@@ -15,7 +15,11 @@ extern s8 lbl_804D6D00;
 extern s32 lbl_804D6D08;
 extern s32 lbl_804D6D0C;
 extern u32 lbl_804D6D10;
-extern u32 lbl_804D6D14;
+
+/// @todo Probably #size_t but that needs to be changed to
+///       <tt>unsigned int</tt> first.
+extern uint lbl_804D6D14;
+
 extern ItemCommonData* lbl_804D6D28;
 
 void func_8027B4A4(HSD_GObj*, u32);

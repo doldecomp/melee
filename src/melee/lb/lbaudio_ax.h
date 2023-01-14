@@ -2,6 +2,10 @@
 #define MELEE_LB_LBAUDIO_AX_H
 
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
+
+/// @todo Create an @c enum for SFX IDs.
+#define SFX_NONE -1
 
 void func_800236B8(s32);
 u32 func_800237A8(u32, u32, u32);
@@ -23,5 +27,7 @@ bool func_80023710(s32);
 bool func_80023710(s32);
 void func_80023870(unk_t, s32, s32, s32);
 s32 func_8002305C(s32, s32);
+void func_80026510(HSD_GObj*);
+enum_t func_800265C4(HSD_GObj*, enum_t sfx);
 
 #endif
