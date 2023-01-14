@@ -109,6 +109,30 @@ void func_80266FCC(void)
 }
 
 /// @private
+void ItUnkHoldKind(HSD_GObj* item_gobj)
+{
+    Item* it = (Item*) HSD_GObjGetUserData(item_gobj);
+
+    switch (it->hold_kind) {
+    case 4:
+    case 5:
+    case 6:
+    case 7: {
+        int temp_r3 = func_8017E068();
+        if (temp_r3 >= 0)
+            it->xC3C = lbl_804D6D28->x80_float[temp_r3];
+    }
+    }
+}
+
+/// @private
+void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl)
+{
+    scl->x = scl->y = scl->z = it->x38_scale;
+    HSD_JObjSetScale(jobj, scl);
+}
+
+/// @private
 void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);

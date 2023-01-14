@@ -130,6 +130,9 @@ bool func_8026784C(enum_t dropItem, int unused);
 /// Store Item Pointers
 void func_80267978(HSD_GObj* item_gobj);
 
+void ItUnkHoldKind(HSD_GObj* item_gobj);
+void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl);
+
 /// Initialize item variables
 void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem);
 
