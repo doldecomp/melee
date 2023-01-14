@@ -4,6 +4,9 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
+/// @todo Create an @c enum for SFX IDs.
+#define SFX_NONE -1
+
 void func_800236B8(s32);
 u32 func_800237A8(u32, u32, u32);
 void func_80023F28(s32);

@@ -596,8 +596,8 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->xDD1_flag.bits.b1 = false;
     item_data->xDCD_flag.bits.b2 = false;
     item_data->xD6C = -1;
-    item_data->sfx_unk2 = -1;
-    item_data->sfx_unk1 = -1;
+    item_data->sfx_unk2 = SFX_NONE;
+    item_data->sfx_unk1 = SFX_NONE;
     item_data->xD70 = item_data->xCC_item_attr->x6C;
     item_data->xD74 = item_data->xCC_item_attr->x70;
     item_data->xD78 = item_data->xCC_item_attr->x74;
@@ -2076,7 +2076,7 @@ void func_8026AF0C(Item* item_data, enum_t sfx, u8 pan, u8 volume)
 {
     if (sfx != 540000) {
         if (sfx != 540001) {
-            if (item_data->sfx_unk1 != -1) {
+            if (item_data->sfx_unk1 != SFX_NONE) {
                 func_800236B8(item_data->sfx_unk1);
             }
             item_data->sfx_unk1 =
@@ -2091,7 +2091,7 @@ void func_8026AFA0(Item* item_data, enum_t sfx, u8 pan, u8 volume)
 {
     if (sfx != 540000) {
         if (sfx != 540001) {
-            if (item_data->sfx_unk2 != -1) {
+            if (item_data->sfx_unk2 != SFX_NONE) {
                 func_800236B8(item_data->sfx_unk2);
             }
             item_data->sfx_unk2 =
@@ -2104,22 +2104,19 @@ void func_8026AFA0(Item* item_data, enum_t sfx, u8 pan, u8 volume)
 
 void func_8026B034(Item* item_data)
 {
-    if (item_data->sfx_unk1 != -1)
+    if (item_data->sfx_unk1 != SFX_NONE)
         func_800236B8(item_data->sfx_unk1);
 
-    item_data->sfx_unk1 = -1;
+    item_data->sfx_unk1 = SFX_NONE;
 }
 
 void func_8026B074(Item* item_data)
 {
-    if (item_data->sfx_unk2 != -1)
+    if (item_data->sfx_unk2 != SFX_NONE)
         func_800236B8(item_data->sfx_unk2);
 
-    item_data->sfx_unk2 = -1;
+    item_data->sfx_unk2 = SFX_NONE;
 }
-
-/// @todo Create an @c enum for SFX IDs.
-#define SFX_NONE -1
 
 /// @private
 void func_8026B0B4(HSD_GObj* item_gobj)
