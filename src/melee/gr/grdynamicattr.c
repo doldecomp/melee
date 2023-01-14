@@ -1,4 +1,4 @@
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <math.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>

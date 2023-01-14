@@ -5,7 +5,8 @@ function replace_symbol {
     local find=${find//[.]/\\.}
     local replace=${2//\//\\\/}
     echo "$find -> $replace"
-    find asm src include -type f -regex 'Makefile\|.*\.\(c\|h\|s\|mk\)$' -exec sed -i "s/\b$find\b/$replace/g" {} +
+    find asm src -type f -regex 'Makefile\|.*\.\(c\|h\|s\|mk|dox|md\)$' \
+      -exec sed -i "s/\b$find\b/$replace/g" {} +
 }
 
 function reverse_symbol {

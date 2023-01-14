@@ -2,7 +2,7 @@
 #define MELEE_IT_TYPES_H
 
 #include <common_structs.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <math.h>
 #include <melee/ft/types.h>
 #include <melee/gr/stage.h>
@@ -14,49 +14,15 @@
 #include <melee/it/itYoyo.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
-
-// Item State Change Flags
-
-#define ITEM_UNK_0x1 (1 << 0)
-
-/// Updates item model with target Item State's AnimJoint, MatAnimJoint and
-/// extra HSD archive node if available
-#define ITEM_ANIM_UPDATE (1 << 1)
-
-/// Copies #Item::xC44 to #Item::xC40 if enabled
-#define ITEM_DROP_UPDATE (1 << 2)
-
-/// Runs some #HSD_JObj function
-#define ITEM_MODEL_UPDATE (1 << 3)
-
-/// Keep current hitboxes
-#define ITEM_HIT_PRESERVE (1 << 4)
-
-/// Keep current SFX
-#define ITEM_SFX_PRESERVE (1 << 5)
-
-/// Keep current color overlay
-#define ITEM_COLANIM_PRESERVE (1 << 6)
-
-#define ITEM_UNK_UPDATE (1 << 7)
-
-/// Run item's Subaction Events up to its current animation frame
-#define ITEM_CMD_UPDATE (1 << 8)
-
-// Item Unk Kinds
-
-// These are used in 0x8026C258 to determine whether Samus' Homing Missile
-// should lock on its target.
-#define ITEM_UNK_MATO 4 // Item type: Target (Mato)
-#define ITEM_UNK_LOCKON 5
-#define ITEM_UNK_ENEMY 6 // Item type: Stage Enemy (Goomba, Koopa Troopa, etc.)
 
 /// @todo Size unknown.
 struct ItemStateTable {
@@ -76,54 +42,54 @@ struct ItemStateTable {
 /// @todo Size unknown.
 struct ItemStateContainer {
     /// @at{0}
-    struct ItemStateTable stateTable UNK_SIZE_ARRAY;
+    ItemStateTable stateTable UNK_SIZE_ARRAY;
 };
 
 struct ItemLogicTable {
     /// @at{0} @sz{4}
-    struct ItemStateContainer* states;
+    ItemStateContainer* states;
 
     /// @at{4} @sz{4}
-    void (*spawned)(HSD_GObj* item);
+    HSD_GObjEvent spawned;
 
     /// @at{8} @sz{4}
-    void (*destroyed)(HSD_GObj* item);
+    HSD_GObjEvent destroyed;
 
     /// @at{C} @sz{4}
-    void (*picked_up)(HSD_GObj* item);
+    HSD_GObjEvent picked_up;
 
     /// @at{10} @sz{4}
-    void (*dropped)(HSD_GObj* item);
+    HSD_GObjEvent dropped;
 
     /// @at{14} @sz{4}
-    void (*thrown)(HSD_GObj* item);
+    HSD_GObjEvent thrown;
 
     /// @at{18} @sz{4}
-    bool (*dmg_dealt)(HSD_GObj* item);
+    HSD_GObjPredicate dmg_dealt;
 
     /// @at{1C} @sz{4}
-    bool (*dmg_received)(HSD_GObj* item);
+    HSD_GObjPredicate dmg_received;
 
     /// @at{20} @sz{4}
-    void (*entered_air)(HSD_GObj* item);
+    HSD_GObjEvent entered_air;
 
     /// @at{24} @sz{4}
-    bool (*reflected)(HSD_GObj* item);
+    HSD_GObjPredicate reflected;
 
     /// @at{28} @sz{4}
-    bool (*clanked)(HSD_GObj* item);
+    HSD_GObjPredicate clanked;
 
     /// @at{2C} @sz{4}
-    bool (*absorbed)(HSD_GObj* item);
+    HSD_GObjPredicate absorbed;
 
     /// @at{30} @sz{4}
-    bool (*shield_bounced)(HSD_GObj* item);
+    HSD_GObjPredicate shield_bounced;
 
     /// @at{34} @sz{4}
-    bool (*hit_shield)(HSD_GObj* item);
+    HSD_GObjPredicate hit_shield;
 
     /// @at{38} @sz{4}
-    void (*evt_unk)(HSD_GObj* item, HSD_GObj* fighter);
+    HSD_GObjInteraction evt_unk;
 };
 
 struct CameraBoxFlags {
@@ -175,36 +141,23 @@ struct flag32 {
 };
 
 struct DynamicBoneTable {
-    HSD_JObj* x0_jobj[100];
+    /// @at{0} @sz{190}
+    HSD_JObj* bones[100];
 };
 
-/// @sz{1C}
 struct Item_DynamicBones {
-    /// @todo If this is 256, dynamics are not processed
-    /// @at{0} @sz{4}
     int flags;
-
-    /// @at{4} @sz{4}
     HSD_JObj* skeleton;
-
-    /// @at{8} @sz{4}
-    /// @todo Stored at @c 8000FDD4, comes from a nonstandard heap at
-    ///       @c -0x52fc(r13)
     unk_t unk_ptr;
-
-    /// @at{C} @sz{4}
-    /// @brief The number of bones in this bone set.
     int count;
-
-    /// @at{10} @sz{C}
     Vec3 unk_vec;
 };
 
 struct ECB {
-    f32 x0_ecbTop;
-    f32 x4_ecbBottom;
-    f32 x8_ecbRight;
-    f32 xC_ecbLeft;
+    f32 top;
+    f32 bottom;
+    f32 right;
+    f32 left;
 };
 
 struct ItemAttr {
@@ -262,18 +215,25 @@ struct ItemAttr {
 };
 
 struct ItemDynamicsDesc {
-    s32 x0_boneID;   // bone index;
-    void* x4_params; // dynamics params;
-    s32 x8_num;      // number of children bones to make dynamic
+    int x0_boneID;   // bone index;
+    unk_t x4_params; // dynamics params;
+
+    /// @at{8} @sz{4}
+    /// @brief Number of children bones to make dynamic.
+    int child_count;
+
     f32 xC;
     f32 x10;
     f32 x14;
 };
 
+/// @sz{8}
 struct ItemDynamics {
-    s32 x0_dynamics_num; // 0x8 number of dynamic bonesets for this fp
-    ItemDynamicsDesc*
-        x4_dynamicsDesc; // 0x4 boneset data array (one for each boneset)
+    /// @at{0} @sz{4}
+    int count;
+
+    /// @at{4} @sz{4}
+    ItemDynamicsDesc* dyn_descs;
 };
 
 struct ItemState_ParamStruct {
@@ -282,39 +242,65 @@ struct ItemState_ParamStruct {
     void* x8_unk;
 };
 
+/// @sz{10}
 struct ItemStateDesc {
-    void* x0_anim_joint;
-    void* x4_matanim_joint;
-    void* x8_parameters;
-    void* xC_script;
+    /// @at{0} @sz{4}
+    HSD_AnimJoint* x0_anim_joint;
+
+    /// @at{0} @sz{4}
+    HSD_MatAnimJoint* x4_matanim_joint;
+
+    /// @at{0} @sz{4}
+    unk_t x8_parameters;
+
+    /// @at{0} @sz{4}
+    unk_t xC_script;
 };
 
 struct ItemStateArray {
     struct ItemStateDesc x0_itemStateDesc[8];
 };
 
+/// @sz{10}
 struct ItemModelDesc {
+    /// @at{0} @sz{4}
     HSD_Joint* x0_joint;
+
+    /// @at{4} @sz{4}
     u32 x4_bone_count;
+
+    /// @at{8} @sz{4}
     s32 x8_bone_attach_id;
-    s32 xC_bit_field;
+
+    /// @at{C} @sz{4}
+    int xC_bit_field;
 };
 
 struct Article {
     ItemAttr* x0_common_attr;
-    void* x4_specialAttributes;
-    void* x8_hurtbox;
+    unk_t x4_specialAttributes;
+    unk_t x8_hurtbox;
     ItemStateArray* xC_itemStates;
     ItemModelDesc* x10_modelDesc;
     ItemDynamics* x14_dynamics;
 };
 
 struct itHurt {
-    s32 x0_bone_state; // 0x0 = normral; 0x1 = invincible; 0x2 = intangible;
+    /// @at{0} @sz{4}
+    Tangibility tangiblity;
+
+    /// @at{4} @sz{C}
     Vec3 x4_hurt1_offset;
+
+    /// @at{10} @sz{C}
     Vec3 x10_hurt2_offset;
+
+    /// @at{1C} @sz{4}
     f32 x1C_scale;
+
+    /// @at{20} @sz{4}
     HSD_JObj* x20_jobj;
+
     UnkFlagStruct x24_flags; // 0x80 = hurtbox position update toggle; doesn't
                              // update position if toggled ON
     UnkFlagStruct x25_flags;
@@ -326,10 +312,12 @@ struct itHurt {
 };
 
 struct itHitVictim {
-    void* x0_victim;   // m-ex header says this is a user_data pointer but
-                       // proceeds to call it a GObj in the comment below it
-    s32 x4_timedRehit; // number of frames needed to pass before this entity can
-                       // be hit again; 0 = can't rehit
+    HSD_GObj* x0_victim;
+
+    /// @at{4} @sz{4}
+    /// @brief The number of frames needed to pass before this entity can be hit
+    ///        again; 0 = can't rehit
+    s32 iframes;
 };
 
 struct itHit {
@@ -375,19 +363,36 @@ struct itHit {
 
 struct Item {
     void* x0;
-    HSD_GObj* x4_GObj;
+
+    /// @at{4} @sz{4}
+    HSD_GObj* entity;
+
     s32 x8;
-    s32 xC_spawn_kind;
-    s32 x10_item_kind;
+
+    /// @at{C} @sz{4}
+    enum_t spawn_kind;
+
+    /// @at{10} @sz{4}
+    enum_t kind;
+
+    /// @at{14} @sz{4}
     enum_t hold_kind;
+
     s32 x18;
     s32 x1C;
+
+    /// @at{20} @sz1
     u8 x20_team_id;
+
     u8 x21;
     u8 x22;
     u8 x23;
-    s32 x24_item_state_index;
-    s32 x28_item_anim_index;
+
+    /// @at{24} @sz{4}
+    enum_t asid;
+
+    /// @at{28} @sz{4}
+    enum_t anim_id;
 
     /// @at{2C} @sz{4}
     f32 facing_dir;
@@ -395,27 +400,39 @@ struct Item {
     /// @at{30} @sz{4}
     f32 init_facing_dir;
 
-    f32 x34_spin_speed;
-    f32 x38_scale;
+    /// @at{34} @sz{4}
+    f32 spin_spd;
+
+    /// @at{38} @sz{4}
+    f32 scl;
+
+    /// @at{3C} @sz{4}
     f32 x3C;
+
+    /// @at{40} @sz{C}
     Vec3 x40_vel;
 
     /// @at{4C} @sz{C}
     Vec3 pos;
 
+    /// @at{58} @sz{C}
     Vec3 x58_vec_unk;
+
+    /// @at{64} @sz{C}
     Vec3 x64_vec_unk2;
+
+    /// @at{70} @sz{C}
     Vec3 x70_nudge;
+
     u8 padding_x7C[0xB8 - 0x7C];
-    struct ItemLogicTable* xB8_itemLogicTable; // Global item callbacks
-    struct ItemStateContainer* xBC_itemStateContainer;
+
+    ItemLogicTable* xB8_itemLogicTable; // Global item callbacks
+
+    ItemStateContainer* xBC_itemStateContainer;
+
     s32 xC0_unk_state; // Air state?
     Article* xC4_article_data;
-    union // Might be exclusively HSD_Joint*
-    {
-        HSD_JObj* xC8_jobj;
-        HSD_Joint* xC8_joint;
-    };
+    HSD_Joint* xC8_joint;
     ItemAttr* xCC_item_attr;
     struct ItemStateDesc* xD0_itemStateDesc;
     Item_DynamicBones xD4_dynamicBones[24];
@@ -716,7 +733,7 @@ typedef struct ItemLink // user_data struct of GObj class 7
 
 } ItemLink;
 
-extern struct sdata_ItemGXLink {
+struct sdata_ItemGXLink {
     void (*x0_renderFunc)(HSD_GObj*, s32);
 };
 

@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_PSAPPSRT_H
 #define SYSDOLPHIN_BASELIB_PSAPPSRT_H
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
 
 typedef struct _UnkGeneratorMember { // MexTK: GeneratorAppSRT

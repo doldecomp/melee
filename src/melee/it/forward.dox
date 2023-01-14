@@ -1,0 +1,42 @@
+/** @var Item_StateChangeFlags::ITEM_ANIM_UPDATE
+ * Updates item model with target Item State's AnimJoint, MatAnimJoint and
+ * extra HSD archive node if available
+ */
+
+/** @var Item_StateChangeFlags::ITEM_DROP_UPDATE
+ * Copies #Item::xC44 to #Item::xC40 if enabled.
+ */
+
+/** @var Item_StateChangeFlags::ITEM_MODEL_UPDATE
+ * Runs some #HSD_JObj function
+ */
+
+/** @var Item_StateChangeFlags::ITEM_HIT_PRESERVE
+ * Keep current hitboxes
+ */
+
+/** @var Item_StateChangeFlags::ITEM_SFX_PRESERVE
+ * Keep current SFX
+ */
+
+/** @var Item_StateChangeFlags::ITEM_COLANIM_PRESERVE
+ * Keep current color overlay
+ */
+
+/** @var Item_StateChangeFlags::ITEM_CMD_UPDATE
+ * Run item's Subaction Events up to its current animation frame
+ */
+
+/** @enum Item_UnkKinds
+ * @todo Doxygen can't seem to find enums by name...
+ * These are used in #func_8026C258 to determine whether Samus' Homing Missile
+ * should lock on its target.
+ */
+
+/** @var Item_UnkKinds::ITEM_UNK_MATO
+ * Item type: Target (Mato)
+ */
+
+/** @var Item_UnkKinds::ITEM_UNK_ENEMY
+ * Item type: Stage Enemy (Goomba, Koopa Troopa, etc.)
+ */

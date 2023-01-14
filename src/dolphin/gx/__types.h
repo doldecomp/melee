@@ -3,7 +3,7 @@
 
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/OSContext.h>
 
 #define GX_WRITE_U8(ub) WGPIPE.u8 = ((u8*) &ub);

@@ -1,7 +1,7 @@
 #ifndef MELEE_CM_CAMERA_H
 #define MELEE_CM_CAMERA_H
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 
 struct _CameraBox* func_80029020(void);
 void func_800290D4(struct _CameraBox*);

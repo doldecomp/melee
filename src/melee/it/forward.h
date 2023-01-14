@@ -32,4 +32,28 @@ typedef struct itHurt itHurt;
 typedef struct SpawnItem SpawnItem;
 typedef struct UnkItemArticles3 UnkItemArticles3;
 
+typedef enum Tangibility {
+    Vulnerable,
+    Invincible,
+    Intangible
+} Tangibility;
+
+typedef enum Item_StateChangeFlags {
+    ITEM_UNK_0x1 = (1 << 0),
+    ITEM_ANIM_UPDATE = (1 << 1),
+    ITEM_DROP_UPDATE = (1 << 2),
+    ITEM_MODEL_UPDATE = (1 << 3),
+    ITEM_HIT_PRESERVE = (1 << 4),
+    ITEM_SFX_PRESERVE = (1 << 5),
+    ITEM_COLANIM_PRESERVE = (1 << 6),
+    ITEM_UNK_UPDATE = (1 << 7),
+    ITEM_CMD_UPDATE = (1 << 8),
+} Item_StateChangeFlags;
+
+typedef enum Item_UnkKinds {
+    ITEM_UNK_MATO = 4,
+    ITEM_UNK_LOCKON = 5,
+    ITEM_UNK_ENEMY = 6,
+} Item_UnkKinds;
+
 #endif

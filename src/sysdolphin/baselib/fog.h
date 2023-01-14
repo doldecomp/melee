@@ -2,7 +2,7 @@
 #define SYSDOLPHIN_BASELIB_FOG_H
 
 #include <dolphin/gx/types.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/object.h>
 

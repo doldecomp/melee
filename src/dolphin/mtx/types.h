@@ -1,5 +1,5 @@
-#ifndef _MTXTYPES_h_
-#define _MTXTYPES_h_
+#ifndef DOLPHIN_MTX_TYPES_H
+#define DOLPHIN_MTX_TYPES_H
 
 #include <Runtime/platform.h>
 

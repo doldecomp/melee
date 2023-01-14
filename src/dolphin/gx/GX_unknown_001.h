@@ -3,7 +3,7 @@
 #define DOLPHIN_GX_GX_UNKNOWN_001_H
 
 #include <dolphin/gx/types.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 
 extern const GXRenderModeObj lbl_804011E0;
 extern const GXRenderModeObj lbl_804011A4;
