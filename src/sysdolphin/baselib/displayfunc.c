@@ -1,7 +1,9 @@
 #include <sysdolphin/baselib/displayfunc.h>
 
+#include <dolphin/gx/GXTransform.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
+
 typedef struct _HSD_ZList {
     Mtx pmtx;
     MtxPtr vmtx;
