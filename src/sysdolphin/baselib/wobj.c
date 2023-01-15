@@ -1,6 +1,6 @@
-#include "sysdolphin/baselib/class.h"
 #include <sysdolphin/baselib/wobj.h>
 
+#include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/robj.h>
 #include <sysdolphin/baselib/spline.h>

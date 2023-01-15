@@ -1,8 +1,8 @@
-#include "sysdolphin/baselib/class.h"
 #include <sysdolphin/baselib/dobj.h>
 
 #include <dolphin/os/os.h>
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/pobj.h>
 
 static void DObjInfoInit(void);
