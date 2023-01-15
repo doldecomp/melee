@@ -3,7 +3,7 @@
 #include <melee/it/item.h>
 
 #include <common_structs.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db_unknown_001.h>
@@ -128,7 +128,7 @@ void ItUnkHoldKind(HSD_GObj* item_gobj)
 /// @private
 void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl)
 {
-    scl->x = scl->y = scl->z = it->x38_scale;
+    scl->x = scl->y = scl->z = it->scl;
     HSD_JObjSetScale(jobj, scl);
 }
 
@@ -349,7 +349,7 @@ void func_802676F4(HSD_GObj* item_gobj)
     case 0:
         lbl_804A0C64.x0++;
 
-        if (item_data->x10_item_kind == 34)
+        if (item_data->kind == 34)
             lbl_804A0C64.x1C++;
 
         break;
@@ -477,24 +477,24 @@ extern struct ItemLogicTable lbl_803F4D20[];
 void func_80267978(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
-    if (item_data->x10_item_kind < It_Kind_Kuriboh) {
+    if (item_data->kind < It_Kind_Kuriboh) {
         // Common items
         item_data->xC4_article_data =
-            lbl_804D6D24->article_ptr[item_data->x10_item_kind];
-        item_data->xB8_itemLogicTable = &lbl_803F14C4[item_data->x10_item_kind];
-    } else if (item_data->x10_item_kind < Pokemon_Tosakinto) {
+            lbl_804D6D24->article_ptr[item_data->kind];
+        item_data->xB8_itemLogicTable = &lbl_803F14C4[item_data->kind];
+    } else if (item_data->kind < Pokemon_Tosakinto) {
         // Character items
-        int idx = item_data->x10_item_kind - It_Kind_Kuriboh;
+        int idx = item_data->kind - It_Kind_Kuriboh;
         item_data->xC4_article_data = lbl_804D6D38->unkptr[idx];
         item_data->xB8_itemLogicTable = &lbl_803F3100[idx];
-    } else if (item_data->x10_item_kind < It_Kind_Old_Kuri) {
+    } else if (item_data->kind < It_Kind_Old_Kuri) {
         // Pokemon
-        int idx = item_data->x10_item_kind - Pokemon_Tosakinto;
+        int idx = item_data->kind - Pokemon_Tosakinto;
         item_data->xC4_article_data = lbl_804D6D30->unkptr[idx];
         item_data->xB8_itemLogicTable = &lbl_803F23CC[idx];
     } else {
         // Stage items
-        int idx = item_data->x10_item_kind - It_Kind_Old_Kuri;
+        int idx = item_data->kind - It_Kind_Old_Kuri;
         item_data->xC4_article_data = lbl_804A0F60->unkptr[idx];
         item_data->xB8_itemLogicTable = &lbl_803F4D20[idx];
         if (item_data->xC4_article_data == NULL) {
@@ -512,13 +512,13 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
 {
     ItemAttr* item_attr;
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    item_data->x10_item_kind = spawnItem->kind;
+    item_data->kind = spawnItem->kind;
     item_data->hold_kind = spawnItem->hold_kind;
     item_data->x18 = spawnItem->x10;
     item_data->x1C = lbl_804D6D10++;
-    item_data->x4_GObj = item_gobj;
+    item_data->entity = item_gobj;
     func_80267978(item_gobj);
-    item_data->x24_item_state_index = -1;
+    item_data->asid = -1;
     item_data->xC8_joint = item_data->xC4_article_data->x10_modelDesc->x0_joint;
     item_data->xCC_item_attr = item_data->xC4_article_data->x0_common_attr;
     item_data->owner = NULL;
@@ -555,7 +555,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->xCD0 = 0.0f;
     func_80275158(item_gobj, lbl_804D6D28->x30);
     item_data->xDD0_flag.bits.b3 = false;
-    item_data->x34_spin_speed = item_data->xCC_item_attr->xC_spin_speed;
+    item_data->spin_spd = item_data->xCC_item_attr->xC_spin_speed;
     item_data->xDC8_word.flags.x19 = item_data->xCC_item_attr->x1_3;
     item_data->xDC8_word.flags.x17 = item_data->xCC_item_attr->x1_1;
     item_attr = item_data->xCC_item_attr;
@@ -617,7 +617,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->xDCF_flag.bits.b2 = false;
     item_data->xDD1_flag.bits.b0 = false;
     item_data->xDCE_flag.bits.b7 = 1;
-    item_data->x38_scale = item_data->xCC_item_attr->x60_scale;
+    item_data->scl = item_data->xCC_item_attr->x60_scale;
     item_data->x3C = 0.0f;
     item_data->xDCD_flag.bits.b3 = false;
     item_data->xDCD_flag.bits.b4 = false;
@@ -776,7 +776,7 @@ bool func_802682F0(HSD_GObj* item_gobj)
         var_r5 = item_gobj->hsd_obj;
         var_r4 = 0;
         while (var_r5 != NULL) {
-            (item_data->xBBC_dynamicBoneTable->x0_jobj[var_r4]) = var_r5;
+            (item_data->xBBC_dynamicBoneTable->bones[var_r4]) = var_r5;
             var_r4++;
             var_r0 = (var_r5 == NULL) ? NULL : var_r5->child;
             if (var_r0 != NULL) {
@@ -817,7 +817,7 @@ void func_8026849C(HSD_GObj* item_gobj)
 {
     HSD_JObj* temp_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    f32 tmp = item_data->x38_scale;
+    f32 tmp = item_data->scl;
     Vec3 sp14;
     sp14.x = sp14.y = sp14.z = tmp;
     HSD_JObjSetScale(temp_jobj, &sp14);
@@ -836,23 +836,21 @@ void func_80268560(HSD_GObj* item_gobj)
         item_data->xB68 = 0;
         return;
     }
-    item_data->x374_dynamicBonesNum =
-        article_data->x14_dynamics->x0_dynamics_num;
-    for (i = 0; i < article_data->x14_dynamics->x0_dynamics_num; i++) {
+    item_data->x374_dynamicBonesNum = article_data->x14_dynamics->count;
+    for (i = 0; i < article_data->x14_dynamics->count; i++) {
         ItemDynamicsDesc* desc;
         HSD_JObj* jobj;
-        desc = &article_data->x14_dynamics->x4_dynamicsDesc[i];
-        jobj = item_data->xBBC_dynamicBoneTable->x0_jobj[desc->x0_boneID];
+        desc = &article_data->x14_dynamics->dyn_descs[i];
+        jobj = item_data->xBBC_dynamicBoneTable->bones[desc->x0_boneID];
         func_8000FD48(jobj, &item_data->xD4_dynamicBones[i].unk_ptr,
-                      desc->x8_num);
+                      desc->child_count);
         item_data->xD4_dynamicBones[i].skeleton = jobj;
         item_data->xD4_dynamicBones[i].flags = 0;
-        func_80011710(&article_data->x14_dynamics->x4_dynamicsDesc[i].x4_params,
+        func_80011710(&article_data->x14_dynamics->dyn_descs[i].x4_params,
                       &item_data->xD4_dynamicBones[i].unk_ptr);
     }
 }
 
-extern HSD_JObj* HSD_JObjAlloc();
 extern CameraBox* func_80029044(s32);
 extern void func_8008702C(s32);
 extern struct sdata_ItemGXLink lbl_803F1418[];
@@ -885,8 +883,8 @@ void foobar2(HSD_GObj* gobj)
 {
     Item* it = (Item*) HSD_GObjGetUserData(gobj);
     // Check if item is a character item with an owner
-    if (it->x10_item_kind >= It_Kind_Mario_Fire &&
-        it->x10_item_kind < It_Kind_Unk4 && func_80086960(it->owner))
+    if (it->kind >= It_Kind_Mario_Fire && it->kind < It_Kind_Unk4 &&
+        func_80086960(it->owner))
     {
         it->xDC8_word.flags.xE = 1;
         it->x378_itemColl.x19C = func_800872A4(it->owner);
@@ -1148,7 +1146,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags)
 
     item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
     item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    item_data->x24_item_state_index = itemStateID;
+    item_data->asid = itemStateID;
     item_data->xDC8_word.flags.x14 = 0;
     HSD_JObjSetTranslate(item_gobj->hsd_obj, &item_data->pos);
     func_80067624(item_gobj, &item_data->xBC0);
@@ -1182,9 +1180,9 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags)
     item_data->xCC8_knockback = 0.0f;
     temp_r30 =
         (new_var = &item_data->xBC_itemStateContainer->stateTable[itemStateID]);
-    item_data->x28_item_anim_index = temp_r30->asid;
+    item_data->anim_id = temp_r30->asid;
     item_data->x5CC_currentAnimFrame = 0.0f;
-    temp_r0 = item_data->x28_item_anim_index;
+    temp_r0 = item_data->anim_id;
     if (temp_r0 != -1) {
         item_data->xD0_itemStateDesc =
             (temp_r23 =
@@ -1197,7 +1195,7 @@ void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags)
             if (itemStateFlags & 0x80) {
                 item_jobj1_2 = item_gobj->hsd_obj;
                 item_data3 = GetItemData(item_gobj);
-                item_data3->x38_scale = item_data3->xCC_item_attr->x60_scale;
+                item_data3->scl = item_data3->xCC_item_attr->x60_scale;
                 HSD_JObjSetScaleItem(item_data3, item_jobj1_2, &sp4C);
                 item_attr = item_data3->xCC_item_attr;
                 item_data3->xBCC_unk = item_attr->x30_unk;
@@ -1300,8 +1298,7 @@ void lbl_80269528(HSD_GObj* item_gobj)
         }
     }
     if (item_data->xDC8_word.flags.x15 != 0 &&
-        item_data->x10_item_kind < It_Kind_L_Gun_Ray &&
-        !item_data->xDD0_flag.bits.b3)
+        item_data->kind < It_Kind_L_Gun_Ray && !item_data->xDD0_flag.bits.b3)
     {
         item_data->xD44_lifeTimer -= 1.0f;
         if (item_data->xD44_lifeTimer <= 0.0f) {
@@ -1589,7 +1586,7 @@ bool func_80269F14(HSD_GObj* item_gobj)
     Item* temp_item = (Item*) HSD_GObjGetUserData(item_gobj);
 
     if (temp_item->xDCC_flag.b1 == 0) {
-        if (temp_item->x10_item_kind == 34) {
+        if (temp_item->kind == 34) {
             if (temp_item->xDCC_flag.b2 == 0) {
                 temp_item->owner = temp_item->xC64_reflectGObj;
                 temp_item->x20_team_id = func_80086EB4(temp_item->owner);
@@ -1864,9 +1861,9 @@ void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj)
 {
     Item* temp_item = (Item*) HSD_GObjGetUserData(item_gobj);
 
-    if (temp_item->hold_kind == 8 && temp_item->x10_item_kind != 58 &&
-        temp_item->x10_item_kind != 59 && temp_item->x10_item_kind != 99 &&
-        temp_item->x10_item_kind != 103)
+    if (temp_item->hold_kind == 8 && temp_item->kind != 58 &&
+        temp_item->kind != 59 && temp_item->kind != 99 &&
+        temp_item->kind != 103)
     {
         if (func_800867CC(fighter_gobj) == item_gobj)
             func_80086764(fighter_gobj);
@@ -1881,9 +1878,8 @@ void DestroyItemInline(HSD_GObj* this, Item* other_ip)
     Item* ip = this->user_data;
     HSD_GObj* other = other_ip->owner;
 
-    if (ip->hold_kind == 8 && ip->x10_item_kind != 58 &&
-        ip->x10_item_kind != 59 && ip->x10_item_kind != 99 &&
-        ip->x10_item_kind != 103)
+    if (ip->hold_kind == 8 && ip->kind != 58 && ip->kind != 59 &&
+        ip->kind != 99 && ip->kind != 103)
     {
         if (func_800867CC(other) == this)
             func_80086764(other);

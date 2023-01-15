@@ -1,7 +1,7 @@
 #ifndef _code_8000B074_h_
 #define _code_8000B074_h_
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 
 bool func_8000B074(struct _HSD_JObj*);
 bool func_8000B09C(struct _HSD_JObj*);

@@ -2,7 +2,7 @@
 #define _lbvector_h_
 
 #include <dolphin/gx/GXTransform.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <melee/lb/lbrefract.h>
 
 #include <sysdolphin/baselib/cobj.h>

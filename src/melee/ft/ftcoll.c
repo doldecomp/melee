@@ -1,4 +1,4 @@
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
 
 #include <common_structs.h>

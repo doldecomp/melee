@@ -84,7 +84,7 @@ bool func_8026B2D8(HSD_GObj* item_gobj) // Check if item is heavy again?
 s32 itGetKind(HSD_GObj* item_gobj) // Get Item ID
 {
     Item* temp_item = item_gobj->user_data;
-    return temp_item->x10_item_kind;
+    return temp_item->kind;
 }
 
 // 0x8026B30C
@@ -176,7 +176,7 @@ u32 func_8026B3C0(s32 kind) // Count identical item GObj entities?
     unkItemGObj = lbl_804D782C->x24_items;
     while (unkItemGObj != NULL) {
         temp_item = unkItemGObj->user_data;
-        if ((s32) temp_item->x10_item_kind == kind) {
+        if ((s32) temp_item->kind == kind) {
             i += 1;
         }
         unkItemGObj = unkItemGObj->next;
@@ -222,7 +222,7 @@ s32 func_8026B47C(HSD_GObj* item_gobj) // Get heal value of healing items
     Item* temp_item;
 
     temp_item = item_gobj->user_data;
-    kind = temp_item->x10_item_kind;
+    kind = temp_item->kind;
     switch (kind) {
     case It_Kind_Heart:
         return temp_item->xDD4_itemVar.HeartContainer.xDD4_heal;
@@ -247,7 +247,7 @@ bool func_8026B4F0(HSD_GObj* item_gobj) // Check if item is a healing item
     Item* temp_item;
 
     temp_item = item_gobj->user_data;
-    kind = temp_item->x10_item_kind;
+    kind = temp_item->kind;
     switch (kind) {
     case It_Kind_Heart:           // Heart Container
     case It_Kind_Tomato:          // Maxim Tomato
@@ -310,7 +310,7 @@ bool func_8026B594(HSD_GObj* item_gobj) // Check if item can fire projectiles
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    kind = item_data->x10_item_kind;
+    kind = item_data->kind;
     switch (kind) {
     case It_Kind_L_Gun:
     case It_Kind_S_Scope:
@@ -418,13 +418,13 @@ bool func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item?
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    kind = item_data->x10_item_kind;
+    kind = item_data->kind;
     if (((kind >= It_Kind_Kuriboh) && (kind < It_Kind_Octarock_Stone)) ||
-        ((itemID_2 = item_data->x10_item_kind,
+        ((itemID_2 = item_data->kind,
           ((itemID_2 < It_Kind_Old_Kuri) == false)) &&
          (itemID_2 < It_Kind_Arwing_Laser)))
     {
-        itemID_3 = item_data->x10_item_kind;
+        itemID_3 = item_data->kind;
         if ((itemID_3 != It_Kind_Kyasarin_Egg) &&
             (itemID_3 != It_Kind_WhispyApple))
         {
@@ -486,7 +486,7 @@ bool func_8026B774(HSD_GObj* item_gobj,
 s32 func_8026B7A4(HSD_GObj* item_gobj) // Get Item State ID
 {
     Item* item_data = item_gobj->user_data;
-    return item_data->x24_item_state_index;
+    return item_data->asid;
 }
 
 // 0x8026B7B0
@@ -644,7 +644,7 @@ s32 func_8026B924(HSD_GObj* item_gobj)
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    kind = item_data->x10_item_kind;
+    kind = item_data->kind;
     ret = -1;
     switch (kind) {
     case It_Kind_Freeze:
@@ -675,7 +675,7 @@ f32 func_8026B960(register HSD_GObj* item_gobj)
     register f32 unk_timer = -1.0f;
 
     item_data = item_gobj->user_data;
-    kind = item_data->x10_item_kind;
+    kind = item_data->kind;
 
     asm {
         cmpwi kind, It_Kind_Link_Bomb
@@ -691,7 +691,7 @@ f32 func_8026B960(register HSD_GObj* item_gobj)
     return unk_timer = item_data->xDD4_itemVar.BobOmb.xDEC;
 
 lbl_block:
-    if (item_data->x24_item_state_index != 0x5) {
+    if (item_data->asid != 0x5) {
         return unk_timer = item_data->xD44_lifeTimer;
     }
 
@@ -710,15 +710,15 @@ f32 func_8026B960(HSD_GObj* item_gobj)
     Item* item_data;
 
     item_data = item_gobj->user_data;
-    kind = item_data->x10_item_kind;
+    kind = item_data->kind;
     switch (kind) {
     case It_Kind_BombHei:
-        if ((s32) item_data->x24_item_state_index != 0xB) {
+        if ((s32) item_data->asid != 0xB) {
             unk_timer = item_data->xDD4_itemVar.BobOmb.xDEC;
         }
         break;
     case It_Kind_Link_Bomb:
-        if ((s32) item_data->x24_item_state_index != 5) {
+        if ((s32) item_data->asid != 5) {
             unk_timer = item_data->xD44_lifeTimer;
         }
     }
@@ -741,7 +741,7 @@ static inline void What(HSD_GObj* item_gobj,
     item_jobj = NULL;
     item_data->xD54_throwNum -= 1;
     item_data->xDC8_word.flags.x14 = 0;
-    if ((s32) item_data->x28_item_anim_index != -1) {
+    if ((s32) item_data->anim_id != -1) {
         item_data->xD0_itemStateDesc = itemStateDesc;
         if (item_data->xD0_itemStateDesc != NULL) {
             HSD_JObjRemoveAnimAll(item_jobj2);
@@ -783,8 +783,7 @@ void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
     item_data = item_gobj->user_data;
     temp_stateArray = item_data->xC4_article_data->xC_itemStates;
     item_jobj2 = item_gobj->hsd_obj;
-    itemStateDesc =
-        &temp_stateArray->x0_itemStateDesc[item_data->x28_item_anim_index];
+    itemStateDesc = &temp_stateArray->x0_itemStateDesc[item_data->anim_id];
     sp1C.z = 0.0f;
     sp1C.y = 0.0f;
     sp1C.x = 0.0f;
@@ -797,7 +796,7 @@ void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
         item_jobj = NULL;
         item_data->xD54_throwNum -= 1;
         item_data->xDC8_word.flags.x14 = 0;
-        if ((s32) item_data->x28_item_anim_index != -1) {
+        if ((s32) item_data->anim_id != -1) {
             item_data->xD0_itemStateDesc = itemStateDesc;
             if (item_data->xD0_itemStateDesc != NULL) {
                 HSD_JObjRemoveAnimAll(item_jobj2);
@@ -836,7 +835,7 @@ void func_8026BAE8(HSD_GObj* item_gobj,
     item_data = item_gobj->user_data;
     item_jobj = item_gobj->hsd_obj;
     scale = scale_mul * item_data->xCC_item_attr->x60_scale;
-    item_data->x38_scale = scale;
+    item_data->scl = scale;
     func_80272F7C(item_jobj, scale);
 }
 
@@ -1108,7 +1107,7 @@ void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch
             /// @todo #HSD_GObjGetUserData cast does not match here, likely
             ///       because there is a missing inline with the case below.
             item_data = GetItemData(bobOmbGObj);
-            kind = item_data->x10_item_kind;
+            kind = item_data->kind;
             switch (kind) {
             case It_Kind_Heart:
                 func_80283BD4(bobOmbGObj);
@@ -1126,7 +1125,7 @@ void* func_8026BE84(BobOmbRain* bobOmbRain) // Bob-Omb Rain Switch
             func_802841B4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
         if (bobOmbGObj != NULL) {
             item_data = GetItemData(bobOmbGObj);
-            itemID2 = item_data->x10_item_kind;
+            itemID2 = item_data->kind;
             switch (itemID2) {
             case It_Kind_Heart:
                 func_80283BD4(bobOmbGObj);
@@ -1365,7 +1364,7 @@ void func_8026C368(HSD_GObj* item_gobj) // Run bomb item explosion callbacks
 
     item_data = item_gobj->user_data;
     if (item_data->x378_itemColl.x34_flags.bits.b7 != 0) {
-        kind = item_data->x10_item_kind;
+        kind = item_data->kind;
         switch (kind) {
         case It_Kind_BombHei: // Bob-Omb
             func_8027D730(item_gobj);

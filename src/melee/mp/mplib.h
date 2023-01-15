@@ -1,7 +1,7 @@
 #ifndef MELEE_MP_MPLIB_H
 #define MELEE_MP_MPLIB_H
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <melee/ft/fighter.h>
 
 bool func_80054ED8(s32);

@@ -2,7 +2,7 @@
 #define _fighter_h_
 
 #include <common_structs.h>
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <math.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftstatevars.h>

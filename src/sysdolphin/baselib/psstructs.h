@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_PSSTRUCTS_H
 #define SYSDOLPHIN_BASELIB_PSSTRUCTS_H
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/jobj.h>

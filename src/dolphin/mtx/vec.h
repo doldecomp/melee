@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_MTX_VEC_H
 #define DOLPHIN_MTX_VEC_H
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 
 void PSVECAdd(Vec3* a, Vec3* b, Vec3* result);
 void PSVECScale(Vec3* src, Vec3* dst, f32 scale);

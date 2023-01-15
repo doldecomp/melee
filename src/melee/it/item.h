@@ -5,7 +5,7 @@
 #ifndef MELEE_IT_ITEM_H
 #define MELEE_IT_ITEM_H
 
-#include <dolphin/mtx/mtxtypes.h>
+#include <dolphin/mtx/types.h>
 #include <melee/it/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>

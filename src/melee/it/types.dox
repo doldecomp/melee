@@ -1,0 +1,31 @@
+/** @struct Item_DynamicBones
+ * @sz{1C}
+ */
+
+/*
+ * @var Item_DynamicBones::flags
+ * @at{0} @sz{4}
+ * @todo If this is 256, dynamics are not processed.
+ */
+
+/*
+ * @var Item_DynamicBones::skeleton
+ * @at{4} @sz{4}
+ */
+
+/*
+ * @var Item_DynamicBones::unk_ptr
+ * @at{8} @sz{4}
+ * @todo Stored at @c 8000FDD4, comes from a nonstandard heap at @c -0x52fc(r13)
+ */
+
+/*
+ * @var Item_DynamicBones::count
+ * The number of bones in this bone set.
+ * @at{C} @sz{4}
+ */
+
+/*
+ * @var Item_DynamicBones::unk_vec
+ * @at{10} @sz{C}
+ */
