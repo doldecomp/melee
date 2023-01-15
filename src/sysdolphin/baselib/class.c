@@ -5,12 +5,20 @@
 #include <sysdolphin/baselib/object.h>
 
 void _hsdClassInfoInit(void);
-HSD_ClassInfo hsdClass = { _hsdClassInfoInit };
+HSD_ClassInfo hsdClass = {
+    { _hsdClassInfoInit, FLAGS_NONE, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0 },
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+};
 
 static HSD_MemoryEntry** memory_list;
 static s32 nb_memory_list;
 static u32 lbl_804D7708;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
 void ClassInfoInit(HSD_ClassInfo* info)
@@ -20,6 +28,7 @@ void ClassInfoInit(HSD_ClassInfo* info)
     }
 }
 #pragma pop
+#endif
 
 void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
                       char* base_class_library, char* type, s32 info_size,
