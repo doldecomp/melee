@@ -52,7 +52,7 @@ void func_8026B390(HSD_GObj* item_gobj);
 void func_8026B3A8(HSD_GObj* item_gobj);
 
 /// Count item entities of identical kind?
-u32 func_8026B3C0(s32 kind);
+int func_8026B3C0(ItemKind kind);
 
 /// Store Item article pointer to table
 void func_8026B3F8(Article* article, s32 kind);
@@ -213,7 +213,7 @@ void func_8026BDCC(HSD_GObj* item_gobj);
 void func_8026BE28(HSD_GObj* item_gobj);
 
 /// Bob-Omb Rain Switch
-void* func_8026BE84(BobOmbRain* bobOmbRain);
+HSD_GObj* func_8026BE84(BobOmbRain* bobOmbRain);
 
 /// Get item's CollData pointer
 CollData* func_8026C100(HSD_GObj* item_gobj);

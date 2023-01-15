@@ -58,12 +58,12 @@ UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
     return temp_r3;
 }
 
-void func_801C97DC(s32 arg0, s32 arg1, s32 arg2)
+void func_801C97DC(s32 arg0, s32 arg1, HSD_JObj* arg2)
 {
     func_8039F6CC(0, arg1, arg0, arg2);
 }
 
-void func_801C9808(s32 arg0, s32 arg1, s32 arg2)
+void func_801C9808(s32 arg0, s32 arg1, HSD_JObj* arg2)
 {
     func_8039EFAC(0, arg1, arg0, arg2);
 }
@@ -143,13 +143,12 @@ void func_801C9908(HSD_JObj* jobj)
     }
 }
 
-void func_801C99C0(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
+void func_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
 {
-    if (arg3 != 0) {
+    if (arg3 != 0)
         func_8039EFAC(0, arg0, arg1, arg2);
-    } else {
+    else
         func_8039F6CC(0, arg0, arg1, arg2);
-    }
 }
 
 Vec3* func_801C9A10(void)

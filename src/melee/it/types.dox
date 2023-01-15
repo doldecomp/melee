@@ -1,3 +1,10 @@
+/** @struct Item
+ */
+
+/* @var Item::ground_or_air
+ * @at{C0} @sz{4}
+ */
+
 /** @struct Item_DynamicBones
  * @sz{1C}
  */

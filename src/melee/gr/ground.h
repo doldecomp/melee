@@ -5,7 +5,7 @@
 #include <sysdolphin/baselib/gobj.h>
 
 static void func_801BFFA8(void);
-static void func_801BFFAC(s32);
+static void func_801BFFAC(bool);
 static void func_801C1E94(void);
 void func_801C3880(f32);
 void func_801C3890(f32);
@@ -36,12 +36,11 @@ static void func_801C1CD0(HSD_GObj*);
 static void func_801C1D38(HSD_GObj*);
 static void func_801C2BBC(HSD_GObj*, s32);
 static void func_801C2BD4(void* arg0);
-HSD_GObj* func_801C14D0(s32);
+HSD_GObj* func_801C14D0(int);
 static void func_801C34AC(s32, struct _HSD_JObj*, struct _HSD_Joint*);
 static void func_801C28CC(void*, s32);
 
 f32 func_801C0498(void);
-struct _HSD_GObj* func_801C14D0(s32);
 bool func_801C28AC(s32, u32, s32*);
 struct _HSD_GObj* func_801C2BA4(s32);
 struct _HSD_JObj* func_801C2CF4(s32);
@@ -72,5 +71,8 @@ void func_801C0F78(StructPairWithStageID* pair);
 void func_801C0FB8(StructPairWithStageID* pair);
 void func_801C1074(StructPairWithStageID* pair, s32 arg1);
 void func_801C06B8(InternalStageId arg0);
+void func_801C2FE0(HSD_GObj* arg0);
+void func_801C4A08(HSD_GObj* gobj);
+void func_801C10B8(HSD_GObj* arg0, HSD_GObjEvent arg1);
 
 #endif

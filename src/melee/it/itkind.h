@@ -6,7 +6,7 @@
 // https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8
 // //
 
-typedef enum ITKIND {
+typedef enum ItemKind {
     // COMMON ITEMS
 
     It_Kind_Capsule,  // Capsule //
@@ -268,6 +268,6 @@ typedef enum ITKIND {
     It_Kind_GreatFox_Laser,  // Great Fox's Laser
     It_Kind_Kyasarin_Egg,    // Birdo's Egg
 
-} ITKIND;
+} ItemKind;
 
 #endif

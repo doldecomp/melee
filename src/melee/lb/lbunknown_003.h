@@ -18,5 +18,6 @@ void func_80011AC4(void);
 void func_8000FD48(HSD_JObj*, unk_t, size_t);
 void func_80011710(unk_t, unk_t);
 void func_8000FD18(unk_t);
+void func_800115F4(void);
 
 #endif

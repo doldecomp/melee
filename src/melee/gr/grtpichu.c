@@ -1,29 +1,45 @@
 #include <melee/gr/grtpichu.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
+#include <melee/lb/lbunknown_003.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 
-static StageCallbacks lbl_803E91B0[4] = {
-    { lbl_80222D24, lbl_80222D50, lbl_80222D58, lbl_80222D5C, 0UL },
-    { lbl_80222DF0, lbl_80222E40, lbl_80222E48, lbl_80222E68, 0UL },
-    { lbl_80222D60, lbl_80222DB0, lbl_80222DB8, lbl_80222DEC, 0xC0000000 },
-    { NULL, NULL, NULL, NULL, 0UL }
+static StageCallbacks lbl_803E91B0[] = {
+    { lbl_80222D24, lbl_80222D50, lbl_80222D58, lbl_80222D5C, FLAGS_NONE },
+    { lbl_80222DF0, lbl_80222E40, lbl_80222E48, lbl_80222E68, FLAGS_NONE },
+    { lbl_80222D60, lbl_80222DB0, lbl_80222DB8, lbl_80222DEC,
+      (1 << 30) | (1 << 31) },
+    { NULL, NULL, NULL, NULL, FLAGS_NONE }
 };
 
-extern StageData lbl_803E920C = { 0x00000038,   lbl_803E91B0,  "/GrTPc.dat",
-                                  lbl_80222B9C, func_80222B98, lbl_80222C0C,
-                                  lbl_80222C10, lbl_80222C34,  lbl_80222E6C,
-                                  lbl_80222E74, 0UL,           NULL,
-                                  0UL };
+StageData lbl_803E920C = {
+    (1 << 3) | (1 << 4) | (1 << 5),
+    lbl_803E91B0,
+    "/GrTPc.dat",
+    lbl_80222B9C,
+    func_80222B98,
+    lbl_80222C0C,
+    lbl_80222C10,
+    lbl_80222C34,
+    lbl_80222E6C,
+    lbl_80222E74,
+    FLAGS_NONE,
+    NULL,
+    0,
+};
 
 extern StageInfo stage_info;
 
-static void func_80222B98(long) {}
+static void func_80222B98(bool arg0) {}
+
 static void lbl_80222B9C(void)
 {
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
     func_80222C3C(0);
     func_80222C3C(1);
     func_80222C3C(2);
@@ -32,16 +48,20 @@ static void lbl_80222B9C(void)
     func_801C4210();
     func_801C42AC();
 }
+
 static void lbl_80222C0C(void) {}
+
 static void lbl_80222C10(void)
 {
     func_801CAE04(0);
 }
-static s32 lbl_80222C34(void)
+
+static bool lbl_80222C34(void)
 {
-    return 0;
+    return false;
 }
-static HSD_GObj* func_80222C3C(s32 gobj_id)
+
+static HSD_GObj* func_80222C3C(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E91B0[gobj_id];
@@ -68,17 +88,22 @@ static HSD_GObj* func_80222C3C(s32 gobj_id)
 
     return gobj;
 }
+
 static void lbl_80222D24(HSD_GObj* gobj)
 {
     Map* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_80222D50(void)
+
+static bool lbl_80222D50(HSD_GObj* arg0)
 {
-    return 0;
+    return false;
 }
-static void lbl_80222D58(HSD_GObj*) {}
-static void lbl_80222D5C(void) {}
+
+static void lbl_80222D58(HSD_GObj* arg0) {}
+
+static void lbl_80222D5C(HSD_GObj* arg0) {}
+
 static void lbl_80222D60(HSD_GObj* gobj)
 {
     u32 unused[2];
@@ -86,37 +111,49 @@ static void lbl_80222D60(HSD_GObj* gobj)
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_80222DB0(void)
+
+static bool lbl_80222DB0(HSD_GObj* arg0)
 {
-    return 0;
+    return false;
 }
+
 static void lbl_80222DB8(HSD_GObj* gobj)
 {
     func_800115F4();
     func_801C2FE0(gobj);
 }
-static void lbl_80222DEC(void) {}
+
+static void lbl_80222DEC(HSD_GObj* arg0) {}
 static void lbl_80222DF0(HSD_GObj* gobj)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_80222E40(void)
-{
-    return 0;
-}
-static void lbl_80222E48(HSD_GObj*)
-{
-    func_801C2FE0();
-}
-static void lbl_80222E68(void) {}
-static bool lbl_80222E6C(long)
+
+static bool lbl_80222E40(HSD_GObj* arg0)
 {
     return false;
 }
-static s32 lbl_80222E74(Vec3*, s32, struct _HSD_JObj*)
+
+static void lbl_80222E48(HSD_GObj* arg0)
+{
+    func_801C2FE0(arg0);
+}
+
+static void lbl_80222E68(HSD_GObj* arg0) {}
+
+static bool lbl_80222E6C(int arg0)
+{
+    return false;
+}
+
+static bool lbl_80222E74(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }

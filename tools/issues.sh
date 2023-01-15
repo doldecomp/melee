@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SOURCES=$(find src include -name '*.c' -or -name '*.h')
+SOURCES=$(find src -name '*.c' -or -name '*.h')
 
 for file in $SOURCES; do
   clang @compile_flags.txt \
