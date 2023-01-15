@@ -1,6 +1,7 @@
 #ifndef _texp_h_
 #define _texp_h_
 
+#include <dolphin/gx/GXEnum.h>
 #include <Runtime/platform.h>
 
 #define HSD_TEXP_RAS -2
@@ -155,5 +156,7 @@ typedef union _HSD_TExp {
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp);
 HSD_TExp* HSD_TExpTev(HSD_TExp**);
 HSD_TExp* HSD_TExpCnst(void*, HSD_TEInput, HSD_TEType, HSD_TExp**);
+void HSD_TExpOrder(HSD_TExp*, unk_t, enum_t);
+void HSD_TExpColorOp(HSD_TExp*, enum_t, enum_t, enum_t, GXBool);
 
 #endif
