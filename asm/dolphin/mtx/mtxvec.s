@@ -2,8 +2,8 @@
 
 .section .text  # 0x80342AA8 - 0x80342B4C
 
-.global PSMTXMUltiVec
-PSMTXMUltiVec:
+.global PSMTXMultiVec
+PSMTXMultiVec:
 /* 80342AA8 0033F688  E0 04 00 00 */	psq_l f0, 0(r4), 0, qr0
 /* 80342AAC 0033F68C  E0 43 00 00 */	psq_l f2, 0(r3), 0, qr0
 /* 80342AB0 0033F690  E0 24 80 08 */	psq_l f1, 8(r4), 1, qr0

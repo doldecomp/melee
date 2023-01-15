@@ -1,5 +1,6 @@
 #include <sysdolphin/baselib/jobj.h>
 
+#include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -31,8 +32,8 @@ void HSD_JObjCheckDepend(HSD_JObj* jobj)
             {
                 jobj->flags |= JOBJ_MTX_DIRTY;
             }
-        } else if (jobj->parent != NULL &&
-                       (jobj->parent->flags & JOBJ_MTX_DIRTY) ||
+        } else if ((jobj->parent != NULL &&
+                    (jobj->parent->flags & JOBJ_MTX_DIRTY)) ||
                    (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT1 ||
                    (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT2 ||
                    (jobj->flags & JOBJ_EFFECTOR) == JOBJ_EFFECTOR ||
@@ -177,7 +178,7 @@ void HSD_JObjMakeMatrix(HSD_JObj* jobj)
         Vec3 vec;
         HSD_JObj* aobj_jobj = (HSD_JObj*) jobj->aobj->hsd_obj;
         HSD_JObjSetupMatrix((HSD_JObj*) jobj->aobj->hsd_obj);
-        PSMTXMUltiVec(aobj_jobj->mtx, &jobj->translate, &vec);
+        PSMTXMultiVec(aobj_jobj->mtx, &jobj->translate, &vec);
         jobj->mtx[0][3] = vec.x;
         jobj->mtx[1][3] = vec.y;
         jobj->mtx[2][3] = vec.z;
@@ -1701,7 +1702,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
                 PSVECSubtract(&sp5C, &spB0, &sp5C);
                 if (temp_f26 != 0.0F) {
                     PSMTXRotAxisRad(sp20, &sp68, temp_f26);
-                    PSMTXMUltiVec(sp20, &sp5C, &sp5C);
+                    PSMTXMultiVec(sp20, &sp5C, &sp5C);
                 }
                 PSVECCrossProduct(&sp68, &sp5C, &sp50);
                 PSVECCrossProduct(&sp50, &sp68, &sp5C);
@@ -1864,7 +1865,7 @@ void resolveIKJoint2(HSD_JObj* jobj)
                 sp1C.z = mtx[2][2];
             }
             PSMTXRotAxisRad(sp34, &sp1C, var_f1_2);
-            PSMTXMUltiVec(sp34, &sp28, &sp7C);
+            PSMTXMultiVec(sp34, &sp28, &sp7C);
         }
     }
     {
