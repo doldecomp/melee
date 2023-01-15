@@ -17,8 +17,6 @@ void GXSetZMode(s8, s32, s32);
 void GXSetAlphaUpdate(s32);
 void GXSetColorUpdate(s32);
 void GXSetBlendMode(s32, s32, s32, s32);
-void GXSetFogRangeAdj(s8, u16, struct _GXFogAdjTbl*);
-void GXInitFogAdjTable(struct _GXFogAdjTbl*, u16, Mtx44Ptr);
 void GXSetFog(s32, GXColor, f32, f32, f32, f32);
 void GXSetTevColorS10(s32, GXColor*);
 void GXSetTevDirect(void);

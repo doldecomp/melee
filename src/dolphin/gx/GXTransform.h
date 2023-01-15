@@ -19,5 +19,7 @@ void GXLoadNrmMtxImm(unk_t, s32);
 void GXLoadPosMtxImm(unk_t, s32);
 void GXSetScissor(s32 left, s32 top, s32 width, s32 height);
 void GXSetScissorBoxOffset(u32 x_off, u32 y_off);
+void GXGetProjectionv(f32* proj);
+void GXGetViewportv(f32* viewport_v);
 
 #endif
