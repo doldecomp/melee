@@ -2,8 +2,10 @@
 
 #include <dolphin/mtx.h>
 #include <math.h>
-
+#include <MetroTRK/intrinsics.h>
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/mtx.h>
 
 extern void TObjInfoInit(void);
 
@@ -332,8 +334,11 @@ END:
 
 char lbl_8040562C[23] = "unexpected texmap id.\n\0";
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
+
 static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 {
     switch (id) {
@@ -358,7 +363,10 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     }
     return 0;
 }
+
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 /*static*/ void MakeTextureMtx(HSD_TObj* tobj)
 {
@@ -395,7 +403,7 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     trans.z = tobj->translate.z;
 
     MTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
-    HSD_MkRotationMtx(m, &rot);
+    HSD_MkRotationMtx(m, (Vec3*) &rot);
     MTXConcat(m, tobj->mtx, tobj->mtx);
     MTXScale(m, scale.x, scale.y, scale.z);
     MTXConcat(m, tobj->mtx, tobj->mtx);
