@@ -120,7 +120,7 @@ void* HSD_IDGetDataFromTable(HSD_IDTable* table, u32 id, s32* success)
     return NULL;
 }
 
-void _HSD_IDForgetMemory(void)
+void _HSD_IDForgetMemory(any_t low, any_t high)
 {
     memset(&default_table, 0, sizeof(HSD_IDTable));
 }

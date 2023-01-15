@@ -11,7 +11,6 @@ extern const GXRenderModeObj GXNtsc480IntDf;
 
 void GXSetDstAlpha(s32, s32);
 void GXSetDither(s32);
-void GXSetPixelFmt(s32, s32);
 void GXSetZCompLoc(s32);
 void GXSetZMode(s8, s32, s32);
 void GXSetAlphaUpdate(s32);

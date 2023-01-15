@@ -11,5 +11,6 @@ typedef struct _GXFogAdjTbl {
 void GXSetFieldMode(s8, s32);
 void GXInitFogAdjTable(struct _GXFogAdjTbl*, u16, Mtx44);
 void GXSetFogRangeAdj(s8, u16, struct _GXFogAdjTbl*);
+void GXSetPixelFmt(s32, s32);
 
 #endif

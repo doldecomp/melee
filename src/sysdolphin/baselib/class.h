@@ -65,5 +65,6 @@ bool hsdChangeClass(void* object, void* class_info);
 // bool hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p);
 bool hsdObjIsDescendantOf(struct _HSD_Obj* o, HSD_ClassInfo* p);
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name);
+void hsdForgetClassLibrary(const char* library_name);
 
 #endif
