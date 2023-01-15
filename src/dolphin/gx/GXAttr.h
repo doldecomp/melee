@@ -7,7 +7,7 @@ void GXSetNumTexGens(s8);
 void GXSetTexCoordGen2(u32, s32, u32, s32, s32, s32);
 void GXInvalidateVtxCache(void);
 void GXSetArray(s32, s32, s8);
-void GXSetVtxAttrFmt(int vertex_format, s32, s32, s32, s8);
+void GXSetVtxAttrFmt(int vertex_format, int, int, int, int);
 void GXClearVtxDesc(void);
 void GXSetVtxDesc(u32, s32);
 void __GXSetVCD(void);
