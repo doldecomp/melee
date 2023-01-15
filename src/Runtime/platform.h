@@ -154,5 +154,4 @@ typedef void (*Event)(void);
 #define FLAGS_NONE 0
 #define HAS_FLAG(value, flag) ((value) & (flag))
 #define NOT_FLAG(value, flag) (!((value) & (flag)))
-
 #endif

@@ -1,5 +1,7 @@
-#include <math.h>
 #include <melee/lb/lbvector.h>
+
+#include <dolphin/mtx.h>
+#include <math.h>
 
 // exactly the same as the one from math.h, but with one extra iteration
 extern inline float sqrtf_accurate(float x)
@@ -372,7 +374,11 @@ extern MtxPtr func_80369688(HSD_CObj*);
 Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
                              Vec3* screenCoords, int d)
 {
-    u8 filler[16];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
     Mtx projMtx;
     float projection[7]; // projection params
     float viewport[6];   // viewport params
@@ -404,7 +410,7 @@ Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
         projection[6] = projMtx[2][3];
         break;
     case PROJ_ORTHO:
-        C_MTXOrtho(&projMtx, cobj->projection_param.ortho.top,
+        C_MTXOrtho(projMtx, cobj->projection_param.ortho.top,
                    cobj->projection_param.ortho.bottom,
                    cobj->projection_param.ortho.left,
                    cobj->projection_param.ortho.right, cobj->near, cobj->far);
@@ -428,9 +434,9 @@ Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
     viewport[5] = 1.0f;                                       // far z
 
     if (d != 0) {
-        func_80368784(cobj, &camPos); // HSD_CObjGetEyePosition
-        func_80368E70(cobj, &upVec);  // HSD_CObjGetUpVector
-        func_803686AC(cobj, &target); // HSD_CObjGetInterest
+        HSD_CObjGetEyePosition(cobj, &camPos);
+        HSD_CObjGetUpVector(cobj, &upVec);
+        HSD_CObjGetInterest(cobj, &target);
         C_MTXLookAt(m, &camPos, &upVec, &target);
         mvMtx = m;
     } else

@@ -840,7 +840,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/sobjlib.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/sysdolphin/baselib/sislib.c.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/sislib.s.o\
 
 TEXT_O_FILES +=\

@@ -2,6 +2,8 @@
 #define _code_8000B074_h_
 
 #include <dolphin/mtx/types.h>
+#include <melee/sc/scene.h>
+#include <sysdolphin/baselib/jobj.h>
 
 bool func_8000B074(struct _HSD_JObj*);
 bool func_8000B09C(struct _HSD_JObj*);
@@ -24,7 +26,7 @@ static struct _HSD_AnimJoint* func_8000BECC(struct _HSD_AnimJoint* animjoint);
 f32 func_8000BFF0(struct _HSD_AnimJoint* animjoint);
 void func_8000C07C(struct _HSD_JObj*, s32 i, struct _HSD_AnimJoint**,
                    struct _HSD_MatAnimJoint**, struct _HSD_ShapeAnimJoint**);
-void func_8000C0E8(struct _HSD_JObj*, s32 i, struct _UnkAnimContainer*);
+void func_8000C0E8(HSD_JObj* jobj, s32 i, struct _DynamicModelDesc* arg2);
 void func_8000C160(void* mem, int size);
 void func_8000C1C0(struct _HSD_JObj*, struct _HSD_JObj* constraint);
 void func_8000C228(struct _HSD_JObj*, struct _HSD_JObj* constraint);

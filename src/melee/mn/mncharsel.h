@@ -19,25 +19,6 @@ typedef enum _StageSelectMode {
     StageSelectMode_Loser
 } StageSelectMode;
 
-typedef struct _GameRules {
-    /*0x00*/ u8 unk_x0;
-    /*0x01*/ u8 unk_x1;
-    /*0x02*/ u8 mode;
-    /*0x03*/ u8 time_limit;
-    /*0x04*/ u8 stock_count;
-    /*0x05*/ u8 handicap;
-    /*0x06*/ u8 damage_ratio;
-    /*0x07*/ u8 unk_x7;
-    /*0x08*/ u8 stock_time_limit;
-    /*0x09*/ u8 friendly_fire;
-    /*0x0A*/ u8 pause;
-    /*0x0B*/ u8 score_display;
-    /*0x0C*/ u8 unk_xc;
-    /*0x0D*/ u8 unk_xd[3];
-    /*0x10*/ u8 unk_x10;
-    /*0x11*/ u8 unk_x11[7];
-} GameRules;
-
 typedef struct _PlayerInitData {
     /*0x00*/ u8 character_kind;
     /*0x01*/ u8 slot_type;

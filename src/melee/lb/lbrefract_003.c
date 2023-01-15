@@ -1,5 +1,8 @@
 #include <melee/lb/lbrefract.h>
 
+#include <math.h>
+#include <MetroTRK/intrinsics.h>
+
 #pragma region trigf
 extern f32 lbl_80400770[], lbl_80400774[];
 #pragma endregion

@@ -61,6 +61,25 @@ struct gmm_x2FF8 {
     struct gmm_x2FF8_inner inner[19];
 };
 
+typedef struct _GameRules {
+    /*0x00*/ u8 unk_x0;
+    /*0x01*/ u8 unk_x1;
+    /*0x02*/ u8 mode;
+    /*0x03*/ u8 time_limit;
+    /*0x04*/ u8 stock_count;
+    /*0x05*/ u8 handicap;
+    /*0x06*/ u8 damage_ratio;
+    /*0x07*/ u8 unk_x7;
+    /*0x08*/ u8 stock_time_limit;
+    /*0x09*/ u8 friendly_fire;
+    /*0x0A*/ u8 pause;
+    /*0x0B*/ u8 score_display;
+    /*0x0C*/ u8 unk_xc;
+    /*0x0D*/ u8 unk_xd[3];
+    /*0x10*/ u8 unk_x10;
+    /*0x11*/ u8 unk_x11[7];
+} GameRules;
+
 struct gmm_x1868 {
     /* 0x1868 */ s32 x1868;
     u8 padding_x1868[0x1A18 - 0x1868 - 4];
@@ -128,8 +147,7 @@ extern struct gmm_x0 {
     /* 0x0586 */ s16 x586;
     /* 0x0588 */ s8 x588[4];
     u8 padding_x588[0x1850 - 0x588 - 4];
-    /* 0x1850 */ s32 x1850;
-    u8 padding_x1850[0x1868 - 0x1850 - 4];
+    /* 0x1850 */ GameRules x1850;
     struct gmm_x1868 thing;
 }* lbl_804D3EE0;
 
@@ -171,5 +189,6 @@ void func_8015D8FC(u32);
 s32 func_8015D94C(u32);
 void func_8015FCC0(void);
 void func_8015FBA4(void);
+GameRules* func_8015CC34(void);
 
 #endif

@@ -100,5 +100,7 @@ void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim);
 void HSD_RObjRemoveAll(HSD_RObj*);
 void HSD_RObjResolveRefsAll(HSD_RObj*, HSD_RObjDesc*);
 HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc*);
+void HSD_RObjSetConstraintObj(HSD_RObj* robj, HSD_JObj* constraint);
+void HSD_RObjRemove(HSD_RObj*);
 
 #endif

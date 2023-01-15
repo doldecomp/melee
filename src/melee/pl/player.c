@@ -80,7 +80,7 @@ ftMapping ftMapping_list[FTKIND_MAX] = { //////ftMapping_list
 StaticPlayer player_slots[PL_SLOT_MAX];
 HSD_ObjAllocData lbl_804587E0;
 
-extern s32 lbl_804D6470;
+extern int lbl_804D6470;
 
 /// @todo This can be used in more places when functions are fixed to use
 ///       correct structs.
@@ -1899,7 +1899,12 @@ void Player_800368F8(s32 slot)
 void Player_80036978(s32 slot, s32 arg1)
 {
     StaticPlayer* player;
-    s32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
@@ -1914,7 +1919,11 @@ void Player_InitOrResetPlayer(s32 slot)
     u8* transformed1;
     f32 zerofloat;
     f32 onefloat;
-    s32 unused[14];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[56];
+#endif
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -2042,22 +2051,22 @@ void Player_InitAllPlayers(void)
     }
 }
 
-void Player_80036DA4()
+void Player_80036DA4(void)
 {
     HSD_ObjAllocInit(&lbl_804587E0, 8, 4);
     Fighter_FirstInitialize_80067A84();
 }
 
-void Player_80036DD8()
+void Player_80036DD8(void)
 {
-    s32* sp8;
+    int* sp8;
 
     func_80016C64(str_PdPmdat_start_of_data, &sp8, str_plLoadCommonData, 0);
     lbl_804D6470 = *sp8;
 }
 
 void Player_80036E20(s32 arg0, s32 arg1, s32 arg2)
-{ /// decomp.me/scratch/J1Elr
+{
     struct Unk_Struct_w_Array* unkStruct =
         (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     func_800BEB60(unkStruct->vec_arr[arg0].x, arg1, arg2);
@@ -2086,7 +2095,11 @@ s32 Player_80036EA0(s32 slot)
 void Player_80036F34(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
     u8 unused;
+#endif
 
     StaticPlayer* player;
 
@@ -2114,7 +2127,11 @@ void Player_80036F34(s32 slot, s32 arg1)
 void Player_80037054(s32 slot, s32 arg1)
 {
     struct plAllocInfo2 some_struct;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
     u8 unused;
+#endif
 
     StaticPlayer* player;
 

@@ -279,5 +279,6 @@ void func_800C06C0(void);
 HSD_GObj* func_800BE7E0(unk_t);
 void func_800D4FF4(HSD_GObj*);
 void func_SetEntityFacingDirection(HSD_GObj*, f32 facing_dir);
+void func_800BEB60(int, int, int);
 
 #endif

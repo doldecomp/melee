@@ -133,6 +133,7 @@ typedef struct _HSD_JObjInfo {
 } HSD_JObjInfo;
 
 extern HSD_JObjInfo hsdJObj;
+typedef void (*HSD_JObjWalkTreeCallback)(HSD_JObj*, f32**, s32);
 
 void HSD_JObjSetDefaultClass(HSD_JObjInfo* info);
 
@@ -163,6 +164,10 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode);
 void HSD_JObjRemoveAnim(HSD_JObj* jobj);
 void HSD_JObjAddNext(HSD_JObj* jobj, HSD_JObj* next);
 void HSD_JObjRemoveAnimAll(HSD_JObj* jobj);
+void HSD_JObjWalkTree(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
+                      f32** cb_args);
+void HSD_JObjPrependRObj(HSD_JObj* jobj, struct _HSD_RObj* robj);
+void HSD_JObjDeleteRObj(HSD_JObj* jobj, struct _HSD_RObj* robj);
 
 static inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
