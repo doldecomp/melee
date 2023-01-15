@@ -1,3 +1,5 @@
+#include <sysdolphin/baselib/gobjproc.h>
+
 #include <sysdolphin/baselib/gobj.h>
 
 extern HSD_ObjAllocData gobjproc_alloc_data;
@@ -58,7 +60,11 @@ inline void assertProc(HSD_GObjProc* gproc)
 HSD_GObjProc* func_8038FD54(HSD_GObj* gobj, void (*func)(HSD_GObj*), u8 pri)
 {
     HSD_GObjProc* gproc;
-    s32 unused[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     gproc = HSD_ObjAlloc(&gobjproc_alloc_data);
     assertProc(gproc);
