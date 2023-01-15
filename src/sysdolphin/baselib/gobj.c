@@ -1,6 +1,9 @@
 #include <sysdolphin/baselib/gobj.h>
 
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
 
 extern HSD_GObj* lbl_804D7818;
 extern HSD_GObj* lbl_804D781C;
@@ -176,13 +179,20 @@ void lbl_80391044(HSD_GObj* gobj)
 void func_80391070(HSD_GObj* gobj, s32 arg1)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
+
+#ifdef MUST_MATCH
 // don't inline func_80390EB8
 // TODO is there a file boundary between func_80390EB8 and func_80391070?
 #pragma push
 #pragma dont_inline on
+#endif
+
     HSD_JObjDispAll(jobj, NULL, func_80390EB8(arg1), 0);
 }
+
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void lbl_803910B4(HSD_GObj* gobj)
 {
@@ -191,7 +201,7 @@ void lbl_803910B4(HSD_GObj* gobj)
 
 void func_803910D8(HSD_GObj* gobj, s32 arg1)
 {
-    if (HSD_CObjSetCurrent(gobj->hsd_obj)) {
+    if (HSD_CObjSetCurrent(gobj->hsd_obj, (Event) arg1)) {
         func_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
     }
@@ -212,11 +222,11 @@ void lbl_803911C0(HSD_Obj* obj)
     lbl_80391120(obj);
 }
 
-typedef struct _GObjFuncs {
+struct _GObjFuncs {
     struct _GObjFuncs* next;
     u8 size;
     void (**funcs)();
-} GObjFuncs;
+};
 
 extern GObjFuncs lbl_80408610;
 extern s8 lbl_804D7848;
