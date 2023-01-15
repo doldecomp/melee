@@ -19,6 +19,7 @@ inline u8 GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
         proc->flags_1 = value;
         proc = proc->child;
     }
+    /// @todo Missing return statement
 }
 
 inline u8 GObj_SetFlag2_inline(HSD_GObjProc* proc, u8 value)
@@ -27,6 +28,7 @@ inline u8 GObj_SetFlag2_inline(HSD_GObjProc* proc, u8 value)
         proc->flags_2 = value;
         proc = proc->child;
     }
+    /// @todo Missing return statement
 }
 
 void func_80390C5C(HSD_GObj* gobj)
@@ -243,10 +245,10 @@ void func_80391260(struct _GObjUnkStruct* arg0)
     lbl_804D7848 = count;
 }
 
-typedef struct _GObjUnkStruct {
+struct _GObjUnkStruct {
     u32 unused;
     GObjFuncs foo;
-} GObjUnkStruct;
+};
 
 u8 func_803912A8(GObjUnkStruct* arg0, GObjFuncs* foo)
 {
