@@ -2,10 +2,11 @@
 
 #include <dolphin/os/os.h>
 #include <string.h>
+#include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/texp.h>
 
-static HSD_MObjInfo* default_class;
+static HSD_ClassInfo* default_class;
 static HSD_MObj* current_mobj;
 HSD_TObj* tobj_shadows;
 HSD_TObj* tobj_toon;
@@ -473,8 +474,8 @@ void HSD_MObjRemove(HSD_MObj* mobj)
 
 HSD_MObj* HSD_MObjAlloc(void)
 {
-    HSD_MObj* mobj = hsdNew(
-        (HSD_ClassInfo*) (default_class != NULL ? default_class : &hsdMObj));
+    HSD_MObj* mobj =
+        hsdNew(default_class != NULL ? default_class : &hsdMObj.parent);
     HSD_ASSERT(915, mobj);
     return mobj;
 }

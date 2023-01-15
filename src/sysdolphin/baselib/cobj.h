@@ -114,7 +114,6 @@ HSD_WObj* HSD_CObjGetEyePositionWObj(HSD_CObj* cobj);
 HSD_WObj* HSD_CObjGetInterestWObj(HSD_CObj* cobj);
 void HSD_CObjSetOrtho(HSD_CObj* cobj, f32, f32, f32, f32);
 unk_t func_8036A590(cobj_Unk1*);
-HSD_CObj* HSD_CObjAlloc(void);
 void func_80368718(HSD_CObj* cobj, s32*);
 void func_803687F0(HSD_CObj* cobj, s32*);
 void func_803699C0(HSD_CObj* cobj, f32);
@@ -136,5 +135,6 @@ void HSD_CObjGetEyePosition(HSD_CObj* cobj, Vec3* cam_pos);
 void func_8036885C(void);
 void HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up);
 void HSD_CObjGetInterest(HSD_CObj* cobj, Vec3* interest);
+HSD_CObj* HSD_CObjAlloc(void);
 
 #endif

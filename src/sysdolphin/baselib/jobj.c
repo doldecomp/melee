@@ -1592,8 +1592,8 @@ void HSD_JObjClearFlagsAll(HSD_JObj* jobj, u32 flags)
 
 HSD_JObj* HSD_JObjAlloc(void)
 {
-    HSD_JObj* jobj = hsdNew(default_class != NULL ? default_class
-                                                  : (HSD_ClassInfo*) &hsdJObj);
+    HSD_JObj* jobj =
+        hsdNew(default_class != NULL ? default_class : &hsdJObj.parent.parent);
     HSD_ASSERT(0x7D3, jobj);
     return jobj;
 }

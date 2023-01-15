@@ -252,8 +252,8 @@ void HSD_DObjSetDefaultClass(HSD_ClassInfo* info)
 
 HSD_DObj* HSD_DObjAlloc(void)
 {
-    HSD_DObj* dobj = (HSD_DObj*) hsdNew(
-        default_class ? default_class : (HSD_ClassInfo*) &hsdDObj);
+    HSD_DObj* dobj =
+        (HSD_DObj*) hsdNew(default_class ? default_class : &hsdDObj.parent);
     if (dobj == NULL) {
         __assert(lbl_804D5C78, 525, lbl_804D5C84);
     }
