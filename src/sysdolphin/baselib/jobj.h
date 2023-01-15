@@ -1,6 +1,7 @@
 #ifndef _jobj_h_
 #define _jobj_h_
 
+#include "sysdolphin/baselib/class.h"
 #include <Runtime/platform.h>
 
 #include <dolphin/mtx.h>
@@ -136,7 +137,7 @@ extern HSD_JObjInfo hsdJObj;
 typedef void (*HSD_JObjWalkTreeCallback)(HSD_JObj*, f32**, s32);
 typedef void (*DPCtlCallback)(int, int lo, int hi, HSD_JObj* jobj);
 
-void HSD_JObjSetDefaultClass(HSD_JObjInfo* info);
+void HSD_JObjSetDefaultClass(HSD_ClassInfo* info);
 
 void HSD_JObjCheckDepend(HSD_JObj* jobj);
 u32 HSD_JObjGetFlags(HSD_JObj* jobj);

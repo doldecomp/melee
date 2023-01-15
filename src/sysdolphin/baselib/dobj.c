@@ -1,3 +1,4 @@
+#include "sysdolphin/baselib/class.h"
 #include <sysdolphin/baselib/dobj.h>
 
 #include <dolphin/os/os.h>
@@ -7,7 +8,7 @@
 static void DObjInfoInit(void);
 HSD_DObjInfo hsdDObj = { DObjInfoInit };
 
-static HSD_DObjInfo* default_class = NULL;
+static HSD_ClassInfo* default_class = NULL;
 
 static HSD_DObj* current_dobj = NULL;
 
@@ -237,17 +238,13 @@ void HSD_DObjRemoveAll(HSD_DObj* dobj)
     }
 }
 
-void HSD_DObjSetDefaultClass(HSD_DObjInfo* info)
+void HSD_DObjSetDefaultClass(HSD_ClassInfo* info)
 {
     if (info) {
         if (!hsdIsDescendantOf(info, &hsdDObj)) {
-            __assert(
-                lbl_804D5C78, 498,
-                "hsdIsDescendantOf(info, &hsdDObj)"); // The line number here is
-                                                      // totally made up, this
-                                                      // function is removed in
-                                                      // practice but the string
-                                                      // isn't
+            // The line number here is totally made up, this function is removed
+            // in practice but the string isn't
+            __assert(lbl_804D5C78, 498, "hsdIsDescendantOf(info, &hsdDObj)");
         }
     }
     default_class = info;
@@ -256,7 +253,7 @@ void HSD_DObjSetDefaultClass(HSD_DObjInfo* info)
 HSD_DObj* HSD_DObjAlloc(void)
 {
     HSD_DObj* dobj = (HSD_DObj*) hsdNew(
-        (HSD_ClassInfo*) (default_class ? default_class : &hsdDObj));
+        default_class ? default_class : (HSD_ClassInfo*) &hsdDObj);
     if (dobj == NULL) {
         __assert(lbl_804D5C78, 525, lbl_804D5C84);
     }

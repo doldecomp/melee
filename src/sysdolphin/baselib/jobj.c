@@ -1,3 +1,4 @@
+#include "sysdolphin/baselib/class.h"
 #include <sysdolphin/baselib/jobj.h>
 
 #include <dolphin/mtx/mtxvec.h>
@@ -24,7 +25,7 @@ HSD_JObjInfo hsdJObj = {
     NULL,
 };
 
-static HSD_JObjInfo* default_class;
+static HSD_ClassInfo* default_class;
 static HSD_SList* ufc_callbacks;
 static void (*dptcl_callback)(int, int lo, int hi, HSD_JObj* jobj);
 static void (*jsound_callback)(s32);
@@ -941,7 +942,7 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
     }
 }
 
-void HSD_JObjSetDefaultClass(HSD_JObjInfo* info)
+void HSD_JObjSetDefaultClass(HSD_ClassInfo* info)
 {
     if (info != NULL) {
         HSD_ASSERT(0x3A5, hsdIsDescendantOf(info, &hsdJObj));
@@ -1591,8 +1592,8 @@ void HSD_JObjClearFlagsAll(HSD_JObj* jobj, u32 flags)
 
 HSD_JObj* HSD_JObjAlloc(void)
 {
-    HSD_JObj* jobj = hsdNew(
-        (HSD_ClassInfo*) (default_class != NULL ? default_class : &hsdJObj));
+    HSD_JObj* jobj = hsdNew(default_class != NULL ? default_class
+                                                  : (HSD_ClassInfo*) &hsdJObj);
     HSD_ASSERT(0x7D3, jobj);
     return jobj;
 }

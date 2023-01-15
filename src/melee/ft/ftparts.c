@@ -25,7 +25,6 @@
 extern HSD_GObj* lbl_804D7814;
 extern HSD_PerfStat HSD_PerfCurrentStat;
 extern HSD_MObjInfo ftMObj;
-bool hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p);
 
 unk_t func_80074ACC();
 u32 func_8007506C(s32 ftkind, u32 part);

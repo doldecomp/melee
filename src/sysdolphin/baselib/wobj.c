@@ -1,3 +1,4 @@
+#include "sysdolphin/baselib/class.h"
 #include <sysdolphin/baselib/wobj.h>
 
 #include <sysdolphin/baselib/jobj.h>
@@ -8,7 +9,7 @@ static void WObjInfoInit(void);
 
 HSD_WObjInfo hsdWObj = { WObjInfoInit };
 
-static HSD_WObjInfo* default_class = NULL;
+static HSD_ClassInfo* default_class = NULL;
 
 void HSD_WObjRemoveAnim(HSD_WObj* wobj)
 {
@@ -113,7 +114,7 @@ void HSD_WObjInit(HSD_WObj* wobj, HSD_WObjDesc* desc)
     HSD_RObjResolveRefsAll(wobj->robj, desc->robjdesc);
 }
 
-void HSD_WObjSetDefaultClass(HSD_WObjInfo* info)
+void HSD_WObjSetDefaultClass(HSD_ClassInfo* info)
 {
     if (info) {
         HSD_ASSERT(221, hsdIsDescendantOf(info, &hsdWObj)); // The line number here is totally made
@@ -228,7 +229,7 @@ void HSD_WObjGetPosition(HSD_WObj* wobj, Vec3* vec)
 HSD_WObj* HSD_WObjAlloc(void)
 {
     HSD_WObj* wobj = (HSD_WObj*) hsdNew(
-        (HSD_ClassInfo*) (default_class ? default_class : &hsdWObj));
+        default_class ? default_class : (HSD_ClassInfo*) &hsdWObj);
     HSD_ASSERT(591, wobj);
     return wobj;
 }

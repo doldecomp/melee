@@ -371,9 +371,10 @@ bool hsdChangeClass(void* object, void* class_info)
     return hsdChangeClass_inline(object, class_info);
 }
 
-bool hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p)
+bool hsdIsDescendantOf(HSD_ClassInfo* info, any_t p)
 {
     HSD_ClassInfo* var_r31;
+    HSD_ClassInfo* cls = (HSD_ClassInfo*) p;
 
     if (info == NULL || p == NULL) {
         return false;
@@ -389,11 +390,11 @@ bool hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p)
     if (!(info->head.flags & 1)) {
         var_r31->head.info_init();
     }
-    if (!(p->head.flags & 1)) {
-        p->head.info_init();
+    if (!(cls->head.flags & 1)) {
+        cls->head.info_init();
     }
     while (var_r31 != NULL) {
-        if (var_r31 == p) {
+        if (var_r31 == cls) {
             return true;
         }
         var_r31 = var_r31->head.parent;
