@@ -1716,8 +1716,6 @@ void resolveIKJoint1(HSD_JObj* jobj)
         {
             if (jobj->robj != NULL) {
                 HSD_RObjUpdateAll(jobj->robj, jobj, JObjUpdateFunc);
-                // void HSD_RObjUpdateAll(HSD_RObj* robj, HSD_JObj* jobj,
-                // JObjUpdateFunc);
                 if (HSD_JObjMtxIsDirty(jobj)) {
                     HSD_JOBJ_METHOD(jobj)->make_mtx(jobj);
                     jobj->flags &= 0xFFFFFFBF;
