@@ -45,7 +45,7 @@ void HSD_DObjModifyFlags(HSD_DObj* dobj, u32 flags, u32 mask)
     if (dobj == NULL)
         return;
 
-    dobj->flags = dobj->flags & ~mask | flags & mask;
+    dobj->flags = (dobj->flags & ~mask) | (flags & mask);
 }
 
 void HSD_DObjRemoveAnimByFlags(HSD_DObj* dobj, u32 flags)
