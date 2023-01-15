@@ -411,7 +411,11 @@ lbl_8036FB3C:
 void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
                      HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint)
 {
-    u32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     bool has_dobj;
 
     if (jobj != NULL) {
@@ -905,8 +909,12 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
         if (jobj->flags & JOBJ_INSTANCE) {
             if (!(jobj->flags & JOBJ_HIDDEN)) {
                 Mtx mtx;
-                MtxPtr tmp;
-                u32 unused;
+
+                /// @todo Unused stack.
+#ifdef MUST_MATCH
+                u8 unused[8];
+#endif
+
                 HSD_CObj* cobj;
                 HSD_JObjSetupMatrix(jobj);
                 HSD_JObjSetupMatrix(jobj->child);
