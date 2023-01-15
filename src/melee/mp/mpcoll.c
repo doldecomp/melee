@@ -991,7 +991,7 @@ bool func_80043BBC(CollData* arg0, s32* arg1)
     return false;
 }
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
