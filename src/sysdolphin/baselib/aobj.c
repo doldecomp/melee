@@ -14,7 +14,10 @@ HSD_ObjAllocData aobj_alloc_data;
 
 static char lbl_804D5D08[7] = "aobj.c\0";
 static char lbl_804D5D10[4] = "new\0";
+
+#ifdef MUST_MATCH
 static char lbl_804D5D14[4] = "obj\0";
+#endif
 
 char lbl_80405FB8[9] = "object.h\0";
 char lbl_80405FC4[39] = "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF\0";
