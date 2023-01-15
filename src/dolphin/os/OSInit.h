@@ -15,5 +15,6 @@ __OSExceptionHandler __OSGetExceptionHandler(__OSException);
 void __OSSetExceptionHandler(s32, __OSExceptionHandler);
 u32 OSGetConsoleType(void);
 void OSInit(void);
+void __OSPSInit(void);
 
 #endif

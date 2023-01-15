@@ -10,5 +10,6 @@ void DCFlushRangeNoSync(void* addr, size_t nbytes);
 void ICFlashInvalidate(void);
 void ICInvalidateRange(void* addr, size_t nbytes);
 void LCDisable(void);
+void __OSCacheInit(void);
 
 #endif
