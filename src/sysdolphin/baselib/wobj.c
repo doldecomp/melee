@@ -1,5 +1,6 @@
 #include <sysdolphin/baselib/wobj.h>
 
+#include <dolphin/mtx/mtxvec.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/robj.h>
