@@ -2,6 +2,7 @@
 
 #include <dolphin/os/os.h>
 #include <string.h>
+#include <sysdolphin/baselib/hash.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/object.h>
 
@@ -264,7 +265,7 @@ int _hsdClassInit(HSD_Class* arg0)
     return 0;
 }
 
-void _hsdClassRelease(HSD_Class*) {}
+void _hsdClassRelease(HSD_Class* cls) {}
 
 void _hsdClassDestroy(HSD_Class* cls)
 {
@@ -422,7 +423,7 @@ bool hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
 
 void class_set_flags(HSD_ClassInfo* class_info, s32 set, s32 reset)
 {
-    class_info->head.flags = class_info->head.flags & ~reset | set;
+    class_info->head.flags = (class_info->head.flags & ~reset) | set;
 }
 
 void ForgetClassLibraryReal(HSD_ClassInfo* class_info)
@@ -471,7 +472,6 @@ void hsdForgetClassLibrary(const char* library_name)
     }
 }
 
-HSD_ClassInfo* HSD_HashSearch();
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 {
     if (lbl_804D7708 != 0) {
@@ -480,10 +480,12 @@ HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
     return NULL;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused5[] = "info_hash";
 #pragma pop
+#endif
 
 void DumpClassStat(HSD_ClassInfo* info, s32 level)
 {
