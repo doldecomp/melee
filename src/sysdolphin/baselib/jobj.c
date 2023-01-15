@@ -1731,7 +1731,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
         HSD_RObjGetGlobalPosition(var_r28->robj, 1, &var_r28->translate);
         PSVECSubtract(&var_r28->translate, &spB0, &sp8C);
         temp_f31 = PSVECDotProduct(&sp8C, &sp8C);
-        if (temp_f31 > var_f5) {
+        {
             sp68 = sp8C;
             if (HSD_RObjGetGlobalPosition(jobj->robj, 3, &sp5C)) {
                 PSVECSubtract(&sp5C, &spB0, &sp5C);
@@ -1766,9 +1766,6 @@ void resolveIKJoint1(HSD_JObj* jobj)
             var_f1 = temp_f5_2 * var_f4_3;
             var_f5 = sqrtf(1.0F / (1e-10F + var_f27));
             var_f29_2 = var_f27 * var_f5;
-        } else {
-            var_f1 = 0.0F;
-            var_f29_2 = temp_f30;
         }
         if (var_r30 != 0) {
             var_f29_2 = -var_f29_2;
@@ -1812,7 +1809,12 @@ void resolveIKJoint2(HSD_JObj* jobj)
     Mtx sp34;
     Vec3 sp28;
     Vec3 sp1C;
-    HSD_JObj* temp_r5;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     HSD_JObj* var_r29;
     f32 temp_f1_4;
     f32 var_f1_2;
