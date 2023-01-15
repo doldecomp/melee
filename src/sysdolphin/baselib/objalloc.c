@@ -1,5 +1,7 @@
 #include <sysdolphin/baselib/objalloc.h>
 
+#include <string.h>
+#include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/memory.h>
 
 static objheap obj_heap = { 0, 0, -1, -1 };
@@ -72,8 +74,7 @@ void* HSD_ObjAlloc(HSD_ObjAllocData* data)
             if (obj_heap.top != 0) {
                 size = obj_heap.remain;
             } else {
-                HSD_GetHeap();
-                size = OSCheckHeap();
+                size = OSCheckHeap(HSD_GetHeap());
             }
             if (size <= data->heap_limit_size) {
                 data->heap_limit_num = data->used + data->free;
@@ -82,8 +83,7 @@ void* HSD_ObjAlloc(HSD_ObjAllocData* data)
             if (obj_heap.top != 0) {
                 size = obj_heap.remain;
             } else {
-                HSD_GetHeap();
-                size = OSCheckHeap();
+                size = OSCheckHeap(HSD_GetHeap());
             }
             if (size > data->heap_limit_size) {
                 data->heap_limit_num = -1;
