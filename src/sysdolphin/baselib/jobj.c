@@ -1092,6 +1092,8 @@ static inline int iref_INC(void* o)
     HSD_OBJ(o)->ref_count_individual != 0
         ? (void) 0
         : __assert(lbl_804068E4, 0x9E, lbl_80406918);
+
+    /// @todo Missing return statement
 }
 
 static inline bool iref_none(void* o)
@@ -1731,7 +1733,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
         temp_f31 = PSVECDotProduct(&sp8C, &sp8C);
         if (temp_f31 > var_f5) {
             sp68 = sp8C;
-            if (HSD_RObjGetGlobalPosition(jobj->robj, 3, &sp5C) != 0) {
+            if (HSD_RObjGetGlobalPosition(jobj->robj, 3, &sp5C)) {
                 PSVECSubtract(&sp5C, &spB0, &sp5C);
                 if (temp_f26 != 0.0F) {
                     PSMTXRotAxisRad(sp20, &sp68, temp_f26);
@@ -2081,6 +2083,7 @@ void JObjAmnesia(HSD_ClassInfo* info)
     HSD_OBJECT_PARENT_INFO(&hsdJObj)->amnesia(info);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused3[] = "jobj[%d,%d]";
@@ -2095,6 +2098,7 @@ static char unused11[] = "  rot(G): ";
 static char unused12[] = "  sca(G): ";
 static char unused13[] = "  tra(G): ";
 #pragma pop
+#endif
 
 void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx, u32 trsp_mask,
                      u32 rendermode);
@@ -2116,7 +2120,9 @@ void JObjInfoInit(void)
     HSD_JOBJ_INFO(&hsdJObj)->release_child = JObjReleaseChild;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static u32 unused14[6] = { 0 };
 #pragma pop
+#endif
