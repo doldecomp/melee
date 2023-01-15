@@ -41,9 +41,7 @@ void GXSetCopyFilter(s8, u8*, s8, u8*);
 void GXSetCopyClear(u8*, s32);
 u32 GXSetDispCopyYScale(f32);
 void GXSetCopyClamp(s32);
-void GXSetTexCopyDst(s32, s32, s32, s32);
 void GXSetDispCopyDst(s32);
-void GXSetTexCopySrc(s16, s32, s16, s16);
 void GXSetDispCopySrc(s16, s32, s16, s16);
 
 #endif
