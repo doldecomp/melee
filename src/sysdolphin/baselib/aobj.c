@@ -15,7 +15,7 @@ HSD_ObjAllocData aobj_alloc_data;
 static char lbl_804D5D08[7] = "aobj.c\0";
 static char lbl_804D5D10[4] = "new\0";
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 static char lbl_804D5D14[4] = "obj\0";
 #endif
 

@@ -1103,7 +1103,7 @@ HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj)
     return NULL;
 }
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 #pragma push
 #pragma force_active on
 static char unused1[] = "hsdIsDescendantOf(info, &hsdLObj)";

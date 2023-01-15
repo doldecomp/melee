@@ -23,12 +23,16 @@ static u32 lbl_804D7708;
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
+
 void ClassInfoInit(HSD_ClassInfo* info)
 {
     if ((info->head.flags & 1) == 0) {
         (*info->head.info_init)();
     }
 }
+
+#ifdef MUST_MATCH
 #pragma pop
 #endif
 
