@@ -227,7 +227,7 @@ void lbl_803911C0(HSD_Obj* obj)
 struct _GObjFuncs {
     struct _GObjFuncs* next;
     u8 size;
-    void (**funcs)();
+    void (**funcs)(void);
 };
 
 extern GObjFuncs lbl_80408610;
