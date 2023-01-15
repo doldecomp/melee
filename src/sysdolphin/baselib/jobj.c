@@ -25,7 +25,7 @@ HSD_JObjInfo hsdJObj = {
 
 static HSD_JObjInfo* default_class;
 static HSD_SList* ufc_callbacks;
-static void (*dptcl_callback)();
+static void (*dptcl_callback)(int, int lo, int hi, HSD_JObj* jobj);
 static void (*jsound_callback)(s32);
 static void (*ptcltgt_callback)(HSD_JObj*, s32);
 static HSD_JObj* current_jobj;
@@ -1980,7 +1980,7 @@ void HSD_JObjSetMtxDirtySub(HSD_JObj* jobj)
     }
 }
 
-void HSD_JObjSetDPtclCallback(void (*cb)(s32, s32, s32, HSD_JObj*))
+void HSD_JObjSetDPtclCallback(DPCtlCallback cb)
 {
     dptcl_callback = cb;
 }

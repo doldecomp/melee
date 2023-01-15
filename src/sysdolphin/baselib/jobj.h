@@ -134,6 +134,7 @@ typedef struct _HSD_JObjInfo {
 
 extern HSD_JObjInfo hsdJObj;
 typedef void (*HSD_JObjWalkTreeCallback)(HSD_JObj*, f32**, s32);
+typedef void (*DPCtlCallback)(int, int lo, int hi, HSD_JObj* jobj);
 
 void HSD_JObjSetDefaultClass(HSD_JObjInfo* info);
 
