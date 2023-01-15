@@ -546,7 +546,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/dsp/dsp.c.o\
     $(BUILD_DIR)/src/dolphin/dsp/dsp_debug.c.o\
-    $(BUILD_DIR)/asm/dolphin/dsp/dsp_task.s.o\
+    $(BUILD_DIR)/src/dolphin/dsp/dsp_task.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/dvd/dvdlow.s.o\
