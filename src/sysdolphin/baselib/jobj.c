@@ -3,6 +3,7 @@
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/robj.h>
@@ -1044,7 +1045,10 @@ static inline void ref_INC_alt(void* o)
 
 void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 {
-    u32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     if (jobj == NULL || joint == NULL)
         return;
@@ -1065,7 +1069,11 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 
 void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
 {
-    u32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     while (jobj != NULL && joint != NULL) {
         HSD_JObjResolveRefs(jobj, joint);
         if (!(jobj->flags & JOBJ_INSTANCE)) {
@@ -1658,7 +1666,12 @@ void resolveIKJoint1(HSD_JObj* jobj)
     f32 var_f4;
     f32 var_f4_2;
     Vec3 spB0;
-    f32 tmp;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     f32 var_f4_3;
     f32 var_f4_4;
     f32 var_f5;
@@ -1703,6 +1716,8 @@ void resolveIKJoint1(HSD_JObj* jobj)
         {
             if (jobj->robj != NULL) {
                 HSD_RObjUpdateAll(jobj->robj, jobj, JObjUpdateFunc);
+                // void HSD_RObjUpdateAll(HSD_RObj* robj, HSD_JObj* jobj,
+                // JObjUpdateFunc);
                 if (HSD_JObjMtxIsDirty(jobj)) {
                     HSD_JOBJ_METHOD(jobj)->make_mtx(jobj);
                     jobj->flags &= 0xFFFFFFBF;
