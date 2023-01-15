@@ -342,7 +342,7 @@ static void func_8021A3BC(HSD_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_GObj* bg_gobj;
     s32 temp_r0_2;
-    s16 sp28[] = { 1, 2, 4 };
+    s16 sp28[BATTLE_BG_MAX] = { 1, 2, 4 };
     s32 tmp;
 
     /// @todo Unused stack.

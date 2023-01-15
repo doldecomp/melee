@@ -13,6 +13,7 @@
 -Wno-unused-value
 -Wno-switch
 -Wno-incompatible-library-redeclaration
+-Wno-gnu-folding-constant
 -Werror=strict-prototypes
 -Werror=implicit-function-declaration
 -Werror=typedef-redefinition
