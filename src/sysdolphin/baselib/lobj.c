@@ -1,10 +1,21 @@
 #include <sysdolphin/baselib/lobj.h>
 
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/mtxvec.h>
+#include <dolphin/mtx/vec.h>
+#include <placeholder.h>
 
 void LObjInfoInit(void);
 
-HSD_LObjInfo hsdLObj = { LObjInfoInit };
+HSD_LObjInfo hsdLObj = {
+    { { { LObjInfoInit, FLAGS_NONE, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0 },
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        NULL } },
+    NULL
+};
 
 extern s32 lightmask_diffuse;
 extern s32 lightmask_attnfunc;
@@ -83,7 +94,8 @@ HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx)
     }
 }
 
-static void LObjUpdateFunc(void* obj, u32 type, FObjData* val)
+/// @private
+void LObjUpdateFunc(void* obj, u32 type, FObjData* val)
 {
     HSD_LObj* lobj = obj;
 
@@ -310,7 +322,14 @@ void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
     if (spec_id != 0) {
         GXInitLightColor(&lobj->spec_lightobj, lobj->color);
         lobj->shininess = 50.0F;
+
+        /// @todo Duplicate assignment
+#ifdef MUST_MATCH
         x = x = lobj->shininess;
+#else
+        x = lobj->shininess;
+#endif
+
         x *= 0.5F;
         GXInitLightAttn(&lobj->spec_lightobj, 0.0F, 0.0F, 1.0F, x, 0.0F,
                         1.0F - x);
@@ -385,6 +404,8 @@ void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
 }
 
 extern char lbl_804D5D24[4];
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void HSD_LObjSetupInit(HSD_CObj* arg0)
@@ -727,6 +748,15 @@ lbl_8036639C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void HSD_LObjSetupInit(HSD_CObj* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 extern char lbl_804D5D2C[8];
 inline u8 HSD_LObjGetPriority(HSD_LObj* lobj)
 {
@@ -792,7 +822,7 @@ void HSD_LObjDeleteCurrent(HSD_LObj* lobj)
     }
 }
 
-inline void LObjRemoveAll()
+inline void LObjRemoveAll(void)
 {
     int i;
     for (i = 0; i < GX_MAX_LIGHT; i++) {
@@ -819,7 +849,11 @@ void HSD_LObjDeleteCurrentAll(HSD_LObj* lobj)
 
 void HSD_LObjSetCurrentAll(HSD_LObj* lobj)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
     u32 unused;
+#endif
+
     LObjRemoveAll();
     HSD_LObjAddCurrent(lobj);
 }
@@ -1064,6 +1098,7 @@ HSD_WObj* HSD_LObjGetInterestWObj(HSD_LObj* lobj)
     return NULL;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused1[] = "hsdIsDescendantOf(info, &hsdLObj)";
@@ -1071,3 +1106,4 @@ char lbl_804061D4[] = "unexpected lightdesc flags (%x)\n";
 static char unused2[] = "sysdolphin_base_library";
 static char unused3[] = "hsd_lobj";
 #pragma pop
+#endif
