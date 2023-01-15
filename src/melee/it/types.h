@@ -373,7 +373,7 @@ struct Item {
     enum_t spawn_kind;
 
     /// @at{10} @sz{4}
-    enum_t kind;
+    ItemKind kind;
 
     /// @at{14} @sz{4}
     enum_t hold_kind;
@@ -429,12 +429,11 @@ struct Item {
     ItemLogicTable* xB8_itemLogicTable; // Global item callbacks
 
     ItemStateContainer* xBC_itemStateContainer;
-
-    s32 xC0_unk_state; // Air state?
+    GroundOrAir ground_or_air;
     Article* xC4_article_data;
     HSD_Joint* xC8_joint;
     ItemAttr* xCC_item_attr;
-    struct ItemStateDesc* xD0_itemStateDesc;
+    ItemStateDesc* xD0_itemStateDesc;
     Item_DynamicBones xD4_dynamicBones[24];
     s32 x374_dynamicBonesNum;
     CollData x378_itemColl;
@@ -632,7 +631,7 @@ struct Item {
     f32 xD44_lifeTimer;
     f32 xD48_halfLifeTimer; // Not radioactive, just the item's original
                             // lifetime halved
-    s32 xD4C;
+    int xD4C;
     s32 xD50_landNum;  // Number of times this item has landed
     s32 xD54_throwNum; // Number of times this item has been thrown
     s32 xD58;
@@ -769,10 +768,10 @@ struct UnkItemArticles3 {
 };
 
 struct BobOmbRain {
-    s32 x0;
+    enum_t x0;
     HSD_JObj* x4;
     Vec3 x8_vec;
-    s32 x14;
+    enum_t x14;
     s32 x18;
     UnkFlagStruct x1C;
 };
@@ -782,7 +781,7 @@ struct SpawnItem {
     HSD_GObj*
         x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness' PK Fire
                          // Pillar has this set to PK Fire Spark's item GObj
-    ITKIND kind;         // 0x8, ID of the item to spawn
+    ItemKind kind;       // 0x8, ID of the item to spawn
 
     /// @at{C} @sz{4}
     /// @brief Defines the behavior of the item, such as thrown and pickup.
@@ -860,7 +859,7 @@ struct ItemCommonData {
     f32 xCC;
     f32 xD0;
     f32 xD4;
-    s32 xD8;
+    uint xD8;
     s32 xDC;
     u8 filler[0x148 - 0xE0];
     s32 x148;

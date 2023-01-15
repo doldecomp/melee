@@ -21,6 +21,7 @@ extern u32 lbl_804D6D10;
 extern uint lbl_804D6D14;
 
 extern ItemCommonData* lbl_804D6D28;
+extern CommonItemArticles* lbl_804D6D24;
 
 void func_8027B4A4(HSD_GObj*, u32);
 void* func_8027B5B0(s32, s32, HSD_JObj*, s32, s32);
@@ -29,7 +30,7 @@ void func_80274EE8(u32);
 /// Load ItCo.dat/usd
 void func_8027870C(s32);
 
-s32 func_8026D324(s32);
+bool func_8026D324(bool);
 s32 func_8026D604(HSD_GObj* item_gobj);
 void func_8026F9A0(void);
 void func_802701BC(HSD_GObj* item_gobj);

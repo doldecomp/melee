@@ -144,7 +144,7 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
 }
 
 // get closest opposing fp, on given side (left/right)
-HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
+HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 facing_dir)
 {
     Vec3 sp24;
     f32 dx, dy, diff;
@@ -174,8 +174,8 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 arg8)
             continue;
         }
         func_800866DC(cur, &sp24);
-        if ((arg8 == -1.0f && sp24.x > v->x) ||
-            (arg8 == +1.0f && sp24.x < v->x))
+        if ((facing_dir == -1.0f && sp24.x > v->x) ||
+            (facing_dir == +1.0f && sp24.x < v->x))
         {
             continue;
         }

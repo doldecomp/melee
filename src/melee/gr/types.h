@@ -3,7 +3,9 @@
 
 #include <melee/it/forward.h>
 #include <melee/sc/scene.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
 
 /// @todo Finish values, use @c PascalCase
 typedef enum InternalStageId {
@@ -170,7 +172,7 @@ typedef struct StageInfo {
         }* ptr;
     }* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
-    bool (*x178)(s32);
+    bool (*x178)(int);
     void* x17C;
     struct _HSD_GObj* x180[4];
     u8 x190_pad[0x280 - 0x190];
@@ -217,10 +219,10 @@ typedef struct StageInfo {
 } StageInfo;
 
 typedef struct StageCallbacks {
-    void (*callback0)(struct _HSD_GObj*);
-    s32 (*callback1)();
-    void (*callback2)(struct _HSD_GObj*);
-    void (*callback3)();
+    void (*callback0)(HSD_GObj*);
+    bool (*callback1)(HSD_GObj*);
+    void (*callback2)(HSD_GObj*);
+    void (*callback3)(HSD_GObj*);
     u32 flags;
 } StageCallbacks;
 
@@ -229,15 +231,15 @@ typedef struct StageData {
     StageCallbacks* callbacks;
     char* data1;
     void (*callback0)(void);
-    void (*callback1)(s32);
+    void (*callback1)(int);
     void (*callback2)(void);
     void (*callback3)(void);
-    s32 (*callback4)();
-    bool (*callback5)(s32);
-    s32 (*callback6)(Vec3*, s32, struct _HSD_JObj*);
+    bool (*callback4)(void);
+    bool (*callback5)(int);
+    bool (*callback6)(Vec3*, int, HSD_JObj*);
     u32 flags2;
     S16Vec3* x2C;
-    s32 x30; // size of x2C array
+    size_t x30; // size of x2C array
 } StageData;
 
 typedef struct StructPairWithStageID {
@@ -269,15 +271,15 @@ typedef struct Map {
         u8 b7 : 1;
     } x11_flags;
 
-    int map_id;    // 0x14
-    HSD_GObj* x18; // 0x18
+    InternalStageId map_id; // 0x14
+    HSD_GObj* x18;          // 0x18
     HSD_GObjEvent x1C_callback;
-    s32 x20[8];
+    int x20[8];
     u8 x40_pad[0xC4 - 0x40];
-    s32 xC4;
-    s32 xC8;
-    s32 xCC;
-    s32 xD0;
+    int xC4;
+    int xC8;
+    int xCC;
+    int xD0;
     u8 xD4_pad[0x218 - 0xD4];
 } Map;
 

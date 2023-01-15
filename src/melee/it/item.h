@@ -58,7 +58,8 @@ void func_80268DD4(HSD_GObj* item_gobj, f32 arg8);
 void func_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc);
 
 /// Item State Change
-void func_80268E5C(HSD_GObj* item_gobj, s32 itemStateID, s32 itemStateFlags);
+void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
+                   Item_StateChangeFlags flags);
 
 /// Advance item animation + script?
 void func_802694CC(HSD_GObj* item_gobj);
@@ -144,7 +145,6 @@ bool func_802682F0(HSD_GObj* item_gobj);
 /// Set up item dynamic bones
 void func_80268560(HSD_GObj* item_gobj);
 
-/// Item Think - Hitlag
 void lbl_802693E4(HSD_GObj* item_gobj);
 
 /// Item Think - Animation

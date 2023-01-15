@@ -1,32 +1,37 @@
 #include <melee/gr/grtmars.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
 #include <melee/gr/stage.h>
+#include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 
 extern StageInfo stage_info;
 
-static StageCallbacks lbl_803E8EB0[4] = { {
-                                              GrTMars_80222080,
-                                              GrTMars_802220AC,
-                                              GrTMars_802220B4,
-                                              GrTMars_802220B8,
-                                          },
-                                          {
-                                              GrTMars_8022214C,
-                                              GrTMars_8022219C,
-                                              GrTMars_802221A4,
-                                              GrTMars_802221C4,
-                                          },
-                                          {
-                                              GrTMars_802220BC,
-                                              GrTMars_8022210C,
-                                              GrTMars_80222114,
-                                              GrTMars_80222148,
-                                              0xC0000000,
-                                          } };
+static StageCallbacks lbl_803E8EB0[4] = {
+    {
+        GrTMars_80222080,
+        GrTMars_802220AC,
+        GrTMars_802220B4,
+        GrTMars_802220B8,
+    },
+    {
+        GrTMars_8022214C,
+        GrTMars_8022219C,
+        GrTMars_802221A4,
+        GrTMars_802221C4,
+    },
+    {
+        GrTMars_802220BC,
+        GrTMars_8022210C,
+        GrTMars_80222114,
+        GrTMars_80222148,
+        0xC0000000,
+    },
+};
 
 StageData lbl_803E8F0C = {
     0x00000034,       lbl_803E8EB0,     "/GrTMs.dat",     GrTMars_80221EF8,
@@ -34,12 +39,12 @@ StageData lbl_803E8F0C = {
     GrTMars_802221C8, GrTMars_802221D0, 0x00000001,
 };
 
-static void GrTMars_80221EF4(s32) {}
+static void GrTMars_80221EF4(int) {}
 
 static void GrTMars_80221EF8(void)
 {
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
     GrTMars_80221F98(0);
     GrTMars_80221F98(1);
     GrTMars_80221F98(2);
@@ -59,12 +64,12 @@ static void GrTMars_80221F6C(void)
     func_801CAE04(0);
 }
 
-static s32 GrTMars_80221F90(void)
+static bool GrTMars_80221F90(void)
 {
-    return 0;
+    return false;
 }
 
-static HSD_GObj* GrTMars_80221F98(s32 id)
+static HSD_GObj* GrTMars_80221F98(int id)
 {
     HSD_GObj* gobj;
     Map* gp;
@@ -72,6 +77,7 @@ static HSD_GObj* GrTMars_80221F98(s32 id)
 
     callbacks = &lbl_803E8EB0[id];
     gobj = func_801C14D0(id);
+
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = NULL;
@@ -89,6 +95,7 @@ static HSD_GObj* GrTMars_80221F98(s32 id)
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtmars.c", 0xC3, id);
     }
+
     return gobj;
 }
 
@@ -98,7 +105,7 @@ static void GrTMars_80222080(HSD_GObj* gobj)
     func_801C8138(gobj, gp->map_id, 0);
 }
 
-static s32 GrTMars_802220AC(void)
+static bool GrTMars_802220AC(HSD_GObj*)
 {
     return false;
 }
@@ -108,7 +115,7 @@ static void GrTMars_802220B4(HSD_GObj*)
     return;
 }
 
-static void GrTMars_802220B8(void)
+static void GrTMars_802220B8(HSD_GObj*)
 {
     return;
 }
@@ -121,9 +128,9 @@ static void GrTMars_802220BC(HSD_GObj* gobj)
     func_801C8138(gobj, gp->map_id, 0);
 }
 
-static s32 GrTMars_8022210C(void)
+static bool GrTMars_8022210C(HSD_GObj*)
 {
-    return 0;
+    return false;
 }
 
 static void GrTMars_80222114(HSD_GObj* gobj)
@@ -132,7 +139,7 @@ static void GrTMars_80222114(HSD_GObj* gobj)
     func_801C2FE0(gobj);
 }
 
-static void GrTMars_80222148(void) {}
+static void GrTMars_80222148(HSD_GObj*) {}
 
 static void GrTMars_8022214C(HSD_GObj* gobj)
 {
@@ -142,9 +149,9 @@ static void GrTMars_8022214C(HSD_GObj* gobj)
     func_801C8138(gobj, map->map_id, 0);
 }
 
-static s32 GrTMars_8022219C(void)
+static bool GrTMars_8022219C(HSD_GObj*)
 {
-    return 0;
+    return false;
 }
 
 static void GrTMars_802221A4(HSD_GObj* gobj)
@@ -152,14 +159,14 @@ static void GrTMars_802221A4(HSD_GObj* gobj)
     func_801C2FE0(gobj);
 }
 
-static void GrTMars_802221C4(void) {}
+static void GrTMars_802221C4(HSD_GObj*) {}
 
-static bool GrTMars_802221C8(s32)
+static bool GrTMars_802221C8(int)
 {
     return false;
 }
 
-static s32 GrTMars_802221D0(Vec3*, s32, struct _HSD_JObj*)
+static bool GrTMars_802221D0(Vec3*, int, struct _HSD_JObj*)
 {
-    return 1;
+    return true;
 }

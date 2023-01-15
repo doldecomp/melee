@@ -1,8 +1,12 @@
 #include <melee/gr/grtdonkey.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
+#include <melee/lb/lbunknown_003.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E8790[4] = {
     { lbl_802203B4, lbl_802203E0, lbl_802203E8, lbl_802203EC, 0UL },
@@ -19,7 +23,8 @@ extern StageData lbl_803E87EC = { 0x0000002B,   lbl_803E8790,  "/GrTDk.dat",
 
 extern StageInfo stage_info;
 
-static void func_80220228(long) {}
+static void func_80220228(int) {}
+
 static void lbl_8022022C(void)
 {
     stage_info.unk8C.b4 = 0;
@@ -32,16 +37,20 @@ static void lbl_8022022C(void)
     func_801C4210();
     func_801C42AC();
 }
+
 static void lbl_8022029C(void) {}
+
 static void lbl_802202A0(void)
 {
     func_801CAE04(0);
 }
-static s32 lbl_802202C4(void)
+
+static bool lbl_802202C4(void)
 {
-    return 0;
+    return false;
 }
-static HSD_GObj* func_802202CC(s32 gobj_id)
+
+static HSD_GObj* func_802202CC(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E8790[gobj_id];
@@ -73,12 +82,16 @@ static void lbl_802203B4(HSD_GObj* gobj)
     Map* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_802203E0(void)
+
+static bool lbl_802203E0(HSD_GObj*)
 {
-    return 0;
+    return false;
 }
+
 static void lbl_802203E8(HSD_GObj*) {}
-static void lbl_802203EC(void) {}
+
+static void lbl_802203EC(HSD_GObj*) {}
+
 static void lbl_802203F0(HSD_GObj* gobj)
 {
     u32 unused[2];
@@ -86,37 +99,50 @@ static void lbl_802203F0(HSD_GObj* gobj)
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_80220440(void)
+
+static bool lbl_80220440(HSD_GObj*)
 {
-    return 0;
+    return false;
 }
+
 static void lbl_80220448(HSD_GObj* gobj)
 {
     func_800115F4();
     func_801C2FE0(gobj);
 }
-static void lbl_8022047C(void) {}
+
+static void lbl_8022047C(HSD_GObj*) {}
+
 static void lbl_80220480(HSD_GObj* gobj)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
-static s32 lbl_802204D0(void)
+
+static bool lbl_802204D0(HSD_GObj*)
 {
-    return 0;
+    return false;
 }
-static void lbl_802204D8(HSD_GObj*)
+
+static void lbl_802204D8(HSD_GObj* arg0)
 {
-    func_801C2FE0();
+    func_801C2FE0(arg0);
 }
-static void lbl_802204F8(void) {}
-static bool lbl_802204FC(long)
+
+static void lbl_802204F8(HSD_GObj*) {}
+
+static bool lbl_802204FC(int)
 {
-    return 0;
+    return false;
 }
-static s32 lbl_80220504(Vec3*, s32, struct _HSD_JObj*)
+
+static bool lbl_80220504(Vec3*, int, struct _HSD_JObj*)
 {
-    return 1;
+    return true;
 }

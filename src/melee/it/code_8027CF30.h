@@ -124,7 +124,7 @@ HSD_GObj* func_802C3BAC(HSD_GObj*, Vec3*, f32 facing_dir, f32);
 /// Clones an entity?
 HSD_GObj* func_802C3AF0(HSD_GObj*);
 void func_802AE608(HSD_GObj*);
-void func_8029C6CC(f32 radians, f32 vel, HSD_GObj* owner, Vec3*, ITKIND);
+void func_8029C6CC(f32 radians, f32 vel, HSD_GObj* owner, Vec3*, ItemKind);
 HSD_GObj* func_8029CEB4(HSD_GObj*, Vec3*, s32, f32 facing_dir);
 HSD_GObj* func_802C720C(HSD_GObj*, Vec3*, s32, f32);
 void func_802C7340(HSD_GObj*);
@@ -153,5 +153,6 @@ void func_802950D4(HSD_GObj*, bool);
 void func_80294EB0(HSD_GObj*, Vec3*, Vec3*);
 s32 func_802F2094(s32, Vec3*, s32, s32);
 HSD_GObj* func_80294DC0(Vec3*);
+void func_8027D670(Vec3* const);
 
 #endif

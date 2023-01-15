@@ -1,9 +1,12 @@
 #include <melee/gr/grtness.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
 #include <melee/gr/stage.h>
+#include <melee/lb/lbunknown_003.h>
 
 extern StageInfo stage_info;
 
@@ -35,7 +38,7 @@ StageData lbl_803E908C = {
     GrTNess_802228A4, GrTNess_802228AC, 0x00000001,
 };
 
-static void GrTNess_802225D0(s32)
+static void GrTNess_802225D0(int)
 {
     return;
 }
@@ -60,12 +63,12 @@ static void GrTNess_80222644(void)
 
 static void GrTNess_80222648(void)
 {
-    func_801CAE04(0);
+    func_801CAE04(false);
 }
 
-static s32 GrTNess_8022266C(void)
+static bool GrTNess_8022266C(void)
 {
-    return 0;
+    return false;
 }
 
 static HSD_GObj* GrTNess_80222674(int id)
@@ -100,9 +103,9 @@ static void GrTNess_8022275C(HSD_GObj* gobj)
     func_801C8138(gobj, gp->map_id, 0);
 }
 
-static s32 GrTNess_80222788(void)
+static bool GrTNess_80222788(HSD_GObj*)
 {
-    return 0;
+    return false;
 }
 
 static void GrTNess_80222790(HSD_GObj*)
@@ -110,22 +113,26 @@ static void GrTNess_80222790(HSD_GObj*)
     return;
 }
 
-static void GrTNess_80222794(void)
+static void GrTNess_80222794(HSD_GObj*)
 {
     return;
 }
 
 static void GrTNess_80222798(HSD_GObj* gobj)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Map* gp = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }
 
-static s32 GrTNess_802227E8(void)
+static bool GrTNess_802227E8(HSD_GObj*)
 {
-    return 0;
+    return false;
 }
 
 static void GrTNess_802227F0(HSD_GObj* gobj)
@@ -134,22 +141,26 @@ static void GrTNess_802227F0(HSD_GObj* gobj)
     func_801C2FE0(gobj);
 }
 
-static void GrTNess_80222824(void)
+static void GrTNess_80222824(HSD_GObj*)
 {
     return;
 }
 
 static void GrTNess_80222828(HSD_GObj* gobj)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Map* gp = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }
 
-static s32 GrTNess_80222878(void)
+static bool GrTNess_80222878(HSD_GObj*)
 {
-    return 0;
+    return false;
 }
 
 static void GrTNess_80222880(HSD_GObj* gobj)
@@ -157,17 +168,17 @@ static void GrTNess_80222880(HSD_GObj* gobj)
     func_801C2FE0(gobj);
 }
 
-static void GrTNess_802228A0(void)
+static void GrTNess_802228A0(HSD_GObj*)
 {
     return;
 }
 
-static bool GrTNess_802228A4(s32)
+static bool GrTNess_802228A4(int)
 {
     return false;
 }
 
-static s32 GrTNess_802228AC(Vec3*, s32, struct _HSD_JObj*)
+static bool GrTNess_802228AC(Vec3*, int, struct _HSD_JObj*)
 {
     return true;
 }

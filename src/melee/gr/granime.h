@@ -6,5 +6,6 @@
 
 void func_801C7FF8(HSD_GObj*, s32, s32, s32, f32, f32);
 void func_801C8138(HSD_GObj*, enum_t, bool);
+bool func_801C83D0(HSD_GObj*, bool, enum_t);
 
 #endif

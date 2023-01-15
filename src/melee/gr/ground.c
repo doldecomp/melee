@@ -111,7 +111,7 @@ static u8* lbl_804D6950;
 
 static void func_801BFFA8(void) {}
 
-static void func_801BFFAC(s32 unused) {}
+static void func_801BFFAC(bool unused) {}
 
 static void zeroStageInfoArrays(void)
 {
@@ -140,16 +140,22 @@ void func_801BFFB0(void)
     stage_info.x6DC = 0;
     stage_info.x724 = -10000;
     stage_info.x12C = NULL;
-    stage_info.unk8C.b3 = 0;
-    stage_info.unk8C.b2 = 1;
-    stage_info.x178 = 0;
+
+    stage_info.unk8C.b3 = false;
+    stage_info.unk8C.b2 = true;
+
+    stage_info.x178 = NULL;
     stage_info.x17C = NULL;
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 0;
-    stage_info.unk8C.b6 = 0;
+
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = false;
+    stage_info.unk8C.b6 = false;
+
     stage_info.x714 = -1;
     stage_info.x90 = 0;
-    stage_info.unk8C.b7 = 0;
+
+    stage_info.unk8C.b7 = false;
+
     stage_info.x720 = -1;
     stage_info.x94 = 0;
 
@@ -160,22 +166,29 @@ void func_801BFFB0(void)
     stage_info.x694[2] = NULL;
     stage_info.x694[3] = NULL;
     stage_info.x6A4 = NULL;
+
     stage_info.cam_info.cam_bounds_left = -170;
     stage_info.cam_info.cam_bounds_right = 170;
     stage_info.cam_info.cam_bounds_top = 120;
     stage_info.cam_info.cam_bounds_bottom = -60;
+
     stage_info.cam_info.cam_x_offset = 0;
     stage_info.cam_info.cam_y_offset = 0;
+
     stage_info.cam_info.cam_vertical_tilt = 30;
     stage_info.cam_info.cam_pan_degrees = -10;
+
     stage_info.cam_info.x20 = 0.2;
     stage_info.cam_info.x24 = 0.2;
+
     stage_info.cam_info.cam_zoom_rate = 82;
     stage_info.cam_info.cam_max_depth = 1000;
+
     stage_info.blast_zone.left = -99999;
     stage_info.blast_zone.right = 99999;
     stage_info.blast_zone.top = 99999;
     stage_info.blast_zone.bottom = -99999;
+
     stage_info.internal_stage_id = -1;
     stage_info.x6D2 = 0;
     stage_info.x6D4 = 0;
@@ -786,11 +799,12 @@ void func_801C1074(StructPairWithStageID* pair, s32 arg1)
     lbl_803DFEDC[pair->stage_id]->callback1(arg1);
 }
 
-void func_801C10B8(s32 arg0, s32 arg1)
+void func_801C10B8(HSD_GObj* arg0, HSD_GObjEvent arg1)
 {
     struct {
         void* unk0;
-        s32 unk4, unk8;
+        HSD_GObj* unk4;
+        HSD_GObjEvent unk8;
     }* temp_r3;
 
     temp_r3 = HSD_MemAlloc(0xC);
@@ -877,7 +891,7 @@ extern u8 lbl_804D7849;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm HSD_GObj* func_801C14D0(s32 gobj_id)
+asm HSD_GObj* func_801C14D0(int gobj_id)
 { // clang-format off
     nofralloc
 /* 801C14D0 001BE0B0  7C 08 02 A6 */	mflr r0
@@ -1247,7 +1261,7 @@ lbl_801C1A0C:
 
 #else
 
-HSD_GObj* func_801C14D0(s32 gobj_id)
+HSD_GObj* func_801C14D0(int gobj_id)
 {
     NOT_IMPLEMENTED;
 }
@@ -2348,7 +2362,7 @@ static s16 lbl_804D6954;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_801C2FE0(void)
+asm void func_801C2FE0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801C2FE0 001BFBC0  7C 08 02 A6 */	mflr r0
@@ -2447,7 +2461,7 @@ lbl_801C3114:
 
 #else
 
-void func_801C2FE0(void)
+void func_801C2FE0(HSD_GObj* arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -4550,7 +4564,7 @@ void func_801C5694(Map* gp, s32 i, f32 val)
     }
 }
 
-bool func_801C5700(s32 i)
+bool func_801C5700(int i)
 {
     if (stage_info.x178 != NULL) {
         return stage_info.x178(i);

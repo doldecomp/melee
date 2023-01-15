@@ -162,6 +162,7 @@ void HSD_JObjResolveRefsAll(HSD_JObj*, HSD_Joint*);
 void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode);
 void HSD_JObjRemoveAnim(HSD_JObj* jobj);
 void HSD_JObjAddNext(HSD_JObj* jobj, HSD_JObj* next);
+void HSD_JObjRemoveAnimAll(HSD_JObj* jobj);
 
 static inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
