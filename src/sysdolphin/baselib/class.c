@@ -1,6 +1,7 @@
 #include <sysdolphin/baselib/class.h>
 
 #include <dolphin/os/os.h>
+#include <string.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/object.h>
 
@@ -67,6 +68,7 @@ void OSReport_PrintSpaces(s32 count)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused1[] = "entry %d <null>\n";
@@ -74,6 +76,7 @@ static char unused2[] = "entry %d - %d <null>\n";
 static char unused3[] = "entry %d(%d)";
 static char unused4[] = "  nb_alloc %d nb_free %d\n";
 #pragma pop
+#endif
 
 HSD_MemoryEntry* GetMemoryEntry(s32 idx)
 {
@@ -256,7 +259,7 @@ HSD_Class* _hsdClassAlloc(HSD_ClassInfo* info)
     return mem_piece;
 }
 
-int _hsdClassInit(HSD_Class*)
+int _hsdClassInit(HSD_Class* arg0)
 {
     return 0;
 }
@@ -374,7 +377,14 @@ bool hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p)
     if (info == NULL || p == NULL) {
         return false;
     }
+
+    /// @todo Duplicate assignment.
+#ifdef MUST_MATCH
     var_r31 = var_r31 = info;
+#else
+    var_r31 = info;
+#endif
+
     if (!(info->head.flags & 1)) {
         var_r31->head.info_init();
     }
