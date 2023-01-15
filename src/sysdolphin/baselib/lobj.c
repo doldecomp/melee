@@ -962,7 +962,12 @@ s32 HSD_LightID2Index(GXLightID arg0)
         break;
     default:
         __assert(lbl_804D5D18, 0x492U, lbl_804D5D20);
+
+        /// @todo Find a better fix for uninitialized @c var_r31
+#ifndef MUST_MATCH
+        var_r31 = 0;
         break;
+#endif
     }
     return var_r31;
 }
