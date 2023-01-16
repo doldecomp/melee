@@ -26,8 +26,6 @@ extern void exit(int);
 extern void __init_user(void);
 extern void OSInit(void);
 extern void DBInit(void);
-extern void __OSCacheInit(void);
-extern void __OSPSInit(void);
 
 SECTION_INIT void __check_pad3(void);
 SECTION_INIT void __start(void);
