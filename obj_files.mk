@@ -627,7 +627,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/ar/ar.s.o\
-    $(BUILD_DIR)/asm/dolphin/ar/arq.s.o\
+    $(BUILD_DIR)/src/dolphin/ar/arq.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/card/CARDBios.c.o\
