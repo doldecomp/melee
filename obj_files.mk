@@ -615,7 +615,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/pad/PadClamp.c.o\
-    $(BUILD_DIR)/asm/dolphin/pad/Padclamp.s.o\
     $(BUILD_DIR)/src/dolphin/pad/Pad.c.o\
     $(BUILD_DIR)/asm/dolphin/pad/Pad.s.o\
 
@@ -662,7 +661,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/dolphin/axfx/reverb_std.s.o\
     $(BUILD_DIR)/asm/dolphin/axfx/chorus.s.o\
     $(BUILD_DIR)/asm/dolphin/axfx/delay.s.o\
-    $(BUILD_DIR)/asm/dolphin/axfx/axfx.s.o\
+    $(BUILD_DIR)/src/dolphin/axfx/axfx.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/sysdolphin/baselib/dobj.c.o\

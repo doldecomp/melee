@@ -17,7 +17,7 @@ typedef struct _Heap {
 
 typedef int OSHeapHandle;
 
-// extern volatile OSHeapHandle __OSCurrHeap;
+extern volatile OSHeapHandle __OSCurrHeap;
 
 void* OSInitAlloc(void*, void*, int);
 OSHeapHandle OSCreateHeap(void*, void*);
