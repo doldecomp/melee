@@ -9,23 +9,8 @@
 static void FogInfoInit(void);
 static void FogAdjInfoInit(void);
 
-HSD_FogInfo hsdFog = { { {
-    { FogInfoInit, FLAGS_NONE, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0 },
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-} } };
-
-HSD_ClassInfo hsdFogAdj = {
-    { FogAdjInfoInit, FLAGS_NONE, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0 },
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-};
+HSD_FogInfo hsdFog = { FogInfoInit };
+HSD_ClassInfo hsdFogAdj = { FogAdjInfoInit };
 
 const GXColor lbl_804DE6F0 = { 0 };
 

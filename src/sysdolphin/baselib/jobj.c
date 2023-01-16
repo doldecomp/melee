@@ -11,19 +11,7 @@
 #include <sysdolphin/baselib/spline.h>
 
 void JObjInfoInit(void);
-HSD_JObjInfo hsdJObj = {
-    { { { JObjInfoInit, FLAGS_NONE, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0 },
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL } },
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-};
+HSD_JObjInfo hsdJObj = { JObjInfoInit };
 
 static HSD_ClassInfo* default_class;
 static HSD_SList* ufc_callbacks;

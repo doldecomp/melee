@@ -14,6 +14,8 @@
 -Wno-switch
 -Wno-incompatible-library-redeclaration
 -Wno-gnu-folding-constant
+-Wno-missing-braces
+-Wno-missing-field-initializers
 -Werror=strict-prototypes
 -Werror=implicit-function-declaration
 -Werror=typedef-redefinition
@@ -21,5 +23,4 @@
 -Werror=pointer-type-mismatch
 -Werror=implicit-int
 -Werror=c2x-extensions
--Werror=missing-field-initializers
 -Werror=unknown-pragmas

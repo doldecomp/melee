@@ -7,15 +7,7 @@
 
 void LObjInfoInit(void);
 
-HSD_LObjInfo hsdLObj = {
-    { { { LObjInfoInit, FLAGS_NONE, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0 },
-        NULL,
-        NULL,
-        NULL,
-        NULL,
-        NULL } },
-    NULL
-};
+HSD_LObjInfo hsdLObj = { LObjInfoInit };
 
 extern s32 lightmask_diffuse;
 extern s32 lightmask_attnfunc;

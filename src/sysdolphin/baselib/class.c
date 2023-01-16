@@ -7,14 +7,7 @@
 #include <sysdolphin/baselib/object.h>
 
 void _hsdClassInfoInit(void);
-HSD_ClassInfo hsdClass = {
-    { _hsdClassInfoInit, FLAGS_NONE, NULL, NULL, 0, 0, NULL, NULL, NULL, 0, 0 },
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-};
+HSD_ClassInfo hsdClass = { _hsdClassInfoInit };
 
 static HSD_MemoryEntry** memory_list;
 static s32 nb_memory_list;
