@@ -94,7 +94,7 @@ StageData lbl_803E7E38 = {
     0,
 };
 
-static void func_80219C98(void)
+static void func_80219C98(int arg0)
 {
     lbl_804D6AC8 = 1;
 }
@@ -186,7 +186,7 @@ static void func_80219E6C(HSD_GObj* gobj)
     HSD_JObjSetTranslate(func_801C2CF4(3), &v);
 }
 
-bool func_8021A10C(void)
+bool func_8021A10C(HSD_GObj* arg0)
 {
     return false;
 }
@@ -207,7 +207,7 @@ static void func_8021A11C(HSD_GObj* gobj)
     func_801C8138(gobj, map->map_id, 0);
 }
 
-static bool func_8021A16C(void)
+static bool func_8021A16C(HSD_GObj*)
 {
     return false;
 }
@@ -408,7 +408,7 @@ static bool func_8021A610(int arg0)
     return false;
 }
 
-static bool func_8021A618(void)
+static bool func_8021A618(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }
