@@ -11,8 +11,8 @@ extern voidfunc __ctors[];
 
 static void __init_cpp(void);
 
-SECTION_INIT asm void __init_hardware(void)
-{ // clang-format off
+SECTION_INIT asm void __init_hardware(void){
+    // clang-format off
     nofralloc
     mfmsr r0
     ori  r0,r0,MSR_FP
