@@ -183,36 +183,36 @@ void HSD_FogReqAnimByFlags(HSD_Fog* fog, u32 flags, f32 frame)
 
 void HSD_FogInterpretAnim(HSD_Fog* fog)
 {
-    if (fog != NULL) {
+    if (fog != NULL)
         HSD_AObjInterpretAnim(fog->aobj, fog, FogUpdateFunc);
-    }
 }
 
-void FogUpdateFunc(HSD_Fog* fog, u32 type, FObjData* fv)
+void FogUpdateFunc(any_t obj, enum_t type, HSD_ObjData* val)
 {
+    HSD_Fog* fog = obj;
     if (fog != NULL) {
         switch (type) {
         case 1:
-            fog->start = fv->fv;
+            fog->start = val->fv;
             return;
         case 2:
-            fog->end = fv->fv;
+            fog->end = val->fv;
             return;
         case 5:
-            fog->color.r = 255.0F * fv->fv;
+            fog->color.r = 255.0F * val->fv;
             return;
         case 6:
-            fog->color.g = 255.0F * fv->fv;
+            fog->color.g = 255.0F * val->fv;
             return;
         case 7:
-            fog->color.b = 255.0F * fv->fv;
+            fog->color.b = 255.0F * val->fv;
             return;
         case 8:
-            fog->color.a = 255.0F * fv->fv;
+            fog->color.a = 255.0F * val->fv;
             return;
         case 20:
             if (fog->fog_adj != NULL) {
-                fog->fog_adj->center = fv->fv;
+                fog->fog_adj->center = val->fv;
             }
             break;
         }

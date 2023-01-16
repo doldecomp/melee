@@ -4,6 +4,7 @@
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/forward.h>
 #include <sysdolphin/baselib/object.h>
 
 typedef struct _HSD_FogAdj {
@@ -14,7 +15,7 @@ typedef struct _HSD_FogAdj {
     /* 0x3C */ struct _HSD_AObj* aobj;
 } HSD_FogAdj;
 
-typedef struct _HSD_Fog {
+struct _HSD_Fog {
     /* 0x00 */ HSD_Obj parent;
     /* 0x08 */ u32 type;
     /* 0x0C */ HSD_FogAdj* fog_adj;
@@ -22,7 +23,7 @@ typedef struct _HSD_Fog {
     /* 0x14 */ f32 end;
     /* 0x18 */ GXColor color;
     /* 0x1C */ struct _HSD_AObj* aobj;
-} HSD_Fog;
+};
 
 typedef struct _HSD_FogAdjDesc {
     /* 0x00 */ u16 center;
@@ -51,7 +52,7 @@ HSD_FogAdj* HSD_FogAdjLoadDesc(HSD_FogAdjDesc*);
 void HSD_FogInit(HSD_Fog*, HSD_FogDesc*);
 void HSD_FogAdjInit(HSD_FogAdj*, HSD_FogAdjDesc*);
 void HSD_FogReqAnimByFlags(HSD_Fog*, u32 flags, f32 frame);
-void FogUpdateFunc(HSD_Fog* fog, u32 type, FObjData* fv);
+void FogUpdateFunc(any_t obj, enum_t type, HSD_ObjData* fval);
 HSD_Fog* HSD_FogLoadDesc(HSD_FogDesc* desc);
 
 #endif

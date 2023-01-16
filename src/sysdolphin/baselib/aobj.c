@@ -6,6 +6,7 @@
 #include <string.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/forward.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/robj.h>
 #include <sysdolphin/baselib/tobj.h>
@@ -107,7 +108,7 @@ void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
     HSD_FObjReqAnimAll(aobj->fobj, frame);
 }
 
-void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, Event func)
+void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_AObjUpdateFunc func)
 {
     if (!aobj)
         return;
@@ -116,7 +117,8 @@ void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, Event func)
     aobj->flags |= AOBJ_NO_ANIM;
 }
 
-void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, Event update_func)
+void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
+                           HSD_AObjUpdateFunc update_func)
 {
     f32 rate = 0;
 
