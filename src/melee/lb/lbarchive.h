@@ -6,8 +6,8 @@
 #include <sysdolphin/baselib/archive.h>
 
 void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length);
-void func_80016EFC();
-void func_80016BE0();
+void func_80016EFC(void);
+void func_80016BE0(void);
 
 void func_80016C64(char*, int**, char*, int, ...);
 void* func_80016DBC(void*, ...);
