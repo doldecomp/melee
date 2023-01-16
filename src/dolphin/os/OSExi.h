@@ -45,6 +45,9 @@ typedef struct EXIControl {
     } queue[3];
 } EXIControl;
 
+#define EXI_REG_MAX 5
+extern vu32 __EXIRegs[EXI_MAX_CHAN][EXI_REG_MAX] AT_ADDRESS(0xCC006800);
+
 void SetExiInterruptMask(EXIChannel, volatile EXIControl*);
 bool EXIImm(EXIChannel, void* buf, s32 len, u32 type, EXICallback);
 bool EXIImmEx(EXIChannel, void* buf, s32 len, u32 mode);

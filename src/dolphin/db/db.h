@@ -12,5 +12,6 @@ typedef struct {
 
 void DBInit(void);
 bool DBIsDebuggerPresent(void);
+void DBPrintf(const char* str, ...);
 
 #endif

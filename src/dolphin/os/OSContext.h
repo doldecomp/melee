@@ -11,14 +11,12 @@ typedef struct OSContext {
     u32 ctr;                       // at 0x88
     u32 xer;                       // at 0x8C
     f64 fprs[32];                  // at 0x90
-    u32 WORD_0x190;                // at 0x190
-    u32 fpscr;                     // at 0x194
+    f64 fpscr;                     // at 0x190
     u32 srr0;                      // at 0x198
     u32 srr1;                      // at 0x19C
-    u16 SHORT_0x1A0;               // at 0x1A0
-    u16 SHORT_0x1A2;               // at 0x1A2
+    u16 mode;                      // at 0x1A0
+    u16 state;                     // at 0x1A2
     u32 gqrs[8];                   // at 0x1A4
-    char UNK_0x1C4[0x1C8 - 0x1C4]; // at 0x1C4
     f64 psfs[32];                  // at 0x1C8
 } OSContext;
 
@@ -34,7 +32,8 @@ void* OSGetStackPointer(void);
 void OSSwitchFiber(void*, void*);
 void OSSwitchFiberEx(u32, u32, u32, u32, void*, void*);
 void OSClearContext(OSContext*);
-void OSInitContext(OSContext* ctx, unk_t, unk_t);
+void OSInitContext(register OSContext* ctx, register u32 pc,
+                   register u32 newsp);
 void OSDumpContext(const OSContext*);
 void __OSContextInit(void);
 
