@@ -4,6 +4,6 @@
 #include <Runtime/platform.h>
 
 void ARStartDMA(u32 type, u32 source, u32 dest, u32 length);
-void ARRegisterDMACallback(Event callback);
+Event ARRegisterDMACallback(Event callback);
 
 #endif
