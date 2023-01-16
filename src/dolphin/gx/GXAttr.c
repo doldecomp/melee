@@ -1,5 +1,6 @@
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
+#include <placeholder.h>
 #include <Runtime/platform.h>
 
 static u32 lbl_804D5BB0 = 0x00040102;
@@ -30,9 +31,11 @@ void lbl_8033C95C(void);
 void lbl_8033C910(void);
 void lbl_8033C918(void);
 
+#ifdef MWERKS_GEKKO
+
 // https://decomp.me/scratch/d4i4k // 95 (98.90%)
 #pragma push
-asm unk_t __GXXfVtxSpecs()
+asm void __GXXfVtxSpecs(void)
 { // clang-format off
     nofralloc
 /* 8033BDA8 00338988  80 AD A5 08 */	lwz r5, __GXContexts(r13)
@@ -147,6 +150,15 @@ lbl_8033BEC4:
 } // clang-format on
 #pragma pop
 
+#else
+
+void __GXXfVtxSpecs(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void GXSetVtxDesc(s32 arg0, s32 arg1)
 {
     switch (arg0) {
@@ -237,9 +249,11 @@ void GXSetVtxDesc(s32 arg0, s32 arg1)
     __GXContexts.main->x4F0_flags |= 8;
 }
 
+#ifdef MWERKS_GEKKO
+
 // https://decomp.me/scratch/NAwYO // 4529 (49.68%)
 #pragma push
-asm unk_t __GXSetVCD()
+asm void __GXSetVCD(void)
 { // clang-format off
     nofralloc
 /* 8033C260 00338E40  7C 08 02 A6 */	mflr r0
@@ -336,6 +350,14 @@ lbl_8033C3B4:
 } // clang-format on
 #pragma pop
 
+#else
+
+void __GXSetVCD(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 void GXClearVtxDesc(void)
 {
     GXContext* temp_r3;
@@ -484,14 +506,16 @@ void GXSetArray(s32 arg0, s32 arg1, u8 arg2)
     }
 }
 
-void GXInvalidateVtxCache()
+void GXInvalidateVtxCache(void)
 {
     WGPIPE.u8 = GX_CMD_INVL_VC;
 }
 
+#ifdef MWERKS_GEKKO
+
 // https://decomp.me/scratch/9TphI // 640 (96.44%)
 #pragma push
-asm unk_t GXSetTexCoordGen2()
+asm void GXSetTexCoordGen2(void)
 { // clang-format off
     nofralloc
 /* 8033C8A8 00339488  7C 08 02 A6 */	mflr r0
@@ -708,6 +732,15 @@ lbl_8033CB60:
 /* 8033CB74 00339754  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void GXSetTexCoordGen2(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 void GXSetNumTexGens(u8 arg0)
 {

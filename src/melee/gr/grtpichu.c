@@ -9,11 +9,11 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E91B0[] = {
-    { lbl_80222D24, lbl_80222D50, lbl_80222D58, lbl_80222D5C, FLAGS_NONE },
-    { lbl_80222DF0, lbl_80222E40, lbl_80222E48, lbl_80222E68, FLAGS_NONE },
+    { lbl_80222D24, lbl_80222D50, lbl_80222D58, lbl_80222D5C, FLAGS_ZERO },
+    { lbl_80222DF0, lbl_80222E40, lbl_80222E48, lbl_80222E68, FLAGS_ZERO },
     { lbl_80222D60, lbl_80222DB0, lbl_80222DB8, lbl_80222DEC,
       (1 << 30) | (1 << 31) },
-    { NULL, NULL, NULL, NULL, FLAGS_NONE }
+    { NULL, NULL, NULL, NULL, FLAGS_ZERO }
 };
 
 StageData lbl_803E920C = {
@@ -27,7 +27,7 @@ StageData lbl_803E920C = {
     lbl_80222C34,
     lbl_80222E6C,
     lbl_80222E74,
-    FLAGS_NONE,
+    FLAGS_ZERO,
     NULL,
     0,
 };

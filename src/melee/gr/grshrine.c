@@ -13,8 +13,8 @@
 static void* lbl_804D6A18;
 
 static StageCallbacks lbl_803E50E8[3] = {
-    { func_80201E08, func_80201E34, func_80201E3C, func_80201E40, FLAGS_NONE },
-    { func_80201E44, func_80201E88, func_80201E90, func_80201E94, FLAGS_NONE },
+    { func_80201E08, func_80201E34, func_80201E3C, func_80201E40, FLAGS_ZERO },
+    { func_80201E44, func_80201E88, func_80201E90, func_80201E94, FLAGS_ZERO },
     { func_80201E9C, func_80201F14, func_80201F1C, func_80201F40,
       (1 << 30) | (1 << 31) },
 };
@@ -152,7 +152,7 @@ static void func_80201E9C(HSD_GObj* gobj)
     map->x10_flags.b5 = true;
 }
 
-static bool func_80201F14()
+static bool func_80201F14(HSD_GObj* arg0)
 {
     return false;
 }
@@ -163,14 +163,14 @@ static void func_80201F1C(HSD_GObj* arg0)
     func_800115F4();
 }
 
-static void func_80201F40() {}
+static void func_80201F40(HSD_GObj* arg0) {}
 
-static bool func_80201F44(bool)
+static bool func_80201F44(bool arg0)
 {
     return false;
 }
 
-static bool func_80201F4C(Vec3* a, int unused, struct _HSD_JObj* joint)
+static bool func_80201F4C(Vec3* a, int unused, HSD_JObj* joint)
 {
     Vec3 b;
     func_8000B1CC(joint, 0, &b);

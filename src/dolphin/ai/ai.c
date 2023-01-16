@@ -2,6 +2,7 @@
 
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/OSTime.h>
+#include <placeholder.h>
 
 static AISCallback __AIS_Callback;
 static AIDCallback __AID_Callback;
@@ -247,6 +248,8 @@ static void __AIDHandler(__OSInterrupt interrupt, struct OSContext* context)
     OSSetCurrentContext(context);
 }
 
+#ifdef MWERKS_GEKKO
+
 static asm void __AICallbackStackSwitch(register AIDCallback cb)
 { // clang-format off
     fralloc
@@ -274,6 +277,15 @@ static asm void __AICallbackStackSwitch(register AIDCallback cb)
     frfree
     blr
 } // clang-format on
+
+#else
+
+static void __AICallbackStackSwitch(AIDCallback cb)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 static void __AI_SRC_INIT(void)
 {

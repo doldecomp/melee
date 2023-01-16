@@ -21,7 +21,7 @@ u16 Pad3Button AT_ADDRESS(PAD3_BUTTON_ADDR);
 
 static u8 Debug_BBA = 0;
 
-extern int main(size_t argc, char* argv[]);
+extern int main(int argc, char* argv[]);
 extern void exit(int);
 extern void __init_user(void);
 extern void OSInit(void);

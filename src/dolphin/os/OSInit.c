@@ -12,6 +12,7 @@
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
+#include <placeholder.h>
 #include <Runtime/__mem.h>
 #include <Runtime/platform.h>
 
@@ -22,14 +23,19 @@ typedef struct OSBootInfo {
 
 extern OSBootInfo* BootInfo;
 
-// unused asm function here?
+#ifdef MUST_MATCH
+/// @todo unused asm function here?
+#pragma push
 #pragma peephole off
+#endif
 
 u32 OSGetConsoleType(void)
 {
     if (BootInfo == NULL || BootInfo->consoleType == 0) {
-        return 0x10000002; // default console type
+        // default console type
+        return 0x10000002;
     }
+
     return BootInfo->consoleType;
 }
 
@@ -64,6 +70,12 @@ void ClearArena(void)
     }
 }
 
+#ifdef MUST_MATCH
+#pragma pop
+#endif
+
+#ifdef MWERKS_GEKKO
+
 extern unk_t AreWeInitialized;
 extern unk_t DriveInfo;
 extern unk_t __OSStartTime;
@@ -83,7 +95,6 @@ extern unk_t EXIInit();
 extern void __OSModuleInit(void);
 extern void OSInitAlarm(void);
 extern void __OSInitSystemCall(void);
-extern unk_t OSExceptionInit();
 
 #pragma push
 asm void OSInit(void)
@@ -320,19 +331,23 @@ lbl_803432F4:
 } // clang-format on
 #pragma pop
 
-extern unk_t __OSEVSetNumber();
-extern unk_t OSExceptionVector();
-extern unk_t __OSEVEnd();
-extern unk_t __OSDBIntegrator();
-extern unk_t __OSDBJump();
-extern unk_t __DBVECTOR();
+#else
+
+void OSInit(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 extern unk_t OSExceptionTable;
-extern unk_t OSDefaultExceptionHandler();
 extern unk_t __DBIsExceptionMarked();
 extern unk_t DBPrintf();
 
 #pragma push
-asm unk_t OSExceptionInit()
+asm void OSExceptionInit(void)
 { // clang-format off
     nofralloc
 /* 8034330C 0033FEEC  7C 08 02 A6 */	mflr r0
@@ -515,8 +530,19 @@ lbl_8034355C:
 } // clang-format on
 #pragma pop
 
-// pragma push
-asm unk_t __OSDBIntegrator()
+#else
+
+void OSExceptionInit(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
+#pragma push
+asm void __OSDBIntegrator(void)
 { // clang-format off
     nofralloc
 /* 8034358C 0034016C  38 A0 00 40 */	li r5, 0x40
@@ -529,15 +555,37 @@ asm unk_t __OSDBIntegrator()
 /* 803435A8 00340188  7C 60 01 24 */	mtmsr r3
 /* 803435AC 0034018C  4E 80 00 20 */	blr
 } // clang-format on
-// pragma pop
+#pragma pop
+
+#else
+
+void __OSDBIntegrator(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t __OSDBJump()
+asm void __OSDBJump(void)
 { // clang-format off
     nofralloc
 /* 803435B0 00340190  48 00 00 63 */	bla 0x60
 } // clang-format on
 #pragma pop
+
+#else
+
+void __OSDBJump(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void __OSSetExceptionHandler(s32, __OSExceptionHandler)
@@ -553,9 +601,20 @@ asm void __OSSetExceptionHandler(s32, __OSExceptionHandler)
 } // clang-format on
 #pragma pop
 
+#else
+
+void __OSSetExceptionHandler(s32 arg0, __OSExceptionHandler arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm __OSExceptionHandler __OSGetExceptionHandler(__OSException)
-{ // clang-format off
+asm __OSExceptionHandler __OSGetExceptionHandler(__OSException){
+    // clang-format off
     nofralloc
 /* 803435D0 003401B0  54 60 06 3E */	clrlwi r0, r3, 0x18
 /* 803435D4 003401B4  80 6D BC A8 */	lwz r3, OSExceptionTable(r13)
@@ -565,8 +624,19 @@ asm __OSExceptionHandler __OSGetExceptionHandler(__OSException)
 } // clang-format on
 #pragma pop
 
+#else
+
+__OSExceptionHandler __OSGetExceptionHandler(__OSException arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t OSExceptionVector()
+asm void OSExceptionVector(void)
 { // clang-format off
     nofralloc
 /* 803435E4 003401C4  7C 90 43 A6 */	mtspr 0x110, r4
@@ -594,8 +664,19 @@ asm unk_t OSExceptionVector()
 } // clang-format on
 #pragma pop
 
+#else
+
+void OSExceptionVector(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __DBVECTOR()
+asm void __DBVECTOR(void)
 { // clang-format off
     nofralloc
 /* 8034363C 0034021C  60 00 00 00 */	nop
@@ -605,8 +686,19 @@ asm unk_t __DBVECTOR()
 } // clang-format on
 #pragma pop
 
+#else
+
+void __DBVECTOR(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __OSEVSetNumber()
+asm void __OSEVSetNumber(void)
 { // clang-format off
     nofralloc
 /* 8034364C 0034022C  38 60 00 00 */	li r3, 0
@@ -625,16 +717,36 @@ lbl_8034366C:
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm unk_t __OSEVEnd()
+#else
+
+void __OSEVSetNumber(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
+asm void __OSEVEnd(void)
 { // clang-format off
     nofralloc
-/* 8034367C 0034025C  60 00 00 00 */	nop
+    nop
 } // clang-format on
-#pragma pop
+
+#else
+
+void __OSEVEnd(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t OSDefaultExceptionHandler()
+asm void OSDefaultExceptionHandler(void)
 { // clang-format off
     nofralloc
 /* 80343680 00340260  90 04 00 00 */	stw r0, 0(r4)
@@ -661,6 +773,17 @@ asm unk_t OSDefaultExceptionHandler()
 } // clang-format on
 #pragma pop
 
+#else
+
+void OSDefaultExceptionHandler(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void __OSPSInit(void)
 { // clang-format off
@@ -682,14 +805,30 @@ asm void __OSPSInit(void)
 } // clang-format on
 #pragma pop
 
+#else
+
+void __OSPSInit(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 extern volatile u32 __DIRegs[0x10] AT_ADDRESS(0xCC006000);
 
 #define DI_CONFIG_IDX 0x9
 #define DI_CONFIG_CONFIG_MASK 0x000000FF
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma peephole off
+#endif
 
 u32 __OSGetDIConfig(void)
 {
     return __DIRegs[DI_CONFIG_IDX] & DI_CONFIG_CONFIG_MASK;
 }
+
+#ifdef MUST_MATCH
+#pragma pop
+#endif

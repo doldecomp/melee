@@ -71,5 +71,9 @@ void SIRefreshSamplingRate(void);
 void SISetSamplingRate(u32 msec);
 void SIGetTypeAsync(s32, SICallback);
 u32 SIGetType(s32);
+void __SITransfer(void);
+void SIGetResponseRaw(void);
+void SITransfer(void);
+void GetTypeCallback(void);
 
 #endif

@@ -1,4 +1,7 @@
+#include <sysdolphin/baselib/tev.h>
+
 #include <dolphin/gx/GXLight.h>
+#include <placeholder.h>
 #include <sysdolphin/baselib/tev.h>
 
 extern void* lbl_80405B98;
@@ -34,6 +37,9 @@ HSD_ObjAllocData* HSD_ChanGetAllocData(void)
     return &chan_alloc_data;
 }
 
+#ifdef MWERKS_GEKKO
+
+#pragma push
 asm void HSD_SetupChannel(void* ch)
 { // clang-format off
     nofralloc
@@ -254,13 +260,20 @@ lbl_803623BC:
 /* 803623C8 0035EFA8  7C 08 03 A6 */	mtlr r0
 /* 803623CC 0035EFAC  4E 80 00 20 */	blr
 } // clang-format on
+#pragma pop
 
-#pragma push
-#pragma peephole on
+#else
+
+void HSD_SetupChannel(void* ch)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void HSD_StateSetNumChans(s32 num)
 {
     if (lbl_804D7600 != num) {
         GXSetNumChans(num & 0xFF);
     }
 }
-#pragma pop

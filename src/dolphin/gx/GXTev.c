@@ -1,6 +1,8 @@
+#include <dolphin/gx/GXTev.h>
+
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__types.h>
-#include <dolphin/gx/GXTev.h>
+#include <placeholder.h>
 
 void GXSetTevOp(GXTevStageID id, GXTevMode mode)
 {
@@ -132,7 +134,8 @@ void GXSetTevColor(GXTevRegID id, GXColor color)
     __GXContexts.main->x0.u16[1] = 0;
 }
 
-// https://decomp.me/scratch/UNKO4
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void GXSetTevColorS10(s32, GXColor*)
 { // clang-format off
@@ -168,6 +171,17 @@ asm void GXSetTevColorS10(s32, GXColor*)
 /* 803402D0 0033CEB0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void GXSetTevColorS10(s32 arg0, GXColor* arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void GXSetTevKColor(GXTevKColorID id, GXColor color)
@@ -205,7 +219,17 @@ asm void GXSetTevKColor(GXTevKColorID id, GXColor color)
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/fj9UW // 1475 (45.37%)
+#else
+
+void GXSetTevKColor(GXTevKColorID id, GXColor color)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void GXSetTevKColorSel(GXTevStageID stage, GXTevKColorSel sel)
 { // clang-format off
@@ -242,7 +266,17 @@ lbl_80340390:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/dsU75 // 1475 (45.37%)
+#else
+
+void GXSetTevKColorSel(GXTevStageID stage, GXTevKColorSel sel)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void GXSetTevKAlphaSel(GXTevStageID stage, GXTevKAlphaSel sel)
 { // clang-format off
@@ -279,7 +313,17 @@ lbl_803403FC:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/xoMcT // 2145 (2.50%)
+#else
+
+void GXSetTevKAlphaSel(GXTevStageID stage, GXTevKAlphaSel sel)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel,
                           GXTevSwapSel tex_sel)
@@ -310,7 +354,18 @@ asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel,
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/y8FRa // 2545 (36.38%)
+#else
+
+void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel,
+                      GXTevSwapSel tex_sel)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
                                GXTevColorChan green, GXTevColorChan blue,
@@ -360,7 +415,18 @@ asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
 } // clang-format on
 #pragma pop
 
-void GXSetTevClampMode(s32, s32) {}
+#else
+
+void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
+                           GXTevColorChan green, GXTevColorChan blue,
+                           GXTevColorChan alpha)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+void GXSetTevClampMode(s32 arg0, s32 arg1) {}
 
 void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1,
                        u8 ref1)
@@ -377,7 +443,8 @@ void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1,
     set_x2(GX_FALSE);
 }
 
-// https://decomp.me/scratch/N3R8X // 1410 (57.27%)
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void GXSetZTexture(GXZTexOp op, GXTexFmt fmt, u32 bias)
 { // clang-format off
@@ -424,9 +491,19 @@ lbl_803405B4:
 } // clang-format on
 #pragma pop
 
+#else
+
+void GXSetZTexture(GXZTexOp op, GXTexFmt fmt, u32 bias)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 static u32 lbl_804014E0[] = { 0, 1, 0, 1, 0, 1, 7, 5, 6, 0 };
 
-// https://decomp.me/scratch/0H3SX // 780 (92.50%)
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map,
                        GXChannelID color)
@@ -549,6 +626,16 @@ lbl_8034075C:
 /* 8034078C 0033D36C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map,
+                   GXChannelID color)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 void GXSetNumTevStages(u8 arg0)
 {

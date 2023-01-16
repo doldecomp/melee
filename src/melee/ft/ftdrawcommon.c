@@ -1,9 +1,12 @@
+#include <melee/ft/ftdrawcommon.h>
+
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftlib.h>
+#include <placeholder.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
@@ -22,29 +25,29 @@ extern f32 lbl_804D8368;
 extern s32 lbl_804D836C[1];
 extern s32 lbl_804D8370[2];
 
-extern unk_t func_800750C8();
-extern unk_t func_8009F7F8();
-extern unk_t func_800C8AF0();
-extern unk_t func_8009F5AC();
-extern unk_t func_80369808();
-extern unk_t func_800310B8();
-extern unk_t func_80031060();
-extern unk_t func_800C2600();
-extern unk_t func_8000A1A8();
-extern unk_t func_8000A044();
-extern unk_t func_8001E2F8();
-extern unk_t func_80014770();
-extern unk_t func_800B395C();
-extern unk_t func_800117F4();
-extern unk_t func_8000A460();
-extern unk_t func_8000A78C();
-extern unk_t func_8000AB2C();
-extern unk_t func_8000A95C();
-extern unk_t func_8000A244();
-extern unk_t func_8000A584();
-extern unk_t func_80009F54();
+extern void func_800750C8(void);
+extern void func_8009F7F8(void);
+extern void func_800C8AF0(void);
+extern void func_8009F5AC(void);
+extern void func_80369808(void);
+extern void func_800310B8(void);
+extern void func_80031060(void);
+extern void func_800C2600(void);
+extern void func_8000A1A8(void);
+extern void func_8000A044(void);
+extern void func_8001E2F8(void);
+extern void func_80014770(void);
+extern void func_800B395C(void);
+extern void func_800117F4(void);
+extern void func_8000A460(void);
+extern void func_8000A78C(void);
+extern void func_8000AB2C(void);
+extern void func_8000A95C(void);
+extern void func_8000A244(void);
+extern void func_8000A584(void);
+extern void func_80009F54(void);
 
-static inline mtx_thing(MtxPtr mtx, Vec3* ptr, f32 val, f32 val2)
+static inline void mtx_thing(MtxPtr mtx, Vec3* ptr, f32 val, f32 val2)
 {
     mtx[0][3] = ptr->x + val;
     mtx[1][3] = ptr->y + val;
@@ -53,15 +56,24 @@ static inline mtx_thing(MtxPtr mtx, Vec3* ptr, f32 val, f32 val2)
 
 MtxPtr func_8008051C(HSD_GObj* arg1, MtxPtr arg2)
 {
-    u8 pad2[0x4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused0[0x4];
+#endif
 
     Vec3 sp54;
 
-    u8 pad1[0xC];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused1[0xC];
+#endif
 
     Mtx sp18;
 
-    u8 pad0[0x8];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused2[0x8];
+#endif
 
     f32 temp_f31;
     f32 temp_f0;
@@ -72,6 +84,7 @@ MtxPtr func_8008051C(HSD_GObj* arg1, MtxPtr arg2)
     sp54.z = temp_f31;
     sp54.y = temp_f31;
     sp54.x = temp_f31;
+
     if (func_80087074(arg1, &sp54)) {
         temp_r31 = HSD_CObjGetCurrent()->view_mtx;
         PSMTXIdentity(sp18);
@@ -84,10 +97,10 @@ MtxPtr func_8008051C(HSD_GObj* arg1, MtxPtr arg2)
     return NULL;
 }
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t func_800805C8()
+asm void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 { // clang-format off
     nofralloc
 /* 800805C8 0007D1A8  7C 08 02 A6 */	mflr r0
@@ -546,7 +559,7 @@ lbl_80080C10:
 } // clang-format on
 #pragma pop
 
-#else
+#elif false
 
 // https://decomp.me/scratch/wbs6Q // 7183 (82.39%)
 void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
@@ -799,12 +812,19 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
     }
 }
 
+#else
+
+void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
 #endif
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t func_80080C28()
+asm void func_80080C28(void)
 { // clang-format off
     nofralloc
 /* 80080C28 0007D808  7C 08 02 A6 */	mflr r0
@@ -939,7 +959,7 @@ lbl_80080E00:
 } // clang-format on
 #pragma pop
 
-#else
+#elif false
 
 // https://decomp.me/scratch/sjQ3z // 155 (98.75%) @permuter
 void func_80080C28(HSD_GObj* gobj, s32 arg1)
@@ -1014,10 +1034,19 @@ void func_80080C28(HSD_GObj* gobj, s32 arg1)
     }
 }
 
+#else
+
+void func_80080C28(HSD_GObj* gobj, s32 arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
 #endif
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80080E18()
+asm void func_80080E18(HSD_GObj*, long)
 { // clang-format off
     nofralloc
 /* 80080E18 0007D9F8  7C 08 02 A6 */	mflr r0
@@ -1226,8 +1255,19 @@ lbl_80081104:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80080E18(HSD_GObj* arg0, long arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80081118()
+asm void func_80081118(void)
 { // clang-format off
     nofralloc
 /* 80081118 0007DCF8  80 8D C1 8C */	lwz r4, lbl_804D782C(r13)
@@ -1245,8 +1285,19 @@ lbl_80081134:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80081118(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80081140()
+asm void func_80081140(void)
 { // clang-format off
     nofralloc
 /* 80081140 0007DD20  80 8D C1 8C */	lwz r4, lbl_804D782C(r13)
@@ -1264,8 +1315,19 @@ lbl_8008115C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80081140(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80081168()
+asm void func_80081168(void)
 { // clang-format off
     nofralloc
 /* 80081168 0007DD48  7C 08 02 A6 */	mflr r0
@@ -1312,8 +1374,19 @@ lbl_800811E0:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80081168(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80081200()
+asm void func_80081200(void)
 { // clang-format off
     nofralloc
 /* 80081200 0007DDE0  7C 08 02 A6 */	mflr r0
@@ -1359,3 +1432,12 @@ lbl_80081278:
 /* 80081294 0007DE74  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_80081200(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

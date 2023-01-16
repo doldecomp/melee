@@ -1,5 +1,8 @@
+#include <placeholder.h>
 #include <Runtime/platform.h>
 #include <stdarg.h>
+
+#ifdef __MWERKS__
 
 #define ALIGN(addr, size) (((uintptr_t) (addr) + ((size) -1)) & ~((size) -1))
 
@@ -49,3 +52,12 @@ void* __va_arg(va_list v_list, unsigned char type)
 
     return addr;
 }
+
+#else
+
+void* __va_arg(va_list v_list, unsigned char type)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

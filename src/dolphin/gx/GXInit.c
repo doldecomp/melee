@@ -16,6 +16,7 @@
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/vi/vi.h>
+#include <placeholder.h>
 
 GXContext __GXContext;
 GXContexts __GXContexts = { &__GXContext, NULL };
@@ -34,9 +35,10 @@ f32 const lbl_804DE210 = 0.0F;
 f32 const lbl_804DE214 = 0.10000000149011612F;
 f64 const lbl_804DE218 = 4503599627370496.0L;
 
-// // https://decomp.me/scratch/wdCL6 // 2039 (34.23%)
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __GXDefaultTexRegionCallback()
+asm void __GXDefaultTexRegionCallback(void)
 { // clang-format off
     nofralloc
 /* 8033A6E0 003372C0  7C 08 02 A6 */	mflr r0
@@ -75,9 +77,21 @@ lbl_8033A74C:
 } // clang-format on
 #pragma pop
 
-#pragma peephole off
+#else
 
-void* __GXDefaultTlutRegionCallback(u32 arg0)
+void __GXDefaultTexRegionCallback(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MUST_MATCH
+#pragma push
+#pragma peephole off
+#endif
+
+unk_t __GXDefaultTlutRegionCallback(u32 arg0)
 {
     if (arg0 >= 0x14) {
         return NULL;
@@ -86,9 +100,14 @@ void* __GXDefaultTlutRegionCallback(u32 arg0)
     }
 }
 
+#ifdef MUST_MATCH
+#pragma pop
+#endif
+
+#ifdef MWERKS_GEKKO
+
 static void __GXInitGX(void);
 
-// https://decomp.me/scratch/gAywS // 49600 (0%)
 #pragma push
 asm GXFifoObj* GXInit(GXFifoObj* fifo, u32 size)
 { // clang-format off
@@ -612,6 +631,17 @@ lbl_8033AE6C:
 /* 8033AF3C 00337B1C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+GXFifoObj* GXInit(GXFifoObj* fifo, u32 size)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 // https://decomp.me/scratch/zVpOX // 7812 (85.26%)
 #pragma push
@@ -1164,3 +1194,12 @@ lbl_8033B674:
 /* 8033B784 00338364  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __GXInitGX(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

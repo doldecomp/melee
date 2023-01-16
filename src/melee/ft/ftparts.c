@@ -8,6 +8,7 @@
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftdata.h>
 #include <melee/lb/lbrefract.h>
+#include <placeholder.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
@@ -26,7 +27,7 @@ extern HSD_GObj* lbl_804D7814;
 extern HSD_PerfStat HSD_PerfCurrentStat;
 extern HSD_MObjInfo ftMObj;
 
-unk_t func_80074ACC();
+void func_80074ACC(void);
 u32 func_8007506C(s32 ftkind, u32 part);
 
 void Fighter_JObjInfoInit(void);
@@ -125,8 +126,10 @@ void Fighter_JObjInfoInit(void)
     HSD_JOBJ_INFO(&ftJObj)->make_pmtx = Fighter_JObjMakePositionMtx;
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm void func_80073758()
+asm void func_80073758(HSD_JObj*)
 { // clang-format off
     nofralloc
 /* 80073758 00070338  7C 08 02 A6 */	mflr r0
@@ -141,6 +144,17 @@ asm void func_80073758()
 /* 8007377C 0007035C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_80073758(HSD_JObj* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm s32 Fighter_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
@@ -171,6 +185,15 @@ asm s32 Fighter_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
 } // clang-format on
 #pragma pop
 
+#else
+
+s32 Fighter_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void Fighter_IntpJObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftIntpJObj), HSD_CLASS_INFO(&hsdJObj),
@@ -179,8 +202,10 @@ void Fighter_IntpJObjInfoInit(void)
     HSD_JOBJ_INFO(&ftIntpJObj)->load = Fighter_IntpJObjLoad;
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80073830()
+asm void func_80073830(void)
 { // clang-format off
     nofralloc
 /* 80073830 00070410  7C 08 02 A6 */	mflr r0
@@ -292,8 +317,19 @@ lbl_80073998:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80073830(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_800739B8()
+asm void func_800739B8(void)
 { // clang-format off
     nofralloc
 /* 800739B8 00070598  7C 08 02 A6 */	mflr r0
@@ -503,8 +539,19 @@ lbl_80073C94:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_800739B8(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80073CA8()
+asm void func_80073CA8(void)
 { // clang-format off
     nofralloc
 /* 80073CA8 00070888  7C 08 02 A6 */	mflr r0
@@ -768,6 +815,17 @@ lbl_8007402C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80073CA8(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void Fighter_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
                               u32 rendermode)
@@ -822,6 +880,15 @@ lbl_800740D4:
 } // clang-format on
 #pragma pop
 
+#else
+
+void Fighter_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void Fighter_PObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftPObj), HSD_CLASS_INFO(&hsdPObj),
@@ -831,8 +898,10 @@ void Fighter_PObjInfoInit(void)
     HSD_POBJ_INFO(&ftPObj)->setup_mtx = Fighter_PObjSetupMtx;
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm void func_80074148()
+asm void func_80074148(void)
 { // clang-format off
     nofralloc
 /* 80074148 00070D28  7C 08 02 A6 */	mflr r0
@@ -848,8 +917,19 @@ asm void func_80074148()
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80074148(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm void func_80074170()
+asm void func_80074170(void)
 { // clang-format off
     nofralloc
 /* 80074170 00070D50  7C 08 02 A6 */	mflr r0
@@ -864,7 +944,18 @@ asm void func_80074170()
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80074170(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 #include <dolphin/os/os.h>
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
@@ -1046,6 +1137,16 @@ lbl_800743BC:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
+                   u32* dobj_index, u32 tree_depth)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void Fighter_SetupParts(HSD_GObj* fighter_obj)
 {
     HSD_JObj* jobj = fighter_obj->hsd_obj;
@@ -1116,8 +1217,10 @@ void Fighter_SetupParts(HSD_GObj* fighter_obj)
     }
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_8007462C()
+asm void func_8007462C(void)
 { // clang-format off
     nofralloc
 /* 8007462C 0007120C  7C 08 02 A6 */	mflr r0
@@ -1279,8 +1382,19 @@ lbl_8007480C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_8007462C(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_8007482C()
+asm void func_8007482C(void)
 { // clang-format off
     nofralloc
 /* 8007482C 0007140C  7C 08 02 A6 */	mflr r0
@@ -1305,6 +1419,17 @@ asm unk_t func_8007482C()
 /* 80074878 00071458  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_8007482C(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_8007487C(unk_t item, u32*, u8 costume_id, u32*, u32*)
@@ -1406,8 +1531,19 @@ lbl_80074944:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_8007487C(unk_t item, u32* arg1, u8 costume_id, u32* arg3, u32* arg4)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm void func_800749CC()
+asm void func_800749CC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 800749CC 000715AC  7C 08 02 A6 */	mflr r0
@@ -1447,6 +1583,17 @@ lbl_80074A20:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_800749CC(HSD_GObj* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void func_80074A4C(struct _HSD_GObj*, u32, s32)
 { // clang-format off
@@ -1464,9 +1611,20 @@ asm void func_80074A4C(struct _HSD_GObj*, u32, s32)
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80074A4C(HSD_GObj* arg0, u32 arg1, s32 arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm s32 func_80074A74(HSD_GObj*, s32)
-{ // clang-format off
+asm s32 func_80074A74(HSD_GObj*,
+                      s32){ // clang-format off
     nofralloc
 /* 80074A74 00071654  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 80074A78 00071658  54 80 08 3C */	slwi r0, r4, 1
@@ -1477,8 +1635,19 @@ asm s32 func_80074A74(HSD_GObj*, s32)
 } // clang-format on
 #pragma pop
 
+#else
+
+s32 func_80074A74(HSD_GObj* arg0, s32 arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm void func_80074A8C()
+asm void func_80074A8C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80074A8C 0007166C  80 83 00 2C */	lwz r4, 0x2c(r3)
@@ -1502,8 +1671,19 @@ lbl_80074AAC:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80074A8C(HSD_GObj* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80074ACC()
+asm void func_80074ACC(void)
 { // clang-format off
     nofralloc
 /* 80074ACC 000716AC  80 A3 00 2C */	lwz r5, 0x2c(r3)
@@ -1526,6 +1706,17 @@ lbl_80074AEC:
 /* 80074B08 000716E8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_80074ACC(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_80074B0C(HSD_GObj*, s32, s32)
@@ -1559,8 +1750,19 @@ lbl_80074B5C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80074B0C(HSD_GObj* arg0, s32 arg1, s32 arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80074B6C()
+asm void func_80074B6C(void)
 { // clang-format off
     nofralloc
 /* 80074B6C 0007174C  7C 08 02 A6 */	mflr r0
@@ -1654,6 +1856,17 @@ lbl_80074C8C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80074B6C(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void func_80074CA0(u32*, s32, u32*)
 { // clang-format off
@@ -1722,6 +1935,17 @@ lbl_80074D68:
 /* 80074D78 00071958  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_80074CA0(u32* arg0, s32 arg1, u32* arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_80074D7C(u32*, s32, u32*)
@@ -1792,8 +2016,19 @@ lbl_80074E44:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80074D7C(u32* arg0, s32 arg1, u32* arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm void func_80074E58()
+asm void func_80074E58(Fighter*)
 { // clang-format off
     nofralloc
 /* 80074E58 00071A38  7C 08 02 A6 */	mflr r0
@@ -1910,9 +2145,20 @@ lbl_80074EC8:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80074E58(Fighter* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm s32 func_8007500C(Fighter*, s32)
-{ // clang-format off
+asm s32 func_8007500C(Fighter*,
+                      s32){ // clang-format off
     nofralloc
 /* 8007500C 00071BEC  80 03 00 04 */	lwz r0, 4(r3)
 /* 80075010 00071BF0  80 6D AE A4 */	lwz r3, ftPartsTable(r13)
@@ -1924,8 +2170,19 @@ asm s32 func_8007500C(Fighter*, s32)
 } // clang-format on
 #pragma pop
 
+#else
+
+s32 func_8007500C(Fighter* arg0, s32 arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80075028()
+asm void func_80075028(void)
 { // clang-format off
     nofralloc
 /* 80075028 00071C08  80 CD AE A4 */	lwz r6, ftPartsTable(r13)
@@ -1949,9 +2206,20 @@ lbl_80075064:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80075028(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm u32 func_8007506C(s32 ftkind, u32 part)
-{ // clang-format off
+asm u32 func_8007506C(s32 ftkind, u32 part){
+    // clang-format off
     nofralloc
 /* 8007506C 00071C4C  80 AD AE A0 */	lwz r5, lbl_804D6540(r13)
 /* 80075070 00071C50  54 60 10 3A */	slwi r0, r3, 2
@@ -1982,8 +2250,19 @@ lbl_800750C0:
 } // clang-format on
 #pragma pop
 
+#else
+
+u32 func_8007506C(s32 ftkind, u32 part)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_800750C8()
+asm void func_800750C8(void)
 { // clang-format off
     nofralloc
 /* 800750C8 00071CA8  7C 08 02 A6 */	mflr r0
@@ -2092,8 +2371,19 @@ lbl_80075224:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_800750C8(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80075240()
+asm void func_80075240(void)
 { // clang-format off
     nofralloc
 /* 80075240 00071E20  7C 08 02 A6 */	mflr r0
@@ -2156,8 +2446,19 @@ lbl_800752F0:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80075240(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80075304()
+asm void func_80075304(void)
 { // clang-format off
     nofralloc
 /* 80075304 00071EE4  54 60 06 3E */	clrlwi r0, r3, 0x18
@@ -2227,6 +2528,17 @@ lbl_800753C0:
 /* 800753D0 00071FB0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_80075304(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_800753D4(struct _Fighter*, s32, unk_t)
@@ -2373,8 +2685,19 @@ lbl_8007556C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_800753D4(Fighter* arg0, s32 arg1, unk_t arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_800755E8()
+asm void func_800755E8(void)
 { // clang-format off
     nofralloc
 /* 800755E8 000721C8  7C 08 02 A6 */	mflr r0
@@ -2405,6 +2728,17 @@ asm unk_t func_800755E8()
 /* 8007564C 0007222C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_800755E8(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_80075650(HSD_GObj* fighter_gobj, HSD_JObj*, u32*)
@@ -2572,6 +2906,17 @@ lbl_80075830:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80075650(HSD_GObj* fighter_gobj, HSD_JObj* arg1, u32* arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void Fighter_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 { // clang-format off
@@ -2639,6 +2984,17 @@ lbl_80075908:
 /* 80075928 00072508  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void Fighter_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_8007592C(Fighter*, s32, f32)
@@ -2771,6 +3127,17 @@ lbl_80075ACC:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_8007592C(Fighter* arg0, s32 arg1, f32 arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void func_80075AF0(Fighter*, s32, f32)
 { // clang-format off
@@ -2901,6 +3268,17 @@ lbl_80075C90:
 /* 80075CB0 00072890  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_80075AF0(Fighter* arg0, s32 arg1, f32 arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_80075CB4(Fighter*, s32, f32)
@@ -3033,6 +3411,17 @@ lbl_80075E54:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80075CB4(Fighter* arg0, s32 arg1, f32 arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm f32 func_80075E78(Fighter*, bool)
 { // clang-format off
@@ -3097,6 +3486,17 @@ lbl_80075F2C:
 } // clang-format on
 #pragma pop
 
+#else
+
+f32 func_80075E78(Fighter* arg0, bool arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm f32 func_80075F48(Fighter*, s32)
 { // clang-format off
@@ -3160,3 +3560,12 @@ lbl_80075FFC:
 /* 80076014 00072BF4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+f32 func_80075F48(Fighter* arg0, s32 arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

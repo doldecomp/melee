@@ -4,7 +4,10 @@
 #include <melee/it/item.h>
 #include <melee/it/item2.h>
 #include <melee/lb/lbunknown_003.h>
+#include <placeholder.h>
 #include <sysdolphin/baselib/gobj.h>
+
+#ifdef MWERKS_GEKKO
 
 static f32 const lbl_804D83A0 = -1.0F;
 static f32 const lbl_804D83A4 = 1.0F;
@@ -44,6 +47,17 @@ asm void func_80081938(HSD_GObj* fighter_gobj)
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80081938(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void func_800819A8(HSD_GObj* fighter_gobj)
 { // clang-format off
@@ -73,8 +87,19 @@ asm void func_800819A8(HSD_GObj* fighter_gobj)
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_800819A8(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80081A00()
+asm void func_80081A00(void)
 { // clang-format off
     nofralloc
 /* 80081A00 0007E5E0  7C 08 02 A6 */	mflr r0
@@ -164,3 +189,12 @@ lbl_80081B24:
 /* 80081B34 0007E714  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_80081A00(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

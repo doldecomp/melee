@@ -1,5 +1,9 @@
 #include <dolphin/gx/__GXInit.h>
 
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
+
 void lbl_80341E70(void);
 void lbl_80341E8C(void);
 void lbl_80341EA8(void);
@@ -81,7 +85,7 @@ static jtbl_t jtbl_80401584 = {
 
 // https://decomp.me/scratch/gAvJm // 3230 (94.13%)
 #pragma push
-asm unk_t GXSetGPMetric()
+asm void GXSetGPMetric(void)
 { // clang-format off
     nofralloc
 /* 803418FC 0033E4DC  80 AD A5 08 */	lwz r5, __GXContexts(r13)
@@ -705,6 +709,15 @@ entry lbl_80342184
 /* 80342190 0033ED70  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void GXSetGPMetric(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 void GXClearGPMetric(void)
 {

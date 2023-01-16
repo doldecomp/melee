@@ -1,14 +1,16 @@
 #include <dolphin/os/init/__start.h>
 
-#pragma section code_type ".init"
+#include <placeholder.h>
 
 #define RESET_BUTTON_MASK 0x0EEF
 
 void __check_pad3(void)
 {
-    if ((Pad3Button & RESET_BUTTON_MASK) == RESET_BUTTON_MASK)
+    if (FLAGS_ALL(Pad3Button, RESET_BUTTON_MASK))
         OSResetSystem(OS_RESET_RESTART, 0, false);
 }
+
+#ifdef MWERKS_GEKKO
 
 asm void __start(void)
 { // clang-format off
@@ -110,6 +112,15 @@ asm static void __init_registers(void)
     ori r13, r13, _SDA_BASE_@l
     blr
 } // clang-format on
+
+#else
+
+void __start(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 inline static void __copy_rom_section(void* dst, void* const src, size_t size)
 {

@@ -1,7 +1,12 @@
+#include <dolphin/gx/GXTexture.h>
+
 #include <common_structs.h>
 #include <dolphin/gx/__GXBump.h>
 #include <dolphin/gx/__GXInit.h>
+#include <placeholder.h>
 #include <Runtime/__mem.h>
+
+#ifdef MWERKS_GEKKO
 
 static Vec2 const lbl_804DE268 = { 16.0F, 0.0F };
 static f64 const lbl_804DE270 = 4503599627370496.0L;
@@ -80,9 +85,8 @@ static jtbl_t jtbl_804014A0 = { &lbl_8033EB58, &lbl_8033EB6C, &lbl_8033EB6C,
                                 &lbl_8033EBBC, &lbl_8033EBBC, &lbl_8033EBA8,
                                 NULL };
 
-// https://decomp.me/scratch/FgNqV // 2963 (65.94%)
 #pragma push
-asm unk_t GXGetTexBufferSize()
+asm void GXGetTexBufferSize(void)
 { // clang-format off
     nofralloc
 /* 8033E78C 0033B36C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -191,9 +195,19 @@ lbl_8033E8D8:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/efvey // 1665 (66.70%)
+#else
+
+void GXGetTexBufferSize(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __GetImageTileCount()
+asm void __GetImageTileCount(void)
 { // clang-format off
     nofralloc
 /* 8033E8E8 0033B4C8  28 03 00 3C */	cmplwi r3, 0x3c
@@ -259,9 +273,19 @@ lbl_8033E9A8:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/YiUMp
+#else
+
+void __GetImageTileCount(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXInitTexObj()
+asm void GXInitTexObj(void)
 { // clang-format off
     nofralloc
 /* 8033E9B0 0033B590  7C 08 02 A6 */	mflr r0
@@ -437,9 +461,19 @@ lbl_8033EBCC:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/YQyg4
+#else
+
+void GXInitTexObj(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXInitTexObjCI()
+asm void GXInitTexObjCI(void)
 { // clang-format off
     nofralloc
 /* 8033EC24 0033B804  7C 08 02 A6 */	mflr r0
@@ -463,9 +497,20 @@ asm unk_t GXInitTexObjCI()
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/K0q3K
+#else
+
+void GXInitTexObjCI(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXInitTexObjLOD(){
+asm void GXInitTexObjLOD(void)
+{
     // clang-format off
     nofralloc
 /* 8033EC6C 0033B84C  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -582,6 +627,15 @@ lbl_8033EDC4:
 } // clang-format on
 #pragma pop
 
+#else
+
+void GXInitTexObjLOD(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 s32 GXGetTexObjWidth(GXTexObj* tex_obj)
 {
     return (tex_obj->dimensions & 0x3FF) + 1;
@@ -597,9 +651,10 @@ GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj)
     return tex_obj->tex_fmt;
 }
 
-// https://decomp.me/scratch/ZnHCT
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXLoadTexObjPreLoaded()
+asm void GXLoadTexObjPreLoaded(unk_t, unk_t, s32)
 { // clang-format off
     nofralloc
 /* 8033EE28 0033BA08  7C 08 02 A6 */	mflr r0
@@ -712,14 +767,24 @@ lbl_8033EF70:
 } // clang-format on
 #pragma pop
 
-void GXLoadTexObj(void* arg0, s32 arg1)
+#else
+
+void GXLoadTexObjPreLoaded(unk_t arg0, unk_t arg1, s32 arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+void GXLoadTexObj(unk_t arg0, s32 arg1)
 {
     GXLoadTexObjPreLoaded(arg0, __GXContexts.main->callbacks[0x98](), arg1);
 }
 
-// https://decomp.me/scratch/Y9lJO
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXInitTlutObj()
+asm void GXInitTlutObj(void)
 { // clang-format off
     nofralloc
 /* 8033F024 0033BC04  38 00 00 00 */	li r0, 0
@@ -743,9 +808,19 @@ asm unk_t GXInitTlutObj()
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/9AKJV
+#else
+
+void GXInitTlutObj(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXLoadTlut()
+asm void GXLoadTlut(void)
 { // clang-format off
     nofralloc
 /* 8033F06C 0033BC4C  7C 08 02 A6 */	mflr r0
@@ -790,9 +865,19 @@ asm unk_t GXLoadTlut()
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/GFUrl // 7200 (0%)
+#else
+
+void GXLoadTlut(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXInitTexCacheRegion()
+asm void GXInitTexCacheRegion(void)
 { // clang-format off
     nofralloc
 /* 8033F108 0033BCE8  2C 06 00 01 */	cmpwi r6, 1
@@ -881,6 +966,15 @@ lbl_8033F1D4:
 } // clang-format on
 #pragma pop
 
+#else
+
+void GXInitTexCacheRegion(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
 {
     *arg0 = 0;
@@ -915,9 +1009,10 @@ GXTexRegionCallback GXSetTlutRegionCallback(GXTexRegionCallback arg0)
     return result;
 }
 
-// https://decomp.me/scratch/Npksb
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __SetSURegs()
+asm void __SetSURegs(void)
 { // clang-format off
     nofralloc
 /* 8033F2E0 0033BEC0  80 AD A5 08 */	lwz r5, __GXContexts(r13)
@@ -974,9 +1069,19 @@ asm unk_t __SetSURegs()
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/QG7Ms // 9100 (0%)
+#else
+
+void __SetSURegs(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __GXSetSUTexSize()
+asm void __GXSetSUTexSize(void)
 { // clang-format off
     nofralloc
 /* 8033F3AC 0033BF8C  7C 08 02 A6 */	mflr r0
@@ -1088,9 +1193,19 @@ lbl_8033F504:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/QfxT4 // 3865 (73.16%)
+#else
+
+void __GXSetSUTexSize(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __GXSetTmemConfig()
+asm void __GXSetTmemConfig(void)
 { // clang-format off
     nofralloc
 /* 8033F518 0033C0F8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1242,3 +1357,12 @@ lbl_8033F748:
 /* 8033F754 0033C334  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __GXSetTmemConfig(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

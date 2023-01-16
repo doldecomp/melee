@@ -8,9 +8,9 @@ typedef struct _GXFogAdjTbl {
     u16 r[10];
 } GXFogAdjTbl;
 
-void GXSetFieldMode(s8, s32);
-void GXInitFogAdjTable(struct _GXFogAdjTbl*, u16, Mtx44);
-void GXSetFogRangeAdj(s8, u16, struct _GXFogAdjTbl*);
-void GXSetPixelFmt(s32, s32);
+void GXSetFieldMode(int, int);
+void GXInitFogAdjTable(GXFogAdjTbl*, u16, Mtx44);
+void GXSetFogRangeAdj(s8, u16, GXFogAdjTbl*);
+void GXSetPixelFmt(int, int);
 
 #endif

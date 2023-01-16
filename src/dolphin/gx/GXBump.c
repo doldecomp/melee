@@ -1,11 +1,14 @@
 #include <common_structs.h>
 #include <dolphin/gx/__GXInit.h>
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
 
 static Vec2 const lbl_804DE290 = { 1024.0F, 0.0F };
 
 // https://decomp.me/scratch/nTyRU // 1150 (70.51%)
 #pragma push
-asm unk_t GXSetTevIndirect()
+asm void GXSetTevIndirect(void)
 { // clang-format off
     nofralloc
 /* 8033F758 0033C338  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -50,9 +53,19 @@ asm unk_t GXSetTevIndirect()
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/ctXNh
+#else
+
+void GXSetTevIndirect(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXSetIndTexMtx()
+asm void GXSetIndTexMtx(void)
 { // clang-format off
     nofralloc
 /* 8033F7F4 0033C3D4  2C 03 00 08 */	cmpwi r3, 8
@@ -152,9 +165,20 @@ lbl_8033F844:
 } // clang-format on
 #pragma pop
 
+#else
+
+void GXSetIndTexMtx(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 // https://decomp.me/scratch/VEhb9 // 355 (96.97%)
 #pragma push
-asm unk_t GXSetIndTexCoordScale()
+asm void GXSetIndTexCoordScale(void)
 { // clang-format off
     nofralloc
 /* 8033F954 0033C534  2C 03 00 02 */	cmpwi r3, 2
@@ -283,7 +307,17 @@ lbl_8033FB18:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/Zyr7j
+#else
+
+void GXSetIndTexCoordScale(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm unk_t GXSetIndTexOrder()
 { // clang-format off
@@ -375,16 +409,27 @@ lbl_8033FC2C:
 } // clang-format on
 #pragma pop
 
+#else
+
+unk_t GXSetIndTexOrder(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void GXSetNumIndStages(s32 arg0)
 {
     __GXContexts.main->x204 =
-        __GXContexts.main->x204 & 0xFFF8FFFF | arg0 << 0x10 & 0xFF0000;
+        (__GXContexts.main->x204 & 0xFFF8FFFF) | (arg0 << 0x10 & 0xFF0000);
     __GXContexts.main->x4F0_flags |= 6;
 }
 
+#ifdef MWERKS_GEKKO
+
 // https://decomp.me/scratch/aRJcf // 362 (79.89%)
 #pragma push
-asm unk_t GXSetTevDirect()
+asm void GXSetTevDirect(void)
 { // clang-format off
     nofralloc
 /* 8033FC8C 0033C86C  7C 08 02 A6 */	mflr r0
@@ -408,8 +453,19 @@ asm unk_t GXSetTevDirect()
 } // clang-format on
 #pragma pop
 
+#else
+
+void GXSetTevDirect(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __GXUpdateBPMask()
+asm void __GXUpdateBPMask(void)
 { // clang-format off
     nofralloc
 /* 8033FCD4 0033C8B4  80 6D A5 08 */	lwz r3, __GXContexts(r13)
@@ -473,6 +529,15 @@ lbl_8033FD5C:
 /* 8033FD9C 0033C97C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __GXUpdateBPMask(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 void __GXFlushTextureState(void)
 {

@@ -1,5 +1,7 @@
 #include <dolphin/os/OSMutex.h>
 
+#include <placeholder.h>
+
 void __OSUnlockAllMutex(OSThread* thread)
 {
     while (thread->mutexQueue.head != NULL) {
@@ -17,8 +19,10 @@ void __OSUnlockAllMutex(OSThread* thread)
     }
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __OSCheckMutex()
+asm void __OSCheckMutex(void)
 { // clang-format off
     nofralloc
 /* 80347F4C 00344B2C  80 83 00 00 */	lwz r4, 0(r3)
@@ -98,8 +102,19 @@ lbl_80348044:
 } // clang-format on
 #pragma pop
 
+#else
+
+void __OSCheckMutex(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __OSCheckDeadLock()
+asm void __OSCheckDeadLock(void)
 { // clang-format off
     nofralloc
 /* 8034804C 00344C2C  80 83 02 F0 */	lwz r4, 0x2f0(r3)
@@ -123,8 +138,19 @@ lbl_8034807C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void __OSCheckDeadLock(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __OSCheckMutexes()
+asm void __OSCheckMutexes(void)
 { // clang-format off
     nofralloc
 /* 80348084 00344C64  7C 08 02 A6 */	mflr r0
@@ -163,3 +189,12 @@ lbl_803480E0:
 /* 803480F4 00344CD4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __OSCheckMutexes(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

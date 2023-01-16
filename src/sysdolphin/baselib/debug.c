@@ -18,6 +18,7 @@ extern struct UnkStruct80400430 lbl_80400430;
 
 OSContext lbl_804C2608;
 
+#ifdef MUST_MATCH
 /*
  * Unused symbol probably used by the myStrippedFunction below, but since it got
  * stripped there's no telling what it was for.
@@ -32,9 +33,11 @@ extern char lbl_804C28D0[0x10];
 
 char lbl_804C28D0[0x10]; // unk space. what is this?
 #pragma pop
+#endif
 
 static char lbl_804D6010[1] = "";
 
+#ifdef MUST_MATCH
 // required stripped asm function to get the peephole off behavior in early
 // CW versions to occur.
 static void asm myStrippedFunction()
@@ -44,6 +47,7 @@ static void asm myStrippedFunction()
     nop
     nop
 } // clang-format on
+#endif
 
 int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3)
 {

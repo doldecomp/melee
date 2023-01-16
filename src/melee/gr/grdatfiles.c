@@ -116,6 +116,11 @@ static UnkArchiveStruct* func_801C62B4(void)
         }
     }
     HSD_ASSERT(229, 0);
+
+#ifndef MUST_MATCH
+    // Asserts 0 but the compiler doesn't know that.
+    return NULL;
+#endif
 }
 
 UnkArchiveStruct* func_801C6324(void)
@@ -162,7 +167,7 @@ static UnkBgmStruct lbl_803E07E4 = {
     0, -1, -1, 0, 0, 0, 0, 0, { 0 },
 };
 
-static UnkStage6B0 lbl_803E0848 = {
+UnkStage6B0 lbl_803E0848 = {
     1,  0x80, {}, 0x1E,          0,  1,  0x8000, 10, 0,     0, 1, 1, 1,  {},
     40, 10,   50, 100,           10, 10, 10,     10, false, 0, 0, 0, 30, 10,
     0,  0,    {}, &lbl_803E07E4, 1,

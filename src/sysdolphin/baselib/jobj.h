@@ -1,9 +1,8 @@
 #ifndef _jobj_h_
 #define _jobj_h_
 
-#include <Runtime/platform.h>
-
 #include <dolphin/mtx.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/list.h>
