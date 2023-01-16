@@ -1,5 +1,7 @@
 #include <sysdolphin/baselib/aobj.h>
 
+#include <MetroTRK/intrinsics.h>
+#include <placeholder.h>
 #include <stdarg.h>
 #include <string.h>
 #include <sysdolphin/baselib/debug.h>
@@ -12,7 +14,10 @@ HSD_ObjAllocData aobj_alloc_data;
 
 static char lbl_804D5D08[7] = "aobj.c\0";
 static char lbl_804D5D10[4] = "new\0";
+
+#ifdef MWERKS_GEKKO
 static char lbl_804D5D14[4] = "obj\0";
+#endif
 
 char lbl_80405FB8[9] = "object.h\0";
 char lbl_80405FC4[39] = "HSD_OBJ(o)->ref_count != HSD_OBJ_NOREF\0";
@@ -102,7 +107,7 @@ void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
     HSD_FObjReqAnimAll(aobj->fobj, frame);
 }
 
-void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, void (*func)())
+void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, Event func)
 {
     if (!aobj)
         return;
@@ -111,7 +116,7 @@ void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, void (*func)())
     aobj->flags |= AOBJ_NO_ANIM;
 }
 
-void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, void (*update_func)())
+void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj, Event update_func)
 {
     f32 rate = 0;
 
@@ -177,7 +182,12 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
 {
     HSD_FObjDesc* fobjdesc;
     HSD_AObj* aobj;
-    HSD_JObj* jobj;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     HSD_FObj* fobj;
     u32 id;
     HSD_Obj* phi_r30;
@@ -304,7 +314,7 @@ void callbackForeachFunc(struct _HSD_AObj* aobj, void* obj, HSD_Type type,
     }
 }
 
-void TObjForeachAnim(HSD_TObj* tobj, HSD_TypeMask mask, void (*func)(),
+void TObjForeachAnim(HSD_TObj* tobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg)
 {
     while (tobj != NULL) {
@@ -316,7 +326,7 @@ void TObjForeachAnim(HSD_TObj* tobj, HSD_TypeMask mask, void (*func)(),
     }
 }
 
-void RObjForeachAnim(HSD_RObj* robj, HSD_TypeMask mask, void (*func)(),
+void RObjForeachAnim(HSD_RObj* robj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg)
 {
     while (robj != NULL) {
@@ -328,7 +338,7 @@ void RObjForeachAnim(HSD_RObj* robj, HSD_TypeMask mask, void (*func)(),
     }
 }
 
-void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, void (*func)(),
+void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg)
 {
     if (pobj == NULL)
@@ -342,7 +352,7 @@ void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, void (*func)(),
     }
 }
 
-void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, void (*func)(),
+void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg)
 {
     if (mobj == NULL)
@@ -354,7 +364,7 @@ void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, void (*func)(),
     TObjForeachAnim(mobj->tobj, mask, func, arg_type, arg);
 }
 
-void DObjForeachAnim(HSD_DObj* dobj, HSD_TypeMask mask, void (*func)(),
+void DObjForeachAnim(HSD_DObj* dobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg)
 {
     HSD_PObj* pobj;
@@ -598,7 +608,7 @@ lbl_80364BF4:
 
 #else
 
-void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, void (*func)(),
+void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg)
 {
     HSD_JObj* child;
@@ -624,6 +634,8 @@ void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, void (*func)(),
 }
 
 #endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask,
@@ -1128,6 +1140,16 @@ lbl_803652F8:
 } // clang-format on
 #pragma pop
 
+#else
+
+void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask, void* func,
+                     AObj_Arg_Type arg_type, ...)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate)
 {
     if (!aobj)
@@ -1161,7 +1183,7 @@ void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
     }
 }
 
-void _HSD_AObjForgetMemory(void)
+void _HSD_AObjForgetMemory(any_t low, any_t high)
 {
     endcallback_list = NULL;
 }

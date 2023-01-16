@@ -1,20 +1,25 @@
 #include <sysdolphin/baselib/initialize.h>
 
 #include <dolphin/gx/GXLight.h>
+#include <dolphin/gx/GXPixel.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
+#include <dolphin/vi/vi.h>
 #include <stdarg.h>
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/id.h>
 #include <sysdolphin/baselib/leak.h>
+#include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/robj.h>
 #include <sysdolphin/baselib/shadow.h>
+#include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 
 extern OSHeapHandle __OSCurrHeap;
@@ -198,7 +203,7 @@ void HSD_GetNextArena(void** lo, void** hi)
 OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
 {
     int i;
-    void (*cb_table[])() = {
+    void (*cb_table[])(any_t lo, any_t hi) = {
         _HSD_AObjForgetMemory,
         _HSD_DispForgetMemory,
         _HSD_IDForgetMemory,

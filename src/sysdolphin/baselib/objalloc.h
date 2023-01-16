@@ -62,7 +62,7 @@ void HSD_ObjSetHeap(u32 size, void* ptr);
 s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num);
 void* HSD_ObjAlloc(HSD_ObjAllocData* data);
 void HSD_ObjFree(HSD_ObjAllocData* data, void* obj);
-void _HSD_ObjAllocForgetMemory(void);
+void _HSD_ObjAllocForgetMemory(any_t low, any_t high);
 void HSD_ObjAllocInit(HSD_ObjAllocData* data, size_t size, u32 align);
 
 #endif

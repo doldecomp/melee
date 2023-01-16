@@ -70,14 +70,13 @@ u32 HSD_FObjGetState(HSD_FObj* fobj);
 void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe);
 void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(void),
                       f32 rate);
-void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(void),
-                         f32 rate);
+void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, Event obj_update, f32 rate);
 void FObjUpdateAnim(HSD_FObj* fobj, void* obj,
                     void (*obj_update)(void*, s32, FObjData*));
-void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(void),
+void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj, Event obj_update,
                            f32 rate);
-void HSD_FObjInterpretAnimAll(HSD_FObj* fobj, void* obj,
-                              void (*obj_update)(void), f32 rate);
+void HSD_FObjInterpretAnimAll(HSD_FObj* fobj, void* obj, Event obj_update,
+                              f32 rate);
 HSD_FObj* HSD_FObjLoadDesc(HSD_FObjDesc* desc);
 HSD_FObj* HSD_FObjAlloc(void);
 void HSD_FObjFree(HSD_FObj* fobj);

@@ -1,4 +1,10 @@
+#include <sysdolphin/baselib/gobjplink.h>
+
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 
 void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
 {
@@ -130,7 +136,11 @@ void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
     HSD_GObjProc* cur;
     s32 flags_cur;
     s32 flags_new;
-    u32 unused[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     HSD_ASSERT(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
     if (!lbl_804CE3E4.b0 && gobj == lbl_804D781C) {

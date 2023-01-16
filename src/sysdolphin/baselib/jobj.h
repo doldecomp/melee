@@ -5,6 +5,7 @@
 
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/list.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/object.h>
@@ -134,8 +135,9 @@ typedef struct _HSD_JObjInfo {
 
 extern HSD_JObjInfo hsdJObj;
 typedef void (*HSD_JObjWalkTreeCallback)(HSD_JObj*, f32**, s32);
+typedef void (*DPCtlCallback)(int, int lo, int hi, HSD_JObj* jobj);
 
-void HSD_JObjSetDefaultClass(HSD_JObjInfo* info);
+void HSD_JObjSetDefaultClass(HSD_ClassInfo* info);
 
 void HSD_JObjCheckDepend(HSD_JObj* jobj);
 u32 HSD_JObjGetFlags(HSD_JObj* jobj);

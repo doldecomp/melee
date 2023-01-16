@@ -3,13 +3,14 @@
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSInit.h>
+#include <placeholder.h>
 
 #define MSR_FP 0x2000
 
-typedef void (*voidfunc)(void);
-extern voidfunc __ctors[];
-
+extern Event __ctors[];
 static void __init_cpp(void);
+
+#ifdef MWERKS_GEKKO
 
 SECTION_INIT asm void __init_hardware(void)
 { // clang-format off
@@ -23,6 +24,17 @@ SECTION_INIT asm void __init_hardware(void)
     mtlr    r31
     blr
 } // clang-format on
+
+#else
+
+void __init_hardware(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 SECTION_INIT asm void __flush_cache(void* address, size_t size)
 { // clang-format off
@@ -43,6 +55,15 @@ rept:
     blr
 } // clang-format on
 
+#else
+
+void __flush_cache(void* address, size_t size)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void __init_user(void)
 {
     __init_cpp();
@@ -50,7 +71,7 @@ void __init_user(void)
 
 static void __init_cpp(void)
 {
-    voidfunc* constructor;
+    Event* constructor;
 
     for (constructor = __ctors; *constructor; constructor++) {
         (*constructor)();

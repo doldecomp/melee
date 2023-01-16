@@ -1,6 +1,8 @@
 #include <sysdolphin/baselib/class.h>
 
 #include <dolphin/os/os.h>
+#include <string.h>
+#include <sysdolphin/baselib/hash.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/object.h>
 
@@ -11,15 +13,21 @@ static HSD_MemoryEntry** memory_list;
 static s32 nb_memory_list;
 static u32 lbl_804D7708;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
+
 void ClassInfoInit(HSD_ClassInfo* info)
 {
     if ((info->head.flags & 1) == 0) {
         (*info->head.info_init)();
     }
 }
+
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
                       char* base_class_library, char* type, s32 info_size,
@@ -58,6 +66,7 @@ void OSReport_PrintSpaces(s32 count)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused1[] = "entry %d <null>\n";
@@ -65,6 +74,7 @@ static char unused2[] = "entry %d - %d <null>\n";
 static char unused3[] = "entry %d(%d)";
 static char unused4[] = "  nb_alloc %d nb_free %d\n";
 #pragma pop
+#endif
 
 HSD_MemoryEntry* GetMemoryEntry(s32 idx)
 {
@@ -247,12 +257,12 @@ HSD_Class* _hsdClassAlloc(HSD_ClassInfo* info)
     return mem_piece;
 }
 
-int _hsdClassInit(HSD_Class*)
+int _hsdClassInit(HSD_Class* arg0)
 {
     return 0;
 }
 
-void _hsdClassRelease(HSD_Class*) {}
+void _hsdClassRelease(HSD_Class* cls) {}
 
 void _hsdClassDestroy(HSD_Class* cls)
 {
@@ -358,22 +368,30 @@ bool hsdChangeClass(void* object, void* class_info)
     return hsdChangeClass_inline(object, class_info);
 }
 
-bool hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p)
+bool hsdIsDescendantOf(HSD_ClassInfo* info, any_t p)
 {
     HSD_ClassInfo* var_r31;
+    HSD_ClassInfo* cls = (HSD_ClassInfo*) p;
 
     if (info == NULL || p == NULL) {
         return false;
     }
+
+    /// @todo Duplicate assignment.
+#ifdef MUST_MATCH
     var_r31 = var_r31 = info;
+#else
+    var_r31 = info;
+#endif
+
     if (!(info->head.flags & 1)) {
         var_r31->head.info_init();
     }
-    if (!(p->head.flags & 1)) {
-        p->head.info_init();
+    if (!(cls->head.flags & 1)) {
+        cls->head.info_init();
     }
     while (var_r31 != NULL) {
-        if (var_r31 == p) {
+        if (var_r31 == cls) {
             return true;
         }
         var_r31 = var_r31->head.parent;
@@ -403,7 +421,7 @@ bool hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
 
 void class_set_flags(HSD_ClassInfo* class_info, s32 set, s32 reset)
 {
-    class_info->head.flags = class_info->head.flags & ~reset | set;
+    class_info->head.flags = (class_info->head.flags & ~reset) | set;
 }
 
 void ForgetClassLibraryReal(HSD_ClassInfo* class_info)
@@ -452,7 +470,6 @@ void hsdForgetClassLibrary(const char* library_name)
     }
 }
 
-HSD_ClassInfo* HSD_HashSearch();
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 {
     if (lbl_804D7708 != 0) {
@@ -461,10 +478,12 @@ HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
     return NULL;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused5[] = "info_hash";
 #pragma pop
+#endif
 
 void DumpClassStat(HSD_ClassInfo* info, s32 level)
 {

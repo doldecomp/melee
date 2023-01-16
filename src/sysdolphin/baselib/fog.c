@@ -1,16 +1,16 @@
 #include <sysdolphin/baselib/fog.h>
 
 #include <dolphin/gx/GX_unknown_001.h>
+#include <dolphin/gx/GXPixel.h>
+#include <dolphin/gx/GXTransform.h>
+#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
 
 static void FogInfoInit(void);
 static void FogAdjInfoInit(void);
+
 HSD_FogInfo hsdFog = { FogInfoInit };
 HSD_ClassInfo hsdFogAdj = { FogAdjInfoInit };
-
-typedef struct _GXFogAdjTbl {
-    u16 r[10];
-} GXFogAdjTbl;
 
 const GXColor lbl_804DE6F0 = { 0 };
 
@@ -49,7 +49,10 @@ void HSD_FogSet(HSD_Fog* fog)
             GXInitFogAdjTable(&tbl, fog->fog_adj->width, fog->fog_adj->mtx);
         } else {
             Mtx44 mtx = { 0 };
-            GXGetProjectionv(&proj);
+
+            /// @todo Eliminate cast
+            GXGetProjectionv((f32*) &proj);
+
             switch ((s32) proj.x0) {
             case 0:
                 mtx[0][0] = proj.v[0];

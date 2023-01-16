@@ -1,7 +1,10 @@
 #include <sysdolphin/baselib/jobj.h>
 
+#include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/robj.h>
@@ -10,9 +13,9 @@
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };
 
-static HSD_JObjInfo* default_class;
+static HSD_ClassInfo* default_class;
 static HSD_SList* ufc_callbacks;
-static void (*dptcl_callback)();
+static void (*dptcl_callback)(int, int lo, int hi, HSD_JObj* jobj);
 static void (*jsound_callback)(s32);
 static void (*ptcltgt_callback)(HSD_JObj*, s32);
 static HSD_JObj* current_jobj;
@@ -31,8 +34,8 @@ void HSD_JObjCheckDepend(HSD_JObj* jobj)
             {
                 jobj->flags |= JOBJ_MTX_DIRTY;
             }
-        } else if (jobj->parent != NULL &&
-                       (jobj->parent->flags & JOBJ_MTX_DIRTY) ||
+        } else if ((jobj->parent != NULL &&
+                    (jobj->parent->flags & JOBJ_MTX_DIRTY)) ||
                    (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT1 ||
                    (jobj->flags & JOBJ_EFFECTOR) == JOBJ_JOINT2 ||
                    (jobj->flags & JOBJ_EFFECTOR) == JOBJ_EFFECTOR ||
@@ -398,7 +401,11 @@ lbl_8036FB3C:
 void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
                      HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint)
 {
-    u32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     bool has_dobj;
 
     if (jobj != NULL) {
@@ -892,8 +899,12 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
         if (jobj->flags & JOBJ_INSTANCE) {
             if (!(jobj->flags & JOBJ_HIDDEN)) {
                 Mtx mtx;
-                MtxPtr tmp;
-                u32 unused;
+
+                /// @todo Unused stack.
+#ifdef MUST_MATCH
+                u8 unused[8];
+#endif
+
                 HSD_CObj* cobj;
                 HSD_JObjSetupMatrix(jobj);
                 HSD_JObjSetupMatrix(jobj->child);
@@ -919,7 +930,7 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
     }
 }
 
-void HSD_JObjSetDefaultClass(HSD_JObjInfo* info)
+void HSD_JObjSetDefaultClass(HSD_ClassInfo* info)
 {
     if (info != NULL) {
         HSD_ASSERT(0x3A5, hsdIsDescendantOf(info, &hsdJObj));
@@ -1023,7 +1034,10 @@ static inline void ref_INC_alt(void* o)
 
 void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 {
-    u32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     if (jobj == NULL || joint == NULL)
         return;
@@ -1044,7 +1058,11 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 
 void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
 {
-    u32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     while (jobj != NULL && joint != NULL) {
         HSD_JObjResolveRefs(jobj, joint);
         if (!(jobj->flags & JOBJ_INSTANCE)) {
@@ -1063,6 +1081,8 @@ static inline int iref_INC(void* o)
     HSD_OBJ(o)->ref_count_individual != 0
         ? (void) 0
         : __assert(lbl_804068E4, 0x9E, lbl_80406918);
+
+    /// @todo Missing return statement
 }
 
 static inline bool iref_none(void* o)
@@ -1560,8 +1580,8 @@ void HSD_JObjClearFlagsAll(HSD_JObj* jobj, u32 flags)
 
 HSD_JObj* HSD_JObjAlloc(void)
 {
-    HSD_JObj* jobj = hsdNew(
-        (HSD_ClassInfo*) (default_class != NULL ? default_class : &hsdJObj));
+    HSD_JObj* jobj =
+        hsdNew(default_class != NULL ? default_class : &hsdJObj.parent.parent);
     HSD_ASSERT(0x7D3, jobj);
     return jobj;
 }
@@ -1637,7 +1657,12 @@ void resolveIKJoint1(HSD_JObj* jobj)
     f32 var_f4;
     f32 var_f4_2;
     Vec3 spB0;
-    f32 tmp;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     f32 var_f4_3;
     f32 var_f4_4;
     f32 var_f5;
@@ -1695,9 +1720,11 @@ void resolveIKJoint1(HSD_JObj* jobj)
         HSD_RObjGetGlobalPosition(var_r28->robj, 1, &var_r28->translate);
         PSVECSubtract(&var_r28->translate, &spB0, &sp8C);
         temp_f31 = PSVECDotProduct(&sp8C, &sp8C);
+
+        /// @todo @c sometimes-uninitialized
         if (temp_f31 > var_f5) {
             sp68 = sp8C;
-            if (HSD_RObjGetGlobalPosition(jobj->robj, 3, &sp5C) != 0) {
+            if (HSD_RObjGetGlobalPosition(jobj->robj, 3, &sp5C)) {
                 PSVECSubtract(&sp5C, &spB0, &sp5C);
                 if (temp_f26 != 0.0F) {
                     PSMTXRotAxisRad(sp20, &sp68, temp_f26);
@@ -1776,7 +1803,12 @@ void resolveIKJoint2(HSD_JObj* jobj)
     Mtx sp34;
     Vec3 sp28;
     Vec3 sp1C;
-    HSD_JObj* temp_r5;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     HSD_JObj* var_r29;
     f32 temp_f1_4;
     f32 var_f1_2;
@@ -1967,7 +1999,7 @@ void HSD_JObjSetMtxDirtySub(HSD_JObj* jobj)
     }
 }
 
-void HSD_JObjSetDPtclCallback(void (*cb)(s32, s32, s32, HSD_JObj*))
+void HSD_JObjSetDPtclCallback(DPCtlCallback cb)
 {
     dptcl_callback = cb;
 }
@@ -2047,6 +2079,7 @@ void JObjAmnesia(HSD_ClassInfo* info)
     HSD_OBJECT_PARENT_INFO(&hsdJObj)->amnesia(info);
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused3[] = "jobj[%d,%d]";
@@ -2061,6 +2094,7 @@ static char unused11[] = "  rot(G): ";
 static char unused12[] = "  sca(G): ";
 static char unused13[] = "  tra(G): ";
 #pragma pop
+#endif
 
 void HSD_JObjDispSub(HSD_JObj* jobj, MtxPtr vmtx, MtxPtr pmtx, u32 trsp_mask,
                      u32 rendermode);
@@ -2082,7 +2116,9 @@ void JObjInfoInit(void)
     HSD_JOBJ_INFO(&hsdJObj)->release_child = JObjReleaseChild;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static u32 unused14[6] = { 0 };
 #pragma pop
+#endif

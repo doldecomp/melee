@@ -153,5 +153,9 @@ struct _HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
 void HSD_PObjClearMtxMark(void* obj, u32 mark);
 void HSD_PObjSetMtxMark(int idx, void* obj, u32 mark);
 void HSD_PObjGetMtxMark(int idx, void** obj, u32* mark);
+void HSD_PObjAddAnimAll(HSD_PObj*, HSD_ShapeAnim*);
+void HSD_PObjAnimAll(HSD_PObj*);
+void HSD_PObjResolveRefsAll(HSD_PObj*, HSD_PObjDesc*);
+void HSD_PObjRemoveAll(HSD_PObj*);
 
 #endif

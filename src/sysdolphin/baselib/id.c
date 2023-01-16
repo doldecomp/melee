@@ -1,5 +1,7 @@
 #include <sysdolphin/baselib/id.h>
 
+#include <string.h>
+
 HSD_ObjAllocData hsd_iddata;
 
 HSD_IDTable default_table;
@@ -24,7 +26,7 @@ inline u32 hash(u32 id)
     return id % 0x65;
 }
 
-inline IDEntry* IDEntryAlloc()
+inline IDEntry* IDEntryAlloc(void)
 {
     IDEntry* entry;
 
@@ -118,7 +120,7 @@ void* HSD_IDGetDataFromTable(HSD_IDTable* table, u32 id, s32* success)
     return NULL;
 }
 
-void _HSD_IDForgetMemory(void)
+void _HSD_IDForgetMemory(any_t low, any_t high)
 {
     memset(&default_table, 0, sizeof(HSD_IDTable));
 }

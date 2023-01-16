@@ -7,5 +7,6 @@ int __cntlzw(unsigned int);
 float sqrtf__Ff(float);
 float __fnmsubs(float, float, float);
 double __fabs(double);
+float __fabsf(float);
 
 #endif

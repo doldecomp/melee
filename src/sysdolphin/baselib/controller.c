@@ -1,5 +1,7 @@
 #include <sysdolphin/baselib/controller.h>
 
+#include <dolphin/os/OSInterrupt.h>
+
 extern PadLibData HSD_PadLibData;
 extern HSD_PadStatus HSD_PadMasterStatus[4];
 extern HSD_PadStatus HSD_PadCopyStatus[4];

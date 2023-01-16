@@ -164,5 +164,6 @@ void HSD_MObjRemove(HSD_MObj* mobj);
 HSD_MObj* HSD_MObjAlloc(void);
 HSD_Material* HSD_MaterialAlloc(void);
 void HSD_MObjCompileTev(HSD_MObj* mobj);
+void HSD_MObjDeleteShadowTexture(HSD_TObj* tobj);
 
 #endif

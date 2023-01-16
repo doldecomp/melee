@@ -1,3 +1,6 @@
+#include <sysdolphin/baselib/rumble.h>
+
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad/Pad.h>
 #include <Runtime/platform.h>
 

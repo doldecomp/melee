@@ -11,14 +11,11 @@ extern const GXRenderModeObj GXNtsc480IntDf;
 
 void GXSetDstAlpha(s32, s32);
 void GXSetDither(s32);
-void GXSetPixelFmt(s32, s32);
 void GXSetZCompLoc(s32);
 void GXSetZMode(s8, s32, s32);
 void GXSetAlphaUpdate(s32);
 void GXSetColorUpdate(s32);
 void GXSetBlendMode(s32, s32, s32, s32);
-void GXSetFogRangeAdj(s8, u16, struct _GXFogAdjTbl*);
-void GXInitFogAdjTable(struct _GXFogAdjTbl*, u16, Mtx44Ptr);
 void GXSetFog(s32, GXColor, f32, f32, f32, f32);
 void GXSetTevColorS10(s32, GXColor*);
 void GXSetTevDirect(void);
@@ -44,9 +41,7 @@ void GXSetCopyFilter(s8, u8*, s8, u8*);
 void GXSetCopyClear(u8*, s32);
 u32 GXSetDispCopyYScale(f32);
 void GXSetCopyClamp(s32);
-void GXSetTexCopyDst(s32, s32, s32, s32);
 void GXSetDispCopyDst(s32);
-void GXSetTexCopySrc(s16, s32, s16, s16);
 void GXSetDispCopySrc(s16, s32, s16, s16);
 
 #endif

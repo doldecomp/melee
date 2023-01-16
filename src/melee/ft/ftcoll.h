@@ -1,9 +1,9 @@
 #ifndef _ftcoll_h_
 #define _ftcoll_h_
 
-#include "sysdolphin/baselib/gobjproc.h"
 #include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 #include <melee/ft/fighter.h>
 

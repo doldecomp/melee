@@ -6,5 +6,6 @@
 
 unk_t func_80390ADC(HSD_GObj* gobj);
 void func_80390A70(HSD_GObj* gobj, u8 kind, HSD_JObj* obj);
+void func_80390B0C(HSD_GObj* gobj);
 
 #endif
