@@ -207,7 +207,7 @@ static void func_8021A11C(HSD_GObj* gobj)
     func_801C8138(gobj, map->map_id, 0);
 }
 
-static bool func_8021A16C(HSD_GObj*)
+static bool func_8021A16C(HSD_GObj* arg0)
 {
     return false;
 }

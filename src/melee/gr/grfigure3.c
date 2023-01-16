@@ -14,11 +14,11 @@ static StageCallbacks lbl_803E63D8[3] = {
     { lbl_8020E728, lbl_8020E778, lbl_8020E780, lbl_8020E784, 0UL }
 };
 
-extern StageData lbl_803E6420 = { 0x00000046,   lbl_803E63D8,  "/GrEF3.dat",
-                                  lbl_8020E508, func_8020E504, lbl_8020E578,
-                                  lbl_8020E57C, lbl_8020E5A0,  lbl_8020E788,
-                                  lbl_8020E790, 0x00000001,    NULL,
-                                  0UL };
+StageData lbl_803E6420 = { 0x00000046,   lbl_803E63D8,  "/GrEF3.dat",
+                           lbl_8020E508, func_8020E504, lbl_8020E578,
+                           lbl_8020E57C, lbl_8020E5A0,  lbl_8020E788,
+                           lbl_8020E790, 0x00000001,    NULL,
+                           0UL };
 
 void* lbl_804D6A80;
 
@@ -85,14 +85,14 @@ static void lbl_8020E690(HSD_GObj* gobj)
     func_801C8138(gobj, map->map_id, 0);
 }
 
-static bool lbl_8020E6BC(HSD_GObj*)
+static bool lbl_8020E6BC(HSD_GObj* arg0)
 {
     return false;
 }
 
 static void lbl_8020E6C4(HSD_GObj* gobj) {}
 
-static void lbl_8020E6C8() {}
+static void lbl_8020E6C8(HSD_GObj* arg0) {}
 
 static void lbl_8020E6CC(HSD_GObj* gobj)
 {
@@ -100,7 +100,7 @@ static void lbl_8020E6CC(HSD_GObj* gobj)
     func_801C2ED0(gobj->hsd_obj, map->map_id);
 }
 
-static bool lbl_8020E6F8(HSD_GObj*)
+static bool lbl_8020E6F8(HSD_GObj* arg0)
 {
     return false;
 }
@@ -111,24 +111,28 @@ static void lbl_8020E700(HSD_GObj* gobj)
     func_800115F4();
 }
 
-static void lbl_8020E724() {}
+static void lbl_8020E724(HSD_GObj* arg0) {}
 
 static void lbl_8020E728(HSD_GObj* gobj)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Map* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
 
-static bool lbl_8020E778(HSD_GObj*)
+static bool lbl_8020E778(HSD_GObj* arg0)
 {
     return false;
 }
 
 static void lbl_8020E780(HSD_GObj* gobj) {}
 
-static void lbl_8020E784() {}
+static void lbl_8020E784(HSD_GObj* arg0) {}
 
 static bool lbl_8020E788(int number)
 {
