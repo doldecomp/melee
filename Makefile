@@ -99,6 +99,7 @@ ifeq ($(GENERATE_MAP),1)
 endif
 
 CFLAGS  = -msgstyle gcc \
+		-nowraplines \
 		-cwd source \
 		-Cpp_exceptions off \
 		-proc gekko -fp hard \

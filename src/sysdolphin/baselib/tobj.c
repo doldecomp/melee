@@ -125,7 +125,7 @@ void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe)
     HSD_TObjReqAnimAllByFlags(tobj, startframe, TOBJ_ANIM);
 }
 
-static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
+static void TObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_TObj* tobj = obj;
 

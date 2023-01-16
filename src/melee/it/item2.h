@@ -13,7 +13,6 @@ s32 func_8026B30C(struct _HSD_GObj*);
 s32 func_8026B320(struct _HSD_GObj*);
 
 bool func_8026B594(struct _HSD_GObj*);
-void func_8026B7F8();
 
 /// Apply Item Damage -  may not be itHit* ???
 f32 func_8026B1D4(HSD_GObj* item_gobj, itHit* itemHitboxUnk);

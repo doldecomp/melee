@@ -1,5 +1,8 @@
 #include <dolphin/ar/arq.h>
 
+#include <dolphin/ar/ar.h>
+#include <dolphin/os/OSInterrupt.h>
+
 static ARQRequest* __ARQRequestQueueHi;
 static ARQRequest* __ARQRequestTailHi;
 static ARQRequest* __ARQRequestQueueLo;
@@ -67,7 +70,7 @@ void __ARQServiceQueueLo(void)
     }
 }
 
-void __ARQCallbackHack(ARQRequest*) {}
+void __ARQCallbackHack(ARQRequest* arg0) {}
 
 void __ARQInterruptServiceRoutine(void)
 {

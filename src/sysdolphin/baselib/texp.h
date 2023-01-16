@@ -158,5 +158,9 @@ HSD_TExp* HSD_TExpTev(HSD_TExp**);
 HSD_TExp* HSD_TExpCnst(void*, HSD_TEInput, HSD_TEType, HSD_TExp**);
 void HSD_TExpOrder(HSD_TExp*, unk_t, enum_t);
 void HSD_TExpColorOp(HSD_TExp*, enum_t, enum_t, enum_t, GXBool);
+void HSD_TExpColorIn();
+void HSD_TExpAlphaOp();
+void HSD_TExpAlphaIn();
+void HSD_TExpFreeTevDesc(HSD_TExpTevDesc*);
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef _robj_h_
 #define _robj_h_
 
+#include "sysdolphin/baselib/forward.h"
 #include <sysdolphin/baselib/objalloc.h>
 
 #include <sysdolphin/baselib/aobj.h>
@@ -83,8 +84,6 @@ typedef struct _HSD_RObjAnimJoint {
     struct _HSD_AObjDesc* aobjdesc;
 } HSD_RObjAnimJoint;
 
-typedef void (*HSD_RObjUpdateEvent)(void* obj, u32 type, FObjData* val);
-
 void _HSD_RObjForgetMemory(any_t low, any_t high);
 void HSD_RObjInitAllocData(void);
 HSD_ObjAllocData* HSD_RObjGetAllocData(void);
@@ -104,7 +103,7 @@ void HSD_RObjResolveRefsAll(HSD_RObj*, HSD_RObjDesc*);
 HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc*);
 void HSD_RObjSetConstraintObj(HSD_RObj* robj, HSD_JObj* constraint);
 void HSD_RObjRemove(HSD_RObj*);
-void HSD_RObjUpdateAll(HSD_RObj* robj, HSD_JObj* jobj, HSD_RObjUpdateEvent);
+void HSD_RObjUpdateAll(HSD_RObj* robj, HSD_JObj* jobj, HSD_ObjUpdateFunc);
 bool HSD_RObjGetGlobalPosition(HSD_RObj* robj, bool, Vec3* translate);
 
 #endif

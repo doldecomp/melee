@@ -588,7 +588,7 @@ void __OSDBJump(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void __OSSetExceptionHandler(s32, __OSExceptionHandler)
+asm void __OSSetExceptionHandler(OSException, __OSExceptionHandler)
 { // clang-format off
     nofralloc
 /* 803435B4 00340194  54 60 06 3E */	clrlwi r0, r3, 0x18
@@ -603,7 +603,7 @@ asm void __OSSetExceptionHandler(s32, __OSExceptionHandler)
 
 #else
 
-void __OSSetExceptionHandler(s32 arg0, __OSExceptionHandler arg1)
+void __OSSetExceptionHandler(OSException arg0, __OSExceptionHandler arg1)
 {
     NOT_IMPLEMENTED;
 }
@@ -613,7 +613,7 @@ void __OSSetExceptionHandler(s32 arg0, __OSExceptionHandler arg1)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm __OSExceptionHandler __OSGetExceptionHandler(__OSException){
+asm __OSExceptionHandler __OSGetExceptionHandler(OSException){
     // clang-format off
     nofralloc
 /* 803435D0 003401B0  54 60 06 3E */	clrlwi r0, r3, 0x18
@@ -626,7 +626,7 @@ asm __OSExceptionHandler __OSGetExceptionHandler(__OSException){
 
 #else
 
-__OSExceptionHandler __OSGetExceptionHandler(__OSException arg0)
+__OSExceptionHandler __OSGetExceptionHandler(OSException arg0)
 {
     NOT_IMPLEMENTED;
 }

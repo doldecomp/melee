@@ -9,14 +9,14 @@
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/tobj.h>
 
-void func_800222A4();
+void func_800222A4(void);
 void func_8002247C(HSD_CObj*);
-void func_80022560();
-void func_800225D4();
+void func_80022560(void);
+void func_800225D4(void);
 s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc);
 void func_80022998(s32, s32);
-void func_80022BB8();
-void func_80022BD0();
+void func_80022BB8(void);
+void func_80022BD0(void);
 
 #pragma region lbrefract_003
 

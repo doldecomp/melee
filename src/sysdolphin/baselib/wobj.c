@@ -40,7 +40,7 @@ void HSD_WObjAddAnim(HSD_WObj* wobj, HSD_WObjAnim* anim)
     }
 }
 
-static void WObjUpdateFunc(void* obj, u32 type, f32* fval)
+static void WObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_WObj* wobj;
     Vec3 p;
@@ -50,11 +50,11 @@ static void WObjUpdateFunc(void* obj, u32 type, f32* fval)
     if (wobj != NULL) {
         switch (type) {
         case 4: {
-            if (*fval < 0.0) {
-                *fval = 0.0;
+            if (val->fv < 0.0) {
+                val->fv = 0.0;
             }
-            if (1.0 < *fval) {
-                *fval = 1.0;
+            if (1.0 < val->fv) {
+                val->fv = 1.0;
             }
 
             HSD_ASSERT(148, wobj->aobj);
@@ -62,21 +62,21 @@ static void WObjUpdateFunc(void* obj, u32 type, f32* fval)
             HSD_ASSERT(150, jp);
             HSD_ASSERT(151, jp->u.spline);
 
-            splArcLengthPoint(&p, jp->u.spline, *fval);
+            splArcLengthPoint(&p, jp->u.spline, val->fv);
             HSD_WObjSetPosition(wobj, &p);
             wobj->flags |= 1;
         } break;
 
         case 5:
-            HSD_WObjSetPositionX(wobj, *fval);
+            HSD_WObjSetPositionX(wobj, val->fv);
             break;
 
         case 6:
-            HSD_WObjSetPositionY(wobj, *fval);
+            HSD_WObjSetPositionY(wobj, val->fv);
             break;
 
         case 7:
-            HSD_WObjSetPositionZ(wobj, *fval);
+            HSD_WObjSetPositionZ(wobj, val->fv);
             break;
         }
     }

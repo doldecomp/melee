@@ -1,3 +1,4 @@
+#include "sysdolphin/baselib/forward.h"
 #include <sysdolphin/baselib/fobj.h>
 
 #include <sysdolphin/baselib/spline.h>
@@ -75,15 +76,16 @@ void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe)
     }
 }
 
-inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj, void (*obj_update)(),
-                              f32 rate)
+inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj,
+                              HSD_ObjUpdateFunc obj_update, f32 rate)
 {
     if (fobj->op_intrp == HSD_A_OP_KEY) {
         HSD_FObjInterpretAnim(fobj, obj, obj_update, rate);
     }
 }
 
-void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
+void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update,
+                      f32 rate)
 {
     if (fobj == NULL)
         return;
@@ -92,8 +94,8 @@ void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
     HSD_FObjSetState(fobj, 0);
 }
 
-void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(),
-                         f32 rate)
+void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj,
+                         HSD_ObjUpdateFunc obj_update, f32 rate)
 {
     for (; fobj != NULL; fobj = fobj->next) {
         HSD_FObjStopAnim(fobj, obj, obj_update, rate);
@@ -171,11 +173,10 @@ void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(),
     }
 }
 
-void FObjUpdateAnim(HSD_FObj* fobj, void* obj,
-                    void (*obj_update)(void*, s32, FObjData*))
+void FObjUpdateAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update)
 {
     f32 phi_f0;
-    FObjData fobjdata;
+    HSD_ObjData fobjdata;
 
     if (obj_update == NULL) {
         return;

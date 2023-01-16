@@ -41,5 +41,6 @@ void __ARQServiceQueueLo(void);
 void __ARQCallbackHack(ARQRequest*);
 void __ARQInitTempQueue(void);
 void __ARQPushTempQueue(ARQRequest* task);
+void __ARQInterruptServiceRoutine(void);
 
 #endif // DOLPHIN_AR_ARQ_H

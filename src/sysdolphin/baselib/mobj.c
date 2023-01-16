@@ -74,7 +74,7 @@ void HSD_MObjReqAnim(HSD_MObj* mobj, f32 startframe)
     HSD_MObjReqAnimByFlags(mobj, startframe, ALL_ANIM);
 }
 
-static void MObjUpdateFunc(void* obj, u32 type, FObjData* val)
+static void MObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_MObj* mobj = obj;
 

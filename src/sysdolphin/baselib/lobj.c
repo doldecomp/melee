@@ -87,7 +87,7 @@ HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx)
 }
 
 /// @private
-void LObjUpdateFunc(void* obj, u32 type, FObjData* val)
+void LObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_LObj* lobj = obj;
 

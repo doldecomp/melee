@@ -671,7 +671,7 @@ void HSD_JObjAddAnimAll(HSD_JObj* jobj, HSD_AnimJoint* arg1,
 
 typedef void (*ufc_callback)(HSD_JObj*, u32, f32);
 
-void JObjUpdateFunc(void* obj, u32 type, FObjData* val)
+void JObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_JObj* jobj = obj;
     ufc_callback cb;
@@ -837,13 +837,13 @@ void JObjUpdateFunc(void* obj, u32 type, FObjData* val)
             } else {
                 PSMTXCopy(jobj->mtx, mtx);
             }
-            if (type == 0x36 || type == 0x38) {
+            if (type == 0x36U || type == 0x38U) {
                 HSD_MtxGetTranslate(mtx, &jobj->translate);
             }
             if (type == 0x36 || type == 0x37) {
                 HSD_MtxGetRotation(mtx, (Vec3*) &jobj->rotate);
             }
-            if (type == 0x36 || type == 0x39) {
+            if (type == 0x36U || type == 0x39U) {
                 HSD_MtxGetScale(mtx, &jobj->scale);
             }
             break;

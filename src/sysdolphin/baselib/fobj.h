@@ -2,7 +2,7 @@
 #define _fobj_h_
 
 #include <Runtime/platform.h>
-
+#include <sysdolphin/baselib/forward.h>
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/object.h>
 
@@ -55,11 +55,11 @@ typedef struct _HSD_FObjDesc {
     u8* ad;
 } HSD_FObjDesc;
 
-typedef union _HSD_FObjData {
+union _HSD_ObjData {
     f32 fv;
     s32 iv;
     Vec3 p;
-} FObjData;
+};
 
 HSD_ObjAllocData* HSD_FObjGetAllocData(void);
 void HSD_FObjInitAllocData(void);
@@ -68,15 +68,15 @@ void HSD_FObjRemoveAll(HSD_FObj* fobj);
 u8 HSD_FObjSetState(HSD_FObj* fobj, u8 state);
 u32 HSD_FObjGetState(HSD_FObj* fobj);
 void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe);
-void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(void),
+void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update,
                       f32 rate);
-void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, Event obj_update, f32 rate);
-void FObjUpdateAnim(HSD_FObj* fobj, void* obj,
-                    void (*obj_update)(void*, s32, FObjData*));
-void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj, Event obj_update,
-                           f32 rate);
-void HSD_FObjInterpretAnimAll(HSD_FObj* fobj, void* obj, Event obj_update,
-                              f32 rate);
+void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj,
+                         HSD_ObjUpdateFunc obj_update, f32 rate);
+void FObjUpdateAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc update_func);
+void HSD_FObjInterpretAnim(HSD_FObj* fobj, void* obj,
+                           HSD_ObjUpdateFunc obj_update, f32 rate);
+void HSD_FObjInterpretAnimAll(HSD_FObj* fobj, void* obj,
+                              HSD_ObjUpdateFunc obj_update, f32 rate);
 HSD_FObj* HSD_FObjLoadDesc(HSD_FObjDesc* desc);
 HSD_FObj* HSD_FObjAlloc(void);
 void HSD_FObjFree(HSD_FObj* fobj);

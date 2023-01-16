@@ -149,7 +149,7 @@ s32 HSD_LObjGetNbActive(void);
 HSD_LObj* HSD_LObjGetActiveByID(GXLightID id);
 HSD_LObj* HSD_LObjGetActiveByIndex(s32 idx);
 
-void LObjUpdateFunc(void* obj, u32 type, FObjData* val);
+void LObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val);
 
 void HSD_LObjAnim(HSD_LObj* lobj);
 void HSD_LObjAnimAll(HSD_LObj* lobj);
