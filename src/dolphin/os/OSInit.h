@@ -7,12 +7,15 @@
 #include <dolphin/os/OSContext.h>
 #include <Runtime/platform.h>
 
-typedef u8 __OSException;
-typedef void (*__OSExceptionHandler)(__OSException exception,
+typedef enum OSException {
+    OS_EXCEPTION_FLOATING_POINT = 7,
+} OSException;
+
+typedef void (*__OSExceptionHandler)(OSException exception,
                                      struct OSContext* context);
 
-__OSExceptionHandler __OSGetExceptionHandler(__OSException);
-void __OSSetExceptionHandler(s32, __OSExceptionHandler);
+__OSExceptionHandler __OSGetExceptionHandler(OSException);
+void __OSSetExceptionHandler(OSException, __OSExceptionHandler);
 u32 OSGetConsoleType(void);
 void OSInit(void);
 void __OSPSInit(void);

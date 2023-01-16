@@ -14,7 +14,7 @@ static struct OSAlarmQueue {
     OSAlarm* tail;
 } AlarmQueue;
 
-void DecrementerExceptionHandler(__OSException exception, OSContext* context);
+void DecrementerExceptionHandler(OSException exception, OSContext* context);
 
 void OSInitAlarm(void)
 {
@@ -137,7 +137,7 @@ void OSCancelAlarm(OSAlarm* alarm)
     OSRestoreInterrupts(enabled);
 }
 
-static void DecrementerExceptionCallback(register __OSException exception,
+static void DecrementerExceptionCallback(register OSException exception,
                                          register OSContext* context)
 {
     OSAlarm* alarm;
@@ -189,7 +189,7 @@ static void DecrementerExceptionCallback(register __OSException exception,
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void DecrementerExceptionHandler(__OSException exception,
+asm void DecrementerExceptionHandler(OSException exception,
                                      OSContext* context)
 { // clang-format off
     nofralloc
@@ -217,7 +217,7 @@ asm void DecrementerExceptionHandler(__OSException exception,
 
 #else
 
-void DecrementerExceptionHandler(__OSException exception, OSContext* context)
+void DecrementerExceptionHandler(OSException exception, OSContext* context)
 {
     NOT_IMPLEMENTED;
 }

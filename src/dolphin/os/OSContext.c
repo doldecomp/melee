@@ -2,7 +2,9 @@
 
 #include <dolphin/db/db.h>
 #include <dolphin/os/os.h>
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <placeholder.h>
 
 #ifdef MWERKS_GEKKO
 asm void __OSLoadFPUContext(u32 unused, register OSContext* fpuctx)
@@ -195,7 +197,7 @@ asm void OSLoadFPUContext(register OSContext* fpuctx)
     b __OSLoadFPUContext
 } // clang-format on
 #else
-void __OSSaveFPUContext(u32 unused1, u32 unused2, OSContext* fpuctx)
+void OSLoadFPUContext(u32 unused1, u32 unused2, OSContext* fpuctx)
 {
     NOT_IMPLEMENTED;
 }
@@ -209,7 +211,7 @@ asm void OSSaveFPUContext(register OSContext* fpuctx)
     b __OSSaveFPUContext
 } // clang-format on
 #else
-void __OSSaveFPUContext(u32 unused1, u32 unused2, OSContext* fpuctx)
+void OSSaveFPUContext(OSContext* fpuctx)
 {
     NOT_IMPLEMENTED;
 }
@@ -248,7 +250,7 @@ disable_fpu:
     blr
 } // clang-format on
 #else
-void __OSSaveFPUContext(u32 unused1, u32 unused2, OSContext* fpuctx)
+void OSSetCurrentContext(OSContext* ctx)
 {
     NOT_IMPLEMENTED;
 }
@@ -379,12 +381,19 @@ void OSLoadContext(OSContext* ctx)
 }
 #endif
 
-any_t OSGetStackPointer()
+#ifdef MWERKS_GEKKO
+any_t OSGetStackPointer(void)
 {
     register any_t result;
     asm { mr result, r1 }
     return result;
 }
+#else
+any_t OSGetStackPointer(void)
+{
+    NOT_IMPLEMENTED;
+}
+#endif
 
 extern volatile OSContext* __OSFPUContext AT_ADDRESS(OS_BASE_CACHED | 0xD8);
 
@@ -521,9 +530,6 @@ void OSDumpContext(const OSContext* context)
     }
 }
 
-typedef enum OSException {
-    OS_EXCEPTION_FLOATING_POINT = 7,
-} OSException;
 
 #ifdef MWERKS_GEKKO
 asm void OSSwitchFPUContext(OSException unused, register OSContext* ctx)
