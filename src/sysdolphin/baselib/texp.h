@@ -162,5 +162,8 @@ void HSD_TExpColorIn();
 void HSD_TExpAlphaOp();
 void HSD_TExpAlphaIn();
 void HSD_TExpFreeTevDesc(HSD_TExpTevDesc*);
+void HSD_TExpFreeList(HSD_TExp*, HSD_TExpType, int);
+void HSD_TExpCompile(HSD_TExp*, HSD_TExpTevDesc**, HSD_TExp**);
+void HSD_TExpSetupTev(HSD_TExpTevDesc*, HSD_TExp*);
 
 #endif

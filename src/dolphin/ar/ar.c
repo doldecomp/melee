@@ -77,7 +77,7 @@ u32 ARFree(u32* length)
     return __AR_StackPointer;
 }
 
-bool ARCheckInit()
+bool ARCheckInit(void)
 {
     return __AR_init_flag;
 }
@@ -128,7 +128,7 @@ u32 ARGetSize(void)
     return __AR_Size;
 }
 
-static void __ARHandler(__OSInterrupt interrupt, OSContext* context)
+void __ARHandler(__OSInterrupt interrupt, OSContext* context)
 {
     OSContext exceptionContext;
 

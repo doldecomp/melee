@@ -166,5 +166,6 @@ HSD_Material* HSD_MaterialAlloc(void);
 void HSD_MObjCompileTev(HSD_MObj* mobj);
 void HSD_MObjDeleteShadowTexture(HSD_TObj* tobj);
 HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list);
+void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2);
 
 #endif

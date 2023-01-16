@@ -28,6 +28,21 @@ typedef struct _CLinkAttributes {
 void ftCLink_OnItemPickup(HSD_GObj*, bool);
 void ftCLink_OnItemDrop(HSD_GObj*, bool);
 void func_80149268(HSD_GObj*);
+void ftCLink_OnKnockbackExit(HSD_GObj* gobj);
+void func_80149114(HSD_GObj* gobj);
+void func_8014919C(HSD_GObj* gobj);
+void ftCLink_OnDeath(HSD_GObj* gobj);
+bool func_8014920C(HSD_GObj* gobj);
+void func_801492C4(HSD_GObj* gobj);
+u32 func_801492F4(HSD_GObj* gobj);
+void func_80149318(HSD_GObj* gobj);
+void ftCLink_OnLoad(HSD_GObj* gobj);
+void ftCLink_OnItemPickupExt(HSD_GObj* gobj, s32 arg1);
+void ftCLink_OnItemInvisible(HSD_GObj* gobj);
+void ftCLink_OnItemVisible(HSD_GObj* gobj);
+void ftCLink_OnItemDropExt(HSD_GObj* gobj, s32 arg1);
+void ftCLink_LoadSpecialAttrs(HSD_GObj* gobj);
+void ftCLink_OnKnockbackEnter(HSD_GObj* gobj);
 
 static inline void checkFighter2244(HSD_GObj* gobj)
 {
