@@ -174,7 +174,7 @@ void func_800DEEA8(struct _HSD_GObj* fighter_gobj);
 u32 func_800DEEE8(struct _Fighter*, struct _Vec2*);
 void func_800DEF38(struct _HSD_GObj*);
 void func_800DF0D0(struct _HSD_GObj*);
-s32 func_80096CC8(struct _HSD_GObj*);
+bool func_80096CC8(HSD_GObj*);
 
 /// @todo enum params
 void func_800DEAE8(struct _HSD_GObj* gobj, enum_t asid0, enum_t asid1);

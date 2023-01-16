@@ -1,5 +1,6 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_3.h>
 
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ftbosslib.h>
 
@@ -56,7 +57,11 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
 {
     f32 temp_f1;
     Fighter* r32_fp;
-    s32 unk_filler[4];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     r32_fp = gobj->user_data;
     if (r32_fp->sa.masterhand.x2258 == 0x156) {
@@ -93,7 +98,10 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
 // https://decomp.me/scratch/tAkIF
 void lbl_80150F00(HSD_GObj* gobj)
 {
-    u32 unk[1];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = gobj->user_data;

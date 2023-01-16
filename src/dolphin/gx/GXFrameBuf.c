@@ -1,6 +1,7 @@
 #include <common_structs.h>
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
+#include <placeholder.h>
 
 Vec2 const lbl_804DE220 = { 256.0F, 0.0F };
 Vec2 const lbl_804DE228 = { 176.0F, 0.0F };
@@ -73,8 +74,10 @@ void GXSetDispCopyDst(s32 arg0)
 extern unk_t __GetImageTileCount();
 extern unk_t __cvt_fp2unsigned();
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXSetTexCopyDst()
+asm void GXSetTexCopyDst(void)
 { // clang-format off
     nofralloc
 /* 8033D5CC 0033A1AC  7C 08 02 A6 */	mflr r0
@@ -176,15 +179,25 @@ lbl_8033D658:
 } // clang-format on
 #pragma pop
 
+#else
+
+void GXSetTexCopyDst(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void GXSetDispCopyFrame2Field(s32 arg0)
 {
     INSERT_FIELD(__GXContexts.main->x1D0[0x7], arg0, 2, 12);
     INSERT_FIELD(__GXContexts.main->x1D0[0xB], 0, 2, 12);
 }
 
-// https://decomp.me/scratch/eN1kg // 2515 (18.87%)
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXSetCopyClamp()
+asm void GXSetCopyClamp(void)
 { // clang-format off
     nofralloc
 /* 8033D768 0033A348  80 AD A5 08 */	lwz r5, __GXContexts(r13)
@@ -221,9 +234,20 @@ asm unk_t GXSetCopyClamp()
 } // clang-format on
 #pragma pop
 
+#else
+
+void GXSetCopyClamp(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 // https://decomp.me/scratch/ZNlNl // 620 (86.81%)
 #pragma push
-asm unk_t GXSetDispCopyYScale()
+asm void GXSetDispCopyYScale(void)
 { // clang-format off
     nofralloc
 /* 8033D7E4 0033A3C4  7C 08 02 A6 */	mflr r0
@@ -276,9 +300,19 @@ asm unk_t GXSetDispCopyYScale()
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/uNbv5 // 2555 (1.73%)
+#else
+
+void GXSetDispCopyYScale(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXSetCopyClear()
+asm void GXSetCopyClear(void)
 { // clang-format off
     nofralloc
 /* 8033D8A0 0033A480  54 80 02 3E */	clrlwi r0, r4, 8
@@ -310,9 +344,19 @@ asm unk_t GXSetCopyClear()
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/EqBSQ // 6759 (51.02%)
+#else
+
+void GXSetCopyClear(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXSetCopyFilter()
+asm void GXSetCopyFilter(void)
 { // clang-format off
     nofralloc
 /* 8033D908 0033A4E8  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -460,13 +504,24 @@ lbl_8033DB00:
 } // clang-format on
 #pragma pop
 
+#else
+
+void GXSetCopyFilter(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void GXSetDispCopyGamma(s32 arg0)
 {
     INSERT_FIELD(__GXContexts.main->x1D0[7], arg0, 2, 7);
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXCopyDisp()
+asm void GXCopyDisp(void)
 { // clang-format off
     nofralloc
 /* 8033DB4C 0033A72C  54 80 06 3F */	clrlwi. r0, r4, 0x18
@@ -569,8 +624,19 @@ lbl_8033DCAC:
 } // clang-format on
 #pragma pop
 
+#else
+
+void GXCopyDisp(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXCopyTex()
+asm void GXCopyTex(void)
 { // clang-format off
     nofralloc
 /* 8033DCBC 0033A89C  54 80 06 3F */	clrlwi. r0, r4, 0x18
@@ -683,7 +749,16 @@ lbl_8033DE3C:
 } // clang-format on
 #pragma pop
 
-void GXClearBoundingBox()
+#else
+
+void GXCopyTex(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+void GXClearBoundingBox(void)
 {
     WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = 0x550003FF;

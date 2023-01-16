@@ -34,7 +34,6 @@ bool EnvColl_CheckGroundAndLedge(HSD_GObj* fighter_gobj, s32 direction);
 void func_80083F88(HSD_GObj* fighter_gobj);
 void func_80085154(HSD_GObj* fighter_gobj);
 void func_80083B68(HSD_GObj* fighter_gobj);
-void func_800831CC(HSD_GObj*, s32 (*)(HSD_GObj*), HSD_GObjEvent);
 bool func_800824A0(HSD_GObj*, struct _ftCollisionBox*);
 bool func_80082888(HSD_GObj*, struct _ftCollisionBox*);
 void func_80085204(HSD_GObj* fighter_gobj);
@@ -48,5 +47,7 @@ bool func_800821DC(void);
 bool func_80084A18(HSD_GObj*);
 void func_800849EC(Fighter*, Fighter*);
 void func_80081C88(HSD_GObj* dst_gobj, f32 scl_y);
+void func_80082838(void);
+void func_800831CC(HSD_GObj*, HSD_GObjPredicate, HSD_GObjEvent);
 
 #endif

@@ -2,7 +2,10 @@
 
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSThread.h>
+#include <placeholder.h>
 #include <string.h>
+
+#ifdef MWERKS_GEKKO
 
 void lbl_80347374(void);
 
@@ -19,6 +22,17 @@ entry lbl_80347374
 } // clang-format on
 #pragma pop
 
+#else
+
+bool OSDisableInterrupts(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm bool OSEnableInterrupts(void)
 { // clang-format off
@@ -30,6 +44,17 @@ asm bool OSEnableInterrupts(void)
 /* 80347388 00343F68  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+bool OSEnableInterrupts(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm bool OSRestoreInterrupts(bool)
@@ -48,6 +73,15 @@ lbl_803473A4:
 /* 803473AC 00343F8C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+bool OSRestoreInterrupts(bool arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 extern OSInterruptHandler* InterruptHandlerTable;
 
@@ -74,7 +108,10 @@ extern volatile struct {
 extern volatile u32 OS_INTR_OLD AT_ADDRESS(0x800000C4);
 extern volatile u32 OS_INTR_CUR AT_ADDRESS(0x800000C8);
 
+#ifdef MUST_MATCH
+#pragma push
 #pragma peephole off
+#endif
 
 void __OSInterruptInit(void)
 {
@@ -87,8 +124,14 @@ void __OSInterruptInit(void)
     __OSSetExceptionHandler(4, lbl_80347B80);
 }
 
+#ifdef MUST_MATCH
+#pragma pop
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t SetInterruptMask()
+asm void SetInterruptMask(void)
 { // clang-format off
     nofralloc
 /* 80347454 00344034  7C 60 00 34 */	cntlzw r0, r3
@@ -313,6 +356,17 @@ lbl_80347728:
 } // clang-format on
 #pragma pop
 
+#else
+
+void SetInterruptMask(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm u32 __OSMaskInterrupts(u32)
 { // clang-format off
@@ -358,8 +412,18 @@ lbl_80347784:
 } // clang-format on
 #pragma pop
 
+#else
+
+u32 __OSMaskInterrupts(u32 arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 extern unk_t lbl_80402318;
-extern unk_t OSGetTime();
 
 #pragma push
 asm u32 __OSUnmaskInterrupts(u32)
@@ -406,8 +470,19 @@ lbl_8034780C:
 } // clang-format on
 #pragma pop
 
+#else
+
+u32 __OSUnmaskInterrupts(u32 arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t lbl_8034783C()
+asm void lbl_8034783C(void)
 { // clang-format off
     nofralloc
 /* 8034783C 0034441C  7C 08 02 A6 */	mflr r0
@@ -657,6 +732,17 @@ lbl_80347B5C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void lbl_8034783C(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 static asm void lbl_80347B80(__OSException exception, OSContext* context)
 { // clang-format off
@@ -682,3 +768,12 @@ static asm void lbl_80347B80(__OSException exception, OSContext* context)
 /* 80347BC8 003447A8  4B FF FC 74 */	b lbl_8034783C
 } // clang-format on
 #pragma pop
+
+#else
+
+static void lbl_80347B80(__OSException exception, OSContext* context)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

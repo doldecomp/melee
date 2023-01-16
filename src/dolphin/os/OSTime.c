@@ -1,8 +1,11 @@
-#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 
-asm OSTime OSGetTime(void)
-{ // clang-format off
+#include <dolphin/os/OSInterrupt.h>
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
+
+asm OSTime OSGetTime(void){ // clang-format off
     mftbu r3
     mftb r4, 0x10c
     mftbu r5
@@ -10,16 +13,39 @@ asm OSTime OSGetTime(void)
     bne OSGetTime
 } // clang-format on
 
-asm OSTick OSGetTick(void)
-{ // clang-format off
+#else
+
+OSTime OSGetTime(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
+asm OSTick OSGetTick(void){ // clang-format off
     mftb r3, 0x10c
 } // clang-format on
+
+#else
+
+OSTick OSGetTick(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 extern volatile OSTime OS_SYSTEM_TIME AT_ADDRESS(0x800030D8);
 
 OSTime __OSGetSystemTime(void)
 {
-    s32 pad;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     bool intr = OSDisableInterrupts();
     OSTime time = OSGetTime() + OS_SYSTEM_TIME;
     OSRestoreInterrupts(intr);
@@ -28,7 +54,11 @@ OSTime __OSGetSystemTime(void)
 
 OSTime __OSTimeToSystemTime(s64 time)
 {
-    s32 pad;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     bool intr = OSDisableInterrupts();
     OSTime sysTime = OS_SYSTEM_TIME + time;
     OSRestoreInterrupts(intr);
@@ -78,18 +108,21 @@ static void GetDates(s32 days, OSCalendarTime* cal)
 
     p_days = IsLeapYear(year) ? LeapYearDays : YearDays;
     month = OS_TIME_MONTH_MAX;
-    while (days < p_days[--month]) {
-        ;
-    }
+
+    while (days < p_days[--month])
+        continue;
+
     cal->mon = month;
     cal->mday = days - p_days[month] + 1;
 }
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t __div2i();
 extern unk_t __mod2i();
 
 #pragma push
-asm void OSTicksToCalendarTime(unsigned long long ticks, OSCalendarTime* td)
+asm void OSTicksToCalendarTime(u64 ticks, OSCalendarTime* td)
 { // clang-format off
     nofralloc
 /* 8034C668 00349248  7C 08 02 A6 */	mflr r0
@@ -225,3 +258,12 @@ lbl_8034C7E8:
 /* 8034C868 00349448  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void OSTicksToCalendarTime(u64 ticks, OSCalendarTime* td)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

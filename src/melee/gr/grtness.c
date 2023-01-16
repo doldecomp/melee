@@ -38,7 +38,7 @@ StageData lbl_803E908C = {
     GrTNess_802228A4, GrTNess_802228AC, 0x00000001,
 };
 
-static void GrTNess_802225D0(int)
+static void GrTNess_802225D0(int arg0)
 {
     return;
 }
@@ -103,17 +103,17 @@ static void GrTNess_8022275C(HSD_GObj* gobj)
     func_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool GrTNess_80222788(HSD_GObj*)
+static bool GrTNess_80222788(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void GrTNess_80222790(HSD_GObj*)
+static void GrTNess_80222790(HSD_GObj* arg0)
 {
     return;
 }
 
-static void GrTNess_80222794(HSD_GObj*)
+static void GrTNess_80222794(HSD_GObj* arg0)
 {
     return;
 }
@@ -130,7 +130,7 @@ static void GrTNess_80222798(HSD_GObj* gobj)
     func_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool GrTNess_802227E8(HSD_GObj*)
+static bool GrTNess_802227E8(HSD_GObj* arg0)
 {
     return false;
 }
@@ -141,7 +141,7 @@ static void GrTNess_802227F0(HSD_GObj* gobj)
     func_801C2FE0(gobj);
 }
 
-static void GrTNess_80222824(HSD_GObj*)
+static void GrTNess_80222824(HSD_GObj* arg0)
 {
     return;
 }
@@ -158,7 +158,7 @@ static void GrTNess_80222828(HSD_GObj* gobj)
     func_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool GrTNess_80222878(HSD_GObj*)
+static bool GrTNess_80222878(HSD_GObj* arg0)
 {
     return false;
 }
@@ -168,17 +168,17 @@ static void GrTNess_80222880(HSD_GObj* gobj)
     func_801C2FE0(gobj);
 }
 
-static void GrTNess_802228A0(HSD_GObj*)
+static void GrTNess_802228A0(HSD_GObj* arg0)
 {
     return;
 }
 
-static bool GrTNess_802228A4(int)
+static bool GrTNess_802228A4(int arg0)
 {
     return false;
 }
 
-static bool GrTNess_802228AC(Vec3*, int, struct _HSD_JObj*)
+static bool GrTNess_802228AC(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }

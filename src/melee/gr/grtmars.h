@@ -3,6 +3,7 @@
 
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/jobj.h>
 
 static void GrTMars_80221EF4(int);
 static void GrTMars_80221EF8(void);
@@ -23,6 +24,6 @@ static bool GrTMars_8022219C(HSD_GObj*);
 static void GrTMars_802221A4(HSD_GObj*);
 static void GrTMars_802221C4(HSD_GObj*);
 static bool GrTMars_802221C8(int);
-static bool GrTMars_802221D0(Vec3*, int, struct _HSD_JObj*);
+static bool GrTMars_802221D0(Vec3*, int, HSD_JObj*);
 
 #endif

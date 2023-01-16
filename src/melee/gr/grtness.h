@@ -1,8 +1,10 @@
 #ifndef _grtness_h_
 #define _grtness_h_
 
+#include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/jobj.h>
 
 static void GrTNess_802225D0(int);
 static void GrTNess_802225D4(void);
@@ -23,6 +25,6 @@ static bool GrTNess_80222878(HSD_GObj*);
 static void GrTNess_80222880(HSD_GObj* gobj);
 static void GrTNess_802228A0(HSD_GObj*);
 static bool GrTNess_802228A4(int);
-static bool GrTNess_802228AC(Vec3*, int, struct _HSD_JObj*);
+static bool GrTNess_802228AC(Vec3*, int, HSD_JObj*);
 
 #endif

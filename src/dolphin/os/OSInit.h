@@ -16,5 +16,13 @@ void __OSSetExceptionHandler(s32, __OSExceptionHandler);
 u32 OSGetConsoleType(void);
 void OSInit(void);
 void __OSPSInit(void);
+void OSExceptionInit(void);
+void __OSDBIntegrator(void);
+void __OSDBJump(void);
+void __DBVECTOR(void);
+void __OSEVSetNumber(void);
+void __OSEVEnd(void);
+void OSExceptionVector(void);
+void OSDefaultExceptionHandler(void);
 
 #endif

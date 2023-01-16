@@ -1,9 +1,13 @@
-#include <Runtime/platform.h>
+#include <dolphin/os/OSFont.h>
+
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
 
 static s16 lbl_804D5C20[] = { -1, 0, 0, 0 };
 
 #pragma push
-asm unk_t OSGetFontEncode()
+asm u16 OSGetFontEncode(void)
 { // clang-format off
     nofralloc
 /* 8034730C 00343EEC  A0 6D A5 80 */	lhz r3, lbl_804D5C20(r13)
@@ -35,3 +39,12 @@ lbl_8034735C:
 /* 80347360 00343F40  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+u16 OSGetFontEncode(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

@@ -1164,26 +1164,26 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
         func_80274EF8(item_gobj);
     }
 
-    if (HAS_FLAG(flags, ITEM_MODEL_UPDATE))
+    if (FLAGS_ANY(flags, ITEM_MODEL_UPDATE))
         func_80274740(item_gobj);
 
-    if (NOT_FLAG(flags, ITEM_COLANIM_PRESERVE) &&
+    if (FLAGS_NONE(flags, ITEM_COLANIM_PRESERVE) &&
         lbl_804D6D04[item_data->x548_colorOverlay.x28_colanim].x5_unk != 0)
     {
         func_80279BBC(item_data);
     }
 
-    if (NOT_FLAG(flags, ITEM_SFX_PRESERVE))
+    if (FLAGS_NONE(flags, ITEM_SFX_PRESERVE))
         func_8026B074(item_data);
 
     HSD_JObjSetFacingDirItem(item_jobj, item_data);
 
-    if (HAS_FLAG(flags, ITEM_DROP_UPDATE))
+    if (FLAGS_ANY(flags, ITEM_DROP_UPDATE))
         item_data->xC40 = item_data->xC44;
     else
         item_data->xC40 = 1.0F;
 
-    if (NOT_FLAG(flags, ITEM_HIT_PRESERVE) && item_data->xDC8_word.flags.x16)
+    if (FLAGS_NONE(flags, ITEM_HIT_PRESERVE) && item_data->xDC8_word.flags.x16)
         func_802725D4(item_gobj);
 
     item_data->xCC8_knockback = 0.0F;
@@ -1201,10 +1201,10 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
 
         temp_r23 = (new_var3 = item_data->xD0_itemStateDesc);
 
-        if (temp_r23 != NULL && HAS_FLAG(flags, ITEM_ANIM_UPDATE)) {
+        if (temp_r23 != NULL && FLAGS_ANY(flags, ITEM_ANIM_UPDATE)) {
             func_80268D34(item_gobj, temp_r23);
 
-            if (HAS_FLAG(flags, ITEM_UNK_UPDATE)) {
+            if (FLAGS_ANY(flags, ITEM_UNK_UPDATE)) {
                 item_jobj1_2 = item_gobj->hsd_obj;
                 item_data3 = GetItemData(item_gobj);
                 item_data3->scl = item_data3->xCC_item_attr->x60_scale;
@@ -1222,7 +1222,7 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0;
             item_data->x524 = 0.0F;
-        } else if (temp_r23 != NULL && HAS_FLAG(flags, ITEM_CMD_UPDATE)) {
+        } else if (temp_r23 != NULL && FLAGS_ANY(flags, ITEM_CMD_UPDATE)) {
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0U;
             item_data->x524 = 0.0f;

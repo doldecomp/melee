@@ -2,6 +2,7 @@
 #define _object_h_
 
 #include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/forward.h>
 
 #define HSD_OBJ_NOREF ((u16) -1)
 
@@ -52,11 +53,11 @@ typedef enum _HSD_TypeMask {
     ALL_TYPE_MASK = MASK_OF(HSD_MAX_TYPE) - 1,
 } HSD_TypeMask;
 
-typedef struct _HSD_Obj {
+struct _HSD_Obj {
     struct _HSD_Class parent;
     u16 ref_count;
     u16 ref_count_individual;
-} HSD_Obj;
+};
 
 typedef struct _HSD_ObjInfo {
     struct _HSD_ClassInfo parent;

@@ -20,7 +20,7 @@ typedef struct OSCalendarTime {
     int usec; // microseconds after the millisecond [0,999]
 } OSCalendarTime;
 
-void OSTicksToCalendarTime(unsigned long long ticks, OSCalendarTime* td);
+void OSTicksToCalendarTime(u64 ticks, OSCalendarTime* td);
 s64 OSGetTime(void);
 OSTick OSGetTick(void);
 OSTime __OSTimeToSystemTime(OSTime);

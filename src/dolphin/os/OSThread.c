@@ -1,14 +1,19 @@
+#include <dolphin/os/OSThread.h>
+
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMutex.h>
-#include <dolphin/os/OSThread.h>
+#include <placeholder.h>
+
+extern s32 Reschedule;
+extern u32 RunQueueBits;
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t _stack_end;
 extern unk_t _db_stack_end;
 extern unk_t lbl_804A7FB8;
-extern u32 RunQueueBits;
 extern unk_t lbl_804D73DC;
-extern s32 Reschedule;
 
 #pragma push
 asm void __OSThreadInit(void)
@@ -94,6 +99,15 @@ lbl_8034ACFC:
 } // clang-format on
 #pragma pop
 
+#else
+
+void __OSThreadInit(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void OSInitThreadQueue(OSThreadQueue* queue)
 {
     queue->tail = NULL;
@@ -133,21 +147,18 @@ void UnsetRun(OSThread* thread)
     queue = thread->queue;
     prev = thread->prev;
 
-    if (next == NULL) {
+    if (next == NULL)
         queue->tail = prev;
-    } else {
+    else
         next->prev = prev;
-    }
 
-    if (prev == NULL) {
+    if (prev == NULL)
         queue->head = next;
-    } else {
+    else
         prev->next = next;
-    }
 
-    if (queue->head == NULL) {
-        RunQueueBits &= ~(1 << OS_PRIORITY_MAX - thread->priority);
-    }
+    if (queue->head == NULL)
+        RunQueueBits &= ~(1 << (31 - thread->priority));
 
     thread->queue = NULL;
 }
@@ -169,8 +180,10 @@ s32 __OSGetEffectivePriority(OSThread* thread)
     return prio;
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t SetEffectivePriority()
+asm void SetEffectivePriority(void)
 { // clang-format off
     nofralloc
 /* 8034AE6C 00347A4C  7C 08 02 A6 */	mflr r0
@@ -308,8 +321,19 @@ lbl_8034B014:
 } // clang-format on
 #pragma pop
 
+#else
+
+void SetEffectivePriority(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t SelectThread()
+asm void SelectThread(void)
 { // clang-format off
     nofralloc
 /* 8034B02C 00347C0C  7C 08 02 A6 */	mflr r0
@@ -457,6 +481,17 @@ lbl_8034B214:
 } // clang-format on
 #pragma pop
 
+#else
+
+void SelectThread(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void __OSReschedule(void)
 { // clang-format off
@@ -476,6 +511,17 @@ lbl_8034B24C:
 /* 8034B258 00347E38  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __OSReschedule(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm bool OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*, OSThread_Unk2*,
@@ -562,6 +608,18 @@ lbl_8034B35C:
 } // clang-format on
 #pragma pop
 
+#else
+
+bool OSCreateThread(OSThread* arg0, OSThreadFunc arg1, OSThread_Unk1* arg2,
+                    OSThread_Unk2* arg3, u32 arg4, s32 arg5, u16 arg6)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void OSExitThread(OSThread*)
 { // clang-format off
@@ -632,6 +690,17 @@ lbl_8034B438:
 /* 8034B45C 0034803C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void OSExitThread(OSThread* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void OSCancelThread(OSThread*)
@@ -770,7 +839,17 @@ lbl_8034B600:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/UARTk // 7996 (50.64%)
+#else
+
+void OSCancelThread(OSThread* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm s32 OSResumeThread(OSThread*)
 { // clang-format off
@@ -966,10 +1045,20 @@ lbl_8034B87C:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/p2ZdW // 9200 (0%)
+#else
+
+s32 OSResumeThread(OSThread* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm s32 OSSuspendThread(OSThread*)
-{ // clang-format off
+asm s32 OSSuspendThread(OSThread*){
+    // clang-format off
     nofralloc
 /* 8034B8A4 00348484  7C 08 02 A6 */	mflr r0
 /* 8034B8A8 00348488  90 01 00 04 */	stw r0, 4(r1)
@@ -1079,6 +1168,17 @@ lbl_8034B9EC:
 } // clang-format on
 #pragma pop
 
+#else
+
+s32 OSSuspendThread(OSThread* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void OSSleepThread(OSThreadQueue*)
 { // clang-format off
@@ -1154,7 +1254,17 @@ lbl_8034BAE0:
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/oYS6V
+#else
+
+void OSSleepThread(OSThreadQueue* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void OSWakeupThread(OSThreadQueue*)
 { // clang-format off
@@ -1234,8 +1344,19 @@ lbl_8034BBE4:
 } // clang-format on
 #pragma pop
 
+#else
+
+void OSWakeupThread(OSThreadQueue* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t CheckThreadQueue()
+asm void CheckThreadQueue(void)
 { // clang-format off
     nofralloc
 /* 8034BC04 003487E4  80 83 00 00 */	lwz r4, 0(r3)
@@ -1286,13 +1407,24 @@ lbl_8034BC90:
 } // clang-format on
 #pragma pop
 
+#else
+
+void CheckThreadQueue(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 extern char* lbl_80402420[];
 extern unk_t lbl_804D5C28;
 extern unk_t __OSCheckMutexes();
 extern unk_t __OSCheckDeadLock();
 
 #pragma push
-asm unk_t OSCheckActiveThreads()
+asm void OSCheckActiveThreads(void)
 { // clang-format off
     nofralloc
 /* 8034BCA0 00348880  7C 08 02 A6 */	mflr r0
@@ -1817,3 +1949,12 @@ lbl_8034C3C8:
 /* 8034C3EC 00348FCC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void OSCheckActiveThreads(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

@@ -151,7 +151,9 @@ typedef void (*Event)(void);
 #define U32_MAX 0xFFFFFFFF
 #define F32_MAX 3.4028235E38
 
-#define FLAGS_NONE 0
-#define HAS_FLAG(value, flag) ((value) & (flag))
-#define NOT_FLAG(value, flag) (!((value) & (flag)))
+#define FLAGS_ZERO 0
+#define FLAGS_ANY(value, flag) ((value) & (flag))
+#define FLAGS_NONE(value, flag) (!((value) & (flag)))
+#define FLAGS_ALL(value, flag) (((value) & (flag)) == (flag))
+
 #endif

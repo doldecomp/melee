@@ -30,7 +30,7 @@ void OSSetCurrentContext(OSContext*);
 OSContext* OSGetCurrentContext(void);
 bool OSSaveContext(OSContext*);
 void OSLoadContext(OSContext*);
-void* OSGetStackPointer(void);
+any_t OSGetStackPointer(void);
 void OSSwitchFiber(void*, void*);
 void OSSwitchFiberEx(u32, u32, u32, u32, void*, void*);
 void OSClearContext(OSContext*);

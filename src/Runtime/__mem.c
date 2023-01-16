@@ -7,12 +7,24 @@ void* memset(void* dst, int val, unsigned long /*size_t*/ n)
     return (dst);
 }
 
+#ifdef __MWERKS__
+#define INCREMENT_ASSIGN(ptr, type, value) (*++((type*) (ptr)) = (value))
+#else
+#define INCREMENT_ASSIGN(ptr, type, value)                                     \
+    do {                                                                       \
+        type* __INCREMENT_ASSIGN_tmp;                                          \
+        (ptr) = ((type*) (ptr)) + 1;                                           \
+        __INCREMENT_ASSIGN_tmp = ((type*) (ptr));                              \
+        *__INCREMENT_ASSIGN_tmp = (value);                                     \
+    } while (false);
+#endif
+
 void __fill_mem(void* dst, int val, unsigned long n)
 {
     unsigned long v = (unsigned char) val;
     unsigned long i;
 
-    ((unsigned char*) dst) = ((unsigned char*) dst) - 1;
+    dst = ((unsigned char*) dst) - 1;
 
     if (n >= 32) {
         i = (~(unsigned long) dst) & 3;
@@ -21,28 +33,22 @@ void __fill_mem(void* dst, int val, unsigned long n)
             n -= i;
 
             do {
-                *++(((unsigned char*) dst)) = v;
+                INCREMENT_ASSIGN(dst, unsigned char, v);
             } while (--i);
         }
 
         if (v)
             v |= v << 24 | v << 16 | v << 8;
 
-        ((unsigned long*) dst) =
-            ((unsigned long*) (((unsigned char*) dst) + 1)) - 1;
+        dst = ((unsigned long*) (((unsigned char*) dst) + 1)) - 1;
 
         i = n >> 5;
 
         if (i) {
             do {
-                *++((unsigned long*) dst) = v;
-                *++((unsigned long*) dst) = v;
-                *++((unsigned long*) dst) = v;
-                *++((unsigned long*) dst) = v;
-                *++((unsigned long*) dst) = v;
-                *++((unsigned long*) dst) = v;
-                *++((unsigned long*) dst) = v;
-                *++((unsigned long*) dst) = v;
+                int j;
+                for (j = 0; j < 8; j++)
+                    INCREMENT_ASSIGN(dst, unsigned long, v);
             } while (--i);
         }
 
@@ -50,23 +56,23 @@ void __fill_mem(void* dst, int val, unsigned long n)
 
         if (i) {
             do {
-                *++((unsigned long*) dst) = v;
+                INCREMENT_ASSIGN(dst, unsigned long, v);
             } while (--i);
         }
 
-        ((unsigned char*) dst) =
-            ((unsigned char*) (((unsigned long*) dst) + 1)) - 1;
-
+        dst = ((unsigned char*) (((unsigned long*) dst) + 1)) - 1;
         n &= 3;
     }
 
     if (n)
         do {
-            *++((unsigned char*) dst) = v;
+            INCREMENT_ASSIGN(dst, unsigned char, v);
         } while (--n);
 
     return;
 }
+
+#undef INCREMENT_ASSIGN
 
 void* memcpy(void* dst, const void* src, unsigned long /* size_t */ n)
 {

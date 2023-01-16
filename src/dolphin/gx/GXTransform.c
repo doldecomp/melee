@@ -6,6 +6,9 @@
 #include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
 #include <dolphin/gx/GXStubs.h>
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx,
@@ -110,6 +113,16 @@ lbl_8034124C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx,
+               f32* sy, f32* sz)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void GXSetProjection(f32* proj, s32 projection_type)
 {
     __GXContexts.main->projection_type = projection_type;
@@ -147,6 +160,8 @@ void GXGetProjectionv(f32* proj)
     proj[6] = __GXContexts.main->projection_v[5];
 }
 
+#ifdef MWERKS_GEKKO
+
 asm void WriteMTXPS4x3(register float* src, register float* dst)
 { // clang-format off
     psq_l f0, 0(src), 0, qr0
@@ -163,7 +178,17 @@ asm void WriteMTXPS4x3(register float* src, register float* dst)
     psq_st f5, 0(dst), 0, qr0
 } // clang-format on
 
-// https://decomp.me/scratch/OH9kG // 0 (100%)
+#else
+
+void WriteMTXPS4x3(float* src, float* dst)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void WriteMTXPS3x3from3x4(register float* src, register float* dst)
 { // clang-format off
     psq_l f0, 0(src), 0, qr0
@@ -180,6 +205,17 @@ asm void WriteMTXPS3x3from3x4(register float* src, register float* dst)
     stfs f5, 0(dst)
 } // clang-format on
 
+#else
+
+void WriteMTXPS3x3from3x4(float* src, float* dst)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void WriteMTXPS4x2(register float* src, register float* dst)
 { // clang-format off
     psq_l f0, 0(src), 0, qr0
@@ -192,9 +228,20 @@ asm void WriteMTXPS4x2(register float* src, register float* dst)
     psq_st f3, 0(dst), 0, qr0
 } // clang-format on
 
-// NOTE: peephole off is needed for following functions to match
-// The previous matrix functions were probably inline asm in the original
-// source, which triggered the peephole off MWCC bug.
+#else
+
+void WriteMTXPS4x2(float* src, float* dst)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+/**
+ * @attention peephole off is needed for following functions to match
+ * The previous matrix functions were probably inline asm in the original
+ * source, which triggered the peephole off MWCC bug.
+ */
 
 void GXLoadPosMtxImm(void* mtx, s32 arg1)
 {
@@ -322,7 +369,7 @@ void GXSetScissorBoxOffset(u32 x_off, u32 y_off)
     u32 var1 = (x_off + 342) / 2;
     u32 var2 = (y_off + 342) / 2;
     WGPIPE.u8 = GX_LOAD_BP_REG;
-    var1 = (var1 & 0xFFF003FF | var2 << 10) & 0xFFFFFF;
+    var1 = ((var1 & 0xFFF003FF) | var2 << 10) & 0xFFFFFF;
     var1 |= 0x59000000;
     WGPIPE.u32 = var1;
     set_x2(GX_FALSE);

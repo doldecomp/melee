@@ -3,6 +3,7 @@
 
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/forward.h>
 
 #define HSD_CLASS_INFO(o) ((HSD_ClassInfo*) o)
 #define HSD_CLASS_METHOD(o) (((HSD_Class*) o)->class_info)
@@ -63,7 +64,7 @@ void hsdFreeMemPiece(void* mem, s32 size);
 void* hsdNew(HSD_ClassInfo*);
 bool hsdChangeClass(void* object, void* class_info);
 bool hsdIsDescendantOf(HSD_ClassInfo* info, any_t p);
-bool hsdObjIsDescendantOf(struct _HSD_Obj* o, HSD_ClassInfo* p);
+bool hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p);
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name);
 void hsdForgetClassLibrary(const char* library_name);
 

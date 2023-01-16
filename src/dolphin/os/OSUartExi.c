@@ -1,3 +1,4 @@
+#include <placeholder.h>
 #include <Runtime/platform.h>
 
 static u32 Enabled[2];
@@ -19,6 +20,8 @@ s32 ReadUARTN(void)
     return 4;
 }
 
+#ifdef MWERKS_GEKKO
+
 extern unk_t EXIUnlock();
 extern unk_t EXIDeselect();
 extern unk_t EXISync();
@@ -27,7 +30,7 @@ extern unk_t EXILock();
 extern unk_t EXISelect();
 
 #pragma push
-asm unk_t WriteUARTN()
+asm void WriteUARTN(void)
 { // clang-format off
     nofralloc
 /* 8034C8BC 0034949C  7C 08 02 A6 */	mflr r0
@@ -180,3 +183,12 @@ lbl_8034CAA8:
 /* 8034CAB8 00349698  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void WriteUARTN(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

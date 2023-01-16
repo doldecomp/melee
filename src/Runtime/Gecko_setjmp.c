@@ -1,4 +1,9 @@
+#include <placeholder.h>
+#include <Runtime/platform.h>
 
+#ifdef MWERKS_GEKKO
+
+#pragma push
 asm int __setjmp(register* env)
 { // clang-format off
     nofralloc
@@ -32,7 +37,20 @@ asm int __setjmp(register* env)
 /* 80322838 0031F418  38 60 00 00 */	li r3, 0
 /* 8032283C 0031F41C  4E 80 00 20 */	blr
 } // clang-format on
+#pragma pop
 
+#else
+
+int __setjmp(unk_t env)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
+#pragma push
 asm void longjmp(register* env, register int val)
 { // clang-format off
     nofralloc
@@ -69,3 +87,13 @@ asm void longjmp(register* env, register int val)
 /* 803228B8 0031F498  38 60 00 01 */	li r3, 1
 /* 803228BC 0031F49C  4E 80 00 20 */	blr
 } // clang-format on
+#pragma pop
+
+#else
+
+void longjmp(unk_t env, int val)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

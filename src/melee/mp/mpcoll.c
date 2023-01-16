@@ -6,7 +6,7 @@
 #include <melee/gr/grdynamicattr.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
-#include <mplib.h>
+#include <melee/mp/mplib.h>
 #include <MSL/trigf.h>
 #include <placeholder.h>
 

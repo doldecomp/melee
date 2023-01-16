@@ -23,7 +23,7 @@ bool func_8000B074(HSD_JObj* jobj)
 {
     HSD_AObj* aobj = jobj->aobj;
 
-    if (aobj != NULL && NOT_FLAG(aobj->flags, AOBJ_NO_ANIM))
+    if (aobj != NULL && FLAGS_NONE(aobj->flags, AOBJ_NO_ANIM))
         return true;
 
     return false;
@@ -1030,8 +1030,8 @@ inline HSD_LObj* lobj_next(HSD_LObj* lobj)
 HSD_LObj* func_8000CDC0(HSD_LObj* cur)
 {
     while (cur != NULL) {
-        if (NOT_FLAG(cur->flags, (1 << 0) | (1 << 1)) &&
-            NOT_FLAG(HSD_LObjGetFlags(cur), 1 << 5))
+        if (FLAGS_NONE(cur->flags, (1 << 0) | (1 << 1)) &&
+            FLAGS_NONE(HSD_LObjGetFlags(cur), 1 << 5))
         {
             return cur;
         }

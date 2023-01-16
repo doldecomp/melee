@@ -1,7 +1,12 @@
+#include <melee/ft/code_8007C114.h>
+
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/it/item2.h>
 #include <melee/lb/lbunknown_001.h>
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
 
 static f32 const lbl_804D8320 = 0.0F;
 static f32 const lbl_804D8324 = 1.0F;
@@ -49,6 +54,17 @@ lbl_8007C154:
 /* 8007C178 00078D58  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_8007C114(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_8007C17C(HSD_GObj* fighter_gobj)
@@ -98,6 +114,17 @@ asm void func_8007C17C(HSD_GObj* fighter_gobj)
 /* 8007C220 00078E00  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_8007C17C(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_8007C224(HSD_GObj* fighter_gobj)
@@ -158,8 +185,19 @@ lbl_8007C2CC:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_8007C224(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_8007C2E0()
+asm void func_8007C2E0(void)
 { // clang-format off
     nofralloc
 /* 8007C2E0 00078EC0  7C 08 02 A6 */	mflr r0
@@ -294,6 +332,17 @@ lbl_8007C49C:
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_8007C2E0(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void func_8007C4BC(HSD_GObj* fighter_gobj)
 { // clang-format off
@@ -403,3 +452,12 @@ lbl_8007C61C:
 /* 8007C62C 0007920C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_8007C4BC(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
