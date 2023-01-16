@@ -22,7 +22,6 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 
-extern OSHeapHandle __OSCurrHeap;
 extern OSHeapHandle lbl_804D6018;
 extern GXRenderModeObj GXNtsc480IntDf;
 extern GXRenderModeObj HSD_VIData;
