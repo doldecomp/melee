@@ -64,9 +64,9 @@ static void __DBExceptionDestination(void)
 
 #endif
 
-int __DBIsExceptionMarked(u8 a)
+bool __DBIsExceptionMarked(u8 exception)
 {
-    return __DBInterface->exceptionMask & (1 << a);
+    return __DBInterface->exceptionMask & (1 << exception);
 }
 
 void DBPrintf(const char* str, ...) {}

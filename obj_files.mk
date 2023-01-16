@@ -582,7 +582,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/dolphin/os/OSInit.c.o\
-    $(BUILD_DIR)/asm/dolphin/os/OS_data.s.o\
     $(BUILD_DIR)/src/dolphin/os/OSAlarm.c.o\
     $(BUILD_DIR)/src/dolphin/os/OSAlloc.c.o\
     $(BUILD_DIR)/src/dolphin/os/OSArena.c.o\
