@@ -392,5 +392,6 @@ void ftGameWatch_SpecialN_GroundToAir(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirN_AirToGround(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame);
 void ftGameWatch_SpecialAirN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame);
+void ftGameWatch_LoadSpecialAttrs(HSD_GObj* gobj);
 
 #endif

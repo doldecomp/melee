@@ -73,6 +73,9 @@ typedef struct _ftCrazyHandAttributes {
     Vec2 x13C_pos;
 } ftCrazyHandAttributes;
 
+void ftCrazyhand_OnDeath(HSD_GObj* fighter_gobj);
+void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj);
+void ftCrazyHand_LoadSpecialAttrs(HSD_GObj* gobj);
 void func_80155FCC(HSD_GObj*);
 void func_80156014(HSD_GObj*);
 void func_8015A2B0(HSD_GObj*);

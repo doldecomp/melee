@@ -530,7 +530,6 @@ void OSDumpContext(const OSContext* context)
     }
 }
 
-
 #ifdef MWERKS_GEKKO
 asm void OSSwitchFPUContext(OSException unused, register OSContext* ctx)
 { // clang-format off

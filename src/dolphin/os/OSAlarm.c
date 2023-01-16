@@ -189,8 +189,7 @@ static void DecrementerExceptionCallback(register OSException exception,
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void DecrementerExceptionHandler(OSException exception,
-                                     OSContext* context)
+asm void DecrementerExceptionHandler(OSException exception, OSContext* context)
 { // clang-format off
     nofralloc
 /* 80343DF8 003409D8  90 04 00 00 */	stw r0, 0(r4)
