@@ -3,7 +3,7 @@
 
 static u32 Enabled[2];
 
-extern s32 OSGetConsoleType();
+extern s32 OSGetConsoleType(void);
 
 s32 InitializeUART(void)
 {
@@ -22,12 +22,12 @@ s32 ReadUARTN(void)
 
 #ifdef MWERKS_GEKKO
 
-extern unk_t EXIUnlock();
-extern unk_t EXIDeselect();
-extern unk_t EXISync();
-extern unk_t EXIImm();
-extern unk_t EXILock();
-extern unk_t EXISelect();
+extern unk_t EXIUnlock(void);
+extern unk_t EXIDeselect(void);
+extern unk_t EXISync(void);
+extern unk_t EXIImm(void);
+extern unk_t EXILock(void);
+extern unk_t EXISelect(void);
 
 #pragma push
 asm void WriteUARTN(void)

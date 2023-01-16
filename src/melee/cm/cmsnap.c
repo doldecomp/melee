@@ -3,12 +3,10 @@
 #include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 
-extern void func_800121FC();
-
 typedef struct {
-    s32 unk0;
-    s32 unk1;
-    s32 unused[6];
+    int unk0;
+    int unk1;
+    int unused[6];
 } _cmsnap_data;
 static _cmsnap_data cmsnap_data;
 
@@ -29,7 +27,7 @@ s32 func_80031618(void)
     return cmsnap_data.unk1;
 }
 
-void func_80031640(HSD_GObj*, s32)
+void func_80031640(HSD_GObj* arg0, s32 arg1)
 {
     switch (cmsnap_data.unk0) {
     case 0:

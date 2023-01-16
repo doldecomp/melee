@@ -40,8 +40,8 @@ void GXSetDispCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
 {
     __GXContexts.main->x1D0[4] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[4], arg0, 10, 0);
-    __GXContexts.main->x1D0[4] = __GXContexts.main->x1D0[4] & 0xFFF003FF |
-                                 (u32) (arg1 << 10) & 0x03FFFC00;
+    __GXContexts.main->x1D0[4] = (__GXContexts.main->x1D0[4] & 0xFFF003FF) |
+                                 ((u32) (arg1 << 10) & 0x03FFFC00);
     INSERT_FIELD(__GXContexts.main->x1D0[4], 73, 8, 24);
     __GXContexts.main->x1D0[5] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[5], arg2 - 1, 10, 0);
@@ -71,8 +71,8 @@ void GXSetDispCopyDst(s32 arg0)
     INSERT_FIELD(__GXContexts.main->x1D0[6], 0x4D, 8, 24);
 }
 
-extern unk_t __GetImageTileCount();
-extern unk_t __cvt_fp2unsigned();
+extern unk_t __GetImageTileCount(void);
+extern unk_t __cvt_fp2unsigned(void);
 
 #ifdef MWERKS_GEKKO
 
