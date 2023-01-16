@@ -3,7 +3,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void PSMTXMultiVec(Mtx, Vec3*, Vec3*);
+void PSMTXMUltiVec(Mtx, Vec3*, Vec3*);
 void PSMTXMultVecSR(Mtx, Vec3*, Vec3*);
 
 #endif

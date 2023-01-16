@@ -180,7 +180,7 @@ void HSD_JObjMakeMatrix(HSD_JObj* jobj)
         Vec3 vec;
         HSD_JObj* aobj_jobj = (HSD_JObj*) jobj->aobj->hsd_obj;
         HSD_JObjSetupMatrix((HSD_JObj*) jobj->aobj->hsd_obj);
-        PSMTXMultiVec(aobj_jobj->mtx, &jobj->translate, &vec);
+        PSMTXMUltiVec(aobj_jobj->mtx, &jobj->translate, &vec);
         jobj->mtx[0][3] = vec.x;
         jobj->mtx[1][3] = vec.y;
         jobj->mtx[2][3] = vec.z;
@@ -1728,7 +1728,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
                 PSVECSubtract(&sp5C, &spB0, &sp5C);
                 if (temp_f26 != 0.0F) {
                     PSMTXRotAxisRad(sp20, &sp68, temp_f26);
-                    PSMTXMultiVec(sp20, &sp5C, &sp5C);
+                    PSMTXMUltiVec(sp20, &sp5C, &sp5C);
                 }
                 PSVECCrossProduct(&sp68, &sp5C, &sp50);
                 PSVECCrossProduct(&sp50, &sp68, &sp5C);
@@ -1896,7 +1896,7 @@ void resolveIKJoint2(HSD_JObj* jobj)
                 sp1C.z = mtx[2][2];
             }
             PSMTXRotAxisRad(sp34, &sp1C, var_f1_2);
-            PSMTXMultiVec(sp34, &sp28, &sp7C);
+            PSMTXMUltiVec(sp34, &sp28, &sp7C);
         }
     }
     {

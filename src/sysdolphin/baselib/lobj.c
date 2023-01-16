@@ -329,7 +329,7 @@ void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id)
         case 2:
         case 3:
             HSD_LObjGetPosition(lobj, &lobj->lvec);
-            PSMTXMultiVec(mtx, &lobj->lvec, &lobj->lvec);
+            PSMTXMUltiVec(mtx, &lobj->lvec, &lobj->lvec);
             break;
         case 1:
             HSD_LObjGetLightVector(lobj, &lobj->lvec);
@@ -350,7 +350,7 @@ void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx)
     GXInitLightColor(&lobj->lightobj, lobj->color);
     lobj->hw_color = lobj->color;
     HSD_LObjGetPosition(lobj, &lpos);
-    PSMTXMultiVec(mtx, &lpos, &lpos);
+    PSMTXMUltiVec(mtx, &lpos, &lpos);
     GXInitLightPos(&lobj->lightobj, lpos.x, lpos.y, lpos.z);
     GXInitLightPos(&lobj->spec_lightobj, lpos.x, lpos.y, lpos.z);
     if (lobj->flags & 0x40) {
@@ -371,7 +371,7 @@ void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx)
     Vec3 lpos;
     Vec3 ldir;
     HSD_LObjGetPosition(lobj, &lpos);
-    PSMTXMultiVec(mtx, &lpos, &lpos);
+    PSMTXMUltiVec(mtx, &lpos, &lpos);
     HSD_LObjGetLightVector(lobj, &ldir);
     PSMTXMultVecSR(mtx, &ldir, &ldir);
     PSVECNormalize(&ldir, &ldir);
@@ -521,7 +521,7 @@ lbl_80366090:
 /* 803660C0 00362CA0  C0 01 00 30 */	lfs f0, 0x30(r1)
 /* 803660C4 00362CA4  EC 00 07 F2 */	fmuls f0, f0, f31
 /* 803660C8 00362CA8  D0 01 00 30 */	stfs f0, 0x30(r1)
-/* 803660CC 00362CAC  4B FD C9 DD */	bl PSMTXMultiVec
+/* 803660CC 00362CAC  4B FD C9 DD */	bl PSMTXMUltiVec
 /* 803660D0 00362CB0  A0 18 00 08 */	lhz r0, 8(r24)
 /* 803660D4 00362CB4  54 00 07 7B */	rlwinm. r0, r0, 0, 0x1d, 0x1d
 /* 803660D8 00362CB8  41 82 00 38 */	beq lbl_80366110
