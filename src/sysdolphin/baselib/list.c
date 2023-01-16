@@ -5,23 +5,23 @@
 HSD_ObjAllocData slist_alloc_data;
 HSD_ObjAllocData dlist_alloc_data;
 
-void HSD_ListInitAllocData()
+void HSD_ListInitAllocData(void)
 {
     HSD_ObjAllocInit(&slist_alloc_data, sizeof(HSD_SList), 4);
     HSD_ObjAllocInit(&dlist_alloc_data, sizeof(HSD_DList), 4);
 }
 
-HSD_ObjAllocData* HSD_SListGetAllocData()
+HSD_ObjAllocData* HSD_SListGetAllocData(void)
 {
     return &slist_alloc_data;
 }
 
-HSD_ObjAllocData* HSD_DListGetAllocData()
+HSD_ObjAllocData* HSD_DListGetAllocData(void)
 {
     return &dlist_alloc_data;
 }
 
-HSD_SList* HSD_SListAlloc()
+HSD_SList* HSD_SListAlloc(void)
 {
     HSD_SList* list;
 
