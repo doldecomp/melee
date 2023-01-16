@@ -58,9 +58,9 @@ extern HSD_ObjAllocData lbl_80459080;
 extern HSD_ObjAllocData lbl_804590AC;
 
 // functions in fighter.c
-void Fighter_800679B0();
-void Fighter_FirstInitialize_80067A84();
-void Fighter_LoadCommonData();
+void Fighter_800679B0(void);
+void Fighter_FirstInitialize_80067A84(void);
+void Fighter_LoadCommonData(void);
 void Fighter_UpdateModelScale(HSD_GObj* fighter_gobj);
 void Fighter_UnkInitReset_80067C98(Fighter*);
 void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighter_gobj);
@@ -69,7 +69,7 @@ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp);
 void Fighter_ResetInputData_80068854(HSD_GObj* fighter_gobj);
 void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj,
                                   struct S_TEMP1* argdata);
-u32 Fighter_NewSpawn_80068E40();
+u32 Fighter_NewSpawn_80068E40(void);
 void Fighter_80068E64(HSD_GObj* fighter_gobj);
 HSD_GObj* Fighter_Create(struct S_TEMP1* input);
 void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
@@ -104,7 +104,7 @@ void Fighter_8006DA4C(HSD_GObj* fighter_gobj);
 void Fighter_Unload_8006DABC(void* user_data);
 
 void Fighter_UnkProcessDeath_80068354(struct _HSD_GObj*);
-u32 Fighter_NewSpawn_80068E40();
+u32 Fighter_NewSpawn_80068E40(void);
 
 void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighter_gobj,
                                         s32 newAction, s32 flags,
