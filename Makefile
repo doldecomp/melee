@@ -9,6 +9,8 @@ GENERATE_MAP ?= 0
 NON_MATCHING ?= 0
 EPILOGUE_PROCESS ?= 1
 SKIP_CHECK ?= 0
+REQUIRE_PROTOS ?= 0
+MSG_STYLE ?= gcc
 
 VERBOSE ?= 0
 MAX_ERRORS ?= 0     # 0 = no maximum
@@ -98,7 +100,7 @@ ifeq ($(GENERATE_MAP),1)
 	LDFLAGS += -map $(MAP)
 endif
 
-CFLAGS  = -msgstyle gcc \
+CFLAGS = -msgstyle $(MSG_STYLE) \
 		-nowraplines \
 		-cwd source \
 		-Cpp_exceptions off \
@@ -113,6 +115,13 @@ ifneq ($(NON_MATCHING),1)
 	CFLAGS += -DMUST_MATCH
 endif
 
+ifeq ($(REQUIRE_PROTOS),1)
+	CFLAGS += -requireprotos
+endif
+
+ifeq ($(MAX_ERRORS),0)
+	CFLAGS += -nofail
+endif
 
 $(BUILD_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)
 $(BUILD_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
