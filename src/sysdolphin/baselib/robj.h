@@ -103,7 +103,7 @@ void HSD_RObjResolveRefsAll(HSD_RObj*, HSD_RObjDesc*);
 HSD_RObj* HSD_RObjLoadDesc(HSD_RObjDesc*);
 void HSD_RObjSetConstraintObj(HSD_RObj* robj, HSD_JObj* constraint);
 void HSD_RObjRemove(HSD_RObj*);
-void HSD_RObjUpdateAll(HSD_RObj* robj, HSD_JObj* jobj, HSD_AObjUpdateFunc);
+void HSD_RObjUpdateAll(HSD_RObj* robj, HSD_JObj* jobj, HSD_ObjUpdateFunc);
 bool HSD_RObjGetGlobalPosition(HSD_RObj* robj, bool, Vec3* translate);
 
 #endif

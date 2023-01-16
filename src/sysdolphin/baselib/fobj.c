@@ -77,14 +77,14 @@ void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe)
 }
 
 inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj,
-                              HSD_AObjUpdateFunc obj_update, f32 rate)
+                              HSD_ObjUpdateFunc obj_update, f32 rate)
 {
     if (fobj->op_intrp == HSD_A_OP_KEY) {
         HSD_FObjInterpretAnim(fobj, obj, obj_update, rate);
     }
 }
 
-void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, HSD_AObjUpdateFunc obj_update,
+void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update,
                       f32 rate)
 {
     if (fobj == NULL)
@@ -95,7 +95,7 @@ void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, HSD_AObjUpdateFunc obj_update,
 }
 
 void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj,
-                         HSD_AObjUpdateFunc obj_update, f32 rate)
+                         HSD_ObjUpdateFunc obj_update, f32 rate)
 {
     for (; fobj != NULL; fobj = fobj->next) {
         HSD_FObjStopAnim(fobj, obj, obj_update, rate);
@@ -173,7 +173,7 @@ void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj,
     }
 }
 
-void FObjUpdateAnim(HSD_FObj* fobj, void* obj, HSD_AObjUpdateFunc obj_update)
+void FObjUpdateAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update)
 {
     f32 phi_f0;
     HSD_ObjData fobjdata;

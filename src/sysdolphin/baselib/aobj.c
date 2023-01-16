@@ -108,7 +108,7 @@ void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
     HSD_FObjReqAnimAll(aobj->fobj, frame);
 }
 
-void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_AObjUpdateFunc func)
+void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func)
 {
     if (!aobj)
         return;
@@ -118,7 +118,7 @@ void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_AObjUpdateFunc func)
 }
 
 void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
-                           HSD_AObjUpdateFunc update_func)
+                           HSD_ObjUpdateFunc update_func)
 {
     f32 rate = 0;
 

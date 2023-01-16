@@ -72,10 +72,10 @@ void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj);
 void HSD_AObjInitEndCallBack(void);
 void HSD_AObjInvokeCallBacks(void);
 void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame);
-void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_AObjUpdateFunc func);
+void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func);
 
 void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
-                           HSD_AObjUpdateFunc update_func);
+                           HSD_ObjUpdateFunc update_func);
 
 float fmod(float x, float y);
 HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc);
