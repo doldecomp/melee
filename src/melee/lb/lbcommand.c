@@ -1,5 +1,7 @@
 #include <melee/lb/lbcommand.h>
 
+#include <melee/lb/lbbgflash.h>
+
 extern const f64 lbl_804D79E0;
 
 void (*lbl_803B9840[16])(CommandInfo*) = {

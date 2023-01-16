@@ -26,5 +26,7 @@ void func_80040460(u8 slot, bool);
 void func_8003E4A4(u8 slot, bool, s32, s32);
 void func_8003891C(int slot);
 void func_80038F10(int slot);
+void func_8003715C(void);
+void func_80037590(void);
 
 #endif

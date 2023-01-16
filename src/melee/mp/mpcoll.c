@@ -3,16 +3,12 @@
 #include <dolphin/os/os.h>
 #include <melee/db/db_unknown_001.h>
 #include <melee/ft/ftlib.h>
+#include <melee/gr/grdynamicattr.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
+#include <mplib.h>
 #include <MSL/trigf.h>
-
-// TODO: proper signatures, mplib.h
-s32 func_80052700();
-s32 func_8004F008();
-s32 func_80054584();
-s32 func_8004DD90();
-s32 func_8004E398();
+#include <placeholder.h>
 
 extern s32 lbl_804D64A0;
 extern s32 lbl_804D64A4;
@@ -32,7 +28,10 @@ char lbl_804D3948[2] = "0";
 // 80041C8C https://decomp.me/scratch/VvSaI
 void func_80041C8C(CollData* cd)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     lbl_804D64A0 = 0;
     lbl_804D64A4 = 0;
@@ -109,7 +108,7 @@ void func_80041DD0(CollData* cd, u32 flags)
     func_800588D0(left, bottom, right, top);
 }
 
-// TODO: float order hack
+/// @todo float order hack
 const f32 lbl_804D7F9C = -F32_MAX;
 const f32 lbl_804D7FA0 = F32_MAX;
 
@@ -626,7 +625,7 @@ void func_80042DB0(CollData* ecb, f32 time)
 // 80043268 https://decomp.me/scratch/GNwej
 void func_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
 {
-    void (*sp1C)(s32, s32, CollData*, s32, s32, f32);
+    mpLib_Callback sp1C;
     s32 sp18;
     s32 temp_r31;
 
@@ -641,7 +640,7 @@ void func_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
             } else {
                 thing = 1;
             }
-            (*sp1C)(sp18, temp_r31, arg0, arg0->x50, thing, arg8);
+            sp1C(sp18, temp_r31, arg0, arg0->x50, thing, arg8);
         }
     }
 }
@@ -650,9 +649,13 @@ const char* dummy_string_data = "i<MPCOLL_WALLID_MAX";
 
 // 80043324
 void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
-{                  // see func_80043268
-    s32 dummy = 0; // TODO: fake, breaks func_80043558
-    void (*callback)(s32, s32, CollData*, s32, s32, f32);
+{ // see func_80043268
+  /// @todo Fake, breaks func_80043558
+#ifdef MUST_MATCH
+    int dummy = 0;
+#endif
+
+    mpLib_Callback callback;
     s32 thing;
     s32 temp_r29;
 
@@ -660,9 +663,9 @@ void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
     if (temp_r29 != -1) {
         thing = 0;
         func_800581BC(temp_r29, &callback, &thing);
-        if (callback != 0) {
-            (*callback)(thing, temp_r29, arg0, arg0->x50, 0, arg8);
-        }
+
+        if (callback != NULL)
+            callback(thing, temp_r29, arg0, arg0->x50, 0, arg8);
     }
 }
 void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
@@ -673,7 +676,11 @@ void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
 void func_80043324(CollData* arg0, s32 arg1, s32 arg2)
 {
     s32 temp_r3;
-    s32 temp_r3_2;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 temp_r3_2[4];
+#endif
 
     if (arg0->x14C_ground.index != -1) {
         temp_r3 = func_801CA284(&arg0->x4_vec, arg0->x14C_ground.index);
@@ -755,16 +762,14 @@ void func_80043558(CollData* arg0, s32 arg1)
 #else
 
 /// @todo dummy stack in func_80043324_inline2 breaks this function
-void func_80043558(CollData* arg0, s32 arg1)
+void func_80043558(CollData* arg0, int arg1)
 {
-    s32 temp_r3;
+    enum_t temp_r3 = func_80054C6C(arg1);
 
-    temp_r3 = func_80054C6C(arg1);
-    if (temp_r3 == 1) {
+    if (temp_r3 == 1)
         func_80043268(arg0, arg1, 0, 0.0f);
-    } else if (temp_r3 == 2) {
+    else if (temp_r3 == 2)
         func_80043324_inline2(arg0, arg1, 0, 0.0f);
-    }
 }
 
 #endif
@@ -827,7 +832,12 @@ inline f32 max_inline(f32 a, f32 b)
 s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
 {
     Vec3 vel;
-    f32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     f32 dist_right_x;
     f32 dist_right_y;
     f32 x;
@@ -960,7 +970,7 @@ void func_80043ADC(CollData* arg0)
 }
 
 // 80043BBC
-s32 func_80043BBC(CollData* arg0, s32* arg1)
+bool func_80043BBC(CollData* arg0, s32* arg1)
 {
     s32 sp10;
     s32 temp_r31;
@@ -976,12 +986,12 @@ s32 func_80043BBC(CollData* arg0, s32* arg1)
         (sp10 != temp_r31))
     {
         *arg1 = sp10;
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
@@ -1135,7 +1145,7 @@ lbl_80043E70:
 } // clang-format on
 #pragma pop
 
-#else
+#elif false
 
 void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
 {
@@ -1207,6 +1217,13 @@ void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
             }
         }
     }
+}
+
+#else
+
+void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
+{
+    NOT_IMPLEMENTED;
 }
 
 #endif

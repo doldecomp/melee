@@ -76,8 +76,8 @@ void HSD_JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint)
     }
 }
 
-void HSD_JObjWalkTree0(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32),
-                       void* args)
+void HSD_JObjWalkTree0(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
+                       f32** cb_args)
 {
     u32 type;
 
@@ -87,30 +87,30 @@ void HSD_JObjWalkTree0(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32),
     HSD_ASSERT(0xAE, jobj->parent);
     type = jobj->parent->child == jobj ? 1 : 2;
     if (cb != NULL) {
-        cb(jobj, args, type);
+        cb(jobj, cb_args, type);
     }
     if (!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObj* child = jobj->child;
         while (child != NULL) {
-            HSD_JObjWalkTree0(child, cb, args);
+            HSD_JObjWalkTree0(child, cb, cb_args);
             child = child->next;
         }
     }
 }
 
-void HSD_JObjWalkTree(HSD_JObj* jobj, void (*cb)(HSD_JObj*, void*, u32),
-                      void* args)
+void HSD_JObjWalkTree(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
+                      f32** cb_args)
 {
     if (jobj == NULL) {
         return;
     }
     if (cb != NULL) {
-        cb(jobj, args, 0);
+        cb(jobj, cb_args, 0);
     }
     if (!(jobj->flags & JOBJ_INSTANCE)) {
         HSD_JObj* child = jobj->child;
         while (child != NULL) {
-            HSD_JObjWalkTree0(child, cb, args);
+            HSD_JObjWalkTree0(child, cb, cb_args);
             child = child->next;
         }
     }

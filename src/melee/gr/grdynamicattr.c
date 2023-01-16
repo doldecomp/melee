@@ -102,9 +102,10 @@ inline f32 do_sqrtf(f32 x)
     return sqrtf(x);
 }
 
-s32 func_801CA284(Vec3* v, s32 arg1)
+int func_801CA284(Vec3* v, int arg1)
 {
     UnkStruct* cur;
+
     for (cur = lbl_804D6960; cur != NULL; cur = cur->next) {
         if (func_80054F68(arg1, cur->unk14)) {
             f32 dx = v->x - cur->unk8.x;
@@ -116,5 +117,6 @@ s32 func_801CA284(Vec3* v, s32 arg1)
                 return cur->unk4;
         }
     }
+
     return 0;
 }

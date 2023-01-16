@@ -5,5 +5,7 @@ void __sync(void);
 void __isync(void);
 int __cntlzw(unsigned int);
 float sqrtf__Ff(float);
+float __fnmsubs(float, float, float);
+double __fabs(double);
 
 #endif

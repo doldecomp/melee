@@ -1,7 +1,7 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbtime.h>
 
-void* func_8015CC34(void)
+GameRules* func_8015CC34(void)
 {
     return &lbl_804D3EE0->x1850;
 }

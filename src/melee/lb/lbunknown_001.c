@@ -1,5 +1,8 @@
 #include <melee/lb/lbunknown_001.h>
 
+#include <dolphin/mtx/mtxvec.h>
+#include <melee/sc/scene.h>
+#include <placeholder.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -19,9 +22,10 @@ static s32 lbl_803BA030[] = { 7, 4, 5, 6 };
 bool func_8000B074(HSD_JObj* jobj)
 {
     HSD_AObj* aobj = jobj->aobj;
-    if (aobj != NULL && !(aobj->flags & AOBJ_NO_ANIM)) {
+
+    if (aobj != NULL && NOT_FLAG(aobj->flags, AOBJ_NO_ANIM))
         return true;
-    }
+
     return false;
 }
 
@@ -31,7 +35,7 @@ bool func_8000B09C(HSD_JObj* jobj)
         if (jobj->aobj != NULL && !(jobj->aobj->flags & AOBJ_NO_ANIM)) {
             return true;
         }
-        if (jobj->child == NULL && jobj->next == NULL ||
+        if ((jobj->child == NULL && jobj->next == NULL) ||
             (jobj->flags & JOBJ_INSTANCE))
         {
             while (true) {
@@ -60,7 +64,7 @@ bool func_8000B134(HSD_JObj* jobj)
         if (jobj->aobj != NULL && (jobj->aobj->flags & AOBJ_REWINDED)) {
             return true;
         }
-        if (jobj->child == NULL && jobj->next == NULL ||
+        if ((jobj->child == NULL && jobj->next == NULL) ||
             (jobj->flags & JOBJ_INSTANCE))
         {
             while (true) {
@@ -102,7 +106,7 @@ void func_8000B1CC(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
     }
     if (jobj_parent(arg0) != NULL) {
         HSD_JObjSetupMatrix(arg0);
-        if (arg1 == NULL || !arg1->x && !arg1->y && !arg1->z) {
+        if (arg1 == NULL || (!arg1->x && !arg1->y && !arg1->z)) {
             arg2->x = arg0->mtx[0][3];
             arg2->y = arg0->mtx[1][3];
             arg2->z = arg0->mtx[2][3];
@@ -111,7 +115,7 @@ void func_8000B1CC(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
         }
         return;
     }
-    if (arg1 == NULL || !arg1->x && !arg1->y && !arg1->z) {
+    if (arg1 == NULL || (!arg1->x && !arg1->y && !arg1->z)) {
         HSD_JObjGetTranslation(arg0, arg2);
         return;
     }
@@ -380,17 +384,9 @@ void func_8000C07C(HSD_JObj* jobj, s32 i, HSD_AnimJoint** arg3,
     HSD_JObjAddAnimAll(jobj, phi_r4, phi_r5, phi_r6);
 }
 
-typedef struct _UnkAnimContainer {
-    u8 x0_pad[0x4];
-    struct _HSD_AnimJoint** x4_anims;
-    struct _HSD_MatAnimJoint** x8_matanims;
-    struct _HSD_ShapeAnimJoint** xC_shapeanims;
-} UnkAnimContainer;
-
-void func_8000C0E8(HSD_JObj* jobj, s32 i, struct _UnkAnimContainer* arg2)
+void func_8000C0E8(HSD_JObj* jobj, s32 i, struct _DynamicModelDesc* arg2)
 {
-    func_8000C07C(jobj, i, arg2->x4_anims, arg2->x8_matanims,
-                  arg2->xC_shapeanims);
+    func_8000C07C(jobj, i, arg2->anims, arg2->matanims, arg2->shapeanims);
 }
 
 void func_8000C160(void* mem, int size)
@@ -443,11 +439,13 @@ void func_8000C390(HSD_JObj* jobj)
 {
     HSD_RObj* next;
     HSD_RObj* cur = HSD_JObjGetRObj(jobj);
-    while (1) {
+
+    while (true) {
         cur = HSD_RObjGetByType(cur, REFTYPE_JOBJ, 0);
-        if (cur == NULL) {
+
+        if (cur == NULL)
             break;
-        }
+
         next = robj_next(cur);
         HSD_JObjDeleteRObj(jobj, cur);
         HSD_RObjRemove(cur);
@@ -465,6 +463,9 @@ void func_8000C420(HSD_JObj* jobj, u32 flags, f32 limit)
     HSD_JObjPrependRObj(jobj, robj);
 }
 
+#ifdef MWERKS_GEKKO
+
+#pragma push
 // https://decomp.me/scratch/atKIC
 asm void func_8000C490(HSD_JObj*, HSD_JObj*, HSD_JObj*, f32, f32)
 { // clang-format off
@@ -688,6 +689,16 @@ lbl_8000C7A4:
 } // clang-format on
 #pragma peephole on
 
+#else
+
+void func_8000C490(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2, f32 arg3,
+                   f32 arg4)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
 {
     dst->rotate = src->rotate;
@@ -701,7 +712,8 @@ void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
     HSD_JObjSetFlags(dst, JOBJ_MTX_DIRTY);
 }
 
-// https://decomp.me/scratch/63ON3
+#ifdef MWERKS_GEKKO
+
 asm void func_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, f32, f32)
 { // clang-format off
     nofralloc
@@ -909,6 +921,16 @@ lbl_8000CB3C:
 } // clang-format on
 #pragma peephole on
 
+#else
+
+void func_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, f32 arg3,
+                   f32 arg4)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 static s32 lbGetFreeColorRegImpl(s32 i0, HSD_TevDesc* tevdesc, HSD_TExp* texp1,
                                  HSD_TExp* texp2)
 {
@@ -959,7 +981,8 @@ s32 func_8000CCA4(s32 i)
     return lbl_803B9FE0[i];
 }
 
-static s32 lbGetFreeAlphaRegImpl(s32 i0, HSD_TevDesc* cur, HSD_TExp*, HSD_TExp*)
+static s32 lbGetFreeAlphaRegImpl(s32 i0, HSD_TevDesc* cur, HSD_TExp* arg2,
+                                 HSD_TExp* arg3)
 {
     bool register_used[8];
     int i;
@@ -1007,11 +1030,15 @@ inline HSD_LObj* lobj_next(HSD_LObj* lobj)
 HSD_LObj* func_8000CDC0(HSD_LObj* cur)
 {
     while (cur != NULL) {
-        if (!(cur->flags & 3) && !(HSD_LObjGetFlags(cur) & 0x20)) {
+        if (NOT_FLAG(cur->flags, (1 << 0) | (1 << 1)) &&
+            NOT_FLAG(HSD_LObjGetFlags(cur), 1 << 5))
+        {
             return cur;
         }
         cur = lobj_next(cur);
     }
+
+    /// @todo Missing return statement
 }
 
 void func_8000CE30(HSD_DObj* dobj, HSD_DObj* next)

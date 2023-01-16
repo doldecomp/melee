@@ -40,6 +40,7 @@ void C_MTXScaleApply(const Mtx src, Mtx dst, f32 xS, f32 yS, f32 zS);
 void C_MTXRotRad(Mtx m, char axis, f32 rad);
 void C_MTXRotTrig(Mtx m, char axis, f32 sinA, f32 cosA);
 void C_MTXRotAxisRad(Mtx m, const Vec3* axis, f32 rad);
+void C_MTXLookAt(Mtx m, Vec3* cam_pos, Vec3* up, Vec3* target);
 
 void PSMTXQuat(Mtx m, const Quaternion* q);
 void PSMTXReflect(Mtx m, const Vec3* p, const Vec3* n);

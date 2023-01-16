@@ -132,7 +132,9 @@ f32 HSD_CObjGetFar(struct _HSD_CObj*);
 void HSD_CObjSetScissorx4(HSD_CObj*, s32, s32, s32, s32);
 void HSD_CObjSetViewportfx4(HSD_CObj*, f32, f32, f32, f32);
 u32 HSD_CObjGetProjectionType(struct _HSD_CObj*);
-void func_80368784(HSD_CObj* cobj, Vec3* cam_pos);
+void HSD_CObjGetEyePosition(HSD_CObj* cobj, Vec3* cam_pos);
 void func_8036885C(void);
+void HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up);
+void HSD_CObjGetInterest(HSD_CObj* cobj, Vec3* interest);
 
 #endif

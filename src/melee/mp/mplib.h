@@ -4,6 +4,8 @@
 #include <dolphin/mtx/types.h>
 #include <melee/ft/fighter.h>
 
+typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);
+
 bool func_80054ED8(s32);
 unk_t func_80056B34(void);
 unk_t func_80056AC4(void);
@@ -50,5 +52,17 @@ void func_80057424(s16);
 void func_80057638(s16);
 void func_80057BC0(s16);
 bool func_80054F68(s32, s32);
+s32 func_80052700(int idx);
+s32 func_8004F008();
+s32 func_80054584();
+s32 func_8004DD90();
+s32 func_8004E398();
+void func_800588D0(f32 left, f32 bottom, f32 right, f32 top);
+s32 func_80056B6C(s32);
+void func_800580FC(int, mpLib_Callback*, unk_t);
+void func_800581BC(int, mpLib_Callback*, unk_t);
+enum_t func_80054C6C(int);
+void func_80058AA0(void);
+enum_t func_8004E090(int idx, Vec3*, f32*, u32*, Vec3* normal);
 
 #endif

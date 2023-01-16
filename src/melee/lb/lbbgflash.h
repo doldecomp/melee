@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-s32 func_80022C48();
+void func_80021C48(u32, u32);
 
 #endif
