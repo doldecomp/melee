@@ -7,7 +7,6 @@
 
 extern volatile u32 Mem_Size AT_ADDRESS(0x80000028);
 extern volatile u32 Simulated_Mem AT_ADDRESS(0x800000F0);
-extern volatile u16 __MEMRegs[64] AT_ADDRESS(0xCC004000);
 extern OSErrorHandler __OSErrorTable[];
 
 static bool OnReset(bool);

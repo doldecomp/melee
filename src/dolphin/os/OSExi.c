@@ -5,7 +5,6 @@
 #include <dolphin/os/OSTime.h>
 #include <placeholder.h>
 
-#define REG_MAX 5
 #define EXI_FREQ_1M 0
 #define REG(chan, idx) (__EXIRegs[(chan)][(idx)])
 #define EXI_0CR(tstart, dma, rw, tlen)                                         \
@@ -15,7 +14,6 @@
 #define CPR_CS(x) ((1u << (x)) << 7)
 
 extern s32 __EXIProbeStartTime[2] AT_ADDRESS(0x800030C0);
-extern vu32 __EXIRegs[EXI_MAX_CHAN][REG_MAX] AT_ADDRESS(0xCC006800);
 
 EXIControl Ecb[EXI_MAX_CHAN];
 

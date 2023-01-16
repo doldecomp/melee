@@ -69,4 +69,4 @@ int __DBIsExceptionMarked(u8 a)
     return __DBInterface->exceptionMask & (1 << a);
 }
 
-void DBPrintf(char* str, ...) {}
+void DBPrintf(const char* str, ...) {}
