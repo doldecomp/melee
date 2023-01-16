@@ -54,7 +54,6 @@ OSErrorHandler OSSetErrorHandler(OSError error, OSErrorHandler handler)
 /* static */ extern char* lbl_80401FF8;
 /* static */ extern jtbl_t jtbl_804022D4;
 /* static */ extern char* lbl_804D5C18;
-extern void* lbl_804D738C;
 
 static void lbl_803459C0(void);
 static void lbl_803459D8(void);
@@ -204,7 +203,7 @@ lbl_80345A3C:
 /* 80345A44 00342624  4C C6 31 82 */	crclr 6
 /* 80345A48 00342628  80 AD BC DC */	lwz r5, __OSLastInterruptSrr0(r13)
 /* 80345A4C 0034262C  80 ED BC E8 */	lwz r7, __OSLastInterruptTime(r13)
-/* 80345A50 00342630  81 0D BC EC */	lwz r8, lbl_804D738C(r13)
+/* 80345A50 00342630  81 0D BC EC */	lwz r8, __OSLastInterruptTime+4(r13)
 /* 80345A54 00342634  4B FF FC 55 */	bl OSReport
 /* 80345A58 00342638  4B FF 04 3D */	bl PPCHalt
 /* 80345A5C 0034263C  BB 21 00 1C */	lmw r25, 0x1c(r1)
