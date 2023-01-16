@@ -8,5 +8,11 @@ void func_801525E0(struct _HSD_GObj*);
 void lbl_8015236C(void);
 void lbl_801525DC(HSD_GObj* gobj);
 void lbl_801523BC(HSD_GObj* gobj);
+void lbl_80152414(HSD_GObj* gobj);
+void lbl_80152458(HSD_GObj* arg0);
+void lbl_80152478(HSD_GObj* gobj);
+void lbl_801524C8(HSD_GObj* gobj);
+void lbl_80152544(HSD_GObj* gobj);
+void lbl_80152588(HSD_GObj* gobj);
 
 #endif
