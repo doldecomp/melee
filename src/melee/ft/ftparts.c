@@ -1,6 +1,5 @@
 #include <melee/ft/ftparts.h>
 
-#include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os/os.h>

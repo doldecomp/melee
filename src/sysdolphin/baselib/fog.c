@@ -1,6 +1,5 @@
 #include <sysdolphin/baselib/fog.h>
 
-#include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>

@@ -1,7 +1,6 @@
 #include <sysdolphin/baselib/__baselib.h>
 #include <sysdolphin/baselib/psdisp.h>
 
-#include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXMisc.h>

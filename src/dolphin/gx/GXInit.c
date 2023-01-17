@@ -6,7 +6,6 @@
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GXMisc.h>
-#include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXBump.h>
 #include <dolphin/gx/GXFrameBuf.h>

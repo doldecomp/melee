@@ -3,7 +3,6 @@
 #include <common_structs.h>
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
-#include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
 #include <dolphin/gx/GXStubs.h>
 #include <placeholder.h>
