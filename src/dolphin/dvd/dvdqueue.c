@@ -11,17 +11,14 @@ typedef struct DVDNode {
 
 static DVDNode WaitingQueue[4];
 
-static inline DVDCommandBlock* getWaitingBlock(int i)
-{
-    return (DVDCommandBlock*) &WaitingQueue[i];
-}
+#define WAITING_BLOCK(idx) ((DVDCommandBlock*) &WaitingQueue[(idx)])
 
 void __DVDClearWaitingQueue(void)
 {
     int i;
 
     for (i = 0; i < 4; i++) {
-        DVDCommandBlock* ptr = getWaitingBlock(i);
+        DVDCommandBlock* ptr = WAITING_BLOCK(i);
 
         ptr->next = (DVDCommandBlock*) ptr;
         ptr->prev = (DVDCommandBlock*) ptr;
@@ -31,7 +28,7 @@ void __DVDClearWaitingQueue(void)
 int __DVDPushWaitingQueue(int a, DVDCommandBlock* b)
 {
     bool intrEnabled = OSDisableInterrupts();
-    DVDCommandBlock* r5 = (DVDCommandBlock*) &WaitingQueue[a];
+    DVDCommandBlock* r5 = WAITING_BLOCK(a);
 
     r5->prev->next = b;
     b->prev = r5->prev;
@@ -47,13 +44,13 @@ DVDCommandBlock* __DVDPopWaitingQueue(void)
     int i;
 
     for (i = 0; i < 4; i++) {
-        if (WaitingQueue[i].next != (DVDCommandBlock*) &WaitingQueue[i]) {
+        if (WaitingQueue[i].next != WAITING_BLOCK(i)) {
             DVDCommandBlock* r5;
             DVDCommandBlock* r31;
 
             OSRestoreInterrupts(intrEnabled);
             intrEnabled = OSDisableInterrupts();
-            r5 = (DVDCommandBlock*) &WaitingQueue[i];
+            r5 = WAITING_BLOCK(i);
             r31 = r5->next;
             r5->next = r31->next;
             r31->next->prev = r5;
