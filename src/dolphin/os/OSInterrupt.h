@@ -2,6 +2,8 @@
 
 #ifndef _OS_INTERRUPT_H_
 #define _OS_INTERRUPT_H_
+
+#include <dolphin/os/forward.h>
 #include <dolphin/os/OSContext.h>
 #include <Runtime/platform.h>
 

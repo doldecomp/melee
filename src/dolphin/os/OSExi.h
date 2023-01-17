@@ -1,9 +1,10 @@
 #ifndef DOLPHIN_OS_OSEXI_H
 #define DOLPHIN_OS_OSEXI_H
 
+#include <dolphin/os/forward.h>
 #include <dolphin/os/OSInterrupt.h>
 
-typedef struct EXIControl {
+struct EXIControl {
     EXICallback exiCallback;
     EXICallback tcCallback;
     EXICallback extCallback;
@@ -18,7 +19,7 @@ typedef struct EXIControl {
         u32 dev;
         EXICallback callback;
     } queue[3];
-} EXIControl;
+};
 
 #define EXI_REG_MAX 5
 extern vu32 __EXIRegs[EXI_MAX_CHAN][EXI_REG_MAX] AT_ADDRESS(0xCC006800);
