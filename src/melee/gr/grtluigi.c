@@ -113,3 +113,8 @@ void lbl_80221D9C(HSD_GObj* gobj)
     Map* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
 }
+
+bool lbl_80221DC8(HSD_GObj* arg0)
+{
+    return false;
+}
