@@ -1,5 +1,4 @@
 #include <MSL/string.h>
-
 #define EOF -1
 
 #ifdef MWERKS_GEKKO
