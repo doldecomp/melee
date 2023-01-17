@@ -1,3 +1,5 @@
+#include <dolphin/gx/GXBump.h>
+
 #include <common_structs.h>
 #include <dolphin/gx/__GXInit.h>
 #include <placeholder.h>
@@ -8,7 +10,7 @@ static Vec2 const lbl_804DE290 = { 1024.0F, 0.0F };
 
 // https://decomp.me/scratch/nTyRU // 1150 (70.51%)
 #pragma push
-asm void GXSetTevIndirect(void)
+asm void GXSetTevIndirect(s32, s32, u8, s32, s32, s32, s32, s32)
 { // clang-format off
     nofralloc
 /* 8033F758 0033C338  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -53,19 +55,12 @@ asm void GXSetTevIndirect(void)
 } // clang-format on
 #pragma pop
 
-#else
-
-void GXSetTevIndirect(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXSetIndTexMtx(void)
+asm void GXSetIndTexMtx(s32, unk_t, s32)
 { // clang-format off
     nofralloc
 /* 8033F7F4 0033C3D4  2C 03 00 08 */	cmpwi r3, 8
@@ -165,20 +160,13 @@ lbl_8033F844:
 } // clang-format on
 #pragma pop
 
-#else
-
-void GXSetIndTexMtx(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
 
 // https://decomp.me/scratch/VEhb9 // 355 (96.97%)
 #pragma push
-asm void GXSetIndTexCoordScale(void)
+asm void GXSetIndTexCoordScale(s32, s32, s32)
 { // clang-format off
     nofralloc
 /* 8033F954 0033C534  2C 03 00 02 */	cmpwi r3, 2
@@ -307,19 +295,12 @@ lbl_8033FB18:
 } // clang-format on
 #pragma pop
 
-#else
-
-void GXSetIndTexCoordScale(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t GXSetIndTexOrder()
+asm void GXSetIndTexOrder(s32, s32, s32)
 { // clang-format off
     nofralloc
 /* 8033FB28 0033C708  2C 03 00 02 */	cmpwi r3, 2
@@ -409,13 +390,6 @@ lbl_8033FC2C:
 } // clang-format on
 #pragma pop
 
-#else
-
-unk_t GXSetIndTexOrder(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 void GXSetNumIndStages(s32 arg0)
@@ -452,13 +426,6 @@ asm void GXSetTevDirect(void)
 /* 8033FCD0 0033C8B0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetTevDirect(void)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 
@@ -529,13 +496,6 @@ lbl_8033FD5C:
 /* 8033FD9C 0033C97C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void __GXUpdateBPMask(void)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 

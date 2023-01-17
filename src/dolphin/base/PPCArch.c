@@ -1,3 +1,5 @@
+#include <dolphin/base/PPCArch.h>
+
 #include <placeholder.h>
 
 #ifdef MWERKS_GEKKO
@@ -28,7 +30,7 @@ asm void PPCMtmsr(u32)
 
 #else
 
-void PPCMtmsr(u32)
+void PPCMtmsr(u32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -37,8 +39,7 @@ void PPCMtmsr(u32)
 
 #ifdef MWERKS_GEKKO
 
-asm void PPCMfhid0(u32)
-{ // clang-format off
+asm u32 PPCMfhid0(void){ // clang-format off
     nofralloc
     mfspr r3, 0x3f0
     blr
@@ -46,7 +47,7 @@ asm void PPCMfhid0(u32)
 
 #else
 
-void PPCMfhid0(u32 arg0)
+u32 PPCMfhid0(void)
 {
     NOT_IMPLEMENTED;
 }
