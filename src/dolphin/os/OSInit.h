@@ -4,16 +4,9 @@
 #ifndef DOLPHIN_OS_OS_H
 #define DOLPHIN_OS_OS_H
 
+#include <dolphin/os/forward.h>
 #include <dolphin/os/OSContext.h>
 #include <Runtime/platform.h>
-
-typedef enum OSException {
-    OS_EXCEPTION_FLOATING_POINT = 7,
-    OS_EXCEPTION_COUNT = 15,
-} OSException;
-
-typedef void (*__OSExceptionHandler)(OSException exception,
-                                     struct OSContext* context);
 
 extern vu32 __DIRegs[0x10] AT_ADDRESS(0xCC006000);
 

@@ -2,49 +2,10 @@
 
 #ifndef _OS_INTERRUPT_H_
 #define _OS_INTERRUPT_H_
+
+#include <dolphin/os/forward.h>
 #include <dolphin/os/OSContext.h>
 #include <Runtime/platform.h>
-
-typedef s16 __OSInterrupt;
-
-typedef enum {
-    OS_INTR_MEM_0,
-    OS_INTR_MEM_1,
-    OS_INTR_MEM_2,
-    OS_INTR_MEM_3,
-    OS_INTR_MEM_ADDRESS,
-    OS_INTR_DSP_AI,
-    OS_INTR_DSP_ARAM,
-    OS_INTR_DSP_DSP,
-    OS_INTR_AI_AI,
-    OS_INTR_EXI_0_EXI,
-    OS_INTR_EXI_0_TC,
-    OS_INTR_EXI_0_EXT,
-    OS_INTR_EXI_1_EXI,
-    OS_INTR_EXI_1_TC,
-    OS_INTR_EXI_1_EXT,
-    OS_INTR_EXI_2_EXI,
-    OS_INTR_EXI_2_TC,
-    OS_INTR_PI_CP,
-    OS_INTR_PI_PE_TOKEN,
-    OS_INTR_PI_PE_FINISH,
-    OS_INTR_PI_SI,
-    OS_INTR_PI_DI,
-    OS_INTR_PI_RSW,
-    OS_INTR_PI_ERROR,
-    OS_INTR_PI_VI,
-    OS_INTR_PI_DEBUG,
-    OS_INTR_PI_HSP,
-    OS_INTR_PI_ACR,
-    OS_INTR_28,
-    OS_INTR_29,
-    OS_INTR_30,
-    OS_INTR_31,
-
-    OS_INTR_MAX
-} OSInterruptType;
-
-typedef u32 OSInterruptMask;
 
 #define OS_INTRMASK_MEM_0 (0x80000000U >> OS_INTR_MEM_0)
 #define OS_INTRMASK_MEM_1 (0x80000000U >> OS_INTR_MEM_1)

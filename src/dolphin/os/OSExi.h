@@ -1,34 +1,10 @@
 #ifndef DOLPHIN_OS_OSEXI_H
 #define DOLPHIN_OS_OSEXI_H
 
+#include <dolphin/os/forward.h>
 #include <dolphin/os/OSInterrupt.h>
 
-typedef enum {
-    EXI_STATE_DMA_ACCESS = (1 << 0),
-    EXI_STATE_IMM_ACCESS = (1 << 1),
-    EXI_STATE_SELECTED = (1 << 2),
-    EXI_STATE_ATTACHED = (1 << 3),
-    EXI_STATE_LOCKED = (1 << 4),
-    EXI_STATE_BUSY = EXI_STATE_DMA_ACCESS | EXI_STATE_IMM_ACCESS
-} EXIState;
-
-typedef enum {
-    EXI_CHAN_0,
-    EXI_CHAN_1,
-    EXI_CHAN_2,
-    EXI_MAX_CHAN
-} EXIChannel;
-
-typedef enum {
-    EXI_READ,
-    EXI_WRITE,
-    EXI_TYPE_2,
-    EXI_MAX_TYPE
-} EXIType;
-
-typedef void (*EXICallback)(EXIChannel, OSContext*);
-
-typedef struct EXIControl {
+struct EXIControl {
     EXICallback exiCallback;
     EXICallback tcCallback;
     EXICallback extCallback;
@@ -43,7 +19,7 @@ typedef struct EXIControl {
         u32 dev;
         EXICallback callback;
     } queue[3];
-} EXIControl;
+};
 
 #define EXI_REG_MAX 5
 extern vu32 __EXIRegs[EXI_MAX_CHAN][EXI_REG_MAX] AT_ADDRESS(0xCC006800);

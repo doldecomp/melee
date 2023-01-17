@@ -3,6 +3,7 @@
 #ifndef _OSTHREAD_H_
 #define _OSTHREAD_H_
 
+#include <dolphin/os/forward.h>
 #include <dolphin/os/OSContext.h>
 #include <Runtime/platform.h>
 
@@ -11,34 +12,22 @@
 
 #define OS_THREAD_STACK_MAGIC 0xDEADBABE
 
-typedef enum {
-    OS_THREAD_STATE_EXITED = 0,
-    OS_THREAD_STATE_READY = 1,
-    OS_THREAD_STATE_RUNNING = 2,
-    OS_THREAD_STATE_SLEEPING = 4,
-    OS_THREAD_STATE_MORIBUND = 8
-} OSThreadState;
-
-typedef enum {
-    OS_THREAD_DETACHED = (1 << 0)
-} OSThreadFlag;
-
-typedef struct OSThreadQueue {
+struct OSThreadQueue {
     struct OSThread* head; // at 0x0
     struct OSThread* tail; // at 0x4
-} OSThreadQueue;
+};
 
-typedef struct OSMutexQueue {
+struct OSMutexQueue {
     struct OSMutex* head; // at 0x0
     struct OSMutex* tail; // at 0x4
-} OSMutexQueue;
+};
 
-typedef struct OSMutexLink {
+struct OSMutexLink {
     struct OSMutex* next; // at 0x0
     struct OSMutex* prev; // at 0x4
-} OSMutexLink;
+};
 
-typedef struct OSThread {
+struct OSThread {
     OSContext context;
     u16 state;                 // at 0x2C8
     u16 flags;                 // at 0x2CA
@@ -58,19 +47,11 @@ typedef struct OSThread {
     u32* stackEnd;             // at 0x308
     u32 WORD_0x30C;            // at 0x30C
     u32 ARR_0x310[2];          // at 0x310
-} OSThread;
-
-typedef void (*OSSwitchThreadCallback)(OSThread*, OSThread*);
+};
 
 extern OSThreadQueue OS_THREAD_QUEUE AT_ADDRESS(0x800000DC);
 extern OSThread* OS_CURRENT_THREAD AT_ADDRESS(0x800000E4);
 
-typedef struct _OSThread_Unk1 OSThread_Unk1;
-typedef struct _OSThread_Unk2 OSThread_Unk2;
-typedef struct _OSThread_Unk3 OSThread_Unk3;
-typedef struct _OSThread_Unk4 OSThread_Unk4;
-
-typedef OSThread_Unk3* (*OSThreadFunc)(OSThread_Unk4*);
 OSSwitchThreadCallback OSSetSwitchThreadCallback(OSSwitchThreadCallback);
 void __OSThreadInit(void);
 void OSSetCurrentThread(OSThread*);
