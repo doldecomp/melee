@@ -20,8 +20,8 @@ void __DVDClearWaitingQueue(void)
     for (i = 0; i < 4; i++) {
         DVDCommandBlock* ptr = WAITING_BLOCK(i);
 
-        ptr->next = (DVDCommandBlock*) ptr;
-        ptr->prev = (DVDCommandBlock*) ptr;
+        ptr->next = ptr;
+        ptr->prev = ptr;
     }
 }
 
@@ -70,7 +70,7 @@ bool __DVDCheckWaitingQueue(void)
     int i;
 
     for (i = 0; i < 4; i++) {
-        if (WaitingQueue[i].next != (DVDCommandBlock*) &WaitingQueue[i]) {
+        if (WaitingQueue[i].next != WAITING_BLOCK(i)) {
             OSRestoreInterrupts(intrEnabled);
             return true;
         }
