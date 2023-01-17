@@ -216,8 +216,6 @@ error:
     return result;
 }
 
-void __CARDUnlockedHandler(s32 chan, OSContext* context);
-
 void __CARDMountCallback(s32 chan, s32 result)
 {
     CARDControl* card;

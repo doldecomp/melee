@@ -1,5 +1,6 @@
-#include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
 
+#include <dolphin/card.h>
 #include <dolphin/card/CARDMount.h>
 #include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSExi.h>
@@ -126,7 +127,7 @@ void __CARDUnlockedHandler(EXIChannel chan, OSContext* context)
     }
 }
 
-s32 __CARDEnableInterrupt(s32 chan, bool enable)
+s32 __CARDEnableInterrupt(EXIChannel chan, bool enable)
 {
     bool err;
     u32 cmd;
@@ -422,7 +423,7 @@ s32 __CARDWritePage(s32 chan, CARDCallback callback)
     return result;
 }
 
-s32 __CARDEraseSector(s32 chan, u32 addr, CARDCallback callback)
+s32 __CARDEraseSector(EXIChannel chan, u32 addr, CARDCallback callback)
 {
     CARDControl* card;
     s32 result;
@@ -482,7 +483,7 @@ void __CARDSetDiskID(const DVDDiskID* id)
     __CARDBlock[1].diskID = id ? id : &__CARDDiskNone;
 }
 
-s32 __CARDGetControlBlock(s32 chan, CARDControl** pcard)
+s32 __CARDGetControlBlock(EXIChannel chan, CARDControl** pcard)
 {
     bool enabled;
     s32 result;
