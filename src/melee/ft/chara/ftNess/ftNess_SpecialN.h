@@ -3,7 +3,7 @@
 
 #include <Runtime/platform.h>
 
-void ftNess_ItemPKFlushSetNULL(struct _HSD_GObj*);
+void ftNess_ItemPKFlushSetNULL(HSD_GObj*);
 
 f32 return_void(void);
 f32 return_void2(void);

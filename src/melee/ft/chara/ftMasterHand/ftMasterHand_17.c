@@ -5,7 +5,7 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ftbosslib.h>
 
-static void func_80153910(struct _HSD_GObj*);
+static void func_80153910(HSD_GObj*);
 
 // 8015386C 15044C
 // https://decomp.me/scratch/dCvLa

@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void ftNess_SpecialHiTakeDamage(struct _HSD_GObj*);
+void ftNess_SpecialHiTakeDamage(HSD_GObj*);
 
 #endif

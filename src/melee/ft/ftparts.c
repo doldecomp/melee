@@ -1594,7 +1594,7 @@ void func_800749CC(HSD_GObj* arg0)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80074A4C(struct _HSD_GObj*, u32, s32)
+asm void func_80074A4C(HSD_GObj*, u32, s32)
 { // clang-format off
     nofralloc
 /* 80074A4C 0007162C  80 C3 00 2C */	lwz r6, 0x2c(r3)

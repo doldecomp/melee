@@ -174,7 +174,7 @@ typedef struct StageInfo {
     Vec3 x130, x13C, x148, x154, x160, x16C;
     bool (*x178)(int);
     void* x17C;
-    struct _HSD_GObj* x180[4];
+    HSD_GObj* x180[4];
     u8 x190_pad[0x280 - 0x190];
     struct _HSD_JObj* x280[261];
     void* x694[4];

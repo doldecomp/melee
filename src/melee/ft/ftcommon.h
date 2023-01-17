@@ -117,7 +117,7 @@ void func_800804A0(Fighter*, f32);
 f32 func_800804EC(Fighter*);
 void func_800804FC(Fighter*);
 
-void func_8007CB74(struct _HSD_GObj*);
+void func_8007CB74(HSD_GObj*);
 void func_8007CC78(Fighter*, f32);
 void func_8007CCA0(Fighter*, f32);
 f32 func_8007CD6C(f32 value, f32 decrement);
@@ -132,24 +132,24 @@ void func_8007D5D4(Fighter*);
 void func_8007D6A4(Fighter*);
 void func_8007D780(Fighter*);
 void func_8007D7FC(Fighter*);
-void func_8007D92C(struct _HSD_GObj*);
+void func_8007D92C(HSD_GObj*);
 void func_8007D9FC(Fighter*);
 f32 func_8007DA74(s32, u32, f32);
 
 void func_8007E2D0(Fighter*, s16, HSD_GObjEvent, HSD_GObjEvent,
                    void (*)(HSD_GObj*, HSD_GObj*));
 
-void func_8007E2FC(struct _HSD_GObj*);
-void func_8007E83C(struct _HSD_GObj*, s32, f32 div);
-s32 ftGetParasolStatus(struct _HSD_GObj*);
+void func_8007E2FC(HSD_GObj*);
+void func_8007E83C(HSD_GObj*, s32, f32 div);
+s32 ftGetParasolStatus(HSD_GObj*);
 void func_8007EA90(Fighter*, s32);
 void func_8007ED50(Fighter*, s32);
 void func_8007EFC0(Fighter*, u32);
 f32 Fighter_GetModelScale(Fighter*);
-void func_8007FC7C(struct _HSD_GObj*, f32);
+void func_8007FC7C(HSD_GObj*, f32);
 
 /// @todo static
-void func_8007FE84(struct _HSD_GObj*, struct _HSD_GObj*, s32, f32);
+void func_8007FE84(HSD_GObj*, HSD_GObj*, s32, f32);
 
 bool func_8007FFD8(Fighter*, f32);
 

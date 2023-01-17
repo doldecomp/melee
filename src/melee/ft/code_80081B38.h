@@ -23,9 +23,9 @@ void func_80084104(HSD_GObj* fighter_gobj);
 
 bool func_80082708(HSD_GObj* fighter_gobj);
 void func_80084F3C(HSD_GObj* fighter_gobj);
-void func_80084280(struct _HSD_GObj*);
+void func_80084280(HSD_GObj*);
 void func_8008403C(HSD_GObj*, HSD_GObjEvent);
-void func_80084DB0(struct _HSD_GObj*);
+void func_80084DB0(HSD_GObj*);
 void func_80082C74(HSD_GObj*, HSD_GObjEvent);
 
 /// @todo Name does not follow our conventions.

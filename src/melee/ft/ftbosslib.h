@@ -12,22 +12,22 @@ HSD_GObj* func_8015C3E8(s32 arg0);
 /// @todo @c arg0 is #FighterKind.
 s32 func_8015C44C(s32 arg0);
 
-void func_8015BD20(struct _HSD_GObj*);
+void func_8015BD20(HSD_GObj*);
 void func_8015BD24(s32, f32*, f32, s32, s32, s32);
-void func_8015BDB4(struct _HSD_GObj*);
-void func_8015BE40(struct _HSD_GObj* gobj, Vec3*, f32*, f32, f32);
-void func_8015BF74(struct _HSD_GObj*, f32);
-void func_8015C010(struct _HSD_GObj*, f32);
-void func_8015C09C(struct _HSD_GObj*, f32);
-void func_8015C190(struct _HSD_GObj*);
-void func_8015C208(struct _HSD_GObj*, Vec3*);
-HSD_GObj* func_8015C244(struct _HSD_GObj*, Vec3*);
+void func_8015BDB4(HSD_GObj*);
+void func_8015BE40(HSD_GObj* gobj, Vec3*, f32*, f32, f32);
+void func_8015BF74(HSD_GObj*, f32);
+void func_8015C010(HSD_GObj*, f32);
+void func_8015C09C(HSD_GObj*, f32);
+void func_8015C190(HSD_GObj*);
+void func_8015C208(HSD_GObj*, Vec3*);
+HSD_GObj* func_8015C244(HSD_GObj*, Vec3*);
 bool func_8015C31C(void);
 bool func_8015C3A0(void);
 HSD_GObj* func_8015C3E8(s32);
 s32 func_8015C44C(s32);
 s32 func_8015C4C4(void);
-void func_8015C5F8(struct _HSD_GObj*);
+void func_8015C5F8(HSD_GObj*);
 
 bool func_8015C270(void);
 bool func_8015C2A8(void);

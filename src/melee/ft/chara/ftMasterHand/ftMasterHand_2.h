@@ -5,6 +5,6 @@
 
 void func_8014FE10(HSD_GObj*);
 void func_8014FE58(HSD_GObj*);
-void func_80150144(struct _HSD_GObj*);
+void func_80150144(HSD_GObj*);
 
 #endif

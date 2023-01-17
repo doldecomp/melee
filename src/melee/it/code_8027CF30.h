@@ -24,20 +24,20 @@ void func_802D09D0(HSD_GObj*);
 
 /// @attention Above this line, symbols are placed correctly.
 
-void func_80294E78(struct _HSD_GObj*, f32);
-struct _HSD_GObj* func_8029A748(struct _HSD_GObj*, Vec3*, u8, f32);
-void func_8029A89C(struct _HSD_GObj*, f32);
-void func_8029A8F4(struct _HSD_GObj*, Vec3*, f32);
+void func_80294E78(HSD_GObj*, f32);
+HSD_GObj* func_8029A748(HSD_GObj*, Vec3*, u8, f32);
+void func_8029A89C(HSD_GObj*, f32);
+void func_8029A8F4(HSD_GObj*, Vec3*, f32);
 s32 func_802B1DEC(u32);
 u32 func_802B1DF8(HSD_GObj*, Vec3*, Vec3*, s32, s32, s32);
 s32 func_802B1FC8(u32);
 void func_802B1FE8(u32, Vec3*);
 void func_802B56E4(HSD_GObj*, Vec3*, f32, f32, f32);
-void* func_802C8B28(struct _HSD_GObj*, Vec3*, u32, f32);
+void* func_802C8B28(HSD_GObj*, Vec3*, u32, f32);
 void func_802D8618(s32, Vec3*, s32, s32);
-u32 func_802F0340(struct _HSD_GObj*, Vec3*, Vec3*, u32, u32, f32);
+u32 func_802F0340(HSD_GObj*, Vec3*, Vec3*, u32, u32, f32);
 void func_802F046C(s32);
-void func_802F0AE0(struct _HSD_GObj*, Vec3*, Vec3*, s32, s32, f32, f32, f32);
+void func_802F0AE0(HSD_GObj*, Vec3*, Vec3*, s32, s32, f32, f32, f32);
 
 /// @todo @c arg0 is likely a @c HSD_GObj*.
 void func_802C0DBC(u32 arg0);

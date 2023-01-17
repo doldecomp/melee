@@ -3,7 +3,7 @@
 
 #include <Runtime/platform.h>
 
-void ftNess_YoyoItemDespawn(struct _HSD_GObj*);
+void ftNess_YoyoItemDespawn(HSD_GObj*);
 
 Fighter* GetFighterData(HSD_GObj* fighter_gobj);
 

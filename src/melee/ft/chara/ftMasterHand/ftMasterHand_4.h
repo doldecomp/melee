@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void func_801510B0(struct _HSD_GObj*);
+void func_801510B0(HSD_GObj*);
 
 #endif

@@ -468,7 +468,7 @@ void ftFox_SpecialSEnd_Coll(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj);
 void ftFox_SpecialSEnd_Action(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirSEnd_Action(HSD_GObj* fighter_gobj);
-void ftFox_LoadSpecialAttrs(struct _HSD_GObj*);
+void ftFox_LoadSpecialAttrs(HSD_GObj*);
 void ftFox_OnLoadForFalco(Fighter* fp);
 
 void ftFox_OnLoad(HSD_GObj* gobj);

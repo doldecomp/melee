@@ -7,6 +7,7 @@ typedef struct _HSD_DObj HSD_DObj;
 typedef struct _HSD_Fog HSD_Fog;
 typedef struct _HSD_LObj HSD_LObj;
 typedef struct _HSD_Obj HSD_Obj;
+typedef struct HSD_GObj HSD_GObj;
 typedef union _HSD_ObjData HSD_ObjData;
 typedef struct _TextKerning TextKerning;
 typedef struct HSD_PadRumbleListData HSD_PadRumbleListData;

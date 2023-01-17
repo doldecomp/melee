@@ -2,7 +2,7 @@
 #define _gobj_h_
 
 #include <Runtime/platform.h>
-
+#include <sysdolphin/baselib/forward.h>
 #include <sysdolphin/baselib/objalloc.h>
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
@@ -15,7 +15,7 @@
     0x7 // Used by chain-type items in-game to link multiple parts together
 #define HSD_GOBJ_CLASS_EFFECT 0x8
 
-typedef struct _HSD_GObj {
+struct HSD_GObj {
     /* 0x00 */ u16 classifier;
     /* 0x02 */ u8 p_link;
     /* 0x03 */ u8 gx_link;
@@ -23,18 +23,18 @@ typedef struct _HSD_GObj {
     /* 0x05 */ u8 render_priority;
     /* 0x06 */ u8 obj_kind;
     /* 0x07 */ u8 user_data_kind;
-    /* 0x08 */ struct _HSD_GObj* next;
-    /* 0x0C */ struct _HSD_GObj* prev;
-    /* 0x10 */ struct _HSD_GObj* next_gx;
-    /* 0x14 */ struct _HSD_GObj* prev_gx;
+    /* 0x08 */ HSD_GObj* next;
+    /* 0x0C */ HSD_GObj* prev;
+    /* 0x10 */ HSD_GObj* next_gx;
+    /* 0x14 */ HSD_GObj* prev_gx;
     /* 0x18 */ struct _HSD_GObjProc* proc;
-    /* 0x1C */ void (*render_cb)(struct _HSD_GObj* gobj, s32 code);
+    /* 0x1C */ void (*render_cb)(HSD_GObj* gobj, s32 code);
     /* 0x20 */ u64 gxlink_prios;
     /* 0x28 */ void* hsd_obj;
     /* 0x2C */ void* user_data;
     /* 0x30 */ void (*user_data_remove_func)(void* data);
     /* 0x34 */ void* x34_unk;
-} HSD_GObj;
+};
 
 typedef struct _HSD_GObjProc {
     /* 0x00 */ struct _HSD_GObjProc* child;
@@ -44,8 +44,8 @@ typedef struct _HSD_GObjProc {
     /* 0x0D */ u8 flags_1 : 1;
     /* 0x0D */ u8 flags_2 : 1;
     /* 0x0D */ u8 flags_3 : 2;
-    /* 0x10 */ struct _HSD_GObj* gobj;              // owner
-    /* 0x14 */ void (*callback)(struct _HSD_GObj*); // on_invoke
+    /* 0x10 */ HSD_GObj* gobj;              // owner
+    /* 0x14 */ void (*callback)(HSD_GObj*); // on_invoke
 } HSD_GObjProc;
 
 typedef struct _HSD_GObjLibInitDataType {

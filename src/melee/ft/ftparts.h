@@ -4,14 +4,14 @@
 #include <dolphin/mtx/types.h>
 #include <melee/ft/fighter.h>
 
-void func_80074B0C(struct _HSD_GObj*, s32, s32);
+void func_80074B0C(HSD_GObj*, s32, s32);
 void func_80073758(struct _HSD_JObj*);
 void func_80074148(void);
 void func_80074170(void);
 void func_800743E0(void);
-void func_800749CC(struct _HSD_GObj*);
-void func_80074A4C(struct _HSD_GObj*, u32, s32);
-void func_80074A8C(struct _HSD_GObj*);
+void func_800749CC(HSD_GObj*);
+void func_80074A4C(HSD_GObj*, u32, s32);
+void func_80074A8C(HSD_GObj*);
 void func_80074E58(struct _Fighter*);
 
 /// @returns A bone index.

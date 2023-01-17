@@ -3,7 +3,7 @@
 
 #include <Runtime/platform.h>
 
-void func_80155014(struct _HSD_GObj*);
+void func_80155014(HSD_GObj*);
 
 void lbl_80154FF0(HSD_GObj* gobj);
 void lbl_80155010(HSD_GObj* gobj);

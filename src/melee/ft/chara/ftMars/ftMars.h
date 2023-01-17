@@ -153,6 +153,6 @@ void func_80139080(HSD_GObj* gobj);
 void func_801390E0(HSD_GObj* gobj);
 void lbl_80139140(HSD_GObj* gobj);
 void ftMars_OnLoadForRoy(struct _Fighter*);
-void ftMars_LoadSpecialAttrs(struct _HSD_GObj*);
+void ftMars_LoadSpecialAttrs(HSD_GObj*);
 
 #endif
