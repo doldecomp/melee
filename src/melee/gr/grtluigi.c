@@ -118,3 +118,5 @@ bool lbl_80221DC8(HSD_GObj* arg0)
 {
     return false;
 }
+
+void lbl_80221DD0(HSD_GObj* arg0) {}
