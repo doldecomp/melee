@@ -21,5 +21,7 @@ void GXTokenInterruptHandler(__OSInterrupt unused, OSContext* current_ctx);
 GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb);
 void GXFinishInterruptHandler(__OSInterrupt unused, OSContext* current_ctx);
 void __GXPEInit(void);
+void GXPokeBlendMode(GXBlendMode type, GXBlendFactor src_factor,
+                     GXBlendFactor dst_factor, GXLogicOp op);
 
 #endif
