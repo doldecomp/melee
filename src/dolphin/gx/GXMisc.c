@@ -1,6 +1,7 @@
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/forward.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/types.h>
@@ -18,8 +19,6 @@
 #define PE_POKE_AMODE1_ID 4
 
 #define PI_MEMSP_EFB 0x08000000
-
-typedef void (*GXDrawDoneCallback)(void);
 
 static void (*lbl_804D7320)(u16);
 static GXDrawDoneCallback lbl_804D7324;

@@ -25,7 +25,7 @@ f64 const lbl_804DE2E8 = 4503599627370496.0L;
 unk_t __cvt_fp2unsigned();
 
 #pragma push
-asm void GXSetFog(void)
+asm void GXSetFog(s32, GXColor, f32, f32, f32, f32)
 { // clang-format off
     nofralloc
 /* 803407C4 0033D3A4  7C 08 02 A6 */	mflr r0
@@ -149,7 +149,7 @@ lbl_80340868:
 
 #else
 
-void GXSetFog(void)
+void GXSetFog(s32 arg0, GXColor arg1, f32 arg2, f32 arg3, f32 arg4, f32 arg5)
 {
     NOT_IMPLEMENTED;
 }
@@ -378,7 +378,7 @@ void GXSetFogRangeAdj(s8 arg0, u16 arg1, GXFogAdjTbl* arg2)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXSetBlendMode(void)
+asm void GXSetBlendMode(s32, s32, s32, s32)
 { // clang-format off
     nofralloc
 /* 80340C3C 0033D81C  2C 03 00 01 */	cmpwi r3, 1
@@ -452,7 +452,7 @@ lbl_80340C54:
 
 #else
 
-void GXSetBlendMode(void)
+void GXSetBlendMode(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
 {
     NOT_IMPLEMENTED;
 }
@@ -463,7 +463,7 @@ void GXSetBlendMode(void)
 
 // https://decomp.me/scratch/yi6mS // 440 (72.50%)
 #pragma push
-asm void GXSetColorUpdate(void)
+asm void GXSetColorUpdate(s32)
 { // clang-format off
     nofralloc
 /* 80340D40 0033D920  80 8D A5 08 */	lwz r4, __GXContexts(r13)
@@ -487,7 +487,7 @@ asm void GXSetColorUpdate(void)
 
 #else
 
-void GXSetColorUpdate(void)
+void GXSetColorUpdate(s32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -498,7 +498,7 @@ void GXSetColorUpdate(void)
 
 // https://decomp.me/scratch/NG4ef // 440 (72.50%)
 #pragma push
-asm void GXSetAlphaUpdate(void)
+asm void GXSetAlphaUpdate(s32)
 { // clang-format off
     nofralloc
 /* 80340D80 0033D960  80 8D A5 08 */	lwz r4, __GXContexts(r13)
@@ -522,7 +522,7 @@ asm void GXSetAlphaUpdate(void)
 
 #else
 
-void GXSetAlphaUpdate(void)
+void GXSetAlphaUpdate(s32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -533,7 +533,7 @@ void GXSetAlphaUpdate(void)
 
 // https://decomp.me/scratch/MBnZl // 1345 (55.17%)
 #pragma push
-asm void GXSetZMode(void)
+asm void GXSetZMode(s8, s32, s32)
 { // clang-format off
     nofralloc
 /* 80340DC0 0033D9A0  80 CD A5 08 */	lwz r6, __GXContexts(r13)
@@ -571,7 +571,7 @@ asm void GXSetZMode(void)
 
 #else
 
-void GXSetZMode(void)
+void GXSetZMode(s8 arg0, s32 arg1, s32 arg2)
 {
     NOT_IMPLEMENTED;
 }
@@ -582,7 +582,7 @@ void GXSetZMode(void)
 
 // https://decomp.me/scratch/mQjA0 // 440 (72.50%)
 #pragma push
-asm void GXSetZCompLoc(void)
+asm void GXSetZCompLoc(s32)
 { // clang-format off
     nofralloc
 /* 80340E38 0033DA18  80 8D A5 08 */	lwz r4, __GXContexts(r13)
@@ -606,7 +606,7 @@ asm void GXSetZCompLoc(void)
 
 #else
 
-void GXSetZCompLoc(void)
+void GXSetZCompLoc(s32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -708,7 +708,7 @@ void GXSetPixelFmt(int arg0, int arg1)
 
 // https://decomp.me/scratch/Eo3bb // 440 (72.50%)
 #pragma push
-asm void GXSetDither(void)
+asm void GXSetDither(s32)
 { // clang-format off
     nofralloc
 /* 80340F88 0033DB68  80 8D A5 08 */	lwz r4, __GXContexts(r13)
@@ -732,7 +732,7 @@ asm void GXSetDither(void)
 
 #else
 
-void GXSetDither(void)
+void GXSetDither(s32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -742,7 +742,7 @@ void GXSetDither(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXSetDstAlpha(void)
+asm void GXSetDstAlpha(s32, s32)
 { // clang-format off
     nofralloc
 /* 80340FC8 0033DBA8  80 AD A5 08 */	lwz r5, __GXContexts(r13)
@@ -771,7 +771,7 @@ asm void GXSetDstAlpha(void)
 
 #else
 
-void GXSetDstAlpha(void)
+void GXSetDstAlpha(s32 arg0, s32 arg1)
 {
     NOT_IMPLEMENTED;
 }
@@ -781,7 +781,7 @@ void GXSetDstAlpha(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXSetFieldMask(void)
+asm void GXSetFieldMask(s32, s8)
 { // clang-format off
     nofralloc
 /* 8034101C 0033DBFC  54 80 06 3E */	clrlwi r0, r4, 0x18
@@ -800,13 +800,6 @@ asm void GXSetFieldMask(void)
 /* 80341050 0033DC30  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetFieldMask(void)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 

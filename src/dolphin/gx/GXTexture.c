@@ -86,7 +86,7 @@ static jtbl_t jtbl_804014A0 = { &lbl_8033EB58, &lbl_8033EB6C, &lbl_8033EB6C,
                                 NULL };
 
 #pragma push
-asm void GXGetTexBufferSize(void)
+asm s32 GXGetTexBufferSize(u16, u16, u32, u8, u8)
 { // clang-format off
     nofralloc
 /* 8033E78C 0033B36C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -197,7 +197,7 @@ lbl_8033E8D8:
 
 #else
 
-void GXGetTexBufferSize(void)
+s32 GXGetTexBufferSize(u16 arg0, u16 arg1, u32 arg2, u8 arg3, u8 arg4)
 {
     NOT_IMPLEMENTED;
 }
@@ -285,7 +285,7 @@ void __GetImageTileCount(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXInitTexObj(void)
+asm void GXInitTexObj(unk_t, u32, u16, u16, s32, s32, s32, s8)
 { // clang-format off
     nofralloc
 /* 8033E9B0 0033B590  7C 08 02 A6 */	mflr r0
@@ -463,7 +463,8 @@ lbl_8033EBCC:
 
 #else
 
-void GXInitTexObj(void)
+void GXInitTexObj(unk_t arg0, u32 arg1, u16 arg2, u16 arg3, s32 arg4, s32 arg5,
+                  s32 arg6, s8 arg7)
 {
     NOT_IMPLEMENTED;
 }
@@ -473,7 +474,7 @@ void GXInitTexObj(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXInitTexObjCI(void)
+asm void GXInitTexObjCI(unk_t, s32, u16, u16, s32, s32, s32, s8)
 { // clang-format off
     nofralloc
 /* 8033EC24 0033B804  7C 08 02 A6 */	mflr r0
@@ -499,7 +500,8 @@ asm void GXInitTexObjCI(void)
 
 #else
 
-void GXInitTexObjCI(void)
+void GXInitTexObjCI(unk_t arg0, s32 arg1, u16 arg2, u16 arg3, s32 arg4,
+                    s32 arg5, s32 arg6, s8 arg7)
 {
     NOT_IMPLEMENTED;
 }
@@ -509,8 +511,7 @@ void GXInitTexObjCI(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXInitTexObjLOD(void)
-{
+asm void GXInitTexObjLOD(unk_t, s32, s32, s32, s8, s32, f32, f32, f32){
     // clang-format off
     nofralloc
 /* 8033EC6C 0033B84C  94 21 FF C8 */	stwu r1, -0x38(r1)
@@ -626,13 +627,6 @@ lbl_8033EDC4:
 /* 8033EDFC 0033B9DC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXInitTexObjLOD(void)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 
@@ -784,7 +778,7 @@ void GXLoadTexObj(unk_t arg0, s32 arg1)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXInitTlutObj(void)
+asm void GXInitTlutObj(unk_t, u32, s32, u16)
 { // clang-format off
     nofralloc
 /* 8033F024 0033BC04  38 00 00 00 */	li r0, 0
@@ -808,19 +802,12 @@ asm void GXInitTlutObj(void)
 } // clang-format on
 #pragma pop
 
-#else
-
-void GXInitTlutObj(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXLoadTlut(void)
+asm void GXLoadTlut(unk_t, s32)
 { // clang-format off
     nofralloc
 /* 8033F06C 0033BC4C  7C 08 02 A6 */	mflr r0
@@ -865,19 +852,12 @@ asm void GXLoadTlut(void)
 } // clang-format on
 #pragma pop
 
-#else
-
-void GXLoadTlut(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXInitTexCacheRegion(void)
+asm void GXInitTexCacheRegion(unk_t, s8, u32, s32, u32, s32, s32)
 { // clang-format off
     nofralloc
 /* 8033F108 0033BCE8  2C 06 00 01 */	cmpwi r6, 1
@@ -966,13 +946,6 @@ lbl_8033F1D4:
 } // clang-format on
 #pragma pop
 
-#else
-
-void GXInitTexCacheRegion(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
@@ -983,7 +956,7 @@ void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
     INSERT_FIELD(*arg0, 0x65, 8, 24);
 }
 
-void GXInvalidateTexAll(void)
+void GXInvalidateTexAll(GXContext* arg0, s32 arg1, u8* arg2)
 {
     __GXFlushTextureState();
     WGPIPE.u8 = GX_LOAD_BP_REG;
@@ -1205,7 +1178,7 @@ void __GXSetSUTexSize(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void __GXSetTmemConfig(void)
+asm void __GXSetTmemConfig(s32)
 { // clang-format off
     nofralloc
 /* 8033F518 0033C0F8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1357,12 +1330,5 @@ lbl_8033F748:
 /* 8033F754 0033C334  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void __GXSetTmemConfig(void)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
