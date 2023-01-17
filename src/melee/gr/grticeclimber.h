@@ -32,4 +32,6 @@ bool lbl_8022135C(Vec3*, int, HSD_JObj*);
 HSD_GObj* func_80220FB4(int);
 void func_80221288(HSD_GObj*);
 
+void lbl_80221208(void);
+
 #endif

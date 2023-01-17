@@ -9,5 +9,6 @@ void func_801C9698(HSD_GObj*);
 void func_801C94D8(unk_t hsd_obj);
 void func_801C9604(HSD_GObj* bg, int, bool);
 void func_801C8858(HSD_JObj*, u32 flags);
+void func_801C8CDC(void);
 
 #endif
