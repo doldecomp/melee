@@ -1,8 +1,11 @@
 #include <melee/gr/grtluigi.h>
 
+#include <dolphin/os/os.h>
+#include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/gr/types.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 
 /* static */ StageCallbacks lbl_803E8DF0[4] = {
     {
@@ -42,13 +45,6 @@ StageData lbl_803E8E4C = {
     1,
 };
 
-#ifdef MUST_MATCH
-#pragma push
-#pragma force_active on
-char str0[] = "%s:%d: couldn t get gobj(id=%d)\n";
-char str1[] = "grtluigi.c";
-#endif
-
 void func_80221C10(int arg0)
 {
     return;
@@ -81,4 +77,32 @@ void lbl_80221C88(void)
 bool lbl_80221CAC(void)
 {
     return false;
+}
+
+HSD_GObj* func_80221CB4(int arg0)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* cb;
+    Map* map;
+
+    cb = &lbl_803E8DF0[arg0];
+    gobj = func_801C14D0(arg0);
+    if (gobj != NULL) {
+        map = gobj->user_data;
+        map->x8_callback = 0;
+        map->xC_callback = 0;
+        GObj_SetupGXLink(gobj, &func_801C5DB0, 3, 0);
+        if (cb->callback3 != 0U) {
+            map->x1C_callback = cb->callback3;
+        }
+        if (cb->callback0 != NULL) {
+            cb->callback0(gobj);
+        }
+        if (cb->callback2 != 0U) {
+            func_8038FD54(gobj, cb->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtluigi.c", 0xC3, arg0);
+    }
+    return gobj;
 }

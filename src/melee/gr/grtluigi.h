@@ -27,6 +27,6 @@ bool lbl_80221CAC(void);
 bool lbl_80221EE4(int);
 bool lbl_80221EEC(Vec3*, int, HSD_JObj*);
 
-void func_80221CB4(int);
+HSD_GObj* func_80221CB4(int);
 
 #endif
