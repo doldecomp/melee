@@ -47,10 +47,7 @@ StageData lbl_803E8E4C = {
     1,
 };
 
-void func_80221C10(int arg0)
-{
-    return;
-}
+void func_80221C10(int arg0) {}
 
 void lbl_80221C14(void)
 {
@@ -66,10 +63,7 @@ void lbl_80221C14(void)
     func_801C42AC();
 }
 
-void lbl_80221C84(void)
-{
-    return;
-}
+void lbl_80221C84(void) {}
 
 void lbl_80221C88(void)
 {
@@ -146,3 +140,5 @@ void lbl_80221E30(HSD_GObj* arg0)
     func_800115F4();
     func_801C2FE0(arg0);
 }
+
+void lbl_80221E64(HSD_GObj* arg0) {}
