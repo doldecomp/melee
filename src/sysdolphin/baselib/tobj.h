@@ -143,7 +143,7 @@ typedef struct _HSD_TObj {
     struct _HSD_ImageDesc* imagedesc;
     struct _HSD_Tlut* tlut;
     struct _HSD_TexLODDesc* lod;
-    struct _HSD_AObj* aobj;
+    HSD_AObj* aobj;
     struct _HSD_ImageDesc** imagetbl;
     struct _HSD_Tlut** tluttbl;
     u8 tlut_no;

@@ -3,6 +3,7 @@
 
 #include <Runtime/platform.h>
 
+typedef struct HSD_AObj HSD_AObj;
 typedef struct _HSD_DObj HSD_DObj;
 typedef struct _HSD_Fog HSD_Fog;
 typedef struct _HSD_LObj HSD_LObj;

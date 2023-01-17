@@ -1,5 +1,6 @@
-#include <melee/ft/chara/ftSamus/ftsamus.h>
+#include <melee/ft/chara/ftSamus/ftsamus1.h>
 
+#include <melee/ft/chara/ftSamus/ftsamus.h>
 #include <melee/ft/chara/ftSamus/ftsamus3.h>
 #include <melee/ft/chara/ftSamus/ftsamus4.h>
 #include <melee/ft/ft_unknown_006.h>

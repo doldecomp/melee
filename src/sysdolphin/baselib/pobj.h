@@ -39,7 +39,7 @@ typedef enum _PObjSetupFlag {
 
 typedef struct _unk_struct_pobj {
     u32 data[8];
-    struct _HSD_AObj* aobj; // 0x20
+    HSD_AObj* aobj; // 0x20
 };
 
 typedef struct _HSD_PObj {

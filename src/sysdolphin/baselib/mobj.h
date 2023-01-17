@@ -70,7 +70,7 @@ typedef struct _HSD_MObj {
     struct _HSD_TObj* tobj;
     struct _HSD_Material* mat;
     struct _HSD_PEDesc* pe;
-    struct _HSD_AObj* aobj;
+    HSD_AObj* aobj;
     struct _HSD_TExpTevDesc* tevdesc;
     union _HSD_TExp* texp;
 } HSD_MObj;

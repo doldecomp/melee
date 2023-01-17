@@ -100,7 +100,7 @@ typedef struct _HSD_JObj {
     /* 0x44 */ Mtx mtx;
     /* 0x74 */ Vec3* scl;
     /* 0x78 */ MtxPtr envelopemtx;
-    /* 0x7C */ struct _HSD_AObj* aobj;
+    /* 0x7C */ HSD_AObj* aobj;
     /* 0x80 */ struct _HSD_RObj* robj;
     /* 0x84 */ u32 id;
 } HSD_JObj;

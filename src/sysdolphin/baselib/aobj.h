@@ -38,7 +38,7 @@ typedef union _callbackArg {
     void* v;
 } callbackArg;
 
-typedef struct _HSD_AObj {
+struct HSD_AObj {
     u32 flags;
     f32 curr_frame;
     f32 rewind_frame;
@@ -46,7 +46,7 @@ typedef struct _HSD_AObj {
     f32 framerate;
     HSD_FObj* fobj;
     struct _HSD_Obj* hsd_obj;
-} HSD_AObj;
+};
 
 typedef struct _HSD_AObjDesc {
     u32 flags;

@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTSAMUS_FTSAMUS1_H
 
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 void ftSamus_OnDeath(HSD_GObj* fighter_gobj);
 void ftSamus_OnLoad(HSD_GObj* fighter_gobj);

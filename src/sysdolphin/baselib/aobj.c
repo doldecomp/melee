@@ -270,8 +270,8 @@ void HSD_AObjFree(HSD_AObj* aobj)
     HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*) aobj);
 }
 
-void callbackForeachFunc(struct _HSD_AObj* aobj, void* obj, HSD_Type type,
-                         void* func, AObj_Arg_Type arg_type, callbackArg* arg)
+void callbackForeachFunc(HSD_AObj* aobj, void* obj, HSD_Type type, void* func,
+                         AObj_Arg_Type arg_type, callbackArg* arg)
 {
     switch (arg_type) {
     case AOBJ_ARG_A:

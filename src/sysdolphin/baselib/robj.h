@@ -63,7 +63,7 @@ typedef struct _HSD_RObj {
         f32 limit;
         struct _HSD_IKHint ik_hint;
     } u;
-    struct _HSD_AObj* aobj;
+    HSD_AObj* aobj;
 } HSD_RObj;
 
 typedef struct _HSD_RObjDesc {

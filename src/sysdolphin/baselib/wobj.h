@@ -8,7 +8,7 @@ typedef struct _HSD_WObj {
     HSD_Obj parent;
     u32 flags;
     Vec3 pos;
-    struct _HSD_AObj* aobj;
+    HSD_AObj* aobj;
     struct _HSD_RObj* robj;
 } HSD_WObj;
 
