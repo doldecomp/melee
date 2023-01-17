@@ -1,5 +1,6 @@
 #include <melee/gr/grticeclimber.h>
 
+#include <melee/gr/ground.h>
 #include <melee/gr/types.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
@@ -37,3 +38,17 @@ char str0[] = "%s:%d: couldn t get gobj(id=%d)\n";
 char str1[] = "grticeclimber.c";
 
 void func_80220F10(bool arg0) {}
+
+void lbl_80220F14(void)
+{
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+
+    func_80220FB4(0);
+    func_80220FB4(1);
+    func_80220FB4(2);
+    func_801C39C0();
+    func_801C3BB4();
+    func_801C4210();
+    func_801C42AC();
+}
