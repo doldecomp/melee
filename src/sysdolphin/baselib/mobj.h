@@ -70,7 +70,7 @@ struct HSD_MObj {
     u32 rendermode;
     HSD_TObj* tobj;
     HSD_Material* mat;
-    struct _HSD_PEDesc* pe;
+    HSD_PEDesc* pe;
     HSD_AObj* aobj;
     struct _HSD_TExpTevDesc* tevdesc;
     union _HSD_TExp* texp;
@@ -84,7 +84,7 @@ struct HSD_Material {
     f32 shininess;
 };
 
-typedef struct _HSD_PEDesc {
+struct HSD_PEDesc {
     u8 flags;
     u8 ref0;
     u8 ref1;
@@ -97,7 +97,7 @@ typedef struct _HSD_PEDesc {
     u8 alpha_comp0;
     u8 alpha_op;
     u8 alpha_comp1;
-} HSD_PEDesc;
+};
 
 typedef struct _HSD_MObjDesc {
     char* class_name;
@@ -105,7 +105,7 @@ typedef struct _HSD_MObjDesc {
     struct _HSD_TObjDesc* texdesc;
     HSD_Material* mat;
     void* renderdesc;
-    struct _HSD_PEDesc* pedesc;
+    HSD_PEDesc* pedesc;
 } HSD_MObjDesc;
 
 typedef struct _HSD_ChanAnim {
