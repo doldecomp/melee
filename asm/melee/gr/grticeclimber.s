@@ -334,29 +334,7 @@ lbl_8022135C:
 
 
 .section .data
-    .balign 8
-.global lbl_803E8A98
-lbl_803E8A98:
-    .4byte lbl_8022109C
-    .4byte lbl_802210C8
-    .4byte lbl_802210D0
-    .4byte lbl_802210D4
-    .4byte NULL
-    .4byte lbl_8022118C
-    .4byte lbl_802211DC
-    .4byte lbl_802211E4
-    .4byte lbl_80221204
-    .4byte NULL
-    .4byte lbl_802210D8
-    .4byte lbl_8022114C
-    .4byte lbl_80221154
-    .4byte lbl_80221188
-    .4byte 0xC0000000
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
+    .balign 4
 .global lbl_803E8AE8
 lbl_803E8AE8:
     .asciz "/GrTIc.dat"
