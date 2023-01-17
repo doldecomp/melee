@@ -66,3 +66,8 @@ void lbl_80221C14(void)
     func_801C4210();
     func_801C42AC();
 }
+
+void lbl_80221C84(void)
+{
+    return;
+}
