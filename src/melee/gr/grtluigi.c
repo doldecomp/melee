@@ -164,3 +164,15 @@ void lbl_80221EC0(HSD_GObj* gobj)
 {
     func_801C2FE0(gobj);
 }
+
+void lbl_80221EE0(HSD_GObj* arg0) {}
+
+bool lbl_80221EE4(int arg0)
+{
+    return false;
+}
+
+int lbl_80221EEC(Vec3* arg0, int arg1, HSD_JObj* arg2)
+{
+    return true;
+}
