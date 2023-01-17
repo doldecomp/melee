@@ -52,3 +52,5 @@ void lbl_80220F14(void)
     func_801C4210();
     func_801C42AC();
 }
+
+void lbl_80220F84(void) {}
