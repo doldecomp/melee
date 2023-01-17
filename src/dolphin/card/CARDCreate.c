@@ -1,3 +1,5 @@
+#include <dolphin/card/CARDCreate.h>
+
 #include <cstring.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>

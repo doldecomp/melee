@@ -1,5 +1,6 @@
-#include <dolphin/card.h>
+#include <dolphin/card/CARDCheck.h>
 
+#include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/os/OSFont.h>

@@ -1,3 +1,5 @@
+#include <dolphin/card/CARDDelete.h>
+
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDBlock.h>
