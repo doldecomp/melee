@@ -33,9 +33,13 @@ typedef struct {
     u32 padding0;
 } DVDBuffer;
 
+struct DVDNode {
+    DVDNode* next;
+    DVDNode* prev;
+};
+
 struct DVDCommandBlock {
-    /*0x00*/ DVDCommandBlock* next;
-    /*0x04*/ DVDCommandBlock* prev;
+    DVDNode node;
     /*0x08*/ u32 command;
     /*0x0C*/ s32 state;
     /*0x10*/ u32 offset;
