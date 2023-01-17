@@ -65,5 +65,7 @@ void func_800439FC(CollData* arg0);
 void func_80043ADC(CollData* arg0);
 bool func_80043BBC(CollData* arg0, s32* arg1);
 void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2);
+void func_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3,
+                   f32 arg4);
 
 #endif

@@ -171,5 +171,7 @@ void func_801C1154(void);
 void func_801C1158(void);
 void func_801C11AC(HSD_GObj* gobj);
 HSD_JObj* func_801C13D0(s32 arg0, s32 depth);
+void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
+                   HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5);
 
 #endif

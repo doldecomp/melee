@@ -879,13 +879,6 @@ lbl_800740D4:
 } // clang-format on
 #pragma pop
 
-#else
-
-void Fighter_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 void Fighter_PObjInfoInit(void)
@@ -1135,14 +1128,6 @@ lbl_800743BC:
 /* 800743DC 00070FBC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
-                   u32* dobj_index, u32 tree_depth)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 

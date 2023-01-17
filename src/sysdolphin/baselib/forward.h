@@ -22,5 +22,6 @@ typedef struct PadLibData PadLibData;
 typedef struct RumbleInfo RumbleInfo;
 
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);
+typedef void (*HSD_DevComCallback)(int, int, int, bool cancelflag);
 
 #endif

@@ -1,3 +1,5 @@
+#include <MSL/ctype.h>
+
 #include <Runtime/platform.h>
 
 static const u8 LowercaseTable[] = {

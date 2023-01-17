@@ -47,5 +47,8 @@ void func_80075304(void);
 void func_800755E8(void);
 void func_800739B8(void);
 void func_80073CA8(void);
+void Fighter_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
+void func_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
+                   u32* dobj_index, u32 tree_depth);
 
 #endif
