@@ -177,9 +177,8 @@ void lbl_80221204(HSD_GObj* arg0) {}
 #ifdef MWERKS_GEKKO
 
 #pragma push
-// clang-format off
 asm void lbl_80221208(void)
-{
+{ // clang-format off
     nofralloc
 /* 80221208 0021DDE8  7C 08 02 A6 */	mflr r0
 /* 8022120C 0021DDEC  38 80 00 10 */	li r4, 0x10
@@ -213,8 +212,7 @@ asm void lbl_80221208(void)
 /* 8022127C 0021DE5C  38 21 00 38 */	addi r1, r1, 0x38
 /* 80221280 0021DE60  7C 08 03 A6 */	mtlr r0
 /* 80221284 0021DE64  4E 80 00 20 */	blr
-}
-// clang-format on
+} // clang-format on
 #pragma pop
 
 #endif
