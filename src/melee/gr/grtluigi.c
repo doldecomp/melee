@@ -1,6 +1,7 @@
 #include <melee/gr/grtluigi.h>
 
 #include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
 #include <melee/gr/types.h>
 
 /* static */ StageCallbacks lbl_803E8DF0[4] = {
@@ -70,4 +71,9 @@ void lbl_80221C14(void)
 void lbl_80221C84(void)
 {
     return;
+}
+
+void lbl_80221C88(void)
+{
+    func_801CAE04(0);
 }
