@@ -33,5 +33,7 @@ HSD_GObj* func_80220FB4(int);
 void func_80221288(HSD_GObj*);
 
 void lbl_80221208(void);
+void func_801C8DE0(void);
+void func_801C8CFC(void);
 
 #endif

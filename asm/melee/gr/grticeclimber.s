@@ -2,7 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-
 .global func_80221288
 func_80221288:
 /* 80221288 0021DE68  7C 08 02 A6 */	mflr r0
@@ -67,34 +66,6 @@ lbl_80221354:
 lbl_8022135C:
 /* 8022135C 0021DF3C  38 60 00 01 */	li r3, 1
 /* 80221360 0021DF40  4E 80 00 20 */	blr
-
-
-.section .data
-    .balign 4
-.global lbl_803E8B5C
-lbl_803E8B5C:
-    .4byte 0x00000001
-    .4byte 0x00020003
-    .4byte 0x00040005
-    .4byte 0x00060008
-    .4byte 0x0009000A
-    .4byte 0x000B000C
-    .4byte 0x000D000E
-    .4byte 0x000F0010
-    .4byte 0x00110012
-    .4byte 0x00130014
-    .4byte 0x00150016
-    .4byte 0x002C002D
-    .4byte 0x002E002F
-    .4byte 0x00300031
-    .4byte 0x00320033
-    .4byte 0x00340035
-    .4byte 0x00360037
-    .4byte 0x00380039
-    .4byte 0x003A003B
-    .4byte 0x003C003D
-    .4byte 0xFFFF0000
-
 
 .section .sdata2
     .balign 8

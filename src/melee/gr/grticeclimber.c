@@ -175,7 +175,6 @@ void lbl_802211E4(HSD_GObj* gobj)
 void lbl_80221204(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void lbl_80221208(void)
 { // clang-format off
@@ -214,5 +213,12 @@ asm void lbl_80221208(void)
 /* 80221284 0021DE64  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #endif
+
+/// @todo Unknown struct
+u32 lbl_803E8B5C[] = {
+    0x00000001, 0x00020003, 0x00040005, 0x00060008, 0x0009000A, 0x000B000C,
+    0x000D000E, 0x000F0010, 0x00110012, 0x00130014, 0x00150016, 0x002C002D,
+    0x002E002F, 0x00300031, 0x00320033, 0x00340035, 0x00360037, 0x00380039,
+    0x003A003B, 0x003C003D, 0xFFFF0000,
+};
