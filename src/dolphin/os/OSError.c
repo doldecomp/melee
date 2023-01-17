@@ -2,10 +2,10 @@
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSError.h>
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
-#include <dolphin/os/OSInit.h>
 #include <stdio.h>
 
 void OSReport(char* msg, ...)
@@ -95,8 +95,10 @@ void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar)
         break;
     case 15:
         OSReport("\n");
-        OSReport("AI DMA Address =   0x%04x%04x\n", __DSPRegs[24], __DSPRegs[25]);
-        OSReport("ARAM DMA Address = 0x%04x%04x\n", __DSPRegs[16], __DSPRegs[17]);
+        OSReport("AI DMA Address =   0x%04x%04x\n", __DSPRegs[24],
+                 __DSPRegs[25]);
+        OSReport("ARAM DMA Address = 0x%04x%04x\n", __DSPRegs[16],
+                 __DSPRegs[17]);
         OSReport("DI DMA Address =   0x%08x\n", __DIRegs[5]);
         break;
     }
