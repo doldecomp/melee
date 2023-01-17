@@ -4,6 +4,8 @@
 #include <melee/gr/types.h>
 #include <sysdolphin/baselib/gobj.h>
 
+extern StageInfo stage_info;
+
 static void func_801BFFA8(void);
 static void func_801BFFAC(bool);
 static void func_801C1E94(void);

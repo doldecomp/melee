@@ -1,12 +1,7 @@
 #include <melee/gr/grtluigi.h>
 
+#include <melee/gr/ground.h>
 #include <melee/gr/types.h>
-
-// .4byte NULL
-// .4byte NULL
-// .4byte NULL
-// .4byte NULL
-// .4byte NULL
 
 /* static */ StageCallbacks lbl_803E8DF0[4] = {
     {
@@ -56,4 +51,18 @@ char str1[] = "grtluigi.c";
 void func_80221C10(int arg0)
 {
     return;
+}
+
+void lbl_80221C14(void)
+{
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+
+    func_80221CB4(0);
+    func_80221CB4(1);
+    func_80221CB4(2);
+    func_801C39C0();
+    func_801C3BB4();
+    func_801C4210();
+    func_801C42AC();
 }
