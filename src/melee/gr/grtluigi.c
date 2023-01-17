@@ -32,11 +32,7 @@
     },
 };
 
-u32 lbl_803E8E40[] = {
-    0x2F477254,
-    0x4C672E64,
-    0x61740000,
-};
+char lbl_803E8E40[] = "/GrTLg.dat";
 
 void func_80221C10(void)
 {
