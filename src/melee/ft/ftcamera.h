@@ -2,8 +2,15 @@
 #define MELEE_FT_FTCAMERA_H
 
 #include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
 
 void func_80076064(struct _Fighter*);
 void func_800761C8(HSD_GObj* gobj);
+
+void func_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul);
+void func_80076064(Fighter* fp);
+void func_800761C8(HSD_GObj* gobj);
+void func_800762F4(HSD_GObj* gobj);
+void func_80076320(HSD_GObj* gobj);
 
 #endif

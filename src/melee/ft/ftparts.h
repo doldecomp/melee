@@ -34,4 +34,18 @@ void Fighter_SetupParts(HSD_GObj* fighter_obj);
 /// @returns Blend frames.
 f32 func_80075E78(Fighter*, bool);
 
+void Fighter_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx);
+void func_8007462C(void);
+void func_8007482C(void);
+s32 Fighter_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent);
+void func_80074B6C(void);
+void func_80073830(void);
+void func_80075028(void);
+void func_800750C8(void);
+void func_80075240(void);
+void func_80075304(void);
+void func_800755E8(void);
+void func_800739B8(void);
+void func_80073CA8(void);
+
 #endif
