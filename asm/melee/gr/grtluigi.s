@@ -248,28 +248,6 @@ lbl_80221EEC:
 
 .section .data
     .balign 8
-.global lbl_803E8DF0
-lbl_803E8DF0:
-    .4byte lbl_80221D9C
-    .4byte lbl_80221DC8
-    .4byte lbl_80221DD0
-    .4byte lbl_80221DD4
-    .4byte NULL
-    .4byte lbl_80221E68
-    .4byte lbl_80221EB8
-    .4byte lbl_80221EC0
-    .4byte lbl_80221EE0
-    .4byte NULL
-    .4byte lbl_80221DD8
-    .4byte lbl_80221E28
-    .4byte lbl_80221E30
-    .4byte lbl_80221E64
-    .4byte 0xC0000000
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
 .global lbl_803E8E40
 lbl_803E8E40:
     .4byte 0x2F477254
