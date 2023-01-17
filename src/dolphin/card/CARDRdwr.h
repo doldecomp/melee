@@ -10,4 +10,6 @@ s32 __CARDWrite(s32 chan, u32 addr, u32 length, void* dst,
 s32 __CARDRead(s32 chan, u32 addr, u32 length, void* dst,
                CARDCallback callback);
 
+u32 CARDGetXferredBytes(s32 chan);
+
 #endif

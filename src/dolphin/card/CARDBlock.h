@@ -6,4 +6,7 @@
 s32 __CARDAllocBlock(s32 chan, u32 cBlock, CARDCallback callback);
 s32 __CARDFreeBlock(s32 chan, u16 nBlock, CARDCallback callback);
 
+s32 __CARDFreeBlock(s32 chan, u16 nBlock, CARDCallback callback);
+s32 __CARDAllocBlock(s32 chan, u32 cBlock, CARDCallback callback);
+
 #endif

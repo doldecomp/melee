@@ -6,4 +6,9 @@
 void __CARDCheckSum(void* ptr, int length, u16* checksum, u16* checksumInv);
 s32 __CARDVerify(CARDControl* card);
 
+void __CARDCheckSum(void* ptr, int length, u16* checksum, u16* checksumInv);
+s32 __CARDVerify(CARDControl* card);
+s32 CARDCheckExAsync(s32 chan, s32* xferBytes, CARDCallback callback);
+s32 CARDCheckAsync(s32 chan, CARDCallback callback);
+
 #endif
