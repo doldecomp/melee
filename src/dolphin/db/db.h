@@ -15,4 +15,6 @@ bool DBIsDebuggerPresent(void);
 bool __DBIsExceptionMarked(u8 exception);
 void DBPrintf(const char* str, ...);
 
+int __DBIsExceptionMarked(u8 a);
+
 #endif
