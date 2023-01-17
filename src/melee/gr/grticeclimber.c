@@ -1,6 +1,7 @@
 #include <melee/gr/grticeclimber.h>
 
 #include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
 #include <melee/gr/types.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
@@ -54,3 +55,8 @@ void lbl_80220F14(void)
 }
 
 void lbl_80220F84(void) {}
+
+void lbl_80220F88(void)
+{
+    func_801CAE04(0);
+}
