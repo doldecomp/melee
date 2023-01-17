@@ -9,9 +9,9 @@
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lbunknown_003.h>
 #include <MSL/trigf.h>
-
-void ftCaptain_SpecialN_CreateWindEffect(
-    HSD_GObj* fighter_gobj) // Create Aesthetic Wind Effect for Warlock Punch
+//
+// Create Aesthetic Wind Effect for Warlock Punch
+void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj)
 {
     s32 currentAnimFrame;
     Fighter* fp = fighter_gobj->user_data;
@@ -35,8 +35,8 @@ void ftCaptain_SpecialN_CreateWindEffect(
     }
 }
 
-f32 ftCaptain_SpecialN_GetAngleVel(
-    Fighter* fp) // Calculate angle from control stick input - inline
+// Calculate angle from control stick input - inline
+f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 {
     ftCaptainAttributes* tempAttrs = fp->x2D4_specialAttributes;
 
