@@ -81,4 +81,8 @@ HSD_FObj* HSD_FObjLoadDesc(HSD_FObjDesc* desc);
 HSD_FObj* HSD_FObjAlloc(void);
 void HSD_FObjFree(HSD_FObj* fobj);
 
+/*static*/ f32 parseFloat(u8** pos, u8 frac);
+/*static*/ s32 parsePackInfo(u8** pos);
+/*static*/ void FObjLaunchKeyData(HSD_FObj* fobj);
+
 #endif

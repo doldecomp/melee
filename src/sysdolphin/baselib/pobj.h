@@ -158,4 +158,6 @@ void HSD_PObjAnimAll(HSD_PObj*);
 void HSD_PObjResolveRefsAll(HSD_PObj*, HSD_PObjDesc*);
 void HSD_PObjRemoveAll(HSD_PObj*);
 
+void HSD_PObjRemoveAnimByFlags(HSD_PObj* pobj, u32 flags);
+
 #endif

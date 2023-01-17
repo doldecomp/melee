@@ -16,10 +16,10 @@ typedef struct _TextGlyphTexture {
     /*0x00*/ u8 data[512];
 } TextGlyphTexture;
 
-typedef struct _TextKerning {
+struct _TextKerning {
     /*0x00*/ u8 left;
     /*0x01*/ u8 right;
-} TextKerning;
+};
 
 typedef struct _SIS {
     /*0x00*/ TextKerning* kerning;

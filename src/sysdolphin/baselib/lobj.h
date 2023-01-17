@@ -175,4 +175,19 @@ void HSD_LObjSetInterest(HSD_LObj* lobj, Vec3* interest);
 void func_803668EC(HSD_LObj* lobj);
 void HSD_LObjSetupInit(HSD_CObj* arg0);
 
+void func_80366CA4(HSD_LObj* lobj, GXColor* color);
+void func_80366CB0(HSD_LObj* lobj, GXColor* color);
+void func_80366CBC(HSD_LObj* lobj, f32 cutoff, s32 point_func);
+void func_80366CD0(HSD_LObj* lobj, f32 ref_dist, f32 ref_br, s32 dist_func);
+void HSD_LObjSetupSpecularInit(Mtx pmtx);
+void setup_spec_lightobj(HSD_LObj* lobj, Mtx mtx, s32 spec_id);
+void setup_point_lightobj(HSD_LObj* lobj, Mtx mtx);
+void setup_spot_lightobj(HSD_LObj* lobj, Mtx mtx);
+u32 HSD_LObjGetType(HSD_LObj* lobj);
+void HSD_LObjAddCurrent(HSD_LObj* lobj);
+void HSD_LObjUnrefThis(HSD_LObj* lobj);
+void HSD_LObjDeleteCurrentAll(HSD_LObj* lobj);
+void HSD_LObjSetCurrentAll(HSD_LObj* lobj);
+HSD_LObj* HSD_LObjGetCurrentByType(u16 type);
+
 #endif
