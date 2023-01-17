@@ -5,5 +5,7 @@
 #include <Runtime/platform.h>
 
 s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat* stat);
+s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat* stat,
+                       CARDCallback callback);
 
 #endif
