@@ -3,4 +3,6 @@
 
 #include <Runtime/platform.h>
 
+void func_80221C10(void);
+
 #endif
