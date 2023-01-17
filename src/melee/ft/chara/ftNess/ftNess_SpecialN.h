@@ -5,4 +5,8 @@
 
 void ftNess_ItemPKFlushSetNULL(struct _HSD_GObj*);
 
+f32 return_void(void);
+f32 return_void2(void);
+f32 return_void3(void);
+
 #endif
