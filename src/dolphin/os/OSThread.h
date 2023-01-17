@@ -3,7 +3,6 @@
 #ifndef _OSTHREAD_H_
 #define _OSTHREAD_H_
 
-#include <dolphin/os/forward.h>
 #include <dolphin/os/OSContext.h>
 #include <Runtime/platform.h>
 

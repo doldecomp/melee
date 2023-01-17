@@ -17,7 +17,6 @@ typedef struct _OSThread_Unk2 OSThread_Unk2;
 typedef struct _OSThread_Unk3 OSThread_Unk3;
 typedef struct _OSThread_Unk4 OSThread_Unk4;
 typedef struct OSAlarm OSAlarm;
-typedef struct EXIControl EXIControl;
 
 typedef enum OSException {
     OS_EXCEPTION_FLOATING_POINT = 7,
@@ -84,7 +83,7 @@ typedef enum {
     EXI_MAX_TYPE
 } EXIType;
 
-typedef enum OSThreadState {
+typedef enum {
     OS_THREAD_STATE_EXITED = 0,
     OS_THREAD_STATE_READY = 1,
     OS_THREAD_STATE_RUNNING = 2,
