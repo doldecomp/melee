@@ -1,10 +1,12 @@
+#include <Runtime/Gecko_setjmp.h>
+
 #include <placeholder.h>
 #include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm int __setjmp(register* env)
+asm int __setjmp(register unk_t env, unk_t, unk_t)
 { // clang-format off
     nofralloc
 /* 803227CC 0031F3AC  7C A8 02 A6 */	mflr r5
@@ -41,7 +43,7 @@ asm int __setjmp(register* env)
 
 #else
 
-int __setjmp(unk_t env)
+int __setjmp(unk_t env, unk_t arg1, unk_t arg2)
 {
     NOT_IMPLEMENTED;
 }
@@ -51,7 +53,7 @@ int __setjmp(unk_t env)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void longjmp(register* env, register int val)
+asm void longjmp(register unk_t env, register int val)
 { // clang-format off
     nofralloc
 /* 80322840 0031F420  80 A3 00 00 */	lwz r5, 0(r3)
