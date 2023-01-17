@@ -1,3 +1,4 @@
+#include "sysdolphin/baselib/gobj.h"
 #include <melee/gr/grticeclimber.h>
 
 #include <dolphin/os/os.h>
@@ -75,7 +76,7 @@ HSD_GObj* func_80220FB4(int id)
     gobj = func_801C14D0(id);
 
     if (gobj != NULL) {
-        Map* map = gobj->user_data;
+        Map* map = (Map*) HSD_GObjGetUserData(gobj);
         map->x8_callback = 0;
         map->xC_callback = 0;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3U, 0U);
