@@ -2,11 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global lbl_80221CAC
-lbl_80221CAC:
-/* 80221CAC 0021E88C  38 60 00 00 */	li r3, 0
-/* 80221CB0 0021E890  4E 80 00 20 */	blr
-
 .global func_80221CB4
 func_80221CB4:
 /* 80221CB4 0021E894  7C 08 02 A6 */	mflr r0

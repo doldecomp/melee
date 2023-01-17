@@ -77,3 +77,8 @@ void lbl_80221C88(void)
 {
     func_801CAE04(0);
 }
+
+bool lbl_80221CAC(void)
+{
+    return false;
+}
