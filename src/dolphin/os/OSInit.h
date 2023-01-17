@@ -9,13 +9,14 @@
 
 typedef enum OSException {
     OS_EXCEPTION_FLOATING_POINT = 7,
+    OS_EXCEPTION_COUNT = 15,
 } OSException;
 
 typedef void (*__OSExceptionHandler)(OSException exception,
                                      struct OSContext* context);
 
-__OSExceptionHandler __OSGetExceptionHandler(OSException);
-void __OSSetExceptionHandler(OSException, __OSExceptionHandler);
+__OSExceptionHandler __OSGetExceptionHandler(u8);
+__OSExceptionHandler __OSSetExceptionHandler(u8, __OSExceptionHandler);
 u32 OSGetConsoleType(void);
 void OSInit(void);
 void __OSPSInit(void);

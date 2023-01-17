@@ -12,6 +12,7 @@ typedef struct {
 
 void DBInit(void);
 bool DBIsDebuggerPresent(void);
+bool __DBIsExceptionMarked(u8 exception);
 void DBPrintf(const char* str, ...);
 
 #endif
