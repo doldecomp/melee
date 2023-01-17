@@ -6,6 +6,7 @@
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/gr/types.h>
+#include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 
 /* static */ StageCallbacks lbl_803E8DF0[4] = {
@@ -138,4 +139,10 @@ void lbl_80221DD8(HSD_GObj* gobj)
 bool lbl_80221E28(HSD_GObj* arg0)
 {
     return false;
+}
+
+void lbl_80221E30(HSD_GObj* arg0)
+{
+    func_800115F4();
+    func_801C2FE0(arg0);
 }
