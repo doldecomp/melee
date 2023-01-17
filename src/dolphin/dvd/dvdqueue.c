@@ -21,7 +21,7 @@ void __DVDClearWaitingQueue(void)
     int i;
 
     for (i = 0; i < 4; i++) {
-        DVDCommandBlock* ptr = (DVDCommandBlock*) &WaitingQueue[i];
+        DVDCommandBlock* ptr = getWaitingBlock(i);
 
         ptr->next = (DVDCommandBlock*) ptr;
         ptr->prev = (DVDCommandBlock*) ptr;
