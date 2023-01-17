@@ -1,3 +1,5 @@
+#include <melee/ft/chara/ftIceClimber/fticeclimber2_nana.h>
+
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftparts.h>

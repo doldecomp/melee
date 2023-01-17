@@ -1,5 +1,6 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_20.h>
 
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/ftbosslib.h>
 
 // 80153D28 150908

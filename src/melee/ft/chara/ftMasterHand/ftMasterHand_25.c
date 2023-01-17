@@ -1,5 +1,6 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_25.h>
 
+#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_22.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_23.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
