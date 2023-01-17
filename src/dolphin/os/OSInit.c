@@ -8,13 +8,23 @@
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/init/__start.h>
 #include <dolphin/os/os.h>
+#include <dolphin/os/OSAlarm.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSAudioSystem.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSError.h>
+#include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSLink.h>
+#include <dolphin/os/OSMemory.h>
+#include <dolphin/os/OSResetSW.h>
+#include <dolphin/os/OSRtc.h>
+#include <dolphin/os/OSSerial.h>
+#include <dolphin/os/OSSync.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
+#include <MetroTRK/dolphin_trk.h>
+#include <MetroTRK/intrinsics.h>
 #include <placeholder.h>
 #include <Runtime/__mem.h>
 #include <Runtime/platform.h>
@@ -108,7 +118,6 @@ void ClearArena(void)
 extern bool __DVDLongFileNameFlag;
 extern u32 __PADSpec;
 extern void _db_stack_end(void);
-extern unk_t __OSResetSWInterruptHandler();
 
 typedef struct BI2Debug {
     s32 debugMonSize;  // 0x0
@@ -298,7 +307,7 @@ static u32 __OSExceptionLocations[] = {
     0x0900, 0x0C00, 0x0D00, 0x0F00, 0x1300, 0x1400, 0x1700,
 };
 
-static void OSExceptionInit(void)
+void OSExceptionInit(void)
 {
     u8 exception;
     void* destAddr;
@@ -500,7 +509,7 @@ entry __OSEVEnd
 
 #else
 
-asm void OSExceptionVector(void)
+void OSExceptionVector(void)
 {
     NOT_IMPLEMENTED;
 }
