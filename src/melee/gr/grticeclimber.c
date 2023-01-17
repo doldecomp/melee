@@ -110,3 +110,5 @@ bool lbl_802210C8(HSD_GObj* arg0)
 }
 
 void lbl_802210D0(HSD_GObj* arg0) {}
+
+void lbl_802210D4(HSD_GObj* arg0) {}
