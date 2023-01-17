@@ -35,3 +35,5 @@ StageData lbl_803E8AF4 = {
 
 char str0[] = "%s:%d: couldn t get gobj(id=%d)\n";
 char str1[] = "grticeclimber.c";
+
+void func_80220F10(bool arg0) {}
