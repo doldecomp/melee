@@ -69,17 +69,17 @@ bool lbl_80220FAC(void)
 
 HSD_GObj* func_80220FB4(int id)
 {
+    /// @todo Cannot be moved below @c cb due to an inline
     HSD_GObj* gobj;
-    StageCallbacks* cb;
 
-    cb = &lbl_803E8A98[id];
+    StageCallbacks* cb = &lbl_803E8A98[id];
     gobj = func_801C14D0(id);
 
     if (gobj != NULL) {
         Map* map = (Map*) HSD_GObjGetUserData(gobj);
-        map->x8_callback = 0;
-        map->xC_callback = 0;
-        GObj_SetupGXLink(gobj, func_801C5DB0, 3U, 0U);
+        map->x8_callback = NULL;
+        map->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
 
         if (cb->callback3 != NULL)
             map->x1C_callback = cb->callback3;
