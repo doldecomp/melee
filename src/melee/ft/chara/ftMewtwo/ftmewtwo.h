@@ -265,4 +265,14 @@ void ftMewtwo_SpecialAirNCancel_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialN_Shoot(HSD_GObj* fighter_gobj);
 
+void ftMewtwo_OnLoad(HSD_GObj* fighter_gobj);
+void ftMewTwo_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftMewTwo_OnItemDrop(HSD_GObj* fighter_gobj, bool bool);
+void ftMewTwo_OnItemInvisible(HSD_GObj* fighter_gobj);
+void ftMewTwo_OnItemVisible(HSD_GObj* fighter_gobj);
+void ftMewTwo_80144F58(HSD_GObj* fighter_gobj);
+void ftMewTwo_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
+void ftMewTwo_OnKnockbackEnter(HSD_GObj* fighter_gobj);
+void ftMewTwo_OnKnockbackExit(HSD_GObj* fighter_gobj);
+
 #endif
