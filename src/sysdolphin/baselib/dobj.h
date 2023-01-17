@@ -11,8 +11,8 @@
 struct _HSD_DObj {
     HSD_Class parent;
     struct _HSD_DObj* next; // 0x04
-    struct _HSD_MObj* mobj; // 0x08
-    struct _HSD_PObj* pobj; // 0x0C
+    HSD_MObj* mobj;         // 0x08
+    HSD_PObj* pobj;         // 0x0C
     HSD_AObj* aobj;         // 0x10
     u32 flags;              // 0x14
 };

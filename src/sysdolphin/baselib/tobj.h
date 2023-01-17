@@ -2,10 +2,9 @@
 #define _hsd_tobj_h_
 
 #include <Runtime/platform.h>
-
-#include <sysdolphin/baselib/object.h>
-
 #include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/forward.h>
+#include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/texp.h>
 
 #define TOBJ_ANIM 0x10
@@ -124,9 +123,9 @@
 #define TEX_MTX_DIRTY (1U << 31)
 
 // Texture Object
-typedef struct _HSD_TObj {
+struct HSD_TObj {
     HSD_Obj parent;
-    struct _HSD_TObj* next;
+    HSD_TObj* next;
     s32 id;  // GXTexMapID
     u32 src; // GXTexGenSrc
     GXTexMtx mtxid;
@@ -150,7 +149,7 @@ typedef struct _HSD_TObj {
     Mtx mtx;
     u32 coord; // GXTexCoordID
     struct _HSD_TObjTev* tev;
-} HSD_TObj;
+};
 
 typedef struct _HSD_TObjDesc {
     char* class_name;
@@ -303,7 +302,7 @@ u32 HSD_Index2TexMtx(u32 index);
 u8 HSD_Index2TexMap(u32 index);
 u32 HSD_TexMap2Index(u8 mapid);
 struct _HSD_ImageDesc* HSD_ImageDescAlloc(void);
-struct _HSD_TObj* allocShadowTObj(void);
+HSD_TObj* allocShadowTObj(void);
 
 void HSD_TObjRemoveAnim(HSD_TObj* tobj);
 void HSD_TObjReqAnimByFlags(HSD_TObj* tobj, f32 startframe, u32 flags);

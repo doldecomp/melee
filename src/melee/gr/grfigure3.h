@@ -23,6 +23,6 @@ static bool lbl_8020E778(HSD_GObj*);
 static void lbl_8020E780(HSD_GObj* gobj);
 static void lbl_8020E784(HSD_GObj*);
 static bool lbl_8020E788(int number);
-static int lbl_8020E790(Vec3* vector, int number, struct _HSD_JObj* jobj);
+static int lbl_8020E790(Vec3* vector, int number, HSD_JObj* jobj);
 
 #endif

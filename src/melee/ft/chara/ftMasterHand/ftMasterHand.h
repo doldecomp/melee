@@ -133,7 +133,7 @@ void lbl_80152E28(HSD_GObj* gobj);
 
 // ftMasterHand_15
 void lbl_801535B0(HSD_GObj* gobj);
-void func_8015364C(HSD_GObj*, struct _HSD_JObj*, f32, f32);
+void func_8015364C(HSD_GObj*, HSD_JObj*, f32, f32);
 
 // ftMasterHand_21
 void lbl_801541C4(HSD_GObj* gobj);

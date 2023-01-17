@@ -16,7 +16,7 @@ void func_8006FE48(HSD_GObj*);
 void func_80070308(HSD_GObj*);
 void func_800704F0(HSD_GObj*, s32, f32);
 void func_80070654(HSD_GObj*);
-void func_80070758(struct _HSD_JObj*);
+void func_80070758(HSD_JObj*);
 void func_8007077C(HSD_GObj*);
 void ftAnim_ApplyPartAnim(HSD_GObj*, s32, s32, f32);
 void func_80070C48(HSD_GObj*, s32);

@@ -5,7 +5,7 @@
 #include <melee/ft/fighter.h>
 
 void func_80074B0C(HSD_GObj*, s32, s32);
-void func_80073758(struct _HSD_JObj*);
+void func_80073758(HSD_JObj*);
 void func_80074148(void);
 void func_80074170(void);
 void func_800743E0(void);
@@ -17,7 +17,7 @@ void func_80074E58(Fighter*);
 /// @returns A bone index.
 s32 func_8007500C(Fighter*, s32);
 
-void Fighter_JObjSetRotation(struct _HSD_JObj*, Quaternion*);
+void Fighter_JObjSetRotation(HSD_JObj*, Quaternion*);
 void func_8007592C(Fighter*, s32, f32);
 void func_80075AF0(Fighter*, s32, f32);
 void func_80075CB4(Fighter*, s32, f32);

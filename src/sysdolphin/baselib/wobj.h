@@ -9,7 +9,7 @@ typedef struct _HSD_WObj {
     u32 flags;
     Vec3 pos;
     HSD_AObj* aobj;
-    struct _HSD_RObj* robj;
+    HSD_RObj* robj;
 } HSD_WObj;
 
 typedef struct _HSD_WObjDesc {

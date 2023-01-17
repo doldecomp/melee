@@ -35,7 +35,7 @@ typedef struct ftHurt {
     u32 x48_is_grabbable;     // 0x48
 } ftHurt;
 
-void* HSD_JObjUnkMtxPtr(struct _HSD_JObj*);
+void* HSD_JObjUnkMtxPtr(HSD_JObj*);
 s32 func_80008248(s32, struct ftHurt*, void*, f32, f32, f32);
 void func_80008440(struct _Hitbox*);
 void func_80008434(struct _Hitbox*);

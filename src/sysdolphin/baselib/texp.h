@@ -3,6 +3,7 @@
 
 #include <dolphin/gx/GXEnum.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 #define HSD_TEXP_RAS -2
 #define HSD_TEXP_TEX -1
@@ -93,7 +94,7 @@ typedef struct _HSD_TevDesc {
 
 typedef struct _HSD_TExpTevDesc {
     struct _HSD_TevDesc desc;
-    struct _HSD_TObj* tobj;
+    HSD_TObj* tobj;
 } HSD_TExpTevDesc;
 
 typedef struct _HSD_TECommon {
@@ -142,7 +143,7 @@ typedef struct _HSD_TETev {
     u8 kasel;
     HSD_TEArg c_in[4];
     HSD_TEArg a_in[4];
-    struct _HSD_TObj* tex;
+    HSD_TObj* tex;
     u8 chan;
 } HSD_TETev;
 

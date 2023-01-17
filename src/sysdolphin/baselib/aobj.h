@@ -1,15 +1,13 @@
 #ifndef _aobj_h_
 #define _aobj_h_
 
-#include "sysdolphin/baselib/forward.h"
 #include <Runtime/platform.h>
-
+#include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/forward.h>
 #include <sysdolphin/baselib/id.h>
+#include <sysdolphin/baselib/list.h>
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/object.h>
-
-#include <sysdolphin/baselib/fobj.h>
-#include <sysdolphin/baselib/list.h>
 
 #define AOBJ_REWINDED (1 << 26)
 #define AOBJ_FIRST_PLAY (1 << 27)
@@ -91,6 +89,18 @@ void HSD_AObjSetRewindFrame(HSD_AObj* aobj, f32 frame);
 void HSD_AObjSetEndFrame(HSD_AObj* aobj, f32 frame);
 void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame);
 void _HSD_AObjForgetMemory(any_t low, any_t high);
+void TObjForeachAnim(HSD_TObj* tobj, HSD_TypeMask mask, Event func,
+                     AObj_Arg_Type arg_type, callbackArg* arg);
+void RObjForeachAnim(HSD_RObj* robj, HSD_TypeMask mask, Event func,
+                     AObj_Arg_Type arg_type, callbackArg* arg);
+void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, Event func,
+                     AObj_Arg_Type arg_type, callbackArg* arg);
+void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, Event func,
+                     AObj_Arg_Type arg_type, callbackArg* arg);
+void DObjForeachAnim(HSD_DObj* dobj, HSD_TypeMask mask, Event func,
+                     AObj_Arg_Type arg_type, callbackArg* arg);
+asm void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, void (*func)(),
+                         AObj_Arg_Type arg_type, callbackArg* arg);
 
 static inline f32 HSD_AObjGetEndFrame(HSD_AObj* aobj)
 {

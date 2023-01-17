@@ -5,6 +5,7 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/forward.h>
 #include <sysdolphin/baselib/list.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/object.h>
@@ -83,11 +84,11 @@
 
 typedef u32 HSD_TrspMask;
 
-typedef struct _HSD_JObj {
+struct HSD_JObj {
     /* 0x00 - 0x04 */ HSD_Obj object;
-    /* 0x08 */ struct _HSD_JObj* next;
-    /* 0x0C */ struct _HSD_JObj* parent;
-    /* 0x10 */ struct _HSD_JObj* child;
+    /* 0x08 */ HSD_JObj* next;
+    /* 0x0C */ HSD_JObj* parent;
+    /* 0x10 */ HSD_JObj* child;
     /* 0x14 */ u32 flags;
     /* 0x18 */ union {
         HSD_SList* ptcl;
@@ -101,9 +102,9 @@ typedef struct _HSD_JObj {
     /* 0x74 */ Vec3* scl;
     /* 0x78 */ MtxPtr envelopemtx;
     /* 0x7C */ HSD_AObj* aobj;
-    /* 0x80 */ struct _HSD_RObj* robj;
+    /* 0x80 */ HSD_RObj* robj;
     /* 0x84 */ u32 id;
-} HSD_JObj;
+};
 
 typedef struct _HSD_Joint {
     char* class_name;
@@ -167,10 +168,10 @@ void HSD_JObjAddNext(HSD_JObj* jobj, HSD_JObj* next);
 void HSD_JObjRemoveAnimAll(HSD_JObj* jobj);
 void HSD_JObjWalkTree(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
                       f32** cb_args);
-void HSD_JObjPrependRObj(HSD_JObj* jobj, struct _HSD_RObj* robj);
-void HSD_JObjDeleteRObj(HSD_JObj* jobj, struct _HSD_RObj* robj);
+void HSD_JObjPrependRObj(HSD_JObj* jobj, HSD_RObj* robj);
+void HSD_JObjDeleteRObj(HSD_JObj* jobj, HSD_RObj* robj);
 
-static inline struct _HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
+static inline HSD_RObj* HSD_JObjGetRObj(HSD_JObj* jobj)
 {
     HSD_ASSERT(405, jobj);
     return jobj->robj;
@@ -366,7 +367,7 @@ static inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
 
 /// @todo This is misplaced or something; @c jobj.h must not include @c
 ///       lbcollision.
-void* HSD_JObjUnkMtxPtr(struct _HSD_JObj*);
+void* HSD_JObjUnkMtxPtr(HSD_JObj*);
 
 static inline void HSD_JObjGetMtx(HSD_JObj* jobj)
 {

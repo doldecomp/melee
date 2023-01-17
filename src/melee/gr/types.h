@@ -176,7 +176,7 @@ typedef struct StageInfo {
     void* x17C;
     HSD_GObj* x180[4];
     u8 x190_pad[0x280 - 0x190];
-    struct _HSD_JObj* x280[261];
+    HSD_JObj* x280[261];
     void* x694[4];
     void* x6A4;
     struct {

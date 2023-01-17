@@ -5,6 +5,7 @@
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/forward.h>
 #include <sysdolphin/baselib/texp.h>
 #include <sysdolphin/baselib/tobj.h>
 
@@ -64,16 +65,16 @@
 #define RENDER_NO_ZUPDATE (1 << 29)
 #define RENDER_XLU (1 << 30)
 
-typedef struct _HSD_MObj {
+struct HSD_MObj {
     HSD_Class parent;
     u32 rendermode;
-    struct _HSD_TObj* tobj;
+    HSD_TObj* tobj;
     struct _HSD_Material* mat;
     struct _HSD_PEDesc* pe;
     HSD_AObj* aobj;
     struct _HSD_TExpTevDesc* tevdesc;
     union _HSD_TExp* texp;
-} HSD_MObj;
+};
 
 typedef struct _HSD_Material {
     GXColor ambient;

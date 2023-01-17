@@ -135,7 +135,7 @@ static bool lbl_8020E4F4(int number)
     return false;
 }
 
-static bool lbl_8020E4FC(Vec3* vector, int number, struct _HSD_JObj* jobj)
+static bool lbl_8020E4FC(Vec3* vector, int number, HSD_JObj* jobj)
 {
     return true;
 }

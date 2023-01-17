@@ -139,7 +139,7 @@ static bool lbl_8020E788(int number)
     return false;
 }
 
-static bool lbl_8020E790(Vec3* vector, int number, struct _HSD_JObj* jobj)
+static bool lbl_8020E790(Vec3* vector, int number, HSD_JObj* jobj)
 {
     return true;
 }

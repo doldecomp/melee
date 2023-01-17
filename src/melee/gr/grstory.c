@@ -165,7 +165,7 @@ typedef struct {
     s32 x14;
     u8 x18_fill[0xC4 - 0x18];
     s16 xC4;
-    struct _HSD_JObj* xC8;
+    HSD_JObj* xC8;
 } UnkUserData;
 
 void func_801E3370(HSD_GObj* gobj)
@@ -300,7 +300,7 @@ static bool func_801E36D0(bool arg0)
     return false;
 }
 
-bool func_801E36D8(Vec3* a, int unused, struct _HSD_JObj* joint)
+bool func_801E36D8(Vec3* a, int unused, HSD_JObj* joint)
 {
     Vec3 b;
     func_8000B1CC(joint, NULL, &b);

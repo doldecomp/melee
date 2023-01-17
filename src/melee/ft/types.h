@@ -1711,7 +1711,7 @@ struct Fighter {
     /* 0x2098 */ u16 x2098;
     /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
-    /* 0x20A0 */ struct _HSD_JObj* x20A0_accessory;
+    /* 0x20A0 */ HSD_JObj* x20A0_accessory;
     /* 0x20A4 */ s32 x20A4;
     /* 0x20A8 */ s32 x20A8;
     /* 0x20AC */ HSD_GObj* x20AC;

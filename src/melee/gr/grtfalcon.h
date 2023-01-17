@@ -23,6 +23,6 @@ static bool lbl_8021FF08(HSD_GObj*);
 static void lbl_8021FF10(HSD_GObj*);
 static void lbl_8021FF30(HSD_GObj*);
 static bool lbl_8021FF34(int);
-static bool lbl_8021FF3C(Vec3*, int, struct _HSD_JObj*);
+static bool lbl_8021FF3C(Vec3*, int, HSD_JObj*);
 
 #endif

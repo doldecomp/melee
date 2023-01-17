@@ -150,7 +150,7 @@ static bool lbl_8020E260(int n)
     return false;
 }
 
-static bool lbl_8020E268(Vec3* v, int n, struct _HSD_JObj* o)
+static bool lbl_8020E268(Vec3* v, int n, HSD_JObj* o)
 {
     return true;
 }

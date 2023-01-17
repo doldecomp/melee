@@ -42,20 +42,20 @@ typedef struct _unk_struct_pobj {
     HSD_AObj* aobj; // 0x20
 };
 
-typedef struct _HSD_PObj {
+struct HSD_PObj {
     HSD_Class parent;
-    struct _HSD_PObj* next;
+    HSD_PObj* next;
     struct _HSD_VtxDescList* verts;
     u16 flags;
     u16 n_display;
     u8* display; // u8 primitive, u8 vtxcnt, u16* indices
     union {
-        struct _HSD_JObj* jobj;
+        HSD_JObj* jobj;
         struct _HSD_ShapeSet* shape_set;
         struct _HSD_SList* envelope_list;
         struct _unk_struct_pobj* x14_unk;
     } u;
-} HSD_PObj;
+};
 
 typedef struct _HSD_PObjDesc {
     char* class_name;
@@ -83,7 +83,7 @@ typedef struct _HSD_VtxDescList {
 
 typedef struct _HSD_Envelope {
     struct _HSD_Envelope* next;
-    struct _HSD_JObj* jobj;
+    HSD_JObj* jobj;
     f32 weight;
 } HSD_Envelope;
 
@@ -148,7 +148,7 @@ u32 HSD_PObjGetFlags(HSD_PObj* pobj);
 void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags);
 void HSD_PObjReqAnimAllByFlags(HSD_PObj* pobj, f32 startframe, u32 flags);
 void HSD_ClearVtxDesc(void);
-struct _HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
+HSD_PObj* HSD_PObjLoadDesc(struct _HSD_PObjDesc*);
 
 void HSD_PObjClearMtxMark(void* obj, u32 mark);
 void HSD_PObjSetMtxMark(int idx, void* obj, u32 mark);

@@ -20,6 +20,11 @@ typedef struct HSD_PadData HSD_PadData;
 typedef struct HSD_PadStatus HSD_PadStatus;
 typedef struct PadLibData PadLibData;
 typedef struct RumbleInfo RumbleInfo;
+typedef struct HSD_TObj HSD_TObj;
+typedef struct HSD_RObj HSD_RObj;
+typedef struct HSD_PObj HSD_PObj;
+typedef struct HSD_MObj HSD_MObj;
+typedef struct HSD_JObj HSD_JObj;
 
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);
 typedef void (*HSD_DevComCallback)(int, int, int, bool cancelflag);
