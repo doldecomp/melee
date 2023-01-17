@@ -1,3 +1,4 @@
+#include "dolphin/gx/forward.h"
 #include <common_structs.h>
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
@@ -6,10 +7,31 @@
 Vec2 const lbl_804DE220 = { 256.0F, 0.0F };
 Vec2 const lbl_804DE228 = { 176.0F, 0.0F };
 
-/* GXRenderModeObj? */ u32 GXNtsc480IntDf[] = {
-    0x00000000, 0x028001E0, 0x01E00028, 0x00000280, 0x01E00000,
-    0x00000001, 0x00000606, 0x06060606, 0x06060606, 0x06060606,
-    0x06060606, 0x06060606, 0x06060808, 0x0A0C0A08, 0x08000000
+GXRenderModeObj GXNtsc480IntDf = {
+    0,
+    640,
+    480,
+    480,
+    40,
+    0,
+    640,
+    480,
+    1,
+    0,
+    0,
+    { { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 } },
+    { 8, 8, 10, 12, 10, 8, 8 },
 };
 
 /* GXRenderModeObj? */ u32 lbl_804011A4[] = {
@@ -55,20 +77,20 @@ void GXSetTexCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
     INSERT_FIELD(__GXContexts.main->x1D0[8], arg0, 10, 0);
     __GXContexts.main->x1D0[8] =
         (((u32) __GXContexts.main->x1D0[8] & 0xFFF003FF) |
-         ((u32) (arg1 << 0xA) & 0x03FFFC00));
-    INSERT_FIELD(__GXContexts.main->x1D0[8], 0x49, 8, 24);
+         ((u32) (arg1 << 10) & 0x03FFFC00));
+    INSERT_FIELD(__GXContexts.main->x1D0[8], 73, 8, 24);
     __GXContexts.main->x1D0[9] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[9], arg2 - 1, 10, 0);
     INSERT_FIELD(__GXContexts.main->x1D0[9], arg3 - 1, 10, 10);
-    INSERT_FIELD(__GXContexts.main->x1D0[9], 0x4A, 8, 24);
+    INSERT_FIELD(__GXContexts.main->x1D0[9], 74, 8, 24);
 }
 
 void GXSetDispCopyDst(s32 arg0)
 {
-    s32 val = (s32) ((u32) (arg0 << 1) & 0xFFFE) >> 5;
+    s32 val = (s32) ((u32) (arg0 << 1) & 65534) >> 5;
     __GXContexts.main->x1D0[6] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[6], val, 10, 0);
-    INSERT_FIELD(__GXContexts.main->x1D0[6], 0x4D, 8, 24);
+    INSERT_FIELD(__GXContexts.main->x1D0[6], 77, 8, 24);
 }
 
 extern unk_t __GetImageTileCount(void);
@@ -190,8 +212,8 @@ void GXSetTexCopyDst(void)
 
 void GXSetDispCopyFrame2Field(s32 arg0)
 {
-    INSERT_FIELD(__GXContexts.main->x1D0[0x7], arg0, 2, 12);
-    INSERT_FIELD(__GXContexts.main->x1D0[0xB], 0, 2, 12);
+    INSERT_FIELD(__GXContexts.main->x1D0[7], arg0, 2, 12);
+    INSERT_FIELD(__GXContexts.main->x1D0[11], 0, 2, 12);
 }
 
 #ifdef MWERKS_GEKKO
