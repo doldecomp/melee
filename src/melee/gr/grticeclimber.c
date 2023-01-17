@@ -145,3 +145,17 @@ void lbl_80221154(HSD_GObj* arg0)
 }
 
 void lbl_80221188(HSD_GObj* arg0) {}
+
+void lbl_8022118C(HSD_GObj* gobj)
+{
+    Map* map;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    map = (Map*) HSD_GObjGetUserData(gobj);
+    func_801C2ED0(gobj->hsd_obj, map->map_id);
+    func_801C8138(gobj, map->map_id, 0);
+}
