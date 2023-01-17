@@ -1,5 +1,13 @@
+#include <dolphin/dvd/dvdqueue.h>
+
 #include <dolphin/dvd/dvd.h>
+#include <dolphin/dvd/forward.h>
 #include <dolphin/os/OSInterrupt.h>
+
+typedef struct DVDNode {
+    /*0x00*/ DVDCommandBlock* next;
+    /*0x04*/ DVDCommandBlock* prev;
+} DVDNode;
 
 static DVDNode WaitingQueue[4];
 
@@ -10,15 +18,15 @@ void __DVDClearWaitingQueue(void)
     for (i = 0; i < 4; i++) {
         DVDNode* ptr = &WaitingQueue[i];
 
-        ptr->next = ptr;
-        ptr->prev = ptr;
+        ptr->next = (DVDCommandBlock*) ptr;
+        ptr->prev = (DVDCommandBlock*) ptr;
     }
 }
 
-int __DVDPushWaitingQueue(int a, DVDNode* b)
+int __DVDPushWaitingQueue(int a, DVDCommandBlock* b)
 {
     bool intrEnabled = OSDisableInterrupts();
-    DVDNode* r5 = &WaitingQueue[a];
+    DVDCommandBlock* r5 = (DVDCommandBlock*) &WaitingQueue[a];
 
     r5->prev->next = b;
     b->prev = r5->prev;
@@ -28,19 +36,19 @@ int __DVDPushWaitingQueue(int a, DVDNode* b)
     return 1;
 }
 
-DVDNode* __DVDPopWaitingQueue(void)
+DVDCommandBlock* __DVDPopWaitingQueue(void)
 {
     bool intrEnabled = OSDisableInterrupts();
     int i;
 
     for (i = 0; i < 4; i++) {
-        if (WaitingQueue[i].next != &WaitingQueue[i]) {
-            DVDNode* r5;
-            DVDNode* r31;
+        if (WaitingQueue[i].next != (DVDCommandBlock*) &WaitingQueue[i]) {
+            DVDCommandBlock* r5;
+            DVDCommandBlock* r31;
 
             OSRestoreInterrupts(intrEnabled);
             intrEnabled = OSDisableInterrupts();
-            r5 = &WaitingQueue[i];
+            r5 = (DVDCommandBlock*) &WaitingQueue[i];
             r31 = r5->next;
             r5->next = r31->next;
             r31->next->prev = r5;
@@ -60,7 +68,7 @@ bool __DVDCheckWaitingQueue(void)
     int i;
 
     for (i = 0; i < 4; i++) {
-        if (WaitingQueue[i].next != &WaitingQueue[i]) {
+        if (WaitingQueue[i].next != (DVDCommandBlock*) &WaitingQueue[i]) {
             OSRestoreInterrupts(intrEnabled);
             return true;
         }
@@ -69,11 +77,11 @@ bool __DVDCheckWaitingQueue(void)
     return false;
 }
 
-bool __DVDDequeueWaitingQueue(DVDNode* a)
+bool __DVDDequeueWaitingQueue(DVDCommandBlock* a)
 {
     bool intrEnabled = OSDisableInterrupts();
-    DVDNode* r4 = a->prev;
-    DVDNode* r5 = a->next;
+    DVDCommandBlock* r4 = a->prev;
+    DVDCommandBlock* r5 = a->next;
 
     if (r4 == NULL || r5 == NULL) {
         OSRestoreInterrupts(intrEnabled);
