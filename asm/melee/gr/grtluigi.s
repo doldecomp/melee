@@ -247,12 +247,12 @@ lbl_80221EEC:
 
 
 .section .data
-    .balign 8
-.global lbl_803E8E40
-lbl_803E8E40:
-    .4byte 0x2F477254
-    .4byte 0x4C672E64
-    .4byte 0x61740000
+    .balign 4
+# .global lbl_803E8E40
+# lbl_803E8E40:
+#     .4byte 0x2F477254
+#     .4byte 0x4C672E64
+#     .4byte 0x61740000
 .global lbl_803E8E4C
 lbl_803E8E4C:
     .4byte 0x00000033
