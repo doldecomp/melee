@@ -471,4 +471,8 @@ void ftFox_SpecialAirSEnd_Action(HSD_GObj* fighter_gobj);
 void ftFox_LoadSpecialAttrs(struct _HSD_GObj*);
 void ftFox_OnLoadForFalco(Fighter* fp);
 
+void ftFox_OnLoad(HSD_GObj* gobj);
+void ftFox_OnKnockbackEnter(HSD_GObj* gobj);
+void ftFox_OnKnockbackExit(HSD_GObj* fighter_gobj);
+
 #endif

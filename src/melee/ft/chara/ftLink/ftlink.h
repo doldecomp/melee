@@ -34,4 +34,16 @@ void ftLink_OnLoadForCLink(Fighter* fp);
 void ftLink_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 void func_800EAF58(HSD_GObj*);
 
+bool func_800EAD64(HSD_GObj* fighter_gobj);
+void ftLink_OnKnockbackEnter(HSD_GObj* fighter_gobj);
+void ftLink_OnKnockbackExit(HSD_GObj* fighter_gobj);
+void ftLink_800EB334(HSD_GObj* fighter_gobj);
+void ftLink_OnDeath(HSD_GObj* fighter_gobj);
+void ftLink_OnLoad(HSD_GObj* fighter_gobj);
+void func_800EAF38(void);
+void ftLink_OnItemPickupExt(HSD_GObj* fighter_gobj, int arg1);
+void ftLink_OnItemInvisible(HSD_GObj* fighter_gobj);
+void ftLink_OnItemVisible(HSD_GObj* fighter_gobj);
+void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, bool arg1);
+
 #endif
