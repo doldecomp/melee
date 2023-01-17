@@ -1420,8 +1420,6 @@ void CheckThreadQueue(void)
 
 extern char* lbl_80402420[];
 extern unk_t lbl_804D5C28;
-extern unk_t __OSCheckMutexes();
-extern unk_t __OSCheckDeadLock();
 
 #pragma push
 asm void OSCheckActiveThreads(void)

@@ -2,8 +2,6 @@
 
 #ifndef _OS_INTERRUPT_H_
 #define _OS_INTERRUPT_H_
-
-#include <dolphin/os/forward.h>
 #include <dolphin/os/OSContext.h>
 #include <Runtime/platform.h>
 
@@ -85,5 +83,8 @@ void __OSInterruptInit(void);
 
 u32 __OSMaskInterrupts(u32);
 u32 __OSUnmaskInterrupts(u32);
+
+u32 SetInterruptMask(OSInterruptMask mask, OSInterruptMask current);
+void __OSDispatchInterrupt(OSException exception, OSContext* context);
 
 #endif

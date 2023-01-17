@@ -76,4 +76,15 @@ void SIGetResponseRaw(void);
 void SITransfer(void);
 void GetTypeCallback(void);
 
+void SITransferCommands(void);
+s32 SISetXY(u32 arg0, u32 arg1);
+bool SIBusy(void);
+void SIInterruptHandler(void);
+bool SIIsChanBusy(enum_t status);
+void SIEnablePollingInterrupt(void);
+void SIRegisterPollingHandler(void);
+void SIUnregisterPollingHandler(void);
+void SIInit(void);
+void SIGetStatus(void);
+
 #endif

@@ -1,10 +1,10 @@
-// https://github.com/kiwi515/open_rvl/blob/605e2a99ad053441f0ebb9b322a18433f92025e2/include/OS/OSContext.h
-
 #ifndef DOLPHIN_OS_OSCONTEXT_H
 #define DOLPHIN_OS_OSCONTEXT_H
+
+#include <dolphin/os/forward.h>
 #include <Runtime/platform.h>
 
-typedef struct OSContext {
+struct OSContext {
     u32 gprs[32]; // at 0x0
     u32 cr;       // at 0x80
     u32 lr;       // at 0x84
@@ -18,7 +18,7 @@ typedef struct OSContext {
     u16 state;    // at 0x1A2
     u32 gqrs[8];  // at 0x1A4
     f64 psfs[32]; // at 0x1C8
-} OSContext;
+};
 
 extern OSContext* OS_CURRENT_CONTEXT AT_ADDRESS(0x800000D4);
 extern OSContext* OS_CURRENT_FPU_CONTEXT AT_ADDRESS(0x800000D8);
@@ -36,5 +36,9 @@ void OSInitContext(register OSContext* ctx, register u32 pc,
                    register u32 newsp);
 void OSDumpContext(const OSContext*);
 void __OSContextInit(void);
+
+void __OSLoadFPUContext(u32 unused, register OSContext* fpuctx);
+void OSLoadFPUContext(register OSContext* fpuctx);
+void OSSwitchFPUContext(OSException unused, register OSContext* ctx);
 
 #endif

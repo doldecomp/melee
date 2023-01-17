@@ -4,9 +4,11 @@
 #ifndef DOLPHIN_OS_OS_H
 #define DOLPHIN_OS_OS_H
 
-#include <dolphin/os/forward.h>
 #include <dolphin/os/OSContext.h>
 #include <Runtime/platform.h>
+
+typedef void (*__OSExceptionHandler)(OSException exception,
+                                     struct OSContext* context);
 
 extern vu32 __DIRegs[0x10] AT_ADDRESS(0xCC006000);
 
@@ -23,5 +25,8 @@ void __OSEVSetNumber(void);
 void __OSEVEnd(void);
 void OSExceptionVector(void);
 void OSDefaultExceptionHandler(void);
+
+void ClearArena(void);
+u32 __OSGetDIConfig(void);
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef DOLPHIN_OS_OSRTC
 #define DOLPHIN_OS_OSRTC
 
+#include <dolphin/os/forward.h>
 #include <Runtime/platform.h>
 
 typedef struct OSSram {
@@ -33,5 +34,12 @@ void __OSUnlockSramEx(bool commit);
 bool __OSSyncSram(void);
 u32 OSGetWirelessID(u32 chan);
 void OSSetWirelessID(u32 chan, u16 id);
+
+u32 OSGetSoundMode(void);
+void OSSetSoundMode(u32 mode);
+u32 OSGetProgressiveMode(void);
+void OSSetProgressiveMode(u32 mode);
+void WriteSramCallback(EXIChannel unused0, OSContext* unused1);
+void __OSInitSram(void);
 
 #endif // DOLPHIN_OS_OSRTC

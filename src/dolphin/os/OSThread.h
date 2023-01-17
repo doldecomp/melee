@@ -3,7 +3,6 @@
 #ifndef _OSTHREAD_H_
 #define _OSTHREAD_H_
 
-#include <dolphin/os/forward.h>
 #include <dolphin/os/OSContext.h>
 #include <Runtime/platform.h>
 
@@ -78,5 +77,11 @@ void OSWakeupThread(OSThreadQueue*);
 bool OSSetThreadPriority(OSThread*, s32);
 void OSClearStack(u8);
 void OSSleepTicks(s64);
+
+void CheckThreadQueue(void);
+void UnsetRun(OSThread* thread);
+void OSCheckActiveThreads(void);
+void SetEffectivePriority(void);
+void SelectThread(void);
 
 #endif
