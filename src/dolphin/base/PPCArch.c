@@ -2,8 +2,7 @@
 
 #ifdef MWERKS_GEKKO
 
-asm void PPCMfmsr(void)
-{ // clang-format off
+asm u32 PPCMfmsr(void){ // clang-format off
     nofralloc
     mfmsr r3
     blr
@@ -11,7 +10,7 @@ asm void PPCMfmsr(void)
 
 #else
 
-void PPCMfmsr(void)
+u32 PPCMfmsr(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -20,7 +19,7 @@ void PPCMfmsr(void)
 
 #ifdef MWERKS_GEKKO
 
-asm void PPCMtmsr(void)
+asm void PPCMtmsr(u32)
 { // clang-format off
     nofralloc
     mtmsr r3
@@ -29,7 +28,7 @@ asm void PPCMtmsr(void)
 
 #else
 
-void PPCMtmsr(void)
+void PPCMtmsr(u32)
 {
     NOT_IMPLEMENTED;
 }
@@ -38,7 +37,7 @@ void PPCMtmsr(void)
 
 #ifdef MWERKS_GEKKO
 
-asm void PPCMfhid0(void)
+asm void PPCMfhid0(u32)
 { // clang-format off
     nofralloc
     mfspr r3, 0x3f0
@@ -47,7 +46,7 @@ asm void PPCMfhid0(void)
 
 #else
 
-void PPCMfhid0(void)
+void PPCMfhid0(u32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -56,8 +55,7 @@ void PPCMfhid0(void)
 
 #ifdef MWERKS_GEKKO
 
-asm void PPCMfl2cr(void)
-{ // clang-format off
+asm u32 PPCMfl2cr(void){ // clang-format off
     nofralloc
     mfspr r3, 0x3f9
     blr
@@ -65,7 +63,7 @@ asm void PPCMfl2cr(void)
 
 #else
 
-void PPCMfl2cr(void)
+u32 PPCMfl2cr(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -74,7 +72,7 @@ void PPCMfl2cr(void)
 
 #ifdef MWERKS_GEKKO
 
-asm void PPCMtl2cr(void)
+asm void PPCMtl2cr(u32)
 { // clang-format off
     nofralloc
     mtspr 0x3f9, r3
@@ -83,7 +81,7 @@ asm void PPCMtl2cr(void)
 
 #else
 
-void PPCMtl2cr(void)
+void PPCMtl2cr(u32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -92,7 +90,7 @@ void PPCMtl2cr(void)
 
 #ifdef MWERKS_GEKKO
 
-asm void PPCMtdec(void)
+asm void PPCMtdec(u32)
 { // clang-format off
     nofralloc
     mtspr 0x16, r3
@@ -101,7 +99,7 @@ asm void PPCMtdec(void)
 
 #else
 
-void PPCMtdec(void)
+void PPCMtdec(u32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -150,8 +148,7 @@ void PPCHalt(void)
 
 #ifdef MWERKS_GEKKO
 
-asm void PPCMfhid2(void)
-{ // clang-format off
+asm u32 PPCMfhid2(void){ // clang-format off
     nofralloc
     mfspr r3, 0x398
     blr
@@ -159,7 +156,7 @@ asm void PPCMfhid2(void)
 
 #else
 
-void PPCMfhid2(void)
+u32 PPCMfhid2(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -168,7 +165,7 @@ void PPCMfhid2(void)
 
 #ifdef MWERKS_GEKKO
 
-asm void PPCMthid2(void)
+asm void PPCMthid2(u32)
 { // clang-format off
     nofralloc
     mtspr 0x398, r3
@@ -177,7 +174,7 @@ asm void PPCMthid2(void)
 
 #else
 
-void PPCMthid2(void)
+void PPCMthid2(u32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -186,7 +183,7 @@ void PPCMthid2(void)
 
 #ifdef MWERKS_GEKKO
 
-asm void PPCMtwpar(void)
+asm void PPCMtwpar(u32)
 { // clang-format off
     nofralloc
     mtspr 0x399, r3
@@ -195,7 +192,7 @@ asm void PPCMtwpar(void)
 
 #else
 
-void PPCMtwpar(void)
+void PPCMtwpar(u32 arg0)
 {
     NOT_IMPLEMENTED;
 }
