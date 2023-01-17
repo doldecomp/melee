@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTDONKEY_FTDONKEY_CALLBACKS_H
 
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 void ftDonkey_OnDeath(HSD_GObj* fighter_gobj);
 void ftDonkey_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
