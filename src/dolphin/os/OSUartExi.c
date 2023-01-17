@@ -1,3 +1,5 @@
+#include <dolphin/os/OSUartExi.h>
+
 #include <placeholder.h>
 #include <Runtime/platform.h>
 
