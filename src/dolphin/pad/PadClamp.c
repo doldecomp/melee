@@ -1,3 +1,5 @@
+#include <dolphin/pad/PadClamp.h>
+
 #include <dolphin/pad/Pad.h>
 #include <Runtime/platform.h>
 
