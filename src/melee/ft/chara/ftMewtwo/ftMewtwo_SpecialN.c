@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.h>
+#include <melee/ft/chara/ftMewtwo/ftMewtwo_SpecialN.h>
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>

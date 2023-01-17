@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftZelda/ftzelda.h>
+#include <melee/ft/chara/ftZelda/ftzelda4.h>
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/chara/ftSeak/ftseak.h>
+#include <melee/ft/chara/ftZelda/ftzelda.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
