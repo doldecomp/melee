@@ -6,6 +6,7 @@
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/gr/types.h>
+#include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -135,4 +136,10 @@ void lbl_802210D8(HSD_GObj* gobj)
 bool lbl_8022114C(HSD_GObj* arg0)
 {
     return false;
+}
+
+void lbl_80221154(HSD_GObj* arg0)
+{
+    func_800115F4();
+    func_801C2FE0(arg0);
 }
