@@ -1,6 +1,7 @@
 #include <melee/gr/grticeclimber.h>
 
 #include <melee/gr/types.h>
+#include <sysdolphin/baselib/gobjproc.h>
 
 /* static */ StageCallbacks lbl_803E8A98[4] = {
     {
@@ -25,3 +26,12 @@
         (1 << 30) | (1 << 31),
     },
 };
+
+StageData lbl_803E8AF4 = {
+    47,           lbl_803E8A98, "/GrTIc.dat", lbl_80220F14, func_80220F10,
+    lbl_80220F84, lbl_80220F88, lbl_80220FAC, lbl_80221354, lbl_8022135C,
+    (1 << 0),
+};
+
+char str0[] = "%s:%d: couldn t get gobj(id=%d)\n";
+char str1[] = "grticeclimber.c";

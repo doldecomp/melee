@@ -335,29 +335,6 @@ lbl_8022135C:
 
 .section .data
     .balign 4
-.global lbl_803E8AE8
-lbl_803E8AE8:
-    .asciz "/GrTIc.dat"
-    .balign 4
-.global lbl_803E8AF4
-lbl_803E8AF4:
-    .4byte 0x0000002F
-    .4byte lbl_803E8A98
-    .4byte lbl_803E8AE8
-    .4byte lbl_80220F14
-    .4byte func_80220F10
-    .4byte lbl_80220F84
-    .4byte lbl_80220F88
-    .4byte lbl_80220FAC
-    .4byte lbl_80221354
-    .4byte lbl_8022135C
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte NULL
-    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
-    .balign 4
-    .asciz "grticeclimber.c"
-    .balign 4
 .global lbl_803E8B5C
 lbl_803E8B5C:
     .4byte 0x00000001

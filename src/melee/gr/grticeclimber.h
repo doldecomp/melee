@@ -1,6 +1,7 @@
 #ifndef MELEE_GR_GRTICECLIMBER_H
 #define MELEE_GR_GRTICECLIMBER_H
 
+#include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -18,5 +19,14 @@ void lbl_802210D8(HSD_GObj*);
 bool lbl_8022114C(HSD_GObj*);
 void lbl_80221154(HSD_GObj*);
 void lbl_80221188(HSD_GObj*);
+
+void lbl_80220F14(void);
+void func_80220F10(int);
+void lbl_80220F84(void);
+void lbl_80220F88(void);
+bool lbl_80220FAC(void);
+
+bool lbl_80221354(int);
+bool lbl_8022135C(Vec3*, int, HSD_JObj*);
 
 #endif
