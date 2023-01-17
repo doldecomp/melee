@@ -20,8 +20,8 @@ void __DVDClearWaitingQueue(void)
     for (i = 0; i < 4; i++) {
         DVDCommandBlock* ptr = WAITING_BLOCK(i);
 
-        ptr->next = ptr;
-        ptr->prev = ptr;
+        ptr->next = (DVDCommandBlock*) ptr;
+        ptr->prev = (DVDCommandBlock*) ptr;
     }
 }
 
