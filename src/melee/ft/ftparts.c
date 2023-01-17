@@ -2540,7 +2540,7 @@ void func_80075304(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800753D4(struct _Fighter*, s32, unk_t)
+asm void func_800753D4(Fighter*, s32, unk_t)
 { // clang-format off
     nofralloc
 /* 800753D4 00071FB4  7C 08 02 A6 */	mflr r0

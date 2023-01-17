@@ -4,7 +4,7 @@
 #include <melee/ft/fighter.h>
 
 void func_80154C78(HSD_GObj*);
-void func_80154CF8(HSD_GObj*, struct _Fighter*);
+void func_80154CF8(HSD_GObj*, Fighter*);
 
 void func_80154CF8(HSD_GObj* gobj, Fighter* fp);
 void func_80154C78(HSD_GObj* arg0);

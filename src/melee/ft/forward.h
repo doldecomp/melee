@@ -4,5 +4,6 @@
 #include <Runtime/platform.h>
 
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
+typedef struct Fighter Fighter;
 
 #endif

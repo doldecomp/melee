@@ -9,7 +9,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/lb/lbunknown_003.h>
 #include <MSL/trigf.h>
-//
+
 // Create Aesthetic Wind Effect for Warlock Punch
 void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj)
 {

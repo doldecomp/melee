@@ -12,17 +12,17 @@ void func_800743E0(void);
 void func_800749CC(HSD_GObj*);
 void func_80074A4C(HSD_GObj*, u32, s32);
 void func_80074A8C(HSD_GObj*);
-void func_80074E58(struct _Fighter*);
+void func_80074E58(Fighter*);
 
 /// @returns A bone index.
-s32 func_8007500C(struct _Fighter*, s32);
+s32 func_8007500C(Fighter*, s32);
 
 void Fighter_JObjSetRotation(struct _HSD_JObj*, Quaternion*);
-void func_8007592C(struct _Fighter*, s32, f32);
-void func_80075AF0(struct _Fighter*, s32, f32);
-void func_80075CB4(struct _Fighter*, s32, f32);
-s32 func_8007500C(struct _Fighter*, s32);
-void func_800753D4(struct _Fighter*, s32, unk_t);
+void func_8007592C(Fighter*, s32, f32);
+void func_80075AF0(Fighter*, s32, f32);
+void func_80075CB4(Fighter*, s32, f32);
+s32 func_8007500C(Fighter*, s32);
+void func_800753D4(Fighter*, s32, unk_t);
 f32 func_80075F48(Fighter*, s32);
 s32 func_80074A74(HSD_GObj*, s32);
 void func_80075650(HSD_GObj* fighter_gobj, HSD_JObj*, u32*);

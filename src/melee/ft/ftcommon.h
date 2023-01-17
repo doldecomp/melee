@@ -2,11 +2,10 @@
 #define MELEE_FT_FTCOMMON_H
 
 #include <dolphin/mtx.h>
+#include <melee/ft/forward.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
-
-typedef struct _Fighter Fighter;
 
 void func_8007C930(Fighter*, f32);
 void func_8007C98C(Fighter*, f32 vel, f32, f32 gr_friction);
