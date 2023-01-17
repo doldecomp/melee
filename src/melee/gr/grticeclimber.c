@@ -1,8 +1,11 @@
 #include <melee/gr/grticeclimber.h>
 
+#include <dolphin/os/os.h>
+#include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/gr/types.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /* static */ StageCallbacks lbl_803E8A98[4] = {
@@ -64,4 +67,34 @@ void lbl_80220F88(void)
 bool lbl_80220FAC(void)
 {
     return false;
+}
+
+HSD_GObj* func_80220FB4(int idx)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* cb;
+
+    cb = &lbl_803E8A98[idx];
+    gobj = func_801C14D0(idx);
+
+    if (gobj != NULL) {
+        Map* map;
+        map = gobj->user_data;
+        map->x8_callback = 0;
+        map->xC_callback = 0;
+        GObj_SetupGXLink(gobj, func_801C5DB0, 3U, 0U);
+
+        if (cb->callback3 != NULL)
+            map->x1C_callback = cb->callback3;
+
+        if (cb->callback0 != NULL)
+            cb->callback0(gobj);
+
+        if (cb->callback2 != NULL)
+            func_8038FD54(gobj, cb->callback2, 4);
+    } else {
+        OSReport(str0, str1, 0xCA, idx);
+    }
+
+    return gobj;
 }
