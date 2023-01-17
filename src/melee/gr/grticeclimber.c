@@ -1,11 +1,12 @@
-#include "sysdolphin/baselib/gobj.h"
 #include <melee/gr/grticeclimber.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/gr/types.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
@@ -95,4 +96,10 @@ HSD_GObj* func_80220FB4(int id)
     }
 
     return gobj;
+}
+
+void lbl_8022109C(HSD_GObj* gobj)
+{
+    Map* map = (Map*) HSD_GObjGetUserData(gobj);
+    func_801C8138(gobj, map->map_id, 0);
 }
