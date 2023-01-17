@@ -1,5 +1,6 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey1.h>
 
+#include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey4.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey6.h>
 #include <melee/ft/code_80081B38.h>

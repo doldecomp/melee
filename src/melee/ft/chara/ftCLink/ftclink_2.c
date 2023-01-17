@@ -1,5 +1,6 @@
-#include <melee/ft/chara/ftCLink/ftclink.h>
+#include <melee/ft/chara/ftCLink/ftclink_2.h>
 
+#include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/chara/ftLink/ftlink.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
