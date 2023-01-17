@@ -1,6 +1,7 @@
 #ifndef DOLPHIN_CARD_H
 #define DOLPHIN_CARD_H
 
+#include <dolphin/card/forward.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSAlarm.h>
@@ -82,8 +83,6 @@
 #define CARD_ATTR_NO_MOVE 0x10
 #define CARD_ATTR_GLOBAL 0x20
 #define CARD_ATTR_COMPANY 0x40
-
-typedef void (*CARDCallback)(EXIChannel chan, s32 result);
 
 typedef struct CARDFileInfo {
     s32 chan;
