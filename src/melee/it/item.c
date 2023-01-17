@@ -1008,12 +1008,10 @@ void func_80268B9C(SpawnItem* spawnItem)
     func_8026862C(spawnItem);
 }
 
-extern void HSD_JObjAddAnim(void*, void*, void*, void*);
-
 /// @private
 void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
-                   HSD_MatAnimJoint* matanim_joint, ItemState_ParamStruct* arg3,
-                   Item* item_data)
+                   HSD_MatAnimJoint* matanim_joint,
+                   HSD_ShapeAnimJoint* shapeanim_joint, Item* item_data)
 {
     void* functionArg1;
     void* functionArg2;
@@ -1037,8 +1035,8 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
                         if (matanim_joint != NULL) {
                             functionArg2 = matanim_joint->next;
                         }
-                        if (arg3 != NULL) {
-                            functionArg3 = arg3->x4_unk;
+                        if (shapeanim_joint != NULL) {
+                            functionArg3 = shapeanim_joint->next;
                         }
                         func_80268BE0(item_jobj->next, functionArg1,
                                       functionArg2, functionArg3, item_data);
@@ -1046,7 +1044,7 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
                     return;
                 }
         }
-        HSD_JObjAddAnim(item_jobj, anim_joint, matanim_joint, arg3);
+        HSD_JObjAddAnim(item_jobj, anim_joint, matanim_joint, shapeanim_joint);
         if (item_jobj->child != NULL) {
             functionArg1 = NULL;
             functionArg2 = NULL;
@@ -1057,8 +1055,8 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
             if (matanim_joint != NULL) {
                 functionArg2 = matanim_joint->child;
             }
-            if (arg3 != NULL) {
-                functionArg3 = arg3->x0_unk;
+            if (shapeanim_joint != NULL) {
+                functionArg3 = shapeanim_joint->child;
             }
             func_80268BE0(item_jobj->child, functionArg1, functionArg2,
                           functionArg3, item_data);
@@ -1073,8 +1071,8 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
             if (matanim_joint != NULL) {
                 functionArg2 = matanim_joint->next;
             }
-            if (arg3 != NULL) {
-                functionArg3 = arg3->x4_unk;
+            if (shapeanim_joint != NULL) {
+                functionArg3 = shapeanim_joint->next;
             }
             func_80268BE0(item_jobj->next, functionArg1, functionArg2,
                           functionArg3, item_data);

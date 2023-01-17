@@ -179,8 +179,8 @@ HSD_GObj* func_8026862C(SpawnItem* spawnItem);
 
 /// Adds #HSD_AObj instances to item model
 void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
-                   HSD_MatAnimJoint* matanim_joint, ItemState_ParamStruct* arg3,
-                   Item* item_data);
+                   HSD_MatAnimJoint* matanim_joint,
+                   HSD_ShapeAnimJoint* shapeanim_joint, Item* item_data);
 
 /// Item Think - Exit Hitlag Check
 void func_8026A0A0(HSD_GObj* item_gobj);

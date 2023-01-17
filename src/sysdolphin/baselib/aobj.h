@@ -99,8 +99,8 @@ void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg);
 void DObjForeachAnim(HSD_DObj* dobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg);
-asm void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, void (*func)(),
-                         AObj_Arg_Type arg_type, callbackArg* arg);
+void JObjForeachAnim(HSD_JObj* jobj, HSD_TypeMask mask, Event func,
+                     AObj_Arg_Type arg_type, callbackArg* arg);
 
 static inline f32 HSD_AObjGetEndFrame(HSD_AObj* aobj)
 {

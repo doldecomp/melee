@@ -64,5 +64,6 @@ void HSD_DObjDisp(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 
 void HSD_DObjRemove(HSD_DObj* dobj);
 void HSD_DObjSetDefaultClass(HSD_ClassInfo* info);
+void forceStringAllocation(HSD_DObj* dobj, HSD_MObj* mobj);
 
 #endif

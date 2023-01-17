@@ -409,4 +409,9 @@ void HSD_JObjAnim(HSD_JObj* jobj);
 void JObjAnimAll(HSD_JObj* jobj);
 s32 JObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent);
 
+void HSD_JObjAddAnim(HSD_JObj*, HSD_AnimJoint* an_joint,
+                     HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint);
+void HSD_JObjWalkTree0(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
+                       f32** cb_args);
+
 #endif
