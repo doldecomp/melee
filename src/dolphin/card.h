@@ -84,7 +84,7 @@
 #define CARD_ATTR_GLOBAL 0x20
 #define CARD_ATTR_COMPANY 0x40
 
-typedef struct CARDFileInfo {
+struct CARDFileInfo {
     s32 chan;
     s32 fileNo;
 
@@ -92,7 +92,7 @@ typedef struct CARDFileInfo {
     s32 length;
     u16 iBlock;
     u16 __padding;
-} CARDFileInfo;
+};
 
 typedef struct CARDDir {
     u8 gameName[4];
