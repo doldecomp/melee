@@ -30,10 +30,10 @@ OSContext lbl_804C2608;
 #pragma push
 #pragma force_active on
 extern char lbl_804C28D0[0x10];
-
-char lbl_804C28D0[0x10]; // unk space. what is this?
 #pragma pop
 #endif
+
+char lbl_804C28D0[0x10]; // unk space. what is this?
 
 static char lbl_804D6010[1] = "";
 
