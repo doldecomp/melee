@@ -1,11 +1,12 @@
-#include <melee/ft/fighter.h>
+#include <melee/ft/ftcamera.h>
 
+#include <melee/ft/fighter.h>
 #include <melee/ft/ftlib.h>
 
-typedef struct UnkFloat6_Camera {
+struct UnkFloat6_Camera {
     Vec3 x0;
     Vec3 xC;
-} UnkFloat6_Camera;
+};
 
 void func_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, f32 mul)
 {
