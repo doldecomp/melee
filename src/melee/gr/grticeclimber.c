@@ -157,3 +157,8 @@ void lbl_8022118C(HSD_GObj* gobj)
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
+
+bool lbl_802211DC(HSD_GObj* arg0)
+{
+    return false;
+}
