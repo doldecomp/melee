@@ -222,4 +222,17 @@ void func_802F7220(void);
 
 extern HudIndex lbl_804A10C8; // global array of HUD info
 
+void func_802F5B48(void);
+void lbl_802F5DE0(HSD_GObj* player, s32 arg1);
+void lbl_802F5E50(void);
+void func_802F5EC0(void);
+void func_802F61FC(void);
+void func_802F66A4(void);
+void func_802F4B84(void);
+void func_802F6EA4(void);
+void func_802F7034(void);
+void func_802F7134(void);
+void func_802F4EDC(void);
+void func_802F491C(void);
+
 #endif
