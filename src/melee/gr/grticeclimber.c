@@ -38,9 +38,6 @@ StageData lbl_803E8AF4 = {
     (1 << 0),
 };
 
-char str0[] = "%s:%d: couldn t get gobj(id=%d)\n";
-char str1[] = "grticeclimber.c";
-
 void func_80220F10(bool arg0) {}
 
 void lbl_80220F14(void)
@@ -69,13 +66,13 @@ bool lbl_80220FAC(void)
     return false;
 }
 
-HSD_GObj* func_80220FB4(int idx)
+HSD_GObj* func_80220FB4(int id)
 {
     HSD_GObj* gobj;
     StageCallbacks* cb;
 
-    cb = &lbl_803E8A98[idx];
-    gobj = func_801C14D0(idx);
+    cb = &lbl_803E8A98[id];
+    gobj = func_801C14D0(id);
 
     if (gobj != NULL) {
         Map* map;
@@ -93,7 +90,8 @@ HSD_GObj* func_80220FB4(int idx)
         if (cb->callback2 != NULL)
             func_8038FD54(gobj, cb->callback2, 4);
     } else {
-        OSReport(str0, str1, 0xCA, idx);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grticeclimber.c", 202,
+                 id);
     }
 
     return gobj;
