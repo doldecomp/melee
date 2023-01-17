@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_7_H
 
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 void lbl_80151B50(HSD_GObj* arg0);
 void lbl_80151B70(HSD_GObj* gobj);

@@ -17,5 +17,6 @@ void lbl_801518B0(HSD_GObj* gobj);
 void lbl_801518F4(HSD_GObj* arg0);
 void lbl_80151914(void);
 void lbl_8015198C(HSD_GObj* gobj);
+void lbl_80151824(void);
 
 #endif
