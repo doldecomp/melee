@@ -11,12 +11,17 @@ typedef struct DVDNode {
 
 static DVDNode WaitingQueue[4];
 
+static inline DVDCommandBlock* getWaitingBlock(int i)
+{
+    return (DVDCommandBlock*) &WaitingQueue[i];
+}
+
 void __DVDClearWaitingQueue(void)
 {
     int i;
 
     for (i = 0; i < 4; i++) {
-        DVDNode* ptr = &WaitingQueue[i];
+        DVDCommandBlock* ptr = (DVDCommandBlock*) &WaitingQueue[i];
 
         ptr->next = (DVDCommandBlock*) ptr;
         ptr->prev = (DVDCommandBlock*) ptr;
