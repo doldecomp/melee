@@ -40,5 +40,6 @@ void __OSContextInit(void);
 void __OSLoadFPUContext(u32 unused, register OSContext* fpuctx);
 void OSLoadFPUContext(register OSContext* fpuctx);
 void OSSwitchFPUContext(OSException unused, register OSContext* ctx);
+void __OSSaveFPUContext(u32 unused1, u32 unused2, OSContext* fpuctx);
 
 #endif

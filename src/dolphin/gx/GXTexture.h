@@ -24,5 +24,6 @@ void GXInitTlutObj(unk_t, u32, s32, u16);
 void GXLoadTlut(unk_t, s32);
 void __GXSetTmemConfig(s32);
 GXTexRegionCallback GXSetTexRegionCallback(GXTexRegionCallback arg0);
+void GXInitTexCacheRegion(unk_t, s8, u32, s32, u32, s32, s32);
 
 #endif
