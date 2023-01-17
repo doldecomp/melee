@@ -63,7 +63,7 @@ GXRenderModeObj lbl_804011A4 = {
       { 6, 6 },
       { 6, 6 },
       { 6, 6 } },
-    { 0, 0, 0x15, 0x16, 0x15, 0, 0 },
+    { 0, 0, 21, 22, 21, 0, 0 },
 };
 
 GXRenderModeObj lbl_804011E0 = {
@@ -90,7 +90,7 @@ GXRenderModeObj lbl_804011E0 = {
       { 6, 6 },
       { 6, 6 },
       { 6, 6 } },
-    { 0, 0, 0x15, 0x16, 0x15, 0, 0 },
+    { 0, 0, 21, 22, 21, 0, 0 },
 };
 
 GXRenderModeObj GXMpal480IntDf = {
@@ -123,12 +123,12 @@ GXRenderModeObj GXMpal480IntDf = {
 GXRenderModeObj GXPal528IntDf = {
     4,
     640,
-    0x210,
-    0x210,
+    528,
+    528,
     40,
-    0x17,
+    23,
     640,
-    0x210,
+    528,
     1,
     0,
     0,
