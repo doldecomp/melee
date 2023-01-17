@@ -69,20 +69,20 @@ struct HSD_MObj {
     HSD_Class parent;
     u32 rendermode;
     HSD_TObj* tobj;
-    struct _HSD_Material* mat;
+    HSD_Material* mat;
     struct _HSD_PEDesc* pe;
     HSD_AObj* aobj;
     struct _HSD_TExpTevDesc* tevdesc;
     union _HSD_TExp* texp;
 };
 
-typedef struct _HSD_Material {
+struct HSD_Material {
     GXColor ambient;
     GXColor diffuse;
     GXColor specular;
     f32 alpha;
     f32 shininess;
-} HSD_Material;
+};
 
 typedef struct _HSD_PEDesc {
     u8 flags;
@@ -103,7 +103,7 @@ typedef struct _HSD_MObjDesc {
     char* class_name;
     u32 rendermode;
     struct _HSD_TObjDesc* texdesc;
-    struct _HSD_Material* mat;
+    HSD_Material* mat;
     void* renderdesc;
     struct _HSD_PEDesc* pedesc;
 } HSD_MObjDesc;

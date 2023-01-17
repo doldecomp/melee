@@ -25,8 +25,8 @@ typedef struct HSD_RObj HSD_RObj;
 typedef struct HSD_PObj HSD_PObj;
 typedef struct HSD_MObj HSD_MObj;
 typedef struct HSD_JObj HSD_JObj;
+typedef struct HSD_Material HSD_Material;
 
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);
 typedef void (*HSD_DevComCallback)(int, int, int, bool cancelflag);
-
 #endif
