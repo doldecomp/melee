@@ -131,3 +131,8 @@ void lbl_802210D8(HSD_GObj* gobj)
     func_801C7FF8(gobj, 0x45, 2, 1, lbl_804DBCB8, lbl_804DBCBC);
     func_80221288(gobj);
 }
+
+bool lbl_8022114C(HSD_GObj* arg0)
+{
+    return false;
+}
