@@ -159,3 +159,8 @@ bool lbl_80221EB8(HSD_GObj* arg0)
 {
     return false;
 }
+
+void lbl_80221EC0(HSD_GObj* gobj)
+{
+    func_801C2FE0(gobj);
+}
