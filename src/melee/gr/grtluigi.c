@@ -32,9 +32,28 @@
     },
 };
 
-char lbl_803E8E40[] = "/GrTLg.dat";
+StageData lbl_803E8E4C = {
+    51,
+    lbl_803E8DF0,
+    "/GrTLg.dat",
+    lbl_80221C14,
+    func_80221C10,
+    lbl_80221C84,
+    lbl_80221C88,
+    lbl_80221CAC,
+    lbl_80221EE4,
+    lbl_80221EEC,
+    1,
+};
 
-void func_80221C10(void)
+#ifdef MUST_MATCH
+#pragma push
+#pragma force_active on
+char str0[] = "%s:%d: couldn t get gobj(id=%d)\n";
+char str1[] = "grtluigi.c";
+#endif
+
+void func_80221C10(int arg0)
 {
     return;
 }

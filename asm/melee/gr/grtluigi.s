@@ -246,37 +246,3 @@ lbl_80221EEC:
 /* 80221EF0 0021EAD0  4E 80 00 20 */	blr
 
 
-.section .data
-    .balign 4
-# .global lbl_803E8E40
-# lbl_803E8E40:
-#     .4byte 0x2F477254
-#     .4byte 0x4C672E64
-#     .4byte 0x61740000
-.global lbl_803E8E4C
-lbl_803E8E4C:
-    .4byte 0x00000033
-    .4byte lbl_803E8DF0
-    .4byte lbl_803E8E40
-    .4byte lbl_80221C14
-    .4byte func_80221C10
-    .4byte lbl_80221C84
-    .4byte lbl_80221C88
-    .4byte lbl_80221CAC
-    .4byte lbl_80221EE4
-    .4byte lbl_80221EEC
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x6772746C
-    .4byte 0x75696769
-    .4byte 0x2E630000
