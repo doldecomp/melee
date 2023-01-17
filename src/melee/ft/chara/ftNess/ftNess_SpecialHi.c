@@ -217,8 +217,8 @@ bool ftNess_CheckSpecialHiHold(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    return fp->x10_action_state_index == 0x167 ||
-                   fp->x10_action_state_index == 0x16B
+    return fp->x10_action_state_index == AS_NESS_SPECIALHI_HOLD ||
+                   fp->x10_action_state_index == AS_NESS_SPECIALAIRHI_HOLD
                ? true
                : false;
 }
