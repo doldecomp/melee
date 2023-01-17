@@ -1,6 +1,7 @@
 #include <melee/gr/grtluigi.h>
 
 #include <dolphin/os/os.h>
+#include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
@@ -105,4 +106,10 @@ HSD_GObj* func_80221CB4(int arg0)
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtluigi.c", 0xC3, arg0);
     }
     return gobj;
+}
+
+void lbl_80221D9C(HSD_GObj* gobj)
+{
+    Map* map = gobj->user_data;
+    func_801C8138(gobj, map->map_id, 0);
 }
