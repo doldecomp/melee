@@ -3,4 +3,6 @@
 
 #include <Runtime/platform.h>
 
+typedef struct grDynamicAttr_UnkStruct grDynamicAttr_UnkStruct;
+
 #endif
