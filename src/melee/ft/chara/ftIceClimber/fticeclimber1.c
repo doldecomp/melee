@@ -2,6 +2,7 @@
 
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
 #include <melee/it/code_8027CF30.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -155,4 +156,10 @@ void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &lbl_8011F500;
+}
+
+void lbl_8011F318(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj))
+        func_8008A2BC(gobj);
 }
