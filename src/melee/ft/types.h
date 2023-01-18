@@ -1486,7 +1486,7 @@ struct Fighter {
     /* 0x119D */ u8 x119D;
     /* 0x119E */ u8 x119E_hurtboxNum;
     /* 0x119F */ u8 x119F;
-    /* 0x11A0 */ ftHurt x11A0_fighterHurtbox[15];
+    /* 0x11A0 */ Hurtbox x11A0_fighterHurtbox[15];
     /* 0x1614 */ unk_t x1614;
     /* 0x1618 */ u8 filler_x1618[0x166C - 0x1618];
     /* 0x166C */ u32 x166C;

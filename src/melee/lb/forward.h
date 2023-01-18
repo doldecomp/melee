@@ -1,6 +1,9 @@
 #ifndef MELEE_LB_FORWARD_H
 #define MELEE_LB_FORWARD_H
 
+typedef struct Hurtbox Hurtbox;
+typedef struct Hitbox Hitbox;
+
 typedef enum Tangibility {
     Vulnerable,
     Invincible,
@@ -37,4 +40,5 @@ typedef enum HitElement {
     ///  ReDead grab attacks
     HitElement_Leadead,
 } HitElement;
+
 #endif
