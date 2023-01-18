@@ -39,5 +39,6 @@ void ftPurin_OnUserDataRemove(HSD_GObj* fighter_gobj);
 void func_8013C360(HSD_GObj* fighter_gobj);
 void func_8013C4F0(HSD_GObj* fighter_gobj, s32 arg1, Mtx vmtx);
 void lbl_8013C94C(void);
+void ftPurin_SpecialHi_StartAction(HSD_GObj*);
 
 #endif
