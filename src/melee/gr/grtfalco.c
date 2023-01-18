@@ -1,6 +1,7 @@
 #include <melee/gr/grtfalco.h>
 
 #include <melee/gr/ground.h>
+#include <melee/gr/grzakogenerator.h>
 
 /* static */ StageCallbacks lbl_803E8918[4] = {
     {
@@ -62,3 +63,8 @@ void lbl_802207F4(void)
 }
 
 void lbl_8022086C(void) {}
+
+void lbl_80220870(void)
+{
+    func_801CAE04(0);
+}
