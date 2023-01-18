@@ -10,7 +10,7 @@ char* strchr(const char*, int);
 int strncmp(const char*, const char*, unsigned long);
 int strcmp(const char*, const char*);
 char* strncpy(char* __restrict, const char* __restrict, unsigned long);
-char* strcpy(char* __restrict, const char* __restrict);
-unsigned long strlen(const char*);
+char* strcpy(char* __restrict dst, const char* __restrict src);
+size_t strlen(const char* s);
 
 #endif
