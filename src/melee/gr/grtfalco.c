@@ -1,7 +1,10 @@
 #include <melee/gr/grtfalco.h>
 
+#include <dolphin/os/os.h>
+#include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 
 /* static */ StageCallbacks lbl_803E8918[4] = {
     {
@@ -72,4 +75,32 @@ void lbl_80220870(void)
 bool lbl_80220894(void)
 {
     return false;
+}
+
+HSD_GObj* func_8022089C(int arg0)
+{
+    HSD_GObj* gobj;
+
+    StageCallbacks* cb = &lbl_803E8918[arg0];
+    gobj = func_801C14D0(arg0);
+    if (gobj != NULL) {
+        Map* map = gobj->user_data;
+        map->x8_callback = 0;
+        map->xC_callback = 0;
+        GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
+
+        if (cb->callback3 != NULL)
+            map->x1C_callback = cb->callback3;
+
+        if (cb->callback0 != NULL)
+            cb->callback0(gobj);
+
+        if (cb->callback2 != NULL)
+            func_8038FD54(gobj, cb->callback2, 4);
+
+    } else {
+        OSReport(str0, str1, 201, arg0);
+    }
+
+    return gobj;
 }
