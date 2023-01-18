@@ -147,16 +147,13 @@ void lbl_80221E64(HSD_GObj* arg0) {}
 inline void something(HSD_GObj* gobj)
 {
     Map* map = (Map*) HSD_GObjGetUserData(gobj);
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
+    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
+    func_801C2ED0(jobj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
 
 void lbl_80221E68(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 unused[4];
-#endif
     something(gobj);
 }
 
