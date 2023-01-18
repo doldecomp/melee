@@ -125,7 +125,7 @@ ifeq ($(MAX_ERRORS),0)
 endif
 
 ifeq ($(WARN_ERROR),1)
-	CLAGS += -warn iserror
+	CFLAGS += -warn iserror
 endif
 
 $(BUILD_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)
