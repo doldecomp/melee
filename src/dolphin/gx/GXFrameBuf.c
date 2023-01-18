@@ -36,11 +36,6 @@ GXRenderModeObj GXNtsc480IntDf = {
     { 8, 8, 10, 12, 10, 8, 8 },
 };
 
-// u8 field_rendering;
-// u8 aa;
-// u8 sample_pattern[12][2];
-// u8 vfilter[7];
-
 GXRenderModeObj lbl_804011A4 = {
     0,
     640,
