@@ -10,8 +10,12 @@ typedef struct _Hitbox {
     s32 x4;
     s32 x8;
     f32 xC;
-    /// @remarks @c f32 needed for 'manual' mods to hitbox damage.
-    u8 x10[0x134 - 0x10];
+    u8 x10[0x30 - 0x10];
+
+    /// @at{30} @sz{4}
+    HitElement element;
+
+    u8 x34[0x134 - 0x34];
     s32 x134;
 } Hitbox;
 
