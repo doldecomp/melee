@@ -44,9 +44,6 @@ StageData lbl_803E8974 = {
     1,
 };
 
-char str0[] = "%s:%d: couldn t get gobj(id=%d)\n";
-char str1[] = "grtfalco.c";
-
 unk_t lbl_804D6AF8;
 
 void func_802207F0(int arg0) {}
@@ -77,16 +74,16 @@ bool lbl_80220894(void)
     return false;
 }
 
-HSD_GObj* func_8022089C(int arg0)
+HSD_GObj* func_8022089C(int id)
 {
     HSD_GObj* gobj;
 
-    StageCallbacks* cb = &lbl_803E8918[arg0];
-    gobj = func_801C14D0(arg0);
+    StageCallbacks* cb = &lbl_803E8918[id];
+    gobj = func_801C14D0(id);
     if (gobj != NULL) {
         Map* map = gobj->user_data;
-        map->x8_callback = 0;
-        map->xC_callback = 0;
+        map->x8_callback = NULL;
+        map->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
 
         if (cb->callback3 != NULL)
@@ -99,7 +96,7 @@ HSD_GObj* func_8022089C(int arg0)
             func_8038FD54(gobj, cb->callback2, 4);
 
     } else {
-        OSReport(str0, str1, 201, arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtfalco.c", 201, id);
     }
 
     return gobj;
