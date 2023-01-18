@@ -451,3 +451,7 @@ lbl_8013CC4C:
 } // clang-format on
 #pragma pop
 #endif
+
+void lbl_8013CC60(HSD_GObj* arg0) {}
+
+void lbl_8013CC64(HSD_GObj* arg0) {}
