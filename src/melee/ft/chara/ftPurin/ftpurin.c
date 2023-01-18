@@ -490,3 +490,28 @@ asm void lbl_8013CC88(HSD_GObj*)
 } // clang-format on
 #pragma pop
 #endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void lbl_8013CCA8(HSD_GObj*)
+{ // clang-format off
+    nofralloc
+/* 8013CCA8 00139888  7C 08 02 A6 */	mflr r0
+/* 8013CCAC 0013988C  90 01 00 04 */	stw r0, 4(r1)
+/* 8013CCB0 00139890  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 8013CCB4 00139894  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 8013CCB8 00139898  7C 7F 1B 78 */	mr r31, r3
+/* 8013CCBC 0013989C  4B F4 5A E5 */	bl func_800827A0
+/* 8013CCC0 001398A0  2C 03 00 00 */	cmpwi r3, 0
+/* 8013CCC4 001398A4  40 82 00 0C */	bne lbl_8013CCD0
+/* 8013CCC8 001398A8  7F E3 FB 78 */	mr r3, r31
+/* 8013CCCC 001398AC  48 00 00 69 */	bl func_8013CD34
+lbl_8013CCD0:
+/* 8013CCD0 001398B0  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8013CCD4 001398B4  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 8013CCD8 001398B8  38 21 00 18 */	addi r1, r1, 0x18
+/* 8013CCDC 001398BC  7C 08 03 A6 */	mtlr r0
+/* 8013CCE0 001398C0  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
