@@ -27,8 +27,12 @@ typedef struct HSD_MObj HSD_MObj;
 typedef struct HSD_JObj HSD_JObj;
 typedef struct HSD_Material HSD_Material;
 typedef struct HSD_PEDesc HSD_PEDesc;
+typedef struct HSD_GObjProc HSD_GObjProc;
 
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);
 typedef void (*HSD_DevComCallback)(int, int, int, bool cancelflag);
+typedef void (*HSD_GObjEvent)(HSD_GObj* gobj);
+typedef bool (*HSD_GObjPredicate)(HSD_GObj* gobj);
+typedef void (*HSD_GObjInteraction)(HSD_GObj* gobj0, HSD_GObj* gobj1);
 
 #endif

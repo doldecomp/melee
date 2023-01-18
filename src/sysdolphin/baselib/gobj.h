@@ -27,7 +27,7 @@ struct HSD_GObj {
     /* 0x0C */ HSD_GObj* prev;
     /* 0x10 */ HSD_GObj* next_gx;
     /* 0x14 */ HSD_GObj* prev_gx;
-    /* 0x18 */ struct _HSD_GObjProc* proc;
+    /* 0x18 */ HSD_GObjProc* proc;
     /* 0x1C */ void (*render_cb)(HSD_GObj* gobj, s32 code);
     /* 0x20 */ u64 gxlink_prios;
     /* 0x28 */ void* hsd_obj;
@@ -35,18 +35,6 @@ struct HSD_GObj {
     /* 0x30 */ void (*user_data_remove_func)(void* data);
     /* 0x34 */ void* x34_unk;
 };
-
-typedef struct _HSD_GObjProc {
-    /* 0x00 */ struct _HSD_GObjProc* child;
-    /* 0x04 */ struct _HSD_GObjProc* next;
-    /* 0x08 */ struct _HSD_GObjProc* prev;
-    /* 0x0C */ u8 s_link;
-    /* 0x0D */ u8 flags_1 : 1;
-    /* 0x0D */ u8 flags_2 : 1;
-    /* 0x0D */ u8 flags_3 : 2;
-    /* 0x10 */ HSD_GObj* gobj;              // owner
-    /* 0x14 */ void (*callback)(HSD_GObj*); // on_invoke
-} HSD_GObjProc;
 
 typedef struct _HSD_GObjLibInitDataType {
     u8 p_link_max;                  // 804CE380
