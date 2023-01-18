@@ -1,3 +1,5 @@
+#include <dolphin/card/CARDStat.h>
+
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDDir.h>
@@ -17,7 +19,7 @@
          (u16) (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |   \
                 ((f) << (2 * (n)))))
 
-typedef struct CARDStat {
+struct CARDStat {
     char fileName[CARD_FILENAME_MAX];
     u32 length;
     u32 time; // seconds since 01/01/2000 midnight
@@ -36,7 +38,7 @@ typedef struct CARDStat {
     u32 offsetIcon[CARD_ICON_MAX];
     u32 offsetIconTlut;
     u32 offsetData;
-} CARDStat;
+};
 
 static void UpdateIconOffsets(CARDDir* ent, CARDStat* stat)
 {

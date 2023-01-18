@@ -1,3 +1,5 @@
+#include <dolphin/os/OSReboot.h>
+
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSInterrupt.h>

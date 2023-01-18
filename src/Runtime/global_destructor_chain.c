@@ -1,3 +1,5 @@
+#include <Runtime/global_destructor_chain.h>
+
 typedef void (*Destructor)(void*, int);
 typedef struct DestructorChain {
     struct DestructorChain* next;

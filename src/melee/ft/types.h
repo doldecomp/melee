@@ -1294,7 +1294,7 @@ struct SpecialAttrs_Sandbag {
     char filler0[0x100];
 };
 
-typedef struct _Fighter {
+struct Fighter {
     /* 0x0 */ HSD_GObj* x0_fighter;
     /* 0x4 */ FighterKind x4_fighterKind;
     /* 0x8 */ s32 x8_spawnNum;
@@ -1711,7 +1711,7 @@ typedef struct _Fighter {
     /* 0x2098 */ u16 x2098;
     /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
-    /* 0x20A0 */ struct _HSD_JObj* x20A0_accessory;
+    /* 0x20A0 */ HSD_JObj* x20A0_accessory;
     /* 0x20A4 */ s32 x20A4;
     /* 0x20A8 */ s32 x20A8;
     /* 0x20AC */ HSD_GObj* x20AC;
@@ -2040,6 +2040,6 @@ typedef struct _Fighter {
     /* 0x23B4 */ s32 x23B4;
     /* 0x23B8 */ s32 x23B8;
     u8 filler_x23B8[0x23E8 - 0x23B8];
-} Fighter;
+};
 
 #endif

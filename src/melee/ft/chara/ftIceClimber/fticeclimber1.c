@@ -1,5 +1,6 @@
-#include <melee/ft/chara/ftIceClimber/fticeclimber.h>
+#include <melee/ft/chara/ftIceClimber/fticeclimber1.h>
 
+#include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftparts.h>
 

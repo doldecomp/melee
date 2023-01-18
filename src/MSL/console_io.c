@@ -1,3 +1,5 @@
+#include <MSL/console_io.h>
+
 #include <Runtime/platform.h>
 
 s32 InitializeUART(u32);

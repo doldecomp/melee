@@ -1,3 +1,5 @@
+#include <MSL/abort_exit.h>
+
 #include <Runtime/platform.h>
 
 void _ExitProcess(void);

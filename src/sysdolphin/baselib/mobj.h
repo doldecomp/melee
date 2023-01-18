@@ -5,6 +5,7 @@
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/class.h>
+#include <sysdolphin/baselib/forward.h>
 #include <sysdolphin/baselib/texp.h>
 #include <sysdolphin/baselib/tobj.h>
 
@@ -64,26 +65,26 @@
 #define RENDER_NO_ZUPDATE (1 << 29)
 #define RENDER_XLU (1 << 30)
 
-typedef struct _HSD_MObj {
+struct HSD_MObj {
     HSD_Class parent;
     u32 rendermode;
-    struct _HSD_TObj* tobj;
-    struct _HSD_Material* mat;
-    struct _HSD_PEDesc* pe;
-    struct _HSD_AObj* aobj;
+    HSD_TObj* tobj;
+    HSD_Material* mat;
+    HSD_PEDesc* pe;
+    HSD_AObj* aobj;
     struct _HSD_TExpTevDesc* tevdesc;
     union _HSD_TExp* texp;
-} HSD_MObj;
+};
 
-typedef struct _HSD_Material {
+struct HSD_Material {
     GXColor ambient;
     GXColor diffuse;
     GXColor specular;
     f32 alpha;
     f32 shininess;
-} HSD_Material;
+};
 
-typedef struct _HSD_PEDesc {
+struct HSD_PEDesc {
     u8 flags;
     u8 ref0;
     u8 ref1;
@@ -96,15 +97,15 @@ typedef struct _HSD_PEDesc {
     u8 alpha_comp0;
     u8 alpha_op;
     u8 alpha_comp1;
-} HSD_PEDesc;
+};
 
 typedef struct _HSD_MObjDesc {
     char* class_name;
     u32 rendermode;
     struct _HSD_TObjDesc* texdesc;
-    struct _HSD_Material* mat;
+    HSD_Material* mat;
     void* renderdesc;
-    struct _HSD_PEDesc* pedesc;
+    HSD_PEDesc* pedesc;
 } HSD_MObjDesc;
 
 typedef struct _HSD_ChanAnim {

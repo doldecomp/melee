@@ -8,8 +8,6 @@
 
 typedef unk_t HSD_PSAppSRT;
 
-struct _HSD_JObj;
-
 struct _generator;
 
 struct _psAppSRT;
@@ -309,8 +307,8 @@ HSD_Particle* psGenerateParticleIDN(int linkNo, int bank, int id);
 void psKillParticle(HSD_Particle* pp);
 void psKillAllParticle(void);
 
-void psSetPointJObj(int no, struct _HSD_JObj* jobj);
-void psSetPointJObjNodup(struct _HSD_JObj* jobj, int no);
+void psSetPointJObj(int no, HSD_JObj* jobj);
+void psSetPointJObjNodup(HSD_JObj* jobj, int no);
 
 void psClearPointJObj(void);
 

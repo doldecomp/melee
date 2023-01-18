@@ -11,7 +11,7 @@
 typedef struct _HSD_Shadow {
     struct _HSD_SList* objects; // 0x0
     struct _HSD_CObj* camera;   // 0x4
-    struct _HSD_TObj* texture;  // 0x8
+    HSD_TObj* texture;          // 0x8
     f32 scaleS;                 // 0xC
     f32 scaleT;                 // 0x10
     f32 transS;                 // 0x14

@@ -6,7 +6,7 @@
 
 #define TEST(expr) (expr) ? true : false
 
-/* static */ s32 func_800C06B4(struct _Fighter*);
+/* static */ s32 func_800C06B4(Fighter*);
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1)
 {

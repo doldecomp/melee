@@ -1,3 +1,5 @@
+#include <dolphin/card/CARDWrite.h>
+
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDDir.h>

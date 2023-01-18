@@ -879,13 +879,6 @@ lbl_800740D4:
 } // clang-format on
 #pragma pop
 
-#else
-
-void Fighter_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 void Fighter_PObjInfoInit(void)
@@ -1135,14 +1128,6 @@ lbl_800743BC:
 /* 800743DC 00070FBC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
-                   u32* dobj_index, u32 tree_depth)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 
@@ -1594,7 +1579,7 @@ void func_800749CC(HSD_GObj* arg0)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80074A4C(struct _HSD_GObj*, u32, s32)
+asm void func_80074A4C(HSD_GObj*, u32, s32)
 { // clang-format off
     nofralloc
 /* 80074A4C 0007162C  80 C3 00 2C */	lwz r6, 0x2c(r3)
@@ -2540,7 +2525,7 @@ void func_80075304(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800753D4(struct _Fighter*, s32, unk_t)
+asm void func_800753D4(Fighter*, s32, unk_t)
 { // clang-format off
     nofralloc
 /* 800753D4 00071FB4  7C 08 02 A6 */	mflr r0

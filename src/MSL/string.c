@@ -1,5 +1,10 @@
+#include <MSL/string.h>
 #define EOF -1
+
+#ifdef __MWERKS__
+#pragma push
 #pragma ANSI_strict off
+#endif
 
 static unsigned int lbl_804D5B58 = 0x80808080L; // = K1
 static unsigned int lbl_804D5B5C = 0xfefefeffL; // = K2
@@ -328,4 +333,6 @@ unsigned long(strlen)(const char* s)
     return k;
 }
 
-#pragma ANSI_strict on
+#ifdef __MWERKS__
+#pragma pop
+#endif

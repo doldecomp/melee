@@ -1,3 +1,5 @@
+#include <melee/ft/chara/ftDonkey/ftdonkey_walk.h>
+
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey1.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey6.h>

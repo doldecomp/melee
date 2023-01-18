@@ -9,8 +9,9 @@ GENERATE_MAP ?= 0
 NON_MATCHING ?= 0
 EPILOGUE_PROCESS ?= 1
 SKIP_CHECK ?= 0
-REQUIRE_PROTOS ?= 0
+REQUIRE_PROTOS ?= 1
 MSG_STYLE ?= gcc
+WARN_ERROR ?= 1
 
 VERBOSE ?= 0
 MAX_ERRORS ?= 0     # 0 = no maximum
@@ -121,6 +122,10 @@ endif
 
 ifeq ($(MAX_ERRORS),0)
 	CFLAGS += -nofail
+endif
+
+ifeq ($(WARN_ERROR),1)
+	CLAGS += -warn iserror
 endif
 
 $(BUILD_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)

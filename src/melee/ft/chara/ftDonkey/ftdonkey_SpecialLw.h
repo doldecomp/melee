@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTDONKEY_FTDONKEY_SPECIALLW_H
 
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 void ftDonkey_8010DF5C(HSD_GObj* fighter_gobj);
 void ftDonkey_8010DF98(HSD_GObj* fighter_gobj);

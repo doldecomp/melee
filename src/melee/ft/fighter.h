@@ -103,12 +103,11 @@ void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighter_gobj);
 void Fighter_8006DA4C(HSD_GObj* fighter_gobj);
 void Fighter_Unload_8006DABC(void* user_data);
 
-void Fighter_UnkProcessDeath_80068354(struct _HSD_GObj*);
+void Fighter_UnkProcessDeath_80068354(HSD_GObj*);
 u32 Fighter_NewSpawn_80068E40(void);
 
-void Fighter_ActionStateChange_800693AC(struct _HSD_GObj* fighter_gobj,
-                                        s32 newAction, s32 flags,
-                                        struct _HSD_GObj* otherObj,
+void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 newAction,
+                                        s32 flags, HSD_GObj* otherObj,
                                         f32 animStart, f32 animSpeed,
                                         f32 animBlend);
 

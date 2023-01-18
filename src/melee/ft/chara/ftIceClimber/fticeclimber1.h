@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER1_H
 
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 void ftIceClimber_OnItemInvisible(HSD_GObj* fighter_gobj);
 void ftIceClimber_OnItemVisible(HSD_GObj* fighter_gobj);

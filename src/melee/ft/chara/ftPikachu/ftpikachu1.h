@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void ftPikachu_LoadSpecialAttrs(struct _HSD_GObj*);
+void ftPikachu_LoadSpecialAttrs(HSD_GObj*);
 
 #endif

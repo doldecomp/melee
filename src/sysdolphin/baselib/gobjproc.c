@@ -73,7 +73,7 @@ HSD_GObjProc* func_8038FD54(HSD_GObj* gobj, void (*func)(HSD_GObj*), u8 pri)
     gproc->flags_1 = gproc->flags_2 = 0;
     gproc->flags_3 = 3;
     gproc->gobj = gobj;
-    gproc->callback = func;
+    gproc->on_invoke = func;
     func_8038FAA8(gproc);
     return gproc;
 }

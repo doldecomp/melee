@@ -101,5 +101,11 @@ int DVDCancelStream(DVDCommandBlock* block);
 bool DVDStopStreamAtEndAsync(DVDCommandBlock* block, DVDCBCallback callback);
 bool DVDInquiryAsync(DVDCommandBlock* block, void* addr,
                      DVDCBCallback callback);
+bool DVDReadAbsAsyncPrio(DVDCommandBlock* block, void* addr, s32 length,
+                         s32 offset, DVDCBCallback callback, s32 prio);
+bool DVDSeekAbsAsyncPrio(DVDCommandBlock* block, u32 offset,
+                         DVDCBCallback callback, s32 prio);
+bool DVDPrepareStreamAbsAsync(DVDCommandBlock* block, u32 length, u32 offset,
+                              DVDCBCallback callback);
 
 #endif

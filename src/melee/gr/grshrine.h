@@ -25,6 +25,6 @@ static bool func_80201F14(HSD_GObj*);
 static void func_80201F1C(HSD_GObj*);
 static void func_80201F40(HSD_GObj*);
 static bool func_80201F44(bool);
-static bool func_80201F4C(Vec3*, int, struct _HSD_JObj*);
+static bool func_80201F4C(Vec3*, int, HSD_JObj*);
 
 #endif

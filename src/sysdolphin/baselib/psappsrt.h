@@ -3,6 +3,7 @@
 
 #include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 typedef struct _UnkGeneratorMember { // MexTK: GeneratorAppSRT
     u32 x0_fill[2];
@@ -18,7 +19,7 @@ typedef struct _UnkGeneratorMember { // MexTK: GeneratorAppSRT
 typedef struct _UnkGeneratorStruct { // MexTK: Particle
     struct _UnkGeneratorStruct* next;
     u8 x4_fill[0xC];
-    struct _HSD_JObj* x10_jobj;
+    HSD_JObj* x10_jobj;
     u16 x14_fill;
     u16 x16_flags;
     u8 x18_fill[0x24 - 0x18];

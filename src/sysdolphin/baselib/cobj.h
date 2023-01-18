@@ -48,10 +48,10 @@ typedef struct _HSD_CObj {
             f32 right;
         } ortho;
     } projection_param;
-    u8 projection_type;     // 0x50
-    Mtx view_mtx;           // 0x54
-    struct _HSD_AObj* aobj; // 0x84
-    Mtx* proj_mtx;          // 0x88
+    u8 projection_type; // 0x50
+    Mtx view_mtx;       // 0x54
+    HSD_AObj* aobj;     // 0x84
+    Mtx* proj_mtx;      // 0x88
 } HSD_CObj;
 
 typedef struct _HSD_CObjDesc {

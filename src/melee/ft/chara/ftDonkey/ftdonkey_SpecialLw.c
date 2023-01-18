@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialLw.h>
 
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 

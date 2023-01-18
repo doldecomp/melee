@@ -3361,8 +3361,8 @@ f32 func_801C3F20(HSD_JObj* arg0)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm struct _HSD_JObj* func_801C3FA4(HSD_GObj*, s32 depth)
-{ // clang-format off
+asm HSD_JObj* func_801C3FA4(HSD_GObj*, s32 depth){
+    // clang-format off
     nofralloc
 /* 801C3FA4 001C0B84  80 63 00 28 */	lwz r3, 0x28(r3)
 /* 801C3FA8 001C0B88  28 03 00 00 */	cmplwi r3, 0
@@ -3481,7 +3481,7 @@ lbl_801C40EC:
 
 #else
 
-struct _HSD_JObj* func_801C3FA4(HSD_GObj* arg0, s32 depth)
+HSD_JObj* func_801C3FA4(HSD_GObj* arg0, s32 depth)
 {
     NOT_IMPLEMENTED;
 }

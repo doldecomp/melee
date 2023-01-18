@@ -142,7 +142,7 @@ static bool lbl_802204FC(int)
     return false;
 }
 
-static bool lbl_80220504(Vec3*, int, struct _HSD_JObj*)
+static bool lbl_80220504(Vec3*, int, HSD_JObj*)
 {
     return true;
 }

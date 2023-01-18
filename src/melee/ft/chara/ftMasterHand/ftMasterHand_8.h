@@ -3,7 +3,7 @@
 
 #include <sysdolphin/baselib/gobj.h>
 
-void func_80151CA8(struct _HSD_GObj*);
+void func_80151CA8(HSD_GObj*);
 
 void lbl_80151C04(HSD_GObj* arg0);
 void lbl_80151C40(HSD_GObj* gobj);

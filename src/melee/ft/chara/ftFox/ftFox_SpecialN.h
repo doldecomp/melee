@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void ftFox_RemoveBlaster(struct _HSD_GObj*);
+void ftFox_RemoveBlaster(HSD_GObj*);
 
 #endif

@@ -11,9 +11,9 @@
 struct _HSD_DObj {
     HSD_Class parent;
     struct _HSD_DObj* next; // 0x04
-    struct _HSD_MObj* mobj; // 0x08
-    struct _HSD_PObj* pobj; // 0x0C
-    struct _HSD_AObj* aobj; // 0x10
+    HSD_MObj* mobj;         // 0x08
+    HSD_PObj* pobj;         // 0x0C
+    HSD_AObj* aobj;         // 0x10
     u32 flags;              // 0x14
 };
 
@@ -64,5 +64,6 @@ void HSD_DObjDisp(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 
 void HSD_DObjRemove(HSD_DObj* dobj);
 void HSD_DObjSetDefaultClass(HSD_ClassInfo* info);
+void forceStringAllocation(HSD_DObj* dobj, HSD_MObj* mobj);
 
 #endif

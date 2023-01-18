@@ -138,9 +138,9 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
-void ftCaptain_OnLoadForGanon(struct _Fighter*);
+void ftCaptain_OnLoadForGanon(Fighter*);
 
 /// @todo @c ftCaptain prefix
-void ftCFalcon_LoadSpecialAttrs(struct _HSD_GObj*);
+void ftCFalcon_LoadSpecialAttrs(HSD_GObj*);
 
 #endif

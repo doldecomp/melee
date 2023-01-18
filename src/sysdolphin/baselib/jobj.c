@@ -677,7 +677,7 @@ void JObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
     ufc_callback cb;
     Vec3 p;
     HSD_JObj* jp;
-    struct _HSD_RObj* robj;
+    HSD_RObj* robj;
     Mtx mtx;
 
     if (jobj != NULL) {

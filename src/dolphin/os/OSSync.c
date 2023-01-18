@@ -1,3 +1,5 @@
+#include <dolphin/os/OSSync.h>
+
 #include <dolphin/os/OSCache.h>
 #include <MetroTRK/intrinsics.h>
 #include <placeholder.h>

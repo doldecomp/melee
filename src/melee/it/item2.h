@@ -7,12 +7,12 @@
 /// Transfer item on character swap - used for Zelda <-> Sheik
 void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2);
 
-s32 func_8026B30C(struct _HSD_GObj*);
+s32 func_8026B30C(HSD_GObj*);
 
 /// Return item hold kind
-s32 func_8026B320(struct _HSD_GObj*);
+s32 func_8026B320(HSD_GObj*);
 
-bool func_8026B594(struct _HSD_GObj*);
+bool func_8026B594(HSD_GObj*);
 
 /// Apply Item Damage -  may not be itHit* ???
 f32 func_8026B1D4(HSD_GObj* item_gobj, itHit* itemHitboxUnk);

@@ -3,10 +3,12 @@
 
 #include <Runtime/platform.h>
 
+typedef struct HSD_AObj HSD_AObj;
 typedef struct _HSD_DObj HSD_DObj;
 typedef struct _HSD_Fog HSD_Fog;
 typedef struct _HSD_LObj HSD_LObj;
 typedef struct _HSD_Obj HSD_Obj;
+typedef struct HSD_GObj HSD_GObj;
 typedef union _HSD_ObjData HSD_ObjData;
 typedef struct _TextKerning TextKerning;
 typedef struct HSD_PadRumbleListData HSD_PadRumbleListData;
@@ -18,7 +20,19 @@ typedef struct HSD_PadData HSD_PadData;
 typedef struct HSD_PadStatus HSD_PadStatus;
 typedef struct PadLibData PadLibData;
 typedef struct RumbleInfo RumbleInfo;
+typedef struct HSD_TObj HSD_TObj;
+typedef struct HSD_RObj HSD_RObj;
+typedef struct HSD_PObj HSD_PObj;
+typedef struct HSD_MObj HSD_MObj;
+typedef struct HSD_JObj HSD_JObj;
+typedef struct HSD_Material HSD_Material;
+typedef struct HSD_PEDesc HSD_PEDesc;
+typedef struct HSD_GObjProc HSD_GObjProc;
 
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);
+typedef void (*HSD_DevComCallback)(int, int, int, bool cancelflag);
+typedef void (*HSD_GObjEvent)(HSD_GObj* gobj);
+typedef bool (*HSD_GObjPredicate)(HSD_GObj* gobj);
+typedef void (*HSD_GObjInteraction)(HSD_GObj* gobj0, HSD_GObj* gobj1);
 
 #endif

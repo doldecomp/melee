@@ -9,7 +9,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 
 HSD_GObj* func_80082E3C(HSD_GObj* fighter_gobj);
-f32 Stage_GetGroundFrictionMultiplier(struct _Fighter* fp);
+f32 Stage_GetGroundFrictionMultiplier(Fighter* fp);
 bool func_8008239C(HSD_GObj* fighter_gobj, s32 facing_direction,
                    f32* height_attributes);
 void func_80084FA8(HSD_GObj* fighter_gobj);
@@ -23,9 +23,9 @@ void func_80084104(HSD_GObj* fighter_gobj);
 
 bool func_80082708(HSD_GObj* fighter_gobj);
 void func_80084F3C(HSD_GObj* fighter_gobj);
-void func_80084280(struct _HSD_GObj*);
+void func_80084280(HSD_GObj*);
 void func_8008403C(HSD_GObj*, HSD_GObjEvent);
-void func_80084DB0(struct _HSD_GObj*);
+void func_80084DB0(HSD_GObj*);
 void func_80082C74(HSD_GObj*, HSD_GObjEvent);
 
 /// @todo Name does not follow our conventions.

@@ -1,4 +1,4 @@
-#include <dolphin/gecko.h>
+#include <Runtime/Gecko_setjmp.h>
 #include <string.h>
 #include <sysdolphin/baselib/__baselib.h>
 

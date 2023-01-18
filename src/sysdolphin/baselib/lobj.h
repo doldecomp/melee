@@ -96,7 +96,7 @@ typedef struct _HSD_LObj {
     } u;
     /* 0x38 */ f32 shininess;
     /* 0x3C - 0x44 */ Vec3 lvec;
-    /* 0x48 */ struct _HSD_AObj* aobj;
+    /* 0x48 */ HSD_AObj* aobj;
     /* 0x4C */ GXLightID id;
     /* 0x50 */ GXLightObj lightobj;
     /* 0x90 */ GXLightID spec_id;

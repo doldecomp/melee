@@ -15,7 +15,7 @@
 typedef struct _HSD_Rvalue {
     struct _HSD_Rvalue* next;
     u32 flags;
-    struct _HSD_JObj* jobj;
+    HSD_JObj* jobj;
 } HSD_Rvalue;
 
 typedef struct _HSD_RvalueList {
@@ -54,17 +54,17 @@ typedef struct _HSD_ByteCodeExpDesc {
     struct _HSD_RvalueList* rvalue;
 } HSD_ByteCodeExpDesc;
 
-typedef struct _HSD_RObj {
-    struct _HSD_RObj* next;
+struct HSD_RObj {
+    HSD_RObj* next;
     u32 flags;
     union {
-        struct _HSD_JObj* jobj;
+        HSD_JObj* jobj;
         struct _HSD_Exp exp;
         f32 limit;
         struct _HSD_IKHint ik_hint;
     } u;
-    struct _HSD_AObj* aobj;
-} HSD_RObj;
+    HSD_AObj* aobj;
+};
 
 typedef struct _HSD_RObjDesc {
     struct _HSD_RObjDesc* next;

@@ -12,7 +12,7 @@ typedef struct _HSD_FogAdj {
     /* 0x08 */ s16 center;
     /* 0x0A */ u16 width;
     /* 0x0C */ Mtx44 mtx;
-    /* 0x3C */ struct _HSD_AObj* aobj;
+    /* 0x3C */ HSD_AObj* aobj;
 } HSD_FogAdj;
 
 struct _HSD_Fog {
@@ -22,7 +22,7 @@ struct _HSD_Fog {
     /* 0x10 */ f32 start;
     /* 0x14 */ f32 end;
     /* 0x18 */ GXColor color;
-    /* 0x1C */ struct _HSD_AObj* aobj;
+    /* 0x1C */ HSD_AObj* aobj;
 };
 
 typedef struct _HSD_FogAdjDesc {

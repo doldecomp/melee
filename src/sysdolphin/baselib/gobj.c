@@ -2,6 +2,7 @@
 
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 
@@ -83,7 +84,7 @@ void func_80390CFC(void)
                 {
                     lbl_804D781C = gobj;
                     lbl_804D7838 = proc;
-                    proc->callback(proc->gobj);
+                    proc->on_invoke(proc->gobj);
                     lbl_804D7830 = proc->next;
                     if (lbl_804CE3E4.flags != 0) {
                         lbl_804CE3E4.b0 = 1;

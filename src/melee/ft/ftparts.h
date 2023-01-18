@@ -4,25 +4,25 @@
 #include <dolphin/mtx/types.h>
 #include <melee/ft/fighter.h>
 
-void func_80074B0C(struct _HSD_GObj*, s32, s32);
-void func_80073758(struct _HSD_JObj*);
+void func_80074B0C(HSD_GObj*, s32, s32);
+void func_80073758(HSD_JObj*);
 void func_80074148(void);
 void func_80074170(void);
 void func_800743E0(void);
-void func_800749CC(struct _HSD_GObj*);
-void func_80074A4C(struct _HSD_GObj*, u32, s32);
-void func_80074A8C(struct _HSD_GObj*);
-void func_80074E58(struct _Fighter*);
+void func_800749CC(HSD_GObj*);
+void func_80074A4C(HSD_GObj*, u32, s32);
+void func_80074A8C(HSD_GObj*);
+void func_80074E58(Fighter*);
 
 /// @returns A bone index.
-s32 func_8007500C(struct _Fighter*, s32);
+s32 func_8007500C(Fighter*, s32);
 
-void Fighter_JObjSetRotation(struct _HSD_JObj*, Quaternion*);
-void func_8007592C(struct _Fighter*, s32, f32);
-void func_80075AF0(struct _Fighter*, s32, f32);
-void func_80075CB4(struct _Fighter*, s32, f32);
-s32 func_8007500C(struct _Fighter*, s32);
-void func_800753D4(struct _Fighter*, s32, unk_t);
+void Fighter_JObjSetRotation(HSD_JObj*, Quaternion*);
+void func_8007592C(Fighter*, s32, f32);
+void func_80075AF0(Fighter*, s32, f32);
+void func_80075CB4(Fighter*, s32, f32);
+s32 func_8007500C(Fighter*, s32);
+void func_800753D4(Fighter*, s32, unk_t);
 f32 func_80075F48(Fighter*, s32);
 s32 func_80074A74(HSD_GObj*, s32);
 void func_80075650(HSD_GObj* fighter_gobj, HSD_JObj*, u32*);
@@ -47,5 +47,8 @@ void func_80075304(void);
 void func_800755E8(void);
 void func_800739B8(void);
 void func_80073CA8(void);
+void Fighter_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
+void func_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
+                   u32* dobj_index, u32 tree_depth);
 
 #endif

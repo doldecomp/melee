@@ -4,6 +4,8 @@
 #include <string.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/tev.h>
 #include <sysdolphin/baselib/texp.h>
 
 static HSD_ClassInfo* default_class;

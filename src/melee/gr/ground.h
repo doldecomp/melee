@@ -37,18 +37,18 @@ static void func_801C1D38(HSD_GObj*);
 static void func_801C2BBC(HSD_GObj*, s32);
 static void func_801C2BD4(void* arg0);
 HSD_GObj* func_801C14D0(int);
-static void func_801C34AC(s32, struct _HSD_JObj*, struct _HSD_Joint*);
+static void func_801C34AC(s32, HSD_JObj*, struct _HSD_Joint*);
 static void func_801C28CC(void*, s32);
 
 f32 func_801C0498(void);
 bool func_801C28AC(s32, u32, s32*);
-struct _HSD_GObj* func_801C2BA4(s32);
-struct _HSD_JObj* func_801C2CF4(s32);
+HSD_GObj* func_801C2BA4(s32);
+HSD_JObj* func_801C2CF4(s32);
 bool func_801C2D24(enum_t, Vec3*);
-bool func_801C2ED0(struct _HSD_JObj*, s32);
+bool func_801C2ED0(HSD_JObj*, s32);
 void func_801C39C0(void);
 void func_801C3BB4(void);
-struct _HSD_JObj* func_801C3FA4(struct _HSD_GObj*, s32);
+HSD_JObj* func_801C3FA4(HSD_GObj*, s32);
 s32 func_801C4210(void);
 void func_801C42AC(void);
 
@@ -171,5 +171,7 @@ void func_801C1154(void);
 void func_801C1158(void);
 void func_801C11AC(HSD_GObj* gobj);
 HSD_JObj* func_801C13D0(s32 arg0, s32 depth);
+void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
+                   HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5);
 
 #endif
