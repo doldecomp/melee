@@ -42,5 +42,6 @@ void lbl_8013C94C(void);
 void ftPurin_SpecialHi_StartAction(HSD_GObj*);
 void ftPurin_SpecialAirHi_StartAction(HSD_GObj*);
 void lbl_8013CB68(HSD_GObj*);
+void lbl_8013CBE4(HSD_GObj*);
 
 #endif
