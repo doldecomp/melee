@@ -42,3 +42,5 @@ StageData lbl_803E8974 = {
 
 char str0[] = "%s:%d: couldn t get gobj(id=%d)\n";
 char str1[] = "grtfalco.c";
+
+unk_t lbl_804D6AF8;
