@@ -57,5 +57,6 @@ void func_80008434(struct Hitbox*);
 void func_8000ACFC(void);
 void func_80008688(void);
 void func_800084FC(void);
+void func_80008820(void);
 
 #endif
