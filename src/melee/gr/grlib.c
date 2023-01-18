@@ -21,8 +21,8 @@ static Vec3 lbl_8049EF58[6];
 
 bool func_801C96E8(HSD_GObj* arg0)
 {
-    Ground* map = arg0->user_data;
-    return map->x10_flags.b4;
+    Ground* gp = arg0->user_data;
+    return gp->x10_flags.b4;
 }
 
 UnkGeneratorStruct* func_8039F05C(s8, s8, s32);

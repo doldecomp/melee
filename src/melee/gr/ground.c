@@ -3988,7 +3988,7 @@ static inline void removeStageGObj(HSD_GObj* gobj)
     }
 }
 
-// Stage destroy map gobj
+// Stage destroy gp gobj
 void func_801C4A08(HSD_GObj* gobj)
 {
     UnkArchiveStruct* archive;

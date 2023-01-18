@@ -148,15 +148,15 @@ static void GrTMars_80222148(HSD_GObj* arg0) {}
 
 static void GrTMars_8022214C(HSD_GObj* gobj)
 {
-    Ground* map = gobj->user_data;
+    Ground* gp = gobj->user_data;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 unused[8];
 #endif
 
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
+    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    func_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool GrTMars_8022219C(HSD_GObj* arg0)

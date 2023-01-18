@@ -84,13 +84,13 @@ static HSD_GObj* func_80201D20(s32 arg0)
     gobj = func_801C14D0(arg0);
 
     if (gobj != NULL) {
-        Ground* map;
-        map = gobj->user_data;
-        map->x8_callback = NULL;
-        map->xC_callback = NULL;
+        Ground* gp;
+        gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
         if (callbacks->callback3 != NULL) {
-            map->x1C_callback = callbacks->callback3;
+            gp->x1C_callback = callbacks->callback3;
         }
         if (callbacks->callback0 != NULL) {
             callbacks->callback0(gobj);
@@ -106,8 +106,8 @@ static HSD_GObj* func_80201D20(s32 arg0)
 
 static void func_80201E08(HSD_GObj* gobj)
 {
-    Ground* map = gobj->user_data;
-    func_801C8138(gobj, map->map_id, 0);
+    Ground* gp = gobj->user_data;
+    func_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool func_80201E34(HSD_GObj* arg0)
@@ -121,9 +121,9 @@ static void func_80201E40(HSD_GObj* arg0) {}
 
 static void func_80201E44(HSD_GObj* gobj)
 {
-    Ground* map = gobj->user_data;
-    func_801C8138(gobj, map->map_id, 0);
-    map->x11_flags.b012 = 2;
+    Ground* gp = gobj->user_data;
+    func_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 2;
 }
 
 static bool func_80201E88(HSD_GObj* arg0)
@@ -144,12 +144,12 @@ static void func_80201E9C(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Ground* map = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
+    Ground* gp = gobj->user_data;
+    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    func_801C8138(gobj, gp->map_id, 0);
     func_801C10B8(gobj, func_80201E98);
     func_801C2FE0(gobj);
-    map->x10_flags.b5 = true;
+    gp->x10_flags.b5 = true;
 }
 
 static bool func_80201F14(HSD_GObj* arg0)

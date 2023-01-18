@@ -179,10 +179,10 @@ void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
 
 static inline void Ground_JObjInline1(HSD_GObj* gobj)
 {
-    Ground* map = (Ground*) HSD_GObjGetUserData(gobj);
+    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
     HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
-    func_801C2ED0(jobj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
+    func_801C2ED0(jobj, gp->map_id);
+    func_801C8138(gobj, gp->map_id, 0);
 }
 
 #endif
