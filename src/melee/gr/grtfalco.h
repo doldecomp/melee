@@ -24,5 +24,6 @@ void lbl_80220870(void);
 bool lbl_80220894(void);
 bool lbl_80220ACC(int);
 bool lbl_80220B78(Vec3*, int, HSD_JObj*);
+void func_8022089C(int);
 
 #endif

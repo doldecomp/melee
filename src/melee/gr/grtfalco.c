@@ -46,3 +46,17 @@ char str1[] = "grtfalco.c";
 unk_t lbl_804D6AF8;
 
 void func_802207F0(int arg0) {}
+
+void lbl_802207F4(void)
+{
+    lbl_804D6AF8 = func_801C49F8();
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+    func_8022089C(0);
+    func_8022089C(1);
+    func_8022089C(2);
+    func_801C39C0();
+    func_801C3BB4();
+    func_801C4210();
+    func_801C42AC();
+}
