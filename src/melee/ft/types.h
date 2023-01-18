@@ -984,11 +984,6 @@ typedef struct _SmashAttr {
     f32 x2138_smashSinceHitbox; // 0x2138
 } SmashAttr;
 
-typedef struct _ftHit {
-    u8 filler_x0[0x134];
-    s32 x134;
-} ftHit;
-
 typedef struct _itPickup // 0x294
 {
     Vec2 x0_ground_light_offset;  // 0x294
@@ -1486,7 +1481,7 @@ struct Fighter {
     u8 filler_x8AC[0x914 - 0x8B0];
     /* 0x914 */ Hitbox x914[4];
     u8 filler_xDF4[0x1064 - 0xDF4];
-    /* 0x1064 */ ftHit x1064_thrownHitbox;
+    /* 0x1064 */ Hitbox x1064_thrownHitbox;
     /* 0x119C */ u8 x119C_teamUnk;
     /* 0x119D */ u8 x119D;
     /* 0x119E */ u8 x119E_hurtboxNum;
