@@ -30,4 +30,5 @@ typedef struct HSD_PEDesc HSD_PEDesc;
 
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);
 typedef void (*HSD_DevComCallback)(int, int, int, bool cancelflag);
+
 #endif
