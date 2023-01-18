@@ -282,7 +282,6 @@ lbl_80220B78:
 /* 80220B78 0021D758  38 60 00 01 */	li r3, 1
 /* 80220B7C 0021D75C  4E 80 00 20 */	blr
 
-
 .section .data
     .balign 8
 .global lbl_803E8918
@@ -291,27 +290,26 @@ lbl_803E8918:
     .4byte lbl_802209B0
     .4byte lbl_802209B8
     .4byte lbl_802209BC
-    .4byte NULL
+    .4byte 0
     .4byte lbl_80220A50
     .4byte lbl_80220AA0
     .4byte lbl_80220AA8
     .4byte lbl_80220AC8
-    .4byte NULL
+    .4byte 0
     .4byte lbl_802209C0
     .4byte lbl_80220A10
     .4byte lbl_80220A18
     .4byte lbl_80220A4C
     .4byte 0xC0000000
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
+    .4byte 0
+    .4byte 0
+    .4byte 0
+    .4byte 0
+    .4byte 0
 .global lbl_803E8968
 lbl_803E8968:
-    .4byte 0x2F477254
-    .4byte 0x46632E64
-    .4byte 0x61740000
+    .asciz "/GrTFc.dat"
+    .balign 4
 .global lbl_803E8974
 lbl_803E8974:
     .4byte 0x0000002D
@@ -325,21 +323,12 @@ lbl_803E8974:
     .4byte lbl_80220ACC
     .4byte lbl_80220B78
     .4byte 0x00000001
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x25733A25
-    .4byte 0x643A2063
-    .4byte 0x6F756C64
-    .4byte 0x6E207420
-    .4byte 0x67657420
-    .4byte 0x676F626A
-    .4byte 0x2869643D
-    .4byte 0x2564290A
-    .4byte NULL
-    .4byte 0x67727466
-    .4byte 0x616C636F
-    .4byte 0x2E630000
-
+    .4byte 0
+    .4byte 0
+    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
+    .balign 4
+    .asciz "grtfalco.c"
+    .balign 4
 
 .section .sbss
     .balign 8
