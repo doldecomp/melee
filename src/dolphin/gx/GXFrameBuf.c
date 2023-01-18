@@ -173,7 +173,7 @@ void GXSetTexCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
 
 void GXSetDispCopyDst(s32 arg0)
 {
-    s32 val = (s32) ((u32) (arg0 << 1) & 65534) >> 5;
+    s32 val = (s32) ((u32) (arg0 << 1) & 0xFFFE) >> 5;
     __GXContexts.main->x1D0[6] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[6], val, 10, 0);
     INSERT_FIELD(__GXContexts.main->x1D0[6], 77, 8, 24);
