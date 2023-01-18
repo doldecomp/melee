@@ -195,19 +195,12 @@ lbl_8033E8D8:
 } // clang-format on
 #pragma pop
 
-#else
-
-s32 GXGetTexBufferSize(u16 arg0, u16 arg1, u32 arg2, u8 arg3, u8 arg4)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void __GetImageTileCount(void)
+asm void __GetImageTileCount(u32, s16, s16, s32*, s32*, s32*)
 { // clang-format off
     nofralloc
 /* 8033E8E8 0033B4C8  28 03 00 3C */	cmplwi r3, 0x3c
@@ -272,13 +265,6 @@ lbl_8033E9A8:
 /* 8033E9AC 0033B58C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void __GetImageTileCount(void)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 
@@ -460,14 +446,6 @@ lbl_8033EBCC:
 /* 8033EC20 0033B800  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXInitTexObj(unk_t arg0, u32 arg1, u16 arg2, u16 arg3, s32 arg4, s32 arg5,
-                  s32 arg6, s8 arg7)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 
@@ -985,7 +963,7 @@ GXTexRegionCallback GXSetTlutRegionCallback(GXTexRegionCallback arg0)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void __SetSURegs(void)
+asm void __SetSURegs(s32, s32)
 { // clang-format off
     nofralloc
 /* 8033F2E0 0033BEC0  80 AD A5 08 */	lwz r5, __GXContexts(r13)
@@ -1041,13 +1019,6 @@ asm void __SetSURegs(void)
 /* 8033F3A8 0033BF88  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void __SetSURegs(void)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 
