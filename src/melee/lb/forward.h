@@ -40,4 +40,5 @@ typedef enum HitElement {
     ///  ReDead grab attacks
     HitElement_Leadead,
 } HitElement;
+
 #endif
