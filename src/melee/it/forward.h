@@ -21,7 +21,6 @@ typedef struct ItemDynamicsDesc ItemDynamicsDesc;
 typedef struct ItemLogicTable ItemLogicTable;
 typedef struct ItemModelDesc ItemModelDesc;
 typedef struct ItemModStruct ItemModStruct;
-typedef struct ItemState_ParamStruct ItemState_ParamStruct;
 typedef struct ItemStateArray ItemStateArray;
 typedef struct ItemStateContainer ItemStateContainer;
 typedef struct ItemStateDesc ItemStateDesc;

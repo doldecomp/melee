@@ -236,12 +236,6 @@ struct ItemDynamics {
     ItemDynamicsDesc* dyn_descs;
 };
 
-struct ItemState_ParamStruct {
-    void* x0_unk;
-    void* x4_unk;
-    void* x8_unk;
-};
-
 /// @sz{10}
 struct ItemStateDesc {
     /// @at{0} @sz{4}
