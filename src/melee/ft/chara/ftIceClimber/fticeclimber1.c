@@ -108,3 +108,20 @@ void func_8011F190(HSD_GObj* fighter_gobj)
     func_802C17DC(fp->sa.nana.x222C);
     func_8011F16C(fighter_gobj, fp->sa.nana.x222C);
 }
+
+extern f32 const lbl_804D9838;
+extern f32 const lbl_804D983C;
+
+void ftIceClimber_SpecialN_StartAction(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
+    fp->x2210_ThrowFlags.flags = FLAGS_ZERO;
+    fp->x2200_ftcmd_var0 = 0;
+    fp->sa.nana.x222C = 0;
+
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 341, 0, NULL, lbl_804D9838,
+                                       lbl_804D983C, lbl_804D9838);
+
+    func_8006EBA4(fighter_gobj);
+    fp->cb.x21BC_callback_Accessory4 = &lbl_8011F500;
+}
