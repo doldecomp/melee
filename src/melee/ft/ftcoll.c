@@ -347,7 +347,7 @@ extern unk_t lbl_804D6560;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80076808(void)
+asm void func_80076808(Fighter* attacker, Hitbox*, int, Fighter* victim, int)
 { // clang-format off
     nofralloc
 /* 80076808 000733E8  7C 08 02 A6 */	mflr r0

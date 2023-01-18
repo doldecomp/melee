@@ -79,7 +79,7 @@ void func_80084BFC(void);
 void func_80084C38(void);
 void func_80084C74(void);
 void func_80084CB0(void);
-void func_80084CE4(void);
+bool func_80084CE4(Fighter* attacker, Fighter* victim);
 void func_80084E1C(void);
 void func_80082084(void);
 void func_80085004(void);
