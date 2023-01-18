@@ -125,3 +125,34 @@ void ftIceClimber_SpecialN_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &lbl_8011F500;
 }
+
+extern f32 const lbl_804D9840;
+
+void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
+    Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
+    ftIceClimberAttributes* icattr = fp->x2D4_specialAttributes;
+
+    fp->x2210_ThrowFlags.flags = FLAGS_ZERO;
+    fp->x2200_ftcmd_var0 = 0;
+    fp->sa.nana.x222C = 0;
+
+    if ((s32) fp->sa.nana.x224C == false) {
+        fp->x80_self_vel.y = icattr->x4;
+        fp->sa.nana.x224C = true;
+        fp->sa.nana.x2250 = lbl_804D9838;
+    } else {
+        fp->sa.nana.x2250 = lbl_804D9840;
+    }
+
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 342, 0, NULL, lbl_804D9838,
+                                       lbl_804D983C, lbl_804D9838);
+
+    func_8006EBA4(fighter_gobj);
+    fp->cb.x21BC_callback_Accessory4 = &lbl_8011F500;
+}

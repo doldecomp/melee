@@ -22,5 +22,6 @@ void ftIceClimber_OnKnockbackExit(HSD_GObj* fighter_gobj);
 void func_8011F16C(HSD_GObj* fighter_gobj, uint arg1);
 void lbl_8011F500(HSD_GObj*);
 void ftIceClimber_SpecialN_StartAction(HSD_GObj* fighter_gobj);
+void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
 
 #endif
