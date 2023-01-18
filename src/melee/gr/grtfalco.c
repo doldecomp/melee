@@ -1,10 +1,11 @@
-#include "sysdolphin/baselib/gobj.h"
 #include <melee/gr/grtfalco.h>
 
 #include <dolphin/os/os.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
+#include <melee/lb/lbunknown_003.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 
 /* static */ StageCallbacks lbl_803E8918[4] = {
@@ -126,4 +127,10 @@ void lbl_802209C0(HSD_GObj* gobj)
 bool lbl_80220A10(HSD_GObj* arg0)
 {
     return false;
+}
+
+void lbl_80220A18(HSD_GObj* arg0)
+{
+    func_800115F4();
+    func_801C2FE0(arg0);
 }
