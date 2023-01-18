@@ -151,3 +151,5 @@ void lbl_80220AA8(HSD_GObj* gobj)
 {
     func_801C2FE0(gobj);
 }
+
+void lbl_80220AC8(HSD_GObj* arg0) {}
