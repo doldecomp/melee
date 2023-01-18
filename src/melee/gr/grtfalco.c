@@ -1,3 +1,4 @@
+#include "sysdolphin/baselib/gobj.h"
 #include <melee/gr/grtfalco.h>
 
 #include <dolphin/os/os.h>
@@ -100,4 +101,10 @@ HSD_GObj* func_8022089C(int id)
     }
 
     return gobj;
+}
+
+void lbl_80220984(HSD_GObj* gobj)
+{
+    Map* map = (Map*) HSD_GObjGetUserData(gobj);
+    func_801C8138(gobj, map->map_id, 0);
 }
