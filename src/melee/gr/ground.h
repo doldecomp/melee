@@ -1,8 +1,11 @@
 #ifndef _ground_h_
 #define _ground_h_
 
+#include <melee/gr/granime.h>
 #include <melee/gr/types.h>
 #include <sysdolphin/baselib/gobj.h>
+
+extern StageInfo stage_info;
 
 static void func_801BFFA8(void);
 static void func_801BFFAC(bool);
@@ -173,5 +176,13 @@ void func_801C11AC(HSD_GObj* gobj);
 HSD_JObj* func_801C13D0(s32 arg0, s32 depth);
 void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
                    HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5);
+
+static inline void Ground_JObjInline1(HSD_GObj* gobj)
+{
+    Map* map = (Map*) HSD_GObjGetUserData(gobj);
+    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
+    func_801C2ED0(jobj, map->map_id);
+    func_801C8138(gobj, map->map_id, 0);
+}
 
 #endif
