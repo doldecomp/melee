@@ -1,6 +1,7 @@
 #include <melee/ft/chara/ftIceClimber/fticeclimber1.h>
 
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
@@ -173,3 +174,8 @@ void lbl_8011F354(HSD_GObj* gobj)
 void lbl_8011F390(HSD_GObj* arg0) {}
 
 void lbl_8011F394(HSD_GObj* arg0) {}
+
+void lbl_8011F398(HSD_GObj* gobj)
+{
+    func_80084F3C(gobj);
+}

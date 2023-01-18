@@ -2,17 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global lbl_8011F398
-lbl_8011F398:
-/* 8011F398 0011BF78  7C 08 02 A6 */	mflr r0
-/* 8011F39C 0011BF7C  90 01 00 04 */	stw r0, 4(r1)
-/* 8011F3A0 0011BF80  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8011F3A4 0011BF84  4B F6 5B 99 */	bl func_80084F3C
-/* 8011F3A8 0011BF88  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8011F3AC 0011BF8C  38 21 00 08 */	addi r1, r1, 8
-/* 8011F3B0 0011BF90  7C 08 03 A6 */	mtlr r0
-/* 8011F3B4 0011BF94  4E 80 00 20 */	blr
-
 .global lbl_8011F3B8
 lbl_8011F3B8:
 /* 8011F3B8 0011BF98  7C 08 02 A6 */	mflr r0
