@@ -124,7 +124,6 @@ static inline void* HSD_GObjGetHSDObj(HSD_GObj* item_gobj)
     return item_gobj->hsd_obj;
 }
 
-
 void func_80390ED0(HSD_GObj* gobj, u32 mask);
 void func_80390ED0(HSD_GObj* gobj, u32 mask);
 
