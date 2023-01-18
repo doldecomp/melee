@@ -333,6 +333,6 @@ unsigned long(strlen)(const char* s)
     return k;
 }
 
-#ifdef MWERKS_GEKKO
+#ifdef __MWERKS__
 #pragma pop
 #endif
