@@ -11,6 +11,7 @@ struct Hitbox {
     s32 x8;
     f32 xC;
     u8 x10[0x30 - 0x10];
+
     /// @at{30} @sz{4}
     HitElement element;
 
