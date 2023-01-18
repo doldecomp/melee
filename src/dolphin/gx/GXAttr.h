@@ -3,14 +3,19 @@
 
 #include <Runtime/platform.h>
 
-void GXSetNumTexGens(s8);
+void GXSetNumTexGens(u8 arg0);
 void GXSetTexCoordGen2(u32, s32, u32, s32, s32, s32);
 void GXInvalidateVtxCache(void);
-void GXSetArray(s32, s32, s8);
-void GXSetVtxAttrFmt(int vertex_format, int, int, int, int);
+void GXSetArray(s32, s32, u8);
+void GXSetVtxAttrFmt(u32, u32, s32, u32, u8);
 void GXClearVtxDesc(void);
-void GXSetVtxDesc(u32, s32);
+void GXSetVtxDesc(s32, s32);
 void __GXSetVCD(void);
 void __GXSetVAT(void);
+void __GXSetVCD(void);
+void GXClearVtxDesc(void);
+void __GXXfVtxSpecs(void);
+void __GXSetVAT(void);
+void GXInvalidateVtxCache(void);
 
 #endif

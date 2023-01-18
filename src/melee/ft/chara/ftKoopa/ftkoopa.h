@@ -59,4 +59,35 @@ void func_80132A64(HSD_GObj* gobj);
 void ftKoopa_OnLoadForGKoopa(Fighter* fp);
 void ftKoopa_LoadSpecialAttrs(HSD_GObj* gobj);
 
+f32 func_80132DC0(HSD_GObj* gobj);
+f32 func_80132DD0(HSD_GObj* gobj);
+f32 func_80132DE0(HSD_GObj* gobj);
+f32 func_80132DF0(HSD_GObj* gobj);
+f32 func_80132E00(HSD_GObj* gobj);
+f32 func_80132E10(HSD_GObj* gobj);
+f32 func_80132E20(HSD_GObj* gobj);
+void ftKoopa_OnDeath(HSD_GObj* gobj);
+void func_80132E30(HSD_GObj* gobj);
+void ftKoopa_SpecialAirS_StartAction(HSD_GObj* gobj);
+void func_8013319C(HSD_GObj* gobj);
+void func_8013322C(HSD_GObj* gobj);
+void func_801332C4(HSD_GObj* gobj);
+void func_80133324(HSD_GObj* gobj);
+void func_80133398(HSD_GObj* gobj);
+void func_801333F8(HSD_GObj* gobj);
+void func_80133484(HSD_GObj* gobj);
+void func_801334E4(HSD_GObj* gobj);
+void func_8013359C(HSD_GObj* gobj);
+void func_80133654(HSD_GObj* gobj);
+void func_80133690(HSD_GObj* gobj);
+void func_801336CC(HSD_GObj* gobj);
+void ftKoopa_OnLoad(HSD_GObj* gobj);
+void func_80132B38(void);
+void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftKoopa_OnItemInvisible(HSD_GObj* gobj);
+void ftKoopa_OnItemVisible(HSD_GObj* gobj);
+void ftKoopa_OnItemDrop(HSD_GObj* gobj, bool bool1);
+void ftKoopa_OnKnockbackEnter(HSD_GObj* gobj);
+void ftKoopa_OnKnockbackExit(HSD_GObj* gobj);
+
 #endif

@@ -137,4 +137,6 @@ void HSD_CObjGetUpVector(HSD_CObj* cobj, Vec3* up);
 void HSD_CObjGetInterest(HSD_CObj* cobj, Vec3* interest);
 HSD_CObj* HSD_CObjAlloc(void);
 
+void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags);
+
 #endif

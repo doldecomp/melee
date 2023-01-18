@@ -24,4 +24,16 @@ typedef struct _ftSeakAttributes {
 void lbl_8011412C(HSD_GObj* fighter_gobj);
 void func_80114758(HSD_GObj*);
 
+void ftSeak_OnLoad(HSD_GObj* fighter_gobj);
+void ftSeak_80110198(HSD_GObj* fighter_gobj);
+void ftSeak_801101CC(HSD_GObj* fighter_gobj);
+void ftSeak_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftSeak_OnItemInvisible(HSD_GObj* fighter_gobj);
+void ftSeak_OnItemVisible(HSD_GObj* fighter_gobj);
+void ftSeak_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1);
+void ftSeak_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
+void ftSeak_OnKnockbackEnter(HSD_GObj* fighter_gobj);
+void ftSeak_OnKnockbackExit(HSD_GObj* fighter_gobj);
+void ftSeak_OnDeath(HSD_GObj* fighter_gobj);
+
 #endif

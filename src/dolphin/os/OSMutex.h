@@ -17,4 +17,8 @@ void OSUnlockMutex(OSMutex*);
 void __OSUnlockAllMutex(OSThread*);
 bool OSTryLockMutex(OSMutex*);
 
+void __OSCheckDeadLock(void);
+void __OSCheckMutexes(void);
+void __OSCheckMutex(void);
+
 #endif

@@ -1,0 +1,6 @@
+#ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALN_H
+#define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALN_H
+
+#include <Runtime/platform.h>
+
+#endif

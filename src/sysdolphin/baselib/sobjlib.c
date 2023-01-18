@@ -1,7 +1,6 @@
 #include <sysdolphin/baselib/__baselib.h>
 #include <sysdolphin/baselib/sobjlib.h>
 
-#include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/os/os.h>

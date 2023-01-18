@@ -23,4 +23,20 @@ typedef struct _ftPurinAttributes {
 /// functions
 void func_8013C494(HSD_GObj* fighter_gobj);
 
+void func_8013C614(Fighter* fp, s32 arg1, s32 arg2);
+void* func_8013C664(HSD_GObj* fighter_gobj);
+void ftPurin_OnLoad(HSD_GObj* fighter_gobj);
+void func_8013C2F8(void);
+void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftPurin_OnItemInvisible(HSD_GObj* fighter_gobj);
+void ftPurin_OnItemVisible(HSD_GObj* fighter_gobj);
+void ftPurin_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1);
+void ftPurin_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
+void ftPurin_OnKnockbackEnter(HSD_GObj* fighter_gobj);
+void ftPurin_OnKnockbackExit(HSD_GObj* fighter_gobj);
+void ftPurin_OnDeath(HSD_GObj* fighter_gobj);
+void ftPurin_OnUserDataRemove(HSD_GObj* fighter_gobj);
+void func_8013C360(HSD_GObj* fighter_gobj);
+void func_8013C4F0(HSD_GObj* fighter_gobj, s32 arg1, Mtx vmtx);
+
 #endif

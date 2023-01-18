@@ -305,4 +305,7 @@ u32 HSD_TexMap2Index(u8 mapid);
 struct _HSD_ImageDesc* HSD_ImageDescAlloc(void);
 struct _HSD_TObj* allocShadowTObj(void);
 
+void HSD_TObjRemoveAnim(HSD_TObj* tobj);
+void HSD_TObjReqAnimByFlags(HSD_TObj* tobj, f32 startframe, u32 flags);
+
 #endif

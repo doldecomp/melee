@@ -1,6 +1,7 @@
 #ifndef __DOLPHIN_DVD_H_
 #define __DOLPHIN_DVD_H_
 
+#include <dolphin/dvd/forward.h>
 #include <Runtime/platform.h>
 
 struct bb2struct {
@@ -31,9 +32,6 @@ typedef struct {
     u32 userLength;
     u32 padding0;
 } DVDBuffer;
-
-typedef struct DVDCommandBlock DVDCommandBlock;
-typedef void (*DVDCBCallback)(s32 result, DVDCommandBlock* block);
 
 struct DVDCommandBlock {
     /*0x00*/ DVDCommandBlock* next;
@@ -92,5 +90,16 @@ bool DVDSetAutoInvalidation(bool autoInval);
 
 #define DVDReadAsync(fileInfo, addr, length, offset, callback)                 \
     DVDReadAsyncPrio((fileInfo), (addr), (length), (offset), (callback), 2)
+
+s32 DVDGetCommandBlockStatus(const DVDCommandBlock* block);
+bool DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback);
+int DVDCancelAll(void);
+DVDDiskID* DVDGetCurrentDiskID(void);
+u32 CategorizeError(u32 error);
+bool DVDCancelStreamAsync(DVDCommandBlock* block, DVDCBCallback callback);
+int DVDCancelStream(DVDCommandBlock* block);
+bool DVDStopStreamAtEndAsync(DVDCommandBlock* block, DVDCBCallback callback);
+bool DVDInquiryAsync(DVDCommandBlock* block, void* addr,
+                     DVDCBCallback callback);
 
 #endif

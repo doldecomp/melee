@@ -12,7 +12,7 @@ static bool Prepared;
 
 #ifdef MWERKS_GEKKO
 
-void Run(register void (*callback)(void))
+void Run(register Event callback)
 {
     OSDisableInterrupts();
     ICFlashInvalidate();
@@ -26,7 +26,7 @@ void Run(register void (*callback)(void))
 
 #else
 
-void Run(void (*unused)(void))
+void Run(Event arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -41,7 +41,7 @@ static void Callback(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm __OSReboot(u32 resetCode, bool forceMenu)
+asm void __OSReboot(u32 resetCode, bool forceMenu)
 { // clang-format off
     nofralloc
 /* 80348144 00344D24  7C 08 02 A6 */	mflr r0

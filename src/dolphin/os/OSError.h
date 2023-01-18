@@ -3,9 +3,6 @@
 
 #include <dolphin/os/OSContext.h>
 
-typedef u16 OSError;
-typedef void (*OSErrorHandler)(OSError error, OSContext* context, ...);
-
 #define OS_ERROR_SYSTEM_RESET 0
 #define OS_ERROR_MACHINE_CHECK 1
 #define OS_ERROR_DSI 2

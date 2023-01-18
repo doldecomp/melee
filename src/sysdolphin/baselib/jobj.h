@@ -381,4 +381,31 @@ static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)
     PSMTXCopy(mtx, jobj->mtx);
 }
 
+void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint);
+void HSD_JObjUnrefThis(HSD_JObj* jobj);
+void HSD_JObjMakeMatrix(HSD_JObj* jobj);
+void RecalcParentTrspBits(HSD_JObj* jobj);
+void HSD_JObjAddChild(HSD_JObj* jobj, HSD_JObj* child);
+HSD_JObj* HSD_JObjReparent(HSD_JObj* jobj, HSD_JObj* parent);
+void HSD_JObjAddDObj(HSD_JObj* jobj, HSD_DObj* dobj);
+HSD_JObj* jobj_get_effector_checked(HSD_JObj* eff);
+void resolveIKJoint1(HSD_JObj* jobj);
+void resolveIKJoint2(HSD_JObj* jobj);
+void HSD_JObjRemoveAnimByFlags(HSD_JObj* jobj, u32 flags);
+void HSD_JObjSetDPtclCallback(DPCtlCallback cb);
+int JObjInit(HSD_Class* o);
+void JObjReleaseChild(HSD_JObj* jobj);
+void JObjRelease(HSD_Class* o);
+void HSD_JObjRemoveAnimAllByFlags(HSD_JObj* jobj, u32 flags);
+void JObjAmnesia(HSD_ClassInfo* info);
+void HSD_JObjReqAnimByFlags(HSD_JObj* jobj, u32 flags, f32 frame);
+void HSD_JObjReqAnimAllByFlags(HSD_JObj* jobj, u32 flags, f32 frame);
+void HSD_JObjReqAnim(HSD_JObj* jobj, f32 frame);
+void JObjSortAnim(HSD_AObj* aobj);
+void JObjResetRST(HSD_JObj* jobj, HSD_Joint* joint);
+void JObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val);
+void HSD_JObjAnim(HSD_JObj* jobj);
+void JObjAnimAll(HSD_JObj* jobj);
+s32 JObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent);
+
 #endif

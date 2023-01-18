@@ -22,4 +22,7 @@ void __OSDoHotReset(s32 arg0);
 #define OS_RESET_HOTRESET 1
 #define OS_RESET_SHUTDOWN 2
 
+bool __OSCallResetFunctions(bool funcs_arg);
+u32 OSGetResetCode(void);
+
 #endif

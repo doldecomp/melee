@@ -244,4 +244,16 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj);
 void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj);
 void ftLuigi_SpecialAirLw_Coll(HSD_GObj* fighter_gobj);
 
+void ftLuigi_OnLoad(HSD_GObj* fighter_gobj);
+void ftLuigi_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftLuigi_OnItemInvisible(HSD_GObj* fighter_gobj);
+void ftLuigi_OnItemVisible(HSD_GObj* fighter_gobj);
+void ftLuigi_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1);
+void ftLuigi_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
+void ftLuigi_OnKnockbackEnter(HSD_GObj* fighter_gobj);
+void ftLuigi_OnKnockbackExit(HSD_GObj* fighter_gobj);
+void ftLuigi_8014260C(s32 arg0, s32* arg1, s32* arg2);
+void ftLuigi_OnDeath(HSD_GObj* fighter_gobj);
+void* func_80142640(s32 demoMotionArg);
+
 #endif

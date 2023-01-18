@@ -1,5 +1,8 @@
+#include <dolphin/gx/GXAttr.h>
+
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/GXTransform.h>
 #include <placeholder.h>
 #include <Runtime/platform.h>
 
@@ -149,13 +152,6 @@ lbl_8033BEC4:
 /* 8033BEFC 00338ADC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void __GXXfVtxSpecs(void)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 
@@ -515,7 +511,7 @@ void GXInvalidateVtxCache(void)
 
 // https://decomp.me/scratch/9TphI // 640 (96.44%)
 #pragma push
-asm void GXSetTexCoordGen2(void)
+asm void GXSetTexCoordGen2(u32, s32, u32, s32, s32, s32)
 { // clang-format off
     nofralloc
 /* 8033C8A8 00339488  7C 08 02 A6 */	mflr r0
@@ -732,13 +728,6 @@ lbl_8033CB60:
 /* 8033CB74 00339754  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetTexCoordGen2(void)
-{
-    NOT_IMPLEMENTED;
-}
 
 #endif
 

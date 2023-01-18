@@ -1,6 +1,7 @@
 #ifndef DOLPHIN_GX___TYPES_H
 #define DOLPHIN_GX___TYPES_H
 
+#include <dolphin/gx/forward.h>
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
@@ -19,7 +20,7 @@
             ((u32) (value) << (shift));
 
 // GXFifoObj private fields
-typedef struct {
+typedef struct __GXFifoObj {
     void* base;      // at 0x00
     void* end;       // at 0x04
     u32 size;        // at 0x08
@@ -31,10 +32,7 @@ typedef struct {
     u8 x20_pad[4];   // at 0x20
 } __GXFifoObj;
 
-typedef void* (*GXTexRegionCallback)(void); // signature unknown
-
-// https://github.com/kiwi515/open_rvl/blob/366b440e58f030aa0aacc9316d2717289d58fe16/include/GX/GXInit.h#L9-L41
-typedef struct {
+typedef struct GXContext {
     union {
         u32 u32;
         u16 u16[2];
@@ -92,7 +90,7 @@ typedef struct {
     u32 dirtyFlags;                     // at 0x570
 } GXContext;
 
-typedef struct {
+typedef struct GXSettings {
     u16 z_mode;
     u16 color_settings;
     u16 dst_alpha;
@@ -105,7 +103,7 @@ extern volatile u16* __peReg;
 extern volatile u16* __cpReg;
 extern volatile u32* __memReg;
 
-extern volatile union {
+extern volatile union WGPIPE_T {
     s8 s8;
     u8 u8;
     s16 s16;
@@ -114,10 +112,9 @@ extern volatile union {
     s32 s32;
     unk_t ptr;
     f32 f32;
-
 } WGPIPE AT_ADDRESS(0xCC008000);
 
-typedef struct {
+typedef struct __GXGPFifo {
     u16 x0;
     s16 x2;
     s16 x4;
@@ -125,17 +122,17 @@ typedef struct {
     u8 x8_pad[0x38 - 0x8];
 } __GXGPFifo;
 
-typedef struct {
+typedef struct GXContexts {
     GXContext* main;
     GXContext* null;
 } GXContexts;
 
-typedef struct _GXTexObj {
+struct GXTexObj {
     u8 x0_pad[0x8];
     u32 dimensions;
     u8 xC_pad[0x8];
     GXTexFmt tex_fmt; // at 0x14
     u8 x18_pad[8];    // at 0x18
-} GXTexObj;
+};
 
 #endif

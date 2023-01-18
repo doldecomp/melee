@@ -23,9 +23,11 @@ void PPCMtdec(u32);
 void PPCSync(void);
 void PPCHalt(void);
 u32 PPCMfhid2(void);
-void PPCMthid2(u32);
 void PPCMtwpar(u32);
 void PPCDisableSpeculation(void);
 void PPCSetFpNonIEEEMode(void);
+void PPCSync(void);
+void PPCHalt(void);
+void PPCMthid2(u32);
 
 #endif

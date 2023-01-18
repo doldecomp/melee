@@ -6,14 +6,15 @@
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GXMisc.h>
-#include <dolphin/gx/__GXTexture.h>
-#include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXBump.h>
 #include <dolphin/gx/GXFrameBuf.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXLight.h>
+#include <dolphin/gx/GXPerf.h>
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
+#include <dolphin/gx/GXTexture.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/vi/vi.h>
 #include <placeholder.h>

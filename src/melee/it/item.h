@@ -226,6 +226,9 @@ void RunCallback(HSD_GObj* this, HSD_GObjEvent arg1);
 void func_8026A8EC_inline1(HSD_GObj* this);
 void func_8026A8EC_inline2(HSD_GObj* item_gobj);
 void func_8026A8EC_inline3(HSD_GObj* item_gobj);
+void foobar(HSD_GObj* gobj);
+void foobar2(HSD_GObj* gobj);
+void foobar3(HSD_GObj* gobj);
 
 /// Stop All Item SFX
 void func_8026B0B4(HSD_GObj* item_gobj);
@@ -240,4 +243,5 @@ static inline Item* GetItemData(HSD_GObj* item_gobj)
 }
 
 #endif
+
 /// @}

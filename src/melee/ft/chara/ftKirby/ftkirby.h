@@ -35,4 +35,10 @@ void ftKirby_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
 void func_800EEB00(HSD_GObj*, void*);
 void func_800EEB1C(HSD_GObj*, void*);
 
+void ftKirby_800EE74C(HSD_GObj* fighter_gobj);
+void ftKirby_800EE7B8(HSD_GObj* fighter_gobj);
+void func_800EE528(void);
+void ftKirby_OnDeath(HSD_GObj* fighter_gobj);
+void ftKirby_OnLoad(HSD_GObj* fighter_gobj);
+
 #endif

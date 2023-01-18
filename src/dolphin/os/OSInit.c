@@ -194,8 +194,7 @@ void OSInit(void)
         // set up bottom of heap (ArenaLo)
         // grab address from BootInfo if it exists, otherwise use default
         // __ArenaLo
-        OSSetArenaLo(BootInfo->arenaLo == NULL ? __ArenaLo
-                                               : BootInfo->arenaLo);
+        OSSetArenaLo(BootInfo->arenaLo == NULL ? __ArenaLo : BootInfo->arenaLo);
 
         // if the input arenaLo is null, and debug flag location exists (and
         // flag is < 2),
@@ -210,8 +209,7 @@ void OSInit(void)
         // set up top of heap (ArenaHi)
         // grab address from BootInfo if it exists, otherwise use default
         // __ArenaHi
-        OSSetArenaHi(BootInfo->arenaHi == NULL ? __ArenaHi
-                                               : BootInfo->arenaHi);
+        OSSetArenaHi(BootInfo->arenaHi == NULL ? __ArenaHi : BootInfo->arenaHi);
 
         // OS INIT AND REPORT //
         // initialise a whole bunch of OS stuff

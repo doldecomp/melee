@@ -106,4 +106,9 @@ void HSD_RObjRemove(HSD_RObj*);
 void HSD_RObjUpdateAll(HSD_RObj* robj, HSD_JObj* jobj, HSD_ObjUpdateFunc);
 bool HSD_RObjGetGlobalPosition(HSD_RObj* robj, bool, Vec3* translate);
 
+void HSD_RObjRemoveAnimByFlags(HSD_RObj* robj, u32 flags);
+void HSD_RObjReqAnimByFlags(HSD_RObj* robj, f32 startframe, u32 flags);
+void HSD_RObjAddAnim(HSD_RObj* robj, HSD_RObjAnimJoint* anim);
+void HSD_RObjAnim(HSD_RObj* robj);
+
 #endif

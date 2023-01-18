@@ -1,84 +1,12 @@
 #include <sysdolphin/baselib/rumble.h>
 
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/pad/forward.h>
 #include <dolphin/pad/Pad.h>
 #include <Runtime/platform.h>
-
-typedef struct _RumbleCommand {
-    u16 op;
-    u16 frame;
-} RumbleCommand;
-
-typedef union _HSD_Rumble {
-    u16 def;
-    struct _RumbleCommand command;
-} HSD_Rumble;
-
-typedef struct _HSD_PadData {
-    PADStatus stat[4];
-    u32 rumble_mask;
-} HSD_PadData;
-
-typedef struct _HSD_PadRumbleListData {
-    /*0x00*/ struct _HSD_PadRumbleListData* next;
-    /*0x04*/ u32 id;
-    /*0x08*/ u8 pause;
-    /*0x09*/ u8 pri;
-    /*0x0A*/ u8 status;
-    /*0x0C*/ u16 loop_count;
-    /*0x0E*/ u16 wait;
-    /*0x10*/ s32 frame;
-    /*0x14*/ /* HSD_Rumble* */ u16* stack;
-    /*0x18*/ /* HSD_Rumble* */ u16* listp;
-    /*0x1C*/ /* HSD_Rumble* */ u16* headp;
-} HSD_PadRumbleListData;
-
-struct _RumbleInfo {
-    u16 max_list;
-    u8 unk2;
-    struct _HSD_PadRumbleListData* listdatap;
-};
-
-typedef struct _PadLibData {
-    /*0x00*/ u8 qnum;
-    /*0x01*/ u8 qread;
-    /*0x02*/ u8 qwrite;
-    /*0x03*/ u8 qcount;
-    /*0x04*/ u8 qtype;
-    /*0x08*/ struct _HSD_PadData* queue;
-    /*0x0C*/ s32 repeat_start;
-    /*0x10*/ s32 repeat_interval;
-    /*0x14*/ u8 adc_type;
-    /*0x15*/ s8 adc_th;
-    /*0x18*/ f32 adc_angle;
-    /*0x1C*/ u8 clamp_stickType;
-    /*0x1D*/ u8 clamp_stickShift;
-    /*0x1E*/ s8 clamp_stickMax;
-    /*0x1F*/ s8 clamp_stickMin;
-    /*0x20*/ u8 clamp_analogLRShift;
-    /*0x21*/ u8 clamp_analogLRMax;
-    /*0x22*/ u8 clamp_analogLRMin;
-    /*0x23*/ u8 clamp_analogABShift;
-    /*0x24*/ u8 clamp_analogABMax;
-    /*0x25*/ u8 clamp_analogABMin;
-    /*0x26*/ s8 scale_stick;
-    /*0x27*/ u8 scale_analogLR;
-    /*0x28*/ u8 scale_analogAB;
-    /*0x29*/ u8 cross_dir;
-    /*0x2A*/ u8 reset_switch_status;
-    /*0x2B*/ u8 reset_switch;
-    /*0x2C*/ struct _RumbleInfo rumble_info;
-} PadLibData;
+#include <sysdolphin/baselib/controller.h>
 
 extern PadLibData HSD_PadLibData;
-
-struct Struct804C22E0 {
-    u8 unk0;
-    u8 unk1;
-    u8 unk2;
-    u16 unk4;
-    struct _HSD_PadRumbleListData* unk8;
-};
 
 struct Struct804C22E0 lbl_804C22E0[4];
 
@@ -102,7 +30,7 @@ void func_803780DC(u8 a)
 
 void func_80378128(struct Struct804C22E0* a, HSD_PadRumbleListData* b)
 {
-    struct _RumbleInfo* r6 = &HSD_PadLibData.rumble_info;
+    RumbleInfo* r6 = &HSD_PadLibData.rumble_info;
     HSD_PadRumbleListData** r5 = &a->unk8;
 
     while ((*r5) != b)
@@ -139,10 +67,10 @@ void func_80378280(u8 a, int b)
 {
     struct Struct804C22E0* r31 = &lbl_804C22E0[a];
     bool r3 = OSDisableInterrupts();
-    struct _HSD_PadRumbleListData* r7 = r31->unk8;
+    HSD_PadRumbleListData* r7 = r31->unk8;
 
     while (r7 != NULL) {
-        struct _HSD_PadRumbleListData* r6 = r7->next;
+        HSD_PadRumbleListData* r6 = r7->next;
         if (r7->id == b)
             func_80378128(r31, r7);
         r7 = r6;
@@ -153,10 +81,10 @@ void func_80378280(u8 a, int b)
 void func_80378330_inline(u8 a, int b)
 {
     bool intrEnabled = OSDisableInterrupts();
-    struct _HSD_PadRumbleListData* r4 = lbl_804C22E0[a].unk8;
+    HSD_PadRumbleListData* r4 = lbl_804C22E0[a].unk8;
 
     while (r4 != NULL) {
-        struct _HSD_PadRumbleListData* next = r4->next;
+        HSD_PadRumbleListData* next = r4->next;
 
         r4->pause = b;
         r4 = next;
@@ -194,7 +122,7 @@ void func_80378430_inline(HSD_PadRumbleListData** r6, HSD_PadRumbleListData* r7)
 
 int func_80378430(u8 a, int b, int c, int d, void* e)
 {
-    struct _RumbleInfo* r31 = &HSD_PadLibData.rumble_info;
+    struct RumbleInfo* r31 = &HSD_PadLibData.rumble_info;
     struct Struct804C22E0* r30 = &lbl_804C22E0[a];
     int r29 = 0;
     bool intrEnabled = OSDisableInterrupts();
@@ -288,10 +216,10 @@ void func_803786F0_inline(HSD_PadRumbleListData** r6,
 
 void func_803786F0(void)
 {
-    struct _RumbleInfo* r31 = &HSD_PadLibData.rumble_info;
+    struct RumbleInfo* r31 = &HSD_PadLibData.rumble_info;
     struct Struct804C22E0* r30 = lbl_804C22E0;
-    struct _HSD_PadRumbleListData* r29;
-    struct _HSD_PadRumbleListData* r28;
+    HSD_PadRumbleListData* r29;
+    HSD_PadRumbleListData* r28;
     int i;
     u8 dummy[8];
 
@@ -333,7 +261,7 @@ struct Struct804C22E0 lbl_80406DE0 = { 0 };
 
 void HSD_PadRumbleInit(u16 a, void* b)
 {
-    struct _RumbleInfo* r6 = &HSD_PadLibData.rumble_info;
+    struct RumbleInfo* r6 = &HSD_PadLibData.rumble_info;
     int i;
 
     r6->unk2 = 0;

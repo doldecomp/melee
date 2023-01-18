@@ -168,4 +168,11 @@ void HSD_MObjDeleteShadowTexture(HSD_TObj* tobj);
 HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list);
 void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2);
 
+void HSD_MObjSetup(HSD_MObj* mobj, u32 rendermode);
+void HSD_MObjUnset(HSD_MObj* mobj, u32 rendermode);
+void HSD_MObjSetToonTextureImage(HSD_ImageDesc* imagedesc);
+void HSD_MObjSetDiffuseColor(HSD_MObj* mobj, u8 r, u8 g, u8 b);
+void HSD_MObjSetAlpha(HSD_MObj* mobj, f32 alpha);
+void HSD_MObjAddShadowTexture(HSD_TObj* tobj);
+
 #endif

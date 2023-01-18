@@ -5,4 +5,6 @@
 
 bool ftDonkey_800E0134(HSD_GObj* fighter_gobj);
 
+bool ftDonkey_800E0134(HSD_GObj* fighter_gobj);
+
 #endif

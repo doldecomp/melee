@@ -38,4 +38,7 @@ typedef struct _BufferIoUnkStruct {
     /* 0x44 */ s32 x44;
 } BufferIoUnkStruct;
 
+void __prep_buffer(BufferIoUnkStruct* arg0);
+s32 __flush_buffer(BufferIoUnkStruct* arg0, s32* arg1);
+
 #endif

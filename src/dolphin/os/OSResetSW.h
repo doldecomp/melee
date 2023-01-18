@@ -53,4 +53,7 @@ typedef struct _OSResetSW_Unk1 {
 typedef bool (*OSResetSW_MulticastPredicate)(OSResetSW_Predicate*);
 bool OSGetResetSwitchState(void);
 
+void __OSResetSWInterruptHandler(__OSInterrupt interrupt, OSContext* context);
+bool OSGetResetButtonState(void);
+
 #endif

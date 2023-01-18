@@ -3,6 +3,7 @@
 
 #include <common_structs.h>
 #include <Runtime/platform.h>
+#include <stdio.h>
 
 enum __file_kinds {
     __closed_file,
@@ -16,5 +17,7 @@ enum __file_orientation {
     __char_oriented,
     __wide_oriented
 };
+
+int fwide(FILE* stream, int mode);
 
 #endif

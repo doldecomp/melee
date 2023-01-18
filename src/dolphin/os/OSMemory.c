@@ -145,7 +145,7 @@ void Config48MB(void)
 
 #ifdef MWERKS_GEKKO
 
-asm void RealMode(register void (*)(void))
+asm void RealMode(register Event)
 { // clang-format off
     nofralloc
     clrlwi r3, r3, 2
@@ -158,7 +158,7 @@ asm void RealMode(register void (*)(void))
 
 #else
 
-void RealMode(void (*unused)(void))
+void RealMode(Event arg0)
 {
     NOT_IMPLEMENTED;
 }

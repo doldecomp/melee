@@ -762,7 +762,7 @@ void func_80043558(CollData* arg0, s32 arg1)
 #else
 
 /// @todo dummy stack in func_80043324_inline2 breaks this function
-void func_80043558(CollData* arg0, int arg1)
+void func_80043558(CollData* arg0, s32 arg1)
 {
     enum_t temp_r3 = func_80054C6C(arg1);
 

@@ -6,4 +6,9 @@
 void ftDonkey_800DFA70(HSD_GObj* fighter_gobj);
 bool ftDonkey_800DF938(HSD_GObj* fighter_gobj);
 
+void ftDonkey_800DF9F0(HSD_GObj* fighter_gobj);
+void ftDonkey_800DFA50(HSD_GObj* fighter_gobj);
+void ftDonkey_800DFA70(HSD_GObj* fighter_gobj);
+bool ftDonkey_800DF938(HSD_GObj* fighter_gobj);
+
 #endif

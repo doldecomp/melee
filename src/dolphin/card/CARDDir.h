@@ -6,4 +6,6 @@
 
 s32 __CARDUpdateDir(s32 chan, CARDCallback callback);
 
+s32 __CARDUpdateDir(s32 chan, CARDCallback callback);
+
 #endif

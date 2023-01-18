@@ -15,4 +15,6 @@ void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
 void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj);
 bool ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj);
 
+s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj);
+
 #endif

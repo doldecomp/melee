@@ -44,4 +44,19 @@ void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
 unk_t func_8012BECC(void);
 void func_8012C850(HSD_GObj* fighter_gobj);
 
+void func_8012B918(HSD_GObj* fighter_gobj);
+void ftYoshi_OnDeath(HSD_GObj* fighter_gobj);
+void ftYoshi_OnLoad(HSD_GObj* fighter_gobj);
+void ftYoshi_8012BA8C(HSD_GObj* fighter_gobj);
+f32 ftYoshi_8012BAC0(Fighter* fp);
+void ftYoshi_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftYoshi_OnItemInvisible(HSD_GObj* fighter_gobj);
+void ftYoshi_OnItemVisible(HSD_GObj* fighter_gobj);
+void ftYoshi_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1);
+void ftYoshi_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
+void ftYoshi_OnKnockbackEnter(HSD_GObj* fighter_gobj);
+void ftYoshi_OnKnockbackExit(HSD_GObj* fighter_gobj);
+unk_t func_8012BDA0(void);
+void func_8012BE3C(HSD_GObj* fighter_gobj);
+
 #endif

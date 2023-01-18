@@ -5,16 +5,17 @@
 
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/fobj.h>
+#include <sysdolphin/baselib/forward.h>
 #include <sysdolphin/baselib/mobj.h>
 
-typedef struct _HSD_DObj {
+struct _HSD_DObj {
     HSD_Class parent;
     struct _HSD_DObj* next; // 0x04
     struct _HSD_MObj* mobj; // 0x08
     struct _HSD_PObj* pobj; // 0x0C
     struct _HSD_AObj* aobj; // 0x10
     u32 flags;              // 0x14
-} HSD_DObj;
+};
 
 typedef struct _HSD_DObjDesc {
     char* class_name;
@@ -60,5 +61,8 @@ HSD_DObj* HSD_DObjAlloc(void);
 void HSD_DObjResolveRefs(HSD_DObj* dobj, HSD_DObjDesc* desc);
 void HSD_DObjResolveRefsAll(HSD_DObj* dobj, HSD_DObjDesc* desc);
 void HSD_DObjDisp(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
+
+void HSD_DObjRemove(HSD_DObj* dobj);
+void HSD_DObjSetDefaultClass(HSD_ClassInfo* info);
 
 #endif
