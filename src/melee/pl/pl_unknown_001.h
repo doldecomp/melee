@@ -28,5 +28,6 @@ void func_8003891C(int slot);
 void func_80038F10(int slot);
 void func_8003715C(void);
 void func_80037590(void);
+void func_8003E150(void);
 
 #endif
