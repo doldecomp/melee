@@ -1,12 +1,13 @@
-#include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
+#include <melee/ft/ftcoll.h>
 
 #include <common_structs.h>
+#include <dolphin/mtx/types.h>
 #include <math.h>
 #include <melee/ft/fighter.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
 #include <melee/pl/player.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
