@@ -121,14 +121,7 @@ void lbl_80221DD4(HSD_GObj* arg0) {}
 
 void lbl_80221DD8(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 unused[8];
-#endif
-
-    Map* map = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 bool lbl_80221E28(HSD_GObj* arg0)
