@@ -4,6 +4,7 @@
 #include <dolphin/gx/__GXBump.h>
 #include <dolphin/gx/__GXInit.h>
 #include <placeholder.h>
+#include <Runtime/runtime.h>
 
 #ifdef MWERKS_GEKKO
 
@@ -21,8 +22,6 @@ Vec2 const lbl_804DE2D0 = { 1.0F, 0.0F };
 f64 const lbl_804DE2D8 = 3.0L;
 Vec2 const lbl_804DE2E0 = { 256.0F, 0.0F };
 f64 const lbl_804DE2E8 = 4503599627370496.0L;
-
-unk_t __cvt_fp2unsigned();
 
 #pragma push
 asm void GXSetFog(s32, GXColor, f32, f32, f32, f32)
