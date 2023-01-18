@@ -31,7 +31,7 @@ void func_80078C70(HSD_GObj*);
 void func_8007925C(HSD_GObj*);
 void func_8007AB48(HSD_GObj*);
 void func_8007AB80(HSD_GObj*);
-void func_8007ABD0(struct _Hitbox*, u32 damageAmount, HSD_GObj*);
+void func_8007ABD0(Hitbox*, u32 damageAmount, HSD_GObj*);
 void func_8007AE80(HSD_GObj*);
 void func_8007AEE0(HSD_GObj*);
 void func_8007AF28(HSD_GObj* fighter_gobj);
