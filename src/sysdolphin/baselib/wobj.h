@@ -25,7 +25,7 @@ typedef struct _HSD_WObjInfo {
 } HSD_WObjInfo;
 
 typedef struct _HSD_WObjAnim {
-    struct _HSD_AObjDesc* aobjdesc;
+    HSD_AObjDesc* aobjdesc;
     struct _HSD_RObjAnimJoint* robjanim;
 } HSD_WObjAnim;
 
@@ -47,5 +47,9 @@ void HSD_WObjSetPositionY(HSD_WObj*, f32);
 void HSD_WObjSetPositionZ(HSD_WObj*, f32);
 void HSD_WObjGetPosition(HSD_WObj*, Vec3*);
 HSD_WObj* HSD_WObjAlloc(void);
+
+
+void HSD_WObjSetDefaultClass(HSD_ClassInfo* info);
+void HSD_WObjSetDefaultClass(HSD_ClassInfo* info);
 
 #endif

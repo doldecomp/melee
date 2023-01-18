@@ -22,4 +22,10 @@ void func_8038FED4(HSD_GObj* gobj);
 void func_8038FAA8(HSD_GObjProc*);
 void func_8038FC18(HSD_GObjProc* gproc);
 
+
+void func_8038FCE4(HSD_GObjProc* gproc);
+void func_8038FE24(HSD_GObjProc* gproc);
+void func_8038FCE4(HSD_GObjProc* gproc);
+void func_8038FE24(HSD_GObjProc* gproc);
+
 #endif

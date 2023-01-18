@@ -1,3 +1,5 @@
+#include <sysdolphin/baselib/gobjobject.h>
+
 #include <sysdolphin/baselib/gobj.h>
 
 extern void (**lbl_804D7810)(void*);
@@ -14,7 +16,7 @@ HSD_GObj* func_80390A3C(u16 id, u8 arg1)
     return cur;
 }
 
-void func_80390A70(HSD_GObj* gobj, u8 kind, unk_t obj)
+void func_80390A70(HSD_GObj* gobj, u8 kind, any_t obj)
 {
     HSD_ASSERT(42, gobj->obj_kind == HSD_GOBJ_OBJ_NONE);
     gobj->obj_kind = kind;

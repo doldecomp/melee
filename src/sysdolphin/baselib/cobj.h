@@ -98,7 +98,7 @@ typedef struct _HSD_CObjInfo {
 } HSD_CObjInfo;
 
 typedef struct _HSD_CameraAnim {
-    struct _HSD_AObjDesc* aobjdesc;
+    HSD_AObjDesc* aobjdesc;
     struct _HSD_WObjAnim* eye_anim;
     struct _HSD_WObjAnim* interest_anim;
 } HSD_CameraAnim;

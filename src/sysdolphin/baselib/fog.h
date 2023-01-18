@@ -55,4 +55,16 @@ void HSD_FogReqAnimByFlags(HSD_Fog*, u32 flags, f32 frame);
 void FogUpdateFunc(any_t obj, enum_t type, HSD_ObjData* fval);
 HSD_Fog* HSD_FogLoadDesc(HSD_FogDesc* desc);
 
+
+HSD_Fog* HSD_FogAlloc(void);
+HSD_FogAdj* HSD_FogAdjAlloc(void);
+void func_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc);
+void HSD_FogReqAnim(HSD_Fog* fog, f32 frame);
+void HSD_FogInterpretAnim(HSD_Fog* fog);
+HSD_Fog* HSD_FogAlloc(void);
+HSD_FogAdj* HSD_FogAdjAlloc(void);
+void func_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc);
+void HSD_FogReqAnim(HSD_Fog* fog, f32 frame);
+void HSD_FogInterpretAnim(HSD_Fog* fog);
+
 #endif

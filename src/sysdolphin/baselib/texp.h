@@ -167,4 +167,10 @@ void HSD_TExpFreeList(HSD_TExp*, HSD_TExpType, int);
 void HSD_TExpCompile(HSD_TExp*, HSD_TExpTevDesc**, HSD_TExp**);
 void HSD_TExpSetupTev(HSD_TExpTevDesc*, HSD_TExp*);
 
+
+void HSD_TExpRef(HSD_TExp* texp, u8 sel);
+void HSD_TExpUnref(HSD_TExp* texp, u8 sel);
+void HSD_TExpRef(HSD_TExp* texp, u8 sel);
+void HSD_TExpUnref(HSD_TExp* texp, u8 sel);
+
 #endif

@@ -46,17 +46,17 @@ struct HSD_AObj {
     struct _HSD_Obj* hsd_obj;
 };
 
-typedef struct _HSD_AObjDesc {
+struct HSD_AObjDesc {
     u32 flags;
     f32 end_frame;
     HSD_FObjDesc* fobjdesc;
     u32 obj_id;
-} HSD_AObjDesc;
+};
 
 typedef struct _HSD_AnimJoint {
     struct _HSD_AnimJoint* child;
     struct _HSD_AnimJoint* next;
-    struct _HSD_AObjDesc* aobjdesc;
+    HSD_AObjDesc* aobjdesc;
     struct _HSD_RObjAnimJoint* robj_anim;
     u32 flags;
 } HSD_AnimJoint;

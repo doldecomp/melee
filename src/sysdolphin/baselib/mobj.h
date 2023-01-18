@@ -110,12 +110,12 @@ typedef struct _HSD_MObjDesc {
 
 typedef struct _HSD_ChanAnim {
     struct _HSD_ChanAnim* next;
-    struct _HSD_AObjDesc* aobjdesc;
+    HSD_AObjDesc* aobjdesc;
 } HSD_ChanAnim;
 
 typedef struct _HSD_TevRegAnim {
     struct _HSD_TevRegAnim* next;
-    struct _HSD_AObjDesc* aobjdesc;
+    HSD_AObjDesc* aobjdesc;
 } HSD_TevRegAnim;
 
 typedef struct _HSD_RenderAnim {
@@ -125,7 +125,7 @@ typedef struct _HSD_RenderAnim {
 
 typedef struct _HSD_MatAnim {
     struct _HSD_MatAnim* next;
-    struct _HSD_AObjDesc* aobjdesc;
+    HSD_AObjDesc* aobjdesc;
     struct _HSD_TexAnim* texanim;
     struct _HSD_RenderAnim* renderanim;
 } HSD_MatAnim;
