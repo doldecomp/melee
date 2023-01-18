@@ -1,3 +1,4 @@
+#include "sysdolphin/baselib/gobj.h"
 #include <melee/gr/grtluigi.h>
 
 #include <dolphin/os/os.h>
@@ -143,16 +144,20 @@ void lbl_80221E30(HSD_GObj* arg0)
 
 void lbl_80221E64(HSD_GObj* arg0) {}
 
+inline void something(HSD_GObj* gobj)
+{
+    Map* map = (Map*) HSD_GObjGetUserData(gobj);
+    func_801C2ED0(gobj->hsd_obj, map->map_id);
+    func_801C8138(gobj, map->map_id, 0);
+}
+
 void lbl_80221E68(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 unused[4];
 #endif
-
-    Map* map = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
+    something(gobj);
 }
 
 bool lbl_80221EB8(HSD_GObj* arg0)
