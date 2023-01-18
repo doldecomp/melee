@@ -40,5 +40,7 @@ s32 func_80008248(s32, struct ftHurt*, void*, f32, f32, f32);
 void func_80008440(struct _Hitbox*);
 void func_80008434(struct _Hitbox*);
 void func_8000ACFC(void);
+void func_80008688(void);
+void func_800084FC(void);
 
 #endif
