@@ -144,17 +144,9 @@ void lbl_80221E30(HSD_GObj* arg0)
 
 void lbl_80221E64(HSD_GObj* arg0) {}
 
-inline void something(HSD_GObj* gobj)
-{
-    Map* map = (Map*) HSD_GObjGetUserData(gobj);
-    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
-    func_801C2ED0(jobj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
-}
-
 void lbl_80221E68(HSD_GObj* gobj)
 {
-    something(gobj);
+    Ground_JObjInline1(gobj);
 }
 
 bool lbl_80221EB8(HSD_GObj* arg0)
