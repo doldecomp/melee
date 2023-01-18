@@ -284,28 +284,6 @@ lbl_80220B78:
 
 .section .data
     .balign 8
-.global lbl_803E8918
-lbl_803E8918:
-    .4byte lbl_80220984
-    .4byte lbl_802209B0
-    .4byte lbl_802209B8
-    .4byte lbl_802209BC
-    .4byte 0
-    .4byte lbl_80220A50
-    .4byte lbl_80220AA0
-    .4byte lbl_80220AA8
-    .4byte lbl_80220AC8
-    .4byte 0
-    .4byte lbl_802209C0
-    .4byte lbl_80220A10
-    .4byte lbl_80220A18
-    .4byte lbl_80220A4C
-    .4byte 0xC0000000
-    .4byte 0
-    .4byte 0
-    .4byte 0
-    .4byte 0
-    .4byte 0
 .global lbl_803E8968
 lbl_803E8968:
     .asciz "/GrTFc.dat"
