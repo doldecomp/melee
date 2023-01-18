@@ -22,7 +22,7 @@ void func_802207F0(int);
 void lbl_8022086C(void);
 void lbl_80220870(void);
 bool lbl_80220894(void);
-bool lbl_80220ACC(int);
+bool lbl_80220ACC(enum_t);
 bool lbl_80220B78(Vec3*, int, HSD_JObj*);
 HSD_GObj* func_8022089C(int);
 

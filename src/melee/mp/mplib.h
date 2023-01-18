@@ -58,7 +58,7 @@ s32 func_80054584(void);
 s32 func_8004DD90(void);
 s32 func_8004E398(void);
 void func_800588D0(f32 left, f32 bottom, f32 right, f32 top);
-s32 func_80056B6C(s32);
+enum_t func_80056B6C(enum_t);
 void func_800580FC(int, mpLib_Callback*, unk_t);
 void func_800581BC(int, mpLib_Callback*, unk_t);
 enum_t func_80054C6C(int);

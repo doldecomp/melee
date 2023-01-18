@@ -235,7 +235,7 @@ typedef struct StageData {
     void (*callback2)(void);
     void (*callback3)(void);
     bool (*callback4)(void);
-    bool (*callback5)(int);
+    bool (*callback5)(enum_t);
     bool (*callback6)(Vec3*, int, HSD_JObj*);
     u32 flags2;
     S16Vec3* x2C;
