@@ -136,5 +136,6 @@ void func_80279BBC(Item* item_data);
 void func_80279BE0(HSD_GObj* item_gobj);
 void func_8027B0C4(HSD_GObj*, SpawnItem*);
 void func_8026FAC4(void);
+void func_80077688(void);
 
 #endif
