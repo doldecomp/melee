@@ -1,7 +1,7 @@
 #include <MSL/string.h>
 #define EOF -1
 
-#ifdef MWERKS_GEKKO
+#ifdef __MWERKS__
 #pragma push
 #pragma ANSI_strict off
 #endif
