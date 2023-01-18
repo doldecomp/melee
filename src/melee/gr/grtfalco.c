@@ -141,3 +141,8 @@ void lbl_80220A50(HSD_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
+
+bool lbl_80220AA0(HSD_GObj* arg0)
+{
+    return false;
+}
