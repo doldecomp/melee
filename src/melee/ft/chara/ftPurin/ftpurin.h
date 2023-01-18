@@ -51,5 +51,6 @@ void lbl_8013CCA8(HSD_GObj*);
 void func_8013CD34(HSD_GObj*);
 void lbl_8013CCE4(HSD_GObj*);
 void func_8013CDD8(HSD_GObj*);
+void func_8013CD34(HSD_GObj*);
 
 #endif
