@@ -31,12 +31,6 @@ typedef struct itHurt itHurt;
 typedef struct SpawnItem SpawnItem;
 typedef struct UnkItemArticles3 UnkItemArticles3;
 
-typedef enum Tangibility {
-    Vulnerable,
-    Invincible,
-    Intangible
-} Tangibility;
-
 typedef enum Item_StateChangeFlags {
     ITEM_UNK_0x1 = (1 << 0),
     ITEM_ANIM_UPDATE = (1 << 1),

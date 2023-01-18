@@ -1,11 +1,12 @@
 #ifndef MELEE_LB_LBCOLLISION_H
 #define MELEE_LB_LBCOLLISION_H
 
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/jobj.h>
 
 /// @todo Does not belong here.
 typedef struct _Hitbox {
-    s32 x0;
+    Tangibility tangiblity;
     s32 x4;
     s32 x8;
     f32 xC;
