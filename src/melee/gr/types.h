@@ -247,7 +247,7 @@ typedef struct StructPairWithStageID {
     s32 list_idx;
 } StructPairWithStageID;
 
-typedef struct Map {
+typedef struct Ground {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
     HSD_GObjEvent x8_callback;
@@ -281,6 +281,6 @@ typedef struct Map {
     int xCC;
     int xD0;
     u8 xD4_pad[0x218 - 0xD4];
-} Map;
+} Ground;
 
 #endif

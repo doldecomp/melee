@@ -141,7 +141,7 @@ static HSD_GObj* func_80219D84(int gobj_id)
     gobj = func_801C14D0(gobj_id);
 
     if (gobj != NULL) {
-        Map* map = gobj->user_data;
+        Ground* map = gobj->user_data;
         map->x8_callback = NULL;
         map->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
@@ -165,7 +165,7 @@ static HSD_GObj* func_80219D84(int gobj_id)
 static void func_80219E6C(HSD_GObj* gobj)
 {
     Vec3 v;
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     enum_t id = map->map_id;
 
     func_801C8138(gobj, id, 0);
@@ -202,7 +202,7 @@ static void func_8021A11C(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
@@ -227,7 +227,7 @@ static void func_8021A19C(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
     map->x11_flags.b012 = 2;
@@ -249,7 +249,7 @@ static void func_8021A20C(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
 
     /// @todo Missing cast
     unk_t hsd_obj = gobj->hsd_obj;
@@ -275,7 +275,7 @@ static void func_8021A274(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
     func_801C8138(gobj, map->map_id, 0);
     func_801C94D8(hsd_obj);
@@ -298,7 +298,7 @@ static void func_8021A2DC(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
     func_801C8138(gobj, map->map_id, 0);
     func_801C94D8(hsd_obj);
@@ -322,7 +322,7 @@ static void func_8021A344(HSD_GObj* gobj)
     u8 unused[24];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
     map->x11_flags.b012 = 2;
     map->xC4 = 0;
@@ -338,7 +338,7 @@ static bool func_8021A3B4(HSD_GObj* arg0)
 
 static void func_8021A3BC(HSD_GObj* gobj)
 {
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_GObj* bg_gobj;
     s32 temp_r0_2;

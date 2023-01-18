@@ -80,7 +80,7 @@ HSD_GObj* func_80221CB4(int arg0)
 {
     HSD_GObj* gobj;
     StageCallbacks* cb;
-    Map* map;
+    Ground* map;
 
     cb = &lbl_803E8DF0[arg0];
     gobj = func_801C14D0(arg0);
@@ -106,7 +106,7 @@ HSD_GObj* func_80221CB4(int arg0)
 
 void lbl_80221D9C(HSD_GObj* gobj)
 {
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
 }
 

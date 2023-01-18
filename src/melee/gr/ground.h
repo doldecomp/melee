@@ -30,8 +30,8 @@ static void func_801C1E2C(HSD_GObj*);
 static bool func_801C0A70(Vec3* pos);
 static void func_801C0C2C(HSD_GObj*);
 static bool func_801C24F8(s32, u32, s32*);
-void func_801C5544(Map*, s32);
-static void func_801C55AC(Map*);
+void func_801C5544(Ground*, s32);
+static void func_801C55AC(Ground*);
 HSD_GObj* func_801C57A4(void);
 static void func_801C5878(void);
 static void func_801C466C(void);
@@ -147,10 +147,10 @@ bool func_801C4E20(void);
 void func_801C4FAC(void);
 void func_801C53EC(u32 arg0);
 void func_801C5414(unk_t arg0, s32 arg1);
-void func_801C5440(Map* gp, s32 i, u32 arg2);
-bool func_801C54DC(Map* gp, s32 i);
-void func_801C5630(Map* gp, s32 i, f32 val);
-void func_801C5694(Map* gp, s32 i, f32 val);
+void func_801C5440(Ground* gp, s32 i, u32 arg2);
+bool func_801C54DC(Ground* gp, s32 i);
+void func_801C5630(Ground* gp, s32 i, f32 val);
+void func_801C5694(Ground* gp, s32 i, f32 val);
 bool func_801C5700(int i);
 void func_801C5740(s32 arg0);
 void func_801C5750(void);
@@ -179,7 +179,7 @@ void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
 
 static inline void Ground_JObjInline1(HSD_GObj* gobj)
 {
-    Map* map = (Map*) HSD_GObjGetUserData(gobj);
+    Ground* map = (Ground*) HSD_GObjGetUserData(gobj);
     HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
     func_801C2ED0(jobj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);

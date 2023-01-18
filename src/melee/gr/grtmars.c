@@ -72,7 +72,7 @@ static bool GrTMars_80221F90(void)
 static HSD_GObj* GrTMars_80221F98(int id)
 {
     HSD_GObj* gobj;
-    Map* gp;
+    Ground* gp;
     StageCallbacks* callbacks;
 
     callbacks = &lbl_803E8EB0[id];
@@ -101,7 +101,7 @@ static HSD_GObj* GrTMars_80221F98(int id)
 
 static void GrTMars_80222080(HSD_GObj* gobj)
 {
-    Map* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
     func_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -122,7 +122,7 @@ static void GrTMars_802220B8(HSD_GObj* arg0)
 
 static void GrTMars_802220BC(HSD_GObj* gobj)
 {
-    Map* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -148,7 +148,7 @@ static void GrTMars_80222148(HSD_GObj* arg0) {}
 
 static void GrTMars_8022214C(HSD_GObj* gobj)
 {
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH

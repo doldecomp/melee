@@ -83,7 +83,7 @@ HSD_GObj* func_801E30D8(int gobj_id)
     gobj = func_801C14D0(gobj_id);
 
     if (gobj != NULL) {
-        Map* map = gobj->user_data;
+        Ground* map = gobj->user_data;
         map->x8_callback = NULL;
         map->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
@@ -113,7 +113,7 @@ void func_801E31C0(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
     map->x11_flags.b012 = 2;
     func_801C8858(func_801C3FA4(gobj, 1), 0x20000000);
@@ -136,7 +136,7 @@ inline s32 randi(s32 max)
 /* Initialize shyguys */
 void func_801E3234(HSD_GObj* gobj)
 {
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
     func_801C7FF8(gobj, 5, 7, 1, 0.0f, 1.0f);

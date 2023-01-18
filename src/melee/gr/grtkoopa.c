@@ -67,7 +67,7 @@ static HSD_GObj* func_802216EC(int gobj_id)
 
     gobj = func_801C14D0(gobj_id);
     if (gobj != NULL) {
-        Map* map = gobj->user_data;
+        Ground* map = gobj->user_data;
         map->x8_callback = NULL;
         map->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
@@ -90,7 +90,7 @@ static HSD_GObj* func_802216EC(int gobj_id)
 
 static void lbl_802217D4(HSD_GObj* gobj)
 {
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
 }
 
@@ -109,7 +109,7 @@ static void lbl_80221810(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }
@@ -134,7 +134,7 @@ static void lbl_802218A0(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
 }

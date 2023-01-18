@@ -84,7 +84,7 @@ static HSD_GObj* func_80201D20(s32 arg0)
     gobj = func_801C14D0(arg0);
 
     if (gobj != NULL) {
-        Map* map;
+        Ground* map;
         map = gobj->user_data;
         map->x8_callback = NULL;
         map->xC_callback = NULL;
@@ -106,7 +106,7 @@ static HSD_GObj* func_80201D20(s32 arg0)
 
 static void func_80201E08(HSD_GObj* gobj)
 {
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
 }
 
@@ -121,7 +121,7 @@ static void func_80201E40(HSD_GObj* arg0) {}
 
 static void func_80201E44(HSD_GObj* gobj)
 {
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C8138(gobj, map->map_id, 0);
     map->x11_flags.b012 = 2;
 }
@@ -144,7 +144,7 @@ static void func_80201E9C(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* map = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, map->map_id);
     func_801C8138(gobj, map->map_id, 0);
     func_801C10B8(gobj, func_80201E98);

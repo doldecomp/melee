@@ -21,7 +21,7 @@ static Vec3 lbl_8049EF58[6];
 
 bool func_801C96E8(HSD_GObj* arg0)
 {
-    Map* map = arg0->user_data;
+    Ground* map = arg0->user_data;
     return map->x10_flags.b4;
 }
 
