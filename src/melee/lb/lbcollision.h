@@ -15,7 +15,16 @@ typedef struct _Hitbox {
     /// @at{30} @sz{4}
     HitElement element;
 
-    u8 x34[0x134 - 0x34];
+    u8 x34[0x40 - 0x34];
+    u8 x40_b0 : 1;
+    u8 x40_b1 : 1;
+    u8 x40_b2 : 1;
+    u8 x40_b3 : 1;
+    u8 x40_b4 : 1;
+    u8 x40_b5 : 1;
+    u8 x40_b6 : 1;
+    u8 x40_b7 : 1;
+    u8 x41[0x134 - 0x41];
     s32 x134;
 } Hitbox;
 
