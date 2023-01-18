@@ -3868,7 +3868,6 @@ lbl_804D655C:
 lbl_804D6560:
     .skip 0x4
 
-
 .section .sdata2
     .balign 8
 .global lbl_804D8300
