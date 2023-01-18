@@ -16,11 +16,11 @@ typedef struct _Hitbox {
 } Hitbox;
 
 typedef struct ftHurt {
-    u32 tangiblity;        // 0x0, whether or not this hurtbox can be hit
-    Vec3 x4_hurt1_offset;  // 0x4
-    Vec3 x10_hurt2_offset; // 0x10
-    f32 x1C_scale;         // 0x1c
-    HSD_JObj* x20_jobj;    // 0x20
+    Tangibility tangiblity; // 0x0, whether or not this hurtbox can be hit
+    Vec3 x4_hurt1_offset;   // 0x4
+    Vec3 x10_hurt2_offset;  // 0x10
+    f32 x1C_scale;          // 0x1c
+    HSD_JObj* x20_jobj;     // 0x20
     unsigned char
         x24_1_is_updated : 1; // 0x24, 0x80, if enabled, wont update position
     unsigned char x24_2 : 1;  // 0x24 0x40
