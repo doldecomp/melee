@@ -163,3 +163,9 @@ void lbl_8011F318(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj))
         func_8008A2BC(gobj);
 }
+
+void lbl_8011F354(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj))
+        func_800CC730(gobj);
+}

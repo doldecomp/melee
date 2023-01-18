@@ -24,5 +24,6 @@ void lbl_8011F500(HSD_GObj*);
 void ftIceClimber_SpecialN_StartAction(HSD_GObj* fighter_gobj);
 void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
 void lbl_8011F318(HSD_GObj* gobj);
+void lbl_8011F354(HSD_GObj* gobj);
 
 #endif
