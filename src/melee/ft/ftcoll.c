@@ -1,8 +1,7 @@
-
-#include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
+#include <melee/ft/ftcoll.h>
 
 #include <common_structs.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <math.h>
 #include <melee/ef/efsync.h>
