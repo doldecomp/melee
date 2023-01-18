@@ -1646,8 +1646,8 @@ struct Fighter {
     /* 0x1A5C */ HSD_GObj* x1A5C;
     /* 0x1A60 */ u32 x1A60;
     /* 0x1A64 */ s32 x1A64;
-    /* 0x1A68 */ s16 x1A68;
-    /* 0x1A6A */ s16 x1A6A;
+    /* 0x1A68 */ u16 x1A68;
+    /* 0x1A6A */ u16 x1A6A;
     /* 0x1A6C */ f32 x1A6C;
     /* 0x1A70 */ Vec3 x1A70;
     /* 0x1A7C */ Vec3 x1A7C;

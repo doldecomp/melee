@@ -14,6 +14,7 @@
 #include <melee/gr/stage.h>
 #include <melee/it/code_80266F3C.h>
 #include <melee/it/item.h>
+#include <melee/lb/forward.h>
 #include <melee/pl/pl_unknown_001.h>
 #include <melee/pl/player.h>
 #include <MSL/trigf.h>
