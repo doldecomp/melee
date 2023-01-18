@@ -5,7 +5,7 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/jobj.h>
 
-struct Hitbox {
+typedef struct Hitbox {
     Tangibility tangiblity;
     s32 x4;
     s32 x8;
@@ -52,9 +52,9 @@ struct Hurtbox {
 
 void* HSD_JObjUnkMtxPtr(HSD_JObj*);
 s32 func_80008248(s32, struct Hurtbox*, void*, f32, f32, f32);
-void func_80008440(struct Hitbox*);
-void func_80008434(struct Hitbox*);
-void func_8000ACFC(void);
+void func_80008440(Hitbox*);
+void func_80008434(Hitbox*);
+bool func_8000ACFC(Fighter*, Hitbox*);
 void func_80008688(void);
 void func_800084FC(void);
 void func_80008820(void);
