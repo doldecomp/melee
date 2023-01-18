@@ -171,3 +171,5 @@ void lbl_8011F354(HSD_GObj* gobj)
 }
 
 void lbl_8011F390(HSD_GObj* arg0) {}
+
+void lbl_8011F394(HSD_GObj* arg0) {}
