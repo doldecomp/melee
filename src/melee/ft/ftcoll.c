@@ -2919,7 +2919,7 @@ lbl_80078A10:
 
 extern f32 const lbl_804D8310;
 
-#ifdef MUST_MATCH
+#ifdef MWERKS_GEKKO
 #pragma push
 asm void func_80078A2C(HSD_GObj*)
 { // clang-format off
