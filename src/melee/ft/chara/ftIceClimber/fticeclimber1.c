@@ -3,6 +3,7 @@
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftparts.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftIceClimber_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
@@ -87,4 +88,16 @@ void ftIceClimber_OnKnockbackEnter(HSD_GObj* fighter_gobj)
 void ftIceClimber_OnKnockbackExit(HSD_GObj* fighter_gobj)
 {
     Fighter_OnKnockbackExit(fighter_gobj, true);
+}
+
+void func_8011F16C(HSD_GObj* fighter_gobj, uint arg1)
+{
+    Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
+
+    if (arg1 != fp->sa.nana.x222C)
+        return;
+
+    fp->sa.nana.x222C = 0;
+    fp->cb.x21E4_callback_OnDeath2 = NULL;
+    fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
