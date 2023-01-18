@@ -36,5 +36,6 @@ void func_8003D60C(void);
 void func_80041B08(void);
 void func_8003EB30(void);
 void func_8003722C(void);
+void func_800373CC(void);
 
 #endif
