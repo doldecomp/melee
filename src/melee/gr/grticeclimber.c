@@ -124,7 +124,7 @@ extern f32 const lbl_804DBCBC;
 void lbl_802210D8(HSD_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
-    func_801C7FF8(gobj, 0x45, 2, 1, lbl_804DBCB8, lbl_804DBCBC);
+    func_801C7FF8(gobj, 69, 2, 1, lbl_804DBCB8, lbl_804DBCBC);
     func_80221288(gobj);
 }
 
