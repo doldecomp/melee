@@ -51,16 +51,14 @@ struct Hurtbox {
 };
 
 void* HSD_JObjUnkMtxPtr(HSD_JObj*);
-s32 func_80008248(s32, Hurtbox*, void*, f32, f32, f32);
-void func_80008440(Hitbox*);
-void func_80008434(Hitbox*);
-bool func_8000ACFC(Fighter*, Hitbox*);
+s32 func_80008248(s32, struct Hurtbox*, void*, f32, f32, f32);
+void func_80008440(struct Hitbox*);
+void func_80008434(struct Hitbox*);
+void func_8000ACFC(void);
 void func_80008688(void);
-void func_800084FC(void);
 void func_80008820(void);
-void func_80077464(void);
+void func_800084FC(void);
 void func_80005BB0(void);
-bool func_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
-                   f32 hurt_pos_z);
+void func_80007ECC(void);
 
 #endif
