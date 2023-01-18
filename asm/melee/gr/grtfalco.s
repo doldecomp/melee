@@ -282,32 +282,6 @@ lbl_80220B78:
 /* 80220B78 0021D758  38 60 00 01 */	li r3, 1
 /* 80220B7C 0021D75C  4E 80 00 20 */	blr
 
-.section .data
-    .balign 8
-.global lbl_803E8968
-lbl_803E8968:
-    .asciz "/GrTFc.dat"
-    .balign 4
-.global lbl_803E8974
-lbl_803E8974:
-    .4byte 0x0000002D
-    .4byte lbl_803E8918
-    .4byte lbl_803E8968
-    .4byte lbl_802207F4
-    .4byte func_802207F0
-    .4byte lbl_8022086C
-    .4byte lbl_80220870
-    .4byte lbl_80220894
-    .4byte lbl_80220ACC
-    .4byte lbl_80220B78
-    .4byte 0x00000001
-    .4byte 0
-    .4byte 0
-    .asciz "%s:%d: couldn t get gobj(id=%d)\n"
-    .balign 4
-    .asciz "grtfalco.c"
-    .balign 4
-
 .section .sbss
     .balign 8
 .global lbl_804D6AF8

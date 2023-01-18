@@ -25,3 +25,20 @@
         (1 << 30) | (1 << 31),
     },
 };
+
+StageData lbl_803E8974 = {
+    45,
+    lbl_803E8918,
+    "/GrTFc.dat",
+    lbl_802207F4,
+    func_802207F0,
+    lbl_8022086C,
+    lbl_80220870,
+    lbl_80220894,
+    lbl_80220ACC,
+    lbl_80220B78,
+    1,
+};
+
+char str0[] = "%s:%d: couldn t get gobj(id=%d)\n";
+char str1[] = "grtfalco.c";
