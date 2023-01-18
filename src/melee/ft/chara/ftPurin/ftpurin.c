@@ -2,6 +2,7 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_005.h>
 #include <melee/ft/ft_unknown_006.h>
@@ -455,3 +456,20 @@ lbl_8013CC4C:
 void lbl_8013CC60(HSD_GObj* arg0) {}
 
 void lbl_8013CC64(HSD_GObj* arg0) {}
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void lbl_8013CC68(HSD_GObj*)
+{ // clang-format off
+    nofralloc
+/* 8013CC68 00139848  7C 08 02 A6 */	mflr r0
+/* 8013CC6C 0013984C  90 01 00 04 */	stw r0, 4(r1)
+/* 8013CC70 00139850  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8013CC74 00139854  4B F4 82 C9 */	bl func_80084F3C
+/* 8013CC78 00139858  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8013CC7C 0013985C  38 21 00 08 */	addi r1, r1, 8
+/* 8013CC80 00139860  7C 08 03 A6 */	mtlr r0
+/* 8013CC84 00139864  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
