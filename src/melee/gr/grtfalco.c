@@ -44,3 +44,5 @@ char str0[] = "%s:%d: couldn t get gobj(id=%d)\n";
 char str1[] = "grtfalco.c";
 
 unk_t lbl_804D6AF8;
+
+void func_802207F0(int arg0) {}
