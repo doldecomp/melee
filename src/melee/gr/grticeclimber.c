@@ -123,16 +123,7 @@ extern f32 const lbl_804DBCBC;
 
 void lbl_802210D8(HSD_GObj* gobj)
 {
-    Map* map;
-
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 unused[8];
-#endif
-
-    map = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
+    Ground_JObjInline1(gobj);
     func_801C7FF8(gobj, 0x45, 2, 1, lbl_804DBCB8, lbl_804DBCBC);
     func_80221288(gobj);
 }
@@ -152,14 +143,7 @@ void lbl_80221188(HSD_GObj* arg0) {}
 
 void lbl_8022118C(HSD_GObj* gobj)
 {
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 unused[8];
-#endif
-
-    Map* map = (Map*) HSD_GObjGetUserData(gobj);
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
+    Ground_JObjInline1(gobj);
 }
 
 bool lbl_802211DC(HSD_GObj* arg0)
