@@ -8,8 +8,6 @@
 
 typedef unk_t HSD_PSAppSRT;
 
-HSD_JObj;
-
 struct _generator;
 
 struct _psAppSRT;
