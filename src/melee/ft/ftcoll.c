@@ -193,8 +193,8 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim,
     return unk_floatvar * fp->dmg.x182c_behavior;
 }
 
-extern f32 const lbl_804D82E0;
-extern f32 const lbl_804D82E4;
+f32 const lbl_804D82E0 = 0.0F;
+f32 const lbl_804D82E4 = 500.0F;
 extern char* const lbl_803C0C58;
 extern char* const lbl_803C0C74;
 extern char* const lbl_804D3A68;
@@ -397,8 +397,8 @@ lbl_80076878:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_800768A0(void)
-{ // clang-format off
+asm void func_800768A0(void){
+    // clang-format off
     nofralloc
 /* 800768A0 00073480  7C 08 02 A6 */	mflr r0
 /* 800768A4 00073484  38 C3 09 14 */	addi r6, r3, 0x914
@@ -472,10 +472,10 @@ lbl_8007698C:
 #pragma pop
 #endif
 
-extern f32 const lbl_804D82E8;
-extern f32 const lbl_804D82EC;
-extern f32 const lbl_804D82F0;
-extern f64 const lbl_804D82F8;
+f32 const lbl_804D82E8 = 0.5F;
+f32 const lbl_804D82EC = 1.0F;
+f32 const lbl_804D82F0 = -1.0F;
+f64 const lbl_804D82F8 = 4503601774854144.0;
 
 #ifdef MWERKS_GEKKO
 #pragma push
