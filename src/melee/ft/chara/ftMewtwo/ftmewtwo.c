@@ -61,7 +61,7 @@ void ftMewTwo_OnItemVisible(HSD_GObj* fighter_gobj)
 
 void ftMewTwo_80144F58(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* attr = fp->x2D4_specialAttributes;
     f32 attr_value = attr->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
