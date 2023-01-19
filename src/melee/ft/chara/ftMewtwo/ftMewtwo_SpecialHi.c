@@ -282,7 +282,7 @@ void ftMewtwo_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 
 bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
 
     if ((f32) fp->mewtwoVars[0].SpecialHi.unk4 >=
