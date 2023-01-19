@@ -248,7 +248,7 @@ void ftFox_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 void ftFox_SpecialHi_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Possibly common inline with #ftFox_SpecialAirHi_Phys.
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
 
     fp->foxVars[0].SpecialHi.unk++;
