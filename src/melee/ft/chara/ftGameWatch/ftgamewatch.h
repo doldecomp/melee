@@ -231,7 +231,7 @@ void ftGameWatch_AttackAir_DecideAction(HSD_GObj* fighter_gobj);
 
 // Aerial Attacks (AttackAir) //
 
-void ftGameWatch_AttackAirN_Action(HSD_GObj* fighter_gobj, s32 ASID);
+void ftGameWatch_AttackAirN_Action(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackAirN_Anim(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackAirN_IASA(HSD_GObj* fighter_gobj);
 void ftGameWatch_AttackAirN_Phys(HSD_GObj* fighter_gobj);
