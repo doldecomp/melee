@@ -13,7 +13,7 @@ void ftSamus_ClearThrowFlagsUnk(HSD_GObj* fighter_gobj)
 
 void ftSamus_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     fp->xEC_ground_vel /= samus_attr->x2C;
     fp->x80_self_vel.y = 0.0f;
@@ -31,7 +31,7 @@ void ftSamus_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
 void ftSamus_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     fp->x80_self_vel.x /= samus_attr->x2C;
     if (fp->x673 < samus_attr->x28) {
