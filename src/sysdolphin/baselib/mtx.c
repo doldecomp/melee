@@ -239,7 +239,7 @@ void HSD_MtxGetRotation(Mtx m, Vec3* vec)
                 } else if (testVal_1 <= -1) {
                     val_01 = -M_PI / 2;
                 } else {
-                    val_01 = func_80022DBC(testVal_1);
+                    val_01 = asinf(testVal_1);
                 }
 
                 vec->y = val_01;

@@ -2,8 +2,8 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_803265A8
-func_803265A8:
+.global logf
+logf:
 /* 803265A8 00323188  94 21 FF D8 */	stwu r1, -0x28(r1)
 /* 803265AC 0032318C  3C 00 7F 80 */	lis r0, 0x7f80
 /* 803265B0 00323190  D0 21 00 08 */	stfs f1, 8(r1)
@@ -38,23 +38,23 @@ lbl_803265D0:
 /* 80326620 00323200  3C 03 00 01 */	addis r0, r3, 1
 /* 80326624 00323204  90 01 00 1C */	stw r0, 0x1c(r1)
 lbl_80326628:
-/* 80326628 00323208  3C 60 80 3C */	lis r3, lbl_803B9154@ha
+/* 80326628 00323208  3C 60 80 3C */	lis r3, __one_over_F@ha
 /* 8032662C 0032320C  C0 41 00 18 */	lfs f2, 0x18(r1)
 /* 80326630 00323210  C0 01 00 1C */	lfs f0, 0x1c(r1)
 /* 80326634 00323214  55 04 10 3A */	slwi r4, r8, 2
-/* 80326638 00323218  38 03 91 54 */	addi r0, r3, lbl_803B9154@l
+/* 80326638 00323218  38 03 91 54 */	addi r0, r3, __one_over_F@l
 /* 8032663C 0032321C  C0 21 00 14 */	lfs f1, 0x14(r1)
 /* 80326640 00323220  7C 60 22 14 */	add r3, r0, r4
 /* 80326644 00323224  6C E0 80 00 */	xoris r0, r7, 0x8000
 /* 80326648 00323228  EC C2 00 28 */	fsubs f6, f2, f0
 /* 8032664C 0032322C  C0 03 00 00 */	lfs f0, 0(r3)
-/* 80326650 00323230  3C 60 80 3C */	lis r3, lbl_803B8F50@ha
+/* 80326650 00323230  3C 60 80 3C */	lis r3, __ln_F@ha
 /* 80326654 00323234  90 01 00 24 */	stw r0, 0x24(r1)
 /* 80326658 00323238  3C 00 43 30 */	lis r0, 0x4330
 /* 8032665C 0032323C  EC C6 00 32 */	fmuls f6, f6, f0
 /* 80326660 00323240  C0 01 00 10 */	lfs f0, 0x10(r1)
 /* 80326664 00323244  90 01 00 20 */	stw r0, 0x20(r1)
-/* 80326668 00323248  38 03 8F 50 */	addi r0, r3, lbl_803B8F50@l
+/* 80326668 00323248  38 03 8F 50 */	addi r0, r3, __ln_F@l
 /* 8032666C 0032324C  C8 82 E7 E8 */	lfd f4, lbl_804DE1C8@sda21(r2)
 /* 80326670 00323250  C8 61 00 20 */	lfd f3, 0x20(r1)
 /* 80326674 00323254  7C 60 22 14 */	add r3, r0, r4
@@ -73,12 +73,12 @@ lbl_803266A0:
 /* 803266A4 00323284  C8 22 E7 E8 */	lfd f1, lbl_804DE1C8@sda21(r2)
 /* 803266A8 00323288  90 01 00 24 */	stw r0, 0x24(r1)
 /* 803266AC 0032328C  3C 00 43 30 */	lis r0, 0x4330
-/* 803266B0 00323290  3C 60 80 3C */	lis r3, lbl_803B8F50@ha
+/* 803266B0 00323290  3C 60 80 3C */	lis r3, __ln_F@ha
 /* 803266B4 00323294  C0 42 E7 E0 */	lfs f2, lbl_804DE1C0@sda21(r2)
 /* 803266B8 00323298  90 01 00 20 */	stw r0, 0x20(r1)
 /* 803266BC 0032329C  55 04 10 3A */	slwi r4, r8, 2
 /* 803266C0 003232A0  C8 01 00 20 */	lfd f0, 0x20(r1)
-/* 803266C4 003232A4  38 03 8F 50 */	addi r0, r3, lbl_803B8F50@l
+/* 803266C4 003232A4  38 03 8F 50 */	addi r0, r3, __ln_F@l
 /* 803266C8 003232A8  7C 60 22 14 */	add r3, r0, r4
 /* 803266CC 003232AC  EC 20 08 28 */	fsubs f1, f0, f1
 /* 803266D0 003232B0  C0 03 00 00 */	lfs f0, 0(r3)
@@ -92,13 +92,13 @@ lbl_803266DC:
 lbl_803266EC:
 /* 803266EC 003232CC  54 80 00 01 */	rlwinm. r0, r4, 0, 0, 0
 /* 803266F0 003232D0  41 82 00 0C */	beq lbl_803266FC
-/* 803266F4 003232D4  C0 22 E7 D8 */	lfs f1, lbl_804DE1B8@sda21(r2)
+/* 803266F4 003232D4  C0 22 E7 D8 */	lfs f1, __float_nan@sda21(r2)
 /* 803266F8 003232D8  48 00 00 14 */	b lbl_8032670C
 lbl_803266FC:
-/* 803266FC 003232DC  C0 22 E7 DC */	lfs f1, lbl_804DE1BC@sda21(r2)
+/* 803266FC 003232DC  C0 22 E7 DC */	lfs f1, __float_huge@sda21(r2)
 /* 80326700 003232E0  48 00 00 0C */	b lbl_8032670C
 lbl_80326704:
-/* 80326704 003232E4  C0 02 E7 DC */	lfs f0, lbl_804DE1BC@sda21(r2)
+/* 80326704 003232E4  C0 02 E7 DC */	lfs f0, __float_huge@sda21(r2)
 /* 80326708 003232E8  FC 20 00 50 */	fneg f1, f0
 lbl_8032670C:
 /* 8032670C 003232EC  38 21 00 28 */	addi r1, r1, 0x28
@@ -107,8 +107,8 @@ lbl_8032670C:
 
 .section .rodata, "a"
     .balign 8
-.global lbl_803B8F50
-lbl_803B8F50:
+.global __ln_F
+__ln_F:
     .4byte 0x00000000
     .4byte 0x3BFF0153
     .4byte 0x3C7E0545
@@ -238,8 +238,8 @@ lbl_803B8F50:
     .4byte 0x3F2F7015
     .4byte 0x3F307198
     .4byte 0x3F317218
-.global lbl_803B9154
-lbl_803B9154:
+.global __one_over_F
+__one_over_F:
     .4byte 0x3F800000
     .4byte 0x3F7E03F8
     .4byte 0x3F7C0FC1
@@ -400,11 +400,11 @@ lbl_804DE1B0:
 .global lbl_804DE1B4
 lbl_804DE1B4:
     .4byte 0x3EAAAA36
-.global lbl_804DE1B8
-lbl_804DE1B8:
+.global __float_nan
+__float_nan:
     .4byte 0x7FFFFFFF
-.global lbl_804DE1BC
-lbl_804DE1BC:
+.global __float_huge
+__float_huge:
     .4byte 0x7F800000
 .global lbl_804DE1C0
 lbl_804DE1C0:
