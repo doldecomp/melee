@@ -9,8 +9,7 @@ void GXLoadTexObjPreLoaded(unk_t, unk_t, s32);
 
 void GXInvalidateTexAll(GXContext*, s32, u8*);
 GXTexRegionCallback GXSetTlutRegionCallback(GXTexRegionCallback arg0);
-void __SetSURegs(void);
-void __GetImageTileCount(void);
+void __SetSURegs(s32, s32);
 void GXInitTexObj(unk_t, u32, u16, u16, s32, s32, s32, s8);
 s32 GXGetTexObjWidth(GXTexObj* tex_obj);
 s32 GXGetTexObjHeight(GXTexObj* tex_obj);
@@ -25,5 +24,5 @@ void GXLoadTlut(unk_t, s32);
 void __GXSetTmemConfig(s32);
 GXTexRegionCallback GXSetTexRegionCallback(GXTexRegionCallback arg0);
 void GXInitTexCacheRegion(unk_t, s8, u32, s32, u32, s32, s32);
-
+void __GetImageTileCount(u32, s16, s16, s32*, s32*, s32*);
 #endif

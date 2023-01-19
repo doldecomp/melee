@@ -122,7 +122,7 @@ typedef struct _HSD_LightDesc {
 
 typedef struct _HSD_LightAnim {
     struct _HSD_LightAnim* next;
-    struct _HSD_AObjDesc* aobjdesc;
+    HSD_AObjDesc* aobjdesc;
     struct _HSD_WObjAnim* position_anim;
     struct _HSD_WObjAnim* interest_anim;
 } HSD_LightAnim;

@@ -81,7 +81,7 @@ typedef struct _HSD_RObjDesc {
 
 typedef struct _HSD_RObjAnimJoint {
     struct _HSD_RObjAnimJoint* next;
-    struct _HSD_AObjDesc* aobjdesc;
+    HSD_AObjDesc* aobjdesc;
 } HSD_RObjAnimJoint;
 
 void _HSD_RObjForgetMemory(any_t low, any_t high);

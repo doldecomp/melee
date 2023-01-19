@@ -15,8 +15,6 @@
 /* 004DAE48 */ extern const f32 lbl_804DE268[2];
 /* 004DAE08 */ extern const f32 lbl_804DE228[2];
 /* 004DAE00 */ extern const f32 lbl_804DE220[2];
-/* 0033BEC0 */ extern void __SetSURegs(s32, s32);
 /* 0033BA08 */ extern void GXLoadTexObjPreLoaded(unk_t, unk_t, s32);
-/* 0033B4C8 */ extern void __GetImageTileCount(u32, s16, s16, s32*, s32*, s32*);
 
 #endif

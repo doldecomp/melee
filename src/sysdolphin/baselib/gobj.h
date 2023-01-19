@@ -103,6 +103,16 @@ void func_803910D8(HSD_GObj*, Event);
 u8 func_803912A8(GObjUnkStruct*, GObjFuncs*);
 HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority);
 void func_80391070(HSD_GObj* gobj, s32 arg1);
+void func_80390CD4(HSD_GObj* gobj);
+void func_80390CFC(void);
+void render_gobj(HSD_GObj* cur, s32 i);
+void func_80390FC0(void);
+void lbl_80391044(HSD_GObj* gobj);
+void lbl_803910B4(HSD_GObj* gobj);
+void lbl_80391120(HSD_Obj* obj);
+void lbl_803911C0(HSD_Obj* obj);
+void func_80391260(struct _GObjUnkStruct* arg0);
+void func_803912E0(GObjFuncs* arg0);
 
 static inline void* HSD_GObjGetUserData(HSD_GObj* gobj)
 {
@@ -113,5 +123,8 @@ static inline void* HSD_GObjGetHSDObj(HSD_GObj* item_gobj)
 {
     return item_gobj->hsd_obj;
 }
+
+void func_80390ED0(HSD_GObj* gobj, u32 mask);
+void func_80390ED0(HSD_GObj* gobj, u32 mask);
 
 #endif

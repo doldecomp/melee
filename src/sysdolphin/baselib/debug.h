@@ -18,4 +18,7 @@ void HSD_Panic(char*, u32, char*);
     ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, #cond))
 #endif
 
+int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3);
+int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3);
+
 #endif
