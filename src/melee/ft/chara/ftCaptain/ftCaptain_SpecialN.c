@@ -204,7 +204,7 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj)
 // Falcon/Warlock Punch Physics callback
 void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
     s32 ftKind;
     s32 flag;
