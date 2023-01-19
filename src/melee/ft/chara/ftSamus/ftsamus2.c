@@ -188,6 +188,7 @@ void ftSamus_80128E88(HSD_GObj* fighter_gobj)
 #ifdef MUST_MATCH
     u8 unused[4];
 #endif
+
     struct attr* ftAttr = &fp->x110_attr;
 
     if (fp->x2200_ftcmd_var0) {
