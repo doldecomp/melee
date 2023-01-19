@@ -113,9 +113,9 @@ void ftMewtwo_OnDeath(HSD_GObj* gobj)
 
 void ftMewtwo_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    ftMewtwoAttributes* attr = fp->x10C_ftData->ext_attr;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     void** item_list = fp->x10C_ftData->x48_items;
+
     PUSH_ATTRS(fp, ftMewtwoAttributes);
 
     {
