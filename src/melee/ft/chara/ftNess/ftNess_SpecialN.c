@@ -255,7 +255,7 @@ inline void
 SetPKFlashAttr(HSD_GObj* fighter_gobj) // Inline to set all variables and match
                                        // ASM register data
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
 
     fp->nessVars[0].SpecialN.flashTimerLoop1 =
@@ -276,7 +276,12 @@ void ftNess_SpecialNEnd_Anim(
     HSD_GObj*
         fighter_gobj) // Ness's grounded PK Flash Release Animation callback
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     SetPKFlashAttr(fighter_gobj);
     func_8007592C(fp, 0, 0.0f);
@@ -378,7 +383,11 @@ void ftNess_SpecialAirNEnd_Anim(
     Fighter* fp = fighter_gobj->user_data;
     ftNessAttributes* ness_attr = getFtSpecialAttrs(fp);
     f32 landingLag;
-    s32 filler;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     SetPKFlashAttr(fighter_gobj);
     func_8007592C(fp, 0, 0.0f);
@@ -526,7 +535,7 @@ void ftNess_SpecialNEnd_Phys(
 void ftNess_SpecialAirNStart_Phys(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Start Physics callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
     f32 airFriction;
     f32 fallAccel;
@@ -547,7 +556,7 @@ void ftNess_SpecialAirNStart_Phys(
 void ftNess_SpecialAirNHold_Phys(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Charge Physics callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
     f32 airFriction;
     f32 fallAccel;
@@ -568,7 +577,7 @@ void ftNess_SpecialAirNHold_Phys(
 void ftNess_SpecialAirNEnd_Phys(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Release Physics callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
     f32 airFriction;
     f32 fallAccel;
@@ -589,7 +598,7 @@ void ftNess_SpecialAirNEnd_Phys(
 void ftNess_SpecialNStart_Coll(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Flash Start Collision callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (func_80082708(fighter_gobj) == false) {
         func_8007D5D4(fp);
@@ -605,7 +614,7 @@ void ftNess_SpecialNHold_Coll(
     HSD_GObj*
         fighter_gobj) // Ness's grounded PK Flash Charge Collision callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (func_80082708(fighter_gobj) == false) {
         func_8007D5D4(fp);
@@ -621,7 +630,7 @@ void ftNess_SpecialNEnd_Coll(
     HSD_GObj*
         fighter_gobj) // Ness's grounded PK Flash Release Collision callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (func_80082708(fighter_gobj) == false) {
         func_8007D5D4(fp);
@@ -636,7 +645,7 @@ void ftNess_SpecialNEnd_Coll(
 void ftNess_SpecialAirNStart_Coll(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Start Collision callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (func_80081D0C(fighter_gobj) != false) {
         func_8007D7FC(fp);
@@ -651,7 +660,7 @@ void ftNess_SpecialAirNStart_Coll(
 void ftNess_SpecialAirNHold_Coll(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Charge Collision callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (func_80081D0C(fighter_gobj) != false) {
         func_8007D7FC(fp);
@@ -666,7 +675,7 @@ void ftNess_SpecialAirNHold_Coll(
 void ftNess_SpecialAirNEnd_Coll(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Release Collision callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (func_80081D0C(fighter_gobj) != false) {
         func_8007D7FC(fp);
