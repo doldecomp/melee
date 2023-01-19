@@ -54,10 +54,10 @@ void ftLuigi_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
     Fighter* var[7];
     Fighter* fp2;
 
-    temp_fp = (fp = getFighter(fighter_gobj));
+    temp_fp = (fp = GET_FIGHTER(fighter_gobj));
     luigiAttrs = temp_fp->x2D4_specialAttributes;
     fp2 = temp_fp;
-    getFighter(fighter_gobj)->x2208_ftcmd_var2 = 0;
+    GET_FIGHTER(fighter_gobj)->x2208_ftcmd_var2 = 0;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRLW, 0,
                                        NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
@@ -83,10 +83,10 @@ void ftLuigi_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
     Fighter* fp2;
     f32 cycloneVar;
 
-    temp_fp = (fp = getFighter(fighter_gobj));
+    temp_fp = (fp = GET_FIGHTER(fighter_gobj));
     luigiAttrs = temp_fp->x2D4_specialAttributes;
     fp2 = temp_fp;
-    getFighter(fighter_gobj)->x2208_ftcmd_var2 = 0;
+    GET_FIGHTER(fighter_gobj)->x2208_ftcmd_var2 = 0;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRLW, 0,
                                        NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
@@ -106,7 +106,7 @@ void ftLuigi_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 
 static inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
 }
@@ -247,7 +247,7 @@ static ftCollisionBox ftLuigi_SpecialLw_CollisionBox = {
 
 static inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (((u32) fp->x220C_ftcmd_var3 != 0U) &&
         ((s32) fp->luigiVars[0].SpecialLw.isUnkColl != false))
     {
@@ -265,7 +265,7 @@ static inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 var[5];
 
     if ((s32) fp->xE0_ground_or_air == GA_Ground) {
