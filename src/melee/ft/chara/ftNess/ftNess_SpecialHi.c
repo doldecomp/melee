@@ -469,8 +469,13 @@ void ftNess_SpecialAirHiStart_Action(
     ftNessAttributes* temp_attr;
     f64 phi_f0;
 
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     temp_f1 = 0.0f;
-    fp = getFighterPlus(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRHI_START,
                                        0, NULL, 0.0f, 1.0f, 0.0f);
@@ -538,7 +543,12 @@ void ftNess_SpecialHi_Action(
     f32 phi_f0;
     f32 phi_f0_2;
 
-    fp = getFighterPlus(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    fp = getFighter(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
     if ((fp->x6F0_collData.x14C_ground.unk & 0x100) == 0) {
         temp_f3 = 5.0f;
