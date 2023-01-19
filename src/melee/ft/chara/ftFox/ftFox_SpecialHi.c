@@ -52,7 +52,7 @@ void ftFox_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
     Fighter* fp;
     ftFoxAttributes* foxAttrs;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     foxAttrs = getFtSpecialAttrs(fp);
 
     fp->foxVars[0].SpecialHi.gravityDelay =
@@ -68,7 +68,7 @@ void ftFox_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
 
     fp->foxVars[0].SpecialHi.gravityDelay =
@@ -86,14 +86,14 @@ void ftFox_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHi_RotateModel(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007592C(fp, func_8007500C(fp, 2),
                   DOUBLE_PI32 - fp->foxVars[0].SpecialHi.rotateModel);
 }
 
 void ftFox_SpecialHiHold_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if ((s32) fp->xE0_ground_or_air == GA_Air) {
@@ -107,7 +107,7 @@ void ftFox_SpecialHiHold_Anim(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHiHoldAir_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if ((s32) fp->xE0_ground_or_air == GA_Air) {
@@ -158,7 +158,7 @@ void ftFox_SpecialHiHold_Coll(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 facingDir;
 
     /// @todo Ternary operator should be possible here somehow.
@@ -178,7 +178,7 @@ void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHiHold_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D60C(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_HOLDAIR,
@@ -190,7 +190,7 @@ void ftFox_SpecialHiHold_GroundToAir(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHiHoldAir_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_HOLD,
@@ -204,7 +204,7 @@ void ftFox_SpecialHiHoldAir_AirToGround(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     /// @todo Common inline with #ftFox_SpecialAirHi_Anim.
     fp->foxVars[0].SpecialHi.travelFrames--;
@@ -221,7 +221,7 @@ void ftFox_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->foxVars[0].SpecialHi.travelFrames--;
 
@@ -280,7 +280,7 @@ void ftFox_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     CollData* collData = &fp->x6F0_collData;
 
     fp->foxVars[0].SpecialHi.unk2 += 1;
@@ -300,7 +300,7 @@ void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 
 static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (fp->foxVars[0].SpecialHi.unk2 >= foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR)
@@ -316,7 +316,7 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 {
     f32 facingDir;
     s32 envFlags;
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = foxAttrs = getFtSpecialAttrs(fp);
     CollData* collData = collData = getFtColl(fp);
 
@@ -389,7 +389,7 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     /// @todo Probably missing arguments.
     HSD_GObjEvent cb;
@@ -537,7 +537,7 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 // End Animation callback
 void ftFox_SpecialHiLanding_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
@@ -549,7 +549,7 @@ void ftFox_SpecialHiLanding_Anim(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftFox_SpecialHiFall_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -594,7 +594,7 @@ void ftFox_SpecialHiFall_Phys(HSD_GObj* fighter_gobj)
 // End Collision callback
 void ftFox_SpecialHiLanding_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (func_80082708(fighter_gobj) == false) {
@@ -609,7 +609,7 @@ void ftFox_SpecialHiLanding_Coll(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftFox_SpecialHiFall_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_BOTH) != false) {
         ftFox_SpecialHiFall_Action(fighter_gobj);
@@ -707,7 +707,7 @@ void ftFox_SpecialHiBound_IASA(HSD_GObj* fighter_gobj)
 // Physics callback
 void ftFox_SpecialHiBound_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     bool ground_or_air = ftGetGroundAir(fp);
 
     if (ground_or_air == GA_Air) {
@@ -752,7 +752,7 @@ void ftFox_SpecialHiBound_Coll(HSD_GObj* fighter_gobj)
 inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* fighter_gobj)
 {
     vf32 sp1C; // I have a feeling this is a Vec3 struct however
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     CollData* collData = collData = getFtColl(fp);
 
     if (fp->x6F0_collData.x134_envFlags & 0x18000) {
