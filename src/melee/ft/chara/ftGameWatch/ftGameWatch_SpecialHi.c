@@ -16,12 +16,11 @@ static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
-    f32 temp;
     Fighter* fp;
     HSD_GObj* rescueGObj;
 
-    fp = fighter_gobj->user_data;
-    if ((u32) fp->sa.gaw.x226C_rescueGObj == 0) {
+    fp = GET_FIGHTER(fighter_gobj);
+    if (fp->sa.gaw.x226C_rescueGObj == NULL) {
         func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * Fighter_GetModelScale(fp)) - sp10.y);
         rescueGObj = func_802C8038(fighter_gobj, &sp10, 0,
@@ -42,7 +41,7 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
 // Fire Rescue
 bool ftGameWatch_ItemCheckRescueRemove(HSD_GObj* fighter_gobj)
 {
-    s32 ASID = ((Fighter*) fighter_gobj->user_data)->action_id;
+    enum_t ASID = GET_FIGHTER(fighter_gobj)->action_id;
 
     switch (ASID) {
     case AS_GAMEWATCH_SPECIALHI:
@@ -56,7 +55,7 @@ bool ftGameWatch_ItemCheckRescueRemove(HSD_GObj* fighter_gobj)
 // 0x8014DFE4 - Set Fire Rescue GObj pointer and callbacks to NULL
 void ftGameWatch_ItemRescueSetNULL(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->sa.gaw.x226C_rescueGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
@@ -66,9 +65,7 @@ void ftGameWatch_ItemRescueSetNULL(HSD_GObj* fighter_gobj)
 // 0x8014DFFC - Remove Fire Rescue item
 void ftGameWatch_ItemRescueRemove(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    HSD_GObj* rescueGObj;
-    HSD_GObj* rescueGObj2;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.gaw.x226C_rescueGObj != NULL) {
         func_802C8158(fp->sa.gaw.x226C_rescueGObj);
@@ -79,7 +76,7 @@ void ftGameWatch_ItemRescueRemove(HSD_GObj* fighter_gobj)
 // 0x8014E04C - Apply hitlag to Fire Rescue item
 static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.gaw.x226C_rescueGObj != NULL) {
         func_802C81C8(fp->sa.gaw.x226C_rescueGObj);
@@ -89,7 +86,7 @@ static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj)
 // 0x8014E06C - Remove hitlag for Fire Rescue item
 static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.gaw.x226C_rescueGObj != NULL) {
         func_802C81E8(fp->sa.gaw.x226C_rescueGObj);
@@ -98,7 +95,7 @@ static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj)
 
 static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -111,14 +108,12 @@ static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftGameWatch_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    HSD_GObj* rescueGObj;
-    void (*cb_Accessory4)(HSD_GObj*);
-    s32 sfx;
-    s8 pan;
-    s8 volume;
-    f32 temp;
-    f32 vel;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     fp->x74_anim_vel.y = 0.0f;
     fp->x80_self_vel.y = 0.0f;
@@ -133,16 +128,12 @@ void ftGameWatch_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 // 0x8014E158 - Mr. Game & Watch's aerial Fire Rescue Action State handler
 void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    HSD_GObj* rescueGObj;
-    void (*cb_Accessory4)(HSD_GObj*);
-    s32 var;
-    s32 var2;
-    s32 sfx;
-    s8 pan;
-    s8 volume;
-    f32 temp;
-    f32 vel;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
 
     func_8007D60C(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRHI,
@@ -167,7 +158,7 @@ void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs;
     f32 temp;
 
-    gawAttrs = ((Fighter*) fighter_gobj->user_data)->x2D4_specialAttributes;
+    gawAttrs = (GET_FIGHTER(fighter_gobj))->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if (0.0f == gawAttrs->x60_GAMEWATCH_RESCUE_LANDING) {
             func_800CC730(fighter_gobj);
@@ -189,10 +180,9 @@ void ftGameWatch_SpecialHi_IASA(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
     f32 stick_x;
-    f32 stick_range_min;
     f32 temp;
     f32 angle;
     f32 facing_dir;
@@ -243,11 +233,16 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
     ftGameWatchAttributes* gawAttrs;
-    f32 animFrame;
-    s32 ledgeGrabDir;
+    int ledgeGrabDir;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     fp = GET_FIGHTER(fighter_gobj);
-    gawAttrs = getFtSpecialAttrs(fp);
+    gawAttrs = fp->x2D4_specialAttributes;
+
     if (fp->x894_currentAnimFrame > 4.0f) {
         if (fp->x80_self_vel.y >= 0.0f) {
             if (func_80081D0C(fighter_gobj) != false) {
