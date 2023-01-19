@@ -154,7 +154,7 @@ Fighter_CostumeStrings lbl_803CC020[] = {
 
 void ftDonkey_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->sa.dk.x222C = 0;
     func_80074A4C(fighter_gobj, 0, 0);
 }
@@ -187,7 +187,7 @@ void ftDonkey_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void func_8010D96C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* attr = fp->x2D4_specialAttributes;
 
     if (fp->sa.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS)
@@ -226,23 +226,27 @@ void ftDonkey_OnKnockbackExit(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2]; /// can't remove with get inlines
     bool bool1;
     Fighter* fp = fighter_gobj->user_data;
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     CollData* colldata = &fp->x6F0_collData;
 
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (fp->x2210_ThrowFlags.b3) {
-        fp->x2210_ThrowFlags.b3 = 0;
-        bool1 = 1;
+        fp->x2210_ThrowFlags.b3 = false;
+        bool1 = true;
     } else {
-        bool1 = 0;
+        bool1 = false;
     }
 
-    if ((bool1) && ((colldata->x134_envFlags & 0x18000))) {
+    if (bool1 && FLAGS_ANY(colldata->x134_envFlags, 0x18000)) {
         Vec3 vec_list[4];
 
-        s32 i;
+        int i;
         for (i = 0; i < 4; i++) {
             f32 temp_f5 = (donkey_attr->SpecialLw.x68 * i) -
                           (donkey_attr->SpecialLw.x68 * 1.5f);
