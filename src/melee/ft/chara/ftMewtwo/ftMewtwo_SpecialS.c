@@ -8,7 +8,7 @@
 // https://decomp.me/scratch/ktG8y // Set flags
 void ftMewtwo_SpecialS_SetFlags(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007E2F4(fp, 0x1FF);
     func_8007E2FC(fighter_gobj);
@@ -20,9 +20,9 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
 {
 /// @todo Fix double assignment.
 #ifdef MUST_MATCH
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
 #else
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 #endif
 
     if (fp->x1A58_interactedFighter == NULL) {
@@ -38,7 +38,7 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
 // handler
 void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     f32 var;
     f32 var2;
 
@@ -59,9 +59,9 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
 {
 /// @todo Fix double assignment.
 #ifdef MUST_MATCH
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
 #else
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 #endif
 
     if (fp->x1A58_interactedFighter == NULL) {
@@ -79,9 +79,9 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
 /// @todo Fix double assignment.
 #ifdef MUST_MATCH
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
 #else
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 #endif
 
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
@@ -107,7 +107,7 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 
 static inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObj* victimGObj;
 
     if ((u32) fp->x2200_ftcmd_var0 != 0) {
@@ -174,7 +174,7 @@ void ftMewtwo_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 
 static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->mewtwoVars[0].SpecialS.isConfusionReflect != false) {
         fp->x2218_flag.bits.b3 = 1;
         fp->x2218_flag.bits.b4 = 1;
@@ -187,7 +187,7 @@ static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* fighter_gobj)
 // State handler
 void ftMewtwo_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D5D4(fp);
 
@@ -209,7 +209,7 @@ void ftMewtwo_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 // State handler
 void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D7FC(fp);
 
@@ -241,7 +241,7 @@ void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/BDCzb // Confusion Reflect think function
 void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
     s32 reflectFlag;
 
