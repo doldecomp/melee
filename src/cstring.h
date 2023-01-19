@@ -4,7 +4,7 @@
 #include <Runtime/platform.h>
 #include <stddef.h>
 
-int func_8032388C(void* dst, const void* src, size_t len);
+int wcstombs(void* dst, const void* src, size_t len);
 int memcmp(const void* str1, const void* str2, size_t len);
 void* memchr(const void* str, int c, size_t len);
 void* memmove(void* dst, const void* src, size_t len);

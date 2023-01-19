@@ -2,8 +2,8 @@
 
 .section .text, "ax"  # 0x80005940 - 0x803B7240
 
-.global func_8000CE50
-func_8000CE50:
+.global expf
+expf:
 /* 8000CE50 00009A30  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8000CE54 00009A34  38 A0 00 02 */	li r5, 2
 /* 8000CE58 00009A38  C0 02 80 A8 */	lfs f0, lbl_804D7A88@sda21(r2)
@@ -45,8 +45,8 @@ lbl_8000CED4:
 /* 8000CED8 00009AB8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8000CEDC 00009ABC  4E 80 00 20 */	blr
 
-.global func_8000CEE0
-func_8000CEE0:
+.global powf
+powf:
 /* 8000CEE0 00009AC0  7C 08 02 A6 */	mflr r0
 /* 8000CEE4 00009AC4  90 01 00 04 */	stw r0, 4(r1)
 /* 8000CEE8 00009AC8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -81,7 +81,7 @@ lbl_8000CF24:
 /* 8000CF54 00009B34  C0 02 80 9C */	lfs f0, lbl_804D7A7C@sda21(r2)
 /* 8000CF58 00009B38  EC 00 01 32 */	fmuls f0, f0, f4
 /* 8000CF5C 00009B3C  EC 22 00 32 */	fmuls f1, f2, f0
-/* 8000CF60 00009B40  4B FF FE F1 */	bl func_8000CE50
+/* 8000CF60 00009B40  4B FF FE F1 */	bl expf
 lbl_8000CF64:
 /* 8000CF64 00009B44  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8000CF68 00009B48  38 21 00 18 */	addi r1, r1, 0x18
