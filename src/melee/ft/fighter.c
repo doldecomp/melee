@@ -209,8 +209,8 @@ inline void Fighter_InitScale(Fighter* fp, Vec3* scale, f32 modelScale)
 
 void Fighter_UpdateModelScale(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
-    HSD_JObj* jobj = getHSDJObj(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(fighter_gobj);
     f32 modelScale_f1 = Fighter_GetModelScale(fp);
     Vec3 scale;
 
@@ -509,7 +509,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
 void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     Fighter_UnkInitReset_80067C98(fp);
     HSD_JObjSetTranslate(fighter_gobj->hsd_obj, &fp->xB0_pos);
