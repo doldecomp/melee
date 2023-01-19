@@ -39,6 +39,7 @@
 #include <melee/text_2.h>
 #include <melee/text_4.h>
 #include <MSL/trigf.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mtx.h>
@@ -590,7 +591,7 @@ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
 
 void Fighter_ResetInputData_80068854(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->input.x620_lstick_x = fp->input.x624_lstick_y =
         fp->input.x628_lstick_x2 = fp->input.x62C_lstick_y2 = 0.0f;
