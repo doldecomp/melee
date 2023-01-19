@@ -834,9 +834,9 @@ static void Fighter_Create_Inline2(HSD_GObj* fighter_gobj)
     Fighter* fp =
         getFighter(fighter_gobj); // you cant do (void*) here to make it
                                   // consistent, Fighter_Create wont match
-    if (fp->x2229_b5_no_normal_motion == 0) {
+    if (!fp->x2229_b5_no_normal_motion) {
         fp->x2EC = func_8001E8F8(func_80085E50(fp, 0x23));
-        if (fp->x2228_flag.bits.b2 == 0) {
+        if (!fp->x2228_flag.bits.b2) {
             fp->x2DC = func_8001E8F8(func_80085E50(fp, 7));
             fp->x2E0 = func_8001E8F8(func_80085E50(fp, 8));
             fp->x2E4 = func_8001E8F8(func_80085E50(fp, 9));
