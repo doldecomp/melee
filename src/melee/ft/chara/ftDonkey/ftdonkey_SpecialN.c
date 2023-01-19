@@ -28,7 +28,7 @@ void ftDonkey_UpdateDKVelocityAfterPunch(HSD_GObj* fighter_gobj)
 
 void ftDonkey_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     if (fp->sa.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x175, 0, NULL, 0.0f,
@@ -58,7 +58,7 @@ void ftDonkey_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
 void ftDonkey_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     if (fp->sa.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17A, 0, NULL, 0.0f,
@@ -104,7 +104,7 @@ void ftDonkey_NullCallbacks(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E840(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     if (0.0f == fp->x894_currentAnimFrame) {
         fp->sa.dk.x222C += 1;
@@ -183,7 +183,7 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
 
     if (fp->x2200_ftcmd_var0) {
@@ -228,7 +228,7 @@ void ftDonkey_8010EC5C(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010ECE8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
 
     if (fp->x894_currentAnimFrame == 0.0f) {
