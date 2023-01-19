@@ -38,7 +38,7 @@ void ftPurin_OnDeath(HSD_GObj* fighter_gobj);
 void ftPurin_OnUserDataRemove(HSD_GObj* fighter_gobj);
 void func_8013C360(HSD_GObj* fighter_gobj);
 void func_8013C4F0(HSD_GObj* fighter_gobj, s32 arg1, Mtx vmtx);
-void lbl_8013C94C(void);
+void lbl_8013C94C(HSD_GObj*);
 void ftPurin_SpecialHi_StartAction(HSD_GObj*);
 void ftPurin_SpecialAirHi_StartAction(HSD_GObj*);
 void lbl_8013CB68(HSD_GObj*);
