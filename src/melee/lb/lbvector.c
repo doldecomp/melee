@@ -332,7 +332,7 @@ Vec3* lbvector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
         }
         result_angles->z = 0.0f;
     } else {
-        result_angles->y = func_80022DBC(-b->z); // asin
+        result_angles->y = asinf(-b->z);
         result_angles->x = atan2f(c->z, a->z);
         result_angles->z = atan2f(b->y, b->x);
     }

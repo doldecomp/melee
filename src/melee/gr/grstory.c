@@ -83,12 +83,12 @@ HSD_GObj* func_801E30D8(int gobj_id)
     gobj = func_801C14D0(gobj_id);
 
     if (gobj != NULL) {
-        Map* map = gobj->user_data;
-        map->x8_callback = NULL;
-        map->xC_callback = NULL;
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
         if (callbacks->callback3 != NULL) {
-            map->x1C_callback = callbacks->callback3;
+            gp->x1C_callback = callbacks->callback3;
         }
         // 0x80
         if (callbacks->callback0 != NULL) {
@@ -113,9 +113,9 @@ void func_801E31C0(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
-    func_801C8138(gobj, map->map_id, 0);
-    map->x11_flags.b012 = 2;
+    Ground* gp = gobj->user_data;
+    func_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 2;
     func_801C8858(func_801C3FA4(gobj, 1), 0x20000000);
 }
 
@@ -136,14 +136,14 @@ inline s32 randi(s32 max)
 /* Initialize shyguys */
 void func_801E3234(HSD_GObj* gobj)
 {
-    Map* map = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
+    Ground* gp = gobj->user_data;
+    func_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
     func_801C7FF8(gobj, 5, 7, 1, 0.0f, 1.0f);
 
-    map->xC8 = lbl_804D69B8->unk0 + randi(lbl_804D69B8->unk4);
-    map->xC8 = 120;
-    map->x10_flags.b5 = true;
+    gp->xC8 = lbl_804D69B8->unk0 + randi(lbl_804D69B8->unk4);
+    gp->xC8 = 120;
+    gp->x10_flags.b5 = true;
 }
 
 bool func_801E332C(HSD_GObj* arg0)
@@ -224,7 +224,7 @@ void func_801E3418(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    UnkUserData2* map = gobj->user_data;
+    UnkUserData2* gp = gobj->user_data;
 
     // Don't trigger if any shy guys are still onscreen
     if (func_8026B3C0(It_Kind_Heiho) != 0) {
@@ -232,23 +232,23 @@ void func_801E3418(HSD_GObj* gobj)
     }
 
     // Wait until the shy guy timer has triggered
-    tmp = map->xC8;
+    tmp = gp->xC8;
     if (tmp != 0) {
-        map->xC8 = tmp - 1;
+        gp->xC8 = tmp - 1;
         return;
     }
     // Reset the timer
-    map->xC8 = lbl_804D69B8->unk0 + randi(lbl_804D69B8->unk4);
+    gp->xC8 = lbl_804D69B8->unk0 + randi(lbl_804D69B8->unk4);
     // This value really is overwritten in the game code.
     // Maybe a leftover hardcoded value from debugging?
-    map->xC8 = 120;
+    gp->xC8 = 120;
 
     // Pick a random spawn pattern,
     // which must be different from the previous one
     do {
         spawn_pattern = randi(6);
-    } while (map->xC5 == spawn_pattern);
-    map->xC5 = spawn_pattern;
+    } while (gp->xC5 == spawn_pattern);
+    gp->xC5 = spawn_pattern;
 
     // Choose whether they will spawn on the left or the right
     if (spawn_pattern < 3) {
@@ -264,17 +264,17 @@ void func_801E3418(HSD_GObj* gobj)
 
         // Spawn either 1, or 3-6 shy guys
         if (randi(lbl_804D69B8->unk8) == 0) {
-            map->xC4 = randi(3) + 3;
+            gp->xC4 = randi(3) + 3;
         } else {
-            map->xC4 = 1;
+            gp->xC4 = 1;
         }
         // Another overwrite, possible debugging?
         if (randi(2) == 0) {
-            map->xC4 = randi(3) + 3;
+            gp->xC4 = randi(3) + 3;
         } else {
-            map->xC4 = 1;
+            gp->xC4 = 1;
         }
-        for (i = 0; i < map->xC4; i++) {
+        for (i = 0; i < gp->xC4; i++) {
             func_802D8618(i, &pos, temp_r29, 25.0f * i);
             // Jitter the vertical position of the each subsequent shy guy
             pos.y = 3.0f * frand_amp1() + lbl_804D69B8->vars[spawn_pattern];

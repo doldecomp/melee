@@ -141,13 +141,13 @@ static HSD_GObj* func_80219D84(int gobj_id)
     gobj = func_801C14D0(gobj_id);
 
     if (gobj != NULL) {
-        Map* map = gobj->user_data;
-        map->x8_callback = NULL;
-        map->xC_callback = NULL;
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
 
         if (callbacks->callback3 != NULL)
-            map->x1C_callback = callbacks->callback3;
+            gp->x1C_callback = callbacks->callback3;
 
         if (callbacks->callback0 != NULL)
             callbacks->callback0(gobj);
@@ -165,8 +165,8 @@ static HSD_GObj* func_80219D84(int gobj_id)
 static void func_80219E6C(HSD_GObj* gobj)
 {
     Vec3 v;
-    Map* map = gobj->user_data;
-    enum_t id = map->map_id;
+    Ground* gp = gobj->user_data;
+    enum_t id = gp->map_id;
 
     func_801C8138(gobj, id, 0);
 
@@ -202,9 +202,9 @@ static void func_8021A11C(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
+    Ground* gp = gobj->user_data;
+    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    func_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool func_8021A16C(HSD_GObj* arg0)
@@ -227,10 +227,10 @@ static void func_8021A19C(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, map->map_id);
-    func_801C8138(gobj, map->map_id, 0);
-    map->x11_flags.b012 = 2;
+    Ground* gp = gobj->user_data;
+    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    func_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 2;
 }
 
 static bool func_8021A1FC(HSD_GObj* arg0)
@@ -249,14 +249,14 @@ static void func_8021A20C(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* gp = gobj->user_data;
 
     /// @todo Missing cast
     unk_t hsd_obj = gobj->hsd_obj;
 
-    func_801C8138(gobj, map->map_id, 0);
+    func_801C8138(gobj, gp->map_id, 0);
     func_801C94D8(hsd_obj);
-    map->x11_flags.b012 = 2;
+    gp->x11_flags.b012 = 2;
 }
 
 static bool func_8021A264(HSD_GObj* arg0)
@@ -275,11 +275,11 @@ static void func_8021A274(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* gp = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
-    func_801C8138(gobj, map->map_id, 0);
+    func_801C8138(gobj, gp->map_id, 0);
     func_801C94D8(hsd_obj);
-    map->x11_flags.b012 = 2;
+    gp->x11_flags.b012 = 2;
 }
 
 static bool func_8021A2CC(HSD_GObj* arg0)
@@ -298,12 +298,12 @@ static void func_8021A2DC(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* gp = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
-    func_801C8138(gobj, map->map_id, 0);
+    func_801C8138(gobj, gp->map_id, 0);
     func_801C94D8(hsd_obj);
     gobj;
-    map->x11_flags.b012 = 2;
+    gp->x11_flags.b012 = 2;
 }
 
 static bool func_8021A334(HSD_GObj* arg0)
@@ -322,12 +322,12 @@ static void func_8021A344(HSD_GObj* gobj)
     u8 unused[24];
 #endif
 
-    Map* map = gobj->user_data;
+    Ground* gp = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
-    map->x11_flags.b012 = 2;
-    map->xC4 = 0;
-    map->xD0 = HSD_Randi(1200) + 2400;
-    map->xC8 = -1;
+    gp->x11_flags.b012 = 2;
+    gp->xC4 = 0;
+    gp->xD0 = HSD_Randi(1200) + 2400;
+    gp->xC8 = -1;
     HSD_JObjSetFlagsAll(jobj, 0x10);
 }
 
@@ -338,7 +338,7 @@ static bool func_8021A3B4(HSD_GObj* arg0)
 
 static void func_8021A3BC(HSD_GObj* gobj)
 {
-    Map* map = gobj->user_data;
+    Ground* gp = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_GObj* bg_gobj;
     s32 temp_r0_2;
@@ -350,11 +350,11 @@ static void func_8021A3BC(HSD_GObj* gobj)
     u8 unused[28];
 #endif
 
-    switch (map->xC4) {
+    switch (gp->xC4) {
     case 0:
-        if (map->xD0-- < 0) {
-            map->xC4 = 1;
-            func_801C8138(gobj, map->map_id, 0);
+        if (gp->xD0-- < 0) {
+            gp->xC4 = 1;
+            func_801C8138(gobj, gp->map_id, 0);
         }
         break;
     case 1:
@@ -362,40 +362,40 @@ static void func_8021A3BC(HSD_GObj* gobj)
             HSD_JObjClearFlagsAll(jobj, 0x10);
         }
         if (func_801C83D0(gobj, 0, 7)) {
-            if (map->xC8 == -1) {
+            if (gp->xC8 == -1) {
                 u32 i;
                 for (i = 0; i < BATTLE_BG_MAX; i++) {
                     if (func_801C2BA4(sp28[i])) {
-                        map->xC8 = sp28[i];
+                        gp->xC8 = sp28[i];
                         break;
                     }
                 }
                 HSD_ASSERT(527, i<BATTLE_BG_MAX);
             }
-            map->xCC = map->xC8;
+            gp->xCC = gp->xC8;
             do {
                 temp_r0_2 = sp28[HSD_Randi(BATTLE_BG_MAX)];
-            } while ((tmp = map->xCC) == (map->xC8 = temp_r0_2));
+            } while ((tmp = gp->xCC) == (gp->xC8 = temp_r0_2));
 
             bg_gobj = func_801C2BA4(tmp);
             HSD_ASSERT(535, bg_gobj);
             func_801C9604(bg_gobj, lbl_804D6ACC->unk4, 0);
 
-            bg_gobj = func_80219D84(map->xC8);
+            bg_gobj = func_80219D84(gp->xC8);
             HSD_ASSERT(539, bg_gobj);
             func_801C9604(bg_gobj, lbl_804D6ACC->unk0, 0);
 
-            map->xC4 = 2;
+            gp->xC4 = 2;
         }
         break;
     case 2:
-        bg_gobj = func_801C2BA4(map->xCC);
+        bg_gobj = func_801C2BA4(gp->xCC);
         HSD_ASSERT(546, bg_gobj);
         if (func_801C96E8(bg_gobj)) {
             func_801C4A08(bg_gobj);
             HSD_JObjSetFlagsAll(jobj, 0x10);
-            map->xC4 = 0;
-            map->xD0 = HSD_Randi(1200) + 2400;
+            gp->xC4 = 0;
+            gp->xD0 = HSD_Randi(1200) + 2400;
         }
         break;
     }
