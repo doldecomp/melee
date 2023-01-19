@@ -67,7 +67,7 @@ void ftDonkey_8010E35C(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E3BC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->x2200_ftcmd_var0) {
         if (!func_800827A0(fighter_gobj)) {
             ftDonkey_8010E464(fighter_gobj);
