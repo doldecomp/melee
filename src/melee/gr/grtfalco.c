@@ -91,13 +91,13 @@ HSD_GObj* func_8022089C(int id)
     StageCallbacks* cb = &lbl_803E8918[id];
     gobj = func_801C14D0(id);
     if (gobj != NULL) {
-        Map* map = gobj->user_data;
-        map->x8_callback = NULL;
-        map->xC_callback = NULL;
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
 
         if (cb->callback3 != NULL)
-            map->x1C_callback = cb->callback3;
+            gp->x1C_callback = cb->callback3;
 
         if (cb->callback0 != NULL)
             cb->callback0(gobj);
@@ -114,8 +114,8 @@ HSD_GObj* func_8022089C(int id)
 
 void lbl_80220984(HSD_GObj* gobj)
 {
-    Map* map = (Map*) HSD_GObjGetUserData(gobj);
-    func_801C8138(gobj, map->map_id, 0);
+    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
+    func_801C8138(gobj, gp->map_id, 0);
 }
 
 bool lbl_802209B0(HSD_GObj* arg0)
