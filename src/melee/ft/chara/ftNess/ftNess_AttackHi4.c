@@ -9,6 +9,7 @@
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/mp/mpcoll.h>
+#include <sysdolphin/baselib/gobj.h>
 
 void ftNess_YoyoUpdateHitPos(HSD_GObj* fighter_gobj)
 {
@@ -365,10 +366,13 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* fighter_gobj)
     HSD_GObj* yoyo_GObj;
     itYoyoAttributes* yoyo_attr;
     ftNessAttributes* ness_attr;
-    Hitbox* hitbox;
-    s32 filler;
 
-    fp = getFighterPlus(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
 
     // Current animation frame, integer
     fp->nessVars[0].AttackHi4.yoyoCurrentFrame = 14;
@@ -386,7 +390,7 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* fighter_gobj)
 
     func_80088510(fp, 0x334AA, 0x7F, 0x40);
     smashChargeFrames = fp->x2114_SmashAttr.x2118_frames;
-    fighter_data2 = getFighterPlus(fighter_gobj);
+    fighter_data2 = GET_FIGHTER(fighter_gobj);
     ness_attr = getFtSpecialAttrs(fighter_data2);
 
     if ((0.0f != smashChargeFrames) && ((s32) fighter_data2->x914->x0 == true))
@@ -503,7 +507,12 @@ void ftNess_YoyoSetUnkRate(HSD_GObj* fighter_gobj)
     ftNessAttributes* ness_attr;
     f32 yoyo_float;
 
-    fp = getFighterPlus(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
     yoyo_GObj = fp->sa.ness.x222C_yoyoGObj;
     if (yoyo_GObj != NULL) {
@@ -554,7 +563,12 @@ void ftNess_YoyoItemSetFlag(HSD_GObj* fighter_gobj)
 
 void ftNess_YoyoItemDespawn(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->sa.ness.x222C_yoyoGObj != NULL) {
         func_802BE958(fp->sa.ness.x222C_yoyoGObj);
@@ -661,7 +675,12 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj)
             ((s32) fighter_data2->nessVars[0].AttackHi4.isChargeDisable ==
              false))
         {
-            fighter_data2 = getFighterPlus(fighter_gobj);
+            /// @todo Unused stack.
+#ifdef MUST_MATCH
+            u8 unused[8];
+#endif
+
+            fighter_data2 = getFighter(fighter_gobj);
             sp18.x = 0.0f;
             sp18.y = 0.5f *
                      (fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.top.y +
@@ -761,8 +780,7 @@ void ftNess_AttackHi4_Coll(
 
 static inline HSD_GObj* GetYoyoGObj(Fighter* fp)
 {
-    HSD_GObj* yoyo_GObj = fp->sa.ness.x222C_yoyoGObj;
-    return yoyo_GObj;
+    return fp->sa.ness.x222C_yoyoGObj;
 };
 
 // 0x80115F88
@@ -1001,14 +1019,19 @@ void ftNess_AttackHi4_Release_Action(HSD_GObj* fighter_gobj)
     itYoyoAttributes* yoyo_attr;
     HSD_GObj* yoyo_GObj;
 
-    fp = fighter_gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKHI4_RELEASE,
                                        FIGHTER_ITEMVIS_NOUPDATE, NULL, 13.0f,
                                        1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 
-    fighter_data2 = getFighterPlus(fighter_gobj);
-    fighter_data2 = getFighterPlus(fighter_gobj);
+    fighter_data2 = getFighter(fighter_gobj);
+    fighter_data2 = getFighter(fighter_gobj);
     fighter_data2->nessVars[0].AttackHi4.yoyoCurrentFrame = 14;
 
     if ((yoyo_GObj = fighter_data2->sa.ness.x222C_yoyoGObj) != NULL) {
