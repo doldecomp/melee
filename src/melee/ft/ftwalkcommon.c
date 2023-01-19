@@ -85,7 +85,7 @@ void ftWalkCommon_800DFDDC(HSD_GObj* fighter_gobj)
     f32 velocity_f2;
     f32 anim_rate;
 
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (Stage_GetGroundFrictionMultiplier(fp) < 1.0f) {
         velocity_f2 = fp->x2340_f32;
@@ -116,7 +116,7 @@ void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
 {
     s32 action_state_sum;
     s32 action_state_base;
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 walk_action_type = ftWalkCommon_GetWalkType_800DFBF8_fake(fighter_gobj);
 
     action_state_base = fp->x2344_stateVar2_s32;
