@@ -24,7 +24,7 @@ void ftLuigi_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 // State handler
 void ftLuigi_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     f32 vel;
     f32 mul;
@@ -90,7 +90,7 @@ void ftLuigi_SpecialHi_IASA(HSD_GObj* fighter_gobj)
     f32 stick_angle;
     bool flag;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     stick_x = fp->input.x620_lstick_x;
     luigiAttrs = fp->x2D4_specialAttributes;
     stick_range = stickGetDir(fp->input.x620_lstick_x, 0.0f);
@@ -161,7 +161,7 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
     f32 range4;
     bool flag;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     stick_x = fp->input.x620_lstick_x;
     luigiAttrs = fp->x2D4_specialAttributes;
     stick_range = stickGetDir(fp->input.x620_lstick_x, 0.0f);
@@ -259,7 +259,7 @@ void ftLuigi_SpecialHi_CheckLanding(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftLuigi_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
         if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
@@ -279,7 +279,7 @@ void ftLuigi_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
         if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
