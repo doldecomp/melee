@@ -1278,7 +1278,7 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
     HSD_JObj* temp_r3_4;
     void* temp_r3;
     f32 phi_f0;
-    Map* gp;
+    Ground* gp;
     int i;
 
     /// @todo Unused stack
@@ -1362,7 +1362,7 @@ static void func_801C1CD0(HSD_GObj* gobj)
 #endif
 
     HSD_JObj* jobj = gobj->hsd_obj;
-    Map* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
     HSD_JObjAnimAll(jobj);
     func_801C9698(gobj);
     lbl_804D64AC += 1;
@@ -1373,7 +1373,7 @@ static void func_801C1CD0(HSD_GObj* gobj)
 
 static void func_801C1D38(HSD_GObj* gobj)
 {
-    Map* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
 
     if (gp->xC_callback != NULL)
         gp->xC_callback(gobj);
@@ -3988,11 +3988,11 @@ static inline void removeStageGObj(HSD_GObj* gobj)
     }
 }
 
-// Stage destroy map gobj
+// Stage destroy ground gobj
 void func_801C4A08(HSD_GObj* gobj)
 {
     UnkArchiveStruct* archive;
-    Map* gp;
+    Ground* gp;
     HSD_JObj* jobj;
     s32 map_id;
 
@@ -4067,14 +4067,14 @@ void func_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
 
     lbvector_CrossprodNormalized(&vec0, &vec2, &vec1);
     lbvector_CrossprodNormalized(&vec1, &vec0, &vec2);
-    result_y = func_80022DBC(vec1.z);
+    result_y = asinf(vec1.z);
     z1 = vec1.z;
 
     if (vec1.z < 0.0F)
         z1 = -vec1.z;
 
     if (z1 >= 0.99999F) {
-        phi_f31 = func_80022DBC(-vec0.y);
+        phi_f31 = asinf(-vec0.y);
 
         if (vec0.x * cosf(phi_f31) * sinf(result_y) < 0.0F)
             phi_f31 = M_PI - phi_f31;
@@ -4082,12 +4082,12 @@ void func_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
         result_x = phi_f31;
         result_z = 0.0F;
     } else {
-        result_x = func_80022DBC(vec2.z / cosf(result_y));
+        result_x = asinf(vec2.z / cosf(result_y));
 
         if (vec0.z * cosf(result_x) * cosf(result_y) < 0)
             result_x = M_PI - result_x;
 
-        result_z = func_80022DBC(-vec1.y / cosf(result_y));
+        result_z = asinf(-vec1.y / cosf(result_y));
 
         if (-vec1.x * cosf(result_y) * cosf(result_z) < 0)
             result_z = M_PI - result_z;
@@ -4483,7 +4483,7 @@ void func_801C5414(unk_t arg0, s32 arg1)
 /// @file
 /// @todo Don't hardcode 8
 
-void func_801C5440(Map* gp, s32 i, u32 arg2)
+void func_801C5440(Ground* gp, s32 i, u32 arg2)
 {
     if (i < 0 || i >= 8)
         return;
@@ -4496,7 +4496,7 @@ void func_801C5440(Map* gp, s32 i, u32 arg2)
 
     if (arg2 != 540001) {
         if (gp->x20[i] != -1) {
-            Map* tmp_gp = gp;
+            Ground* tmp_gp = gp;
             func_800236B8(tmp_gp->x20[i]);
         }
 
@@ -4506,7 +4506,7 @@ void func_801C5440(Map* gp, s32 i, u32 arg2)
     }
 }
 
-bool func_801C54DC(Map* gp, s32 i)
+bool func_801C54DC(Ground* gp, s32 i)
 {
     if (i < 0 || i >= 8)
         return false;
@@ -4517,7 +4517,7 @@ bool func_801C54DC(Map* gp, s32 i)
     return false;
 }
 
-void func_801C5544(Map* gp, s32 i)
+void func_801C5544(Ground* gp, s32 i)
 {
     if (i < 0 || i >= 8)
         return;
@@ -4526,14 +4526,14 @@ void func_801C5544(Map* gp, s32 i)
         return;
 
     if (gp->x20[i] != -1) {
-        Map* tmp_gp = gp;
+        Ground* tmp_gp = gp;
         func_800236B8(tmp_gp->x20[i]);
     }
 
     gp->x20[i] = -1;
 }
 
-static void func_801C55AC(Map* gp)
+static void func_801C55AC(Ground* gp)
 {
     int i;
 
@@ -4544,7 +4544,7 @@ static void func_801C55AC(Map* gp)
         func_801C5544(gp, i);
 }
 
-void func_801C5630(Map* gp, s32 i, f32 val)
+void func_801C5630(Ground* gp, s32 i, f32 val)
 {
     if (i < 0 || i >= 8) {
         return;
@@ -4554,7 +4554,7 @@ void func_801C5630(Map* gp, s32 i, f32 val)
     }
 }
 
-void func_801C5694(Map* gp, s32 i, f32 val)
+void func_801C5694(Ground* gp, s32 i, f32 val)
 {
     if (i < 0 || i >= 8) {
         return;
