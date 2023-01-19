@@ -96,7 +96,7 @@ void ftDonkey_8010E7B4(HSD_GObj* fighter_gobj)
 
 void ftDonkey_NullCallbacks(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21F0_callback = 0;
     fp->cb.x21D4_callback_EnterHitlag = 0;
     fp->cb.x21D8_callback_ExitHitlag = 0;
