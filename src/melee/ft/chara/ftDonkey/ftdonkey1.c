@@ -19,9 +19,14 @@ bool ftDonkey_800DF938(HSD_GObj* fighter_gobj)
 
 void ftDonkey_800DF980(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2]; /// getFighter inlines not working
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     if (fp->xE0_ground_or_air == GA_Air) {
         func_8007D7FC(fp);
     }
