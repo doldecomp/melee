@@ -99,7 +99,12 @@ void ftNess_SpecialNStart_Action(
     ftNessAttributes* ness_attr;
     Fighter* temp_fp;
 
-    fp = getFighterPlus(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_START, 0,
                                        NULL, 0.0f, 1.0f, 0.0f);
@@ -136,7 +141,12 @@ void ftNess_SpecialAirNStart_Action(
     ftNessAttributes* ness_attr;
     Fighter* temp_fp;
 
-    fp = getFighterPlus(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRN_START,
                                        0, NULL, 0.0f, 1.0f, 0.0f);
@@ -183,11 +193,11 @@ void ftNess_SpecialNStart_Anim(
     Fighter* fp;
     Fighter* fighter_data2;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_HOLD,
                                            0, NULL, 0.0f, 1.0f, 0.0f);
-        fighter_data2 = getFighterPlus(fighter_gobj);
+        fighter_data2 = GET_FIGHTER(fighter_gobj);
         if (fighter_data2->sa.ness.x2240_flashGObj == NULL) {
             func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, NULL,
                           &sp28);
@@ -305,11 +315,11 @@ void ftNess_SpecialAirNStart_Anim(
     Fighter* fp;
     Fighter* fighter_data2;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_NESS_SPECIALAIRN_HOLD, 0, NULL, 0.0f, 1.0f, 0.0f);
-        fighter_data2 = getFighterPlus(fighter_gobj);
+        fighter_data2 = GET_FIGHTER(fighter_gobj);
         if (fighter_data2->sa.ness.x2240_flashGObj == NULL) {
             func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, NULL,
                           &sp28);
