@@ -19,7 +19,7 @@ void ftSamus_801293BC_inner(HSD_GObj* fighter_gobj)
 void ftSamus_801291F0(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj) {
-        Fighter* fp = getFighter(fighter_gobj);
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
         if (fp->sa.samus.x222C) {
             fp->sa.samus.x222C = 0;
         }
@@ -30,7 +30,7 @@ void ftSamus_801291F0(HSD_GObj* fighter_gobj)
 void ftSamus_80129258(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj) {
-        Fighter* fp = getFighter(fighter_gobj);
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
         ftSamus_UnkAndDestroyAllEF(fighter_gobj);
         fp->sa.samus.x2230 = 0;
     }
@@ -106,7 +106,7 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj)
 void ftSamus_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
     Vec3* self_vel;
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
     fp->x220C_ftcmd_var3 = 0;
@@ -125,7 +125,7 @@ void ftSamus_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
 void ftSamus_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
     fp->x220C_ftcmd_var3 = 0;
@@ -238,7 +238,7 @@ void ftSamus_80129A14(HSD_GObj* fighter_gobj)
 
 void ftSamus_80129A98(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     ftSamus_801293BC(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -425,7 +425,7 @@ void ftSamus_8012A074(HSD_GObj* fighter_gobj)
 
 void ftSamus_8012A168(HSD_GObj* fighter_gobj, Vec3* spawnlocation)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!fp->x2219_flag.bits.b0) {
         ef_Spawn(0x483, fighter_gobj, spawnlocation);
         fp->x2219_flag.bits.b0 = 1;
