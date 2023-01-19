@@ -9,7 +9,7 @@
 
 void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2340_stateVar1 = 0;
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17F, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
@@ -150,7 +150,7 @@ void ftDonkey_8010E090(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E0CC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!fp->x2219_flag.bits.b0) {
         ef_Spawn(0x4C6, fighter_gobj, fp->x5E8_fighterBones[1].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
@@ -162,7 +162,7 @@ void ftDonkey_8010E0CC(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E148(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!fp->x2219_flag.bits.b0) {
         ef_Spawn(0x4C7, fighter_gobj, fp->x5E8_fighterBones[1].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
