@@ -23,7 +23,7 @@
 // https://decomp.me/scratch/UHxFc
 void ftZelda_801396AC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftZelda_801396E0(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = 0;
 }
