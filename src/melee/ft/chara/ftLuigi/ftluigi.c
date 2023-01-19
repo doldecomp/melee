@@ -103,14 +103,14 @@ Fighter_CostumeStrings lbl_803D0AB4[] = {
 
 void ftLuigi_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, false);
     fp->sa.luigi.x2234 = 0;
 }
 
 void ftLuigi_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftLuigiAttributes);
