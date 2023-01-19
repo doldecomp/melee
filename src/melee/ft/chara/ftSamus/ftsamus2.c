@@ -81,6 +81,7 @@ void ftSamus_80128B1C(HSD_GObj* fighter_gobj, f32 angle, f32 arg9, f32 argA)
 {
     Fighter* fp;
     Fighter* fighter2;
+
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 unused[8];
@@ -136,10 +137,12 @@ void ftSamus_80128D3C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 unused[8];
 #endif
+
     if ((fp->x2204_ftcmd_var1) && (fp->input.x624_lstick_y < samus_attr->x14)) {
         fp->x2204_ftcmd_var1 = 0;
         func_800D638C(fighter_gobj);
@@ -224,10 +227,12 @@ void ftSamus_80128F60(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 unused[8];
 #endif
+
     if (fp->x2200_ftcmd_var0) {
         /// @todo Remove cast.
         if (!func_80082888(fighter_gobj,
@@ -244,10 +249,12 @@ void ftSamus_80128FD4(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 unused[8];
 #endif
+
     if (fp->x2200_ftcmd_var0) {
         if (func_800824A0(fighter_gobj,
                           (ftCollisionBox*) &samus_attr->height_attributes))
