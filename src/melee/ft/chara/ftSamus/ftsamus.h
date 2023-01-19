@@ -71,7 +71,7 @@ void ftSamus_8012B668(HSD_GObj* fighter_gobj);
 
 static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = &ftSamus_80128428;
     fp->cb.x21E4_callback_OnDeath2 = &ftSamus_80128428;
 }
@@ -86,7 +86,7 @@ static inline void ftSamus_SetAttrx2334(HSD_GObj* fighter_gobj)
 static inline void ftSamus_destroyAllEF(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj) {
-        Fighter* fp = getFighterPlus(fighter_gobj);
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
         if (fp->sa.samus.x2234) {
             efLib_DestroyAll(fighter_gobj);
             fp->sa.samus.x2234 = 0;

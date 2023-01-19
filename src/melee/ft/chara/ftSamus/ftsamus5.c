@@ -11,6 +11,12 @@
 void ftSamus_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x161, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
     ftSamus_updateDamageDeathCBs(fighter_gobj);
@@ -29,8 +35,9 @@ void ftSamus_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 
 void ftSamus_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x162, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
     ftSamus_updateDamageDeathCBs(fighter_gobj);
