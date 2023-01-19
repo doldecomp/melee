@@ -1142,7 +1142,7 @@ struct SpecialAttrs_Popo {
 };
 
 struct SpecialAttrs_Nana {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ uint x222C;
     /* 0x2230 */ UnkFlagStruct x2230;
     /* 0x2231 */ u8 filler_x2231[3];
     /* 0x2234 */ u32 x2234;
