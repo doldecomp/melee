@@ -129,11 +129,6 @@ void ftSamus_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
     Vec3* self_vel;
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 unused[8];
-#endif
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
     fp->x220C_ftcmd_var3 = 0;
@@ -153,11 +148,6 @@ void ftSamus_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 void ftSamus_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 unused[8];
-#endif
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
     fp->x220C_ftcmd_var3 = 0;
