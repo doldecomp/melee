@@ -3,7 +3,7 @@
 
 // Widechar to multibyte string conversion,
 // doesn't care about proper conversion though?
-int func_8032388C(void* dst, const void* src, size_t len)
+int wcstombs(void* dst, const void* src, size_t len)
 {
     char c;
     int i;
