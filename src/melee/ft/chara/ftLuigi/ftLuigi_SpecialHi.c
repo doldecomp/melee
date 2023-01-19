@@ -10,7 +10,7 @@
 // State handler
 void ftLuigi_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
@@ -47,7 +47,7 @@ void ftLuigi_SpecialHi_Anim(HSD_GObj* fighter_gobj)
     f32 freefall;
     f32 landing;
 
-    luigiAttrs = getFighter(fighter_gobj)->x2D4_specialAttributes;
+    luigiAttrs = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_80096900(fighter_gobj, 0, 1, 0,
                       luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
@@ -65,7 +65,7 @@ void ftLuigi_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
     f32 landing;
     f32 landing2;
 
-    luigiAttrs = getFighter(fighter_gobj)->x2D4_specialAttributes;
+    luigiAttrs = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_80096900(fighter_gobj, 0, 1, 0,
                       luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
@@ -216,7 +216,7 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialHi_Phys(HSD_GObj* fighter_gobj)
 {
-    if ((s32) getFighter(fighter_gobj)->xE0_ground_or_air == GA_Air) {
+    if ((s32) GET_FIGHTER(fighter_gobj)->xE0_ground_or_air == GA_Air) {
         func_80085154(fighter_gobj);
         return;
     }
@@ -250,7 +250,7 @@ void ftLuigi_SpecialHi_CheckLanding(HSD_GObj* fighter_gobj)
 {
     func_800D5CB0(
         fighter_gobj, 0,
-        ((ftLuigiAttributes*) getFighter(fighter_gobj)->x2D4_specialAttributes)
+        ((ftLuigiAttributes*) GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes)
             ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
 }
 
