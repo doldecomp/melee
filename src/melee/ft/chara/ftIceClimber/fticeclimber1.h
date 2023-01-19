@@ -15,4 +15,19 @@ void ftIceClimber_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
 void ftIceClimber_OnKnockbackEnter(HSD_GObj* fighter_gobj);
 void ftIceClimber_OnKnockbackExit(HSD_GObj* fighter_gobj);
 
+/* static */ void func_8011F190(HSD_GObj* fighter_gobj);
+/* static */ void func_80122898(HSD_GObj* fighter_gobj);
+/* static */ void func_80121164(HSD_GObj* fighter_gobj);
+/* static */ void func_8011F68C(HSD_GObj* fighter_gobj);
+void func_8011F16C(HSD_GObj* fighter_gobj, uint arg1);
+void lbl_8011F500(HSD_GObj*);
+void ftIceClimber_SpecialN_StartAction(HSD_GObj* fighter_gobj);
+void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
+void lbl_8011F318(HSD_GObj* gobj);
+void lbl_8011F354(HSD_GObj* gobj);
+void lbl_8011F390(HSD_GObj*);
+void lbl_8011F394(HSD_GObj*);
+void lbl_8011F398(HSD_GObj*);
+void lbl_8011F3B8(HSD_GObj*);
+
 #endif
