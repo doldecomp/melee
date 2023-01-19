@@ -17,7 +17,7 @@ void ftDonkey_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
 void ftDonkey_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     fp->x80_self_vel.x /= donkey_attr->SpecialS.x3C_MIN_STICK_X_MOMENTUM;
     fp->x80_self_vel.y = 0.0f;
