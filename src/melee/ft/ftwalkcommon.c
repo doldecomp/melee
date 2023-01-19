@@ -1,9 +1,9 @@
-#include <melee/ft/ftwalkcommon.h>
 
 #include <dolphin/os/os.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/ftwalkcommon.h>
 
 s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
 {
@@ -59,11 +59,16 @@ void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8,
                            f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD,
                            f32 argE, f32 argF)
 {
-    s32 unused[3];
     s32 new_action_state;
     s32 walking_state;
     Fighter* fp;
-    fp = getFighterPlus(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[20];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
     fp->x2360_f32 = argF;
     walking_state = ftWalkCommon_GetWalkType_800DFBF8_fake(fighter_gobj);
     new_action_state = arg1 + walking_state;
