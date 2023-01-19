@@ -73,8 +73,12 @@ void ftSamus_8012A400(HSD_GObj* fighter_gobj)
 
 void ftSamus_8012A420(HSD_GObj* fighter_gobj)
 {
-    s32 unused[5];
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
+
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     Fighter* fighter2;
     func_8007D4B8(fp);
@@ -120,12 +124,16 @@ void ftSamus_8012A560(HSD_GObj* fighter_gobj)
 
 void ftSamus_8012A580(HSD_GObj* fighter_gobj)
 {
-    s32 unused[8]; /// this func is so strange
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[40];
+#endif
+
     Fighter* fighter2;
     Fighter* fp;
     ftSamusAttributes* samus_attr;
     ftSamusAttributes* samus_attr2;
-    fp = fighter2 = getFighterPlus(fighter_gobj);
+    fp = fighter2 = GET_FIGHTER(fighter_gobj);
     samus_attr = getFtSpecialAttrs(fp);
     func_8007D4B8(fp);
     samus_attr2 = samus_attr;
@@ -148,7 +156,13 @@ void ftSamus_8012A604(HSD_GObj* fighter_gobj)
 
 void ftSamus_8012A640(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     efLib_DestroyAll(fighter_gobj);
     fp->sa.samus.x2244 = 0;
 }
