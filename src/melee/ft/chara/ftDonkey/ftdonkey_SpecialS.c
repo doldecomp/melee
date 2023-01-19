@@ -7,7 +7,13 @@
 
 void ftDonkey_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17B, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
     func_8006EBA4(fighter_gobj);
