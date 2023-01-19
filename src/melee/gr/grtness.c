@@ -74,7 +74,7 @@ static bool GrTNess_8022266C(void)
 static HSD_GObj* GrTNess_80222674(int id)
 {
     HSD_GObj* gobj;
-    Map* gp;
+    Ground* gp;
     StageCallbacks* cb = &lbl_803E9030[id];
     gobj = func_801C14D0(id);
     if (gobj != NULL) {
@@ -99,7 +99,7 @@ static HSD_GObj* GrTNess_80222674(int id)
 
 static void GrTNess_8022275C(HSD_GObj* gobj)
 {
-    Map* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
     func_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -125,7 +125,7 @@ static void GrTNess_80222798(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }
@@ -153,7 +153,7 @@ static void GrTNess_80222828(HSD_GObj* gobj)
     u8 unused[8];
 #endif
 
-    Map* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }

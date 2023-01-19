@@ -1278,7 +1278,7 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
     HSD_JObj* temp_r3_4;
     void* temp_r3;
     f32 phi_f0;
-    Map* gp;
+    Ground* gp;
     int i;
 
     /// @todo Unused stack
@@ -1362,7 +1362,7 @@ static void func_801C1CD0(HSD_GObj* gobj)
 #endif
 
     HSD_JObj* jobj = gobj->hsd_obj;
-    Map* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
     HSD_JObjAnimAll(jobj);
     func_801C9698(gobj);
     lbl_804D64AC += 1;
@@ -1373,7 +1373,7 @@ static void func_801C1CD0(HSD_GObj* gobj)
 
 static void func_801C1D38(HSD_GObj* gobj)
 {
-    Map* gp = gobj->user_data;
+    Ground* gp = gobj->user_data;
 
     if (gp->xC_callback != NULL)
         gp->xC_callback(gobj);
@@ -3988,11 +3988,11 @@ static inline void removeStageGObj(HSD_GObj* gobj)
     }
 }
 
-// Stage destroy map gobj
+// Stage destroy ground gobj
 void func_801C4A08(HSD_GObj* gobj)
 {
     UnkArchiveStruct* archive;
-    Map* gp;
+    Ground* gp;
     HSD_JObj* jobj;
     s32 map_id;
 
@@ -4483,7 +4483,7 @@ void func_801C5414(unk_t arg0, s32 arg1)
 /// @file
 /// @todo Don't hardcode 8
 
-void func_801C5440(Map* gp, s32 i, u32 arg2)
+void func_801C5440(Ground* gp, s32 i, u32 arg2)
 {
     if (i < 0 || i >= 8)
         return;
@@ -4496,7 +4496,7 @@ void func_801C5440(Map* gp, s32 i, u32 arg2)
 
     if (arg2 != 540001) {
         if (gp->x20[i] != -1) {
-            Map* tmp_gp = gp;
+            Ground* tmp_gp = gp;
             func_800236B8(tmp_gp->x20[i]);
         }
 
@@ -4506,7 +4506,7 @@ void func_801C5440(Map* gp, s32 i, u32 arg2)
     }
 }
 
-bool func_801C54DC(Map* gp, s32 i)
+bool func_801C54DC(Ground* gp, s32 i)
 {
     if (i < 0 || i >= 8)
         return false;
@@ -4517,7 +4517,7 @@ bool func_801C54DC(Map* gp, s32 i)
     return false;
 }
 
-void func_801C5544(Map* gp, s32 i)
+void func_801C5544(Ground* gp, s32 i)
 {
     if (i < 0 || i >= 8)
         return;
@@ -4526,14 +4526,14 @@ void func_801C5544(Map* gp, s32 i)
         return;
 
     if (gp->x20[i] != -1) {
-        Map* tmp_gp = gp;
+        Ground* tmp_gp = gp;
         func_800236B8(tmp_gp->x20[i]);
     }
 
     gp->x20[i] = -1;
 }
 
-static void func_801C55AC(Map* gp)
+static void func_801C55AC(Ground* gp)
 {
     int i;
 
@@ -4544,7 +4544,7 @@ static void func_801C55AC(Map* gp)
         func_801C5544(gp, i);
 }
 
-void func_801C5630(Map* gp, s32 i, f32 val)
+void func_801C5630(Ground* gp, s32 i, f32 val)
 {
     if (i < 0 || i >= 8) {
         return;
@@ -4554,7 +4554,7 @@ void func_801C5630(Map* gp, s32 i, f32 val)
     }
 }
 
-void func_801C5694(Map* gp, s32 i, f32 val)
+void func_801C5694(Ground* gp, s32 i, f32 val)
 {
     if (i < 0 || i >= 8) {
         return;
