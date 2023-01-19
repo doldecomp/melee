@@ -54,8 +54,8 @@ static inline Fighter* getFighter(HSD_GObj* fighter_gobj)
     return fighter_gobj->user_data;
 }
 
-static inline Fighter*
-getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space //
+/// @deprecated use #GET_FIGHTER instead.
+static inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     return fp;
