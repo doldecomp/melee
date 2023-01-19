@@ -4067,14 +4067,14 @@ void func_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
 
     lbvector_CrossprodNormalized(&vec0, &vec2, &vec1);
     lbvector_CrossprodNormalized(&vec1, &vec0, &vec2);
-    result_y = func_80022DBC(vec1.z);
+    result_y = asinf(vec1.z);
     z1 = vec1.z;
 
     if (vec1.z < 0.0F)
         z1 = -vec1.z;
 
     if (z1 >= 0.99999F) {
-        phi_f31 = func_80022DBC(-vec0.y);
+        phi_f31 = asinf(-vec0.y);
 
         if (vec0.x * cosf(phi_f31) * sinf(result_y) < 0.0F)
             phi_f31 = M_PI - phi_f31;
@@ -4082,12 +4082,12 @@ void func_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
         result_x = phi_f31;
         result_z = 0.0F;
     } else {
-        result_x = func_80022DBC(vec2.z / cosf(result_y));
+        result_x = asinf(vec2.z / cosf(result_y));
 
         if (vec0.z * cosf(result_x) * cosf(result_y) < 0)
             result_x = M_PI - result_x;
 
-        result_z = func_80022DBC(-vec1.y / cosf(result_y));
+        result_z = asinf(-vec1.y / cosf(result_y));
 
         if (-vec1.x * cosf(result_y) * cosf(result_z) < 0)
             result_z = M_PI - result_z;

@@ -14,7 +14,7 @@ extern void (*lbl_804D7710)(s32, s32);
 extern void (*lbl_804D7714)(OSContext*, ...);
 extern int (*lbl_804D7718)(s32, s32, s32*, s32);
 
-extern struct UnkStruct80400430 lbl_80400430;
+extern struct UnkStruct80400430 __files;
 
 OSContext lbl_804C2608;
 
@@ -61,10 +61,10 @@ int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3)
 void func_803881E4(void)
 {
     if (lbl_804D7718 == NULL) {
-        lbl_804D7718 = lbl_80400430.unk84;
+        lbl_804D7718 = __files.unk84;
     }
-    lbl_80400430.unk84 = lbl_8038815C;
-    lbl_80400430.unk52 = 0;
+    __files.unk84 = lbl_8038815C;
+    __files.unk52 = 0;
 }
 
 void __assert(char* str, u32 arg1, char* arg2)

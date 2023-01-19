@@ -124,7 +124,7 @@ f32 acosf(f32 x)
 
 #endif
 
-f32 func_80022DBC(f32 x)
+f32 asinf(f32 x)
 {
     return atanf(x * local_80022DF8(-(x * x - ONE)));
 }

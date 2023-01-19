@@ -22,7 +22,7 @@ void func_80022BD0(void);
 
 f32 atan2f(f32 y, f32 x);
 f32 acosf(f32);
-f32 func_80022DBC(f32);
+f32 asinf(f32);
 f32 atanf(f32);
 
 #pragma endregion
