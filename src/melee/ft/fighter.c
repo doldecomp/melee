@@ -820,10 +820,7 @@ u32 Fighter_NewSpawn_80068E40(void)
 
 void Fighter_80068E64(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = (void*) getFighter(
-        fighter_gobj); // bit of a fake void* cast, but a sacrifice well worth
-                       // getting rid of an fp_temp and filler. TODO: Maybe we
-                       // can still do better?
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (stage_info.internal_stage_id == 0x1B) {
         fp->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
