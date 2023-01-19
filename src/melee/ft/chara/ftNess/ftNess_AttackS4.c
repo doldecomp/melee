@@ -21,7 +21,12 @@ void ftNess_AttackS4_Action(
     Fighter* fp;
     HSD_GObj* baseballBatGObj;
 
-    fp = getFighterPlus(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
 
     fp->x2218_flag.bits.b0 = 0;
 
@@ -131,7 +136,12 @@ void ftNess_AttackS4_Anim(
 void ftNess_AttackS4_IASA(
     HSD_GObj* fighter_gobj) // Ness's F-Smash IASA Callback
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->x2218_flag.bits.b0 != 0) {
         if (fp->sa.ness.x2248_baseballBatGObj != NULL) {
