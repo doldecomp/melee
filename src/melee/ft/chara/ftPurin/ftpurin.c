@@ -129,7 +129,7 @@ void ftPurin_OnLoad(HSD_GObj* fighter_gobj)
 
 void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
         switch (func_8026B320(fp->x1974_heldItem)) {
         case 1:
@@ -151,7 +151,7 @@ void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 
 void ftPurin_OnItemInvisible(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->x1974_heldItem) {
         if (!func_8026B2B4(fp->x1974_heldItem)) {
             func_80070CC4(fighter_gobj, 0);
@@ -161,7 +161,7 @@ void ftPurin_OnItemInvisible(HSD_GObj* fighter_gobj)
 
 void ftPurin_OnItemVisible(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->x1974_heldItem) {
         if (!func_8026B2B4(fp->x1974_heldItem)) {
             func_80070C48(fighter_gobj, 0);
