@@ -19,17 +19,17 @@ void lbl_8012C030(HSD_GObj* fighter_gobj)
     HSD_JObj* jobj;
     u32 unused[4];
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     fp->x2340_f32 += lbl_804D9A28;
     func_80092BCC(fighter_gobj);
     if (func_800925A4(fighter_gobj)) {
-        fp = getFighter(fighter_gobj);
+        fp = GET_FIGHTER(fighter_gobj);
         func_80074B0C(fighter_gobj, 0, 0);
         func_8007B0C0(fighter_gobj, 0);
 
         x1CC = &fp->x110_attr.x1CC;
         bone_idx = func_8007500C(fp, 4);
-        fp2 = getFighter(fighter_gobj);
+        fp2 = GET_FIGHTER(fighter_gobj);
         jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
 
         efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CFU, jobj, x1CC);
