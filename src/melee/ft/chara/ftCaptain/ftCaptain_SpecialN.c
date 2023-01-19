@@ -71,8 +71,12 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 // Falcon/Warlock Punch Action State handler
 void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
-    f32 var;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -89,8 +93,12 @@ void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 // Falcon/Warlock Punch Action State handler
 void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
-    f32 var;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -138,8 +146,9 @@ void ftCaptain_SpecialN_IASA(HSD_GObj* fighter_gobj)
 // Falcon/Warlock Punch IASA callback
 void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
+
     f32 vel;
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
@@ -158,12 +167,11 @@ void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
 // Falcon/Warlock Punch Physics callback
 void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ftKind;
     s32 flag;
-    s32 var;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     if (fp->x2210_ThrowFlags.b1 != 0) {
         fp->x2210_ThrowFlags.b1 = 0;
         flag = true;

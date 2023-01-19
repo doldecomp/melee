@@ -46,6 +46,8 @@
         }                                                                      \
     }
 
+#define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
+
 static inline Fighter* getFighter(HSD_GObj* fighter_gobj)
 {
     return fighter_gobj->user_data;
