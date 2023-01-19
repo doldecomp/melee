@@ -56,7 +56,7 @@ void ftFox_SpecialLw_CreateReflectGFX(HSD_GObj* fighter_gobj)
 
 static inline void ftFox_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = foxAttrs = getFtSpecialAttrs(fp);
 
     fp->foxVars[0].SpecialLw.releaseLag =
@@ -86,7 +86,7 @@ void ftFox_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     fp->x80_self_vel.y = 0.0f;
@@ -110,7 +110,7 @@ static void ftFox_SpecialAirLwLoop_Action(HSD_GObj* fighter_gobj);
 // Animation callback
 void ftFox_SpecialLwStart_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
         fp->foxVars[0].SpecialLw.isRelease = true;
@@ -130,7 +130,7 @@ void ftFox_SpecialLwStart_Anim(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftFox_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 var;
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
@@ -179,7 +179,7 @@ void ftFox_SpecialLwStart_Pass(HSD_GObj* fighter_gobj)
 {
     func_8009A184(fighter_gobj, AS_FOX_SPECIALAIRLW_START,
                   FTFOX_SPECIALLW_COLL_FLAG,
-                  getFighter(fighter_gobj)->x894_currentAnimFrame);
+                  GET_FIGHTER(fighter_gobj)->x894_currentAnimFrame);
 
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
@@ -224,7 +224,7 @@ void ftFox_SpecialAirLwStart_Coll(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialLwStart_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D5D4(fp);
 
@@ -235,7 +235,7 @@ void ftFox_SpecialLwStart_GroundToAir(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialAirLwStart_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D7FC(fp);
 
@@ -249,7 +249,7 @@ void ftFox_SpecialAirLwStart_AirToGround(HSD_GObj* fighter_gobj)
 void ftFox_SpecialLwLoop_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Shared @c inline with #ftFox_SpecialAirLwLoop_Anim.
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false)
 
         fp->foxVars[0].SpecialLw.isRelease = true;
@@ -271,7 +271,7 @@ void ftFox_SpecialLwLoop_Anim(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialAirLwLoop_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false)
         fp->foxVars[0].SpecialLw.isRelease = true;
@@ -331,7 +331,7 @@ static void ftFox_SpecialLwLoop_Pass(HSD_GObj* fighter_gobj)
 {
     func_8009A184(fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP,
                   FTFOX_SPECIALLW_COLL_FLAG,
-                  getFighter(fighter_gobj)->x894_currentAnimFrame);
+                  GET_FIGHTER(fighter_gobj)->x894_currentAnimFrame);
 
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
@@ -388,7 +388,7 @@ void ftFox_SpecialAirLwLoop_Coll(HSD_GObj* fighter_gobj)
 
 static void ftFox_SpecialLwLoop_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D5D4(fp);
 
@@ -498,7 +498,7 @@ static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* fighter_gobj)
 void ftFox_SpecialLwTurn_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Shared @c inline with #ftFox_SpecialAirLwTurn_Anim.
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 var[4];
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false)
@@ -515,7 +515,7 @@ void ftFox_SpecialLwTurn_Anim(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialAirLwTurn_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 var[5];
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false)
@@ -556,7 +556,7 @@ void ftFox_SpecialLwTurn_Phys(HSD_GObj* fighter_gobj)
 // Physics callback
 void ftFox_SpecialAirLwTurn_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
     attr* ftAttrs = getFtAttrs(fp);
     s32 var;
@@ -593,7 +593,7 @@ void ftFox_SpecialAirLwTurn_Coll(HSD_GObj* fighter_gobj)
 
 inline void ftFox_SpecialLw_SetReflectVars(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2218_flag.bits.b3 = 1;
     fp->cb.x21C8_callback_OnReflectHit = ftFox_SpecialLwHit_Action;
 }
@@ -603,7 +603,7 @@ inline void ftFox_SpecialLw_SetReflectVars(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftFox_SpecialLwTurn_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_TURN,
@@ -617,7 +617,7 @@ void ftFox_SpecialLwTurn_GroundToAir(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftFox_SpecialAirLwTurn_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_TURN,
@@ -710,7 +710,7 @@ bool ftFox_SpecialLwHit_Check(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftFox_SpecialLwHit_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 var;
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
@@ -779,7 +779,7 @@ void ftFox_SpecialLwHit_Phys(HSD_GObj* fighter_gobj)
 // callback
 void ftFox_SpecialAirLwHit_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
     attr* ftAttrs = getFtAttrs(fp);
     s32 var;
@@ -848,7 +848,7 @@ void ftFox_SpecialAirLwHit_AirToGround(HSD_GObj* fighter_gobj)
 // for Reflector
 void ftFox_SpecialLwHit_SetCall(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->x2218_flag.bits.b3 = 1;
     fp->cb.x21C8_callback_OnReflectHit = ftFox_SpecialLwHit_Action;
@@ -860,7 +860,7 @@ void ftFox_SpecialLwHit_SetCall(HSD_GObj* fighter_gobj)
 void ftFox_SpecialLwHit_Action(HSD_GObj* fighter_gobj)
 {
     Vec3 sp14;
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     s32 ASID;
 
     fp->facing_dir = fp->ReflectAttr.x1A2C_reflectHitDirection;
@@ -887,7 +887,7 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftFox_SpecialLwEnd_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8007DB24(fighter_gobj);
@@ -900,7 +900,7 @@ void ftFox_SpecialLwEnd_Anim(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftFox_SpecialAirLwEnd_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8007DB24(fighter_gobj);
@@ -931,7 +931,7 @@ void ftFox_SpecialLwEnd_Phys(HSD_GObj* fighter_gobj)
 // callback
 void ftFox_SpecialAirLwEnd_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
     attr* ftAttrs = getFtAttrs(fp);
     s32 var;
