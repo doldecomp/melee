@@ -25,7 +25,7 @@ void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
     Fighter* fp;
 
     if (attacker != victim) {
-        fp = getFighter(attacker);
+        fp = GET_FIGHTER(attacker);
         temp_GObj = fp->x2094;
         if (temp_GObj == NULL) {
             fp->x208C = attackID;
@@ -52,7 +52,7 @@ void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
 void func_80076444(HSD_GObj* attacker,
                    HSD_GObj* victim) // Combo Count Logic + Get Attack ID //
 {
-    Fighter* fp = getFighter(attacker);
+    Fighter* fp = GET_FIGHTER(attacker);
     func_800763C0(attacker, victim, fp->x2068_attackID);
 }
 
@@ -81,14 +81,14 @@ void func_800764DC(HSD_GObj* fighter_gobj) // Check to end combo for victim //
     Fighter* temp_fp;
     Fighter* fp;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     hitstunTimer = fp->x2098;
     if (hitstunTimer != 0) {
         fp->x2098 = (u16) (hitstunTimer - 1);
     }
     temp_gobj = fp->x2094;
     if (temp_gobj != NULL) {
-        temp_fp = getFighter(temp_gobj);
+        temp_fp = GET_FIGHTER(temp_gobj);
         if ((temp_fp->x221C_flag.bits.b6 == 0) && ((u16) temp_fp->x2098 == 0)) {
             fp->x2094 = NULL;
         }
@@ -142,7 +142,7 @@ void func_800765AC(HSD_GObj* victim) // Clear victim pointer from attacker upon
         lbl_804D782C
             ->x20_fighters; // Get fp GObj from global list of entities (?) //
     while (gobj != NULL) {
-        fp = getFighter(gobj);
+        fp = GET_FIGHTER(gobj);
         if (victim == fp->x2094) {
             fp->x2094 = NULL;
         }
