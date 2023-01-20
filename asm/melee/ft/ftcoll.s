@@ -1,19 +1,5 @@
 .include "macros.inc"
 .section .text  # 0x800763C0 - 0x800DF934
-.global func_8007AFC8
-func_8007AFC8:
-/* 8007AFC8 00077BA8  7C 08 02 A6 */	mflr r0
-/* 8007AFCC 00077BAC  1C 84 01 38 */	mulli r4, r4, 0x138
-/* 8007AFD0 00077BB0  90 01 00 04 */	stw r0, 4(r1)
-/* 8007AFD4 00077BB4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8007AFD8 00077BB8  80 03 00 2C */	lwz r0, 0x2c(r3)
-/* 8007AFDC 00077BBC  38 64 09 14 */	addi r3, r4, 0x914
-/* 8007AFE0 00077BC0  7C 60 1A 14 */	add r3, r0, r3
-/* 8007AFE4 00077BC4  4B F8 D4 45 */	bl func_80008428
-/* 8007AFE8 00077BC8  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8007AFEC 00077BCC  38 21 00 08 */	addi r1, r1, 8
-/* 8007AFF0 00077BD0  7C 08 03 A6 */	mtlr r0
-/* 8007AFF4 00077BD4  4E 80 00 20 */	blr
 
 .global func_8007AFF8
 func_8007AFF8:
