@@ -88,5 +88,6 @@ void func_80079EA8(void);
 void func_8007A06C(void);
 void func_8007AC68(void);
 void func_8007AC9C(void);
+void func_8007AD18(void);
 
 #endif
