@@ -106,7 +106,7 @@ s32 func_800879F8(HSD_GObj* fighter_gobj)
 s32 func_80087A18(HSD_GObj* fighter_gobj)
 {
     s32 var1;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->x2226_flag.bits.b4) &&
         ((var1 = func_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) &&
@@ -165,7 +165,7 @@ void func_80087AC0(HSD_GObj* fighter_gobj, s32 arg1)
 
 s32 func_80087AEC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->x34_scale.y != fp->x34_scale.x) ||
         ((fp->x2226_flag.bits.b4) || (fp->x2223_flag.bits.b7) ||
@@ -232,7 +232,7 @@ s32 func_80087C1C(void)
     for (fighter_gobj = lbl_804D782C->x20_fighters; fighter_gobj != 0;
          fighter_gobj = fighter_gobj->next)
     {
-        ftKind = ((Fighter*) fighter_gobj->user_data)->x4_fighterKind;
+        ftKind = (GET_FIGHTER(fighter_gobj))->x4_fighterKind;
         if (ftKind < 27) {
             result = result | 1 << ftKind;
         }
