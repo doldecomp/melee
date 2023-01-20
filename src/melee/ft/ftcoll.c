@@ -5800,7 +5800,7 @@ asm void func_8007B064(void)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8007B0C0(HSD_GObj*, s32)
+asm void func_8007B0C0(HSD_GObj*, int)
 { // clang-format off
     nofralloc
 /* 8007B0C0 00077CA0  80 C3 00 2C */	lwz r6, 0x2c(r3)
