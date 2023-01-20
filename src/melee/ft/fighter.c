@@ -1446,8 +1446,7 @@ void Fighter_8006A1BC(HSD_GObj* fighter_gobj)
 
 void Fighter_8006A360(HSD_GObj* fighter_gobj)
 {
-    Vec3 vec1;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!fp->x221F_flag.bits.b3) {
         fp->xC8_pos_delta.x = fp->xB0_pos.x - fp->xBC_prevPos.x;
@@ -1554,10 +1553,10 @@ void Fighter_8006A360(HSD_GObj* fighter_gobj)
             }
 
             if (fp->x2018 <= 0) {
-                vec1 = lbl_803B7488;
+                Vec3 vec = lbl_803B7488;
 
                 func_8007F8E8(fighter_gobj);
-                func_8026ABD8(fp->x1980, &vec1, 0.0f);
+                func_8026ABD8(fp->x1980, &vec, 0.0f);
                 func_8007FF74(fighter_gobj);
             }
         }
@@ -1639,10 +1638,7 @@ void Fighter_8006A360(HSD_GObj* fighter_gobj)
 
         if (fp->x1974_heldItem) {
             if (itGetKind(fp->x1974_heldItem) != 0x1C) {
-                // im not sure of whatever is here, but a void ptr downcast to
-                // get rid of filler seems like a better tradeoff...
-                void* fighterVoid = fp;
-                (void) fighterVoid;
+                !fp;
             } else {
                 func_800C511C(fighter_gobj);
             }
