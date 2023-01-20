@@ -73,34 +73,22 @@ void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim)
         func_800763C0(owner, victim, asid);
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_800764DC(HSD_GObj* fighter_gobj)
-{ // clang-format off
-    nofralloc
-/* 800764DC 000730BC  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 800764E0 000730C0  A0 64 20 98 */	lhz r3, 0x2098(r4)
-/* 800764E4 000730C4  28 03 00 00 */	cmplwi r3, 0
-/* 800764E8 000730C8  41 82 00 0C */	beq lbl_800764F4
-/* 800764EC 000730CC  38 03 FF FF */	addi r0, r3, -1
-/* 800764F0 000730D0  B0 04 20 98 */	sth r0, 0x2098(r4)
-lbl_800764F4:
-/* 800764F4 000730D4  80 64 20 94 */	lwz r3, 0x2094(r4)
-/* 800764F8 000730D8  28 03 00 00 */	cmplwi r3, 0
-/* 800764FC 000730DC  4D 82 00 20 */	beqlr
-/* 80076500 000730E0  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 80076504 000730E4  88 03 22 1C */	lbz r0, 0x221c(r3)
-/* 80076508 000730E8  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
-/* 8007650C 000730EC  4C 82 00 20 */	bnelr
-/* 80076510 000730F0  A0 03 20 98 */	lhz r0, 0x2098(r3)
-/* 80076514 000730F4  28 00 00 00 */	cmplwi r0, 0
-/* 80076518 000730F8  4C 82 00 20 */	bnelr
-/* 8007651C 000730FC  38 00 00 00 */	li r0, 0
-/* 80076520 00073100  90 04 20 94 */	stw r0, 0x2094(r4)
-/* 80076524 00073104  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+/// Check to end combo for victim
+void func_800764DC(HSD_GObj* gobj)
+{
+    /// @todo #GET_FIGHTER adds an instruction
+    Fighter* fp1 = gobj->user_data;
+
+    if (fp1->x2098 != 0)
+        fp1->x2098--;
+
+    if (fp1->x2094 != NULL) {
+        Fighter* fp2 = fp1->x2094->user_data;
+
+        if (!fp2->x221C_flag.bits.b6 && fp2->x2098 == 0)
+            fp1->x2094 = NULL;
+    }
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
