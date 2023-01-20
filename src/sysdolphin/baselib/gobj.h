@@ -113,18 +113,19 @@ void lbl_80391120(HSD_Obj* obj);
 void lbl_803911C0(HSD_Obj* obj);
 void func_80391260(struct _GObjUnkStruct* arg0);
 void func_803912E0(GObjFuncs* arg0);
+void func_80390ED0(HSD_GObj* gobj, u32 mask);
+void func_80390ED0(HSD_GObj* gobj, u32 mask);
 
-static inline void* HSD_GObjGetUserData(HSD_GObj* gobj)
+static inline any_t HSD_GObjGetUserData(HSD_GObj* gobj)
 {
     return gobj->user_data;
 }
 
-static inline void* HSD_GObjGetHSDObj(HSD_GObj* item_gobj)
+static inline any_t HSD_GObjGetHSDObj(HSD_GObj* gobj)
 {
-    return item_gobj->hsd_obj;
+    return gobj->hsd_obj;
 }
 
-void func_80390ED0(HSD_GObj* gobj, u32 mask);
-void func_80390ED0(HSD_GObj* gobj, u32 mask);
+#define GET_JOBJ(gobj) ((HSD_JObj*) HSD_GObjGetHSDObj(gobj))
 
 #endif
