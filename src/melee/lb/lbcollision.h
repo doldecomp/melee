@@ -65,5 +65,6 @@ bool func_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
 void func_8000805C(void);
 void func_80007BCC(void);
 void func_80007AFC(void);
+void func_80007DD8(void);
 
 #endif
