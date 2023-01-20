@@ -66,13 +66,11 @@ void func_80076444(HSD_GObj* attacker, HSD_GObj* victim)
 /// Combo Count Logic w/ Item Owner
 void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim)
 {
-    HSD_GObj* itemOwner = func_8026BC78(attackItem);
-    s32 attackID = func_8026BC84(attackItem);
+    HSD_GObj* owner = func_8026BC78(attackItem);
+    enum_t asid = func_8026BC84(attackItem);
 
-    // Check if item's owner is a fighter
-    if (func_80086960(itemOwner) != false) {
-        func_800763C0(itemOwner, victim, attackID);
-    }
+    if (func_80086960(owner))
+        func_800763C0(owner, victim, asid);
 }
 
 #ifdef MWERKS_GEKKO
