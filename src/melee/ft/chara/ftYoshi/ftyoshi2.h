@@ -44,6 +44,6 @@ f32 func_8012CCC4(HSD_GObj*);
 f32 func_8012CCD0(HSD_GObj*);
 f32 func_8012CCE0(HSD_GObj*);
 f32 func_8012CCF0(HSD_GObj*);
-void func_8012CD00(HSD_GObj*);
+f32 func_8012CD00(HSD_GObj*);
 
 #endif

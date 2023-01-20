@@ -17,7 +17,7 @@ typedef struct _ftYoshiAttributes {
     f32 x18;
     f32 x1C;
     f32 x20;
-    s32 x24;
+    f32 x24;
     s32 x28;
     s32 x2C;
     u8 data_filler1[0xEF];

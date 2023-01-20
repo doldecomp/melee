@@ -775,15 +775,8 @@ f32 func_8012CCF0(HSD_GObj* fighter_gobj)
     return attr->x20;
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_8012CD00(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8012CD00 001298E0  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8012CD04 001298E4  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8012CD08 001298E8  C0 23 00 24 */	lfs f1, 0x24(r3)
-/* 8012CD0C 001298EC  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+f32 func_8012CD00(HSD_GObj* fighter_gobj)
+{
+    ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    return attr->x24;
+}
