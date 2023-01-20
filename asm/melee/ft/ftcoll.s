@@ -1,32 +1,6 @@
 .include "macros.inc"
 .section .text  # 0x800763C0 - 0x800DF934
 
-.global ftColl_CreateAbsorbHit
-ftColl_CreateAbsorbHit:
-/* 8007B2C4 00077EA4  80 C3 00 2C */	lwz r6, 0x2c(r3)
-/* 8007B2C8 00077EA8  38 A0 00 01 */	li r5, 1
-/* 8007B2CC 00077EAC  38 60 00 00 */	li r3, 0
-/* 8007B2D0 00077EB0  88 06 22 18 */	lbz r0, 0x2218(r6)
-/* 8007B2D4 00077EB4  50 A0 0F BC */	rlwimi r0, r5, 1, 0x1e, 0x1e
-/* 8007B2D8 00077EB8  98 06 22 18 */	stb r0, 0x2218(r6)
-/* 8007B2DC 00077EBC  88 06 22 18 */	lbz r0, 0x2218(r6)
-/* 8007B2E0 00077EC0  50 60 07 FE */	rlwimi r0, r3, 0, 0x1f, 0x1f
-/* 8007B2E4 00077EC4  98 06 22 18 */	stb r0, 0x2218(r6)
-/* 8007B2E8 00077EC8  80 04 00 00 */	lwz r0, 0(r4)
-/* 8007B2EC 00077ECC  80 66 05 E8 */	lwz r3, 0x5e8(r6)
-/* 8007B2F0 00077ED0  54 00 20 36 */	slwi r0, r0, 4
-/* 8007B2F4 00077ED4  7C 03 00 2E */	lwzx r0, r3, r0
-/* 8007B2F8 00077ED8  90 06 1A 08 */	stw r0, 0x1a08(r6)
-/* 8007B2FC 00077EDC  C0 04 00 10 */	lfs f0, 0x10(r4)
-/* 8007B300 00077EE0  D0 06 1A 28 */	stfs f0, 0x1a28(r6)
-/* 8007B304 00077EE4  80 64 00 04 */	lwz r3, 4(r4)
-/* 8007B308 00077EE8  80 04 00 08 */	lwz r0, 8(r4)
-/* 8007B30C 00077EEC  90 66 1A 1C */	stw r3, 0x1a1c(r6)
-/* 8007B310 00077EF0  90 06 1A 20 */	stw r0, 0x1a20(r6)
-/* 8007B314 00077EF4  80 04 00 0C */	lwz r0, 0xc(r4)
-/* 8007B318 00077EF8  90 06 1A 24 */	stw r0, 0x1a24(r6)
-/* 8007B31C 00077EFC  4E 80 00 20 */	blr
-
 .global func_8007B320
 func_8007B320:
 /* 8007B320 00077F00  7C 08 02 A6 */	mflr r0
