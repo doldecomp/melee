@@ -37,5 +37,7 @@ void lbl_8012CBBC(HSD_GObj*);
 void lbl_8012CBDC(HSD_GObj*);
 void lbl_8012CBFC(HSD_GObj*);
 bool func_8012CC1C(HSD_GObj*);
+void func_8012CC6C(HSD_GObj*);
+void func_8012CC94(HSD_GObj*);
 
 #endif
