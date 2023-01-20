@@ -398,3 +398,40 @@ lbl_8012C774:
 } // clang-format on
 #pragma pop
 #endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void lbl_8012C7A4(HSD_GObj*)
+{ // clang-format off
+    nofralloc
+/* 8012C7A4 00129384  7C 08 02 A6 */	mflr r0
+/* 8012C7A8 00129388  90 01 00 04 */	stw r0, 4(r1)
+/* 8012C7AC 0012938C  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 8012C7B0 00129390  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 8012C7B4 00129394  93 C1 00 10 */	stw r30, 0x10(r1)
+/* 8012C7B8 00129398  7C 7E 1B 78 */	mr r30, r3
+/* 8012C7BC 0012939C  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 8012C7C0 001293A0  4B F6 74 01 */	bl func_80093BC0
+/* 8012C7C4 001293A4  7F C3 F3 78 */	mr r3, r30
+/* 8012C7C8 001293A8  4B F4 2A 71 */	bl ftAnim_IsFramesRemaining
+/* 8012C7CC 001293AC  2C 03 00 00 */	cmpwi r3, 0
+/* 8012C7D0 001293B0  40 82 00 24 */	bne lbl_8012C7F4
+/* 8012C7D4 001293B4  80 1F 23 4C */	lwz r0, 0x234c(r31)
+/* 8012C7D8 001293B8  2C 00 00 00 */	cmpwi r0, 0
+/* 8012C7DC 001293BC  41 82 00 10 */	beq lbl_8012C7EC
+/* 8012C7E0 001293C0  7F C3 F3 78 */	mr r3, r30
+/* 8012C7E4 001293C4  4B F6 64 05 */	bl func_80092BE8
+/* 8012C7E8 001293C8  48 00 00 0C */	b lbl_8012C7F4
+lbl_8012C7EC:
+/* 8012C7EC 001293CC  7F C3 F3 78 */	mr r3, r30
+/* 8012C7F0 001293D0  4B F6 60 DD */	bl func_800928CC
+lbl_8012C7F4:
+/* 8012C7F4 001293D4  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8012C7F8 001293D8  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 8012C7FC 001293DC  83 C1 00 10 */	lwz r30, 0x10(r1)
+/* 8012C800 001293E0  38 21 00 18 */	addi r1, r1, 0x18
+/* 8012C804 001293E4  7C 08 03 A6 */	mtlr r0
+/* 8012C808 001293E8  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif

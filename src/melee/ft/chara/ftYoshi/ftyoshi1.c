@@ -440,7 +440,6 @@ lbl_8012BFF0:
 /* 8012C02C 00128C0C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
 #endif
 
 /** @fn func_8012C850
