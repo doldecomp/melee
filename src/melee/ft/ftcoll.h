@@ -66,5 +66,6 @@ void func_8007B7FC(Fighter*, s32);
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID);
 void func_80076640(void);
 void func_80076764(void);
+void func_80076808(void);
 
 #endif
