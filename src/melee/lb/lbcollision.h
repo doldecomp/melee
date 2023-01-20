@@ -62,5 +62,8 @@ void func_80077464(void);
 void func_80005BB0(void);
 bool func_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
                    f32 hurt_pos_z);
+void func_8000805C(void);
+void func_80007BCC(void);
+void func_80007AFC(void);
 
 #endif
