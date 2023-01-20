@@ -5630,3 +5630,18 @@ asm void func_8007AEF8(HSD_GObj*)
 } // clang-format on
 #pragma pop
 #endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void func_8007AF10(HSD_GObj*)
+{ // clang-format off
+    nofralloc
+/* 8007AF10 00077AF0  80 63 00 2C */	lwz r3, 0x2c(r3)
+/* 8007AF14 00077AF4  38 80 00 00 */	li r4, 0
+/* 8007AF18 00077AF8  88 03 1A 0C */	lbz r0, 0x1a0c(r3)
+/* 8007AF1C 00077AFC  50 80 3E 30 */	rlwimi r0, r4, 7, 0x18, 0x18
+/* 8007AF20 00077B00  98 03 1A 0C */	stb r0, 0x1a0c(r3)
+/* 8007AF24 00077B04  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
