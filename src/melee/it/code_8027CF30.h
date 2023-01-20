@@ -155,5 +155,7 @@ s32 func_802F2094(s32, Vec3*, s32, s32);
 HSD_GObj* func_80294DC0(Vec3*);
 void func_8027D670(Vec3* const);
 void func_802C17DC(uint);
+void func_802C16F8(HSD_GObj*);
+void func_802C1590(HSD_GObj*);
 
 #endif

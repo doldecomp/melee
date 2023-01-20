@@ -37,5 +37,8 @@ void lbl_8011F390(HSD_GObj*);
 void lbl_8011F394(HSD_GObj*);
 void lbl_8011F398(HSD_GObj*);
 void lbl_8011F3B8(HSD_GObj*);
+void lbl_8011F3D8(HSD_GObj*);
+void lbl_8011F454(HSD_GObj*);
+void func_8011F6FC(HSD_GObj*);
 
 #endif
