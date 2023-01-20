@@ -271,47 +271,24 @@ void lbl_8011F3B8(HSD_GObj* gobj)
     func_80084EEC(gobj);
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void lbl_8011F3D8(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8011F3D8 0011BFB8  7C 08 02 A6 */	mflr r0
-/* 8011F3DC 0011BFBC  90 01 00 04 */	stw r0, 4(r1)
-/* 8011F3E0 0011BFC0  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8011F3E4 0011BFC4  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8011F3E8 0011BFC8  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8011F3EC 0011BFCC  7C 7E 1B 78 */	mr r30, r3
-/* 8011F3F0 0011BFD0  4B F6 33 19 */	bl func_80082708
-/* 8011F3F4 0011BFD4  2C 03 00 00 */	cmpwi r3, 0
-/* 8011F3F8 0011BFD8  40 82 00 44 */	bne lbl_8011F43C
-/* 8011F3FC 0011BFDC  83 FE 00 2C */	lwz r31, 0x2c(r30)
-/* 8011F400 0011BFE0  80 7F 22 2C */	lwz r3, 0x222c(r31)
-/* 8011F404 0011BFE4  28 03 00 00 */	cmplwi r3, 0
-/* 8011F408 0011BFE8  41 82 00 2C */	beq lbl_8011F434
-/* 8011F40C 0011BFEC  48 1A 23 D1 */	bl func_802C17DC
-/* 8011F410 0011BFF0  80 9E 00 2C */	lwz r4, 0x2c(r30)
-/* 8011F414 0011BFF4  80 7F 22 2C */	lwz r3, 0x222c(r31)
-/* 8011F418 0011BFF8  80 04 22 2C */	lwz r0, 0x222c(r4)
-/* 8011F41C 0011BFFC  7C 03 00 40 */	cmplw r3, r0
-/* 8011F420 0011C000  40 82 00 14 */	bne lbl_8011F434
-/* 8011F424 0011C004  38 00 00 00 */	li r0, 0
-/* 8011F428 0011C008  90 04 22 2C */	stw r0, 0x222c(r4)
-/* 8011F42C 0011C00C  90 04 21 E4 */	stw r0, 0x21e4(r4)
-/* 8011F430 0011C010  90 04 21 DC */	stw r0, 0x21dc(r4)
-lbl_8011F434:
-/* 8011F434 0011C014  7F C3 F3 78 */	mr r3, r30
-/* 8011F438 0011C018  4B FA D2 F9 */	bl func_800CC730
-lbl_8011F43C:
-/* 8011F43C 0011C01C  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8011F440 0011C020  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8011F444 0011C024  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 8011F448 0011C028  38 21 00 20 */	addi r1, r1, 0x20
-/* 8011F44C 0011C02C  7C 08 03 A6 */	mtlr r0
-/* 8011F450 0011C030  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void lbl_8011F3D8(HSD_GObj* fighter_gobj)
+{
+    if (!func_80082708(fighter_gobj)) {
+        Fighter* fp1;
+        fp1 = GET_FIGHTER(fighter_gobj);
+        if (fp1->sa.nana.x222C != 0U) {
+            Fighter* fp2;
+            func_802C17DC(fp1->sa.nana.x222C);
+            fp2 = GET_FIGHTER(fighter_gobj);
+            if ((u32) fp1->sa.nana.x222C == (u32) fp2->sa.nana.x222C) {
+                fp2->sa.nana.x222C = 0U;
+                fp2->cb.x21E4_callback_OnDeath2 = 0U;
+                fp2->cb.x21DC_callback_OnTakeDamage = 0U;
+            }
+        }
+        func_800CC730(fighter_gobj);
+    }
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
