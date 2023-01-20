@@ -206,7 +206,8 @@ lbl_8007657C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_800765AC(HSD_GObj*){
+asm void func_800765AC(HSD_GObj*)
+{
     // clang-format off
     nofralloc
 /* 800765AC 0007318C  80 8D C1 8C */	lwz r4, lbl_804D782C
@@ -225,6 +226,21 @@ lbl_800765D4:
 /* 800765D4 000731B4  28 06 00 00 */	cmplwi r6, 0
 /* 800765D8 000731B8  40 82 FF E4 */	bne lbl_800765BC
 /* 800765DC 000731BC  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
+
+extern unk_t lbl_804D6558;
+extern unk_t lbl_804D655C;
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void func_800765E0(void){ // clang-format off
+    nofralloc
+/* 800765E0 000731C0  38 00 00 00 */	li r0, 0
+/* 800765E4 000731C4  90 0D AE B8 */	stw r0, lbl_804D6558
+/* 800765E8 000731C8  90 0D AE BC */	stw r0, lbl_804D655C
+/* 800765EC 000731CC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 #endif
