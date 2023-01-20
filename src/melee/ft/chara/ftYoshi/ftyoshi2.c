@@ -227,58 +227,29 @@ void lbl_8012C47C(HSD_GObj* arg0)
     func_80092BAC(arg0);
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_8012C49C(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8012C49C 0012907C  7C 08 02 A6 */	mflr r0
-/* 8012C4A0 00129080  38 80 01 57 */	li r4, 0x157
-/* 8012C4A4 00129084  90 01 00 04 */	stw r0, 4(r1)
-/* 8012C4A8 00129088  38 A0 00 00 */	li r5, 0
-/* 8012C4AC 0012908C  38 C0 00 00 */	li r6, 0
-/* 8012C4B0 00129090  94 21 FF D0 */	stwu r1, -0x30(r1)
-/* 8012C4B4 00129094  93 E1 00 2C */	stw r31, 0x2c(r1)
-/* 8012C4B8 00129098  93 C1 00 28 */	stw r30, 0x28(r1)
-/* 8012C4BC 0012909C  93 A1 00 24 */	stw r29, 0x24(r1)
-/* 8012C4C0 001290A0  7C 7D 1B 78 */	mr r29, r3
-/* 8012C4C4 001290A4  C0 22 A0 4C */	lfs f1, lbl_804D9A2C
-/* 8012C4C8 001290A8  C0 42 A0 48 */	lfs f2, lbl_804D9A28
-/* 8012C4CC 001290AC  FC 60 08 90 */	fmr f3, f1
-/* 8012C4D0 001290B0  4B F3 CE DD */	bl Fighter_ActionStateChange_800693AC
-/* 8012C4D4 001290B4  83 FD 00 2C */	lwz r31, 0x2c(r29)
-/* 8012C4D8 001290B8  38 7D 00 00 */	addi r3, r29, 0
-/* 8012C4DC 001290BC  38 80 00 00 */	li r4, 0
-/* 8012C4E0 001290C0  38 A0 00 00 */	li r5, 0
-/* 8012C4E4 001290C4  4B F4 86 29 */	bl func_80074B0C
-/* 8012C4E8 001290C8  38 7D 00 00 */	addi r3, r29, 0
-/* 8012C4EC 001290CC  38 80 00 00 */	li r4, 0
-/* 8012C4F0 001290D0  4B F4 EB D1 */	bl func_8007B0C0
-/* 8012C4F4 001290D4  38 7F 00 00 */	addi r3, r31, 0
-/* 8012C4F8 001290D8  3B DF 01 CC */	addi r30, r31, 0x1cc
-/* 8012C4FC 001290DC  38 80 00 04 */	li r4, 4
-/* 8012C500 001290E0  4B F4 8B 0D */	bl func_8007500C
-/* 8012C504 001290E4  80 9F 05 E8 */	lwz r4, 0x5e8(r31)
-/* 8012C508 001290E8  54 60 20 36 */	slwi r0, r3, 4
-/* 8012C50C 001290EC  80 BD 00 2C */	lwz r5, 0x2c(r29)
-/* 8012C510 001290F0  7F A3 EB 78 */	mr r3, r29
-/* 8012C514 001290F4  7C E4 00 2E */	lwzx r7, r4, r0
-/* 8012C518 001290F8  38 85 06 0C */	addi r4, r5, 0x60c
-/* 8012C51C 001290FC  4C C6 31 82 */	crclr 6
-/* 8012C520 00129100  39 1E 00 00 */	addi r8, r30, 0
-/* 8012C524 00129104  38 A0 00 04 */	li r5, 4
-/* 8012C528 00129108  38 C0 04 CF */	li r6, 0x4cf
-/* 8012C52C 0012910C  4B F3 B1 C5 */	bl efAsync_Spawn
-/* 8012C530 00129110  80 01 00 34 */	lwz r0, 0x34(r1)
-/* 8012C534 00129114  83 E1 00 2C */	lwz r31, 0x2c(r1)
-/* 8012C538 00129118  83 C1 00 28 */	lwz r30, 0x28(r1)
-/* 8012C53C 0012911C  83 A1 00 24 */	lwz r29, 0x24(r1)
-/* 8012C540 00129120  38 21 00 30 */	addi r1, r1, 0x30
-/* 8012C544 00129124  7C 08 03 A6 */	mtlr r0
-/* 8012C548 00129128  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void func_8012C49C(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp;
+    s32* x1CC;
+    s32 bone_idx;
+    Fighter* fp2;
+    HSD_JObj* jobj;
+    u32 unused[4];
+
+    f32 temp_f1 = lbl_804D9A2C;
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL, temp_f1,
+                                       lbl_804D9A28, temp_f1);
+
+    fp = fighter_gobj->user_data;
+    func_80074B0C(fighter_gobj, 0, 0);
+    func_8007B0C0(fighter_gobj, 0);
+
+    x1CC = &fp->x110_attr.x1CC;
+    bone_idx = func_8007500C(fp, 4);
+    fp2 = fighter_gobj->user_data;
+    jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
+    efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
