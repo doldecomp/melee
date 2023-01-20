@@ -5886,3 +5886,45 @@ lbl_8007B1A8:
 } // clang-format on
 #pragma pop
 #endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void func_8007B1B8(HSD_GObj*, f32*, HSD_GObjEvent)
+{ // clang-format off
+    nofralloc
+/* 8007B1B8 00077D98  80 E3 00 2C */	lwz r7, 0x2c(r3)
+/* 8007B1BC 00077D9C  38 C0 00 01 */	li r6, 1
+/* 8007B1C0 00077DA0  38 60 00 00 */	li r3, 0
+/* 8007B1C4 00077DA4  88 07 22 1B */	lbz r0, 0x221b(r7)
+/* 8007B1C8 00077DA8  50 C0 3E 30 */	rlwimi r0, r6, 7, 0x18, 0x18
+/* 8007B1CC 00077DAC  98 07 22 1B */	stb r0, 0x221b(r7)
+/* 8007B1D0 00077DB0  88 07 22 1B */	lbz r0, 0x221b(r7)
+/* 8007B1D4 00077DB4  50 60 36 72 */	rlwimi r0, r3, 6, 0x19, 0x19
+/* 8007B1D8 00077DB8  98 07 22 1B */	stb r0, 0x221b(r7)
+/* 8007B1DC 00077DBC  88 07 22 1B */	lbz r0, 0x221b(r7)
+/* 8007B1E0 00077DC0  50 60 2E B4 */	rlwimi r0, r3, 5, 0x1a, 0x1a
+/* 8007B1E4 00077DC4  98 07 22 1B */	stb r0, 0x221b(r7)
+/* 8007B1E8 00077DC8  88 07 22 1B */	lbz r0, 0x221b(r7)
+/* 8007B1EC 00077DCC  50 60 26 F6 */	rlwimi r0, r3, 4, 0x1b, 0x1b
+/* 8007B1F0 00077DD0  98 07 22 1B */	stb r0, 0x221b(r7)
+/* 8007B1F4 00077DD4  88 07 22 1B */	lbz r0, 0x221b(r7)
+/* 8007B1F8 00077DD8  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
+/* 8007B1FC 00077DDC  98 07 22 1B */	stb r0, 0x221b(r7)
+/* 8007B200 00077DE0  90 A7 21 C4 */	stw r5, 0x21c4(r7)
+/* 8007B204 00077DE4  80 04 00 00 */	lwz r0, 0(r4)
+/* 8007B208 00077DE8  80 67 05 E8 */	lwz r3, 0x5e8(r7)
+/* 8007B20C 00077DEC  54 00 20 36 */	slwi r0, r0, 4
+/* 8007B210 00077DF0  7C 03 00 2E */	lwzx r0, r3, r0
+/* 8007B214 00077DF4  90 07 19 C0 */	stw r0, 0x19c0(r7)
+/* 8007B218 00077DF8  C0 04 00 10 */	lfs f0, 0x10(r4)
+/* 8007B21C 00077DFC  D0 07 19 E0 */	stfs f0, 0x19e0(r7)
+/* 8007B220 00077E00  80 64 00 04 */	lwz r3, 4(r4)
+/* 8007B224 00077E04  80 04 00 08 */	lwz r0, 8(r4)
+/* 8007B228 00077E08  90 67 19 D4 */	stw r3, 0x19d4(r7)
+/* 8007B22C 00077E0C  90 07 19 D8 */	stw r0, 0x19d8(r7)
+/* 8007B230 00077E10  80 04 00 0C */	lwz r0, 0xc(r4)
+/* 8007B234 00077E14  90 07 19 DC */	stw r0, 0x19dc(r7)
+/* 8007B238 00077E18  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
