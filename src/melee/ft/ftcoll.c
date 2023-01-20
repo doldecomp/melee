@@ -90,50 +90,36 @@ void func_800764DC(HSD_GObj* gobj)
     }
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_80076528(HSD_GObj*)
+inline void comboCount_Push(Fighter* fp)
 {
-    // clang-format off
-    nofralloc
-/* 80076528 00073108  80 A3 00 2C */	lwz r5, 0x2c(r3)
-/* 8007652C 0007310C  A0 65 20 92 */	lhz r3, 0x2092(r5)
-/* 80076530 00073110  28 03 00 00 */	cmplwi r3, 0
-/* 80076534 00073114  4D 82 00 20 */	beqlr
-/* 80076538 00073118  38 03 FF FF */	addi r0, r3, -1
-/* 8007653C 0007311C  B0 05 20 92 */	sth r0, 0x2092(r5)
-/* 80076540 00073120  80 05 1A 58 */	lwz r0, 0x1a58(r5)
-/* 80076544 00073124  28 00 00 00 */	cmplwi r0, 0
-/* 80076548 00073128  4C 82 00 20 */	bnelr
-/* 8007654C 0007312C  80 05 00 E0 */	lwz r0, 0xe0(r5)
-/* 80076550 00073130  2C 00 00 00 */	cmpwi r0, 0
-/* 80076554 00073134  4C 82 00 20 */	bnelr
-/* 80076558 00073138  80 CD AE B4 */	lwz r6, p_ftCommonData
-/* 8007655C 0007313C  38 85 08 44 */	addi r4, r5, 0x844
-/* 80076560 00073140  A0 65 20 90 */	lhz r3, 0x2090(r5)
-/* 80076564 00073144  80 06 04 C8 */	lwz r0, 0x4c8(r6)
-/* 80076568 00073148  7C 03 00 00 */	cmpw r3, r0
-/* 8007656C 0007314C  40 80 00 0C */	bge lbl_80076578
-/* 80076570 00073150  C0 46 04 D0 */	lfs f2, 0x4d0(r6)
-/* 80076574 00073154  48 00 00 08 */	b lbl_8007657C
-lbl_80076578:
-/* 80076578 00073158  C0 46 04 D4 */	lfs f2, 0x4d4(r6)
-lbl_8007657C:
-/* 8007657C 0007315C  C0 05 00 2C */	lfs f0, 0x2c(r5)
-/* 80076580 00073160  C0 24 00 04 */	lfs f1, 4(r4)
-/* 80076584 00073164  EC 40 00 B2 */	fmuls f2, f0, f2
-/* 80076588 00073168  C0 05 00 B0 */	lfs f0, 0xb0(r5)
-/* 8007658C 0007316C  EC 01 00 BC */	fnmsubs f0, f1, f2, f0
-/* 80076590 00073170  D0 05 00 B0 */	stfs f0, 0xb0(r5)
-/* 80076594 00073174  C0 24 00 00 */	lfs f1, 0(r4)
-/* 80076598 00073178  C0 05 00 B4 */	lfs f0, 0xb4(r5)
-/* 8007659C 0007317C  FC 20 08 50 */	fneg f1, f1
-/* 800765A0 00073180  EC 01 00 BC */	fnmsubs f0, f1, f2, f0
-/* 800765A4 00073184  D0 05 00 B4 */	stfs f0, 0xb4(r5)
-/* 800765A8 00073188  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+    Vec3* pos = &fp->x6F0_collData.x14C_ground.normal;
+    f32 temp_f2;
+    f32 var_f2;
+    if ((s32) fp->x2090 < (s32) p_ftCommonData->x4C8) {
+        var_f2 = p_ftCommonData->x4D0;
+    } else {
+        var_f2 = p_ftCommonData->x4D4;
+    }
+    temp_f2 = fp->facing_dir * var_f2;
+    fp->xB0_pos.x = -((pos->y * temp_f2) - fp->xB0_pos.x);
+    fp->xB0_pos.y = -((-pos->x * temp_f2) - fp->xB0_pos.y);
+}
+
+/// Combo count something + adjust TopN
+void func_80076528(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    u16 temp_r3 = fp->x2092;
+
+    if (temp_r3 != 0) {
+        fp->x2092 = (u16) (temp_r3 - 1);
+        if ((fp->x1A58_interactedFighter == NULL) &&
+            (fp->xE0_ground_or_air == GA_Ground))
+        {
+            comboCount_Push(fp);
+        }
+    }
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
