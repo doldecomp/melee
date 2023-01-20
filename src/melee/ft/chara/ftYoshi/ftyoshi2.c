@@ -435,3 +435,97 @@ lbl_8012C7F4:
 } // clang-format on
 #pragma pop
 #endif
+
+void lbl_8012C80C(HSD_GObj* arg0) {}
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void lbl_8012C810(HSD_GObj*)
+{ // clang-format off
+    nofralloc
+/* 8012C810 001293F0  7C 08 02 A6 */	mflr r0
+/* 8012C814 001293F4  90 01 00 04 */	stw r0, 4(r1)
+/* 8012C818 001293F8  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8012C81C 001293FC  4B F6 6E 0D */	bl func_80093628
+/* 8012C820 00129400  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8012C824 00129404  38 21 00 08 */	addi r1, r1, 8
+/* 8012C828 00129408  7C 08 03 A6 */	mtlr r0
+/* 8012C82C 0012940C  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void lbl_8012C830(HSD_GObj*)
+{ // clang-format off
+    nofralloc
+/* 8012C830 00129410  7C 08 02 A6 */	mflr r0
+/* 8012C834 00129414  90 01 00 04 */	stw r0, 4(r1)
+/* 8012C838 00129418  94 21 FF F8 */	stwu r1, -8(r1)
+/* 8012C83C 0012941C  4B F6 6E 21 */	bl func_8009365C
+/* 8012C840 00129420  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 8012C844 00129424  38 21 00 08 */	addi r1, r1, 8
+/* 8012C848 00129428  7C 08 03 A6 */	mtlr r0
+/* 8012C84C 0012942C  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void func_8012C850(HSD_GObj*)
+{ // clang-format off
+    nofralloc
+/* 8012C850 00129430  7C 08 02 A6 */	mflr r0
+/* 8012C854 00129434  38 80 01 59 */	li r4, 0x159
+/* 8012C858 00129438  90 01 00 04 */	stw r0, 4(r1)
+/* 8012C85C 0012943C  38 A0 00 10 */	li r5, 0x10
+/* 8012C860 00129440  38 C0 00 00 */	li r6, 0
+/* 8012C864 00129444  94 21 FF E8 */	stwu r1, -0x18(r1)
+/* 8012C868 00129448  93 E1 00 14 */	stw r31, 0x14(r1)
+/* 8012C86C 0012944C  93 C1 00 10 */	stw r30, 0x10(r1)
+/* 8012C870 00129450  7C 7E 1B 78 */	mr r30, r3
+/* 8012C874 00129454  83 E3 00 2C */	lwz r31, 0x2c(r3)
+/* 8012C878 00129458  C0 42 A0 48 */	lfs f2, lbl_804D9A28
+/* 8012C87C 0012945C  C0 62 A0 4C */	lfs f3, lbl_804D9A2C
+/* 8012C880 00129460  C0 3F 08 94 */	lfs f1, 0x894(r31)
+/* 8012C884 00129464  4B F3 CB 29 */	bl Fighter_ActionStateChange_800693AC
+/* 8012C888 00129468  38 00 00 FE */	li r0, 0xfe
+/* 8012C88C 0012946C  98 1F 06 72 */	stb r0, 0x672(r31)
+/* 8012C890 00129470  3C 60 80 13 */	lis r3, lbl_8012CACC@ha
+/* 8012C894 00129474  38 83 CA CC */	addi r4, r3, lbl_8012CACC@l
+/* 8012C898 00129478  88 1F 22 1A */	lbz r0, 0x221a(r31)
+/* 8012C89C 0012947C  38 C0 00 00 */	li r6, 0
+/* 8012C8A0 00129480  50 C0 07 FE */	rlwimi r0, r6, 0, 0x1f, 0x1f
+/* 8012C8A4 00129484  98 1F 22 1A */	stb r0, 0x221a(r31)
+/* 8012C8A8 00129488  38 A0 00 01 */	li r5, 1
+/* 8012C8AC 0012948C  38 7E 00 00 */	addi r3, r30, 0
+/* 8012C8B0 00129490  88 1F 22 1B */	lbz r0, 0x221b(r31)
+/* 8012C8B4 00129494  50 C0 3E 30 */	rlwimi r0, r6, 7, 0x18, 0x18
+/* 8012C8B8 00129498  98 1F 22 1B */	stb r0, 0x221b(r31)
+/* 8012C8BC 0012949C  88 1F 22 1C */	lbz r0, 0x221c(r31)
+/* 8012C8C0 001294A0  50 A0 26 F6 */	rlwimi r0, r5, 4, 0x1b, 0x1b
+/* 8012C8C4 001294A4  98 1F 22 1C */	stb r0, 0x221c(r31)
+/* 8012C8C8 001294A8  88 1F 22 1C */	lbz r0, 0x221c(r31)
+/* 8012C8CC 001294AC  50 A0 36 72 */	rlwimi r0, r5, 6, 0x19, 0x19
+/* 8012C8D0 001294B0  98 1F 22 1C */	stb r0, 0x221c(r31)
+/* 8012C8D4 001294B4  88 1F 22 1C */	lbz r0, 0x221c(r31)
+/* 8012C8D8 001294B8  50 A0 2E B4 */	rlwimi r0, r5, 5, 0x1a, 0x1a
+/* 8012C8DC 001294BC  98 1F 22 1C */	stb r0, 0x221c(r31)
+/* 8012C8E0 001294C0  80 AD AE B4 */	lwz r5, p_ftCommonData
+/* 8012C8E4 001294C4  C0 05 02 A4 */	lfs f0, 0x2a4(r5)
+/* 8012C8E8 001294C8  D0 1F 23 54 */	stfs f0, 0x2354(r31)
+/* 8012C8EC 001294CC  80 AD AE B4 */	lwz r5, p_ftCommonData
+/* 8012C8F0 001294D0  C0 05 02 B4 */	lfs f0, 0x2b4(r5)
+/* 8012C8F4 001294D4  D0 1F 23 58 */	stfs f0, 0x2358(r31)
+/* 8012C8F8 001294D8  4B F6 6E 15 */	bl func_8009370C
+/* 8012C8FC 001294DC  80 01 00 1C */	lwz r0, 0x1c(r1)
+/* 8012C900 001294E0  83 E1 00 14 */	lwz r31, 0x14(r1)
+/* 8012C904 001294E4  83 C1 00 10 */	lwz r30, 0x10(r1)
+/* 8012C908 001294E8  38 21 00 18 */	addi r1, r1, 0x18
+/* 8012C90C 001294EC  7C 08 03 A6 */	mtlr r0
+/* 8012C910 001294F0  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif

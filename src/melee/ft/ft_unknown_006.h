@@ -252,6 +252,7 @@ void func_80093354(HSD_GObj*);
 void func_80093624(HSD_GObj*);
 void func_80093628(HSD_GObj*);
 void func_8009365C(HSD_GObj*);
+void func_8009370C(HSD_GObj*);
 void func_80093BC0(HSD_GObj*);
 void func_80093CD0(HSD_GObj*);
 void func_80093EC0(HSD_GObj*);
