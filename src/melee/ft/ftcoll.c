@@ -63,43 +63,17 @@ void func_80076444(HSD_GObj* attacker, HSD_GObj* victim)
     func_800763C0(attacker, victim, fp->x2068_attackID);
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim)
-{ // clang-format off
-    nofralloc
-/* 8007646C 0007304C  7C 08 02 A6 */	mflr r0
-/* 80076470 00073050  90 01 00 04 */	stw r0, 4(r1)
-/* 80076474 00073054  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 80076478 00073058  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8007647C 0007305C  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 80076480 00073060  3B C3 00 00 */	addi r30, r3, 0
-/* 80076484 00073064  93 A1 00 14 */	stw r29, 0x14(r1)
-/* 80076488 00073068  3B A4 00 00 */	addi r29, r4, 0
-/* 8007648C 0007306C  48 1F 57 ED */	bl func_8026BC78
-/* 80076490 00073070  3B E3 00 00 */	addi r31, r3, 0
-/* 80076494 00073074  38 7E 00 00 */	addi r3, r30, 0
-/* 80076498 00073078  48 1F 57 ED */	bl func_8026BC84
-/* 8007649C 0007307C  3B C3 00 00 */	addi r30, r3, 0
-/* 800764A0 00073080  38 7F 00 00 */	addi r3, r31, 0
-/* 800764A4 00073084  48 01 04 BD */	bl func_80086960
-/* 800764A8 00073088  2C 03 00 00 */	cmpwi r3, 0
-/* 800764AC 0007308C  41 82 00 14 */	beq lbl_800764C0
-/* 800764B0 00073090  38 7F 00 00 */	addi r3, r31, 0
-/* 800764B4 00073094  38 9D 00 00 */	addi r4, r29, 0
-/* 800764B8 00073098  38 BE 00 00 */	addi r5, r30, 0
-/* 800764BC 0007309C  4B FF FF 05 */	bl func_800763C0
-lbl_800764C0:
-/* 800764C0 000730A0  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 800764C4 000730A4  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 800764C8 000730A8  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 800764CC 000730AC  83 A1 00 14 */	lwz r29, 0x14(r1)
-/* 800764D0 000730B0  38 21 00 20 */	addi r1, r1, 0x20
-/* 800764D4 000730B4  7C 08 03 A6 */	mtlr r0
-/* 800764D8 000730B8  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+/// Combo Count Logic w/ Item Owner
+void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim)
+{
+    HSD_GObj* itemOwner = func_8026BC78(attackItem);
+    s32 attackID = func_8026BC84(attackItem);
+
+    // Check if item's owner is a fighter
+    if (func_80086960(itemOwner) != false) {
+        func_800763C0(itemOwner, victim, attackID);
+    }
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
