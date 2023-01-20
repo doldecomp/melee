@@ -13,7 +13,7 @@ typedef struct _ftYoshiAttributes {
     f32 x8;
     f32 xC;
     f32 x10;
-    s32 x14;
+    f32 x14;
     f32 x18;
     s32 x1C;
     s32 x20;

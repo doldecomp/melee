@@ -1,6 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI2_H
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI2_H
 
+#include <dolphin/mtx/types.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
@@ -38,7 +39,7 @@ void lbl_8012CBDC(HSD_GObj*);
 void lbl_8012CBFC(HSD_GObj*);
 bool func_8012CC1C(HSD_GObj*);
 void func_8012CC6C(HSD_GObj*);
-void func_8012CC94(HSD_GObj*);
+void func_8012CC94(HSD_GObj* fighter_gobj, Vec3* out);
 void func_8012CCC4(HSD_GObj*);
 void func_8012CCD0(HSD_GObj*);
 void func_8012CCE0(HSD_GObj*);
