@@ -31,5 +31,11 @@ void lbl_8012C80C(HSD_GObj*);
 void lbl_8012C810(HSD_GObj*);
 void lbl_8012C830(HSD_GObj*);
 void lbl_8012CACC(HSD_GObj*);
+void func_8012C914(HSD_GObj*);
+void lbl_8012CAD0(HSD_GObj*);
+void lbl_8012CBBC(HSD_GObj*);
+void lbl_8012CBDC(HSD_GObj*);
+void lbl_8012CBFC(HSD_GObj*);
+void func_8012CC1C(HSD_GObj*);
 
 #endif
