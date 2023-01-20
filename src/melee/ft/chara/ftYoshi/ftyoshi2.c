@@ -251,87 +251,33 @@ void func_8012C49C(HSD_GObj* fighter_gobj)
     efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void lbl_8012C54C(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8012C54C 0012912C  7C 08 02 A6 */	mflr r0
-/* 8012C550 00129130  90 01 00 04 */	stw r0, 4(r1)
-/* 8012C554 00129134  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8012C558 00129138  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8012C55C 0012913C  7C 7F 1B 78 */	mr r31, r3
-/* 8012C560 00129140  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 8012C564 00129144  C0 02 A0 48 */	lfs f0, lbl_804D9A28
-/* 8012C568 00129148  C0 24 23 40 */	lfs f1, 0x2340(r4)
-/* 8012C56C 0012914C  EC 01 00 2A */	fadds f0, f1, f0
-/* 8012C570 00129150  D0 04 23 40 */	stfs f0, 0x2340(r4)
-/* 8012C574 00129154  4B F4 2C C5 */	bl ftAnim_IsFramesRemaining
-/* 8012C578 00129158  2C 03 00 00 */	cmpwi r3, 0
-/* 8012C57C 0012915C  40 82 00 0C */	bne lbl_8012C588
-/* 8012C580 00129160  7F E3 FB 78 */	mr r3, r31
-/* 8012C584 00129164  4B F5 DD 39 */	bl func_8008A2BC
-lbl_8012C588:
-/* 8012C588 00129168  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8012C58C 0012916C  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8012C590 00129170  38 21 00 20 */	addi r1, r1, 0x20
-/* 8012C594 00129174  7C 08 03 A6 */	mtlr r0
-/* 8012C598 00129178  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void lbl_8012C54C(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp;
+    s32 unused[2];
+    fp = fighter_gobj->user_data;
+    fp->x2340_f32 = fp->x2340_f32 + lbl_804D9A28;
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+        func_8008A2BC(fighter_gobj);
+    }
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void lbl_8012C59C(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8012C59C 0012917C  7C 08 02 A6 */	mflr r0
-/* 8012C5A0 00129180  90 01 00 04 */	stw r0, 4(r1)
-/* 8012C5A4 00129184  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8012C5A8 00129188  4B F6 D1 ED */	bl func_80099794
-/* 8012C5AC 0012918C  2C 03 00 00 */	cmpwi r3, 0
-/* 8012C5B0 00129190  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8012C5B4 00129194  38 21 00 08 */	addi r1, r1, 8
-/* 8012C5B8 00129198  7C 08 03 A6 */	mtlr r0
-/* 8012C5BC 0012919C  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void lbl_8012C59C(HSD_GObj* arg0)
+{
+    if (!func_80099794(arg0)) {
+        return;
+    }
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void lbl_8012C5C0(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8012C5C0 001291A0  7C 08 02 A6 */	mflr r0
-/* 8012C5C4 001291A4  90 01 00 04 */	stw r0, 4(r1)
-/* 8012C5C8 001291A8  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8012C5CC 001291AC  4B F6 68 45 */	bl func_80092E10
-/* 8012C5D0 001291B0  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8012C5D4 001291B4  38 21 00 08 */	addi r1, r1, 8
-/* 8012C5D8 001291B8  7C 08 03 A6 */	mtlr r0
-/* 8012C5DC 001291BC  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void lbl_8012C5C0(HSD_GObj* arg0)
+{
+    func_80092E10(arg0);
+}
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void lbl_8012C5E0(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8012C5E0 001291C0  7C 08 02 A6 */	mflr r0
-/* 8012C5E4 001291C4  90 01 00 04 */	stw r0, 4(r1)
-/* 8012C5E8 001291C8  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8012C5EC 001291CC  4B F6 68 45 */	bl func_80092E30
-/* 8012C5F0 001291D0  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8012C5F4 001291D4  38 21 00 08 */	addi r1, r1, 8
-/* 8012C5F8 001291D8  7C 08 03 A6 */	mtlr r0
-/* 8012C5FC 001291DC  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+void lbl_8012C5E0(HSD_GObj* arg0)
+{
+    func_80092E30(arg0);
+}
 
 extern f64 const lbl_804D9A30;
 
