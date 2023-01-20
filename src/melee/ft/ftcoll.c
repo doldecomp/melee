@@ -5391,3 +5391,26 @@ lbl_8007AC24:
 } // clang-format on
 #pragma pop
 #endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void func_8007AC68(void)
+{ // clang-format off
+    nofralloc
+/* 8007AC68 00077848  28 03 01 69 */	cmplwi r3, 0x169
+/* 8007AC6C 0007784C  41 82 00 28 */	beq lbl_8007AC94
+/* 8007AC70 00077850  80 8D AE B4 */	lwz r4, p_ftCommonData
+/* 8007AC74 00077854  80 04 07 E8 */	lwz r0, 0x7e8(r4)
+/* 8007AC78 00077858  7C 00 18 40 */	cmplw r0, r3
+/* 8007AC7C 0007785C  41 81 00 18 */	bgt lbl_8007AC94
+/* 8007AC80 00077860  80 04 07 EC */	lwz r0, 0x7ec(r4)
+/* 8007AC84 00077864  7C 03 00 40 */	cmplw r3, r0
+/* 8007AC88 00077868  41 81 00 0C */	bgt lbl_8007AC94
+/* 8007AC8C 0007786C  38 60 00 01 */	li r3, 1
+/* 8007AC90 00077870  4E 80 00 20 */	blr
+lbl_8007AC94:
+/* 8007AC94 00077874  38 60 00 00 */	li r3, 0
+/* 8007AC98 00077878  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
