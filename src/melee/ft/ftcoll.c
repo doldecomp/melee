@@ -27,10 +27,8 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
-// 0x800763C0 //
-// https://decomp.me/scratch/zSqbD //
-void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
-                   s32 attackID) // Combo Count Logic //
+/// Combo Count Logic
+void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID)
 {
     HSD_GObj* temp_GObj;
     Fighter* fp;
@@ -58,24 +56,12 @@ void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
     }
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_80076444(HSD_GObj* attacker, HSD_GObj* victim)
-{ // clang-format off
-    nofralloc
-/* 80076444 00073024  7C 08 02 A6 */	mflr r0
-/* 80076448 00073028  90 01 00 04 */	stw r0, 4(r1)
-/* 8007644C 0007302C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80076450 00073030  80 A3 00 2C */	lwz r5, 0x2c(r3)
-/* 80076454 00073034  80 A5 20 68 */	lwz r5, 0x2068(r5)
-/* 80076458 00073038  4B FF FF 69 */	bl func_800763C0
-/* 8007645C 0007303C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80076460 00073040  38 21 00 08 */	addi r1, r1, 8
-/* 80076464 00073044  7C 08 03 A6 */	mtlr r0
-/* 80076468 00073048  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+/// Combo Count Logic + Get Attack ID
+void func_80076444(HSD_GObj* attacker, HSD_GObj* victim)
+{
+    Fighter* fp = GET_FIGHTER(attacker);
+    func_800763C0(attacker, victim, fp->x2068_attackID);
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
