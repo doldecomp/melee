@@ -163,5 +163,6 @@ void func_8012C1D4(HSD_GObj*);
 void lbl_8012C2F4(HSD_GObj* fighter_gobj);
 void lbl_8012C3EC(HSD_GObj*);
 void lbl_8012C45C(HSD_GObj*);
+void lbl_8012C47C(HSD_GObj*);
 
 #endif
