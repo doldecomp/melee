@@ -2,41 +2,6 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-
-.global func_8012CCC4
-func_8012CCC4:
-/* 8012CCC4 001298A4  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8012CCC8 001298A8  C0 23 00 2C */	lfs f1, 0x2c(r3)
-/* 8012CCCC 001298AC  4E 80 00 20 */	blr
-
-.global func_8012CCD0
-func_8012CCD0:
-/* 8012CCD0 001298B0  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8012CCD4 001298B4  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8012CCD8 001298B8  C0 23 00 18 */	lfs f1, 0x18(r3)
-/* 8012CCDC 001298BC  4E 80 00 20 */	blr
-
-.global func_8012CCE0
-func_8012CCE0:
-/* 8012CCE0 001298C0  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8012CCE4 001298C4  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8012CCE8 001298C8  C0 23 00 1C */	lfs f1, 0x1c(r3)
-/* 8012CCEC 001298CC  4E 80 00 20 */	blr
-
-.global func_8012CCF0
-func_8012CCF0:
-/* 8012CCF0 001298D0  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8012CCF4 001298D4  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8012CCF8 001298D8  C0 23 00 20 */	lfs f1, 0x20(r3)
-/* 8012CCFC 001298DC  4E 80 00 20 */	blr
-
-.global func_8012CD00
-func_8012CD00:
-/* 8012CD00 001298E0  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8012CD04 001298E4  80 63 02 D4 */	lwz r3, 0x2d4(r3)
-/* 8012CD08 001298E8  C0 23 00 24 */	lfs f1, 0x24(r3)
-/* 8012CD0C 001298EC  4E 80 00 20 */	blr
-
 .global func_8012CD10
 func_8012CD10:
 /* 8012CD10 001298F0  3C 60 80 46 */	lis r3, gFtDataList@ha
