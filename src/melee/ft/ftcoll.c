@@ -121,47 +121,30 @@ void func_80076528(HSD_GObj* fighter_gobj)
     }
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_800765AC(HSD_GObj*)
+/// Clear victim pointer from attacker upon freeing memory?
+void func_800765AC(HSD_GObj* victim)
 {
-    // clang-format off
-    nofralloc
-/* 800765AC 0007318C  80 8D C1 8C */	lwz r4, lbl_804D782C
-/* 800765B0 00073190  38 00 00 00 */	li r0, 0
-/* 800765B4 00073194  80 C4 00 20 */	lwz r6, 0x20(r4)
-/* 800765B8 00073198  48 00 00 1C */	b lbl_800765D4
-lbl_800765BC:
-/* 800765BC 0007319C  80 A6 00 2C */	lwz r5, 0x2c(r6)
-/* 800765C0 000731A0  80 85 20 94 */	lwz r4, 0x2094(r5)
-/* 800765C4 000731A4  7C 03 20 40 */	cmplw r3, r4
-/* 800765C8 000731A8  40 82 00 08 */	bne lbl_800765D0
-/* 800765CC 000731AC  90 05 20 94 */	stw r0, 0x2094(r5)
-lbl_800765D0:
-/* 800765D0 000731B0  80 C6 00 08 */	lwz r6, 8(r6)
-lbl_800765D4:
-/* 800765D4 000731B4  28 06 00 00 */	cmplwi r6, 0
-/* 800765D8 000731B8  40 82 FF E4 */	bne lbl_800765BC
-/* 800765DC 000731BC  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+    HSD_GObj* cur = lbl_804D782C->x20_fighters;
+
+    while (cur != NULL) {
+        Fighter* fp = GET_FIGHTER(cur);
+
+        if (victim == fp->x2094)
+            fp->x2094 = NULL;
+
+        cur = cur->next;
+    }
+}
 
 extern unk_t lbl_804D6558;
 extern unk_t lbl_804D655C;
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_800765E0(void)
-{ // clang-format off
-    nofralloc
-/* 800765E0 000731C0  38 00 00 00 */	li r0, 0
-/* 800765E4 000731C4  90 0D AE B8 */	stw r0, lbl_804D6558
-/* 800765E8 000731C8  90 0D AE BC */	stw r0, lbl_804D655C
-/* 800765EC 000731CC  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+/// Reset hitbox and phantom collision count?
+void func_800765E0(void)
+{
+    lbl_804D6558 = NULL;
+    lbl_804D655C = NULL;
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
