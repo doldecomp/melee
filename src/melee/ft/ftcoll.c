@@ -27,56 +27,36 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
-f32 const lbl_804D82E0 = 0.0F;
-f32 const lbl_804D82E4 = 500.0F;
-f32 const lbl_804D82E8 = 0.5F;
-f32 const lbl_804D82EC = 1.0F;
-f32 const lbl_804D82F0 = -1.0F;
-f64 const lbl_804D82F8 = 4503601774854144.0;
+// 0x800763C0 //
+// https://decomp.me/scratch/zSqbD //
+void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
+                   s32 attackID) // Combo Count Logic //
+{
+    HSD_GObj* temp_GObj;
+    Fighter* fp;
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID)
-{ // clang-format off
-    nofralloc
-/* 800763C0 00072FA0  7C 03 20 40 */	cmplw r3, r4
-/* 800763C4 00072FA4  4D 82 00 20 */	beqlr
-/* 800763C8 00072FA8  80 C3 00 2C */	lwz r6, 0x2c(r3)
-/* 800763CC 00072FAC  80 06 20 94 */	lwz r0, 0x2094(r6)
-/* 800763D0 00072FB0  28 00 00 00 */	cmplwi r0, 0
-/* 800763D4 00072FB4  40 82 00 18 */	bne lbl_800763EC
-/* 800763D8 00072FB8  90 A6 20 8C */	stw r5, 0x208c(r6)
-/* 800763DC 00072FBC  38 00 00 01 */	li r0, 1
-/* 800763E0 00072FC0  B0 06 20 90 */	sth r0, 0x2090(r6)
-/* 800763E4 00072FC4  90 86 20 94 */	stw r4, 0x2094(r6)
-/* 800763E8 00072FC8  4E 80 00 20 */	blr
-lbl_800763EC:
-/* 800763EC 00072FCC  7C 00 20 40 */	cmplw r0, r4
-/* 800763F0 00072FD0  4C 82 00 20 */	bnelr
-/* 800763F4 00072FD4  2C 05 00 01 */	cmpwi r5, 1
-/* 800763F8 00072FD8  41 82 00 3C */	beq lbl_80076434
-/* 800763FC 00072FDC  80 06 20 8C */	lwz r0, 0x208c(r6)
-/* 80076400 00072FE0  7C 00 28 00 */	cmpw r0, r5
-/* 80076404 00072FE4  40 82 00 30 */	bne lbl_80076434
-/* 80076408 00072FE8  A0 66 20 90 */	lhz r3, 0x2090(r6)
-/* 8007640C 00072FEC  38 03 00 01 */	addi r0, r3, 1
-/* 80076410 00072FF0  B0 06 20 90 */	sth r0, 0x2090(r6)
-/* 80076414 00072FF4  80 8D AE B4 */	lwz r4, p_ftCommonData
-/* 80076418 00072FF8  A0 66 20 90 */	lhz r3, 0x2090(r6)
-/* 8007641C 00072FFC  80 04 04 C4 */	lwz r0, 0x4c4(r4)
-/* 80076420 00073000  7C 03 00 00 */	cmpw r3, r0
-/* 80076424 00073004  4D 80 00 20 */	bltlr
-/* 80076428 00073008  80 04 04 D8 */	lwz r0, 0x4d8(r4)
-/* 8007642C 0007300C  B0 06 20 92 */	sth r0, 0x2092(r6)
-/* 80076430 00073010  4E 80 00 20 */	blr
-lbl_80076434:
-/* 80076434 00073014  38 00 00 00 */	li r0, 0
-/* 80076438 00073018  B0 06 20 90 */	sth r0, 0x2090(r6)
-/* 8007643C 0007301C  90 A6 20 8C */	stw r5, 0x208c(r6)
-/* 80076440 00073020  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+    if (attacker != victim) {
+        fp = GET_FIGHTER(attacker);
+        temp_GObj = fp->x2094;
+        if (temp_GObj == NULL) {
+            fp->x208C = attackID;
+            fp->x2090 = 1U;
+            fp->x2094 = victim;
+            return;
+        }
+        if (temp_GObj == victim) {
+            if ((attackID != 1) && ((s32) fp->x208C == attackID)) {
+                fp->x2090 = (u16) (fp->x2090 + 1);
+                if (fp->x2090 >= p_ftCommonData->x4C4) {
+                    fp->x2092 = p_ftCommonData->x4D8;
+                }
+            } else {
+                fp->x2090 = 0U;
+                fp->x208C = attackID;
+            }
+        }
+    }
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -486,8 +466,8 @@ lbl_80076878:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_800768A0(void)
-{ // clang-format off
+asm void func_800768A0(void){
+    // clang-format off
     nofralloc
 /* 800768A0 00073480  7C 08 02 A6 */	mflr r0
 /* 800768A4 00073484  38 C3 09 14 */	addi r6, r3, 0x914
@@ -561,10 +541,12 @@ lbl_8007698C:
 #pragma pop
 #endif
 
-extern f32 const lbl_804D82E8;
-extern f64 const lbl_804D82F8;
-extern f32 const lbl_804D82EC;
-extern f32 const lbl_804D82F0;
+f32 const lbl_804D82E0 = 0.0F;
+f32 const lbl_804D82E4 = 500.0F;
+f32 const lbl_804D82E8 = 0.5F;
+f32 const lbl_804D82EC = 1.0F;
+f32 const lbl_804D82F0 = -1.0F;
+f64 const lbl_804D82F8 = 4503601774854144.0;
 
 #ifdef MWERKS_GEKKO
 #pragma push
