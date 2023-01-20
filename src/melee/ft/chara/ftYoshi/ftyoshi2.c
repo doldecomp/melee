@@ -722,33 +722,16 @@ asm void lbl_8012CBFC(HSD_GObj*)
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_8012CC1C(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8012CC1C 001297FC  7C 08 02 A6 */	mflr r0
-/* 8012CC20 00129800  90 01 00 04 */	stw r0, 4(r1)
-/* 8012CC24 00129804  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8012CC28 00129808  80 83 00 2C */	lwz r4, 0x2c(r3)
-/* 8012CC2C 0012980C  80 04 06 5C */	lwz r0, 0x65c(r4)
-/* 8012CC30 00129810  54 00 00 01 */	rlwinm. r0, r0, 0, 0, 0
-/* 8012CC34 00129814  41 82 00 24 */	beq lbl_8012CC58
-/* 8012CC38 00129818  C0 24 19 98 */	lfs f1, 0x1998(r4)
-/* 8012CC3C 0012981C  C0 02 A0 4C */	lfs f0, lbl_804D9A2C
-/* 8012CC40 00129820  FC 01 00 40 */	fcmpo cr0, f1, f0
-/* 8012CC44 00129824  4C 41 13 82 */	cror 2, 1, 2
-/* 8012CC48 00129828  40 82 00 10 */	bne lbl_8012CC58
-/* 8012CC4C 0012982C  4B F6 5C 81 */	bl func_800928CC
-/* 8012CC50 00129830  38 60 00 01 */	li r3, 1
-/* 8012CC54 00129834  48 00 00 08 */	b lbl_8012CC5C
-lbl_8012CC58:
-/* 8012CC58 00129838  38 60 00 00 */	li r3, 0
-lbl_8012CC5C:
-/* 8012CC5C 0012983C  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 8012CC60 00129840  38 21 00 08 */	addi r1, r1, 8
-/* 8012CC64 00129844  7C 08 03 A6 */	mtlr r0
-/* 8012CC68 00129848  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+bool func_8012CC1C(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    if ((fp->input.x65C_heldInputs & 0x80000000) &&
+        (fp->x1998_shieldHealth >= lbl_804D9A2C))
+    {
+        func_800928CC(fighter_gobj);
+        return true;
+    }
+
+    return false;
+}
