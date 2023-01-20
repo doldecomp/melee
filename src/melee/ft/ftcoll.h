@@ -68,5 +68,7 @@ void func_80076640(void);
 void func_80076764(void);
 void func_80076808(void);
 void func_800768A0(void);
+void func_8007699C(void);
+void func_800784B4(void);
 
 #endif
