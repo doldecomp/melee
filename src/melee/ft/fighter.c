@@ -118,22 +118,17 @@ unk_t lbl_804D654C = NULL;
 unk_t lbl_804D6550 = NULL;
 ftCommonData* p_ftCommonData;
 
-// ==== fighter.c functions ====
-// =============================
-
-// TEMP HACKS TO DEAL WITH --------------------
 inline HSD_JObj* getHSDJObj(HSD_GObj* hsd_gobj)
 {
     HSD_JObj* hsd_jobj = hsd_gobj->hsd_obj;
     return (void*) hsd_jobj;
 }
-// --------------------------------------------
 
 void Fighter_800679B0(void)
 {
     s32 i;
 
-    // @WARNING: don't hardcode the allocation sizes
+    /// @warning don't hardcode the allocation sizes
     HSD_ObjAllocInit(&fighter_alloc_data, sizeof(Fighter), /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80458FFC, /*size*/ 0x424, /*align*/ 4);
     func_800852B0();
