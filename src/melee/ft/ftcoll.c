@@ -29,6 +29,13 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
+f32 const lbl_804D82E0 = 0.0F;
+f32 const lbl_804D82E4 = 500.0F;
+f32 const lbl_804D82E8 = 0.5F;
+f32 const lbl_804D82EC = 1.0F;
+f32 const lbl_804D82F0 = -1.0F;
+f64 const lbl_804D82F8 = 4503601774854144.0;
+
 #ifdef MWERKS_GEKKO
 #pragma push
 asm void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID)
@@ -235,7 +242,8 @@ extern unk_t lbl_804D655C;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_800765E0(void){ // clang-format off
+asm void func_800765E0(void)
+{ // clang-format off
     nofralloc
 /* 800765E0 000731C0  38 00 00 00 */	li r0, 0
 /* 800765E4 000731C4  90 0D AE B8 */	stw r0, lbl_804D6558
@@ -245,9 +253,33 @@ asm void func_800765E0(void){ // clang-format off
 #pragma pop
 #endif
 
-f32 const lbl_804D82E0 = 0.0F;
-f32 const lbl_804D82E4 = 500.0F;
-f32 const lbl_804D82E8 = 0.5F;
-f32 const lbl_804D82EC = 1.0F;
-f32 const lbl_804D82F0 = -1.0F;
-f64 const lbl_804D82F8 = 4503601774854144.0;
+#ifdef MWERKS_GEKKO
+#pragma push
+asm f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar)
+{ // clang-format off
+    nofralloc
+/* 800765F0 000731D0  80 A3 1A 58 */	lwz r5, 0x1a58(r3)
+/* 800765F4 000731D4  28 05 00 00 */	cmplwi r5, 0
+/* 800765F8 000731D8  41 82 00 24 */	beq lbl_8007661C
+/* 800765FC 000731DC  88 03 22 1B */	lbz r0, 0x221b(r3)
+/* 80076600 000731E0  54 00 F7 FF */	rlwinm. r0, r0, 0x1e, 0x1f, 0x1f
+/* 80076604 000731E4  40 82 00 18 */	bne lbl_8007661C
+/* 80076608 000731E8  7C 05 20 40 */	cmplw r5, r4
+/* 8007660C 000731EC  41 82 00 10 */	beq lbl_8007661C
+/* 80076610 000731F0  80 8D AE B4 */	lwz r4, p_ftCommonData
+/* 80076614 000731F4  C0 04 01 28 */	lfs f0, 0x128(r4)
+/* 80076618 000731F8  EC 21 00 32 */	fmuls f1, f1, f0
+lbl_8007661C:
+/* 8007661C 000731FC  80 03 00 10 */	lwz r0, 0x10(r3)
+/* 80076620 00073200  2C 00 01 45 */	cmpwi r0, 0x145
+/* 80076624 00073204  40 82 00 10 */	bne lbl_80076634
+/* 80076628 00073208  80 8D AE B4 */	lwz r4, p_ftCommonData
+/* 8007662C 0007320C  C0 04 07 14 */	lfs f0, 0x714(r4)
+/* 80076630 00073210  EC 21 00 32 */	fmuls f1, f1, f0
+lbl_80076634:
+/* 80076634 00073214  C0 03 18 2C */	lfs f0, 0x182c(r3)
+/* 80076638 00073218  EC 21 00 32 */	fmuls f1, f1, f0
+/* 8007663C 0007321C  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
