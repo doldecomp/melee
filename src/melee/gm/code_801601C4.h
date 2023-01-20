@@ -31,6 +31,7 @@ bool func_8018841C(void);
 void func_80160854(void);
 void func_80168B34(void);
 void func_801692E8(int, struct datetime* datetime);
+void func_8016B248(void);
 void func_8016B498(void);
 
 #endif
