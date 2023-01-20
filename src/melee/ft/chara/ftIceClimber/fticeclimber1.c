@@ -497,21 +497,14 @@ lbl_8011F6DC:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_8011F6FC(HSD_GObj*)
-{ // clang-format off
-    nofralloc
-/* 8011F6FC 0011C2DC  28 03 00 00 */	cmplwi r3, 0
-/* 8011F700 0011C2E0  41 82 00 18 */	beq lbl_8011F718
-/* 8011F704 0011C2E4  80 63 00 2C */	lwz r3, 0x2c(r3)
-/* 8011F708 0011C2E8  28 03 00 00 */	cmplwi r3, 0
-/* 8011F70C 0011C2EC  41 82 00 0C */	beq lbl_8011F718
-/* 8011F710 0011C2F0  80 63 22 04 */	lwz r3, 0x2204(r3)
-/* 8011F714 0011C2F4  4E 80 00 20 */	blr
-lbl_8011F718:
-/* 8011F718 0011C2F8  38 60 00 01 */	li r3, 1
-/* 8011F71C 0011C2FC  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+bool func_8011F6FC(HSD_GObj* fighter_gobj)
+{
+    if (fighter_gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+        if (fp != NULL)
+            return fp->x2204_ftcmd_var1;
+    }
+
+    return true;
+}
