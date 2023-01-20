@@ -64,6 +64,7 @@ void ftYoshi_OnKnockbackEnter(HSD_GObj* fighter_gobj);
 void ftYoshi_OnKnockbackExit(HSD_GObj* fighter_gobj);
 unk_t func_8012BDA0(void);
 void func_8012BE3C(HSD_GObj* fighter_gobj);
+void lbl_8012C7A4(HSD_GObj*);
 
 void lbl_8012C030(HSD_GObj*);
 void lbl_8012C114(HSD_GObj*);
