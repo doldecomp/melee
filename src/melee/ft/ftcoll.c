@@ -5928,3 +5928,46 @@ asm void func_8007B1B8(HSD_GObj*, f32*, HSD_GObjEvent)
 } // clang-format on
 #pragma pop
 #endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, HSD_GObjEvent)
+{ // clang-format off
+    nofralloc
+/* 8007B23C 00077E1C  80 E3 00 2C */	lwz r7, 0x2c(r3)
+/* 8007B240 00077E20  38 C0 00 01 */	li r6, 1
+/* 8007B244 00077E24  38 60 00 00 */	li r3, 0
+/* 8007B248 00077E28  88 07 22 18 */	lbz r0, 0x2218(r7)
+/* 8007B24C 00077E2C  50 C0 26 F6 */	rlwimi r0, r6, 4, 0x1b, 0x1b
+/* 8007B250 00077E30  98 07 22 18 */	stb r0, 0x2218(r7)
+/* 8007B254 00077E34  88 07 22 18 */	lbz r0, 0x2218(r7)
+/* 8007B258 00077E38  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
+/* 8007B25C 00077E3C  98 07 22 18 */	stb r0, 0x2218(r7)
+/* 8007B260 00077E40  90 A7 21 C8 */	stw r5, 0x21c8(r7)
+/* 8007B264 00077E44  80 04 00 04 */	lwz r0, 4(r4)
+/* 8007B268 00077E48  90 07 1A 30 */	stw r0, 0x1a30(r7)
+/* 8007B26C 00077E4C  C0 04 00 18 */	lfs f0, 0x18(r4)
+/* 8007B270 00077E50  D0 07 1A 34 */	stfs f0, 0x1a34(r7)
+/* 8007B274 00077E54  C0 04 00 1C */	lfs f0, 0x1c(r4)
+/* 8007B278 00077E58  D0 07 1A 38 */	stfs f0, 0x1a38(r7)
+/* 8007B27C 00077E5C  88 64 00 20 */	lbz r3, 0x20(r4)
+/* 8007B280 00077E60  88 07 22 18 */	lbz r0, 0x2218(r7)
+/* 8007B284 00077E64  50 60 17 7A */	rlwimi r0, r3, 2, 0x1d, 0x1d
+/* 8007B288 00077E68  98 07 22 18 */	stb r0, 0x2218(r7)
+/* 8007B28C 00077E6C  80 04 00 00 */	lwz r0, 0(r4)
+/* 8007B290 00077E70  80 67 05 E8 */	lwz r3, 0x5e8(r7)
+/* 8007B294 00077E74  54 00 20 36 */	slwi r0, r0, 4
+/* 8007B298 00077E78  7C 03 00 2E */	lwzx r0, r3, r0
+/* 8007B29C 00077E7C  90 07 19 E4 */	stw r0, 0x19e4(r7)
+/* 8007B2A0 00077E80  C0 04 00 14 */	lfs f0, 0x14(r4)
+/* 8007B2A4 00077E84  D0 07 1A 04 */	stfs f0, 0x1a04(r7)
+/* 8007B2A8 00077E88  80 64 00 08 */	lwz r3, 8(r4)
+/* 8007B2AC 00077E8C  80 04 00 0C */	lwz r0, 0xc(r4)
+/* 8007B2B0 00077E90  90 67 19 F8 */	stw r3, 0x19f8(r7)
+/* 8007B2B4 00077E94  90 07 19 FC */	stw r0, 0x19fc(r7)
+/* 8007B2B8 00077E98  80 04 00 10 */	lwz r0, 0x10(r4)
+/* 8007B2BC 00077E9C  90 07 1A 00 */	stw r0, 0x1a00(r7)
+/* 8007B2C0 00077EA0  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
