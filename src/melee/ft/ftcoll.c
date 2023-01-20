@@ -146,36 +146,18 @@ void func_800765E0(void)
     lbl_804D655C = NULL;
 }
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 unk_floatvar)
-{ // clang-format off
-    nofralloc
-/* 800765F0 000731D0  80 A3 1A 58 */	lwz r5, 0x1a58(r3)
-/* 800765F4 000731D4  28 05 00 00 */	cmplwi r5, 0
-/* 800765F8 000731D8  41 82 00 24 */	beq lbl_8007661C
-/* 800765FC 000731DC  88 03 22 1B */	lbz r0, 0x221b(r3)
-/* 80076600 000731E0  54 00 F7 FF */	rlwinm. r0, r0, 0x1e, 0x1f, 0x1f
-/* 80076604 000731E4  40 82 00 18 */	bne lbl_8007661C
-/* 80076608 000731E8  7C 05 20 40 */	cmplw r5, r4
-/* 8007660C 000731EC  41 82 00 10 */	beq lbl_8007661C
-/* 80076610 000731F0  80 8D AE B4 */	lwz r4, p_ftCommonData
-/* 80076614 000731F4  C0 04 01 28 */	lfs f0, 0x128(r4)
-/* 80076618 000731F8  EC 21 00 32 */	fmuls f1, f1, f0
-lbl_8007661C:
-/* 8007661C 000731FC  80 03 00 10 */	lwz r0, 0x10(r3)
-/* 80076620 00073200  2C 00 01 45 */	cmpwi r0, 0x145
-/* 80076624 00073204  40 82 00 10 */	bne lbl_80076634
-/* 80076628 00073208  80 8D AE B4 */	lwz r4, p_ftCommonData
-/* 8007662C 0007320C  C0 04 07 14 */	lfs f0, 0x714(r4)
-/* 80076630 00073210  EC 21 00 32 */	fmuls f1, f1, f0
-lbl_80076634:
-/* 80076634 00073214  C0 03 18 2C */	lfs f0, 0x182c(r3)
-/* 80076638 00073218  EC 21 00 32 */	fmuls f1, f1, f0
-/* 8007663C 0007321C  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 arg2)
+{
+    HSD_GObj* cur = fp->x1A58_interactedFighter;
+
+    if (cur != NULL && !fp->x221B_flag.bits.b5 && cur != victim)
+        arg2 *= p_ftCommonData->x128;
+
+    if (fp->action_id == ASID_DAMAGEICE)
+        arg2 *= p_ftCommonData->x714;
+
+    return arg2 * fp->dmg.x182c_behavior;
+}
 
 extern f32 const lbl_804D82E0;
 extern f32 const lbl_804D82E4;
