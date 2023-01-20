@@ -17,7 +17,7 @@ bool ftNess_CheckSpecialNHold(
     s32 ASID;
 
     if (fighter_gobj != NULL) {
-        fp = fighter_gobj->user_data;
+        fp = GET_FIGHTER(fighter_gobj);
         if (fp != NULL) {
             if (fp->sa.ness.x2240_flashGObj != NULL) {
                 ASID = fp->action_id;
@@ -41,7 +41,7 @@ void ftNess_SpecialNSetNULL(
     Fighter* fp;
 
     if (fighter_gobj != NULL) {
-        fp = fighter_gobj->user_data;
+        fp = GET_FIGHTER(fighter_gobj);
         if (fp != NULL) {
             if (fp->sa.ness.x2240_flashGObj != NULL) {
                 fp->sa.ness.x2240_flashGObj = NULL;
@@ -62,7 +62,7 @@ void ftNess_ItemPKFlushSetNULL(
     Fighter* fp;
 
     if (fighter_gobj != NULL) {
-        fp = fighter_gobj->user_data;
+        fp = GET_FIGHTER(fighter_gobj);
         if (fp != NULL) {
             if (fp->sa.ness.x2240_flashGObj != NULL) {
                 func_802AAA50(fp->sa.ness.x2240_flashGObj);
@@ -114,7 +114,7 @@ void ftNess_SpecialNStart_Action(
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
 
-    temp_fp = fighter_gobj->user_data;
+    temp_fp = GET_FIGHTER(fighter_gobj);
     ness_attr = getFtSpecialAttrs(temp_fp);
 
     temp_fp->nessVars[0].SpecialN.flashTimerLoop1 =
@@ -157,7 +157,7 @@ void ftNess_SpecialAirNStart_Action(
     fp->x2200_ftcmd_var0 = 0;
     fp->x80_self_vel.y = 0.0f;
 
-    temp_fp = fighter_gobj->user_data;
+    temp_fp = GET_FIGHTER(fighter_gobj);
     ness_attr = getFtSpecialAttrs(temp_fp);
 
     temp_fp->nessVars[0].SpecialN.flashTimerLoop1 =
@@ -224,7 +224,7 @@ void ftNess_SpecialNHold_Anim(
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     if (fp->nessVars[0].SpecialN.flashTimerLoop1 != 0) {
         fp->nessVars[0].SpecialN.flashTimerLoop1--;
     }
@@ -343,7 +343,7 @@ void ftNess_SpecialAirNStart_Anim(
 void ftNess_SpecialAirNHold_Anim(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Charge Animation callback
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->nessVars[0].SpecialN.flashTimerLoop1 != 0) {
         fp->nessVars[0].SpecialN.flashTimerLoop1--;
@@ -387,7 +387,7 @@ void ftNess_SpecialAirNHold_Anim(
 void ftNess_SpecialAirNEnd_Anim(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Flash Release Animation callback
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftNessAttributes* ness_attr = getFtSpecialAttrs(fp);
     f32 landingLag;
 
@@ -425,7 +425,7 @@ void ftNess_SpecialNHold_IASA(
     Fighter* fp;
     s32 phi_r0;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     fp->nessVars[0].SpecialN.flashTimerMin--;
     if ((s32) fp->nessVars[0].SpecialN.flashTimerMin <= 0) {
         fp->nessVars[0].SpecialN.flashTimerMin = 0;
@@ -437,7 +437,7 @@ void ftNess_SpecialNHold_IASA(
         ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) &&
         (fighter_gobj != NULL))
     {
-        fp = fighter_gobj->user_data;
+        fp = GET_FIGHTER(fighter_gobj);
         if (fp != NULL) {
             if (fp->sa.ness.x2240_flashGObj != NULL) {
                 fp->sa.ness.x2240_flashGObj = NULL;
@@ -471,7 +471,7 @@ void ftNess_SpecialAirNHold_IASA(
     Fighter* fp;
     s32 phi_r0;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     fp->nessVars[0].SpecialN.flashTimerMin =
         (s32) (fp->nessVars[0].SpecialN.flashTimerMin - 1);
     if ((s32) fp->nessVars[0].SpecialN.flashTimerMin <= 0) {
@@ -484,7 +484,7 @@ void ftNess_SpecialAirNHold_IASA(
         ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) &&
         (fighter_gobj != NULL))
     {
-        fp = fighter_gobj->user_data;
+        fp = GET_FIGHTER(fighter_gobj);
         if (fp != NULL) {
             if (fp->sa.ness.x2240_flashGObj != NULL) {
                 fp->sa.ness.x2240_flashGObj = NULL;
@@ -505,7 +505,7 @@ void ftNess_SpecialAirNEnd_IASA(
 inline void GravityDelay(HSD_GObj* fighter_gobj) // Inline to set remaining
                                                  // frames of gravity delay
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->nessVars[0].SpecialN.gravityDelay != 0) {
         fp->nessVars[0].SpecialN.gravityDelay--;
