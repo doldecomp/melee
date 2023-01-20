@@ -15,5 +15,12 @@ void lbl_8012C030(HSD_GObj* fighter_gobj);
 void lbl_8012C114(HSD_GObj* fighter_gobj);
 void lbl_8012C194(HSD_GObj*);
 void lbl_8012C1B4(HSD_GObj*);
+void func_8012C1D4(HSD_GObj*);
+void lbl_8012C2F4(HSD_GObj* fighter_gobj);
+void lbl_8012C3EC(HSD_GObj*);
+void lbl_8012C45C(HSD_GObj*);
+void lbl_8012C47C(HSD_GObj*);
+void func_8012C49C(HSD_GObj*);
+void lbl_8012C54C(HSD_GObj*);
 
 #endif
