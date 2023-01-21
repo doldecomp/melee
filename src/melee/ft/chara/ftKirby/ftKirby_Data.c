@@ -456,3 +456,11 @@ unk_t lbl_803C9F08[unk_array_size] = { 0 };
 unk_t lbl_803C9F38[unk_array_size] = { 0 };
 unk_t lbl_803C9F68[unk_array_size] = { 0 };
 unk_t lbl_803C9F98[unk_array_size] = { 0 };
+
+unk_t lbl_803C9FC8[] = {
+    NULL, NULL,         NULL,         lbl_803C9ED8, NULL, NULL, NULL,
+    NULL, NULL,         NULL,         NULL,         NULL, NULL, NULL,
+    NULL, lbl_803C9F08, lbl_803C9F38, NULL,         NULL, NULL, NULL,
+    NULL, lbl_803C9F68, NULL,         lbl_803C9F98, NULL, NULL, NULL,
+    NULL, NULL,         NULL,         NULL,         NULL,
+};
