@@ -119,7 +119,7 @@ char lbl_803C7CD8[] = "PlyFox5KGr_Share_joint";
 char lbl_803C7CF0[] = "PlyFox5KGr_Share_matanim_joint";
 char lbl_803C7D10[] = "PlFxAJ.dat";
 
-char* lbl_803C7D8C[] = {
+Fighter_DemoStrings lbl_803C7D8C[] = {
     "ftDemoResultMotionFileFox",
     "ftDemoIntroMotionFileFox",
     "ftDemoEndingMotionFileFox",

@@ -1054,6 +1054,13 @@ struct Fighter_CostumeStrings {
     char* matanim_joint_name;
 };
 
+struct Fighter_DemoStrings {
+    char* result_filename;
+    char* intro_filename;
+    char* ending_filename;
+    char* vi_wait_filename;
+};
+
 // --------------------------------------------------------------------------------
 // UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fp
 // header includes or something.
