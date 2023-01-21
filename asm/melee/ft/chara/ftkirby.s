@@ -35535,23 +35535,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global jtbl_803CA2CC
-jtbl_803CA2CC:
-    .4byte lbl_800F1D08
-    .4byte lbl_800F1D08
-    .4byte lbl_800F1D00
-    .4byte lbl_800F1D08
-    .4byte lbl_800F1D08
-    .4byte lbl_800F1D08
-    .4byte lbl_800F1D08
-    .4byte lbl_800F1D00
-    .4byte lbl_800F1D08
-    .4byte lbl_800F1D08
-    .4byte lbl_800F1D00
-    .4byte lbl_800F1D00
-    .4byte lbl_800F1D08
-    .4byte lbl_800F1D00
-    .4byte NULL
 .global lbl_803CA308
 lbl_803CA308:
     .asciz "PlKb.dat"
