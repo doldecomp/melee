@@ -35535,22 +35535,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global jtbl_803CA294
-jtbl_803CA294:
-    .4byte lbl_800F1CD0
-    .4byte lbl_800F1CD0
-    .4byte lbl_800F1CC8
-    .4byte lbl_800F1CD0
-    .4byte lbl_800F1CD0
-    .4byte lbl_800F1CD0
-    .4byte lbl_800F1CD0
-    .4byte lbl_800F1CC8
-    .4byte lbl_800F1CD0
-    .4byte lbl_800F1CD0
-    .4byte lbl_800F1CC8
-    .4byte lbl_800F1CC8
-    .4byte lbl_800F1CD0
-    .4byte lbl_800F1CC8
 .global jtbl_803CA2CC
 jtbl_803CA2CC:
     .4byte lbl_800F1D08
