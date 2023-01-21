@@ -102,3 +102,19 @@ ActionState as_table_fox[] = {
     { 326, 0x00000072, 0x01000000, ftFox_AppealS_Anim, ftFox_AppealS_IASA,
       ftFox_AppealS_Phys, ftFox_AppealS_Coll, func_800761C8 },
 };
+
+char lbl_803C7BE8[] = "PlFx.dat";
+char lbl_803C7BF4[] = "ftDataFox";
+char lbl_803C7C00[] = "PlFxNr.dat";
+char lbl_803C7C0C[] = "PlyFox5K_Share_joint";
+char lbl_803C7C24[] = "PlyFox5K_Share_matanim_joint";
+char lbl_803C7C44[] = "PlFxOr.dat";
+char lbl_803C7C50[] = "PlyFox5KOr_Share_joint";
+char lbl_803C7C68[] = "PlyFox5KOr_Share_matanim_joint";
+char lbl_803C7C88[] = "PlFxLa.dat";
+char lbl_803C7C94[] = "PlyFox5KLa_Share_joint";
+char lbl_803C7CAC[] = "PlyFox5KLa_Share_matanim_joint";
+char lbl_803C7CCC[] = "PlFxGr.dat";
+char lbl_803C7CD8[] = "PlyFox5KGr_Share_joint";
+char lbl_803C7CF0[] = "PlyFox5KGr_Share_matanim_joint";
+char lbl_803C7D10[] = "PlFxAJ.dat";
