@@ -60,3 +60,23 @@ ActionState as_table_cfalcon[] = {
     { 317, 0x00340614, 0x15000000, func_800E43CC, NULL, func_800E4698,
       func_800E49DC, func_800761C8 },
 };
+
+char lbl_803C7598[] = "PlCa.dat";
+char lbl_803C75A4[] = "ftDataCaptain";
+char lbl_803C75B4[] = "PlCaNr.dat";
+char lbl_803C75C0[] = "PlyCaptain5K_Share_joint";
+char lbl_803C75DC[] = "PlCaGy.dat";
+char lbl_803C75E8[] = "PlyCaptain5KGy_Share_joint";
+char lbl_803C7604[] = "PlCaRe.";
+char lbl_803C760C[] = "PlyCaptain5KRe_Share_joint";
+char lbl_803C7628[] = "PlCaWh.dat";
+char lbl_803C7634[] = "PlyCaptain5KWh_Share_joint";
+char lbl_803C7650[] = "PlCaGr.dat";
+char lbl_803C765C[] = "PlyCaptain5KGr_Share_joint";
+char lbl_803C7678[] = "PlCaBu.dat";
+char lbl_803C7684[] = "PlyCaptain5KBu_Share_joint";
+char lbl_803C76A0[] = "PlCaAJ.dat";
+char lbl_803C76AC[] = "ftDemoResultMotionFileCaptain";
+char lbl_803C76CC[] = "ftDemoIntroMotionFileCaptain";
+char lbl_803C76EC[] = "ftDemoEndingMotionFileCaptain";
+char lbl_803C770C[] = "ftDemoViWaitMotionFileCaptain";
