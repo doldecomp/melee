@@ -1022,10 +1022,15 @@ struct ActionState {
 
     s32 x4_flags;
 
-    u8 move_id;
-    UnkFlagStruct x9_flags;
-    UnkFlagStruct flagsA;
-    UnkFlagStruct flagsB;
+    union {
+        u32 x8_flags;
+        struct {
+            u8 move_id;
+            UnkFlagStruct x9_flags;
+            UnkFlagStruct flagsA;
+            UnkFlagStruct flagsB;
+        };
+    };
 
     HSD_GObjEvent cb_Anim;
     HSD_GObjEvent cb_Input;

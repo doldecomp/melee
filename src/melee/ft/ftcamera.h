@@ -12,5 +12,6 @@ void func_80076064(Fighter* fp);
 void func_800761C8(HSD_GObj* gobj);
 void func_800762F4(HSD_GObj* gobj);
 void func_80076320(HSD_GObj* gobj);
+void func_800761C8(HSD_GObj*);
 
 #endif
