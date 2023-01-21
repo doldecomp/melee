@@ -1,3 +1,4 @@
+#include "melee/ft/forward.h"
 #include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
@@ -691,4 +692,10 @@ char* lbl_803CA5A4[] = {
     NULL,
     NULL,
     lbl_803CA588,
+};
+Fighter_CostumeStrings lbl_803CA5B4[] = {
+    lbl_803CA320, lbl_803CA32C, lbl_803CA344, lbl_803CA364, lbl_803CA370,
+    lbl_803CA38C, lbl_803CA3B0, lbl_803CA3BC, lbl_803CA3D8, lbl_803CA3FC,
+    lbl_803CA408, lbl_803CA424, lbl_803CA448, lbl_803CA454, lbl_803CA470,
+    lbl_803CA494, lbl_803CA4A0, lbl_803CA4BC,
 };
