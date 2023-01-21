@@ -941,8 +941,8 @@ Vec4 lbl_803CB720 = { 1.1F, 1.35F, 1.3F, 1.2F };
 char ftKirby_assert_msg_3[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 
 Vec3 lbl_803CB758[] = {
-    { 8, 0, -4 },
-    { 4, 4, 4 },
+    { +8, +0, -4 },
+    { +4, +4, +4 },
 };
 
 uint lbl_803CB770[] = {
