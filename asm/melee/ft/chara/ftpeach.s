@@ -3816,12 +3816,6 @@ lbl_8011ED08:
 
 .section .data
     .balign 8
-.global ftPeach_str_arr_ftDemo
-ftPeach_str_arr_ftDemo:
-    .4byte str_ftDemoResultMotionFilePeach
-    .4byte str_ftDemoIntroMotionFilePeach
-    .4byte str_ftDemoEndingMotionFilePeach
-    .4byte str_ftDemoViWaitMotionFilePeach
 .global ftPeach_str_arr_Costumes
 ftPeach_str_arr_Costumes:
     .4byte str_PlPeNr_dat

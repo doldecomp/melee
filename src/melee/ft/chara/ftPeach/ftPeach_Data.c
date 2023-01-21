@@ -1,4 +1,5 @@
 #include <melee/ft/chara/ftPeach/ftpeach.h>
+#include <melee/ft/forward.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/types.h>
@@ -91,3 +92,10 @@ char str_ftDemoResultMotionFilePeach[] = "ftDemoResultMotionFilePeach";
 char str_ftDemoIntroMotionFilePeach[] = "ftDemoIntroMotionFilePeach";
 char str_ftDemoEndingMotionFilePeach[] = "ftDemoEndingMotionFilePeach";
 char str_ftDemoViWaitMotionFilePeach[] = "ftDemoViWaitMotionFilePeach";
+
+Fighter_DemoStrings ftPeach_str_arr_ftDemo = {
+    str_ftDemoResultMotionFilePeach,
+    str_ftDemoIntroMotionFilePeach,
+    str_ftDemoEndingMotionFilePeach,
+    str_ftDemoViWaitMotionFilePeach,
+};
