@@ -314,7 +314,7 @@ lbl_800767F8:
 #pragma pop
 #endif
 
-extern unk_t lbl_804D6560;
+extern bool* lbl_804D6560;
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -2919,6 +2919,11 @@ lbl_80078A10:
 
 extern f32 const lbl_804D8310;
 
+inline Hitbox* ftHitGetPtr(Fighter* fp, u32 i)
+{
+    return &fp->x914[i];
+}
+
 #ifdef MUST_MATCH
 
 #pragma push
@@ -3086,11 +3091,6 @@ lbl_80078C50:
 #pragma pop
 
 #else
-
-inline Hitbox* ftHitGetPtr(Fighter* fp, u32 i)
-{
-    return &fp->x914[i];
-}
 
 inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
 {
