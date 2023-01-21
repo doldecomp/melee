@@ -29,3 +29,29 @@ jtbl_t jtbl_803CC5BC = {
     lbl_80112418, lbl_80112408, lbl_80112418, lbl_80112418, lbl_80112408,
     lbl_80112418, lbl_80112418, lbl_80112408,
 };
+
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112650(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112650(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112650(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112650(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112650(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112660(void);
+/* static */ void lbl_80112650(void);
+
+jtbl_t jtbl_803CC604 = {
+    lbl_80112660, lbl_80112660, lbl_80112650, lbl_80112660, lbl_80112660,
+    lbl_80112650, lbl_80112660, lbl_80112660, lbl_80112650, lbl_80112660,
+    lbl_80112660, lbl_80112650, lbl_80112660, lbl_80112660, lbl_80112650,
+    lbl_80112660, lbl_80112660, lbl_80112650,
+};

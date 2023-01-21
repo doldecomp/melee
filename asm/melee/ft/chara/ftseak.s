@@ -4850,31 +4850,6 @@ lbl_80114788:
 /* 801147B8 00111398  7C 08 03 A6 */	mtlr r0
 /* 801147BC 0011139C  4E 80 00 20 */	blr
 
-.section .data
-    .balign 4
-.global jtbl_803CC604
-jtbl_803CC604:
-    .4byte lbl_80112660
-    .4byte lbl_80112660
-    .4byte lbl_80112650
-    .4byte lbl_80112660
-    .4byte lbl_80112660
-    .4byte lbl_80112650
-    .4byte lbl_80112660
-    .4byte lbl_80112660
-    .4byte lbl_80112650
-    .4byte lbl_80112660
-    .4byte lbl_80112660
-    .4byte lbl_80112650
-    .4byte lbl_80112660
-    .4byte lbl_80112660
-    .4byte lbl_80112650
-    .4byte lbl_80112660
-    .4byte lbl_80112660
-    .4byte lbl_80112650
-    .4byte NULL
-
-
 .section .rodata
     .balign 8
 .global lbl_803B7588
