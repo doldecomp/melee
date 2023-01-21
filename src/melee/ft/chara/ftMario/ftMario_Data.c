@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 #include <melee/ft/chara/ftMario/ftMario_SpecialN.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
@@ -29,4 +30,9 @@ ActionState as_table_mario[] = {
     { 302, 0x00340614, 0x15000000, ftMario_SpecialAirLw_Anim,
       ftMario_SpecialAirLw_IASA, ftMario_SpecialAirLw_Phys,
       ftMario_SpecialAirLw_Coll, func_800761C8 },
+};
+
+ActionState lbl_803C7260[] = {
+    { 0xE, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
+    { 0xF, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };
