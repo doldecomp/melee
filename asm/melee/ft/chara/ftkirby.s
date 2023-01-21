@@ -19,6 +19,7 @@ func_800EE818:
 /* 800EE848 000EB428  7C 04 00 2E */	lwzx r0, r4, r0
 /* 800EE84C 000EB42C  7C 09 03 A6 */	mtctr r0
 /* 800EE850 000EB430  4E 80 04 20 */	bctr
+.global lbl_800EE854
 lbl_800EE854:
 /* 800EE854 000EB434  80 83 22 E8 */	lwz r4, 0x22e8(r3)
 /* 800EE858 000EB438  80 05 01 90 */	lwz r0, 0x190(r5)
@@ -28,6 +29,7 @@ lbl_800EE854:
 /* 800EE868 000EB448  38 A0 00 00 */	li r5, 0
 /* 800EE86C 000EB44C  4B FD 17 65 */	bl func_800BFFD0
 /* 800EE870 000EB450  48 00 00 94 */	b lbl_800EE904
+.global lbl_800EE874
 lbl_800EE874:
 /* 800EE874 000EB454  80 83 22 D4 */	lwz r4, 0x22d4(r3)
 /* 800EE878 000EB458  3C 00 43 30 */	lis r0, 0x4330
@@ -44,6 +46,7 @@ lbl_800EE874:
 /* 800EE8A4 000EB484  38 A0 00 00 */	li r5, 0
 /* 800EE8A8 000EB488  4B FD 17 29 */	bl func_800BFFD0
 /* 800EE8AC 000EB48C  48 00 00 58 */	b lbl_800EE904
+.global lbl_800EE8B0
 lbl_800EE8B0:
 /* 800EE8B0 000EB490  80 83 22 C8 */	lwz r4, 0x22c8(r3)
 /* 800EE8B4 000EB494  3C 00 43 30 */	lis r0, 0x4330
@@ -60,6 +63,7 @@ lbl_800EE8B0:
 /* 800EE8E0 000EB4C0  38 A0 00 00 */	li r5, 0
 /* 800EE8E4 000EB4C4  4B FD 16 ED */	bl func_800BFFD0
 /* 800EE8E8 000EB4C8  48 00 00 1C */	b lbl_800EE904
+.global lbl_800EE8EC
 lbl_800EE8EC:
 /* 800EE8EC 000EB4CC  80 03 22 E0 */	lwz r0, 0x22e0(r3)
 /* 800EE8F0 000EB4D0  2C 00 00 06 */	cmpwi r0, 6
@@ -67,6 +71,7 @@ lbl_800EE8EC:
 /* 800EE8F8 000EB4D8  38 80 00 57 */	li r4, 0x57
 /* 800EE8FC 000EB4DC  38 A0 00 00 */	li r5, 0
 /* 800EE900 000EB4E0  4B FD 16 D1 */	bl func_800BFFD0
+.global lbl_800EE904
 lbl_800EE904:
 /* 800EE904 000EB4E4  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 800EE908 000EB4E8  38 21 00 20 */	addi r1, r1, 0x20
@@ -35530,62 +35535,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global jtbl_803CA0CC
-jtbl_803CA0CC:
-    .4byte lbl_800EE854
-    .4byte lbl_800EE904
-    .4byte lbl_800EE904
-    .4byte lbl_800EE904
-    .4byte lbl_800EE8EC
-    .4byte lbl_800EE904
-    .4byte lbl_800EE904
-    .4byte lbl_800EE904
-    .4byte lbl_800EE904
-    .4byte lbl_800EE904
-    .4byte lbl_800EE874
-    .4byte lbl_800EE904
-    .4byte lbl_800EE904
-    .4byte lbl_800EE8B0
-    .asciz "fighter parts model dobj num over!\n"
-    .balign 4
-    .asciz "ftkirby.c"
-    .balign 4
-    .asciz "fighter dobj num over!\n"
-    .balign 4
-.global jtbl_803CA14C
-jtbl_803CA14C:
-    .4byte lbl_800F1708
-    .4byte lbl_800F1764
-    .4byte lbl_800F18F8
-    .4byte lbl_800F18F8
-    .4byte lbl_800F18F8
-    .4byte lbl_800F186C
-    .4byte lbl_800F17A4
-    .4byte lbl_800F1894
-    .4byte lbl_800F17F8
-    .4byte lbl_800F1744
-    .4byte lbl_800F1730
-    .4byte lbl_800F18F8
-    .4byte lbl_800F1818
-    .4byte lbl_800F1858
-    .4byte lbl_800F18E8
-    .4byte lbl_800F18F8
-    .4byte lbl_800F17E4
-    .4byte lbl_800F171C
-    .4byte lbl_800F18F8
-    .4byte lbl_800F18F8
-    .4byte lbl_800F17C4
-    .4byte lbl_800F18B4
-    .4byte lbl_800F1784
-    .4byte lbl_800F1838
-    .4byte lbl_800F18C8
-    .4byte lbl_800F18F8
-    .4byte lbl_800F18F8
-    .4byte lbl_800F18F8
-    .4byte lbl_800F18F8
-    .4byte lbl_800F18F8
-    .4byte lbl_800F18F8
-    .4byte lbl_800F1880
 .global jtbl_803CA1CC
 jtbl_803CA1CC:
     .4byte lbl_800F1A78

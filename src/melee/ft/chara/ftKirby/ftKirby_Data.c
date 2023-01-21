@@ -472,3 +472,71 @@ ActionState lbl_803CA04C[] = {
     { 16, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
     { 17, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7414, NULL, NULL },
 };
+
+/* static */ void lbl_800EE854(void);
+/* static */ void lbl_800EE904(void);
+/* static */ void lbl_800EE904(void);
+/* static */ void lbl_800EE904(void);
+/* static */ void lbl_800EE8EC(void);
+/* static */ void lbl_800EE904(void);
+/* static */ void lbl_800EE904(void);
+/* static */ void lbl_800EE904(void);
+/* static */ void lbl_800EE904(void);
+/* static */ void lbl_800EE904(void);
+/* static */ void lbl_800EE874(void);
+/* static */ void lbl_800EE904(void);
+/* static */ void lbl_800EE904(void);
+/* static */ void lbl_800EE8B0(void);
+
+jtbl_t jtbl_803CA0CC = {
+    lbl_800EE854, lbl_800EE904, lbl_800EE904, lbl_800EE904, lbl_800EE8EC,
+    lbl_800EE904, lbl_800EE904, lbl_800EE904, lbl_800EE904, lbl_800EE904,
+    lbl_800EE874, lbl_800EE904, lbl_800EE904, lbl_800EE8B0,
+};
+
+char func_800EE818_assert0[] = "fighter parts model dobj num over!\n";
+char func_800EE818_assert1[] = "ftkirby.c";
+char func_800EE818_assert2[] = "fighter dobj num over!\n";
+
+/* static */ void lbl_800F1708(void);
+/* static */ void lbl_800F1764(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F186C(void);
+/* static */ void lbl_800F17A4(void);
+/* static */ void lbl_800F1894(void);
+/* static */ void lbl_800F17F8(void);
+/* static */ void lbl_800F1744(void);
+/* static */ void lbl_800F1730(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F1818(void);
+/* static */ void lbl_800F1858(void);
+/* static */ void lbl_800F18E8(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F17E4(void);
+/* static */ void lbl_800F171C(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F17C4(void);
+/* static */ void lbl_800F18B4(void);
+/* static */ void lbl_800F1784(void);
+/* static */ void lbl_800F1838(void);
+/* static */ void lbl_800F18C8(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F18F8(void);
+/* static */ void lbl_800F1880(void);
+
+jtbl_t jtbl_803CA14C = {
+    lbl_800F1708, lbl_800F1764, lbl_800F18F8, lbl_800F18F8, lbl_800F18F8,
+    lbl_800F186C, lbl_800F17A4, lbl_800F1894, lbl_800F17F8, lbl_800F1744,
+    lbl_800F1730, lbl_800F18F8, lbl_800F1818, lbl_800F1858, lbl_800F18E8,
+    lbl_800F18F8, lbl_800F17E4, lbl_800F171C, lbl_800F18F8, lbl_800F18F8,
+    lbl_800F17C4, lbl_800F18B4, lbl_800F1784, lbl_800F1838, lbl_800F18C8,
+    lbl_800F18F8, lbl_800F18F8, lbl_800F18F8, lbl_800F18F8, lbl_800F18F8,
+    lbl_800F18F8, lbl_800F1880,
+};
