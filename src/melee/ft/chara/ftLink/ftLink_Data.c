@@ -85,3 +85,5 @@ Fighter_CostumeStrings lbl_803C82B0[] = {
     { lbl_803C819C, lbl_803C81A8, lbl_803C81C0 },
     { lbl_803C81E0, lbl_803C81EC, lbl_803C8204 },
 };
+
+int lbl_803C82EC[31] = { 0 };

@@ -3589,44 +3589,6 @@ lbl_800EE514:
 /* 800EE520 000EB100  7C 08 03 A6 */	mtlr r0
 /* 800EE524 000EB104  4E 80 00 20 */	blr
 
-
-.section .data
-    .balign 4
-.global lbl_803C82EC
-lbl_803C82EC:
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-
-
 .section .rodata
     .balign 8
 .global lbl_803B7520
