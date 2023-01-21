@@ -80,3 +80,10 @@ char lbl_803C76AC[] = "ftDemoResultMotionFileCaptain";
 char lbl_803C76CC[] = "ftDemoIntroMotionFileCaptain";
 char lbl_803C76EC[] = "ftDemoEndingMotionFileCaptain";
 char lbl_803C770C[] = "ftDemoViWaitMotionFileCaptain";
+
+char* lbl_803C772C[] = {
+    lbl_803C76AC,
+    lbl_803C76CC,
+    lbl_803C76EC,
+    lbl_803C770C,
+};

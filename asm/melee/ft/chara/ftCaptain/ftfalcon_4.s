@@ -827,12 +827,6 @@ lbl_800E550C:
 
 .section .data
     .balign 4
-.global lbl_803C772C
-lbl_803C772C:
-    .4byte lbl_803C76AC
-    .4byte lbl_803C76CC
-    .4byte lbl_803C76EC
-    .4byte lbl_803C770C
 .global lbl_803C773C
 lbl_803C773C:
     .4byte lbl_803C75B4
