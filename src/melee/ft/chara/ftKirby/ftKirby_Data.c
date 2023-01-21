@@ -919,3 +919,6 @@ struct lbl_803CB4EC_t {
     { 0, 2, 3, 4, 5, 6 },
     { 0.0F, 1.0F, 0.0F },
 };
+
+char lbl_803CB510[] = "Other Dead_Proc Existence";
+char lbl_803CB52C[] = "ftkirbyspecials.c";

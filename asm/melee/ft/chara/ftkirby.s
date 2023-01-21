@@ -35534,14 +35534,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global lbl_803CB510
-lbl_803CB510:
-    .asciz "Other Dead_Proc Existence"
-    .balign 4
-.global lbl_803CB52C
-lbl_803CB52C:
-    .asciz "ftkirbyspecials.c"
-    .balign 4
 .global lbl_803CB540
 lbl_803CB540:
     .4byte NULL
