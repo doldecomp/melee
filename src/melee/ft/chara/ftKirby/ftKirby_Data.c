@@ -449,8 +449,10 @@ HSD_GObjEvent lbl_803C9E54[] = {
     NULL,         lbl_800FA958, NULL,
 };
 
-unk_t lbl_803C9ED8[12] = { 0 };
-unk_t lbl_803C9F08[12] = { 0 };
-unk_t lbl_803C9F38[12] = { 0 };
-unk_t lbl_803C9F68[12] = { 0 };
-unk_t lbl_803C9F98[12] = { 0 };
+static size_t const unk_array_size = 12;
+
+unk_t lbl_803C9ED8[unk_array_size] = { 0 };
+unk_t lbl_803C9F08[unk_array_size] = { 0 };
+unk_t lbl_803C9F38[unk_array_size] = { 0 };
+unk_t lbl_803C9F68[unk_array_size] = { 0 };
+unk_t lbl_803C9F98[unk_array_size] = { 0 };
