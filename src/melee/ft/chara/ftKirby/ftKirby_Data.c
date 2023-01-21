@@ -930,6 +930,15 @@ enum_t lbl_803CB540[] = {
     2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
 };
 
-uint lbl_803CB6C0[] = {
-    0x3F7A6, 0x3F7A9, 0x3F7AC, 0x3F7AF, 0x3F7B2, 0x00000,
+uint lbl_803CB6C0[] = { 0x3F7A6, 0x3F7A9, 0x3F7AC, 0x3F7AF, 0x3F7B2, 0 };
+
+char lbl_803CB6D8[] = "ftToSpecialNFox::Caution!!!\n";
+char lbl_803CB6F8[] = "ftkirbyspecialfox.c\0\0\0\0";
+// u32 pad = 0;
+// .4byte NULL
+int lbl_803CB710[] = {
+    0x3F266666,
+    0x3F333333,
+    0x3F4CCCCD,
+    0x3F800000,
 };

@@ -35534,21 +35534,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global lbl_803CB6D8
-lbl_803CB6D8:
-    .asciz "ftToSpecialNFox::Caution!!!\n"
-    .balign 4
-.global lbl_803CB6F8
-lbl_803CB6F8:
-    .asciz "ftkirbyspecialfox.c"
-    .balign 4
-    .4byte NULL
-.global lbl_803CB710
-lbl_803CB710:
-    .4byte 0x3F266666
-    .4byte 0x3F333333
-    .4byte 0x3F4CCCCD
-    .4byte 0x3F800000
 .global lbl_803CB720
 lbl_803CB720:
     .4byte 0x3F8CCCCD
