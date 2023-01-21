@@ -918,6 +918,5 @@ struct lbl_803CB4EC_t {
     f32 x1C;
     unk_t x20;
 } lbl_803CB4EC = {
-    0,          0x00000002, 0x00000003, 0x00000004, 0x00000005,
-    0x00000006, NULL,       1.0F,       NULL,
+    0, 2, 3, 4, 5, 6, NULL, 1.0F, NULL,
 };
