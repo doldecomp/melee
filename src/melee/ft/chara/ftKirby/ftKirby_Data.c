@@ -937,11 +937,11 @@ char lbl_803CB6F8[] = "ftkirbyspecialfox.c\0\0\0\0";
 
 Vec4 lbl_803CB710 = { 0.65F, 0.7F, 0.8F, 1.0F };
 
-uint lbl_803CB720[] = {
-    0x3F8CCCCD,
-    0x3FACCCCD,
-    0x3FA66666,
-    0x3F99999A,
+f32 lbl_803CB720[] = {
+    1.1F,
+    1.35F,
+    1.3F,
+    1.2F,
 };
 
 char ftKirby_assert_msg_3[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
