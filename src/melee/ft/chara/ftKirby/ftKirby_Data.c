@@ -1,5 +1,5 @@
-#include "melee/ft/forward.h"
 #include <melee/ft/chara/ftKirby/ftkirby.h>
+#include <melee/ft/forward.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/types.h>
@@ -699,3 +699,54 @@ Fighter_CostumeStrings lbl_803CA5B4[] = {
     lbl_803CA408, lbl_803CA424, lbl_803CA448, lbl_803CA454, lbl_803CA470,
     lbl_803CA494, lbl_803CA4A0, lbl_803CA4BC,
 };
+
+char lbl_803CA5FC[] = "PlKbCpMr.dat";
+char lbl_803CA60C[] = "ftDataKirbyCopyMario";
+char lbl_803CA624[] = "PlKbCpFx.dat";
+char lbl_803CA634[] = "ftDataKirbyCopyFox";
+char lbl_803CA648[] = "PlKbCpCa.dat";
+char lbl_803CA658[] = "ftDataKirbyCopyCaptain";
+char lbl_803CA670[] = "PlKbCpDk.dat";
+char lbl_803CA680[] = "ftDataKirbyCopyDonkey";
+char lbl_803CA698[] = "PlKbCpKp.dat";
+char lbl_803CA6A8[] = "ftDataKirbyCopyKoopa";
+char lbl_803CA6C0[] = "PlKbCpLk.dat";
+char lbl_803CA6D0[] = "ftDataKirbyCopyLink";
+char lbl_803CA6E4[] = "PlKbCpSk.dat";
+char lbl_803CA6F4[] = "ftDataKirbyCopySeak";
+char lbl_803CA708[] = "PlKbCpNs.dat";
+char lbl_803CA718[] = "ftDataKirbyCopyNess";
+char lbl_803CA72C[] = "PlKbCpPe.dat";
+char lbl_803CA73C[] = "ftDataKirbyCopyPeach";
+char lbl_803CA754[] = "PlKbCpPp.dat";
+char lbl_803CA764[] = "ftDataKirbyCopyPopo";
+char lbl_803CA778[] = "PlKbCpPk.dat";
+char lbl_803CA788[] = "ftDataKirbyCopyPikachu";
+char lbl_803CA7A0[] = "PlKbCpSs.dat";
+char lbl_803CA7B0[] = "ftDataKirbyCopySamus";
+char lbl_803CA7C8[] = "PlKbCpYs.dat";
+char lbl_803CA7D8[] = "ftDataKirbyCopyYoshi";
+char lbl_803CA7F0[] = "PlKbCpPr.dat";
+char lbl_803CA800[] = "ftDataKirbyCopyPurin";
+char lbl_803CA818[] = "PlKbCpMt.dat";
+char lbl_803CA828[] = "ftDataKirbyCopyMewtwo";
+char lbl_803CA840[] = "PlKbCpLg.dat";
+char lbl_803CA850[] = "ftDataKirbyCopyLuigi";
+char lbl_803CA868[] = "PlKbCpMs.dat";
+char lbl_803CA878[] = "ftDataKirbyCopyMars";
+char lbl_803CA88C[] = "PlKbCpZd.dat";
+char lbl_803CA89C[] = "ftDataKirbyCopyZelda";
+char lbl_803CA8B4[] = "PlKbCpCl.dat";
+char lbl_803CA8C4[] = "ftDataKirbyCopyClink";
+char lbl_803CA8DC[] = "PlKbCpDr.dat";
+char lbl_803CA8EC[] = "ftDataKirbyCopyDrmario";
+char lbl_803CA904[] = "PlKbCpFc.dat";
+char lbl_803CA914[] = "ftDataKirbyCopyFalco";
+char lbl_803CA92C[] = "PlKbCpPc.dat";
+char lbl_803CA93C[] = "ftDataKirbyCopyPichu";
+char lbl_803CA954[] = "PlKbCpGw.dat";
+char lbl_803CA964[] = "ftDataKirbyCopyGamewatch";
+char lbl_803CA980[] = "PlKbCpGn.dat";
+char lbl_803CA990[] = "ftDataKirbyCopyGanon";
+char lbl_803CA9A8[] = "PlKbCpFe.dat";
+char lbl_803CA9B8[] = "ftDataKirbyCopyEmblem";
