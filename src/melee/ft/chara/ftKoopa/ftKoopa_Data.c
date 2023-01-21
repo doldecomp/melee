@@ -80,9 +80,17 @@ Fighter_DemoStrings lbl_803CF25C = {
     lbl_803CF240,
 };
 
-Fighter_CostumeStrings lbl_803CF26C[] = {
-    { lbl_803CF0B8, lbl_803CF0C4, lbl_803CF0DC },
-    { lbl_803CF0FC, lbl_803CF108, lbl_803CF124 },
-    { lbl_803CF148, lbl_803CF154, lbl_803CF170 },
-    { lbl_803CF194, lbl_803CF1A0, lbl_803CF1BC },
+/// @todo #Fighter_CostumeStrings array will not align at the end.
+///       Likely a missing split.
+char* lbl_803CF26C[] = {
+    lbl_803CF0B8, lbl_803CF0C4, lbl_803CF0DC, lbl_803CF0FC, lbl_803CF108,
+    lbl_803CF124, lbl_803CF148, lbl_803CF154, lbl_803CF170, lbl_803CF194,
+    lbl_803CF1A0, lbl_803CF1BC, NULL,
+};
+
+enum_t lbl_803CF2A0[] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3,
+    0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1, 1,
+    2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2,
 };
