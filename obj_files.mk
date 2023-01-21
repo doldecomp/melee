@@ -227,6 +227,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftpurin.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftPurin_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftpurin.s.o\
 
 TEXT_O_FILES +=\
