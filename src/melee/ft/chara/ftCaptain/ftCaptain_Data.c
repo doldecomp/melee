@@ -76,14 +76,10 @@ char lbl_803C765C[] = "PlyCaptain5KGr_Share_joint";
 char lbl_803C7678[] = "PlCaBu.dat";
 char lbl_803C7684[] = "PlyCaptain5KBu_Share_joint";
 char lbl_803C76A0[] = "PlCaAJ.dat";
-char lbl_803C76AC[] = "ftDemoResultMotionFileCaptain";
-char lbl_803C76CC[] = "ftDemoIntroMotionFileCaptain";
-char lbl_803C76EC[] = "ftDemoEndingMotionFileCaptain";
-char lbl_803C770C[] = "ftDemoViWaitMotionFileCaptain";
 
 char* lbl_803C772C[] = {
-    lbl_803C76AC,
-    lbl_803C76CC,
-    lbl_803C76EC,
-    lbl_803C770C,
+    "ftDemoResultMotionFileCaptain",
+    "ftDemoIntroMotionFileCaptain",
+    "ftDemoEndingMotionFileCaptain",
+    "ftDemoViWaitMotionFileCaptain",
 };
