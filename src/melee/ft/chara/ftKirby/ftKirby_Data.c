@@ -892,3 +892,11 @@ Fighter_CostumeStrings lbl_803CB3A0[] = {
     { lbl_803CB358, lbl_803CB368, lbl_803CB380 },
     { lbl_803CB358, lbl_803CB368, lbl_803CB380 },
 };
+
+Fighter_CostumeStrings* lbl_803CB3E8[] = {
+    NULL, NULL,         NULL,         lbl_803CACB0, NULL, NULL, NULL,
+    NULL, NULL,         NULL,         NULL,         NULL, NULL, NULL,
+    NULL, lbl_803CAED0, lbl_803CB0F0, NULL,         NULL, NULL, NULL,
+    NULL, lbl_803CB310, NULL,         lbl_803CB3A0, NULL, NULL, NULL,
+    NULL, NULL,         NULL,         NULL,         NULL,
+};

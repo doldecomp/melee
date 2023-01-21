@@ -35534,41 +35534,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global lbl_803CB3E8
-lbl_803CB3E8:
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte lbl_803CACB0
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte lbl_803CAED0
-    .4byte lbl_803CB0F0
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte lbl_803CB310
-    .4byte NULL
-    .4byte lbl_803CB3A0
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
 .global lbl_803CB46C
 lbl_803CB46C:
     .4byte 0x20212627
