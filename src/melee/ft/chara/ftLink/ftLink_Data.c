@@ -46,3 +46,33 @@ ActionState as_table_link[] = {
     { 313, 0x00C00000, 0x01000000, func_800C4380, func_800C4388, func_800C4438,
       func_80082B78, func_800761C8 },
 };
+
+char lbl_803C80B8[] = "PlLk.dat";
+char lbl_803C80C4[] = "ftDataLink";
+char lbl_803C80D0[] = "PlLkNr.dat";
+char lbl_803C80DC[] = "PlyLink5K_Share_joint";
+char lbl_803C80F4[] = "PlyLink5K_Share_matanim_joint";
+char lbl_803C8114[] = "PlLkRe.dat";
+char lbl_803C8120[] = "PlyLink5KRe_Share_joint";
+char lbl_803C8138[] = "PlyLink5KRe_Share_matanim_joint";
+char lbl_803C8158[] = "PlLkBu.dat";
+char lbl_803C8164[] = "PlyLink5KBu_Share_joint";
+char lbl_803C817C[] = "PlyLink5KBu_Share_matanim_joint";
+char lbl_803C819C[] = "PlLkBk.dat";
+char lbl_803C81A8[] = "PlyLink5KBk_Share_joint";
+char lbl_803C81C0[] = "PlyLink5KBk_Share_matanim_joint";
+char lbl_803C81E0[] = "PlLkWh.dat";
+char lbl_803C81EC[] = "PlyLink5KWh_Share_joint";
+char lbl_803C8204[] = "PlyLink5KWh_Share_matanim_joint";
+char lbl_803C8224[] = "PlLkAJ.dat";
+char lbl_803C8230[] = "ftDemoResultMotionFileLink";
+char lbl_803C824C[] = "ftDemoIntroMotionFileLink";
+char lbl_803C8268[] = "ftDemoEndingMotionFileLink";
+char lbl_803C8284[] = "ftDemoViWaitMotionFileLink";
+
+Fighter_DemoStrings lbl_803C82A0 = {
+    lbl_803C8230,
+    lbl_803C824C,
+    lbl_803C8268,
+    lbl_803C8284,
+};
