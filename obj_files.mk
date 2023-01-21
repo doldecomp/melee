@@ -204,6 +204,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftkoopa.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftKoopa_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftkoopa.s.o\
 
 TEXT_O_FILES +=\
