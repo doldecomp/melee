@@ -302,10 +302,12 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftZakoGirl/ftzakogirl.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftZakoGirl/ftZakoGirl_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftzakogirl.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftGigaKoopa/ftgigakoopa.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGigaKoopa/ftGigaKoopa_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftgigakoopa.s.o\
 
 TEXT_O_FILES +=\
