@@ -465,3 +465,10 @@ ftKirby_UnkArrayThing* lbl_803C9FC8[] = {
     NULL, &lbl_803C9F68, NULL,          &lbl_803C9F98, NULL, NULL, NULL,
     NULL, NULL,          NULL,          NULL,          NULL,
 };
+
+ActionState lbl_803CA04C[] = {
+    { 0xE, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
+    { 0xF, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
+    { 0x10, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
+    { 0x11, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7414, NULL, NULL },
+};

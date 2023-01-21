@@ -35530,40 +35530,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global lbl_803CA04C
-lbl_803CA04C:
-    .4byte 0x0000000E
-    .4byte NULL
-    .4byte 0x01000000
-    .4byte NULL
-    .4byte NULL
-    .4byte func_800C737C
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x0000000F
-    .4byte NULL
-    .4byte 0x01000000
-    .4byte NULL
-    .4byte NULL
-    .4byte func_800C737C
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x00000010
-    .4byte NULL
-    .4byte 0x01000000
-    .4byte NULL
-    .4byte NULL
-    .4byte func_800C737C
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x00000011
-    .4byte NULL
-    .4byte 0x01000000
-    .4byte NULL
-    .4byte NULL
-    .4byte func_800C7414
-    .4byte NULL
-    .4byte NULL
 .global jtbl_803CA0CC
 jtbl_803CA0CC:
     .4byte lbl_800EE854
