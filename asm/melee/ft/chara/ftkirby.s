@@ -35535,12 +35535,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global lbl_803CA55C
-lbl_803CA55C:
-    .4byte lbl_803CA4EC
-    .4byte lbl_803CA508
-    .4byte lbl_803CA524
-    .4byte lbl_803CA540
 .global lbl_803CA56C
 lbl_803CA56C:
     .asciz "ftDemoVi0501MotionFileKirby"

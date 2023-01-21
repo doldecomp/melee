@@ -675,3 +675,10 @@ char lbl_803CA4EC[] = "ftDemoResultMotionFileKirby";
 char lbl_803CA508[] = "ftDemoIntroMotionFileKirby";
 char lbl_803CA524[] = "ftDemoEndingMotionFileKirby";
 char lbl_803CA540[] = "ftDemoViWaitMotionFileKirby";
+
+Fighter_DemoStrings lbl_803CA55C = {
+    lbl_803CA4EC,
+    lbl_803CA508,
+    lbl_803CA524,
+    lbl_803CA540,
+};
