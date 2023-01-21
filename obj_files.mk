@@ -292,6 +292,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftEmblem/ftemblem.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftEmblem/ftRoy_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftemblem.s.o\
 
 TEXT_O_FILES +=\
