@@ -494,9 +494,9 @@ jtbl_t jtbl_803CA0CC = {
     lbl_800EE874, lbl_800EE904, lbl_800EE904, lbl_800EE8B0,
 };
 
-char func_800EE818_assert0[] = "fighter parts model dobj num over!\n";
-char func_800EE818_assert1[] = "ftkirby.c";
-char func_800EE818_assert2[] = "fighter dobj num over!\n";
+char ftKirby_assert_msg_0[] = "fighter parts model dobj num over!\n";
+char ftKirby_assert_msg_1[] = "ftkirby.c";
+char ftKirby_assert_msg_2[] = "fighter dobj num over!\n";
 
 /* static */ void lbl_800F1708(void);
 /* static */ void lbl_800F1764(void);
