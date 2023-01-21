@@ -365,5 +365,9 @@ void func_800C447C(HSD_GObj*);
 void func_800C4380(HSD_GObj*);
 void func_800C4388(HSD_GObj*);
 void func_800C4438(HSD_GObj*);
+void func_800D7590(HSD_GObj*);
+void func_800D7614(HSD_GObj*);
+void func_800D7634(HSD_GObj*);
+void func_800D767C(HSD_GObj*);
 
 #endif
