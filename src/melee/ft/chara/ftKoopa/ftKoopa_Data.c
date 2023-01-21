@@ -51,3 +51,23 @@ ActionState as_table_koopa[] = {
     { 315, 0x00340214, 0x15000000, lbl_801349C4, NULL, lbl_80134A00,
       lbl_80134A20, func_800761C8 },
 };
+
+char lbl_803CF0A0[] = "PlKp.dat";
+char lbl_803CF0AC[] = "ftDataKoopa";
+char lbl_803CF0B8[] = "PlKpNr.dat";
+char lbl_803CF0C4[] = "PlyKoopa5K_Share_joint";
+char lbl_803CF0DC[] = "PlyKoopa5K_Share_matanim_joint";
+char lbl_803CF0FC[] = "PlKpRe.dat";
+char lbl_803CF108[] = "PlyKoopa5KRe_Share_joint";
+char lbl_803CF124[] = "PlyKoopa5KRe_Share_matanim_joint";
+char lbl_803CF148[] = "PlKpBu.dat";
+char lbl_803CF154[] = "PlyKoopa5KBu_Share_joint";
+char lbl_803CF170[] = "PlyKoopa5KBu_Share_matanim_joint";
+char lbl_803CF194[] = "PlKpBk.dat";
+char lbl_803CF1A0[] = "PlyKoopa5KBk_Share_joint";
+char lbl_803CF1BC[] = "PlyKoopa5KBk_Share_matanim_joint";
+char lbl_803CF1E0[] = "PlKpAJ.dat";
+char lbl_803CF1EC[] = "ftDemoResultMotionFileKoopa";
+char lbl_803CF208[] = "ftDemoIntroMotionFileKoopa";
+char lbl_803CF224[] = "ftDemoEndingMotionFileKoopa";
+char lbl_803CF240[] = "ftDemoViWaitMotionFileKoopa";
