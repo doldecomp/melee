@@ -3592,23 +3592,6 @@ lbl_800EE514:
 
 .section .data
     .balign 4
-.global lbl_803C82B0
-lbl_803C82B0:
-    .4byte lbl_803C80D0
-    .4byte lbl_803C80DC
-    .4byte lbl_803C80F4
-    .4byte lbl_803C8114
-    .4byte lbl_803C8120
-    .4byte lbl_803C8138
-    .4byte lbl_803C8158
-    .4byte lbl_803C8164
-    .4byte lbl_803C817C
-    .4byte lbl_803C819C
-    .4byte lbl_803C81A8
-    .4byte lbl_803C81C0
-    .4byte lbl_803C81E0
-    .4byte lbl_803C81EC
-    .4byte lbl_803C8204
 .global lbl_803C82EC
 lbl_803C82EC:
     .4byte NULL

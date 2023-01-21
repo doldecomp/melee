@@ -1,3 +1,4 @@
+#include "melee/ft/forward.h"
 #include <melee/ft/chara/ftLink/ftlink.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
@@ -75,4 +76,12 @@ Fighter_DemoStrings lbl_803C82A0 = {
     lbl_803C824C,
     lbl_803C8268,
     lbl_803C8284,
+};
+
+Fighter_CostumeStrings lbl_803C82B0[] = {
+    { lbl_803C80D0, lbl_803C80DC, lbl_803C80F4 },
+    { lbl_803C8114, lbl_803C8120, lbl_803C8138 },
+    { lbl_803C8158, lbl_803C8164, lbl_803C817C },
+    { lbl_803C819C, lbl_803C81A8, lbl_803C81C0 },
+    { lbl_803C81E0, lbl_803C81EC, lbl_803C8204 },
 };
