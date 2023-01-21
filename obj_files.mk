@@ -155,6 +155,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftNess/ftNess_data.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_AttackS4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess_AttackHi4.c.o\
