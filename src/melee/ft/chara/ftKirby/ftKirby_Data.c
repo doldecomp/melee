@@ -645,8 +645,33 @@ jtbl_t jtbl_803CA294 = {
 /* static */ void lbl_800F1D08(void);
 /* static */ void lbl_800F1D00(void);
 
-jtbl_t jtbl_803CA2CC = {
-    lbl_800F1D08, lbl_800F1D08, lbl_800F1D00, lbl_800F1D08, lbl_800F1D08,
-    lbl_800F1D08, lbl_800F1D08, lbl_800F1D00, lbl_800F1D08, lbl_800F1D08,
-    lbl_800F1D00, lbl_800F1D00, lbl_800F1D08, lbl_800F1D00,
-};
+jtbl_t jtbl_803CA2CC = { lbl_800F1D08, lbl_800F1D08, lbl_800F1D00, lbl_800F1D08,
+                         lbl_800F1D08, lbl_800F1D08, lbl_800F1D08, lbl_800F1D00,
+                         lbl_800F1D08, lbl_800F1D08, lbl_800F1D00, lbl_800F1D00,
+                         lbl_800F1D08, lbl_800F1D00, NULL };
+
+char lbl_803CA308[] = "PlKb.dat";
+char lbl_803CA314[] = "ftDataKirby";
+char lbl_803CA320[] = "PlKbNr.dat";
+char lbl_803CA32C[] = "PlyKirby5K_Share_joint";
+char lbl_803CA344[] = "PlyKirby5K_Share_matanim_joint";
+char lbl_803CA364[] = "PlKbYe.dat";
+char lbl_803CA370[] = "PlyKirby5KYe_Share_joint";
+char lbl_803CA38C[] = "PlyKirby5KYe_Share_matanim_joint";
+char lbl_803CA3B0[] = "PlKbBu.dat";
+char lbl_803CA3BC[] = "PlyKirby5KBu_Share_joint";
+char lbl_803CA3D8[] = "PlyKirby5KBu_Share_matanim_joint";
+char lbl_803CA3FC[] = "PlKbRe.dat";
+char lbl_803CA408[] = "PlyKirby5KRe_Share_joint";
+char lbl_803CA424[] = "PlyKirby5KRe_Share_matanim_joint";
+char lbl_803CA448[] = "PlKbGr.dat";
+char lbl_803CA454[] = "PlyKirby5KGr_Share_joint";
+char lbl_803CA470[] = "PlyKirby5KGr_Share_matanim_joint";
+char lbl_803CA494[] = "PlKbWh.dat";
+char lbl_803CA4A0[] = "PlyKirby5KWh_Share_joint";
+char lbl_803CA4BC[] = "PlyKirby5KWh_Share_matanim_joint";
+char lbl_803CA4E0[] = "PlKbAJ.dat";
+char lbl_803CA4EC[] = "ftDemoResultMotionFileKirby";
+char lbl_803CA508[] = "ftDemoIntroMotionFileKirby";
+char lbl_803CA524[] = "ftDemoEndingMotionFileKirby";
+char lbl_803CA540[] = "ftDemoViWaitMotionFileKirby";
