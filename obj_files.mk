@@ -167,6 +167,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftpeach.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPeach/ftPeach_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftpeach.s.o\
 
 TEXT_O_FILES +=\
