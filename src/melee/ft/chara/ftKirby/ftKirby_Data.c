@@ -934,6 +934,14 @@ uint lbl_803CB6C0[] = { 0x3F7A6, 0x3F7A9, 0x3F7AC, 0x3F7AF, 0x3F7B2, 0 };
 
 char lbl_803CB6D8[] = "ftToSpecialNFox::Caution!!!\n";
 char lbl_803CB6F8[] = "ftkirbyspecialfox.c\0\0\0\0";
-// u32 pad = 0;
-// .4byte NULL
-f32 lbl_803CB710[] = { 0.65F, 0.7F, 0.8F, 1.0F };
+
+Vec4 lbl_803CB710 = { 0.65F, 0.7F, 0.8F, 1.0F };
+
+uint lbl_803CB720[] = {
+    0x3F8CCCCD,
+    0x3FACCCCD,
+    0x3FA66666,
+    0x3F99999A,
+};
+
+char ftKirby_assert_msg_3[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
