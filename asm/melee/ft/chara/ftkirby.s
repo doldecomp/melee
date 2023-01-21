@@ -35534,26 +35534,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global lbl_803CB0F0
-lbl_803CB0F0:
-    .4byte lbl_803CAF18
-    .4byte lbl_803CAF28
-    .4byte lbl_803CAF40
-    .4byte lbl_803CAF60
-    .4byte lbl_803CAF70
-    .4byte lbl_803CAF8C
-    .4byte lbl_803CAFB0
-    .4byte lbl_803CAFC0
-    .4byte lbl_803CAFDC
-    .4byte lbl_803CB000
-    .4byte lbl_803CB010
-    .4byte lbl_803CB02C
-    .4byte lbl_803CB050
-    .4byte lbl_803CB060
-    .4byte lbl_803CB07C
-    .4byte lbl_803CB0A0
-    .4byte lbl_803CB0B0
-    .4byte lbl_803CB0CC
 .global lbl_803CB138
 lbl_803CB138:
     .asciz "PlKbNrCpFc.dat"

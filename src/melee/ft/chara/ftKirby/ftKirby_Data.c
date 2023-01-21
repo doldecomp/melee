@@ -842,3 +842,12 @@ char lbl_803CB07C[] = "PlyKirbyMtGr_Share_matanim_joint";
 char lbl_803CB0A0[] = "PlKbWhCpMt.dat";
 char lbl_803CB0B0[] = "PlyKirbyMtWh_Share_joint";
 char lbl_803CB0CC[] = "PlyKirbyMtWh_Share_matanim_joint";
+
+Fighter_CostumeStrings lbl_803CB0F0[] = {
+    { lbl_803CAF18, lbl_803CAF28, lbl_803CAF40 },
+    { lbl_803CAF60, lbl_803CAF70, lbl_803CAF8C },
+    { lbl_803CAFB0, lbl_803CAFC0, lbl_803CAFDC },
+    { lbl_803CB000, lbl_803CB010, lbl_803CB02C },
+    { lbl_803CB050, lbl_803CB060, lbl_803CB07C },
+    { lbl_803CB0A0, lbl_803CB0B0, lbl_803CB0CC },
+};
