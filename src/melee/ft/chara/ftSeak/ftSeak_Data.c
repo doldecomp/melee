@@ -1,3 +1,4 @@
+#include "melee/ft/forward.h"
 #include <melee/ft/chara/ftSeak/ftseak.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/types.h>
@@ -75,3 +76,10 @@ char lbl_803CC4D8[] = "ftDemoResultMotionFileSeak";
 char lbl_803CC4F4[] = "ftDemoIntroMotionFileSeak";
 char lbl_803CC510[] = "ftDemoEndingMotionFileSeak";
 char lbl_803CC52C[] = "ftDemoViWaitMotionFileSeak";
+
+Fighter_DemoStrings lbl_803CC548 = {
+    lbl_803CC4D8,
+    lbl_803CC4F4,
+    lbl_803CC510,
+    lbl_803CC52C,
+};
