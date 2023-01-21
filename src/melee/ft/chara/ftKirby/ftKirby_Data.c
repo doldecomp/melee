@@ -767,3 +767,22 @@ Fighter_CostumeStrings lbl_803CA9D0[] = {
     NULL,         NULL,         NULL,         NULL,         NULL,
     NULL,
 };
+
+char lbl_803CAAD8[] = "PlKbNrCpDk.dat";
+char lbl_803CAAE8[] = "PlyKirbyDk_Share_joint";
+char lbl_803CAB00[] = "PlyKirbyDk_Share_matanim_joint";
+char lbl_803CAB20[] = "PlKbYeCpDk.dat";
+char lbl_803CAB30[] = "PlyKirbyDkYe_Share_joint";
+char lbl_803CAB4C[] = "PlyKirbyDkYe_Share_matanim_joint";
+char lbl_803CAB70[] = "PlKbBuCpDk.dat";
+char lbl_803CAB80[] = "PlyKirbyDkBu_Share_joint";
+char lbl_803CAB9C[] = "PlyKirbyDkBu_Share_matanim_joint";
+char lbl_803CABC0[] = "PlKbReCpDk.dat";
+char lbl_803CABD0[] = "PlyKirbyDkRe_Share_joint";
+char lbl_803CABEC[] = "PlyKirbyDkRe_Share_matanim_joint";
+char lbl_803CAC10[] = "PlKbGrCpDk.dat";
+char lbl_803CAC20[] = "PlyKirbyDkGr_Share_joint";
+char lbl_803CAC3C[] = "PlyKirbyDkGr_Share_matanim_joint";
+char lbl_803CAC60[] = "PlKbWhCpDk.dat";
+char lbl_803CAC70[] = "PlyKirbyDkWh_Share_joint";
+char lbl_803CAC8C[] = "PlyKirbyDkWh_Share_matanim_joint";
