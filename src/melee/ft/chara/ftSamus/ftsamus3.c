@@ -90,9 +90,7 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj)
         x2230 = fp->sa.samus.x2230;
         func_802B56E4(fp->sa.samus.x222C, &vec1, var_f0, x2230,
                       samus_attr->x18);
-        if ((fp->x10_action_state_index == 0x15C) ||
-            (fp->xE0_ground_or_air == GA_Air))
-        {
+        if ((fp->action_id == 0x15C) || (fp->xE0_ground_or_air == GA_Air)) {
             ftSamus_801293BC_inner(fighter_gobj);
         }
         fp->sa.samus.x2230 = 0U;
@@ -410,9 +408,7 @@ void ftSamus_8012A074(HSD_GObj* fighter_gobj)
         func_8000B1CC(fp->x5E8_fighterBones[56].x0_jobj, NULL, &position);
         position.x += (samus_attr->x34 * fp->facing_dir);
 
-        if ((fp->x10_action_state_index == 0x15D) ||
-            (fp->x10_action_state_index == 0x15F))
-        {
+        if ((fp->action_id == 0x15D) || (fp->action_id == 0x15F)) {
             func_802B62D0(fighter_gobj, &position, 0, fp->facing_dir);
         } else {
             func_802B62D0(fighter_gobj, &position, 1, fp->facing_dir);

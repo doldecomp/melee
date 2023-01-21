@@ -426,7 +426,7 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj)
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         fp->nessVars[0].AttackHi4.isPosUpdateMod = 0;
     }
-    ASID = fp->x10_action_state_index;
+    ASID = fp->action_id;
     if ((ASID >= AS_NESS_ATTACKHI4) && (ASID <= AS_NESS_ATTACKHI4_RELEASE)) {
         yoyoSpawnFrame = 2;
         yoyoDespawnFrame = 49;
@@ -453,7 +453,7 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj)
             fp->sa.ness.x223C = 0.0f;
             func_80088510(fp, 0x334B0, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
-        ASID = fp->x10_action_state_index;
+        ASID = fp->action_id;
         if ((ASID >= AS_NESS_ATTACKHI4) && (ASID <= AS_NESS_ATTACKHI4_RELEASE))
         {
             yoyoRotFrame = yoyo_attr->x40_UPSMASH_YOYO_ROT_FRAME;
@@ -466,7 +466,7 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj)
         if (yoyoSmashFrameCurr2 == yoyoRotFrame) {
             sp14 = YoyoThinkPos;
             func_802C0010(yoyo_GObj, &sp14);
-            ASID = fp->x10_action_state_index;
+            ASID = fp->action_id;
             if ((ASID >= AS_NESS_ATTACKHI4) &&
                 (ASID <= AS_NESS_ATTACKHI4_RELEASE))
             {
@@ -529,8 +529,8 @@ void ftNess_YoyoCreateItem(HSD_GObj* fighter_gobj)
 
     fp = fighter_gobj->user_data;
     func_8000B1CC(fp->x5E8_fighterBones[0x2A].x0_jobj, NULL, &sp10);
-    fp->sa.ness.x222C_yoyoGObj = func_802BE9D8(
-        fp->facing_dir, fighter_gobj, &sp10, fp->x10_action_state_index);
+    fp->sa.ness.x222C_yoyoGObj =
+        func_802BE9D8(fp->facing_dir, fighter_gobj, &sp10, fp->action_id);
     fp->x1984_heldItemSpec = fp->sa.ness.x222C_yoyoGObj;
     if (fp->sa.ness.x222C_yoyoGObj != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {

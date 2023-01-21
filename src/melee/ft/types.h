@@ -1018,7 +1018,7 @@ struct S_TEMP1 {
 };
 
 struct ActionState {
-    enum_t action_id;
+    enum_t anim_id;
 
     s32 x4_flags;
 
@@ -1304,8 +1304,8 @@ struct Fighter {
     /* 0x4 */ FighterKind x4_fighterKind;
     /* 0x8 */ s32 x8_spawnNum;
     /* 0xC */ u8 xC_playerID;
-    /* 0x10 */ s32 x10_action_state_index;
-    /* 0x14 */ s32 x14_action_id;
+    /* 0x10 */ enum_t action_id;
+    /* 0x14 */ enum_t anim_id;
     /* 0x18 */ s32 x18;
     /* 0x1C */ ActionState* x1C_actionStateList;
     /* 0x20 */ ActionState* x20_actionStateList;

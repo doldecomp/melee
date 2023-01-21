@@ -949,7 +949,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
     u8* unk_byte_ptr;
     bool animflags_bool;
 
-    fp->x10_action_state_index = new_action_state_index;
+    fp->action_id = new_action_state_index;
     fp->x30_facingDirectionRepeated = fp->facing_dir;
 
     HSD_JObjSetTranslate(jobj, &fp->xB0_pos);
@@ -1236,7 +1236,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
             func_80037C60(fighter_gobj, volatile_integer);
         }
 
-        fp->x14_action_id = new_action_state->action_id;
+        fp->anim_id = new_action_state->anim_id;
         fp->x89C_frameSpeedMul = arg9;
         fp->x8A0_unk = arg9;
 
@@ -1251,7 +1251,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
             animflags_bool = false;
         }
 
-        if (fp->x14_action_id != -1) {
+        if (fp->anim_id != -1) {
             Vec3 translation;
             Quaternion quat;
 
@@ -1266,21 +1266,21 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
 
             if (otherObj != NULL) {
                 unk_struct_x18 =
-                    &((Fighter*) otherObj->user_data)->x24[fp->x14_action_id];
-                unk_byte_ptr = &((Fighter*) otherObj->user_data)
-                                    ->x28[fp->x14_action_id << 1];
+                    &((Fighter*) otherObj->user_data)->x24[fp->anim_id];
+                unk_byte_ptr =
+                    &((Fighter*) otherObj->user_data)->x28[fp->anim_id << 1];
             } else {
-                unk_struct_x18 = &fp->x24[fp->x14_action_id];
-                unk_byte_ptr = &fp->x28[fp->x14_action_id << 1];
+                unk_struct_x18 = &fp->x24[fp->anim_id];
+                unk_byte_ptr = &fp->x28[fp->anim_id << 1];
             }
             fp->x594_s32 = unk_struct_x18->x10_animCurrFlags;
             func_8009E7B4(fp, unk_byte_ptr);
             if ((arg2 & FIGHTER_ANIM_NOUPDATE) == 0) {
                 if (otherObj != 0U) {
-                    func_80085CD8(fp, getFighter(otherObj), fp->x14_action_id);
+                    func_80085CD8(fp, getFighter(otherObj), fp->anim_id);
                     func_8007B8CC(fp, otherObj);
                 } else {
-                    func_80085CD8(fp, fp, fp->x14_action_id);
+                    func_80085CD8(fp, fp, fp->anim_id);
                 }
                 fp->x3EC = unk_struct_x18->xC;
                 fp->x3F0 = 0;
@@ -1367,11 +1367,11 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
                     func_80073240(fighter_gobj);
                 }
             } else {
-                fp->x14_action_id = -1;
+                fp->anim_id = -1;
             }
         }
 
-        if (fp->x14_action_id == -1) {
+        if (fp->anim_id == -1) {
             fp->x594_s32 = 0;
             func_80070758(jobj);
             func_80070758(fp->x8AC_animSkeleton);
@@ -2701,8 +2701,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
                    func_8008E984(fp)));
     vec = vec3_803B7494;
 
-    if (fp->x10_action_state_index != 0x145 &&
-        (unsigned) fp->x10_action_state_index - 0x122 > 1 &&
+    if (fp->action_id != 0x145 && (unsigned) fp->action_id - 0x122 > 1 &&
         fp->dmg.x1860_dealt != 0xAU && !fp->x2226_flag.bits.b2)
     {
         if ( ///// giant if condition
@@ -2820,7 +2819,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     bool bool1 = 0;
-    s32 action_state_index = fp->x10_action_state_index;
+    s32 action_state_index = fp->action_id;
     bool bool2 = 0;
     bool bool3 = 0;
     bool bool4 = 0;

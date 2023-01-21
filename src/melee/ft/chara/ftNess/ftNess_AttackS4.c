@@ -51,7 +51,7 @@ bool ftNess_CheckNessBatRemove(
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if (fp->x10_action_state_index != AS_NESS_ATTACKS4) {
+    if (fp->action_id != AS_NESS_ATTACKS4) {
         return true;
     }
 

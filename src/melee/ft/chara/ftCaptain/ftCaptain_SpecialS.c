@@ -166,7 +166,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
         detectGObj = fp->x20AC;
         entityClass = detectGObj->classifier;
         if (entityClass == HSD_GOBJ_CLASS_FIGHTER) {
-            ASID = fp->x10_action_state_index;
+            ASID = fp->action_id;
             switch (ASID) {
             case AS_CAPTAIN_SPECIALS_START:
                 captainAttrs = getFtSpecialAttrsD(fp);
@@ -191,7 +191,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
             }
         } else if (entityClass == HSD_GOBJ_CLASS_ITEM) {
             if (itGetKind(detectGObj) < It_Kind_BombHei) {
-                ASID = fp->x10_action_state_index;
+                ASID = fp->action_id;
                 switch (ASID) {
                 case AS_CAPTAIN_SPECIALS_START:
                     ftCaptain_SpecialS_Switch1(fighter_gobj);
@@ -207,7 +207,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
                          (itGetKind(detectGObj) < It_Kind_Arwing_Laser)) ||
                         (itGetKind(detectGObj) == Pokemon_Random)))
             {
-                switch (ASID = fp->x10_action_state_index) {
+                switch (ASID = fp->action_id) {
                 case AS_CAPTAIN_SPECIALS_START:
                     ftCaptain_SpecialS_Switch0(fighter_gobj);
                     return;

@@ -327,7 +327,7 @@ s32 ftZelda_8013B540(HSD_GObj* fighter_gobj)
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    actionStateIndex = fp->x10_action_state_index;
+    actionStateIndex = fp->action_id;
 
     if (((actionStateIndex == 0x158) || (actionStateIndex == 0x15B)) &&
         (fp->sa.zelda.x222C != 0U))
@@ -348,7 +348,7 @@ s32 ftZelda_8013B574(HSD_GObj* fighter_gobj)
     fp = fighter_gobj->user_data;
 
     if (fp->sa.zelda.x222C != 0) {
-        switch (fp->x10_action_state_index) {
+        switch (fp->action_id) {
         case 0x15C:
         case 0x159:
             if (fp->x2204_ftcmd_var1 == 1) {

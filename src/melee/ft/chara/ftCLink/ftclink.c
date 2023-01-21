@@ -145,7 +145,7 @@ bool func_8014920C(HSD_GObj* gobj)
     if (fp == NULL) {
         return true;
     }
-    temp_r0 = fp->x10_action_state_index;
+    temp_r0 = fp->action_id;
     if (temp_r0 != 0x156 && temp_r0 != 0x157) {
         return true;
     }

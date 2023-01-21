@@ -91,7 +91,7 @@ bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    s32 asid = fp->x10_action_state_index;
+    s32 asid = fp->action_id;
 
     if ((asid >= AS_MARIO_SPECIALS) && (asid <= AS_MARIO_SPECIALAIRS))
         return false;

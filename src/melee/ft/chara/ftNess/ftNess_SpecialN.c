@@ -20,7 +20,7 @@ bool ftNess_CheckSpecialNHold(
         fp = fighter_gobj->user_data;
         if (fp != NULL) {
             if (fp->sa.ness.x2240_flashGObj != NULL) {
-                ASID = fp->x10_action_state_index;
+                ASID = fp->action_id;
                 if (ASID == AS_NESS_SPECIALN_HOLD ||
                     ASID == AS_NESS_SPECIALAIRN_HOLD)
                 {
@@ -231,7 +231,7 @@ void ftNess_SpecialNHold_Anim(
                 fighter_gobj, AS_NESS_SPECIALN_END, 0, NULL, 0.0f, 1.0f, 0.0f);
             return;
         }
-        if ((s32) fp->x10_action_state_index != AS_NESS_SPECIALN_HOLD_RELEASE) {
+        if ((s32) fp->action_id != AS_NESS_SPECIALN_HOLD_RELEASE) {
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_NESS_SPECIALN_HOLD_RELEASE, 0, NULL,
                 fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -242,7 +242,7 @@ void ftNess_SpecialNHold_Anim(
             return;
         }
         if ((func_802AA7F0(fp->sa.ness.x2240_flashGObj) == true) &&
-            ((s32) fp->x10_action_state_index != AS_NESS_SPECIALN_HOLD_RELEASE))
+            ((s32) fp->action_id != AS_NESS_SPECIALN_HOLD_RELEASE))
         {
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_NESS_SPECIALN_HOLD_RELEASE, 0, NULL,
@@ -347,9 +347,7 @@ void ftNess_SpecialAirNHold_Anim(
                                                0.0f, 1.0f, 0.0f);
             return;
         }
-        if ((s32) fp->x10_action_state_index !=
-            AS_NESS_SPECIALAIRN_HOLD_RELEASE)
-        {
+        if ((s32) fp->action_id != AS_NESS_SPECIALAIRN_HOLD_RELEASE) {
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_NESS_SPECIALAIRN_HOLD_RELEASE, 0, NULL,
                 fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -360,8 +358,7 @@ void ftNess_SpecialAirNHold_Anim(
             return;
         }
         if ((func_802AA7F0(fp->sa.ness.x2240_flashGObj) == true) &&
-            ((s32) fp->x10_action_state_index !=
-             AS_NESS_SPECIALAIRN_HOLD_RELEASE))
+            ((s32) fp->action_id != AS_NESS_SPECIALAIRN_HOLD_RELEASE))
         {
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_NESS_SPECIALAIRN_HOLD_RELEASE, 0, NULL,

@@ -96,7 +96,7 @@ void ftWalkCommon_800DFDDC(HSD_GObj* fighter_gobj)
         anim_rate = 0.0f;
     } else {
         velocity_f2 = fabs_inline(velocity_f2);
-        switch (fp->x10_action_state_index - fp->x2344_stateVar2) {
+        switch (fp->action_id - fp->x2344_stateVar2) {
         case 0:
             anim_rate = velocity_f2 / fp->x234C_pos.z;
             break;
@@ -121,7 +121,7 @@ void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
 
     action_state_base = fp->x2344_stateVar2_s32;
     action_state_sum = action_state_base + walk_action_type;
-    if (action_state_sum != fp->x10_action_state_index) {
+    if (action_state_sum != fp->action_id) {
         f32 float_result;
         f32 var_f31;
         f32 init_animFrame;

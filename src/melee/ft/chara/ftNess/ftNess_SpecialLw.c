@@ -944,7 +944,7 @@ void ftNess_AbsorbThink_DecideAction(
     func_80040B8C(temp_r31->xC_playerID, temp_r31->x221F_flag.bits.b4,
                   (s32) temp_f31);
     temp_r31->facing_dir = (f32) temp_r31->AbsorbAttr.x1A40_absorbHitDirection;
-    temp_r0 = temp_r31->x10_action_state_index;
+    temp_r0 = temp_r31->action_id;
 
     if (((temp_r0 != AS_NESS_SPECIALLW_HIT) &&
          (temp_r0 != AS_NESS_SPECIALAIRLW_HIT)) ||

@@ -37,7 +37,7 @@ bool ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj != NULL) {
         Fighter* fp = getFighter(fighter_gobj);
-        s32 ASID = fp->x10_action_state_index;
+        s32 ASID = fp->action_id;
 
         switch (ASID) {
         case AS_MEWTWO_SPECIALN_START:
@@ -68,7 +68,7 @@ bool ftMewtwo_SpecialN_CheckShadowBallCancel(HSD_GObj* fighter_gobj)
     s32 ASID;
 
     if (fighter_gobj != NULL) {
-        ASID = getFighter(fighter_gobj)->x10_action_state_index;
+        ASID = getFighter(fighter_gobj)->action_id;
         switch (ASID) {
         case AS_MEWTWO_SPECIALN_START:
         case AS_MEWTWO_SPECIALN_LOOP:
@@ -199,14 +199,14 @@ void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = getFighter(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
-    if (((s32) fp->x10_action_state_index == AS_MEWTWO_SPECIALAIRN_END) ||
+    if (((s32) fp->action_id == AS_MEWTWO_SPECIALAIRN_END) ||
         ((s32) fp->xE0_ground_or_air == GA_Air))
     {
         fp->x80_self_vel.x =
             fp->facing_dir * (mewtwoAttrs->x8_MEWTWO_SHADOWBALL_AIR_RECOIL_X *
                               (f32) fp->sa.mewtwo.x2234_shadowBallCharge);
     }
-    if (((s32) fp->x10_action_state_index == AS_MEWTWO_SPECIALN_END) ||
+    if (((s32) fp->action_id == AS_MEWTWO_SPECIALN_END) ||
         ((s32) fp->xE0_ground_or_air == GA_Ground))
     {
         fp->xEC_ground_vel =

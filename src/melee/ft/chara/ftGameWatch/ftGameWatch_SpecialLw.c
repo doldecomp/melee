@@ -85,7 +85,7 @@ void ftGameWatch_ItemPanicExitHitlag(HSD_GObj* fighter_gobj)
 bool ftGameWatch_ItemCheckPanicRemove(HSD_GObj* fighter_gobj)
 {
     /// @todo @c enum
-    enum_t asid = ((Fighter*) fighter_gobj->user_data)->x10_action_state_index;
+    enum_t asid = ((Fighter*) fighter_gobj->user_data)->action_id;
 
     if ((asid >= AS_GAMEWATCH_SPECIALLW_SHOOT) &&
         (asid <= AS_GAMEWATCH_SPECIALAIRLW_SHOOT))

@@ -260,7 +260,7 @@ s32 ftSamus_80129158(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj) {
         Fighter* fp = getFighter(fighter_gobj);
-        s32 action_state_index = fp->x10_action_state_index;
+        s32 action_state_index = fp->action_id;
         switch (action_state_index) {
         case 0x157:
         case 0x158:
@@ -283,7 +283,7 @@ s32 ftSamus_801291A8(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj) {
         Fighter* fp = getFighter(fighter_gobj);
-        s32 action_state_index = fp->x10_action_state_index;
+        s32 action_state_index = fp->action_id;
 
         switch (action_state_index) {
         case 0x157:

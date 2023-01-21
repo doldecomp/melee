@@ -174,7 +174,7 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim,
     {
         unk_floatvar *= p_ftCommonData->x128;
     }
-    if (fp->x10_action_state_index == ASID_DAMAGEICE) {
+    if (fp->action_id == ASID_DAMAGEICE) {
         unk_floatvar *= p_ftCommonData->x714;
     }
     return unk_floatvar * fp->dmg.x182c_behavior;
