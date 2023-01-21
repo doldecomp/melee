@@ -411,3 +411,20 @@ ActionState as_table_kirby[] = {
     { 478, 0x0034042E, 0x2F000000, func_800FAC70, func_800FAF70, func_800FB014,
       func_800FB304, func_800761C8 },
 };
+
+HSD_GObjEvent lbl_803C9CC8[] = {
+    func_800EFA40, lbl_800EFAF0, lbl_800EFB4C, lbl_800EFBFC, lbl_800EFC58,
+    lbl_800EFD08,  lbl_800F0FC0, lbl_800F10A4, NULL,         NULL,
+    lbl_800EFD64,  lbl_800EFE1C, lbl_800EFE80, lbl_800EFF38, lbl_800EFF9C,
+    lbl_800F0054,  lbl_800F00B8, lbl_800F0168, lbl_800F01C4, lbl_800F0274,
+    lbl_800F02D0,  lbl_800F0380, NULL,         NULL,         lbl_800F03DC,
+    lbl_800F0494,  lbl_800F04F8, lbl_800F05A8, lbl_800F0604, lbl_800F06B4,
+    lbl_800F10D4,  lbl_800F11AC, lbl_800F11F0, lbl_800F12C8, lbl_800F0710,
+    lbl_800F07C0,  lbl_800F081C, lbl_800F08D4, lbl_800F0938, lbl_800F09F0,
+    lbl_800F0A54,  lbl_800F0B0C, lbl_800F0B70, lbl_800F0C20, lbl_800F130C,
+    lbl_800F13F0,  lbl_800F0C7C, lbl_800F0D34, lbl_800F14B4, lbl_800F15D8,
+    lbl_800F0D98,  lbl_800F0E48, lbl_800F0EA4, lbl_800F0F5C, NULL,
+    NULL,          NULL,         NULL,         NULL,         NULL,
+    NULL,          NULL,         lbl_800EFD64, lbl_800EFE1C, NULL,
+    NULL,
+};
