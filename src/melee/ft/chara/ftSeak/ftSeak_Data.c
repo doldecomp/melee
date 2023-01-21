@@ -91,3 +91,5 @@ Fighter_CostumeStrings lbl_803CC558[] = {
     { lbl_803CC444, lbl_803CC450, lbl_803CC468 },
     { lbl_803CC488, lbl_803CC494, lbl_803CC4AC },
 };
+
+Vec3 const lbl_803B7588 = { 1.8, 0, 0 };

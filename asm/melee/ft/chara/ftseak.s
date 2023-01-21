@@ -4850,15 +4850,6 @@ lbl_80114788:
 /* 801147B8 00111398  7C 08 03 A6 */	mtlr r0
 /* 801147BC 0011139C  4E 80 00 20 */	blr
 
-.section .rodata
-    .balign 8
-.global lbl_803B7588
-lbl_803B7588:
-    .float 1.8
-    .float 0
-    .float 0
-
-
 .section .sdata2
 .global lbl_804D95F8
 lbl_804D95F8:
