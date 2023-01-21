@@ -107,3 +107,23 @@ ActionState as_table_ness[] = {
       ftNess_SpecialAirLwTurn_IASA, ftNess_SpecialAirLwTurn_Phys,
       ftNess_SpecialAirLwTurn_Coll, func_800761C8 },
 };
+
+char lbl_803CCAD0[] = "PlNs.dat";
+char lbl_803CCADC[] = "ftDataNess";
+char lbl_803CCAE8[] = "PlNsNr.dat";
+char lbl_803CCAF4[] = "PlyNess5K_Share_joint";
+char lbl_803CCB0C[] = "PlyNess5K_Share_matanim_joint";
+char lbl_803CCB2C[] = "PlNsYe.dat";
+char lbl_803CCB38[] = "PlyNess5KYe_Share_joint";
+char lbl_803CCB50[] = "PlyNess5KYe_Share_matanim_joint";
+char lbl_803CCB70[] = "PlNsBu.dat";
+char lbl_803CCB7C[] = "PlyNess5KBu_Share_joint";
+char lbl_803CCB94[] = "PlyNess5KBu_Share_matanim_joint";
+char lbl_803CCBB4[] = "PlNsGr.dat";
+char lbl_803CCBC0[] = "PlyNess5KGr_Share_joint";
+char lbl_803CCBD8[] = "PlyNess5KGr_Share_matanim_joint";
+char lbl_803CCBF8[] = "PlNsAJ.dat";
+char lbl_803CCC04[] = "ftDemoResultMotionFileNess";
+char lbl_803CCC20[] = "ftDemoIntroMotionFileNess";
+char lbl_803CCC3C[] = "ftDemoEndingMotionFileNess";
+char lbl_803CCC58[] = "ftDemoViWaitMotionFileNess";
