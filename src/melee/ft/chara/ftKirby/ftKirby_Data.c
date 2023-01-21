@@ -948,3 +948,28 @@ Vec3 lbl_803CB758[] = {
 f32 lbl_803CB770[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,
 };
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106464(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106464(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106464(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106464(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106464(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106474(void);
+/* static */ void lbl_80106464(void);
+
+jtbl_t jtbl_803CB794 = {
+    lbl_80106474, lbl_80106474, lbl_80106464, lbl_80106474, lbl_80106474,
+    lbl_80106464, lbl_80106474, lbl_80106474, lbl_80106464, lbl_80106474,
+    lbl_80106474, lbl_80106464, lbl_80106474, lbl_80106474, lbl_80106464,
+    lbl_80106474, lbl_80106474, lbl_80106464,
+};

@@ -35534,26 +35534,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global jtbl_803CB794
-jtbl_803CB794:
-    .4byte lbl_80106474
-    .4byte lbl_80106474
-    .4byte lbl_80106464
-    .4byte lbl_80106474
-    .4byte lbl_80106474
-    .4byte lbl_80106464
-    .4byte lbl_80106474
-    .4byte lbl_80106474
-    .4byte lbl_80106464
-    .4byte lbl_80106474
-    .4byte lbl_80106474
-    .4byte lbl_80106464
-    .4byte lbl_80106474
-    .4byte lbl_80106474
-    .4byte lbl_80106464
-    .4byte lbl_80106474
-    .4byte lbl_80106474
-    .4byte lbl_80106464
 .global jtbl_803CB7DC
 jtbl_803CB7DC:
     .4byte lbl_801066C4
