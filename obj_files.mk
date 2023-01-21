@@ -131,6 +131,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftlink.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftLink/ftLink_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftlink.s.o\
 
 TEXT_O_FILES +=\
