@@ -450,3 +450,7 @@ HSD_GObjEvent lbl_803C9E54[] = {
 };
 
 unk_t lbl_803C9ED8[12] = { 0 };
+unk_t lbl_803C9F08[12] = { 0 };
+unk_t lbl_803C9F38[12] = { 0 };
+unk_t lbl_803C9F68[12] = { 0 };
+unk_t lbl_803C9F98[12] = { 0 };
