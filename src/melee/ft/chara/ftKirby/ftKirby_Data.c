@@ -936,12 +936,6 @@ char lbl_803CB6D8[] = "ftToSpecialNFox::Caution!!!\n";
 char lbl_803CB6F8[] = "ftkirbyspecialfox.c\0\0\0\0";
 
 Vec4 lbl_803CB710 = { 0.65F, 0.7F, 0.8F, 1.0F };
-
-f32 lbl_803CB720[] = {
-    1.1F,
-    1.35F,
-    1.3F,
-    1.2F,
-};
+Vec4 lbl_803CB720 = { 1.1F, 1.35F, 1.3F, 1.2F };
 
 char ftKirby_assert_msg_3[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
