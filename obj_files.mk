@@ -115,6 +115,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_SpecialS.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_3.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_4.s.o\
 
 TEXT_O_FILES +=\
