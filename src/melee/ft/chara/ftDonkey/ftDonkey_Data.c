@@ -12,6 +12,7 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialS.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_walk.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/forward.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 
@@ -132,3 +133,10 @@ char lbl_803CBF94[] = "ftDemoResultMotionFileDonkey";
 char lbl_803CBFB4[] = "ftDemoIntroMotionFileDonkey";
 char lbl_803CBFD0[] = "ftDemoEndingMotionFileDonkey";
 char lbl_803CBFF0[] = "ftDemoViWaitMotionFileDonkey";
+
+Fighter_DemoStrings lbl_803CC010 = {
+    lbl_803CBF94,
+    lbl_803CBFB4,
+    lbl_803CBFD0,
+    lbl_803CBFF0,
+};
