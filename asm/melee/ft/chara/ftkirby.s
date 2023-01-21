@@ -35532,20 +35532,6 @@ func_8010D6D0:
 /* 8010D738 0010A318  7C 08 03 A6 */	mtlr r0
 /* 8010D73C 0010A31C  4E 80 00 20 */	blr
 
-.section .rodata
-    .balign 4
-.global lbl_803B7570
-lbl_803B7570:
-    .float 0
-    .float 4
-    .float 0
-.global lbl_803B757C
-lbl_803B757C:
-    .float 0
-    .float 4
-    .float 0
-
-
 .section .sdata
     .balign 8
 .global lbl_804D3D98
