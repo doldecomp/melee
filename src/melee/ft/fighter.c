@@ -63,8 +63,8 @@ extern fn_ptr_t lbl_803C10D0[FTKIND_MAX];
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
 extern ftData* gFtDataList[FTKIND_MAX];
-extern struct ActionState ActionStateList[341];
-extern struct ActionState* ActionStateTableByCharacter[FTKIND_MAX];
+extern ActionState ActionStateList[341];
+extern ActionState* ActionStateTableByCharacter[FTKIND_MAX];
 
 extern s8 lbl_803C26FC[FTKIND_MAX];
 
@@ -943,7 +943,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
 {
     HSD_JObj* jobj = fighter_gobj->hsd_obj;
     Fighter* fp = fighter_gobj->user_data;
-    struct ActionState* new_action_state;
+    ActionState* new_action_state;
     struct S_TEMP4* unk_struct_x18;
     s32 bone_index;
     u8* unk_byte_ptr;

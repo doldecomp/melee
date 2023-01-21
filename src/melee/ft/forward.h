@@ -5,5 +5,6 @@
 
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
 typedef struct Fighter Fighter;
+typedef struct ActionState ActionState;
 
 #endif

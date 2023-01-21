@@ -1307,8 +1307,8 @@ struct Fighter {
     /* 0x10 */ s32 x10_action_state_index;
     /* 0x14 */ s32 x14_action_id;
     /* 0x18 */ s32 x18;
-    /* 0x1C */ struct ActionState* x1C_actionStateList;
-    /* 0x20 */ struct ActionState* x20_actionStateList;
+    /* 0x1C */ ActionState* x1C_actionStateList;
+    /* 0x20 */ ActionState* x20_actionStateList;
     /* 0x24 */ struct S_TEMP4* x24;
     /* 0x28 */ u8* x28;
     /* 0x2C */ f32 facing_dir;

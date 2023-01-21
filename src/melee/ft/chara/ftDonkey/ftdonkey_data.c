@@ -15,7 +15,7 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 
-struct ActionState as_table_donkey[] = {
+ActionState as_table_donkey[] = {
     { 0x00000127, 0x00480000, 0x35400000, NULL, ftDonkey_800DF9F0,
       ftDonkey_800DFA50, ftDonkey_800DFA70, func_800761C8 },
     { 0x00000128, 0x00484066, 0x35000000, ftDonkey_800DFB34, ftDonkey_800DFB54,
