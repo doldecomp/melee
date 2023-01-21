@@ -4851,25 +4851,7 @@ lbl_80114788:
 /* 801147BC 0011139C  4E 80 00 20 */	blr
 
 .section .data
-    .balign 4
-.global lbl_803CC558
-lbl_803CC558:
-    .4byte lbl_803CC378
-    .4byte lbl_803CC384
-    .4byte lbl_803CC39C
-    .4byte lbl_803CC3BC
-    .4byte lbl_803CC3C8
-    .4byte lbl_803CC3E0
-    .4byte lbl_803CC400
-    .4byte lbl_803CC40C
-    .4byte lbl_803CC424
-    .4byte lbl_803CC444
-    .4byte lbl_803CC450
-    .4byte lbl_803CC468
-    .4byte lbl_803CC488
-    .4byte lbl_803CC494
-    .4byte lbl_803CC4AC
-    .4byte NULL
+    .balign 8
 .global lbl_803CC598
 lbl_803CC598:
     .4byte 0xBF800000
