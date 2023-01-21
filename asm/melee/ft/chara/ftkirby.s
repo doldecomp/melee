@@ -35529,42 +35529,7 @@ func_8010D6D0:
 
 
 .section .data
-    .balign 8
-.global lbl_803C9DD0
-lbl_803C9DD0:
-    .4byte lbl_800F9110
-    .4byte lbl_800FE100
-    .4byte lbl_800F99BC
-    .4byte lbl_800FF8EC
-    .4byte func_800F5F68
-    .4byte lbl_800FA8B4
-    .4byte lbl_800FB880
-    .4byte lbl_8010612C
-    .4byte lbl_800FED38
-    .4byte lbl_8010C4D4
-    .4byte lbl_80108D64
-    .4byte NULL
-    .4byte lbl_800F9FD4
-    .4byte lbl_800FCF74
-    .4byte lbl_8010941C
-    .4byte lbl_80101560
-    .4byte lbl_80107568
-    .4byte lbl_800F9614
-    .4byte lbl_8010B2FC
-    .4byte lbl_80105B2C
-    .4byte lbl_800FB880
-    .4byte lbl_800F9110
-    .4byte lbl_800FE100
-    .4byte lbl_800F9FD4
-    .4byte lbl_8010D188
-    .4byte lbl_800F99BC
-    .4byte lbl_8010B2FC
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte lbl_800FA8B4
-    .4byte NULL
+    .balign 4
 .global lbl_803C9E54
 lbl_803C9E54:
     .4byte lbl_800F93CC
