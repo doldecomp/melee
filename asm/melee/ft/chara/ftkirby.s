@@ -35534,17 +35534,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global lbl_803CB770
-lbl_803CB770:
-    .4byte 0xBF800000
-    .4byte 0xBF400000
-    .4byte 0xBF000000
-    .4byte 0xBE800000
-    .4byte NULL
-    .4byte 0x3E800000
-    .4byte 0x3F000000
-    .4byte 0x3F400000
-    .4byte 0x3F800000
 .global jtbl_803CB794
 jtbl_803CB794:
     .4byte lbl_80106474

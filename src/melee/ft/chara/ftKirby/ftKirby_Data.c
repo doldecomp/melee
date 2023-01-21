@@ -943,3 +943,8 @@ char ftKirby_assert_msg_3[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 uint lbl_803CB758[] = {
     0x41000000, 0, 0xC0800000, 0x40800000, 0x40800000, 0x40800000,
 };
+
+uint lbl_803CB770[] = {
+    0xBF800000, 0xBF400000, 0xBF000000, 0xBE800000, 0,
+    0x3E800000, 0x3F000000, 0x3F400000, 0x3F800000,
+};
