@@ -109,3 +109,26 @@ ActionState as_table_donkey[] = {
     { 0x150, 0x00340614, 0x15000000, ftDonkey_8010E030, ftDonkey_8010E06C,
       ftDonkey_8010E070, ftDonkey_8010E090, func_800761C8 },
 };
+
+char lbl_803CBDF8[] = "PlDk.dat";
+char lbl_803CBE04[] = "ftDataDonkey";
+char lbl_803CBE14[] = "PlDkNr.dat";
+char lbl_803CBE20[] = "PlyDonkey5K_Share_joint";
+char lbl_803CBE38[] = "PlyDonkey5K_Share_matanim_joint";
+char lbl_803CBE58[] = "PlDkBk.dat";
+char lbl_803CBE64[] = "PlyDonkey5KBk_Share_joint";
+char lbl_803CBE80[] = "PlyDonkey5KBk_Share_matanim_joint";
+char lbl_803CBEA4[] = "PlDkRe.dat";
+char lbl_803CBEB0[] = "PlyDonkey5KRe_Share_joint";
+char lbl_803CBECC[] = "PlyDonkey5KRe_Share_matanim_joint";
+char lbl_803CBEF0[] = "PlDkBu.dat";
+char lbl_803CBEFC[] = "PlyDonkey5KBu_Share_joint";
+char lbl_803CBF18[] = "PlyDonkey5KBu_Share_matanim_joint";
+char lbl_803CBF3C[] = "PlDkGr.dat";
+char lbl_803CBF48[] = "PlyDonkey5KGr_Share_joint";
+char lbl_803CBF64[] = "PlyDonkey5KGr_Share_matanim_joint";
+char lbl_803CBF88[] = "PlDkAJ.dat";
+char lbl_803CBF94[] = "ftDemoResultMotionFileDonkey";
+char lbl_803CBFB4[] = "ftDemoIntroMotionFileDonkey";
+char lbl_803CBFD0[] = "ftDemoEndingMotionFileDonkey";
+char lbl_803CBFF0[] = "ftDemoViWaitMotionFileDonkey";
