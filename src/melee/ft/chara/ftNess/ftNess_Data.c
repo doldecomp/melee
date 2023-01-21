@@ -1,3 +1,4 @@
+#include "melee/ft/forward.h"
 #include <melee/ft/chara/ftNess/ftNess.h>
 #include <melee/ft/chara/ftNess/ftNess_SpecialLw.h>
 #include <melee/ft/ftcamera.h>
@@ -127,3 +128,10 @@ char lbl_803CCC04[] = "ftDemoResultMotionFileNess";
 char lbl_803CCC20[] = "ftDemoIntroMotionFileNess";
 char lbl_803CCC3C[] = "ftDemoEndingMotionFileNess";
 char lbl_803CCC58[] = "ftDemoViWaitMotionFileNess";
+
+Fighter_DemoStrings lbl_803CCC74 = {
+    lbl_803CCC04,
+    lbl_803CCC20,
+    lbl_803CCC3C,
+    lbl_803CCC58,
+};
