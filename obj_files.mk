@@ -287,6 +287,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftGanon/ftganon.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGanon/ftGanon_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftganon.s.o\
 
 TEXT_O_FILES +=\
