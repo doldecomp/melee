@@ -1048,6 +1048,12 @@ struct S_TEMP4 {
     s32 x14;
 };
 
+struct Fighter_CostumeStrings {
+    char* dat_filename;
+    char* joint_name;
+    char* matanim_joint_name;
+};
+
 // --------------------------------------------------------------------------------
 // UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fp
 // header includes or something.
