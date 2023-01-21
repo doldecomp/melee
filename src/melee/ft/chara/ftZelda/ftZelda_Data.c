@@ -1,0 +1,43 @@
+#include <melee/ft/chara/ftZelda/ftzelda.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/types.h>
+
+ActionState as_table_zelda[] = {
+    { 0x00000127, 0x00341011, 0x12000000, ftZelda_8013AA38, ftZelda_8013AB60,
+      ftZelda_8013AB68, ftZelda_8013AC10, func_800761C8 },
+    { 0x00000128, 0x00341411, 0x12000000, ftZelda_8013AACC, ftZelda_8013AB64,
+      ftZelda_8013AB9C, ftZelda_8013AC4C, func_800761C8 },
+    { 0x00000129, 0x00340112, 0x13000000, ftZelda_8013B780, ftZelda_8013BDD0,
+      ftZelda_8013BED8, ftZelda_8013C070, func_800761C8 },
+    { 0x0000012A, 0x00340112, 0x13000000, ftZelda_8013B89C, ftZelda_8013BDD4,
+      ftZelda_8013BF10, ftZelda_8013C0DC, func_800761C8 },
+    { 0x0000012B, 0x00340112, 0x13000000, ftZelda_8013BA04, ftZelda_8013BE50,
+      ftZelda_8013BF30, ftZelda_8013C148, func_800761C8 },
+    { 0x0000012C, 0x00340512, 0x13000000, ftZelda_8013BA8C, ftZelda_8013BE54,
+      ftZelda_8013BF50, ftZelda_8013C1B4, func_800761C8 },
+    { 0x0000012D, 0x00340512, 0x13000000, ftZelda_8013BBA8, ftZelda_8013BE58,
+      ftZelda_8013BFB0, ftZelda_8013C220, func_800761C8 },
+    { 0x0000012E, 0x00340512, 0x13000000, ftZelda_8013BD10, ftZelda_8013BED4,
+      ftZelda_8013C010, ftZelda_8013C28C, func_800761C8 },
+    { 0x0000012F, 0x00340013, 0x14000000, ftZelda_801399B4, ftZelda_80139A2C,
+      ftZelda_80139A34, ftZelda_80139A98, func_800761C8 },
+    { 0x0000012F, 0x00340013, 0x14000000, ftZelda_80139C1C, ftZelda_80139C94,
+      ftZelda_80139C9C, ftZelda_80139CC0, func_800761C8 },
+    { 0x00000130, 0x00340013, 0x14000000, ftZelda_8013A448, ftZelda_8013A4E4,
+      ftZelda_8013A4EC, ftZelda_8013A588, func_800761C8 },
+    { 0x00000131, 0x00340413, 0x14000000, ftZelda_801399F0, ftZelda_80139A30,
+      ftZelda_80139A54, ftZelda_80139AD4, func_800761C8 },
+    { 0x00000131, 0x00340413, 0x14000000, ftZelda_80139C58, ftZelda_80139C98,
+      ftZelda_80139CBC, ftZelda_80139D60, func_800761C8 },
+    { 0x00000132, 0x00340413, 0x14000000, ftZelda_8013A484, ftZelda_8013A4E8,
+      ftZelda_8013A50C, ftZelda_8013A5C4, func_800761C8 },
+    { 0x00000133, 0x00340014, 0x15000000, ftZelda_8013B068, ftZelda_8013B0E8,
+      ftZelda_8013B0F0, ftZelda_8013B154, func_800761C8 },
+    { 0x00000134, 0x00340014, 0x15000000, ftZelda_8013B2A4, ftZelda_8013B31C,
+      ftZelda_8013B324, ftZelda_8013B388, func_800761C8 },
+    { 0x00000135, 0x00340414, 0x15000000, ftZelda_8013B0A8, ftZelda_8013B0EC,
+      ftZelda_8013B110, ftZelda_8013B190, func_800761C8 },
+    { 0x00000136, 0x00340414, 0x15000000, ftZelda_8013B2E0, ftZelda_8013B320,
+      ftZelda_8013B344, ftZelda_8013B3C4, func_800761C8 },
+};
