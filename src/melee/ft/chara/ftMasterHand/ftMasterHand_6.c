@@ -27,9 +27,7 @@ void lbl_801517F4(HSD_GObj* gobj)
     r4_fp->x80_self_vel.z += r3_attributes->x158;
 }
 
-// 80151824 14E404
-// https://decomp.me/scratch/xfY30
-void lbl_80151824(void) {}
+void lbl_80151824(HSD_GObj* arg0) {}
 
 // 80151828 14E408
 // https://decomp.me/scratch/rsfpE
@@ -64,12 +62,7 @@ void lbl_801518F4(HSD_GObj* arg0)
     func_80085134(arg0);
 }
 
-// 80151914 14E4F4
-// https://decomp.me/scratch/BYVIT
-void lbl_80151914(void)
-{
-    return;
-}
+void lbl_80151914(HSD_GObj* arg0) {}
 
 // 80151918 14E4F8
 // https://decomp.me/scratch/uyxzl
@@ -138,12 +131,7 @@ void lbl_80151A88(HSD_GObj* gobj)
                   r6_attributes->x2C, r6_attributes->x28);
 }
 
-// 80151AC4 14E6A4
-// https://decomp.me/scratch/edLn0
-void lbl_80151AC4(void)
-{
-    return;
-}
+void lbl_80151AC4(HSD_GObj* arg0) {}
 
 // 80151AC8 14E6A8
 // https://decomp.me/scratch/AimoS

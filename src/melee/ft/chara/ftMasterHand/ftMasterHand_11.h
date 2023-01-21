@@ -5,7 +5,7 @@
 
 void func_8015247C(HSD_GObj*);
 void func_801525E0(HSD_GObj*);
-void lbl_8015236C(void);
+void lbl_8015236C(HSD_GObj*);
 void lbl_801525DC(HSD_GObj* gobj);
 void lbl_801523BC(HSD_GObj* gobj);
 void lbl_80152414(HSD_GObj* gobj);

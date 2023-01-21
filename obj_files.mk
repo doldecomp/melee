@@ -316,6 +316,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftsandbag.s.o\
 
 TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftmasterhand.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_2.c.o\
