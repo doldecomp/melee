@@ -50,12 +50,12 @@ void lbl_8012C114(HSD_GObj* fighter_gobj)
     }
 }
 
-void lbl_8012C194(void)
+void lbl_8012C194(HSD_GObj* arg0)
 {
     func_80092870();
 }
 
-void lbl_8012C1B4(void)
+void lbl_8012C1B4(HSD_GObj* arg0)
 {
     func_800928AC();
 }

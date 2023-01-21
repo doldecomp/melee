@@ -197,6 +197,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftsamus.s.o\
 
 TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYoshi_Data.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi1.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o\
