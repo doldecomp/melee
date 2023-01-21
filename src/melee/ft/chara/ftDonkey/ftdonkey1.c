@@ -2,9 +2,19 @@
 
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey4.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey5.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey6.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey7.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey8.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey9.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialLw.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialN.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialS.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_walk.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcamera.h>
 
 bool ftDonkey_800DF938(HSD_GObj* fighter_gobj)
 {
