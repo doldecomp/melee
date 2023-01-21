@@ -85,7 +85,7 @@ char* lbl_803C772C[] = {
 };
 
 char* lbl_803C773C[6][3] = {
-    { lbl_803C75B4, lbl_803C75C0 }, { lbl_803C75DC, lbl_803C75E8 },
-    { lbl_803C7604, lbl_803C760C }, { lbl_803C7628, lbl_803C7634 },
-    { lbl_803C7650, lbl_803C765C }, { lbl_803C7678, lbl_803C7684 },
+    { lbl_803C75B4, lbl_803C75C0, NULL }, { lbl_803C75DC, lbl_803C75E8, NULL },
+    { lbl_803C7604, lbl_803C760C, NULL }, { lbl_803C7628, lbl_803C7634, NULL },
+    { lbl_803C7650, lbl_803C765C, NULL }, { lbl_803C7678, lbl_803C7684, NULL },
 };
