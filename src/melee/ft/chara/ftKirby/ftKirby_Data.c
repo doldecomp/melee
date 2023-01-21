@@ -448,3 +448,5 @@ HSD_GObjEvent lbl_803C9E54[] = {
     lbl_800F9A54, lbl_8010B4A0, NULL,         NULL,         NULL,
     NULL,         lbl_800FA958, NULL,
 };
+
+unk_t lbl_803C9ED8[12] = { 0 };
