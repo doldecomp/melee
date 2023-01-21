@@ -677,7 +677,7 @@ lbl_80076CA8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80076CBC(void)
+asm bool func_80076CBC(Fighter*, Hitbox*, Fighter*)
 { // clang-format off
     nofralloc
 /* 80076CBC 0007389C  7C 08 02 A6 */	mflr r0
@@ -840,7 +840,7 @@ extern unk_t lbl_80459598;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80076ED8(void)
+asm bool func_80076ED8(Fighter*, Hitbox*, Fighter*, Hurtbox*)
 { // clang-format off
     nofralloc
 /* 80076ED8 00073AB8  7C 08 02 A6 */	mflr r0
