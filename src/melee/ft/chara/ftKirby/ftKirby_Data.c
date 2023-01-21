@@ -823,3 +823,22 @@ Fighter_CostumeStrings lbl_803CAED0[] = {
     { lbl_803CAE30, lbl_803CAE40, lbl_803CAE5C },
     { lbl_803CAE80, lbl_803CAE90, lbl_803CAEAC },
 };
+
+char lbl_803CAF18[] = "PlKbNrCpMt.dat";
+char lbl_803CAF28[] = "PlyKirbyMt_Share_joint";
+char lbl_803CAF40[] = "PlyKirbyMt_Share_matanim_joint";
+char lbl_803CAF60[] = "PlKbYeCpMt.dat";
+char lbl_803CAF70[] = "PlyKirbyMtYe_Share_joint";
+char lbl_803CAF8C[] = "PlyKirbyMtYe_Share_matanim_joint";
+char lbl_803CAFB0[] = "PlKbBuCpMt.dat";
+char lbl_803CAFC0[] = "PlyKirbyMtBu_Share_joint";
+char lbl_803CAFDC[] = "PlyKirbyMtBu_Share_matanim_joint";
+char lbl_803CB000[] = "PlKbReCpMt.dat";
+char lbl_803CB010[] = "PlyKirbyMtRe_Share_joint";
+char lbl_803CB02C[] = "PlyKirbyMtRe_Share_matanim_joint";
+char lbl_803CB050[] = "PlKbGrCpMt.dat";
+char lbl_803CB060[] = "PlyKirbyMtGr_Share_joint";
+char lbl_803CB07C[] = "PlyKirbyMtGr_Share_matanim_joint";
+char lbl_803CB0A0[] = "PlKbWhCpMt.dat";
+char lbl_803CB0B0[] = "PlyKirbyMtWh_Share_joint";
+char lbl_803CB0CC[] = "PlyKirbyMtWh_Share_matanim_joint";
