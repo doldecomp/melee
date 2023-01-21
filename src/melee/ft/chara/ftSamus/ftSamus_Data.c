@@ -1,0 +1,43 @@
+#include <melee/ft/chara/ftSamus/ftsamus.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcamera.h>
+#include <melee/ft/types.h>
+
+ActionState as_table_samus[] = {
+    { 0x00000127, FLAGS_ZERO, 0x01000000, ftSamus_80128C04, ftSamus_80128D3C,
+      ftSamus_80128E88, ftSamus_80128F60, func_800761C8 },
+    { 0x00000128, FLAGS_ZERO, 0x01000000, ftSamus_80128CA0, ftSamus_80128E68,
+      ftSamus_80128EF8, ftSamus_80128FD4, func_800761C8 },
+    { 0x00000129, 0x00340111, 0x12000000, ftSamus_80129684, ftSamus_80129B18,
+      ftSamus_80129C88, ftSamus_80129D48, func_800761C8 },
+    { 0x0000012A, 0x00340111, 0x12000000, ftSamus_80129774, ftSamus_80129B1C,
+      ftSamus_80129CA8, ftSamus_80129DC8, func_800761C8 },
+    { 0x0000012B, 0x00340111, 0x12000000, ftSamus_80129940, ftSamus_80129C78,
+      ftSamus_80129CC8, ftSamus_80129E68, func_800761C8 },
+    { 0x0000012C, 0x00340111, 0x12000000, ftSamus_801299D0, ftSamus_80129C7C,
+      ftSamus_80129CE8, ftSamus_80129EE8, func_800761C8 },
+    { 0x0000012D, 0x00340511, 0x12000000, ftSamus_80129A14, ftSamus_80129C80,
+      ftSamus_80129D08, ftSamus_80129F68, func_800761C8 },
+    { 0x0000012E, 0x00340511, 0x12000000, ftSamus_80129A98, ftSamus_80129C84,
+      ftSamus_80129D28, ftSamus_80129FE8, func_800761C8 },
+    { 0x0000012F, 0x00340112, 0x13000000, ftSamus_8012A380, ftSamus_8012A3F8,
+      ftSamus_8012A400, ftSamus_8012A468, func_800761C8 },
+    { 0x00000130, 0x00340912, 0x13000000, ftSamus_8012A4E0, ftSamus_8012A558,
+      ftSamus_8012A560, ftSamus_8012A5C8, func_800761C8 },
+    { 0x00000131, 0x00340512, 0x13000000, ftSamus_8012A3BC, ftSamus_8012A3FC,
+      ftSamus_8012A420, ftSamus_8012A4A4, func_800761C8 },
+    { 0x00000132, 0x00340D12, 0x13000000, ftSamus_8012A51C, ftSamus_8012A55C,
+      ftSamus_8012A580, ftSamus_8012A604, func_800761C8 },
+    { 0x00000133, 0x00340213, 0x14000000, ftSamus_8012A81C, ftSamus_8012A96C,
+      ftSamus_8012AB0C, ftSamus_8012AC00, func_800761C8 },
+    { 0x00000134, 0x00340613, 0x14000000, ftSamus_8012A8C4, ftSamus_8012AA3C,
+      ftSamus_8012ABB4, ftSamus_8012ACF8, func_800761C8 },
+    { 0x00000135, 0x00340114, 0x15000000, ftSamus_8012B150, ftSamus_8012B358,
+      ftSamus_8012B3A8, ftSamus_8012B488, func_800761C8 },
+    { 0x00000136, 0x00340514, 0x15000000, ftSamus_8012B264, ftSamus_8012B3A4,
+      ftSamus_8012B41C, ftSamus_8012B4FC, func_800761C8 },
+    { 0x00000137, 0x00200000, 0x01000000, func_800C3D6C, func_800C4384,
+      func_800C438C, func_800C447C, func_800761C8 },
+    { 0x00000138, 0x00C00000, 0x01000000, func_800C4380, func_800C4388,
+      func_800C4438, func_80082B78, func_800761C8 },
+};
