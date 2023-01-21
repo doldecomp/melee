@@ -52,3 +52,26 @@ ActionState as_table_seak[] = {
     { 316, 0x00340414, 0x15000000, lbl_80114560, lbl_801145A0, lbl_801145C4,
       lbl_80114644, func_800761C8 },
 };
+
+char lbl_803CC360[] = "PlSk.dat";
+char lbl_803CC36C[] = "ftDataSeak";
+char lbl_803CC378[] = "PlSkNr.dat";
+char lbl_803CC384[] = "PlySeak5K_Share_joint";
+char lbl_803CC39C[] = "PlySeak5K_Share_matanim_joint";
+char lbl_803CC3BC[] = "PlSkRe.dat";
+char lbl_803CC3C8[] = "PlySeak5KRe_Share_joint";
+char lbl_803CC3E0[] = "PlySeak5KRe_Share_matanim_joint";
+char lbl_803CC400[] = "PlSkBu.dat";
+char lbl_803CC40C[] = "PlySeak5KBu_Share_joint";
+char lbl_803CC424[] = "PlySeak5KBu_Share_matanim_joint";
+char lbl_803CC444[] = "PlSkGr.dat";
+char lbl_803CC450[] = "PlySeak5KGr_Share_joint";
+char lbl_803CC468[] = "PlySeak5KGr_Share_matanim_joint";
+char lbl_803CC488[] = "PlSkWh.dat";
+char lbl_803CC494[] = "PlySeak5KWh_Share_joint";
+char lbl_803CC4AC[] = "PlySeak5KWh_Share_matanim_joint";
+char lbl_803CC4CC[] = "PlSkAJ.dat";
+char lbl_803CC4D8[] = "ftDemoResultMotionFileSeak";
+char lbl_803CC4F4[] = "ftDemoIntroMotionFileSeak";
+char lbl_803CC510[] = "ftDemoEndingMotionFileSeak";
+char lbl_803CC52C[] = "ftDemoViWaitMotionFileSeak";
