@@ -685,3 +685,10 @@ Fighter_DemoStrings lbl_803CA55C = {
 
 char lbl_803CA56C[] = "ftDemoVi0501MotionFileKirby";
 char lbl_803CA588[] = "ftDemoVi0502MotionFileKirby";
+
+char* lbl_803CA5A4[] = {
+    lbl_803CA56C,
+    NULL,
+    NULL,
+    lbl_803CA588,
+};
