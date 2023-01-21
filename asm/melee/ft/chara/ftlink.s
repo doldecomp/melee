@@ -3589,21 +3589,6 @@ lbl_800EE514:
 /* 800EE520 000EB100  7C 08 03 A6 */	mtlr r0
 /* 800EE524 000EB104  4E 80 00 20 */	blr
 
-.section .rodata
-    .balign 8
-.global lbl_803B7520
-lbl_803B7520:
-    .float 0
-    .float 0
-    .float 0
-    .float 0
-    .float 0
-    .float 0
-    .float 0
-    .float 0
-    .float 0
-
-
 .section .sdata2
     .balign 8
 .global lbl_804D92E8

@@ -87,3 +87,5 @@ Fighter_CostumeStrings lbl_803C82B0[] = {
 };
 
 int lbl_803C82EC[31] = { 0 };
+
+Vec3 const lbl_803B7520[3] = { 0 };
