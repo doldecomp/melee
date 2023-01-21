@@ -64,3 +64,30 @@ ActionState as_table_peach[] = {
     { 317, 0x004C0058, 0x57800000, func_800CF424, func_800CF428, func_800CF494,
       func_800CF4B4, func_800761C8 },
 };
+
+char ftPeach_str_PlPe_dat[] = "PlPe.dat";
+char ftPeach_str_ftDataPeach[] = "ftDataPeach";
+char str_PlPeNr_dat[] = "PlPeNr.dat";
+char str_PlyPeach5K_Share_joint[] = "PlyPeach5K_Share_joint";
+char str_PlyPeach5K_Share_matanim_joint[] = "PlyPeach5K_Share_matanim_joint";
+char str_PlPeYe_dat[] = "PlPeYe.dat";
+char str_PlyPeach5KYe_Share_joint[] = "PlyPeach5KYe_Share_joint";
+char str_PlyPeach5KYe_Share_matanim_joint[] =
+    "PlyPeach5KYe_Share_matanim_joint";
+char str_PlPeWh_dat[] = "PlPeWh.dat";
+char str_PlyPeach5KWh_Share_joint[] = "PlyPeach5KWh_Share_joint";
+char str_PlyPeach5KWh_Share_matanim_joint[] =
+    "PlyPeach5KWh_Share_matanim_joint";
+char str_PlPeBu_dat[] = "PlPeBu.dat";
+char str_PlyPeach5KBu_Share_joint[] = "PlyPeach5KBu_Share_joint";
+char str_PlyPeach5KBu_Share_matanim_joint[] =
+    "PlyPeach5KBu_Share_matanim_joint";
+char str_PlPeGr_dat[] = "PlPeGr.dat";
+char str_PlyPeach5KGr_Share_joint[] = "PlyPeach5KGr_Share_joint";
+char str_PlyPeach5KGr_Share_matanim_joint[] =
+    "PlyPeach5KGr_Share_matanim_joint";
+char str_PlPeAJ_dat[] = "PlPeAJ.dat";
+char str_ftDemoResultMotionFilePeach[] = "ftDemoResultMotionFilePeach";
+char str_ftDemoIntroMotionFilePeach[] = "ftDemoIntroMotionFilePeach";
+char str_ftDemoEndingMotionFilePeach[] = "ftDemoEndingMotionFilePeach";
+char str_ftDemoViWaitMotionFilePeach[] = "ftDemoViWaitMotionFilePeach";

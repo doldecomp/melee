@@ -3816,76 +3816,6 @@ lbl_8011ED08:
 
 .section .data
     .balign 8
-.global ftPeach_str_PlPe_dat
-ftPeach_str_PlPe_dat:
-    .asciz "PlPe.dat"
-    .balign 4
-.global ftPeach_str_ftDataPeach
-ftPeach_str_ftDataPeach:
-    .asciz "ftDataPeach"
-    .balign 4
-str_PlPeNr_dat:
-    .asciz "PlPeNr.dat"
-    .balign 4
-str_PlyPeach5K_Share_joint:
-    .asciz "PlyPeach5K_Share_joint"
-    .balign 4
-str_PlyPeach5K_Share_matanim_joint:
-    .asciz "PlyPeach5K_Share_matanim_joint"
-    .balign 4
-str_PlPeYe_dat:
-    .asciz "PlPeYe.dat"
-    .balign 4
-str_PlyPeach5KYe_Share_joint:
-    .asciz "PlyPeach5KYe_Share_joint"
-    .balign 4
-str_PlyPeach5KYe_Share_matanim_joint:
-    .asciz "PlyPeach5KYe_Share_matanim_joint"
-    .balign 4
-str_PlPeWh_dat:
-    .asciz "PlPeWh.dat"
-    .balign 4
-str_PlyPeach5KWh_Share_joint:
-    .asciz "PlyPeach5KWh_Share_joint"
-    .balign 4
-str_PlyPeach5KWh_Share_matanim_joint:
-    .asciz "PlyPeach5KWh_Share_matanim_joint"
-    .balign 4
-str_PlPeBu_dat:
-    .asciz "PlPeBu.dat"
-    .balign 4
-str_PlyPeach5KBu_Share_joint:
-    .asciz "PlyPeach5KBu_Share_joint"
-    .balign 4
-.global str_PlyPeach5KBu_Share_matanim_joint
-str_PlyPeach5KBu_Share_matanim_joint:
-    .asciz "PlyPeach5KBu_Share_matanim_joint"
-    .balign 4
-str_PlPeGr_dat:
-    .asciz "PlPeGr.dat"
-    .balign 4
-str_PlyPeach5KGr_Share_joint:
-    .asciz "PlyPeach5KGr_Share_joint"
-    .balign 4
-str_PlyPeach5KGr_Share_matanim_joint:
-    .asciz "PlyPeach5KGr_Share_matanim_joint"
-    .balign 4
-.global str_PlPeAJ_dat
-str_PlPeAJ_dat:
-    .asciz "PlPeAJ.dat"
-    .balign 4
-str_ftDemoResultMotionFilePeach:
-    .asciz "ftDemoResultMotionFilePeach"
-    .balign 4
-str_ftDemoIntroMotionFilePeach:
-    .asciz "ftDemoIntroMotionFilePeach"
-    .balign 4
-str_ftDemoEndingMotionFilePeach:
-    .asciz "ftDemoEndingMotionFilePeach"
-    .balign 4
-str_ftDemoViWaitMotionFilePeach:
-    .asciz "ftDemoViWaitMotionFilePeach"
-    .balign 4
 .global ftPeach_str_arr_ftDemo
 ftPeach_str_arr_ftDemo:
     .4byte str_ftDemoResultMotionFilePeach
@@ -3910,7 +3840,6 @@ ftPeach_str_arr_Costumes:
     .4byte str_PlyPeach5KGr_Share_joint
     .4byte str_PlyPeach5KGr_Share_matanim_joint
     .4byte NULL
-
 
 .section .sdata2
 f32_804D97C0:
