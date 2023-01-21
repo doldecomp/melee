@@ -126,8 +126,9 @@ char* lbl_803C7D8C[] = {
     "ftDemoViWaitMotionFileFox",
 };
 
-char* lbl_803C7D9C[4][3] = {
-    lbl_803C7C00, lbl_803C7C0C, lbl_803C7C24, lbl_803C7C44,
-    lbl_803C7C50, lbl_803C7C68, lbl_803C7C88, lbl_803C7C94,
-    lbl_803C7CAC, lbl_803C7CCC, lbl_803C7CD8, lbl_803C7CF0,
+char* lbl_803C7D9C[][3] = {
+    { lbl_803C7C00, lbl_803C7C0C, lbl_803C7C24 },
+    { lbl_803C7C44, lbl_803C7C50, lbl_803C7C68 },
+    { lbl_803C7C88, lbl_803C7C94, lbl_803C7CAC },
+    { lbl_803C7CCC, lbl_803C7CD8, lbl_803C7CF0 },
 };
