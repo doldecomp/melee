@@ -936,9 +936,9 @@ char lbl_803CB6D8[] = "ftToSpecialNFox::Caution!!!\n";
 char lbl_803CB6F8[] = "ftkirbyspecialfox.c\0\0\0\0";
 // u32 pad = 0;
 // .4byte NULL
-int lbl_803CB710[] = {
-    0x3F266666,
-    0x3F333333,
-    0x3F4CCCCD,
-    0x3F800000,
+f32 lbl_803CB710[] = {
+    0.64999997615814208984375F,
+    0.699999988079071044921875F,
+    0.800000011920928955078125F,
+    1.0F,
 };
