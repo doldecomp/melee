@@ -282,6 +282,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_SpecialLw.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_SpecialHi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_SpecialN.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftGameWatch/ftGameWatch_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftgamewatch.s.o\
 
 TEXT_O_FILES +=\
