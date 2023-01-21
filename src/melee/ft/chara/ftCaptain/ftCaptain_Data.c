@@ -84,8 +84,8 @@ char* lbl_803C772C[] = {
     "ftDemoViWaitMotionFileCaptain",
 };
 
-char* lbl_803C773C[] = {
-    lbl_803C75B4, lbl_803C75C0, NULL, lbl_803C75DC, lbl_803C75E8, NULL,
-    lbl_803C7604, lbl_803C760C, NULL, lbl_803C7628, lbl_803C7634, NULL,
-    lbl_803C7650, lbl_803C765C, NULL, lbl_803C7678, lbl_803C7684, NULL,
+char* lbl_803C773C[6][3] = {
+    { lbl_803C75B4, lbl_803C75C0, NULL }, { lbl_803C75DC, lbl_803C75E8, NULL },
+    { lbl_803C7604, lbl_803C760C, NULL }, { lbl_803C7628, lbl_803C7634, NULL },
+    { lbl_803C7650, lbl_803C765C, NULL }, { lbl_803C7678, lbl_803C7684, NULL },
 };
