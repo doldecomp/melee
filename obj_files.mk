@@ -172,6 +172,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/fticeclimber1.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftIceClimber_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/fticeclimber.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/fticeclimber2_nana.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/fticeclimber2_nana.s.o\
