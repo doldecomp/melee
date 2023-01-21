@@ -1000,3 +1000,5 @@ jtbl_t jtbl_803CB7DC = {
 };
 
 uint lbl_803CB828[] = { 0x00030DB9, 0x00030DBC, 0x00030DBF, 0x00030DC2 };
+
+f32 const lbl_803B7548[10] = { 0 };
