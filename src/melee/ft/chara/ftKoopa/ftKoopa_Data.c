@@ -1,3 +1,4 @@
+#include "melee/ft/forward.h"
 #include <melee/ft/chara/ftKoopa/ftkoopa.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
@@ -71,3 +72,10 @@ char lbl_803CF1EC[] = "ftDemoResultMotionFileKoopa";
 char lbl_803CF208[] = "ftDemoIntroMotionFileKoopa";
 char lbl_803CF224[] = "ftDemoEndingMotionFileKoopa";
 char lbl_803CF240[] = "ftDemoViWaitMotionFileKoopa";
+
+Fighter_DemoStrings lbl_803CF25C = {
+    lbl_803CF1EC,
+    lbl_803CF208,
+    lbl_803CF224,
+    lbl_803CF240,
+};

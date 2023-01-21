@@ -3022,12 +3022,6 @@ lbl_8013623C:
 
 .section .data
     .balign 4
-.global lbl_803CF25C
-lbl_803CF25C:
-    .4byte lbl_803CF1EC
-    .4byte lbl_803CF208
-    .4byte lbl_803CF224
-    .4byte lbl_803CF240
 .global lbl_803CF26C
 lbl_803CF26C:
     .4byte lbl_803CF0B8
