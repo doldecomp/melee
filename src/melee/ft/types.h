@@ -1027,11 +1027,11 @@ struct ActionState {
     UnkFlagStruct flagsA;
     UnkFlagStruct flagsB;
 
-    void* cb_Anim;
-    void* cb_Input;
-    void* cb_Physics;
-    void* cb_Collision;
-    void* cb_Camera;
+    HSD_GObjEvent cb_Anim;
+    HSD_GObjEvent cb_Input;
+    HSD_GObjEvent cb_Physics;
+    HSD_GObjEvent cb_Collision;
+    HSD_GObjEvent cb_Camera;
 };
 
 struct S_TEMP4 {
