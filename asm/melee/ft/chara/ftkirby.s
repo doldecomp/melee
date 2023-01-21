@@ -35534,12 +35534,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global lbl_803CB828
-lbl_803CB828:
-    .4byte 0x00030DB9
-    .4byte 0x00030DBC
-    .4byte 0x00030DBF
-    .4byte 0x00030DC2
 
 
 .section .rodata
