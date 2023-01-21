@@ -8,10 +8,7 @@ typedef struct _ftSandbagAttributes {
     u32 x0_pair[2];
 } ftSandbagAttributes;
 
-void ftSandbag_OnDeath(void)
-{
-    return;
-}
+void ftSandbag_OnDeath(HSD_GObj* arg0) {}
 
 void ftSandbag_OnLoad(HSD_GObj* gobj)
 {
@@ -61,15 +58,9 @@ void ftSandbag_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftSandbagAttributes);
 }
 
-void ftSandbag_OnKnockbackEnter(void)
-{
-    return;
-}
+void ftSandbag_OnKnockbackEnter(HSD_GObj* arg0) {}
 
-void ftSandbag_OnKnockbackExit(void)
-{
-    return;
-}
+void ftSandbag_OnKnockbackExit(HSD_GObj* arg0) {}
 
 void func_8014FBA4(HSD_GObj* gobj)
 {
@@ -84,15 +75,9 @@ void func_8014FBA4(HSD_GObj* gobj)
     func_8007EFC0(fp, p_ftCommonData->x5F0);
 }
 
-void func_8014FC20(void)
-{
-    return;
-}
+void func_8014FC20(HSD_GObj* arg0) {}
 
-void func_8014FC24(void)
-{
-    return;
-}
+void func_8014FC24(HSD_GObj* arg0) {}
 
 void func_8014FC28(HSD_GObj* gobj)
 {

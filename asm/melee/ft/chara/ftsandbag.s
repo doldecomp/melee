@@ -2,16 +2,6 @@
 
 .section .data
     .balign 8
-.global as_table_sandbag
-as_table_sandbag:
-    .4byte 0x00000127
-    .4byte NULL
-    .4byte 0x01400000
-    .4byte func_8014FC20
-    .4byte func_8014FC24
-    .4byte func_8014FC28
-    .4byte func_8014FC48
-    .4byte func_800761C8
 .global lbl_803D39B8
 lbl_803D39B8:
     .asciz "PlSb.dat"
