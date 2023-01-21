@@ -540,3 +540,37 @@ jtbl_t jtbl_803CA14C = {
     lbl_800F18F8, lbl_800F18F8, lbl_800F18F8, lbl_800F18F8, lbl_800F18F8,
     lbl_800F18F8, lbl_800F1880,
 };
+
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A00(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A64(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A0C(void);
+/* static */ void lbl_800F1A44(void);
+/* static */ void lbl_800F1A2C(void);
+/* static */ void lbl_800F19F4(void);
+/* static */ void lbl_800F19E8(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A38(void);
+/* static */ void lbl_800F1A50(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A20(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A0C(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A00(void);
+/* static */ void lbl_800F1A78(void);
+/* static */ void lbl_800F1A70(void);
+
+jtbl_t jtbl_803CA1CC = {
+    lbl_800F1A78, lbl_800F1A00, lbl_800F1A78, lbl_800F1A64, lbl_800F1A78,
+    lbl_800F1A78, lbl_800F1A0C, lbl_800F1A44, lbl_800F1A2C, lbl_800F19F4,
+    lbl_800F19E8, lbl_800F1A78, lbl_800F1A78, lbl_800F1A38, lbl_800F1A50,
+    lbl_800F1A78, lbl_800F1A20, lbl_800F1A78, lbl_800F1A78, lbl_800F1A78,
+    lbl_800F1A0C, lbl_800F1A78, lbl_800F1A00, lbl_800F1A78, lbl_800F1A70,
+};
