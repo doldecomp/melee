@@ -750,3 +750,20 @@ char lbl_803CA980[] = "PlKbCpGn.dat";
 char lbl_803CA990[] = "ftDataKirbyCopyGanon";
 char lbl_803CA9A8[] = "PlKbCpFe.dat";
 char lbl_803CA9B8[] = "ftDataKirbyCopyEmblem";
+
+Fighter_CostumeStrings lbl_803CA9D0[] = {
+    lbl_803CA5FC, lbl_803CA60C, lbl_803CA624, lbl_803CA634, lbl_803CA648,
+    lbl_803CA658, lbl_803CA670, lbl_803CA680, NULL,         NULL,
+    lbl_803CA698, lbl_803CA6A8, lbl_803CA6C0, lbl_803CA6D0, lbl_803CA6E4,
+    lbl_803CA6F4, lbl_803CA708, lbl_803CA718, lbl_803CA72C, lbl_803CA73C,
+    lbl_803CA754, lbl_803CA764, NULL,         NULL,         lbl_803CA778,
+    lbl_803CA788, lbl_803CA7A0, lbl_803CA7B0, lbl_803CA7C8, lbl_803CA7D8,
+    lbl_803CA7F0, lbl_803CA800, lbl_803CA818, lbl_803CA828, lbl_803CA840,
+    lbl_803CA850, lbl_803CA868, lbl_803CA878, lbl_803CA88C, lbl_803CA89C,
+    lbl_803CA8B4, lbl_803CA8C4, lbl_803CA8DC, lbl_803CA8EC, lbl_803CA904,
+    lbl_803CA914, lbl_803CA92C, lbl_803CA93C, lbl_803CA954, lbl_803CA964,
+    lbl_803CA980, lbl_803CA990, lbl_803CA9A8, lbl_803CA9B8, NULL,
+    NULL,         NULL,         NULL,         NULL,         NULL,
+    NULL,         NULL,         NULL,         NULL,         NULL,
+    NULL,
+};
