@@ -258,6 +258,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDrMario/ftdrmario.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDrMario/ftdrmario_2.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftDrMario/ftDrMario_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftdrmario.s.o\
 
 TEXT_O_FILES +=\
