@@ -35534,7 +35534,7 @@ func_8010D6D0:
 
 
 .section .data
-    .balign 4
+    .balign 8
 .global lbl_803CA308
 lbl_803CA308:
     .asciz "PlKb.dat"
