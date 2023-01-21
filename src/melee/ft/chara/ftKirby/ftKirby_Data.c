@@ -914,9 +914,8 @@ bool lbl_803CB490[] = {
 
 struct lbl_803CB4EC_t {
     int x0[6];
-    unk_t x18;
-    f32 x1C;
-    unk_t x20;
+    Vec3 x18;
 } lbl_803CB4EC = {
-    0, 2, 3, 4, 5, 6, NULL, 1.0F, NULL,
+    { 0, 2, 3, 4, 5, 6 },
+    { 0.0F, 1.0F, 0.0F },
 };
