@@ -103,15 +103,9 @@ void ftPikachu_80124A20(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_80124B6C(void)
-{
-    return;
-}
+void ftPikachu_Stub_80124B6C(HSD_GObj* arg0) {}
 
-void ftPikachu_Stub_80124B70(void)
-{
-    return;
-}
+void ftPikachu_Stub_80124B70(HSD_GObj* arg0) {}
 
 void ftPikachu_80124B74(HSD_GObj* fighter_gobj)
 {
