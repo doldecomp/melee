@@ -355,6 +355,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftcrazyhand.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCrazyHand/ftCrazyHand_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftcrazyhand.s.o\
 
 TEXT_O_FILES +=\
