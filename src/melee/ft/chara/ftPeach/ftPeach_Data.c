@@ -99,3 +99,16 @@ Fighter_DemoStrings ftPeach_str_arr_ftDemo = {
     str_ftDemoEndingMotionFilePeach,
     str_ftDemoViWaitMotionFilePeach,
 };
+
+Fighter_CostumeStrings ftPeach_str_arr_Costumes[] = {
+    { str_PlPeNr_dat, str_PlyPeach5K_Share_joint,
+      str_PlyPeach5K_Share_matanim_joint },
+    { str_PlPeYe_dat, str_PlyPeach5KYe_Share_joint,
+      str_PlyPeach5KYe_Share_matanim_joint },
+    { str_PlPeWh_dat, str_PlyPeach5KWh_Share_joint,
+      str_PlyPeach5KWh_Share_matanim_joint },
+    { str_PlPeBu_dat, str_PlyPeach5KBu_Share_joint,
+      str_PlyPeach5KBu_Share_matanim_joint },
+    { str_PlPeGr_dat, str_PlyPeach5KGr_Share_joint,
+      str_PlyPeach5KGr_Share_matanim_joint },
+};

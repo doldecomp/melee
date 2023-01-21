@@ -3813,28 +3813,6 @@ lbl_8011ED08:
 /* 8011ED30 0011B910  7C 08 03 A6 */	mtlr r0
 /* 8011ED34 0011B914  4E 80 00 20 */	blr
 
-
-.section .data
-    .balign 8
-.global ftPeach_str_arr_Costumes
-ftPeach_str_arr_Costumes:
-    .4byte str_PlPeNr_dat
-    .4byte str_PlyPeach5K_Share_joint
-    .4byte str_PlyPeach5K_Share_matanim_joint
-    .4byte str_PlPeYe_dat
-    .4byte str_PlyPeach5KYe_Share_joint
-    .4byte str_PlyPeach5KYe_Share_matanim_joint
-    .4byte str_PlPeWh_dat
-    .4byte str_PlyPeach5KWh_Share_joint
-    .4byte str_PlyPeach5KWh_Share_matanim_joint
-    .4byte str_PlPeBu_dat
-    .4byte str_PlyPeach5KBu_Share_joint
-    .4byte str_PlyPeach5KBu_Share_matanim_joint
-    .4byte str_PlPeGr_dat
-    .4byte str_PlyPeach5KGr_Share_joint
-    .4byte str_PlyPeach5KGr_Share_matanim_joint
-    .4byte NULL
-
 .section .sdata2
 f32_804D97C0:
     .4byte 0x00000000
