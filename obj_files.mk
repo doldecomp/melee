@@ -148,6 +148,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_Data.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_Data_2.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o\
 
 TEXT_O_FILES +=\
