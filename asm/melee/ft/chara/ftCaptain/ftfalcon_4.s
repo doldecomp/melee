@@ -824,32 +824,6 @@ lbl_800E550C:
 /* 800E552C 000E210C  90 05 00 B8 */	stw r0, 0xb8(r5)
 /* 800E5530 000E2110  4E 80 00 20 */	blr
 
-
-.section .data
-    .balign 4
-.global lbl_803C773C
-lbl_803C773C:
-    .4byte lbl_803C75B4
-    .4byte lbl_803C75C0
-    .4byte NULL
-    .4byte lbl_803C75DC
-    .4byte lbl_803C75E8
-    .4byte NULL
-    .4byte lbl_803C7604
-    .4byte lbl_803C760C
-    .4byte NULL
-    .4byte lbl_803C7628
-    .4byte lbl_803C7634
-    .4byte NULL
-    .4byte lbl_803C7650
-    .4byte lbl_803C765C
-    .4byte NULL
-    .4byte lbl_803C7678
-    .4byte lbl_803C7684
-    .4byte NULL
-    .4byte NULL
-
-
 .section .sdata2
     .balign 8
 .global lbl_804D9230/*0.0f*/
