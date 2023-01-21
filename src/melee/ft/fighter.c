@@ -1389,11 +1389,11 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
             }
         }
 
-        fp->cb.x21A0_callback_Anim = new_action_state->cb_Anim;
-        fp->cb.x219C_callback_IASA = new_action_state->cb_Input;
-        fp->cb.x21A4_callback_Phys = new_action_state->cb_Physics;
-        fp->cb.x21A8_callback_Coll = new_action_state->cb_Collision;
-        fp->cb.x21AC_callback_Cam = new_action_state->cb_Camera;
+        fp->cb.x21A0_callback_Anim = new_action_state->animated;
+        fp->cb.x219C_callback_IASA = new_action_state->input_updated;
+        fp->cb.x21A4_callback_Phys = new_action_state->physics_updated;
+        fp->cb.x21A8_callback_Coll = new_action_state->collided;
+        fp->cb.x21AC_callback_Cam = new_action_state->camera_updated;
 
         fp->cb.x21B0_callback_Accessory1 = 0;
         fp->cb.x21BC_callback_Accessory4 = 0;

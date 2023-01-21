@@ -1018,7 +1018,7 @@ struct S_TEMP1 {
 };
 
 struct ActionState {
-    s32 action_id;
+    enum_t action_id;
 
     s32 x4_flags;
 
@@ -1032,11 +1032,11 @@ struct ActionState {
         };
     };
 
-    HSD_GObjEvent cb_Anim;
-    HSD_GObjEvent cb_Input;
-    HSD_GObjEvent cb_Physics;
-    HSD_GObjEvent cb_Collision;
-    HSD_GObjEvent cb_Camera;
+    HSD_GObjEvent animated;
+    HSD_GObjEvent input_updated;
+    HSD_GObjEvent physics_updated;
+    HSD_GObjEvent collided;
+    HSD_GObjEvent camera_updated;
 };
 
 struct S_TEMP4 {
