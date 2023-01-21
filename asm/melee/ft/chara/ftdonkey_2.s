@@ -1,7 +1,7 @@
 .include "macros.inc"
 
 .section .data
-    .balign 4
+    .balign 8
 .global lbl_803CBDF8
 lbl_803CBDF8:
     .asciz "PlDk.dat"
