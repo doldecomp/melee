@@ -879,3 +879,16 @@ Fighter_CostumeStrings lbl_803CB310[] = {
     { lbl_803CB270, lbl_803CB280, lbl_803CB29C },
     { lbl_803CB2C0, lbl_803CB2D0, lbl_803CB2EC },
 };
+
+char lbl_803CB358[] = "PlKbNrCpGw.dat";
+char lbl_803CB368[] = "PlyKirbyGw_Share_joint";
+char lbl_803CB380[] = "PlyKirbyGw_Share_matanim_joint";
+
+Fighter_CostumeStrings lbl_803CB3A0[] = {
+    { lbl_803CB358, lbl_803CB368, lbl_803CB380 },
+    { lbl_803CB358, lbl_803CB368, lbl_803CB380 },
+    { lbl_803CB358, lbl_803CB368, lbl_803CB380 },
+    { lbl_803CB358, lbl_803CB368, lbl_803CB380 },
+    { lbl_803CB358, lbl_803CB368, lbl_803CB380 },
+    { lbl_803CB358, lbl_803CB368, lbl_803CB380 },
+};

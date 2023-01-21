@@ -35534,38 +35534,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global lbl_803CB358
-lbl_803CB358:
-    .asciz "PlKbNrCpGw.dat"
-    .balign 4
-.global lbl_803CB368
-lbl_803CB368:
-    .asciz "PlyKirbyGw_Share_joint"
-    .balign 4
-.global lbl_803CB380
-lbl_803CB380:
-    .asciz "PlyKirbyGw_Share_matanim_joint"
-    .balign 4
-.global lbl_803CB3A0
-lbl_803CB3A0:
-    .4byte lbl_803CB358
-    .4byte lbl_803CB368
-    .4byte lbl_803CB380
-    .4byte lbl_803CB358
-    .4byte lbl_803CB368
-    .4byte lbl_803CB380
-    .4byte lbl_803CB358
-    .4byte lbl_803CB368
-    .4byte lbl_803CB380
-    .4byte lbl_803CB358
-    .4byte lbl_803CB368
-    .4byte lbl_803CB380
-    .4byte lbl_803CB358
-    .4byte lbl_803CB368
-    .4byte lbl_803CB380
-    .4byte lbl_803CB358
-    .4byte lbl_803CB368
-    .4byte lbl_803CB380
 .global lbl_803CB3E8
 lbl_803CB3E8:
     .4byte NULL
