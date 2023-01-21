@@ -449,13 +449,14 @@ HSD_GObjEvent lbl_803C9E54[] = {
     NULL,         lbl_800FA958, NULL,
 };
 
-static size_t const unk_array_size = 12;
+// static size_t const unk_array_size = 12;
+typedef unk_t ftKirby_UnkArrayThing[12];
 
-unk_t lbl_803C9ED8[unk_array_size] = { 0 };
-unk_t lbl_803C9F08[unk_array_size] = { 0 };
-unk_t lbl_803C9F38[unk_array_size] = { 0 };
-unk_t lbl_803C9F68[unk_array_size] = { 0 };
-unk_t lbl_803C9F98[unk_array_size] = { 0 };
+ftKirby_UnkArrayThing lbl_803C9ED8 = { 0 };
+ftKirby_UnkArrayThing lbl_803C9F08 = { 0 };
+ftKirby_UnkArrayThing lbl_803C9F38 = { 0 };
+ftKirby_UnkArrayThing lbl_803C9F68 = { 0 };
+ftKirby_UnkArrayThing lbl_803C9F98 = { 0 };
 
 unk_t lbl_803C9FC8[] = {
     NULL, NULL,         NULL,         lbl_803C9ED8, NULL, NULL, NULL,
