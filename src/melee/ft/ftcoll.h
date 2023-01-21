@@ -68,7 +68,7 @@ void func_80076640(void);
 void func_80076764(void);
 void func_80076808(Fighter* attacker, Hitbox*, int, Fighter* victim, int);
 void func_800768A0(void);
-void func_8007699C(void);
+bool func_8007699C(Fighter*, Hitbox*, Fighter*, Hitbox*);
 void func_800784B4(void);
 void func_80076CBC(void);
 void func_80076ED8(void);

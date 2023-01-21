@@ -58,11 +58,11 @@ void lbl_80138AA8(HSD_GObj* gobj)
     if (fp->x2204_ftcmd_var1 == 1) {
         fp->x2204_ftcmd_var1 = 2;
         func_8007B1B8(gobj, &attr->x64, &lbl_80139140);
-        fp->x221B_flag.bits.b1 = 1;
+        fp->x221B_b1 = 1;
         fp->x19B4_shieldUnk = attr->x60;
         fp->x19B8_shieldUnk = attr->x60;
     } else if (fp->x2204_ftcmd_var1 == 0) {
-        fp->x221B_flag.bits.b0 = 0;
+        fp->x221B_b0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_8008A2BC(gobj);
@@ -82,11 +82,11 @@ void lbl_80138B64(HSD_GObj* gobj)
     if (fp->x2204_ftcmd_var1 == 1) {
         fp->x2204_ftcmd_var1 = 2;
         func_8007B1B8(gobj, &attr->x64, &lbl_80139140);
-        fp->x221B_flag.bits.b1 = 1;
+        fp->x221B_b1 = 1;
         fp->x19B4_shieldUnk = attr->x60;
         fp->x19B8_shieldUnk = attr->x60;
     } else if (fp->x2204_ftcmd_var1 == 0) {
-        fp->x221B_flag.bits.b0 = 0;
+        fp->x221B_b0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_800CC730(gobj);
@@ -157,7 +157,7 @@ void func_80138D38(HSD_GObj* gobj)
     attr = ft_2->x2D4_specialAttributes;
     if (ft_2->x2204_ftcmd_var1 == 2) {
         func_8007B1B8(gobj, &attr->x64, &lbl_80139140);
-        ft_2->x221B_flag.bits.b1 = 1;
+        ft_2->x221B_b1 = 1;
     }
 }
 
@@ -178,7 +178,7 @@ void func_80138DD0(HSD_GObj* gobj)
     attr = ft_2->x2D4_specialAttributes;
     if (ft_2->x2204_ftcmd_var1 == 2) {
         func_8007B1B8(gobj, &attr->x64, &lbl_80139140);
-        ft_2->x221B_flag.bits.b1 = 1;
+        ft_2->x221B_b1 = 1;
     }
 }
 

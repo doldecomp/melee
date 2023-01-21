@@ -15,7 +15,14 @@ struct Hitbox {
     /// @at{30} @sz{4}
     HitElement element;
 
-    u8 x34[0x40 - 0x34];
+    u8 x34[0x38 - 0x34];
+
+    /// @at{38} @sz{4}
+    int sfx_severity;
+
+    /// @at{3C} @sz{4}
+    enum_t sfx_kind;
+
     u8 x40_b0 : 1;
     u8 x40_b1 : 1;
     u8 x40_b2 : 1;
@@ -24,8 +31,31 @@ struct Hitbox {
     u8 x40_b5 : 1;
     u8 x40_b6 : 1;
     u8 x40_b7 : 1;
-    u8 x41[0x134 - 0x41];
-    s32 x134;
+    u8 x41[0x42 - 0x41];
+    u8 x42_b0 : 1;
+    u8 x42_b1 : 1;
+    u8 x42_b2 : 1;
+    u8 x42_b3 : 1;
+    u8 x42_b4 : 1;
+    u8 x42_b5 : 1;
+    u8 x42_b6 : 1;
+    u8 x42_b7 : 1;
+    u8 x43_b0 : 1;
+    u8 x43_b1 : 1;
+    u8 x43_b2 : 1;
+    u8 x43_b3 : 1;
+    u8 x43_b4 : 1;
+    u8 x43_b5 : 1;
+    u8 x43_b6 : 1;
+    u8 x43_b7 : 1;
+    u8 x44[0x134 - 0x44];
+
+    /// @at{134} @sz{4}
+    /// @todo This union is unacceptable.
+    union {
+        HSD_GObj* owner;
+        u8 hit_grabbed_victim_only : 1;
+    };
 };
 
 struct Hurtbox {
@@ -64,7 +94,7 @@ bool func_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
                    f32 hurt_pos_z);
 void func_8000805C(void);
 void func_80007BCC(void);
-void func_80007AFC(void);
+bool func_80007AFC(Hitbox*, Hitbox*, f32, f32);
 void func_80007DD8(void);
 void func_80008D30(void);
 void func_80008428(void);
