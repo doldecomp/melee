@@ -35534,17 +35534,6 @@ func_8010D6D0:
 
 .section .data
     .balign 4
-.global lbl_803CB4EC
-lbl_803CB4EC:
-    .4byte NULL
-    .4byte 0x00000002
-    .4byte 0x00000003
-    .4byte 0x00000004
-    .4byte 0x00000005
-    .4byte 0x00000006
-    .4byte NULL
-    .4byte 0x3F800000
-    .4byte NULL
 .global lbl_803CB510
 lbl_803CB510:
     .asciz "Other Dead_Proc Existence"
