@@ -438,3 +438,13 @@ HSD_GObjEvent lbl_803C9DD0[] = {
     lbl_800F99BC, lbl_8010B2FC, NULL,         NULL,         NULL,
     NULL,         lbl_800FA8B4, NULL,
 };
+
+HSD_GObjEvent lbl_803C9E54[] = {
+    lbl_800F93CC, lbl_800FE240, lbl_800F9A54, lbl_800FFA10, func_800F6070,
+    lbl_800FA958, lbl_800FBA00, lbl_801061E4, lbl_800FEDD0, lbl_8010C560,
+    lbl_80108E14, NULL,         lbl_800FA064, lbl_800FD020, lbl_801094FC,
+    lbl_80101618, lbl_80107638, lbl_800F9684, lbl_8010B4A0, lbl_80105BA8,
+    lbl_800FBA00, lbl_800F93CC, lbl_800FE240, lbl_800FA064, lbl_8010D204,
+    lbl_800F9A54, lbl_8010B4A0, NULL,         NULL,         NULL,
+    NULL,         lbl_800FA958, NULL,
+};

@@ -856,4 +856,32 @@ void lbl_800F99BC(HSD_GObj*);
 void lbl_8010B2FC(HSD_GObj*);
 void lbl_800FA8B4(HSD_GObj*);
 
+void lbl_800F93CC(HSD_GObj*);
+void lbl_800FE240(HSD_GObj*);
+void lbl_800F9A54(HSD_GObj*);
+void lbl_800FFA10(HSD_GObj*);
+void func_800F6070(HSD_GObj*);
+void lbl_800FA958(HSD_GObj*);
+void lbl_800FBA00(HSD_GObj*);
+void lbl_801061E4(HSD_GObj*);
+void lbl_800FEDD0(HSD_GObj*);
+void lbl_8010C560(HSD_GObj*);
+void lbl_80108E14(HSD_GObj*);
+void lbl_800FA064(HSD_GObj*);
+void lbl_800FD020(HSD_GObj*);
+void lbl_801094FC(HSD_GObj*);
+void lbl_80101618(HSD_GObj*);
+void lbl_80107638(HSD_GObj*);
+void lbl_800F9684(HSD_GObj*);
+void lbl_8010B4A0(HSD_GObj*);
+void lbl_80105BA8(HSD_GObj*);
+void lbl_800FBA00(HSD_GObj*);
+void lbl_800F93CC(HSD_GObj*);
+void lbl_800FE240(HSD_GObj*);
+void lbl_800FA064(HSD_GObj*);
+void lbl_8010D204(HSD_GObj*);
+void lbl_800F9A54(HSD_GObj*);
+void lbl_8010B4A0(HSD_GObj*);
+void lbl_800FA958(HSD_GObj*);
+
 #endif
