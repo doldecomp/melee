@@ -928,3 +928,38 @@ Fighter_UnkMtxEvent lbl_803C20CC[FTKIND_MAX] = {
     NULL, NULL, NULL, NULL, func_8013C4F0, NULL, NULL, NULL, NULL, NULL, NULL,
     NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL, NULL, NULL, NULL,
 };
+
+/// Character model group (e.g. high poly, low poly, metal) visibility change
+/// callbacks
+struct {
+    Fighter_ModelEvent model_events[FTKIND_MAX];
+    unk_t (*getter[FTKIND_MAX])(HSD_GObj*);
+} lbl_803C2150 = {
+    {
+        NULL, NULL, NULL, NULL, func_800EF87C, NULL, NULL,          NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL,          NULL, func_8013C614, NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL,          NULL, NULL,          NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL,          NULL,
+    },
+    {
+        NULL, NULL, NULL, NULL, func_800EF028, NULL, NULL,          NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL,          NULL, func_8013C664, NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL,          NULL, NULL,          NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL,          NULL,
+    },
+};
+
+HSD_GObjEvent lbl_803C2258[][FTKIND_MAX] = {
+    {
+        NULL,          NULL, NULL, NULL, NULL, NULL, NULL, NULL, func_800EF9BC,
+        func_800EF9FC, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+        NULL,          NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+        NULL,          NULL, NULL, NULL, NULL, NULL,
+    },
+    {
+        NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    }
+
+};

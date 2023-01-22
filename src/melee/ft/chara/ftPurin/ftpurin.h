@@ -54,7 +54,7 @@ void func_8013C2F8(void);
 void func_8013C360(HSD_GObj* fighter_gobj);
 void func_8013C494(HSD_GObj* fighter_gobj);
 void func_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx);
-void func_8013C614(Fighter* fp, s32 arg1, s32 arg2);
+void func_8013C614(Fighter* fp, int arg1, bool arg2);
 void func_8013CD34(HSD_GObj*);
 void func_8013CDD8(HSD_GObj*);
 void func_8013D104(HSD_GObj*);

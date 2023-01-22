@@ -911,5 +911,9 @@ void func_800F1B6C(HSD_GObj*);
 void ftKirby_LoadSpecialAttrs(HSD_GObj*);
 void func_800EEE9C(HSD_GObj*);
 void func_800EEF04(HSD_GObj*, int, Mtx);
+void func_800EF87C(Fighter*, int, bool);
+unk_t func_800EF028(HSD_GObj*);
+void func_800EF9BC(HSD_GObj*);
+void func_800EF9FC(HSD_GObj*);
 
 #endif

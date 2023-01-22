@@ -13,5 +13,6 @@ typedef struct Fighter_DemoStrings Fighter_DemoStrings;
 
 typedef void (*Fighter_ItemEvent)(HSD_GObj* this, bool arg1);
 typedef void (*Fighter_UnkMtxEvent)(HSD_GObj* this, int arg1, Mtx vmtx);
+typedef void (*Fighter_ModelEvent)(Fighter* fp, int arg1, bool arg2);
 
 #endif
