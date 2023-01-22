@@ -6063,7 +6063,6 @@ lbl_803C52A0:
     .4byte NULL
     .4byte NULL
 
-
 .section .sdata
     .balign 8
 .global lbl_804D3AB8
