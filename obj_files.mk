@@ -211,7 +211,6 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMars.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMars_Data.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftmars.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMarsSpecialHi.c.o\
