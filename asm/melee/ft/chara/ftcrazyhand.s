@@ -6830,43 +6830,7 @@ lbl_8015BCE8:
 
 
 .section .data
-    .balign 8
-.global lbl_803D4878
-lbl_803D4878:
-    .4byte 0x00000157
-    .4byte 0x00000159
-    .4byte 0x0000015B
-    .4byte 0x0000015D
-    .4byte 0x0000015F
-    .4byte 0x00000162
-    .4byte 0x00000163
-    .4byte 0x00000165
-    .4byte 0x00000174
-    .4byte 0x00000175
-    .4byte 0x00000176
-    .4byte 0x00000167
-    .4byte 0x00000169
-    .4byte 0x00000170
-    .4byte 0x00000171
-    .4byte 0x00000179
-    .4byte 0x0000017A
-    .4byte 0x0000017B
-    .4byte 0x00010203
-    .4byte 0x04050607
-    .4byte 0x08090A0B
-    .4byte 0x0C0D0E0F
-    .4byte 0x10110000
-    .4byte 0x00040404
-    .4byte 0x08030B02
-    .4byte 0x0D020F03
-    .4byte 0x01020304
-    .4byte 0x05000203
-    .4byte 0x04050001
-    .4byte 0x03040500
-    .4byte 0x01020405
-    .4byte 0x00010203
-    .4byte 0x05000102
-    .4byte 0x03040000
+    .balign 0
 .global jtbl_803D4900
 jtbl_803D4900:
     .4byte lbl_801566B4
