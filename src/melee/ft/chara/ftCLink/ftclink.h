@@ -39,7 +39,7 @@ void func_801492C4(HSD_GObj* gobj);
 u32 func_801492F4(HSD_GObj* gobj);
 void func_80149318(HSD_GObj* gobj);
 void ftCLink_OnLoad(HSD_GObj* gobj);
-void ftCLink_OnItemPickupExt(HSD_GObj* gobj, s32 arg1);
+void ftCLink_OnItemPickupExt(HSD_GObj* gobj, bool arg1);
 void ftCLink_OnItemInvisible(HSD_GObj* gobj);
 void ftCLink_OnItemVisible(HSD_GObj* gobj);
 void ftCLink_OnItemDropExt(HSD_GObj* gobj, s32 arg1);

@@ -2,11 +2,14 @@
 #define MELEE_FT_FORWARD_H
 
 #include <Runtime/platform.h>
+#include <sysdolphin/baselib/forward.h>
 
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
 typedef struct Fighter Fighter;
 typedef struct ActionState ActionState;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
+
+typedef void (*Fighter_ItemEvent)(HSD_GObj* this, bool arg1);
 
 #endif
