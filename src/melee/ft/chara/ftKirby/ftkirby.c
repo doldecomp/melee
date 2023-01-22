@@ -977,8 +977,6 @@ f32 const lbl_803B7548[10] = { 0 };
 Vec3 const lbl_803B7570 = { 0, 4, 0 };
 Vec3 const lbl_803B757C = { 0, 4, 0 };
 
-extern s32 lbl_80459B88[FTKIND_MAX];
-
 #ifdef MWERKS_GEKKO
 #pragma push
 asm void func_800EE528(void)

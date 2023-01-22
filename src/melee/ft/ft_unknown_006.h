@@ -10,6 +10,8 @@
 /// @remarks Only used by Purin.
 extern HSD_Joint* lbl_8045A1E0[6];
 
+extern s32 lbl_80459B88[FTKIND_MAX];
+
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1);
 s32 func_80087818(HSD_GObj* fighter_gobj, s32 arg1);
 s32 func_80087838(HSD_GObj* fighter_gobj);
@@ -78,7 +80,7 @@ void func_8008E9D0(HSD_GObj*);
 void func_8008EB58(HSD_GObj*);
 void func_8008EC90(HSD_GObj*);
 void func_80090594(Fighter*, s32, bool, s32, s32, float);
-u32 func_80090690(Fighter*, struct _Vec2*);
+u32 func_80090690(Fighter*, Vec2*);
 void func_80090718(Fighter*);
 f32 func_80092ED8(s32, void*, f32);
 s32 func_80093694(void);
@@ -171,7 +173,7 @@ void func_800DE2A8(HSD_GObj*, HSD_GObj*);
 void func_800DE508(HSD_GObj*);
 void func_800DE7C0(HSD_GObj*, s32, s32);
 void func_800DEEA8(HSD_GObj* fighter_gobj);
-u32 func_800DEEE8(Fighter*, struct _Vec2*);
+u32 func_800DEEE8(Fighter*, Vec2*);
 void func_800DEF38(HSD_GObj*);
 void func_800DF0D0(HSD_GObj*);
 bool func_80096CC8(HSD_GObj*);

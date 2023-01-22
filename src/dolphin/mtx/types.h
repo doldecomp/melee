@@ -3,6 +3,17 @@
 
 #include <Runtime/platform.h>
 
+/// @sz{8}
+typedef struct Vec2 {
+    /// @at{0} @sz{4}
+    /// @brief The @e x component.
+    f32 x;
+
+    /// @at{4} @sz{4}
+    /// @brief The @e y component.
+    f32 y;
+} Vec2;
+
 /// @sz{C}
 typedef struct Vec3 {
     /// @at{0} @sz{4}
