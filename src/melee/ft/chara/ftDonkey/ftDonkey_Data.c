@@ -129,16 +129,12 @@ char lbl_803CBF3C[] = "PlDkGr.dat";
 char lbl_803CBF48[] = "PlyDonkey5KGr_Share_joint";
 char lbl_803CBF64[] = "PlyDonkey5KGr_Share_matanim_joint";
 char lbl_803CBF88[] = "PlDkAJ.dat";
-char lbl_803CBF94[] = "ftDemoResultMotionFileDonkey";
-char lbl_803CBFB4[] = "ftDemoIntroMotionFileDonkey";
-char lbl_803CBFD0[] = "ftDemoEndingMotionFileDonkey";
-char lbl_803CBFF0[] = "ftDemoViWaitMotionFileDonkey";
 
 Fighter_DemoStrings lbl_803CC010 = {
-    lbl_803CBF94,
-    lbl_803CBFB4,
-    lbl_803CBFD0,
-    lbl_803CBFF0,
+    "ftDemoResultMotionFileDonkey",
+    "ftDemoIntroMotionFileDonkey",
+    "ftDemoEndingMotionFileDonkey",
+    "ftDemoViWaitMotionFileDonkey",
 };
 
 Fighter_CostumeStrings lbl_803CC020[] = {

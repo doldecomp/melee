@@ -67,16 +67,12 @@ char lbl_803D1380[] = "PlClBk.dat";
 char lbl_803D138C[] = "PlyClink5KBk_Share_joint";
 char lbl_803D13A8[] = "PlyClink5KBk_Share_matanim_joint";
 char lbl_803D13CC[] = "PlClAJ.dat";
-char lbl_803D13D8[] = "ftDemoResultMotionFileClink";
-char lbl_803D13F4[] = "ftDemoIntroMotionFileClink";
-char lbl_803D1410[] = "ftDemoEndingMotionFileClink";
-char lbl_803D142C[] = "ftDemoViWaitMotionFileClink";
 
 Fighter_DemoStrings lbl_803D1448 = {
-    lbl_803D13D8,
-    lbl_803D13F4,
-    lbl_803D1410,
-    lbl_803D142C,
+    "ftDemoResultMotionFileClink",
+    "ftDemoIntroMotionFileClink",
+    "ftDemoEndingMotionFileClink",
+    "ftDemoViWaitMotionFileClink",
 };
 
 Fighter_CostumeStrings lbl_803D1458[] = {
