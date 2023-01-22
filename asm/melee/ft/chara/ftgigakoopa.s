@@ -1,30 +1,6 @@
 .include "macros.inc"
 
 .section .data
-    .balign 8
-.global lbl_803D38E8
-lbl_803D38E8:
-    .asciz "PlGk.dat"
-    .balign 4
-.global lbl_803D38F4
-lbl_803D38F4:
-    .asciz "ftDataGkoopa"
-    .balign 4
-.global lbl_803D3904
-lbl_803D3904:
-    .asciz "PlGkNr.dat"
-    .balign 4
-.global lbl_803D3910
-lbl_803D3910:
-    .asciz "PlyGkoopa5K_Share_joint"
-    .balign 4
-.global lbl_803D3928
-lbl_803D3928:
-    .asciz "PlyGkoopa5K_Share_matanim_joint"
-    .balign 4
-.global lbl_803D3948
-lbl_803D3948:
-    .asciz "PlGkAJ.dat"
     .balign 4
 .global lbl_803D3954
 lbl_803D3954:

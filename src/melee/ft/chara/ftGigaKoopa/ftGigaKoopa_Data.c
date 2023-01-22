@@ -55,3 +55,10 @@ ActionState as_table_gkoopa[] = {
 ActionState lbl_803D38C8 = {
     0xE, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C74AC, NULL, NULL,
 };
+
+char lbl_803D38E8[] = "PlGk.dat";
+char lbl_803D38F4[] = "ftDataGkoopa";
+char lbl_803D3904[] = "PlGkNr.dat";
+char lbl_803D3910[] = "PlyGkoopa5K_Share_joint";
+char lbl_803D3928[] = "PlyGkoopa5K_Share_matanim_joint";
+char lbl_803D3948[] = "PlGkAJ.dat";
