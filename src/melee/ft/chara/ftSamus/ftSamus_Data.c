@@ -59,3 +59,10 @@ char lbl_803CE5F8[] = "ftDemoResultMotionFileSamus";
 char lbl_803CE614[] = "ftDemoIntroMotionFileSamus";
 char lbl_803CE630[] = "ftDemoEndingMotionFileSamus";
 char lbl_803CE64C[] = "ftDemoViWaitMotionFileSamus";
+
+Fighter_DemoStrings lbl_803CE668 = {
+    lbl_803CE5F8,
+    lbl_803CE614,
+    lbl_803CE630,
+    lbl_803CE64C,
+};
