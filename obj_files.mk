@@ -183,7 +183,6 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi1.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYoshi_Data_2.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYoshi_Data_3.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o\
 
