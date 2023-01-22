@@ -125,3 +125,27 @@ ActionState as_table_gamewatch[] = {
       ftGameWatch_SpecialAirLwShoot_IASA, ftGameWatch_SpecialAirLwShoot_Phys,
       ftGameWatch_SpecialAirLwShoot_Coll, func_800761C8 },
 };
+
+char lbl_803D28E8[] = "PlGw.dat";
+char lbl_803D28F4[] = "ftDataGamewatch";
+char lbl_803D2904[] = "PlGwNr.dat";
+char lbl_803D2910[] = "PlyGamewatch5K_Share_joint";
+char lbl_803D292C[] = "PlGwAJ.dat";
+char lbl_803D2938[] = "ftDemoResultMotionFileGamewatch";
+char lbl_803D2958[] = "ftDemoIntroMotionFileGamewatch";
+char lbl_803D2978[] = "ftDemoEndingMotionFileGamewatch";
+char lbl_803D2998[] = "ftDemoViWaitMotionFileGamewatch";
+
+Fighter_DemoStrings lbl_803D29B8 = {
+    lbl_803D2938,
+    lbl_803D2958,
+    lbl_803D2978,
+    lbl_803D2998,
+};
+
+Fighter_CostumeStrings lbl_803D29C8[] = {
+    { lbl_803D2904, lbl_803D2910, NULL },
+    { lbl_803D2904, lbl_803D2910, NULL },
+    { lbl_803D2904, lbl_803D2910, NULL },
+    { lbl_803D2904, lbl_803D2910, NULL },
+};
