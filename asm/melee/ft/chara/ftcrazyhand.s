@@ -6828,23 +6828,6 @@ lbl_8015BCE8:
 /* 8015BD18 001588F8  7C 08 03 A6 */	mtlr r0
 /* 8015BD1C 001588FC  4E 80 00 20 */	blr
 
-
-.section .data
-    .balign 4
-.global jtbl_803D4998
-jtbl_803D4998:
-    .4byte lbl_8015B2FC
-    .4byte lbl_8015B35C
-    .4byte lbl_8015B390
-    .4byte lbl_8015B3B8
-    .4byte lbl_8015B3EC
-    .4byte lbl_8015B404
-    .4byte lbl_8015B43C
-    .4byte lbl_8015B46C
-    .4byte lbl_8015B4AC
-    .4byte lbl_8015B4BC
-
-
 .section .sdata
     .balign 8
 .global lbl_804D3EC0
@@ -6855,7 +6838,6 @@ lbl_804D3EC0:
 lbl_804D3EC8:
     .asciz "jobj"
     .balign 4
-
 
 .section .sdata2
     .balign 8

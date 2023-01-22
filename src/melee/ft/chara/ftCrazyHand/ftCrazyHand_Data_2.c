@@ -61,3 +61,19 @@ jtbl_t jtbl_803D4900 = {
     lbl_80156898, lbl_801568AC, lbl_80156A5C, lbl_80156A5C, lbl_801568B8,
     lbl_801568E8, lbl_80156918, lbl_80156948,
 };
+
+/* static */ void lbl_8015B2FC(void);
+/* static */ void lbl_8015B35C(void);
+/* static */ void lbl_8015B390(void);
+/* static */ void lbl_8015B3B8(void);
+/* static */ void lbl_8015B3EC(void);
+/* static */ void lbl_8015B404(void);
+/* static */ void lbl_8015B43C(void);
+/* static */ void lbl_8015B46C(void);
+/* static */ void lbl_8015B4AC(void);
+/* static */ void lbl_8015B4BC(void);
+
+jtbl_t jtbl_803D4998 = {
+    lbl_8015B2FC, lbl_8015B35C, lbl_8015B390, lbl_8015B3B8, lbl_8015B3EC,
+    lbl_8015B404, lbl_8015B43C, lbl_8015B46C, lbl_8015B4AC, lbl_8015B4BC,
+};
