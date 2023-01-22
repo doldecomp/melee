@@ -910,5 +910,6 @@ void ftKirby_OnItemDrop(HSD_GObj*, bool);
 void ftKirby_OnKnockbackEnter(HSD_GObj*);
 void ftKirby_OnKnockbackExit(HSD_GObj*);
 void func_800F1B6C(HSD_GObj*);
+void ftKirby_LoadSpecialAttrs(HSD_GObj*);
 
 #endif
