@@ -883,5 +883,13 @@ void lbl_8010D204(HSD_GObj*);
 void lbl_800F9A54(HSD_GObj*);
 void lbl_8010B4A0(HSD_GObj*);
 void lbl_800FA958(HSD_GObj*);
+/* static */ s32 func_800F1BAC(HSD_GObj* fighter_gobj, s32, bool);
+/* static */ void func_800F5524(HSD_GObj* fighter_gobj);
+/* static */ void func_800F22D4(HSD_GObj* fighter_gobj);
+/* static */ void func_800F5318(HSD_GObj* fighter_gobj);
+/* static */ void func_800F9090(HSD_GObj* fighter_gobj);
+/* static */ void func_800F19AC(HSD_GObj* fighter_gobj);
+/* static */ void func_800F1A8C(HSD_GObj* fighter_gobj);
+void func_800EE818(HSD_GObj* fighter_gobj);
 
 #endif
