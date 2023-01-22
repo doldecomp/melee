@@ -50,16 +50,12 @@ char lbl_803D1724[] = "PlDrBk.dat";
 char lbl_803D1730[] = "PlyDrmario5KBk_Share_joint";
 char lbl_803D174C[] = "PlyDrmario5KBk_Share_matanim_joint";
 char lbl_803D1770[] = "PlDrAJ.dat";
-char lbl_803D177C[] = "ftDemoResultMotionFileDrmario";
-char lbl_803D179C[] = "ftDemoIntroMotionFileDrmario";
-char lbl_803D17BC[] = "ftDemoEndingMotionFileDrmario";
-char lbl_803D17DC[] = "ftDemoViWaitMotionFileDrmario";
 
 Fighter_DemoStrings lbl_803D17FC = {
-    lbl_803D177C,
-    lbl_803D179C,
-    lbl_803D17BC,
-    lbl_803D17DC,
+    "ftDemoResultMotionFileDrmario",
+    "ftDemoIntroMotionFileDrmario",
+    "ftDemoEndingMotionFileDrmario",
+    "ftDemoViWaitMotionFileDrmario",
 };
 
 Fighter_CostumeStrings lbl_803D180C[] = {
