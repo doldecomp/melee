@@ -183,7 +183,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu5.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftPikachu_Data.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftpikachu.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus1.c.o\
