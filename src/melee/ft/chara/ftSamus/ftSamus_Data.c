@@ -41,3 +41,21 @@ ActionState as_table_samus[] = {
     { 312, 0x00C00000, 0x01000000, func_800C4380, func_800C4388, func_800C4438,
       func_80082B78, func_800761C8 },
 };
+
+char lbl_803CE510[] = "PlSs.dat";
+char lbl_803CE51C[] = "ftDataSamus";
+char lbl_803CE528[] = "PlSsNr.dat";
+char lbl_803CE534[] = "PlySamus5K_Share_joint";
+char lbl_803CE54C[] = "PlSsPi.dat";
+char lbl_803CE558[] = "PlySamus5KPi_Share_joint";
+char lbl_803CE574[] = "PlSsBk.dat";
+char lbl_803CE580[] = "PlySamus5KBk_Share_joint";
+char lbl_803CE59C[] = "PlSsGr.dat";
+char lbl_803CE5A8[] = "PlySamus5KGr_Share_joint";
+char lbl_803CE5C4[] = "PlSsLa.dat";
+char lbl_803CE5D0[] = "PlySamus5KLa_Share_joint";
+char lbl_803CE5EC[] = "PlSsAJ.dat";
+char lbl_803CE5F8[] = "ftDemoResultMotionFileSamus";
+char lbl_803CE614[] = "ftDemoIntroMotionFileSamus";
+char lbl_803CE630[] = "ftDemoEndingMotionFileSamus";
+char lbl_803CE64C[] = "ftDemoViWaitMotionFileSamus";
