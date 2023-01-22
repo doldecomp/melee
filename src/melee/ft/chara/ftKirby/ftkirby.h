@@ -909,5 +909,7 @@ void ftKirby_OnKnockbackEnter(HSD_GObj*);
 void ftKirby_OnKnockbackExit(HSD_GObj*);
 void func_800F1B6C(HSD_GObj*);
 void ftKirby_LoadSpecialAttrs(HSD_GObj*);
+void func_800EEE9C(HSD_GObj*);
+void func_800EEF04(HSD_GObj*, int, Mtx);
 
 #endif
