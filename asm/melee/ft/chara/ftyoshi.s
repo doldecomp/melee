@@ -7420,12 +7420,6 @@ lbl_8013295C:
 
 .section .data
     .balign 4
-.global lbl_803CECEC
-lbl_803CECEC:
-    .4byte lbl_803CEC7C
-    .4byte lbl_803CEC98
-    .4byte lbl_803CECB4
-    .4byte lbl_803CECD0
 .global lbl_803CECFC
 lbl_803CECFC:
     .4byte lbl_803CEAB0

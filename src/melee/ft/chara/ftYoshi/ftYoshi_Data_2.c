@@ -1,3 +1,5 @@
+#include <melee/ft/types.h>
+
 char lbl_803CEA98[] = "PlYs.dat";
 char lbl_803CEAA4[] = "ftDataYoshi";
 char lbl_803CEAB0[] = "PlYsNr.dat";
@@ -23,3 +25,10 @@ char lbl_803CEC7C[] = "ftDemoResultMotionFileYoshi";
 char lbl_803CEC98[] = "ftDemoIntroMotionFileYoshi";
 char lbl_803CECB4[] = "ftDemoEndingMotionFileYoshi";
 char lbl_803CECD0[] = "ftDemoViWaitMotionFileYoshi";
+
+Fighter_DemoStrings lbl_803CECEC = {
+    lbl_803CEC7C,
+    lbl_803CEC98,
+    lbl_803CECB4,
+    lbl_803CECD0,
+};
