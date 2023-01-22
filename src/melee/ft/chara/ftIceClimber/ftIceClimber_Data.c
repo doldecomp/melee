@@ -1,3 +1,4 @@
+#include "melee/ft/forward.h"
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/types.h>
@@ -74,3 +75,10 @@ char lbl_803CD744[] = "ftDemoResultMotionFilePopo";
 char lbl_803CD760[] = "ftDemoIntroMotionFilePopo";
 char lbl_803CD77C[] = "ftDemoEndingMotionFilePopo";
 char lbl_803CD798[] = "ftDemoViWaitMotionFilePopo";
+
+Fighter_DemoStrings lbl_803CD7B4 = {
+    lbl_803CD744,
+    lbl_803CD760,
+    lbl_803CD77C,
+    lbl_803CD798,
+};
