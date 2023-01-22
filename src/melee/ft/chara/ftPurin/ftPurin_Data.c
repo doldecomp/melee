@@ -116,3 +116,5 @@ char lbl_803D0598[] = "PlyPurinYeHat_TopN_joint";
 char* lbl_803D05B4[] = {
     NULL, lbl_803D0544, lbl_803D0560, lbl_803D057C, lbl_803D0598,
 };
+
+Vec4 lbl_803D05C8 = { 0.65, 0.7, 0.8, 1 };
