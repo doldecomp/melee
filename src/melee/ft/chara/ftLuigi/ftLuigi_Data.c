@@ -60,6 +60,6 @@ ActionState as_table_luigi[] = {
 };
 
 ActionState lbl_803D0868[] = {
-    { 0xE, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
-    { 0xF, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
+    { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
+    { 15, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };

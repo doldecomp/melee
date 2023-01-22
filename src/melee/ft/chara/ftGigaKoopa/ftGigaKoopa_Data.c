@@ -53,7 +53,7 @@ ActionState as_table_gkoopa[] = {
 };
 
 ActionState lbl_803D38C8[] = {
-    { 0xE, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C74AC, NULL, NULL },
+    { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C74AC, NULL, NULL },
 };
 
 char lbl_803D38E8[] = "PlGk.dat";
