@@ -2,24 +2,6 @@
 
 .section .data
     .balign 8
-.global lbl_803D0868
-lbl_803D0868:
-    .4byte 0x0000000E
-    .4byte NULL
-    .4byte 0x01000000
-    .4byte NULL
-    .4byte NULL
-    .4byte func_800C7158
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x0000000F
-    .4byte NULL
-    .4byte 0x01000000
-    .4byte NULL
-    .4byte NULL
-    .4byte func_800C7200
-    .4byte NULL
-    .4byte NULL
 .global lbl_803D08A8
 lbl_803D08A8:
     .asciz "PlLg.dat"
