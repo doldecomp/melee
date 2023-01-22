@@ -7417,21 +7417,6 @@ lbl_8013295C:
 /* 80132A04 0012F5E4  7C 08 03 A6 */	mtlr r0
 /* 80132A08 0012F5E8  4E 80 00 20 */	blr
 
-
-.section .data
-    .balign 4
-
-
-.section .rodata
-    .balign 8
-.global lbl_803B75C0
-lbl_803B75C0:
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-    .4byte 0x00000000
-
-
 .section .sdata
     .balign 8
 .global lbl_804D3E58
@@ -7454,7 +7439,6 @@ lbl_804D3E70:
 lbl_804D3E78:
     .asciz "scale"
     .balign 4
-
 
 .section .sdata2
     .balign 8
