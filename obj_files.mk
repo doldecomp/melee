@@ -181,7 +181,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus6.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYoshi_Data_1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYoshi_Data_2.c.o\

@@ -2,12 +2,74 @@
 
 #include <dolphin/os/os.h>
 #include <melee/ef/efasync.h>
+#include <melee/ft/chara/ftYoshi/ftyoshi.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftanim.h>
+#include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
 #include <melee/it/itkind.h>
 #include <placeholder.h>
+
+ActionState as_table_yoshi[] = {
+    { 37, 0x00100000, 0x01000000, lbl_8012C030, lbl_8012C114, lbl_8012C194,
+      lbl_8012C1B4, func_800761C8 },
+    { -1, 0x00180000, 0x01000000, lbl_8012C2F4, lbl_8012C3EC, lbl_8012C45C,
+      lbl_8012C47C, func_800761C8 },
+    { 39, 0x00100000, 0x01000000, lbl_8012C54C, lbl_8012C59C, lbl_8012C5C0,
+      lbl_8012C5E0, func_800761C8 },
+    { 40, 0x00100000, 0x01000000, lbl_8012C7A4, lbl_8012C80C, lbl_8012C810,
+      lbl_8012C830, func_800761C8 },
+    { 37, 0x00101073, 0x01000000, lbl_8012CAD0, lbl_8012CBBC, lbl_8012CBDC,
+      lbl_8012CBFC, func_800761C8 },
+    { 295, 0x00340011, 0x12000000, lbl_8012D550, NULL, lbl_8012DC30,
+      lbl_8012DD70, func_800761C8 },
+    { 296, 0x00340011, 0x12000000, lbl_8012D658, NULL, lbl_8012DC90,
+      lbl_8012DDE8, func_800761C8 },
+    { 296, 0x00340011, 0x12000000, lbl_8012D5C8, NULL, lbl_8012DC70,
+      lbl_8012DDC0, func_800761C8 },
+    { 297, 0x00340011, 0x12000000, lbl_8012D948, NULL, lbl_8012DD10,
+      lbl_8012DE88, func_800761C8 },
+    { 297, 0x00340011, 0x12000000, lbl_8012D7D8, NULL, lbl_8012DCF0,
+      lbl_8012DE60, func_800761C8 },
+    { 298, 0x00340411, 0x12000000, lbl_8012D58C, NULL, lbl_8012DC50,
+      lbl_8012DD98, func_800761C8 },
+    { 299, 0x00340411, 0x12000000, lbl_8012D760, NULL, lbl_8012DCD0,
+      lbl_8012DE38, func_800761C8 },
+    { 299, 0x00340411, 0x12000000, lbl_8012D6D0, NULL, lbl_8012DCB0,
+      lbl_8012DE10, func_800761C8 },
+    { 300, 0x00340411, 0x12000000, lbl_8012DB74, NULL, lbl_8012DD50,
+      lbl_8012DED8, func_800761C8 },
+    { 300, 0x00340411, 0x12000000, lbl_8012DA04, NULL, lbl_8012DD30,
+      lbl_8012DEB0, func_800761C8 },
+    { 301, 0x00340212, 0x13000000, lbl_8012F654, lbl_80130DB8, lbl_801310C4,
+      lbl_801317DC, func_800761C8 },
+    { 302, 0x00340212, 0x13000000, lbl_8012F750, lbl_80130DBC, lbl_801310E8,
+      lbl_8013187C, func_800761C8 },
+    { 303, 0x00340212, 0x13000000, lbl_8012FAC4, lbl_80130F7C, lbl_801312EC,
+      lbl_80131B60, func_800761C8 },
+    { 304, 0x00340212, 0x13000000, lbl_8012FFF4, lbl_80130FD8, lbl_80131618,
+      lbl_80131E74, func_800761C8 },
+    { 305, 0x00340612, 0x13000000, lbl_80130368, lbl_80130FDC, lbl_80131654,
+      lbl_80131ED4, func_800761C8 },
+    { 306, 0x00340612, 0x13000000, lbl_80130428, lbl_80130FEC, lbl_8013168C,
+      lbl_80131F80, func_800761C8 },
+    { 307, 0x00340612, 0x13000000, lbl_801306A8, lbl_80131050, lbl_80131718,
+      lbl_8013245C, func_800761C8 },
+    { 308, 0x00340612, 0x13000000, lbl_80130A24, lbl_801310B4, lbl_801317A4,
+      lbl_801328F0, func_800761C8 },
+    { 309, 0x00340113, 0x14000000, lbl_8012E4DC, NULL, lbl_8012E594,
+      lbl_8012E5D4, func_800761C8 },
+    { 310, 0x00340513, 0x14000000, lbl_8012E538, NULL, lbl_8012E5B4,
+      lbl_8012E5FC, func_800761C8 },
+    { 311, 0x00340214, 0x15000000, lbl_8012E814, NULL, lbl_8012E88C,
+      lbl_8012E924, func_800761C8 },
+    { 312, 0x00340214, 0x15000000, lbl_8012EA40, NULL, lbl_8012EA7C,
+      lbl_8012EA9C, func_800761C8 },
+    { 313, 0x00340614, 0x15000000, lbl_8012E850, NULL, lbl_8012E8CC,
+      func_8012E944, func_800761C8 },
+};
 
 extern char* lbl_804D3E58;
 extern char* lbl_804D3E60;
