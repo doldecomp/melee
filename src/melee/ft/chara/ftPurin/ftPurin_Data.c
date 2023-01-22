@@ -112,3 +112,7 @@ char lbl_803D0544[] = "PlyPurinReHat_TopN_joint";
 char lbl_803D0560[] = "PlyPurinBuHat_TopN_joint";
 char lbl_803D057C[] = "PlyPurinGrHat_TopN_joint";
 char lbl_803D0598[] = "PlyPurinYeHat_TopN_joint";
+
+char* lbl_803D05B4[] = {
+    NULL, lbl_803D0544, lbl_803D0560, lbl_803D057C, lbl_803D0598,
+};

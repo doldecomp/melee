@@ -6386,13 +6386,6 @@ lbl_8014222C:
 
 .section .data
     .balign 4
-.global lbl_803D05B4
-lbl_803D05B4:
-    .4byte NULL
-    .4byte lbl_803D0544
-    .4byte lbl_803D0560
-    .4byte lbl_803D057C
-    .4byte lbl_803D0598
 .global lbl_803D05C8
 lbl_803D05C8:
     .4byte 0x3F266666
