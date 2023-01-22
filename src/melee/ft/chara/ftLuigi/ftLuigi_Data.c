@@ -63,3 +63,30 @@ ActionState lbl_803D0868[] = {
     { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
     { 15, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };
+
+char lbl_803D08A8[] = "PlLg.dat";
+char lbl_803D08B4[] = "ftDataLuigi";
+char lbl_803D08C0[] = "PlLgNr.dat";
+char lbl_803D08CC[] = "PlyLuigi5K_Share_joint";
+char lbl_803D08E4[] = "PlyLuigi5K_Share_matanim_joint";
+char lbl_803D0904[] = "PlLgWh.dat";
+char lbl_803D0910[] = "PlyLuigi5KWh_Share_joint";
+char lbl_803D092C[] = "PlyLuigi5KWh_Share_matanim_joint";
+char lbl_803D0950[] = "PlLgAq.dat";
+char lbl_803D095C[] = "PlyLuigi5KAq_Share_joint";
+char lbl_803D0978[] = "PlyLuigi5KAq_Share_matanim_joint";
+char lbl_803D099C[] = "PlLgPi.dat";
+char lbl_803D09A8[] = "PlyLuigi5KPi_Share_joint";
+char lbl_803D09C4[] = "PlyLuigi5KPi_Share_matanim_joint";
+char lbl_803D09E8[] = "PlLgAJ.dat";
+char lbl_803D09F4[] = "ftDemoResultMotionFileLuigi";
+char lbl_803D0A10[] = "ftDemoIntroMotionFileLuigi";
+char lbl_803D0A2C[] = "ftDemoEndingMotionFileLuigi";
+char lbl_803D0A48[] = "ftDemoViWaitMotionFileLuigi";
+
+Fighter_DemoStrings lbl_803D0A64 = {
+    lbl_803D09F4,
+    lbl_803D0A10,
+    lbl_803D0A2C,
+    lbl_803D0A48,
+};
