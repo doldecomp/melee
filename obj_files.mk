@@ -287,8 +287,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftZakoBoy/ftzakoboy.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftZakoBoy/ftZakoBoy_Data.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftzakoboy.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftZakoGirl/ftzakogirl.c.o\
