@@ -6386,12 +6386,6 @@ lbl_8014222C:
 
 .section .data
     .balign 4
-.global lbl_803D04F8
-lbl_803D04F8:
-    .4byte lbl_803D0488
-    .4byte lbl_803D04A4
-    .4byte lbl_803D04C0
-    .4byte lbl_803D04DC
 .global lbl_803D0508
 lbl_803D0508:
     .4byte lbl_803D0308
@@ -6455,10 +6449,8 @@ lbl_803D0610:
     .4byte 0x40800000
     .4byte 0x40800000
 
-
 .section .sdata
     .balign 8
-
 .global lbl_804D3E98
 lbl_804D3E98:
     .asciz "jobj.h"
@@ -6472,10 +6464,8 @@ lbl_804D3EA8:
     .asciz "scale"
     .balign 4
 
-
 .section .sdata2
     .balign 8
-
 .global lbl_804D9C10
 lbl_804D9C10:
     .4byte 0xBF800000

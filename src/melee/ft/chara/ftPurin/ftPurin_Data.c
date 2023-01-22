@@ -92,3 +92,10 @@ char lbl_803D0488[] = "ftDemoResultMotionFilePurin";
 char lbl_803D04A4[] = "ftDemoIntroMotionFilePurin";
 char lbl_803D04C0[] = "ftDemoEndingMotionFilePurin";
 char lbl_803D04DC[] = "ftDemoViWaitMotionFilePurin";
+
+Fighter_DemoStrings lbl_803D04F8 = {
+    lbl_803D0488,
+    lbl_803D04A4,
+    lbl_803D04C0,
+    lbl_803D04DC,
+};
