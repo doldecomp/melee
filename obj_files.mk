@@ -132,7 +132,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftKirby/ftkirby.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftKirby/ftKirby_Data.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftkirby.s.o\
 
 TEXT_O_FILES +=\
