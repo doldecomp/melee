@@ -4317,23 +4317,7 @@ lbl_80122EC0:
 /* 80122ED8 0011FAB8  4E 80 00 20 */	blr
 
 .section .data
-    .balign 4
-
-.global lbl_803CD7C4
-lbl_803CD7C4:
-    .4byte lbl_803CD628
-    .4byte lbl_803CD634
-    .4byte lbl_803CD64C
-    .4byte lbl_803CD66C
-    .4byte lbl_803CD678
-    .4byte lbl_803CD690
-    .4byte lbl_803CD6B0
-    .4byte lbl_803CD6BC
-    .4byte lbl_803CD6D4
-    .4byte lbl_803CD6F4
-    .4byte lbl_803CD700
-    .4byte lbl_803CD718
-    .4byte NULL
+    .balign 8
 
 .global lbl_803CD7F8
 lbl_803CD7F8:
