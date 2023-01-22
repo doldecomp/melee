@@ -1,6 +1,5 @@
 #include <melee/ft/chara/ftPurin/ftpurin.h>
 
-#include <melee/ft/chara/ftPurin/ftpurin.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_005.h>
 #include <melee/ft/ft_unknown_006.h>
