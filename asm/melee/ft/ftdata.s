@@ -828,10 +828,6 @@ lbl_800860B0:
 /* 800860BC 00082C9C  7C 08 03 A6 */	mtlr r0
 /* 800860C0 00082CA0  4E 80 00 20 */	blr
 
-.section .data
-    .balign 8
-
-
 .section .sdata
     .balign 8
 .global lbl_804D3AB8
