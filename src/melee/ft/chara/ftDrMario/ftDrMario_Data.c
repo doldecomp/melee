@@ -31,3 +31,26 @@ ActionState as_table_drmario[] = {
       ftMario_SpecialAirLw_IASA, ftMario_SpecialAirLw_Phys,
       ftMario_SpecialAirLw_Coll, func_800761C8 },
 };
+
+char lbl_803D15D8[] = "PlDr.dat";
+char lbl_803D15E4[] = "ftDataDrmario";
+char lbl_803D15F4[] = "PlDrNr.dat";
+char lbl_803D1600[] = "PlyDrmario5K_Share_joint";
+char lbl_803D161C[] = "PlyDrmario5K_Share_matanim_joint";
+char lbl_803D1640[] = "PlDrRe.dat";
+char lbl_803D164C[] = "PlyDrmario5KRe_Share_joint";
+char lbl_803D1668[] = "PlyDrmario5KRe_Share_matanim_joint";
+char lbl_803D168C[] = "PlDrBu.dat";
+char lbl_803D1698[] = "PlyDrmario5KBu_Share_joint";
+char lbl_803D16B4[] = "PlyDrmario5KBu_Share_matanim_joint";
+char lbl_803D16D8[] = "PlDrGr.dat";
+char lbl_803D16E4[] = "PlyDrmario5KGr_Share_joint";
+char lbl_803D1700[] = "PlyDrmario5KGr_Share_matanim_joint";
+char lbl_803D1724[] = "PlDrBk.dat";
+char lbl_803D1730[] = "PlyDrmario5KBk_Share_joint";
+char lbl_803D174C[] = "PlyDrmario5KBk_Share_matanim_joint";
+char lbl_803D1770[] = "PlDrAJ.dat";
+char lbl_803D177C[] = "ftDemoResultMotionFileDrmario";
+char lbl_803D179C[] = "ftDemoIntroMotionFileDrmario";
+char lbl_803D17BC[] = "ftDemoEndingMotionFileDrmario";
+char lbl_803D17DC[] = "ftDemoViWaitMotionFileDrmario";
