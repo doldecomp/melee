@@ -2,16 +2,6 @@
 
 .section .data
     .balign 8
-.global lbl_803D38C8
-lbl_803D38C8:
-    .4byte 0x0000000E
-    .4byte NULL
-    .4byte 0x01000000
-    .4byte NULL
-    .4byte NULL
-    .4byte func_800C74AC
-    .4byte NULL
-    .4byte NULL
 .global lbl_803D38E8
 lbl_803D38E8:
     .asciz "PlGk.dat"

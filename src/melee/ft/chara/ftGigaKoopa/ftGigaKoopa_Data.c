@@ -51,3 +51,7 @@ ActionState as_table_gkoopa[] = {
     { 315, 0x00340214, 0x15000000, lbl_801349C4, NULL, lbl_80134A00,
       lbl_80134A20, func_800761C8 },
 };
+
+ActionState lbl_803D38C8 = {
+    0xE, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C74AC, NULL, NULL,
+};
