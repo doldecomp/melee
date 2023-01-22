@@ -5,11 +5,12 @@ int lbl_803C5520[] = {
     84, 84, 84, 85, 85, 85, 86, 86, 86, 89, 88, 87,
 };
 
+char lbl_803C5580[] = "ftGetImmItem item_gobj is NULL!!\n";
+
 #ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 #endif
-char lbl_803C5580[] = "ftGetImmItem item_gobj is NULL!!\n";
 char ftItemPickup_assert_msg_1[] = "ftpickupitem.c";
 char ftItemPickup_assert_msg_2[] = "item_gobj";
 #ifdef MUST_MATCH
