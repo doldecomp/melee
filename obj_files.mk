@@ -142,7 +142,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftDonkey_Data.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak.c.o\
