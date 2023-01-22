@@ -65,3 +65,26 @@ ActionState as_table_mewtwo[] = {
       ftMewtwo_SpecialAirLw_IASA, ftMewtwo_SpecialAirLw_Phys,
       ftMewtwo_SpecialAirLw_Coll, func_800761C8 },
 };
+
+char lbl_803D0D80[] = "PlMt.dat";
+char lbl_803D0D8C[] = "ftDataMewtwo";
+char lbl_803D0D9C[] = "PlMtNr.dat";
+char lbl_803D0DA8[] = "PlyMewtwo5K_Share_joint";
+char lbl_803D0DC0[] = "PlyMewtwo5K_Share_matanim_joint";
+char lbl_803D0DE0[] = "PlMtRe.dat";
+char lbl_803D0DEC[] = "PlyMewtwo5KRe_Share_joint";
+char lbl_803D0E08[] = "PlyMewtwo5KRe_Share_matanim_joint";
+char lbl_803D0E2C[] = "PlMtBu.dat";
+char lbl_803D0E38[] = "PlyMewtwo5KBu_Share_joint";
+char lbl_803D0E54[] = "PlyMewtwo5KBu_Share_matanim_joint";
+char lbl_803D0E78[] = "PlMtGr.dat";
+char lbl_803D0E84[] = "PlyMewtwo5KGr_Share_joint";
+char lbl_803D0EA0[] = "PlyMewtwo5KGr_Share_matanim_joint";
+char lbl_803D0EC4[] = "PlMtAJ.dat";
+
+Fighter_DemoStrings lbl_803D0F4C = {
+    "ftDemoResultMotionFileMewtwo",
+    "ftDemoIntroMotionFileMewtwo",
+    "ftDemoEndingMotionFileMewtwo",
+    "ftDemoViWaitMotionFileMewtwo",
+};
