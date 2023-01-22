@@ -6386,23 +6386,6 @@ lbl_8014222C:
 
 .section .data
     .balign 4
-.global lbl_803D0508
-lbl_803D0508:
-    .4byte lbl_803D0308
-    .4byte lbl_803D0314
-    .4byte lbl_803D032C
-    .4byte lbl_803D034C
-    .4byte lbl_803D0358
-    .4byte lbl_803D0374
-    .4byte lbl_803D0398
-    .4byte lbl_803D03A4
-    .4byte lbl_803D03C0
-    .4byte lbl_803D03E4
-    .4byte lbl_803D03F0
-    .4byte lbl_803D040C
-    .4byte lbl_803D0430
-    .4byte lbl_803D043C
-    .4byte lbl_803D0458
 .global lbl_803D0544
 lbl_803D0544:
     .asciz "PlyPurinReHat_TopN_joint"
