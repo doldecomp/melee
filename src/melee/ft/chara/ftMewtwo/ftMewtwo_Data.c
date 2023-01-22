@@ -88,3 +88,10 @@ Fighter_DemoStrings lbl_803D0F4C = {
     "ftDemoEndingMotionFileMewtwo",
     "ftDemoViWaitMotionFileMewtwo",
 };
+
+Fighter_CostumeStrings lbl_803D0F5C[] = {
+    { lbl_803D0D9C, lbl_803D0DA8, lbl_803D0DC0 },
+    { lbl_803D0DE0, lbl_803D0DEC, lbl_803D0E08 },
+    { lbl_803D0E2C, lbl_803D0E38, lbl_803D0E54 },
+    { lbl_803D0E78, lbl_803D0E84, lbl_803D0EA0 },
+};

@@ -240,7 +240,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_Data.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftmewtwo.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftmewtwo.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialLw.c.o\
