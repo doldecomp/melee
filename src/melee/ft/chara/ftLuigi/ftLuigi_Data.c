@@ -79,14 +79,10 @@ char lbl_803D099C[] = "PlLgPi.dat";
 char lbl_803D09A8[] = "PlyLuigi5KPi_Share_joint";
 char lbl_803D09C4[] = "PlyLuigi5KPi_Share_matanim_joint";
 char lbl_803D09E8[] = "PlLgAJ.dat";
-char lbl_803D09F4[] = "ftDemoResultMotionFileLuigi";
-char lbl_803D0A10[] = "ftDemoIntroMotionFileLuigi";
-char lbl_803D0A2C[] = "ftDemoEndingMotionFileLuigi";
-char lbl_803D0A48[] = "ftDemoViWaitMotionFileLuigi";
 
 Fighter_DemoStrings lbl_803D0A64 = {
-    lbl_803D09F4,
-    lbl_803D0A10,
-    lbl_803D0A2C,
-    lbl_803D0A48,
+    "ftDemoResultMotionFileLuigi",
+    "ftDemoIntroMotionFileLuigi",
+    "ftDemoEndingMotionFileLuigi",
+    "ftDemoViWaitMotionFileLuigi",
 };
