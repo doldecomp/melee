@@ -6384,17 +6384,6 @@ lbl_8014222C:
 /* 801422E0 0013EEC0  7C 08 03 A6 */	mtlr r0
 /* 801422E4 0013EEC4  4E 80 00 20 */	blr
 
-.section .data
-    .balign 4
-.global lbl_803D0610
-lbl_803D0610:
-    .4byte 0x41000000
-    .4byte NULL
-    .4byte 0xC0800000
-    .4byte 0x40800000
-    .4byte 0x40800000
-    .4byte 0x40800000
-
 .section .sdata
     .balign 8
 .global lbl_804D3E98
