@@ -46,16 +46,19 @@
 #include <melee/ft/chara/ftZakoGirl/ftzakogirl.h>
 #include <melee/ft/forward.h>
 #include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftdata.h>
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/forward.h>
 
-struct {
+typedef struct ftData_UnkCountStruct {
     /// Always zero; could be #NULL or the high part of a 64-bit integer.
     int zero;
 
     /// A count or ASID.
     int count;
-} lbl_803C0FC8[FTKIND_MAX] = {
+} ftData_UnkCountStruct;
+
+ftData_UnkCountStruct lbl_803C0FC8[FTKIND_MAX] = {
     { 0, 303 }, { 0, 327 }, { 0, 318 }, { 0, 337 }, { 0, 479 }, { 0, 316 },
     { 0, 314 }, { 0, 317 }, { 0, 326 }, { 0, 318 }, { 0, 321 }, { 0, 321 },
     { 0, 320 }, { 0, 313 }, { 0, 314 }, { 0, 327 }, { 0, 314 }, { 0, 312 },
@@ -932,10 +935,7 @@ Fighter_UnkMtxEvent lbl_803C20CC[FTKIND_MAX] = {
 
 /// Character model group (e.g. high poly, low poly, metal) visibility change
 /// callbacks
-struct {
-    Fighter_ModelEvent model_events[FTKIND_MAX];
-    unk_t (*getter[FTKIND_MAX])(HSD_GObj*);
-} lbl_803C2150 = {
+ftData_UnkModelStruct lbl_803C2150 = {
     {
         NULL, NULL, NULL, NULL, func_800EF87C, NULL, NULL,          NULL, NULL,
         NULL, NULL, NULL, NULL, NULL,          NULL, func_8013C614, NULL, NULL,
@@ -1057,4 +1057,53 @@ Fighter_DemoGetter lbl_803C24EC[FTKIND_MAX] = {
     NULL,
     func_8014F9A4,
     NULL,
+};
+
+Fighter_UnkPtrEvent lbl_803C2570[FTKIND_MAX] = {
+    ftMario_func_800E0CAC,
+    NULL,
+    NULL,
+    NULL,
+    func_800EEBC0,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ftLuigi_8014260C,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    func_8014F98C,
+    NULL,
+};
+
+ftData_UnkCountStruct lbl_803C25F4[FTKIND_MAX] = {
+    { 0, 16 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 18 }, { 0, 14 }, { 0, 14 },
+    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 },
+    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 16 }, { 0, 14 }, { 0, 14 }, { 0, 14 },
+    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 },
+    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 15 }, { 0, 14 },
+};
+
+s8 lbl_803C26FC[FTKIND_MAX] = {
+    1,  3,  4,  8, 5, 12, 6, 17, 10, 15, 14, 14, 7,  2,  9,  11, 13,
+    18, 16, 17, 6, 1, 3,  7, -1, 19, 49, -1, -1, -1, -1, 12, -1,
 };

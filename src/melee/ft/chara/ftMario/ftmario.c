@@ -119,7 +119,7 @@ void ftMario_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftMario_func_800E0CAC(s32 arg0, u32* arg1, u32* arg2)
+void ftMario_func_800E0CAC(s32 arg0, s32* arg1, s32* arg2)
 {
     if (arg0 != 10) {
         if (arg0 >= 10)

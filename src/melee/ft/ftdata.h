@@ -4,8 +4,13 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
-extern void (*lbl_803C20CC[FTKIND_MAX])(HSD_GObj*, s32, void*);
-extern void (*lbl_803C2150[FTKIND_MAX])(HSD_GObj*, s32, bool);
+typedef struct ftData_UnkModelStruct {
+    Fighter_ModelEvent model_events[FTKIND_MAX];
+    unk_t (*getter[FTKIND_MAX])(HSD_GObj*);
+} ftData_UnkModelStruct;
+
+extern Fighter_UnkMtxEvent lbl_803C20CC[FTKIND_MAX];
+extern ftData_UnkModelStruct lbl_803C2150;
 
 void func_800855C8(enum_t id, int slot);
 void func_8008572C(s32);
