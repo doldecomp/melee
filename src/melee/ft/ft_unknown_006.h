@@ -17,7 +17,6 @@ extern char lbl_803C57D0[];
 extern char lbl_803C57DC[];
 extern Fighter_CostumeStrings lbl_803C5A28[];
 extern char lbl_803C595C[];
-extern Fighter_DemoStrings lbl_803C59D8;
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1);
 s32 func_80087818(HSD_GObj* fighter_gobj, s32 arg1);
