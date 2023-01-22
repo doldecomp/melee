@@ -129,3 +129,13 @@ ActionState as_table_masterhand[] = {
     { 344, FLAGS_ZERO, 0x01000000, lbl_80150F00, NULL, lbl_80150F68,
       lbl_80150FC8, func_800761C8 },
 };
+
+char lbl_803D4070[] = "PlMh.dat";
+char lbl_803D407C[] = "ftDataMasterhand";
+char lbl_803D4090[] = "PlMhNr.dat";
+char lbl_803D409C[] = "PlyMasterhand_Share_joint";
+char lbl_803D40B8[] = "PlMhAJ.dat";
+
+Fighter_CostumeStrings lbl_803D40C4[] = {
+    { lbl_803D4090, lbl_803D409C, NULL },
+};
