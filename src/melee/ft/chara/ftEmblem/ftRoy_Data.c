@@ -88,16 +88,12 @@ char lbl_803D33C4[] = "PlFeYe.dat";
 char lbl_803D33D0[] = "PlyEmblem5KYe_Share_joint";
 char lbl_803D33EC[] = "PlyEmblem5KYe_Share_matanim_joint";
 char lbl_803D3410[] = "PlFeAJ.dat";
-char lbl_803D341C[] = "ftDemoResultMotionFileEmblem";
-char lbl_803D343C[] = "ftDemoIntroMotionFileEmblem";
-char lbl_803D3458[] = "ftDemoEndingMotionFileEmblem";
-char lbl_803D3478[] = "ftDemoViWaitMotionFileEmblem";
 
 Fighter_DemoStrings lbl_803D3498 = {
-    lbl_803D341C,
-    lbl_803D343C,
-    lbl_803D3458,
-    lbl_803D3478,
+    "ftDemoResultMotionFileEmblem",
+    "ftDemoIntroMotionFileEmblem",
+    "ftDemoEndingMotionFileEmblem",
+    "ftDemoViWaitMotionFileEmblem",
 };
 
 Fighter_CostumeStrings lbl_803D34A8[] = {

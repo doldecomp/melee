@@ -119,16 +119,12 @@ char lbl_803D1D9C[] = "PlFcGr.dat";
 char lbl_803D1DA8[] = "PlyFalco5KGr_Share_joint";
 char lbl_803D1DC4[] = "PlyFalco5KGr_Share_matanim_joint";
 char lbl_803D1DE8[] = "PlFcAJ.dat";
-char lbl_803D1DF4[] = "ftDemoResultMotionFileFalco";
-char lbl_803D1E10[] = "ftDemoIntroMotionFileFalco";
-char lbl_803D1E2C[] = "ftDemoEndingMotionFileFalco";
-char lbl_803D1E48[] = "ftDemoViWaitMotionFileFalco";
 
 Fighter_DemoStrings lbl_803D1E64 = {
-    lbl_803D1DF4,
-    lbl_803D1E10,
-    lbl_803D1E2C,
-    lbl_803D1E48,
+    "ftDemoResultMotionFileFalco",
+    "ftDemoIntroMotionFileFalco",
+    "ftDemoEndingMotionFileFalco",
+    "ftDemoViWaitMotionFileFalco",
 };
 
 Fighter_CostumeStrings lbl_803D1E74[] = {
