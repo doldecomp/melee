@@ -6,6 +6,8 @@
 #include <sysdolphin/baselib/forward.h>
 
 extern ActionState as_table_pikachu[];
+extern char lbl_803CE0B8[];
+extern char lbl_803CE0C4[];
 
 void ftPikachu_LoadSpecialAttrs(HSD_GObj*);
 

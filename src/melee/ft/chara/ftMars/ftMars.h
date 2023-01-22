@@ -36,6 +36,8 @@ typedef struct _MarsAttributes {
 } MarsAttributes;
 
 extern ActionState as_table_mars[];
+extern char lbl_803CF820[];
+extern char lbl_803CF82C[];
 
 void ftMars_OnDeath(HSD_GObj* gobj);
 void ftMars_OnItemPickup(HSD_GObj* gobj, bool arg1);

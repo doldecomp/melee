@@ -90,6 +90,8 @@ typedef struct _MasterHandAttributes {
 } MasterHandAttributes;
 
 extern ActionState as_table_masterhand[];
+extern char lbl_803D4070[];
+extern char lbl_803D407C[];
 
 // ftMasterHand_1
 void ftMasterhand_OnDeath(HSD_GObj* gobj);

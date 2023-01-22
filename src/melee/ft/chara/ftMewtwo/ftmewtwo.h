@@ -128,6 +128,8 @@ typedef struct _ftMewtwoAttributes {
 } ftMewtwoAttributes;
 
 extern ActionState as_table_mewtwo[];
+extern char lbl_803D0D80[];
+extern char lbl_803D0D8C[];
 
 // Mewtwo functions //
 
@@ -266,7 +268,6 @@ void ftMewtwo_SpecialAirNFull_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirNCancel_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialN_Shoot(HSD_GObj* fighter_gobj);
-
 void ftMewtwo_OnLoad(HSD_GObj* fighter_gobj);
 void ftMewTwo_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
 void ftMewTwo_OnItemDrop(HSD_GObj* fighter_gobj, bool bool);

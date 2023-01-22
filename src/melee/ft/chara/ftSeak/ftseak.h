@@ -23,10 +23,11 @@ typedef struct _ftSeakAttributes {
 } ftSeakAttributes;
 
 extern ActionState as_table_seak[];
+extern char lbl_803CC360[];
+extern char lbl_803CC36C[];
 
 void lbl_8011412C(HSD_GObj* fighter_gobj);
 void func_80114758(HSD_GObj*);
-
 void ftSeak_OnLoad(HSD_GObj* fighter_gobj);
 void ftSeak_80110198(HSD_GObj* fighter_gobj);
 void ftSeak_801101CC(HSD_GObj* fighter_gobj);

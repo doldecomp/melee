@@ -8,6 +8,9 @@ typedef struct _ftZakoboyAttributes {
     s32 x0;
 } ftZakoboyAttributes;
 
+extern char lbl_803D34E8[];
+extern char lbl_803D34F4[];
+
 void ftZakoBoy_OnDeath(HSD_GObj*);
 void ftZakoBoy_OnItemPickup(HSD_GObj*, bool);
 void ftZakoBoy_OnItemInvisible(HSD_GObj*);

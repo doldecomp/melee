@@ -26,6 +26,8 @@ typedef struct _CLinkAttributes {
 } CLinkAttributes;
 
 extern ActionState as_table_clink[];
+extern char lbl_803D1240[];
+extern char lbl_803D124C[];
 
 void ftCLink_OnItemPickup(HSD_GObj*, bool);
 void ftCLink_OnItemDrop(HSD_GObj*, bool);
@@ -45,7 +47,6 @@ void ftCLink_OnItemVisible(HSD_GObj* gobj);
 void ftCLink_OnItemDropExt(HSD_GObj* gobj, bool arg1);
 void ftCLink_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftCLink_OnKnockbackEnter(HSD_GObj* gobj);
-
 void func_800CEDE0(HSD_GObj*);
 void func_800CEE00(HSD_GObj*);
 void func_800CEE30(HSD_GObj*);

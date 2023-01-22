@@ -22,6 +22,8 @@ typedef struct _ftPurinAttributes {
 } ftPurinAttributes;
 
 extern ActionState as_table_purin[];
+extern char lbl_803D02F0[];
+extern char lbl_803D02FC[];
 
 /// functions
 

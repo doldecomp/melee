@@ -11,11 +11,11 @@ typedef struct _ftPeachAttributes {
 } ftPeachAttributes;
 
 extern ActionState as_table_peach[];
+extern char ftPeach_str_PlPe_dat[];
+extern char ftPeach_str_ftDataPeach[];
 
 void ftPeach_OnDeath(HSD_GObj* gobj);
-
 s32 ftPeach_8011BA20(Fighter* fp);
-
 void ftPeach_OnKnockbackEnter(HSD_GObj* fighter_gobj);
 void ftPeach_OnKnockbackExit(HSD_GObj* fighter_gobj);
 void ftPeach_OnLoad(HSD_GObj* gobj);

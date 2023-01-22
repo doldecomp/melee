@@ -15,6 +15,8 @@ typedef struct _ftDrMarioAttributes {
 } ftDrMarioAttributes;
 
 extern ActionState as_table_drmario[];
+extern char lbl_803D15D8[];
+extern char lbl_803D15E4[];
 
 void ftDrMario_OnDeath(HSD_GObj*);
 void ftDrMario_OnLoad(HSD_GObj*);

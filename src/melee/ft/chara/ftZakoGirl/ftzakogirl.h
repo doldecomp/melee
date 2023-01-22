@@ -4,6 +4,9 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
+extern char lbl_803D3568[];
+extern char lbl_803D3574[];
+
 void ftZakoGirl_OnDeath(HSD_GObj*);
 void ftZakoGirl_OnLoad(HSD_GObj*);
 void ftZakoGirl_OnItemPickup(HSD_GObj*, bool);

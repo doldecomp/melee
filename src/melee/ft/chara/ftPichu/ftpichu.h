@@ -13,6 +13,8 @@ typedef struct _ftPichuAttributes {
 } ftPichuAttributes;
 
 extern ActionState as_table_pichu[];
+extern char lbl_803D21E8[];
+extern char lbl_803D21F4[];
 
 void ftPichu_OnLoad(HSD_GObj*);
 void ftPichu_OnDeath(HSD_GObj*);

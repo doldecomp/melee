@@ -6,6 +6,8 @@
 #include <sysdolphin/baselib/forward.h>
 
 extern ActionState as_table_nana[];
+extern char lbl_803CDB78[];
+extern char lbl_803CDB84[];
 
 void ftNana_OnDeath(HSD_GObj* fighter_gobj);
 void ftNana_80122FAC(HSD_GObj* fighter_gobj);

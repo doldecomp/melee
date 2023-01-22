@@ -12,6 +12,9 @@ extern HSD_Joint* lbl_8045A1E0[6];
 
 extern s32 lbl_80459B88[FTKIND_MAX];
 
+extern char lbl_803C57D0[];
+extern char lbl_803C57DC[];
+
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1);
 s32 func_80087818(HSD_GObj* fighter_gobj, s32 arg1);
 s32 func_80087838(HSD_GObj* fighter_gobj);

@@ -44,6 +44,8 @@ typedef struct _ftZeldaAttributes {
 } ftZeldaAttributes;
 
 extern ActionState as_table_zelda[];
+extern char lbl_803CFC98[];
+extern char lbl_803CFCA4[];
 
 // ftzelda 1
 void ftZelda_OnDeath(HSD_GObj* fighter_gobj);

@@ -5,6 +5,8 @@
 #include <sysdolphin/baselib/gobj.h>
 
 extern ActionState as_table_sandbag[];
+extern char lbl_803D39B8[];
+extern char lbl_803D39C4[];
 
 void ftSandbag_OnDeath(HSD_GObj*);
 void ftSandbag_OnLoad(HSD_GObj* gobj);

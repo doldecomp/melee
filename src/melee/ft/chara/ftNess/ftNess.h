@@ -161,6 +161,8 @@ typedef struct ftNessAttributes {
 } ftNessAttributes;
 
 extern ActionState as_table_ness[];
+extern char lbl_803CCAD0[];
+extern char lbl_803CCADC[];
 
 // Ness functions
 

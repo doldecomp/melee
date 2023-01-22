@@ -39,10 +39,12 @@
 #include <melee/ft/chara/ftSandbag/ftsandbag.h>
 #include <melee/ft/chara/ftSeak/ftseak.h>
 #include <melee/ft/chara/ftYoshi/ftyoshi1.h>
+#include <melee/ft/chara/ftYoshi/ftyoshi2.h>
 #include <melee/ft/chara/ftYoshi/ftyoshi4.h>
 #include <melee/ft/chara/ftZakoBoy/ftzakoboy.h>
 #include <melee/ft/chara/ftZakoGirl/ftzakogirl.h>
 #include <melee/ft/forward.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/types.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -892,4 +894,25 @@ HSD_GObjEvent ft_LoadSpecialAttrs[FTKIND_MAX] = {
     ftCrazyHand_LoadSpecialAttrs,  ftZakoBoy_LoadSpecialAttrs,
     ftZakoGirl_LoadSpecialAttrs,   ftGKoopa_LoadSpecialAttrs,
     ftSandbag_LoadSpecialAttrs,
+};
+
+/// Standard Character .dat File Names
+char* lbl_803C1F40[FTKIND_MAX * 2] = {
+    lbl_803C57D0, lbl_803C57DC, lbl_803C7BE8,         lbl_803C7BF4,
+    lbl_803C7598, lbl_803C75A4, lbl_803CBDF8,         lbl_803CBE04,
+    lbl_803CA308, lbl_803CA314, lbl_803CF0A0,         lbl_803CF0AC,
+    lbl_803C80B8, lbl_803C80C4, lbl_803CC360,         lbl_803CC36C,
+    lbl_803CCAD0, lbl_803CCADC, ftPeach_str_PlPe_dat, ftPeach_str_ftDataPeach,
+    lbl_803CD610, lbl_803CD61C, lbl_803CDB78,         lbl_803CDB84,
+    lbl_803CE0B8, lbl_803CE0C4, lbl_803CE510,         lbl_803CE51C,
+    lbl_803CEA98, lbl_803CEAA4, lbl_803D02F0,         lbl_803D02FC,
+    lbl_803D0D80, lbl_803D0D8C, lbl_803D08A8,         lbl_803D08B4,
+    lbl_803CF820, lbl_803CF82C, lbl_803CFC98,         lbl_803CFCA4,
+    lbl_803D1240, lbl_803D124C, lbl_803D15D8,         lbl_803D15E4,
+    lbl_803D1CA8, lbl_803D1CB4, lbl_803D21E8,         lbl_803D21F4,
+    lbl_803D28E8, lbl_803D28F4, lbl_803D2CD8,         lbl_803D2CE4,
+    lbl_803D3280, lbl_803D328C, lbl_803D4070,         lbl_803D407C,
+    lbl_803D4818, lbl_803D4824, lbl_803D34E8,         lbl_803D34F4,
+    lbl_803D3568, lbl_803D3574, lbl_803D38E8,         lbl_803D38F4,
+    lbl_803D39B8, lbl_803D39C4,
 };

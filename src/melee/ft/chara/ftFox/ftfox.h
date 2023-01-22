@@ -143,6 +143,8 @@ typedef struct _ftFoxAttributes {
 } ftFoxAttributes;
 
 extern ActionState as_table_fox[];
+extern char lbl_803C7BE8[];
+extern char lbl_803C7BF4[];
 
 // Fox & Falco Functions //
 

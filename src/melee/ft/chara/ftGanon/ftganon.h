@@ -5,6 +5,8 @@
 #include <sysdolphin/baselib/gobj.h>
 
 extern ActionState as_table_ganon[];
+extern char lbl_803D2CD8[];
+extern char lbl_803D2CE4[];
 
 void ftGanon_OnDeath(HSD_GObj*);
 void ftGanon_OnItemPickup(HSD_GObj*, bool);
@@ -15,7 +17,6 @@ void ftGanon_OnLoad(HSD_GObj*);
 void ftGanon_LoadSpecialAttrs(HSD_GObj*);
 void ftGanon_OnKnockbackEnter(HSD_GObj*);
 void ftGanon_OnKnockbackExit(HSD_GObj*);
-
 void func_800E4B00(HSD_GObj*);
 void func_800E4B60(HSD_GObj*);
 void func_800E4BF8(HSD_GObj*);

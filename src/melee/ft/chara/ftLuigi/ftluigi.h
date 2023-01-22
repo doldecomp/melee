@@ -129,6 +129,8 @@ typedef struct _ftLuigiAttributes {
 
 extern ActionState as_table_luigi[];
 extern ActionState lbl_803D0868[];
+extern char lbl_803D08A8[];
+extern char lbl_803D08B4[];
 
 // Luigi Functions //
 

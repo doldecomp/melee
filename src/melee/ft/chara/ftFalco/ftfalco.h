@@ -5,6 +5,8 @@
 #include <sysdolphin/baselib/gobj.h>
 
 extern ActionState as_table_falco[];
+extern char lbl_803D1CA8[];
+extern char lbl_803D1CB4[];
 
 void ftFalco_OnDeath(HSD_GObj*);
 void ftFalco_OnItemPickup(HSD_GObj*, bool);

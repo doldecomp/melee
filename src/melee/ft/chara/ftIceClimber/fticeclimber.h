@@ -24,7 +24,6 @@ typedef struct _ftIceClimberAttributes {
 } ftIceClimberAttributes;
 
 void ftIceClimber_OnLoadForNana(Fighter* fp);
-
 void lbl_8011F318(HSD_GObj*);
 void lbl_8011F390(HSD_GObj*);
 void lbl_8011F398(HSD_GObj*);

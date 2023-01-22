@@ -53,6 +53,8 @@ typedef struct _ftKoopaVars {
 } ftKoopaVars;
 
 extern ActionState as_table_koopa[];
+extern char lbl_803CF0A0[];
+extern char lbl_803CF0AC[];
 
 void ftKoopa_SpecialS_StartAction(HSD_GObj* gobj);
 void func_8013302C(HSD_GObj* gobj);
@@ -60,7 +62,6 @@ void func_801330E4(HSD_GObj* gobj);
 void func_80132A64(HSD_GObj* gobj);
 void ftKoopa_OnLoadForGKoopa(Fighter* fp);
 void ftKoopa_LoadSpecialAttrs(HSD_GObj* gobj);
-
 f32 func_80132DC0(HSD_GObj* gobj);
 f32 func_80132DD0(HSD_GObj* gobj);
 f32 func_80132DE0(HSD_GObj* gobj);
@@ -91,7 +92,6 @@ void ftKoopa_OnItemVisible(HSD_GObj* gobj);
 void ftKoopa_OnItemDrop(HSD_GObj* gobj, bool bool1);
 void ftKoopa_OnKnockbackEnter(HSD_GObj* gobj);
 void ftKoopa_OnKnockbackExit(HSD_GObj* gobj);
-
 void lbl_80134F48(HSD_GObj*);
 void lbl_801351B0(HSD_GObj*);
 void lbl_80135438(HSD_GObj*);
