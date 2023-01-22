@@ -109,5 +109,8 @@ void ftLink_SpecialS_StartAction(HSD_GObj*);
 void ftLink_SpecialAirHi_StartAction(HSD_GObj*);
 void ftLink_SpecialAirLw_StartAction(HSD_GObj*);
 void ftLink_SpecialAirS_StartAction(HSD_GObj*);
+void ftLink_SpecialAirN_StartAction(HSD_GObj*);
+void ftLink_SpecialN_StartAction(HSD_GObj*);
+void ftLink_SpecialN_StartAction(HSD_GObj*);
 
 #endif

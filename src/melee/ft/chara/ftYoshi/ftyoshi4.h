@@ -8,5 +8,7 @@ void ftYoshi_SpecialS_StartAction(HSD_GObj*);
 void ftYoshi_SpecialAirHi_StartAction(HSD_GObj*);
 void ftYoshi_SpecialAirLw_StartAction(HSD_GObj*);
 void ftYoshi_SpecialAirS_StartAction(HSD_GObj*);
+void ftYoshi_SpecialAirN_StartAction(HSD_GObj*);
+void ftYoshi_SpecialN_StartAction(HSD_GObj*);
 
 #endif

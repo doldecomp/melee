@@ -900,5 +900,7 @@ void ftKirby_SpecialAirHi_StartAction(HSD_GObj*);
 void ftKirby_SpecialAirLw_StartAction(HSD_GObj*);
 void ftKirby_SpecialAirS_StartAction(HSD_GObj*);
 void ftKirby_SpecialAirS_StartAction(HSD_GObj*);
+void ftKirby_SpecialAirN_StartAction(HSD_GObj*);
+void ftKirby_SpecialN_StartAction(HSD_GObj*);
 
 #endif

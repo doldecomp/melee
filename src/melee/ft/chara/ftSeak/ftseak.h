@@ -162,5 +162,7 @@ void ftSeak_SpecialS_StartAction(HSD_GObj*);
 void ftSeak_SpecialAirHi_StartAction(HSD_GObj*);
 void ftSeak_SpecialAirLw_StartAction(HSD_GObj*);
 void ftSeak_SpecialAirS_StartAction(HSD_GObj*);
+void ftSeak_SpecialAirN_StartAction(HSD_GObj*);
+void ftSeak_SpecialN_StartAction(HSD_GObj*);
 
 #endif
