@@ -107,3 +107,8 @@ Fighter_CostumeStrings lbl_803D0508[] = {
     { lbl_803D03E4, lbl_803D03F0, lbl_803D040C },
     { lbl_803D0430, lbl_803D043C, lbl_803D0458 },
 };
+
+char lbl_803D0544[] = "PlyPurinReHat_TopN_joint";
+char lbl_803D0560[] = "PlyPurinBuHat_TopN_joint";
+char lbl_803D057C[] = "PlyPurinGrHat_TopN_joint";
+char lbl_803D0598[] = "PlyPurinYeHat_TopN_joint";

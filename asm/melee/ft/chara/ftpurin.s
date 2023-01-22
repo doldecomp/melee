@@ -6386,22 +6386,6 @@ lbl_8014222C:
 
 .section .data
     .balign 4
-.global lbl_803D0544
-lbl_803D0544:
-    .asciz "PlyPurinReHat_TopN_joint"
-    .balign 4
-.global lbl_803D0560
-lbl_803D0560:
-    .asciz "PlyPurinBuHat_TopN_joint"
-    .balign 4
-.global lbl_803D057C
-lbl_803D057C:
-    .asciz "PlyPurinGrHat_TopN_joint"
-    .balign 4
-.global lbl_803D0598
-lbl_803D0598:
-    .asciz "PlyPurinYeHat_TopN_joint"
-    .balign 4
 .global lbl_803D05B4
 lbl_803D05B4:
     .4byte NULL
