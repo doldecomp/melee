@@ -2,7 +2,6 @@
 
 #include <dolphin/os/os.h>
 #include <melee/ef/efasync.h>
-#include <melee/ft/chara/ftYoshi/ftyoshi.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftanim.h>
 #include <melee/ft/ftcamera.h>
