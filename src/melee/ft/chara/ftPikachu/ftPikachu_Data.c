@@ -64,3 +64,23 @@ ActionState as_table_pikachu[] = {
     { 319, 0x00340414, 0x15000000, ftPikachu_8012808C, NULL, ftPikachu_801281CC,
       ftPikachu_PrepCallActionChange_80128304, func_800761C8 },
 };
+
+char lbl_803CE0B8[] = "PlPk.dat";
+char lbl_803CE0C4[] = "ftDataPikachu";
+char lbl_803CE0D4[] = "PlPkNr.dat";
+char lbl_803CE0E0[] = "PlyPikachu5K_Share_joint";
+char lbl_803CE0FC[] = "PlyPikachu5K_Share_matanim_joint";
+char lbl_803CE120[] = "PlPkRe.dat";
+char lbl_803CE12C[] = "PlyPikachu5KRe_Share_joint";
+char lbl_803CE148[] = "PlyPikachu5KRe_Share_matanim_joint";
+char lbl_803CE16C[] = "PlPkBu.dat";
+char lbl_803CE178[] = "PlyPikachu5KBu_Share_joint";
+char lbl_803CE194[] = "PlyPikachu5KBu_Share_matanim_joint";
+char lbl_803CE1B8[] = "PlPkGr.dat";
+char lbl_803CE1C4[] = "PlyPikachu5KGr_Share_joint";
+char lbl_803CE1E0[] = "PlyPikachu5KGr_Share_matanim_joint";
+char lbl_803CE204[] = "PlPkAJ.dat";
+char lbl_803CE210[] = "ftDemoResultMotionFilePikachu";
+char lbl_803CE230[] = "ftDemoIntroMotionFilePikachu";
+char lbl_803CE250[] = "ftDemoEndingMotionFilePikachu";
+char lbl_803CE270[] = "ftDemoViWaitMotionFilePikachu";
