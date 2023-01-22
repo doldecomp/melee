@@ -125,5 +125,7 @@ void ftIceClimber_SpecialS_StartAction(HSD_GObj*);
 void ftIceClimber_SpecialAirHi_StartAction(HSD_GObj*);
 void ftIceClimber_SpecialAirLw_StartAction(HSD_GObj*);
 void ftIceClimber_SpecialAirS_StartAction(HSD_GObj*);
+void ftIceClimber_SpecialLw_StartAction(HSD_GObj*);
+void ftIceClimber_SpecialHi_StartAction(HSD_GObj*);
 
 #endif

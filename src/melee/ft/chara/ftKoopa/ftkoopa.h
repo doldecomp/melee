@@ -179,5 +179,7 @@ void ftKoopa_SpecialAirHi_StartAction(HSD_GObj*);
 void ftKoopa_SpecialAirLw_StartAction(HSD_GObj*);
 void ftKoopa_SpecialAirN_StartAction(HSD_GObj*);
 void ftKoopa_SpecialN_StartAction(HSD_GObj*);
+void ftKoopa_SpecialLw_StartAction(HSD_GObj*);
+void ftKoopa_SpecialHi_StartAction(HSD_GObj*);
 
 #endif

@@ -112,5 +112,7 @@ void ftLink_SpecialAirS_StartAction(HSD_GObj*);
 void ftLink_SpecialAirN_StartAction(HSD_GObj*);
 void ftLink_SpecialN_StartAction(HSD_GObj*);
 void ftLink_SpecialN_StartAction(HSD_GObj*);
+void ftLink_SpecialLw_StartAction(HSD_GObj*);
+void ftLink_SpecialHi_StartAction(HSD_GObj*);
 
 #endif

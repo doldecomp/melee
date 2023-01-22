@@ -4,6 +4,7 @@
 #include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_callbacks.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialLw.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialN.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialS.h>
 #include <melee/ft/chara/ftDrMario/ftdrmario.h>
@@ -358,5 +359,78 @@ HSD_GObjEvent ft_SpecialN[FTKIND_MAX] = {
     NULL,
     NULL,
     ftKoopa_SpecialN_StartAction,
+    NULL,
+};
+
+HSD_GObjEvent ft_SpecialLw[FTKIND_MAX] = {
+    ftMario_SpecialLw_StartAction,
+    ftFox_SpecialLw_StartAction,
+    ftCFalcon_SpecialLw_StartAction,
+    ftDonkey_SpecialLw_StartAction,
+    ftKirby_SpecialLw_StartAction,
+    ftKoopa_SpecialLw_StartAction,
+    ftLink_SpecialLw_StartAction,
+    ftSeak_SpecialLw_StartAction,
+    ftNess_SpecialLwStart_Action,
+    ftPeach_SpecialLw_StartAction,
+    ftIceClimber_SpecialLw_StartAction,
+    ftIceClimber_SpecialLw_StartAction,
+    ftPikachu_SpecialLw_StartAction,
+    ftSamus_SpecialLw_StartAction,
+    ftYoshi_SpecialLw_StartAction,
+    ftPurin_SpecialLw_StartAction,
+    ftMewtwo_SpecialLw_StartAction,
+    ftLuigi_SpecialLw_StartAction,
+    ftMars_SpecialLw_StartAction,
+    ftZelda_SpecialLw_StartAction,
+    ftLink_SpecialLw_StartAction,
+    ftMario_SpecialLw_StartAction,
+    ftFox_SpecialLw_StartAction,
+    ftPikachu_SpecialLw_StartAction,
+    ftGameWatch_SpecialLw_StartAction,
+    ftCFalcon_SpecialLw_StartAction,
+    ftMars_SpecialLw_StartAction,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ftKoopa_SpecialLw_StartAction,
+    NULL,
+};
+
+HSD_GObjEvent ft_SpecialHi[FTKIND_MAX] = {
+
+    ftMario_SpecialHi_StartAction,
+    ftFox_SpecialHi_StartAction,
+    ftFalcon_SpecialHi_StartAction,
+    ftDonkey_SpecialHi_StartAction,
+    ftKirby_SpecialHi_StartAction,
+    ftKoopa_SpecialHi_StartAction,
+    ftLink_SpecialHi_StartAction,
+    ftSeak_SpecialHi_StartAction,
+    ftNess_SpecialHi_StartAction,
+    ftPeach_SpecialHi_StartAction,
+    ftIceClimber_SpecialHi_StartAction,
+    NULL,
+    ftPikachu_SpecialHi_StartAction,
+    ftSamus_SpecialHi_StartAction,
+    ftYoshi_SpecialHi_StartAction,
+    ftPurin_SpecialHi_StartAction,
+    ftMewtwo_SpecialHi_StartAction,
+    ftLuigi_SpecialHi_StartAction,
+    ftMars_SpecialHi_StartAction,
+    ftZelda_SpecialHi_StartAction,
+    ftLink_SpecialHi_StartAction,
+    ftMario_SpecialHi_StartAction,
+    ftFox_SpecialHi_StartAction,
+    ftPikachu_SpecialHi_StartAction,
+    ftGameWatch_SpecialHi_StartAction,
+    ftFalcon_SpecialHi_StartAction,
+    ftMars_SpecialHi_StartAction,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ftKoopa_SpecialHi_StartAction,
     NULL,
 };

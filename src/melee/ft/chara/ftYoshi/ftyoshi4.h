@@ -10,5 +10,7 @@ void ftYoshi_SpecialAirLw_StartAction(HSD_GObj*);
 void ftYoshi_SpecialAirS_StartAction(HSD_GObj*);
 void ftYoshi_SpecialAirN_StartAction(HSD_GObj*);
 void ftYoshi_SpecialN_StartAction(HSD_GObj*);
+void ftYoshi_SpecialLw_StartAction(HSD_GObj*);
+void ftYoshi_SpecialHi_StartAction(HSD_GObj*);
 
 #endif
