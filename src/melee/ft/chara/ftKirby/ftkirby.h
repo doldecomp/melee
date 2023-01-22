@@ -907,5 +907,6 @@ void ftKirby_SpecialHi_StartAction(HSD_GObj*);
 void ftKirby_OnItemInvisible(HSD_GObj*);
 void ftKirby_OnItemVisible(HSD_GObj*);
 void ftKirby_OnItemDrop(HSD_GObj*, bool);
+void ftKirby_OnKnockbackEnter(HSD_GObj*);
 
 #endif
