@@ -829,7 +829,7 @@ lbl_800860B0:
 /* 800860C0 00082CA0  4E 80 00 20 */	blr
 
 .section .data
-    .balign 4
+    .balign 8
 
 .global ActionStateList
 ActionStateList:
