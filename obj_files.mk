@@ -272,7 +272,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSandbag/ftsandbag.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSandbag/ftSandbag_Data.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_01.c.o\
