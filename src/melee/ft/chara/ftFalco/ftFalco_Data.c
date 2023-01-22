@@ -123,3 +123,10 @@ char lbl_803D1DF4[] = "ftDemoResultMotionFileFalco";
 char lbl_803D1E10[] = "ftDemoIntroMotionFileFalco";
 char lbl_803D1E2C[] = "ftDemoEndingMotionFileFalco";
 char lbl_803D1E48[] = "ftDemoViWaitMotionFileFalco";
+
+Fighter_DemoStrings lbl_803D1E64 = {
+    lbl_803D1DF4,
+    lbl_803D1E10,
+    lbl_803D1E2C,
+    lbl_803D1E48,
+};

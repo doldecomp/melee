@@ -2,12 +2,6 @@
 
 .section .data
     .balign 4
-.global lbl_803D1E64
-lbl_803D1E64:
-    .4byte lbl_803D1DF4
-    .4byte lbl_803D1E10
-    .4byte lbl_803D1E2C
-    .4byte lbl_803D1E48
 .global lbl_803D1E74
 lbl_803D1E74:
     .4byte lbl_803D1CC0
