@@ -69,3 +69,26 @@ ActionState as_table_roy[] = {
     { 326, 0x00340614, 0x15000000, lbl_80138F14, lbl_80138FC4, lbl_80138FE8,
       lbl_80139044, func_800761C8 },
 };
+
+char lbl_803D3280[] = "PlFe.dat";
+char lbl_803D328C[] = "ftDataEmblem";
+char lbl_803D329C[] = "PlFeNr.dat";
+char lbl_803D32A8[] = "PlyEmblem5K_Share_joint";
+char lbl_803D32C0[] = "PlyEmblem5K_Share_matanim_joint";
+char lbl_803D32E0[] = "PlFeRe.dat";
+char lbl_803D32EC[] = "PlyEmblem5KRe_Share_joint";
+char lbl_803D3308[] = "PlyEmblem5KRe_Share_matanim_joint";
+char lbl_803D332C[] = "PlFeBu.dat";
+char lbl_803D3338[] = "PlyEmblem5KBu_Share_joint";
+char lbl_803D3354[] = "PlyEmblem5KBu_Share_matanim_joint";
+char lbl_803D3378[] = "PlFeGr.dat";
+char lbl_803D3384[] = "PlyEmblem5KGr_Share_joint";
+char lbl_803D33A0[] = "PlyEmblem5KGr_Share_matanim_joint";
+char lbl_803D33C4[] = "PlFeYe.dat";
+char lbl_803D33D0[] = "PlyEmblem5KYe_Share_joint";
+char lbl_803D33EC[] = "PlyEmblem5KYe_Share_matanim_joint";
+char lbl_803D3410[] = "PlFeAJ.dat";
+char lbl_803D341C[] = "ftDemoResultMotionFileEmblem";
+char lbl_803D343C[] = "ftDemoIntroMotionFileEmblem";
+char lbl_803D3458[] = "ftDemoEndingMotionFileEmblem";
+char lbl_803D3478[] = "ftDemoViWaitMotionFileEmblem";
