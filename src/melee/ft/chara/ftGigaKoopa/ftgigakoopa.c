@@ -150,16 +150,14 @@ void func_8014F98C(s32 arg0, s32* arg1, s32* arg2)
 
 /// @todo Fix hacky temp variable.
 /// @remarks UB warning: this function may use offset uninitialized
-s32 func_8014F9A4(s32 arg0)
+unk_t func_8014F9A4(s32 arg0)
 {
     int offset;
-    s32* temp;
 
     switch (arg0) {
     case 0xf:
         offset = 0xe;
     }
 
-    temp = (s32*) &lbl_803D3984[0];
-    return temp[offset - 0xe];
+    return lbl_803D3984[offset - 0xe];
 }

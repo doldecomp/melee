@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 
+#include <melee/ft/chara/ftMario/ftmario2.h>
 #include <melee/ft/chara/ftMario/ftMario_SpecialN.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
@@ -40,8 +41,6 @@ ActionState lbl_803C7260[] = {
     { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
     { 15, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };
-
-extern s32 lbl_803C5A20[];
 
 void ftMario_OnDeath(HSD_GObj* gobj)
 {
@@ -135,7 +134,7 @@ void ftMario_func_800E0CAC(s32 arg0, u32* arg1, u32* arg2)
     }
 }
 
-s32 ftMario_func_800E0CE0(s32 arg0)
+unk_t ftMario_func_800E0CE0(s32 arg0)
 {
     int offset;
 

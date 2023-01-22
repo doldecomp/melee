@@ -113,7 +113,7 @@ void ftMario_LoadSpecialAttrs(HSD_GObj*);
 void ftMario_OnKnockbackEnter(HSD_GObj*);
 void ftMario_OnKnockbackExit(HSD_GObj*);
 void ftMario_func_800E0CAC(s32, u32*, u32*);
-s32 ftMario_func_800E0CE0(s32 arg0);
+unk_t ftMario_func_800E0CE0(s32 arg0);
 
 // ftmario2
 int ftMario_SpecialN_VitaminRandom(HSD_GObj*);

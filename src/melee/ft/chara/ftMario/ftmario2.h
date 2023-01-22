@@ -5,5 +5,6 @@
 #include <Runtime/platform.h>
 
 extern Fighter_DemoStrings lbl_803C59D8;
+extern char* lbl_803C5A20[];
 
 #endif

@@ -22,6 +22,7 @@
 #include <melee/ft/chara/ftLink/ftlink.h>
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
 #include <melee/ft/chara/ftMario/ftmario.h>
+#include <melee/ft/chara/ftMario/ftmario2.h>
 #include <melee/ft/chara/ftMars/ftMars.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
@@ -999,4 +1000,61 @@ struct {
         lbl_803D35A0, lbl_803D3948, lbl_803D3A18,
     }
 
+};
+
+/// Demo Lookup Strings
+Fighter_DemoStrings* lbl_803C2468[FTKIND_MAX] = {
+    &lbl_803C59D8, &lbl_803C7D8C,
+    &lbl_803C772C, &lbl_803CC010,
+    &lbl_803CA55C, &lbl_803CF25C,
+    &lbl_803C82A0, &lbl_803CC548,
+    &lbl_803CCC74, &ftPeach_str_arr_ftDemo,
+    &lbl_803CD7B4, &lbl_803CDD1C,
+    &lbl_803CE290, &lbl_803CE668,
+    &lbl_803CECEC, &lbl_803D04F8,
+    &lbl_803D0F4C, &lbl_803D0A64,
+    &lbl_803CFA08, &lbl_803CFEA0,
+    &lbl_803D1448, &lbl_803D17FC,
+    &lbl_803D1E64, &lbl_803D23A4,
+    &lbl_803D29B8, &lbl_803D2E30,
+    &lbl_803D3498, NULL,
+    NULL,          NULL,
+    NULL,          &lbl_803D3954,
+    NULL,
+};
+
+Fighter_DemoGetter lbl_803C24EC[FTKIND_MAX] = {
+    ftMario_func_800E0CE0,
+    NULL,
+    NULL,
+    NULL,
+    func_800EEBF8,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    func_80142640,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    func_8014F9A4,
+    NULL,
 };
