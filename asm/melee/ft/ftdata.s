@@ -831,77 +831,6 @@ lbl_800860B0:
 .section .data
     .balign 4
 
-.global ft_OnItemDrop
-ft_OnItemDrop:
-    .4byte ftMario_OnItemDrop
-    .4byte ftFox_OnItemDrop
-    .4byte ftCFalcon_OnItemDrop
-    .4byte ftDonkey_OnItemDrop
-    .4byte ftKirby_OnItemDrop
-    .4byte ftKoopa_OnItemDrop
-    .4byte ftLink_OnItemDrop
-    .4byte ftSeak_OnItemDrop
-    .4byte ftNess_OnItemDrop
-    .4byte ftPeach_OnItemDrop
-    .4byte ftIceClimber_OnItemDrop
-    .4byte ftIceClimber_OnItemDrop
-    .4byte ftPikachu_OnItemDrop
-    .4byte ftSamus_OnItemDrop
-    .4byte ftYoshi_OnItemDrop
-    .4byte ftPurin_OnItemDrop
-    .4byte ftMewTwo_OnItemDrop
-    .4byte ftLuigi_OnItemDrop
-    .4byte ftMars_OnItemDrop
-    .4byte ftZelda_OnItemDrop
-    .4byte ftCLink_OnItemDrop
-    .4byte ftDrMario_OnItemDrop
-    .4byte ftFalco_OnItemDrop
-    .4byte ftPichu_OnItemDrop
-    .4byte ftGameWatch_OnItemDrop
-    .4byte ftGanon_OnItemDrop
-    .4byte ftRoy_OnItemDrop
-    .4byte NULL
-    .4byte NULL
-    .4byte ftZakoBoy_OnItemDrop
-    .4byte ftZakoGirl_OnItemDrop
-    .4byte ftGKoopa_OnItemDrop
-    .4byte NULL
-
-.global lbl_803C1BA4
-lbl_803C1BA4:
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte ftPikachu_8012467C
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
 
 .global lbl_803C1C28
 lbl_803C1C28:
@@ -974,7 +903,6 @@ ft_OnKnockbackEnter:
     .4byte NULL
     .4byte ftGKoopa_OnKnockbackEnter
     .4byte ftSandbag_OnKnockbackEnter
-
 .global ft_OnKnockbackExit
 ft_OnKnockbackExit:
     .4byte ftMario_OnKnockbackExit
