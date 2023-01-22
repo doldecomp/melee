@@ -118,3 +118,6 @@ char* lbl_803D05B4[] = {
 };
 
 Vec4 lbl_803D05C8 = { 0.65, 0.7, 0.8, 1 };
+Vec4 lbl_803D05D8 = { 1.1, 1.35, 1.3, 1.2 };
+
+char ftPurin_assert_msg_0[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";

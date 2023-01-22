@@ -6386,14 +6386,6 @@ lbl_8014222C:
 
 .section .data
     .balign 4
-.global lbl_803D05D8
-lbl_803D05D8:
-    .4byte 0x3F8CCCCD
-    .4byte 0x3FACCCCD
-    .4byte 0x3FA66666
-    .4byte 0x3F99999A
-    .asciz "!(jobj->flags & JOBJ_USE_QUATERNION)"
-    .balign 4
 .global lbl_803D0610
 lbl_803D0610:
     .4byte 0x41000000
