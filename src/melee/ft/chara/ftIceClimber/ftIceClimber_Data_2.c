@@ -62,3 +62,23 @@ ActionState as_table_nana[] = {
       lbl_801235F8, func_800761C8 },
     { 0x140, 0x00340613, 0x14000000, NULL, NULL, NULL, NULL, func_800761C8 },
 };
+
+char lbl_803CDB78[] = "PlNn.dat";
+char lbl_803CDB84[] = "ftDataNana";
+char lbl_803CDB90[] = "PlNnNr.dat";
+char lbl_803CDB9C[] = "PlyNana5K_Share_joint";
+char lbl_803CDBB4[] = "PlyNana5K_Share_matanim_joint";
+char lbl_803CDBD4[] = "PlNnYe.dat";
+char lbl_803CDBE0[] = "PlyNana5KYe_Share_joint";
+char lbl_803CDBF8[] = "PlyNana5KYe_Share_matanim_joint";
+char lbl_803CDC18[] = "PlNnAq.dat";
+char lbl_803CDC24[] = "PlyNana5KAq_Share_joint";
+char lbl_803CDC3C[] = "PlyNana5KAq_Share_matanim_joint";
+char lbl_803CDC5C[] = "PlNnWh.dat";
+char lbl_803CDC68[] = "PlyNana5KWh_Share_joint";
+char lbl_803CDC80[] = "PlyNana5KWh_Share_matanim_joint";
+char lbl_803CDCA0[] = "PlNnAJ.dat";
+char lbl_803CDCAC[] = "ftDemoResultMotionFileNana";
+char lbl_803CDCC8[] = "ftDemoIntroMotionFileNana";
+char lbl_803CDCE4[] = "ftDemoEndingMotionFileNana";
+char lbl_803CDD00[] = "ftDemoViWaitMotionFilePopo";
