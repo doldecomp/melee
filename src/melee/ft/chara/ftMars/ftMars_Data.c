@@ -1,3 +1,4 @@
+#include "common_structs.h"
 #include <melee/ft/chara/ftMars/ftMars.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
@@ -92,3 +93,10 @@ char lbl_803CF998[] = "ftDemoResultMotionFileMars";
 char lbl_803CF9B4[] = "ftDemoIntroMotionFileMars";
 char lbl_803CF9D0[] = "ftDemoEndingMotionFileMars";
 char lbl_803CF9EC[] = "ftDemoViWaitMotionFileMars";
+
+Fighter_DemoStrings lbl_803CFA08 = {
+    lbl_803CF998,
+    lbl_803CF9B4,
+    lbl_803CF9D0,
+    lbl_803CF9EC,
+};
