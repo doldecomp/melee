@@ -6831,12 +6831,6 @@ lbl_8015BCE8:
 
 .section .data
     .balign 8
-.global lbl_803D4868
-lbl_803D4868:
-    .4byte lbl_803D4834
-    .4byte lbl_803D4840
-    .4byte NULL
-    .4byte NULL
 .global lbl_803D4878
 lbl_803D4878:
     .4byte 0x00000157

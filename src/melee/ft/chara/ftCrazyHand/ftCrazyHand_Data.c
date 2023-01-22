@@ -109,3 +109,7 @@ char lbl_803D4824[] = "ftDataCrazyhand";
 char lbl_803D4834[] = "PlChNr.dat";
 char lbl_803D4840[] = "PlyCrazyhand_Share_joint";
 char lbl_803D485C[] = "PlChAJ.dat";
+
+Fighter_CostumeStrings lbl_803D4868[] = {
+    { lbl_803D4834, lbl_803D4840, NULL },
+};
