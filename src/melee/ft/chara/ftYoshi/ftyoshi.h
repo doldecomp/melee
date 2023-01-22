@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI_H
-#define MELEE_FT_CHARA_FTYOSHI_FTYOSHI_H
+#ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
+#define MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
