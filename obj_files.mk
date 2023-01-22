@@ -90,6 +90,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
     $(BUILD_DIR)/src/melee/ft/ftlib.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwaitanim.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftunk07.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_unknown_006.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_unknown_006.s.o\
 
