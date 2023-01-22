@@ -4319,16 +4319,6 @@ lbl_80122EC0:
 .section .data
     .balign 8
 
-
-.global lbl_803CD820
-lbl_803CD820:
-    .4byte 0x41400000
-    .4byte NULL
-    .4byte 0xC0C00000
-    .4byte 0x40C00000
-    .4byte 0x40C00000
-    .4byte 0x40C00000
-
 .global as_table_nana
 as_table_nana:
     .4byte 0x00000127
