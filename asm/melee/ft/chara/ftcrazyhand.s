@@ -6831,26 +6831,6 @@ lbl_8015BCE8:
 
 .section .data
     .balign 8
-.global lbl_803D4818
-lbl_803D4818:
-    .asciz "PlCh.dat"
-    .balign 4
-.global lbl_803D4824
-lbl_803D4824:
-    .asciz "ftDataCrazyhand"
-    .balign 4
-.global lbl_803D4834
-lbl_803D4834:
-    .asciz "PlChNr.dat"
-    .balign 4
-.global lbl_803D4840
-lbl_803D4840:
-    .asciz "PlyCrazyhand_Share_joint"
-    .balign 4
-.global lbl_803D485C
-lbl_803D485C:
-    .asciz "PlChAJ.dat"
-    .balign 8
 .global lbl_803D4868
 lbl_803D4868:
     .4byte lbl_803D4834

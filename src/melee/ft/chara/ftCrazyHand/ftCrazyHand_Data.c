@@ -103,3 +103,9 @@ ActionState as_table_crazyhand[] = {
     { 343, FLAGS_ZERO, 0x01000000, lbl_8015BB70, NULL, lbl_8015BBD8,
       lbl_8015BC38, func_800761C8 },
 };
+
+char lbl_803D4818[] = "PlCh.dat";
+char lbl_803D4824[] = "ftDataCrazyhand";
+char lbl_803D4834[] = "PlChNr.dat";
+char lbl_803D4840[] = "PlyCrazyhand_Share_joint";
+char lbl_803D485C[] = "PlChAJ.dat";
