@@ -69,3 +69,26 @@ ActionState as_table_mars[] = {
     { 326, 0x00340614, 0x15000000, lbl_80138F14, lbl_80138FC4, lbl_80138FE8,
       lbl_80139044, func_800761C8 },
 };
+
+char lbl_803CF820[] = "PlMs.dat";
+char lbl_803CF82C[] = "ftDataMars";
+char lbl_803CF838[] = "PlMsNr.dat";
+char lbl_803CF844[] = "PlyMars5K_Share_joint";
+char lbl_803CF85C[] = "PlyMars5K_Share_matanim_joint";
+char lbl_803CF87C[] = "PlMsRe.dat";
+char lbl_803CF888[] = "PlyMars5KRe_Share_joint";
+char lbl_803CF8A0[] = "PlyMars5KRe_Share_matanim_joint";
+char lbl_803CF8C0[] = "PlMsGr.dat";
+char lbl_803CF8CC[] = "PlyMars5KGr_Share_joint";
+char lbl_803CF8E4[] = "PlyMars5KGr_Share_matanim_joint";
+char lbl_803CF904[] = "PlMsBk.dat";
+char lbl_803CF910[] = "PlyMars5KBk_Share_joint";
+char lbl_803CF928[] = "PlyMars5KBk_Share_matanim_joint";
+char lbl_803CF948[] = "PlMsWh.dat";
+char lbl_803CF954[] = "PlyMars5KWh_Share_joint";
+char lbl_803CF96C[] = "PlyMars5KWh_Share_matanim_joint";
+char lbl_803CF98C[] = "PlMsAJ.dat";
+char lbl_803CF998[] = "ftDemoResultMotionFileMars";
+char lbl_803CF9B4[] = "ftDemoIntroMotionFileMars";
+char lbl_803CF9D0[] = "ftDemoEndingMotionFileMars";
+char lbl_803CF9EC[] = "ftDemoViWaitMotionFileMars";
