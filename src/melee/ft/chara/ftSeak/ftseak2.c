@@ -1,4 +1,7 @@
+#include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
+
+Vec3 const lbl_803B7588 = { 1.8, 0, 0 };
 
 f32 lbl_803CC598[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,
