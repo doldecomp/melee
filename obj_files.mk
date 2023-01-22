@@ -87,6 +87,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/code_80081B38.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_unknown_005.s.o\
     $(BUILD_DIR)/src/melee/ft/ftdata1.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftdata2.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
     $(BUILD_DIR)/src/melee/ft/ftlib.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwaitanim.c.o\

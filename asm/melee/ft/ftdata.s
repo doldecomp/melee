@@ -831,26 +831,6 @@ lbl_800860B0:
 .section .data
     .balign 4
 
-.global lbl_803C2720
-lbl_803C2720:
-    .asciz "fighter reference counter error!\n"
-    .balign 4
-.global lbl_803C2744
-lbl_803C2744:
-    .asciz "ftdata.c"
-    .balign 4
-    .asciz "cant get corps model array!\n"
-    .balign 4
-    .asciz "HSD_ArchiveParse error!\n"
-    .balign 4
-    .asciz "fighter figatree over! %x\n"
-    .balign 4
-    .asciz "Demo Status error! %d\n"
-    .balign 4
-    .asciz "lbArchiveRelocate error! %x\n"
-    .balign 4
-    .asciz "HSD_ArchiveParse error! %x\n"
-    .balign 8
 .global ActionStateList
 ActionStateList:
     # Entry 0
