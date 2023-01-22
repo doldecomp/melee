@@ -1,3 +1,4 @@
+#include "melee/ft/forward.h"
 #include <dolphin/mtx/types.h>
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 #include <melee/ft/ftcamera.h>
@@ -82,3 +83,10 @@ char lbl_803CDCAC[] = "ftDemoResultMotionFileNana";
 char lbl_803CDCC8[] = "ftDemoIntroMotionFileNana";
 char lbl_803CDCE4[] = "ftDemoEndingMotionFileNana";
 char lbl_803CDD00[] = "ftDemoViWaitMotionFilePopo";
+
+Fighter_DemoStrings lbl_803CDD1C = {
+    lbl_803CDCAC,
+    lbl_803CDCC8,
+    lbl_803CDCE4,
+    lbl_803CDD00,
+};
