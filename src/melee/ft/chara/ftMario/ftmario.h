@@ -98,6 +98,7 @@ static inline ftMarioAttributes* GetMarioAttr(Fighter* fp)
 }
 
 extern ActionState as_table_mario[];
+extern ActionState lbl_803C7260[];
 
 // ftmario1
 void ftMario_OnDeath(HSD_GObj*);

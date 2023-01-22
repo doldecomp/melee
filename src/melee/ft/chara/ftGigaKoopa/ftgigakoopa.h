@@ -5,6 +5,7 @@
 #include <sysdolphin/baselib/gobj.h>
 
 extern ActionState as_table_gkoopa[];
+extern ActionState lbl_803D38C8[];
 
 void ftGKoopa_OnDeath(HSD_GObj*);
 void func_8014F698(HSD_GObj*);

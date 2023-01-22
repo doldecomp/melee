@@ -28,6 +28,7 @@ typedef struct _ftKirbyAttributes {
 } ftKirbyAttributes;
 
 extern ActionState as_table_kirby[];
+extern ActionState lbl_803CA04C[];
 
 void func_800EED50(s32, s32);
 void func_800F1D24(HSD_GObj*);

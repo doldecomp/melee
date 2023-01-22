@@ -24,6 +24,7 @@
 #include <melee/ft/chara/ftPeach/ftpeach.h>
 #include <melee/ft/chara/ftPichu/ftpichu.h>
 #include <melee/ft/chara/ftPikachu/ftpikachu.h>
+#include <melee/ft/chara/ftPikachu/ftpikachu1.h>
 #include <melee/ft/chara/ftPurin/ftpurin.h>
 #include <melee/ft/chara/ftSamus/ftsamus1.h>
 #include <melee/ft/chara/ftSandbag/ftsandbag.h>
@@ -89,4 +90,48 @@ HSD_GObjEvent ft_OnUserDataRemove[FTKIND_MAX] = {
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     NULL,
+};
+
+ActionState* ActionStateTableByCharacter[FTKIND_MAX] = {
+    as_table_mario,
+    as_table_fox,
+    as_table_cfalcon,
+    as_table_donkey,
+    as_table_kirby,
+    as_table_koopa,
+    as_table_link,
+    as_table_seak,
+    as_table_ness,
+    as_table_peach,
+    as_table_iceclimber,
+    as_table_nana,
+    as_table_pikachu,
+    as_table_samus,
+    as_table_yoshi,
+    as_table_purin,
+    as_table_mewtwo,
+    as_table_luigi,
+    as_table_mars,
+    as_table_zelda,
+    as_table_clink,
+    as_table_drmario,
+    as_table_falco,
+    as_table_pichu,
+    as_table_gamewatch,
+    as_table_ganon,
+    as_table_roy,
+    as_table_masterhand,
+    as_table_crazyhand,
+    NULL,
+    NULL,
+    as_table_gkoopa,
+    as_table_sandbag,
+};
+
+ActionState* lbl_803C1364[FTKIND_MAX] = {
+    lbl_803C7260, NULL, NULL, NULL,         lbl_803CA04C, NULL, NULL,
+    NULL,         NULL, NULL, NULL,         NULL,         NULL, NULL,
+    NULL,         NULL, NULL, lbl_803D0868, NULL,         NULL, NULL,
+    NULL,         NULL, NULL, NULL,         NULL,         NULL, NULL,
+    NULL,         NULL, NULL, lbl_803D38C8, NULL,
 };
