@@ -895,5 +895,7 @@ void lbl_800FA958(HSD_GObj*);
 /* static */ void func_800F19AC(HSD_GObj* fighter_gobj);
 /* static */ void func_800F1A8C(HSD_GObj* fighter_gobj);
 void func_800EE818(HSD_GObj* fighter_gobj);
+void ftKirby_SpecialS_StartAction(HSD_GObj*);
+void ftKirby_SpecialAirHi_StartAction(HSD_GObj*);
 
 #endif

@@ -3,6 +3,8 @@
 #include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_callbacks.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialS.h>
 #include <melee/ft/chara/ftDrMario/ftdrmario.h>
 #include <melee/ft/chara/ftEmblem/ftemblem.h>
 #include <melee/ft/chara/ftFalco/ftfalco.h>
@@ -10,6 +12,7 @@
 #include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 #include <melee/ft/chara/ftGanon/ftganon.h>
 #include <melee/ft/chara/ftGigaKoopa/ftgigakoopa.h>
+#include <melee/ft/chara/ftIceClimber/fticeclimber.h>
 #include <melee/ft/chara/ftIceClimber/fticeclimber1.h>
 #include <melee/ft/chara/ftIceClimber/fticeclimber2_nana.h>
 #include <melee/ft/chara/ftKirby/ftkirby.h>
@@ -27,9 +30,12 @@
 #include <melee/ft/chara/ftPikachu/ftpikachu1.h>
 #include <melee/ft/chara/ftPurin/ftpurin.h>
 #include <melee/ft/chara/ftSamus/ftsamus1.h>
+#include <melee/ft/chara/ftSamus/ftsamus4.h>
+#include <melee/ft/chara/ftSamus/ftsamus5.h>
 #include <melee/ft/chara/ftSandbag/ftsandbag.h>
 #include <melee/ft/chara/ftSeak/ftseak.h>
 #include <melee/ft/chara/ftYoshi/ftyoshi1.h>
+#include <melee/ft/chara/ftYoshi/ftyoshi4.h>
 #include <melee/ft/chara/ftZakoBoy/ftzakoboy.h>
 #include <melee/ft/chara/ftZakoGirl/ftzakogirl.h>
 #include <melee/ft/types.h>
@@ -134,4 +140,76 @@ ActionState* lbl_803C1364[FTKIND_MAX] = {
     NULL,         NULL, NULL, lbl_803D0868, NULL,         NULL, NULL,
     NULL,         NULL, NULL, NULL,         NULL,         NULL, NULL,
     NULL,         NULL, NULL, lbl_803D38C8, NULL,
+};
+
+HSD_GObjEvent ft_SpecialS[FTKIND_MAX] = {
+    ftMario_SpecialS_StartAction,
+    ftFox_SpecialS_StartAction,
+    ftCaptain_SpecialS_StartAction,
+    ftDonkey_SpecialS_StartAction,
+    ftKirby_SpecialS_StartAction,
+    ftKoopa_SpecialS_StartAction,
+    ftLink_SpecialS_StartAction,
+    ftSeak_SpecialS_StartAction,
+    ftNess_SpecialS_StartAction,
+    ftPeach_SpecialS_StartAction,
+    ftIceClimber_SpecialS_StartAction,
+    NULL,
+    ftPikachu_SpecialS_StartAction,
+    ftSamus_SpecialS_StartAction,
+    ftYoshi_SpecialS_StartAction,
+    ftPurin_SpecialS_StartAction,
+    ftMewtwo_SpecialS_StartAction,
+    ftLuigi_SpecialS_StartAction,
+    ftMars_SpecialS_StartAction,
+    ftZelda_SpecialS_StartAction,
+    ftLink_SpecialS_StartAction,
+    ftMario_SpecialS_StartAction,
+    ftFox_SpecialS_StartAction,
+    ftPikachu_SpecialS_StartAction,
+    ftGameWatch_SpecialS_StartAction,
+    ftCaptain_SpecialS_StartAction,
+    ftMars_SpecialS_StartAction,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ftKoopa_SpecialS_StartAction,
+    NULL,
+};
+
+HSD_GObjEvent ft_SpecialAirHi[FTKIND_MAX] = {
+    ftMario_SpecialAirHi_StartAction,
+    ftFox_SpecialAirHi_StartAction,
+    ftCFalcon_SpecialAirHi_StartAction,
+    ftDonkey_SpecialAirHi_StartAction,
+    ftKirby_SpecialAirHi_StartAction,
+    ftKoopa_SpecialAirHi_StartAction,
+    ftLink_SpecialAirHi_StartAction,
+    ftSeak_SpecialAirHi_StartAction,
+    ftNess_SpecialAirHiStart_Action,
+    ftPeach_SpecialAirHi_StartAction,
+    ftIceClimber_SpecialAirHi_StartAction,
+    NULL,
+    ftPikachu_SpecialAirHi_StartAction,
+    ftSamus_SpecialAirHi_StartAction,
+    ftYoshi_SpecialAirHi_StartAction,
+    ftPurin_SpecialAirHi_StartAction,
+    ftMewtwo_SpecialAirHi_StartAction,
+    ftLuigi_SpecialAirHi_StartAction,
+    ftMars_SpecialAirHi_StartAction,
+    ftZelda_SpecialAirHi_StartAction,
+    ftLink_SpecialAirHi_StartAction,
+    ftMario_SpecialAirHi_StartAction,
+    ftFox_SpecialAirHi_StartAction,
+    ftPikachu_SpecialAirHi_StartAction,
+    ftGameWatch_SpecialAirHi_StartAction,
+    ftCFalcon_SpecialAirHi_StartAction,
+    ftMars_SpecialAirHi_StartAction,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ftKoopa_SpecialAirHi_StartAction,
+    NULL,
 };

@@ -175,5 +175,6 @@ void func_801348C0(HSD_GObj*);
 void lbl_801349C4(HSD_GObj*);
 void lbl_80134A00(HSD_GObj*);
 void lbl_80134A20(HSD_GObj*);
+void ftKoopa_SpecialAirHi_StartAction(HSD_GObj*);
 
 #endif
