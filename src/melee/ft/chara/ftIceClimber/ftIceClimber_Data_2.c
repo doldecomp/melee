@@ -1,6 +1,7 @@
-#include "melee/ft/forward.h"
+
 #include <dolphin/mtx/types.h>
 #include <melee/ft/chara/ftIceClimber/fticeclimber.h>
+#include <melee/ft/forward.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/types.h>
 
