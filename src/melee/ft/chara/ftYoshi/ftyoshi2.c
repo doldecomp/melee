@@ -91,10 +91,10 @@ void lbl_8012C114(HSD_GObj* fighter_gobj)
 
 void lbl_8012C194(HSD_GObj* arg0)
 {
-    func_80092870();
+    func_80092870(arg0);
 }
 
 void lbl_8012C1B4(HSD_GObj* arg0)
 {
-    func_800928AC();
+    func_800928AC(arg0);
 }

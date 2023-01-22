@@ -282,5 +282,21 @@ void lbl_8015BC38(HSD_GObj*);
 void lbl_8015BB70(HSD_GObj*);
 void lbl_8015BBD8(HSD_GObj*);
 void lbl_8015BC38(HSD_GObj*);
+void func_8015B660(HSD_GObj*);
+void func_8015B664(HSD_GObj*);
+void func_8015B668(HSD_GObj*);
+void func_8015B66C(HSD_GObj*);
+void func_8015B704(HSD_GObj*);
+void func_8015B76C(HSD_GObj*);
+void func_8015B770(HSD_GObj*);
+void func_8015B774(HSD_GObj*);
+void func_8015B840(HSD_GObj*);
+void func_8015B844(HSD_GObj*);
+void func_8015B848(HSD_GObj*);
+void func_8015B84C(HSD_GObj*);
+void func_8015B8EC(HSD_GObj*);
+void func_8015B8F0(HSD_GObj*);
+void func_8015B8F4(HSD_GObj*);
+void func_8015B8F8(HSD_GObj*);
 
 #endif

@@ -920,5 +920,13 @@ void func_800EF9BC(HSD_GObj*);
 void func_800EF9FC(HSD_GObj*);
 unk_t func_800EEBF8(enum_t);
 void func_800EEBC0(s32, s32*, s32*);
+void func_8010AA1C(HSD_GObj*);
+void func_8010AA20(HSD_GObj*);
+void func_8010AA24(HSD_GObj*);
+void func_8010AA28(HSD_GObj*);
+void func_8010AF54(HSD_GObj*);
+void func_8010B0A0(HSD_GObj*);
+void func_8010B0A4(HSD_GObj*);
+void func_8010B0DC(HSD_GObj*);
 
 #endif
