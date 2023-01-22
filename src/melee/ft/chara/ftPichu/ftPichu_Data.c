@@ -64,3 +64,33 @@ ActionState as_table_pichu[] = {
     { 319, 0x00340414, 0x15000000, ftPikachu_8012808C, NULL, ftPikachu_801281CC,
       ftPikachu_PrepCallActionChange_80128304, func_800761C8 },
 };
+
+char lbl_803D21E8[] = "PlPc.dat";
+char lbl_803D21F4[] = "ftDataPichu";
+char lbl_803D2200[] = "PlPcNr.dat";
+char lbl_803D220C[] = "PlyPichu5K_Share_joint";
+char lbl_803D2224[] = "PlyPichu5K_Share_matanim_joint";
+char lbl_803D2244[] = "PlPcRe.dat";
+char lbl_803D2250[] = "PlyPichu5KRe_Share_joint";
+char lbl_803D226C[] = "PlyPichu5KRe_Share_matanim_joint";
+char lbl_803D2290[] = "PlPcBu.dat";
+char lbl_803D229C[] = "PlyPichu5KBu_Share_joint";
+char lbl_803D22B8[] = "PlyPichu5KBu_Share_matanim_joint";
+char lbl_803D22DC[] = "PlPcGr.dat";
+char lbl_803D22E8[] = "PlyPichu5KGr_Share_joint";
+char lbl_803D2304[] = "PlyPichu5KGr_Share_matanim_joint";
+char lbl_803D2328[] = "PlPcAJ.dat";
+
+Fighter_DemoStrings lbl_803D23A4 = {
+    "ftDemoResultMotionFilePichu",
+    "ftDemoIntroMotionFilePichu",
+    "ftDemoEndingMotionFilePichu",
+    "ftDemoViWaitMotionFilePichu",
+};
+
+Fighter_CostumeStrings lbl_803D23B4[] = {
+    { lbl_803D2200, lbl_803D220C, lbl_803D2224 },
+    { lbl_803D2244, lbl_803D2250, lbl_803D226C },
+    { lbl_803D2290, lbl_803D229C, lbl_803D22B8 },
+    { lbl_803D22DC, lbl_803D22E8, lbl_803D2304 },
+};
