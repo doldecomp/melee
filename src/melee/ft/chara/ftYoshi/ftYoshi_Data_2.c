@@ -32,3 +32,12 @@ Fighter_DemoStrings lbl_803CECEC = {
     lbl_803CECB4,
     lbl_803CECD0,
 };
+
+Fighter_CostumeStrings lbl_803CECFC[] = {
+    { lbl_803CEAB0, lbl_803CEABC, lbl_803CEAD4 },
+    { lbl_803CEAF4, lbl_803CEB00, lbl_803CEB1C },
+    { lbl_803CEB40, lbl_803CEB4C, lbl_803CEB68 },
+    { lbl_803CEB8C, lbl_803CEB98, lbl_803CEBB4 },
+    { lbl_803CEBD8, lbl_803CEBE4, lbl_803CEC00 },
+    { lbl_803CEC24, lbl_803CEC30, lbl_803CEC4C },
+};

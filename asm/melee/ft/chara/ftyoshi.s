@@ -7419,28 +7419,7 @@ lbl_8013295C:
 
 
 .section .data
-    .balign 4
-.global lbl_803CECFC
-lbl_803CECFC:
-    .4byte lbl_803CEAB0
-    .4byte lbl_803CEABC
-    .4byte lbl_803CEAD4
-    .4byte lbl_803CEAF4
-    .4byte lbl_803CEB00
-    .4byte lbl_803CEB1C
-    .4byte lbl_803CEB40
-    .4byte lbl_803CEB4C
-    .4byte lbl_803CEB68
-    .4byte lbl_803CEB8C
-    .4byte lbl_803CEB98
-    .4byte lbl_803CEBB4
-    .4byte lbl_803CEBD8
-    .4byte lbl_803CEBE4
-    .4byte lbl_803CEC00
-    .4byte lbl_803CEC24
-    .4byte lbl_803CEC30
-    .4byte lbl_803CEC4C
-    .4byte NULL
+    .balign 8
 .global lbl_803CED48
 lbl_803CED48:
     .4byte NULL
