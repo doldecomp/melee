@@ -54,3 +54,23 @@ ActionState as_table_iceclimber[] = {
       lbl_801235F8, func_800761C8 },
     { 320, 0x00340613, 0x14000000, NULL, NULL, NULL, NULL, func_800761C8 },
 };
+
+char lbl_803CD610[] = "PlPp.dat";
+char lbl_803CD61C[] = "ftDataPopo";
+char lbl_803CD628[] = "PlPpNr.dat";
+char lbl_803CD634[] = "PlyPopo5K_Share_joint";
+char lbl_803CD64C[] = "PlyPopo5K_Share_matanim_joint";
+char lbl_803CD66C[] = "PlPpGr.dat";
+char lbl_803CD678[] = "PlyPopo5KGr_Share_joint";
+char lbl_803CD690[] = "PlyPopo5KGr_Share_matanim_joint";
+char lbl_803CD6B0[] = "PlPpOr.dat";
+char lbl_803CD6BC[] = "PlyPopo5KOr_Share_joint";
+char lbl_803CD6D4[] = "PlyPopo5KOr_Share_matanim_joint";
+char lbl_803CD6F4[] = "PlPpRe.dat";
+char lbl_803CD700[] = "PlyPopo5KRe_Share_joint";
+char lbl_803CD718[] = "PlyPopo5KRe_Share_matanim_joint";
+char lbl_803CD738[] = "PlPpAJ.dat";
+char lbl_803CD744[] = "ftDemoResultMotionFilePopo";
+char lbl_803CD760[] = "ftDemoIntroMotionFilePopo";
+char lbl_803CD77C[] = "ftDemoEndingMotionFilePopo";
+char lbl_803CD798[] = "ftDemoViWaitMotionFilePopo";
