@@ -166,19 +166,18 @@ void ftLuigi_8014260C(s32 arg0, s32* arg1, s32* arg2)
     }
 }
 
-// 0x80142640
-// https://decomp.me/scratch/vH9VM // Get symbol pointers for Luigi cutscenes
-void* func_80142640(s32 demoMotionArg)
+void* func_80142640(enum_t arg0)
 {
-    s32 demoFile;
+    int offset;
 
-    switch (demoMotionArg) {
-    case 0x9:
-        demoFile = 14;
+    switch (arg0) {
+    case 9:
+        offset = 14;
         break;
-    case 0xA:
-        demoFile = 15;
+    case 10:
+        offset = 15;
         break;
     }
-    return lbl_803D0AAC[demoFile - 14];
+
+    return lbl_803D0AAC[offset - 14];
 }

@@ -262,6 +262,6 @@ void ftLuigi_OnKnockbackEnter(HSD_GObj* fighter_gobj);
 void ftLuigi_OnKnockbackExit(HSD_GObj* fighter_gobj);
 void ftLuigi_8014260C(s32 arg0, s32* arg1, s32* arg2);
 void ftLuigi_OnDeath(HSD_GObj* fighter_gobj);
-void* func_80142640(s32 demoMotionArg);
+void* func_80142640(enum_t demoMotionArg);
 
 #endif

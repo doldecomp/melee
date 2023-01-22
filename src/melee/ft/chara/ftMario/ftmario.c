@@ -134,16 +134,16 @@ void ftMario_func_800E0CAC(s32 arg0, u32* arg1, u32* arg2)
     }
 }
 
-unk_t ftMario_func_800E0CE0(s32 arg0)
+unk_t ftMario_func_800E0CE0(enum_t arg0)
 {
     int offset;
 
     switch (arg0) {
     case 9:
-        offset = 0xe;
+        offset = 14;
         break;
     case 10:
-        offset = 0xf;
+        offset = 15;
     }
 
     return lbl_803C5A20[offset - 0xe];
