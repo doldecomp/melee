@@ -69,3 +69,26 @@ ActionState as_table_purin[] = {
     { 326, 0x00340414, 0x15000000, lbl_8013D008, lbl_8013D048, lbl_8013D06C,
       lbl_8013D0C8, func_800761C8 },
 };
+
+char lbl_803D02F0[] = "PlPr.dat";
+char lbl_803D02FC[] = "ftDataPurin";
+char lbl_803D0308[] = "PlPrNr.dat";
+char lbl_803D0314[] = "PlyPurin5K_Share_joint";
+char lbl_803D032C[] = "PlyPurin5K_Share_matanim_joint";
+char lbl_803D034C[] = "PlPrRe.dat";
+char lbl_803D0358[] = "PlyPurin5KRe_Share_joint";
+char lbl_803D0374[] = "PlyPurin5KRe_Share_matanim_joint";
+char lbl_803D0398[] = "PlPrBu.dat";
+char lbl_803D03A4[] = "PlyPurin5KBu_Share_joint";
+char lbl_803D03C0[] = "PlyPurin5KBu_Share_matanim_joint";
+char lbl_803D03E4[] = "PlPrGr.dat";
+char lbl_803D03F0[] = "PlyPurin5KGr_Share_joint";
+char lbl_803D040C[] = "PlyPurin5KGr_Share_matanim_joint";
+char lbl_803D0430[] = "PlPrYe.dat";
+char lbl_803D043C[] = "PlyPurin5KYe_Share_joint";
+char lbl_803D0458[] = "PlyPurin5KYe_Share_matanim_joint";
+char lbl_803D047C[] = "PlPrAJ.dat";
+char lbl_803D0488[] = "ftDemoResultMotionFilePurin";
+char lbl_803D04A4[] = "ftDemoIntroMotionFilePurin";
+char lbl_803D04C0[] = "ftDemoEndingMotionFilePurin";
+char lbl_803D04DC[] = "ftDemoViWaitMotionFilePurin";
