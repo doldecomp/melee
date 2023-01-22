@@ -1,4 +1,9 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_05.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_06.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_07.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_08.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_09.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_10.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_11.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_12.h>
@@ -18,11 +23,6 @@
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_28.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_29.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand_30.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_5.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_6.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_7.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_8.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_9.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/types.h>

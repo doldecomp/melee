@@ -7,7 +7,7 @@
 #include <melee/ef/efasync.h>
 #include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 #include <melee/ft/chara/ftKirby/ftkirby.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_2.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_02.h>
 #include <melee/ft/code_8007C114.h>
 #include <melee/ft/code_8007C630.h>
 #include <melee/ft/code_80081938.h>

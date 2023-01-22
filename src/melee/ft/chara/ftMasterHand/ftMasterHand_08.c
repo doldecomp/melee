@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_8.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_08.h>
 
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 #include <melee/ft/code_80081B38.h>
