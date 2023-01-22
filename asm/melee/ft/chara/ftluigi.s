@@ -2,18 +2,6 @@
 
 .section .data
     .balign 4
-.global lbl_803D0A74
-lbl_803D0A74:
-    .asciz "ftDemoVi0102MotionFileLuigi"
-    .balign 4
-.global lbl_803D0A90
-lbl_803D0A90:
-    .asciz "ftDemoVi1101MotionFileLuigi"
-    .balign 4
-.global lbl_803D0AAC
-lbl_803D0AAC:
-    .4byte lbl_803D0A74
-    .4byte lbl_803D0A90
 .global lbl_803D0AB4
 lbl_803D0AB4:
     .4byte lbl_803D08C0

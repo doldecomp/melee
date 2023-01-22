@@ -86,3 +86,11 @@ Fighter_DemoStrings lbl_803D0A64 = {
     "ftDemoEndingMotionFileLuigi",
     "ftDemoViWaitMotionFileLuigi",
 };
+
+char lbl_803D0A74[] = "ftDemoVi0102MotionFileLuigi";
+char lbl_803D0A90[] = "ftDemoVi1101MotionFileLuigi";
+
+char* lbl_803D0AAC[] = {
+    lbl_803D0A74,
+    lbl_803D0A90,
+};
