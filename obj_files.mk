@@ -223,7 +223,6 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda5.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZelda_Data.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftzelda.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftpurin.c.o\

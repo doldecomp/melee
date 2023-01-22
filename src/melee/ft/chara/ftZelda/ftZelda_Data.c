@@ -64,3 +64,18 @@ char lbl_803CFE30[] = "ftDemoResultMotionFileZelda";
 char lbl_803CFE4C[] = "ftDemoIntroMotionFileZelda";
 char lbl_803CFE68[] = "ftDemoEndingMotionFileZelda";
 char lbl_803CFE84[] = "ftDemoViWaitMotionFileZelda";
+
+Fighter_DemoStrings lbl_803CFEA0 = {
+    lbl_803CFE30,
+    lbl_803CFE4C,
+    lbl_803CFE68,
+    lbl_803CFE84,
+};
+
+Fighter_CostumeStrings lbl_803CFEB0[] = {
+    { lbl_803CFCB0, lbl_803CFCBC, lbl_803CFCD4 },
+    { lbl_803CFCF4, lbl_803CFD00, lbl_803CFD1C },
+    { lbl_803CFD40, lbl_803CFD4C, lbl_803CFD68 },
+    { lbl_803CFD8C, lbl_803CFD98, lbl_803CFDB4 },
+    { lbl_803CFDD8, lbl_803CFDE4, lbl_803CFE00 },
+};
