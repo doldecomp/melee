@@ -54,3 +54,10 @@ char lbl_803D177C[] = "ftDemoResultMotionFileDrmario";
 char lbl_803D179C[] = "ftDemoIntroMotionFileDrmario";
 char lbl_803D17BC[] = "ftDemoEndingMotionFileDrmario";
 char lbl_803D17DC[] = "ftDemoViWaitMotionFileDrmario";
+
+Fighter_DemoStrings lbl_803D17FC = {
+    lbl_803D177C,
+    lbl_803D179C,
+    lbl_803D17BC,
+    lbl_803D17DC,
+};
