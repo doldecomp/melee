@@ -41,3 +41,26 @@ ActionState as_table_zelda[] = {
     { 310, 0x00340414, 0x15000000, ftZelda_8013B2E0, ftZelda_8013B320,
       ftZelda_8013B344, ftZelda_8013B3C4, func_800761C8 },
 };
+
+char lbl_803CFC98[] = "PlZd.dat";
+char lbl_803CFCA4[] = "ftDataZelda";
+char lbl_803CFCB0[] = "PlZdNr.dat";
+char lbl_803CFCBC[] = "PlyZelda5K_Share_joint";
+char lbl_803CFCD4[] = "PlyZelda5K_Share_matanim_joint";
+char lbl_803CFCF4[] = "PlZdRe.dat";
+char lbl_803CFD00[] = "PlyZelda5KRe_Share_joint";
+char lbl_803CFD1C[] = "PlyZelda5KRe_Share_matanim_joint";
+char lbl_803CFD40[] = "PlZdBu.dat";
+char lbl_803CFD4C[] = "PlyZelda5KBu_Share_joint";
+char lbl_803CFD68[] = "PlyZelda5KBu_Share_matanim_joint";
+char lbl_803CFD8C[] = "PlZdGr.dat";
+char lbl_803CFD98[] = "PlyZelda5KGr_Share_joint";
+char lbl_803CFDB4[] = "PlyZelda5KGr_Share_matanim_joint";
+char lbl_803CFDD8[] = "PlZdWh.dat";
+char lbl_803CFDE4[] = "PlyZelda5KWh_Share_joint";
+char lbl_803CFE00[] = "PlyZelda5KWh_Share_matanim_joint";
+char lbl_803CFE24[] = "PlZdAJ.dat";
+char lbl_803CFE30[] = "ftDemoResultMotionFileZelda";
+char lbl_803CFE4C[] = "ftDemoIntroMotionFileZelda";
+char lbl_803CFE68[] = "ftDemoEndingMotionFileZelda";
+char lbl_803CFE84[] = "ftDemoViWaitMotionFileZelda";
