@@ -830,81 +830,8 @@ lbl_800860B0:
 
 
 .section .data
-    .balign 8
-.global lbl_803C10D0
-lbl_803C10D0:
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte func_800EE528
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte func_8013C2F8
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
     .balign 4
 
-.global ft_OnLoad
-ft_OnLoad:
-    .4byte ftMario_OnLoad
-    .4byte ftFox_OnLoad
-    .4byte ftCaptain_OnLoad
-    .4byte ftDonkey_OnLoad
-    .4byte ftKirby_OnLoad
-    .4byte ftKoopa_OnLoad
-    .4byte ftLink_OnLoad
-    .4byte ftSeak_OnLoad
-    .4byte ftNess_OnLoad
-    .4byte ftPeach_OnLoad
-    .4byte ftIceClimber_OnLoad
-    .4byte ftNana_OnLoad
-    .4byte ftPikachu_OnLoad
-    .4byte ftSamus_OnLoad
-    .4byte ftYoshi_OnLoad
-    .4byte ftPurin_OnLoad
-    .4byte ftMewtwo_OnLoad
-    .4byte ftLuigi_OnLoad
-    .4byte ftMars_OnLoad
-    .4byte ftZelda_OnLoad
-    .4byte ftCLink_OnLoad
-    .4byte ftDrMario_OnLoad
-    .4byte ftFalco_OnLoad
-    .4byte ftPichu_OnLoad
-    .4byte ftGameWatch_OnLoad
-    .4byte ftGanon_OnLoad
-    .4byte ftRoy_OnLoad
-    .4byte ftMasterhand_OnLoad
-    .4byte ftCrazyhand_OnLoad
-    .4byte ftZakoBoy_OnLoad
-    .4byte ftZakoGirl_OnLoad
-    .4byte ftGKoopa_OnLoad
-    .4byte ftSandbag_OnLoad
-
-    .balign 4
 .global ft_OnDeath
 ft_OnDeath:
     .4byte ftMario_OnDeath
