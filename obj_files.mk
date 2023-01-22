@@ -147,7 +147,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_Data.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_Data_1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_Data_2.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o\
 
@@ -169,7 +169,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/fticeclimber1.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftIceClimber_Data.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftIceClimber_Data_1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftIceClimber_Data_2.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftIceClimber_Data_3.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/fticeclimber.s.o\
@@ -191,11 +191,11 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus5.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus6.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSamus_Data.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSamus_Data_1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSamus_Data_2.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYoshi_Data.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYoshi_Data_1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYoshi_Data_2.c.o\
@@ -204,7 +204,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftkoopa.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftKoopa_Data.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftKoopa_Data_1.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftKoopa_Data_2.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftkoopa.s.o\
 
