@@ -84,3 +84,10 @@ char lbl_803CE210[] = "ftDemoResultMotionFilePikachu";
 char lbl_803CE230[] = "ftDemoIntroMotionFilePikachu";
 char lbl_803CE250[] = "ftDemoEndingMotionFilePikachu";
 char lbl_803CE270[] = "ftDemoViWaitMotionFilePikachu";
+
+Fighter_DemoStrings lbl_803CE290 = {
+    lbl_803CE210,
+    lbl_803CE230,
+    lbl_803CE250,
+    lbl_803CE270,
+};
