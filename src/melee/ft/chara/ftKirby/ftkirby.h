@@ -904,5 +904,7 @@ void ftKirby_SpecialAirN_StartAction(HSD_GObj*);
 void ftKirby_SpecialN_StartAction(HSD_GObj*);
 void ftKirby_SpecialLw_StartAction(HSD_GObj*);
 void ftKirby_SpecialHi_StartAction(HSD_GObj*);
+void ftKirby_OnItemInvisible(HSD_GObj*);
+void ftKirby_OnItemVisible(HSD_GObj*);
 
 #endif
