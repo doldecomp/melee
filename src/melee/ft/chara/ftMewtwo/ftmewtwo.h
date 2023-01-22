@@ -132,6 +132,7 @@ extern char lbl_803D0D80[];
 extern char lbl_803D0D8C[];
 extern Fighter_CostumeStrings lbl_803D0F5C[];
 extern char lbl_803D0EC4[];
+extern Fighter_DemoStrings lbl_803D0F4C;
 
 // Mewtwo functions //
 

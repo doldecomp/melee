@@ -168,6 +168,7 @@ extern char lbl_803D28E8[];
 extern char lbl_803D28F4[];
 extern Fighter_CostumeStrings lbl_803D29C8[];
 extern char lbl_803D292C[];
+extern Fighter_DemoStrings lbl_803D29B8;
 
 // Mr. Game & Watch Functions //
 

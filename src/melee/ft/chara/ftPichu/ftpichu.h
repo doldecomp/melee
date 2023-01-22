@@ -17,6 +17,7 @@ extern char lbl_803D21E8[];
 extern char lbl_803D21F4[];
 extern Fighter_CostumeStrings lbl_803D23B4[];
 extern char lbl_803D2328[];
+extern Fighter_DemoStrings lbl_803D23A4;
 
 void ftPichu_OnLoad(HSD_GObj*);
 void ftPichu_OnDeath(HSD_GObj*);

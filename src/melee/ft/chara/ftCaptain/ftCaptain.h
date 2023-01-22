@@ -97,6 +97,7 @@ extern char lbl_803C7598[];
 extern char lbl_803C75A4[];
 extern Fighter_CostumeStrings lbl_803C773C[];
 extern char lbl_803C76A0[];
+extern Fighter_DemoStrings lbl_803C772C;
 
 // Captain Falcon & Ganondorf functions //
 

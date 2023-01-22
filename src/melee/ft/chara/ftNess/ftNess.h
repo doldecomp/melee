@@ -165,6 +165,7 @@ extern char lbl_803CCAD0[];
 extern char lbl_803CCADC[];
 extern Fighter_CostumeStrings lbl_803CCC84[];
 extern char lbl_803CCBF8[];
+extern Fighter_DemoStrings lbl_803CCC74;
 
 // Ness functions
 

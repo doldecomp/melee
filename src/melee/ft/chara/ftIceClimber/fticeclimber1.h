@@ -10,6 +10,7 @@ extern char lbl_803CD610[];
 extern char lbl_803CD61C[];
 extern Fighter_CostumeStrings lbl_803CD7C4[];
 extern char lbl_803CD738[];
+extern Fighter_DemoStrings lbl_803CD7B4;
 
 void ftIceClimber_OnItemInvisible(HSD_GObj* fighter_gobj);
 void ftIceClimber_OnItemVisible(HSD_GObj* fighter_gobj);

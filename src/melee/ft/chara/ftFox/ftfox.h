@@ -147,6 +147,7 @@ extern char lbl_803C7BE8[];
 extern char lbl_803C7BF4[];
 extern Fighter_CostumeStrings lbl_803C7D9C[];
 extern char lbl_803C7D10[];
+extern Fighter_DemoStrings lbl_803C7D8C;
 
 // Fox & Falco Functions //
 

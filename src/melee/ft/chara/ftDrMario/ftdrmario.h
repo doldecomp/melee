@@ -19,6 +19,7 @@ extern char lbl_803D15D8[];
 extern char lbl_803D15E4[];
 extern Fighter_CostumeStrings lbl_803D180C[];
 extern char lbl_803D1770[];
+extern Fighter_DemoStrings lbl_803D17FC;
 
 void ftDrMario_OnDeath(HSD_GObj*);
 void ftDrMario_OnLoad(HSD_GObj*);

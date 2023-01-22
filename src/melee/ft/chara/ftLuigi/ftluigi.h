@@ -133,6 +133,7 @@ extern char lbl_803D08A8[];
 extern char lbl_803D08B4[];
 extern Fighter_CostumeStrings lbl_803D0AB4[];
 extern char lbl_803D09E8[];
+extern Fighter_DemoStrings lbl_803D0A64;
 
 // Luigi Functions //
 

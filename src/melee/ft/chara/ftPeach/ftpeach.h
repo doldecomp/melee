@@ -15,6 +15,7 @@ extern char ftPeach_str_PlPe_dat[];
 extern char ftPeach_str_ftDataPeach[];
 extern Fighter_CostumeStrings ftPeach_str_arr_Costumes[];
 extern char str_PlPeAJ_dat[];
+extern Fighter_DemoStrings ftPeach_str_arr_ftDemo;
 
 void ftPeach_OnDeath(HSD_GObj* gobj);
 s32 ftPeach_8011BA20(Fighter* fp);

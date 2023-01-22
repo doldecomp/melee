@@ -10,6 +10,7 @@ extern char lbl_803CE510[];
 extern char lbl_803CE51C[];
 extern Fighter_CostumeStrings lbl_803CE678[];
 extern char lbl_803CE5EC[];
+extern Fighter_DemoStrings lbl_803CE668;
 
 void ftSamus_OnDeath(HSD_GObj* fighter_gobj);
 void ftSamus_OnLoad(HSD_GObj* fighter_gobj);

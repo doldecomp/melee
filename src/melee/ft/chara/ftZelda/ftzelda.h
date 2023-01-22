@@ -48,6 +48,7 @@ extern char lbl_803CFC98[];
 extern char lbl_803CFCA4[];
 extern Fighter_CostumeStrings lbl_803CFEB0[];
 extern char lbl_803CFE24[];
+extern Fighter_DemoStrings lbl_803CFEA0;
 
 // ftzelda 1
 void ftZelda_OnDeath(HSD_GObj* fighter_gobj);

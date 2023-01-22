@@ -40,6 +40,7 @@ extern char lbl_803CF820[];
 extern char lbl_803CF82C[];
 extern Fighter_CostumeStrings lbl_803CFA18[];
 extern char lbl_803CF98C[];
+extern Fighter_DemoStrings lbl_803CFA08;
 
 void ftMars_OnDeath(HSD_GObj* gobj);
 void ftMars_OnItemPickup(HSD_GObj* gobj, bool arg1);

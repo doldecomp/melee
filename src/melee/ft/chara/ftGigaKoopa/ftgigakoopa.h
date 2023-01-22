@@ -10,6 +10,7 @@ extern char lbl_803D38E8[];
 extern char lbl_803D38F4[];
 extern Fighter_CostumeStrings lbl_803D3988[];
 extern char lbl_803D3948[];
+extern Fighter_DemoStrings lbl_803D3954;
 
 void ftGKoopa_OnDeath(HSD_GObj*);
 void func_8014F698(HSD_GObj*);

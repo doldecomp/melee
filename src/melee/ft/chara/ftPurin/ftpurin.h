@@ -27,6 +27,7 @@ extern char lbl_803D02F0[];
 extern char lbl_803D02FC[];
 extern Fighter_CostumeStrings lbl_803D0508[];
 extern char lbl_803D047C[];
+extern Fighter_DemoStrings lbl_803D04F8;
 
 /// functions
 

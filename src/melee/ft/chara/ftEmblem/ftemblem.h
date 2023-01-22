@@ -9,6 +9,7 @@ extern char lbl_803D3280[];
 extern char lbl_803D328C[];
 extern Fighter_CostumeStrings lbl_803D34A8[];
 extern char lbl_803D3410[];
+extern Fighter_DemoStrings lbl_803D3498;
 
 void ftRoy_OnDeath(HSD_GObj*);
 void ftRoy_OnItemPickup(HSD_GObj*, bool);
