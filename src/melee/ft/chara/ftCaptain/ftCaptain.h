@@ -92,6 +92,8 @@ typedef struct _ftCaptainAttributes {
 
 } ftCaptainAttributes;
 
+extern ActionState as_table_cfalcon[];
+
 // Captain Falcon & Ganondorf functions //
 
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj);

@@ -35,6 +35,8 @@ typedef struct _MarsAttributes {
     u8 data_filler_68[0x98 - 0x68];
 } MarsAttributes;
 
+extern ActionState as_table_mars[];
+
 void ftMars_OnDeath(HSD_GObj* gobj);
 void ftMars_OnItemPickup(HSD_GObj* gobj, bool arg1);
 void ftMars_OnItemInvisible(HSD_GObj* gobj);

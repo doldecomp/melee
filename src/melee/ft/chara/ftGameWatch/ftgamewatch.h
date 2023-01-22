@@ -163,6 +163,8 @@ typedef struct _ftGameWatchAttributes {
 
 } ftGameWatchAttributes;
 
+extern ActionState as_table_gamewatch[];
+
 // Mr. Game & Watch Functions //
 
 // General callbacks //

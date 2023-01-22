@@ -127,6 +127,8 @@ typedef struct _ftMewtwoAttributes {
 
 } ftMewtwoAttributes;
 
+extern ActionState as_table_mewtwo[];
+
 // Mewtwo functions //
 
 void ftMewtwo_OnDeath(HSD_GObj* fighter_gobj);

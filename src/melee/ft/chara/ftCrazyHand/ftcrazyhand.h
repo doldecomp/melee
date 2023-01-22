@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTCRAZYHAND_FTCRAZYHAND_H
 
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 
 typedef struct _ftCrazyHandAttributes {
@@ -72,6 +73,8 @@ typedef struct _ftCrazyHandAttributes {
     Vec2 x134_pos;
     Vec2 x13C_pos;
 } ftCrazyHandAttributes;
+
+extern ActionState as_table_crazyhand[];
 
 void ftCrazyhand_OnDeath(HSD_GObj* fighter_gobj);
 void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj);

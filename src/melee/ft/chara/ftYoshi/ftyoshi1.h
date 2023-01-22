@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/mobj.h>
@@ -35,6 +36,8 @@ struct S_UNK_YOSHI1 {
     s32 x0;
     struct S_UNK_YOSHI2* unk_struct;
 };
+
+extern ActionState as_table_yoshi[];
 
 void func_8012B8A4(HSD_GObj* fighter_gobj);
 void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg);

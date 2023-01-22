@@ -89,6 +89,8 @@ typedef struct _MasterHandAttributes {
     f32 x178;
 } MasterHandAttributes;
 
+extern ActionState as_table_masterhand[];
+
 // ftMasterHand_1
 void ftMasterhand_OnDeath(HSD_GObj* gobj);
 void ftMasterhand_OnLoad(HSD_GObj* gobj);

@@ -25,6 +25,8 @@ typedef struct _CLinkAttributes {
     f32 xD8;
 } CLinkAttributes;
 
+extern ActionState as_table_clink[];
+
 void ftCLink_OnItemPickup(HSD_GObj*, bool);
 void ftCLink_OnItemDrop(HSD_GObj*, bool);
 void func_80149268(HSD_GObj*);

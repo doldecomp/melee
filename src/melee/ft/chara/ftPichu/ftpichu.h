@@ -12,6 +12,8 @@ typedef struct _ftPichuAttributes {
     /* 0xDC */ u32 xDC;
 } ftPichuAttributes;
 
+extern ActionState as_table_pichu[];
+
 void ftPichu_OnLoad(HSD_GObj*);
 void ftPichu_OnDeath(HSD_GObj*);
 void ftPichu_OnItemPickup(HSD_GObj*, bool);

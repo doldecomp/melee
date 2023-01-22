@@ -127,6 +127,8 @@ typedef struct _ftLuigiAttributes {
 
 } ftLuigiAttributes;
 
+extern ActionState as_table_luigi[];
+
 // Luigi Functions //
 
 // Netural Special - Fireball (SpecialN) //

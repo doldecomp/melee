@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTPURIN_FTPURIN_H
 
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 
 typedef struct _ftPurinAttributes {
@@ -19,6 +20,8 @@ typedef struct _ftPurinAttributes {
     s32 x2C;
     u8 data_filler_1[0x100 - 0x30];
 } ftPurinAttributes;
+
+extern ActionState as_table_purin[];
 
 /// functions
 

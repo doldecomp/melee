@@ -4,6 +4,8 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
+extern ActionState as_table_ganon[];
+
 void ftGanon_OnDeath(HSD_GObj*);
 void ftGanon_OnItemPickup(HSD_GObj*, bool);
 void ftGanon_OnItemInvisible(HSD_GObj*);

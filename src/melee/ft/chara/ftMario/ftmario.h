@@ -97,6 +97,8 @@ static inline ftMarioAttributes* GetMarioAttr(Fighter* fp)
     return mario_attr;
 }
 
+extern ActionState as_table_mario[];
+
 // ftmario1
 void ftMario_OnDeath(HSD_GObj*);
 void ftMario_OnLoadForDrMario(Fighter*);

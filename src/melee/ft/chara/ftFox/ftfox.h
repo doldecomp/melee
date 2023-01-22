@@ -142,6 +142,8 @@ typedef struct _ftFoxAttributes {
 
 } ftFoxAttributes;
 
+extern ActionState as_table_fox[];
+
 // Fox & Falco Functions //
 
 bool func_800E5534(HSD_GObj* gobj);

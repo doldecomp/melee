@@ -10,6 +10,8 @@ typedef struct _ftPeachAttributes {
     u8 padding[0xB8];
 } ftPeachAttributes;
 
+extern ActionState as_table_peach[];
+
 void ftPeach_OnDeath(HSD_GObj* gobj);
 
 s32 ftPeach_8011BA20(Fighter* fp);

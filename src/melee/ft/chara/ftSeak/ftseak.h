@@ -3,6 +3,7 @@
 
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 
 typedef struct _ftSeakAttributes {
@@ -20,6 +21,8 @@ typedef struct _ftSeakAttributes {
     s32 x2C;
     u8 data_filler_1[0x44];
 } ftSeakAttributes;
+
+extern ActionState as_table_seak[];
 
 void lbl_8011412C(HSD_GObj* fighter_gobj);
 void func_80114758(HSD_GObj*);

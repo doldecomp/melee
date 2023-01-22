@@ -4,6 +4,8 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
+extern ActionState as_table_sandbag[];
+
 void ftSandbag_OnDeath(HSD_GObj*);
 void ftSandbag_OnLoad(HSD_GObj* gobj);
 void func_8014FA30(Fighter* fp);

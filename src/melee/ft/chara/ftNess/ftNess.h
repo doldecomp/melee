@@ -160,6 +160,8 @@ typedef struct ftNessAttributes {
 
 } ftNessAttributes;
 
+extern ActionState as_table_ness[];
+
 // Ness functions
 
 void ftNess_OnDeath(HSD_GObj* gobj);

@@ -4,6 +4,8 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
+extern ActionState as_table_roy[];
+
 void ftRoy_OnDeath(HSD_GObj*);
 void ftRoy_OnItemPickup(HSD_GObj*, bool);
 void ftRoy_OnItemInvisible(HSD_GObj*);

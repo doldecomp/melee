@@ -14,6 +14,8 @@ typedef struct _ftDrMarioAttributes {
     u32 x14;
 } ftDrMarioAttributes;
 
+extern ActionState as_table_drmario[];
+
 void ftDrMario_OnDeath(HSD_GObj*);
 void ftDrMario_OnLoad(HSD_GObj*);
 void func_80149540(HSD_GObj*);

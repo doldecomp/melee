@@ -4,6 +4,8 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
+extern ActionState as_table_gkoopa[];
+
 void ftGKoopa_OnDeath(HSD_GObj*);
 void func_8014F698(HSD_GObj*);
 void ftGKoopa_OnLoad(HSD_GObj*);

@@ -1,8 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER1_H
 #define MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER1_H
 
+#include <melee/ft/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
+
+extern ActionState as_table_iceclimber[];
 
 void ftIceClimber_OnItemInvisible(HSD_GObj* fighter_gobj);
 void ftIceClimber_OnItemVisible(HSD_GObj* fighter_gobj);

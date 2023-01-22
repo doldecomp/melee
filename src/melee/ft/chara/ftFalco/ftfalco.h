@@ -4,6 +4,8 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
+extern ActionState as_table_falco[];
+
 void ftFalco_OnDeath(HSD_GObj*);
 void ftFalco_OnItemPickup(HSD_GObj*, bool);
 void ftFalco_OnItemInvisible(HSD_GObj*);
