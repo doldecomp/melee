@@ -148,7 +148,7 @@ void ftCLink_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftCLink_OnItemDropExt(HSD_GObj* gobj, s32 arg1)
+void ftCLink_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 {
     int unused;
     Fighter* fp = gobj->user_data;

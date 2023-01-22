@@ -176,7 +176,7 @@ void ftGameWatch_8014A538(HSD_GObj* fighter_gobj);
 void ftGameWatch_OnItemPickup(HSD_GObj* gobj, bool arg1);
 void ftGameWatch_OnItemInvisible(HSD_GObj* fighter_gobj);
 void ftGameWatch_OnItemVisible(HSD_GObj* fighter_gobj);
-void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, s32 dropItemFlag);
+void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, bool dropItemFlag);
 void ftGameWatch_8014A77C(HSD_GObj* fighter_gobj);
 void ftGameWatch_CopySpecialAttrs(HSD_GObj* fighter_gobj);
 void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod);

@@ -263,7 +263,7 @@ void ftGameWatch_OnItemVisible(HSD_GObj* fighter_gobj)
 
 // 0x8014A728
 // https://decomp.me/scratch/LR8f5 // OnDropItem callback
-void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, s32 dropItemFlag)
+void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, bool dropItemFlag)
 {
     Fighter_OnItemDrop(fighter_gobj, dropItemFlag, 1, 1);
 }
