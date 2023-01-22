@@ -261,7 +261,6 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftFalco/ftfalco.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftFalco/ftFalco_Data.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftfalco.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPichu/ftpichu.c.o\
