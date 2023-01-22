@@ -7420,27 +7420,6 @@ lbl_8013295C:
 
 .section .data
     .balign 4
-.global lbl_803CED84
-lbl_803CED84:
-    .4byte 0x3F266666
-    .4byte 0x3F333333
-    .4byte 0x3F4CCCCD
-    .4byte 0x3F800000
-.global lbl_803CED94
-lbl_803CED94:
-    .4byte 0x3F8CCCCD
-    .4byte 0x3FACCCCD
-    .4byte 0x3FA66666
-    .4byte 0x3F99999A
-.global lbl_803CEDA4
-lbl_803CEDA4:
-    .4byte 0x41400000
-    .4byte NULL
-    .4byte 0xC0C00000
-    .4byte 0x40C00000
-    .4byte 0x40C00000
-    .4byte 0x40C00000
-    .4byte NULL
 
 
 .section .rodata
