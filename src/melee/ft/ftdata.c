@@ -68,3 +68,25 @@ HSD_GObjEvent ft_OnLoad[FTKIND_MAX] = {
     ftMasterhand_OnLoad, ftCrazyhand_OnLoad,  ftZakoBoy_OnLoad,
     ftZakoGirl_OnLoad,   ftGKoopa_OnLoad,     ftSandbag_OnLoad,
 };
+
+HSD_GObjEvent ft_OnDeath[FTKIND_MAX] = {
+    ftMario_OnDeath,      ftFox_OnDeath,        ftCaptain_OnDeath,
+    ftDonkey_OnDeath,     ftKirby_OnDeath,      ftKoopa_OnDeath,
+    ftLink_OnDeath,       ftSeak_OnDeath,       ftNess_OnDeath,
+    ftPeach_OnDeath,      ftIceClimber_OnDeath, ftNana_OnDeath,
+    ftPikachu_OnDeath,    ftSamus_OnDeath,      ftYoshi_OnDeath,
+    ftPurin_OnDeath,      ftMewtwo_OnDeath,     ftLuigi_OnDeath,
+    ftMars_OnDeath,       ftZelda_OnDeath,      ftCLink_OnDeath,
+    ftDrMario_OnDeath,    ftFalco_OnDeath,      ftPichu_OnDeath,
+    ftGameWatch_OnDeath,  ftGanon_OnDeath,      ftRoy_OnDeath,
+    ftMasterhand_OnDeath, ftCrazyhand_OnDeath,  ftZakoBoy_OnDeath,
+    ftZakoGirl_OnDeath,   ftGKoopa_OnDeath,     ftSandbag_OnDeath,
+};
+
+HSD_GObjEvent ft_OnUserDataRemove[FTKIND_MAX] = {
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, ftPurin_OnUserDataRemove,
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+    NULL,
+};
