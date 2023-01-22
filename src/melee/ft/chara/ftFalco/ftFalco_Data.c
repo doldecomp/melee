@@ -103,3 +103,23 @@ ActionState as_table_falco[] = {
     { 326, 0x00000072, 0x01000000, ftFox_AppealS_Anim, ftFox_AppealS_IASA,
       ftFox_AppealS_Phys, ftFox_AppealS_Coll, func_800761C8 },
 };
+
+char lbl_803D1CA8[] = "PlFc.dat";
+char lbl_803D1CB4[] = "ftDataFalco";
+char lbl_803D1CC0[] = "PlFcNr.dat";
+char lbl_803D1CCC[] = "PlyFalco5K_Share_joint";
+char lbl_803D1CE4[] = "PlyFalco5K_Share_matanim_joint";
+char lbl_803D1D04[] = "PlFcRe.dat";
+char lbl_803D1D10[] = "PlyFalco5KRe_Share_joint";
+char lbl_803D1D2C[] = "PlyFalco5KRe_Share_matanim_joint";
+char lbl_803D1D50[] = "PlFcBu.dat";
+char lbl_803D1D5C[] = "PlyFalco5KBu_Share_joint";
+char lbl_803D1D78[] = "PlyFalco5KBu_Share_matanim_joint";
+char lbl_803D1D9C[] = "PlFcGr.dat";
+char lbl_803D1DA8[] = "PlyFalco5KGr_Share_joint";
+char lbl_803D1DC4[] = "PlyFalco5KGr_Share_matanim_joint";
+char lbl_803D1DE8[] = "PlFcAJ.dat";
+char lbl_803D1DF4[] = "ftDemoResultMotionFileFalco";
+char lbl_803D1E10[] = "ftDemoIntroMotionFileFalco";
+char lbl_803D1E2C[] = "ftDemoEndingMotionFileFalco";
+char lbl_803D1E48[] = "ftDemoViWaitMotionFileFalco";
