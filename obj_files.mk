@@ -192,7 +192,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus5.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftsamus6.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSamus_Data.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftsamus.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSamus/ftSamus_Data_2.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftYoshi_Data.c.o\
