@@ -6830,47 +6830,7 @@ lbl_8015BCE8:
 
 
 .section .data
-    .balign 0
-.global jtbl_803D4900
-jtbl_803D4900:
-    .4byte lbl_801566B4
-    .4byte lbl_80156A5C
-    .4byte lbl_80156688
-    .4byte lbl_80156A5C
-    .4byte lbl_801566E0
-    .4byte lbl_80156A5C
-    .4byte lbl_80156710
-    .4byte lbl_80156A5C
-    .4byte lbl_80156740
-    .4byte lbl_80156A5C
-    .4byte lbl_80156A5C
-    .4byte lbl_80156770
-    .4byte lbl_801567A0
-    .4byte lbl_80156A5C
-    .4byte lbl_801567AC
-    .4byte lbl_80156A5C
-    .4byte lbl_801567DC
-    .4byte lbl_80156A5C
-    .4byte lbl_8015683C
-    .4byte lbl_80156A5C
-    .4byte lbl_80156A5C
-    .4byte lbl_80156A5C
-    .4byte lbl_80156A5C
-    .4byte lbl_80156A5C
-    .4byte lbl_80156A5C
-    .4byte lbl_8015686C
-    .4byte lbl_80156878
-    .4byte lbl_80156A5C
-    .4byte lbl_80156A5C
-    .4byte lbl_80156884
-    .4byte lbl_80156898
-    .4byte lbl_801568AC
-    .4byte lbl_80156A5C
-    .4byte lbl_80156A5C
-    .4byte lbl_801568B8
-    .4byte lbl_801568E8
-    .4byte lbl_80156918
-    .4byte lbl_80156948
+    .balign 4
 .global jtbl_803D4998
 jtbl_803D4998:
     .4byte lbl_8015B2FC
