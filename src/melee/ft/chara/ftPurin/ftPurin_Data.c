@@ -88,16 +88,12 @@ char lbl_803D0430[] = "PlPrYe.dat";
 char lbl_803D043C[] = "PlyPurin5KYe_Share_joint";
 char lbl_803D0458[] = "PlyPurin5KYe_Share_matanim_joint";
 char lbl_803D047C[] = "PlPrAJ.dat";
-char lbl_803D0488[] = "ftDemoResultMotionFilePurin";
-char lbl_803D04A4[] = "ftDemoIntroMotionFilePurin";
-char lbl_803D04C0[] = "ftDemoEndingMotionFilePurin";
-char lbl_803D04DC[] = "ftDemoViWaitMotionFilePurin";
 
 Fighter_DemoStrings lbl_803D04F8 = {
-    lbl_803D0488,
-    lbl_803D04A4,
-    lbl_803D04C0,
-    lbl_803D04DC,
+    "ftDemoResultMotionFilePurin",
+    "ftDemoIntroMotionFilePurin",
+    "ftDemoEndingMotionFilePurin",
+    "ftDemoViWaitMotionFilePurin",
 };
 
 Fighter_CostumeStrings lbl_803D0508[] = {
@@ -108,13 +104,12 @@ Fighter_CostumeStrings lbl_803D0508[] = {
     { lbl_803D0430, lbl_803D043C, lbl_803D0458 },
 };
 
-char lbl_803D0544[] = "PlyPurinReHat_TopN_joint";
-char lbl_803D0560[] = "PlyPurinBuHat_TopN_joint";
-char lbl_803D057C[] = "PlyPurinGrHat_TopN_joint";
-char lbl_803D0598[] = "PlyPurinYeHat_TopN_joint";
-
 char* lbl_803D05B4[] = {
-    NULL, lbl_803D0544, lbl_803D0560, lbl_803D057C, lbl_803D0598,
+    NULL,
+    "PlyPurinReHat_TopN_joint",
+    "PlyPurinBuHat_TopN_joint",
+    "PlyPurinGrHat_TopN_joint",
+    "PlyPurinYeHat_TopN_joint",
 };
 
 Vec4 lbl_803D05C8 = { 0.65, 0.7, 0.8, 1 };
