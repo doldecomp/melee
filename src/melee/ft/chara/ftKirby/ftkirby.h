@@ -31,6 +31,8 @@ extern ActionState as_table_kirby[];
 extern ActionState lbl_803CA04C[];
 extern char lbl_803CA308[];
 extern char lbl_803CA314[];
+extern Fighter_CostumeStrings lbl_803CA5B4[];
+extern char lbl_803CA4E0[];
 
 void func_800EED50(s32, s32);
 void func_800F1D24(HSD_GObj*);

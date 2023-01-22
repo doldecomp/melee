@@ -1,6 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTPURIN_FTPURIN_H
 #define MELEE_FT_CHARA_FTPURIN_FTPURIN_H
 
+#include "melee/ft/forward.h"
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
@@ -24,6 +25,8 @@ typedef struct _ftPurinAttributes {
 extern ActionState as_table_purin[];
 extern char lbl_803D02F0[];
 extern char lbl_803D02FC[];
+extern Fighter_CostumeStrings lbl_803D0508[];
+extern char lbl_803D047C[];
 
 /// functions
 

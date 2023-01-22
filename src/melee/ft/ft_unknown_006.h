@@ -5,6 +5,7 @@
 #define MELEE_FT_FT_UNKNOWN_006_H
 
 #include <melee/ft/fighter.h>
+#include <melee/ft/forward.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 /// @remarks Only used by Purin.
@@ -14,6 +15,8 @@ extern s32 lbl_80459B88[FTKIND_MAX];
 
 extern char lbl_803C57D0[];
 extern char lbl_803C57DC[];
+extern Fighter_CostumeStrings lbl_803C5A28[];
+extern char lbl_803C595C[];
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1);
 s32 func_80087818(HSD_GObj* fighter_gobj, s32 arg1);

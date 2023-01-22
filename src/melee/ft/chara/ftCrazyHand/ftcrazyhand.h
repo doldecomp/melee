@@ -77,6 +77,8 @@ typedef struct _ftCrazyHandAttributes {
 extern ActionState as_table_crazyhand[];
 extern char lbl_803D4818[];
 extern char lbl_803D4824[];
+extern Fighter_CostumeStrings lbl_803D4868[];
+extern char lbl_803D485C[];
 
 void ftCrazyhand_OnDeath(HSD_GObj* fighter_gobj);
 void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj);

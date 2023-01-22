@@ -130,6 +130,8 @@ typedef struct _ftMewtwoAttributes {
 extern ActionState as_table_mewtwo[];
 extern char lbl_803D0D80[];
 extern char lbl_803D0D8C[];
+extern Fighter_CostumeStrings lbl_803D0F5C[];
+extern char lbl_803D0EC4[];
 
 // Mewtwo functions //
 

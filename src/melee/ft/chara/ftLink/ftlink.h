@@ -29,6 +29,8 @@ typedef struct _ftLinkAttributes {
 extern ActionState as_table_link[];
 extern char lbl_803C80B8[];
 extern char lbl_803C80C4[];
+extern Fighter_CostumeStrings lbl_803C82B0[];
+extern char lbl_803C8224[];
 
 void ftLink_OnItemDrop(HSD_GObj* fighter_gobj, bool arg1);
 void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);

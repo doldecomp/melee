@@ -131,6 +131,8 @@ extern ActionState as_table_luigi[];
 extern ActionState lbl_803D0868[];
 extern char lbl_803D08A8[];
 extern char lbl_803D08B4[];
+extern Fighter_CostumeStrings lbl_803D0AB4[];
+extern char lbl_803D09E8[];
 
 // Luigi Functions //
 

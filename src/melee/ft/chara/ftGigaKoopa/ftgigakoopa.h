@@ -8,6 +8,8 @@ extern ActionState as_table_gkoopa[];
 extern ActionState lbl_803D38C8[];
 extern char lbl_803D38E8[];
 extern char lbl_803D38F4[];
+extern Fighter_CostumeStrings lbl_803D3988[];
+extern char lbl_803D3948[];
 
 void ftGKoopa_OnDeath(HSD_GObj*);
 void func_8014F698(HSD_GObj*);

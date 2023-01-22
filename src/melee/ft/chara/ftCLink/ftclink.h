@@ -28,6 +28,8 @@ typedef struct _CLinkAttributes {
 extern ActionState as_table_clink[];
 extern char lbl_803D1240[];
 extern char lbl_803D124C[];
+extern Fighter_CostumeStrings lbl_803D1458[];
+extern char lbl_803D13CC[];
 
 void ftCLink_OnItemPickup(HSD_GObj*, bool);
 void ftCLink_OnItemDrop(HSD_GObj*, bool);

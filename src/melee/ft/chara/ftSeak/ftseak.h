@@ -25,6 +25,8 @@ typedef struct _ftSeakAttributes {
 extern ActionState as_table_seak[];
 extern char lbl_803CC360[];
 extern char lbl_803CC36C[];
+extern Fighter_CostumeStrings lbl_803CC558[];
+extern char lbl_803CC4CC[];
 
 void lbl_8011412C(HSD_GObj* fighter_gobj);
 void func_80114758(HSD_GObj*);

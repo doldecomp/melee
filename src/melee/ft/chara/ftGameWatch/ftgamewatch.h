@@ -166,6 +166,8 @@ typedef struct _ftGameWatchAttributes {
 extern ActionState as_table_gamewatch[];
 extern char lbl_803D28E8[];
 extern char lbl_803D28F4[];
+extern Fighter_CostumeStrings lbl_803D29C8[];
+extern char lbl_803D292C[];
 
 // Mr. Game & Watch Functions //
 

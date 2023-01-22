@@ -7,6 +7,8 @@
 extern ActionState as_table_falco[];
 extern char lbl_803D1CA8[];
 extern char lbl_803D1CB4[];
+extern Fighter_CostumeStrings lbl_803D1E74[];
+extern char lbl_803D1DE8[];
 
 void ftFalco_OnDeath(HSD_GObj*);
 void ftFalco_OnItemPickup(HSD_GObj*, bool);

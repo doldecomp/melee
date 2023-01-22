@@ -92,6 +92,8 @@ typedef struct _MasterHandAttributes {
 extern ActionState as_table_masterhand[];
 extern char lbl_803D4070[];
 extern char lbl_803D407C[];
+extern Fighter_CostumeStrings lbl_803D40C4[];
+extern char lbl_803D40B8[];
 
 // ftMasterHand_1
 void ftMasterhand_OnDeath(HSD_GObj* gobj);

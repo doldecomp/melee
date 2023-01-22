@@ -8,6 +8,8 @@
 extern ActionState as_table_pikachu[];
 extern char lbl_803CE0B8[];
 extern char lbl_803CE0C4[];
+extern Fighter_CostumeStrings lbl_803CE2A0[];
+extern char lbl_803CE204[];
 
 void ftPikachu_LoadSpecialAttrs(HSD_GObj*);
 

@@ -7,6 +7,8 @@
 extern ActionState as_table_ganon[];
 extern char lbl_803D2CD8[];
 extern char lbl_803D2CE4[];
+extern Fighter_CostumeStrings lbl_803D2E40[];
+extern char lbl_803D2DB4[];
 
 void ftGanon_OnDeath(HSD_GObj*);
 void ftGanon_OnItemPickup(HSD_GObj*, bool);

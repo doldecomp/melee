@@ -95,6 +95,8 @@ typedef struct _ftCaptainAttributes {
 extern ActionState as_table_cfalcon[];
 extern char lbl_803C7598[];
 extern char lbl_803C75A4[];
+extern Fighter_CostumeStrings lbl_803C773C[];
+extern char lbl_803C76A0[];
 
 // Captain Falcon & Ganondorf functions //
 

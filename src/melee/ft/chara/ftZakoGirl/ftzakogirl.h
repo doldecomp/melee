@@ -6,6 +6,8 @@
 
 extern char lbl_803D3568[];
 extern char lbl_803D3574[];
+extern Fighter_CostumeStrings lbl_803D35D8[];
+extern char lbl_803D35A0[];
 
 void ftZakoGirl_OnDeath(HSD_GObj*);
 void ftZakoGirl_OnLoad(HSD_GObj*);

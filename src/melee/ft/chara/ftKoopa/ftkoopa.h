@@ -55,6 +55,8 @@ typedef struct _ftKoopaVars {
 extern ActionState as_table_koopa[];
 extern char lbl_803CF0A0[];
 extern char lbl_803CF0AC[];
+extern Fighter_CostumeStrings lbl_803CF26C[];
+extern char lbl_803CF1E0[];
 
 void ftKoopa_SpecialS_StartAction(HSD_GObj* gobj);
 void func_8013302C(HSD_GObj* gobj);

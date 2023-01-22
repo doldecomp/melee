@@ -963,3 +963,40 @@ HSD_GObjEvent lbl_803C2258[][FTKIND_MAX] = {
     }
 
 };
+
+struct {
+    /// Costume and Joint Strings
+    Fighter_CostumeStrings* costume_strings[FTKIND_MAX];
+    /// Animation .dat Filenames
+    char* anim_dat_filenames[FTKIND_MAX];
+} lbl_803C2360 = {
+    {
+        lbl_803C5A28, lbl_803C7D9C,
+        lbl_803C773C, lbl_803CC020,
+        lbl_803CA5B4, lbl_803CF26C,
+        lbl_803C82B0, lbl_803CC558,
+        lbl_803CCC84, ftPeach_str_arr_Costumes,
+        lbl_803CD7C4, lbl_803CDD2C,
+        lbl_803CE2A0, lbl_803CE678,
+        lbl_803CECFC, lbl_803D0508,
+        lbl_803D0F5C, lbl_803D0AB4,
+        lbl_803CFA18, lbl_803CFEB0,
+        lbl_803D1458, lbl_803D180C,
+        lbl_803D1E74, lbl_803D23B4,
+        lbl_803D29C8, lbl_803D2E40,
+        lbl_803D34A8, lbl_803D40C4,
+        lbl_803D4868, lbl_803D3558,
+        lbl_803D35D8, lbl_803D3988,
+        lbl_803D3A24,
+    },
+    {
+        lbl_803C595C, lbl_803C7D10, lbl_803C76A0, lbl_803CBF88, lbl_803CA4E0,
+        lbl_803CF1E0, lbl_803C8224, lbl_803CC4CC, lbl_803CCBF8, str_PlPeAJ_dat,
+        lbl_803CD738, lbl_803CDCA0, lbl_803CE204, lbl_803CE5EC, lbl_803CEC70,
+        lbl_803D047C, lbl_803D0EC4, lbl_803D09E8, lbl_803CF98C, lbl_803CFE24,
+        lbl_803D13CC, lbl_803D1770, lbl_803D1DE8, lbl_803D2328, lbl_803D292C,
+        lbl_803D2DB4, lbl_803D3410, lbl_803D40B8, lbl_803D485C, lbl_803D3520,
+        lbl_803D35A0, lbl_803D3948, lbl_803D3A18,
+    }
+
+};

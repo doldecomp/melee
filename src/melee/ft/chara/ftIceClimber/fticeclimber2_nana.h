@@ -8,6 +8,8 @@
 extern ActionState as_table_nana[];
 extern char lbl_803CDB78[];
 extern char lbl_803CDB84[];
+extern Fighter_CostumeStrings lbl_803CDD2C[];
+extern char lbl_803CDCA0[];
 
 void ftNana_OnDeath(HSD_GObj* fighter_gobj);
 void ftNana_80122FAC(HSD_GObj* fighter_gobj);

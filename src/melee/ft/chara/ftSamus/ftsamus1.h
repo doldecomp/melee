@@ -8,6 +8,8 @@
 extern ActionState as_table_samus[];
 extern char lbl_803CE510[];
 extern char lbl_803CE51C[];
+extern Fighter_CostumeStrings lbl_803CE678[];
+extern char lbl_803CE5EC[];
 
 void ftSamus_OnDeath(HSD_GObj* fighter_gobj);
 void ftSamus_OnLoad(HSD_GObj* fighter_gobj);

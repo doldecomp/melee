@@ -8,6 +8,8 @@
 extern ActionState as_table_donkey[];
 extern char lbl_803CBDF8[];
 extern char lbl_803CBE04[];
+extern Fighter_CostumeStrings lbl_803CC020[];
+extern char lbl_803CBF88[];
 
 void ftDonkey_OnDeath(HSD_GObj* fighter_gobj);
 void ftDonkey_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
