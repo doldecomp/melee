@@ -7419,24 +7419,7 @@ lbl_8013295C:
 
 
 .section .data
-    .balign 8
-.global lbl_803CED48
-lbl_803CED48:
-    .4byte NULL
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000001
-    .4byte 0x00000001
-    .4byte NULL
-    .4byte 0x00000001
-    .4byte 0x00000001
+    .balign 4
 .global lbl_803CED84
 lbl_803CED84:
     .4byte 0x3F266666
