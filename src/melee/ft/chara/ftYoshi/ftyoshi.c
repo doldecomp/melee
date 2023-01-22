@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftYoshi/ftyoshi.h>
+#include <melee/ft/chara/ftYoshi/ftyoshi1.h>
 
 #include <dolphin/os/os.h>
 #include <melee/ef/efasync.h>
