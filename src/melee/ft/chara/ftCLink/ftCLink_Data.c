@@ -71,3 +71,10 @@ char lbl_803D13D8[] = "ftDemoResultMotionFileClink";
 char lbl_803D13F4[] = "ftDemoIntroMotionFileClink";
 char lbl_803D1410[] = "ftDemoEndingMotionFileClink";
 char lbl_803D142C[] = "ftDemoViWaitMotionFileClink";
+
+Fighter_DemoStrings lbl_803D1448 = {
+    lbl_803D13D8,
+    lbl_803D13F4,
+    lbl_803D1410,
+    lbl_803D142C,
+};
