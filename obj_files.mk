@@ -273,7 +273,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftGanon/ftganon.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftGanon/ftGanon_Data.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftEmblem/ftemblem.c.o\
