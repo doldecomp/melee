@@ -62,3 +62,13 @@ char lbl_803D3904[] = "PlGkNr.dat";
 char lbl_803D3910[] = "PlyGkoopa5K_Share_joint";
 char lbl_803D3928[] = "PlyGkoopa5K_Share_matanim_joint";
 char lbl_803D3948[] = "PlGkAJ.dat";
+
+Fighter_DemoStrings lbl_803D3954 = { 0 };
+
+char* lbl_803D3984[] = { "ftDemoVi1201V2MotionFileGkoopa" };
+
+Fighter_DemoStrings lbl_803D3988 = {
+    lbl_803D3904,
+    lbl_803D3910,
+    lbl_803D3928,
+};
