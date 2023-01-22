@@ -231,7 +231,6 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_Data.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftluigi.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftluigi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftLuigi/ftLuigi_SpecialS.c.o\

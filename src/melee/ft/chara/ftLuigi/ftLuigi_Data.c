@@ -87,10 +87,14 @@ Fighter_DemoStrings lbl_803D0A64 = {
     "ftDemoViWaitMotionFileLuigi",
 };
 
-char lbl_803D0A74[] = "ftDemoVi0102MotionFileLuigi";
-char lbl_803D0A90[] = "ftDemoVi1101MotionFileLuigi";
-
 char* lbl_803D0AAC[] = {
-    lbl_803D0A74,
-    lbl_803D0A90,
+    "ftDemoVi0102MotionFileLuigi",
+    "ftDemoVi1101MotionFileLuigi",
+};
+
+Fighter_CostumeStrings lbl_803D0AB4[] = {
+    { lbl_803D08C0, lbl_803D08CC, lbl_803D08E4 },
+    { lbl_803D0904, lbl_803D0910, lbl_803D092C },
+    { lbl_803D0950, lbl_803D095C, lbl_803D0978 },
+    { lbl_803D099C, lbl_803D09A8, lbl_803D09C4 },
 };
