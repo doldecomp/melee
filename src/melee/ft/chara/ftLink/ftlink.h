@@ -107,5 +107,7 @@ void func_800EB93C(HSD_GObj*);
 void func_800EB9D4(HSD_GObj*);
 void ftLink_SpecialS_StartAction(HSD_GObj*);
 void ftLink_SpecialAirHi_StartAction(HSD_GObj*);
+void ftLink_SpecialAirLw_StartAction(HSD_GObj*);
+void ftLink_SpecialAirS_StartAction(HSD_GObj*);
 
 #endif

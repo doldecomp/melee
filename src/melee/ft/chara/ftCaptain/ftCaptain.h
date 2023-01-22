@@ -145,5 +145,6 @@ void ftCaptain_OnLoadForGanon(Fighter*);
 /// @todo @c ftCaptain prefix
 void ftCFalcon_LoadSpecialAttrs(HSD_GObj*);
 void ftCFalcon_SpecialAirHi_StartAction(HSD_GObj*);
+void ftCFalcon_SpecialAirLw_StartAction(HSD_GObj*);
 
 #endif

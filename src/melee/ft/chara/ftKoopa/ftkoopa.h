@@ -176,5 +176,6 @@ void lbl_801349C4(HSD_GObj*);
 void lbl_80134A00(HSD_GObj*);
 void lbl_80134A20(HSD_GObj*);
 void ftKoopa_SpecialAirHi_StartAction(HSD_GObj*);
+void ftKoopa_SpecialAirLw_StartAction(HSD_GObj*);
 
 #endif

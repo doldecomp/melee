@@ -160,5 +160,7 @@ void lbl_80114644(HSD_GObj*);
 void func_800761C8(HSD_GObj*);
 void ftSeak_SpecialS_StartAction(HSD_GObj*);
 void ftSeak_SpecialAirHi_StartAction(HSD_GObj*);
+void ftSeak_SpecialAirLw_StartAction(HSD_GObj*);
+void ftSeak_SpecialAirS_StartAction(HSD_GObj*);
 
 #endif

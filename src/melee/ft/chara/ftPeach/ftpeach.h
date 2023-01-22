@@ -134,5 +134,7 @@ void ftPeach_8011EA90(HSD_GObj*);
 void ftPeach_8011EB1C(HSD_GObj*);
 void ftPeach_SpecialS_StartAction(HSD_GObj*);
 void ftPeach_SpecialAirHi_StartAction(HSD_GObj*);
+void ftPeach_SpecialAirLw_StartAction(HSD_GObj*);
+void ftPeach_SpecialAirS_StartAction(HSD_GObj*);
 
 #endif
