@@ -543,18 +543,6 @@ lbl_804D3708:
 .section .sdata2
     .balign 4
 
-.global lbl_804D7A28
-lbl_804D7A28:
-    .float 2.0
-
-.global lbl_804D7A2C
-lbl_804D7A2C:
-    .float 4.0
-
-.global lbl_804D7A30
-lbl_804D7A30:
-    .float 3.1415927410125732
-
 .global lbl_804D7A34
 lbl_804D7A34:
     .float 20.0

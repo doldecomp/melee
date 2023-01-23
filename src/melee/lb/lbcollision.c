@@ -1349,8 +1349,8 @@ f64 const lbl_804D7A20 = 3.0;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80006E58()
-{ // clang-format off
+asm void func_80006E58(){
+    // clang-format off
     nofralloc
 /* 80006E58 00003A38  7C 08 02 A6 */	mflr r0
 /* 80006E5C 00003A3C  90 01 00 04 */	stw r0, 4(r1)
@@ -1993,9 +1993,9 @@ lbl_8000775C:
 #pragma pop
 #endif
 
-extern f32 const lbl_804D7A28;
-extern f32 const lbl_804D7A2C;
-extern f32 const lbl_804D7A30;
+f32 const lbl_804D7A28 = 2;
+f32 const lbl_804D7A2C = 4;
+f32 const lbl_804D7A30 = M_PI;
 
 #ifdef MWERKS_GEKKO
 #pragma push
