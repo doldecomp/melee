@@ -545,52 +545,48 @@ lbl_804D3708:
 
 .global lbl_804D7A18
 lbl_804D7A18:
-    .4byte 0x3FE00000
-    .4byte 0x00000000
+    .double 0.5
 
 .global lbl_804D7A20
 lbl_804D7A20:
-    .4byte 0x40080000
-    .4byte 0x00000000
+    .double 3.0
 
 .global lbl_804D7A28
 lbl_804D7A28:
-    .4byte 0x40000000
+    .float 2.0
 
 .global lbl_804D7A2C
 lbl_804D7A2C:
-    .4byte 0x40800000
+    .float 4.0
 
 .global lbl_804D7A30
 lbl_804D7A30:
-    .4byte 0x40490FDB
+    .float 3.1415927410125732
 
 .global lbl_804D7A34
 lbl_804D7A34:
-    .4byte 0x41A00000
+    .float 20.0
 
 .global lbl_804D7A38
 lbl_804D7A38:
-    .4byte 0x40400000
+    .float 3.0
 
 .global lbl_804D7A3C
 lbl_804D7A3C:
-    .4byte 0x3F000000
+    .float 0.5
 
 .global lbl_804D7A40
 lbl_804D7A40:
-    .4byte 0x40A00000
-    .4byte 0x00000000
+    .double 2048.0
 
 .global lbl_804D7A48
 lbl_804D7A48:
-    .4byte 0x43300000
-    .4byte 0x00000000
+    .double 4503599627370496.0
 
 .global lbl_804D7A50
 lbl_804D7A50:
-    .4byte 0x00000000
+    .float 0.0
 
 .global lbl_804D7A54
 lbl_804D7A54:
-    .4byte 0xBF800000
+    .float -1.0
