@@ -29,6 +29,7 @@ typedef struct HSD_Material HSD_Material;
 typedef struct HSD_PEDesc HSD_PEDesc;
 typedef struct HSD_GObjProc HSD_GObjProc;
 typedef struct HSD_AObjDesc HSD_AObjDesc;
+typedef struct HSD_Spline HSD_Spline;
 
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);
 typedef void (*HSD_DevComCallback)(int, int, int, bool cancelflag);

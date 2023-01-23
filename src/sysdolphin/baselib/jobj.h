@@ -93,7 +93,7 @@ struct HSD_JObj {
     /* 0x18 */ union {
         HSD_SList* ptcl;
         struct _HSD_DObj* dobj;
-        struct _HSD_Spline* spline;
+        HSD_Spline* spline;
     } u;
     /* 0x1C */ Quaternion rotate;
     /* 0x2C */ Vec3 scale;
@@ -113,7 +113,7 @@ typedef struct _HSD_Joint {
     struct _HSD_Joint* next;
     union {
         struct _HSD_DObjDesc* dobjdesc;
-        struct _HSD_Spline* spline;
+        HSD_Spline* spline;
         struct _HSD_SList* ptcl;
     } u;
     Vec3 rotation;
