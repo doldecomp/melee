@@ -3414,8 +3414,8 @@ lbl_80008A4C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80008A5C()
-{ // clang-format off
+asm void func_80008A5C(){
+    // clang-format off
     nofralloc
 /* 80008A5C 0000563C  80 03 00 00 */	lwz r0, 0(r3)
 /* 80008A60 00005640  2C 00 00 00 */	cmpwi r0, 0
@@ -3616,7 +3616,7 @@ lbl_80008D20:
 #pragma pop
 #endif
 
-extern f64 const lbl_804D7A48;
+f64 const lbl_804D7A48 = 4503599627370496;
 
 #ifdef MWERKS_GEKKO
 #pragma push
