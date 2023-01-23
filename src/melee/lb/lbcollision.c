@@ -2625,7 +2625,7 @@ lbl_80008030:
 #endif
 
 f32 const lbl_804D7A3C = 0.5;
-extern f32 const lbl_804D7A40;
+f32 const lbl_804D7A40 = 5;
 
 #ifdef MWERKS_GEKKO
 #pragma push
