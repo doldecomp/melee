@@ -11,53 +11,23 @@ int lbl_803B9880[] = {
     0x00035BAF, 0x00035BB2, 0x00035BB5, 0x00083D60, 0x00083D60, 0x0000020D,
 };
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm int func_80005BB0(Hitbox*, int)
-{ // clang-format off
-    nofralloc
-/* 80005BB0 00002790  7C 08 02 A6 */	mflr r0
-/* 80005BB4 00002794  90 01 00 04 */	stw r0, 4(r1)
-/* 80005BB8 00002798  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80005BBC 0000279C  80 03 00 3C */	lwz r0, 0x3c(r3)
-/* 80005BC0 000027A0  28 00 00 0D */	cmplwi r0, 0xd
-/* 80005BC4 000027A4  40 82 00 40 */	bne lbl_80005C04
-/* 80005BC8 000027A8  80 C3 00 38 */	lwz r6, 0x38(r3)
-/* 80005BCC 000027AC  28 06 00 02 */	cmplwi r6, 2
-/* 80005BD0 000027B0  40 82 00 34 */	bne lbl_80005C04
-/* 80005BD4 000027B4  1C A0 00 0C */	mulli r5, r0, 0xc
-/* 80005BD8 000027B8  3C 60 80 3C */	lis r3, lbl_803B9880@ha
-/* 80005BDC 000027BC  38 03 98 80 */	addi r0, r3, lbl_803B9880@l
-/* 80005BE0 000027C0  7C 60 2A 14 */	add r3, r0, r5
-/* 80005BE4 000027C4  54 C0 10 3A */	slwi r0, r6, 2
-/* 80005BE8 000027C8  7C 63 02 14 */	add r3, r3, r0
-/* 80005BEC 000027CC  80 63 00 00 */	lwz r3, 0(r3)
-/* 80005BF0 000027D0  38 C4 00 00 */	addi r6, r4, 0
-/* 80005BF4 000027D4  38 80 00 7F */	li r4, 0x7f
-/* 80005BF8 000027D8  38 A0 00 40 */	li r5, 0x40
-/* 80005BFC 000027DC  48 01 E5 89 */	bl func_80024184
-/* 80005C00 000027E0  48 00 00 34 */	b lbl_80005C34
-lbl_80005C04:
-/* 80005C04 000027E4  1C 80 00 0C */	mulli r4, r0, 0xc
-/* 80005C08 000027E8  80 03 00 38 */	lwz r0, 0x38(r3)
-/* 80005C0C 000027EC  3C 60 80 3C */	lis r3, lbl_803B9880@ha
-/* 80005C10 000027F0  38 63 98 80 */	addi r3, r3, lbl_803B9880@l
-/* 80005C14 000027F4  7C 63 22 14 */	add r3, r3, r4
-/* 80005C18 000027F8  54 00 10 3A */	slwi r0, r0, 2
-/* 80005C1C 000027FC  7C 63 02 14 */	add r3, r3, r0
-/* 80005C20 00002800  80 63 00 00 */	lwz r3, 0(r3)
-/* 80005C24 00002804  38 80 00 7F */	li r4, 0x7f
-/* 80005C28 00002808  38 A0 00 40 */	li r5, 0x40
-/* 80005C2C 0000280C  38 C0 FF FF */	li r6, -1
-/* 80005C30 00002810  48 01 E5 55 */	bl func_80024184
-lbl_80005C34:
-/* 80005C34 00002814  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80005C38 00002818  38 21 00 08 */	addi r1, r1, 8
-/* 80005C3C 0000281C  7C 08 03 A6 */	mtlr r0
-/* 80005C40 00002820  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+int func_80005BB0(Hitbox* arg0, int arg1)
+{
+    uint temp_r0;
+    uint temp_r6;
+
+    temp_r0 = arg0->sfx_kind;
+    if (temp_r0 == 0xD) {
+        temp_r6 = arg0->sfx_severity;
+        if (temp_r6 == 2) {
+            return func_80024184(*(lbl_803B9880 + (temp_r0 * 3) + (temp_r6)),
+                                 127, 64, arg1);
+        }
+    }
+
+    return func_80024184(*(lbl_803B9880 + (temp_r0 * 3) + (arg0->sfx_severity)),
+                         127, 64, -1);
+}
 
 f32 const lbl_804D79F0 = 1e-5;
 f32 const lbl_804D79F4 = -1e-5;
