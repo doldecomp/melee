@@ -157,5 +157,6 @@ void func_8000A460();
 void func_8000A584();
 void func_8000A78C();
 void func_8000A95C();
+void func_8000AB2C();
 
 #endif
