@@ -6,6 +6,17 @@
 #include <placeholder.h>
 #include <sysdolphin/baselib/jobj.h>
 
+struct HitResult {
+    HSD_JObj* bone;
+
+    /// Follows attach bone position if toggled OFF
+    u8 skip_update_pos : 1;
+
+    Vec3 pos;
+    Vec3 offset;
+    f32 size;
+};
+
 struct HitVictim {
     /// @at{0} @sz{4}
     HSD_GObj* victim;
