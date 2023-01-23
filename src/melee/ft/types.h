@@ -1618,9 +1618,9 @@ struct Fighter {
     /* 0x19B4 */ f32 x19B4_shieldUnk;
     /* 0x19B8 */ f32 x19B8_shieldUnk;
     /* 0x19BC */ s32 x19BC_shieldDamageTaken3;
-    HitResult shield_hit;
-    HitResult reflect_hit;
-    HitResult absorb_hit;
+    /* 0x19C0 */ HitResult shield_hit;
+    /* 0x19E4 */ HitResult reflect_hit;
+    /* 0x1A08 */ HitResult absorb_hit;
     struct {
         f32 x1A2C_reflectHitDirection;
         s32 x1A30_maxDamage;
