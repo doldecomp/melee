@@ -314,8 +314,8 @@ lbl_80005F80:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80005FC0()
-{ // clang-format off
+asm void func_80005FC0(){
+    // clang-format off
     nofralloc
 /* 80005FC0 00002BA0  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80005FC4 00002BA4  80 E3 00 00 */	lwz r7, 0(r3)
@@ -376,7 +376,7 @@ lbl_80006064:
 #pragma pop
 #endif
 
-extern f64 const lbl_804D7A18;
+f64 const lbl_804D7A18 = 0.5;
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -898,8 +898,8 @@ lbl_800067AC:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32)
-{ // clang-format off
+asm void func_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32){
+    // clang-format off
     nofralloc
 /* 800067F8 000033D8  7C 08 02 A6 */	mflr r0
 /* 800067FC 000033DC  90 01 00 04 */	stw r0, 4(r1)
@@ -1345,7 +1345,7 @@ lbl_80006E1C:
 #pragma pop
 #endif
 
-extern f64 const lbl_804D7A20;
+f64 const lbl_804D7A20 = 3.0;
 
 #ifdef MWERKS_GEKKO
 #pragma push
