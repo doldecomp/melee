@@ -143,5 +143,6 @@ void func_80007B78(Mtx, Mtx, f32, f32);
 bool func_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32);
 void func_800083C4();
 void func_800089B8();
+void func_80008A5C();
 
 #endif
