@@ -76,24 +76,42 @@ struct Hitbox {
 };
 
 struct Hurtbox {
-    Tangibility tangiblity;  // 0x0, whether or not this hurtbox can be hit
-    Vec3 x4_hurt1_offset;    // 0x4
-    Vec3 x10_hurt2_offset;   // 0x10
-    f32 x1C_scale;           // 0x1c
-    HSD_JObj* x20_jobj;      // 0x20
-    u8 x24_1_is_updated : 1; // 0x24, 0x80, if enabled, wont update position
-    u8 x24_2 : 1;            // 0x24 0x40
-    u8 x24_3 : 1;            // 0x24 0x20
-    u8 x24_4 : 1;            // 0x24 0x10
-    u8 x24_5 : 1;            // 0x24 0x08
-    u8 x24_6 : 1;            // 0x24 0x04
-    u8 x24_7 : 1;            // 0x24 0x02
-    u8 x24_8 : 1;            // 0x24 0x01
-    Vec3 x28_hurt1_pos;      // 0x28
-    Vec3 x34_hurt2_pos;      // 0x34
-    u32 x40_bone_index;      // 0x40
-    u32 x44_hurt_kind;       // 0x44. 0 = low, 1 = mid, 2 = high
-    u32 x48_is_grabbable;    // 0x48
+    /// @at{0} @sz{4}
+    Tangibility tangiblity;
+
+    /// @at{4} @sz{C}
+    /// The offset of point @e a of the capsule.
+    Vec3 a_offset;
+
+    /// @at{10} @sz{C}
+    /// The offset of point @e b of the capsule.
+    Vec3 b_offset;
+
+    /// @at{1C} @sz{4}
+    /// The scale of the capsule.
+    f32 scl;
+
+    HSD_JObj* x20_jobj; // 0x20
+    u8 skip_update_pos : 1;
+    u8 x24_b1 : 1; // 0x24 0x40
+    u8 x24_b2 : 1; // 0x24 0x20
+    u8 x24_b3 : 1; // 0x24 0x10
+    u8 x24_b4 : 1; // 0x24 0x08
+    u8 x24_b5 : 1; // 0x24 0x04
+    u8 x24_b6 : 1; // 0x24 0x02
+    u8 x24_b7 : 1; // 0x24 0x01
+
+    /// @at{28} @sz{C}
+    /// The position of point @e a of the capsule.
+    Vec3 a_pos;
+
+    /// @at{28} @sz{C}
+    /// The position of point @e b of the capsule.
+    Vec3 b_pos;
+
+    int bone_idx;      // 0x40
+    enum_t kind;       // 0x44. 0 = low, 1 = mid, 2 = high
+    bool is_grabbable; // 0x48
 };
 
 void HSD_JObjUnkMtxPtr(HSD_JObj*);
