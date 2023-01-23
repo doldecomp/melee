@@ -97,7 +97,7 @@ bool func_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32);
 bool func_80007AFC(Hitbox*, Hitbox*, f32, f32);
 void func_80007DD8();
 void func_80008D30();
-void func_80008428();
+void func_80008428(Hitbox*);
 void func_80005C44();
 void func_80005EBC();
 void func_80005FC0();
