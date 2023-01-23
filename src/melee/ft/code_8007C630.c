@@ -144,7 +144,6 @@ void func_8007C6DC(HSD_GObj* fighter_gobj)
 
 extern unk_t func_80023870();
 extern unk_t func_802E5EF4();
-extern unk_t func_80007B78();
 
 #pragma push
 asm void func_8007C77C(HSD_GObj* fighter_gobj)

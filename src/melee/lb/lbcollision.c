@@ -2265,3 +2265,33 @@ lbl_80007B48:
 } // clang-format on
 #pragma pop
 #endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void func_80007B78(void)
+{ // clang-format off
+    nofralloc
+/* 80007B78 00004758  7C 08 02 A6 */	mflr r0
+/* 80007B7C 0000475C  7C 68 1B 78 */	mr r8, r3
+/* 80007B80 00004760  90 01 00 04 */	stw r0, 4(r1)
+/* 80007B84 00004764  FC 60 08 90 */	fmr f3, f1
+/* 80007B88 00004768  7C 87 23 78 */	mr r7, r4
+/* 80007B8C 0000476C  94 21 FF F8 */	stwu r1, -8(r1)
+/* 80007B90 00004770  38 A8 00 14 */	addi r5, r8, 0x14
+/* 80007B94 00004774  38 C8 00 08 */	addi r6, r8, 8
+/* 80007B98 00004778  C0 24 00 00 */	lfs f1, 0(r4)
+/* 80007B9C 0000477C  38 87 00 08 */	addi r4, r7, 8
+/* 80007BA0 00004780  C0 03 00 00 */	lfs f0, 0(r3)
+/* 80007BA4 00004784  38 67 00 14 */	addi r3, r7, 0x14
+/* 80007BA8 00004788  EC 21 00 B2 */	fmuls f1, f1, f2
+/* 80007BAC 0000478C  EC 40 00 F2 */	fmuls f2, f0, f3
+/* 80007BB0 00004790  38 E7 00 20 */	addi r7, r7, 0x20
+/* 80007BB4 00004794  39 08 00 20 */	addi r8, r8, 0x20
+/* 80007BB8 00004798  4B FF EC 41 */	bl func_800067F8
+/* 80007BBC 0000479C  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 80007BC0 000047A0  38 21 00 08 */	addi r1, r1, 8
+/* 80007BC4 000047A4  7C 08 03 A6 */	mtlr r0
+/* 80007BC8 000047A8  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
