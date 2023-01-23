@@ -5,6 +5,16 @@
 #include <melee/lb/forward.h>
 #include <sysdolphin/baselib/jobj.h>
 
+struct HitVictim {
+    /// @at{0} @sz{4}
+    HSD_GObj* victim;
+
+    /// @at{4} @sz{4}
+    /// @brief The number of frames needed to pass before this entity can be hit
+    ///        again; 0 = can't rehit
+    s32 iframes;
+};
+
 struct Hitbox {
     Tangibility tangiblity;
     s32 x4;
@@ -51,38 +61,10 @@ struct Hitbox {
     u8 x44;
     u8 x45;
     char unk_46[0x74 - 0x46];
-    int x74;
-    int x78;
-    int x7C;
-    int x80;
-    int x84;
-    int x88;
-    int x8C;
-    int x90;
-    int x94;
-    int x98;
-    int x9C;
-    int xA0;
-    int xA4;
-    int xA8;
-    int xAC;
-    char unk_B0[0xD4 - 0xB0];
-    int xD4;
-    int xD8;
-    int xDC;
-    int xE0;
-    int xE4;
-    int xE8;
-    int xEC;
-    int xF0;
-    int xF4;
-    int xF8;
-    int xFC;
-    int x100;
-    int x104;
-    int x108;
-    int x10C;
-    u8 unk_100[0x134 - 0x110];
+    /// @at{74} @sz{60}
+    HitVictim victims_1[12];
+    /// @at{D4} @sz{60}
+    HitVictim victims_2[12];
 
     /// @at{134} @sz{4}
     /// @todo This union is unacceptable.
@@ -112,16 +94,6 @@ struct Hurtbox {
     u32 x40_bone_index;                 // 0x40
     u32 x44_hurt_kind;                  // 0x44. 0 = low, 1 = mid, 2 = high
     u32 x48_is_grabbable;               // 0x48
-};
-
-struct HitVictim {
-    /// @at{0} @sz{4}
-    HSD_GObj* victim;
-
-    /// @at{4} @sz{4}
-    /// @brief The number of frames needed to pass before this entity can be hit
-    ///        again; 0 = can't rehit
-    s32 iframes;
 };
 
 void HSD_JObjUnkMtxPtr(HSD_JObj*);
