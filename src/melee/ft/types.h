@@ -1632,7 +1632,7 @@ struct Fighter {
         Vec3 x19EC_pos;
         Vec3 x19F8_offset;
         f32 x1A04_size;
-    } ReflectHit;
+    } reflect_hit;
     struct {
         HSD_JObj* x1A08_boneAttach;
         u8 x1A0C_updatePos : 1; // Follows attach bone position if toggled OFF
@@ -1640,7 +1640,7 @@ struct Fighter {
         Vec3 x1A10_pos;
         Vec3 x1A1C_offset;
         f32 x1A28_size;
-    } AbsorbHit;
+    } absorb_hit;
     struct {
         f32 x1A2C_reflectHitDirection;
         s32 x1A30_maxDamage;
