@@ -2282,8 +2282,8 @@ bool lbColl_80007AFC(Hitbox* a, Hitbox* b, f32 x, f32 y)
     else
         b_val = b->scl * y;
 
-    lbColl_80006094(&b->x58, &b->x4C, &a->x58, &a->x4C, &b->x64, &a->x64, b_val,
-                    a_val);
+    return lbColl_80006094(&b->x58, &b->x4C, &a->x58, &a->x4C, &b->x64, &a->x64,
+                           b_val, a_val);
 }
 
 void lbColl_80007B78(Mtx a, Mtx b, f32 x, f32 y)
