@@ -8,7 +8,7 @@
 
 struct HitVictim {
     /// @at{0} @sz{4}
-    HSD_GObj* entity;
+    HSD_GObj* victim;
 
     /// @at{4} @sz{4}
     /// @brief The number of frames needed to pass before this entity can be hit
