@@ -99,5 +99,6 @@ void func_80007DD8(void);
 void func_80008D30(void);
 void func_80008428(void);
 void func_80005C44(void);
+void func_80005EBC(void);
 
 #endif
