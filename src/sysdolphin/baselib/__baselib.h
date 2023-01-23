@@ -33,8 +33,6 @@ typedef struct {
 #pragma endregion
 
 #pragma region baselib_unknown_002
-extern u16 lbl_804D78D8;
-extern u16 lbl_804D78DE;
 extern u8 lbl_804D0B50[0x104];
 extern u8 lbl_804D0C54[0x104];
 #pragma endregion

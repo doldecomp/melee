@@ -33,18 +33,10 @@ extern void func_80369808(void);
 extern void func_800310B8(void);
 extern void func_80031060(void);
 extern void func_800C2600(void);
-extern void lbColl_8000A1A8(void);
-extern void lbColl_8000A044(void);
 extern void func_8001E2F8(void);
 extern void func_80014770(void);
 extern void func_800B395C(void);
 extern void func_800117F4(void);
-extern void lbColl_8000A460(void);
-extern void lbColl_8000A78C(void);
-extern void lbColl_8000AB2C(void);
-extern void lbColl_8000A95C(void);
-extern void lbColl_8000A584(void);
-extern void lbColl_80009F54(void);
 
 static inline void mtx_thing(MtxPtr mtx, Vec3* ptr, f32 val, f32 val2)
 {
