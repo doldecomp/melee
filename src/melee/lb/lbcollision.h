@@ -181,7 +181,7 @@ void lbColl_8000A244(Hurtbox* arg0, u32 arg1, Mtx arg2, f32 arg3);
 UNK_RET lbColl_8000A460(UNK_PARAMS);
 UNK_RET lbColl_8000A584(UNK_PARAMS);
 UNK_RET lbColl_8000A78C(UNK_PARAMS);
-UNK_RET lbColl_8000A95C(UNK_PARAMS);
+bool lbColl_8000A95C(HitResult*, unk_t, Mtx*, f32 pos_z);
 UNK_RET lbColl_8000AB2C(UNK_PARAMS);
 bool lbColl_80008248(bool, Hurtbox*, void*, f32, f32, f32);
 

@@ -5717,7 +5717,7 @@ extern int lbl_804D36D0;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_8000A95C()
+asm bool lbColl_8000A95C(HitResult*, unk_t, Mtx*, f32)
 { // clang-format off
     nofralloc
 /* 8000A95C 0000753C  7C 08 02 A6 */	mflr r0
