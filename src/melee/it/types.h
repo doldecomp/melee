@@ -279,32 +279,6 @@ struct Article {
     ItemDynamics* x14_dynamics;
 };
 
-struct itHurt {
-    /// @at{0} @sz{4}
-    Tangibility tangiblity;
-
-    /// @at{4} @sz{C}
-    Vec3 x4_hurt1_offset;
-
-    /// @at{10} @sz{C}
-    Vec3 x10_hurt2_offset;
-
-    /// @at{1C} @sz{4}
-    f32 x1C_scale;
-
-    /// @at{20} @sz{4}
-    HSD_JObj* x20_jobj;
-
-    UnkFlagStruct x24_flags; // 0x80 = hurtbox position update toggle; doesn't
-                             // update position if toggled ON
-    UnkFlagStruct x25_flags;
-    UnkFlagStruct x26_flags;
-    UnkFlagStruct x27_flags;
-    Vec3 x28_hurt1_pos;
-    Vec3 x34_hurt2_pos;
-    s32 x40_bone_index;
-};
-
 struct itHit {
     bool x0_toggle; // Toggles hitbox on/off.
     s32 x4_unk;
@@ -448,11 +422,7 @@ struct Item {
     itHit x5D4_hitboxes[4];
     s32 xAC4_ignoreItemID; // Cannot hit items with this index?
     s32 xAC8_hurtboxNum;   // Number of hurtboxes this item has
-    itHurt xACC_itemHurtbox[2];
-    u32 xB54;
-    u32 xB58;
-    u32 xB5C;
-    u32 xB60;
+    Hurtbox xACC_itemHurtbox[2];
     u32 xB64;
     u8 xB68;
     u8 xB69;
