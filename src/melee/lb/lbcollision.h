@@ -113,10 +113,8 @@ struct Hurtbox {
 };
 
 void HSD_JObjUnkMtxPtr(HSD_JObj*);
-bool lbColl_80008248(bool, Hurtbox*, void*, f32, f32, f32);
 void lbColl_80008440(Hitbox*);
 void lbColl_80008434(Hitbox*);
-bool lbColl_8000ACFC(UNK_T, Hitbox*);
 void lbColl_80008688();
 void lbColl_800084FC();
 void lbColl_80008820();
@@ -134,17 +132,17 @@ bool lbColl_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
 bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32);
 bool lbColl_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32);
 bool lbColl_80007AFC(Hitbox*, Hitbox*, f32, f32);
-void lbColl_80007DD8(void);
-void lbColl_80008D30(void);
-void lbColl_80005C44(void);
-void lbColl_80005EBC(void);
-void lbColl_80005FC0(void);
-void lbColl_80006094(void);
-void lbColl_800067F8(void);
-void lbColl_80006E58(void);
-void lbColl_800077A0(void);
-void lbColl_80007B78(void);
-UNK_RET lbColl_80008428(UNK_PARAMS);
+void lbColl_80007DD8();
+void lbColl_80008D30();
+void lbColl_80008428();
+void lbColl_80005C44();
+void lbColl_80005EBC();
+void lbColl_80005FC0();
+void lbColl_80006094();
+void lbColl_800067F8();
+void lbColl_80006E58();
+void lbColl_800077A0();
+void lbColl_80007B78(Mtx, Mtx, f32, f32);
 UNK_RET lbColl_800089B8(UNK_PARAMS);
 
 #endif
