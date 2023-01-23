@@ -888,7 +888,7 @@ lbl_800067AC:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_800067F8()
+asm void func_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32)
 { // clang-format off
     nofralloc
 /* 800067F8 000033D8  7C 08 02 A6 */	mflr r0

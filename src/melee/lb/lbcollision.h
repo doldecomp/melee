@@ -102,7 +102,7 @@ void func_80005C44();
 void func_80005EBC();
 void func_80005FC0();
 void func_80006094();
-void func_800067F8();
+void func_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32);
 void func_80006E58();
 void func_800077A0();
 void func_80007B78(Mtx, Mtx, f32, f32);
