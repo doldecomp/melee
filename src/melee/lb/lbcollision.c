@@ -413,7 +413,7 @@ extern f64 const lbl_804D7A18;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80006094()
+asm void lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32)
 { // clang-format off
     nofralloc
 /* 80006094 00002C74  7C 08 02 A6 */	mflr r0
@@ -931,7 +931,7 @@ lbl_800067AC:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_800067F8()
+asm void lbColl_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32)
 { // clang-format off
     nofralloc
 /* 800067F8 000033D8  7C 08 02 A6 */	mflr r0

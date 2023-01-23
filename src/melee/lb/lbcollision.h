@@ -61,7 +61,11 @@ struct Hitbox {
     u8 x43_b7 : 1;
     u8 x44;
     u8 x45;
-    char unk_46[0x74 - 0x46];
+    char unk_46[0x4C - 0x46];
+    Vec3 x4C;
+    Vec3 x58;
+    Vec3 x64;
+    int x70;
     /// @at{74} @sz{60}
     HitVictim victims_1[12];
     /// @at{D4} @sz{60}
@@ -133,9 +137,9 @@ UNK_RET lbColl_80008D30(UNK_PARAMS);
 UNK_RET lbColl_80008428(Hitbox*);
 UNK_RET lbColl_80005C44(UNK_PARAMS);
 UNK_RET lbColl_80005EBC(UNK_PARAMS);
-UNK_RET lbColl_80005FC0(UNK_PARAMS);
-UNK_RET lbColl_80006094(UNK_PARAMS);
-UNK_RET lbColl_800067F8(UNK_PARAMS);
+void lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3);
+void lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
+void lbColl_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32);
 UNK_RET lbColl_80006E58(UNK_PARAMS);
 UNK_RET lbColl_800077A0(UNK_PARAMS);
 void lbColl_80007B78(Mtx, Mtx, f32, f32);
