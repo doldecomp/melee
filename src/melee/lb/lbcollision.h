@@ -49,7 +49,8 @@ struct Hitbox {
     u8 x43_b6 : 1;
     u8 x43_b7 : 1;
     u8 x44;
-    char unk_45[0x74 - 0x45];
+    u8 x45;
+    char unk_46[0x74 - 0x46];
     int x74;
     int x78;
     int x7C;
