@@ -51,21 +51,33 @@ struct Hitbox {
     int x44;
     char unk_48[0x74 - 0x48];
     int x74;
-    char unk_78[0x7C - 0x78];
+    int x78;
     int x7C;
-    char unk_80[0x84 - 0x80];
+    int x80;
     int x84;
-    char unk_88[0x8C - 0x88];
+    int x88;
     int x8C;
-    char unk_90[0x94 - 0x90];
+    int x90;
     int x94;
-    char unk_98[0x9C - 0x98];
+    int x98;
     int x9C;
-    char unk_A0[0xA4 - 0xA0];
+    int xA0;
     int xA4;
-    char unk_A8[0xAC - 0xA8];
+    int xA8;
     int xAC;
-    char unk_B0[0x134 - 0xB0];
+    char unk_B0[0xD4 - 0xB0];
+    int xD4;
+    int xD8;
+    int xDC;
+    int xE0;
+    int xE4;
+    int xE8;
+    int xEC;
+    int xF0;
+    int xF4;
+    int xF8;
+    int xFC;
+    u8 unk_100[0x134 - 0x100];
 
     /// @at{134} @sz{4}
     /// @todo This union is unacceptable.
