@@ -146,7 +146,7 @@ void lbColl_80007DD8();
 void lbColl_80008D30();
 void lbColl_80008428();
 void lbColl_80005C44();
-f32 lbColl_80005EBC();
+f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, Vec3*);
 void lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3);
 bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
 void lbColl_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32);

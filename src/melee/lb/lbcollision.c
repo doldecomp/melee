@@ -271,7 +271,7 @@ lbl_80005EB4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm f32 lbColl_80005EBC()
+asm f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, Vec3*)
 { // clang-format off
     nofralloc
 /* 80005EBC 00002A9C  94 21 FF A0 */	stwu r1, -0x60(r1)
