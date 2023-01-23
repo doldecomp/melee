@@ -2,7 +2,6 @@
 
 .section .text, "ax"  # 0x80005BB0 - 0x80008D2C
 
-
 .section .data
     .balign 8
 

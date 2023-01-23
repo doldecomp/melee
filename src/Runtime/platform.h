@@ -164,6 +164,6 @@ typedef void (*Event)(void);
 #define FLAGS_NONE(value, flag) (!((value) & (flag)))
 #define FLAGS_ALL(value, flag) (((value) & (flag)) == (flag))
 
-#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof(arr[0]))
 
 #endif
