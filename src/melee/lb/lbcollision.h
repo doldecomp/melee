@@ -18,10 +18,20 @@ struct HitVictim {
 
 struct Hitbox {
     Tangibility tangiblity;
-    s32 x4;
-    s32 x8;
-    f32 xC;
-    char unk_10[0x30 - 0x10];
+
+    /// @at{4} @sz{C}
+    /// The offset of point @e a of the capsule.
+    Vec3 a_offset;
+
+    /// @at{10} @sz{C}
+    /// The offset of point @e b of the capsule.
+    Vec3 b_offset;
+
+    /// @at{1C} @sz{4}
+    /// The scale of the capsule.
+    f32 scl;
+
+    u8 x20[0x30 - 0x20];
 
     /// @at{30} @sz{4}
     HitElement element;
@@ -132,13 +142,13 @@ bool lbColl_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
 bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32);
 bool lbColl_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32);
 bool lbColl_80007AFC(Hitbox*, Hitbox*, f32, f32);
-UNK_RET lbColl_80007DD8(UNK_PARAMS);
-UNK_RET lbColl_80008D30(UNK_PARAMS);
-UNK_RET lbColl_80008428(Hitbox*);
-UNK_RET lbColl_80005C44(UNK_PARAMS);
-UNK_RET lbColl_80005EBC(UNK_PARAMS);
+void lbColl_80007DD8();
+void lbColl_80008D30();
+void lbColl_80008428();
+void lbColl_80005C44();
+f32 lbColl_80005EBC();
 void lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3);
-void lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
+bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
 void lbColl_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32);
 UNK_RET lbColl_80006E58(UNK_PARAMS);
 UNK_RET lbColl_800077A0(UNK_PARAMS);

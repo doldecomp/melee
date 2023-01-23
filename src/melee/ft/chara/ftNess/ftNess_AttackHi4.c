@@ -68,7 +68,7 @@ static void ftNess_YoyoApplyDamage(f32 unk_float, HSD_GObj* fighter_gobj)
             damage_mul = ness_attr->xB0_YOYO_DAMAGE_MUL * mul - 1.0f;
 
             final_damage =
-                fp->x914->xC * (damage_mul * charge_duration2 + 1.0f);
+                fp->x914->a_offset.z * (damage_mul * charge_duration2 + 1.0f);
 
             func_8007ABD0(&fp->x914[0], final_damage, fighter_gobj);
         }
@@ -397,7 +397,7 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* fighter_gobj)
         ((s32) fighter_data2->x914->tangiblity == Invincible))
     {
         func_8007ABD0(fighter_data2->x914,
-                      (u32) (fighter_data2->x914->xC *
+                      (u32) (fighter_data2->x914->a_offset.z *
                              ((((0.0039059999398887157f *
                                  ness_attr->xB0_YOYO_DAMAGE_MUL) -
                                 1.0f) *

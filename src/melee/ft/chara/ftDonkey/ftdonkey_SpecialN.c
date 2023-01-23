@@ -164,7 +164,7 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj)
             fp->x2344_stateVar2_s32 = 1;
 
         if (fp->x2350_stateVar5_s32 == -1)
-            fp->x2350_stateVar5_s32 = fp->x914[0].xC;
+            fp->x2350_stateVar5_s32 = fp->x914[0].a_offset.z;
 
         func_8007ABD0(&fp->x914[0],
                       fp->x2350_stateVar5_s32 +
@@ -173,7 +173,7 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj)
                       fighter_gobj);
 
         if (fp->x2354_stateVar6_s32 == -1)
-            fp->x2354_stateVar6_s32 = fp->x914[1].xC;
+            fp->x2354_stateVar6_s32 = fp->x914[1].a_offset.z;
 
         func_8007ABD0(&fp->x914[1],
                       fp->x2354_stateVar6_s32 +
@@ -296,7 +296,7 @@ void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj)
     }
     if (fp->x914[0].tangiblity != Vulnerable) {
         if (fp->x2350_stateVar5_s32 == -1) {
-            fp->x2350_stateVar5_s32 = fp->x914[0].xC;
+            fp->x2350_stateVar5_s32 = fp->x914[0].a_offset.z;
         }
         func_8007ABD0(&fp->x914[0],
                       fp->x2350_stateVar5_s32 +
@@ -304,7 +304,7 @@ void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj)
                            donkey_attr->SpecialN.x30_DAMAGE_PER_SWING),
                       fighter_gobj);
         if (fp->x2354_stateVar6_s32 == -1) {
-            fp->x2354_stateVar6_s32 = fp->x914[1].xC;
+            fp->x2354_stateVar6_s32 = fp->x914[1].a_offset.z;
         }
         func_8007ABD0(&fp->x914[1],
                       fp->x2354_stateVar6_s32 +

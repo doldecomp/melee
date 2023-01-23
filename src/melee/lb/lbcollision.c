@@ -271,7 +271,7 @@ lbl_80005EB4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80005EBC()
+asm f32 lbColl_80005EBC()
 { // clang-format off
     nofralloc
 /* 80005EBC 00002A9C  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -413,7 +413,7 @@ extern f64 const lbl_804D7A18;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32)
+asm bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32)
 { // clang-format off
     nofralloc
 /* 80006094 00002C74  7C 08 02 A6 */	mflr r0
@@ -2265,49 +2265,23 @@ lbl_80007AE0:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
-#pragma push
-asm bool lbColl_80007AFC(Hitbox*, Hitbox*, f32, f32)
-{ // clang-format off
-    nofralloc
-/* 80007AFC 000046DC  7C 08 02 A6 */	mflr r0
-/* 80007B00 000046E0  7C 68 1B 78 */	mr r8, r3
-/* 80007B04 000046E4  90 01 00 04 */	stw r0, 4(r1)
-/* 80007B08 000046E8  38 E4 00 00 */	addi r7, r4, 0
-/* 80007B0C 000046EC  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80007B10 000046F0  88 03 00 43 */	lbz r0, 0x43(r3)
-/* 80007B14 000046F4  54 00 D7 FF */	rlwinm. r0, r0, 0x1a, 0x1f, 0x1f
-/* 80007B18 000046F8  41 82 00 0C */	beq lbl_80007B24
-/* 80007B1C 000046FC  C0 68 00 1C */	lfs f3, 0x1c(r8)
-/* 80007B20 00004700  48 00 00 0C */	b lbl_80007B2C
-lbl_80007B24:
-/* 80007B24 00004704  C0 08 00 1C */	lfs f0, 0x1c(r8)
-/* 80007B28 00004708  EC 60 00 72 */	fmuls f3, f0, f1
-lbl_80007B2C:
-/* 80007B2C 0000470C  88 07 00 43 */	lbz r0, 0x43(r7)
-/* 80007B30 00004710  54 00 D7 FF */	rlwinm. r0, r0, 0x1a, 0x1f, 0x1f
-/* 80007B34 00004714  41 82 00 0C */	beq lbl_80007B40
-/* 80007B38 00004718  C0 27 00 1C */	lfs f1, 0x1c(r7)
-/* 80007B3C 0000471C  48 00 00 0C */	b lbl_80007B48
-lbl_80007B40:
-/* 80007B40 00004720  C0 07 00 1C */	lfs f0, 0x1c(r7)
-/* 80007B44 00004724  EC 20 00 B2 */	fmuls f1, f0, f2
-lbl_80007B48:
-/* 80007B48 00004728  FC 40 18 90 */	fmr f2, f3
-/* 80007B4C 0000472C  38 67 00 58 */	addi r3, r7, 0x58
-/* 80007B50 00004730  38 87 00 4C */	addi r4, r7, 0x4c
-/* 80007B54 00004734  38 A8 00 58 */	addi r5, r8, 0x58
-/* 80007B58 00004738  38 C8 00 4C */	addi r6, r8, 0x4c
-/* 80007B5C 0000473C  38 E7 00 64 */	addi r7, r7, 0x64
-/* 80007B60 00004740  39 08 00 64 */	addi r8, r8, 0x64
-/* 80007B64 00004744  4B FF E5 31 */	bl lbColl_80006094
-/* 80007B68 00004748  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80007B6C 0000474C  38 21 00 08 */	addi r1, r1, 8
-/* 80007B70 00004750  7C 08 03 A6 */	mtlr r0
-/* 80007B74 00004754  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
+bool lbColl_80007AFC(Hitbox* a, Hitbox* b, f32 x, f32 y)
+{
+    f32 a_val, b_val;
+
+    if (a->x43_b1)
+        a_val = a->scl;
+    else
+        a_val = a->scl * x;
+
+    if (b->x43_b1)
+        b_val = b->scl;
+    else
+        b_val = b->scl * y;
+
+    lbColl_80006094(&b->x58, &b->x4C, &a->x58, &a->x4C, &b->x64, &a->x64, b_val,
+                    a_val);
+}
 
 void lbColl_80007B78(Mtx a, Mtx b, f32 x, f32 y)
 {
