@@ -20,7 +20,9 @@ struct Hitbox {
     s32 x4;
     s32 x8;
     f32 xC;
-    char unk_10[0x30 - 0x10];
+    char unk_10[0x1C - 0x10];
+    f32 x1C;
+    char unk_20[0x30 - 0x20];
 
     /// @at{30} @sz{4}
     HitElement element;
@@ -50,17 +52,30 @@ struct Hitbox {
     u8 x42_b5 : 1;
     u8 x42_b6 : 1;
     u8 x42_b7 : 1;
-    u8 x43_b0 : 1;
-    u8 x43_b1 : 1;
-    u8 x43_b2 : 1;
-    u8 x43_b3 : 1;
-    u8 x43_b4 : 1;
-    u8 x43_b5 : 1;
-    u8 x43_b6 : 1;
-    u8 x43_b7 : 1;
+    union {
+        u8 x43;
+        struct {
+            u8 x43_b0 : 1;
+            u8 x43_b1 : 1;
+            u8 x43_b2 : 1;
+            u8 x43_b3 : 1;
+            u8 x43_b4 : 1;
+            u8 x43_b5 : 1;
+            u8 x43_b6 : 1;
+            u8 x43_b7 : 1;
+        };
+    };
     u8 x44;
     u8 x45;
-    char unk_46[0x74 - 0x46];
+    char unk_46[0x4C - 0x46];
+    int x4C;
+
+    char unk_50[0x58 - 0x50];
+    int x58;
+    int x5C;
+    int x60;
+    int x64;
+    char unk_68[0x74 - 0x68];
     /// @at{74} @sz{60}
     HitVictim victims_1[12];
     /// @at{D4} @sz{60}
@@ -110,14 +125,14 @@ bool func_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
                    f32 hurt_pos_z);
 bool func_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32);
 bool func_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32);
-bool func_80007AFC(Hitbox*, Hitbox*, f32, f32);
+void func_80007AFC(Hitbox*, Hitbox*, f32, f32);
 void func_80007DD8();
 void func_80008D30();
 void func_80008428(Hitbox*);
 void func_80005C44();
 void func_80005EBC();
 void func_80005FC0();
-void func_80006094();
+void func_80006094(int*, int*, int*, int*, int*, int*, f32, f32);
 void func_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32);
 void func_80006E58();
 void func_800077A0();
