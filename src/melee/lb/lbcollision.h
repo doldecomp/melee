@@ -131,7 +131,7 @@ void func_80008D30();
 void func_80008428(Hitbox*);
 void func_80005C44();
 void func_80005EBC();
-void func_80005FC0();
+void func_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3);
 void func_80006094(int*, int*, int*, int*, int*, int*, f32, f32);
 void func_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32);
 void func_80006E58();
