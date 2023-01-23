@@ -154,5 +154,6 @@ void func_8000A10C();
 void func_8000A1A8();
 void func_8000A244();
 void func_8000A460();
+void func_8000A584();
 
 #endif
