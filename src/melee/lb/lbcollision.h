@@ -166,7 +166,7 @@ UNK_RET lbColl_80006E58(UNK_PARAMS);
 UNK_RET lbColl_800077A0(UNK_PARAMS);
 UNK_RET lbColl_80007B78(Mtx, Mtx, f32, f32);
 bool lbColl_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32);
-UNK_RET lbColl_800083C4(UNK_PARAMS);
+void lbColl_800083C4(Hurtbox*);
 UNK_RET lbColl_800089B8(UNK_PARAMS);
 UNK_RET lbColl_80008A5C(UNK_PARAMS);
 UNK_RET lbColl_80008DA4(UNK_PARAMS);

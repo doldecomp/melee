@@ -2923,7 +2923,7 @@ lbl_80008364:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbColl_800083C4(UNK_PARAMS)
+asm void lbColl_800083C4(Hurtbox*)
 { // clang-format off
     nofralloc
 /* 800083C4 00004FA4  7C 08 02 A6 */	mflr r0
