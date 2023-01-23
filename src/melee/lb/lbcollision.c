@@ -348,8 +348,9 @@ lbl_80005F80:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80005FC0()
-{ // clang-format off
+// clang-format off
+asm UNK_RET lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*)
+{
     nofralloc
 /* 80005FC0 00002BA0  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80005FC4 00002BA4  80 E3 00 00 */	lwz r7, 0(r3)
@@ -1383,8 +1384,9 @@ extern f64 const lbl_804D7A20;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80006E58()
-{ // clang-format off
+asm UNK_RET lbColl_80006E58(UNK_PARAMS)
+{
+    // clang-format off
     nofralloc
 /* 80006E58 00003A38  7C 08 02 A6 */	mflr r0
 /* 80006E5C 00003A3C  90 01 00 04 */	stw r0, 4(r1)
@@ -2033,7 +2035,7 @@ extern f32 const lbl_804D7A30;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_800077A0()
+asm UNK_RET lbColl_800077A0(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 800077A0 00004380  7C 08 02 A6 */	mflr r0
@@ -2460,8 +2462,9 @@ lbl_80007DC4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80007DD8()
-{ // clang-format off
+asm UNK_RET lbColl_80007DD8(UNK_PARAMS)
+{
+    // clang-format off
     nofralloc
 /* 80007DD8 000049B8  7C 08 02 A6 */	mflr r0
 /* 80007DDC 000049BC  90 01 00 04 */	stw r0, 4(r1)
@@ -2920,7 +2923,7 @@ lbl_80008364:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_800083C4()
+asm UNK_RET lbColl_800083C4(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 800083C4 00004FA4  7C 08 02 A6 */	mflr r0
@@ -3029,7 +3032,7 @@ lbl_800084EC:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_800084FC()
+asm UNK_RET lbColl_800084FC(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 800084FC 000050DC  81 23 00 74 */	lwz r9, 0x74(r3)
@@ -3141,7 +3144,7 @@ lbl_8000866C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80008688()
+asm UNK_RET lbColl_80008688(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80008688 00005268  38 00 00 0C */	li r0, 0xc
@@ -3266,7 +3269,7 @@ lbl_80008818:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80008820()
+asm UNK_RET lbColl_80008820(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80008820 00005400  38 00 00 0C */	li r0, 0xc
@@ -3391,7 +3394,7 @@ lbl_800089B0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_800089B8()
+asm UNK_RET lbColl_800089B8(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 800089B8 00005598  38 00 00 02 */	li r0, 2
@@ -3448,8 +3451,9 @@ lbl_80008A4C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80008A5C()
-{ // clang-format off
+asm UNK_RET lbColl_80008A5C(UNK_PARAMS)
+{
+    // clang-format off
     nofralloc
 /* 80008A5C 0000563C  80 03 00 00 */	lwz r0, 0(r3)
 /* 80008A60 00005640  2C 00 00 00 */	cmpwi r0, 0
@@ -3654,8 +3658,9 @@ extern f64 const lbl_804D7A48;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80008D30()
-{ // clang-format off
+asm UNK_RET lbColl_80008D30(UNK_PARAMS)
+{
+    // clang-format off
     nofralloc
 /* 80008D30 00005910  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80008D34 00005914  3C 00 43 30 */	lis r0, 0x4330
@@ -3694,8 +3699,9 @@ extern int const lbl_804D7A50;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80008DA4()
-{ // clang-format off
+asm UNK_RET lbColl_80008DA4(UNK_PARAMS)
+{
+    // clang-format off
     nofralloc
 /* 80008DA4 00005984  7C 08 02 A6 */	mflr r0
 /* 80008DA8 00005988  90 01 00 04 */	stw r0, 4(r1)
@@ -3848,7 +3854,7 @@ extern f32 const lbl_804D7A54;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80008FC8()
+asm UNK_RET lbColl_80008FC8(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80008FC8 00005BA8  7C 08 02 A6 */	mflr r0
@@ -4321,7 +4327,7 @@ lbl_8000968C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_800096B4()
+asm UNK_RET lbColl_800096B4(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 800096B4 00006294  7C 08 02 A6 */	mflr r0
@@ -4807,7 +4813,7 @@ lbl_80009DAC:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80009DD4()
+asm UNK_RET lbColl_80009DD4(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80009DD4 000069B4  7C 08 02 A6 */	mflr r0
@@ -4917,7 +4923,7 @@ extern int lbl_804D36DC;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80009F54()
+asm UNK_RET lbColl_80009F54(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80009F54 00006B34  7C 08 02 A6 */	mflr r0
@@ -4999,7 +5005,7 @@ extern int lbl_804D36EC;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_8000A044()
+asm UNK_RET lbColl_8000A044(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A044 00006C24  7C 08 02 A6 */	mflr r0
@@ -5067,7 +5073,7 @@ extern int lbl_804D36FC;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_8000A10C()
+asm UNK_RET lbColl_8000A10C(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A10C 00006CEC  7C 08 02 A6 */	mflr r0
@@ -5122,7 +5128,7 @@ extern int lbl_804D36F4;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_8000A1A8()
+asm UNK_RET lbColl_8000A1A8(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A1A8 00006D88  7C 08 02 A6 */	mflr r0
@@ -5334,7 +5340,7 @@ extern int lbl_804D36E4;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_8000A460()
+asm UNK_RET lbColl_8000A460(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A460 00007040  7C 08 02 A6 */	mflr r0
@@ -5424,7 +5430,7 @@ lbl_8000A570:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_8000A584()
+asm UNK_RET lbColl_8000A584(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A584 00007164  7C 08 02 A6 */	mflr r0
@@ -5578,7 +5584,7 @@ extern int lbl_804D36C8;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_8000A78C()
+asm UNK_RET lbColl_8000A78C(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A78C 0000736C  7C 08 02 A6 */	mflr r0
@@ -5856,7 +5862,7 @@ extern int lbl_804D36D8;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_8000AB2C()
+asm UNK_RET lbColl_8000AB2C(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000AB2C 0000770C  7C 08 02 A6 */	mflr r0
