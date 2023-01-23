@@ -367,7 +367,7 @@ static inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
 
 /// @todo This is misplaced or something; @c jobj.h must not include @c
 ///       lbcollision.
-void* HSD_JObjUnkMtxPtr(HSD_JObj*);
+void HSD_JObjUnkMtxPtr(HSD_JObj*);
 
 static inline void HSD_JObjGetMtx(HSD_JObj* jobj)
 {

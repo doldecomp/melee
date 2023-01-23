@@ -80,7 +80,7 @@ struct Hurtbox {
     u32 x48_is_grabbable;               // 0x48
 };
 
-void* HSD_JObjUnkMtxPtr(HSD_JObj*);
+void HSD_JObjUnkMtxPtr(HSD_JObj*);
 s32 func_80008248(s32, Hurtbox*, void*, f32, f32, f32);
 void func_80008440(Hitbox*);
 void func_80008434(Hitbox*);
