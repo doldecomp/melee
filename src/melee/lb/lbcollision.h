@@ -7,7 +7,7 @@
 
 struct HitVictim {
     /// @at{0} @sz{4}
-    HSD_GObj* victim;
+    HSD_GObj* entity;
 
     /// @at{4} @sz{4}
     /// @brief The number of frames needed to pass before this entity can be hit
@@ -100,7 +100,7 @@ void HSD_JObjUnkMtxPtr(HSD_JObj*);
 bool func_80008248(bool, Hurtbox*, void*, f32, f32, f32);
 void func_80008440(Hitbox*);
 void func_80008434(Hitbox*);
-bool func_8000ACFC(Fighter*, Hitbox*);
+bool func_8000ACFC(HSD_GObj*, Hitbox*);
 void func_80008688();
 void func_800084FC();
 void func_80008820();
