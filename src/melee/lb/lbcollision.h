@@ -100,5 +100,7 @@ void func_80008D30(void);
 void func_80008428(void);
 void func_80005C44(void);
 void func_80005EBC(void);
+void func_80005FC0(void);
+void func_80006094(void);
 
 #endif
