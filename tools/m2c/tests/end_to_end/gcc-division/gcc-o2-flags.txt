@@ -1,0 +1,1 @@
+--context orig.c --function func_00400098 --function func_004003A8 --function func_004007C0 --function func_00400F48 --function func_00401AA0 --function func_00401FC4

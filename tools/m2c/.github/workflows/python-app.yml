@@ -1,0 +1,34 @@
+name: Python application
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install poetry
+      run: pipx install poetry
+    - name: Setup Python 3.7
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.7
+        cache: poetry
+    - name: Install dependencies
+      run: |
+        poetry install --with=dev
+    - name: Run tests
+      run: |
+        poetry run ./run_tests.py
+    - name: Type-check
+      run: |
+        poetry run mypy
+    - name: Formatting check
+      run: |
+        poetry run black --check .
