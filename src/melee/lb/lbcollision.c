@@ -2935,3 +2935,27 @@ lbl_80008414:
 } // clang-format on
 #pragma pop
 #endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void func_80008428(Hitbox*)
+{ // clang-format off
+    nofralloc
+/* 80008428 00005008  38 00 00 00 */	li r0, 0
+/* 8000842C 0000500C  90 03 00 00 */	stw r0, 0(r3)
+/* 80008430 00005010  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
+
+#ifdef MWERKS_GEKKO
+#pragma push
+asm void func_80008434(Hitbox*)
+{ // clang-format off
+    nofralloc
+/* 80008434 00005014  38 00 00 01 */	li r0, 1
+/* 80008438 00005018  90 03 00 00 */	stw r0, 0(r3)
+/* 8000843C 0000501C  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+#endif
