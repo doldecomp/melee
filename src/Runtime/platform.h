@@ -120,7 +120,7 @@ typedef void (*Event)(void);
 #endif
 
 #ifndef ATTRIBUTE_RESTRICT
-#ifdef __MWERKS__
+#if defined(__MWERKS__) && !defined(M2CTX)
 #define ATTRIBUTE_RESTRICT __restrict
 #else
 #define ATTRIBUTE_RESTRICT
