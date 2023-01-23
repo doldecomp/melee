@@ -26,7 +26,6 @@ typedef struct ItemStateContainer ItemStateContainer;
 typedef struct ItemStateDesc ItemStateDesc;
 typedef struct ItemStateTable ItemStateTable;
 typedef struct itHit itHit;
-typedef struct itHitVictim itHitVictim;
 typedef struct itHurt itHurt;
 typedef struct SpawnItem SpawnItem;
 typedef struct UnkItemArticles3 UnkItemArticles3;

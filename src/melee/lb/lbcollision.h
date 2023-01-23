@@ -114,6 +114,16 @@ struct Hurtbox {
     u32 x48_is_grabbable;               // 0x48
 };
 
+struct HitVictim {
+    /// @at{0} @sz{4}
+    HSD_GObj* victim;
+
+    /// @at{4} @sz{4}
+    /// @brief The number of frames needed to pass before this entity can be hit
+    ///        again; 0 = can't rehit
+    s32 iframes;
+};
+
 void HSD_JObjUnkMtxPtr(HSD_JObj*);
 bool func_80008248(bool, Hurtbox*, void*, f32, f32, f32);
 void func_80008440(Hitbox*);

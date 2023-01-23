@@ -305,15 +305,6 @@ struct itHurt {
     s32 x40_bone_index;
 };
 
-struct itHitVictim {
-    HSD_GObj* x0_victim;
-
-    /// @at{4} @sz{4}
-    /// @brief The number of frames needed to pass before this entity can be hit
-    ///        again; 0 = can't rehit
-    s32 iframes;
-};
-
 struct itHit {
     bool x0_toggle; // Toggles hitbox on/off.
     s32 x4_unk;
@@ -349,8 +340,8 @@ struct itHit {
     Vec3 x64_posColl;      // 0x64   position of hurt collision
     f32 x70_coll_distance; // 0x70   Distance From Collding Hurtbox (Used for
                            // phantom hit collision calculation)
-    itHitVictim x74_tipLog[12];
-    itHitVictim xD4_damageLog[12];
+    HitVictim x74_tipLog[12];
+    HitVictim xD4_damageLog[12];
     s32 x134;
     s32 x138;
 };
