@@ -1624,7 +1624,7 @@ struct Fighter {
         Vec3 x19C8_pos;
         Vec3 x19D4_offset;
         f32 x19E0_size;
-    } ShieldHit;
+    } shield_hit;
     struct {
         HSD_JObj* x19E4_boneAttach;
         u8 x19E8_updatePos : 1; // Follows attach bone position if toggled OFF
