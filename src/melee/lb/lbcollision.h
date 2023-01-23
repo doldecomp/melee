@@ -103,5 +103,6 @@ void func_80005EBC(void);
 void func_80005FC0(void);
 void func_80006094(void);
 void func_800067F8(void);
+void func_80006E58(void);
 
 #endif
