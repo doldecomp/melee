@@ -51,34 +51,32 @@ struct Hitbox {
     u8 x42_b5 : 1;
     u8 x42_b6 : 1;
     u8 x42_b7 : 1;
-    union {
-        u8 x43;
-        struct {
-            u8 x43_b0 : 1;
-            u8 x43_b1 : 1;
-            u8 x43_b2 : 1;
-            u8 x43_b3 : 1;
-            u8 x43_b4 : 1;
-            u8 x43_b5 : 1;
-            u8 x43_b6 : 1;
-            u8 x43_b7 : 1;
-        };
-    };
-    u8 x44;
-    u8 x45;
-    u8 x46[0x4C - 0x46];
-    int x4C;
-
-    u8 x50[0x58 - 0x50];
-    int x58;
-    int x5C;
-    int x60;
-    int x64;
-    u8 x68[0x74 - 0x68];
-    /// @at{74} @sz{60}
-    HitVictim victims_1[12];
-    /// @at{D4} @sz{60}
-    HitVictim victims_2[12];
+    u8 x43_b0 : 1;
+    u8 x43_b1 : 1;
+    u8 x43_b2 : 1;
+    u8 x43_b3 : 1;
+    u8 x43_b4 : 1;
+    u8 x43_b5 : 1;
+    u8 x43_b6 : 1;
+    u8 x43_b7 : 1;
+    int x44;
+    char unk_48[0x74 - 0x48];
+    int x74;
+    char unk_78[0x7C - 0x78];
+    int x7C;
+    char unk_80[0x84 - 0x80];
+    int x84;
+    char unk_88[0x8C - 0x88];
+    int x8C;
+    char unk_90[0x94 - 0x90];
+    int x94;
+    char unk_98[0x9C - 0x98];
+    int x9C;
+    char unk_A0[0xA4 - 0xA0];
+    int xA4;
+    char unk_A8[0xAC - 0xA8];
+    int xAC;
+    char unk_B0[0x134 - 0xB0];
 
     /// @at{134} @sz{4}
     /// @todo This union is unacceptable.
