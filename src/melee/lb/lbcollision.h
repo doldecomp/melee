@@ -140,7 +140,7 @@ struct Hurtbox {
 };
 
 void HSD_JObjUnkMtxPtr(HSD_JObj*);
-bool lbColl_80008248(bool, Hurtbox*, Mtx*, f32, f32, f32);
+bool lbColl_80008248(unk_t, Hurtbox*, Mtx*, f32, f32, f32);
 void lbColl_80008440(Hitbox*);
 void lbColl_80008434(Hitbox*);
 bool lbColl_8000ACFC(UNK_T, Hitbox*);

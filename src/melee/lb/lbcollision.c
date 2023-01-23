@@ -2810,7 +2810,7 @@ lbl_8000821C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool lbColl_80008248(bool, Hurtbox*, Mtx*, f32, f32, f32)
+asm bool lbColl_80008248(unk_t, Hurtbox*, Mtx*, f32, f32, f32)
 { // clang-format off
     nofralloc
 /* 80008248 00004E28  7C 08 02 A6 */	mflr r0

@@ -35,7 +35,7 @@ void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
     }
 }
 
-bool ftSamus_80128A1C(HSD_GObj* fighter_gobj, s32 arg1, f32 farg1)
+bool ftSamus_80128A1C(HSD_GObj* fighter_gobj, unk_t arg1, f32 farg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     int i;
