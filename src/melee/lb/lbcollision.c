@@ -5201,7 +5201,7 @@ extern unk_t lbl_803B9928;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_8000A244()
+asm void lbColl_8000A244(Hurtbox* arg0, u32 arg1, Mtx arg2, f32 arg3)
 { // clang-format off
     nofralloc
 /* 8000A244 00006E24  7C 08 02 A6 */	mflr r0

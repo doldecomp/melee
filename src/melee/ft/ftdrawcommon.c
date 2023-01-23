@@ -43,7 +43,6 @@ extern void lbColl_8000A460(void);
 extern void lbColl_8000A78C(void);
 extern void lbColl_8000AB2C(void);
 extern void lbColl_8000A95C(void);
-extern void lbColl_8000A244(void);
 extern void lbColl_8000A584(void);
 extern void lbColl_80009F54(void);
 

@@ -76,25 +76,24 @@ struct Hitbox {
 };
 
 struct Hurtbox {
-    Tangibility tangiblity; // 0x0, whether or not this hurtbox can be hit
-    Vec3 x4_hurt1_offset;   // 0x4
-    Vec3 x10_hurt2_offset;  // 0x10
-    f32 x1C_scale;          // 0x1c
-    HSD_JObj* x20_jobj;     // 0x20
-    unsigned char x24_1_is_updated : 1; // 0x24, 0x80, if enabled, wont
-                                        // update position
-    unsigned char x24_2 : 1;            // 0x24 0x40
-    unsigned char x24_3 : 1;            // 0x24 0x20
-    unsigned char x24_4 : 1;            // 0x24 0x10
-    unsigned char x24_5 : 1;            // 0x24 0x08
-    unsigned char x24_6 : 1;            // 0x24 0x04
-    unsigned char x24_7 : 1;            // 0x24 0x02
-    unsigned char x24_8 : 1;            // 0x24 0x01
-    Vec3 x28_hurt1_pos;                 // 0x28
-    Vec3 x34_hurt2_pos;                 // 0x34
-    u32 x40_bone_index;                 // 0x40
-    u32 x44_hurt_kind;                  // 0x44. 0 = low, 1 = mid, 2 = high
-    u32 x48_is_grabbable;               // 0x48
+    Tangibility tangiblity;  // 0x0, whether or not this hurtbox can be hit
+    Vec3 x4_hurt1_offset;    // 0x4
+    Vec3 x10_hurt2_offset;   // 0x10
+    f32 x1C_scale;           // 0x1c
+    HSD_JObj* x20_jobj;      // 0x20
+    u8 x24_1_is_updated : 1; // 0x24, 0x80, if enabled, wont update position
+    u8 x24_2 : 1;            // 0x24 0x40
+    u8 x24_3 : 1;            // 0x24 0x20
+    u8 x24_4 : 1;            // 0x24 0x10
+    u8 x24_5 : 1;            // 0x24 0x08
+    u8 x24_6 : 1;            // 0x24 0x04
+    u8 x24_7 : 1;            // 0x24 0x02
+    u8 x24_8 : 1;            // 0x24 0x01
+    Vec3 x28_hurt1_pos;      // 0x28
+    Vec3 x34_hurt2_pos;      // 0x34
+    u32 x40_bone_index;      // 0x40
+    u32 x44_hurt_kind;       // 0x44. 0 = low, 1 = mid, 2 = high
+    u32 x48_is_grabbable;    // 0x48
 };
 
 void HSD_JObjUnkMtxPtr(HSD_JObj*);
@@ -128,29 +127,18 @@ UNK_RET lbColl_800089B8(UNK_PARAMS);
 UNK_RET lbColl_80008A5C(UNK_PARAMS);
 UNK_RET lbColl_80008DA4(UNK_PARAMS);
 UNK_RET lbColl_80008FC8(UNK_PARAMS);
-bool lbColl_80008248(bool, Hurtbox*, void*, f32, f32, f32);
 UNK_RET lbColl_800096B4(UNK_PARAMS);
 UNK_RET lbColl_80009DD4(UNK_PARAMS);
 UNK_RET lbColl_80009F54(UNK_PARAMS);
 UNK_RET lbColl_8000A044(UNK_PARAMS);
 UNK_RET lbColl_8000A10C(UNK_PARAMS);
 UNK_RET lbColl_8000A1A8(UNK_PARAMS);
-UNK_RET lbColl_800083C4(UNK_PARAMS);
-UNK_RET lbColl_800089B8(UNK_PARAMS);
-UNK_RET lbColl_80008A5C(UNK_PARAMS);
-UNK_RET lbColl_80008DA4(UNK_PARAMS);
-UNK_RET lbColl_80008FC8(UNK_PARAMS);
-UNK_RET lbColl_800096B4(UNK_PARAMS);
-UNK_RET lbColl_80009DD4(UNK_PARAMS);
-UNK_RET lbColl_80009F54(UNK_PARAMS);
-UNK_RET lbColl_8000A044(UNK_PARAMS);
-UNK_RET lbColl_8000A10C(UNK_PARAMS);
-UNK_RET lbColl_8000A1A8(UNK_PARAMS);
-UNK_RET lbColl_8000A244(UNK_PARAMS);
+void lbColl_8000A244(Hurtbox* arg0, u32 arg1, Mtx arg2, f32 arg3);
 UNK_RET lbColl_8000A460(UNK_PARAMS);
 UNK_RET lbColl_8000A584(UNK_PARAMS);
 UNK_RET lbColl_8000A78C(UNK_PARAMS);
 UNK_RET lbColl_8000A95C(UNK_PARAMS);
 UNK_RET lbColl_8000AB2C(UNK_PARAMS);
+bool lbColl_80008248(bool, Hurtbox*, void*, f32, f32, f32);
 
 #endif
