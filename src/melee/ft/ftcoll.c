@@ -3154,7 +3154,7 @@ void func_80078A2C(HSD_GObj* this_gobj)
                         if (lbColl_8000ACFC(victim_fp, this_hit) == false) {
                             for (j = 0; j < victim_fp->x119E_hurtboxNum; j++) {
                                 if ((s32) victim_fp->x11A0_fighterHurtbox[j]
-                                        .x48_is_grabbable != false)
+                                        .is_grabbable != false)
                                 {
                                     if (lbColl_80007ECC(
                                             this_hit,
