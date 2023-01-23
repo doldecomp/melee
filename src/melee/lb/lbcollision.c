@@ -3620,8 +3620,7 @@ f64 const lbl_804D7A48 = 4503599627370496;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80008D30()
-{ // clang-format off
+asm void func_80008D30(){ // clang-format off
     nofralloc
 /* 80008D30 00005910  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80008D34 00005914  3C 00 43 30 */	lis r0, 0x4330
@@ -3656,12 +3655,12 @@ asm void func_80008D30()
 #pragma pop
 #endif
 
-extern int const lbl_804D7A50;
+GXColor const lbl_804D7A50 = { 0 };
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80008DA4()
-{ // clang-format off
+asm void func_80008DA4(){
+    // clang-format off
     nofralloc
 /* 80008DA4 00005984  7C 08 02 A6 */	mflr r0
 /* 80008DA8 00005988  90 01 00 04 */	stw r0, 4(r1)
@@ -3810,7 +3809,7 @@ lbl_80008FB0:
 #pragma pop
 #endif
 
-extern f32 const lbl_804D7A54;
+f32 const lbl_804D7A54 = -1;
 
 #ifdef MWERKS_GEKKO
 #pragma push

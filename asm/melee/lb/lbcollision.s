@@ -538,15 +538,3 @@ lbl_804D3700:
 lbl_804D3708:
     .asciz "jobj"
     .balign 4
-
-
-.section .sdata2
-    .balign 4
-
-.global lbl_804D7A50
-lbl_804D7A50:
-    .float 0.0
-
-.global lbl_804D7A54
-lbl_804D7A54:
-    .float -1.0
