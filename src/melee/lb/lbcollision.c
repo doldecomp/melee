@@ -2258,7 +2258,7 @@ void func_80007B78(Mtx a, Mtx b, f32 x, f32 y)
 
 extern char* lbl_804D3700;
 extern char* lbl_804D3708;
-extern f32 const lbl_804D7A34;
+f32 const lbl_804D7A34 = 20;
 
 #ifdef MWERKS_GEKKO
 #pragma push
