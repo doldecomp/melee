@@ -1,0 +1,1 @@
+--context orig.c --valid-syntax --globals=none --stack-structs

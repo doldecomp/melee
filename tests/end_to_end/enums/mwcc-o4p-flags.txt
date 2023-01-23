@@ -1,0 +1,1 @@
+--target ppc-mwcc-c --context orig.c
