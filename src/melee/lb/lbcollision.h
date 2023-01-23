@@ -48,8 +48,8 @@ struct Hitbox {
     u8 x43_b5 : 1;
     u8 x43_b6 : 1;
     u8 x43_b7 : 1;
-    int x44;
-    char unk_48[0x74 - 0x48];
+    u8 x44;
+    char unk_45[0x74 - 0x45];
     int x74;
     int x78;
     int x7C;
@@ -77,7 +77,11 @@ struct Hitbox {
     int xF4;
     int xF8;
     int xFC;
-    u8 unk_100[0x134 - 0x100];
+    int x100;
+    int x104;
+    int x108;
+    int x10C;
+    u8 unk_100[0x134 - 0x110];
 
     /// @at{134} @sz{4}
     /// @todo This union is unacceptable.
