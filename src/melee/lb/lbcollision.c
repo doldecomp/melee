@@ -1384,9 +1384,10 @@ extern f64 const lbl_804D7A20;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbColl_80006E58(UNK_PARAMS)
+// clang-format off
+asm bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, unk_t, unk_t, f32*, Vec3*,
+                       f32, f32, f32)
 {
-    // clang-format off
     nofralloc
 /* 80006E58 00003A38  7C 08 02 A6 */	mflr r0
 /* 80006E5C 00003A3C  90 01 00 04 */	stw r0, 4(r1)
@@ -2667,7 +2668,8 @@ extern f32 const lbl_804D7A40;
 #ifdef MWERKS_GEKKO
 #pragma push
 asm bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32)
-{ // clang-format off
+{
+    // clang-format off
     nofralloc
 /* 8000805C 00004C3C  7C 08 02 A6 */	mflr r0
 /* 80008060 00004C40  90 01 00 04 */	stw r0, 4(r1)
@@ -2810,7 +2812,7 @@ lbl_8000821C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool lbColl_80008248(Hitbox*, Hurtbox*, Mtx*, f32, f32, f32)
+asm bool lbColl_80008248(Hitbox*, Hurtbox*, Mtx, f32, f32, f32)
 { // clang-format off
     nofralloc
 /* 80008248 00004E28  7C 08 02 A6 */	mflr r0
