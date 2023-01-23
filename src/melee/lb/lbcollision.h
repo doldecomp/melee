@@ -81,7 +81,7 @@ struct Hurtbox {
 };
 
 void HSD_JObjUnkMtxPtr(HSD_JObj*);
-s32 func_80008248(s32, Hurtbox*, void*, f32, f32, f32);
+bool func_80008248(bool, Hurtbox*, void*, f32, f32, f32);
 void func_80008440(Hitbox*);
 void func_80008434(Hitbox*);
 bool func_8000ACFC(Fighter*, Hitbox*);
