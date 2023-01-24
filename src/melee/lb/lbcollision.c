@@ -17,11 +17,13 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 
-/// @todo Remove these
-/// @{
-// #undef MUST_MATCH
+/// @todo Toggle for WIP functions
+#if 0
+#undef MUST_MATCH
+#if __MWERKS__
 #pragma require_prototypes off
-/// @}
+#endif
+#endif
 
 int lbl_803B9880[] = {
     0x00083D60, 0x00083D60, 0x00083D60, 0x0000005B, 0x0000005A, 0x00000059,
@@ -3259,8 +3261,8 @@ extern f32 const lbl_804D7A30;
 
 #ifdef MUST_MATCH
 #pragma push
-asm void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*, f32*, f32,
-                         f32){
+asm void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*, f32*, f32, f32)
+{
     // clang-format off
     nofralloc
 /* 800077A0 00004380  7C 08 02 A6 */	mflr r0
@@ -3493,7 +3495,7 @@ lbl_80007AE0:
 #pragma pop
 #else
 
-f32 sqrDistance(Vec3* vec3, Vec3* vec4)
+inline f32 sqrDistance(Vec3* vec3, Vec3* vec4)
 {
     {
         f32 y;
@@ -3505,27 +3507,41 @@ f32 sqrDistance(Vec3* vec3, Vec3* vec4)
         return temp_f2 * temp_f2 + temp_f4 * temp_f4 + y * y;
     }
 }
+
+/// @todo sqrtf inline
+inline f32 todo_sqrtf(Vec3* vec3, Vec3* vec4)
+{
+    f32 result = sqrDistance(vec3, vec4);
+    f64 sqrt;
+    f64 temp1;
+    f64 temp2;
+
+    if (result > 0.0f) {
+        f32 temp0;
+        sqrt = __frsqrte(result);
+        temp1 = 0.5 * sqrt * -(((f64) result * (sqrt * sqrt)) - 3.0);
+        temp2 = 0.5 * temp1 * -(((f64) result * (temp1 * temp1)) - 3.0);
+        temp0 =
+            (f32) ((f64) result *
+                   (0.5 * temp2 * -(((f64) result * (temp2 * temp2)) - 3.0)));
+        result = temp0;
+    }
+
+    return result;
+}
+
 void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                      Vec3* arg5, f32* angle, f32 arg7, f32 arg8)
 {
     Vec3 vec0;
-    f32 sp30;
     f32 sp2C;
     f32 arg3_x;
-    f32 temp_f0_2;
-    f32 temp_f10;
-    f32 temp_f1_5;
     f32 temp_f1_6;
     f32 temp_f5;
-    f32 temp_f8;
-    f32 temp_f9;
-    f32 sqr_dist;
+    f32 dist;
     f32 var_f3;
     f32 var_f3_2;
     f32 var_f6;
-    f64 temp_f1_2;
-    f64 temp_f1_3;
-    f64 temp_f1_4;
     f64 temp_f2_2;
     f64 temp_f2_3;
     f64 temp_f2_4;
@@ -3547,82 +3563,79 @@ void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
         vec4.z = 0.0f;
         PSMTXMUltiVec(arg1, (Vec3*) &vec4.x, (Vec3*) &vec4.x);
 
-        sqr_dist = sqrDistance(&vec3, &vec4);
-
-        if (sqr_dist > 0.0f) {
-            temp_f1_2 = __frsqrte(sqr_dist);
-            temp_f1_3 = 0.5 * temp_f1_2 *
-                        -(((f64) sqr_dist * (temp_f1_2 * temp_f1_2)) - 3.0);
-            temp_f1_4 = 0.5 * temp_f1_3 *
-                        -(((f64) sqr_dist * (temp_f1_3 * temp_f1_3)) - 3.0);
-            sp30 =
-                (f32) ((f64) sqr_dist *
-                       (0.5 * temp_f1_4 *
-                        -(((f64) sqr_dist * (temp_f1_4 * temp_f1_4)) - 3.0)));
-            sqr_dist = sp30;
-        }
-        temp_f1_5 = sqr_dist + arg8;
-        temp_f0_2 = vec0.z * vec0.z + vec0.x * vec0.x + vec0.y * vec0.y;
-        temp_f8 = arg2->x - arg0->x;
-        temp_f9 = arg2->y - arg0->y;
-        temp_f10 = arg2->z - arg0->z;
+        dist = todo_sqrtf(&vec3, &vec4);
 
         {
-            // return var_f3
-            if (approximatelyZero(temp_f0_2)) {
-                var_f3 = 0.0f;
-            } else {
-                temp_f5 =
-                    (2.0f * vec0.z * temp_f10) +
-                    ((2.0f * vec0.x * temp_f8) + (2.0f * vec0.y * temp_f9));
-                temp_f1_6 = (temp_f5 * temp_f5) -
-                            (4.0f * temp_f0_2 *
-                             -((temp_f1_5 * temp_f1_5) -
-                               ((temp_f10 * temp_f10) +
-                                ((temp_f8 * temp_f8) + (temp_f9 * temp_f9)))));
-                var_f6 = temp_f1_6;
-                if (temp_f1_6 < 0.0f) {
-                    var_f6 = 0.0f;
-                }
-                if (var_f6 > 0.0f) {
-                    temp_f2_2 = __frsqrte(var_f6);
-                    temp_f2_3 =
-                        0.5 * temp_f2_2 *
-                        -(((f64) var_f6 * (temp_f2_2 * temp_f2_2)) - 3.0);
-                    temp_f2_4 =
-                        0.5 * temp_f2_3 *
-                        -(((f64) var_f6 * (temp_f2_3 * temp_f2_3)) - 3.0);
-                    sp2C = (f32) ((f64) var_f6 *
-                                  (0.5 * temp_f2_4 *
-                                   -(((f64) var_f6 * (temp_f2_4 * temp_f2_4)) -
-                                     3.0)));
-                    var_f3_2 = sp2C;
-                } else {
-                    var_f3_2 = var_f6;
-                }
-                var_f3 = (-temp_f5 - var_f3_2) / (2.0f * temp_f0_2);
-            }
+            f32 temp_f1_5;
+            f32 temp_f0_2;
+            f32 temp_f8;
+            f32 temp_f9;
+            f32 temp_f10;
+            temp_f1_5 = dist + arg8;
+            temp_f0_2 = vec0.z * vec0.z + vec0.x * vec0.x + vec0.y * vec0.y;
+            temp_f8 = arg2->x - arg0->x;
+            temp_f9 = arg2->y - arg0->y;
+            temp_f10 = arg2->z - arg0->z;
 
             {
-                Vec3 vec1;
-                vec1.x = var_f3 * vec0.x + arg2->x - arg0->x;
-                vec1.y = var_f3 * vec0.y + arg2->y - arg0->y;
-                vec1.z = var_f3 * vec0.z + arg2->z - arg0->z;
-                PSVECNormalize((Vec3*) &vec1.x, arg5);
+                // return var_f3
+                if (approximatelyZero(temp_f0_2)) {
+                    var_f3 = 0.0f;
+                } else {
+                    temp_f5 =
+                        (2.0f * vec0.z * temp_f10) +
+                        ((2.0f * vec0.x * temp_f8) + (2.0f * vec0.y * temp_f9));
+                    temp_f1_6 =
+                        (temp_f5 * temp_f5) -
+                        (4.0f * temp_f0_2 *
+                         -((temp_f1_5 * temp_f1_5) -
+                           ((temp_f10 * temp_f10) +
+                            ((temp_f8 * temp_f8) + (temp_f9 * temp_f9)))));
+                    var_f6 = temp_f1_6;
+                    if (temp_f1_6 < 0.0f) {
+                        var_f6 = 0.0f;
+                    }
+                    if (var_f6 > 0.0f) {
+                        /// @todo sqrtf
+                        temp_f2_2 = __frsqrte(var_f6);
+                        temp_f2_3 =
+                            0.5 * temp_f2_2 *
+                            -(((f64) var_f6 * (temp_f2_2 * temp_f2_2)) - 3.0);
+                        temp_f2_4 =
+                            0.5 * temp_f2_3 *
+                            -(((f64) var_f6 * (temp_f2_3 * temp_f2_3)) - 3.0);
+                        sp2C =
+                            (f32) ((f64) var_f6 *
+                                   (0.5 * temp_f2_4 *
+                                    -(((f64) var_f6 * (temp_f2_4 * temp_f2_4)) -
+                                      3.0)));
+                        var_f3_2 = sp2C;
+                    } else {
+                        var_f3_2 = var_f6;
+                    }
+                    var_f3 = (-temp_f5 - var_f3_2) / (2.0f * temp_f0_2);
+                }
+
+                {
+                    Vec3 vec1;
+                    vec1.x = var_f3 * vec0.x + arg2->x - arg0->x;
+                    vec1.y = var_f3 * vec0.y + arg2->y - arg0->y;
+                    vec1.z = var_f3 * vec0.z + arg2->z - arg0->z;
+                    PSVECNormalize(&vec1, arg5);
+                }
             }
         }
 
-        *angle = lbvector_AngleXY(arg5, (Vec3*) &vec0.x);
-        arg4->x = sqr_dist * arg5->x + arg0->x;
-        arg4->y = sqr_dist * arg5->y + arg0->y;
-        arg4->z = sqr_dist * arg5->z + arg0->z;
-        return;
+        *angle = lbvector_AngleXY(arg5, &vec0);
+        arg4->x = dist * arg5->x + arg0->x;
+        arg4->y = dist * arg5->y + arg0->y;
+        arg4->z = dist * arg5->z + arg0->z;
+    } else {
+        *angle = M_PI;
+        arg5->z = 0.0f;
+        arg5->y = 0.0f;
+        arg5->x = 0.0f;
     }
-
-    *angle = 3.1415927f;
-    arg5->z = 0.0f;
-    arg5->y = 0.0f;
-    arg5->x = 0.0f;
 }
 #endif
 
