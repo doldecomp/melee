@@ -4322,6 +4322,52 @@ lbl_800084EC:
 /* 800084F8 000050D8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+void lbColl_80008440(Hitbox* arg0)
+{
+    s32 var_ctr;
+    s32 var_ctr_2;
+    void* var_r5;
+    void* var_r5_2;
+
+    arg0->victims_1[0].fighter = NULL;
+    arg0->victims_1[1].fighter = NULL;
+    arg0->victims_1[2].fighter = NULL;
+    arg0->victims_1[3].fighter = NULL;
+    arg0->victims_1[4].fighter = NULL;
+    arg0->victims_1[5].fighter = NULL;
+    arg0->victims_1[6].fighter = NULL;
+    arg0->victims_1[7].fighter = NULL;
+    var_r5 = arg0 + 0x40;
+    var_ctr = 0xC - 8U;
+    if (8U < 0xCU) {
+        do {
+            M2C_FIELD(var_r5, Fighter**, 0x74) = NULL;
+            var_r5 += (s32*) 2;
+            var_ctr -= 1;
+        } while (var_ctr != 0);
+    }
+    arg0->x44 = 0;
+    arg0->victims_2[0].fighter = (Fighter*) 0U;
+    arg0->victims_2[1].fighter = (Fighter*) 0U;
+    arg0->victims_2[2].fighter = (Fighter*) 0U;
+    arg0->victims_2[3].fighter = (Fighter*) 0U;
+    arg0->victims_2[4].fighter = (Fighter*) 0U;
+    arg0->victims_2[5].fighter = (Fighter*) 0U;
+    arg0->victims_2[6].fighter = (Fighter*) 0U;
+    arg0->victims_2[7].fighter = (Fighter*) 0U;
+    var_r5_2 = arg0 + 0x40;
+    var_ctr_2 = 0xC - 8U;
+    if (8U < 0xCU) {
+        do {
+            M2C_FIELD(var_r5_2, s32*, 0xD4) = (s32) 0U;
+            var_r5_2 += 8;
+            var_ctr_2 -= 1;
+        } while (var_ctr_2 != 0);
+    }
+    arg0->x45 = 0;
+}
 #endif
 
 #ifdef MWERKS_GEKKO
