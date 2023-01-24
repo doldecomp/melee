@@ -3864,9 +3864,10 @@ extern f32 const lbl_804D7A38;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool lbColl_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y,
-                         f32 hurt_scl_y, f32 hurt_pos_z)
-{ // clang-format off
+asm bool lbColl_80007ECC(Hitbox*, Hurtbox*, Mtx, f32 hit_scl_y, f32 hurt_scl_y,
+                         f32 hurt_pos_z)
+{
+    // clang-format off
     nofralloc
 /* 80007ECC 00004AAC  7C 08 02 A6 */	mflr r0
 /* 80007ED0 00004AB0  90 01 00 04 */	stw r0, 4(r1)

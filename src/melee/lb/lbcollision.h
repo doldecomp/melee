@@ -156,7 +156,7 @@ UNK_RET lbColl_800084FC(UNK_PARAMS);
 UNK_RET lbColl_80008820(UNK_PARAMS);
 void func_80077464();
 int lbColl_80005BB0(Hitbox*, int);
-bool lbColl_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
+bool lbColl_80007ECC(Hitbox*, Hurtbox*, Mtx, f32 hit_scl_y, f32 hurt_scl_y,
                      f32 hurt_pos_z);
 bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32);
 bool lbColl_80007BCC(Hitbox*, HitResult* shield_hit, unk_t, s32, f32, f32, f32);
