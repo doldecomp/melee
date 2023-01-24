@@ -11,7 +11,7 @@
 #ifdef M2CTX
 #define UNK_T M2C_UNK
 #else
-#define UNK_T void*
+#define UNK_T unk_t
 #endif
 #endif
 
