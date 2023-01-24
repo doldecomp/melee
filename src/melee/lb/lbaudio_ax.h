@@ -29,6 +29,6 @@ void func_80023870(unk_t, s32, s32, s32);
 s32 func_8002305C(s32, s32);
 void func_80026510(HSD_GObj*);
 enum_t func_800265C4(HSD_GObj*, enum_t sfx);
-void func_80024184(void);
+int func_80024184(int, int, int, int);
 
 #endif

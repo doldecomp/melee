@@ -19,7 +19,7 @@ struct HitResult {
 
 struct HitVictim {
     /// @at{0} @sz{4}
-    HSD_GObj* victim;
+    UNK_T victim;
 
     /// @at{4} @sz{4}
     /// @brief The number of frames needed to pass before this entity can be hit
@@ -154,7 +154,6 @@ bool lbColl_8000ACFC(UNK_T, Hitbox*);
 UNK_RET lbColl_80008688(UNK_PARAMS);
 UNK_RET lbColl_800084FC(UNK_PARAMS);
 UNK_RET lbColl_80008820(UNK_PARAMS);
-void func_80077464();
 int lbColl_80005BB0(Hitbox*, int);
 bool lbColl_80007ECC(Hitbox*, Hurtbox*, Mtx, f32 hit_scl_y, f32 hurt_scl_y,
                      f32 hurt_pos_z);

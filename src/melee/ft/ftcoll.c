@@ -3159,7 +3159,7 @@ void func_80078A2C(HSD_GObj* this_gobj)
                                     if (lbColl_80007ECC(
                                             this_hit,
                                             &victim_fp->x11A0_fighterHurtbox[j],
-                                            func_8007F804(victim_fp),
+                                            *func_8007F804(victim_fp),
                                             this_fp->x34_scale.y,
                                             victim_fp->x34_scale.y,
                                             victim_fp->xB0_pos.z) != 0)
