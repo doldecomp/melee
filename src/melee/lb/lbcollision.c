@@ -3862,7 +3862,7 @@ lbl_80007E90:
 
 extern f32 const lbl_804D7A38;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool lbColl_80007ECC(Hitbox*, Hurtbox*, Mtx, f32 hit_scl_y, f32 hurt_scl_y,
                          f32 hurt_pos_z)
@@ -3982,6 +3982,61 @@ lbl_80008030:
 /* 80008058 00004C38  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_80007ECC(Hitbox* arg0, Hurtbox* arg1, Mtx arg2, f32 hit_scl_y,
+                     f32 hurt_scl_y, f32 hurt_pos_z)
+{
+    Vec3 sp70;
+    Vec3 sp64;
+    int* sp8;
+    HSD_JObj* temp_r31;
+    HSD_JObj* temp_r31_2;
+    Mtx* var_r9;
+    f32 var_f1;
+    Mtx sp34;
+
+    if ((enum Tangibility) arg1->tangiblity == Vulnerable) {
+        if (!(((u8) M2C_FIELD(arg1, u8*, 0x24) >> 7U) & 1)) {
+            func_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
+            func_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
+            if (arg2 != NULL) {
+                arg1->b_pos.z = hurt_pos_z;
+                arg1->a_pos.z = hurt_pos_z;
+            }
+            M2C_FIELD(arg1, u8*, 0x24) =
+                (u8) (M2C_FIELD(arg1, u8*, 0x24) | 0x80);
+        }
+        if (arg2 != NULL) {
+            temp_r31 = arg1->bone;
+            if (temp_r31 == NULL) {
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+            }
+            HSD_JObjUnkMtxPtr(temp_r31);
+            PSMTXConcat(arg2, (f32(*)[4]) temp_r31->mtx[0], sp34);
+        }
+        if (arg2 != NULL) {
+            var_r9 = &sp34;
+        } else {
+            temp_r31_2 = arg1->bone;
+            if (temp_r31_2 == NULL) {
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+            }
+            HSD_JObjUnkMtxPtr(temp_r31_2);
+            var_r9 = &temp_r31_2->mtx;
+        }
+        if (((u8) arg0->x43 >> 6U) & 1) {
+            var_f1 = arg0->scl;
+        } else {
+            var_f1 = arg0->scl * hit_scl_y;
+        }
+        sp8 = &arg0->x70;
+        return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
+                               &arg1->b_pos, &sp70, &sp64, *var_r9, &arg0->x64,
+                               var_f1, arg1->scl, 3.0f * hurt_scl_y);
+    }
+    return 0;
+}
 #endif
 
 extern f32 const lbl_804D7A3C;
