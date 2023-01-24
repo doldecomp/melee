@@ -200,10 +200,10 @@ void ftNess_AttackS4_Coll(HSD_GObj* gobj);
 
 // Yo-Yo item setup & math
 
-/// Ness Yo-Yo Hitbox Position Update
+/// Ness Yo-Yo HitCapsule Position Update
 void ftNess_YoyoUpdateHitPos(HSD_GObj* gobj);
 
-/// Ness D-Smash Hitbox Refresh Timer
+/// Ness D-Smash HitCapsule Refresh Timer
 void ftNess_YoyoCheckTimedRehit(HSD_GObj* gobj);
 
 /// Check collision of Bone (Yo-Yo attach bone)

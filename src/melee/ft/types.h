@@ -1497,14 +1497,14 @@ struct Fighter {
     /* 0x8A8 */ f32 x8A8_unk;
     /* 0x8AC */ HSD_JObj* x8AC_animSkeleton;
     u8 filler_x8AC[0x914 - 0x8B0];
-    /* 0x914 */ Hitbox x914[4];
+    /* 0x914 */ HitCapsule x914[4];
     u8 filler_xDF4[0x1064 - 0xDF4];
-    /* 0x1064 */ Hitbox x1064_thrownHitbox;
+    /* 0x1064 */ HitCapsule x1064_thrownHitbox;
     /* 0x119C */ u8 x119C_teamUnk;
     /* 0x119D */ u8 grabber_unk1;
     /* 0x119E */ u8 x119E_hurtboxNum;
     /* 0x119F */ u8 x119F;
-    /* 0x11A0 */ Hurtbox x11A0_fighterHurtbox[15];
+    /* 0x11A0 */ HurtCapsule x11A0_fighterHurtbox[15];
     /* 0x1614 */ unk_t x1614;
     /* 0x1618 */ u8 filler_x1618[0x166C - 0x1618];
     /* 0x166C */ u32 x166C;

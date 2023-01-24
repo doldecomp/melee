@@ -35,7 +35,7 @@ int lbl_803B9880[] = {
     0x00035BAF, 0x00035BB2, 0x00035BB5, 0x00083D60, 0x00083D60, 0x0000020D,
 };
 
-int lbColl_80005BB0(Hitbox* arg0, int arg1)
+int lbColl_80005BB0(HitCapsule* arg0, int arg1)
 {
     uint temp_r0;
     uint temp_r6;
@@ -3639,7 +3639,7 @@ void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
 }
 #endif
 
-bool lbColl_80007AFC(Hitbox* a, Hitbox* b, f32 x, f32 y)
+bool lbColl_80007AFC(HitCapsule* a, HitCapsule* b, f32 x, f32 y)
 {
     f32 a_val, b_val;
 
@@ -3671,8 +3671,8 @@ extern f32 const lbl_804D7A34;
 
 #ifdef MUST_MATCH
 #pragma push
-asm bool lbColl_80007BCC(Hitbox*, HitResult* shield_hit, unk_t, s32, f32, f32,
-                         f32)
+asm bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, unk_t, s32, f32,
+                         f32, f32)
 {
     // clang-format off
     nofralloc
@@ -3794,8 +3794,8 @@ lbl_80007D3C:
 #pragma pop
 #else
 
-bool lbColl_80007BCC(Hitbox* arg0, HitResult* shield_hit, void* arg2, s32 arg3,
-                     f32 arg4, f32 arg5, f32 arg6)
+bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
+                     s32 arg3, f32 arg4, f32 arg5, f32 arg6)
 {
     Vec3 sp74;
     Vec3 sp68;
@@ -3903,7 +3903,7 @@ void lbColl_JObjSetupMatrix(HSD_JObj* arg0)
 
 #ifdef MUST_MATCH
 #pragma push
-asm void lbColl_80007DD8(Hitbox*, HitResult*, Mtx, unk_t, unk_t, f32)
+asm void lbColl_80007DD8(HitCapsule*, HitResult*, Mtx, unk_t, unk_t, f32)
 {
     // clang-format off
     nofralloc
@@ -3979,7 +3979,7 @@ lbl_80007E90:
 #pragma pop
 #else
 
-void lbColl_80007DD8(Hitbox* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
+void lbColl_80007DD8(HitCapsule* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
                      unk_t arg4, f32 arg5)
 {
     unk_t sp5C = NULL;
@@ -4021,8 +4021,8 @@ extern f32 const lbl_804D7A38;
 
 #ifdef MUST_MATCH
 #pragma push
-asm bool lbColl_80007ECC(Hitbox*, Hurtbox*, Mtx, f32 hit_scl_y, f32 hurt_scl_y,
-                         f32 hurt_pos_z)
+asm bool lbColl_80007ECC(HitCapsule*, HurtCapsule*, Mtx, f32 hit_scl_y,
+                         f32 hurt_scl_y, f32 hurt_pos_z)
 {
     // clang-format off
     nofralloc
@@ -4141,8 +4141,8 @@ lbl_80008030:
 #pragma pop
 #else
 
-bool lbColl_80007ECC(Hitbox* arg0, Hurtbox* arg1, Mtx arg2, f32 hit_scl_y,
-                     f32 hurt_scl_y, f32 hurt_pos_z)
+bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
+                     f32 hit_scl_y, f32 hurt_scl_y, f32 hurt_pos_z)
 {
     Vec3 sp70;
     Vec3 sp64;
@@ -4201,7 +4201,7 @@ extern f32 const lbl_804D7A40;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32){
+asm bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32){
     // clang-format off
     nofralloc
 /* 8000805C 00004C3C  7C 08 02 A6 */	mflr r0
@@ -4343,8 +4343,8 @@ lbl_8000821C:
 #pragma pop
 #else
 
-s32 lbColl_8000805C(Hitbox* arg0, Hurtbox* arg1, void* arg2, s32 arg3, f32 arg4,
-                    f32 arg5, f32 arg6)
+s32 lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, void* arg2, s32 arg3,
+                    f32 arg4, f32 arg5, f32 arg6)
 {
     Vec3 sp74;
     Vec3 sp68;
@@ -4407,7 +4407,7 @@ s32 lbColl_8000805C(Hitbox* arg0, Hurtbox* arg1, void* arg2, s32 arg3, f32 arg4,
 
 #ifdef MUST_MATCH
 #pragma push
-asm bool lbColl_80008248(Hitbox*, Hurtbox*, Mtx, f32, f32, f32)
+asm bool lbColl_80008248(HitCapsule*, HurtCapsule*, Mtx, f32, f32, f32)
 { // clang-format off
     nofralloc
 /* 80008248 00004E28  7C 08 02 A6 */	mflr r0
@@ -4518,7 +4518,7 @@ lbl_80008364:
 #pragma pop
 #else
 
-inline void checkPos(Hurtbox* hurt, Mtx mtx, f32 arg5)
+inline void checkPos(HurtCapsule* hurt, Mtx mtx, f32 arg5)
 {
     if (!hurt->skip_update_pos) {
         func_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
@@ -4533,7 +4533,7 @@ inline void checkPos(Hurtbox* hurt, Mtx mtx, f32 arg5)
     }
 }
 
-inline void mtxConcat(Hurtbox* hurt, Mtx mtx)
+inline void mtxConcat(HurtCapsule* hurt, Mtx mtx)
 {
     Mtx sp34;
     if (mtx != NULL) {
@@ -4544,7 +4544,7 @@ inline void mtxConcat(Hurtbox* hurt, Mtx mtx)
     }
 }
 
-inline Mtx* pickMtx(Hurtbox* hurt, Mtx mtx)
+inline Mtx* pickMtx(HurtCapsule* hurt, Mtx mtx)
 {
     Mtx* var_r9;
     Mtx sp34;
@@ -4558,7 +4558,7 @@ inline Mtx* pickMtx(Hurtbox* hurt, Mtx mtx)
     return var_r9;
 }
 
-inline f32 getHit1C(Hitbox* hit, f32 arg3)
+inline f32 getHit1C(HitCapsule* hit, f32 arg3)
 {
     f32 var_f1;
     if (hit->x43_b1)
@@ -4568,8 +4568,8 @@ inline f32 getHit1C(Hitbox* hit, f32 arg3)
     return var_f1;
 }
 
-bool lbColl_80008248(Hitbox* hit, Hurtbox* hurt, Mtx mtx, f32 arg3, f32 arg4,
-                     f32 arg5)
+bool lbColl_80008248(HitCapsule* hit, HurtCapsule* hurt, Mtx mtx, f32 arg3,
+                     f32 arg4, f32 arg5)
 {
     Vec3* sp70 = NULL;
     Vec3* sp64 = NULL;
@@ -4583,7 +4583,7 @@ bool lbColl_80008248(Hitbox* hit, Hurtbox* hurt, Mtx mtx, f32 arg3, f32 arg4,
 }
 #endif
 
-void lbColl_800083C4(Hurtbox* arg0)
+void lbColl_800083C4(HurtCapsule* arg0)
 {
     if (arg0->skip_update_pos)
         return;
@@ -4593,19 +4593,19 @@ void lbColl_800083C4(Hurtbox* arg0)
     arg0->skip_update_pos = true;
 }
 
-void lbColl_80008428(Hitbox* arg0)
+void lbColl_80008428(HitCapsule* arg0)
 {
     arg0->tangiblity = 0;
 }
 
-void lbColl_80008434(Hitbox* arg0)
+void lbColl_80008434(HitCapsule* arg0)
 {
     arg0->tangiblity = 1;
 }
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_80008440(Hitbox*)
+asm void lbColl_80008440(HitCapsule*)
 { // clang-format off
     nofralloc
 /* 80008440 00005020  38 80 00 00 */	li r4, 0
@@ -4667,7 +4667,7 @@ lbl_800084EC:
 #pragma pop
 #else
 
-void lbColl_80008440(Hitbox* arg0)
+void lbColl_80008440(HitCapsule* arg0)
 {
     s32 var_ctr;
     s32 var_ctr_2;
@@ -4715,7 +4715,7 @@ void lbColl_80008440(Hitbox* arg0)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_800084FC(Hitbox*, Hitbox*)
+asm void lbColl_800084FC(HitCapsule*, HitCapsule*)
 { // clang-format off
     nofralloc
 /* 800084FC 000050DC  81 23 00 74 */	lwz r9, 0x74(r3)
@@ -6865,7 +6865,7 @@ extern unk_t lbl_803B9928;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_8000A244(Hurtbox* arg0, u32 arg1, Mtx arg2, f32 arg3)
+asm void lbColl_8000A244(HurtCapsule* arg0, u32 arg1, Mtx arg2, f32 arg3)
 { // clang-format off
     nofralloc
 /* 8000A244 00006E24  7C 08 02 A6 */	mflr r0
@@ -7759,7 +7759,7 @@ lbl_8000ACDC:
 #pragma pop
 #endif
 
-bool lbColl_8000ACFC(UNK_T victim, Hitbox* hitbox)
+bool lbColl_8000ACFC(UNK_T victim, HitCapsule* hitbox)
 {
     HitVictim* victims = hitbox->victims_1;
     size_t const count = ARRAY_SIZE(hitbox->victims_1);

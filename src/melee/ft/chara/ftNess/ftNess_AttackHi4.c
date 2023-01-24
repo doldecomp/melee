@@ -15,7 +15,7 @@
 void ftNess_YoyoUpdateHitPos(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    Hitbox* hitbox_data = &fp->x914[0];
+    HitCapsule* hitbox_data = &fp->x914[0];
 
     if (hitbox_data->tangiblity != Vulnerable) {
         if (fp->sa.ness.x2230_yoyoHitboxPos.x != 0.0f ||
@@ -29,7 +29,7 @@ void ftNess_YoyoUpdateHitPos(HSD_GObj* fighter_gobj)
 void ftNess_YoyoCheckTimedRehit(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    Hitbox* hitbox_data;
+    HitCapsule* hitbox_data;
 
     if (fp->x2200_ftcmd_var0 == 0) {
         if (fp->nessVars[0].AttackHi4.yoyoRehitTimer > 0) {

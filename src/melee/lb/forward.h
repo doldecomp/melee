@@ -1,8 +1,8 @@
 #ifndef MELEE_LB_FORWARD_H
 #define MELEE_LB_FORWARD_H
 
-typedef struct Hurtbox Hurtbox;
-typedef struct Hitbox Hitbox;
+typedef struct HurtCapsule HurtCapsule;
+typedef struct HitCapsule HitCapsule;
 typedef struct HitVictim HitVictim;
 typedef struct HitResult HitResult;
 

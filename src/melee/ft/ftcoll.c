@@ -318,7 +318,8 @@ extern bool* lbl_804D6560;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80076808(Fighter* attacker, Hitbox*, int, Fighter* victim, int)
+asm void func_80076808(Fighter* attacker, HitCapsule*, int, Fighter* victim,
+                       int)
 { // clang-format off
     nofralloc
 /* 80076808 000733E8  7C 08 02 A6 */	mflr r0
@@ -449,7 +450,7 @@ f64 const lbl_804D82F8 = 4503601774854144.0;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool func_8007699C(Fighter*, Hitbox*, Fighter*, Hitbox*)
+asm bool func_8007699C(Fighter*, HitCapsule*, Fighter*, HitCapsule*)
 { // clang-format off
     nofralloc
 /* 8007699C 0007357C  7C 08 02 A6 */	mflr r0
@@ -677,7 +678,7 @@ lbl_80076CA8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool func_80076CBC(Fighter*, Hitbox*, Fighter*)
+asm bool func_80076CBC(Fighter*, HitCapsule*, Fighter*)
 { // clang-format off
     nofralloc
 /* 80076CBC 0007389C  7C 08 02 A6 */	mflr r0
@@ -840,7 +841,7 @@ extern unk_t lbl_80459598;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool func_80076ED8(Fighter*, Hitbox*, Fighter*, Hurtbox*)
+asm bool func_80076ED8(Fighter*, HitCapsule*, Fighter*, HurtCapsule*)
 { // clang-format off
     nofralloc
 /* 80076ED8 00073AB8  7C 08 02 A6 */	mflr r0
@@ -2919,7 +2920,7 @@ lbl_80078A10:
 
 extern f32 const lbl_804D8310;
 
-inline Hitbox* ftHitGetPtr(Fighter* fp, u32 i)
+inline HitCapsule* ftHitGetPtr(Fighter* fp, u32 i)
 {
     return &fp->x914[i];
 }
@@ -3120,7 +3121,7 @@ void func_80078A2C(HSD_GObj* this_gobj)
     u8 unused[16];
 #endif
     u32 i;
-    Hitbox* this_hit;
+    HitCapsule* this_hit;
     u32 j;
 
     this_fp = this_gobj->user_data;
@@ -5450,7 +5451,7 @@ asm void func_8007AB80(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8007ABD0(Hitbox*, u32, HSD_GObj*)
+asm void func_8007ABD0(HitCapsule*, u32, HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8007ABD0 000777B0  7C 08 02 A6 */	mflr r0

@@ -31,7 +31,7 @@ void func_80078C70(HSD_GObj*);
 void func_8007925C(HSD_GObj*);
 void func_8007AB48(HSD_GObj*);
 void func_8007AB80(HSD_GObj*);
-void func_8007ABD0(Hitbox*, u32 damageAmount, HSD_GObj*);
+void func_8007ABD0(HitCapsule*, u32 damageAmount, HSD_GObj*);
 void func_8007AE80(HSD_GObj*);
 void func_8007AEE0(HSD_GObj*);
 void func_8007AF28(HSD_GObj* fighter_gobj);
@@ -53,7 +53,7 @@ void func_8007BC90(HSD_GObj*);
 void func_8007BE3C(HSD_GObj*);
 
 ///  Update hitbox positions
-void func_8007B8A8(Hitbox*, Vec3*);
+void func_8007B8A8(HitCapsule*, Vec3*);
 
 /// Enable Reflect Bubble Update
 void func_8007AEF8(HSD_GObj*);
@@ -66,12 +66,12 @@ void func_8007B7FC(Fighter*, s32);
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID);
 void func_80076640(void);
 void func_80076764(void);
-void func_80076808(Fighter* attacker, Hitbox*, int, Fighter* victim, int);
+void func_80076808(Fighter* attacker, HitCapsule*, int, Fighter* victim, int);
 void func_800768A0(void);
-bool func_8007699C(Fighter*, Hitbox*, Fighter*, Hitbox*);
+bool func_8007699C(Fighter*, HitCapsule*, Fighter*, HitCapsule*);
 void func_800784B4(void);
-bool func_80076CBC(Fighter*, Hitbox*, Fighter*);
-bool func_80076ED8(Fighter*, Hitbox*, Fighter*, Hurtbox*);
+bool func_80076CBC(Fighter*, HitCapsule*, Fighter*);
+bool func_80076ED8(Fighter*, HitCapsule*, Fighter*, HurtCapsule*);
 void func_8007891C(void);
 void func_80078488(void);
 void func_80077970(void);

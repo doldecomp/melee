@@ -312,8 +312,8 @@ struct itHit {
     Vec3 pos;
     Vec3 x58_posPrev;
     Vec3 x64_posColl;      // 0x64   position of hurt collision
-    f32 x70_coll_distance; // 0x70   Distance From Collding Hurtbox (Used for
-                           // phantom hit collision calculation)
+    f32 x70_coll_distance; // 0x70   Distance From Collding HurtCapsule (Used
+                           // for phantom hit collision calculation)
     HitVictim x74_tipLog[12];
     HitVictim xD4_damageLog[12];
     s32 x134;
@@ -422,7 +422,7 @@ struct Item {
     itHit x5D4_hitboxes[4];
     s32 xAC4_ignoreItemID; // Cannot hit items with this index?
     s32 xAC8_hurtboxNum;   // Number of hurtboxes this item has
-    Hurtbox xACC_itemHurtbox[2];
+    HurtCapsule xACC_itemHurtbox[2];
     u32 xB64;
     u8 xB68;
     u8 xB69;

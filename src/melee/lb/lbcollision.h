@@ -27,7 +27,7 @@ struct HitVictim {
     s32 iframes;
 };
 
-struct Hitbox {
+struct HitCapsule {
     /// @at{0} @sz{4}
     Tangibility tangiblity;
 
@@ -108,7 +108,7 @@ struct Hitbox {
     };
 };
 
-struct Hurtbox {
+struct HurtCapsule {
     /// @at{0} @sz{4}
     Tangibility tangiblity;
 
@@ -148,22 +148,23 @@ struct Hurtbox {
 };
 
 void lbColl_JObjSetupMatrix(HSD_JObj*);
-bool lbColl_80008248(Hitbox*, Hurtbox*, Mtx, f32, f32, f32);
-void lbColl_80008440(Hitbox*);
-void lbColl_80008434(Hitbox*);
-bool lbColl_8000ACFC(UNK_T, Hitbox*);
+bool lbColl_80008248(HitCapsule*, HurtCapsule*, Mtx, f32, f32, f32);
+void lbColl_80008440(HitCapsule*);
+void lbColl_80008434(HitCapsule*);
+bool lbColl_8000ACFC(UNK_T, HitCapsule*);
 UNK_RET lbColl_80008688(UNK_PARAMS);
-void lbColl_800084FC(Hitbox* src, Hitbox* dst);
+void lbColl_800084FC(HitCapsule* src, HitCapsule* dst);
 UNK_RET lbColl_80008820(UNK_PARAMS);
-int lbColl_80005BB0(Hitbox*, int);
-bool lbColl_80007ECC(Hitbox*, Hurtbox*, Mtx, f32 hit_scl_y, f32 hurt_scl_y,
-                     f32 hurt_pos_z);
-bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32);
-bool lbColl_80007BCC(Hitbox*, HitResult* shield_hit, unk_t, s32, f32, f32, f32);
-bool lbColl_80007AFC(Hitbox*, Hitbox*, f32, f32);
-void lbColl_80007DD8(Hitbox*, HitResult*, Mtx, unk_t, unk_t, f32);
+int lbColl_80005BB0(HitCapsule*, int);
+bool lbColl_80007ECC(HitCapsule*, HurtCapsule*, Mtx, f32 hit_scl_y,
+                     f32 hurt_scl_y, f32 hurt_pos_z);
+bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32);
+bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, unk_t, s32, f32, f32,
+                     f32);
+bool lbColl_80007AFC(HitCapsule*, HitCapsule*, f32, f32);
+void lbColl_80007DD8(HitCapsule*, HitResult*, Mtx, unk_t, unk_t, f32);
 UNK_RET lbColl_80008D30(UNK_PARAMS);
-void lbColl_80008428(Hitbox*);
+void lbColl_80008428(HitCapsule*);
 bool lbColl_80005C44(Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
 f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, f32*);
 UNK_RET lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*);
@@ -171,11 +172,13 @@ bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
 bool lbColl_800067F8(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32, f32);
 bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Mtx, Vec3*, f32,
                      f32 scl, f32);
+
 /// @param[out] angle
 void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*, f32* angle, f32,
                      f32);
+
 UNK_RET lbColl_80007B78(Mtx, Mtx, f32, f32);
-void lbColl_800083C4(Hurtbox*);
+void lbColl_800083C4(HurtCapsule*);
 UNK_RET lbColl_800089B8(UNK_PARAMS);
 UNK_RET lbColl_80008A5C(UNK_PARAMS);
 UNK_RET lbColl_80008DA4(UNK_PARAMS);
@@ -186,7 +189,7 @@ UNK_RET lbColl_80009F54(UNK_PARAMS);
 UNK_RET lbColl_8000A044(UNK_PARAMS);
 UNK_RET lbColl_8000A10C(UNK_PARAMS);
 UNK_RET lbColl_8000A1A8(UNK_PARAMS);
-void lbColl_8000A244(Hurtbox*, u32, Mtx, f32);
+void lbColl_8000A244(HurtCapsule*, u32, Mtx, f32);
 UNK_RET lbColl_8000A460(UNK_PARAMS);
 UNK_RET lbColl_8000A584(UNK_PARAMS);
 UNK_RET lbColl_8000A78C(UNK_PARAMS);
