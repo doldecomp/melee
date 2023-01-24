@@ -4595,12 +4595,12 @@ void lbColl_800083C4(HurtCapsule* arg0)
 
 void lbColl_80008428(HitCapsule* arg0)
 {
-    arg0->tangibility = 0;
+    arg0->state = HitCapsule_Disabled;
 }
 
 void lbColl_80008434(HitCapsule* arg0)
 {
-    arg0->tangibility = 1;
+    arg0->state = HitCapsule_Enabled;
 }
 
 #ifdef MWERKS_GEKKO

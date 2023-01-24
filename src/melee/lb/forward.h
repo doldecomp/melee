@@ -43,4 +43,10 @@ typedef enum HitElement {
     HitElement_Leadead,
 } HitElement;
 
+typedef enum HitCapsuleState {
+    HitCapsule_Disabled,
+    HitCapsule_Enabled,
+    HitCapsule_Unk2,
+} HitCapsuleState;
+
 #endif

@@ -29,7 +29,7 @@ struct HitVictim {
 
 struct HitCapsule {
     /// @at{0} @sz{4}
-    Tangibility tangibility;
+    HitCapsuleState state;
 
     /// @at{4} @sz{C}
     /// The offset of point @e a of the capsule.
