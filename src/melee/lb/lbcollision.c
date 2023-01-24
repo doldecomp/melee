@@ -490,7 +490,7 @@ f32 lbColl_80005EBC(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3)
 
 #ifdef MUST_MATCH
 #pragma push
-asm UNK_RET lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*){
+asm f32 lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*){
     // clang-format off
     nofralloc
 /* 80005FC0 00002BA0  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -552,36 +552,44 @@ lbl_80006064:
 #pragma pop
 #else
 
-UNK_RET lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3)
+f32 lbColl_80005FC0(Vec3* a, Vec3* b, Vec3* c, f32* out)
 {
-    f32 sp58;
-    f32 sp54;
-    f32 sp50;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 temp_f1;
-    f32 temp_f5;
-    f32 temp_f6;
-    f32 var_f4;
+    {
+        Vec3 temp_a;
+        temp_a.x = a->x;
+        temp_a.y = a->y;
+        temp_a.z = a->z;
+        {
+            f32 diff_ba_x = b->x - a->x;
+            f32 diff_ba_y = b->y - a->y;
 
-    sp50 = arg0->x;
-    sp54 = arg0->y;
-    sp58 = arg0->z;
-    temp_f5 = arg1->x - arg0->x;
-    temp_f6 = arg1->y - arg0->y;
-    sp38 = arg2->x;
-    sp3C = arg2->y;
-    sp40 = arg2->z;
-    temp_f1 = -((temp_f5 * (sp50 - sp38)) + (temp_f6 * (sp54 - sp3C))) /
-              ((temp_f5 * temp_f5) + (temp_f6 * temp_f6));
-    var_f4 = temp_f1;
-    if (temp_f1 > (f32) lbl_804D78E0) {
-        var_f4 = lbl_804D78E8;
-    } else if (var_f4 < (f32) lbl_804D78F0) {
-        var_f4 = lbl_804D78D8;
+            Vec3 temp_c;
+            temp_c.x = c->x;
+            temp_c.y = c->y;
+            temp_c.z = c->z;
+            {
+                f32 result0 = -(diff_ba_x * (temp_a.x - temp_c.x) +
+                                (diff_ba_y * (temp_a.y - temp_c.y))) /
+                              (diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y);
+                {
+                    f32 result1 = result0;
+                    if (result0 > (f32) 1.0) {
+                        result1 = 1.0f;
+                    } else if (result1 < (f32) 0.0) {
+                        result1 = 0.0f;
+                    }
+                    {
+                        f32 x, y;
+
+                        y = diff_ba_y * result1 + temp_a.y - c->y;
+                        *out = result1;
+                        x = diff_ba_x * result1 + temp_a.x - c->x;
+                        return x * x + y * y;
+                    }
+                }
+            }
+        }
     }
-    *arg3 = var_f4;
 }
 #endif
 
@@ -1104,18 +1112,6 @@ lbl_800067AC:
 } // clang-format on
 #pragma pop
 #else
-
-inline bool approximatelyZero(f32 x)
-{
-    bool result;
-
-    if ((x < 0.00001f) && (x > -0.00001f))
-        result = true;
-    else
-        result = false;
-
-    return result;
-}
 
 inline bool end(Vec3* a, Vec3* b, f32 unk_sum)
 {

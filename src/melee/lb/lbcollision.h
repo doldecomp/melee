@@ -157,7 +157,7 @@ UNK_RET lbColl_80008D30(UNK_PARAMS);
 void lbColl_80008428(HitCapsule*);
 bool lbColl_80005C44(Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
 f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, f32*);
-UNK_RET lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*);
+f32 lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*);
 bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
 bool lbColl_800067F8(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32, f32);
 bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Mtx, Vec3*, f32,
@@ -185,5 +185,17 @@ UNK_RET lbColl_8000A584(UNK_PARAMS);
 UNK_RET lbColl_8000A78C(UNK_PARAMS);
 bool lbColl_8000A95C(HitResult*, unk_t, Mtx*, f32 pos_z);
 UNK_RET lbColl_8000AB2C(UNK_PARAMS);
+
+inline bool approximatelyZero(f32 x)
+{
+    bool result;
+
+    if ((x < 0.00001f) && (x > -0.00001f))
+        result = true;
+    else
+        result = false;
+
+    return result;
+}
 
 #endif
