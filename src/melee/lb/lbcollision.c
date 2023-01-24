@@ -90,7 +90,7 @@ asm bool lbColl_80005C44(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
 /* 80005C94 00002874  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 80005C98 00002878  40 80 00 0C */	bge lbl_80005CA4
 /* 80005C9C 0000287C  38 60 00 00 */	li r3, 0
-/* 80005CA0 00002880  48 00 02 14 */	b lbl_80005EB4
+             /* 80005CA0 00002880  48 00 02 14 */	b lbl_80005EB4
 lbl_80005CA4:
 /* 80005CA4 00002884  EC 03 10 28 */	fsubs f0, f3, f2
 /* 80005CA8 00002888  FC 00 08 40 */	fcmpo cr0, f0, f1
@@ -1461,7 +1461,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool lbColl_800067F8(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32,
                          f32)
@@ -1912,15 +1912,9 @@ lbl_80006E1C:
 #pragma pop
 #else
 
-bool lbColl_800067F8(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
-                     Vec3* arg5, f32 arg6, f32 arg7, f32 arg8)
+bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
+                     f32 p, f32 q, f32 r)
 {
-    f32 spF8;
-    f32 spF4;
-    f32 spF0;
-    f32 spEC;
-    f32 spE8;
-    f32 spE4;
     f32 spA4;
     f32 spA0;
     f32 sp90;
@@ -1932,15 +1926,6 @@ bool lbColl_800067F8(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
     f32 sp60;
     f32 sp5C;
     f32 sp58;
-    f32 sp48;
-    f32 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    f32 sp30;
-    f32 sp2C;
-    f32 sp28;
     f32 temp_f0;
     f32 temp_f10;
     f32 temp_f10_2;
@@ -1948,19 +1933,15 @@ bool lbColl_800067F8(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
     f32 temp_f11_2;
     f32 temp_f12;
     f32 temp_f13;
-    f32 temp_f1;
+    f32 b_y;
     f32 temp_f1_2;
     f32 temp_f1_3;
-    f32 temp_f25;
     f32 temp_f28;
     f32 temp_f29;
-    f32 temp_f2;
-    f32 temp_f2_2;
     f32 temp_f2_3;
     f32 temp_f2_4;
     f32 temp_f2_5;
     f32 temp_f2_6;
-    f32 temp_f30;
     f32 temp_f31;
     f32 temp_f3;
     f32 temp_f3_2;
@@ -1982,7 +1963,6 @@ bool lbColl_800067F8(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
     f32 temp_f8_2;
     f32 temp_f9;
     f32 temp_f9_2;
-    f32 temp_r0;
     f32 temp_r0_2;
     f32 var_f0;
     f32 var_f1;
@@ -1990,211 +1970,220 @@ bool lbColl_800067F8(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
     f32 var_f23;
     f32 var_f24;
     f32 var_f2;
-    f32 var_f2_2;
-    bool var_r0;
-    bool var_r0_2;
-    bool var_r0_3;
 
-    temp_f25 = arg6 + arg7;
-    sp28 = arg0->x;
-    sp2C = arg0->y;
-    temp_r0 = arg0->z;
-    sp30 = temp_r0;
-    spF0 = sp28;
-    spF4 = sp2C;
-    spF8 = temp_r0;
-    sp34 = arg2->x;
-    sp38 = arg2->y;
-    temp_r0_2 = arg2->z;
-    sp3C = temp_r0_2;
-    spE4 = sp34;
-    spE8 = sp38;
-    spEC = temp_r0_2;
-    temp_f0 = arg1->x;
-    if (spF0 > temp_f0) {
-        temp_f2 = spF0 + temp_f25;
-        if ((temp_f2 < spE4) && (temp_f2 < arg3->x)) {
-            return 0;
-        }
-        temp_f2_2 = temp_f0 - temp_f25;
-        if ((temp_f2_2 > spE4) && (temp_f2_2 > arg3->x)) {
-            return 0;
-        }
-        goto block_13;
-    }
-    temp_f2_3 = spF0 - temp_f25;
-    if ((temp_f2_3 > spE4) && (temp_f2_3 > arg3->x)) {
-        return 0;
-    }
-    temp_f2_4 = temp_f0 + temp_f25;
-    if ((temp_f2_4 < spE4) && (temp_f2_4 < arg3->x)) {
-        return 0;
-    }
-block_13:
-    temp_f1 = arg1->y;
-    if (spF4 > temp_f1) {
-        temp_f3 = spF4 + temp_f25;
-        if ((temp_f3 < spE8) && (temp_f3 < arg3->y)) {
-            return 0;
-        }
-        temp_f3_2 = temp_f1 - temp_f25;
-        if ((temp_f3_2 > spE8) && (temp_f3_2 > arg3->y)) {
-            return 0;
-        }
-        goto block_26;
-    }
-    temp_f3_3 = spF4 - temp_f25;
-    if ((temp_f3_3 > spE8) && (temp_f3_3 > arg3->y)) {
-        return 0;
-    }
-    temp_f3_4 = temp_f1 + temp_f25;
-    if ((temp_f3_4 < spE8) && (temp_f3_4 < arg3->y)) {
-        return 0;
-    }
-block_26:
-    temp_f30 = temp_f1 - spF4;
-    temp_f3_5 = arg3->y;
-    temp_f10 = spF4 - spE8;
-    temp_f28 = temp_f3_5 - spE8;
-    temp_f31 = temp_f0 - spF0;
-    temp_f2_5 = arg3->x;
-    temp_f29 = temp_f2_5 - spE4;
-    temp_f13 = (temp_f31 * temp_f29) + (temp_f30 * temp_f28);
-    temp_f12 = (temp_f29 * temp_f29) + (temp_f28 * temp_f28);
-    temp_f11 = (temp_f31 * temp_f31) + (temp_f30 * temp_f30);
-    temp_f8 = spF0 - spE4;
-    temp_f7 = (temp_f29 * temp_f8) + (temp_f28 * temp_f10);
-    temp_f6 = (temp_f31 * temp_f8) + (temp_f30 * temp_f10);
-    temp_f5 = (temp_f11 * temp_f12) - (temp_f13 * temp_f13);
-    if ((temp_f12 < 0.00001f) && (temp_f12 > -0.00001f)) {
-        var_r0 = 1;
-    } else {
-        var_r0 = 0;
-    }
-    if (var_r0 != 0) {
-        if ((temp_f11 < 0.00001f) && (temp_f11 > -0.00001f)) {
-            var_r0_2 = 1;
-        } else {
-            var_r0_2 = 0;
-        }
-        if (var_r0_2 != 0) {
-            var_f0 = 0.0f;
-            var_f24 = 0.0f;
-        } else {
-            var_f24 = 0.0f;
-            temp_f1_2 = -temp_f6 / temp_f11;
-            var_f0 = temp_f1_2;
-            if (temp_f1_2 > (f32) 1.0) {
-                var_f0 = 1.0f;
-            } else if (var_f0 < (f32) 0.0) {
-                var_f0 = 0.0f;
-            }
-        }
-    } else {
-        if ((temp_f5 < 0.00001f) && (temp_f5 > -0.00001f)) {
-            var_r0_3 = 1;
-        } else {
-            var_r0_3 = 0;
-        }
-        if (var_r0_3 != 0) {
-            temp_f7_2 = (f32) ((0.5 * (f64) temp_f28) + (f64) spE8);
-            temp_f5_2 = (f32) ((0.5 * (f64) temp_f29) + (f64) spE4);
-            temp_f6_2 = spF4 - temp_f7_2;
-            temp_f7_3 = temp_f1 - temp_f7_2;
-            temp_f4 = spF0 - temp_f5_2;
-            temp_f5_3 = temp_f0 - temp_f5_2;
-            if (((temp_f4 * temp_f4) + (temp_f6_2 * temp_f6_2)) <
-                ((temp_f5_3 * temp_f5_3) + (temp_f7_3 * temp_f7_3)))
-            {
-                sp70 = sp34;
-                sp74 = sp38;
-                sp78 = sp3C;
-                temp_f7_4 = temp_f2_5 - arg2->x;
-                temp_f8_2 = temp_f3_5 - arg2->y;
-                sp88 = sp28;
-                temp_f9 = arg3->z - arg2->z;
-                sp8C = sp2C;
-                sp90 = sp30;
-                var_f0 = 0.0f;
-                var_f2 = -((temp_f9 * (sp78 - sp90)) +
-                           ((temp_f7_4 * (sp70 - sp88)) +
-                            (temp_f8_2 * (sp74 - sp8C)))) /
-                         ((temp_f9 * temp_f9) +
-                          ((temp_f7_4 * temp_f7_4) + (temp_f8_2 * temp_f8_2)));
-                if (var_f2 > (f32) 1.0) {
-                    var_f2 = 1.0f;
-                } else if (var_f2 < (f32) 0.0) {
-                    var_f2 = 0.0f;
-                }
-                var_f24 = var_f2;
-            } else {
-                sp40 = sp34;
-                sp44 = sp38;
-                sp48 = sp3C;
-                var_f0 = 1.0f;
-                temp_f9_2 = temp_f2_5 - arg2->x;
-                temp_f10_2 = temp_f3_5 - arg2->y;
-                temp_f11_2 = arg3->z - arg2->z;
-                sp58 = arg1->x;
-                sp5C = arg1->y;
-                sp60 = arg1->z;
-                var_f2_2 =
-                    -((temp_f11_2 * (sp48 - sp60)) +
-                      ((temp_f9_2 * (sp40 - sp58)) +
-                       (temp_f10_2 * (sp44 - sp5C)))) /
-                    ((temp_f11_2 * temp_f11_2) +
-                     ((temp_f9_2 * temp_f9_2) + (temp_f10_2 * temp_f10_2)));
-                if (var_f2_2 > (f32) 1.0) {
-                    var_f2_2 = 1.0f;
-                } else if (var_f2_2 < (f32) 0.0) {
-                    var_f2_2 = 0.0f;
-                }
-                var_f24 = var_f2_2;
-            }
-        } else {
-            temp_f1_3 = ((temp_f13 * temp_f7) - (temp_f12 * temp_f6)) / temp_f5;
-            var_f24 = ((temp_f11 * temp_f7) - (temp_f13 * temp_f6)) / temp_f5;
-            var_f0 = temp_f1_3;
-            if ((temp_f1_3 > (f32) 1.0) || (var_f0 < (f32) 0.0) ||
-                (var_f24 > (f32) 1.0) || (var_f24 < (f32) 0.0))
-            {
-                if (var_f0 < (f32) 0.0) {
-                    var_f22 = 0.0f;
-                    var_f23 = lbColl_80005FC0(arg2, arg3, arg0, &spA4);
-                } else {
-                    var_f22 = 1.0f;
-                    var_f23 = lbColl_80005FC0(arg2, arg3, arg1, &spA4);
-                }
-                if (var_f24 < (f32) 0.0) {
-                    var_f24 = 0.0f;
-                    var_f1 = lbColl_80005FC0(arg0, arg1, arg2, &spA0);
-                } else {
-                    var_f24 = 1.0f;
-                    var_f1 = lbColl_80005FC0(arg0, arg1, arg3, &spA0);
-                }
-                if (var_f23 < var_f1) {
-                    var_f0 = var_f22;
-                    var_f24 = spA4;
-                } else {
-                    var_f0 = spA0;
-                }
-            }
-        }
-    }
-    arg4->x = (temp_f31 * var_f0) + spF0;
-    arg4->y = (temp_f30 * var_f0) + spF4;
-    arg4->z = 0.0f;
-    arg5->x = (temp_f29 * var_f24) + spE4;
-    arg5->y = (temp_f28 * var_f24) + spE8;
-    arg5->z = 0.0f;
-    temp_f4_2 = arg4->y - arg5->y;
-    temp_f2_6 = arg4->x - arg5->x;
-    if ((temp_f25 * temp_f25) <
-        ((temp_f2_6 * temp_f2_6) + (temp_f4_2 * temp_f4_2)))
     {
-        return 0;
+        f32 sum_pq = p + q;
+
+        f32 a_z;
+        Vec3 temp_a0;
+        Vec3 temp_a1;
+
+        temp_a0.x = a->x;
+        temp_a0.y = a->y;
+        temp_a0.z = a_z = a->z;
+        temp_a1.x = temp_a0.x;
+        temp_a1.y = temp_a0.y;
+        temp_a1.z = a_z;
+        {
+            Vec3 temp_c0;
+            temp_c0.x = c->x;
+            temp_c0.y = c->y;
+            temp_c0.z = temp_r0_2 = c->z;
+
+            {
+                Vec3 temp_c1;
+
+                temp_c1.x = temp_c0.x;
+                temp_c1.y = temp_c0.y;
+                temp_c1.z = temp_r0_2;
+                temp_f0 = b->x;
+                if (temp_a1.x > temp_f0) {
+                    {
+                        f32 x = temp_a1.x + sum_pq;
+                        if (x < temp_c1.x && x < d->x)
+                            return false;
+                    }
+                    {
+                        f32 x = temp_f0 - sum_pq;
+                        if ((x > temp_c1.x) && (x > d->x)) {
+                            return false;
+                        }
+                    }
+                    goto block_13;
+                }
+                temp_f2_3 = temp_a1.x - sum_pq;
+                if (temp_f2_3 > temp_c1.x && temp_f2_3 > d->x) {
+                    return false;
+                }
+                temp_f2_4 = temp_f0 + sum_pq;
+                if (temp_f2_4 < temp_c1.x && temp_f2_4 < d->x) {
+                    return false;
+                }
+            block_13:
+                b_y = b->y;
+                if (temp_a1.y > b_y) {
+                    temp_f3 = temp_a1.y + sum_pq;
+                    if ((temp_f3 < temp_c1.y) && (temp_f3 < d->y)) {
+                        return false;
+                    }
+                    temp_f3_2 = b_y - sum_pq;
+                    if ((temp_f3_2 > temp_c1.y) && (temp_f3_2 > d->y)) {
+                        return false;
+                    }
+                    goto block_26;
+                }
+                temp_f3_3 = temp_a1.y - sum_pq;
+                if ((temp_f3_3 > temp_c1.y) && (temp_f3_3 > d->y)) {
+                    return false;
+                }
+                temp_f3_4 = b_y + sum_pq;
+                if ((temp_f3_4 < temp_c1.y) && (temp_f3_4 < d->y)) {
+                    return false;
+                }
+            block_26 : {
+                f32 temp_f30;
+                temp_f30 = b_y - temp_a1.y;
+                temp_f3_5 = d->y;
+                temp_f10 = temp_a1.y - temp_c1.y;
+                temp_f28 = temp_f3_5 - temp_c1.y;
+                temp_f31 = temp_f0 - temp_a1.x;
+                temp_f2_5 = d->x;
+                temp_f29 = temp_f2_5 - temp_c1.x;
+                temp_f13 = temp_f31 * temp_f29 + temp_f30 * temp_f28;
+                temp_f12 = temp_f29 * temp_f29 + temp_f28 * temp_f28;
+                temp_f11 = temp_f31 * temp_f31 + temp_f30 * temp_f30;
+                temp_f8 = temp_a1.x - temp_c1.x;
+                temp_f7 = temp_f29 * temp_f8 + temp_f28 * temp_f10;
+                temp_f6 = temp_f31 * temp_f8 + temp_f30 * temp_f10;
+                temp_f5 = temp_f11 * temp_f12 - temp_f13 * temp_f13;
+
+                if (approximatelyZero(temp_f12)) {
+                    if (approximatelyZero(temp_f11)) {
+                        var_f0 = 0.0f;
+                        var_f24 = 0.0f;
+                    } else {
+                        var_f24 = 0.0f;
+                        temp_f1_2 = -temp_f6 / temp_f11;
+                        var_f0 = temp_f1_2;
+                        if (temp_f1_2 > (f32) 1.0) {
+                            var_f0 = 1.0f;
+                        } else if (var_f0 < (f32) 0.0) {
+                            var_f0 = 0.0f;
+                        }
+                    }
+                } else if (approximatelyZero(temp_f5)) {
+                    temp_f7_2 =
+                        (f32) ((0.5 * (f64) temp_f28) + (f64) temp_c1.y);
+                    temp_f5_2 =
+                        (f32) ((0.5 * (f64) temp_f29) + (f64) temp_c1.x);
+                    temp_f6_2 = temp_a1.y - temp_f7_2;
+                    temp_f7_3 = b_y - temp_f7_2;
+                    temp_f4 = temp_a1.x - temp_f5_2;
+                    temp_f5_3 = temp_f0 - temp_f5_2;
+                    if (((temp_f4 * temp_f4) + (temp_f6_2 * temp_f6_2)) <
+                        ((temp_f5_3 * temp_f5_3) + (temp_f7_3 * temp_f7_3)))
+                    {
+                        sp70 = temp_c0.x;
+                        sp74 = temp_c0.y;
+                        sp78 = temp_c0.z;
+                        temp_f7_4 = temp_f2_5 - c->x;
+                        temp_f8_2 = temp_f3_5 - c->y;
+                        sp88 = temp_a0.x;
+                        temp_f9 = d->z - c->z;
+                        sp8C = temp_a0.y;
+                        sp90 = temp_a0.z;
+                        var_f0 = 0.0f;
+                        var_f2 =
+                            -((temp_f9 * (sp78 - sp90)) +
+                              ((temp_f7_4 * (sp70 - sp88)) +
+                               (temp_f8_2 * (sp74 - sp8C)))) /
+                            ((temp_f9 * temp_f9) + ((temp_f7_4 * temp_f7_4) +
+                                                    (temp_f8_2 * temp_f8_2)));
+                        if (var_f2 > (f32) 1.0) {
+                            var_f2 = 1.0f;
+                        } else if (var_f2 < (f32) 0.0) {
+                            var_f2 = 0.0f;
+                        }
+                        var_f24 = var_f2;
+                    } else {
+                        Vec3 temp_c2;
+
+                        temp_c2.x = temp_c0.x;
+                        temp_c2.y = temp_c0.y;
+                        temp_c2.z = temp_c0.z;
+                        var_f0 = 1.0f;
+                        temp_f9_2 = temp_f2_5 - c->x;
+                        temp_f10_2 = temp_f3_5 - c->y;
+                        temp_f11_2 = d->z - c->z;
+                        sp58 = b->x;
+                        sp5C = b->y;
+                        sp60 = b->z;
+                        {
+                            f32 var_f2_2 =
+                                -(temp_f11_2 * (temp_c2.z - sp60) +
+                                  ((temp_f9_2 * (temp_c2.x - sp58)) +
+                                   (temp_f10_2 * (temp_c2.y - sp5C)))) /
+                                ((temp_f11_2 * temp_f11_2) +
+                                 ((temp_f9_2 * temp_f9_2) +
+                                  (temp_f10_2 * temp_f10_2)));
+                            if (var_f2_2 > (f32) 1.0) {
+                                var_f2_2 = 1.0f;
+                            } else if (var_f2_2 < (f32) 0.0) {
+                                var_f2_2 = 0.0f;
+                            }
+                            var_f24 = var_f2_2;
+                        }
+                    }
+                } else {
+                    temp_f1_3 =
+                        ((temp_f13 * temp_f7) - (temp_f12 * temp_f6)) / temp_f5;
+                    var_f24 =
+                        ((temp_f11 * temp_f7) - (temp_f13 * temp_f6)) / temp_f5;
+                    var_f0 = temp_f1_3;
+                    if ((temp_f1_3 > (f32) 1.0) || (var_f0 < (f32) 0.0) ||
+                        (var_f24 > (f32) 1.0) || (var_f24 < (f32) 0.0))
+                    {
+                        if (var_f0 < (f32) 0.0) {
+                            var_f22 = 0.0f;
+                            var_f23 = lbColl_80005FC0(c, d, a, &spA4);
+                        } else {
+                            var_f22 = 1.0f;
+                            var_f23 = lbColl_80005FC0(c, d, b, &spA4);
+                        }
+                        if (var_f24 < (f32) 0.0) {
+                            var_f24 = 0.0f;
+                            var_f1 = lbColl_80005FC0(a, b, c, &spA0);
+                        } else {
+                            var_f24 = 1.0f;
+                            var_f1 = lbColl_80005FC0(a, b, d, &spA0);
+                        }
+                        if (var_f23 < var_f1) {
+                            var_f0 = var_f22;
+                            var_f24 = spA4;
+                        } else {
+                            var_f0 = spA0;
+                        }
+                    }
+                }
+
+                e->x = temp_f31 * var_f0 + temp_a1.x;
+                e->y = temp_f30 * var_f0 + temp_a1.y;
+                e->z = 0.0f;
+                f->x = temp_f29 * var_f24 + temp_c1.x;
+                f->y = temp_f28 * var_f24 + temp_c1.y;
+                f->z = 0.0f;
+            }
+            }
+        }
+        temp_f4_2 = e->y - f->y;
+        temp_f2_6 = e->x - f->x;
+        if ((sum_pq * sum_pq) <
+            ((temp_f2_6 * temp_f2_6) + (temp_f4_2 * temp_f4_2)))
+        {
+            return false;
+        }
+        return true;
     }
-    return 1;
 }
 #endif
 
