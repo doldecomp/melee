@@ -26,8 +26,6 @@ static inline float _sqrtfItem(float x)
     return x;
 }
 
-// 0x8026B1D4
-// https://decomp.me/scratch/hrApQ
 f32 func_8026B1D4(
     HSD_GObj* item_gobj,
     itHit* itemHitboxUnk) // Apply Item Damage -  may not be itHit* ???
