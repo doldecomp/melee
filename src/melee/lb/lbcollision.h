@@ -100,12 +100,7 @@ struct HitCapsule {
     /// @at{D4} @sz{60}
     HitVictim victims_2[12];
 
-    /// @at{134} @sz{4}
-    /// @todo This union is unacceptable.
-    union {
-        HSD_GObj* owner;
-        u8 hit_grabbed_victim_only : 1;
-    };
+    HSD_GObj* owner;
 };
 
 struct HurtCapsule {
