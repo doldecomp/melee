@@ -21,7 +21,7 @@
 /// @todo Toggle for WIP functions
 #if 0
 #undef MUST_MATCH
-#if __MWERKS__
+#ifdef __MWERKS__
 #pragma require_prototypes off
 #endif
 #endif
