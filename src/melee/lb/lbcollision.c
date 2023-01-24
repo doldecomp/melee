@@ -4083,8 +4083,7 @@ extern f32 const lbl_804D7A40;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32)
-{
+asm bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32){
     // clang-format off
     nofralloc
 /* 8000805C 00004C3C  7C 08 02 A6 */	mflr r0
@@ -4224,6 +4223,68 @@ lbl_8000821C:
 /* 80008244 00004E24  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+s32 lbColl_8000805C(Hitbox* arg0, Hurtbox* arg1, void* arg2, s32 arg3, f32 arg4,
+                    f32 arg5, f32 arg6)
+{
+    Vec3 sp74;
+    Vec3 sp68;
+    s32* sp8;
+    HSD_JObj* temp_r29;
+    HSD_JObj* temp_r29_2;
+    f32* var_r9;
+    f32 var_f1;
+
+    if ((enum Tangibility) arg1->tangiblity != Intangible) {
+        if (!(((u8) M2C_FIELD(arg1, u8*, 0x24) >> 7U) & 1)) {
+            func_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
+            func_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
+            if (arg2 != NULL) {
+                arg1->b_pos.z = arg6;
+                arg1->a_pos.z = arg6;
+            }
+            M2C_FIELD(arg1, u8*, 0x24) =
+                (u8) (M2C_FIELD(arg1, u8*, 0x24) | 0x80);
+        }
+        if (arg3 != 0) {
+            arg0->x64.x = 0.5f * (arg1->a_pos.x + arg1->b_pos.x);
+            arg0->x64.y = 0.5f * (arg1->a_pos.y + arg1->b_pos.y);
+            arg0->x64.z = 0.5f * (arg1->a_pos.z + arg1->b_pos.z);
+            arg0->x70 = 5.0f;
+            return 1;
+        }
+        if (arg2 != NULL) {
+            temp_r29 = arg1->bone;
+            if (temp_r29 == NULL) {
+                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+            }
+            HSD_JObjUnkMtxPtr(temp_r29);
+            PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r29->mtx[0],
+                        (f32(*)[4]) & sp38[0]);
+        }
+        if (arg2 != NULL) {
+            var_r9 = &sp38[0];
+        } else {
+            temp_r29_2 = arg1->bone;
+            if (temp_r29_2 == NULL) {
+                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+            }
+            HSD_JObjUnkMtxPtr(temp_r29_2);
+            var_r9 = temp_r29_2->mtx[0];
+        }
+        if (((u8) arg0->x43 >> 6U) & 1) {
+            var_f1 = arg0->scl;
+        } else {
+            var_f1 = arg0->scl * arg4;
+        }
+        sp8 = &arg0->x70;
+        return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
+                               &arg1->b_pos, &sp74, &sp68, (f32(*)[4]) var_r9,
+                               &arg0->x64, var_f1, arg1->scl, 3.0f * arg5);
+    }
+    return 0;
+}
 #endif
 
 #ifdef MUST_MATCH
