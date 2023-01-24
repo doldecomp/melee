@@ -3287,7 +3287,8 @@ extern f32 const lbl_804D7A30;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbColl_800077A0(UNK_PARAMS)
+asm void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, unk_t, unk_t, unk_t, f32,
+                         f32)
 { // clang-format off
     nofralloc
 /* 800077A0 00004380  7C 08 02 A6 */	mflr r0
@@ -3782,9 +3783,9 @@ void HSD_JObjUnkMtxPtr(HSD_JObj* arg0)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm UNK_RET lbColl_80007DD8(UNK_PARAMS)
+asm void lbColl_80007DD8(Hitbox*, HitResult*, Mtx, unk_t, unk_t, f32)
 {
     // clang-format off
     nofralloc
@@ -3858,6 +3859,44 @@ lbl_80007E90:
 /* 80007EC8 00004AA8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+void lbColl_80007DD8(Hitbox* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
+                     unk_t arg4, f32 arg5)
+{
+    M2C_UNK sp5C;
+    HSD_JObj* temp_r31;
+    HSD_JObj* temp_r31_2;
+    Mtx* var_r4;
+    f32 var_f31;
+    Mtx sp2C;
+
+    if (arg2 != NULL) {
+        temp_r31 = arg1->bone;
+        if (temp_r31 == NULL) {
+            __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+        }
+        HSD_JObjUnkMtxPtr(temp_r31);
+        PSMTXConcat(arg2, (f32(*)[4]) temp_r31->mtx[0], (f32(*)[4]) & sp2C[0]);
+    }
+    if (((u8) arg0->x43 >> 6U) & 1) {
+        var_f31 = arg0->scl;
+    } else {
+        var_f31 = arg0->scl * arg5;
+    }
+    if (arg2 != NULL) {
+        var_r4 = &sp2C;
+    } else {
+        temp_r31_2 = arg1->bone;
+        if (temp_r31_2 == NULL) {
+            __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+        }
+        HSD_JObjUnkMtxPtr(temp_r31_2);
+        var_r4 = &temp_r31_2->mtx;
+    }
+    lbColl_800077A0(&arg1->pos, *var_r4, &arg0->x58, &arg0->x4C, &sp5C, arg3,
+                    arg4, arg1->size, var_f31);
+}
 #endif
 
 extern f32 const lbl_804D7A38;

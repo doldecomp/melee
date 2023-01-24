@@ -161,19 +161,17 @@ bool lbColl_80007ECC(Hitbox*, Hurtbox*, Mtx, f32 hit_scl_y, f32 hurt_scl_y,
 bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32);
 bool lbColl_80007BCC(Hitbox*, HitResult* shield_hit, unk_t, s32, f32, f32, f32);
 bool lbColl_80007AFC(Hitbox*, Hitbox*, f32, f32);
-UNK_RET lbColl_80007DD8(UNK_PARAMS);
+void lbColl_80007DD8(Hitbox*, HitResult*, Mtx, unk_t, unk_t, f32);
 UNK_RET lbColl_80008D30(UNK_PARAMS);
 void lbColl_80008428(Hitbox*);
-bool lbColl_80005C44(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, f32 arg8,
-                     f32 arg9);
+bool lbColl_80005C44(Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
 f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, f32*);
 UNK_RET lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*);
 bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
-bool lbColl_800067F8(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
-                     Vec3* arg5, f32 arg6, f32 arg7, f32 arg8);
+bool lbColl_800067F8(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32, f32);
 bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Mtx, Vec3*, f32,
                      f32 scl, f32);
-UNK_RET lbColl_800077A0(UNK_PARAMS);
+void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, unk_t, unk_t, unk_t, f32, f32);
 UNK_RET lbColl_80007B78(Mtx, Mtx, f32, f32);
 void lbColl_800083C4(Hurtbox*);
 UNK_RET lbColl_800089B8(UNK_PARAMS);
@@ -186,7 +184,7 @@ UNK_RET lbColl_80009F54(UNK_PARAMS);
 UNK_RET lbColl_8000A044(UNK_PARAMS);
 UNK_RET lbColl_8000A10C(UNK_PARAMS);
 UNK_RET lbColl_8000A1A8(UNK_PARAMS);
-void lbColl_8000A244(Hurtbox* arg0, u32 arg1, Mtx arg2, f32 arg3);
+void lbColl_8000A244(Hurtbox*, u32, Mtx, f32);
 UNK_RET lbColl_8000A460(UNK_PARAMS);
 UNK_RET lbColl_8000A584(UNK_PARAMS);
 UNK_RET lbColl_8000A78C(UNK_PARAMS);
