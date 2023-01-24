@@ -2229,7 +2229,7 @@ extern f64 const lbl_804D7A20;
 #ifdef MWERKS_GEKKO
 #pragma push
 // clang-format off
-asm bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, unk_t, unk_t, f32*, Vec3*,
+asm bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Mtx, Vec3*,
                        f32, f32, f32)
 {
     nofralloc
@@ -2872,6 +2872,412 @@ lbl_8000775C:
 /* 8000779C 0000437C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
+                     Vec3* arg5, Mtx arg6, Vec3* arg7, f32 arg8, f32 scl,
+                     f32 argA)
+{
+    f32 sp124;
+    f32 sp120;
+    f32 sp11C;
+    f32 sp118;
+    f32 sp114;
+    f32 sp110;
+    f32 sp10C;
+    f32 sp108;
+    f32 sp104;
+    f32 spD0;
+    f32 spCC;
+    f32 sp8C;
+    f32 sp88;
+    f32 sp84;
+    f32 sp74;
+    f32 sp70;
+    f32 sp6C;
+    f32 sp5C;
+    f32 sp58;
+    f32 sp54;
+    f32 sp44;
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 sp34;
+    f32 temp_f0;
+    f32 temp_f10;
+    f32 temp_f10_2;
+    f32 temp_f10_3;
+    f32 temp_f10_4;
+    f32 temp_f11;
+    f32 temp_f11_2;
+    f32 temp_f11_3;
+    f32 temp_f11_4;
+    f32 temp_f11_5;
+    f32 temp_f12;
+    f32 temp_f1;
+    f32 temp_f1_10;
+    f32 temp_f1_14;
+    f32 temp_f1_15;
+    f32 temp_f1_16;
+    f32 temp_f1_17;
+    f32 temp_f1_2;
+    f32 temp_f1_3;
+    f32 temp_f1_4;
+    f32 temp_f1_5;
+    f32 temp_f1_9;
+    f32 temp_f20;
+    f32 temp_f21;
+    f32 temp_f21_2;
+    f32 temp_f25;
+    f32 temp_f26;
+    f32 temp_f27;
+    f32 temp_f2;
+    f32 temp_f2_2;
+    f32 temp_f2_3;
+    f32 temp_f2_4;
+    f32 temp_f2_5;
+    f32 temp_f2_6;
+    f32 temp_f2_7;
+    f32 temp_f2_8;
+    f32 temp_f3;
+    f32 temp_f3_2;
+    f32 temp_f3_3;
+    f32 temp_f4;
+    f32 temp_f4_10;
+    f32 temp_f4_2;
+    f32 temp_f4_3;
+    f32 temp_f4_4;
+    f32 temp_f4_5;
+    f32 temp_f4_6;
+    f32 temp_f4_7;
+    f32 temp_f4_8;
+    f32 temp_f4_9;
+    f32 temp_f5;
+    f32 temp_f5_2;
+    f32 temp_f5_3;
+    f32 temp_f6;
+    f32 temp_f6_2;
+    f32 temp_f6_3;
+    f32 temp_f6_4;
+    f32 temp_f7;
+    f32 temp_f7_2;
+    f32 temp_f8;
+    f32 temp_f9;
+    f32 temp_f9_2;
+    f32 temp_f9_3;
+    f32 temp_f9_4;
+    f32 var_f0;
+    f32 var_f1;
+    f32 var_f1_2;
+    f32 var_f20;
+    f32 var_f21;
+    f32 var_f22;
+    f32 var_f24;
+    f32 var_f2;
+    f32 var_f2_2;
+    f32 var_f30;
+    f64 temp_f1_11;
+    f64 temp_f1_12;
+    f64 temp_f1_13;
+    f64 temp_f1_6;
+    f64 temp_f1_7;
+    f64 temp_f1_8;
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r0_3;
+    s32 var_r0_4;
+    Mtx sp9C;
+
+    temp_f3 = (scl * argA) + arg8;
+    sp11C = arg0->x;
+    sp120 = arg0->y;
+    sp124 = arg0->z;
+    sp110 = arg2->x;
+    sp114 = arg2->y;
+    sp118 = arg2->z;
+    temp_f5 = arg1->x;
+    if (sp11C > temp_f5) {
+        temp_f2 = sp11C + temp_f3;
+        if ((temp_f2 < sp110) && (temp_f2 < arg3->x)) {
+            return 0;
+        }
+        temp_f2_2 = temp_f5 - temp_f3;
+        if ((temp_f2_2 > sp110) && (temp_f2_2 > arg3->x)) {
+            return 0;
+        }
+        goto block_13;
+    }
+    temp_f2_3 = sp11C - temp_f3;
+    if ((temp_f2_3 > sp110) && (temp_f2_3 > arg3->x)) {
+        return 0;
+    }
+    temp_f2_4 = temp_f5 + temp_f3;
+    if ((temp_f2_4 < sp110) && (temp_f2_4 < arg3->x)) {
+        return 0;
+    }
+block_13:
+    temp_f6 = arg1->y;
+    if (sp120 > temp_f6) {
+        temp_f4 = sp120 + temp_f3;
+        if ((temp_f4 < sp114) && (temp_f4 < arg3->y)) {
+            return 0;
+        }
+        temp_f4_2 = temp_f6 - temp_f3;
+        if ((temp_f4_2 > sp114) && (temp_f4_2 > arg3->y)) {
+            return 0;
+        }
+        goto block_26;
+    }
+    temp_f4_3 = sp120 - temp_f3;
+    if ((temp_f4_3 > sp114) && (temp_f4_3 > arg3->y)) {
+        return 0;
+    }
+    temp_f4_4 = temp_f6 + temp_f3;
+    if ((temp_f4_4 < sp114) && (temp_f4_4 < arg3->y)) {
+        return 0;
+    }
+block_26:
+    temp_f7 = arg1->z;
+    if (sp124 > temp_f7) {
+        temp_f6_2 = sp124 + temp_f3;
+        if ((temp_f6_2 < sp118) && (temp_f6_2 < arg3->z)) {
+            return 0;
+        }
+        temp_f4_5 = temp_f7 - temp_f3;
+        if ((temp_f4_5 > sp118) && (temp_f4_5 > arg3->z)) {
+            return 0;
+        }
+        goto block_39;
+    }
+    temp_f6_3 = sp124 - temp_f3;
+    if ((temp_f6_3 > sp118) && (temp_f6_3 > arg3->z)) {
+        return 0;
+    }
+    temp_f4_6 = temp_f7 + temp_f3;
+    if ((temp_f4_6 < sp118) && (temp_f4_6 < arg3->z)) {
+        return 0;
+    }
+block_39:
+    temp_f3_2 = temp_f5 - sp11C;
+    sp104 = temp_f3_2;
+    sp108 = arg1->y - sp120;
+    sp10C = arg1->z - sp124;
+    temp_f7_2 = arg3->y;
+    temp_f21 = sp120 - sp114;
+    temp_f26 = temp_f7_2 - sp114;
+    temp_f6_4 = arg3->x;
+    temp_f27 = temp_f6_4 - sp110;
+    temp_f8 = arg3->z;
+    temp_f20 = sp11C - sp110;
+    temp_f25 = temp_f8 - sp118;
+    temp_f10 =
+        (sp10C * temp_f25) + ((temp_f3_2 * temp_f27) + (sp108 * temp_f26));
+    temp_f9 =
+        (temp_f25 * temp_f25) + ((temp_f27 * temp_f27) + (temp_f26 * temp_f26));
+    temp_f21_2 = sp124 - sp118;
+    temp_f5_2 = (sp10C * sp10C) + ((temp_f3_2 * temp_f3_2) + (sp108 * sp108));
+    temp_f4_7 =
+        (sp10C * temp_f21_2) + ((temp_f3_2 * temp_f20) + (sp108 * temp_f21));
+    temp_f11 = (temp_f25 * temp_f21_2) +
+               ((temp_f27 * temp_f20) + (temp_f26 * temp_f21));
+    temp_f12 = (temp_f5_2 * temp_f9) - (temp_f10 * temp_f10);
+    if ((temp_f9 < 0.00001f) && (temp_f9 > -0.00001f)) {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 != 0) {
+        if ((temp_f5_2 < 0.00001f) && (temp_f5_2 > -0.00001f)) {
+            var_r0_2 = 1;
+        } else {
+            var_r0_2 = 0;
+        }
+        if (var_r0_2 != 0) {
+            var_f0 = 0.0f;
+            var_f24 = 0.0f;
+        } else {
+            var_f24 = 0.0f;
+            temp_f1 = -temp_f4_7 / temp_f5_2;
+            var_f0 = temp_f1;
+            if (temp_f1 > (f32) 1.0) {
+                var_f0 = 1.0f;
+            } else if (var_f0 < (f32) 0.0) {
+                var_f0 = 0.0f;
+            }
+        }
+    } else {
+        if ((temp_f12 < 0.00001f) && (temp_f12 > -0.00001f)) {
+            var_r0_3 = 1;
+        } else {
+            var_r0_3 = 0;
+        }
+        if (var_r0_3 != 0) {
+            temp_f11_2 = (f32) ((0.5 * (f64) temp_f26) + (f64) sp114);
+            temp_f10_2 = (f32) ((0.5 * (f64) temp_f27) + (f64) sp110);
+            temp_f1_2 = sp120 - temp_f11_2;
+            temp_f9_2 = (f32) ((0.5 * (f64) temp_f25) + (f64) sp118);
+            temp_f11_3 = arg1->y - temp_f11_2;
+            temp_f4_8 = sp11C - temp_f10_2;
+            temp_f5_3 = arg1->x - temp_f10_2;
+            temp_f2_5 = sp124 - temp_f9_2;
+            temp_f3_3 = arg1->z - temp_f9_2;
+            if (((temp_f2_5 * temp_f2_5) +
+                 ((temp_f4_8 * temp_f4_8) + (temp_f1_2 * temp_f1_2))) <
+                ((temp_f3_3 * temp_f3_3) +
+                 ((temp_f5_3 * temp_f5_3) + (temp_f11_3 * temp_f11_3))))
+            {
+                sp6C = arg2->x;
+                var_f0 = 0.0f;
+                sp70 = arg2->y;
+                sp74 = arg2->z;
+                temp_f9_3 = temp_f6_4 - arg2->x;
+                temp_f10_3 = temp_f7_2 - arg2->y;
+                temp_f11_4 = temp_f8 - arg2->z;
+                sp84 = arg0->x;
+                sp88 = arg0->y;
+                sp8C = arg0->z;
+                var_f2 =
+                    -((temp_f11_4 * (sp74 - sp8C)) +
+                      ((temp_f9_3 * (sp6C - sp84)) +
+                       (temp_f10_3 * (sp70 - sp88)))) /
+                    ((temp_f11_4 * temp_f11_4) +
+                     ((temp_f9_3 * temp_f9_3) + (temp_f10_3 * temp_f10_3)));
+                if (var_f2 > (f32) 1.0) {
+                    var_f2 = 1.0f;
+                } else if (var_f2 < (f32) 0.0) {
+                    var_f2 = 0.0f;
+                }
+                var_f24 = var_f2;
+            } else {
+                sp3C = arg2->x;
+                var_f0 = 1.0f;
+                sp40 = arg2->y;
+                sp44 = arg2->z;
+                temp_f9_4 = temp_f6_4 - arg2->x;
+                temp_f10_4 = temp_f7_2 - arg2->y;
+                temp_f11_5 = temp_f8 - arg2->z;
+                sp54 = arg1->x;
+                sp58 = arg1->y;
+                sp5C = arg1->z;
+                var_f2_2 =
+                    -((temp_f11_5 * (sp44 - sp5C)) +
+                      ((temp_f9_4 * (sp3C - sp54)) +
+                       (temp_f10_4 * (sp40 - sp58)))) /
+                    ((temp_f11_5 * temp_f11_5) +
+                     ((temp_f9_4 * temp_f9_4) + (temp_f10_4 * temp_f10_4)));
+                if (var_f2_2 > (f32) 1.0) {
+                    var_f2_2 = 1.0f;
+                } else if (var_f2_2 < (f32) 0.0) {
+                    var_f2_2 = 0.0f;
+                }
+                var_f24 = var_f2_2;
+            }
+        } else {
+            temp_f1_3 =
+                ((temp_f10 * temp_f11) - (temp_f9 * temp_f4_7)) / temp_f12;
+            var_f24 =
+                ((temp_f5_2 * temp_f11) - (temp_f10 * temp_f4_7)) / temp_f12;
+            var_f0 = temp_f1_3;
+            if ((temp_f1_3 > (f32) 1.0) || (var_f0 < (f32) 0.0) ||
+                (var_f24 > (f32) 1.0) || (var_f24 < (f32) 0.0))
+            {
+                if (var_f0 < (f32) 0.0) {
+                    var_f21 = 0.0f;
+                    var_f20 = lbColl_80005EBC(arg2, arg3, arg0, &spD0);
+                } else {
+                    var_f21 = 1.0f;
+                    var_f20 = lbColl_80005EBC(arg2, arg3, arg1, &spD0);
+                }
+                if (var_f24 < (f32) 0.0) {
+                    var_f22 = 0.0f;
+                    var_f1 = lbColl_80005EBC(arg0, arg1, arg2, &spCC);
+                } else {
+                    var_f22 = 1.0f;
+                    var_f1 = lbColl_80005EBC(arg0, arg1, arg3, &spCC);
+                }
+                if (var_f20 < var_f1) {
+                    var_f0 = var_f21;
+                    var_f24 = spD0;
+                } else {
+                    var_f0 = spCC;
+                    var_f24 = var_f22;
+                }
+            }
+        }
+    }
+    arg4->x = (sp104 * var_f0) + sp11C;
+    arg4->y = (sp108 * var_f0) + sp120;
+    arg4->z = (sp10C * var_f0) + sp124;
+    arg5->x = (temp_f27 * var_f24) + sp110;
+    arg5->y = (temp_f26 * var_f24) + sp114;
+    arg5->z = (temp_f25 * var_f24) + sp118;
+    temp_f1_4 = arg4->y - arg5->y;
+    temp_f4_9 = arg4->x - arg5->x;
+    temp_f2_6 = arg4->z - arg5->z;
+    temp_f1_5 = (temp_f2_6 * temp_f2_6) +
+                ((temp_f4_9 * temp_f4_9) + (temp_f1_4 * temp_f1_4));
+    if (temp_f1_5 > 0.0f) {
+        temp_f1_6 = __frsqrte(temp_f1_5);
+        temp_f1_7 = 0.5 * temp_f1_6 *
+                    -(((f64) temp_f1_5 * (temp_f1_6 * temp_f1_6)) - 3.0);
+        temp_f1_8 = 0.5 * temp_f1_7 *
+                    -(((f64) temp_f1_5 * (temp_f1_7 * temp_f1_7)) - 3.0);
+        sp38 = (f32) ((f64) temp_f1_5 *
+                      (0.5 * temp_f1_8 *
+                       -(((f64) temp_f1_5 * (temp_f1_8 * temp_f1_8)) - 3.0)));
+        var_f30 = sp38;
+    } else {
+        var_f30 = temp_f1_5;
+    }
+    if ((var_f30 < 0.00001f) && (var_f30 > -0.00001f)) {
+        var_r0_4 = 1;
+    } else {
+        var_r0_4 = 0;
+    }
+    if (var_r0_4 != 0) {
+        arg2->x = (arg8 + scl) - var_f30;
+        arg7->x = arg4->x;
+        arg7->y = arg4->y;
+        arg7->z = arg4->z;
+        return 1;
+    }
+    HSD_MtxInverse(arg6, sp9C);
+    PSMTXMUltiVec((f32(*)[4]) & sp9C[0], arg4, (Vec3*) &sp11C);
+    PSMTXMUltiVec((f32(*)[4]) & sp9C[0], arg5, (Vec3*) &sp104);
+    temp_f1_9 = sp120 - sp108;
+    temp_f4_10 = sp11C - sp104;
+    temp_f2_7 = sp124 - sp10C;
+    temp_f1_10 = (temp_f2_7 * temp_f2_7) +
+                 ((temp_f4_10 * temp_f4_10) + (temp_f1_9 * temp_f1_9));
+    if (temp_f1_10 > 0.0f) {
+        temp_f1_11 = __frsqrte(temp_f1_10);
+        temp_f1_12 = 0.5 * temp_f1_11 *
+                     -(((f64) temp_f1_10 * (temp_f1_11 * temp_f1_11)) - 3.0);
+        temp_f1_13 = 0.5 * temp_f1_12 *
+                     -(((f64) temp_f1_10 * (temp_f1_12 * temp_f1_12)) - 3.0);
+        sp34 =
+            (f32) ((f64) temp_f1_10 *
+                   (0.5 * temp_f1_13 *
+                    -(((f64) temp_f1_10 * (temp_f1_13 * temp_f1_13)) - 3.0)));
+        var_f1_2 = sp34;
+    } else {
+        var_f1_2 = temp_f1_10;
+    }
+    temp_f0 = (scl * var_f30) / var_f1_2;
+    temp_f2_8 = temp_f0 / var_f30;
+    temp_f1_14 = arg8 + temp_f0;
+    arg2->x = temp_f1_14 - var_f30;
+    temp_f1_15 = arg5->x;
+    arg7->x = (temp_f2_8 * (arg4->x - temp_f1_15)) + temp_f1_15;
+    temp_f1_16 = arg5->y;
+    arg7->y = (temp_f2_8 * (arg4->y - temp_f1_16)) + temp_f1_16;
+    temp_f1_17 = arg5->z;
+    arg7->z = (temp_f2_8 * (arg4->z - temp_f1_17)) + temp_f1_17;
+    if (temp_f1_14 < var_f30) {
+        return 0;
+    }
+    return 1;
+}
 #endif
 
 extern f32 const lbl_804D7A28;
@@ -3795,16 +4201,16 @@ inline void mtxConcat(Hurtbox* hurt, Mtx mtx)
     }
 }
 
-inline f32* mtxGetRow(Hurtbox* hurt, Mtx mtx)
+inline Mtx* pickMtx(Hurtbox* hurt, Mtx mtx)
 {
-    f32* var_r9;
+    Mtx* var_r9;
     Mtx sp34;
     if (mtx != NULL) {
-        var_r9 = sp34[0];
+        var_r9 = &sp34;
     } else {
         HSD_JObj* temp_r31_2 = hurt->bone;
         HSD_JObjGetMtx(temp_r31_2);
-        var_r9 = temp_r31_2->mtx[0];
+        var_r9 = &temp_r31_2->mtx;
     }
     return var_r9;
 }
@@ -3822,14 +4228,14 @@ inline f32 getHit1C(Hitbox* hit, f32 arg3)
 bool lbColl_80008248(Hitbox* hit, Hurtbox* hurt, Mtx mtx, f32 arg3, f32 arg4,
                      f32 arg5)
 {
-    M2C_UNK sp70;
-    M2C_UNK sp64;
+    Vec3* sp70 = NULL;
+    Vec3* sp64 = NULL;
 
     checkPos(hurt, mtx, arg5);
     mtxConcat(hurt, mtx);
 
     return lbColl_80006E58(&hit->x58, &hit->x4C, &hurt->a_pos, &hurt->b_pos,
-                           &sp70, &sp64, mtxGetRow(hurt, mtx), &hit->x64,
+                           sp70, sp64, *pickMtx(hurt, mtx), &hit->x64,
                            getHit1C(hit, arg3), hurt->scl, 3.0f * arg4);
 }
 #endif
