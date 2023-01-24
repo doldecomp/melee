@@ -4713,7 +4713,7 @@ void lbColl_80008440(HitCapsule* arg0)
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void lbColl_CopyHitCapsule(HitCapsule*, HitCapsule*)
 { // clang-format off
@@ -4823,11 +4823,82 @@ lbl_8000866C:
 /* 80008684 00005264  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst)
+{
+    Fighter* temp_r5;
+    Fighter* temp_r5_2;
+    HitVictim* var_r6;
+    HitVictim* var_r7;
+    HitVictim* var_r8;
+    HitVictim* var_r9;
+    s32 temp_r0;
+    s32 temp_r0_2;
+    s32 var_ctr;
+
+    dst->victims_1[0].fighter = src->victims_1[0].fighter;
+    dst->victims_1[0].iframes = src->victims_1[0].iframes;
+    dst->victims_2[0].fighter = src->victims_2[0].fighter;
+    dst->victims_2[0].iframes = src->victims_2[0].iframes;
+    dst->victims_1[1].fighter = src->victims_1[1].fighter;
+    dst->victims_1[1].iframes = src->victims_1[1].iframes;
+    dst->victims_2[1].fighter = src->victims_2[1].fighter;
+    dst->victims_2[1].iframes = src->victims_2[1].iframes;
+    dst->victims_1[2].fighter = src->victims_1[2].fighter;
+    dst->victims_1[2].iframes = src->victims_1[2].iframes;
+    dst->victims_2[2].fighter = src->victims_2[2].fighter;
+    dst->victims_2[2].iframes = src->victims_2[2].iframes;
+    dst->victims_1[3].fighter = src->victims_1[3].fighter;
+    dst->victims_1[3].iframes = src->victims_1[3].iframes;
+    dst->victims_2[3].fighter = src->victims_2[3].fighter;
+    dst->victims_2[3].iframes = src->victims_2[3].iframes;
+    dst->victims_1[4].fighter = src->victims_1[4].fighter;
+    dst->victims_1[4].iframes = src->victims_1[4].iframes;
+    dst->victims_2[4].fighter = src->victims_2[4].fighter;
+    dst->victims_2[4].iframes = src->victims_2[4].iframes;
+    dst->victims_1[5].fighter = src->victims_1[5].fighter;
+    dst->victims_1[5].iframes = src->victims_1[5].iframes;
+    dst->victims_2[5].fighter = src->victims_2[5].fighter;
+    dst->victims_2[5].iframes = src->victims_2[5].iframes;
+    dst->victims_1[6].fighter = src->victims_1[6].fighter;
+    dst->victims_1[6].iframes = src->victims_1[6].iframes;
+    dst->victims_2[6].fighter = src->victims_2[6].fighter;
+    dst->victims_2[6].iframes = src->victims_2[6].iframes;
+    dst->victims_1[7].fighter = src->victims_1[7].fighter;
+    dst->victims_1[7].iframes = src->victims_1[7].iframes;
+    dst->victims_2[7].fighter = src->victims_2[7].fighter;
+    dst->victims_2[7].iframes = src->victims_2[7].iframes;
+    var_r9 = src->victims_1 + 0x40;
+    var_r6 = dst->victims_1 + 0x40;
+    var_r7 = src->victims_2 + 0x40;
+    var_r8 = dst->victims_2 + 0x40;
+    var_ctr = 0xC - 8U;
+    if (8U < 0xCU) {
+        do {
+            temp_r5 = var_r9->fighter;
+            temp_r0 = var_r9->iframes;
+            var_r9 += 8;
+            var_r6->fighter = temp_r5;
+            var_r6->iframes = temp_r0;
+            var_r6 += 8;
+            temp_r5_2 = var_r7->fighter;
+            temp_r0_2 = var_r7->iframes;
+            var_r7 += 8;
+            var_r8->fighter = temp_r5_2;
+            var_r8->iframes = temp_r0_2;
+            var_r8 += 8;
+            var_ctr -= 1;
+        } while (var_ctr != 0);
+    }
+    dst->x44 = src->x44;
+    dst->x45 = src->x45;
+}
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm UNK_RET lbColl_80008688(UNK_PARAMS)
+asm bool lbColl_80008688(HitCapsule*, enum_t, Fighter*)
 { // clang-format off
     nofralloc
 /* 80008688 00005268  38 00 00 0C */	li r0, 0xc
@@ -4948,6 +5019,115 @@ lbl_80008818:
 /* 8000881C 000053FC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_80008688(HitCapsule* arg0, int arg1, Fighter* arg2)
+{
+    HitCapsule* var_r6;
+    HitCapsule* var_r6_2;
+    f32* temp_r6;
+    f32* temp_r6_2;
+    f32* temp_r6_3;
+    f32* temp_r6_4;
+    int var_ctr;
+    int var_ctr_2;
+    int var_r7;
+    u8 var_r0;
+    u8 var_r8;
+
+    var_ctr = 0xC;
+    var_r6 = arg0;
+    var_r7 = 0;
+loop_1:
+    if ((Fighter*) var_r6->victims_1[0].fighter == arg2) {
+        if (arg1 != 6) {
+            if (arg1 < 6) {
+                if (arg1 != 3) {
+                    if ((arg1 < 3) && (arg1 < 2)) {
+                    } else {
+                        goto block_9;
+                    }
+                }
+            } else if (arg1 < 9) {
+            block_9:
+                arg0->victims_1[var_r7].iframes =
+                    (int) (s8) ((u16) M2C_FIELD(arg0, u16*, 0x40) >> 4U);
+            }
+        }
+        return 0;
+    }
+    var_r6 += 8;
+    var_r7 += 1;
+    var_ctr -= 1;
+    if (var_ctr == 0) {
+        var_ctr_2 = 2;
+        var_r6_2 = arg0;
+        var_r8 = 0;
+    loop_13:
+        if ((Fighter*) var_r6_2->victims_1[0].fighter != NULL) {
+            temp_r6 = &var_r6_2->a_offset.y;
+            var_r8 += 1;
+            if ((Fighter*) var_r6_2->victims_1[1].fighter != NULL) {
+                temp_r6_2 = temp_r6 + 8;
+                var_r8 += 1;
+                if ((u32) M2C_FIELD(temp_r6, u32*, 0x7C) != 0U) {
+                    temp_r6_3 = temp_r6_2 + 8;
+                    var_r8 += 1;
+                    if ((u32) M2C_FIELD(temp_r6_2, u32*, 0x7C) != 0U) {
+                        temp_r6_4 = temp_r6_3 + 8;
+                        var_r8 += 1;
+                        if ((u32) M2C_FIELD(temp_r6_3, u32*, 0x7C) != 0U) {
+                            var_r8 += 1;
+                            if ((u32) M2C_FIELD(temp_r6_4, u32*, 0x7C) != 0U) {
+                                var_r6_2 = (HitCapsule*) (temp_r6_4 + 8 + 8);
+                                var_r8 += 1;
+                                var_ctr_2 -= 1;
+                                if (var_ctr_2 != 0) {
+                                    goto loop_13;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (var_r8 == 0xC) {
+            var_r0 = arg0->x44;
+        } else {
+            var_r0 = var_r8;
+        }
+        arg0->victims_1[var_r0].fighter = arg2;
+        if (arg1 != 6) {
+            if (arg1 < 6) {
+                if (arg1 != 3) {
+                    if ((arg1 < 3) && (arg1 < 2)) {
+                        goto block_31;
+                    }
+                    goto block_30;
+                }
+                goto block_31;
+            }
+            if (arg1 < 9) {
+            block_30:
+                arg0->victims_1[var_r0].iframes =
+                    (int) (s8) ((u16) M2C_FIELD(arg0, u16*, 0x40) >> 4U);
+            } else {
+                goto block_31;
+            }
+        } else {
+        block_31:
+            arg0->victims_1[var_r0].iframes = 0;
+        }
+        if (var_r8 == 0xC) {
+            arg0->x44 += 1;
+            if ((u8) arg0->x44 >= 0xCU) {
+                arg0->x44 = 0;
+            }
+        }
+        return 1;
+    }
+    goto loop_1;
+}
 #endif
 
 #ifdef MWERKS_GEKKO

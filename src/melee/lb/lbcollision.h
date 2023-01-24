@@ -152,7 +152,7 @@ bool lbColl_80008248(HitCapsule*, HurtCapsule*, Mtx, f32, f32, f32);
 void lbColl_80008440(HitCapsule*);
 void lbColl_80008434(HitCapsule*);
 bool lbColl_8000ACFC(UNK_T, HitCapsule*);
-UNK_RET lbColl_80008688(UNK_PARAMS);
+bool lbColl_80008688(HitCapsule*, enum_t, Fighter*);
 void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst);
 UNK_RET lbColl_80008820(UNK_PARAMS);
 int lbColl_80005BB0(HitCapsule*, int);
