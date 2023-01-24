@@ -4715,7 +4715,7 @@ void lbColl_80008440(HitCapsule* arg0)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_800084FC(HitCapsule*, HitCapsule*)
+asm void lbColl_CopyHitCapsule(HitCapsule*, HitCapsule*)
 { // clang-format off
     nofralloc
 /* 800084FC 000050DC  81 23 00 74 */	lwz r9, 0x74(r3)

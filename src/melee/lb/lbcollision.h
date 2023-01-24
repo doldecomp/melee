@@ -153,7 +153,7 @@ void lbColl_80008440(HitCapsule*);
 void lbColl_80008434(HitCapsule*);
 bool lbColl_8000ACFC(UNK_T, HitCapsule*);
 UNK_RET lbColl_80008688(UNK_PARAMS);
-void lbColl_800084FC(HitCapsule* src, HitCapsule* dst);
+void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst);
 UNK_RET lbColl_80008820(UNK_PARAMS);
 int lbColl_80005BB0(HitCapsule*, int);
 bool lbColl_80007ECC(HitCapsule*, HurtCapsule*, Mtx, f32 hit_scl_y,
