@@ -153,7 +153,7 @@ void lbColl_80008440(Hitbox*);
 void lbColl_80008434(Hitbox*);
 bool lbColl_8000ACFC(UNK_T, Hitbox*);
 UNK_RET lbColl_80008688(UNK_PARAMS);
-UNK_RET lbColl_800084FC(UNK_PARAMS);
+void lbColl_800084FC(Hitbox* src, Hitbox* dst);
 UNK_RET lbColl_80008820(UNK_PARAMS);
 int lbColl_80005BB0(Hitbox*, int);
 bool lbColl_80007ECC(Hitbox*, Hurtbox*, Mtx, f32 hit_scl_y, f32 hurt_scl_y,

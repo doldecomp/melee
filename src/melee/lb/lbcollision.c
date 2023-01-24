@@ -4715,7 +4715,7 @@ void lbColl_80008440(Hitbox* arg0)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbColl_800084FC(UNK_PARAMS)
+asm void lbColl_800084FC(Hitbox*, Hitbox*)
 { // clang-format off
     nofralloc
 /* 800084FC 000050DC  81 23 00 74 */	lwz r9, 0x74(r3)
