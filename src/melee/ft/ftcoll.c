@@ -3144,7 +3144,7 @@ void func_80078A2C(HSD_GObj* this_gobj)
             {
                 for (i = 0; i < 4; i++) {
                     this_hit = ftHitGetPtr(this_fp, i);
-                    if ((this_hit->tangiblity != Vulnerable) &&
+                    if ((this_hit->tangibility != Vulnerable) &&
                         (this_hit->element == (u32) HitElement_Catch) &&
                         ((((this_hit->x40_b2) &&
                            (victim_fp->xE0_ground_or_air == GA_Air)) ||

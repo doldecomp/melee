@@ -585,7 +585,7 @@ ftGameWatch_SpecialLwShoot_ApplyDamage(HSD_GObj* fighter_gobj)
     int i;
 
     for (i = 0; i < 4; i++)
-        if (fp->x914[i].tangiblity == Invincible)
+        if (fp->x914[i].tangibility == Invincible)
             func_8007ABD0(&fp->x914[i], fp->x2204_ftcmd_var1, fighter_gobj);
 }
 

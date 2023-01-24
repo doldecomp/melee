@@ -4153,7 +4153,7 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
     f32 var_f1;
     Mtx sp34;
 
-    if ((enum Tangibility) arg1->tangiblity == Vulnerable) {
+    if ((enum Tangibility) arg1->tangibility == Vulnerable) {
         if (!(((u8) M2C_FIELD(arg1, u8*, 0x24) >> 7U) & 1)) {
             func_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
             func_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
@@ -4354,7 +4354,7 @@ s32 lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, void* arg2, s32 arg3,
     f32* var_r9;
     f32 var_f1;
 
-    if ((enum Tangibility) arg1->tangiblity != Intangible) {
+    if ((enum Tangibility) arg1->tangibility != Intangible) {
         if (!(((u8) M2C_FIELD(arg1, u8*, 0x24) >> 7U) & 1)) {
             func_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
             func_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
@@ -4595,12 +4595,12 @@ void lbColl_800083C4(HurtCapsule* arg0)
 
 void lbColl_80008428(HitCapsule* arg0)
 {
-    arg0->tangiblity = 0;
+    arg0->tangibility = 0;
 }
 
 void lbColl_80008434(HitCapsule* arg0)
 {
-    arg0->tangiblity = 1;
+    arg0->tangibility = 1;
 }
 
 #ifdef MWERKS_GEKKO

@@ -159,7 +159,7 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj)
                      &fp->facing_dir);
         }
     }
-    if (fp->x914[0].tangiblity != Vulnerable) {
+    if (fp->x914[0].tangibility != Vulnerable) {
         if (fp->x2344_stateVar2_s32 == 0)
             fp->x2344_stateVar2_s32 = 1;
 
@@ -219,7 +219,7 @@ void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj)
         }
     }
 
-    if (fp->x914[0].tangiblity != Vulnerable && (fp->x2344_stateVar2_s32 == 0))
+    if (fp->x914[0].tangibility != Vulnerable && (fp->x2344_stateVar2_s32 == 0))
         fp->x2344_stateVar2_s32 = 1;
 
     if (fp->x2344_stateVar2_s32 == 1) {
@@ -294,7 +294,7 @@ void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj)
                      &fp->facing_dir);
         }
     }
-    if (fp->x914[0].tangiblity != Vulnerable) {
+    if (fp->x914[0].tangibility != Vulnerable) {
         if (fp->x2350_stateVar5_s32 == -1) {
             fp->x2350_stateVar5_s32 = fp->x914[0].a_offset.z;
         }
