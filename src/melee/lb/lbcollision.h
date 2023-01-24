@@ -28,8 +28,8 @@ struct HitVictim {
 };
 
 struct Hitbox {
+    /// @at{0} @sz{4}
     Tangibility tangiblity;
-
     /// @at{4} @sz{C}
     /// The offset of point @e a of the capsule.
     Vec3 a_offset;
@@ -42,7 +42,9 @@ struct Hitbox {
     /// The scale of the capsule.
     f32 scl;
 
-    u8 x20[0x30 - 0x20];
+    HSD_JObj* x20_jobj;
+
+    u8 x24[0x30 - 0x24];
 
     /// @at{30} @sz{4}
     HitElement element;
