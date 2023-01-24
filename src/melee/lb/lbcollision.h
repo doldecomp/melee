@@ -164,7 +164,8 @@ bool lbColl_80005C44(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, f32 arg8,
 f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, f32*);
 UNK_RET lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*);
 bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
-UNK_RET lbColl_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32);
+bool lbColl_800067F8(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
+                     Vec3* arg5, f32 arg6, f32 arg7, f32 arg8);
 bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, unk_t, unk_t, f32*, Vec3*, f32,
                      f32 scl, f32);
 UNK_RET lbColl_800077A0(UNK_PARAMS);

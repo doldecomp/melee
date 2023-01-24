@@ -1,7 +1,4 @@
 #include <melee/lb/lbcollision.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbvector.h>
-#include <sysdolphin/baselib/mtx.h>
 
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXDisplayList.h>
@@ -14,9 +11,12 @@
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
 #include <placeholder.h>
+#include <sysdolphin/baselib/baselib_shared_data_003.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
+
+// #undef MUST_MATCH
 
 int lbl_803B9880[] = {
     0x00083D60, 0x00083D60, 0x00083D60, 0x0000005B, 0x0000005A, 0x00000059,
@@ -83,7 +83,7 @@ f64 const lbl_804D7A00 = 1;
 f32 const lbl_804D7A08 = 1;
 f64 const lbl_804D7A10 = 0;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool lbColl_80005C44(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                          f32 arg8, f32 arg9)
@@ -268,12 +268,132 @@ lbl_80005EB4:
 /* 80005EB8 00002A98  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+int lbColl_80005C44(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, f32 arg8,
+                    f32 arg9)
+{
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 sp34;
+    f32 sp30;
+    f32 sp2C;
+    f32 temp_f10;
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 temp_f2;
+    f32 temp_f3;
+    f32 temp_f3_2;
+    f32 temp_f4;
+    f32 temp_f4_2;
+    f32 temp_f5;
+    f32 temp_f7;
+    f32 temp_f8;
+    f32 temp_f9;
+    f32 var_f6;
+    int var_r0;
+
+    temp_f2 = arg8 + arg9;
+    sp38 = arg0->x;
+    sp3C = arg0->y;
+    sp40 = arg0->z;
+    sp2C = arg2->x;
+    sp30 = arg2->y;
+    sp34 = arg2->z;
+    temp_f3 = arg1->x;
+    if (sp38 > temp_f3) {
+        if ((sp38 + temp_f2) < sp2C) {
+            return 0;
+        }
+        if ((temp_f3 - temp_f2) > sp2C) {
+            return 0;
+        }
+        goto block_9;
+    }
+    if ((sp38 - temp_f2) > sp2C) {
+        return 0;
+    }
+    if ((temp_f3 + temp_f2) < sp2C) {
+        return 0;
+    }
+block_9:
+    temp_f1 = arg1->y;
+    if (sp3C > temp_f1) {
+        if ((sp3C + temp_f2) < sp30) {
+            return 0;
+        }
+        if ((temp_f1 - temp_f2) > sp30) {
+            return 0;
+        }
+        goto block_18;
+    }
+    if ((sp3C - temp_f2) > sp30) {
+        return 0;
+    }
+    if ((temp_f1 + temp_f2) < sp30) {
+        return 0;
+    }
+block_18:
+    temp_f4 = arg1->z;
+    if (sp40 > temp_f4) {
+        if ((sp40 + temp_f2) < sp34) {
+            return 0;
+        }
+        if ((temp_f4 - temp_f2) > sp34) {
+            return 0;
+        }
+        goto block_27;
+    }
+    if ((sp40 - temp_f2) > sp34) {
+        return 0;
+    }
+    if ((temp_f4 + temp_f2) < sp34) {
+        return 0;
+    }
+block_27:
+    temp_f9 = temp_f1 - sp3C;
+    temp_f10 = temp_f4 - sp40;
+    temp_f8 = temp_f3 - sp38;
+    temp_f7 =
+        (temp_f10 * temp_f10) + ((temp_f8 * temp_f8) + (temp_f9 * temp_f9));
+    if ((temp_f7 < lbl_804D78D0) && (temp_f7 > lbl_804D78D4)) {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 != 0) {
+        var_f6 = lbl_804D78D8;
+    } else {
+        temp_f4_2 = -((temp_f10 * (sp40 - sp34)) +
+                      ((temp_f8 * (sp38 - sp2C)) + (temp_f9 * (sp3C - sp30)))) /
+                    temp_f7;
+        var_f6 = temp_f4_2;
+        if (temp_f4_2 > (f32) lbl_804D78E0) {
+            var_f6 = lbl_804D78E8;
+        } else if (var_f6 < (f32) lbl_804D78F0) {
+            var_f6 = lbl_804D78D8;
+        }
+    }
+    arg3->x = (temp_f8 * var_f6) + sp38;
+    arg3->y = (temp_f9 * var_f6) + sp3C;
+    arg3->z = (temp_f10 * var_f6) + sp40;
+    temp_f5 = arg3->y - sp30;
+    temp_f3_2 = arg3->z - sp34;
+    temp_f1_2 = arg3->x - sp2C;
+    if ((temp_f2 * temp_f2) < ((temp_f3_2 * temp_f3_2) +
+                               ((temp_f1_2 * temp_f1_2) + (temp_f5 * temp_f5))))
+    {
+        return 0;
+    }
+    return 1;
+}
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, f32*)
-{ // clang-format off
+asm f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, f32*){
+    // clang-format off
     nofralloc
 /* 80005EBC 00002A9C  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80005EC0 00002AA0  80 E3 00 00 */	lwz r7, 0(r3)
@@ -344,13 +464,56 @@ lbl_80005F80:
 /* 80005FBC 00002B9C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+f32 lbColl_80005EBC(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3)
+{
+    f32 sp58;
+    f32 sp54;
+    f32 sp50;
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 temp_f4;
+    f32 temp_f6;
+    f32 temp_f7;
+    f32 temp_f7_2;
+    f32 temp_f8;
+    f32 var_f5;
+
+    sp50 = arg0->x;
+    sp54 = arg0->y;
+    sp58 = arg0->z;
+    temp_f6 = arg1->x - arg0->x;
+    temp_f7_2 = arg1->y - arg0->y;
+    temp_f8 = arg1->z - arg0->z;
+    sp38 = arg2->x;
+    sp3C = arg2->y;
+    sp40 = arg2->z;
+    temp_f1_2 =
+        -((temp_f8 * (sp58 - sp40)) +
+          ((temp_f6 * (sp50 - sp38)) + (temp_f7_2 * (sp54 - sp3C)))) /
+        ((temp_f8 * temp_f8) + ((temp_f6 * temp_f6) + (temp_f7_2 * temp_f7_2)));
+    var_f5 = temp_f1_2;
+    if (temp_f1_2 > (f32) lbl_804D78E0) {
+        var_f5 = lbl_804D78E8;
+    } else if (var_f5 < (f32) lbl_804D78F0) {
+        var_f5 = lbl_804D78D8;
+    }
+    temp_f7 = ((temp_f7_2 * var_f5) + sp54) - arg2->y;
+    temp_f4 = ((temp_f8 * var_f5) + sp58) - arg2->z;
+    *arg3 = var_f5;
+    temp_f1 = ((temp_f6 * var_f5) + sp50) - arg2->x;
+    return (temp_f4 * temp_f4) + ((temp_f1 * temp_f1) + (temp_f7 * temp_f7));
+}
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-// clang-format off
-asm UNK_RET lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*)
-{
+asm UNK_RET lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*){
+    // clang-format off
     nofralloc
 /* 80005FC0 00002BA0  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80005FC4 00002BA4  80 E3 00 00 */	lwz r7, 0(r3)
@@ -409,11 +572,44 @@ lbl_80006064:
 /* 80006090 00002C70  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+UNK_RET lbColl_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3)
+{
+    f32 sp58;
+    f32 sp54;
+    f32 sp50;
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 temp_f1;
+    f32 temp_f5;
+    f32 temp_f6;
+    f32 var_f4;
+
+    sp50 = arg0->x;
+    sp54 = arg0->y;
+    sp58 = arg0->z;
+    temp_f5 = arg1->x - arg0->x;
+    temp_f6 = arg1->y - arg0->y;
+    sp38 = arg2->x;
+    sp3C = arg2->y;
+    sp40 = arg2->z;
+    temp_f1 = -((temp_f5 * (sp50 - sp38)) + (temp_f6 * (sp54 - sp3C))) /
+              ((temp_f5 * temp_f5) + (temp_f6 * temp_f6));
+    var_f4 = temp_f1;
+    if (temp_f1 > (f32) lbl_804D78E0) {
+        var_f4 = lbl_804D78E8;
+    } else if (var_f4 < (f32) lbl_804D78F0) {
+        var_f4 = lbl_804D78D8;
+    }
+    *arg3 = var_f4;
+}
 #endif
 
 extern f64 const lbl_804D7A18;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32)
 { // clang-format off
@@ -929,12 +1125,374 @@ lbl_800067AC:
 /* 800067F4 000033D4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+inline bool approximatelyZero(f32 x)
+{
+    bool result;
+
+    if ((x < 0.00001f) && (x > -0.00001f))
+        result = true;
+    else
+        result = false;
+
+    return result;
+}
+
+inline bool end(Vec3* a, Vec3* b, f32 unk_sum)
+{
+    f32 y = a->y - b->y;
+    f32 x = a->x - b->x;
+    f32 z = a->z - b->z;
+
+    if (unk_sum * unk_sum < z * z + (x * x + y * y))
+        return false;
+
+    return true;
+}
+
+inline bool testRight(Vec3* a, Vec3* b, Vec3* c, f32 offset)
+{
+    f32 x = a->x + offset;
+    if (x < b->x && x < c->x)
+        return false;
+
+    return true;
+}
+
+inline bool testLeft(Vec3* a, Vec3* b, Vec3* c, f32 offset)
+{
+    f32 x = a->x - offset;
+    if (x > b->x && x > c->x)
+        return false;
+
+    return true;
+}
+int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
+                    Vec3* arg5, f32 arg6, f32 arg7)
+{
+    {
+        Vec3 vec4;
+        f32 sp30;
+        f32 sp34;
+        f32 sp38;
+        Vec3 arg4_offset;
+        Vec3 arg5_offset;
+        f32 sp3C;
+        f32 temp_f1;
+        f32 unk_sum = arg6 + arg7;
+        vec4.x = arg0->x;
+        vec4.y = arg0->y;
+        vec4.z = arg0->z;
+
+        sp30 = vec4.z;
+        sp34 = arg2->x;
+        sp38 = arg2->y;
+
+        arg4_offset.x = vec4.x;
+        arg4_offset.y = vec4.y;
+        arg4_offset.z = vec4.z;
+
+        {
+            f32 temp_r0_2 = arg2->z;
+            sp3C = temp_r0_2;
+
+            arg5_offset.x = sp34;
+            arg5_offset.y = sp38;
+            arg5_offset.z = temp_r0_2;
+        }
+
+        {
+            f32 arg1_x = arg1->x;
+            if (arg4_offset.x > arg1_x) {
+                if (!testRight(&arg4_offset, &arg5_offset, arg3, unk_sum))
+                    return false;
+
+                if (!testLeft(&arg4_offset, &arg5_offset, arg3, unk_sum))
+                    return false;
+
+                goto block_13;
+            }
+            {
+                if (!testLeft(&arg4_offset, &arg5_offset, arg3, unk_sum))
+                    return false;
+            }
+            {
+                f32 x = arg1_x + unk_sum;
+                if (x < arg5_offset.x && x < arg3->x)
+                    return false;
+            }
+
+        block_13 : {
+            temp_f1 = arg1->y;
+            if (arg4_offset.y > temp_f1) {
+                {
+                    f32 temp_f3;
+                    temp_f3 = arg4_offset.y + unk_sum;
+
+                    if (temp_f3 < arg5_offset.y && temp_f3 < arg3->y)
+                        return false;
+                }
+
+                {
+                    f32 temp_f3_2 = temp_f1 - unk_sum;
+
+                    if (temp_f3_2 > arg5_offset.y && temp_f3_2 > arg3->y)
+                        return false;
+                }
+
+                goto block_26;
+            }
+
+            {
+                f32 y = arg4_offset.y - unk_sum;
+                if (y > arg5_offset.y && y > arg3->y)
+                    return false;
+            }
+
+            {
+                f32 y = temp_f1 + unk_sum;
+                if (y < arg5_offset.y && y < arg3->y)
+                    return false;
+            }
+        }
+        block_26 : {
+            f32 temp_f2_5 = arg1->z;
+            if (arg4_offset.z > temp_f2_5) {
+                {
+                    f32 temp_f4;
+                    temp_f4 = arg4_offset.z + unk_sum;
+                    if ((temp_f4 < arg5_offset.z) && (temp_f4 < arg3->z)) {
+                        return false;
+                    }
+                }
+                {
+                    f32 temp_f4_2;
+                    temp_f4_2 = temp_f2_5 - unk_sum;
+                    if ((temp_f4_2 > arg5_offset.z) && (temp_f4_2 > arg3->z)) {
+                        return false;
+                    }
+                }
+                goto block_39;
+            }
+            {
+                f32 temp_f4_3;
+                temp_f4_3 = arg4_offset.z - unk_sum;
+                if ((temp_f4_3 > arg5_offset.z) && (temp_f4_3 > arg3->z)) {
+                    return false;
+                }
+            }
+            {
+                f32 temp_f4_4;
+                temp_f4_4 = temp_f2_5 + unk_sum;
+                if ((temp_f4_4 < arg5_offset.z) && (temp_f4_4 < arg3->z)) {
+                    return false;
+                }
+            }
+        block_39 : {
+            f32 arg4_scl;
+
+            f32 temp_f25 = temp_f1 - arg4_offset.y;
+            f32 temp_f5 = arg3->y;
+            f32 temp_f24 = temp_f2_5 - arg4_offset.z;
+            f32 temp_f22 = temp_f5 - arg5_offset.y;
+            f32 temp_f13 = arg4_offset.y - arg5_offset.y;
+            f32 temp_f4_5 = arg3->x;
+            f32 temp_f26 = arg1_x - arg4_offset.x;
+            f32 temp_f23 = temp_f4_5 - arg5_offset.x;
+            f32 temp_f6 = arg3->z;
+            f32 arg5_offset_base = temp_f6 - arg5_offset.z;
+            f32 temp_f8 = temp_f24 * arg5_offset_base + temp_f26 * temp_f23 +
+                          temp_f25 * temp_f22;
+            f32 temp_f7 = arg5_offset_base * arg5_offset_base +
+                          temp_f23 * temp_f23 + temp_f22 * temp_f22;
+            f32 temp_f19 = arg4_offset.x - arg5_offset.x;
+            f32 temp_f3_5 = (temp_f24 * temp_f24) +
+                            ((temp_f26 * temp_f26) + (temp_f25 * temp_f25));
+            f32 temp_f13_2 = arg4_offset.z - arg5_offset.z;
+            f32 temp_f12 = arg5_offset_base * temp_f13_2 + temp_f23 * temp_f19 +
+                           temp_f22 * temp_f13;
+            f32 temp_f11 = (temp_f24 * temp_f13_2) + temp_f26 * temp_f19 +
+                           temp_f25 * temp_f13;
+            f32 temp_f10 = temp_f3_5 * temp_f7 - temp_f8 * temp_f8;
+
+            {
+                f32 arg5_scl;
+                if (approximatelyZero(temp_f7)) {
+                    if (approximatelyZero(temp_f3_5)) {
+                        arg4_scl = 0.0f;
+                        arg5_scl = 0.0f;
+                    } else {
+                        arg5_scl = 0.0f;
+                        {
+                            f32 temp_f1_2 = -temp_f11 / temp_f3_5;
+                            arg4_scl = temp_f1_2;
+
+                            if (temp_f1_2 > (f32) 1.0)
+                                arg4_scl = 1.0f;
+                            else if (arg4_scl < (f32) 0.0)
+                                arg4_scl = 0.0f;
+                        }
+                    }
+                } else {
+                    if (approximatelyZero(temp_f10)) {
+                        f32 temp_f9 = (0.5 * temp_f22 + arg5_offset.y);
+                        f32 temp_f7_2 = (0.5 * temp_f23 + arg5_offset.x);
+                        f32 temp_f10_2 = arg4_offset.y - temp_f9;
+                        f32 temp_f11_2 = temp_f1 - temp_f9;
+                        f32 temp_f8_2 = 0.5 * arg5_offset_base + arg5_offset.z;
+                        f32 temp_f3_6 = arg4_offset.x - temp_f7_2;
+                        f32 temp_f9_2 = arg1_x - temp_f7_2;
+                        f32 arg4_offset_z = arg4_offset.z - temp_f8_2;
+                        f32 temp_f2_6 = temp_f2_5 - temp_f8_2;
+
+                        // lhs and rhs each the same inline
+                        if ((arg4_offset_z * arg4_offset_z +
+                             ((temp_f3_6 * temp_f3_6) +
+                              (temp_f10_2 * temp_f10_2))) <
+                            ((temp_f2_6 * temp_f2_6) +
+                             ((temp_f9_2 * temp_f9_2) +
+                              (temp_f11_2 * temp_f11_2))))
+                        {
+                            Vec3 vec2;
+                            f32 sp90;
+                            f32 sp8C;
+                            f32 sp88;
+                            f32 temp_f7_4;
+                            f32 temp_f8_3;
+                            f32 temp_f9_3;
+                            vec2.x = sp34;
+                            vec2.y = sp38;
+                            vec2.z = sp3C;
+                            temp_f7_4 = temp_f4_5 - arg2->x;
+                            temp_f8_3 = temp_f5 - arg2->y;
+                            sp88 = vec4.x;
+                            temp_f9_3 = temp_f6 - arg2->z;
+                            sp8C = vec4.y;
+                            sp90 = sp30;
+                            arg4_scl = 0.0f;
+                            {
+                                f32 var_f2 =
+                                    -((temp_f9_3 * (vec2.z - sp90)) +
+                                      ((temp_f7_4 * (vec2.x - sp88)) +
+                                       (temp_f8_3 * (vec2.y - sp8C)))) /
+                                    ((temp_f9_3 * temp_f9_3) +
+                                     ((temp_f7_4 * temp_f7_4) +
+                                      (temp_f8_3 * temp_f8_3)));
+                                if (var_f2 > (f32) 1.0) {
+                                    var_f2 = 1.0f;
+                                } else if (var_f2 < (f32) 0.0) {
+                                    var_f2 = 0.0f;
+                                }
+                                arg5_scl = var_f2;
+                            }
+                        } else {
+                            f32 sp58;
+                            f32 sp60;
+                            f32 sp48;
+                            f32 sp5C;
+                            f32 sp44;
+                            f32 sp40;
+                            f32 temp_f10_3;
+                            f32 temp_f11_3;
+                            f32 temp_f9_4;
+                            sp40 = sp34;
+                            sp44 = sp38;
+                            sp48 = sp3C;
+                            arg4_scl = 1.0f;
+                            temp_f9_4 = temp_f4_5 - arg2->x;
+                            temp_f10_3 = temp_f5 - arg2->y;
+                            sp58 = arg1->x;
+                            temp_f11_3 = temp_f6 - arg2->z;
+                            sp5C = arg1->y;
+                            sp60 = arg1->z;
+                            {
+                                f32 var_f2_2 =
+                                    -temp_f11_3 * (sp48 - sp60) +
+                                    temp_f9_4 * sp40 - sp58 +
+                                    temp_f10_3 * sp44 -
+                                    sp5C / (temp_f11_3 * temp_f11_3) +
+                                    temp_f9_4 * temp_f9_4 +
+                                    temp_f10_3 * temp_f10_3;
+
+                                if (var_f2_2 > (f32) 1.0)
+                                    var_f2_2 = 1.0f;
+                                else if (var_f2_2 < (f32) 0.0)
+                                    var_f2_2 = 0.0f;
+
+                                arg5_scl = var_f2_2;
+                            }
+                        }
+                    } else {
+                        f32 temp_f1_3 =
+                            temp_f8 * temp_f12 - temp_f7 * temp_f11 / temp_f10;
+                        arg5_scl =
+                            ((temp_f3_5 * temp_f12) - (temp_f8 * temp_f11)) /
+                            temp_f10;
+                        arg4_scl = temp_f1_3;
+                        if (temp_f1_3 > (f32) 1.0 || arg4_scl < (f32) 0.0 ||
+                            arg5_scl > (f32) 1.0 || arg5_scl < (f32) 0.0)
+                        {
+                            f32 var_f18;
+                            f32 var_f19;
+                            f32 var_f1;
+                            f32 spA4;
+
+                            if (arg4_scl < (f32) 0.0) {
+                                var_f19 = 0.0f;
+                                var_f18 =
+                                    lbColl_80005EBC(arg2, arg3, arg0, &spA4);
+                            } else {
+                                var_f19 = 1.0f;
+                                var_f18 =
+                                    lbColl_80005EBC(arg2, arg3, arg1, &spA4);
+                            }
+
+                            {
+                                f32 spA0;
+                                if (arg5_scl < (f32) 0.0) {
+                                    arg5_scl = 0.0f;
+                                    var_f1 = lbColl_80005EBC(arg0, arg1, arg2,
+                                                             &spA0);
+                                } else {
+                                    arg5_scl = 1.0f;
+                                    var_f1 = lbColl_80005EBC(arg0, arg1, arg3,
+                                                             &spA0);
+                                }
+
+                                if (var_f18 < var_f1) {
+                                    arg4_scl = var_f19;
+                                    arg5_scl = spA4;
+                                } else {
+                                    arg4_scl = spA0;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                arg4->x = temp_f26 * arg4_scl + arg4_offset.x;
+                arg4->y = temp_f25 * arg4_scl + arg4_offset.y;
+                arg4->z = temp_f24 * arg4_scl + arg4_offset.z;
+
+                arg5->x = temp_f23 * arg5_scl + arg5_offset.x;
+                arg5->y = temp_f22 * arg5_scl + arg5_offset.y;
+                arg5->z = arg5_offset_base * arg5_scl + arg5_offset.z;
+            }
+        }
+            return end(arg4, arg5, unk_sum);
+        }
+        }
+    }
+}
 #endif
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32)
-{ // clang-format off
+asm bool lbColl_800067F8(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32,
+                         f32)
+{
+    // clang-format off
     nofralloc
 /* 800067F8 000033D8  7C 08 02 A6 */	mflr r0
 /* 800067FC 000033DC  90 01 00 04 */	stw r0, 4(r1)
@@ -1378,6 +1936,292 @@ lbl_80006E1C:
 /* 80006E54 00003A34  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_800067F8(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
+                     Vec3* arg5, f32 arg6, f32 arg7, f32 arg8)
+{
+    f32 spF8;
+    f32 spF4;
+    f32 spF0;
+    f32 spEC;
+    f32 spE8;
+    f32 spE4;
+    f32 spA4;
+    f32 spA0;
+    f32 sp90;
+    f32 sp8C;
+    f32 sp88;
+    f32 sp78;
+    f32 sp74;
+    f32 sp70;
+    f32 sp60;
+    f32 sp5C;
+    f32 sp58;
+    f32 sp48;
+    f32 sp44;
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 sp34;
+    f32 sp30;
+    f32 sp2C;
+    f32 sp28;
+    f32 temp_f0;
+    f32 temp_f10;
+    f32 temp_f10_2;
+    f32 temp_f11;
+    f32 temp_f11_2;
+    f32 temp_f12;
+    f32 temp_f13;
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 temp_f1_3;
+    f32 temp_f25;
+    f32 temp_f28;
+    f32 temp_f29;
+    f32 temp_f2;
+    f32 temp_f2_2;
+    f32 temp_f2_3;
+    f32 temp_f2_4;
+    f32 temp_f2_5;
+    f32 temp_f2_6;
+    f32 temp_f30;
+    f32 temp_f31;
+    f32 temp_f3;
+    f32 temp_f3_2;
+    f32 temp_f3_3;
+    f32 temp_f3_4;
+    f32 temp_f3_5;
+    f32 temp_f4;
+    f32 temp_f4_2;
+    f32 temp_f5;
+    f32 temp_f5_2;
+    f32 temp_f5_3;
+    f32 temp_f6;
+    f32 temp_f6_2;
+    f32 temp_f7;
+    f32 temp_f7_2;
+    f32 temp_f7_3;
+    f32 temp_f7_4;
+    f32 temp_f8;
+    f32 temp_f8_2;
+    f32 temp_f9;
+    f32 temp_f9_2;
+    f32 temp_r0;
+    f32 temp_r0_2;
+    f32 var_f0;
+    f32 var_f1;
+    f32 var_f22;
+    f32 var_f23;
+    f32 var_f24;
+    f32 var_f2;
+    f32 var_f2_2;
+    bool var_r0;
+    bool var_r0_2;
+    bool var_r0_3;
+
+    temp_f25 = arg6 + arg7;
+    sp28 = arg0->x;
+    sp2C = arg0->y;
+    temp_r0 = arg0->z;
+    sp30 = temp_r0;
+    spF0 = sp28;
+    spF4 = sp2C;
+    spF8 = temp_r0;
+    sp34 = arg2->x;
+    sp38 = arg2->y;
+    temp_r0_2 = arg2->z;
+    sp3C = temp_r0_2;
+    spE4 = sp34;
+    spE8 = sp38;
+    spEC = temp_r0_2;
+    temp_f0 = arg1->x;
+    if (spF0 > temp_f0) {
+        temp_f2 = spF0 + temp_f25;
+        if ((temp_f2 < spE4) && (temp_f2 < arg3->x)) {
+            return 0;
+        }
+        temp_f2_2 = temp_f0 - temp_f25;
+        if ((temp_f2_2 > spE4) && (temp_f2_2 > arg3->x)) {
+            return 0;
+        }
+        goto block_13;
+    }
+    temp_f2_3 = spF0 - temp_f25;
+    if ((temp_f2_3 > spE4) && (temp_f2_3 > arg3->x)) {
+        return 0;
+    }
+    temp_f2_4 = temp_f0 + temp_f25;
+    if ((temp_f2_4 < spE4) && (temp_f2_4 < arg3->x)) {
+        return 0;
+    }
+block_13:
+    temp_f1 = arg1->y;
+    if (spF4 > temp_f1) {
+        temp_f3 = spF4 + temp_f25;
+        if ((temp_f3 < spE8) && (temp_f3 < arg3->y)) {
+            return 0;
+        }
+        temp_f3_2 = temp_f1 - temp_f25;
+        if ((temp_f3_2 > spE8) && (temp_f3_2 > arg3->y)) {
+            return 0;
+        }
+        goto block_26;
+    }
+    temp_f3_3 = spF4 - temp_f25;
+    if ((temp_f3_3 > spE8) && (temp_f3_3 > arg3->y)) {
+        return 0;
+    }
+    temp_f3_4 = temp_f1 + temp_f25;
+    if ((temp_f3_4 < spE8) && (temp_f3_4 < arg3->y)) {
+        return 0;
+    }
+block_26:
+    temp_f30 = temp_f1 - spF4;
+    temp_f3_5 = arg3->y;
+    temp_f10 = spF4 - spE8;
+    temp_f28 = temp_f3_5 - spE8;
+    temp_f31 = temp_f0 - spF0;
+    temp_f2_5 = arg3->x;
+    temp_f29 = temp_f2_5 - spE4;
+    temp_f13 = (temp_f31 * temp_f29) + (temp_f30 * temp_f28);
+    temp_f12 = (temp_f29 * temp_f29) + (temp_f28 * temp_f28);
+    temp_f11 = (temp_f31 * temp_f31) + (temp_f30 * temp_f30);
+    temp_f8 = spF0 - spE4;
+    temp_f7 = (temp_f29 * temp_f8) + (temp_f28 * temp_f10);
+    temp_f6 = (temp_f31 * temp_f8) + (temp_f30 * temp_f10);
+    temp_f5 = (temp_f11 * temp_f12) - (temp_f13 * temp_f13);
+    if ((temp_f12 < 0.00001f) && (temp_f12 > -0.00001f)) {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 != 0) {
+        if ((temp_f11 < 0.00001f) && (temp_f11 > -0.00001f)) {
+            var_r0_2 = 1;
+        } else {
+            var_r0_2 = 0;
+        }
+        if (var_r0_2 != 0) {
+            var_f0 = 0.0f;
+            var_f24 = 0.0f;
+        } else {
+            var_f24 = 0.0f;
+            temp_f1_2 = -temp_f6 / temp_f11;
+            var_f0 = temp_f1_2;
+            if (temp_f1_2 > (f32) 1.0) {
+                var_f0 = 1.0f;
+            } else if (var_f0 < (f32) 0.0) {
+                var_f0 = 0.0f;
+            }
+        }
+    } else {
+        if ((temp_f5 < 0.00001f) && (temp_f5 > -0.00001f)) {
+            var_r0_3 = 1;
+        } else {
+            var_r0_3 = 0;
+        }
+        if (var_r0_3 != 0) {
+            temp_f7_2 = (f32) ((0.5 * (f64) temp_f28) + (f64) spE8);
+            temp_f5_2 = (f32) ((0.5 * (f64) temp_f29) + (f64) spE4);
+            temp_f6_2 = spF4 - temp_f7_2;
+            temp_f7_3 = temp_f1 - temp_f7_2;
+            temp_f4 = spF0 - temp_f5_2;
+            temp_f5_3 = temp_f0 - temp_f5_2;
+            if (((temp_f4 * temp_f4) + (temp_f6_2 * temp_f6_2)) <
+                ((temp_f5_3 * temp_f5_3) + (temp_f7_3 * temp_f7_3)))
+            {
+                sp70 = sp34;
+                sp74 = sp38;
+                sp78 = sp3C;
+                temp_f7_4 = temp_f2_5 - arg2->x;
+                temp_f8_2 = temp_f3_5 - arg2->y;
+                sp88 = sp28;
+                temp_f9 = arg3->z - arg2->z;
+                sp8C = sp2C;
+                sp90 = sp30;
+                var_f0 = 0.0f;
+                var_f2 = -((temp_f9 * (sp78 - sp90)) +
+                           ((temp_f7_4 * (sp70 - sp88)) +
+                            (temp_f8_2 * (sp74 - sp8C)))) /
+                         ((temp_f9 * temp_f9) +
+                          ((temp_f7_4 * temp_f7_4) + (temp_f8_2 * temp_f8_2)));
+                if (var_f2 > (f32) 1.0) {
+                    var_f2 = 1.0f;
+                } else if (var_f2 < (f32) 0.0) {
+                    var_f2 = 0.0f;
+                }
+                var_f24 = var_f2;
+            } else {
+                sp40 = sp34;
+                sp44 = sp38;
+                sp48 = sp3C;
+                var_f0 = 1.0f;
+                temp_f9_2 = temp_f2_5 - arg2->x;
+                temp_f10_2 = temp_f3_5 - arg2->y;
+                temp_f11_2 = arg3->z - arg2->z;
+                sp58 = arg1->x;
+                sp5C = arg1->y;
+                sp60 = arg1->z;
+                var_f2_2 =
+                    -((temp_f11_2 * (sp48 - sp60)) +
+                      ((temp_f9_2 * (sp40 - sp58)) +
+                       (temp_f10_2 * (sp44 - sp5C)))) /
+                    ((temp_f11_2 * temp_f11_2) +
+                     ((temp_f9_2 * temp_f9_2) + (temp_f10_2 * temp_f10_2)));
+                if (var_f2_2 > (f32) 1.0) {
+                    var_f2_2 = 1.0f;
+                } else if (var_f2_2 < (f32) 0.0) {
+                    var_f2_2 = 0.0f;
+                }
+                var_f24 = var_f2_2;
+            }
+        } else {
+            temp_f1_3 = ((temp_f13 * temp_f7) - (temp_f12 * temp_f6)) / temp_f5;
+            var_f24 = ((temp_f11 * temp_f7) - (temp_f13 * temp_f6)) / temp_f5;
+            var_f0 = temp_f1_3;
+            if ((temp_f1_3 > (f32) 1.0) || (var_f0 < (f32) 0.0) ||
+                (var_f24 > (f32) 1.0) || (var_f24 < (f32) 0.0))
+            {
+                if (var_f0 < (f32) 0.0) {
+                    var_f22 = 0.0f;
+                    var_f23 = lbColl_80005FC0(arg2, arg3, arg0, &spA4);
+                } else {
+                    var_f22 = 1.0f;
+                    var_f23 = lbColl_80005FC0(arg2, arg3, arg1, &spA4);
+                }
+                if (var_f24 < (f32) 0.0) {
+                    var_f24 = 0.0f;
+                    var_f1 = lbColl_80005FC0(arg0, arg1, arg2, &spA0);
+                } else {
+                    var_f24 = 1.0f;
+                    var_f1 = lbColl_80005FC0(arg0, arg1, arg3, &spA0);
+                }
+                if (var_f23 < var_f1) {
+                    var_f0 = var_f22;
+                    var_f24 = spA4;
+                } else {
+                    var_f0 = spA0;
+                }
+            }
+        }
+    }
+    arg4->x = (temp_f31 * var_f0) + spF0;
+    arg4->y = (temp_f30 * var_f0) + spF4;
+    arg4->z = 0.0f;
+    arg5->x = (temp_f29 * var_f24) + spE4;
+    arg5->y = (temp_f28 * var_f24) + spE8;
+    arg5->z = 0.0f;
+    temp_f4_2 = arg4->y - arg5->y;
+    temp_f2_6 = arg4->x - arg5->x;
+    if ((temp_f25 * temp_f25) <
+        ((temp_f2_6 * temp_f2_6) + (temp_f4_2 * temp_f4_2)))
+    {
+        return 0;
+    }
+    return 1;
+}
 #endif
 
 extern f64 const lbl_804D7A20;
@@ -2289,7 +3133,9 @@ bool lbColl_80007AFC(Hitbox* a, Hitbox* b, f32 x, f32 y)
 
 void lbColl_80007B78(Mtx a, Mtx b, f32 x, f32 y)
 {
-    lbColl_800067F8(&b[1][1], &b[0][2], &a[1][1], &a[0][2], &b[1][4], &a[1][4],
+    /// @todo Eliminate casts.
+    lbColl_800067F8((Vec3*) &b[1][1], (Vec3*) &b[0][2], (Vec3*) &a[1][1],
+                    (Vec3*) &a[0][2], (Vec3*) &b[1][4], (Vec3*) &a[1][4],
                     b[0][0] * y, a[0][0] * x, x);
 }
 
@@ -2810,7 +3656,7 @@ lbl_8000821C:
 #pragma pop
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm bool lbColl_80008248(Hitbox*, Hurtbox*, Mtx, f32, f32, f32)
 { // clang-format off
@@ -2921,6 +3767,71 @@ lbl_80008364:
 /* 800083C0 00004FA0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+inline void checkPos(Hurtbox* hurt, Mtx mtx, f32 arg5)
+{
+    if (!hurt->skip_update_pos) {
+        func_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
+        func_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
+
+        if (mtx != NULL) {
+            hurt->b_pos.z = arg5;
+            hurt->a_pos.z = arg5;
+        }
+
+        hurt->skip_update_pos = true;
+    }
+}
+
+inline void mtxConcat(Hurtbox* hurt, Mtx mtx)
+{
+    Mtx sp34;
+    if (mtx != NULL) {
+        HSD_JObj* temp_r31;
+        temp_r31 = hurt->bone;
+        HSD_JObjGetMtx(temp_r31);
+        PSMTXConcat(mtx, temp_r31->mtx, &sp34[0]);
+    }
+}
+
+inline f32* mtxGetRow(Hurtbox* hurt, Mtx mtx)
+{
+    f32* var_r9;
+    Mtx sp34;
+    if (mtx != NULL) {
+        var_r9 = sp34[0];
+    } else {
+        HSD_JObj* temp_r31_2 = hurt->bone;
+        HSD_JObjGetMtx(temp_r31_2);
+        var_r9 = temp_r31_2->mtx[0];
+    }
+    return var_r9;
+}
+
+inline f32 getHit1C(Hitbox* hit, f32 arg3)
+{
+    f32 var_f1;
+    if (hit->x43_b1)
+        var_f1 = hit->scl;
+    else
+        var_f1 = hit->scl * arg3;
+    return var_f1;
+}
+
+bool lbColl_80008248(Hitbox* hit, Hurtbox* hurt, Mtx mtx, f32 arg3, f32 arg4,
+                     f32 arg5)
+{
+    M2C_UNK sp70;
+    M2C_UNK sp64;
+
+    checkPos(hurt, mtx, arg5);
+    mtxConcat(hurt, mtx);
+
+    return lbColl_80006E58(&hit->x58, &hit->x4C, &hurt->a_pos, &hurt->b_pos,
+                           &sp70, &sp64, mtxGetRow(hurt, mtx), &hit->x64,
+                           getHit1C(hit, arg3), hurt->scl, 3.0f * arg4);
+}
 #endif
 
 void lbColl_800083C4(Hurtbox* arg0)
@@ -5832,6 +6743,84 @@ lbl_8000AB0C:
 /* 8000AB28 00007708  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
+{
+    f32 sp98;
+    f32 sp94;
+    f32 sp90;
+    f32 sp8C;
+    f32 sp88;
+    f32 sp84;
+    f32 sp80;
+    f32 sp7C;
+    s32 sp78;
+    f32 sp74;
+    f32 sp70;
+    s32 sp6C;
+    Vec3 sp30;
+    Vec3 sp24;
+    HSD_JObj* temp_r31;
+    HSD_JObj* temp_r31_2;
+    f32* var_r31;
+    f32 temp_f31;
+    u32 var_r0;
+
+    if ((u8) M2C_FIELD(&lbl_804D36CC, u8*, 3) == 0xFF) {
+        var_r0 = 0U;
+    } else {
+        var_r0 = 2U;
+    }
+    if (var_r0 == arg1) {
+        if (!(((u8) M2C_FIELD(arg0, u8*, 4) >> 7U) & 1)) {
+            func_8000B1CC(arg0->bone, &arg0->offset, &arg0->pos);
+            if (arg2 != NULL) {
+                arg0->pos.z = pos_z;
+            }
+            M2C_FIELD(arg0, u8*, 4) = (u8) (M2C_FIELD(arg0, u8*, 4) | 0x80);
+        }
+        if (arg2 != NULL) {
+            temp_r31 = arg0->bone;
+            if (temp_r31 == NULL) {
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+            }
+            HSD_JObjUnkMtxPtr(temp_r31);
+            PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r31->mtx[0],
+                        (f32(*)[4]) & sp9C[0]);
+        }
+        temp_f31 = arg0->size;
+        sp84 = arg0->pos.x;
+        sp88 = arg0->pos.y;
+        sp8C = arg0->pos.z;
+        sp90 = arg0->pos.x;
+        sp94 = arg0->pos.y;
+        sp98 = arg0->pos.z;
+        if (arg2 != NULL) {
+            var_r31 = &sp9C[0];
+        } else {
+            temp_r31_2 = arg0->bone;
+            if (temp_r31_2 == NULL) {
+                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+            }
+            HSD_JObjUnkMtxPtr(temp_r31_2);
+            var_r31 = temp_r31_2->mtx[0];
+        }
+        HSD_MtxInverse((f32(*)[4]) var_r31, (f32(*)[4]) & sp3C[0]);
+        PSMTXMUltiVec((f32(*)[4]) & sp3C[0], (Vec3*) &sp90, &sp24);
+        PSMTXMUltiVec((f32(*)[4]) & sp3C[0], (Vec3*) &sp84, &sp30);
+        sp78 = (s32) sp30;
+        sp6C = (s32) sp24;
+        sp7C = sp30.y;
+        sp70 = sp24.y;
+        sp80 = sp30.z;
+        sp74 = sp24.z;
+        lbColl_800096B4((f32(*)[4]) var_r31, &sp6C, &sp78, &lbl_804D36CC,
+                        &lbl_804D36D0, temp_f31);
+        return 1;
+    }
+    return 0;
+}
 #endif
 
 extern int lbl_804D36D4;
@@ -5973,14 +6962,14 @@ lbl_8000ACDC:
 #pragma pop
 #endif
 
-bool lbColl_8000ACFC(UNK_T victim_gobj, Hitbox* hitbox)
+bool lbColl_8000ACFC(UNK_T victim, Hitbox* hitbox)
 {
     HitVictim* victims = hitbox->victims_1;
     size_t const count = ARRAY_SIZE(hitbox->victims_1);
     size_t i;
 
     for (i = 0; i < count; i++) {
-        if (victims[i].victim == victim_gobj)
+        if (victims[i].victim == victim)
             break;
     }
 
