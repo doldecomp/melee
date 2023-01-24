@@ -154,7 +154,7 @@ int lbColl_80005BB0(Hitbox*, int);
 bool lbColl_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
                      f32 hurt_pos_z);
 bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32);
-bool lbColl_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32);
+bool lbColl_80007BCC(Hitbox*, HitResult shield_hit, unk_t, s32, f32, f32, f32);
 bool lbColl_80007AFC(Hitbox*, Hitbox*, f32, f32);
 UNK_RET lbColl_80007DD8(UNK_PARAMS);
 UNK_RET lbColl_80008D30(UNK_PARAMS);
@@ -170,7 +170,6 @@ bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Mtx, Vec3*, f32,
                      f32 scl, f32);
 UNK_RET lbColl_800077A0(UNK_PARAMS);
 UNK_RET lbColl_80007B78(Mtx, Mtx, f32, f32);
-bool lbColl_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32);
 void lbColl_800083C4(Hurtbox*);
 UNK_RET lbColl_800089B8(UNK_PARAMS);
 UNK_RET lbColl_80008A5C(UNK_PARAMS);

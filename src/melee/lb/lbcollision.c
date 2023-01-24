@@ -16,6 +16,7 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 
+/// @todo Remove this comment.
 // #undef MUST_MATCH
 
 int lbl_803B9880[] = {
@@ -3551,7 +3552,8 @@ extern f32 const lbl_804D7A34;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool lbColl_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32)
+asm bool lbColl_80007BCC(Hitbox*, HitResult shield_hit, unk_t, s32, f32, f32,
+                         f32)
 { // clang-format off
     nofralloc
 /* 80007BCC 000047AC  7C 08 02 A6 */	mflr r0
