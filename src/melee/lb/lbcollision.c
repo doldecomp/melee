@@ -11,7 +11,6 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
-#include <placeholder.h>
 #include <sysdolphin/baselib/baselib_shared_data_003.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
@@ -3258,8 +3257,7 @@ extern f32 const lbl_804D7A30;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, unk_t, unk_t, unk_t, f32,
-                         f32)
+asm void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*, f32*, f32, f32)
 { // clang-format off
     nofralloc
 /* 800077A0 00004380  7C 08 02 A6 */	mflr r0
@@ -3490,6 +3488,132 @@ lbl_80007AE0:
 /* 80007AF8 000046D8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
+                     Vec3* arg5, f32* angle, f32 arg7, f32 arg8)
+{
+    f32 sp70;
+    f32 sp6C;
+    f32 sp68;
+    f32 sp58;
+    f32 sp54;
+    f32 sp50;
+    f32 sp4C;
+    f32 sp48;
+    f32 sp44;
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 sp30;
+    f32 sp2C;
+    f32 temp_f0;
+    f32 temp_f0_2;
+    f32 temp_f10;
+    f32 temp_f1;
+    f32 temp_f1_5;
+    f32 temp_f1_6;
+    f32 temp_f2;
+    f32 temp_f4;
+    f32 temp_f5;
+    f32 temp_f8;
+    f32 temp_f9;
+    f32 var_f31;
+    f32 var_f3;
+    f32 var_f3_2;
+    f32 var_f6;
+    f64 temp_f1_2;
+    f64 temp_f1_3;
+    f64 temp_f1_4;
+    f64 temp_f2_2;
+    f64 temp_f2_3;
+    f64 temp_f2_4;
+    s32 var_r0;
+
+    temp_f0 = arg3->x - arg2->x;
+    sp68 = temp_f0;
+    sp6C = arg3->y - arg2->y;
+    sp70 = arg3->z - arg2->z;
+    if ((temp_f0 != 0.0f) || (sp6C != 0.0f) || (sp70 != 0.0f)) {
+        sp44 = arg7;
+        sp48 = 0.0f;
+        sp4C = 0.0f;
+        PSMTXMUltiVec(arg1, (Vec3*) &sp44, (Vec3*) &sp44);
+        sp38 = 0.0f;
+        sp3C = 0.0f;
+        sp40 = 0.0f;
+        PSMTXMUltiVec(arg1, (Vec3*) &sp38, (Vec3*) &sp38);
+        temp_f1 = sp48 - sp3C;
+        temp_f4 = sp44 - sp38;
+        temp_f2 = sp4C - sp40;
+        var_f31 =
+            (temp_f2 * temp_f2) + ((temp_f4 * temp_f4) + (temp_f1 * temp_f1));
+        if (var_f31 > 0.0f) {
+            temp_f1_2 = __frsqrte(var_f31);
+            temp_f1_3 = 0.5 * temp_f1_2 *
+                        -(((f64) var_f31 * (temp_f1_2 * temp_f1_2)) - 3.0);
+            temp_f1_4 = 0.5 * temp_f1_3 *
+                        -(((f64) var_f31 * (temp_f1_3 * temp_f1_3)) - 3.0);
+            sp30 = (f32) ((f64) var_f31 *
+                          (0.5 * temp_f1_4 *
+                           -(((f64) var_f31 * (temp_f1_4 * temp_f1_4)) - 3.0)));
+            var_f31 = sp30;
+        }
+        temp_f1_5 = var_f31 + arg8;
+        temp_f0_2 = (sp70 * sp70) + ((sp68 * sp68) + (sp6C * sp6C));
+        temp_f8 = arg2->x - arg0->x;
+        temp_f9 = arg2->y - arg0->y;
+        temp_f10 = arg2->z - arg0->z;
+        if ((temp_f0_2 < 0.00001f) && (temp_f0_2 > -0.00001f)) {
+            var_r0 = 1;
+        } else {
+            var_r0 = 0;
+        }
+        if (var_r0 != 0) {
+            var_f3 = 0.0f;
+        } else {
+            temp_f5 = (2.0f * sp70 * temp_f10) +
+                      ((2.0f * sp68 * temp_f8) + (2.0f * sp6C * temp_f9));
+            temp_f1_6 = (temp_f5 * temp_f5) -
+                        (4.0f * temp_f0_2 *
+                         -((temp_f1_5 * temp_f1_5) -
+                           ((temp_f10 * temp_f10) +
+                            ((temp_f8 * temp_f8) + (temp_f9 * temp_f9)))));
+            var_f6 = temp_f1_6;
+            if (temp_f1_6 < 0.0f) {
+                var_f6 = 0.0f;
+            }
+            if (var_f6 > 0.0f) {
+                temp_f2_2 = __frsqrte(var_f6);
+                temp_f2_3 = 0.5 * temp_f2_2 *
+                            -(((f64) var_f6 * (temp_f2_2 * temp_f2_2)) - 3.0);
+                temp_f2_4 = 0.5 * temp_f2_3 *
+                            -(((f64) var_f6 * (temp_f2_3 * temp_f2_3)) - 3.0);
+                sp2C =
+                    (f32) ((f64) var_f6 *
+                           (0.5 * temp_f2_4 *
+                            -(((f64) var_f6 * (temp_f2_4 * temp_f2_4)) - 3.0)));
+                var_f3_2 = sp2C;
+            } else {
+                var_f3_2 = var_f6;
+            }
+            var_f3 = (-temp_f5 - var_f3_2) / (2.0f * temp_f0_2);
+        }
+        sp50 = ((var_f3 * sp68) + arg2->x) - arg0->x;
+        sp54 = ((var_f3 * sp6C) + arg2->y) - arg0->y;
+        sp58 = ((var_f3 * sp70) + arg2->z) - arg0->z;
+        PSVECNormalize((Vec3*) &sp50, arg5);
+        *angle = lbvector_AngleXY(arg5, (Vec3*) &sp68);
+        arg4->x = (var_f31 * arg5->x) + arg0->x;
+        arg4->y = (var_f31 * arg5->y) + arg0->y;
+        arg4->z = (var_f31 * arg5->z) + arg0->z;
+        return;
+    }
+    *angle = 3.1415927f;
+    arg5->z = 0.0f;
+    arg5->y = 0.0f;
+    arg5->x = 0.0f;
+}
 #endif
 
 bool lbColl_80007AFC(Hitbox* a, Hitbox* b, f32 x, f32 y)
@@ -3835,7 +3959,7 @@ lbl_80007E90:
 void lbColl_80007DD8(Hitbox* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
                      unk_t arg4, f32 arg5)
 {
-    M2C_UNK sp5C;
+    unk_t sp5C = NULL;
     HSD_JObj* temp_r31;
     HSD_JObj* temp_r31_2;
     Mtx* var_r4;
@@ -3865,7 +3989,7 @@ void lbColl_80007DD8(Hitbox* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
         lbColl_JObjSetupMatrix(temp_r31_2);
         var_r4 = &temp_r31_2->mtx;
     }
-    lbColl_800077A0(&arg1->pos, *var_r4, &arg0->x58, &arg0->x4C, &sp5C, arg3,
+    lbColl_800077A0(&arg1->pos, *var_r4, &arg0->x58, &arg0->x4C, sp5C, arg3,
                     arg4, arg1->size, var_f31);
 }
 #endif

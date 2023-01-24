@@ -30,6 +30,7 @@ struct HitVictim {
 struct Hitbox {
     /// @at{0} @sz{4}
     Tangibility tangiblity;
+
     /// @at{4} @sz{C}
     /// The offset of point @e a of the capsule.
     Vec3 a_offset;
@@ -170,7 +171,9 @@ bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
 bool lbColl_800067F8(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32, f32);
 bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Mtx, Vec3*, f32,
                      f32 scl, f32);
-void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, unk_t, unk_t, unk_t, f32, f32);
+/// @param[out] angle
+void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*, f32* angle, f32,
+                     f32);
 UNK_RET lbColl_80007B78(Mtx, Mtx, f32, f32);
 void lbColl_800083C4(Hurtbox*);
 UNK_RET lbColl_800089B8(UNK_PARAMS);
