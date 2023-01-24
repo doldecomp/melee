@@ -3586,7 +3586,7 @@ lbl_80007C78:
 /* 80007C98 00004878  48 38 05 89 */	bl __assert
 lbl_80007C9C:
 /* 80007C9C 0000487C  7F A3 EB 78 */	mr r3, r29
-/* 80007CA0 00004880  48 00 00 C9 */	bl HSD_JObjUnkMtxPtr
+/* 80007CA0 00004880  48 00 00 C9 */	bl lbColl_JObjSetupMatrix
 /* 80007CA4 00004884  38 9D 00 44 */	addi r4, r29, 0x44
 /* 80007CA8 00004888  38 7C 00 00 */	addi r3, r28, 0
 /* 80007CAC 0000488C  38 A1 00 38 */	addi r5, r1, 0x38
@@ -3606,7 +3606,7 @@ lbl_80007CC4:
 /* 80007CDC 000048BC  48 38 05 45 */	bl __assert
 lbl_80007CE0:
 /* 80007CE0 000048C0  7F A3 EB 78 */	mr r3, r29
-/* 80007CE4 000048C4  48 00 00 85 */	bl HSD_JObjUnkMtxPtr
+/* 80007CE4 000048C4  48 00 00 85 */	bl lbColl_JObjSetupMatrix
 /* 80007CE8 000048C8  39 3D 00 44 */	addi r9, r29, 0x44
 lbl_80007CEC:
 /* 80007CEC 000048CC  88 1E 00 43 */	lbz r0, 0x43(r30)
@@ -3680,7 +3680,7 @@ bool lbColl_80007BCC(Hitbox* arg0, HitResult* shield_hit, void* arg2, s32 arg3,
         if (temp_r29 == NULL) {
             __assert(lbl_804D3700, 0x478U, lbl_804D3708);
         }
-        HSD_JObjUnkMtxPtr(temp_r29);
+        lbColl_JObjSetupMatrix(temp_r29);
         PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r29->mtx[0], sp38);
     }
     if (arg2 != NULL) {
@@ -3690,7 +3690,7 @@ bool lbColl_80007BCC(Hitbox* arg0, HitResult* shield_hit, void* arg2, s32 arg3,
         if (temp_r29_2 == NULL) {
             __assert(lbl_804D3700, 0x478U, lbl_804D3708);
         }
-        HSD_JObjUnkMtxPtr(temp_r29_2);
+        lbColl_JObjSetupMatrix(temp_r29_2);
         var_r9 = temp_r29_2->mtx[0];
     }
     if (((u8) arg0->x43 >> 6U) & 1) {
@@ -3708,7 +3708,7 @@ bool lbColl_80007BCC(Hitbox* arg0, HitResult* shield_hit, void* arg2, s32 arg3,
 
 #ifdef MUST_MATCH
 #pragma push
-asm void HSD_JObjUnkMtxPtr(HSD_JObj*)
+asm void lbColl_JObjSetupMatrix(HSD_JObj*)
 { // clang-format off
     nofralloc
 /* 80007D68 00004948  7C 08 02 A6 */	mflr r0
@@ -3747,7 +3747,7 @@ lbl_80007DC4:
 #pragma pop
 #else
 
-void HSD_JObjUnkMtxPtr(HSD_JObj* arg0)
+void lbColl_JObjSetupMatrix(HSD_JObj* arg0)
 {
     /// @todo Missing branch somehow
     HSD_JObjSetupMatrix(arg0);
@@ -3781,7 +3781,7 @@ asm void lbColl_80007DD8(Hitbox*, HitResult*, Mtx, unk_t, unk_t, f32)
 /* 80007E20 00004A00  48 38 04 01 */	bl __assert
 lbl_80007E24:
 /* 80007E24 00004A04  7F E3 FB 78 */	mr r3, r31
-/* 80007E28 00004A08  4B FF FF 41 */	bl HSD_JObjUnkMtxPtr
+/* 80007E28 00004A08  4B FF FF 41 */	bl lbColl_JObjSetupMatrix
 /* 80007E2C 00004A0C  38 9F 00 44 */	addi r4, r31, 0x44
 /* 80007E30 00004A10  38 7C 00 00 */	addi r3, r28, 0
 /* 80007E34 00004A14  38 A1 00 2C */	addi r5, r1, 0x2c
@@ -3810,7 +3810,7 @@ lbl_80007E68:
 /* 80007E80 00004A60  48 38 03 A1 */	bl __assert
 lbl_80007E84:
 /* 80007E84 00004A64  7F E3 FB 78 */	mr r3, r31
-/* 80007E88 00004A68  4B FF FE E1 */	bl HSD_JObjUnkMtxPtr
+/* 80007E88 00004A68  4B FF FE E1 */	bl lbColl_JObjSetupMatrix
 /* 80007E8C 00004A6C  38 9F 00 44 */	addi r4, r31, 0x44
 lbl_80007E90:
 /* 80007E90 00004A70  FC 40 F8 90 */	fmr f2, f31
@@ -3847,7 +3847,7 @@ void lbColl_80007DD8(Hitbox* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
         if (temp_r31 == NULL) {
             __assert(lbl_804D3700, 0x478U, lbl_804D3708);
         }
-        HSD_JObjUnkMtxPtr(temp_r31);
+        lbColl_JObjSetupMatrix(temp_r31);
         PSMTXConcat(arg2, (f32(*)[4]) temp_r31->mtx[0], (f32(*)[4]) & sp2C[0]);
     }
     if (((u8) arg0->x43 >> 6U) & 1) {
@@ -3862,7 +3862,7 @@ void lbColl_80007DD8(Hitbox* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
         if (temp_r31_2 == NULL) {
             __assert(lbl_804D3700, 0x478U, lbl_804D3708);
         }
-        HSD_JObjUnkMtxPtr(temp_r31_2);
+        lbColl_JObjSetupMatrix(temp_r31_2);
         var_r4 = &temp_r31_2->mtx;
     }
     lbColl_800077A0(&arg1->pos, *var_r4, &arg0->x58, &arg0->x4C, &sp5C, arg3,
@@ -3930,7 +3930,7 @@ lbl_80007F64:
 /* 80007F84 00004B64  48 38 02 9D */	bl __assert
 lbl_80007F88:
 /* 80007F88 00004B68  7F E3 FB 78 */	mr r3, r31
-/* 80007F8C 00004B6C  4B FF FD DD */	bl HSD_JObjUnkMtxPtr
+/* 80007F8C 00004B6C  4B FF FD DD */	bl lbColl_JObjSetupMatrix
 /* 80007F90 00004B70  38 9F 00 44 */	addi r4, r31, 0x44
 /* 80007F94 00004B74  38 7E 00 00 */	addi r3, r30, 0
 /* 80007F98 00004B78  38 A1 00 34 */	addi r5, r1, 0x34
@@ -3950,7 +3950,7 @@ lbl_80007FB0:
 /* 80007FC8 00004BA8  48 38 02 59 */	bl __assert
 lbl_80007FCC:
 /* 80007FCC 00004BAC  7F E3 FB 78 */	mr r3, r31
-/* 80007FD0 00004BB0  4B FF FD 99 */	bl HSD_JObjUnkMtxPtr
+/* 80007FD0 00004BB0  4B FF FD 99 */	bl lbColl_JObjSetupMatrix
 /* 80007FD4 00004BB4  39 3F 00 44 */	addi r9, r31, 0x44
 lbl_80007FD8:
 /* 80007FD8 00004BB8  88 1C 00 43 */	lbz r0, 0x43(r28)
@@ -4022,7 +4022,7 @@ bool lbColl_80007ECC(Hitbox* arg0, Hurtbox* arg1, Mtx arg2, f32 hit_scl_y,
             if (temp_r31 == NULL) {
                 __assert(lbl_804D3700, 0x478U, lbl_804D3708);
             }
-            HSD_JObjUnkMtxPtr(temp_r31);
+            lbColl_JObjSetupMatrix(temp_r31);
             PSMTXConcat(arg2, (f32(*)[4]) temp_r31->mtx[0], sp34);
         }
         if (arg2 != NULL) {
@@ -4032,7 +4032,7 @@ bool lbColl_80007ECC(Hitbox* arg0, Hurtbox* arg1, Mtx arg2, f32 hit_scl_y,
             if (temp_r31_2 == NULL) {
                 __assert(lbl_804D3700, 0x478U, lbl_804D3708);
             }
-            HSD_JObjUnkMtxPtr(temp_r31_2);
+            lbColl_JObjSetupMatrix(temp_r31_2);
             var_r9 = &temp_r31_2->mtx;
         }
         if (((u8) arg0->x43 >> 6U) & 1) {
@@ -4132,7 +4132,7 @@ lbl_80008150:
 /* 80008170 00004D50  48 38 00 B1 */	bl __assert
 lbl_80008174:
 /* 80008174 00004D54  7F A3 EB 78 */	mr r3, r29
-/* 80008178 00004D58  4B FF FB F1 */	bl HSD_JObjUnkMtxPtr
+/* 80008178 00004D58  4B FF FB F1 */	bl lbColl_JObjSetupMatrix
 /* 8000817C 00004D5C  38 9D 00 44 */	addi r4, r29, 0x44
 /* 80008180 00004D60  38 7C 00 00 */	addi r3, r28, 0
 /* 80008184 00004D64  38 A1 00 38 */	addi r5, r1, 0x38
@@ -4152,7 +4152,7 @@ lbl_8000819C:
 /* 800081B4 00004D94  48 38 00 6D */	bl __assert
 lbl_800081B8:
 /* 800081B8 00004D98  7F A3 EB 78 */	mr r3, r29
-/* 800081BC 00004D9C  4B FF FB AD */	bl HSD_JObjUnkMtxPtr
+/* 800081BC 00004D9C  4B FF FB AD */	bl lbColl_JObjSetupMatrix
 /* 800081C0 00004DA0  39 3D 00 44 */	addi r9, r29, 0x44
 lbl_800081C4:
 /* 800081C4 00004DA4  88 1E 00 43 */	lbz r0, 0x43(r30)
@@ -4230,7 +4230,7 @@ s32 lbColl_8000805C(Hitbox* arg0, Hurtbox* arg1, void* arg2, s32 arg3, f32 arg4,
             if (temp_r29 == NULL) {
                 __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
             }
-            HSD_JObjUnkMtxPtr(temp_r29);
+            lbColl_JObjSetupMatrix(temp_r29);
             PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r29->mtx[0],
                         (f32(*)[4]) & sp38[0]);
         }
@@ -4241,7 +4241,7 @@ s32 lbColl_8000805C(Hitbox* arg0, Hurtbox* arg1, void* arg2, s32 arg3, f32 arg4,
             if (temp_r29_2 == NULL) {
                 __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
             }
-            HSD_JObjUnkMtxPtr(temp_r29_2);
+            lbColl_JObjSetupMatrix(temp_r29_2);
             var_r9 = temp_r29_2->mtx[0];
         }
         if (((u8) arg0->x43 >> 6U) & 1) {
@@ -4311,7 +4311,7 @@ lbl_800082D4:
 /* 800082F4 00004ED4  48 37 FF 2D */	bl __assert
 lbl_800082F8:
 /* 800082F8 00004ED8  7F E3 FB 78 */	mr r3, r31
-/* 800082FC 00004EDC  4B FF FA 6D */	bl HSD_JObjUnkMtxPtr
+/* 800082FC 00004EDC  4B FF FA 6D */	bl lbColl_JObjSetupMatrix
 /* 80008300 00004EE0  38 9F 00 44 */	addi r4, r31, 0x44
 /* 80008304 00004EE4  38 7E 00 00 */	addi r3, r30, 0
 /* 80008308 00004EE8  38 A1 00 34 */	addi r5, r1, 0x34
@@ -4331,7 +4331,7 @@ lbl_80008320:
 /* 80008338 00004F18  48 37 FE E9 */	bl __assert
 lbl_8000833C:
 /* 8000833C 00004F1C  7F E3 FB 78 */	mr r3, r31
-/* 80008340 00004F20  4B FF FA 29 */	bl HSD_JObjUnkMtxPtr
+/* 80008340 00004F20  4B FF FA 29 */	bl lbColl_JObjSetupMatrix
 /* 80008344 00004F24  39 3F 00 44 */	addi r9, r31, 0x44
 lbl_80008348:
 /* 80008348 00004F28  88 1C 00 43 */	lbz r0, 0x43(r28)
@@ -6781,7 +6781,7 @@ lbl_8000A2F8:
 /* 8000A318 00006EF8  48 37 DF 09 */	bl __assert
 lbl_8000A31C:
 /* 8000A31C 00006EFC  7F E3 FB 78 */	mr r3, r31
-/* 8000A320 00006F00  4B FF DA 49 */	bl HSD_JObjUnkMtxPtr
+/* 8000A320 00006F00  4B FF DA 49 */	bl lbColl_JObjSetupMatrix
 /* 8000A324 00006F04  38 9F 00 44 */	addi r4, r31, 0x44
 /* 8000A328 00006F08  38 7D 00 00 */	addi r3, r29, 0
 /* 8000A32C 00006F0C  38 A1 00 9C */	addi r5, r1, 0x9c
@@ -6820,7 +6820,7 @@ lbl_8000A390:
 /* 8000A3A8 00006F88  48 37 DE 79 */	bl __assert
 lbl_8000A3AC:
 /* 8000A3AC 00006F8C  7F 83 E3 78 */	mr r3, r28
-/* 8000A3B0 00006F90  4B FF D9 B9 */	bl HSD_JObjUnkMtxPtr
+/* 8000A3B0 00006F90  4B FF D9 B9 */	bl lbColl_JObjSetupMatrix
 /* 8000A3B4 00006F94  3B 9C 00 44 */	addi r28, r28, 0x44
 lbl_8000A3B8:
 /* 8000A3B8 00006F98  38 7C 00 00 */	addi r3, r28, 0
@@ -6942,7 +6942,7 @@ lbl_8000A4EC:
 /* 8000A53C 0000711C  48 37 DC E5 */	bl __assert
 lbl_8000A540:
 /* 8000A540 00007120  7F 43 D3 78 */	mr r3, r26
-/* 8000A544 00007124  4B FF D8 25 */	bl HSD_JObjUnkMtxPtr
+/* 8000A544 00007124  4B FF D8 25 */	bl lbColl_JObjSetupMatrix
 /* 8000A548 00007128  C0 3D 00 0C */	lfs f1, 0xc(r29)
 /* 8000A54C 0000712C  38 7A 00 44 */	addi r3, r26, 0x44
 /* 8000A550 00007130  38 9B 00 00 */	addi r4, r27, 0
@@ -7030,7 +7030,7 @@ lbl_8000A638:
 /* 8000A658 00007238  48 37 DB C9 */	bl __assert
 lbl_8000A65C:
 /* 8000A65C 0000723C  7F 63 DB 78 */	mr r3, r27
-/* 8000A660 00007240  4B FF D7 09 */	bl HSD_JObjUnkMtxPtr
+/* 8000A660 00007240  4B FF D7 09 */	bl lbColl_JObjSetupMatrix
 /* 8000A664 00007244  38 9B 00 44 */	addi r4, r27, 0x44
 /* 8000A668 00007248  38 7D 00 00 */	addi r3, r29, 0
 /* 8000A66C 0000724C  38 A1 00 A0 */	addi r5, r1, 0xa0
@@ -7067,7 +7067,7 @@ lbl_8000A6C8:
 /* 8000A6E0 000072C0  48 37 DB 41 */	bl __assert
 lbl_8000A6E4:
 /* 8000A6E4 000072C4  7F 63 DB 78 */	mr r3, r27
-/* 8000A6E8 000072C8  4B FF D6 81 */	bl HSD_JObjUnkMtxPtr
+/* 8000A6E8 000072C8  4B FF D6 81 */	bl lbColl_JObjSetupMatrix
 /* 8000A6EC 000072CC  3B 9B 00 44 */	addi r28, r27, 0x44
 lbl_8000A6F0:
 /* 8000A6F0 000072D0  38 7C 00 00 */	addi r3, r28, 0
@@ -7171,7 +7171,7 @@ lbl_8000A810:
 /* 8000A830 00007410  48 37 D9 F1 */	bl __assert
 lbl_8000A834:
 /* 8000A834 00007414  7F E3 FB 78 */	mr r3, r31
-/* 8000A838 00007418  4B FF D5 31 */	bl HSD_JObjUnkMtxPtr
+/* 8000A838 00007418  4B FF D5 31 */	bl lbColl_JObjSetupMatrix
 /* 8000A83C 0000741C  38 9F 00 44 */	addi r4, r31, 0x44
 /* 8000A840 00007420  38 7E 00 00 */	addi r3, r30, 0
 /* 8000A844 00007424  38 A1 00 9C */	addi r5, r1, 0x9c
@@ -7204,7 +7204,7 @@ lbl_8000A890:
 /* 8000A8A8 00007488  48 37 D9 79 */	bl __assert
 lbl_8000A8AC:
 /* 8000A8AC 0000748C  7F E3 FB 78 */	mr r3, r31
-/* 8000A8B0 00007490  4B FF D4 B9 */	bl HSD_JObjUnkMtxPtr
+/* 8000A8B0 00007490  4B FF D4 B9 */	bl lbColl_JObjSetupMatrix
 /* 8000A8B4 00007494  3B FF 00 44 */	addi r31, r31, 0x44
 lbl_8000A8B8:
 /* 8000A8B8 00007498  38 7F 00 00 */	addi r3, r31, 0
@@ -7310,7 +7310,7 @@ lbl_8000A9E0:
 /* 8000AA00 000075E0  48 37 D8 21 */	bl __assert
 lbl_8000AA04:
 /* 8000AA04 000075E4  7F E3 FB 78 */	mr r3, r31
-/* 8000AA08 000075E8  4B FF D3 61 */	bl HSD_JObjUnkMtxPtr
+/* 8000AA08 000075E8  4B FF D3 61 */	bl lbColl_JObjSetupMatrix
 /* 8000AA0C 000075EC  38 9F 00 44 */	addi r4, r31, 0x44
 /* 8000AA10 000075F0  38 7E 00 00 */	addi r3, r30, 0
 /* 8000AA14 000075F4  38 A1 00 9C */	addi r5, r1, 0x9c
@@ -7343,7 +7343,7 @@ lbl_8000AA60:
 /* 8000AA78 00007658  48 37 D7 A9 */	bl __assert
 lbl_8000AA7C:
 /* 8000AA7C 0000765C  7F E3 FB 78 */	mr r3, r31
-/* 8000AA80 00007660  4B FF D2 E9 */	bl HSD_JObjUnkMtxPtr
+/* 8000AA80 00007660  4B FF D2 E9 */	bl lbColl_JObjSetupMatrix
 /* 8000AA84 00007664  3B FF 00 44 */	addi r31, r31, 0x44
 lbl_8000AA88:
 /* 8000AA88 00007668  38 7F 00 00 */	addi r3, r31, 0
@@ -7434,7 +7434,7 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
             if (temp_r31 == NULL) {
                 __assert(lbl_804D3700, 0x478U, lbl_804D3708);
             }
-            HSD_JObjUnkMtxPtr(temp_r31);
+            lbColl_JObjSetupMatrix(temp_r31);
             PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r31->mtx[0],
                         (f32(*)[4]) & sp9C[0]);
         }
@@ -7452,7 +7452,7 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
             if (temp_r31_2 == NULL) {
                 __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
             }
-            HSD_JObjUnkMtxPtr(temp_r31_2);
+            lbColl_JObjSetupMatrix(temp_r31_2);
             var_r31 = temp_r31_2->mtx[0];
         }
         HSD_MtxInverse((f32(*)[4]) var_r31, (f32(*)[4]) & sp3C[0]);
@@ -7529,7 +7529,7 @@ lbl_8000ABB0:
 /* 8000ABD0 000077B0  48 37 D6 51 */	bl __assert
 lbl_8000ABD4:
 /* 8000ABD4 000077B4  7F E3 FB 78 */	mr r3, r31
-/* 8000ABD8 000077B8  4B FF D1 91 */	bl HSD_JObjUnkMtxPtr
+/* 8000ABD8 000077B8  4B FF D1 91 */	bl lbColl_JObjSetupMatrix
 /* 8000ABDC 000077BC  38 9F 00 44 */	addi r4, r31, 0x44
 /* 8000ABE0 000077C0  38 7E 00 00 */	addi r3, r30, 0
 /* 8000ABE4 000077C4  38 A1 00 9C */	addi r5, r1, 0x9c
@@ -7562,7 +7562,7 @@ lbl_8000AC30:
 /* 8000AC48 00007828  48 37 D5 D9 */	bl __assert
 lbl_8000AC4C:
 /* 8000AC4C 0000782C  7F E3 FB 78 */	mr r3, r31
-/* 8000AC50 00007830  4B FF D1 19 */	bl HSD_JObjUnkMtxPtr
+/* 8000AC50 00007830  4B FF D1 19 */	bl lbColl_JObjSetupMatrix
 /* 8000AC54 00007834  3B FF 00 44 */	addi r31, r31, 0x44
 lbl_8000AC58:
 /* 8000AC58 00007838  38 7F 00 00 */	addi r3, r31, 0

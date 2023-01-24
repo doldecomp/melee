@@ -146,7 +146,7 @@ struct Hurtbox {
     bool is_grabbable; // 0x48
 };
 
-void HSD_JObjUnkMtxPtr(HSD_JObj*);
+void lbColl_JObjSetupMatrix(HSD_JObj*);
 bool lbColl_80008248(Hitbox*, Hurtbox*, Mtx, f32, f32, f32);
 void lbColl_80008440(Hitbox*);
 void lbColl_80008434(Hitbox*);
