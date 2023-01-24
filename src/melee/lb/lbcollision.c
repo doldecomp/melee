@@ -3496,16 +3496,13 @@ lbl_80007AE0:
 #pragma pop
 #else
 
-inline f32 sqrDistance(Vec3* vec3, Vec3* vec4)
+inline f32 sqrDistance(Vec3* a, Vec3* b)
 {
     {
-        f32 y;
-        f32 temp_f4;
-        f32 temp_f2;
-        y = vec3->y - vec4->y;
-        temp_f4 = vec3->x - vec4->x;
-        temp_f2 = vec3->z - vec4->z;
-        return temp_f2 * temp_f2 + temp_f4 * temp_f4 + y * y;
+        f32 y = a->y - b->y;
+        f32 x = a->x - b->x;
+        f32 z = a->z - b->z;
+        return z * z + x * x + y * y;
     }
 }
 
@@ -3532,9 +3529,9 @@ void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
         multi_mtx.y = 0.0f;
         multi_mtx.z = 0.0f;
         PSMTXMUltiVec(arg1, &multi_mtx, &multi_mtx);
+
         {
-            f32 dist;
-            dist = sqrDistance(&normal_x, &multi_mtx);
+            f32 dist = sqrDistance(&normal_x, &multi_mtx);
             dist = sqrtf(dist);
 
             {
@@ -3577,11 +3574,11 @@ void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                     }
 
                     {
-                        Vec3 vec1;
-                        vec1.x = scl * diff_cb.x + b->x - a->x;
-                        vec1.y = scl * diff_cb.y + b->y - a->y;
-                        vec1.z = scl * diff_cb.z + b->z - a->z;
-                        PSVECNormalize(&vec1, e);
+                        Vec3 normalize_e;
+                        normalize_e.x = scl * diff_cb.x + b->x - a->x;
+                        normalize_e.y = scl * diff_cb.y + b->y - a->y;
+                        normalize_e.z = scl * diff_cb.z + b->z - a->z;
+                        PSVECNormalize(&normalize_e, e);
                     }
                 }
             }
