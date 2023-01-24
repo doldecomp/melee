@@ -3734,7 +3734,7 @@ bool lbColl_80007BCC(Hitbox* arg0, HitResult* shield_hit, void* arg2, s32 arg3,
 }
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void HSD_JObjUnkMtxPtr(HSD_JObj*)
 { // clang-format off
@@ -3773,6 +3773,13 @@ lbl_80007DC4:
 /* 80007DD4 000049B4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+void HSD_JObjUnkMtxPtr(HSD_JObj* arg0)
+{
+    /// @todo Missing branch somehow
+    HSD_JObjSetupMatrix(arg0);
+}
 #endif
 
 #ifdef MWERKS_GEKKO
