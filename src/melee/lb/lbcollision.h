@@ -42,7 +42,7 @@ struct Hitbox {
     /// The scale of the capsule.
     f32 scl;
 
-    HSD_JObj* x20_jobj;
+    HSD_JObj* bone;
 
     u8 x24[0x30 - 0x24];
 
@@ -118,7 +118,7 @@ struct Hurtbox {
     /// The scale of the capsule.
     f32 scl;
 
-    HSD_JObj* x20_jobj; // 0x20
+    HSD_JObj* bone; // 0x20
     u8 skip_update_pos : 1;
     u8 x24_b1 : 1; // 0x24 0x40
     u8 x24_b2 : 1; // 0x24 0x20

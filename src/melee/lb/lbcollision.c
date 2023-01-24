@@ -2928,8 +2928,8 @@ void lbColl_800083C4(Hurtbox* arg0)
     if (arg0->skip_update_pos)
         return;
 
-    func_8000B1CC(arg0->x20_jobj, &arg0->a_offset, &arg0->a_pos);
-    func_8000B1CC(arg0->x20_jobj, &arg0->b_offset, &arg0->b_pos);
+    func_8000B1CC(arg0->bone, &arg0->a_offset, &arg0->a_pos);
+    func_8000B1CC(arg0->bone, &arg0->b_offset, &arg0->b_pos);
     arg0->skip_update_pos = true;
 }
 
