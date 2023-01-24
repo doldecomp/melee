@@ -4674,14 +4674,14 @@ void lbColl_80008440(HitCapsule* arg0)
     void* var_r5;
     void* var_r5_2;
 
-    arg0->victims_1[0].fighter = NULL;
-    arg0->victims_1[1].fighter = NULL;
-    arg0->victims_1[2].fighter = NULL;
-    arg0->victims_1[3].fighter = NULL;
-    arg0->victims_1[4].fighter = NULL;
-    arg0->victims_1[5].fighter = NULL;
-    arg0->victims_1[6].fighter = NULL;
-    arg0->victims_1[7].fighter = NULL;
+    arg0->victims_1[0].victim = NULL;
+    arg0->victims_1[1].victim = NULL;
+    arg0->victims_1[2].victim = NULL;
+    arg0->victims_1[3].victim = NULL;
+    arg0->victims_1[4].victim = NULL;
+    arg0->victims_1[5].victim = NULL;
+    arg0->victims_1[6].victim = NULL;
+    arg0->victims_1[7].victim = NULL;
     var_r5 = arg0 + 0x40;
     var_ctr = 0xC - 8U;
     if (8U < 0xCU) {
@@ -4692,14 +4692,14 @@ void lbColl_80008440(HitCapsule* arg0)
         } while (var_ctr != 0);
     }
     arg0->x44 = 0;
-    arg0->victims_2[0].fighter = (Fighter*) 0U;
-    arg0->victims_2[1].fighter = (Fighter*) 0U;
-    arg0->victims_2[2].fighter = (Fighter*) 0U;
-    arg0->victims_2[3].fighter = (Fighter*) 0U;
-    arg0->victims_2[4].fighter = (Fighter*) 0U;
-    arg0->victims_2[5].fighter = (Fighter*) 0U;
-    arg0->victims_2[6].fighter = (Fighter*) 0U;
-    arg0->victims_2[7].fighter = (Fighter*) 0U;
+    arg0->victims_2[0].victim = (Fighter*) 0U;
+    arg0->victims_2[1].victim = (Fighter*) 0U;
+    arg0->victims_2[2].victim = (Fighter*) 0U;
+    arg0->victims_2[3].victim = (Fighter*) 0U;
+    arg0->victims_2[4].victim = (Fighter*) 0U;
+    arg0->victims_2[5].victim = (Fighter*) 0U;
+    arg0->victims_2[6].victim = (Fighter*) 0U;
+    arg0->victims_2[7].victim = (Fighter*) 0U;
     var_r5_2 = arg0 + 0x40;
     var_ctr_2 = 0xC - 8U;
     if (8U < 0xCU) {
@@ -4837,37 +4837,37 @@ void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst)
     s32 temp_r0_2;
     s32 var_ctr;
 
-    dst->victims_1[0].fighter = src->victims_1[0].fighter;
+    dst->victims_1[0].victim = src->victims_1[0].victim;
     dst->victims_1[0].iframes = src->victims_1[0].iframes;
-    dst->victims_2[0].fighter = src->victims_2[0].fighter;
+    dst->victims_2[0].victim = src->victims_2[0].victim;
     dst->victims_2[0].iframes = src->victims_2[0].iframes;
-    dst->victims_1[1].fighter = src->victims_1[1].fighter;
+    dst->victims_1[1].victim = src->victims_1[1].victim;
     dst->victims_1[1].iframes = src->victims_1[1].iframes;
-    dst->victims_2[1].fighter = src->victims_2[1].fighter;
+    dst->victims_2[1].victim = src->victims_2[1].victim;
     dst->victims_2[1].iframes = src->victims_2[1].iframes;
-    dst->victims_1[2].fighter = src->victims_1[2].fighter;
+    dst->victims_1[2].victim = src->victims_1[2].victim;
     dst->victims_1[2].iframes = src->victims_1[2].iframes;
-    dst->victims_2[2].fighter = src->victims_2[2].fighter;
+    dst->victims_2[2].victim = src->victims_2[2].victim;
     dst->victims_2[2].iframes = src->victims_2[2].iframes;
-    dst->victims_1[3].fighter = src->victims_1[3].fighter;
+    dst->victims_1[3].victim = src->victims_1[3].victim;
     dst->victims_1[3].iframes = src->victims_1[3].iframes;
-    dst->victims_2[3].fighter = src->victims_2[3].fighter;
+    dst->victims_2[3].victim = src->victims_2[3].victim;
     dst->victims_2[3].iframes = src->victims_2[3].iframes;
-    dst->victims_1[4].fighter = src->victims_1[4].fighter;
+    dst->victims_1[4].victim = src->victims_1[4].victim;
     dst->victims_1[4].iframes = src->victims_1[4].iframes;
-    dst->victims_2[4].fighter = src->victims_2[4].fighter;
+    dst->victims_2[4].victim = src->victims_2[4].victim;
     dst->victims_2[4].iframes = src->victims_2[4].iframes;
-    dst->victims_1[5].fighter = src->victims_1[5].fighter;
+    dst->victims_1[5].victim = src->victims_1[5].victim;
     dst->victims_1[5].iframes = src->victims_1[5].iframes;
-    dst->victims_2[5].fighter = src->victims_2[5].fighter;
+    dst->victims_2[5].victim = src->victims_2[5].victim;
     dst->victims_2[5].iframes = src->victims_2[5].iframes;
-    dst->victims_1[6].fighter = src->victims_1[6].fighter;
+    dst->victims_1[6].victim = src->victims_1[6].victim;
     dst->victims_1[6].iframes = src->victims_1[6].iframes;
-    dst->victims_2[6].fighter = src->victims_2[6].fighter;
+    dst->victims_2[6].victim = src->victims_2[6].victim;
     dst->victims_2[6].iframes = src->victims_2[6].iframes;
-    dst->victims_1[7].fighter = src->victims_1[7].fighter;
+    dst->victims_1[7].victim = src->victims_1[7].victim;
     dst->victims_1[7].iframes = src->victims_1[7].iframes;
-    dst->victims_2[7].fighter = src->victims_2[7].fighter;
+    dst->victims_2[7].victim = src->victims_2[7].victim;
     dst->victims_2[7].iframes = src->victims_2[7].iframes;
     var_r9 = src->victims_1 + 0x40;
     var_r6 = dst->victims_1 + 0x40;
@@ -4876,16 +4876,16 @@ void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst)
     var_ctr = 0xC - 8U;
     if (8U < 0xCU) {
         do {
-            temp_r5 = var_r9->fighter;
+            temp_r5 = var_r9->victim;
             temp_r0 = var_r9->iframes;
             var_r9 += 8;
-            var_r6->fighter = temp_r5;
+            var_r6->victim = temp_r5;
             var_r6->iframes = temp_r0;
             var_r6 += 8;
-            temp_r5_2 = var_r7->fighter;
+            temp_r5_2 = var_r7->victim;
             temp_r0_2 = var_r7->iframes;
             var_r7 += 8;
-            var_r8->fighter = temp_r5_2;
+            var_r8->victim = temp_r5_2;
             var_r8->iframes = temp_r0_2;
             var_r8 += 8;
             var_ctr -= 1;
@@ -5039,7 +5039,7 @@ bool lbColl_80008688(HitCapsule* arg0, int arg1, Fighter* arg2)
     var_r6 = arg0;
     var_r7 = 0;
 loop_1:
-    if ((Fighter*) var_r6->victims_1[0].fighter == arg2) {
+    if ((Fighter*) var_r6->victims_1[0].victim == arg2) {
         if (arg1 != 6) {
             if (arg1 < 6) {
                 if (arg1 != 3) {
@@ -5064,10 +5064,10 @@ loop_1:
         var_r6_2 = arg0;
         var_r8 = 0;
     loop_13:
-        if ((Fighter*) var_r6_2->victims_1[0].fighter != NULL) {
+        if ((Fighter*) var_r6_2->victims_1[0].victim != NULL) {
             temp_r6 = &var_r6_2->a_offset.y;
             var_r8 += 1;
-            if ((Fighter*) var_r6_2->victims_1[1].fighter != NULL) {
+            if ((Fighter*) var_r6_2->victims_1[1].victim != NULL) {
                 temp_r6_2 = temp_r6 + 8;
                 var_r8 += 1;
                 if ((u32) M2C_FIELD(temp_r6, u32*, 0x7C) != 0U) {
@@ -5096,7 +5096,7 @@ loop_1:
         } else {
             var_r0 = var_r8;
         }
-        arg0->victims_1[var_r0].fighter = arg2;
+        arg0->victims_1[var_r0].victim = arg2;
         if (arg1 != 6) {
             if (arg1 < 6) {
                 if (arg1 != 3) {
