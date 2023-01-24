@@ -74,14 +74,19 @@ struct Hitbox {
     u8 x42_b5 : 1;
     u8 x42_b6 : 1;
     u8 x42_b7 : 1;
-    u8 x43_b0 : 1;
-    u8 x43_b1 : 1;
-    u8 x43_b2 : 1;
-    u8 x43_b3 : 1;
-    u8 x43_b4 : 1;
-    u8 x43_b5 : 1;
-    u8 x43_b6 : 1;
-    u8 x43_b7 : 1;
+    union {
+        u8 x43;
+        struct {
+            u8 x43_b0 : 1;
+            u8 x43_b1 : 1;
+            u8 x43_b2 : 1;
+            u8 x43_b3 : 1;
+            u8 x43_b4 : 1;
+            u8 x43_b5 : 1;
+            u8 x43_b6 : 1;
+            u8 x43_b7 : 1;
+        };
+    };
     u8 x44;
     u8 x45;
     char unk_46[0x4C - 0x46];
@@ -154,7 +159,7 @@ int lbColl_80005BB0(Hitbox*, int);
 bool lbColl_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
                      f32 hurt_pos_z);
 bool lbColl_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32);
-bool lbColl_80007BCC(Hitbox*, HitResult shield_hit, unk_t, s32, f32, f32, f32);
+bool lbColl_80007BCC(Hitbox*, HitResult* shield_hit, unk_t, s32, f32, f32, f32);
 bool lbColl_80007AFC(Hitbox*, Hitbox*, f32, f32);
 UNK_RET lbColl_80007DD8(UNK_PARAMS);
 UNK_RET lbColl_80008D30(UNK_PARAMS);

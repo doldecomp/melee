@@ -3550,11 +3550,12 @@ extern char* lbl_804D3700;
 extern char* lbl_804D3708;
 extern f32 const lbl_804D7A34;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm bool lbColl_80007BCC(Hitbox*, HitResult shield_hit, unk_t, s32, f32, f32,
+asm bool lbColl_80007BCC(Hitbox*, HitResult* shield_hit, unk_t, s32, f32, f32,
                          f32)
-{ // clang-format off
+{
+    // clang-format off
     nofralloc
 /* 80007BCC 000047AC  7C 08 02 A6 */	mflr r0
 /* 80007BD0 000047B0  90 01 00 04 */	stw r0, 4(r1)
@@ -3672,6 +3673,65 @@ lbl_80007D3C:
 /* 80007D64 00004944  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_80007BCC(Hitbox* arg0, HitResult* shield_hit, void* arg2, s32 arg3,
+                     f32 arg4, f32 arg5, f32 arg6)
+{
+    Vec3 sp74;
+    Vec3 sp68;
+    int* sp8;
+    HSD_JObj* temp_r29;
+    HSD_JObj* temp_r29_2;
+    Vec3* temp_r5;
+    f32* var_r9;
+    f32 var_f1;
+    Mtx sp38;
+
+    if (!(((u8) M2C_FIELD(shield_hit, u8*, 4) >> 7U) & 1)) {
+        func_8000B1CC(shield_hit->bone, &shield_hit->offset, &shield_hit->pos);
+        if (arg2 != NULL) {
+            shield_hit->pos.z = arg6;
+        }
+        M2C_FIELD(shield_hit, u8*, 4) =
+            (u8) (M2C_FIELD(shield_hit, u8*, 4) | 0x80);
+    }
+    if (arg3 != 0) {
+        arg0->x64.x = shield_hit->pos.x;
+        arg0->x64.y = shield_hit->pos.y;
+        arg0->x64.z = shield_hit->pos.z;
+        arg0->x70 = 0.0f;
+        return 1;
+    }
+    if (arg2 != NULL) {
+        temp_r29 = shield_hit->bone;
+        if (temp_r29 == NULL) {
+            __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+        }
+        HSD_JObjUnkMtxPtr(temp_r29);
+        PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r29->mtx[0], sp38);
+    }
+    if (arg2 != NULL) {
+        var_r9 = sp38[0];
+    } else {
+        temp_r29_2 = shield_hit->bone;
+        if (temp_r29_2 == NULL) {
+            __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+        }
+        HSD_JObjUnkMtxPtr(temp_r29_2);
+        var_r9 = temp_r29_2->mtx[0];
+    }
+    if (((u8) arg0->x43 >> 6U) & 1) {
+        var_f1 = arg0->scl;
+    } else {
+        var_f1 = arg0->scl * arg4;
+    }
+    sp8 = &arg0->x70;
+    temp_r5 = &shield_hit->pos;
+    return lbColl_80006E58(&arg0->x58, &arg0->x4C, temp_r5, temp_r5, &sp74,
+                           &sp68, (f32(*)[4]) var_r9, &arg0->x64, var_f1,
+                           shield_hit->size, 20.0f * arg5);
+}
 #endif
 
 #ifdef MWERKS_GEKKO
