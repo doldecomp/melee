@@ -18,13 +18,8 @@ struct HitResult {
 };
 
 struct HitVictim {
-    /// @at{0} @sz{4}
     UNK_T victim;
-
-    /// @at{4} @sz{4}
-    /// @brief The number of frames needed to pass before this entity can be hit
-    ///        again; 0 = can't rehit
-    s32 iframes;
+    UNK_T x4;
 };
 
 struct HitCapsule {
