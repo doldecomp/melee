@@ -3255,7 +3255,7 @@ extern f32 const lbl_804D7A28;
 extern f32 const lbl_804D7A2C;
 extern f32 const lbl_804D7A30;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 asm void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*, f32*, f32, f32)
 { // clang-format off
@@ -3493,9 +3493,7 @@ lbl_80007AE0:
 void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                      Vec3* arg5, f32* angle, f32 arg7, f32 arg8)
 {
-    f32 sp70;
-    f32 sp6C;
-    f32 sp68;
+    Vec3 vec0;
     f32 sp58;
     f32 sp54;
     f32 sp50;
@@ -3507,7 +3505,7 @@ void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
     f32 sp38;
     f32 sp30;
     f32 sp2C;
-    f32 temp_f0;
+    f32 arg3_x;
     f32 temp_f0_2;
     f32 temp_f10;
     f32 temp_f1;
@@ -3530,11 +3528,11 @@ void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
     f64 temp_f2_4;
     s32 var_r0;
 
-    temp_f0 = arg3->x - arg2->x;
-    sp68 = temp_f0;
-    sp6C = arg3->y - arg2->y;
-    sp70 = arg3->z - arg2->z;
-    if ((temp_f0 != 0.0f) || (sp6C != 0.0f) || (sp70 != 0.0f)) {
+    arg3_x = arg3->x - arg2->x;
+    vec0.x = arg3_x;
+    vec0.y = arg3->y - arg2->y;
+    vec0.z = arg3->z - arg2->z;
+    if (arg3_x != 0.0f || vec0.y != 0.0f || vec0.z != 0.0f) {
         sp44 = arg7;
         sp48 = 0.0f;
         sp4C = 0.0f;
@@ -3548,6 +3546,7 @@ void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
         temp_f2 = sp4C - sp40;
         var_f31 =
             (temp_f2 * temp_f2) + ((temp_f4 * temp_f4) + (temp_f1 * temp_f1));
+
         if (var_f31 > 0.0f) {
             temp_f1_2 = __frsqrte(var_f31);
             temp_f1_3 = 0.5 * temp_f1_2 *
@@ -3560,20 +3559,23 @@ void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
             var_f31 = sp30;
         }
         temp_f1_5 = var_f31 + arg8;
-        temp_f0_2 = (sp70 * sp70) + ((sp68 * sp68) + (sp6C * sp6C));
+        temp_f0_2 = vec0.z * vec0.z + vec0.x * vec0.x + vec0.y * vec0.y;
         temp_f8 = arg2->x - arg0->x;
         temp_f9 = arg2->y - arg0->y;
         temp_f10 = arg2->z - arg0->z;
+
+        /// @todo shared inline
         if ((temp_f0_2 < 0.00001f) && (temp_f0_2 > -0.00001f)) {
             var_r0 = 1;
         } else {
             var_r0 = 0;
         }
+
         if (var_r0 != 0) {
             var_f3 = 0.0f;
         } else {
-            temp_f5 = (2.0f * sp70 * temp_f10) +
-                      ((2.0f * sp68 * temp_f8) + (2.0f * sp6C * temp_f9));
+            temp_f5 = (2.0f * vec0.z * temp_f10) +
+                      ((2.0f * vec0.x * temp_f8) + (2.0f * vec0.y * temp_f9));
             temp_f1_6 = (temp_f5 * temp_f5) -
                         (4.0f * temp_f0_2 *
                          -((temp_f1_5 * temp_f1_5) -
@@ -3599,16 +3601,19 @@ void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
             }
             var_f3 = (-temp_f5 - var_f3_2) / (2.0f * temp_f0_2);
         }
-        sp50 = ((var_f3 * sp68) + arg2->x) - arg0->x;
-        sp54 = ((var_f3 * sp6C) + arg2->y) - arg0->y;
-        sp58 = ((var_f3 * sp70) + arg2->z) - arg0->z;
+
+        sp50 = ((var_f3 * vec0.x) + arg2->x) - arg0->x;
+        sp54 = ((var_f3 * vec0.y) + arg2->y) - arg0->y;
+        sp58 = ((var_f3 * vec0.z) + arg2->z) - arg0->z;
         PSVECNormalize((Vec3*) &sp50, arg5);
-        *angle = lbvector_AngleXY(arg5, (Vec3*) &sp68);
+
+        *angle = lbvector_AngleXY(arg5, (Vec3*) &vec0.x);
         arg4->x = (var_f31 * arg5->x) + arg0->x;
         arg4->y = (var_f31 * arg5->y) + arg0->y;
         arg4->z = (var_f31 * arg5->z) + arg0->z;
         return;
     }
+
     *angle = 3.1415927f;
     arg5->z = 0.0f;
     arg5->y = 0.0f;
