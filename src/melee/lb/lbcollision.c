@@ -7,6 +7,7 @@
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/mtx/mtxvec.h>
+#include <math.h>
 #include <melee/lb/forward.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
@@ -3508,133 +3509,93 @@ inline f32 sqrDistance(Vec3* vec3, Vec3* vec4)
     }
 }
 
-/// @todo sqrtf inline
-inline f32 todo_sqrtf(Vec3* vec3, Vec3* vec4)
+void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
+                     f32* angle, f32 x, f32 dist_offset)
 {
-    f32 result = sqrDistance(vec3, vec4);
-    f64 sqrt;
-    f64 temp1;
-    f64 temp2;
+    Vec3 diff_cb;
+    f32 diff_cb_x;
 
-    if (result > 0.0f) {
-        f32 temp0;
-        sqrt = __frsqrte(result);
-        temp1 = 0.5 * sqrt * -(((f64) result * (sqrt * sqrt)) - 3.0);
-        temp2 = 0.5 * temp1 * -(((f64) result * (temp1 * temp1)) - 3.0);
-        temp0 =
-            (f32) ((f64) result *
-                   (0.5 * temp2 * -(((f64) result * (temp2 * temp2)) - 3.0)));
-        result = temp0;
-    }
+    diff_cb.x = diff_cb_x = c->x - b->x;
+    diff_cb.y = c->y - b->y;
+    diff_cb.z = c->z - b->z;
 
-    return result;
-}
+    if (diff_cb_x != 0.0f || diff_cb.y != 0.0f || diff_cb.z != 0.0f) {
+        Vec3 normal_x;
+        Vec3 multi_mtx;
 
-void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
-                     Vec3* arg5, f32* angle, f32 arg7, f32 arg8)
-{
-    Vec3 vec0;
-    f32 sp2C;
-    f32 arg3_x;
-    f32 temp_f1_6;
-    f32 temp_f5;
-    f32 dist;
-    f32 var_f3;
-    f32 var_f3_2;
-    f32 var_f6;
-    f64 temp_f2_2;
-    f64 temp_f2_3;
-    f64 temp_f2_4;
+        normal_x.x = x;
+        normal_x.y = 0.0f;
+        normal_x.z = 0.0f;
+        PSMTXMUltiVec(arg1, &normal_x, &normal_x);
 
-    arg3_x = arg3->x - arg2->x;
-    vec0.x = arg3_x;
-    vec0.y = arg3->y - arg2->y;
-    vec0.z = arg3->z - arg2->z;
-
-    if (arg3_x != 0.0f || vec0.y != 0.0f || vec0.z != 0.0f) {
-        Vec3 vec3;
-        Vec3 vec4;
-        vec3.x = arg7;
-        vec3.y = 0.0f;
-        vec3.z = 0.0f;
-        PSMTXMUltiVec(arg1, &vec3, &vec3);
-        vec4.x = 0.0f;
-        vec4.y = 0.0f;
-        vec4.z = 0.0f;
-        PSMTXMUltiVec(arg1, (Vec3*) &vec4.x, (Vec3*) &vec4.x);
-
-        dist = todo_sqrtf(&vec3, &vec4);
-
+        multi_mtx.x = 0.0f;
+        multi_mtx.y = 0.0f;
+        multi_mtx.z = 0.0f;
+        PSMTXMUltiVec(arg1, &multi_mtx, &multi_mtx);
         {
-            f32 temp_f1_5;
-            f32 temp_f0_2;
-            f32 temp_f8;
-            f32 temp_f9;
-            f32 temp_f10;
-            temp_f1_5 = dist + arg8;
-            temp_f0_2 = vec0.z * vec0.z + vec0.x * vec0.x + vec0.y * vec0.y;
-            temp_f8 = arg2->x - arg0->x;
-            temp_f9 = arg2->y - arg0->y;
-            temp_f10 = arg2->z - arg0->z;
+            f32 dist;
+            dist = sqrDistance(&normal_x, &multi_mtx);
+            dist = sqrtf(dist);
 
             {
-                // return var_f3
-                if (approximatelyZero(temp_f0_2)) {
-                    var_f3 = 0.0f;
-                } else {
-                    temp_f5 =
-                        (2.0f * vec0.z * temp_f10) +
-                        ((2.0f * vec0.x * temp_f8) + (2.0f * vec0.y * temp_f9));
-                    temp_f1_6 =
-                        (temp_f5 * temp_f5) -
-                        (4.0f * temp_f0_2 *
-                         -((temp_f1_5 * temp_f1_5) -
-                           ((temp_f10 * temp_f10) +
-                            ((temp_f8 * temp_f8) + (temp_f9 * temp_f9)))));
-                    var_f6 = temp_f1_6;
-                    if (temp_f1_6 < 0.0f) {
-                        var_f6 = 0.0f;
-                    }
-                    if (var_f6 > 0.0f) {
-                        /// @todo sqrtf
-                        temp_f2_2 = __frsqrte(var_f6);
-                        temp_f2_3 =
-                            0.5 * temp_f2_2 *
-                            -(((f64) var_f6 * (temp_f2_2 * temp_f2_2)) - 3.0);
-                        temp_f2_4 =
-                            0.5 * temp_f2_3 *
-                            -(((f64) var_f6 * (temp_f2_3 * temp_f2_3)) - 3.0);
-                        sp2C =
-                            (f32) ((f64) var_f6 *
-                                   (0.5 * temp_f2_4 *
-                                    -(((f64) var_f6 * (temp_f2_4 * temp_f2_4)) -
-                                      3.0)));
-                        var_f3_2 = sp2C;
-                    } else {
-                        var_f3_2 = var_f6;
-                    }
-                    var_f3 = (-temp_f5 - var_f3_2) / (2.0f * temp_f0_2);
-                }
+                f32 offset_dist = dist + dist_offset;
+                f32 dot_diff_cb = diff_cb.z * diff_cb.z +
+                                  diff_cb.x * diff_cb.x + diff_cb.y * diff_cb.y;
+
+                f32 diff_ba_x = b->x - a->x;
+                f32 diff_ba_y = b->y - a->y;
+                f32 diff_ba_z = b->z - a->z;
 
                 {
-                    Vec3 vec1;
-                    vec1.x = var_f3 * vec0.x + arg2->x - arg0->x;
-                    vec1.y = var_f3 * vec0.y + arg2->y - arg0->y;
-                    vec1.z = var_f3 * vec0.z + arg2->z - arg0->z;
-                    PSVECNormalize(&vec1, arg5);
+                    f32 scl;
+
+                    if (approximatelyZero(dot_diff_cb)) {
+                        scl = 0.0f;
+                    } else {
+                        f32 n0 = 2.0f * diff_cb.z * diff_ba_z +
+                                 2.0f * diff_cb.x * diff_ba_x +
+                                 2.0f * diff_cb.y * diff_ba_y;
+
+                        f32 n1 = n0 * n0 - (4.0f * dot_diff_cb *
+                                            -(offset_dist * offset_dist -
+                                              diff_ba_z * diff_ba_z +
+                                              diff_ba_x * diff_ba_x +
+                                              diff_ba_y * diff_ba_y));
+
+                        if (n1 < 0.0f)
+                            n1 = 0.0f;
+
+                        {
+                            f32 n2;
+                            if (n1 > 0.0f)
+                                n2 = sqrtf(n1);
+                            else
+                                n2 = n1;
+
+                            scl = (-n0 - n2) / (2.0f * dot_diff_cb);
+                        }
+                    }
+
+                    {
+                        Vec3 vec1;
+                        vec1.x = scl * diff_cb.x + b->x - a->x;
+                        vec1.y = scl * diff_cb.y + b->y - a->y;
+                        vec1.z = scl * diff_cb.z + b->z - a->z;
+                        PSVECNormalize(&vec1, e);
+                    }
                 }
             }
-        }
 
-        *angle = lbvector_AngleXY(arg5, &vec0);
-        arg4->x = dist * arg5->x + arg0->x;
-        arg4->y = dist * arg5->y + arg0->y;
-        arg4->z = dist * arg5->z + arg0->z;
+            *angle = lbvector_AngleXY(e, &diff_cb);
+            d->x = dist * e->x + a->x;
+            d->y = dist * e->y + a->y;
+            d->z = dist * e->z + a->z;
+        }
     } else {
         *angle = M_PI;
-        arg5->z = 0.0f;
-        arg5->y = 0.0f;
-        arg5->x = 0.0f;
+        e->z = 0.0f;
+        e->y = 0.0f;
+        e->x = 0.0f;
     }
 }
 #endif
