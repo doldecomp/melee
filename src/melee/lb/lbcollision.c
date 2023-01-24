@@ -11,13 +11,17 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
+#include <MetroTRK/intrinsics.h>
 #include <sysdolphin/baselib/baselib_shared_data_003.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 
-/// @todo Remove this comment.
+/// @todo Remove these
+/// @{
 // #undef MUST_MATCH
+#pragma require_prototypes off
+/// @}
 
 int lbl_803B9880[] = {
     0x00083D60, 0x00083D60, 0x00083D60, 0x0000005B, 0x0000005A, 0x00000059,
@@ -2871,9 +2875,7 @@ bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
     f32 sp54;
     f32 sp44;
     f32 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
+    Vec3 vec2;
     f32 temp_f0;
     f32 temp_f10;
     f32 temp_f10_2;
@@ -3120,7 +3122,7 @@ block_39:
                 }
                 var_f24 = var_f2;
             } else {
-                sp3C = arg2->x;
+                vec2.z = arg2->x;
                 var_f0 = 1.0f;
                 sp40 = arg2->y;
                 sp44 = arg2->z;
@@ -3132,7 +3134,7 @@ block_39:
                 sp5C = arg1->z;
                 var_f2_2 =
                     -((temp_f11_5 * (sp44 - sp5C)) +
-                      ((temp_f9_4 * (sp3C - sp54)) +
+                      ((temp_f9_4 * (vec2.z - sp54)) +
                        (temp_f10_4 * (sp40 - sp58)))) /
                     ((temp_f11_5 * temp_f11_5) +
                      ((temp_f9_4 * temp_f9_4) + (temp_f10_4 * temp_f10_4)));
@@ -3193,10 +3195,10 @@ block_39:
                     -(((f64) temp_f1_5 * (temp_f1_6 * temp_f1_6)) - 3.0);
         temp_f1_8 = 0.5 * temp_f1_7 *
                     -(((f64) temp_f1_5 * (temp_f1_7 * temp_f1_7)) - 3.0);
-        sp38 = (f32) ((f64) temp_f1_5 *
-                      (0.5 * temp_f1_8 *
-                       -(((f64) temp_f1_5 * (temp_f1_8 * temp_f1_8)) - 3.0)));
-        var_f30 = sp38;
+        vec2.y = (f32) ((f64) temp_f1_5 *
+                        (0.5 * temp_f1_8 *
+                         -(((f64) temp_f1_5 * (temp_f1_8 * temp_f1_8)) - 3.0)));
+        var_f30 = vec2.y;
     } else {
         var_f30 = temp_f1_5;
     }
@@ -3226,11 +3228,11 @@ block_39:
                      -(((f64) temp_f1_10 * (temp_f1_11 * temp_f1_11)) - 3.0);
         temp_f1_13 = 0.5 * temp_f1_12 *
                      -(((f64) temp_f1_10 * (temp_f1_12 * temp_f1_12)) - 3.0);
-        sp34 =
+        vec2.x =
             (f32) ((f64) temp_f1_10 *
                    (0.5 * temp_f1_13 *
                     -(((f64) temp_f1_10 * (temp_f1_13 * temp_f1_13)) - 3.0)));
-        var_f1_2 = sp34;
+        var_f1_2 = vec2.x;
     } else {
         var_f1_2 = temp_f1_10;
     }
@@ -3257,8 +3259,9 @@ extern f32 const lbl_804D7A30;
 
 #ifdef MUST_MATCH
 #pragma push
-asm void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*, f32*, f32, f32)
-{ // clang-format off
+asm void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*, f32*, f32,
+                         f32){
+    // clang-format off
     nofralloc
 /* 800077A0 00004380  7C 08 02 A6 */	mflr r0
 /* 800077A4 00004384  90 01 00 04 */	stw r0, 4(r1)
@@ -3490,33 +3493,33 @@ lbl_80007AE0:
 #pragma pop
 #else
 
+f32 sqrDistance(Vec3* vec3, Vec3* vec4)
+{
+    {
+        f32 y;
+        f32 temp_f4;
+        f32 temp_f2;
+        y = vec3->y - vec4->y;
+        temp_f4 = vec3->x - vec4->x;
+        temp_f2 = vec3->z - vec4->z;
+        return temp_f2 * temp_f2 + temp_f4 * temp_f4 + y * y;
+    }
+}
 void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                      Vec3* arg5, f32* angle, f32 arg7, f32 arg8)
 {
     Vec3 vec0;
-    f32 sp58;
-    f32 sp54;
-    f32 sp50;
-    f32 sp4C;
-    f32 sp48;
-    f32 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
     f32 sp30;
     f32 sp2C;
     f32 arg3_x;
     f32 temp_f0_2;
     f32 temp_f10;
-    f32 temp_f1;
     f32 temp_f1_5;
     f32 temp_f1_6;
-    f32 temp_f2;
-    f32 temp_f4;
     f32 temp_f5;
     f32 temp_f8;
     f32 temp_f9;
-    f32 var_f31;
+    f32 sqr_dist;
     f32 var_f3;
     f32 var_f3_2;
     f32 var_f6;
@@ -3526,91 +3529,93 @@ void lbColl_800077A0(Vec3* arg0, Mtx arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
     f64 temp_f2_2;
     f64 temp_f2_3;
     f64 temp_f2_4;
-    s32 var_r0;
 
     arg3_x = arg3->x - arg2->x;
     vec0.x = arg3_x;
     vec0.y = arg3->y - arg2->y;
     vec0.z = arg3->z - arg2->z;
-    if (arg3_x != 0.0f || vec0.y != 0.0f || vec0.z != 0.0f) {
-        sp44 = arg7;
-        sp48 = 0.0f;
-        sp4C = 0.0f;
-        PSMTXMUltiVec(arg1, (Vec3*) &sp44, (Vec3*) &sp44);
-        sp38 = 0.0f;
-        sp3C = 0.0f;
-        sp40 = 0.0f;
-        PSMTXMUltiVec(arg1, (Vec3*) &sp38, (Vec3*) &sp38);
-        temp_f1 = sp48 - sp3C;
-        temp_f4 = sp44 - sp38;
-        temp_f2 = sp4C - sp40;
-        var_f31 =
-            (temp_f2 * temp_f2) + ((temp_f4 * temp_f4) + (temp_f1 * temp_f1));
 
-        if (var_f31 > 0.0f) {
-            temp_f1_2 = __frsqrte(var_f31);
+    if (arg3_x != 0.0f || vec0.y != 0.0f || vec0.z != 0.0f) {
+        Vec3 vec3;
+        Vec3 vec4;
+        vec3.x = arg7;
+        vec3.y = 0.0f;
+        vec3.z = 0.0f;
+        PSMTXMUltiVec(arg1, &vec3, &vec3);
+        vec4.x = 0.0f;
+        vec4.y = 0.0f;
+        vec4.z = 0.0f;
+        PSMTXMUltiVec(arg1, (Vec3*) &vec4.x, (Vec3*) &vec4.x);
+
+        sqr_dist = sqrDistance(&vec3, &vec4);
+
+        if (sqr_dist > 0.0f) {
+            temp_f1_2 = __frsqrte(sqr_dist);
             temp_f1_3 = 0.5 * temp_f1_2 *
-                        -(((f64) var_f31 * (temp_f1_2 * temp_f1_2)) - 3.0);
+                        -(((f64) sqr_dist * (temp_f1_2 * temp_f1_2)) - 3.0);
             temp_f1_4 = 0.5 * temp_f1_3 *
-                        -(((f64) var_f31 * (temp_f1_3 * temp_f1_3)) - 3.0);
-            sp30 = (f32) ((f64) var_f31 *
-                          (0.5 * temp_f1_4 *
-                           -(((f64) var_f31 * (temp_f1_4 * temp_f1_4)) - 3.0)));
-            var_f31 = sp30;
+                        -(((f64) sqr_dist * (temp_f1_3 * temp_f1_3)) - 3.0);
+            sp30 =
+                (f32) ((f64) sqr_dist *
+                       (0.5 * temp_f1_4 *
+                        -(((f64) sqr_dist * (temp_f1_4 * temp_f1_4)) - 3.0)));
+            sqr_dist = sp30;
         }
-        temp_f1_5 = var_f31 + arg8;
+        temp_f1_5 = sqr_dist + arg8;
         temp_f0_2 = vec0.z * vec0.z + vec0.x * vec0.x + vec0.y * vec0.y;
         temp_f8 = arg2->x - arg0->x;
         temp_f9 = arg2->y - arg0->y;
         temp_f10 = arg2->z - arg0->z;
 
-        /// @todo shared inline
-        if ((temp_f0_2 < 0.00001f) && (temp_f0_2 > -0.00001f)) {
-            var_r0 = 1;
-        } else {
-            var_r0 = 0;
-        }
-
-        if (var_r0 != 0) {
-            var_f3 = 0.0f;
-        } else {
-            temp_f5 = (2.0f * vec0.z * temp_f10) +
-                      ((2.0f * vec0.x * temp_f8) + (2.0f * vec0.y * temp_f9));
-            temp_f1_6 = (temp_f5 * temp_f5) -
-                        (4.0f * temp_f0_2 *
-                         -((temp_f1_5 * temp_f1_5) -
-                           ((temp_f10 * temp_f10) +
-                            ((temp_f8 * temp_f8) + (temp_f9 * temp_f9)))));
-            var_f6 = temp_f1_6;
-            if (temp_f1_6 < 0.0f) {
-                var_f6 = 0.0f;
-            }
-            if (var_f6 > 0.0f) {
-                temp_f2_2 = __frsqrte(var_f6);
-                temp_f2_3 = 0.5 * temp_f2_2 *
-                            -(((f64) var_f6 * (temp_f2_2 * temp_f2_2)) - 3.0);
-                temp_f2_4 = 0.5 * temp_f2_3 *
-                            -(((f64) var_f6 * (temp_f2_3 * temp_f2_3)) - 3.0);
-                sp2C =
-                    (f32) ((f64) var_f6 *
-                           (0.5 * temp_f2_4 *
-                            -(((f64) var_f6 * (temp_f2_4 * temp_f2_4)) - 3.0)));
-                var_f3_2 = sp2C;
+        {
+            // return var_f3
+            if (approximatelyZero(temp_f0_2)) {
+                var_f3 = 0.0f;
             } else {
-                var_f3_2 = var_f6;
+                temp_f5 =
+                    (2.0f * vec0.z * temp_f10) +
+                    ((2.0f * vec0.x * temp_f8) + (2.0f * vec0.y * temp_f9));
+                temp_f1_6 = (temp_f5 * temp_f5) -
+                            (4.0f * temp_f0_2 *
+                             -((temp_f1_5 * temp_f1_5) -
+                               ((temp_f10 * temp_f10) +
+                                ((temp_f8 * temp_f8) + (temp_f9 * temp_f9)))));
+                var_f6 = temp_f1_6;
+                if (temp_f1_6 < 0.0f) {
+                    var_f6 = 0.0f;
+                }
+                if (var_f6 > 0.0f) {
+                    temp_f2_2 = __frsqrte(var_f6);
+                    temp_f2_3 =
+                        0.5 * temp_f2_2 *
+                        -(((f64) var_f6 * (temp_f2_2 * temp_f2_2)) - 3.0);
+                    temp_f2_4 =
+                        0.5 * temp_f2_3 *
+                        -(((f64) var_f6 * (temp_f2_3 * temp_f2_3)) - 3.0);
+                    sp2C = (f32) ((f64) var_f6 *
+                                  (0.5 * temp_f2_4 *
+                                   -(((f64) var_f6 * (temp_f2_4 * temp_f2_4)) -
+                                     3.0)));
+                    var_f3_2 = sp2C;
+                } else {
+                    var_f3_2 = var_f6;
+                }
+                var_f3 = (-temp_f5 - var_f3_2) / (2.0f * temp_f0_2);
             }
-            var_f3 = (-temp_f5 - var_f3_2) / (2.0f * temp_f0_2);
-        }
 
-        sp50 = ((var_f3 * vec0.x) + arg2->x) - arg0->x;
-        sp54 = ((var_f3 * vec0.y) + arg2->y) - arg0->y;
-        sp58 = ((var_f3 * vec0.z) + arg2->z) - arg0->z;
-        PSVECNormalize((Vec3*) &sp50, arg5);
+            {
+                Vec3 vec1;
+                vec1.x = var_f3 * vec0.x + arg2->x - arg0->x;
+                vec1.y = var_f3 * vec0.y + arg2->y - arg0->y;
+                vec1.z = var_f3 * vec0.z + arg2->z - arg0->z;
+                PSVECNormalize((Vec3*) &vec1.x, arg5);
+            }
+        }
 
         *angle = lbvector_AngleXY(arg5, (Vec3*) &vec0.x);
-        arg4->x = (var_f31 * arg5->x) + arg0->x;
-        arg4->y = (var_f31 * arg5->y) + arg0->y;
-        arg4->z = (var_f31 * arg5->z) + arg0->z;
+        arg4->x = sqr_dist * arg5->x + arg0->x;
+        arg4->y = sqr_dist * arg5->y + arg0->y;
+        arg4->z = sqr_dist * arg5->z + arg0->z;
         return;
     }
 
