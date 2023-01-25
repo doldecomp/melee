@@ -18,6 +18,7 @@ jobs:
         gh api \
           repos/doldecomp/melee/pulls/${{github.event.number}}/files --paginate \
           | jq '.[] | select(.status != "removed") | .filename' \
+          | grep -vE "^\"tools/(calcprogress|m2c)/.*?\"" \
           > "$HOME/changed_files"
     - name: print list of changed files
       run: |

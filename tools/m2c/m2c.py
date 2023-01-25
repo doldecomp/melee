@@ -1,4 +1,4 @@
 #!/usr/bin/env python3
-from src.main import main
+from m2c.main import main
 
 main()
