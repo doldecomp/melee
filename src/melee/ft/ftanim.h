@@ -26,5 +26,6 @@ void func_80070F28(HSD_GObj*);
 void func_80070FB4(HSD_GObj*, s32, s32);
 bool func_80070FD0(Fighter*);
 void Fighter_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);
+void func_8006FA58(HSD_GObj*);
 
 #endif
