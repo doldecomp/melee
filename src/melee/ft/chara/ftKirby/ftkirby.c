@@ -138,7 +138,7 @@ void ftKirby_800EE7B8(HSD_GObj* fighter_gobj)
 void func_800EE818(HSD_GObj* fighter_gobj)
 {
     s32 unused[2];
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftKirbyAttributes* attr = fp->x2D4_specialAttributes;
     switch (fp->sa.kirby.x2238) {
     case 3:

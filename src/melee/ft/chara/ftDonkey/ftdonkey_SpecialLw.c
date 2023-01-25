@@ -9,7 +9,7 @@
 
 void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2340_stateVar1 = 0;
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17F, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
@@ -78,11 +78,17 @@ void ftDonkey_8010DE54(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DE88_inner(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (!fp->x2219_flag.bits.b0) {
         efAsync_Spawn(fighter_gobj, &fp->x60C, 1, 0x4CC,
                       fp->x5E8_fighterBones[0].x0_jobj);
-        fp->x2219_flag.bits.b0 = 1;
+        fp->x2219_flag.bits.b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -90,7 +96,7 @@ void ftDonkey_8010DE88_inner(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DE88(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21EC_callback = &ftDonkey_8010DE54;
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x180, 0, NULL, 0.0f, 1.0f,
@@ -150,7 +156,7 @@ void ftDonkey_8010E090(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E0CC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!fp->x2219_flag.bits.b0) {
         ef_Spawn(0x4C6, fighter_gobj, fp->x5E8_fighterBones[1].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
@@ -162,7 +168,7 @@ void ftDonkey_8010E0CC(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E148(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!fp->x2219_flag.bits.b0) {
         ef_Spawn(0x4C7, fighter_gobj, fp->x5E8_fighterBones[1].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;

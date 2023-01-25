@@ -21,7 +21,12 @@ void ftNess_AttackS4_Action(
     Fighter* fp;
     HSD_GObj* baseballBatGObj;
 
-    fp = getFighterPlus(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
 
     fp->x2218_flag.bits.b0 = 0;
 
@@ -91,8 +96,7 @@ void ftNess_ItemNessBatSetNULL(
 void ftNess_AttackS4_Anim(
     HSD_GObj* fighter_gobj) // Ness's F-Smash Animation callback
 {
-    Fighter* fighter_data1 = getFighterPlus(fighter_gobj);
-    Fighter* fighter_data2;
+    Fighter* fighter_data1 = GET_FIGHTER(fighter_gobj);
     ftNessAttributes* ness_attr;
 
     if (fighter_data1->x2218_flag.bits.b3 == 0) {
@@ -114,7 +118,8 @@ void ftNess_AttackS4_Anim(
     if (!ftAnim_IsFramesRemaining(
             fighter_gobj)) // Check if animation has frames remaining
     {
-        fighter_data2 = getFighter(fighter_gobj);
+        Fighter* fighter_data2;
+        fighter_data2 = GET_FIGHTER(fighter_gobj);
         if (fighter_data2->sa.ness.x2248_baseballBatGObj != NULL) {
             func_802AD6B8(
                 fighter_data2->sa.ness
@@ -131,7 +136,12 @@ void ftNess_AttackS4_Anim(
 void ftNess_AttackS4_IASA(
     HSD_GObj* fighter_gobj) // Ness's F-Smash IASA Callback
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->x2218_flag.bits.b0 != 0) {
         if (fp->sa.ness.x2248_baseballBatGObj != NULL) {

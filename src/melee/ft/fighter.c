@@ -39,6 +39,7 @@
 #include <melee/text_2.h>
 #include <melee/text_4.h>
 #include <MSL/trigf.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mtx.h>
@@ -208,8 +209,8 @@ inline void Fighter_InitScale(Fighter* fp, Vec3* scale, f32 modelScale)
 
 void Fighter_UpdateModelScale(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
-    HSD_JObj* jobj = getHSDJObj(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(fighter_gobj);
     f32 modelScale_f1 = Fighter_GetModelScale(fp);
     Vec3 scale;
 
@@ -508,7 +509,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
 void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     Fighter_UnkInitReset_80067C98(fp);
     HSD_JObjSetTranslate(fighter_gobj->hsd_obj, &fp->xB0_pos);
@@ -590,7 +591,7 @@ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
 
 void Fighter_ResetInputData_80068854(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->input.x620_lstick_x = fp->input.x624_lstick_y =
         fp->input.x628_lstick_x2 = fp->input.x62C_lstick_y2 = 0.0f;
@@ -819,10 +820,7 @@ u32 Fighter_NewSpawn_80068E40(void)
 
 void Fighter_80068E64(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = (void*) getFighter(
-        fighter_gobj); // bit of a fake void* cast, but a sacrifice well worth
-                       // getting rid of an fp_temp and filler. TODO: Maybe we
-                       // can still do better?
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (stage_info.internal_stage_id == 0x1B) {
         fp->x34_scale.z = p_ftCommonData->x7E4_scaleZ;
@@ -836,9 +834,9 @@ static void Fighter_Create_Inline2(HSD_GObj* fighter_gobj)
     Fighter* fp =
         getFighter(fighter_gobj); // you cant do (void*) here to make it
                                   // consistent, Fighter_Create wont match
-    if (fp->x2229_b5_no_normal_motion == 0) {
+    if (!fp->x2229_b5_no_normal_motion) {
         fp->x2EC = func_8001E8F8(func_80085E50(fp, 0x23));
-        if (fp->x2228_flag.bits.b2 == 0) {
+        if (!fp->x2228_flag.bits.b2) {
             fp->x2DC = func_8001E8F8(func_80085E50(fp, 7));
             fp->x2E0 = func_8001E8F8(func_80085E50(fp, 8));
             fp->x2E4 = func_8001E8F8(func_80085E50(fp, 9));

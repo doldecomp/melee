@@ -11,7 +11,7 @@
 // https://decomp.me/scratch/yi9xr // Remove all GFX and set GFX flags to false
 void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     efLib_DestroyAll(fighter_gobj);
 
@@ -21,7 +21,7 @@ void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
 
 inline void ftCaptain_SpecialS_SetCall(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = &lbl_800E28C8;
     fp->cb.x21E4_callback_OnDeath2 = &lbl_800E28C8;
 }
@@ -31,10 +31,10 @@ inline void ftCaptain_SpecialS_SetCall(HSD_GObj* fighter_gobj)
 // Raptor Boost/Gerudo Dragon Start Action State handler
 void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ftKind;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
 
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -77,10 +77,10 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 // Boost/Gerudo Dragon Start Action State handler
 void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ftKind;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
 
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -128,7 +128,7 @@ inline void ftCaptain_SpecialS_Switch0(HSD_GObj* fighter_gobj)
 
 inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS,
@@ -142,7 +142,7 @@ inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
 
 inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRS,
                                        FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0f,
                                        1.0f, 0.0f);
@@ -155,7 +155,7 @@ inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
 // / Gerudo Dragon Detect function
 void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs;
     HSD_GObj* detectGObj;
     s32 ASID;
@@ -271,7 +271,7 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
 void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
-    Fighter* temp_fp = getFighter(fighter_gobj);
+    Fighter* temp_fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = temp_fp->x2D4_specialAttributes;
     f32 var;
 
@@ -292,7 +292,7 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
 // Boost / Gerudo Dragon Hit Animation callback
 void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
     s32 ftKind;
     f32 var;
@@ -415,7 +415,7 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 // Raptor Boost / Gerudo Dragon Start Collision callback
 void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
     f32 facingDir;
 
@@ -453,7 +453,7 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
 // Raptor Boost / Gerudo Dragon Hit Collision callback
 void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* temp_fp = getFighter(fighter_gobj);
+    Fighter* temp_fp = GET_FIGHTER(fighter_gobj);
     Fighter* fp;
     ftCaptainAttributes* captainAttrs = temp_fp->x2D4_specialAttributes;
     f32 var;
@@ -492,7 +492,7 @@ void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
 // Boost / Gerudo Dragon Hit Collision callback
 void ftCaptain_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
 
     if (func_80081D0C(fighter_gobj) == true) {

@@ -8,7 +8,7 @@ extern s32 lbl_803C5A20[];
 
 void ftMario_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     func_80074A4C(gobj, 0, 0);
     fp->sa.mario.x222C_vitaminCurr = 9;
     fp->sa.mario.x2230_vitaminPrev = 9;

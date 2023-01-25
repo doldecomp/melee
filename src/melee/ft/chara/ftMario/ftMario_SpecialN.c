@@ -46,7 +46,7 @@ int ftMario_SpecialN_VitaminRandom(
 
 void ftMario_SpecialN_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALN, 0, NULL, 0.0f,
@@ -65,7 +65,7 @@ void ftMario_SpecialN_Anim(HSD_GObj* gobj)
 // 0x800E0E54
 void ftMario_SpecialN_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2200_ftcmd_var0 != 0)
         func_8008A4D4(gobj);
@@ -124,7 +124,7 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
 
 void ftMario_SpecialAirN_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRN, 0, NULL,
@@ -144,7 +144,7 @@ void ftMario_SpecialAirN_Anim(HSD_GObj* gobj)
 // 0x800E10EC
 void ftMario_SpecialAirN_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0 != 0) {
         func_800CCAAC(gobj);
     }
@@ -167,7 +167,7 @@ void ftMario_SpecialAirN_Coll(HSD_GObj* gobj)
 // 0x800E1178
 void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(
         gobj, AS_MARIO_SPECIALAIRN,
@@ -180,7 +180,7 @@ void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
 // 0x800E11E0
 void ftMario_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(
         gobj, AS_MARIO_SPECIALN,

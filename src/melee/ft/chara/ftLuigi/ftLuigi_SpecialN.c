@@ -12,7 +12,7 @@
 // handler
 void ftLuigi_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
@@ -25,7 +25,7 @@ void ftLuigi_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 // 0x801426EC - Luigi's aerial Fireball Action State handler
 void ftLuigi_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
@@ -55,14 +55,14 @@ void ftLuigi_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/JesBp // Luigi's grounded Fireball IASA callback
 void ftLuigi_SpecialN_IASA(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->x2200_ftcmd_var0 != 0U)
+    if (GET_FIGHTER(fighter_gobj)->x2200_ftcmd_var0 != 0U)
         func_8008A4D4(fighter_gobj);
 }
 
 // 0x80142804 - Luigi's aerial Fireball IASA callback
 void ftLuigi_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->x2200_ftcmd_var0 != 0U)
+    if (GET_FIGHTER(fighter_gobj)->x2200_ftcmd_var0 != 0U)
         func_800CCAAC(fighter_gobj);
 }
 
@@ -86,7 +86,7 @@ void ftLuigi_SpecialN_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp;
 
     if (func_80082708(fighter_gobj) == false) {
-        fp = getFighter(fighter_gobj);
+        fp = GET_FIGHTER(fighter_gobj);
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_LUIGI_SPECIALAIRN, FTLUIGI_SPECIALN_COLL_FLAG,
@@ -101,7 +101,7 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp;
 
     if (func_80081D0C(fighter_gobj) != false) {
-        fp = getFighter(fighter_gobj);
+        fp = GET_FIGHTER(fighter_gobj);
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_LUIGI_SPECIALN, FTLUIGI_SPECIALN_COLL_FLAG, NULL,

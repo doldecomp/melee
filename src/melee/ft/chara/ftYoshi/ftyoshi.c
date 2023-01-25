@@ -406,7 +406,7 @@ void func_8012C850(HSD_GObj* fighter_gobj)
     ftCommonData* temp_r5;
     Fighter* fp;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x10, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x672_input_timer_counter = 0xFE;

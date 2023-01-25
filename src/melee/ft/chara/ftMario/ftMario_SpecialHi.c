@@ -10,7 +10,7 @@ void ftMario_SpecialHi_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp;
 
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALHI, 0, NULL, 0.0f,
@@ -24,7 +24,7 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
     ftMarioAttributes* sa;
     u8 unused[4];
 
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
@@ -42,7 +42,7 @@ void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
     Fighter* fp;
     ftMarioAttributes* sa;
 
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80096900(gobj, 0, 1, 0, sa->x18_MARIO_SUPERJUMP_FREEFALL_MOBILITY,
@@ -73,7 +73,7 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
     f32 tmp;
 
     s32 throwflag_flag;
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
 
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
 
@@ -132,7 +132,7 @@ void ftMario_SpecialAirHi_IASA(HSD_GObj* gobj)
 // https://decomp.me/scratch/8axfI
 void ftMario_SpecialHi_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->xE0_ground_or_air == GA_Air) {
         func_80085154(gobj);
     } else {
@@ -174,7 +174,7 @@ void ftMario_SpecialHi_CheckLanding(HSD_GObj* gobj)
     Fighter* fp;
     ftMarioAttributes* sa;
 
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
 
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     func_800D5CB0(gobj, 0, sa->x1C_MARIO_SUPERJUMP_LANDING_LAG);
@@ -186,7 +186,7 @@ void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
 
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
     if (fp->xE0_ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);

@@ -6,6 +6,7 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/lb/forward.h>
 
 void ftDonkey_SetCallbacks_SpecialN(HSD_GObj* fighter_gobj)
 {
@@ -28,7 +29,7 @@ void ftDonkey_UpdateDKVelocityAfterPunch(HSD_GObj* fighter_gobj)
 
 void ftDonkey_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     if (fp->sa.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x175, 0, NULL, 0.0f,
@@ -58,7 +59,7 @@ void ftDonkey_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
 void ftDonkey_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     if (fp->sa.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17A, 0, NULL, 0.0f,
@@ -96,7 +97,7 @@ void ftDonkey_8010E7B4(HSD_GObj* fighter_gobj)
 
 void ftDonkey_NullCallbacks(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21F0_callback = 0;
     fp->cb.x21D4_callback_EnterHitlag = 0;
     fp->cb.x21D8_callback_ExitHitlag = 0;
@@ -104,7 +105,7 @@ void ftDonkey_NullCallbacks(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E840(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     if (0.0f == fp->x894_currentAnimFrame) {
         fp->sa.dk.x222C += 1;
@@ -146,7 +147,7 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj)
                      &fp->facing_dir);
         }
     }
-    if (fp->x914[0].x0) {
+    if (fp->x914[0].tangiblity != Vulnerable) {
         if (fp->x2344_stateVar2_s32 == 0)
             fp->x2344_stateVar2_s32 = 1;
 
@@ -183,7 +184,7 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
 
     if (fp->x2200_ftcmd_var0) {
@@ -202,7 +203,7 @@ void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj)
         }
     }
 
-    if (fp->x914[0].x0 && (fp->x2344_stateVar2_s32 == 0))
+    if (fp->x914[0].tangiblity != Vulnerable && (fp->x2344_stateVar2_s32 == 0))
         fp->x2344_stateVar2_s32 = 1;
 
     if (fp->x2344_stateVar2_s32 == 1) {
@@ -228,7 +229,7 @@ void ftDonkey_8010EC5C(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010ECE8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
 
     if (fp->x894_currentAnimFrame == 0.0f) {
@@ -254,8 +255,13 @@ void ftDonkey_8010ED88(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
-    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->x2200_ftcmd_var0) {
         if (fp->x2348_stateVar3_s32 == 0) {
@@ -272,7 +278,7 @@ void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj)
                      &fp->facing_dir);
         }
     }
-    if (fp->x914[0].x0) {
+    if (fp->x914[0].tangiblity != Vulnerable) {
         if (fp->x2350_stateVar5_s32 == -1) {
             fp->x2350_stateVar5_s32 = fp->x914[0].xC;
         }
@@ -305,8 +311,13 @@ void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010EF7C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
-    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->x2200_ftcmd_var0) {
         if (fp->x2348_stateVar3_s32 == 0) {
@@ -341,8 +352,12 @@ void ftDonkey_8010F094(HSD_GObj* fighter_gobj) {}
 
 void ftDonkey_8010F098(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
     if (!func_8009917C(fighter_gobj)) {
         if ((fp->input.x668 & 0x200)) {
             Fighter_ActionStateChange_800693AC(fighter_gobj, 0x174, 0, NULL,
@@ -373,8 +388,13 @@ void ftDonkey_8010F1E4(HSD_GObj* fighter_gobj) {}
 
 void ftDonkey_8010F1E8(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[12];
+#endif
+
     if ((fp->input.x668 & 0x200)) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x179, 0, NULL, 0.0f,
                                            1.0f, 0.0f);
@@ -451,7 +471,13 @@ void ftDonkey_8010F448(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010F468(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (!func_80082708(fighter_gobj)) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x176, 0x0C4C5080,
@@ -463,7 +489,13 @@ void ftDonkey_8010F468(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010F50C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (!func_80082708(fighter_gobj)) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x177, 0x0C4C5080,
@@ -475,7 +507,13 @@ void ftDonkey_8010F50C(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010F5B0(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (!func_80082708(fighter_gobj)) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x178, 0x0C4C5080,
@@ -487,7 +525,13 @@ void ftDonkey_8010F5B0(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010F654(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (func_800827A0(fighter_gobj) == 0) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x179, 0x0C4D508E,
@@ -499,7 +543,13 @@ void ftDonkey_8010F654(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010F6F8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (func_800827A0(fighter_gobj) == 0) {
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17A, 0x0C4D508E,
@@ -511,7 +561,13 @@ void ftDonkey_8010F6F8(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010F79C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (func_80081D0C(fighter_gobj) == 1) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x171, 0x0C4C5080,
@@ -523,7 +579,13 @@ void ftDonkey_8010F79C(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010F840(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (func_80081D0C(fighter_gobj) == 1) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x172, 0x0C4C5080,
@@ -535,7 +597,13 @@ void ftDonkey_8010F840(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010F8E4(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (func_80081D0C(fighter_gobj) == 1) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x173, 0x0C4C5080,
@@ -547,7 +615,13 @@ void ftDonkey_8010F8E4(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010F988(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (func_80081D0C(fighter_gobj)) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x174, 0x0C4D508E,
@@ -559,7 +633,13 @@ void ftDonkey_8010F988(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010FA2C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (func_80081D0C(fighter_gobj)) {
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x175, 0x0C4D508E,
