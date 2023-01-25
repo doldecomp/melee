@@ -4520,7 +4520,7 @@ void func_80084CB0(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80084CE4(void)
+asm bool func_80084CE4(Fighter* attacker, Fighter* victim)
 {
     // clang-format off
     nofralloc

@@ -6,6 +6,8 @@
 #define M_PI 3.14159265358979323846
 #define M_PI_2 1.57079632679489655799
 
+#define DEG_TO_RAD 0.01745329252f
+
 #ifdef __MWERKS__
 #pragma push
 #pragma cplusplus on

@@ -135,5 +135,9 @@ void func_80279B88(Item* item_data, s32 arg1, s32 arg2);
 void func_80279BBC(Item* item_data);
 void func_80279BE0(HSD_GObj* item_gobj);
 void func_8027B0C4(HSD_GObj*, SpawnItem*);
+void func_8026FAC4(void);
+void func_80077688(void);
+void func_8026FC00(void);
+void func_80272818(void);
 
 #endif
