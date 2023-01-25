@@ -1125,23 +1125,6 @@ inline bool end(Vec3* a, Vec3* b, f32 unk_sum)
     return true;
 }
 
-inline bool testRight(Vec3* a, Vec3* b, Vec3* c, f32 offset)
-{
-    f32 x = a->x + offset;
-    if (x < b->x && x < c->x)
-        return false;
-
-    return true;
-}
-
-inline bool testLeft(Vec3* a, Vec3* b, Vec3* c, f32 offset)
-{
-    f32 x = a->x - offset;
-    if (x > b->x && x > c->x)
-        return false;
-
-    return true;
-}
 int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                     Vec3* arg5, f32 arg6, f32 arg7)
 {
@@ -1179,16 +1162,16 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
         {
             f32 arg1_x = arg1->x;
             if (arg4_offset.x > arg1_x) {
-                if (!testRight(&arg4_offset, &arg5_offset, arg3, unk_sum))
+                if (!testPlusX(&arg4_offset, &arg5_offset, arg3, unk_sum))
                     return false;
 
-                if (!testLeft(&arg4_offset, &arg5_offset, arg3, unk_sum))
+                if (!testMinusX(&arg4_offset, &arg5_offset, arg3, unk_sum))
                     return false;
 
                 goto block_13;
             }
             {
-                if (!testLeft(&arg4_offset, &arg5_offset, arg3, unk_sum))
+                if (!testMinusX(&arg4_offset, &arg5_offset, arg3, unk_sum))
                     return false;
             }
             {
@@ -1915,271 +1898,307 @@ lbl_80006E1C:
 bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                      f32 p, f32 q, f32 r)
 {
-    f32 spA4;
-    f32 spA0;
-    f32 sp90;
-    f32 sp8C;
-    f32 sp88;
-    f32 sp78;
-    f32 sp74;
-    f32 sp70;
-    f32 sp60;
-    f32 sp5C;
-    f32 sp58;
-    f32 temp_f0;
-    f32 temp_f10;
-    f32 temp_f10_2;
-    f32 temp_f11;
-    f32 temp_f11_2;
-    f32 temp_f12;
-    f32 temp_f13;
-    f32 b_y;
-    f32 temp_f1_2;
-    f32 temp_f1_3;
-    f32 temp_f28;
-    f32 temp_f29;
-    f32 temp_f2_3;
-    f32 temp_f2_4;
-    f32 temp_f2_5;
-    f32 temp_f2_6;
-    f32 temp_f31;
-    f32 temp_f3;
-    f32 temp_f3_2;
-    f32 temp_f3_3;
-    f32 temp_f3_4;
-    f32 temp_f3_5;
-    f32 temp_f4;
-    f32 temp_f4_2;
-    f32 temp_f5;
-    f32 temp_f5_2;
-    f32 temp_f5_3;
-    f32 temp_f6;
-    f32 temp_f6_2;
-    f32 temp_f7;
-    f32 temp_f7_2;
-    f32 temp_f7_3;
-    f32 temp_f7_4;
-    f32 temp_f8;
-    f32 temp_f8_2;
-    f32 temp_f9;
-    f32 temp_f9_2;
-    f32 temp_r0_2;
-    f32 var_f0;
-    f32 var_f1;
-    f32 var_f22;
-    f32 var_f23;
-    f32 var_f24;
-    f32 var_f2;
+    f32 sum_pq = p + q;
 
+    f32 a_z;
+    Vec3 a0;
+    Vec3 a1;
+
+    a0.x = a->x;
+    a0.y = a->y;
+    a0.z = a_z = a->z;
+    a1.x = a0.x;
+    a1.y = a0.y;
+    a1.z = a_z;
     {
-        f32 sum_pq = p + q;
+        Vec3 c0;
+        f32 temp_r0_2;
 
-        f32 a_z;
-        Vec3 temp_a0;
-        Vec3 temp_a1;
+        c0.x = c->x;
+        c0.y = c->y;
+        c0.z = temp_r0_2 = c->z;
 
-        temp_a0.x = a->x;
-        temp_a0.y = a->y;
-        temp_a0.z = a_z = a->z;
-        temp_a1.x = temp_a0.x;
-        temp_a1.y = temp_a0.y;
-        temp_a1.z = a_z;
         {
-            Vec3 temp_c0;
-            temp_c0.x = c->x;
-            temp_c0.y = c->y;
-            temp_c0.z = temp_r0_2 = c->z;
+            Vec3 c1;
 
+            c1.x = c0.x;
+            c1.y = c0.y;
+            c1.z = temp_r0_2;
             {
-                Vec3 temp_c1;
-
-                temp_c1.x = temp_c0.x;
-                temp_c1.y = temp_c0.y;
-                temp_c1.z = temp_r0_2;
-                temp_f0 = b->x;
-                if (temp_a1.x > temp_f0) {
+                f32 b_x = b->x;
+                if (a1.x > b_x) {
                     {
-                        f32 x = temp_a1.x + sum_pq;
-                        if (x < temp_c1.x && x < d->x)
+                        f32 x = a1.x + sum_pq;
+                        if (x < c1.x && x < d->x)
                             return false;
                     }
+
                     {
-                        f32 x = temp_f0 - sum_pq;
-                        if ((x > temp_c1.x) && (x > d->x)) {
+                        f32 x = b_x - sum_pq;
+                        if ((x > c1.x) && (x > d->x))
                             return false;
-                        }
                     }
-                    goto block_13;
-                }
-                temp_f2_3 = temp_a1.x - sum_pq;
-                if (temp_f2_3 > temp_c1.x && temp_f2_3 > d->x) {
-                    return false;
-                }
-                temp_f2_4 = temp_f0 + sum_pq;
-                if (temp_f2_4 < temp_c1.x && temp_f2_4 < d->x) {
-                    return false;
-                }
-            block_13:
-                b_y = b->y;
-                if (temp_a1.y > b_y) {
-                    temp_f3 = temp_a1.y + sum_pq;
-                    if ((temp_f3 < temp_c1.y) && (temp_f3 < d->y)) {
-                        return false;
-                    }
-                    temp_f3_2 = b_y - sum_pq;
-                    if ((temp_f3_2 > temp_c1.y) && (temp_f3_2 > d->y)) {
-                        return false;
-                    }
-                    goto block_26;
-                }
-                temp_f3_3 = temp_a1.y - sum_pq;
-                if ((temp_f3_3 > temp_c1.y) && (temp_f3_3 > d->y)) {
-                    return false;
-                }
-                temp_f3_4 = b_y + sum_pq;
-                if ((temp_f3_4 < temp_c1.y) && (temp_f3_4 < d->y)) {
-                    return false;
-                }
-            block_26 : {
-                f32 temp_f30;
-                temp_f30 = b_y - temp_a1.y;
-                temp_f3_5 = d->y;
-                temp_f10 = temp_a1.y - temp_c1.y;
-                temp_f28 = temp_f3_5 - temp_c1.y;
-                temp_f31 = temp_f0 - temp_a1.x;
-                temp_f2_5 = d->x;
-                temp_f29 = temp_f2_5 - temp_c1.x;
-                temp_f13 = temp_f31 * temp_f29 + temp_f30 * temp_f28;
-                temp_f12 = temp_f29 * temp_f29 + temp_f28 * temp_f28;
-                temp_f11 = temp_f31 * temp_f31 + temp_f30 * temp_f30;
-                temp_f8 = temp_a1.x - temp_c1.x;
-                temp_f7 = temp_f29 * temp_f8 + temp_f28 * temp_f10;
-                temp_f6 = temp_f31 * temp_f8 + temp_f30 * temp_f10;
-                temp_f5 = temp_f11 * temp_f12 - temp_f13 * temp_f13;
 
-                if (approximatelyZero(temp_f12)) {
-                    if (approximatelyZero(temp_f11)) {
-                        var_f0 = 0.0f;
-                        var_f24 = 0.0f;
-                    } else {
-                        var_f24 = 0.0f;
-                        temp_f1_2 = -temp_f6 / temp_f11;
-                        var_f0 = temp_f1_2;
-                        if (temp_f1_2 > (f32) 1.0) {
-                            var_f0 = 1.0f;
-                        } else if (var_f0 < (f32) 0.0) {
-                            var_f0 = 0.0f;
-                        }
-                    }
-                } else if (approximatelyZero(temp_f5)) {
-                    temp_f7_2 =
-                        (f32) ((0.5 * (f64) temp_f28) + (f64) temp_c1.y);
-                    temp_f5_2 =
-                        (f32) ((0.5 * (f64) temp_f29) + (f64) temp_c1.x);
-                    temp_f6_2 = temp_a1.y - temp_f7_2;
-                    temp_f7_3 = b_y - temp_f7_2;
-                    temp_f4 = temp_a1.x - temp_f5_2;
-                    temp_f5_3 = temp_f0 - temp_f5_2;
-                    if (((temp_f4 * temp_f4) + (temp_f6_2 * temp_f6_2)) <
-                        ((temp_f5_3 * temp_f5_3) + (temp_f7_3 * temp_f7_3)))
-                    {
-                        sp70 = temp_c0.x;
-                        sp74 = temp_c0.y;
-                        sp78 = temp_c0.z;
-                        temp_f7_4 = temp_f2_5 - c->x;
-                        temp_f8_2 = temp_f3_5 - c->y;
-                        sp88 = temp_a0.x;
-                        temp_f9 = d->z - c->z;
-                        sp8C = temp_a0.y;
-                        sp90 = temp_a0.z;
-                        var_f0 = 0.0f;
-                        var_f2 =
-                            -((temp_f9 * (sp78 - sp90)) +
-                              ((temp_f7_4 * (sp70 - sp88)) +
-                               (temp_f8_2 * (sp74 - sp8C)))) /
-                            ((temp_f9 * temp_f9) + ((temp_f7_4 * temp_f7_4) +
-                                                    (temp_f8_2 * temp_f8_2)));
-                        if (var_f2 > (f32) 1.0) {
-                            var_f2 = 1.0f;
-                        } else if (var_f2 < (f32) 0.0) {
-                            var_f2 = 0.0f;
-                        }
-                        var_f24 = var_f2;
-                    } else {
-                        Vec3 temp_c2;
-
-                        temp_c2.x = temp_c0.x;
-                        temp_c2.y = temp_c0.y;
-                        temp_c2.z = temp_c0.z;
-                        var_f0 = 1.0f;
-                        temp_f9_2 = temp_f2_5 - c->x;
-                        temp_f10_2 = temp_f3_5 - c->y;
-                        temp_f11_2 = d->z - c->z;
-                        sp58 = b->x;
-                        sp5C = b->y;
-                        sp60 = b->z;
-                        {
-                            f32 var_f2_2 =
-                                -(temp_f11_2 * (temp_c2.z - sp60) +
-                                  ((temp_f9_2 * (temp_c2.x - sp58)) +
-                                   (temp_f10_2 * (temp_c2.y - sp5C)))) /
-                                ((temp_f11_2 * temp_f11_2) +
-                                 ((temp_f9_2 * temp_f9_2) +
-                                  (temp_f10_2 * temp_f10_2)));
-                            if (var_f2_2 > (f32) 1.0) {
-                                var_f2_2 = 1.0f;
-                            } else if (var_f2_2 < (f32) 0.0) {
-                                var_f2_2 = 0.0f;
-                            }
-                            var_f24 = var_f2_2;
-                        }
-                    }
                 } else {
-                    temp_f1_3 =
-                        ((temp_f13 * temp_f7) - (temp_f12 * temp_f6)) / temp_f5;
-                    var_f24 =
-                        ((temp_f11 * temp_f7) - (temp_f13 * temp_f6)) / temp_f5;
-                    var_f0 = temp_f1_3;
-                    if ((temp_f1_3 > (f32) 1.0) || (var_f0 < (f32) 0.0) ||
-                        (var_f24 > (f32) 1.0) || (var_f24 < (f32) 0.0))
                     {
-                        if (var_f0 < (f32) 0.0) {
-                            var_f22 = 0.0f;
-                            var_f23 = lbColl_80005FC0(c, d, a, &spA4);
-                        } else {
-                            var_f22 = 1.0f;
-                            var_f23 = lbColl_80005FC0(c, d, b, &spA4);
-                        }
-                        if (var_f24 < (f32) 0.0) {
-                            var_f24 = 0.0f;
-                            var_f1 = lbColl_80005FC0(a, b, c, &spA0);
-                        } else {
-                            var_f24 = 1.0f;
-                            var_f1 = lbColl_80005FC0(a, b, d, &spA0);
-                        }
-                        if (var_f23 < var_f1) {
-                            var_f0 = var_f22;
-                            var_f24 = spA4;
-                        } else {
-                            var_f0 = spA0;
-                        }
+                        f32 x = a1.x - sum_pq;
+                        if (x > c1.x && x > d->x)
+                            return false;
+                    }
+
+                    {
+                        f32 temp_f2_4 = b_x + sum_pq;
+                        if (temp_f2_4 < c1.x && temp_f2_4 < d->x)
+                            return false;
                     }
                 }
 
-                e->x = temp_f31 * var_f0 + temp_a1.x;
-                e->y = temp_f30 * var_f0 + temp_a1.y;
-                e->z = 0.0f;
-                f->x = temp_f29 * var_f24 + temp_c1.x;
-                f->y = temp_f28 * var_f24 + temp_c1.y;
-                f->z = 0.0f;
-            }
+                {
+                    f32 b_y = b->y;
+                    if (a1.y > b_y) {
+                        {
+                            f32 y;
+                            y = a1.y + sum_pq;
+                            if (y < c1.y && y < d->y)
+                                return false;
+                        }
+                        {
+                            f32 y = b_y - sum_pq;
+                            if (y > c1.y && y > d->y)
+                                return false;
+                        }
+
+                    } else {
+                        {
+                            f32 y = a1.y - sum_pq;
+                            if (y > c1.y && y > d->y)
+                                return false;
+                        }
+                        {
+                            f32 y = b_y + sum_pq;
+                            if (y < c1.y && y < d->y)
+                                return false;
+                        }
+                    }
+
+                    {
+                        f32 diff_ba_y = b_y - a1.y;
+                        f32 d_y = d->y;
+                        f32 diff_ac_y = a1.y - c1.y;
+                        f32 diff_dc_y = d_y - c1.y;
+                        f32 diff_ba_x = b_x - a1.x;
+                        f32 d_x = d->x;
+                        f32 diff_dc_x = d_x - c1.x;
+
+                        f32 dot2_diff_ba_dc =
+                            diff_ba_x * diff_dc_x + diff_ba_y * diff_dc_y;
+
+                        f32 sqdist2_dc =
+                            diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;
+                        f32 sqdist2_ba =
+                            diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y;
+                        f32 diff_ac_x = a1.x - c1.x;
+
+                        f32 dot2_diff_dc_ac =
+                            diff_dc_x * diff_ac_x + diff_dc_y * diff_ac_y;
+
+                        f32 dot2_diff_ba_ac =
+                            diff_ba_x * diff_ac_x + diff_ba_y * diff_ac_y;
+
+                        f32 determinant = sqdist2_ba * sqdist2_dc -
+                                          dot2_diff_ba_dc * dot2_diff_ba_dc;
+
+                        {
+                            f32 scl_e;
+                            f32 scl_f;
+                            if (approximatelyZero(sqdist2_dc)) {
+                                if (approximatelyZero(sqdist2_ba)) {
+                                    scl_e = 0.0f;
+                                    scl_f = 0.0f;
+                                } else {
+                                    f32 temp_f1_2;
+                                    scl_f = 0.0f;
+                                    temp_f1_2 = -dot2_diff_ba_ac / sqdist2_ba;
+                                    scl_e = temp_f1_2;
+                                    if (temp_f1_2 > (f32) 1.0) {
+                                        scl_e = 1.0f;
+                                    } else if (scl_e < (f32) 0.0) {
+                                        scl_e = 0.0f;
+                                    }
+                                }
+                            } else if (approximatelyZero(determinant)) {
+                                f32 temp_f7_2 = 0.5 * diff_dc_y + c1.y;
+                                f32 temp_f5_2 = 0.5 * diff_dc_x + c1.x;
+                                f32 temp_f6_2 = a1.y - temp_f7_2;
+                                f32 temp_f7_3 = b_y - temp_f7_2;
+                                {
+                                    f32 temp_scl_f;
+                                    f32 f4 = a1.x - temp_f5_2;
+                                    f32 temp_f5_3 = b_x - temp_f5_2;
+                                    if ((f4 * f4 + temp_f6_2 * temp_f6_2) <
+                                        (temp_f5_3 * temp_f5_3 +
+                                         temp_f7_3 * temp_f7_3))
+                                    {
+                                        f32 diff_dc_x;
+                                        f32 temp_f8_2;
+                                        Vec3 c3;
+                                        c3.x = c0.x;
+                                        c3.y = c0.y;
+                                        c3.z = c0.z;
+                                        diff_dc_x = d_x - c->x;
+                                        temp_f8_2 = d_y - c->y;
+                                        {
+                                            {
+                                                Vec3 a2;
+                                                f32 diff_dc_z;
+                                                a2.x = a0.x;
+                                                diff_dc_z = d->z - c->z;
+                                                a2.y = a0.y;
+                                                a2.z = a0.z;
+                                                scl_e = 0.0f;
+                                                temp_scl_f =
+                                                    -(diff_dc_z *
+                                                      (c3.z - a2.z)) +
+                                                    ((diff_dc_x *
+                                                      (c3.x - a2.x)) +
+                                                     (temp_f8_2 *
+                                                      (c3.y - a2.y))) /
+                                                        ((diff_dc_z *
+                                                          diff_dc_z) +
+                                                         ((diff_dc_x *
+                                                           diff_dc_x) +
+                                                          (temp_f8_2 *
+                                                           temp_f8_2)));
+                                            }
+                                        }
+                                        if (temp_scl_f > (f32) 1.0) {
+                                            temp_scl_f = 1.0f;
+                                        } else if (temp_scl_f < (f32) 0.0) {
+                                            temp_scl_f = 0.0f;
+                                        }
+                                        scl_f = temp_scl_f;
+                                    } else {
+                                        Vec3 c2;
+
+                                        c2.x = c0.x;
+                                        c2.y = c0.y;
+                                        c2.z = c0.z;
+                                        {
+                                            f32 diff_dc_x1;
+                                            scl_e = 1.0f;
+                                            diff_dc_x1 = d_x - c->x;
+                                            {
+                                                f32 diff_dc_y1;
+                                                f32 diff_dc_z1;
+                                                diff_dc_y1 = d_y - c->y;
+                                                diff_dc_z1 = d->z - c->z;
+                                                {
+                                                    Vec3 b0;
+
+                                                    b0.x = b->x;
+                                                    b0.y = b->y;
+                                                    b0.z = b->z;
+                                                    {
+                                                        f32 var_f2_2 =
+                                                            -(diff_dc_z1 *
+                                                                  (c2.z -
+                                                                   b0.z) +
+                                                              ((diff_dc_x1 *
+                                                                (c2.x - b0.x)) +
+                                                               (diff_dc_y1 *
+                                                                (c2.y -
+                                                                 b0.y)))) /
+                                                            ((diff_dc_z1 *
+                                                              diff_dc_z1) +
+                                                             ((diff_dc_x1 *
+                                                               diff_dc_x1) +
+                                                              (diff_dc_y1 *
+                                                               diff_dc_y1)));
+                                                        if (var_f2_2 >
+                                                            (f32) 1.0)
+                                                        {
+                                                            var_f2_2 = 1.0f;
+                                                        } else if (var_f2_2 <
+                                                                   (f32) 0.0)
+                                                        {
+                                                            var_f2_2 = 0.0f;
+                                                        }
+                                                        scl_f = var_f2_2;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                f32 temp_f1_3 =
+                                    ((dot2_diff_ba_dc * dot2_diff_dc_ac) -
+                                     (sqdist2_dc * dot2_diff_ba_ac)) /
+                                    determinant;
+                                scl_f = ((sqdist2_ba * dot2_diff_dc_ac) -
+                                         (dot2_diff_ba_dc * dot2_diff_ba_ac)) /
+                                        determinant;
+                                scl_e = temp_f1_3;
+                                if ((temp_f1_3 > (f32) 1.0) ||
+                                    (scl_e < (f32) 0.0) ||
+                                    (scl_f > (f32) 1.0) || (scl_f < (f32) 0.0))
+                                {
+                                    f32 out0;
+                                    f32 temp_scl_e;
+                                    f32 result0;
+                                    {
+                                        if (scl_e < (f32) 0.0) {
+                                            temp_scl_e = 0.0f;
+                                            result0 =
+                                                lbColl_80005FC0(c, d, a, &out0);
+                                        } else {
+                                            temp_scl_e = 1.0f;
+                                            result0 =
+                                                lbColl_80005FC0(c, d, b, &out0);
+                                        }
+                                    }
+                                    {
+                                        f32 result1;
+                                        f32 out1;
+                                        if (scl_f < (f32) 0.0) {
+                                            scl_f = 0.0f;
+                                            result1 =
+                                                lbColl_80005FC0(a, b, c, &out1);
+                                        } else {
+                                            scl_f = 1.0f;
+                                            result1 =
+                                                lbColl_80005FC0(a, b, d, &out1);
+                                        }
+
+                                        if (result0 < result1) {
+                                            scl_e = temp_scl_e;
+                                            scl_f = out0;
+                                        } else {
+                                            scl_e = out1;
+                                        }
+                                    }
+                                }
+                            }
+
+                            e->x = diff_ba_x * scl_e + a1.x;
+                            e->y = diff_ba_y * scl_e + a1.y;
+                            e->z = 0.0f;
+
+                            f->x = diff_dc_x * scl_f + c1.x;
+                            f->y = diff_dc_y * scl_f + c1.y;
+                            f->z = 0.0f;
+                        }
+                    }
+                }
             }
         }
-        temp_f4_2 = e->y - f->y;
-        temp_f2_6 = e->x - f->x;
-        if ((sum_pq * sum_pq) <
-            ((temp_f2_6 * temp_f2_6) + (temp_f4_2 * temp_f4_2)))
-        {
+    }
+    {
+        f32 diff_ef_y;
+        f32 diff_ef_x;
+        diff_ef_y = e->y - f->y;
+        diff_ef_x = e->x - f->x;
+        if (sum_pq * sum_pq < diff_ef_x * diff_ef_x + (diff_ef_y * diff_ef_y)) {
             return false;
         }
         return true;

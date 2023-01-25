@@ -186,7 +186,7 @@ UNK_RET lbColl_8000A78C(UNK_PARAMS);
 bool lbColl_8000A95C(HitResult*, unk_t, Mtx*, f32 pos_z);
 UNK_RET lbColl_8000AB2C(UNK_PARAMS);
 
-inline bool approximatelyZero(f32 x)
+static inline bool approximatelyZero(f32 x)
 {
     bool result;
 
@@ -196,6 +196,33 @@ inline bool approximatelyZero(f32 x)
         result = false;
 
     return result;
+}
+
+static inline bool testPlusX(Vec3* a, Vec3* b, Vec3* c, f32 offset)
+{
+    f32 x = a->x + offset;
+    if (x < b->x && x < c->x)
+        return false;
+
+    return true;
+}
+
+static inline bool testPlus(float a, float b, float c, float offset)
+{
+    float x = a + offset;
+    if (x < b && x < c)
+        return false;
+
+    return true;
+}
+
+static inline bool testMinusX(Vec3* a, Vec3* b, Vec3* c, f32 offset)
+{
+    f32 x = a->x - offset;
+    if (x > b->x && x > c->x)
+        return false;
+
+    return true;
 }
 
 #endif
