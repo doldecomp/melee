@@ -64,5 +64,6 @@ void func_800581BC(int, mpLib_Callback*, unk_t);
 enum_t func_80054C6C(int);
 void func_80058AA0(void);
 enum_t func_8004E090(int idx, Vec3*, f32*, u32*, Vec3* normal);
+void func_800569EC(void);
 
 #endif

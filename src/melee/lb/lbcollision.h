@@ -1,24 +1,39 @@
 #ifndef MELEE_LB_LBCOLLISION_H
 #define MELEE_LB_LBCOLLISION_H
 
+#include <melee/ft/forward.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/jobj.h>
 
-/// @todo Does not belong here.
-typedef struct _Hitbox {
-    s32 x0;
+struct Hitbox {
+    Tangibility tangiblity;
     s32 x4;
     s32 x8;
     f32 xC;
-    /// @remarks @c f32 needed for 'manual' mods to hitbox damage.
-    u8 filler[0x128];
-} Hitbox;
+    u8 x10[0x30 - 0x10];
 
-typedef struct ftHurt {
-    u32 tangiblity;        // 0x0, whether or not this hurtbox can be hit
-    Vec3 x4_hurt1_offset;  // 0x4
-    Vec3 x10_hurt2_offset; // 0x10
-    f32 x1C_scale;         // 0x1c
-    HSD_JObj* x20_jobj;    // 0x20
+    /// @at{30} @sz{4}
+    HitElement element;
+
+    u8 x34[0x40 - 0x34];
+    u8 x40_b0 : 1;
+    u8 x40_b1 : 1;
+    u8 x40_b2 : 1;
+    u8 x40_b3 : 1;
+    u8 x40_b4 : 1;
+    u8 x40_b5 : 1;
+    u8 x40_b6 : 1;
+    u8 x40_b7 : 1;
+    u8 x41[0x134 - 0x41];
+    s32 x134;
+};
+
+struct Hurtbox {
+    Tangibility tangiblity; // 0x0, whether or not this hurtbox can be hit
+    Vec3 x4_hurt1_offset;   // 0x4
+    Vec3 x10_hurt2_offset;  // 0x10
+    f32 x1C_scale;          // 0x1c
+    HSD_JObj* x20_jobj;     // 0x20
     unsigned char
         x24_1_is_updated : 1; // 0x24, 0x80, if enabled, wont update position
     unsigned char x24_2 : 1;  // 0x24 0x40
@@ -33,11 +48,19 @@ typedef struct ftHurt {
     u32 x40_bone_index;       // 0x40
     u32 x44_hurt_kind;        // 0x44. 0 = low, 1 = mid, 2 = high
     u32 x48_is_grabbable;     // 0x48
-} ftHurt;
+};
 
 void* HSD_JObjUnkMtxPtr(HSD_JObj*);
-s32 func_80008248(s32, struct ftHurt*, void*, f32, f32, f32);
-void func_80008440(struct _Hitbox*);
-void func_80008434(struct _Hitbox*);
+s32 func_80008248(s32, Hurtbox*, void*, f32, f32, f32);
+void func_80008440(Hitbox*);
+void func_80008434(Hitbox*);
+bool func_8000ACFC(Fighter*, Hitbox*);
+void func_80008688(void);
+void func_800084FC(void);
+void func_80008820(void);
+void func_80077464(void);
+void func_80005BB0(void);
+bool func_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
+                   f32 hurt_pos_z);
 
 #endif

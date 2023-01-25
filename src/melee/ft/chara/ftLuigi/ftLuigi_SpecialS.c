@@ -5,6 +5,7 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 // 0x80142A24
@@ -345,7 +346,9 @@ void ftLuigi_SpecialSLaunch_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
 
-    if (!fp->luigiVars[0].SpecialS.isMisfire && fp->x914[0].x0 == 1) {
+    if (!fp->luigiVars[0].SpecialS.isMisfire &&
+        fp->x914[0].tangiblity == Invincible)
+    {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
                               luigiAttrs->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
@@ -367,7 +370,9 @@ void ftLuigi_SpecialAirSLaunch_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
 
-    if (!fp->luigiVars[0].SpecialS.isMisfire && fp->x914[0].x0 == 1) {
+    if (!fp->luigiVars[0].SpecialS.isMisfire &&
+        fp->x914[0].tangiblity == Invincible)
+    {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
                               luigiAttrs->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
@@ -507,7 +512,9 @@ void ftLuigi_SpecialSMisfire_Anim(HSD_GObj* fighter_gobj)
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
     s32 stateVar;
 
-    if (!fp->luigiVars[0].SpecialS.isMisfire && fp->x914[0].x0 == 1) {
+    if (!fp->luigiVars[0].SpecialS.isMisfire &&
+        fp->x914[0].tangiblity == Invincible)
+    {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
                               luigiAttrs->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
@@ -529,7 +536,9 @@ void ftLuigi_SpecialAirSMisfire_Anim(HSD_GObj* fighter_gobj)
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
     s32 stateVar;
 
-    if (!fp->luigiVars[0].SpecialS.isMisfire && fp->x914[0].x0 == 1) {
+    if (!fp->luigiVars[0].SpecialS.isMisfire &&
+        fp->x914[0].tangiblity == Invincible)
+    {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
                               luigiAttrs->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +

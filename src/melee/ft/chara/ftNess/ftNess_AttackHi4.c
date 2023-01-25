@@ -6,6 +6,7 @@
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/it/code_8027CF30.h>
+#include <melee/lb/forward.h>
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/mp/mpcoll.h>
@@ -16,7 +17,7 @@ void ftNess_YoyoUpdateHitPos(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     Hitbox* hitbox_data = &fp->x914[0];
 
-    if (hitbox_data->x0 != false) {
+    if (hitbox_data->tangiblity != Vulnerable) {
         if (fp->sa.ness.x2230_yoyoHitboxPos.x != 0.0f ||
             fp->sa.ness.x2230_yoyoHitboxPos.y != 0.0f)
         {
@@ -57,8 +58,7 @@ static void ftNess_YoyoApplyDamage(f32 unk_float, HSD_GObj* fighter_gobj)
     f32 final_damage;
 
     if (unk_float != 0.0f) {
-        if (fp->x914->x0 == true) // Check if hitbox 0 is active
-        {
+        if (fp->x914->tangiblity == Invincible) {
             // Likely 1/256 but won't match.
             // ((f32) 1 / 256.0) does not match either.
             f32 const mul = 0.0039059999398887157f;
@@ -393,7 +393,8 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* fighter_gobj)
     fighter_data2 = GET_FIGHTER(fighter_gobj);
     ness_attr = getFtSpecialAttrs(fighter_data2);
 
-    if ((0.0f != smashChargeFrames) && ((s32) fighter_data2->x914->x0 == true))
+    if ((0.0f != smashChargeFrames) &&
+        ((s32) fighter_data2->x914->tangiblity == Invincible))
     {
         func_8007ABD0(fighter_data2->x914,
                       (u32) (fighter_data2->x914->xC *

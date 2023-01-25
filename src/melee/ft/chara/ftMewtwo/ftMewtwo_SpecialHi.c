@@ -10,9 +10,6 @@
 #include <melee/lb/lbunknown_001.h>
 #include <MSL/trigf.h>
 
-/// @todo Move elsewhere.
-#define HALF_PI32 (1.5707963705062866f)
-
 // 0x801450A0
 // https://decomp.me/scratch/ZN9lq // Create Teleport Start GFX
 void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj)
@@ -283,9 +280,6 @@ void ftMewtwo_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     }
 }
 
-/// @todo Move elsewhere.
-#define DEG_TO_RAD (0.01745329238474369f)
-
 bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -444,7 +438,7 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* fighter_gobj)
         stickVec.z = 0.0f;
 
         if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &stickVec) <
-              HALF_PI32) &&
+              (f32) M_PI_2) &&
             (func_8009A134(fighter_gobj) == false))
         {
             func_8007D9FC(fp);
@@ -518,7 +512,7 @@ void ftMewtwo_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
         fp->mewtwoVars[0].SpecialHi.stickY = fp->input.x624_lstick_y;
     } else {
         func_8007DA24(fp);
-        floatVar = HALF_PI32;
+        floatVar = (f32) M_PI_2;
         fp->mewtwoVars[0].SpecialHi.stickX = 0.0f;
         sqrt_stick = fp->mewtwoVars[0].SpecialHi.stickY = 1.0f;
     }

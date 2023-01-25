@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftZelda/ftzelda2.h>
 
+#include <math.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/chara/ftZelda/ftzelda.h>
@@ -12,12 +13,6 @@
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
 #include <MSL/trigf.h>
-
-/// @todo Move elsewhere.
-#define HALF_PI (1.5707963705062866f)
-
-/// @todo Move elsewhere.
-#define DEG_TO_RAD (0.017453292f)
 
 // 801396AC - 801396E0 (0x34 bytes)
 // https://decomp.me/scratch/UHxFc
@@ -93,7 +88,7 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 
     func_8000B1CC(jObj, NULL, &vec);
 
-    func_800119DC(&vec, 0x78, 1.5, 0.02, 60 * M_PI / 180);
+    func_800119DC(&vec, 0x78, 1.5, 0.02, 60 * (f32) M_PI / 180);
 }
 
 void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
@@ -145,7 +140,8 @@ void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     func_8000B1CC(jObj, NULL, &sp28);
 
     func_800119DC(&sp28, 0x78, 1.5, 0.02,
-                  60 * M_PI / 180); // lbl_804D9B98, lbl_804D9B9C, lbl_804D9BA0
+                  60 * (f32) M_PI /
+                      180); // lbl_804D9B98, lbl_804D9B9C, lbl_804D9BA0
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
 
@@ -499,7 +495,8 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj)
         inputVector.y = fp->input.x624_lstick_y;
         inputVector.z = 0;
 
-        if (!(lbvector_AngleXY(groundVector, (Vec3*) &inputVector.x) < HALF_PI))
+        if (!(lbvector_AngleXY(groundVector, (Vec3*) &inputVector.x) <
+              (f32) M_PI_2))
         {
             if (func_8009A134(fighter_gobj) == 0) {
                 func_8007D9FC(fp);
@@ -598,7 +595,7 @@ void ftZelda_8013A244(HSD_GObj* fighter_gobj)
         fp->x2348_stateVar3_f32 = fp->input.x624_lstick_y;
     } else {
         func_8007DA24(fp);
-        var_f30 = HALF_PI;
+        var_f30 = (f32) M_PI_2;
         fp->x2344_f32 = 0;
         var_f31 = fp->x2348_stateVar3_f32 = 1.0;
     }
