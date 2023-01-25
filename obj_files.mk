@@ -144,8 +144,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak1.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftseak3.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess.c.o\
