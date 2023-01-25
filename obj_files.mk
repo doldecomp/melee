@@ -144,8 +144,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftdonkey_2.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftseak.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftseak1.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftseak3.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess.c.o\
@@ -186,13 +186,13 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftsamus.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi1.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftyoshi.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftYoshi/ftyoshi2.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftyoshi4.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftkoopa.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftkoopa.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftKoopa/ftkoopa1.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftkoopa3.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftMars/ftMars.c.o\
@@ -288,15 +288,15 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftmasterhand.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_1.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_2.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_3.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_4.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_5.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_6.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_7.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_8.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_9.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_01.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_02.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_03.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_04.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_05.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_06.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_07.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_08.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_09.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_10.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_11.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMasterHand/ftMasterHand_12.c.o\
