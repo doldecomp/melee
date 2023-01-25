@@ -15,8 +15,8 @@ SomeUnion: size 0x8, align 8
 SomeBitfield: size 0x8, align 4
 SubStruct: size 0x4, align 4
   0x0: x (int)
-SomeStruct: size 0x310, align 8
-  0x0: int_field (int)
+SomeStruct: size 0x330, align 8
+  0x0: int_field (Int)
   0x4: float_field (float)
   0x8: pointer_field (void *)
   0x10: data_field (union SomeUnion)
@@ -65,10 +65,12 @@ SomeStruct: size 0x310, align 8
   0x233: array_arithmetic_36 (char [16 + (sizeof(s32))])
   0x247: array_arithmetic_37 (char [16 + (sizeof(void *[4][4]))])
   0x297: array_arithmetic_38 (char [16 + (sizeof(struct SomeBitfield))])
-  0x2af: array_arithmetic_39 (char [16 + (_Alignof(s32 [4]))])
-  0x2c3: char_array (char [2])
-  0x2c8: int_array (int [2])
-  0x2d0: sub_array (struct 
+  0x2af: array_arithmetic_39 (char [16 + ((int) 1)])
+  0x2c0: array_arithmetic_40 (char [16 + ((unsigned char) 0x101)])
+  0x2d1: array_arithmetic_41 (char [16 + (_Alignof(s32 [4]))])
+  0x2e5: char_array (char [2])
+  0x2e8: int_array (int [2])
+  0x2f0: sub_array (struct 
 {
   int a;
   struct 
@@ -76,8 +78,8 @@ SomeStruct: size 0x310, align 8
     int c;
   } b[3];
 } [2])
-  0x2f0: multidim_array (int [2][3])
-  0x308: end (char)
+  0x310: multidim_array (int [2][3])
+  0x328: end (char)
 
 Enums:
 FIRST_ELEM: 0

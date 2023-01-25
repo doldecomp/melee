@@ -39,7 +39,7 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/H3n4O // Decide Jab attack
 void ftGameWatch_Attack11_DecideAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ASID;
 
     if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
@@ -72,7 +72,7 @@ void ftGameWatch_Attack11_DecideAction(HSD_GObj* fighter_gobj)
 // Insecticide Sprayer
 void ftGameWatch_ItemGreenhouseSetFlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_ItemGreenhouseExitHitlag(fighter_gobj);
     fp->sa.gaw.x224C_greenhouseGObj = NULL;
@@ -83,7 +83,7 @@ void ftGameWatch_ItemGreenhouseSetFlag(HSD_GObj* fighter_gobj)
 // Sprayer
 void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObj* greenhouseGObj;
 
     if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
@@ -97,7 +97,7 @@ void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* fighter_gobj)
 // Insecticide Sprayer
 void ftGameWatch_ItemGreenhouseEnterHitlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
         func_802C6374(fp->sa.gaw.x224C_greenhouseGObj);
     }
@@ -106,7 +106,7 @@ void ftGameWatch_ItemGreenhouseEnterHitlag(HSD_GObj* fighter_gobj)
 // 0x8014C004 - Remove hitlag for Mr. Game & Watch's Insecticide Sprayer
 void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
         func_802C6394(fp->sa.gaw.x224C_greenhouseGObj);
     }
@@ -117,7 +117,7 @@ void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* fighter_gobj)
 // jab action states
 bool ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 {
-    s32 ASID = getFighter(fighter_gobj)->action_id;
+    s32 ASID = GET_FIGHTER(fighter_gobj)->action_id;
     if ((ASID >= AS_GAMEWATCH_ATTACK11) && (ASID <= AS_GAMEWATCH_ATTACK100END))
     {
         return false;
@@ -128,7 +128,7 @@ bool ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 // 0x8014C05C - Check if Mr. Game & Watch is performing Jab 1 (Attack11)
 bool ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->action_id != AS_GAMEWATCH_ATTACK11) {
+    if (GET_FIGHTER(fighter_gobj)->action_id != AS_GAMEWATCH_ATTACK11) {
         return true;
     }
     return false;
@@ -139,7 +139,7 @@ bool ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
 // handler
 void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 unused;
 
     if (func_80094790(fighter_gobj) == false) {

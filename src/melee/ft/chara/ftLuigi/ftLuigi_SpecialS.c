@@ -5,13 +5,14 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/lb/forward.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
 // 0x80142A24
 // https://decomp.me/scratch/TEGVv // Luigi's Green Missile GFX callback
 void ftLuigi_SpecialS_SetGFX(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x2219_flag.bits.b0 == false)
         fp->x2219_flag.bits.b0 = true;
@@ -24,7 +25,7 @@ void ftLuigi_SpecialS_SetGFX(HSD_GObj* fighter_gobj)
 // calculations)
 void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
 
     fp->x2200_ftcmd_var0 = 0;
@@ -83,7 +84,7 @@ void ftLuigi_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialS_OnGiveDamage(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->x80_self_vel.x = 0.0f;
     if (fp->x80_self_vel.y >= 0.0f)
@@ -124,7 +125,7 @@ void ftLuigi_SpecialAirSStart_IASA(HSD_GObj* fighter_gobj)
 // Physics callback
 void ftLuigi_SpecialSStart_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007C930(fp, ((ftLuigiAttributes*) getFtSpecialAttrs(fp))
                           ->x1C_LUIGI_GREENMISSILE_UNK2);
@@ -168,7 +169,7 @@ void ftLuigi_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftLuigi_SpecialSStart_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRS_START,
@@ -181,7 +182,7 @@ void ftLuigi_SpecialSStart_GroundToAir(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftLuigi_SpecialAirSStart_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALS_START,
@@ -239,14 +240,14 @@ void ftLuigi_SpecialAirSHold_Anim(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialSHold_IASA(HSD_GObj* fighter_gobj)
 {
-    if (!(getFighter(fighter_gobj)->input.x65C_heldInputs & HSD_BUTTON_B))
+    if (!(GET_FIGHTER(fighter_gobj)->input.x65C_heldInputs & HSD_BUTTON_B))
         ftLuigi_SpecialSLaunch_Action(fighter_gobj);
 }
 
 // 0x80143008 - Luigi's aerial Green Missile Charge IASA callback
 void ftLuigi_SpecialAirSHold_IASA(HSD_GObj* fighter_gobj)
 {
-    if (!(getFighter(fighter_gobj)->input.x65C_heldInputs & HSD_BUTTON_B))
+    if (!(GET_FIGHTER(fighter_gobj)->input.x65C_heldInputs & HSD_BUTTON_B))
         ftLuigi_SpecialAirSLaunch_Action(fighter_gobj);
 }
 
@@ -281,7 +282,7 @@ void ftLuigi_SpecialAirSHold_Coll(HSD_GObj* fighter_gobj)
 // Acion State handler
 void ftLuigi_SpecialSHold_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(
@@ -293,7 +294,7 @@ void ftLuigi_SpecialSHold_GroundToAir(HSD_GObj* fighter_gobj)
 // 0x80143150 - Luigi's Green Missile Charge air -> ground Action State handler
 void ftLuigi_SpecialAirSHold_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(
@@ -315,7 +316,7 @@ void ftLuigi_SpecialSHold_Action(HSD_GObj* fighter_gobj)
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALS_HOLD,
                                        FIGHTER_SFX_PRESERVE, NULL, 0.0f, 1.0f,
                                        0.0f);
-    getFighter(fighter_gobj)->cb.x21BC_callback_Accessory4 =
+    GET_FIGHTER(fighter_gobj)->cb.x21BC_callback_Accessory4 =
         ftLuigi_SpecialS_SetGFX;
 }
 
@@ -331,7 +332,7 @@ void ftLuigi_SpecialAirSHold_Action(HSD_GObj* fighter_gobj)
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRS_HOLD,
                                        FIGHTER_SFX_PRESERVE, NULL, 0.0f, 1.0f,
                                        0.0f);
-    getFighter(fighter_gobj)->cb.x21BC_callback_Accessory4 =
+    GET_FIGHTER(fighter_gobj)->cb.x21BC_callback_Accessory4 =
         ftLuigi_SpecialS_SetGFX;
 }
 
@@ -342,10 +343,12 @@ void ftLuigi_SpecialSLaunch_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Shared @c inline with #ftLuigi_SpecialAirSLaunch_Anim.
     s32 var;
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
 
-    if (!fp->luigiVars[0].SpecialS.isMisfire && fp->x914[0].x0 == 1) {
+    if (!fp->luigiVars[0].SpecialS.isMisfire &&
+        fp->x914[0].tangiblity == Invincible)
+    {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
                               luigiAttrs->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
@@ -364,10 +367,12 @@ void ftLuigi_SpecialSLaunch_Anim(HSD_GObj* fighter_gobj)
 void ftLuigi_SpecialAirSLaunch_Anim(HSD_GObj* fighter_gobj)
 {
     s32 var;
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
 
-    if (!fp->luigiVars[0].SpecialS.isMisfire && fp->x914[0].x0 == 1) {
+    if (!fp->luigiVars[0].SpecialS.isMisfire &&
+        fp->x914[0].tangiblity == Invincible)
+    {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
                               luigiAttrs->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
@@ -421,7 +426,7 @@ void ftLuigi_SpecialAirSLaunch_Coll(HSD_GObj* fighter_gobj)
 // Acion State handler
 void ftLuigi_SpecialSLaunch_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D5D4(fp);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj,
@@ -433,7 +438,7 @@ void ftLuigi_SpecialSLaunch_GroundToAir(HSD_GObj* fighter_gobj)
 // 0x801434C8 - Luigi's Green Missile Launch air -> ground Action State handler
 void ftLuigi_SpecialAirSLaunch_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D7FC(fp);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALS_LAUNCH,
@@ -443,7 +448,7 @@ void ftLuigi_SpecialAirSLaunch_AirToGround(HSD_GObj* fighter_gobj)
 
 static inline void ftLuigi_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2200_ftcmd_var0 = 0;
     func_8007DB24(fighter_gobj);
 }
@@ -465,7 +470,7 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftLuigi_SpecialSLaunch_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObjEvent entered_hitlag;
     HSD_GObjEvent exited_hitlag;
     s32 stateVar;
@@ -485,7 +490,7 @@ void ftLuigi_SpecialSLaunch_Action(HSD_GObj* fighter_gobj)
 // State handler
 void ftLuigi_SpecialAirSLaunch_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 stateVar;
 
     if (fp->luigiVars[0].SpecialS.isMisfire) {
@@ -503,11 +508,13 @@ void ftLuigi_SpecialAirSLaunch_Action(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftLuigi_SpecialSMisfire_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
     s32 stateVar;
 
-    if (!fp->luigiVars[0].SpecialS.isMisfire && fp->x914[0].x0 == 1) {
+    if (!fp->luigiVars[0].SpecialS.isMisfire &&
+        fp->x914[0].tangiblity == Invincible)
+    {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
                               luigiAttrs->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
@@ -525,11 +532,13 @@ void ftLuigi_SpecialSMisfire_Anim(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftLuigi_SpecialAirSMisfire_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
     s32 stateVar;
 
-    if (!fp->luigiVars[0].SpecialS.isMisfire && fp->x914[0].x0 == 1) {
+    if (!fp->luigiVars[0].SpecialS.isMisfire &&
+        fp->x914[0].tangiblity == Invincible)
+    {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
                               luigiAttrs->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
@@ -583,7 +592,7 @@ void ftLuigi_SpecialAirSMisfire_Coll(HSD_GObj* fighter_gobj)
 // air Action State handler
 void ftLuigi_SpecialSMisfire_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D5D4(fp);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj,
@@ -597,7 +606,7 @@ void ftLuigi_SpecialSMisfire_GroundToAir(HSD_GObj* fighter_gobj)
 // ground Action State Handler
 void ftLuigi_SpecialAirSMisfire_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D7FC(fp);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALS_MISFIRE,
@@ -777,7 +786,7 @@ void ftLuigi_SpecialAirSEnd_IASA(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialSEnd_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 decel;
 
     func_8007C930(fp, ((ftLuigiAttributes*) fp->x2D4_specialAttributes)
@@ -810,7 +819,7 @@ void ftLuigi_SpecialSEnd_Coll(HSD_GObj* fighter_gobj)
 // 0x80143EC8 - Luigi's aerial Green Missile End Collision callback
 void ftLuigi_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (func_80081D0C(fighter_gobj)) {
         func_8007D7FC(fp);

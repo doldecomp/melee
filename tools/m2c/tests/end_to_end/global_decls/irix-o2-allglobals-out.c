@@ -25,10 +25,10 @@ struct A static_A = {
 };
 struct A *static_A_ptr = &static_A;
 s32 static_array[3] = { 2, 4, 6 };
-struct A static_bss_A;
-s32 static_bss_array[3];
-s32 static_int;
 s16 unused_static_array[3] = { -8, 0x000A, 0x000C };
+s32 static_int;
+s32 static_bss_array[3];
+struct A static_bss_A;
 s32 static_ro_array[3] = { 7, 8, -9 };              /* const */
 u32 unused_static_ro_array[3] = { 0x0000000A, 0xFFFFFFF5, 0x0000000C }; /* const */
 

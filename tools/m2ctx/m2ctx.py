@@ -26,9 +26,9 @@ MWCC_FLAGS = [
 ]
 
 
-def import_c_file(in_file: str) -> str:
+def import_c_file(in_file: Path) -> str:
     in_file = root / in_file
-    c_command = [str(mwcc_command), *MWCC_FLAGS, "-E", in_file]
+    c_command = [str(mwcc_command), *MWCC_FLAGS, "-E", str(in_file)]
 
     if sys.platform != "win32":
         wine = os.environ.get("WINE", "wine")

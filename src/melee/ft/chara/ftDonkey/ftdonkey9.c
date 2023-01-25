@@ -21,7 +21,7 @@ static bool ftDonkey_800E0750(HSD_GObj* fighter_gobj);
 void ftDonkey_800E06D8(HSD_GObj* fighter_gobj)
 {
     Vec3 vec;
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (ftDonkey_800E0750(fighter_gobj)) {
         ftDonkey_800E07B0(fighter_gobj);
     } else {
@@ -33,7 +33,7 @@ void ftDonkey_800E06D8(HSD_GObj* fighter_gobj)
 
 bool ftDonkey_800E0750(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (func_8008E984(fp))
         return true;
@@ -71,7 +71,7 @@ void ftDonkey_800E0848(HSD_GObj* fighter_gobj)
 
 void ftDonkey_800E0868(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->xE0_ground_or_air == GA_Ground) {
         if (!func_80082708(fighter_gobj)) {
             func_8007D5D4(fp);

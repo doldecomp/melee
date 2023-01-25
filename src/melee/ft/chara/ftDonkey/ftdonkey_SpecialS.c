@@ -7,7 +7,13 @@
 
 void ftDonkey_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17B, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
     func_8006EBA4(fighter_gobj);
@@ -17,7 +23,7 @@ void ftDonkey_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
 void ftDonkey_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     fp->x80_self_vel.x /= donkey_attr->SpecialS.x3C_MIN_STICK_X_MOMENTUM;
     fp->x80_self_vel.y = 0.0f;
@@ -67,7 +73,7 @@ void ftDonkey_8010E35C(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E3BC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->x2200_ftcmd_var0) {
         if (!func_800827A0(fighter_gobj)) {
             ftDonkey_8010E464(fighter_gobj);

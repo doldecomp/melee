@@ -779,43 +779,11 @@ void func_8015DB18(void)
     lbl_804D3EE0->x1 += 1;
 }
 
-#ifdef MUST_MATCH
-
-#pragma push
-asm void func_8015DB2C(u8 arg0, s32 arg2)
-{
-    // clang-format off
-    nofralloc
-/* 8015DB2C 0015A70C  7C 08 02 A6 */	mflr r0
-/* 8015DB30 0015A710  54 63 06 3E */	clrlwi r3, r3, 0x18
-/* 8015DB34 0015A714  90 01 00 04 */	stw r0, 4(r1)
-/* 8015DB38 0015A718  38 80 00 01 */	li r4, 1
-/* 8015DB3C 0015A71C  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8015DB40 0015A720  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8015DB44 0015A724  80 0D 88 40 */	lwz r0, lbl_804D3EE0(r13)
-/* 8015DB48 0015A728  7F E0 1A 14 */	add r31, r0, r3
-/* 8015DB4C 0015A72C  88 7F 00 39 */	lbz r3, 0x39(r31)
-/* 8015DB50 0015A730  4B EA D4 25 */	bl func_8000AF74
-/* 8015DB54 0015A734  98 7F 00 39 */	stb r3, 0x39(r31)
-/* 8015DB58 0015A738  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8015DB5C 0015A73C  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8015DB60 0015A740  38 21 00 18 */	addi r1, r1, 0x18
-/* 8015DB64 0015A744  7C 08 03 A6 */	mtlr r0
-/* 8015DB68 0015A748  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#else
-
-// regswap and extra useless addi
-// https://decomp.me/scratch/emRDP
 void func_8015DB2C(u8 arg0, s32 arg2)
 {
-    u8* base = &lbl_804D3EE0->x39[arg0];
-    *base = func_8000AF74(*base, 1);
+    struct gmm_x0* gmmthing = lbl_804D3EE0;
+    gmmthing->x39[arg0] = func_8000AF74(lbl_804D3EE0->x39[arg0], 1);
 }
-
-#endif
 
 u8 func_8015DB6C(u8 arg0)
 {

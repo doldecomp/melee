@@ -12,14 +12,18 @@ void ftNess_ItemPKFireSpawn(
         fighter_gobj) //* Ness's PK Fire spawn function, stored as Accessory4
                       // and summoned with Subaction Event 0x60 *//
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
     bool FlagResult;
     Vec3 ItemBonePos;
     Vec3 PKFireVelStruct;
     f32 PKFireLaunchNew;
-    f32 PKFireLaunchAgain;
-    f32 PKFire_Dir_x_Vel;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     f32 PKFireRot;
     f32 PKFireLaunch;
     f32 PKFireVel;
@@ -145,7 +149,7 @@ void ftNess_SpecialS_Coll(
 void ftNess_SpecialAirS_Coll(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Fire Collision callback //
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftNessAttributes* ness_attr;
 
     ness_attr = fp->x2D4_specialAttributes;

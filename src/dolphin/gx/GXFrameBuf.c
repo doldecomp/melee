@@ -5,6 +5,7 @@
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/forward.h>
 #include <placeholder.h>
+#include <Runtime/runtime.h>
 
 Vec2 const lbl_804DE220 = { 256.0F, 0.0F };
 Vec2 const lbl_804DE228 = { 176.0F, 0.0F };
@@ -180,7 +181,6 @@ void GXSetDispCopyDst(s32 arg0)
 }
 
 extern unk_t __GetImageTileCount(void);
-extern unk_t __cvt_fp2unsigned(void);
 
 #ifdef MWERKS_GEKKO
 

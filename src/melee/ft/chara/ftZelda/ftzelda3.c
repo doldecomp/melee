@@ -35,47 +35,51 @@ void ftZelda_8013A8AC(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = 0;
 }
 
+inline void startActionHelper(HSD_GObj* fighter_gobj)
+{
+    ftZeldaAttributes* attributes;
+    Fighter* fighter2; // r5
+    fighter2 = GET_FIGHTER(fighter_gobj);
+    attributes = fighter2->x2D4_specialAttributes;
+    fighter2->x2200_ftcmd_var0 = 0;
+    fighter2->x2340_stateVar1 = attributes->x4;
+}
+
 void ftZelda_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
     f32 temp_f1;
-    Fighter* fp;       // r31
-    Fighter* fighter2; // r5
-    ftZeldaAttributes* attributes;
-    f32 unused[5];
+    Fighter* fp; // r31
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[11];
+#endif
 
     temp_f1 = 0;
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x155, 0, NULL, temp_f1,
                                        1.0, temp_f1);
     func_8006EBA4(fighter_gobj);
-
-    fighter2 = fighter_gobj->user_data;
-    attributes = fighter2->x2D4_specialAttributes;
-    fighter2->x2200_ftcmd_var0 = 0;
-    fighter2->x2340_stateVar1 = attributes->x4;
+    startActionHelper(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A830;
 }
 
 void ftZelda_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp; // r31
-    Fighter* fighter2;
     ftZeldaAttributes* attributes;
     f32 unused[5];
 
-    fp = fighter_gobj->user_data;
-    attributes = fp->x2D4_specialAttributes;
+    fp = GET_FIGHTER(fighter_gobj);
+    attributes = (ftZeldaAttributes*) fp->x2D4_specialAttributes;
     fp->x80_self_vel.y = 0;
     fp->x80_self_vel.x = fp->x80_self_vel.x / attributes->x8;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x156, 0, NULL, 0, 1.0, 0);
     func_8006EBA4(fighter_gobj);
 
-    fighter2 = getFighter(fighter_gobj);
-    attributes = fighter2->x2D4_specialAttributes;
-    fighter2->x2200_ftcmd_var0 = 0;
-    fighter2->x2340_stateVar1 = attributes->x4;
+    startActionHelper(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A8AC;
 }
 

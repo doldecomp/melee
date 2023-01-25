@@ -229,7 +229,7 @@ void ftGameWatch_OnDamage(HSD_GObj* fighter_gobj)
 
 void ftGameWatch_8014A538(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->xE0_ground_or_air == GA_Air) {
         ftGameWatch_ItemGreenhouseRemove(fighter_gobj);
         ftGameWatch_ItemManholeOnDamage(fighter_gobj);
@@ -272,7 +272,7 @@ void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, s32 dropItemFlag)
 // https://decomp.me/scratch/SX2FV // Set Oil Panic Color Overlay
 void ftGameWatch_8014A77C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
         func_800BFFD0(fp, 5, 0);
@@ -291,7 +291,7 @@ void ftGameWatch_LoadSpecialAttrs(HSD_GObj* gobj)
 // https://decomp.me/scratch/PFWrJ // Apply color to Mr. Game & Watch's items?
 void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrs(fp);
 
     item_mod->x0_unk = gawAttrs->x4_GAMEWATCH_COLOR[fp->x619_costume_id];
@@ -302,7 +302,7 @@ void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 // items?
 void ftGameWatch_8014A814(HSD_GObj* fighter_gobj, ItemModStruct* item_mod)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrs(fp);
 
     item_mod->x0_unk = gawAttrs->x14_GAMEWATCH_OUTLINE;

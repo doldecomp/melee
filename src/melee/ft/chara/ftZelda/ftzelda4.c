@@ -305,7 +305,7 @@ void ftZelda_8013B4D8(HSD_GObj* fighter_gobj)
     s32 var_r4;
     s32 unused[1];
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     attributes = fp->x2D4_specialAttributes;
 
     if (fp->xE0_ground_or_air == 0) {

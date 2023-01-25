@@ -178,12 +178,12 @@ void ftZelda_8013BA04(HSD_GObj* fighter_gobj)
     Fighter* fp;
     ftZeldaAttributes* attributes;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
 
     func_8007592C(fp, 0, 0);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        fp = getFighter(fighter_gobj);
+        fp = GET_FIGHTER(fighter_gobj);
         attributes = getFtSpecialAttrs(fp);
 
         fp->x2340_stateVar1 = attributes->x10;
@@ -304,15 +304,19 @@ void ftZelda_8013BD10(HSD_GObj* fighter_gobj)
     f32 temp_f2;
     ftZeldaAttributes* attributes; // r31
     ftZeldaAttributes* attributes2;
-    f32 unused[3];
 
-    fp = getFighter(fighter_gobj);
+    /// @todf32o Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
     attributes = fp->x2D4_specialAttributes;
 
     func_8007592C(fp, 0, 0);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        fp = getFighter(fighter_gobj);
+        fp = GET_FIGHTER(fighter_gobj);
         attributes2 = getFtSpecialAttrs(fp);
 
         fp->x2340_stateVar1 = attributes2->x10;
@@ -407,7 +411,7 @@ void ftZelda_8013BED8(HSD_GObj* fighter_gobj)
     s32 stateVar;
     Fighter* fp;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     stateVar = fp->x2348_stateVar3;
 
     if (stateVar) {

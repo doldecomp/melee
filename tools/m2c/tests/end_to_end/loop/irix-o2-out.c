@@ -14,7 +14,6 @@ void test(s8 *arg0, s32 arg1) {
                 *var_v1 = 0;
                 var_v1 += 1;
             } while (temp_a3 != var_v0);
-            var_v1_2 = arg0 + var_v0;
             if (var_v0 != arg1) {
                 goto block_5;
             }

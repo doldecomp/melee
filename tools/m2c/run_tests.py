@@ -13,9 +13,11 @@ from coverage import Coverage  # type: ignore
 from pathlib import Path
 from typing import Any, Iterator, List, Optional, Pattern, Tuple
 
-from src.options import Options
+from m2c.options import Options
 
 CRASH_STRING = "CRASHED\n"
+
+PATH_FLAGS = {"--context", "--incbin-dir"}
 
 
 @dataclass(frozen=True)
@@ -53,16 +55,11 @@ def get_test_flags(flags_path: Path) -> List[str]:
     flags_str = flags_path.read_text()
     flags_list = shlex.split(flags_str)
     for i, flag in enumerate(flags_list):
-        if flag != "--context":
+        if flag not in PATH_FLAGS:
             continue
-        try:
-            relative_context_path: str = flags_list[i + 1]
-        except IndexError:
-            raise Exception(
-                f"{flags_path} contains --context without argument"
-            ) from None
-        absolute_context_path: Path = flags_path.parent / relative_context_path
-        flags_list[i + 1] = str(absolute_context_path)
+        if i + 1 >= len(flags_list):
+            raise Exception(f"{flags_path} contains {flag} without argument")
+        flags_list[i + 1] = str(flags_path.parent / flags_list[i + 1])
 
     return flags_list
 
@@ -71,7 +68,7 @@ def decompile_and_compare(
     test_case: TestCase, test_options: TestOptions
 ) -> Tuple[Optional[bool], str]:
     # This import is deferred so it can be profiled by the coverage tool
-    from src.main import parse_flags
+    from m2c.main import parse_flags
 
     logging.debug(
         f"Decompiling {test_case.asm_file}"
@@ -116,7 +113,7 @@ def decompile_and_compare(
 
 def decompile_and_capture_output(options: Options, brief_crashes: bool) -> str:
     # This import is deferred so it can be profiled by the coverage tool
-    from src.main import run as decompile
+    from m2c.main import run as decompile
 
     out_string = io.StringIO()
     with contextlib.redirect_stdout(out_string):
