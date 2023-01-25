@@ -205,7 +205,7 @@ void func_8013C494(HSD_GObj* fighter_gobj)
     }
 }
 
-void func_8013C4F0(HSD_GObj* fighter_gobj, s32 arg1, Mtx vmtx)
+void func_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx)
 {
     s32 unused[2];
 
@@ -226,7 +226,7 @@ void func_8013C4F0(HSD_GObj* fighter_gobj, s32 arg1, Mtx vmtx)
     }
 }
 
-void func_8013C614(Fighter* fp, s32 arg1, s32 arg2)
+void func_8013C614(Fighter* fp, int arg1, bool arg2)
 {
     if (fp->sa.purin.x223C) {
         if (arg2) {

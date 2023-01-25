@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTCRAZYHAND_FTCRAZYHAND_H
 
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 
 typedef struct _ftCrazyHandAttributes {
@@ -73,6 +74,12 @@ typedef struct _ftCrazyHandAttributes {
     Vec2 x13C_pos;
 } ftCrazyHandAttributes;
 
+extern ActionState as_table_crazyhand[];
+extern char lbl_803D4818[];
+extern char lbl_803D4824[];
+extern Fighter_CostumeStrings lbl_803D4868[];
+extern char lbl_803D485C[];
+
 void ftCrazyhand_OnDeath(HSD_GObj* fighter_gobj);
 void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj);
 void ftCrazyHand_LoadSpecialAttrs(HSD_GObj* gobj);
@@ -81,7 +88,6 @@ void func_80156014(HSD_GObj*);
 void func_8015A2B0(HSD_GObj*);
 void func_8015A3F4(HSD_GObj*);
 void func_8015A560(HSD_GObj*);
-
 void lbl_80156404(HSD_GObj*);
 void lbl_80156A70(HSD_GObj*);
 void lbl_80156AB4(HSD_GObj*);
@@ -276,5 +282,21 @@ void lbl_8015BC38(HSD_GObj*);
 void lbl_8015BB70(HSD_GObj*);
 void lbl_8015BBD8(HSD_GObj*);
 void lbl_8015BC38(HSD_GObj*);
+void func_8015B660(HSD_GObj*);
+void func_8015B664(HSD_GObj*);
+void func_8015B668(HSD_GObj*);
+void func_8015B66C(HSD_GObj*);
+void func_8015B704(HSD_GObj*);
+void func_8015B76C(HSD_GObj*);
+void func_8015B770(HSD_GObj*);
+void func_8015B774(HSD_GObj*);
+void func_8015B840(HSD_GObj*);
+void func_8015B844(HSD_GObj*);
+void func_8015B848(HSD_GObj*);
+void func_8015B84C(HSD_GObj*);
+void func_8015B8EC(HSD_GObj*);
+void func_8015B8F0(HSD_GObj*);
+void func_8015B8F4(HSD_GObj*);
+void func_8015B8F8(HSD_GObj*);
 
 #endif

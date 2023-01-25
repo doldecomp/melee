@@ -163,6 +163,13 @@ typedef struct _ftGameWatchAttributes {
 
 } ftGameWatchAttributes;
 
+extern ActionState as_table_gamewatch[];
+extern char lbl_803D28E8[];
+extern char lbl_803D28F4[];
+extern Fighter_CostumeStrings lbl_803D29C8[];
+extern char lbl_803D292C[];
+extern Fighter_DemoStrings lbl_803D29B8;
+
 // Mr. Game & Watch Functions //
 
 // General callbacks //
@@ -174,7 +181,7 @@ void ftGameWatch_8014A538(HSD_GObj* fighter_gobj);
 void ftGameWatch_OnItemPickup(HSD_GObj* gobj, bool arg1);
 void ftGameWatch_OnItemInvisible(HSD_GObj* fighter_gobj);
 void ftGameWatch_OnItemVisible(HSD_GObj* fighter_gobj);
-void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, s32 dropItemFlag);
+void ftGameWatch_OnItemDrop(HSD_GObj* fighter_gobj, bool dropItemFlag);
 void ftGameWatch_8014A77C(HSD_GObj* fighter_gobj);
 void ftGameWatch_CopySpecialAttrs(HSD_GObj* fighter_gobj);
 void ftGameWatch_8014A7F4(HSD_GObj* fighter_gobj, ItemModStruct* item_mod);

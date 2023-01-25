@@ -97,6 +97,9 @@ static inline ftMarioAttributes* GetMarioAttr(Fighter* fp)
     return mario_attr;
 }
 
+extern ActionState as_table_mario[];
+extern ActionState lbl_803C7260[];
+
 // ftmario1
 void ftMario_OnDeath(HSD_GObj*);
 void ftMario_OnLoadForDrMario(Fighter*);
@@ -109,8 +112,8 @@ void ftMario_OnItemDrop(HSD_GObj*, bool);
 void ftMario_LoadSpecialAttrs(HSD_GObj*);
 void ftMario_OnKnockbackEnter(HSD_GObj*);
 void ftMario_OnKnockbackExit(HSD_GObj*);
-void ftMario_func_800E0CAC(s32, u32*, u32*);
-s32 ftMario_func_800E0CE0(s32 arg0);
+void ftMario_func_800E0CAC(s32, s32*, s32*);
+unk_t ftMario_func_800E0CE0(enum_t arg0);
 
 // ftmario2
 int ftMario_SpecialN_VitaminRandom(HSD_GObj*);

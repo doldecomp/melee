@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTLINK_FTLINK_H
 
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
@@ -25,6 +26,13 @@ typedef struct _ftLinkAttributes {
     f32 xD8;
 } ftLinkAttributes;
 
+extern ActionState as_table_link[];
+extern char lbl_803C80B8[];
+extern char lbl_803C80C4[];
+extern Fighter_CostumeStrings lbl_803C82B0[];
+extern char lbl_803C8224[];
+extern Fighter_DemoStrings lbl_803C82A0;
+
 void ftLink_OnItemDrop(HSD_GObj* fighter_gobj, bool arg1);
 void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
 void func_800EC06C(void);
@@ -33,7 +41,6 @@ void func_800ECD58(HSD_GObj*);
 void ftLink_OnLoadForCLink(Fighter* fp);
 void ftLink_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 void func_800EAF58(HSD_GObj*);
-
 bool func_800EAD64(HSD_GObj* fighter_gobj);
 void ftLink_OnKnockbackEnter(HSD_GObj* fighter_gobj);
 void ftLink_OnKnockbackExit(HSD_GObj* fighter_gobj);
@@ -94,7 +101,6 @@ void func_800EBCAC(HSD_GObj*);
 void func_800EBD30(HSD_GObj*);
 void func_800EBDC0(HSD_GObj*);
 void func_800EBC4C(HSD_GObj*);
-
 void func_800EBCB0(HSD_GObj*);
 void func_800EBCB4(HSD_GObj*);
 void func_800EBDFC(HSD_GObj*);
@@ -104,5 +110,14 @@ void func_800EB95C(HSD_GObj*);
 void func_800EB8E0(HSD_GObj*);
 void func_800EB93C(HSD_GObj*);
 void func_800EB9D4(HSD_GObj*);
+void ftLink_SpecialS_StartAction(HSD_GObj*);
+void ftLink_SpecialAirHi_StartAction(HSD_GObj*);
+void ftLink_SpecialAirLw_StartAction(HSD_GObj*);
+void ftLink_SpecialAirS_StartAction(HSD_GObj*);
+void ftLink_SpecialAirN_StartAction(HSD_GObj*);
+void ftLink_SpecialN_StartAction(HSD_GObj*);
+void ftLink_SpecialN_StartAction(HSD_GObj*);
+void ftLink_SpecialLw_StartAction(HSD_GObj*);
+void ftLink_SpecialHi_StartAction(HSD_GObj*);
 
 #endif

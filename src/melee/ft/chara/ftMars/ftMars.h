@@ -35,6 +35,13 @@ typedef struct _MarsAttributes {
     u8 data_filler_68[0x98 - 0x68];
 } MarsAttributes;
 
+extern ActionState as_table_mars[];
+extern char lbl_803CF820[];
+extern char lbl_803CF82C[];
+extern Fighter_CostumeStrings lbl_803CFA18[];
+extern char lbl_803CF98C[];
+extern Fighter_DemoStrings lbl_803CFA08;
+
 void ftMars_OnDeath(HSD_GObj* gobj);
 void ftMars_OnItemPickup(HSD_GObj* gobj, bool arg1);
 void ftMars_OnItemInvisible(HSD_GObj* gobj);
