@@ -3,6 +3,7 @@
 
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 
 typedef struct _ftSeakAttributes {
@@ -21,9 +22,15 @@ typedef struct _ftSeakAttributes {
     u8 data_filler_1[0x44];
 } ftSeakAttributes;
 
+extern ActionState as_table_seak[];
+extern char lbl_803CC360[];
+extern char lbl_803CC36C[];
+extern Fighter_CostumeStrings lbl_803CC558[];
+extern char lbl_803CC4CC[];
+extern Fighter_DemoStrings lbl_803CC548;
+
 void lbl_8011412C(HSD_GObj* fighter_gobj);
 void func_80114758(HSD_GObj*);
-
 void ftSeak_OnLoad(HSD_GObj* fighter_gobj);
 void ftSeak_80110198(HSD_GObj* fighter_gobj);
 void ftSeak_801101CC(HSD_GObj* fighter_gobj);
@@ -155,5 +162,13 @@ void lbl_801145A0(HSD_GObj*);
 void lbl_801145C4(HSD_GObj*);
 void lbl_80114644(HSD_GObj*);
 void func_800761C8(HSD_GObj*);
+void ftSeak_SpecialS_StartAction(HSD_GObj*);
+void ftSeak_SpecialAirHi_StartAction(HSD_GObj*);
+void ftSeak_SpecialAirLw_StartAction(HSD_GObj*);
+void ftSeak_SpecialAirS_StartAction(HSD_GObj*);
+void ftSeak_SpecialAirN_StartAction(HSD_GObj*);
+void ftSeak_SpecialN_StartAction(HSD_GObj*);
+void ftSeak_SpecialLw_StartAction(HSD_GObj*);
+void ftSeak_SpecialHi_StartAction(HSD_GObj*);
 
 #endif

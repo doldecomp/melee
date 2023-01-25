@@ -142,6 +142,13 @@ typedef struct _ftFoxAttributes {
 
 } ftFoxAttributes;
 
+extern ActionState as_table_fox[];
+extern char lbl_803C7BE8[];
+extern char lbl_803C7BF4[];
+extern Fighter_CostumeStrings lbl_803C7D9C[];
+extern char lbl_803C7D10[];
+extern Fighter_DemoStrings lbl_803C7D8C;
+
 // Fox & Falco Functions //
 
 bool func_800E5534(HSD_GObj* gobj);

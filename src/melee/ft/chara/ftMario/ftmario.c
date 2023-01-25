@@ -1,5 +1,6 @@
 #include <melee/ft/chara/ftMario/ftmario.h>
 
+#include <melee/ft/chara/ftMario/ftmario2.h>
 #include <melee/ft/chara/ftMario/ftMario_SpecialN.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
@@ -40,8 +41,6 @@ ActionState lbl_803C7260[] = {
     { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
     { 15, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };
-
-extern s32 lbl_803C5A20[];
 
 void ftMario_OnDeath(HSD_GObj* gobj)
 {
@@ -120,7 +119,7 @@ void ftMario_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftMario_func_800E0CAC(s32 arg0, u32* arg1, u32* arg2)
+void ftMario_func_800E0CAC(s32 arg0, s32* arg1, s32* arg2)
 {
     if (arg0 != 10) {
         if (arg0 >= 10)
@@ -135,16 +134,16 @@ void ftMario_func_800E0CAC(s32 arg0, u32* arg1, u32* arg2)
     }
 }
 
-s32 ftMario_func_800E0CE0(s32 arg0)
+unk_t ftMario_func_800E0CE0(enum_t arg0)
 {
     int offset;
 
     switch (arg0) {
     case 9:
-        offset = 0xe;
+        offset = 14;
         break;
     case 10:
-        offset = 0xf;
+        offset = 15;
     }
 
     return lbl_803C5A20[offset - 0xe];

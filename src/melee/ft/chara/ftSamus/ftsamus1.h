@@ -1,8 +1,16 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_FTSAMUS1_H
 #define MELEE_FT_CHARA_FTSAMUS_FTSAMUS1_H
 
+#include <melee/ft/types.h>
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
+
+extern ActionState as_table_samus[];
+extern char lbl_803CE510[];
+extern char lbl_803CE51C[];
+extern Fighter_CostumeStrings lbl_803CE678[];
+extern char lbl_803CE5EC[];
+extern Fighter_DemoStrings lbl_803CE668;
 
 void ftSamus_OnDeath(HSD_GObj* fighter_gobj);
 void ftSamus_OnLoad(HSD_GObj* fighter_gobj);

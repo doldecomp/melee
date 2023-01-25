@@ -25,6 +25,13 @@ typedef struct _CLinkAttributes {
     f32 xD8;
 } CLinkAttributes;
 
+extern ActionState as_table_clink[];
+extern char lbl_803D1240[];
+extern char lbl_803D124C[];
+extern Fighter_CostumeStrings lbl_803D1458[];
+extern char lbl_803D13CC[];
+extern Fighter_DemoStrings lbl_803D1448;
+
 void ftCLink_OnItemPickup(HSD_GObj*, bool);
 void ftCLink_OnItemDrop(HSD_GObj*, bool);
 void func_80149268(HSD_GObj*);
@@ -37,13 +44,12 @@ void func_801492C4(HSD_GObj* gobj);
 u32 func_801492F4(HSD_GObj* gobj);
 void func_80149318(HSD_GObj* gobj);
 void ftCLink_OnLoad(HSD_GObj* gobj);
-void ftCLink_OnItemPickupExt(HSD_GObj* gobj, s32 arg1);
+void ftCLink_OnItemPickupExt(HSD_GObj* gobj, bool arg1);
 void ftCLink_OnItemInvisible(HSD_GObj* gobj);
 void ftCLink_OnItemVisible(HSD_GObj* gobj);
-void ftCLink_OnItemDropExt(HSD_GObj* gobj, s32 arg1);
+void ftCLink_OnItemDropExt(HSD_GObj* gobj, bool arg1);
 void ftCLink_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftCLink_OnKnockbackEnter(HSD_GObj* gobj);
-
 void func_800CEDE0(HSD_GObj*);
 void func_800CEE00(HSD_GObj*);
 void func_800CEE30(HSD_GObj*);

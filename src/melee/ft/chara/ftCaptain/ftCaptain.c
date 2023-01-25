@@ -80,7 +80,7 @@ char lbl_803C7678[] = "PlCaBu.dat";
 char lbl_803C7684[] = "PlyCaptain5KBu_Share_joint";
 char lbl_803C76A0[] = "PlCaAJ.dat";
 
-Fighter_DemoStrings lbl_803C772C[] = {
+Fighter_DemoStrings lbl_803C772C = {
     "ftDemoResultMotionFileCaptain",
     "ftDemoIntroMotionFileCaptain",
     "ftDemoEndingMotionFileCaptain",

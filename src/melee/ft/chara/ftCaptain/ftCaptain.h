@@ -92,6 +92,13 @@ typedef struct _ftCaptainAttributes {
 
 } ftCaptainAttributes;
 
+extern ActionState as_table_cfalcon[];
+extern char lbl_803C7598[];
+extern char lbl_803C75A4[];
+extern Fighter_CostumeStrings lbl_803C773C[];
+extern char lbl_803C76A0[];
+extern Fighter_DemoStrings lbl_803C772C;
+
 // Captain Falcon & Ganondorf functions //
 
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj);
@@ -142,5 +149,9 @@ void ftCaptain_OnLoadForGanon(Fighter*);
 
 /// @todo @c ftCaptain prefix
 void ftCFalcon_LoadSpecialAttrs(HSD_GObj*);
+void ftCFalcon_SpecialAirHi_StartAction(HSD_GObj*);
+void ftCFalcon_SpecialAirLw_StartAction(HSD_GObj*);
+void ftCFalcon_SpecialLw_StartAction(HSD_GObj*);
+void ftFalcon_SpecialHi_StartAction(HSD_GObj*);
 
 #endif

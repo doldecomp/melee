@@ -4,6 +4,14 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
+extern ActionState as_table_gkoopa[];
+extern ActionState lbl_803D38C8[];
+extern char lbl_803D38E8[];
+extern char lbl_803D38F4[];
+extern Fighter_CostumeStrings lbl_803D3988[];
+extern char lbl_803D3948[];
+extern Fighter_DemoStrings lbl_803D3954;
+
 void ftGKoopa_OnDeath(HSD_GObj*);
 void func_8014F698(HSD_GObj*);
 void ftGKoopa_OnLoad(HSD_GObj*);
@@ -15,6 +23,6 @@ void ftGKoopa_LoadSpecialAttrs(HSD_GObj*);
 void ftGKoopa_OnKnockbackEnter(HSD_GObj*);
 void ftGKoopa_OnKnockbackExit(HSD_GObj*);
 void func_8014F98C(s32, s32*, s32*);
-s32 func_8014F9A4(s32);
+unk_t func_8014F9A4(enum_t);
 
 #endif

@@ -3,6 +3,7 @@
 
 #include <common_structs.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 
 typedef struct _ftZeldaAttributes {
@@ -41,6 +42,13 @@ typedef struct _ftZeldaAttributes {
     f32 x80; // Type confirmed
     ReflectDesc x84;
 } ftZeldaAttributes;
+
+extern ActionState as_table_zelda[];
+extern char lbl_803CFC98[];
+extern char lbl_803CFCA4[];
+extern Fighter_CostumeStrings lbl_803CFEB0[];
+extern char lbl_803CFE24[];
+extern Fighter_DemoStrings lbl_803CFEA0;
 
 // ftzelda 1
 void ftZelda_OnDeath(HSD_GObj* fighter_gobj);

@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTKIRBY_FTKIRBY_H
 
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>
 
 typedef struct _ftKirbyAttributes {
@@ -26,6 +27,14 @@ typedef struct _ftKirbyAttributes {
     u8 data_filler_4[0x424 - 0x388];
 } ftKirbyAttributes;
 
+extern ActionState as_table_kirby[];
+extern ActionState lbl_803CA04C[];
+extern char lbl_803CA308[];
+extern char lbl_803CA314[];
+extern Fighter_CostumeStrings lbl_803CA5B4[];
+extern char lbl_803CA4E0[];
+extern Fighter_DemoStrings lbl_803CA55C;
+
 void func_800EED50(s32, s32);
 void func_800F1D24(HSD_GObj*);
 void func_800F5BA4(Fighter*);
@@ -34,7 +43,6 @@ void func_800F5D04(HSD_GObj* fighter_gobj, bool);
 void ftKirby_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
 void func_800EEB00(HSD_GObj*, void*);
 void func_800EEB1C(HSD_GObj*, void*);
-
 void ftKirby_800EE74C(HSD_GObj* fighter_gobj);
 void ftKirby_800EE7B8(HSD_GObj* fighter_gobj);
 void func_800EE528(void);
@@ -774,7 +782,6 @@ void func_800FAC70(HSD_GObj*);
 void func_800FAF70(HSD_GObj*);
 void func_800FB014(HSD_GObj*);
 void func_800FB304(HSD_GObj*);
-
 void func_800EFA40(HSD_GObj*);
 void lbl_800EFAF0(HSD_GObj*);
 void lbl_800EFB4C(HSD_GObj*);
@@ -827,7 +834,6 @@ void lbl_800F0EA4(HSD_GObj*);
 void lbl_800F0F5C(HSD_GObj*);
 void lbl_800EFD64(HSD_GObj*);
 void lbl_800EFE1C(HSD_GObj*);
-
 void lbl_800F9110(HSD_GObj*);
 void lbl_800FE100(HSD_GObj*);
 void lbl_800F99BC(HSD_GObj*);
@@ -855,7 +861,6 @@ void lbl_8010D188(HSD_GObj*);
 void lbl_800F99BC(HSD_GObj*);
 void lbl_8010B2FC(HSD_GObj*);
 void lbl_800FA8B4(HSD_GObj*);
-
 void lbl_800F93CC(HSD_GObj*);
 void lbl_800FE240(HSD_GObj*);
 void lbl_800F9A54(HSD_GObj*);
@@ -891,5 +896,37 @@ void lbl_800FA958(HSD_GObj*);
 /* static */ void func_800F19AC(HSD_GObj* fighter_gobj);
 /* static */ void func_800F1A8C(HSD_GObj* fighter_gobj);
 void func_800EE818(HSD_GObj* fighter_gobj);
+void ftKirby_SpecialS_StartAction(HSD_GObj*);
+void ftKirby_SpecialAirHi_StartAction(HSD_GObj*);
+void ftKirby_SpecialAirLw_StartAction(HSD_GObj*);
+void ftKirby_SpecialAirS_StartAction(HSD_GObj*);
+void ftKirby_SpecialAirS_StartAction(HSD_GObj*);
+void ftKirby_SpecialAirN_StartAction(HSD_GObj*);
+void ftKirby_SpecialN_StartAction(HSD_GObj*);
+void ftKirby_SpecialLw_StartAction(HSD_GObj*);
+void ftKirby_SpecialHi_StartAction(HSD_GObj*);
+void ftKirby_OnItemInvisible(HSD_GObj*);
+void ftKirby_OnItemVisible(HSD_GObj*);
+void ftKirby_OnItemDrop(HSD_GObj*, bool);
+void ftKirby_OnKnockbackEnter(HSD_GObj*);
+void ftKirby_OnKnockbackExit(HSD_GObj*);
+void func_800F1B6C(HSD_GObj*);
+void ftKirby_LoadSpecialAttrs(HSD_GObj*);
+void func_800EEE9C(HSD_GObj*);
+void func_800EEF04(HSD_GObj*, int, Mtx);
+void func_800EF87C(Fighter*, int, bool);
+unk_t func_800EF028(HSD_GObj*);
+void func_800EF9BC(HSD_GObj*);
+void func_800EF9FC(HSD_GObj*);
+unk_t func_800EEBF8(enum_t);
+void func_800EEBC0(s32, s32*, s32*);
+void func_8010AA1C(HSD_GObj*);
+void func_8010AA20(HSD_GObj*);
+void func_8010AA24(HSD_GObj*);
+void func_8010AA28(HSD_GObj*);
+void func_8010AF54(HSD_GObj*);
+void func_8010B0A0(HSD_GObj*);
+void func_8010B0A4(HSD_GObj*);
+void func_8010B0DC(HSD_GObj*);
 
 #endif
