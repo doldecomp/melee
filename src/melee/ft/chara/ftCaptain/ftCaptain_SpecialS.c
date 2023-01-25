@@ -114,7 +114,7 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 
 inline void ftCaptain_SpecialS_Switch0(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS,
@@ -160,7 +160,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
     HSD_GObj* detectGObj;
     s32 ASID;
     u16 entityClass;
-    s32 unused[6];
+    s32 unused[5];
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         detectGObj = fp->x20AC;
@@ -239,7 +239,7 @@ void ftCaptain_SpecialSStart_Anim(HSD_GObj* fighter_gobj)
 // Raptor Boost / Gerudo Dragon Hit Animation callback
 void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ftKind;
 
     if ((u32) fp->sa.captain.x2230_isSpecialSGFX == false) {
@@ -373,8 +373,13 @@ void ftCaptain_SpecialS_Phys(HSD_GObj* fighter_gobj)
 // Boost / Gerudo Dragon Start Physics callback
 void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     func_80085134(fighter_gobj);
     if ((u32) fp->x2204_ftcmd_var1 == 1U) {
@@ -395,8 +400,13 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 // Boost / Gerudo Dragon Hit Physics callback
 void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     func_80085134(fighter_gobj);
     fp->captainVars[0].SpecialS.gravity -=
@@ -477,8 +487,8 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
 // Boost / Gerudo Dragon Start Collision callback
 void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
 {
-    ftCaptainAttributes* captainAttrs =
-        getFtSpecialAttrsD(fighter_gobj->user_data);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
 
     if (func_80081D0C(fighter_gobj) == true) {
         efLib_DestroyAll(fighter_gobj);

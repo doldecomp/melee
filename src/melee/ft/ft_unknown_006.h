@@ -242,7 +242,7 @@ void func_800D6C60(HSD_GObj*, HSD_GObjEvent callback);
 void func_800D6E70(HSD_GObj* fighter_gobj);
 void func_800D6E34(HSD_GObj* fighter_gobj);
 s32 func_8008CE68(Fighter*);
-void func_8008CFAC(HSD_GObj*, s32);
+void func_8008CFAC(HSD_GObj*, enum_t);
 void func_800D638C(HSD_GObj*);
 bool func_8008A9F8(HSD_GObj*);
 bool func_8008B658(HSD_GObj*);

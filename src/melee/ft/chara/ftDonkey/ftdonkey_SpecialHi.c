@@ -9,7 +9,7 @@
 
 void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = &ftDonkey_8010D774;
     fp->cb.x21E4_callback_OnDeath2 = &ftDonkey_8010D774;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -42,7 +42,7 @@ void ftDonkey_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 unused[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17E, 0, NULL, 0.0f, 1.0f,
@@ -103,7 +103,7 @@ void ftDonkey_8010FDA4(HSD_GObj* fighter_gobj)
 void ftDonkey_8010FDEC(HSD_GObj* fighter_gobj)
 {
     s32 unused[2]; /// get inline break the regalloc, this seems cleanest
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     f32 gravity_scalar;
 
@@ -120,8 +120,9 @@ void ftDonkey_8010FDEC(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010FE60(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
-    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
+
     if (!func_80082708(fighter_gobj)) {
         func_8007D60C(fp);
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17E, 0x0C4C5080,
@@ -135,9 +136,13 @@ void ftDonkey_8010FE60(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010FF14(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2]; /// get inline break the regalloc, this seems cleanest
-    Fighter* fp = fighter_gobj->user_data;
-    ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->x80_self_vel.y >= 0.0f) {
         if (func_80081D0C(fighter_gobj)) {

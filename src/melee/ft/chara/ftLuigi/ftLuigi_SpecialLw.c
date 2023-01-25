@@ -11,13 +11,13 @@
 // https://decomp.me/scratch/TTyNT // Luigi Cyclone Rotation Update
 void ftLuigi_SpecialLw_UpdateRot(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007592C(fp, 0, 0.0f);
 }
 
 static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -29,14 +29,14 @@ static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
 
 static inline void ftLuigi_SpecialLw_SetCall(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = ftLuigi_SpecialLw_UpdateRot;
     fp->cb.x21E4_callback_OnDeath2 = ftLuigi_SpecialLw_UpdateRot;
 }
 
 static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_JObj* hsd_obj = fighter_gobj->hsd_obj;
     ef_Spawn(0x509, fighter_gobj, hsd_obj);
     fp->x2219_flag.bits.b0 = 1;
@@ -51,8 +51,12 @@ void ftLuigi_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
     Fighter* fp;
     ftLuigiAttributes* luigiAttrs;
     Fighter* temp_fp;
-    Fighter* var[7];
     Fighter* fp2;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[20];
+#endif
 
     temp_fp = (fp = GET_FIGHTER(fighter_gobj));
     luigiAttrs = temp_fp->x2D4_specialAttributes;
@@ -79,9 +83,13 @@ void ftLuigi_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
     Fighter* fp;
     ftLuigiAttributes* luigiAttrs;
     Fighter* temp_fp;
-    Fighter* var[7];
     Fighter* fp2;
     f32 cycloneVar;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     temp_fp = (fp = GET_FIGHTER(fighter_gobj));
     luigiAttrs = temp_fp->x2D4_specialAttributes;
@@ -128,7 +136,7 @@ void ftLuigi_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/gssxH // Luigi's aerial Cyclone Animation callback
 void ftLuigi_SpecialAirLw_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     Fighter* temp_fp;
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     s32 cycloneLanding;
@@ -184,7 +192,7 @@ void ftLuigi_SpecialLw_Phys(HSD_GObj* fighter_gobj)
     f32 var2;
     f32 var3;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     luigiAttrs = getFtSpecialAttrs(fp);
     var2 = luigiAttrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND;
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
@@ -217,7 +225,7 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
     f32 unused;
     f32 vel;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     luigiAttrs = fp->x2D4_specialAttributes;
     if (((s32) fp->sa.luigi.x222C_cycloneCharge == false) &&
         ((u32) fp->x2208_ftcmd_var2 != 0U) &&
@@ -290,7 +298,7 @@ void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj)
 
 static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     fp->x2208_ftcmd_var2 = 0;
     func_8007D7FC(fp);
@@ -308,8 +316,12 @@ static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/fdQ4f // Luigi's aerial Cyclone Collision callback
 void ftLuigi_SpecialAirLw_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    s32 var[8];
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
 
     if (func_800824A0(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) != false) {
         ftLuigi_SpecialAirLw_AirToGround(fighter_gobj);

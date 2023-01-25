@@ -152,9 +152,12 @@ void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
 
 void func_8012B8A4(HSD_GObj* fighter_gobj)
 {
-    s32 unused[4];
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
     f32 tempf = attr->xC * (1.0f - (fp->x1998_shieldHealth /
                                     p_ftCommonData->x260_startShieldHealth));
     func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, tempf);
@@ -163,7 +166,7 @@ void func_8012B8A4(HSD_GObj* fighter_gobj)
 
 void func_8012B918(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, 0.0f);
     func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, 0.0f);
@@ -171,7 +174,7 @@ void func_8012B918(HSD_GObj* fighter_gobj)
 
 void ftYoshi_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, 0);
     fp->sa.yoshi.x2238 = 0;
 }
@@ -187,7 +190,7 @@ void ftYoshi_OnLoad(HSD_GObj* fighter_gobj)
     struct S_UNK_YOSHI1* temp_r27;
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5B8;
     ft = fp->x10C_ftData;
     temp_r28 = (struct S_UNK_YOSHI1*) fp->x5BC;
@@ -314,28 +317,20 @@ asm unk_t func_8012BDA0(void)
 }
 #pragma pop
 
-#else
-
-unk_t func_8012BDA0(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 void func_8012BE3C(HSD_GObj* fighter_gobj) {
     s32* x1CC;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 bone_idx;
     Fighter* fp2;
     HSD_JObj* jobj;
-    u32 unused[2];
     func_80074B0C(fighter_gobj, 0, 0);
     func_8007B0C0(fighter_gobj, 0);
 
     x1CC = &fp->x110_attr.x1CC;
     bone_idx = func_8007500C(fp, 4);
-    fp2 = fighter_gobj->user_data;
+    fp2 = GET_FIGHTER(fighter_gobj);
     jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
     efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
 }
@@ -446,13 +441,6 @@ lbl_8012BFF0:
 } // clang-format on
 #pragma pop
 
-#else
-
-unk_t func_8012BECC(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 /** @fn func_8012C850
@@ -467,7 +455,7 @@ void func_8012C850(HSD_GObj* fighter_gobj)
     ftCommonData* temp_r5;
     Fighter* fp;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x10, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x672_input_timer_counter = 0xFE;

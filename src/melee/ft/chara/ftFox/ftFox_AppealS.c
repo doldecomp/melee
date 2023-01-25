@@ -36,7 +36,7 @@ static inline bool ftFox_CheckAppealSCount(void)
 
 bool ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ftKind = fp->x4_fighterKind;
 
     if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) &&
@@ -79,7 +79,7 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     s32 facingDir;
     s32 actionDir;
     s32 animCount;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->foxVars[0].AppealS.animCount = 0;
     facingDir = ftFox_AppealS_GetLR(1.0f, fp->facing_dir);
@@ -100,14 +100,17 @@ static void ftFox_AppealS_OnTakeDamage(HSD_GObj*);
 
 void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
 {
-    s32 ftKind;
-    s32 flag;
-    s32 var1;
-    s32 var2;
-    Fighter* fp = fighter_gobj->user_data;
+    FighterKind ftKind;
+    bool flag;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->x2210_ThrowFlags.b3 != 0) {
-        fp->x2210_ThrowFlags.b3 = 0;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
+    if (fp->x2210_ThrowFlags.b3) {
+        fp->x2210_ThrowFlags.b3 = false;
         flag = true;
     } else {
         flag = false;
@@ -162,7 +165,7 @@ void ftFox_AppealS_Coll(HSD_GObj* fighter_gobj)
 
 static void ftFox_AppealS_OnTakeDamage(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_801E2AF4();
     fp->cb.x21E0_callback_OnDeath = NULL;

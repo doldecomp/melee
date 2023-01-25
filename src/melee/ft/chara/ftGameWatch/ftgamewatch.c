@@ -151,7 +151,7 @@ Fighter_CostumeStrings lbl_803D29C8[] = {
 
 void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0U, 0);
     func_80074A4C(fighter_gobj, 1U, -1);
     func_80074A4C(fighter_gobj, 2U, 0);
@@ -183,7 +183,7 @@ void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj)
 
 void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     void** items = fp->x10C_ftData->x48_items;
 
     fp->x2222_flag.bits.b6 = 0;

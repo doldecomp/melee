@@ -131,7 +131,7 @@ void func_80076528(
     u16 temp_r3;
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     temp_r3 = fp->x2092;
     if (temp_r3 != 0) {
         fp->x2092 = (u16) (temp_r3 - 1);

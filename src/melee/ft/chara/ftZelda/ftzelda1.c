@@ -81,7 +81,7 @@ Fighter_CostumeStrings lbl_803CFEB0[] = {
 
 void ftZelda_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, 0);
     func_80074A4C(fighter_gobj, 1, 0);
     fp->sa.zelda.x222C = 0;
@@ -89,7 +89,7 @@ void ftZelda_OnDeath(HSD_GObj* fighter_gobj)
 
 void ftZelda_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftZeldaAttributes);

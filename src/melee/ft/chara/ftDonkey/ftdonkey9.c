@@ -46,14 +46,14 @@ bool ftDonkey_800E0750(HSD_GObj* fighter_gobj)
 
 void ftDonkey_800E07B0(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2CC;
     func_8008DCE0(fighter_gobj, donkey_attr->action_state + 9, 0.0f);
 }
 
 void ftDonkey_800E07E4(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8008F744(fighter_gobj);
     if (!fp->x221C_flag.bits.b6) {
         if (fp->xE0_ground_or_air == GA_Air) {

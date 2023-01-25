@@ -7,7 +7,7 @@
 
 s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 ground_vel = fp->xEC_ground_vel;
     f32 walking_velocity = fabs_inline(ground_vel);
     if (walking_velocity >=
@@ -27,7 +27,7 @@ s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
 
 static inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 walking_velocity = fabs_inline(fp->xEC_ground_vel);
     f32 tempf = fp->x2360_f32;
     if (walking_velocity >= (tempf * (p_ftCommonData->x2C *
@@ -46,7 +46,7 @@ static inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
 
 bool ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x620_lstick_x * fp->facing_dir) >= p_ftCommonData->x24) {
         return true;
@@ -178,7 +178,7 @@ void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
     f32 velocity_f1;
     f32 unused_float;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     unused_float = ftx2360_f5 = fp->x2360_f32;
     velocity_f1 = fp->input.x620_lstick_x *
                   fp->x110_attr.x110_WalkInitialVelocity * ftx2360_f5;

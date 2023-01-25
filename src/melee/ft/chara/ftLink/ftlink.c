@@ -94,7 +94,7 @@ Vec3 const lbl_803B7520[3] = { 0 };
 
 bool func_800EAD64(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.link.x2234)
         return true;
@@ -104,7 +104,7 @@ bool func_800EAD64(HSD_GObj* fighter_gobj)
 
 void ftLink_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_80074A4C(fighter_gobj, 0, 0);
     func_80074A4C(fighter_gobj, 1, 0);
@@ -126,7 +126,7 @@ void ftLink_OnLoadForCLink(Fighter* fp)
 
 void ftLink_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
     void** item_list = fp->x10C_ftData->x48_items;
     link_attr->x54 = func_8001E8F8(func_80085E50(fp, 0x48U));
@@ -218,7 +218,7 @@ void ftLink_800EB334(HSD_GObj* fighter_gobj)
 {
     f32 new_ground_vel;
 
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
 
     f32 resultf = func_80092ED8(fp->x19A4, link_attr, link_attr->xD8);
