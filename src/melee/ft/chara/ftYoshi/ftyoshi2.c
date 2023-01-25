@@ -1,7 +1,7 @@
 #include <melee/ft/chara/ftYoshi/ftyoshi2.h>
 
 #include <melee/ef/efasync.h>
-#include <melee/ft/chara/ftYoshi/ftyoshi.h>
+#include <melee/ft/chara/ftYoshi/ftyoshi1.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
