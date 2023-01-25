@@ -14,7 +14,7 @@
 void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj)
 {
     Fighter* fp;
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
 
     func_8007592C(fp, 0, 0.0f);
 }
@@ -23,7 +23,7 @@ void ftMario_SpecialLw_SetGFX(HSD_GObj* gobj)
 {
     void* hsd_obj_ptr;
     Fighter* fp;
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
     hsd_obj_ptr = gobj->hsd_obj;
 
     ef_Spawn(0x47C, gobj, hsd_obj_ptr);
@@ -34,7 +34,7 @@ void ftMario_SpecialLw_SetGFX(HSD_GObj* gobj)
 
 void ftMario_SpecialLw_SetCall(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21DC_callback_OnTakeDamage = &ftMario_SpecialLw_UpdateRot;
     fp->cb.x21E4_callback_OnDeath2 = &ftMario_SpecialLw_UpdateRot;
 }
@@ -44,7 +44,7 @@ void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj)
     Fighter* fp;
     ftMarioAttributes* sa;
     void* hsd_obj_ptr;
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -118,7 +118,7 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
 
 void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
@@ -140,7 +140,7 @@ void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
 // https://decomp.me/scratch/QF5fb
 void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftMarioAttributes* sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
 
     if ((u32) fp->x2204_ftcmd_var1 != 0U) {
@@ -196,7 +196,7 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
 
     u8 padding[8];
 
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
     sa = GetMarioAttr(fp);
 
     flt_var = sa->x3C_MARIO_TORNADO_MOMENTUM_X_GROUND;
@@ -284,7 +284,7 @@ static ftCollisionBox ftMario_SpecialLw_CollisionBox = {
 // https://decomp.me/scratch/ykJHP
 void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         if (func_80082888(gobj, &ftMario_SpecialLw_CollisionBox) == false) {

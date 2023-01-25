@@ -51,7 +51,7 @@ void ftMario_SpecialS_CreateCape(HSD_GObj* gobj)
 // 0x800E132C
 void ftMario_SpecialS_SetNULL(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftMario_SpecialS_ExitHitlag(gobj);
     fp->sa.mario.x223C_capeGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
@@ -61,8 +61,7 @@ void ftMario_SpecialS_SetNULL(HSD_GObj* gobj)
 // 0x800E1368
 void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
-    u8 padding[8];
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->sa.mario.x223C_capeGObj != NULL) {
         func_802B2674(fp->sa.mario.x223C_capeGObj);
@@ -73,7 +72,7 @@ void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj)
 // 0x800E13C8
 void ftMario_SpecialS_EnterHitlag(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->sa.mario.x223C_capeGObj != NULL)
         func_802B26C0(fp->sa.mario.x223C_capeGObj);
 }
@@ -81,7 +80,7 @@ void ftMario_SpecialS_EnterHitlag(HSD_GObj* gobj)
 // 0x800E13F8
 void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->sa.mario.x223C_capeGObj != NULL)
         func_802B26E0(fp->sa.mario.x223C_capeGObj);
 }
@@ -89,7 +88,7 @@ void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
 // 0x800E1428
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     s32 asid = fp->x10_action_state_index;
 
@@ -105,7 +104,7 @@ void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, s32 new_action_state_index)
     Fighter_ActionStateChange_800693AC(gobj, new_action_state_index, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -117,7 +116,7 @@ void ftMario_SpecialS_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp;
     u8 unused[8];
-    fp = getFighter(gobj);
+    fp = GET_FIGHTER(gobj);
     fp->x80_self_vel.y = 0.0f;
 
     ftMario_SpecialS_ChangeAction(gobj, AS_MARIO_SPECIALS);
@@ -125,7 +124,7 @@ void ftMario_SpecialS_StartAction(HSD_GObj* gobj)
 
 void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftMarioAttributes* sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     u8 unused[8];
 
@@ -162,7 +161,7 @@ void ftMario_SpecialAirS_IASA(HSD_GObj* gobj)
 
 void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftMarioAttributes* sa_tmp = fp->x2D4_specialAttributes;
 
     if ((fp->x2204_ftcmd_var1 == 1U) &&
@@ -263,7 +262,7 @@ void ftMario_SpecialAirS_Coll(HSD_GObj* gobj)
 
 void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if ((s32) fp->marioVars[0].SpecialS.isReflect != false) {
         fp->x2218_flag.bits.b3 = 1;
     }
@@ -274,10 +273,7 @@ void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj)
 // 0x800E18B8
 void ftMario_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    u8 unused[4];
-
-    fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRS,
                                        FTMARIO_SPECIALS_COLL_FLAG, NULL,

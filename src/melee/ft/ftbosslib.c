@@ -288,7 +288,7 @@ s32 func_8015C530(u32 arg0)
 
     gobj = func_8015C3E8(FTKIND_MASTERH);
     if (gobj) {
-        attr = getFighter(gobj)->x10C_ftData->ext_attr;
+        attr = GET_FIGHTER(gobj)->x10C_ftData->ext_attr;
         switch (arg0) {
         case 0:
             return attr->x0;

@@ -39,7 +39,7 @@ void ftDonkey_800E04A4(HSD_GObj* fighter_gobj, s32 arg1)
 
 void ftDonkey_800E0518(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->x2348_stateVar3_f32 <= 0.0f) {
         ftDonkey_800E03C0(fighter_gobj);
     }

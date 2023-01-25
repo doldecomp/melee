@@ -84,7 +84,10 @@ void ftCLink_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 
 void ftCLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter* fp = getFighter(gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 

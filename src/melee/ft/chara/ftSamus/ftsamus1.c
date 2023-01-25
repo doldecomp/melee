@@ -63,7 +63,7 @@ void ftSamus_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
 
 void ftSamus_80128628(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* attr = fp->x2D4_specialAttributes;
     s32 samus_x2230 = fp->sa.samus.x2230;
     if (samus_x2230 == attr->x18) {
