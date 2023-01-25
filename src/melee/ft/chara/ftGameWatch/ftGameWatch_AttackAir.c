@@ -37,7 +37,7 @@ void ftGameWatch_ItemParachuteSetup(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/TaqkV // Parachute Accessory Callback - Landing Lag
 void ftGameWatch_ItemParachuteOnLand(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
@@ -58,7 +58,7 @@ void ftGameWatch_ItemParachuteOnLand(HSD_GObj* fighter_gobj)
 // pointers
 void ftGameWatch_ItemParachuteSetFlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
     fp->sa.gaw.x2258_parachuteGObj = NULL;
@@ -70,7 +70,7 @@ void ftGameWatch_ItemParachuteSetFlag(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/KYJBx // Remove Parachute item
 void ftGameWatch_ItemParachuteRemove(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObj* parachuteGObj;
 
     if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
@@ -84,7 +84,7 @@ void ftGameWatch_ItemParachuteRemove(HSD_GObj* fighter_gobj)
 // Neutral Aerial / Neutral Aerial landing
 bool ftGameWatch_ItemCheckParachuteRemove(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 asid = fp->x10_action_state_index;
 
     if (asid >= AS_GAMEWATCH_ATTACKAIRN && asid <= AS_GAMEWATCH_LANDINGAIRN)
@@ -125,7 +125,7 @@ void ftGameWatch_ItemTurtleSetup(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/R20Hy // Turtle Accessory Callback - Landing Lag
 static void ftGameWatch_ItemTurtleOnLand(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.gaw.x225C_turtleGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
@@ -148,7 +148,7 @@ static void ftGameWatch_ItemTurtleOnLand(HSD_GObj* fighter_gobj)
 // pointers
 void ftGameWatch_ItemTurtleSetFlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
     fp->sa.gaw.x225C_turtleGObj = NULL;
@@ -160,7 +160,7 @@ void ftGameWatch_ItemTurtleSetFlag(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/jzWrr // Remove Turtle item
 void ftGameWatch_ItemTurtleRemove(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObj* turtleGObj;
 
     if (fp->sa.gaw.x225C_turtleGObj != NULL) {
@@ -174,7 +174,7 @@ void ftGameWatch_ItemTurtleRemove(HSD_GObj* fighter_gobj)
 // Back Aerial / Back Aerial Landing Lag
 bool ftGameWatch_ItemCheckTurtleRemove(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ASID = fp->x10_action_state_index;
 
     if ((ASID >= AS_GAMEWATCH_ATTACKAIRB) && (ASID <= AS_GAMEWATCH_LANDINGAIRB))
@@ -214,7 +214,7 @@ void ftGameWatch_ItemSparkySetup(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/9eoJs // Sparky Accessory Callback - Landing Lag
 void ftGameWatch_ItemSparkyOnLand(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
@@ -236,7 +236,7 @@ void ftGameWatch_ItemSparkyOnLand(HSD_GObj* fighter_gobj)
 // pointers
 void ftGameWatch_ItemSparkySetFlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
     fp->sa.gaw.x2260_sparkyGObj = NULL;
@@ -248,7 +248,7 @@ void ftGameWatch_ItemSparkySetFlag(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/xkjj4 // Remove Sparky item
 void ftGameWatch_ItemSparkyRemove(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObj* sparkyGObj;
 
     if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
@@ -261,7 +261,7 @@ void ftGameWatch_ItemSparkyRemove(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/EsqL3 // Apply hitlag for available AttackAir items
 void ftGameWatch_AttackAir_EnterItemHitlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
         func_802C6DB8(fp->sa.gaw.x2258_parachuteGObj);
@@ -277,7 +277,7 @@ void ftGameWatch_AttackAir_EnterItemHitlag(HSD_GObj* fighter_gobj)
 // 0x8014B5CC - Remove hitlag for available AttackAir items
 static void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
         func_802C6DD8(fp->sa.gaw.x2258_parachuteGObj);
@@ -295,7 +295,7 @@ static void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* fighter_gobj)
 // Aerial / Up Aerial Landing Lag
 bool ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ASID = fp->x10_action_state_index;
 
     if ((ASID >= AS_GAMEWATCH_ATTACKAIRHI) &&
@@ -563,7 +563,7 @@ static void ftGameWatch_LandingAirN_Init(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftGameWatch_LandingAirN_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5D3C(fighter_gobj);
     if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRN) {
@@ -590,7 +590,7 @@ void ftGameWatch_LandingAirN_Phys(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftGameWatch_LandingAirN_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5F38(fighter_gobj);
     if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRN) {
@@ -603,7 +603,7 @@ void ftGameWatch_LandingAirN_Coll(HSD_GObj* fighter_gobj)
 // prefunction
 void ftGameWatch_LandingAirB_Init(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8008D708(fighter_gobj, AS_GAMEWATCH_LANDINGAIRB,
                   fp->x110_attr.x200_BAirLandingLag);
@@ -614,7 +614,7 @@ void ftGameWatch_LandingAirB_Init(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftGameWatch_LandingAirB_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5D3C(fighter_gobj);
     if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRB) {
@@ -641,7 +641,7 @@ void ftGameWatch_LandingAirB_Phys(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftGameWatch_LandingAirB_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5F38(fighter_gobj);
     if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRB) {
@@ -654,7 +654,7 @@ void ftGameWatch_LandingAirB_Coll(HSD_GObj* fighter_gobj)
 // prefunction
 void ftGameWatch_LandingAirHi_Init(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8008D708(fighter_gobj, AS_GAMEWATCH_LANDINGAIRHI,
                   fp->x110_attr.x200_BAirLandingLag); // Erroneously using Back
@@ -666,7 +666,7 @@ void ftGameWatch_LandingAirHi_Init(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftGameWatch_LandingAirHi_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5D3C(fighter_gobj);
     if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRHI) {
@@ -693,7 +693,7 @@ void ftGameWatch_LandingAirHi_Phys(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftGameWatch_LandingAirHi_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5F38(fighter_gobj);
     if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRHI) {

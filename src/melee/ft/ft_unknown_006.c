@@ -10,31 +10,31 @@
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->input.x65C_heldInputs & arg1);
 }
 
 s32 func_80087818(HSD_GObj* fighter_gobj, s32 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->input.x668 & arg1);
 }
 
 s32 func_80087838(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->x221D_flag.bits.b7 & 1);
 }
 
 s32 func_80087858(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->x2227_flag.bits.b1 & 1);
 }
 
 s32 func_80087878(HSD_GObj* fighter_gobj, s32 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->x1968_jumpsUsed <= 1) && (fp->x10_action_state_index == 0) &&
         (arg1 != 0x23) && (arg1 != 0x24) && (arg1 != 0x25))
@@ -45,7 +45,7 @@ s32 func_80087878(HSD_GObj* fighter_gobj, s32 arg1)
 
 s32 func_800878BC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->x1974_heldItem != NULL) &&
         (func_8026B2B4(fp->x1974_heldItem) == 1))
@@ -56,7 +56,7 @@ s32 func_800878BC(HSD_GObj* fighter_gobj)
 
 s32 func_80087900(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->x1974_heldItem != NULL) && (itGetKind(fp->x1974_heldItem) == 0x1E))
         return true;
@@ -66,7 +66,7 @@ s32 func_80087900(HSD_GObj* fighter_gobj)
 
 s32 func_80087944(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->x1974_heldItem != NULL) && (itGetKind(fp->x1974_heldItem) == 0x7))
         return true;
@@ -85,7 +85,7 @@ s32 func_80087988(HSD_GObj* fighter_gobj)
 
 s32 func_800879D8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x1980 != 0)
         return true;
@@ -95,7 +95,7 @@ s32 func_800879D8(HSD_GObj* fighter_gobj)
 
 s32 func_800879F8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x221D_flag.bits.b6 & 1)
         return true;
@@ -118,31 +118,31 @@ s32 func_80087A18(HSD_GObj* fighter_gobj)
 
 u8 func_80087A80(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x2114_SmashAttr.x2134_vibrateFrame;
 }
 
 f32 func_80087A8C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x2114_SmashAttr.x2138_smashSinceHitbox;
 }
 
 s32 func_80087A98(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x213C;
 }
 
 u8 func_80087AA4(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x2227_flag.bits.b5;
 }
 
 u8 func_80087AB4(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x1968_jumpsUsed;
 }
 
@@ -151,7 +151,7 @@ void func_80087AC0(HSD_GObj* fighter_gobj, s32 arg1)
     s32 var0;
     u8 var1;
     u8 var2;
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (arg1 != 0) {
         var1 = false;
     } else {
@@ -177,7 +177,7 @@ s32 func_80087AEC(HSD_GObj* fighter_gobj)
 
 s32 func_80087B34(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 atk_shield_kb_x = fp->x98_atk_shield_kb.x;
     f32 fVar1 = (fp->x80_self_vel.x * fp->x80_self_vel.x) +
                 (fp->x80_self_vel.y * fp->x80_self_vel.y);
@@ -205,20 +205,20 @@ s32 func_80087B34(HSD_GObj* fighter_gobj)
 
 void func_80087BAC(HSD_GObj* fighter_gobj, s32 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2228_flag.bits.b5 = arg1;
 }
 
 void func_80087BC0(HSD_GObj* fighter_gobj, s8 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     u64 var0 = fp->x1A98;
     func_800A101C(fp, arg1, var0, fp->x1A9C);
 }
 
 void func_80087BEC(HSD_GObj* fighter_gobj, u8 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     u64 var0 = fp->x1A94;
     func_800A101C(fp, var0, arg1, fp->x1A9C);
 }
@@ -242,13 +242,13 @@ s32 func_80087C1C(void)
 
 s32 func_80087C58(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x1988;
 }
 
 void func_80087C64(HSD_GObj* fighter_gobj, s32 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x1988 = arg1;
 }
 

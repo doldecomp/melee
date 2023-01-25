@@ -157,8 +157,8 @@ void ftMewtwo_SpecialN_OnDeath(
     Fighter* fp;
 
     if (fighter_gobj != NULL) {
-        Fighter* fp = fp = getFighter(fighter_gobj);
-        Fighter* fp2 = getFighter(fighter_gobj);
+        Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
+        Fighter* fp2 = GET_FIGHTER(fighter_gobj);
         ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
         fp2 = fp = getFighter(fighter_gobj);
 
@@ -197,7 +197,7 @@ void ftMewtwo_SpecialN_GetPos(Fighter* fp, Vec3* sp38)
 
 void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
     if (((s32) fp->x10_action_state_index == AS_MEWTWO_SPECIALAIRN_END) ||
         ((s32) fp->xE0_ground_or_air == GA_Air))

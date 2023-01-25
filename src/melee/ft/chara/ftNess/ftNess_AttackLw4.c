@@ -8,7 +8,7 @@
 void ftNess_AttackLw4_Action(
     HSD_GObj* fighter_gobj) // Ness's Down Smash Action State handler
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->x2218_flag.bits.b0 = 0;
     fp->nessVars[0].AttackLw4.isChargeDisable = false;
@@ -26,7 +26,7 @@ void ftNess_AttackLw4_Action(
 void ftNess_AttackLw4_Anim(
     HSD_GObj* fighter_gobj) // Ness's Down Smash Animation callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->nessVars[0].AttackLw4.yoyoCurrentFrame++;
     if (ftNess_YoyoThink_IsRemove(fighter_gobj) == false) {
@@ -48,7 +48,7 @@ void ftNess_AttackLw4_Anim(
 void ftNess_AttackLw4_IASA(
     HSD_GObj* fighter_gobj) // Ness's Down Smash IASA callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_A) == false) {
         fp->nessVars[0].AttackLw4.isChargeDisable = true;
@@ -72,7 +72,7 @@ void ftNess_AttackLw4_Phys(
 void ftNess_AttackLw4_Coll(
     HSD_GObj* fighter_gobj) // Ness's Down Smash Collision callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_80084104(fighter_gobj);
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
@@ -89,7 +89,7 @@ void ftNess_AttackLw4_Charge_Anim(
     Fighter* fp;
     ftNessAttributes* ness_attr;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     yoyoSmashFrameCurr = fp->nessVars[0].AttackLw4.yoyoCurrentFrame;
     ness_attr = fp->x2D4_specialAttributes;
     fp->nessVars[0].AttackLw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
@@ -107,7 +107,7 @@ void ftNess_AttackLw4_Charge_Anim(
 void ftNess_AttackLw4_Charge_IASA(
     HSD_GObj* fighter_gobj) // Ness's Down Smash Charge IASA callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_A) == false) {
         ftNess_AttackLw4_Release_Action(fighter_gobj);
@@ -127,7 +127,7 @@ void ftNess_AttackLw4_Charge_Phys(
 void ftNess_AttackLw4_Charge_Coll(
     HSD_GObj* fighter_gobj) // Ness's Down Smash Charge Collision callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_80084104(fighter_gobj);
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
@@ -140,7 +140,7 @@ void ftNess_AttackLw4_Charge_Coll(
 void ftNess_AttackLw4_Charge_Action(
     HSD_GObj* fighter_gobj) // Ness's Down Smash Charge Action State handler
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4_CHARGE,
                                        FIGHTER_ITEMVIS_NOUPDATE, NULL, 12.0f,
@@ -161,7 +161,7 @@ void ftNess_AttackLw4_Release_Anim(
     s32 yoyoSmashFrameCurr;
     Fighter* fp;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     yoyoSmashFrameCurr = fp->nessVars[0].AttackLw4.yoyoCurrentFrame;
     fp->nessVars[0].AttackLw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
     if (ftNess_YoyoThink_IsRemove(fighter_gobj) == false) {
@@ -177,7 +177,7 @@ void ftNess_AttackLw4_Release_Anim(
 void ftNess_AttackLw4_Release_IASA(
     HSD_GObj* fighter_gobj) // Ness's Down Smash Post-Charge IASA callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->x2218_flag.bits.b0 != 0) {
         func_8008A4D4(fighter_gobj);
     }
@@ -192,7 +192,7 @@ void ftNess_AttackLw4_Release_Phys(
     s32 yoyoSmashFrameCurr;
     Fighter* fp;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     func_80084F3C(fighter_gobj);
     yoyoSmashFrameCurr = fp->nessVars[0].AttackLw4.yoyoCurrentFrame;
     if (yoyoSmashFrameCurr < 0x13) {
@@ -217,7 +217,7 @@ void ftNess_AttackLw4_Release_Phys(
 void ftNess_AttackLw4_Release_Coll(
     HSD_GObj* fighter_gobj) // Ness's Down Smash Post-Charge Collision callback
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_80084104(fighter_gobj);
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
@@ -231,7 +231,7 @@ void ftNess_AttackLw4_Release_Action(
     HSD_GObj*
         fighter_gobj) // Ness's Down Smash Post-Charge Action State handler
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4_RELEASE,
                                        FIGHTER_ITEMVIS_NOUPDATE, NULL, 13.0f,

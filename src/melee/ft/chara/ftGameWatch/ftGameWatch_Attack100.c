@@ -7,7 +7,7 @@
 // State handler
 void ftGameWatch_Attack100Start_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D6B00(fighter_gobj, AS_GAMEWATCH_ATTACK100START);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemGreenhouseSetup;
@@ -46,7 +46,7 @@ void ftGameWatch_Attack100Start_Coll(HSD_GObj* fighter_gobj)
 // State handler
 void ftGameWatch_Attack100Loop_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACK100LOOP,
                                        0, NULL, 0.0f, 1.0f, 0.0f);
@@ -83,7 +83,7 @@ void ftGameWatch_Attack100Loop_Coll(HSD_GObj* fighter_gobj)
 // 0x8014C3A4 - Mr. Game & Watch's Rapid Jab End Action State handler
 void ftGameWatch_Attack100End_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACK100END,
                                        0, NULL, 0.0f, 1.0f, 0.0f);

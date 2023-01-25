@@ -9,16 +9,16 @@
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
 void ftMewtwo_SpecialLw_ClearDisableGObj(HSD_GObj* fighter_gobj)
 {
-    getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj = NULL;
+    GET_FIGHTER(fighter_gobj)->sa.mewtwo.x222C_disableGObj = NULL;
 }
 
 // 0x801461A8
 // https://decomp.me/scratch/d5gF6 // Remove Disable projectile
 void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj != NULL) {
-        func_802C49E0(getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj);
-        getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj = NULL;
+    if (GET_FIGHTER(fighter_gobj)->sa.mewtwo.x222C_disableGObj != NULL) {
+        func_802C49E0(GET_FIGHTER(fighter_gobj)->sa.mewtwo.x222C_disableGObj);
+        GET_FIGHTER(fighter_gobj)->sa.mewtwo.x222C_disableGObj = NULL;
     }
 }
 
@@ -27,7 +27,7 @@ void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* fighter_gobj)
 // handler
 void ftMewtwo_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 var;
 
     fp->x2210_ThrowFlags.flags = 0;
@@ -46,7 +46,7 @@ void ftMewtwo_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 // handler
 void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 var;
 
     fp->x2210_ThrowFlags.flags = 0;
@@ -67,10 +67,10 @@ void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if (getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj != NULL) {
+        if (GET_FIGHTER(fighter_gobj)->sa.mewtwo.x222C_disableGObj != NULL) {
             func_802C49E0(
-                getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj);
-            getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj = NULL;
+                GET_FIGHTER(fighter_gobj)->sa.mewtwo.x222C_disableGObj);
+            GET_FIGHTER(fighter_gobj)->sa.mewtwo.x222C_disableGObj = NULL;
         }
 
         func_8008A2BC(fighter_gobj);
@@ -81,10 +81,10 @@ void ftMewtwo_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialAirLw_Anim(HSD_GObj* fighter_gobj)
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if (getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj != NULL) {
+        if (GET_FIGHTER(fighter_gobj)->sa.mewtwo.x222C_disableGObj != NULL) {
             func_802C49E0(
-                getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj);
-            getFighter(fighter_gobj)->sa.mewtwo.x222C_disableGObj = NULL;
+                GET_FIGHTER(fighter_gobj)->sa.mewtwo.x222C_disableGObj);
+            GET_FIGHTER(fighter_gobj)->sa.mewtwo.x222C_disableGObj = NULL;
         }
         func_800CC730(fighter_gobj);
     }
@@ -112,7 +112,7 @@ void ftMewtwo_SpecialLw_Phys(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/haV3L // Mewtwo's aerial Disable Physics callback
 void ftMewtwo_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
     attr* ftAttrs = getFtAttrs(fp);
 
@@ -123,7 +123,7 @@ void ftMewtwo_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
 
 inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->sa.mewtwo.x222C_disableGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftMewtwo_OnDeath2;
         fp->cb.x21DC_callback_OnTakeDamage = ftMewtwo_OnTakeDamage;
@@ -135,7 +135,7 @@ inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* fighter_gobj)
 // State handler
 void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 var;
 
     func_8007D5D4(fp);
@@ -158,7 +158,7 @@ void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
 // State handler
 void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 var;
 
     func_8007D7FC(fp);
@@ -191,7 +191,11 @@ void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* fighter_gobj)
     Vec3 sp18;
     Fighter* fp = getFighter(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs;
-    HSD_GObj* disableGObj;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         mewtwoAttrs = getFtSpecialAttrsD(fp);
