@@ -473,6 +473,7 @@ void ftNess_SpecialAirHiStart_Action(
 #ifdef MUST_MATCH
     u8 unused[8];
 #endif
+
     temp_f1 = 0.0f;
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
