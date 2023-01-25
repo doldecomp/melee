@@ -5,6 +5,7 @@
 #define MELEE_FT_CODE_80081B38_H
 
 #include <melee/ft/fighter.h>
+#include <placeholder.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
@@ -50,42 +51,42 @@ void func_80081C88(HSD_GObj* dst_gobj, f32 scl_y);
 void func_80082838(void);
 void func_800831CC(HSD_GObj*, HSD_GObjPredicate, HSD_GObjEvent);
 
-void func_80082978(void);
-void func_80082D40(void);
-void func_80082F28(void);
-void func_80083090(void);
-void func_80083318(void);
-void func_80083464(void);
-void func_800835B0(void);
-void func_8008370C(void);
-void func_80081DD4(void);
-void func_80083844(void);
-void func_80083910(void);
-void func_80083A48(void);
-void func_80083C00(void);
-void func_80083CE4(void);
-void func_80083DCC(void);
-void func_80083E64(void);
-void func_800841B8(void);
-void func_800843FC(void);
-void func_80081F2C(void);
-void func_800844EC(void);
-void func_800845B4(void);
-void func_800846B0(void);
-void func_800847D0(void);
-void func_800848DC(void);
-void func_80084A80(void);
-void func_80084BFC(void);
-void func_80084C38(void);
-void func_80084C74(void);
-void func_80084CB0(void);
+UNK_RET func_80082978(UNK_PARAMS);
+UNK_RET func_80082D40(UNK_PARAMS);
+UNK_RET func_80082F28(UNK_PARAMS);
+UNK_RET func_80083090(UNK_PARAMS);
+UNK_RET func_80083318(UNK_PARAMS);
+UNK_RET func_80083464(UNK_PARAMS);
+UNK_RET func_800835B0(UNK_PARAMS);
+UNK_RET func_8008370C(UNK_PARAMS);
+UNK_RET func_80081DD4(UNK_PARAMS);
+UNK_RET func_80083844(UNK_PARAMS);
+UNK_RET func_80083910(UNK_PARAMS);
+UNK_RET func_80083A48(UNK_PARAMS);
+UNK_RET func_80083C00(UNK_PARAMS);
+UNK_RET func_80083CE4(UNK_PARAMS);
+UNK_RET func_80083DCC(UNK_PARAMS);
+UNK_RET func_80083E64(UNK_PARAMS);
+UNK_RET func_800841B8(UNK_PARAMS);
+UNK_RET func_800843FC(UNK_PARAMS);
+UNK_RET func_80081F2C(UNK_PARAMS);
+UNK_RET func_800844EC(UNK_PARAMS);
+UNK_RET func_800845B4(UNK_PARAMS);
+UNK_RET func_800846B0(UNK_PARAMS);
+UNK_RET func_800847D0(UNK_PARAMS);
+UNK_RET func_800848DC(UNK_PARAMS);
+UNK_RET func_80084A80(UNK_PARAMS);
+UNK_RET func_80084BFC(UNK_PARAMS);
+UNK_RET func_80084C38(UNK_PARAMS);
+UNK_RET func_80084C74(UNK_PARAMS);
+UNK_RET func_80084CB0(UNK_PARAMS);
 bool func_80084CE4(Fighter* attacker, Fighter* victim);
-void func_80084E1C(void);
-void func_80082084(void);
-void func_80085004(void);
-void func_800850B4(void);
-void func_800851D0(void);
-void func_80082578(void);
-void func_80082638(void);
+UNK_RET func_80084E1C(UNK_PARAMS);
+UNK_RET func_80082084(UNK_PARAMS);
+UNK_RET func_80085004(UNK_PARAMS);
+UNK_RET func_800850B4(UNK_PARAMS);
+UNK_RET func_800851D0(UNK_PARAMS);
+UNK_RET func_80082578(UNK_PARAMS);
+UNK_RET func_80082638(UNK_PARAMS);
 
 #endif
