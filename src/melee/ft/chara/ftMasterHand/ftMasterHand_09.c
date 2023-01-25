@@ -32,12 +32,7 @@ void lbl_80151DA0(HSD_GObj* arg0)
     func_80085134(arg0);
 }
 
-// 80151DC0 14E9A0
-// https://decomp.me/scratch/xMzaA
-void lbl_80151DC0(void)
-{
-    return;
-}
+void lbl_80151DC0(HSD_GObj* arg0) {}
 
 // 80151DC4 14E9A4
 // https://decomp.me/scratch/1PULy
@@ -71,12 +66,7 @@ void lbl_80151E90(HSD_GObj* gobj)
     func_80085134(gobj);
 }
 
-// 80151EB0 14EA90
-// https://decomp.me/scratch/cjk7N
-void lbl_80151EB0(void)
-{
-    return;
-}
+void lbl_80151EB0(HSD_GObj* arg0) {}
 
 // 80151EB4 14EA94
 // https://decomp.me/scratch/ZzhS3
@@ -165,12 +155,7 @@ void lbl_80152090(HSD_GObj* gobj)
     r31_fp->x80_self_vel.x = r30_attributes->x40_pos.z;
 }
 
-// 801520D4 14ECB4
-// https://decomp.me/scratch/xDlzv
-void lbl_801520D4(void)
-{
-    return;
-}
+void lbl_801520D4(HSD_GObj* arg0) {}
 
 // 801520D8 14ECB8
 // https://decomp.me/scratch/HUhGv

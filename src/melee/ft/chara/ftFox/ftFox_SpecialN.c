@@ -69,7 +69,7 @@ s32 ftFox_GetBlasterAction(HSD_GObj* fighter_gobj)
     if (fighter_gobj != NULL) {
         Fighter* fp = fighter_gobj->user_data;
         if (fp != NULL) {
-            s32 currASID = fp->x10_action_state_index;
+            s32 currASID = fp->action_id;
             switch (currASID) {
             case AS_FOX_SPECIALN_START:
             case AS_FOX_SPECIALN_LOOP:
@@ -97,7 +97,7 @@ bool ftFox_CheckBlasterAction(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj != NULL) {
         Fighter* fp = fighter_gobj->user_data;
-        s32 ASID = fp->x10_action_state_index;
+        s32 ASID = fp->action_id;
         switch (ASID) {
         case AS_FOX_SPECIALN_START:
         case AS_FOX_SPECIALN_LOOP:

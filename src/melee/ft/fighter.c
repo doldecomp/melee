@@ -64,8 +64,8 @@ extern fn_ptr_t lbl_803C10D0[FTKIND_MAX];
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
 extern ftData* gFtDataList[FTKIND_MAX];
-extern struct ActionState ActionStateList[341];
-extern struct ActionState* ActionStateTableByCharacter[FTKIND_MAX];
+extern ActionState ActionStateList[341];
+extern ActionState* ActionStateTableByCharacter[FTKIND_MAX];
 
 extern s8 lbl_803C26FC[FTKIND_MAX];
 
@@ -941,13 +941,13 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
 {
     HSD_JObj* jobj = fighter_gobj->hsd_obj;
     Fighter* fp = fighter_gobj->user_data;
-    struct ActionState* new_action_state;
+    ActionState* new_action_state;
     struct S_TEMP4* unk_struct_x18;
     s32 bone_index;
     u8* unk_byte_ptr;
     bool animflags_bool;
 
-    fp->x10_action_state_index = new_action_state_index;
+    fp->action_id = new_action_state_index;
     fp->x30_facingDirectionRepeated = fp->facing_dir;
 
     HSD_JObjSetTranslate(jobj, &fp->xB0_pos);
@@ -1234,7 +1234,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
             func_80037C60(fighter_gobj, volatile_integer);
         }
 
-        fp->x14_action_id = new_action_state->action_id;
+        fp->anim_id = new_action_state->anim_id;
         fp->x89C_frameSpeedMul = arg9;
         fp->x8A0_unk = arg9;
 
@@ -1249,7 +1249,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
             animflags_bool = false;
         }
 
-        if (fp->x14_action_id != -1) {
+        if (fp->anim_id != -1) {
             Vec3 translation;
             Quaternion quat;
 
@@ -1264,21 +1264,21 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
 
             if (otherObj != NULL) {
                 unk_struct_x18 =
-                    &((Fighter*) otherObj->user_data)->x24[fp->x14_action_id];
-                unk_byte_ptr = &((Fighter*) otherObj->user_data)
-                                    ->x28[fp->x14_action_id << 1];
+                    &((Fighter*) otherObj->user_data)->x24[fp->anim_id];
+                unk_byte_ptr =
+                    &((Fighter*) otherObj->user_data)->x28[fp->anim_id << 1];
             } else {
-                unk_struct_x18 = &fp->x24[fp->x14_action_id];
-                unk_byte_ptr = &fp->x28[fp->x14_action_id << 1];
+                unk_struct_x18 = &fp->x24[fp->anim_id];
+                unk_byte_ptr = &fp->x28[fp->anim_id << 1];
             }
             fp->x594_s32 = unk_struct_x18->x10_animCurrFlags;
             func_8009E7B4(fp, unk_byte_ptr);
             if ((arg2 & FIGHTER_ANIM_NOUPDATE) == 0) {
                 if (otherObj != 0U) {
-                    func_80085CD8(fp, getFighter(otherObj), fp->x14_action_id);
+                    func_80085CD8(fp, getFighter(otherObj), fp->anim_id);
                     func_8007B8CC(fp, otherObj);
                 } else {
-                    func_80085CD8(fp, fp, fp->x14_action_id);
+                    func_80085CD8(fp, fp, fp->anim_id);
                 }
                 fp->x3EC = unk_struct_x18->xC;
                 fp->x3F0 = 0;
@@ -1365,11 +1365,11 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
                     func_80073240(fighter_gobj);
                 }
             } else {
-                fp->x14_action_id = -1;
+                fp->anim_id = -1;
             }
         }
 
-        if (fp->x14_action_id == -1) {
+        if (fp->anim_id == -1) {
             fp->x594_s32 = 0;
             func_80070758(jobj);
             func_80070758(fp->x8AC_animSkeleton);
@@ -1387,11 +1387,11 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
             }
         }
 
-        fp->cb.x21A0_callback_Anim = new_action_state->cb_Anim;
-        fp->cb.x219C_callback_IASA = new_action_state->cb_Input;
-        fp->cb.x21A4_callback_Phys = new_action_state->cb_Physics;
-        fp->cb.x21A8_callback_Coll = new_action_state->cb_Collision;
-        fp->cb.x21AC_callback_Cam = new_action_state->cb_Camera;
+        fp->cb.x21A0_callback_Anim = new_action_state->animated;
+        fp->cb.x219C_callback_IASA = new_action_state->input_updated;
+        fp->cb.x21A4_callback_Phys = new_action_state->physics_updated;
+        fp->cb.x21A8_callback_Coll = new_action_state->collided;
+        fp->cb.x21AC_callback_Cam = new_action_state->camera_updated;
 
         fp->cb.x21B0_callback_Accessory1 = 0;
         fp->cb.x21BC_callback_Accessory4 = 0;
@@ -2699,8 +2699,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
                    func_8008E984(fp)));
     vec = vec3_803B7494;
 
-    if (fp->x10_action_state_index != 0x145 &&
-        (unsigned) fp->x10_action_state_index - 0x122 > 1 &&
+    if (fp->action_id != 0x145 && (unsigned) fp->action_id - 0x122 > 1 &&
         fp->dmg.x1860_dealt != 0xAU && !fp->x2226_flag.bits.b2)
     {
         if ( ///// giant if condition
@@ -2818,7 +2817,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     bool bool1 = 0;
-    s32 action_state_index = fp->x10_action_state_index;
+    s32 action_state_index = fp->action_id;
     bool bool2 = 0;
     bool bool3 = 0;
     bool bool4 = 0;

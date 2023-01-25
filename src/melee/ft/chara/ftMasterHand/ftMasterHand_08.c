@@ -28,12 +28,7 @@ void lbl_80151C84(HSD_GObj* gobj)
     func_80085134(gobj);
 }
 
-// 80151CA4 14E884
-// https://decomp.me/scratch/oNK2U
-void lbl_80151CA4(void)
-{
-    return;
-}
+void lbl_80151CA4(HSD_GObj* arg0) {}
 
 // 80151CA8 14E888
 // https://decomp.me/scratch/nRy1R

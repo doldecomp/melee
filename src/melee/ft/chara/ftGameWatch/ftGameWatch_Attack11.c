@@ -43,7 +43,7 @@ void ftGameWatch_Attack11_DecideAction(HSD_GObj* fighter_gobj)
     s32 ASID;
 
     if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
-        ASID = fp->x10_action_state_index;
+        ASID = fp->action_id;
         if (ASID == AS_GAMEWATCH_ATTACK11) {
             func_802C6430(fp->sa.gaw.x224C_greenhouseGObj);
         } else if (ASID == AS_GAMEWATCH_ATTACK100START) {
@@ -117,7 +117,7 @@ void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* fighter_gobj)
 // jab action states
 bool ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 {
-    s32 ASID = GET_FIGHTER(fighter_gobj)->x10_action_state_index;
+    s32 ASID = GET_FIGHTER(fighter_gobj)->action_id;
     if ((ASID >= AS_GAMEWATCH_ATTACK11) && (ASID <= AS_GAMEWATCH_ATTACK100END))
     {
         return false;
@@ -128,9 +128,7 @@ bool ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 // 0x8014C05C - Check if Mr. Game & Watch is performing Jab 1 (Attack11)
 bool ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
 {
-    if (GET_FIGHTER(fighter_gobj)->x10_action_state_index !=
-        AS_GAMEWATCH_ATTACK11)
-    {
+    if (GET_FIGHTER(fighter_gobj)->action_id != AS_GAMEWATCH_ATTACK11) {
         return true;
     }
     return false;

@@ -454,7 +454,7 @@ bool func_80086A18(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     bool result = false;
-    switch (fp->x10_action_state_index) {
+    switch (fp->action_id) {
     case 0xB2:
     case 0xB3:
     case 0xB5:
@@ -555,7 +555,7 @@ void func_80086BEC(HSD_GObj* gobj, Vec3* v)
 s32 func_80086C0C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    return fp->x10_action_state_index;
+    return fp->action_id;
 }
 
 inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
@@ -651,7 +651,7 @@ f32 func_80086F80(HSD_GObj* gobj)
 bool func_80086FA8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    switch (fp->x10_action_state_index) {
+    switch (fp->action_id) {
     case 0x78:
     case 0x79:
     case 0x7A:
@@ -756,7 +756,7 @@ void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
 bool func_80087284(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x10_action_state_index >= 0x6C) {
+    if (fp->action_id >= 0x6C) {
         return true;
     } else {
         return false;
@@ -803,7 +803,7 @@ s32 func_8008731C(HSD_GObj* gobj)
 bool func_8008732C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x10_action_state_index >= 0 && fp->x10_action_state_index <= 10) {
+    if (fp->action_id >= 0 && fp->action_id <= 10) {
         return true;
     }
     return false;
@@ -812,7 +812,7 @@ bool func_8008732C(HSD_GObj* gobj)
 bool func_80087354(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x10_action_state_index >= 3 && fp->x10_action_state_index <= 10) {
+    if (fp->action_id >= 3 && fp->action_id <= 10) {
         return true;
     }
     return false;
@@ -821,7 +821,7 @@ bool func_80087354(HSD_GObj* gobj)
 bool func_8008737C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x10_action_state_index >= 4 && fp->x10_action_state_index <= 5) {
+    if (fp->action_id >= 4 && fp->action_id <= 5) {
         return true;
     }
     return false;
@@ -830,7 +830,7 @@ bool func_8008737C(HSD_GObj* gobj)
 bool func_800873A4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x10_action_state_index >= 6 && fp->x10_action_state_index <= 10) {
+    if (fp->action_id >= 6 && fp->action_id <= 10) {
         return true;
     }
     return false;
@@ -839,7 +839,7 @@ bool func_800873A4(HSD_GObj* gobj)
 bool func_800873CC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x10_action_state_index >= 12 && fp->x10_action_state_index <= 13) {
+    if (fp->action_id >= 12 && fp->action_id <= 13) {
         return true;
     }
     return false;
@@ -848,9 +848,7 @@ bool func_800873CC(HSD_GObj* gobj)
 bool func_800873F4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x10_action_state_index >= 0x142 &&
-        fp->x10_action_state_index <= 0x144)
-    {
+    if (fp->action_id >= 0x142 && fp->action_id <= 0x144) {
         return true;
     }
     return false;

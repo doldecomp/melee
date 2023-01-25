@@ -84,7 +84,7 @@ lbl_8011BB5C:
 /* 8011BB64 00118744  7C 08 03 A6 */	mtlr r0
 /* 8011BB68 00118748  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BB6C
 ftPeach_8011BB6C:
 /* 8011BB6C 0011874C  7C 08 02 A6 */	mflr r0
 /* 8011BB70 00118750  38 A0 00 00 */	li r5, 0
@@ -139,7 +139,7 @@ lbl_8011BBCC:
 /* 8011BC30 00118810  7C 08 03 A6 */	mtlr r0
 /* 8011BC34 00118814  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BC38
 ftPeach_8011BC38:
 /* 8011BC38 00118818  7C 08 02 A6 */	mflr r0
 /* 8011BC3C 0011881C  90 01 00 04 */	stw r0, 4(r1)
@@ -165,7 +165,7 @@ lbl_8011BC7C:
 /* 8011BC84 00118864  7C 08 03 A6 */	mtlr r0
 /* 8011BC88 00118868  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BC8C
 ftPeach_8011BC8C:
 /* 8011BC8C 0011886C  7C 08 02 A6 */	mflr r0
 /* 8011BC90 00118870  90 01 00 04 */	stw r0, 4(r1)
@@ -205,7 +205,7 @@ lbl_8011BD00:
 /* 8011BD10 001188F0  7C 08 03 A6 */	mtlr r0
 /* 8011BD14 001188F4  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BD18
 ftPeach_8011BD18:
 /* 8011BD18 001188F8  7C 08 02 A6 */	mflr r0
 /* 8011BD1C 001188FC  90 01 00 04 */	stw r0, 4(r1)
@@ -217,7 +217,7 @@ ftPeach_8011BD18:
 /* 8011BD34 00118914  7C 08 03 A6 */	mtlr r0
 /* 8011BD38 00118918  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BD3C
 ftPeach_8011BD3C:
 /* 8011BD3C 0011891C  7C 08 02 A6 */	mflr r0
 /* 8011BD40 00118920  3C 80 80 09 */	lis r4, func_80096CC8@ha
@@ -232,7 +232,7 @@ ftPeach_8011BD3C:
 /* 8011BD64 00118944  7C 08 03 A6 */	mtlr r0
 /* 8011BD68 00118948  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BD6C
 ftPeach_8011BD6C:
 /* 8011BD6C 0011894C  7C 08 02 A6 */	mflr r0
 /* 8011BD70 00118950  90 01 00 04 */	stw r0, 4(r1)
@@ -272,7 +272,7 @@ lbl_8011BDC4:
 /* 8011BDE8 001189C8  7C 08 03 A6 */	mtlr r0
 /* 8011BDEC 001189CC  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BDF0
 ftPeach_8011BDF0:
 /* 8011BDF0 001189D0  7C 08 02 A6 */	mflr r0
 /* 8011BDF4 001189D4  90 01 00 04 */	stw r0, 4(r1)
@@ -291,11 +291,11 @@ lbl_8011BE18:
 /* 8011BE24 00118A04  7C 08 03 A6 */	mtlr r0
 /* 8011BE28 00118A08  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BE2C
 ftPeach_8011BE2C:
 /* 8011BE2C 00118A0C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BE30
 ftPeach_8011BE30:
 /* 8011BE30 00118A10  7C 08 02 A6 */	mflr r0
 /* 8011BE34 00118A14  90 01 00 04 */	stw r0, 4(r1)
@@ -306,7 +306,7 @@ ftPeach_8011BE30:
 /* 8011BE48 00118A28  7C 08 03 A6 */	mtlr r0
 /* 8011BE4C 00118A2C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BE50
 ftPeach_8011BE50:
 /* 8011BE50 00118A30  7C 08 02 A6 */	mflr r0
 /* 8011BE54 00118A34  3C 80 80 09 */	lis r4, func_80096CC8@ha
@@ -321,7 +321,7 @@ ftPeach_8011BE50:
 /* 8011BE78 00118A58  7C 08 03 A6 */	mtlr r0
 /* 8011BE7C 00118A5C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BE80
 ftPeach_8011BE80:
 /* 8011BE80 00118A60  7C 08 02 A6 */	mflr r0
 /* 8011BE84 00118A64  90 01 00 04 */	stw r0, 4(r1)
@@ -373,7 +373,7 @@ lbl_8011BF1C:
 /* 8011BF2C 00118B0C  7C 08 03 A6 */	mtlr r0
 /* 8011BF30 00118B10  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BF34
 ftPeach_8011BF34:
 /* 8011BF34 00118B14  7C 08 02 A6 */	mflr r0
 /* 8011BF38 00118B18  90 01 00 04 */	stw r0, 4(r1)
@@ -397,7 +397,7 @@ ftPeach_8011BF34:
 /* 8011BF80 00118B60  7C 08 03 A6 */	mtlr r0
 /* 8011BF84 00118B64  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011BF88
 ftPeach_8011BF88:
 /* 8011BF88 00118B68  7C 08 02 A6 */	mflr r0
 /* 8011BF8C 00118B6C  90 01 00 04 */	stw r0, 4(r1)
@@ -453,7 +453,7 @@ lbl_8011C02C:
 /* 8011C03C 00118C1C  7C 08 03 A6 */	mtlr r0
 /* 8011C040 00118C20  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C044
 ftPeach_8011C044:
 /* 8011C044 00118C24  7C 08 02 A6 */	mflr r0
 /* 8011C048 00118C28  90 01 00 04 */	stw r0, 4(r1)
@@ -533,7 +533,7 @@ lbl_8011C148:
 /* 8011C158 00118D38  7C 08 03 A6 */	mtlr r0
 /* 8011C15C 00118D3C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C160
 ftPeach_8011C160:
 /* 8011C160 00118D40  7C 08 02 A6 */	mflr r0
 /* 8011C164 00118D44  90 01 00 04 */	stw r0, 4(r1)
@@ -552,7 +552,7 @@ lbl_8011C188:
 /* 8011C190 00118D70  7C 08 03 A6 */	mtlr r0
 /* 8011C194 00118D74  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C198
 ftPeach_8011C198:
 /* 8011C198 00118D78  7C 08 02 A6 */	mflr r0
 /* 8011C19C 00118D7C  3C 80 80 09 */	lis r4, func_8008D5FC@ha
@@ -603,7 +603,7 @@ lbl_8011C1F0:
 /* 8011C240 00118E20  7C 08 03 A6 */	mtlr r0
 /* 8011C244 00118E24  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C248
 ftPeach_8011C248:
 /* 8011C248 00118E28  7C 08 02 A6 */	mflr r0
 /* 8011C24C 00118E2C  90 01 00 04 */	stw r0, 4(r1)
@@ -622,7 +622,7 @@ lbl_8011C270:
 /* 8011C27C 00118E5C  7C 08 03 A6 */	mtlr r0
 /* 8011C280 00118E60  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C284
 ftPeach_8011C284:
 /* 8011C284 00118E64  7C 08 02 A6 */	mflr r0
 /* 8011C288 00118E68  90 01 00 04 */	stw r0, 4(r1)
@@ -638,7 +638,7 @@ lbl_8011C2A4:
 /* 8011C2AC 00118E8C  7C 08 03 A6 */	mtlr r0
 /* 8011C2B0 00118E90  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C2B4
 ftPeach_8011C2B4:
 /* 8011C2B4 00118E94  7C 08 02 A6 */	mflr r0
 /* 8011C2B8 00118E98  90 01 00 04 */	stw r0, 4(r1)
@@ -649,7 +649,7 @@ ftPeach_8011C2B4:
 /* 8011C2CC 00118EAC  7C 08 03 A6 */	mtlr r0
 /* 8011C2D0 00118EB0  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C2D4
 ftPeach_8011C2D4:
 /* 8011C2D4 00118EB4  7C 08 02 A6 */	mflr r0
 /* 8011C2D8 00118EB8  90 01 00 04 */	stw r0, 4(r1)
@@ -802,7 +802,7 @@ lbl_8011C4E0:
 /* 8011C4E8 001190C8  7C 08 03 A6 */	mtlr r0
 /* 8011C4EC 001190CC  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C4F0
 ftPeach_8011C4F0:
 /* 8011C4F0 001190D0  7C 08 02 A6 */	mflr r0
 /* 8011C4F4 001190D4  90 01 00 04 */	stw r0, 4(r1)
@@ -845,7 +845,7 @@ lbl_8011C570:
 /* 8011C580 00119160  7C 08 03 A6 */	mtlr r0
 /* 8011C584 00119164  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C588
 ftPeach_8011C588:
 /* 8011C588 00119168  7C 08 02 A6 */	mflr r0
 /* 8011C58C 0011916C  90 01 00 04 */	stw r0, 4(r1)
@@ -874,15 +874,15 @@ lbl_8011C5D0:
 /* 8011C5E0 001191C0  7C 08 03 A6 */	mtlr r0
 /* 8011C5E4 001191C4  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C5E8
 ftPeach_8011C5E8:
 /* 8011C5E8 001191C8  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C5EC
 ftPeach_8011C5EC:
 /* 8011C5EC 001191CC  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C5F0
 ftPeach_8011C5F0:
 /* 8011C5F0 001191D0  7C 08 02 A6 */	mflr r0
 /* 8011C5F4 001191D4  90 01 00 04 */	stw r0, 4(r1)
@@ -906,7 +906,7 @@ ftPeach_8011C5F0:
 /* 8011C63C 0011921C  7C 08 03 A6 */	mtlr r0
 /* 8011C640 00119220  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C644
 ftPeach_8011C644:
 /* 8011C644 00119224  7C 08 02 A6 */	mflr r0
 /* 8011C648 00119228  90 01 00 04 */	stw r0, 4(r1)
@@ -917,7 +917,7 @@ ftPeach_8011C644:
 /* 8011C65C 0011923C  7C 08 03 A6 */	mtlr r0
 /* 8011C660 00119240  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C664
 ftPeach_8011C664:
 /* 8011C664 00119244  7C 08 02 A6 */	mflr r0
 /* 8011C668 00119248  90 01 00 04 */	stw r0, 4(r1)
@@ -962,7 +962,7 @@ lbl_8011C6E0:
 /* 8011C6F4 001192D4  7C 08 03 A6 */	mtlr r0
 /* 8011C6F8 001192D8  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C6FC
 ftPeach_8011C6FC:
 /* 8011C6FC 001192DC  7C 08 02 A6 */	mflr r0
 /* 8011C700 001192E0  90 01 00 04 */	stw r0, 4(r1)
@@ -1015,7 +1015,7 @@ lbl_8011C794:
 /* 8011C7A8 00119388  7C 08 03 A6 */	mtlr r0
 /* 8011C7AC 0011938C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C7B0
 ftPeach_8011C7B0:
 /* 8011C7B0 00119390  7C 08 02 A6 */	mflr r0
 /* 8011C7B4 00119394  90 01 00 04 */	stw r0, 4(r1)
@@ -1044,7 +1044,7 @@ ftPeach_8011C7B0:
 /* 8011C810 001193F0  7C 08 03 A6 */	mtlr r0
 /* 8011C814 001193F4  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C818
 ftPeach_8011C818:
 /* 8011C818 001193F8  7C 08 02 A6 */	mflr r0
 /* 8011C81C 001193FC  90 01 00 04 */	stw r0, 4(r1)
@@ -1071,7 +1071,7 @@ ftPeach_8011C818:
 /* 8011C870 00119450  7C 08 03 A6 */	mtlr r0
 /* 8011C874 00119454  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C878
 ftPeach_8011C878:
 /* 8011C878 00119458  7C 08 02 A6 */	mflr r0
 /* 8011C87C 0011945C  90 01 00 04 */	stw r0, 4(r1)
@@ -1096,11 +1096,11 @@ lbl_8011C8B4:
 /* 8011C8C0 001194A0  7C 08 03 A6 */	mtlr r0
 /* 8011C8C4 001194A4  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C8C8
 ftPeach_8011C8C8:
 /* 8011C8C8 001194A8  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C8CC
 ftPeach_8011C8CC:
 /* 8011C8CC 001194AC  7C 08 02 A6 */	mflr r0
 /* 8011C8D0 001194B0  90 01 00 04 */	stw r0, 4(r1)
@@ -1134,7 +1134,7 @@ lbl_8011C918:
 /* 8011C934 00119514  7C 08 03 A6 */	mtlr r0
 /* 8011C938 00119518  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C93C
 ftPeach_8011C93C:
 /* 8011C93C 0011951C  7C 08 02 A6 */	mflr r0
 /* 8011C940 00119520  90 01 00 04 */	stw r0, 4(r1)
@@ -1182,7 +1182,7 @@ lbl_8011C9C4:
 /* 8011C9D8 001195B8  7C 08 03 A6 */	mtlr r0
 /* 8011C9DC 001195BC  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011C9E0
 ftPeach_8011C9E0:
 /* 8011C9E0 001195C0  7C 08 02 A6 */	mflr r0
 /* 8011C9E4 001195C4  90 01 00 04 */	stw r0, 4(r1)
@@ -1228,7 +1228,7 @@ lbl_8011CA2C:
 /* 8011CA7C 0011965C  7C 08 03 A6 */	mtlr r0
 /* 8011CA80 00119660  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CA84
 ftPeach_8011CA84:
 /* 8011CA84 00119664  7C 08 02 A6 */	mflr r0
 /* 8011CA88 00119668  90 01 00 04 */	stw r0, 4(r1)
@@ -1247,7 +1247,7 @@ lbl_8011CAAC:
 /* 8011CAB8 00119698  7C 08 03 A6 */	mtlr r0
 /* 8011CABC 0011969C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CAC0
 ftPeach_8011CAC0:
 /* 8011CAC0 001196A0  7C 08 02 A6 */	mflr r0
 /* 8011CAC4 001196A4  90 01 00 04 */	stw r0, 4(r1)
@@ -1266,15 +1266,15 @@ lbl_8011CAE8:
 /* 8011CAF4 001196D4  7C 08 03 A6 */	mtlr r0
 /* 8011CAF8 001196D8  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CAFC
 ftPeach_8011CAFC:
 /* 8011CAFC 001196DC  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CB00
 ftPeach_8011CB00:
 /* 8011CB00 001196E0  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CB04
 ftPeach_8011CB04:
 /* 8011CB04 001196E4  7C 08 02 A6 */	mflr r0
 /* 8011CB08 001196E8  90 01 00 04 */	stw r0, 4(r1)
@@ -1285,7 +1285,7 @@ ftPeach_8011CB04:
 /* 8011CB1C 001196FC  7C 08 03 A6 */	mtlr r0
 /* 8011CB20 00119700  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CB24
 ftPeach_8011CB24:
 /* 8011CB24 00119704  7C 08 02 A6 */	mflr r0
 /* 8011CB28 00119708  90 01 00 04 */	stw r0, 4(r1)
@@ -1296,7 +1296,7 @@ ftPeach_8011CB24:
 /* 8011CB3C 0011971C  7C 08 03 A6 */	mtlr r0
 /* 8011CB40 00119720  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CB44
 ftPeach_8011CB44:
 /* 8011CB44 00119724  7C 08 02 A6 */	mflr r0
 /* 8011CB48 00119728  90 01 00 04 */	stw r0, 4(r1)
@@ -1315,7 +1315,7 @@ lbl_8011CB6C:
 /* 8011CB78 00119758  7C 08 03 A6 */	mtlr r0
 /* 8011CB7C 0011975C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CB80
 ftPeach_8011CB80:
 /* 8011CB80 00119760  7C 08 02 A6 */	mflr r0
 /* 8011CB84 00119764  90 01 00 04 */	stw r0, 4(r1)
@@ -1334,7 +1334,7 @@ lbl_8011CBA8:
 /* 8011CBB4 00119794  7C 08 03 A6 */	mtlr r0
 /* 8011CBB8 00119798  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CBBC
 ftPeach_8011CBBC:
 /* 8011CBBC 0011979C  7C 08 02 A6 */	mflr r0
 /* 8011CBC0 001197A0  90 01 00 04 */	stw r0, 4(r1)
@@ -1360,7 +1360,7 @@ ftPeach_8011CBBC:
 /* 8011CC10 001197F0  7C 08 03 A6 */	mtlr r0
 /* 8011CC14 001197F4  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CC18
 ftPeach_8011CC18:
 /* 8011CC18 001197F8  7C 08 02 A6 */	mflr r0
 /* 8011CC1C 001197FC  90 01 00 04 */	stw r0, 4(r1)
@@ -1386,7 +1386,7 @@ ftPeach_8011CC18:
 /* 8011CC6C 0011984C  7C 08 03 A6 */	mtlr r0
 /* 8011CC70 00119850  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CC74
 ftPeach_8011CC74:
 /* 8011CC74 00119854  7C 08 02 A6 */	mflr r0
 /* 8011CC78 00119858  38 80 01 63 */	li r4, 0x163
@@ -1437,7 +1437,7 @@ lbl_8011CD08:
 /* 8011CD28 00119908  7C 08 03 A6 */	mtlr r0
 /* 8011CD2C 0011990C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CD30
 ftPeach_8011CD30:
 /* 8011CD30 00119910  7C 08 02 A6 */	mflr r0
 /* 8011CD34 00119914  90 01 00 04 */	stw r0, 4(r1)
@@ -1513,7 +1513,7 @@ lbl_8011CE20:
 /* 8011CE40 00119A20  7C 08 03 A6 */	mtlr r0
 /* 8011CE44 00119A24  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011CE48
 ftPeach_8011CE48:
 /* 8011CE48 00119A28  7C 08 02 A6 */	mflr r0
 /* 8011CE4C 00119A2C  38 E0 00 00 */	li r7, 0
@@ -1848,7 +1848,7 @@ lbl_8011D280:
 /* 8011D2E4 00119EC4  7C 08 03 A6 */	mtlr r0
 /* 8011D2E8 00119EC8  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011D2EC
 ftPeach_8011D2EC:
 /* 8011D2EC 00119ECC  7C 08 02 A6 */	mflr r0
 /* 8011D2F0 00119ED0  90 01 00 04 */	stw r0, 4(r1)
@@ -1873,7 +1873,7 @@ lbl_8011D32C:
 /* 8011D338 00119F18  7C 08 03 A6 */	mtlr r0
 /* 8011D33C 00119F1C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011D340
 ftPeach_8011D340:
 /* 8011D340 00119F20  7C 08 02 A6 */	mflr r0
 /* 8011D344 00119F24  90 01 00 04 */	stw r0, 4(r1)
@@ -1898,7 +1898,7 @@ lbl_8011D380:
 /* 8011D38C 00119F6C  7C 08 03 A6 */	mtlr r0
 /* 8011D390 00119F70  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011D394
 ftPeach_8011D394:
 /* 8011D394 00119F74  7C 08 02 A6 */	mflr r0
 /* 8011D398 00119F78  90 01 00 04 */	stw r0, 4(r1)
@@ -1909,7 +1909,7 @@ ftPeach_8011D394:
 /* 8011D3AC 00119F8C  7C 08 03 A6 */	mtlr r0
 /* 8011D3B0 00119F90  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011D3B4
 ftPeach_8011D3B4:
 /* 8011D3B4 00119F94  7C 08 02 A6 */	mflr r0
 /* 8011D3B8 00119F98  90 01 00 04 */	stw r0, 4(r1)
@@ -1920,7 +1920,7 @@ ftPeach_8011D3B4:
 /* 8011D3CC 00119FAC  7C 08 03 A6 */	mtlr r0
 /* 8011D3D0 00119FB0  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011D3D4
 ftPeach_8011D3D4:
 /* 8011D3D4 00119FB4  7C 08 02 A6 */	mflr r0
 /* 8011D3D8 00119FB8  3C 80 80 12 */	lis r4, lbl_8011D214@ha
@@ -1933,7 +1933,7 @@ ftPeach_8011D3D4:
 /* 8011D3F4 00119FD4  7C 08 03 A6 */	mtlr r0
 /* 8011D3F8 00119FD8  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011D3FC
 ftPeach_8011D3FC:
 /* 8011D3FC 00119FDC  7C 08 02 A6 */	mflr r0
 /* 8011D400 00119FE0  3C 80 80 12 */	lis r4, lbl_8011D280@ha
@@ -2282,7 +2282,7 @@ lbl_8011D8BC:
 /* 8011D8C8 0011A4A8  7C 08 03 A6 */	mtlr r0
 /* 8011D8CC 0011A4AC  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011D8D0
 ftPeach_8011D8D0:
 /* 8011D8D0 0011A4B0  7C 08 02 A6 */	mflr r0
 /* 8011D8D4 0011A4B4  90 01 00 04 */	stw r0, 4(r1)
@@ -2333,7 +2333,7 @@ lbl_8011D96C:
 /* 8011D978 0011A558  7C 08 03 A6 */	mtlr r0
 /* 8011D97C 0011A55C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011D980
 ftPeach_8011D980:
 /* 8011D980 0011A560  7C 08 02 A6 */	mflr r0
 /* 8011D984 0011A564  90 01 00 04 */	stw r0, 4(r1)
@@ -2384,7 +2384,7 @@ lbl_8011DA1C:
 /* 8011DA28 0011A608  7C 08 03 A6 */	mtlr r0
 /* 8011DA2C 0011A60C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DA30
 ftPeach_8011DA30:
 /* 8011DA30 0011A610  7C 08 02 A6 */	mflr r0
 /* 8011DA34 0011A614  90 01 00 04 */	stw r0, 4(r1)
@@ -2481,7 +2481,7 @@ lbl_8011DB64:
 /* 8011DB70 0011A750  7C 08 03 A6 */	mtlr r0
 /* 8011DB74 0011A754  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DB78
 ftPeach_8011DB78:
 /* 8011DB78 0011A758  7C 08 02 A6 */	mflr r0
 /* 8011DB7C 0011A75C  90 01 00 04 */	stw r0, 4(r1)
@@ -2578,7 +2578,7 @@ lbl_8011DCAC:
 /* 8011DCB8 0011A898  7C 08 03 A6 */	mtlr r0
 /* 8011DCBC 0011A89C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DCC0
 ftPeach_8011DCC0:
 /* 8011DCC0 0011A8A0  7C 08 02 A6 */	mflr r0
 /* 8011DCC4 0011A8A4  90 01 00 04 */	stw r0, 4(r1)
@@ -2597,7 +2597,7 @@ lbl_8011DCE8:
 /* 8011DCF0 0011A8D0  7C 08 03 A6 */	mtlr r0
 /* 8011DCF4 0011A8D4  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DCF8
 ftPeach_8011DCF8:
 /* 8011DCF8 0011A8D8  7C 08 02 A6 */	mflr r0
 /* 8011DCFC 0011A8DC  90 01 00 04 */	stw r0, 4(r1)
@@ -2652,7 +2652,7 @@ lbl_8011DD8C:
 /* 8011DDB4 0011A994  7C 08 03 A6 */	mtlr r0
 /* 8011DDB8 0011A998  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DDBC
 ftPeach_8011DDBC:
 /* 8011DDBC 0011A99C  7C 08 02 A6 */	mflr r0
 /* 8011DDC0 0011A9A0  90 01 00 04 */	stw r0, 4(r1)
@@ -2687,7 +2687,7 @@ lbl_8011DE1C:
 /* 8011DE24 0011AA04  7C 08 03 A6 */	mtlr r0
 /* 8011DE28 0011AA08  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DE2C
 ftPeach_8011DE2C:
 /* 8011DE2C 0011AA0C  7C 08 02 A6 */	mflr r0
 /* 8011DE30 0011AA10  90 01 00 04 */	stw r0, 4(r1)
@@ -2722,7 +2722,7 @@ lbl_8011DE8C:
 /* 8011DE94 0011AA74  7C 08 03 A6 */	mtlr r0
 /* 8011DE98 0011AA78  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DE9C
 ftPeach_8011DE9C:
 /* 8011DE9C 0011AA7C  7C 08 02 A6 */	mflr r0
 /* 8011DEA0 0011AA80  90 01 00 04 */	stw r0, 4(r1)
@@ -2750,7 +2750,7 @@ lbl_8011DEE4:
 /* 8011DEF4 0011AAD4  7C 08 03 A6 */	mtlr r0
 /* 8011DEF8 0011AAD8  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DEFC
 ftPeach_8011DEFC:
 /* 8011DEFC 0011AADC  7C 08 02 A6 */	mflr r0
 /* 8011DF00 0011AAE0  90 01 00 04 */	stw r0, 4(r1)
@@ -2778,15 +2778,15 @@ lbl_8011DF44:
 /* 8011DF54 0011AB34  7C 08 03 A6 */	mtlr r0
 /* 8011DF58 0011AB38  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DF5C
 ftPeach_8011DF5C:
 /* 8011DF5C 0011AB3C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DF60
 ftPeach_8011DF60:
 /* 8011DF60 0011AB40  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DF64
 ftPeach_8011DF64:
 /* 8011DF64 0011AB44  7C 08 02 A6 */	mflr r0
 /* 8011DF68 0011AB48  90 01 00 04 */	stw r0, 4(r1)
@@ -2818,7 +2818,7 @@ lbl_8011DFB4:
 /* 8011DFC8 0011ABA8  7C 08 03 A6 */	mtlr r0
 /* 8011DFCC 0011ABAC  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011DFD0
 ftPeach_8011DFD0:
 /* 8011DFD0 0011ABB0  7C 08 02 A6 */	mflr r0
 /* 8011DFD4 0011ABB4  90 01 00 04 */	stw r0, 4(r1)
@@ -2871,7 +2871,7 @@ lbl_8011E064:
 /* 8011E08C 0011AC6C  7C 08 03 A6 */	mtlr r0
 /* 8011E090 0011AC70  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E094
 ftPeach_8011E094:
 /* 8011E094 0011AC74  7C 08 02 A6 */	mflr r0
 /* 8011E098 0011AC78  90 01 00 04 */	stw r0, 4(r1)
@@ -2906,7 +2906,7 @@ lbl_8011E0F4:
 /* 8011E0FC 0011ACDC  7C 08 03 A6 */	mtlr r0
 /* 8011E100 0011ACE0  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E104
 ftPeach_8011E104:
 /* 8011E104 0011ACE4  7C 08 02 A6 */	mflr r0
 /* 8011E108 0011ACE8  90 01 00 04 */	stw r0, 4(r1)
@@ -3083,7 +3083,7 @@ lbl_8011E368:
 /* 8011E370 0011AF50  7C 08 03 A6 */	mtlr r0
 /* 8011E374 0011AF54  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E378
 ftPeach_8011E378:
 /* 8011E378 0011AF58  7C 08 02 A6 */	mflr r0
 /* 8011E37C 0011AF5C  90 01 00 04 */	stw r0, 4(r1)
@@ -3193,7 +3193,7 @@ ftPeach_SpecialAirN_StartAction:
 /* 8011E4F0 0011B0D0  7C 08 03 A6 */	mtlr r0
 /* 8011E4F4 0011B0D4  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E4F8
 ftPeach_8011E4F8:
 /* 8011E4F8 0011B0D8  7C 08 02 A6 */	mflr r0
 /* 8011E4FC 0011B0DC  90 01 00 04 */	stw r0, 4(r1)
@@ -3246,7 +3246,7 @@ lbl_8011E598:
 /* 8011E5AC 0011B18C  7C 08 03 A6 */	mtlr r0
 /* 8011E5B0 0011B190  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E5B4
 ftPeach_8011E5B4:
 /* 8011E5B4 0011B194  7C 08 02 A6 */	mflr r0
 /* 8011E5B8 0011B198  90 01 00 04 */	stw r0, 4(r1)
@@ -3299,15 +3299,15 @@ lbl_8011E654:
 /* 8011E668 0011B248  7C 08 03 A6 */	mtlr r0
 /* 8011E66C 0011B24C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E670
 ftPeach_8011E670:
 /* 8011E670 0011B250  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E674
 ftPeach_8011E674:
 /* 8011E674 0011B254  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E678
 ftPeach_8011E678:
 /* 8011E678 0011B258  7C 08 02 A6 */	mflr r0
 /* 8011E67C 0011B25C  90 01 00 04 */	stw r0, 4(r1)
@@ -3323,7 +3323,7 @@ ftPeach_8011E678:
 /* 8011E6A4 0011B284  7C 08 03 A6 */	mtlr r0
 /* 8011E6A8 0011B288  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E6AC
 ftPeach_8011E6AC:
 /* 8011E6AC 0011B28C  7C 08 02 A6 */	mflr r0
 /* 8011E6B0 0011B290  90 01 00 04 */	stw r0, 4(r1)
@@ -3374,7 +3374,7 @@ lbl_8011E72C:
 /* 8011E754 0011B334  7C 08 03 A6 */	mtlr r0
 /* 8011E758 0011B338  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E75C
 ftPeach_8011E75C:
 /* 8011E75C 0011B33C  7C 08 02 A6 */	mflr r0
 /* 8011E760 0011B340  90 01 00 04 */	stw r0, 4(r1)
@@ -3393,7 +3393,7 @@ lbl_8011E784:
 /* 8011E790 0011B370  7C 08 03 A6 */	mtlr r0
 /* 8011E794 0011B374  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E798
 ftPeach_8011E798:
 /* 8011E798 0011B378  7C 08 02 A6 */	mflr r0
 /* 8011E79C 0011B37C  90 01 00 04 */	stw r0, 4(r1)
@@ -3412,7 +3412,7 @@ lbl_8011E7C0:
 /* 8011E7CC 0011B3AC  7C 08 03 A6 */	mtlr r0
 /* 8011E7D0 0011B3B0  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E7D4
 ftPeach_8011E7D4:
 /* 8011E7D4 0011B3B4  7C 08 02 A6 */	mflr r0
 /* 8011E7D8 0011B3B8  90 01 00 04 */	stw r0, 4(r1)
@@ -3477,7 +3477,7 @@ lbl_8011E8A8:
 /* 8011E8B8 0011B498  7C 08 03 A6 */	mtlr r0
 /* 8011E8BC 0011B49C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E8C0
 ftPeach_8011E8C0:
 /* 8011E8C0 0011B4A0  7C 08 02 A6 */	mflr r0
 /* 8011E8C4 0011B4A4  90 01 00 04 */	stw r0, 4(r1)
@@ -3538,7 +3538,7 @@ lbl_8011E988:
 /* 8011E998 0011B578  7C 08 03 A6 */	mtlr r0
 /* 8011E99C 0011B57C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011E9A0
 ftPeach_8011E9A0:
 /* 8011E9A0 0011B580  7C 08 02 A6 */	mflr r0
 /* 8011E9A4 0011B584  90 01 00 04 */	stw r0, 4(r1)
@@ -3568,7 +3568,7 @@ lbl_8011E9F0:
 /* 8011E9FC 0011B5DC  7C 08 03 A6 */	mtlr r0
 /* 8011EA00 0011B5E0  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011EA04
 ftPeach_8011EA04:
 /* 8011EA04 0011B5E4  7C 08 02 A6 */	mflr r0
 /* 8011EA08 0011B5E8  90 01 00 04 */	stw r0, 4(r1)
@@ -3598,15 +3598,15 @@ lbl_8011EA54:
 /* 8011EA60 0011B640  7C 08 03 A6 */	mtlr r0
 /* 8011EA64 0011B644  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011EA68
 ftPeach_8011EA68:
 /* 8011EA68 0011B648  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011EA6C
 ftPeach_8011EA6C:
 /* 8011EA6C 0011B64C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011EA70
 ftPeach_8011EA70:
 /* 8011EA70 0011B650  7C 08 02 A6 */	mflr r0
 /* 8011EA74 0011B654  90 01 00 04 */	stw r0, 4(r1)
@@ -3617,7 +3617,7 @@ ftPeach_8011EA70:
 /* 8011EA88 0011B668  7C 08 03 A6 */	mtlr r0
 /* 8011EA8C 0011B66C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011EA90
 ftPeach_8011EA90:
 /* 8011EA90 0011B670  7C 08 02 A6 */	mflr r0
 /* 8011EA94 0011B674  90 01 00 04 */	stw r0, 4(r1)
@@ -3640,7 +3640,7 @@ ftPeach_8011EA90:
 /* 8011EAD8 0011B6B8  7C 08 03 A6 */	mtlr r0
 /* 8011EADC 0011B6BC  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011EAE0
 ftPeach_8011EAE0:
 /* 8011EAE0 0011B6C0  7C 08 02 A6 */	mflr r0
 /* 8011EAE4 0011B6C4  90 01 00 04 */	stw r0, 4(r1)
@@ -3659,7 +3659,7 @@ lbl_8011EB08:
 /* 8011EB14 0011B6F4  7C 08 03 A6 */	mtlr r0
 /* 8011EB18 0011B6F8  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011EB1C
 ftPeach_8011EB1C:
 /* 8011EB1C 0011B6FC  7C 08 02 A6 */	mflr r0
 /* 8011EB20 0011B700  90 01 00 04 */	stw r0, 4(r1)
@@ -3678,7 +3678,7 @@ lbl_8011EB44:
 /* 8011EB50 0011B730  7C 08 03 A6 */	mtlr r0
 /* 8011EB54 0011B734  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011EB58
 ftPeach_8011EB58:
 /* 8011EB58 0011B738  7C 08 02 A6 */	mflr r0
 /* 8011EB5C 0011B73C  90 01 00 04 */	stw r0, 4(r1)
@@ -3707,7 +3707,7 @@ ftPeach_8011EB58:
 /* 8011EBB8 0011B798  7C 08 03 A6 */	mtlr r0
 /* 8011EBBC 0011B79C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011EBC0
 ftPeach_8011EBC0:
 /* 8011EBC0 0011B7A0  7C 08 02 A6 */	mflr r0
 /* 8011EBC4 0011B7A4  90 01 00 04 */	stw r0, 4(r1)
@@ -3738,7 +3738,7 @@ ftPeach_8011EBC0:
 /* 8011EC28 0011B808  7C 08 03 A6 */	mtlr r0
 /* 8011EC2C 0011B80C  4E 80 00 20 */	blr
 
-
+.global ftPeach_8011EC30
 ftPeach_8011EC30:
 /* 8011EC30 0011B810  80 83 00 2C */	lwz r4, 0x2c(r3)
 /* 8011EC34 0011B814  80 04 22 44 */	lwz r0, 0x2244(r4)
@@ -3812,347 +3812,6 @@ lbl_8011ED08:
 /* 8011ED2C 0011B90C  38 21 00 28 */	addi r1, r1, 0x28
 /* 8011ED30 0011B910  7C 08 03 A6 */	mtlr r0
 /* 8011ED34 0011B914  4E 80 00 20 */	blr
-
-
-.section .data
-    .balign 8
-.global as_table_peach
-as_table_peach:
-    .4byte 0x00000127
-    .4byte NULL
-    .4byte 0x01000000
-    .4byte ftPeach_8011BC38
-    .4byte ftPeach_8011BC8C
-    .4byte ftPeach_8011BD18
-    .4byte ftPeach_8011BD3C
-    .4byte func_800761C8
-    .4byte 0x00000128
-    .4byte NULL
-    .4byte 0x01000000
-    .4byte ftPeach_8011BDF0
-    .4byte ftPeach_8011BE2C
-    .4byte ftPeach_8011BE30
-    .4byte ftPeach_8011BE50
-    .4byte func_800761C8
-    .4byte 0x00000129
-    .4byte NULL
-    .4byte 0x01000000
-    .4byte ftPeach_8011BDF0
-    .4byte ftPeach_8011BE2C
-    .4byte ftPeach_8011BE30
-    .4byte ftPeach_8011BE50
-    .4byte func_800761C8
-    .4byte 0x00000044
-    .4byte 0x0024040C
-    .4byte 0x0D000000
-    .4byte ftPeach_8011BF88
-    .4byte ftPeach_8011C044
-    .4byte ftPeach_8011C160
-    .4byte ftPeach_8011C198
-    .4byte func_800761C8
-    .4byte 0x00000045
-    .4byte 0x0024040D
-    .4byte 0x0E000000
-    .4byte ftPeach_8011BF88
-    .4byte ftPeach_8011C044
-    .4byte ftPeach_8011C160
-    .4byte ftPeach_8011C198
-    .4byte func_800761C8
-    .4byte 0x00000046
-    .4byte 0x0024040E
-    .4byte 0x0F000000
-    .4byte ftPeach_8011BF88
-    .4byte ftPeach_8011C044
-    .4byte ftPeach_8011C160
-    .4byte ftPeach_8011C198
-    .4byte func_800761C8
-    .4byte 0x00000047
-    .4byte 0x0024040F
-    .4byte 0x10000000
-    .4byte ftPeach_8011BF88
-    .4byte ftPeach_8011C044
-    .4byte ftPeach_8011C160
-    .4byte ftPeach_8011C198
-    .4byte func_800761C8
-    .4byte 0x00000048
-    .4byte 0x00240410
-    .4byte 0x11000000
-    .4byte ftPeach_8011BF88
-    .4byte ftPeach_8011C044
-    .4byte ftPeach_8011C160
-    .4byte ftPeach_8011C198
-    .4byte func_800761C8
-    .4byte 0x0000012A
-    .4byte 0x00240A09
-    .4byte 0x0A000000
-    .4byte ftPeach_8011C248
-    .4byte ftPeach_8011C284
-    .4byte ftPeach_8011C2B4
-    .4byte ftPeach_8011C2D4
-    .4byte func_800761C8
-    .4byte 0x0000012B
-    .4byte 0x00240A09
-    .4byte 0x0A000000
-    .4byte ftPeach_8011C248
-    .4byte ftPeach_8011C284
-    .4byte ftPeach_8011C2B4
-    .4byte ftPeach_8011C2D4
-    .4byte func_800761C8
-    .4byte 0x0000012C
-    .4byte 0x00240A09
-    .4byte 0x0A000000
-    .4byte ftPeach_8011C248
-    .4byte ftPeach_8011C284
-    .4byte ftPeach_8011C2B4
-    .4byte ftPeach_8011C2D4
-    .4byte func_800761C8
-    .4byte 0x0000012D
-    .4byte 0x00340014
-    .4byte 0x15000000
-    .4byte ftPeach_8011D2EC
-    .4byte NULL
-    .4byte ftPeach_8011D394
-    .4byte ftPeach_8011D3D4
-    .4byte func_800761C8
-    .4byte 0x0000012D
-    .4byte 0x00340014
-    .4byte 0x15000000
-    .4byte ftPeach_8011D340
-    .4byte NULL
-    .4byte ftPeach_8011D3B4
-    .4byte ftPeach_8011D3FC
-    .4byte func_800761C8
-    .4byte 0x0000012E
-    .4byte 0x00340212
-    .4byte 0x13000000
-    .4byte ftPeach_8011C4F0
-    .4byte ftPeach_8011C5E8
-    .4byte ftPeach_8011C5F0
-    .4byte ftPeach_8011C664
-    .4byte func_800761C8
-    .4byte 0x0000012F
-    .4byte 0x00340212
-    .4byte 0x13000000
-    .4byte ftPeach_8011CA84
-    .4byte ftPeach_8011CAFC
-    .4byte ftPeach_8011CB04
-    .4byte ftPeach_8011CB44
-    .4byte func_800761C8
-    .4byte 0x00000130
-    .4byte 0x00340212
-    .4byte 0x13000000
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte NULL
-    .4byte func_800761C8
-    .4byte 0x00000131
-    .4byte 0x00340612
-    .4byte 0x13000000
-    .4byte ftPeach_8011C588
-    .4byte ftPeach_8011C5EC
-    .4byte ftPeach_8011C644
-    .4byte ftPeach_8011C6FC
-    .4byte func_800761C8
-    .4byte 0x00000132
-    .4byte 0x00340612
-    .4byte 0x13000000
-    .4byte ftPeach_8011CAC0
-    .4byte ftPeach_8011CB00
-    .4byte ftPeach_8011CB24
-    .4byte ftPeach_8011CB80
-    .4byte func_800761C8
-    .4byte 0x00000133
-    .4byte 0x00340612
-    .4byte 0x13000000
-    .4byte ftPeach_8011CAC0
-    .4byte ftPeach_8011CB00
-    .4byte ftPeach_8011CB24
-    .4byte ftPeach_8011CB80
-    .4byte func_800761C8
-    .4byte 0x00000130
-    .4byte 0x00340612
-    .4byte 0x13000000
-    .4byte ftPeach_8011C878
-    .4byte ftPeach_8011C8C8
-    .4byte ftPeach_8011C8CC
-    .4byte ftPeach_8011C93C
-    .4byte func_800761C8
-    .4byte 0x00000134
-    .4byte 0x00340013
-    .4byte 0x14000000
-    .4byte ftPeach_8011D8D0
-    .4byte ftPeach_8011DA30
-    .4byte ftPeach_8011DCC0
-    .4byte ftPeach_8011DDBC
-    .4byte func_800761C8
-    .4byte 0x00000135
-    .4byte 0x00340013
-    .4byte 0x14000000
-    .4byte ftPeach_8011DE9C
-    .4byte ftPeach_8011DF5C
-    .4byte ftPeach_8011DF64
-    .4byte ftPeach_8011E094
-    .4byte func_800761C8
-    .4byte 0x00000136
-    .4byte 0x00340413
-    .4byte 0x14000000
-    .4byte ftPeach_8011D980
-    .4byte ftPeach_8011DB78
-    .4byte ftPeach_8011DCF8
-    .4byte ftPeach_8011DE2C
-    .4byte func_800761C8
-    .4byte 0x00000137
-    .4byte 0x00340413
-    .4byte 0x14000000
-    .4byte ftPeach_8011DEFC
-    .4byte ftPeach_8011DF60
-    .4byte ftPeach_8011DFD0
-    .4byte ftPeach_8011E104
-    .4byte func_800761C8
-    .4byte 0x00000138
-    .4byte 0x00340011
-    .4byte 0x12000000
-    .4byte ftPeach_8011E4F8
-    .4byte ftPeach_8011E670
-    .4byte ftPeach_8011E678
-    .4byte ftPeach_8011E75C
-    .4byte func_800761C8
-    .4byte 0x00000139
-    .4byte 0x00340011
-    .4byte 0x12000000
-    .4byte ftPeach_8011E9A0
-    .4byte ftPeach_8011EA68
-    .4byte ftPeach_8011EA70
-    .4byte ftPeach_8011EAE0
-    .4byte func_800761C8
-    .4byte 0x0000013A
-    .4byte 0x00340411
-    .4byte 0x12000000
-    .4byte ftPeach_8011E5B4
-    .4byte ftPeach_8011E674
-    .4byte ftPeach_8011E6AC
-    .4byte ftPeach_8011E798
-    .4byte func_800761C8
-    .4byte 0x0000013B
-    .4byte 0x00340411
-    .4byte 0x12000000
-    .4byte ftPeach_8011EA04
-    .4byte ftPeach_8011EA6C
-    .4byte ftPeach_8011EA90
-    .4byte ftPeach_8011EB1C
-    .4byte func_800761C8
-    .4byte 0x0000013C
-    .4byte 0x00440058
-    .4byte 0x57800000
-    .4byte func_800CF0B8
-    .4byte func_800CF118
-    .4byte func_800CF1A0
-    .4byte func_800CF258
-    .4byte func_800761C8
-    .4byte 0x0000013D
-    .4byte 0x004C0058
-    .4byte 0x57800000
-    .4byte func_800CF424
-    .4byte func_800CF428
-    .4byte func_800CF494
-    .4byte func_800CF4B4
-    .4byte func_800761C8
-.global ftPeach_str_PlPe_dat
-ftPeach_str_PlPe_dat:
-    .asciz "PlPe.dat"
-    .balign 4
-.global ftPeach_str_ftDataPeach
-ftPeach_str_ftDataPeach:
-    .asciz "ftDataPeach"
-    .balign 4
-str_PlPeNr_dat:
-    .asciz "PlPeNr.dat"
-    .balign 4
-str_PlyPeach5K_Share_joint:
-    .asciz "PlyPeach5K_Share_joint"
-    .balign 4
-str_PlyPeach5K_Share_matanim_joint:
-    .asciz "PlyPeach5K_Share_matanim_joint"
-    .balign 4
-str_PlPeYe_dat:
-    .asciz "PlPeYe.dat"
-    .balign 4
-str_PlyPeach5KYe_Share_joint:
-    .asciz "PlyPeach5KYe_Share_joint"
-    .balign 4
-str_PlyPeach5KYe_Share_matanim_joint:
-    .asciz "PlyPeach5KYe_Share_matanim_joint"
-    .balign 4
-str_PlPeWh_dat:
-    .asciz "PlPeWh.dat"
-    .balign 4
-str_PlyPeach5KWh_Share_joint:
-    .asciz "PlyPeach5KWh_Share_joint"
-    .balign 4
-str_PlyPeach5KWh_Share_matanim_joint:
-    .asciz "PlyPeach5KWh_Share_matanim_joint"
-    .balign 4
-str_PlPeBu_dat:
-    .asciz "PlPeBu.dat"
-    .balign 4
-str_PlyPeach5KBu_Share_joint:
-    .asciz "PlyPeach5KBu_Share_joint"
-    .balign 4
-.global str_PlyPeach5KBu_Share_matanim_joint
-str_PlyPeach5KBu_Share_matanim_joint:
-    .asciz "PlyPeach5KBu_Share_matanim_joint"
-    .balign 4
-str_PlPeGr_dat:
-    .asciz "PlPeGr.dat"
-    .balign 4
-str_PlyPeach5KGr_Share_joint:
-    .asciz "PlyPeach5KGr_Share_joint"
-    .balign 4
-str_PlyPeach5KGr_Share_matanim_joint:
-    .asciz "PlyPeach5KGr_Share_matanim_joint"
-    .balign 4
-.global str_PlPeAJ_dat
-str_PlPeAJ_dat:
-    .asciz "PlPeAJ.dat"
-    .balign 4
-str_ftDemoResultMotionFilePeach:
-    .asciz "ftDemoResultMotionFilePeach"
-    .balign 4
-str_ftDemoIntroMotionFilePeach:
-    .asciz "ftDemoIntroMotionFilePeach"
-    .balign 4
-str_ftDemoEndingMotionFilePeach:
-    .asciz "ftDemoEndingMotionFilePeach"
-    .balign 4
-str_ftDemoViWaitMotionFilePeach:
-    .asciz "ftDemoViWaitMotionFilePeach"
-    .balign 4
-.global ftPeach_str_arr_ftDemo
-ftPeach_str_arr_ftDemo:
-    .4byte str_ftDemoResultMotionFilePeach
-    .4byte str_ftDemoIntroMotionFilePeach
-    .4byte str_ftDemoEndingMotionFilePeach
-    .4byte str_ftDemoViWaitMotionFilePeach
-.global ftPeach_str_arr_Costumes
-ftPeach_str_arr_Costumes:
-    .4byte str_PlPeNr_dat
-    .4byte str_PlyPeach5K_Share_joint
-    .4byte str_PlyPeach5K_Share_matanim_joint
-    .4byte str_PlPeYe_dat
-    .4byte str_PlyPeach5KYe_Share_joint
-    .4byte str_PlyPeach5KYe_Share_matanim_joint
-    .4byte str_PlPeWh_dat
-    .4byte str_PlyPeach5KWh_Share_joint
-    .4byte str_PlyPeach5KWh_Share_matanim_joint
-    .4byte str_PlPeBu_dat
-    .4byte str_PlyPeach5KBu_Share_joint
-    .4byte str_PlyPeach5KBu_Share_matanim_joint
-    .4byte str_PlPeGr_dat
-    .4byte str_PlyPeach5KGr_Share_joint
-    .4byte str_PlyPeach5KGr_Share_matanim_joint
-    .4byte NULL
-
 
 .section .sdata2
 f32_804D97C0:

@@ -28,18 +28,6 @@
 #define MPCOLL_RIGHTWALL 0x3F
 #define MPCOLL_CEIL 0x6000
 
-typedef struct _Vec2 {
-    float x, y;
-} Vec2;
-
-struct DemoMotionSymbols {
-    char* x0;
-};
-
-struct DemoMotionFiles {
-    struct DemoMotionSymbols* x0_demoMotionPtr[14];
-};
-
 typedef union _UnkFlagStruct {
     u8 u8;
     struct {

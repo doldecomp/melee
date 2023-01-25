@@ -1013,20 +1013,25 @@ struct S_TEMP1 {
 };
 
 struct ActionState {
-    s32 action_id;
+    enum_t anim_id;
 
     s32 x4_flags;
 
-    u8 move_id;
-    UnkFlagStruct x9_flags;
-    UnkFlagStruct flagsA;
-    UnkFlagStruct flagsB;
+    union {
+        u32 x8_flags;
+        struct {
+            u8 move_id;
+            UnkFlagStruct x9_flags;
+            UnkFlagStruct flagsA;
+            UnkFlagStruct flagsB;
+        };
+    };
 
-    void* cb_Anim;
-    void* cb_Input;
-    void* cb_Physics;
-    void* cb_Collision;
-    void* cb_Camera;
+    HSD_GObjEvent animated;
+    HSD_GObjEvent input_updated;
+    HSD_GObjEvent physics_updated;
+    HSD_GObjEvent collided;
+    HSD_GObjEvent camera_updated;
 };
 
 struct S_TEMP4 {
@@ -1036,6 +1041,19 @@ struct S_TEMP4 {
     s32 xC;
     s32 x10_animCurrFlags;
     s32 x14;
+};
+
+struct Fighter_CostumeStrings {
+    char* dat_filename;
+    char* joint_name;
+    char* matanim_joint_name;
+};
+
+struct Fighter_DemoStrings {
+    char* result_filename;
+    char* intro_filename;
+    char* ending_filename;
+    char* vi_wait_filename;
 };
 
 // --------------------------------------------------------------------------------
@@ -1294,11 +1312,11 @@ struct Fighter {
     /* 0x4 */ FighterKind x4_fighterKind;
     /* 0x8 */ s32 x8_spawnNum;
     /* 0xC */ u8 xC_playerID;
-    /* 0x10 */ s32 x10_action_state_index;
-    /* 0x14 */ s32 x14_action_id;
+    /* 0x10 */ enum_t action_id;
+    /* 0x14 */ enum_t anim_id;
     /* 0x18 */ s32 x18;
-    /* 0x1C */ struct ActionState* x1C_actionStateList;
-    /* 0x20 */ struct ActionState* x20_actionStateList;
+    /* 0x1C */ ActionState* x1C_actionStateList;
+    /* 0x20 */ ActionState* x20_actionStateList;
     /* 0x24 */ struct S_TEMP4* x24;
     /* 0x28 */ u8* x28;
     /* 0x2C */ f32 facing_dir;

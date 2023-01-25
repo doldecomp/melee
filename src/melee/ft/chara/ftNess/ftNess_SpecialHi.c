@@ -121,7 +121,7 @@ void ftNess_SpecialHiStopGFX(HSD_GObj* fighter_gobj) // Removes GFX //
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    ASID = fp->x10_action_state_index;
+    ASID = fp->action_id;
     switch (ASID) {
     case AS_NESS_SPECIALHI_START:
     case AS_NESS_SPECIALHI_HOLD:
@@ -226,8 +226,8 @@ bool ftNess_CheckSpecialHiHold(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    return fp->x10_action_state_index == AS_NESS_SPECIALHI_HOLD ||
-                   fp->x10_action_state_index == AS_NESS_SPECIALAIRHI_HOLD
+    return fp->action_id == AS_NESS_SPECIALHI_HOLD ||
+                   fp->action_id == AS_NESS_SPECIALAIRHI_HOLD
                ? true
                : false;
 }
@@ -245,7 +245,7 @@ void ftNess_ItemPKThunderRemove(HSD_GObj* fighter_gobj) // OnTakeDamage? //
         temp_fp->sa.ness.x2244_pkThunderGObj = NULL;
     }
     fp = GET_FIGHTER(fighter_gobj);
-    ASID = fp->x10_action_state_index;
+    ASID = fp->action_id;
     switch (ASID) {
     case AS_NESS_SPECIALHI_START:
     case AS_NESS_SPECIALHI_HOLD:
@@ -283,7 +283,7 @@ void ftNess_SpecialHiTakeDamage(
         fp->sa.ness.x2244_pkThunderGObj = NULL;
     }
     fighter_data2 = GET_FIGHTER(fighter_gobj);
-    ASID = fighter_data2->x10_action_state_index;
+    ASID = fighter_data2->action_id;
     switch (ASID) {
     case AS_NESS_SPECIALHI_START:
     case AS_NESS_SPECIALHI_HOLD:
@@ -473,7 +473,6 @@ void ftNess_SpecialAirHiStart_Action(
 #ifdef MUST_MATCH
     u8 unused[8];
 #endif
-
     temp_f1 = 0.0f;
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
@@ -616,7 +615,7 @@ block_stuff:
     fighter_data3 = GET_FIGHTER(fighter_gobj);
 #endif
 
-    ASID = fighter_data3->x10_action_state_index;
+    ASID = fighter_data3->action_id;
     switch (ASID) {
     case AS_NESS_SPECIALHI_START:
     case AS_NESS_SPECIALHI_HOLD:
@@ -780,7 +779,7 @@ void ftNess_SpecialHiHold_Anim(
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_NESS_SPECIALHI_END, 0, NULL, 0.0f, 1.0f, 0.0f);
             fighter_data2 = fighter_gobj->user_data;
-            ASID = fighter_data2->x10_action_state_index;
+            ASID = fighter_data2->action_id;
             switch (ASID) {
             case AS_NESS_SPECIALHI_START:
             case AS_NESS_SPECIALHI_HOLD:
@@ -804,7 +803,7 @@ void ftNess_SpecialHiHold_Anim(
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALHI_END,
                                            0, NULL, 0.0f, 1.0f, 0.0f);
         fighter_data3 = fighter_gobj->user_data;
-        ASID2 = fighter_data3->x10_action_state_index;
+        ASID2 = fighter_data3->action_id;
         switch (ASID2) {
         case AS_NESS_SPECIALHI_START:
         case AS_NESS_SPECIALHI_HOLD:
@@ -856,7 +855,7 @@ void ftNess_SpecialHi_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALHI_END,
                                            0, NULL, 0.0f, 1.0f, 0.0f);
         fighter_data2 = fighter_gobj->user_data;
-        ASID = fighter_data2->x10_action_state_index;
+        ASID = fighter_data2->action_id;
         switch (ASID) {
         case AS_NESS_SPECIALHI_START:
         case AS_NESS_SPECIALHI_HOLD:
@@ -961,7 +960,7 @@ void ftNess_SpecialAirHiHold_Anim(
                                                AS_NESS_SPECIALAIRHI_END, 0,
                                                NULL, 0.0f, 1.0f, 0.0f);
             fighter_data2 = fighter_gobj->user_data;
-            ASID = fighter_data2->x10_action_state_index;
+            ASID = fighter_data2->action_id;
             switch (ASID) {
             case AS_NESS_SPECIALHI_START:
             case AS_NESS_SPECIALHI_HOLD:
@@ -1001,7 +1000,7 @@ void ftNess_SpecialAirHiHold_Anim(
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_NESS_SPECIALAIRHI_END, 0, NULL, 0.0f, 1.0f, 0.0f);
         fighter_data5 = fighter_gobj->user_data;
-        ASID2 = fighter_data5->x10_action_state_index;
+        ASID2 = fighter_data5->action_id;
         switch (ASID2) {
         case AS_NESS_SPECIALHI_START:
         case AS_NESS_SPECIALHI_HOLD:
@@ -1537,7 +1536,7 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder
     {
         fp->xEC_ground_vel = (f32) 0.0f;
         fighter_data2 = fighter_gobj->user_data;
-        ASID = fighter_data2->x10_action_state_index;
+        ASID = fighter_data2->action_id;
         switch (ASID) {
         case AS_NESS_SPECIALHI_START:
         case AS_NESS_SPECIALHI_HOLD:
@@ -1683,7 +1682,7 @@ void ftNess_SpecialAirHi_Coll(
             fighter_r31->x80_self_vel.y = 0.0f;
             fighter_r31->x80_self_vel.x = 0.0f;
             fighter_data2 = fighter_gobj->user_data;
-            ASID = fighter_data2->x10_action_state_index;
+            ASID = fighter_data2->action_id;
             switch (ASID) {
             case AS_NESS_SPECIALHI_START:
 
@@ -1860,7 +1859,7 @@ void ftNess_SpecialAirHiRebound_Coll(
         fp->x80_self_vel.y = 0.0f;
         fp->x80_self_vel.x = 0.0f;
         fighter_data2 = fighter_gobj->user_data;
-        ASID = fighter_data2->x10_action_state_index;
+        ASID = fighter_data2->action_id;
         switch (ASID) {
         case AS_NESS_SPECIALHI_START:
         case AS_NESS_SPECIALHI_HOLD:

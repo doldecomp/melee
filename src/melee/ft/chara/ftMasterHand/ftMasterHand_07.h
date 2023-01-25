@@ -6,7 +6,7 @@
 
 void lbl_80151B50(HSD_GObj* arg0);
 void lbl_80151B70(HSD_GObj* gobj);
-void lbl_80151BB4(void);
+void lbl_80151BB4(HSD_GObj*);
 void lbl_80151B14(HSD_GObj* arg0);
 
 #endif

@@ -73,15 +73,9 @@ void ftPikachu_80125F14(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_80125F50(void)
-{
-    return;
-}
+void ftPikachu_Stub_80125F50(HSD_GObj* arg0) {}
 
-void ftPikachu_Stub_80125F54(void)
-{
-    return;
-}
+void ftPikachu_Stub_80125F54(HSD_GObj* arg0) {}
 
 void ftPikachu_80125F58(HSD_GObj* fighter_gobj)
 {
@@ -217,15 +211,9 @@ void ftPikachu_801262B4(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_80126424(void)
-{
-    return;
-}
+void ftPikachu_Stub_80126424(HSD_GObj* arg0) {}
 
-void ftPikachu_Stub_80126428(void)
-{
-    return;
-}
+void ftPikachu_Stub_80126428(HSD_GObj* arg0) {}
 
 void ftPikachu_8012642C(HSD_GObj* fighter_gobj)
 {
@@ -709,15 +697,9 @@ void ftPikachu_80127228(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_Stub_801272D8(void)
-{
-    return;
-}
+void ftPikachu_Stub_801272D8(HSD_GObj* arg0) {}
 
-void ftPikachu_Stub_801272DC(void)
-{
-    return;
-}
+void ftPikachu_Stub_801272DC(HSD_GObj* arg0) {}
 
 void ftPikachu_801272E0(HSD_GObj* fighter_gobj)
 {

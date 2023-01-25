@@ -1,6 +1,33 @@
 #include <melee/ft/chara/ftZakoBoy/ftzakoboy.h>
 
 #include <melee/ft/ftparts.h>
+#include <melee/ft/types.h>
+
+char lbl_803D34E8[] = "PlBo.dat";
+char lbl_803D34F4[] = "ftDataBoy";
+char lbl_803D3500[] = "PlBoNr.dat";
+char lbl_803D350C[] = "PlyBoy_Share_joint";
+char lbl_803D3520[] = "PlBoAJ.dat";
+
+#ifdef MUST_MATCH
+#pragma push
+#pragma force_active on
+#endif
+
+Fighter_DemoStrings ftZakoBoy_DemoStrings = {
+    NULL,
+    "ftDemoIntroMotionFileBoy",
+    NULL,
+    NULL,
+};
+
+#ifdef MUST_MATCH
+#pragma pop
+#endif
+
+Fighter_CostumeStrings lbl_803D3558[] = {
+    { lbl_803D3500, lbl_803D350C, NULL },
+};
 
 void ftZakoBoy_OnDeath(HSD_GObj* gobj)
 {

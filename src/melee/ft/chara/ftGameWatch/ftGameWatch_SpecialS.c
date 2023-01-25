@@ -94,7 +94,7 @@ static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj)
 bool ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj)
 {
     /// @todo @c enum
-    enum_t asid = GET_FIGHTER(fighter_gobj)->x10_action_state_index;
+    enum_t asid = GET_FIGHTER(fighter_gobj)->action_id;
 
     if (asid >= AS_GAMEWATCH_SPECIALS1 && asid <= AS_GAMEWATCH_SPECIALAIRS9)
         return false;

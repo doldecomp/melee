@@ -2,6 +2,32 @@
 
 #include <melee/ft/ftparts.h>
 
+char lbl_803D3568[] = "PlGl.dat";
+char lbl_803D3574[] = "ftDataGirl";
+char lbl_803D3580[] = "PlGlNr.dat";
+char lbl_803D358C[] = "PlyGirl_Share_joint";
+char lbl_803D35A0[] = "PlGlAJ.dat";
+
+#ifdef MUST_MATCH
+#pragma push
+#pragma force_active on
+#endif
+
+Fighter_DemoStrings ftZakoGirl_DemoStrings = {
+    NULL,
+    "ftDemoIntroMotionFileGirl",
+    NULL,
+    NULL,
+};
+
+#ifdef MUST_MATCH
+#pragma pop
+#endif
+
+Fighter_CostumeStrings lbl_803D35D8[] = {
+    { lbl_803D3580, lbl_803D358C, NULL },
+};
+
 void ftZakoGirl_OnDeath(HSD_GObj* gobj)
 {
     func_80074A4C(gobj, 0, 0);

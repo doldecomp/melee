@@ -664,7 +664,7 @@ void func_8007D6A4(Fighter* fp)
     fp->x6F0_collData.x130_flags &= 0xFFFFFFEF;
     if (!func_80084A18(fp->x0_fighter)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID,
-                 fp->x10_action_state_index);
+                 fp->action_id);
         HSD_ASSERT(686, 0);
     }
 }
@@ -716,7 +716,7 @@ void func_8007D7FC(Fighter* fp)
     fp->x6F0_collData.x130_flags &= 0xFFFFFFEF;
     if (!func_80084A18(fp->x0_fighter)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID,
-                 fp->x10_action_state_index);
+                 fp->action_id);
         HSD_ASSERT(0x2AE, 0);
     }
 }

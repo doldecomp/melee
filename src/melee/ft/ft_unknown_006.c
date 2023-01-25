@@ -36,8 +36,8 @@ s32 func_80087878(HSD_GObj* fighter_gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if ((fp->x1968_jumpsUsed <= 1) && (fp->x10_action_state_index == 0) &&
-        (arg1 != 0x23) && (arg1 != 0x24) && (arg1 != 0x25))
+    if ((fp->x1968_jumpsUsed <= 1) && (fp->action_id == 0) && (arg1 != 0x23) &&
+        (arg1 != 0x24) && (arg1 != 0x25))
         return true;
 
     return false;

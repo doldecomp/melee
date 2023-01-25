@@ -4,12 +4,7 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ftbosslib.h>
 
-// 8015236C 14EF4C
-// https://decomp.me/scratch/kPOjS
-void lbl_8015236C(void)
-{
-    return;
-}
+void lbl_8015236C(HSD_GObj* arg0) {}
 
 // 80152370 14EF50
 // https://decomp.me/scratch/ehsMv

@@ -237,7 +237,7 @@ void func_80137940(HSD_GObj* gobj)
     s32 thing;
 
     func_8007D5D4(fp);
-    switch (fp->x10_action_state_index) {
+    switch (fp->action_id) {
     case 0x15E:
         thing = 0x167;
         break;
@@ -261,7 +261,7 @@ void func_801379D0(HSD_GObj* gobj)
 
     fp->sa.mars.x222C = 0;
     func_8007D7FC(fp);
-    switch (fp->x10_action_state_index) {
+    switch (fp->action_id) {
     case 0x167:
         thing = 0x15E;
         break;
@@ -391,7 +391,7 @@ void func_80137CBC(HSD_GObj* gobj)
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
-    switch (fp->x10_action_state_index) {
+    switch (fp->action_id) {
     case 0x160:
         thing = 0x169;
         break;
@@ -418,7 +418,7 @@ void func_80137D60(HSD_GObj* gobj)
     fp->sa.mars.x222C = 0;
     // // Air_SetAsGrounded2
     func_8007D7FC(fp);
-    switch (fp->x10_action_state_index) {
+    switch (fp->action_id) {
     case 0x169:
         thing = 0x160;
         break;
@@ -536,7 +536,7 @@ void func_80137FF8(HSD_GObj* gobj)
     s32 thing;
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
-    switch (fp->x10_action_state_index) {
+    switch (fp->action_id) {
     case 0x163:
         thing = 0x16C;
         break;
@@ -564,7 +564,7 @@ void func_8013809C(HSD_GObj* gobj)
     fp->sa.mars.x222C = 0;
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
-    switch (fp->x10_action_state_index) {
+    switch (fp->action_id) {
     case 0x16C:
         thing = 0x163;
         break;

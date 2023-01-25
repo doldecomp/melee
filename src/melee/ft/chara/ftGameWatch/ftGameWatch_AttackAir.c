@@ -41,7 +41,7 @@ void ftGameWatch_ItemParachuteOnLand(HSD_GObj* fighter_gobj)
 
     if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
-        if (fp->x10_action_state_index == AS_GAMEWATCH_LANDINGAIRN) {
+        if (fp->action_id == AS_GAMEWATCH_LANDINGAIRN) {
             func_802C6E50(fp->sa.gaw.x2258_parachuteGObj);
         }
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -85,7 +85,7 @@ void ftGameWatch_ItemParachuteRemove(HSD_GObj* fighter_gobj)
 bool ftGameWatch_ItemCheckParachuteRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 asid = fp->x10_action_state_index;
+    s32 asid = fp->action_id;
 
     if (asid >= AS_GAMEWATCH_ATTACKAIRN && asid <= AS_GAMEWATCH_LANDINGAIRN)
         return false;
@@ -131,7 +131,7 @@ static void ftGameWatch_ItemTurtleOnLand(HSD_GObj* fighter_gobj)
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
 
         // Deliberate ASID mismatch to prevent item animation from freezing???
-        if (fp->x10_action_state_index == AS_GAMEWATCH_LANDINGAIRN)
+        if (fp->action_id == AS_GAMEWATCH_LANDINGAIRN)
             func_802C7158(fp->sa.gaw.x225C_turtleGObj);
 
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -175,7 +175,7 @@ void ftGameWatch_ItemTurtleRemove(HSD_GObj* fighter_gobj)
 bool ftGameWatch_ItemCheckTurtleRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 ASID = fp->x10_action_state_index;
+    s32 ASID = fp->action_id;
 
     if ((ASID >= AS_GAMEWATCH_ATTACKAIRB) && (ASID <= AS_GAMEWATCH_LANDINGAIRB))
     {
@@ -219,7 +219,7 @@ void ftGameWatch_ItemSparkyOnLand(HSD_GObj* fighter_gobj)
     if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
 
-        if (fp->x10_action_state_index == AS_GAMEWATCH_LANDINGAIRN)
+        if (fp->action_id == AS_GAMEWATCH_LANDINGAIRN)
             func_802C7424(fp->sa.gaw.x2260_sparkyGObj);
 
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -296,7 +296,7 @@ static void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* fighter_gobj)
 bool ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 ASID = fp->x10_action_state_index;
+    s32 ASID = fp->action_id;
 
     if ((ASID >= AS_GAMEWATCH_ATTACKAIRHI) &&
         (ASID <= AS_GAMEWATCH_LANDINGAIRHI))
@@ -566,7 +566,7 @@ void ftGameWatch_LandingAirN_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5D3C(fighter_gobj);
-    if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRN) {
+    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRN) {
         ftGameWatch_OnDamage(fighter_gobj);
     }
 }
@@ -593,7 +593,7 @@ void ftGameWatch_LandingAirN_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5F38(fighter_gobj);
-    if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRN) {
+    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRN) {
         ftGameWatch_OnDamage(fighter_gobj);
     }
 }
@@ -617,7 +617,7 @@ void ftGameWatch_LandingAirB_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5D3C(fighter_gobj);
-    if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRB) {
+    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRB) {
         ftGameWatch_OnDamage(fighter_gobj);
     }
 }
@@ -644,7 +644,7 @@ void ftGameWatch_LandingAirB_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5F38(fighter_gobj);
-    if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRB) {
+    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRB) {
         ftGameWatch_OnDamage(fighter_gobj);
     }
 }
@@ -669,7 +669,7 @@ void ftGameWatch_LandingAirHi_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5D3C(fighter_gobj);
-    if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRHI) {
+    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRHI) {
         ftGameWatch_OnDamage(fighter_gobj);
     }
 }
@@ -696,7 +696,7 @@ void ftGameWatch_LandingAirHi_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800D5F38(fighter_gobj);
-    if (fp->x10_action_state_index != AS_GAMEWATCH_LANDINGAIRHI) {
+    if (fp->action_id != AS_GAMEWATCH_LANDINGAIRHI) {
         ftGameWatch_OnDamage(fighter_gobj);
     }
 }

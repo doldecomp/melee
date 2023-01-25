@@ -1,17 +1,33 @@
 #include <melee/ft/chara/ftSandbag/ftsandbag.h>
 
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/ft/types.h>
 #include <melee/lb/lbunknown_001.h>
+
+ActionState as_table_sandbag[] = {
+    { 295, FLAGS_ZERO, 0x01400000, func_8014FC20, func_8014FC24, func_8014FC28,
+      func_8014FC48, func_800761C8 },
+};
+
+char lbl_803D39B8[] = "PlSb.dat";
+char lbl_803D39C4[] = "ftDataSandbag";
+char lbl_803D39D4[] = "PlSbNr.dat";
+char lbl_803D39E0[] = "PlySandbag_Share_joint";
+char lbl_803D39F8[] = "PlySandbag_Share_matanim_joint";
+char lbl_803D3A18[] = "PlSbAJ.dat";
+
+Fighter_CostumeStrings lbl_803D3A24[] = {
+    { lbl_803D39D4, lbl_803D39E0, lbl_803D39F8 },
+};
 
 typedef struct _ftSandbagAttributes {
     u32 x0_pair[2];
 } ftSandbagAttributes;
 
-void ftSandbag_OnDeath(void)
-{
-    return;
-}
+void ftSandbag_OnDeath(HSD_GObj* arg0) {}
 
 void ftSandbag_OnLoad(HSD_GObj* gobj)
 {
@@ -61,15 +77,9 @@ void ftSandbag_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftSandbagAttributes);
 }
 
-void ftSandbag_OnKnockbackEnter(void)
-{
-    return;
-}
+void ftSandbag_OnKnockbackEnter(HSD_GObj* arg0) {}
 
-void ftSandbag_OnKnockbackExit(void)
-{
-    return;
-}
+void ftSandbag_OnKnockbackExit(HSD_GObj* arg0) {}
 
 void func_8014FBA4(HSD_GObj* gobj)
 {
@@ -84,15 +94,9 @@ void func_8014FBA4(HSD_GObj* gobj)
     func_8007EFC0(fp, p_ftCommonData->x5F0);
 }
 
-void func_8014FC20(void)
-{
-    return;
-}
+void func_8014FC20(HSD_GObj* arg0) {}
 
-void func_8014FC24(void)
-{
-    return;
-}
+void func_8014FC24(HSD_GObj* arg0) {}
 
 void func_8014FC28(HSD_GObj* gobj)
 {

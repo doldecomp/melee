@@ -1403,7 +1403,6 @@ lbl_80124344:
 /* 801243A4 00120F84  7C 08 03 A6 */	mtlr r0
 /* 801243A8 00120F88  4E 80 00 20 */	blr
 
-
 .section .sdata2
     .balign 8
 .global lbl_804D9898

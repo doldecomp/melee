@@ -9,14 +9,13 @@ void func_80151AC8(HSD_GObj*);
 void lbl_801517B0(HSD_GObj* gobj);
 void lbl_80151A44(HSD_GObj* gobj);
 void lbl_80151A88(HSD_GObj* gobj);
-void lbl_80151AC4(void);
+void lbl_80151AC4(HSD_GObj*);
 void lbl_801517F4(HSD_GObj* gobj);
-// https://decomp.me/scratch/xfY30 void lbl_80151824(void);
+void lbl_80151824(HSD_GObj*);
 void lbl_80151874(HSD_GObj* arg0);
 void lbl_801518B0(HSD_GObj* gobj);
 void lbl_801518F4(HSD_GObj* arg0);
-void lbl_80151914(void);
+void lbl_80151914(HSD_GObj*);
 void lbl_8015198C(HSD_GObj* gobj);
-void lbl_80151824(void);
 
 #endif

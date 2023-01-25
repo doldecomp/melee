@@ -93,7 +93,7 @@ typedef struct _MasterHandAttributes {
 void ftMasterhand_OnDeath(HSD_GObj* gobj);
 void ftMasterhand_OnLoad(HSD_GObj* gobj);
 
-// ftMasterHand_2
+// ftMasterHand_02
 void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj);
 void func_8014FE10(HSD_GObj* gobj);
 void func_8014FE58(HSD_GObj* gobj);
@@ -107,7 +107,7 @@ void lbl_80150870(HSD_GObj* gobj);
 void lbl_80150890(HSD_GObj* gobj);
 void func_80150894(HSD_GObj* gobj);
 
-// ftMasterHand_3
+// ftMasterHand_03
 void func_80150C8C(HSD_GObj* gobj);
 void func_80150D28(HSD_GObj* gobj);
 void func_80150DC4(HSD_GObj* gobj, void*, Vec3*);
@@ -123,7 +123,7 @@ void lbl_801511B0(HSD_GObj* gobj);
 void lbl_801511F4(HSD_GObj* gobj);
 void lbl_801511F8(HSD_GObj* gobj);
 
-// ftMasterHand_5
+// ftMasterHand_05
 
 /// Probably isCrazyHandLoaded func.
 u32 lbl_80151428(Vec3* vec);

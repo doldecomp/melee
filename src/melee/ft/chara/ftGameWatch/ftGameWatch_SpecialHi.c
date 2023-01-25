@@ -25,8 +25,7 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
         func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * Fighter_GetModelScale(fp)) - sp10.y);
         rescueGObj = func_802C8038(fighter_gobj, &sp10, 0,
-                                   fp->x10_action_state_index - 0x175,
-                                   fp->facing_dir, 2.5f);
+                                   fp->action_id - 0x175, fp->facing_dir, 2.5f);
         fp->sa.gaw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -43,7 +42,7 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
 // Fire Rescue
 bool ftGameWatch_ItemCheckRescueRemove(HSD_GObj* fighter_gobj)
 {
-    s32 ASID = ((Fighter*) fighter_gobj->user_data)->x10_action_state_index;
+    s32 ASID = ((Fighter*) fighter_gobj->user_data)->action_id;
 
     switch (ASID) {
     case AS_GAMEWATCH_SPECIALHI:
