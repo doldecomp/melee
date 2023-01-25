@@ -28,5 +28,14 @@ void func_8003891C(int slot);
 void func_80038F10(int slot);
 void func_8003715C(void);
 void func_80037590(void);
+void func_8003E150(void);
+void func_8003E17C(void);
+void func_80038144(void);
+void func_80078710(void);
+void func_8003D60C(void);
+void func_80041B08(void);
+void func_8003EB30(void);
+void func_8003722C(void);
+void func_800373CC(void);
 
 #endif

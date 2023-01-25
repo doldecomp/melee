@@ -31,5 +31,6 @@ bool func_8017E068(void);
 bool func_8016AE80(void);
 bool func_8018841C(void);
 bool func_8016B1D8(void);
+bool func_8016B0D4(void);
 
 #endif
