@@ -17,7 +17,7 @@ void ftZelda_8013ADB4(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     if (!fp->x2219_flag.bits.b0) {
         ef_Spawn(0x4FC, fighter_gobj, fp->x5E8_fighterBones[0x68].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
@@ -34,7 +34,7 @@ void ftZelda_8013AE30(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     if (!fp->x2219_flag.bits.b0) {
         ef_Spawn(0x4FD, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
@@ -52,7 +52,7 @@ void ftZelda_8013AEAC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = 0;
 
     func_8007EFC8(fighter_gobj, func_80114758);
@@ -114,7 +114,7 @@ void ftZelda_8013B068(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AEAC;
     }
@@ -126,7 +126,7 @@ void ftZelda_8013B0A8(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AEAC;
     }
@@ -153,9 +153,13 @@ void ftZelda_8013B110(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
     ftZeldaAttributes* attributes;
-    f32 unused[3];
 
-    fp = fighter_gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
     attributes = fp->x2D4_specialAttributes;
 
     func_8007D494(fp, attributes->x78, attributes->x7C);
@@ -186,7 +190,7 @@ void ftZelda_8013B1CC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x165, 0x0C4C508E, NULL,
                                        fp->x894_currentAnimFrame, 1.0, 0);
@@ -198,7 +202,7 @@ void ftZelda_8013B238(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0x0C4C508E, NULL,
                                        fp->x894_currentAnimFrame, 1.0, 0);
@@ -242,9 +246,13 @@ void ftZelda_8013B344(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
     ftZeldaAttributes* attributes;
-    f32 unused[3];
 
-    fp = fighter_gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
     attributes = fp->x2D4_specialAttributes;
 
     func_8007D494(fp, attributes->x78, attributes->x7C);
@@ -275,7 +283,7 @@ void ftZelda_8013B400(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x166, 0x0C4C508E, NULL,
                                        fp->x894_currentAnimFrame, 1.0, 0);
@@ -288,7 +296,7 @@ void ftZelda_8013B46C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0x0C4C508E, NULL,
                                        fp->x894_currentAnimFrame, 1.0, 0);
@@ -326,7 +334,7 @@ s32 ftZelda_8013B540(HSD_GObj* fighter_gobj)
     s32 actionStateIndex;
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     actionStateIndex = fp->action_id;
 
     if (((actionStateIndex == 0x158) || (actionStateIndex == 0x15B)) &&
@@ -345,7 +353,7 @@ s32 ftZelda_8013B574(HSD_GObj* fighter_gobj)
     s32 temp_r0;
     Fighter* fp; // r3
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.zelda.x222C != 0) {
         switch (fp->action_id) {
@@ -368,7 +376,7 @@ void ftZelda_8013B5C4(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     if (fp->sa.zelda.x222C != 0) {
         fp->sa.zelda.x222C = 0;
     }
@@ -381,7 +389,7 @@ void ftZelda_8013B5C4(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/8QoCa
 void ftZelda_8013B5EC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.zelda.x222C != NULL) {
         func_802C3D44(fp->sa.zelda.x222C);

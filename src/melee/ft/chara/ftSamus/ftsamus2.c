@@ -8,9 +8,15 @@
 
 void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    ftSamusAttributes* attr = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftSamusAttributes* attr = fp->x2D4_specialAttributes;
     f32 float_result = ftSamus_80128AC8(fighter_gobj, farg1, farg2);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (!func_8007B868(fighter_gobj)) {
         switch (fp->x2071_b0_3) {
         case 0:
@@ -29,19 +35,20 @@ void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
     }
 }
 
-s32 ftSamus_80128A1C(HSD_GObj* fighter_gobj, s32 arg1, f32 farg1)
+bool ftSamus_80128A1C(HSD_GObj* fighter_gobj, s32 arg1, f32 farg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 i;
+    int i;
 
     for (i = 0; i < fp->x119E_hurtboxNum; i++) {
         if (func_80008248(arg1, &fp->x11A0_fighterHurtbox[i], func_8007F804(fp),
                           farg1, fp->x34_scale.y, fp->xB0_pos.z))
         {
-            return 1;
+            return true;
         }
     }
-    return 0;
+
+    return false;
 }
 
 f32 ftSamus_80128AC8(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
@@ -95,7 +102,7 @@ void ftSamus_80128B1C(HSD_GObj* fighter_gobj, f32 angle, f32 arg9, f32 argA)
 
 void ftSamus_80128C04(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if ((fp->x2200_ftcmd_var0) && (!fp->x2340_stateVar1)) {
         ftSamus_8012AEBC(fighter_gobj);
         fp->x2340_stateVar1 = 1;
@@ -111,7 +118,7 @@ void ftSamus_80128C04(HSD_GObj* fighter_gobj)
 
 void ftSamus_80128CA0(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if ((fp->x2200_ftcmd_var0) && (!fp->x2340_stateVar1)) {
         ftSamus_8012AEBC(fighter_gobj);
         fp->x2340_stateVar1 = 1;
@@ -196,9 +203,15 @@ void ftSamus_80128E88(HSD_GObj* fighter_gobj)
 
 void ftSamus_80128EF8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
     struct attr* ftAttr = &fp->x110_attr;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     func_8007D4B8(fp);
     func_8007D344(fp, 0.0f,
                   ftAttr->x154_GroundToAirJumpMomentumMultiplier *
@@ -263,11 +276,17 @@ void ftSamus_801290A4(HSD_GObj* fighter_gobj)
                                        fp->x89C_frameSpeedMul, 0.0f);
 }
 
-s32 ftSamus_80129100(HSD_GObj* fighter_gobj, s32* arg1, s32* arg2)
+int ftSamus_80129100(HSD_GObj* fighter_gobj, s32* arg1, s32* arg2)
 {
-    if (fighter_gobj) {
-        Fighter* fp = fighter_gobj->user_data;
-        ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
+    if (fighter_gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
+        ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
+
+        /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 unused[4];
+#endif
+
         if (!fp->sa.samus.x222C)
             return -1;
 
@@ -275,6 +294,7 @@ s32 ftSamus_80129100(HSD_GObj* fighter_gobj, s32* arg1, s32* arg2)
         *arg2 = samus_attr->x18;
         return 0;
     }
+
     return -1;
 }
 

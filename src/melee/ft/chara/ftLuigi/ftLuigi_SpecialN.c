@@ -115,8 +115,7 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
 void ftLuigi_SpecialN_FireSpawn(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
-    Fighter* fp = fighter_gobj->user_data;
-    s32 unused;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     bool flag;
 
     if (fp->x2210_ThrowFlags.b0 != 0) {

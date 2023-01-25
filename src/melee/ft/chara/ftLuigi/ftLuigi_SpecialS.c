@@ -49,7 +49,7 @@ void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj)
 void ftLuigi_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Shared @c inline with #ftLuigi_SpecialAirS_StartAction.
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     HSD_GObjEvent callback;
     s32 asid;
@@ -66,7 +66,7 @@ void ftLuigi_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 // handler
 void ftLuigi_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     HSD_GObjEvent callback;
     s32 asid;
@@ -137,7 +137,7 @@ void ftLuigi_SpecialSStart_Phys(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     attr* ftAttr = &fp->x110_attr;
     s32 var;
@@ -196,7 +196,7 @@ void ftLuigi_SpecialAirSStart_AirToGround(HSD_GObj* fighter_gobj)
 void ftLuigi_SpecialSHold_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Shared @c inline with #ftLuigi_SpecialAirSHold_Anim.
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     HSD_GObjEvent callback;
     s32 stateVar;
@@ -218,7 +218,7 @@ void ftLuigi_SpecialSHold_Anim(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftLuigi_SpecialAirSHold_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     HSD_GObjEvent callback;
     s32 stateVar;
@@ -706,7 +706,7 @@ void ftLuigi_SpecialAirSFly_Coll(HSD_GObj* fighter_gobj)
     CollData* collData;
     s32 envFlags;
 
-    temp_fp = fighter_gobj->user_data;
+    temp_fp = GET_FIGHTER(fighter_gobj);
     fp = temp_fp;
     collData = &temp_fp->x6F0_collData;
 
@@ -799,7 +799,7 @@ void ftLuigi_SpecialSEnd_Phys(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialAirSEnd_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     f32 gravity;
     f32 decel;
@@ -832,7 +832,7 @@ void ftLuigi_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftLuigi_SpecialSEnd_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
 
     fp->x2200_ftcmd_var0 = 0;
@@ -846,7 +846,7 @@ void ftLuigi_SpecialSEnd_Action(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftLuigi_SpecialAirSEnd_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
 
     fp->x2200_ftcmd_var0 = 0;

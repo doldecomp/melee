@@ -763,7 +763,7 @@ bool func_80087284(HSD_GObj* gobj)
     }
 }
 
-s32 func_800872A4(HSD_GObj* gobj)
+FighterKind func_800872A4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     return fp->x4_fighterKind;

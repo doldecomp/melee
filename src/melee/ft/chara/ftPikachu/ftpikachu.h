@@ -163,7 +163,7 @@ void ftPikachu_ActionChange_80126A2C(HSD_GObj* fighter_gobj);
 void ftPikachu_ActionChange_80126AA4(HSD_GObj* fighter_gobj);
 void ftPikachu_80126C0C(HSD_GObj* fighter_gobj);
 void ftPikachu_80126E1C(HSD_GObj* fighter_gobj);
-s32 ftPikachu_80127064(HSD_GObj* fighter_gobj);
+bool ftPikachu_80127064(HSD_GObj* fighter_gobj);
 void ftPikachu_80127198(HSD_GObj* fighter_gobj);
 void ftPikachu_80127228(HSD_GObj* fighter_gobj);
 void ftPikachu_801272E0(HSD_GObj* fighter_gobj);

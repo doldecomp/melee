@@ -130,7 +130,7 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj)
     void** items;
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     ftdata = fp->x10C_ftData;
     ftData_attr = ftdata->ext_attr;
     items = ftdata->x48_items;

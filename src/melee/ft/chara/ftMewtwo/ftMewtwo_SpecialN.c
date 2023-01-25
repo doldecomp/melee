@@ -299,8 +299,11 @@ void ftMewtwo_SpecialN_PlayChargeSFX(HSD_GObj* fighter_gobj)
     ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
     static u32 shadowBallSFX[4] = { 0x30DB9, 0x30DBC, 0x30DBF, 0x30DC2 };
     f32 chargeLevel;
-    f32 localVar;
-    f32 var2;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if ((u32) fp->x2208_ftcmd_var2 != 0U) {
         if (fp->sa.mewtwo.x2234_shadowBallCharge != 0) {
@@ -491,13 +494,11 @@ void ftMewtwo_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
 inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* fighter_gobj,
                                                Vec3* pos1, Vec3* pos2)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(fighter_gobj);
 
     if (((u32) fp->x220C_ftcmd_var3 == 1U) &&
         (fp->sa.mewtwo.x2230_shadowHeldGObj == NULL))
     {
-        Vec3 sp2C;
-        Vec3 sp20;
         HSD_GObj* shadowHeldGObj;
 
         pos1->z = 2.0f;
@@ -528,7 +529,7 @@ void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
     Vec3 sp1C;
     const Vec3 shadowBallPos = { 0.0f, 7.0f, 0.0f };
 
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
 
     sp34 = shadowBallPos;
@@ -681,7 +682,7 @@ void ftMewtwo_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
     Vec3 sp1C;
     const Vec3 shadowBallPos = { 0.0f, 7.0f, 0.0f };
 
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
 
     sp34 = shadowBallPos;
@@ -873,7 +874,11 @@ void ftMewtwo_SpecialAirNLoop_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     u32 recentInput;
-    u32 unused[8];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[32];
+#endif
 
     recentInput = fp->input.x668;
     if (((recentInput & HSD_BUTTON_A) != false) &&

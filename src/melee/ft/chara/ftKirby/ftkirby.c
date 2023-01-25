@@ -1070,7 +1070,7 @@ void func_800EE528(void)
 
 void ftKirby_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, 0);
     func_80074A4C(fighter_gobj, 1, 0);
     fp->sa.kirby.x222C = 0;
@@ -1089,7 +1089,7 @@ void ftKirby_OnDeath(HSD_GObj* fighter_gobj)
 
 void ftKirby_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftKirbyAttributes);
@@ -1105,7 +1105,7 @@ void ftKirby_OnLoad(HSD_GObj* fighter_gobj)
 
 void ftKirby_800EE74C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_800F5524(fighter_gobj);
     func_800F22D4(fighter_gobj);
     func_800F5318(fighter_gobj);
@@ -1117,7 +1117,7 @@ void ftKirby_800EE74C(HSD_GObj* fighter_gobj)
 
 void ftKirby_800EE7B8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_800F5524(fighter_gobj);
     func_800F22D4(fighter_gobj);
     func_800F5318(fighter_gobj);

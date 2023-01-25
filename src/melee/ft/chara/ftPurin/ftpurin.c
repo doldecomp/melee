@@ -163,7 +163,7 @@ void func_8013C360(HSD_GObj* fighter_gobj)
     s32 unused;
 
     HSD_Joint** joint_list = lbl_8045A1E0;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (lbl_803D05B4[fp->x619_costume_id]) {
         void** item_list = fp->x10C_ftData->x48_items;
@@ -195,10 +195,9 @@ void func_8013C360(HSD_GObj* fighter_gobj)
 
 void func_8013C494(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    HSD_JObj* jobj = fp->sa.purin.x223C;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (jobj) {
+    if (fp->sa.purin.x223C != NULL) {
         HSD_JObjRemoveAll(fp->sa.purin.x223C);
         fp->sa.purin.x223C = NULL;
         HSD_ObjFree(&lbl_80459080, fp->sa.purin.x2244);
@@ -210,7 +209,7 @@ void func_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx)
 {
     s32 unused[2];
 
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.purin.x223C && fp->x2225_flag.bits.b2) {
         Mtx* mtx;
@@ -241,7 +240,7 @@ void func_8013C614(Fighter* fp, int arg1, bool arg2)
 
 void* func_8013C664(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.purin.x223C)
         return fp->sa.purin.x223C;
@@ -251,7 +250,7 @@ void* func_8013C664(HSD_GObj* fighter_gobj)
 
 void ftPurin_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     PUSH_ATTRS(fp, ftPurinAttributes);
     fp->x2222_flag.bits.b1 = 1;
     fp->x2D0 = fp->x2D4_specialAttributes;

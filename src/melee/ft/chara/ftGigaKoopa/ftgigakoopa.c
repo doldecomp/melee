@@ -78,7 +78,7 @@ Fighter_CostumeStrings lbl_803D3988[] = {
 void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj)
 {
     s32 unused[2];
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftKoopaAttributes* koopaAttr = fp->x2D4_specialAttributes;
 
     func_80074A4C(fighter_gobj, 0, 0);

@@ -1412,7 +1412,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
 
 void Fighter_8006A1BC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!fp->x221F_flag.bits.b3) {
         if (fp->dmg.x1954 > 0.0f) {
@@ -1726,7 +1726,7 @@ void Fighter_8006A360(HSD_GObj* fighter_gobj)
 
 void Fighter_8006ABA0(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!fp->x221F_flag.bits.b3 && func_800A2040(fp)) {
         func_800B3900(fighter_gobj);
     }
@@ -1735,7 +1735,7 @@ void Fighter_8006ABA0(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/A7CgG
 void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (func_800CAE80(fighter_gobj)) {
         fp->x68A = fp->x685;
@@ -2527,14 +2527,14 @@ void Fighter_8006C27C(HSD_GObj* fighter_gobj)
 
 void Fighter_8006C5F4(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!fp->x221F_flag.bits.b3)
         func_80089B08(fighter_gobj);
 }
 
 void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighter_gobj)
 {
-    Fighter* fighter_r31 = fighter_gobj->user_data;
+    Fighter* fighter_r31 = GET_FIGHTER(fighter_gobj);
     s32 bit = fighter_r31->x221F_flag.bits.b3;
 
     if (!bit) {
@@ -2601,7 +2601,7 @@ void Fighter_8006C80C(HSD_GObj* fighter_gobj)
 
 void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!fp->x221F_flag.bits.b3 && !func_8016B1C4()) {
         func_8007BA0C(fighter_gobj);
@@ -2636,7 +2636,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighter_gobj)
 
 void Fighter_8006CB94(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 func_8007BBCC_float_output;
 
     if (!fp->x221F_flag.bits.b3 && !fp->x2219_flag.bits.b1) {
@@ -2735,7 +2735,7 @@ void Fighter_8006CF5C(Fighter* fp, s32 arg1)
 
 void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x2219_flag.bits.b7) {
         fp->x221A_flag.bits.b1 = 1;
@@ -2744,7 +2744,7 @@ void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* fighter_gobj)
 
 void Fighter_8006CFE0(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x2219_flag.bits.b7) {
         if (!fp->x221A_flag.bits.b2) {
@@ -2815,7 +2815,7 @@ void Fighter_8006D10C(HSD_GObj* fighter_gobj)
 
 void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     bool bool1 = 0;
     s32 action_state_index = fp->action_id;
     bool bool2 = 0;
@@ -3066,7 +3066,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
 void Fighter_8006D9AC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x221F_flag.bits.b3 || fp->x2219_flag.bits.b5)
         return;
@@ -3076,7 +3076,7 @@ void Fighter_8006D9AC(HSD_GObj* fighter_gobj)
 
 void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!fp->x221F_flag.bits.b3) {
         func_8008021C(fighter_gobj);
@@ -3088,7 +3088,7 @@ void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighter_gobj)
 
 void Fighter_8006DA4C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!fp->x221F_flag.bits.b3) {
         Player_80032828(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->xB0_pos);

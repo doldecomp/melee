@@ -39,7 +39,7 @@ void ftDonkey_8010DD38(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DD74(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if (fp->x2340_stateVar1) {
             fp->x2340_stateVar1 = 0;
@@ -52,7 +52,7 @@ void ftDonkey_8010DD74(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DDDC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->input.x668 & 0x200) {
         fp->x2340_stateVar1 = 1;
     }

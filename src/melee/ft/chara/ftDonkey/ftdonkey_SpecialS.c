@@ -92,7 +92,7 @@ void ftDonkey_8010E428(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E464(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17C, 0x0C4C508A, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -104,7 +104,7 @@ void ftDonkey_8010E464(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E4EC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17B, 0x0C4C508A, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);

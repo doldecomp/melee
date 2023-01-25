@@ -269,11 +269,8 @@ void ftSamus_801299D0(HSD_GObj* fighter_gobj)
 
 void ftSamus_80129A14(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 unused[8];
-#endif
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
     ftSamus_801292E4(fighter_gobj);
     fp->x2340_stateVar1 = 1;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -301,7 +298,7 @@ void ftSamus_80129B18(HSD_GObj* fighter_gobj) {}
 
 void ftSamus_80129B1C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObj* fighterObj2;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -440,7 +437,7 @@ void ftSamus_80129FE8(HSD_GObj* fighter_gobj)
 
 s32 ftSamus_8012A068(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->sa.samus.x2238;
 }
 

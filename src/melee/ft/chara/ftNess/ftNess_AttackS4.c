@@ -10,7 +10,7 @@
 void ftNess_AttackS4_OnReflect(
     HSD_GObj* fighter_gobj) // Ness's F-Smash OnReflect callback
 {
-    func_80088148(fighter_gobj->user_data, 0xE0U, 0x7FU, 0x40U);
+    func_80088148(GET_FIGHTER(fighter_gobj), 0xE0U, 0x7FU, 0x40U);
 };
 
 // 0x80114C24
@@ -54,7 +54,7 @@ bool ftNess_CheckNessBatRemove(
     HSD_GObj*
         fighter_gobj) // Check if Ness is in F-Smash + has Baseball Bat item
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->action_id != AS_NESS_ATTACKS4) {
         return true;
@@ -71,7 +71,7 @@ bool ftNess_CheckNessBatRemove(
 // https://decomp.me/scratch/mpl3X
 void ftNess_ItemNessBatRemove(HSD_GObj* fighter_gobj) // Remove Baseball Bat
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.ness.x2248_baseballBatGObj != NULL) {
         func_802AD6B8(fp->sa.ness.x2248_baseballBatGObj);
@@ -84,7 +84,7 @@ void ftNess_ItemNessBatRemove(HSD_GObj* fighter_gobj) // Remove Baseball Bat
 void ftNess_ItemNessBatSetNULL(
     HSD_GObj* fighter_gobj) // Clear Baseball Bat GObj pointer
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.ness.x2248_baseballBatGObj != NULL) {
         fp->sa.ness.x2248_baseballBatGObj = NULL;

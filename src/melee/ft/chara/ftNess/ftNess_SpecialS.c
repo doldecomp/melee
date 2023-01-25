@@ -72,7 +72,7 @@ void ftNess_SpecialS_StartAction(
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
     fp->x2200_ftcmd_var0 = 0; // Set ftcmd flag0 to 0; unused in PK Fire? //
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALS, 0, NULL,
@@ -89,7 +89,7 @@ void ftNess_SpecialAirS_Action(
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
     fp->x2200_ftcmd_var0 = 0; // Set ftcmd flag0 to 0; unused in PK Fire? //
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRS, 0,

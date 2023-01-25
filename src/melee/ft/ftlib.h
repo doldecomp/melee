@@ -72,10 +72,7 @@ s32 func_80087120(HSD_GObj*);
 void func_80087140(HSD_GObj*);
 void func_800871A8(HSD_GObj*, HSD_GObj*);
 bool func_80087284(HSD_GObj*);
-
-/// @todo Returns #FighterKind
-s32 func_800872A4(HSD_GObj*);
-
+FighterKind func_800872A4(HSD_GObj*);
 void* func_800872B0(HSD_GObj*);
 bool func_800872BC(HSD_GObj*);
 s32 func_80087300(HSD_GObj*);

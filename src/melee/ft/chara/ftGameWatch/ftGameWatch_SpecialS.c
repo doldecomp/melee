@@ -15,8 +15,7 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj)
 {
     Vec3 sp20;
     Vec3 sp14;
-    Fighter* fp = fighter_gobj->user_data;
-    HSD_GObj* judgementGObj;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (GET_FIGHTER(fighter_gobj)->x2204_ftcmd_var1 != 0U) {
         fp->x2204_ftcmd_var1 = 0;
@@ -49,7 +48,7 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/KIUEJ // Set Judgement flags + clear pointers
 void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_ItemJudgementExitHitlag(fighter_gobj);
     fp->sa.gaw.x2264_judgementGObj = NULL;
@@ -62,8 +61,6 @@ void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* fighter_gobj)
 void ftGameWatch_ItemJudgementRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    Fighter* fp2;
-    HSD_GObj* judgementGObj;
 
     if (fp->sa.gaw.x2264_judgementGObj != NULL) {
         func_802C7A84(fp->sa.gaw.x2264_judgementGObj);
@@ -168,7 +165,7 @@ void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/IzXqX
 void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
     s32 asid;
 
@@ -229,7 +226,7 @@ void ftGameWatch_SpecialS_Phys(HSD_GObj* fighter_gobj)
 // Physics callback
 void ftGameWatch_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     u32 ftcmd_var = fp->x2200_ftcmd_var0;
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
     f32 ftGameWatchPhys[4];
@@ -289,7 +286,7 @@ static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* fighter_gobj)
 // Acion State handler
 static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ASID;
 
     func_8007D5D4(fp);
@@ -307,7 +304,7 @@ static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 // 0x8014CB44 - Mr. Game & Watch's air -> ground Judgement Action State Handler
 static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ASID;
 
     fp->sa.gaw.x2234 = 0;

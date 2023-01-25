@@ -43,7 +43,7 @@ bool ftFox_SpecialS_CheckGhostRemove(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/jUfwc // Return 0x2208 from Fighter Struct
 u32 ftFox_SpecialS_GetCmdVar2(HSD_GObj* fighter_gobj)
 {
-    return ((Fighter*) fighter_gobj->user_data)->x2208_ftcmd_var2;
+    return (GET_FIGHTER(fighter_gobj))->x2208_ftcmd_var2;
 }
 
 // 0x800E9EAC
@@ -51,7 +51,7 @@ u32 ftFox_SpecialS_GetCmdVar2(HSD_GObj* fighter_gobj)
 void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index,
                                         Vec3* ghostPos)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     *ghostPos = fp->foxVars[0].SpecialS.ghostEffectPos[index];
 }
@@ -150,7 +150,7 @@ void ftFox_SpecialAirSStart_IASA(HSD_GObj* fighter_gobj)
 // Start Physics callback
 void ftFox_SpecialSStart_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->foxVars[0].SpecialS.gravityDelay != 0) {
         fp->foxVars[0].SpecialS.gravityDelay--;
@@ -163,9 +163,14 @@ void ftFox_SpecialSStart_Phys(HSD_GObj* fighter_gobj)
 // Start Physics callback
 void ftFox_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = fighter_gobj->user_data;
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
+    ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
     attr* ftAttrs = &fp->x110_attr;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->foxVars[0].SpecialS.gravityDelay != 0) {
         fp->foxVars[0].SpecialS.gravityDelay--;
@@ -214,7 +219,7 @@ void ftFox_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
 // Illusion/Phantasm Start Action State handler
 void ftFox_SpecialSStart_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D60C(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRS_START,
@@ -227,7 +232,7 @@ void ftFox_SpecialSStart_GroundToAir(HSD_GObj* fighter_gobj)
 // Illusion/Phantasm Start Action State handler
 void ftFox_SpecialAirSStart_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALS_START,
@@ -287,7 +292,7 @@ void ftFox_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 // Dash IASA callback
 void ftFox_SpecialS_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x668 & HSD_BUTTON_B) != false) {
         if ((s32) fp->xE0_ground_or_air == GA_Air) {
@@ -303,7 +308,7 @@ void ftFox_SpecialS_IASA(HSD_GObj* fighter_gobj)
 // Dash IASA callback
 void ftFox_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x668 & HSD_BUTTON_B) != false) {
         if ((s32) fp->xE0_ground_or_air == GA_Air) {
@@ -318,7 +323,7 @@ static inline void ftFox_SpecialS_SetPhys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
 
-    fp = fighter_gobj->user_data;
+    fp = GET_FIGHTER(fighter_gobj);
 
     fp->foxVars[0].SpecialS.ghostEffectPos[3] =
         fp->foxVars[0].SpecialS.ghostEffectPos[2];
@@ -394,7 +399,7 @@ void ftFox_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
 // Illusion/Phantasm Dash Action State handler
 void ftFox_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D60C(fp);
     Fighter_ActionStateChange_800693AC(
@@ -409,7 +414,7 @@ void ftFox_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 // Illusion/Phantasm Dash Action State handler
 void ftFox_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(
@@ -509,7 +514,12 @@ void ftFox_SpecialAirSEnd_IASA(HSD_GObj* fighter_gobj)
 void ftFox_SpecialSEnd_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
+    ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->foxVars[0].SpecialS.gravityDelay != 0) {
         fp->foxVars[0].SpecialS.gravityDelay--;
@@ -525,8 +535,13 @@ void ftFox_SpecialSEnd_Phys(HSD_GObj* fighter_gobj)
 void ftFox_SpecialAirSEnd_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
-    attr* ftAttrs = getFtAttrs(fp);
+    ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
+    attr* ftAttrs = &fp->x110_attr;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->foxVars[0].SpecialS.gravityDelay != 0) {
         fp->foxVars[0].SpecialS.gravityDelay--;
@@ -542,7 +557,10 @@ void ftFox_SpecialAirSEnd_Phys(HSD_GObj* fighter_gobj)
 // End Collision callback
 void ftFox_SpecialSEnd_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (func_800827A0(fighter_gobj) == false) {
         func_800CC730(fighter_gobj);
@@ -554,9 +572,15 @@ void ftFox_SpecialSEnd_Coll(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
-    s32 cliffCatchDir;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
+    int cliffCatchDir;
 
     if (fp->facing_dir < 0.0f) {
         cliffCatchDir = -1;
@@ -573,7 +597,7 @@ void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj)
 
 inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
     fp->foxVars[0].SpecialS.gravityDelay =
         foxAttrs->x44_FOX_ILLUSION_FALL_ACCEL;
@@ -585,8 +609,8 @@ inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* fighter_gobj)
 // State handler
 void ftFox_SpecialSEnd_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     fp->xEC_ground_vel =
         foxAttrs->x34_FOX_ILLUSION_GROUND_END_VEL_X * fp->facing_dir;
@@ -601,8 +625,8 @@ void ftFox_SpecialSEnd_Action(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/QFxa9
 void ftFox_SpecialAirSEnd_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     fp->x80_self_vel.x =
         foxAttrs->x3C_FOX_ILLUSION_AIR_END_VEL_X * fp->facing_dir;

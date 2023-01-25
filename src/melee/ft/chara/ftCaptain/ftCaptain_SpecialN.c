@@ -14,7 +14,7 @@
 void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj)
 {
     s32 currentAnimFrame;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ftKind;
 
     currentAnimFrame = (s32) fp->x894_currentAnimFrame;
@@ -257,7 +257,7 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
 void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
 {
     if (func_800827A0(fighter_gobj) == false) {
-        Fighter* fp = fighter_gobj->user_data;
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_CAPTAIN_SPECIALAIRN, FTCAPTAIN_SPECIALN_COLL_FLAG,
@@ -274,7 +274,7 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
 void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
 {
     if (func_80081D0C(fighter_gobj) != false) {
-        Fighter* fp = fighter_gobj->user_data;
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_CAPTAIN_SPECIALN, FTCAPTAIN_SPECIALN_COLL_FLAG,

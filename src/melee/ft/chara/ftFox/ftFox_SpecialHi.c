@@ -17,7 +17,7 @@
 
 void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x2219_flag.bits.b0 == false) {
         ef_Spawn(0x48C, fighter_gobj,
@@ -33,7 +33,7 @@ void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x2219_flag.bits.b0 == false) {
         ef_Spawn(0x48B, fighter_gobj,
@@ -135,9 +135,14 @@ void ftFox_SpecialHiHold_Phys(HSD_GObj* fighter_gobj)
 
 void ftFox_SpecialHiHoldAir_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
     attr* ftAttrs = &fp->x110_attr;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->foxVars[0].SpecialHi.gravityDelay != 0) {
         fp->foxVars[0].SpecialHi.gravityDelay -= 1;
@@ -479,7 +484,7 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 {
     ftFoxAttributes* foxAttrs;
     attr* ftAttrs;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* tempAttrs;
     f32 stick_x;
     f32 stick_y;
@@ -609,7 +614,10 @@ void ftFox_SpecialHiLanding_Coll(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftFox_SpecialHiFall_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_BOTH) != false) {
         ftFox_SpecialHiFall_Action(fighter_gobj);
@@ -624,7 +632,7 @@ void ftFox_SpecialHiFall_Coll(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftFox_SpecialHiFall_Action(HSD_GObj* fighter_gobj)
 {
-    func_8007D7FC(fighter_gobj->user_data);
+    func_8007D7FC(GET_FIGHTER(fighter_gobj));
     Fighter_ActionStateChange_800693AC(
         fighter_gobj, AS_FOX_SPECIALHI_LANDING,
         (FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE), NULL, 13.0f, 1.0f,
@@ -637,7 +645,7 @@ void ftFox_SpecialHiFall_Action(HSD_GObj* fighter_gobj)
 // Firefox/Firebird End Action State handler
 void ftFox_SpecialHiFall_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007DB24(fighter_gobj);
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
@@ -653,7 +661,7 @@ void ftFox_SpecialHiFall_AirToGround(HSD_GObj* fighter_gobj)
 // Rebound Collision thing
 void ftFox_SpecialHiLanding_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007DB24(fighter_gobj);
 
@@ -671,9 +679,14 @@ void ftFox_SpecialHiBound_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp;
     ftFoxAttributes* foxAttrs;
 
-    fp = fighter_gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
+    fp = GET_FIGHTER(fighter_gobj);
     ftAttrs = &fp->x110_attr;
-    foxAttrs = getFtSpecialAttrs(fp);
+    foxAttrs = fp->x2D4_specialAttributes;
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) &&
         ((s32) fp->xE0_ground_or_air == GA_Air))
@@ -723,7 +736,7 @@ void ftFox_SpecialHiBound_Phys(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftFox_SpecialHiBound_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 cliffCatchDir;
 
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
@@ -751,18 +764,18 @@ void ftFox_SpecialHiBound_Coll(HSD_GObj* fighter_gobj)
 
 inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* fighter_gobj)
 {
-    vf32 sp1C; // I have a feeling this is a Vec3 struct however
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
+    vf32 f; // I have a feeling this is a Vec3 struct however
+    Fighter* fp = fp = fighter_gobj->user_data;
     CollData* collData = collData = getFtColl(fp);
 
     if (fp->x6F0_collData.x134_envFlags & 0x18000) {
-        sp1C = -atan2f(collData->x14C_ground.normal.x,
-                       collData->x14C_ground.normal.y);
+        f = -atan2f(collData->x14C_ground.normal.x,
+                    collData->x14C_ground.normal.y);
     } else {
-        sp1C = 0.0f;
+        f = 0.0f;
     }
-    ef_Spawn(0x406, fighter_gobj, &fp->xB0_pos, &sp1C);
-    fp->x2219_flag.bits.b0 = 1;
+    ef_Spawn(0x406, fighter_gobj, &fp->xB0_pos, &f);
+    fp->x2219_flag.bits.b0 = true;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
@@ -772,7 +785,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftFox_SpecialHiBound_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_BOUND, 0,

@@ -95,7 +95,7 @@ Fighter_CostumeStrings lbl_803CC558[] = {
 
 void ftSeak_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->sa.seak.x222C = 0;
     fp->sa.seak.x2230 = 0;
     fp->sa.seak.x2234 = 0;
@@ -105,7 +105,7 @@ void ftSeak_OnDeath(HSD_GObj* fighter_gobj)
 
 void ftSeak_OnLoad(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     void** item_list = fp->x10C_ftData->x48_items;
 
     fp->x2224_flag.bits.b7 = 1;
@@ -129,7 +129,7 @@ void ftSeak_80110198(HSD_GObj* fighter_gobj)
 
 void ftSeak_801101CC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->sa.seak.x222C == 6) {
         func_800BFFD0(fp, 0x56, 0);
     }
@@ -170,10 +170,15 @@ void ftSeak_OnKnockbackExit(HSD_GObj* fighter_gobj)
     Fighter_OnKnockbackExit(fighter_gobj, 1);
 }
 
+/// @todo Commented code.
+#if false
+
 // 8011412C - 80114160
 // https://decomp.me/scratch/b1oIZ
-// void lbl_8011412C(HSD_GObj* fighter_gobj) {
-//     Fighter* fp = fighter_gobj->user_data;
-//     fp->cb.x21BC_callback_Accessory4 = 0;
-//     func_8007EFC8(fighter_gobj, &ftZelda_8013B4D8);
-// }
+void lbl_8011412C(HSD_GObj* fighter_gobj) {
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    fp->cb.x21BC_callback_Accessory4 = 0;
+    func_8007EFC8(fighter_gobj, &ftZelda_8013B4D8);
+}
+
+#endif

@@ -106,9 +106,13 @@ extern f32 lbl_804D9898;
 
 void ftNana_OnLoad(HSD_GObj* fighter_gobj)
 {
-    s32 unused[4];
-    Fighter* fp = fighter_gobj->user_data;
-    fp->x2222_flag.bits.b4 = 1;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    fp->x2222_flag.bits.b4 = true;
     ftIceClimber_OnLoadForNana(fp);
 
     {
@@ -120,7 +124,7 @@ void ftNana_OnLoad(HSD_GObj* fighter_gobj)
 void ftNana_OnDeath(HSD_GObj* fighter_gobj)
 {
     s32 unused;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
     fp->dmg.x18B0 = attr->xC8;
     func_80074A4C(fighter_gobj, 0U, 0);

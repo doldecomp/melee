@@ -122,7 +122,7 @@ void ftIceClimber_OnLoadForNana(Fighter* fp)
 void ftIceClimber_OnLoad(HSD_GObj* fighter_gobj)
 {
     s32 unused;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     void** item_list = fp->x10C_ftData->x48_items;
     fp->x2222_flag.bits.b5 = 1;
 
@@ -139,13 +139,12 @@ void ftIceClimber_OnLoad(HSD_GObj* fighter_gobj)
 
 void ftIceClimber_OnDeath(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0U, 0);
     func_80074A4C(fighter_gobj, 1U, 0);
     fp->sa.nana.x2234 = 0;
     fp->sa.nana.x222C = 0;
-    fp->sa.nana.x2230.bits.b0 = 0;
+    fp->sa.nana.x2230.bits.b0 = false;
     fp->sa.nana.x2238 = 0;
     fp->sa.nana.x224C = 0;
     fp->sa.nana.x2250 = 0.0f;

@@ -67,7 +67,7 @@ s32 ftFox_GetBlasterAction(HSD_GObj* fighter_gobj)
     s32 ASID = 9;
 
     if (fighter_gobj != NULL) {
-        Fighter* fp = fighter_gobj->user_data;
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
         if (fp != NULL) {
             s32 currASID = fp->action_id;
             switch (currASID) {
@@ -96,7 +96,7 @@ s32 ftFox_GetBlasterAction(HSD_GObj* fighter_gobj)
 bool ftFox_CheckBlasterAction(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj != NULL) {
-        Fighter* fp = fighter_gobj->user_data;
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
         s32 ASID = fp->action_id;
         switch (ASID) {
         case AS_FOX_SPECIALN_START:
@@ -129,7 +129,7 @@ inline void ftFox_SpecialN_SetNULL(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/4v8j4 // Clear Blaster GObj pointer and callbacks
 void ftFox_ClearBlaster(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.fox.x222C_blasterGObj != NULL) {
         fp->sa.fox.x222C_blasterGObj = NULL;
@@ -141,7 +141,7 @@ void ftFox_ClearBlaster(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/WglAb // Remove Blaster item
 void ftFox_RemoveBlaster(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObj* blasterGObj;
 
     if (fp->sa.fox.x222C_blasterGObj != NULL) {
@@ -362,7 +362,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
         ftFoxAttributes* foxAttrs;
         Fighter* fp;
         f64 launchAngle;
-        s32 ftKind;
+        FighterKind ftKind;
 
 #ifdef MUST_MATCH
         fp = fp = GET_FIGHTER(fighter_gobj);
@@ -592,7 +592,7 @@ void ftFox_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
 // callback
 void ftFox_SpecialNStart_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
         fp->foxVars[0].SpecialN.isBlasterLoop = true;
@@ -604,7 +604,7 @@ void ftFox_SpecialNStart_IASA(HSD_GObj* fighter_gobj)
 // callback
 void ftFox_SpecialNLoop_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
         fp->foxVars[0].SpecialN.isBlasterLoop = true;
@@ -622,7 +622,7 @@ void ftFox_SpecialNEnd_IASA(HSD_GObj* fighter_gobj)
 // callback
 void ftFox_SpecialAirNStart_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
         fp->foxVars[0].SpecialN.isBlasterLoop = true;
@@ -634,7 +634,7 @@ void ftFox_SpecialAirNStart_IASA(HSD_GObj* fighter_gobj)
 // callback
 void ftFox_SpecialAirNLoop_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
         fp->foxVars[0].SpecialN.isBlasterLoop = true;

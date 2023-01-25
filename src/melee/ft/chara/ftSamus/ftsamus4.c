@@ -6,7 +6,7 @@
 
 void ftSamus_ClearThrowFlagsUnk(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2210_ThrowFlags.flags = 0;
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012A074;
 }
