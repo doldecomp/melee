@@ -35,7 +35,7 @@ void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/rtVt4 // Set flags on Mr. Game & Watch's Torch //
 void ftGameWatch_ItemTorchSetFlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftGameWatch_ItemTorchExitHitlag(fighter_gobj);
     fp->sa.gaw.x2254_fireGObj = NULL;
 }
@@ -44,7 +44,7 @@ void ftGameWatch_ItemTorchSetFlag(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/mIWB3 // Remove Mr. Game & Watch's Torch //
 void ftGameWatch_ItemTorchOnDamage(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObj* fireGObj;
 
     if (fp->sa.gaw.x2254_fireGObj != NULL) {
@@ -57,7 +57,7 @@ void ftGameWatch_ItemTorchOnDamage(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/Y9bAE // Apply hitlag to Mr. Game & Watch's item
 void ftGameWatch_ItemTorchEnterHitlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->sa.gaw.x2254_fireGObj != NULL) {
         func_802C6A78(fp->sa.gaw.x2254_fireGObj);
     }
@@ -67,7 +67,7 @@ void ftGameWatch_ItemTorchEnterHitlag(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/OGia3 // End hitlag for Mr. Game & Watch's item
 void ftGameWatch_ItemTorchExitHitlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->sa.gaw.x2254_fireGObj != NULL) {
         func_802C6A98(fp->sa.gaw.x2254_fireGObj);
     }
@@ -78,7 +78,7 @@ void ftGameWatch_ItemTorchExitHitlag(HSD_GObj* fighter_gobj)
 // Forward Smash
 bool ftGameWatch_ItemCheckTorchRemove(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->action_id == AS_GAMEWATCH_ATTACKS4)
         return false;
@@ -91,7 +91,7 @@ bool ftGameWatch_ItemCheckTorchRemove(HSD_GObj* fighter_gobj)
 // State handler
 void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 unused;
 
     fp->x2218_flag.bits.b0 = 0;
@@ -116,7 +116,7 @@ void ftGameWatch_AttackS4_Anim(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_AttackS4_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x2218_flag.bits.b0 != false)
         func_8008A4D4(fighter_gobj);

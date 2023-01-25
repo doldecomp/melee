@@ -3,6 +3,7 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/lb/forward.h>
 
 void ftPikachu_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
@@ -229,7 +230,7 @@ void ftPikachu_8012557C(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
 
-    if (fp->x914[0].x0 == 1) {
+    if (fp->x914[0].tangiblity == Invincible) {
         f32 float_result =
             (fp->x2340_stateVar1 * pika_attr->x2C) + pika_attr->x28;
         func_8007ABD0(&fp->x914[0], float_result, fighter_gobj);
@@ -247,7 +248,7 @@ void ftPikachu_8012561C(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
 
-    if (fp->x914[0].x0 == 1) {
+    if (fp->x914[0].tangiblity == Invincible) {
         f32 float_result =
             (fp->x2340_stateVar1 * pika_attr->x2C) + pika_attr->x28;
         func_8007ABD0(&fp->x914[0], float_result, fighter_gobj);

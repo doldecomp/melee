@@ -5,9 +5,9 @@ struct _m2c_stack_test {
 M2C_UNK extern_fn(struct A *);                      /* extern */
 M2C_UNK static_fn(struct A *);                      /* static */
 extern f32 extern_float;
-struct A static_bss_A;
-s32 static_bss_array[3];
 s32 static_int;
+s32 static_bss_array[3];
+struct A static_bss_A;
 
 s32 test(void) {
     static_int *= 0x1C8;

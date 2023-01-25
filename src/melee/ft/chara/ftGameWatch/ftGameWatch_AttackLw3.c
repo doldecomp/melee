@@ -48,7 +48,7 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* fighter_gobj)
 void ftGameWatch_ItemManholeRemove(HSD_GObj* fighter_gobj)
 {
     HSD_GObj* manholeGObj;
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_ItemManholeExitHitlag(fighter_gobj);
     fp->sa.gaw.x2250_manholeGObj2 = NULL;
@@ -80,7 +80,7 @@ void ftGameWatch_ItemManholeOnDamage(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/Kw1d3 // Apply hitlag to Manhole item
 static void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->sa.gaw.x2250_manholeGObj2 != NULL) {
         func_802C6764(fp->sa.gaw.x2250_manholeGObj2);
     }
@@ -89,7 +89,7 @@ static void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj* fighter_gobj)
 // 0x8014AD68 - Remove hitlag from Manhole item
 static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->sa.gaw.x2250_manholeGObj2 != NULL) {
         func_802C6784(fp->sa.gaw.x2250_manholeGObj2);
     }
@@ -100,7 +100,7 @@ static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* fighter_gobj)
 // Down Tilt - remove if returns true
 bool ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->action_id == AS_GAMEWATCH_ATTACKLW3) {
         return false;
     }
@@ -112,7 +112,7 @@ bool ftGameWatch_ItemCheckManholeRemove(HSD_GObj* fighter_gobj)
 // Handler
 void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (func_80094790(fighter_gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
@@ -128,7 +128,7 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj); // Filler
+    Fighter* fp = GET_FIGHTER(fighter_gobj); // Filler
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_800D638C(fighter_gobj);
@@ -139,7 +139,7 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/qzCi0 // Mr. Game & Watch's Down Tilt IASA callback
 void ftGameWatch_AttackLw3_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->x2218_flag.bits.b0 == 0)
         return;
     if (func_8008BFC4(fighter_gobj) != false)

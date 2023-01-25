@@ -13,19 +13,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python 3.6
-      uses: actions/setup-python@v2
+    - name: Install poetry
+      run: pipx install poetry
+    - name: Setup Python 3.7
+      uses: actions/setup-python@v4
       with:
-        python-version: 3.6
+        python-version: 3.7
+        cache: poetry
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade mypy dataclasses types-dataclasses pycparser coverage black==22.3.0
+        poetry install --with=dev
     - name: Run tests
       run: |
-        ./run_tests.py
+        poetry run ./run_tests.py
     - name: Type-check
       run: |
-        mypy
+        poetry run mypy
     - name: Formatting check
       run: |
-        black --check .
+        poetry run black --check .

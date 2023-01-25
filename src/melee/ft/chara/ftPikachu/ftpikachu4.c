@@ -12,12 +12,6 @@
 #include <MSL/trigf.h>
 
 /// @todo Move elsewhere.
-#define HALF_PI (1.5707963705062866f)
-
-/// @todo Move elsewhere.
-#define DEG_TO_RAD (0.017453292f)
-
-/// @todo Move elsewhere.
 #define MAX_STICK_MAG (0.999f)
 
 // points velocity toward facing direction
@@ -231,7 +225,7 @@ void ftPikachu_8012642C(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
 
-    f32 half_pi = HALF_PI;
+    f32 half_pi = (f32) M_PI_2;
     f32 tempf =
         (fp->facing_dir * atan2f(fp->x80_self_vel.x, fp->x80_self_vel.y)) +
         (pika_attr->x78 - half_pi);
@@ -481,7 +475,7 @@ void ftPikachu_80126C0C(HSD_GObj* fighter_gobj)
         lstick_direction.z = 0.0f;
 
         if (!(lbvector_AngleXY(&collData->x14C_ground.normal,
-                               &lstick_direction) < HALF_PI) &&
+                               &lstick_direction) < (f32) M_PI_2) &&
             (!func_8009A134(fighter_gobj)))
         {
             Fighter* fighter2;
@@ -569,7 +563,7 @@ void ftPikachu_80126E1C(HSD_GObj* fighter_gobj)
 
         // use max stick_mag and 90°
         final_stick_mag = MAX_STICK_MAG;
-        some_angle = HALF_PI;
+        some_angle = (f32) M_PI_2;
 
         // store inputs as if x=0 and y=max
         fp->x234C_pos.y = 0.0f;

@@ -147,7 +147,7 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
     s32 var;
     ftGameWatchAttributes* gawAttrs;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     gawAttrs = getFtSpecialAttrs(fp);
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = randomInt = 0;
@@ -161,7 +161,7 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
             func_8000B1CC(
                 fp->x5E8_fighterBones[func_8007500C(fp, 0x1F)].x0_jobj, &sp38,
                 &sp44);
-            temp_fp = getFighter(fighter_gobj);
+            temp_fp = GET_FIGHTER(fighter_gobj);
             i = 5;
             for (i -= 5; i < 5; i++) {
                 if ((i != temp_fp->sa.gaw.x2240_chefVar1) &&
@@ -185,7 +185,7 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
 
 static inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -199,7 +199,7 @@ static inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* fighter_gobj)
 // State handler
 void ftGameWatch_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
-    getFighter(fighter_gobj)->x80_self_vel.y = 0.0f;
+    GET_FIGHTER(fighter_gobj)->x80_self_vel.y = 0.0f;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN, 0,
                                        NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
@@ -211,7 +211,7 @@ void ftGameWatch_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 // State handler
 void ftGameWatch_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
-    getFighter(fighter_gobj)->x80_self_vel.y = 0.0f;
+    GET_FIGHTER(fighter_gobj)->x80_self_vel.y = 0.0f;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN,
                                        0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
@@ -220,7 +220,7 @@ void ftGameWatch_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 
 static inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
 
     if ((u32) fp->x2208_ftcmd_var2 != 0U) {
@@ -251,7 +251,7 @@ void ftGameWatch_SpecialN_Anim(HSD_GObj* fighter_gobj)
 
 static inline void ftGameWatch_SpecialAirN_ChefLoop(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
 
     if ((u32) fp->x2208_ftcmd_var2 != 0U) {
@@ -284,7 +284,7 @@ void ftGameWatch_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_SpecialN_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
@@ -304,7 +304,7 @@ void ftGameWatch_SpecialN_IASA(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
@@ -354,13 +354,13 @@ void ftGameWatch_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftGameWatch_SpecialN_GroundToAir(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN,
                                        FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    getFighter(fighter_gobj)->cb.x21BC_callback_Accessory4 =
+    GET_FIGHTER(fighter_gobj)->cb.x21BC_callback_Accessory4 =
         &ftGameWatch_SpecialN_CreateSausage;
 }
 
@@ -369,13 +369,13 @@ void ftGameWatch_SpecialN_GroundToAir(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftGameWatch_SpecialAirN_AirToGround(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN,
                                        FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    getFighter(fighter_gobj)->cb.x21BC_callback_Accessory4 =
+    GET_FIGHTER(fighter_gobj)->cb.x21BC_callback_Accessory4 =
         &ftGameWatch_SpecialN_CreateSausage;
 }
 
@@ -385,7 +385,7 @@ void ftGameWatch_SpecialAirN_AirToGround(HSD_GObj* fighter_gobj)
 void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 {
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirN_Loop.
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     f32 var;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN,
@@ -396,9 +396,9 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 
 #ifdef MUST_MATCH
     /// @todo Repeated assignment
-    fp = fp = getFighter(fighter_gobj);
+    fp = fp = GET_FIGHTER(fighter_gobj);
 #else
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
 #endif
 
     fp->x2204_ftcmd_var1 = 0;
@@ -412,7 +412,7 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 // State handler
 void ftGameWatch_SpecialAirN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     f32 var;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN,
@@ -421,9 +421,9 @@ void ftGameWatch_SpecialAirN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
     func_8006EBA4(fighter_gobj);
 
 #ifdef MUST_MATCH
-    fp = fp = getFighter(fighter_gobj);
+    fp = fp = GET_FIGHTER(fighter_gobj);
 #else
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
 #endif
 
     fp->x2204_ftcmd_var1 = 0;

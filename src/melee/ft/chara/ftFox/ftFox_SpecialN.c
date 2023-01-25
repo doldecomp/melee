@@ -14,7 +14,7 @@ void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
     Vec3 sp14;
 
     // Double fp init otherwise this will not match when inlined
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
 
     sp14.x = 0.0f;
     sp14.y = 1.2325000762939453f;
@@ -27,7 +27,7 @@ void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 {
     Vec3 sp14;
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
 
     sp14.x = 0.0f;
     sp14.y = 1.2325000762939453f;
@@ -42,7 +42,7 @@ void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 // function
 void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_800892A0(fighter_gobj);
     func_80089824(fighter_gobj);
@@ -53,7 +53,7 @@ void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj)
 // pointer
 bool ftFox_CheckRemoveBlaster(HSD_GObj* fighter_gobj)
 {
-    if (getFighter(fighter_gobj)->sa.fox.x222C_blasterGObj == NULL) {
+    if (GET_FIGHTER(fighter_gobj)->sa.fox.x222C_blasterGObj == NULL) {
         return true;
     }
     return false;
@@ -120,7 +120,7 @@ bool ftFox_CheckBlasterAction(HSD_GObj* fighter_gobj)
 
 inline void ftFox_SpecialN_SetNULL(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
 }
@@ -172,9 +172,9 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
 
 #ifdef MUST_MATCH
     /// @todo Seems fake, probably one or more missing @c inline functions.
-    fp = fp = getFighter(fighter_gobj);
+    fp = fp = GET_FIGHTER(fighter_gobj);
 #else
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
 #endif
 
     foxAttrs = getFtSpecialAttrs(fp);
@@ -211,7 +211,7 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
 
 inline void ftFox_SpecialN_SetCall(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21DC_callback_OnTakeDamage = func_800E5588;
     fp->cb.x21E4_callback_OnDeath2 = func_800E5588;
 }
@@ -221,7 +221,7 @@ inline void ftFox_SpecialN_SetCall(HSD_GObj* fighter_gobj)
 // State handler
 void ftFox_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
     HSD_GObj* blasterGObj;
 
@@ -264,7 +264,7 @@ void ftFox_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 void ftFox_SpecialAirN_StartAction(
     HSD_GObj* fighter_gobj) // Fox & Falco's aerial Blaster Action State handler
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
     HSD_GObj* blasterGObj;
 
@@ -299,7 +299,7 @@ void ftFox_SpecialAirN_StartAction(
 // Animation callback
 void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObj* blasterGObj;
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
@@ -365,13 +365,13 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
         s32 ftKind;
 
 #ifdef MUST_MATCH
-        fp = fp = getFighter(fighter_gobj);
+        fp = fp = GET_FIGHTER(fighter_gobj);
 #else
-        fp = getFighter(fighter_gobj);
+        fp = GET_FIGHTER(fighter_gobj);
 #endif
 
         foxAttrs = getFtSpecialAttrs(fp);
-        unused = getFighter(fighter_gobj);
+        unused = GET_FIGHTER(fighter_gobj);
 
         if ((u32) fp->x2208_ftcmd_var2 != 0U) {
             fp->x2208_ftcmd_var2 = 0U;
@@ -406,7 +406,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
 
 static inline void ftFox_SpecialN_RemoveBlasterNULL(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.fox.x222C_blasterGObj != NULL) {
         fp->sa.fox.x222C_blasterGObj = NULL;
@@ -444,7 +444,7 @@ void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     HSD_GObj* blasterGObj;
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
@@ -512,13 +512,13 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
         Fighter* fp;
 
 #ifdef MUST_MATCH
-        fp = fp = getFighter(fighter_gobj);
+        fp = fp = GET_FIGHTER(fighter_gobj);
 #else
-        fp = getFighter(fighter_gobj);
+        fp = GET_FIGHTER(fighter_gobj);
 #endif
 
         foxAttrs = getFtSpecialAttrs(fp);
-        unused = getFighter(fighter_gobj);
+        unused = GET_FIGHTER(fighter_gobj);
 
         if ((u32) fp->x2208_ftcmd_var2 != 0U) {
             f64 launchAngle;
@@ -724,7 +724,7 @@ void ftFox_SpecialAirNEnd_Coll(HSD_GObj* fighter_gobj)
 // spawn Blaster
 void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = getFighter(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
     s32 ftKind = ftGetKind(fp);
 

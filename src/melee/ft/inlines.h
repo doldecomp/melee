@@ -46,13 +46,16 @@
         }                                                                      \
     }
 
+#define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
+
+/// @deprecated Use #GET_FIGHTER instead.
 static inline Fighter* getFighter(HSD_GObj* fighter_gobj)
 {
     return fighter_gobj->user_data;
 }
 
-static inline Fighter*
-getFighterPlus(HSD_GObj* fighter_gobj) // Uses more stack space //
+/// @deprecated use #GET_FIGHTER instead.
+static inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
     return fp;
@@ -112,7 +115,7 @@ static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
                                         bool catchItemFlag, bool bool2,
                                         bool bool3)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
         switch (func_8026B320(fp->x1974_heldItem)) {
         case 1:
@@ -136,7 +139,7 @@ static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
 
 static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
         func_80070CC4(gobj, bool);
     }
@@ -144,7 +147,7 @@ static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
 
 static inline void Fighter_OnItemVisible(HSD_GObj* gobj, bool bool)
 {
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!func_8026B2B4(fp->x1974_heldItem)) {
         func_80070C48(gobj, bool);
     }
@@ -173,7 +176,7 @@ static inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1)
 
 static inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2200_ftcmd_var0 = 0;
 }
 

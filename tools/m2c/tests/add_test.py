@@ -24,8 +24,8 @@ def set_up_logging(debug: bool) -> None:
 @dataclass
 class PathsToBinaries:
     IDO_CC: Optional[Path]
-    SM64_TOOLS: Optional[Path]
     MWCC_CC: Optional[Path]
+    WINE: Optional[Path]
 
 
 def get_environment_variables() -> PathsToBinaries:
@@ -44,17 +44,12 @@ def get_environment_variables() -> PathsToBinaries:
         "IDO_CC",
         "env variable IDO_CC should point to recompiled IDO cc binary",
     )
-    SM64_TOOLS = load(
-        "SM64_TOOLS",
-        (
-            "env variable SM64_TOOLS should point to a checkout of "
-            "https://github.com/queueRAM/sm64tools/, with mipsdisasm built"
-        ),
-    )
     MWCC_CC = load(
         "MWCC_CC", "env variable MWCC_CC should point to a PPC cc binary (mwcceppc.exe)"
     )
-    return PathsToBinaries(IDO_CC=IDO_CC, SM64_TOOLS=SM64_TOOLS, MWCC_CC=MWCC_CC)
+    if MWCC_CC and sys.platform.startswith("linux"):
+        WINE = load("WINE", "env variable WINE should point to wine or wibo binary")
+    return PathsToBinaries(IDO_CC=IDO_CC, MWCC_CC=MWCC_CC, WINE=WINE)
 
 
 @dataclass
@@ -66,9 +61,8 @@ class Compiler:
         return replace(self, cc_command=self.cc_command + flags)
 
 
-def get_compilers(paths: PathsToBinaries) -> List[Tuple[str, Compiler]]:
-    compilers: List[Tuple[str, Compiler]] = []
-    if paths.IDO_CC is not None and paths.SM64_TOOLS is not None:
+def get_ido_compilers(paths: PathsToBinaries) -> List[Tuple[str, Compiler]]:
+    if paths.IDO_CC is not None:
         ido = Compiler(
             name="ido",
             cc_command=[
@@ -86,13 +80,17 @@ def get_compilers(paths: PathsToBinaries) -> List[Tuple[str, Compiler]]:
                 "-signed",
             ],
         )
-        compilers.append(("irix-g", ido.with_cc_flags(["-g", "-mips2"])))
-        compilers.append(("irix-o2", ido.with_cc_flags(["-O2", "-mips2"])))
-        # compilers.append(("irix-g-mips1", ido.with_cc_flags(["-O2", "-mips1"])))
-        # compilers.append(("irix-o2-mips1", ido.with_cc_flags(["-O2", "-mips1"])))
-    else:
-        logger.warning("IDO tools not found; skipping MIPS compilers")
+        return [
+            ("irix-g", ido.with_cc_flags(["-g", "-mips2"])),
+            ("irix-o2", ido.with_cc_flags(["-O2", "-mips2"])),
+            # ("irix-g-mips1", ido.with_cc_flags(["-O2", "-mips1"]))
+            # ("irix-o2-mips1", ido.with_cc_flags(["-O2", "-mips1"]))
+        ]
+    logger.warning("IDO tools not found; skipping MIPS compilers")
+    return []
 
+
+def get_mwcc_compilers(paths: PathsToBinaries) -> List[Tuple[str, Compiler]]:
     if paths.MWCC_CC is not None:
         cc_command = [
             str(paths.MWCC_CC),
@@ -107,78 +105,47 @@ def get_compilers(paths: PathsToBinaries) -> List[Tuple[str, Compiler]]:
             "int",
             "-nodefaults",
         ]
+        ok = True
         if paths.MWCC_CC.suffix == ".exe" and sys.platform.startswith("linux"):
-            cc_command.insert(0, "/usr/bin/wine")
-        mwcc = Compiler(
-            name="mwcc",
-            cc_command=cc_command,
-        )
-        compilers.append(("mwcc-o4p", mwcc.with_cc_flags(["-O4,p"])))
-        # compilers.append(("mwcc-o4p-s0", mwcc.with_cc_flags(["-O4,p", "-sdata", "0", "-sdata2", "0"])))
-    else:
-        logger.warning("MWCC tools not found; skipping PPC compilers")
+            if paths.WINE:
+                cc_command.insert(0, str(paths.WINE))
+            else:
+                ok = False
+        if ok:
+            mwcc = Compiler(
+                name="mwcc",
+                cc_command=cc_command,
+            )
+            return [
+                ("mwcc-o4p", mwcc.with_cc_flags(["-O4,p"])),
+                # ("mwcc-o4p-s0", mwcc.with_cc_flags(["-O4,p", "-sdata", "0", "-sdata2", "0"]))
+            ]
+    logger.warning("MWCC tools not found; skipping PPC compilers")
+    return []
 
+
+def get_compilers(paths: PathsToBinaries) -> List[Tuple[str, Compiler]]:
+    compilers: List[Tuple[str, Compiler]] = []
+    compilers.extend(get_ido_compilers(paths))
+    compilers.extend(get_mwcc_compilers(paths))
     return compilers
 
 
-@dataclass
-class DisassemblyInfo:
-    entry_point: bytes
-    disasm: bytes
-
-
-def do_disassembly_step(
-    temp_out_file: str, env_vars: PathsToBinaries
-) -> DisassemblyInfo:
-    section_lines: List[str] = subprocess.run(
-        ["mips-linux-gnu-readelf", "-S", temp_out_file],
+def disassemble_mips_elf(temp_out_file: str) -> bytes:
+    return subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "spimdisasm.elfObjDisasm",
+            "--Mreg-names",
+            "o32",
+            "--quiet",
+            temp_out_file,
+            "-",
+        ],
         stdout=subprocess.PIPE,
-        encoding="utf-8",
-    ).stdout.split("\n")
-
-    header_lines: List[bytes] = subprocess.run(
-        ["mips-linux-gnu-readelf", "-h", temp_out_file], stdout=subprocess.PIPE
-    ).stdout.split(b"\n")
-
-    entry_point: bytes = b""
-    for line in header_lines:
-        if b"Entry" in line:
-            entry_point = line.split(b" ")[-1]
-            break
-    if not entry_point:
-        raise Exception("no entry point found in ELF file")
-
-    for section_line in section_lines:
-        if " .text" not in section_line:
-            continue
-        addr = "0x" + section_line[42:][:7]
-        index = "0x" + section_line[51:][:5]
-        size = "0x" + section_line[58:][:5]
-        break
-    else:
-        raise Exception("missing .text section in ELF file")
-
-    arg = f"{addr}:{index}+{size}"
-    entry_point_str = entry_point.decode("utf-8", "replace")
-    logger.debug(
-        f"Calling mipsdisasm with arg {arg} and entry point {entry_point_str}..."
-    )
-    assert env_vars.SM64_TOOLS is not None
-    final_asm = subprocess.run(
-        [env_vars.SM64_TOOLS / "mipsdisasm", temp_out_file, arg],
-        stdout=subprocess.PIPE,
+        check=True,
     ).stdout
-
-    if final_asm is None:
-        raise Exception("mipsdisasm didn't output anything")
-
-    return DisassemblyInfo(entry_point, final_asm)
-
-
-def do_linker_step(temp_out_file: str, temp_o_file: str) -> None:
-    subprocess.run(
-        ["mips-linux-gnu-ld", "-o", temp_out_file, temp_o_file, "-e", "test"]
-    )
 
 
 def do_compilation_step(
@@ -194,72 +161,21 @@ def do_compilation_step(
     subprocess.run(args)
 
 
-def do_fix_lohi_step(disasm_info: DisassemblyInfo) -> bytes:
-    logger.debug("Fixing %lo and %hi macros...")
-
-    def replace_last(s: bytes, a: bytes, b: bytes) -> bytes:
-        return b.join(s.rsplit(a, 1))
-
-    output: List[bytes] = []
-    waiting_hi: Dict[bytes, Tuple[int, int, bytes]] = {}
-    for line in disasm_info.disasm.split(b"\n"):
-        line = line.strip()
-        if (disasm_info.entry_point + b" ")[2:].upper() in line:
-            output.append(b"glabel test")
-
-        index = len(output)
-        if line.startswith(b"func"):
-            line = b"glabel " + line[:-1]
-        elif b"lui" in line:
-            reg, imm_hex = line.split(b" ")[-2::]
-            imm = int(imm_hex, 0)
-            if 0x10 <= imm < 0x1000:  # modestly large lui is probably a pointer
-                waiting_hi[reg[:-1]] = (index, imm, imm_hex)
-        else:
-            lo_regs = [reg for reg in waiting_hi.keys() if reg in line]
-            if lo_regs and b"0x" in line:
-                lo_reg = lo_regs[0]
-                hi_ind, hi_imm, hi_imm_hex = waiting_hi[lo_reg]
-                lo_imm_hex = line.split(b" ")[-1].split(b"(")[0]
-                lo_imm = int(lo_imm_hex, 0)
-                if lo_imm >= 0x8000:
-                    lo_imm -= 0x10000
-                sym = b"D_" + bytes(hex((hi_imm << 16) + lo_imm)[2:].upper(), "utf-8")
-                line = replace_last(line, lo_imm_hex, b"%lo(" + sym + b")")
-                output[hi_ind] = replace_last(
-                    output[hi_ind], hi_imm_hex, b"%hi(" + sym + b")"
-                )
-                del waiting_hi[lo_reg]
-        output.append(line)
-    return b"\n".join(output)
-
-
-def irix_compile(
-    in_file: Path, out_file: Path, env_vars: PathsToBinaries, compiler: Compiler
-) -> None:
-    flags_str = " ".join(compiler.cc_command)
-    logger.info(f"Compiling {in_file} to {out_file} using: {flags_str}")
-    with ExitStack() as stack:
-        temp_o_file = stack.enter_context(NamedTemporaryFile(suffix=".o")).name
-        temp_out_file = stack.enter_context(NamedTemporaryFile(suffix=".out")).name
-        logger.debug(f"Compiling and linking {in_file} using: {flags_str}")
-        do_compilation_step(temp_o_file, str(in_file), compiler)
-        do_linker_step(temp_out_file, temp_o_file)
-        disasm_info = do_disassembly_step(temp_out_file, env_vars)
-        final_asm = do_fix_lohi_step(disasm_info)
-    out_file.write_bytes(final_asm)
-    logger.info(f"Successfully wrote disassembly to {out_file}.")
-
-
-def ppc_compile(in_file: Path, out_file: Path, compiler: Compiler) -> None:
+def run_compile(in_file: Path, out_file: Path, compiler: Compiler) -> None:
     flags_str = " ".join(compiler.cc_command)
     logger.info(f"Compiling {in_file} to {out_file} using: {flags_str}")
     with NamedTemporaryFile(suffix=".o") as temp_o_file:
         logger.debug(f"Compiling {in_file} using: {flags_str}")
         do_compilation_step(temp_o_file.name, str(in_file), compiler)
-        with open(temp_o_file.name, "rb") as o_f:
-            with out_file.open("w") as out_f:
-                disassemble_ppc_elf(o_f, out_f)
+        if compiler.name == "ido":
+            final_asm = disassemble_mips_elf(temp_o_file.name)
+            out_file.write_bytes(final_asm)
+        elif compiler.name == "mwcc":
+            with open(temp_o_file.name, "rb") as o_f:
+                with out_file.open("w") as out_f:
+                    disassemble_ppc_elf(o_f, out_f)
+        else:
+            assert False, compiler.name
     logger.info(f"Successfully wrote disassembly to {out_file}.")
 
 
@@ -270,11 +186,8 @@ def add_test_from_file(
     for asm_filename, compiler in compilers:
         asm_file_path = test_dir / (asm_filename + ".s")
         try:
-            if compiler.name == "ido":
-                irix_compile(orig_file, asm_file_path, env_vars, compiler)
-            elif compiler.name == "mwcc":
-                ppc_compile(orig_file, asm_file_path, compiler)
-
+            run_compile(orig_file, asm_file_path, compiler)
+            if compiler.name == "mwcc":
                 # If the flags file doesn't exist, initialize it with the correct --target
                 ppc_flags = test_dir / (asm_filename + "-flags.txt")
                 if not ppc_flags.exists():

@@ -36,7 +36,7 @@ bool ftDonkey_800E0378(HSD_GObj* fighter_gobj)
 
 void ftDonkey_800E03C0(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighterPlus(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr;
     func_8007D5D4(fp);
     donkey_attr = getFtSpecialAttrs2CC(fp);

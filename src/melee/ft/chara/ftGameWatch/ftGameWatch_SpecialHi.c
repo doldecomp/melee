@@ -246,7 +246,7 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
     f32 animFrame;
     s32 ledgeGrabDir;
 
-    fp = getFighter(fighter_gobj);
+    fp = GET_FIGHTER(fighter_gobj);
     gawAttrs = getFtSpecialAttrs(fp);
     if (fp->x894_currentAnimFrame > 4.0f) {
         if (fp->x80_self_vel.y >= 0.0f) {
