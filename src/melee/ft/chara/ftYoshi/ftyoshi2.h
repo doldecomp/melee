@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
-#define MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
+#ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI2_H
+#define MELEE_FT_CHARA_FTYOSHI_FTYOSHI2_H
 
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
