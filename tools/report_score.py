@@ -34,7 +34,7 @@ def main(obj_path: str) -> None:
     print("Function|Score|Max|%")
     print("-|-|-|-")
     for entry in entries:
-        print(f"`{entry[0]}`|`{entry[1]}`|`{entry[2]}`|`{entry[3]}%`")
+        print(f"`{entry[0]}`|`{entry[1]}`|`{entry[2]}`|`{entry[3]:.2f}%`")
 
 if __name__ == "__main__":
     import sys

@@ -2208,7 +2208,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 
 f64 const lbl_804D7A20 = 3.0;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
 // clang-format off
 asm bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Mtx, Vec3*,
