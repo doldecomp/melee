@@ -593,7 +593,7 @@ f32 lbColl_80005FC0(Vec3* a, Vec3* b, Vec3* c, f32* out)
 }
 #endif
 
-extern f64 const lbl_804D7A18;
+f64 const lbl_804D7A18 = 0.5;
 
 #ifdef MUST_MATCH
 #pragma push
@@ -2206,7 +2206,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 }
 #endif
 
-extern f64 const lbl_804D7A20;
+f64 const lbl_804D7A20 = 3.0;
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -3260,9 +3260,9 @@ block_39:
 }
 #endif
 
-extern f32 const lbl_804D7A28;
-extern f32 const lbl_804D7A2C;
-extern f32 const lbl_804D7A30;
+f32 const lbl_804D7A28 = 2;
+f32 const lbl_804D7A2C = 4;
+f32 const lbl_804D7A30 = M_PI;
 
 #ifdef MUST_MATCH
 #pragma push
@@ -3629,7 +3629,7 @@ void lbColl_80007B78(Mtx a, Mtx b, f32 x, f32 y)
 
 extern char* lbl_804D3700;
 extern char* lbl_804D3708;
-extern f32 const lbl_804D7A34;
+f32 const lbl_804D7A34 = 20;
 
 #ifdef MUST_MATCH
 #pragma push
@@ -3979,7 +3979,7 @@ void lbColl_80007DD8(HitCapsule* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
 }
 #endif
 
-extern f32 const lbl_804D7A38;
+f32 const lbl_804D7A38 = 3;
 
 #ifdef MUST_MATCH
 #pragma push
@@ -4158,8 +4158,8 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
 }
 #endif
 
-extern f32 const lbl_804D7A3C;
-extern f32 const lbl_804D7A40;
+f32 const lbl_804D7A3C = 0.5;
+f32 const lbl_804D7A40 = 5;
 
 #ifdef MWERKS_GEKKO
 #pragma push
@@ -5276,8 +5276,7 @@ lbl_80008A4C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbColl_80008A5C(UNK_PARAMS)
-{
+asm UNK_RET lbColl_80008A5C(UNK_PARAMS){
     // clang-format off
     nofralloc
 /* 80008A5C 0000563C  80 03 00 00 */	lwz r0, 0(r3)
@@ -5479,12 +5478,11 @@ lbl_80008D20:
 #pragma pop
 #endif
 
-extern f64 const lbl_804D7A48;
+f64 const lbl_804D7A48 = 4503599627370496;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbColl_80008D30(UNK_PARAMS)
-{
+asm UNK_RET lbColl_80008D30(UNK_PARAMS){
     // clang-format off
     nofralloc
 /* 80008D30 00005910  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -5520,12 +5518,11 @@ asm UNK_RET lbColl_80008D30(UNK_PARAMS)
 #pragma pop
 #endif
 
-extern int const lbl_804D7A50;
+GXColor const lbl_804D7A50 = { 0 };
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbColl_80008DA4(UNK_PARAMS)
-{
+asm UNK_RET lbColl_80008DA4(UNK_PARAMS){
     // clang-format off
     nofralloc
 /* 80008DA4 00005984  7C 08 02 A6 */	mflr r0
@@ -5675,7 +5672,7 @@ lbl_80008FB0:
 #pragma pop
 #endif
 
-extern f32 const lbl_804D7A54;
+f32 const lbl_804D7A54 = -1;
 
 #ifdef MWERKS_GEKKO
 #pragma push
