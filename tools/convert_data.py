@@ -7,7 +7,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': r"asm/melee/lb/lbcollision.s"
+    'input_glob': r"src/**/GXTransform.c"
 }
 
 default_options = {
