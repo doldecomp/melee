@@ -20,14 +20,14 @@ struct Hitbox {
     s32 x4;
     s32 x8;
     f32 xC;
-    char unk_10[0x1C - 0x10];
+    u8 x10[0x1C - 0x10];
     f32 x1C;
-    char unk_20[0x30 - 0x20];
+    u8 x20[0x30 - 0x20];
 
     /// @at{30} @sz{4}
     HitElement element;
 
-    char unk_34[0x38 - 0x34];
+    u8 x34[0x38 - 0x34];
 
     /// @at{38} @sz{4}
     int sfx_severity;
@@ -43,7 +43,7 @@ struct Hitbox {
     u8 x40_b5 : 1;
     u8 x40_b6 : 1;
     u8 x40_b7 : 1;
-    char unk_41[0x42 - 0x41];
+    u8 x41[0x42 - 0x41];
     u8 x42_b0 : 1;
     u8 x42_b1 : 1;
     u8 x42_b2 : 1;
@@ -67,15 +67,15 @@ struct Hitbox {
     };
     u8 x44;
     u8 x45;
-    char unk_46[0x4C - 0x46];
+    u8 x46[0x4C - 0x46];
     int x4C;
 
-    char unk_50[0x58 - 0x50];
+    u8 x50[0x58 - 0x50];
     int x58;
     int x5C;
     int x60;
     int x64;
-    char unk_68[0x74 - 0x68];
+    u8 x68[0x74 - 0x68];
     /// @at{74} @sz{60}
     HitVictim victims_1[12];
     /// @at{D4} @sz{60}
