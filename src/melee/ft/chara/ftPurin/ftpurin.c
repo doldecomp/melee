@@ -179,7 +179,7 @@ void func_8013C360(HSD_GObj* fighter_gobj)
         fp->sa.purin.x2244 = HSD_ObjAlloc(&lbl_80459080);
         func_80074148();
         fp->sa.purin.x223C = HSD_JObjLoadJoint(joint_list[fp->x619_costume_id]);
-        fp->x2225_flag.bits.b2 = 1;
+        fp->x2225_b2 = 1;
         func_80074170();
         func_80075650(fighter_gobj, fp->sa.purin.x223C, &fp->sa.purin.x2240);
 
@@ -211,7 +211,7 @@ void func_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx)
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.purin.x223C && fp->x2225_flag.bits.b2) {
+    if (fp->sa.purin.x223C && fp->x2225_b2) {
         Mtx* mtx;
         HSD_JObj* jobj;
         HSD_JObj* bone_jobj = fp->x5E8_fighterBones[6].x0_jobj;

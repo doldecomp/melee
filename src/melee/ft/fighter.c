@@ -369,20 +369,20 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x1994 = 0;
 
     fp->x221D_flag.bits.b6 = 0;
-    fp->x221B_flag.bits.b5 = 0;
+    fp->x221B_b5 = 0;
 
     fp->x1A58_interactedFighter = 0;
     fp->x1A5C = 0;
 
-    fp->x221B_flag.bits.b6 = 0;
+    fp->x221B_b6 = 0;
 
     fp->x1A60 = 0;
     fp->x1A64 = 0;
 
-    fp->x221B_flag.bits.b7 = 0;
+    fp->x221B_b7 = 0;
     fp->x221C_flag.bits.b0 = 0;
 
-    fp->x1064_thrownHitbox.x134 = 0;
+    fp->x1064_thrownHitbox.owner = NULL;
     fp->x221C_u16_y = 0;
     fp->x20AC = NULL;
     fp->x221C_flag.bits.b5 = 0;
@@ -400,10 +400,10 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x1998_shieldHealth = p_ftCommonData->x260_startShieldHealth;
 
     fp->x221A_flag.bits.b7 = 0;
-    fp->x221B_flag.bits.b0 = 0;
-    fp->x221B_flag.bits.b1 = 0;
-    fp->x221B_flag.bits.b3 = 0;
-    fp->x221B_flag.bits.b4 = 0;
+    fp->x221B_b0 = 0;
+    fp->x221B_b1 = 0;
+    fp->x221B_b3 = 0;
+    fp->x221B_b4 = 0;
     fp->x221C_flag.bits.b3 = 0;
     fp->x221C_flag.bits.b1 = 0;
     fp->x221C_flag.bits.b2 = 0;
@@ -476,15 +476,15 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x1A52 = 0;
     fp->x210C_walljumpInputTimer = 254;
     fp->dmg.x1910 = 0;
-    fp->x2225_flag.bits.b0 = 0;
-    fp->x2225_flag.bits.b2 = 1;
-    fp->x2225_flag.bits.b4 = 0;
+    fp->x2225_b0 = 0;
+    fp->x2225_b2 = 1;
+    fp->x2225_b4 = 0;
     func_800DEEA8(fp->x0_fighter);
     fp->dmg.x18BC = 0.0f;
     fp->dmg.x18B8 = 0.0f;
     fp->x2226_flag.bits.b2 = 0;
     fp->x2170 = 0.0f;
-    fp->x2225_flag.bits.b6 = fp->x2225_flag.bits.b5;
+    fp->x2225_b6 = fp->x2225_b5;
     fp->dmg.x1908 = -1;
     fp->dmg.x190C = 0;
     fp->x2227_flag.bits.b4 = 0;
@@ -683,8 +683,8 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj,
     fp->x2223_flag.bits.b6 = Player_GetFlagsBit5(fp->xC_playerID);
     fp->x2226_flag.bits.b3 = Player_GetFlagsBit6(fp->xC_playerID);
     fp->x2226_flag.bits.b6 = Player_GetFlagsBit7(fp->xC_playerID);
-    fp->x2225_flag.bits.b5 = Player_GetMoreFlagsBit1(fp->xC_playerID);
-    fp->x2225_flag.bits.b7 = Player_GetMoreFlagsBit2(fp->xC_playerID);
+    fp->x2225_b5 = Player_GetMoreFlagsBit1(fp->xC_playerID);
+    fp->x2225_b7 = Player_GetMoreFlagsBit2(fp->xC_playerID);
     fp->x2228_flag.bits.b3 = Player_GetMoreFlagsBit6(fp->xC_playerID);
     fp->x2229_b1 = Player_GetFlagsAEBit0(fp->xC_playerID);
 
@@ -780,7 +780,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj,
 
     fp->x60C = 0;
 
-    fp->x2225_flag.bits.b3 = 0;
+    fp->x2225_b3 = 0;
     fp->x2228_flag.bits.b2 = 0;
 
     fp->x2226_flag.bits.b0 = 0;
@@ -948,7 +948,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
     }
 
     if ((arg2 & FIGHTER_THROW_EXCEPTION_NOUPDATE) == 0) {
-        fp->x1064_thrownHitbox.x134 = 0;
+        fp->x1064_thrownHitbox.owner = NULL;
     }
 
     if ((arg2 & FIGHTER_HITSTATUS_COLANIM_PRESERVE) == 0) {
@@ -1040,7 +1040,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
     fp->dmg.x18a0 = 0.0f;
 
     fp->x221A_flag.bits.b7 = 0;
-    fp->x221B_flag.bits.b0 = 0;
+    fp->x221B_b0 = 0;
     fp->x221C_flag.bits.b3 = 0;
 
     fp->x19B4_shieldUnk = 0.0f;
@@ -1068,8 +1068,8 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
     fp->x2223_flag.bits.b0 = 0;
     fp->x2222_flag.bits.b3 = 0;
     fp->x2224_flag.bits.b5 = 0;
-    fp->x2225_flag.bits.b1 = 0;
-    fp->x2225_flag.bits.b4 = 0;
+    fp->x2225_b1 = 0;
+    fp->x2225_b4 = 0;
 
     func_8004CBF4(&fp->x6F0_collData);
 
@@ -1089,7 +1089,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
     }
 
     if ((arg2 & FIGHTER_MODEL_FLAG_NOUPDATE) == 0) {
-        fp->x2225_flag.bits.b2 = 1;
+        fp->x2225_b2 = 1;
     }
 
     if ((arg2 & FIGHTER_FASTFALL_PRESERVE) == 0) {
@@ -1199,7 +1199,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
         volatile s32 volatile_integer = fp->x2070_int;
         func_800890D0(fp, new_action_state->move_id);
         func_800895E0(fp, new_action_state->x4_flags);
-        fp->x2225_flag.bits.b3 = new_action_state->x9_flags.bits.b0;
+        fp->x2225_b3 = new_action_state->x9_flags.bits.b0;
 
         if (fp->x2226_flag.bits.b4 != 0U) {
             if (fp->x2071_b5 != 0U) {
@@ -2376,14 +2376,14 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj)
     // TODO: do the bitflag tests here tell us if the player is dead?
     func_800D3158(fighter_gobj);
 
-    if (fp->x2225_flag.bits.b0) {
+    if (fp->x2225_b0) {
         // if position.y crossed
         // (0.25*stage.blastBottom+0.75*stage.cameraBottom) +
         // stage.crowdReactStart from below...
         if (fp->xBC_prevPos.y <= Stage_CalcUnkCamYBounds() &&
             fp->xB0_pos.y > Stage_CalcUnkCamYBounds())
         {
-            fp->x2225_flag.bits.b0 = 0;
+            fp->x2225_b0 = 0;
         }
     } else {
         if (!fp->x222A_flag.bits.b1 && !fp->x2228_flag.bits.b5) {
@@ -2395,7 +2395,7 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj)
                 // plays this sound you always hear when you get close to the
                 // bottom blast zone
                 func_80088148(fp, 96, 127, 64);
-                fp->x2225_flag.bits.b0 = 1;
+                fp->x2225_b0 = 1;
             }
         }
     }
@@ -2587,7 +2587,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighter_gobj)
         if (fp->x221E_flag.bits.b6) {
             func_80078A2C(fighter_gobj);
             if (fp->x1A58_interactedFighter) {
-                if (!fp->x2225_flag.bits.b1) {
+                if (!fp->x2225_b1) {
                     func_80088148(fp, fp->x10C_ftData->x4C_collisionData->x30,
                                   0x7F, 0x40);
                 }
@@ -2600,7 +2600,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighter_gobj)
             func_8007BC90(fighter_gobj);
 
             if (fp->x1A60) {
-                if (!fp->x2225_flag.bits.b1) {
+                if (!fp->x2225_b1) {
                     func_80088148(fp, fp->x10C_ftData->x4C_collisionData->x30,
                                   0x7F, 0x40);
                 }

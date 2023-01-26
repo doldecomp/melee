@@ -13,11 +13,11 @@ typedef struct _ftYoshiAttributes {
     f32 x8;
     f32 xC;
     f32 x10;
-    s32 x14;
+    f32 x14;
     f32 x18;
-    s32 x1C;
-    s32 x20;
-    s32 x24;
+    f32 x1C;
+    f32 x20;
+    f32 x24;
     s32 x28;
     s32 x2C;
     u8 data_filler1[0xEF];
@@ -41,6 +41,9 @@ extern ActionState as_table_yoshi[];
 
 void func_8012B8A4(HSD_GObj* fighter_gobj);
 void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg);
+void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
+                   f32 start_frame);
+void func_8012C49C(HSD_GObj* fighter_gobj);
 void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
                    f32 start_frame);
 
@@ -159,5 +162,10 @@ void lbl_8012EA9C(HSD_GObj*);
 void lbl_8012E850(HSD_GObj*);
 void lbl_8012E8CC(HSD_GObj*);
 void func_8012E944(HSD_GObj*);
+void func_8012C1D4(HSD_GObj*);
+void lbl_8012C2F4(HSD_GObj* fighter_gobj);
+void lbl_8012C3EC(HSD_GObj*);
+void lbl_8012C45C(HSD_GObj*);
+void lbl_8012C47C(HSD_GObj*);
 
 #endif
