@@ -1,6 +1,7 @@
 #ifndef __MATH_H__
 #define __MATH_H__
 
+#include <MetroTRK/intrinsics.h>
 #include <Runtime/platform.h>
 
 #define M_PI 3.14159265358979323846
@@ -14,8 +15,6 @@
 #endif
 
 #define FLT_EPSILON 1.00000001335e-10f
-
-extern double __frsqrte(double);
 
 extern inline float sqrtf(float x)
 {

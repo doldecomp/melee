@@ -119,6 +119,14 @@ typedef void (*Event)(void);
 #endif
 #endif
 
+#ifndef ATTRIBUTE_RESTRICT
+#if defined(__MWERKS__) && !defined(M2CTX)
+#define ATTRIBUTE_RESTRICT __restrict
+#else
+#define ATTRIBUTE_RESTRICT
+#endif
+#endif
+
 #ifdef PERMUTER
 #define AT_ADDRESS(x) = FIXEDADDR(x)
 #elif defined(__MWERKS__) && !defined(M2CTX)
@@ -155,5 +163,7 @@ typedef void (*Event)(void);
 #define FLAGS_ANY(value, flag) ((value) & (flag))
 #define FLAGS_NONE(value, flag) (!((value) & (flag)))
 #define FLAGS_ALL(value, flag) (((value) & (flag)) == (flag))
+
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
 #endif
