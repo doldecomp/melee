@@ -1903,12 +1903,12 @@ void func_8008031C(HSD_GObj* gobj)
 
 void func_80080460(Fighter* fp)
 {
-    fp->x2225_flag.bits.b6 = true;
+    fp->x2225_b6 = true;
 }
 
 void func_80080474(Fighter* fp)
 {
-    fp->x2225_flag.bits.b6 = fp->x2225_flag.bits.b5;
+    fp->x2225_b6 = fp->x2225_b5;
 }
 
 void func_80080484(Fighter* fp)
