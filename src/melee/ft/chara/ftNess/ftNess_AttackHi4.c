@@ -35,8 +35,8 @@ void ftNess_YoyoCheckTimedRehit(HSD_GObj* fighter_gobj)
         if (fp->nessVars[0].AttackHi4.yoyoRehitTimer > 0) {
             fp->nessVars[0].AttackHi4.yoyoRehitTimer--;
             if (fp->nessVars[0].AttackHi4.yoyoRehitTimer == 0) {
-                func_80008440(&fp->x914[0]);
-                func_80008434(&fp->x914[0]);
+                lbColl_80008440(&fp->x914[0]);
+                lbColl_80008434(&fp->x914[0]);
             }
         }
     }
@@ -666,8 +666,8 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj)
                 fp->nessVars[0].AttackHi4.yoyoRehitTimer =
                     (s32) (yoyoRehitTimer - 1);
                 if ((s32) fp->nessVars[0].AttackHi4.yoyoRehitTimer == 0) {
-                    func_80008440(&fp->x914[0]);
-                    func_80008434(&fp->x914[0]);
+                    lbColl_80008440(&fp->x914[0]);
+                    lbColl_80008434(&fp->x914[0]);
                 }
             }
         }
@@ -822,8 +822,8 @@ void ftNess_AttackHi4_Charge_Anim(
             fighter_data2->nessVars[0].AttackHi4.yoyoRehitTimer--;
             if ((s32) fighter_data2->nessVars[0].AttackHi4.yoyoRehitTimer == 0)
             {
-                func_80008440(fighter_data2->x914);
-                func_80008434(fighter_data2->x914);
+                lbColl_80008440(fighter_data2->x914);
+                lbColl_80008434(fighter_data2->x914);
             }
         }
     }
@@ -915,8 +915,8 @@ void ftNess_AttackHi4_Release_Anim(
             if (yoyoRehitTimer > 0) {
                 fp->nessVars[0].AttackHi4.yoyoRehitTimer--;
                 if ((s32) fp->nessVars[0].AttackHi4.yoyoRehitTimer == 0) {
-                    func_80008440(fp->x914);
-                    func_80008434(fp->x914);
+                    lbColl_80008440(fp->x914);
+                    lbColl_80008434(fp->x914);
                 }
             }
         }
