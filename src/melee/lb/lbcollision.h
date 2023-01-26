@@ -3,6 +3,7 @@
 
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
+#include <placeholder.h>
 #include <sysdolphin/baselib/jobj.h>
 
 struct HitVictim {
@@ -115,7 +116,7 @@ void HSD_JObjUnkMtxPtr(HSD_JObj*);
 bool func_80008248(bool, Hurtbox*, void*, f32, f32, f32);
 void func_80008440(Hitbox*);
 void func_80008434(Hitbox*);
-bool func_8000ACFC(HSD_GObj*, Hitbox*);
+bool func_8000ACFC(UNK_T, Hitbox*);
 void func_80008688();
 void func_800084FC();
 void func_80008820();

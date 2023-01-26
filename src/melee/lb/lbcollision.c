@@ -7,10 +7,10 @@
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/mtx/mtxvec.h>
-#include <m2c_macros.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
+#include <placeholder.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
@@ -5955,7 +5955,7 @@ lbl_8000ACDC:
 #pragma pop
 #endif
 
-bool func_8000ACFC(HSD_GObj* victim_gobj, Hitbox* hitbox)
+bool func_8000ACFC(UNK_T victim_gobj, Hitbox* hitbox)
 {
     HitVictim* victims = hitbox->victims_1;
     size_t const count = ARRAY_SIZE(hitbox->victims_1);
