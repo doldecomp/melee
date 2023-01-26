@@ -212,9 +212,9 @@ void func_8014919C(HSD_GObj* gobj)
     if (fp->x5F8 == 0) {
         attrs = (void*) fp->x2D4_specialAttributes;
         func_8007B1B8(gobj, &attrs->xC4, func_80149114);
-        fp->x221B_flag.bits.b3 = 1;
-        fp->x221B_flag.bits.b4 = 1;
-        fp->x221B_flag.bits.b2 = 1;
+        fp->x221B_b3 = 1;
+        fp->x221B_b4 = 1;
+        fp->x221B_b2 = 1;
     }
 }
 

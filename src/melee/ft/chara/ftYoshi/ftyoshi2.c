@@ -200,7 +200,7 @@ void lbl_8012C2F4(HSD_GObj* fighter_gobj)
     if (func_800925A4(fighter_gobj)) {
         spawnEffect(fighter_gobj);
     } else if (fp->x234C_stateVar4_s32 != 0 ||
-               (!(fp->x221B_flag.bits.b0 & 1) && !(fp->x2218_flag.bits.b3)))
+               (!(fp->x221B_b0 & 1) && !(fp->x2218_flag.bits.b3)))
     {
         func_80092BE8(fighter_gobj);
     } else {
@@ -461,7 +461,7 @@ void func_8012C850(HSD_GObj* fighter_gobj)
                                        lbl_804D9A2C);
     fp->x672_input_timer_counter = 254;
     fp->x221A_flag.bits.b7 = false;
-    fp->x221B_flag.bits.b0 = false;
+    fp->x221B_b0 = false;
     fp->x221C_flag.bits.b3 = true;
     fp->x221C_flag.bits.b1 = true;
     fp->x221C_flag.bits.b2 = true;

@@ -23,8 +23,8 @@ void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     func_800DD168(gobj_1);
     ft_1->x1A5C = gobj_2;
     ft_1->x1A58_interactedFighter = gobj_2;
-    ft_1->x221B_flag.bits.b5 = 0;
-    ft_1->x221B_flag.bits.b7 = 0;
+    ft_1->x221B_b5 = 0;
+    ft_1->x221B_b7 = 0;
     ft_1->facing_dir = ft_2->facing_dir;
     func_8007DBCC(ft_1, 0, func_800DA824(ft_2));
     func_800DB368(ft_2, ft_1);

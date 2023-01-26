@@ -1501,7 +1501,7 @@ struct Fighter {
     u8 filler_xDF4[0x1064 - 0xDF4];
     /* 0x1064 */ Hitbox x1064_thrownHitbox;
     /* 0x119C */ u8 x119C_teamUnk;
-    /* 0x119D */ u8 x119D;
+    /* 0x119D */ u8 grabber_unk1;
     /* 0x119E */ u8 x119E_hurtboxNum;
     /* 0x119F */ u8 x119F;
     /* 0x11A0 */ Hurtbox x11A0_fighterHurtbox[15];
@@ -1803,7 +1803,20 @@ struct Fighter {
     /* 0x2218 */ UnkFlagStruct x2218_flag;
     /* 0x2219 */ UnkFlagStruct x2219_flag;
     /* 0x221A */ UnkFlagStruct x221A_flag;
-    /* 0x221B */ UnkFlagStruct x221B_flag;
+    /* 0x221B */
+    union {
+        u8 x221B;
+        struct {
+            u8 x221B_b0 : 1;
+            u8 x221B_b1 : 1;
+            u8 x221B_b2 : 1;
+            u8 x221B_b3 : 1;
+            u8 x221B_b4 : 1;
+            u8 x221B_b5 : 1;
+            u8 x221B_b6 : 1;
+            u8 x221B_b7 : 1;
+        };
+    };
     /* 0x221C */
     union {
         struct {
@@ -1833,9 +1846,16 @@ struct Fighter {
     } x2220_flag;
     /* 0x2221 */ UnkFlagStruct x2221_flag;
     /* 0x2222 */ UnkFlagStruct x2222_flag;
-    /* 0x2224 */ UnkFlagStruct x2223_flag;
+    /* 0x2223 */ UnkFlagStruct x2223_flag;
     /* 0x2224 */ UnkFlagStruct x2224_flag;
-    /* 0x2224 */ UnkFlagStruct x2225_flag;
+    /* 0x2225 b0 */ u8 x2225_b0 : 1;
+    /* 0x2225 b1 */ u8 x2225_b1 : 1;
+    /* 0x2225 b2 */ u8 x2225_b2 : 1;
+    /* 0x2225 b3 */ u8 x2225_b3 : 1;
+    /* 0x2225 b4 */ u8 x2225_b4 : 1;
+    /* 0x2225 b5 */ u8 x2225_b5 : 1;
+    /* 0x2225 b6 */ u8 x2225_b6 : 1;
+    /* 0x2225 b7 */ u8 x2225_b7 : 1;
     /* 0x2226 */ UnkFlagStruct x2226_flag;
     /* 0x2227 */ UnkFlagStruct x2227_flag;
     /* 0x2228 */ struct { /// UnkFlagStruct does not quite work
