@@ -21,7 +21,11 @@ def main(obj_path: str) -> None:
         result = json.loads(result)
         current_score = int(result["current_score"])
         max_score = int(result["max_score"])
-        percent = round(100 * current_score / max_score, 2)
+
+        if current_score == 0:
+            continue
+
+        percent = 100 - round(100 * current_score / max_score, 2)
         entries.append((symbol, current_score, max_score, percent))
 
     entries.sort(key=lambda x: x[3], reverse=True)
