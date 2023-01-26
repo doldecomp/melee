@@ -3,6 +3,7 @@
 
 typedef struct Hurtbox Hurtbox;
 typedef struct Hitbox Hitbox;
+typedef struct HitVictim HitVictim;
 
 typedef enum Tangibility {
     Vulnerable,

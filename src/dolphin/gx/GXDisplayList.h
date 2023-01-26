@@ -5,6 +5,4 @@
 
 void GXCallDisplayList(s32, s32);
 
-void GXCallDisplayList(s32 arg0, s32 arg1);
-
 #endif

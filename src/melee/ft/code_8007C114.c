@@ -12,8 +12,6 @@ static f32 const lbl_804D8320 = 0.0F;
 static f32 const lbl_804D8324 = 1.0F;
 
 extern unk_t func_800C555C();
-extern void func_80008440(Hitbox*);
-extern unk_t func_800089B8();
 
 void func_8007C224(HSD_GObj* fighter_gobj);
 

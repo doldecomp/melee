@@ -14,6 +14,7 @@ EXTABINDEX_O_FILES :=\
 
 TEXT_O_FILES :=\
     $(BUILD_DIR)/src/melee/lb/lbcommand.c.o\
+    $(BUILD_DIR)/src/melee/lb/lbcollision.c.o\
     $(BUILD_DIR)/asm/melee/lb/lbcollision.s.o\
     $(BUILD_DIR)/src/melee/lb/lblanguage.c.o\
     $(BUILD_DIR)/src/melee/lb/lbtime.c.o\
