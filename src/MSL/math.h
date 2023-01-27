@@ -1,8 +1,8 @@
 #ifndef MSL_MATH_H
 #define MSL_MATH_H
 
-#define __HI(x) *(int*) &x
-#define __LO(x) *(1 + (int*) &x)
+#define MSL_HI(x) *(int*) &x
+#define MSL_LO(x) *(1 + (int*) &x)
 
 double frexp(double x, int* exponent);
 double fabsf__Ff(double);
