@@ -3078,8 +3078,8 @@ void Fighter_8006DA4C(HSD_GObj* fighter_gobj)
 
 void Fighter_Unload_8006DABC(void* user_data)
 {
-    // this doesnt use a GET_FIGHTER macro, but since it appears to pass it
-    // directly its probably just written directly.
+    /// @remarks This doesn't use #GET_FIGHTER, but since it appears to pass it
+    ///          directly it's probably just written directly.
     Fighter* fp = (Fighter*) (user_data);
     int kind = fp->x4_fighterKind;
 
