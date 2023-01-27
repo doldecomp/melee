@@ -10,6 +10,6 @@
 
 .global __ctors
 __ctors:
-	.4byte __init_cpp_exceptions
+    .4byte __init_cpp_exceptions
     .4byte __sinit_trigf_c
     .4byte NULL

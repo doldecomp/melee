@@ -33,6 +33,7 @@ src/m2ctx.py
 expected/
 dump/
 *.log
+tools/doxygen-awesome-css
 
 # Epilogue hack folder
 epilogue/

@@ -1,5 +1,11 @@
 #include <melee/ft/chara/ftDrMario/ftdrmario.h>
 
+#include <melee/ft/chara/ftMario/ftmario.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/it/code_8027CF30.h>
+#include <melee/lb/lbunknown_001.h>
+
 void func_80149954(HSD_GObj* gobj)
 {
     Vec3 sp18;
@@ -11,7 +17,7 @@ void func_80149954(HSD_GObj* gobj)
     if (fp->x2200_ftcmd_var0 == 1 && fp->sa.mario.x2240 == 0U) {
         func_8000B1CC(fp->x5E8_fighterBones->x0_jobj, 0, &sp18);
         tmp = ftMario_SpecialN_VitaminRandom(gobj);
-        tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->x2C_facing_direction);
+        tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
         fp->sa.mario.x2240 = tmp;
         if (tmp != 0) {
             fp->cb.x21E4_callback_OnDeath2 = func_80149540;
@@ -20,7 +26,7 @@ void func_80149954(HSD_GObj* gobj)
     } else if (fp->x2200_ftcmd_var0 == 2) {
         func_801497CC(gobj);
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         if (gobj != NULL) {
             fp = gobj->user_data;
             if (fp != NULL && fp->sa.mario.x2240 != 0) {

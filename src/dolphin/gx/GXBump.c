@@ -1,11 +1,16 @@
+#include <dolphin/gx/GXBump.h>
+
 #include <common_structs.h>
 #include <dolphin/gx/__GXInit.h>
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
 
 static Vec2 const lbl_804DE290 = { 1024.0F, 0.0F };
 
 // https://decomp.me/scratch/nTyRU // 1150 (70.51%)
 #pragma push
-asm unk_t GXSetTevIndirect()
+asm void GXSetTevIndirect(s32, s32, u8, s32, s32, s32, s32, s32)
 { // clang-format off
     nofralloc
 /* 8033F758 0033C338  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -46,13 +51,16 @@ asm unk_t GXSetTevIndirect()
 /* 8033F7E4 0033C3C4  38 00 00 00 */	li r0, 0
 /* 8033F7E8 0033C3C8  38 21 00 28 */	addi r1, r1, 0x28
 /* 8033F7EC 0033C3CC  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033F7F0 0033C3D0  4E 80 00 20 */	blr 
+/* 8033F7F0 0033C3D0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/ctXNh
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXSetIndTexMtx()
+asm void GXSetIndTexMtx(s32, unk_t, s32)
 { // clang-format off
     nofralloc
 /* 8033F7F4 0033C3D4  2C 03 00 08 */	cmpwi r3, 8
@@ -148,13 +156,17 @@ lbl_8033F844:
 /* 8033F944 0033C524  50 A4 C0 0E */	rlwimi r4, r5, 0x18, 0, 7
 /* 8033F948 0033C528  90 89 80 00 */	stw r4, -0x8000(r9)
 /* 8033F94C 0033C52C  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033F950 0033C530  4E 80 00 20 */	blr 
+/* 8033F950 0033C530  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#endif
+
+#ifdef MWERKS_GEKKO
+
 // https://decomp.me/scratch/VEhb9 // 355 (96.97%)
 #pragma push
-asm unk_t GXSetIndTexCoordScale()
+asm void GXSetIndTexCoordScale(s32, s32, s32)
 { // clang-format off
     nofralloc
 /* 8033F954 0033C534  2C 03 00 02 */	cmpwi r3, 2
@@ -279,13 +291,16 @@ lbl_8033FB18:
 /* 8033FB18 0033C6F8  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 8033FB1C 0033C6FC  38 00 00 00 */	li r0, 0
 /* 8033FB20 0033C700  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033FB24 0033C704  4E 80 00 20 */	blr 
+/* 8033FB24 0033C704  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/Zyr7j
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXSetIndTexOrder()
+asm void GXSetIndTexOrder(s32, s32, s32)
 { // clang-format off
     nofralloc
 /* 8033FB28 0033C708  2C 03 00 02 */	cmpwi r3, 2
@@ -371,19 +386,24 @@ lbl_8033FC2C:
 /* 8033FC50 0033C830  90 64 04 F0 */	stw r3, 0x4f0(r4)
 /* 8033FC54 0033C834  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 8033FC58 0033C838  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033FC5C 0033C83C  4E 80 00 20 */	blr 
+/* 8033FC5C 0033C83C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#endif
+
 void GXSetNumIndStages(s32 arg0)
 {
-    __GXContexts.main->x204 = __GXContexts.main->x204 & 0xFFF8FFFF | arg0 << 0x10 & 0xFF0000;
+    __GXContexts.main->x204 =
+        (__GXContexts.main->x204 & 0xFFF8FFFF) | (arg0 << 0x10 & 0xFF0000);
     __GXContexts.main->x4F0_flags |= 6;
 }
 
+#ifdef MWERKS_GEKKO
+
 // https://decomp.me/scratch/aRJcf // 362 (79.89%)
 #pragma push
-asm unk_t GXSetTevDirect()
+asm void GXSetTevDirect(void)
 { // clang-format off
     nofralloc
 /* 8033FC8C 0033C86C  7C 08 02 A6 */	mflr r0
@@ -403,12 +423,16 @@ asm unk_t GXSetTevDirect()
 /* 8033FCC4 0033C8A4  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8033FCC8 0033C8A8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8033FCCC 0033C8AC  7C 08 03 A6 */	mtlr r0
-/* 8033FCD0 0033C8B0  4E 80 00 20 */	blr 
+/* 8033FCD0 0033C8B0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __GXUpdateBPMask()
+asm void __GXUpdateBPMask(void)
 { // clang-format off
     nofralloc
 /* 8033FCD4 0033C8B4  80 6D A5 08 */	lwz r3, __GXContexts(r13)
@@ -457,7 +481,7 @@ lbl_8033FD5C:
 /* 8033FD60 0033C940  80 63 01 24 */	lwz r3, 0x124(r3)
 /* 8033FD64 0033C944  54 60 06 3E */	clrlwi r0, r3, 0x18
 /* 8033FD68 0033C948  7C 00 30 40 */	cmplw r0, r6
-/* 8033FD6C 0033C94C  4D 82 00 20 */	beqlr 
+/* 8033FD6C 0033C94C  4D 82 00 20 */	beqlr
 /* 8033FD70 0033C950  54 60 00 2E */	rlwinm r0, r3, 0, 0, 0x17
 /* 8033FD74 0033C954  7C 00 33 78 */	or r0, r0, r6
 /* 8033FD78 0033C958  90 04 00 00 */	stw r0, 0(r4)
@@ -469,9 +493,11 @@ lbl_8033FD5C:
 /* 8033FD90 0033C970  80 64 01 24 */	lwz r3, 0x124(r4)
 /* 8033FD94 0033C974  90 65 80 00 */	stw r3, -0x8000(r5)
 /* 8033FD98 0033C978  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033FD9C 0033C97C  4E 80 00 20 */	blr 
+/* 8033FD9C 0033C97C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#endif
 
 void __GXFlushTextureState(void)
 {

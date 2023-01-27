@@ -24,7 +24,7 @@ PSMTXMUltiVec:
 /* 80342AEC 0033F6CC  10 A3 20 7A */	ps_madd f5, f3, f1, f4
 /* 80342AF0 0033F6D0  10 C5 29 94 */	ps_sum0 f6, f5, f6, f5
 /* 80342AF4 0033F6D4  F0 C5 80 08 */	psq_st f6, 8(r5), 1, qr0
-/* 80342AF8 0033F6D8  4E 80 00 20 */	blr 
+/* 80342AF8 0033F6D8  4E 80 00 20 */	blr
 
 .global PSMTXMultVecSR
 PSMTXMultVecSR:
@@ -48,4 +48,4 @@ PSMTXMultVecSR:
 /* 80342B40 0033F720  F1 65 80 04 */	psq_st f11, 4(r5), 1, qr0
 /* 80342B44 0033F724  11 A5 61 FA */	ps_madd f13, f5, f7, f12
 /* 80342B48 0033F728  F1 A5 80 08 */	psq_st f13, 8(r5), 1, qr0
-/* 80342B4C 0033F72C  4E 80 00 20 */	blr 
+/* 80342B4C 0033F72C  4E 80 00 20 */	blr

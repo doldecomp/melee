@@ -1,8 +1,11 @@
-#include <dolphin/types.h>
+#include <dolphin/os/OSUartExi.h>
+
+#include <placeholder.h>
+#include <Runtime/platform.h>
 
 static u32 Enabled[2];
 
-extern s32 OSGetConsoleType();
+extern s32 OSGetConsoleType(void);
 
 s32 InitializeUART(void)
 {
@@ -19,15 +22,17 @@ s32 ReadUARTN(void)
     return 4;
 }
 
-extern unk_t EXIUnlock();
-extern unk_t EXIDeselect();
-extern unk_t EXISync();
-extern unk_t EXIImm();
-extern unk_t EXILock();
-extern unk_t EXISelect();
+#ifdef MWERKS_GEKKO
+
+extern unk_t EXIUnlock(void);
+extern unk_t EXIDeselect(void);
+extern unk_t EXISync(void);
+extern unk_t EXIImm(void);
+extern unk_t EXILock(void);
+extern unk_t EXISelect(void);
 
 #pragma push
-asm unk_t WriteUARTN()
+asm void WriteUARTN(void)
 { // clang-format off
     nofralloc
 /* 8034C8BC 0034949C  7C 08 02 A6 */	mflr r0
@@ -177,6 +182,15 @@ lbl_8034CAA8:
 /* 8034CAAC 0034968C  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8034CAB0 00349690  38 21 00 30 */	addi r1, r1, 0x30
 /* 8034CAB4 00349694  7C 08 03 A6 */	mtlr r0
-/* 8034CAB8 00349698  4E 80 00 20 */	blr 
+/* 8034CAB8 00349698  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void WriteUARTN(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

@@ -1,9 +1,13 @@
+#include <melee/ft/ftdrawcommon.h>
+
 #include <dolphin/mtx.h>
-#include <dolphin/types.h>
+#include <dolphin/mtx/mtxvec.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftlib.h>
+#include <placeholder.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -21,30 +25,29 @@ extern f32 lbl_804D8368;
 extern s32 lbl_804D836C[1];
 extern s32 lbl_804D8370[2];
 
-extern unk_t func_800750C8();
-extern unk_t func_8009F7F8();
-extern unk_t func_800C8AF0();
-extern unk_t HSD_JObjDispAll();
-extern unk_t func_8009F5AC();
-extern unk_t func_80369808();
-extern unk_t func_800310B8();
-extern unk_t func_80031060();
-extern unk_t func_800C2600();
-extern unk_t func_8000A1A8();
-extern unk_t func_8000A044();
-extern unk_t func_8001E2F8();
-extern unk_t func_80014770();
-extern unk_t func_800B395C();
-extern unk_t func_800117F4();
-extern unk_t func_8000A460();
-extern unk_t func_8000A78C();
-extern unk_t func_8000AB2C();
-extern unk_t func_8000A95C();
-extern unk_t func_8000A244();
-extern unk_t func_8000A584();
-extern unk_t func_80009F54();
+extern void func_800750C8(void);
+extern void func_8009F7F8(void);
+extern void func_800C8AF0(void);
+extern void func_8009F5AC(void);
+extern void func_80369808(void);
+extern void func_800310B8(void);
+extern void func_80031060(void);
+extern void func_800C2600(void);
+extern void func_8000A1A8(void);
+extern void func_8000A044(void);
+extern void func_8001E2F8(void);
+extern void func_80014770(void);
+extern void func_800B395C(void);
+extern void func_800117F4(void);
+extern void func_8000A460(void);
+extern void func_8000A78C(void);
+extern void func_8000AB2C(void);
+extern void func_8000A95C(void);
+extern void func_8000A244(void);
+extern void func_8000A584(void);
+extern void func_80009F54(void);
 
-static inline mtx_thing(MtxPtr mtx, Vec* ptr, f32 val, f32 val2)
+static inline void mtx_thing(MtxPtr mtx, Vec3* ptr, f32 val, f32 val2)
 {
     mtx[0][3] = ptr->x + val;
     mtx[1][3] = ptr->y + val;
@@ -53,15 +56,24 @@ static inline mtx_thing(MtxPtr mtx, Vec* ptr, f32 val, f32 val2)
 
 MtxPtr func_8008051C(HSD_GObj* arg1, MtxPtr arg2)
 {
-    u8 pad2[0x4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused0[0x4];
+#endif
 
-    Vec sp54;
+    Vec3 sp54;
 
-    u8 pad1[0xC];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused1[0xC];
+#endif
 
     Mtx sp18;
 
-    u8 pad0[0x8];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused2[0x8];
+#endif
 
     f32 temp_f31;
     f32 temp_f0;
@@ -72,6 +84,7 @@ MtxPtr func_8008051C(HSD_GObj* arg1, MtxPtr arg2)
     sp54.z = temp_f31;
     sp54.y = temp_f31;
     sp54.x = temp_f31;
+
     if (func_80087074(arg1, &sp54)) {
         temp_r31 = HSD_CObjGetCurrent()->view_mtx;
         PSMTXIdentity(sp18);
@@ -84,217 +97,10 @@ MtxPtr func_8008051C(HSD_GObj* arg1, MtxPtr arg2)
     return NULL;
 }
 
-#ifdef NON_MATCHING
-
-// https://decomp.me/scratch/wbs6Q // 7183 (82.39%)
-void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
-{
-    u8 padding2[0x4];
-
-    Mtx sp78;
-    Mtx sp48;
-
-    u8 padding1[0xC];
-
-    Vec sp30;
-
-    u8 padding0[0x14];
-
-    s32 spA8;
-    s32 spAC;
-    f32 temp_f0;
-    f32 temp_f31;
-    Vec* temp_r4;
-    MtxPtr temp_r29;
-    s32 fighter_2;
-    u32 temp_r25;
-
-    void* fighter0;
-
-    itPickup* temp_r24;
-    Fighter* fighter;
-    Fighter* phi_r26;
-    u32 phi_r25;
-
-    u32 phi_r24;
-
-    u32 phi_r30;
-    MtxPtr phi_r29;
-
-    fighter = gobj->user_data;
-    phi_r30 = 0U;
-    phi_r30 = 0U;
-    if (fighter->x21FC_flag.bits.b6 != 0) {
-        phi_r26 = fighter + 0x138 * 0;
-        phi_r25 = 0U;
-        do {
-            if (func_80009F54(&phi_r26->x914, arg1, fighter->x34_scale.y) != 0) {
-                phi_r30 = 1U;
-            }
-            temp_r25 = phi_r25 + 1;
-            phi_r26 = phi_r26 + 0x138;
-            phi_r25 = temp_r25;
-            phi_r30 = phi_r30;
-        } while (temp_r25 < 4U);
-        if (fighter->x221D_flag.bits.b6 != 0) {
-            phi_r26 = fighter + (0U * 0x4C);
-            phi_r30 = phi_r30;
-            while (phi_r25 < fighter->x119E_hurtboxNum) {
-                if (func_8000A584(phi_r26->x11A0_fighterHurtbox, 1, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0) {
-                    phi_r30 = 1U;
-                }
-                phi_r25 += 1;
-                phi_r26 = phi_r26 + 0x4C;
-            }
-        } else {
-            fighter_2 = fighter->x1988;
-            if ((fighter_2 == 0) && ((s32) fighter->x198C == 0)) {
-                phi_r26 = fighter;
-                phi_r30 = phi_r30;
-                while (phi_r25 <  fighter->x119E_hurtboxNum) {
-                    if (func_8000A244(phi_r26->x11A0_fighterHurtbox, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0) {
-                        phi_r30 = 1U;
-                    }
-                    phi_r25 += 1;
-                    phi_r26 += 0x4C;
-                }
-            } else {
-                if ((fighter->x198C == 2) || (fighter_2 == 2)) {
-                    phi_r24 = 2;
-                } else {
-                    phi_r24 = 1;
-                }
-                phi_r26 = fighter;
-                phi_r30 = phi_r30;
-                while (phi_r25 < fighter->x119E_hurtboxNum) {
-                    if (func_8000A584(phi_r26->x11A0_fighterHurtbox, phi_r24, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0) {
-                        phi_r30 = 1U;
-                    }
-                    phi_r25 += 1;
-                    phi_r26 += 0x4C;
-                }
-            }
-        }
-        if ((fighter->x2218_flag.bits.b3 != 0) && (func_8000A95C(fighter + 0x19E4, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0)) {
-            phi_r30 = 1U;
-        }
-        if ((fighter->x2218_flag.bits.b6 != 0) && (func_8000AB2C(fighter + 0x1A08, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0)) {
-            phi_r30 = 1U;
-        }
-        if ((fighter->x221B_flag.bits.b0 != 0) && (func_8000A78C(fighter + 0x19C0, arg1, func_8007F804(fighter), fighter->xB0_pos.z) != 0)) {
-            phi_r30 = 1U;
-        }
-    }
-    phi_r30 = phi_r30;
-    if (fighter->x21FC_flag.bits.b5 != 0) {
-        phi_r25 = 0U;
-        phi_r26 = fighter;
-        phi_r25 = 0U;
-        while (phi_r25 < (u8) fighter->x166C) {
-            if (func_8000A460(&phi_r26->x1670, arg1) != 0) {
-                phi_r30 = 1U;
-            }
-            phi_r25 += 1;
-            phi_r26 += 0x28;
-        }
-        phi_r26 = fighter;
-        while (phi_r25 < fighter->x3E0) {
-            spAC = 0.0f; // lbl_804D836C; //change to actual label
-            spA8 = 0.0f; // lbl_804D8370; //change to actual label
-            if (func_800117F4(&phi_r26->x2F4, &spAC, &spA8, phi_r26->x3E0, arg1) != 0) {
-                phi_r30 = 1U;
-            }
-            phi_r25 += 1;
-            phi_r26 += 0x18;
-        }
-    }
-    if ((fighter->x21FC_flag.bits.b3 != 0) && (func_800B395C(gobj, arg1) != 0)) {
-        phi_r30 = 1U;
-    }
-    if ((fighter->x21FC_flag.bits.b4 != 0) && (fighter->x2223_flag.bits.b5 != 0) && (func_80014770(fighter + 0x1930, arg1) != 0)) {
-        phi_r30 = 1U;
-    }
-    if (fighter->x21FC_flag.bits.b3 != 0) {
-        temp_r24 = &fighter->x294_itPickup;
-        if (fighter->xE0_ground_or_air == GA_Ground) {
-            if (func_8001E2F8(&temp_r24->x0_ground_light_offset, &fighter->xB0_pos, &lbl_804D3A88, arg1, fighter->x2C_facing_direction) != 0) {
-                phi_r30 = 1U;
-            }
-            if (func_8001E2F8(&temp_r24->x10_ground_heavy_offset, &fighter->xB0_pos, &lbl_804D3A90, arg1, fighter->x2C_facing_direction) != 0) {
-                phi_r30 = 1U;
-            }
-        } else if (func_8001E2F8(&temp_r24->x20_air_light_offset, &fighter->xB0_pos, &lbl_804D3A8C, arg1, fighter->x2C_facing_direction) != 0) {
-            phi_r30 = 1U;
-        }
-    }
-    if ((fighter->x21FC_flag.bits.b2 != 0) && (fighter->x2227_flag.bits.b2 == 0) && (func_8000A044(&fighter->x1064_thrownHitbox, arg1, fighter->x34_scale.y) != 0)) {
-        phi_r30 = 1U;
-    }
-    if ((fighter->x21FC_flag.bits.b0 != 0) && (fighter->x2229_b4 == 0)) {
-        phi_r26 = fighter + (0U * 0x2C);
-        phi_r25 = 0U;
-        do {
-            if (func_8000A1A8(&phi_r26->x1614, arg1, fighter->x34_scale.y) != 0) {
-                phi_r30 = 1U;
-            }
-            temp_r25 = phi_r25 + 1;
-            phi_r26 += 0x2C;
-            phi_r25 = temp_r25;
-        } while (temp_r25 < 2U);
-    }
-    if (phi_r30 != 0U) {
-        HSD_StateInvalidate(-1);
-    }
-    if (fighter->x21FC_flag.bits.b7 != 0) {
-        if ((fighter->x221E_flag.bits.b0 == 0) && (fighter->x221E_flag.bits.b5 == 0) && (arg2 != 0)) {
-            func_800750C8(fighter, 1, 0);
-            func_800750C8(fighter, 4, 0);
-            if ((fighter->x2223_flag.bits.b7 != 0) || (fighter->x2226_flag.bits.b5 != 0) || (fighter->x2227_flag.bits.b3 != 0)) {
-                func_800750C8(fighter, 0, 0);
-                func_800750C8(fighter, 2, 1);
-            } else {
-                func_800750C8(fighter, 2, 0);
-                func_800750C8(fighter, 0, 1);
-            }
-            func_8009F5AC(fighter);
-            fighter->x2223_flag.bits.b2 = 0;
-            temp_r4 = &sp30;
-            fighter->x2227_flag.bits.b7 = 1;
-            fighter->x2228_flag.bits.b0 = 0;
-            temp_f31 = temp_f0 = 0.0f;
-            sp30.z = temp_f31;
-            sp30.y = temp_f31;
-            sp30.x = temp_f31;
-            phi_r29 = NULL;
-            if (func_80087074(gobj, temp_r4) != 0) {
-                temp_r29 = HSD_CObjGetCurrent()->view_mtx;
-
-                PSMTXIdentity(sp48);
-
-                mtx_thing(sp48, &sp30, temp_f31, temp_f0);
-
-                PSMTXConcat(temp_r29, sp48, sp78);
-                phi_r29 = sp78;
-            }
-            fighter0 = gobj->hsd_obj;
-            HSD_JObjDispAll(fighter0, phi_r29, func_80390EB8(arg1), 0);
-            if (lbl_803C20CC[fighter->x4_fighterKind] != NULL) {
-                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1, (MtxPtr) phi_r29);
-            }
-            func_800C8AF0(fighter);
-            func_8009F7F8(fighter);
-        }
-        if ((u32) fighter->x20A0_accessory != 0U) {
-            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1), 0);
-        }
-        func_800C2600(gobj, arg1);
-    }
-}
-
-#else
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t func_800805C8()
+asm void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 { // clang-format off
     nofralloc
 /* 800805C8 0007D1A8  7C 08 02 A6 */	mflr r0
@@ -722,7 +528,7 @@ lbl_80080B74:
 /* 80080BBC 0007D79C  38 7B 00 00 */	addi r3, r27, 0
 /* 80080BC0 0007D7A0  38 9C 00 00 */	addi r4, r28, 0
 /* 80080BC4 0007D7A4  38 B8 00 00 */	addi r5, r24, 0
-/* 80080BC8 0007D7A8  4E 80 00 21 */	blrl 
+/* 80080BC8 0007D7A8  4E 80 00 21 */	blrl
 lbl_80080BCC:
 /* 80080BCC 0007D7AC  7F E3 FB 78 */	mr r3, r31
 /* 80080BD0 0007D7B0  48 04 7F 21 */	bl func_800C8AF0
@@ -749,86 +555,276 @@ lbl_80080C10:
 /* 80080C18 0007D7F8  CB E1 00 D0 */	lfd f31, 0xd0(r1)
 /* 80080C1C 0007D7FC  38 21 00 D8 */	addi r1, r1, 0xd8
 /* 80080C20 0007D800  7C 08 03 A6 */	mtlr r0
-/* 80080C24 0007D804  4E 80 00 20 */	blr 
+/* 80080C24 0007D804  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-#endif
+#elif false
 
-#ifdef NON_MATCHING
-
-// https://decomp.me/scratch/sjQ3z // 155 (98.75%) @permuter
-void func_80080C28(HSD_GObj* gobj, s32 arg1)
+// https://decomp.me/scratch/wbs6Q // 7183 (82.39%)
+void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 {
-    MtxPtr temp_r28;
-    f32 temp_f31;
+    u8 padding2[0x4];
+
+    Mtx sp78;
+    Mtx sp48;
+
+    u8 padding1[0xC];
+
+    Vec3 sp30;
+
+    u8 padding0[0x14];
+
+    s32 spA8;
+    s32 spAC;
     f32 temp_f0;
+    f32 temp_f31;
+    Vec3* temp_r4;
+    MtxPtr temp_r29;
+    s32 fighter_2;
+    u32 temp_r25;
 
-    Mtx sp70;
-    Mtx sp40;
+    void* fighter0;
 
-    u8 pad0[0xC];
-
-    Vec sp30;
-
+    itPickup* temp_r24;
     Fighter* fighter;
+    Fighter* phi_r26;
+    u32 phi_r25;
 
-    MtxPtr phi_r28;
-    void* temp_r27;
+    u32 phi_r24;
 
-    u8 pad1[0x18];
+    u32 phi_r30;
+    MtxPtr phi_r29;
 
     fighter = gobj->user_data;
-    if (fighter->x21FC_flag.bits.b7 != 0) {
-        if ((fighter->x221E_flag.bits.b0 == 0) && (fighter->x221E_flag.bits.b5 == 0) && (fighter->x2226_flag.bits.b5 == 0)) {
-            func_8009F5AC(fighter);
-            if (fighter->x5BC != 0U) {
-                func_800750C8(fighter, 0, 0);
-                func_800750C8(fighter, 2, 0);
-                func_800750C8(fighter, 4, 0);
-                func_800750C8(fighter, 1, 1);
+    phi_r30 = 0U;
+    phi_r30 = 0U;
+    if (fighter->x21FC_flag.bits.b6 != 0) {
+        phi_r26 = fighter + 0x138 * 0;
+        phi_r25 = 0U;
+        do {
+            if (func_80009F54(&phi_r26->x914, arg1, fighter->x34_scale.y) != 0)
+            {
+                phi_r30 = 1U;
             }
-
-            phi_r28 = NULL;
-
+            temp_r25 = phi_r25 + 1;
+            phi_r26 = phi_r26 + 0x138;
+            phi_r25 = temp_r25;
+            phi_r30 = phi_r30;
+        } while (temp_r25 < 4U);
+        if (fighter->x221D_flag.bits.b6 != 0) {
+            phi_r26 = fighter + (0U * 0x4C);
+            phi_r30 = phi_r30;
+            while (phi_r25 < fighter->x119E_hurtboxNum) {
+                if (func_8000A584(phi_r26->x11A0_fighterHurtbox, 1, arg1,
+                                  func_8007F804(fighter),
+                                  fighter->xB0_pos.z) != 0)
+                {
+                    phi_r30 = 1U;
+                }
+                phi_r25 += 1;
+                phi_r26 = phi_r26 + 0x4C;
+            }
+        } else {
+            fighter_2 = fighter->x1988;
+            if ((fighter_2 == 0) && ((s32) fighter->x198C == 0)) {
+                phi_r26 = fighter;
+                phi_r30 = phi_r30;
+                while (phi_r25 < fighter->x119E_hurtboxNum) {
+                    if (func_8000A244(phi_r26->x11A0_fighterHurtbox, arg1,
+                                      func_8007F804(fighter),
+                                      fighter->xB0_pos.z) != 0)
+                    {
+                        phi_r30 = 1U;
+                    }
+                    phi_r25 += 1;
+                    phi_r26 += 0x4C;
+                }
+            } else {
+                if ((fighter->x198C == 2) || (fighter_2 == 2)) {
+                    phi_r24 = 2;
+                } else {
+                    phi_r24 = 1;
+                }
+                phi_r26 = fighter;
+                phi_r30 = phi_r30;
+                while (phi_r25 < fighter->x119E_hurtboxNum) {
+                    if (func_8000A584(phi_r26->x11A0_fighterHurtbox, phi_r24,
+                                      arg1, func_8007F804(fighter),
+                                      fighter->xB0_pos.z) != 0)
+                    {
+                        phi_r30 = 1U;
+                    }
+                    phi_r25 += 1;
+                    phi_r26 += 0x4C;
+                }
+            }
+        }
+        if ((fighter->x2218_flag.bits.b3 != 0) &&
+            (func_8000A95C(fighter + 0x19E4, arg1, func_8007F804(fighter),
+                           fighter->xB0_pos.z) != 0))
+        {
+            phi_r30 = 1U;
+        }
+        if ((fighter->x2218_flag.bits.b6 != 0) &&
+            (func_8000AB2C(fighter + 0x1A08, arg1, func_8007F804(fighter),
+                           fighter->xB0_pos.z) != 0))
+        {
+            phi_r30 = 1U;
+        }
+        if ((fighter->x221B_flag.bits.b0 != 0) &&
+            (func_8000A78C(fighter + 0x19C0, arg1, func_8007F804(fighter),
+                           fighter->xB0_pos.z) != 0))
+        {
+            phi_r30 = 1U;
+        }
+    }
+    phi_r30 = phi_r30;
+    if (fighter->x21FC_flag.bits.b5 != 0) {
+        phi_r25 = 0U;
+        phi_r26 = fighter;
+        phi_r25 = 0U;
+        while (phi_r25 < (u8) fighter->x166C) {
+            if (func_8000A460(&phi_r26->x1670, arg1) != 0) {
+                phi_r30 = 1U;
+            }
+            phi_r25 += 1;
+            phi_r26 += 0x28;
+        }
+        phi_r26 = fighter;
+        while (phi_r25 < fighter->x3E0) {
+            spAC = 0.0f; // lbl_804D836C; //change to actual label
+            spA8 = 0.0f; // lbl_804D8370; //change to actual label
+            if (func_800117F4(&phi_r26->x2F4, &spAC, &spA8, phi_r26->x3E0,
+                              arg1) != 0)
+            {
+                phi_r30 = 1U;
+            }
+            phi_r25 += 1;
+            phi_r26 += 0x18;
+        }
+    }
+    if ((fighter->x21FC_flag.bits.b3 != 0) && (func_800B395C(gobj, arg1) != 0))
+    {
+        phi_r30 = 1U;
+    }
+    if ((fighter->x21FC_flag.bits.b4 != 0) &&
+        (fighter->x2223_flag.bits.b5 != 0) &&
+        (func_80014770(fighter + 0x1930, arg1) != 0))
+    {
+        phi_r30 = 1U;
+    }
+    if (fighter->x21FC_flag.bits.b3 != 0) {
+        temp_r24 = &fighter->x294_itPickup;
+        if (fighter->xE0_ground_or_air == GA_Ground) {
+            if (func_8001E2F8(&temp_r24->x0_ground_light_offset,
+                              &fighter->xB0_pos, &lbl_804D3A88, arg1,
+                              fighter->facing_dir) != 0)
+            {
+                phi_r30 = 1U;
+            }
+            if (func_8001E2F8(&temp_r24->x10_ground_heavy_offset,
+                              &fighter->xB0_pos, &lbl_804D3A90, arg1,
+                              fighter->facing_dir) != 0)
+            {
+                phi_r30 = 1U;
+            }
+        } else if (func_8001E2F8(&temp_r24->x20_air_light_offset,
+                                 &fighter->xB0_pos, &lbl_804D3A8C, arg1,
+                                 fighter->facing_dir) != 0)
+        {
+            phi_r30 = 1U;
+        }
+    }
+    if ((fighter->x21FC_flag.bits.b2 != 0) &&
+        (fighter->x2227_flag.bits.b2 == 0) &&
+        (func_8000A044(&fighter->x1064_thrownHitbox, arg1,
+                       fighter->x34_scale.y) != 0))
+    {
+        phi_r30 = 1U;
+    }
+    if ((fighter->x21FC_flag.bits.b0 != 0) && (fighter->x2229_b4 == 0)) {
+        phi_r26 = fighter + (0U * 0x2C);
+        phi_r25 = 0U;
+        do {
+            if (func_8000A1A8(&phi_r26->x1614, arg1, fighter->x34_scale.y) != 0)
+            {
+                phi_r30 = 1U;
+            }
+            temp_r25 = phi_r25 + 1;
+            phi_r26 += 0x2C;
+            phi_r25 = temp_r25;
+        } while (temp_r25 < 2U);
+    }
+    if (phi_r30 != 0U) {
+        HSD_StateInvalidate(-1);
+    }
+    if (fighter->x21FC_flag.bits.b7 != 0) {
+        if ((fighter->x221E_flag.bits.b0 == 0) &&
+            (fighter->x221E_flag.bits.b5 == 0) && (arg2 != 0))
+        {
+            func_800750C8(fighter, 1, 0);
+            func_800750C8(fighter, 4, 0);
+            if ((fighter->x2223_flag.bits.b7 != 0) ||
+                (fighter->x2226_flag.bits.b5 != 0) ||
+                (fighter->x2227_flag.bits.b3 != 0))
+            {
+                func_800750C8(fighter, 0, 0);
+                func_800750C8(fighter, 2, 1);
+            } else {
+                func_800750C8(fighter, 2, 0);
+                func_800750C8(fighter, 0, 1);
+            }
+            func_8009F5AC(fighter);
             fighter->x2223_flag.bits.b2 = 0;
-            fighter->x2223_flag.bits.b3 = 0;
-            fighter->x2227_flag.bits.b7 = 0;
-            fighter->x2228_flag.bits.b0 = 1;
-
+            temp_r4 = &sp30;
+            fighter->x2227_flag.bits.b7 = 1;
+            fighter->x2228_flag.bits.b0 = 0;
             temp_f31 = temp_f0 = 0.0f;
             sp30.z = temp_f31;
             sp30.y = temp_f31;
             sp30.x = temp_f31;
+            phi_r29 = NULL;
+            if (func_80087074(gobj, temp_r4) != 0) {
+                temp_r29 = HSD_CObjGetCurrent()->view_mtx;
 
-            if (func_80087074(gobj, &sp30) != 0) {
-                temp_r28 = HSD_CObjGetCurrent()->view_mtx;
-                PSMTXIdentity(sp40);
+                PSMTXIdentity(sp48);
 
-                mtx_thing(sp40, &sp30, temp_f31, temp_f0);
+                mtx_thing(sp48, &sp30, temp_f31, temp_f0);
 
-                PSMTXConcat(temp_r28, sp40, sp70);
-                phi_r28 = sp70;
+                PSMTXConcat(temp_r29, sp48, sp78);
+                phi_r29 = sp78;
             }
-
-            temp_r27 = gobj->hsd_obj;
-            HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, func_80390EB8(arg1), 0);
+            fighter0 = gobj->hsd_obj;
+            HSD_JObjDispAll(fighter0, phi_r29, func_80390EB8(arg1), 0);
             if (lbl_803C20CC[fighter->x4_fighterKind] != NULL) {
-                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1, (MtxPtr) phi_r28);
+                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1,
+                                                      (MtxPtr) phi_r29);
             }
             func_800C8AF0(fighter);
             func_8009F7F8(fighter);
         }
-        if (fighter->x20A0_accessory != NULL) {
-            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1), 0);
+        if ((u32) fighter->x20A0_accessory != 0U) {
+            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1),
+                            0);
         }
+        func_800C2600(gobj, arg1);
     }
 }
 
 #else
 
+void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80080C28()
+asm void func_80080C28(void)
 { // clang-format off
     nofralloc
 /* 80080C28 0007D808  7C 08 02 A6 */	mflr r0
@@ -936,7 +932,7 @@ lbl_80080D74:
 /* 80080DB8 0007D998  38 7D 00 00 */	addi r3, r29, 0
 /* 80080DBC 0007D99C  38 9E 00 00 */	addi r4, r30, 0
 /* 80080DC0 0007D9A0  38 BC 00 00 */	addi r5, r28, 0
-/* 80080DC4 0007D9A4  4E 80 00 21 */	blrl 
+/* 80080DC4 0007D9A4  4E 80 00 21 */	blrl
 lbl_80080DC8:
 /* 80080DC8 0007D9A8  7F E3 FB 78 */	mr r3, r31
 /* 80080DCC 0007D9AC  48 04 7D 25 */	bl func_800C8AF0
@@ -959,14 +955,98 @@ lbl_80080E00:
 /* 80080E08 0007D9E8  CB E1 00 B8 */	lfd f31, 0xb8(r1)
 /* 80080E0C 0007D9EC  38 21 00 C0 */	addi r1, r1, 0xc0
 /* 80080E10 0007D9F0  7C 08 03 A6 */	mtlr r0
-/* 80080E14 0007D9F4  4E 80 00 20 */	blr 
+/* 80080E14 0007D9F4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#elif false
+
+// https://decomp.me/scratch/sjQ3z // 155 (98.75%) @permuter
+void func_80080C28(HSD_GObj* gobj, s32 arg1)
+{
+    MtxPtr temp_r28;
+    f32 temp_f31;
+    f32 temp_f0;
+
+    Mtx sp70;
+    Mtx sp40;
+
+    u8 pad0[0xC];
+
+    Vec3 sp30;
+
+    Fighter* fighter;
+
+    MtxPtr phi_r28;
+    void* temp_r27;
+
+    u8 pad1[0x18];
+
+    fighter = gobj->user_data;
+    if (fighter->x21FC_flag.bits.b7 != 0) {
+        if ((fighter->x221E_flag.bits.b0 == 0) &&
+            (fighter->x221E_flag.bits.b5 == 0) &&
+            (fighter->x2226_flag.bits.b5 == 0))
+        {
+            func_8009F5AC(fighter);
+            if (fighter->x5BC != 0U) {
+                func_800750C8(fighter, 0, 0);
+                func_800750C8(fighter, 2, 0);
+                func_800750C8(fighter, 4, 0);
+                func_800750C8(fighter, 1, 1);
+            }
+
+            phi_r28 = NULL;
+
+            fighter->x2223_flag.bits.b2 = 0;
+            fighter->x2223_flag.bits.b3 = 0;
+            fighter->x2227_flag.bits.b7 = 0;
+            fighter->x2228_flag.bits.b0 = 1;
+
+            temp_f31 = temp_f0 = 0.0f;
+            sp30.z = temp_f31;
+            sp30.y = temp_f31;
+            sp30.x = temp_f31;
+
+            if (func_80087074(gobj, &sp30) != 0) {
+                temp_r28 = HSD_CObjGetCurrent()->view_mtx;
+                PSMTXIdentity(sp40);
+
+                mtx_thing(sp40, &sp30, temp_f31, temp_f0);
+
+                PSMTXConcat(temp_r28, sp40, sp70);
+                phi_r28 = sp70;
+            }
+
+            temp_r27 = gobj->hsd_obj;
+            HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, func_80390EB8(arg1), 0);
+            if (lbl_803C20CC[fighter->x4_fighterKind] != NULL) {
+                lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1,
+                                                      (MtxPtr) phi_r28);
+            }
+            func_800C8AF0(fighter);
+            func_8009F7F8(fighter);
+        }
+        if (fighter->x20A0_accessory != NULL) {
+            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1),
+                            0);
+        }
+    }
+}
+
+#else
+
+void func_80080C28(HSD_GObj* gobj, s32 arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
 #endif
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80080E18()
+asm void func_80080E18(HSD_GObj*, long)
 { // clang-format off
     nofralloc
 /* 80080E18 0007D9F8  7C 08 02 A6 */	mflr r0
@@ -1171,12 +1251,23 @@ lbl_80081104:
 /* 80081108 0007DCE8  80 01 00 A4 */	lwz r0, 0xa4(r1)
 /* 8008110C 0007DCEC  38 21 00 A0 */	addi r1, r1, 0xa0
 /* 80081110 0007DCF0  7C 08 03 A6 */	mtlr r0
-/* 80081114 0007DCF4  4E 80 00 20 */	blr 
+/* 80081114 0007DCF4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80080E18(HSD_GObj* arg0, long arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80081118()
+asm void func_80081118(void)
 { // clang-format off
     nofralloc
 /* 80081118 0007DCF8  80 8D C1 8C */	lwz r4, lbl_804D782C(r13)
@@ -1190,12 +1281,23 @@ lbl_8008112C:
 lbl_80081134:
 /* 80081134 0007DD14  28 03 00 00 */	cmplwi r3, 0
 /* 80081138 0007DD18  40 82 FF F4 */	bne lbl_8008112C
-/* 8008113C 0007DD1C  4E 80 00 20 */	blr 
+/* 8008113C 0007DD1C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80081118(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80081140()
+asm void func_80081140(void)
 { // clang-format off
     nofralloc
 /* 80081140 0007DD20  80 8D C1 8C */	lwz r4, lbl_804D782C(r13)
@@ -1209,12 +1311,23 @@ lbl_80081154:
 lbl_8008115C:
 /* 8008115C 0007DD3C  28 03 00 00 */	cmplwi r3, 0
 /* 80081160 0007DD40  40 82 FF F4 */	bne lbl_80081154
-/* 80081164 0007DD44  4E 80 00 20 */	blr 
+/* 80081164 0007DD44  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80081140(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80081168()
+asm void func_80081168(void)
 { // clang-format off
     nofralloc
 /* 80081168 0007DD48  7C 08 02 A6 */	mflr r0
@@ -1257,12 +1370,23 @@ lbl_800811E0:
 /* 800811F0 0007DDD0  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 800811F4 0007DDD4  38 21 00 20 */	addi r1, r1, 0x20
 /* 800811F8 0007DDD8  7C 08 03 A6 */	mtlr r0
-/* 800811FC 0007DDDC  4E 80 00 20 */	blr 
+/* 800811FC 0007DDDC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_80081168(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_80081200()
+asm void func_80081200(void)
 { // clang-format off
     nofralloc
 /* 80081200 0007DDE0  7C 08 02 A6 */	mflr r0
@@ -1305,6 +1429,15 @@ lbl_80081278:
 /* 80081288 0007DE68  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8008128C 0007DE6C  38 21 00 20 */	addi r1, r1, 0x20
 /* 80081290 0007DE70  7C 08 03 A6 */	mtlr r0
-/* 80081294 0007DE74  4E 80 00 20 */	blr 
+/* 80081294 0007DE74  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_80081200(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

@@ -94,16 +94,16 @@ def ctor_realign(f, ofsSecHeader, nSecHeader, idxSegNameSeg):
         if not ofsname: continue
 
         back = f.tell()
-        
+
         f.seek(ofsSecHeader + (idxSegNameSeg * 0x28) + 0x10)
         ofsShST = read_u32(f)
         f.seek(ofsShST + ofsname)
         name = read_string(f)
         if name == ".ctors" or name == ".dtors":
             patch_align_ofs.append(ofsSecHeader + i * 0x28 + 0x20)
-            
+
         f.seek(back)
-    
+
     return patch_align_ofs
 
 SHT_PROGBITS = 1
@@ -168,15 +168,15 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                 # 2) These instructions are 4-byte aligned
                 assert ofs != 0
                 assert ofs % 4 == 0
-                assert size % 4 == 0 
-                
+                assert size % 4 == 0
+
                 f.seek(ofs)
 
                 mtlr_pos = 0
                 addi_pos = 0
                 lwz_pos = 0
                 mr_pos = 0
-                
+
                 # (mtlr position, blr position)
                 epilogues = []
 
@@ -192,7 +192,7 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
 
                     # Call analysis is not actually required
                     # No mtlr will exist without a blr; mtctr/bctr* is used for dynamic dispatch
-                    
+
                     # FUN_A:
                     #   li r3, 0
                     #   blr       <---- No mtlr, move onto the next function
@@ -228,10 +228,10 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
                         mr_pos = 0
 
                 # Reunify mtlr/blr instructions, shifting intermediary instructions up
-                for mtlr_pos, blr_pos in epilogues:    
+                for mtlr_pos, blr_pos in epilogues:
                     # Check if we need to do anything
                     if mtlr_pos + 4 == blr_pos: continue
-                    
+
                     # As the processor can only hold 6 instructions at once in the pipeline,
                     # it's unlikely for the mtlr be shifted up more instructions than that--usually,
                     # only one:
@@ -245,18 +245,18 @@ def impl_postprocess_elf(f, do_ctor_realign, do_old_stack, do_symbol_fixup):
 
                     f.seek(mtlr_pos)
                     mtlr = read_u32(f)
-                    
+
                     for it in range(mtlr_pos, blr_pos - 4, 4):
                         f.seek(it + 4)
                         next_instr = read_u32(f)
                         f.seek(it)
                         write_u32(f, next_instr)
-                    
+
                     f.seek(blr_pos - 4)
                     write_u32(f, mtlr)
 
                 # Swap the lwz and mr instruction that are incorrectly scheduled
-                for lwz_pos, mr_pos in mr_epilogues:    
+                for lwz_pos, mr_pos in mr_epilogues:
                     print("Patching old lwz/mr epilogue: %s %s" % (lwz_pos, mr_pos))
 
                     f.seek(lwz_pos)

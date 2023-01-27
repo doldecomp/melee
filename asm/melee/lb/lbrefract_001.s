@@ -4,31 +4,31 @@
     .balign 4
 
 lbl_804D7D70:
-	.float 2.0
+    .float 2.0
 
 lbl_804D7D74:
-	.float -1.0
+    .float -1.0
 
 lbl_804D7D78:
-	.double 0.0
+    .double 0.0
 
 lbl_804D7D80:
-	.double 0.5
+    .double 0.5
 
 lbl_804D7D88:
-	.double 3.0
+    .double 3.0
 
 lbl_804D7D90:
-	.float 1.0
+    .float 1.0
 
 lbl_804D7D94:
-	.float 128.0
+    .float 128.0
 
 lbl_804D7D98:
-	.double 527765581332480.0
+    .double 527765581332480.0
 
 lbl_804D7DA0:
-	.double 4503599627370496.0
+    .double 4503599627370496.0
 
 .section .text
 
@@ -159,7 +159,7 @@ lbl_80021E74:
 /* 80021EA8 0001EA88  39 1E 00 00 */	addi r8, r30, 0
 /* 80021EAC 0001EA8C  38 C0 00 00 */	li r6, 0
 /* 80021EB0 0001EA90  38 E0 00 00 */	li r7, 0
-/* 80021EB4 0001EA94  4E 80 00 21 */	blrl 
+/* 80021EB4 0001EA94  4E 80 00 21 */	blrl
 /* 80021EB8 0001EA98  EF 39 E0 2A */	fadds f25, f25, f28
 /* 80021EBC 0001EA9C  3B 7B 00 01 */	addi r27, r27, 1
 lbl_80021EC0:
@@ -192,7 +192,7 @@ lbl_80021ED4:
 /* 80021F24 0001EB04  CA 61 00 58 */	lfd f19, 0x58(r1)
 /* 80021F28 0001EB08  38 21 00 C0 */	addi r1, r1, 0xc0
 /* 80021F2C 0001EB0C  7C 08 03 A6 */	mtlr r0
-/* 80021F30 0001EB10  4E 80 00 20 */	blr 
+/* 80021F30 0001EB10  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/VElQJ
 callback_80021F34:
@@ -230,7 +230,7 @@ callback_80021F70:
 /* 80021FA4 0001EB84  7C 83 1B 78 */	or r3, r4, r3
 /* 80021FA8 0001EB88  54 00 08 3C */	slwi r0, r0, 1
 /* 80021FAC 0001EB8C  7C 69 03 2E */	sthx r3, r9, r0
-/* 80021FB0 0001EB90  4E 80 00 20 */	blr 
+/* 80021FB0 0001EB90  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/sveP4
 callback_80021FB4:
@@ -250,7 +250,7 @@ callback_80021FB4:
 /* 80021FE8 0001EBC8  98 C3 00 01 */	stb r6, 1(r3)
 /* 80021FEC 0001EBCC  98 E3 00 20 */	stb r7, 0x20(r3)
 /* 80021FF0 0001EBD0  99 03 00 21 */	stb r8, 0x21(r3)
-/* 80021FF4 0001EBD4  4E 80 00 20 */	blr 
+/* 80021FF4 0001EBD4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/kcNXw
 callback_80021FF8:
@@ -282,10 +282,10 @@ lbl_80022044:
 /* 80022054 0001EC34  90 08 00 00 */	stw r0, 0(r8)
 lbl_80022058:
 /* 80022058 0001EC38  28 09 00 00 */	cmplwi r9, 0
-/* 8002205C 0001EC3C  4D 82 00 20 */	beqlr 
+/* 8002205C 0001EC3C  4D 82 00 20 */	beqlr
 /* 80022060 0001EC40  7C 0A 20 AE */	lbzx r0, r10, r4
 /* 80022064 0001EC44  90 09 00 00 */	stw r0, 0(r9)
-/* 80022068 0001EC48  4E 80 00 20 */	blr 
+/* 80022068 0001EC48  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/ZzShG
 callback_8002206C:
@@ -333,7 +333,7 @@ lbl_800220F8:
 /* 800220F8 0001ECD8  90 07 00 00 */	stw r0, 0(r7)
 lbl_800220FC:
 /* 800220FC 0001ECDC  28 08 00 00 */	cmplwi r8, 0
-/* 80022100 0001ECE0  4D 82 00 20 */	beqlr 
+/* 80022100 0001ECE0  4D 82 00 20 */	beqlr
 /* 80022104 0001ECE4  54 80 06 39 */	rlwinm. r0, r4, 0, 0x18, 0x1c
 /* 80022108 0001ECE8  41 82 00 0C */	beq lbl_80022114
 /* 8002210C 0001ECEC  38 00 00 07 */	li r0, 7
@@ -375,11 +375,11 @@ lbl_80022170:
 /* 80022180 0001ED60  90 07 00 00 */	stw r0, 0(r7)
 lbl_80022184:
 /* 80022184 0001ED64  28 08 00 00 */	cmplwi r8, 0
-/* 80022188 0001ED68  4D 82 00 20 */	beqlr 
+/* 80022188 0001ED68  4D 82 00 20 */	beqlr
 /* 8002218C 0001ED6C  7C 6A 22 14 */	add r3, r10, r4
 /* 80022190 0001ED70  88 03 00 21 */	lbz r0, 0x21(r3)
 /* 80022194 0001ED74  90 08 00 00 */	stw r0, 0(r8)
-/* 80022198 0001ED78  4E 80 00 20 */	blr 
+/* 80022198 0001ED78  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/MxVsy
 .global local_8002219C
@@ -456,4 +456,4 @@ lbl_80022288:
 /* 80022294 0001EE74  83 A1 00 24 */	lwz r29, 0x24(r1)
 /* 80022298 0001EE78  38 21 00 30 */	addi r1, r1, 0x30
 /* 8002229C 0001EE7C  7C 08 03 A6 */	mtlr r0
-/* 800222A0 0001EE80  4E 80 00 20 */	blr 
+/* 800222A0 0001EE80  4E 80 00 20 */	blr

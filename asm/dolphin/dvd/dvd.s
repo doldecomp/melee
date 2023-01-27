@@ -4,7 +4,7 @@
     .balign 4
 .global DVDInitialized
 DVDInitialized:
-	.skip 0x4
+    .skip 0x4
 .global LastState
 LastState:
-	.skip 0x4
+    .skip 0x4

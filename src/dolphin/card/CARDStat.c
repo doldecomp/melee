@@ -1,15 +1,25 @@
+#include <dolphin/card/CARDStat.h>
+
 #include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDDir.h>
+#include <dolphin/card/CARDOpen.h>
+#include <Runtime/__mem.h>
 
-#define CARDGetBannerFormat(stat) (((stat)->bannerFormat) & CARD_STAT_BANNER_MASK)
+#define CARDGetBannerFormat(stat)                                              \
+    (((stat)->bannerFormat) & CARD_STAT_BANNER_MASK)
 #define CARDGetIconAnim(stat) (((stat)->bannerFormat) & CARD_STAT_ANIM_MASK)
-#define CARDGetIconFormat(stat, n) (((stat)->iconFormat >> (2 * (n))) & CARD_STAT_ICON_MASK)
-#define CARDGetIconSpeed(stat, n) (((stat)->iconSpeed >> (2 * (n))) & CARD_STAT_SPEED_MASK)
+#define CARDGetIconFormat(stat, n)                                             \
+    (((stat)->iconFormat >> (2 * (n))) & CARD_STAT_ICON_MASK)
+#define CARDGetIconSpeed(stat, n)                                              \
+    (((stat)->iconSpeed >> (2 * (n))) & CARD_STAT_SPEED_MASK)
 
-#define CARDSetIconSpeed(stat, n, f) \
-    ((stat)->iconSpeed =             \
-         (u16) (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) | ((f) << (2 * (n)))))
+#define CARDSetIconSpeed(stat, n, f)                                           \
+    ((stat)->iconSpeed =                                                       \
+         (u16) (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |   \
+                ((f) << (2 * (n)))))
 
-typedef struct CARDStat {
+struct CARDStat {
     char fileName[CARD_FILENAME_MAX];
     u32 length;
     u32 time; // seconds since 01/01/2000 midnight
@@ -28,12 +38,12 @@ typedef struct CARDStat {
     u32 offsetIcon[CARD_ICON_MAX];
     u32 offsetIconTlut;
     u32 offsetData;
-} CARDStat;
+};
 
 static void UpdateIconOffsets(CARDDir* ent, CARDStat* stat)
 {
     u32 offset;
-    BOOL iconTlut;
+    bool iconTlut;
     int i;
 
     offset = ent->iconAddr;
@@ -44,7 +54,7 @@ static void UpdateIconOffsets(CARDDir* ent, CARDStat* stat)
         offset = 0;
     }
 
-    iconTlut = FALSE;
+    iconTlut = false;
     switch (CARDGetBannerFormat(ent)) {
     case CARD_STAT_BANNER_C8:
         stat->offsetBanner = offset;
@@ -67,7 +77,7 @@ static void UpdateIconOffsets(CARDDir* ent, CARDStat* stat)
         case CARD_STAT_ICON_C8:
             stat->offsetIcon[i] = offset;
             offset += CARD_ICON_WIDTH * CARD_ICON_HEIGHT;
-            iconTlut = TRUE;
+            iconTlut = true;
             break;
         case CARD_STAT_ICON_RGB5A3:
             stat->offsetIcon[i] = offset;
@@ -127,7 +137,8 @@ s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat* stat)
     return __CARDPutControlBlock(card, result);
 }
 
-s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat* stat, CARDCallback callback)
+s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat* stat,
+                       CARDCallback callback)
 {
     CARDControl* card;
     CARDDir* dir;
@@ -137,7 +148,9 @@ s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat* stat, CARDCallback callba
     if (fileNo < 0 || CARD_MAX_FILE <= fileNo ||
         (stat->iconAddr != 0xffffffff && CARD_READ_SIZE <= stat->iconAddr) ||
         (stat->commentAddr != 0xffffffff &&
-         CARD_SYSTEM_BLOCK_SIZE - CARD_COMMENT_SIZE < stat->commentAddr % CARD_SYSTEM_BLOCK_SIZE)) {
+         CARD_SYSTEM_BLOCK_SIZE - CARD_COMMENT_SIZE <
+             stat->commentAddr % CARD_SYSTEM_BLOCK_SIZE))
+    {
         return CARD_RESULT_FATAL_ERROR;
     }
     result = __CARDGetControlBlock(chan, &card);

@@ -39,7 +39,7 @@ InitMetroTRK:
 /* 8032A6A8 00327288  80 83 00 84 */	lwz r4, 0x84(r3)
 /* 8032A6AC 0032728C  7C 88 03 A6 */	mtlr r4
 /* 8032A6B0 00327290  B8 03 00 00 */	.4byte 0xB8030000  /* illegal lmw r0, 0(r3) */
-/* 8032A6B4 00327294  4E 80 00 20 */	blr 
+/* 8032A6B4 00327294  4E 80 00 20 */	blr
 lbl_8032A6B8:
 /* 8032A6B8 00327298  48 00 05 28 */	b TRK_main
 
@@ -52,7 +52,7 @@ EnableMetroTRKInterrupts:
 /* 8032A6CC 003272AC  38 21 00 08 */	addi r1, r1, 8
 /* 8032A6D0 003272B0  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032A6D4 003272B4  7C 08 03 A6 */	mtlr r0
-/* 8032A6D8 003272B8  4E 80 00 20 */	blr 
+/* 8032A6D8 003272B8  4E 80 00 20 */	blr
 
 .global TRKTargetTranslate
 TRKTargetTranslate:
@@ -75,7 +75,7 @@ lbl_8032A718:
 /* 8032A718 003272F8  54 60 00 BE */	clrlwi r0, r3, 2
 /* 8032A71C 003272FC  64 03 80 00 */	oris r3, r0, 0x8000
 lbl_8032A720:
-/* 8032A720 00327300  4E 80 00 20 */	blr 
+/* 8032A720 00327300  4E 80 00 20 */	blr
 
 .global TRK_copy_vector
 TRK_copy_vector:
@@ -102,7 +102,7 @@ TRK_copy_vector:
 /* 8032A774 00327354  38 21 00 10 */	addi r1, r1, 0x10
 /* 8032A778 00327358  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032A77C 0032735C  7C 08 03 A6 */	mtlr r0
-/* 8032A780 00327360  4E 80 00 20 */	blr 
+/* 8032A780 00327360  4E 80 00 20 */	blr
 
 .global __TRK_copy_vectors
 __TRK_copy_vectors:
@@ -146,7 +146,7 @@ lbl_8032A7E8:
 /* 8032A808 003273E8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032A80C 003273EC  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032A810 003273F0  7C 08 03 A6 */	mtlr r0
-/* 8032A814 003273F4  4E 80 00 20 */	blr 
+/* 8032A814 003273F4  4E 80 00 20 */	blr
 
 .global TRKInitializeTarget
 TRKInitializeTarget:
@@ -169,7 +169,7 @@ TRKInitializeTarget:
 /* 8032A858 00327438  38 21 00 10 */	addi r1, r1, 0x10
 /* 8032A85C 0032743C  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032A860 00327440  7C 08 03 A6 */	mtlr r0
-/* 8032A864 00327444  4E 80 00 20 */	blr 
+/* 8032A864 00327444  4E 80 00 20 */	blr
 
 
 .section .data

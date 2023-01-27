@@ -3,43 +3,43 @@
 .section .sdata2
     .balign 8
 lbl_804DEB10:
-	.float 0.5
+    .float 0.5
 lbl_804DEB14:
     .float -0.1687
 lbl_804DEB18:
-	.float 0.3312999904155731
+    .float 0.3312999904155731
 lbl_804DEB1C:
-	.float 0.4187000095844269
+    .float 0.4187000095844269
 lbl_804DEB20:
-	.float 0.08129999786615372
+    .float 0.08129999786615372
 lbl_804DEB24:
-	.float 0.11400000005960464
+    .float 0.11400000005960464
 lbl_804DEB28:
-	.float 0.29899999499320984
+    .float 0.29899999499320984
 lbl_804DEB2C:
-	.float 0.5870000123977661
+    .float 0.5870000123977661
 lbl_804DEB30:
     .double 4503601774854144.0
 lbl_804DEB38:
-	.double 0.707107
+    .double 0.707107
 lbl_804DEB40:
-	.double -0.92388
+    .double -0.92388
 lbl_804DEB48:
-	.double 0.382683
+    .double 0.382683
 lbl_804DEB50:
-	.double 0.92388
+    .double 0.92388
 lbl_804DEB58:
-	.double 0.980785
+    .double 0.980785
 lbl_804DEB60:
-	.double 0.19509
+    .double 0.19509
 lbl_804DEB68:
-	.double 0.83147
+    .double 0.83147
 lbl_804DEB70:
-	.double 0.55557
+    .double 0.55557
 lbl_804DEB78:
-	.double -0.55557
+    .double -0.55557
 lbl_804DEB80:
-	.double -0.19509
+    .double -0.19509
 
 .section .text
 
@@ -268,7 +268,7 @@ lbl_803B3600:
 /* 803B375C 003B033C  41 80 FD 20 */	blt lbl_803B347C
 /* 803B3760 003B0340  BA A1 00 6C */	lmw r21, 0x6c(r1)
 /* 803B3764 003B0344  38 21 00 98 */	addi r1, r1, 0x98
-/* 803B3768 003B0348  4E 80 00 20 */	blr 
+/* 803B3768 003B0348  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/5eJ7p // 34700 (0%)
 func_803B376C:
@@ -621,7 +621,7 @@ lbl_803B3BE4:
 /* 803B3CC8 003B08A8  83 C1 00 A0 */	lwz r30, 0xa0(r1)
 /* 803B3CCC 003B08AC  83 A1 00 9C */	lwz r29, 0x9c(r1)
 /* 803B3CD0 003B08B0  38 21 00 D8 */	addi r1, r1, 0xd8
-/* 803B3CD4 003B08B4  4E 80 00 20 */	blr 
+/* 803B3CD4 003B08B4  4E 80 00 20 */	blr
 
 .section .data
     .balign 4
@@ -2058,15 +2058,15 @@ lbl_803B46C0:
 /* 803B46C4 003B12A4  80 01 00 6C */	lwz r0, 0x6c(r1)
 /* 803B46C8 003B12A8  38 21 00 68 */	addi r1, r1, 0x68
 /* 803B46CC 003B12AC  7C 08 03 A6 */	mtlr r0
-/* 803B46D0 003B12B0  4E 80 00 20 */	blr 
+/* 803B46D0 003B12B0  4E 80 00 20 */	blr
 
 .section .sdata2
     .balign 4
 
 lbl_804DEB88:
-	.4byte 0x4A464946
+    .4byte 0x4A464946
 lbl_804DEB8C:
-	.skip 0x4
+    .skip 0x4
 
 .section .text
 
@@ -2314,7 +2314,7 @@ lbl_803B4A18:
 /* 803B4A1C 003B15FC  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 803B4A20 003B1600  38 21 00 18 */	addi r1, r1, 0x18
 /* 803B4A24 003B1604  7C 08 03 A6 */	mtlr r0
-/* 803B4A28 003B1608  4E 80 00 20 */	blr 
+/* 803B4A28 003B1608  4E 80 00 20 */	blr
 
 
 
@@ -2552,7 +2552,7 @@ lbl_803B4D40:
 /* 803B4D54 003B1934  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 803B4D58 003B1938  38 21 00 28 */	addi r1, r1, 0x28
 /* 803B4D5C 003B193C  7C 08 03 A6 */	mtlr r0
-/* 803B4D60 003B1940  4E 80 00 20 */	blr 
+/* 803B4D60 003B1940  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/QYtxI
 .global func_803B4D64
@@ -2875,7 +2875,7 @@ lbl_803B51AC:
 /* 803B51B8 003B1D98  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 803B51BC 003B1D9C  38 21 00 20 */	addi r1, r1, 0x20
 /* 803B51C0 003B1DA0  7C 08 03 A6 */	mtlr r0
-/* 803B51C4 003B1DA4  4E 80 00 20 */	blr 
+/* 803B51C4 003B1DA4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/uUQAo // 66500 (0%)
 .global func_803B51C8
@@ -3599,7 +3599,7 @@ lbl_803B5C18:
 /* 803B5C1C 003B27FC  80 01 02 34 */	lwz r0, 0x234(r1)
 /* 803B5C20 003B2800  38 21 02 30 */	addi r1, r1, 0x230
 /* 803B5C24 003B2804  7C 08 03 A6 */	mtlr r0
-/* 803B5C28 003B2808  4E 80 00 20 */	blr 
+/* 803B5C28 003B2808  4E 80 00 20 */	blr
 
 .section .rodata
     .balign 8
@@ -3720,17 +3720,17 @@ func_803B5C2C:
 /* 803B5C30 003B2810  90 6D AC F8 */	stw r3, lbl_804D6398@sda21(r13)
 /* 803B5C34 003B2814  41 80 00 0C */	blt lbl_803B5C40
 /* 803B5C38 003B2818  2C 03 00 0A */	cmpwi r3, 0xa
-/* 803B5C3C 003B281C  4C 81 00 20 */	blelr 
+/* 803B5C3C 003B281C  4C 81 00 20 */	blelr
 lbl_803B5C40:
 /* 803B5C40 003B2820  38 00 00 03 */	li r0, 3
 /* 803B5C44 003B2824  90 0D AC F8 */	stw r0, lbl_804D6398@sda21(r13)
-/* 803B5C48 003B2828  4E 80 00 20 */	blr 
+/* 803B5C48 003B2828  4E 80 00 20 */	blr
 
 .section .sdata
     .balign 8
 
 lbl_804D6398:
-	.long 3
+    .long 3
 
 .section .text
 
@@ -3815,7 +3815,7 @@ lbl_803B5D3C:
 /* 803B5D60 003B2940  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 803B5D64 003B2944  38 21 00 20 */	addi r1, r1, 0x20
 /* 803B5D68 003B2948  7C 08 03 A6 */	mtlr r0
-/* 803B5D6C 003B294C  4E 80 00 20 */	blr 
+/* 803B5D6C 003B294C  4E 80 00 20 */	blr
 
 
 
@@ -3914,7 +3914,7 @@ lbl_803B5E8C:
 /* 803B5E90 003B2A70  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 803B5E94 003B2A74  38 21 00 28 */	addi r1, r1, 0x28
 /* 803B5E98 003B2A78  7C 08 03 A6 */	mtlr r0
-/* 803B5E9C 003B2A7C  4E 80 00 20 */	blr 
+/* 803B5E9C 003B2A7C  4E 80 00 20 */	blr
 
 
 
@@ -4131,27 +4131,27 @@ lbl_803B61A0:
 /* 803B61A4 003B2D84  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 803B61A8 003B2D88  38 21 00 28 */	addi r1, r1, 0x28
 /* 803B61AC 003B2D8C  7C 08 03 A6 */	mtlr r0
-/* 803B61B0 003B2D90  4E 80 00 20 */	blr 
+/* 803B61B0 003B2D90  4E 80 00 20 */	blr
 
 .section .sdata2
     .balign 4
 
 lbl_804DEB90:
-	.double 0.980785
+    .double 0.980785
 lbl_804DEB98:
-	.double 0.19509
+    .double 0.19509
 lbl_804DEBA0:
-	.double 0.83147
+    .double 0.83147
 lbl_804DEBA8:
-	.double 0.55557
+    .double 0.55557
 lbl_804DEBB0:
-	.double 0.707107
+    .double 0.707107
 lbl_804DEBB8:
-	.double -0.92388
+    .double -0.92388
 lbl_804DEBC0:
-	.double 0.382683
+    .double 0.382683
 lbl_804DEBC8:
-	.double 0.92388
+    .double 0.92388
 lbl_804DEBD0:
     .double 4503601774854144.0
 
@@ -4572,25 +4572,25 @@ lbl_803B6728:
 /* 803B6810 003B33F0  CA E1 00 D0 */	lfd f23, 0xd0(r1)
 /* 803B6814 003B33F4  CA C1 00 C8 */	lfd f22, 0xc8(r1)
 /* 803B6818 003B33F8  38 21 01 18 */	addi r1, r1, 0x118
-/* 803B681C 003B33FC  4E 80 00 20 */	blr 
+/* 803B681C 003B33FC  4E 80 00 20 */	blr
 
 .section .sdata2
     .balign 8
 
 lbl_804DEBD8:
-	.double 1.402
+    .double 1.402
 lbl_804DEBE0:
-	.float 0.0
+    .float 0.0
 lbl_804DEBE4:
-	.float 255.0
+    .float 255.0
 lbl_804DEBE8:
-	.float 0.3440999984741211
+    .float 0.3440999984741211
 lbl_804DEBEC:
-	.float 0.7139000296592712
+    .float 0.7139000296592712
 lbl_804DEBF0:
-	.double 0.5872001647949219
+    .double 0.5872001647949219
 lbl_804DEBF8:
-	.double 0.0012
+    .double 0.0012
 
 .section .text
 
@@ -4852,7 +4852,7 @@ lbl_803B6B68:
 /* 803B6BD4 003B37B4  41 80 FD A0 */	blt lbl_803B6974
 /* 803B6BD8 003B37B8  B9 C1 00 68 */	lmw r14, 0x68(r1)
 /* 803B6BDC 003B37BC  38 21 00 B0 */	addi r1, r1, 0xb0
-/* 803B6BE0 003B37C0  4E 80 00 20 */	blr 
+/* 803B6BE0 003B37C0  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/0sddj
 .global func_803B6BE4
@@ -5289,5 +5289,5 @@ lbl_803B721C:
 /* 803B7220 003B3E00  80 01 00 8C */	lwz r0, 0x8c(r1)
 /* 803B7224 003B3E04  38 21 00 88 */	addi r1, r1, 0x88
 /* 803B7228 003B3E08  7C 08 03 A6 */	mtlr r0
-/* 803B722C 003B3E0C  4E 80 00 20 */	blr 
+/* 803B722C 003B3E0C  4E 80 00 20 */	blr
 

@@ -3,6 +3,9 @@
 
 #include <dolphin/gx/types.h>
 
-/* 00337360 */ extern GXFifoObj *GXInit(GXFifoObj *fifo, u32 size);
+GXFifoObj* GXInit(GXFifoObj* fifo, u32 size);
+
+void __GXDefaultTexRegionCallback(void);
+unk_t __GXDefaultTlutRegionCallback(u32 arg0);
 
 #endif

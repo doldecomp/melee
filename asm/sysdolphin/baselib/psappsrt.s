@@ -20,7 +20,7 @@ psInitAppSRT:
 /* 803A4168 003A0D48  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 803A416C 003A0D4C  38 21 00 08 */	addi r1, r1, 8
 /* 803A4170 003A0D50  7C 08 03 A6 */	mtlr r0
-/* 803A4174 003A0D54  4E 80 00 20 */	blr 
+/* 803A4174 003A0D54  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/BtnBu
 .global psAddGeneratorAppSRT
@@ -83,7 +83,7 @@ lbl_803A423C:
 /* 803A424C 003A0E2C  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 803A4250 003A0E30  38 21 00 20 */	addi r1, r1, 0x20
 /* 803A4254 003A0E34  7C 08 03 A6 */	mtlr r0
-/* 803A4258 003A0E38  4E 80 00 20 */	blr 
+/* 803A4258 003A0E38  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/URyZz
 .global func_803A425C
@@ -101,7 +101,7 @@ func_803A425C:
 /* 803A4284 003A0E64  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 803A4288 003A0E68  38 21 00 18 */	addi r1, r1, 0x18
 /* 803A428C 003A0E6C  7C 08 03 A6 */	mtlr r0
-/* 803A4290 003A0E70  4E 80 00 20 */	blr 
+/* 803A4290 003A0E70  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/EE6e6
 .global psAddGeneratorAppSRT_begin
@@ -119,7 +119,7 @@ psAddGeneratorAppSRT_begin:
 /* 803A42BC 003A0E9C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 803A42C0 003A0EA0  38 21 00 18 */	addi r1, r1, 0x18
 /* 803A42C4 003A0EA4  7C 08 03 A6 */	mtlr r0
-/* 803A42C8 003A0EA8  4E 80 00 20 */	blr 
+/* 803A42C8 003A0EA8  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/hvOIc
 .global psAttachParticleAppSRT
@@ -133,14 +133,14 @@ psAttachParticleAppSRT:
 /* 803A42E4 003A0EC4  41 82 00 0C */	beq lbl_803A42F0
 lbl_803A42E8:
 /* 803A42E8 003A0EC8  38 60 FF FF */	li r3, -1
-/* 803A42EC 003A0ECC  4E 80 00 20 */	blr 
+/* 803A42EC 003A0ECC  4E 80 00 20 */	blr
 lbl_803A42F0:
 /* 803A42F0 003A0ED0  90 83 00 8C */	stw r4, 0x8c(r3)
 /* 803A42F4 003A0ED4  A0 64 00 32 */	lhz r3, 0x32(r4)
 /* 803A42F8 003A0ED8  38 03 00 01 */	addi r0, r3, 1
 /* 803A42FC 003A0EDC  B0 04 00 32 */	sth r0, 0x32(r4)
 /* 803A4300 003A0EE0  54 03 04 3E */	clrlwi r3, r0, 0x10
-/* 803A4304 003A0EE4  4E 80 00 20 */	blr 
+/* 803A4304 003A0EE4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/6i2Pu
 .global psAttachGeneratorAppSRT
@@ -154,14 +154,14 @@ psAttachGeneratorAppSRT:
 /* 803A4320 003A0F00  41 82 00 0C */	beq lbl_803A432C
 lbl_803A4324:
 /* 803A4324 003A0F04  38 60 FF FF */	li r3, -1
-/* 803A4328 003A0F08  4E 80 00 20 */	blr 
+/* 803A4328 003A0F08  4E 80 00 20 */	blr
 lbl_803A432C:
 /* 803A432C 003A0F0C  90 83 00 54 */	stw r4, 0x54(r3)
 /* 803A4330 003A0F10  A0 64 00 32 */	lhz r3, 0x32(r4)
 /* 803A4334 003A0F14  38 03 00 01 */	addi r0, r3, 1
 /* 803A4338 003A0F18  B0 04 00 32 */	sth r0, 0x32(r4)
 /* 803A433C 003A0F1C  54 03 04 3E */	clrlwi r3, r0, 0x10
-/* 803A4340 003A0F20  4E 80 00 20 */	blr 
+/* 803A4340 003A0F20  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/flXbS
 .global psRemoveParticleAppSRT
@@ -190,7 +190,7 @@ lbl_803A4374:
 /* 803A4394 003A0F74  41 82 00 10 */	beq lbl_803A43A4
 /* 803A4398 003A0F78  7D 88 03 A6 */	mtlr r12
 /* 803A439C 003A0F7C  38 7F 00 00 */	addi r3, r31, 0
-/* 803A43A0 003A0F80  4E 80 00 21 */	blrl 
+/* 803A43A0 003A0F80  4E 80 00 21 */	blrl
 lbl_803A43A4:
 /* 803A43A4 003A0F84  3C 60 80 4D */	lis r3, lbl_804D10B0@ha
 /* 803A43A8 003A0F88  38 63 10 B0 */	addi r3, r3, lbl_804D10B0@l
@@ -210,7 +210,7 @@ lbl_803A43CC:
 /* 803A43D8 003A0FB8  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 803A43DC 003A0FBC  38 21 00 20 */	addi r1, r1, 0x20
 /* 803A43E0 003A0FC0  7C 08 03 A6 */	mtlr r0
-/* 803A43E4 003A0FC4  4E 80 00 20 */	blr 
+/* 803A43E4 003A0FC4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/80iZw
 .global psRemoveGeneratorSRT
@@ -246,7 +246,7 @@ lbl_803A442C:
 /* 803A4450 003A1030  41 82 00 10 */	beq lbl_803A4460
 /* 803A4454 003A1034  7D 88 03 A6 */	mtlr r12
 /* 803A4458 003A1038  38 7F 00 00 */	addi r3, r31, 0
-/* 803A445C 003A103C  4E 80 00 21 */	blrl 
+/* 803A445C 003A103C  4E 80 00 21 */	blrl
 lbl_803A4460:
 /* 803A4460 003A1040  3C 60 80 4D */	lis r3, lbl_804D10B0@ha
 /* 803A4464 003A1044  38 63 10 B0 */	addi r3, r3, lbl_804D10B0@l
@@ -266,28 +266,28 @@ lbl_803A4488:
 /* 803A4494 003A1074  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 803A4498 003A1078  38 21 00 20 */	addi r1, r1, 0x20
 /* 803A449C 003A107C  7C 08 03 A6 */	mtlr r0
-/* 803A44A0 003A1080  4E 80 00 20 */	blr 
+/* 803A44A0 003A1080  4E 80 00 20 */	blr
 
 
 .section .bss, "wa"
     .balign 8
 .global lbl_804D10B0
 lbl_804D10B0:
-	.skip 0x30
+    .skip 0x30
 
 
 .section .sbss
     .balign 8
 .global lbl_804D7958
 lbl_804D7958:
-	.skip 0x8
+    .skip 0x8
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DEA68
 lbl_804DEA68:
-	.4byte NULL
+    .4byte NULL
 .global lbl_804DEA6C
 lbl_804DEA6C:
-	.float 1.0
+    .float 1.0

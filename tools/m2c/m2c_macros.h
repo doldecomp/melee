@@ -36,4 +36,8 @@ typedef s64 M2C_UNK64;
 /* Carry bit from partially-implemented instructions */
 #define M2C_CARRY 0
 
+/* Memcpy patterns */
+#define M2C_MEMCPY_ALIGNED memcpy
+#define M2C_MEMCPY_UNALIGNED memcpy
+
 #endif

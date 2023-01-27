@@ -1,4 +1,11 @@
+#include <dolphin/card/CARDDelete.h>
+
 #include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDBlock.h>
+#include <dolphin/card/CARDDir.h>
+#include <dolphin/card/CARDOpen.h>
+#include <Runtime/__mem.h>
 
 static void DeleteCallback(s32 chan, s32 result)
 {
@@ -53,8 +60,11 @@ s32 CARDFastDeleteAsync(s32 chan, s32 fileNo, CARDCallback callback)
     card->startBlock = ent->startBlock;
     memset(ent, 0xff, sizeof(CARDDir));
 
-    card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
-    result = __CARDUpdateDir(chan, DeleteCallback);
+    /// @todo Eliminate casts to #CARDCallback.
+    card->apiCallback =
+        callback ? callback : (CARDCallback) __CARDDefaultApiCallback;
+    result = __CARDUpdateDir(chan, (CARDCallback) DeleteCallback);
+
     if (result < 0) {
         __CARDPutControlBlock(card, result);
     }
@@ -86,8 +96,11 @@ s32 CARDDeleteAsync(s32 chan, const char* fileName, CARDCallback callback)
     card->startBlock = ent->startBlock;
     memset(ent, 0xff, sizeof(CARDDir));
 
-    card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
-    result = __CARDUpdateDir(chan, DeleteCallback);
+    /// @todo Eliminate casts to #CARDCallback.
+    card->apiCallback =
+        callback ? callback : (CARDCallback) __CARDDefaultApiCallback;
+    result = __CARDUpdateDir(chan, (CARDCallback) DeleteCallback);
+
     if (result < 0) {
         __CARDPutControlBlock(card, result);
     }

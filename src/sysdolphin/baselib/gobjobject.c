@@ -1,3 +1,5 @@
+#include <sysdolphin/baselib/gobjobject.h>
+
 #include <sysdolphin/baselib/gobj.h>
 
 extern void (**lbl_804D7810)(void*);
@@ -5,7 +7,8 @@ extern void (**lbl_804D7810)(void*);
 HSD_GObj* func_80390A3C(u16 id, u8 arg1)
 {
     HSD_GObj* cur;
-    for (cur = ((HSD_GObj**)lbl_804D782C)[arg1]; cur != NULL; cur = cur->next) {
+    for (cur = ((HSD_GObj**) lbl_804D782C)[arg1]; cur != NULL; cur = cur->next)
+    {
         if (cur->classifier == id) {
             break;
         }
@@ -13,9 +16,9 @@ HSD_GObj* func_80390A3C(u16 id, u8 arg1)
     return cur;
 }
 
-void func_80390A70(HSD_GObj* gobj, u8 kind, unk_t obj)
+void func_80390A70(HSD_GObj* gobj, u8 kind, any_t obj)
 {
-    assert_line(42, gobj->obj_kind == HSD_GOBJ_OBJ_NONE);
+    HSD_ASSERT(42, gobj->obj_kind == HSD_GOBJ_OBJ_NONE);
     gobj->obj_kind = kind;
     gobj->hsd_obj = obj;
 }

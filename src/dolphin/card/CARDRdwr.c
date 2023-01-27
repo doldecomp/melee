@@ -1,4 +1,7 @@
+#include <dolphin/card/CARDRdwr.h>
+
 #include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
 
 static void BlockReadCallback(s32 chan, s32 result)
 {
@@ -13,12 +16,14 @@ static void BlockReadCallback(s32 chan, s32 result)
     card->xferred += CARD_SEG_SIZE;
 
     card->addr += CARD_SEG_SIZE;
-    (u8*) card->buffer += CARD_SEG_SIZE;
+    card->buffer = (u8*) card->buffer + CARD_SEG_SIZE;
     if (--card->repeat <= 0) {
         goto error;
     }
 
-    result = __CARDReadSegment(chan, BlockReadCallback);
+    /// @todo Eliminate cast to #CARDCallback.
+    result = __CARDReadSegment(chan, (CARDCallback) BlockReadCallback);
+
     if (result < 0) {
         goto error;
     }
@@ -47,7 +52,8 @@ s32 __CARDRead(s32 chan, u32 addr, u32 length, void* dst, CARDCallback callback)
     card->addr = addr;
     card->buffer = dst;
 
-    return __CARDReadSegment(chan, BlockReadCallback);
+    /// @todo Eliminate cast to #CARDCallback.
+    return __CARDReadSegment(chan, (CARDCallback) BlockReadCallback);
 }
 
 static void BlockWriteCallback(s32 chan, s32 result)
@@ -63,15 +69,17 @@ static void BlockWriteCallback(s32 chan, s32 result)
     card->xferred += CARD_PAGE_SIZE;
 
     card->addr += CARD_PAGE_SIZE;
-    (u8*) card->buffer += CARD_PAGE_SIZE;
+    card->buffer = (u8*) card->buffer + CARD_PAGE_SIZE;
     if (--card->repeat <= 0) {
         goto error;
     }
 
-    result = __CARDWritePage(chan, BlockWriteCallback);
-    if (result < 0) {
+    /// @todo Eliminate cast to #CARDCallback.
+    result = __CARDWritePage(chan, (CARDCallback) BlockWriteCallback);
+
+    if (result < 0)
         goto error;
-    }
+
     return;
 
 error:
@@ -85,7 +93,8 @@ error:
     }
 }
 
-s32 __CARDWrite(s32 chan, u32 addr, u32 length, void* dst, CARDCallback callback)
+s32 __CARDWrite(s32 chan, u32 addr, u32 length, void* dst,
+                CARDCallback callback)
 {
     CARDControl* card = &__CARDBlock[chan];
     if (!card->attached) {
@@ -97,7 +106,7 @@ s32 __CARDWrite(s32 chan, u32 addr, u32 length, void* dst, CARDCallback callback
     card->addr = addr;
     card->buffer = dst;
 
-    return __CARDWritePage(chan, BlockWriteCallback);
+    return __CARDWritePage(chan, (CARDCallback) BlockWriteCallback);
 }
 
 u32 CARDGetXferredBytes(s32 chan)

@@ -43,7 +43,7 @@ lbl_803277BC:
 /* 803277C8 003243A8  38 21 00 18 */	addi r1, r1, 0x18
 /* 803277CC 003243AC  80 01 00 04 */	lwz r0, 4(r1)
 /* 803277D0 003243B0  7C 08 03 A6 */	mtlr r0
-/* 803277D4 003243B4  4E 80 00 20 */	blr 
+/* 803277D4 003243B4  4E 80 00 20 */	blr
 
 .global TRKSendACK
 TRKSendACK:
@@ -68,7 +68,7 @@ lbl_80327810:
 /* 80327818 003243F8  38 21 00 10 */	addi r1, r1, 0x10
 /* 8032781C 003243FC  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327820 00324400  7C 08 03 A6 */	mtlr r0
-/* 80327824 00324404  4E 80 00 20 */	blr 
+/* 80327824 00324404  4E 80 00 20 */	blr
 
 .global TRKStandardACK
 TRKStandardACK:
@@ -84,7 +84,7 @@ TRKStandardACK:
 /* 8032784C 0032442C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80327850 00324430  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327854 00324434  7C 08 03 A6 */	mtlr r0
-/* 80327858 00324438  4E 80 00 20 */	blr 
+/* 80327858 00324438  4E 80 00 20 */	blr
 
 .global lbl_8032785C
 lbl_8032785C:
@@ -97,7 +97,7 @@ lbl_8032785C:
 /* 80327874 00324454  38 21 00 08 */	addi r1, r1, 8
 /* 80327878 00324458  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032787C 0032445C  7C 08 03 A6 */	mtlr r0
-/* 80327880 00324460  4E 80 00 20 */	blr 
+/* 80327880 00324460  4E 80 00 20 */	blr
 
 .global lbl_80327884
 lbl_80327884:
@@ -110,7 +110,7 @@ lbl_80327884:
 /* 8032789C 0032447C  38 21 00 08 */	addi r1, r1, 8
 /* 803278A0 00324480  80 01 00 04 */	lwz r0, 4(r1)
 /* 803278A4 00324484  7C 08 03 A6 */	mtlr r0
-/* 803278A8 00324488  4E 80 00 20 */	blr 
+/* 803278A8 00324488  4E 80 00 20 */	blr
 
 .global lbl_803278AC
 lbl_803278AC:
@@ -134,7 +134,7 @@ lbl_803278E4:
 /* 803278EC 003244CC  38 21 00 18 */	addi r1, r1, 0x18
 /* 803278F0 003244D0  80 01 00 04 */	lwz r0, 4(r1)
 /* 803278F4 003244D4  7C 08 03 A6 */	mtlr r0
-/* 803278F8 003244D8  4E 80 00 20 */	blr 
+/* 803278F8 003244D8  4E 80 00 20 */	blr
 
 .global TRKDoReset
 TRKDoReset:
@@ -149,7 +149,7 @@ TRKDoReset:
 /* 8032791C 003244FC  38 21 00 08 */	addi r1, r1, 8
 /* 80327920 00324500  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327924 00324504  7C 08 03 A6 */	mtlr r0
-/* 80327928 00324508  4E 80 00 20 */	blr 
+/* 80327928 00324508  4E 80 00 20 */	blr
 
 .global TRKDoVersions
 TRKDoVersions:
@@ -260,7 +260,7 @@ lbl_80327A9C:
 /* 80327AA0 00324680  38 21 00 10 */	addi r1, r1, 0x10
 /* 80327AA4 00324684  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327AA8 00324688  7C 08 03 A6 */	mtlr r0
-/* 80327AAC 0032468C  4E 80 00 20 */	blr 
+/* 80327AAC 0032468C  4E 80 00 20 */	blr
 
 .global TRKDoSupportMask
 TRKDoSupportMask:
@@ -324,7 +324,7 @@ lbl_80327B78:
 /* 80327B7C 0032475C  38 21 00 30 */	addi r1, r1, 0x30
 /* 80327B80 00324760  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327B84 00324764  7C 08 03 A6 */	mtlr r0
-/* 80327B88 00324768  4E 80 00 20 */	blr 
+/* 80327B88 00324768  4E 80 00 20 */	blr
 
 .global TRKDoCPUType
 TRKDoCPUType:
@@ -489,7 +489,7 @@ lbl_80327DBC:
 /* 80327DC0 003249A0  38 21 00 18 */	addi r1, r1, 0x18
 /* 80327DC4 003249A4  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327DC8 003249A8  7C 08 03 A6 */	mtlr r0
-/* 80327DCC 003249AC  4E 80 00 20 */	blr 
+/* 80327DCC 003249AC  4E 80 00 20 */	blr
 
 .global TRKDoReadMemory
 TRKDoReadMemory:
@@ -601,7 +601,7 @@ lbl_80327F30:
 /* 80327F4C 00324B2C  54 00 10 3A */	slwi r0, r0, 2
 /* 80327F50 00324B30  7C 03 00 2E */	lwzx r0, r3, r0
 /* 80327F54 00324B34  7C 09 03 A6 */	mtctr r0
-/* 80327F58 00324B38  4E 80 04 20 */	bctr 
+/* 80327F58 00324B38  4E 80 04 20 */	bctr
 lbl_80327F5C:
 /* 80327F5C 00324B3C  38 A0 00 15 */	li r5, 0x15
 /* 80327F60 00324B40  48 00 00 28 */	b lbl_80327F88
@@ -633,7 +633,7 @@ lbl_80327FA0:
 /* 80327FA8 00324B88  38 21 08 20 */	addi r1, r1, 0x820
 /* 80327FAC 00324B8C  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327FB0 00324B90  7C 08 03 A6 */	mtlr r0
-/* 80327FB4 00324B94  4E 80 00 20 */	blr 
+/* 80327FB4 00324B94  4E 80 00 20 */	blr
 
 .global TRKDoWriteMemory
 TRKDoWriteMemory:
@@ -753,7 +753,7 @@ lbl_8032812C:
 /* 80328148 00324D28  54 00 10 3A */	slwi r0, r0, 2
 /* 8032814C 00324D2C  7C 03 00 2E */	lwzx r0, r3, r0
 /* 80328150 00324D30  7C 09 03 A6 */	mtctr r0
-/* 80328154 00324D34  4E 80 04 20 */	bctr 
+/* 80328154 00324D34  4E 80 04 20 */	bctr
 lbl_80328158:
 /* 80328158 00324D38  38 A0 00 15 */	li r5, 0x15
 /* 8032815C 00324D3C  48 00 00 28 */	b lbl_80328184
@@ -785,7 +785,7 @@ lbl_8032819C:
 /* 803281A4 00324D84  38 21 08 20 */	addi r1, r1, 0x820
 /* 803281A8 00324D88  80 01 00 04 */	lwz r0, 4(r1)
 /* 803281AC 00324D8C  7C 08 03 A6 */	mtlr r0
-/* 803281B0 00324D90  4E 80 00 20 */	blr 
+/* 803281B0 00324D90  4E 80 00 20 */	blr
 
 .global TRKDoReadRegisters
 TRKDoReadRegisters:
@@ -941,7 +941,7 @@ lbl_803283A4:
 /* 803283A8 00324F88  38 21 00 18 */	addi r1, r1, 0x18
 /* 803283AC 00324F8C  80 01 00 04 */	lwz r0, 4(r1)
 /* 803283B0 00324F90  7C 08 03 A6 */	mtlr r0
-/* 803283B4 00324F94  4E 80 00 20 */	blr 
+/* 803283B4 00324F94  4E 80 00 20 */	blr
 
 .global TRKDoWriteRegisters
 TRKDoWriteRegisters:
@@ -1099,7 +1099,7 @@ lbl_803285A8:
 /* 803285B0 00325190  38 21 00 20 */	addi r1, r1, 0x20
 /* 803285B4 00325194  80 01 00 04 */	lwz r0, 4(r1)
 /* 803285B8 00325198  7C 08 03 A6 */	mtlr r0
-/* 803285BC 0032519C  4E 80 00 20 */	blr 
+/* 803285BC 0032519C  4E 80 00 20 */	blr
 
 .global TRKDoFlushCache
 TRKDoFlushCache:
@@ -1192,7 +1192,7 @@ lbl_803286E0:
 /* 803286E8 003252C8  38 21 00 20 */	addi r1, r1, 0x20
 /* 803286EC 003252CC  80 01 00 04 */	lwz r0, 4(r1)
 /* 803286F0 003252D0  7C 08 03 A6 */	mtlr r0
-/* 803286F4 003252D4  4E 80 00 20 */	blr 
+/* 803286F4 003252D4  4E 80 00 20 */	blr
 
 .global TRKDoContinue
 TRKDoContinue:
@@ -1222,7 +1222,7 @@ lbl_80328748:
 /* 8032874C 0032532C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80328750 00325330  80 01 00 04 */	lwz r0, 4(r1)
 /* 80328754 00325334  7C 08 03 A6 */	mtlr r0
-/* 80328758 00325338  4E 80 00 20 */	blr 
+/* 80328758 00325338  4E 80 00 20 */	blr
 
 .global TRKDoStep
 TRKDoStep:
@@ -1371,7 +1371,7 @@ lbl_8032894C:
 /* 80328950 00325530  38 21 00 18 */	addi r1, r1, 0x18
 /* 80328954 00325534  80 01 00 04 */	lwz r0, 4(r1)
 /* 80328958 00325538  7C 08 03 A6 */	mtlr r0
-/* 8032895C 0032553C  4E 80 00 20 */	blr 
+/* 8032895C 0032553C  4E 80 00 20 */	blr
 
 .global TRKDoStop
 TRKDoStop:
@@ -1414,7 +1414,7 @@ lbl_803289C4:
 /* 803289D4 003255B4  38 21 00 10 */	addi r1, r1, 0x10
 /* 803289D8 003255B8  80 01 00 04 */	lwz r0, 4(r1)
 /* 803289DC 003255BC  7C 08 03 A6 */	mtlr r0
-/* 803289E0 003255C0  4E 80 00 20 */	blr 
+/* 803289E0 003255C0  4E 80 00 20 */	blr
 
 .global TRKSuppAccessFile
 TRKSuppAccessFile:
@@ -1628,7 +1628,7 @@ lbl_80328CA8:
 /* 80328CAC 0032588C  38 21 00 48 */	addi r1, r1, 0x48
 /* 80328CB0 00325890  80 01 00 04 */	lwz r0, 4(r1)
 /* 80328CB4 00325894  7C 08 03 A6 */	mtlr r0
-/* 80328CB8 00325898  4E 80 00 20 */	blr 
+/* 80328CB8 00325898  4E 80 00 20 */	blr
 
 .global TRKRequestSend
 TRKRequestSend:
@@ -1749,22 +1749,22 @@ lbl_80328E48:
 /* 80328E50 00325A30  38 21 00 38 */	addi r1, r1, 0x38
 /* 80328E54 00325A34  80 01 00 04 */	lwz r0, 4(r1)
 /* 80328E58 00325A38  7C 08 03 A6 */	mtlr r0
-/* 80328E5C 00325A3C  4E 80 00 20 */	blr 
+/* 80328E5C 00325A3C  4E 80 00 20 */	blr
 
 .global TRKInitializeMutex
 TRKInitializeMutex:
 /* 80328E60 00325A40  38 60 00 00 */	li r3, 0
-/* 80328E64 00325A44  4E 80 00 20 */	blr 
+/* 80328E64 00325A44  4E 80 00 20 */	blr
 
 .global TRKAcquireMutex
 TRKAcquireMutex:
 /* 80328E68 00325A48  38 60 00 00 */	li r3, 0
-/* 80328E6C 00325A4C  4E 80 00 20 */	blr 
+/* 80328E6C 00325A4C  4E 80 00 20 */	blr
 
 .global TRKReleaseMutex
 TRKReleaseMutex:
 /* 80328E70 00325A50  38 60 00 00 */	li r3, 0
-/* 80328E74 00325A54  4E 80 00 20 */	blr 
+/* 80328E74 00325A54  4E 80 00 20 */	blr
 
 .global TRKDoNotifyStopped
 TRKDoNotifyStopped:
@@ -1827,26 +1827,26 @@ lbl_80328F34:
 /* 80328F40 00325B20  38 21 00 20 */	addi r1, r1, 0x20
 /* 80328F44 00325B24  80 01 00 04 */	lwz r0, 4(r1)
 /* 80328F48 00325B28  7C 08 03 A6 */	mtlr r0
-/* 80328F4C 00325B2C  4E 80 00 20 */	blr 
+/* 80328F4C 00325B2C  4E 80 00 20 */	blr
 
 
 .section .data
     .balign 8
 .global jtbl_80400810
 jtbl_80400810:
-	.4byte lbl_80327F64
-	.4byte lbl_80327F84
-	.4byte lbl_80327F5C
-	.4byte lbl_80327F84
-	.4byte lbl_80327F6C
-	.4byte lbl_80327F74
-	.4byte lbl_80327F7C
+    .4byte lbl_80327F64
+    .4byte lbl_80327F84
+    .4byte lbl_80327F5C
+    .4byte lbl_80327F84
+    .4byte lbl_80327F6C
+    .4byte lbl_80327F74
+    .4byte lbl_80327F7C
 .global jtbl_8040082C
 jtbl_8040082C:
-	.4byte lbl_80328160
-	.4byte lbl_80328180
-	.4byte lbl_80328158
-	.4byte lbl_80328180
-	.4byte lbl_80328168
-	.4byte lbl_80328170
-	.4byte lbl_80328178
+    .4byte lbl_80328160
+    .4byte lbl_80328180
+    .4byte lbl_80328158
+    .4byte lbl_80328180
+    .4byte lbl_80328168
+    .4byte lbl_80328170
+    .4byte lbl_80328178

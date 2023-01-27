@@ -1,5 +1,7 @@
 #include <sysdolphin/baselib/objalloc.h>
 
+#include <string.h>
+#include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/memory.h>
 
 static objheap obj_heap = { 0, 0, -1, -1 };
@@ -23,7 +25,7 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
     int i;
     u32 unused;
 
-    assert_line(0xEE, data);
+    HSD_ASSERT(0xEE, data);
     pool_size = data->size * num;
     if (obj_heap.top != 0) {
         pool_end = obj_heap.top + obj_heap.size;
@@ -33,7 +35,8 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
             return 0;
         }
         if (pool_end - (u32) pool_start < pool_size) {
-            pool_size = pool_end - (u32) pool_start - (pool_end - (u32) pool_start) % data->size;
+            pool_size = pool_end - (u32) pool_start -
+                        (pool_end - (u32) pool_start) % data->size;
         }
         num = pool_size / data->size;
         if (num == 0) {
@@ -49,7 +52,8 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
         obj_heap.remain -= pool_size;
     }
     for (i = 0; i < num - 1; i++) {
-        *(void**) (pool_start + data->size * i) = (void*) (pool_start + data->size * (i + 1));
+        *(void**) (pool_start + data->size * i) =
+            (void*) (pool_start + data->size * (i + 1));
     }
     *(void**) (pool_start + data->size * i) = data->freehead;
     data->freehead = (HSD_ObjAllocLink*) pool_start;
@@ -70,8 +74,7 @@ void* HSD_ObjAlloc(HSD_ObjAllocData* data)
             if (obj_heap.top != 0) {
                 size = obj_heap.remain;
             } else {
-                HSD_GetHeap();
-                size = OSCheckHeap();
+                size = OSCheckHeap(HSD_GetHeap());
             }
             if (size <= data->heap_limit_size) {
                 data->heap_limit_num = data->used + data->free;
@@ -80,8 +83,7 @@ void* HSD_ObjAlloc(HSD_ObjAllocData* data)
             if (obj_heap.top != 0) {
                 size = obj_heap.remain;
             } else {
-                HSD_GetHeap();
-                size = OSCheckHeap();
+                size = OSCheckHeap(HSD_GetHeap());
             }
             if (size > data->heap_limit_size) {
                 data->heap_limit_num = -1;
@@ -128,9 +130,9 @@ inline void removeAll(HSD_ObjAllocData* data)
     }
 }
 
-void HSD_ObjAllocInit(HSD_ObjAllocData* data, u32 size, u32 align)
+void HSD_ObjAllocInit(HSD_ObjAllocData* data, size_t size, u32 align)
 {
-    assert_line(0x185, data);
+    HSD_ASSERT(0x185, data);
     if (data != NULL) {
         removeAll(data);
     } else {
@@ -146,7 +148,7 @@ void HSD_ObjAllocInit(HSD_ObjAllocData* data, u32 size, u32 align)
     alloc_datas = data;
 }
 
-void _HSD_ObjAllocForgetMemory(void)
+void _HSD_ObjAllocForgetMemory(any_t low, any_t high)
 {
     alloc_datas = NULL;
 }

@@ -9,7 +9,7 @@ HSD_DevComIsBusy:
 /* 8038EA58 0038B638  38 04 63 20 */	addi r0, r4, lbl_804C6320@l
 /* 8038EA5C 0038B63C  7C 60 1A 14 */	add r3, r0, r3
 /* 8038EA60 0038B640  80 63 00 00 */	lwz r3, 0(r3)
-/* 8038EA64 0038B644  4E 80 00 20 */	blr 
+/* 8038EA64 0038B644  4E 80 00 20 */	blr
 
 .global HSD_DevComUnlink
 HSD_DevComUnlink:
@@ -77,7 +77,7 @@ lbl_8038EB34:
 /* 8038EB40 0038B720  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8038EB44 0038B724  38 21 00 20 */	addi r1, r1, 0x20
 /* 8038EB48 0038B728  7C 08 03 A6 */	mtlr r0
-/* 8038EB4C 0038B72C  4E 80 00 20 */	blr 
+/* 8038EB4C 0038B72C  4E 80 00 20 */	blr
 
 .global HSD_DevComStdCallback
 HSD_DevComStdCallback:
@@ -114,7 +114,7 @@ lbl_8038EBA0:
 /* 8038EBBC 0038B79C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8038EBC0 0038B7A0  38 21 00 18 */	addi r1, r1, 0x18
 /* 8038EBC4 0038B7A4  7C 08 03 A6 */	mtlr r0
-/* 8038EBC8 0038B7A8  4E 80 00 20 */	blr 
+/* 8038EBC8 0038B7A8  4E 80 00 20 */	blr
 
 .global HSD_DevComARAMCallback
 HSD_DevComARAMCallback:
@@ -153,7 +153,7 @@ lbl_8038EC2C:
 /* 8038EC3C 0038B81C  7D 88 03 A6 */	mtlr r12
 /* 8038EC40 0038B820  80 86 00 20 */	lwz r4, 0x20(r6)
 /* 8038EC44 0038B824  A0 C6 00 1A */	lhz r6, 0x1a(r6)
-/* 8038EC48 0038B828  4E 80 00 21 */	blrl 
+/* 8038EC48 0038B828  4E 80 00 21 */	blrl
 lbl_8038EC4C:
 /* 8038EC4C 0038B82C  80 6D C1 68 */	lwz r3, lbl_804D7808@sda21(r13)
 /* 8038EC50 0038B830  4B FF FE 19 */	bl HSD_DevComUnlink
@@ -193,7 +193,7 @@ lbl_8038ECA4:
 /* 8038ECCC 0038B8AC  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 8038ECD0 0038B8B0  38 21 00 20 */	addi r1, r1, 0x20
 /* 8038ECD4 0038B8B4  7C 08 03 A6 */	mtlr r0
-/* 8038ECD8 0038B8B8  4E 80 00 20 */	blr 
+/* 8038ECD8 0038B8B8  4E 80 00 20 */	blr
 
 .global HSD_DevComARAMWakeUp
 HSD_DevComARAMWakeUp:
@@ -228,7 +228,7 @@ lbl_8038ED14:
 /* 8038ED48 0038B928  80 84 00 20 */	lwz r4, 0x20(r4)
 /* 8038ED4C 0038B92C  38 A0 00 00 */	li r5, 0
 /* 8038ED50 0038B930  38 C0 00 01 */	li r6, 1
-/* 8038ED54 0038B934  4E 80 00 21 */	blrl 
+/* 8038ED54 0038B934  4E 80 00 21 */	blrl
 lbl_8038ED58:
 /* 8038ED58 0038B938  80 6D C1 68 */	lwz r3, lbl_804D7808@sda21(r13)
 /* 8038ED5C 0038B93C  4B FF FD 0D */	bl HSD_DevComUnlink
@@ -452,7 +452,7 @@ lbl_8038F084:
 /* 8038F088 0038BC68  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8038F08C 0038BC6C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8038F090 0038BC70  7C 08 03 A6 */	mtlr r0
-/* 8038F094 0038BC74  4E 80 00 20 */	blr 
+/* 8038F094 0038BC74  4E 80 00 20 */	blr
 lbl_8038F098:
 /* 8038F098 0038BC78  7C 08 02 A6 */	mflr r0
 /* 8038F09C 0038BC7C  3C 80 80 4C */	lis r4, lbl_804C62A0@ha
@@ -486,7 +486,7 @@ lbl_8038F0E8:
 /* 8038F100 0038BCE0  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8038F104 0038BCE4  38 21 00 18 */	addi r1, r1, 0x18
 /* 8038F108 0038BCE8  7C 08 03 A6 */	mtlr r0
-/* 8038F10C 0038BCEC  4E 80 00 20 */	blr 
+/* 8038F10C 0038BCEC  4E 80 00 20 */	blr
 
 .global lbl_8038F110
 lbl_8038F110:
@@ -543,7 +543,7 @@ lbl_8038F194:
 /* 8038F1C4 0038BDA4  80 85 00 20 */	lwz r4, 0x20(r5)
 /* 8038F1C8 0038BDA8  A0 C5 00 1A */	lhz r6, 0x1a(r5)
 /* 8038F1CC 0038BDAC  38 A0 00 00 */	li r5, 0
-/* 8038F1D0 0038BDB0  4E 80 00 21 */	blrl 
+/* 8038F1D0 0038BDB0  4E 80 00 21 */	blrl
 lbl_8038F1D4:
 /* 8038F1D4 0038BDB4  83 DF 00 00 */	lwz r30, 0(r31)
 /* 8038F1D8 0038BDB8  4B FB 81 8D */	bl OSDisableInterrupts
@@ -559,7 +559,7 @@ lbl_8038F1D4:
 /* 8038F200 0038BDE0  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8038F204 0038BDE4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8038F208 0038BDE8  7C 08 03 A6 */	mtlr r0
-/* 8038F20C 0038BDEC  4E 80 00 20 */	blr 
+/* 8038F20C 0038BDEC  4E 80 00 20 */	blr
 
 .global HSD_DevComDVDMemCallback
 HSD_DevComDVDMemCallback:
@@ -604,7 +604,7 @@ lbl_8038F280:
 /* 8038F2A0 0038BE80  80 85 00 20 */	lwz r4, 0x20(r5)
 /* 8038F2A4 0038BE84  A0 C5 00 1A */	lhz r6, 0x1a(r5)
 /* 8038F2A8 0038BE88  38 A0 00 00 */	li r5, 0
-/* 8038F2AC 0038BE8C  4E 80 00 21 */	blrl 
+/* 8038F2AC 0038BE8C  4E 80 00 21 */	blrl
 lbl_8038F2B0:
 /* 8038F2B0 0038BE90  80 6D C1 58 */	lwz r3, lbl_804D77F8@sda21(r13)
 /* 8038F2B4 0038BE94  4B FF F7 B5 */	bl HSD_DevComUnlink
@@ -622,7 +622,7 @@ lbl_8038F2DC:
 /* 8038F2E0 0038BEC0  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8038F2E4 0038BEC4  38 21 00 18 */	addi r1, r1, 0x18
 /* 8038F2E8 0038BEC8  7C 08 03 A6 */	mtlr r0
-/* 8038F2EC 0038BECC  4E 80 00 20 */	blr 
+/* 8038F2EC 0038BECC  4E 80 00 20 */	blr
 
 .global HSD_DevComDVDCallback
 HSD_DevComDVDCallback:
@@ -674,7 +674,7 @@ lbl_8038F370:
 /* 8038F398 0038BF78  7D 88 03 A6 */	mtlr r12
 /* 8038F39C 0038BF7C  A0 C6 00 1A */	lhz r6, 0x1a(r6)
 /* 8038F3A0 0038BF80  38 A5 00 A0 */	addi r5, r5, 0xa0
-/* 8038F3A4 0038BF84  4E 80 00 21 */	blrl 
+/* 8038F3A4 0038BF84  4E 80 00 21 */	blrl
 lbl_8038F3A8:
 /* 8038F3A8 0038BF88  80 6D C1 58 */	lwz r3, lbl_804D77F8@sda21(r13)
 /* 8038F3AC 0038BF8C  4B FF F6 BD */	bl HSD_DevComUnlink
@@ -760,7 +760,7 @@ lbl_8038F4D8:
 /* 8038F4E0 0038C0C0  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8038F4E4 0038C0C4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8038F4E8 0038C0C8  7C 08 03 A6 */	mtlr r0
-/* 8038F4EC 0038C0CC  4E 80 00 20 */	blr 
+/* 8038F4EC 0038C0CC  4E 80 00 20 */	blr
 
 .global HSD_DevComDVDWakeUp
 HSD_DevComDVDWakeUp:
@@ -801,7 +801,7 @@ lbl_8038F53C:
 /* 8038F570 0038C150  80 85 00 20 */	lwz r4, 0x20(r5)
 /* 8038F574 0038C154  38 A0 00 00 */	li r5, 0
 /* 8038F578 0038C158  38 C0 00 01 */	li r6, 1
-/* 8038F57C 0038C15C  4E 80 00 21 */	blrl 
+/* 8038F57C 0038C15C  4E 80 00 21 */	blrl
 lbl_8038F580:
 /* 8038F580 0038C160  80 6D C1 58 */	lwz r3, lbl_804D77F8@sda21(r13)
 /* 8038F584 0038C164  4B FF F4 E5 */	bl HSD_DevComUnlink
@@ -898,7 +898,7 @@ lbl_8038F6B4:
 /* 8038F6C4 0038C2A4  83 81 00 08 */	lwz r28, 8(r1)
 /* 8038F6C8 0038C2A8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8038F6CC 0038C2AC  7C 08 03 A6 */	mtlr r0
-/* 8038F6D0 0038C2B0  4E 80 00 20 */	blr 
+/* 8038F6D0 0038C2B0  4E 80 00 20 */	blr
 
 .global HSD_DevComRequest
 HSD_DevComRequest:
@@ -1079,7 +1079,7 @@ lbl_8038F940:
 /* 8038F944 0038C524  80 01 00 64 */	lwz r0, 0x64(r1)
 /* 8038F948 0038C528  38 21 00 60 */	addi r1, r1, 0x60
 /* 8038F94C 0038C52C  7C 08 03 A6 */	mtlr r0
-/* 8038F950 0038C530  4E 80 00 20 */	blr 
+/* 8038F950 0038C530  4E 80 00 20 */	blr
 
 .global HSD_DevComCancelEx
 HSD_DevComCancelEx:
@@ -1141,7 +1141,7 @@ lbl_8038FA00:
 /* 8038FA14 0038C5F4  80 9B 00 20 */	lwz r4, 0x20(r27)
 /* 8038FA18 0038C5F8  38 A0 00 00 */	li r5, 0
 /* 8038FA1C 0038C5FC  38 C0 00 01 */	li r6, 1
-/* 8038FA20 0038C600  4E 80 00 21 */	blrl 
+/* 8038FA20 0038C600  4E 80 00 21 */	blrl
 lbl_8038FA24:
 /* 8038FA24 0038C604  7F 63 DB 78 */	mr r3, r27
 /* 8038FA28 0038C608  4B FF F0 41 */	bl HSD_DevComUnlink
@@ -1178,7 +1178,7 @@ lbl_8038FA88:
 /* 8038FA98 0038C678  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8038FA9C 0038C67C  38 21 00 38 */	addi r1, r1, 0x38
 /* 8038FAA0 0038C680  7C 08 03 A6 */	mtlr r0
-/* 8038FAA4 0038C684  4E 80 00 20 */	blr 
+/* 8038FAA4 0038C684  4E 80 00 20 */	blr
 
 
 .section .data
@@ -1207,20 +1207,20 @@ lbl_804083B8:
     .balign 8
 .global lbl_804C62A0
 lbl_804C62A0:
-	.skip 0x80
+    .skip 0x80
 .global lbl_804C6320
 lbl_804C6320:
-	.skip 0x10
+    .skip 0x10
 .global lbl_804C6330
 lbl_804C6330:
-	.skip 0x8050
+    .skip 0x8050
 
 
 .section .sdata
     .balign 8
 .global lbl_804D6050
 lbl_804D6050:
-	.long 4
+    .long 4
 .global lbl_804D6054
 lbl_804D6054:
     .asciz "0"
@@ -1235,31 +1235,31 @@ lbl_804D6058:
     .balign 8
 .global lbl_804D77F0
 lbl_804D77F0:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D77F4
 lbl_804D77F4:
-	.skip 0x1
+    .skip 0x1
 .global lbl_804D77F5
 lbl_804D77F5:
-	.skip 0x1
+    .skip 0x1
 .global lbl_804D77F6
 lbl_804D77F6:
-	.skip 0x1
+    .skip 0x1
 .global lbl_804D77F7
 lbl_804D77F7:
-	.skip 0x1
+    .skip 0x1
 .global lbl_804D77F8
 lbl_804D77F8:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D77FC
 lbl_804D77FC:
-	.skip 0x8
+    .skip 0x8
 .global lbl_804D7804
 lbl_804D7804:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7808
 lbl_804D7808:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D780C
 lbl_804D780C:
-	.skip 0x4
+    .skip 0x4

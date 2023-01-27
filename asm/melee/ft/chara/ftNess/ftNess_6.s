@@ -1,6 +1,6 @@
 .include "macros.inc"
 
-.section .text  # 0x80005940 - 0x803B7240 
+.section .text  # 0x80005940 - 0x803B7240
 
 .global ftNess_SpecialAirNHold_Coll
 ftNess_SpecialAirNHold_Coll:
@@ -31,7 +31,7 @@ lbl_80117AEC:
 /* 80117AF4 001146D4  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80117AF8 001146D8  38 21 00 18 */	addi r1, r1, 0x18
 /* 80117AFC 001146DC  7C 08 03 A6 */	mtlr r0
-/* 80117B00 001146E0  4E 80 00 20 */	blr 
+/* 80117B00 001146E0  4E 80 00 20 */	blr
 .global ftNess_SpecialAirNEnd_Coll
 ftNess_SpecialAirNEnd_Coll:
 /* 80117B04 001146E4  7C 08 02 A6 */	mflr r0
@@ -62,17 +62,17 @@ lbl_80117B58:
 /* 80117B60 00114740  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80117B64 00114744  38 21 00 18 */	addi r1, r1, 0x18
 /* 80117B68 00114748  7C 08 03 A6 */	mtlr r0
-/* 80117B6C 0011474C  4E 80 00 20 */	blr 
+/* 80117B6C 0011474C  4E 80 00 20 */	blr
 
 .section .sdata2
     .balign 8
 .global lbl_804D9720/*0.0f*/
 lbl_804D9720/*0.0f*/:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804D9724/*3.0f*/
 lbl_804D9724/*3.0f*/:
-	.4byte 0x40400000
+    .4byte 0x40400000
 .global lbl_804D9728/*1.0f*/
 lbl_804D9728/*1.0f*/:
-	.4byte 0x3F800000
-	.4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x00000000

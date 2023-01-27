@@ -3,9 +3,9 @@
 
 #include <dolphin/gx/__types.h>
 
-void __GXFifoInit();
-void GXSetGPFifo(GXFifoObj *fifo);
-void GXSetCPUFifo(GXFifoObj *fifo);
-void GXInitFifoBase(GXFifoObj *fifo, void *base, u32 size);
+void __GXFifoInit(void);
+void GXSetGPFifo(GXFifoObj* fifo);
+void GXSetCPUFifo(GXFifoObj* fifo);
+void GXInitFifoBase(GXFifoObj* fifo, void* base, u32 size);
 
 #endif

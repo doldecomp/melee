@@ -1,6 +1,12 @@
-#include <melee/ft/chara/ftCLink/ftclink.h>
+#include <melee/ft/chara/ftCLink/ftclink_2.h>
 
-extern void func_800EAF58(HSD_GObj*);
+#include <melee/ft/chara/ftCLink/ftclink.h>
+#include <melee/ft/chara/ftLink/ftlink.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftparts.h>
+#include <melee/it/code_8027CF30.h>
 
 void func_80149354(HSD_GObj* gobj)
 {
@@ -13,7 +19,7 @@ void func_80149354(HSD_GObj* gobj)
 
     if (fp->x2204_ftcmd_var1 == 1 && fp->sa.clink.x2244 == 0) {
         temp_r3 = func_802C8B28(gobj, &fp->xB0_pos, func_8007500C(ft2, 0x1F),
-                                fp->x2C_facing_direction);
+                                fp->facing_dir);
         fp->sa.clink.x2244 = (u32) temp_r3;
         if (temp_r3 != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = func_800EAF58;
@@ -22,7 +28,7 @@ void func_80149354(HSD_GObj* gobj)
     } else if (ft2->x2204_ftcmd_var1 == 2) {
         func_80149268(gobj);
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         checkFighter2244(gobj);
         func_8008A2BC(gobj);
     }

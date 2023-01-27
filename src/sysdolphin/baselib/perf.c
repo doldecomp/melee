@@ -1,6 +1,7 @@
 #include <sysdolphin/baselib/perf.h>
 
 #include <dolphin/os/OSTime.h>
+#include <string.h>
 #include <sysdolphin/baselib/debug.h>
 
 s64 start_time;
@@ -21,21 +22,24 @@ void HSD_PerfSetStartTime(void)
 
 void HSD_PerfSetCPUTime(void)
 {
-    HSD_PerfCurrentStat.cpu_time = (OSGetTime() - start_time) / (f32) (*(u32*) 0x800000F8 / 4 / 60);
+    HSD_PerfCurrentStat.cpu_time =
+        (OSGetTime() - start_time) / (f32) (*(u32*) 0x800000F8 / 4 / 60);
 }
 
 void HSD_PerfSetDrawTime(void)
 {
-    HSD_PerfCurrentStat.draw_time = (OSGetTime() - start_time) / (f32) (*(u32*) 0x800000F8 / 4 / 60);
+    HSD_PerfCurrentStat.draw_time =
+        (OSGetTime() - start_time) / (f32) (*(u32*) 0x800000F8 / 4 / 60);
 }
 
 void HSD_PerfSetTotalTime(void)
 {
-    HSD_PerfCurrentStat.total_time = (OSGetTime() - start_time) / (f32) (*(u32*) 0x800000F8 / 4 / 60);
+    HSD_PerfCurrentStat.total_time =
+        (OSGetTime() - start_time) / (f32) (*(u32*) 0x800000F8 / 4 / 60);
 }
 
 void HSD_PerfCountEnvelopeBlending(s32 n)
 {
-    assert_line(0xA4, n < 32);
+    HSD_ASSERT(0xA4, n < 32);
     HSD_PerfCurrentStat.count[n]++;
 }

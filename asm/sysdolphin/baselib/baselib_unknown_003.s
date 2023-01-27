@@ -30,7 +30,7 @@ lbl_803A949C:
 /* 803A94F4 003A60D4  54 00 10 3A */	slwi r0, r0, 2
 /* 803A94F8 003A60D8  7C 03 00 2E */	lwzx r0, r3, r0
 /* 803A94FC 003A60DC  7C 09 03 A6 */	mtctr r0
-/* 803A9500 003A60E0  4E 80 04 20 */	bctr 
+/* 803A9500 003A60E0  4E 80 04 20 */	bctr
 lbl_803A9504:
 /* 803A9504 003A60E4  2C 1A 00 00 */	cmpwi r26, 0
 /* 803A9508 003A60E8  41 82 00 2C */	beq lbl_803A9534
@@ -1353,26 +1353,26 @@ lbl_803AA77C:
 /* 803AA780 003A7360  80 01 00 64 */	lwz r0, 0x64(r1)
 /* 803AA784 003A7364  38 21 00 60 */	addi r1, r1, 0x60
 /* 803AA788 003A7368  7C 08 03 A6 */	mtlr r0
-/* 803AA78C 003A736C  4E 80 00 20 */	blr 
+/* 803AA78C 003A736C  4E 80 00 20 */	blr
 
 .section .data
     .balign 1
 
 jtbl_80430B40:
-	.4byte lbl_803AA748
-	.4byte lbl_803AA20C
-	.4byte lbl_803A9504
-	.4byte lbl_803AA748
-	.4byte lbl_803AA748
-	.4byte lbl_803A97CC
-	.4byte lbl_803AA748
-	.4byte lbl_803AA494
-	.4byte lbl_803AA524
-	.4byte lbl_803AA534
-	.4byte lbl_803A9AA8
-	.4byte lbl_803A9E54
-	.4byte lbl_803AA748
-	.4byte lbl_803AA594
-	.4byte lbl_803AA748
-	.4byte lbl_803A972C
-	.4byte lbl_803AA350
+    .4byte lbl_803AA748
+    .4byte lbl_803AA20C
+    .4byte lbl_803A9504
+    .4byte lbl_803AA748
+    .4byte lbl_803AA748
+    .4byte lbl_803A97CC
+    .4byte lbl_803AA748
+    .4byte lbl_803AA494
+    .4byte lbl_803AA524
+    .4byte lbl_803AA534
+    .4byte lbl_803A9AA8
+    .4byte lbl_803A9E54
+    .4byte lbl_803AA748
+    .4byte lbl_803AA594
+    .4byte lbl_803AA748
+    .4byte lbl_803A972C
+    .4byte lbl_803AA350

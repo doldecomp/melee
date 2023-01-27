@@ -1,15 +1,12 @@
 #ifndef _ftcaptain_h_
 #define _ftcaptain_h_
 
-#include <global.h>
-#include <dolphin/types.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
+#include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef enum ftCaptainAction {
-
-    AS_FTCOMMON = 340,
-    AS_CAPTAIN_SWING42_SWORD,
+    AS_CAPTAIN_SWING42_SWORD = ASID_MAX,
     AS_CAPTAIN_SWING42_2,
     AS_CAPTAIN_SWING42_3,
     AS_CAPTAIN_SWING42_4,
@@ -31,18 +28,33 @@ typedef enum ftCaptainAction {
 // Flags used by Captain Falcon and Ganondorf in ActionStateChange //
 
 // SpecialN/SpecialAirN (Falcon / Warlock Punch)
-#define FTCAPTAIN_SPECIALN_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTCAPTAIN_SPECIALN_COLL_FLAG                                           \
+    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE |                          \
+        FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE |                         \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
+        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
+        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 // SpecialS/SpecialAirS (Raptor Boost / Gerudo Dragon)
-#define FTCAPTAIN_SPECIALS_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTCAPTAIN_SPECIALS_FLAG                                                \
+    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |     \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
+        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
+        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
-typedef struct _ftCaptainAttributes
-{
-    f32 x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG;   // Minimum control stick range required for downward angle (Negative Y)
-    f32 x4_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_POS;   // Minimum control stick range required for upward angle (Positive Y)
-    f32 x8_CAPTAIN_FALCONPUNCH_ANGLE_DIFF;          // Maximum angle change from control stick input
-    f32 xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X;          // Momentum gained from aerial Falcon/Warlock Punch
-    f32 x10_CAPTAIN_FALCONPUNCH_MOMENTUM_MUL;       // Additional momentum from angled Falcon/Warlock Punch
+typedef struct _ftCaptainAttributes {
+    f32 x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG; // Minimum control stick range
+                                                  // required for downward angle
+                                                  // (Negative Y)
+    f32 x4_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_POS; // Minimum control stick range
+                                                  // required for upward angle
+                                                  // (Positive Y)
+    f32 x8_CAPTAIN_FALCONPUNCH_ANGLE_DIFF; // Maximum angle change from control
+                                           // stick input
+    f32 xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X; // Momentum gained from aerial
+                                           // Falcon/Warlock Punch
+    f32 x10_CAPTAIN_FALCONPUNCH_MOMENTUM_MUL; // Additional momentum from angled
+                                              // Falcon/Warlock Punch
 
     f32 x14_CAPTAIN_RAPTORBOOST_GROUND_VEL_X;
     f32 x18_CAPTAIN_RAPTORBOOST_GRAVITY;
@@ -80,15 +92,22 @@ typedef struct _ftCaptainAttributes
 
 } ftCaptainAttributes;
 
+extern ActionState as_table_cfalcon[];
+extern char lbl_803C7598[];
+extern char lbl_803C75A4[];
+extern Fighter_CostumeStrings lbl_803C773C[];
+extern char lbl_803C76A0[];
+extern Fighter_DemoStrings lbl_803C772C;
+
 // Captain Falcon & Ganondorf functions //
 
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj);
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj);
 void lbl_800E28C8(HSD_GObj* fighter_gobj);
-void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, BOOL unk_var);
-void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj) ;
+void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, bool unk_var);
+void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj);
 void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj);
-void ftCFalcon_OnItemDrop(HSD_GObj* fighter_gobj, BOOL unk1);
+void ftCFalcon_OnItemDrop(HSD_GObj* fighter_gobj, bool unk1);
 void ftCFalcon_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 
 // Neutral Special - Falcon/Warlock Punch (SpecialN) //
@@ -126,5 +145,13 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
+void ftCaptain_OnLoadForGanon(Fighter*);
+
+/// @todo @c ftCaptain prefix
+void ftCFalcon_LoadSpecialAttrs(HSD_GObj*);
+void ftCFalcon_SpecialAirHi_StartAction(HSD_GObj*);
+void ftCFalcon_SpecialAirLw_StartAction(HSD_GObj*);
+void ftCFalcon_SpecialLw_StartAction(HSD_GObj*);
+void ftFalcon_SpecialHi_StartAction(HSD_GObj*);
 
 #endif

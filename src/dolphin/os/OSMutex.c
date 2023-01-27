@@ -1,5 +1,7 @@
 #include <dolphin/os/OSMutex.h>
 
+#include <placeholder.h>
+
 void __OSUnlockAllMutex(OSThread* thread)
 {
     while (thread->mutexQueue.head != NULL) {
@@ -17,8 +19,10 @@ void __OSUnlockAllMutex(OSThread* thread)
     }
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __OSCheckMutex()
+asm void __OSCheckMutex(void)
 { // clang-format off
     nofralloc
 /* 80347F4C 00344B2C  80 83 00 00 */	lwz r4, 0(r3)
@@ -29,7 +33,7 @@ asm unk_t __OSCheckMutex()
 /* 80347F60 00344B40  28 00 00 00 */	cmplwi r0, 0
 /* 80347F64 00344B44  41 82 00 0C */	beq lbl_80347F70
 /* 80347F68 00344B48  38 60 00 00 */	li r3, 0
-/* 80347F6C 00344B4C  4E 80 00 20 */	blr 
+/* 80347F6C 00344B4C  4E 80 00 20 */	blr
 lbl_80347F70:
 /* 80347F70 00344B50  80 A3 00 04 */	lwz r5, 4(r3)
 /* 80347F74 00344B54  28 05 00 00 */	cmplwi r5, 0
@@ -38,7 +42,7 @@ lbl_80347F70:
 /* 80347F80 00344B60  28 00 00 00 */	cmplwi r0, 0
 /* 80347F84 00344B64  41 82 00 0C */	beq lbl_80347F90
 /* 80347F88 00344B68  38 60 00 00 */	li r3, 0
-/* 80347F8C 00344B6C  4E 80 00 20 */	blr 
+/* 80347F8C 00344B6C  4E 80 00 20 */	blr
 lbl_80347F90:
 /* 80347F90 00344B70  7C 86 23 78 */	mr r6, r4
 /* 80347F94 00344B74  48 00 00 74 */	b lbl_80348008
@@ -50,7 +54,7 @@ lbl_80347F98:
 /* 80347FA8 00344B88  7C 06 00 40 */	cmplw r6, r0
 /* 80347FAC 00344B8C  41 82 00 0C */	beq lbl_80347FB8
 /* 80347FB0 00344B90  38 60 00 00 */	li r3, 0
-/* 80347FB4 00344B94  4E 80 00 20 */	blr 
+/* 80347FB4 00344B94  4E 80 00 20 */	blr
 lbl_80347FB8:
 /* 80347FB8 00344B98  80 A6 02 E4 */	lwz r5, 0x2e4(r6)
 /* 80347FBC 00344B9C  28 05 00 00 */	cmplwi r5, 0
@@ -59,19 +63,19 @@ lbl_80347FB8:
 /* 80347FC8 00344BA8  7C 06 00 40 */	cmplw r6, r0
 /* 80347FCC 00344BAC  41 82 00 0C */	beq lbl_80347FD8
 /* 80347FD0 00344BB0  38 60 00 00 */	li r3, 0
-/* 80347FD4 00344BB4  4E 80 00 20 */	blr 
+/* 80347FD4 00344BB4  4E 80 00 20 */	blr
 lbl_80347FD8:
 /* 80347FD8 00344BB8  A0 06 02 C8 */	lhz r0, 0x2c8(r6)
 /* 80347FDC 00344BBC  28 00 00 04 */	cmplwi r0, 4
 /* 80347FE0 00344BC0  41 82 00 0C */	beq lbl_80347FEC
 /* 80347FE4 00344BC4  38 60 00 00 */	li r3, 0
-/* 80347FE8 00344BC8  4E 80 00 20 */	blr 
+/* 80347FE8 00344BC8  4E 80 00 20 */	blr
 lbl_80347FEC:
 /* 80347FEC 00344BCC  80 06 02 D0 */	lwz r0, 0x2d0(r6)
 /* 80347FF0 00344BD0  7C 00 38 00 */	cmpw r0, r7
 /* 80347FF4 00344BD4  40 80 00 0C */	bge lbl_80348000
 /* 80347FF8 00344BD8  38 60 00 00 */	li r3, 0
-/* 80347FFC 00344BDC  4E 80 00 20 */	blr 
+/* 80347FFC 00344BDC  4E 80 00 20 */	blr
 lbl_80348000:
 /* 80348000 00344BE0  7C 07 03 78 */	mr r7, r0
 /* 80348004 00344BE4  38 C4 00 00 */	addi r6, r4, 0
@@ -85,21 +89,32 @@ lbl_80348008:
 /* 80348020 00344C00  2C 00 00 00 */	cmpwi r0, 0
 /* 80348024 00344C04  41 81 00 20 */	bgt lbl_80348044
 /* 80348028 00344C08  38 60 00 00 */	li r3, 0
-/* 8034802C 00344C0C  4E 80 00 20 */	blr 
+/* 8034802C 00344C0C  4E 80 00 20 */	blr
 lbl_80348030:
 /* 80348030 00344C10  80 03 00 0C */	lwz r0, 0xc(r3)
 /* 80348034 00344C14  2C 00 00 00 */	cmpwi r0, 0
 /* 80348038 00344C18  41 82 00 0C */	beq lbl_80348044
 /* 8034803C 00344C1C  38 60 00 00 */	li r3, 0
-/* 80348040 00344C20  4E 80 00 20 */	blr 
+/* 80348040 00344C20  4E 80 00 20 */	blr
 lbl_80348044:
 /* 80348044 00344C24  38 60 00 01 */	li r3, 1
-/* 80348048 00344C28  4E 80 00 20 */	blr 
+/* 80348048 00344C28  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void __OSCheckMutex(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __OSCheckDeadLock()
+asm void __OSCheckDeadLock(void)
 { // clang-format off
     nofralloc
 /* 8034804C 00344C2C  80 83 02 F0 */	lwz r4, 0x2f0(r3)
@@ -108,7 +123,7 @@ lbl_80348054:
 /* 80348054 00344C34  7C 04 18 40 */	cmplw r4, r3
 /* 80348058 00344C38  40 82 00 0C */	bne lbl_80348064
 /* 8034805C 00344C3C  38 60 00 01 */	li r3, 1
-/* 80348060 00344C40  4E 80 00 20 */	blr 
+/* 80348060 00344C40  4E 80 00 20 */	blr
 lbl_80348064:
 /* 80348064 00344C44  80 84 02 F0 */	lwz r4, 0x2f0(r4)
 lbl_80348068:
@@ -119,12 +134,23 @@ lbl_80348068:
 /* 80348078 00344C58  40 82 FF DC */	bne lbl_80348054
 lbl_8034807C:
 /* 8034807C 00344C5C  38 60 00 00 */	li r3, 0
-/* 80348080 00344C60  4E 80 00 20 */	blr 
+/* 80348080 00344C60  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void __OSCheckDeadLock(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __OSCheckMutexes()
+asm void __OSCheckMutexes(void)
 { // clang-format off
     nofralloc
 /* 80348084 00344C64  7C 08 02 A6 */	mflr r0
@@ -160,6 +186,15 @@ lbl_803480E0:
 /* 803480E8 00344CC8  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 803480EC 00344CCC  7C 08 03 A6 */	mtlr r0
 /* 803480F0 00344CD0  38 21 00 18 */	addi r1, r1, 0x18
-/* 803480F4 00344CD4  4E 80 00 20 */	blr 
+/* 803480F4 00344CD4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __OSCheckMutexes(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

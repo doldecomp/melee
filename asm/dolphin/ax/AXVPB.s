@@ -5,7 +5,7 @@
 .global __AXGetNumVoices
 __AXGetNumVoices:
 /* 8035A250 00356E30  80 6D BE E8 */	lwz r3, __AXNumVoices@sda21(r13)
-/* 8035A254 00356E34  4E 80 00 20 */	blr 
+/* 8035A254 00356E34  4E 80 00 20 */	blr
 
 .global __AXServiceVPB
 __AXServiceVPB:
@@ -29,7 +29,7 @@ __AXServiceVPB:
 /* 8035A29C 00356E7C  B0 06 00 7A */	sth r0, 0x7a(r6)
 /* 8035A2A0 00356E80  A0 05 00 7C */	lhz r0, 0x7c(r5)
 /* 8035A2A4 00356E84  B0 06 00 7C */	sth r0, 0x7c(r6)
-/* 8035A2A8 00356E88  4E 80 00 20 */	blr 
+/* 8035A2A8 00356E88  4E 80 00 20 */	blr
 lbl_8035A2AC:
 /* 8035A2AC 00356E8C  54 87 00 01 */	rlwinm. r7, r4, 0, 0, 0
 /* 8035A2B0 00356E90  41 82 02 24 */	beq lbl_8035A4D4
@@ -131,13 +131,13 @@ lbl_8035A2AC:
 /* 8035A430 00357010  90 85 00 BC */	stw r4, 0xbc(r5)
 /* 8035A434 00357014  80 83 00 28 */	lwz r4, 0x28(r3)
 /* 8035A438 00357018  28 04 00 00 */	cmplwi r4, 0
-/* 8035A43C 0035701C  4D 82 00 20 */	beqlr 
+/* 8035A43C 0035701C  4D 82 00 20 */	beqlr
 /* 8035A440 00357020  80 A3 00 18 */	lwz r5, 0x18(r3)
 /* 8035A444 00357024  38 63 00 34 */	addi r3, r3, 0x34
 /* 8035A448 00357028  54 A5 40 2E */	slwi r5, r5, 8
 /* 8035A44C 0035702C  7C A0 2A 14 */	add r5, r0, r5
 /* 8035A450 00357030  38 A5 40 00 */	addi r5, r5, 0x4000
-/* 8035A454 00357034  4D 82 00 20 */	beqlr 
+/* 8035A454 00357034  4D 82 00 20 */	beqlr
 /* 8035A458 00357038  54 80 E8 FF */	rlwinm. r0, r4, 0x1d, 3, 0x1f
 /* 8035A45C 0035703C  7C 09 03 A6 */	mtctr r0
 /* 8035A460 00357040  41 82 00 58 */	beq lbl_8035A4B8
@@ -162,7 +162,7 @@ lbl_8035A464:
 /* 8035A4A8 00357088  38 63 00 20 */	addi r3, r3, 0x20
 /* 8035A4AC 0035708C  42 00 FF B8 */	bdnz lbl_8035A464
 /* 8035A4B0 00357090  70 84 00 07 */	andi. r4, r4, 7
-/* 8035A4B4 00357094  4D 82 00 20 */	beqlr 
+/* 8035A4B4 00357094  4D 82 00 20 */	beqlr
 lbl_8035A4B8:
 /* 8035A4B8 00357098  7C 89 03 A6 */	mtctr r4
 lbl_8035A4BC:
@@ -171,7 +171,7 @@ lbl_8035A4BC:
 /* 8035A4C4 003570A4  90 03 00 00 */	stw r0, 0(r3)
 /* 8035A4C8 003570A8  38 63 00 04 */	addi r3, r3, 4
 /* 8035A4CC 003570AC  42 00 FF F0 */	bdnz lbl_8035A4BC
-/* 8035A4D0 003570B0  4E 80 00 20 */	blr 
+/* 8035A4D0 003570B0  4E 80 00 20 */	blr
 lbl_8035A4D4:
 /* 8035A4D4 003570B4  54 87 07 FF */	clrlwi. r7, r4, 0x1f
 /* 8035A4D8 003570B8  41 82 00 14 */	beq lbl_8035A4EC
@@ -470,14 +470,14 @@ lbl_8035A8D0:
 /* 8035A90C 003574EC  B0 05 00 B2 */	sth r0, 0xb2(r5)
 lbl_8035A910:
 /* 8035A910 003574F0  54 80 02 D7 */	rlwinm. r0, r4, 0, 0xb, 0xb
-/* 8035A914 003574F4  4D 82 00 20 */	beqlr 
+/* 8035A914 003574F4  4D 82 00 20 */	beqlr
 /* 8035A918 003574F8  A0 06 00 B4 */	lhz r0, 0xb4(r6)
 /* 8035A91C 003574FC  B0 05 00 B4 */	sth r0, 0xb4(r5)
 /* 8035A920 00357500  A0 06 00 B6 */	lhz r0, 0xb6(r6)
 /* 8035A924 00357504  B0 05 00 B6 */	sth r0, 0xb6(r5)
 /* 8035A928 00357508  A0 06 00 B8 */	lhz r0, 0xb8(r6)
 /* 8035A92C 0035750C  B0 05 00 B8 */	sth r0, 0xb8(r5)
-/* 8035A930 00357510  4E 80 00 20 */	blr 
+/* 8035A930 00357510  4E 80 00 20 */	blr
 
 .global __AXSyncPBs
 __AXSyncPBs:
@@ -638,13 +638,13 @@ lbl_8035AB3C:
 /* 8035AB6C 0035774C  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8035AB70 00357750  38 21 00 30 */	addi r1, r1, 0x30
 /* 8035AB74 00357754  7C 08 03 A6 */	mtlr r0
-/* 8035AB78 00357758  4E 80 00 20 */	blr 
+/* 8035AB78 00357758  4E 80 00 20 */	blr
 
 .global __AXGetPBs
 __AXGetPBs:
 /* 8035AB7C 0035775C  3C 60 80 4B */	lis r3, __AXPB@ha
 /* 8035AB80 00357760  38 63 09 E0 */	addi r3, r3, __AXPB@l
-/* 8035AB84 00357764  4E 80 00 20 */	blr 
+/* 8035AB84 00357764  4E 80 00 20 */	blr
 
 .global __AXSetPBDefault
 __AXSetPBDefault:
@@ -662,7 +662,7 @@ __AXSetPBDefault:
 /* 8035ABB4 00357794  B0 A3 01 80 */	sth r5, 0x180(r3)
 /* 8035ABB8 00357798  B0 A3 01 7E */	sth r5, 0x17e(r3)
 /* 8035ABBC 0035779C  B0 A3 01 7C */	sth r5, 0x17c(r3)
-/* 8035ABC0 003577A0  4E 80 00 20 */	blr 
+/* 8035ABC0 003577A0  4E 80 00 20 */	blr
 
 .global __AXVPBInit
 __AXVPBInit:
@@ -799,7 +799,7 @@ lbl_8035AD40:
 /* 8035ADB4 00357994  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8035ADB8 00357998  38 21 00 30 */	addi r1, r1, 0x30
 /* 8035ADBC 0035799C  7C 08 03 A6 */	mtlr r0
-/* 8035ADC0 003579A0  4E 80 00 20 */	blr 
+/* 8035ADC0 003579A0  4E 80 00 20 */	blr
 
 .global AXSetVoiceState
 AXSetVoiceState:
@@ -826,7 +826,7 @@ lbl_8035AE04:
 /* 8035AE10 003579F0  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8035AE14 003579F4  7C 08 03 A6 */	mtlr r0
 /* 8035AE18 003579F8  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035AE1C 003579FC  4E 80 00 20 */	blr 
+/* 8035AE1C 003579FC  4E 80 00 20 */	blr
 
 .global func_8035AE20
 func_8035AE20:
@@ -994,7 +994,7 @@ lbl_8035B04C:
 /* 8035B06C 00357C4C  7C 08 03 A6 */	mtlr r0
 /* 8035B070 00357C50  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8035B074 00357C54  38 21 00 20 */	addi r1, r1, 0x20
-/* 8035B078 00357C58  4E 80 00 20 */	blr 
+/* 8035B078 00357C58  4E 80 00 20 */	blr
 
 .global AXSetVoiceItdOn
 AXSetVoiceItdOn:
@@ -1022,7 +1022,7 @@ AXSetVoiceItdOn:
 /* 8035B0D0 00357CB0  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8035B0D4 00357CB4  38 21 00 18 */	addi r1, r1, 0x18
 /* 8035B0D8 00357CB8  7C 08 03 A6 */	mtlr r0
-/* 8035B0DC 00357CBC  4E 80 00 20 */	blr 
+/* 8035B0DC 00357CBC  4E 80 00 20 */	blr
 
 .global AXSetVoiceItdTarget
 AXSetVoiceItdTarget:
@@ -1048,7 +1048,7 @@ AXSetVoiceItdTarget:
 /* 8035B12C 00357D0C  7C 08 03 A6 */	mtlr r0
 /* 8035B130 00357D10  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8035B134 00357D14  38 21 00 20 */	addi r1, r1, 0x20
-/* 8035B138 00357D18  4E 80 00 20 */	blr 
+/* 8035B138 00357D18  4E 80 00 20 */	blr
 
 .global AXSetVoiceVe
 AXSetVoiceVe:
@@ -1073,7 +1073,7 @@ AXSetVoiceVe:
 /* 8035B184 00357D64  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8035B188 00357D68  7C 08 03 A6 */	mtlr r0
 /* 8035B18C 00357D6C  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035B190 00357D70  4E 80 00 20 */	blr 
+/* 8035B190 00357D70  4E 80 00 20 */	blr
 
 .global AXSetVoiceVeDelta
 AXSetVoiceVeDelta:
@@ -1095,7 +1095,7 @@ AXSetVoiceVeDelta:
 /* 8035B1D0 00357DB0  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8035B1D4 00357DB4  7C 08 03 A6 */	mtlr r0
 /* 8035B1D8 00357DB8  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035B1DC 00357DBC  4E 80 00 20 */	blr 
+/* 8035B1DC 00357DBC  4E 80 00 20 */	blr
 
 .global AXSetVoiceAddr
 AXSetVoiceAddr:
@@ -1170,7 +1170,7 @@ lbl_8035B2B4:
 /* 8035B2E0 00357EC0  7C 08 03 A6 */	mtlr r0
 /* 8035B2E4 00357EC4  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8035B2E8 00357EC8  38 21 00 20 */	addi r1, r1, 0x20
-/* 8035B2EC 00357ECC  4E 80 00 20 */	blr 
+/* 8035B2EC 00357ECC  4E 80 00 20 */	blr
 
 .global AXSetVoiceLoop
 AXSetVoiceLoop:
@@ -1192,7 +1192,7 @@ AXSetVoiceLoop:
 /* 8035B32C 00357F0C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8035B330 00357F10  7C 08 03 A6 */	mtlr r0
 /* 8035B334 00357F14  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035B338 00357F18  4E 80 00 20 */	blr 
+/* 8035B338 00357F18  4E 80 00 20 */	blr
 
 .global AXSetVoiceLoopAddr
 AXSetVoiceLoopAddr:
@@ -1216,7 +1216,7 @@ AXSetVoiceLoopAddr:
 /* 8035B380 00357F60  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8035B384 00357F64  7C 08 03 A6 */	mtlr r0
 /* 8035B388 00357F68  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035B38C 00357F6C  4E 80 00 20 */	blr 
+/* 8035B38C 00357F6C  4E 80 00 20 */	blr
 
 .global AXSetVoiceEndAddr
 AXSetVoiceEndAddr:
@@ -1240,7 +1240,7 @@ AXSetVoiceEndAddr:
 /* 8035B3D4 00357FB4  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8035B3D8 00357FB8  7C 08 03 A6 */	mtlr r0
 /* 8035B3DC 00357FBC  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035B3E0 00357FC0  4E 80 00 20 */	blr 
+/* 8035B3E0 00357FC0  4E 80 00 20 */	blr
 
 .global AXSetVoiceCurrentAddr
 AXSetVoiceCurrentAddr:
@@ -1264,7 +1264,7 @@ AXSetVoiceCurrentAddr:
 /* 8035B428 00358008  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8035B42C 0035800C  7C 08 03 A6 */	mtlr r0
 /* 8035B430 00358010  38 21 00 18 */	addi r1, r1, 0x18
-/* 8035B434 00358014  4E 80 00 20 */	blr 
+/* 8035B434 00358014  4E 80 00 20 */	blr
 
 .global AXSetVoiceAdpcm
 AXSetVoiceAdpcm:
@@ -1308,7 +1308,7 @@ AXSetVoiceAdpcm:
 /* 8035B4CC 003580AC  7C 08 03 A6 */	mtlr r0
 /* 8035B4D0 003580B0  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8035B4D4 003580B4  38 21 00 20 */	addi r1, r1, 0x20
-/* 8035B4D8 003580B8  4E 80 00 20 */	blr 
+/* 8035B4D8 003580B8  4E 80 00 20 */	blr
 
 .global AXSetVoiceSrc
 AXSetVoiceSrc:
@@ -1349,7 +1349,7 @@ AXSetVoiceSrc:
 /* 8035B564 00358144  7C 08 03 A6 */	mtlr r0
 /* 8035B568 00358148  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8035B56C 0035814C  38 21 00 20 */	addi r1, r1, 0x20
-/* 8035B570 00358150  4E 80 00 20 */	blr 
+/* 8035B570 00358150  4E 80 00 20 */	blr
 
 .global AXSetVoiceSrcRatio
 AXSetVoiceSrcRatio:
@@ -1391,7 +1391,7 @@ lbl_8035B5CC:
 /* 8035B5FC 003581DC  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8035B600 003581E0  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8035B604 003581E4  38 21 00 28 */	addi r1, r1, 0x28
-/* 8035B608 003581E8  4E 80 00 20 */	blr 
+/* 8035B608 003581E8  4E 80 00 20 */	blr
 
 .global AXSetVoiceAdpcmLoop
 AXSetVoiceAdpcmLoop:
@@ -1421,7 +1421,7 @@ AXSetVoiceAdpcmLoop:
 /* 8035B668 00358248  7C 08 03 A6 */	mtlr r0
 /* 8035B66C 0035824C  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8035B670 00358250  38 21 00 20 */	addi r1, r1, 0x20
-/* 8035B674 00358254  4E 80 00 20 */	blr 
+/* 8035B674 00358254  4E 80 00 20 */	blr
 
 
 .section .data
@@ -1473,7 +1473,7 @@ __AXMixCycles:
     .balign 8
 .global lbl_804DE358
 lbl_804DE358:
-	.4byte 0x47800000
+    .4byte 0x47800000
 
 
 .section .bss
@@ -1482,17 +1482,17 @@ lbl_804DE358:
     .balign 32
 .global __AXPB
 __AXPB:
-	.skip 0xFE00
+    .skip 0xFE00
 
 
 .section .sbss
     .balign 8
 .global __AXMaxDspCycles
 __AXMaxDspCycles:
-	.skip 0x4
+    .skip 0x4
 .global __AXRecDspCycles
 __AXRecDspCycles:
-	.skip 0x4
+    .skip 0x4
 .global __AXNumVoices
 __AXNumVoices:
-	.skip 0x4
+    .skip 0x4

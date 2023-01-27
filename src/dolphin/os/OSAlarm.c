@@ -1,24 +1,20 @@
-#include <dolphin/base/PPCArch.h>
 #include <dolphin/os/OSAlarm.h>
+
+#include <dolphin/base/PPCArch.h>
 #include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSError.h>
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
+#include <placeholder.h>
 
 static struct OSAlarmQueue {
     OSAlarm* head;
     OSAlarm* tail;
 } AlarmQueue;
 
-extern unk_t __OSSetExceptionHandler();
-extern unk_t __div2i();
-extern OSTime __OSGetSystemTime();
-
-typedef u8 __OSException;
-typedef void (*__OSExceptionHandler)(__OSException exception, OSContext* context);
-extern void DecrementerExceptionHandler(__OSException exception, OSContext* context);
-
-extern __OSExceptionHandler __OSGetExceptionHandler(__OSException);
+void DecrementerExceptionHandler(OSException exception, OSContext* context);
 
 void OSInitAlarm(void)
 {
@@ -29,9 +25,9 @@ void OSInitAlarm(void)
     }
 }
 
-void OSCreateAlarm(s32* arg0)
+void OSCreateAlarm(OSAlarm* alarm)
 {
-    *arg0 = 0;
+    alarm->handler = NULL;
 }
 
 static void SetTimer(OSAlarm* alarm)
@@ -100,9 +96,10 @@ void OSSetAlarm(OSAlarm* alarm, OSTime tick, OSAlarmHandler handler)
     OSRestoreInterrupts(oldInt);
 }
 
-void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period, OSAlarmHandler handler)
+void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period,
+                        OSAlarmHandler handler)
 {
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
     alarm->period = period;
     alarm->start = __OSTimeToSystemTime(start);
     InsertAlarm(alarm, 0, handler);
@@ -112,7 +109,7 @@ void OSSetPeriodicAlarm(OSAlarm* alarm, OSTime start, OSTime period, OSAlarmHand
 void OSCancelAlarm(OSAlarm* alarm)
 {
     OSAlarm* next;
-    BOOL enabled;
+    bool enabled;
 
     enabled = OSDisableInterrupts();
 
@@ -140,7 +137,7 @@ void OSCancelAlarm(OSAlarm* alarm)
     OSRestoreInterrupts(enabled);
 }
 
-static void DecrementerExceptionCallback(register __OSException exception,
+static void DecrementerExceptionCallback(register OSException exception,
                                          register OSContext* context)
 {
     OSAlarm* alarm;
@@ -189,8 +186,10 @@ static void DecrementerExceptionCallback(register __OSException exception,
     OSLoadContext(context);
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm void DecrementerExceptionHandler(__OSException exception, OSContext* context)
+asm void DecrementerExceptionHandler(OSException exception, OSContext* context)
 { // clang-format off
     nofralloc
 /* 80343DF8 003409D8  90 04 00 00 */	stw r0, 0(r4)
@@ -214,3 +213,12 @@ asm void DecrementerExceptionHandler(__OSException exception, OSContext* context
 /* 80343E40 00340A20  4B FF FD 88 */	b DecrementerExceptionCallback
 } // clang-format on
 #pragma pop
+
+#else
+
+void DecrementerExceptionHandler(OSException exception, OSContext* context)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

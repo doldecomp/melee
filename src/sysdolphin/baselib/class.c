@@ -1,6 +1,8 @@
 #include <sysdolphin/baselib/class.h>
 
 #include <dolphin/os/os.h>
+#include <string.h>
+#include <sysdolphin/baselib/hash.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/object.h>
 
@@ -11,23 +13,31 @@ static HSD_MemoryEntry** memory_list;
 static s32 nb_memory_list;
 static u32 lbl_804D7708;
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
+
 void ClassInfoInit(HSD_ClassInfo* info)
 {
     if ((info->head.flags & 1) == 0) {
         (*info->head.info_init)();
     }
 }
-#pragma pop
 
-void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info, char* base_class_library, char* type, s32 info_size, s32 class_size)
+#ifdef MUST_MATCH
+#pragma pop
+#endif
+
+void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info,
+                      char* base_class_library, char* type, s32 info_size,
+                      s32 class_size)
 {
     class_info->head.flags = 1;
     class_info->head.library_name = base_class_library;
     class_info->head.class_name = type;
-    class_info->head.obj_size = (s16)class_size;
-    class_info->head.info_size = (s16)info_size;
+    class_info->head.obj_size = (s16) class_size;
+    class_info->head.info_size = (s16) info_size;
     class_info->head.parent = parent_info;
     class_info->head.child = NULL;
     class_info->head.next = NULL;
@@ -38,15 +48,17 @@ void hsdInitClassInfo(HSD_ClassInfo* class_info, HSD_ClassInfo* parent_info, cha
         if ((parent_info->head.flags & 1) == 0) {
             (*parent_info->head.info_init)();
         }
-        assert_line(94, class_info->head.obj_size >= parent_info->head.obj_size);
-        assert_line(95, class_info->head.info_size >= parent_info->head.info_size);
-        memcpy(&class_info->alloc, &parent_info->alloc, parent_info->head.info_size - 0x28);
+        HSD_ASSERT(94, class_info->head.obj_size >= parent_info->head.obj_size);
+        HSD_ASSERT(95, class_info->head.info_size >= parent_info->head.info_size);
+        memcpy(&class_info->alloc, &parent_info->alloc,
+               parent_info->head.info_size - 0x28);
         class_info->head.next = parent_info->head.child;
         parent_info->head.child = class_info;
     }
 }
 
-void OSReport_PrintSpaces(s32 count) {
+void OSReport_PrintSpaces(s32 count)
+{
     s32 i;
 
     for (i = 0; i < count; i++) {
@@ -54,6 +66,7 @@ void OSReport_PrintSpaces(s32 count) {
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused1[] = "entry %d <null>\n";
@@ -61,24 +74,26 @@ static char unused2[] = "entry %d - %d <null>\n";
 static char unused3[] = "entry %d(%d)";
 static char unused4[] = "  nb_alloc %d nb_free %d\n";
 #pragma pop
+#endif
 
 HSD_MemoryEntry* GetMemoryEntry(s32 idx)
 {
-    assert_line(171, idx >= 0);
+    HSD_ASSERT(171, idx >= 0);
 
     if (idx >= nb_memory_list) {
-        if (nb_memory_list == 0) { //In this case, it's uninitialized and allocs the array
+        if (nb_memory_list == 0)
+        { // In this case, it's uninitialized and allocs the array
             s32 new_nb;
 
             for (new_nb = 32; idx >= new_nb; new_nb *= 2) {
             }
-            memory_list = (HSD_MemoryEntry**)HSD_MemAlloc(new_nb * 4);
+            memory_list = (HSD_MemoryEntry**) HSD_MemAlloc(new_nb * 4);
             if (memory_list == NULL) {
                 return NULL;
             }
-            memset(memory_list, 0, new_nb*4);
+            memset(memory_list, 0, new_nb * 4);
             nb_memory_list = new_nb;
-        } else { //Resizes the array
+        } else { // Resizes the array
             HSD_MemoryEntry** old_list;
             HSD_MemoryEntry** new_list;
             s32 old_nb, new_nb;
@@ -87,29 +102,32 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
             while (idx >= new_nb) {
                 new_nb *= 2;
             }
-            
+
             new_list = HSD_MemAlloc(4 * new_nb);
             if (new_list == NULL) {
                 return NULL;
             }
 
             memcpy(new_list, memory_list, 4 * nb_memory_list);
-            memset(&new_list[nb_memory_list], 0, 4 * (new_nb - nb_memory_list)); //You start *after* existing ptrs and make sure memory is zero'd
-    
+            memset(&new_list[nb_memory_list], 0,
+                   4 * (new_nb -
+                        nb_memory_list)); // You start *after* existing ptrs and
+                                          // make sure memory is zero'd
+
             old_list = memory_list;
             old_nb = OSRoundDown32B(nb_memory_list * 4);
             memory_list = new_list;
             nb_memory_list = new_nb;
 
             hsdFreeMemPiece(old_list, old_nb);
-            memory_list[OSRoundUp32B(old_nb)/32 - 1]->nb_alloc += 1;
+            memory_list[OSRoundUp32B(old_nb) / 32 - 1]->nb_alloc += 1;
         }
     }
 
     {
         s32 i;
         u32 size;
-        BOOL found;
+        bool found;
         HSD_MemoryEntry* entry;
 
         size = idx * 4;
@@ -121,17 +139,17 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
             memset(entry, 0, sizeof(HSD_MemoryEntry));
             entry->size = (idx + 1) * 32;
             memory_list[idx] = entry;
-            
-            found = FALSE;
+
+            found = false;
             for (i = idx - 1; i >= 0; --i) {
                 if (memory_list[i] != NULL) {
-                    found = TRUE;
+                    found = true;
                     entry->next = memory_list[i]->next;
                     memory_list[i]->next = entry;
                     break;
                 }
             }
-            if (found == FALSE) {
+            if (found == false) {
                 for (i = idx + 1; i < nb_memory_list; i++) {
                     if (memory_list[i] != NULL) {
                         entry->next = memory_list[i];
@@ -171,7 +189,8 @@ void* hsdAllocMemPiece(s32 size)
     var_r28 = temp_r3_3->next;
     while (var_r28 != NULL) {
         if (var_r28->free_list != NULL) {
-            temp_r3_4 = GetMemoryEntry((s32) (var_r28->size - temp_r3_3->size + 0x1F) / 32 - 1);
+            temp_r3_4 = GetMemoryEntry(
+                (s32) (var_r28->size - temp_r3_3->size + 0x1F) / 32 - 1);
             if (temp_r3_4 == NULL) {
                 return NULL;
             }
@@ -215,9 +234,9 @@ void* hsdAllocMemPiece(s32 size)
 void hsdFreeMemPiece(void* mem, s32 size)
 {
     HSD_MemoryEntry* entry;
-    HSD_FreeList* piece = (HSD_FreeList*)mem;
+    HSD_FreeList* piece = (HSD_FreeList*) mem;
 
-    if (mem != NULL ){
+    if (mem != NULL) {
         entry = GetMemoryEntry((size + 31) / 32 - 1);
         piece->next = entry->free_list;
         entry->free_list = piece;
@@ -238,14 +257,12 @@ HSD_Class* _hsdClassAlloc(HSD_ClassInfo* info)
     return mem_piece;
 }
 
-int _hsdClassInit(HSD_Class*)
+int _hsdClassInit(HSD_Class* arg0)
 {
     return 0;
 }
 
-void _hsdClassRelease(HSD_Class*)
-{
-}
+void _hsdClassRelease(HSD_Class* cls) {}
 
 void _hsdClassDestroy(HSD_Class* cls)
 {
@@ -268,7 +285,7 @@ void _hsdClassAmnesia(HSD_ClassInfo* info)
 void _hsdClassInfoInit(void)
 {
     hsdInitClassInfo(&hsdClass, NULL, "sysdolphin_base_library", "hsd_class",
-        sizeof(HSD_ClassInfo), sizeof(HSD_Class));
+                     sizeof(HSD_ClassInfo), sizeof(HSD_Class));
     hsdClass.alloc = _hsdClassAlloc;
     hsdClass.init = _hsdClassInit;
     hsdClass.release = _hsdClassRelease;
@@ -309,73 +326,85 @@ inline HSD_ClassInfo* HSD_PushClassInfo(HSD_ClassInfo* class_info)
     return ret = class_info;
 }
 
-inline BOOL hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
+inline bool hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo* var_r29;
     HSD_ClassInfo* var_r28;
 
-    assert_line(0x249, object);
-    assert_line(0x24A, class_info);
+    HSD_ASSERT(0x249, object);
+    HSD_ASSERT(0x24A, class_info);
     var_r29 = HSD_GetClassInfo(object);
     !var_r29;
     var_r28 = HSD_PushClassInfo(class_info);
     if (!(var_r28->head.flags & 1)) {
         var_r28->head.info_init();
     }
-    if (var_r29->head.obj_size != var_r28->head.obj_size) return FALSE;
-    while (var_r29->head.parent != NULL && var_r29->head.parent->head.obj_size == var_r29->head.obj_size) {
+    if (var_r29->head.obj_size != var_r28->head.obj_size)
+        return false;
+    while (var_r29->head.parent != NULL &&
+           var_r29->head.parent->head.obj_size == var_r29->head.obj_size)
+    {
         var_r29 = var_r29->head.parent;
     }
-    while (var_r28->head.parent != NULL && var_r28->head.parent->head.obj_size == var_r28->head.obj_size) {
+    while (var_r28->head.parent != NULL &&
+           var_r28->head.parent->head.obj_size == var_r28->head.obj_size)
+    {
         var_r28 = var_r28->head.parent;
     }
     if (var_r29 == var_r28) {
         var_r29->head.nb_exist--;
         class_info->head.nb_exist++;
-        if (class_info->head.nb_exist > class_info->head.nb_peak)
-        {
+        if (class_info->head.nb_exist > class_info->head.nb_peak) {
             class_info->head.nb_peak = class_info->head.nb_exist;
         }
         object->parent.class_info = class_info;
-        return TRUE;
+        return true;
     }
-    return FALSE;
+    return false;
 }
 
-BOOL hsdChangeClass(void* object, void* class_info)
+bool hsdChangeClass(void* object, void* class_info)
 {
     return hsdChangeClass_inline(object, class_info);
 }
 
-BOOL hsdIsDescendantOf(HSD_ClassInfo* info, HSD_ClassInfo* p)
+bool hsdIsDescendantOf(HSD_ClassInfo* info, any_t p)
 {
     HSD_ClassInfo* var_r31;
+    HSD_ClassInfo* cls = (HSD_ClassInfo*) p;
 
     if (info == NULL || p == NULL) {
-        return FALSE;
+        return false;
     }
+
+    /// @todo Duplicate assignment.
+#ifdef MUST_MATCH
     var_r31 = var_r31 = info;
+#else
+    var_r31 = info;
+#endif
+
     if (!(info->head.flags & 1)) {
         var_r31->head.info_init();
     }
-    if (!(p->head.flags & 1)) {
-        p->head.info_init();
+    if (!(cls->head.flags & 1)) {
+        cls->head.info_init();
     }
     while (var_r31 != NULL) {
-        if (var_r31 == p) {
-            return TRUE;
+        if (var_r31 == cls) {
+            return true;
         }
         var_r31 = var_r31->head.parent;
     }
-    return FALSE;
+    return false;
 }
 
-BOOL hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
+bool hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
 {
     HSD_ClassInfo* info;
 
     if (o == NULL || p == NULL) {
-        return FALSE;
+        return false;
     }
     info = o->parent.class_info;
     if (!(p->head.flags & 1)) {
@@ -383,16 +412,16 @@ BOOL hsdObjIsDescendantOf(HSD_Obj* o, HSD_ClassInfo* p)
     }
     while (info != NULL) {
         if (info == p) {
-            return TRUE;
+            return true;
         }
         info = info->head.parent;
     }
-    return FALSE;
+    return false;
 }
 
 void class_set_flags(HSD_ClassInfo* class_info, s32 set, s32 reset)
 {
-    class_info->head.flags = class_info->head.flags & ~reset | set;
+    class_info->head.flags = (class_info->head.flags & ~reset) | set;
 }
 
 void ForgetClassLibraryReal(HSD_ClassInfo* class_info)
@@ -411,7 +440,8 @@ void ForgetClassLibraryReal(HSD_ClassInfo* class_info)
     class_set_flags(class_info, 0, 1);
 }
 
-void ForgetClassLibraryChild(const char* library_name, HSD_ClassInfo* class_info)
+void ForgetClassLibraryChild(const char* library_name,
+                             HSD_ClassInfo* class_info)
 {
     HSD_ClassInfo** cur = &class_info->head.child;
     while (*cur != NULL) {
@@ -440,7 +470,6 @@ void hsdForgetClassLibrary(const char* library_name)
     }
 }
 
-HSD_ClassInfo* HSD_HashSearch();
 HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
 {
     if (lbl_804D7708 != 0) {
@@ -449,10 +478,12 @@ HSD_ClassInfo* hsdSearchClassInfo(const char* class_name)
     return NULL;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused5[] = "info_hash";
 #pragma pop
+#endif
 
 void DumpClassStat(HSD_ClassInfo* info, s32 level)
 {
@@ -460,21 +491,21 @@ void DumpClassStat(HSD_ClassInfo* info, s32 level)
     OSReport("<class %s>\n", info->head.class_name);
     OSReport_PrintSpaces(level);
     OSReport("    info %d object %d nb_exist %d nb_peak %d\n",
-        info->head.info_size, info->head.obj_size,
-        info->head.nb_exist, info->head.nb_peak);
+             info->head.info_size, info->head.obj_size, info->head.nb_exist,
+             info->head.nb_peak);
 }
 
-void hsdDumpClassStat(HSD_ClassInfo* info, BOOL recursive, s32 level)
+void hsdDumpClassStat(HSD_ClassInfo* info, bool recursive, s32 level)
 {
     if (info == NULL) {
-        hsdDumpClassStat(&hsdClass, TRUE, level);
+        hsdDumpClassStat(&hsdClass, true, level);
     } else if (info->head.flags & 1) {
         DumpClassStat(info, level);
         if (recursive) {
             level += 2;
             info = info->head.child;
             while (info != NULL) {
-                hsdDumpClassStat(info, TRUE, level);
+                hsdDumpClassStat(info, true, level);
                 info = info->head.next;
             }
         }

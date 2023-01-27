@@ -63,7 +63,7 @@ lbl_80326B90:
 /* 80326B9C 0032377C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80326BA0 00323780  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326BA4 00323784  7C 08 03 A6 */	mtlr r0
-/* 80326BA8 00323788  4E 80 00 20 */	blr 
+/* 80326BA8 00323788  4E 80 00 20 */	blr
 
 .global TRKTerminateNub
 TRKTerminateNub:
@@ -75,7 +75,7 @@ TRKTerminateNub:
 /* 80326BC0 003237A0  38 21 00 08 */	addi r1, r1, 8
 /* 80326BC4 003237A4  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326BC8 003237A8  7C 08 03 A6 */	mtlr r0
-/* 80326BCC 003237AC  4E 80 00 20 */	blr 
+/* 80326BCC 003237AC  4E 80 00 20 */	blr
 
 .global TRKNubWelcome
 TRKNubWelcome:
@@ -88,7 +88,7 @@ TRKNubWelcome:
 /* 80326BE8 003237C8  38 21 00 08 */	addi r1, r1, 8
 /* 80326BEC 003237CC  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326BF0 003237D0  7C 08 03 A6 */	mtlr r0
-/* 80326BF4 003237D4  4E 80 00 20 */	blr 
+/* 80326BF4 003237D4  4E 80 00 20 */	blr
 
 .global TRKInitializeEndian
 TRKInitializeEndian:
@@ -123,7 +123,7 @@ lbl_80326C60:
 /* 80326C60 00323840  38 60 00 01 */	li r3, 1
 lbl_80326C64:
 /* 80326C64 00323844  38 21 00 10 */	addi r1, r1, 0x10
-/* 80326C68 00323848  4E 80 00 20 */	blr 
+/* 80326C68 00323848  4E 80 00 20 */	blr
 
 
 .section .rodata
@@ -143,40 +143,40 @@ lbl_803B93A0:
 .section .bss, "wa"
 .global lbl_804A3148
 lbl_804A3148:
-	.skip 0x28
+    .skip 0x28
 .global gTRKBigEndian
 gTRKBigEndian:
-	.skip 0x8
+    .skip 0x8
 .global lbl_804A3178
 lbl_804A3178:
-	.skip 0x19B0
+    .skip 0x19B0
 .global gTRKFramingState
 gTRKFramingState:
-	.skip 0x14
+    .skip 0x14
 .global gTRKInputPendingPtr
 gTRKInputPendingPtr:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804A4B40
 lbl_804A4B40:
-	.skip 0x8
+    .skip 0x8
 .global lbl_804A4B48
 lbl_804A4B48:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804A4B4C
 lbl_804A4B4C:
-	.skip 0x94
+    .skip 0x94
 .global TRKvalue128_temp
 TRKvalue128_temp:
-	.skip 0x10
+    .skip 0x10
 .global gTRKState
 gTRKState:
-	.skip 0xA8
+    .skip 0xA8
 .global gTRKCPUState
 gTRKCPUState:
-	.skip 0x430
+    .skip 0x430
 .global lbl_804A50C8
 lbl_804A50C8:
-	.skip 0x8
+    .skip 0x8
 .global TRK_mainError
 TRK_mainError:
-	.skip 0x10
+    .skip 0x10

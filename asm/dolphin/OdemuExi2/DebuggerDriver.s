@@ -181,7 +181,7 @@ lbl_8032B268:
 lbl_8032B270:
 /* 8032B270 00327E50  BA C1 00 20 */	lmw r22, 0x20(r1)
 /* 8032B274 00327E54  38 21 00 48 */	addi r1, r1, 0x48
-/* 8032B278 00327E58  4E 80 00 20 */	blr 
+/* 8032B278 00327E58  4E 80 00 20 */	blr
 
 .global DBGReadMailbox
 DBGReadMailbox:
@@ -229,7 +229,7 @@ lbl_8032B2F4:
 /* 8032B318 00327EF8  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8032B31C 00327EFC  38 21 00 38 */	addi r1, r1, 0x38
 /* 8032B320 00327F00  7C 08 03 A6 */	mtlr r0
-/* 8032B324 00327F04  4E 80 00 20 */	blr 
+/* 8032B324 00327F04  4E 80 00 20 */	blr
 
 .global DBGRead
 DBGRead:
@@ -291,7 +291,7 @@ lbl_8032B3D4:
 /* 8032B3F4 00327FD4  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8032B3F8 00327FD8  38 21 00 40 */	addi r1, r1, 0x40
 /* 8032B3FC 00327FDC  7C 08 03 A6 */	mtlr r0
-/* 8032B400 00327FE0  4E 80 00 20 */	blr 
+/* 8032B400 00327FE0  4E 80 00 20 */	blr
 
 .global DBGWrite
 DBGWrite:
@@ -353,10 +353,10 @@ lbl_8032B4B0:
 /* 8032B4D0 003280B0  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8032B4D4 003280B4  38 21 00 40 */	addi r1, r1, 0x40
 /* 8032B4D8 003280B8  7C 08 03 A6 */	mtlr r0
-/* 8032B4DC 003280BC  4E 80 00 20 */	blr 
+/* 8032B4DC 003280BC  4E 80 00 20 */	blr
 
-.global func_8032B4E0
-func_8032B4E0:
+.global DBGReadStatus
+DBGReadStatus:
 /* 8032B4E0 003280C0  7C 08 02 A6 */	mflr r0
 /* 8032B4E4 003280C4  38 80 00 02 */	li r4, 2
 /* 8032B4E8 003280C8  90 01 00 04 */	stw r0, 4(r1)
@@ -401,42 +401,44 @@ lbl_8032B558:
 /* 8032B57C 0032815C  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8032B580 00328160  38 21 00 38 */	addi r1, r1, 0x38
 /* 8032B584 00328164  7C 08 03 A6 */	mtlr r0
-/* 8032B588 00328168  4E 80 00 20 */	blr 
-lbl_8032B58C:
+/* 8032B588 00328168  4E 80 00 20 */	blr
+
+MWCallback:
 /* 8032B58C 0032816C  7C 08 02 A6 */	mflr r0
 /* 8032B590 00328170  90 01 00 04 */	stw r0, 4(r1)
 /* 8032B594 00328174  38 00 00 01 */	li r0, 1
 /* 8032B598 00328178  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8032B59C 0032817C  81 8D B9 E8 */	lwz r12, lbl_804D7088@sda21(r13)
-/* 8032B5A0 00328180  98 0D B9 FC */	stb r0, lbl_804D709C@sda21(r13)
+/* 8032B59C 0032817C  81 8D B9 E8 */	lwz r12, MTRCallback@sda21(r13)
+/* 8032B5A0 00328180  98 0D B9 FC */	stb r0, EXIInputFlag@sda21(r13)
 /* 8032B5A4 00328184  28 0C 00 00 */	cmplwi r12, 0
 /* 8032B5A8 00328188  41 82 00 10 */	beq lbl_8032B5B8
 /* 8032B5AC 0032818C  7D 88 03 A6 */	mtlr r12
 /* 8032B5B0 00328190  38 60 00 00 */	li r3, 0
-/* 8032B5B4 00328194  4E 80 00 21 */	blrl 
+/* 8032B5B4 00328194  4E 80 00 21 */	blrl
 lbl_8032B5B8:
 /* 8032B5B8 00328198  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032B5BC 0032819C  38 21 00 08 */	addi r1, r1, 8
 /* 8032B5C0 003281A0  7C 08 03 A6 */	mtlr r0
-/* 8032B5C4 003281A4  4E 80 00 20 */	blr 
-lbl_8032B5C8:
+/* 8032B5C4 003281A4  4E 80 00 20 */	blr
+
+DBGHandler:
 /* 8032B5C8 003281A8  7C 08 02 A6 */	mflr r0
 /* 8032B5CC 003281AC  3C A0 CC 00 */	lis r5, 0xCC003000@ha
 /* 8032B5D0 003281B0  90 01 00 04 */	stw r0, 4(r1)
 /* 8032B5D4 003281B4  38 00 10 00 */	li r0, 0x1000
 /* 8032B5D8 003281B8  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8032B5DC 003281BC  81 8D B9 EC */	lwz r12, lbl_804D708C@sda21(r13)
+/* 8032B5DC 003281BC  81 8D B9 EC */	lwz r12, DBGCallback@sda21(r13)
 /* 8032B5E0 003281C0  90 05 30 00 */	stw r0, 0xCC003000@l(r5)
 /* 8032B5E4 003281C4  28 0C 00 00 */	cmplwi r12, 0
 /* 8032B5E8 003281C8  41 82 00 10 */	beq lbl_8032B5F8
 /* 8032B5EC 003281CC  7D 88 03 A6 */	mtlr r12
 /* 8032B5F0 003281D0  7C 63 07 34 */	extsh r3, r3
-/* 8032B5F4 003281D4  4E 80 00 21 */	blrl 
+/* 8032B5F4 003281D4  4E 80 00 21 */	blrl
 lbl_8032B5F8:
 /* 8032B5F8 003281D8  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032B5FC 003281DC  38 21 00 08 */	addi r1, r1, 8
 /* 8032B600 003281E0  7C 08 03 A6 */	mtlr r0
-/* 8032B604 003281E4  4E 80 00 20 */	blr 
+/* 8032B604 003281E4  4E 80 00 20 */	blr
 
 .global DBInitComm
 DBInitComm:
@@ -449,14 +451,14 @@ DBInitComm:
 /* 8032B620 00328200  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 8032B624 00328204  3B A3 00 00 */	addi r29, r3, 0
 /* 8032B628 00328208  48 01 BD 3D */	bl OSDisableInterrupts
-/* 8032B62C 0032820C  38 0D B9 FC */	addi r0, r13, lbl_804D709C@sda21
-/* 8032B630 00328210  90 0D B9 F8 */	stw r0, lbl_804D7098@sda21(r13)
+/* 8032B62C 0032820C  38 0D B9 FC */	addi r0, r13, EXIInputFlag@sda21
+/* 8032B630 00328210  90 0D B9 F8 */	stw r0, pEXIInputFlag@sda21(r13)
 /* 8032B634 00328214  3C 80 00 02 */	lis r4, 0x00018000@ha
 /* 8032B638 00328218  3B E3 00 00 */	addi r31, r3, 0
-/* 8032B63C 0032821C  80 0D B9 F8 */	lwz r0, lbl_804D7098@sda21(r13)
+/* 8032B63C 0032821C  80 0D B9 F8 */	lwz r0, pEXIInputFlag@sda21(r13)
 /* 8032B640 00328220  38 64 80 00 */	addi r3, r4, 0x00018000@l
 /* 8032B644 00328224  90 1D 00 00 */	stw r0, 0(r29)
-/* 8032B648 00328228  93 CD B9 E8 */	stw r30, lbl_804D7088@sda21(r13)
+/* 8032B648 00328228  93 CD B9 E8 */	stw r30, MTRCallback@sda21(r13)
 /* 8032B64C 0032822C  48 01 C0 E1 */	bl __OSMaskInterrupts
 /* 8032B650 00328230  3C 60 CC 00 */	lis r3, 0xCC006828@ha
 /* 8032B654 00328234  38 00 00 00 */	li r0, 0
@@ -469,7 +471,7 @@ DBInitComm:
 /* 8032B670 00328250  7C 08 03 A6 */	mtlr r0
 /* 8032B674 00328254  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8032B678 00328258  38 21 00 20 */	addi r1, r1, 0x20
-/* 8032B67C 0032825C  4E 80 00 20 */	blr 
+/* 8032B67C 0032825C  4E 80 00 20 */	blr
 
 .global DBInitInterrupts
 DBInitInterrupts:
@@ -481,11 +483,11 @@ DBInitInterrupts:
 /* 8032B694 00328274  48 01 C0 99 */	bl __OSMaskInterrupts
 /* 8032B698 00328278  38 60 00 40 */	li r3, 0x40
 /* 8032B69C 0032827C  48 01 C0 91 */	bl __OSMaskInterrupts
-/* 8032B6A0 00328280  3C 60 80 33 */	lis r3, lbl_8032B58C@ha
-/* 8032B6A4 00328284  38 03 B5 8C */	addi r0, r3, lbl_8032B58C@l
-/* 8032B6A8 00328288  3C 60 80 33 */	lis r3, lbl_8032B5C8@ha
-/* 8032B6AC 0032828C  90 0D B9 EC */	stw r0, lbl_804D708C@sda21(r13)
-/* 8032B6B0 00328290  38 83 B5 C8 */	addi r4, r3, lbl_8032B5C8@l
+/* 8032B6A0 00328280  3C 60 80 33 */	lis r3, MWCallback@ha
+/* 8032B6A4 00328284  38 03 B5 8C */	addi r0, r3, MWCallback@l
+/* 8032B6A8 00328288  3C 60 80 33 */	lis r3, DBGHandler@ha
+/* 8032B6AC 0032828C  90 0D B9 EC */	stw r0, DBGCallback@sda21(r13)
+/* 8032B6B0 00328290  38 83 B5 C8 */	addi r4, r3, DBGHandler@l
 /* 8032B6B4 00328294  38 60 00 19 */	li r3, 0x19
 /* 8032B6B8 00328298  48 01 BC F9 */	bl __OSSetInterruptHandler
 /* 8032B6BC 0032829C  38 60 00 40 */	li r3, 0x40
@@ -493,7 +495,7 @@ DBInitInterrupts:
 /* 8032B6C4 003282A4  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8032B6C8 003282A8  38 21 00 08 */	addi r1, r1, 8
 /* 8032B6CC 003282AC  7C 08 03 A6 */	mtlr r0
-/* 8032B6D0 003282B0  4E 80 00 20 */	blr 
+/* 8032B6D0 003282B0  4E 80 00 20 */	blr
 
 .global DBQueryData
 DBQueryData:
@@ -502,14 +504,14 @@ DBQueryData:
 /* 8032B6DC 003282BC  90 01 00 04 */	stw r0, 4(r1)
 /* 8032B6E0 003282C0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8032B6E4 003282C4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8032B6E8 003282C8  80 0D B9 F4 */	lwz r0, lbl_804D7094@sda21(r13)
-/* 8032B6EC 003282CC  98 6D B9 FC */	stb r3, lbl_804D709C@sda21(r13)
+/* 8032B6E8 003282C8  80 0D B9 F4 */	lwz r0, RecvDataLeng@sda21(r13)
+/* 8032B6EC 003282CC  98 6D B9 FC */	stb r3, EXIInputFlag@sda21(r13)
 /* 8032B6F0 003282D0  2C 00 00 00 */	cmpwi r0, 0
 /* 8032B6F4 003282D4  40 82 00 5C */	bne lbl_8032B750
 /* 8032B6F8 003282D8  48 01 BC 6D */	bl OSDisableInterrupts
 /* 8032B6FC 003282DC  3B E3 00 00 */	addi r31, r3, 0
 /* 8032B700 003282E0  38 61 00 08 */	addi r3, r1, 8
-/* 8032B704 003282E4  4B FF FD DD */	bl func_8032B4E0
+/* 8032B704 003282E4  4B FF FD DD */	bl DBGReadStatus
 /* 8032B708 003282E8  80 01 00 08 */	lwz r0, 8(r1)
 /* 8032B70C 003282EC  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 8032B710 003282F0  41 82 00 40 */	beq lbl_8032B750
@@ -524,19 +526,19 @@ DBQueryData:
 /* 8032B734 00328314  28 00 00 00 */	cmplwi r0, 0
 /* 8032B738 00328318  40 82 00 18 */	bne lbl_8032B750
 /* 8032B73C 0032831C  54 83 04 7E */	clrlwi r3, r4, 0x11
-/* 8032B740 00328320  90 8D B9 F0 */	stw r4, lbl_804D7090@sda21(r13)
+/* 8032B740 00328320  90 8D B9 F0 */	stw r4, SendMailData@sda21(r13)
 /* 8032B744 00328324  38 00 00 01 */	li r0, 1
-/* 8032B748 00328328  90 6D B9 F4 */	stw r3, lbl_804D7094@sda21(r13)
-/* 8032B74C 0032832C  98 0D B9 FC */	stb r0, lbl_804D709C@sda21(r13)
+/* 8032B748 00328328  90 6D B9 F4 */	stw r3, RecvDataLeng@sda21(r13)
+/* 8032B74C 0032832C  98 0D B9 FC */	stb r0, EXIInputFlag@sda21(r13)
 lbl_8032B750:
 /* 8032B750 00328330  7F E3 FB 78 */	mr r3, r31
 /* 8032B754 00328334  48 01 BC 39 */	bl OSRestoreInterrupts
 /* 8032B758 00328338  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8032B75C 0032833C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8032B760 00328340  38 21 00 18 */	addi r1, r1, 0x18
-/* 8032B764 00328344  80 6D B9 F4 */	lwz r3, lbl_804D7094@sda21(r13)
+/* 8032B764 00328344  80 6D B9 F4 */	lwz r3, RecvDataLeng@sda21(r13)
 /* 8032B768 00328348  7C 08 03 A6 */	mtlr r0
-/* 8032B76C 0032834C  4E 80 00 20 */	blr 
+/* 8032B76C 0032834C  4E 80 00 20 */	blr
 
 .global DBRead
 DBRead:
@@ -549,7 +551,7 @@ DBRead:
 /* 8032B788 00328368  93 A1 00 14 */	stw r29, 0x14(r1)
 /* 8032B78C 0032836C  3B A3 00 00 */	addi r29, r3, 0
 /* 8032B790 00328370  48 01 BB D5 */	bl OSDisableInterrupts
-/* 8032B794 00328374  80 0D B9 F0 */	lwz r0, lbl_804D7090@sda21(r13)
+/* 8032B794 00328374  80 0D B9 F0 */	lwz r0, SendMailData@sda21(r13)
 /* 8032B798 00328378  3B E3 00 00 */	addi r31, r3, 0
 /* 8032B79C 0032837C  54 00 03 DF */	rlwinm. r0, r0, 0, 0xf, 0xf
 /* 8032B7A0 00328380  41 82 00 0C */	beq lbl_8032B7AC
@@ -565,9 +567,9 @@ lbl_8032B7B0:
 /* 8032B7C0 003283A0  38 63 E0 00 */	addi r3, r3, -8192
 /* 8032B7C4 003283A4  4B FF FB 65 */	bl DBGRead
 /* 8032B7C8 003283A8  38 00 00 00 */	li r0, 0
-/* 8032B7CC 003283AC  90 0D B9 F4 */	stw r0, lbl_804D7094@sda21(r13)
+/* 8032B7CC 003283AC  90 0D B9 F4 */	stw r0, RecvDataLeng@sda21(r13)
 /* 8032B7D0 003283B0  7F E3 FB 78 */	mr r3, r31
-/* 8032B7D4 003283B4  98 0D B9 FC */	stb r0, lbl_804D709C@sda21(r13)
+/* 8032B7D4 003283B4  98 0D B9 FC */	stb r0, EXIInputFlag@sda21(r13)
 /* 8032B7D8 003283B8  48 01 BB B5 */	bl OSRestoreInterrupts
 /* 8032B7DC 003283BC  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8032B7E0 003283C0  38 60 00 00 */	li r3, 0
@@ -576,7 +578,7 @@ lbl_8032B7B0:
 /* 8032B7EC 003283CC  7C 08 03 A6 */	mtlr r0
 /* 8032B7F0 003283D0  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8032B7F4 003283D4  38 21 00 20 */	addi r1, r1, 0x20
-/* 8032B7F8 003283D8  4E 80 00 20 */	blr 
+/* 8032B7F8 003283D8  4E 80 00 20 */	blr
 
 .global DBWrite
 DBWrite:
@@ -622,10 +624,10 @@ lbl_8032B874:
 /* 8032B88C 0032846C  80 01 00 54 */	lwz r0, 0x54(r1)
 /* 8032B890 00328470  54 00 07 BD */	rlwinm. r0, r0, 0, 0x1e, 0x1e
 /* 8032B894 00328474  40 82 FF 90 */	bne lbl_8032B824
-/* 8032B898 00328478  88 6D A4 C0 */	lbz r3, lbl_804D5B60@sda21(r13)
+/* 8032B898 00328478  88 6D A4 C0 */	lbz r3, SendCount@sda21(r13)
 /* 8032B89C 0032847C  38 03 00 01 */	addi r0, r3, 1
-/* 8032B8A0 00328480  98 0D A4 C0 */	stb r0, lbl_804D5B60@sda21(r13)
-/* 8032B8A4 00328484  88 0D A4 C0 */	lbz r0, lbl_804D5B60@sda21(r13)
+/* 8032B8A0 00328480  98 0D A4 C0 */	stb r0, SendCount@sda21(r13)
+/* 8032B8A4 00328484  88 0D A4 C0 */	lbz r0, SendCount@sda21(r13)
 /* 8032B8A8 00328488  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 8032B8AC 0032848C  41 82 00 0C */	beq lbl_8032B8B8
 /* 8032B8B0 00328490  38 60 10 00 */	li r3, 0x1000
@@ -675,7 +677,7 @@ lbl_8032B930:
 /* 8032B948 00328528  80 01 00 54 */	lwz r0, 0x54(r1)
 /* 8032B94C 0032852C  54 00 07 BD */	rlwinm. r0, r0, 0, 0x1e, 0x1e
 /* 8032B950 00328530  40 82 FF 98 */	bne lbl_8032B8E8
-/* 8032B954 00328534  88 0D A4 C0 */	lbz r0, lbl_804D5B60@sda21(r13)
+/* 8032B954 00328534  88 0D A4 C0 */	lbz r0, SendCount@sda21(r13)
 /* 8032B958 00328538  54 00 80 1E */	slwi r0, r0, 0x10
 /* 8032B95C 0032853C  64 00 1F 00 */	oris r0, r0, 0x1f00
 /* 8032B960 00328540  7C 00 DB 78 */	or r0, r0, r27
@@ -745,47 +747,46 @@ lbl_8032BA10:
 /* 8032BA4C 0032862C  80 01 00 7C */	lwz r0, 0x7c(r1)
 /* 8032BA50 00328630  38 21 00 78 */	addi r1, r1, 0x78
 /* 8032BA54 00328634  7C 08 03 A6 */	mtlr r0
-/* 8032BA58 00328638  4E 80 00 20 */	blr 
+/* 8032BA58 00328638  4E 80 00 20 */	blr
 
 .global DBOpen
 DBOpen:
-/* 8032BA5C 0032863C  4E 80 00 20 */	blr 
+/* 8032BA5C 0032863C  4E 80 00 20 */	blr
 
 .global DBClose
 DBClose:
-/* 8032BA60 00328640  4E 80 00 20 */	blr 
+/* 8032BA60 00328640  4E 80 00 20 */	blr
 
 .global Hu_IsStub
 Hu_IsStub:
 /* 8032BA64 00328644  38 60 00 00 */	li r3, 0
-/* 8032BA68 00328648  4E 80 00 20 */	blr 
+/* 8032BA68 00328648  4E 80 00 20 */	blr
 
 
 .section .sdata
     .balign 8
-.global lbl_804D5B60
-lbl_804D5B60:
-    .4byte 0x80000000
-    .4byte 0x00000000
+.global SendCount
+SendCount:
+    .byte 0x80
 
 
 .section .sbss
     .balign 8
-.global lbl_804D7088
-lbl_804D7088:
-	.skip 0x4
-.global lbl_804D708C
-lbl_804D708C:
-	.skip 0x4
-.global lbl_804D7090
-lbl_804D7090:
-	.skip 0x4
-.global lbl_804D7094
-lbl_804D7094:
-	.skip 0x4
-.global lbl_804D7098
-lbl_804D7098:
-	.skip 0x4
-.global lbl_804D709C
-lbl_804D709C:
-	.skip 0x4
+.global MTRCallback
+MTRCallback:
+    .skip 0x4
+.global DBGCallback
+DBGCallback:
+    .skip 0x4
+.global SendMailData
+SendMailData:
+    .skip 0x4
+.global RecvDataLeng
+RecvDataLeng:
+    .skip 0x4
+.global pEXIInputFlag
+pEXIInputFlag:
+    .skip 0x4
+.global EXIInputFlag
+EXIInputFlag:
+    .skip 0x1

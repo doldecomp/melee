@@ -1,8 +1,11 @@
+#include <dolphin/card/CARDUnlock.h>
+
 #include <dolphin/card.h>
-
+#include <dolphin/card/CARDMount.h>
 #include <dolphin/os/os.h>
-
-extern CARDControl __CARDBlock[2];
+#include <dolphin/os/OSCache.h>
+#include <MSL/rand.h>
+#include <string.h>
 
 static u8 CardData[] ATTRIBUTE_ALIGN(32) = {
     // clang-format off
@@ -85,7 +88,7 @@ u32 bitrev(u32 data)
 s32 ReadArrayUnlock(s32 chan, u32 data, void* rbuf, s32 rlen, s32 mode)
 {
     CARDControl* card;
-    BOOL err;
+    bool err;
     u8 cmd[5];
 
     card = &__CARDBlock[chan];
@@ -106,9 +109,10 @@ s32 ReadArrayUnlock(s32 chan, u32 data, void* rbuf, s32 rlen, s32 mode)
         cmd[2] = (u8) ((data & 0x00FF0000) >> 16);
     }
 
-    err = FALSE;
+    err = false;
     err |= !EXIImmEx(chan, cmd, 5, 1);
-    err |= !EXIImmEx(chan, (u8*) card->workArea + (u32) sizeof(CARDID), card->latency, 1);
+    err |= !EXIImmEx(chan, (u8*) card->workArea + (u32) sizeof(CARDID),
+                     card->latency, 1);
     err |= !EXIImmEx(chan, rbuf, rlen, 0);
     err |= !EXIDeselect(chan);
 
@@ -187,7 +191,6 @@ typedef struct DecodeParameters {
     u8* outputAddr;
 } DecodeParameters;
 
-extern u8 CardData[];
 static void InitCallback(void* task);
 static void DoneCallback(void* task);
 
@@ -304,8 +307,8 @@ s32 __CARDUnlock(s32 chan, u8 flashID[12])
     DCFlushRange(input, 8);
     DCInvalidateRange(output, 4);
     DCFlushRange(param, sizeof(DecodeParameters));
-
     task->priority = 255;
+
     task->iram_mmem_addr = (u16*) OSPhysicalToCached(CardData);
     task->iram_length = 0x160;
     task->iram_addr = 0;

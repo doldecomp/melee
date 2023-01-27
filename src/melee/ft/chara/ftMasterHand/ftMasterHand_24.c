@@ -1,8 +1,11 @@
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_24.h>
+
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 // 80154C78 151858
 // https://decomp.me/scratch/j7foW
-void func_80154C78(HSD_GObj* arg0) {
+void func_80154C78(HSD_GObj* arg0)
+{
     Fighter* temp_r31;
     MasterHandAttributes* temp_r30;
 
@@ -15,11 +18,10 @@ void func_80154C78(HSD_GObj* arg0) {
     temp_r31->x234C_pos.z = 0.0f;
 }
 
-
-
 // 80154CF8 1518D8
 // https://decomp.me/scratch/XwAlv
-void func_80154CF8(HSD_GObj* gobj, Fighter* fp) {
+void func_80154CF8(HSD_GObj* gobj, Fighter* fp)
+{
     Fighter* temp_r31;
     MasterHandAttributes* temp_r30;
 

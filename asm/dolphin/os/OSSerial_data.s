@@ -61,31 +61,31 @@ lbl_8040236C:
     .balign 8
 .global Packet
 Packet:
-	.skip 0x80
+    .skip 0x80
 .global Alarm
 Alarm:
-	.skip 0xA0
+    .skip 0xA0
 .global lbl_804A7ED8
 lbl_804A7ED8:
-	.skip 0x20
+    .skip 0x20
 .global lbl_804A7EF8
 lbl_804A7EF8:
-	.skip 0x20
+    .skip 0x20
 .global lbl_804A7F18
 lbl_804A7F18:
-	.skip 0x40
+    .skip 0x40
 .global lbl_804A7F58
 lbl_804A7F58:
-	.skip 0x60
+    .skip 0x60
 
 .section .sbss
     .balign 8
 .global lbl_804D73C8
 lbl_804D73C8:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D73CC
 lbl_804D73CC:
-	.skip 0x4
+    .skip 0x4
 .global __PADFixBits
 __PADFixBits:
-	.skip 0x8
+    .skip 0x8

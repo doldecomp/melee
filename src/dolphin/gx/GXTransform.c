@@ -1,12 +1,17 @@
-#include <common_structs.h>
 #include <dolphin/gx/GXTransform.h>
-#include <dolphin/gx/GX_unknown_001.h>
-#include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
-#include <dolphin/gx/__GXInit.h>
+
+#include <common_structs.h>
 #include <dolphin/gx/__GX_unknown_001.h>
+#include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
+#include <dolphin/gx/GXStubs.h>
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx, f32* sy, f32* sz)
+asm void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx,
+                   f32* sy, f32* sz)
 { // clang-format off
     nofralloc
 /* 80341148 0033DD28  C0 83 00 00 */	lfs f4, 0(r3)
@@ -103,9 +108,19 @@ lbl_8034124C:
 /* 803412AC 0033DE8C  EC 00 00 72 */	fmuls f0, f0, f1
 /* 803412B0 0033DE90  EC 02 00 2A */	fadds f0, f2, f0
 /* 803412B4 0033DE94  D0 08 00 00 */	stfs f0, 0(r8)
-/* 803412B8 0033DE98  4E 80 00 20 */	blr 
+/* 803412B8 0033DE98  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void GXProject(f32 x, f32 y, f32 z, MtxPtr mtx, f32* pm, f32* vp, f32* sx,
+               f32* sy, f32* sz)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 void GXSetProjection(f32* proj, s32 projection_type)
 {
@@ -144,8 +159,10 @@ void GXGetProjectionv(f32* proj)
     proj[6] = __GXContexts.main->projection_v[5];
 }
 
+#ifdef MWERKS_GEKKO
+
 asm void WriteMTXPS4x3(register float* src, register float* dst)
-{
+{ // clang-format off
     psq_l f0, 0(src), 0, qr0
     psq_l f1, 8(src), 0, qr0
     psq_l f2, 0x10(src), 0, qr0
@@ -158,11 +175,21 @@ asm void WriteMTXPS4x3(register float* src, register float* dst)
     psq_st f3, 0(dst), 0, qr0
     psq_st f4, 0(dst), 0, qr0
     psq_st f5, 0(dst), 0, qr0
+} // clang-format on
+
+#else
+
+void WriteMTXPS4x3(float* src, float* dst)
+{
+    NOT_IMPLEMENTED;
 }
 
-// https://decomp.me/scratch/OH9kG // 0 (100%)
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void WriteMTXPS3x3from3x4(register float* src, register float* dst)
-{
+{ // clang-format off
     psq_l f0, 0(src), 0, qr0
     lfs f1, 8(src)
     psq_l f2, 16(src), 0, qr0
@@ -175,10 +202,21 @@ asm void WriteMTXPS3x3from3x4(register float* src, register float* dst)
     stfs f3, 0(dst)
     psq_st f4, 0(dst), 0, qr0
     stfs f5, 0(dst)
+} // clang-format on
+
+#else
+
+void WriteMTXPS3x3from3x4(float* src, float* dst)
+{
+    NOT_IMPLEMENTED;
 }
 
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void WriteMTXPS4x2(register float* src, register float* dst)
-{
+{ // clang-format off
     psq_l f0, 0(src), 0, qr0
     psq_l f1, 8(src), 0, qr0
     psq_l f2, 16(src), 0, qr0
@@ -187,11 +225,22 @@ asm void WriteMTXPS4x2(register float* src, register float* dst)
     psq_st f1, 0(dst), 0, qr0
     psq_st f2, 0(dst), 0, qr0
     psq_st f3, 0(dst), 0, qr0
+} // clang-format on
+
+#else
+
+void WriteMTXPS4x2(float* src, float* dst)
+{
+    NOT_IMPLEMENTED;
 }
 
-// NOTE: peephole off is needed for following functions to match
-// The previous matrix functions were probably inline asm in the original source,
-// which triggered the peephole off MWCC bug.
+#endif
+
+/**
+ * @attention peephole off is needed for following functions to match
+ * The previous matrix functions were probably inline asm in the original
+ * source, which triggered the peephole off MWCC bug.
+ */
 
 void GXLoadPosMtxImm(void* mtx, s32 arg1)
 {
@@ -238,7 +287,8 @@ void GXLoadTexMtxImm(void* arg0, u32 arg1, s32 arg2)
     }
 }
 
-void GXSetViewportJitter(f32 left, f32 top, f32 width, f32 height, f32 nearz, f32 farz, u32 field)
+void GXSetViewportJitter(f32 left, f32 top, f32 width, f32 height, f32 nearz,
+                         f32 farz, u32 field)
 {
     f32 temp_f31;
     f32 temp_f30;
@@ -255,10 +305,10 @@ void GXSetViewportJitter(f32 left, f32 top, f32 width, f32 height, f32 nearz, f3
     }
     w_half = width / 2;
     h_half = height / 2;
-    temp_f31 = width / 2; // f31
-    temp_f29 = -height / 2; // f29
+    temp_f31 = width / 2;                // f31
+    temp_f29 = -height / 2;              // f29
     temp_f27 = (left + w_half) + 342.0F; // f27
-    temp_f26 = (top + h_half) + 342.0F; // f26
+    temp_f26 = (top + h_half) + 342.0F;  // f26
     temp_f30 = farz * 16777215.0F;
     temp_f0 = nearz * 16777215.0F; // temp_f0
     temp_f28 = temp_f30 - temp_f0;
@@ -318,7 +368,7 @@ void GXSetScissorBoxOffset(u32 x_off, u32 y_off)
     u32 var1 = (x_off + 342) / 2;
     u32 var2 = (y_off + 342) / 2;
     WGPIPE.u8 = GX_LOAD_BP_REG;
-    var1 = (var1 & 0xFFF003FF | var2 << 10) & 0xFFFFFF;
+    var1 = ((var1 & 0xFFF003FF) | var2 << 10) & 0xFFFFFF;
     var1 |= 0x59000000;
     WGPIPE.u32 = var1;
     set_x2(GX_FALSE);

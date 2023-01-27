@@ -1,15 +1,17 @@
+#include <dolphin/os/OSMemory.h>
+
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSReset.h>
+#include <placeholder.h>
 
-extern volatile u32 Mem_Size : 0x80000028;
-extern volatile u32 Simulated_Mem : 0x800000F0;
-extern volatile u16 __MEMRegs[64] : 0xCC004000;
+extern volatile u32 Mem_Size AT_ADDRESS(0x80000028);
+extern volatile u32 Simulated_Mem AT_ADDRESS(0x800000F0);
 extern OSErrorHandler __OSErrorTable[];
 
-static BOOL OnReset(BOOL);
-static OSResetFunctionInfo lbl_80402348 = { OnReset, 127 };
+static bool OnReset(bool);
+
+static OSResetFunctionInfo lbl_80402348 = { OnReset, 127, NULL, NULL };
 
 u32 OSGetPhysicalMemSize(void)
 {
@@ -21,13 +23,13 @@ u32 OSGetConsoleSimulatedMemSize(void)
     return Simulated_Mem;
 }
 
-static BOOL OnReset(BOOL final)
+static bool OnReset(bool final)
 {
     if (final) {
         __MEMRegs[8] = 0xFF;
         __OSMaskInterrupts(0xF0000000);
     }
-    return TRUE;
+    return true;
 }
 
 static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
@@ -37,12 +39,15 @@ static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
     __MEMRegs[0x10] = 0;
 
     if (__OSErrorTable[OS_ERROR_PROTECTION]) {
-        __OSErrorTable[OS_ERROR_PROTECTION](OS_ERROR_PROTECTION, context, cause, addr);
+        __OSErrorTable[OS_ERROR_PROTECTION](OS_ERROR_PROTECTION, context, cause,
+                                            addr);
         return;
     }
 
     __OSUnhandledException(OS_ERROR_PROTECTION, context, cause, addr);
 }
+
+#ifdef MWERKS_GEKKO
 
 asm void Config24MB(void)
 { // clang-format off
@@ -81,6 +86,17 @@ asm void Config24MB(void)
     rfi
 } // clang-format on
 
+#else
+
+void Config24MB(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void Config48MB(void)
 { // clang-format off
     nofralloc
@@ -118,7 +134,18 @@ asm void Config48MB(void)
     rfi
 } // clang-format on
 
-asm void RealMode(register void (*)(void))
+#else
+
+void Config48MB(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
+asm void RealMode(register Event)
 { // clang-format off
     nofralloc
     clrlwi r3, r3, 2
@@ -129,11 +156,20 @@ asm void RealMode(register void (*)(void))
     rfi
 } // clang-format on
 
+#else
+
+void RealMode(Event arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void __OSInitMemoryProtection(void)
 {
     u32 unused[10];
     size_t simulated_mem = OSGetConsoleSimulatedMemSize();
-    BOOL intr = OSDisableInterrupts();
+    bool intr = OSDisableInterrupts();
     if (simulated_mem <= 24 * 1024 * 1024) {
         RealMode(Config24MB);
     } else if (simulated_mem <= 48 * 1024 * 1024) {

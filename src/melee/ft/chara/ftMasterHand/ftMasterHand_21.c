@@ -1,14 +1,17 @@
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_21.h>
+
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
 
 // 801541C4 150DA4
-void lbl_801541C4(HSD_GObj* gobj) {
+void lbl_801541C4(HSD_GObj* gobj)
+{
     return;
 }
 
-
 // 801541C8 150DA8
 // https://decomp.me/scratch/WhlXG
-void func_801541C8(HSD_GObj* gobj, void* arg1) {
+void func_801541C8(HSD_GObj* gobj, void* arg1)
+{
     Fighter* r31_fp;
     u32 unk[2];
 

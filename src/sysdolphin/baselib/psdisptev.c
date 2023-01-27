@@ -1,9 +1,9 @@
 #include <sysdolphin/baselib/psdisptev.h>
 
-#include <dolphin/gx/GX_unknown_001.h>
 #include <dolphin/gx/GXAttr.h>
 
-/* 004D4530 */ extern s32 lbl_804D7950[2];
-/* 003A063C */ extern void psSetupTev(unk_t);
-/* 003A0630 */ extern void psSetupTevInvalidState();
-/* 003A0500 */ extern void psSetupTevCommon();
+extern s32 lbl_804D7950[2];
+
+void psSetupTev(unk_t);
+void psSetupTevInvalidState(void);
+void psSetupTevCommon(void);

@@ -1,4 +1,11 @@
+#include <dolphin/card/CARDDir.h>
+
 #include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDCheck.h>
+#include <dolphin/card/CARDRdwr.h>
+#include <dolphin/os/OSCache.h>
+#include <Runtime/__mem.h>
 
 CARDDir* __CARDGetDirBlock(CARDControl* card)
 {
@@ -24,7 +31,6 @@ static void WriteCallback(s32 chan, s32 result)
         }
     }
 
-error:
     if (card->apiCallback == 0) {
         __CARDPutControlBlock(card, result);
     }
@@ -44,16 +50,18 @@ static void EraseCallback(s32 chan, s32 result)
     u32 addr;
 
     card = &__CARDBlock[chan];
-    if (result < 0) {
+    if (result < 0)
         goto error;
-    }
 
     dir = __CARDGetDirBlock(card);
-    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / 0x2000 * card->sectorSize;
-    result = __CARDWrite(chan, addr, 0x2000, dir, WriteCallback);
-    if (result < 0) {
+    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / 0x2000 *
+           card->sectorSize;
+
+    /// @todo Eliminate cast to #CARDCallback.
+    result = __CARDWrite(chan, addr, 0x2000, dir, (CARDCallback) WriteCallback);
+
+    if (result < 0)
         goto error;
-    }
 
     return;
 
@@ -84,10 +92,14 @@ s32 __CARDUpdateDir(s32 chan, CARDCallback callback)
     dir = __CARDGetDirBlock(card);
     check = __CARDGetDirCheck(dir);
     ++check->checkCode;
-    __CARDCheckSum(dir, 0x2000 - sizeof(u32), &check->checkSum, &check->checkSumInv);
+    __CARDCheckSum(dir, 0x2000 - sizeof(u32), &check->checkSum,
+                   &check->checkSumInv);
     DCStoreRange(dir, 0x2000);
 
     card->eraseCallback = callback;
-    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / 0x2000 * card->sectorSize;
-    return __CARDEraseSector(chan, addr, EraseCallback);
+    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / 0x2000 *
+           card->sectorSize;
+
+    /// @todo Eliminate cast to #CARDCallback.
+    return __CARDEraseSector(chan, addr, (CARDCallback) EraseCallback);
 }

@@ -1,10 +1,14 @@
-#include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXGeometry.h>
+
 #include <dolphin/gx/__GXInit.h>
-#include <dolphin/gx/__GXGeometry.h>
+#include <dolphin/gx/__types.h>
+#include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXBump.h>
+#include <dolphin/gx/GXTexture.h>
 
-static void __GXSetGenMode();
+static void __GXSetGenMode(void);
 
-void __GXSetDirtyState()
+void __GXSetDirtyState(void)
 {
     if (__GXContexts.main->x4F0_flags & 1)
         __GXSetSUTexSize();
@@ -29,12 +33,12 @@ void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts)
     WGPIPE.u16 = nverts;
 }
 
-void __GXSendFlushPrim()
+void __GXSendFlushPrim(void)
 {
     u32 size;
     u32 i;
 
-    GXContext *ctx = __GXContexts.main;
+    GXContext* ctx = __GXContexts.main;
     size = ctx->x4 * ctx->x6;
 
     WGPIPE.u8 = GX_DRAW_TRIANGLE_STRIP;
@@ -64,7 +68,8 @@ void GXSetPointSize(u8 pointSize, GXTexOffset texOffsets)
     set_x2(GX_FALSE);
 }
 
-void GXEnableTexOffsets(GXTexCoordID coord, GXBool line_enable, GXBool point_enable)
+void GXEnableTexOffsets(GXTexCoordID coord, GXBool line_enable,
+                        GXBool point_enable)
 {
     INSERT_FIELD(__GXContexts.main->xB8[coord], line_enable, 1, 18);
     INSERT_FIELD(__GXContexts.main->xB8[coord], point_enable, 1, 19);
@@ -75,8 +80,7 @@ void GXEnableTexOffsets(GXTexCoordID coord, GXBool line_enable, GXBool point_ena
 
 void GXSetCullMode(GXCullMode mode)
 {
-    switch (mode)
-    {
+    switch (mode) {
     case GX_CULL_FRONT:
         mode = GX_CULL_BACK;
         break;
@@ -97,7 +101,7 @@ void GXSetCoPlanar(GXBool enable)
     GX_WRITE_U32(__GXContexts.main->x204);
 }
 
-static void __GXSetGenMode()
+static void __GXSetGenMode(void)
 {
     WGPIPE.u8 = GX_LOAD_BP_REG;
     GX_WRITE_U32(__GXContexts.main->x204);

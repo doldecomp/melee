@@ -19,23 +19,23 @@ __AXGetCurrentProfile:
 /* 8035B6A8 00358288  7C 00 21 D6 */	mullw r0, r0, r4
 /* 8035B6AC 0035828C  7C 00 28 50 */	subf r0, r0, r5
 /* 8035B6B0 00358290  90 0D BE F8 */	stw r0, __AXCurrentProfile@sda21(r13)
-/* 8035B6B4 00358294  4E 80 00 20 */	blr 
+/* 8035B6B4 00358294  4E 80 00 20 */	blr
 lbl_8035B6B8:
 /* 8035B6B8 00358298  38 60 00 00 */	li r3, 0
-/* 8035B6BC 0035829C  4E 80 00 20 */	blr 
+/* 8035B6BC 0035829C  4E 80 00 20 */	blr
 
 
 .section .sbss
     .balign 8
 .global __AXProfile
 __AXProfile:
-	.skip 0x4
+    .skip 0x4
 .global __AXMaxProfiles
 __AXMaxProfiles:
-	.skip 0x4
+    .skip 0x4
 .global __AXCurrentProfile
 __AXCurrentProfile:
-	.skip 0x4
+    .skip 0x4
 .global __AXProfileInitialized
 __AXProfileInitialized:
-	.skip 0x4
+    .skip 0x4

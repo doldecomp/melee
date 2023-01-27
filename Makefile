@@ -1,20 +1,23 @@
 ifneq ($(findstring MINGW,$(shell uname)),)
-  WINDOWS := 1
+	WINDOWS := 1
 endif
 ifneq ($(findstring MSYS,$(shell uname)),)
-  WINDOWS := 1
+	WINDOWS := 1
 endif
 
 GENERATE_MAP ?= 0
 NON_MATCHING ?= 0
 EPILOGUE_PROCESS ?= 1
 SKIP_CHECK ?= 0
+REQUIRE_PROTOS ?= 1
+MSG_STYLE ?= gcc
+WARN_ERROR ?= 1
 
 VERBOSE ?= 0
 MAX_ERRORS ?= 0     # 0 = no maximum
 
 ifeq ($(VERBOSE),0)
-  QUIET := @
+	QUIET := @
 endif
 
 #-------------------------------------------------------------------------------
@@ -54,18 +57,18 @@ MWCC_LD_VERSION := 1.1
 
 # Programs
 ifeq ($(WINDOWS),1)
-  WINE :=
+	WINE :=
 else
-  WINE ?= wine
-  # Disable wine debug output for cleanliness
-  export WINEDEBUG ?= -all
-  # Default devkitPPC path
-  DEVKITPPC ?= /opt/devkitpro/devkitPPC
+	WINE ?= wine
+	# Disable wine debug output for cleanliness
+	export WINEDEBUG ?= -all
+	# Default devkitPPC path
+	DEVKITPPC ?= /opt/devkitpro/devkitPPC
 endif
 ifeq ($(shell uname),Darwin)
-  SHA1SUM := shasum
+	SHA1SUM := shasum
 else
-  SHA1SUM := sha1sum
+	SHA1SUM := sha1sum
 endif
 AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
@@ -76,26 +79,54 @@ LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
 HOSTCC  := cc
 PYTHON  := python3
+FORMAT  := clang-format -i -style=file
 
 FRANK := tools/frank.py
 
 # Options
 INCLUDE_DIRS = $(*D)
-SYSTEM_INCLUDE_DIRS := include include/dolphin src
-#INCLUDES = -i $(*D) -I- -i include -i include/dolphin/ -i include/dolphin/mtx/ -i src
+# TODO dolphin and sysdolphin as system includes
+#      Then fix include statements to use quotes for other paths
+#      And make sure that all tools understand this distinction.
+SYSTEM_INCLUDE_DIRS := src src/MSL
 INCLUDES = $(addprefix -i ,$(INCLUDE_DIRS)) -I- $(addprefix -i ,$(SYSTEM_INCLUDE_DIRS))
 
 
-ASFLAGS := -mgekko -I include
+ASFLAGS := -mgekko -I src
+ifneq ($(NON_MATCHING),1)
+	ASFLAGS += --defsym MUST_MATCH=1
+endif
 LDFLAGS := -fp hard -nodefaults
 ifeq ($(GENERATE_MAP),1)
-  LDFLAGS += -map $(MAP)
-endif
-CFLAGS  = -cwd source -Cpp_exceptions off -proc gekko -fp hard -fp_contract on -O4,p -enum int -nodefaults -inline auto $(INCLUDES) -maxerrors $(MAX_ERRORS)
-ifeq ($(NON_MATCHING),1)
-CFLAGS += -DNON_MATCHING
+	LDFLAGS += -map $(MAP)
 endif
 
+CFLAGS = -msgstyle $(MSG_STYLE) \
+		-nowraplines \
+		-cwd source \
+		-Cpp_exceptions off \
+		-proc gekko -fp hard \
+		-fp_contract on -O4,p \
+		-enum int \
+		-nodefaults \
+		-inline auto $(INCLUDES) \
+		-maxerrors $(MAX_ERRORS)
+
+ifneq ($(NON_MATCHING),1)
+	CFLAGS += -DMUST_MATCH
+endif
+
+ifeq ($(REQUIRE_PROTOS),1)
+	CFLAGS += -requireprotos
+endif
+
+ifeq ($(MAX_ERRORS),0)
+	CFLAGS += -nofail
+endif
+
+ifeq ($(WARN_ERROR),1)
+	CFLAGS += -warn iserror
+endif
 
 $(BUILD_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)
 $(BUILD_DIR)/src/melee/lb/lbtime.c.o: CC_EPI := $(CC)
@@ -109,7 +140,7 @@ HOSTCFLAGS := -Wall -O3 -s
 # Remove all built-in rules
 .SUFFIXES:
 
-.PHONY: default
+.PHONY: default format clean
 
 ### Default target ###
 
@@ -122,9 +153,17 @@ else
 	$(QUIET) $(SHA1SUM) -c $(TARGET).sha1
 endif
 
+# clang-format all source files
+format:
+	$(QUIET) find src -type f \( -name '*.c' -o -name '*.h' \) -exec $(FORMAT) {} +
+	$(QUIET) tools/newlines.sh
+
+clean:
+	rm -f -d -r build $(ELF2DOL)
+
 ALL_DIRS := $(sort $(dir $(O_FILES)))
 ALL_DIRS += $(patsubst $(BUILD_DIR)/%,$(VANILLA_DIR)/%,$(ALL_DIRS)) \
-            $(patsubst $(BUILD_DIR)/%,$(PROFILE_DIR)/%,$(ALL_DIRS))
+			$(patsubst $(BUILD_DIR)/%,$(PROFILE_DIR)/%,$(ALL_DIRS))
 
 # Make sure build directory exists before compiling anything
 DUMMY != mkdir -p $(ALL_DIRS)
@@ -135,9 +174,6 @@ DUMMY != mkdir -p $(ALL_DIRS)
 ifeq ($(GENERATE_MAP),1)
 	$(QUIET) $(PYTHON) tools/calcprogress/calcprogress.py --dol $(DOL) --map $(MAP) --asm-obj-ext .s.o --old-map true
 endif
-
-clean:
-	rm -f -d -r build $(ELF2DOL)
 
 # ELF creation makefile instructions
 $(ELF): $(O_FILES) $(LDSCRIPT)

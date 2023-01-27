@@ -1,6 +1,10 @@
 #include <sysdolphin/baselib/gobj.h>
 
+#include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/lobj.h>
 
 extern HSD_GObj* lbl_804D7818;
 extern HSD_GObj* lbl_804D781C;
@@ -16,6 +20,7 @@ inline u8 GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
         proc->flags_1 = value;
         proc = proc->child;
     }
+    /// @todo Missing return statement
 }
 
 inline u8 GObj_SetFlag2_inline(HSD_GObjProc* proc, u8 value)
@@ -24,21 +29,26 @@ inline u8 GObj_SetFlag2_inline(HSD_GObjProc* proc, u8 value)
         proc->flags_2 = value;
         proc = proc->child;
     }
+    /// @todo Missing return statement
 }
 
-void func_80390C5C(HSD_GObj* gobj) {
+void func_80390C5C(HSD_GObj* gobj)
+{
     GObj_SetFlag1_inline(gobj->proc, 1);
 }
 
-void func_80390C84(HSD_GObj* gobj) {
+void func_80390C84(HSD_GObj* gobj)
+{
     GObj_SetFlag1_inline(gobj->proc, 0);
 }
 
-void func_80390CAC(HSD_GObj* gobj) {
+void func_80390CAC(HSD_GObj* gobj)
+{
     GObj_SetFlag2_inline(gobj->proc, 0);
 }
 
-void func_80390CD4(HSD_GObj* gobj) {
+void func_80390CD4(HSD_GObj* gobj)
+{
     HSD_GObjProc* p = gobj->proc;
 
     while (p != NULL) {
@@ -54,7 +64,8 @@ void func_80390CFC(void)
     HSD_GObjProc* proc;
     HSD_GObj* gobj;
 
-    u64 var_r31 = HSD_GObjLibInitData.unk_2 != NULL ? *HSD_GObjLibInitData.unk_2 : 0;
+    u64 var_r31 =
+        HSD_GObjLibInitData.unk_2 != NULL ? *HSD_GObjLibInitData.unk_2 : 0;
     lbl_804D783C += 1;
     if (lbl_804D783C > 2) {
         lbl_804D783C = 0;
@@ -68,11 +79,12 @@ void func_80390CFC(void)
             if (proc->flags_3 != lbl_804D783C) {
                 proc->flags_3 = lbl_804D783C;
                 gobj = proc->gobj;
-                if (!(var_r31 & (1LL << gobj->p_link)) &&
-                    !(proc->flags_1) && !(proc->flags_2)) {
+                if (!(var_r31 & (1LL << gobj->p_link)) && !(proc->flags_1) &&
+                    !(proc->flags_2))
+                {
                     lbl_804D781C = gobj;
                     lbl_804D7838 = proc;
-                    proc->callback(proc->gobj);
+                    proc->on_invoke(proc->gobj);
                     lbl_804D7830 = proc->next;
                     if (lbl_804CE3E4.flags != 0) {
                         lbl_804CE3E4.b0 = 1;
@@ -81,7 +93,8 @@ void func_80390CFC(void)
                         } else {
                             if (lbl_804CE3E4.b3) {
                                 func_8039032C(lbl_804CE3E4.type, proc->gobj,
-                                              lbl_804CE3E4.p_link, lbl_804CE3E4.p_prio,
+                                              lbl_804CE3E4.p_link,
+                                              lbl_804CE3E4.p_prio,
                                               lbl_804CE3E4.gobj);
                             }
                             if (lbl_804CE3E4.b2) {
@@ -128,7 +141,8 @@ void func_80390ED0(HSD_GObj* gobj, u32 mask)
             while (prios) {
                 if (prios & 1) {
                     HSD_GObj* cur;
-                    for (cur = lbl_804D7824[j]; cur != NULL; cur = cur->next_gx) {
+                    for (cur = lbl_804D7824[j]; cur != NULL; cur = cur->next_gx)
+                    {
                         if (cur->render_cb != NULL) {
                             render_gobj(cur, i);
                         }
@@ -168,22 +182,29 @@ void lbl_80391044(HSD_GObj* gobj)
 void func_80391070(HSD_GObj* gobj, s32 arg1)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
+
+#ifdef MUST_MATCH
 // don't inline func_80390EB8
 // TODO is there a file boundary between func_80390EB8 and func_80391070?
 #pragma push
 #pragma dont_inline on
+#endif
+
     HSD_JObjDispAll(jobj, NULL, func_80390EB8(arg1), 0);
 }
+
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void lbl_803910B4(HSD_GObj* gobj)
 {
     HSD_FogSet(gobj->hsd_obj);
 }
 
-void func_803910D8(HSD_GObj* gobj, s32 arg1)
+void func_803910D8(HSD_GObj* gobj, Event arg1)
 {
-    if (HSD_CObjSetCurrent(gobj->hsd_obj)) {
+    if (HSD_CObjSetCurrent(gobj->hsd_obj, arg1)) {
         func_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
     }
@@ -204,11 +225,11 @@ void lbl_803911C0(HSD_Obj* obj)
     lbl_80391120(obj);
 }
 
-typedef struct _GObjFuncs {
+struct _GObjFuncs {
     struct _GObjFuncs* next;
     u8 size;
-    void (**funcs)();
-} GObjFuncs;
+    void (**funcs)(void);
+};
 
 extern GObjFuncs lbl_80408610;
 extern s8 lbl_804D7848;
@@ -225,10 +246,10 @@ void func_80391260(struct _GObjUnkStruct* arg0)
     lbl_804D7848 = count;
 }
 
-typedef struct _GObjUnkStruct {
+struct _GObjUnkStruct {
     u32 unused;
     GObjFuncs foo;
-} GObjUnkStruct;
+};
 
 u8 func_803912A8(GObjUnkStruct* arg0, GObjFuncs* foo)
 {

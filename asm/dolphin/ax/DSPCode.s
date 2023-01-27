@@ -6,7 +6,7 @@
     .balign 32
 .global axDspSlave
 axDspSlave:
-    .4byte NULL
+    .4byte 0x00000000
     .4byte 0x029F0C10
     .4byte 0x029F0C1F
     .4byte 0x029F0C3B
@@ -873,12 +873,12 @@ axDspSlave:
     .4byte 0x18271B07
     .4byte 0x1B7C0000
     .4byte 0x18271B07
-    .4byte NULL
+    .4byte 0x00000000
     .4byte 0x18271B07
-    .4byte NULL
+    .4byte 0x00000000
     .4byte 0x006506D1
     .4byte 0x18271B07
-    .4byte NULL
+    .4byte 0x00000000
     .4byte 0x006606D6
     .4byte 0x4A001B7E
     .4byte 0x1B7C0004
@@ -1556,7 +1556,7 @@ axDspSlave:
     .4byte 0x26FC02A0
     .4byte 0x8000029C
     .4byte 0x0C160000
-    .4byte NULL
+    .4byte 0x00000000
     .4byte 0x02FF8E00
     .4byte 0x00F00E17
     .4byte 0x00FE0E18
@@ -1569,8 +1569,8 @@ axDspSlave:
     .4byte 0x00D00E17
     .4byte 0x00DE0E18
     .4byte 0x00DC0E19
-    .4byte NULL
-    .4byte NULL
+    .4byte 0x00000000
+    .4byte 0x00000000
     .4byte 0x02FF8E00
     .4byte 0x1DBC1DBE
     .4byte 0x810000DE
@@ -1579,8 +1579,8 @@ axDspSlave:
     .4byte 0x0E0000FE
     .4byte 0x0B871FCD
     .4byte 0x1F8D02FF
-    .4byte NULL
-    .4byte NULL
+    .4byte 0x00000000
+    .4byte 0x00000000
     .4byte 0x000002FF
     .4byte 0x8E001DBC
     .4byte 0x1DBE8100
@@ -1607,11 +1607,11 @@ axDspSlave:
     .4byte 0x00FC0BDD
     .4byte 0x81001FCD
     .4byte 0x1F8D02FF
-    .4byte NULL
-    .4byte NULL
+    .4byte 0x00000000
+    .4byte 0x00000000
     .4byte 0x000002FF
-    .4byte NULL
-    .4byte NULL
+    .4byte 0x00000000
+    .4byte 0x00000000
     .4byte 0x02FF0C9F
     .4byte 0x0CA20CDA
     .4byte 0x0CDD8E00
@@ -1660,8 +1660,8 @@ axDspSlave:
     .4byte 0x27FE03C0
     .4byte 0x8000029C
     .4byte 0x0CE602DF
-    .4byte NULL
-    .4byte NULL
+    .4byte 0x00000000
+    .4byte 0x00000000
 
 
 .section .sdata

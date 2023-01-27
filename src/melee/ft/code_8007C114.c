@@ -1,16 +1,17 @@
-#include <dolphin/types.h>
+#include <melee/ft/code_8007C114.h>
+
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcoll.h>
+#include <melee/it/item2.h>
+#include <melee/lb/lbunknown_001.h>
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
 
 static f32 const lbl_804D8320 = 0.0F;
 static f32 const lbl_804D8324 = 1.0F;
 
 extern unk_t func_800C555C();
-extern void func_80008440(Hitbox*);
-extern unk_t func_80008688();
-extern unk_t func_8000ACFC();
-extern unk_t func_800089B8();
-extern unk_t func_80007AFC();
 
 void func_8007C224(HSD_GObj* fighter_gobj);
 
@@ -45,9 +46,20 @@ lbl_8007C154:
 /* 8007C16C 00078D4C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8007C170 00078D50  38 21 00 18 */	addi r1, r1, 0x18
 /* 8007C174 00078D54  7C 08 03 A6 */	mtlr r0
-/* 8007C178 00078D58  4E 80 00 20 */	blr 
+/* 8007C178 00078D58  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_8007C114(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_8007C17C(HSD_GObj* fighter_gobj)
@@ -94,9 +106,20 @@ asm void func_8007C17C(HSD_GObj* fighter_gobj)
 /* 8007C214 00078DF4  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8007C218 00078DF8  38 21 00 28 */	addi r1, r1, 0x28
 /* 8007C21C 00078DFC  7C 08 03 A6 */	mtlr r0
-/* 8007C220 00078E00  4E 80 00 20 */	blr 
+/* 8007C220 00078E00  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_8007C17C(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_8007C224(HSD_GObj* fighter_gobj)
@@ -153,12 +176,23 @@ lbl_8007C2CC:
 /* 8007C2D0 00078EB0  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 8007C2D4 00078EB4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8007C2D8 00078EB8  7C 08 03 A6 */	mtlr r0
-/* 8007C2DC 00078EBC  4E 80 00 20 */	blr 
+/* 8007C2DC 00078EBC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_8007C224(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t func_8007C2E0()
+asm void func_8007C2E0(void)
 { // clang-format off
     nofralloc
 /* 8007C2E0 00078EC0  7C 08 02 A6 */	mflr r0
@@ -289,9 +323,20 @@ lbl_8007C49C:
 /* 8007C4AC 0007908C  83 81 00 28 */	lwz r28, 0x28(r1)
 /* 8007C4B0 00079090  38 21 00 38 */	addi r1, r1, 0x38
 /* 8007C4B4 00079094  7C 08 03 A6 */	mtlr r0
-/* 8007C4B8 00079098  4E 80 00 20 */	blr 
+/* 8007C4B8 00079098  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_8007C2E0(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_8007C4BC(HSD_GObj* fighter_gobj)
@@ -399,6 +444,15 @@ lbl_8007C61C:
 /* 8007C620 00079200  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8007C624 00079204  38 21 00 40 */	addi r1, r1, 0x40
 /* 8007C628 00079208  7C 08 03 A6 */	mtlr r0
-/* 8007C62C 0007920C  4E 80 00 20 */	blr 
+/* 8007C62C 0007920C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_8007C4BC(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

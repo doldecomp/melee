@@ -74,7 +74,7 @@ lbl_8036BA4C:
 /* 8036BA5C 0036863C  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 8036BA60 00368640  38 21 00 20 */	addi r1, r1, 0x20
 /* 8036BA64 00368644  7C 08 03 A6 */	mtlr r0
-/* 8036BA68 00368648  4E 80 00 20 */	blr 
+/* 8036BA68 00368648  4E 80 00 20 */	blr
 
 .global HSD_PObjReqAnimAllByFlags
 HSD_PObjReqAnimAllByFlags:
@@ -115,14 +115,14 @@ lbl_8036BAD8:
 /* 8036BAE4 003686C4  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8036BAE8 003686C8  38 21 00 28 */	addi r1, r1, 0x28
 /* 8036BAEC 003686CC  7C 08 03 A6 */	mtlr r0
-/* 8036BAF0 003686D0  4E 80 00 20 */	blr 
+/* 8036BAF0 003686D0  4E 80 00 20 */	blr
 lbl_8036BAF4:
 /* 8036BAF4 003686D4  28 03 00 00 */	cmplwi r3, 0
-/* 8036BAF8 003686D8  4D 82 00 20 */	beqlr 
+/* 8036BAF8 003686D8  4D 82 00 20 */	beqlr
 /* 8036BAFC 003686DC  A0 03 00 0C */	lhz r0, 0xc(r3)
 /* 8036BB00 003686E0  54 00 04 A6 */	rlwinm r0, r0, 0, 0x12, 0x13
 /* 8036BB04 003686E4  2C 00 10 00 */	cmpwi r0, 0x1000
-/* 8036BB08 003686E8  4C 82 00 20 */	bnelr 
+/* 8036BB08 003686E8  4C 82 00 20 */	bnelr
 /* 8036BB0C 003686EC  80 63 00 14 */	lwz r3, 0x14(r3)
 /* 8036BB10 003686F0  A0 03 00 00 */	lhz r0, 0(r3)
 /* 8036BB14 003686F4  54 00 07 BD */	rlwinm. r0, r0, 0, 0x1e, 0x1e
@@ -132,11 +132,11 @@ lbl_8036BAF4:
 /* 8036BB24 00368704  C0 05 00 00 */	lfs f0, 0(r5)
 /* 8036BB28 00368708  7C 63 02 14 */	add r3, r3, r0
 /* 8036BB2C 0036870C  D0 03 FF F8 */	stfs f0, -8(r3)
-/* 8036BB30 00368710  4E 80 00 20 */	blr 
+/* 8036BB30 00368710  4E 80 00 20 */	blr
 lbl_8036BB34:
 /* 8036BB34 00368714  C0 05 00 00 */	lfs f0, 0(r5)
 /* 8036BB38 00368718  D0 03 00 1C */	stfs f0, 0x1c(r3)
-/* 8036BB3C 0036871C  4E 80 00 20 */	blr 
+/* 8036BB3C 0036871C  4E 80 00 20 */	blr
 
 .global HSD_PObjAnimAll
 HSD_PObjAnimAll:
@@ -174,7 +174,7 @@ lbl_8036BBA4:
 /* 8036BBAC 0036878C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8036BBB0 00368790  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036BBB4 00368794  7C 08 03 A6 */	mtlr r0
-/* 8036BBB8 00368798  4E 80 00 20 */	blr 
+/* 8036BBB8 00368798  4E 80 00 20 */	blr
 
 .global loadEnvelopeDesc
 loadEnvelopeDesc:
@@ -240,7 +240,7 @@ lbl_8036BC88:
 /* 8036BC8C 0036886C  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8036BC90 00368870  38 21 00 38 */	addi r1, r1, 0x38
 /* 8036BC94 00368874  7C 08 03 A6 */	mtlr r0
-/* 8036BC98 00368878  4E 80 00 20 */	blr 
+/* 8036BC98 00368878  4E 80 00 20 */	blr
 
 .global loadShapeSetDesc
 loadShapeSetDesc:
@@ -313,7 +313,7 @@ lbl_8036BD7C:
 /* 8036BD90 00368970  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8036BD94 00368974  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036BD98 00368978  7C 08 03 A6 */	mtlr r0
-/* 8036BD9C 0036897C  4E 80 00 20 */	blr 
+/* 8036BD9C 0036897C  4E 80 00 20 */	blr
 lbl_8036BDA0:
 /* 8036BDA0 00368980  7C 08 02 A6 */	mflr r0
 /* 8036BDA4 00368984  90 01 00 04 */	stw r0, 4(r1)
@@ -368,7 +368,7 @@ lbl_8036BE48:
 /* 8036BE54 00368A34  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8036BE58 00368A38  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036BE5C 00368A3C  7C 08 03 A6 */	mtlr r0
-/* 8036BE60 00368A40  4E 80 00 20 */	blr 
+/* 8036BE60 00368A40  4E 80 00 20 */	blr
 
 .global HSD_PObjLoadDesc
 HSD_PObjLoadDesc:
@@ -403,7 +403,7 @@ lbl_8036BEC0:
 /* 8036BEC8 00368AA8  38 9E 00 00 */	addi r4, r30, 0
 /* 8036BECC 00368AAC  81 85 00 44 */	lwz r12, 0x44(r5)
 /* 8036BED0 00368AB0  7D 88 03 A6 */	mtlr r12
-/* 8036BED4 00368AB4  4E 80 00 21 */	blrl 
+/* 8036BED4 00368AB4  4E 80 00 21 */	blrl
 /* 8036BED8 00368AB8  7F E3 FB 78 */	mr r3, r31
 /* 8036BEDC 00368ABC  48 00 00 08 */	b lbl_8036BEE4
 lbl_8036BEE0:
@@ -414,7 +414,7 @@ lbl_8036BEE4:
 /* 8036BEEC 00368ACC  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8036BEF0 00368AD0  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036BEF4 00368AD4  7C 08 03 A6 */	mtlr r0
-/* 8036BEF8 00368AD8  4E 80 00 20 */	blr 
+/* 8036BEF8 00368AD8  4E 80 00 20 */	blr
 
 .global HSD_PObjRemoveAll
 HSD_PObjRemoveAll:
@@ -433,12 +433,12 @@ lbl_8036BF18:
 /* 8036BF28 00368B08  7F C3 F3 78 */	mr r3, r30
 /* 8036BF2C 00368B0C  81 84 00 30 */	lwz r12, 0x30(r4)
 /* 8036BF30 00368B10  7D 88 03 A6 */	mtlr r12
-/* 8036BF34 00368B14  4E 80 00 21 */	blrl 
+/* 8036BF34 00368B14  4E 80 00 21 */	blrl
 /* 8036BF38 00368B18  80 9E 00 00 */	lwz r4, 0(r30)
 /* 8036BF3C 00368B1C  7F C3 F3 78 */	mr r3, r30
 /* 8036BF40 00368B20  81 84 00 34 */	lwz r12, 0x34(r4)
 /* 8036BF44 00368B24  7D 88 03 A6 */	mtlr r12
-/* 8036BF48 00368B28  4E 80 00 21 */	blrl 
+/* 8036BF48 00368B28  4E 80 00 21 */	blrl
 lbl_8036BF4C:
 /* 8036BF4C 00368B2C  7F FE FB 78 */	mr r30, r31
 lbl_8036BF50:
@@ -449,7 +449,7 @@ lbl_8036BF50:
 /* 8036BF60 00368B40  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8036BF64 00368B44  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036BF68 00368B48  7C 08 03 A6 */	mtlr r0
-/* 8036BF6C 00368B4C  4E 80 00 20 */	blr 
+/* 8036BF6C 00368B4C  4E 80 00 20 */	blr
 
 .global HSD_PObjSetDefaultClass
 HSD_PObjSetDefaultClass:
@@ -476,7 +476,7 @@ lbl_8036BFB4:
 /* 8036BFBC 00368B9C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8036BFC0 00368BA0  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036BFC4 00368BA4  7C 08 03 A6 */	mtlr r0
-/* 8036BFC8 00368BA8  4E 80 00 20 */	blr 
+/* 8036BFC8 00368BA8  4E 80 00 20 */	blr
 
 .global HSD_PObjAlloc
 HSD_PObjAlloc:
@@ -505,7 +505,7 @@ lbl_8036C010:
 /* 8036C018 00368BF8  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8036C01C 00368BFC  38 21 00 10 */	addi r1, r1, 0x10
 /* 8036C020 00368C00  7C 08 03 A6 */	mtlr r0
-/* 8036C024 00368C04  4E 80 00 20 */	blr 
+/* 8036C024 00368C04  4E 80 00 20 */	blr
 
 .global resolveEnvelope
 resolveEnvelope:
@@ -579,7 +579,7 @@ lbl_8036C110:
 /* 8036C114 00368CF4  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8036C118 00368CF8  38 21 00 30 */	addi r1, r1, 0x30
 /* 8036C11C 00368CFC  7C 08 03 A6 */	mtlr r0
-/* 8036C120 00368D00  4E 80 00 20 */	blr 
+/* 8036C120 00368D00  4E 80 00 20 */	blr
 
 .global HSD_PObjResolveRefsAll
 HSD_PObjResolveRefsAll:
@@ -661,7 +661,7 @@ lbl_8036C228:
 /* 8036C234 00368E14  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 8036C238 00368E18  38 21 00 28 */	addi r1, r1, 0x28
 /* 8036C23C 00368E1C  7C 08 03 A6 */	mtlr r0
-/* 8036C240 00368E20  4E 80 00 20 */	blr 
+/* 8036C240 00368E20  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/z3FDr
 .global HSD_ClearVtxDesc
@@ -676,7 +676,7 @@ HSD_ClearVtxDesc:
 /* 8036C260 00368E40  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8036C264 00368E44  38 21 00 08 */	addi r1, r1, 8
 /* 8036C268 00368E48  7C 08 03 A6 */	mtlr r0
-/* 8036C26C 00368E4C  4E 80 00 20 */	blr 
+/* 8036C26C 00368E4C  4E 80 00 20 */	blr
 
 .global setupArrayDesc
 setupArrayDesc:
@@ -713,7 +713,7 @@ lbl_8036C2D0:
 /* 8036C2D8 00368EB8  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8036C2DC 00368EBC  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036C2E0 00368EC0  7C 08 03 A6 */	mtlr r0
-/* 8036C2E4 00368EC4  4E 80 00 20 */	blr 
+/* 8036C2E4 00368EC4  4E 80 00 20 */	blr
 
 .global setupVtxDesc
 setupVtxDesc:
@@ -760,7 +760,7 @@ lbl_8036C36C:
 /* 8036C374 00368F54  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8036C378 00368F58  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036C37C 00368F5C  7C 08 03 A6 */	mtlr r0
-/* 8036C380 00368F60  4E 80 00 20 */	blr 
+/* 8036C380 00368F60  4E 80 00 20 */	blr
 
 .global setupShapeAnimArrayDesc
 setupShapeAnimArrayDesc:
@@ -799,7 +799,7 @@ lbl_8036C3DC:
 /* 8036C3F4 00368FD4  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8036C3F8 00368FD8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036C3FC 00368FDC  7C 08 03 A6 */	mtlr r0
-/* 8036C400 00368FE0  4E 80 00 20 */	blr 
+/* 8036C400 00368FE0  4E 80 00 20 */	blr
 
 .global setupShapeAnimVtxDesc
 setupShapeAnimVtxDesc:
@@ -861,7 +861,7 @@ lbl_8036C4AC:
 /* 8036C4C4 003690A4  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8036C4C8 003690A8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036C4CC 003690AC  7C 08 03 A6 */	mtlr r0
-/* 8036C4D0 003690B0  4E 80 00 20 */	blr 
+/* 8036C4D0 003690B0  4E 80 00 20 */	blr
 
 .global get_shape_vertex_xyz
 get_shape_vertex_xyz:
@@ -1102,7 +1102,7 @@ lbl_8036C844:
 /* 8036C850 00369430  83 A1 00 5C */	lwz r29, 0x5c(r1)
 /* 8036C854 00369434  38 21 00 68 */	addi r1, r1, 0x68
 /* 8036C858 00369438  7C 08 03 A6 */	mtlr r0
-/* 8036C85C 0036943C  4E 80 00 20 */	blr 
+/* 8036C85C 0036943C  4E 80 00 20 */	blr
 
 .global get_shape_normal_xyz
 get_shape_normal_xyz:
@@ -1343,7 +1343,7 @@ lbl_8036CBD0:
 /* 8036CBDC 003697BC  83 A1 00 5C */	lwz r29, 0x5c(r1)
 /* 8036CBE0 003697C0  38 21 00 68 */	addi r1, r1, 0x68
 /* 8036CBE4 003697C4  7C 08 03 A6 */	mtlr r0
-/* 8036CBE8 003697C8  4E 80 00 20 */	blr 
+/* 8036CBE8 003697C8  4E 80 00 20 */	blr
 
 .global get_shape_nbt_xyz
 get_shape_nbt_xyz:
@@ -1939,7 +1939,7 @@ lbl_8036D4BC:
 /* 8036D4C0 0036A0A0  80 01 00 C4 */	lwz r0, 0xc4(r1)
 /* 8036D4C4 0036A0A4  38 21 00 C0 */	addi r1, r1, 0xc0
 /* 8036D4C8 0036A0A8  7C 08 03 A6 */	mtlr r0
-/* 8036D4CC 0036A0AC  4E 80 00 20 */	blr 
+/* 8036D4CC 0036A0AC  4E 80 00 20 */	blr
 
 .global interpretShapeAnimDisplayList
 interpretShapeAnimDisplayList:
@@ -1989,7 +1989,7 @@ lbl_8036D548:
 /* 8036D570 0036A150  54 83 10 3A */	slwi r3, r4, 2
 /* 8036D574 0036A154  7C 7A 18 2E */	lwzx r3, r26, r3
 /* 8036D578 0036A158  7C 69 03 A6 */	mtctr r3
-/* 8036D57C 0036A15C  4E 80 04 20 */	bctr 
+/* 8036D57C 0036A15C  4E 80 04 20 */	bctr
 
 .global lbl_8036D580
 lbl_8036D580:
@@ -2179,7 +2179,7 @@ lbl_8036D7D0:
 /* 8036D7D4 0036A3B4  80 01 00 64 */	lwz r0, 0x64(r1)
 /* 8036D7D8 0036A3B8  38 21 00 60 */	addi r1, r1, 0x60
 /* 8036D7DC 0036A3BC  7C 08 03 A6 */	mtlr r0
-/* 8036D7E0 0036A3C0  4E 80 00 20 */	blr 
+/* 8036D7E0 0036A3C0  4E 80 00 20 */	blr
 
 .global drawShapeAnim
 drawShapeAnim:
@@ -2767,7 +2767,7 @@ lbl_8036E018:
 /* 8036E024 0036AC04  CB C1 01 00 */	lfd f30, 0x100(r1)
 /* 8036E028 0036AC08  38 21 01 10 */	addi r1, r1, 0x110
 /* 8036E02C 0036AC0C  7C 08 03 A6 */	mtlr r0
-/* 8036E030 0036AC10  4E 80 00 20 */	blr 
+/* 8036E030 0036AC10  4E 80 00 20 */	blr
 
 .global HSD_PObjClearMtxMark
 HSD_PObjClearMtxMark:
@@ -2776,16 +2776,16 @@ HSD_PObjClearMtxMark:
 /* 8036E03C 0036AC1C  90 85 00 04 */	stw r4, 4(r5)
 /* 8036E040 0036AC20  90 65 00 08 */	stw r3, 8(r5)
 /* 8036E044 0036AC24  90 85 00 0C */	stw r4, 0xc(r5)
-/* 8036E048 0036AC28  4E 80 00 20 */	blr 
+/* 8036E048 0036AC28  4E 80 00 20 */	blr
 
-.global func_8036E04C
-func_8036E04C:
+.global HSD_PObjSetMtxMark
+HSD_PObjSetMtxMark:
 /* 8036E04C 0036AC2C  2C 03 00 02 */	cmpwi r3, 2
-/* 8036E050 0036AC30  4C 80 00 20 */	bgelr 
+/* 8036E050 0036AC30  4C 80 00 20 */	bgelr
 /* 8036E054 0036AC34  2C 03 00 00 */	cmpwi r3, 0
 /* 8036E058 0036AC38  41 80 00 0C */	blt lbl_8036E064
 /* 8036E05C 0036AC3C  2C 03 00 02 */	cmpwi r3, 2
-/* 8036E060 0036AC40  4D 80 00 20 */	bltlr 
+/* 8036E060 0036AC40  4D 80 00 20 */	bltlr
 lbl_8036E064:
 /* 8036E064 0036AC44  3C C0 80 4C */	lis r6, mtx_mark@ha
 /* 8036E068 0036AC48  54 63 18 38 */	slwi r3, r3, 3
@@ -2793,10 +2793,10 @@ lbl_8036E064:
 /* 8036E070 0036AC50  7C 60 1A 14 */	add r3, r0, r3
 /* 8036E074 0036AC54  90 83 00 00 */	stw r4, 0(r3)
 /* 8036E078 0036AC58  90 A3 00 04 */	stw r5, 4(r3)
-/* 8036E07C 0036AC5C  4E 80 00 20 */	blr 
+/* 8036E07C 0036AC5C  4E 80 00 20 */	blr
 
-.global func_8036E080
-func_8036E080:
+.global HSD_PObjGetMtxMark
+HSD_PObjGetMtxMark:
 /* 8036E080 0036AC60  7C 08 02 A6 */	mflr r0
 /* 8036E084 0036AC64  90 01 00 04 */	stw r0, 4(r1)
 /* 8036E088 0036AC68  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -2844,7 +2844,7 @@ lbl_8036E110:
 /* 8036E11C 0036ACFC  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 8036E120 0036AD00  38 21 00 28 */	addi r1, r1, 0x28
 /* 8036E124 0036AD04  7C 08 03 A6 */	mtlr r0
-/* 8036E128 0036AD08  4E 80 00 20 */	blr 
+/* 8036E128 0036AD08  4E 80 00 20 */	blr
 
 .global SetupRigidModelMtx
 SetupRigidModelMtx:
@@ -2904,7 +2904,7 @@ lbl_8036E1EC:
 /* 8036E1F0 0036ADD0  41 82 00 58 */	beq lbl_8036E248
 /* 8036E1F4 0036ADD4  38 7C 00 00 */	addi r3, r28, 0
 /* 8036E1F8 0036ADD8  38 81 00 20 */	addi r4, r1, 0x20
-/* 8036E1FC 0036ADDC  48 00 B8 25 */	bl func_80379A20
+/* 8036E1FC 0036ADDC  48 00 B8 25 */	bl HSD_MtxInverseTranspose
 /* 8036E200 0036ADE0  80 1F 00 14 */	lwz r0, 0x14(r31)
 /* 8036E204 0036ADE4  54 00 06 31 */	rlwinm. r0, r0, 0, 0x18, 0x18
 /* 8036E208 0036ADE8  41 82 00 1C */	beq lbl_8036E224
@@ -2932,7 +2932,7 @@ lbl_8036E248:
 /* 8036E258 0036AE38  83 81 00 50 */	lwz r28, 0x50(r1)
 /* 8036E25C 0036AE3C  38 21 00 60 */	addi r1, r1, 0x60
 /* 8036E260 0036AE40  7C 08 03 A6 */	mtlr r0
-/* 8036E264 0036AE44  4E 80 00 20 */	blr 
+/* 8036E264 0036AE44  4E 80 00 20 */	blr
 
 .global SetupSharedVtxModelMtx
 SetupSharedVtxModelMtx:
@@ -3009,7 +3009,7 @@ lbl_8036E32C:
 /* 8036E36C 0036AF4C  41 82 00 58 */	beq lbl_8036E3C4
 /* 8036E370 0036AF50  38 7D 00 00 */	addi r3, r29, 0
 /* 8036E374 0036AF54  38 81 00 84 */	addi r4, r1, 0x84
-/* 8036E378 0036AF58  48 00 B6 A9 */	bl func_80379A20
+/* 8036E378 0036AF58  48 00 B6 A9 */	bl HSD_MtxInverseTranspose
 /* 8036E37C 0036AF5C  80 1F 00 14 */	lwz r0, 0x14(r31)
 /* 8036E380 0036AF60  54 00 06 31 */	rlwinm. r0, r0, 0, 0x18, 0x18
 /* 8036E384 0036AF64  41 82 00 1C */	beq lbl_8036E3A0
@@ -3073,7 +3073,7 @@ lbl_8036E41C:
 /* 8036E458 0036B038  41 82 00 58 */	beq lbl_8036E4B0
 /* 8036E45C 0036B03C  38 61 00 24 */	addi r3, r1, 0x24
 /* 8036E460 0036B040  38 81 00 54 */	addi r4, r1, 0x54
-/* 8036E464 0036B044  48 00 B5 BD */	bl func_80379A20
+/* 8036E464 0036B044  48 00 B5 BD */	bl HSD_MtxInverseTranspose
 /* 8036E468 0036B048  80 1F 00 14 */	lwz r0, 0x14(r31)
 /* 8036E46C 0036B04C  54 00 06 31 */	rlwinm. r0, r0, 0, 0x18, 0x18
 /* 8036E470 0036B050  41 82 00 1C */	beq lbl_8036E48C
@@ -3098,7 +3098,7 @@ lbl_8036E4B0:
 /* 8036E4B4 0036B094  80 01 00 DC */	lwz r0, 0xdc(r1)
 /* 8036E4B8 0036B098  38 21 00 D8 */	addi r1, r1, 0xd8
 /* 8036E4BC 0036B09C  7C 08 03 A6 */	mtlr r0
-/* 8036E4C0 0036B0A0  4E 80 00 20 */	blr 
+/* 8036E4C0 0036B0A0  4E 80 00 20 */	blr
 
 .global SetupEnvelopeModelMtx
 SetupEnvelopeModelMtx:
@@ -3146,7 +3146,7 @@ lbl_8036E548:
 lbl_8036E560:
 /* 8036E560 0036B140  38 7A 00 00 */	addi r3, r26, 0
 /* 8036E564 0036B144  38 81 00 88 */	addi r4, r1, 0x88
-/* 8036E568 0036B148  48 00 5D 45 */	bl func_803742AC
+/* 8036E568 0036B148  48 00 5D 45 */	bl _HSD_mkEnvelopeModelNodeMtx
 /* 8036E56C 0036B14C  3C 80 80 40 */	lis r4, HSD_PerfCurrentStat@ha
 /* 8036E570 0036B150  83 36 00 14 */	lwz r25, 0x14(r22)
 /* 8036E574 0036B154  38 84 72 18 */	addi r4, r4, HSD_PerfCurrentStat@l
@@ -3310,7 +3310,7 @@ lbl_8036E77C:
 /* 8036E7A8 0036B388  41 82 00 60 */	beq lbl_8036E808
 /* 8036E7AC 0036B38C  38 61 00 28 */	addi r3, r1, 0x28
 /* 8036E7B0 0036B390  38 81 00 58 */	addi r4, r1, 0x58
-/* 8036E7B4 0036B394  48 00 B2 6D */	bl func_80379A20
+/* 8036E7B4 0036B394  48 00 B2 6D */	bl HSD_MtxInverseTranspose
 /* 8036E7B8 0036B398  80 1A 00 14 */	lwz r0, 0x14(r26)
 /* 8036E7BC 0036B39C  54 00 06 31 */	rlwinm. r0, r0, 0, 0x18, 0x18
 /* 8036E7C0 0036B3A0  41 82 00 1C */	beq lbl_8036E7DC
@@ -3347,7 +3347,7 @@ lbl_8036E820:
 /* 8036E82C 0036B40C  CB C1 00 F0 */	lfd f30, 0xf0(r1)
 /* 8036E830 0036B410  38 21 01 00 */	addi r1, r1, 0x100
 /* 8036E834 0036B414  7C 08 03 A6 */	mtlr r0
-/* 8036E838 0036B418  4E 80 00 20 */	blr 
+/* 8036E838 0036B418  4E 80 00 20 */	blr
 
 PObjSetupMtx:
 /* 8036E83C 0036B41C  7C 08 02 A6 */	mflr r0
@@ -3383,7 +3383,7 @@ lbl_8036E89C:
 /* 8036E89C 0036B47C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8036E8A0 0036B480  38 21 00 08 */	addi r1, r1, 8
 /* 8036E8A4 0036B484  7C 08 03 A6 */	mtlr r0
-/* 8036E8A8 0036B488  4E 80 00 20 */	blr 
+/* 8036E8A8 0036B488  4E 80 00 20 */	blr
 
 .global HSD_PObjDisp
 HSD_PObjDisp:
@@ -3437,7 +3437,7 @@ lbl_8036E944:
 /* 8036E954 0036B534  38 BE 00 00 */	addi r5, r30, 0
 /* 8036E958 0036B538  38 DF 00 00 */	addi r6, r31, 0
 /* 8036E95C 0036B53C  7D 88 03 A6 */	mtlr r12
-/* 8036E960 0036B540  4E 80 00 21 */	blrl 
+/* 8036E960 0036B540  4E 80 00 21 */	blrl
 /* 8036E964 0036B544  A0 1C 00 0C */	lhz r0, 0xc(r28)
 /* 8036E968 0036B548  54 00 04 A6 */	rlwinm r0, r0, 0, 0x12, 0x13
 /* 8036E96C 0036B54C  2C 00 10 00 */	cmpwi r0, 0x1000
@@ -3475,7 +3475,7 @@ lbl_8036E9D0:
 /* 8036E9E0 0036B5C0  83 81 00 18 */	lwz r28, 0x18(r1)
 /* 8036E9E4 0036B5C4  38 21 00 28 */	addi r1, r1, 0x28
 /* 8036E9E8 0036B5C8  7C 08 03 A6 */	mtlr r0
-/* 8036E9EC 0036B5CC  4E 80 00 20 */	blr 
+/* 8036E9EC 0036B5CC  4E 80 00 20 */	blr
 
 PObjRelease:
 /* 8036E9F0 0036B5D0  7C 08 02 A6 */	mflr r0
@@ -3553,7 +3553,7 @@ lbl_8036EAD8:
 /* 8036EAE4 0036B6C4  7F 83 E3 78 */	mr r3, r28
 /* 8036EAE8 0036B6C8  81 84 00 30 */	lwz r12, 0x30(r4)
 /* 8036EAEC 0036B6CC  7D 88 03 A6 */	mtlr r12
-/* 8036EAF0 0036B6D0  4E 80 00 21 */	blrl 
+/* 8036EAF0 0036B6D0  4E 80 00 21 */	blrl
 /* 8036EAF4 0036B6D4  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8036EAF8 0036B6D8  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 8036EAFC 0036B6DC  83 C1 00 18 */	lwz r30, 0x18(r1)
@@ -3561,7 +3561,7 @@ lbl_8036EAD8:
 /* 8036EB04 0036B6E4  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 8036EB08 0036B6E8  38 21 00 20 */	addi r1, r1, 0x20
 /* 8036EB0C 0036B6EC  7C 08 03 A6 */	mtlr r0
-/* 8036EB10 0036B6F0  4E 80 00 20 */	blr 
+/* 8036EB10 0036B6F0  4E 80 00 20 */	blr
 
 lbl_8036EB14:
 /* 8036EB14 0036B6F4  7C 08 02 A6 */	mflr r0
@@ -3590,11 +3590,11 @@ lbl_8036EB60:
 /* 8036EB68 0036B748  80 84 00 14 */	lwz r4, 0x14(r4)
 /* 8036EB6C 0036B74C  81 84 00 38 */	lwz r12, 0x38(r4)
 /* 8036EB70 0036B750  7D 88 03 A6 */	mtlr r12
-/* 8036EB74 0036B754  4E 80 00 21 */	blrl 
+/* 8036EB74 0036B754  4E 80 00 21 */	blrl
 /* 8036EB78 0036B758  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8036EB7C 0036B75C  38 21 00 08 */	addi r1, r1, 8
 /* 8036EB80 0036B760  7C 08 03 A6 */	mtlr r0
-/* 8036EB84 0036B764  4E 80 00 20 */	blr 
+/* 8036EB84 0036B764  4E 80 00 20 */	blr
 
 .global PObjInfoInit
 PObjInfoInit:
@@ -3631,7 +3631,7 @@ PObjInfoInit:
 /* 8036EC00 0036B7E0  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 8036EC04 0036B7E4  38 21 00 10 */	addi r1, r1, 0x10
 /* 8036EC08 0036B7E8  7C 08 03 A6 */	mtlr r0
-/* 8036EC0C 0036B7EC  4E 80 00 20 */	blr 
+/* 8036EC0C 0036B7EC  4E 80 00 20 */	blr
 
 
 .section .data
@@ -3796,7 +3796,7 @@ lbl_804066D0:
     .balign 8
 .global mtx_mark
 mtx_mark:
-	.skip 0x10
+    .skip 0x10
 
 
 .section .sdata
@@ -3835,50 +3835,50 @@ lbl_804D5D94:
     .balign 8
 .global lbl_804D7660
 lbl_804D7660:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7664
 lbl_804D7664:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7668
 lbl_804D7668:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D766C
 lbl_804D766C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7670
 lbl_804D7670:
-	.skip 0x4
+    .skip 0x4
 .global prev_vtxdesclist_array
 prev_vtxdesclist_array:
-	.skip 0x4
+    .skip 0x4
 .global prev_vtxdesc
 prev_vtxdesc:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DE4F8
 lbl_804DE4F8:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE500
 lbl_804DE500:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000
 .global lbl_804DE508
 lbl_804DE508:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804DE510
 lbl_804DE510:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE518
 lbl_804DE518:
-	.4byte 0x3FF00000
-	.4byte 0x00000000
+    .4byte 0x3FF00000
+    .4byte 0x00000000
 .global lbl_804DE520
 lbl_804DE520:
-	.4byte 0x3F800000
-	.4byte 0x00000000
+    .4byte 0x3F800000
+    .4byte 0x00000000

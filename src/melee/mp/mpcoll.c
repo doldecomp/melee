@@ -1,16 +1,14 @@
-// python ../asm-differ/diff.py -mwobs func_X
-
 #include <melee/mp/mpcoll.h>
-#include "melee/ft/ftlib.h"
+
+#include <dolphin/os/os.h>
+#include <melee/db/db_unknown_001.h>
+#include <melee/ft/ftlib.h>
+#include <melee/gr/grdynamicattr.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
-
-// TODO: proper signatures, mplib.h
-s32 func_80052700();
-s32 func_8004F008();
-s32 func_80054584();
-s32 func_8004DD90();
-s32 func_8004E398();
+#include <melee/mp/mplib.h>
+#include <MSL/trigf.h>
+#include <placeholder.h>
 
 extern s32 lbl_804D64A0;
 extern s32 lbl_804D64A4;
@@ -18,7 +16,8 @@ extern s32 lbl_804D64A8;
 extern u32 lbl_804D64AC;
 
 // 80041C78 https://decomp.me/scratch/V6eYQ
-void func_80041C78(void) {
+void func_80041C78(void)
+{
     lbl_804D64A0 = 0;
     lbl_804D64A4 = 0;
     lbl_804D64A8 = 0;
@@ -27,24 +26,28 @@ void func_80041C78(void) {
 char lbl_804D3948[2] = "0";
 
 // 80041C8C https://decomp.me/scratch/VvSaI
-void func_80041C8C(CollData* cd) {
-    u32 unused[2];
+void func_80041C8C(CollData* cd)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     lbl_804D64A0 = 0;
     lbl_804D64A4 = 0;
     if (g_debugLevel >= 3) {
         if (!(cd->x4_vec.x < 45000.0f) || !(cd->x4_vec.x > -45000.0f) ||
-            !(cd->x4_vec.y < 45000.0f) || !(cd->x4_vec.y > -45000.0f)) {
-
+            !(cd->x4_vec.y < 45000.0f) || !(cd->x4_vec.y > -45000.0f))
+        {
             if (func_80086960(cd->x0_gobj) != 0) {
-                OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n",
-                    "mpcoll.c", 203,
-                    func_80086BE0(cd->x0_gobj), func_800874BC(cd->x0_gobj),
-                    cd->x4_vec.x, cd->x4_vec.y);
+                OSReport(
+                    "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n",
+                    "mpcoll.c", 203, func_80086BE0(cd->x0_gobj),
+                    func_800874BC(cd->x0_gobj), cd->x4_vec.x, cd->x4_vec.y);
             } else {
                 OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n",
-                    "mpcoll.c", 212, cd->x0_gobj->classifier,
-                    cd->x4_vec.x, cd->x4_vec.y);
+                         "mpcoll.c", 212, cd->x0_gobj->classifier, cd->x4_vec.x,
+                         cd->x4_vec.y);
                 if (cd->x0_gobj->p_link == 9) {
                     OSReport("itkind=%d\n", itGetKind(cd->x0_gobj));
                 }
@@ -56,19 +59,22 @@ void func_80041C8C(CollData* cd) {
 }
 
 // 80041DD0 https://decomp.me/scratch/1KPLe
-inline void clamp_above(f32* value, f32 min) {
+inline void clamp_above(f32* value, f32 min)
+{
     if (*value < min) {
         *value = min;
     }
 }
 
-inline void clamp_below(f32* value, f32 max) {
+inline void clamp_below(f32* value, f32 max)
+{
     if (*value > max) {
         *value = max;
     }
 }
 
-void func_80041DD0(CollData* cd, u32 flags) {
+void func_80041DD0(CollData* cd, u32 flags)
+{
     f32 left, bottom, right, top;
 
     left = cd->xA4_ecbCurrCorrect.left.x + cd->x4_vec.x;
@@ -102,13 +108,14 @@ void func_80041DD0(CollData* cd, u32 flags) {
     func_800588D0(left, bottom, right, top);
 }
 
-// TODO: float order hack
-const f32 lbl_804D7F9C = -FLT_MAX;
-const f32 lbl_804D7FA0 = FLT_MAX;
+/// @todo float order hack
+const f32 lbl_804D7F9C = -F32_MAX;
+const f32 lbl_804D7FA0 = F32_MAX;
 
 // 80041EE4 https://decomp.me/scratch/j2TXK
 // CollDataInit
-void func_80041EE4(CollData* cd) {
+void func_80041EE4(CollData* cd)
+{
     cd->x0_gobj = NULL;
     cd->x34_flags.bits.b0 = 1;
     cd->x34_flags.bits.b6 = 0;
@@ -159,9 +166,10 @@ void func_80041EE4(CollData* cd) {
 }
 
 // 80042078 https://decomp.me/scratch/hM7h8
-void func_80042078(CollData* cd, HSD_GObj* gobj,
-        HSD_JObj* arg1, HSD_JObj* arg2, HSD_JObj* arg3, HSD_JObj* arg4,
-        HSD_JObj* arg5, HSD_JObj* arg6, HSD_JObj* arg7, f32 arg9) {
+void func_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1, HSD_JObj* arg2,
+                   HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5,
+                   HSD_JObj* arg6, HSD_JObj* arg7, f32 arg9)
+{
     cd->x0_gobj = gobj;
     cd->x104 = 1;
     cd->x108_joint = arg1;
@@ -186,7 +194,7 @@ void func_80042078(CollData* cd, HSD_GObj* gobj,
         cd->xA4_ecbCurrCorrect = cd->xA4_ecbCurrCorrect;
         cd->xC4_ecb = cd->xA4_ecbCurrCorrect;
         cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
-        cd->x64_ecb  = cd->xA4_ecbCurrCorrect;
+        cd->x64_ecb = cd->xA4_ecbCurrCorrect;
         cd->x84_ecb = cd->xA4_ecbCurrCorrect;
     }
     cd->x36 = -1;
@@ -194,7 +202,9 @@ void func_80042078(CollData* cd, HSD_GObj* gobj,
 }
 
 // 8004220C https://decomp.me/scratch/nOinn
-void func_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
+void func_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3,
+                   f32 arg4)
+{
     cd->x0_gobj = gobj;
     cd->x104 = 2;
     cd->x108_f32 = arg1;
@@ -220,14 +230,16 @@ void func_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3, f
 }
 
 // 80042374 https://decomp.me/scratch/SgKfv
-void func_80042374(CollData* arg0, f32 arg8, f32 arg9, f32 argA) {
+void func_80042374(CollData* arg0, f32 arg8, f32 arg9, f32 argA)
+{
     arg0->x54 = arg8;
     arg0->x58 = arg9;
     arg0->x5C = argA;
 }
 
 // 80042384 https://decomp.me/scratch/P8djI
-void func_80042384(CollData* cd) {
+void func_80042384(CollData* cd)
+{
     f32 tmp, tmp2;
 
     if (fabs_inline(cd->x84_ecb.top.y - cd->x84_ecb.bottom.y) < 1.0f) {
@@ -257,16 +269,12 @@ void func_80042384(CollData* cd) {
     }
     tmp = cd->x84_ecb.top.y;
     tmp2 = cd->x84_ecb.right.y;
-    if (tmp - tmp2 < 0.001f ||
-        tmp2 - cd->x84_ecb.bottom.y < 0.001f)
-    {
+    if (tmp - tmp2 < 0.001f || tmp2 - cd->x84_ecb.bottom.y < 0.001f) {
         cd->x84_ecb.right.y = 0.5f * (tmp + cd->x84_ecb.bottom.y);
     }
     tmp = cd->x84_ecb.top.y;
     tmp2 = cd->x84_ecb.left.y;
-    if (tmp - tmp2 < 0.001f ||
-        tmp2 - cd->x84_ecb.bottom.y < 0.001f)
-    {
+    if (tmp - tmp2 < 0.001f || tmp2 - cd->x84_ecb.bottom.y < 0.001f) {
         cd->x84_ecb.left.y = 0.5f * (tmp + cd->x84_ecb.bottom.y);
     }
 }
@@ -281,7 +289,8 @@ inline void update_min_max(f32* min, f32* max, f32 val)
     }
 }
 
-void func_800424DC(CollData* cd, u32 flags) {
+void func_800424DC(CollData* cd, u32 flags)
+{
     Vec3 vec;
     f32 left_x, bottom_y;
     f32 right_x, top_y;
@@ -313,12 +322,12 @@ void func_800424DC(CollData* cd, u32 flags) {
         left_x = right_x = vec.x - temp_x;
         bottom_y = top_y = vec.y - temp_y;
 
-        #define EXPAND_ECB_FOR(joint) \
-        func_8000B1CC(joint, NULL, &vec);\
-        dx = vec.x - temp_x;\
-        dy = vec.y - temp_y;\
-        update_min_max(&left_x, &right_x, dx);\
-        update_min_max(&bottom_y, &top_y, dy);
+#define EXPAND_ECB_FOR(joint)                                                  \
+    func_8000B1CC(joint, NULL, &vec);                                          \
+    dx = vec.x - temp_x;                                                       \
+    dy = vec.y - temp_y;                                                       \
+    update_min_max(&left_x, &right_x, dx);                                     \
+    update_min_max(&bottom_y, &top_y, dy);
 
         EXPAND_ECB_FOR(cd->x10C_joint[1]);
         EXPAND_ECB_FOR(cd->x10C_joint[2]);
@@ -415,24 +424,25 @@ inline void clamp_below_2(f32* value, f32 max)
     }
 }
 
-void func_8004293C(CollData* cd) {
+void func_8004293C(CollData* cd)
+{
     f32 angle;
     f32 sin;
     f32 cos;
-    
+
     f32 midpoint_x;
     f32 midpoint_y;
-    
+
     f32 orig_top_y;
     f32 orig_bottom_y;
     f32 orig_right_x;
     f32 orig_left_x;
-    
+
     f32 top_y;
     f32 bottom_y;
     f32 right_x;
     f32 left_x;
-    
+
     f32 rot_top_x;
     f32 rot_top_y;
     f32 rot_bot_x;
@@ -441,7 +451,7 @@ void func_8004293C(CollData* cd) {
     f32 rot_right_y;
     f32 rot_left_y;
     f32 rot_left_x;
-    
+
     angle = cd->x118_f32;
     if ((cd->x130_flags & 0x20) != 0) {
         cd->xA4_ecbCurrCorrect.top.x = 0.0f;
@@ -455,10 +465,10 @@ void func_8004293C(CollData* cd) {
         cd->x130_flags &= 0xFFFFFFDF;
     }
     cd->xE4_ecb = cd->xA4_ecbCurrCorrect;
-    
+
     bottom_y = -cd->x10C_f32;
     top_y = cd->x108_f32;
-    
+
     if (cd->x36 == 1) {
         right_x = cd->x110_f32;
         left_x = -cd->x114_f32;
@@ -466,27 +476,27 @@ void func_8004293C(CollData* cd) {
         right_x = cd->x114_f32;
         left_x = -cd->x110_f32;
     }
-    
+
     if (angle != 0.0f) {
         sin = sinf(angle);
         cos = cosf(angle);
-        
+
         orig_top_y = top_y;
         orig_bottom_y = bottom_y;
         orig_right_x = right_x;
         orig_left_x = left_x;
-        
+
         // fake
         rot_right_y = 0.5f * (orig_right_x + orig_left_x);
         midpoint_x = rot_right_y;
-        
+
         top_y = right_x = bottom_y = left_x = 0.0f;
-        
+
         rot_top_x = -orig_top_y * sin;
         rot_top_y = orig_top_y * cos;
         update_min_max_2(&left_x, &right_x, rot_top_x);
         update_min_max_2(&bottom_y, &top_y, rot_top_y);
-        
+
         rot_bot_x = -orig_bottom_y * sin;
         rot_bot_y = orig_bottom_y * cos;
         update_min_max_2(&left_x, &right_x, rot_bot_x);
@@ -502,12 +512,12 @@ void func_8004293C(CollData* cd) {
         update_min_max_2(&left_x, &right_x, rot_left_x);
         update_min_max_2(&bottom_y, &top_y, rot_left_y);
     }
-    
+
     clamp_above_2(&top_y, 0.0f);
     clamp_below_2(&bottom_y, -0.0f);
     clamp_above_2(&right_x, 0.0f);
     clamp_below_2(&left_x, -0.0f);
-    
+
     if ((top_y - bottom_y) < 3.0f) {
         top_y = 1.5f;
         bottom_y = -top_y;
@@ -516,23 +526,24 @@ void func_8004293C(CollData* cd) {
         right_x = 1.5f;
         left_x = -right_x;
     }
-    
+
     cd->x84_ecb.top.x = 0.0f;
     cd->x84_ecb.top.y = top_y;
     cd->x84_ecb.bottom.x = 0.0f;
     cd->x84_ecb.bottom.y = bottom_y;
-    
+
     midpoint_y = 0.5f * (top_y + bottom_y);
     cd->x84_ecb.right.x = right_x;
     cd->x84_ecb.right.y = midpoint_y;
     cd->x84_ecb.left.x = left_x;
     cd->x84_ecb.left.y = midpoint_y;
-    
+
     cd->x34_flags.bits.b0 = 0;
 }
 
 // 80042C58 https://decomp.me/scratch/pqafT
-void func_80042C58(CollData* arg0, ftECB* arg1) {
+void func_80042C58(CollData* arg0, ftECB* arg1)
+{
     if ((arg0->x130_flags & 0x20) != 0) {
         arg0->xA4_ecbCurrCorrect.top.x = 0.0f;
         arg0->xA4_ecbCurrCorrect.top.y = 0.0f;
@@ -557,7 +568,8 @@ void func_80042C58(CollData* arg0, ftECB* arg1) {
 }
 
 // 80042D24 https://decomp.me/scratch/2MnVj
-void func_80042D24(CollData* cd) {
+void func_80042D24(CollData* cd)
+{
     f32 saved_bottom_x;
     f32 saved_bottom_y;
 
@@ -578,19 +590,22 @@ void func_80042D24(CollData* cd) {
 }
 
 // 80042DB0 https://decomp.me/scratch/GbMpk
-inline void Vec2_Interpolate(f32 time, Vec2 *dest, Vec2 *src) {
+inline void Vec2_Interpolate(f32 time, Vec2* dest, Vec2* src)
+{
     dest->x += time * (src->x - dest->x);
     dest->y += time * (src->y - dest->y);
 }
 
-void func_80042DB0(CollData* ecb, f32 time) {
+void func_80042DB0(CollData* ecb, f32 time)
+{
     ecb->xC4_ecb = ecb->xA4_ecbCurrCorrect;
     if (ecb->x34_flags.bits.b6) {
         ecb->xA4_ecbCurrCorrect = ecb->x64_ecb;
         ecb->x34_flags.bits.b6 = 0;
     }
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.top, &ecb->x84_ecb.top);
-    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.bottom, &ecb->x84_ecb.bottom);
+    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.bottom,
+                     &ecb->x84_ecb.bottom);
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.left, &ecb->x84_ecb.left);
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.right, &ecb->x84_ecb.right);
     if (fpclassify(ecb->xA4_ecbCurrCorrect.top.x) == FP_NAN ||
@@ -600,16 +615,17 @@ void func_80042DB0(CollData* ecb, f32 time) {
         fpclassify(ecb->xA4_ecbCurrCorrect.left.x) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.left.y) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.right.x) == FP_NAN ||
-        fpclassify(ecb->xA4_ecbCurrCorrect.right.y) == FP_NAN
-    ) {
+        fpclassify(ecb->xA4_ecbCurrCorrect.right.y) == FP_NAN)
+    {
         OSReport("error\n");
         __assert("mpcoll.c", 1193, lbl_804D3948);
     }
 }
 
 // 80043268 https://decomp.me/scratch/GNwej
-void func_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8) {
-    void (*sp1C)(s32, s32, CollData*, s32, s32, f32);
+void func_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
+{
+    mpLib_Callback sp1C;
     s32 sp18;
     s32 temp_r31;
 
@@ -624,17 +640,22 @@ void func_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8) {
             } else {
                 thing = 1;
             }
-            (*sp1C)(sp18, temp_r31, arg0, arg0->x50, thing, arg8);
+            sp1C(sp18, temp_r31, arg0, arg0->x50, thing, arg8);
         }
     }
 }
 
-const char * dummy_string_data = "i<MPCOLL_WALLID_MAX";
+const char* dummy_string_data = "i<MPCOLL_WALLID_MAX";
 
 // 80043324
-void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8) { // see func_80043268
-    s32 dummy = 0; // TODO: fake, breaks func_80043558
-    void (*callback)(s32, s32, CollData*, s32, s32, f32);
+void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
+{ // see func_80043268
+  /// @todo Fake, breaks func_80043558
+#ifdef MUST_MATCH
+    int dummy = 0;
+#endif
+
+    mpLib_Callback callback;
     s32 thing;
     s32 temp_r29;
 
@@ -642,38 +663,59 @@ void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8) { // se
     if (temp_r29 != -1) {
         thing = 0;
         func_800581BC(temp_r29, &callback, &thing);
-        if (callback != 0) {
-            (*callback)(thing, temp_r29, arg0, arg0->x50, 0, arg8);
-        }
+
+        if (callback != NULL)
+            callback(thing, temp_r29, arg0, arg0->x50, 0, arg8);
     }
 }
-void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, f32 arg8) {
+void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
+{
     // inhibit inlining
     func_80043268(arg0, arg1, arg2, arg8);
 }
-void func_80043324(CollData* arg0, s32 arg1, s32 arg2) {
+void func_80043324(CollData* arg0, s32 arg1, s32 arg2)
+{
     s32 temp_r3;
-    s32 temp_r3_2;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 temp_r3_2[4];
+#endif
 
     if (arg0->x14C_ground.index != -1) {
         temp_r3 = func_801CA284(&arg0->x4_vec, arg0->x14C_ground.index);
         if (temp_r3 != 0) {
-            arg0->x14C_ground.unk = (arg0->x14C_ground.unk & 0xFFFFFF00) | (temp_r3 & 0xFF);
+            arg0->x14C_ground.unk =
+                (arg0->x14C_ground.unk & 0xFFFFFF00) | (temp_r3 & 0xFF);
         }
     }
-    if ((arg1 != 0) || (arg0->x134_envFlags & 0x800000) || (arg0->x134_envFlags & 0x100000) || (arg0->x134_envFlags & 0x200000)) {
-        func_80043324_inline(arg0, arg0->x14C_ground.index, arg2, arg0->x4_vec.y - arg0->x1C_vec.y);
+    if ((arg1 != 0) || (arg0->x134_envFlags & 0x800000) ||
+        (arg0->x134_envFlags & 0x100000) || (arg0->x134_envFlags & 0x200000))
+    {
+        func_80043324_inline(arg0, arg0->x14C_ground.index, arg2,
+                             arg0->x4_vec.y - arg0->x1C_vec.y);
     }
     if (arg0->x134_envFlags & 0x6000) {
-        func_80043324_inline2(arg0, arg0->x188_ceiling.index, arg2, arg0->x4_vec.y - arg0->x1C_vec.y);
+        func_80043324_inline2(arg0, arg0->x188_ceiling.index, arg2,
+                              arg0->x4_vec.y - arg0->x1C_vec.y);
     }
     if (g_debugLevel >= 3) {
-        if (!(arg0->x4_vec.x < 45000.0f) || !(arg0->x4_vec.x > -45000.0f) || !(arg0->x4_vec.y < 45000.0f) || !(arg0->x4_vec.y > -45000.0f)) {
+        if (!(arg0->x4_vec.x < 45000.0f) || !(arg0->x4_vec.x > -45000.0f) ||
+            !(arg0->x4_vec.y < 45000.0f) || !(arg0->x4_vec.y > -45000.0f))
+        {
             if (func_80086960(arg0->x0_gobj)) {
-                OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) ply=%d ms=%d\n", "mpcoll.c", 1350, arg0->x1C_vec.x, arg0->x1C_vec.y, arg0->x4_vec.x, arg0->x4_vec.y, func_80086BE0(arg0->x0_gobj), func_800874BC(arg0->x0_gobj));
+                OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
+                         "ply=%d ms=%d\n",
+                         "mpcoll.c", 1350, arg0->x1C_vec.x, arg0->x1C_vec.y,
+                         arg0->x4_vec.x, arg0->x4_vec.y,
+                         func_80086BE0(arg0->x0_gobj),
+                         func_800874BC(arg0->x0_gobj));
             } else {
                 s32 gobjid = arg0->x0_gobj->classifier;
-                OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) gobjid=%d\n", "mpcoll.c", 1358, arg0->x1C_vec.x, arg0->x1C_vec.y, arg0->x4_vec.x, arg0->x4_vec.y, gobjid);
+                OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
+                         "gobjid=%d\n",
+                         "mpcoll.c", 1358, arg0->x1C_vec.x, arg0->x1C_vec.y,
+                         arg0->x4_vec.x, arg0->x4_vec.y, gobjid);
                 if (arg0->x0_gobj->p_link == 9) {
                     OSReport("itkind=%d\n", itGetKind(arg0->x0_gobj));
                 }
@@ -683,18 +725,10 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2) {
     }
 }
 
-// 80043558
-void func_80043558(CollData* arg0, s32 arg1) {
-#ifdef NON_MATCHING // TODO: dummy stack in func_80043324_inline2 breaks this function
-    s32 temp_r3;
+#ifdef MUST_MATCH
 
-    temp_r3 = func_80054C6C(arg1);
-    if (temp_r3 == 1) {
-        func_80043268(arg0, arg1, 0, 0.0f);
-    } else if (temp_r3 == 2) {
-        func_80043324_inline2(arg0, arg1, 0, 0.0f);
-    }
-#else
+void func_80043558(CollData* arg0, s32 arg1)
+{
     s32 sp1C;
     void (*sp18)(s32, s32, CollData*, s32, s32, f32);
     s32 sp14;
@@ -723,16 +757,32 @@ void func_80043558(CollData* arg0, s32 arg1) {
             }
         }
     }
-#endif
 }
 
+#else
+
+/// @todo dummy stack in func_80043324_inline2 breaks this function
+void func_80043558(CollData* arg0, s32 arg1)
+{
+    enum_t temp_r3 = func_80054C6C(arg1);
+
+    if (temp_r3 == 1)
+        func_80043268(arg0, arg1, 0, 0.0f);
+    else if (temp_r3 == 2)
+        func_80043324_inline2(arg0, arg1, 0, 0.0f);
+}
+
+#endif
+
 // 80043670
-void func_80043670(CollData* arg0) {
+void func_80043670(CollData* arg0)
+{
     arg0->x130_flags |= 0x20;
 }
 
 // 80043680
-void func_80043680(CollData* arg0, Vec3* arg1) {
+void func_80043680(CollData* arg0, Vec3* arg1)
+{
     arg0->x4_vec = *arg1;
     arg0->x10_vec = arg0->x4_vec;
     arg0->x1C_vec = arg0->x10_vec;
@@ -740,19 +790,22 @@ void func_80043680(CollData* arg0, Vec3* arg1) {
 }
 
 // 800436D8
-void func_800436D8(CollData* arg0, s32 arg1) {
+void func_800436D8(CollData* arg0, int arg1)
+{
     arg0->x36 = arg1;
 }
 
 // TODO: float order hack
 const f32 flt_804D7FD8 = 6.0f;
-static f32 six(void) {
+static f32 six(void)
+{
     return flt_804D7FD8;
 }
 
 // 800436E4
 #define M_TAU 6.283185307179586
-void func_800436E4(CollData* arg0, f32 arg1) {
+void func_800436E4(CollData* arg0, f32 arg1)
+{
     f32 var_f1;
 
     var_f1 = arg1;
@@ -771,14 +824,20 @@ void func_800436E4(CollData* arg0, f32 arg1) {
     }
 }
 
-
 // 80043754 https://decomp.me/scratch/JEEcj
-inline f32 max_inline(f32 a, f32 b) {
+inline f32 max_inline(f32 a, f32 b)
+{
     return (a > b) ? a : b;
 }
-s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2) {
+s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
+{
     Vec3 vel;
-    f32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     f32 dist_right_x;
     f32 dist_right_y;
     f32 x;
@@ -798,7 +857,8 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2) {
     dist_left_x = fabs_inline(dist_left_x);
 
     dist_right_x = arg1->x84_ecb.right.x - arg1->xA4_ecbCurrCorrect.right.x;
-    if (dist_right_x < 0) dist_right_x = -dist_right_x;
+    if (dist_right_x < 0)
+        dist_right_x = -dist_right_x;
 
     if (dist_left_x < dist_right_x) {
         dist_left_x = dist_right_x;
@@ -809,7 +869,8 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2) {
     dist_top_y = fabs_inline(dist_top_y);
 
     dist_right_y = arg1->x84_ecb.right.y - arg1->xA4_ecbCurrCorrect.right.y;
-    if (dist_right_y < 0) dist_right_y = -dist_right_y;
+    if (dist_right_y < 0)
+        dist_right_y = -dist_right_y;
 
     if (dist_top_y < dist_right_y) {
         dist_top_y = dist_right_y;
@@ -819,8 +880,8 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2) {
     y = max_inline(y, dist_top_y);
     x = max_inline(x, y);
 
-    if (x > flt_804D7FD8) { //6.0f float order hack
-        var_r30 = (s32) (x / flt_804D7FD8); //6.0f float order hack
+    if (x > flt_804D7FD8) {                 // 6.0f float order hack
+        var_r30 = (s32) (x / flt_804D7FD8); // 6.0f float order hack
         var_r30 = var_r30 + 1;
         vel.x /= var_r30;
         vel.y /= var_r30;
@@ -845,7 +906,8 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2) {
 }
 
 // 800439FC https://decomp.me/scratch/T1yAJ
-void func_800439FC(CollData* arg0) {
+void func_800439FC(CollData* arg0)
+{
     Vec3 sp10;
     f32 spC;
     f32 temp_f3;
@@ -858,16 +920,17 @@ void func_800439FC(CollData* arg0) {
     if (var_f31 < 0.0f) {
         var_f31 = -var_f31;
     }
-    if (func_800501CC(
-            (arg0->x188_ceiling.normal.y * var_f31) + temp_f3,
-            -((arg0->x188_ceiling.normal.x * var_f31) - temp_f4),
-            temp_f3, temp_f4,
-            &arg0->x140,
-            NULL, NULL, NULL,
-            arg0->x48, arg0->x4C) != 0) {
+    if (func_800501CC((arg0->x188_ceiling.normal.y * var_f31) + temp_f3,
+                      -((arg0->x188_ceiling.normal.x * var_f31) - temp_f4),
+                      temp_f3, temp_f4, &arg0->x140, NULL, NULL, NULL,
+                      arg0->x48, arg0->x4C) != 0)
+    {
         sp10.x = arg0->x140.x - var_f31;
         sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (func_8004E090(arg0->x188_ceiling.index, (Point3d* ) &sp10, &spC, (u32* ) &arg0->x188_ceiling.unk, &arg0->x188_ceiling.normal) != -1) {
+        if (func_8004E090(arg0->x188_ceiling.index, (Vec3*) &sp10, &spC,
+                          (u32*) &arg0->x188_ceiling.unk,
+                          &arg0->x188_ceiling.normal) != -1)
+        {
             arg0->x4_vec.y += spC;
             arg0->x4_vec.x = sp10.x;
         }
@@ -875,7 +938,8 @@ void func_800439FC(CollData* arg0) {
 }
 
 // 80043ADC
-void func_80043ADC(CollData* arg0) {
+void func_80043ADC(CollData* arg0)
+{
     Vec3 sp10;
     f32 spC;
     f32 temp_f3;
@@ -888,10 +952,17 @@ void func_80043ADC(CollData* arg0) {
     if (var_f31 < 0.0f) {
         var_f31 = -var_f31;
     }
-    if (func_800509B8(-((arg0->x188_ceiling.normal.y * var_f31) - temp_f3), ((arg0->x188_ceiling.normal.x * var_f31) + temp_f4), temp_f3, temp_f4, &arg0->x140, NULL, NULL, NULL, arg0->x48, arg0->x4C) != 0) {
+    if (func_800509B8(-((arg0->x188_ceiling.normal.y * var_f31) - temp_f3),
+                      ((arg0->x188_ceiling.normal.x * var_f31) + temp_f4),
+                      temp_f3, temp_f4, &arg0->x140, NULL, NULL, NULL,
+                      arg0->x48, arg0->x4C) != 0)
+    {
         sp10.x = arg0->x140.x + var_f31;
         sp10.y = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.top.y;
-        if (func_8004E090(arg0->x188_ceiling.index, &sp10, &spC, &arg0->x188_ceiling.unk, &arg0->x188_ceiling.normal) != -1) {
+        if (func_8004E090(arg0->x188_ceiling.index, &sp10, &spC,
+                          &arg0->x188_ceiling.unk,
+                          &arg0->x188_ceiling.normal) != -1)
+        {
             arg0->x4_vec.y += spC;
             arg0->x4_vec.x = sp10.x;
         }
@@ -899,87 +970,32 @@ void func_80043ADC(CollData* arg0) {
 }
 
 // 80043BBC
-s32 func_80043BBC(CollData* arg0, s32* arg1) {
+bool func_80043BBC(CollData* arg0, s32* arg1)
+{
     s32 sp10;
     s32 temp_r31;
     f32 new_var;
 
     temp_r31 = func_80052700(arg0->x14C_ground.index);
     new_var = arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.bottom.x;
-    if ((func_800501CC(
-            new_var,
-            arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y,
-            arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.right.x,
-            arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y,
-            NULL, &sp10, NULL, NULL, arg0->x48, arg0->x4C)
-        != 0) && (sp10 != temp_r31)) {
+    if ((func_800501CC(new_var,
+                       arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y,
+                       arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.right.x,
+                       arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y, NULL,
+                       &sp10, NULL, NULL, arg0->x48, arg0->x4C) != 0) &&
+        (sp10 != temp_r31))
+    {
         *arg1 = sp10;
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
-// 80043C6C
-#ifdef NON_MATCHING
-void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2) {
-    f32 sp30;
-    f32 sp24;
-    f32 sp20;
-    s32 sp1C;
-    s32 sp8;
-    f32 temp_f1;
-    f32 temp_f1_2;
-    f32 temp_f1_3;
-    f32 temp_f2;
-    f32 temp_f4;
-    f32 var_f31;
+#ifdef MWERKS_GEKKO
 
-    temp_f1 = arg0->xA4_ecbCurrCorrect.right.x;
-    if (temp_f1 < 0.0f) {
-        var_f31 = -temp_f1;
-    } else {
-        var_f31 = temp_f1;
-    }
-    sp20 = arg0->x4_vec.x + temp_f1;
-    temp_f1_2 = arg0->x4_vec.y;
-    sp24 = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
-    if (func_8004E398(arg1, &sp20, 0, 0, 0, temp_f1_2) != -1) {
-        if (func_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48, arg0->x4C, -((arg0->x14C_ground.normal.y * var_f31) - sp20), (arg0->x14C_ground.normal.x * var_f31) + sp24) != 0) {
-            sp20 = arg0->x140.x - var_f31;
-            if (arg2 != 0) {
-                sp24 = arg0->x4_vec.y;
-            } else {
-                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
-            }
-            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30, &arg0->x14C_ground.unk, &arg0->x14C_ground.normal) != -1) {
-                arg0->x4_vec.y += sp30;
-                arg0->x4_vec.x = sp20;
-            }
-        }
-    } else {
-        func_80054584(arg1, &sp20);
-        temp_f4 = 2.0f;
-        temp_f2 = sp24;
-        temp_f1_3 = sp20 - temp_f4;
-        sp20 = -((temp_f4 * var_f31) - temp_f1_3);
-        sp24 = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y - arg0->xA4_ecbCurrCorrect.bottom.y)) - temp_f2);
-        sp8 = 0;
-        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C, 0, temp_f1_3, temp_f2, sp20, sp24, 0.0f) != 0) {
-            sp20 = arg0->x140.x;
-            if (arg2 != 0) {
-                sp24 = arg0->x4_vec.y;
-            } else {
-                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
-            }
-            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30, &arg0->x14C_ground.unk, &arg0->x14C_ground.normal) != -1) {
-                arg0->x4_vec.y += sp30;
-                arg0->x4_vec.x = sp20;
-            }
-        }
-    }
-}
-#else
-asm void func_80043C6C() {
+#pragma push
+asm void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
+{ // clang-format off
     nofralloc
 /* 80043C6C 0004084C  7C 08 02 A6 */	mflr r0
 /* 80043C70 00040850  90 01 00 04 */	stw r0, 4(r1)
@@ -1125,80 +1141,92 @@ lbl_80043E70:
 /* 80043E80 00040A60  83 A1 00 3C */	lwz r29, 0x3c(r1)
 /* 80043E84 00040A64  38 21 00 50 */	addi r1, r1, 0x50
 /* 80043E88 00040A68  7C 08 03 A6 */	mtlr r0
-/* 80043E8C 00040A6C  4E 80 00 20 */	blr 
-}
-#pragma peephole on
-#endif
+/* 80043E8C 00040A6C  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
 
-// 80043E90
-// 80043F40
-// 80044164
-// 800443C4
-// 80044628
-// 80044838
-// 80044948
-// 80044AD8
-// 80044C74
-// 80044E10
-// 800454A4
-// 80045B74
-// 80046224
-// 80046904
-// 800471F8
-// 8004730C
-// 800473CC
-// 800474E0
-// 800475F4
-// 800476B4
-// 800477E0
-// 800478F4
-// 80047A08
-// 80047AC8
-// 80047BF4
-// 80047D20
-// 80047E14
-// 80047F40
-// 8004806C
-// 80048160
-// 80048274
-// 80048388
-// 80048464
-// 80048578
-// 80048654
-// 80048768
-// 80048844
-// 800488F4
-// 80048AB0
-// 800491C8
-// 80049778
-// 80049EAC
-// 8004A45C
-// 8004A678
-// 8004A908
-// 8004AB80
-// 8004B108
-// 8004B21C
-// 8004B2DC
-// 8004B3F0
-// 8004B4B0
-// 8004B5C4
-// 8004B6D8
-// 8004B894
-// 8004BDD4
-// 8004C328
-// 8004C750
-// 8004C864
-// 8004C91C
-// 8004CA6C
-// 8004CAA0
-// 8004CAE8
-// 8004CB30
-// 8004CB78
-// 8004CBC0
-// 8004CBE8
-// 8004CBF4
-// 8004CC00
-// 8004D024
+#elif false
+
+void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
+{
+    f32 sp30;
+    f32 sp24;
+    f32 sp20;
+    s32 sp1C;
+    s32 sp8;
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 temp_f1_3;
+    f32 temp_f2;
+    f32 temp_f4;
+    f32 var_f31;
+
+    temp_f1 = arg0->xA4_ecbCurrCorrect.right.x;
+    if (temp_f1 < 0.0f) {
+        var_f31 = -temp_f1;
+    } else {
+        var_f31 = temp_f1;
+    }
+    sp20 = arg0->x4_vec.x + temp_f1;
+    temp_f1_2 = arg0->x4_vec.y;
+    sp24 = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
+    if (func_8004E398(arg1, &sp20, 0, 0, 0, temp_f1_2) != -1) {
+        if (func_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48, arg0->x4C,
+                          -((arg0->x14C_ground.normal.y * var_f31) - sp20),
+                          (arg0->x14C_ground.normal.x * var_f31) + sp24) != 0)
+        {
+            sp20 = arg0->x140.x - var_f31;
+            if (arg2 != 0) {
+                sp24 = arg0->x4_vec.y;
+            } else {
+                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
+            }
+            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30,
+                              &arg0->x14C_ground.unk,
+                              &arg0->x14C_ground.normal) != -1)
+            {
+                arg0->x4_vec.y += sp30;
+                arg0->x4_vec.x = sp20;
+            }
+        }
+    } else {
+        func_80054584(arg1, &sp20);
+        temp_f4 = 2.0f;
+        temp_f2 = sp24;
+        temp_f1_3 = sp20 - temp_f4;
+        sp20 = -((temp_f4 * var_f31) - temp_f1_3);
+        sp24 = -((temp_f4 * (arg0->xA4_ecbCurrCorrect.right.y -
+                             arg0->xA4_ecbCurrCorrect.bottom.y)) -
+                 temp_f2);
+        sp8 = 0;
+        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C,
+                          0, temp_f1_3, temp_f2, sp20, sp24, 0.0f) != 0)
+        {
+            sp20 = arg0->x140.x;
+            if (arg2 != 0) {
+                sp24 = arg0->x4_vec.y;
+            } else {
+                sp24 = arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y;
+            }
+            if (func_8004DD90(arg0->x14C_ground.index, &sp20, &sp30,
+                              &arg0->x14C_ground.unk,
+                              &arg0->x14C_ground.normal) != -1)
+            {
+                arg0->x4_vec.y += sp30;
+                arg0->x4_vec.x = sp20;
+            }
+        }
+    }
+}
+
+#else
+
+void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 const f32 flt_804D7FF8 = 5.0f;
 const f64 flt_804D8000 = -0.75;

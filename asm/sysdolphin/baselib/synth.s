@@ -5,12 +5,12 @@
 .global func_80388320
 func_80388320:
 /* 80388320 00384F00  90 6D C0 70 */	stw r3, lbl_804D7710@sda21(r13)
-/* 80388324 00384F04  4E 80 00 20 */	blr 
+/* 80388324 00384F04  4E 80 00 20 */	blr
 
 .global func_80388328
 func_80388328:
 /* 80388328 00384F08  90 6D C0 74 */	stw r3, lbl_804D7714@sda21(r13)
-/* 8038832C 00384F0C  4E 80 00 20 */	blr 
+/* 8038832C 00384F0C  4E 80 00 20 */	blr
 
 .global HSD_AudioMalloc
 HSD_AudioMalloc:
@@ -37,7 +37,7 @@ lbl_80388374:
 /* 8038837C 00384F5C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80388380 00384F60  38 21 00 18 */	addi r1, r1, 0x18
 /* 80388384 00384F64  7C 08 03 A6 */	mtlr r0
-/* 80388388 00384F68  4E 80 00 20 */	blr 
+/* 80388388 00384F68  4E 80 00 20 */	blr
 
 .global HSD_AudioFree
 HSD_AudioFree:
@@ -50,7 +50,7 @@ HSD_AudioFree:
 /* 803883A4 00384F84  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 803883A8 00384F88  38 21 00 08 */	addi r1, r1, 8
 /* 803883AC 00384F8C  7C 08 03 A6 */	mtlr r0
-/* 803883B0 00384F90  4E 80 00 20 */	blr 
+/* 803883B0 00384F90  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXSampleLoadCallback
 HSD_SynthSFXSampleLoadCallback:
@@ -290,7 +290,7 @@ lbl_80388714:
 /* 80388728 00385308  80 7F 01 80 */	lwz r3, 0x180(r31)
 /* 8038872C 0038530C  7D 88 03 A6 */	mtlr r12
 /* 80388730 00385310  80 9F 01 8C */	lwz r4, 0x18c(r31)
-/* 80388734 00385314  4E 80 00 21 */	blrl 
+/* 80388734 00385314  4E 80 00 21 */	blrl
 lbl_80388738:
 /* 80388738 00385318  80 7D 00 00 */	lwz r3, 0(r29)
 /* 8038873C 0038531C  80 1A 00 00 */	lwz r0, 0(r26)
@@ -337,7 +337,7 @@ lbl_803887B0:
 /* 803887CC 003853AC  80 01 00 4C */	lwz r0, 0x4c(r1)
 /* 803887D0 003853B0  38 21 00 48 */	addi r1, r1, 0x48
 /* 803887D4 003853B4  7C 08 03 A6 */	mtlr r0
-/* 803887D8 003853B8  4E 80 00 20 */	blr 
+/* 803887D8 003853B8  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXHeaderLoadCallback
 HSD_SynthSFXHeaderLoadCallback:
@@ -432,7 +432,7 @@ lbl_80388928:
 /* 8038892C 0038550C  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 80388930 00385510  38 21 00 38 */	addi r1, r1, 0x38
 /* 80388934 00385514  7C 08 03 A6 */	mtlr r0
-/* 80388938 00385518  4E 80 00 20 */	blr 
+/* 80388938 00385518  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXLoadNewProc
 HSD_SynthSFXLoadNewProc:
@@ -467,7 +467,7 @@ lbl_803889A4:
 /* 803889A8 00385588  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 803889AC 0038558C  38 21 00 10 */	addi r1, r1, 0x10
 /* 803889B0 00385590  7C 08 03 A6 */	mtlr r0
-/* 803889B4 00385594  4E 80 00 20 */	blr 
+/* 803889B4 00385594  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXLoad
 HSD_SynthSFXLoad:
@@ -559,7 +559,7 @@ lbl_80388AEC:
 /* 80388AFC 003856DC  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 80388B00 003856E0  38 21 00 30 */	addi r1, r1, 0x30
 /* 80388B04 003856E4  7C 08 03 A6 */	mtlr r0
-/* 80388B08 003856E8  4E 80 00 20 */	blr 
+/* 80388B08 003856E8  4E 80 00 20 */	blr
 
 .global func_80388B0C
 func_80388B0C:
@@ -572,7 +572,7 @@ func_80388B0C:
 lbl_80388B24:
 /* 80388B24 00385704  39 9F 00 00 */	addi r12, r31, 0
 /* 80388B28 00385708  7D 88 03 A6 */	mtlr r12
-/* 80388B2C 0038570C  4E 80 00 21 */	blrl 
+/* 80388B2C 0038570C  4E 80 00 21 */	blrl
 lbl_80388B30:
 /* 80388B30 00385710  80 0D C0 8C */	lwz r0, lbl_804D772C@sda21(r13)
 /* 80388B34 00385714  2C 00 00 00 */	cmpwi r0, 0
@@ -581,14 +581,14 @@ lbl_80388B30:
 /* 80388B40 00385720  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80388B44 00385724  38 21 00 18 */	addi r1, r1, 0x18
 /* 80388B48 00385728  7C 08 03 A6 */	mtlr r0
-/* 80388B4C 0038572C  4E 80 00 20 */	blr 
+/* 80388B4C 0038572C  4E 80 00 20 */	blr
 
 .global func_80388B50
 func_80388B50:
 /* 80388B50 00385730  80 6D C0 98 */	lwz r3, lbl_804D7738@sda21(r13)
 /* 80388B54 00385734  80 0D C0 8C */	lwz r0, lbl_804D772C@sda21(r13)
 /* 80388B58 00385738  7C 63 00 50 */	subf r3, r3, r0
-/* 80388B5C 0038573C  4E 80 00 20 */	blr 
+/* 80388B5C 0038573C  4E 80 00 20 */	blr
 
 .global func_80388B60
 func_80388B60:
@@ -683,7 +683,7 @@ lbl_80388C84:
 /* 80388CA0 00385880  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 80388CA4 00385884  38 21 00 20 */	addi r1, r1, 0x20
 /* 80388CA8 00385888  7C 08 03 A6 */	mtlr r0
-/* 80388CAC 0038588C  4E 80 00 20 */	blr 
+/* 80388CAC 0038588C  4E 80 00 20 */	blr
 
 .global func_80388CB0
 func_80388CB0:
@@ -719,7 +719,7 @@ lbl_80388D14:
 /* 80388D20 00385900  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80388D24 00385904  38 21 00 08 */	addi r1, r1, 8
 /* 80388D28 00385908  7C 08 03 A6 */	mtlr r0
-/* 80388D2C 0038590C  4E 80 00 20 */	blr 
+/* 80388D2C 0038590C  4E 80 00 20 */	blr
 
 .global func_80388D30
 func_80388D30:
@@ -764,7 +764,7 @@ lbl_80388D9C:
 /* 80388DB8 00385998  BB 61 00 14 */	lmw r27, 0x14(r1)
 /* 80388DBC 0038599C  38 21 00 28 */	addi r1, r1, 0x28
 /* 80388DC0 003859A0  7C 08 03 A6 */	mtlr r0
-/* 80388DC4 003859A4  4E 80 00 20 */	blr 
+/* 80388DC4 003859A4  4E 80 00 20 */	blr
 
 .global func_80388DC8
 func_80388DC8:
@@ -779,14 +779,14 @@ lbl_80388DDC:
 /* 80388DE4 003859C4  40 82 00 10 */	bne lbl_80388DF4
 /* 80388DE8 003859C8  80 04 00 00 */	lwz r0, 0(r4)
 /* 80388DEC 003859CC  90 05 00 00 */	stw r0, 0(r5)
-/* 80388DF0 003859D0  4E 80 00 20 */	blr 
+/* 80388DF0 003859D0  4E 80 00 20 */	blr
 lbl_80388DF4:
 /* 80388DF4 003859D4  7C 85 23 78 */	mr r5, r4
 lbl_80388DF8:
 /* 80388DF8 003859D8  80 85 00 00 */	lwz r4, 0(r5)
 /* 80388DFC 003859DC  28 04 00 00 */	cmplwi r4, 0
 /* 80388E00 003859E0  40 82 FF DC */	bne lbl_80388DDC
-/* 80388E04 003859E4  4E 80 00 20 */	blr 
+/* 80388E04 003859E4  4E 80 00 20 */	blr
 
 .global func_80388E08
 func_80388E08:
@@ -839,7 +839,7 @@ lbl_80388E98:
 /* 80388EA4 00385A84  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 80388EA8 00385A88  38 21 00 20 */	addi r1, r1, 0x20
 /* 80388EAC 00385A8C  7C 08 03 A6 */	mtlr r0
-/* 80388EB0 00385A90  4E 80 00 20 */	blr 
+/* 80388EB0 00385A90  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXGroupDataReaddressCallback
 HSD_SynthSFXGroupDataReaddressCallback:
@@ -861,7 +861,7 @@ lbl_80388EE0:
 /* 80388EEC 00385ACC  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80388EF0 00385AD0  38 21 00 08 */	addi r1, r1, 8
 /* 80388EF4 00385AD4  7C 08 03 A6 */	mtlr r0
-/* 80388EF8 00385AD8  4E 80 00 20 */	blr 
+/* 80388EF8 00385AD8  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXGroupDataReaddress
 HSD_SynthSFXGroupDataReaddress:
@@ -930,7 +930,7 @@ lbl_80388FC4:
 /* 80388FE0 00385BC0  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 80388FE4 00385BC4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80388FE8 00385BC8  7C 08 03 A6 */	mtlr r0
-/* 80388FEC 00385BCC  4E 80 00 20 */	blr 
+/* 80388FEC 00385BCC  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXBankDeflag
 HSD_SynthSFXBankDeflag:
@@ -973,14 +973,14 @@ lbl_80389054:
 /* 80389074 00385C54  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 80389078 00385C58  38 21 00 20 */	addi r1, r1, 0x20
 /* 8038907C 00385C5C  7C 08 03 A6 */	mtlr r0
-/* 80389080 00385C60  4E 80 00 20 */	blr 
+/* 80389080 00385C60  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXBankDeflagSync
 HSD_SynthSFXBankDeflagSync:
 /* 80389084 00385C64  80 0D C0 9C */	lwz r0, lbl_804D773C@sda21(r13)
 /* 80389088 00385C68  2C 00 00 00 */	cmpwi r0, 0
 /* 8038908C 00385C6C  40 82 FF F8 */	bne HSD_SynthSFXBankDeflagSync
-/* 80389090 00385C70  4E 80 00 20 */	blr 
+/* 80389090 00385C70  4E 80 00 20 */	blr
 
 .global func_80389094
 func_80389094:
@@ -991,7 +991,7 @@ func_80389094:
 /* 803890A4 00385C84  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 803890A8 00385C88  38 21 00 08 */	addi r1, r1, 8
 /* 803890AC 00385C8C  7C 08 03 A6 */	mtlr r0
-/* 803890B0 00385C90  4E 80 00 20 */	blr 
+/* 803890B0 00385C90  4E 80 00 20 */	blr
 
 .global func_803890B4
 func_803890B4:
@@ -1026,7 +1026,7 @@ lbl_803890F8:
 /* 8038911C 00385CFC  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 80389120 00385D00  38 21 00 20 */	addi r1, r1, 0x20
 /* 80389124 00385D04  7C 08 03 A6 */	mtlr r0
-/* 80389128 00385D08  4E 80 00 20 */	blr 
+/* 80389128 00385D08  4E 80 00 20 */	blr
 
 .global func_8038912C
 func_8038912C:
@@ -1046,7 +1046,7 @@ func_8038912C:
 /* 80389160 00385D40  41 82 00 10 */	beq lbl_80389170
 /* 80389164 00385D44  80 7B 00 00 */	lwz r3, 0(r27)
 /* 80389168 00385D48  7D 88 03 A6 */	mtlr r12
-/* 8038916C 00385D4C  4E 80 00 21 */	blrl 
+/* 8038916C 00385D4C  4E 80 00 21 */	blrl
 lbl_80389170:
 /* 80389170 00385D50  3B 80 00 00 */	li r28, 0
 /* 80389174 00385D54  57 80 10 3A */	slwi r0, r28, 2
@@ -1073,7 +1073,7 @@ lbl_803891B0:
 /* 803891C0 00385DA0  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 803891C4 00385DA4  38 21 00 38 */	addi r1, r1, 0x38
 /* 803891C8 00385DA8  7C 08 03 A6 */	mtlr r0
-/* 803891CC 00385DAC  4E 80 00 20 */	blr 
+/* 803891CC 00385DAC  4E 80 00 20 */	blr
 
 .global dropcallback
 dropcallback:
@@ -1138,7 +1138,7 @@ lbl_80389284:
 /* 803892A4 00385E84  41 82 00 10 */	beq lbl_803892B4
 /* 803892A8 00385E88  80 7E 00 00 */	lwz r3, 0(r30)
 /* 803892AC 00385E8C  7D 88 03 A6 */	mtlr r12
-/* 803892B0 00385E90  4E 80 00 21 */	blrl 
+/* 803892B0 00385E90  4E 80 00 21 */	blrl
 lbl_803892B4:
 /* 803892B4 00385E94  38 E0 00 00 */	li r7, 0
 /* 803892B8 00385E98  38 BE 00 00 */	addi r5, r30, 0
@@ -1175,7 +1175,7 @@ lbl_80389314:
 /* 80389324 00385F04  83 81 00 20 */	lwz r28, 0x20(r1)
 /* 80389328 00385F08  38 21 00 30 */	addi r1, r1, 0x30
 /* 8038932C 00385F0C  7C 08 03 A6 */	mtlr r0
-/* 80389330 00385F10  4E 80 00 20 */	blr 
+/* 80389330 00385F10  4E 80 00 20 */	blr
 
 .global func_80389334
 func_80389334:
@@ -1430,7 +1430,7 @@ lbl_803896C8:
 /* 803896E0 003862C0  CB 61 00 A8 */	lfd f27, 0xa8(r1)
 /* 803896E4 003862C4  38 21 00 D0 */	addi r1, r1, 0xd0
 /* 803896E8 003862C8  7C 08 03 A6 */	mtlr r0
-/* 803896EC 003862CC  4E 80 00 20 */	blr 
+/* 803896EC 003862CC  4E 80 00 20 */	blr
 
 .global func_803896F0
 func_803896F0:
@@ -1509,7 +1509,7 @@ lbl_803897D8:
 /* 80389800 003863E0  41 82 00 10 */	beq lbl_80389810
 /* 80389804 003863E4  80 63 00 00 */	lwz r3, 0(r3)
 /* 80389808 003863E8  7D 88 03 A6 */	mtlr r12
-/* 8038980C 003863EC  4E 80 00 21 */	blrl 
+/* 8038980C 003863EC  4E 80 00 21 */	blrl
 lbl_80389810:
 /* 80389810 003863F0  80 77 00 00 */	lwz r3, 0(r23)
 /* 80389814 003863F4  48 00 00 69 */	bl HSD_SynthSFXKeyOff
@@ -1538,7 +1538,7 @@ lbl_80389818:
 /* 8038986C 0038644C  CB 61 00 60 */	lfd f27, 0x60(r1)
 /* 80389870 00386450  38 21 00 88 */	addi r1, r1, 0x88
 /* 80389874 00386454  7C 08 03 A6 */	mtlr r0
-/* 80389878 00386458  4E 80 00 20 */	blr 
+/* 80389878 00386458  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXKeyOff
 HSD_SynthSFXKeyOff:
@@ -1575,7 +1575,7 @@ lbl_803898BC:
 /* 803898EC 003864CC  41 82 00 10 */	beq lbl_803898FC
 /* 803898F0 003864D0  80 7B 00 00 */	lwz r3, 0(r27)
 /* 803898F4 003864D4  7D 88 03 A6 */	mtlr r12
-/* 803898F8 003864D8  4E 80 00 21 */	blrl 
+/* 803898F8 003864D8  4E 80 00 21 */	blrl
 lbl_803898FC:
 /* 803898FC 003864DC  3B 80 00 00 */	li r28, 0
 /* 80389900 003864E0  57 80 10 3A */	slwi r0, r28, 2
@@ -1627,7 +1627,7 @@ lbl_8038999C:
 /* 803899A0 00386580  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 803899A4 00386584  38 21 00 38 */	addi r1, r1, 0x38
 /* 803899A8 00386588  7C 08 03 A6 */	mtlr r0
-/* 803899AC 0038658C  4E 80 00 20 */	blr 
+/* 803899AC 0038658C  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXStopRange
 HSD_SynthSFXStopRange:
@@ -1672,7 +1672,7 @@ lbl_80389A20:
 /* 80389A40 00386620  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 80389A44 00386624  38 21 00 20 */	addi r1, r1, 0x20
 /* 80389A48 00386628  7C 08 03 A6 */	mtlr r0
-/* 80389A4C 0038662C  4E 80 00 20 */	blr 
+/* 80389A4C 0038662C  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXPause
 HSD_SynthSFXPause:
@@ -1710,7 +1710,7 @@ lbl_80389ABC:
 /* 80389AC0 003866A0  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80389AC4 003866A4  38 21 00 18 */	addi r1, r1, 0x18
 /* 80389AC8 003866A8  7C 08 03 A6 */	mtlr r0
-/* 80389ACC 003866AC  4E 80 00 20 */	blr 
+/* 80389ACC 003866AC  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXResume
 HSD_SynthSFXResume:
@@ -1748,7 +1748,7 @@ lbl_80389B3C:
 /* 80389B40 00386720  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80389B44 00386724  38 21 00 18 */	addi r1, r1, 0x18
 /* 80389B48 00386728  7C 08 03 A6 */	mtlr r0
-/* 80389B4C 0038672C  4E 80 00 20 */	blr 
+/* 80389B4C 0038672C  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXCheck
 HSD_SynthSFXCheck:
@@ -1772,26 +1772,26 @@ lbl_80389B80:
 /* 80389B8C 0038676C  54 00 07 FF */	clrlwi. r0, r0, 0x1f
 /* 80389B90 00386770  41 82 00 0C */	beq lbl_80389B9C
 /* 80389B94 00386774  38 60 FF FF */	li r3, -1
-/* 80389B98 00386778  4E 80 00 20 */	blr 
+/* 80389B98 00386778  4E 80 00 20 */	blr
 lbl_80389B9C:
 /* 80389B9C 0038677C  88 05 00 0A */	lbz r0, 0xa(r5)
 /* 80389BA0 00386780  2C 00 00 00 */	cmpwi r0, 0
 /* 80389BA4 00386784  7C 09 03 A6 */	mtctr r0
-/* 80389BA8 00386788  4C 81 00 20 */	blelr 
+/* 80389BA8 00386788  4C 81 00 20 */	blelr
 lbl_80389BAC:
 /* 80389BAC 0038678C  80 85 00 0C */	lwz r4, 0xc(r5)
 /* 80389BB0 00386790  A0 04 01 46 */	lhz r0, 0x146(r4)
 /* 80389BB4 00386794  28 00 00 00 */	cmplwi r0, 0
 /* 80389BB8 00386798  40 82 00 0C */	bne lbl_80389BC4
 /* 80389BBC 0038679C  38 60 FF FF */	li r3, -1
-/* 80389BC0 003867A0  4E 80 00 20 */	blr 
+/* 80389BC0 003867A0  4E 80 00 20 */	blr
 lbl_80389BC4:
 /* 80389BC4 003867A4  38 A5 00 04 */	addi r5, r5, 4
 /* 80389BC8 003867A8  42 00 FF E4 */	bdnz lbl_80389BAC
-/* 80389BCC 003867AC  4E 80 00 20 */	blr 
+/* 80389BCC 003867AC  4E 80 00 20 */	blr
 lbl_80389BD0:
 /* 80389BD0 003867B0  38 60 FF FF */	li r3, -1
-/* 80389BD4 003867B4  4E 80 00 20 */	blr 
+/* 80389BD4 003867B4  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXSetVolumeFade
 HSD_SynthSFXSetVolumeFade:
@@ -1858,7 +1858,7 @@ lbl_80389CA8:
 /* 80389CB4 00386894  83 A1 00 24 */	lwz r29, 0x24(r1)
 /* 80389CB8 00386898  38 21 00 30 */	addi r1, r1, 0x30
 /* 80389CBC 0038689C  7C 08 03 A6 */	mtlr r0
-/* 80389CC0 003868A0  4E 80 00 20 */	blr 
+/* 80389CC0 003868A0  4E 80 00 20 */	blr
 
 .global func_80389CC4
 func_80389CC4:
@@ -1888,7 +1888,7 @@ lbl_80389D14:
 /* 80389D14 003868F4  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80389D18 003868F8  38 21 00 08 */	addi r1, r1, 8
 /* 80389D1C 003868FC  7C 08 03 A6 */	mtlr r0
-/* 80389D20 00386900  4E 80 00 20 */	blr 
+/* 80389D20 00386900  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXSetMix
 HSD_SynthSFXSetMix:
@@ -1920,7 +1920,7 @@ lbl_80389D7C:
 /* 80389D7C 0038695C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80389D80 00386960  38 21 00 08 */	addi r1, r1, 8
 /* 80389D84 00386964  7C 08 03 A6 */	mtlr r0
-/* 80389D88 00386968  4E 80 00 20 */	blr 
+/* 80389D88 00386968  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXUpdatePitch
 HSD_SynthSFXUpdatePitch:
@@ -1968,7 +1968,7 @@ lbl_80389E0C:
 /* 80389E1C 003869FC  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 80389E20 00386A00  38 21 00 28 */	addi r1, r1, 0x28
 /* 80389E24 00386A04  7C 08 03 A6 */	mtlr r0
-/* 80389E28 00386A08  4E 80 00 20 */	blr 
+/* 80389E28 00386A08  4E 80 00 20 */	blr
 
 .global func_80389E2C
 func_80389E2C:
@@ -2052,7 +2052,7 @@ lbl_80389F2C:
 /* 80389F3C 00386B1C  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 80389F40 00386B20  38 21 00 30 */	addi r1, r1, 0x30
 /* 80389F44 00386B24  7C 08 03 A6 */	mtlr r0
-/* 80389F48 00386B28  4E 80 00 20 */	blr 
+/* 80389F48 00386B28  4E 80 00 20 */	blr
 
 .global func_80389F4C
 func_80389F4C:
@@ -2105,7 +2105,7 @@ lbl_80389FE0:
 /* 80389FF0 00386BD0  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 80389FF4 00386BD4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80389FF8 00386BD8  7C 08 03 A6 */	mtlr r0
-/* 80389FFC 00386BDC  4E 80 00 20 */	blr 
+/* 80389FFC 00386BDC  4E 80 00 20 */	blr
 
 .global func_8038A000
 func_8038A000:
@@ -2482,7 +2482,7 @@ lbl_8038A530:
 /* 8038A550 00387130  40 82 00 18 */	bne lbl_8038A568
 /* 8038A554 00387134  80 7C 00 00 */	lwz r3, 0(r28)
 /* 8038A558 00387138  7D 88 03 A6 */	mtlr r12
-/* 8038A55C 0038713C  4E 80 00 21 */	blrl 
+/* 8038A55C 0038713C  4E 80 00 21 */	blrl
 /* 8038A560 00387140  48 00 00 08 */	b lbl_8038A568
 lbl_8038A564:
 /* 8038A564 00387144  3B 3C 00 20 */	addi r25, r28, 0x20
@@ -2501,7 +2501,7 @@ lbl_8038A568:
 /* 8038A594 00387174  CB 61 00 60 */	lfd f27, 0x60(r1)
 /* 8038A598 00387178  38 21 00 88 */	addi r1, r1, 0x88
 /* 8038A59C 0038717C  7C 08 03 A6 */	mtlr r0
-/* 8038A5A0 00387180  4E 80 00 20 */	blr 
+/* 8038A5A0 00387180  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXUpdateVolume
 HSD_SynthSFXUpdateVolume:
@@ -2528,7 +2528,7 @@ lbl_8038A5E8:
 /* 8038A5F0 003871D0  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8038A5F4 003871D4  38 21 00 18 */	addi r1, r1, 0x18
 /* 8038A5F8 003871D8  7C 08 03 A6 */	mtlr r0
-/* 8038A5FC 003871DC  4E 80 00 20 */	blr 
+/* 8038A5FC 003871DC  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXUpdateMix
 HSD_SynthSFXUpdateMix:
@@ -2847,7 +2847,7 @@ lbl_8038AA8C:
 /* 8038AAA0 00387680  CB E1 00 68 */	lfd f31, 0x68(r1)
 /* 8038AAA4 00387684  38 21 00 70 */	addi r1, r1, 0x70
 /* 8038AAA8 00387688  7C 08 03 A6 */	mtlr r0
-/* 8038AAAC 0038768C  4E 80 00 20 */	blr 
+/* 8038AAAC 0038768C  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXUpdateAllVolume
 HSD_SynthSFXUpdateAllVolume:
@@ -2921,22 +2921,22 @@ lbl_8038AB9C:
 /* 8038ABAC 0038778C  83 81 00 28 */	lwz r28, 0x28(r1)
 /* 8038ABB0 00387790  38 21 00 38 */	addi r1, r1, 0x38
 /* 8038ABB4 00387794  7C 08 03 A6 */	mtlr r0
-/* 8038ABB8 00387798  4E 80 00 20 */	blr 
+/* 8038ABB8 00387798  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXSetDriverInactivatedCallback
 HSD_SynthSFXSetDriverInactivatedCallback:
 /* 8038ABBC 0038779C  90 6D C0 A0 */	stw r3, lbl_804D7740@sda21(r13)
-/* 8038ABC0 003877A0  4E 80 00 20 */	blr 
+/* 8038ABC0 003877A0  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXSetDriverMasterClockCallback
 HSD_SynthSFXSetDriverMasterClockCallback:
 /* 8038ABC4 003877A4  90 6D C0 A4 */	stw r3, lbl_804D7744@sda21(r13)
-/* 8038ABC8 003877A8  4E 80 00 20 */	blr 
+/* 8038ABC8 003877A8  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXSetDriverPauseCallback
 HSD_SynthSFXSetDriverPauseCallback:
 /* 8038ABCC 003877AC  90 6D C0 A8 */	stw r3, lbl_804D7748@sda21(r13)
-/* 8038ABD0 003877B0  4E 80 00 20 */	blr 
+/* 8038ABD0 003877B0  4E 80 00 20 */	blr
 
 .global HSD_SynthCallback
 HSD_SynthCallback:
@@ -3004,7 +3004,7 @@ lbl_8038AC9C:
 /* 8038ACB8 00387898  41 82 00 10 */	beq lbl_8038ACC8
 /* 8038ACBC 0038789C  80 7E 00 00 */	lwz r3, 0(r30)
 /* 8038ACC0 003878A0  7D 88 03 A6 */	mtlr r12
-/* 8038ACC4 003878A4  4E 80 00 21 */	blrl 
+/* 8038ACC4 003878A4  4E 80 00 21 */	blrl
 lbl_8038ACC8:
 /* 8038ACC8 003878A8  3B 20 00 00 */	li r25, 0
 /* 8038ACCC 003878AC  57 20 10 3A */	slwi r0, r25, 2
@@ -3035,7 +3035,7 @@ lbl_8038AD0C:
 /* 8038AD24 00387904  41 82 00 10 */	beq lbl_8038AD34
 /* 8038AD28 00387908  80 6D C0 BC */	lwz r3, lbl_804D775C@sda21(r13)
 /* 8038AD2C 0038790C  7D 88 03 A6 */	mtlr r12
-/* 8038AD30 00387910  4E 80 00 21 */	blrl 
+/* 8038AD30 00387910  4E 80 00 21 */	blrl
 lbl_8038AD34:
 /* 8038AD34 00387914  48 00 00 9D */	bl func_8038ADD0
 /* 8038AD38 00387918  80 8D C0 BC */	lwz r4, lbl_804D775C@sda21(r13)
@@ -3047,7 +3047,7 @@ lbl_8038AD34:
 /* 8038AD50 00387930  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8038AD54 00387934  38 21 00 38 */	addi r1, r1, 0x38
 /* 8038AD58 00387938  7C 08 03 A6 */	mtlr r0
-/* 8038AD5C 0038793C  4E 80 00 20 */	blr 
+/* 8038AD5C 0038793C  4E 80 00 20 */	blr
 lbl_8038AD60:
 /* 8038AD60 00387940  80 6D C0 C8 */	lwz r3, lbl_804D7768@sda21(r13)
 /* 8038AD64 00387944  38 00 00 00 */	li r0, 0
@@ -3079,7 +3079,7 @@ func_8038AD74:
 /* 8038ADC0 003879A0  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8038ADC4 003879A4  38 21 00 08 */	addi r1, r1, 8
 /* 8038ADC8 003879A8  7C 08 03 A6 */	mtlr r0
-/* 8038ADCC 003879AC  4E 80 00 20 */	blr 
+/* 8038ADCC 003879AC  4E 80 00 20 */	blr
 
 .global func_8038ADD0
 func_8038ADD0:
@@ -3312,7 +3312,7 @@ lbl_8038B10C:
 /* 8038B110 00387CF0  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8038B114 00387CF4  38 21 00 20 */	addi r1, r1, 0x20
 /* 8038B118 00387CF8  7C 08 03 A6 */	mtlr r0
-/* 8038B11C 00387CFC  4E 80 00 20 */	blr 
+/* 8038B11C 00387CFC  4E 80 00 20 */	blr
 
 .global lbl_8038B120
 lbl_8038B120:
@@ -3478,7 +3478,7 @@ lbl_8038B368:
 /* 8038B370 00387F50  CB E1 00 40 */	lfd f31, 0x40(r1)
 /* 8038B374 00387F54  38 21 00 48 */	addi r1, r1, 0x48
 /* 8038B378 00387F58  7C 08 03 A6 */	mtlr r0
-/* 8038B37C 00387F5C  4E 80 00 20 */	blr 
+/* 8038B37C 00387F5C  4E 80 00 20 */	blr
 
 .global HSD_SynthPStreamFirstHakoHeaderCallback
 HSD_SynthPStreamFirstHakoHeaderCallback:
@@ -3505,7 +3505,7 @@ HSD_SynthPStreamFirstHakoHeaderCallback:
 /* 8038B3D0 00387FB0  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8038B3D4 00387FB4  38 21 00 08 */	addi r1, r1, 8
 /* 8038B3D8 00387FB8  7C 08 03 A6 */	mtlr r0
-/* 8038B3DC 00387FBC  4E 80 00 20 */	blr 
+/* 8038B3DC 00387FBC  4E 80 00 20 */	blr
 
 .global HSD_SynthPStreamHeaderCallback
 HSD_SynthPStreamHeaderCallback:
@@ -3630,7 +3630,7 @@ lbl_8038B594:
 /* 8038B59C 0038817C  CB E1 00 40 */	lfd f31, 0x40(r1)
 /* 8038B5A0 00388180  38 21 00 48 */	addi r1, r1, 0x48
 /* 8038B5A4 00388184  7C 08 03 A6 */	mtlr r0
-/* 8038B5A8 00388188  4E 80 00 20 */	blr 
+/* 8038B5A8 00388188  4E 80 00 20 */	blr
 
 .global func_8038B5AC
 func_8038B5AC:
@@ -3800,7 +3800,7 @@ lbl_8038B724:
 /* 8038B80C 003883EC  80 01 00 5C */	lwz r0, 0x5c(r1)
 /* 8038B810 003883F0  38 21 00 58 */	addi r1, r1, 0x58
 /* 8038B814 003883F4  7C 08 03 A6 */	mtlr r0
-/* 8038B818 003883F8  4E 80 00 20 */	blr 
+/* 8038B818 003883F8  4E 80 00 20 */	blr
 
 .global HSD_SynthStreamSetVolume
 HSD_SynthStreamSetVolume:
@@ -3877,7 +3877,7 @@ lbl_8038B90C:
 /* 8038B928 00388508  83 A1 00 3C */	lwz r29, 0x3c(r1)
 /* 8038B92C 0038850C  38 21 00 48 */	addi r1, r1, 0x48
 /* 8038B930 00388510  7C 08 03 A6 */	mtlr r0
-/* 8038B934 00388514  4E 80 00 20 */	blr 
+/* 8038B934 00388514  4E 80 00 20 */	blr
 
 .global HSD_SynthInit
 HSD_SynthInit:
@@ -4007,7 +4007,7 @@ HSD_SynthInit:
 /* 8038BB24 00388704  83 A1 00 3C */	lwz r29, 0x3c(r1)
 /* 8038BB28 00388708  38 21 00 48 */	addi r1, r1, 0x48
 /* 8038BB2C 0038870C  7C 08 03 A6 */	mtlr r0
-/* 8038BB30 00388710  4E 80 00 20 */	blr 
+/* 8038BB30 00388710  4E 80 00 20 */	blr
 
 
 .section .data
@@ -4138,25 +4138,25 @@ lbl_804080EC:
     .balign 8
 .global lbl_804C28E0
 lbl_804C28E0:
-	.skip 0x100
+    .skip 0x100
 .global lbl_804C29E0
 lbl_804C29E0:
-	.skip 0x80
+    .skip 0x80
 .global lbl_804C2A60
 lbl_804C2A60:
-	.skip 0x60
+    .skip 0x60
 .global lbl_804C2AC0
 lbl_804C2AC0:
-	.skip 0x20
+    .skip 0x20
 .global lbl_804C2AE0
 lbl_804C2AE0:
-	.skip 0x184
+    .skip 0x184
 .global lbl_804C2C64
 lbl_804C2C64:
-	.skip 0x18DC
+    .skip 0x18DC
 .global lbl_804C4540
 lbl_804C4540:
-	.skip 0x60
+    .skip 0x60
 
 
 .section .sdata
@@ -4186,142 +4186,142 @@ lbl_804D6030:
     .balign 8
 .global lbl_804D7710
 lbl_804D7710:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7714
 lbl_804D7714:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7718
 lbl_804D7718:
-	.skip 0x8
+    .skip 0x8
 .global lbl_804D7720
 lbl_804D7720:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7724
 lbl_804D7724:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7728
 lbl_804D7728:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D772C
 lbl_804D772C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7730
 lbl_804D7730:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7734
 lbl_804D7734:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7738
 lbl_804D7738:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D773C
 lbl_804D773C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7740
 lbl_804D7740:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7744
 lbl_804D7744:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7748
 lbl_804D7748:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D774C
 lbl_804D774C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7750
 lbl_804D7750:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7754
 lbl_804D7754:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7758
 lbl_804D7758:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D775C
 lbl_804D775C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7760
 lbl_804D7760:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7764
 lbl_804D7764:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7768
 lbl_804D7768:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D776C
 lbl_804D776C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7770
 lbl_804D7770:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7774
 lbl_804D7774:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7778
 lbl_804D7778:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D777C
 lbl_804D777C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7780
 lbl_804D7780:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7784
 lbl_804D7784:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DE7F0
 lbl_804DE7F0:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE7F4
 lbl_804DE7F4:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE7F8
 lbl_804DE7F8:
-	.4byte 0x3803126F
+    .4byte 0x3803126F
 .global lbl_804DE7FC
 lbl_804DE7FC:
-	.4byte 0x3B808081
+    .4byte 0x3B808081
 .global lbl_804DE800
 lbl_804DE800:
-	.4byte 0x46FFFE00
+    .4byte 0x46FFFE00
 .global lbl_804DE804
 lbl_804DE804:
-	.4byte 0x47800000
+    .4byte 0x47800000
 .global lbl_804DE808
 lbl_804DE808:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804DE810
 lbl_804DE810:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000
 .global lbl_804DE818
 lbl_804DE818:
-	.4byte 0x3F701010
-	.4byte 0x10101010
+    .4byte 0x3F701010
+    .4byte 0x10101010
 .global lbl_804DE820
 lbl_804DE820:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE824
 lbl_804DE824:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DE828
 lbl_804DE828:
-	.4byte 0x3FE00000
-	.4byte 0x00000000
+    .4byte 0x3FE00000
+    .4byte 0x00000000
 .global lbl_804DE830
 lbl_804DE830:
-	.4byte 0x40080000
-	.4byte 0x00000000
+    .4byte 0x40080000
+    .4byte 0x00000000
 .global lbl_804DE838
 lbl_804DE838:
-	.4byte 0x46B50389
+    .4byte 0x46B50389
 .global lbl_804DE83C
 lbl_804DE83C:
-	.4byte 0x3F000000
+    .4byte 0x3F000000

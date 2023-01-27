@@ -216,7 +216,7 @@ lbl_8034D494:
 /* 8034D4A4 0034A084  83 81 00 30 */	lwz r28, 0x30(r1)
 /* 8034D4A8 0034A088  38 21 00 40 */	addi r1, r1, 0x40
 /* 8034D4AC 0034A08C  7C 08 03 A6 */	mtlr r0
-/* 8034D4B0 0034A090  4E 80 00 20 */	blr 
+/* 8034D4B0 0034A090  4E 80 00 20 */	blr
 
 .global PADReceiveCheckCallback
 PADReceiveCheckCallback:
@@ -298,7 +298,7 @@ lbl_8034D5CC:
 /* 8034D5D8 0034A1B8  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8034D5DC 0034A1BC  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034D5E0 0034A1C0  7C 08 03 A6 */	mtlr r0
-/* 8034D5E4 0034A1C4  4E 80 00 20 */	blr 
+/* 8034D5E4 0034A1C4  4E 80 00 20 */	blr
 
 .global PADReset
 PADReset:
@@ -367,7 +367,7 @@ lbl_8034D6C4:
 /* 8034D6D8 0034A2B8  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8034D6DC 0034A2BC  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034D6E0 0034A2C0  7C 08 03 A6 */	mtlr r0
-/* 8034D6E4 0034A2C4  4E 80 00 20 */	blr 
+/* 8034D6E4 0034A2C4  4E 80 00 20 */	blr
 
 .global PADRecalibrate
 PADRecalibrate:
@@ -437,7 +437,7 @@ lbl_8034D7C8:
 /* 8034D7DC 0034A3BC  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8034D7E0 0034A3C0  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034D7E4 0034A3C4  7C 08 03 A6 */	mtlr r0
-/* 8034D7E8 0034A3C8  4E 80 00 20 */	blr 
+/* 8034D7E8 0034A3C8  4E 80 00 20 */	blr
 
 .global PADInit
 PADInit:
@@ -579,7 +579,7 @@ lbl_8034D9EC:
 /* 8034D9F0 0034A5D0  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8034D9F4 0034A5D4  38 21 00 38 */	addi r1, r1, 0x38
 /* 8034D9F8 0034A5D8  7C 08 03 A6 */	mtlr r0
-/* 8034D9FC 0034A5DC  4E 80 00 20 */	blr 
+/* 8034D9FC 0034A5DC  4E 80 00 20 */	blr
 
 .global PADRead
 PADRead:
@@ -793,7 +793,7 @@ lbl_8034DD00:
 /* 8034DD08 0034A8E8  38 9F 00 00 */	addi r4, r31, 0
 /* 8034DD0C 0034A8EC  7D 88 03 A6 */	mtlr r12
 /* 8034DD10 0034A8F0  38 A1 00 14 */	addi r5, r1, 0x14
-/* 8034DD14 0034A8F4  4E 80 00 21 */	blrl 
+/* 8034DD14 0034A8F4  4E 80 00 21 */	blrl
 /* 8034DD18 0034A8F8  A0 1F 00 00 */	lhz r0, 0(r31)
 /* 8034DD1C 0034A8FC  54 00 04 A5 */	rlwinm. r0, r0, 0, 0x12, 0x12
 /* 8034DD20 0034A900  41 82 00 44 */	beq lbl_8034DD64
@@ -832,7 +832,7 @@ lbl_8034DD78:
 /* 8034DD9C 0034A97C  80 01 00 54 */	lwz r0, 0x54(r1)
 /* 8034DDA0 0034A980  38 21 00 50 */	addi r1, r1, 0x50
 /* 8034DDA4 0034A984  7C 08 03 A6 */	mtlr r0
-/* 8034DDA8 0034A988  4E 80 00 20 */	blr 
+/* 8034DDA8 0034A988  4E 80 00 20 */	blr
 
 .global SISetSamplingRate
 SISetSamplingRate:
@@ -902,7 +902,7 @@ lbl_8034DE50:
 /* 8034DE88 0034AA68  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 8034DE8C 0034AA6C  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034DE90 0034AA70  7C 08 03 A6 */	mtlr r0
-/* 8034DE94 0034AA74  4E 80 00 20 */	blr 
+/* 8034DE94 0034AA74  4E 80 00 20 */	blr
 
 .global SIRefreshSamplingRate
 SIRefreshSamplingRate:
@@ -914,7 +914,7 @@ SIRefreshSamplingRate:
 /* 8034DEAC 0034AA8C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8034DEB0 0034AA90  38 21 00 08 */	addi r1, r1, 8
 /* 8034DEB4 0034AA94  7C 08 03 A6 */	mtlr r0
-/* 8034DEB8 0034AA98  4E 80 00 20 */	blr 
+/* 8034DEB8 0034AA98  4E 80 00 20 */	blr
 
 .global PADControlMotor
 PADControlMotor:
@@ -960,7 +960,7 @@ lbl_8034DF3C:
 /* 8034DF50 0034AB30  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 8034DF54 0034AB34  38 21 00 28 */	addi r1, r1, 0x28
 /* 8034DF58 0034AB38  7C 08 03 A6 */	mtlr r0
-/* 8034DF5C 0034AB3C  4E 80 00 20 */	blr 
+/* 8034DF5C 0034AB3C  4E 80 00 20 */	blr
 
 .global PADSetSpec
 PADSetSpec:
@@ -992,7 +992,7 @@ lbl_8034DFAC:
 /* 8034DFB4 0034AB94  90 0D A5 A8 */	stw r0, MakeStatus@sda21(r13)
 lbl_8034DFB8:
 /* 8034DFB8 0034AB98  90 6D A5 A4 */	stw r3, Spec@sda21(r13)
-/* 8034DFBC 0034AB9C  4E 80 00 20 */	blr 
+/* 8034DFBC 0034AB9C  4E 80 00 20 */	blr
 
 SPEC0_MakeStatus:
 /* 8034DFC0 0034ABA0  38 60 00 00 */	li r3, 0
@@ -1098,7 +1098,7 @@ lbl_8034E100:
 /* 8034E124 0034AD04  88 64 00 05 */	lbz r3, 5(r4)
 /* 8034E128 0034AD08  38 03 FF 80 */	addi r0, r3, -128
 /* 8034E12C 0034AD0C  98 04 00 05 */	stb r0, 5(r4)
-/* 8034E130 0034AD10  4E 80 00 20 */	blr 
+/* 8034E130 0034AD10  4E 80 00 20 */	blr
 
 SPEC1_MakeStatus:
 /* 8034E134 0034AD14  38 60 00 00 */	li r3, 0
@@ -1204,7 +1204,7 @@ lbl_8034E274:
 /* 8034E298 0034AE78  88 64 00 05 */	lbz r3, 5(r4)
 /* 8034E29C 0034AE7C  38 03 FF 80 */	addi r0, r3, -128
 /* 8034E2A0 0034AE80  98 04 00 05 */	stb r0, 5(r4)
-/* 8034E2A4 0034AE84  4E 80 00 20 */	blr 
+/* 8034E2A4 0034AE84  4E 80 00 20 */	blr
 
 .global SPEC2_MakeStatus
 SPEC2_MakeStatus:
@@ -1480,7 +1480,7 @@ lbl_8034E678:
 lbl_8034E694:
 /* 8034E694 0034B274  7C 60 18 50 */	subf r3, r0, r3
 /* 8034E698 0034B278  98 64 00 07 */	stb r3, 7(r4)
-/* 8034E69C 0034B27C  4E 80 00 20 */	blr 
+/* 8034E69C 0034B27C  4E 80 00 20 */	blr
 
 .global PADOnReset
 PADOnReset:
@@ -1592,7 +1592,7 @@ lbl_8034E81C:
 /* 8034E824 0034B404  83 C1 00 20 */	lwz r30, 0x20(r1)
 /* 8034E828 0034B408  38 21 00 28 */	addi r1, r1, 0x28
 /* 8034E82C 0034B40C  7C 08 03 A6 */	mtlr r0
-/* 8034E830 0034B410  4E 80 00 20 */	blr 
+/* 8034E830 0034B410  4E 80 00 20 */	blr
 
 .global SamplingHandler
 SamplingHandler:
@@ -1610,7 +1610,7 @@ SamplingHandler:
 /* 8034E860 0034B440  4B FF 68 2D */	bl OSSetCurrentContext
 /* 8034E864 0034B444  81 8D BD 70 */	lwz r12, SamplingCallback@sda21(r13)
 /* 8034E868 0034B448  7D 88 03 A6 */	mtlr r12
-/* 8034E86C 0034B44C  4E 80 00 21 */	blrl 
+/* 8034E86C 0034B44C  4E 80 00 21 */	blrl
 /* 8034E870 0034B450  38 61 00 10 */	addi r3, r1, 0x10
 /* 8034E874 0034B454  4B FF 69 E1 */	bl OSClearContext
 /* 8034E878 0034B458  7F E3 FB 78 */	mr r3, r31
@@ -1620,7 +1620,7 @@ lbl_8034E880:
 /* 8034E884 0034B464  83 E1 02 DC */	lwz r31, 0x2dc(r1)
 /* 8034E888 0034B468  38 21 02 E0 */	addi r1, r1, 0x2e0
 /* 8034E88C 0034B46C  7C 08 03 A6 */	mtlr r0
-/* 8034E890 0034B470  4E 80 00 20 */	blr 
+/* 8034E890 0034B470  4E 80 00 20 */	blr
 
 .global PADSetSamplingCallback
 PADSetSamplingCallback:
@@ -1646,7 +1646,7 @@ lbl_8034E8D0:
 /* 8034E8D8 0034B4B8  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8034E8DC 0034B4BC  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034E8E0 0034B4C0  7C 08 03 A6 */	mtlr r0
-/* 8034E8E4 0034B4C4  4E 80 00 20 */	blr 
+/* 8034E8E4 0034B4C4  4E 80 00 20 */	blr
 
 .global __PADDisableRecalibration
 __PADDisableRecalibration:
@@ -1683,7 +1683,7 @@ lbl_8034E944:
 /* 8034E954 0034B534  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8034E958 0034B538  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034E95C 0034B53C  7C 08 03 A6 */	mtlr r0
-/* 8034E960 0034B540  4E 80 00 20 */	blr 
+/* 8034E960 0034B540  4E 80 00 20 */	blr
 
 
 .section .data
@@ -1734,10 +1734,10 @@ ResetFunctionInfo:
     .balign 8
 .global Type
 Type:
-	.skip 0x10
+    .skip 0x10
 .global Origin
 Origin:
-	.skip 0x40
+    .skip 0x40
 
 
 .section .sdata
@@ -1775,34 +1775,34 @@ lbl_804D5C54:
     .balign 8
 .global Initialized
 Initialized:
-	.skip 0x4
+    .skip 0x4
 .global EnabledBits
 EnabledBits:
-	.skip 0x4
+    .skip 0x4
 .global ResettingBits
 ResettingBits:
-	.skip 0x4
+    .skip 0x4
 .global RecalibrateBits
 RecalibrateBits:
-	.skip 0x4
+    .skip 0x4
 .global WaitingBits
 WaitingBits:
-	.skip 0x4
+    .skip 0x4
 .global CheckingBits
 CheckingBits:
-	.skip 0x4
+    .skip 0x4
 .global PendingBits
 PendingBits:
-	.skip 0x4
+    .skip 0x4
 .global SamplingRate
 SamplingRate:
-	.skip 0x4
+    .skip 0x4
 .global SamplingCallback
 SamplingCallback:
-	.skip 0x4
+    .skip 0x4
 .global recalibrated
 recalibrated:
-	.skip 0x4
+    .skip 0x4
 .global __PADSpec
 __PADSpec:
-	.skip 0x8
+    .skip 0x8

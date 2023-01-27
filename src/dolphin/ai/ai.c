@@ -2,6 +2,7 @@
 
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/OSTime.h>
+#include <placeholder.h>
 
 static AISCallback __AIS_Callback;
 static AIDCallback __AID_Callback;
@@ -38,7 +39,8 @@ void AIInitDMA(u32 addr, u32 length)
     oldInts = OSDisableInterrupts();
     __DSPRegs[24] = (u16) ((__DSPRegs[24] & ~0x3FF) | (addr >> 16));
     __DSPRegs[25] = (u16) ((__DSPRegs[25] & ~0xFFE0) | (0xffff & addr));
-    __DSPRegs[27] = (u16) ((__DSPRegs[27] & ~0x7FFF) | (u16) ((length >> 5) & 0xFFFF));
+    __DSPRegs[27] =
+        (u16) ((__DSPRegs[27] & ~0x7FFF) | (u16) ((length >> 5) & 0xFFFF));
     OSRestoreInterrupts(oldInts);
 }
 
@@ -188,7 +190,7 @@ u8 AIGetStreamVolRight(void)
 
 void AIInit(u8* stack)
 {
-    if (__AI_init_flag == TRUE) {
+    if (__AI_init_flag == true) {
         return;
     }
 
@@ -211,7 +213,7 @@ void AIInit(u8* stack)
     __OSUnmaskInterrupts(0x04000000);
     __OSSetInterruptHandler(8, __AISHandler);
     __OSUnmaskInterrupts(0x800000);
-    __AI_init_flag = TRUE;
+    __AI_init_flag = true;
 }
 
 static void __AISHandler(__OSInterrupt interrupt, OSContext* context)
@@ -246,6 +248,8 @@ static void __AIDHandler(__OSInterrupt interrupt, struct OSContext* context)
     OSSetCurrentContext(context);
 }
 
+#ifdef MWERKS_GEKKO
+
 static asm void __AICallbackStackSwitch(register AIDCallback cb)
 { // clang-format off
     fralloc
@@ -273,6 +277,15 @@ static asm void __AICallbackStackSwitch(register AIDCallback cb)
     frfree
     blr
 } // clang-format on
+
+#else
+
+static void __AICallbackStackSwitch(AIDCallback cb)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 static void __AI_SRC_INIT(void)
 {
@@ -320,7 +333,8 @@ static void __AI_SRC_INIT(void)
             temp = min_wait;
             done = 1;
             ++initCnt;
-        } else if (diff >= bound_32KHz + buffer && diff < bound_48KHz - buffer) {
+        } else if (diff >= bound_32KHz + buffer && diff < bound_48KHz - buffer)
+        {
             temp = max_wait;
             done = 1;
             ++initCnt;

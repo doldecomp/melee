@@ -1,8 +1,12 @@
+#include <dolphin/os/OSCache.h>
+
 #include <dolphin/base/PPCArch.h>
+#include <dolphin/os/os.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/os/os.h>
-#include <dolphin/types.h>
+#include <MetroTRK/intrinsics.h>
+#include <placeholder.h>
+#include <Runtime/platform.h>
 
 #define MSR_IR 0x00000020
 #define MSR_DR 0x00000010
@@ -17,13 +21,26 @@
 #define HID2_DCMERR 0x00200000
 #define HID2_DQOERR 0x00100000
 
-asm void DCEnable()
+#ifdef MWERKS_GEKKO
+
+asm void DCEnable(void)
 { // clang-format off
     sync
     mfspr r3, HID0
     ori   r3, r3, 0x4000
     mtspr HID0, r3
 } // clang-format on
+
+#else
+
+void DCEnable(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 asm void DCInvalidateRange(register void* addr, register size_t nbytes)
 { // clang-format off
@@ -41,6 +58,17 @@ asm void DCInvalidateRange(register void* addr, register size_t nbytes)
     addi addr, addr, 32
     bdnz @2
 } // clang-format on
+
+#else
+
+void DCInvalidateRange(void* addr, size_t nbytes)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 asm void DCFlushRange(register void* addr, register size_t nbytes)
 { // clang-format off
@@ -60,6 +88,17 @@ asm void DCFlushRange(register void* addr, register size_t nbytes)
     sc
 } // clang-format on
 
+#else
+
+void DCFlushRange(void* addr, size_t nbytes)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void DCStoreRange(register void* addr, register size_t nbytes)
 { // clang-format off
     cmplwi nbytes, 0
@@ -78,6 +117,17 @@ asm void DCStoreRange(register void* addr, register size_t nbytes)
     sc
 } // clang-format on
 
+#else
+
+void DCStoreRange(void* addr, size_t nbytes)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void DCFlushRangeNoSync(register void* addr, register size_t nbytes)
 { // clang-format off
     cmplwi nbytes, 0
@@ -95,6 +145,17 @@ asm void DCFlushRangeNoSync(register void* addr, register size_t nbytes)
     bdnz @2
 } // clang-format on
 
+#else
+
+void DCFlushRangeNoSync(void* addr, size_t nbytes)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void DCZeroRange(register void* addr, register size_t nbytes)
 { // clang-format off
     cmplwi nbytes, 0
@@ -111,6 +172,17 @@ asm void DCZeroRange(register void* addr, register size_t nbytes)
     addi addr, addr, 32
     bdnz @2
 } // clang-format on
+
+#else
+
+void DCZeroRange(void* addr, size_t nbytes)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 asm void ICInvalidateRange(register void* addr, register size_t nbytes)
 { // clang-format off
@@ -131,12 +203,34 @@ asm void ICInvalidateRange(register void* addr, register size_t nbytes)
     isync
 } // clang-format on
 
+#else
+
+void ICInvalidateRange(void* addr, size_t nbytes)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 asm void ICFlashInvalidate(void)
 { // clang-format off
     mfspr r3, 0x3f0
     ori r3, r3, 0x800
     mtspr 0x3f0, r3
 } // clang-format on
+
+#else
+
+void ICFlashInvalidate(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 asm void ICEnable(void)
 { // clang-format off
@@ -145,6 +239,17 @@ asm void ICEnable(void)
     ori r3, r3, 0x8000
     mtspr 0x3f0, r3
 } // clang-format on
+
+#else
+
+void ICEnable(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 asm void __LCEnable(void)
 { // clang-format off
@@ -202,12 +307,23 @@ lockloop:
     nop
 } // clang-format on
 
+#else
+
+void __LCEnable(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
 void LCEnable(void)
 {
-    BOOL enabled = OSDisableInterrupts();
+    bool enabled = OSDisableInterrupts();
     __LCEnable();
     OSRestoreInterrupts(enabled);
 }
+
+#ifdef MWERKS_GEKKO
 
 asm void LCDisable(void)
 { // clang-format off
@@ -223,7 +339,20 @@ asm void LCDisable(void)
     mtspr 0x398, r4
 } // clang-format on
 
-asm void LCStoreBlocks(register void* dst, register void* src, register u32 nblocks){ // clang-format off
+#else
+
+void LCDisable(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
+asm void LCStoreBlocks(register void* dst, register void* src,
+                       register u32 nblocks)
+{ // clang-format off
     rlwinm r6, nblocks, 30, 27, 31
     clrlwi dst, dst, 4
     or r6, r6, dst
@@ -233,6 +362,15 @@ asm void LCStoreBlocks(register void* dst, register void* src, register u32 nblo
     ori r6, r6, 2
     mtspr 0x39b, r6
 } // clang-format on
+
+#else
+
+void LCStoreBlocks(void* dst, void* src, u32 nblocks)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 u32 LCStoreData(void* destAddr, void* srcAddr, u32 nBytes)
 {
@@ -254,6 +392,8 @@ u32 LCStoreData(void* destAddr, void* srcAddr, u32 nBytes)
     return numTransactions;
 }
 
+#ifdef MWERKS_GEKKO
+
 asm void LCQueueWait(register u32 len)
 { // clang-format off
     nofralloc
@@ -265,6 +405,15 @@ asm void LCQueueWait(register u32 len)
     bge cr2, @1
     blr
 } // clang-format on
+
+#else
+
+void LCQueueWait(u32 len)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 extern char lbl_80401BF0[];
 void DBPrintf(const char* fmt, ...);
@@ -312,7 +461,8 @@ void DMAErrorHandler(OSError error, OSContext* context, ...)
     OSReport("Machine check received\n");
     OSReport("HID2 = 0x%x   SRR1 = 0x%x\n", hid2, context->srr1);
     if (!(hid2 & (HID2_DCHERR | HID2_DNCERR | HID2_DCMERR | HID2_DQOERR)) ||
-        !(context->srr1 & SRR1_DMA_BIT)) {
+        !(context->srr1 & SRR1_DMA_BIT))
+    {
         OSReport("Machine check was not DMA/locked cache related\n");
         OSDumpContext(context);
         PPCHalt();
@@ -322,7 +472,8 @@ void DMAErrorHandler(OSError error, OSContext* context, ...)
     OSReport("The following errors have been detected and cleared :\n");
 
     if (hid2 & HID2_DCHERR) {
-        OSReport("\t- Requested a locked cache tag that was already in the cache\n");
+        OSReport(
+            "\t- Requested a locked cache tag that was already in the cache\n");
     }
 
     if (hid2 & HID2_DNCERR) {
@@ -341,7 +492,7 @@ void DMAErrorHandler(OSError error, OSContext* context, ...)
     PPCMthid2(hid2);
 }
 
-void __OSCacheInit()
+void __OSCacheInit(void)
 {
     if (!(PPCMfhid0() & HID0_ICE)) {
         ICEnable();

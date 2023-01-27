@@ -1,9 +1,11 @@
 #include <sysdolphin/baselib/tobj.h>
 
-#include <math.h>
 #include <dolphin/mtx.h>
-
+#include <math.h>
+#include <MetroTRK/intrinsics.h>
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/mtx.h>
 
 extern void TObjInfoInit(void);
 
@@ -18,7 +20,7 @@ char lbl_804D5C98[5] = "tobj\0";
 
 void HSD_TObjRemoveAnim(HSD_TObj* tobj)
 {
-    if (tobj == NULL){
+    if (tobj == NULL) {
         return;
     }
 
@@ -30,7 +32,7 @@ void HSD_TObjRemoveAnimAll(HSD_TObj* tobj)
 {
     HSD_TObj* tp;
 
-    if (tobj != NULL){
+    if (tobj != NULL) {
         for (tp = tobj; tp != NULL; tp = tp->next) {
             HSD_TObjRemoveAnim(tp);
         }
@@ -68,7 +70,8 @@ void HSD_TObjAddAnim(HSD_TObj* tobj, HSD_TexAnim* texanim)
             }
 
             if (ta->n_tluttbl) {
-                tobj->tluttbl = (HSD_Tlut**)HSD_MemAlloc((s32)sizeof(HSD_Tlut*) * (ta->n_tluttbl + 1));
+                tobj->tluttbl = (HSD_Tlut**) HSD_MemAlloc(
+                    (s32) sizeof(HSD_Tlut*) * (ta->n_tluttbl + 1));
                 for (i = 0; i < ta->n_tluttbl; i++) {
                     tobj->tluttbl[i] = HSD_TlutLoadDesc(ta->tluttbl[i]);
                 }
@@ -122,7 +125,7 @@ void HSD_TObjReqAnimAll(HSD_TObj* tobj, f32 startframe)
     HSD_TObjReqAnimAllByFlags(tobj, startframe, TOBJ_ANIM);
 }
 
-static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
+static void TObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_TObj* tobj = obj;
 
@@ -132,17 +135,17 @@ static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
     switch (type) {
     case HSD_A_T_TIMG: {
         int n;
-        if (tobj->imagetbl == NULL){
+        if (tobj->imagetbl == NULL) {
             __assert(lbl_804D5C90, 276, "tobj->imagetbl");
         }
-        n = (int)val->fv;
+        n = (int) val->fv;
         if (tobj->imagetbl[n]) {
             tobj->imagedesc = tobj->imagetbl[n];
         }
     } break;
     case HSD_A_T_TCLT: {
         if (tobj->tluttbl) {
-            tobj->tlut_no = (u8)val->fv;
+            tobj->tlut_no = (u8) val->fv;
         }
     } break;
     case HSD_A_T_BLEND:
@@ -176,40 +179,40 @@ static void TObjUpdateFunc(void* obj, u32 type, FObjData* val)
         tobj->lod->LODBias = val->fv;
         break;
     case HSD_A_T_KONST_R:
-        tobj->tev->konst.r = (u8)(255.0 * val->fv);
+        tobj->tev->konst.r = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_KONST_G:
-        tobj->tev->konst.g = (u8)(255.0 * val->fv);
+        tobj->tev->konst.g = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_KONST_B:
-        tobj->tev->konst.b = (u8)(255.0 * val->fv);
+        tobj->tev->konst.b = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_KONST_A:
-        tobj->tev->konst.a = (u8)(255.0 * val->fv);
+        tobj->tev->konst.a = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_R:
-        tobj->tev->tev0.r = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.r = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_G:
-        tobj->tev->tev0.g = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.g = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_B:
-        tobj->tev->tev0.b = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.b = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_TEV0_A:
-        tobj->tev->tev0.a = (u8)(255.0 * val->fv);
+        tobj->tev->tev0.a = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_R:
-        tobj->tev->tev1.r = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.r = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_G:
-        tobj->tev->tev1.g = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.g = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_B:
-        tobj->tev->tev1.b = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.b = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_TEV1_A:
-        tobj->tev->tev1.a = (u8)(255.0 * val->fv);
+        tobj->tev->tev1.a = (u8) (255.0 * val->fv);
         break;
     case HSD_A_T_TS_BLEND:
         tobj->blending = val->fv;
@@ -222,7 +225,7 @@ void HSD_TObjAnim(HSD_TObj* tobj)
     if (tobj == NULL) {
         return;
     }
-    
+
     HSD_AObjInterpretAnim(tobj->aobj, tobj, TObjUpdateFunc);
 }
 
@@ -233,7 +236,7 @@ void HSD_TObjAnimAll(HSD_TObj* tobj)
     if (tobj == NULL) {
         return;
     }
-    
+
     for (i = tobj; i != NULL; i = i->next) {
         HSD_TObjAnim(i);
     }
@@ -262,7 +265,7 @@ void HSD_TObjAnimAll(HSD_TObj* tobj)
     tobj->lod = td->lod;
     tobj->aobj = NULL;
     tobj->flags |= TEX_MTX_DIRTY;
-    tobj->tlut_no = (u8)-1;
+    tobj->tlut_no = (u8) -1;
     tobj->tev = HSD_TObjTevLoadDesc(td->tev);
 
     return 0;
@@ -289,7 +292,7 @@ HSD_TObj* HSD_TObjLoadDesc(HSD_TObjDesc* td)
     }
 }
 
-HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc *tlutdesc)
+HSD_Tlut* HSD_TlutLoadDesc(HSD_TlutDesc* tlutdesc)
 {
     if (tlutdesc != NULL) {
         HSD_Tlut* tlut = HSD_TlutAlloc();
@@ -315,8 +318,7 @@ HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping)
 
     if (from == NULL) {
         tp = tobj_head;
-    }
-    else {
+    } else {
         tp = from->next;
     }
 
@@ -332,64 +334,76 @@ END:
 
 char lbl_8040562C[23] = "unexpected texmap id.\n\0";
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
+#endif
+
 static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 {
-	switch(id)
-	{
-	case GX_TEXMAP0:
-		return GX_PTTEXMTX0;
-	case GX_TEXMAP1:
-		return GX_PTTEXMTX1;
-	case GX_TEXMAP2:
-		return GX_PTTEXMTX2;
-	case GX_TEXMAP3:
-		return GX_PTTEXMTX3;
-	case GX_TEXMAP4:
-		return GX_PTTEXMTX4;
-	case GX_TEXMAP5:
-		return GX_PTTEXMTX5;
-	case GX_TEXMAP6:
-		return GX_PTTEXMTX6;
-	case GX_TEXMAP7:
-		return GX_PTTEXMTX7;
-	default:
-		HSD_Panic(lbl_804D5C90, 574, lbl_8040562C);
-	}
-	return 0;
+    switch (id) {
+    case GX_TEXMAP0:
+        return GX_PTTEXMTX0;
+    case GX_TEXMAP1:
+        return GX_PTTEXMTX1;
+    case GX_TEXMAP2:
+        return GX_PTTEXMTX2;
+    case GX_TEXMAP3:
+        return GX_PTTEXMTX3;
+    case GX_TEXMAP4:
+        return GX_PTTEXMTX4;
+    case GX_TEXMAP5:
+        return GX_PTTEXMTX5;
+    case GX_TEXMAP6:
+        return GX_PTTEXMTX6;
+    case GX_TEXMAP7:
+        return GX_PTTEXMTX7;
+    default:
+        HSD_Panic(lbl_804D5C90, 574, lbl_8040562C);
+    }
+    return 0;
 }
-#pragma pop
 
-/*static*/ void MakeTextureMtx(HSD_TObj *tobj)
+#ifdef MUST_MATCH
+#pragma pop
+#endif
+
+/*static*/ void MakeTextureMtx(HSD_TObj* tobj)
 {
-    Vec scale;
+    Vec3 scale;
     Mtx m;
-    Vec trans;
+    Vec3 trans;
     Quaternion rot;
     u32 unused[2];
-    BOOL no_assert = FALSE;
+    bool no_assert = false;
 
     if (tobj->repeat_s && tobj->repeat_t) {
-        no_assert = TRUE;
+        no_assert = true;
     }
 
     if (!no_assert) {
         __assert(lbl_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
     }
 
-    scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON ? 0.0F : (f32)tobj->repeat_s / tobj->scale.x;
-    scale.y = __fabsf(tobj->scale.y) < FLT_EPSILON ? 0.0F : (f32)tobj->repeat_t / tobj->scale.y;
+    scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON
+                  ? 0.0F
+                  : (f32) tobj->repeat_s / tobj->scale.x;
+    scale.y = __fabsf(tobj->scale.y) < FLT_EPSILON
+                  ? 0.0F
+                  : (f32) tobj->repeat_t / tobj->scale.y;
     scale.z = tobj->scale.z;
     rot.x = tobj->rotate.x;
     rot.y = tobj->rotate.y;
     rot.z = -tobj->rotate.z;
     trans.x = -tobj->translate.x;
-    trans.y = -(tobj->translate.y + (tobj->wrap_t == GX_MIRROR ? 1.0F / (tobj->repeat_t / tobj->scale.y) : 0.0F));
+    trans.y =
+        -(tobj->translate.y + (tobj->wrap_t == GX_MIRROR
+                                   ? 1.0F / (tobj->repeat_t / tobj->scale.y)
+                                   : 0.0F));
     trans.z = tobj->translate.z;
-    
+
     MTXTrans(tobj->mtx, trans.x, trans.y, trans.z);
-    HSD_MkRotationMtx(m, &rot);
+    HSD_MkRotationMtx(m, (Vec3*) &rot);
     MTXConcat(m, tobj->mtx, tobj->mtx);
     MTXScale(m, scale.x, scale.y, scale.z);
     MTXConcat(m, tobj->mtx, tobj->mtx);

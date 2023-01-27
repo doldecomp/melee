@@ -456,7 +456,7 @@ lbl_80380BD0:
 /* 80380BE4 0037D7C4  48 00 76 3D */	bl __assert
 lbl_80380BE8:
 /* 80380BE8 0037D7C8  C0 37 00 04 */	lfs f1, 4(r23)
-/* 80380BEC 0037D7CC  4B CA 21 D1 */	bl func_80022DBC
+/* 80380BEC 0037D7CC  4B CA 21 D1 */	bl asinf
 /* 80380BF0 0037D7D0  FC 1F 00 72 */	fmul f0, f31, f1
 /* 80380BF4 0037D7D4  FC 00 00 18 */	frsp f0, f0
 /* 80380BF8 0037D7D8  D0 01 00 30 */	stfs f0, 0x30(r1)
@@ -504,7 +504,7 @@ lbl_80380C78:
 /* 80380C8C 0037D86C  48 00 75 95 */	bl __assert
 lbl_80380C90:
 /* 80380C90 0037D870  C0 37 00 04 */	lfs f1, 4(r23)
-/* 80380C94 0037D874  4B FA 59 15 */	bl func_803265A8
+/* 80380C94 0037D874  4B FA 59 15 */	bl logf
 /* 80380C98 0037D878  D0 21 00 30 */	stfs f1, 0x30(r1)
 /* 80380C9C 0037D87C  80 01 00 30 */	lwz r0, 0x30(r1)
 /* 80380CA0 0037D880  90 17 00 04 */	stw r0, 4(r23)
@@ -518,7 +518,7 @@ lbl_80380CA8:
 /* 80380CBC 0037D89C  48 00 75 65 */	bl __assert
 lbl_80380CC0:
 /* 80380CC0 0037D8A0  C0 37 00 04 */	lfs f1, 4(r23)
-/* 80380CC4 0037D8A4  4B C8 C1 8D */	bl func_8000CE50
+/* 80380CC4 0037D8A4  4B C8 C1 8D */	bl expf
 /* 80380CC8 0037D8A8  D0 21 00 30 */	stfs f1, 0x30(r1)
 /* 80380CCC 0037D8AC  80 01 00 30 */	lwz r0, 0x30(r1)
 /* 80380CD0 0037D8B0  90 17 00 04 */	stw r0, 4(r23)
@@ -894,7 +894,7 @@ lbl_803811D8:
 /* 803811E8 0037DDC8  C0 41 00 2C */	lfs f2, 0x2c(r1)
 /* 803811EC 0037DDCC  7C 77 1B 78 */	mr r23, r3
 /* 803811F0 0037DDD0  C0 23 00 04 */	lfs f1, 4(r3)
-/* 803811F4 0037DDD4  4B C8 BC ED */	bl func_8000CEE0
+/* 803811F4 0037DDD4  4B C8 BC ED */	bl powf
 /* 803811F8 0037DDD8  D0 21 00 30 */	stfs f1, 0x30(r1)
 /* 803811FC 0037DDDC  80 01 00 30 */	lwz r0, 0x30(r1)
 /* 80381200 0037DDE0  90 17 00 04 */	stw r0, 4(r23)
@@ -1612,7 +1612,7 @@ lbl_80381BB0:
 /* 80381BD4 0037E7B4  CB 01 00 70 */	lfd f24, 0x70(r1)
 /* 80381BD8 0037E7B8  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 80381BDC 0037E7BC  7C 08 03 A6 */	mtlr r0
-/* 80381BE0 0037E7C0  4E 80 00 20 */	blr 
+/* 80381BE0 0037E7C0  4E 80 00 20 */	blr
 
 
 .section .data
@@ -1650,31 +1650,31 @@ lbl_804D5F9C:
     .balign 8
 .global lbl_804DE7A0
 lbl_804DE7A0:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE7A8
 lbl_804DE7A8:
-	.4byte 0x3F91DF46
-	.4byte 0xA2529D39
+    .4byte 0x3F91DF46
+    .4byte 0xA2529D39
 .global lbl_804DE7B0
 lbl_804DE7B0:
-	.4byte 0x404CA5DC
-	.4byte 0x1A63C1F8
+    .4byte 0x404CA5DC
+    .4byte 0x1A63C1F8
 .global lbl_804DE7B8
 lbl_804DE7B8:
-	.4byte 0x3FE00000
-	.4byte 0x00000000
+    .4byte 0x3FE00000
+    .4byte 0x00000000
 .global lbl_804DE7C0
 lbl_804DE7C0:
-	.4byte 0x40080000
-	.4byte 0x00000000
+    .4byte 0x40080000
+    .4byte 0x00000000
 .global lbl_804DE7C8
 lbl_804DE7C8:
-	.4byte 0x42B40000
+    .4byte 0x42B40000
 .global lbl_804DE7CC
 lbl_804DE7CC:
-	.4byte 0xC2B40000
+    .4byte 0xC2B40000
 .global lbl_804DE7D0
 lbl_804DE7D0:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000

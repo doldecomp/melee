@@ -102,7 +102,7 @@ lbl_8024A2CC:
 /* 8024A2D8 00246EB8  83 A1 00 4C */	lwz r29, 0x4c(r1)
 /* 8024A2DC 00246EBC  38 21 00 58 */	addi r1, r1, 0x58
 /* 8024A2E0 00246EC0  7C 08 03 A6 */	mtlr r0
-/* 8024A2E4 00246EC4  4E 80 00 20 */	blr 
+/* 8024A2E4 00246EC4  4E 80 00 20 */	blr
 lbl_8024A2E8:
 /* 8024A2E8 00246EC8  7C 08 02 A6 */	mflr r0
 /* 8024A2EC 00246ECC  3C 80 80 3F */	lis r4, lbl_803EEFE4@ha
@@ -127,7 +127,7 @@ lbl_8024A32C:
 /* 8024A334 00246F14  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8024A338 00246F18  38 21 00 20 */	addi r1, r1, 0x20
 /* 8024A33C 00246F1C  7C 08 03 A6 */	mtlr r0
-/* 8024A340 00246F20  4E 80 00 20 */	blr 
+/* 8024A340 00246F20  4E 80 00 20 */	blr
 lbl_8024A344:
 /* 8024A344 00246F24  7C 08 02 A6 */	mflr r0
 /* 8024A348 00246F28  3C 80 80 4A */	lis r4, lbl_804A04F0@ha
@@ -171,7 +171,7 @@ lbl_8024A3D0:
 /* 8024A3D8 00246FB8  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8024A3DC 00246FBC  38 21 00 20 */	addi r1, r1, 0x20
 /* 8024A3E0 00246FC0  7C 08 03 A6 */	mtlr r0
-/* 8024A3E4 00246FC4  4E 80 00 20 */	blr 
+/* 8024A3E4 00246FC4  4E 80 00 20 */	blr
 lbl_8024A3E8:
 /* 8024A3E8 00246FC8  7C 08 02 A6 */	mflr r0
 /* 8024A3EC 00246FCC  3C 80 80 4A */	lis r4, lbl_804A04F0@ha
@@ -227,7 +227,7 @@ lbl_8024A4A4:
 /* 8024A4AC 0024708C  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8024A4B0 00247090  38 21 00 20 */	addi r1, r1, 0x20
 /* 8024A4B4 00247094  7C 08 03 A6 */	mtlr r0
-/* 8024A4B8 00247098  4E 80 00 20 */	blr 
+/* 8024A4B8 00247098  4E 80 00 20 */	blr
 
 .global func_8024A4BC
 func_8024A4BC:
@@ -245,7 +245,7 @@ func_8024A4BC:
 /* 8024A4E8 002470C8  3B A4 EF D8 */	addi r29, r4, lbl_803EEFD8@l
 /* 8024A4EC 002470CC  38 80 00 07 */	li r4, 7
 /* 8024A4F0 002470D0  93 81 00 38 */	stw r28, 0x38(r1)
-/* 8024A4F4 002470D4  48 14 5C FD */	bl func_803901F0
+/* 8024A4F4 002470D4  48 14 5C FD */	bl GObj_Create
 /* 8024A4F8 002470D8  7C 7C 1B 78 */	mr r28, r3
 /* 8024A4FC 002470DC  93 8D B5 98 */	stw r28, lbl_804D6C38@sda21(r13)
 /* 8024A500 002470E0  80 7E 00 00 */	lwz r3, 0(r30)
@@ -362,7 +362,7 @@ lbl_8024A66C:
 /* 8024A6B4 00247294  83 81 00 38 */	lwz r28, 0x38(r1)
 /* 8024A6B8 00247298  38 21 00 48 */	addi r1, r1, 0x48
 /* 8024A6BC 0024729C  7C 08 03 A6 */	mtlr r0
-/* 8024A6C0 002472A0  4E 80 00 20 */	blr 
+/* 8024A6C0 002472A0  4E 80 00 20 */	blr
 
 .global func_8024A6C4
 func_8024A6C4:
@@ -403,7 +403,7 @@ func_8024A6C4:
 /* 8024A74C 0024732C  38 60 00 00 */	li r3, 0
 /* 8024A750 00247330  38 80 00 01 */	li r4, 1
 /* 8024A754 00247334  38 A0 00 80 */	li r5, 0x80
-/* 8024A758 00247338  48 14 5A 99 */	bl func_803901F0
+/* 8024A758 00247338  48 14 5A 99 */	bl GObj_Create
 /* 8024A75C 0024733C  3C 80 80 25 */	lis r4, func_8024A168@ha
 /* 8024A760 00247340  38 84 A1 68 */	addi r4, r4, func_8024A168@l
 /* 8024A764 00247344  38 A0 00 00 */	li r5, 0
@@ -416,7 +416,7 @@ func_8024A6C4:
 /* 8024A780 00247360  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 8024A784 00247364  38 21 00 20 */	addi r1, r1, 0x20
 /* 8024A788 00247368  7C 08 03 A6 */	mtlr r0
-/* 8024A78C 0024736C  4E 80 00 20 */	blr 
+/* 8024A78C 0024736C  4E 80 00 20 */	blr
 
 
 .section .data
@@ -455,44 +455,44 @@ lbl_803EEFF0:
     .balign 8
 .global lbl_804A08B8
 lbl_804A08B8:
-	.skip 0x10
+    .skip 0x10
 
 
 .section .sbss
     .balign 8
 .global lbl_804D6C38
 lbl_804D6C38:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D6C3C
 lbl_804D6C3C:
-	.skip 0x4
+    .skip 0x4
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DC098
 lbl_804DC098:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000
 .global lbl_804DC0A0
 lbl_804DC0A0:
-	.4byte 0xC1180000
+    .4byte 0xC1180000
 .global lbl_804DC0A4
 lbl_804DC0A4:
-	.4byte 0x4111999A
+    .4byte 0x4111999A
 .global lbl_804DC0A8
 lbl_804DC0A8:
-	.4byte 0x41880000
+    .4byte 0x41880000
 .global lbl_804DC0AC
 lbl_804DC0AC:
-	.4byte 0x43B65777
+    .4byte 0x43B65777
 .global lbl_804DC0B0
 lbl_804DC0B0:
-	.4byte 0x42198D06
+    .4byte 0x42198D06
 .global lbl_804DC0B4
 lbl_804DC0B4:
-	.4byte 0x3D5566CF
+    .4byte 0x3D5566CF
 .global lbl_804DC0B8
 lbl_804DC0B8:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000

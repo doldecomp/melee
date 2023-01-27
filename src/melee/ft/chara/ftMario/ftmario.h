@@ -1,19 +1,12 @@
 #ifndef _ftmario_h_
 #define _ftmario_h_
 
-#include <global.h>
-
-#include <dolphin/types.h>
-
-#include <sysdolphin/baselib/gobj.h>
-
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef enum ftMarioAction {
-
-    AS_FTCOMMON = 340,
-    AS_MARIO_UNK1,
+    AS_MARIO_UNK1 = ASID_MAX,
     AS_MARIO_UNK2,
     AS_MARIO_SPECIALN,
     AS_MARIO_SPECIALAIRN,
@@ -23,7 +16,6 @@ typedef enum ftMarioAction {
     AS_MARIO_SPECIALAIRHI,
     AS_MARIO_SPECIALLW,
     AS_MARIO_SPECIALAIRLW,
-
 } ftMarioAction;
 
 // Flags used by Mario & Dr. Mario in Action State Change //
@@ -32,24 +24,31 @@ typedef enum ftMarioAction {
 
 // SpecialS/SpecialAirS (Cape / Super Sheet) //
 
-#define FTMARIO_SPECIALS_COLL_FLAG FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTMARIO_SPECIALS_COLL_FLAG                                             \
+    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE |                \
+        FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
+        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
+        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 // SpecialLw/SpecialAirLw (Mario / Dr. Tornado ) //
 
-#define FTMARIO_SPECIALLW_COLL_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
-
-
+#define FTMARIO_SPECIALLW_COLL_FLAG                                            \
+    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
+        FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE |                        \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
+        FIGHTER_UNK_0x2227
 
 typedef struct _ftMarioAttributes {
-
     // SIDE SPECIAL - CAPE / SUPER SHEET //
 
     /* 0x00 */ u8 x0_padding[0x04 - 0x0];
-	/* 0x04 */ f32 x4_MARIO_CAPE_VEL_X;
-	/* 0x08 */ f32 x8_MARIO_CAPE_VEL_Y;
-	/* 0x0C */ f32 xC_MARIO_CAPE_GRAVITY;
-	/* 0x10 */ f32 x10_MARIO_CAPE_TERMINAL_VELOCITY;
-	/* 0x14 */ s32 x14_MARIO_CAPE_IT_KIND;
+    /* 0x04 */ f32 x4_MARIO_CAPE_VEL_X;
+    /* 0x08 */ f32 x8_MARIO_CAPE_VEL_Y;
+    /* 0x0C */ f32 xC_MARIO_CAPE_GRAVITY;
+    /* 0x10 */ f32 x10_MARIO_CAPE_TERMINAL_VELOCITY;
+    /* 0x14 */ s32 x14_MARIO_CAPE_IT_KIND;
 
     // UP SPECIAL - SUPER JUMP PUNCH //
 
@@ -64,7 +63,8 @@ typedef struct _ftMarioAttributes {
 
     // DOWN SPECIAL - MARIO TORNADO / DR. TORNADO //
 
-    /* 0x38 */ f32 x38_MARIO_TORNADO_GROUND_VEL_Y; // Vertical momentum from inital grounded B-tap
+    /* 0x38 */ f32 x38_MARIO_TORNADO_GROUND_VEL_Y; // Vertical momentum from
+                                                   // inital grounded B-tap
     /* 0x3C */ f32 x3C_MARIO_TORNADO_MOMENTUM_X_GROUND;
     /* 0x40 */ f32 x40_MARIO_TORNADO_MOMENTUM_X_AIR;
     /* 0x44 */ f32 x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND;
@@ -81,8 +81,7 @@ typedef struct _ftMarioAttributes {
 
 } ftMarioAttributes;
 
-typedef struct ftMario_SpecialLw_ECB
-{
+typedef struct ftMario_SpecialLw_ECB {
     u8 x0_str_arr[3];
     u8 x3_balign;
     u32 x4;
@@ -92,28 +91,31 @@ typedef struct ftMario_SpecialLw_ECB
     u32 x14;
 } ftMario_SpecialLw_ECB;
 
-inline ftMarioAttributes* GetMarioAttr(Fighter* fp)
+static inline ftMarioAttributes* GetMarioAttr(Fighter* fp)
 {
     ftMarioAttributes* mario_attr = fp->x2D4_specialAttributes;
     return mario_attr;
 }
 
-//ftmario1
+extern ActionState as_table_mario[];
+extern ActionState lbl_803C7260[];
+
+// ftmario1
 void ftMario_OnDeath(HSD_GObj*);
 void ftMario_OnLoadForDrMario(Fighter*);
 void ftMario_OnLoad(HSD_GObj*);
 void ftMario_OnTakeDamage(HSD_GObj*);
-void ftMario_OnItemPickup(HSD_GObj*, BOOL);
+void ftMario_OnItemPickup(HSD_GObj*, bool);
 void ftMario_OnItemInvisible(HSD_GObj*);
 void ftMario_OnItemVisible(HSD_GObj*);
-void ftMario_OnItemDrop(HSD_GObj*, BOOL);
+void ftMario_OnItemDrop(HSD_GObj*, bool);
 void ftMario_LoadSpecialAttrs(HSD_GObj*);
 void ftMario_OnKnockbackEnter(HSD_GObj*);
 void ftMario_OnKnockbackExit(HSD_GObj*);
-void ftMario_func_800E0CAC(s32, u32*, u32*);
-s32 ftMario_func_800E0CE0(s32 arg0);
+void ftMario_func_800E0CAC(s32, s32*, s32*);
+unk_t ftMario_func_800E0CE0(enum_t arg0);
 
-//ftmario2
+// ftmario2
 int ftMario_SpecialN_VitaminRandom(HSD_GObj*);
 void ftMario_SpecialN_StartAction(HSD_GObj*);
 void ftMario_SpecialN_Anim(HSD_GObj*);
@@ -129,14 +131,14 @@ void ftMario_SpecialAirN_Coll(HSD_GObj*);
 void ftMario_SpecialN_GroundToAir(HSD_GObj*);
 void ftMario_SpecialAirN_AirToGround(HSD_GObj*);
 
-//ftmario3
+// ftmario3
 void ftMario_SpecialS_CreateCape(HSD_GObj*);
 void ftMario_SpecialS_SetNULL(HSD_GObj*);
 void ftMario_SpecialS_RemoveCape(HSD_GObj*);
 void ftMario_SpecialS_EnterHitlag(HSD_GObj*);
 void ftMario_SpecialS_ExitHitlag(HSD_GObj*);
 void ftMario_SpecialS_ExitHitlag(HSD_GObj*);
-BOOL ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj*);
+bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj*);
 void ftMario_SpecialS_StartAction(HSD_GObj*);
 void ftMario_SpecialAirS_StartAction(HSD_GObj*);
 void ftMario_SpecialS_Anim(HSD_GObj*);
@@ -150,7 +152,7 @@ void ftMario_SpecialAirS_Coll(HSD_GObj*);
 void ftMario_SpecialS_GroundToAir(HSD_GObj*);
 void ftMario_SpecialAirS_AirToGround(HSD_GObj*);
 
-//ftmario4
+// ftmario4
 void ftMario_SpecialHi_StartAction(HSD_GObj*);
 void ftMario_SpecialAirHi_StartAction(HSD_GObj*);
 void ftMario_SpecialHi_Anim(HSD_GObj*);
@@ -163,7 +165,7 @@ void ftMario_SpecialHi_CheckLanding(HSD_GObj*);
 void ftMario_SpecialHi_Coll(HSD_GObj*);
 void ftMario_SpecialAirHi_Coll(HSD_GObj*);
 
-//ftmario5
+// ftmario5
 void ftMario_SpecialLw_UpdateRot(HSD_GObj*);
 void ftMario_SpecialLw_StartAction(HSD_GObj*);
 void ftMario_SpecialAirLw_StartAction(HSD_GObj*);

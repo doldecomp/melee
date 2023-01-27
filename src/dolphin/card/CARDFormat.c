@@ -1,9 +1,15 @@
-#include <dolphin/card.h>
+#include <dolphin/card/CARDFormat.h>
 
+#include <dolphin/card.h>
+#include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDCheck.h>
+#include <dolphin/card/CARDRdwr.h>
+#include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSFont.h>
 #include <dolphin/os/OSRtc.h>
+#include <Runtime/__mem.h>
 
-vu16 __VIRegs[59] : 0xCC002000;
+extern vu16 __VIRegs[59] AT_ADDRESS(0xCC002000);
 
 void FormatCallback(s32 chan, s32 result)
 {
@@ -17,23 +23,34 @@ void FormatCallback(s32 chan, s32 result)
 
     ++card->formatStep;
     if (card->formatStep < CARD_NUM_SYSTEM_BLOCK) {
-        result = __CARDEraseSector(chan, (u32) card->sectorSize * card->formatStep, FormatCallback);
-        if (0 <= result) {
+        /// @todo Eliminate cast to #CARDCallback.
+        result =
+            __CARDEraseSector(chan, (u32) card->sectorSize * card->formatStep,
+                              (CARDCallback) FormatCallback);
+
+        if (0 <= result)
             return;
-        }
     } else if (card->formatStep < 2 * CARD_NUM_SYSTEM_BLOCK) {
         int step = card->formatStep - CARD_NUM_SYSTEM_BLOCK;
-        result = __CARDWrite(chan, (u32) card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE,
-                             (u8*) card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step), FormatCallback);
-        if (result >= 0) {
+
+        /// @todo Eliminate cast to #CARDCallback.
+        result = __CARDWrite(
+            chan, (u32) card->sectorSize * step, CARD_SYSTEM_BLOCK_SIZE,
+            (u8*) card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step),
+            (CARDCallback) FormatCallback);
+
+        if (result >= 0)
             return;
-        }
     } else {
-        card->currentDir = (CARDDir*) ((u8*) card->workArea + (1 + 0) * CARD_SYSTEM_BLOCK_SIZE);
-        memcpy(card->currentDir, (u8*) card->workArea + (1 + 1) * CARD_SYSTEM_BLOCK_SIZE,
+        card->currentDir = (CARDDir*) ((u8*) card->workArea +
+                                       (1 + 0) * CARD_SYSTEM_BLOCK_SIZE);
+        memcpy(card->currentDir,
+               (u8*) card->workArea + (1 + 1) * CARD_SYSTEM_BLOCK_SIZE,
                CARD_SYSTEM_BLOCK_SIZE);
-        card->currentFat = (u16*) ((u8*) card->workArea + (3 + 0) * CARD_SYSTEM_BLOCK_SIZE);
-        memcpy(card->currentFat, (u8*) card->workArea + (3 + 1) * CARD_SYSTEM_BLOCK_SIZE,
+        card->currentFat =
+            (u16*) ((u8*) card->workArea + (3 + 0) * CARD_SYSTEM_BLOCK_SIZE);
+        memcpy(card->currentFat,
+               (u8*) card->workArea + (3 + 1) * CARD_SYSTEM_BLOCK_SIZE,
                CARD_SYSTEM_BLOCK_SIZE);
     }
 
@@ -72,7 +89,7 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback)
     sram = __OSLockSram();
     *(u32*) &id->serial[20] = sram->counterBias;
     *(u32*) &id->serial[24] = sram->language;
-    __OSUnlockSram(FALSE);
+    __OSUnlockSram(false);
 
     rand = time = OSGetTime();
 
@@ -82,24 +99,26 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback)
         id->serial[i] = (u8) (sramEx->flashID[chan][i] + rand);
         rand = ((rand * 1103515245 + 12345) >> 16) & 0x7FFF;
     }
-    __OSUnlockSramEx(FALSE);
+    __OSUnlockSramEx(false);
 
     *(u32*) &id->serial[28] = viDTVStatus;
     *(OSTime*) &id->serial[12] = time;
 
     id->deviceID = 0;
     id->size = card->size;
-    __CARDCheckSum(id, sizeof(CARDID) - sizeof(u32), &id->checkSum, &id->checkSumInv);
+    __CARDCheckSum(id, sizeof(CARDID) - sizeof(u32), &id->checkSum,
+                   &id->checkSumInv);
 
     for (i = 0; i < 2; i++) {
         CARDDirCheck* check;
 
-        dir = (CARDDir*) ((u8*) card->workArea + (1 + i) * CARD_SYSTEM_BLOCK_SIZE);
+        dir = (CARDDir*) ((u8*) card->workArea +
+                          (1 + i) * CARD_SYSTEM_BLOCK_SIZE);
         memset(dir, 0xff, CARD_SYSTEM_BLOCK_SIZE);
         check = __CARDGetDirCheck(dir);
         check->checkCode = i;
-        __CARDCheckSum(dir, CARD_SYSTEM_BLOCK_SIZE - sizeof(u32), &check->checkSum,
-                       &check->checkSumInv);
+        __CARDCheckSum(dir, CARD_SYSTEM_BLOCK_SIZE - sizeof(u32),
+                       &check->checkSum, &check->checkSumInv);
     }
     for (i = 0; i < 2; i++) {
         fat = (u16*) ((u8*) card->workArea + (3 + i) * CARD_SYSTEM_BLOCK_SIZE);
@@ -107,18 +126,26 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback)
         fat[CARD_FAT_CHECKCODE] = (u16) i;
         fat[CARD_FAT_FREEBLOCKS] = (u16) (card->cBlock - CARD_NUM_SYSTEM_BLOCK);
         fat[CARD_FAT_LASTSLOT] = CARD_NUM_SYSTEM_BLOCK - 1;
-        __CARDCheckSum(&fat[CARD_FAT_CHECKCODE], CARD_SYSTEM_BLOCK_SIZE - sizeof(u32),
+        __CARDCheckSum(&fat[CARD_FAT_CHECKCODE],
+                       CARD_SYSTEM_BLOCK_SIZE - sizeof(u32),
                        &fat[CARD_FAT_CHECKSUM], &fat[CARD_FAT_CHECKSUMINV]);
     }
 
-    card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
+    /// @todo Eliminate cast to #CARDCallback.
+    card->apiCallback =
+        callback ? callback : (CARDCallback) __CARDDefaultApiCallback;
+
     DCStoreRange(card->workArea, CARD_WORKAREA_SIZE);
 
     card->formatStep = 0;
-    result = __CARDEraseSector(chan, (u32) card->sectorSize * card->formatStep, FormatCallback);
-    if (result < 0) {
+
+    /// @todo Eliminate cast to #CARDCallback.
+    result = __CARDEraseSector(chan, (u32) card->sectorSize * card->formatStep,
+                               (CARDCallback) FormatCallback);
+
+    if (result < 0)
         __CARDPutControlBlock(card, result);
-    }
+
     return result;
 }
 

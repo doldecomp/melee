@@ -1,7 +1,10 @@
-#include <dolphin/pad/pad.h>
+#include <dolphin/pad/Pad.h>
 
 #include <dolphin/os/OSContext.h>
+#include <dolphin/os/OSRtc.h>
 #include <dolphin/os/OSSerial.h>
+#include <MetroTRK/intrinsics.h>
+#include <Runtime/__mem.h>
 
 #define PAD_CHAN0_BIT 0x80000000
 
@@ -15,8 +18,6 @@ extern u32 ResettingBits;
 extern u32 WaitingBits;
 extern u32 CheckingBits;
 extern u32 PendingBits;
-
-void PADTypeAndStatusCallback(s32 chan, u32 type);
 
 static void PADEnable(s32 chan)
 {
@@ -34,7 +35,7 @@ static void PADEnable(s32 chan)
 
 static void PADDisable(s32 chan)
 {
-    BOOL enabled;
+    bool enabled;
     u32 chanBit;
 
     enabled = OSDisableInterrupts();
@@ -101,22 +102,23 @@ void UpdateOrigin(s32 arg0)
     origin->stickY -= 0x80;
     origin->substickX -= 0x80;
     origin->substickY -= 0x80;
-    if ((XPatchBits & bit) && origin->stickX > 0x40 && (SIGetType(arg0) & 0xFFFF0000) == 0x9000000) {
+    if ((XPatchBits & bit) && origin->stickX > 0x40 &&
+        (SIGetType(arg0) & 0xFFFF0000) == 0x9000000)
+    {
         origin->stickX = 0U;
     }
 }
 
 inline void foo(s32 chan)
 {
-    u8 sp1C[0x18];
+    /// @todo @c sp1C is a struct.
+    u32 sp1C[6];
     EnabledBits |= PAD_CHAN0_BIT >> chan;
-    SIGetResponse(chan, sp1C + 0xC);
+    SIGetResponse(chan, sp1C + 3);
     SISetCommand(chan, AnalogMode | 0x400000);
 }
 
-void PADTypeAndStatusCallback(s32 chan, u32 type);
-
-void PADOriginCallback(s32, s32 arg1)
+void PADOriginCallback(s32 unused0, s32 arg1)
 {
     if (!(arg1 & 0xF)) {
         UpdateOrigin(ResettingChan);
@@ -134,25 +136,24 @@ void PADOriginCallback(s32, s32 arg1)
 
 void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context)
 {
-
-    if (!(EnabledBits & (PAD_CHAN0_BIT >> chan))) {
+    if (!(EnabledBits & (PAD_CHAN0_BIT >> chan)))
         return;
-    }
 
-    if (!(error &
-          (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN | SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION))) {
+    if (!(error & (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN |
+                   SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)))
+    {
         UpdateOrigin(chan);
     }
 
-    if (error & SI_ERROR_NO_RESPONSE) {
+    if (error & SI_ERROR_NO_RESPONSE)
         PADDisable(chan);
-    }
 }
 
 void PADProbeCallback(s32 chan, u32 error, OSContext* context)
 {
-    if (!(error &
-          (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN | SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION))) {
+    if (!(error & (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN |
+                   SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)))
+    {
         PADEnable(ResettingChan);
         WaitingBits |= PAD_CHAN0_BIT >> ResettingChan;
     }

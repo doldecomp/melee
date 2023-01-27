@@ -5,7 +5,7 @@
 .global TRKSetBufferUsed
 TRKSetBufferUsed:
 /* 80326C94 00323874  90 83 00 04 */	stw r4, 4(r3)
-/* 80326C98 00323878  4E 80 00 20 */	blr 
+/* 80326C98 00323878  4E 80 00 20 */	blr
 
 .global TRKInitializeMessageBuffers
 TRKInitializeMessageBuffers:
@@ -39,7 +39,7 @@ lbl_80326CC4:
 /* 80326D04 003238E4  38 21 00 10 */	addi r1, r1, 0x10
 /* 80326D08 003238E8  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326D0C 003238EC  7C 08 03 A6 */	mtlr r0
-/* 80326D10 003238F0  4E 80 00 20 */	blr 
+/* 80326D10 003238F0  4E 80 00 20 */	blr
 
 .global TRKGetFreeBuffer
 TRKGetFreeBuffer:
@@ -84,7 +84,7 @@ lbl_80326D90:
 /* 80326DA0 00323980  38 21 00 20 */	addi r1, r1, 0x20
 /* 80326DA4 00323984  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326DA8 00323988  7C 08 03 A6 */	mtlr r0
-/* 80326DAC 0032398C  4E 80 00 20 */	blr 
+/* 80326DAC 0032398C  4E 80 00 20 */	blr
 
 .global TRKGetBuffer
 TRKGetBuffer:
@@ -99,7 +99,7 @@ TRKGetBuffer:
 /* 80326DD0 003239B0  7C 00 22 14 */	add r0, r0, r4
 lbl_80326DD4:
 /* 80326DD4 003239B4  7C 03 03 78 */	mr r3, r0
-/* 80326DD8 003239B8  4E 80 00 20 */	blr 
+/* 80326DD8 003239B8  4E 80 00 20 */	blr
 
 .global TRKReleaseBuffer
 TRKReleaseBuffer:
@@ -129,7 +129,7 @@ lbl_80326E30:
 /* 80326E34 00323A14  38 21 00 10 */	addi r1, r1, 0x10
 /* 80326E38 00323A18  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326E3C 00323A1C  7C 08 03 A6 */	mtlr r0
-/* 80326E40 00323A20  4E 80 00 20 */	blr 
+/* 80326E40 00323A20  4E 80 00 20 */	blr
 
 .global TRKResetBuffer
 TRKResetBuffer:
@@ -149,7 +149,7 @@ lbl_80326E74:
 /* 80326E74 00323A54  38 21 00 08 */	addi r1, r1, 8
 /* 80326E78 00323A58  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326E7C 00323A5C  7C 08 03 A6 */	mtlr r0
-/* 80326E80 00323A60  4E 80 00 20 */	blr 
+/* 80326E80 00323A60  4E 80 00 20 */	blr
 
 .global TRKSetBufferPosition
 TRKSetBufferPosition:
@@ -166,7 +166,7 @@ lbl_80326E98:
 /* 80326EA8 00323A88  90 83 00 08 */	stw r4, 8(r3)
 lbl_80326EAC:
 /* 80326EAC 00323A8C  7C A3 2B 78 */	mr r3, r5
-/* 80326EB0 00323A90  4E 80 00 20 */	blr 
+/* 80326EB0 00323A90  4E 80 00 20 */	blr
 
 .global TRKAppendBuffer
 TRKAppendBuffer:
@@ -215,7 +215,7 @@ lbl_80326F3C:
 /* 80326F48 00323B28  38 21 00 18 */	addi r1, r1, 0x18
 /* 80326F4C 00323B2C  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326F50 00323B30  7C 08 03 A6 */	mtlr r0
-/* 80326F54 00323B34  4E 80 00 20 */	blr 
+/* 80326F54 00323B34  4E 80 00 20 */	blr
 
 .global TRKReadBuffer
 TRKReadBuffer:
@@ -256,7 +256,7 @@ lbl_80326FC8:
 /* 80326FD4 00323BB4  38 21 00 18 */	addi r1, r1, 0x18
 /* 80326FD8 00323BB8  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326FDC 00323BBC  7C 08 03 A6 */	mtlr r0
-/* 80326FE0 00323BC0  4E 80 00 20 */	blr 
+/* 80326FE0 00323BC0  4E 80 00 20 */	blr
 
 .global TRKAppendBuffer1_ui16
 TRKAppendBuffer1_ui16:
@@ -282,7 +282,7 @@ lbl_80327020:
 /* 80327028 00323C08  38 21 00 10 */	addi r1, r1, 0x10
 /* 8032702C 00323C0C  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327030 00323C10  7C 08 03 A6 */	mtlr r0
-/* 80327034 00323C14  4E 80 00 20 */	blr 
+/* 80327034 00323C14  4E 80 00 20 */	blr
 
 .global TRKAppendBuffer1_ui32
 TRKAppendBuffer1_ui32:
@@ -312,7 +312,7 @@ lbl_80327084:
 /* 8032708C 00323C6C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80327090 00323C70  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327094 00323C74  7C 08 03 A6 */	mtlr r0
-/* 80327098 00323C78  4E 80 00 20 */	blr 
+/* 80327098 00323C78  4E 80 00 20 */	blr
 
 .global TRKAppendBuffer1_ui64
 TRKAppendBuffer1_ui64:
@@ -351,7 +351,7 @@ lbl_8032710C:
 /* 80327114 00323CF4  38 21 00 18 */	addi r1, r1, 0x18
 /* 80327118 00323CF8  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032711C 00323CFC  7C 08 03 A6 */	mtlr r0
-/* 80327120 00323D00  4E 80 00 20 */	blr 
+/* 80327120 00323D00  4E 80 00 20 */	blr
 
 .global TRKAppendBuffer_ui8
 TRKAppendBuffer_ui8:
@@ -385,7 +385,7 @@ lbl_80327174:
 /* 80327180 00323D60  41 80 FF B0 */	blt lbl_80327130
 lbl_80327184:
 /* 80327184 00323D64  7C 03 03 78 */	mr r3, r0
-/* 80327188 00323D68  4E 80 00 20 */	blr 
+/* 80327188 00323D68  4E 80 00 20 */	blr
 
 .global TRKAppendBuffer_ui32
 TRKAppendBuffer_ui32:
@@ -422,7 +422,7 @@ lbl_803271E8:
 /* 803271F8 00323DD8  38 21 00 18 */	addi r1, r1, 0x18
 /* 803271FC 00323DDC  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327200 00323DE0  7C 08 03 A6 */	mtlr r0
-/* 80327204 00323DE4  4E 80 00 20 */	blr 
+/* 80327204 00323DE4  4E 80 00 20 */	blr
 
 .global TRKReadBuffer1_ui8
 TRKReadBuffer1_ui8:
@@ -434,7 +434,7 @@ TRKReadBuffer1_ui8:
 /* 8032721C 00323DFC  38 21 00 08 */	addi r1, r1, 8
 /* 80327220 00323E00  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327224 00323E04  7C 08 03 A6 */	mtlr r0
-/* 80327228 00323E08  4E 80 00 20 */	blr 
+/* 80327228 00323E08  4E 80 00 20 */	blr
 
 .global TRKReadBuffer1_ui16
 TRKReadBuffer1_ui16:
@@ -472,7 +472,7 @@ lbl_80327294:
 /* 8032729C 00323E7C  38 21 00 18 */	addi r1, r1, 0x18
 /* 803272A0 00323E80  80 01 00 04 */	lwz r0, 4(r1)
 /* 803272A4 00323E84  7C 08 03 A6 */	mtlr r0
-/* 803272A8 00323E88  4E 80 00 20 */	blr 
+/* 803272A8 00323E88  4E 80 00 20 */	blr
 
 .global TRKReadBuffer1_ui32
 TRKReadBuffer1_ui32:
@@ -514,7 +514,7 @@ lbl_80327324:
 /* 8032732C 00323F0C  38 21 00 18 */	addi r1, r1, 0x18
 /* 80327330 00323F10  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327334 00323F14  7C 08 03 A6 */	mtlr r0
-/* 80327338 00323F18  4E 80 00 20 */	blr 
+/* 80327338 00323F18  4E 80 00 20 */	blr
 
 .global TRKReadBuffer1_ui64
 TRKReadBuffer1_ui64:
@@ -564,7 +564,7 @@ lbl_803273D4:
 /* 803273DC 00323FBC  38 21 00 18 */	addi r1, r1, 0x18
 /* 803273E0 00323FC0  80 01 00 04 */	lwz r0, 4(r1)
 /* 803273E4 00323FC4  7C 08 03 A6 */	mtlr r0
-/* 803273E8 00323FC8  4E 80 00 20 */	blr 
+/* 803273E8 00323FC8  4E 80 00 20 */	blr
 
 .global TRKReadBuffer_ui8
 TRKReadBuffer_ui8:
@@ -599,7 +599,7 @@ lbl_80327440:
 /* 80327450 00324030  38 21 00 18 */	addi r1, r1, 0x18
 /* 80327454 00324034  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327458 00324038  7C 08 03 A6 */	mtlr r0
-/* 8032745C 0032403C  4E 80 00 20 */	blr 
+/* 8032745C 0032403C  4E 80 00 20 */	blr
 
 .global TRKReadBuffer_ui32
 TRKReadBuffer_ui32:
@@ -636,4 +636,4 @@ lbl_803274BC:
 /* 803274CC 003240AC  38 21 00 18 */	addi r1, r1, 0x18
 /* 803274D0 003240B0  80 01 00 04 */	lwz r0, 4(r1)
 /* 803274D4 003240B4  7C 08 03 A6 */	mtlr r0
-/* 803274D8 003240B8  4E 80 00 20 */	blr 
+/* 803274D8 003240B8  4E 80 00 20 */	blr

@@ -1,24 +1,29 @@
 #include <sysdolphin/baselib/displayfunc.h>
 
+#include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXTransform.h>
+#include <sysdolphin/baselib/state.h>
+#include <sysdolphin/baselib/tev.h>
+
 typedef struct _HSD_ZList {
-  Mtx pmtx;
-  MtxPtr vmtx;
-  HSD_JObj* jobj;
-  u32 rendermode;
+    Mtx pmtx;
+    MtxPtr vmtx;
+    HSD_JObj* jobj;
+    u32 rendermode;
 
-  struct {
-    struct _HSD_ZList *texedge;
-    struct _HSD_ZList *xlu;
-  } sort;
+    struct {
+        struct _HSD_ZList* texedge;
+        struct _HSD_ZList* xlu;
+    } sort;
 
-  struct _HSD_ZList *next;
+    struct _HSD_ZList* next;
 } HSD_ZList;
 
 HSD_ObjAllocData zlist_alloc_data;
 
 void HSD_ZListInitAllocData(void)
 {
-  HSD_ObjAllocInit(&zlist_alloc_data, sizeof(HSD_ZList), 4);
+    HSD_ObjAllocInit(&zlist_alloc_data, sizeof(HSD_ZList), 4);
 }
 
 void HSD_StateInitDirect(int vtxfmt, u32 param_2)

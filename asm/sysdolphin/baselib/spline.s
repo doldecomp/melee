@@ -27,7 +27,7 @@ splGetHelmite:
 /* 80378A84 00375664  EC 03 00 7A */	fmadds f0, f3, f1, f0
 /* 80378A88 00375668  EC 05 00 BA */	fmadds f0, f5, f2, f0
 /* 80378A8C 0037566C  EC 26 02 7A */	fmadds f1, f6, f9, f0
-/* 80378A90 00375670  4E 80 00 20 */	blr 
+/* 80378A90 00375670  4E 80 00 20 */	blr
 
 .global splGetSplinePoint
 splGetSplinePoint:
@@ -340,7 +340,7 @@ lbl_80378F04:
 /* 80378F2C 00375B0C  90 03 00 08 */	stw r0, 8(r3)
 lbl_80378F30:
 /* 80378F30 00375B10  38 21 00 58 */	addi r1, r1, 0x58
-/* 80378F34 00375B14  4E 80 00 20 */	blr 
+/* 80378F34 00375B14  4E 80 00 20 */	blr
 
 .global splArcLengthGetParameter
 splArcLengthGetParameter:
@@ -590,7 +590,7 @@ lbl_80379270:
 /* 803792B8 00375E98  C9 E1 00 58 */	lfd f15, 0x58(r1)
 /* 803792BC 00375E9C  38 21 00 E0 */	addi r1, r1, 0xe0
 /* 803792C0 00375EA0  7C 08 03 A6 */	mtlr r0
-/* 803792C4 00375EA4  4E 80 00 20 */	blr 
+/* 803792C4 00375EA4  4E 80 00 20 */	blr
 
 .global splArcLengthPoint
 splArcLengthPoint:
@@ -611,46 +611,46 @@ splArcLengthPoint:
 /* 80379300 00375EE0  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 80379304 00375EE4  38 21 00 20 */	addi r1, r1, 0x20
 /* 80379308 00375EE8  7C 08 03 A6 */	mtlr r0
-/* 8037930C 00375EEC  4E 80 00 20 */	blr 
+/* 8037930C 00375EEC  4E 80 00 20 */	blr
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DE620
 lbl_804DE620:
-	.4byte 0x40000000
+    .4byte 0x40000000
 .global lbl_804DE624
 lbl_804DE624:
-	.4byte 0x40400000
+    .4byte 0x40400000
 .global lbl_804DE628
 lbl_804DE628:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DE62C
 lbl_804DE62C:
-	.4byte 0x3E2AAAAB
+    .4byte 0x3E2AAAAB
 .global lbl_804DE630
 lbl_804DE630:
-	.4byte 0x40800000
+    .4byte 0x40800000
 .global lbl_804DE634
 lbl_804DE634:
-	.4byte 0x40C00000
+    .4byte 0x40C00000
 .global lbl_804DE638
 lbl_804DE638:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE640
 lbl_804DE640:
-	.4byte 0x43300000
-	.4byte 0x80000000
+    .4byte 0x43300000
+    .4byte 0x80000000
 .global lbl_804DE648
 lbl_804DE648:
-	.4byte 0xBA83126F
+    .4byte 0xBA83126F
 .global lbl_804DE64C
 lbl_804DE64C:
-	.4byte 0x3E000000
+    .4byte 0x3E000000
 .global lbl_804DE650
 lbl_804DE650:
-	.4byte 0x3F000000
+    .4byte 0x3F000000
 .global lbl_804DE654
 lbl_804DE654:
-	.4byte 0x3727C5AC
+    .4byte 0x3727C5AC
