@@ -2742,10 +2742,12 @@ void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* fighter_gobj)
     fp->x2219_flag.bits.b5 = 1;
 
     if (fp->x1A5C && !fp->x2219_flag.bits.b7) {
-        HSD_GObj* newgobj = fighter_gobj;
-        setBit(newgobj =
-                   fp->x1A5C); // wat. i dont understand whats going on here.
-        Fighter_UnkRecursiveFunc_8006D044(newgobj);
+        HSD_GObj* new_gobj = fighter_gobj;
+
+        // @todo What is going on here?
+        setBit(new_gobj = fp->x1A5C);
+
+        Fighter_UnkRecursiveFunc_8006D044(new_gobj);
     }
 }
 
