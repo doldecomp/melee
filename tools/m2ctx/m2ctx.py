@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import argparse
 import os
 import subprocess
 import sys
@@ -8,6 +7,10 @@ from pathlib import Path
 
 here = Path(__file__).parent
 root = (here / '../../').resolve()
+src = root / 'src'
+build = root / 'build'
+header_path = build / 'ctx.h'
+source_path = build / 'ctx.c'
 mwcc_command = root / "tools/mwcc_compiler/1.2.5e/mwcceppc.exe"
 
 MWCC_FLAGS = [
@@ -26,8 +29,14 @@ MWCC_FLAGS = [
 ]
 
 
+def write_header(path: Path):
+    files = sorted({f'#include <{file.relative_to(src)}>'
+                    for file in src.rglob("*.h")})
+    with open(path, 'w') as f:
+        f.write('\n'.join(files))
+
+
 def import_c_file(in_file: Path) -> str:
-    in_file = root / in_file
     c_command = [str(mwcc_command), *MWCC_FLAGS, "-E", str(in_file)]
 
     if sys.platform != "win32":
@@ -53,18 +62,54 @@ def import_c_file(in_file: Path) -> str:
 
 
 def main():
+    import argparse
+
     parser = argparse.ArgumentParser(
-        description="""Create a context file which can be used for mips_to_c"""
-    )
-    parser.add_argument(
-        "c_file",
-        help="""File from which to create context""",
-    )
+        description="""Create a context file which can be used for mips_to_c""")
+
+    parser.add_argument("-q", "--quiet", action="store_true",
+                        help="do not print the output")
+    parser.add_argument("-n", "--no-file", action="store_true",
+                        help=f"do not write {source_path.relative_to(root)}")
+    parser.add_argument("-x", "--clipboard", action="store_true",
+                        help="copy the output to the clipboard (requires pyperclip)")
+    parser.add_argument("-c", "--colorize", action="store_true",
+                        help="colorize the output (requires pygments)")
+    parser.add_argument("-f", "--format", action="store_true",
+                        help="colorize the output (requires clang-format)")
     args = parser.parse_args()
 
-    output = import_c_file(args.c_file)
 
-    print(output)
+    write_header(header_path)
+    output = import_c_file(header_path)
+
+    if args.format:
+        try:
+            output = subprocess.check_output(['clang-format'], cwd=root,
+                                             input=output, encoding="utf8")
+        except subprocess.CalledProcessError as err:
+            print(f'Failed to format the output:\n{err.output}',
+                  file=sys.stderr)
+
+    output = output.strip()
+
+    if not args.no_file:
+        with open(source_path, 'w') as f:
+            f.write(output)
+
+    if args.clipboard:
+        import pyperclip
+        pyperclip.copy(output)
+
+    if not args.quiet:
+        if args.colorize:
+            from pygments import highlight
+            from pygments.lexers import CLexer
+            from pygments.formatters import TerminalFormatter
+            output = highlight(output, CLexer(), TerminalFormatter())
+
+        print(output)
+
 
 if __name__ == "__main__":
     main()
