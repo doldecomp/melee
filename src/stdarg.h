@@ -3,7 +3,7 @@
 
 #include <placeholder.h>
 
-#if defined(__MWERKS__)
+#ifdef __MWERKS__
 typedef struct {
     char gpr;
     char fpr;
