@@ -2,56 +2,55 @@
 
 import argparse
 import os
-import sys
 import subprocess
-import tempfile
+import sys
+from pathlib import Path
 
-script_dir = os.path.dirname(os.path.realpath(__file__))
-root_dir = os.path.abspath(os.path.join(script_dir, ".."))
-src_dir = root_dir + "src/"
+here = Path(__file__).parent
+root = (here / '../../').resolve()
+mwcc_command = root / "tools/mwcc_compiler/1.2.5e/mwcceppc.exe"
 
-# Project-specific
-CPP_FLAGS = [
-    "-Iinclude",
-    "-Isrc",
-    "-Iver/current/build/include",
-    "-D_LANGUAGE_C",
-    "-DF3DEX_GBI_2",
-    "-D_MIPS_SZLONG=32",
-    "-DSCRIPT(...)={}",
-    "-D__attribute__(...)=",
-    "-D__asm__(...)=",
-    "-ffreestanding",
+MWCC_FLAGS = [
+    "-EP",
+    "-Cpp_exceptions", "off",
+    "-proc", "gekko",
+    "-fp", "hard",
+    "-fp_contract", "on",
+    "-O4,p",
+    "-enum", "int",
+    "-nodefaults",
+    "-inline", "auto", "-I-",
+    "-i", "src/MSL",
+    "-i", "src",
     "-DM2CTX",
 ]
 
-def import_c_file(in_file) -> str:
-    in_file = os.path.relpath(in_file, root_dir)
-    cpp_command = ["gcc", "-E", "-P", "-dM", *CPP_FLAGS, in_file]
-    cpp_command2 = ["gcc", "-E", "-P", *CPP_FLAGS, in_file]
 
-    with tempfile.NamedTemporaryFile(suffix=".c") as tmp:
-        stock_macros = subprocess.check_output(["gcc", "-E", "-P", "-dM", tmp.name], cwd=root_dir, encoding="utf-8")
+def import_c_file(in_file: Path) -> str:
+    in_file = root / in_file
+    c_command = [str(mwcc_command), *MWCC_FLAGS, "-E", str(in_file)]
 
-    out_text = ""
+    if sys.platform != "win32":
+        wine = os.environ.get("WINE", "wine")
+        c_command = [wine] + c_command
+
     try:
-        out_text += subprocess.check_output(cpp_command, cwd=root_dir, encoding="utf-8")
-        out_text += subprocess.check_output(cpp_command2, cwd=root_dir, encoding="utf-8")
-    except subprocess.CalledProcessError:
+        out_text = subprocess.check_output(c_command, cwd=root, encoding="utf8")
+    except subprocess.CalledProcessError as err:
         print(
             "Failed to preprocess input file, when running command:\n"
-            + ' '.join(cpp_command),
+            + ' '.join(c_command)
+            + f'\n\n{err.output}',
             file=sys.stderr,
-            )
+        )
         sys.exit(1)
 
     if not out_text:
         print("Output is empty - aborting")
         sys.exit(1)
 
-    for line in stock_macros.strip().splitlines():
-        out_text = out_text.replace(line + "\n", "")
     return out_text
+
 
 def main():
     parser = argparse.ArgumentParser(
@@ -65,9 +64,7 @@ def main():
 
     output = import_c_file(args.c_file)
 
-    with open(os.path.join(root_dir, "ctx.c"), "w", encoding="UTF-8") as f:
-        f.write(output)
-
+    print(output)
 
 if __name__ == "__main__":
     main()
