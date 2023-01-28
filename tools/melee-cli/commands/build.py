@@ -165,7 +165,7 @@ def attach_subparser(subparsers):
         "-r",
         "--rebuild",
         type=str,
-        help="rebuild: delete *.o files matching the given pattern;"
+        help="delete *.o files matching the given pattern;"
         " -c takes priority",
     )
     parser_build.add_argument(
