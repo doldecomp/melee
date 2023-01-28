@@ -1,0 +1,1 @@
+--context orig.c --globals=all --target ppc-mwcc-c

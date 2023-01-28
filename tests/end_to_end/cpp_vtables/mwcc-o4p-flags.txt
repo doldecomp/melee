@@ -1,0 +1,1 @@
+--target ppc-mwcc-c++ --function compute__FR7Derivedi --function method__4BaseFi --function static_method__4BaseFi --function virtual_method__7DerivedFi --function __ct__7DerivedFi --function __ct__4BaseFv
