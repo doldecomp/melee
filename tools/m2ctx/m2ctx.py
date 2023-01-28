@@ -12,6 +12,8 @@ src = root / 'src'
 build = root / 'build'
 header_path = build / 'ctx.h'
 source_path = build / 'ctx.c'
+render_path = build / 'ctx.html'
+template_path = here / '../ctx_template.html'
 mwcc_command = root / "tools/mwcc_compiler/1.2.5e/mwcceppc.exe"
 
 MWCC_FLAGS = [
@@ -95,6 +97,8 @@ def main():
                         help="colorize the output (requires clang-format)")
     parser.add_argument("-p", "--preprocessor", action="store_true",
                         help="preserve preprocessor directives (requires pcpp)")
+    parser.add_argument("-r", "--render", action="store_true",
+                        help="render the context to html")
     args = parser.parse_args()
 
 
@@ -122,6 +126,11 @@ def main():
     if args.clipboard:
         import pyperclip
         pyperclip.copy(output)
+
+    if args.render:
+        template = template_path.read_text()
+        html = template.format(ctx=output)
+        render_path.write_text(html)
 
     if not args.quiet:
         if args.colorize:
