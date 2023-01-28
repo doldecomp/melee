@@ -102,6 +102,7 @@ def main():
     write_header(header_path)
 
     if args.preprocessor:
+        import pcpp
         output = pcpp_import(header_path)
     else:
         output = mwcc_import(header_path)
