@@ -1,0 +1,1 @@
+--no-ifs --void --target ppc-mwcc-c

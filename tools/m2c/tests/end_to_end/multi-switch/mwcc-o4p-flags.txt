@@ -1,0 +1,1 @@
+--comment-style=oneline --comment-column=0 --zfill-constants --target ppc-mwcc-c
