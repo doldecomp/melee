@@ -2,21 +2,14 @@ import argparse
 import sys
 from typing import Any
 
-
-def build(args):
-    print(args)
+from commands import build
 
 
 def parse_args(args: list[str]) -> Any:
 
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
-
-    parser_build = subparsers.add_parser(
-        "build", aliases=["b"], help="Build the project"
-    )
-
-    parser_build.set_defaults(func=build)
+    build.attach_subparser(subparsers)
 
     return parser.parse_args(args)
 
