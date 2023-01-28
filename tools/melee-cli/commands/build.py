@@ -77,8 +77,11 @@ def run(args):
         print("Cleaning.")
         run_proc_logged(make_cmd, "clean")
     elif args.rebuild:
-        print(f'Removing files matching pattern "{args.rebuild}".')
+        print(f'Removing object files matching pattern "{args.rebuild}".')
         for file in build_path.rglob(args.rebuild):
+            if file.suffix != ".o":
+                continue
+
             print(f"Removing {file.relative_to(build_path)}")
             if file.is_dir():
                 file.rmdir()
