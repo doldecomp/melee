@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # PYTHON_ARGCOMPLETE_OK
 import argparse
+import enum
 import sys
 from typing import (
     Any,
@@ -26,6 +27,14 @@ def fail(msg: str) -> NoReturn:
 
 def static_assert_unreachable(x: NoReturn) -> NoReturn:
     raise Exception("Unreachable! " + repr(x))
+
+
+class DiffMode(enum.Enum):
+    SINGLE = "single"
+    SINGLE_BASE = "single_base"
+    NORMAL = "normal"
+    THREEWAY_PREV = "3prev"
+    THREEWAY_BASE = "3base"
 
 
 # ==== COMMAND-LINE ====
@@ -229,6 +238,13 @@ if __name__ == "__main__":
         help="Don't visualize branches/branch targets.",
     )
     parser.add_argument(
+        "-R",
+        "--no-show-rodata-refs",
+        dest="show_rodata_refs",
+        action="store_false",
+        help="Don't show .rodata -> .text references (typically from jump tables).",
+    )
+    parser.add_argument(
         "-S",
         "--base-shift",
         dest="base_shift",
@@ -249,20 +265,36 @@ if __name__ == "__main__":
         Recommended in combination with -m.""",
     )
     parser.add_argument(
+        "-0",
+        "--diff_mode=single_base",
+        dest="diff_mode",
+        action="store_const",
+        const=DiffMode.SINGLE_BASE,
+        help="""View the base asm only (not a diff).""",
+    )
+    parser.add_argument(
+        "-1",
+        "--diff_mode=single",
+        dest="diff_mode",
+        action="store_const",
+        const=DiffMode.SINGLE,
+        help="""View the current asm only (not a diff).""",
+    )
+    parser.add_argument(
         "-3",
         "--threeway=prev",
-        dest="threeway",
+        dest="diff_mode",
         action="store_const",
-        const="prev",
+        const=DiffMode.THREEWAY_PREV,
         help="""Show a three-way diff between target asm, current asm, and asm
         prior to -w rebuild. Requires -w.""",
     )
     parser.add_argument(
         "-b",
         "--threeway=base",
-        dest="threeway",
+        dest="diff_mode",
         action="store_const",
-        const="base",
+        const=DiffMode.THREEWAY_BASE,
         help="""Show a three-way diff between target asm, current asm, and asm
         when diff.py was started. Requires -w.""",
     )
@@ -340,7 +372,6 @@ import ast
 from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass, field, replace
 import difflib
-import enum
 import html
 import itertools
 import json
@@ -357,7 +388,7 @@ import traceback
 
 MISSING_PREREQUISITES = (
     "Missing prerequisite python module {}. "
-    "Run `python3 -m pip install --user colorama watchdog python-Levenshtein cxxfilt` to install prerequisites (cxxfilt only needed with --source)."
+    "Run `python3 -m pip install --user colorama watchdog levenshtein cxxfilt` to install prerequisites (cxxfilt only needed with --source)."
 )
 
 try:
@@ -378,7 +409,6 @@ class ProjectSettings:
     map_format: str
     build_dir: str
     ms_map_address_offset: int
-    ms_ignore_missing_objfile: int
     baseimg: Optional[str]
     myimg: Optional[str]
     mapfile: Optional[str]
@@ -387,6 +417,7 @@ class ProjectSettings:
     show_line_numbers_default: bool
     disassemble_all: bool
     reg_categories: Dict[str, int]
+    expected_dir: str
 
 
 @dataclass
@@ -411,10 +442,11 @@ class Config:
 
     # Display options
     formatter: "Formatter"
-    threeway: Optional[str]
+    diff_mode: DiffMode
     base_shift: int
     skip_lines: int
     compress: Optional[Compress]
+    show_rodata_refs: bool
     show_branches: bool
     show_line_numbers: bool
     show_source: bool
@@ -448,9 +480,9 @@ def create_project_settings(settings: Dict[str, Any]) -> ProjectSettings:
         ),
         objdump_executable=get_objdump_executable(settings.get("objdump_executable")),
         objdump_flags=settings.get("objdump_flags", []),
+        expected_dir=settings.get("expected_dir", "expected/"),
         map_format=settings.get("map_format", "gnu"),
         ms_map_address_offset=settings.get("ms_map_address_offset", 0),
-        ms_ignore_missing_objfile=settings.get("ms_ignore_missing_objfile", True),
         build_dir=settings.get("build_dir", settings.get("mw_build_dir", "build/")),
         show_line_numbers_default=settings.get("show_line_numbers_default", True),
         disassemble_all=settings.get("disassemble_all", False),
@@ -500,12 +532,13 @@ def create_config(args: argparse.Namespace, project: ProjectSettings) -> Config:
         max_function_size_bytes=args.max_lines * 4,
         # Display options
         formatter=formatter,
-        threeway=args.threeway,
+        diff_mode=args.diff_mode or DiffMode.NORMAL,
         base_shift=eval_int(
             args.base_shift, "Failed to parse --base-shift (-S) argument as an integer."
         ),
         skip_lines=args.skip_lines,
         compress=compress,
+        show_rodata_refs=args.show_rodata_refs,
         show_branches=args.show_branches,
         show_line_numbers=show_line_numbers,
         show_source=args.show_source or args.source_old_binutils,
@@ -671,11 +704,19 @@ class Text:
 
 
 @dataclass
-class TableMetadata:
+class TableLine:
+    key: Optional[str]
+    is_data_ref: bool
+    cells: Tuple[Tuple[Text, Optional["Line"]], ...]
+
+
+@dataclass
+class TableData:
     headers: Tuple[Text, ...]
     current_score: int
     max_score: int
     previous_score: Optional[int]
+    lines: List[TableLine]
 
 
 class Formatter(abc.ABC):
@@ -685,7 +726,7 @@ class Formatter(abc.ABC):
         ...
 
     @abc.abstractmethod
-    def table(self, meta: TableMetadata, lines: List[Tuple["OutputLine", ...]]) -> str:
+    def table(self, data: TableData) -> str:
         """Format a multi-column table with metadata"""
         ...
 
@@ -693,8 +734,8 @@ class Formatter(abc.ABC):
         return "".join(self.apply_format(chunk, f) for chunk, f in text.segments)
 
     @staticmethod
-    def outputline_texts(lines: Tuple["OutputLine", ...]) -> Tuple[Text, ...]:
-        return tuple([lines[0].base or Text()] + [line.fmt2 for line in lines[1:]])
+    def outputline_texts(line: TableLine) -> Tuple[Text, ...]:
+        return tuple(cell[0] for cell in line.cells)
 
 
 @dataclass
@@ -704,8 +745,8 @@ class PlainFormatter(Formatter):
     def apply_format(self, chunk: str, f: Format) -> str:
         return chunk
 
-    def table(self, meta: TableMetadata, lines: List[Tuple["OutputLine", ...]]) -> str:
-        rows = [meta.headers] + [self.outputline_texts(ls) for ls in lines]
+    def table(self, data: TableData) -> str:
+        rows = [data.headers] + [self.outputline_texts(line) for line in data.lines]
         return "\n".join(
             "".join(self.apply(x.ljust(self.column_width)) for x in row) for row in rows
         )
@@ -772,9 +813,13 @@ class AnsiFormatter(Formatter):
             static_assert_unreachable(f)
         return f"{ansi_code}{chunk}{undo_ansi_code}"
 
-    def table(self, meta: TableMetadata, lines: List[Tuple["OutputLine", ...]]) -> str:
-        rows = [(meta.headers, False)] + [
-            (self.outputline_texts(line), line[1].is_data_ref) for line in lines
+    def table(self, data: TableData) -> str:
+        rows = [(data.headers, False)] + [
+            (
+                self.outputline_texts(line),
+                line.is_data_ref,
+            )
+            for line in data.lines
         ]
         return "\n".join(
             "".join(
@@ -806,7 +851,7 @@ class HtmlFormatter(Formatter):
             static_assert_unreachable(f)
         return f"<span class='{class_name}' {data_attr}>{chunk}</span>"
 
-    def table(self, meta: TableMetadata, lines: List[Tuple["OutputLine", ...]]) -> str:
+    def table(self, data: TableData) -> str:
         def table_row(line: Tuple[Text, ...], is_data_ref: bool, cell_el: str) -> str:
             tr_attrs = " class='data-ref'" if is_data_ref else ""
             output_row = f"    <tr{tr_attrs}>"
@@ -818,12 +863,12 @@ class HtmlFormatter(Formatter):
 
         output = "<table class='diff'>\n"
         output += "  <thead>\n"
-        output += table_row(meta.headers, False, "th")
+        output += table_row(data.headers, False, "th")
         output += "  </thead>\n"
         output += "  <tbody>\n"
         output += "".join(
-            table_row(self.outputline_texts(line), line[1].is_data_ref, "td")
-            for line in lines
+            table_row(self.outputline_texts(line), line.is_data_ref, "td")
+            for line in data.lines
         )
         output += "  </tbody>\n"
         output += "</table>\n"
@@ -838,7 +883,7 @@ class JsonFormatter(Formatter):
         # This method is unused by this formatter
         return NotImplemented
 
-    def table(self, meta: TableMetadata, rows: List[Tuple["OutputLine", ...]]) -> str:
+    def table(self, data: TableData) -> str:
         def serialize_format(s: str, f: Format) -> Dict[str, Any]:
             if f == BasicFormat.NONE:
                 return {"text": s}
@@ -856,29 +901,25 @@ class JsonFormatter(Formatter):
                 return []
             return [serialize_format(s, f) for s, f in text.segments]
 
-        is_threeway = len(meta.headers) == 3
-
         output: Dict[str, Any] = {}
         output["arch_str"] = self.arch_str
         output["header"] = {
             name: serialize(h)
-            for h, name in zip(meta.headers, ("base", "current", "previous"))
+            for h, name in zip(data.headers, ("base", "current", "previous"))
         }
-        output["current_score"] = meta.current_score
-        output["max_score"] = meta.max_score
-        if meta.previous_score is not None:
-            output["previous_score"] = meta.previous_score
+        output["current_score"] = data.current_score
+        output["max_score"] = data.max_score
+        if data.previous_score is not None:
+            output["previous_score"] = data.previous_score
         output_rows: List[Dict[str, Any]] = []
-        for row in rows:
+        for row in data.lines:
             output_row: Dict[str, Any] = {}
-            output_row["key"] = row[0].key2
-            output_row["is_data_ref"] = row[1].is_data_ref
-            iters = [
-                ("base", row[0].base, row[0].line1),
-                ("current", row[1].fmt2, row[1].line2),
+            output_row["key"] = row.key
+            output_row["is_data_ref"] = row.is_data_ref
+            iters: List[Tuple[str, Text, Optional[Line]]] = [
+                (label, *cell)
+                for label, cell in zip(("base", "current", "previous"), row.cells)
             ]
-            if is_threeway:
-                iters.append(("previous", row[2].fmt2, row[2].line2))
             if all(line is None for _, _, line in iters):
                 # Skip rows that were only for displaying source code
                 continue
@@ -1068,7 +1109,7 @@ def preprocess_objdump_out(
             out = out[out.find("\n") + 1 :]
         out = out.rstrip("\n")
 
-    if obj_data:
+    if obj_data and config.show_rodata_refs:
         out = (
             serialize_rodata_references(parse_elf_rodata_references(obj_data, config))
             + out
@@ -1097,7 +1138,7 @@ def search_build_objects(objname: str, project: ProjectSettings) -> Optional[str
 
 
 def search_map_file(
-    fn_name: str, project: ProjectSettings, config: Config
+    fn_name: str, project: ProjectSettings, config: Config, *, for_binary: bool
 ) -> Tuple[Optional[str], Optional[int]]:
     if not project.mapfile:
         fail(f"No map file configured; cannot find function {fn_name}.")
@@ -1109,6 +1150,12 @@ def search_map_file(
         fail(f"Failed to open map file {project.mapfile} for reading.")
 
     if project.map_format == "gnu":
+        if for_binary and "load address" not in contents:
+            fail(
+                'Failed to find "load address" in map file. Maybe you need to add\n'
+                '"export LANG := C" to your Makefile to avoid localized output?'
+            )
+
         lines = contents.split("\n")
 
         try:
@@ -1126,8 +1173,10 @@ def search_map_file(
                     ram_to_rom = rom - ram
                 if line.endswith(" " + fn_name) or f" {fn_name} = 0x" in line:
                     ram = int(line.split()[0], 0)
-                    if cur_objfile is not None and ram_to_rom is not None:
-                        cands.append((cur_objfile, ram + ram_to_rom))
+                    if (for_binary and ram_to_rom is not None) or (
+                        not for_binary and cur_objfile is not None
+                    ):
+                        cands.append((cur_objfile, ram + (ram_to_rom or 0)))
                 last_line = line
         except Exception as e:
             traceback.print_exc()
@@ -1140,13 +1189,13 @@ def search_map_file(
     elif project.map_format == "mw":
         find = re.findall(
             #            ram   elf rom  alignment
-            r"()  \S+ \S+ (\S+)(?: +\S+)? "
+            r"() \S+ \S+ (\S+)(?: +\S+)? "
             + re.escape(fn_name)
             + r"(?: \(entry of "
             + re.escape(config.diff_section)
             + r"\))? \t"
             # object name
-            + "(\S+)",
+            + r"(\S+)",
             contents,
         )
         if len(find) > 1:
@@ -1197,13 +1246,13 @@ def search_map_file(
                 - load_address
                 + project.ms_map_address_offset
             )
+            if for_binary:
+                return None, fileofs
+
             objname = names_find.group(2)
             objfile = search_build_objects(objname, project)
-
             if objfile is not None:
-                return (objfile, fileofs)
-            elif project.ms_ignore_missing_objfile:
-                return (objname, fileofs)
+                return objfile, fileofs
     else:
         fail(f"Linker map format {project.map_format} unrecognised.")
     return None, None
@@ -1219,6 +1268,8 @@ def parse_elf_rodata_references(
     SHT_SYMTAB = 2
     SHT_REL = 9
     SHT_RELA = 4
+    R_MIPS_32 = 2
+    R_MIPS_GPREL32 = 12
 
     is_32bit = e_ident[4] == 1
     is_little_endian = e_ident[5] == 1
@@ -1292,7 +1343,7 @@ def parse_elf_rodata_references(
                 # Skip section_name -> section_name references
                 continue
             sec_name = sec_names[s.sh_info].decode("latin1")
-            if sec_name != ".rodata":
+            if sec_name not in (".rodata", ".late_rodata"):
                 continue
             sec_base = sections[s.sh_info].sh_offset
             for i in range(0, s.sh_size, s.sh_entsize):
@@ -1317,7 +1368,7 @@ def parse_elf_rodata_references(
                     )
                 if st_shndx == text_section:
                     if s.sh_type == SHT_REL:
-                        if e_machine == 8 and r_type == 2:  # R_MIPS_32
+                        if e_machine == 8 and r_type in (R_MIPS_32, R_MIPS_GPREL32):
                             (r_addend,) = read("I", sec_base + r_offset)
                         else:
                             continue
@@ -1383,7 +1434,7 @@ def dump_objfile(
 
     objfile = config.objfile
     if not objfile:
-        objfile, _ = search_map_file(start, project, config)
+        objfile, _ = search_map_file(start, project, config, for_binary=False)
 
     if not objfile:
         fail("Not able to find .o file for function.")
@@ -1394,8 +1445,8 @@ def dump_objfile(
     if not os.path.isfile(objfile):
         fail(f"Not able to find .o file for function: {objfile} is not a file.")
 
-    refobjfile = "expected/" + objfile
-    if not os.path.isfile(refobjfile):
+    refobjfile = os.path.join(project.expected_dir, objfile)
+    if config.diff_mode != DiffMode.SINGLE and not os.path.isfile(refobjfile):
         refobjfile = refobjfile.replace("/src/", "/asm/").replace(".c.o", ".s.o")
         if not os.path.isfile(refobjfile):
             fail(f'Please ensure an OK .o file exists at "{refobjfile}".')
@@ -1422,7 +1473,7 @@ def dump_binary(
         run_make(project.myimg, project)
     start_addr = maybe_eval_int(start)
     if start_addr is None:
-        _, start_addr = search_map_file(start, project, config)
+        _, start_addr = search_map_file(start, project, config, for_binary=True)
         if start_addr is None:
             fail("Not able to find function in map file.")
     if end is not None:
@@ -1473,8 +1524,15 @@ class AsmProcessor:
     def post_process(self, lines: List["Line"]) -> None:
         return
 
+    def is_end_of_function(self, mnemonic: str, args: str) -> bool:
+        return False
+
 
 class AsmProcessorMIPS(AsmProcessor):
+    def __init__(self, config: Config) -> None:
+        super().__init__(config)
+        self.seen_jr_ra = False
+
     def process_reloc(self, row: str, prev: str) -> Tuple[str, Optional[str]]:
         arch = self.config.arch
         if "R_MIPS_NONE" in row or "R_MIPS_JALR" in row:
@@ -1507,6 +1565,13 @@ class AsmProcessorMIPS(AsmProcessor):
         else:
             assert False, f"unknown relocation type '{row}' for line '{prev}'"
         return before + repl + after, repl
+
+    def is_end_of_function(self, mnemonic: str, args: str) -> bool:
+        if self.seen_jr_ra:
+            return True
+        if mnemonic == "jr" and args == "ra":
+            self.seen_jr_ra = True
+        return False
 
 
 class AsmProcessorPPC(AsmProcessor):
@@ -1572,10 +1637,17 @@ class AsmProcessorPPC(AsmProcessor):
 
         return before + repl + after, repl
 
+    def is_end_of_function(self, mnemonic: str, args: str) -> bool:
+        return mnemonic == "blr"
+
 
 class AsmProcessorARM32(AsmProcessor):
     def process_reloc(self, row: str, prev: str) -> Tuple[str, Optional[str]]:
         arch = self.config.arch
+        if "R_ARM_V4BX" in row:
+            # R_ARM_V4BX converts "bx <reg>" to "mov pc,<reg>" for some targets.
+            # Ignore for now.
+            return prev, None
         if "R_ARM_ABS32" in row and not prev.startswith(".word"):
             # Don't crash on R_ARM_ABS32 relocations incorrectly applied to code.
             # (We may want to do something more fancy here that actually shows the
@@ -1707,6 +1779,9 @@ class AsmProcessorI686(AsmProcessor):
             assert False, f"unknown relocation type '{row}' for line '{prev}'"
 
         return f"{mnemonic}\t{args[:start]+repl+args[end:]}", repl
+
+    def is_end_of_function(self, mnemonic: str, args: str) -> bool:
+        return mnemonic == "ret"
 
 
 @dataclass
@@ -1915,17 +1990,25 @@ MIPS_SETTINGS = ArchSettings(
     re_reg=re.compile(r"\$?\b([astv][0-9]|at|f[astv]?[0-9]+f?|kt?[01]|fp|ra|zero)\b"),
     re_sprel=re.compile(r"(?<=,)([0-9]+|0x[0-9a-f]+)\(sp\)"),
     re_large_imm=re.compile(r"-?[1-9][0-9]{2,}|-?0x[0-9a-f]{3,}"),
-    re_imm=re.compile(r"(\b|-)([0-9]+|0x[0-9a-fA-F]+)\b(?!\(sp)|%(lo|hi)\([^)]*\)"),
+    re_imm=re.compile(
+        r"(\b|-)([0-9]+|0x[0-9a-fA-F]+)\b(?!\(sp)|%(lo|hi|got|gp_rel|call16)\([^)]*\)"
+    ),
     re_reloc=re.compile(r"R_MIPS_"),
     arch_flags=["-m", "mips:4300"],
     branch_likely_instructions=MIPS_BRANCH_LIKELY_INSTRUCTIONS,
     branch_instructions=MIPS_BRANCH_INSTRUCTIONS,
-    instructions_with_address_immediates=MIPS_BRANCH_INSTRUCTIONS.union({"jal", "j"}),
+    instructions_with_address_immediates=MIPS_BRANCH_INSTRUCTIONS.union({"j", "jal"}),
     delay_slot_instructions=MIPS_BRANCH_INSTRUCTIONS.union({"j", "jal", "jr", "jalr"}),
     proc=AsmProcessorMIPS,
 )
 
 MIPSEL_SETTINGS = replace(MIPS_SETTINGS, name="mipsel", big_endian=False)
+
+MIPSEE_SETTINGS = replace(
+    MIPSEL_SETTINGS, name="mipsee", arch_flags=["-m", "mips:5900"]
+)
+
+MIPS_ARCH_NAMES = {"mips", "mipsel", "mipsee"}
 
 ARM32_SETTINGS = ArchSettings(
     name="arm32",
@@ -2019,6 +2102,7 @@ I686_SETTINGS = ArchSettings(
 ARCH_SETTINGS = [
     MIPS_SETTINGS,
     MIPSEL_SETTINGS,
+    MIPSEE_SETTINGS,
     ARM32_SETTINGS,
     ARMEL_SETTINGS,
     AARCH64_SETTINGS,
@@ -2174,6 +2258,7 @@ def process(dump: str, config: Config) -> List[Line]:
         tabs = row.split("\t")
         line_num = eval_line_num(line_num_str.strip())
 
+        # TODO: use --no-show-raw-insn for all arches
         if arch.name == "i686":
             row = "\t".join(tabs[1:])
         else:
@@ -2234,6 +2319,17 @@ def process(dump: str, config: Config) -> List[Line]:
                 break
             i += 1
 
+        is_text_relative_j = False
+        if (
+            arch.name in MIPS_ARCH_NAMES
+            and mnemonic == "j"
+            and symbol is not None
+            and symbol.startswith(".text")
+        ):
+            symbol = None
+            original = row
+            is_text_relative_j = True
+
         normalized_original = processor.normalize(mnemonic, original)
 
         scorable_line = normalized_original
@@ -2259,7 +2355,9 @@ def process(dump: str, config: Config) -> List[Line]:
             row = normalize_imms(row, arch)
 
         branch_target = None
-        if mnemonic in arch.branch_instructions:
+        if (
+            mnemonic in arch.branch_instructions or is_text_relative_j
+        ) and symbol is None:
             x86_longjmp = re.search(r"\*(.*)\(", args)
             if x86_longjmp:
                 capture = x86_longjmp.group(1)
@@ -2288,18 +2386,8 @@ def process(dump: str, config: Config) -> List[Line]:
         num_instr += 1
         source_lines = []
 
-        if config.stop_at_ret:
-            if config.arch.name == "mips":
-                if mnemonic == "jr" and args == "ra":
-                    stop_after_delay_slot = True
-                elif stop_after_delay_slot:
-                    break
-            if config.arch.name == "ppc":
-                if mnemonic == "blr":
-                    break
-            if config.arch.name == "i686":
-                if mnemonic == "ret":
-                    break
+        if config.stop_at_ret and processor.is_end_of_function(mnemonic, args):
+            break
 
     processor.post_process(output)
     return output
@@ -2343,7 +2431,7 @@ def field_matches_any_symbol(field: str, arch: ArchSettings) -> bool:
 
         return re.fullmatch((r"^@\d+$"), field) is not None
 
-    if arch.name == "mips":
+    if arch.name in MIPS_ARCH_NAMES:
         return "." in field
 
     # Example: ".text+0x34"
@@ -2374,15 +2462,10 @@ def diff_sequences_difflib(
 def diff_sequences(
     seq1: List[str], seq2: List[str], algorithm: str
 ) -> List[Tuple[str, int, int, int, int]]:
-    if (
-        algorithm != "levenshtein"
-        or len(seq1) * len(seq2) > 4 * 10**8
-        or len(seq1) + len(seq2) >= 0x110000
-    ):
+    if algorithm != "levenshtein":
         return diff_sequences_difflib(seq1, seq2)
 
     # The Levenshtein library assumes that we compare strings, not lists. Convert.
-    # (Per the check above we know we have fewer than 0x110000 unique elements, so chr() works.)
     remapping: Dict[str, str] = {}
 
     def remap(seq: List[str]) -> str:
@@ -2395,8 +2478,16 @@ def diff_sequences(
             seq[i] = val
         return "".join(seq)
 
-    rem1 = remap(seq1)
-    rem2 = remap(seq2)
+    try:
+        rem1 = remap(seq1)
+        rem2 = remap(seq2)
+    except ValueError as e:
+        if len(seq1) + len(seq2) < 0x110000:
+            raise
+        # If there are too many unique elements, chr() doesn't work.
+        # Assume this is the case and fall back to difflib.
+        return diff_sequences_difflib(seq1, seq2)
+
     import Levenshtein
 
     ret: List[Tuple[str, int, int, int, int]] = Levenshtein.opcodes(rem1, rem2)
@@ -2463,8 +2554,8 @@ def diff_sameline(
     else:
         # If the last field has a parenthesis suffix, e.g. "0x38(r7)"
         # we split that part out to make it a separate field
-        # however, we don't split if it has a proceeding %hi/%lo  e.g."%lo(.data)" or "%hi(.rodata + 0x10)"
-        re_paren = re.compile(r"(?<!%hi)(?<!%lo)\(")
+        # however, we don't split if it has a proceeding % macro, e.g. "%lo(.data)"
+        re_paren = re.compile(r"(?<!%hi)(?<!%lo)(?<!%got)(?<!%call16)(?<!%gp_rel)\(")
         oldfields = oldfields[:-1] + re_paren.split(oldfields[-1])
         newfields = newfields[:-1] + re_paren.split(newfields[-1])
 
@@ -2942,24 +3033,12 @@ def compress_matching(
     return ret
 
 
-def align_diffs(
-    old_diff: Diff, new_diff: Diff, config: Config
-) -> Tuple[TableMetadata, List[Tuple[OutputLine, ...]]]:
-    meta: TableMetadata
+def align_diffs(old_diff: Diff, new_diff: Diff, config: Config) -> TableData:
+    headers: Tuple[Text, ...]
     diff_lines: List[Tuple[OutputLine, ...]]
     padding = " " * 7 if config.show_line_numbers else " " * 2
 
-    if config.threeway:
-        meta = TableMetadata(
-            headers=(
-                Text("TARGET"),
-                Text(f"{padding}CURRENT ({new_diff.score})"),
-                Text(f"{padding}PREVIOUS ({old_diff.score})"),
-            ),
-            current_score=new_diff.score,
-            max_score=new_diff.max_score,
-            previous_score=old_diff.score,
-        )
+    if config.diff_mode in (DiffMode.THREEWAY_PREV, DiffMode.THREEWAY_BASE):
         old_chunks = chunk_diff_lines(old_diff.lines)
         new_chunks = chunk_diff_lines(new_diff.lines)
         diff_lines = []
@@ -2994,20 +3073,54 @@ def align_diffs(
         diff_lines = [
             (base, new, old if old != new else empty) for base, new, old in diff_lines
         ]
-    else:
-        meta = TableMetadata(
-            headers=(
-                Text("TARGET"),
-                Text(f"{padding}CURRENT ({new_diff.score})"),
-            ),
-            current_score=new_diff.score,
-            max_score=new_diff.max_score,
-            previous_score=None,
+        headers = (
+            Text("TARGET"),
+            Text(f"{padding}CURRENT ({new_diff.score})"),
+            Text(f"{padding}PREVIOUS ({old_diff.score})"),
         )
+        current_score = new_diff.score
+        max_score = new_diff.max_score
+        previous_score = old_diff.score
+    elif config.diff_mode in (DiffMode.SINGLE, DiffMode.SINGLE_BASE):
+        header = Text("BASE" if config.diff_mode == DiffMode.SINGLE_BASE else "CURRENT")
+        diff_lines = [(line,) for line in new_diff.lines]
+        headers = (header,)
+        # Scoring is disabled for view mode
+        current_score = 0
+        max_score = 0
+        previous_score = None
+    else:
         diff_lines = [(line, line) for line in new_diff.lines]
+        headers = (
+            Text("TARGET"),
+            Text(f"{padding}CURRENT ({new_diff.score})"),
+        )
+        current_score = new_diff.score
+        max_score = new_diff.max_score
+        previous_score = None
     if config.compress:
         diff_lines = compress_matching(diff_lines, config.compress.context)
-    return meta, diff_lines
+
+    def diff_line_to_table_line(line: Tuple[OutputLine, ...]) -> TableLine:
+        cells = [
+            (line[0].base or Text(), line[0].line1)
+        ]
+        for ol in line[1:]:
+            cells.append((ol.fmt2, ol.line2))
+
+        return TableLine(
+            key=line[0].key2,
+            is_data_ref=line[0].is_data_ref,
+            cells=tuple(cells),
+        )
+
+    return TableData(
+        headers=headers,
+        current_score=current_score,
+        max_score=max_score,
+        previous_score=previous_score,
+        lines=[diff_line_to_table_line(line) for line in diff_lines],
+    )
 
 
 def debounced_fs_watch(
@@ -3110,13 +3223,20 @@ class Display:
             return (self.emsg, self.emsg)
 
         my_lines = process(self.mydump, self.config)
-        diff_output = do_diff(self.base_lines, my_lines, self.config)
+
+        if self.config.diff_mode == DiffMode.SINGLE_BASE:
+            diff_output = do_diff(self.base_lines, self.base_lines, self.config)
+        elif self.config.diff_mode == DiffMode.SINGLE:
+            diff_output = do_diff(my_lines, my_lines, self.config)
+        else:
+            diff_output = do_diff(self.base_lines, my_lines, self.config)
+
         last_diff_output = self.last_diff_output or diff_output
-        if self.config.threeway != "base" or not self.last_diff_output:
+        if self.config.diff_mode != DiffMode.THREEWAY_BASE or not self.last_diff_output:
             self.last_diff_output = diff_output
 
-        meta, diff_lines = align_diffs(last_diff_output, diff_output, self.config)
-        output = self.config.formatter.table(meta, diff_lines)
+        data = align_diffs(last_diff_output, diff_output, self.config)
+        output = self.config.formatter.table(data)
 
         refresh_key = (
             [line.key2 for line in diff_output.lines],
@@ -3240,7 +3360,10 @@ def main() -> None:
         except ModuleNotFoundError as e:
             fail(MISSING_PREREQUISITES.format(e.name))
 
-    if config.threeway and not args.watch:
+    if (
+        config.diff_mode in (DiffMode.THREEWAY_BASE, DiffMode.THREEWAY_PREV)
+        and not args.watch
+    ):
         fail("Threeway diffing requires -w.")
 
     if args.diff_elf_symbol:
@@ -3268,8 +3391,10 @@ def main() -> None:
     if args.base_asm is not None:
         with open(args.base_asm) as f:
             basedump = f.read()
-    else:
+    elif config.diff_mode != DiffMode.SINGLE:
         basedump = run_objdump(basecmd, config, project)
+    else:
+        basedump = ""
 
     mydump = run_objdump(mycmd, config, project)
 
