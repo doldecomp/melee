@@ -13,7 +13,7 @@ build = root / 'build'
 header_path = build / 'ctx.h'
 source_path = build / 'ctx.c'
 render_path = build / 'ctx.html'
-template_path = here / '../ctx_template.html'
+template_path = root / 'tools/ctx_template.html'
 mwcc_command = root / "tools/mwcc_compiler/1.2.5e/mwcceppc.exe"
 
 MWCC_FLAGS = [
