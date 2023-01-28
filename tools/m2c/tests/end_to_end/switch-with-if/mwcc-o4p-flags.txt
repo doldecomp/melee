@@ -1,1 +1,0 @@
---void --target ppc-mwcc-c
