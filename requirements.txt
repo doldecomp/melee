@@ -4,6 +4,9 @@ coverage==7.1.0
 cxxfilt==0.3.0
 GitPython==3.1.30
 graphviz==0.20.1
+pcpp==1.30
 pyelftools==0.29
+Pygments==2.14.0
+pyperclip==1.8.2
 python_Levenshtein==0.20.9
 watchdog==2.2.1

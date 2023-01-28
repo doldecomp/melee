@@ -165,7 +165,7 @@ float cosf(float x)
     //   frac_part is the remainder(mod(pi/4))
     //  i.e. the actual arg that will be evaluated is frac_part*(pi/4)
     //  note: since n is signed n<<1 may pad rightmost bit w/a one.
-    int n = (__HI(x) & 0x80000000) ? (int) (z - .5f) : (int) (z + .5f);
+    int n = (MSL_HI(x) & 0x80000000) ? (int) (z - .5f) : (int) (z + .5f);
 
     const float frac_part =
         ((((x - (float) (n * 2)) + __four_over_pi_m1[0] * x) +
@@ -348,7 +348,7 @@ float sinf(float x)
     //   frac_part is the remainder(mod(pi/4))
     //  i.e. the actual arg that will be evaluated is frac_part*(pi/4)
     //  note: since n is signed n<<1 may pad rightmost bit w/a one.
-    int n = (__HI(x) & 0x80000000) ? (int) (z - .5f) : (int) (z + .5f);
+    int n = (MSL_HI(x) & 0x80000000) ? (int) (z - .5f) : (int) (z + .5f);
 
     const float frac_part =
         ((((x - (float) (n * 2)) + __four_over_pi_m1[0] * x) +
