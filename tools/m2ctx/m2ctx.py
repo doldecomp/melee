@@ -42,8 +42,7 @@ PCPP_FLAGS = [
 def write_header(path: Path):
     files = sorted({f'#include <{file.relative_to(src)}>'
                     for file in src.rglob("*.h")})
-    with open(path, 'w') as f:
-        f.write('\n'.join(files))
+    path.write_text('\n'.join(files))
 
 def try_import(c_command: List[str]):
     try:
@@ -118,8 +117,7 @@ def main():
     output = output.strip()
 
     if not args.no_file:
-        with open(source_path, 'w') as f:
-            f.write(output)
+        source_path.write_text(output)
 
     if args.clipboard:
         import pyperclip
