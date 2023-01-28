@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: melee-cli
+Version: 0.0.1
+Summary: An entry point for melee decomp command line tooling
+Home-page: UNKNOWN
+License: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.10
+License-File: LICENSE
+
+UNKNOWN
+

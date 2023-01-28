@@ -1,0 +1,8 @@
+LICENSE
+main.py
+setup.py
+melee_cli.egg-info/PKG-INFO
+melee_cli.egg-info/SOURCES.txt
+melee_cli.egg-info/dependency_links.txt
+melee_cli.egg-info/entry_points.txt
+melee_cli.egg-info/top_level.txt
