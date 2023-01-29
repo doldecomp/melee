@@ -1,3 +1,4 @@
+@page getting_started Getting Started
 # Introduction
 
 This doc is designed to help beginners get into Melee decompilation (and hopefully contribute). Also, we'll try to answer common questions here and talk about motivations for working on this project.
@@ -6,7 +7,7 @@ This doc is designed to help beginners get into Melee decompilation (and hopeful
 
 The goal of this repo is to **write C code that, after being compiled, matches the PowerPC assembly 100%**. There's a bit of nuance here though. Let’s first take a look at what we’re working with:
 
-![compilation_diagram](docs/img/compilation_diagram.png)
+![](compilation_diagram.png)
 
 The details for what produces these different artifacts is out-of-scope. Here’s what some Melee C code looks like ([link](https://github.com/doldecomp/melee/blob/d00b11d0489b14401965c87bf386828d54fa0ccc/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c#L5-L13)):
 
