@@ -16,6 +16,7 @@ calcprogress
       and slice_group_progress_callback functions (both in this file). Example code is written
       in each function.
 """
+from math import floor
 
 from src.main import main
 
@@ -34,13 +35,20 @@ def exec_progress_callback(src_code: int, total_code: int, src_data: int, total_
     """Executable (DOL/REL) progress callback.
     Any game-specific counters or extra things should go here.
     """
-    # Example code:
-    print("Example executable progress callback!")
-    code_progress = src_code / total_code  # range [0, 1]
-    data_progress = src_data / total_data  # range [0, 1]
-    total_progress = (code_progress + data_progress) / (1 + 1)
-    total_percent = total_progress * 100
-    print(f"{total_percent}% of this executable has been decompiled")
+
+    # Calculate percentages
+    code_percent = (src_code / total_code)
+    data_percent = (src_data / total_data)
+    bytes_per_trophy = total_code / 293
+    bytes_per_event = total_data / 51
+    
+    trophy_count = floor(src_code / bytes_per_trophy)
+    event_count = floor(src_data / bytes_per_event)
+
+    bytes_to_go_next_trophy = ((trophy_count + 1) * bytes_per_trophy) - src_code
+
+    print("You have {} of 293 Trophies and completed {} of 51 Event Matches.".format(trophy_count, event_count))
+    print("Code bytes to go for next trophy:", floor(bytes_to_go_next_trophy)+1)
 
 
 def slice_group_progress_callback(name: str, src_size: int, total_size: int):

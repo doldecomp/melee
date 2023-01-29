@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import List
 
 from .asm_util import AsmUtil
 from .dol import Dol
@@ -20,7 +21,7 @@ class Slice:
 @dataclass
 class SliceGroup:
     name: str
-    slices: list[Slice]
+    slices: List[Slice]
 
     def total_size(self) -> int:
         size = 0
@@ -35,7 +36,7 @@ class SliceGroup:
         return False
 
 
-def calc_exec_progress(dol: Dol, asm_list: list[AsmUtil.Section], callback: "function"):
+def calc_exec_progress(dol: Dol, asm_list: List[AsmUtil.Section], callback: "function", correction: int):
     """Calculate decompilation progress of the specified DOL.
     User callback specified for any game-specific progress info.
     """
@@ -55,21 +56,20 @@ def calc_exec_progress(dol: Dol, asm_list: list[AsmUtil.Section], callback: "fun
     total_code = dol.code_size()
     total_data = dol.data_size()
     # Decompiled sizes
-    src_code = total_code - asm_code
+    src_code = total_code - asm_code - correction
     src_data = total_data - asm_data
     # Percentages
-    code_pcnt = src_code / total_code
-    data_pcnt = src_data / total_data
-    print(
-        f"Code sections: {src_code} / {total_code} bytes in src ({code_pcnt:%})")
-    print(
-        f"Data sections: {src_data} / {total_data} bytes in src ({data_pcnt:%})")
+    code_percent = src_code / total_code
+    data_percent = src_data / total_data
+    print("Progress:")
+    print(f"\tCode sections: {src_code} / {total_code} bytes in src ({code_percent:%})")
+    print(f"\tData sections: {src_data} / {total_data} bytes in src ({data_percent:%})")
 
     # User callback
     callback(src_code, total_code, src_data, total_data)
 
 
-def calc_slice_group_progress(group: SliceGroup, asm_list: list[AsmUtil.Section], callback: "function"):
+def calc_slice_group_progress(group: SliceGroup, asm_list: List[AsmUtil.Section], callback: "function"):
     """Calculate decompilation progress of the specified slice group.
     User callback specified for any game-specific progress info.
     """

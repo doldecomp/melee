@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from os.path import basename
 from re import match
+from typing import List
 
 from .cw_map import Map
 
@@ -20,7 +21,7 @@ class AsmUtil:
         type: int
 
     @staticmethod
-    def get_obj_files_mk_asm(obj_files_mk_path: str, asm_root: str, obj_ext: str) -> list[str]:
+    def get_obj_files_mk_asm(obj_files_mk_path: str, asm_root: str, obj_ext: str) -> List[str]:
         """Generate list of assembly object filenames, using obj_files.mk.
         Paths are relative to the project's asm directory.
 
@@ -30,7 +31,7 @@ class AsmUtil:
             obj_ext (str): Project assembly object file extension
 
         Returns:
-            list[str]: Assembly object file names (relative to assembly root dir)
+            List[str]: Assembly object file names (relative to assembly root dir)
         """
         asm_files = []
 
@@ -91,7 +92,7 @@ class AsmUtil:
         return file
 
     @staticmethod
-    def get_obj_sections(obj_file: str, cw_map: Map, src_ext: str, obj_ext: str) -> list["AsmUtil.Section"]:
+    def get_obj_sections(obj_file: str, cw_map: Map, src_ext: str, obj_ext: str) -> List["AsmUtil.Section"]:
         """Create list of sections in assembly object file.
         Requires map from DOL.
         """
@@ -104,15 +105,15 @@ class AsmUtil:
         # Find sections in asm file by looking for .section directives
         for line in asm:
             sect_match = match(AsmUtil.SECTION_REGEX, line)
-            if sect_match != None:
+            if sect_match is not None:
                 # Section name
                 sect_name = sect_match.group("Name")
                 # Avoid recounting the same section
                 if sect_name not in sections_found:
-                    # Header symbols in current object file
-                    my_file_headers = cw_map.headers[basename(obj_file)]
-                    # Header symbol for current section
                     try:
+                        # Header symbols in current object file
+                        my_file_headers = cw_map.headers[basename(obj_file)]
+                        # Header symbol for current section
                         my_header = my_file_headers[sect_name]
                         # Create summable section object
                         section = AsmUtil.Section(
@@ -124,19 +125,10 @@ class AsmUtil:
                         pass
                     sections_found.add(sect_name)
 
-        # Dump sections
-        # print(f"File: {obj_file}")
-        # print("Sections:")
-        # for i in sections:
-        #     if i.type == AsmUtil.SECTION_DATA:
-        #         print(
-        #             f"start: {hex(i.start & 0xFFFFFFFF)}, size: {hex(i.size & 0xFFFFFFFF)}, type: {('CODE', 'DATA')[i.type]}")
-        # print()
-
         return sections
 
     @staticmethod
-    def get_obj_list_sections(obj_files: list[str], cw_map: Map, src_ext: str, obj_ext: str) -> list["AsmUtil.Section"]:
+    def get_obj_list_sections(obj_files: List[str], cw_map: Map, src_ext: str, obj_ext: str) -> List["AsmUtil.Section"]:
         """Create list of sections in list of assembly object files.
         Requires map from DOL.
         """

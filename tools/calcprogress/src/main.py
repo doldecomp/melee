@@ -1,13 +1,15 @@
 from argparse import ArgumentParser
 from sys import argv
+from typing import List
 
 from .asm_util import AsmUtil
 from .cw_map import Map
 from .dol import Dol
 from .progress import SliceGroup, calc_exec_progress, calc_slice_group_progress
+from .find_asm_functions import search
 
 
-def main(groups: list[SliceGroup], exec_callback: "function", group_callback: "function"):
+def main(groups: List[SliceGroup], exec_callback: "function", group_callback: "function"):
     parser = ArgumentParser()
     # Either DOL or REL is required
     group = parser.add_mutually_exclusive_group(required=True)
@@ -30,7 +32,8 @@ def main(groups: list[SliceGroup], exec_callback: "function", group_callback: "f
     args = parser.parse_args(argv[1:])
 
     dol = Dol(args.dol)
-    dol_map = Map(args.map, args.old_map)
+    correction_symbols = search('src', 'include')
+    dol_map = Map(args.map, args.old_map, correction_symbols)
 
     # All assembly source built by the makefile
     obj_files = AsmUtil.get_obj_files_mk_asm(
@@ -40,7 +43,7 @@ def main(groups: list[SliceGroup], exec_callback: "function", group_callback: "f
         obj_files, dol_map, args.asm_src_ext, args.asm_obj_ext)
 
     # Calculate full progress (REL/DOL)
-    calc_exec_progress(dol, sections, exec_callback)
+    calc_exec_progress(dol, sections, exec_callback, dol_map.correction)
 
     # Calculate progress of slices
     if len(groups) > 0:
