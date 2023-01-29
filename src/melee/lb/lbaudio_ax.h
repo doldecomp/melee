@@ -8,7 +8,7 @@
 #define SFX_NONE -1
 
 void func_800236B8(s32);
-u32 func_800237A8(u32, u32, u32);
+u32 func_800237A8(enum_t sfx_id, u8 sfx_vol, u8 sfx_pan);
 void func_80023F28(s32);
 void func_8002438C(s32);
 void func_80024B1C(s32, s32);
@@ -30,6 +30,6 @@ s32 func_8002305C(s32, s32);
 void func_80026510(HSD_GObj*);
 enum_t func_800265C4(HSD_GObj*, enum_t sfx);
 int func_80024184(int, int, int, int);
-UNK_RET func_80024B94(UNK_PARAMS);
+void func_80024B94(int, int);
 
 #endif

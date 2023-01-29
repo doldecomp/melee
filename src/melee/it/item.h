@@ -98,13 +98,13 @@ void func_8026ADC0(HSD_GObj* item_gobj);
 uint func_8026AE60(void);
 
 /// Play Item SFX
-void func_8026AE84(Item* item_data, enum_t sfx, u8 pan, u8 volume);
+void func_8026AE84(Item* item_data, enum_t sfx, int pan, int volume);
 
 /// Play Item SFX 2
-void func_8026AF0C(Item* item_data, enum_t sfx, u8 pan, u8 volume);
+void func_8026AF0C(Item* item_data, enum_t sfx, int pan, int volume);
 
 /// Play Item SFX 3
-void func_8026AFA0(Item* item_data, enum_t sfx, u8 pan, u8 volume);
+void func_8026AFA0(Item* item_data, enum_t sfx, int pan, int volume);
 
 /// Stop Item SFX
 void func_8026B034(Item* item_data);
