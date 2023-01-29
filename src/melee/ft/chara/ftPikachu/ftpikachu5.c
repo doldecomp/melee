@@ -12,7 +12,7 @@ bool ftPikachu_CheckProperty_801275CC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    s32 value = fp->x2071_b0_3;
+    s32 value = fp->x2070.x2071_b0_3;
 
     switch (value) {
     case 1:
