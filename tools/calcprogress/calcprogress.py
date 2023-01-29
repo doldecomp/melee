@@ -41,7 +41,7 @@ def exec_progress_callback(src_code: int, total_code: int, src_data: int, total_
     data_percent = (src_data / total_data)
     bytes_per_trophy = total_code / 293
     bytes_per_event = total_data / 51
-    
+
     trophy_count = floor(src_code / bytes_per_trophy)
     event_count = floor(src_data / bytes_per_event)
 
