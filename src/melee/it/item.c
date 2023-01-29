@@ -2103,7 +2103,7 @@ uint func_8026AE60(void)
     return result;
 }
 
-void func_8026AE84(Item* item_data, enum_t sfx, u8 pan, u8 volume)
+void func_8026AE84(Item* item_data, enum_t sfx, int pan, int volume)
 {
     if (sfx != 540000) {
         if (sfx != 540001)
@@ -2113,7 +2113,7 @@ void func_8026AE84(Item* item_data, enum_t sfx, u8 pan, u8 volume)
     }
 }
 
-void func_8026AF0C(Item* item_data, enum_t sfx, u8 pan, u8 volume)
+void func_8026AF0C(Item* item_data, enum_t sfx, int pan, int volume)
 {
     if (sfx != 540000) {
         if (sfx != 540001) {
@@ -2128,7 +2128,7 @@ void func_8026AF0C(Item* item_data, enum_t sfx, u8 pan, u8 volume)
     }
 }
 
-void func_8026AFA0(Item* item_data, enum_t sfx, u8 pan, u8 volume)
+void func_8026AFA0(Item* item_data, enum_t sfx, int pan, int volume)
 {
     if (sfx != 540000) {
         if (sfx != 540001) {

@@ -124,7 +124,7 @@ void func_80088080(Fighter*);
 void func_800880AC(Fighter*);
 void func_800880D8(Fighter*);
 void func_80088110(Fighter*);
-void func_80088148(Fighter*, u32, u32, u32);
+void func_80088148(Fighter*, enum_t, int, int);
 void func_800881D8(Fighter*, u32, u32, u32);
 void func_80088478(Fighter*, s32, s32, s32);
 void func_80088510(Fighter*, s32, u8, u8);
