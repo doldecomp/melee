@@ -30,5 +30,6 @@ s32 func_8002305C(s32, s32);
 void func_80026510(HSD_GObj*);
 enum_t func_800265C4(HSD_GObj*, enum_t sfx);
 int func_80024184(int, int, int, int);
+UNK_RET func_80024B94(UNK_PARAMS);
 
 #endif
