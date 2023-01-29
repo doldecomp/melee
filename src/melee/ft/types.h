@@ -1307,6 +1307,7 @@ struct SpecialAttrs_Sandbag {
     char filler0[0x100];
 };
 
+/// @todo Rename this and its members; investigate using it elsewhere.
 union Struct2070 {
     struct {
         s8 x2070;
