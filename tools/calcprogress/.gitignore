@@ -1,7 +1,0 @@
-__pycache__/
-*.dol
-*.map
-asm/
-asm_old/
-build/
-tests/
