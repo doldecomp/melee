@@ -271,33 +271,32 @@ lbl_80221334:
 #pragma pop
 #else
 
-void func_80221288(HSD_GObj* arg0)
+void func_80221288(HSD_GObj* ground_gobj)
 {
-    s16* var_r30;
-    s16 temp_r4;
-    s32 temp_r3;
-    s32 temp_r3_2;
-    Ground* temp_r29;
+    s16* cur = lbl_803E8B5C;
+    Ground* gp = GET_GROUND(ground_gobj->user_data);
+    s16 val = *cur;
 
-    var_r30 = lbl_803E8B5C;
-    temp_r29 = arg0->user_data;
-loop_5:
-    temp_r4 = var_r30[0];
-    if (temp_r4 != -1) {
-        temp_r3 = func_801C33C0(2, (s32) temp_r4);
-        if (temp_r3 != -1) {
-            temp_r3_2 =
-                func_801C8CFC(0, 0, temp_r29, func_801C3FA4(arg0, temp_r3), 0,
+    while (val != -1) {
+        enum_t result_0 = func_801C33C0(2, val);
+        if (result_0 != -1) {
+            bool result_1 =
+                func_801C8CFC(0, 0, gp, func_801C3FA4(ground_gobj, result_0), 0,
                               lbl_80221208, 0);
-            if (temp_r3_2 != 0) {
-                func_801C8DE0();
-                func_801C8E08(temp_r3_2);
+
+            if (result_1) {
+                func_801C8DE0(result_1, lbl_804DBCC0, lbl_804DBCB8,
+                              lbl_804DBCB8, lbl_804DBCBC, lbl_804DBCB8,
+                              lbl_804DBCB8, lbl_804DBCC4);
+                func_801C8E08(result_1);
             }
         }
-        var_r30 += 2;
-        goto loop_5;
+
+        val = *cur;
+        cur += 1;
     }
 }
+
 #endif
 
 bool lbl_80221354(int arg0)
