@@ -103,7 +103,7 @@ class Map:
             if symbol is not None:
                 # "Header symbol" refers to the first symbol in the object file
                 obj_file = symbol.object_file
-               
+
                 if symbol.name in self.__correction_symbols:
                     self.correction += symbol.size
 
