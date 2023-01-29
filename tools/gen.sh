@@ -1,4 +1,5 @@
-HERE=$(dirname "$(readlink -f $0)")
+#!/usr/bin/env bash
+
 ctx_includes="ctx_includes.h"
 ctx=ctx.c
 includes=false
@@ -47,7 +48,7 @@ if [ "$clear" = true ]; then
     clear
 fi
 
-pushd "$HERE"
+pushd "$(dirname "$(readlink -f $0)")/.." >/dev/null
 
 go() {
     out_path="$(echo "$1" | sed 's/asm/src/').c"
@@ -95,4 +96,4 @@ else
     gen
 fi
 
-popd
+popd >/dev/null

@@ -27,7 +27,7 @@ v1.02 - main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
 
 # Contributing
 
-If you're new to decomp or getting started, check out our [Getting Started guide](GETTING_STARTED.md)! Once you're in a place that you're ready to open a PR, check out our [Contributing guidelines](CONTRIBUTING.md).
+If you're new to decomp or getting started, check out our [Getting Started guide](https://doldecomp.github.io/melee/getting_started.html)! Once you're in a place that you're ready to open a PR, check out our [Contributing guidelines](CONTRIBUTING.md).
 
 # FAQ
 ## What can be done after decompiling Melee?
