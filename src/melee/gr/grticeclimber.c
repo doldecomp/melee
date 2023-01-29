@@ -118,13 +118,10 @@ void lbl_802210D0(HSD_GObj* arg0) {}
 
 void lbl_802210D4(HSD_GObj* arg0) {}
 
-extern f32 const lbl_804DBCB8;
-extern f32 const lbl_804DBCBC;
-
 void lbl_802210D8(HSD_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
-    func_801C7FF8(gobj, 69, 2, 1, lbl_804DBCB8, lbl_804DBCBC);
+    func_801C7FF8(gobj, 69, 2, 1, 0.0F, 1.0F);
     func_80221288(gobj);
 }
 
@@ -205,9 +202,6 @@ s16 lbl_803E8B5C[] = {
     50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, 0,
 };
 
-extern f32 const lbl_804DBCC0;
-extern f32 const lbl_804DBCC4;
-
 void func_80221288(HSD_GObj* ground_gobj)
 {
     Ground* gp = GET_GROUND(ground_gobj);
@@ -221,9 +215,8 @@ void func_80221288(HSD_GObj* ground_gobj)
                               lbl_80221208, 0);
 
             if (result_1) {
-                func_801C8DE0(result_1, lbl_804DBCC0, lbl_804DBCB8,
-                              lbl_804DBCB8, lbl_804DBCBC, lbl_804DBCB8,
-                              lbl_804DBCB8, lbl_804DBCC4);
+                func_801C8DE0(result_1, -1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F,
+                              4.0F);
                 func_801C8E08(result_1);
             }
         }
