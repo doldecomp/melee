@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 function replace_symbol {
     local find=${1//\//\\\/}

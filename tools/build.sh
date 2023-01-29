@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-HERE=$(dirname "$(readlink -f $0)")
 clean=false
 rebuild_pattern=
 expected=false
@@ -68,7 +67,7 @@ if [ $clear = true ]; then
     clear
 fi
 
-pushd "$HERE"
+pushd "$(dirname "$(readlink -f $0)")/.." >/dev/null
 build_time() {
     date +%T.%N
 }
@@ -134,4 +133,4 @@ else
     build
 fi
 
-popd
+popd >/dev/null
