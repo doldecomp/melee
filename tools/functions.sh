@@ -1,18 +1,5 @@
 #!/usr/bin/env bash
 
-function replace_symbol {
-    local find=${1//\//\\\/}
-    local find=${find//[.]/\\.}
-    local replace=${2//\//\\\/}
-    echo "$find -> $replace"
-    find asm src -type f -regex 'Makefile\|.*\.\(c\|h\|s\|mk\|dox\|md\)$' \
-      -exec sed -i "s/\b$find\b/$replace/g" {} +
-}
-
-function reverse_symbol {
-    replace_symbol "$2" "$1"
-}
-
 function rename_module_symbols_asm {
     sed -rn 's/^(func|lbl)_([0-9A-F]{8})\b:$/\1_\2/pg' "$1" | while read line
     do

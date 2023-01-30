@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="melee_cli",
-    version="0.0.1",
+    version="0.0.2",
     description="An entry point for melee decomp command line tooling",
     packages=find_packages(),
     python_requires=">=3.10",

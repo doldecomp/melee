@@ -155,81 +155,81 @@ def run(args):
 
 
 def attach_subparser(subparsers):
-    parser_build = subparsers.add_parser(
-        "build", aliases=["b"], help="Build the project"
+    parser = subparsers.add_parser(
+        "build", aliases=["b"], help="build the project"
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-c",
         "--clean",
         action="store_true",
         help='"make clean" before running make',
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-r",
         "--rebuild",
         type=str,
         help="delete *.o files matching the given pattern;"
         " -c takes priority",
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-e",
         "--expected",
         action="store_true",
         help="after a successful make run, sync build to expected/build",
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-f",
         "--frank",
         action="store_true",
         help="pass EPILOGUE_PROCESS=1 to make",
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-m",
         "--map",
         action="store_true",
         help="pass GENERATE_MAP=1 to make",
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-n",
         "--non-matching",
         action="store_true",
         help="pass NON_MATCHING=1 to make",
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-s",
         "--skip-check",
         action="store_true",
         help="pass SKIP_CHECK=1 to make",
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-x",
         "--clear",
         action="store_true",
         help="clear the console before executing this script",
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-l",
         "--log",
         action="store_true",
         help="tee output to build.log",
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-d",
         "--dump",
         action="store_true",
         help="dump the built dol to asm (requires dadosod)",
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-j",
         "--jobs",
         type=int,
         help="pass a number of threads to make",
     )
-    parser_build.add_argument(
+    parser.add_argument(
         "-p",
         "--pretty",
         action="store_true",
         help='run "make format" before running make',
     )
 
-    parser_build.set_defaults(func=run)
+    parser.set_defaults(func=run)

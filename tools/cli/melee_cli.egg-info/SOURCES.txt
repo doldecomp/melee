@@ -3,6 +3,7 @@ main.py
 setup.py
 commands/__init__.py
 commands/build.py
+commands/replace.py
 melee_cli.egg-info/PKG-INFO
 melee_cli.egg-info/SOURCES.txt
 melee_cli.egg-info/dependency_links.txt
