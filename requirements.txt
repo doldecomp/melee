@@ -1,4 +1,4 @@
--e tools/melee-cli
+-e tools/cli
 argcomplete==2.0.0
 colorama==0.4.6
 coverage==7.1.0

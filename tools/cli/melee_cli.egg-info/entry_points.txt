@@ -1,3 +1,2 @@
 [console_scripts]
 melee = main:main
-
