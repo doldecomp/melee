@@ -177,10 +177,12 @@ HSD_JObj* func_801C13D0(s32 arg0, s32 depth);
 void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
                    HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5);
 
+#define GET_GROUND(gobj) ((Ground*) HSD_GObjGetUserData(gobj))
+
 static inline void Ground_JObjInline1(HSD_GObj* gobj)
 {
-    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
-    HSD_JObj* jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     func_801C2ED0(jobj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }

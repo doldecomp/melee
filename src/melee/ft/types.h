@@ -1307,6 +1307,28 @@ struct SpecialAttrs_Sandbag {
     char filler0[0x100];
 };
 
+/// @todo Rename this and its members; investigate using it elsewhere.
+union Struct2070 {
+    struct {
+        s8 x2070;
+
+        u8 x2071_b0_3 : 4;
+        u8 x2071_b4 : 1;
+        u8 x2071_b5 : 1;
+        u8 x2071_b6 : 1;
+        u8 x2071_b7 : 1;
+
+        u8 x2072_b0_3 : 4;
+        u8 x2072_b4 : 1;
+        u8 x2072_b5 : 1;
+        u8 x2072_b6 : 1;
+        u8 x2072_b7 : 1;
+
+        u8 x2073;
+    };
+    s32 x2070_int;
+};
+
 struct Fighter {
     /* 0x0 */ HSD_GObj* x0_fighter;
     /* 0x4 */ FighterKind x4_fighterKind;
@@ -1676,26 +1698,7 @@ struct Fighter {
     /* 0x2064 */ s32 x2064_ledgeCooldown;
     /* 0x2068 */ s32 x2068_attackID;
     u8 filler_x206C[0x2070 - 0x206C];
-    /* 0x2070 */ union {
-        struct {
-            s8 x2070;
-
-            u8 x2071_b0_3 : 4;
-            u8 x2071_b4 : 1;
-            u8 x2071_b5 : 1;
-            u8 x2071_b6 : 1;
-            u8 x2071_b7 : 1;
-
-            u8 x2072_b0_3 : 4;
-            u8 x2072_b4 : 1;
-            u8 x2072_b5 : 1;
-            u8 x2072_b6 : 1;
-            u8 x2072_b7 : 1;
-
-            u8 x2073;
-        };
-        s32 x2070_int;
-    };
+    /* 0x2070 */ union Struct2070 x2070;
     u8 filler_x2074[0x208C - 0x2074];
     /* 0x208C */ s32 x208C;
     /* 0x2090 */ u16 x2090;

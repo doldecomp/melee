@@ -5,6 +5,8 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
 
+extern s16 lbl_803E8B5C[];
+
 void lbl_8022109C(HSD_GObj*);
 bool lbl_802210C8(HSD_GObj*);
 void lbl_802210D0(HSD_GObj*);
@@ -33,7 +35,6 @@ HSD_GObj* func_80220FB4(int);
 void func_80221288(HSD_GObj*);
 
 void lbl_80221208(void);
-void func_801C8DE0(void);
-void func_801C8CFC(void);
+void func_801C8DE0(s32, f32, f32, f32, f32, f32, f32, f32);
 
 #endif

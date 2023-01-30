@@ -28,7 +28,7 @@ required arguments:
   --map MAP             Path to symbol map
 ```
 - **Use the `--asm-src-ext`/`--asm-obj-ext` arguments if your project does not use `.s` and `.o` respectively.**
-  
+
 ## Customization
 - Custom library/range progress tracking
     - Create `Slice` objects for areas of the DOL you would like to specifically track progress, such as libraries.
@@ -57,7 +57,7 @@ required arguments:
    - In `calcprogress.py`, configure the following functions for your project:
      - `exec_progress_callback`: Any custom main exectuable (DOL/REL) progress display
      - `slice_group_progress_callback`: Any custom slice group progress display
-  
+
 ## Design
  - Rather than calculating the size of decompiled source files, this script opts to get the size of the non-decompiled, assembly files:
 1. Base DOL is read to get the total code/data size
@@ -69,6 +69,6 @@ required arguments:
    - This is not required by this design but saves time by not parsing any additional assembly that is not needed.
 4. All assembly listed above is parsed for `.section` directives, which are tracked by their size and type (code/data).
 5. Assembly section sizes are summed up against the code/data sum found by the DOL's sections.
-  
+
 ## Credits
  - Twilight Princess team from zeldaret, for the concept of calculating progress by finding the size of the assembly, rather than trying to assume what has been decompiled from the map
