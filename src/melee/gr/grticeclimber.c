@@ -118,13 +118,10 @@ void lbl_802210D0(HSD_GObj* arg0) {}
 
 void lbl_802210D4(HSD_GObj* arg0) {}
 
-extern f32 const lbl_804DBCB8;
-extern f32 const lbl_804DBCBC;
-
 void lbl_802210D8(HSD_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
-    func_801C7FF8(gobj, 69, 2, 1, lbl_804DBCB8, lbl_804DBCBC);
+    func_801C7FF8(gobj, 69, 2, 1, 0.0F, 1.0F);
     func_80221288(gobj);
 }
 
@@ -199,13 +196,39 @@ asm void lbl_80221208(void)
 #pragma pop
 #endif
 
-/// @todo Unknown struct
-u32 lbl_803E8B5C[] = {
-    0x00000001, 0x00020003, 0x00040005, 0x00060008, 0x0009000A, 0x000B000C,
-    0x000D000E, 0x000F0010, 0x00110012, 0x00130014, 0x00150016, 0x002C002D,
-    0x002E002F, 0x00300031, 0x00320033, 0x00340035, 0x00360037, 0x00380039,
-    0x003A003B, 0x003C003D, 0xFFFF0000,
+s16 lbl_803E8B5C[] = {
+    0,  1,  2,  3,  4,  5,  6,  8,  9,  10, 11, 12, 13, 14,
+    15, 16, 17, 18, 19, 20, 21, 22, 44, 45, 46, 47, 48, 49,
+    50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, 0,
 };
 
-extern f32 const lbl_804DBCC0;
-extern f32 const lbl_804DBCC4;
+void func_80221288(HSD_GObj* ground_gobj)
+{
+    Ground* gp = GET_GROUND(ground_gobj);
+    int i;
+
+    for (i = 0; lbl_803E8B5C[i] != -1; i++) {
+        enum_t result_0 = func_801C33C0(2, lbl_803E8B5C[i]);
+        if (result_0 != -1) {
+            bool result_1 =
+                func_801C8CFC(0, 0, gp, func_801C3FA4(ground_gobj, result_0), 0,
+                              lbl_80221208, 0);
+
+            if (result_1) {
+                func_801C8DE0(result_1, -1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F,
+                              4.0F);
+                func_801C8E08(result_1);
+            }
+        }
+    }
+}
+
+bool lbl_80221354(int arg0)
+{
+    return false;
+}
+
+bool lbl_8022135C(Vec3* arg0, int arg1, HSD_JObj* arg2)
+{
+    return true;
+}
