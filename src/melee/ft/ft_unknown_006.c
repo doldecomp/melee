@@ -692,3 +692,19 @@ void func_80088110(Fighter* fp)
     func_80025038(fp->x2168);
     fp->x2168 = 0;
 }
+
+void func_80088148(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
+{
+    sfx_id = func_80087D0C(fp, sfx_id);
+    fp->x2160 = func_800237A8(sfx_id, sfx_vol, sfx_pan);
+
+    {
+        int rand;
+        if (sfx_id >= 332 && sfx_id <= 370)
+            rand = HSD_Randi(200) - 100;
+        else
+            rand = 0;
+
+        func_80024B94(fp->x2160, rand);
+    }
+}

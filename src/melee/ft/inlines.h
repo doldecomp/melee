@@ -33,7 +33,7 @@
     } while (0)
 
 #define COPY_ATTRS(gobj, attributeName)                                        \
-    Fighter* fp = gobj->user_data;                                             \
+    Fighter* fp = GET_FIGHTER(gobj);                                           \
     attributeName* sA2 = (attributeName*) fp->x2D4_specialAttributes;          \
     attributeName* ext_attr = (attributeName*) fp->x10C_ftData->ext_attr;      \
     *sA2 = *ext_attr;
