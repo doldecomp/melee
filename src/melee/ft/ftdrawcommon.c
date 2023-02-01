@@ -33,19 +33,10 @@ extern void func_80369808(void);
 extern void func_800310B8(void);
 extern void func_80031060(void);
 extern void func_800C2600(void);
-extern void func_8000A1A8(void);
-extern void func_8000A044(void);
 extern void func_8001E2F8(void);
 extern void func_80014770(void);
 extern void func_800B395C(void);
 extern void func_800117F4(void);
-extern void func_8000A460(void);
-extern void func_8000A78C(void);
-extern void func_8000AB2C(void);
-extern void func_8000A95C(void);
-extern void func_8000A244(void);
-extern void func_8000A584(void);
-extern void func_80009F54(void);
 
 static inline void mtx_thing(MtxPtr mtx, Vec3* ptr, f32 val, f32 val2)
 {
@@ -124,7 +115,7 @@ lbl_8008060C:
 /* 8008060C 0007D1EC  C0 3F 00 38 */	lfs f1, 0x38(r31)
 /* 80080610 0007D1F0  38 9C 00 00 */	addi r4, r28, 0
 /* 80080614 0007D1F4  38 7A 09 14 */	addi r3, r26, 0x914
-/* 80080618 0007D1F8  4B F8 99 3D */	bl func_80009F54
+/* 80080618 0007D1F8  4B F8 99 3D */	bl lbColl_80009F54
 /* 8008061C 0007D1FC  2C 03 00 00 */	cmpwi r3, 0
 /* 80080620 0007D200  41 82 00 08 */	beq lbl_80080628
 /* 80080624 0007D204  3B C0 00 01 */	li r30, 1
@@ -148,7 +139,7 @@ lbl_80080654:
 /* 80080664 0007D244  38 BC 00 00 */	addi r5, r28, 0
 /* 80080668 0007D248  38 7A 11 A0 */	addi r3, r26, 0x11a0
 /* 8008066C 0007D24C  38 80 00 01 */	li r4, 1
-/* 80080670 0007D250  4B F8 9F 15 */	bl func_8000A584
+/* 80080670 0007D250  4B F8 9F 15 */	bl lbColl_8000A584
 /* 80080674 0007D254  2C 03 00 00 */	cmpwi r3, 0
 /* 80080678 0007D258  41 82 00 08 */	beq lbl_80080680
 /* 8008067C 0007D25C  3B C0 00 01 */	li r30, 1
@@ -178,7 +169,7 @@ lbl_800806C0:
 /* 800806CC 0007D2AC  38 A3 00 00 */	addi r5, r3, 0
 /* 800806D0 0007D2B0  38 9C 00 00 */	addi r4, r28, 0
 /* 800806D4 0007D2B4  38 7A 11 A0 */	addi r3, r26, 0x11a0
-/* 800806D8 0007D2B8  4B F8 9B 6D */	bl func_8000A244
+/* 800806D8 0007D2B8  4B F8 9B 6D */	bl lbColl_8000A244
 /* 800806DC 0007D2BC  2C 03 00 00 */	cmpwi r3, 0
 /* 800806E0 0007D2C0  41 82 00 08 */	beq lbl_800806E8
 /* 800806E4 0007D2C4  3B C0 00 01 */	li r30, 1
@@ -214,7 +205,7 @@ lbl_80080730:
 /* 80080740 0007D320  38 98 00 00 */	addi r4, r24, 0
 /* 80080744 0007D324  38 BC 00 00 */	addi r5, r28, 0
 /* 80080748 0007D328  38 7A 11 A0 */	addi r3, r26, 0x11a0
-/* 8008074C 0007D32C  4B F8 9E 39 */	bl func_8000A584
+/* 8008074C 0007D32C  4B F8 9E 39 */	bl lbColl_8000A584
 /* 80080750 0007D330  2C 03 00 00 */	cmpwi r3, 0
 /* 80080754 0007D334  41 82 00 08 */	beq lbl_8008075C
 /* 80080758 0007D338  3B C0 00 01 */	li r30, 1
@@ -235,7 +226,7 @@ lbl_80080770:
 /* 80080788 0007D368  38 A3 00 00 */	addi r5, r3, 0
 /* 8008078C 0007D36C  38 9C 00 00 */	addi r4, r28, 0
 /* 80080790 0007D370  38 7F 19 E4 */	addi r3, r31, 0x19e4
-/* 80080794 0007D374  4B F8 A1 C9 */	bl func_8000A95C
+/* 80080794 0007D374  4B F8 A1 C9 */	bl lbColl_8000A95C
 /* 80080798 0007D378  2C 03 00 00 */	cmpwi r3, 0
 /* 8008079C 0007D37C  41 82 00 08 */	beq lbl_800807A4
 /* 800807A0 0007D380  3B C0 00 01 */	li r30, 1
@@ -249,7 +240,7 @@ lbl_800807A4:
 /* 800807BC 0007D39C  38 A3 00 00 */	addi r5, r3, 0
 /* 800807C0 0007D3A0  38 9C 00 00 */	addi r4, r28, 0
 /* 800807C4 0007D3A4  38 7F 1A 08 */	addi r3, r31, 0x1a08
-/* 800807C8 0007D3A8  4B F8 A3 65 */	bl func_8000AB2C
+/* 800807C8 0007D3A8  4B F8 A3 65 */	bl lbColl_8000AB2C
 /* 800807CC 0007D3AC  2C 03 00 00 */	cmpwi r3, 0
 /* 800807D0 0007D3B0  41 82 00 08 */	beq lbl_800807D8
 /* 800807D4 0007D3B4  3B C0 00 01 */	li r30, 1
@@ -263,7 +254,7 @@ lbl_800807D8:
 /* 800807F0 0007D3D0  38 A3 00 00 */	addi r5, r3, 0
 /* 800807F4 0007D3D4  38 9C 00 00 */	addi r4, r28, 0
 /* 800807F8 0007D3D8  38 7F 19 C0 */	addi r3, r31, 0x19c0
-/* 800807FC 0007D3DC  4B F8 9F 91 */	bl func_8000A78C
+/* 800807FC 0007D3DC  4B F8 9F 91 */	bl lbColl_8000A78C
 /* 80080800 0007D3E0  2C 03 00 00 */	cmpwi r3, 0
 /* 80080804 0007D3E4  41 82 00 08 */	beq lbl_8008080C
 /* 80080808 0007D3E8  3B C0 00 01 */	li r30, 1
@@ -278,7 +269,7 @@ lbl_8008080C:
 lbl_80080828:
 /* 80080828 0007D408  38 7A 16 70 */	addi r3, r26, 0x1670
 /* 8008082C 0007D40C  38 9C 00 00 */	addi r4, r28, 0
-/* 80080830 0007D410  4B F8 9C 31 */	bl func_8000A460
+/* 80080830 0007D410  4B F8 9C 31 */	bl lbColl_8000A460
 /* 80080834 0007D414  2C 03 00 00 */	cmpwi r3, 0
 /* 80080838 0007D418  41 82 00 08 */	beq lbl_80080840
 /* 8008083C 0007D41C  3B C0 00 01 */	li r30, 1
@@ -385,7 +376,7 @@ lbl_8008098C:
 /* 800809A4 0007D584  C0 3F 00 38 */	lfs f1, 0x38(r31)
 /* 800809A8 0007D588  38 9C 00 00 */	addi r4, r28, 0
 /* 800809AC 0007D58C  38 7F 10 64 */	addi r3, r31, 0x1064
-/* 800809B0 0007D590  4B F8 96 95 */	bl func_8000A044
+/* 800809B0 0007D590  4B F8 96 95 */	bl lbColl_8000A044
 /* 800809B4 0007D594  2C 03 00 00 */	cmpwi r3, 0
 /* 800809B8 0007D598  41 82 00 08 */	beq lbl_800809C0
 /* 800809BC 0007D59C  3B C0 00 01 */	li r30, 1
@@ -403,7 +394,7 @@ lbl_800809E4:
 /* 800809E4 0007D5C4  C0 3F 00 38 */	lfs f1, 0x38(r31)
 /* 800809E8 0007D5C8  38 9C 00 00 */	addi r4, r28, 0
 /* 800809EC 0007D5CC  38 7A 16 14 */	addi r3, r26, 0x1614
-/* 800809F0 0007D5D0  4B F8 97 B9 */	bl func_8000A1A8
+/* 800809F0 0007D5D0  4B F8 97 B9 */	bl lbColl_8000A1A8
 /* 800809F4 0007D5D4  2C 03 00 00 */	cmpwi r3, 0
 /* 800809F8 0007D5D8  41 82 00 08 */	beq lbl_80080A00
 /* 800809FC 0007D5DC  3B C0 00 01 */	li r30, 1
@@ -603,7 +594,8 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         phi_r26 = fighter + 0x138 * 0;
         phi_r25 = 0U;
         do {
-            if (func_80009F54(&phi_r26->x914, arg1, fighter->x34_scale.y) != 0)
+            if (lbColl_80009F54(&phi_r26->x914, arg1, fighter->x34_scale.y) !=
+                0)
             {
                 phi_r30 = 1U;
             }
@@ -616,9 +608,9 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             phi_r26 = fighter + (0U * 0x4C);
             phi_r30 = phi_r30;
             while (phi_r25 < fighter->x119E_hurtboxNum) {
-                if (func_8000A584(phi_r26->x11A0_fighterHurtbox, 1, arg1,
-                                  func_8007F804(fighter),
-                                  fighter->xB0_pos.z) != 0)
+                if (lbColl_8000A584(phi_r26->x11A0_fighterHurtbox, 1, arg1,
+                                    func_8007F804(fighter),
+                                    fighter->xB0_pos.z) != 0)
                 {
                     phi_r30 = 1U;
                 }
@@ -631,9 +623,9 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 phi_r26 = fighter;
                 phi_r30 = phi_r30;
                 while (phi_r25 < fighter->x119E_hurtboxNum) {
-                    if (func_8000A244(phi_r26->x11A0_fighterHurtbox, arg1,
-                                      func_8007F804(fighter),
-                                      fighter->xB0_pos.z) != 0)
+                    if (lbColl_8000A244(phi_r26->x11A0_fighterHurtbox, arg1,
+                                        func_8007F804(fighter),
+                                        fighter->xB0_pos.z) != 0)
                     {
                         phi_r30 = 1U;
                     }
@@ -649,9 +641,9 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 phi_r26 = fighter;
                 phi_r30 = phi_r30;
                 while (phi_r25 < fighter->x119E_hurtboxNum) {
-                    if (func_8000A584(phi_r26->x11A0_fighterHurtbox, phi_r24,
-                                      arg1, func_8007F804(fighter),
-                                      fighter->xB0_pos.z) != 0)
+                    if (lbColl_8000A584(phi_r26->x11A0_fighterHurtbox, phi_r24,
+                                        arg1, func_8007F804(fighter),
+                                        fighter->xB0_pos.z) != 0)
                     {
                         phi_r30 = 1U;
                     }
@@ -661,20 +653,20 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             }
         }
         if ((fighter->x2218_flag.bits.b3 != 0) &&
-            (func_8000A95C(fighter + 0x19E4, arg1, func_8007F804(fighter),
-                           fighter->xB0_pos.z) != 0))
+            (lbColl_8000A95C(fighter + 0x19E4, arg1, func_8007F804(fighter),
+                             fighter->xB0_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
         if ((fighter->x2218_flag.bits.b6 != 0) &&
-            (func_8000AB2C(fighter + 0x1A08, arg1, func_8007F804(fighter),
-                           fighter->xB0_pos.z) != 0))
+            (lbColl_8000AB2C(fighter + 0x1A08, arg1, func_8007F804(fighter),
+                             fighter->xB0_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
         if ((fighter->x221B_flag.bits.b0 != 0) &&
-            (func_8000A78C(fighter + 0x19C0, arg1, func_8007F804(fighter),
-                           fighter->xB0_pos.z) != 0))
+            (lbColl_8000A78C(fighter + 0x19C0, arg1, func_8007F804(fighter),
+                             fighter->xB0_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
@@ -685,7 +677,7 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         phi_r26 = fighter;
         phi_r25 = 0U;
         while (phi_r25 < (u8) fighter->x166C) {
-            if (func_8000A460(&phi_r26->x1670, arg1) != 0) {
+            if (lbColl_8000A460(&phi_r26->x1670, arg1) != 0) {
                 phi_r30 = 1U;
             }
             phi_r25 += 1;
@@ -738,8 +730,8 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
     }
     if ((fighter->x21FC_flag.bits.b2 != 0) &&
         (fighter->x2227_flag.bits.b2 == 0) &&
-        (func_8000A044(&fighter->x1064_thrownHitbox, arg1,
-                       fighter->x34_scale.y) != 0))
+        (lbColl_8000A044(&fighter->x1064_thrownHitbox, arg1,
+                         fighter->x34_scale.y) != 0))
     {
         phi_r30 = 1U;
     }
@@ -747,7 +739,8 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         phi_r26 = fighter + (0U * 0x2C);
         phi_r25 = 0U;
         do {
-            if (func_8000A1A8(&phi_r26->x1614, arg1, fighter->x34_scale.y) != 0)
+            if (lbColl_8000A1A8(&phi_r26->x1614, arg1, fighter->x34_scale.y) !=
+                0)
             {
                 phi_r30 = 1U;
             }

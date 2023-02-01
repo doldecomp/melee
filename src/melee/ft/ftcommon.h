@@ -91,7 +91,7 @@ f32 Fighter_GetModelScale(Fighter*);
 void func_8007F6A4(Fighter*, HSD_JObj*);
 void func_8007F76C(HSD_GObj*);
 void func_8007F7B4(HSD_GObj*);
-void* func_8007F804(Fighter*);
+Mtx* func_8007F804(Fighter*);
 void func_8007F824(HSD_GObj*);
 void func_8007F86C(HSD_GObj*);
 void func_8007F8B4(Fighter*, Vec3* v);

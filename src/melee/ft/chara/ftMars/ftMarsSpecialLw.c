@@ -209,7 +209,7 @@ void lbl_80138E68(HSD_GObj* gobj)
         hb = (s32) fp;
         while (ndx < 4) {
             if (*(s32*) (hb + 0x914) == 1) {
-                func_8007ABD0((Hitbox*) (hb + 0x914), fp->x2340_stateVar1,
+                func_8007ABD0((HitCapsule*) (hb + 0x914), fp->x2340_stateVar1,
                               gobj);
             }
             ndx++;
@@ -248,7 +248,7 @@ void lbl_80138F14(HSD_GObj* gobj)
         hb = (s32) fp;
         while (ndx < 4) {
             if (*(s32*) (hb + 0x914) == 1) {
-                func_8007ABD0((Hitbox*) (hb + 0x914), fp->x2340_stateVar1,
+                func_8007ABD0((HitCapsule*) (hb + 0x914), fp->x2340_stateVar1,
                               gobj);
             }
             ndx++;

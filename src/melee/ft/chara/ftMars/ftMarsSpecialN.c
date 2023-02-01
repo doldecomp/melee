@@ -303,7 +303,7 @@ void lbl_80136EE4(HSD_GObj* gobj)
         while (ndx < 4) {
             if (*(s32*) (hb + 0x914) == 1) {
                 func_8007ABD0(
-                    (Hitbox*) (hb + 0x914),
+                    (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
                     (f32) (attr->x4 + fp->x2340_stateVar1 / 30 * attr->x8),
@@ -362,7 +362,7 @@ void lbl_80137010(HSD_GObj* gobj)
         while (ndx < 4) {
             if (*(s32*) (hb + 0x914) == 1) {
                 func_8007ABD0(
-                    (Hitbox*) (hb + 0x914),
+                    (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
                     (f32) (attr->x4 + fp->x2340_stateVar1 / 30 * attr->x8),

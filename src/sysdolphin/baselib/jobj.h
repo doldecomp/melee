@@ -93,7 +93,7 @@ struct HSD_JObj {
     /* 0x18 */ union {
         HSD_SList* ptcl;
         struct _HSD_DObj* dobj;
-        struct _HSD_Spline* spline;
+        HSD_Spline* spline;
     } u;
     /* 0x1C */ Quaternion rotate;
     /* 0x2C */ Vec3 scale;
@@ -113,7 +113,7 @@ typedef struct _HSD_Joint {
     struct _HSD_Joint* next;
     union {
         struct _HSD_DObjDesc* dobjdesc;
-        struct _HSD_Spline* spline;
+        HSD_Spline* spline;
         struct _HSD_SList* ptcl;
     } u;
     Vec3 rotation;
@@ -367,12 +367,12 @@ static inline f32 HSD_JObjGetTranslationY(HSD_JObj* jobj)
 
 /// @todo This is misplaced or something; @c jobj.h must not include @c
 ///       lbcollision.
-void HSD_JObjUnkMtxPtr(HSD_JObj*);
+void lbColl_JObjSetupMatrix(HSD_JObj*);
 
 static inline void HSD_JObjGetMtx(HSD_JObj* jobj)
 {
     HSD_ASSERT(1144, jobj);
-    HSD_JObjUnkMtxPtr(jobj);
+    lbColl_JObjSetupMatrix(jobj);
 }
 
 static inline void HSD_JObjCopyMtx(HSD_JObj* jobj, Mtx mtx)

@@ -1592,7 +1592,7 @@ void func_8007F7B4(HSD_GObj* gobj)
     fp->x80_self_vel.x = -fp->facing_dir * fabs_inline(fp->x80_self_vel.x);
 }
 
-void* func_8007F804(Fighter* fp)
+Mtx* func_8007F804(Fighter* fp)
 {
     if (fp->x34_scale.z != 1) {
         return &fp->x44_mtx;
