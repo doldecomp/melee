@@ -6,29 +6,46 @@
 #include <placeholder.h>
 #include <sysdolphin/baselib/jobj.h>
 
-struct HitVictim {
-    /// @at{0} @sz{4}
-    HSD_GObj* entity;
+struct HitResult {
+    HSD_JObj* bone;
 
-    /// @at{4} @sz{4}
-    /// @brief The number of frames needed to pass before this entity can be hit
-    ///        again; 0 = can't rehit
-    s32 iframes;
+    /// Follows attach bone position if toggled OFF
+    u8 skip_update_pos : 1;
+
+    Vec3 pos;
+    Vec3 offset;
+    f32 size;
 };
 
-struct Hitbox {
-    Tangibility tangiblity;
-    s32 x4;
-    s32 x8;
-    f32 xC;
-    u8 x10[0x1C - 0x10];
-    f32 x1C;
-    u8 x20[0x30 - 0x20];
+struct HitVictim {
+    UNK_T victim;
+    UNK_T x4;
+};
+
+struct HitCapsule {
+    /// @at{0} @sz{4}
+    HitCapsuleState state;
+
+    /// @at{4} @sz{C}
+    /// The offset of point @e a of the capsule.
+    Vec3 a_offset;
+
+    /// @at{10} @sz{C}
+    /// The offset of point @e b of the capsule.
+    Vec3 b_offset;
+
+    /// @at{1C} @sz{4}
+    /// The scale of the capsule.
+    f32 scl;
+
+    HSD_JObj* bone;
+
+    u8 x24[0x30 - 0x24];
 
     /// @at{30} @sz{4}
     HitElement element;
 
-    u8 x34[0x38 - 0x34];
+    char unk_34[0x38 - 0x34];
 
     /// @at{38} @sz{4}
     int sfx_severity;
@@ -44,7 +61,7 @@ struct Hitbox {
     u8 x40_b5 : 1;
     u8 x40_b6 : 1;
     u8 x40_b7 : 1;
-    u8 x41[0x42 - 0x41];
+    char unk_41[0x42 - 0x41];
     u8 x42_b0 : 1;
     u8 x42_b1 : 1;
     u8 x42_b2 : 1;
@@ -68,93 +85,144 @@ struct Hitbox {
     };
     u8 x44;
     u8 x45;
-    u8 x46[0x4C - 0x46];
-    int x4C;
-
-    u8 x50[0x58 - 0x50];
-    int x58;
-    int x5C;
-    int x60;
-    int x64;
-    u8 x68[0x74 - 0x68];
+    char unk_46[0x4C - 0x46];
+    Vec3 x4C;
+    Vec3 x58;
+    Vec3 x64;
+    int x70;
     /// @at{74} @sz{60}
     HitVictim victims_1[12];
     /// @at{D4} @sz{60}
     HitVictim victims_2[12];
 
-    /// @at{134} @sz{4}
-    /// @todo This union is unacceptable.
-    union {
-        HSD_GObj* owner;
-        u8 hit_grabbed_victim_only : 1;
-    };
+    HSD_GObj* owner;
 };
 
-struct Hurtbox {
-    Tangibility tangiblity; // 0x0, whether or not this hurtbox can be hit
-    Vec3 x4_hurt1_offset;   // 0x4
-    Vec3 x10_hurt2_offset;  // 0x10
-    f32 x1C_scale;          // 0x1c
-    HSD_JObj* x20_jobj;     // 0x20
-    unsigned char x24_1_is_updated : 1; // 0x24, 0x80, if enabled, wont
-                                        // update position
-    unsigned char x24_2 : 1;            // 0x24 0x40
-    unsigned char x24_3 : 1;            // 0x24 0x20
-    unsigned char x24_4 : 1;            // 0x24 0x10
-    unsigned char x24_5 : 1;            // 0x24 0x08
-    unsigned char x24_6 : 1;            // 0x24 0x04
-    unsigned char x24_7 : 1;            // 0x24 0x02
-    unsigned char x24_8 : 1;            // 0x24 0x01
-    Vec3 x28_hurt1_pos;                 // 0x28
-    Vec3 x34_hurt2_pos;                 // 0x34
-    u32 x40_bone_index;                 // 0x40
-    u32 x44_hurt_kind;                  // 0x44. 0 = low, 1 = mid, 2 = high
-    u32 x48_is_grabbable;               // 0x48
+struct HurtCapsule {
+    /// @at{0} @sz{4}
+    Tangibility tangibility;
+
+    /// @at{4} @sz{C}
+    /// The offset of point @e a of the capsule.
+    Vec3 a_offset;
+
+    /// @at{10} @sz{C}
+    /// The offset of point @e b of the capsule.
+    Vec3 b_offset;
+
+    /// @at{1C} @sz{4}
+    /// The scale of the capsule.
+    f32 scl;
+
+    HSD_JObj* bone; // 0x20
+    u8 skip_update_pos : 1;
+    u8 x24_b1 : 1; // 0x24 0x40
+    u8 x24_b2 : 1; // 0x24 0x20
+    u8 x24_b3 : 1; // 0x24 0x10
+    u8 x24_b4 : 1; // 0x24 0x08
+    u8 x24_b5 : 1; // 0x24 0x04
+    u8 x24_b6 : 1; // 0x24 0x02
+    u8 x24_b7 : 1; // 0x24 0x01
+
+    /// @at{28} @sz{C}
+    /// The position of point @e a of the capsule.
+    Vec3 a_pos;
+
+    /// @at{28} @sz{C}
+    /// The position of point @e b of the capsule.
+    Vec3 b_pos;
+
+    int bone_idx;      // 0x40
+    enum_t kind;       // 0x44. 0 = low, 1 = mid, 2 = high
+    bool is_grabbable; // 0x48
 };
 
-void HSD_JObjUnkMtxPtr(HSD_JObj*);
-bool func_80008248(bool, Hurtbox*, void*, f32, f32, f32);
-void func_80008440(Hitbox*);
-void func_80008434(Hitbox*);
-bool func_8000ACFC(UNK_T, Hitbox*);
-void func_80008688();
-void func_800084FC();
-void func_80008820();
-void func_80077464();
-int func_80005BB0(Hitbox*, int);
-bool func_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
-                   f32 hurt_pos_z);
-bool func_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32);
-bool func_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32);
-void func_80007AFC(Hitbox*, Hitbox*, f32, f32);
-void func_80007DD8();
-void func_80008D30();
-void func_80008428(Hitbox*);
-void func_80005C44();
-void func_80005EBC();
-void func_80005FC0(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3);
-void func_80006094(int*, int*, int*, int*, int*, int*, f32, f32);
-void func_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32);
-void func_80006E58();
-void func_800077A0();
-void func_80007B78(Mtx, Mtx, f32, f32);
-bool func_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32);
-void func_800083C4();
-void func_800089B8();
-void func_80008A5C();
-void func_80008DA4();
-void func_80008FC8();
-void func_800096B4();
-void func_80009DD4();
-void func_80009F54();
-void func_8000A044();
-void func_8000A10C();
-void func_8000A1A8();
-void func_8000A244();
-void func_8000A460();
-void func_8000A584();
-void func_8000A78C();
-void func_8000A95C();
-void func_8000AB2C();
+void lbColl_JObjSetupMatrix(HSD_JObj*);
+bool lbColl_80008248(HitCapsule*, HurtCapsule*, Mtx, f32, f32, f32);
+void lbColl_80008440(HitCapsule*);
+void lbColl_80008434(HitCapsule*);
+bool lbColl_8000ACFC(UNK_T, HitCapsule*);
+bool lbColl_80008688(HitCapsule*, enum_t, Fighter*);
+void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst);
+UNK_RET lbColl_80008820(UNK_PARAMS);
+int lbColl_80005BB0(HitCapsule*, int);
+bool lbColl_80007ECC(HitCapsule*, HurtCapsule*, Mtx, f32 hit_scl_y,
+                     f32 hurt_scl_y, f32 hurt_pos_z);
+bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32);
+bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, unk_t, s32, f32, f32,
+                     f32);
+bool lbColl_80007AFC(HitCapsule*, HitCapsule*, f32, f32);
+void lbColl_80007DD8(HitCapsule*, HitResult*, Mtx, unk_t, unk_t, f32);
+UNK_RET lbColl_80008D30(UNK_PARAMS);
+void lbColl_80008428(HitCapsule*);
+bool lbColl_80005C44(Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
+f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, f32*);
+f32 lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*);
+bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32);
+bool lbColl_800067F8(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32, f32);
+bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Mtx, Vec3*, f32,
+                     f32 scl, f32);
+
+/// @param[out] angle
+void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*, f32* angle, f32,
+                     f32);
+
+UNK_RET lbColl_80007B78(Mtx, Mtx, f32, f32);
+void lbColl_800083C4(HurtCapsule*);
+UNK_RET lbColl_800089B8(UNK_PARAMS);
+UNK_RET lbColl_80008A5C(UNK_PARAMS);
+UNK_RET lbColl_80008DA4(UNK_PARAMS);
+UNK_RET lbColl_80008FC8(UNK_PARAMS);
+UNK_RET lbColl_800096B4(UNK_PARAMS);
+UNK_RET lbColl_80009DD4(UNK_PARAMS);
+UNK_RET lbColl_80009F54(UNK_PARAMS);
+UNK_RET lbColl_8000A044(UNK_PARAMS);
+UNK_RET lbColl_8000A10C(UNK_PARAMS);
+UNK_RET lbColl_8000A1A8(UNK_PARAMS);
+void lbColl_8000A244(HurtCapsule*, u32, Mtx, f32);
+UNK_RET lbColl_8000A460(UNK_PARAMS);
+UNK_RET lbColl_8000A584(UNK_PARAMS);
+UNK_RET lbColl_8000A78C(UNK_PARAMS);
+bool lbColl_8000A95C(HitResult*, unk_t, Mtx*, f32 pos_z);
+UNK_RET lbColl_8000AB2C(UNK_PARAMS);
+
+static inline bool approximatelyZero(f32 x)
+{
+    bool result;
+
+    if ((x < 0.00001f) && (x > -0.00001f))
+        result = true;
+    else
+        result = false;
+
+    return result;
+}
+
+static inline bool testPlusX(Vec3* a, Vec3* b, Vec3* c, f32 offset)
+{
+    f32 x = a->x + offset;
+    if (x < b->x && x < c->x)
+        return false;
+
+    return true;
+}
+
+static inline bool testPlus(float a, float b, float c, float offset)
+{
+    float x = a + offset;
+    if (x < b && x < c)
+        return false;
+
+    return true;
+}
+
+static inline bool testMinusX(Vec3* a, Vec3* b, Vec3* c, f32 offset)
+{
+    f32 x = a->x - offset;
+    if (x > b->x && x > c->x)
+        return false;
+
+    return true;
+}
 
 #endif

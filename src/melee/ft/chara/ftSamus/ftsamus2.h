@@ -18,7 +18,7 @@ void ftSamus_80128FD4(HSD_GObj* fighter_gobj);
 int ftSamus_80129100(HSD_GObj* fighter_gobj, s32* arg1, s32* arg2);
 s32 ftSamus_80129158(HSD_GObj* fighter_gobj);
 s32 ftSamus_801291A8(HSD_GObj* fighter_gobj);
-bool ftSamus_80128A1C(HSD_GObj* fighter_gobj, s32 arg1, f32 farg1);
+bool ftSamus_80128A1C(HSD_GObj* fighter_gobj, unk_t arg1, f32 farg1);
 void ftSamus_80128C04(HSD_GObj* fighter_gobj);
 
 #endif
