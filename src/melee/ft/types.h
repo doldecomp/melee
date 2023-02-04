@@ -1519,14 +1519,14 @@ struct Fighter {
     /* 0x8A8 */ f32 x8A8_unk;
     /* 0x8AC */ HSD_JObj* x8AC_animSkeleton;
     u8 filler_x8AC[0x914 - 0x8B0];
-    /* 0x914 */ Hitbox x914[4];
+    /* 0x914 */ HitCapsule x914[4];
     u8 filler_xDF4[0x1064 - 0xDF4];
-    /* 0x1064 */ Hitbox x1064_thrownHitbox;
+    /* 0x1064 */ HitCapsule x1064_thrownHitbox;
     /* 0x119C */ u8 x119C_teamUnk;
     /* 0x119D */ u8 grabber_unk1;
     /* 0x119E */ u8 x119E_hurtboxNum;
     /* 0x119F */ u8 x119F;
-    /* 0x11A0 */ Hurtbox x11A0_fighterHurtbox[15];
+    /* 0x11A0 */ HurtCapsule x11A0_fighterHurtbox[15];
     /* 0x1614 */ unk_t x1614;
     /* 0x1618 */ u8 filler_x1618[0x166C - 0x1618];
     /* 0x166C */ u32 x166C;
@@ -1640,29 +1640,9 @@ struct Fighter {
     /* 0x19B4 */ f32 x19B4_shieldUnk;
     /* 0x19B8 */ f32 x19B8_shieldUnk;
     /* 0x19BC */ s32 x19BC_shieldDamageTaken3;
-    struct {
-        HSD_JObj* x19C0_boneAttach;
-        u8 x19C4_updatePos : 1;
-        Vec3 x19C8_pos;
-        Vec3 x19D4_offset;
-        f32 x19E0_size;
-    } ShieldHit;
-    struct {
-        HSD_JObj* x19E4_boneAttach;
-        u8 x19E8_updatePos : 1; // Follows attach bone position if toggled OFF
-                                // //
-        Vec3 x19EC_pos;
-        Vec3 x19F8_offset;
-        f32 x1A04_size;
-    } ReflectHit;
-    struct {
-        HSD_JObj* x1A08_boneAttach;
-        u8 x1A0C_updatePos : 1; // Follows attach bone position if toggled OFF
-                                // //
-        Vec3 x1A10_pos;
-        Vec3 x1A1C_offset;
-        f32 x1A28_size;
-    } AbsorbHit;
+    /* 0x19C0 */ HitResult shield_hit;
+    /* 0x19E4 */ HitResult reflect_hit;
+    /* 0x1A08 */ HitResult absorb_hit;
     struct {
         f32 x1A2C_reflectHitDirection;
         s32 x1A30_maxDamage;

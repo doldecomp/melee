@@ -15,9 +15,9 @@
 void ftNess_YoyoUpdateHitPos(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    Hitbox* hitbox_data = &fp->x914[0];
+    HitCapsule* hitbox_data = &fp->x914[0];
 
-    if (hitbox_data->tangiblity != Vulnerable) {
+    if (hitbox_data->state != HitCapsule_Disabled) {
         if (fp->sa.ness.x2230_yoyoHitboxPos.x != 0.0f ||
             fp->sa.ness.x2230_yoyoHitboxPos.y != 0.0f)
         {
@@ -29,14 +29,14 @@ void ftNess_YoyoUpdateHitPos(HSD_GObj* fighter_gobj)
 void ftNess_YoyoCheckTimedRehit(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
-    Hitbox* hitbox_data;
+    HitCapsule* hitbox_data;
 
     if (fp->x2200_ftcmd_var0 == 0) {
         if (fp->nessVars[0].AttackHi4.yoyoRehitTimer > 0) {
             fp->nessVars[0].AttackHi4.yoyoRehitTimer--;
             if (fp->nessVars[0].AttackHi4.yoyoRehitTimer == 0) {
-                func_80008440(&fp->x914[0]);
-                func_80008434(&fp->x914[0]);
+                lbColl_80008440(&fp->x914[0]);
+                lbColl_80008434(&fp->x914[0]);
             }
         }
     }
@@ -58,7 +58,7 @@ static void ftNess_YoyoApplyDamage(f32 unk_float, HSD_GObj* fighter_gobj)
     f32 final_damage;
 
     if (unk_float != 0.0f) {
-        if (fp->x914->tangiblity == Invincible) {
+        if (fp->x914->state == HitCapsule_Enabled) {
             // Likely 1/256 but won't match.
             // ((f32) 1 / 256.0) does not match either.
             f32 const mul = 0.0039059999398887157f;
@@ -68,7 +68,7 @@ static void ftNess_YoyoApplyDamage(f32 unk_float, HSD_GObj* fighter_gobj)
             damage_mul = ness_attr->xB0_YOYO_DAMAGE_MUL * mul - 1.0f;
 
             final_damage =
-                fp->x914->xC * (damage_mul * charge_duration2 + 1.0f);
+                fp->x914->a_offset.z * (damage_mul * charge_duration2 + 1.0f);
 
             func_8007ABD0(&fp->x914[0], final_damage, fighter_gobj);
         }
@@ -394,10 +394,10 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* fighter_gobj)
     ness_attr = getFtSpecialAttrs(fighter_data2);
 
     if ((0.0f != smashChargeFrames) &&
-        ((s32) fighter_data2->x914->tangiblity == Invincible))
+        ((s32) fighter_data2->x914->state == HitCapsule_Enabled))
     {
         func_8007ABD0(fighter_data2->x914,
-                      (u32) (fighter_data2->x914->xC *
+                      (u32) (fighter_data2->x914->a_offset.z *
                              ((((0.0039059999398887157f *
                                  ness_attr->xB0_YOYO_DAMAGE_MUL) -
                                 1.0f) *
@@ -666,8 +666,8 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj)
                 fp->nessVars[0].AttackHi4.yoyoRehitTimer =
                     (s32) (yoyoRehitTimer - 1);
                 if ((s32) fp->nessVars[0].AttackHi4.yoyoRehitTimer == 0) {
-                    func_80008440(&fp->x914[0]);
-                    func_80008434(&fp->x914[0]);
+                    lbColl_80008440(&fp->x914[0]);
+                    lbColl_80008434(&fp->x914[0]);
                 }
             }
         }
@@ -822,8 +822,8 @@ void ftNess_AttackHi4_Charge_Anim(
             fighter_data2->nessVars[0].AttackHi4.yoyoRehitTimer--;
             if ((s32) fighter_data2->nessVars[0].AttackHi4.yoyoRehitTimer == 0)
             {
-                func_80008440(fighter_data2->x914);
-                func_80008434(fighter_data2->x914);
+                lbColl_80008440(fighter_data2->x914);
+                lbColl_80008434(fighter_data2->x914);
             }
         }
     }
@@ -915,8 +915,8 @@ void ftNess_AttackHi4_Release_Anim(
             if (yoyoRehitTimer > 0) {
                 fp->nessVars[0].AttackHi4.yoyoRehitTimer--;
                 if ((s32) fp->nessVars[0].AttackHi4.yoyoRehitTimer == 0) {
-                    func_80008440(fp->x914);
-                    func_80008434(fp->x914);
+                    lbColl_80008440(fp->x914);
+                    lbColl_80008434(fp->x914);
                 }
             }
         }

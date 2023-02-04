@@ -230,7 +230,7 @@ void ftPikachu_8012557C(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
 
-    if (fp->x914[0].tangiblity == Invincible) {
+    if (fp->x914[0].state == HitCapsule_Enabled) {
         f32 float_result =
             (fp->x2340_stateVar1 * pika_attr->x2C) + pika_attr->x28;
         func_8007ABD0(&fp->x914[0], float_result, fighter_gobj);
@@ -248,7 +248,7 @@ void ftPikachu_8012561C(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
 
-    if (fp->x914[0].tangiblity == Invincible) {
+    if (fp->x914[0].state == HitCapsule_Enabled) {
         f32 float_result =
             (fp->x2340_stateVar1 * pika_attr->x2C) + pika_attr->x28;
         func_8007ABD0(&fp->x914[0], float_result, fighter_gobj);

@@ -14,7 +14,7 @@ s32 func_8026B320(HSD_GObj*);
 
 bool func_8026B594(HSD_GObj*);
 
-/// Apply Item Damage -  may not be itHit* ???
+/// Apply Item Damage
 f32 func_8026B1D4(HSD_GObj* item_gobj, itHit* itemHitboxUnk);
 
 /// Copy Item position vector

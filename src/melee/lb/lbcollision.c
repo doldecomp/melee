@@ -7,13 +7,24 @@
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/mtx/mtxvec.h>
+#include <math.h>
+#include <melee/lb/forward.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
-#include <placeholder.h>
+#include <MetroTRK/intrinsics.h>
+#include <sysdolphin/baselib/baselib_shared_data_003.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
+
+/// @todo Toggle for WIP functions
+#if 0
+#undef MUST_MATCH
+#ifdef __MWERKS__
+#pragma require_prototypes off
+#endif
+#endif
 
 int lbl_803B9880[] = {
     0x00083D60, 0x00083D60, 0x00083D60, 0x0000005B, 0x0000005A, 0x00000059,
@@ -25,7 +36,7 @@ int lbl_803B9880[] = {
     0x00035BAF, 0x00035BB2, 0x00035BB5, 0x00083D60, 0x00083D60, 0x0000020D,
 };
 
-int func_80005BB0(Hitbox* arg0, int arg1)
+int lbColl_80005BB0(HitCapsule* arg0, int arg1)
 {
     uint temp_r0;
     uint temp_r6;
@@ -50,9 +61,10 @@ f64 const lbl_804D7A00 = 1;
 f32 const lbl_804D7A08 = 1;
 f64 const lbl_804D7A10 = 0;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm void func_80005C44()
+asm bool lbColl_80005C44(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
+                         f32 arg8, f32 arg9)
 { // clang-format off
     nofralloc
 /* 80005C44 00002824  94 21 FF B8 */	stwu r1, -0x48(r1)
@@ -78,7 +90,7 @@ asm void func_80005C44()
 /* 80005C94 00002874  FC 00 08 40 */	fcmpo cr0, f0, f1
 /* 80005C98 00002878  40 80 00 0C */	bge lbl_80005CA4
 /* 80005C9C 0000287C  38 60 00 00 */	li r3, 0
-/* 80005CA0 00002880  48 00 02 14 */	b lbl_80005EB4
+             /* 80005CA0 00002880  48 00 02 14 */	b lbl_80005EB4
 lbl_80005CA4:
 /* 80005CA4 00002884  EC 03 10 28 */	fsubs f0, f3, f2
 /* 80005CA8 00002888  FC 00 08 40 */	fcmpo cr0, f0, f1
@@ -234,12 +246,132 @@ lbl_80005EB4:
 /* 80005EB8 00002A98  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+int lbColl_80005C44(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, f32 arg8,
+                    f32 arg9)
+{
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 sp34;
+    f32 sp30;
+    f32 sp2C;
+    f32 temp_f10;
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 temp_f2;
+    f32 temp_f3;
+    f32 temp_f3_2;
+    f32 temp_f4;
+    f32 temp_f4_2;
+    f32 temp_f5;
+    f32 temp_f7;
+    f32 temp_f8;
+    f32 temp_f9;
+    f32 var_f6;
+    int var_r0;
+
+    temp_f2 = arg8 + arg9;
+    sp38 = arg0->x;
+    sp3C = arg0->y;
+    sp40 = arg0->z;
+    sp2C = arg2->x;
+    sp30 = arg2->y;
+    sp34 = arg2->z;
+    temp_f3 = arg1->x;
+    if (sp38 > temp_f3) {
+        if ((sp38 + temp_f2) < sp2C) {
+            return 0;
+        }
+        if ((temp_f3 - temp_f2) > sp2C) {
+            return 0;
+        }
+        goto block_9;
+    }
+    if ((sp38 - temp_f2) > sp2C) {
+        return 0;
+    }
+    if ((temp_f3 + temp_f2) < sp2C) {
+        return 0;
+    }
+block_9:
+    temp_f1 = arg1->y;
+    if (sp3C > temp_f1) {
+        if ((sp3C + temp_f2) < sp30) {
+            return 0;
+        }
+        if ((temp_f1 - temp_f2) > sp30) {
+            return 0;
+        }
+        goto block_18;
+    }
+    if ((sp3C - temp_f2) > sp30) {
+        return 0;
+    }
+    if ((temp_f1 + temp_f2) < sp30) {
+        return 0;
+    }
+block_18:
+    temp_f4 = arg1->z;
+    if (sp40 > temp_f4) {
+        if ((sp40 + temp_f2) < sp34) {
+            return 0;
+        }
+        if ((temp_f4 - temp_f2) > sp34) {
+            return 0;
+        }
+        goto block_27;
+    }
+    if ((sp40 - temp_f2) > sp34) {
+        return 0;
+    }
+    if ((temp_f4 + temp_f2) < sp34) {
+        return 0;
+    }
+block_27:
+    temp_f9 = temp_f1 - sp3C;
+    temp_f10 = temp_f4 - sp40;
+    temp_f8 = temp_f3 - sp38;
+    temp_f7 =
+        (temp_f10 * temp_f10) + ((temp_f8 * temp_f8) + (temp_f9 * temp_f9));
+    if ((temp_f7 < lbl_804D78D0) && (temp_f7 > lbl_804D78D4)) {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 != 0) {
+        var_f6 = lbl_804D78D8;
+    } else {
+        temp_f4_2 = -((temp_f10 * (sp40 - sp34)) +
+                      ((temp_f8 * (sp38 - sp2C)) + (temp_f9 * (sp3C - sp30)))) /
+                    temp_f7;
+        var_f6 = temp_f4_2;
+        if (temp_f4_2 > (f32) lbl_804D78E0) {
+            var_f6 = lbl_804D78E8;
+        } else if (var_f6 < (f32) lbl_804D78F0) {
+            var_f6 = lbl_804D78D8;
+        }
+    }
+    arg3->x = (temp_f8 * var_f6) + sp38;
+    arg3->y = (temp_f9 * var_f6) + sp3C;
+    arg3->z = (temp_f10 * var_f6) + sp40;
+    temp_f5 = arg3->y - sp30;
+    temp_f3_2 = arg3->z - sp34;
+    temp_f1_2 = arg3->x - sp2C;
+    if ((temp_f2 * temp_f2) < ((temp_f3_2 * temp_f3_2) +
+                               ((temp_f1_2 * temp_f1_2) + (temp_f5 * temp_f5))))
+    {
+        return 0;
+    }
+    return 1;
+}
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm void func_80005EBC()
-{ // clang-format off
+asm f32 lbColl_80005EBC(Vec3*, Vec3*, Vec3*, f32*){
+    // clang-format off
     nofralloc
 /* 80005EBC 00002A9C  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 80005EC0 00002AA0  80 E3 00 00 */	lwz r7, 0(r3)
@@ -310,11 +442,55 @@ lbl_80005F80:
 /* 80005FBC 00002B9C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+f32 lbColl_80005EBC(Vec3* arg0, Vec3* arg1, Vec3* arg2, f32* arg3)
+{
+    f32 sp58;
+    f32 sp54;
+    f32 sp50;
+    f32 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 temp_f1;
+    f32 temp_f1_2;
+    f32 temp_f4;
+    f32 temp_f6;
+    f32 temp_f7;
+    f32 temp_f7_2;
+    f32 temp_f8;
+    f32 var_f5;
+
+    sp50 = arg0->x;
+    sp54 = arg0->y;
+    sp58 = arg0->z;
+    temp_f6 = arg1->x - arg0->x;
+    temp_f7_2 = arg1->y - arg0->y;
+    temp_f8 = arg1->z - arg0->z;
+    sp38 = arg2->x;
+    sp3C = arg2->y;
+    sp40 = arg2->z;
+    temp_f1_2 =
+        -((temp_f8 * (sp58 - sp40)) +
+          ((temp_f6 * (sp50 - sp38)) + (temp_f7_2 * (sp54 - sp3C)))) /
+        ((temp_f8 * temp_f8) + ((temp_f6 * temp_f6) + (temp_f7_2 * temp_f7_2)));
+    var_f5 = temp_f1_2;
+    if (temp_f1_2 > (f32) lbl_804D78E0) {
+        var_f5 = lbl_804D78E8;
+    } else if (var_f5 < (f32) lbl_804D78F0) {
+        var_f5 = lbl_804D78D8;
+    }
+    temp_f7 = ((temp_f7_2 * var_f5) + sp54) - arg2->y;
+    temp_f4 = ((temp_f8 * var_f5) + sp58) - arg2->z;
+    *arg3 = var_f5;
+    temp_f1 = ((temp_f6 * var_f5) + sp50) - arg2->x;
+    return (temp_f4 * temp_f4) + ((temp_f1 * temp_f1) + (temp_f7 * temp_f7));
+}
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm void func_80005FC0(){
+asm f32 lbColl_80005FC0(Vec3*, Vec3*, Vec3*, f32*){
     // clang-format off
     nofralloc
 /* 80005FC0 00002BA0  94 21 FF A0 */	stwu r1, -0x60(r1)
@@ -374,13 +550,54 @@ lbl_80006064:
 /* 80006090 00002C70  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+f32 lbColl_80005FC0(Vec3* a, Vec3* b, Vec3* c, f32* out)
+{
+    {
+        Vec3 temp_a;
+        temp_a.x = a->x;
+        temp_a.y = a->y;
+        temp_a.z = a->z;
+        {
+            f32 diff_ba_x = b->x - a->x;
+            f32 diff_ba_y = b->y - a->y;
+
+            Vec3 temp_c;
+            temp_c.x = c->x;
+            temp_c.y = c->y;
+            temp_c.z = c->z;
+            {
+                f32 result0 = -(diff_ba_x * (temp_a.x - temp_c.x) +
+                                (diff_ba_y * (temp_a.y - temp_c.y))) /
+                              (diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y);
+                {
+                    f32 result1 = result0;
+                    if (result0 > (f32) 1.0) {
+                        result1 = 1.0f;
+                    } else if (result1 < (f32) 0.0) {
+                        result1 = 0.0f;
+                    }
+                    {
+                        f32 x, y;
+
+                        y = diff_ba_y * result1 + temp_a.y - c->y;
+                        *out = result1;
+                        x = diff_ba_x * result1 + temp_a.x - c->x;
+                        return x * x + y * y;
+                    }
+                }
+            }
+        }
+    }
+}
 #endif
 
 f64 const lbl_804D7A18 = 0.5;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm void func_80006094(int*, int*, int*, int*, int*, int*, f32, f32)
+asm bool lbColl_80006094(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32)
 { // clang-format off
     nofralloc
 /* 80006094 00002C74  7C 08 02 A6 */	mflr r0
@@ -801,7 +1018,7 @@ lbl_8000668C:
 /* 800066A0 00003280  38 9D 00 00 */	addi r4, r29, 0
 /* 800066A4 00003284  38 BA 00 00 */	addi r5, r26, 0
 /* 800066A8 00003288  38 C1 00 A4 */	addi r6, r1, 0xa4
-/* 800066AC 0000328C  4B FF F8 11 */	bl func_80005EBC
+/* 800066AC 0000328C  4B FF F8 11 */	bl lbColl_80005EBC
 /* 800066B0 00003290  FE 40 08 90 */	fmr f18, f1
 /* 800066B4 00003294  48 00 00 20 */	b lbl_800066D4
 lbl_800066B8:
@@ -810,7 +1027,7 @@ lbl_800066B8:
 /* 800066C0 000032A0  38 9D 00 00 */	addi r4, r29, 0
 /* 800066C4 000032A4  38 BB 00 00 */	addi r5, r27, 0
 /* 800066C8 000032A8  38 C1 00 A4 */	addi r6, r1, 0xa4
-/* 800066CC 000032AC  4B FF F7 F1 */	bl func_80005EBC
+/* 800066CC 000032AC  4B FF F7 F1 */	bl lbColl_80005EBC
 /* 800066D0 000032B0  FE 40 08 90 */	fmr f18, f1
 lbl_800066D4:
 /* 800066D4 000032B4  C8 02 80 30 */	lfd f0, lbl_804D7A10(r2)
@@ -821,7 +1038,7 @@ lbl_800066D4:
 /* 800066E8 000032C8  38 9B 00 00 */	addi r4, r27, 0
 /* 800066EC 000032CC  38 BC 00 00 */	addi r5, r28, 0
 /* 800066F0 000032D0  38 C1 00 A0 */	addi r6, r1, 0xa0
-/* 800066F4 000032D4  4B FF F7 C9 */	bl func_80005EBC
+/* 800066F4 000032D4  4B FF F7 C9 */	bl lbColl_80005EBC
 /* 800066F8 000032D8  48 00 00 1C */	b lbl_80006714
 lbl_800066FC:
 /* 800066FC 000032DC  C2 82 80 28 */	lfs f20, lbl_804D7A08(r2)
@@ -829,7 +1046,7 @@ lbl_800066FC:
 /* 80006704 000032E4  38 9B 00 00 */	addi r4, r27, 0
 /* 80006708 000032E8  38 BD 00 00 */	addi r5, r29, 0
 /* 8000670C 000032EC  38 C1 00 A0 */	addi r6, r1, 0xa0
-/* 80006710 000032F0  4B FF F7 AD */	bl func_80005EBC
+/* 80006710 000032F0  4B FF F7 AD */	bl lbColl_80005EBC
 lbl_80006714:
 /* 80006714 000032F4  FC 12 08 40 */	fcmpo cr0, f18, f1
 /* 80006718 000032F8  40 80 00 10 */	bge lbl_80006728
@@ -894,11 +1111,344 @@ lbl_800067AC:
 /* 800067F4 000033D4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+inline bool end(Vec3* a, Vec3* b, f32 unk_sum)
+{
+    f32 y = a->y - b->y;
+    f32 x = a->x - b->x;
+    f32 z = a->z - b->z;
+
+    if (unk_sum * unk_sum < z * z + (x * x + y * y))
+        return false;
+
+    return true;
+}
+
+int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
+                    Vec3* arg5, f32 arg6, f32 arg7)
+{
+    {
+        Vec3 vec4;
+        f32 sp30;
+        f32 sp34;
+        f32 sp38;
+        Vec3 arg4_offset;
+        Vec3 arg5_offset;
+        f32 sp3C;
+        f32 temp_f1;
+        f32 unk_sum = arg6 + arg7;
+        vec4.x = arg0->x;
+        vec4.y = arg0->y;
+        vec4.z = arg0->z;
+
+        sp30 = vec4.z;
+        sp34 = arg2->x;
+        sp38 = arg2->y;
+
+        arg4_offset.x = vec4.x;
+        arg4_offset.y = vec4.y;
+        arg4_offset.z = vec4.z;
+
+        {
+            f32 temp_r0_2 = arg2->z;
+            sp3C = temp_r0_2;
+
+            arg5_offset.x = sp34;
+            arg5_offset.y = sp38;
+            arg5_offset.z = temp_r0_2;
+        }
+
+        {
+            f32 arg1_x = arg1->x;
+            if (arg4_offset.x > arg1_x) {
+                if (!testPlusX(&arg4_offset, &arg5_offset, arg3, unk_sum))
+                    return false;
+
+                if (!testMinusX(&arg4_offset, &arg5_offset, arg3, unk_sum))
+                    return false;
+
+                goto block_13;
+            }
+            {
+                if (!testMinusX(&arg4_offset, &arg5_offset, arg3, unk_sum))
+                    return false;
+            }
+            {
+                f32 x = arg1_x + unk_sum;
+                if (x < arg5_offset.x && x < arg3->x)
+                    return false;
+            }
+
+        block_13 : {
+            temp_f1 = arg1->y;
+            if (arg4_offset.y > temp_f1) {
+                {
+                    f32 temp_f3;
+                    temp_f3 = arg4_offset.y + unk_sum;
+
+                    if (temp_f3 < arg5_offset.y && temp_f3 < arg3->y)
+                        return false;
+                }
+
+                {
+                    f32 temp_f3_2 = temp_f1 - unk_sum;
+
+                    if (temp_f3_2 > arg5_offset.y && temp_f3_2 > arg3->y)
+                        return false;
+                }
+
+                goto block_26;
+            }
+
+            {
+                f32 y = arg4_offset.y - unk_sum;
+                if (y > arg5_offset.y && y > arg3->y)
+                    return false;
+            }
+
+            {
+                f32 y = temp_f1 + unk_sum;
+                if (y < arg5_offset.y && y < arg3->y)
+                    return false;
+            }
+        }
+        block_26 : {
+            f32 temp_f2_5 = arg1->z;
+            if (arg4_offset.z > temp_f2_5) {
+                {
+                    f32 temp_f4;
+                    temp_f4 = arg4_offset.z + unk_sum;
+                    if ((temp_f4 < arg5_offset.z) && (temp_f4 < arg3->z)) {
+                        return false;
+                    }
+                }
+                {
+                    f32 temp_f4_2;
+                    temp_f4_2 = temp_f2_5 - unk_sum;
+                    if ((temp_f4_2 > arg5_offset.z) && (temp_f4_2 > arg3->z)) {
+                        return false;
+                    }
+                }
+                goto block_39;
+            }
+            {
+                f32 temp_f4_3;
+                temp_f4_3 = arg4_offset.z - unk_sum;
+                if ((temp_f4_3 > arg5_offset.z) && (temp_f4_3 > arg3->z)) {
+                    return false;
+                }
+            }
+            {
+                f32 temp_f4_4;
+                temp_f4_4 = temp_f2_5 + unk_sum;
+                if ((temp_f4_4 < arg5_offset.z) && (temp_f4_4 < arg3->z)) {
+                    return false;
+                }
+            }
+        block_39 : {
+            f32 arg4_scl;
+
+            f32 temp_f25 = temp_f1 - arg4_offset.y;
+            f32 temp_f5 = arg3->y;
+            f32 temp_f24 = temp_f2_5 - arg4_offset.z;
+            f32 temp_f22 = temp_f5 - arg5_offset.y;
+            f32 temp_f13 = arg4_offset.y - arg5_offset.y;
+            f32 temp_f4_5 = arg3->x;
+            f32 temp_f26 = arg1_x - arg4_offset.x;
+            f32 temp_f23 = temp_f4_5 - arg5_offset.x;
+            f32 temp_f6 = arg3->z;
+            f32 arg5_offset_base = temp_f6 - arg5_offset.z;
+            f32 temp_f8 = temp_f24 * arg5_offset_base + temp_f26 * temp_f23 +
+                          temp_f25 * temp_f22;
+            f32 temp_f7 = arg5_offset_base * arg5_offset_base +
+                          temp_f23 * temp_f23 + temp_f22 * temp_f22;
+            f32 temp_f19 = arg4_offset.x - arg5_offset.x;
+            f32 temp_f3_5 = (temp_f24 * temp_f24) +
+                            ((temp_f26 * temp_f26) + (temp_f25 * temp_f25));
+            f32 temp_f13_2 = arg4_offset.z - arg5_offset.z;
+            f32 temp_f12 = arg5_offset_base * temp_f13_2 + temp_f23 * temp_f19 +
+                           temp_f22 * temp_f13;
+            f32 temp_f11 = (temp_f24 * temp_f13_2) + temp_f26 * temp_f19 +
+                           temp_f25 * temp_f13;
+            f32 temp_f10 = temp_f3_5 * temp_f7 - temp_f8 * temp_f8;
+
+            {
+                f32 arg5_scl;
+                if (approximatelyZero(temp_f7)) {
+                    if (approximatelyZero(temp_f3_5)) {
+                        arg4_scl = 0.0f;
+                        arg5_scl = 0.0f;
+                    } else {
+                        arg5_scl = 0.0f;
+                        {
+                            f32 temp_f1_2 = -temp_f11 / temp_f3_5;
+                            arg4_scl = temp_f1_2;
+
+                            if (temp_f1_2 > (f32) 1.0)
+                                arg4_scl = 1.0f;
+                            else if (arg4_scl < (f32) 0.0)
+                                arg4_scl = 0.0f;
+                        }
+                    }
+                } else {
+                    if (approximatelyZero(temp_f10)) {
+                        f32 temp_f9 = (0.5 * temp_f22 + arg5_offset.y);
+                        f32 temp_f7_2 = (0.5 * temp_f23 + arg5_offset.x);
+                        f32 temp_f10_2 = arg4_offset.y - temp_f9;
+                        f32 temp_f11_2 = temp_f1 - temp_f9;
+                        f32 temp_f8_2 = 0.5 * arg5_offset_base + arg5_offset.z;
+                        f32 temp_f3_6 = arg4_offset.x - temp_f7_2;
+                        f32 temp_f9_2 = arg1_x - temp_f7_2;
+                        f32 arg4_offset_z = arg4_offset.z - temp_f8_2;
+                        f32 temp_f2_6 = temp_f2_5 - temp_f8_2;
+
+                        // lhs and rhs each the same inline
+                        if ((arg4_offset_z * arg4_offset_z +
+                             ((temp_f3_6 * temp_f3_6) +
+                              (temp_f10_2 * temp_f10_2))) <
+                            ((temp_f2_6 * temp_f2_6) +
+                             ((temp_f9_2 * temp_f9_2) +
+                              (temp_f11_2 * temp_f11_2))))
+                        {
+                            Vec3 vec2;
+                            f32 sp90;
+                            f32 sp8C;
+                            f32 sp88;
+                            f32 temp_f7_4;
+                            f32 temp_f8_3;
+                            f32 temp_f9_3;
+                            vec2.x = sp34;
+                            vec2.y = sp38;
+                            vec2.z = sp3C;
+                            temp_f7_4 = temp_f4_5 - arg2->x;
+                            temp_f8_3 = temp_f5 - arg2->y;
+                            sp88 = vec4.x;
+                            temp_f9_3 = temp_f6 - arg2->z;
+                            sp8C = vec4.y;
+                            sp90 = sp30;
+                            arg4_scl = 0.0f;
+                            {
+                                f32 var_f2 =
+                                    -((temp_f9_3 * (vec2.z - sp90)) +
+                                      ((temp_f7_4 * (vec2.x - sp88)) +
+                                       (temp_f8_3 * (vec2.y - sp8C)))) /
+                                    ((temp_f9_3 * temp_f9_3) +
+                                     ((temp_f7_4 * temp_f7_4) +
+                                      (temp_f8_3 * temp_f8_3)));
+                                if (var_f2 > (f32) 1.0) {
+                                    var_f2 = 1.0f;
+                                } else if (var_f2 < (f32) 0.0) {
+                                    var_f2 = 0.0f;
+                                }
+                                arg5_scl = var_f2;
+                            }
+                        } else {
+                            f32 sp58;
+                            f32 sp60;
+                            f32 sp48;
+                            f32 sp5C;
+                            f32 sp44;
+                            f32 sp40;
+                            f32 temp_f10_3;
+                            f32 temp_f11_3;
+                            f32 temp_f9_4;
+                            sp40 = sp34;
+                            sp44 = sp38;
+                            sp48 = sp3C;
+                            arg4_scl = 1.0f;
+                            temp_f9_4 = temp_f4_5 - arg2->x;
+                            temp_f10_3 = temp_f5 - arg2->y;
+                            sp58 = arg1->x;
+                            temp_f11_3 = temp_f6 - arg2->z;
+                            sp5C = arg1->y;
+                            sp60 = arg1->z;
+                            {
+                                f32 var_f2_2 =
+                                    -temp_f11_3 * (sp48 - sp60) +
+                                    temp_f9_4 * sp40 - sp58 +
+                                    temp_f10_3 * sp44 -
+                                    sp5C / (temp_f11_3 * temp_f11_3) +
+                                    temp_f9_4 * temp_f9_4 +
+                                    temp_f10_3 * temp_f10_3;
+
+                                if (var_f2_2 > (f32) 1.0)
+                                    var_f2_2 = 1.0f;
+                                else if (var_f2_2 < (f32) 0.0)
+                                    var_f2_2 = 0.0f;
+
+                                arg5_scl = var_f2_2;
+                            }
+                        }
+                    } else {
+                        f32 temp_f1_3 =
+                            temp_f8 * temp_f12 - temp_f7 * temp_f11 / temp_f10;
+                        arg5_scl =
+                            ((temp_f3_5 * temp_f12) - (temp_f8 * temp_f11)) /
+                            temp_f10;
+                        arg4_scl = temp_f1_3;
+                        if (temp_f1_3 > (f32) 1.0 || arg4_scl < (f32) 0.0 ||
+                            arg5_scl > (f32) 1.0 || arg5_scl < (f32) 0.0)
+                        {
+                            f32 var_f18;
+                            f32 var_f19;
+                            f32 var_f1;
+                            f32 spA4;
+
+                            if (arg4_scl < (f32) 0.0) {
+                                var_f19 = 0.0f;
+                                var_f18 =
+                                    lbColl_80005EBC(arg2, arg3, arg0, &spA4);
+                            } else {
+                                var_f19 = 1.0f;
+                                var_f18 =
+                                    lbColl_80005EBC(arg2, arg3, arg1, &spA4);
+                            }
+
+                            {
+                                f32 spA0;
+                                if (arg5_scl < (f32) 0.0) {
+                                    arg5_scl = 0.0f;
+                                    var_f1 = lbColl_80005EBC(arg0, arg1, arg2,
+                                                             &spA0);
+                                } else {
+                                    arg5_scl = 1.0f;
+                                    var_f1 = lbColl_80005EBC(arg0, arg1, arg3,
+                                                             &spA0);
+                                }
+
+                                if (var_f18 < var_f1) {
+                                    arg4_scl = var_f19;
+                                    arg5_scl = spA4;
+                                } else {
+                                    arg4_scl = spA0;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                arg4->x = temp_f26 * arg4_scl + arg4_offset.x;
+                arg4->y = temp_f25 * arg4_scl + arg4_offset.y;
+                arg4->z = temp_f24 * arg4_scl + arg4_offset.z;
+
+                arg5->x = temp_f23 * arg5_scl + arg5_offset.x;
+                arg5->y = temp_f22 * arg5_scl + arg5_offset.y;
+                arg5->z = arg5_offset_base * arg5_scl + arg5_offset.z;
+            }
+        }
+            return end(arg4, arg5, unk_sum);
+        }
+        }
+    }
+}
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm void func_800067F8(f32*, f32*, f32*, f32*, f32*, f32*, f32, f32, f32){
+asm bool lbColl_800067F8(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, f32, f32,
+                         f32)
+{
     // clang-format off
     nofralloc
 /* 800067F8 000033D8  7C 08 02 A6 */	mflr r0
@@ -1259,7 +1809,7 @@ lbl_80006D10:
 /* 80006D24 00003904  38 9D 00 00 */	addi r4, r29, 0
 /* 80006D28 00003908  38 BA 00 00 */	addi r5, r26, 0
 /* 80006D2C 0000390C  38 C1 00 A4 */	addi r6, r1, 0xa4
-/* 80006D30 00003910  4B FF F2 91 */	bl func_80005FC0
+/* 80006D30 00003910  4B FF F2 91 */	bl lbColl_80005FC0
 /* 80006D34 00003914  FE E0 08 90 */	fmr f23, f1
 /* 80006D38 00003918  48 00 00 20 */	b lbl_80006D58
 lbl_80006D3C:
@@ -1268,7 +1818,7 @@ lbl_80006D3C:
 /* 80006D44 00003924  38 9D 00 00 */	addi r4, r29, 0
 /* 80006D48 00003928  38 BB 00 00 */	addi r5, r27, 0
 /* 80006D4C 0000392C  38 C1 00 A4 */	addi r6, r1, 0xa4
-/* 80006D50 00003930  4B FF F2 71 */	bl func_80005FC0
+/* 80006D50 00003930  4B FF F2 71 */	bl lbColl_80005FC0
 /* 80006D54 00003934  FE E0 08 90 */	fmr f23, f1
 lbl_80006D58:
 /* 80006D58 00003938  C8 02 80 30 */	lfd f0, lbl_804D7A10(r2)
@@ -1279,7 +1829,7 @@ lbl_80006D58:
 /* 80006D6C 0000394C  38 9B 00 00 */	addi r4, r27, 0
 /* 80006D70 00003950  38 BC 00 00 */	addi r5, r28, 0
 /* 80006D74 00003954  38 C1 00 A0 */	addi r6, r1, 0xa0
-/* 80006D78 00003958  4B FF F2 49 */	bl func_80005FC0
+/* 80006D78 00003958  4B FF F2 49 */	bl lbColl_80005FC0
 /* 80006D7C 0000395C  48 00 00 1C */	b lbl_80006D98
 lbl_80006D80:
 /* 80006D80 00003960  C3 02 80 28 */	lfs f24, lbl_804D7A08(r2)
@@ -1287,7 +1837,7 @@ lbl_80006D80:
 /* 80006D88 00003968  38 9B 00 00 */	addi r4, r27, 0
 /* 80006D8C 0000396C  38 BD 00 00 */	addi r5, r29, 0
 /* 80006D90 00003970  38 C1 00 A0 */	addi r6, r1, 0xa0
-/* 80006D94 00003974  4B FF F2 2D */	bl func_80005FC0
+/* 80006D94 00003974  4B FF F2 2D */	bl lbColl_80005FC0
 lbl_80006D98:
 /* 80006D98 00003978  FC 17 08 40 */	fcmpo cr0, f23, f1
 /* 80006D9C 0000397C  40 80 00 10 */	bge lbl_80006DAC
@@ -1343,14 +1893,327 @@ lbl_80006E1C:
 /* 80006E54 00003A34  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
+                     f32 p, f32 q, f32 r)
+{
+    f32 sum_pq = p + q;
+
+    f32 a_z;
+    Vec3 a0;
+    Vec3 a1;
+
+    a0.x = a->x;
+    a0.y = a->y;
+    a0.z = a_z = a->z;
+    a1.x = a0.x;
+    a1.y = a0.y;
+    a1.z = a_z;
+    {
+        Vec3 c0;
+        f32 temp_r0_2;
+
+        c0.x = c->x;
+        c0.y = c->y;
+        c0.z = temp_r0_2 = c->z;
+
+        {
+            Vec3 c1;
+
+            c1.x = c0.x;
+            c1.y = c0.y;
+            c1.z = temp_r0_2;
+            {
+                f32 b_x = b->x;
+                if (a1.x > b_x) {
+                    {
+                        f32 x = a1.x + sum_pq;
+                        if (x < c1.x && x < d->x)
+                            return false;
+                    }
+
+                    {
+                        f32 x = b_x - sum_pq;
+                        if ((x > c1.x) && (x > d->x))
+                            return false;
+                    }
+
+                } else {
+                    {
+                        f32 x = a1.x - sum_pq;
+                        if (x > c1.x && x > d->x)
+                            return false;
+                    }
+
+                    {
+                        f32 temp_f2_4 = b_x + sum_pq;
+                        if (temp_f2_4 < c1.x && temp_f2_4 < d->x)
+                            return false;
+                    }
+                }
+
+                {
+                    f32 b_y = b->y;
+                    if (a1.y > b_y) {
+                        {
+                            f32 y;
+                            y = a1.y + sum_pq;
+                            if (y < c1.y && y < d->y)
+                                return false;
+                        }
+                        {
+                            f32 y = b_y - sum_pq;
+                            if (y > c1.y && y > d->y)
+                                return false;
+                        }
+
+                    } else {
+                        {
+                            f32 y = a1.y - sum_pq;
+                            if (y > c1.y && y > d->y)
+                                return false;
+                        }
+                        {
+                            f32 y = b_y + sum_pq;
+                            if (y < c1.y && y < d->y)
+                                return false;
+                        }
+                    }
+
+                    {
+                        f32 diff_ba_y = b_y - a1.y;
+                        f32 d_y = d->y;
+                        f32 diff_ac_y = a1.y - c1.y;
+                        f32 diff_dc_y = d_y - c1.y;
+                        f32 diff_ba_x = b_x - a1.x;
+                        f32 d_x = d->x;
+                        f32 diff_dc_x = d_x - c1.x;
+
+                        f32 dot2_diff_ba_dc =
+                            diff_ba_x * diff_dc_x + diff_ba_y * diff_dc_y;
+
+                        f32 sqdist2_dc =
+                            diff_dc_x * diff_dc_x + diff_dc_y * diff_dc_y;
+                        f32 sqdist2_ba =
+                            diff_ba_x * diff_ba_x + diff_ba_y * diff_ba_y;
+                        f32 diff_ac_x = a1.x - c1.x;
+
+                        f32 dot2_diff_dc_ac =
+                            diff_dc_x * diff_ac_x + diff_dc_y * diff_ac_y;
+
+                        f32 dot2_diff_ba_ac =
+                            diff_ba_x * diff_ac_x + diff_ba_y * diff_ac_y;
+
+                        f32 determinant = sqdist2_ba * sqdist2_dc -
+                                          dot2_diff_ba_dc * dot2_diff_ba_dc;
+
+                        {
+                            f32 scl_e;
+                            f32 scl_f;
+                            if (approximatelyZero(sqdist2_dc)) {
+                                if (approximatelyZero(sqdist2_ba)) {
+                                    scl_e = 0.0f;
+                                    scl_f = 0.0f;
+                                } else {
+                                    f32 temp_f1_2;
+                                    scl_f = 0.0f;
+                                    temp_f1_2 = -dot2_diff_ba_ac / sqdist2_ba;
+                                    scl_e = temp_f1_2;
+                                    if (temp_f1_2 > (f32) 1.0) {
+                                        scl_e = 1.0f;
+                                    } else if (scl_e < (f32) 0.0) {
+                                        scl_e = 0.0f;
+                                    }
+                                }
+                            } else if (approximatelyZero(determinant)) {
+                                f32 temp_f7_2 = 0.5 * diff_dc_y + c1.y;
+                                f32 temp_f5_2 = 0.5 * diff_dc_x + c1.x;
+                                f32 temp_f6_2 = a1.y - temp_f7_2;
+                                f32 temp_f7_3 = b_y - temp_f7_2;
+                                {
+                                    f32 temp_scl_f;
+                                    f32 f4 = a1.x - temp_f5_2;
+                                    f32 temp_f5_3 = b_x - temp_f5_2;
+                                    if ((f4 * f4 + temp_f6_2 * temp_f6_2) <
+                                        (temp_f5_3 * temp_f5_3 +
+                                         temp_f7_3 * temp_f7_3))
+                                    {
+                                        f32 diff_dc_x;
+                                        f32 temp_f8_2;
+                                        Vec3 c3;
+                                        c3.x = c0.x;
+                                        c3.y = c0.y;
+                                        c3.z = c0.z;
+                                        diff_dc_x = d_x - c->x;
+                                        temp_f8_2 = d_y - c->y;
+                                        {
+                                            {
+                                                Vec3 a2;
+                                                f32 diff_dc_z;
+                                                a2.x = a0.x;
+                                                diff_dc_z = d->z - c->z;
+                                                a2.y = a0.y;
+                                                a2.z = a0.z;
+                                                scl_e = 0.0f;
+                                                temp_scl_f =
+                                                    -(diff_dc_z *
+                                                      (c3.z - a2.z)) +
+                                                    ((diff_dc_x *
+                                                      (c3.x - a2.x)) +
+                                                     (temp_f8_2 *
+                                                      (c3.y - a2.y))) /
+                                                        ((diff_dc_z *
+                                                          diff_dc_z) +
+                                                         ((diff_dc_x *
+                                                           diff_dc_x) +
+                                                          (temp_f8_2 *
+                                                           temp_f8_2)));
+                                            }
+                                        }
+                                        if (temp_scl_f > (f32) 1.0) {
+                                            temp_scl_f = 1.0f;
+                                        } else if (temp_scl_f < (f32) 0.0) {
+                                            temp_scl_f = 0.0f;
+                                        }
+                                        scl_f = temp_scl_f;
+                                    } else {
+                                        Vec3 c2;
+
+                                        c2.x = c0.x;
+                                        c2.y = c0.y;
+                                        c2.z = c0.z;
+                                        {
+                                            f32 diff_dc_x1;
+                                            scl_e = 1.0f;
+                                            diff_dc_x1 = d_x - c->x;
+                                            {
+                                                f32 diff_dc_y1;
+                                                f32 diff_dc_z1;
+                                                diff_dc_y1 = d_y - c->y;
+                                                diff_dc_z1 = d->z - c->z;
+                                                {
+                                                    Vec3 b0;
+
+                                                    b0.x = b->x;
+                                                    b0.y = b->y;
+                                                    b0.z = b->z;
+                                                    {
+                                                        f32 var_f2_2 =
+                                                            -(diff_dc_z1 *
+                                                                  (c2.z -
+                                                                   b0.z) +
+                                                              ((diff_dc_x1 *
+                                                                (c2.x - b0.x)) +
+                                                               (diff_dc_y1 *
+                                                                (c2.y -
+                                                                 b0.y)))) /
+                                                            ((diff_dc_z1 *
+                                                              diff_dc_z1) +
+                                                             ((diff_dc_x1 *
+                                                               diff_dc_x1) +
+                                                              (diff_dc_y1 *
+                                                               diff_dc_y1)));
+                                                        if (var_f2_2 >
+                                                            (f32) 1.0)
+                                                        {
+                                                            var_f2_2 = 1.0f;
+                                                        } else if (var_f2_2 <
+                                                                   (f32) 0.0)
+                                                        {
+                                                            var_f2_2 = 0.0f;
+                                                        }
+                                                        scl_f = var_f2_2;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                f32 temp_f1_3 =
+                                    ((dot2_diff_ba_dc * dot2_diff_dc_ac) -
+                                     (sqdist2_dc * dot2_diff_ba_ac)) /
+                                    determinant;
+                                scl_f = ((sqdist2_ba * dot2_diff_dc_ac) -
+                                         (dot2_diff_ba_dc * dot2_diff_ba_ac)) /
+                                        determinant;
+                                scl_e = temp_f1_3;
+                                if ((temp_f1_3 > (f32) 1.0) ||
+                                    (scl_e < (f32) 0.0) ||
+                                    (scl_f > (f32) 1.0) || (scl_f < (f32) 0.0))
+                                {
+                                    f32 out0;
+                                    f32 temp_scl_e;
+                                    f32 result0;
+                                    {
+                                        if (scl_e < (f32) 0.0) {
+                                            temp_scl_e = 0.0f;
+                                            result0 =
+                                                lbColl_80005FC0(c, d, a, &out0);
+                                        } else {
+                                            temp_scl_e = 1.0f;
+                                            result0 =
+                                                lbColl_80005FC0(c, d, b, &out0);
+                                        }
+                                    }
+                                    {
+                                        f32 result1;
+                                        f32 out1;
+                                        if (scl_f < (f32) 0.0) {
+                                            scl_f = 0.0f;
+                                            result1 =
+                                                lbColl_80005FC0(a, b, c, &out1);
+                                        } else {
+                                            scl_f = 1.0f;
+                                            result1 =
+                                                lbColl_80005FC0(a, b, d, &out1);
+                                        }
+
+                                        if (result0 < result1) {
+                                            scl_e = temp_scl_e;
+                                            scl_f = out0;
+                                        } else {
+                                            scl_e = out1;
+                                        }
+                                    }
+                                }
+                            }
+
+                            e->x = diff_ba_x * scl_e + a1.x;
+                            e->y = diff_ba_y * scl_e + a1.y;
+                            e->z = 0.0f;
+
+                            f->x = diff_dc_x * scl_f + c1.x;
+                            f->y = diff_dc_y * scl_f + c1.y;
+                            f->z = 0.0f;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    {
+        f32 diff_ef_y;
+        f32 diff_ef_x;
+        diff_ef_y = e->y - f->y;
+        diff_ef_x = e->x - f->x;
+        if (sum_pq * sum_pq < diff_ef_x * diff_ef_x + (diff_ef_y * diff_ef_y)) {
+            return false;
+        }
+        return true;
+    }
+}
 #endif
 
 f64 const lbl_804D7A20 = 3.0;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm void func_80006E58(){
-    // clang-format off
+// clang-format off
+asm bool lbColl_80006E58(Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Vec3*, Mtx, Vec3*,
+                       f32, f32, f32)
+{
     nofralloc
 /* 80006E58 00003A38  7C 08 02 A6 */	mflr r0
 /* 80006E5C 00003A3C  90 01 00 04 */	stw r0, 4(r1)
@@ -1772,7 +2635,7 @@ lbl_80007458:
 /* 8000746C 0000404C  38 97 00 00 */	addi r4, r23, 0
 /* 80007470 00004050  38 B8 00 00 */	addi r5, r24, 0
 /* 80007474 00004054  38 C1 00 D0 */	addi r6, r1, 0xd0
-/* 80007478 00004058  4B FF EA 45 */	bl func_80005EBC
+/* 80007478 00004058  4B FF EA 45 */	bl lbColl_80005EBC
 /* 8000747C 0000405C  FE 80 08 90 */	fmr f20, f1
 /* 80007480 00004060  48 00 00 20 */	b lbl_800074A0
 lbl_80007484:
@@ -1781,7 +2644,7 @@ lbl_80007484:
 /* 8000748C 0000406C  38 97 00 00 */	addi r4, r23, 0
 /* 80007490 00004070  38 B9 00 00 */	addi r5, r25, 0
 /* 80007494 00004074  38 C1 00 D0 */	addi r6, r1, 0xd0
-/* 80007498 00004078  4B FF EA 25 */	bl func_80005EBC
+/* 80007498 00004078  4B FF EA 25 */	bl lbColl_80005EBC
 /* 8000749C 0000407C  FE 80 08 90 */	fmr f20, f1
 lbl_800074A0:
 /* 800074A0 00004080  C8 02 80 30 */	lfd f0, lbl_804D7A10(r2)
@@ -1792,7 +2655,7 @@ lbl_800074A0:
 /* 800074B4 00004094  38 99 00 00 */	addi r4, r25, 0
 /* 800074B8 00004098  38 BA 00 00 */	addi r5, r26, 0
 /* 800074BC 0000409C  38 C1 00 CC */	addi r6, r1, 0xcc
-/* 800074C0 000040A0  4B FF E9 FD */	bl func_80005EBC
+/* 800074C0 000040A0  4B FF E9 FD */	bl lbColl_80005EBC
 /* 800074C4 000040A4  48 00 00 1C */	b lbl_800074E0
 lbl_800074C8:
 /* 800074C8 000040A8  C2 C2 80 28 */	lfs f22, lbl_804D7A08(r2)
@@ -1800,7 +2663,7 @@ lbl_800074C8:
 /* 800074D0 000040B0  38 99 00 00 */	addi r4, r25, 0
 /* 800074D4 000040B4  38 B7 00 00 */	addi r5, r23, 0
 /* 800074D8 000040B8  38 C1 00 CC */	addi r6, r1, 0xcc
-/* 800074DC 000040BC  4B FF E9 E1 */	bl func_80005EBC
+/* 800074DC 000040BC  4B FF E9 E1 */	bl lbColl_80005EBC
 lbl_800074E0:
 /* 800074E0 000040C0  FC 14 08 40 */	fcmpo cr0, f20, f1
 /* 800074E4 000040C4  40 80 00 10 */	bge lbl_800074F4
@@ -1991,16 +2854,421 @@ lbl_8000775C:
 /* 8000779C 0000437C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
+                     Vec3* arg5, Mtx arg6, Vec3* arg7, f32 arg8, f32 scl,
+                     f32 argA)
+{
+    f32 sp124;
+    f32 sp120;
+    f32 sp11C;
+    f32 sp118;
+    f32 sp114;
+    f32 sp110;
+    f32 sp10C;
+    f32 sp108;
+    f32 sp104;
+    f32 spD0;
+    f32 spCC;
+    f32 sp8C;
+    f32 sp88;
+    f32 sp84;
+    f32 sp74;
+    f32 sp70;
+    f32 sp6C;
+    f32 sp5C;
+    f32 sp58;
+    f32 sp54;
+    f32 sp44;
+    f32 sp40;
+    Vec3 vec2;
+    f32 temp_f0;
+    f32 temp_f10;
+    f32 temp_f10_2;
+    f32 temp_f10_3;
+    f32 temp_f10_4;
+    f32 temp_f11;
+    f32 temp_f11_2;
+    f32 temp_f11_3;
+    f32 temp_f11_4;
+    f32 temp_f11_5;
+    f32 temp_f12;
+    f32 temp_f1;
+    f32 temp_f1_10;
+    f32 temp_f1_14;
+    f32 temp_f1_15;
+    f32 temp_f1_16;
+    f32 temp_f1_17;
+    f32 temp_f1_2;
+    f32 temp_f1_3;
+    f32 temp_f1_4;
+    f32 temp_f1_5;
+    f32 temp_f1_9;
+    f32 temp_f20;
+    f32 temp_f21;
+    f32 temp_f21_2;
+    f32 temp_f25;
+    f32 temp_f26;
+    f32 temp_f27;
+    f32 temp_f2;
+    f32 temp_f2_2;
+    f32 temp_f2_3;
+    f32 temp_f2_4;
+    f32 temp_f2_5;
+    f32 temp_f2_6;
+    f32 temp_f2_7;
+    f32 temp_f2_8;
+    f32 temp_f3;
+    f32 temp_f3_2;
+    f32 temp_f3_3;
+    f32 temp_f4;
+    f32 temp_f4_10;
+    f32 temp_f4_2;
+    f32 temp_f4_3;
+    f32 temp_f4_4;
+    f32 temp_f4_5;
+    f32 temp_f4_6;
+    f32 temp_f4_7;
+    f32 temp_f4_8;
+    f32 temp_f4_9;
+    f32 temp_f5;
+    f32 temp_f5_2;
+    f32 temp_f5_3;
+    f32 temp_f6;
+    f32 temp_f6_2;
+    f32 temp_f6_3;
+    f32 temp_f6_4;
+    f32 temp_f7;
+    f32 temp_f7_2;
+    f32 temp_f8;
+    f32 temp_f9;
+    f32 temp_f9_2;
+    f32 temp_f9_3;
+    f32 temp_f9_4;
+    f32 var_f0;
+    f32 var_f1;
+    f32 var_f1_2;
+    f32 var_f20;
+    f32 var_f21;
+    f32 var_f22;
+    f32 var_f24;
+    f32 var_f2;
+    f32 var_f2_2;
+    f32 var_f30;
+    f64 temp_f1_11;
+    f64 temp_f1_12;
+    f64 temp_f1_13;
+    f64 temp_f1_6;
+    f64 temp_f1_7;
+    f64 temp_f1_8;
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r0_3;
+    s32 var_r0_4;
+    Mtx sp9C;
+
+    temp_f3 = (scl * argA) + arg8;
+    sp11C = arg0->x;
+    sp120 = arg0->y;
+    sp124 = arg0->z;
+    sp110 = arg2->x;
+    sp114 = arg2->y;
+    sp118 = arg2->z;
+    temp_f5 = arg1->x;
+    if (sp11C > temp_f5) {
+        temp_f2 = sp11C + temp_f3;
+        if ((temp_f2 < sp110) && (temp_f2 < arg3->x)) {
+            return 0;
+        }
+        temp_f2_2 = temp_f5 - temp_f3;
+        if ((temp_f2_2 > sp110) && (temp_f2_2 > arg3->x)) {
+            return 0;
+        }
+        goto block_13;
+    }
+    temp_f2_3 = sp11C - temp_f3;
+    if ((temp_f2_3 > sp110) && (temp_f2_3 > arg3->x)) {
+        return 0;
+    }
+    temp_f2_4 = temp_f5 + temp_f3;
+    if ((temp_f2_4 < sp110) && (temp_f2_4 < arg3->x)) {
+        return 0;
+    }
+block_13:
+    temp_f6 = arg1->y;
+    if (sp120 > temp_f6) {
+        temp_f4 = sp120 + temp_f3;
+        if ((temp_f4 < sp114) && (temp_f4 < arg3->y)) {
+            return 0;
+        }
+        temp_f4_2 = temp_f6 - temp_f3;
+        if ((temp_f4_2 > sp114) && (temp_f4_2 > arg3->y)) {
+            return 0;
+        }
+        goto block_26;
+    }
+    temp_f4_3 = sp120 - temp_f3;
+    if ((temp_f4_3 > sp114) && (temp_f4_3 > arg3->y)) {
+        return 0;
+    }
+    temp_f4_4 = temp_f6 + temp_f3;
+    if ((temp_f4_4 < sp114) && (temp_f4_4 < arg3->y)) {
+        return 0;
+    }
+block_26:
+    temp_f7 = arg1->z;
+    if (sp124 > temp_f7) {
+        temp_f6_2 = sp124 + temp_f3;
+        if ((temp_f6_2 < sp118) && (temp_f6_2 < arg3->z)) {
+            return 0;
+        }
+        temp_f4_5 = temp_f7 - temp_f3;
+        if ((temp_f4_5 > sp118) && (temp_f4_5 > arg3->z)) {
+            return 0;
+        }
+        goto block_39;
+    }
+    temp_f6_3 = sp124 - temp_f3;
+    if ((temp_f6_3 > sp118) && (temp_f6_3 > arg3->z)) {
+        return 0;
+    }
+    temp_f4_6 = temp_f7 + temp_f3;
+    if ((temp_f4_6 < sp118) && (temp_f4_6 < arg3->z)) {
+        return 0;
+    }
+block_39:
+    temp_f3_2 = temp_f5 - sp11C;
+    sp104 = temp_f3_2;
+    sp108 = arg1->y - sp120;
+    sp10C = arg1->z - sp124;
+    temp_f7_2 = arg3->y;
+    temp_f21 = sp120 - sp114;
+    temp_f26 = temp_f7_2 - sp114;
+    temp_f6_4 = arg3->x;
+    temp_f27 = temp_f6_4 - sp110;
+    temp_f8 = arg3->z;
+    temp_f20 = sp11C - sp110;
+    temp_f25 = temp_f8 - sp118;
+    temp_f10 =
+        (sp10C * temp_f25) + ((temp_f3_2 * temp_f27) + (sp108 * temp_f26));
+    temp_f9 =
+        (temp_f25 * temp_f25) + ((temp_f27 * temp_f27) + (temp_f26 * temp_f26));
+    temp_f21_2 = sp124 - sp118;
+    temp_f5_2 = (sp10C * sp10C) + ((temp_f3_2 * temp_f3_2) + (sp108 * sp108));
+    temp_f4_7 =
+        (sp10C * temp_f21_2) + ((temp_f3_2 * temp_f20) + (sp108 * temp_f21));
+    temp_f11 = (temp_f25 * temp_f21_2) +
+               ((temp_f27 * temp_f20) + (temp_f26 * temp_f21));
+    temp_f12 = (temp_f5_2 * temp_f9) - (temp_f10 * temp_f10);
+    if ((temp_f9 < 0.00001f) && (temp_f9 > -0.00001f)) {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 != 0) {
+        if ((temp_f5_2 < 0.00001f) && (temp_f5_2 > -0.00001f)) {
+            var_r0_2 = 1;
+        } else {
+            var_r0_2 = 0;
+        }
+        if (var_r0_2 != 0) {
+            var_f0 = 0.0f;
+            var_f24 = 0.0f;
+        } else {
+            var_f24 = 0.0f;
+            temp_f1 = -temp_f4_7 / temp_f5_2;
+            var_f0 = temp_f1;
+            if (temp_f1 > (f32) 1.0) {
+                var_f0 = 1.0f;
+            } else if (var_f0 < (f32) 0.0) {
+                var_f0 = 0.0f;
+            }
+        }
+    } else {
+        if ((temp_f12 < 0.00001f) && (temp_f12 > -0.00001f)) {
+            var_r0_3 = 1;
+        } else {
+            var_r0_3 = 0;
+        }
+        if (var_r0_3 != 0) {
+            temp_f11_2 = (f32) ((0.5 * (f64) temp_f26) + (f64) sp114);
+            temp_f10_2 = (f32) ((0.5 * (f64) temp_f27) + (f64) sp110);
+            temp_f1_2 = sp120 - temp_f11_2;
+            temp_f9_2 = (f32) ((0.5 * (f64) temp_f25) + (f64) sp118);
+            temp_f11_3 = arg1->y - temp_f11_2;
+            temp_f4_8 = sp11C - temp_f10_2;
+            temp_f5_3 = arg1->x - temp_f10_2;
+            temp_f2_5 = sp124 - temp_f9_2;
+            temp_f3_3 = arg1->z - temp_f9_2;
+            if (((temp_f2_5 * temp_f2_5) +
+                 ((temp_f4_8 * temp_f4_8) + (temp_f1_2 * temp_f1_2))) <
+                ((temp_f3_3 * temp_f3_3) +
+                 ((temp_f5_3 * temp_f5_3) + (temp_f11_3 * temp_f11_3))))
+            {
+                sp6C = arg2->x;
+                var_f0 = 0.0f;
+                sp70 = arg2->y;
+                sp74 = arg2->z;
+                temp_f9_3 = temp_f6_4 - arg2->x;
+                temp_f10_3 = temp_f7_2 - arg2->y;
+                temp_f11_4 = temp_f8 - arg2->z;
+                sp84 = arg0->x;
+                sp88 = arg0->y;
+                sp8C = arg0->z;
+                var_f2 =
+                    -((temp_f11_4 * (sp74 - sp8C)) +
+                      ((temp_f9_3 * (sp6C - sp84)) +
+                       (temp_f10_3 * (sp70 - sp88)))) /
+                    ((temp_f11_4 * temp_f11_4) +
+                     ((temp_f9_3 * temp_f9_3) + (temp_f10_3 * temp_f10_3)));
+                if (var_f2 > (f32) 1.0) {
+                    var_f2 = 1.0f;
+                } else if (var_f2 < (f32) 0.0) {
+                    var_f2 = 0.0f;
+                }
+                var_f24 = var_f2;
+            } else {
+                vec2.z = arg2->x;
+                var_f0 = 1.0f;
+                sp40 = arg2->y;
+                sp44 = arg2->z;
+                temp_f9_4 = temp_f6_4 - arg2->x;
+                temp_f10_4 = temp_f7_2 - arg2->y;
+                temp_f11_5 = temp_f8 - arg2->z;
+                sp54 = arg1->x;
+                sp58 = arg1->y;
+                sp5C = arg1->z;
+                var_f2_2 =
+                    -((temp_f11_5 * (sp44 - sp5C)) +
+                      ((temp_f9_4 * (vec2.z - sp54)) +
+                       (temp_f10_4 * (sp40 - sp58)))) /
+                    ((temp_f11_5 * temp_f11_5) +
+                     ((temp_f9_4 * temp_f9_4) + (temp_f10_4 * temp_f10_4)));
+                if (var_f2_2 > (f32) 1.0) {
+                    var_f2_2 = 1.0f;
+                } else if (var_f2_2 < (f32) 0.0) {
+                    var_f2_2 = 0.0f;
+                }
+                var_f24 = var_f2_2;
+            }
+        } else {
+            temp_f1_3 =
+                ((temp_f10 * temp_f11) - (temp_f9 * temp_f4_7)) / temp_f12;
+            var_f24 =
+                ((temp_f5_2 * temp_f11) - (temp_f10 * temp_f4_7)) / temp_f12;
+            var_f0 = temp_f1_3;
+            if ((temp_f1_3 > (f32) 1.0) || (var_f0 < (f32) 0.0) ||
+                (var_f24 > (f32) 1.0) || (var_f24 < (f32) 0.0))
+            {
+                if (var_f0 < (f32) 0.0) {
+                    var_f21 = 0.0f;
+                    var_f20 = lbColl_80005EBC(arg2, arg3, arg0, &spD0);
+                } else {
+                    var_f21 = 1.0f;
+                    var_f20 = lbColl_80005EBC(arg2, arg3, arg1, &spD0);
+                }
+                if (var_f24 < (f32) 0.0) {
+                    var_f22 = 0.0f;
+                    var_f1 = lbColl_80005EBC(arg0, arg1, arg2, &spCC);
+                } else {
+                    var_f22 = 1.0f;
+                    var_f1 = lbColl_80005EBC(arg0, arg1, arg3, &spCC);
+                }
+                if (var_f20 < var_f1) {
+                    var_f0 = var_f21;
+                    var_f24 = spD0;
+                } else {
+                    var_f0 = spCC;
+                    var_f24 = var_f22;
+                }
+            }
+        }
+    }
+    arg4->x = (sp104 * var_f0) + sp11C;
+    arg4->y = (sp108 * var_f0) + sp120;
+    arg4->z = (sp10C * var_f0) + sp124;
+    arg5->x = (temp_f27 * var_f24) + sp110;
+    arg5->y = (temp_f26 * var_f24) + sp114;
+    arg5->z = (temp_f25 * var_f24) + sp118;
+    temp_f1_4 = arg4->y - arg5->y;
+    temp_f4_9 = arg4->x - arg5->x;
+    temp_f2_6 = arg4->z - arg5->z;
+    temp_f1_5 = (temp_f2_6 * temp_f2_6) +
+                ((temp_f4_9 * temp_f4_9) + (temp_f1_4 * temp_f1_4));
+    if (temp_f1_5 > 0.0f) {
+        temp_f1_6 = __frsqrte(temp_f1_5);
+        temp_f1_7 = 0.5 * temp_f1_6 *
+                    -(((f64) temp_f1_5 * (temp_f1_6 * temp_f1_6)) - 3.0);
+        temp_f1_8 = 0.5 * temp_f1_7 *
+                    -(((f64) temp_f1_5 * (temp_f1_7 * temp_f1_7)) - 3.0);
+        vec2.y = (f32) ((f64) temp_f1_5 *
+                        (0.5 * temp_f1_8 *
+                         -(((f64) temp_f1_5 * (temp_f1_8 * temp_f1_8)) - 3.0)));
+        var_f30 = vec2.y;
+    } else {
+        var_f30 = temp_f1_5;
+    }
+    if ((var_f30 < 0.00001f) && (var_f30 > -0.00001f)) {
+        var_r0_4 = 1;
+    } else {
+        var_r0_4 = 0;
+    }
+    if (var_r0_4 != 0) {
+        arg2->x = (arg8 + scl) - var_f30;
+        arg7->x = arg4->x;
+        arg7->y = arg4->y;
+        arg7->z = arg4->z;
+        return 1;
+    }
+    HSD_MtxInverse(arg6, sp9C);
+    PSMTXMUltiVec((f32(*)[4]) & sp9C[0], arg4, (Vec3*) &sp11C);
+    PSMTXMUltiVec((f32(*)[4]) & sp9C[0], arg5, (Vec3*) &sp104);
+    temp_f1_9 = sp120 - sp108;
+    temp_f4_10 = sp11C - sp104;
+    temp_f2_7 = sp124 - sp10C;
+    temp_f1_10 = (temp_f2_7 * temp_f2_7) +
+                 ((temp_f4_10 * temp_f4_10) + (temp_f1_9 * temp_f1_9));
+    if (temp_f1_10 > 0.0f) {
+        temp_f1_11 = __frsqrte(temp_f1_10);
+        temp_f1_12 = 0.5 * temp_f1_11 *
+                     -(((f64) temp_f1_10 * (temp_f1_11 * temp_f1_11)) - 3.0);
+        temp_f1_13 = 0.5 * temp_f1_12 *
+                     -(((f64) temp_f1_10 * (temp_f1_12 * temp_f1_12)) - 3.0);
+        vec2.x =
+            (f32) ((f64) temp_f1_10 *
+                   (0.5 * temp_f1_13 *
+                    -(((f64) temp_f1_10 * (temp_f1_13 * temp_f1_13)) - 3.0)));
+        var_f1_2 = vec2.x;
+    } else {
+        var_f1_2 = temp_f1_10;
+    }
+    temp_f0 = (scl * var_f30) / var_f1_2;
+    temp_f2_8 = temp_f0 / var_f30;
+    temp_f1_14 = arg8 + temp_f0;
+    arg2->x = temp_f1_14 - var_f30;
+    temp_f1_15 = arg5->x;
+    arg7->x = (temp_f2_8 * (arg4->x - temp_f1_15)) + temp_f1_15;
+    temp_f1_16 = arg5->y;
+    arg7->y = (temp_f2_8 * (arg4->y - temp_f1_16)) + temp_f1_16;
+    temp_f1_17 = arg5->z;
+    arg7->z = (temp_f2_8 * (arg4->z - temp_f1_17)) + temp_f1_17;
+    if (temp_f1_14 < var_f30) {
+        return 0;
+    }
+    return 1;
+}
 #endif
 
 f32 const lbl_804D7A28 = 2;
 f32 const lbl_804D7A2C = 4;
 f32 const lbl_804D7A30 = M_PI;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm void func_800077A0()
-{ // clang-format off
+asm void lbColl_800077A0(Vec3*, Mtx, Vec3*, Vec3*, Vec3*, Vec3*, f32*, f32, f32)
+{
+    // clang-format off
     nofralloc
 /* 800077A0 00004380  7C 08 02 A6 */	mflr r0
 /* 800077A4 00004384  90 01 00 04 */	stw r0, 4(r1)
@@ -2230,40 +3498,145 @@ lbl_80007AE0:
 /* 80007AF8 000046D8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+inline f32 sqrDistance(Vec3* a, Vec3* b)
+{
+    {
+        f32 y = a->y - b->y;
+        f32 x = a->x - b->x;
+        f32 z = a->z - b->z;
+        return z * z + x * x + y * y;
+    }
+}
+
+void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
+                     f32* angle, f32 x, f32 dist_offset)
+{
+    Vec3 diff_cb;
+    f32 diff_cb_x;
+
+    diff_cb.x = diff_cb_x = c->x - b->x;
+    diff_cb.y = c->y - b->y;
+    diff_cb.z = c->z - b->z;
+
+    if (diff_cb_x != 0.0f || diff_cb.y != 0.0f || diff_cb.z != 0.0f) {
+        Vec3 normal_x;
+        Vec3 multi_mtx;
+
+        normal_x.x = x;
+        normal_x.y = 0.0f;
+        normal_x.z = 0.0f;
+        PSMTXMUltiVec(arg1, &normal_x, &normal_x);
+
+        multi_mtx.x = 0.0f;
+        multi_mtx.y = 0.0f;
+        multi_mtx.z = 0.0f;
+        PSMTXMUltiVec(arg1, &multi_mtx, &multi_mtx);
+
+        {
+            f32 dist = sqrDistance(&normal_x, &multi_mtx);
+            dist = sqrtf(dist);
+
+            {
+                f32 offset_dist = dist + dist_offset;
+                f32 dot_diff_cb = diff_cb.z * diff_cb.z +
+                                  diff_cb.x * diff_cb.x + diff_cb.y * diff_cb.y;
+
+                f32 diff_ba_x = b->x - a->x;
+                f32 diff_ba_y = b->y - a->y;
+                f32 diff_ba_z = b->z - a->z;
+
+                {
+                    f32 scl;
+
+                    if (approximatelyZero(dot_diff_cb)) {
+                        scl = 0.0f;
+                    } else {
+                        f32 n0 = 2.0f * diff_cb.z * diff_ba_z +
+                                 2.0f * diff_cb.x * diff_ba_x +
+                                 2.0f * diff_cb.y * diff_ba_y;
+
+                        f32 n1 = n0 * n0 - (4.0f * dot_diff_cb *
+                                            -(offset_dist * offset_dist -
+                                              diff_ba_z * diff_ba_z +
+                                              diff_ba_x * diff_ba_x +
+                                              diff_ba_y * diff_ba_y));
+
+                        if (n1 < 0.0f)
+                            n1 = 0.0f;
+
+                        {
+                            f32 n2;
+                            if (n1 > 0.0f)
+                                n2 = sqrtf(n1);
+                            else
+                                n2 = n1;
+
+                            scl = (-n0 - n2) / (2.0f * dot_diff_cb);
+                        }
+                    }
+
+                    {
+                        Vec3 normalize_e;
+                        normalize_e.x = scl * diff_cb.x + b->x - a->x;
+                        normalize_e.y = scl * diff_cb.y + b->y - a->y;
+                        normalize_e.z = scl * diff_cb.z + b->z - a->z;
+                        PSVECNormalize(&normalize_e, e);
+                    }
+                }
+            }
+
+            *angle = lbvector_AngleXY(e, &diff_cb);
+            d->x = dist * e->x + a->x;
+            d->y = dist * e->y + a->y;
+            d->z = dist * e->z + a->z;
+        }
+    } else {
+        *angle = M_PI;
+        e->z = 0.0f;
+        e->y = 0.0f;
+        e->x = 0.0f;
+    }
+}
 #endif
 
-void func_80007AFC(Hitbox* a, Hitbox* b, f32 x, f32 y)
+bool lbColl_80007AFC(HitCapsule* a, HitCapsule* b, f32 x, f32 y)
 {
     f32 a_val, b_val;
 
     if (a->x43_b1)
-        a_val = a->x1C;
+        a_val = a->scl;
     else
-        a_val = a->x1C * x;
+        a_val = a->scl * x;
 
     if (b->x43_b1)
-        b_val = b->x1C;
+        b_val = b->scl;
     else
-        b_val = b->x1C * y;
+        b_val = b->scl * y;
 
-    func_80006094(&b->x58, &b->x4C, &a->x58, &a->x4C, &b->x64, &a->x64, b_val,
-                  a_val);
+    return lbColl_80006094(&b->x58, &b->x4C, &a->x58, &a->x4C, &b->x64, &a->x64,
+                           b_val, a_val);
 }
 
-void func_80007B78(Mtx a, Mtx b, f32 x, f32 y)
+void lbColl_80007B78(Mtx a, Mtx b, f32 x, f32 y)
 {
-    func_800067F8(&b[1][1], &b[0][2], &a[1][1], &a[0][2], &b[1][4], &a[1][4],
-                  b[0][0] * y, a[0][0] * x, x);
+    /// @todo Eliminate casts.
+    lbColl_800067F8((Vec3*) &b[1][1], (Vec3*) &b[0][2], (Vec3*) &a[1][1],
+                    (Vec3*) &a[0][2], (Vec3*) &b[1][4], (Vec3*) &a[1][4],
+                    b[0][0] * y, a[0][0] * x, x);
 }
 
 extern char* lbl_804D3700;
 extern char* lbl_804D3708;
 f32 const lbl_804D7A34 = 20;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm bool func_80007BCC(Hitbox*, unk_t shield_hit, unk_t, s32, f32, f32, f32)
-{ // clang-format off
+asm bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, unk_t, s32, f32,
+                         f32, f32)
+{
+    // clang-format off
     nofralloc
 /* 80007BCC 000047AC  7C 08 02 A6 */	mflr r0
 /* 80007BD0 000047B0  90 01 00 04 */	stw r0, 4(r1)
@@ -2322,7 +3695,7 @@ lbl_80007C78:
 /* 80007C98 00004878  48 38 05 89 */	bl __assert
 lbl_80007C9C:
 /* 80007C9C 0000487C  7F A3 EB 78 */	mr r3, r29
-/* 80007CA0 00004880  48 00 00 C9 */	bl HSD_JObjUnkMtxPtr
+/* 80007CA0 00004880  48 00 00 C9 */	bl lbColl_JObjSetupMatrix
 /* 80007CA4 00004884  38 9D 00 44 */	addi r4, r29, 0x44
 /* 80007CA8 00004888  38 7C 00 00 */	addi r3, r28, 0
 /* 80007CAC 0000488C  38 A1 00 38 */	addi r5, r1, 0x38
@@ -2342,7 +3715,7 @@ lbl_80007CC4:
 /* 80007CDC 000048BC  48 38 05 45 */	bl __assert
 lbl_80007CE0:
 /* 80007CE0 000048C0  7F A3 EB 78 */	mr r3, r29
-/* 80007CE4 000048C4  48 00 00 85 */	bl HSD_JObjUnkMtxPtr
+/* 80007CE4 000048C4  48 00 00 85 */	bl lbColl_JObjSetupMatrix
 /* 80007CE8 000048C8  39 3D 00 44 */	addi r9, r29, 0x44
 lbl_80007CEC:
 /* 80007CEC 000048CC  88 1E 00 43 */	lbz r0, 0x43(r30)
@@ -2366,7 +3739,7 @@ lbl_80007D08:
 /* 80007D2C 0000490C  38 E1 00 74 */	addi r7, r1, 0x74
 /* 80007D30 00004910  39 01 00 68 */	addi r8, r1, 0x68
 /* 80007D34 00004914  39 5E 00 64 */	addi r10, r30, 0x64
-/* 80007D38 00004918  4B FF F1 21 */	bl func_80006E58
+/* 80007D38 00004918  4B FF F1 21 */	bl lbColl_80006E58
 lbl_80007D3C:
 /* 80007D3C 0000491C  80 01 00 AC */	lwz r0, 0xac(r1)
 /* 80007D40 00004920  CB E1 00 A0 */	lfd f31, 0xa0(r1)
@@ -2381,11 +3754,70 @@ lbl_80007D3C:
 /* 80007D64 00004944  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
+                     s32 arg3, f32 arg4, f32 arg5, f32 arg6)
+{
+    Vec3 sp74;
+    Vec3 sp68;
+    int* sp8;
+    HSD_JObj* temp_r29;
+    HSD_JObj* temp_r29_2;
+    Vec3* temp_r5;
+    f32* var_r9;
+    f32 var_f1;
+    Mtx sp38;
+
+    if (!(((u8) M2C_FIELD(shield_hit, u8*, 4) >> 7U) & 1)) {
+        func_8000B1CC(shield_hit->bone, &shield_hit->offset, &shield_hit->pos);
+        if (arg2 != NULL) {
+            shield_hit->pos.z = arg6;
+        }
+        M2C_FIELD(shield_hit, u8*, 4) =
+            (u8) (M2C_FIELD(shield_hit, u8*, 4) | 0x80);
+    }
+    if (arg3 != 0) {
+        arg0->x64.x = shield_hit->pos.x;
+        arg0->x64.y = shield_hit->pos.y;
+        arg0->x64.z = shield_hit->pos.z;
+        arg0->x70 = 0.0f;
+        return 1;
+    }
+    if (arg2 != NULL) {
+        temp_r29 = shield_hit->bone;
+        if (temp_r29 == NULL) {
+            __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+        }
+        lbColl_JObjSetupMatrix(temp_r29);
+        PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r29->mtx[0], sp38);
+    }
+    if (arg2 != NULL) {
+        var_r9 = sp38[0];
+    } else {
+        temp_r29_2 = shield_hit->bone;
+        if (temp_r29_2 == NULL) {
+            __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+        }
+        lbColl_JObjSetupMatrix(temp_r29_2);
+        var_r9 = temp_r29_2->mtx[0];
+    }
+    if (((u8) arg0->x43 >> 6U) & 1) {
+        var_f1 = arg0->scl;
+    } else {
+        var_f1 = arg0->scl * arg4;
+    }
+    sp8 = &arg0->x70;
+    temp_r5 = &shield_hit->pos;
+    return lbColl_80006E58(&arg0->x58, &arg0->x4C, temp_r5, temp_r5, &sp74,
+                           &sp68, (f32(*)[4]) var_r9, &arg0->x64, var_f1,
+                           shield_hit->size, 20.0f * arg5);
+}
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm void HSD_JObjUnkMtxPtr(HSD_JObj*)
+asm void lbColl_JObjSetupMatrix(HSD_JObj*)
 { // clang-format off
     nofralloc
 /* 80007D68 00004948  7C 08 02 A6 */	mflr r0
@@ -2422,11 +3854,19 @@ lbl_80007DC4:
 /* 80007DD4 000049B4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+void lbColl_JObjSetupMatrix(HSD_JObj* arg0)
+{
+    /// @todo Missing branch somehow
+    HSD_JObjSetupMatrix(arg0);
+}
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm void func_80007DD8(){
+asm void lbColl_80007DD8(HitCapsule*, HitResult*, Mtx, unk_t, unk_t, f32)
+{
     // clang-format off
     nofralloc
 /* 80007DD8 000049B8  7C 08 02 A6 */	mflr r0
@@ -2450,7 +3890,7 @@ asm void func_80007DD8(){
 /* 80007E20 00004A00  48 38 04 01 */	bl __assert
 lbl_80007E24:
 /* 80007E24 00004A04  7F E3 FB 78 */	mr r3, r31
-/* 80007E28 00004A08  4B FF FF 41 */	bl HSD_JObjUnkMtxPtr
+/* 80007E28 00004A08  4B FF FF 41 */	bl lbColl_JObjSetupMatrix
 /* 80007E2C 00004A0C  38 9F 00 44 */	addi r4, r31, 0x44
 /* 80007E30 00004A10  38 7C 00 00 */	addi r3, r28, 0
 /* 80007E34 00004A14  38 A1 00 2C */	addi r5, r1, 0x2c
@@ -2479,7 +3919,7 @@ lbl_80007E68:
 /* 80007E80 00004A60  48 38 03 A1 */	bl __assert
 lbl_80007E84:
 /* 80007E84 00004A64  7F E3 FB 78 */	mr r3, r31
-/* 80007E88 00004A68  4B FF FE E1 */	bl HSD_JObjUnkMtxPtr
+/* 80007E88 00004A68  4B FF FE E1 */	bl lbColl_JObjSetupMatrix
 /* 80007E8C 00004A6C  38 9F 00 44 */	addi r4, r31, 0x44
 lbl_80007E90:
 /* 80007E90 00004A70  FC 40 F8 90 */	fmr f2, f31
@@ -2490,7 +3930,7 @@ lbl_80007E90:
 /* 80007EA4 00004A84  38 BA 00 58 */	addi r5, r26, 0x58
 /* 80007EA8 00004A88  38 DA 00 4C */	addi r6, r26, 0x4c
 /* 80007EAC 00004A8C  38 E1 00 5C */	addi r7, r1, 0x5c
-/* 80007EB0 00004A90  4B FF F8 F1 */	bl func_800077A0
+/* 80007EB0 00004A90  4B FF F8 F1 */	bl lbColl_800077A0
 /* 80007EB4 00004A94  BB 41 00 68 */	lmw r26, 0x68(r1)
 /* 80007EB8 00004A98  80 01 00 8C */	lwz r0, 0x8c(r1)
 /* 80007EBC 00004A9C  CB E1 00 80 */	lfd f31, 0x80(r1)
@@ -2499,14 +3939,53 @@ lbl_80007E90:
 /* 80007EC8 00004AA8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+void lbColl_80007DD8(HitCapsule* arg0, HitResult* arg1, Mtx arg2, unk_t arg3,
+                     unk_t arg4, f32 arg5)
+{
+    unk_t sp5C = NULL;
+    HSD_JObj* temp_r31;
+    HSD_JObj* temp_r31_2;
+    Mtx* var_r4;
+    f32 var_f31;
+    Mtx sp2C;
+
+    if (arg2 != NULL) {
+        temp_r31 = arg1->bone;
+        if (temp_r31 == NULL) {
+            __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+        }
+        lbColl_JObjSetupMatrix(temp_r31);
+        PSMTXConcat(arg2, (f32(*)[4]) temp_r31->mtx[0], (f32(*)[4]) & sp2C[0]);
+    }
+    if (((u8) arg0->x43 >> 6U) & 1) {
+        var_f31 = arg0->scl;
+    } else {
+        var_f31 = arg0->scl * arg5;
+    }
+    if (arg2 != NULL) {
+        var_r4 = &sp2C;
+    } else {
+        temp_r31_2 = arg1->bone;
+        if (temp_r31_2 == NULL) {
+            __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+        }
+        lbColl_JObjSetupMatrix(temp_r31_2);
+        var_r4 = &temp_r31_2->mtx;
+    }
+    lbColl_800077A0(&arg1->pos, *var_r4, &arg0->x58, &arg0->x4C, sp5C, arg3,
+                    arg4, arg1->size, var_f31);
+}
 #endif
 
 f32 const lbl_804D7A38 = 3;
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm bool func_80007ECC(Hitbox*, Hurtbox*, unk_t, f32 hit_scl_y, f32 hurt_scl_y,
-                       f32 hurt_pos_z){
+asm bool lbColl_80007ECC(HitCapsule*, HurtCapsule*, Mtx, f32 hit_scl_y,
+                         f32 hurt_scl_y, f32 hurt_pos_z)
+{
     // clang-format off
     nofralloc
 /* 80007ECC 00004AAC  7C 08 02 A6 */	mflr r0
@@ -2560,7 +4039,7 @@ lbl_80007F64:
 /* 80007F84 00004B64  48 38 02 9D */	bl __assert
 lbl_80007F88:
 /* 80007F88 00004B68  7F E3 FB 78 */	mr r3, r31
-/* 80007F8C 00004B6C  4B FF FD DD */	bl HSD_JObjUnkMtxPtr
+/* 80007F8C 00004B6C  4B FF FD DD */	bl lbColl_JObjSetupMatrix
 /* 80007F90 00004B70  38 9F 00 44 */	addi r4, r31, 0x44
 /* 80007F94 00004B74  38 7E 00 00 */	addi r3, r30, 0
 /* 80007F98 00004B78  38 A1 00 34 */	addi r5, r1, 0x34
@@ -2580,7 +4059,7 @@ lbl_80007FB0:
 /* 80007FC8 00004BA8  48 38 02 59 */	bl __assert
 lbl_80007FCC:
 /* 80007FCC 00004BAC  7F E3 FB 78 */	mr r3, r31
-/* 80007FD0 00004BB0  4B FF FD 99 */	bl HSD_JObjUnkMtxPtr
+/* 80007FD0 00004BB0  4B FF FD 99 */	bl lbColl_JObjSetupMatrix
 /* 80007FD4 00004BB4  39 3F 00 44 */	addi r9, r31, 0x44
 lbl_80007FD8:
 /* 80007FD8 00004BB8  88 1C 00 43 */	lbz r0, 0x43(r28)
@@ -2604,7 +4083,7 @@ lbl_80007FF4:
 /* 80008018 00004BF8  38 E1 00 70 */	addi r7, r1, 0x70
 /* 8000801C 00004BFC  39 01 00 64 */	addi r8, r1, 0x64
 /* 80008020 00004C00  39 5C 00 64 */	addi r10, r28, 0x64
-/* 80008024 00004C04  4B FF EE 35 */	bl func_80006E58
+/* 80008024 00004C04  4B FF EE 35 */	bl lbColl_80006E58
 /* 80008028 00004C08  48 00 00 08 */	b lbl_80008030
 lbl_8000802C:
 /* 8000802C 00004C0C  38 60 00 00 */	li r3, 0
@@ -2622,6 +4101,61 @@ lbl_80008030:
 /* 80008058 00004C38  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
+                     f32 hit_scl_y, f32 hurt_scl_y, f32 hurt_pos_z)
+{
+    Vec3 sp70;
+    Vec3 sp64;
+    int* sp8;
+    HSD_JObj* temp_r31;
+    HSD_JObj* temp_r31_2;
+    Mtx* var_r9;
+    f32 var_f1;
+    Mtx sp34;
+
+    if ((enum Tangibility) arg1->tangibility == Vulnerable) {
+        if (!(((u8) M2C_FIELD(arg1, u8*, 0x24) >> 7U) & 1)) {
+            func_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
+            func_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
+            if (arg2 != NULL) {
+                arg1->b_pos.z = hurt_pos_z;
+                arg1->a_pos.z = hurt_pos_z;
+            }
+            M2C_FIELD(arg1, u8*, 0x24) =
+                (u8) (M2C_FIELD(arg1, u8*, 0x24) | 0x80);
+        }
+        if (arg2 != NULL) {
+            temp_r31 = arg1->bone;
+            if (temp_r31 == NULL) {
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+            }
+            lbColl_JObjSetupMatrix(temp_r31);
+            PSMTXConcat(arg2, (f32(*)[4]) temp_r31->mtx[0], sp34);
+        }
+        if (arg2 != NULL) {
+            var_r9 = &sp34;
+        } else {
+            temp_r31_2 = arg1->bone;
+            if (temp_r31_2 == NULL) {
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+            }
+            lbColl_JObjSetupMatrix(temp_r31_2);
+            var_r9 = &temp_r31_2->mtx;
+        }
+        if (((u8) arg0->x43 >> 6U) & 1) {
+            var_f1 = arg0->scl;
+        } else {
+            var_f1 = arg0->scl * hit_scl_y;
+        }
+        sp8 = &arg0->x70;
+        return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
+                               &arg1->b_pos, &sp70, &sp64, *var_r9, &arg0->x64,
+                               var_f1, arg1->scl, 3.0f * hurt_scl_y);
+    }
+    return 0;
+}
 #endif
 
 f32 const lbl_804D7A3C = 0.5;
@@ -2629,8 +4163,8 @@ f32 const lbl_804D7A40 = 5;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool func_8000805C(Hitbox*, Hurtbox*, unk_t, s32, f32, f32, f32)
-{ // clang-format off
+asm bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32){
+    // clang-format off
     nofralloc
 /* 8000805C 00004C3C  7C 08 02 A6 */	mflr r0
 /* 80008060 00004C40  90 01 00 04 */	stw r0, 4(r1)
@@ -2707,7 +4241,7 @@ lbl_80008150:
 /* 80008170 00004D50  48 38 00 B1 */	bl __assert
 lbl_80008174:
 /* 80008174 00004D54  7F A3 EB 78 */	mr r3, r29
-/* 80008178 00004D58  4B FF FB F1 */	bl HSD_JObjUnkMtxPtr
+/* 80008178 00004D58  4B FF FB F1 */	bl lbColl_JObjSetupMatrix
 /* 8000817C 00004D5C  38 9D 00 44 */	addi r4, r29, 0x44
 /* 80008180 00004D60  38 7C 00 00 */	addi r3, r28, 0
 /* 80008184 00004D64  38 A1 00 38 */	addi r5, r1, 0x38
@@ -2727,7 +4261,7 @@ lbl_8000819C:
 /* 800081B4 00004D94  48 38 00 6D */	bl __assert
 lbl_800081B8:
 /* 800081B8 00004D98  7F A3 EB 78 */	mr r3, r29
-/* 800081BC 00004D9C  4B FF FB AD */	bl HSD_JObjUnkMtxPtr
+/* 800081BC 00004D9C  4B FF FB AD */	bl lbColl_JObjSetupMatrix
 /* 800081C0 00004DA0  39 3D 00 44 */	addi r9, r29, 0x44
 lbl_800081C4:
 /* 800081C4 00004DA4  88 1E 00 43 */	lbz r0, 0x43(r30)
@@ -2751,7 +4285,7 @@ lbl_800081E0:
 /* 80008204 00004DE4  38 E1 00 74 */	addi r7, r1, 0x74
 /* 80008208 00004DE8  39 01 00 68 */	addi r8, r1, 0x68
 /* 8000820C 00004DEC  39 5E 00 64 */	addi r10, r30, 0x64
-/* 80008210 00004DF0  4B FF EC 49 */	bl func_80006E58
+/* 80008210 00004DF0  4B FF EC 49 */	bl lbColl_80006E58
 /* 80008214 00004DF4  48 00 00 08 */	b lbl_8000821C
 lbl_80008218:
 /* 80008218 00004DF8  38 60 00 00 */	li r3, 0
@@ -2769,11 +4303,73 @@ lbl_8000821C:
 /* 80008244 00004E24  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+s32 lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, void* arg2, s32 arg3,
+                    f32 arg4, f32 arg5, f32 arg6)
+{
+    Vec3 sp74;
+    Vec3 sp68;
+    s32* sp8;
+    HSD_JObj* temp_r29;
+    HSD_JObj* temp_r29_2;
+    f32* var_r9;
+    f32 var_f1;
+
+    if ((enum Tangibility) arg1->tangibility != Intangible) {
+        if (!(((u8) M2C_FIELD(arg1, u8*, 0x24) >> 7U) & 1)) {
+            func_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
+            func_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
+            if (arg2 != NULL) {
+                arg1->b_pos.z = arg6;
+                arg1->a_pos.z = arg6;
+            }
+            M2C_FIELD(arg1, u8*, 0x24) =
+                (u8) (M2C_FIELD(arg1, u8*, 0x24) | 0x80);
+        }
+        if (arg3 != 0) {
+            arg0->x64.x = 0.5f * (arg1->a_pos.x + arg1->b_pos.x);
+            arg0->x64.y = 0.5f * (arg1->a_pos.y + arg1->b_pos.y);
+            arg0->x64.z = 0.5f * (arg1->a_pos.z + arg1->b_pos.z);
+            arg0->x70 = 5.0f;
+            return 1;
+        }
+        if (arg2 != NULL) {
+            temp_r29 = arg1->bone;
+            if (temp_r29 == NULL) {
+                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+            }
+            lbColl_JObjSetupMatrix(temp_r29);
+            PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r29->mtx[0],
+                        (f32(*)[4]) & sp38[0]);
+        }
+        if (arg2 != NULL) {
+            var_r9 = &sp38[0];
+        } else {
+            temp_r29_2 = arg1->bone;
+            if (temp_r29_2 == NULL) {
+                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+            }
+            lbColl_JObjSetupMatrix(temp_r29_2);
+            var_r9 = temp_r29_2->mtx[0];
+        }
+        if (((u8) arg0->x43 >> 6U) & 1) {
+            var_f1 = arg0->scl;
+        } else {
+            var_f1 = arg0->scl * arg4;
+        }
+        sp8 = &arg0->x70;
+        return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
+                               &arg1->b_pos, &sp74, &sp68, (f32(*)[4]) var_r9,
+                               &arg0->x64, var_f1, arg1->scl, 3.0f * arg5);
+    }
+    return 0;
+}
 #endif
 
-#ifdef MWERKS_GEKKO
+#ifdef MUST_MATCH
 #pragma push
-asm bool func_80008248(bool, Hurtbox*, void*, f32, f32, f32)
+asm bool lbColl_80008248(HitCapsule*, HurtCapsule*, Mtx, f32, f32, f32)
 { // clang-format off
     nofralloc
 /* 80008248 00004E28  7C 08 02 A6 */	mflr r0
@@ -2824,7 +4420,7 @@ lbl_800082D4:
 /* 800082F4 00004ED4  48 37 FF 2D */	bl __assert
 lbl_800082F8:
 /* 800082F8 00004ED8  7F E3 FB 78 */	mr r3, r31
-/* 800082FC 00004EDC  4B FF FA 6D */	bl HSD_JObjUnkMtxPtr
+/* 800082FC 00004EDC  4B FF FA 6D */	bl lbColl_JObjSetupMatrix
 /* 80008300 00004EE0  38 9F 00 44 */	addi r4, r31, 0x44
 /* 80008304 00004EE4  38 7E 00 00 */	addi r3, r30, 0
 /* 80008308 00004EE8  38 A1 00 34 */	addi r5, r1, 0x34
@@ -2844,7 +4440,7 @@ lbl_80008320:
 /* 80008338 00004F18  48 37 FE E9 */	bl __assert
 lbl_8000833C:
 /* 8000833C 00004F1C  7F E3 FB 78 */	mr r3, r31
-/* 80008340 00004F20  4B FF FA 29 */	bl HSD_JObjUnkMtxPtr
+/* 80008340 00004F20  4B FF FA 29 */	bl lbColl_JObjSetupMatrix
 /* 80008344 00004F24  39 3F 00 44 */	addi r9, r31, 0x44
 lbl_80008348:
 /* 80008348 00004F28  88 1C 00 43 */	lbz r0, 0x43(r28)
@@ -2868,7 +4464,7 @@ lbl_80008364:
 /* 80008388 00004F68  38 E1 00 70 */	addi r7, r1, 0x70
 /* 8000838C 00004F6C  39 01 00 64 */	addi r8, r1, 0x64
 /* 80008390 00004F70  39 5C 00 64 */	addi r10, r28, 0x64
-/* 80008394 00004F74  4B FF EA C5 */	bl func_80006E58
+/* 80008394 00004F74  4B FF EA C5 */	bl lbColl_80006E58
 /* 80008398 00004F78  80 01 00 AC */	lwz r0, 0xac(r1)
 /* 8000839C 00004F7C  CB E1 00 A0 */	lfd f31, 0xa0(r1)
 /* 800083A0 00004F80  CB C1 00 98 */	lfd f30, 0x98(r1)
@@ -2882,56 +4478,96 @@ lbl_80008364:
 /* 800083C0 00004FA0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+inline void checkPos(HurtCapsule* hurt, Mtx mtx, f32 arg5)
+{
+    if (!hurt->skip_update_pos) {
+        func_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
+        func_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
+
+        if (mtx != NULL) {
+            hurt->b_pos.z = arg5;
+            hurt->a_pos.z = arg5;
+        }
+
+        hurt->skip_update_pos = true;
+    }
+}
+
+inline void mtxConcat(HurtCapsule* hurt, Mtx mtx)
+{
+    Mtx sp34;
+    if (mtx != NULL) {
+        HSD_JObj* temp_r31;
+        temp_r31 = hurt->bone;
+        HSD_JObjGetMtx(temp_r31);
+        PSMTXConcat(mtx, temp_r31->mtx, &sp34[0]);
+    }
+}
+
+inline Mtx* pickMtx(HurtCapsule* hurt, Mtx mtx)
+{
+    Mtx* var_r9;
+    Mtx sp34;
+    if (mtx != NULL) {
+        var_r9 = &sp34;
+    } else {
+        HSD_JObj* temp_r31_2 = hurt->bone;
+        HSD_JObjGetMtx(temp_r31_2);
+        var_r9 = &temp_r31_2->mtx;
+    }
+    return var_r9;
+}
+
+inline f32 getHit1C(HitCapsule* hit, f32 arg3)
+{
+    f32 var_f1;
+    if (hit->x43_b1)
+        var_f1 = hit->scl;
+    else
+        var_f1 = hit->scl * arg3;
+    return var_f1;
+}
+
+bool lbColl_80008248(HitCapsule* hit, HurtCapsule* hurt, Mtx mtx, f32 arg3,
+                     f32 arg4, f32 arg5)
+{
+    Vec3* sp70 = NULL;
+    Vec3* sp64 = NULL;
+
+    checkPos(hurt, mtx, arg5);
+    mtxConcat(hurt, mtx);
+
+    return lbColl_80006E58(&hit->x58, &hit->x4C, &hurt->a_pos, &hurt->b_pos,
+                           sp70, sp64, *pickMtx(hurt, mtx), &hit->x64,
+                           getHit1C(hit, arg3), hurt->scl, 3.0f * arg4);
+}
 #endif
+
+void lbColl_800083C4(HurtCapsule* arg0)
+{
+    if (arg0->skip_update_pos)
+        return;
+
+    func_8000B1CC(arg0->bone, &arg0->a_offset, &arg0->a_pos);
+    func_8000B1CC(arg0->bone, &arg0->b_offset, &arg0->b_pos);
+    arg0->skip_update_pos = true;
+}
+
+void lbColl_80008428(HitCapsule* arg0)
+{
+    arg0->state = HitCapsule_Disabled;
+}
+
+void lbColl_80008434(HitCapsule* arg0)
+{
+    arg0->state = HitCapsule_Enabled;
+}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_800083C4()
-{ // clang-format off
-    nofralloc
-/* 800083C4 00004FA4  7C 08 02 A6 */	mflr r0
-/* 800083C8 00004FA8  90 01 00 04 */	stw r0, 4(r1)
-/* 800083CC 00004FAC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 800083D0 00004FB0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 800083D4 00004FB4  7C 7F 1B 78 */	mr r31, r3
-/* 800083D8 00004FB8  88 03 00 24 */	lbz r0, 0x24(r3)
-/* 800083DC 00004FBC  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
-/* 800083E0 00004FC0  40 82 00 34 */	bne lbl_80008414
-/* 800083E4 00004FC4  80 7F 00 20 */	lwz r3, 0x20(r31)
-/* 800083E8 00004FC8  38 9F 00 04 */	addi r4, r31, 4
-/* 800083EC 00004FCC  38 BF 00 28 */	addi r5, r31, 0x28
-/* 800083F0 00004FD0  48 00 2D DD */	bl func_8000B1CC
-/* 800083F4 00004FD4  80 7F 00 20 */	lwz r3, 0x20(r31)
-/* 800083F8 00004FD8  38 9F 00 10 */	addi r4, r31, 0x10
-/* 800083FC 00004FDC  38 BF 00 34 */	addi r5, r31, 0x34
-/* 80008400 00004FE0  48 00 2D CD */	bl func_8000B1CC
-/* 80008404 00004FE4  88 1F 00 24 */	lbz r0, 0x24(r31)
-/* 80008408 00004FE8  38 60 00 01 */	li r3, 1
-/* 8000840C 00004FEC  50 60 3E 30 */	rlwimi r0, r3, 7, 0x18, 0x18
-/* 80008410 00004FF0  98 1F 00 24 */	stb r0, 0x24(r31)
-lbl_80008414:
-/* 80008414 00004FF4  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80008418 00004FF8  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8000841C 00004FFC  38 21 00 18 */	addi r1, r1, 0x18
-/* 80008420 00005000  7C 08 03 A6 */	mtlr r0
-/* 80008424 00005004  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-#endif
-
-void func_80008428(Hitbox* arg0)
-{
-    arg0->tangiblity = 0;
-}
-
-void func_80008434(Hitbox* arg0)
-{
-    arg0->tangiblity = 1;
-}
-
-#ifdef MWERKS_GEKKO
-#pragma push
-asm void func_80008440(Hitbox*)
+asm void lbColl_80008440(HitCapsule*)
 { // clang-format off
     nofralloc
 /* 80008440 00005020  38 80 00 00 */	li r4, 0
@@ -2991,11 +4627,57 @@ lbl_800084EC:
 /* 800084F8 000050D8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+void lbColl_80008440(HitCapsule* arg0)
+{
+    s32 var_ctr;
+    s32 var_ctr_2;
+    void* var_r5;
+    void* var_r5_2;
+
+    arg0->victims_1[0].victim = NULL;
+    arg0->victims_1[1].victim = NULL;
+    arg0->victims_1[2].victim = NULL;
+    arg0->victims_1[3].victim = NULL;
+    arg0->victims_1[4].victim = NULL;
+    arg0->victims_1[5].victim = NULL;
+    arg0->victims_1[6].victim = NULL;
+    arg0->victims_1[7].victim = NULL;
+    var_r5 = arg0 + 0x40;
+    var_ctr = 0xC - 8U;
+    if (8U < 0xCU) {
+        do {
+            M2C_FIELD(var_r5, Fighter**, 0x74) = NULL;
+            var_r5 += (s32*) 2;
+            var_ctr -= 1;
+        } while (var_ctr != 0);
+    }
+    arg0->x44 = 0;
+    arg0->victims_2[0].victim = (Fighter*) 0U;
+    arg0->victims_2[1].victim = (Fighter*) 0U;
+    arg0->victims_2[2].victim = (Fighter*) 0U;
+    arg0->victims_2[3].victim = (Fighter*) 0U;
+    arg0->victims_2[4].victim = (Fighter*) 0U;
+    arg0->victims_2[5].victim = (Fighter*) 0U;
+    arg0->victims_2[6].victim = (Fighter*) 0U;
+    arg0->victims_2[7].victim = (Fighter*) 0U;
+    var_r5_2 = arg0 + 0x40;
+    var_ctr_2 = 0xC - 8U;
+    if (8U < 0xCU) {
+        do {
+            M2C_FIELD(var_r5_2, s32*, 0xD4) = (s32) 0U;
+            var_r5_2 += 8;
+            var_ctr_2 -= 1;
+        } while (var_ctr_2 != 0);
+    }
+    arg0->x45 = 0;
+}
 #endif
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_800084FC()
+asm void lbColl_CopyHitCapsule(HitCapsule*, HitCapsule*)
 { // clang-format off
     nofralloc
 /* 800084FC 000050DC  81 23 00 74 */	lwz r9, 0x74(r3)
@@ -3103,11 +4785,82 @@ lbl_8000866C:
 /* 80008684 00005264  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst)
+{
+    Fighter* temp_r5;
+    Fighter* temp_r5_2;
+    HitVictim* var_r6;
+    HitVictim* var_r7;
+    HitVictim* var_r8;
+    HitVictim* var_r9;
+    s32 temp_r0;
+    s32 temp_r0_2;
+    s32 var_ctr;
+
+    dst->victims_1[0].victim = src->victims_1[0].victim;
+    dst->victims_1[0].x4 = src->victims_1[0].x4;
+    dst->victims_2[0].victim = src->victims_2[0].victim;
+    dst->victims_2[0].x4 = src->victims_2[0].x4;
+    dst->victims_1[1].victim = src->victims_1[1].victim;
+    dst->victims_1[1].x4 = src->victims_1[1].x4;
+    dst->victims_2[1].victim = src->victims_2[1].victim;
+    dst->victims_2[1].x4 = src->victims_2[1].x4;
+    dst->victims_1[2].victim = src->victims_1[2].victim;
+    dst->victims_1[2].x4 = src->victims_1[2].x4;
+    dst->victims_2[2].victim = src->victims_2[2].victim;
+    dst->victims_2[2].x4 = src->victims_2[2].x4;
+    dst->victims_1[3].victim = src->victims_1[3].victim;
+    dst->victims_1[3].x4 = src->victims_1[3].x4;
+    dst->victims_2[3].victim = src->victims_2[3].victim;
+    dst->victims_2[3].x4 = src->victims_2[3].x4;
+    dst->victims_1[4].victim = src->victims_1[4].victim;
+    dst->victims_1[4].x4 = src->victims_1[4].x4;
+    dst->victims_2[4].victim = src->victims_2[4].victim;
+    dst->victims_2[4].x4 = src->victims_2[4].x4;
+    dst->victims_1[5].victim = src->victims_1[5].victim;
+    dst->victims_1[5].x4 = src->victims_1[5].x4;
+    dst->victims_2[5].victim = src->victims_2[5].victim;
+    dst->victims_2[5].x4 = src->victims_2[5].x4;
+    dst->victims_1[6].victim = src->victims_1[6].victim;
+    dst->victims_1[6].x4 = src->victims_1[6].x4;
+    dst->victims_2[6].victim = src->victims_2[6].victim;
+    dst->victims_2[6].x4 = src->victims_2[6].x4;
+    dst->victims_1[7].victim = src->victims_1[7].victim;
+    dst->victims_1[7].x4 = src->victims_1[7].x4;
+    dst->victims_2[7].victim = src->victims_2[7].victim;
+    dst->victims_2[7].x4 = src->victims_2[7].x4;
+    var_r9 = src->victims_1 + 0x40;
+    var_r6 = dst->victims_1 + 0x40;
+    var_r7 = src->victims_2 + 0x40;
+    var_r8 = dst->victims_2 + 0x40;
+    var_ctr = 0xC - 8U;
+    if (8U < 0xCU) {
+        do {
+            temp_r5 = var_r9->victim;
+            temp_r0 = var_r9->x4;
+            var_r9 += 8;
+            var_r6->victim = temp_r5;
+            var_r6->x4 = temp_r0;
+            var_r6 += 8;
+            temp_r5_2 = var_r7->victim;
+            temp_r0_2 = var_r7->x4;
+            var_r7 += 8;
+            var_r8->victim = temp_r5_2;
+            var_r8->x4 = temp_r0_2;
+            var_r8 += 8;
+            var_ctr -= 1;
+        } while (var_ctr != 0);
+    }
+    dst->x44 = src->x44;
+    dst->x45 = src->x45;
+}
 #endif
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80008688()
+asm bool lbColl_80008688(HitCapsule*, enum_t, Fighter*)
 { // clang-format off
     nofralloc
 /* 80008688 00005268  38 00 00 0C */	li r0, 0xc
@@ -3228,11 +4981,120 @@ lbl_80008818:
 /* 8000881C 000053FC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+#else
+
+bool lbColl_80008688(HitCapsule* arg0, int arg1, Fighter* arg2)
+{
+    HitCapsule* var_r6;
+    HitCapsule* var_r6_2;
+    f32* temp_r6;
+    f32* temp_r6_2;
+    f32* temp_r6_3;
+    f32* temp_r6_4;
+    int var_ctr;
+    int var_ctr_2;
+    int var_r7;
+    u8 var_r0;
+    u8 var_r8;
+
+    var_ctr = 0xC;
+    var_r6 = arg0;
+    var_r7 = 0;
+loop_1:
+    if ((Fighter*) var_r6->victims_1[0].victim == arg2) {
+        if (arg1 != 6) {
+            if (arg1 < 6) {
+                if (arg1 != 3) {
+                    if ((arg1 < 3) && (arg1 < 2)) {
+                    } else {
+                        goto block_9;
+                    }
+                }
+            } else if (arg1 < 9) {
+            block_9:
+                arg0->victims_1[var_r7].x4 =
+                    (int) (s8) ((u16) M2C_FIELD(arg0, u16*, 0x40) >> 4U);
+            }
+        }
+        return 0;
+    }
+    var_r6 += 8;
+    var_r7 += 1;
+    var_ctr -= 1;
+    if (var_ctr == 0) {
+        var_ctr_2 = 2;
+        var_r6_2 = arg0;
+        var_r8 = 0;
+    loop_13:
+        if ((Fighter*) var_r6_2->victims_1[0].victim != NULL) {
+            temp_r6 = &var_r6_2->a_offset.y;
+            var_r8 += 1;
+            if ((Fighter*) var_r6_2->victims_1[1].victim != NULL) {
+                temp_r6_2 = temp_r6 + 8;
+                var_r8 += 1;
+                if ((u32) M2C_FIELD(temp_r6, u32*, 0x7C) != 0U) {
+                    temp_r6_3 = temp_r6_2 + 8;
+                    var_r8 += 1;
+                    if ((u32) M2C_FIELD(temp_r6_2, u32*, 0x7C) != 0U) {
+                        temp_r6_4 = temp_r6_3 + 8;
+                        var_r8 += 1;
+                        if ((u32) M2C_FIELD(temp_r6_3, u32*, 0x7C) != 0U) {
+                            var_r8 += 1;
+                            if ((u32) M2C_FIELD(temp_r6_4, u32*, 0x7C) != 0U) {
+                                var_r6_2 = (HitCapsule*) (temp_r6_4 + 8 + 8);
+                                var_r8 += 1;
+                                var_ctr_2 -= 1;
+                                if (var_ctr_2 != 0) {
+                                    goto loop_13;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (var_r8 == 0xC) {
+            var_r0 = arg0->x44;
+        } else {
+            var_r0 = var_r8;
+        }
+        arg0->victims_1[var_r0].victim = arg2;
+        if (arg1 != 6) {
+            if (arg1 < 6) {
+                if (arg1 != 3) {
+                    if ((arg1 < 3) && (arg1 < 2)) {
+                        goto block_31;
+                    }
+                    goto block_30;
+                }
+                goto block_31;
+            }
+            if (arg1 < 9) {
+            block_30:
+                arg0->victims_1[var_r0].x4 =
+                    (int) (s8) ((u16) M2C_FIELD(arg0, u16*, 0x40) >> 4U);
+            } else {
+                goto block_31;
+            }
+        } else {
+        block_31:
+            arg0->victims_1[var_r0].x4 = 0;
+        }
+        if (var_r8 == 0xC) {
+            arg0->x44 += 1;
+            if ((u8) arg0->x44 >= 0xCU) {
+                arg0->x44 = 0;
+            }
+        }
+        return 1;
+    }
+    goto loop_1;
+}
 #endif
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80008820()
+asm UNK_RET lbColl_80008820(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80008820 00005400  38 00 00 0C */	li r0, 0xc
@@ -3357,7 +5219,7 @@ lbl_800089B0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_800089B8()
+asm UNK_RET lbColl_800089B8(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 800089B8 00005598  38 00 00 02 */	li r0, 2
@@ -3414,7 +5276,7 @@ lbl_80008A4C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80008A5C(){
+asm UNK_RET lbColl_80008A5C(UNK_PARAMS){
     // clang-format off
     nofralloc
 /* 80008A5C 0000563C  80 03 00 00 */	lwz r0, 0(r3)
@@ -3620,7 +5482,8 @@ f64 const lbl_804D7A48 = 4503599627370496;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80008D30(){ // clang-format off
+asm UNK_RET lbColl_80008D30(UNK_PARAMS){
+    // clang-format off
     nofralloc
 /* 80008D30 00005910  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80008D34 00005914  3C 00 43 30 */	lis r0, 0x4330
@@ -3659,7 +5522,7 @@ GXColor const lbl_804D7A50 = { 0 };
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80008DA4(){
+asm UNK_RET lbColl_80008DA4(UNK_PARAMS){
     // clang-format off
     nofralloc
 /* 80008DA4 00005984  7C 08 02 A6 */	mflr r0
@@ -3813,7 +5676,7 @@ f32 const lbl_804D7A54 = -1;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80008FC8()
+asm UNK_RET lbColl_80008FC8(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80008FC8 00005BA8  7C 08 02 A6 */	mflr r0
@@ -3834,7 +5697,7 @@ asm void func_80008FC8()
 /* 80009004 00005BE4  48 35 94 D5 */	bl HSD_StateInitTev
 /* 80009008 00005BE8  38 7D 00 00 */	addi r3, r29, 0
 /* 8000900C 00005BEC  38 9E 00 00 */	addi r4, r30, 0
-/* 80009010 00005BF0  4B FF FD 95 */	bl func_80008DA4
+/* 80009010 00005BF0  4B FF FD 95 */	bl lbColl_80008DA4
 /* 80009014 00005BF4  48 36 12 75 */	bl HSD_CObjGetCurrent
 /* 80009018 00005BF8  38 81 01 04 */	addi r4, r1, 0x104
 /* 8000901C 00005BFC  48 36 05 D5 */	bl func_803695F0
@@ -4286,7 +6149,7 @@ lbl_8000968C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_800096B4()
+asm UNK_RET lbColl_800096B4(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 800096B4 00006294  7C 08 02 A6 */	mflr r0
@@ -4308,7 +6171,7 @@ asm void func_800096B4()
 /* 800096F4 000062D4  48 35 8D E5 */	bl HSD_StateInitTev
 /* 800096F8 000062D8  38 7D 00 00 */	addi r3, r29, 0
 /* 800096FC 000062DC  38 9E 00 00 */	addi r4, r30, 0
-/* 80009700 000062E0  4B FF F6 A5 */	bl func_80008DA4
+/* 80009700 000062E0  4B FF F6 A5 */	bl lbColl_80008DA4
 /* 80009704 000062E4  48 36 0B 85 */	bl HSD_CObjGetCurrent
 /* 80009708 000062E8  38 81 01 08 */	addi r4, r1, 0x108
 /* 8000970C 000062EC  48 35 FE E5 */	bl func_803695F0
@@ -4772,7 +6635,7 @@ lbl_80009DAC:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80009DD4()
+asm UNK_RET lbColl_80009DD4(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80009DD4 000069B4  7C 08 02 A6 */	mflr r0
@@ -4789,7 +6652,7 @@ asm void func_80009DD4()
 /* 80009E00 000069E0  48 35 86 D9 */	bl HSD_StateInitTev
 /* 80009E04 000069E4  38 7F 00 00 */	addi r3, r31, 0
 /* 80009E08 000069E8  38 9F 00 00 */	addi r4, r31, 0
-/* 80009E0C 000069EC  4B FF EF 99 */	bl func_80008DA4
+/* 80009E0C 000069EC  4B FF EF 99 */	bl lbColl_80008DA4
 /* 80009E10 000069F0  48 36 24 35 */	bl HSD_ClearVtxDesc
 /* 80009E14 000069F4  38 60 00 00 */	li r3, 0
 /* 80009E18 000069F8  38 80 00 09 */	li r4, 9
@@ -4882,7 +6745,7 @@ extern int lbl_804D36DC;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80009F54()
+asm UNK_RET lbColl_80009F54(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 80009F54 00006B34  7C 08 02 A6 */	mflr r0
@@ -4945,7 +6808,7 @@ lbl_80009FE4:
 /* 8000A018 00006BF8  80 03 00 60 */	lwz r0, 0x60(r3)
 /* 8000A01C 00006BFC  7D 03 43 78 */	mr r3, r8
 /* 8000A020 00006C00  90 01 00 28 */	stw r0, 0x28(r1)
-/* 8000A024 00006C04  4B FF EF A5 */	bl func_80008FC8
+/* 8000A024 00006C04  4B FF EF A5 */	bl lbColl_80008FC8
 /* 8000A028 00006C08  38 60 00 01 */	li r3, 1
 /* 8000A02C 00006C0C  48 00 00 08 */	b lbl_8000A034
 lbl_8000A030:
@@ -4964,7 +6827,7 @@ extern int lbl_804D36EC;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8000A044()
+asm UNK_RET lbColl_8000A044(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A044 00006C24  7C 08 02 A6 */	mflr r0
@@ -5013,7 +6876,7 @@ lbl_8000A0A8:
 /* 8000A0E0 00006CC0  80 03 00 60 */	lwz r0, 0x60(r3)
 /* 8000A0E4 00006CC4  7D 03 43 78 */	mr r3, r8
 /* 8000A0E8 00006CC8  90 01 00 28 */	stw r0, 0x28(r1)
-/* 8000A0EC 00006CCC  4B FF EE DD */	bl func_80008FC8
+/* 8000A0EC 00006CCC  4B FF EE DD */	bl lbColl_80008FC8
 /* 8000A0F0 00006CD0  38 60 00 01 */	li r3, 1
 /* 8000A0F4 00006CD4  48 00 00 08 */	b lbl_8000A0FC
 lbl_8000A0F8:
@@ -5032,7 +6895,7 @@ extern int lbl_804D36FC;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8000A10C()
+asm UNK_RET lbColl_8000A10C(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A10C 00006CEC  7C 08 02 A6 */	mflr r0
@@ -5068,7 +6931,7 @@ lbl_8000A13C:
 /* 8000A17C 00006D5C  90 01 00 28 */	stw r0, 0x28(r1)
 /* 8000A180 00006D60  C0 08 00 00 */	lfs f0, 0(r8)
 /* 8000A184 00006D64  EC 20 00 72 */	fmuls f1, f0, f1
-/* 8000A188 00006D68  4B FF EE 41 */	bl func_80008FC8
+/* 8000A188 00006D68  4B FF EE 41 */	bl lbColl_80008FC8
 /* 8000A18C 00006D6C  38 60 00 01 */	li r3, 1
 /* 8000A190 00006D70  48 00 00 08 */	b lbl_8000A198
 lbl_8000A194:
@@ -5087,7 +6950,7 @@ extern int lbl_804D36F4;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8000A1A8()
+asm UNK_RET lbColl_8000A1A8(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A1A8 00006D88  7C 08 02 A6 */	mflr r0
@@ -5123,7 +6986,7 @@ lbl_8000A1D4:
 /* 8000A218 00006DF8  90 01 00 28 */	stw r0, 0x28(r1)
 /* 8000A21C 00006DFC  C0 08 00 00 */	lfs f0, 0(r8)
 /* 8000A220 00006E00  EC 20 00 72 */	fmuls f1, f0, f1
-/* 8000A224 00006E04  4B FF ED A5 */	bl func_80008FC8
+/* 8000A224 00006E04  4B FF ED A5 */	bl lbColl_80008FC8
 /* 8000A228 00006E08  38 60 00 01 */	li r3, 1
 /* 8000A22C 00006E0C  48 00 00 08 */	b lbl_8000A234
 lbl_8000A230:
@@ -5141,7 +7004,7 @@ extern unk_t lbl_803B9928;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8000A244()
+asm void lbColl_8000A244(HurtCapsule* arg0, u32 arg1, Mtx arg2, f32 arg3)
 { // clang-format off
     nofralloc
 /* 8000A244 00006E24  7C 08 02 A6 */	mflr r0
@@ -5204,7 +7067,7 @@ lbl_8000A2F8:
 /* 8000A318 00006EF8  48 37 DF 09 */	bl __assert
 lbl_8000A31C:
 /* 8000A31C 00006EFC  7F E3 FB 78 */	mr r3, r31
-/* 8000A320 00006F00  4B FF DA 49 */	bl HSD_JObjUnkMtxPtr
+/* 8000A320 00006F00  4B FF DA 49 */	bl lbColl_JObjSetupMatrix
 /* 8000A324 00006F04  38 9F 00 44 */	addi r4, r31, 0x44
 /* 8000A328 00006F08  38 7D 00 00 */	addi r3, r29, 0
 /* 8000A32C 00006F0C  38 A1 00 9C */	addi r5, r1, 0x9c
@@ -5243,7 +7106,7 @@ lbl_8000A390:
 /* 8000A3A8 00006F88  48 37 DE 79 */	bl __assert
 lbl_8000A3AC:
 /* 8000A3AC 00006F8C  7F 83 E3 78 */	mr r3, r28
-/* 8000A3B0 00006F90  4B FF D9 B9 */	bl HSD_JObjUnkMtxPtr
+/* 8000A3B0 00006F90  4B FF D9 B9 */	bl lbColl_JObjSetupMatrix
 /* 8000A3B4 00006F94  3B 9C 00 44 */	addi r28, r28, 0x44
 lbl_8000A3B8:
 /* 8000A3B8 00006F98  38 7C 00 00 */	addi r3, r28, 0
@@ -5275,7 +7138,7 @@ lbl_8000A3B8:
 /* 8000A420 00007000  90 C1 00 80 */	stw r6, 0x80(r1)
 /* 8000A424 00007004  38 DE 00 00 */	addi r6, r30, 0
 /* 8000A428 00007008  90 01 00 74 */	stw r0, 0x74(r1)
-/* 8000A42C 0000700C  4B FF F2 89 */	bl func_800096B4
+/* 8000A42C 0000700C  4B FF F2 89 */	bl lbColl_800096B4
 /* 8000A430 00007010  38 60 00 01 */	li r3, 1
 /* 8000A434 00007014  48 00 00 08 */	b lbl_8000A43C
 lbl_8000A438:
@@ -5299,7 +7162,7 @@ extern int lbl_804D36E4;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8000A460()
+asm UNK_RET lbColl_8000A460(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A460 00007040  7C 08 02 A6 */	mflr r0
@@ -5365,14 +7228,14 @@ lbl_8000A4EC:
 /* 8000A53C 0000711C  48 37 DC E5 */	bl __assert
 lbl_8000A540:
 /* 8000A540 00007120  7F 43 D3 78 */	mr r3, r26
-/* 8000A544 00007124  4B FF D8 25 */	bl HSD_JObjUnkMtxPtr
+/* 8000A544 00007124  4B FF D8 25 */	bl lbColl_JObjSetupMatrix
 /* 8000A548 00007128  C0 3D 00 0C */	lfs f1, 0xc(r29)
 /* 8000A54C 0000712C  38 7A 00 44 */	addi r3, r26, 0x44
 /* 8000A550 00007130  38 9B 00 00 */	addi r4, r27, 0
 /* 8000A554 00007134  38 BC 00 00 */	addi r5, r28, 0
 /* 8000A558 00007138  38 DF 00 00 */	addi r6, r31, 0
 /* 8000A55C 0000713C  38 FE 00 00 */	addi r7, r30, 0
-/* 8000A560 00007140  4B FF F1 55 */	bl func_800096B4
+/* 8000A560 00007140  4B FF F1 55 */	bl lbColl_800096B4
 /* 8000A564 00007144  38 60 00 01 */	li r3, 1
 /* 8000A568 00007148  48 00 00 08 */	b lbl_8000A570
 lbl_8000A56C:
@@ -5389,7 +7252,7 @@ lbl_8000A570:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8000A584()
+asm UNK_RET lbColl_8000A584(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A584 00007164  7C 08 02 A6 */	mflr r0
@@ -5453,7 +7316,7 @@ lbl_8000A638:
 /* 8000A658 00007238  48 37 DB C9 */	bl __assert
 lbl_8000A65C:
 /* 8000A65C 0000723C  7F 63 DB 78 */	mr r3, r27
-/* 8000A660 00007240  4B FF D7 09 */	bl HSD_JObjUnkMtxPtr
+/* 8000A660 00007240  4B FF D7 09 */	bl lbColl_JObjSetupMatrix
 /* 8000A664 00007244  38 9B 00 44 */	addi r4, r27, 0x44
 /* 8000A668 00007248  38 7D 00 00 */	addi r3, r29, 0
 /* 8000A66C 0000724C  38 A1 00 A0 */	addi r5, r1, 0xa0
@@ -5490,7 +7353,7 @@ lbl_8000A6C8:
 /* 8000A6E0 000072C0  48 37 DB 41 */	bl __assert
 lbl_8000A6E4:
 /* 8000A6E4 000072C4  7F 63 DB 78 */	mr r3, r27
-/* 8000A6E8 000072C8  4B FF D6 81 */	bl HSD_JObjUnkMtxPtr
+/* 8000A6E8 000072C8  4B FF D6 81 */	bl lbColl_JObjSetupMatrix
 /* 8000A6EC 000072CC  3B 9B 00 44 */	addi r28, r27, 0x44
 lbl_8000A6F0:
 /* 8000A6F0 000072D0  38 7C 00 00 */	addi r3, r28, 0
@@ -5522,7 +7385,7 @@ lbl_8000A6F0:
 /* 8000A758 00007338  90 C1 00 84 */	stw r6, 0x84(r1)
 /* 8000A75C 0000733C  38 DE 00 00 */	addi r6, r30, 0
 /* 8000A760 00007340  90 01 00 78 */	stw r0, 0x78(r1)
-/* 8000A764 00007344  4B FF EF 51 */	bl func_800096B4
+/* 8000A764 00007344  4B FF EF 51 */	bl lbColl_800096B4
 /* 8000A768 00007348  38 60 00 01 */	li r3, 1
 /* 8000A76C 0000734C  48 00 00 08 */	b lbl_8000A774
 lbl_8000A770:
@@ -5543,7 +7406,7 @@ extern int lbl_804D36C8;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8000A78C()
+asm UNK_RET lbColl_8000A78C(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000A78C 0000736C  7C 08 02 A6 */	mflr r0
@@ -5594,7 +7457,7 @@ lbl_8000A810:
 /* 8000A830 00007410  48 37 D9 F1 */	bl __assert
 lbl_8000A834:
 /* 8000A834 00007414  7F E3 FB 78 */	mr r3, r31
-/* 8000A838 00007418  4B FF D5 31 */	bl HSD_JObjUnkMtxPtr
+/* 8000A838 00007418  4B FF D5 31 */	bl lbColl_JObjSetupMatrix
 /* 8000A83C 0000741C  38 9F 00 44 */	addi r4, r31, 0x44
 /* 8000A840 00007420  38 7E 00 00 */	addi r3, r30, 0
 /* 8000A844 00007424  38 A1 00 9C */	addi r5, r1, 0x9c
@@ -5627,7 +7490,7 @@ lbl_8000A890:
 /* 8000A8A8 00007488  48 37 D9 79 */	bl __assert
 lbl_8000A8AC:
 /* 8000A8AC 0000748C  7F E3 FB 78 */	mr r3, r31
-/* 8000A8B0 00007490  4B FF D4 B9 */	bl HSD_JObjUnkMtxPtr
+/* 8000A8B0 00007490  4B FF D4 B9 */	bl lbColl_JObjSetupMatrix
 /* 8000A8B4 00007494  3B FF 00 44 */	addi r31, r31, 0x44
 lbl_8000A8B8:
 /* 8000A8B8 00007498  38 7F 00 00 */	addi r3, r31, 0
@@ -5659,7 +7522,7 @@ lbl_8000A8B8:
 /* 8000A920 00007500  90 C1 00 80 */	stw r6, 0x80(r1)
 /* 8000A924 00007504  38 CD 80 24 */	addi r6, r13, lbl_804D36C4
 /* 8000A928 00007508  90 01 00 74 */	stw r0, 0x74(r1)
-/* 8000A92C 0000750C  4B FF ED 89 */	bl func_800096B4
+/* 8000A92C 0000750C  4B FF ED 89 */	bl lbColl_800096B4
 /* 8000A930 00007510  38 60 00 01 */	li r3, 1
 /* 8000A934 00007514  48 00 00 08 */	b lbl_8000A93C
 lbl_8000A938:
@@ -5682,7 +7545,7 @@ extern int lbl_804D36D0;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8000A95C()
+asm bool lbColl_8000A95C(HitResult*, unk_t, Mtx*, f32)
 { // clang-format off
     nofralloc
 /* 8000A95C 0000753C  7C 08 02 A6 */	mflr r0
@@ -5733,7 +7596,7 @@ lbl_8000A9E0:
 /* 8000AA00 000075E0  48 37 D8 21 */	bl __assert
 lbl_8000AA04:
 /* 8000AA04 000075E4  7F E3 FB 78 */	mr r3, r31
-/* 8000AA08 000075E8  4B FF D3 61 */	bl HSD_JObjUnkMtxPtr
+/* 8000AA08 000075E8  4B FF D3 61 */	bl lbColl_JObjSetupMatrix
 /* 8000AA0C 000075EC  38 9F 00 44 */	addi r4, r31, 0x44
 /* 8000AA10 000075F0  38 7E 00 00 */	addi r3, r30, 0
 /* 8000AA14 000075F4  38 A1 00 9C */	addi r5, r1, 0x9c
@@ -5766,7 +7629,7 @@ lbl_8000AA60:
 /* 8000AA78 00007658  48 37 D7 A9 */	bl __assert
 lbl_8000AA7C:
 /* 8000AA7C 0000765C  7F E3 FB 78 */	mr r3, r31
-/* 8000AA80 00007660  4B FF D2 E9 */	bl HSD_JObjUnkMtxPtr
+/* 8000AA80 00007660  4B FF D2 E9 */	bl lbColl_JObjSetupMatrix
 /* 8000AA84 00007664  3B FF 00 44 */	addi r31, r31, 0x44
 lbl_8000AA88:
 /* 8000AA88 00007668  38 7F 00 00 */	addi r3, r31, 0
@@ -5798,7 +7661,7 @@ lbl_8000AA88:
 /* 8000AAF0 000076D0  90 C1 00 80 */	stw r6, 0x80(r1)
 /* 8000AAF4 000076D4  38 CD 80 2C */	addi r6, r13, lbl_804D36CC
 /* 8000AAF8 000076D8  90 01 00 74 */	stw r0, 0x74(r1)
-/* 8000AAFC 000076DC  4B FF EB B9 */	bl func_800096B4
+/* 8000AAFC 000076DC  4B FF EB B9 */	bl lbColl_800096B4
 /* 8000AB00 000076E0  38 60 00 01 */	li r3, 1
 /* 8000AB04 000076E4  48 00 00 08 */	b lbl_8000AB0C
 lbl_8000AB08:
@@ -5814,6 +7677,86 @@ lbl_8000AB0C:
 /* 8000AB28 00007708  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
+{
+    f32 sp98;
+    f32 sp94;
+    f32 sp90;
+    f32 sp8C;
+    f32 sp88;
+    f32 sp84;
+    f32 sp80;
+    f32 sp7C;
+    s32 sp78;
+    f32 sp74;
+    f32 sp70;
+    s32 sp6C;
+    Vec3 sp30;
+    Vec3 sp24;
+    HSD_JObj* temp_r31;
+    HSD_JObj* temp_r31_2;
+    f32* var_r31;
+    f32 temp_f31;
+    u32 var_r0;
+
+    if ((u8) M2C_FIELD(&lbl_804D36CC, u8*, 3) == 0xFF) {
+        var_r0 = 0U;
+    } else {
+        var_r0 = 2U;
+    }
+    if (var_r0 == arg1) {
+        if (!(((u8) M2C_FIELD(arg0, u8*, 4) >> 7U) & 1)) {
+            func_8000B1CC(arg0->bone, &arg0->offset, &arg0->pos);
+            if (arg2 != NULL) {
+                arg0->pos.z = pos_z;
+            }
+            M2C_FIELD(arg0, u8*, 4) = (u8) (M2C_FIELD(arg0, u8*, 4) | 0x80);
+        }
+        if (arg2 != NULL) {
+            temp_r31 = arg0->bone;
+            if (temp_r31 == NULL) {
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
+            }
+            lbColl_JObjSetupMatrix(temp_r31);
+            PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r31->mtx[0],
+                        (f32(*)[4]) & sp9C[0]);
+        }
+        temp_f31 = arg0->size;
+        sp84 = arg0->pos.x;
+        sp88 = arg0->pos.y;
+        sp8C = arg0->pos.z;
+        sp90 = arg0->pos.x;
+        sp94 = arg0->pos.y;
+        sp98 = arg0->pos.z;
+        if (arg2 != NULL) {
+            var_r31 = &sp9C[0];
+        } else {
+            temp_r31_2 = arg0->bone;
+            if (temp_r31_2 == NULL) {
+                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+            }
+            lbColl_JObjSetupMatrix(temp_r31_2);
+            var_r31 = temp_r31_2->mtx[0];
+        }
+        HSD_MtxInverse((f32(*)[4]) var_r31, (f32(*)[4]) & sp3C[0]);
+        PSMTXMUltiVec((f32(*)[4]) & sp3C[0], (Vec3*) &sp90, &sp24);
+        PSMTXMUltiVec((f32(*)[4]) & sp3C[0], (Vec3*) &sp84, &sp30);
+        sp78 = (s32) sp30;
+        sp6C = (s32) sp24;
+        sp7C = sp30.y;
+        sp70 = sp24.y;
+        sp80 = sp30.z;
+        sp74 = sp24.z;
+        lbColl_800096B4((f32(*)[4]) var_r31, &sp6C, &sp78, &lbl_804D36CC,
+                        &lbl_804D36D0, temp_f31);
+        return 1;
+    }
+    return 0;
+}
+
 #endif
 
 extern int lbl_804D36D4;
@@ -5821,7 +7764,7 @@ extern int lbl_804D36D8;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8000AB2C()
+asm UNK_RET lbColl_8000AB2C(UNK_PARAMS)
 { // clang-format off
     nofralloc
 /* 8000AB2C 0000770C  7C 08 02 A6 */	mflr r0
@@ -5872,7 +7815,7 @@ lbl_8000ABB0:
 /* 8000ABD0 000077B0  48 37 D6 51 */	bl __assert
 lbl_8000ABD4:
 /* 8000ABD4 000077B4  7F E3 FB 78 */	mr r3, r31
-/* 8000ABD8 000077B8  4B FF D1 91 */	bl HSD_JObjUnkMtxPtr
+/* 8000ABD8 000077B8  4B FF D1 91 */	bl lbColl_JObjSetupMatrix
 /* 8000ABDC 000077BC  38 9F 00 44 */	addi r4, r31, 0x44
 /* 8000ABE0 000077C0  38 7E 00 00 */	addi r3, r30, 0
 /* 8000ABE4 000077C4  38 A1 00 9C */	addi r5, r1, 0x9c
@@ -5905,7 +7848,7 @@ lbl_8000AC30:
 /* 8000AC48 00007828  48 37 D5 D9 */	bl __assert
 lbl_8000AC4C:
 /* 8000AC4C 0000782C  7F E3 FB 78 */	mr r3, r31
-/* 8000AC50 00007830  4B FF D1 19 */	bl HSD_JObjUnkMtxPtr
+/* 8000AC50 00007830  4B FF D1 19 */	bl lbColl_JObjSetupMatrix
 /* 8000AC54 00007834  3B FF 00 44 */	addi r31, r31, 0x44
 lbl_8000AC58:
 /* 8000AC58 00007838  38 7F 00 00 */	addi r3, r31, 0
@@ -5937,7 +7880,7 @@ lbl_8000AC58:
 /* 8000ACC0 000078A0  90 C1 00 80 */	stw r6, 0x80(r1)
 /* 8000ACC4 000078A4  38 CD 80 34 */	addi r6, r13, lbl_804D36D4
 /* 8000ACC8 000078A8  90 01 00 74 */	stw r0, 0x74(r1)
-/* 8000ACCC 000078AC  4B FF E9 E9 */	bl func_800096B4
+/* 8000ACCC 000078AC  4B FF E9 E9 */	bl lbColl_800096B4
 /* 8000ACD0 000078B0  38 60 00 01 */	li r3, 1
 /* 8000ACD4 000078B4  48 00 00 08 */	b lbl_8000ACDC
 lbl_8000ACD8:
@@ -5955,14 +7898,14 @@ lbl_8000ACDC:
 #pragma pop
 #endif
 
-bool func_8000ACFC(UNK_T victim_gobj, Hitbox* hitbox)
+bool lbColl_8000ACFC(UNK_T victim, HitCapsule* hitbox)
 {
     HitVictim* victims = hitbox->victims_1;
     size_t const count = ARRAY_SIZE(hitbox->victims_1);
     size_t i;
 
     for (i = 0; i < count; i++) {
-        if (victims[i].entity == victim_gobj)
+        if (victims[i].victim == victim)
             break;
     }
 

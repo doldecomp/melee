@@ -347,7 +347,7 @@ void ftLuigi_SpecialSLaunch_Anim(HSD_GObj* fighter_gobj)
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
 
     if (!fp->luigiVars[0].SpecialS.isMisfire &&
-        fp->x914[0].tangiblity == Invincible)
+        fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
@@ -371,7 +371,7 @@ void ftLuigi_SpecialAirSLaunch_Anim(HSD_GObj* fighter_gobj)
     ftLuigiAttributes* luigiAttrs = getFtSpecialAttrs(fp);
 
     if (!fp->luigiVars[0].SpecialS.isMisfire &&
-        fp->x914[0].tangiblity == Invincible)
+        fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
@@ -513,7 +513,7 @@ void ftLuigi_SpecialSMisfire_Anim(HSD_GObj* fighter_gobj)
     s32 stateVar;
 
     if (!fp->luigiVars[0].SpecialS.isMisfire &&
-        fp->x914[0].tangiblity == Invincible)
+        fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *
@@ -537,7 +537,7 @@ void ftLuigi_SpecialAirSMisfire_Anim(HSD_GObj* fighter_gobj)
     s32 stateVar;
 
     if (!fp->luigiVars[0].SpecialS.isMisfire &&
-        fp->x914[0].tangiblity == Invincible)
+        fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
                       fp->luigiVars[0].SpecialS.chargeFrames *

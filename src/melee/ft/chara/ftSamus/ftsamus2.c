@@ -35,14 +35,15 @@ void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
     }
 }
 
-bool ftSamus_80128A1C(HSD_GObj* fighter_gobj, s32 arg1, f32 farg1)
+bool ftSamus_80128A1C(HSD_GObj* fighter_gobj, unk_t arg1, f32 farg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     int i;
 
     for (i = 0; i < fp->x119E_hurtboxNum; i++) {
-        if (func_80008248(arg1, &fp->x11A0_fighterHurtbox[i], func_8007F804(fp),
-                          farg1, fp->x34_scale.y, fp->xB0_pos.z))
+        if (lbColl_80008248(arg1, &fp->x11A0_fighterHurtbox[i],
+                            *func_8007F804(fp), farg1, fp->x34_scale.y,
+                            fp->xB0_pos.z))
         {
             return true;
         }

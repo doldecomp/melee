@@ -4,6 +4,7 @@
 #define MELEE_IT_CODE_80266F3C_H
 
 #include <melee/it/types.h>
+#include <placeholder.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -135,9 +136,9 @@ void func_80279B88(Item* item_data, s32 arg1, s32 arg2);
 void func_80279BBC(Item* item_data);
 void func_80279BE0(HSD_GObj* item_gobj);
 void func_8027B0C4(HSD_GObj*, SpawnItem*);
-void func_8026FAC4(void);
-void func_80077688(void);
-void func_8026FC00(void);
-void func_80272818(void);
+UNK_RET func_8026FAC4(UNK_PARAMS);
+UNK_RET func_80077688(UNK_PARAMS);
+UNK_RET func_8026FC00(UNK_PARAMS);
+UNK_RET func_80272818(UNK_PARAMS);
 
 #endif
