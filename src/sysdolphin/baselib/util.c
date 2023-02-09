@@ -10,8 +10,7 @@ void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest)
     dest->a = (arg0->a * arg1->a) / 255U;
 }
 
-// HSD_CountSetBits?
-u32 func_8037A7EC(u32 c)
+u32 HSD_GetNbBits(u32 c)
 {
     int ret = 0;
     int i;

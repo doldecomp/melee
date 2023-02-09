@@ -3188,39 +3188,16 @@ jtbl_80407898:
     .4byte lbl_803835E4
     .4byte lbl_803835EC
     .4byte lbl_803835F4
-    .4byte 0x7465762D
-    .4byte 0x3E6B6173
-    .4byte 0x656C203D
-    .4byte 0x3D206B73
-    .4byte 0x656C0000
-    .4byte 0x73656C20
-    .4byte 0x3D3D2048
-    .4byte 0x53445F54
-    .4byte 0x455F4100
-    .4byte 0x69647820
-    .4byte 0x3D3D2033
-    .4byte 0x207C7C20
-    .4byte 0x6578702D
-    .4byte 0x3E746576
-    .4byte 0x2E615F63
-    .4byte 0x6C616D70
-    .4byte NULL
-    .4byte 0x73656C20
-    .4byte 0x3D3D2048
-    .4byte 0x53445F54
-    .4byte 0x455F4120
-    .4byte 0x7C7C2073
-    .4byte 0x656C203D
-    .4byte 0x3D204853
-    .4byte 0x445F5445
-    .4byte 0x5F580000
-    .4byte 0x6578702D
-    .4byte 0x3E636E73
-    .4byte 0x742E636F
-    .4byte 0x6D70203D
-    .4byte 0x3D204853
-    .4byte 0x445F5445
-    .4byte 0x5F580000
+    .asciz "tev->kasel == ksel"
+    .balign 4
+    .asciz "sel == HSD_TE_A"
+    .balign 4
+    .asciz "idx == 3 || exp->tev.a_clamp"
+    .balign 4
+    .asciz "sel == HSD_TE_A || sel == HSD_TE_X"
+    .balign 4
+    .asciz "exp->cnst.comp == HSD_TE_X"
+    .balign 4
 .global jtbl_80407938
 jtbl_80407938:
     .4byte lbl_80383C58
@@ -3288,20 +3265,10 @@ lbl_80407A14:
     .4byte 0x00000002
     .4byte 0x00000003
     .4byte NULL
-    .4byte 0x7465762D
-    .4byte 0x3E635F64
-    .4byte 0x73742021
-    .4byte 0x3D204853
-    .4byte 0x445F5445
-    .4byte 0x5F554E44
-    .4byte 0x45460000
-    .4byte 0x7465762D
-    .4byte 0x3E615F64
-    .4byte 0x73742021
-    .4byte 0x3D204853
-    .4byte 0x445F5445
-    .4byte 0x5F554E44
-    .4byte 0x45460000
+    .asciz "tev->c_dst != HSD_TE_UNDEF"
+    .balign 4
+    .asciz "tev->a_dst != HSD_TE_UNDEF"
+    .balign 4
     .4byte NULL
     .4byte 0x00000001
     .4byte 0x00000002
@@ -3309,13 +3276,7 @@ lbl_80407A14:
     .4byte 0x00000001
     .4byte 0x00000002
     .4byte 0x00000003
-    .4byte 0x636C6973
-    .4byte 0x742D3E74
-    .4byte 0x79706520
-    .4byte 0x3D3D2048
-    .4byte 0x53445F54
-    .4byte 0x455F434E
-    .4byte 0x53540000
+    .asciz "clist->type == HSD_TE_CNST"
 
 
 .section .sdata
@@ -3347,7 +3308,7 @@ lbl_804D5FE4:
 .global lbl_804DE7D8
 lbl_804DE7D8:
     .4byte 0x437F0000
-    .4byte 0x00000000
+    .balign 8
 .global lbl_804DE7E0
 lbl_804DE7E0:
     .4byte 0x406FE000

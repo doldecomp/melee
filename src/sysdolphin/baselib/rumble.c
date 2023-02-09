@@ -204,7 +204,7 @@ int func_80378560(HSD_PadRumbleListData* a, u8* b)
     return 0;
 }
 
-void func_803786F0_inline(HSD_PadRumbleListData** r6,
+void HSD_PadRumbleInterpret_inline(HSD_PadRumbleListData** r6,
                           HSD_PadRumbleListData* r29)
 {
     HSD_PadRumbleListData* r5;
@@ -214,7 +214,7 @@ void func_803786F0_inline(HSD_PadRumbleListData** r6,
     *r6 = r29->next;
 }
 
-void func_803786F0(void)
+void HSD_PadRumbleInterpret(void)
 {
     struct RumbleInfo* r31 = &HSD_PadLibData.rumble_info;
     struct Struct804C22E0* r30 = lbl_804C22E0;
@@ -232,7 +232,7 @@ void func_803786F0(void)
                 r28 = r29->next;
 
                 if (func_80378560((void*) r29, &r30->unk1) != 0) {
-                    func_803786F0_inline(&r30->unk8, r29);
+                    HSD_PadRumbleInterpret_inline(&r30->unk8, r29);
                     r30->unk4--;
                     r29->next = r31->listdatap;
                     r31->listdatap = r29;

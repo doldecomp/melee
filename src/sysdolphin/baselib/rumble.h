@@ -64,11 +64,11 @@ void func_80378430_inline(HSD_PadRumbleListData** r6,
 int func_80378430(u8 a, int b, int c, int d, void* e);
 void func_80378524(int a);
 int func_80378560(HSD_PadRumbleListData* a, u8* b);
-void func_803786F0(void);
+void HSD_PadRumbleInterpret(void);
 void HSD_PadRumbleInit(u16 a, void* b);
 void HSD_PadRumbleOn(u8 a);
 void func_803780DC(u8 a);
-void func_803786F0_inline(HSD_PadRumbleListData** r6,
+void HSD_PadRumbleInterpret_inline(HSD_PadRumbleListData** r6,
                           HSD_PadRumbleListData* r29);
 
 #endif
