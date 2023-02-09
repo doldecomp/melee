@@ -126,6 +126,7 @@ bool HSD_CObjSetCurrent(HSD_Obj*, cobj_UnkCallback1);
 HSD_CObj* HSD_CObjGetCurrent(void);
 void HSD_CObjEndCurrent(void);
 void HSD_CObjGetViewingMtx(unk_t);
+MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj*);
 f32 HSD_CObjGetNear(struct _HSD_CObj*);
 f32 HSD_CObjGetFar(struct _HSD_CObj*);
 void HSD_CObjSetScissorx4(HSD_CObj*, s32, s32, s32, s32);
