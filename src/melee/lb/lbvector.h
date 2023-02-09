@@ -41,7 +41,7 @@ Vec3* lbvector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a, Vec3* c);
 Vec3* lbvector_ApplyEulerRotation(Vec3* v, Vec3* angles);
 float lbvector_sqrtf_accurate(float x);
 
-extern MtxPtr func_80369688(HSD_CObj*);
+extern MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj*);
 
 Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
                              Vec3* screenCoords, int d);

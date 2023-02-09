@@ -1018,8 +1018,8 @@ lbl_803747D8:
 /* 803747F0 003713D0  7C 08 03 A6 */	mtlr r0
 /* 803747F4 003713D4  4E 80 00 20 */	blr
 
-.global func_803747F8
-func_803747F8:
+.global _HSD_ZListSort
+_HSD_ZListSort:
 /* 803747F8 003713D8  7C 08 02 A6 */	mflr r0
 /* 803747FC 003713DC  90 01 00 04 */	stw r0, 4(r1)
 /* 80374800 003713E0  94 21 FF F8 */	stwu r1, -8(r1)
@@ -1042,8 +1042,8 @@ lbl_80374838:
 /* 80374840 00371420  7C 08 03 A6 */	mtlr r0
 /* 80374844 00371424  4E 80 00 20 */	blr
 
-.global func_80374848
-func_80374848:
+.global _HSD_ZListDisp
+_HSD_ZListDisp:
 /* 80374848 00371428  7C 08 02 A6 */	mflr r0
 /* 8037484C 0037142C  90 01 00 04 */	stw r0, 4(r1)
 /* 80374850 00371430  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1095,7 +1095,7 @@ lbl_803748C8:
 lbl_803748EC:
 /* 803748EC 003714CC  28 1E 00 00 */	cmplwi r30, 0
 /* 803748F0 003714D0  40 82 FF C4 */	bne lbl_803748B4
-/* 803748F4 003714D4  48 00 00 1D */	bl func_80374910
+/* 803748F4 003714D4  48 00 00 1D */	bl _HSD_ZListClear
 /* 803748F8 003714D8  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 803748FC 003714DC  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80374900 003714E0  83 C1 00 10 */	lwz r30, 0x10(r1)
@@ -1103,8 +1103,8 @@ lbl_803748EC:
 /* 80374908 003714E8  7C 08 03 A6 */	mtlr r0
 /* 8037490C 003714EC  4E 80 00 20 */	blr
 
-.global func_80374910
-func_80374910:
+.global _HSD_ZListClear
+_HSD_ZListClear:
 /* 80374910 003714F0  7C 08 02 A6 */	mflr r0
 /* 80374914 003714F4  3C 60 80 4C */	lis r3, zlist_alloc_data@ha
 /* 80374918 003714F8  90 01 00 04 */	stw r0, 4(r1)

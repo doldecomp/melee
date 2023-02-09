@@ -368,7 +368,7 @@ float lbvector_sqrtf_accurate(float x)
     return sqrtf_accurate(x);
 }
 
-extern MtxPtr func_80369688(HSD_CObj*);
+extern MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj*);
 
 // 8000E210
 Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
@@ -439,8 +439,9 @@ Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
         HSD_CObjGetInterest(cobj, &target);
         C_MTXLookAt(m, &camPos, &upVec, &target);
         mvMtx = m;
-    } else
-        mvMtx = func_80369688(cobj); // HSD_CObjSetupViewingMtx
+    } else {
+        mvMtx = HSD_CObjGetViewingMtxPtr(cobj);
+    }
 
     f1 = mvMtx[2][0] * pos3d->x + mvMtx[2][1] * pos3d->y +
          mvMtx[2][2] * pos3d->z + mvMtx[2][3];
