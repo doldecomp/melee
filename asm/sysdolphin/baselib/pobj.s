@@ -471,7 +471,7 @@ HSD_PObjSetDefaultClass:
 /* 8036BFAC 00368B8C  38 80 02 A1 */	li r4, 0x2a1
 /* 8036BFB0 00368B90  48 01 C2 71 */	bl __assert
 lbl_8036BFB4:
-/* 8036BFB4 00368B94  93 ED BF C0 */	stw r31, lbl_804D7660@sda21(r13)
+/* 8036BFB4 00368B94  93 ED BF C0 */	stw r31, default_class@sda21(r13)
 /* 8036BFB8 00368B98  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8036BFBC 00368B9C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8036BFC0 00368BA0  38 21 00 18 */	addi r1, r1, 0x18
@@ -484,7 +484,7 @@ HSD_PObjAlloc:
 /* 8036BFD0 00368BB0  90 01 00 04 */	stw r0, 4(r1)
 /* 8036BFD4 00368BB4  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8036BFD8 00368BB8  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8036BFDC 00368BBC  80 6D BF C0 */	lwz r3, lbl_804D7660@sda21(r13)
+/* 8036BFDC 00368BBC  80 6D BF C0 */	lwz r3, default_class@sda21(r13)
 /* 8036BFE0 00368BC0  28 03 00 00 */	cmplwi r3, 0
 /* 8036BFE4 00368BC4  41 82 00 08 */	beq lbl_8036BFEC
 /* 8036BFE8 00368BC8  48 00 00 0C */	b lbl_8036BFF4
@@ -2192,18 +2192,18 @@ drawShapeAnim:
 /* 8036D7FC 0036A3DC  3B C3 00 00 */	addi r30, r3, 0
 /* 8036D800 0036A3E0  3C 60 80 40 */	lis r3, hsdPObj@ha
 /* 8036D804 0036A3E4  3B A3 63 98 */	addi r29, r3, hsdPObj@l
-/* 8036D808 0036A3E8  80 0D BF CC */	lwz r0, lbl_804D766C@sda21(r13)
+/* 8036D808 0036A3E8  80 0D BF CC */	lwz r0, vertex_buffer_size@sda21(r13)
 /* 8036D80C 0036A3EC  83 FE 00 14 */	lwz r31, 0x14(r30)
 /* 8036D810 0036A3F0  28 00 00 00 */	cmplwi r0, 0
 /* 8036D814 0036A3F4  40 82 00 1C */	bne lbl_8036D830
 /* 8036D818 0036A3F8  38 00 07 D0 */	li r0, 0x7d0
-/* 8036D81C 0036A3FC  90 0D BF CC */	stw r0, lbl_804D766C@sda21(r13)
-/* 8036D820 0036A400  80 0D BF CC */	lwz r0, lbl_804D766C@sda21(r13)
+/* 8036D81C 0036A3FC  90 0D BF CC */	stw r0, vertex_buffer_size@sda21(r13)
+/* 8036D820 0036A400  80 0D BF CC */	lwz r0, vertex_buffer_size@sda21(r13)
 /* 8036D824 0036A404  1C 60 00 0C */	mulli r3, r0, 0xc
 /* 8036D828 0036A408  48 01 19 BD */	bl HSD_MemAlloc
-/* 8036D82C 0036A40C  90 6D BF C4 */	stw r3, lbl_804D7664@sda21(r13)
+/* 8036D82C 0036A40C  90 6D BF C4 */	stw r3, vertex_buffer@sda21(r13)
 lbl_8036D830:
-/* 8036D830 0036A410  80 6D BF CC */	lwz r3, lbl_804D766C@sda21(r13)
+/* 8036D830 0036A410  80 6D BF CC */	lwz r3, vertex_buffer_size@sda21(r13)
 /* 8036D834 0036A414  80 1F 00 04 */	lwz r0, 4(r31)
 /* 8036D838 0036A418  7C 03 00 40 */	cmplw r3, r0
 /* 8036D83C 0036A41C  40 80 00 14 */	bge lbl_8036D850
@@ -2215,15 +2215,15 @@ lbl_8036D850:
 /* 8036D850 0036A430  80 1F 00 14 */	lwz r0, 0x14(r31)
 /* 8036D854 0036A434  28 00 00 00 */	cmplwi r0, 0
 /* 8036D858 0036A438  41 82 00 28 */	beq lbl_8036D880
-/* 8036D85C 0036A43C  80 0D BF D0 */	lwz r0, lbl_804D7670@sda21(r13)
+/* 8036D85C 0036A43C  80 0D BF D0 */	lwz r0, normal_buffer_size@sda21(r13)
 /* 8036D860 0036A440  28 00 00 00 */	cmplwi r0, 0
 /* 8036D864 0036A444  40 82 00 1C */	bne lbl_8036D880
 /* 8036D868 0036A448  38 00 07 D0 */	li r0, 0x7d0
-/* 8036D86C 0036A44C  90 0D BF D0 */	stw r0, lbl_804D7670@sda21(r13)
-/* 8036D870 0036A450  80 0D BF D0 */	lwz r0, lbl_804D7670@sda21(r13)
+/* 8036D86C 0036A44C  90 0D BF D0 */	stw r0, normal_buffer_size@sda21(r13)
+/* 8036D870 0036A450  80 0D BF D0 */	lwz r0, normal_buffer_size@sda21(r13)
 /* 8036D874 0036A454  1C 60 00 0C */	mulli r3, r0, 0xc
 /* 8036D878 0036A458  48 01 19 6D */	bl HSD_MemAlloc
-/* 8036D87C 0036A45C  90 6D BF C8 */	stw r3, lbl_804D7668@sda21(r13)
+/* 8036D87C 0036A45C  90 6D BF C8 */	stw r3, normal_buffer@sda21(r13)
 lbl_8036D880:
 /* 8036D880 0036A460  80 7F 00 14 */	lwz r3, 0x14(r31)
 /* 8036D884 0036A464  28 03 00 00 */	cmplwi r3, 0
@@ -2231,7 +2231,7 @@ lbl_8036D880:
 /* 8036D88C 0036A46C  80 03 00 00 */	lwz r0, 0(r3)
 /* 8036D890 0036A470  2C 00 00 0A */	cmpwi r0, 0xa
 /* 8036D894 0036A474  40 82 00 2C */	bne lbl_8036D8C0
-/* 8036D898 0036A478  80 6D BF D0 */	lwz r3, lbl_804D7670@sda21(r13)
+/* 8036D898 0036A478  80 6D BF D0 */	lwz r3, normal_buffer_size@sda21(r13)
 /* 8036D89C 0036A47C  80 1F 00 10 */	lwz r0, 0x10(r31)
 /* 8036D8A0 0036A480  7C 03 00 40 */	cmplw r3, r0
 /* 8036D8A4 0036A484  40 80 00 14 */	bge lbl_8036D8B8
@@ -2244,7 +2244,7 @@ lbl_8036D8B8:
 /* 8036D8BC 0036A49C  48 00 00 2C */	b lbl_8036D8E8
 lbl_8036D8C0:
 /* 8036D8C0 0036A4A0  80 1F 00 10 */	lwz r0, 0x10(r31)
-/* 8036D8C4 0036A4A4  80 6D BF D0 */	lwz r3, lbl_804D7670@sda21(r13)
+/* 8036D8C4 0036A4A4  80 6D BF D0 */	lwz r3, normal_buffer_size@sda21(r13)
 /* 8036D8C8 0036A4A8  1C 00 00 03 */	mulli r0, r0, 3
 /* 8036D8CC 0036A4AC  7C 03 00 40 */	cmplw r3, r0
 /* 8036D8D0 0036A4B0  40 80 00 14 */	bge lbl_8036D8E4
@@ -2336,7 +2336,7 @@ lbl_8036D9E4:
 /* 8036D9F8 0036A5D8  38 7C 00 04 */	addi r3, r28, 4
 /* 8036D9FC 0036A5DC  C0 01 00 B4 */	lfs f0, 0xb4(r1)
 /* 8036DA00 0036A5E0  38 1C 00 08 */	addi r0, r28, 8
-/* 8036DA04 0036A5E4  80 8D BF C4 */	lwz r4, lbl_804D7664@sda21(r13)
+/* 8036DA04 0036A5E4  80 8D BF C4 */	lwz r4, vertex_buffer@sda21(r13)
 /* 8036DA08 0036A5E8  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8036DA0C 0036A5EC  3B 5A 00 01 */	addi r26, r26, 1
 /* 8036DA10 0036A5F0  EC 1F 08 3A */	fmadds f0, f31, f0, f1
@@ -2344,13 +2344,13 @@ lbl_8036D9E4:
 /* 8036DA18 0036A5F8  3B 9C 00 0C */	addi r28, r28, 0xc
 /* 8036DA1C 0036A5FC  C0 21 00 C4 */	lfs f1, 0xc4(r1)
 /* 8036DA20 0036A600  C0 01 00 B8 */	lfs f0, 0xb8(r1)
-/* 8036DA24 0036A604  80 8D BF C4 */	lwz r4, lbl_804D7664@sda21(r13)
+/* 8036DA24 0036A604  80 8D BF C4 */	lwz r4, vertex_buffer@sda21(r13)
 /* 8036DA28 0036A608  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8036DA2C 0036A60C  EC 1F 08 3A */	fmadds f0, f31, f0, f1
 /* 8036DA30 0036A610  7C 04 1D 2E */	stfsx f0, r4, r3
 /* 8036DA34 0036A614  C0 21 00 C8 */	lfs f1, 0xc8(r1)
 /* 8036DA38 0036A618  C0 01 00 BC */	lfs f0, 0xbc(r1)
-/* 8036DA3C 0036A61C  80 6D BF C4 */	lwz r3, lbl_804D7664@sda21(r13)
+/* 8036DA3C 0036A61C  80 6D BF C4 */	lwz r3, vertex_buffer@sda21(r13)
 /* 8036DA40 0036A620  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8036DA44 0036A624  EC 1F 08 3A */	fmadds f0, f31, f0, f1
 /* 8036DA48 0036A628  7C 03 05 2E */	stfsx f0, r3, r0
@@ -2389,7 +2389,7 @@ lbl_8036DAA8:
 /* 8036DAC0 0036A6A0  40 81 05 30 */	ble lbl_8036DFF0
 /* 8036DAC4 0036A6A4  C0 21 00 90 */	lfs f1, 0x90(r1)
 /* 8036DAC8 0036A6A8  C0 01 00 6C */	lfs f0, 0x6c(r1)
-/* 8036DACC 0036A6AC  81 2D BF C8 */	lwz r9, lbl_804D7668@sda21(r13)
+/* 8036DACC 0036A6AC  81 2D BF C8 */	lwz r9, normal_buffer@sda21(r13)
 /* 8036DAD0 0036A6B0  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8036DAD4 0036A6B4  39 09 00 04 */	addi r8, r9, 4
 /* 8036DAD8 0036A6B8  38 E9 00 08 */	addi r7, r9, 8
@@ -2439,7 +2439,7 @@ lbl_8036DAA8:
 /* 8036DB88 0036A768  48 00 04 68 */	b lbl_8036DFF0
 lbl_8036DB8C:
 /* 8036DB8C 0036A76C  20 09 00 09 */	subfic r0, r9, 9
-/* 8036DB90 0036A770  80 6D BF C8 */	lwz r3, lbl_804D7668@sda21(r13)
+/* 8036DB90 0036A770  80 6D BF C8 */	lwz r3, normal_buffer@sda21(r13)
 /* 8036DB94 0036A774  2C 09 00 09 */	cmpwi r9, 9
 /* 8036DB98 0036A778  7C 09 03 A6 */	mtctr r0
 /* 8036DB9C 0036A77C  40 80 00 2C */	bge lbl_8036DBC8
@@ -2487,7 +2487,7 @@ lbl_8036DC18:
 /* 8036DC2C 0036A80C  38 78 00 04 */	addi r3, r24, 4
 /* 8036DC30 0036A810  C0 01 00 50 */	lfs f0, 0x50(r1)
 /* 8036DC34 0036A814  38 18 00 08 */	addi r0, r24, 8
-/* 8036DC38 0036A818  80 8D BF C8 */	lwz r4, lbl_804D7668@sda21(r13)
+/* 8036DC38 0036A818  80 8D BF C8 */	lwz r4, normal_buffer@sda21(r13)
 /* 8036DC3C 0036A81C  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8036DC40 0036A820  3B 5A 00 01 */	addi r26, r26, 1
 /* 8036DC44 0036A824  EC 1F 08 3A */	fmadds f0, f31, f0, f1
@@ -2495,13 +2495,13 @@ lbl_8036DC18:
 /* 8036DC4C 0036A82C  3B 18 00 0C */	addi r24, r24, 0xc
 /* 8036DC50 0036A830  C0 21 00 60 */	lfs f1, 0x60(r1)
 /* 8036DC54 0036A834  C0 01 00 54 */	lfs f0, 0x54(r1)
-/* 8036DC58 0036A838  80 8D BF C8 */	lwz r4, lbl_804D7668@sda21(r13)
+/* 8036DC58 0036A838  80 8D BF C8 */	lwz r4, normal_buffer@sda21(r13)
 /* 8036DC5C 0036A83C  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8036DC60 0036A840  EC 1F 08 3A */	fmadds f0, f31, f0, f1
 /* 8036DC64 0036A844  7C 04 1D 2E */	stfsx f0, r4, r3
 /* 8036DC68 0036A848  C0 21 00 64 */	lfs f1, 0x64(r1)
 /* 8036DC6C 0036A84C  C0 01 00 58 */	lfs f0, 0x58(r1)
-/* 8036DC70 0036A850  80 6D BF C8 */	lwz r3, lbl_804D7668@sda21(r13)
+/* 8036DC70 0036A850  80 6D BF C8 */	lwz r3, normal_buffer@sda21(r13)
 /* 8036DC74 0036A854  EC 00 08 28 */	fsubs f0, f0, f1
 /* 8036DC78 0036A858  EC 1F 08 3A */	fmadds f0, f31, f0, f1
 /* 8036DC7C 0036A85C  7C 03 05 2E */	stfsx f0, r3, r0
@@ -2517,7 +2517,7 @@ lbl_8036DC90:
 /* 8036DC9C 0036A87C  CB C2 EB 30 */	lfd f30, lbl_804DE510@sda21(r2)
 /* 8036DCA0 0036A880  48 00 00 B0 */	b lbl_8036DD50
 lbl_8036DCA4:
-/* 8036DCA4 0036A884  80 0D BF C4 */	lwz r0, lbl_804D7664@sda21(r13)
+/* 8036DCA4 0036A884  80 0D BF C4 */	lwz r0, vertex_buffer@sda21(r13)
 /* 8036DCA8 0036A888  38 7F 00 00 */	addi r3, r31, 0
 /* 8036DCAC 0036A88C  38 BB 00 00 */	addi r5, r27, 0
 /* 8036DCB0 0036A890  7C C0 D2 14 */	add r6, r0, r26
@@ -2538,20 +2538,20 @@ lbl_8036DCD8:
 /* 8036DCE4 0036A8C4  38 9C 00 01 */	addi r4, r28, 1
 /* 8036DCE8 0036A8C8  38 C1 00 44 */	addi r6, r1, 0x44
 /* 8036DCEC 0036A8CC  4B FF E7 E9 */	bl get_shape_vertex_xyz
-/* 8036DCF0 0036A8D0  80 0D BF C4 */	lwz r0, lbl_804D7664@sda21(r13)
+/* 8036DCF0 0036A8D0  80 0D BF C4 */	lwz r0, vertex_buffer@sda21(r13)
 /* 8036DCF4 0036A8D4  3B 39 00 04 */	addi r25, r25, 4
 /* 8036DCF8 0036A8D8  C0 21 00 44 */	lfs f1, 0x44(r1)
 /* 8036DCFC 0036A8DC  3B 9C 00 01 */	addi r28, r28, 1
 /* 8036DD00 0036A8E0  7C 1A 04 2E */	lfsx f0, r26, r0
 /* 8036DD04 0036A8E4  EC 01 07 FA */	fmadds f0, f1, f31, f0
 /* 8036DD08 0036A8E8  7C 1A 05 2E */	stfsx f0, r26, r0
-/* 8036DD0C 0036A8EC  80 6D BF C4 */	lwz r3, lbl_804D7664@sda21(r13)
+/* 8036DD0C 0036A8EC  80 6D BF C4 */	lwz r3, vertex_buffer@sda21(r13)
 /* 8036DD10 0036A8F0  C0 21 00 48 */	lfs f1, 0x48(r1)
 /* 8036DD14 0036A8F4  38 03 00 04 */	addi r0, r3, 4
 /* 8036DD18 0036A8F8  7C 1A 04 2E */	lfsx f0, r26, r0
 /* 8036DD1C 0036A8FC  EC 01 07 FA */	fmadds f0, f1, f31, f0
 /* 8036DD20 0036A900  7C 1A 05 2E */	stfsx f0, r26, r0
-/* 8036DD24 0036A904  80 6D BF C4 */	lwz r3, lbl_804D7664@sda21(r13)
+/* 8036DD24 0036A904  80 6D BF C4 */	lwz r3, vertex_buffer@sda21(r13)
 /* 8036DD28 0036A908  C0 21 00 4C */	lfs f1, 0x4c(r1)
 /* 8036DD2C 0036A90C  38 03 00 08 */	addi r0, r3, 8
 /* 8036DD30 0036A910  7C 1A 04 2E */	lfsx f0, r26, r0
@@ -2579,7 +2579,7 @@ lbl_8036DD50:
 /* 8036DD80 0036A960  3B 60 00 01 */	li r27, 1
 /* 8036DD84 0036A964  48 00 01 80 */	b lbl_8036DF04
 lbl_8036DD88:
-/* 8036DD88 0036A968  80 0D BF C8 */	lwz r0, lbl_804D7668@sda21(r13)
+/* 8036DD88 0036A968  80 0D BF C8 */	lwz r0, normal_buffer@sda21(r13)
 /* 8036DD8C 0036A96C  38 7F 00 00 */	addi r3, r31, 0
 /* 8036DD90 0036A970  38 BA 00 00 */	addi r5, r26, 0
 /* 8036DD94 0036A974  7C C0 C2 14 */	add r6, r0, r24
@@ -2604,7 +2604,7 @@ lbl_8036DDBC:
 /* 8036DDD8 0036A9B8  3A C0 00 00 */	li r22, 0
 /* 8036DDDC 0036A9BC  40 81 02 2C */	ble lbl_8036E008
 /* 8036DDE0 0036A9C0  38 00 00 08 */	li r0, 8
-/* 8036DDE4 0036A9C4  81 4D BF C8 */	lwz r10, lbl_804D7668@sda21(r13)
+/* 8036DDE4 0036A9C4  81 4D BF C8 */	lwz r10, normal_buffer@sda21(r13)
 /* 8036DDE8 0036A9C8  54 00 E8 FE */	srwi r0, r0, 3
 /* 8036DDEC 0036A9CC  2C 1B 00 00 */	cmpwi r27, 0
 /* 8036DDF0 0036A9D0  7C 09 03 A6 */	mtctr r0
@@ -2659,7 +2659,7 @@ lbl_8036DE00:
 /* 8036DEB0 0036AA90  48 00 01 58 */	b lbl_8036E008
 lbl_8036DEB4:
 /* 8036DEB4 0036AA94  20 16 00 09 */	subfic r0, r22, 9
-/* 8036DEB8 0036AA98  80 6D BF C8 */	lwz r3, lbl_804D7668@sda21(r13)
+/* 8036DEB8 0036AA98  80 6D BF C8 */	lwz r3, normal_buffer@sda21(r13)
 /* 8036DEBC 0036AA9C  2C 16 00 09 */	cmpwi r22, 9
 /* 8036DEC0 0036AAA0  7C 09 03 A6 */	mtctr r0
 /* 8036DEC4 0036AAA4  40 80 00 24 */	bge lbl_8036DEE8
@@ -2692,7 +2692,7 @@ lbl_8036DF14:
 /* 8036DF1C 0036AAFC  1F 3A 00 0C */	mulli r25, r26, 0xc
 /* 8036DF20 0036AB00  48 00 00 B0 */	b lbl_8036DFD0
 lbl_8036DF24:
-/* 8036DF24 0036AB04  80 0D BF C8 */	lwz r0, lbl_804D7668@sda21(r13)
+/* 8036DF24 0036AB04  80 0D BF C8 */	lwz r0, normal_buffer@sda21(r13)
 /* 8036DF28 0036AB08  38 7F 00 00 */	addi r3, r31, 0
 /* 8036DF2C 0036AB0C  38 BA 00 00 */	addi r5, r26, 0
 /* 8036DF30 0036AB10  7C C0 CA 14 */	add r6, r0, r25
@@ -2713,20 +2713,20 @@ lbl_8036DF58:
 /* 8036DF64 0036AB44  38 9B 00 01 */	addi r4, r27, 1
 /* 8036DF68 0036AB48  38 C1 00 14 */	addi r6, r1, 0x14
 /* 8036DF6C 0036AB4C  4B FF E8 F5 */	bl get_shape_normal_xyz
-/* 8036DF70 0036AB50  80 0D BF C8 */	lwz r0, lbl_804D7668@sda21(r13)
+/* 8036DF70 0036AB50  80 0D BF C8 */	lwz r0, normal_buffer@sda21(r13)
 /* 8036DF74 0036AB54  3B 18 00 04 */	addi r24, r24, 4
 /* 8036DF78 0036AB58  C0 21 00 14 */	lfs f1, 0x14(r1)
 /* 8036DF7C 0036AB5C  3B 7B 00 01 */	addi r27, r27, 1
 /* 8036DF80 0036AB60  7C 19 04 2E */	lfsx f0, r25, r0
 /* 8036DF84 0036AB64  EC 01 07 FA */	fmadds f0, f1, f31, f0
 /* 8036DF88 0036AB68  7C 19 05 2E */	stfsx f0, r25, r0
-/* 8036DF8C 0036AB6C  80 6D BF C8 */	lwz r3, lbl_804D7668@sda21(r13)
+/* 8036DF8C 0036AB6C  80 6D BF C8 */	lwz r3, normal_buffer@sda21(r13)
 /* 8036DF90 0036AB70  C0 21 00 18 */	lfs f1, 0x18(r1)
 /* 8036DF94 0036AB74  38 03 00 04 */	addi r0, r3, 4
 /* 8036DF98 0036AB78  7C 19 04 2E */	lfsx f0, r25, r0
 /* 8036DF9C 0036AB7C  EC 01 07 FA */	fmadds f0, f1, f31, f0
 /* 8036DFA0 0036AB80  7C 19 05 2E */	stfsx f0, r25, r0
-/* 8036DFA4 0036AB84  80 6D BF C8 */	lwz r3, lbl_804D7668@sda21(r13)
+/* 8036DFA4 0036AB84  80 6D BF C8 */	lwz r3, normal_buffer@sda21(r13)
 /* 8036DFA8 0036AB88  C0 21 00 1C */	lfs f1, 0x1c(r1)
 /* 8036DFAC 0036AB8C  38 03 00 08 */	addi r0, r3, 8
 /* 8036DFB0 0036AB90  7C 19 04 2E */	lfsx f0, r25, r0
@@ -2743,9 +2743,9 @@ lbl_8036DFD0:
 /* 8036DFD4 0036ABB4  7C 1A 00 00 */	cmpw r26, r0
 /* 8036DFD8 0036ABB8  41 80 FF 4C */	blt lbl_8036DF24
 lbl_8036DFDC:
-/* 8036DFDC 0036ABBC  80 8D BF C4 */	lwz r4, lbl_804D7664@sda21(r13)
+/* 8036DFDC 0036ABBC  80 8D BF C4 */	lwz r4, vertex_buffer@sda21(r13)
 /* 8036DFE0 0036ABC0  7F C3 F3 78 */	mr r3, r30
-/* 8036DFE4 0036ABC4  80 AD BF C8 */	lwz r5, lbl_804D7668@sda21(r13)
+/* 8036DFE4 0036ABC4  80 AD BF C8 */	lwz r5, normal_buffer@sda21(r13)
 /* 8036DFE8 0036ABC8  4B FF F4 E9 */	bl interpretShapeAnimDisplayList
 /* 8036DFEC 0036ABCC  48 00 00 2C */	b lbl_8036E018
 lbl_8036DFF0:
@@ -3563,25 +3563,25 @@ lbl_8036EAD8:
 /* 8036EB0C 0036B6EC  7C 08 03 A6 */	mtlr r0
 /* 8036EB10 0036B6F0  4E 80 00 20 */	blr
 
-lbl_8036EB14:
+PObjAmnesia:
 /* 8036EB14 0036B6F4  7C 08 02 A6 */	mflr r0
 /* 8036EB18 0036B6F8  90 01 00 04 */	stw r0, 4(r1)
 /* 8036EB1C 0036B6FC  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8036EB20 0036B700  80 0D BF C0 */	lwz r0, lbl_804D7660@sda21(r13)
+/* 8036EB20 0036B700  80 0D BF C0 */	lwz r0, default_class@sda21(r13)
 /* 8036EB24 0036B704  7C 03 00 40 */	cmplw r3, r0
 /* 8036EB28 0036B708  40 82 00 0C */	bne lbl_8036EB34
 /* 8036EB2C 0036B70C  38 00 00 00 */	li r0, 0
-/* 8036EB30 0036B710  90 0D BF C0 */	stw r0, lbl_804D7660@sda21(r13)
+/* 8036EB30 0036B710  90 0D BF C0 */	stw r0, default_class@sda21(r13)
 lbl_8036EB34:
 /* 8036EB34 0036B714  3C 80 80 40 */	lis r4, hsdPObj@ha
 /* 8036EB38 0036B718  38 04 63 98 */	addi r0, r4, hsdPObj@l
 /* 8036EB3C 0036B71C  7C 03 00 40 */	cmplw r3, r0
 /* 8036EB40 0036B720  40 82 00 20 */	bne lbl_8036EB60
 /* 8036EB44 0036B724  38 00 00 00 */	li r0, 0
-/* 8036EB48 0036B728  90 0D BF C4 */	stw r0, lbl_804D7664@sda21(r13)
-/* 8036EB4C 0036B72C  90 0D BF CC */	stw r0, lbl_804D766C@sda21(r13)
-/* 8036EB50 0036B730  90 0D BF C8 */	stw r0, lbl_804D7668@sda21(r13)
-/* 8036EB54 0036B734  90 0D BF D0 */	stw r0, lbl_804D7670@sda21(r13)
+/* 8036EB48 0036B728  90 0D BF C4 */	stw r0, vertex_buffer@sda21(r13)
+/* 8036EB4C 0036B72C  90 0D BF CC */	stw r0, vertex_buffer_size@sda21(r13)
+/* 8036EB50 0036B730  90 0D BF C8 */	stw r0, normal_buffer@sda21(r13)
+/* 8036EB54 0036B734  90 0D BF D0 */	stw r0, normal_buffer_size@sda21(r13)
 /* 8036EB58 0036B738  90 0D BF D4 */	stw r0, prev_vtxdesclist_array@sda21(r13)
 /* 8036EB5C 0036B73C  90 0D BF D8 */	stw r0, prev_vtxdesc@sda21(r13)
 lbl_8036EB60:
@@ -3614,9 +3614,9 @@ PObjInfoInit:
 /* 8036EBBC 0036B79C  48 01 30 5D */	bl hsdInitClassInfo
 /* 8036EBC0 0036B7A0  3C 60 80 37 */	lis r3, PObjRelease@ha
 /* 8036EBC4 0036B7A4  38 03 E9 F0 */	addi r0, r3, PObjRelease@l
-/* 8036EBC8 0036B7A8  3C 60 80 37 */	lis r3, lbl_8036EB14@ha
+/* 8036EBC8 0036B7A8  3C 60 80 37 */	lis r3, PObjAmnesia@ha
 /* 8036EBCC 0036B7AC  90 1F 00 30 */	stw r0, 0x30(r31)
-/* 8036EBD0 0036B7B0  38 03 EB 14 */	addi r0, r3, lbl_8036EB14@l
+/* 8036EBD0 0036B7B0  38 03 EB 14 */	addi r0, r3, PObjAmnesia@l
 /* 8036EBD4 0036B7B4  3C 60 80 37 */	lis r3, HSD_PObjDisp@ha
 /* 8036EBD8 0036B7B8  90 1F 00 38 */	stw r0, 0x38(r31)
 /* 8036EBDC 0036B7BC  38 03 E8 AC */	addi r0, r3, HSD_PObjDisp@l
@@ -3734,54 +3734,16 @@ lbl_804065A8:
     .4byte lbl_8036D78C
     .4byte lbl_8036D78C
     .4byte lbl_8036D618
-    .4byte 0x76657274
-    .4byte 0x65785F62
-    .4byte 0x75666665
-    .4byte 0x725F7369
-    .4byte 0x7A65203E
-    .4byte 0x3D207368
-    .4byte 0x6170655F
-    .4byte 0x7365742D
-    .4byte 0x3E6E625F
-    .4byte 0x76657274
-    .4byte 0x65785F69
-    .4byte 0x6E646578
-    .4byte NULL
-    .4byte 0x6E6F726D
-    .4byte 0x616C5F62
-    .4byte 0x75666665
-    .4byte 0x725F7369
-    .4byte 0x7A65203E
-    .4byte 0x3D207368
-    .4byte 0x6170655F
-    .4byte 0x7365742D
-    .4byte 0x3E6E625F
-    .4byte 0x6E6F726D
-    .4byte 0x616C5F69
-    .4byte 0x6E646578
-    .4byte NULL
-    .4byte 0x6E6F726D
-    .4byte 0x616C5F62
-    .4byte 0x75666665
-    .4byte 0x725F7369
-    .4byte 0x7A65203E
-    .4byte 0x3D207368
-    .4byte 0x6170655F
-    .4byte 0x7365742D
-    .4byte 0x3E6E625F
-    .4byte 0x6E6F726D
-    .4byte 0x616C5F69
-    .4byte 0x6E646578
-    .4byte 0x202A2033
-    .4byte NULL
-    .4byte 0x656E7665
-    .4byte 0x6C6F7065
-    .4byte 0x2D3E6A6F
-    .4byte 0x626A0000
-    .4byte 0x6A702D3E
-    .4byte 0x656E7665
-    .4byte 0x6C6F7065
-    .4byte 0x6D747800
+    .asciz "vertex_buffer_size >= shape_set->nb_vertex_index"
+    .balign 4
+    .asciz "normal_buffer_size >= shape_set->nb_normal_index"
+    .balign 4
+    .asciz "normal_buffer_size >= shape_set->nb_normal_index * 3"
+    .balign 4
+    .asciz "envelope->jobj"
+    .balign 4
+    .asciz "jp->envelopemtx"
+    .balign 4
 .global lbl_804066D0
 lbl_804066D0:
     .asciz "pobj->u.shape_set"
@@ -3833,20 +3795,19 @@ lbl_804D5D94:
 
 .section .sbss
     .balign 8
-.global lbl_804D7660
-lbl_804D7660:
+default_class:
     .skip 0x4
-.global lbl_804D7664
-lbl_804D7664:
+.global vertex_buffer
+vertex_buffer:
     .skip 0x4
-.global lbl_804D7668
-lbl_804D7668:
+.global normal_buffer
+normal_buffer:
     .skip 0x4
-.global lbl_804D766C
-lbl_804D766C:
+.global vertex_buffer_size
+vertex_buffer_size:
     .skip 0x4
-.global lbl_804D7670
-lbl_804D7670:
+.global normal_buffer_size
+normal_buffer_size:
     .skip 0x4
 .global prev_vtxdesclist_array
 prev_vtxdesclist_array:

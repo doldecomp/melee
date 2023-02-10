@@ -982,25 +982,14 @@ lbl_80407310:
     .4byte 0x09000000
     .4byte 0x0004050F
     .4byte 0x07070007
-    .4byte 0x73686164
-    .4byte 0x6F772D3E
-    .4byte 0x63616D65
-    .4byte 0x72610000
-    .4byte 0x73686164
-    .4byte 0x6F772D3E
-    .4byte 0x74657874
-    .4byte 0x75726500
-    .4byte 0x73686164
-    .4byte 0x6F772D3E
-    .4byte 0x74657874
-    .4byte 0x7572652D
-    .4byte 0x3E696D61
-    .4byte 0x67656465
-    .4byte 0x73630000
-    .4byte 0x64697374
-    .4byte 0x616E6365
-    .4byte 0x203E2030
-    .4byte 0x2E304600
+    .asciz "shadow->camera"
+    .balign 4
+    .asciz "shadow->texture"
+    .balign 4
+    .asciz "shadow->texture->imagedesc"
+    .balign 4
+    .asciz "distance > 0.0F"
+    .balign 4
 .global lbl_8040743C
 lbl_8040743C:
     .asciz "object.h"

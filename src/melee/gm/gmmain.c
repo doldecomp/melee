@@ -174,8 +174,8 @@ int main(void)
     *seed_ptr = OSGetTick();
     func_8002838C();
     func_80019AAC(&lbl_8015FD24);
-    func_80375934(&lbl_8015FDA0);
-    func_8037598C(&lbl_803762C4);
+    HSD_VISetUserPostRetraceCallback(&lbl_8015FDA0);
+    HSD_VISetUserGXDrawDoneCallback(&lbl_803762C4);
     HSD_VISetBlack(0);
     func_8001564C();
     func_80015F3C();
