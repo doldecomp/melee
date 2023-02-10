@@ -3307,9 +3307,8 @@ lbl_804D5FE4:
     .balign 8
 .global lbl_804DE7D8
 lbl_804DE7D8:
-    .4byte 0x437F0000
+    .float 255.0
     .balign 8
 .global lbl_804DE7E0
 lbl_804DE7E0:
-    .4byte 0x406FE000
-    .4byte 0x00000000
+    .double 255.0
