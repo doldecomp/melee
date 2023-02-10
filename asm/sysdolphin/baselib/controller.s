@@ -2,8 +2,8 @@
 
 .section .text  # 0x8037699C - 0x8037808C
 
-.global func_803769FC
-func_803769FC:
+.global HSD_PadRenewRawStatus
+HSD_PadRenewRawStatus:
 /* 803769FC 003735DC  7C 08 02 A6 */	mflr r0
 /* 80376A00 003735E0  3C 80 80 4C */	lis r4, HSD_PadLibData@ha
 /* 80376A04 003735E4  90 01 00 04 */	stw r0, 4(r1)
@@ -12,7 +12,7 @@ func_803769FC:
 /* 80376A10 003735F0  3B E4 1F 78 */	addi r31, r4, HSD_PadLibData@l
 /* 80376A14 003735F4  93 C1 00 60 */	stw r30, 0x60(r1)
 /* 80376A18 003735F8  3B C3 00 00 */	addi r30, r3, 0
-/* 80376A1C 003735FC  48 00 1C D5 */	bl func_803786F0
+/* 80376A1C 003735FC  48 00 1C D5 */	bl HSD_PadRumbleInterpret
 /* 80376A20 00373600  38 61 00 2C */	addi r3, r1, 0x2c
 /* 80376A24 00373604  4B FD 6F DD */	bl PADRead
 /* 80376A28 00373608  2C 1E 00 00 */	cmpwi r30, 0
@@ -154,11 +154,11 @@ lbl_80376BB0:
 /* 80376C28 00373808  98 1F 00 02 */	stb r0, 2(r31)
 lbl_80376C2C:
 /* 80376C2C 0037380C  88 01 00 36 */	lbz r0, 0x36(r1)
-/* 80376C30 00373810  3C 60 80 3C */	lis r3, lbl_803B9570@ha
+/* 80376C30 00373810  3C 60 80 3C */	lis r3, pad_bit@ha
 /* 80376C34 00373814  38 A1 00 2C */	addi r5, r1, 0x2c
 /* 80376C38 00373818  7C 00 07 74 */	extsb r0, r0
 /* 80376C3C 0037381C  2C 00 FF FF */	cmpwi r0, -1
-/* 80376C40 00373820  38 83 95 70 */	addi r4, r3, lbl_803B9570@l
+/* 80376C40 00373820  38 83 95 70 */	addi r4, r3, pad_bit@l
 /* 80376C44 00373824  38 60 00 00 */	li r3, 0
 /* 80376C48 00373828  40 82 00 08 */	bne lbl_80376C50
 /* 80376C4C 0037382C  80 64 00 00 */	lwz r3, 0(r4)
@@ -1317,7 +1317,7 @@ func_80377CE8:
 /* 80377CEC 003748CC  38 60 00 00 */	li r3, 0
 /* 80377CF0 003748D0  90 01 00 04 */	stw r0, 4(r1)
 /* 80377CF4 003748D4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80377CF8 003748D8  4B FF ED 05 */	bl func_803769FC
+/* 80377CF8 003748D8  4B FF ED 05 */	bl HSD_PadRenewRawStatus
 /* 80377CFC 003748DC  4B FF F8 11 */	bl HSD_PadRenewMasterStatus
 /* 80377D00 003748E0  4B FF FC C1 */	bl HSD_PadRenewCopyStatus
 /* 80377D04 003748E4  4B FF FE 51 */	bl func_80377B54
@@ -1365,9 +1365,9 @@ lbl_80377D48:
 .global HSD_PadInit
 HSD_PadInit:
 /* 80377D98 00374978  7C 08 02 A6 */	mflr r0
-/* 80377D9C 0037497C  3C E0 80 40 */	lis r7, lbl_80406DAC@ha
+/* 80377D9C 0037497C  3C E0 80 40 */	lis r7, default_libinfo_data@ha
 /* 80377DA0 00374980  90 01 00 04 */	stw r0, 4(r1)
-/* 80377DA4 00374984  39 07 6D AC */	addi r8, r7, lbl_80406DAC@l
+/* 80377DA4 00374984  39 07 6D AC */	addi r8, r7, default_libinfo_data@l
 /* 80377DA8 00374988  3D 20 80 4C */	lis r9, HSD_PadLibData@ha
 /* 80377DAC 0037498C  94 21 FF 88 */	stwu r1, -0x78(r1)
 /* 80377DB0 00374990  93 E1 00 74 */	stw r31, 0x74(r1)
@@ -1403,9 +1403,9 @@ HSD_PadInit:
 /* 80377E28 00374A08  90 9F 00 08 */	stw r4, 8(r31)
 /* 80377E2C 00374A0C  7C C4 33 78 */	mr r4, r6
 /* 80377E30 00374A10  48 00 09 F9 */	bl HSD_PadRumbleInit
-/* 80377E34 00374A14  3C 60 80 40 */	lis r3, lbl_80406D68@ha
+/* 80377E34 00374A14  3C 60 80 40 */	lis r3, default_status_data@ha
 /* 80377E38 00374A18  38 00 00 08 */	li r0, 8
-/* 80377E3C 00374A1C  38 63 6D 68 */	addi r3, r3, lbl_80406D68@l
+/* 80377E3C 00374A1C  38 63 6D 68 */	addi r3, r3, default_status_data@l
 /* 80377E40 00374A20  7C 09 03 A6 */	mtctr r0
 /* 80377E44 00374A24  38 A1 00 10 */	addi r5, r1, 0x10
 /* 80377E48 00374A28  38 83 FF F8 */	addi r4, r3, -8
@@ -1571,8 +1571,8 @@ lbl_8037805C:
 
 .section .rodata
     .balign 8
-.global lbl_803B9570
-lbl_803B9570:
+.global pad_bit
+pad_bit:
     .4byte 0x80000000
     .4byte 0x40000000
     .4byte 0x20000000
@@ -1581,8 +1581,8 @@ lbl_803B9570:
 
 .section .data
     .balign 8
-.global lbl_80406D68
-lbl_80406D68:
+.global default_status_data
+default_status_data:
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1600,8 +1600,8 @@ lbl_80406D68:
     .4byte NULL
     .4byte NULL
     .4byte 0x01000000
-.global lbl_80406DAC
-lbl_80406DAC:
+.global default_libinfo_data
+default_libinfo_data:
     .4byte NULL
     .4byte NULL
     .4byte NULL

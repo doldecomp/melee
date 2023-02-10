@@ -28,8 +28,8 @@ lbl_803758D4:
 /* 803758D4 003724B4  38 60 FF FF */	li r3, -1
 /* 803758D8 003724B8  4E 80 00 20 */	blr
 
-.global func_803758DC
-func_803758DC:
+.global HSD_VISetUserPreRetraceCallback
+HSD_VISetUserPreRetraceCallback:
 /* 803758DC 003724BC  7C 08 02 A6 */	mflr r0
 /* 803758E0 003724C0  3C 80 80 4C */	lis r4, HSD_VIData@ha
 /* 803758E4 003724C4  90 01 00 04 */	stw r0, 4(r1)
@@ -53,8 +53,8 @@ func_803758DC:
 /* 8037592C 0037250C  7C 08 03 A6 */	mtlr r0
 /* 80375930 00372510  4E 80 00 20 */	blr
 
-.global func_80375934
-func_80375934:
+.global HSD_VISetUserPostRetraceCallback
+HSD_VISetUserPostRetraceCallback:
 /* 80375934 00372514  7C 08 02 A6 */	mflr r0
 /* 80375938 00372518  3C 80 80 4C */	lis r4, HSD_VIData@ha
 /* 8037593C 0037251C  90 01 00 04 */	stw r0, 4(r1)
@@ -78,8 +78,8 @@ func_80375934:
 /* 80375984 00372564  7C 08 03 A6 */	mtlr r0
 /* 80375988 00372568  4E 80 00 20 */	blr
 
-.global func_8037598C
-func_8037598C:
+.global HSD_VISetUserGXDrawDoneCallback
+HSD_VISetUserGXDrawDoneCallback:
 /* 8037598C 0037256C  7C 08 02 A6 */	mflr r0
 /* 80375990 00372570  3C 80 80 4C */	lis r4, HSD_VIData@ha
 /* 80375994 00372574  90 01 00 04 */	stw r0, 4(r1)
@@ -105,12 +105,12 @@ func_8037598C:
 
 HSD_VIPreRetraceCB:
 /* 803759E4 003725C4  7C 08 02 A6 */	mflr r0
-/* 803759E8 003725C8  3C 80 80 4C */	lis r4, lbl_804C0980@ha
+/* 803759E8 003725C8  3C 80 80 4C */	lis r4, garbage@ha
 /* 803759EC 003725CC  90 01 00 04 */	stw r0, 4(r1)
 /* 803759F0 003725D0  38 A0 00 00 */	li r5, 0
 /* 803759F4 003725D4  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 803759F8 003725D8  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 803759FC 003725DC  3B E4 09 80 */	addi r31, r4, lbl_804C0980@l
+/* 803759FC 003725DC  3B E4 09 80 */	addi r31, r4, garbage@l
 /* 80375A00 003725E0  38 9F 14 00 */	addi r4, r31, 0x1400
 /* 80375A04 003725E4  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 80375A08 003725E8  3B C3 00 00 */	addi r30, r3, 0
@@ -243,21 +243,21 @@ lbl_80375BB0:
 lbl_80375BBC:
 /* 80375BBC 0037279C  2C 1C 00 00 */	cmpwi r28, 0
 /* 80375BC0 003727A0  41 82 00 10 */	beq lbl_80375BD0
-/* 80375BC4 003727A4  80 6D C0 3C */	lwz r3, lbl_804D76DC@sda21(r13)
+/* 80375BC4 003727A4  80 6D C0 3C */	lwz r3, renew_count@sda21(r13)
 /* 80375BC8 003727A8  38 03 00 01 */	addi r0, r3, 1
-/* 80375BCC 003727AC  90 0D C0 3C */	stw r0, lbl_804D76DC@sda21(r13)
+/* 80375BCC 003727AC  90 0D C0 3C */	stw r0, renew_count@sda21(r13)
 lbl_80375BD0:
-/* 80375BD0 003727B0  80 6D C0 38 */	lwz r3, lbl_804D76D8@sda21(r13)
+/* 80375BD0 003727B0  80 6D C0 38 */	lwz r3, vr_count@sda21(r13)
 /* 80375BD4 003727B4  38 63 00 01 */	addi r3, r3, 1
-/* 80375BD8 003727B8  90 6D C0 38 */	stw r3, lbl_804D76D8@sda21(r13)
+/* 80375BD8 003727B8  90 6D C0 38 */	stw r3, vr_count@sda21(r13)
 /* 80375BDC 003727BC  80 1F 15 EC */	lwz r0, 0x15ec(r31)
 /* 80375BE0 003727C0  7C 03 00 00 */	cmpw r3, r0
 /* 80375BE4 003727C4  41 80 00 18 */	blt lbl_80375BFC
-/* 80375BE8 003727C8  80 6D C0 3C */	lwz r3, lbl_804D76DC@sda21(r13)
+/* 80375BE8 003727C8  80 6D C0 3C */	lwz r3, renew_count@sda21(r13)
 /* 80375BEC 003727CC  38 00 00 00 */	li r0, 0
 /* 80375BF0 003727D0  90 7F 15 F0 */	stw r3, 0x15f0(r31)
-/* 80375BF4 003727D4  90 0D C0 3C */	stw r0, lbl_804D76DC@sda21(r13)
-/* 80375BF8 003727D8  90 0D C0 38 */	stw r0, lbl_804D76D8@sda21(r13)
+/* 80375BF4 003727D4  90 0D C0 3C */	stw r0, renew_count@sda21(r13)
+/* 80375BF8 003727D8  90 0D C0 38 */	stw r0, vr_count@sda21(r13)
 lbl_80375BFC:
 /* 80375BFC 003727DC  81 9F 15 D8 */	lwz r12, 0x15d8(r31)
 /* 80375C00 003727E0  28 0C 00 00 */	cmplwi r12, 0
@@ -277,11 +277,11 @@ lbl_80375C14:
 
 HSD_VIPostRetraceCB:
 /* 80375C34 00372814  7C 08 02 A6 */	mflr r0
-/* 80375C38 00372818  3C 80 80 4C */	lis r4, lbl_804C0980@ha
+/* 80375C38 00372818  3C 80 80 4C */	lis r4, garbage@ha
 /* 80375C3C 0037281C  90 01 00 04 */	stw r0, 4(r1)
 /* 80375C40 00372820  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 80375C44 00372824  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 80375C48 00372828  3B E4 09 80 */	addi r31, r4, lbl_804C0980@l
+/* 80375C48 00372828  3B E4 09 80 */	addi r31, r4, garbage@l
 /* 80375C4C 0037282C  38 BF 14 00 */	addi r5, r31, 0x1400
 /* 80375C50 00372830  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 80375C54 00372834  3B C3 00 00 */	addi r30, r3, 0
@@ -421,9 +421,9 @@ lbl_80375E00:
 
 HSD_VIGXDrawDoneCB:
 /* 80375E1C 003729FC  7C 08 02 A6 */	mflr r0
-/* 80375E20 00372A00  3C 60 80 4C */	lis r3, lbl_804C0980@ha
+/* 80375E20 00372A00  3C 60 80 4C */	lis r3, garbage@ha
 /* 80375E24 00372A04  90 01 00 04 */	stw r0, 4(r1)
-/* 80375E28 00372A08  38 63 09 80 */	addi r3, r3, lbl_804C0980@l
+/* 80375E28 00372A08  38 63 09 80 */	addi r3, r3, garbage@l
 /* 80375E2C 00372A0C  38 00 00 00 */	li r0, 0
 /* 80375E30 00372A10  94 21 FF F8 */	stwu r1, -8(r1)
 /* 80375E34 00372A14  90 03 15 E0 */	stw r0, 0x15e0(r3)
@@ -449,11 +449,11 @@ HSD_VIGetDrawDoneWaitingFlag:
 .global HSD_VIGetXFBDrawEnable
 HSD_VIGetXFBDrawEnable:
 /* 80375E70 00372A50  7C 08 02 A6 */	mflr r0
-/* 80375E74 00372A54  3C 60 80 4C */	lis r3, lbl_804C0980@ha
+/* 80375E74 00372A54  3C 60 80 4C */	lis r3, garbage@ha
 /* 80375E78 00372A58  90 01 00 04 */	stw r0, 4(r1)
 /* 80375E7C 00372A5C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80375E80 00372A60  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80375E84 00372A64  3B E3 09 80 */	addi r31, r3, lbl_804C0980@l
+/* 80375E84 00372A64  3B E3 09 80 */	addi r31, r3, garbage@l
 /* 80375E88 00372A68  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80375E8C 00372A6C  3B C0 FF FF */	li r30, -1
 /* 80375E90 00372A70  80 1F 15 D4 */	lwz r0, 0x15d4(r31)
@@ -659,8 +659,8 @@ lbl_803760E4:
 /* 8037616C 00372D4C  4B FC 72 9D */	bl GXSetDispCopySrc
 /* 80376170 00372D50  38 60 00 03 */	li r3, 3
 /* 80376174 00372D54  4B FC 75 F5 */	bl GXSetCopyClamp
-/* 80376178 00372D58  3C 60 80 4C */	lis r3, lbl_804C0980@ha
-/* 8037617C 00372D5C  38 63 09 80 */	addi r3, r3, lbl_804C0980@l
+/* 80376178 00372D58  3C 60 80 4C */	lis r3, garbage@ha
+/* 8037617C 00372D5C  38 63 09 80 */	addi r3, r3, garbage@l
 /* 80376180 00372D60  38 80 00 01 */	li r4, 1
 /* 80376184 00372D64  4B FC 79 C9 */	bl GXCopyDisp
 /* 80376188 00372D68  48 00 00 18 */	b lbl_803761A0
@@ -684,11 +684,11 @@ lbl_803761A4:
 .global HSD_VICopyXFB
 HSD_VICopyXFB:
 /* 803761C0 00372DA0  7C 08 02 A6 */	mflr r0
-/* 803761C4 00372DA4  3C 80 80 4C */	lis r4, lbl_804C0980@ha
+/* 803761C4 00372DA4  3C 80 80 4C */	lis r4, garbage@ha
 /* 803761C8 00372DA8  90 01 00 04 */	stw r0, 4(r1)
 /* 803761CC 00372DAC  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 803761D0 00372DB0  BF 61 00 24 */	stmw r27, 0x24(r1)
-/* 803761D4 00372DB4  3B C4 09 80 */	addi r30, r4, lbl_804C0980@l
+/* 803761D4 00372DB4  3B C4 09 80 */	addi r30, r4, garbage@l
 /* 803761D8 00372DB8  3B 63 00 00 */	addi r27, r3, 0
 /* 803761DC 00372DBC  80 1E 15 D4 */	lwz r0, 0x15d4(r30)
 /* 803761E0 00372DC0  2C 00 00 02 */	cmpwi r0, 2
@@ -1091,8 +1091,8 @@ lbl_803766FC:
 /* 80376710 003732F0  7C 08 03 A6 */	mtlr r0
 /* 80376714 003732F4  4E 80 00 20 */	blr
 
-.global func_80376718
-func_80376718:
+.global HSD_VISetConfigure
+HSD_VISetConfigure:
 /* 80376718 003732F8  80 A3 00 00 */	lwz r5, 0(r3)
 /* 8037671C 003732FC  3C C0 80 4C */	lis r6, HSD_VIData@ha
 /* 80376720 00373300  80 83 00 04 */	lwz r4, 4(r3)
@@ -1140,7 +1140,7 @@ HSD_VISetBlack:
 .global HSD_VIInit
 HSD_VIInit:
 /* 803767B8 00373398  7C 08 02 A6 */	mflr r0
-/* 803767BC 0037339C  3C E0 80 4C */	lis r7, lbl_804C0980@ha
+/* 803767BC 0037339C  3C E0 80 4C */	lis r7, garbage@ha
 /* 803767C0 003733A0  90 01 00 04 */	stw r0, 4(r1)
 /* 803767C4 003733A4  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 803767C8 003733A8  BF 61 00 24 */	stmw r27, 0x24(r1)
@@ -1148,7 +1148,7 @@ HSD_VIInit:
 /* 803767D0 003733B0  3B 64 00 00 */	addi r27, r4, 0
 /* 803767D4 003733B4  3B 85 00 00 */	addi r28, r5, 0
 /* 803767D8 003733B8  3B A6 00 00 */	addi r29, r6, 0
-/* 803767DC 003733BC  3B E7 09 80 */	addi r31, r7, lbl_804C0980@l
+/* 803767DC 003733BC  3B E7 09 80 */	addi r31, r7, garbage@l
 /* 803767E0 003733C0  4B FD 86 BD */	bl VIInit
 /* 803767E4 003733C4  38 00 00 0A */	li r0, 0xa
 /* 803767E8 003733C8  7C 09 03 A6 */	mtctr r0
@@ -1296,8 +1296,8 @@ lbl_80406D3C:
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804C0980
-lbl_804C0980:
+.global garbage
+garbage:
     .skip 0x1400
 .global HSD_VIData
 HSD_VIData:
@@ -1314,11 +1314,11 @@ lbl_804D5E88:
 
 .section .sbss
     .balign 8
-.global lbl_804D76D8
-lbl_804D76D8:
+.global vr_count
+vr_count:
     .skip 0x4
-.global lbl_804D76DC
-lbl_804D76DC:
+.global renew_count
+renew_count:
     .skip 0x4
 
 
