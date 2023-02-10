@@ -5,7 +5,7 @@
 
 /* 004D2788 */ extern GXContexts __GXContexts;
 
-static void set_x2(GXBool value)
+static inline void set_x2(GXBool value)
 {
     __GXContexts.main->x0.u16[1] = value;
 }
