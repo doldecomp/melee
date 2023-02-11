@@ -80,9 +80,7 @@ DSPTaskInfo* DSPAddTask(DSPTaskInfo* task)
     return task;
 }
 
-// Unknown DSP command
-// Similar to DSPReset, DSPHalt
-void DSPSomething(void)
+void DSPCancelTask(void)
 {
     bool enabled = OSDisableInterrupts();
     __DSPRegs[5] = (__DSPRegs[5] & ~0xA8) | 2;
@@ -102,7 +100,7 @@ void* DSPAssertTask(DSPTaskInfo* task)
         __DSP_rude_task = task;
         __DSP_rude_task_pending = 1;
         if (__DSP_curr_task->state == 1) {
-            DSPSomething();
+            DSPCancelTask();
         }
         OSRestoreInterrupts(enabled);
         return task;

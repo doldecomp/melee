@@ -48,7 +48,7 @@ void __DSP_remove_task(DSPTaskInfo* task);
 DSPTaskInfo* DSPAddTask(DSPTaskInfo* task);
 void __DSP_exec_task(DSPTaskInfo*, DSPTaskInfo*);
 
-void DSPSomething(void);
+void DSPCancelTask(void);
 void* DSPAssertTask(DSPTaskInfo* task);
 
 #endif
