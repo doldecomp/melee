@@ -1398,21 +1398,21 @@ lbl_8037C51C:
 /* 8037C520 00379100  40 82 FF EC */	bne lbl_8037C50C
 /* 8037C524 00379104  91 FA 00 08 */	stw r15, 8(r26)
 lbl_8037C528:
-/* 8037C528 00379108  80 0D C0 48 */	lwz r0, lbl_804D76E8@sda21(r13)
+/* 8037C528 00379108  80 0D C0 48 */	lwz r0, arg_buf@sda21(r13)
 /* 8037C52C 0037910C  28 00 00 00 */	cmplwi r0, 0
 /* 8037C530 00379110  40 82 00 28 */	bne lbl_8037C558
-/* 8037C534 00379114  80 0D C0 4C */	lwz r0, lbl_804D76EC@sda21(r13)
+/* 8037C534 00379114  80 0D C0 4C */	lwz r0, arg_buf_size@sda21(r13)
 /* 8037C538 00379118  28 00 00 00 */	cmplwi r0, 0
 /* 8037C53C 0037911C  40 82 00 0C */	bne lbl_8037C548
 /* 8037C540 00379120  38 00 00 64 */	li r0, 0x64
-/* 8037C544 00379124  90 0D C0 4C */	stw r0, lbl_804D76EC@sda21(r13)
+/* 8037C544 00379124  90 0D C0 4C */	stw r0, arg_buf_size@sda21(r13)
 lbl_8037C548:
-/* 8037C548 00379128  80 0D C0 4C */	lwz r0, lbl_804D76EC@sda21(r13)
+/* 8037C548 00379128  80 0D C0 4C */	lwz r0, arg_buf_size@sda21(r13)
 /* 8037C54C 0037912C  54 03 10 3A */	slwi r3, r0, 2
 /* 8037C550 00379130  48 00 2C 95 */	bl HSD_MemAlloc
-/* 8037C554 00379134  90 6D C0 48 */	stw r3, lbl_804D76E8@sda21(r13)
+/* 8037C554 00379134  90 6D C0 48 */	stw r3, arg_buf@sda21(r13)
 lbl_8037C558:
-/* 8037C558 00379138  80 AD C0 4C */	lwz r5, lbl_804D76EC@sda21(r13)
+/* 8037C558 00379138  80 AD C0 4C */	lwz r5, arg_buf_size@sda21(r13)
 /* 8037C55C 0037913C  80 9A 00 08 */	lwz r4, 8(r26)
 /* 8037C560 00379140  7C 05 20 40 */	cmplw r5, r4
 /* 8037C564 00379144  40 80 00 24 */	bge lbl_8037C588
@@ -1425,7 +1425,7 @@ lbl_8037C558:
 /* 8037C580 00379160  38 AD A8 38 */	addi r5, r13, lbl_804D5ED8@sda21
 /* 8037C584 00379164  48 00 BC F5 */	bl HSD_Panic
 lbl_8037C588:
-/* 8037C588 00379168  83 CD C0 48 */	lwz r30, lbl_804D76E8@sda21(r13)
+/* 8037C588 00379168  83 CD C0 48 */	lwz r30, arg_buf@sda21(r13)
 /* 8037C58C 0037916C  3F 20 02 00 */	lis r25, 0x200
 /* 8037C590 00379170  83 FA 00 04 */	lwz r31, 4(r26)
 /* 8037C594 00379174  3F 00 00 40 */	lis r24, 0x40
@@ -1673,14 +1673,14 @@ lbl_8037C8C4:
 /* 8037C8D0 003794B0  28 00 00 00 */	cmplwi r0, 0
 /* 8037C8D4 003794B4  41 82 00 1C */	beq lbl_8037C8F0
 /* 8037C8D8 003794B8  80 7A 00 00 */	lwz r3, 0(r26)
-/* 8037C8DC 003794BC  80 8D C0 48 */	lwz r4, lbl_804D76E8@sda21(r13)
+/* 8037C8DC 003794BC  80 8D C0 48 */	lwz r4, arg_buf@sda21(r13)
 /* 8037C8E0 003794C0  80 BA 00 08 */	lwz r5, 8(r26)
 /* 8037C8E4 003794C4  48 00 3C F9 */	bl HSD_ByteCodeEval
 /* 8037C8E8 003794C8  D0 21 00 1C */	stfs f1, 0x1c(r1)
 /* 8037C8EC 003794CC  48 00 00 18 */	b lbl_8037C904
 lbl_8037C8F0:
 /* 8037C8F0 003794D0  81 9A 00 00 */	lwz r12, 0(r26)
-/* 8037C8F4 003794D4  80 6D C0 48 */	lwz r3, lbl_804D76E8@sda21(r13)
+/* 8037C8F4 003794D4  80 6D C0 48 */	lwz r3, arg_buf@sda21(r13)
 /* 8037C8F8 003794D8  7D 88 03 A6 */	mtlr r12
 /* 8037C8FC 003794DC  4E 80 00 21 */	blrl
 /* 8037C900 003794E0  D0 21 00 1C */	stfs f1, 0x1c(r1)
@@ -2012,14 +2012,14 @@ lbl_8037CD40:
 
 .global _HSD_RObjForgetMemory
 _HSD_RObjForgetMemory:
-/* 8037CD5C 0037993C  80 0D C0 48 */	lwz r0, lbl_804D76E8@sda21(r13)
+/* 8037CD5C 0037993C  80 0D C0 48 */	lwz r0, arg_buf@sda21(r13)
 /* 8037CD60 00379940  7C 03 00 40 */	cmplw r3, r0
 /* 8037CD64 00379944  4D 81 00 20 */	bgtlr
 /* 8037CD68 00379948  7C 00 20 40 */	cmplw r0, r4
 /* 8037CD6C 0037994C  4C 80 00 20 */	bgelr
 /* 8037CD70 00379950  38 00 00 00 */	li r0, 0
-/* 8037CD74 00379954  90 0D C0 48 */	stw r0, lbl_804D76E8@sda21(r13)
-/* 8037CD78 00379958  90 0D C0 4C */	stw r0, lbl_804D76EC@sda21(r13)
+/* 8037CD74 00379954  90 0D C0 48 */	stw r0, arg_buf@sda21(r13)
+/* 8037CD78 00379958  90 0D C0 4C */	stw r0, arg_buf_size@sda21(r13)
 /* 8037CD7C 0037995C  4E 80 00 20 */	blr
 
 
@@ -2138,11 +2138,11 @@ lbl_804D5EE4:
 
 .section .sbss
     .balign 8
-.global lbl_804D76E8
-lbl_804D76E8:
+.global arg_buf
+arg_buf:
     .skip 0x4
-.global lbl_804D76EC
-lbl_804D76EC:
+.global arg_buf_size
+arg_buf_size:
     .skip 0x4
 
 

@@ -1041,7 +1041,7 @@ func_8038912C:
 /* 8038914C 00385D2C  88 1B 00 27 */	lbz r0, 0x27(r27)
 /* 80389150 00385D30  28 00 00 01 */	cmplwi r0, 1
 /* 80389154 00385D34  40 82 00 1C */	bne lbl_80389170
-/* 80389158 00385D38  81 8D C0 A0 */	lwz r12, lbl_804D7740@sda21(r13)
+/* 80389158 00385D38  81 8D C0 A0 */	lwz r12, driverInactivatedCallback@sda21(r13)
 /* 8038915C 00385D3C  28 0C 00 00 */	cmplwi r12, 0
 /* 80389160 00385D40  41 82 00 10 */	beq lbl_80389170
 /* 80389164 00385D44  80 7B 00 00 */	lwz r3, 0(r27)
@@ -1133,7 +1133,7 @@ lbl_80389284:
 /* 80389290 00385E70  88 1E 00 27 */	lbz r0, 0x27(r30)
 /* 80389294 00385E74  28 00 00 01 */	cmplwi r0, 1
 /* 80389298 00385E78  40 82 00 1C */	bne lbl_803892B4
-/* 8038929C 00385E7C  81 8D C0 A0 */	lwz r12, lbl_804D7740@sda21(r13)
+/* 8038929C 00385E7C  81 8D C0 A0 */	lwz r12, driverInactivatedCallback@sda21(r13)
 /* 803892A0 00385E80  28 0C 00 00 */	cmplwi r12, 0
 /* 803892A4 00385E84  41 82 00 10 */	beq lbl_803892B4
 /* 803892A8 00385E88  80 7E 00 00 */	lwz r3, 0(r30)
@@ -1504,7 +1504,7 @@ lbl_803897D8:
 /* 803897EC 003863CC  88 03 00 27 */	lbz r0, 0x27(r3)
 /* 803897F0 003863D0  28 00 00 01 */	cmplwi r0, 1
 /* 803897F4 003863D4  40 82 00 1C */	bne lbl_80389810
-/* 803897F8 003863D8  81 8D C0 A0 */	lwz r12, lbl_804D7740@sda21(r13)
+/* 803897F8 003863D8  81 8D C0 A0 */	lwz r12, driverInactivatedCallback@sda21(r13)
 /* 803897FC 003863DC  28 0C 00 00 */	cmplwi r12, 0
 /* 80389800 003863E0  41 82 00 10 */	beq lbl_80389810
 /* 80389804 003863E4  80 63 00 00 */	lwz r3, 0(r3)
@@ -1570,7 +1570,7 @@ lbl_803898BC:
 /* 803898D8 003864B8  88 1F 00 27 */	lbz r0, 0x27(r31)
 /* 803898DC 003864BC  28 00 00 01 */	cmplwi r0, 1
 /* 803898E0 003864C0  40 82 00 1C */	bne lbl_803898FC
-/* 803898E4 003864C4  81 8D C0 A0 */	lwz r12, lbl_804D7740@sda21(r13)
+/* 803898E4 003864C4  81 8D C0 A0 */	lwz r12, driverInactivatedCallback@sda21(r13)
 /* 803898E8 003864C8  28 0C 00 00 */	cmplwi r12, 0
 /* 803898EC 003864CC  41 82 00 10 */	beq lbl_803898FC
 /* 803898F0 003864D0  80 7B 00 00 */	lwz r3, 0(r27)
@@ -2474,7 +2474,7 @@ lbl_8038A530:
 /* 8038A530 00387110  88 1C 00 0A */	lbz r0, 0xa(r28)
 /* 8038A534 00387114  7C 1B 00 00 */	cmpw r27, r0
 /* 8038A538 00387118  41 80 FF 94 */	blt lbl_8038A4CC
-/* 8038A53C 0038711C  81 8D C0 A8 */	lwz r12, lbl_804D7748@sda21(r13)
+/* 8038A53C 0038711C  81 8D C0 A8 */	lwz r12, driverPauseCallback@sda21(r13)
 /* 8038A540 00387120  28 0C 00 00 */	cmplwi r12, 0
 /* 8038A544 00387124  41 82 00 24 */	beq lbl_8038A568
 /* 8038A548 00387128  88 1C 00 27 */	lbz r0, 0x27(r28)
@@ -2925,17 +2925,17 @@ lbl_8038AB9C:
 
 .global HSD_SynthSFXSetDriverInactivatedCallback
 HSD_SynthSFXSetDriverInactivatedCallback:
-/* 8038ABBC 0038779C  90 6D C0 A0 */	stw r3, lbl_804D7740@sda21(r13)
+/* 8038ABBC 0038779C  90 6D C0 A0 */	stw r3, driverInactivatedCallback@sda21(r13)
 /* 8038ABC0 003877A0  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXSetDriverMasterClockCallback
 HSD_SynthSFXSetDriverMasterClockCallback:
-/* 8038ABC4 003877A4  90 6D C0 A4 */	stw r3, lbl_804D7744@sda21(r13)
+/* 8038ABC4 003877A4  90 6D C0 A4 */	stw r3, driverMasterClockCallback@sda21(r13)
 /* 8038ABC8 003877A8  4E 80 00 20 */	blr
 
 .global HSD_SynthSFXSetDriverPauseCallback
 HSD_SynthSFXSetDriverPauseCallback:
-/* 8038ABCC 003877AC  90 6D C0 A8 */	stw r3, lbl_804D7748@sda21(r13)
+/* 8038ABCC 003877AC  90 6D C0 A8 */	stw r3, driverPauseCallback@sda21(r13)
 /* 8038ABD0 003877B0  4E 80 00 20 */	blr
 
 .global HSD_SynthCallback
@@ -2999,7 +2999,7 @@ lbl_8038AC9C:
 /* 8038ACA4 00387884  88 1E 00 27 */	lbz r0, 0x27(r30)
 /* 8038ACA8 00387888  28 00 00 01 */	cmplwi r0, 1
 /* 8038ACAC 0038788C  40 82 00 1C */	bne lbl_8038ACC8
-/* 8038ACB0 00387890  81 8D C0 A0 */	lwz r12, lbl_804D7740@sda21(r13)
+/* 8038ACB0 00387890  81 8D C0 A0 */	lwz r12, driverInactivatedCallback@sda21(r13)
 /* 8038ACB4 00387894  28 0C 00 00 */	cmplwi r12, 0
 /* 8038ACB8 00387898  41 82 00 10 */	beq lbl_8038ACC8
 /* 8038ACBC 0038789C  80 7E 00 00 */	lwz r3, 0(r30)
@@ -3030,7 +3030,7 @@ lbl_8038AD0C:
 /* 8038AD10 003878F0  2C 1D 00 08 */	cmpwi r29, 8
 /* 8038AD14 003878F4  41 80 FF 34 */	blt lbl_8038AC48
 /* 8038AD18 003878F8  4B FF F2 E9 */	bl func_8038A000
-/* 8038AD1C 003878FC  81 8D C0 A4 */	lwz r12, lbl_804D7744@sda21(r13)
+/* 8038AD1C 003878FC  81 8D C0 A4 */	lwz r12, driverMasterClockCallback@sda21(r13)
 /* 8038AD20 00387900  28 0C 00 00 */	cmplwi r12, 0
 /* 8038AD24 00387904  41 82 00 10 */	beq lbl_8038AD34
 /* 8038AD28 00387908  80 6D C0 BC */	lwz r3, lbl_804D775C@sda21(r13)
@@ -4217,14 +4217,14 @@ lbl_804D7738:
 .global lbl_804D773C
 lbl_804D773C:
     .skip 0x4
-.global lbl_804D7740
-lbl_804D7740:
+.global driverInactivatedCallback
+driverInactivatedCallback:
     .skip 0x4
-.global lbl_804D7744
-lbl_804D7744:
+.global driverMasterClockCallback
+driverMasterClockCallback:
     .skip 0x4
-.global lbl_804D7748
-lbl_804D7748:
+.global driverPauseCallback
+driverPauseCallback:
     .skip 0x4
 .global lbl_804D774C
 lbl_804D774C:

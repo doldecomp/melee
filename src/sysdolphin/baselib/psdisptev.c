@@ -2,7 +2,7 @@
 
 #include <dolphin/gx/GXAttr.h>
 
-extern s32 lbl_804D7950[2];
+extern s32 prevTev[2];
 
 void psSetupTev(unk_t);
 void psSetupTevInvalidState(void);
