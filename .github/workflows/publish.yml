@@ -23,47 +23,31 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    container: ribbanya/melee:latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          submodules: "true"
-
       - name: Checkout Doxygen Awesome repo
         uses: actions/checkout@v3
         with:
           repository: jothepro/doxygen-awesome-css
           path: tools/doxygen-awesome-css
-
-      - uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: doxygen graphviz
-          version: 1.0
-
-      - name: Create build directory
-        run: mkdir -p build/doxygen
-
       - name: Generate Doxygen documentation
-        run: doxygen Doxyfile
+        run: |
+          mkdir -p build/doxygen
+          doxygen Doxyfile
+          touch build/doxygen/html/.nojekyll
         shell: bash
-
-      - name: Create .nojekyll (ensures pages with underscores work on gh pages)
-        run: touch build/doxygen/html/.nojekyll
-        shell: bash
-
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-      - run: pip install -r requirements.txt
-      - run: python tools/m2ctx/m2ctx.py -pqr
-      - run: cp build/ctx.html build/doxygen/html
-
+      - name: Generate context
+        run: |
+          . /usr/local/share/venv/bin/activate
+          pip3 install -r requirements.txt --no-cache-dir
+          python3 tools/m2ctx/m2ctx.py -pqr
+          cp build/ctx.html build/doxygen/html
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v1.0.5
         with:
           path: build/doxygen/html
-
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
