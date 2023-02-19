@@ -20,7 +20,7 @@ jobs:
         make -j$(nproc) ${{ matrix.makeflags }} WINE=$WINE
     - name: Upload map
       if: matrix.makeflags == 'GENERATE_MAP=1'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: GALE01.map
         path: build/ssbm.us.1.2/GALE01.map
