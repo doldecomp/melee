@@ -35,17 +35,19 @@ RUN sudo apt update
 RUN sudo apt dist-upgrade
 RUN sudo apt autoremove
 
-FROM sid AS setup-devkitpro
+FROM sid AS install-packages
 RUN sudo dpkg --add-architecture i386
 RUN sudo apt update
 RUN sudo apt install \
     build-essential \
+    ninja-build \
     gcc-multilib \
     g++-multilib \
     libc6:i386 \
-    lsb-release
+    lsb-release \
+    python3-full
 
-FROM setup-devkitpro AS setup-wibo
+FROM install-packages AS setup-wibo
 WORKDIR /tmp
 RUN git clone https://github.com/decompals/wibo.git --depth=1
 WORKDIR /tmp/wibo
@@ -54,32 +56,31 @@ RUN cmake --build build
 RUN chmod +x build/wibo
 RUN cp build/wibo /usr/local/bin
 ENV WINE /usr/local/bin/wibo
+WORKDIR /
+RUN rm -rf /tmp/*
 
-FROM setup-wibo AS setup-mwcc
-WORKDIR /tmp
-RUN git clone https://github.com/doldecomp/melee.git --depth=1
-WORKDIR /tmp/melee
+FROM setup-wibo AS setup-melee
+RUN mkdir -p /usr/local/src/melee
+WORKDIR /usr/local/src/melee
+RUN git clone https://github.com/doldecomp/melee.git --depth=1 .
+ENV PATH="/usr/local/src/melee/tools:${PATH}"
+
+FROM setup-melee AS setup-mwcc
 RUN curl -L \
-    'https://cdn.discordapp.com/attachments/727918646525165659/917185027656286218/GC_WII_COMPILERS.zip' \
-    | bsdtar -xvf- -C tools --exclude Wii
-RUN mv tools/GC tools/mwcc_compiler
-RUN sha1sum -c tools/mwld_prepatch.sha1
-RUN python3 tools/mwld_patch.py
-RUN sha1sum -c tools/mwld_postpatch.sha1
-RUN cp -a tools/mwcc_compiler /usr/local/bin/
+    'https://cdn.discordapp.com/attachments/727918646525165659/917185027656286218/GC_WII_COMPILERS.zip' | \
+    bsdtar -xvf- -C tools --exclude Wii && \
+    mv tools/GC tools/mwcc_compiler
+RUN sha1sum -c tools/mwld_prepatch.sha1 && \
+    python3 tools/mwld_patch.py && \
+    sha1sum -c tools/mwld_postpatch.sha1 && \
+    cp -a tools/mwcc_compiler /usr/local/bin/
 RUN printf "%s\n" \
     '#!/bin/sh'\
     '$WINE /usr/local/bin/mwcc_compiler/1.2.5e/mwcceppc.exe "$@"' \
-    >/usr/local/bin/mwcceppc
+    > /usr/local/bin/mwcceppc
 RUN chmod +x /usr/local/bin/mwcceppc
 
-FROM setup-mwcc AS setup-devenv
-RUN sudo apt install \
-    python3-full
+FROM setup-mwcc AS setup-venv
 RUN python3 -m venv /usr/local/share/venv
-RUN . /usr/local/share/venv/bin/activate; \
+RUN . /usr/local/share/venv/bin/activate && \
     pip3 install -r requirements.txt
-RUN mkdir -p /usr/local/src/melee
-ENV PATH="/src/melee/tools:${PATH}"
-RUN rm -rf /tmp/*
-WORKDIR /usr/local/src
