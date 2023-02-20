@@ -23,7 +23,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    container: ribbanya/melee:latest
+    container: ribbanya/melee:20230219
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3

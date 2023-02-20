@@ -10,7 +10,7 @@ jobs:
       matrix:
         makeflags: ["GENERATE_MAP=1", "NON_MATCHING=1"]
     runs-on: ubuntu-latest
-    container: ribbanya/melee:latest
+    container: ribbanya/melee:20230219
     steps:
     - name: Checkout Melee repo
       uses: actions/checkout@v3
