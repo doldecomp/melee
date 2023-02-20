@@ -44,6 +44,13 @@ jobs:
           pip3 install -r requirements.txt --no-cache-dir
           python3 tools/m2ctx/m2ctx.py -pqr
           cp build/ctx.html build/doxygen/html
+      - name: Build progress site
+        working-directory: tools/progress-site/site
+        run: |
+          npm install
+          npm run build
+          mkdir -p ../../../build/doxygen/html/progress
+          cp -a public/* ../../../build/doxygen/html/progress/
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v1.0.5
         with:
