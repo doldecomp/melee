@@ -10,9 +10,9 @@
 # the user, with function headers including some function info.
 #
 # Usage:
-#		split_suggester.py [fileToSpli.s]
-#					OR
-#		split_suggester.py [fileToSpli.s] [mapFilePath.map]
+#        split_suggester.py [fileToSpli.s]
+#                    OR
+#        split_suggester.py [fileToSpli.s] [mapFilePath.map]
 #
 # If a map file is provided, function names from it will be
 # included in the generated function headers. If your data,
@@ -336,7 +336,7 @@ functions = functions[1:]
 functionNames = [func.name for func in functions]
 
 
-""" 	Separate functions - Pass 1
+"""     Separate functions - Pass 1
 
     Here, a multidimentional list is created, wherein the main list represents a list of files,
     and each list within that will be a list of functions within that file. This pass checks for
@@ -412,7 +412,7 @@ if debugging: # Print results so far
             print( '\t\t' + func.name )
 
 
-""" 	Separate functions - Pass 2
+"""     Separate functions - Pass 2
 
     This pass will look at each function (starting from the last file and last function) and
     determine if functions from the previous file are needed by it. Those files will then be
