@@ -1,4 +1,10 @@
+#include <sysdolphin/baselib/gobjplink.h>
+
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
 
 void GObj_PReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
 {
@@ -40,16 +46,18 @@ inline void gobj_first_higher_prio(HSD_GObj* gobj)
     while (var_r4 != NULL && var_r4->p_priority < gobj->p_priority) {
         var_r4 = var_r4->next;
     }
-    GObj_PReorder(gobj, var_r4 != NULL ? var_r4->prev : plinklow_gobjs[gobj->p_link]);
+    GObj_PReorder(gobj,
+                  var_r4 != NULL ? var_r4->prev : plinklow_gobjs[gobj->p_link]);
 }
 
 extern char lbl_804084B8[];
 extern char lbl_804084C4[];
-HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority, HSD_GObj* position)
+HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority,
+                     HSD_GObj* position)
 {
     HSD_GObj* gobj;
 
-    assert_line(0xA8, p_link <= HSD_GObjLibInitData.p_link_max);
+    HSD_ASSERT(0xA8, p_link <= HSD_GObjLibInitData.p_link_max);
     if ((gobj = gobj_allocate()) == NULL) {
         return NULL;
     }
@@ -85,7 +93,7 @@ HSD_GObj* CreateGObj(s32 where, u16 classifier, u8 p_link, u8 priority, HSD_GObj
     return gobj;
 }
 
-HSD_GObj* func_803901F0(u16 classifier, u8 p_link, u8 priority)
+HSD_GObj* GObj_Create(u16 classifier, u8 p_link, u8 priority)
 {
     return CreateGObj(0, classifier, p_link, priority, NULL);
 }
@@ -94,7 +102,7 @@ extern HSD_GObj* lbl_804D781C;
 
 void func_80390228(HSD_GObj* gobj)
 {
-    assert_line(0x171, gobj);
+    HSD_ASSERT(0x171, gobj);
     if (!lbl_804CE3E4.b0 && gobj == lbl_804D781C) {
         lbl_804CE3E4.b1 = 1;
         return;
@@ -120,16 +128,21 @@ void func_80390228(HSD_GObj* gobj)
 
 extern s32 lbl_804D783C;
 
-void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority, HSD_GObj* position)
+void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
+                   HSD_GObj* position)
 {
     HSD_GObjProc* proc_cur;
     HSD_GObjProc* child;
     HSD_GObjProc* cur;
     s32 flags_cur;
     s32 flags_new;
-    u32 unused[2];
 
-    assert_line(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    HSD_ASSERT(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);
     if (!lbl_804CE3E4.b0 && gobj == lbl_804D781C) {
         lbl_804CE3E4.b3 = 1;
         lbl_804CE3E4.type = arg0;

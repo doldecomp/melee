@@ -31,8 +31,8 @@ lbl_80326B1C:
 lbl_80326B2C:
 /* 80326B2C 0032370C  2C 1E 00 00 */	cmpwi r30, 0
 /* 80326B30 00323710  40 82 00 40 */	bne lbl_80326B70
-/* 80326B34 00323714  3C 60 80 4A */	lis r3, lbl_804A4B3C@ha
-/* 80326B38 00323718  3B E3 4B 3C */	addi r31, r3, lbl_804A4B3C@l
+/* 80326B34 00323714  3C 60 80 4A */	lis r3, gTRKInputPendingPtr@ha
+/* 80326B38 00323718  3B E3 4B 3C */	addi r31, r3, gTRKInputPendingPtr@l
 /* 80326B3C 0032371C  3C 60 00 01 */	lis r3, 0x0000E100@ha
 /* 80326B40 00323720  38 DF 00 00 */	addi r6, r31, 0
 /* 80326B44 00323724  38 63 E1 00 */	addi r3, r3, 0x0000E100@l
@@ -63,7 +63,7 @@ lbl_80326B90:
 /* 80326B9C 0032377C  38 21 00 10 */	addi r1, r1, 0x10
 /* 80326BA0 00323780  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326BA4 00323784  7C 08 03 A6 */	mtlr r0
-/* 80326BA8 00323788  4E 80 00 20 */	blr 
+/* 80326BA8 00323788  4E 80 00 20 */	blr
 
 .global TRKTerminateNub
 TRKTerminateNub:
@@ -75,7 +75,7 @@ TRKTerminateNub:
 /* 80326BC0 003237A0  38 21 00 08 */	addi r1, r1, 8
 /* 80326BC4 003237A4  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326BC8 003237A8  7C 08 03 A6 */	mtlr r0
-/* 80326BCC 003237AC  4E 80 00 20 */	blr 
+/* 80326BCC 003237AC  4E 80 00 20 */	blr
 
 .global TRKNubWelcome
 TRKNubWelcome:
@@ -88,13 +88,13 @@ TRKNubWelcome:
 /* 80326BE8 003237C8  38 21 00 08 */	addi r1, r1, 8
 /* 80326BEC 003237CC  80 01 00 04 */	lwz r0, 4(r1)
 /* 80326BF0 003237D0  7C 08 03 A6 */	mtlr r0
-/* 80326BF4 003237D4  4E 80 00 20 */	blr 
+/* 80326BF4 003237D4  4E 80 00 20 */	blr
 
 .global TRKInitializeEndian
 TRKInitializeEndian:
-/* 80326BF8 003237D8  3C 60 80 4A */	lis r3, lbl_804A3170@ha
+/* 80326BF8 003237D8  3C 60 80 4A */	lis r3, gTRKBigEndian@ha
 /* 80326BFC 003237DC  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 80326C00 003237E0  38 A3 31 70 */	addi r5, r3, lbl_804A3170@l
+/* 80326C00 003237E0  38 A3 31 70 */	addi r5, r3, gTRKBigEndian@l
 /* 80326C04 003237E4  38 C0 00 01 */	li r6, 1
 /* 80326C08 003237E8  90 C5 00 00 */	stw r6, 0(r5)
 /* 80326C0C 003237EC  38 00 00 12 */	li r0, 0x12
@@ -123,7 +123,7 @@ lbl_80326C60:
 /* 80326C60 00323840  38 60 00 01 */	li r3, 1
 lbl_80326C64:
 /* 80326C64 00323844  38 21 00 10 */	addi r1, r1, 0x10
-/* 80326C68 00323848  4E 80 00 20 */	blr 
+/* 80326C68 00323848  4E 80 00 20 */	blr
 
 
 .section .rodata
@@ -143,40 +143,40 @@ lbl_803B93A0:
 .section .bss, "wa"
 .global lbl_804A3148
 lbl_804A3148:
-	.skip 0x28
-.global lbl_804A3170
-lbl_804A3170:
-	.skip 0x8
+    .skip 0x28
+.global gTRKBigEndian
+gTRKBigEndian:
+    .skip 0x8
 .global lbl_804A3178
 lbl_804A3178:
-	.skip 0x19B0
-.global lbl_804A4B28
-lbl_804A4B28:
-	.skip 0x14
-.global lbl_804A4B3C
-lbl_804A4B3C:
-	.skip 0x4
+    .skip 0x19B0
+.global gTRKFramingState
+gTRKFramingState:
+    .skip 0x14
+.global gTRKInputPendingPtr
+gTRKInputPendingPtr:
+    .skip 0x4
 .global lbl_804A4B40
 lbl_804A4B40:
-	.skip 0x8
+    .skip 0x8
 .global lbl_804A4B48
 lbl_804A4B48:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804A4B4C
 lbl_804A4B4C:
-	.skip 0x94
-.global lbl_804A4BE0
-lbl_804A4BE0:
-	.skip 0x10
-.global lbl_804A4BF0
-lbl_804A4BF0:
-	.skip 0xA8
-.global lbl_804A4C98
-lbl_804A4C98:
-	.skip 0x430
+    .skip 0x94
+.global TRKvalue128_temp
+TRKvalue128_temp:
+    .skip 0x10
+.global gTRKState
+gTRKState:
+    .skip 0xA8
+.global gTRKCPUState
+gTRKCPUState:
+    .skip 0x430
 .global lbl_804A50C8
 lbl_804A50C8:
-	.skip 0x8
-.global lbl_804A50D0
-lbl_804A50D0:
-	.skip 0x10
+    .skip 0x8
+.global TRK_mainError
+TRK_mainError:
+    .skip 0x10

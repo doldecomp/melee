@@ -1,289 +1,93 @@
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSResetSW.h>
+#include <dolphin/os/OSTime.h>
 
-/* 00345650 */ s32 OSGetResetSwitchState(OSResetSW_Unk1 *);
+typedef void (*OSResetCallback)(void);
 
-extern unk_t lbl_804D73C4;
-extern unk_t HoldDown;
-extern unk_t OSResetSW_LastState;
-extern unk_t lbl_804D73A8;
-extern unk_t lbl_804D73AC;
-extern unk_t __OSGetSystemTime();
+extern u8 GameChoice AT_ADDRESS(0x800030E3);
+extern vu32 __PIRegs[12] AT_ADDRESS(0xCC003000);
 
-#pragma push
-asm unk_t __OSResetSWInterruptHandler()
-{ // clang-format off
-    nofralloc
-/* 803486E4 003452C4  7C 08 02 A6 */	mflr r0
-/* 803486E8 003452C8  90 01 00 04 */	stw r0, 4(r1)
-/* 803486EC 003452CC  94 21 FF D8 */	stwu r1, -0x28(r1)
-/* 803486F0 003452D0  93 E1 00 24 */	stw r31, 0x24(r1)
-/* 803486F4 003452D4  93 C1 00 20 */	stw r30, 0x20(r1)
-/* 803486F8 003452D8  93 A1 00 1C */	stw r29, 0x1c(r1)
-/* 803486FC 003452DC  48 00 3D 15 */	bl __OSGetSystemTime
-/* 80348700 003452E0  3C A0 80 00 */	lis r5, 0x800000F8@ha
-/* 80348704 003452E4  90 8D BD 24 */	stw r4, lbl_804D73C4(r13)
-/* 80348708 003452E8  80 05 00 F8 */	lwz r0, 0x800000F8@l(r5)
-/* 8034870C 003452EC  3C 80 43 1C */	lis r4, 0x431BDE83@ha
-/* 80348710 003452F0  38 84 DE 83 */	addi r4, r4, 0x431BDE83@l
-/* 80348714 003452F4  90 6D BD 20 */	stw r3, HoldDown(r13)
-/* 80348718 003452F8  54 00 F0 BE */	srwi r0, r0, 2
-/* 8034871C 003452FC  7C 04 00 16 */	mulhwu r0, r4, r0
-/* 80348720 00345300  54 00 8B FE */	srwi r0, r0, 0xf
-/* 80348724 00345304  1C 00 00 64 */	mulli r0, r0, 0x64
-/* 80348728 00345308  54 1D E8 FE */	srwi r29, r0, 3
-/* 8034872C 0034530C  3B C0 00 00 */	li r30, 0
-/* 80348730 00345310  3F E0 CC 00 */	lis r31, 0xcc00
-lbl_80348734:
-/* 80348734 00345314  48 00 3C DD */	bl __OSGetSystemTime
-/* 80348738 00345318  80 CD BD 24 */	lwz r6, lbl_804D73C4(r13)
-/* 8034873C 0034531C  6F C5 80 00 */	xoris r5, r30, 0x8000
-/* 80348740 00345320  80 0D BD 20 */	lwz r0, HoldDown(r13)
-/* 80348744 00345324  7C 86 20 10 */	subfc r4, r6, r4
-/* 80348748 00345328  7C 00 19 10 */	subfe r0, r0, r3
-/* 8034874C 0034532C  6C 03 80 00 */	xoris r3, r0, 0x8000
-/* 80348750 00345330  7C 1D 20 10 */	subfc r0, r29, r4
-/* 80348754 00345334  7C A5 19 10 */	subfe r5, r5, r3
-/* 80348758 00345338  7C A3 19 10 */	subfe r5, r3, r3
-/* 8034875C 0034533C  7C A5 00 D1 */	neg. r5, r5
-/* 80348760 00345340  41 82 00 10 */	beq lbl_80348770
-/* 80348764 00345344  80 1F 30 00 */	lwz r0, 0x3000(r31)
-/* 80348768 00345348  54 00 03 DF */	rlwinm. r0, r0, 0, 0xf, 0xf
-/* 8034876C 0034534C  41 82 FF C8 */	beq lbl_80348734
-lbl_80348770:
-/* 80348770 00345350  3C 60 CC 00 */	lis r3, 0xCC003000@ha
-/* 80348774 00345354  80 03 30 00 */	lwz r0, 0xCC003000@l(r3)
-/* 80348778 00345358  54 00 03 DF */	rlwinm. r0, r0, 0, 0xf, 0xf
-/* 8034877C 0034535C  40 82 00 34 */	bne lbl_803487B0
-/* 80348780 00345360  38 00 00 01 */	li r0, 1
-/* 80348784 00345364  90 0D BD 0C */	stw r0, lbl_804D73AC(r13)
-/* 80348788 00345368  38 60 02 00 */	li r3, 0x200
-/* 8034878C 0034536C  90 0D BD 10 */	stw r0, OSResetSW_LastState(r13)
-/* 80348790 00345370  4B FF EF 9D */	bl __OSMaskInterrupts
-/* 80348794 00345374  81 8D BD 08 */	lwz r12, lbl_804D73A8(r13)
-/* 80348798 00345378  28 0C 00 00 */	cmplwi r12, 0
-/* 8034879C 0034537C  41 82 00 14 */	beq lbl_803487B0
-/* 803487A0 00345380  38 00 00 00 */	li r0, 0
-/* 803487A4 00345384  7D 88 03 A6 */	mtlr r12
-/* 803487A8 00345388  90 0D BD 08 */	stw r0, lbl_804D73A8(r13)
-/* 803487AC 0034538C  4E 80 00 21 */	blrl 
-lbl_803487B0:
-/* 803487B0 00345390  38 00 00 02 */	li r0, 2
-/* 803487B4 00345394  3C 60 CC 00 */	lis r3, 0xCC003000@ha
-/* 803487B8 00345398  90 03 30 00 */	stw r0, 0xCC003000@l(r3)
-/* 803487BC 0034539C  80 01 00 2C */	lwz r0, 0x2c(r1)
-/* 803487C0 003453A0  83 E1 00 24 */	lwz r31, 0x24(r1)
-/* 803487C4 003453A4  83 C1 00 20 */	lwz r30, 0x20(r1)
-/* 803487C8 003453A8  83 A1 00 1C */	lwz r29, 0x1c(r1)
-/* 803487CC 003453AC  38 21 00 28 */	addi r1, r1, 0x28
-/* 803487D0 003453B0  7C 08 03 A6 */	mtlr r0
-/* 803487D4 003453B4  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+static OSResetCallback ResetCallback;
+static bool Down;
+static bool LastState;
+static OSTime HoldUp;
+static OSTime HoldDown;
 
-extern unk_t HoldUp;
-extern unk_t lbl_804D73BC;
-extern unk_t lbl_804D7354;
-extern unk_t __OSStartTime;
-extern unk_t __div2i();
+extern OSTime __OSStartTime;
 
-#pragma push
-asm unk_t OSGetResetButtonState()
-{ // clang-format off
-    nofralloc
-/* 803487D8 003453B8  7C 08 02 A6 */	mflr r0
-/* 803487DC 003453BC  90 01 00 04 */	stw r0, 4(r1)
-/* 803487E0 003453C0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 803487E4 003453C4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 803487E8 003453C8  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 803487EC 003453CC  93 A1 00 0C */	stw r29, 0xc(r1)
-/* 803487F0 003453D0  4B FF EB 75 */	bl OSDisableInterrupts
-/* 803487F4 003453D4  7C 7E 1B 78 */	mr r30, r3
-/* 803487F8 003453D8  48 00 3C 19 */	bl __OSGetSystemTime
-/* 803487FC 003453DC  3C A0 CC 00 */	lis r5, 0xCC003000@ha
-/* 80348800 003453E0  80 05 30 00 */	lwz r0, 0xCC003000@l(r5)
-/* 80348804 003453E4  54 00 03 DF */	rlwinm. r0, r0, 0, 0xf, 0xf
-/* 80348808 003453E8  40 82 00 DC */	bne lbl_803488E4
-/* 8034880C 003453EC  80 0D BD 0C */	lwz r0, lbl_804D73AC(r13)
-/* 80348810 003453F0  2C 00 00 00 */	cmpwi r0, 0
-/* 80348814 003453F4  40 82 00 40 */	bne lbl_80348854
-/* 80348818 003453F8  80 0D BD 18 */	lwz r0, HoldUp(r13)
-/* 8034881C 003453FC  38 C0 00 00 */	li r6, 0
-/* 80348820 00345400  80 AD BD 1C */	lwz r5, lbl_804D73BC(r13)
-/* 80348824 00345404  38 E0 00 01 */	li r7, 1
-/* 80348828 00345408  7C 00 32 78 */	xor r0, r0, r6
-/* 8034882C 0034540C  7C A5 32 78 */	xor r5, r5, r6
-/* 80348830 00345410  90 ED BD 0C */	stw r7, lbl_804D73AC(r13)
-/* 80348834 00345414  7C A0 03 79 */	or. r0, r5, r0
-/* 80348838 00345418  41 82 00 08 */	beq lbl_80348840
-/* 8034883C 0034541C  48 00 00 08 */	b lbl_80348844
-lbl_80348840:
-/* 80348840 00345420  7C C7 33 78 */	mr r7, r6
-lbl_80348844:
-/* 80348844 00345424  90 8D BD 24 */	stw r4, lbl_804D73C4(r13)
-/* 80348848 00345428  7C FD 3B 78 */	mr r29, r7
-/* 8034884C 0034542C  90 6D BD 20 */	stw r3, HoldDown(r13)
-/* 80348850 00345430  48 00 01 48 */	b lbl_80348998
-lbl_80348854:
-/* 80348854 00345434  80 0D BD 18 */	lwz r0, HoldUp(r13)
-/* 80348858 00345438  39 20 00 00 */	li r9, 0
-/* 8034885C 0034543C  80 AD BD 1C */	lwz r5, lbl_804D73BC(r13)
-/* 80348860 00345440  39 40 00 01 */	li r10, 1
-/* 80348864 00345444  7C 00 4A 78 */	xor r0, r0, r9
-/* 80348868 00345448  7C A5 4A 78 */	xor r5, r5, r9
-/* 8034886C 0034544C  7C A0 03 79 */	or. r0, r5, r0
-/* 80348870 00345450  40 82 00 58 */	bne lbl_803488C8
-/* 80348874 00345454  3C C0 80 00 */	lis r6, 0x800000F8@ha
-/* 80348878 00345458  80 AD BD 24 */	lwz r5, lbl_804D73C4(r13)
-/* 8034887C 0034545C  80 E6 00 F8 */	lwz r7, 0x800000F8@l(r6)
-/* 80348880 00345460  3C C0 43 1C */	lis r6, 0x431BDE83@ha
-/* 80348884 00345464  39 06 DE 83 */	addi r8, r6, 0x431BDE83@l
-/* 80348888 00345468  80 0D BD 20 */	lwz r0, HoldDown(r13)
-/* 8034888C 0034546C  54 E6 F0 BE */	srwi r6, r7, 2
-/* 80348890 00345470  7C C8 30 16 */	mulhwu r6, r8, r6
-/* 80348894 00345474  54 C6 8B FE */	srwi r6, r6, 0xf
-/* 80348898 00345478  1C C6 00 64 */	mulli r6, r6, 0x64
-/* 8034889C 0034547C  7C E5 20 10 */	subfc r7, r5, r4
-/* 803488A0 00345480  7C 00 19 10 */	subfe r0, r0, r3
-/* 803488A4 00345484  54 C8 E8 FE */	srwi r8, r6, 3
-/* 803488A8 00345488  6C 05 80 00 */	xoris r5, r0, 0x8000
-/* 803488AC 0034548C  6D 26 80 00 */	xoris r6, r9, 0x8000
-/* 803488B0 00345490  7C 07 40 10 */	subfc r0, r7, r8
-/* 803488B4 00345494  7C A5 31 10 */	subfe r5, r5, r6
-/* 803488B8 00345498  7C A6 31 10 */	subfe r5, r6, r6
-/* 803488BC 0034549C  7C A5 00 D1 */	neg. r5, r5
-/* 803488C0 003454A0  40 82 00 08 */	bne lbl_803488C8
-/* 803488C4 003454A4  7D 2A 4B 78 */	mr r10, r9
-lbl_803488C8:
-/* 803488C8 003454A8  2C 0A 00 00 */	cmpwi r10, 0
-/* 803488CC 003454AC  41 82 00 0C */	beq lbl_803488D8
-/* 803488D0 003454B0  38 00 00 01 */	li r0, 1
-/* 803488D4 003454B4  48 00 00 08 */	b lbl_803488DC
-lbl_803488D8:
-/* 803488D8 003454B8  38 00 00 00 */	li r0, 0
-lbl_803488DC:
-/* 803488DC 003454BC  7C 1D 03 78 */	mr r29, r0
-/* 803488E0 003454C0  48 00 00 B8 */	b lbl_80348998
-lbl_803488E4:
-/* 803488E4 003454C4  80 0D BD 0C */	lwz r0, lbl_804D73AC(r13)
-/* 803488E8 003454C8  2C 00 00 00 */	cmpwi r0, 0
-/* 803488EC 003454CC  41 82 00 34 */	beq lbl_80348920
-/* 803488F0 003454D0  80 AD BD 10 */	lwz r5, OSResetSW_LastState(r13)
-/* 803488F4 003454D4  38 00 00 00 */	li r0, 0
-/* 803488F8 003454D8  90 0D BD 0C */	stw r0, lbl_804D73AC(r13)
-/* 803488FC 003454DC  2C 05 00 00 */	cmpwi r5, 0
-/* 80348900 003454E0  3B A5 00 00 */	addi r29, r5, 0
-/* 80348904 003454E4  41 82 00 10 */	beq lbl_80348914
-/* 80348908 003454E8  90 8D BD 1C */	stw r4, lbl_804D73BC(r13)
-/* 8034890C 003454EC  90 6D BD 18 */	stw r3, HoldUp(r13)
-/* 80348910 003454F0  48 00 00 88 */	b lbl_80348998
-lbl_80348914:
-/* 80348914 003454F4  90 0D BD 1C */	stw r0, lbl_804D73BC(r13)
-/* 80348918 003454F8  90 0D BD 18 */	stw r0, HoldUp(r13)
-/* 8034891C 003454FC  48 00 00 7C */	b lbl_80348998
-lbl_80348920:
-/* 80348920 00345500  80 CD BD 18 */	lwz r6, HoldUp(r13)
-/* 80348924 00345504  39 00 00 00 */	li r8, 0
-/* 80348928 00345508  80 ED BD 1C */	lwz r7, lbl_804D73BC(r13)
-/* 8034892C 0034550C  7C C0 42 78 */	xor r0, r6, r8
-/* 80348930 00345510  7C E5 42 78 */	xor r5, r7, r8
-/* 80348934 00345514  7C A0 03 79 */	or. r0, r5, r0
-/* 80348938 00345518  41 82 00 50 */	beq lbl_80348988
-/* 8034893C 0034551C  3C A0 80 00 */	lis r5, 0x800000F8@ha
-/* 80348940 00345520  80 05 00 F8 */	lwz r0, 0x800000F8@l(r5)
-/* 80348944 00345524  3C A0 10 62 */	lis r5, 0x10624DD3@ha
-/* 80348948 00345528  38 A5 4D D3 */	addi r5, r5, 0x10624DD3@l
-/* 8034894C 0034552C  54 00 F0 BE */	srwi r0, r0, 2
-/* 80348950 00345530  7C 05 00 16 */	mulhwu r0, r5, r0
-/* 80348954 00345534  54 00 D1 BE */	srwi r0, r0, 6
-/* 80348958 00345538  1C 00 00 28 */	mulli r0, r0, 0x28
-/* 8034895C 0034553C  7C E7 20 10 */	subfc r7, r7, r4
-/* 80348960 00345540  7C A6 19 10 */	subfe r5, r6, r3
-/* 80348964 00345544  6C A6 80 00 */	xoris r6, r5, 0x8000
-/* 80348968 00345548  6D 05 80 00 */	xoris r5, r8, 0x8000
-/* 8034896C 0034554C  7C 00 38 10 */	subfc r0, r0, r7
-/* 80348970 00345550  7C A5 31 10 */	subfe r5, r5, r6
-/* 80348974 00345554  7C A6 31 10 */	subfe r5, r6, r6
-/* 80348978 00345558  7C A5 00 D1 */	neg. r5, r5
-/* 8034897C 0034555C  41 82 00 0C */	beq lbl_80348988
-/* 80348980 00345560  3B A0 00 01 */	li r29, 1
-/* 80348984 00345564  48 00 00 14 */	b lbl_80348998
-lbl_80348988:
-/* 80348988 00345568  38 00 00 00 */	li r0, 0
-/* 8034898C 0034556C  90 0D BD 1C */	stw r0, lbl_804D73BC(r13)
-/* 80348990 00345570  3B A0 00 00 */	li r29, 0
-/* 80348994 00345574  90 0D BD 18 */	stw r0, HoldUp(r13)
-lbl_80348998:
-/* 80348998 00345578  3C A0 80 00 */	lis r5, 0x800030E3@ha
-/* 8034899C 0034557C  93 AD BD 10 */	stw r29, OSResetSW_LastState(r13)
-/* 803489A0 00345580  88 05 30 E3 */	lbz r0, 0x800030E3@l(r5)
-/* 803489A4 00345584  54 00 06 BF */	clrlwi. r0, r0, 0x1a
-/* 803489A8 00345588  41 82 00 A0 */	beq lbl_80348A48
-/* 803489AC 0034558C  1D 40 00 3C */	mulli r10, r0, 0x3c
-/* 803489B0 00345590  80 05 00 F8 */	lwz r0, 0xf8(r5)
-/* 803489B4 00345594  81 2D BC B4 */	lwz r9, lbl_804D7354(r13)
-/* 803489B8 00345598  81 0D BC B0 */	lwz r8, __OSStartTime(r13)
-/* 803489BC 0034559C  54 06 F0 BE */	srwi r6, r0, 2
-/* 803489C0 003455A0  7D 40 FE 70 */	srawi r0, r10, 0x1f
-/* 803489C4 003455A4  7C E0 31 D6 */	mullw r7, r0, r6
-/* 803489C8 003455A8  7C 0A 30 16 */	mulhwu r0, r10, r6
-/* 803489CC 003455AC  7C AA 31 D6 */	mullw r5, r10, r6
-/* 803489D0 003455B0  7D 29 28 14 */	addc r9, r9, r5
-/* 803489D4 003455B4  3B E0 00 00 */	li r31, 0
-/* 803489D8 003455B8  7C E7 02 14 */	add r7, r7, r0
-/* 803489DC 003455BC  7C 0A F9 D6 */	mullw r0, r10, r31
-/* 803489E0 003455C0  7C 07 02 14 */	add r0, r7, r0
-/* 803489E4 003455C4  7D 08 01 14 */	adde r8, r8, r0
-/* 803489E8 003455C8  6D 07 80 00 */	xoris r7, r8, 0x8000
-/* 803489EC 003455CC  6C 65 80 00 */	xoris r5, r3, 0x8000
-/* 803489F0 003455D0  7C 04 48 10 */	subfc r0, r4, r9
-/* 803489F4 003455D4  7C A5 39 10 */	subfe r5, r5, r7
-/* 803489F8 003455D8  7C A7 39 10 */	subfe r5, r7, r7
-/* 803489FC 003455DC  7C A5 00 D1 */	neg. r5, r5
-/* 80348A00 003455E0  41 82 00 48 */	beq lbl_80348A48
-/* 80348A04 003455E4  7C 89 20 10 */	subfc r4, r9, r4
-/* 80348A08 003455E8  7C 68 19 10 */	subfe r3, r8, r3
-/* 80348A0C 003455EC  38 A0 00 00 */	li r5, 0
-/* 80348A10 003455F0  4B FD 9F F9 */	bl __div2i
-/* 80348A14 003455F4  38 A0 00 00 */	li r5, 0
-/* 80348A18 003455F8  38 C0 00 02 */	li r6, 2
-/* 80348A1C 003455FC  4B FD 9F ED */	bl __div2i
-/* 80348A20 00345600  38 00 00 01 */	li r0, 1
-/* 80348A24 00345604  7C 84 00 38 */	and r4, r4, r0
-/* 80348A28 00345608  7C 60 F8 38 */	and r0, r3, r31
-/* 80348A2C 0034560C  7C 83 FA 78 */	xor r3, r4, r31
-/* 80348A30 00345610  7C 00 FA 78 */	xor r0, r0, r31
-/* 80348A34 00345614  7C 60 03 79 */	or. r0, r3, r0
-/* 80348A38 00345618  40 82 00 0C */	bne lbl_80348A44
-/* 80348A3C 0034561C  3B A0 00 01 */	li r29, 1
-/* 80348A40 00345620  48 00 00 08 */	b lbl_80348A48
-lbl_80348A44:
-/* 80348A44 00345624  3B A0 00 00 */	li r29, 0
-lbl_80348A48:
-/* 80348A48 00345628  7F C3 F3 78 */	mr r3, r30
-/* 80348A4C 0034562C  4B FF E9 41 */	bl OSRestoreInterrupts
-/* 80348A50 00345630  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80348A54 00345634  7F A3 EB 78 */	mr r3, r29
-/* 80348A58 00345638  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 80348A5C 0034563C  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 80348A60 00345640  7C 08 03 A6 */	mtlr r0
-/* 80348A64 00345644  83 A1 00 0C */	lwz r29, 0xc(r1)
-/* 80348A68 00345648  38 21 00 18 */	addi r1, r1, 0x18
-/* 80348A6C 0034564C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void __OSResetSWInterruptHandler(__OSInterrupt interrupt, OSContext* context)
+{
+    HoldDown = __OSGetSystemTime();
+    while (__OSGetSystemTime() - HoldDown < OSMicrosecondsToTicks(100) &&
+           !(__PIRegs[0] & 0x10000))
+    {
+        ;
+    }
+    if (!(__PIRegs[0] & 0x10000)) {
+        LastState = Down = true;
+        __OSMaskInterrupts(0x80000000U >> OS_INTR_PI_RSW);
+        if (ResetCallback) {
+            OSResetCallback callback = ResetCallback;
+            ResetCallback = NULL;
+            callback();
+        }
+    }
+    __PIRegs[0] = 2;
+}
 
-#pragma push
-asm s32 OSGetResetSwitchState(OSResetSW_Unk1*)
-{ // clang-format off
-    nofralloc
-/* 80348A70 00345650  7C 08 02 A6 */	mflr r0
-/* 80348A74 00345654  90 01 00 04 */	stw r0, 4(r1)
-/* 80348A78 00345658  94 21 FF F8 */	stwu r1, -8(r1)
-/* 80348A7C 0034565C  4B FF FD 5D */	bl OSGetResetButtonState
-/* 80348A80 00345660  80 01 00 0C */	lwz r0, 0xc(r1)
-/* 80348A84 00345664  38 21 00 08 */	addi r1, r1, 8
-/* 80348A88 00345668  7C 08 03 A6 */	mtlr r0
-/* 80348A8C 0034566C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+bool OSGetResetButtonState(void)
+{
+    bool enabled = OSDisableInterrupts();
+    bool state;
+    OSTime now = __OSGetSystemTime();
+    u32 reg = __PIRegs[0];
+
+    if (!(reg & 0x00010000)) {
+        if (!Down) {
+            Down = true;
+            state = HoldUp ? true : false;
+            HoldDown = now;
+        } else {
+            state = HoldUp || (OSMicrosecondsToTicks(100) < now - HoldDown)
+                        ? true
+                        : false;
+        }
+    } else if (Down) {
+        Down = false;
+        state = LastState;
+        if (state) {
+            HoldUp = now;
+        } else {
+            HoldUp = 0;
+        }
+    } else if (HoldUp && (now - HoldUp < OSMillisecondsToTicks(40))) {
+        state = true;
+    } else {
+        state = false;
+        HoldUp = 0;
+    }
+
+    LastState = state;
+
+    if (GameChoice & 0x3F) {
+        OSTime fire = (GameChoice & 0x3F) * 60;
+        fire = __OSStartTime + OSSecondsToTicks(fire);
+        if (fire < now) {
+            now -= fire;
+            now = OSTicksToSeconds(now) / 2;
+            if ((now & 1) == 0) {
+                state = true;
+            } else {
+                state = false;
+            }
+        }
+    }
+
+    OSRestoreInterrupts(enabled);
+    return state;
+}
+
+bool OSGetResetSwitchState(void)
+{
+    return OSGetResetButtonState();
+}

@@ -7,27 +7,8 @@ from elf_file import ElfFile, ElfSection, ElfSymbol
 # Based on `doldisasm.py` from camthesaxman:
 # https://gist.github.com/camthesaxman/a36f610dbf4cc53a874322ef146c4123
 
-
-# Minimal stubs for Capstone
-# fmt: off
 CsMnemonic = int
 CsRegister = int
-class CsInsn:
-    def __init__(self, cs: Any, all_info: Any) -> None: ...
-    @property
-    def id(self) -> CsMnemonic: ...
-    @property
-    def address(self) -> int: ...
-    @property
-    def bytes(self) -> bytes: ...
-    @property
-    def mnemonic(self) -> str: ...
-    @property
-    def op_str(self) -> str: ...
-    @property
-    def operands(self) -> List[Any]: ...
-    def reg_name(self, reg_id: CsRegister, default: Optional[str] = ...) -> str: ...
-# fmt: on
 
 
 MANUAL_MNEMONICS: Set[CsMnemonic] = {
@@ -121,14 +102,16 @@ def address_label(addr: int) -> str:
 
 
 # Returns true if the instruction is a load or store with the given register as a base
-def is_load_store_reg_offset(insn: CsInsn, reg: Optional[CsRegister]) -> bool:
+def is_load_store_reg_offset(insn: cs.CsInsn, reg: Optional[CsRegister]) -> bool:
     return insn.id in LOAD_STORE_MNEMONICS and (
         reg == None or insn.operands[1].mem.base == reg
     )
 
 
 # Converts the instruction to a string, fixing various issues with Capstone
-def instruction_to_text(insn: CsInsn, raw: int, section: ElfSection) -> Optional[str]:
+def instruction_to_text(
+    insn: cs.CsInsn, raw: int, section: ElfSection
+) -> Optional[str]:
     # Look up the relocation for this address, which is either at offset+0 or offset+2
     # (It should be possible to determine which offset to use from either the relocation
     # type or the instruction mnemonic, but for now just check both since they should
@@ -207,8 +190,12 @@ def instruction_to_text(insn: CsInsn, raw: int, section: ElfSection) -> Optional
         # Reloc R_PPC_EMB_SDA21, the linker sets the register to either
         # $r13 or $r2 based on the section name.
         if reloc.relocation_type == 109:
-            assert reloc.symbol.section is not None
-            reg = "r13" if reloc.symbol.section.name.endswith("2") else "r2"
+            if reloc.symbol.section is None:
+                reg = "r0"
+            elif reloc.symbol.section.name.endswith("2"):
+                reg = "r13"
+            else:
+                reg = "r2"
             if insn.id == cs.ppc.PPC_INS_LI:
                 return "addi %s, %s, %s@sda21" % (
                     insn.reg_name(insn.operands[0].value.reg),
@@ -418,7 +405,7 @@ def disasm_mcrxr(inst: int) -> Optional[str]:
 # Disassemble code
 def disassemble_instruction(
     address: int,
-    insn: Optional[CsInsn],
+    insn: Optional[cs.CsInsn],
     raw_bytes: bytes,
     section: ElfSection,
     output: TextIO,
@@ -470,8 +457,8 @@ def disassemble_instruction(
 
 def disassemble_bytes(
     cap: cs.Cs, base_address: int, data: bytes
-) -> List[Tuple[Optional[CsInsn], int, bytes]]:
-    output: List[Tuple[Optional[CsInsn], int, bytes]] = []
+) -> List[Tuple[Optional[cs.CsInsn], int, bytes]]:
+    output: List[Tuple[Optional[cs.CsInsn], int, bytes]] = []
     offset = 0
     end = len(data)
     while offset < end:

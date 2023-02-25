@@ -1,11 +1,15 @@
 #include <melee/lb/lbunknown_001.h>
 
+#include <dolphin/mtx/mtxvec.h>
+#include <melee/sc/scene.h>
+#include <placeholder.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/pobj.h>
+#include <sysdolphin/baselib/quatlib.h>
 #include <sysdolphin/baselib/robj.h>
 
 static s32 lbl_803B9FC0[] = { 14, 14, 14, 14, 2, 4, 6, 0 };
@@ -15,23 +19,26 @@ static s32 lbl_803BA000[] = { 6, 6, 6, 6, 1, 2, 3, 0 };
 static s32 lbl_803BA020[] = { 28, 29, 30, 31 };
 static s32 lbl_803BA030[] = { 7, 4, 5, 6 };
 
-BOOL func_8000B074(HSD_JObj* jobj)
+bool func_8000B074(HSD_JObj* jobj)
 {
     HSD_AObj* aobj = jobj->aobj;
-    if (aobj != NULL && !(aobj->flags & AOBJ_NO_ANIM)) {
-        return TRUE;
-    }
-    return FALSE;
+
+    if (aobj != NULL && FLAGS_NONE(aobj->flags, AOBJ_NO_ANIM))
+        return true;
+
+    return false;
 }
 
-BOOL func_8000B09C(HSD_JObj* jobj)
+bool func_8000B09C(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
         if (jobj->aobj != NULL && !(jobj->aobj->flags & AOBJ_NO_ANIM)) {
-            return TRUE;
+            return true;
         }
-        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & JOBJ_INSTANCE)) {
-            while (TRUE) {
+        if ((jobj->child == NULL && jobj->next == NULL) ||
+            (jobj->flags & JOBJ_INSTANCE))
+        {
+            while (true) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
                     break;
@@ -48,17 +55,19 @@ BOOL func_8000B09C(HSD_JObj* jobj)
             jobj = jobj->next;
         }
     }
-    return FALSE;
+    return false;
 }
 
-BOOL func_8000B134(HSD_JObj* jobj)
+bool func_8000B134(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
         if (jobj->aobj != NULL && (jobj->aobj->flags & AOBJ_REWINDED)) {
-            return TRUE;
+            return true;
         }
-        if (jobj->child == NULL && jobj->next == NULL || (jobj->flags & JOBJ_INSTANCE)) {
-            while (TRUE) {
+        if ((jobj->child == NULL && jobj->next == NULL) ||
+            (jobj->flags & JOBJ_INSTANCE))
+        {
+            while (true) {
                 if (jobj->parent == NULL) {
                     jobj = NULL;
                     break;
@@ -75,7 +84,7 @@ BOOL func_8000B134(HSD_JObj* jobj)
             jobj = jobj->next;
         }
     }
-    return FALSE;
+    return false;
 }
 
 inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
@@ -97,7 +106,7 @@ void func_8000B1CC(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
     }
     if (jobj_parent(arg0) != NULL) {
         HSD_JObjSetupMatrix(arg0);
-        if (arg1 == NULL || !arg1->x && !arg1->y && !arg1->z) {
+        if (arg1 == NULL || (!arg1->x && !arg1->y && !arg1->z)) {
             arg2->x = arg0->mtx[0][3];
             arg2->y = arg0->mtx[1][3];
             arg2->z = arg0->mtx[2][3];
@@ -106,7 +115,7 @@ void func_8000B1CC(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
         }
         return;
     }
-    if (arg1 == NULL || !arg1->x && !arg1->y && !arg1->z) {
+    if (arg1 == NULL || (!arg1->x && !arg1->y && !arg1->z)) {
         HSD_JObjGetTranslation(arg0, arg2);
         return;
     }
@@ -217,7 +226,9 @@ void func_8000BA44(HSD_DObj* dobj, f32 val)
     if (dobj->pobj != NULL) {
         HSD_PObj* cur;
         for (cur = dobj->pobj; cur != NULL; cur = cur->next) {
-            if (pobj_type(cur) == POBJ_SHAPEANIM && cur->u.x14_unk->aobj != NULL) {
+            if (pobj_type(cur) == POBJ_SHAPEANIM &&
+                cur->u.x14_unk->aobj != NULL)
+            {
                 HSD_AObjSetRate(cur->u.x14_unk->aobj, val);
             }
         }
@@ -247,7 +258,9 @@ void func_8000BB24(HSD_DObj* dobj, f32 val)
     if (dobj->pobj != NULL) {
         HSD_PObj* cur;
         for (cur = dobj->pobj; cur != NULL; cur = cur->next) {
-            if (pobj_type(cur) == POBJ_SHAPEANIM && cur->u.x14_unk->aobj != NULL) {
+            if (pobj_type(cur) == POBJ_SHAPEANIM &&
+                cur->u.x14_unk->aobj != NULL)
+            {
                 HSD_AObjReqAnim(cur->u.x14_unk->aobj, val);
             }
         }
@@ -371,23 +384,16 @@ void func_8000C07C(HSD_JObj* jobj, s32 i, HSD_AnimJoint** arg3,
     HSD_JObjAddAnimAll(jobj, phi_r4, phi_r5, phi_r6);
 }
 
-typedef struct _UnkAnimContainer {
-    u8 x0_pad[0x4];
-    struct _HSD_AnimJoint** x4_anims;
-    struct _HSD_MatAnimJoint** x8_matanims;
-    struct _HSD_ShapeAnimJoint** xC_shapeanims;
-} UnkAnimContainer;
-
-void func_8000C0E8(HSD_JObj* jobj, s32 i, struct _UnkAnimContainer* arg2)
+void func_8000C0E8(HSD_JObj* jobj, s32 i, struct _DynamicModelDesc* arg2)
 {
-    func_8000C07C(jobj, i, arg2->x4_anims, arg2->x8_matanims, arg2->xC_shapeanims);
+    func_8000C07C(jobj, i, arg2->anims, arg2->matanims, arg2->shapeanims);
 }
 
 void func_8000C160(void* mem, int size)
 {
     u8* bytes = mem;
     while (size--) {
-       *bytes++ = 0;
+        *bytes++ = 0;
     }
 }
 
@@ -433,11 +439,13 @@ void func_8000C390(HSD_JObj* jobj)
 {
     HSD_RObj* next;
     HSD_RObj* cur = HSD_JObjGetRObj(jobj);
-    while (1) {
+
+    while (true) {
         cur = HSD_RObjGetByType(cur, REFTYPE_JOBJ, 0);
-        if (cur == NULL) {
+
+        if (cur == NULL)
             break;
-        }
+
         next = robj_next(cur);
         HSD_JObjDeleteRObj(jobj, cur);
         HSD_RObjRemove(cur);
@@ -455,9 +463,12 @@ void func_8000C420(HSD_JObj* jobj, u32 flags, f32 limit)
     HSD_JObjPrependRObj(jobj, robj);
 }
 
+#ifdef MWERKS_GEKKO
+
+#pragma push
 // https://decomp.me/scratch/atKIC
 asm void func_8000C490(HSD_JObj*, HSD_JObj*, HSD_JObj*, f32, f32)
-{
+{ // clang-format off
     nofralloc
 /* 8000C490 00009070  7C 08 02 A6 */	mflr r0
 /* 8000C494 00009074  90 01 00 04 */	stw r0, 4(r1)
@@ -674,9 +685,19 @@ lbl_8000C7A4:
 /* 8000C7AC 0000938C  CB E1 00 88 */	lfd f31, 0x88(r1)
 /* 8000C7B0 00009390  38 21 00 90 */	addi r1, r1, 0x90
 /* 8000C7B4 00009394  7C 08 03 A6 */	mtlr r0
-/* 8000C7B8 00009398  4E 80 00 20 */	blr 
-}
+/* 8000C7B8 00009398  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
+
+#else
+
+void func_8000C490(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2, f32 arg3,
+                   f32 arg4)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
 
 void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
 {
@@ -691,9 +712,10 @@ void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
     HSD_JObjSetFlags(dst, JOBJ_MTX_DIRTY);
 }
 
-// https://decomp.me/scratch/63ON3
+#ifdef MWERKS_GEKKO
+
 asm void func_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, f32, f32)
-{
+{ // clang-format off
     nofralloc
 /* 8000C868 00009448  7C 08 02 A6 */	mflr r0
 /* 8000C86C 0000944C  90 01 00 04 */	stw r0, 4(r1)
@@ -895,33 +917,43 @@ lbl_8000CB3C:
 /* 8000CB50 00009730  83 81 00 D0 */	lwz r28, 0xd0(r1)
 /* 8000CB54 00009734  38 21 00 E8 */	addi r1, r1, 0xe8
 /* 8000CB58 00009738  7C 08 03 A6 */	mtlr r0
-/* 8000CB5C 0000973C  4E 80 00 20 */	blr 
-}
+/* 8000CB5C 0000973C  4E 80 00 20 */	blr
+} // clang-format on
 #pragma peephole on
 
-static s32 lbGetFreeColorRegImpl(s32 i0, HSD_TevDesc* tevdesc,
-                                 HSD_TExp* texp1, HSD_TExp* texp2)
+#else
+
+void func_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, f32 arg3,
+                   f32 arg4)
 {
-    BOOL register_used[8];
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+static s32 lbGetFreeColorRegImpl(s32 i0, HSD_TevDesc* tevdesc, HSD_TExp* texp1,
+                                 HSD_TExp* texp2)
+{
+    bool register_used[8];
     int i;
 
     for (i = 0; i < 8; i++) {
-        register_used[i] = FALSE;
+        register_used[i] = false;
     }
     while (texp1 != NULL) {
         if (texp1->cnst.reg < 8) {
-            register_used[texp1->cnst.reg] = TRUE;
+            register_used[texp1->cnst.reg] = true;
         }
         texp1 = texp1->cnst.next;
     }
     while (tevdesc != NULL) {
         s32 idx = lbl_803B9FF0[tevdesc->u.tevconf.clr_out_reg];
-        register_used[idx] = TRUE;
+        register_used[idx] = true;
         tevdesc = tevdesc->next;
     }
     while (texp2 != NULL) {
         if (texp2->cnst.reg < 8) {
-            register_used[texp2->cnst.reg] = TRUE;
+            register_used[texp2->cnst.reg] = true;
         }
         texp2 = texp2->cnst.next;
     }
@@ -949,17 +981,18 @@ s32 func_8000CCA4(s32 i)
     return lbl_803B9FE0[i];
 }
 
-static s32 lbGetFreeAlphaRegImpl(s32 i0, HSD_TevDesc* cur, HSD_TExp*, HSD_TExp*)
+static s32 lbGetFreeAlphaRegImpl(s32 i0, HSD_TevDesc* cur, HSD_TExp* arg2,
+                                 HSD_TExp* arg3)
 {
-    BOOL register_used[8];
+    bool register_used[8];
     int i;
 
     for (i = 0; i < 8; i++) {
-        register_used[i] = FALSE;
+        register_used[i] = false;
     }
     while (cur != NULL) {
         s32 idx = lbl_803BA030[cur->u.tevconf.alpha_out_reg];
-        register_used[idx] = TRUE;
+        register_used[idx] = true;
         cur = cur->next;
     }
     for (i = i0; i < 7; i++) {
@@ -997,11 +1030,15 @@ inline HSD_LObj* lobj_next(HSD_LObj* lobj)
 HSD_LObj* func_8000CDC0(HSD_LObj* cur)
 {
     while (cur != NULL) {
-        if (!(cur->flags & 3) && !(HSD_LObjGetFlags(cur) & 0x20)) {
+        if (FLAGS_NONE(cur->flags, (1 << 0) | (1 << 1)) &&
+            FLAGS_NONE(HSD_LObjGetFlags(cur), 1 << 5))
+        {
             return cur;
         }
         cur = lobj_next(cur);
     }
+
+    /// @todo Missing return statement
 }
 
 void func_8000CE30(HSD_DObj* dobj, HSD_DObj* next)

@@ -1,7 +1,12 @@
-#include <Runtime/__mem.h>
+#include <dolphin/gx/GXTexture.h>
+
 #include <common_structs.h>
 #include <dolphin/gx/__GXBump.h>
 #include <dolphin/gx/__GXInit.h>
+#include <placeholder.h>
+#include <Runtime/__mem.h>
+
+#ifdef MWERKS_GEKKO
 
 static Vec2 const lbl_804DE268 = { 16.0F, 0.0F };
 static f64 const lbl_804DE270 = 4503599627370496.0L;
@@ -28,190 +33,60 @@ static GXTexture_Unk0 GX2HWFiltConv = { 0x00040105, 0x02060000 };
 
 void lbl_8033E7B4(void);
 void lbl_8033E7C0(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7CC(void);
-void lbl_8033E7CC(void);
-void lbl_8033E7CC(void);
 void lbl_8033E7CC(void);
 void lbl_8033E7D8(void);
-void lbl_8033E7B4(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7CC(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7B4(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7CC(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7CC(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7B4(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7CC(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7CC(void);
-void lbl_8033E7CC(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7B4(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7C0(void);
-void lbl_8033E7D8(void);
-void lbl_8033E7CC(void);
-void lbl_8033E908(void);
-void lbl_8033E914(void);
-void lbl_8033E914(void);
-void lbl_8033E920(void);
-void lbl_8033E920(void);
-void lbl_8033E920(void);
-void lbl_8033E920(void);
-void lbl_8033E92C(void);
 void lbl_8033E908(void);
 void lbl_8033E914(void);
 void lbl_8033E920(void);
 void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E908(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E914(void);
-void lbl_8033E92C(void);
-void lbl_8033E920(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E920(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E908(void);
-void lbl_8033E92C(void);
-void lbl_8033E914(void);
-void lbl_8033E920(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E914(void);
-void lbl_8033E914(void);
-void lbl_8033E914(void);
-void lbl_8033E914(void);
-void lbl_8033E920(void);
-void lbl_8033E920(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E908(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E92C(void);
-void lbl_8033E914(void);
-void lbl_8033E914(void);
-void lbl_8033E92C(void);
-void lbl_8033E920(void);
 void lbl_8033EB58(void);
 void lbl_8033EB6C(void);
-void lbl_8033EB6C(void);
-void lbl_8033EB80(void);
-void lbl_8033EB80(void);
 void lbl_8033EB80(void);
 void lbl_8033EB94(void);
-void lbl_8033EBBC(void);
-void lbl_8033EB58(void);
-void lbl_8033EB6C(void);
-void lbl_8033EB80(void);
-void lbl_8033EBBC(void);
-void lbl_8033EBBC(void);
-void lbl_8033EBBC(void);
 void lbl_8033EBA8(void);
+void lbl_8033EBBC(void);
 
 static jtbl_t jtbl_804012B8 = {
-    &lbl_8033E7B4, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7CC,
-    &lbl_8033E7CC, &lbl_8033E7CC, &lbl_8033E7CC, &lbl_8033E7D8,
-    &lbl_8033E7B4, &lbl_8033E7C0, &lbl_8033E7CC, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7D8, &lbl_8033E7CC,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7CC, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7B4, &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7CC,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0,
-    &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7CC,
-    &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7B4, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
-    &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7D8,
+    &lbl_8033E7B4, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7CC, &lbl_8033E7CC,
+    &lbl_8033E7CC, &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7C0,
+    &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7D8, &lbl_8033E7CC,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7D8, &lbl_8033E7C0,
+    &lbl_8033E7CC, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0,
+    &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7CC, &lbl_8033E7CC,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7B4, &lbl_8033E7D8,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7D8,
+    &lbl_8033E7D8, &lbl_8033E7D8, &lbl_8033E7C0, &lbl_8033E7C0, &lbl_8033E7D8,
     &lbl_8033E7CC
 };
 
 static jtbl_t jtbl_804013AC = {
-    &lbl_8033E908, &lbl_8033E914, &lbl_8033E914, &lbl_8033E920,
-    &lbl_8033E920, &lbl_8033E920, &lbl_8033E920, &lbl_8033E92C,
-    &lbl_8033E908, &lbl_8033E914, &lbl_8033E920, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E914, &lbl_8033E92C, &lbl_8033E920,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E920, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E908, &lbl_8033E92C, &lbl_8033E914, &lbl_8033E920,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914,
-    &lbl_8033E914, &lbl_8033E914, &lbl_8033E914, &lbl_8033E920,
-    &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E908, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
-    &lbl_8033E92C, &lbl_8033E914, &lbl_8033E914, &lbl_8033E92C,
+    &lbl_8033E908, &lbl_8033E914, &lbl_8033E914, &lbl_8033E920, &lbl_8033E920,
+    &lbl_8033E920, &lbl_8033E920, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E914,
+    &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914, &lbl_8033E92C, &lbl_8033E920,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E92C, &lbl_8033E914,
+    &lbl_8033E920, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914,
+    &lbl_8033E914, &lbl_8033E914, &lbl_8033E914, &lbl_8033E920, &lbl_8033E920,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E908, &lbl_8033E92C,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E92C,
+    &lbl_8033E92C, &lbl_8033E92C, &lbl_8033E914, &lbl_8033E914, &lbl_8033E92C,
     &lbl_8033E920
 };
 
-static jtbl_t jtbl_804014A0 = {
-    &lbl_8033EB58, &lbl_8033EB6C, &lbl_8033EB6C, &lbl_8033EB80,
-    &lbl_8033EB80, &lbl_8033EB80, &lbl_8033EB94, &lbl_8033EBBC,
-    &lbl_8033EB58, &lbl_8033EB6C, &lbl_8033EB80, &lbl_8033EBBC,
-    &lbl_8033EBBC, &lbl_8033EBBC, &lbl_8033EBA8, NULL
-};
+static jtbl_t jtbl_804014A0 = { &lbl_8033EB58, &lbl_8033EB6C, &lbl_8033EB6C,
+                                &lbl_8033EB80, &lbl_8033EB80, &lbl_8033EB80,
+                                &lbl_8033EB94, &lbl_8033EBBC, &lbl_8033EB58,
+                                &lbl_8033EB6C, &lbl_8033EB80, &lbl_8033EBBC,
+                                &lbl_8033EBBC, &lbl_8033EBBC, &lbl_8033EBA8,
+                                NULL };
 
-// https://decomp.me/scratch/FgNqV // 2963 (65.94%)
 #pragma push
-asm unk_t GXGetTexBufferSize()
+asm s32 GXGetTexBufferSize(u16, u16, u32, u8, u8)
 { // clang-format off
     nofralloc
 /* 8033E78C 0033B36C  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -223,7 +98,7 @@ asm unk_t GXGetTexBufferSize()
 /* 8033E7A4 0033B384  54 A0 10 3A */	slwi r0, r5, 2
 /* 8033E7A8 0033B388  7C 08 00 2E */	lwzx r0, r8, r0
 /* 8033E7AC 0033B38C  7C 09 03 A6 */	mtctr r0
-/* 8033E7B0 0033B390  4E 80 04 20 */	bctr 
+/* 8033E7B0 0033B390  4E 80 04 20 */	bctr
 entry lbl_8033E7B4
 /* 8033E7B4 0033B394  38 00 00 03 */	li r0, 3
 /* 8033E7B8 0033B398  39 00 00 03 */	li r8, 3
@@ -316,13 +191,16 @@ lbl_8033E8D8:
 /* 8033E8D8 0033B4B8  7F E3 FB 78 */	mr r3, r31
 /* 8033E8DC 0033B4BC  83 E1 00 24 */	lwz r31, 0x24(r1)
 /* 8033E8E0 0033B4C0  38 21 00 28 */	addi r1, r1, 0x28
-/* 8033E8E4 0033B4C4  4E 80 00 20 */	blr 
+/* 8033E8E4 0033B4C4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/efvey // 1665 (66.70%)
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __GetImageTileCount()
+asm void __GetImageTileCount(u32, s16, s16, s32*, s32*, s32*)
 { // clang-format off
     nofralloc
 /* 8033E8E8 0033B4C8  28 03 00 3C */	cmplwi r3, 0x3c
@@ -332,7 +210,7 @@ asm unk_t __GetImageTileCount()
 /* 8033E8F8 0033B4D8  54 60 10 3A */	slwi r0, r3, 2
 /* 8033E8FC 0033B4DC  7C 09 00 2E */	lwzx r0, r9, r0
 /* 8033E900 0033B4E0  7C 09 03 A6 */	mtctr r0
-/* 8033E904 0033B4E4  4E 80 04 20 */	bctr 
+/* 8033E904 0033B4E4  4E 80 04 20 */	bctr
 entry lbl_8033E908
 /* 8033E908 0033B4E8  39 60 00 03 */	li r11, 3
 /* 8033E90C 0033B4EC  39 80 00 03 */	li r12, 3
@@ -384,13 +262,16 @@ lbl_8033E9A4:
 /* 8033E9A4 0033B584  38 00 00 01 */	li r0, 1
 lbl_8033E9A8:
 /* 8033E9A8 0033B588  90 08 00 00 */	stw r0, 0(r8)
-/* 8033E9AC 0033B58C  4E 80 00 20 */	blr 
+/* 8033E9AC 0033B58C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/YiUMp
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXInitTexObj()
+asm void GXInitTexObj(unk_t, u32, u16, u16, s32, s32, s32, s8)
 { // clang-format off
     nofralloc
 /* 8033E9B0 0033B590  7C 08 02 A6 */	mflr r0
@@ -504,7 +385,7 @@ lbl_8033EAD8:
 /* 8033EB48 0033B728  54 E0 10 3A */	slwi r0, r7, 2
 /* 8033EB4C 0033B72C  7C 05 00 2E */	lwzx r0, r5, r0
 /* 8033EB50 0033B730  7C 09 03 A6 */	mtctr r0
-/* 8033EB54 0033B734  4E 80 04 20 */	bctr 
+/* 8033EB54 0033B734  4E 80 04 20 */	bctr
 entry lbl_8033EB58
 /* 8033EB58 0033B738  38 00 00 01 */	li r0, 1
 /* 8033EB5C 0033B73C  98 1F 00 1E */	stb r0, 0x1e(r31)
@@ -562,13 +443,16 @@ lbl_8033EBCC:
 /* 8033EC14 0033B7F4  BB 01 00 40 */	lmw r24, 0x40(r1)
 /* 8033EC18 0033B7F8  38 21 00 60 */	addi r1, r1, 0x60
 /* 8033EC1C 0033B7FC  7C 08 03 A6 */	mtlr r0
-/* 8033EC20 0033B800  4E 80 00 20 */	blr 
+/* 8033EC20 0033B800  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/YQyg4
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXInitTexObjCI()
+asm void GXInitTexObjCI(unk_t, s32, u16, u16, s32, s32, s32, s8)
 { // clang-format off
     nofralloc
 /* 8033EC24 0033B804  7C 08 02 A6 */	mflr r0
@@ -588,14 +472,25 @@ asm unk_t GXInitTexObjCI()
 /* 8033EC5C 0033B83C  83 C1 00 28 */	lwz r30, 0x28(r1)
 /* 8033EC60 0033B840  38 21 00 30 */	addi r1, r1, 0x30
 /* 8033EC64 0033B844  7C 08 03 A6 */	mtlr r0
-/* 8033EC68 0033B848  4E 80 00 20 */	blr 
+/* 8033EC68 0033B848  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/K0q3K
+#else
+
+void GXInitTexObjCI(unk_t arg0, s32 arg1, u16 arg2, u16 arg3, s32 arg4,
+                    s32 arg5, s32 arg6, s8 arg7)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXInitTexObjLOD()
-{ // clang-format off
+asm void GXInitTexObjLOD(unk_t, s32, s32, s32, s8, s32, f32, f32, f32){
+    // clang-format off
     nofralloc
 /* 8033EC6C 0033B84C  94 21 FF C8 */	stwu r1, -0x38(r1)
 /* 8033EC70 0033B850  C0 02 E8 98 */	lfs f0, lbl_804DE278(r2)
@@ -707,9 +602,11 @@ lbl_8033EDC4:
 /* 8033EDF0 0033B9D0  38 21 00 38 */	addi r1, r1, 0x38
 /* 8033EDF4 0033B9D4  50 04 44 2E */	rlwimi r4, r0, 8, 0x10, 0x17
 /* 8033EDF8 0033B9D8  90 83 00 04 */	stw r4, 4(r3)
-/* 8033EDFC 0033B9DC  4E 80 00 20 */	blr 
+/* 8033EDFC 0033B9DC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#endif
 
 s32 GXGetTexObjWidth(GXTexObj* tex_obj)
 {
@@ -726,9 +623,10 @@ GXTexFmt GXGetTexObjFmt(GXTexObj* tex_obj)
     return tex_obj->tex_fmt;
 }
 
-// https://decomp.me/scratch/ZnHCT
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXLoadTexObjPreLoaded()
+asm void GXLoadTexObjPreLoaded(unk_t, unk_t, s32)
 { // clang-format off
     nofralloc
 /* 8033EE28 0033BA08  7C 08 02 A6 */	mflr r0
@@ -803,7 +701,7 @@ asm unk_t GXLoadTexObjPreLoaded()
 /* 8033EF3C 0033BB1C  80 7C 00 18 */	lwz r3, 0x18(r28)
 /* 8033EF40 0033BB20  81 84 04 14 */	lwz r12, 0x414(r4)
 /* 8033EF44 0033BB24  7D 88 03 A6 */	mtlr r12
-/* 8033EF48 0033BB28  4E 80 00 21 */	blrl 
+/* 8033EF48 0033BB28  4E 80 00 21 */	blrl
 /* 8033EF4C 0033BB2C  38 8D A5 50 */	addi r4, r13, GXTexTlutIds
 /* 8033EF50 0033BB30  80 A3 00 04 */	lwz r5, 4(r3)
 /* 8033EF54 0033BB34  7C 04 E8 AE */	lbzx r0, r4, r29
@@ -837,42 +735,28 @@ lbl_8033EF70:
 /* 8033EFC0 0033BBA0  83 81 00 18 */	lwz r28, 0x18(r1)
 /* 8033EFC4 0033BBA4  38 21 00 28 */	addi r1, r1, 0x28
 /* 8033EFC8 0033BBA8  7C 08 03 A6 */	mtlr r0
-/* 8033EFCC 0033BBAC  4E 80 00 20 */	blr 
+/* 8033EFCC 0033BBAC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/es1CS
-#pragma push
-asm unk_t GXLoadTexObj()
-{ // clang-format off
-    nofralloc
-/* 8033EFD0 0033BBB0  7C 08 02 A6 */	mflr r0
-/* 8033EFD4 0033BBB4  90 01 00 04 */	stw r0, 4(r1)
-/* 8033EFD8 0033BBB8  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8033EFDC 0033BBBC  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8033EFE0 0033BBC0  3B E4 00 00 */	addi r31, r4, 0
-/* 8033EFE4 0033BBC4  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8033EFE8 0033BBC8  3B C3 00 00 */	addi r30, r3, 0
-/* 8033EFEC 0033BBCC  80 AD A5 08 */	lwz r5, __GXContexts(r13)
-/* 8033EFF0 0033BBD0  81 85 04 10 */	lwz r12, 0x410(r5)
-/* 8033EFF4 0033BBD4  7D 88 03 A6 */	mtlr r12
-/* 8033EFF8 0033BBD8  4E 80 00 21 */	blrl 
-/* 8033EFFC 0033BBDC  38 83 00 00 */	addi r4, r3, 0
-/* 8033F000 0033BBE0  38 7E 00 00 */	addi r3, r30, 0
-/* 8033F004 0033BBE4  38 BF 00 00 */	addi r5, r31, 0
-/* 8033F008 0033BBE8  4B FF FE 21 */	bl GXLoadTexObjPreLoaded
-/* 8033F00C 0033BBEC  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8033F010 0033BBF0  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8033F014 0033BBF4  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8033F018 0033BBF8  7C 08 03 A6 */	mtlr r0
-/* 8033F01C 0033BBFC  38 21 00 18 */	addi r1, r1, 0x18
-/* 8033F020 0033BC00  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+#else
 
-// https://decomp.me/scratch/Y9lJO
+void GXLoadTexObjPreLoaded(unk_t arg0, unk_t arg1, s32 arg2)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+void GXLoadTexObj(unk_t arg0, s32 arg1)
+{
+    GXLoadTexObjPreLoaded(arg0, __GXContexts.main->callbacks[0x98](), arg1);
+}
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXInitTlutObj()
+asm void GXInitTlutObj(unk_t, u32, s32, u16)
 { // clang-format off
     nofralloc
 /* 8033F024 0033BC04  38 00 00 00 */	li r0, 0
@@ -892,13 +776,16 @@ asm unk_t GXInitTlutObj()
 /* 8033F05C 0033BC3C  64 00 64 00 */	oris r0, r0, 0x6400
 /* 8033F060 0033BC40  90 03 00 04 */	stw r0, 4(r3)
 /* 8033F064 0033BC44  B0 C3 00 08 */	sth r6, 8(r3)
-/* 8033F068 0033BC48  4E 80 00 20 */	blr 
+/* 8033F068 0033BC48  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/9AKJV
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXLoadTlut()
+asm void GXLoadTlut(unk_t, s32)
 { // clang-format off
     nofralloc
 /* 8033F06C 0033BC4C  7C 08 02 A6 */	mflr r0
@@ -911,7 +798,7 @@ asm unk_t GXLoadTlut()
 /* 8033F088 0033BC68  80 AD A5 08 */	lwz r5, __GXContexts(r13)
 /* 8033F08C 0033BC6C  81 85 04 14 */	lwz r12, 0x414(r5)
 /* 8033F090 0033BC70  7D 88 03 A6 */	mtlr r12
-/* 8033F094 0033BC74  4E 80 00 21 */	blrl 
+/* 8033F094 0033BC74  4E 80 00 21 */	blrl
 /* 8033F098 0033BC78  7C 7F 1B 78 */	mr r31, r3
 /* 8033F09C 0033BC7C  48 00 0D 05 */	bl __GXFlushTextureState
 /* 8033F0A0 0033BC80  38 80 00 61 */	li r4, 0x61
@@ -939,13 +826,16 @@ asm unk_t GXLoadTlut()
 /* 8033F0F8 0033BCD8  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8033F0FC 0033BCDC  7C 08 03 A6 */	mtlr r0
 /* 8033F100 0033BCE0  38 21 00 20 */	addi r1, r1, 0x20
-/* 8033F104 0033BCE4  4E 80 00 20 */	blr 
+/* 8033F104 0033BCE4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/GFUrl // 7200 (0%)
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXInitTexCacheRegion()
+asm void GXInitTexCacheRegion(unk_t, s8, u32, s32, u32, s32, s32)
 { // clang-format off
     nofralloc
 /* 8033F108 0033BCE8  2C 06 00 01 */	cmpwi r6, 1
@@ -1030,9 +920,11 @@ lbl_8033F1D4:
 /* 8033F218 0033BDF8  90 A3 00 04 */	stw r5, 4(r3)
 /* 8033F21C 0033BDFC  98 83 00 0C */	stb r4, 0xc(r3)
 /* 8033F220 0033BE00  98 03 00 0D */	stb r0, 0xd(r3)
-/* 8033F224 0033BE04  4E 80 00 20 */	blr 
+/* 8033F224 0033BE04  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#endif
 
 void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
 {
@@ -1042,7 +934,7 @@ void GXInitTlutRegion(s32* arg0, s32 arg1, s32 arg2)
     INSERT_FIELD(*arg0, 0x65, 8, 24);
 }
 
-void GXInvalidateTexAll(void)
+void GXInvalidateTexAll(GXContext* arg0, s32 arg1, u8* arg2)
 {
     __GXFlushTextureState();
     WGPIPE.u8 = GX_LOAD_BP_REG;
@@ -1052,35 +944,26 @@ void GXInvalidateTexAll(void)
     __GXFlushTextureState();
 }
 
-// https://decomp.me/scratch/UXYXZ // 305 (39%)
-#pragma push
-asm unk_t GXSetTexRegionCallback()
-{ // clang-format off
-    nofralloc
-/* 8033F2B8 0033BE98  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033F2BC 0033BE9C  84 04 04 10 */	lwzu r0, 0x410(r4)
-/* 8033F2C0 0033BEA0  90 64 00 00 */	stw r3, 0(r4)
-/* 8033F2C4 0033BEA4  7C 03 03 78 */	mr r3, r0
-/* 8033F2C8 0033BEA8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+GXTexRegionCallback GXSetTexRegionCallback(GXTexRegionCallback arg0)
+{
+    GXContext* main = __GXContexts.main;
+    GXTexRegionCallback result = main->callbacks[0x98];
+    main->callbacks[0x98] = arg0;
+    return result;
+}
 
-// https://decomp.me/scratch/Xojw3 // 305 (39%)
-#pragma push
-asm unk_t GXSetTlutRegionCallback()
-{ // clang-format off
-    nofralloc
-/* 8033F2CC 0033BEAC  80 8D A5 08 */	lwz r4, __GXContexts(r13)
-/* 8033F2D0 0033BEB0  84 04 04 14 */	lwzu r0, 0x414(r4)
-/* 8033F2D4 0033BEB4  90 64 00 00 */	stw r3, 0(r4)
-/* 8033F2D8 0033BEB8  7C 03 03 78 */	mr r3, r0
-/* 8033F2DC 0033BEBC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+GXTexRegionCallback GXSetTlutRegionCallback(GXTexRegionCallback arg0)
+{
+    GXContext* main = __GXContexts.main;
+    GXTexRegionCallback result = main->callbacks[0x99];
+    main->callbacks[0x99] = arg0;
+    return result;
+}
 
-// https://decomp.me/scratch/Npksb
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __SetSURegs()
+asm void __SetSURegs(s32, s32)
 { // clang-format off
     nofralloc
 /* 8033F2E0 0033BEC0  80 AD A5 08 */	lwz r5, __GXContexts(r13)
@@ -1133,13 +1016,16 @@ asm unk_t __SetSURegs()
 /* 8033F39C 0033BF7C  80 04 00 D8 */	lwz r0, 0xd8(r4)
 /* 8033F3A0 0033BF80  90 06 80 00 */	stw r0, -0x8000(r6)
 /* 8033F3A4 0033BF84  B0 65 00 02 */	sth r3, 2(r5)
-/* 8033F3A8 0033BF88  4E 80 00 20 */	blr 
+/* 8033F3A8 0033BF88  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/QG7Ms // 9100 (0%)
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __GXSetSUTexSize()
+asm void __GXSetSUTexSize(void)
 { // clang-format off
     nofralloc
 /* 8033F3AC 0033BF8C  7C 08 02 A6 */	mflr r0
@@ -1247,13 +1133,23 @@ lbl_8033F504:
 /* 8033F508 0033C0E8  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8033F50C 0033C0EC  38 21 00 28 */	addi r1, r1, 0x28
 /* 8033F510 0033C0F0  7C 08 03 A6 */	mtlr r0
-/* 8033F514 0033C0F4  4E 80 00 20 */	blr 
+/* 8033F514 0033C0F4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/QfxT4 // 3865 (73.16%)
+#else
+
+void __GXSetSUTexSize(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __GXSetTmemConfig()
+asm void __GXSetTmemConfig(s32)
 { // clang-format off
     nofralloc
 /* 8033F518 0033C0F8  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -1402,6 +1298,8 @@ lbl_8033F748:
 /* 8033F748 0033C328  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8033F74C 0033C32C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8033F750 0033C330  38 21 00 18 */	addi r1, r1, 0x18
-/* 8033F754 0033C334  4E 80 00 20 */	blr 
+/* 8033F754 0033C334  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#endif

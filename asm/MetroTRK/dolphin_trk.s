@@ -6,8 +6,8 @@
 InitMetroTRK:
 /* 8032A628 00327208  38 21 FF FC */	addi r1, r1, -4
 /* 8032A62C 0032720C  90 61 00 00 */	stw r3, 0(r1)
-/* 8032A630 00327210  3C 60 80 4A */	lis r3, lbl_804A4C98@h
-/* 8032A634 00327214  60 63 4C 98 */	ori r3, r3, lbl_804A4C98@l
+/* 8032A630 00327210  3C 60 80 4A */	lis r3, gTRKCPUState@h
+/* 8032A634 00327214  60 63 4C 98 */	ori r3, r3, gTRKCPUState@l
 /* 8032A638 00327218  BC 03 00 00 */	stmw r0, 0(r3)
 /* 8032A63C 0032721C  80 81 00 00 */	lwz r4, 0(r1)
 /* 8032A640 00327220  38 21 00 04 */	addi r1, r1, 4
@@ -24,8 +24,8 @@ InitMetroTRK:
 /* 8032A66C 0032724C  7C 60 01 24 */	mtmsr r3
 /* 8032A670 00327250  7C 9B 03 A6 */	mtspr 0x1b, r4
 /* 8032A674 00327254  48 00 01 F5 */	bl TRKSaveExtended1Block
-/* 8032A678 00327258  3C 60 80 4A */	lis r3, lbl_804A4C98@h
-/* 8032A67C 0032725C  60 63 4C 98 */	ori r3, r3, lbl_804A4C98@l
+/* 8032A678 00327258  3C 60 80 4A */	lis r3, gTRKCPUState@h
+/* 8032A67C 0032725C  60 63 4C 98 */	ori r3, r3, gTRKCPUState@l
 /* 8032A680 00327260  B8 03 00 00 */	.4byte 0xB8030000  /* illegal lmw r0, 0(r3) */
 /* 8032A684 00327264  38 00 00 00 */	li r0, 0
 /* 8032A688 00327268  7C 12 FB A6 */	mtspr 0x3f2, r0
@@ -39,7 +39,7 @@ InitMetroTRK:
 /* 8032A6A8 00327288  80 83 00 84 */	lwz r4, 0x84(r3)
 /* 8032A6AC 0032728C  7C 88 03 A6 */	mtlr r4
 /* 8032A6B0 00327290  B8 03 00 00 */	.4byte 0xB8030000  /* illegal lmw r0, 0(r3) */
-/* 8032A6B4 00327294  4E 80 00 20 */	blr 
+/* 8032A6B4 00327294  4E 80 00 20 */	blr
 lbl_8032A6B8:
 /* 8032A6B8 00327298  48 00 05 28 */	b TRK_main
 
@@ -52,7 +52,7 @@ EnableMetroTRKInterrupts:
 /* 8032A6CC 003272AC  38 21 00 08 */	addi r1, r1, 8
 /* 8032A6D0 003272B0  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032A6D4 003272B4  7C 08 03 A6 */	mtlr r0
-/* 8032A6D8 003272B8  4E 80 00 20 */	blr 
+/* 8032A6D8 003272B8  4E 80 00 20 */	blr
 
 .global TRKTargetTranslate
 TRKTargetTranslate:
@@ -64,8 +64,8 @@ TRKTargetTranslate:
 /* 8032A6F0 003272D0  38 04 40 00 */	addi r0, r4, 0x4000
 /* 8032A6F4 003272D4  7C 03 00 40 */	cmplw r3, r0
 /* 8032A6F8 003272D8  40 80 00 20 */	bge lbl_8032A718
-/* 8032A6FC 003272DC  3C 80 80 4A */	lis r4, lbl_804A4C98@ha
-/* 8032A700 003272E0  38 84 4C 98 */	addi r4, r4, lbl_804A4C98@l
+/* 8032A6FC 003272DC  3C 80 80 4A */	lis r4, gTRKCPUState@ha
+/* 8032A700 003272E0  38 84 4C 98 */	addi r4, r4, gTRKCPUState@l
 /* 8032A704 003272E4  80 04 02 38 */	lwz r0, 0x238(r4)
 /* 8032A708 003272E8  54 00 07 BE */	clrlwi r0, r0, 0x1e
 /* 8032A70C 003272EC  28 00 00 00 */	cmplwi r0, 0
@@ -75,7 +75,7 @@ lbl_8032A718:
 /* 8032A718 003272F8  54 60 00 BE */	clrlwi r0, r3, 2
 /* 8032A71C 003272FC  64 03 80 00 */	oris r3, r0, 0x8000
 lbl_8032A720:
-/* 8032A720 00327300  4E 80 00 20 */	blr 
+/* 8032A720 00327300  4E 80 00 20 */	blr
 
 .global TRK_copy_vector
 TRK_copy_vector:
@@ -102,7 +102,7 @@ TRK_copy_vector:
 /* 8032A774 00327354  38 21 00 10 */	addi r1, r1, 0x10
 /* 8032A778 00327358  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032A77C 0032735C  7C 08 03 A6 */	mtlr r0
-/* 8032A780 00327360  4E 80 00 20 */	blr 
+/* 8032A780 00327360  4E 80 00 20 */	blr
 
 .global __TRK_copy_vectors
 __TRK_copy_vectors:
@@ -117,9 +117,9 @@ __TRK_copy_vectors:
 /* 8032A7A4 00327384  4B FF FF 39 */	bl TRKTargetTranslate
 /* 8032A7A8 00327388  3B A0 00 00 */	li r29, 0
 /* 8032A7AC 0032738C  83 83 00 00 */	lwz r28, 0(r3)
-/* 8032A7B0 00327390  3C 60 80 40 */	lis r3, lbl_80400878@ha
+/* 8032A7B0 00327390  3C 60 80 40 */	lis r3, TRK_ISR_OFFSETS@ha
 /* 8032A7B4 00327394  57 A4 10 3A */	slwi r4, r29, 2
-/* 8032A7B8 00327398  38 03 08 78 */	addi r0, r3, lbl_80400878@l
+/* 8032A7B8 00327398  38 03 08 78 */	addi r0, r3, TRK_ISR_OFFSETS@l
 /* 8032A7BC 0032739C  7F C0 22 14 */	add r30, r0, r4
 /* 8032A7C0 003273A0  48 00 00 04 */	b lbl_8032A7C4
 lbl_8032A7C4:
@@ -146,7 +146,7 @@ lbl_8032A7E8:
 /* 8032A808 003273E8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032A80C 003273EC  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032A810 003273F0  7C 08 03 A6 */	mtlr r0
-/* 8032A814 003273F4  4E 80 00 20 */	blr 
+/* 8032A814 003273F4  4E 80 00 20 */	blr
 
 .global TRKInitializeTarget
 TRKInitializeTarget:
@@ -154,8 +154,8 @@ TRKInitializeTarget:
 /* 8032A81C 003273FC  90 01 00 04 */	stw r0, 4(r1)
 /* 8032A820 00327400  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 8032A824 00327404  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8032A828 00327408  3C 60 80 4A */	lis r3, lbl_804A4BF0@ha
-/* 8032A82C 0032740C  3B E3 4B F0 */	addi r31, r3, lbl_804A4BF0@l
+/* 8032A828 00327408  3C 60 80 4A */	lis r3, gTRKState@ha
+/* 8032A82C 0032740C  3B E3 4B F0 */	addi r31, r3, gTRKState@l
 /* 8032A830 00327410  38 00 00 01 */	li r0, 1
 /* 8032A834 00327414  90 1F 00 98 */	stw r0, 0x98(r31)
 /* 8032A838 00327418  4B FF E8 15 */	bl __TRK_get_MSR
@@ -169,13 +169,13 @@ TRKInitializeTarget:
 /* 8032A858 00327438  38 21 00 10 */	addi r1, r1, 0x10
 /* 8032A85C 0032743C  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032A860 00327440  7C 08 03 A6 */	mtlr r0
-/* 8032A864 00327444  4E 80 00 20 */	blr 
+/* 8032A864 00327444  4E 80 00 20 */	blr
 
 
 .section .data
     .balign 8
-.global lbl_80400878
-lbl_80400878:
+.global TRK_ISR_OFFSETS
+TRK_ISR_OFFSETS:
     .4byte 0x00000100
     .4byte 0x00000200
     .4byte 0x00000300

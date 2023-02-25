@@ -1,54 +1,47 @@
+#include <dolphin/os/OSSerial.h>
+
+#include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSRtc.h>
+#include <dolphin/os/OSTime.h>
+#include <placeholder.h>
 
-extern unk_t lbl_80402358;
+extern struct {
+    enum_t status;
+    u32 xy;
+    s32 unused[0x20 - 0x8];
+} lbl_80402358;
 
-#pragma push
-asm unk_t SIBusy()
-{ // clang-format off
-    nofralloc
-/* 803494BC 0034609C  3C 60 80 40 */	lis r3, lbl_80402358@ha
-/* 803494C0 003460A0  80 03 23 58 */	lwz r0, lbl_80402358@l(r3)
-/* 803494C4 003460A4  2C 00 FF FF */	cmpwi r0, -1
-/* 803494C8 003460A8  41 82 00 0C */	beq lbl_803494D4
-/* 803494CC 003460AC  38 60 00 01 */	li r3, 1
-/* 803494D0 003460B0  4E 80 00 20 */	blr 
-lbl_803494D4:
-/* 803494D4 003460B4  38 60 00 00 */	li r3, 0
-/* 803494D8 003460B8  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+bool SIBusy(void)
+{
+    if (lbl_80402358.status != -1)
+        return true;
 
-extern unk_t Packet;
+    return false;
+}
 
-#pragma push
-asm unk_t SIIsChanBusy()
-{ // clang-format off
-    nofralloc
-/* 803494DC 003460BC  3C 80 80 4A */	lis r4, Packet@ha
-/* 803494E0 003460C0  54 65 28 34 */	slwi r5, r3, 5
-/* 803494E4 003460C4  38 04 7D B8 */	addi r0, r4, Packet@l
-/* 803494E8 003460C8  7C 80 2A 14 */	add r4, r0, r5
-/* 803494EC 003460CC  80 04 00 00 */	lwz r0, 0(r4)
-/* 803494F0 003460D0  38 A0 00 01 */	li r5, 1
-/* 803494F4 003460D4  2C 00 FF FF */	cmpwi r0, -1
-/* 803494F8 003460D8  40 82 00 18 */	bne lbl_80349510
-/* 803494FC 003460DC  3C 80 80 40 */	lis r4, lbl_80402358@ha
-/* 80349500 003460E0  80 04 23 58 */	lwz r0, lbl_80402358@l(r4)
-/* 80349504 003460E4  7C 00 18 00 */	cmpw r0, r3
-/* 80349508 003460E8  41 82 00 08 */	beq lbl_80349510
-/* 8034950C 003460EC  38 A0 00 00 */	li r5, 0
-lbl_80349510:
-/* 80349510 003460F0  7C A3 2B 78 */	mr r3, r5
-/* 80349514 003460F4  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+extern struct {
+    s32 x0;
+    u8 pad[32 - 4];
+} Packet[];
+
+bool SIIsChanBusy(enum_t status)
+{
+    bool result = true;
+
+    if (Packet[status].x0 == -1 && lbl_80402358.status != status)
+        result = false;
+
+    return result;
+}
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t lbl_804A7EF8;
 extern unk_t lbl_804A7ED8;
-extern unk_t __OSGetSystemTime();
 
 #pragma push
-asm unk_t CompleteTransfer()
+static asm void CompleteTransfer(void)
 { // clang-format off
     nofralloc
 /* 80349518 003460F8  7C 08 02 A6 */	mflr r0
@@ -255,20 +248,27 @@ lbl_803497F4:
 /* 80349804 003463E4  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 80349808 003463E8  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 8034980C 003463EC  38 21 00 20 */	addi r1, r1, 0x20
-/* 80349810 003463F0  4E 80 00 20 */	blr 
+/* 80349810 003463F0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-extern unk_t GetTypeCallback();
+#else
+
+static void CompleteTransfer(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 extern unk_t lbl_804D73C8;
-extern unk_t SIGetResponseRaw();
 extern unk_t VIGetCurrentLine();
-extern unk_t SITransfer();
 extern unk_t OSCancelAlarm();
-extern unk_t __SITransfer();
 
 #pragma push
-asm unk_t SIInterruptHandler()
+asm void SIInterruptHandler(void)
 { // clang-format off
     nofralloc
 /* 80349814 003463F4  7C 08 02 A6 */	mflr r0
@@ -344,7 +344,7 @@ lbl_80349910:
 /* 80349920 00346500  38 77 00 00 */	addi r3, r23, 0
 /* 80349924 00346504  38 96 00 00 */	addi r4, r22, 0
 /* 80349928 00346508  38 BF 00 00 */	addi r5, r31, 0
-/* 8034992C 0034650C  4E 80 00 21 */	blrl 
+/* 8034992C 0034650C  4E 80 00 21 */	blrl
 lbl_80349930:
 /* 80349930 00346510  3C 60 CC 00 */	lis r3, 0xCC006400@ha
 /* 80349934 00346514  38 83 64 00 */	addi r4, r3, 0xCC006400@l
@@ -483,7 +483,7 @@ lbl_80349B18:
 /* 80349B24 00346704  7D 88 03 A6 */	mtlr r12
 /* 80349B28 00346708  38 7E 00 00 */	addi r3, r30, 0
 /* 80349B2C 0034670C  38 9F 00 00 */	addi r4, r31, 0
-/* 80349B30 00346710  4E 80 00 21 */	blrl 
+/* 80349B30 00346710  4E 80 00 21 */	blrl
 lbl_80349B34:
 /* 80349B34 00346714  3A D6 00 01 */	addi r22, r22, 1
 /* 80349B38 00346718  2C 16 00 04 */	cmpwi r22, 4
@@ -494,12 +494,23 @@ lbl_80349B44:
 /* 80349B48 00346728  80 01 00 4C */	lwz r0, 0x4c(r1)
 /* 80349B4C 0034672C  38 21 00 48 */	addi r1, r1, 0x48
 /* 80349B50 00346730  7C 08 03 A6 */	mtlr r0
-/* 80349B54 00346734  4E 80 00 20 */	blr 
+/* 80349B54 00346734  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void SIInterruptHandler(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t SIEnablePollingInterrupt()
+asm void SIEnablePollingInterrupt(void)
 { // clang-format off
     nofralloc
 /* 80349B58 00346738  7C 08 02 A6 */	mflr r0
@@ -543,14 +554,25 @@ lbl_80349BC4:
 /* 80349BE0 003467C0  7C 08 03 A6 */	mtlr r0
 /* 80349BE4 003467C4  83 A1 00 24 */	lwz r29, 0x24(r1)
 /* 80349BE8 003467C8  38 21 00 30 */	addi r1, r1, 0x30
-/* 80349BEC 003467CC  4E 80 00 20 */	blr 
+/* 80349BEC 003467CC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void SIEnablePollingInterrupt(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t lbl_804A7F58;
 
 #pragma push
-asm unk_t SIRegisterPollingHandler()
+asm void SIRegisterPollingHandler(void)
 { // clang-format off
     nofralloc
 /* 80349BF0 003467D0  7C 08 02 A6 */	mflr r0
@@ -608,12 +630,23 @@ lbl_80349CA4:
 /* 80349CAC 0034688C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80349CB0 00346890  7C 08 03 A6 */	mtlr r0
 /* 80349CB4 00346894  38 21 00 18 */	addi r1, r1, 0x18
-/* 80349CB8 00346898  4E 80 00 20 */	blr 
+/* 80349CB8 00346898  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void SIRegisterPollingHandler(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t SIUnregisterPollingHandler()
+asm void SIUnregisterPollingHandler(void)
 { // clang-format off
     nofralloc
 /* 80349CBC 0034689C  7C 08 02 A6 */	mflr r0
@@ -681,14 +714,23 @@ lbl_80349D98:
 /* 80349DA0 00346980  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80349DA4 00346984  7C 08 03 A6 */	mtlr r0
 /* 80349DA8 00346988  38 21 00 18 */	addi r1, r1, 0x18
-/* 80349DAC 0034698C  4E 80 00 20 */	blr 
+/* 80349DAC 0034698C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-extern unk_t SIGetType();
+#else
+
+void SIUnregisterPollingHandler(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t SIInit()
+asm void SIInit(void)
 { // clang-format off
     nofralloc
 /* 80349DB0 00346990  7C 08 02 A6 */	mflr r0
@@ -728,12 +770,23 @@ lbl_80349DE4:
 /* 80349E34 00346A14  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80349E38 00346A18  38 21 00 08 */	addi r1, r1, 8
 /* 80349E3C 00346A1C  7C 08 03 A6 */	mtlr r0
-/* 80349E40 00346A20  4E 80 00 20 */	blr 
+/* 80349E40 00346A20  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void SIInit(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __SITransfer()
+asm void __SITransfer(void)
 { // clang-format off
     nofralloc
 /* 80349E44 00346A24  7C 08 02 A6 */	mflr r0
@@ -879,14 +932,25 @@ lbl_8034A03C:
 /* 8034A040 00346C20  80 01 00 4C */	lwz r0, 0x4c(r1)
 /* 8034A044 00346C24  38 21 00 48 */	addi r1, r1, 0x48
 /* 8034A048 00346C28  7C 08 03 A6 */	mtlr r0
-/* 8034A04C 00346C2C  4E 80 00 20 */	blr 
+/* 8034A04C 00346C2C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __SITransfer(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t lbl_8040236C;
 
 #pragma push
-asm unk_t SIGetStatus()
+asm void SIGetStatus(void)
 { // clang-format off
     nofralloc
 /* 8034A050 00346C30  7C 08 02 A6 */	mflr r0
@@ -920,66 +984,50 @@ lbl_8034A0AC:
 /* 8034A0BC 00346C9C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8034A0C0 00346CA0  7C 08 03 A6 */	mtlr r0
 /* 8034A0C4 00346CA4  38 21 00 18 */	addi r1, r1, 0x18
-/* 8034A0C8 00346CA8  4E 80 00 20 */	blr 
+/* 8034A0C8 00346CA8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm unk_t SISetCommand()
-{ // clang-format off
-    nofralloc
-/* 8034A0CC 00346CAC  1C 03 00 0C */	mulli r0, r3, 0xc
-/* 8034A0D0 00346CB0  3C 60 CC 00 */	lis r3, 0xCC006400@ha
-/* 8034A0D4 00346CB4  38 63 64 00 */	addi r3, r3, 0xCC006400@l
-/* 8034A0D8 00346CB8  7C 83 01 2E */	stwx r4, r3, r0
-/* 8034A0DC 00346CBC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+#else
+
+void SIGetStatus(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+extern volatile struct {
+    u32 command, x4, x8;
+} SIRegs[] AT_ADDRESS(0xCC006400);
+
+void SISetCommand(s32 index, u32 value)
+{
+    SIRegs[index].command = value;
+}
+
+void SITransferCommands(void)
+{
+    SIRegs[4].x8 = 0x80000000;
+}
+
+s32 SISetXY(u32 arg0, u32 arg1)
+{
+    bool intr;
+    u32 temp_r4 = (arg0 << 0x10);
+    temp_r4 |= (arg1 << 8);
+    intr = OSDisableInterrupts();
+    lbl_80402358.xy &= 0xFC0000FF;
+    lbl_80402358.xy |= temp_r4;
+    temp_r4 = lbl_80402358.xy;
+    OSRestoreInterrupts(intr);
+    return temp_r4;
+}
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t SITransferCommands()
-{ // clang-format off
-    nofralloc
-/* 8034A0E0 00346CC0  3C 60 CC 00 */	lis r3, 0xCC006438@ha
-/* 8034A0E4 00346CC4  3C 00 80 00 */	lis r0, 0x8000
-/* 8034A0E8 00346CC8  90 03 64 38 */	stw r0, 0xCC006438@l(r3)
-/* 8034A0EC 00346CCC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
-
-#pragma push
-asm unk_t SISetXY()
-{ // clang-format off
-    nofralloc
-/* 8034A0F0 00346CD0  7C 08 02 A6 */	mflr r0
-/* 8034A0F4 00346CD4  90 01 00 04 */	stw r0, 4(r1)
-/* 8034A0F8 00346CD8  54 80 40 2E */	slwi r0, r4, 8
-/* 8034A0FC 00346CDC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8034A100 00346CE0  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8034A104 00346CE4  54 7F 80 1E */	slwi r31, r3, 0x10
-/* 8034A108 00346CE8  7F FF 03 78 */	or r31, r31, r0
-/* 8034A10C 00346CEC  4B FF D2 59 */	bl OSDisableInterrupts
-/* 8034A110 00346CF0  3C 80 80 40 */	lis r4, lbl_80402358@ha
-/* 8034A114 00346CF4  38 84 23 58 */	addi r4, r4, lbl_80402358@l
-/* 8034A118 00346CF8  84 04 00 04 */	lwzu r0, 4(r4)
-/* 8034A11C 00346CFC  54 00 06 0A */	rlwinm r0, r0, 0, 0x18, 5
-/* 8034A120 00346D00  90 04 00 00 */	stw r0, 0(r4)
-/* 8034A124 00346D04  80 04 00 00 */	lwz r0, 0(r4)
-/* 8034A128 00346D08  7C 00 FB 78 */	or r0, r0, r31
-/* 8034A12C 00346D0C  90 04 00 00 */	stw r0, 0(r4)
-/* 8034A130 00346D10  83 E4 00 00 */	lwz r31, 0(r4)
-/* 8034A134 00346D14  4B FF D2 59 */	bl OSRestoreInterrupts
-/* 8034A138 00346D18  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8034A13C 00346D1C  7F E3 FB 78 */	mr r3, r31
-/* 8034A140 00346D20  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8034A144 00346D24  38 21 00 18 */	addi r1, r1, 0x18
-/* 8034A148 00346D28  7C 08 03 A6 */	mtlr r0
-/* 8034A14C 00346D2C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
-
-#pragma push
-asm unk_t SIEnablePolling()
+asm void SIEnablePolling(u32 chan_mask)
 { // clang-format off
     nofralloc
 /* 8034A150 00346D30  7C 08 02 A6 */	mflr r0
@@ -1022,12 +1070,23 @@ lbl_8034A1D8:
 /* 8034A1DC 00346DBC  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8034A1E0 00346DC0  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034A1E4 00346DC4  7C 08 03 A6 */	mtlr r0
-/* 8034A1E8 00346DC8  4E 80 00 20 */	blr 
+/* 8034A1E8 00346DC8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void SIEnablePolling(u32 chan_mask)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t SIDisablePolling()
+asm void SIDisablePolling(u32 chan_mask)
 { // clang-format off
     nofralloc
 /* 8034A1EC 00346DCC  7C 08 02 A6 */	mflr r0
@@ -1058,12 +1117,23 @@ lbl_8034A244:
 /* 8034A248 00346E28  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8034A24C 00346E2C  38 21 00 18 */	addi r1, r1, 0x18
 /* 8034A250 00346E30  7C 08 03 A6 */	mtlr r0
-/* 8034A254 00346E34  4E 80 00 20 */	blr 
+/* 8034A254 00346E34  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void SIDisablePolling(u32 chan_mask)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t SIGetResponseRaw()
+asm void SIGetResponseRaw(void)
 { // clang-format off
     nofralloc
 /* 8034A258 00346E38  7C 08 02 A6 */	mflr r0
@@ -1121,12 +1191,23 @@ lbl_8034A310:
 /* 8034A31C 00346EFC  7C 08 03 A6 */	mtlr r0
 /* 8034A320 00346F00  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 8034A324 00346F04  38 21 00 28 */	addi r1, r1, 0x28
-/* 8034A328 00346F08  4E 80 00 20 */	blr 
+/* 8034A328 00346F08  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void SIGetResponseRaw(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t SIGetResponse()
+asm void SIGetResponse(EXIChannel chan, u32 data[2])
 { // clang-format off
     nofralloc
 /* 8034A32C 00346F0C  7C 08 02 A6 */	mflr r0
@@ -1179,14 +1260,25 @@ lbl_8034A3D0:
 /* 8034A3E0 00346FC0  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8034A3E4 00346FC4  38 21 00 28 */	addi r1, r1, 0x28
 /* 8034A3E8 00346FC8  7C 08 03 A6 */	mtlr r0
-/* 8034A3EC 00346FCC  4E 80 00 20 */	blr 
+/* 8034A3EC 00346FCC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void SIGetResponse(EXIChannel chan, u32 data[2])
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t Alarm;
 
 #pragma push
-asm unk_t AlarmHandler()
+static asm void AlarmHandler(void)
 { // clang-format off
     nofralloc
 /* 8034A3F0 00346FD0  7C 08 02 A6 */	mflr r0
@@ -1224,14 +1316,25 @@ lbl_8034A468:
 /* 8034A46C 0034704C  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 8034A470 00347050  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034A474 00347054  7C 08 03 A6 */	mtlr r0
-/* 8034A478 00347058  4E 80 00 20 */	blr 
+/* 8034A478 00347058  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+static void AlarmHandler(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t OSSetAlarm();
 
 #pragma push
-asm unk_t SITransfer()
+asm void SITransfer(void)
 { // clang-format off
     nofralloc
 /* 8034A47C 0034705C  7C 08 02 A6 */	mflr r0
@@ -1331,16 +1434,23 @@ lbl_8034A5D4:
 /* 8034A5D8 003471B8  80 01 00 64 */	lwz r0, 0x64(r1)
 /* 8034A5DC 003471BC  38 21 00 60 */	addi r1, r1, 0x60
 /* 8034A5E0 003471C0  7C 08 03 A6 */	mtlr r0
-/* 8034A5E4 003471C4  4E 80 00 20 */	blr 
+/* 8034A5E4 003471C4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-extern unk_t lbl_804D73D0;
-extern unk_t OSGetWirelessID();
-extern unk_t OSSetWirelessID();
+#else
+
+void SITransfer(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t GetTypeCallback()
+asm void GetTypeCallback(void)
 { // clang-format off
     nofralloc
 /* 8034A5E8 003471C8  7C 08 02 A6 */	mflr r0
@@ -1369,10 +1479,10 @@ asm unk_t GetTypeCallback()
 /* 8034A644 00347224  57 40 07 3F */	clrlwi. r0, r26, 0x1c
 /* 8034A648 00347228  90 65 01 20 */	stw r3, 0x120(r5)
 /* 8034A64C 0034722C  7C 84 DC 30 */	srw r4, r4, r27
-/* 8034A650 00347230  80 6D BD 30 */	lwz r3, lbl_804D73D0(r13)
+/* 8034A650 00347230  80 6D BD 30 */	lwz r3, __PADFixBits(r13)
 /* 8034A654 00347234  83 9E 00 00 */	lwz r28, 0(r30)
 /* 8034A658 00347238  7C 60 20 78 */	andc r0, r3, r4
-/* 8034A65C 0034723C  90 0D BD 30 */	stw r0, lbl_804D73D0(r13)
+/* 8034A65C 0034723C  90 0D BD 30 */	stw r0, __PADFixBits(r13)
 /* 8034A660 00347240  7C 7A 20 38 */	and r26, r3, r4
 /* 8034A664 00347244  40 82 00 24 */	bne lbl_8034A688
 /* 8034A668 00347248  57 83 00 C8 */	rlwinm r3, r28, 0, 3, 4
@@ -1401,7 +1511,7 @@ lbl_8034A6AC:
 /* 8034A6BC 0034729C  7D 88 03 A6 */	mtlr r12
 /* 8034A6C0 003472A0  38 7B 00 00 */	addi r3, r27, 0
 /* 8034A6C4 003472A4  38 9E 00 00 */	addi r4, r30, 0
-/* 8034A6C8 003472A8  4E 80 00 21 */	blrl 
+/* 8034A6C8 003472A8  4E 80 00 21 */	blrl
 lbl_8034A6CC:
 /* 8034A6CC 003472AC  3B BD 00 01 */	addi r29, r29, 1
 /* 8034A6D0 003472B0  2C 1D 00 04 */	cmpwi r29, 4
@@ -1509,7 +1619,7 @@ lbl_8034A83C:
 /* 8034A84C 0034742C  7D 88 03 A6 */	mtlr r12
 /* 8034A850 00347430  38 7B 00 00 */	addi r3, r27, 0
 /* 8034A854 00347434  38 9E 00 00 */	addi r4, r30, 0
-/* 8034A858 00347438  4E 80 00 21 */	blrl 
+/* 8034A858 00347438  4E 80 00 21 */	blrl
 lbl_8034A85C:
 /* 8034A85C 0034743C  3B BD 00 01 */	addi r29, r29, 1
 /* 8034A860 00347440  2C 1D 00 04 */	cmpwi r29, 4
@@ -1520,14 +1630,25 @@ lbl_8034A86C:
 /* 8034A870 00347450  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8034A874 00347454  38 21 00 30 */	addi r1, r1, 0x30
 /* 8034A878 00347458  7C 08 03 A6 */	mtlr r0
-/* 8034A87C 0034745C  4E 80 00 20 */	blr 
+/* 8034A87C 0034745C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void GetTypeCallback(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t lbl_804D73CC;
 
 #pragma push
-asm unk_t SIGetType()
+asm u32 SIGetType(s32)
 { // clang-format off
     nofralloc
 /* 8034A880 00347460  7C 08 02 A6 */	mflr r0
@@ -1648,14 +1769,25 @@ lbl_8034AA30:
 /* 8034AA34 00347614  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8034AA38 00347618  38 21 00 28 */	addi r1, r1, 0x28
 /* 8034AA3C 0034761C  7C 08 03 A6 */	mtlr r0
-/* 8034AA40 00347620  4E 80 00 20 */	blr 
+/* 8034AA40 00347620  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+u32 SIGetType(s32 arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t lbl_804A7F18;
 
 #pragma push
-asm unk_t SIGetTypeAsync()
+asm void SIGetTypeAsync(s32, SICallback)
 { // clang-format off
     nofralloc
 /* 8034AA44 00347624  7C 08 02 A6 */	mflr r0
@@ -1729,7 +1861,7 @@ lbl_8034AB40:
 /* 8034AB44 00347724  7D 88 03 A6 */	mtlr r12
 /* 8034AB48 00347728  38 7C 00 00 */	addi r3, r28, 0
 /* 8034AB4C 0034772C  38 9D 00 00 */	addi r4, r29, 0
-/* 8034AB50 00347730  4E 80 00 21 */	blrl 
+/* 8034AB50 00347730  4E 80 00 21 */	blrl
 lbl_8034AB54:
 /* 8034AB54 00347734  7F C3 F3 78 */	mr r3, r30
 /* 8034AB58 00347738  4B FF C8 35 */	bl OSRestoreInterrupts
@@ -1741,6 +1873,15 @@ lbl_8034AB54:
 /* 8034AB70 00347750  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8034AB74 00347754  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 8034AB78 00347758  38 21 00 20 */	addi r1, r1, 0x20
-/* 8034AB7C 0034775C  4E 80 00 20 */	blr 
+/* 8034AB7C 0034775C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void SIGetTypeAsync(s32 arg0, SICallback arg1)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

@@ -17,9 +17,9 @@ void test(void) {
     // The last 3 bytes are loaded using lwr, then stored using swr
     char str[7] = "abcdef";
     foo(str);
-    // 4 bytes being loaded using lwl+lwr, then stored using swl/swr
+    // 4 bytes being loaded using lwl+lwr, then stored using swl+swr
     a1.data = a2.data;
-    // 5 bytes being loaded using lwl+lwr+lbu, then stored using sw+sb
+    // 5 bytes being loaded using lw+lbu, then stored using swl+swr+sb
     a3[0] = a1;
     // 4 bytes being loaded using lwl+lwr, then stored using sw
     strcpy(buf, "ghi");

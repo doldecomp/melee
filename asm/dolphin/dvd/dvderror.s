@@ -20,9 +20,9 @@ lbl_8033A36C:
 /* 8033A378 00336F58  48 00 01 04 */	b lbl_8033A47C
 lbl_8033A37C:
 /* 8033A37C 00336F5C  38 00 00 02 */	li r0, 2
-/* 8033A380 00336F60  3C 80 80 40 */	lis r4, lbl_80400F98@ha
+/* 8033A380 00336F60  3C 80 80 40 */	lis r4, ErrorTable@ha
 /* 8033A384 00336F64  7C 09 03 A6 */	mtctr r0
-/* 8033A388 00336F68  38 C4 0F 98 */	addi r6, r4, lbl_80400F98@l
+/* 8033A388 00336F68  38 C4 0F 98 */	addi r6, r4, ErrorTable@l
 /* 8033A38C 00336F6C  54 64 46 3E */	srwi r4, r3, 0x18
 /* 8033A390 00336F70  54 63 02 3E */	clrlwi r3, r3, 8
 /* 8033A394 00336F74  38 A0 00 00 */	li r5, 0
@@ -103,13 +103,13 @@ lbl_8033A47C:
 /* 8033A490 00337070  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 8033A494 00337074  38 21 00 20 */	addi r1, r1, 0x20
 /* 8033A498 00337078  7C 08 03 A6 */	mtlr r0
-/* 8033A49C 0033707C  4E 80 00 20 */	blr 
+/* 8033A49C 0033707C  4E 80 00 20 */	blr
 
 
 .section .data
     .balign 8
-.global lbl_80400F98
-lbl_80400F98:
+.global ErrorTable
+ErrorTable:
     .4byte NULL
     .4byte 0x00023A00
     .4byte 0x00062800

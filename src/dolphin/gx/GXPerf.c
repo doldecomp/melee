@@ -1,4 +1,9 @@
+#include <dolphin/gx/GXPerf.h>
+
 #include <dolphin/gx/__GXInit.h>
+#include <placeholder.h>
+
+#ifdef MWERKS_GEKKO
 
 void lbl_80341E70(void);
 void lbl_80341E8C(void);
@@ -61,29 +66,27 @@ void lbl_80341E24(void);
 void lbl_80341E40(void);
 
 static jtbl_t jtbl_80401528 = {
-    &lbl_80341E70, &lbl_80341E8C, &lbl_80341EA8, &lbl_80341EC4,
-    &lbl_80341EE0, &lbl_80341EFC, &lbl_80341F18, &lbl_80341F34,
-    &lbl_80341F50, &lbl_80341F6C, &lbl_80341FA4, &lbl_80341FDC,
-    &lbl_80342014, &lbl_8034204C, &lbl_80342084, &lbl_803420BC,
-    &lbl_803420F4, &lbl_8034212C, &lbl_8034213C, &lbl_8034214C,
+    &lbl_80341E70, &lbl_80341E8C, &lbl_80341EA8, &lbl_80341EC4, &lbl_80341EE0,
+    &lbl_80341EFC, &lbl_80341F18, &lbl_80341F34, &lbl_80341F50, &lbl_80341F6C,
+    &lbl_80341FA4, &lbl_80341FDC, &lbl_80342014, &lbl_8034204C, &lbl_80342084,
+    &lbl_803420BC, &lbl_803420F4, &lbl_8034212C, &lbl_8034213C, &lbl_8034214C,
     &lbl_8034215C, &lbl_8034216C, &lbl_80342184
 };
 
 static jtbl_t jtbl_80401584 = {
-    &lbl_80341A40, &lbl_80341A60, &lbl_80341A80, &lbl_80341AA0,
-    &lbl_80341AC0, &lbl_80341AE0, &lbl_80341B00, &lbl_80341B20,
-    &lbl_80341B40, &lbl_80341B60, &lbl_80341B9C, &lbl_80341B80,
-    &lbl_80341BBC, &lbl_80341BD8, &lbl_80341BF4, &lbl_80341C10,
-    &lbl_80341C2C, &lbl_80341C48, &lbl_80341C64, &lbl_80341C80,
-    &lbl_80341C9C, &lbl_80341CB8, &lbl_80341CD4, &lbl_80341CF0,
-    &lbl_80341D0C, &lbl_80341D28, &lbl_80341D44, &lbl_80341D60,
-    &lbl_80341D7C, &lbl_80341D98, &lbl_80341DB4, &lbl_80341DD0,
-    &lbl_80341DEC, &lbl_80341E08, &lbl_80341E24, &lbl_80341E40
+    &lbl_80341A40, &lbl_80341A60, &lbl_80341A80, &lbl_80341AA0, &lbl_80341AC0,
+    &lbl_80341AE0, &lbl_80341B00, &lbl_80341B20, &lbl_80341B40, &lbl_80341B60,
+    &lbl_80341B9C, &lbl_80341B80, &lbl_80341BBC, &lbl_80341BD8, &lbl_80341BF4,
+    &lbl_80341C10, &lbl_80341C2C, &lbl_80341C48, &lbl_80341C64, &lbl_80341C80,
+    &lbl_80341C9C, &lbl_80341CB8, &lbl_80341CD4, &lbl_80341CF0, &lbl_80341D0C,
+    &lbl_80341D28, &lbl_80341D44, &lbl_80341D60, &lbl_80341D7C, &lbl_80341D98,
+    &lbl_80341DB4, &lbl_80341DD0, &lbl_80341DEC, &lbl_80341E08, &lbl_80341E24,
+    &lbl_80341E40
 };
 
 // https://decomp.me/scratch/gAvJm // 3230 (94.13%)
 #pragma push
-asm unk_t GXSetGPMetric()
+asm void GXSetGPMetric(u32, u32)
 { // clang-format off
     nofralloc
 /* 803418FC 0033E4DC  80 AD A5 08 */	lwz r5, __GXContexts(r13)
@@ -176,7 +179,7 @@ lbl_80341A10:
 /* 80341A30 0033E610  54 00 10 3A */	slwi r0, r0, 2
 /* 80341A34 0033E614  7C 03 00 2E */	lwzx r0, r3, r0
 /* 80341A38 0033E618  7C 09 03 A6 */	mtctr r0
-/* 80341A3C 0033E61C  4E 80 04 20 */	bctr 
+/* 80341A3C 0033E61C  4E 80 04 20 */	bctr
 entry lbl_80341A40
 /* 80341A40 0033E620  38 00 00 10 */	li r0, 0x10
 /* 80341A44 0033E624  3C A0 CC 01 */	lis r5, 0xCC008000@ha
@@ -480,7 +483,7 @@ entry lbl_80341E40
 /* 80341E60 0033EA40  54 00 10 3A */	slwi r0, r0, 2
 /* 80341E64 0033EA44  7C 03 00 2E */	lwzx r0, r3, r0
 /* 80341E68 0033EA48  7C 09 03 A6 */	mtctr r0
-/* 80341E6C 0033EA4C  4E 80 04 20 */	bctr 
+/* 80341E6C 0033EA4C  4E 80 04 20 */	bctr
 entry lbl_80341E70
 /* 80341E70 0033EA50  38 00 00 61 */	li r0, 0x61
 /* 80341E74 0033EA54  3C 80 CC 01 */	lis r4, 0xCC008000@ha
@@ -704,9 +707,11 @@ entry lbl_80342184
 /* 80342184 0033ED64  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 80342188 0033ED68  38 00 00 00 */	li r0, 0
 /* 8034218C 0033ED6C  B0 03 00 02 */	sth r0, 2(r3)
-/* 80342190 0033ED70  4E 80 00 20 */	blr 
+/* 80342190 0033ED70  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#endif
 
 void GXClearGPMetric(void)
 {

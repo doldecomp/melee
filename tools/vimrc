@@ -1,0 +1,11 @@
+
+set colorcolumn=81
+highlight colorcolumn ctermbg=darkgray
+
+augroup project
+  autocmd!
+  autocmd BufRead,BufNewFile *.h,*.c,*.dox set filetype=c | set syntax=c.doxygen
+augroup END
+
+let &path.="src,"
+

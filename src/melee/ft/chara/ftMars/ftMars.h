@@ -1,10 +1,9 @@
 #ifndef _ftmars_h_
 #define _ftmars_h_
 
-#include <global.h>
-#include <dolphin/types.h>
-#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
+#include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef struct _MarsAttributes {
     s32 x0;
@@ -36,11 +35,18 @@ typedef struct _MarsAttributes {
     u8 data_filler_68[0x98 - 0x68];
 } MarsAttributes;
 
+extern ActionState as_table_mars[];
+extern char lbl_803CF820[];
+extern char lbl_803CF82C[];
+extern Fighter_CostumeStrings lbl_803CFA18[];
+extern char lbl_803CF98C[];
+extern Fighter_DemoStrings lbl_803CFA08;
+
 void ftMars_OnDeath(HSD_GObj* gobj);
-void ftMars_OnItemPickup(HSD_GObj* gobj, BOOL arg1);
+void ftMars_OnItemPickup(HSD_GObj* gobj, bool arg1);
 void ftMars_OnItemInvisible(HSD_GObj* gobj);
 void ftMars_OnItemVisible(HSD_GObj* gobj);
-void ftMars_OnItemDrop(HSD_GObj* gobj, BOOL arg1);
+void ftMars_OnItemDrop(HSD_GObj* gobj, bool arg1);
 void ftMars_OnLoadForRoy(Fighter* fp);
 void ftMars_OnLoad(HSD_GObj* gobj);
 void ftMars_LoadSpecialAttrs(HSD_GObj* gobj);
@@ -74,12 +80,12 @@ void func_80136DB4(HSD_GObj* gobj);
 void func_80136E14(HSD_GObj* gobj);
 void func_80136E74(HSD_GObj* gobj);
 void func_80136EAC(HSD_GObj* gobj);
-void lbl_80136EE4(HSD_GObj *gobj);
+void lbl_80136EE4(HSD_GObj* gobj);
 void lbl_80137010(HSD_GObj* gobj);
 void lbl_8013713C(HSD_GObj* gobj);
 void lbl_80137140(HSD_GObj* gobj);
-void lbl_80137144(HSD_GObj *gobj);
-void lbl_80137164(HSD_GObj *gobj);
+void lbl_80137144(HSD_GObj* gobj);
+void lbl_80137164(HSD_GObj* gobj);
 void lbl_80137184(HSD_GObj* gobj);
 void lbl_801371C0(HSD_GObj* arg0);
 void func_801371FC(HSD_GObj* gobj);
@@ -153,5 +159,136 @@ void lbl_80139044(HSD_GObj* gobj);
 void func_80139080(HSD_GObj* gobj);
 void func_801390E0(HSD_GObj* gobj);
 void lbl_80139140(HSD_GObj* gobj);
+void ftMars_OnLoadForRoy(Fighter*);
+void ftMars_LoadSpecialAttrs(HSD_GObj*);
+
+void lbl_80136844(HSD_GObj*);
+void lbl_80136914(HSD_GObj*);
+void lbl_8013691C(HSD_GObj*);
+void lbl_801369A4(HSD_GObj*);
+void lbl_80136ADC(HSD_GObj*);
+void lbl_80136C8C(HSD_GObj*);
+void lbl_80136CFC(HSD_GObj*);
+void lbl_80136D3C(HSD_GObj*);
+void lbl_80136EE4(HSD_GObj*);
+void lbl_8013713C(HSD_GObj*);
+void lbl_80137144(HSD_GObj*);
+void lbl_80137184(HSD_GObj*);
+void lbl_80136EE4(HSD_GObj*);
+void lbl_8013713C(HSD_GObj*);
+void lbl_80137144(HSD_GObj*);
+void lbl_80137184(HSD_GObj*);
+void lbl_801368AC(HSD_GObj*);
+void lbl_80136918(HSD_GObj*);
+void lbl_8013695C(HSD_GObj*);
+void lbl_801369E0(HSD_GObj*);
+void lbl_80136BB4(HSD_GObj*);
+void lbl_80136CC4(HSD_GObj*);
+void lbl_80136D1C(HSD_GObj*);
+void lbl_80136D78(HSD_GObj*);
+void lbl_80137010(HSD_GObj*);
+void lbl_80137140(HSD_GObj*);
+void lbl_80137164(HSD_GObj*);
+void lbl_801371C0(HSD_GObj*);
+void lbl_80137010(HSD_GObj*);
+void lbl_80137140(HSD_GObj*);
+void lbl_80137164(HSD_GObj*);
+void lbl_801371C0(HSD_GObj*);
+void lbl_80137558(HSD_GObj*);
+void lbl_801375B8(HSD_GObj*);
+void lbl_80137618(HSD_GObj*);
+void lbl_8013767C(HSD_GObj*);
+void lbl_801377B0(HSD_GObj*);
+void lbl_80137810(HSD_GObj*);
+void lbl_80137870(HSD_GObj*);
+void lbl_801378D4(HSD_GObj*);
+void lbl_801377B0(HSD_GObj*);
+void lbl_80137810(HSD_GObj*);
+void lbl_80137870(HSD_GObj*);
+void lbl_801378D4(HSD_GObj*);
+void lbl_80137B34(HSD_GObj*);
+void lbl_80137B94(HSD_GObj*);
+void lbl_80137BF4(HSD_GObj*);
+void lbl_80137C50(HSD_GObj*);
+void lbl_80137B34(HSD_GObj*);
+void lbl_80137B94(HSD_GObj*);
+void lbl_80137BF4(HSD_GObj*);
+void lbl_80137C50(HSD_GObj*);
+void lbl_80137B34(HSD_GObj*);
+void lbl_80137B94(HSD_GObj*);
+void lbl_80137BF4(HSD_GObj*);
+void lbl_80137C50(HSD_GObj*);
+void lbl_80137ECC(HSD_GObj*);
+void lbl_80137F2C(HSD_GObj*);
+void lbl_80137F30(HSD_GObj*);
+void lbl_80137F8C(HSD_GObj*);
+void lbl_80137ECC(HSD_GObj*);
+void lbl_80137F2C(HSD_GObj*);
+void lbl_80137F30(HSD_GObj*);
+void lbl_80137F8C(HSD_GObj*);
+void lbl_80137ECC(HSD_GObj*);
+void lbl_80137F2C(HSD_GObj*);
+void lbl_80137F30(HSD_GObj*);
+void lbl_80137F8C(HSD_GObj*);
+void lbl_80137558(HSD_GObj*);
+void lbl_801375B8(HSD_GObj*);
+void lbl_80137618(HSD_GObj*);
+void lbl_8013767C(HSD_GObj*);
+void lbl_801377B0(HSD_GObj*);
+void lbl_80137810(HSD_GObj*);
+void lbl_80137870(HSD_GObj*);
+void lbl_801378D4(HSD_GObj*);
+void lbl_801377B0(HSD_GObj*);
+void lbl_80137810(HSD_GObj*);
+void lbl_80137870(HSD_GObj*);
+void lbl_801378D4(HSD_GObj*);
+void lbl_80137B34(HSD_GObj*);
+void lbl_80137B94(HSD_GObj*);
+void lbl_80137BF4(HSD_GObj*);
+void lbl_80137C50(HSD_GObj*);
+void lbl_80137B34(HSD_GObj*);
+void lbl_80137B94(HSD_GObj*);
+void lbl_80137BF4(HSD_GObj*);
+void lbl_80137C50(HSD_GObj*);
+void lbl_80137B34(HSD_GObj*);
+void lbl_80137B94(HSD_GObj*);
+void lbl_80137BF4(HSD_GObj*);
+void lbl_80137C50(HSD_GObj*);
+void lbl_80137ECC(HSD_GObj*);
+void lbl_80137F2C(HSD_GObj*);
+void lbl_80137F30(HSD_GObj*);
+void lbl_80137F8C(HSD_GObj*);
+void lbl_80137ECC(HSD_GObj*);
+void lbl_80137F2C(HSD_GObj*);
+void lbl_80137F30(HSD_GObj*);
+void lbl_80137F8C(HSD_GObj*);
+void lbl_80137ECC(HSD_GObj*);
+void lbl_80137F2C(HSD_GObj*);
+void lbl_80137F30(HSD_GObj*);
+void lbl_80137F8C(HSD_GObj*);
+void lbl_801382E8(HSD_GObj*);
+void lbl_801383A8(HSD_GObj*);
+void lbl_80138638(HSD_GObj*);
+void lbl_801388B4(HSD_GObj*);
+void lbl_80138348(HSD_GObj*);
+void lbl_801384F0(HSD_GObj*);
+void lbl_8013873C(HSD_GObj*);
+void lbl_80138940(HSD_GObj*);
+void lbl_80138AA8(HSD_GObj*);
+void lbl_80138C20(HSD_GObj*);
+void lbl_80138C28(HSD_GObj*);
+void lbl_80138CC0(HSD_GObj*);
+void lbl_80138E68(HSD_GObj*);
+void lbl_80138FC0(HSD_GObj*);
+void lbl_80138FC8(HSD_GObj*);
+void lbl_80139008(HSD_GObj*);
+void lbl_80138B64(HSD_GObj*);
+void lbl_80138C24(HSD_GObj*);
+void lbl_80138C5C(HSD_GObj*);
+void lbl_80138CFC(HSD_GObj*);
+void lbl_80138F14(HSD_GObj*);
+void lbl_80138FC4(HSD_GObj*);
+void lbl_80138FE8(HSD_GObj*);
+void lbl_80139044(HSD_GObj*);
 
 #endif

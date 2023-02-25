@@ -1,17 +1,23 @@
+#include <dolphin/gx/GXInit.h>
+
 #include <dolphin/base/PPCArch.h>
-#include <dolphin/gx/GXAttr.h>
-#include <dolphin/gx/GXGeometry.h>
-#include <dolphin/gx/GXLight.h>
-#include <dolphin/gx/GXTransform.h>
-#include <dolphin/gx/GX_unknown_001.h>
+#include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXBump.h>
 #include <dolphin/gx/__GXFifo.h>
-#include <dolphin/gx/__GXFrameBuf.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GXMisc.h>
-#include <dolphin/gx/__GXTexture.h>
-#include <dolphin/gx/__GX_unknown_001.h>
+#include <dolphin/gx/GXAttr.h>
+#include <dolphin/gx/GXBump.h>
+#include <dolphin/gx/GXFrameBuf.h>
+#include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXLight.h>
+#include <dolphin/gx/GXPerf.h>
+#include <dolphin/gx/GXPixel.h>
+#include <dolphin/gx/GXTev.h>
+#include <dolphin/gx/GXTexture.h>
+#include <dolphin/gx/GXTransform.h>
 #include <dolphin/vi/vi.h>
+#include <placeholder.h>
 
 GXContext __GXContext;
 GXContexts __GXContexts = { &__GXContext, NULL };
@@ -30,9 +36,10 @@ f32 const lbl_804DE210 = 0.0F;
 f32 const lbl_804DE214 = 0.10000000149011612F;
 f64 const lbl_804DE218 = 4503599627370496.0L;
 
-// // https://decomp.me/scratch/wdCL6 // 2039 (34.23%)
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t __GXDefaultTexRegionCallback()
+asm void __GXDefaultTexRegionCallback(void)
 { // clang-format off
     nofralloc
 /* 8033A6E0 003372C0  7C 08 02 A6 */	mflr r0
@@ -67,33 +74,43 @@ lbl_8033A74C:
 /* 8033A74C 0033732C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8033A750 00337330  38 21 00 08 */	addi r1, r1, 8
 /* 8033A754 00337334  7C 08 03 A6 */	mtlr r0
-/* 8033A758 00337338  4E 80 00 20 */	blr 
+/* 8033A758 00337338  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/vLLix // 2270 (33.24%)
+#else
+
+void __GXDefaultTexRegionCallback(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MUST_MATCH
 #pragma push
-asm unk_t __GXDefaultTlutRegionCallback(){ // clang-format off
-    nofralloc
-/* 8033A75C 0033733C  28 03 00 14 */	cmplwi r3, 0x14
-/* 8033A760 00337340  41 80 00 0C */	blt lbl_8033A76C
-/* 8033A764 00337344  38 60 00 00 */	li r3, 0
-/* 8033A768 00337348  48 00 00 14 */	b lbl_8033A77C
-lbl_8033A76C:
-/* 8033A76C 0033734C  54 63 20 36 */	slwi r3, r3, 4
-/* 8033A770 00337350  80 0D A5 08 */	lwz r0, __GXContexts(r13)
-/* 8033A774 00337354  38 63 02 D0 */	addi r3, r3, 0x2d0
-/* 8033A778 00337358  7C 60 1A 14 */	add r3, r0, r3
-lbl_8033A77C:
-/* 8033A77C 0033735C  4E 80 00 20 */	blr 
-} // clang-format on
+#pragma peephole off
+#endif
+
+unk_t __GXDefaultTlutRegionCallback(u32 arg0)
+{
+    if (arg0 >= 0x14) {
+        return NULL;
+    } else {
+        return &__GXContexts.main->x2D0[arg0];
+    }
+}
+
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
-unk_t __GXInitGX();
+#ifdef MWERKS_GEKKO
 
-// https://decomp.me/scratch/gAywS // 49600 (0%)
+static void __GXInitGX(void);
+
 #pragma push
-asm unk_t GXInit()
+asm GXFifoObj* GXInit(GXFifoObj* fifo, u32 size)
 { // clang-format off
     nofralloc
 /* 8033A780 00337360  7C 08 02 A6 */	mflr r0
@@ -612,13 +629,24 @@ lbl_8033AE6C:
 /* 8033AF30 00337B10  80 01 00 4C */	lwz r0, 0x4c(r1)
 /* 8033AF34 00337B14  38 21 00 48 */	addi r1, r1, 0x48
 /* 8033AF38 00337B18  7C 08 03 A6 */	mtlr r0
-/* 8033AF3C 00337B1C  4E 80 00 20 */	blr 
+/* 8033AF3C 00337B1C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+GXFifoObj* GXInit(GXFifoObj* fifo, u32 size)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 // https://decomp.me/scratch/zVpOX // 7812 (85.26%)
 #pragma push
-asm unk_t __GXInitGX()
+asm void __GXInitGX(void)
 { // clang-format off
     nofralloc
 /* 8033AF40 00337B20  7C 08 02 A6 */	mflr r0
@@ -1164,6 +1192,15 @@ lbl_8033B674:
 /* 8033B778 00338358  83 C1 00 70 */	lwz r30, 0x70(r1)
 /* 8033B77C 0033835C  7C 08 03 A6 */	mtlr r0
 /* 8033B780 00338360  38 21 00 78 */	addi r1, r1, 0x78
-/* 8033B784 00338364  4E 80 00 20 */	blr 
+/* 8033B784 00338364  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __GXInitGX(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

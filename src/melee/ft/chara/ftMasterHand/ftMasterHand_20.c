@@ -1,19 +1,23 @@
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_20.h>
+
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/ftbosslib.h>
 
 // 80153D28 150908
-void lbl_80153D28(HSD_GObj* gobj) {
+void lbl_80153D28(HSD_GObj* gobj)
+{
     return;
 }
 
-
-
 // 80153D2C 15090C
 // https://decomp.me/scratch/RXqaJ
-inline HSD_JObj* get_jobj(HSD_GObj* gobj) {
+inline HSD_JObj* get_jobj(HSD_GObj* gobj)
+{
     return gobj->hsd_obj;
 }
 
-void lbl_80153D2C(HSD_GObj* gobj) {
+void lbl_80153D2C(HSD_GObj* gobj)
+{
     HSD_JObj* jobj;
     Fighter* fp;
     MasterHandAttributes* attr;
@@ -58,11 +62,10 @@ void lbl_80153D2C(HSD_GObj* gobj) {
     fp->x2200_ftcmd_var0 = 1;
 }
 
-
-
 // 80153F8C 150B6C
 // https://decomp.me/scratch/w6kte
-void lbl_80153F8C(HSD_GObj* gobj_arg) {
+void lbl_80153F8C(HSD_GObj* gobj_arg)
+{
     HSD_GObj* gobj = gobj_arg;
     Fighter* fp;
     s32 unk;
@@ -85,27 +88,25 @@ void lbl_80153F8C(HSD_GObj* gobj_arg) {
         }
         HSD_JObjSetScale(jobj, &scale);
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        ((Fighter*)gobj->user_data)->x80_self_vel.x = 0.0f;
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ((Fighter*) gobj->user_data)->x80_self_vel.x = 0.0f;
         func_80151018(gobj);
     }
 }
 
-
-
 // 80154114 150CF4
-void lbl_80154114(HSD_GObj* arg0) {
+void lbl_80154114(HSD_GObj* arg0)
+{
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
 
-
-
 // 80154158 150D38
 // https://decomp.me/scratch/rgPDD
-void lbl_80154158(HSD_GObj* gobj) {
+void lbl_80154158(HSD_GObj* gobj)
+{
     Fighter* r3_fp;
     MasterHandAttributes* r4_attributes;
     u32 unk[2];

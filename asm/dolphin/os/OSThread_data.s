@@ -59,7 +59,7 @@ lbl_80402420:
     .balign 8
 .global lbl_804A7FB8
 lbl_804A7FB8:
-	.skip 0x9E8
+    .skip 0x9E8
 
 .section .sdata
     .balign 8
@@ -70,12 +70,12 @@ lbl_804D5C28:
 
 .section .sbss
     .balign 8
-.global lbl_804D73D8
-lbl_804D73D8:
-	.skip 0x4
+.global RunQueueBits
+RunQueueBits:
+    .skip 0x4
 .global lbl_804D73DC
 lbl_804D73DC:
-	.skip 0x4
-.global lbl_804D73E0
-lbl_804D73E0:
-	.skip 0x8
+    .skip 0x4
+.global Reschedule
+Reschedule:
+    .skip 0x8

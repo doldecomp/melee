@@ -1,10 +1,10 @@
 #ifndef _ftmasterhand_h_
 #define _ftmasterhand_h_
 
-#include <global.h>
-#include <dolphin/types.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/chara/forward.h>
 #include <melee/ft/fighter.h>
+#include <Runtime/platform.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef struct _MasterHandAttributes {
     s32 x0;
@@ -89,11 +89,17 @@ typedef struct _MasterHandAttributes {
     f32 x178;
 } MasterHandAttributes;
 
+extern ActionState as_table_masterhand[];
+extern char lbl_803D4070[];
+extern char lbl_803D407C[];
+extern Fighter_CostumeStrings lbl_803D40C4[];
+extern char lbl_803D40B8[];
+
 // ftMasterHand_1
 void ftMasterhand_OnDeath(HSD_GObj* gobj);
 void ftMasterhand_OnLoad(HSD_GObj* gobj);
 
-// ftMasterHand_2
+// ftMasterHand_02
 void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj);
 void func_8014FE10(HSD_GObj* gobj);
 void func_8014FE58(HSD_GObj* gobj);
@@ -107,7 +113,7 @@ void lbl_80150870(HSD_GObj* gobj);
 void lbl_80150890(HSD_GObj* gobj);
 void func_80150894(HSD_GObj* gobj);
 
-// ftMasterHand_3
+// ftMasterHand_03
 void func_80150C8C(HSD_GObj* gobj);
 void func_80150D28(HSD_GObj* gobj);
 void func_80150DC4(HSD_GObj* gobj, void*, Vec3*);
@@ -122,17 +128,18 @@ void lbl_80151168(HSD_GObj* gobj);
 void lbl_801511B0(HSD_GObj* gobj);
 void lbl_801511F4(HSD_GObj* gobj);
 void lbl_801511F8(HSD_GObj* gobj);
-void lbl_801511FC(HSD_GObj* gobj);
 
-// ftMasterHand_5
-u32 lbl_80151428(Vec* vec);
+// ftMasterHand_05
+
+/// Probably isCrazyHandLoaded func.
+u32 lbl_80151428(Vec3* vec);
 
 // ftMasterHand_14
 void lbl_80152E28(HSD_GObj* gobj);
 
 // ftMasterHand_15
 void lbl_801535B0(HSD_GObj* gobj);
-void func_8015364C(struct _HSD_GObj *, struct _HSD_JObj *, f32, f32);
+void func_8015364C(HSD_GObj*, HSD_JObj*, f32, f32);
 
 // ftMasterHand_21
 void lbl_801541C4(HSD_GObj* gobj);

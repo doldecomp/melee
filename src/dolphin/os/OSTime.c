@@ -1,219 +1,128 @@
-#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 
-#pragma push
-asm s64 OSGetTime(void)
-{ // clang-format off
-    nofralloc
-/* 8034C3F0 00348FD0  7C 6D 42 E6 */	mftbu r3
-/* 8034C3F4 00348FD4  7C 8C 42 E6 */	mftb r4, 0x10c
-/* 8034C3F8 00348FD8  7C AD 42 E6 */	mftbu r5
-/* 8034C3FC 00348FDC  7C 03 28 00 */	cmpw r3, r5
-/* 8034C400 00348FE0  40 82 FF F0 */	bne OSGetTime
-/* 8034C404 00348FE4  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+#include <dolphin/os/OSInterrupt.h>
+#include <placeholder.h>
 
-#pragma push
-asm OSTick OSGetTick(void)
-{ // clang-format off
-    nofralloc
-/* 8034C408 00348FE8  7C 6C 42 E6 */	mftb r3, 0x10c
-/* 8034C40C 00348FEC  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+#ifdef MWERKS_GEKKO
 
-#pragma push
-asm unk_t __OSGetSystemTime()
-{ // clang-format off
-    nofralloc
-/* 8034C410 00348FF0  7C 08 02 A6 */	mflr r0
-/* 8034C414 00348FF4  90 01 00 04 */	stw r0, 4(r1)
-/* 8034C418 00348FF8  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8034C41C 00348FFC  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8034C420 00349000  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8034C424 00349004  93 A1 00 14 */	stw r29, 0x14(r1)
-/* 8034C428 00349008  4B FF AF 3D */	bl OSDisableInterrupts
-/* 8034C42C 0034900C  7C 7F 1B 78 */	mr r31, r3
-/* 8034C430 00349010  4B FF FF C1 */	bl OSGetTime
-/* 8034C434 00349014  3C C0 80 00 */	lis r6, 0x800030DC@ha
-/* 8034C438 00349018  80 A6 30 DC */	lwz r5, 0x800030DC@l(r6)
-/* 8034C43C 0034901C  80 06 30 D8 */	lwz r0, 0x30d8(r6)
-/* 8034C440 00349020  7F A5 20 14 */	addc r29, r5, r4
-/* 8034C444 00349024  7F C0 19 14 */	adde r30, r0, r3
-/* 8034C448 00349028  7F E3 FB 78 */	mr r3, r31
-/* 8034C44C 0034902C  4B FF AF 41 */	bl OSRestoreInterrupts
-/* 8034C450 00349030  7F A4 EB 78 */	mr r4, r29
-/* 8034C454 00349034  7F C3 F3 78 */	mr r3, r30
-/* 8034C458 00349038  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8034C45C 0034903C  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8034C460 00349040  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 8034C464 00349044  7C 08 03 A6 */	mtlr r0
-/* 8034C468 00349048  83 A1 00 14 */	lwz r29, 0x14(r1)
-/* 8034C46C 0034904C  38 21 00 20 */	addi r1, r1, 0x20
-/* 8034C470 00349050  4E 80 00 20 */	blr 
+asm OSTime OSGetTime(void){ // clang-format off
+    mftbu r3
+    mftb r4, 0x10c
+    mftbu r5
+    cmpw r3, r5
+    bne OSGetTime
 } // clang-format on
-#pragma pop
 
-#pragma push
-asm unk_t __OSTimeToSystemTime()
-{ // clang-format off
-    nofralloc
-/* 8034C474 00349054  7C 08 02 A6 */	mflr r0
-/* 8034C478 00349058  90 01 00 04 */	stw r0, 4(r1)
-/* 8034C47C 0034905C  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 8034C480 00349060  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 8034C484 00349064  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 8034C488 00349068  7C 7F 1B 78 */	mr r31, r3
-/* 8034C48C 0034906C  7C 9E 23 78 */	mr r30, r4
-/* 8034C490 00349070  4B FF AE D5 */	bl OSDisableInterrupts
-/* 8034C494 00349074  3C A0 80 00 */	lis r5, 0x800030DC@ha
-/* 8034C498 00349078  80 85 30 DC */	lwz r4, 0x800030DC@l(r5)
-/* 8034C49C 0034907C  80 05 30 D8 */	lwz r0, 0x30d8(r5)
-/* 8034C4A0 00349080  7F C4 F0 14 */	addc r30, r4, r30
-/* 8034C4A4 00349084  7F E0 F9 14 */	adde r31, r0, r31
-/* 8034C4A8 00349088  4B FF AE E5 */	bl OSRestoreInterrupts
-/* 8034C4AC 0034908C  7F C4 F3 78 */	mr r4, r30
-/* 8034C4B0 00349090  7F E3 FB 78 */	mr r3, r31
-/* 8034C4B4 00349094  80 01 00 24 */	lwz r0, 0x24(r1)
-/* 8034C4B8 00349098  83 E1 00 1C */	lwz r31, 0x1c(r1)
-/* 8034C4BC 0034909C  83 C1 00 18 */	lwz r30, 0x18(r1)
-/* 8034C4C0 003490A0  7C 08 03 A6 */	mtlr r0
-/* 8034C4C4 003490A4  38 21 00 20 */	addi r1, r1, 0x20
-/* 8034C4C8 003490A8  4E 80 00 20 */	blr 
+#else
+
+OSTime OSGetTime(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
+asm OSTick OSGetTick(void){ // clang-format off
+    mftb r3, 0x10c
 } // clang-format on
-#pragma pop
 
-extern unk_t lbl_80402C30;
-extern unk_t lbl_80402C60;
+#else
 
-#pragma push
-asm unk_t GetDates()
-{ // clang-format off
-    nofralloc
-/* 8034C4CC 003490AC  3C A0 92 49 */	lis r5, 0x92492493@ha
-/* 8034C4D0 003490B0  38 05 24 93 */	addi r0, r5, 0x92492493@l
-/* 8034C4D4 003490B4  38 E3 00 06 */	addi r7, r3, 6
-/* 8034C4D8 003490B8  7C C0 38 96 */	mulhw r6, r0, r7
-/* 8034C4DC 003490BC  3C A0 B3 8D */	lis r5, 0xB38CF9B1@ha
-/* 8034C4E0 003490C0  38 05 F9 B1 */	addi r0, r5, 0xB38CF9B1@l
-/* 8034C4E4 003490C4  7C 00 18 96 */	mulhw r0, r0, r3
-/* 8034C4E8 003490C8  7C A6 3A 14 */	add r5, r6, r7
-/* 8034C4EC 003490CC  7C A5 16 70 */	srawi r5, r5, 2
-/* 8034C4F0 003490D0  54 A6 0F FE */	srwi r6, r5, 0x1f
-/* 8034C4F4 003490D4  7C A5 32 14 */	add r5, r5, r6
-/* 8034C4F8 003490D8  7C 00 1A 14 */	add r0, r0, r3
-/* 8034C4FC 003490DC  1C C5 00 07 */	mulli r6, r5, 7
-/* 8034C500 003490E0  7C 00 46 70 */	srawi r0, r0, 8
-/* 8034C504 003490E4  54 05 0F FE */	srwi r5, r0, 0x1f
-/* 8034C508 003490E8  7C A0 2A 14 */	add r5, r0, r5
-/* 8034C50C 003490EC  7C 06 38 50 */	subf r0, r6, r7
-/* 8034C510 003490F0  1D 65 01 6D */	mulli r11, r5, 0x16d
-/* 8034C514 003490F4  90 04 00 18 */	stw r0, 0x18(r4)
-/* 8034C518 003490F8  48 00 00 04 */	b lbl_8034C51C
-lbl_8034C51C:
-/* 8034C51C 003490FC  3C C0 51 EC */	lis r6, 0x51EB851F@ha
-/* 8034C520 00349100  39 46 85 1F */	addi r10, r6, 0x51EB851F@l
-/* 8034C524 00349104  48 00 00 04 */	b lbl_8034C528
-lbl_8034C528:
-/* 8034C528 00349108  48 00 00 0C */	b lbl_8034C534
-lbl_8034C52C:
-/* 8034C52C 0034910C  39 6B FE 93 */	addi r11, r11, -365
-/* 8034C530 00349110  38 A5 FF FF */	addi r5, r5, -1
-lbl_8034C534:
-/* 8034C534 00349114  2C 05 00 01 */	cmpwi r5, 1
-/* 8034C538 00349118  40 80 00 0C */	bge lbl_8034C544
-/* 8034C53C 0034911C  38 00 00 00 */	li r0, 0
-/* 8034C540 00349120  48 00 00 38 */	b lbl_8034C578
-lbl_8034C544:
-/* 8034C544 00349124  38 05 FF FF */	addi r0, r5, -1
-/* 8034C548 00349128  7C 0A 00 96 */	mulhw r0, r10, r0
-/* 8034C54C 0034912C  7C 08 3E 70 */	srawi r8, r0, 7
-/* 8034C550 00349130  7C 06 2E 70 */	srawi r6, r0, 5
-/* 8034C554 00349134  38 05 00 03 */	addi r0, r5, 3
-/* 8034C558 00349138  54 C7 0F FE */	srwi r7, r6, 0x1f
-/* 8034C55C 0034913C  7C 00 16 70 */	srawi r0, r0, 2
-/* 8034C560 00349140  55 09 0F FE */	srwi r9, r8, 0x1f
-/* 8034C564 00349144  7C C6 3A 14 */	add r6, r6, r7
-/* 8034C568 00349148  7C 00 01 94 */	addze r0, r0
-/* 8034C56C 0034914C  7C E8 4A 14 */	add r7, r8, r9
-/* 8034C570 00349150  7C 06 00 50 */	subf r0, r6, r0
-/* 8034C574 00349154  7C 07 02 14 */	add r0, r7, r0
-lbl_8034C578:
-/* 8034C578 00349158  7C 0B 02 14 */	add r0, r11, r0
-/* 8034C57C 0034915C  7C 03 00 00 */	cmpw r3, r0
-/* 8034C580 00349160  41 80 FF AC */	blt lbl_8034C52C
-/* 8034C584 00349164  7C A6 16 70 */	srawi r6, r5, 2
-/* 8034C588 00349168  90 A4 00 14 */	stw r5, 0x14(r4)
-/* 8034C58C 0034916C  7C C6 01 94 */	addze r6, r6
-/* 8034C590 00349170  54 C6 10 3A */	slwi r6, r6, 2
-/* 8034C594 00349174  7C C6 28 10 */	subfc r6, r6, r5
-/* 8034C598 00349178  7C 00 18 50 */	subf r0, r0, r3
-/* 8034C59C 0034917C  2C 06 00 00 */	cmpwi r6, 0
-/* 8034C5A0 00349180  90 04 00 1C */	stw r0, 0x1c(r4)
-/* 8034C5A4 00349184  38 E0 00 01 */	li r7, 1
-/* 8034C5A8 00349188  39 00 00 00 */	li r8, 0
-/* 8034C5AC 0034918C  40 82 00 30 */	bne lbl_8034C5DC
-/* 8034C5B0 00349190  3C 60 51 EC */	lis r3, 0x51EB851F@ha
-/* 8034C5B4 00349194  38 63 85 1F */	addi r3, r3, 0x51EB851F@l
-/* 8034C5B8 00349198  7C 63 28 96 */	mulhw r3, r3, r5
-/* 8034C5BC 0034919C  7C 63 2E 70 */	srawi r3, r3, 5
-/* 8034C5C0 003491A0  54 66 0F FE */	srwi r6, r3, 0x1f
-/* 8034C5C4 003491A4  7C 63 32 14 */	add r3, r3, r6
-/* 8034C5C8 003491A8  1C 63 00 64 */	mulli r3, r3, 0x64
-/* 8034C5CC 003491AC  7C 63 28 50 */	subf r3, r3, r5
-/* 8034C5D0 003491B0  2C 03 00 00 */	cmpwi r3, 0
-/* 8034C5D4 003491B4  41 82 00 08 */	beq lbl_8034C5DC
-/* 8034C5D8 003491B8  7C E8 3B 78 */	mr r8, r7
-lbl_8034C5DC:
-/* 8034C5DC 003491BC  2C 08 00 00 */	cmpwi r8, 0
-/* 8034C5E0 003491C0  40 82 00 30 */	bne lbl_8034C610
-/* 8034C5E4 003491C4  3C 60 51 EC */	lis r3, 0x51EB851F@ha
-/* 8034C5E8 003491C8  38 63 85 1F */	addi r3, r3, 0x51EB851F@l
-/* 8034C5EC 003491CC  7C 63 28 96 */	mulhw r3, r3, r5
-/* 8034C5F0 003491D0  7C 63 3E 70 */	srawi r3, r3, 7
-/* 8034C5F4 003491D4  54 66 0F FE */	srwi r6, r3, 0x1f
-/* 8034C5F8 003491D8  7C 63 32 14 */	add r3, r3, r6
-/* 8034C5FC 003491DC  1C 63 01 90 */	mulli r3, r3, 0x190
-/* 8034C600 003491E0  7C 63 28 50 */	subf r3, r3, r5
-/* 8034C604 003491E4  2C 03 00 00 */	cmpwi r3, 0
-/* 8034C608 003491E8  41 82 00 08 */	beq lbl_8034C610
-/* 8034C60C 003491EC  38 E0 00 00 */	li r7, 0
-lbl_8034C610:
-/* 8034C610 003491F0  2C 07 00 00 */	cmpwi r7, 0
-/* 8034C614 003491F4  41 82 00 10 */	beq lbl_8034C624
-/* 8034C618 003491F8  3C 60 80 40 */	lis r3, lbl_80402C60@ha
-/* 8034C61C 003491FC  38 C3 2C 60 */	addi r6, r3, lbl_80402C60@l
-/* 8034C620 00349200  48 00 00 0C */	b lbl_8034C62C
-lbl_8034C624:
-/* 8034C624 00349204  3C 60 80 40 */	lis r3, lbl_80402C30@ha
-/* 8034C628 00349208  38 C3 2C 30 */	addi r6, r3, lbl_80402C30@l
-lbl_8034C62C:
-/* 8034C62C 0034920C  38 E0 00 0C */	li r7, 0xc
-/* 8034C630 00349210  38 60 00 30 */	li r3, 0x30
-/* 8034C634 00349214  48 00 00 04 */	b lbl_8034C638
-lbl_8034C638:
-/* 8034C638 00349218  48 00 00 04 */	b lbl_8034C63C
-lbl_8034C63C:
-/* 8034C63C 0034921C  38 63 FF FC */	addi r3, r3, -4
-/* 8034C640 00349220  7C A6 18 2E */	lwzx r5, r6, r3
-/* 8034C644 00349224  38 E7 FF FF */	addi r7, r7, -1
-/* 8034C648 00349228  7C 00 28 00 */	cmpw r0, r5
-/* 8034C64C 0034922C  41 80 FF F0 */	blt lbl_8034C63C
-/* 8034C650 00349230  90 E4 00 10 */	stw r7, 0x10(r4)
-/* 8034C654 00349234  7C 66 18 2E */	lwzx r3, r6, r3
-/* 8034C658 00349238  7C 63 00 50 */	subf r3, r3, r0
-/* 8034C65C 0034923C  38 03 00 01 */	addi r0, r3, 1
-/* 8034C660 00349240  90 04 00 0C */	stw r0, 0xc(r4)
-/* 8034C664 00349244  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+OSTick OSGetTick(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+extern volatile OSTime OS_SYSTEM_TIME AT_ADDRESS(0x800030D8);
+
+OSTime __OSGetSystemTime(void)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
+    bool intr = OSDisableInterrupts();
+    OSTime time = OSGetTime() + OS_SYSTEM_TIME;
+    OSRestoreInterrupts(intr);
+    return time;
+}
+
+OSTime __OSTimeToSystemTime(s64 time)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
+    bool intr = OSDisableInterrupts();
+    OSTime sysTime = OS_SYSTEM_TIME + time;
+    OSRestoreInterrupts(intr);
+    return sysTime;
+}
+
+#define OS_TIME_MONTH_MAX 12
+#define OS_TIME_WEEK_DAY_MAX 7
+#define OS_TIME_YEAR_DAY_MAX 365
+
+static s32 YearDays[12] = { 0,   31,  59,  90,  120, 151,
+                            181, 212, 243, 273, 304, 334 };
+static s32 LeapYearDays[12] = { 0,   31,  60,  91,  121, 152,
+                                182, 213, 244, 274, 305, 335 };
+
+static bool IsLeapYear(s32 year)
+{
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+static s32 GetLeapDays(s32 year)
+{
+    if (year < 1) {
+        return 0;
+    }
+    return (year + 3) / 4 - (year - 1) / 100 + (year - 1) / 400;
+}
+
+static void GetDates(s32 days, OSCalendarTime* cal)
+{
+    s32 year;
+    s32 totalDays;
+    s32* p_days;
+    s32 month;
+
+    cal->wday = (days + 6) % OS_TIME_WEEK_DAY_MAX;
+
+    for (year = days / OS_TIME_YEAR_DAY_MAX;
+         days < (totalDays = year * OS_TIME_YEAR_DAY_MAX + GetLeapDays(year));
+         year--)
+    {
+        ;
+    }
+    days -= totalDays;
+    cal->year = year;
+    cal->yday = days;
+
+    p_days = IsLeapYear(year) ? LeapYearDays : YearDays;
+    month = OS_TIME_MONTH_MAX;
+
+    while (days < p_days[--month])
+        continue;
+
+    cal->mon = month;
+    cal->mday = days - p_days[month] + 1;
+}
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t __div2i();
 extern unk_t __mod2i();
 
 #pragma push
-asm void OSTicksToCalendarTime(unsigned long long ticks, OSCalendarTime* td)
+asm void OSTicksToCalendarTime(u64 ticks, OSCalendarTime* td)
 { // clang-format off
     nofralloc
 /* 8034C668 00349248  7C 08 02 A6 */	mflr r0
@@ -346,6 +255,15 @@ lbl_8034C7E8:
 /* 8034C85C 0034943C  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8034C860 00349440  38 21 00 38 */	addi r1, r1, 0x38
 /* 8034C864 00349444  7C 08 03 A6 */	mtlr r0
-/* 8034C868 00349448  4E 80 00 20 */	blr 
+/* 8034C868 00349448  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void OSTicksToCalendarTime(u64 ticks, OSCalendarTime* td)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

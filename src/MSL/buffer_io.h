@@ -1,9 +1,7 @@
 #ifndef _BUFFER_IO_H_
 #define _BUFFER_IO_H_
 
-
-#include <dolphin/types.h>
-
+#include <Runtime/platform.h>
 
 typedef struct _BufferIoUnkFlagStruct {
     /* 0x00 */ struct {
@@ -34,10 +32,13 @@ typedef struct _BufferIoUnkStruct {
     /* 0x2C */ s32 x2C_filler;
     /* 0x30 */ s32 x30;
     /* 0x34 */ s32 x34_filler[2];
-    /* 0x3C */ s32 (*x3C) (s32 x3C_arg0, s32 x3C_arg1, s32* x3C_arg2, s32 x3C_arg3);
+    /* 0x3C */ s32 (*x3C)(s32 x3C_arg0, s32 x3C_arg1, s32* x3C_arg2,
+                          s32 x3C_arg3);
     /* 0x40 */ s32 x40_filler;
     /* 0x44 */ s32 x44;
 } BufferIoUnkStruct;
 
+void __prep_buffer(BufferIoUnkStruct* arg0);
+s32 __flush_buffer(BufferIoUnkStruct* arg0, s32* arg1);
 
 #endif

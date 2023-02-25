@@ -1,9 +1,8 @@
 #ifndef MELEE_IF_IFSTATUS_H
 #define MELEE_IF_IFSTATUS_H
 
-#include <dolphin/types.h>
-#include <global.h>
 #include <melee/pl/player.h>
+#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -154,7 +153,8 @@ typedef struct _Placeholder_8016AE38_flags_2 {
     u8 bot5 : 5;
 } Placeholder_8016AE38_flags_2;
 
-// When we figure out what that function is, replace this type with an actual type
+// When we figure out what that function is, replace this type with an actual
+// type
 typedef struct _Placeholder_8016AE38_ret_val {
     u32 unk0;
     u32 unk4;
@@ -180,7 +180,8 @@ typedef struct _Placeholder_8016AE50_flags {
     u8 unk1 : 1;
 } Placeholder_8016AE50_flags;
 
-// When we figure out what that function is, replace this type with an actual type
+// When we figure out what that function is, replace this type with an actual
+// type
 typedef struct _Placeholder_8016AE50_ret_val {
     u8 unk0;
     u8 unk1;
@@ -191,8 +192,8 @@ typedef struct _Placeholder_8016AE50_ret_val {
 // takes HSD obj* ?
 // extern void func_80391CAC(void*);
 extern void func_802FB6AC(s32);
-extern Placeholder_8016AE38_ret_val* func_8016AE38();
-extern Placeholder_8016AE50_ret_val* func_8016AE50();
+extern Placeholder_8016AE38_ret_val* func_8016AE38(void);
+extern Placeholder_8016AE50_ret_val* func_8016AE50(void);
 extern void func_8016B8D4(s32, s32);
 extern void func_802F7C30(s32);
 extern void func_802F7AF8(s32);
@@ -215,10 +216,23 @@ void func_802F69C0(s32, s32);
 void func_802F6AF8(s32);
 void func_802F6C04(s32);
 void func_802F6D10(s32);
-void func_802F6E1C(s32);
+void func_802F6E1C(int slot);
 void func_802F6E3C(s32);
 void func_802F7220(void);
 
 extern HudIndex lbl_804A10C8; // global array of HUD info
+
+void func_802F5B48(void);
+void lbl_802F5DE0(HSD_GObj* player, s32 arg1);
+void lbl_802F5E50(void);
+void func_802F5EC0(void);
+void func_802F61FC(void);
+void func_802F66A4(void);
+void func_802F4B84(void);
+void func_802F6EA4(void);
+void func_802F7034(void);
+void func_802F7134(void);
+void func_802F4EDC(void);
+void func_802F491C(void);
 
 #endif

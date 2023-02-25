@@ -1,14 +1,19 @@
+#include <dolphin/os/OSThread.h>
+
+#include <dolphin/os/os.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMutex.h>
-#include <dolphin/os/OSThread.h>
-#include <dolphin/os/os.h>
+#include <placeholder.h>
+
+extern s32 Reschedule;
+extern u32 RunQueueBits;
+
+#ifdef MWERKS_GEKKO
 
 extern unk_t _stack_end;
 extern unk_t _db_stack_end;
 extern unk_t lbl_804A7FB8;
-extern unk_t lbl_804D73D8;
 extern unk_t lbl_804D73DC;
-extern unk_t lbl_804D73E0;
 
 #pragma push
 asm void __OSThreadInit(void)
@@ -57,7 +62,7 @@ asm void __OSThreadInit(void)
 /* 8034ACA4 00347884  57 40 18 38 */	slwi r0, r26, 3
 /* 8034ACA8 00347888  90 83 00 00 */	stw r4, 0(r3)
 /* 8034ACAC 0034788C  7F 7C 02 14 */	add r27, r28, r0
-/* 8034ACB0 00347890  93 AD BD 38 */	stw r29, lbl_804D73D8(r13)
+/* 8034ACB0 00347890  93 AD BD 38 */	stw r29, RunQueueBits(r13)
 /* 8034ACB4 00347894  93 FE 00 E4 */	stw r31, 0xe4(r30)
 /* 8034ACB8 00347898  93 AD BD 3C */	stw r29, lbl_804D73DC(r13)
 lbl_8034ACBC:
@@ -85,148 +90,100 @@ lbl_8034ACFC:
 /* 8034AD08 003478E8  93 DF 02 FC */	stw r30, 0x2fc(r31)
 /* 8034AD0C 003478EC  93 E4 00 00 */	stw r31, 0(r4)
 /* 8034AD10 003478F0  4B FF A5 45 */	bl OSClearContext
-/* 8034AD14 003478F4  93 CD BD 40 */	stw r30, lbl_804D73E0(r13)
+/* 8034AD14 003478F4  93 CD BD 40 */	stw r30, Reschedule(r13)
 /* 8034AD18 003478F8  BB 41 00 08 */	lmw r26, 8(r1)
 /* 8034AD1C 003478FC  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8034AD20 00347900  38 21 00 20 */	addi r1, r1, 0x20
 /* 8034AD24 00347904  7C 08 03 A6 */	mtlr r0
-/* 8034AD28 00347908  4E 80 00 20 */	blr 
+/* 8034AD28 00347908  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-#pragma push
-asm void OSInitThreadQueue(OSThreadQueue*)
-{ // clang-format off
-    nofralloc
-/* 8034AD2C 0034790C  38 00 00 00 */	li r0, 0
-/* 8034AD30 00347910  90 03 00 04 */	stw r0, 4(r3)
-/* 8034AD34 00347914  90 03 00 00 */	stw r0, 0(r3)
-/* 8034AD38 00347918  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+#else
 
-// https://decomp.me/scratch/EPwIs
-#pragma push
-asm OSThread* OSGetCurrentThread(void)
-{ // clang-format off
-    nofralloc
-/* 8034AD3C 0034791C  3C 60 80 00 */	lis r3, 0x800000E4@ha
-/* 8034AD40 00347920  80 63 00 E4 */	lwz r3, 0x800000E4@l(r3)
-/* 8034AD44 00347924  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void __OSThreadInit(void)
+{
+    NOT_IMPLEMENTED;
+}
 
-#pragma push
-asm s32 OSDisableScheduler(void)
-{ // clang-format off
-    nofralloc
-/* 8034AD48 00347928  7C 08 02 A6 */	mflr r0
-/* 8034AD4C 0034792C  90 01 00 04 */	stw r0, 4(r1)
-/* 8034AD50 00347930  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8034AD54 00347934  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8034AD58 00347938  4B FF C6 0D */	bl OSDisableInterrupts
-/* 8034AD5C 0034793C  80 8D BD 40 */	lwz r4, lbl_804D73E0(r13)
-/* 8034AD60 00347940  38 04 00 01 */	addi r0, r4, 1
-/* 8034AD64 00347944  90 0D BD 40 */	stw r0, lbl_804D73E0(r13)
-/* 8034AD68 00347948  7C 9F 23 78 */	mr r31, r4
-/* 8034AD6C 0034794C  4B FF C6 21 */	bl OSRestoreInterrupts
-/* 8034AD70 00347950  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8034AD74 00347954  7F E3 FB 78 */	mr r3, r31
-/* 8034AD78 00347958  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 8034AD7C 0034795C  38 21 00 10 */	addi r1, r1, 0x10
-/* 8034AD80 00347960  7C 08 03 A6 */	mtlr r0
-/* 8034AD84 00347964  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+#endif
 
-#pragma push
-asm s32 OSEnableScheduler(void)
-{ // clang-format off
-    nofralloc
-/* 8034AD88 00347968  7C 08 02 A6 */	mflr r0
-/* 8034AD8C 0034796C  90 01 00 04 */	stw r0, 4(r1)
-/* 8034AD90 00347970  94 21 FF F0 */	stwu r1, -0x10(r1)
-/* 8034AD94 00347974  93 E1 00 0C */	stw r31, 0xc(r1)
-/* 8034AD98 00347978  4B FF C5 CD */	bl OSDisableInterrupts
-/* 8034AD9C 0034797C  80 8D BD 40 */	lwz r4, lbl_804D73E0(r13)
-/* 8034ADA0 00347980  38 04 FF FF */	addi r0, r4, -1
-/* 8034ADA4 00347984  90 0D BD 40 */	stw r0, lbl_804D73E0(r13)
-/* 8034ADA8 00347988  7C 9F 23 78 */	mr r31, r4
-/* 8034ADAC 0034798C  4B FF C5 E1 */	bl OSRestoreInterrupts
-/* 8034ADB0 00347990  80 01 00 14 */	lwz r0, 0x14(r1)
-/* 8034ADB4 00347994  7F E3 FB 78 */	mr r3, r31
-/* 8034ADB8 00347998  83 E1 00 0C */	lwz r31, 0xc(r1)
-/* 8034ADBC 0034799C  38 21 00 10 */	addi r1, r1, 0x10
-/* 8034ADC0 003479A0  7C 08 03 A6 */	mtlr r0
-/* 8034ADC4 003479A4  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+void OSInitThreadQueue(OSThreadQueue* queue)
+{
+    queue->tail = NULL;
+    queue->head = NULL;
+}
 
-#pragma push
-asm unk_t UnsetRun()
-{ // clang-format off
-    nofralloc
-/* 8034ADC8 003479A8  80 83 02 E0 */	lwz r4, 0x2e0(r3)
-/* 8034ADCC 003479AC  80 A3 02 DC */	lwz r5, 0x2dc(r3)
-/* 8034ADD0 003479B0  28 04 00 00 */	cmplwi r4, 0
-/* 8034ADD4 003479B4  80 C3 02 E4 */	lwz r6, 0x2e4(r3)
-/* 8034ADD8 003479B8  40 82 00 0C */	bne lbl_8034ADE4
-/* 8034ADDC 003479BC  90 C5 00 04 */	stw r6, 4(r5)
-/* 8034ADE0 003479C0  48 00 00 08 */	b lbl_8034ADE8
-lbl_8034ADE4:
-/* 8034ADE4 003479C4  90 C4 02 E4 */	stw r6, 0x2e4(r4)
-lbl_8034ADE8:
-/* 8034ADE8 003479C8  28 06 00 00 */	cmplwi r6, 0
-/* 8034ADEC 003479CC  40 82 00 0C */	bne lbl_8034ADF8
-/* 8034ADF0 003479D0  90 85 00 00 */	stw r4, 0(r5)
-/* 8034ADF4 003479D4  48 00 00 08 */	b lbl_8034ADFC
-lbl_8034ADF8:
-/* 8034ADF8 003479D8  90 86 02 E0 */	stw r4, 0x2e0(r6)
-lbl_8034ADFC:
-/* 8034ADFC 003479DC  80 05 00 00 */	lwz r0, 0(r5)
-/* 8034AE00 003479E0  28 00 00 00 */	cmplwi r0, 0
-/* 8034AE04 003479E4  40 82 00 20 */	bne lbl_8034AE24
-/* 8034AE08 003479E8  80 03 02 D0 */	lwz r0, 0x2d0(r3)
-/* 8034AE0C 003479EC  38 80 00 01 */	li r4, 1
-/* 8034AE10 003479F0  80 AD BD 38 */	lwz r5, lbl_804D73D8(r13)
-/* 8034AE14 003479F4  20 00 00 1F */	subfic r0, r0, 0x1f
-/* 8034AE18 003479F8  7C 80 00 30 */	slw r0, r4, r0
-/* 8034AE1C 003479FC  7C A0 00 78 */	andc r0, r5, r0
-/* 8034AE20 00347A00  90 0D BD 38 */	stw r0, lbl_804D73D8(r13)
-lbl_8034AE24:
-/* 8034AE24 00347A04  38 00 00 00 */	li r0, 0
-/* 8034AE28 00347A08  90 03 02 DC */	stw r0, 0x2dc(r3)
-/* 8034AE2C 00347A0C  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+OSThread* OSGetCurrentThread(void)
+{
+    return OS_CURRENT_THREAD;
+}
+
+s32 OSDisableScheduler(void)
+{
+    bool intr = OSDisableInterrupts();
+    s32 ret = Reschedule;
+    Reschedule = ret + 1;
+    OSRestoreInterrupts(intr);
+    return ret;
+}
+
+s32 OSEnableScheduler(void)
+{
+    bool intr = OSDisableInterrupts();
+    s32 ret = Reschedule;
+    Reschedule = ret - 1;
+    OSRestoreInterrupts(intr);
+    return ret;
+}
+
+void UnsetRun(OSThread* thread)
+{
+    OSThreadQueue* queue;
+    OSThread* next;
+    OSThread* prev;
+
+    next = thread->next;
+    queue = thread->queue;
+    prev = thread->prev;
+
+    if (next == NULL)
+        queue->tail = prev;
+    else
+        next->prev = prev;
+
+    if (prev == NULL)
+        queue->head = next;
+    else
+        prev->next = next;
+
+    if (queue->head == NULL)
+        RunQueueBits &= ~(1 << (31 - thread->priority));
+
+    thread->queue = NULL;
+}
+
+s32 __OSGetEffectivePriority(OSThread* thread)
+{
+    s32 prio = thread->WORD_0x2D4;
+
+    OSMutex* mutex;
+    for (mutex = thread->mutexQueue.head; mutex != NULL;
+         mutex = mutex->link.next)
+    {
+        OSThread* mutexThread = mutex->queue.head;
+        if (mutexThread != NULL && mutexThread->priority < prio) {
+            prio = mutexThread->priority;
+        }
+    }
+
+    return prio;
+}
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm s32 __OSGetEffectivePriority(OSThread*)
-{ // clang-format off
-    nofralloc
-/* 8034AE30 00347A10  80 83 02 D4 */	lwz r4, 0x2d4(r3)
-/* 8034AE34 00347A14  80 A3 02 F4 */	lwz r5, 0x2f4(r3)
-/* 8034AE38 00347A18  48 00 00 24 */	b lbl_8034AE5C
-lbl_8034AE3C:
-/* 8034AE3C 00347A1C  80 65 00 00 */	lwz r3, 0(r5)
-/* 8034AE40 00347A20  28 03 00 00 */	cmplwi r3, 0
-/* 8034AE44 00347A24  41 82 00 14 */	beq lbl_8034AE58
-/* 8034AE48 00347A28  80 03 02 D0 */	lwz r0, 0x2d0(r3)
-/* 8034AE4C 00347A2C  7C 00 20 00 */	cmpw r0, r4
-/* 8034AE50 00347A30  40 80 00 08 */	bge lbl_8034AE58
-/* 8034AE54 00347A34  7C 04 03 78 */	mr r4, r0
-lbl_8034AE58:
-/* 8034AE58 00347A38  80 A5 00 10 */	lwz r5, 0x10(r5)
-lbl_8034AE5C:
-/* 8034AE5C 00347A3C  28 05 00 00 */	cmplwi r5, 0
-/* 8034AE60 00347A40  40 82 FF DC */	bne lbl_8034AE3C
-/* 8034AE64 00347A44  7C 83 23 78 */	mr r3, r4
-/* 8034AE68 00347A48  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
-
-#pragma push
-asm unk_t SetEffectivePriority()
+asm void SetEffectivePriority(void)
 { // clang-format off
     nofralloc
 /* 8034AE6C 00347A4C  7C 08 02 A6 */	mflr r0
@@ -274,11 +231,11 @@ lbl_8034AEF4:
 /* 8034AF04 00347AE4  80 9F 02 DC */	lwz r4, 0x2dc(r31)
 /* 8034AF08 00347AE8  93 E4 00 04 */	stw r31, 4(r4)
 /* 8034AF0C 00347AEC  80 1F 02 D0 */	lwz r0, 0x2d0(r31)
-/* 8034AF10 00347AF0  80 8D BD 38 */	lwz r4, lbl_804D73D8(r13)
+/* 8034AF10 00347AF0  80 8D BD 38 */	lwz r4, RunQueueBits(r13)
 /* 8034AF14 00347AF4  20 00 00 1F */	subfic r0, r0, 0x1f
 /* 8034AF18 00347AF8  7C 60 00 30 */	slw r0, r3, r0
 /* 8034AF1C 00347AFC  7C 80 03 78 */	or r0, r4, r0
-/* 8034AF20 00347B00  90 0D BD 38 */	stw r0, lbl_804D73D8(r13)
+/* 8034AF20 00347B00  90 0D BD 38 */	stw r0, RunQueueBits(r13)
 /* 8034AF24 00347B04  90 6D BD 3C */	stw r3, lbl_804D73DC(r13)
 /* 8034AF28 00347B08  48 00 00 E8 */	b lbl_8034B010
 lbl_8034AF2C:
@@ -360,12 +317,23 @@ lbl_8034B014:
 /* 8034B01C 00347BFC  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8034B020 00347C00  7C 08 03 A6 */	mtlr r0
 /* 8034B024 00347C04  38 21 00 18 */	addi r1, r1, 0x18
-/* 8034B028 00347C08  4E 80 00 20 */	blr 
+/* 8034B028 00347C08  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void SetEffectivePriority(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t SelectThread()
+asm void SelectThread(void)
 { // clang-format off
     nofralloc
 /* 8034B02C 00347C0C  7C 08 02 A6 */	mflr r0
@@ -376,7 +344,7 @@ asm unk_t SelectThread()
 /* 8034B040 00347C20  3B E4 7F B8 */	addi r31, r4, lbl_804A7FB8@l
 /* 8034B044 00347C24  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 8034B048 00347C28  3B C3 00 00 */	addi r30, r3, 0
-/* 8034B04C 00347C2C  80 0D BD 40 */	lwz r0, lbl_804D73E0(r13)
+/* 8034B04C 00347C2C  80 0D BD 40 */	lwz r0, Reschedule(r13)
 /* 8034B050 00347C30  2C 00 00 00 */	cmpwi r0, 0
 /* 8034B054 00347C34  40 81 00 0C */	ble lbl_8034B060
 /* 8034B058 00347C38  38 60 00 00 */	li r3, 0
@@ -398,7 +366,7 @@ lbl_8034B080:
 /* 8034B090 00347C70  40 82 00 90 */	bne lbl_8034B120
 /* 8034B094 00347C74  2C 1E 00 00 */	cmpwi r30, 0
 /* 8034B098 00347C78  40 82 00 20 */	bne lbl_8034B0B8
-/* 8034B09C 00347C7C  80 8D BD 38 */	lwz r4, lbl_804D73D8(r13)
+/* 8034B09C 00347C7C  80 8D BD 38 */	lwz r4, RunQueueBits(r13)
 /* 8034B0A0 00347C80  80 06 02 D0 */	lwz r0, 0x2d0(r6)
 /* 8034B0A4 00347C84  7C 84 00 34 */	cntlzw r4, r4
 /* 8034B0A8 00347C88  7C 00 20 00 */	cmpw r0, r4
@@ -428,11 +396,11 @@ lbl_8034B0EC:
 /* 8034B0FC 00347CDC  80 A6 02 DC */	lwz r5, 0x2dc(r6)
 /* 8034B100 00347CE0  90 C5 00 04 */	stw r6, 4(r5)
 /* 8034B104 00347CE4  80 06 02 D0 */	lwz r0, 0x2d0(r6)
-/* 8034B108 00347CE8  80 AD BD 38 */	lwz r5, lbl_804D73D8(r13)
+/* 8034B108 00347CE8  80 AD BD 38 */	lwz r5, RunQueueBits(r13)
 /* 8034B10C 00347CEC  20 00 00 1F */	subfic r0, r0, 0x1f
 /* 8034B110 00347CF0  7C 80 00 30 */	slw r0, r4, r0
 /* 8034B114 00347CF4  7C A0 03 78 */	or r0, r5, r0
-/* 8034B118 00347CF8  90 0D BD 38 */	stw r0, lbl_804D73D8(r13)
+/* 8034B118 00347CF8  90 0D BD 38 */	stw r0, RunQueueBits(r13)
 /* 8034B11C 00347CFC  90 8D BD 3C */	stw r4, lbl_804D73DC(r13)
 lbl_8034B120:
 /* 8034B120 00347D00  A0 06 01 A2 */	lhz r0, 0x1a2(r6)
@@ -444,7 +412,7 @@ lbl_8034B120:
 /* 8034B138 00347D18  38 60 00 00 */	li r3, 0
 /* 8034B13C 00347D1C  48 00 00 D8 */	b lbl_8034B214
 lbl_8034B140:
-/* 8034B140 00347D20  80 0D BD 38 */	lwz r0, lbl_804D73D8(r13)
+/* 8034B140 00347D20  80 0D BD 38 */	lwz r0, RunQueueBits(r13)
 /* 8034B144 00347D24  38 80 00 00 */	li r4, 0
 /* 8034B148 00347D28  3C 60 80 00 */	lis r3, 0x800000E4@ha
 /* 8034B14C 00347D2C  28 00 00 00 */	cmplwi r0, 0
@@ -455,11 +423,11 @@ lbl_8034B140:
 lbl_8034B160:
 /* 8034B160 00347D40  4B FF C2 19 */	bl OSEnableInterrupts
 lbl_8034B164:
-/* 8034B164 00347D44  80 0D BD 38 */	lwz r0, lbl_804D73D8(r13)
+/* 8034B164 00347D44  80 0D BD 38 */	lwz r0, RunQueueBits(r13)
 /* 8034B168 00347D48  28 00 00 00 */	cmplwi r0, 0
 /* 8034B16C 00347D4C  41 82 FF F8 */	beq lbl_8034B164
 /* 8034B170 00347D50  4B FF C1 F5 */	bl OSDisableInterrupts
-/* 8034B174 00347D54  80 0D BD 38 */	lwz r0, lbl_804D73D8(r13)
+/* 8034B174 00347D54  80 0D BD 38 */	lwz r0, RunQueueBits(r13)
 /* 8034B178 00347D58  28 00 00 00 */	cmplwi r0, 0
 /* 8034B17C 00347D5C  41 82 FF E4 */	beq lbl_8034B160
 /* 8034B180 00347D60  38 7F 07 20 */	addi r3, r31, 0x720
@@ -467,7 +435,7 @@ lbl_8034B164:
 lbl_8034B188:
 /* 8034B188 00347D68  38 60 00 00 */	li r3, 0
 /* 8034B18C 00347D6C  90 6D BD 3C */	stw r3, lbl_804D73DC(r13)
-/* 8034B190 00347D70  80 0D BD 38 */	lwz r0, lbl_804D73D8(r13)
+/* 8034B190 00347D70  80 0D BD 38 */	lwz r0, RunQueueBits(r13)
 /* 8034B194 00347D74  7C 07 00 34 */	cntlzw r7, r0
 /* 8034B198 00347D78  54 E0 18 38 */	slwi r0, r7, 3
 /* 8034B19C 00347D7C  7C 9F 02 14 */	add r4, r31, r0
@@ -486,11 +454,11 @@ lbl_8034B1C0:
 /* 8034B1C8 00347DA8  28 00 00 00 */	cmplwi r0, 0
 /* 8034B1CC 00347DAC  40 82 00 1C */	bne lbl_8034B1E8
 /* 8034B1D0 00347DB0  20 07 00 1F */	subfic r0, r7, 0x1f
-/* 8034B1D4 00347DB4  80 8D BD 38 */	lwz r4, lbl_804D73D8(r13)
+/* 8034B1D4 00347DB4  80 8D BD 38 */	lwz r4, RunQueueBits(r13)
 /* 8034B1D8 00347DB8  38 60 00 01 */	li r3, 1
 /* 8034B1DC 00347DBC  7C 60 00 30 */	slw r0, r3, r0
 /* 8034B1E0 00347DC0  7C 80 00 78 */	andc r0, r4, r0
-/* 8034B1E4 00347DC4  90 0D BD 38 */	stw r0, lbl_804D73D8(r13)
+/* 8034B1E4 00347DC4  90 0D BD 38 */	stw r0, RunQueueBits(r13)
 lbl_8034B1E8:
 /* 8034B1E8 00347DC8  38 00 00 00 */	li r0, 0
 /* 8034B1EC 00347DCC  90 1F 02 DC */	stw r0, 0x2dc(r31)
@@ -509,9 +477,20 @@ lbl_8034B214:
 /* 8034B21C 00347DFC  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8034B220 00347E00  7C 08 03 A6 */	mtlr r0
 /* 8034B224 00347E04  38 21 00 18 */	addi r1, r1, 0x18
-/* 8034B228 00347E08  4E 80 00 20 */	blr 
+/* 8034B228 00347E08  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void SelectThread(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void __OSReschedule(void)
@@ -529,12 +508,24 @@ lbl_8034B24C:
 /* 8034B24C 00347E2C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8034B250 00347E30  38 21 00 08 */	addi r1, r1, 8
 /* 8034B254 00347E34  7C 08 03 A6 */	mtlr r0
-/* 8034B258 00347E38  4E 80 00 20 */	blr 
+/* 8034B258 00347E38  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void __OSReschedule(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm BOOL OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*, OSThread_Unk2*, u32, s32, u16)
+asm bool OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*, OSThread_Unk2*,
+                        u32, s32, u16)
 { // clang-format off
     nofralloc
 /* 8034B25C 00347E3C  7C 08 02 A6 */	mflr r0
@@ -613,9 +604,21 @@ lbl_8034B35C:
 /* 8034B36C 00347F4C  83 A1 00 2C */	lwz r29, 0x2c(r1)
 /* 8034B370 00347F50  83 81 00 28 */	lwz r28, 0x28(r1)
 /* 8034B374 00347F54  38 21 00 38 */	addi r1, r1, 0x38
-/* 8034B378 00347F58  4E 80 00 20 */	blr 
+/* 8034B378 00347F58  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+bool OSCreateThread(OSThread* arg0, OSThreadFunc arg1, OSThread_Unk1* arg2,
+                    OSThread_Unk2* arg3, u32 arg4, s32 arg5, u16 arg6)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void OSExitThread(OSThread*)
@@ -684,9 +687,20 @@ lbl_8034B438:
 /* 8034B450 00348030  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8034B454 00348034  83 81 00 10 */	lwz r28, 0x10(r1)
 /* 8034B458 00348038  38 21 00 20 */	addi r1, r1, 0x20
-/* 8034B45C 0034803C  4E 80 00 20 */	blr 
+/* 8034B45C 0034803C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void OSExitThread(OSThread* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void OSCancelThread(OSThread*)
@@ -821,11 +835,21 @@ lbl_8034B600:
 /* 8034B60C 003481EC  7C 08 03 A6 */	mtlr r0
 /* 8034B610 003481F0  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8034B614 003481F4  38 21 00 20 */	addi r1, r1, 0x20
-/* 8034B618 003481F8  4E 80 00 20 */	blr 
+/* 8034B618 003481F8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/UARTk // 7996 (50.64%)
+#else
+
+void OSCancelThread(OSThread* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm s32 OSResumeThread(OSThread*)
 { // clang-format off
@@ -898,11 +922,11 @@ lbl_8034B6F4:
 /* 8034B704 003482E4  80 9D 02 DC */	lwz r4, 0x2dc(r29)
 /* 8034B708 003482E8  93 A4 00 04 */	stw r29, 4(r4)
 /* 8034B70C 003482EC  80 1D 02 D0 */	lwz r0, 0x2d0(r29)
-/* 8034B710 003482F0  80 8D BD 38 */	lwz r4, lbl_804D73D8(r13)
+/* 8034B710 003482F0  80 8D BD 38 */	lwz r4, RunQueueBits(r13)
 /* 8034B714 003482F4  20 00 00 1F */	subfic r0, r0, 0x1f
 /* 8034B718 003482F8  7C 60 00 30 */	slw r0, r3, r0
 /* 8034B71C 003482FC  7C 80 03 78 */	or r0, r4, r0
-/* 8034B720 00348300  90 0D BD 38 */	stw r0, lbl_804D73D8(r13)
+/* 8034B720 00348300  90 0D BD 38 */	stw r0, RunQueueBits(r13)
 /* 8034B724 00348304  90 6D BD 3C */	stw r3, lbl_804D73DC(r13)
 /* 8034B728 00348308  48 00 01 40 */	b lbl_8034B868
 lbl_8034B72C:
@@ -1017,14 +1041,24 @@ lbl_8034B87C:
 /* 8034B894 00348474  7C 08 03 A6 */	mtlr r0
 /* 8034B898 00348478  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 8034B89C 0034847C  38 21 00 28 */	addi r1, r1, 0x28
-/* 8034B8A0 00348480  4E 80 00 20 */	blr 
+/* 8034B8A0 00348480  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/p2ZdW // 9200 (0%)
+#else
+
+s32 OSResumeThread(OSThread* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm s32 OSSuspendThread(OSThread*)
-{ // clang-format off
+asm s32 OSSuspendThread(OSThread*){
+    // clang-format off
     nofralloc
 /* 8034B8A4 00348484  7C 08 02 A6 */	mflr r0
 /* 8034B8A8 00348488  90 01 00 04 */	stw r0, 4(r1)
@@ -1130,9 +1164,20 @@ lbl_8034B9EC:
 /* 8034BA04 003485E4  7C 08 03 A6 */	mtlr r0
 /* 8034BA08 003485E8  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 8034BA0C 003485EC  38 21 00 20 */	addi r1, r1, 0x20
-/* 8034BA10 003485F0  4E 80 00 20 */	blr 
+/* 8034BA10 003485F0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+s32 OSSuspendThread(OSThread* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void OSSleepThread(OSThreadQueue*)
@@ -1205,11 +1250,21 @@ lbl_8034BAE0:
 /* 8034BAF0 003486D0  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8034BAF4 003486D4  7C 08 03 A6 */	mtlr r0
 /* 8034BAF8 003486D8  38 21 00 18 */	addi r1, r1, 0x18
-/* 8034BAFC 003486DC  4E 80 00 20 */	blr 
+/* 8034BAFC 003486DC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/oYS6V
+#else
+
+void OSSleepThread(OSThreadQueue* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
 asm void OSWakeupThread(OSThreadQueue*)
 { // clang-format off
@@ -1262,11 +1317,11 @@ lbl_8034BB90:
 /* 8034BBA0 00348780  80 86 02 DC */	lwz r4, 0x2dc(r6)
 /* 8034BBA4 00348784  90 C4 00 04 */	stw r6, 4(r4)
 /* 8034BBA8 00348788  80 06 02 D0 */	lwz r0, 0x2d0(r6)
-/* 8034BBAC 0034878C  80 8D BD 38 */	lwz r4, lbl_804D73D8(r13)
+/* 8034BBAC 0034878C  80 8D BD 38 */	lwz r4, RunQueueBits(r13)
 /* 8034BBB0 00348790  20 00 00 1F */	subfic r0, r0, 0x1f
 /* 8034BBB4 00348794  7C 60 00 30 */	slw r0, r3, r0
 /* 8034BBB8 00348798  7C 80 03 78 */	or r0, r4, r0
-/* 8034BBBC 0034879C  90 0D BD 38 */	stw r0, lbl_804D73D8(r13)
+/* 8034BBBC 0034879C  90 0D BD 38 */	stw r0, RunQueueBits(r13)
 /* 8034BBC0 003487A0  90 6D BD 3C */	stw r3, lbl_804D73DC(r13)
 lbl_8034BBC4:
 /* 8034BBC4 003487A4  80 DE 00 00 */	lwz r6, 0(r30)
@@ -1285,12 +1340,23 @@ lbl_8034BBE4:
 /* 8034BBF4 003487D4  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8034BBF8 003487D8  7C 08 03 A6 */	mtlr r0
 /* 8034BBFC 003487DC  38 21 00 18 */	addi r1, r1, 0x18
-/* 8034BC00 003487E0  4E 80 00 20 */	blr 
+/* 8034BC00 003487E0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void OSWakeupThread(OSThreadQueue* arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t CheckThreadQueue()
+asm void CheckThreadQueue(void)
 { // clang-format off
     nofralloc
 /* 8034BC04 003487E4  80 83 00 00 */	lwz r4, 0(r3)
@@ -1300,7 +1366,7 @@ asm unk_t CheckThreadQueue()
 /* 8034BC14 003487F4  28 00 00 00 */	cmplwi r0, 0
 /* 8034BC18 003487F8  41 82 00 0C */	beq lbl_8034BC24
 /* 8034BC1C 003487FC  38 60 00 00 */	li r3, 0
-/* 8034BC20 00348800  4E 80 00 20 */	blr 
+/* 8034BC20 00348800  4E 80 00 20 */	blr
 lbl_8034BC24:
 /* 8034BC24 00348804  80 63 00 04 */	lwz r3, 4(r3)
 /* 8034BC28 00348808  28 03 00 00 */	cmplwi r3, 0
@@ -1309,7 +1375,7 @@ lbl_8034BC24:
 /* 8034BC34 00348814  28 00 00 00 */	cmplwi r0, 0
 /* 8034BC38 00348818  41 82 00 0C */	beq lbl_8034BC44
 /* 8034BC3C 0034881C  38 60 00 00 */	li r3, 0
-/* 8034BC40 00348820  4E 80 00 20 */	blr 
+/* 8034BC40 00348820  4E 80 00 20 */	blr
 lbl_8034BC44:
 /* 8034BC44 00348824  7C 85 23 78 */	mr r5, r4
 /* 8034BC48 00348828  48 00 00 48 */	b lbl_8034BC90
@@ -1321,7 +1387,7 @@ lbl_8034BC4C:
 /* 8034BC5C 0034883C  7C 05 00 40 */	cmplw r5, r0
 /* 8034BC60 00348840  41 82 00 0C */	beq lbl_8034BC6C
 /* 8034BC64 00348844  38 60 00 00 */	li r3, 0
-/* 8034BC68 00348848  4E 80 00 20 */	blr 
+/* 8034BC68 00348848  4E 80 00 20 */	blr
 lbl_8034BC6C:
 /* 8034BC6C 0034884C  80 85 02 E4 */	lwz r4, 0x2e4(r5)
 /* 8034BC70 00348850  28 04 00 00 */	cmplwi r4, 0
@@ -1330,24 +1396,33 @@ lbl_8034BC6C:
 /* 8034BC7C 0034885C  7C 05 00 40 */	cmplw r5, r0
 /* 8034BC80 00348860  41 82 00 0C */	beq lbl_8034BC8C
 /* 8034BC84 00348864  38 60 00 00 */	li r3, 0
-/* 8034BC88 00348868  4E 80 00 20 */	blr 
+/* 8034BC88 00348868  4E 80 00 20 */	blr
 lbl_8034BC8C:
 /* 8034BC8C 0034886C  7C 65 1B 78 */	mr r5, r3
 lbl_8034BC90:
 /* 8034BC90 00348870  28 05 00 00 */	cmplwi r5, 0
 /* 8034BC94 00348874  40 82 FF B8 */	bne lbl_8034BC4C
 /* 8034BC98 00348878  38 60 00 01 */	li r3, 1
-/* 8034BC9C 0034887C  4E 80 00 20 */	blr 
+/* 8034BC9C 0034887C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void CheckThreadQueue(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 extern char* lbl_80402420[];
 extern unk_t lbl_804D5C28;
-extern unk_t __OSCheckMutexes();
-extern unk_t __OSCheckDeadLock();
 
 #pragma push
-asm unk_t OSCheckActiveThreads()
+asm void OSCheckActiveThreads(void)
 { // clang-format off
     nofralloc
 /* 8034BCA0 00348880  7C 08 02 A6 */	mflr r0
@@ -1365,7 +1440,7 @@ asm unk_t OSCheckActiveThreads()
 /* 8034BCD0 003488B0  3B 40 00 00 */	li r26, 0
 lbl_8034BCD4:
 /* 8034BCD4 003488B4  20 1A 00 1F */	subfic r0, r26, 0x1f
-/* 8034BCD8 003488B8  80 8D BD 38 */	lwz r4, lbl_804D73D8(r13)
+/* 8034BCD8 003488B8  80 8D BD 38 */	lwz r4, RunQueueBits(r13)
 /* 8034BCDC 003488BC  38 60 00 01 */	li r3, 1
 /* 8034BCE0 003488C0  7C 60 00 30 */	slw r0, r3, r0
 /* 8034BCE4 003488C4  7C 80 00 39 */	and. r0, r4, r0
@@ -1869,6 +1944,15 @@ lbl_8034C3C8:
 /* 8034C3E0 00348FC0  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8034C3E4 00348FC4  38 21 00 38 */	addi r1, r1, 0x38
 /* 8034C3E8 00348FC8  7C 08 03 A6 */	mtlr r0
-/* 8034C3EC 00348FCC  4E 80 00 20 */	blr 
+/* 8034C3EC 00348FCC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void OSCheckActiveThreads(void)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

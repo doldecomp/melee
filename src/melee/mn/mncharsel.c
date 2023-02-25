@@ -1,9 +1,11 @@
 
 #include <melee/mn/mncharsel.h>
-#include <melee/mn/mntext.h>
 
-extern GameRules* func_8015CC34();
-extern s32 lbLang_IsSavedLanguageJP();
+#include <melee/gm/gmmain_lib.h>
+#include <melee/it/item2.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/mn/mntext.h>
+#include <sysdolphin/baselib/sislib.h>
 
 extern CSSData* lbl_804D6CB0;
 extern SIS* lbl_804D1124[];
@@ -43,7 +45,7 @@ TextKerning* func_8025BC20(TextKerning* arg0, u32 arg1)
     return ++arg0;
 }
 
-void func_8025BD30()
+void func_8025BD30(void)
 {
     TextKerning* kerning;
 

@@ -166,33 +166,33 @@ lbl_804D6074:
     .asciz "A@"
     .balign 4
 lbl_804D6078:
-	.4byte 0x0C000000
-	.4byte NULL
+    .4byte 0x0C000000
+    .4byte NULL
 
 .section .sdata2
     .balign 8
 lbl_804DE890:
-	.double 0.9
+    .double 0.9
 lbl_804DE898:
-	.double 0.3
+    .double 0.3
 lbl_804DE8A0:
-	.double 0.7
+    .double 0.7
 lbl_804DE8A8:
-	.double 1.257285386913054e-10
+    .double 1.257285386913054e-10
 lbl_804DE8B0:
-	.double 4503601774854144.0
+    .double 4503601774854144.0
 lbl_804DE8B8:
-	.double 0.0
+    .double 0.0
 lbl_804DE8C0:
-	.double 0.0
+    .double 0.0
 lbl_804DE8C8:
-	.double 0.5
+    .double 0.5
 lbl_804DE8D0:
-	.double 3.0
+    .double 3.0
 lbl_804DE8D8:
-	.float 6.0
+    .float 6.0
 lbl_804DE8DC:
-	.float 4.0
+    .float 4.0
 
 .section .text
 
@@ -456,7 +456,7 @@ lbl_803919E0:
 /* 803919F4 0038E5D4  CB 81 00 90 */	lfd f28, 0x90(r1)
 /* 803919F8 0038E5D8  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 803919FC 0038E5DC  7C 08 03 A6 */	mtlr r0
-/* 80391A00 0038E5E0  4E 80 00 20 */	blr 
+/* 80391A00 0038E5E0  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/O3Onb // 4900 (0%)
 .global func_80391A04
@@ -472,17 +472,17 @@ func_80391A04:
 /* 80391A24 0038E604  4B FA FA ED */	bl GXSetCurrentMtx
 /* 80391A28 0038E608  4B FD 88 61 */	bl HSD_CObjGetCurrent
 /* 80391A2C 0038E60C  38 81 00 14 */	addi r4, r1, 0x14
-/* 80391A30 0038E610  4B FD 7B C1 */	bl func_803695F0
+/* 80391A30 0038E610  4B FD 7B C1 */	bl HSD_CObjGetViewingMtx
 /* 80391A34 0038E614  38 61 00 14 */	addi r3, r1, 0x14
 /* 80391A38 0038E618  38 80 00 00 */	li r4, 0
 /* 80391A3C 0038E61C  4B FA FA 59 */	bl GXLoadPosMtxImm
 /* 80391A40 0038E620  88 6D A9 D8 */	lbz r3, lbl_804D6078@sda21(r13)
 /* 80391A44 0038E624  38 80 00 05 */	li r4, 5
-/* 80391A48 0038E628  4B FD 00 2D */	bl func_80361A74
+/* 80391A48 0038E628  4B FD 00 2D */	bl HSD_StateSetLineWidth
 /* 80391A4C 0038E62C  88 0D A9 D8 */	lbz r0, lbl_804D6078@sda21(r13)
 /* 80391A50 0038E630  38 80 00 05 */	li r4, 5
 /* 80391A54 0038E634  54 03 0E 3C */	rlwinm r3, r0, 1, 0x18, 0x1e
-/* 80391A58 0038E638  4B FD 02 09 */	bl func_80361C60
+/* 80391A58 0038E638  4B FD 02 09 */	bl HSD_StateSetPointSize
 /* 80391A5C 0038E63C  3C 60 68 00 */	lis r3, 0x68000002@ha
 /* 80391A60 0038E640  38 63 00 02 */	addi r3, r3, 0x68000002@l
 /* 80391A64 0038E644  4B FC FF 39 */	bl HSD_SetupRenderMode
@@ -509,7 +509,7 @@ func_80391A04:
 /* 80391AB8 0038E698  80 01 00 4C */	lwz r0, 0x4c(r1)
 /* 80391ABC 0038E69C  38 21 00 48 */	addi r1, r1, 0x48
 /* 80391AC0 0038E6A0  7C 08 03 A6 */	mtlr r0
-/* 80391AC4 0038E6A4  4E 80 00 20 */	blr 
+/* 80391AC4 0038E6A4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/Rq3fk // 21200 (0%)
 .global func_80391AC8
@@ -774,7 +774,7 @@ lbl_80391DF0:
 /* 80391E08 0038E9E8  83 81 00 28 */	lwz r28, 0x28(r1)
 /* 80391E0C 0038E9EC  38 21 00 48 */	addi r1, r1, 0x48
 /* 80391E10 0038E9F0  7C 08 03 A6 */	mtlr r0
-/* 80391E14 0038E9F4  4E 80 00 20 */	blr 
+/* 80391E14 0038E9F4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/vcyKr // 6800 (0%)
 .global func_80391E18
@@ -848,7 +848,7 @@ lbl_80391EF0:
 /* 80391F18 0038EAF8  83 C1 00 28 */	lwz r30, 0x28(r1)
 /* 80391F1C 0038EAFC  38 21 00 70 */	addi r1, r1, 0x70
 /* 80391F20 0038EB00  7C 08 03 A6 */	mtlr r0
-/* 80391F24 0038EB04  4E 80 00 20 */	blr 
+/* 80391F24 0038EB04  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/Jcdwp // 15500 (0%)
 .global func_80391F28
@@ -1012,7 +1012,7 @@ lbl_8039212C:
 /* 80392184 0038ED64  CA 61 00 50 */	lfd f19, 0x50(r1)
 /* 80392188 0038ED68  38 21 00 B8 */	addi r1, r1, 0xb8
 /* 8039218C 0038ED6C  7C 08 03 A6 */	mtlr r0
-/* 80392190 0038ED70  4E 80 00 20 */	blr 
+/* 80392190 0038ED70  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/O7Lvi // 900 (0%)
 .global func_80392194
@@ -1027,4 +1027,4 @@ lbl_803921AC:
 /* 803921AC 0038ED8C  88 07 00 01 */	lbz r0, 1(r7)
 lbl_803921B0:
 /* 803921B0 0038ED90  98 03 00 01 */	stb r0, 1(r3)
-/* 803921B4 0038ED94  4E 80 00 20 */	blr 
+/* 803921B4 0038ED94  4E 80 00 20 */	blr

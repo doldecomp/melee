@@ -1,9 +1,19 @@
-#include <dolphin/types.h>
+/** @file
+ * @todo Rename to @c ftUnk1.c
+ */
+#include <melee/ft/code_8007C630.h>
+
+#include <melee/ef/efsync.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/item.h>
+#include <melee/it/item2.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/text_2.h>
+#include <placeholder.h>
+#include <Runtime/platform.h>
+
+#ifdef MWERKS_GEKKO
 
 static f32 const lbl_804D8328 = 0.0F;
 static f32 const lbl_804D832C = 1.0F;
@@ -57,9 +67,20 @@ lbl_8007C658:
 /* 8007C6CC 000792AC  CB E1 00 28 */	lfd f31, 0x28(r1)
 /* 8007C6D0 000792B0  38 21 00 30 */	addi r1, r1, 0x30
 /* 8007C6D4 000792B4  7C 08 03 A6 */	mtlr r0
-/* 8007C6D8 000792B8  4E 80 00 20 */	blr 
+/* 8007C6D8 000792B8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_8007C630(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
 asm void func_8007C6DC(HSD_GObj* fighter_gobj)
@@ -106,13 +127,23 @@ lbl_8007C764:
 /* 8007C76C 0007934C  CB E1 00 28 */	lfd f31, 0x28(r1)
 /* 8007C770 00079350  38 21 00 30 */	addi r1, r1, 0x30
 /* 8007C774 00079354  7C 08 03 A6 */	mtlr r0
-/* 8007C778 00079358  4E 80 00 20 */	blr 
+/* 8007C778 00079358  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#else
+
+void func_8007C6DC(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+#ifdef MWERKS_GEKKO
+
 extern unk_t func_80023870();
 extern unk_t func_802E5EF4();
-extern unk_t func_80007B78();
 
 #pragma push
 asm void func_8007C77C(HSD_GObj* fighter_gobj)
@@ -187,7 +218,7 @@ lbl_8007C868:
 /* 8007C86C 0007944C  38 9D 16 14 */	addi r4, r29, 0x1614
 /* 8007C870 00079450  C0 5F 00 38 */	lfs f2, 0x38(r31)
 /* 8007C874 00079454  7F 43 D3 78 */	mr r3, r26
-/* 8007C878 00079458  4B F8 B3 01 */	bl func_80007B78
+/* 8007C878 00079458  4B F8 B3 01 */	bl lbColl_80007B78
 /* 8007C87C 0007945C  2C 03 00 00 */	cmpwi r3, 0
 /* 8007C880 00079460  41 82 00 7C */	beq lbl_8007C8FC
 /* 8007C884 00079464  80 7B 00 04 */	lwz r3, 4(r27)
@@ -236,6 +267,15 @@ lbl_8007C918:
 /* 8007C920 00079500  CB E1 00 48 */	lfd f31, 0x48(r1)
 /* 8007C924 00079504  38 21 00 50 */	addi r1, r1, 0x50
 /* 8007C928 00079508  7C 08 03 A6 */	mtlr r0
-/* 8007C92C 0007950C  4E 80 00 20 */	blr 
+/* 8007C92C 0007950C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void func_8007C77C(HSD_GObj* fighter_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

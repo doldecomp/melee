@@ -97,7 +97,7 @@ lbl_8037F648:
 /* 8037F64C 0037C22C  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8037F650 0037C230  38 21 00 38 */	addi r1, r1, 0x38
 /* 8037F654 0037C234  7C 08 03 A6 */	mtlr r0
-/* 8037F658 0037C238  4E 80 00 20 */	blr 
+/* 8037F658 0037C238  4E 80 00 20 */	blr
 
 .global drawBackgroundRect
 drawBackgroundRect:
@@ -181,7 +181,7 @@ drawBackgroundRect:
 /* 8037F790 0037C370  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8037F794 0037C374  38 21 00 40 */	addi r1, r1, 0x40
 /* 8037F798 0037C378  7C 08 03 A6 */	mtlr r0
-/* 8037F79C 0037C37C  4E 80 00 20 */	blr 
+/* 8037F79C 0037C37C  4E 80 00 20 */	blr
 
 .global HSD_ShadowStartRender
 HSD_ShadowStartRender:
@@ -286,7 +286,7 @@ lbl_8037F908:
 /* 8037F90C 0037C4EC  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8037F910 0037C4F0  38 21 00 28 */	addi r1, r1, 0x28
 /* 8037F914 0037C4F4  7C 08 03 A6 */	mtlr r0
-/* 8037F918 0037C4F8  4E 80 00 20 */	blr 
+/* 8037F918 0037C4F8  4E 80 00 20 */	blr
 
 .global HSD_ShadowEndRender
 HSD_ShadowEndRender:
@@ -325,7 +325,7 @@ lbl_8037F970:
 /* 8037F994 0037C574  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8037F998 0037C578  38 21 00 18 */	addi r1, r1, 0x18
 /* 8037F99C 0037C57C  7C 08 03 A6 */	mtlr r0
-/* 8037F9A0 0037C580  4E 80 00 20 */	blr 
+/* 8037F9A0 0037C580  4E 80 00 20 */	blr
 
 .global HSD_ShadowSetActive
 HSD_ShadowSetActive:
@@ -380,7 +380,7 @@ lbl_8037FA44:
 /* 8037FA4C 0037C62C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8037FA50 0037C630  38 21 00 18 */	addi r1, r1, 0x18
 /* 8037FA54 0037C634  7C 08 03 A6 */	mtlr r0
-/* 8037FA58 0037C638  4E 80 00 20 */	blr 
+/* 8037FA58 0037C638  4E 80 00 20 */	blr
 
 .global HSD_ShadowAddObject
 HSD_ShadowAddObject:
@@ -430,7 +430,7 @@ lbl_8037FAF0:
 /* 8037FAF8 0037C6D8  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 8037FAFC 0037C6DC  38 21 00 18 */	addi r1, r1, 0x18
 /* 8037FB00 0037C6E0  7C 08 03 A6 */	mtlr r0
-/* 8037FB04 0037C6E4  4E 80 00 20 */	blr 
+/* 8037FB04 0037C6E4  4E 80 00 20 */	blr
 
 .global HSD_ShadowDeleteObject
 HSD_ShadowDeleteObject:
@@ -476,7 +476,7 @@ lbl_8037FB88:
 /* 8037FB8C 0037C76C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8037FB90 0037C770  38 21 00 18 */	addi r1, r1, 0x18
 /* 8037FB94 0037C774  7C 08 03 A6 */	mtlr r0
-/* 8037FB98 0037C778  4E 80 00 20 */	blr 
+/* 8037FB98 0037C778  4E 80 00 20 */	blr
 
 .global makeMatrix
 makeMatrix:
@@ -553,7 +553,7 @@ lbl_8037FC80:
 /* 8037FC9C 0037C87C  83 E1 00 54 */	lwz r31, 0x54(r1)
 /* 8037FCA0 0037C880  38 21 00 58 */	addi r1, r1, 0x58
 /* 8037FCA4 0037C884  7C 08 03 A6 */	mtlr r0
-/* 8037FCA8 0037C888  4E 80 00 20 */	blr 
+/* 8037FCA8 0037C888  4E 80 00 20 */	blr
 
 .global HSD_ShadowSetViewingRect
 HSD_ShadowSetViewingRect:
@@ -709,7 +709,7 @@ lbl_8037FEAC:
 /* 8037FECC 0037CAAC  83 C1 00 78 */	lwz r30, 0x78(r1)
 /* 8037FED0 0037CAB0  38 21 00 B0 */	addi r1, r1, 0xb0
 /* 8037FED4 0037CAB4  7C 08 03 A6 */	mtlr r0
-/* 8037FED8 0037CAB8  4E 80 00 20 */	blr 
+/* 8037FED8 0037CAB8  4E 80 00 20 */	blr
 
 .global HSD_ViewingRectInit
 HSD_ViewingRectInit:
@@ -767,7 +767,7 @@ lbl_8037FF18:
 /* 8037FFA4 0037CB84  BB 61 00 2C */	lmw r27, 0x2c(r1)
 /* 8037FFA8 0037CB88  38 21 00 40 */	addi r1, r1, 0x40
 /* 8037FFAC 0037CB8C  7C 08 03 A6 */	mtlr r0
-/* 8037FFB0 0037CB90  4E 80 00 20 */	blr 
+/* 8037FFB0 0037CB90  4E 80 00 20 */	blr
 
 .global HSD_ViewingRectCheck
 HSD_ViewingRectCheck:
@@ -798,7 +798,7 @@ lbl_80380008:
 /* 8038000C 0037CBEC  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80380010 0037CBF0  38 21 00 18 */	addi r1, r1, 0x18
 /* 80380014 0037CBF4  7C 08 03 A6 */	mtlr r0
-/* 80380018 0037CBF8  4E 80 00 20 */	blr 
+/* 80380018 0037CBF8  4E 80 00 20 */	blr
 
 .global HSD_ViewingRectAddRect
 HSD_ViewingRectAddRect:
@@ -923,7 +923,7 @@ lbl_803801B0:
 /* 803801D4 0037CDB4  83 A1 00 4C */	lwz r29, 0x4c(r1)
 /* 803801D8 0037CDB8  38 21 00 88 */	addi r1, r1, 0x88
 /* 803801DC 0037CDBC  7C 08 03 A6 */	mtlr r0
-/* 803801E0 0037CDC0  4E 80 00 20 */	blr 
+/* 803801E0 0037CDC0  4E 80 00 20 */	blr
 
 
 .section .data
@@ -982,25 +982,14 @@ lbl_80407310:
     .4byte 0x09000000
     .4byte 0x0004050F
     .4byte 0x07070007
-    .4byte 0x73686164
-    .4byte 0x6F772D3E
-    .4byte 0x63616D65
-    .4byte 0x72610000
-    .4byte 0x73686164
-    .4byte 0x6F772D3E
-    .4byte 0x74657874
-    .4byte 0x75726500
-    .4byte 0x73686164
-    .4byte 0x6F772D3E
-    .4byte 0x74657874
-    .4byte 0x7572652D
-    .4byte 0x3E696D61
-    .4byte 0x67656465
-    .4byte 0x73630000
-    .4byte 0x64697374
-    .4byte 0x616E6365
-    .4byte 0x203E2030
-    .4byte 0x2E304600
+    .asciz "shadow->camera"
+    .balign 4
+    .asciz "shadow->texture"
+    .balign 4
+    .asciz "shadow->texture->imagedesc"
+    .balign 4
+    .asciz "distance > 0.0F"
+    .balign 4
 .global lbl_8040743C
 lbl_8040743C:
     .asciz "object.h"
@@ -1023,7 +1012,7 @@ lbl_80407448:
     .balign 8
 .global shadow_alloc_data
 shadow_alloc_data:
-	.skip 0x30
+    .skip 0x30
 
 
 .section .sdata
@@ -1045,23 +1034,23 @@ lbl_804D5F84:
 .section .sdata2
 .global lbl_804DE770
 lbl_804DE770:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE774
 lbl_804DE774:
-	.4byte 0x43800000
+    .4byte 0x43800000
 .global lbl_804DE778
 lbl_804DE778:
-	.4byte 0x43300000
-	.4byte 0x00000000
+    .4byte 0x43300000
+    .4byte 0x00000000
 .global lbl_804DE780
 lbl_804DE780:
-	.4byte 0x3F99999A
+    .4byte 0x3F99999A
 .global lbl_804DE784
 lbl_804DE784:
-	.4byte 0xBF8CCCCD
+    .4byte 0xBF8CCCCD
 .global lbl_804DE788
 lbl_804DE788:
-	.4byte 0xFF7FFFFF
+    .4byte 0xFF7FFFFF
 .global lbl_804DE78C
 lbl_804DE78C:
-	.4byte 0x7F7FFFFF
+    .4byte 0x7F7FFFFF

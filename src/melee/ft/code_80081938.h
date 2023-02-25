@@ -1,3 +1,6 @@
+/** @file
+ * @todo Rename to @c ftUnk2.h
+ */
 #ifndef MELEE_FT_CODE_80081938_H
 #define MELEE_FT_CODE_80081938_H
 
@@ -5,5 +8,7 @@
 
 void func_80081938(HSD_GObj* fighter_gobj);
 void func_800819A8(HSD_GObj* fighter_gobj);
+
+void func_80081A00(void);
 
 #endif

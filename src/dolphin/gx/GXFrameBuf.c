@@ -1,50 +1,156 @@
+#include <dolphin/gx/GXFrameBuf.h>
+
 #include <common_structs.h>
-#include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__GX_unknown_001.h>
+#include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/forward.h>
+#include <placeholder.h>
+#include <Runtime/runtime.h>
 
 Vec2 const lbl_804DE220 = { 256.0F, 0.0F };
 Vec2 const lbl_804DE228 = { 176.0F, 0.0F };
 
-/* GXRenderModeObj? */ u32 GXNtsc480IntDf[] = {
-    0x00000000, 0x028001E0, 0x01E00028, 0x00000280,
-    0x01E00000, 0x00000001, 0x00000606, 0x06060606,
-    0x06060606, 0x06060606, 0x06060606, 0x06060606,
-    0x06060808, 0x0A0C0A08, 0x08000000
+GXRenderModeObj GXNtsc480IntDf = {
+    0,
+    640,
+    480,
+    480,
+    40,
+    0,
+    640,
+    480,
+    1,
+    0,
+    0,
+    { { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 } },
+    { 8, 8, 10, 12, 10, 8, 8 },
 };
 
-/* GXRenderModeObj? */ u32 lbl_804011A4[] = {
-    0x00000000, 0x028001E0, 0x01E00028, 0x00000280,
-    0x01E00000, 0x00000001, 0x00000606, 0x06060606,
-    0x06060606, 0x06060606, 0x06060606, 0x06060606,
-    0x06060000, 0x15161500, 0x00000000
+GXRenderModeObj lbl_804011A4 = {
+    0,
+    640,
+    480,
+    480,
+    40,
+    0,
+    640,
+    480,
+    1,
+    0,
+    0,
+    { { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 } },
+    { 0, 0, 21, 22, 21, 0, 0 },
 };
 
-/* GXRenderModeObj? */ u32 lbl_804011E0[] = {
-    0x00000002, 0x028001E0, 0x01E00028, 0x00000280,
-    0x01E00000, 0x00000000, 0x00000606, 0x06060606,
-    0x06060606, 0x06060606, 0x06060606, 0x06060606,
-    0x06060000, 0x15161500, 0x00000000
+GXRenderModeObj lbl_804011E0 = {
+    2,
+    640,
+    480,
+    480,
+    40,
+    0,
+    640,
+    480,
+    0,
+    0,
+    0,
+    { { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 } },
+    { 0, 0, 21, 22, 21, 0, 0 },
 };
 
-/* GXRenderModeObj? */ u32 GXMpal480IntDf[] = {
-    0x00000008, 0x028001E0, 0x01E00028, 0x00000280,
-    0x01E00000, 0x00000001, 0x00000606, 0x06060606,
-    0x06060606, 0x06060606, 0x06060606, 0x06060606,
-    0x06060808, 0x0A0C0A08, 0x08000000
+GXRenderModeObj GXMpal480IntDf = {
+    8,
+    640,
+    480,
+    480,
+    40,
+    0,
+    640,
+    480,
+    1,
+    0,
+    0,
+    { { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 } },
+    { 8, 8, 10, 12, 10, 8, 8 },
 };
 
-/* GXRenderModeObj? */ u32 GXPal528IntDf[] = {
-    0x00000004, 0x02800210, 0x02100028, 0x00170280,
-    0x02100000, 0x00000001, 0x00000606, 0x06060606,
-    0x06060606, 0x06060606, 0x06060606, 0x06060606,
-    0x06060808, 0x0A0C0A08, 0x08000000, 0x00000000
+GXRenderModeObj GXPal528IntDf = {
+    4,
+    640,
+    528,
+    528,
+    40,
+    23,
+    640,
+    528,
+    1,
+    0,
+    0,
+    { { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 },
+      { 6, 6 } },
+    { 8, 8, 10, 12, 10, 8, 8 },
 };
 
 void GXSetDispCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
 {
     __GXContexts.main->x1D0[4] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[4], arg0, 10, 0);
-    __GXContexts.main->x1D0[4] = __GXContexts.main->x1D0[4] & 0xFFF003FF | (u32) (arg1 << 10) & 0x03FFFC00;
+    __GXContexts.main->x1D0[4] = (__GXContexts.main->x1D0[4] & 0xFFF003FF) |
+                                 ((u32) (arg1 << 10) & 0x03FFFC00);
     INSERT_FIELD(__GXContexts.main->x1D0[4], 73, 8, 24);
     __GXContexts.main->x1D0[5] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[5], arg2 - 1, 10, 0);
@@ -56,12 +162,14 @@ void GXSetTexCopySrc(u16 arg0, u32 arg1, u16 arg2, u16 arg3)
 {
     __GXContexts.main->x1D0[8] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[8], arg0, 10, 0);
-    __GXContexts.main->x1D0[8] = (((u32) __GXContexts.main->x1D0[8] & 0xFFF003FF) | ((u32) (arg1 << 0xA) & 0x03FFFC00));
-    INSERT_FIELD(__GXContexts.main->x1D0[8], 0x49, 8, 24);
+    __GXContexts.main->x1D0[8] =
+        (((u32) __GXContexts.main->x1D0[8] & 0xFFF003FF) |
+         ((u32) (arg1 << 10) & 0x03FFFC00));
+    INSERT_FIELD(__GXContexts.main->x1D0[8], 73, 8, 24);
     __GXContexts.main->x1D0[9] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[9], arg2 - 1, 10, 0);
     INSERT_FIELD(__GXContexts.main->x1D0[9], arg3 - 1, 10, 10);
-    INSERT_FIELD(__GXContexts.main->x1D0[9], 0x4A, 8, 24);
+    INSERT_FIELD(__GXContexts.main->x1D0[9], 74, 8, 24);
 }
 
 void GXSetDispCopyDst(s32 arg0)
@@ -69,14 +177,15 @@ void GXSetDispCopyDst(s32 arg0)
     s32 val = (s32) ((u32) (arg0 << 1) & 0xFFFE) >> 5;
     __GXContexts.main->x1D0[6] = 0;
     INSERT_FIELD(__GXContexts.main->x1D0[6], val, 10, 0);
-    INSERT_FIELD(__GXContexts.main->x1D0[6], 0x4D, 8, 24);
+    INSERT_FIELD(__GXContexts.main->x1D0[6], 77, 8, 24);
 }
 
-extern unk_t __GetImageTileCount();
-extern unk_t __cvt_fp2unsigned();
+extern unk_t __GetImageTileCount(void);
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t GXSetTexCopyDst()
+asm void GXSetTexCopyDst(s32, s32, s32, s32)
 { // clang-format off
     nofralloc
 /* 8033D5CC 0033A1AC  7C 08 02 A6 */	mflr r0
@@ -174,19 +283,22 @@ lbl_8033D658:
 /* 8033D72C 0033A30C  83 C1 00 28 */	lwz r30, 0x28(r1)
 /* 8033D730 0033A310  7C 08 03 A6 */	mtlr r0
 /* 8033D734 0033A314  38 21 00 30 */	addi r1, r1, 0x30
-/* 8033D738 0033A318  4E 80 00 20 */	blr 
+/* 8033D738 0033A318  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#endif
+
 void GXSetDispCopyFrame2Field(s32 arg0)
 {
-    INSERT_FIELD(__GXContexts.main->x1D0[0x7], arg0, 2, 12);
-    INSERT_FIELD(__GXContexts.main->x1D0[0xB], 0, 2, 12);
+    INSERT_FIELD(__GXContexts.main->x1D0[7], arg0, 2, 12);
+    INSERT_FIELD(__GXContexts.main->x1D0[11], 0, 2, 12);
 }
 
-// https://decomp.me/scratch/eN1kg // 2515 (18.87%)
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXSetCopyClamp()
+asm void GXSetCopyClamp(s32)
 { // clang-format off
     nofralloc
 /* 8033D768 0033A348  80 AD A5 08 */	lwz r5, __GXContexts(r13)
@@ -219,13 +331,17 @@ asm unk_t GXSetCopyClamp()
 /* 8033D7D4 0033A3B4  54 00 07 FA */	rlwinm r0, r0, 0, 0x1f, 0x1d
 /* 8033D7D8 0033A3B8  7C 00 33 78 */	or r0, r0, r6
 /* 8033D7DC 0033A3BC  90 03 00 00 */	stw r0, 0(r3)
-/* 8033D7E0 0033A3C0  4E 80 00 20 */	blr 
+/* 8033D7E0 0033A3C0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#endif
+
+#ifdef MWERKS_GEKKO
+
 // https://decomp.me/scratch/ZNlNl // 620 (86.81%)
 #pragma push
-asm unk_t GXSetDispCopyYScale()
+asm u32 GXSetDispCopyYScale(f32)
 { // clang-format off
     nofralloc
 /* 8033D7E4 0033A3C4  7C 08 02 A6 */	mflr r0
@@ -274,13 +390,16 @@ asm unk_t GXSetDispCopyYScale()
 /* 8033D890 0033A470  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 8033D894 0033A474  38 21 00 28 */	addi r1, r1, 0x28
 /* 8033D898 0033A478  7C 08 03 A6 */	mtlr r0
-/* 8033D89C 0033A47C  4E 80 00 20 */	blr 
+/* 8033D89C 0033A47C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/uNbv5 // 2555 (1.73%)
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXSetCopyClear()
+asm void GXSetCopyClear(u8*, s32)
 { // clang-format off
     nofralloc
 /* 8033D8A0 0033A480  54 80 02 3E */	clrlwi r0, r4, 8
@@ -308,13 +427,16 @@ asm unk_t GXSetCopyClear()
 /* 8033D8F8 0033A4D8  98 C5 80 00 */	stb r6, -0x8000(r5)
 /* 8033D8FC 0033A4DC  90 E5 80 00 */	stw r7, -0x8000(r5)
 /* 8033D900 0033A4E0  B0 04 00 02 */	sth r0, 2(r4)
-/* 8033D904 0033A4E4  4E 80 00 20 */	blr 
+/* 8033D904 0033A4E4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-// https://decomp.me/scratch/EqBSQ // 6759 (51.02%)
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXSetCopyFilter()
+asm void GXSetCopyFilter(s8, u8*, s8, u8*)
 { // clang-format off
     nofralloc
 /* 8033D908 0033A4E8  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -458,17 +580,21 @@ lbl_8033DB00:
 /* 8033DB20 0033A700  B0 03 00 02 */	sth r0, 2(r3)
 /* 8033DB24 0033A704  BA E1 00 2C */	lmw r23, 0x2c(r1)
 /* 8033DB28 0033A708  38 21 00 50 */	addi r1, r1, 0x50
-/* 8033DB2C 0033A70C  4E 80 00 20 */	blr 
+/* 8033DB2C 0033A70C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#endif
 
 void GXSetDispCopyGamma(s32 arg0)
 {
     INSERT_FIELD(__GXContexts.main->x1D0[7], arg0, 2, 7);
 }
 
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXCopyDisp()
+asm void GXCopyDisp(u32, s8)
 { // clang-format off
     nofralloc
 /* 8033DB4C 0033A72C  54 80 06 3F */	clrlwi. r0, r4, 0x18
@@ -567,12 +693,16 @@ lbl_8033DCAC:
 /* 8033DCAC 0033A88C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 8033DCB0 0033A890  38 00 00 00 */	li r0, 0
 /* 8033DCB4 0033A894  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033DCB8 0033A898  4E 80 00 20 */	blr 
+/* 8033DCB8 0033A898  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
+#endif
+
+#ifdef MWERKS_GEKKO
+
 #pragma push
-asm unk_t GXCopyTex()
+asm void GXCopyTex(u32, GXBool)
 { // clang-format off
     nofralloc
 /* 8033DCBC 0033A89C  54 80 06 3F */	clrlwi. r0, r4, 0x18
@@ -681,11 +811,13 @@ lbl_8033DE3C:
 /* 8033DE3C 0033AA1C  80 6D A5 08 */	lwz r3, __GXContexts(r13)
 /* 8033DE40 0033AA20  38 00 00 00 */	li r0, 0
 /* 8033DE44 0033AA24  B0 03 00 02 */	sth r0, 2(r3)
-/* 8033DE48 0033AA28  4E 80 00 20 */	blr 
+/* 8033DE48 0033AA28  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-void GXClearBoundingBox()
+#endif
+
+void GXClearBoundingBox(void)
 {
     WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = 0x550003FF;

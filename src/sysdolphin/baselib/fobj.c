@@ -1,4 +1,7 @@
+#include "sysdolphin/baselib/forward.h"
 #include <sysdolphin/baselib/fobj.h>
+
+#include <sysdolphin/baselib/spline.h>
 
 HSD_ObjAllocData fobj_alloc_data;
 
@@ -20,7 +23,7 @@ void HSD_FObjRemove(HSD_FObj* fobj)
     HSD_FObjFree(fobj);
 }
 
-void HSD_FObjRemoveAll(HSD_FObj* fobj) 
+void HSD_FObjRemoveAll(HSD_FObj* fobj)
 {
     if (fobj == NULL)
         return;
@@ -48,7 +51,7 @@ inline void HSD_FObjReqAnim(HSD_FObj* fobj, f32 startframe)
         return;
 
     fobj->ad = fobj->ad_head;
-    fobj->time = (f32)fobj->startframe + startframe;
+    fobj->time = (f32) fobj->startframe + startframe;
     fobj->op = 0;
     fobj->op_intrp = 0;
     fobj->flags &= ~0x40;
@@ -73,22 +76,26 @@ void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe)
     }
 }
 
-inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
+inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj,
+                              HSD_ObjUpdateFunc obj_update, f32 rate)
 {
     if (fobj->op_intrp == HSD_A_OP_KEY) {
         HSD_FObjInterpretAnim(fobj, obj, obj_update, rate);
     }
 }
 
-void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate) {
+void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update,
+                      f32 rate)
+{
     if (fobj == NULL)
         return;
-    
+
     FObj_FlushKeyData(fobj, obj, obj_update, rate);
     HSD_FObjSetState(fobj, 0);
 }
 
-void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 rate)
+void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj,
+                         HSD_ObjUpdateFunc obj_update, f32 rate)
 {
     for (; fobj != NULL; fobj = fobj->next) {
         HSD_FObjStopAnim(fobj, obj, obj_update, rate);
@@ -166,55 +173,55 @@ void HSD_FObjStopAnimAll(HSD_FObj* fobj, void* obj, void (*obj_update)(), f32 ra
     }
 }
 
-void FObjUpdateAnim(HSD_FObj* fobj, void* obj, void (*obj_update)(void*, s32, FObjData*))
+void FObjUpdateAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update)
 {
     f32 phi_f0;
-    FObjData fobjdata;
+    HSD_ObjData fobjdata;
 
     if (obj_update == NULL) {
         return;
     }
     switch (fobj->op_intrp) {
-        case HSD_A_OP_KEY:
-            if (fobj->flags & 0x80) {
-                fobjdata.fv = fobj->p0;
-                fobj->flags &= 0xFFFFFF7F;
-            } else {
-                return;
-            }
-            break;
-        case HSD_A_OP_CON:
-            if (fobj->time >= fobj->fterm) {
-                phi_f0 = fobj->p1;
-            } else {
-                phi_f0 = fobj->p0;
-            }
-            fobjdata.fv = phi_f0;
-            break;
-        case HSD_A_OP_LIN:
-            if (fobj->flags & 0x20) {
-                fobj->flags = fobj->flags & 0xFFFFFFDF;
-                if (fobj->fterm != 0) {
-                    fobj->d0 = (fobj->p1 - fobj->p0) / fobj->fterm;
-                } else {
-                    fobj->d0 = 0;
-                    fobj->p0 = fobj->p1;
-                }
-            }
-            fobjdata.fv = fobj->d0 * fobj->time + fobj->p0;
-            break;
-        case HSD_A_OP_SPL0:
-        case HSD_A_OP_SPL:
-        case HSD_A_OP_SLP:
+    case HSD_A_OP_KEY:
+        if (fobj->flags & 0x80) {
+            fobjdata.fv = fobj->p0;
+            fobj->flags &= 0xFFFFFF7F;
+        } else {
+            return;
+        }
+        break;
+    case HSD_A_OP_CON:
+        if (fobj->time >= fobj->fterm) {
+            phi_f0 = fobj->p1;
+        } else {
+            phi_f0 = fobj->p0;
+        }
+        fobjdata.fv = phi_f0;
+        break;
+    case HSD_A_OP_LIN:
+        if (fobj->flags & 0x20) {
+            fobj->flags = fobj->flags & 0xFFFFFFDF;
             if (fobj->fterm != 0) {
-                fobjdata.fv = splGetHelmite(1.0 / fobj->fterm,
-                    fobj->time, fobj->p0, fobj->p1, fobj->d0, fobj->d1);
+                fobj->d0 = (fobj->p1 - fobj->p0) / fobj->fterm;
             } else {
-                fobjdata.fv = fobj->p1;
+                fobj->d0 = 0;
+                fobj->p0 = fobj->p1;
             }
-            break;
-        default:
-            break;
+        }
+        fobjdata.fv = fobj->d0 * fobj->time + fobj->p0;
+        break;
+    case HSD_A_OP_SPL0:
+    case HSD_A_OP_SPL:
+    case HSD_A_OP_SLP:
+        if (fobj->fterm != 0) {
+            fobjdata.fv = splGetHelmite(1.0 / fobj->fterm, fobj->time, fobj->p0,
+                                        fobj->p1, fobj->d0, fobj->d1);
+        } else {
+            fobjdata.fv = fobj->p1;
+        }
+        break;
+    default:
+        break;
     }
     obj_update(obj, fobj->obj_type, &fobjdata);
 }

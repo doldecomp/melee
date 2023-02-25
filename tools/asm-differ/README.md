@@ -7,7 +7,7 @@ Nice differ for assembly code. Currently supports MIPS, PPC, AArch64, and ARM32;
 ## Dependencies
 
 - Python >= 3.6
-- `python3 -m pip install --user colorama watchdog python-Levenshtein` (also `dataclasses` if on 3.6)
+- `python3 -m pip install --user colorama watchdog levenshtein cxxfilt` (also `dataclasses` if on 3.6)
 
 ## Usage
 

@@ -850,14 +850,14 @@ lbl_801CBB54:
 /* 801CBB74 001C8754  CB C1 00 B8 */	lfd f30, 0xb8(r1)
 /* 801CBB78 001C8758  38 21 00 C8 */	addi r1, r1, 0xc8
 /* 801CBB7C 001C875C  7C 08 03 A6 */	mtlr r0
-/* 801CBB80 001C8760  4E 80 00 20 */	blr 
+/* 801CBB80 001C8760  4E 80 00 20 */	blr
 
 
 .section .rodata
     .balign 8
 .global lbl_803B7E50
 lbl_803B7E50:
-	.float 1
+    .float 1
     .float 1
     .float 1
     .float 0
@@ -997,19 +997,19 @@ lbl_804D45B0:
     .balign 8
 .global lbl_804DADB8
 lbl_804DADB8:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DADC0
 lbl_804DADC0:
-	.4byte 0x3FF00000
-	.4byte 0x00000000
+    .4byte 0x3FF00000
+    .4byte 0x00000000
 .global lbl_804DADC8
 lbl_804DADC8:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DADCC
 lbl_804DADCC:
-	.4byte 0x3F8CCCCD
+    .4byte 0x3F8CCCCD
 .global lbl_804DADD0
 lbl_804DADD0:
-	.4byte 0x3F666666
-	.4byte 0x00000000
+    .4byte 0x3F666666
+    .4byte 0x00000000

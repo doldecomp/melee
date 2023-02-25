@@ -171,7 +171,7 @@ while idx < len(final_bytes):
     if mtlr_found_pos + 4 == blr_found_pos:
         idx += 4
         continue # continue if mtlr is followed directly by blr
-    
+
     final_bytes = final_bytes[:mtlr_found_pos] + final_bytes[mtlr_found_pos+4:blr_found_pos] + final_bytes[mtlr_found_pos:mtlr_found_pos+4] + final_bytes[blr_found_pos:]
     idx = mtlr_found_pos + len(MTLR_BYTE_SEQ)
 

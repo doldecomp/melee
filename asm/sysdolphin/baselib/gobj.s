@@ -178,7 +178,7 @@ lbl_8039154C:
 /* 80391570 0038E150  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80391574 0038E154  38 21 00 18 */	addi r1, r1, 0x18
 /* 80391578 0038E158  7C 08 03 A6 */	mtlr r0
-/* 8039157C 0038E15C  4E 80 00 20 */	blr 
+/* 8039157C 0038E15C  4E 80 00 20 */	blr
 
 
 .section .data
@@ -191,10 +191,10 @@ lbl_804085F0:
     .4byte NULL
 .global lbl_80408600
 lbl_80408600:
-	.4byte lbl_80391120
-	.4byte HSD_LObjRemoveAll
-	.4byte HSD_JObjRemoveAll
-	.4byte lbl_803911C0
+    .4byte lbl_80391120
+    .4byte HSD_LObjRemoveAll
+    .4byte HSD_JObjRemoveAll
+    .4byte lbl_803911C0
 .global lbl_80408610
 lbl_80408610:
     .4byte NULL
@@ -213,71 +213,71 @@ lbl_80408620:
     .balign 8
 .global HSD_GObjLibInitData
 HSD_GObjLibInitData:
-	.skip 0xC
+    .skip 0xC
 .global gobj_alloc_data
 gobj_alloc_data:
-	.skip 0x2C
+    .skip 0x2C
 .global gobjproc_alloc_data
 gobjproc_alloc_data:
-	.skip 0x2C
+    .skip 0x2C
 .global lbl_804CE3E4
 lbl_804CE3E4:
-	.skip 0x14
+    .skip 0x14
 
 
 .section .sbss
     .balign 8
 .global lbl_804D7810
 lbl_804D7810:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7814
 lbl_804D7814:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7818
 lbl_804D7818:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D781C
 lbl_804D781C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7820
 lbl_804D7820:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7824
 lbl_804D7824:
-	.skip 0x4
+    .skip 0x4
 .global plinklow_gobjs
 plinklow_gobjs:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D782C
 lbl_804D782C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7830
 lbl_804D7830:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7834
 lbl_804D7834:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7838
 lbl_804D7838:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D783C
 lbl_804D783C:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7840
 lbl_804D7840:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7844
 lbl_804D7844:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D7848
 lbl_804D7848:
-	.skip 0x1
+    .skip 0x1
 .global lbl_804D7849
 lbl_804D7849:
-	.skip 0x1
+    .skip 0x1
 .global lbl_804D784A
 lbl_804D784A:
-	.skip 0x1
+    .skip 0x1
 .global lbl_804D784B
 lbl_804D784B:
-	.skip 0x5
+    .skip 0x5

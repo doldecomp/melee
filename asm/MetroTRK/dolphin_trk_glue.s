@@ -56,7 +56,7 @@ TRKEXICallBack:
 /* 8032ACD8 003278B8  38 21 00 10 */	addi r1, r1, 0x10
 /* 8032ACDC 003278BC  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032ACE0 003278C0  7C 08 03 A6 */	mtlr r0
-/* 8032ACE4 003278C4  4E 80 00 20 */	blr 
+/* 8032ACE4 003278C4  4E 80 00 20 */	blr
 
 .global InitMetroTRKCommTable
 InitMetroTRKCommTable:
@@ -67,9 +67,9 @@ InitMetroTRKCommTable:
 /* 8032ACF8 003278D8  40 82 00 68 */	bne lbl_8032AD60
 /* 8032ACFC 003278DC  48 00 0D 69 */	bl Hu_IsStub
 /* 8032AD00 003278E0  3C A0 80 33 */	lis r5, DBInitComm@ha
-/* 8032AD04 003278E4  3C 80 80 40 */	lis r4, lbl_804008B8@ha
+/* 8032AD04 003278E4  3C 80 80 40 */	lis r4, gDBCommTable@ha
 /* 8032AD08 003278E8  38 05 B6 08 */	addi r0, r5, DBInitComm@l
-/* 8032AD0C 003278EC  38 A4 08 B8 */	addi r5, r4, lbl_804008B8@l
+/* 8032AD0C 003278EC  38 A4 08 B8 */	addi r5, r4, gDBCommTable@l
 /* 8032AD10 003278F0  3C 80 80 33 */	lis r4, DBInitInterrupts@ha
 /* 8032AD14 003278F4  90 05 00 00 */	stw r0, 0(r5)
 /* 8032AD18 003278F8  38 04 B6 80 */	addi r0, r4, DBInitInterrupts@l
@@ -93,9 +93,9 @@ InitMetroTRKCommTable:
 lbl_8032AD60:
 /* 8032AD60 00327940  48 00 02 7D */	bl AMC_IsStub
 /* 8032AD64 00327944  3C A0 80 33 */	lis r5, EXI2_Init@ha
-/* 8032AD68 00327948  3C 80 80 40 */	lis r4, lbl_804008B8@ha
+/* 8032AD68 00327948  3C 80 80 40 */	lis r4, gDBCommTable@ha
 /* 8032AD6C 0032794C  38 05 AF B4 */	addi r0, r5, EXI2_Init@l
-/* 8032AD70 00327950  38 A4 08 B8 */	addi r5, r4, lbl_804008B8@l
+/* 8032AD70 00327950  38 A4 08 B8 */	addi r5, r4, gDBCommTable@l
 /* 8032AD74 00327954  3C 80 80 33 */	lis r4, EXI2_EnableInterrupts@ha
 /* 8032AD78 00327958  90 05 00 00 */	stw r0, 0(r5)
 /* 8032AD7C 0032795C  38 04 AF B8 */	addi r0, r4, EXI2_EnableInterrupts@l
@@ -119,71 +119,71 @@ lbl_8032ADC0:
 /* 8032ADC0 003279A0  38 21 00 08 */	addi r1, r1, 8
 /* 8032ADC4 003279A4  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032ADC8 003279A8  7C 08 03 A6 */	mtlr r0
-/* 8032ADCC 003279AC  4E 80 00 20 */	blr 
+/* 8032ADCC 003279AC  4E 80 00 20 */	blr
 
 .global TRKUARTInterruptHandler
 TRKUARTInterruptHandler:
-/* 8032ADD0 003279B0  4E 80 00 20 */	blr 
+/* 8032ADD0 003279B0  4E 80 00 20 */	blr
 
 .global TRKInitializeIntDrivenUART
 TRKInitializeIntDrivenUART:
 /* 8032ADD4 003279B4  7C 08 02 A6 */	mflr r0
 /* 8032ADD8 003279B8  90 01 00 04 */	stw r0, 4(r1)
 /* 8032ADDC 003279BC  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8032ADE0 003279C0  3C 60 80 40 */	lis r3, lbl_804008B8@ha
-/* 8032ADE4 003279C4  38 63 08 B8 */	addi r3, r3, lbl_804008B8@l
+/* 8032ADE0 003279C0  3C 60 80 40 */	lis r3, gDBCommTable@ha
+/* 8032ADE4 003279C4  38 63 08 B8 */	addi r3, r3, gDBCommTable@l
 /* 8032ADE8 003279C8  3C 80 80 33 */	lis r4, TRKEXICallBack@ha
 /* 8032ADEC 003279CC  81 83 00 00 */	lwz r12, 0(r3)
 /* 8032ADF0 003279D0  38 84 AC B0 */	addi r4, r4, TRKEXICallBack@l
 /* 8032ADF4 003279D4  7C C3 33 78 */	mr r3, r6
 /* 8032ADF8 003279D8  7D 88 03 A6 */	mtlr r12
-/* 8032ADFC 003279DC  4E 80 00 21 */	blrl 
+/* 8032ADFC 003279DC  4E 80 00 21 */	blrl
 /* 8032AE00 003279E0  38 60 00 00 */	li r3, 0
 /* 8032AE04 003279E4  38 21 00 08 */	addi r1, r1, 8
 /* 8032AE08 003279E8  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032AE0C 003279EC  7C 08 03 A6 */	mtlr r0
-/* 8032AE10 003279F0  4E 80 00 20 */	blr 
+/* 8032AE10 003279F0  4E 80 00 20 */	blr
 
 .global EnableEXI2Interrupts
 EnableEXI2Interrupts:
 /* 8032AE14 003279F4  7C 08 02 A6 */	mflr r0
 /* 8032AE18 003279F8  90 01 00 04 */	stw r0, 4(r1)
 /* 8032AE1C 003279FC  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8032AE20 00327A00  3C 60 80 40 */	lis r3, lbl_804008B8@ha
-/* 8032AE24 00327A04  38 63 08 B8 */	addi r3, r3, lbl_804008B8@l
+/* 8032AE20 00327A00  3C 60 80 40 */	lis r3, gDBCommTable@ha
+/* 8032AE24 00327A04  38 63 08 B8 */	addi r3, r3, gDBCommTable@l
 /* 8032AE28 00327A08  81 83 00 04 */	lwz r12, 4(r3)
 /* 8032AE2C 00327A0C  7D 88 03 A6 */	mtlr r12
-/* 8032AE30 00327A10  4E 80 00 21 */	blrl 
+/* 8032AE30 00327A10  4E 80 00 21 */	blrl
 /* 8032AE34 00327A14  38 21 00 08 */	addi r1, r1, 8
 /* 8032AE38 00327A18  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032AE3C 00327A1C  7C 08 03 A6 */	mtlr r0
-/* 8032AE40 00327A20  4E 80 00 20 */	blr 
+/* 8032AE40 00327A20  4E 80 00 20 */	blr
 
 .global TRKPollUART
 TRKPollUART:
 /* 8032AE44 00327A24  7C 08 02 A6 */	mflr r0
 /* 8032AE48 00327A28  90 01 00 04 */	stw r0, 4(r1)
 /* 8032AE4C 00327A2C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8032AE50 00327A30  3C 60 80 40 */	lis r3, lbl_804008B8@ha
-/* 8032AE54 00327A34  38 63 08 B8 */	addi r3, r3, lbl_804008B8@l
+/* 8032AE50 00327A30  3C 60 80 40 */	lis r3, gDBCommTable@ha
+/* 8032AE54 00327A34  38 63 08 B8 */	addi r3, r3, gDBCommTable@l
 /* 8032AE58 00327A38  81 83 00 08 */	lwz r12, 8(r3)
 /* 8032AE5C 00327A3C  7D 88 03 A6 */	mtlr r12
-/* 8032AE60 00327A40  4E 80 00 21 */	blrl 
+/* 8032AE60 00327A40  4E 80 00 21 */	blrl
 /* 8032AE64 00327A44  38 21 00 08 */	addi r1, r1, 8
 /* 8032AE68 00327A48  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032AE6C 00327A4C  7C 08 03 A6 */	mtlr r0
-/* 8032AE70 00327A50  4E 80 00 20 */	blr 
+/* 8032AE70 00327A50  4E 80 00 20 */	blr
 
 .global TRK_ReadUARTN
 TRK_ReadUARTN:
 /* 8032AE74 00327A54  7C 08 02 A6 */	mflr r0
 /* 8032AE78 00327A58  90 01 00 04 */	stw r0, 4(r1)
 /* 8032AE7C 00327A5C  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8032AE80 00327A60  3C A0 80 40 */	lis r5, lbl_804008B8@ha
-/* 8032AE84 00327A64  38 A5 08 B8 */	addi r5, r5, lbl_804008B8@l
+/* 8032AE80 00327A60  3C A0 80 40 */	lis r5, gDBCommTable@ha
+/* 8032AE84 00327A64  38 A5 08 B8 */	addi r5, r5, gDBCommTable@l
 /* 8032AE88 00327A68  81 85 00 0C */	lwz r12, 0xc(r5)
 /* 8032AE8C 00327A6C  7D 88 03 A6 */	mtlr r12
-/* 8032AE90 00327A70  4E 80 00 21 */	blrl 
+/* 8032AE90 00327A70  4E 80 00 21 */	blrl
 /* 8032AE94 00327A74  2C 03 00 00 */	cmpwi r3, 0
 /* 8032AE98 00327A78  40 82 00 0C */	bne lbl_8032AEA4
 /* 8032AE9C 00327A7C  38 60 00 00 */	li r3, 0
@@ -194,18 +194,18 @@ lbl_8032AEA8:
 /* 8032AEA8 00327A88  38 21 00 08 */	addi r1, r1, 8
 /* 8032AEAC 00327A8C  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032AEB0 00327A90  7C 08 03 A6 */	mtlr r0
-/* 8032AEB4 00327A94  4E 80 00 20 */	blr 
+/* 8032AEB4 00327A94  4E 80 00 20 */	blr
 
 .global TRK_WriteUARTN
 TRK_WriteUARTN:
 /* 8032AEB8 00327A98  7C 08 02 A6 */	mflr r0
 /* 8032AEBC 00327A9C  90 01 00 04 */	stw r0, 4(r1)
 /* 8032AEC0 00327AA0  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8032AEC4 00327AA4  3C A0 80 40 */	lis r5, lbl_804008B8@ha
-/* 8032AEC8 00327AA8  38 A5 08 B8 */	addi r5, r5, lbl_804008B8@l
+/* 8032AEC4 00327AA4  3C A0 80 40 */	lis r5, gDBCommTable@ha
+/* 8032AEC8 00327AA8  38 A5 08 B8 */	addi r5, r5, gDBCommTable@l
 /* 8032AECC 00327AAC  81 85 00 10 */	lwz r12, 0x10(r5)
 /* 8032AED0 00327AB0  7D 88 03 A6 */	mtlr r12
-/* 8032AED4 00327AB4  4E 80 00 21 */	blrl 
+/* 8032AED4 00327AB4  4E 80 00 21 */	blrl
 /* 8032AED8 00327AB8  2C 03 00 00 */	cmpwi r3, 0
 /* 8032AEDC 00327ABC  40 82 00 0C */	bne lbl_8032AEE8
 /* 8032AEE0 00327AC0  38 60 00 00 */	li r3, 0
@@ -216,37 +216,37 @@ lbl_8032AEEC:
 /* 8032AEEC 00327ACC  38 21 00 08 */	addi r1, r1, 8
 /* 8032AEF0 00327AD0  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032AEF4 00327AD4  7C 08 03 A6 */	mtlr r0
-/* 8032AEF8 00327AD8  4E 80 00 20 */	blr 
+/* 8032AEF8 00327AD8  4E 80 00 20 */	blr
 
 .global ReserveEXI2Port
 ReserveEXI2Port:
 /* 8032AEFC 00327ADC  7C 08 02 A6 */	mflr r0
 /* 8032AF00 00327AE0  90 01 00 04 */	stw r0, 4(r1)
 /* 8032AF04 00327AE4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8032AF08 00327AE8  3C 60 80 40 */	lis r3, lbl_804008B8@ha
-/* 8032AF0C 00327AEC  38 63 08 B8 */	addi r3, r3, lbl_804008B8@l
+/* 8032AF08 00327AE8  3C 60 80 40 */	lis r3, gDBCommTable@ha
+/* 8032AF0C 00327AEC  38 63 08 B8 */	addi r3, r3, gDBCommTable@l
 /* 8032AF10 00327AF0  81 83 00 14 */	lwz r12, 0x14(r3)
 /* 8032AF14 00327AF4  7D 88 03 A6 */	mtlr r12
-/* 8032AF18 00327AF8  4E 80 00 21 */	blrl 
+/* 8032AF18 00327AF8  4E 80 00 21 */	blrl
 /* 8032AF1C 00327AFC  38 21 00 08 */	addi r1, r1, 8
 /* 8032AF20 00327B00  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032AF24 00327B04  7C 08 03 A6 */	mtlr r0
-/* 8032AF28 00327B08  4E 80 00 20 */	blr 
+/* 8032AF28 00327B08  4E 80 00 20 */	blr
 
 .global UnreserveEXI2Port
 UnreserveEXI2Port:
 /* 8032AF2C 00327B0C  7C 08 02 A6 */	mflr r0
 /* 8032AF30 00327B10  90 01 00 04 */	stw r0, 4(r1)
 /* 8032AF34 00327B14  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8032AF38 00327B18  3C 60 80 40 */	lis r3, lbl_804008B8@ha
-/* 8032AF3C 00327B1C  38 63 08 B8 */	addi r3, r3, lbl_804008B8@l
+/* 8032AF38 00327B18  3C 60 80 40 */	lis r3, gDBCommTable@ha
+/* 8032AF3C 00327B1C  38 63 08 B8 */	addi r3, r3, gDBCommTable@l
 /* 8032AF40 00327B20  81 83 00 18 */	lwz r12, 0x18(r3)
 /* 8032AF44 00327B24  7D 88 03 A6 */	mtlr r12
-/* 8032AF48 00327B28  4E 80 00 21 */	blrl 
+/* 8032AF48 00327B28  4E 80 00 21 */	blrl
 /* 8032AF4C 00327B2C  38 21 00 08 */	addi r1, r1, 8
 /* 8032AF50 00327B30  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032AF54 00327B34  7C 08 03 A6 */	mtlr r0
-/* 8032AF58 00327B38  4E 80 00 20 */	blr 
+/* 8032AF58 00327B38  4E 80 00 20 */	blr
 
 .global TRK_board_display
 TRK_board_display:
@@ -258,13 +258,13 @@ TRK_board_display:
 /* 8032AF70 00327B50  38 21 00 08 */	addi r1, r1, 8
 /* 8032AF74 00327B54  80 01 00 04 */	lwz r0, 4(r1)
 /* 8032AF78 00327B58  7C 08 03 A6 */	mtlr r0
-/* 8032AF7C 00327B5C  4E 80 00 20 */	blr 
+/* 8032AF7C 00327B5C  4E 80 00 20 */	blr
 
 
 .section .data
     .balign 8
-.global lbl_804008B8
-lbl_804008B8:
+.global gDBCommTable
+gDBCommTable:
     .4byte NULL
     .4byte NULL
     .4byte NULL

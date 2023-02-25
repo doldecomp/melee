@@ -81,7 +81,7 @@ lbl_80116C70:
 /* 80116C84 00113864  83 A1 00 34 */	lwz r29, 0x34(r1)
 /* 80116C88 00113868  38 21 00 50 */	addi r1, r1, 0x50
 /* 80116C8C 0011386C  7C 08 03 A6 */	mtlr r0
-/* 80116C90 00113870  4E 80 00 20 */	blr 
+/* 80116C90 00113870  4E 80 00 20 */	blr
 
 .global ftNess_SpecialS_StartAction
 ftNess_SpecialS_StartAction:
@@ -112,7 +112,7 @@ ftNess_SpecialS_StartAction:
 /* 80116CF4 001138D4  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80116CF8 001138D8  38 21 00 18 */	addi r1, r1, 0x18
 /* 80116CFC 001138DC  7C 08 03 A6 */	mtlr r0
-/* 80116D00 001138E0  4E 80 00 20 */	blr 
+/* 80116D00 001138E0  4E 80 00 20 */	blr
 
 .global ftNess_SpecialAirS_Action
 ftNess_SpecialAirS_Action:
@@ -144,12 +144,12 @@ ftNess_SpecialAirS_Action:
 /* 80116D64 00113944  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80116D68 00113948  38 21 00 18 */	addi r1, r1, 0x18
 /* 80116D6C 0011394C  7C 08 03 A6 */	mtlr r0
-/* 80116D70 00113950  4E 80 00 20 */	blr 
+/* 80116D70 00113950  4E 80 00 20 */	blr
 .section .sdata2
     .balign 8
 .global lbl_804D9718/*0.0f*/
 lbl_804D9718/*0.0f*/:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804D971C/*1.0f*/
 lbl_804D971C/*1.0f*/:
-	.4byte 0x3F800000
+    .4byte 0x3F800000

@@ -233,17 +233,17 @@ lbl_8001FBE4:
 /* 8001FBF8 0001C7D8  80 01 00 5C */	lwz r0, 0x5c(r1)
 /* 8001FBFC 0001C7DC  38 21 00 58 */	addi r1, r1, 0x58
 /* 8001FC00 0001C7E0  7C 08 03 A6 */	mtlr r0
-/* 8001FC04 0001C7E4  4E 80 00 20 */	blr 
+/* 8001FC04 0001C7E4  4E 80 00 20 */	blr
 
 .section .bss, "wa"
     .balign 8
 
 skipA0_804335B8:
-	.skip 0xA0
+    .skip 0xA0
 
 .section .sdata2
     .balign 8
 
 lbl_804D7CE0:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000

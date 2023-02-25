@@ -85,7 +85,7 @@ lbl_802F73A0:
 /* 802F73B4 002F3F94  83 C1 00 20 */	lwz r30, 0x20(r1)
 /* 802F73B8 002F3F98  38 21 00 30 */	addi r1, r1, 0x30
 /* 802F73BC 002F3F9C  7C 08 03 A6 */	mtlr r0
-/* 802F73C0 002F3FA0  4E 80 00 20 */	blr 
+/* 802F73C0 002F3FA0  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/C1FoM // 6600 (1.49%)
 .global lbl_802F73C4
@@ -131,7 +131,7 @@ lbl_802F7420:
 /* 802F7450 002F4030  41 82 00 10 */	beq lbl_802F7460
 /* 802F7454 002F4034  7D 88 03 A6 */	mtlr r12
 /* 802F7458 002F4038  38 7D 00 00 */	addi r3, r29, 0
-/* 802F745C 002F403C  4E 80 00 21 */	blrl 
+/* 802F745C 002F403C  4E 80 00 21 */	blrl
 lbl_802F7460:
 /* 802F7460 002F4040  88 1E 00 12 */	lbz r0, 0x12(r30)
 /* 802F7464 002F4044  38 60 00 01 */	li r3, 1
@@ -150,7 +150,7 @@ lbl_802F7470:
 /* 802F7494 002F4074  41 82 00 10 */	beq lbl_802F74A4
 /* 802F7498 002F4078  7D 88 03 A6 */	mtlr r12
 /* 802F749C 002F407C  38 7D 00 00 */	addi r3, r29, 0
-/* 802F74A0 002F4080  4E 80 00 21 */	blrl 
+/* 802F74A0 002F4080  4E 80 00 21 */	blrl
 lbl_802F74A4:
 /* 802F74A4 002F4084  38 00 00 00 */	li r0, 0
 /* 802F74A8 002F4088  90 1E 00 00 */	stw r0, 0(r30)
@@ -163,7 +163,7 @@ lbl_802F74B4:
 /* 802F74C0 002F40A0  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 802F74C4 002F40A4  38 21 00 20 */	addi r1, r1, 0x20
 /* 802F74C8 002F40A8  7C 08 03 A6 */	mtlr r0
-/* 802F74CC 002F40AC  4E 80 00 20 */	blr 
+/* 802F74CC 002F40AC  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/yu4V2 // 6400 (1.54%)
 .global lbl_802F74D0
@@ -209,7 +209,7 @@ lbl_802F752C:
 /* 802F755C 002F413C  41 82 00 10 */	beq lbl_802F756C
 /* 802F7560 002F4140  7D 88 03 A6 */	mtlr r12
 /* 802F7564 002F4144  38 7E 00 00 */	addi r3, r30, 0
-/* 802F7568 002F4148  4E 80 00 21 */	blrl 
+/* 802F7568 002F4148  4E 80 00 21 */	blrl
 lbl_802F756C:
 /* 802F756C 002F414C  88 1F 00 12 */	lbz r0, 0x12(r31)
 /* 802F7570 002F4150  38 60 00 01 */	li r3, 1
@@ -228,7 +228,7 @@ lbl_802F757C:
 /* 802F75A0 002F4180  41 82 00 10 */	beq lbl_802F75B0
 /* 802F75A4 002F4184  7D 88 03 A6 */	mtlr r12
 /* 802F75A8 002F4188  38 7E 00 00 */	addi r3, r30, 0
-/* 802F75AC 002F418C  4E 80 00 21 */	blrl 
+/* 802F75AC 002F418C  4E 80 00 21 */	blrl
 lbl_802F75B0:
 /* 802F75B0 002F4190  38 00 00 00 */	li r0, 0
 /* 802F75B4 002F4194  90 1F 00 1C */	stw r0, 0x1c(r31)
@@ -239,7 +239,7 @@ lbl_802F75B8:
 /* 802F75C4 002F41A4  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 802F75C8 002F41A8  38 21 00 20 */	addi r1, r1, 0x20
 /* 802F75CC 002F41AC  7C 08 03 A6 */	mtlr r0
-/* 802F75D0 002F41B0  4E 80 00 20 */	blr 
+/* 802F75D0 002F41B0  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/ompWa // 13600 (0.73%)
 func_802F75D4:
@@ -286,7 +286,7 @@ lbl_802F7658:
 /* 802F7660 002F4240  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 802F7664 002F4244  38 21 00 18 */	addi r1, r1, 0x18
 /* 802F7668 002F4248  7C 08 03 A6 */	mtlr r0
-/* 802F766C 002F424C  4E 80 00 20 */	blr 
+/* 802F766C 002F424C  4E 80 00 20 */	blr
 lbl_802F7670:
 /* 802F7670 002F4250  7C 08 02 A6 */	mflr r0
 /* 802F7674 002F4254  90 01 00 04 */	stw r0, 4(r1)
@@ -331,7 +331,7 @@ lbl_802F76F4:
 /* 802F76FC 002F42DC  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 802F7700 002F42E0  38 21 00 18 */	addi r1, r1, 0x18
 /* 802F7704 002F42E4  7C 08 03 A6 */	mtlr r0
-/* 802F7708 002F42E8  4E 80 00 20 */	blr 
+/* 802F7708 002F42E8  4E 80 00 20 */	blr
 lbl_802F770C:
 /* 802F770C 002F42EC  7C 08 02 A6 */	mflr r0
 /* 802F7710 002F42F0  90 01 00 04 */	stw r0, 4(r1)
@@ -399,7 +399,7 @@ lbl_802F77E0:
 /* 802F77E8 002F43C8  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 802F77EC 002F43CC  38 21 00 20 */	addi r1, r1, 0x20
 /* 802F77F0 002F43D0  7C 08 03 A6 */	mtlr r0
-/* 802F77F4 002F43D4  4E 80 00 20 */	blr 
+/* 802F77F4 002F43D4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/W1OSN // 19100 (0.52%)
 func_802F77F8:
@@ -426,7 +426,7 @@ lbl_802F7840:
 /* 802F7840 002F4420  38 60 00 0E */	li r3, 0xe
 /* 802F7844 002F4424  38 80 00 0F */	li r4, 0xf
 /* 802F7848 002F4428  38 A0 00 00 */	li r5, 0
-/* 802F784C 002F442C  48 09 89 A5 */	bl func_803901F0
+/* 802F784C 002F442C  48 09 89 A5 */	bl GObj_Create
 /* 802F7850 002F4430  7C 7E 1B 79 */	or. r30, r3, r3
 /* 802F7854 002F4434  41 82 01 28 */	beq lbl_802F797C
 /* 802F7858 002F4438  80 7D 00 00 */	lwz r3, 0(r29)
@@ -514,7 +514,7 @@ lbl_802F7980:
 /* 802F7984 002F4564  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 802F7988 002F4568  38 21 00 28 */	addi r1, r1, 0x28
 /* 802F798C 002F456C  7C 08 03 A6 */	mtlr r0
-/* 802F7990 002F4570  4E 80 00 20 */	blr 
+/* 802F7990 002F4570  4E 80 00 20 */	blr
 lbl_802F7994:
 /* 802F7994 002F4574  7C 08 02 A6 */	mflr r0
 /* 802F7998 002F4578  90 01 00 04 */	stw r0, 4(r1)
@@ -614,7 +614,7 @@ lbl_802F7AE4:
 /* 802F7AE8 002F46C8  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 802F7AEC 002F46CC  38 21 00 30 */	addi r1, r1, 0x30
 /* 802F7AF0 002F46D0  7C 08 03 A6 */	mtlr r0
-/* 802F7AF4 002F46D4  4E 80 00 20 */	blr 
+/* 802F7AF4 002F46D4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/WadtZ // 4600 (2.13%)
 .global func_802F7AF8
@@ -667,7 +667,7 @@ lbl_802F7BA0:
 /* 802F7BA4 002F4784  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 802F7BA8 002F4788  38 21 00 28 */	addi r1, r1, 0x28
 /* 802F7BAC 002F478C  7C 08 03 A6 */	mtlr r0
-/* 802F7BB0 002F4790  4E 80 00 20 */	blr 
+/* 802F7BB0 002F4790  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/f14tv // 3000 (3.23%)
 .global func_802F7BB4
@@ -703,7 +703,7 @@ lbl_802F7C14:
 /* 802F7C20 002F4800  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 802F7C24 002F4804  38 21 00 20 */	addi r1, r1, 0x20
 /* 802F7C28 002F4808  7C 08 03 A6 */	mtlr r0
-/* 802F7C2C 002F480C  4E 80 00 20 */	blr 
+/* 802F7C2C 002F480C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/vLGeu // 5300 (1.85%)
 .global func_802F7C30
@@ -763,7 +763,7 @@ lbl_802F7CEC:
 /* 802F7CF8 002F48D8  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 802F7CFC 002F48DC  38 21 00 20 */	addi r1, r1, 0x20
 /* 802F7D00 002F48E0  7C 08 03 A6 */	mtlr r0
-/* 802F7D04 002F48E4  4E 80 00 20 */	blr 
+/* 802F7D04 002F48E4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/31ni8 // 7000 (1.41%)
 .global func_802F7D08
@@ -841,7 +841,7 @@ lbl_802F7E08:
 /* 802F7E14 002F49F4  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 802F7E18 002F49F8  38 21 00 28 */	addi r1, r1, 0x28
 /* 802F7E1C 002F49FC  7C 08 03 A6 */	mtlr r0
-/* 802F7E20 002F4A00  4E 80 00 20 */	blr 
+/* 802F7E20 002F4A00  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/XTs8a // 2100 (4.55%)
 .global func_802F7E24
@@ -867,7 +867,7 @@ func_802F7E24:
 /* 802F7E6C 002F4A4C  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 802F7E70 002F4A50  38 21 00 10 */	addi r1, r1, 0x10
 /* 802F7E74 002F4A54  7C 08 03 A6 */	mtlr r0
-/* 802F7E78 002F4A58  4E 80 00 20 */	blr 
+/* 802F7E78 002F4A58  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/RCHtv // 3100 (3.12%)
 .global func_802F7E7C
@@ -906,7 +906,7 @@ lbl_802F7EC4:
 /* 802F7EEC 002F4ACC  83 A1 00 0C */	lwz r29, 0xc(r1)
 /* 802F7EF0 002F4AD0  38 21 00 18 */	addi r1, r1, 0x18
 /* 802F7EF4 002F4AD4  7C 08 03 A6 */	mtlr r0
-/* 802F7EF8 002F4AD8  4E 80 00 20 */	blr 
+/* 802F7EF8 002F4AD8  4E 80 00 20 */	blr
 
 .section .data
     .balign 8
@@ -920,7 +920,7 @@ lbl_803F9798:
 .section .bss, "wa"
     .balign 8
 lbl_804A1340:
-	.skip 0x38
+    .skip 0x38
 
 .section .sdata
     .balign 8
@@ -934,8 +934,8 @@ lbl_804D57D0:
 .section .sdata2
     .balign 8
 lbl_804DDAB0:
-	.double 4503599627370496.0
+    .double 4503599627370496.0
 lbl_804DDAB8:
-	.float 0.0
+    .float 0.0
 lbl_804DDABC:
-	.float 12.0
+    .float 12.0

@@ -109,7 +109,7 @@ lbl_801C5CD8:
 /* 801C5D04 001C28E4  38 61 00 30 */	addi r3, r1, 0x30
 /* 801C5D08 001C28E8  7D 88 03 A6 */	mtlr r12
 /* 801C5D0C 001C28EC  38 80 FF FF */	li r4, -1
-/* 801C5D10 001C28F0  4E 80 00 21 */	blrl 
+/* 801C5D10 001C28F0  4E 80 00 21 */	blrl
 /* 801C5D14 001C28F4  2C 03 00 00 */	cmpwi r3, 0
 /* 801C5D18 001C28F8  41 82 00 18 */	beq lbl_801C5D30
 lbl_801C5D1C:
@@ -156,7 +156,7 @@ lbl_801C5D9C:
 /* 801C5DA0 001C2980  80 01 00 94 */	lwz r0, 0x94(r1)
 /* 801C5DA4 001C2984  38 21 00 90 */	addi r1, r1, 0x90
 /* 801C5DA8 001C2988  7C 08 03 A6 */	mtlr r0
-/* 801C5DAC 001C298C  4E 80 00 20 */	blr 
+/* 801C5DAC 001C298C  4E 80 00 20 */	blr
 
 .global func_801C5DB0
 func_801C5DB0:
@@ -276,7 +276,7 @@ lbl_801C5F4C:
 /* 801C5F50 001C2B30  80 01 00 7C */	lwz r0, 0x7c(r1)
 /* 801C5F54 001C2B34  38 21 00 78 */	addi r1, r1, 0x78
 /* 801C5F58 001C2B38  7C 08 03 A6 */	mtlr r0
-/* 801C5F5C 001C2B3C  4E 80 00 20 */	blr 
+/* 801C5F5C 001C2B3C  4E 80 00 20 */	blr
 
 /* this function might belong in the next file */
 .global lbl_801C5F60
@@ -305,7 +305,7 @@ lbl_801C5FAC:
 /* 801C5FB0 001C2B90  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 801C5FB4 001C2B94  38 21 00 20 */	addi r1, r1, 0x20
 /* 801C5FB8 001C2B98  7C 08 03 A6 */	mtlr r0
-/* 801C5FBC 001C2B9C  4E 80 00 20 */	blr 
+/* 801C5FBC 001C2B9C  4E 80 00 20 */	blr
 
 
 .section .data

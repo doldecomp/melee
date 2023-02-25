@@ -1,24 +1,34 @@
 #include <melee/gr/grlib.h>
+
+#include <melee/cm/camera.h>
+#include <melee/gr/grbigblue.h>
+#include <melee/gr/gricemt.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/grrcruise.h>
+#include <melee/it/item2.h>
+#include <melee/lb/lbunknown_003.h>
+#include <placeholder.h>
+#include <sysdolphin/baselib/baselib_unknown_002.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/psappsrt.h>
 
 extern StageInfo stage_info;
 extern u8 lbl_804D7849;
-extern struct _UnkEffectStruct* lbl_804D78FC;
+extern struct _UnkGeneratorStruct* lbl_804D78FC;
 
-static Vec lbl_8049EF58[6];
+static Vec3 lbl_8049EF58[6];
 
-BOOL func_801C96E8(HSD_GObj* arg0)
+bool func_801C96E8(HSD_GObj* arg0)
 {
-    Map* map = arg0->user_data;
-    return map->x10_flags.b4;
+    Ground* gp = arg0->user_data;
+    return gp->x10_flags.b4;
 }
-
-
 
 UnkGeneratorStruct* func_8039F05C(s8, s8, s32);
 UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 
-UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec* arg2)
+UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
 {
     UnkGeneratorStruct* temp_r3;
     UnkGeneratorMember* phi_r30;
@@ -48,17 +58,17 @@ UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec* arg2)
     return temp_r3;
 }
 
-void func_801C97DC(s32 arg0, s32 arg1, s32 arg2)
+void func_801C97DC(s32 arg0, s32 arg1, HSD_JObj* arg2)
 {
     func_8039F6CC(0, arg1, arg0, arg2);
 }
 
-void func_801C9808(s32 arg0, s32 arg1, s32 arg2)
+void func_801C9808(s32 arg0, s32 arg1, HSD_JObj* arg2)
 {
     func_8039EFAC(0, arg1, arg0, arg2);
 }
 
-void func_801C9834(s32 arg0)
+void func_801C9834(UnkGeneratorStruct* arg0)
 {
     func_8039D4DC(arg0);
 }
@@ -68,15 +78,7 @@ void func_801C9854(s32 arg0)
     func_8039D5DC(arg0);
 }
 
-typedef struct _UnkEffectStruct { // MexTK: ptclGen (particle generator)
-    struct _UnkEffectStruct* next;
-    u8 x4_fill[0xC];
-    HSD_JObj* x10_jobj;
-    u16 x14_fill;
-    u16 x16_flags;
-} UnkEffectStruct;
-
-void func_801C9874(UnkEffectStruct* arg0)
+void func_801C9874(UnkGeneratorStruct* arg0)
 {
     arg0->x16_flags |= 0x80;
     func_8039D4DC(arg0);
@@ -84,7 +86,7 @@ void func_801C9874(UnkEffectStruct* arg0)
 
 void func_801C98A0(HSD_JObj* jobj)
 {
-    UnkEffectStruct* cur, *next;
+    UnkGeneratorStruct *cur, *next;
 
     if (jobj == NULL) {
         return;
@@ -117,8 +119,8 @@ inline HSD_JObj* jobj_next(HSD_JObj* node)
 
 void func_801C9908(HSD_JObj* jobj)
 {
-    UnkEffectStruct* cur;
-    UnkEffectStruct* next;
+    UnkGeneratorStruct* cur;
+    UnkGeneratorStruct* next;
 
     if (jobj == NULL) {
         return;
@@ -141,16 +143,15 @@ void func_801C9908(HSD_JObj* jobj)
     }
 }
 
-void func_801C99C0(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
+void func_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
 {
-    if (arg3 != 0) {
+    if (arg3 != 0)
         func_8039EFAC(0, arg0, arg1, arg2);
-    } else {
+    else
         func_8039F6CC(0, arg0, arg1, arg2);
-    }
 }
 
-Vec* func_801C9A10(void)
+Vec3* func_801C9A10(void)
 {
     func_801C2D24(0, &lbl_8049EF58[0]);
     func_801C2D24(1, &lbl_8049EF58[1]);
@@ -159,9 +160,9 @@ Vec* func_801C9A10(void)
     return lbl_8049EF58;
 }
 
-void func_801C9A70(s32 arg0, Vec* v)
+void func_801C9A70(enum_t arg0, Vec3* v)
 {
-    s32 i;
+    int i;
     switch (arg0) {
     case 0:
         i = 0;
@@ -176,17 +177,16 @@ void func_801C9A70(s32 arg0, Vec* v)
         i = 3;
         break;
     default:
-        assert_line(290, 0);
+        HSD_ASSERT(290, 0);
+#ifndef MUST_MATCH
+        // Asserts 0 but the compiler doesn't know that.
+        return;
+#endif
     }
     *v = lbl_8049EF58[i];
 }
 
-typedef struct _UnkAnimStruct {
-    void* x0_data;
-    s32 x4_size;
-} UnkAnimStruct;
-
-void func_801C9B20(void* arg1, UnkAnimStruct* arg2, void* arg3)
+void func_801C9B20(void* arg1, UnkAnimStruct* arg2, unk_t arg3)
 {
     func_8000FD48(arg1, arg3, arg2->x4_size);
     func_80011710(arg2, arg3);
@@ -245,7 +245,7 @@ HSD_GObj* func_801C9CEC(s32 idx1)
         return NULL;
     }
     tmp = idx1;
-    gobj = func_803901F0(3, 18, tmp);
+    gobj = GObj_Create(3, 18, tmp);
     jobj = HSD_JObjLoadJoint(stage_info.x6CC->joint);
 
     func_80390A70(gobj, lbl_804D7849, jobj);
@@ -273,30 +273,39 @@ void func_801C9E50(s16 val)
     stage_info.x708 = val;
 }
 
-BOOL func_801C9E60(Vec* v)
+bool func_801C9E60(Vec3* v)
 {
-    s32 id = stage_info.internal_stage_id;
+    InternalStageId id = stage_info.internal_stage_id;
+
     if (id == RCRUISE) {
         func_80201918(v);
-        return TRUE;
+        return true;
     }
+
     if (id == BIGBLUE) {
         func_801EF7D8(v);
-        return TRUE;
+        return true;
     }
+
     if (id == ICEMTN) {
         func_801FA728(v);
-        return TRUE;
+        return true;
     }
-    v->z = 0;
-    v->y = 0;
-    v->x = 0;
-    return FALSE;
+
+    v->z = 0.0F;
+    v->y = 0.0F;
+    v->x = 0.0F;
+
+    return false;
 }
 
-// Only called from yorster and inishie1
-asm BOOL func_801C9EE8()
+#ifdef MWERKS_GEKKO
+
+#pragma push
+/// @todo @c clang-format why
+asm bool func_801C9EE8(void)
 {
+    // clang-format off
     nofralloc
 /* 801C9EE8 001C6AC8  7C 08 02 A6 */	mflr r0
 /* 801C9EEC 001C6ACC  90 01 00 04 */	stw r0, 4(r1)
@@ -429,5 +438,15 @@ lbl_801CA090:
 /* 801CA0A4 001C6C84  83 C1 00 38 */	lwz r30, 0x38(r1)
 /* 801CA0A8 001C6C88  38 21 00 58 */	addi r1, r1, 0x58
 /* 801CA0AC 001C6C8C  7C 08 03 A6 */	mtlr r0
-/* 801CA0B0 001C6C90  4E 80 00 20 */	blr 
+/* 801CA0B0 001C6C90  4E 80 00 20 */	blr
+} // clang-format on
+#pragma pop
+
+#else
+
+bool func_801C9EE8(void)
+{
+    NOT_IMPLEMENTED;
 }
+
+#endif

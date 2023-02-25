@@ -1,5 +1,5 @@
-#include <dolphin/types.h>
 #include <MSL/math.h>
+#include <Runtime/platform.h>
 
 f32 cos__Ff(f32);
 f32 sin__Ff(f32);
@@ -21,10 +21,11 @@ f32 sin__Ff(f32 x)
     return sinf(x);
 }
 
-const float tmp_float[] = {0.25F, 0.023239374F, 0.00000017055572F, 1.867365e-11F};
+const float tmp_float[] = { 0.25F, 0.023239374F, 0.00000017055572F,
+                            1.867365e-11F };
 
-int lbl_80400770[] = {0x7FFFFFFF};
-int lbl_80400774[] = {0x7F800000};
+int lbl_80400770[] = { 0x7FFFFFFF };
+int lbl_80400774[] = { 0x7F800000 };
 
 float __four_over_pi_m1[4] = {};
 
@@ -37,50 +38,7 @@ const double lbl_804DE1A8 = 4503601774854144.0L;
 extern const float __sincos_poly[];
 extern const float __sincos_on_quadrant[];
 
-#ifdef NON_MATCHING
-
-
-float cosf(float x) {
-    float z = __two_over_pi * x;
-
-    //note we multiply n by 2 below because the polynomial we are using is for [o,pi/4]. n is the nearest multiple
-    // of pi/2 not pi/4.
-    //  frac_part is the remainder(mod(pi/4))
-    // i.e. the actual arg that will be evaluated is frac_part*(pi/4)
-    // note: since n is signed n<<1 may pad rightmost bit w/a one.
-    int n = (__HI(x) & 0x80000000) ? (int)(z - .5f) : (int)(z + .5f);
-
-    const float frac_part = ((((x - (float)(n * 2)) + __four_over_pi_m1[0] * x) + __four_over_pi_m1[1] * x) +
-        __four_over_pi_m1[2] * x) + __four_over_pi_m1[3] * x
-    /*) +
-    													__four_over_pi_m1[4]*x  */
-    ;
-
-    float xsq;
-    n &= 0x00000003;
-
-    if (fabsf__Ff(frac_part) < __SQRT_FLT_EPSILON__) {
-        n <<= 1; //index into __sincos_on_quadrant array
-        return __sincos_on_quadrant[n + 1] - (__sincos_on_quadrant[n] * frac_part);
-    }
-
-    //use identity cos(x)=cos(n*pi/4 + frac_part)=cos(n*pi/4)cos(frac_part)- sin(n*pi/4)sin(frac_part)
-    xsq = frac_part * frac_part;
-    if (n & 0x00000001) // we are at a multiple of pi/2 thus cos(n*pi/4)= 0
-    {
-        n <<= 1; //index into __sincos_on_quadrant array 
-        z = -((((__sincos_poly[1] * xsq + __sincos_poly[3]) * xsq + __sincos_poly[5]) * xsq + __sincos_poly[7]) * xsq + __sincos_poly[9]) * frac_part;
-        return z * __sincos_on_quadrant[n];
-    }
-
-    n <<= 1; //index into __sincos_on_quadrant array
-    // if here we are near a multiple of pi so sin(n*pi/4) =0
-
-    z = (((__sincos_poly[0] * xsq + __sincos_poly[2]) * xsq + __sincos_poly[4]) * xsq + __sincos_poly[6]) * xsq + __sincos_poly[8];
-    return z * __sincos_on_quadrant[n + 1]; // sin(frac_part)*cos(n*pi/4);  note: n*pi/4 is a multiple of pi/2(not pi)
-}
-
-#else
+#ifdef MUST_MATCH
 
 #pragma push
 asm float cosf(float)
@@ -191,61 +149,76 @@ lbl_803263BC:
 /* 803263C4 00322FA4  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 803263C8 00322FA8  7C 08 03 A6 */	mtlr r0
 /* 803263CC 00322FAC  38 21 00 28 */	addi r1, r1, 0x28
-/* 803263D0 00322FB0  4E 80 00 20 */	blr 
+/* 803263D0 00322FB0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-#endif
+#else
 
-#ifdef NON_MATCHING
-
-float sinf(float x) {
+float cosf(float x)
+{
     float z = __two_over_pi * x;
-    //note we multiply n by 2 below because the polynomial we are using is for [o,pi/4]. n is the nearest multiple
-    // of pi/2 not pi/4.
-    //  frac_part is the remainder(mod(pi/4))
-    // i.e. the actual arg that will be evaluated is frac_part*(pi/4)
-    // note: since n is signed n<<1 may pad rightmost bit w/a one.
-    int n = (__HI(x) & 0x80000000) ? (int)(z - .5f) : (int)(z + .5f);
 
-    const float frac_part = ((((x - (float)(n * 2)) + __four_over_pi_m1[0] * x) + __four_over_pi_m1[1] * x) +
-        __four_over_pi_m1[2] * x) + __four_over_pi_m1[3] * x
-    /*) +
-      	                                               __four_over_pi_m1[4]*x  */
-    ;
+    // note we multiply n by 2 below because the polynomial we are using is for
+    // [o,pi/4]. n is the nearest multiple
+    //  of pi/2 not pi/4.
+    //   frac_part is the remainder(mod(pi/4))
+    //  i.e. the actual arg that will be evaluated is frac_part*(pi/4)
+    //  note: since n is signed n<<1 may pad rightmost bit w/a one.
+    int n = (MSL_HI(x) & 0x80000000) ? (int) (z - .5f) : (int) (z + .5f);
+
+    const float frac_part =
+        ((((x - (float) (n * 2)) + __four_over_pi_m1[0] * x) +
+          __four_over_pi_m1[1] * x) +
+         __four_over_pi_m1[2] * x) +
+        __four_over_pi_m1[3] * x
+        /*) +
+                                                            __four_over_pi_m1[4]*x
+         */
+        ;
 
     float xsq;
-
-    //assumes 2's complement integer storage for negative numbers.
     n &= 0x00000003;
 
     if (fabsf__Ff(frac_part) < __SQRT_FLT_EPSILON__) {
-        n <<= 1; //index into __sincos_on_quadrant array
-        return __sincos_on_quadrant[n] + (__sincos_on_quadrant[n + 1] * frac_part * __sincos_poly[9]);
+        n <<= 1; // index into __sincos_on_quadrant array
+        return __sincos_on_quadrant[n + 1] -
+               (__sincos_on_quadrant[n] * frac_part);
     }
 
+    // use identity cos(x)=cos(n*pi/4 + frac_part)=cos(n*pi/4)cos(frac_part)-
+    // sin(n*pi/4)sin(frac_part)
     xsq = frac_part * frac_part;
     if (n & 0x00000001) // we are at a multiple of pi/2 thus cos(n*pi/4)= 0
     {
-
-        n <<= 1; //index into __sincos_on_quadrant array
-        z = (((__sincos_poly[0] * xsq + __sincos_poly[2]) * xsq + __sincos_poly[4]) * xsq + __sincos_poly[6]) * xsq +
-            __sincos_poly[8];
-
-        return z * __sincos_on_quadrant[n]; // sin(frac_part)*cos(n*pi/4);  note: n*pi/4 is a multiple of pi/2(not pi)
-        //return z;// sin(frac_part)*cos(n*pi/4);  note: n*pi/4 is a multiple of pi/2(not pi)
+        n <<= 1; // index into __sincos_on_quadrant array
+        z = -((((__sincos_poly[1] * xsq + __sincos_poly[3]) * xsq +
+                __sincos_poly[5]) *
+                   xsq +
+               __sincos_poly[7]) *
+                  xsq +
+              __sincos_poly[9]) *
+            frac_part;
+        return z * __sincos_on_quadrant[n];
     }
 
+    n <<= 1; // index into __sincos_on_quadrant array
     // if here we are near a multiple of pi so sin(n*pi/4) =0
-    n <<= 1; //index into __sincos_on_quadrant array
 
-    z = ((((__sincos_poly[1] * xsq + __sincos_poly[3]) * xsq + __sincos_poly[5]) * xsq + __sincos_poly[7]) * xsq + __sincos_poly[9]) * frac_part;
-    //return z;// sin(frac_part)*cos(n*pi/4);  note: n*pi/4 is a multiple of pi/2(not pi)
-
-    return z * __sincos_on_quadrant[n + 1]; // sin(frac_part)*cos(n*pi/4);  note: n*pi/4 is a multiple of pi/2(not pi)
+    z = (((__sincos_poly[0] * xsq + __sincos_poly[2]) * xsq +
+          __sincos_poly[4]) *
+             xsq +
+         __sincos_poly[6]) *
+            xsq +
+        __sincos_poly[8];
+    return z *
+           __sincos_on_quadrant[n + 1]; // sin(frac_part)*cos(n*pi/4);  note:
+                                        // n*pi/4 is a multiple of pi/2(not pi)
 }
 
-#else
+#endif
+
+#ifdef MUST_MATCH
 
 #pragma push
 asm float sinf(float)
@@ -360,25 +333,86 @@ lbl_80326560:
 /* 80326568 00323148  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 8032656C 0032314C  7C 08 03 A6 */	mtlr r0
 /* 80326570 00323150  38 21 00 28 */	addi r1, r1, 0x28
-/* 80326574 00323154  4E 80 00 20 */	blr 
+/* 80326574 00323154  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
 
-#endif
-
-#ifdef NON_MATCHING
-
-void __sinit_trigf_c() {
-    __four_over_pi_m1[0] = tmp_float[0];
-    __four_over_pi_m1[1] = tmp_float[1];
-    __four_over_pi_m1[2] = tmp_float[2];
-    __four_over_pi_m1[3] = tmp_float[3];
-}
-
 #else
 
+float sinf(float x)
+{
+    float z = __two_over_pi * x;
+    // note we multiply n by 2 below because the polynomial we are using is for
+    // [o,pi/4]. n is the nearest multiple
+    //  of pi/2 not pi/4.
+    //   frac_part is the remainder(mod(pi/4))
+    //  i.e. the actual arg that will be evaluated is frac_part*(pi/4)
+    //  note: since n is signed n<<1 may pad rightmost bit w/a one.
+    int n = (MSL_HI(x) & 0x80000000) ? (int) (z - .5f) : (int) (z + .5f);
+
+    const float frac_part =
+        ((((x - (float) (n * 2)) + __four_over_pi_m1[0] * x) +
+          __four_over_pi_m1[1] * x) +
+         __four_over_pi_m1[2] * x) +
+        __four_over_pi_m1[3] * x
+        /*) +
+                                                           __four_over_pi_m1[4]*x
+         */
+        ;
+
+    float xsq;
+
+    // assumes 2's complement integer storage for negative numbers.
+    n &= 0x00000003;
+
+    if (fabsf__Ff(frac_part) < __SQRT_FLT_EPSILON__) {
+        n <<= 1; // index into __sincos_on_quadrant array
+        return __sincos_on_quadrant[n] +
+               (__sincos_on_quadrant[n + 1] * frac_part * __sincos_poly[9]);
+    }
+
+    xsq = frac_part * frac_part;
+    if (n & 0x00000001) // we are at a multiple of pi/2 thus cos(n*pi/4)= 0
+    {
+        n <<= 1; // index into __sincos_on_quadrant array
+        z = (((__sincos_poly[0] * xsq + __sincos_poly[2]) * xsq +
+              __sincos_poly[4]) *
+                 xsq +
+             __sincos_poly[6]) *
+                xsq +
+            __sincos_poly[8];
+
+        return z *
+               __sincos_on_quadrant[n]; // sin(frac_part)*cos(n*pi/4);  note:
+                                        // n*pi/4 is a multiple of pi/2(not pi)
+        // return z;// sin(frac_part)*cos(n*pi/4);  note: n*pi/4 is a multiple
+        // of pi/2(not pi)
+    }
+
+    // if here we are near a multiple of pi so sin(n*pi/4) =0
+    n <<= 1; // index into __sincos_on_quadrant array
+
+    z = ((((__sincos_poly[1] * xsq + __sincos_poly[3]) * xsq +
+           __sincos_poly[5]) *
+              xsq +
+          __sincos_poly[7]) *
+             xsq +
+         __sincos_poly[9]) *
+        frac_part;
+    // return z;// sin(frac_part)*cos(n*pi/4);  note: n*pi/4 is a multiple of
+    // pi/2(not pi)
+
+    return z *
+           __sincos_on_quadrant[n + 1]; // sin(frac_part)*cos(n*pi/4);  note:
+                                        // n*pi/4 is a multiple of pi/2(not pi)
+}
+
+#endif
+
+#ifdef MUST_MATCH
+
 #pragma push
-asm void __sinit_trigf_c()
+asm void __sinit_trigf_c(void)
 { // clang-format off
     nofralloc
 /* 80326578 00323158  3C 60 80 3C */	lis r3, tmp_float@ha
@@ -392,8 +426,18 @@ asm void __sinit_trigf_c()
 /* 80326598 00323178  D0 03 00 08 */	stfs f0, 8(r3)
 /* 8032659C 0032317C  C0 04 00 0C */	lfs f0, 0xc(r4)
 /* 803265A0 00323180  D0 03 00 0C */	stfs f0, 0xc(r3)
-/* 803265A4 00323184  4E 80 00 20 */	blr 
+/* 803265A4 00323184  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __sinit_trigf_c(void)
+{
+    __four_over_pi_m1[0] = tmp_float[0];
+    __four_over_pi_m1[1] = tmp_float[1];
+    __four_over_pi_m1[2] = tmp_float[2];
+    __four_over_pi_m1[3] = tmp_float[3];
+}
 
 #endif

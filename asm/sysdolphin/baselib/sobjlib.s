@@ -16,7 +16,7 @@ func_803A44A4:
 /* 803A44C4 003A10A4  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 803A44C8 003A10A8  38 21 00 08 */	addi r1, r1, 8
 /* 803A44CC 003A10AC  7C 08 03 A6 */	mtlr r0
-/* 803A44D0 003A10B0  4E 80 00 20 */	blr 
+/* 803A44D0 003A10B0  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/YScqE
 .global func_803A44D4
@@ -136,7 +136,7 @@ lbl_803A464C:
 /* 803A465C 003A123C  83 A1 00 2C */	lwz r29, 0x2c(r1)
 /* 803A4660 003A1240  38 21 00 38 */	addi r1, r1, 0x38
 /* 803A4664 003A1244  7C 08 03 A6 */	mtlr r0
-/* 803A4668 003A1248  4E 80 00 20 */	blr 
+/* 803A4668 003A1248  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/jvzaI
 .global func_803A466C
@@ -201,7 +201,7 @@ lbl_803A472C:
 /* 803A4730 003A1310  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 803A4734 003A1314  38 21 00 20 */	addi r1, r1, 0x20
 /* 803A4738 003A1318  7C 08 03 A6 */	mtlr r0
-/* 803A473C 003A131C  4E 80 00 20 */	blr 
+/* 803A473C 003A131C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/afkxp
 .global func_803A4740
@@ -222,7 +222,7 @@ lbl_803A4760:
 /* 803A476C 003A134C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 803A4770 003A1350  38 21 00 18 */	addi r1, r1, 0x18
 /* 803A4774 003A1354  7C 08 03 A6 */	mtlr r0
-/* 803A4778 003A1358  4E 80 00 20 */	blr 
+/* 803A4778 003A1358  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/I6wRr
 .global func_803A477C
@@ -386,7 +386,7 @@ lbl_803A490C:
 /* 803A49D0 003A15B0  CB E1 00 70 */	lfd f31, 0x70(r1)
 /* 803A49D4 003A15B4  38 21 00 78 */	addi r1, r1, 0x78
 /* 803A49D8 003A15B8  7C 08 03 A6 */	mtlr r0
-/* 803A49DC 003A15BC  4E 80 00 20 */	blr 
+/* 803A49DC 003A15BC  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/4iDwE
 .global func_803A49E0
@@ -415,7 +415,7 @@ lbl_803A4A24:
 /* 803A4A2C 003A160C  41 82 00 10 */	beq lbl_803A4A3C
 /* 803A4A30 003A1610  7D 88 03 A6 */	mtlr r12
 /* 803A4A34 003A1614  38 7F 00 00 */	addi r3, r31, 0
-/* 803A4A38 003A1618  4E 80 00 21 */	blrl 
+/* 803A4A38 003A1618  4E 80 00 21 */	blrl
 lbl_803A4A3C:
 /* 803A4A3C 003A161C  7F E3 FB 78 */	mr r3, r31
 /* 803A4A40 003A1620  48 00 00 29 */	bl func_803A4A68
@@ -429,7 +429,7 @@ lbl_803A4A50:
 /* 803A4A58 003A1638  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 803A4A5C 003A163C  38 21 00 20 */	addi r1, r1, 0x20
 /* 803A4A60 003A1640  7C 08 03 A6 */	mtlr r0
-/* 803A4A64 003A1644  4E 80 00 20 */	blr 
+/* 803A4A64 003A1644  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/ykUfq
 .global func_803A4A68
@@ -878,7 +878,7 @@ lbl_803A510C:
 /* 803A511C 003A1CFC  57 A0 10 3A */	slwi r0, r29, 2
 /* 803A5120 003A1D00  7C 03 00 2E */	lwzx r0, r3, r0
 /* 803A5124 003A1D04  7C 09 03 A6 */	mtctr r0
-/* 803A5128 003A1D08  4E 80 04 20 */	bctr 
+/* 803A5128 003A1D08  4E 80 04 20 */	bctr
 .global lbl_803A512C
 lbl_803A512C:
 /* 803A512C 003A1D0C  80 1C 00 38 */	lwz r0, 0x38(r28)
@@ -1131,7 +1131,7 @@ lbl_803A54B4:
 /* 803A54DC 003A20BC  83 81 00 88 */	lwz r28, 0x88(r1)
 /* 803A54E0 003A20C0  38 21 00 C8 */	addi r1, r1, 0xc8
 /* 803A54E4 003A20C4  7C 08 03 A6 */	mtlr r0
-/* 803A54E8 003A20C8  4E 80 00 20 */	blr 
+/* 803A54E8 003A20C8  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/rwP4G
 .global func_803A54EC
@@ -1152,7 +1152,7 @@ func_803A54EC:
 /* 803A5520 003A2100  4B F9 BF F1 */	bl GXSetCurrentMtx
 /* 803A5524 003A2104  4B FC 4D 65 */	bl HSD_CObjGetCurrent
 /* 803A5528 003A2108  38 81 00 10 */	addi r4, r1, 0x10
-/* 803A552C 003A210C  4B FC 40 C5 */	bl func_803695F0
+/* 803A552C 003A210C  4B FC 40 C5 */	bl HSD_CObjGetViewingMtx
 /* 803A5530 003A2110  38 61 00 10 */	addi r3, r1, 0x10
 /* 803A5534 003A2114  38 80 00 00 */	li r4, 0
 /* 803A5538 003A2118  4B F9 BF 5D */	bl GXLoadPosMtxImm
@@ -1197,7 +1197,7 @@ lbl_803A55AC:
 /* 803A55CC 003A21AC  83 C1 00 40 */	lwz r30, 0x40(r1)
 /* 803A55D0 003A21B0  38 21 00 48 */	addi r1, r1, 0x48
 /* 803A55D4 003A21B4  7C 08 03 A6 */	mtlr r0
-/* 803A55D8 003A21B8  4E 80 00 20 */	blr 
+/* 803A55D8 003A21B8  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/LA73x
 .global func_803A55DC
@@ -1263,28 +1263,28 @@ func_803A55DC:
 /* 803A56C4 003A22A4  4B FC 4B CD */	bl HSD_CObjAlloc
 /* 803A56C8 003A22A8  3B E3 00 00 */	addi r31, r3, 0
 /* 803A56CC 003A22AC  38 80 00 03 */	li r4, 3
-/* 803A56D0 003A22B0  4B FC 4A 75 */	bl func_8036A144
+/* 803A56D0 003A22B0  4B FC 4A 75 */	bl HSD_CObjSetProjectionType
 /* 803A56D4 003A22B4  38 7F 00 00 */	addi r3, r31, 0
 /* 803A56D8 003A22B8  38 81 00 34 */	addi r4, r1, 0x34
-/* 803A56DC 003A22BC  4B FC 49 7D */	bl func_8036A058
+/* 803A56DC 003A22BC  4B FC 49 7D */	bl HSD_CObjSetViewport
 /* 803A56E0 003A22C0  38 7F 00 00 */	addi r3, r31, 0
 /* 803A56E4 003A22C4  38 81 00 2C */	addi r4, r1, 0x2c
-/* 803A56E8 003A22C8  4B FC 49 0D */	bl func_80369FF4
+/* 803A56E8 003A22C8  4B FC 49 0D */	bl HSD_CObjSetScissor
 /* 803A56EC 003A22CC  38 7F 00 00 */	addi r3, r31, 0
 /* 803A56F0 003A22D0  38 81 00 20 */	addi r4, r1, 0x20
-/* 803A56F4 003A22D4  4B FC 30 FD */	bl func_803687F0
+/* 803A56F4 003A22D4  4B FC 30 FD */	bl HSD_CObjSetEyePosition
 /* 803A56F8 003A22D8  38 7F 00 00 */	addi r3, r31, 0
 /* 803A56FC 003A22DC  38 81 00 14 */	addi r4, r1, 0x14
-/* 803A5700 003A22E0  4B FC 30 19 */	bl func_80368718
+/* 803A5700 003A22E0  4B FC 30 19 */	bl HSD_CObjSetInterest
 /* 803A5704 003A22E4  7F E3 FB 78 */	mr r3, r31
 /* 803A5708 003A22E8  FC 20 F8 90 */	fmr f1, f31
-/* 803A570C 003A22EC  4B FC 42 B5 */	bl func_803699C0
+/* 803A570C 003A22EC  4B FC 42 B5 */	bl HSD_CObjSetRoll
 /* 803A5710 003A22F0  7F E3 FB 78 */	mr r3, r31
 /* 803A5714 003A22F4  FC 20 F8 90 */	fmr f1, f31
-/* 803A5718 003A22F8  4B FC 48 89 */	bl func_80369FA0
+/* 803A5718 003A22F8  4B FC 48 89 */	bl HSD_CObjSetNear
 /* 803A571C 003A22FC  7F E3 FB 78 */	mr r3, r31
 /* 803A5720 003A2300  FC 20 F0 90 */	fmr f1, f30
-/* 803A5724 003A2304  4B FC 48 A5 */	bl func_80369FC8
+/* 803A5724 003A2304  4B FC 48 A5 */	bl HSD_CObjSetFar
 /* 803A5728 003A2308  FC 20 E8 90 */	fmr f1, f29
 /* 803A572C 003A230C  7F E3 FB 78 */	mr r3, r31
 /* 803A5730 003A2310  FC 40 E0 90 */	fmr f2, f28
@@ -1312,19 +1312,19 @@ func_803A55DC:
 /* 803A5788 003A2368  83 A1 00 54 */	lwz r29, 0x54(r1)
 /* 803A578C 003A236C  38 21 00 90 */	addi r1, r1, 0x90
 /* 803A5790 003A2370  7C 08 03 A6 */	mtlr r0
-/* 803A5794 003A2374  4E 80 00 20 */	blr 
+/* 803A5794 003A2374  4E 80 00 20 */	blr
 
 
 .section .rodata
     .balign 8
 .global lbl_803B9658
 lbl_803B9658:
-	.float 0
+    .float 0
     .float 0
     .float 1
 .global lbl_803B9664
 lbl_803B9664:
-	.float 0
+    .float 0
     .float 0
     .float 0
 
@@ -1333,7 +1333,7 @@ lbl_803B9664:
     .balign 8
 .global lbl_8040C3A0
 lbl_8040C3A0:
-	.4byte func_803A4740
+    .4byte func_803A4740
 .global lbl_8040C3A4
 lbl_8040C3A4:
     .4byte NULL
@@ -1349,21 +1349,21 @@ lbl_8040C3BC:
     .balign 4
 .global jtbl_8040C3DC
 jtbl_8040C3DC:
-	.4byte lbl_803A512C
-	.4byte lbl_803A512C
-	.4byte lbl_803A51C0
-	.4byte lbl_803A51C0
-	.4byte lbl_803A5254
-	.4byte lbl_803A52D4
-	.4byte lbl_803A52D4
-	.4byte lbl_803A5350
-	.4byte lbl_803A52D4
-	.4byte lbl_803A52D4
-	.4byte lbl_803A52D4
-	.4byte lbl_803A5350
-	.4byte lbl_803A5350
-	.4byte lbl_803A5350
-	.4byte lbl_803A52D4
+    .4byte lbl_803A512C
+    .4byte lbl_803A512C
+    .4byte lbl_803A51C0
+    .4byte lbl_803A51C0
+    .4byte lbl_803A5254
+    .4byte lbl_803A52D4
+    .4byte lbl_803A52D4
+    .4byte lbl_803A5350
+    .4byte lbl_803A52D4
+    .4byte lbl_803A52D4
+    .4byte lbl_803A52D4
+    .4byte lbl_803A5350
+    .4byte lbl_803A5350
+    .4byte lbl_803A5350
+    .4byte lbl_803A52D4
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -1396,7 +1396,7 @@ jtbl_8040C3DC:
     .balign 8
 .global lbl_804D10E0
 lbl_804D10E0:
-	.skip 0x30
+    .skip 0x30
 
 
 .section .sdata
@@ -1411,44 +1411,44 @@ lbl_804D6388:
     .balign 8
 .global lbl_804D7960
 lbl_804D7960:
-	.skip 0x8
+    .skip 0x8
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DEA70
 lbl_804DEA70:
-	.4byte NULL
+    .4byte NULL
 .global lbl_804DEA74
 lbl_804DEA74:
-	.float 1.0
+    .float 1.0
 .global lbl_804DEA78
 lbl_804DEA78:
-	.float 176.0
-	.4byte NULL
+    .float 176.0
+    .4byte NULL
 .global lbl_804DEA80
 lbl_804DEA80:
-	.4byte 0xFFA60000
+    .4byte 0xFFA60000
 .global lbl_804DEA84
 lbl_804DEA84:
-	.4byte 0xFF8E0087
+    .4byte 0xFF8E0087
 .global lbl_804DEA88
 lbl_804DEA88:
-	.4byte 0x0000E258
+    .4byte 0x0000E258
 .global lbl_804DEA8C
 lbl_804DEA8C:
-	.4byte 0xB30000B6
+    .4byte 0xB30000B6
 .global lbl_804DEA90
 lbl_804DEA90:
-	.4byte 0xFF00FF80
+    .4byte 0xFF00FF80
 .global lbl_804DEA94
 lbl_804DEA94:
-	.float 0.5
+    .float 0.5
 .global lbl_804DEA98
 lbl_804DEA98:
-	.float 2.0
-	.4byte NULL
+    .float 2.0
+    .4byte NULL
 .global lbl_804DEAA0
 lbl_804DEAA0:
-	.float 176.0
-	.4byte 0x80000000
+    .float 176.0
+    .4byte 0x80000000

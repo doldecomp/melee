@@ -1,37 +1,47 @@
-#include <melee/lb/lblanguage.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lblanguage.h>
 
-u8 lbLang_GetLanguageSetting(void) {
+enum_t lbLang_GetLanguageSetting(void)
+{
     return lbl_804D3EE0->language;
 }
 
-int lbLang_SetLanguageSetting(int language) {
-    if(language >= 0 && language < 2) {
+enum_t lbLang_SetLanguageSetting(enum_t language)
+{
+    if (language >= 0 && language < 2) {
         lbl_804D3EE0->language = language;
     }
+
+    return language;
 }
 
-int lbLang_IsSettingJP(void) {
+enum_t lbLang_IsSettingJP(void)
+{
     return (lbl_804D3EE0->language) == 0 ? 1 : 0;
 }
 
-int lbLang_IsSettingUS(void) {
+enum_t lbLang_IsSettingUS(void)
+{
     return (lbl_804D3EE0->language) == 1 ? 1 : 0;
 }
 
-u8 lbLang_GetSavedLanguage() {
+enum_t lbLang_GetSavedLanguage(void)
+{
     return func_8015CC58()->saved_language;
 }
 
-void lbLang_SetSavedLanguage(int language) {
-    if(language >= 0 && language < 2)
+void lbLang_SetSavedLanguage(enum_t language)
+{
+    if (language >= 0 && language < 2)
         func_8015CC58()->saved_language = language;
 }
 
-int lbLang_IsSavedLanguageJP(void) {
+enum_t lbLang_IsSavedLanguageJP(void)
+{
     return (func_8015CC58()->saved_language == 0) ? 1 : 0;
 }
 
-int lbLang_IsSavedLanguageUS(void) {
+enum_t lbLang_IsSavedLanguageUS(void)
+{
     return (func_8015CC58()->saved_language == 1) ? 1 : 0;
 }

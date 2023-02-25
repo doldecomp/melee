@@ -1,55 +1,49 @@
+#include <dolphin/os/OSReboot.h>
+
+#include <dolphin/dvd/dvd.h>
+#include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSReset.h>
+#include <MetroTRK/intrinsics.h>
+#include <placeholder.h>
 
-extern unk_t ICFlashInvalidate();
+static unk_t Header[0x20 / sizeof(unk_t)];
+static unk_t SaveStart;
+static unk_t SaveEnd;
+static bool Prepared;
 
-#pragma push
-static asm unk_t Run()
-{ // clang-format off
-    nofralloc
-/* 803480F8 00344CD8  7C 08 02 A6 */	mflr r0
-/* 803480FC 00344CDC  90 01 00 04 */	stw r0, 4(r1)
-/* 80348100 00344CE0  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 80348104 00344CE4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80348108 00344CE8  7C 7F 1B 78 */	mr r31, r3
-/* 8034810C 00344CEC  4B FF F2 59 */	bl OSDisableInterrupts
-/* 80348110 00344CF0  4B FF C7 FD */	bl ICFlashInvalidate
-/* 80348114 00344CF4  7C 00 04 AC */	sync
-/* 80348118 00344CF8  4C 00 01 2C */	isync 
-/* 8034811C 00344CFC  7F E8 03 A6 */	mtlr r31
-/* 80348120 00344D00  4E 80 00 20 */	blr 
-/* 80348124 00344D04  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 80348128 00344D08  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8034812C 00344D0C  38 21 00 18 */	addi r1, r1, 0x18
-/* 80348130 00344D10  7C 08 03 A6 */	mtlr r0
-/* 80348134 00344D14  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+#ifdef MWERKS_GEKKO
 
-extern unk_t lbl_804D7398;
+void Run(register Event callback)
+{
+    OSDisableInterrupts();
+    ICFlashInvalidate();
+    __sync();
+    __isync();
+    asm {
+        mtlr callback
+        blr
+    }
+}
 
-#pragma push
-static asm unk_t Callback()
-{ // clang-format off
-    nofralloc
-/* 80348138 00344D18  38 00 00 01 */	li r0, 1
-/* 8034813C 00344D1C  90 0D BC F8 */	stw r0, lbl_804D7398(r13)
-/* 80348140 00344D20  4E 80 00 20 */	blr 
-} // clang-format on
-#pragma pop
+#else
 
-extern unk_t lbl_804A7D40;
-extern unk_t lbl_804D7390;
-extern unk_t lbl_804D7394;
-extern void ICInvalidateRange(void*, u32);
-extern unk_t DVDReadAbsAsyncForBS();
-extern unk_t __OSDoHotReset();
-extern unk_t DVDCheckDisk();
-extern unk_t __DVDPrepareResetAsync();
-extern unk_t DVDSetAutoInvalidation();
-extern unk_t DVDInit();
+void Run(Event arg0)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
+
+static void Callback(void)
+{
+    Prepared = true;
+}
+
+#ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t __OSReboot()
+asm void __OSReboot(u32 resetCode, bool forceMenu)
 { // clang-format off
     nofralloc
 /* 80348144 00344D24  7C 08 02 A6 */	mflr r0
@@ -59,13 +53,13 @@ asm unk_t __OSReboot()
 /* 80348154 00344D34  93 C1 03 40 */	stw r30, 0x340(r1)
 /* 80348158 00344D38  93 A1 03 3C */	stw r29, 0x33c(r1)
 /* 8034815C 00344D3C  7C 7D 1B 78 */	mr r29, r3
-/* 80348160 00344D40  3C 60 80 4A */	lis r3, lbl_804A7D40@ha
-/* 80348164 00344D44  3B C3 7D 40 */	addi r30, r3, lbl_804A7D40@l
+/* 80348160 00344D40  3C 60 80 4A */	lis r3, Header@ha
+/* 80348164 00344D44  3B C3 7D 40 */	addi r30, r3, Header@l
 /* 80348168 00344D48  4B FF F1 FD */	bl OSDisableInterrupts
-/* 8034816C 00344D4C  80 AD BC F0 */	lwz r5, lbl_804D7390(r13)
+/* 8034816C 00344D4C  80 AD BC F0 */	lwz r5, SaveStart(r13)
 /* 80348170 00344D50  3F E0 81 80 */	lis r31, 0x817FFFFC@ha
 /* 80348174 00344D54  38 60 00 00 */	li r3, 0
-/* 80348178 00344D58  80 0D BC F4 */	lwz r0, lbl_804D7394(r13)
+/* 80348178 00344D58  80 0D BC F4 */	lwz r0, SaveEnd(r13)
 /* 8034817C 00344D5C  3C 80 81 30 */	lis r4, 0x812FDFF0@ha
 /* 80348180 00344D60  38 E0 00 01 */	li r7, 1
 /* 80348184 00344D64  93 BF FF FC */	stw r29, 0x817FFFFC@l(r31)
@@ -99,7 +93,7 @@ lbl_803481D8:
 lbl_803481F0:
 /* 803481F0 00344DD0  48 00 00 04 */	b lbl_803481F4
 lbl_803481F4:
-/* 803481F4 00344DD4  80 0D BC F8 */	lwz r0, lbl_804D7398(r13)
+/* 803481F4 00344DD4  80 0D BC F8 */	lwz r0, Prepared(r13)
 /* 803481F8 00344DD8  2C 00 00 00 */	cmpwi r0, 0
 /* 803481FC 00344DDC  41 82 FF F8 */	beq lbl_803481F4
 /* 80348200 00344DE0  7F C4 F3 78 */	mr r4, r30
@@ -139,7 +133,7 @@ lbl_8034825C:
 lbl_80348274:
 /* 80348274 00344E54  48 00 00 04 */	b lbl_80348278
 lbl_80348278:
-/* 80348278 00344E58  80 0D BC F8 */	lwz r0, lbl_804D7398(r13)
+/* 80348278 00344E58  80 0D BC F8 */	lwz r0, Prepared(r13)
 /* 8034827C 00344E5C  2C 00 00 00 */	cmpwi r0, 0
 /* 80348280 00344E60  41 82 FF F8 */	beq lbl_80348278
 /* 80348284 00344E64  7F C5 F3 78 */	mr r5, r30
@@ -181,6 +175,15 @@ lbl_803482E0:
 /* 80348300 00344EE0  7C 08 03 A6 */	mtlr r0
 /* 80348304 00344EE4  83 A1 03 3C */	lwz r29, 0x33c(r1)
 /* 80348308 00344EE8  38 21 03 48 */	addi r1, r1, 0x348
-/* 8034830C 00344EEC  4E 80 00 20 */	blr 
+/* 8034830C 00344EEC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+void __OSReboot(u32 resetCode, bool forceMenu)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif

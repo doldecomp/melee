@@ -1,5 +1,8 @@
 #include <sysdolphin/baselib/controller.h>
 
+#include <dolphin/os/OSInterrupt.h>
+#include <sysdolphin/baselib/rumble.h>
+
 extern PadLibData HSD_PadLibData;
 extern HSD_PadStatus HSD_PadMasterStatus[4];
 extern HSD_PadStatus HSD_PadCopyStatus[4];
@@ -15,7 +18,7 @@ u8 HSD_PadGetRawQueueCount(void)
     intr = OSDisableInterrupts();
     queue_count = p->qcount;
     OSRestoreInterrupts(intr);
-    
+
     return queue_count;
 }
 
@@ -23,5 +26,5 @@ s32 HSD_PadGetResetSwitch(void)
 {
     PadLibData* p = &HSD_PadLibData;
 
-    return (p->reset_switch != 0) ? TRUE : FALSE;
+    return (p->reset_switch != 0) ? true : false;
 }

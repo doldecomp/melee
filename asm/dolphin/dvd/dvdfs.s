@@ -5,19 +5,19 @@
 .global __DVDFSInit
 __DVDFSInit:
 /* 80337934 00334514  3C 60 80 00 */	lis r3, 0x80000038@ha
-/* 80337938 00334518  90 6D BB D8 */	stw r3, lbl_804D7278@sda21(r13)
+/* 80337938 00334518  90 6D BB D8 */	stw r3, BootInfo@sda21(r13)
 /* 8033793C 0033451C  80 03 00 38 */	lwz r0, 0x80000038@l(r3)
 /* 80337940 00334520  90 0D BB DC */	stw r0, FstStart@sda21(r13)
 /* 80337944 00334524  80 6D BB DC */	lwz r3, FstStart@sda21(r13)
 /* 80337948 00334528  28 03 00 00 */	cmplwi r3, 0
-/* 8033794C 0033452C  4D 82 00 20 */	beqlr 
+/* 8033794C 0033452C  4D 82 00 20 */	beqlr
 /* 80337950 00334530  80 03 00 08 */	lwz r0, 8(r3)
 /* 80337954 00334534  90 0D BB E4 */	stw r0, MaxEntryNum@sda21(r13)
 /* 80337958 00334538  80 0D BB E4 */	lwz r0, MaxEntryNum@sda21(r13)
 /* 8033795C 0033453C  1C 00 00 0C */	mulli r0, r0, 0xc
 /* 80337960 00334540  7C 03 02 14 */	add r0, r3, r0
 /* 80337964 00334544  90 0D BB E0 */	stw r0, FstStringStart@sda21(r13)
-/* 80337968 00334548  4E 80 00 20 */	blr 
+/* 80337968 00334548  4E 80 00 20 */	blr
 
 .global DVDConvertPathToEntrynum
 DVDConvertPathToEntrynum:
@@ -248,7 +248,7 @@ lbl_80337C4C:
 /* 80337C50 00334830  80 01 00 4C */	lwz r0, 0x4c(r1)
 /* 80337C54 00334834  38 21 00 48 */	addi r1, r1, 0x48
 /* 80337C58 00334838  7C 08 03 A6 */	mtlr r0
-/* 80337C5C 0033483C  4E 80 00 20 */	blr 
+/* 80337C5C 0033483C  4E 80 00 20 */	blr
 
 .global DVDFastOpen
 DVDFastOpen:
@@ -271,7 +271,7 @@ lbl_80337C94:
 /* 80337C98 00334878  41 82 00 0C */	beq lbl_80337CA4
 lbl_80337C9C:
 /* 80337C9C 0033487C  38 60 00 00 */	li r3, 0
-/* 80337CA0 00334880  4E 80 00 20 */	blr 
+/* 80337CA0 00334880  4E 80 00 20 */	blr
 lbl_80337CA4:
 /* 80337CA4 00334884  7C 63 32 14 */	add r3, r3, r6
 /* 80337CA8 00334888  80 A3 00 04 */	lwz r5, 4(r3)
@@ -284,7 +284,7 @@ lbl_80337CA4:
 /* 80337CC4 003348A4  90 A4 00 34 */	stw r5, 0x34(r4)
 /* 80337CC8 003348A8  90 04 00 38 */	stw r0, 0x38(r4)
 /* 80337CCC 003348AC  90 04 00 0C */	stw r0, 0xc(r4)
-/* 80337CD0 003348B0  4E 80 00 20 */	blr 
+/* 80337CD0 003348B0  4E 80 00 20 */	blr
 
 .global DVDClose
 DVDClose:
@@ -296,7 +296,7 @@ DVDClose:
 /* 80337CE8 003348C8  38 60 00 01 */	li r3, 1
 /* 80337CEC 003348CC  38 21 00 08 */	addi r1, r1, 8
 /* 80337CF0 003348D0  7C 08 03 A6 */	mtlr r0
-/* 80337CF4 003348D4  4E 80 00 20 */	blr 
+/* 80337CF4 003348D4  4E 80 00 20 */	blr
 
 .global DVDReadAsyncPrio
 DVDReadAsyncPrio:
@@ -351,7 +351,7 @@ lbl_80337D78:
 /* 80337DA8 00334988  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 80337DAC 0033498C  38 21 00 38 */	addi r1, r1, 0x38
 /* 80337DB0 00334990  7C 08 03 A6 */	mtlr r0
-/* 80337DB4 00334994  4E 80 00 20 */	blr 
+/* 80337DB4 00334994  4E 80 00 20 */	blr
 
 .global cbForReadAsync
 cbForReadAsync:
@@ -362,12 +362,12 @@ cbForReadAsync:
 /* 80337DC8 003349A8  28 0C 00 00 */	cmplwi r12, 0
 /* 80337DCC 003349AC  41 82 00 0C */	beq lbl_80337DD8
 /* 80337DD0 003349B0  7D 88 03 A6 */	mtlr r12
-/* 80337DD4 003349B4  4E 80 00 21 */	blrl 
+/* 80337DD4 003349B4  4E 80 00 21 */	blrl
 lbl_80337DD8:
 /* 80337DD8 003349B8  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80337DDC 003349BC  38 21 00 08 */	addi r1, r1, 8
 /* 80337DE0 003349C0  7C 08 03 A6 */	mtlr r0
-/* 80337DE4 003349C4  4E 80 00 20 */	blr 
+/* 80337DE4 003349C4  4E 80 00 20 */	blr
 
 
 .section .data
@@ -392,21 +392,23 @@ lbl_804D5B88:
 
 .section .sbss
     .balign 8
-.global lbl_804D7278
-lbl_804D7278:
-	.skip 0x4
+BootInfo:
+    .skip 0x4
 .global FstStart
 FstStart:
-	.skip 0x4
+    .skip 0x4
 .global FstStringStart
 FstStringStart:
-	.skip 0x4
+    .skip 0x4
 .global MaxEntryNum
 MaxEntryNum:
-	.skip 0x4
+    .skip 0x4
 .global currentDirectory
 currentDirectory:
-	.skip 0x4
+    .skip 0x4
 .global __DVDLongFileNameFlag
 __DVDLongFileNameFlag:
-	.skip 0x4
+    .skip 0x4
+.global __DVDThreadQueue
+__DVDThreadQueue:
+    .skip 0x8

@@ -2,145 +2,147 @@
 
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
+#include <melee/lb/lbaudio_ax.h>
 
-#define TEST(expr) (expr) ? TRUE : FALSE
+#define TEST(expr) (expr) ? true : false
 
-extern s32 func_80023220(s32);
-extern s32 func_800230C8(s32, s32*, s32*);
-extern s32 func_80023130();
-extern s32 func_800233EC(s32);
-extern s32 func_800C06B4(struct _Fighter*);
+/* static */ s32 func_800C06B4(Fighter*);
 
 s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->input.x65C_heldInputs & arg1);
 }
 
 s32 func_80087818(HSD_GObj* fighter_gobj, s32 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->input.x668 & arg1);
 }
 
 s32 func_80087838(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->x221D_flag.bits.b7 & 1);
 }
 
 s32 func_80087858(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->x2227_flag.bits.b1 & 1);
 }
 
 s32 func_80087878(HSD_GObj* fighter_gobj, s32 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if ((fp->x1968_jumpsUsed <= 1) && (fp->x10_action_state_index == 0) && (arg1 != 0x23) && (arg1 != 0x24) && (arg1 != 0x25))
-        return TRUE;
+    if ((fp->x1968_jumpsUsed <= 1) && (fp->action_id == 0) && (arg1 != 0x23) &&
+        (arg1 != 0x24) && (arg1 != 0x25))
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_800878BC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if ((fp->x1974_heldItem != NULL) && (func_8026B2B4(fp->x1974_heldItem) == 1))
-        return TRUE;
+    if ((fp->x1974_heldItem != NULL) &&
+        (func_8026B2B4(fp->x1974_heldItem) == 1))
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_80087900(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->x1974_heldItem != NULL) && (itGetKind(fp->x1974_heldItem) == 0x1E))
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_80087944(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->x1974_heldItem != NULL) && (itGetKind(fp->x1974_heldItem) == 0x7))
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_80087988(HSD_GObj* fighter_gobj)
 {
-    if ((ftGetParasolStatus(fighter_gobj) == 4) || (ftGetParasolStatus(fighter_gobj) == 5))
-        return TRUE;
+    if ((ftGetParasolStatus(fighter_gobj) == 4) ||
+        (ftGetParasolStatus(fighter_gobj) == 5))
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_800879D8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x1980 != 0)
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_800879F8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x221D_flag.bits.b6 & 1)
-        return TRUE;
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_80087A18(HSD_GObj* fighter_gobj)
 {
     s32 var1;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if ((fp->x2226_flag.bits.b4) && ((var1 = func_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) && ((fp->x2226_flag.bits.b5)))
-        return TRUE;
+    if ((fp->x2226_flag.bits.b4) &&
+        ((var1 = func_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) &&
+        ((fp->x2226_flag.bits.b5)))
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 u8 func_80087A80(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x2114_SmashAttr.x2134_vibrateFrame;
 }
 
 f32 func_80087A8C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x2114_SmashAttr.x2138_smashSinceHitbox;
 }
 
 s32 func_80087A98(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x213C;
 }
 
 u8 func_80087AA4(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x2227_flag.bits.b5;
 }
 
 u8 func_80087AB4(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x1968_jumpsUsed;
 }
 
@@ -149,11 +151,11 @@ void func_80087AC0(HSD_GObj* fighter_gobj, s32 arg1)
     s32 var0;
     u8 var1;
     u8 var2;
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (arg1 != 0) {
-        var1 = FALSE;
+        var1 = false;
     } else {
-        var1 = TRUE;
+        var1 = true;
     }
     var0 = var1;
     var2 = fp->x221E_flag.bits.b7;
@@ -163,30 +165,39 @@ void func_80087AC0(HSD_GObj* fighter_gobj, s32 arg1)
 
 s32 func_80087AEC(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if ((fp->x34_scale.y != fp->x34_scale.x) || ((fp->x2226_flag.bits.b4) || (fp->x2223_flag.bits.b7) || (fp->x197C != 0)))
-        return TRUE;
+    if ((fp->x34_scale.y != fp->x34_scale.x) ||
+        ((fp->x2226_flag.bits.b4) || (fp->x2223_flag.bits.b7) ||
+         (fp->x197C != 0)))
+        return true;
 
-    return FALSE;
+    return false;
 }
 
 s32 func_80087B34(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 atk_shield_kb_x = fp->x98_atk_shield_kb.x;
-    f32 fVar1 = (fp->x80_self_vel.x * fp->x80_self_vel.x) + (fp->x80_self_vel.y * fp->x80_self_vel.y);
+    f32 fVar1 = (fp->x80_self_vel.x * fp->x80_self_vel.x) +
+                (fp->x80_self_vel.y * fp->x80_self_vel.y);
     f32* atk_shield_kb_y = &fp->x98_atk_shield_kb.y;
-    f32 fVar2 = (atk_shield_kb_x * atk_shield_kb_x) + ((*atk_shield_kb_y) * (*atk_shield_kb_y));
+    f32 fVar2 = (atk_shield_kb_x * atk_shield_kb_x) +
+                ((*atk_shield_kb_y) * (*atk_shield_kb_y));
 
-    if (fVar1 > ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) + (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y))) {
-        if (fVar1 > ((atk_shield_kb_x * atk_shield_kb_x) + (fp->x98_atk_shield_kb.y * fp->x98_atk_shield_kb.y)))
+    if (fVar1 > ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) +
+                 (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y)))
+    {
+        if (fVar1 > ((atk_shield_kb_x * atk_shield_kb_x) +
+                     (fp->x98_atk_shield_kb.y * fp->x98_atk_shield_kb.y)))
             return 0;
 
         return 2;
     }
 
-    if ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) + (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y) > fVar2)
+    if ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) +
+            (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y) >
+        fVar2)
         return 1;
 
     return 2;
@@ -194,32 +205,34 @@ s32 func_80087B34(HSD_GObj* fighter_gobj)
 
 void func_80087BAC(HSD_GObj* fighter_gobj, s32 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2228_flag.bits.b5 = arg1;
 }
 
 void func_80087BC0(HSD_GObj* fighter_gobj, s8 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     u64 var0 = fp->x1A98;
     func_800A101C(fp, arg1, var0, fp->x1A9C);
 }
 
 void func_80087BEC(HSD_GObj* fighter_gobj, u8 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     u64 var0 = fp->x1A94;
     func_800A101C(fp, var0, arg1, fp->x1A9C);
 }
 
-s32 func_80087C1C()
+s32 func_80087C1C(void)
 {
     HSD_GObj* fighter_gobj;
     s32 ftKind;
     u32 result = 0;
 
-    for (fighter_gobj = lbl_804D782C->x20_fighters; fighter_gobj != 0; fighter_gobj = fighter_gobj->next) {
-        ftKind = ((Fighter*) fighter_gobj->user_data)->x4_fighterKind;
+    for (fighter_gobj = lbl_804D782C->x20_fighters; fighter_gobj != 0;
+         fighter_gobj = fighter_gobj->next)
+    {
+        ftKind = (GET_FIGHTER(fighter_gobj))->x4_fighterKind;
         if (ftKind < 27) {
             result = result | 1 << ftKind;
         }
@@ -229,13 +242,13 @@ s32 func_80087C1C()
 
 s32 func_80087C58(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x1988;
 }
 
 void func_80087C64(HSD_GObj* fighter_gobj, s32 arg1)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x1988 = arg1;
 }
 
@@ -279,122 +292,7 @@ s32 func_80087C70(Fighter* fp, s32 arg1)
     return var_r4;
 }
 
-#ifdef NON_MATCHING
-
-// https://decomp.me/scratch/QCKGz
-s32 func_80087D0C(Fighter* fighter, s32 arg1)
-{
-    s32 sp18;
-    s32 sp14;
-    enum FighterKind ftKind;
-    s32 var_r30;
-    s32 sfx_id;
-    int new_var;
-    s32 ssm_id;
-    s32 var_r4;
-
-    sfx_id = func_800233EC(arg1);
-    ssm_id = func_80023130();
-    switch (ssm_id) {
-    case 0:
-        switch (sfx_id) {
-        case 0x197:
-        case 0x1D3:
-        case 0x1F7:
-        case 0x203:
-        case 0x46D03:
-        case 0x1FD:
-        case 0x1E5:
-        case 0x1EB:
-        case 0x1DF:
-        case 0x1D9:
-        case 0x1B5:
-        case 0x1C7:
-        case 0x1CD:
-        case 0x1C1:
-        case 0x1BB:
-        case 0x1A9:
-        case 0x1AF:
-        case 0x1A3:
-        case 0x19D:
-        case 0x179:
-        case 0x18B:
-        case 0x191:
-        case 0x185:
-        case 0x17F:
-        case 0x173:
-            sfx_id = func_80087C70(fighter, sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
-            if (fighter->x2223_flag.bits.b7) {
-                sfx_id += 3;
-            }
-            break;
-        case 0x167:
-        case 0x170:
-        case 0x16D:
-        case 0x16A:
-        case 0x158:
-        case 0x161:
-        case 0x164:
-        case 0x15E:
-        case 0x15B:
-        case 0x152:
-        case 0x155:
-        case 0x14F:
-        case 0x14C:
-            sfx_id = func_80087C70(fighter, sfx_id); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfxID)
-            break;
-        }
-        break;
-    case 13:
-        ftKind = fighter->x4_fighterKind;
-        if ((ftKind < 0xc) && (10 > ftKind)) {
-
-            if ((0x1fbfd < sfx_id) &&
-                ((sfx_id < 0x1fc62 && (func_80080144(fighter) == 1)))) {
-                sfx_id += 0x66;
-            }
-            if (((0x1fc63 < sfx_id) && (sfx_id < 0x1fcc8)) && (func_80080144(fighter) != 1)) {
-                sfx_id -= 0x66;
-            }
-        }
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 14:
-    case 15:
-    case 16:
-    case 17:
-    case 18:
-    case 19:
-    case 20:
-    case 21:
-    case 22:
-    case 23:
-    case 24:
-    case 25:
-    case 26:
-    case 27:
-    case 28:
-    case 29:
-    case 30:
-    case 31:
-    case 33:
-        if ((func_800230C8(ssm_id, &sp18, &sp14) == 0) && (sfx_id >= ((s32) (sp18 + func_80023220(ssm_id))))) {
-            sfx_id = func_80087C70(fighter, sfx_id);
-        }
-        break;
-    default:
-        break;
-    }
-
-    return sfx_id;
-}
-
-#else
+#ifdef MUST_MATCH
 
 #pragma push
 asm s32 func_80087D0C(Fighter* fighter, s32 arg1)
@@ -636,9 +534,132 @@ lbl_8008803C:
 /* 8008804C 00084C2C  83 A1 00 24 */	lwz r29, 0x24(r1)
 /* 80088050 00084C30  38 21 00 30 */	addi r1, r1, 0x30
 /* 80088054 00084C34  7C 08 03 A6 */	mtlr r0
-/* 80088058 00084C38  4E 80 00 20 */	blr 
+/* 80088058 00084C38  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
+
+#else
+
+// https://decomp.me/scratch/QCKGz
+s32 func_80087D0C(Fighter* fighter, s32 arg1)
+{
+    s32 sp18;
+    s32 sp14;
+    enum FighterKind ftKind;
+    s32 var_r30;
+    s32 sfx;
+    int new_var;
+    s32 ssm_id;
+    s32 var_r4;
+
+    sfx = func_800233EC(arg1);
+    ssm_id = func_80023130();
+    switch (ssm_id) {
+    case 0:
+        switch (sfx) {
+        case 0x197:
+        case 0x1D3:
+        case 0x1F7:
+        case 0x203:
+        case 0x46D03:
+        case 0x1FD:
+        case 0x1E5:
+        case 0x1EB:
+        case 0x1DF:
+        case 0x1D9:
+        case 0x1B5:
+        case 0x1C7:
+        case 0x1CD:
+        case 0x1C1:
+        case 0x1BB:
+        case 0x1A9:
+        case 0x1AF:
+        case 0x1A3:
+        case 0x19D:
+        case 0x179:
+        case 0x18B:
+        case 0x191:
+        case 0x185:
+        case 0x17F:
+        case 0x173:
+            sfx = func_80087C70(
+                fighter,
+                sfx); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
+            if (fighter->x2223_flag.bits.b7) {
+                sfx += 3;
+            }
+            break;
+        case 0x167:
+        case 0x170:
+        case 0x16D:
+        case 0x16A:
+        case 0x158:
+        case 0x161:
+        case 0x164:
+        case 0x15E:
+        case 0x15B:
+        case 0x152:
+        case 0x155:
+        case 0x14F:
+        case 0x14C:
+            sfx = func_80087C70(
+                fighter,
+                sfx); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
+            break;
+        }
+        break;
+    case 13:
+        ftKind = fighter->x4_fighterKind;
+        if ((ftKind < 0xc) && (10 > ftKind)) {
+            if ((0x1fbfd < sfx) &&
+                ((sfx < 0x1fc62 && (func_80080144(fighter) == 1))))
+            {
+                sfx += 0x66;
+            }
+            if (((0x1fc63 < sfx) && (sfx < 0x1fcc8)) &&
+                (func_80080144(fighter) != 1))
+            {
+                sfx -= 0x66;
+            }
+        }
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 20:
+    case 21:
+    case 22:
+    case 23:
+    case 24:
+    case 25:
+    case 26:
+    case 27:
+    case 28:
+    case 29:
+    case 30:
+    case 31:
+    case 33:
+        if ((func_800230C8(ssm_id, &sp18, &sp14) == 0) &&
+            (sfx >= ((s32) (sp18 + func_80023220(ssm_id)))))
+        {
+            sfx = func_80087C70(fighter, sfx);
+        }
+        break;
+    default:
+        break;
+    }
+
+    return sfx;
+}
 
 #endif
 
@@ -670,4 +691,20 @@ void func_80088110(Fighter* fp)
 {
     func_80025038(fp->x2168);
     fp->x2168 = 0;
+}
+
+void func_80088148(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
+{
+    sfx_id = func_80087D0C(fp, sfx_id);
+    fp->x2160 = func_800237A8(sfx_id, sfx_vol, sfx_pan);
+
+    {
+        int rand;
+        if (sfx_id >= 332 && sfx_id <= 370)
+            rand = HSD_Randi(200) - 100;
+        else
+            rand = 0;
+
+        func_80024B94(fp->x2160, rand);
+    }
 }

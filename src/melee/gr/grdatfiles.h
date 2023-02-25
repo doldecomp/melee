@@ -34,7 +34,7 @@ typedef struct _UnkStage6B0 {
     s32 x34;
     s32 x38;
     f32 x3C, x40, x44, x48;
-    BOOL x4C_fixed_cam;
+    bool x4C_fixed_cam;
     f32 x50, x54, x58, x5C, x60, x64;
     s16 x68;
     u8 x6C_pad[0xB0 - 0x6A];
@@ -58,7 +58,7 @@ typedef struct _UnkStageDat {
     struct {
         struct _HSD_Joint* unk0;
         u8 x4_fill[0x20 - 0x4];
-        S16Vec* unk20;
+        S16Vec3* unk20;
         s32 unk24; // size of unk20 array
         u8 x28_fill[0x34 - 0x28];
     }* unk8;

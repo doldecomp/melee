@@ -1,13 +1,14 @@
 #include <sysdolphin/baselib/texp.h>
 
-HSD_TExpType HSD_TExpGetType(HSD_TExp* texp) {
+HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
+{
     if (texp == NULL) {
         return HSD_TE_ZERO;
     }
-    if ((u32)texp == -1) {
+    if ((u32) texp == -1) {
         return HSD_TE_TEX;
     }
-    if ((u32)texp == -2) {
+    if ((u32) texp == -2) {
         return HSD_TE_RAS;
     }
     return texp->type;
@@ -17,14 +18,13 @@ void HSD_TExpRef(HSD_TExp* texp, u8 sel)
 {
     HSD_TExpType type = HSD_TExpGetType(texp);
     if (type != HSD_TE_CNST) {
-        if (type >= HSD_TE_CNST){
+        if (type >= HSD_TE_CNST) {
             return;
         }
-        if (type != HSD_TE_TEV)
-        {
+        if (type != HSD_TE_TEV) {
             return;
         }
-        if (sel == TRUE) {
+        if (sel == true) {
             texp->tev.c_ref += 1;
             return;
         } else {
@@ -32,7 +32,7 @@ void HSD_TExpRef(HSD_TExp* texp, u8 sel)
             return;
         }
     }
-    
+
     texp->cnst.ref += 1;
 }
 
@@ -45,7 +45,7 @@ void HSD_TExpUnref(HSD_TExp* texp, u8 sel)
         if (type >= HSD_TE_CNST || type != HSD_TE_TEV) {
             return;
         }
-        if (sel == TRUE) {
+        if (sel == true) {
             if (texp->tev.c_ref != 0) {
                 texp->tev.c_ref -= 1;
             }

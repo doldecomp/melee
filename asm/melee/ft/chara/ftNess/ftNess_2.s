@@ -14,7 +14,7 @@ ftNess_AttackS4_OnReflect:
 /* 80114C14 001117F4  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80114C18 001117F8  38 21 00 08 */	addi r1, r1, 8
 /* 80114C1C 001117FC  7C 08 03 A6 */	mtlr r0
-/* 80114C20 00111800  4E 80 00 20 */	blr 
+/* 80114C20 00111800  4E 80 00 20 */	blr
 
 .global ftNess_AttackS4_Action
 ftNess_AttackS4_Action:
@@ -59,13 +59,13 @@ lbl_80114CA8:
 /* 80114CB0 00111890  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 80114CB4 00111894  38 21 00 20 */	addi r1, r1, 0x20
 /* 80114CB8 00111898  7C 08 03 A6 */	mtlr r0
-/* 80114CBC 0011189C  4E 80 00 20 */	blr 
+/* 80114CBC 0011189C  4E 80 00 20 */	blr
 
 .section .sdata2
     .balign 8
 .global lbl_804D96B8/*0.0f*/
 lbl_804D96B8/*0.0f*/:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804D96BC/*1.0f*/
 lbl_804D96BC/*1.0f*/:
-	.4byte 0x3F800000
+    .4byte 0x3F800000

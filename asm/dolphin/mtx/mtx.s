@@ -14,7 +14,7 @@ PSMTXIdentity:
 /* 803421C0 0033EDA0  F0 43 00 10 */	psq_st f2, 16(r3), 0, qr0
 /* 803421C4 0033EDA4  F0 23 00 00 */	psq_st f1, 0(r3), 0, qr0
 /* 803421C8 0033EDA8  F0 23 00 28 */	psq_st f1, 40(r3), 0, qr0
-/* 803421CC 0033EDAC  4E 80 00 20 */	blr 
+/* 803421CC 0033EDAC  4E 80 00 20 */	blr
 
 .global PSMTXCopy
 PSMTXCopy:
@@ -30,7 +30,7 @@ PSMTXCopy:
 /* 803421F4 0033EDD4  F0 84 00 20 */	psq_st f4, 32(r4), 0, qr0
 /* 803421F8 0033EDD8  E0 A3 00 28 */	psq_l f5, 40(r3), 0, qr0
 /* 803421FC 0033EDDC  F0 A4 00 28 */	psq_st f5, 40(r4), 0, qr0
-/* 80342200 0033EDE0  4E 80 00 20 */	blr 
+/* 80342200 0033EDE0  4E 80 00 20 */	blr
 
 .global PSMTXConcat
 PSMTXConcat:
@@ -84,7 +84,7 @@ PSMTXConcat:
 /* 803422C0 0033EEA0  F0 05 00 28 */	psq_st f0, 40(r5), 0, qr0
 /* 803422C4 0033EEA4  CB E1 00 28 */	lfd f31, 0x28(r1)
 /* 803422C8 0033EEA8  38 21 00 40 */	addi r1, r1, 0x40
-/* 803422CC 0033EEAC  4E 80 00 20 */	blr 
+/* 803422CC 0033EEAC  4E 80 00 20 */	blr
 
 .global PSMTXTranspose
 PSMTXTranspose:
@@ -107,7 +107,7 @@ PSMTXTranspose:
 /* 80342310 0033EEF0  C0 63 00 28 */	lfs f3, 0x28(r3)
 /* 80342314 0033EEF4  F0 A4 00 18 */	psq_st f5, 24(r4), 0, qr0
 /* 80342318 0033EEF8  D0 64 00 28 */	stfs f3, 0x28(r4)
-/* 8034231C 0033EEFC  4E 80 00 20 */	blr 
+/* 8034231C 0033EEFC  4E 80 00 20 */	blr
 
 .global PSMTXInverse
 PSMTXInverse:
@@ -139,7 +139,7 @@ PSMTXInverse:
 /* 80342384 0033EF64  10 07 30 40 */	ps_cmpo0 cr0, f7, f6
 /* 80342388 0033EF68  40 82 00 0C */	bne lbl_80342394
 /* 8034238C 0033EF6C  38 60 00 00 */	li r3, 0
-/* 80342390 0033EF70  4E 80 00 20 */	blr 
+/* 80342390 0033EF70  4E 80 00 20 */	blr
 lbl_80342394:
 /* 80342394 0033EF74  EC 00 38 30 */	fres f0, f7
 /* 80342398 0033EF78  10 C0 00 2A */	ps_add f6, f0, f0
@@ -173,7 +173,7 @@ lbl_80342394:
 /* 80342408 0033EFE8  10 E8 38 FE */	ps_nmadd f7, f8, f3, f7
 /* 8034240C 0033EFEC  38 60 00 01 */	li r3, 1
 /* 80342410 0033EFF0  F0 E4 80 2C */	psq_st f7, 44(r4), 1, qr0
-/* 80342414 0033EFF4  4E 80 00 20 */	blr 
+/* 80342414 0033EFF4  4E 80 00 20 */	blr
 
 .global PSMTXRotRad
 PSMTXRotRad:
@@ -204,7 +204,7 @@ PSMTXRotRad:
 /* 80342478 0033F058  83 C1 00 18 */	lwz r30, 0x18(r1)
 /* 8034247C 0033F05C  38 21 00 28 */	addi r1, r1, 0x28
 /* 80342480 0033F060  7C 08 03 A6 */	mtlr r0
-/* 80342484 0033F064  4E 80 00 20 */	blr 
+/* 80342484 0033F064  4E 80 00 20 */	blr
 
 .global PSMTXRotTrig
 PSMTXRotTrig:
@@ -253,7 +253,7 @@ lbl_80342508:
 /* 80342524 0033F104  F0 83 00 00 */	psq_st f4, 0(r3), 0, qr0
 /* 80342528 0033F108  F0 43 00 28 */	psq_st f2, 40(r3), 0, qr0
 lbl_8034252C:
-/* 8034252C 0033F10C  4E 80 00 20 */	blr 
+/* 8034252C 0033F10C  4E 80 00 20 */	blr
 
 .global PSMTXRotAxisRad
 PSMTXRotAxisRad:
@@ -321,7 +321,7 @@ PSMTXRotAxisRad:
 /* 80342624 0033F204  83 A1 00 24 */	lwz r29, 0x24(r1)
 /* 80342628 0033F208  38 21 00 58 */	addi r1, r1, 0x58
 /* 8034262C 0033F20C  7C 08 03 A6 */	mtlr r0
-/* 80342630 0033F210  4E 80 00 20 */	blr 
+/* 80342630 0033F210  4E 80 00 20 */	blr
 
 .global PSMTXTrans
 PSMTXTrans:
@@ -337,7 +337,7 @@ PSMTXTrans:
 /* 80342658 0033F238  D0 83 00 28 */	stfs f4, 0x28(r3)
 /* 8034265C 0033F23C  D0 63 00 2C */	stfs f3, 0x2c(r3)
 /* 80342660 0033F240  D0 83 00 00 */	stfs f4, 0(r3)
-/* 80342664 0033F244  4E 80 00 20 */	blr 
+/* 80342664 0033F244  4E 80 00 20 */	blr
 
 .global PSMTXScale
 PSMTXScale:
@@ -350,7 +350,7 @@ PSMTXScale:
 /* 80342680 0033F260  F0 03 00 20 */	psq_st f0, 32(r3), 0, qr0
 /* 80342684 0033F264  D0 63 00 28 */	stfs f3, 0x28(r3)
 /* 80342688 0033F268  D0 03 00 2C */	stfs f0, 0x2c(r3)
-/* 8034268C 0033F26C  4E 80 00 20 */	blr 
+/* 8034268C 0033F26C  4E 80 00 20 */	blr
 
 .global PSMTXQuat
 PSMTXQuat:
@@ -394,7 +394,7 @@ PSMTXQuat:
 /* 80342724 0033F304  11 6A 4C 60 */	ps_merge01 f11, f10, f9
 /* 80342728 0033F308  F0 E3 00 18 */	psq_st f7, 24(r3), 0, qr0
 /* 8034272C 0033F30C  F1 63 00 20 */	psq_st f11, 32(r3), 0, qr0
-/* 80342730 0033F310  4E 80 00 20 */	blr 
+/* 80342730 0033F310  4E 80 00 20 */	blr
 
 .global C_MTXLookAt
 C_MTXLookAt:
@@ -496,7 +496,7 @@ C_MTXLookAt:
 /* 803428B0 0033F490  83 A1 00 44 */	lwz r29, 0x44(r1)
 /* 803428B4 0033F494  38 21 00 50 */	addi r1, r1, 0x50
 /* 803428B8 0033F498  7C 08 03 A6 */	mtlr r0
-/* 803428BC 0033F49C  4E 80 00 20 */	blr 
+/* 803428BC 0033F49C  4E 80 00 20 */	blr
 
 .global C_MTXLightFrustum
 C_MTXLightFrustum:
@@ -536,7 +536,7 @@ C_MTXLightFrustum:
 /* 80342944 0033F524  D0 03 00 28 */	stfs f0, 0x28(r3)
 /* 80342948 0033F528  D0 63 00 2C */	stfs f3, 0x2c(r3)
 /* 8034294C 0033F52C  38 21 00 30 */	addi r1, r1, 0x30
-/* 80342950 0033F530  4E 80 00 20 */	blr 
+/* 80342950 0033F530  4E 80 00 20 */	blr
 
 .global C_MTXLightPerspective
 C_MTXLightPerspective:
@@ -590,7 +590,7 @@ C_MTXLightPerspective:
 /* 80342A10 0033F5F0  83 E1 00 2C */	lwz r31, 0x2c(r1)
 /* 80342A14 0033F5F4  38 21 00 58 */	addi r1, r1, 0x58
 /* 80342A18 0033F5F8  7C 08 03 A6 */	mtlr r0
-/* 80342A1C 0033F5FC  4E 80 00 20 */	blr 
+/* 80342A1C 0033F5FC  4E 80 00 20 */	blr
 
 .global C_MTXLightOrtho
 C_MTXLightOrtho:
@@ -627,7 +627,7 @@ C_MTXLightOrtho:
 /* 80342A98 0033F678  D0 63 00 24 */	stfs f3, 0x24(r3)
 /* 80342A9C 0033F67C  D0 63 00 28 */	stfs f3, 0x28(r3)
 /* 80342AA0 0033F680  D1 63 00 2C */	stfs f11, 0x2c(r3)
-/* 80342AA4 0033F684  4E 80 00 20 */	blr 
+/* 80342AA4 0033F684  4E 80 00 20 */	blr
 
 
 .section .sdata
@@ -642,19 +642,19 @@ lbl_804D5C00:
     .balign 8
 .global lbl_804DE310
 lbl_804DE310:
-	.4byte 0x3F800000
+    .4byte 0x3F800000
 .global lbl_804DE314
 lbl_804DE314:
-	.4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804DE318
 lbl_804DE318:
-	.4byte 0x40000000
+    .4byte 0x40000000
 .global lbl_804DE31C
 lbl_804DE31C:
-	.4byte 0xBF800000
+    .4byte 0xBF800000
 .global lbl_804DE320
 lbl_804DE320:
-	.4byte 0x3F000000
+    .4byte 0x3F000000
 .global lbl_804DE324
 lbl_804DE324:
-	.4byte 0x3C8EFA35
+    .4byte 0x3C8EFA35

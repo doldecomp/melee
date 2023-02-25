@@ -1,5 +1,8 @@
 #include <melee/lb/lbrefract.h>
 
+#include <math.h>
+#include <MetroTRK/intrinsics.h>
+
 #pragma region trigf
 extern f32 lbl_80400770[], lbl_80400774[];
 #pragma endregion
@@ -16,8 +19,8 @@ extern f32 lbl_80400770[], lbl_80400774[];
 /* static */ extern const f32 lbl_804D7DD4; // = 0.4142135679721832;
 
 #define SIGN_BIT (1 << 31)
-#define BITWISE(f) (*(u32 *)&f)
-#define SIGNED_BITWISE(f) ((s32)BITWISE(f))
+#define BITWISE(f) (*(u32*) &f)
+#define SIGNED_BITWISE(f) ((s32) BITWISE(f))
 #define GET_SIGN_BIT(f) (SIGNED_BITWISE(f) & SIGN_BIT)
 #define BITWISE_PI_2 0x3FC90FDB
 
@@ -34,8 +37,7 @@ extern f32 lbl_80400770[], lbl_80400774[];
 
 f32 atan2f(f32 y, f32 x)
 {
-    if (GET_SIGN_BIT(x) == GET_SIGN_BIT(y))
-    {
+    if (GET_SIGN_BIT(x) == GET_SIGN_BIT(y)) {
         if (GET_SIGN_BIT(x) != 0)
             return NEGATIVE_ZERO == x ? NEGATIVE_PI_2 : atanf(y / x) - PI;
 
@@ -48,29 +50,18 @@ f32 atan2f(f32 y, f32 x)
     if (x != ZERO)
         return atanf(y / x);
 
-    *(u32 *)&y = GET_SIGN_BIT(y) + BITWISE_PI_2;
+    *(u32*) &y = GET_SIGN_BIT(y) + BITWISE_PI_2;
 
     return y;
 }
 
-f32 local_80022DF8(f32);
+static f32 local_80022DF8(f32);
 f32 atanf(f32);
 
+#if MUST_MATCH
 
-#if NON_MATCHING
-
-f32 acosf(f32 x)
-{
-    f32 result = -(x * x - ONE);
-    result = local_80022DF8(result) * x;
-    result = atanf(result);
-    result = PI_2 - result;
-    return result;
-}
-
-#else
-
-// https://decomp.me/scratch/TeCho // 120 (97%) @frank
+#pragma push
+/// @todo @frank
 asm f32 acosf(f32)
 { // clang-format off
     nofralloc
@@ -118,21 +109,29 @@ lbl_80022D9C:
 /* 80022DB4 0001F994  7C 08 03 A6 */	mtlr r0
 /* 80022DB8 0001F998  4E 80 00 20 */	blr
 } // clang-format on
-#pragma peephole on
+#pragma pop
+
+#else
+
+f32 acosf(f32 x)
+{
+    f32 result = -(x * x - ONE);
+    result = local_80022DF8(result) * x;
+    result = atanf(result);
+    result = PI_2 - result;
+    return result;
+}
 
 #endif
 
-f32 func_80022DBC(f32 x)
+f32 asinf(f32 x)
 {
     return atanf(x * local_80022DF8(-(x * x - ONE)));
 }
 
-
-
-inline f32 local_80022DF8(f32 x)
+static inline f32 local_80022DF8(f32 x)
 {
-    if (x > ZERO)
-    {
+    if (x > ZERO) {
         f32 guess;
         guess = __frsqrte(x);
         guess = HALF * guess * (THREE - guess * guess * x);
@@ -212,25 +211,20 @@ static const f32 atanf_lookup[] = {
 f32 atanf(f32 x)
 {
     f32 result;
-    const f32 *lookup_ptr;
+    const f32* lookup_ptr;
     s32 lookup_index = -1;
-    BOOL x_ge_ratio = FALSE;
+    bool x_ge_ratio = false;
     s32 sign_bit_x = BITWISE(x) & SIGN_BIT;
 
     BITWISE(x) &= ~SIGN_BIT;
 
-    if (x >= SILVER_RATIO_1)
-    {
-        x_ge_ratio = TRUE;
+    if (x >= SILVER_RATIO_1) {
+        x_ge_ratio = true;
         result = ONE / x;
-    }
-    else if (SILVER_RATIO_1_CONJUGATE < x)
-    {
+    } else if (SILVER_RATIO_1_CONJUGATE < x) {
         lookup_index = 0;
-        switch (BITWISE(x) & BITWISE_INF)
-        {
-        case BITWISE_0_5:
-        {
+        switch (BITWISE(x) & BITWISE_INF) {
+        case BITWISE_0_5: {
             if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_0))
                 lookup_index = 1;
 
@@ -239,8 +233,7 @@ f32 atanf(f32 x)
 
             break;
         }
-        case BITWISE_1_0:
-        {
+        case BITWISE_1_0: {
             lookup_index = 2;
             if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_2))
                 lookup_index = 3;
@@ -250,8 +243,7 @@ f32 atanf(f32 x)
 
             break;
         }
-        case BITWISE_2_0:
-        {
+        case BITWISE_2_0: {
             lookup_index = 4;
             break;
         }
@@ -264,11 +256,10 @@ f32 atanf(f32 x)
             offset_33 = lookup_ptr[33];
 
             result = ONE / (offset_33 + (x + offset_39));
-            result = __fnmsubs(result, lookup_ptr[7], offset_33) + __fnmsubs(result, lookup_ptr[13], offset_39);
+            result = __fnmsubs(result, lookup_ptr[7], offset_33) +
+                     __fnmsubs(result, lookup_ptr[13], offset_39);
         }
-    }
-    else
-    {
+    } else {
         result = x;
     }
 
@@ -277,7 +268,7 @@ f32 atanf(f32 x)
         lookup_ptr = &atanf_lookup[lookup_index];
 
         // clang-format off
-        result = result * 
+        result = result *
             result_squared * (
                 result_squared * (
                     result_squared * (
@@ -297,8 +288,7 @@ f32 atanf(f32 x)
         result += lookup_ptr[20];
     }
 
-    if (x_ge_ratio)
-    {
+    if (x_ge_ratio) {
         result -= PI_2;
         return sign_bit_x ? result : -result;
     }

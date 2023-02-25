@@ -4,15 +4,13 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/lb/lbvector.h>
 
+#include <common_structs.h>
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
 #include <melee/it/itkind.h>
-#include <common_structs.h>
 
-typedef enum ftLuigiAction
-{
-    AS_FTCOMMON = 340,
-    AS_LUIGI_SPECIALN,
+typedef enum ftLuigiAction {
+    AS_LUIGI_SPECIALN = ASID_MAX,
     AS_LUIGI_SPECIALAIRN,
     AS_LUIGI_SPECIALS_START,
     AS_LUIGI_SPECIALS_HOLD,
@@ -41,29 +39,48 @@ typedef enum ftLuigiAction
 
 // SpecialS/SpecialAirS (Green Missile)
 
-#define FTLUIGI_SPECIALS_COLL_FLAG FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_SFX_PRESERVE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTLUIGI_SPECIALS_COLL_FLAG                                             \
+    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_MATANIM_NOUPDATE |            \
+        FIGHTER_SFX_PRESERVE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
+        FIGHTER_UNK_0x2227
 
-#define FTLUIGI_SPECIALS_GROUND_AIR_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTLUIGI_SPECIALS_GROUND_AIR_FLAG                                       \
+    FIGHTER_GFX_PRESERVE | FIGHTER_HITSTATUS_COLANIM_PRESERVE |                \
+        FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
+        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
+        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
+        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
 
 // Misfire
 
-#define FTLUIGI_SPECIALS_MISFIRE_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+#define FTLUIGI_SPECIALS_MISFIRE_FLAG                                          \
+    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
+        FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE |                        \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
+        FIGHTER_UNK_0x2227
 
 // SpecialLw (Luigi Cyclone)
 
-#define FTLUIGI_SPECIALLW_FLAG FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
-
+#define FTLUIGI_SPECIALLW_FLAG                                                 \
+    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
+        FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE |                        \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
+        FIGHTER_UNK_0x2227
 
 typedef struct _ftLuigiAttributes {
-
     // SIDE SPECIAL - GREEN MISSILE //
 
     f32 x0_LUIGI_GREENMISSILE_UNK1;
-    f32 x4_LUIGI_GREENMISSILE_SMASH; 
+    f32 x4_LUIGI_GREENMISSILE_SMASH;
     f32 x8_LUIGI_GREENMISSILE_CHARGE_RATE;
     f32 xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES;
     f32 x10_LUIGI_GREENMISSILE_DAMAGE_TILT;
-    f32 x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE; // (base damage + charge duration) * this value?
+    f32 x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE; // (base damage + charge duration)
+                                             // * this value?
     f32 x18_LUIGI_GREENMISSILE_TRACTION;
     f32 x1C_LUIGI_GREENMISSILE_UNK2;
     f32 x20_LUIGI_GREENMISSILE_FALLING_SPEED;
@@ -78,21 +95,26 @@ typedef struct _ftLuigiAttributes {
     f32 x44_LUIGI_GREENMISSILE_MISFIRE_CHANCE; // 1.0f divided by this value
     f32 x48_LUIGI_GREENMISSILE_MISFIRE_VEL_X;
     f32 x4C_LUIGI_GREENMISSILE_MISFIRE_VEL_Y;
-    
+
     // UP SPECIAL - SUPER JUMP PUNCH //
 
-    f32 x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY; // Multiplies Luigi's max horionztal aerial mobility
+    f32 x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY; // Multiplies Luigi's max
+                                               // horionztal aerial mobility
     f32 x54_LUIGI_SUPERJUMP_LANDING_LAG;
-    f32 x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE; // Minimum stick range required for turnaround
-    f32 x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE; // Minimum stick range required for horionztal momentum?
+    f32 x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE; // Minimum stick range required
+                                                 // for turnaround
+    f32 x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE; // Minimum stick range
+                                                  // required for horionztal
+                                                  // momentum?
     f32 x60_LUIGI_SUPERJUMP_ANGLE_DIFF;
-    f32 x64_LUIGI_SUPERJUMP_VEL_X; 
+    f32 x64_LUIGI_SUPERJUMP_VEL_X;
     f32 x68_LUIGI_SUPERJUMP_GRAVITY_START;
     f32 x6C_LUIGI_SUPERJUMP_VEL_Y;
-    
+
     // DOWN SPECIAL - LUIGI CYCLONE //
 
-    f32 x70_LUIGI_CYCLONE_TAP_MOMENTUM; // Vertical momentum from (first?) B button tap
+    f32 x70_LUIGI_CYCLONE_TAP_MOMENTUM; // Vertical momentum from (first?) B
+                                        // button tap
     f32 x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND;
     f32 x78_LUIGI_CYCLONE_MOMENTUM_X_AIR;
     f32 x7C_LUIGI_CYCLONE_MOMENTUM_X_MUL_GROUND;
@@ -104,6 +126,14 @@ typedef struct _ftLuigiAttributes {
     s32 x94_LUIGI_CYCLONE_LANDING_LAG;
 
 } ftLuigiAttributes;
+
+extern ActionState as_table_luigi[];
+extern ActionState lbl_803D0868[];
+extern char lbl_803D08A8[];
+extern char lbl_803D08B4[];
+extern Fighter_CostumeStrings lbl_803D0AB4[];
+extern char lbl_803D09E8[];
+extern Fighter_DemoStrings lbl_803D0A64;
 
 // Luigi Functions //
 
@@ -221,5 +251,17 @@ void ftLuigi_SpecialLw_Phys(HSD_GObj* fighter_gobj);
 void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj);
 void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj);
 void ftLuigi_SpecialAirLw_Coll(HSD_GObj* fighter_gobj);
+
+void ftLuigi_OnLoad(HSD_GObj* fighter_gobj);
+void ftLuigi_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftLuigi_OnItemInvisible(HSD_GObj* fighter_gobj);
+void ftLuigi_OnItemVisible(HSD_GObj* fighter_gobj);
+void ftLuigi_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1);
+void ftLuigi_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
+void ftLuigi_OnKnockbackEnter(HSD_GObj* fighter_gobj);
+void ftLuigi_OnKnockbackExit(HSD_GObj* fighter_gobj);
+void ftLuigi_8014260C(s32 arg0, s32* arg1, s32* arg2);
+void ftLuigi_OnDeath(HSD_GObj* fighter_gobj);
+void* func_80142640(enum_t demoMotionArg);
 
 #endif

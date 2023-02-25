@@ -80,14 +80,14 @@ psSetupTevCommon:
 /* 803A3A40 003A0620  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 803A3A44 003A0624  38 21 00 08 */	addi r1, r1, 8
 /* 803A3A48 003A0628  7C 08 03 A6 */	mtlr r0
-/* 803A3A4C 003A062C  4E 80 00 20 */	blr 
+/* 803A3A4C 003A062C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/nBWOl // 0 (100%)
 .global psSetupTevInvalidState
 psSetupTevInvalidState:
 /* 803A3A50 003A0630  38 00 FF FF */	li r0, -1
-/* 803A3A54 003A0634  90 0D C2 B0 */	stw r0, lbl_804D7950@sda21(r13)
-/* 803A3A58 003A0638  4E 80 00 20 */	blr 
+/* 803A3A54 003A0634  90 0D C2 B0 */	stw r0, prevTev@sda21(r13)
+/* 803A3A58 003A0638  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/RAhGZ
 .global psSetupTev
@@ -98,12 +98,12 @@ psSetupTev:
 /* 803A3A68 003A0648  38 C4 04 80 */	addi r6, r4, 0x80100480@l
 /* 803A3A6C 003A064C  94 21 FF F8 */	stwu r1, -8(r1)
 /* 803A3A70 003A0650  80 A3 00 04 */	lwz r5, 4(r3)
-/* 803A3A74 003A0654  80 0D C2 B0 */	lwz r0, lbl_804D7950@sda21(r13)
+/* 803A3A74 003A0654  80 0D C2 B0 */	lwz r0, prevTev@sda21(r13)
 /* 803A3A78 003A0658  7C A5 30 38 */	and r5, r5, r6
 /* 803A3A7C 003A065C  7C 05 00 40 */	cmplw r5, r0
 /* 803A3A80 003A0660  41 82 06 A8 */	beq lbl_803A4128
-/* 803A3A84 003A0664  90 AD C2 B0 */	stw r5, lbl_804D7950@sda21(r13)
-/* 803A3A88 003A0668  80 AD C2 B0 */	lwz r5, lbl_804D7950@sda21(r13)
+/* 803A3A84 003A0664  90 AD C2 B0 */	stw r5, prevTev@sda21(r13)
+/* 803A3A88 003A0668  80 AD C2 B0 */	lwz r5, prevTev@sda21(r13)
 /* 803A3A8C 003A066C  2C 05 00 00 */	cmpwi r5, 0
 /* 803A3A90 003A0670  41 82 01 A0 */	beq lbl_803A3C30
 /* 803A3A94 003A0674  40 80 00 80 */	bge lbl_803A3B14
@@ -174,9 +174,9 @@ lbl_803A3B78:
 /* 803A3B78 003A0758  80 03 00 04 */	lwz r0, 4(r3)
 /* 803A3B7C 003A075C  54 00 06 6E */	rlwinm r0, r0, 0, 0x19, 0x17
 /* 803A3B80 003A0760  90 03 00 04 */	stw r0, 4(r3)
-/* 803A3B84 003A0764  80 0D C2 B0 */	lwz r0, lbl_804D7950@sda21(r13)
+/* 803A3B84 003A0764  80 0D C2 B0 */	lwz r0, prevTev@sda21(r13)
 /* 803A3B88 003A0768  54 00 06 6E */	rlwinm r0, r0, 0, 0x19, 0x17
-/* 803A3B8C 003A076C  90 0D C2 B0 */	stw r0, lbl_804D7950@sda21(r13)
+/* 803A3B8C 003A076C  90 0D C2 B0 */	stw r0, prevTev@sda21(r13)
 lbl_803A3B90:
 /* 803A3B90 003A0770  38 60 00 02 */	li r3, 2
 /* 803A3B94 003A0774  4B F9 CB FD */	bl GXSetNumTevStages
@@ -216,9 +216,9 @@ lbl_803A3C18:
 /* 803A3C18 003A07F8  80 03 00 04 */	lwz r0, 4(r3)
 /* 803A3C1C 003A07FC  54 00 06 6E */	rlwinm r0, r0, 0, 0x19, 0x17
 /* 803A3C20 003A0800  90 03 00 04 */	stw r0, 4(r3)
-/* 803A3C24 003A0804  80 0D C2 B0 */	lwz r0, lbl_804D7950@sda21(r13)
+/* 803A3C24 003A0804  80 0D C2 B0 */	lwz r0, prevTev@sda21(r13)
 /* 803A3C28 003A0808  54 00 06 6E */	rlwinm r0, r0, 0, 0x19, 0x17
-/* 803A3C2C 003A080C  90 0D C2 B0 */	stw r0, lbl_804D7950@sda21(r13)
+/* 803A3C2C 003A080C  90 0D C2 B0 */	stw r0, prevTev@sda21(r13)
 lbl_803A3C30:
 /* 803A3C30 003A0810  38 60 00 01 */	li r3, 1
 /* 803A3C34 003A0814  4B F9 CB 5D */	bl GXSetNumTevStages
@@ -482,9 +482,9 @@ lbl_803A401C:
 /* 803A401C 003A0BFC  80 03 00 04 */	lwz r0, 4(r3)
 /* 803A4020 003A0C00  54 00 06 6E */	rlwinm r0, r0, 0, 0x19, 0x17
 /* 803A4024 003A0C04  90 03 00 04 */	stw r0, 4(r3)
-/* 803A4028 003A0C08  80 0D C2 B0 */	lwz r0, lbl_804D7950@sda21(r13)
+/* 803A4028 003A0C08  80 0D C2 B0 */	lwz r0, prevTev@sda21(r13)
 /* 803A402C 003A0C0C  54 00 06 6E */	rlwinm r0, r0, 0, 0x19, 0x17
-/* 803A4030 003A0C10  90 0D C2 B0 */	stw r0, lbl_804D7950@sda21(r13)
+/* 803A4030 003A0C10  90 0D C2 B0 */	stw r0, prevTev@sda21(r13)
 lbl_803A4034:
 /* 803A4034 003A0C14  38 60 00 01 */	li r3, 1
 /* 803A4038 003A0C18  4B F9 C7 59 */	bl GXSetNumTevStages
@@ -512,9 +512,9 @@ lbl_803A408C:
 /* 803A408C 003A0C6C  80 03 00 04 */	lwz r0, 4(r3)
 /* 803A4090 003A0C70  54 00 06 6E */	rlwinm r0, r0, 0, 0x19, 0x17
 /* 803A4094 003A0C74  90 03 00 04 */	stw r0, 4(r3)
-/* 803A4098 003A0C78  80 0D C2 B0 */	lwz r0, lbl_804D7950@sda21(r13)
+/* 803A4098 003A0C78  80 0D C2 B0 */	lwz r0, prevTev@sda21(r13)
 /* 803A409C 003A0C7C  54 00 06 6E */	rlwinm r0, r0, 0, 0x19, 0x17
-/* 803A40A0 003A0C80  90 0D C2 B0 */	stw r0, lbl_804D7950@sda21(r13)
+/* 803A40A0 003A0C80  90 0D C2 B0 */	stw r0, prevTev@sda21(r13)
 lbl_803A40A4:
 /* 803A40A4 003A0C84  38 60 00 02 */	li r3, 2
 /* 803A40A8 003A0C88  4B F9 C6 E9 */	bl GXSetNumTevStages
@@ -553,11 +553,11 @@ lbl_803A4128:
 /* 803A4128 003A0D08  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 803A412C 003A0D0C  38 21 00 08 */	addi r1, r1, 8
 /* 803A4130 003A0D10  7C 08 03 A6 */	mtlr r0
-/* 803A4134 003A0D14  4E 80 00 20 */	blr 
+/* 803A4134 003A0D14  4E 80 00 20 */	blr
 
 
 .section .sbss
     .balign 8
-.global lbl_804D7950
-lbl_804D7950:
-	.skip 0x8
+.global prevTev
+prevTev:
+    .skip 0x8

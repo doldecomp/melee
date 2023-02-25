@@ -1,8 +1,17 @@
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_27.h>
+
+#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
 #include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
+#include <melee/ft/code_80081B38.h>
+#include <melee/ft/ft_unknown_006.h>
+#include <melee/ft/ftbosslib.h>
+#include <melee/ft/ftcommon.h>
 
 // 80155074 151C54
 // https://decomp.me/scratch/GL82m
-void lbl_80155074(HSD_GObj* gobj) {
+void lbl_80155074(HSD_GObj* gobj)
+{
     s32 unused[2];
     Fighter* fp;
     HSD_GObj* gobj_2;
@@ -19,41 +28,36 @@ void lbl_80155074(HSD_GObj* gobj) {
         }
         fp->x2360 = 0;
     }
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80151018(gobj);
     }
 }
 
-
-
-
 // 8015512C 151D0C
-void lbl_8015512C(HSD_GObj* arg0) {
+void lbl_8015512C(HSD_GObj* arg0)
+{
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(arg0);
     }
 }
 
-
-
 // 80155170 151D50
-void lbl_80155170(HSD_GObj* gobj) {
+void lbl_80155170(HSD_GObj* gobj)
+{
     func_80085134(gobj);
 }
 
-
-
 // 80155190 151D70
-void lbl_80155190(HSD_GObj* gobj) {
+void lbl_80155190(HSD_GObj* gobj)
+{
     return;
 }
 
-
-
 // 80155194 151D74
 // https://decomp.me/scratch/3ppDy
-void lbl_80155194(HSD_GObj* gobj) {
+void lbl_80155194(HSD_GObj* gobj)
+{
     Fighter* fp;
     HSD_GObj* gobj_2;
 

@@ -24,7 +24,7 @@ func_80061D70:
 /* 80061DB4 0005E994  54 00 10 3A */	slwi r0, r0, 2
 /* 80061DB8 0005E998  7C 03 00 2E */	lwzx r0, r3, r0
 /* 80061DBC 0005E99C  7C 09 03 A6 */	mtctr r0
-/* 80061DC0 0005E9A0  4E 80 04 20 */	bctr 
+/* 80061DC0 0005E9A0  4E 80 04 20 */	bctr
 
 .global lbl_80061DC4
 lbl_80061DC4:
@@ -2108,7 +2108,7 @@ lbl_80063908:
 /* 80063920 00060500  CB E1 01 68 */	lfd f31, 0x168(r1)
 /* 80063924 00060504  38 21 01 70 */	addi r1, r1, 0x170
 /* 80063928 00060508  7C 08 03 A6 */	mtlr r0
-/* 8006392C 0006050C  4E 80 00 20 */	blr 
+/* 8006392C 0006050C  4E 80 00 20 */	blr
 
 
 .section .data
@@ -2204,23 +2204,23 @@ lbl_804D39E0:
     .balign 8
 .global lbl_804D81D0
 lbl_804D81D0:
-	.4byte 0x00000000
-	.4byte 0x00000000
+    .4byte 0x00000000
+    .4byte 0x00000000
 .global lbl_804D81D8
 lbl_804D81D8:
-	.4byte 0xBFF921FB
-	.4byte 0x54442D18
+    .4byte 0xBFF921FB
+    .4byte 0x54442D18
 .global lbl_804D81E0
 lbl_804D81E0:
-	.4byte 0x3FF921FB
-	.4byte 0x54442D18
+    .4byte 0x3FF921FB
+    .4byte 0x54442D18
 .global lbl_804D81E8
 lbl_804D81E8:
-	.4byte 0x3FC90FDB
+    .4byte 0x3FC90FDB
 .global lbl_804D81EC
 lbl_804D81EC:
-	.4byte 0x40C00000
+    .4byte 0x40C00000
 .global lbl_804D81F0
 lbl_804D81F0:
-	.4byte 0xBFC90FDB
-	.4byte 0x00000000
+    .4byte 0xBFC90FDB
+    .4byte 0x00000000

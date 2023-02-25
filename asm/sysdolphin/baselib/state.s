@@ -26,9 +26,9 @@ lbl_80361600:
 /* 80361614 0035E1F4  7F E3 FB 78 */	mr r3, r31
 /* 80361618 0035E1F8  48 00 0A 8D */	bl HSD_SetupChannel
 /* 8036161C 0035E1FC  48 00 3D E9 */	bl HSD_LObjGetNbActive
-/* 80361620 0035E200  3C 80 80 4C */	lis r4, lbl_804C07E0@ha
+/* 80361620 0035E200  3C 80 80 4C */	lis r4, matstate@ha
 /* 80361624 0035E204  3B A3 00 00 */	addi r29, r3, 0
-/* 80361628 0035E208  3B C4 07 E0 */	addi r30, r4, lbl_804C07E0@l
+/* 80361628 0035E208  3B C4 07 E0 */	addi r30, r4, matstate@l
 /* 8036162C 0035E20C  3B 81 00 0C */	addi r28, r1, 0xc
 /* 80361630 0035E210  3B 40 00 00 */	li r26, 0
 /* 80361634 0035E214  48 00 00 40 */	b lbl_80361674
@@ -78,14 +78,14 @@ lbl_803616B0:
 /* 803616C0 0035E2A0  A0 1E 00 08 */	lhz r0, 8(r30)
 /* 803616C4 0035E2A4  54 00 07 7B */	rlwinm. r0, r0, 0, 0x1d, 0x1d
 /* 803616C8 0035E2A8  41 82 00 1C */	beq lbl_803616E4
-/* 803616CC 0035E2AC  3C 60 80 4C */	lis r3, lbl_804C07E0@ha
-/* 803616D0 0035E2B0  38 63 07 E0 */	addi r3, r3, lbl_804C07E0@l
+/* 803616CC 0035E2AC  3C 60 80 4C */	lis r3, matstate@ha
+/* 803616D0 0035E2B0  38 63 07 E0 */	addi r3, r3, matstate@l
 /* 803616D4 0035E2B4  38 9E 00 10 */	addi r4, r30, 0x10
 /* 803616D8 0035E2B8  38 BF 00 6C */	addi r5, r31, 0x6c
 /* 803616DC 0035E2BC  48 01 90 A5 */	bl HSD_MulColor
 /* 803616E0 0035E2C0  48 00 00 0C */	b lbl_803616EC
 lbl_803616E4:
-/* 803616E4 0035E2C4  80 0D A6 28 */	lwz r0, lbl_804D5CC8@sda21(r13)
+/* 803616E4 0035E2C4  80 0D A6 28 */	lwz r0, dark_matter@sda21(r13)
 /* 803616E8 0035E2C8  90 1F 00 6C */	stw r0, 0x6c(r31)
 lbl_803616EC:
 /* 803616EC 0035E2CC  48 00 3C F9 */	bl HSD_LObjGetLightMaskDiffuse
@@ -126,7 +126,7 @@ lbl_80361764:
 /* 80361768 0035E348  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8036176C 0035E34C  38 21 00 30 */	addi r1, r1, 0x30
 /* 80361770 0035E350  7C 08 03 A6 */	mtlr r0
-/* 80361774 0035E354  4E 80 00 20 */	blr 
+/* 80361774 0035E354  4E 80 00 20 */	blr
 
 .global HSD_SetupPEMode
 HSD_SetupPEMode:
@@ -240,7 +240,7 @@ lbl_803618F0:
 /* 803618FC 0035E4DC  83 A1 00 14 */	lwz r29, 0x14(r1)
 /* 80361900 0035E4E0  38 21 00 20 */	addi r1, r1, 0x20
 /* 80361904 0035E4E4  7C 08 03 A6 */	mtlr r0
-/* 80361908 0035E4E8  4E 80 00 20 */	blr 
+/* 80361908 0035E4E8  4E 80 00 20 */	blr
 
 .global HSD_SetupRenderModeWithCustomPE
 HSD_SetupRenderModeWithCustomPE:
@@ -280,7 +280,7 @@ lbl_80361964:
 /* 8036198C 0035E56C  83 C1 00 88 */	lwz r30, 0x88(r1)
 /* 80361990 0035E570  38 21 00 90 */	addi r1, r1, 0x90
 /* 80361994 0035E574  7C 08 03 A6 */	mtlr r0
-/* 80361998 0035E578  4E 80 00 20 */	blr 
+/* 80361998 0035E578  4E 80 00 20 */	blr
 
 .global HSD_SetupRenderMode
 HSD_SetupRenderMode:
@@ -317,14 +317,14 @@ lbl_803619EC:
 /* 80361A10 0035E5F0  83 E1 00 84 */	lwz r31, 0x84(r1)
 /* 80361A14 0035E5F4  38 21 00 88 */	addi r1, r1, 0x88
 /* 80361A18 0035E5F8  7C 08 03 A6 */	mtlr r0
-/* 80361A1C 0035E5FC  4E 80 00 20 */	blr 
+/* 80361A1C 0035E5FC  4E 80 00 20 */	blr
 
 .global HSD_SetMaterialColor
 HSD_SetMaterialColor:
 /* 80361A20 0035E600  94 21 FF E0 */	stwu r1, -0x20(r1)
-/* 80361A24 0035E604  3C C0 80 4C */	lis r6, lbl_804C07E0@ha
+/* 80361A24 0035E604  3C C0 80 4C */	lis r6, matstate@ha
 /* 80361A28 0035E608  80 03 00 00 */	lwz r0, 0(r3)
-/* 80361A2C 0035E60C  38 66 07 E0 */	addi r3, r6, lbl_804C07E0@l
+/* 80361A2C 0035E60C  38 66 07 E0 */	addi r3, r6, matstate@l
 /* 80361A30 0035E610  90 03 00 00 */	stw r0, 0(r3)
 /* 80361A34 0035E614  80 04 00 00 */	lwz r0, 0(r4)
 /* 80361A38 0035E618  90 03 00 04 */	stw r0, 4(r3)
@@ -337,17 +337,17 @@ HSD_SetMaterialColor:
 /* 80361A54 0035E634  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80361A58 0035E638  98 03 00 0C */	stb r0, 0xc(r3)
 /* 80361A5C 0035E63C  38 21 00 20 */	addi r1, r1, 0x20
-/* 80361A60 0035E640  4E 80 00 20 */	blr 
+/* 80361A60 0035E640  4E 80 00 20 */	blr
 
 .global HSD_SetMaterialShininess
 HSD_SetMaterialShininess:
-/* 80361A64 0035E644  3C 60 80 4C */	lis r3, lbl_804C07E0@ha
-/* 80361A68 0035E648  38 63 07 E0 */	addi r3, r3, lbl_804C07E0@l
+/* 80361A64 0035E644  3C 60 80 4C */	lis r3, matstate@ha
+/* 80361A68 0035E648  38 63 07 E0 */	addi r3, r3, matstate@l
 /* 80361A6C 0035E64C  D0 23 00 10 */	stfs f1, 0x10(r3)
-/* 80361A70 0035E650  4E 80 00 20 */	blr 
+/* 80361A70 0035E650  4E 80 00 20 */	blr
 
-.global func_80361A74
-func_80361A74:
+.global HSD_StateSetLineWidth
+HSD_StateSetLineWidth:
 /* 80361A74 0035E654  7C 08 02 A6 */	mflr r0
 /* 80361A78 0035E658  90 01 00 04 */	stw r0, 4(r1)
 /* 80361A7C 0035E65C  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -374,7 +374,7 @@ lbl_80361AC0:
 /* 80361AC8 0035E6A8  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80361ACC 0035E6AC  38 21 00 18 */	addi r1, r1, 0x18
 /* 80361AD0 0035E6B0  7C 08 03 A6 */	mtlr r0
-/* 80361AD4 0035E6B4  4E 80 00 20 */	blr 
+/* 80361AD4 0035E6B4  4E 80 00 20 */	blr
 
 .global HSD_StateSetCullMode
 HSD_StateSetCullMode:
@@ -383,18 +383,18 @@ HSD_StateSetCullMode:
 /* 80361AE0 0035E6C0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80361AE4 0035E6C4  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 80361AE8 0035E6C8  3B E3 00 00 */	addi r31, r3, 0
-/* 80361AEC 0035E6CC  80 0D BF 20 */	lwz r0, lbl_804D75C0@sda21(r13)
+/* 80361AEC 0035E6CC  80 0D BF 20 */	lwz r0, state_cull_mode@sda21(r13)
 /* 80361AF0 0035E6D0  7C 00 F8 00 */	cmpw r0, r31
 /* 80361AF4 0035E6D4  41 82 00 10 */	beq lbl_80361B04
 /* 80361AF8 0035E6D8  7F E3 FB 78 */	mr r3, r31
 /* 80361AFC 0035E6DC  4B FD B8 55 */	bl GXSetCullMode
-/* 80361B00 0035E6E0  93 ED BF 20 */	stw r31, lbl_804D75C0@sda21(r13)
+/* 80361B00 0035E6E0  93 ED BF 20 */	stw r31, state_cull_mode@sda21(r13)
 lbl_80361B04:
 /* 80361B04 0035E6E4  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80361B08 0035E6E8  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80361B0C 0035E6EC  38 21 00 18 */	addi r1, r1, 0x18
 /* 80361B10 0035E6F0  7C 08 03 A6 */	mtlr r0
-/* 80361B14 0035E6F4  4E 80 00 20 */	blr 
+/* 80361B14 0035E6F4  4E 80 00 20 */	blr
 
 .global HSD_StateSetBlendMode
 HSD_StateSetBlendMode:
@@ -409,16 +409,16 @@ HSD_StateSetBlendMode:
 /* 80361B38 0035E718  3B A4 00 00 */	addi r29, r4, 0
 /* 80361B3C 0035E71C  93 81 00 18 */	stw r28, 0x18(r1)
 /* 80361B40 0035E720  3B 83 00 00 */	addi r28, r3, 0
-/* 80361B44 0035E724  80 0D BF 24 */	lwz r0, lbl_804D75C4@sda21(r13)
+/* 80361B44 0035E724  80 0D BF 24 */	lwz r0, state_blend_type@sda21(r13)
 /* 80361B48 0035E728  7C 00 E0 00 */	cmpw r0, r28
 /* 80361B4C 0035E72C  40 82 00 28 */	bne lbl_80361B74
-/* 80361B50 0035E730  80 0D BF 28 */	lwz r0, lbl_804D75C8@sda21(r13)
+/* 80361B50 0035E730  80 0D BF 28 */	lwz r0, state_src_factor@sda21(r13)
 /* 80361B54 0035E734  7C 00 E8 00 */	cmpw r0, r29
 /* 80361B58 0035E738  40 82 00 1C */	bne lbl_80361B74
-/* 80361B5C 0035E73C  80 0D BF 2C */	lwz r0, lbl_804D75CC@sda21(r13)
+/* 80361B5C 0035E73C  80 0D BF 2C */	lwz r0, state_dst_factor@sda21(r13)
 /* 80361B60 0035E740  7C 00 F0 00 */	cmpw r0, r30
 /* 80361B64 0035E744  40 82 00 10 */	bne lbl_80361B74
-/* 80361B68 0035E748  80 0D BF 30 */	lwz r0, lbl_804D75D0@sda21(r13)
+/* 80361B68 0035E748  80 0D BF 30 */	lwz r0, state_logic_op@sda21(r13)
 /* 80361B6C 0035E74C  7C 00 F8 00 */	cmpw r0, r31
 /* 80361B70 0035E750  41 82 00 28 */	beq lbl_80361B98
 lbl_80361B74:
@@ -427,10 +427,10 @@ lbl_80361B74:
 /* 80361B7C 0035E75C  38 BE 00 00 */	addi r5, r30, 0
 /* 80361B80 0035E760  38 DF 00 00 */	addi r6, r31, 0
 /* 80361B84 0035E764  4B FD F0 B9 */	bl GXSetBlendMode
-/* 80361B88 0035E768  93 8D BF 24 */	stw r28, lbl_804D75C4@sda21(r13)
-/* 80361B8C 0035E76C  93 AD BF 28 */	stw r29, lbl_804D75C8@sda21(r13)
-/* 80361B90 0035E770  93 CD BF 2C */	stw r30, lbl_804D75CC@sda21(r13)
-/* 80361B94 0035E774  93 ED BF 30 */	stw r31, lbl_804D75D0@sda21(r13)
+/* 80361B88 0035E768  93 8D BF 24 */	stw r28, state_blend_type@sda21(r13)
+/* 80361B8C 0035E76C  93 AD BF 28 */	stw r29, state_src_factor@sda21(r13)
+/* 80361B90 0035E770  93 CD BF 2C */	stw r30, state_dst_factor@sda21(r13)
+/* 80361B94 0035E774  93 ED BF 30 */	stw r31, state_logic_op@sda21(r13)
 lbl_80361B98:
 /* 80361B98 0035E778  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 80361B9C 0035E77C  83 E1 00 24 */	lwz r31, 0x24(r1)
@@ -439,7 +439,7 @@ lbl_80361B98:
 /* 80361BA8 0035E788  83 81 00 18 */	lwz r28, 0x18(r1)
 /* 80361BAC 0035E78C  38 21 00 28 */	addi r1, r1, 0x28
 /* 80361BB0 0035E790  7C 08 03 A6 */	mtlr r0
-/* 80361BB4 0035E794  4E 80 00 20 */	blr 
+/* 80361BB4 0035E794  4E 80 00 20 */	blr
 
 .global HSD_StateSetZMode
 HSD_StateSetZMode:
@@ -465,14 +465,14 @@ lbl_80361BE8:
 lbl_80361BFC:
 /* 80361BFC 0035E7DC  38 60 00 00 */	li r3, 0
 lbl_80361C00:
-/* 80361C00 0035E7E0  88 0D BF 34 */	lbz r0, lbl_804D75D4@sda21(r13)
+/* 80361C00 0035E7E0  88 0D BF 34 */	lbz r0, state_z_enable@sda21(r13)
 /* 80361C04 0035E7E4  54 7F 06 3E */	clrlwi r31, r3, 0x18
 /* 80361C08 0035E7E8  7C 00 E8 00 */	cmpw r0, r29
 /* 80361C0C 0035E7EC  40 82 00 1C */	bne lbl_80361C28
-/* 80361C10 0035E7F0  80 0D BF 38 */	lwz r0, lbl_804D75D8@sda21(r13)
+/* 80361C10 0035E7F0  80 0D BF 38 */	lwz r0, state_z_func@sda21(r13)
 /* 80361C14 0035E7F4  7C 00 F0 00 */	cmpw r0, r30
 /* 80361C18 0035E7F8  40 82 00 10 */	bne lbl_80361C28
-/* 80361C1C 0035E7FC  88 0D BF 3C */	lbz r0, lbl_804D75DC@sda21(r13)
+/* 80361C1C 0035E7FC  88 0D BF 3C */	lbz r0, state_z_update@sda21(r13)
 /* 80361C20 0035E800  7C 00 F8 00 */	cmpw r0, r31
 /* 80361C24 0035E804  41 82 00 20 */	beq lbl_80361C44
 lbl_80361C28:
@@ -480,9 +480,9 @@ lbl_80361C28:
 /* 80361C2C 0035E80C  38 9E 00 00 */	addi r4, r30, 0
 /* 80361C30 0035E810  38 BF 00 00 */	addi r5, r31, 0
 /* 80361C34 0035E814  4B FD F1 8D */	bl GXSetZMode
-/* 80361C38 0035E818  9B AD BF 34 */	stb r29, lbl_804D75D4@sda21(r13)
-/* 80361C3C 0035E81C  93 CD BF 38 */	stw r30, lbl_804D75D8@sda21(r13)
-/* 80361C40 0035E820  9B ED BF 3C */	stb r31, lbl_804D75DC@sda21(r13)
+/* 80361C38 0035E818  9B AD BF 34 */	stb r29, state_z_enable@sda21(r13)
+/* 80361C3C 0035E81C  93 CD BF 38 */	stw r30, state_z_func@sda21(r13)
+/* 80361C40 0035E820  9B ED BF 3C */	stb r31, state_z_update@sda21(r13)
 lbl_80361C44:
 /* 80361C44 0035E824  80 01 00 2C */	lwz r0, 0x2c(r1)
 /* 80361C48 0035E828  83 E1 00 24 */	lwz r31, 0x24(r1)
@@ -490,10 +490,10 @@ lbl_80361C44:
 /* 80361C50 0035E830  83 A1 00 1C */	lwz r29, 0x1c(r1)
 /* 80361C54 0035E834  38 21 00 28 */	addi r1, r1, 0x28
 /* 80361C58 0035E838  7C 08 03 A6 */	mtlr r0
-/* 80361C5C 0035E83C  4E 80 00 20 */	blr 
+/* 80361C5C 0035E83C  4E 80 00 20 */	blr
 
-.global func_80361C60
-func_80361C60:
+.global HSD_StateSetPointSize
+HSD_StateSetPointSize:
 /* 80361C60 0035E840  7C 08 02 A6 */	mflr r0
 /* 80361C64 0035E844  90 01 00 04 */	stw r0, 4(r1)
 /* 80361C68 0035E848  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -520,7 +520,7 @@ lbl_80361CAC:
 /* 80361CB4 0035E894  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80361CB8 0035E898  38 21 00 18 */	addi r1, r1, 0x18
 /* 80361CBC 0035E89C  7C 08 03 A6 */	mtlr r0
-/* 80361CC0 0035E8A0  4E 80 00 20 */	blr 
+/* 80361CC0 0035E8A0  4E 80 00 20 */	blr
 
 .global HSD_StateSetAlphaCompare
 HSD_StateSetAlphaCompare:
@@ -533,20 +533,20 @@ HSD_StateSetAlphaCompare:
 /* 80361CDC 0035E8BC  3B A5 00 00 */	addi r29, r5, 0
 /* 80361CE0 0035E8C0  3B C6 00 00 */	addi r30, r6, 0
 /* 80361CE4 0035E8C4  3B E7 00 00 */	addi r31, r7, 0
-/* 80361CE8 0035E8C8  80 0D BF 40 */	lwz r0, lbl_804D75E0@sda21(r13)
+/* 80361CE8 0035E8C8  80 0D BF 40 */	lwz r0, state_alpha_comp0@sda21(r13)
 /* 80361CEC 0035E8CC  7C 00 D8 00 */	cmpw r0, r27
 /* 80361CF0 0035E8D0  40 82 00 3C */	bne lbl_80361D2C
-/* 80361CF4 0035E8D4  88 6D BF 44 */	lbz r3, lbl_804D75E4@sda21(r13)
+/* 80361CF4 0035E8D4  88 6D BF 44 */	lbz r3, state_alpha_ref0@sda21(r13)
 /* 80361CF8 0035E8D8  57 80 06 3E */	clrlwi r0, r28, 0x18
 /* 80361CFC 0035E8DC  7C 03 00 40 */	cmplw r3, r0
 /* 80361D00 0035E8E0  40 82 00 2C */	bne lbl_80361D2C
-/* 80361D04 0035E8E4  80 0D BF 48 */	lwz r0, lbl_804D75E8@sda21(r13)
+/* 80361D04 0035E8E4  80 0D BF 48 */	lwz r0, state_alpha_op@sda21(r13)
 /* 80361D08 0035E8E8  7C 00 E8 00 */	cmpw r0, r29
 /* 80361D0C 0035E8EC  40 82 00 20 */	bne lbl_80361D2C
-/* 80361D10 0035E8F0  80 0D BF 4C */	lwz r0, lbl_804D75EC@sda21(r13)
+/* 80361D10 0035E8F0  80 0D BF 4C */	lwz r0, state_alpha_comp1@sda21(r13)
 /* 80361D14 0035E8F4  7C 00 F0 00 */	cmpw r0, r30
 /* 80361D18 0035E8F8  40 82 00 14 */	bne lbl_80361D2C
-/* 80361D1C 0035E8FC  88 6D BF 50 */	lbz r3, lbl_804D75F0@sda21(r13)
+/* 80361D1C 0035E8FC  88 6D BF 50 */	lbz r3, state_alpha_ref1@sda21(r13)
 /* 80361D20 0035E900  57 E0 06 3E */	clrlwi r0, r31, 0x18
 /* 80361D24 0035E904  7C 03 00 40 */	cmplw r3, r0
 /* 80361D28 0035E908  41 82 00 30 */	beq lbl_80361D58
@@ -557,17 +557,17 @@ lbl_80361D2C:
 /* 80361D38 0035E918  38 DE 00 00 */	addi r6, r30, 0
 /* 80361D3C 0035E91C  38 FF 00 00 */	addi r7, r31, 0
 /* 80361D40 0035E920  4B FD E7 DD */	bl GXSetAlphaCompare
-/* 80361D44 0035E924  93 6D BF 40 */	stw r27, lbl_804D75E0@sda21(r13)
-/* 80361D48 0035E928  9B 8D BF 44 */	stb r28, lbl_804D75E4@sda21(r13)
-/* 80361D4C 0035E92C  93 AD BF 48 */	stw r29, lbl_804D75E8@sda21(r13)
-/* 80361D50 0035E930  93 CD BF 4C */	stw r30, lbl_804D75EC@sda21(r13)
-/* 80361D54 0035E934  9B ED BF 50 */	stb r31, lbl_804D75F0@sda21(r13)
+/* 80361D44 0035E924  93 6D BF 40 */	stw r27, state_alpha_comp0@sda21(r13)
+/* 80361D48 0035E928  9B 8D BF 44 */	stb r28, state_alpha_ref0@sda21(r13)
+/* 80361D4C 0035E92C  93 AD BF 48 */	stw r29, state_alpha_op@sda21(r13)
+/* 80361D50 0035E930  93 CD BF 4C */	stw r30, state_alpha_comp1@sda21(r13)
+/* 80361D54 0035E934  9B ED BF 50 */	stb r31, state_alpha_ref1@sda21(r13)
 lbl_80361D58:
 /* 80361D58 0035E938  BB 61 00 24 */	lmw r27, 0x24(r1)
 /* 80361D5C 0035E93C  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 80361D60 0035E940  38 21 00 38 */	addi r1, r1, 0x38
 /* 80361D64 0035E944  7C 08 03 A6 */	mtlr r0
-/* 80361D68 0035E948  4E 80 00 20 */	blr 
+/* 80361D68 0035E948  4E 80 00 20 */	blr
 
 .global HSD_StateSetColorUpdate
 HSD_StateSetColorUpdate:
@@ -582,19 +582,19 @@ HSD_StateSetColorUpdate:
 lbl_80361D8C:
 /* 80361D8C 0035E96C  38 60 00 00 */	li r3, 0
 lbl_80361D90:
-/* 80361D90 0035E970  88 0D BF 51 */	lbz r0, lbl_804D75F1@sda21(r13)
+/* 80361D90 0035E970  88 0D BF 51 */	lbz r0, state_color_update@sda21(r13)
 /* 80361D94 0035E974  54 7F 06 3E */	clrlwi r31, r3, 0x18
 /* 80361D98 0035E978  7C 00 F8 00 */	cmpw r0, r31
 /* 80361D9C 0035E97C  41 82 00 10 */	beq lbl_80361DAC
 /* 80361DA0 0035E980  7F E3 FB 78 */	mr r3, r31
 /* 80361DA4 0035E984  4B FD EF 9D */	bl GXSetColorUpdate
-/* 80361DA8 0035E988  9B ED BF 51 */	stb r31, lbl_804D75F1@sda21(r13)
+/* 80361DA8 0035E988  9B ED BF 51 */	stb r31, state_color_update@sda21(r13)
 lbl_80361DAC:
 /* 80361DAC 0035E98C  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80361DB0 0035E990  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80361DB4 0035E994  38 21 00 18 */	addi r1, r1, 0x18
 /* 80361DB8 0035E998  7C 08 03 A6 */	mtlr r0
-/* 80361DBC 0035E99C  4E 80 00 20 */	blr 
+/* 80361DBC 0035E99C  4E 80 00 20 */	blr
 
 .global HSD_StateSetAlphaUpdate
 HSD_StateSetAlphaUpdate:
@@ -609,19 +609,19 @@ HSD_StateSetAlphaUpdate:
 lbl_80361DE0:
 /* 80361DE0 0035E9C0  38 60 00 00 */	li r3, 0
 lbl_80361DE4:
-/* 80361DE4 0035E9C4  88 0D BF 52 */	lbz r0, lbl_804D75F2@sda21(r13)
+/* 80361DE4 0035E9C4  88 0D BF 52 */	lbz r0, state_alpha_update@sda21(r13)
 /* 80361DE8 0035E9C8  54 7F 06 3E */	clrlwi r31, r3, 0x18
 /* 80361DEC 0035E9CC  7C 00 F8 00 */	cmpw r0, r31
 /* 80361DF0 0035E9D0  41 82 00 10 */	beq lbl_80361E00
 /* 80361DF4 0035E9D4  7F E3 FB 78 */	mr r3, r31
 /* 80361DF8 0035E9D8  4B FD EF 89 */	bl GXSetAlphaUpdate
-/* 80361DFC 0035E9DC  9B ED BF 52 */	stb r31, lbl_804D75F2@sda21(r13)
+/* 80361DFC 0035E9DC  9B ED BF 52 */	stb r31, state_alpha_update@sda21(r13)
 lbl_80361E00:
 /* 80361E00 0035E9E0  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80361E04 0035E9E4  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80361E08 0035E9E8  38 21 00 18 */	addi r1, r1, 0x18
 /* 80361E0C 0035E9EC  7C 08 03 A6 */	mtlr r0
-/* 80361E10 0035E9F0  4E 80 00 20 */	blr 
+/* 80361E10 0035E9F0  4E 80 00 20 */	blr
 
 .global HSD_StateSetDstAlpha
 HSD_StateSetDstAlpha:
@@ -638,11 +638,11 @@ HSD_StateSetDstAlpha:
 lbl_80361E3C:
 /* 80361E3C 0035EA1C  38 60 00 00 */	li r3, 0
 lbl_80361E40:
-/* 80361E40 0035EA20  88 0D BF 53 */	lbz r0, lbl_804D75F3@sda21(r13)
+/* 80361E40 0035EA20  88 0D BF 53 */	lbz r0, state_enable_dst_alpha@sda21(r13)
 /* 80361E44 0035EA24  54 7F 06 3E */	clrlwi r31, r3, 0x18
 /* 80361E48 0035EA28  7C 00 F8 00 */	cmpw r0, r31
 /* 80361E4C 0035EA2C  40 82 00 14 */	bne lbl_80361E60
-/* 80361E50 0035EA30  88 6D BF 54 */	lbz r3, lbl_804D75F4@sda21(r13)
+/* 80361E50 0035EA30  88 6D BF 54 */	lbz r3, state_dst_alpha@sda21(r13)
 /* 80361E54 0035EA34  57 C0 06 3E */	clrlwi r0, r30, 0x18
 /* 80361E58 0035EA38  7C 03 00 40 */	cmplw r3, r0
 /* 80361E5C 0035EA3C  41 82 00 18 */	beq lbl_80361E74
@@ -650,15 +650,15 @@ lbl_80361E60:
 /* 80361E60 0035EA40  38 7F 00 00 */	addi r3, r31, 0
 /* 80361E64 0035EA44  38 9E 00 00 */	addi r4, r30, 0
 /* 80361E68 0035EA48  4B FD F1 61 */	bl GXSetDstAlpha
-/* 80361E6C 0035EA4C  9B ED BF 53 */	stb r31, lbl_804D75F3@sda21(r13)
-/* 80361E70 0035EA50  9B CD BF 54 */	stb r30, lbl_804D75F4@sda21(r13)
+/* 80361E6C 0035EA4C  9B ED BF 53 */	stb r31, state_enable_dst_alpha@sda21(r13)
+/* 80361E70 0035EA50  9B CD BF 54 */	stb r30, state_dst_alpha@sda21(r13)
 lbl_80361E74:
 /* 80361E74 0035EA54  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80361E78 0035EA58  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80361E7C 0035EA5C  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80361E80 0035EA60  38 21 00 18 */	addi r1, r1, 0x18
 /* 80361E84 0035EA64  7C 08 03 A6 */	mtlr r0
-/* 80361E88 0035EA68  4E 80 00 20 */	blr 
+/* 80361E88 0035EA68  4E 80 00 20 */	blr
 
 .global HSD_StateSetZCompLoc
 HSD_StateSetZCompLoc:
@@ -673,19 +673,19 @@ HSD_StateSetZCompLoc:
 lbl_80361EAC:
 /* 80361EAC 0035EA8C  38 60 00 00 */	li r3, 0
 lbl_80361EB0:
-/* 80361EB0 0035EA90  88 0D BF 55 */	lbz r0, lbl_804D75F5@sda21(r13)
+/* 80361EB0 0035EA90  88 0D BF 55 */	lbz r0, state_before_tex@sda21(r13)
 /* 80361EB4 0035EA94  54 7F 06 3E */	clrlwi r31, r3, 0x18
 /* 80361EB8 0035EA98  7C 00 F8 00 */	cmpw r0, r31
 /* 80361EBC 0035EA9C  41 82 00 10 */	beq lbl_80361ECC
 /* 80361EC0 0035EAA0  7F E3 FB 78 */	mr r3, r31
 /* 80361EC4 0035EAA4  4B FD EF 75 */	bl GXSetZCompLoc
-/* 80361EC8 0035EAA8  9B ED BF 55 */	stb r31, lbl_804D75F5@sda21(r13)
+/* 80361EC8 0035EAA8  9B ED BF 55 */	stb r31, state_before_tex@sda21(r13)
 lbl_80361ECC:
 /* 80361ECC 0035EAAC  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80361ED0 0035EAB0  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80361ED4 0035EAB4  38 21 00 18 */	addi r1, r1, 0x18
 /* 80361ED8 0035EAB8  7C 08 03 A6 */	mtlr r0
-/* 80361EDC 0035EABC  4E 80 00 20 */	blr 
+/* 80361EDC 0035EABC  4E 80 00 20 */	blr
 
 .global HSD_StateSetDither
 HSD_StateSetDither:
@@ -700,31 +700,31 @@ HSD_StateSetDither:
 lbl_80361F00:
 /* 80361F00 0035EAE0  38 60 00 00 */	li r3, 0
 lbl_80361F04:
-/* 80361F04 0035EAE4  88 0D BF 56 */	lbz r0, lbl_804D75F6@sda21(r13)
+/* 80361F04 0035EAE4  88 0D BF 56 */	lbz r0, state_dither@sda21(r13)
 /* 80361F08 0035EAE8  54 7F 06 3E */	clrlwi r31, r3, 0x18
 /* 80361F0C 0035EAEC  7C 00 F8 00 */	cmpw r0, r31
 /* 80361F10 0035EAF0  41 82 00 10 */	beq lbl_80361F20
 /* 80361F14 0035EAF4  7F E3 FB 78 */	mr r3, r31
 /* 80361F18 0035EAF8  4B FD F0 71 */	bl GXSetDither
-/* 80361F1C 0035EAFC  9B ED BF 56 */	stb r31, lbl_804D75F6@sda21(r13)
+/* 80361F1C 0035EAFC  9B ED BF 56 */	stb r31, state_dither@sda21(r13)
 lbl_80361F20:
 /* 80361F20 0035EB00  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80361F24 0035EB04  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 80361F28 0035EB08  38 21 00 18 */	addi r1, r1, 0x18
 /* 80361F2C 0035EB0C  7C 08 03 A6 */	mtlr r0
-/* 80361F30 0035EB10  4E 80 00 20 */	blr 
+/* 80361F30 0035EB10  4E 80 00 20 */	blr
 
-.global lbl_80361F34
-lbl_80361F34:
+.global _HSD_StateInvalidatePrimitive
+_HSD_StateInvalidatePrimitive:
 /* 80361F34 0035EB14  38 60 00 00 */	li r3, 0
 /* 80361F38 0035EB18  38 00 FF FF */	li r0, -1
 /* 80361F3C 0035EB1C  98 6D BF 10 */	stb r3, lbl_804D75B0@sda21(r13)
 /* 80361F40 0035EB20  98 6D BF 18 */	stb r3, lbl_804D75B8@sda21(r13)
-/* 80361F44 0035EB24  90 0D BF 20 */	stw r0, lbl_804D75C0@sda21(r13)
-/* 80361F48 0035EB28  4E 80 00 20 */	blr 
+/* 80361F44 0035EB24  90 0D BF 20 */	stw r0, state_cull_mode@sda21(r13)
+/* 80361F48 0035EB28  4E 80 00 20 */	blr
 
-.global lbl_80361F4C
-lbl_80361F4C:
+.global _HSD_StateInvalidateVtxAttr
+_HSD_StateInvalidateVtxAttr:
 /* 80361F4C 0035EB2C  7C 08 02 A6 */	mflr r0
 /* 80361F50 0035EB30  90 01 00 04 */	stw r0, 4(r1)
 /* 80361F54 0035EB34  94 21 FF F8 */	stwu r1, -8(r1)
@@ -732,41 +732,41 @@ lbl_80361F4C:
 /* 80361F5C 0035EB3C  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80361F60 0035EB40  38 21 00 08 */	addi r1, r1, 8
 /* 80361F64 0035EB44  7C 08 03 A6 */	mtlr r0
-/* 80361F68 0035EB48  4E 80 00 20 */	blr 
+/* 80361F68 0035EB48  4E 80 00 20 */	blr
 
-.global lbl_80361F6C
-lbl_80361F6C:
+.global _HSD_StateInvalidateRenderMode
+_HSD_StateInvalidateRenderMode:
 /* 80361F6C 0035EB4C  38 80 FF FF */	li r4, -1
 /* 80361F70 0035EB50  38 60 00 FF */	li r3, 0xff
-/* 80361F74 0035EB54  90 8D BF 24 */	stw r4, lbl_804D75C4@sda21(r13)
+/* 80361F74 0035EB54  90 8D BF 24 */	stw r4, state_blend_type@sda21(r13)
 /* 80361F78 0035EB58  38 00 00 00 */	li r0, 0
-/* 80361F7C 0035EB5C  90 8D BF 28 */	stw r4, lbl_804D75C8@sda21(r13)
-/* 80361F80 0035EB60  90 8D BF 2C */	stw r4, lbl_804D75CC@sda21(r13)
-/* 80361F84 0035EB64  90 8D BF 30 */	stw r4, lbl_804D75D0@sda21(r13)
-/* 80361F88 0035EB68  98 6D BF 34 */	stb r3, lbl_804D75D4@sda21(r13)
-/* 80361F8C 0035EB6C  90 8D BF 38 */	stw r4, lbl_804D75D8@sda21(r13)
-/* 80361F90 0035EB70  98 6D BF 3C */	stb r3, lbl_804D75DC@sda21(r13)
-/* 80361F94 0035EB74  90 8D BF 40 */	stw r4, lbl_804D75E0@sda21(r13)
-/* 80361F98 0035EB78  98 0D BF 44 */	stb r0, lbl_804D75E4@sda21(r13)
-/* 80361F9C 0035EB7C  90 8D BF 48 */	stw r4, lbl_804D75E8@sda21(r13)
-/* 80361FA0 0035EB80  90 8D BF 4C */	stw r4, lbl_804D75EC@sda21(r13)
-/* 80361FA4 0035EB84  98 0D BF 50 */	stb r0, lbl_804D75F0@sda21(r13)
-/* 80361FA8 0035EB88  98 6D BF 51 */	stb r3, lbl_804D75F1@sda21(r13)
-/* 80361FAC 0035EB8C  98 6D BF 52 */	stb r3, lbl_804D75F2@sda21(r13)
-/* 80361FB0 0035EB90  98 6D BF 53 */	stb r3, lbl_804D75F3@sda21(r13)
-/* 80361FB4 0035EB94  98 0D BF 54 */	stb r0, lbl_804D75F4@sda21(r13)
-/* 80361FB8 0035EB98  98 6D BF 55 */	stb r3, lbl_804D75F5@sda21(r13)
-/* 80361FBC 0035EB9C  98 6D BF 56 */	stb r3, lbl_804D75F6@sda21(r13)
-/* 80361FC0 0035EBA0  4E 80 00 20 */	blr 
+/* 80361F7C 0035EB5C  90 8D BF 28 */	stw r4, state_src_factor@sda21(r13)
+/* 80361F80 0035EB60  90 8D BF 2C */	stw r4, state_dst_factor@sda21(r13)
+/* 80361F84 0035EB64  90 8D BF 30 */	stw r4, state_logic_op@sda21(r13)
+/* 80361F88 0035EB68  98 6D BF 34 */	stb r3, state_z_enable@sda21(r13)
+/* 80361F8C 0035EB6C  90 8D BF 38 */	stw r4, state_z_func@sda21(r13)
+/* 80361F90 0035EB70  98 6D BF 3C */	stb r3, state_z_update@sda21(r13)
+/* 80361F94 0035EB74  90 8D BF 40 */	stw r4, state_alpha_comp0@sda21(r13)
+/* 80361F98 0035EB78  98 0D BF 44 */	stb r0, state_alpha_ref0@sda21(r13)
+/* 80361F9C 0035EB7C  90 8D BF 48 */	stw r4, state_alpha_op@sda21(r13)
+/* 80361FA0 0035EB80  90 8D BF 4C */	stw r4, state_alpha_comp1@sda21(r13)
+/* 80361FA4 0035EB84  98 0D BF 50 */	stb r0, state_alpha_ref1@sda21(r13)
+/* 80361FA8 0035EB88  98 6D BF 51 */	stb r3, state_color_update@sda21(r13)
+/* 80361FAC 0035EB8C  98 6D BF 52 */	stb r3, state_alpha_update@sda21(r13)
+/* 80361FB0 0035EB90  98 6D BF 53 */	stb r3, state_enable_dst_alpha@sda21(r13)
+/* 80361FB4 0035EB94  98 0D BF 54 */	stb r0, state_dst_alpha@sda21(r13)
+/* 80361FB8 0035EB98  98 6D BF 55 */	stb r3, state_before_tex@sda21(r13)
+/* 80361FBC 0035EB9C  98 6D BF 56 */	stb r3, state_dither@sda21(r13)
+/* 80361FC0 0035EBA0  4E 80 00 20 */	blr
 
 .global HSD_StateInvalidate
 HSD_StateInvalidate:
 /* 80361FC4 0035EBA4  7C 08 02 A6 */	mflr r0
-/* 80361FC8 0035EBA8  3C 80 80 40 */	lis r4, lbl_80405B58@ha
+/* 80361FC8 0035EBA8  3C 80 80 40 */	lis r4, invalidate_funcs@ha
 /* 80361FCC 0035EBAC  90 01 00 04 */	stw r0, 4(r1)
 /* 80361FD0 0035EBB0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 80361FD4 0035EBB4  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 80361FD8 0035EBB8  3B E4 5B 58 */	addi r31, r4, lbl_80405B58@l
+/* 80361FD8 0035EBB8  3B E4 5B 58 */	addi r31, r4, invalidate_funcs@l
 /* 80361FDC 0035EBBC  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 80361FE0 0035EBC0  3B C3 00 00 */	addi r30, r3, 0
 /* 80361FE4 0035EBC4  48 00 00 1C */	b lbl_80362000
@@ -775,7 +775,7 @@ lbl_80361FE8:
 /* 80361FEC 0035EBCC  41 82 00 10 */	beq lbl_80361FFC
 /* 80361FF0 0035EBD0  81 9F 00 04 */	lwz r12, 4(r31)
 /* 80361FF4 0035EBD4  7D 88 03 A6 */	mtlr r12
-/* 80361FF8 0035EBD8  4E 80 00 21 */	blrl 
+/* 80361FF8 0035EBD8  4E 80 00 21 */	blrl
 lbl_80361FFC:
 /* 80361FFC 0035EBDC  3B FF 00 08 */	addi r31, r31, 8
 lbl_80362000:
@@ -787,7 +787,7 @@ lbl_80362000:
 /* 80362014 0035EBF4  83 C1 00 10 */	lwz r30, 0x10(r1)
 /* 80362018 0035EBF8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8036201C 0035EBFC  7C 08 03 A6 */	mtlr r0
-/* 80362020 0035EC00  4E 80 00 20 */	blr 
+/* 80362020 0035EC00  4E 80 00 20 */	blr
 
 
 .section .data
@@ -866,117 +866,116 @@ lbl_80405A38:
     .4byte 0x00000002
     .4byte 0x00000002
     .4byte NULL
-.global lbl_80405B58
-lbl_80405B58:
+.global invalidate_funcs
+invalidate_funcs:
     .4byte 0x00000001
-	.4byte lbl_80361F34
+    .4byte _HSD_StateInvalidatePrimitive
     .4byte 0x00000002
-	.4byte lbl_80361F4C
+    .4byte _HSD_StateInvalidateVtxAttr
     .4byte 0x00000004
-	.4byte lbl_80362CA0
+    .4byte lbl_80362CA0
     .4byte 0x00000008
-	.4byte lbl_80362CF8
+    .4byte lbl_80362CF8
     .4byte 0x00000010
-	.4byte lbl_80362D04
+    .4byte lbl_80362D04
     .4byte 0x00000020
-	.4byte lbl_80362D24
+    .4byte lbl_80362D24
     .4byte 0x00000040
-	.4byte lbl_80361F6C
+    .4byte _HSD_StateInvalidateRenderMode
     .4byte NULL
     .4byte NULL
 
 
 .section .bss, "wa"
     .balign 8
-.global lbl_804C07E0
-lbl_804C07E0:
-	.skip 0x18
+.global matstate
+matstate:
+    .skip 0x18
 
 
 .section .sdata
     .balign 8
-.global lbl_804D5CC8
-lbl_804D5CC8:
-	.4byte 0x000000FF
-    .4byte NULL
+.global dark_matter
+dark_matter:
+    .4byte 0x000000FF
 
 
 .section .sbss
     .balign 8
 .global lbl_804D75B0
 lbl_804D75B0:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D75B4
 lbl_804D75B4:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D75B8
 lbl_804D75B8:
-	.skip 0x4
+    .skip 0x4
 .global lbl_804D75BC
 lbl_804D75BC:
-	.skip 0x4
-.global lbl_804D75C0
-lbl_804D75C0:
-	.skip 0x4
-.global lbl_804D75C4
-lbl_804D75C4:
-	.skip 0x4
-.global lbl_804D75C8
-lbl_804D75C8:
-	.skip 0x4
-.global lbl_804D75CC
-lbl_804D75CC:
-	.skip 0x4
-.global lbl_804D75D0
-lbl_804D75D0:
-	.skip 0x4
-.global lbl_804D75D4
-lbl_804D75D4:
-	.skip 0x4
-.global lbl_804D75D8
-lbl_804D75D8:
-	.skip 0x4
-.global lbl_804D75DC
-lbl_804D75DC:
-	.skip 0x4
-.global lbl_804D75E0
-lbl_804D75E0:
-	.skip 0x4
-.global lbl_804D75E4
-lbl_804D75E4:
-	.skip 0x4
-.global lbl_804D75E8
-lbl_804D75E8:
-	.skip 0x4
-.global lbl_804D75EC
-lbl_804D75EC:
-	.skip 0x4
-.global lbl_804D75F0
-lbl_804D75F0:
-	.skip 0x1
-.global lbl_804D75F1
-lbl_804D75F1:
-	.skip 0x1
-.global lbl_804D75F2
-lbl_804D75F2:
-	.skip 0x1
-.global lbl_804D75F3
-lbl_804D75F3:
-	.skip 0x1
-.global lbl_804D75F4
-lbl_804D75F4:
-	.skip 0x1
-.global lbl_804D75F5
-lbl_804D75F5:
-	.skip 0x1
-.global lbl_804D75F6
-lbl_804D75F6:
-	.skip 0x2
+    .skip 0x4
+.global state_cull_mode
+state_cull_mode:
+    .skip 0x4
+.global state_blend_type
+state_blend_type:
+    .skip 0x4
+.global state_src_factor
+state_src_factor:
+    .skip 0x4
+.global state_dst_factor
+state_dst_factor:
+    .skip 0x4
+.global state_logic_op
+state_logic_op:
+    .skip 0x4
+.global state_z_enable
+state_z_enable:
+    .skip 0x4
+.global state_z_func
+state_z_func:
+    .skip 0x4
+.global state_z_update
+state_z_update:
+    .skip 0x4
+.global state_alpha_comp0
+state_alpha_comp0:
+    .skip 0x4
+.global state_alpha_ref0
+state_alpha_ref0:
+    .skip 0x4
+.global state_alpha_op
+state_alpha_op:
+    .skip 0x4
+.global state_alpha_comp1
+state_alpha_comp1:
+    .skip 0x4
+.global state_alpha_ref1
+state_alpha_ref1:
+    .skip 0x1
+.global state_color_update
+state_color_update:
+    .skip 0x1
+.global state_alpha_update
+state_alpha_update:
+    .skip 0x1
+.global state_enable_dst_alpha
+state_enable_dst_alpha:
+    .skip 0x1
+.global state_dst_alpha
+state_dst_alpha:
+    .skip 0x1
+.global state_before_tex
+state_before_tex:
+    .skip 0x1
+.global state_dither
+state_dither:
+    .skip 0x2
 
 
 .section .sdata2
     .balign 8
 .global lbl_804DE418
 lbl_804DE418:
-	.4byte 0x406FE000
-	.4byte 0x00000000
+    .4byte 0x406FE000
+    .4byte 0x00000000

@@ -63,7 +63,7 @@ lbl_80327594:
 /* 8032759C 0032417C  38 21 00 18 */	addi r1, r1, 0x18
 /* 803275A0 00324180  80 01 00 04 */	lwz r0, 4(r1)
 /* 803275A4 00324184  7C 08 03 A6 */	mtlr r0
-/* 803275A8 00324188  4E 80 00 20 */	blr 
+/* 803275A8 00324188  4E 80 00 20 */	blr
 
 .global TRKGetInput
 TRKGetInput:
@@ -99,7 +99,7 @@ lbl_80327610:
 /* 80327618 003241F8  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032761C 003241FC  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327620 00324200  7C 08 03 A6 */	mtlr r0
-/* 80327624 00324204  4E 80 00 20 */	blr 
+/* 80327624 00324204  4E 80 00 20 */	blr
 
 .global TRKProcessInput
 TRKProcessInput:
@@ -111,9 +111,9 @@ TRKProcessInput:
 /* 8032763C 0032421C  3B E3 00 00 */	addi r31, r3, 0
 /* 80327640 00324220  38 61 00 08 */	addi r3, r1, 8
 /* 80327644 00324224  4B FF F4 59 */	bl TRKConstructEvent
-/* 80327648 00324228  3C 60 80 4A */	lis r3, lbl_804A4B28@ha
+/* 80327648 00324228  3C 60 80 4A */	lis r3, gTRKFramingState@ha
 /* 8032764C 0032422C  93 E1 00 10 */	stw r31, 0x10(r1)
-/* 80327650 00324230  38 83 4B 28 */	addi r4, r3, lbl_804A4B28@l
+/* 80327650 00324230  38 83 4B 28 */	addi r4, r3, gTRKFramingState@l
 /* 80327654 00324234  38 61 00 08 */	addi r3, r1, 8
 /* 80327658 00324238  38 00 FF FF */	li r0, -1
 /* 8032765C 0032423C  90 04 00 00 */	stw r0, 0(r4)
@@ -122,25 +122,25 @@ TRKProcessInput:
 /* 80327668 00324248  38 21 00 18 */	addi r1, r1, 0x18
 /* 8032766C 0032424C  80 01 00 04 */	lwz r0, 4(r1)
 /* 80327670 00324250  7C 08 03 A6 */	mtlr r0
-/* 80327674 00324254  4E 80 00 20 */	blr 
+/* 80327674 00324254  4E 80 00 20 */	blr
 
 .global TRKInitializeSerialHandler
 TRKInitializeSerialHandler:
-/* 80327678 00324258  3C 60 80 4A */	lis r3, lbl_804A4B28@ha
-/* 8032767C 0032425C  38 83 4B 28 */	addi r4, r3, lbl_804A4B28@l
+/* 80327678 00324258  3C 60 80 4A */	lis r3, gTRKFramingState@ha
+/* 8032767C 0032425C  38 83 4B 28 */	addi r4, r3, gTRKFramingState@l
 /* 80327680 00324260  38 00 FF FF */	li r0, -1
 /* 80327684 00324264  90 04 00 00 */	stw r0, 0(r4)
 /* 80327688 00324268  38 00 00 00 */	li r0, 0
 /* 8032768C 0032426C  38 60 00 00 */	li r3, 0
 /* 80327690 00324270  98 04 00 08 */	stb r0, 8(r4)
 /* 80327694 00324274  90 04 00 0C */	stw r0, 0xc(r4)
-/* 80327698 00324278  4E 80 00 20 */	blr 
+/* 80327698 00324278  4E 80 00 20 */	blr
 
 .global TRKTerminateSerialHandler
 TRKTerminateSerialHandler:
 /* 8032769C 0032427C  38 60 00 00 */	li r3, 0
-/* 803276A0 00324280  4E 80 00 20 */	blr 
+/* 803276A0 00324280  4E 80 00 20 */	blr
 
 .global usr_put_initialize
 usr_put_initialize:
-/* 803276A4 00324284  4E 80 00 20 */	blr 
+/* 803276A4 00324284  4E 80 00 20 */	blr
