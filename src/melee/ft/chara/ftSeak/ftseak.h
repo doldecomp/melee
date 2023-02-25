@@ -20,4 +20,4 @@ typedef struct _ftSeakAttributes {
     u8 data_filler_1[0x44];
 } ftSeakAttributes;
 
-//void ftSeak_8011412C(HSD_GObj* fighter_gobj);
+//void lbl_8011412C(HSD_GObj* fighter_gobj);

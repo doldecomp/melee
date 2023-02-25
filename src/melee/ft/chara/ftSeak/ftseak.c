@@ -24,8 +24,8 @@ void ftSeak_OnLoad(HSD_GObj* fighter_gobj) {
 }
 
 void ftSeak_80110198(HSD_GObj* fighter_gobj) {
-    ftSeak_80111FBC(fighter_gobj);
-    ftSeak_80110E88(fighter_gobj);
+    func_80111FBC(fighter_gobj);
+    func_80110E88(fighter_gobj);
 }
 
 void ftSeak_801101CC(HSD_GObj* fighter_gobj) {
@@ -66,7 +66,7 @@ void ftSeak_OnKnockbackExit(HSD_GObj* fighter_gobj) {
 
 // 8011412C - 80114160
 // https://decomp.me/scratch/b1oIZ
-// void ftSeak_8011412C(HSD_GObj* fighter_gobj) {
+// void lbl_8011412C(HSD_GObj* fighter_gobj) {
 //     Fighter* fp = fighter_gobj->user_data;
 //     fp->cb.x21BC_callback_Accessory4 = 0;
 //     func_8007EFC8(fighter_gobj, &ftZelda_8013B4D8);

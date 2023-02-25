@@ -35,14 +35,14 @@ void ftZelda_8013AE30(HSD_GObj* fighter_gobj) {
 // Zelda_TransformToSubcharacter
 // 8013AEAC - 8013AEE0 (0x34 bytes)
 // https://decomp.me/scratch/iINH1
-void ftSeak_80114758(HSD_GObj*);                      /* extern */
+void func_80114758(HSD_GObj*);                      /* extern */
 void ftZelda_8013AEAC(HSD_GObj* fighter_gobj) {
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
     fp->cb.x21BC_callback_Accessory4 = 0;
 
-    func_8007EFC8(fighter_gobj, ftSeak_80114758);
+    func_8007EFC8(fighter_gobj, func_80114758);
 }
 
 // Helper function for both ftZelda_SpecialLw_StartAction / ftZelda_SpecialAirLw_StartAction
