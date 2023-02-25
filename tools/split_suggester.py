@@ -1,5 +1,5 @@
-# Created by Daniel Cappel ("DRGN")
-# Version 1.0
+# Created by Daniel R. Cappel ("DRGN")
+# Version 1.1
 #
 # Analyzes float constants used within a source ASM (.s) file
 # to determine file boundaries. This considers duplicate float
@@ -10,22 +10,21 @@
 # the user, with function headers including some function info.
 #
 # Usage:
-#		split_suggester.py [fileToSpli.s]
-#					OR
-#		split_suggester.py [fileToSpli.s] [mapFilePath.map]
+#         split_suggester.py [fileToSplit.s]
+#                     OR
+#         split_suggester.py [fileToSplit.s] [mapFilePath.map]
 #
 # If a map file is provided, function names from it will be
 # included in the generated function headers. If your data,
 # text, and sdata sections are not in the same file, you may
 # create a new file with them all included and input that.
 
+import errno
+import math
 import os
+import struct
 import sys
 import time
-import math
-import errno
-import struct
-
 from collections import OrderedDict
 
 debugging = False
@@ -37,19 +36,19 @@ else:
 
 # Parse command line arguments
 # Expecting the file to split and [optionally] a map file
-mapFilePath = ''
-if len( sys.argv ) < 2:
-    print( 'Invalid input; you must provide one .s file to split.' )
-    exit( 1 )
-elif len( sys.argv ) == 3:
-    if sys.argv[2].lower().endswith( '.map' ):
+mapFilePath = ""
+if len(sys.argv) < 2:
+    print("Invalid input; you must provide one .s file to split.")
+    exit(1)
+elif len(sys.argv) == 3:
+    if sys.argv[2].lower().endswith(".map"):
         mapFilePath = sys.argv[2]
     else:
-        print( 'Invalid input; the second argument is expected to be a .map file.' )
-        exit( 1 )
-elif len( sys.argv ) > 3:
-    print( 'Invalid input; got more than the expected one or two arguments.' )
-    exit( 1 )
+        print("Invalid input; the second argument is expected to be a .map file.")
+        exit(1)
+elif len(sys.argv) > 3:
+    print("Invalid input; got more than the expected one or two arguments.")
+    exit(1)
 
 
 # For function processing
@@ -66,7 +65,7 @@ reachedSdata = False
 firstValueProcessed = False
 floatTypes = {}
 susPadding = []
-lastLabel = ''
+lastLabel = ""
 
 # Running totals for section bytecounts
 textBytes = 0
@@ -74,11 +73,10 @@ dataBytes = 0
 sdataBytes = 0
 
 
-class Function( object ):
-
+class Function(object):
     def __init__(self, name):
         self.name = name
-        self.mapName = ''
+        self.mapName = ""
         self.start = -1
         self.end = -1
         self.lines = []
@@ -87,71 +85,78 @@ class Function( object ):
         self._length = -1
 
     @property
-    def length( self ):
+    def length(self):
         if self._length == -1:
-            assert self.start != -1, 'Unable to calculate function length; start address not set for "{}".'.format(self.name)
-            assert self.end != -1, 'Unable to calculate function length; end address not set for "{}".'.format(self.name)
+            assert (
+                self.start != -1
+            ), 'Unable to calculate function length; start address not set for "{}".'.format(
+                self.name
+            )
+            assert (
+                self.end != -1
+            ), 'Unable to calculate function length; end address not set for "{}".'.format(
+                self.name
+            )
 
-            start = int( self.start, 16 )
-            end = int( self.end, 16 )
+            start = int(self.start, 16)
+            end = int(self.end, 16)
 
             self._length = end - start
 
         return self._length
 
-    def checkForMapName( self ):
+    def checkForMapName(self):
         if mapNames and self.start != -1:
-            name = mapNames.get( self.start )
-            if name and not name.startswith( 'zz' ) and not name.endswith( '_' ):
+            name = mapNames.get(self.start)
+            if name and not name.startswith("zz") and not name.endswith("_"):
                 self.mapName = name
 
 
-def align( x, base=32 ):
+def align(x, base=32):
+    """Rounds up to nearest increment of [base] (default: 32 or 0x20)."""
 
-    """ Rounds up to nearest increment of [base] (default: 32 or 0x20). """
-
-    return int( base * math.ceil(float(x) / base) )
+    return int(base * math.ceil(float(x) / base))
 
 
-def createFolders( folderPath ):
+def createFolders(folderPath):
     try:
-        os.makedirs( folderPath )
+        os.makedirs(folderPath)
 
         # Primitive failsafe to prevent race condition
         attempt = 0
-        while not os.path.exists( folderPath ):
-            time.sleep( .3 )
+        while not os.path.exists(folderPath):
+            time.sleep(0.3)
             if attempt > 10:
-                raise Exception( 'Unable to create folder: ' + folderPath )
+                raise Exception("Unable to create folder: " + folderPath)
             attempt += 1
 
-    except OSError as error: # Python >2.5
-        if error.errno == errno.EEXIST and os.path.isdir( folderPath ):
+    except OSError as error:  # Python >2.5
+        if error.errno == errno.EEXIST and os.path.isdir(folderPath):
             pass
-        else: raise
+        else:
+            raise
 
 
 def userConfirms():
+    """Accepts input from the user. Anything starting with
+    'Y' or 'y' will return True; all else is False."""
 
-    """ Accepts input from the user. Anything starting with
-        'Y' or 'y' will return True; all else is False. """
-
-    print( '' ) # Separates query from response
+    print("")  # Separates query from response
 
     if runningPython3:
         userInput = input()
     else:
         userInput = raw_input()
 
-    return ( userInput.lower()[0] == 'y' )
+    return userInput.lower()[0] == "y"
 
 
 # Parse the map file for function names
 if mapFilePath:
-    with open( mapFilePath, 'r' ) as mapFile:
+    with open(mapFilePath, "r") as mapFile:
         for line in mapFile:
             line = line.strip()
-            if not line or line.startswith( '.' ):
+            if not line or line.startswith("."):
                 continue
 
             try:
@@ -160,51 +165,53 @@ if mapFilePath:
                 funcName = lineParts[-1]
                 mapNames[funcStart] = funcName
             except:
-                print( 'Unable to parse map file line: ' + line )
+                print("Unable to parse map file line: " + line)
 
 
 # Open the file to be split and parse its contents
 fileToSplit = sys.argv[1]
-with open( fileToSplit, 'r' ) as sourceFile:
+with open(fileToSplit, "r") as sourceFile:
     for line in sourceFile:
-        line = line.split( '//' )[0] # Removes comments
-        line = line.split( '#' )[0] # Removes comments
-        line = line.strip() # Removes leading/trailing whitespace
+        line = line.split("//")[0]  # Removes comments
+        line = line.split("#")[0]  # Removes comments
+        line = line.strip()  # Removes leading/trailing whitespace
 
         if not line:
             continue
-        elif line.startswith( '.global ' ):
+        elif line.startswith(".global "):
             functionEndCertain = True
             continue
 
         elif reachedSdata:
-            if line.endswith( ':' ):
-                lastLabel = line[:-1] # Strips colon
+            if line.endswith(":"):
+                lastLabel = line[:-1]  # Strips colon
                 firstValueProcessed = False
-            elif line.startswith( '.4byte' ):
+            elif line.startswith(".4byte"):
                 stringValue = line.split()[-1]
 
                 if firstValueProcessed:
-                    if floatType == 'single':
+                    if floatType == "single":
                         # There may be a file boundary here.
-                        susPadding.append( lastLabel )
+                        susPadding.append(lastLabel)
 
-                    elif floatType == 'double':
-                        valueBytes += bytearray.fromhex( stringValue.replace('0x', '') )
-                        value = struct.unpack( '>d', valueBytes )[0]
-                        floatsData[lastLabel] = ( lastLabel, 'double', value )
+                    elif floatType == "double":
+                        valueBytes += bytearray.fromhex(stringValue.replace("0x", ""))
+                        value = struct.unpack(">d", valueBytes)[0]
+                        floatsData[lastLabel] = (lastLabel, "double", value)
                 else:
-                    floatType = floatTypes.get( lastLabel )
+                    floatType = floatTypes.get(lastLabel)
 
                     if not floatType:
-                        print( 'Warning! Unable to determine a float type for ' + lastLabel )
+                        print(
+                            "Warning! Unable to determine a float type for " + lastLabel
+                        )
                         continue
 
-                    valueBytes = bytearray.fromhex( stringValue.replace('0x', '') )
+                    valueBytes = bytearray.fromhex(stringValue.replace("0x", ""))
 
-                    if floatType == 'single':
-                        value = struct.unpack( '>f', valueBytes )[0]
-                        floatsData[lastLabel] = ( lastLabel, 'single', value )
+                    if floatType == "single":
+                        value = struct.unpack(">f", valueBytes)[0]
+                        floatsData[lastLabel] = (lastLabel, "single", value)
 
                     firstValueProcessed = True
 
@@ -212,101 +219,101 @@ with open( fileToSplit, 'r' ) as sourceFile:
 
         elif reachedDataSection:
             # Check for next section
-            if line == '.section .sdata2':
+            if line == ".section .sdata2":
                 reachedSdata = True
-                functions.append( currentFunction )
+                functions.append(currentFunction)
 
             # Tally byte total
-            elif line.startswith( '.4byte' ):
+            elif line.startswith(".4byte"):
                 dataBytes += 4
-            elif line.startswith( '.asciz' ):
-                stringLength = len( line.split('"')[1] )
-                dataBytes += align( stringLength+1, 4 )
+            elif line.startswith(".asciz"):
+                stringLength = len(line.split('"')[1])
+                dataBytes += align(stringLength + 1, 4)
 
-        else: # Function processing
+        else:  # Function processing
             # Check for next section
-            if line == '.section .data':
+            if line == ".section .data":
                 reachedDataSection = True
                 continue
 
-            if line.startswith( '/*' ): # Indicates a code line
-                if line.endswith( 'blr' ):
+            if line.startswith("/*"):  # Indicates a code line
+                if line.endswith("blr"):
                     functionEndLikely = True
 
                 # Check if this is a line referencing a float from sdata
-                elif 'lbl_' in line:
-                    asm = line.split( '*/' )[1].lstrip()
+                elif "lbl_" in line:
+                    asm = line.split("*/")[1].lstrip()
 
-                    labelPortion = asm.split( ',' )[-1]
-                    label = labelPortion.split( '@' )[0].lstrip()
+                    labelPortion = asm.split(",")[-1]
+                    label = labelPortion.split("@")[0].lstrip()
 
-                    if asm.startswith( 'lfs ' ):
-                        floatTypes[label] = 'single'
-                        currentFunction.labels.append( label )
-                    elif asm.startswith( 'lfd ' ):
-                        floatTypes[label] = 'double'
-                        currentFunction.labels.append( label )
+                    if asm.startswith("lfs "):
+                        floatTypes[label] = "single"
+                        currentFunction.labels.append(label)
+                    elif asm.startswith("lfd "):
+                        floatTypes[label] = "double"
+                        currentFunction.labels.append(label)
 
                 # Set the function's start address and the last function's end address
                 if currentFunction.start == -1:
                     lineParts = line.split()
                     currentFunction.start = lineParts[1]
                     currentFunction.checkForMapName()
-                    if len( functions ) > 1: # First item is None
-                        functions[-1].end = lineParts[1] # Previous function
+                    if len(functions) > 1:  # First item is None
+                        functions[-1].end = lineParts[1]  # Previous function
 
-                currentFunction.lines.append( line )
+                currentFunction.lines.append(line)
                 textBytes += 4
 
             # Check if this is the start of a new function
-            elif line.endswith( ':' ):
-                label = line[:-1] # Removes colon
+            elif line.endswith(":"):
+                label = line[:-1]  # Removes colon
 
                 # Check if the last line was THE end, or just AN end to the function
                 if currentFunction and functionEndLikely and not functionEndCertain:
                     for funcLine in currentFunction.lines:
-                        if funcLine.startswith( '/*' ): # Indicates a code line
-                            asm = funcLine.split( '*/' )[1].lstrip()
+                        if funcLine.startswith("/*"):  # Indicates a code line
+                            asm = funcLine.split("*/")[1].lstrip()
 
                             # If a branch points to right after the blr, it's probably not the end of the full function
-                            if label in asm and asm.startswith( 'b' ):
+                            if label in asm and asm.startswith("b"):
                                 functionEndLikely = False
                                 if debugging:
-                                    print( 'discredited function end on line', line )
-                                    print( 'considering line', funcLine )
+                                    print("discredited function end on line", line)
+                                    print("considering line", funcLine)
                                 break
 
                 if functionEndLikely or functionEndCertain:
-                    functions.append( currentFunction )
+                    functions.append(currentFunction)
 
                     # Create a new function object to add properties to
-                    currentFunction = Function( label )
+                    currentFunction = Function(label)
                     functionEndLikely = False
                     functionEndCertain = False
                 else:
-                    currentFunction.lines.append( line )
+                    currentFunction.lines.append(line)
 
 
 # Sanity checks
 if not reachedSdata:
-    print( 'Unable to find the sdata2 section of the file!' )
-    exit( 2 )
+    print("Unable to find the sdata2 section of the file!")
+    exit(2)
 elif not floatsData:
-    print( 'Unable to parse floats data from sdata2!' )
-    exit( 3 )
+    print("Unable to parse floats data from sdata2!")
+    exit(3)
 
 
 # Account for alignment padding in byte usage totals
-textBytes = align( textBytes, 8 )
-dataBytes = align( dataBytes, 8 )
-sdataBytes = align( sdataBytes, 8 )
+textBytes = align(textBytes, 8)
+dataBytes = align(dataBytes, 8)
+sdataBytes = align(sdataBytes, 8)
 
 
 # Set the last function's end address (the rest are set in the loop above)
 lastCodeLine = functions[-1].lines[-1]
 lineParts = lastCodeLine.split()
-lineAddress = int( lineParts[1], 16 )
-functions[-1].end = '{:X}'.format( lineAddress + 4 )
+lineAddress = int(lineParts[1], 16)
+functions[-1].end = "{:X}".format(lineAddress + 4)
 
 
 # Analyze padding among literals to look for file breaks
@@ -315,20 +322,20 @@ if susPadding:
     checkNextType = False
     for name, floatType, value in floatsData.values():
         if checkNextType:
-            if floatType == 'single':
-                paddingBreaks.append( name )
+            if floatType == "single":
+                paddingBreaks.append(name)
             checkNextType = False
 
         if name in susPadding:
             checkNextType = True
     if debugging:
         if paddingBreaks:
-            print( 'File breaks suspected before these labels:' )
-            print( paddingBreaks )
+            print("File breaks suspected before these labels:")
+            print(paddingBreaks)
         else:
-            print( 'Suspicious padding absolved.' )
+            print("Suspicious padding absolved.")
 elif debugging:
-    print( 'No suspicious padding.' )
+    print("No suspicious padding.")
 
 
 # Remove leading 'None' in functions list and get all function names
@@ -336,7 +343,7 @@ functions = functions[1:]
 functionNames = [func.name for func in functions]
 
 
-""" 	Separate functions - Pass 1
+"""     Separate functions - Pass 1
 
     Here, a multidimentional list is created, wherein the main list represents a list of files,
     and each list within that will be a list of functions within that file. This pass checks for
@@ -345,127 +352,160 @@ functionNames = [func.name for func in functions]
     floats will also be applied here. """
 
 labelsUsed = set()
-fileList = [[]] # This will be a list of lists. Each list will be a list of functions for one file
+fileList = [
+    []
+]  # This will be a list of lists. Each list will be a list of functions for one file
 for func in functions:
     # Add this to the last file if it references no float labels
     if not func.labels:
-        fileList[-1].append( func )
+        fileList[-1].append(func)
         continue
 
     floatsInThisFunction = set()
     moveToNewFile = False
 
     for label in func.labels:
-        floatInstance = floatsData.get( label )
+        floatInstance = floatsData.get(label)
         if not floatInstance:
-            print( 'Warning! Unable to find a float for this label: ' + label )
+            print("Warning! Unable to find a float for this label: " + label)
             continue
 
         # Check for breaks due to usage of new instances of existing float literals
         if not moveToNewFile:
             for name, floatType, value in labelsUsed:
-                if name != floatInstance[0] and floatType == floatInstance[1] and value == floatInstance[2]:
+                if (
+                    name != floatInstance[0]
+                    and floatType == floatInstance[1]
+                    and value == floatInstance[2]
+                ):
                     if debugging:
-                        print( 'Moving {} to a new file due to float usage (using new {} {} value).'.format(func.name, floatType, value) )
+                        print(
+                            "Moving {} to a new file due to float usage (using new {} {} value).".format(
+                                func.name, floatType, value
+                            )
+                        )
                     moveToNewFile = True
                     if floatInstance[0] in paddingBreaks:
-                        paddingBreaks.remove( floatInstance[0] )
+                        paddingBreaks.remove(floatInstance[0])
                     break
 
         # Check for breaks due to padding
         if not moveToNewFile:
             if label in paddingBreaks:
                 if debugging:
-                    print( 'Moving {} to a new file due to padding.'.format(func.name) )
+                    print("Moving {} to a new file due to padding.".format(func.name))
                 moveToNewFile = True
-                paddingBreaks.remove( label )
+                paddingBreaks.remove(label)
 
-        floatsInThisFunction.add( floatInstance )
+        floatsInThisFunction.add(floatInstance)
 
     if moveToNewFile:
         # Move this function to a new list (which will be a new file)
-        fileList.append( [func] )
+        fileList.append([func])
 
         # Reset the labelsUsed so far in this new file to just those in this function
         labelsUsed = floatsInThisFunction
     else:
         # Add this function to the current file
-        fileList[-1].append( func )
+        fileList[-1].append(func)
 
         # Add the float data collected for this function to those used in this file
-        labelsUsed.update( floatsInThisFunction )
+        labelsUsed.update(floatsInThisFunction)
 
 
 # Parse the given file for directory, filename, and extension
-parentDir = os.path.dirname( fileToSplit )
-filename = os.path.basename( fileToSplit ) # Includes extension
-filename, ext = os.path.splitext( filename )
+parentDir = os.path.dirname(fileToSplit)
+filename = os.path.basename(fileToSplit)  # Includes extension
+filename, ext = os.path.splitext(filename)
 
 
-if debugging: # Print results so far
-    print( '\nSuggesting {} files (after 1st pass):'.format(len(fileList)) )
-    for i, functionList in enumerate( fileList, start=1 ):
+if debugging:  # Print results so far
+    print("\nSuggesting {} files (after 1st pass):".format(len(fileList)))
+    for i, functionList in enumerate(fileList, start=1):
         newFileName = filename + str(i) + ext
-        print( '\n\t{}  |  {} functions'.format(newFileName, len(functionList)) )
+        print("\n\t{}  |  {} functions".format(newFileName, len(functionList)))
 
         for func in functionList:
-            print( '\t\t' + func.name )
+            print("\t\t" + func.name)
 
 
-""" 	Separate functions - Pass 2
+"""     Separate functions - Pass 2
 
     This pass will look at each function (starting from the last file and last function) and
     determine if functions from the previous file are needed by it. Those files will then be
     moved over to the current file if they are. """
 
 currentFileIndex = -1
-for functionList in reversed( fileList ):
+for functionList in reversed(fileList):
     earliestFunction = -1
 
-    for function in reversed( functionList ):
+    for function in reversed(functionList):
         # Gather a list of functions required by this current one
         requiredFunctions = set()
         for line in function.lines:
             for name in functionNames:
                 # Check if a function name is in this line and it's not a label
-                if name in line and not line.endswith( ':' ):
-                    requiredFunctions.add( name )
+                if name in line and not line.endswith(":"):
+                    requiredFunctions.add(name)
 
         # Exclude functions already in this file
         if requiredFunctions:
             if debugging:
-                print( 'Found required functions for {}: {}'.format(function.name, requiredFunctions) )
+                print(
+                    "Found required functions for {}: {}".format(
+                        function.name, requiredFunctions
+                    )
+                )
             for funct in functionList:
                 if funct.name in requiredFunctions:
-                    requiredFunctions.remove( funct.name )
+                    requiredFunctions.remove(funct.name)
 
         # If there are still required functions, check the previous file for them
         previousFileIndex = currentFileIndex - 1
         if requiredFunctions:
             # Ensure this isn't the first file (no previous file)
-            if abs( previousFileIndex ) <= len( fileList ):
+            if abs(previousFileIndex) <= len(fileList):
                 if debugging:
-                    print( ' -> looking for these in previous file: {}'.format(requiredFunctions) )
-                for functionIndex, funct in enumerate( fileList[previousFileIndex] ):
+                    print(
+                        " -> looking for these in previous file: {}".format(
+                            requiredFunctions
+                        )
+                    )
+                for functionIndex, funct in enumerate(fileList[previousFileIndex]):
                     if funct.name in requiredFunctions:
                         # Remember the earliest file index and function index
                         if earliestFunction == -1 or functionIndex < earliestFunction:
                             if debugging:
-                                print( ' -> setting earliest funct to ' + str(earliestFunction) )
+                                print(
+                                    " -> setting earliest funct to "
+                                    + str(earliestFunction)
+                                )
                             earliestFunction = functionIndex
-                        requiredFunctions.remove( funct.name )
+                        requiredFunctions.remove(funct.name)
 
                 if requiredFunctions and debugging:
-                    print( ' x  In file index {}'.format(previousFileIndex) )
-                    print( ' x  Unable to find these required functions for {} from the current or previous file: {}'.format(function.name, requiredFunctions) )
+                    print(" x  In file index {}".format(previousFileIndex))
+                    print(
+                        " x  Unable to find these required functions for {} from the current or previous file: {}".format(
+                            function.name, requiredFunctions
+                        )
+                    )
 
     # Move functions from the previous file to the current one if required functions were found
     if earliestFunction != -1:
         funcName = fileList[previousFileIndex][earliestFunction].name
         functionsToMove = fileList[previousFileIndex][earliestFunction:]
         if debugging:
-            print( '\nMoving {} functions from file index {} to file index {},'.format(len(functionsToMove), previousFileIndex, currentFileIndex) )
-            print( 'Starting from function at index {} ({})\n'.format(earliestFunction, funcName) )
+            print(
+                "\nMoving {} functions from file index {} to file index {},".format(
+                    len(functionsToMove), previousFileIndex, currentFileIndex
+                )
+            )
+            print(
+                "Starting from function at index {} ({})\n".format(
+                    earliestFunction, funcName
+                )
+            )
         fileList[currentFileIndex] = functionsToMove + fileList[currentFileIndex]
         fileList[previousFileIndex] = fileList[previousFileIndex][:earliestFunction]
 
@@ -473,97 +513,128 @@ for functionList in reversed( fileList ):
 
 
 # Print results
-print( 'Total functions: ' + str(len(functions)) )
-print( 'Total floats:    ' + str(len(floatTypes)) )
-print( 'Text Section:    0x{:X} bytes'.format(textBytes) )
-print( 'Data Section:    0x{:X} bytes'.format(dataBytes) )
-print( 'sdata2 Section:  0x{:X} bytes'.format(sdataBytes) )
+print("Total functions: " + str(len(functions)))
+print("Total floats:    " + str(len(floatTypes)))
+print("Text Section:    0x{:X} bytes".format(textBytes))
+print("Data Section:    0x{:X} bytes".format(dataBytes))
+print("sdata2 Section:  0x{:X} bytes".format(sdataBytes))
+if mapNames:
+    print("\n\t(Function names found in the map file are shown to the right.)")
+fileCount = len(fileList)
 if debugging:
-    print( 'All floats data:' )
-    print( floatsData )
-    print( '' )
-    print( '\nSuggesting {} files  (after 2nd pass):'.format(len(fileList)) )
+    print("All floats data:")
+    print(floatsData)
+    print("")
+    if fileCount == 1:
+        print("\nSuggesting 1 file  (after 2nd pass):")
+    else:
+        print("\nSuggesting {} files  (after 2nd pass):".format(fileCount))
 else:
-    print( '\nSuggesting {} files:'.format(len(fileList)) )
-for i, functionList in enumerate( fileList, start=1 ):
+    if fileCount == 1:
+        print("\nSuggesting 1 file:")
+    else:
+        print("\nSuggesting {} files:".format(fileCount))
+for i, functionList in enumerate(fileList, start=1):
     newFileName = filename + str(i) + ext
-    print( '\n\t{}  |  {} functions'.format(newFileName, len(functionList)) )
-
+    print("\n\t{}  |  {} functions".format(newFileName, len(functionList)))
     for func in functionList:
-        print( '\t\t' + func.name )
+        if func.mapName:
+            print("\t\t{}\t\t({})".format(func.name, func.mapName))
+        else:
+            print("\t\t" + func.name)
 
 
 # Determine (and create) a directory to create the new files in
-newParentDir = parentDir.replace( '\\asm\\', '\\src\\' )
-if newParentDir.endswith( '\\ft\\chara' ): # Add a subfolder for characters
-    charFolderName = 'ft' + filename[2].upper() + filename[3:]
-    newParentDir = os.path.join( newParentDir, charFolderName )
-createFolders( newParentDir )
+newParentDir = parentDir.replace("\\asm\\", "\\src\\")
+if newParentDir.endswith("\\ft\\chara"):  # Add a subfolder for characters
+    charFolderName = "ft" + filename[2].upper() + filename[3:]
+    newParentDir = os.path.join(newParentDir, charFolderName)
+createFolders(newParentDir)
 
 
 # Ask if the user would like to create files and function headers
-print( '\nWould you like to create files and function headers with these results?' )
-print( 'These will be created in "{}"'.format(newParentDir) )
+print("\nWould you like to create files and function headers with these results?")
+print('These will be created in "{}"'.format(newParentDir))
 if not userConfirms():
-    exit( 0 )
+    exit(0)
 
 
 # Check for existing files
 allExist = True
 someExist = False
 lines = []
-for i, functionList in enumerate( fileList, start=1 ):
-    newFileName = filename + str(i) + '.c'
-    newFilePath = os.path.join( newParentDir, newFileName )
+for i, functionList in enumerate(fileList, start=1):
+    newFileName = filename + str(i) + ".c"
+    newFilePath = os.path.join(newParentDir, newFileName)
 
-    if os.path.exists( newFilePath ):
-        lines.append( '\t{} - Already exists'.format(newFileName) )
+    if os.path.exists(newFilePath):
+        lines.append("\t{} - Already exists".format(newFileName))
         someExist = True
     else:
-        lines.append( '\t{}'.format(newFileName) )
+        lines.append("\t{}".format(newFileName))
         allExist = False
 
 
 # Prompt to overwrite existing files
 if allExist:
-    print( '\nThe suggested files already exist.' )
-    print( 'Would you like to overwrite them?' )
+    print("\nThe suggested files already exist.")
+    print("Would you like to overwrite them?")
     overwrite = userConfirms()
 elif someExist:
-    print( '\nSome of the suggested files already exist.' )
-    print( 'Would you like to overwrite these?' )
-    print( '' )
+    print("\nSome of the suggested files already exist.")
+    print("Would you like to overwrite these?")
+    print("")
     for line in lines:
-        print( line )
+        print(line)
     overwrite = userConfirms()
-else: # No existing files
+else:  # No existing files
     overwrite = True
 
 
+# Build the string for the relative header-include path
+head, tail = os.path.split(newParentDir)
+pathParts = [tail, filename]
+while True:
+    # Grab each part of the path until we reach the folder above the 'melee' folder
+    head, tail = os.path.split(head)
+    pathParts.insert(0, tail)
+
+    if tail == "melee":  # The new path will start with this
+        break
+includePath = "#include <{}.h>".format("/".join(pathParts))
+
+
 # Write output files
-for i, functionList in enumerate( fileList, start=1 ):
-    newFileName = filename + str(i) + '.c'
-    newFilePath = os.path.join( newParentDir, newFileName )
+for i, functionList in enumerate(fileList, start=1):
+    newFileName = filename + str(i) + ".c"
+    newFilePath = os.path.join(newParentDir, newFileName)
 
     # Create a new name if the user doesn't wish to overwrite existing files
-    if not overwrite and os.path.exists( newFilePath ):
-        newFileName = filename + str(i) + ' - NEW.c'
-        newFilePath = os.path.join( newParentDir, newFileName )
+    if not overwrite and os.path.exists(newFilePath):
+        newFileName = filename + str(i) + " - NEW.c"
+        newFilePath = os.path.join(newParentDir, newFileName)
 
-    with open( newFilePath, 'w' ) as cFile:
-        cFile.write( '#include "{}.h"'.format(filename) )
+    with open(newFilePath, "w") as cFile:
+        cFile.write(includePath)
 
         # Write headers for each function
         for function in functionList:
-            cFile.write( '\n' )
+            cFile.write("\n")
             if function.mapName:
-                cFile.write( '\n// {}'.format(function.mapName) )
-            cFile.write( '\n// {} - {} (0x{:X} bytes)'.format(function.start, function.end, function.length) )
-            cFile.write( '\n// ' ) # Placeholder line for scratch link
+                cFile.write("\n// {}".format(function.mapName))
+            cFile.write(
+                "\n// {} - {} (0x{:X} bytes)".format(
+                    function.start, function.end, function.length
+                )
+            )
+            cFile.write("\n// ")  # Placeholder line for scratch link
 
             # Write the float literals this function references
+            uniqueSamples = set()
             for label in function.labels:
-                name, floatType, value = floatsData.get( label )
-                cFile.write( '\n// {} ({}: {})'.format(name, floatType, value) )
+                if label not in uniqueSamples:
+                    name, floatType, value = floatsData.get(label)
+                    cFile.write("\n// {} ({}: {})".format(name, floatType, value))
+                    uniqueSamples.add(label)
 
-print( '\nFile templates created.' )
+print("\nFile templates created.")
