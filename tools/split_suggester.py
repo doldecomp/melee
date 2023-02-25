@@ -1,5 +1,5 @@
-# Created by Daniel Cappel ("DRGN")
-# Version 1.0
+# Created by Daniel R. Cappel ("DRGN")
+# Version 1.1
 #
 # Analyzes float constants used within a source ASM (.s) file
 # to determine file boundaries. This considers duplicate float
@@ -10,9 +10,9 @@
 # the user, with function headers including some function info.
 #
 # Usage:
-#        split_suggester.py [fileToSpli.s]
-#                    OR
-#        split_suggester.py [fileToSpli.s] [mapFilePath.map]
+#         split_suggester.py [fileToSplit.s]
+#                     OR
+#         split_suggester.py [fileToSplit.s] [mapFilePath.map]
 #
 # If a map file is provided, function names from it will be
 # included in the generated function headers. If your data,
@@ -518,19 +518,30 @@ print("Total floats:    " + str(len(floatTypes)))
 print("Text Section:    0x{:X} bytes".format(textBytes))
 print("Data Section:    0x{:X} bytes".format(dataBytes))
 print("sdata2 Section:  0x{:X} bytes".format(sdataBytes))
+if mapNames:
+    print("\n\t(Function names found in the map file are shown to the right.)")
+fileCount = len(fileList)
 if debugging:
     print("All floats data:")
     print(floatsData)
     print("")
-    print("\nSuggesting {} files  (after 2nd pass):".format(len(fileList)))
+    if fileCount == 1:
+        print("\nSuggesting 1 file  (after 2nd pass):")
+    else:
+        print("\nSuggesting {} files  (after 2nd pass):".format(fileCount))
 else:
-    print("\nSuggesting {} files:".format(len(fileList)))
+    if fileCount == 1:
+        print("\nSuggesting 1 file:")
+    else:
+        print("\nSuggesting {} files:".format(fileCount))
 for i, functionList in enumerate(fileList, start=1):
     newFileName = filename + str(i) + ext
     print("\n\t{}  |  {} functions".format(newFileName, len(functionList)))
-
     for func in functionList:
-        print("\t\t" + func.name)
+        if func.mapName:
+            print("\t\t{}\t\t({})".format(func.name, func.mapName))
+        else:
+            print("\t\t" + func.name)
 
 
 # Determine (and create) a directory to create the new files in
@@ -580,6 +591,19 @@ else:  # No existing files
     overwrite = True
 
 
+# Build the string for the relative header-include path
+head, tail = os.path.split(newParentDir)
+pathParts = [tail, filename]
+while True:
+    # Grab each part of the path until we reach the folder above the 'melee' folder
+    head, tail = os.path.split(head)
+    pathParts.insert(0, tail)
+
+    if tail == "melee":  # The new path will start with this
+        break
+includePath = "#include <{}.h>".format("/".join(pathParts))
+
+
 # Write output files
 for i, functionList in enumerate(fileList, start=1):
     newFileName = filename + str(i) + ".c"
@@ -591,7 +615,7 @@ for i, functionList in enumerate(fileList, start=1):
         newFilePath = os.path.join(newParentDir, newFileName)
 
     with open(newFilePath, "w") as cFile:
-        cFile.write('#include "{}.h"'.format(filename))
+        cFile.write(includePath)
 
         # Write headers for each function
         for function in functionList:
@@ -606,8 +630,11 @@ for i, functionList in enumerate(fileList, start=1):
             cFile.write("\n// ")  # Placeholder line for scratch link
 
             # Write the float literals this function references
+            uniqueSamples = set()
             for label in function.labels:
-                name, floatType, value = floatsData.get(label)
-                cFile.write("\n// {} ({}: {})".format(name, floatType, value))
+                if label not in uniqueSamples:
+                    name, floatType, value = floatsData.get(label)
+                    cFile.write("\n// {} ({}: {})".format(name, floatType, value))
+                    uniqueSamples.add(label)
 
 print("\nFile templates created.")
