@@ -13,10 +13,10 @@ jobs:
     container: devkitpro/devkitppc:20230110
     steps:
     - name: Install GCC
-      run: |
-        apt update
-        apt -y --no-install-recommends install \
-          build-essential libc6-dev
+      uses: awalsh128/cache-apt-pkgs-action@v1.2.4
+      with:
+        packages: build-essential libc6-dev
+        version: 1.0.0
     - name: Checkout Melee repo
       uses: actions/checkout@v3
     - name: Download WiBo
