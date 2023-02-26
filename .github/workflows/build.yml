@@ -79,7 +79,6 @@ jobs:
       run:
         make WINDOWS=1 `
           AS=".\tools\mwcc_compiler\powerpc-eabi-as.exe" `
-          HOSTCC=gcc `
           -j "$env:NUMBER_OF_PROCESSORS" `
           ${{ matrix.makeflags }}
     - name: Calc progress

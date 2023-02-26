@@ -77,7 +77,7 @@ CC_EPI   = $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/$(MWCC_EPI_EXE)
 endif
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
-HOSTCC  := cc
+HOSTCC  := gcc
 PYTHON  := python3
 FORMAT  := clang-format -i -style=file
 
