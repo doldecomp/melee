@@ -1,4 +1,4 @@
-name: "Checking EditorConfig"
+name: "Check EditorConfig"
 
 permissions: read-all
 
@@ -8,35 +8,35 @@ on:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
-    if: "github.repository_owner == 'doldecomp' && !contains(github.event.pull_request.title, '[skip editorconfig]')"
+    runs-on: ubuntu-22.04
+    if: "!contains(github.event.pull_request.title, '[skip editorconfig]')"
     steps:
-    - name: Get list of changed files from PR
+    - name: Get editorconfig-checker command from image
+      run: |
+        docker create --name editorconfig-checker \
+          mstruebing/editorconfig-checker:2.7.0
+        docker cp editorconfig-checker:/usr/bin/ec /tmp
+        docker rm editorconfig-checker
+    - uses: actions/checkout@v3
+      with:
+        # pull_request_target checks out the base branch by default
+        ref: ${{ github.head_ref }}
+    - name: Check EditorConfig
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         gh api \
-          repos/doldecomp/melee/pulls/${{github.event.number}}/files --paginate \
+          repos/${{github.repository_owner}}/melee/pulls/${{github.event.number}}/files --paginate \
           | jq '.[] | select(.status != "removed") | .filename' \
           | grep -vE "^\"tools/m2c/.*?\"" \
-          > "$HOME/changed_files"
-    - name: print list of changed files
-      run: |
-        cat "$HOME/changed_files"
-    - uses: actions/checkout@v3
-      with:
-        # pull_request_target checks out the base branch by default
-        ref: refs/pull/${{ github.event.pull_request.number }}/merge
-    - uses: cachix/install-nix-action@v18
-      with:
-        # nixpkgs commit is pinned so that it doesn't break
-        # editorconfig-checker 2.4.0
-        nix_path: nixpkgs=https://github.com/NixOS/nixpkgs/archive/c473cc8714710179df205b153f4e9fa007107ff9.tar.gz
-    - name: install editorconfig-checker
-      run: nix-env -iA editorconfig-checker -f '<nixpkgs>'
-    - name: Checking EditorConfig
-      run: |
-        cat "$HOME/changed_files" | xargs -r editorconfig-checker -disable-indent-size
+          > "$HOME/changed_files.txt"
+
+        cat "$HOME/changed_files.txt" \
+          | xargs -r /tmp/ec -disable-indent-size
+
+        printf "These files were changed and checked by EditorConfig:\n\n%s" \
+          "$(cat "$HOME/changed_files.txt" | sed -e 's/"/`/g' -e 's/^/* /')" \
+          >> "$GITHUB_STEP_SUMMARY"
     - if: ${{ failure() }}
       run: |
         echo "::error :: Hey! It looks like your changes don't follow our editorconfig settings. Read https://editorconfig.org/#download to configure your editor so you never see this error again."
