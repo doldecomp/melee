@@ -16,7 +16,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         gh api \
-          repos/${{github.repository_owner}}/melee/pulls/${{github.event.number}}/files --paginate \
+          repos/${{github.repository}}/pulls/${{github.event.number}}/files --paginate \
           | jq '.[] | select(.status != "removed") | .filename' \
           | grep -vE '^"(dump|build|expected|tools/(m2c|calcprogress))/.*?"$' \
           > "$HOME/changed_files"
