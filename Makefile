@@ -77,7 +77,7 @@ CC_EPI   = $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/$(MWCC_EPI_EXE)
 endif
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
-HOSTCC  := cc
+HOSTCC  := gcc
 PYTHON  := python3
 FORMAT  := clang-format -i -style=file
 
@@ -178,7 +178,7 @@ endif
 # ELF creation makefile instructions
 $(ELF): $(O_FILES) $(LDSCRIPT)
 	@echo Linking ELF $@
-	$(QUIET) echo $(O_FILES) > build/o_files
+	$(file >build/o_files, $(O_FILES))
 	$(QUIET) $(LD) $(LDFLAGS) -o $@ -lcf $(LDSCRIPT) @build/o_files
 
 $(BUILD_DIR)/%.s.o: %.s

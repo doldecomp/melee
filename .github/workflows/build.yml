@@ -5,47 +5,88 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-ubuntu:
     strategy:
       matrix:
         makeflags: ["GENERATE_MAP=1", "NON_MATCHING=1"]
-    runs-on: ubuntu-latest
-    container: devkitpro/devkitppc:latest
+    runs-on: ubuntu-22.04
+    container: devkitpro/devkitppc:20230110
     steps:
-    - name: Install devkitPro
-      run: |
-        sudo dpkg --add-architecture i386
-        sudo apt-get update
-        sudo apt-get -y install build-essential gcc-multilib g++-multilib libc6:i386
-        sudo chown $(whoami) "$GITHUB_WORKSPACE"
+    - name: Install GCC
+      uses: awalsh128/cache-apt-pkgs-action@v1.2.4
+      with:
+        packages: build-essential libc6-dev
+        version: 1.0.0
     - name: Checkout Melee repo
       uses: actions/checkout@v3
-    - name: Checkout WiBo repo
-      uses: actions/checkout@v3
-      with:
-        repository: decompals/WiBo
-        path: tools/WiBo
+    - name: Download WiBo
+      shell: bash
+      run: |
+        curl -L 'https://github.com/decompals/wibo/releases/download/0.4.1/wibo' \
+          -o tools/wibo
+        sha1sum -c <(echo "23f5eee8793f7bb93a1a5de4380d153bc360f7b0  tools/wibo")
+        chmod +x tools/wibo
     - name: Download compilers
       run: |
-        curl -L https://cdn.discordapp.com/attachments/727918646525165659/917185027656286218/GC_WII_COMPILERS.zip \
-          | bsdtar -xvf- -C tools --exclude Wii
+        curl -L 'https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip' \
+          | bsdtar -xvf- -C tools
         mv tools/GC tools/mwcc_compiler
-        sha1sum -c tools/mwld_prepatch.sha1
-        python3 tools/mwld_patch.py
-        sha1sum -c tools/mwld_postpatch.sha1
-    - name: Build WiBo
-      working-directory: tools/WiBo
-      run: |
-        cmake -B build
-        cmake --build build
     - name: Build Melee
-      run: make -j$(nproc) ${{ matrix.makeflags }} WINE=./tools/WiBo/build/wibo
+      run: |
+        make \
+          WINE=./tools/wibo \
+          -j$(nproc) \
+          ${{ matrix.makeflags }}
     - name: Upload map
       if: matrix.makeflags == 'GENERATE_MAP=1'
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: GALE01.map
         path: build/ssbm.us.1.2/GALE01.map
     - name: Calc progress
       if: matrix.makeflags == 'GENERATE_MAP=1'
-      run: python3 tools/calcprogress/calcprogress.py --dol build/ssbm.us.1.2/main.dol --map build/ssbm.us.1.2/GALE01.map --asm-obj-ext .s.o --old-map true >> $GITHUB_STEP_SUMMARY
+      run: |
+        python3 tools/calcprogress/calcprogress.py \
+        --dol build/ssbm.us.1.2/main.dol \
+        --map build/ssbm.us.1.2/GALE01.map \
+        --asm-obj-ext .s.o \
+        --old-map true \
+        >> $GITHUB_STEP_SUMMARY
+
+  build-windows:
+    strategy:
+      matrix:
+        makeflags: ["GENERATE_MAP=1", "NON_MATCHING=1"]
+    runs-on: windows-2022
+    steps:
+    - name: Checkout Melee repo
+      uses: actions/checkout@v3
+    - name: Download compilers
+      run: |
+        $uri = "https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip"
+        $zip = New-TemporaryFile
+
+        Invoke-WebRequest -Uri $uri -OutFile $zip
+        $target = New-Item -ItemType Directory -Path (Join-Path $env:TEMP "MELEE_COMPILERS")
+        Expand-Archive -LiteralPath $zip.FullName -DestinationPath $target.FullName
+
+        $path = Get-ChildItem -Path $target.FullName | Select-Object -ExpandProperty FullName
+        Copy-Item -Path $path -Destination "tools\mwcc_compiler" -Recurse
+
+        $zip | Remove-Item -Force
+        $target | Remove-Item -Recurse -Force
+    - name: Build Melee
+      run:
+        make WINDOWS=1 `
+          AS=".\tools\mwcc_compiler\powerpc-eabi-as.exe" `
+          -j "$env:NUMBER_OF_PROCESSORS" `
+          ${{ matrix.makeflags }}
+    - name: Calc progress
+      if: matrix.makeflags == 'GENERATE_MAP=1'
+      run: |
+        python3 tools/calcprogress/calcprogress.py `
+          --dol build/ssbm.us.1.2/main.dol `
+          --map build/ssbm.us.1.2/GALE01.map `
+          --asm-obj-ext .s.o `
+          --old-map true `
+          >> $GITHUB_STEP_SUMMARY
