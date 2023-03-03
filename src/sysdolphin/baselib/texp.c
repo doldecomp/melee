@@ -288,3 +288,16 @@ void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEI
     HSD_TExpAlphaInSub(tev, sel_c, exp_c, 2);
     HSD_TExpAlphaInSub(tev, sel_d, exp_d, 3);
 }
+
+void HSD_TExpOrder(HSD_TExp *texp, HSD_TObj *tex, GXChannelID chan) 
+{
+    HSD_ASSERT(0x345, texp);
+    HSD_ASSERT(0x346, HSD_TExpGetType(texp) == HSD_TE_TEV);
+    
+    texp->tev.tex = tex;
+    if (chan == GX_COLOR_NULL) {
+        texp->tev.chan = GX_COLOR_NULL;
+        return;
+    }
+    texp->tev.chan = chan;
+}

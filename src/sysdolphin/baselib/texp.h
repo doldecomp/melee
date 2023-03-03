@@ -159,7 +159,7 @@ union HSD_TExp {
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp);
 HSD_TExp* HSD_TExpTev(HSD_TExp**);
 HSD_TExp* HSD_TExpCnst(void*, HSD_TEInput, HSD_TEType, HSD_TExp**);
-void HSD_TExpOrder(HSD_TExp*, unk_t, enum_t);
+void HSD_TExpOrder(HSD_TExp*, HSD_TObj*, GXChannelID);
 void HSD_TExpColorOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
 void HSD_TExpColorIn(HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*);
 #ifdef __clang__
