@@ -256,7 +256,18 @@ void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias, GXTevScale scal
     }
 }
 
-static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp, s32 idx);
+// https://decomp.me/scratch/A99tU
+static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp, s32 idx)
+{
+	HSD_TEArg prev;
+	u8 ksel;
+	{
+		u8 swap;
+	}
+	{
+		u8 swap;
+	}
+}
 
 void HSD_TExpColorIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEInput sel_b, HSD_TExp* exp_b, 
     HSD_TEInput sel_c, HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d) 
@@ -273,7 +284,11 @@ void HSD_TExpColorIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEI
     HSD_TExpColorInSub(tev, sel_d, exp_d, 3);
 }
 
-static void HSD_TExpAlphaInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp, s32 idx);
+static void HSD_TExpAlphaInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp, s32 idx)
+{
+	HSD_TEArg prev;
+	u8 ksel;
+}
 
 void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEInput sel_b, HSD_TExp* exp_b, 
     HSD_TEInput sel_c, HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d) {
@@ -289,7 +304,7 @@ void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEI
     HSD_TExpAlphaInSub(tev, sel_d, exp_d, 3);
 }
 
-void HSD_TExpOrder(HSD_TExp *texp, HSD_TObj *tex, GXChannelID chan) 
+void HSD_TExpOrder(HSD_TExp* texp, HSD_TObj* tex, GXChannelID chan) 
 {
     HSD_ASSERT(0x345, texp);
     HSD_ASSERT(0x346, HSD_TExpGetType(texp) == HSD_TE_TEV);
@@ -300,4 +315,10 @@ void HSD_TExpOrder(HSD_TExp *texp, HSD_TObj *tex, GXChannelID chan)
         return;
     }
     texp->tev.chan = chan;
+}
+
+static int AssignColorReg(HSD_TETev* tev, int idx, HSD_TExpRes* res)
+{
+	HSD_TECnst* cnst;
+	int j;
 }

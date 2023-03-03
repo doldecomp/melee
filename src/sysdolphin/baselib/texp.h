@@ -79,6 +79,17 @@ typedef struct _HSD_TevConf {
     u32 kasel;
 } HSD_TevConf;
 
+typedef struct _HSD_TExpRes {
+	s32 failed;
+	s32 texmap;
+	s32 cnst_remain;
+	u16 color_reg[8];
+	u8 c_ref;
+	u8 a_ref;
+	u8 c_use;
+	u8 a_use;
+} HSD_TExpRes;
+
 typedef struct _HSD_TevDesc {
     struct _HSD_TevDesc* next;
     u32 flags;
