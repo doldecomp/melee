@@ -161,13 +161,14 @@ HSD_TExp* HSD_TExpTev(HSD_TExp**);
 HSD_TExp* HSD_TExpCnst(void*, HSD_TEInput, HSD_TEType, HSD_TExp**);
 void HSD_TExpOrder(HSD_TExp*, unk_t, enum_t);
 void HSD_TExpColorOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
+void HSD_TExpColorIn(HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*, HSD_TEInput, HSD_TExp*);
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wstrict-prototypes"
 #endif
 /// @todo Find real parameters
 void HSD_TExpColorIn();
-void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp, GXTevBias, GXTevScale, u8);
+void HSD_TExpAlphaOp(HSD_TExp*, GXTevOp, GXTevBias, GXTevScale, u8);
 /// @todo Find real parameters
 void HSD_TExpAlphaIn();
 #ifdef __clang__

@@ -255,3 +255,18 @@ void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias, GXTevScale scal
         texp->tev.a_scale = 0;
     }
 }
+
+void HSD_TExpColorIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEInput sel_b, HSD_TExp* exp_b, 
+    HSD_TEInput sel_c, HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d) 
+{
+    HSD_TETev* tev;
+    
+    HSD_ASSERT(0x2B3, texp);
+    HSD_ASSERT(0x2B4, HSD_TExpGetType(texp) == HSD_TE_TEV);
+
+    tev = &texp->tev;
+    HSD_TExpColorInSub(tev, sel_a, exp_a, 0);
+    HSD_TExpColorInSub(tev, sel_b, exp_b, 1);
+    HSD_TExpColorInSub(tev, sel_c, exp_c, 2);
+    HSD_TExpColorInSub(tev, sel_d, exp_d, 3);
+}
