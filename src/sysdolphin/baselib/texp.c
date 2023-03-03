@@ -1,5 +1,8 @@
 #include <baselib/texp.h>
 
+#include <string.h>
+#include <sysdolphin/baselib/class.h>
+
 HSD_TExpType HSD_TExpGetType(HSD_TExp* texp)
 {
     if (texp == NULL) {
@@ -70,13 +73,13 @@ void HSD_TExpUnref(HSD_TExp* texp, u8 sel)
 
 static HSD_TExp* TevAlloc() {
     HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TETev));
-    assert_line(62, texp);
+    HSD_ASSERT(62, texp);
     return texp;
 }
 
 static HSD_TExp* CnstAlloc() {
     HSD_TExp* texp = hsdAllocMemPiece(sizeof(HSD_TECnst));
-    assert_line(70, texp);
+    HSD_ASSERT(70, texp);
     return texp;
 }
 
@@ -168,7 +171,7 @@ HSD_TExp* HSD_TExpTev(HSD_TExp** texp_list) {
     int i;
     HSD_TExp* texp;
 
-    assert_line(294, texp_list);
+    HSD_ASSERT(294, texp_list);
     texp = TevAlloc();
     memset(texp, 0xFF, sizeof(HSD_TETev));
     texp->type = HSD_TE_TEV;
@@ -184,16 +187,16 @@ HSD_TExp* HSD_TExpTev(HSD_TExp** texp_list) {
     return texp;
 }
 
-void* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type, HSD_TExp** texp_list) {
+HSD_TExp* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type, HSD_TExp** texp_list) {
     HSD_TExp* texp;
 
-    assert_line(361, texp_list);
+    HSD_ASSERT(361, texp_list);
 
     texp = *texp_list;
     do {     
         while (texp)  {
             if (texp->type == HSD_TE_CNST && texp->cnst.val == val && texp->cnst.comp == comp) {
-                assert_line(368, texp->cnst.ctype == type);
+                HSD_ASSERT(368, texp->cnst.ctype == type);
                 return texp;
             }
             texp = texp->cnst.next;
@@ -214,16 +217,16 @@ void* HSD_TExpCnst(void* val, HSD_TEInput comp, HSD_TEType type, HSD_TExp** texp
         texp->cnst.reg = 0xFF;
         texp->cnst.idx = 0xFF;
         return texp;
-    } while (TRUE);
+    } while (true);
     
     return texp;
 }
 
-void HSD_TExpColorOp(HSD_TExp* texp, u32 op, u8 bias, u8 scale, u8 clamp) {
+void HSD_TExpColorOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias, GXTevScale scale, u8 clamp) {
     s32 unused[2];
 
-    assert_line(0x198, texp);
-    assert_line(0x199, HSD_TExpGetType(texp) == HSD_TE_TEV);
+    HSD_ASSERT(408, texp);
+    HSD_ASSERT(409, HSD_TExpGetType(texp) == HSD_TE_TEV);
 
     texp->tev.c_op = op;
     texp->tev.c_clamp = (clamp ? GX_ENABLE : GX_DISABLE);
@@ -236,11 +239,11 @@ void HSD_TExpColorOp(HSD_TExp* texp, u32 op, u8 bias, u8 scale, u8 clamp) {
     }
 }
 
-void HSD_TExpAlphaOp(HSD_TExp* texp, u32 op, u8 bias, u8 scale, u8 clamp) {
+void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias, GXTevScale scale, u8 clamp) {
     s32 unused[2];
 
-    assert_line(0x1B2, texp);
-    assert_line(0x1B3, HSD_TExpGetType(texp) == HSD_TE_TEV);
+    HSD_ASSERT(434, texp);
+    HSD_ASSERT(435, HSD_TExpGetType(texp) == HSD_TE_TEV);
 
     texp->tev.a_op = op;
     texp->tev.a_clamp = (clamp ? GX_ENABLE : GX_DISABLE);
