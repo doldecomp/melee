@@ -256,6 +256,8 @@ void HSD_TExpAlphaOp(HSD_TExp* texp, GXTevOp op, GXTevBias bias, GXTevScale scal
     }
 }
 
+static void HSD_TExpColorInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp, s32 idx);
+
 void HSD_TExpColorIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEInput sel_b, HSD_TExp* exp_b, 
     HSD_TEInput sel_c, HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d) 
 {
@@ -269,4 +271,20 @@ void HSD_TExpColorIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEI
     HSD_TExpColorInSub(tev, sel_b, exp_b, 1);
     HSD_TExpColorInSub(tev, sel_c, exp_c, 2);
     HSD_TExpColorInSub(tev, sel_d, exp_d, 3);
+}
+
+static void HSD_TExpAlphaInSub(HSD_TETev* tev, HSD_TEInput sel, HSD_TExp* exp, s32 idx);
+
+void HSD_TExpAlphaIn(HSD_TExp* texp, HSD_TEInput sel_a, HSD_TExp* exp_a, HSD_TEInput sel_b, HSD_TExp* exp_b, 
+    HSD_TEInput sel_c, HSD_TExp* exp_c, HSD_TEInput sel_d, HSD_TExp* exp_d) {
+    HSD_TETev* tev;
+    
+    HSD_ASSERT(0x335, texp);
+    HSD_ASSERT(0x336, HSD_TExpGetType(texp) == HSD_TE_TEV);
+
+    tev = &texp->tev;
+    HSD_TExpAlphaInSub(tev, sel_a, exp_a, 0);
+    HSD_TExpAlphaInSub(tev, sel_b, exp_b, 1);
+    HSD_TExpAlphaInSub(tev, sel_c, exp_c, 2);
+    HSD_TExpAlphaInSub(tev, sel_d, exp_d, 3);
 }
