@@ -102,7 +102,7 @@ jobs:
 
       - name: Push package
         uses: docker/build-push-action@v4
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        if: github.event_name == 'push'
         with:
           context: .
           file: ${{ env.CONTAINERFILE }}
@@ -197,7 +197,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push package
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+        if: github.event_name == 'push'
         shell: bash
         run: |
           echo $(
