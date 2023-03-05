@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_CHARA_FTSEAK_FTSEAK_H
-#define MELEE_FT_CHARA_FTSEAK_FTSEAK_H
+#ifndef MELEE_FT_CHARA_FTSEAK_FTSEAK_INIT_H
+#define MELEE_FT_CHARA_FTSEAK_FTSEAK_INIT_H
 
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 #include <melee/ft/ftcommon.h>

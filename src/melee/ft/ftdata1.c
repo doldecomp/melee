@@ -38,7 +38,7 @@
 #include <melee/ft/chara/ftSamus/ftsamus5.h>
 #include <melee/ft/chara/ftSamus/ftsamus6.h>
 #include <melee/ft/chara/ftSandbag/ftsandbag.h>
-#include <melee/ft/chara/ftSeak/ftseak.h>
+#include <melee/ft/chara/ftSeak/ftSeak_Init.h>
 #include <melee/ft/chara/ftYoshi/ftyoshi1.h>
 #include <melee/ft/chara/ftYoshi/ftyoshi2.h>
 #include <melee/ft/chara/ftYoshi/ftyoshi4.h>
