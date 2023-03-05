@@ -205,7 +205,7 @@ int func_80378560(HSD_PadRumbleListData* a, u8* b)
 }
 
 void HSD_PadRumbleInterpret_inline(HSD_PadRumbleListData** r6,
-                          HSD_PadRumbleListData* r29)
+                                   HSD_PadRumbleListData* r29)
 {
     HSD_PadRumbleListData* r5;
 

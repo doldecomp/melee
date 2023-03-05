@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import re
 import struct
 from math import ceil
@@ -7,7 +9,7 @@ from typing import TextIO, Match, Callable, Any, Tuple, Union, List
 root = Path(__file__).parent.parent
 
 options = {
-    'input_glob': r"src/**/GXTransform.c"
+    'input_glob': r"**/ftseak3.s"
 }
 
 default_options = {

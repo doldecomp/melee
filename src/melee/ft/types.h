@@ -60,91 +60,122 @@ typedef enum FighterKind {
 } FighterKind;
 
 typedef enum CharacterKind {
-    CKIND_CAPTAIN,   // Captain Falcon (Captain) //
-    CKIND_DONKEY,    // Donkey Kong (Donkey) //
-    CKIND_FOX,       // Fox //
-    CKIND_GAMEWATCH, // Mr. Game & Watch (GameWatch) //
-    CKIND_KIRBY,     // Kirby //
-    CKIND_KOOPA,     // Bowser (Koopa) //
-    CKIND_LINK,      // Link //
-    CKIND_LUIGI,     // Luigi //
-    CKIND_MARIO,     // Mario //
-    CKIND_MARS,      // Marth (Mars) //
-    CKIND_MEWTWO,    // Mewtwo //
-    CKIND_NESS,      // Ness//
-    CKIND_PEACH,     // Peach //
-    CKIND_PIKACHU,   // Pikachu //
-    CKIND_POPONANA,  // Ice Climbers (Popo & Nana) //
-    CKIND_PURIN,     // Jigglypuff (Purin) //
-    CKIND_SAMUS,     // Samus //
-    CKIND_YOSHI,     // Yoshi //
-    CKIND_ZELDA,     // Zelda (ZE->SE) //
-    CKIND_SEAK,      // Sheik (SE->ZE) //
-    CKIND_FALCO,     // Falco //
-    CKIND_CLINK,     // Young Link (CLink) //
-    CKIND_DRMARIO,   // Dr. Mario //
-    CKIND_EMBLEM,    // Roy (Emblem) //
-    CKIND_PICHU,     // Pichu //
-    CKIND_GANON,     // Ganondorf (Ganon) //
-    CKIND_MASTERH,   // Master Hand (MasterH) //
-    CKIND_BOY,       // Male Wireframe (Boy) //
-    CKIND_GIRL,      // Female Wireframe (Girl) //
-    CKIND_GKOOPS,    // Giga Bowser (GKoops) //
-    CKIND_CREZYH,    // Crazy Hand (CrezyH) //
-    CHKIND_SANDBAG,  // Sandbag //
-    CHKIND_POPO,     // Popo //
-    CHKIND_NONE,     // None //
+    CKIND_CAPTAIN,   // Captain Falcon (Captain)
+    CKIND_DONKEY,    // Donkey Kong (Donkey)
+    CKIND_FOX,       // Fox
+    CKIND_GAMEWATCH, // Mr. Game & Watch (GameWatch)
+    CKIND_KIRBY,     // Kirby
+    CKIND_KOOPA,     // Bowser (Koopa)
+    CKIND_LINK,      // Link
+    CKIND_LUIGI,     // Luigi
+    CKIND_MARIO,     // Mario
+    CKIND_MARS,      // Marth (Mars)
+    CKIND_MEWTWO,    // Mewtwo
+    CKIND_NESS,      // Ness
+    CKIND_PEACH,     // Peach
+    CKIND_PIKACHU,   // Pikachu
+    CKIND_POPONANA,  // Ice Climbers (Popo & Nana)
+    CKIND_PURIN,     // Jigglypuff (Purin)
+    CKIND_SAMUS,     // Samus
+    CKIND_YOSHI,     // Yoshi
+    CKIND_ZELDA,     // Zelda (ZE->SE)
+    CKIND_SEAK,      // Sheik (SE->ZE)
+    CKIND_FALCO,     // Falco
+    CKIND_CLINK,     // Young Link (CLink)
+    CKIND_DRMARIO,   // Dr. Mario
+    CKIND_EMBLEM,    // Roy (Emblem)
+    CKIND_PICHU,     // Pichu
+    CKIND_GANON,     // Ganondorf (Ganon)
+    CKIND_MASTERH,   // Master Hand (MasterH)
+    CKIND_BOY,       // Male Wireframe (Boy)
+    CKIND_GIRL,      // Female Wireframe (Girl)
+    CKIND_GKOOPS,    // Giga Bowser (GKoops)
+    CKIND_CREZYH,    // Crazy Hand (CrezyH)
+    CHKIND_SANDBAG,  // Sandbag
+    CHKIND_POPO,     // Popo
+    CHKIND_NONE,     // None
     CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
 // Action State Change flags
 
-#define FIGHTER_FASTFALL_PRESERVE 0x1
-#define FIGHTER_GFX_PRESERVE 0x2
-#define FIGHTER_HITSTATUS_COLANIM_PRESERVE                                     \
-    0x4                             // Preserve full body collision state //
-#define FIGHTER_HIT_NOUPDATE 0x8    // Keep hitboxes
-#define FIGHTER_MODEL_NOUPDATE 0x10 // Ignore model state change (?)
-#define FIGHTER_ANIMVEL_NOUPDATE 0x20
-#define FIGHTER_UNK_0x40 0x40
-#define FIGHTER_MATANIM_NOUPDATE                                               \
-    0x80 // Ignore switching to character's "hurt" textures (?) //
-#define FIGHTER_THROW_EXCEPTION_NOUPDATE                                       \
-    0x100 // Resets thrower GObj pointer to NULL if false? //
-#define FIGHTER_SFX_PRESERVE 0x200
-#define FIGHTER_PARASOL_NOUPDATE 0x400 // Ignore Parasol state change //
-#define FIGHTER_RUMBLE_NOUPDATE 0x800  // Ignore rumble update? //
-#define FIGHTER_COLANIM_NOUPDATE 0x1000
-#define FIGHTER_ACCESSORY_PRESERVE 0x2000 // Keep respawn platform? //
-#define FIGHTER_CMD_UPDATE                                                     \
-    0x4000 // Run all Subaction Events up to the current animation frame //
-#define FIGHTER_NAMETAGVIS_NOUPDATE 0x8000
-#define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE                                \
-    0x10000 // Assume this is for individual bones? //
-#define FIGHTER_SWORDTRAIL_PRESERVE 0x20000
-#define FIGHTER_ITEMVIS_NOUPDATE                                               \
-    0x40000 // Used by Ness during Up/Down Smash, I suppose this is what the
-            // flag does //
-#define FIGHTER_SKIP_UNK_0x2222 0x80000 // Skips updating bit 0x20 of 0x2222? //
-#define FIGHTER_PHYS_UNKUPDATE 0x100000
-#define FIGHTER_FREEZESTATE                                                    \
-    0x200000 // Sets anim rate to 0x and some other stuff
-#define FIGHTER_MODELPART_VIS_NOUPDATE 0x400000
-#define FIGHTER_METALB_NOUPDATE 0x800000
-#define FIGHTER_UNK_0x1000000 0x1000000
-#define FIGHTER_ATTACKCOUNT_NOUPDATE 0x2000000
-#define FIGHTER_MODEL_FLAG_NOUPDATE 0x4000000
-#define FIGHTER_UNK_0x2227 0x8000000
-#define FIGHTER_HITSTUN_FLAG_NOUPDATE 0x10000000
-#define FIGHTER_ANIM_NOUPDATE 0x20000000  // Keeps current fp animation?
-#define FIGHTER_UNK_0x40000000 0x40000000 // Unused?
-#define FIGHTER_UNK_0x80000000 0x80000000 // Unused?
+#define FIGHTER_FASTFALL_PRESERVE (1 << 0)
+#define FIGHTER_GFX_PRESERVE (1 << 1)
 
-// LandingFallSpecial flags //
+/// Preserve full body collision state
+#define FIGHTER_HITSTATUS_COLANIM_PRESERVE (1 << 2)
+
+/// Keep hitboxes
+#define FIGHTER_HIT_NOUPDATE (1 << 3)
+
+/// Ignore model state change (?)
+#define FIGHTER_MODEL_NOUPDATE (1 << 4)
+
+#define FIGHTER_ANIMVEL_NOUPDATE (1 << 5)
+#define FIGHTER_UNK_0x40 (1 << 6)
+
+/// Ignore switching to character's "hurt" textures (?)
+#define FIGHTER_MATANIM_NOUPDATE (1 << 7)
+
+/// Resets thrower GObj pointer to NULL if false?
+#define FIGHTER_THROW_EXCEPTION_NOUPDATE (1 << 8)
+
+#define FIGHTER_SFX_PRESERVE (1 << 9)
+
+/// Ignore Parasol state change
+#define FIGHTER_PARASOL_NOUPDATE (1 << 10)
+
+/// Ignore rumble update?
+#define FIGHTER_RUMBLE_NOUPDATE (1 << 11)
+
+#define FIGHTER_COLANIM_NOUPDATE (1 << 12)
+
+/// Keep respawn platform?
+#define FIGHTER_ACCESSORY_PRESERVE (1 << 13)
+
+/// Run all Subaction Events up to the current animation frame
+#define FIGHTER_CMD_UPDATE (1 << 14)
+
+#define FIGHTER_NAMETAGVIS_NOUPDATE (1 << 15)
+
+/// Assume this is for individual bones?
+#define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE (1 << 16)
+
+#define FIGHTER_SWORDTRAIL_PRESERVE (1 << 17)
+
+/// Used by Ness during Up/Down Smash
+#define FIGHTER_ITEMVIS_NOUPDATE (1 << 18)
+
+/// Skips updating bit 0x20 of 0x2222?
+#define FIGHTER_SKIP_UNK_0x2222 (1 << 19)
+
+#define FIGHTER_PHYS_UNKUPDATE (1 << 20)
+
+/// Sets anim rate to 0x and some other stuff
+#define FIGHTER_FREEZESTATE (1 << 21)
+
+#define FIGHTER_MODELPART_VIS_NOUPDATE (1 << 22)
+#define FIGHTER_METALB_NOUPDATE (1 << 23)
+#define FIGHTER_UNK_0x1000000 (1 << 24)
+#define FIGHTER_ATTACKCOUNT_NOUPDATE (1 << 25)
+#define FIGHTER_MODEL_FLAG_NOUPDATE (1 << 26)
+#define FIGHTER_UNK_0x2227 (1 << 27)
+#define FIGHTER_HITSTUN_FLAG_NOUPDATE (1 << 28)
+
+/// Keeps current fp animation?
+#define FIGHTER_ANIM_NOUPDATE (1 << 29)
+
+/// Unused?
+#define FIGHTER_UNK_0x40000000 (1 << 30)
+
+/// Unused?
+#define FIGHTER_UNK_0x80000000 (1 << 31)
+
+// LandingFallSpecial flags
 
 #define IS_INTERRUPTIBLE 1
 
-// Ledge Grab Macros //
+// Ledge Grab Macros
 
 #define CLIFFCATCH_BOTH 0
 #define CLIFFCATCH_LEFT -1
@@ -1061,8 +1092,8 @@ struct Fighter_DemoStrings {
 // header includes or something.
 // --------------------------------------------------------------------------------
 struct SpecialAttrs_Mario {
-    /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo //
-    /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo //
+    /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo
+    /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo
     /* 0x2234 */ bool x2234_tornadoCharge;
     /* 0x2238 */ bool x2238_isCapeBoost;
     /* 0x223C */ HSD_GObj* x223C_capeGObj;
@@ -1124,9 +1155,12 @@ struct SpecialAttrs_Link {
 };
 
 struct SpecialAttrs_Seak {
-    /* 0x222C */ s32 x222C;
+    /* 0x222C */ int x222C;
     /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
+    /* 0x2234 */ HSD_GObj* x2234;
+    /* 0x2238 */ Vec3 x2238[4];
+    /* 0x2268 */ Vec3 x2268[4];
+    /* 0x2298 */ Vec3 lstick_delta;
 };
 
 struct SpecialAttrs_Ness {
@@ -1136,7 +1170,7 @@ struct SpecialAttrs_Ness {
     /* 0x2240 */ HSD_GObj* x2240_flashGObj;
     /* 0x2244 */ HSD_GObj* x2244_pkThunderGObj;
     /* 0x2248 */ HSD_GObj* x2248_baseballBatGObj;
-    /* 0x224C */ u32 x224C_thunderGFX; // bool for PK Thunder GFX? //
+    /* 0x224C */ u32 x224C_thunderGFX; // bool for PK Thunder GFX?
 };
 
 struct SpecialAttrs_Peach {
@@ -1533,8 +1567,8 @@ struct Fighter {
     /* 0x1670 */ unk_t x1670;
     /* 0x1674 */ u8 filler_x1674[0x1828 - 0x1674];
     /* 0x1828 */ s32 x1828;
-    struct dmg                        // 0x182c
-    {                                 //
+    struct dmg // 0x182c
+    {
         f32 x182c_behavior;           // 0x182c
         f32 x1830_percent;            // 0x1830
         f32 x1834;                    // 0x1834
@@ -1649,12 +1683,12 @@ struct Fighter {
         f32 x1A34_damageMul;
         f32 x1A38_speedMul;
         s32 x1A3C_damageOver; // % damage over the maximum reflectable damage
-                              // threshold //
+                              // threshold
     } ReflectAttr;
     struct {
         f32 x1A40_absorbHitDirection;
-        s32 x1A44_damageTaken; // unconfirmred? //
-        s32 x1A48_hitsTaken;   // unconfirmed? //
+        s32 x1A44_damageTaken; // unconfirmred?
+        s32 x1A48_hitsTaken;   // unconfirmed?
     } AbsorbAttr;
     /* 0x1A4C */ f32 x1A4C;
     /* 0x1A50 */ s8 x1A50;
@@ -1703,7 +1737,7 @@ struct Fighter {
     /* 0x208C */ s32 x208C;
     /* 0x2090 */ u16 x2090;
     /* 0x2092 */ u16 x2092;
-    /* 0x2094 */ HSD_GObj* x2094; // GObj pointer of combo victim? //
+    /* 0x2094 */ HSD_GObj* x2094; // GObj pointer of combo victim?
     /* 0x2098 */ u16 x2098;
     /* 0x209A */ u16 x209A;
     /* 0x209C */ s16 x209C;
@@ -1925,6 +1959,9 @@ struct Fighter {
         };
         union {
             ftFoxStateVars foxVars[0]; // 0x2340
+        };
+        union {
+            ftSeakStateVars seakVars[0]; // 0x2340
         };
         union {
             ftNessStateVars nessVars[0]; // 0x2340

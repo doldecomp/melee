@@ -2,7 +2,7 @@
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftSeak/ftseak.h>
+#include <melee/ft/chara/ftSeak/ftSeak_SpecialLw.h>
 #include <melee/ft/chara/ftZelda/ftzelda.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
@@ -55,7 +55,7 @@ void ftZelda_8013AEAC(HSD_GObj* fighter_gobj)
     fp = GET_FIGHTER(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = 0;
 
-    func_8007EFC8(fighter_gobj, func_80114758);
+    func_8007EFC8(fighter_gobj, ftSeak_80114758);
 }
 
 // Helper function for both ftZelda_SpecialLw_StartAction /

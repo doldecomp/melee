@@ -7,14 +7,17 @@
 #define M_PI 3.14159265358979323846
 #define M_PI_2 1.57079632679489655799
 
-#define DEG_TO_RAD 0.01745329252f
+#define DEG_TO_RAD 0.01745329252F
+#define RAD_TO_DEG 57.29578F
+
+#define M_PI_F 3.14159265358979323846F
 
 #ifdef __MWERKS__
 #pragma push
 #pragma cplusplus on
 #endif
 
-#define FLT_EPSILON 1.00000001335e-10f
+#define FLT_EPSILON 1.00000001335e-10F
 
 extern inline float sqrtf(float x)
 {
