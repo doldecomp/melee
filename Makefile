@@ -1,9 +1,3 @@
-ifneq ($(findstring MINGW,$(shell uname)),)
-	WINDOWS := 1
-endif
-ifneq ($(findstring MSYS,$(shell uname)),)
-	WINDOWS := 1
-endif
 
 GENERATE_MAP ?= 0
 NON_MATCHING ?= 0
@@ -56,7 +50,7 @@ endif
 MWCC_LD_VERSION := 1.1
 
 # Programs
-ifeq ($(WINDOWS),1)
+ifeq ($(OS),Windows_NT)
 	WINE :=
 else
 	WINE ?= wine
@@ -70,7 +64,13 @@ ifeq ($(shell uname),Darwin)
 else
 	SHA1SUM := sha1sum
 endif
-AS      := $(DEVKITPPC)/bin/powerpc-eabi-as
+
+ifeq ($(OS),Windows_NT)
+	AS := $(WINE) tools/mwcc_compiler/powerpc-eabi-as.exe
+else
+	AS := $(DEVKITPPC)/bin/powerpc-eabi-as
+endif
+
 CC      := $(WINE) tools/mwcc_compiler/$(MWCC_VERSION)/mwcceppc.exe
 ifeq ($(EPILOGUE_PROCESS),1)
 CC_EPI   = $(WINE) tools/mwcc_compiler/$(MWCC_EPI_VERSION)/$(MWCC_EPI_EXE)
@@ -78,7 +78,7 @@ endif
 LD      := $(WINE) tools/mwcc_compiler/$(MWCC_LD_VERSION)/mwldeppc.exe
 ELF2DOL := tools/elf2dol
 HOSTCC  := gcc
-PYTHON  := python3
+PYTHON  := python
 FORMAT  := clang-format -i -style=file
 
 FRANK := tools/frank.py
