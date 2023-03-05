@@ -3,6 +3,7 @@ name: publish-pages
 
 on:
   push:
+    paths: [ "**" ]
   pull_request:
 
 jobs:

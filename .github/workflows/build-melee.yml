@@ -3,6 +3,7 @@ run-name: Build Melee
 
 on:
   push:
+    paths: [ "**" ]
   pull_request:
 
 jobs:
