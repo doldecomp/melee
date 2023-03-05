@@ -151,8 +151,13 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_Init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_SpecialS.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSeak_SpecialN.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_SpecialN.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSeak_SpecialS.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSeak_SpecialHi.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_SpecialHi.c.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftSeak/ftSeak_SpecialLw.s.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftSeak/ftSeak_SpecialLw.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftNess/ftNess.c.o\

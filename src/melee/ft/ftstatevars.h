@@ -11,6 +11,7 @@
 #include <melee/ft/chara/ftMario/ftMario_StateVars.h>
 #include <melee/ft/chara/ftMewtwo/ftMewtwo_StateVars.h>
 #include <melee/ft/chara/ftNess/ftNess_StateVars.h>
+#include <melee/ft/chara/ftSeak/ftSeak_StateVars.h>
 
 typedef struct ftCliffCommonVars {
     s32 ledgeID; // 0x2340 - Used to check against opponent's variable @ 0x213C

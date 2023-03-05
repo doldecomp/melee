@@ -1,7 +1,10 @@
 #ifndef MELEE_IT_CODE_8027CF30_H
 #define MELEE_IT_CODE_8027CF30_H
 
+#include <melee/ft/chara/ftSeak/types.h>
 #include <melee/it/itkind.h>
+#include <melee/it/types.h>
+#include <placeholder.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -157,5 +160,12 @@ void func_8027D670(Vec3* const);
 void func_802C17DC(uint);
 void func_802C16F8(HSD_GObj*);
 void func_802C1590(HSD_GObj*);
+void func_802BB20C(HSD_GObj*);
+void func_802BAEEC(HSD_GObj*);
+void func_802BAF0C(HSD_GObj*);
+void func_802BCFC4(HSD_GObj* item_gobj, f32* arg1, itChainSegment* chainSegment,
+                   Item* item_data, f32 arg4);
+HSD_GObj* func_802BB290(HSD_GObj* fighter_gobj, Vec3* arg1, f32 facing_dir);
+void func_802BCF84(HSD_GObj*);
 
 #endif

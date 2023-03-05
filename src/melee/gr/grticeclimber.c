@@ -157,8 +157,8 @@ void lbl_80221204(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80221208(void)
-{ // clang-format off
+asm void lbl_80221208(void){
+    // clang-format off
     nofralloc
 /* 80221208 0021DDE8  7C 08 02 A6 */	mflr r0
 /* 8022120C 0021DDEC  38 80 00 10 */	li r4, 0x10

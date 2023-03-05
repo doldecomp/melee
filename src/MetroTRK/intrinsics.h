@@ -10,4 +10,6 @@ double __fabs(double);
 float __fabsf(float);
 double __frsqrte(double);
 
+void* __memcpy(void* dst, const void* src, unsigned long n);
+
 #endif

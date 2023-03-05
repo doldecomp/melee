@@ -69,6 +69,6 @@ void HSD_PadRumbleInit(u16 a, void* b);
 void HSD_PadRumbleOn(u8 a);
 void func_803780DC(u8 a);
 void HSD_PadRumbleInterpret_inline(HSD_PadRumbleListData** r6,
-                          HSD_PadRumbleListData* r29);
+                                   HSD_PadRumbleListData* r29);
 
 #endif

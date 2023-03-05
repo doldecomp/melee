@@ -40,7 +40,6 @@ void ftComm_ClampFallSpeed(Fighter*, f32);
 void func_8007D508(Fighter*, f32, f32);
 bool func_8007D528(Fighter*);
 void func_8007D5BC(Fighter*);
-void func_8007D5D4(Fighter*);
 void func_8007D60C(Fighter*);
 void func_8007D698(Fighter*);
 void func_8007D6A4(Fighter*);
