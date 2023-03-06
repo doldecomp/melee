@@ -12,13 +12,30 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
-      IMAGE: ${{ github.repository }}/build-linux:latest
     strategy:
       matrix:
         make_flags: ["GENERATE_MAP=1", "NON_MATCHING=1"]
       fail-fast: false
 
     steps:
+    - name: Get image name
+      env:
+        EVENT_NAME: ${{ github.event_name }}
+        PUSH_REPO_NAME: ${{ github.repository }}
+        PR_REPO_NAME: ${{ github.event.repository.full_name }}
+        IMAGE_SUFFIX: build-linux:latest
+      run: |
+        result=""
+        case "$EVENT_NAME" in
+          push)
+            result="$PUSH_REPO_NAME"
+            ;;
+          pull_request)
+            result="$PR_REPO_NAME"
+            ;;
+        esac
+        echo "IMAGE=$result/$IMAGE_SUFFIX" >> $GITHUB_ENV
+
     - name: Checkout Melee repository
       uses: actions/checkout@v3
 
@@ -58,7 +75,6 @@ jobs:
     runs-on: windows-latest
     env:
       REGISTRY: ghcr.io
-      IMAGE: ${{ github.repository }}/build-windows:latest
       MAKE_FLAGS: ${{ matrix.make_flags }}
     strategy:
       matrix:
@@ -66,6 +82,25 @@ jobs:
       fail-fast: false
 
     steps:
+    - name: Get image name
+      env:
+        EVENT_NAME: ${{ github.event_name }}
+        PUSH_REPO_NAME: ${{ github.repository }}
+        PR_REPO_NAME: ${{ github.event.repository.full_name }}
+        IMAGE_SUFFIX: build-windows:latest
+      shell: bash
+      run: |
+        result=""
+        case "$EVENT_NAME" in
+          push)
+            result="$PUSH_REPO_NAME"
+            ;;
+          pull_request)
+            result="$PR_REPO_NAME"
+            ;;
+        esac
+        echo "IMAGE=$result/$IMAGE_SUFFIX" >> $GITHUB_ENV
+
     - name: Checkout Melee repository
       uses: actions/checkout@v3
 

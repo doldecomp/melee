@@ -13,8 +13,26 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
-      IMAGE: ${{ github.repository }}/gen-pages:latest
     steps:
+      - name: Get image name
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_REPO_NAME: ${{ github.repository }}
+          PR_REPO_NAME: ${{ github.event.repository.full_name }}
+          IMAGE_SUFFIX: gen-pages:latest
+        shell: bash
+        run: |
+          result=""
+          case "$EVENT_NAME" in
+            push)
+              result="$PUSH_REPO_NAME"
+              ;;
+            pull_request)
+              result="$PR_REPO_NAME"
+              ;;
+          esac
+          echo "IMAGE=$result/$IMAGE_SUFFIX" >> $GITHUB_ENV
+
       - name: Checkout Melee repository
         uses: actions/checkout@v3
 
