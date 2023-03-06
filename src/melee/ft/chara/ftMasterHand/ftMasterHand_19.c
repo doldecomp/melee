@@ -44,7 +44,7 @@ void lbl_80153B90(HSD_GObj* arg0)
     temp_r30 = temp_r31->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(arg0, 0x172, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
-    temp_r31->masterhandVars[0].x2340_unk = temp_r30->x6C;
+    temp_r31->masterhandVars.x2340_unk = temp_r30->x6C;
     func_8015C208(arg0, &sp10);
     temp_r31->xB0_pos.x = sp10.x;
     temp_r31->xB0_pos.y = temp_r30->x68;
@@ -81,7 +81,7 @@ void lbl_80153CD4(HSD_GObj* gobj)
     Fighter* r4_fp;
 
     r4_fp = gobj->user_data;
-    if (--r4_fp->masterhandVars[0].x2340_unk > 0.0f) {
+    if (--r4_fp->masterhandVars.x2340_unk > 0.0f) {
         func_8015BF74(
             gobj, ((MasterHandAttributes*) r4_fp->x10C_ftData->ext_attr)->x58);
     } else {

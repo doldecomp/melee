@@ -31,8 +31,8 @@ bool func_80081298(HSD_GObj* gobj)
         other_fp = other_gobj->user_data;
         func_8003FFDC(other_fp->xC_playerID, other_fp->x221F_flag.bits.b4,
                       fp->xC_playerID, fp->x221F_flag.bits.b4,
-                      other_fp->commonVars[0].CliffCommon.ledgeID);
-        fp->x213C = other_fp->commonVars[0].CliffCommon.ledgeID;
+                      other_fp->commonVars.CliffCommon.ledgeID);
+        fp->x213C = other_fp->commonVars.CliffCommon.ledgeID;
         return false;
     }
     return false;
@@ -70,9 +70,9 @@ void func_80081370(HSD_GObj* gobj)
     func_8007E2FC(gobj);
     fp->x221D_flag.bits.b7 = 1;
     if (fp->facing_dir > 0.0f) {
-        fp->commonVars[0].CliffCommon.ledgeID = fp->x6F0_collData.x44;
+        fp->commonVars.CliffCommon.ledgeID = fp->x6F0_collData.x44;
     } else {
-        fp->commonVars[0].CliffCommon.ledgeID = fp->x6F0_collData.x40;
+        fp->commonVars.CliffCommon.ledgeID = fp->x6F0_collData.x40;
     }
     func_80081544(gobj);
     func_800881D8(fp, fp->x10C_ftData->x4C_collisionData->x28, 0x7F, 0x40);
@@ -80,9 +80,9 @@ void func_80081370(HSD_GObj* gobj)
     func_8007EBAC(fp, 0xC, 0);
 
     if (fp->facing_dir > 0.0f) {
-        func_80053ECC(fp->commonVars[0].CliffCommon.ledgeID, unkParam.x10);
+        func_80053ECC(fp->commonVars.CliffCommon.ledgeID, unkParam.x10);
     } else {
-        func_80053DA4(fp->commonVars[0].CliffCommon.ledgeID, unkParam.x10);
+        func_80053DA4(fp->commonVars.CliffCommon.ledgeID, unkParam.x10);
     }
     efAsync_Spawn(gobj, (void*) ((u32) gobj->user_data + 0x60C), 2, 0x41C, 0,
                   &unkParam.x10);
@@ -105,11 +105,11 @@ void func_80081544(HSD_GObj* gobj)
     s32 dummy2[1];
 
     Fighter* fp = gobj->user_data;
-    if (func_80054ED8(fp->commonVars[0].CliffCommon.ledgeID) != 0) {
+    if (func_80054ED8(fp->commonVars.CliffCommon.ledgeID) != 0) {
         if (fp->facing_dir > 0.0f) {
-            func_80053ECC(fp->commonVars[0].CliffCommon.ledgeID, sp10);
+            func_80053ECC(fp->commonVars.CliffCommon.ledgeID, sp10);
         } else {
-            func_80053DA4(fp->commonVars[0].CliffCommon.ledgeID, sp10);
+            func_80053DA4(fp->commonVars.CliffCommon.ledgeID, sp10);
         }
         fp->xB0_pos.x =
             (f32) ((fp->x68C_transNPos.z * fp->facing_dir) + sp10[0]);
@@ -139,7 +139,7 @@ void func_80081644(HSD_GObj* gobj)
     func_800761C8(gobj);
     if ((s32) fp->xE0_ground_or_air == GA_Air) {
         func_8005811C(&fp->x6F0_collData,
-                      fp->commonVars[0].CliffCommon.ledgeID);
+                      fp->commonVars.CliffCommon.ledgeID);
         fp->x890_cameraBox->xC_flag.bits.b0 = 1;
     }
 }

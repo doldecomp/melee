@@ -332,10 +332,10 @@ void ftSeak_80110BCC(HSD_GObj* fighter_gobj)
                 fp->sa.seak.x2268[i].y = fp->sa.seak.x2238[i].y;
             }
 
-            if (fp->seakVars[0].SpecialS.x235C > 0) {
-                fp->seakVars[0].SpecialS.x235C--;
+            if (fp->seakVars.SpecialS.x235C > 0) {
+                fp->seakVars.SpecialS.x235C--;
 
-                if (fp->seakVars[0].SpecialS.x235C == 0)
+                if (fp->seakVars.SpecialS.x235C == 0)
                     ftSeakSpecialS_LoopChainHitCollisions(fighter_gobj);
             }
 
@@ -348,16 +348,16 @@ void ftSeak_80110BCC(HSD_GObj* fighter_gobj)
                     sums_of_squares[2] > chain_val_sq ||
                     sums_of_squares[3] > chain_val_sq)
                 {
-                    if (fp->seakVars[0].SpecialS.x235C <= 0) {
-                        fp->seakVars[0].SpecialS.x235C = specialAttributes->x18;
+                    if (fp->seakVars.SpecialS.x235C <= 0) {
+                        fp->seakVars.SpecialS.x235C = specialAttributes->x18;
                         ftSeakSpecialS_LoopChainHitActivate(fighter_gobj);
                     }
                 } else {
-                    s32 var = fp->seakVars[0].SpecialS.x2360;
+                    s32 var = fp->seakVars.SpecialS.x2360;
                     if (var > 0) {
-                        fp->seakVars[0].SpecialS.x2360--;
+                        fp->seakVars.SpecialS.x2360--;
                     } else {
-                        fp->seakVars[0].SpecialS.x235C = 0;
+                        fp->seakVars.SpecialS.x235C = 0;
                         ftSeakSpecialS_LoopChainHitCollisions(fighter_gobj);
                     }
                 }
@@ -414,7 +414,7 @@ void ftSeak_ChainSomething(HSD_GObj* fighter_gobj)
 
     if (fp->sa.seak.x2234) {
         func_802BAF0C(fp->sa.seak.x2234);
-        fp->seakVars[0].SpecialS.x2360 = 2;
+        fp->seakVars.SpecialS.x2360 = 2;
     }
 }
 
@@ -532,7 +532,7 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* fighter_gobj)
 
         fp2->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
         fp2->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
-        fp->seakVars[0].SpecialS.x235C = specialAttributes->x18;
+        fp->seakVars.SpecialS.x235C = specialAttributes->x18;
 
         if (fp->sa.seak.x2234 == NULL) {
             if (fp->xE0_ground_or_air == GA_Air)
@@ -1032,7 +1032,7 @@ void ftSeak_80111DF8(HSD_GObj* fighter_gobj)
         Fighter* fp = GET_FIGHTER(fighter_gobj);
         fp->x2340_stateVar1 = 0;
 
-        if (fp->seakVars[0].SpecialS.x235C != 0)
+        if (fp->seakVars.SpecialS.x235C != 0)
             ftSeak_80110AEC(fighter_gobj);
 
         if (fp->sa.seak.x2234 != NULL) {
@@ -1055,7 +1055,7 @@ void ftSeak_80111EB4(HSD_GObj* fighter_gobj)
         Fighter* fp = fighter_gobj->user_data;
         fp->x2340_stateVar1 = 0;
 
-        if (fp->seakVars[0].SpecialS.x235C != 0)
+        if (fp->seakVars.SpecialS.x235C != 0)
             ftSeak_80110AEC(fighter_gobj);
 
         if (fp->sa.seak.x2234 != NULL) {

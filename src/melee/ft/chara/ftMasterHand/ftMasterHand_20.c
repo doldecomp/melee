@@ -38,7 +38,7 @@ void lbl_80153D2C(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
 
-    fp->masterhandVars[0].x2340_unk = attr->x74;
+    fp->masterhandVars.x2340_unk = attr->x74;
     fp->x23B0 = attr->x7C;
 
     HSD_JObjGetScale(jobj, &scale);
@@ -112,7 +112,7 @@ void lbl_80154158(HSD_GObj* gobj)
     u32 unk[2];
 
     r3_fp = gobj->user_data;
-    if (--r3_fp->masterhandVars[0].x2340_unk > 0.0f) {
+    if (--r3_fp->masterhandVars.x2340_unk > 0.0f) {
         r4_attributes = r3_fp->x10C_ftData->ext_attr;
         func_8015BF74(gobj, r4_attributes->x58);
     } else {

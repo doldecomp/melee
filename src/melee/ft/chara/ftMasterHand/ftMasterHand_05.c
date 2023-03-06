@@ -34,23 +34,23 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     r29_fp->x80_self_vel.z = 0.0f;
     r29_fp->x80_self_vel.y = 0.0f;
     r29_fp->x80_self_vel.x = 0.0f;
-    func_802F046C(r29_fp->x2374);
-    func_802F046C(r29_fp->x2378);
-    func_802F046C(r29_fp->x237C);
+    func_802F046C(r29_fp->masterhandVars.x2374);
+    func_802F046C(r29_fp->masterhandVars.x2378);
+    func_802F046C(r29_fp->masterhandVars.x237C);
     func_802F046C(r29_fp->x2380);
-    r29_fp->x2374 = 0;
-    r29_fp->x2378 = 0;
-    r29_fp->x237C = 0;
+    r29_fp->masterhandVars.x2374 = 0;
+    r29_fp->masterhandVars.x2378 = 0;
+    r29_fp->masterhandVars.x237C = 0;
     r29_fp->x2380 = 0;
-    func_800236B8(r29_fp->masterhandVars[0].x2368);
-    func_800236B8(r29_fp->masterhandVars[0].x236C);
-    func_800236B8(r29_fp->masterhandVars[0].x2370);
-    if (r29_fp->masterhandVars[0].x2360) {
+    func_800236B8(r29_fp->masterhandVars.x2368);
+    func_800236B8(r29_fp->masterhandVars.x236C);
+    func_800236B8(r29_fp->masterhandVars.x2370);
+    if (r29_fp->masterhandVars.x2360) {
         func_80155D1C(r29_fp->x1A58_interactedFighter);
     }
     r29_fp->x80_self_vel.y = temp_r30->x14C;
     r29_fp->x80_self_vel.z = temp_r30->x154;
-    r29_fp->masterhandVars[0].x2348 = temp_r30->x15C;
+    r29_fp->masterhandVars.x2348 = temp_r30->x15C;
 }
 
 void func_80151484(HSD_GObj* gobj)
@@ -100,14 +100,14 @@ void lbl_801515B8(HSD_GObj* gobj)
         r31_fp->x2200_ftcmd_var0 = 0U;
     }
 
-    // masterhandVars[0].x2348 does that make sense if its u32?
-    if (r31_fp->masterhandVars[0].x2348 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
+    // masterhandVars.x2348 does that make sense if its u32?
+    if (r31_fp->masterhandVars.x2348 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }
-    temp_r0 = r31_fp->masterhandVars[0].x2348 - 1;
+    temp_r0 = r31_fp->masterhandVars.x2348 - 1;
 
-    r31_fp->masterhandVars[0].x2348 = temp_r0;
+    r31_fp->masterhandVars.x2348 = temp_r0;
     if (temp_r0) {
         return;
     }
@@ -142,16 +142,16 @@ void lbl_801516B4(HSD_GObj* gobj)
         }
         r31_fp->x2200_ftcmd_var0 = 0U;
     }
-    if (r31_fp->masterhandVars[0].x2348 > 0 && !ftAnim_IsFramesRemaining(gobj))
+    if (r31_fp->masterhandVars.x2348 > 0 && !ftAnim_IsFramesRemaining(gobj))
     {
         temp_f1 = 0.0f;
         Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, temp_f1, 1.0f,
                                            temp_f1);
         func_8006EBA4(gobj);
     }
-    temp_r0 = r31_fp->masterhandVars[0].x2348 - 1;
+    temp_r0 = r31_fp->masterhandVars.x2348 - 1;
     // temp_cr0_eq = ;
-    r31_fp->masterhandVars[0].x2348 = temp_r0;
+    r31_fp->masterhandVars.x2348 = temp_r0;
     if (temp_r0 == 0) {
         func_800D4F24(gobj, 0);
     }

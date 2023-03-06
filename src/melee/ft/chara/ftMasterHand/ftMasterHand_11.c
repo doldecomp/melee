@@ -27,7 +27,7 @@ void lbl_801523BC(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
     func_8015247C(gobj);
-    r31_fp->masterhandVars[0].x2348 = r30_attributes->xA0;
+    r31_fp->masterhandVars.x2348 = r30_attributes->xA0;
 }
 
 // 80152414 14EFF4
@@ -69,7 +69,7 @@ void lbl_801524C8(HSD_GObj* gobj)
     u32 unk[2];
 
     temp_r4 = gobj->user_data;
-    if (!--temp_r4->masterhandVars[0].x2348) {
+    if (!--temp_r4->masterhandVars.x2348) {
         func_801525E0(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {

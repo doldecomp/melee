@@ -17,7 +17,7 @@ void lbl_80154D78(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = gobj->user_data;
 
-        if (fp->masterhandVars[0].x2360 == 1)
+        if (fp->masterhandVars.x2360 == 1)
             func_80154A78(gobj);
         else
             func_801546D8(gobj);
@@ -41,7 +41,7 @@ void lbl_80154E14(HSD_GObj* gobj)
     MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
 
     func_80085134(gobj);
-    func_8015BE40(gobj, &fp->masterhandVars[0].x234C_pos, &fp->masterhandVars[0].x2358, attr->x2C,
+    func_8015BE40(gobj, &fp->masterhandVars.x234C_pos, &fp->masterhandVars.x2358, attr->x2C,
                   attr->x28);
 }
 
@@ -85,7 +85,7 @@ void lbl_80154ED8(HSD_GObj* gobj)
             ft_2->dmg.x1844_direction *= -1.0f;
             func_800DE7C0(gobj_2, 0, 0);
         }
-        fp->masterhandVars[0].x2360 = 0;
+        fp->masterhandVars.x2360 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80151018(gobj);

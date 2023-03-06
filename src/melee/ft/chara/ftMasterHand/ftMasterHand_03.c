@@ -90,8 +90,8 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
         }
         r32_fp->sa.masterhand.x2258 = 0x185;
     }
-    r32_fp->masterhandVars[0].x2344_callback = arg1_stateVar2;
-    r32_fp->masterhandVars[0].x234C_pos = *arg2_pos;
+    r32_fp->masterhandVars.x2344_callback = arg1_stateVar2;
+    r32_fp->masterhandVars.x234C_pos = *arg2_pos;
 }
 
 // 80150F00 0014DAE0
@@ -124,7 +124,7 @@ void lbl_80150F68(HSD_GObj* gobj)
     r30_ft_attributes = r4_ftdata->ext_attr;
 
     func_80085134(gobj);
-    func_8015BE40(gobj, &r31_fp->masterhandVars[0].x234C_pos, &r31_fp->masterhandVars[0].x2358,
+    func_8015BE40(gobj, &r31_fp->masterhandVars.x234C_pos, &r31_fp->masterhandVars.x2358,
                   r30_ft_attributes->x2C, r30_ft_attributes->x28);
 }
 
@@ -135,7 +135,7 @@ void lbl_80150FC8(HSD_GObj* gobj)
     Fighter* r4_fp;
 
     r4_fp = gobj->user_data;
-    if (0.0f == r4_fp->masterhandVars[0].x2358) {
+    if (0.0f == r4_fp->masterhandVars.x2358) {
         r4_fp->x80_self_vel.z = 0.0f;
         r4_fp->x80_self_vel.y = 0.0f;
         r4_fp->x80_self_vel.x = 0.0f;
@@ -158,7 +158,7 @@ void func_80151018(HSD_GObj* gobj)
 
     r6_fp = gobj->user_data;
     r5_attributes = r6_fp->x10C_ftData->ext_attr;
-    r6_fp->masterhandVars[0].x2360 = 0;
+    r6_fp->masterhandVars.x2360 = 0;
     sp1C_pos.x = r5_attributes->x30_pos2.x;
     sp1C_pos.y = r5_attributes->x30_pos2.y;
     sp1C_pos.z = 0.0f;
@@ -169,6 +169,6 @@ void func_80151018(HSD_GObj* gobj)
     } else {
         func_80150C8C(gobj);
     }
-    r31_fp->masterhandVars[0].x2344_callback = lbl_8014FFDC;
-    r31_fp->masterhandVars[0].x234C_pos = sp1C_pos;
+    r31_fp->masterhandVars.x2344_callback = lbl_8014FFDC;
+    r31_fp->masterhandVars.x234C_pos = sp1C_pos;
 }
