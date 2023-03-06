@@ -127,8 +127,9 @@ void lbl_80151A88(HSD_GObj* gobj)
 
     r5_fp = gobj->user_data;
     r6_attributes = r5_fp->x10C_ftData->ext_attr;
-    func_8015BE40(gobj, &r5_fp->masterhandVars.x234C_pos, &r5_fp->masterhandVars.x2358,
-                  r6_attributes->x2C, r6_attributes->x28);
+    func_8015BE40(gobj, &r5_fp->masterhandVars.x234C_pos,
+                  &r5_fp->masterhandVars.x2358, r6_attributes->x2C,
+                  r6_attributes->x28);
 }
 
 void lbl_80151AC4(HSD_GObj* arg0) {}

@@ -249,8 +249,9 @@ void lbl_801547D8(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
     func_80085134(gobj);
-    func_8015BE40(gobj, &r31_fp->masterhandVars.x234C_pos, &r31_fp->masterhandVars.x2358,
-                  r30_attributes->x2C, r30_attributes->x28);
+    func_8015BE40(gobj, &r31_fp->masterhandVars.x234C_pos,
+                  &r31_fp->masterhandVars.x2358, r30_attributes->x2C,
+                  r30_attributes->x28);
 }
 
 // 80154838 151418
@@ -315,8 +316,9 @@ void lbl_801549A8(HSD_GObj* arg0)
     temp_r31 = arg0->user_data;
     temp_r30 = temp_r31->x10C_ftData->ext_attr;
     func_80085134(arg0);
-    func_8015BE40(arg0, &temp_r31->masterhandVars.x234C_pos, &temp_r31->masterhandVars.x2358,
-                  temp_r30->x2C, temp_r30->x28);
+    func_8015BE40(arg0, &temp_r31->masterhandVars.x234C_pos,
+                  &temp_r31->masterhandVars.x2358, temp_r30->x2C,
+                  temp_r30->x28);
 }
 
 // 80154A08 1515E8

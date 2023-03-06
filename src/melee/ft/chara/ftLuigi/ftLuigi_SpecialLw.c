@@ -22,8 +22,7 @@ static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->luigiVars.SpecialLw.groundVelX = (f32) 0.0f;
-    fp->luigiVars.SpecialLw.unk =
-        (s32) luigiAttrs->x88_LUIGI_CYCLONE_UNK + 1;
+    fp->luigiVars.SpecialLw.unk = (s32) luigiAttrs->x88_LUIGI_CYCLONE_UNK + 1;
     fp->luigiVars.SpecialLw.isUnkColl = false;
 }
 

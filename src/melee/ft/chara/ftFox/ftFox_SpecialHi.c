@@ -271,8 +271,7 @@ void ftFox_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
 
     fp->foxVars.SpecialHi.unk++;
 
-    if (fp->foxVars.SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END)
-    {
+    if (fp->foxVars.SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END) {
         fp->x80_self_vel.x =
             -((fp->facing_dir * (foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL *
                                  cosf(fp->foxVars.SpecialHi.rotateModel))) -

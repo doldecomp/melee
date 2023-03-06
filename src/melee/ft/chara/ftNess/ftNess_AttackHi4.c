@@ -482,9 +482,7 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj)
         } else if (yoyoSmashFrameCurr2 == yoyoNudgeFrame) {
             func_802BFEC4(yoyo_GObj);
         }
-        if ((s32) fp->nessVars.AttackHi4.yoyoCurrentFrame ==
-            yoyoDespawnFrame)
-        {
+        if ((s32) fp->nessVars.AttackHi4.yoyoCurrentFrame == yoyoDespawnFrame) {
             func_802BE958(fp->sa.ness.x222C_yoyoGObj);
         }
     } else if (yoyoSmashFrameCurr == yoyoSpawnFrame) {
@@ -671,10 +669,8 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj)
                 }
             }
         }
-        if (((s32) fighter_data2->nessVars.AttackHi4.yoyoCurrentFrame ==
-             13) &&
-            ((s32) fighter_data2->nessVars.AttackHi4.isChargeDisable ==
-             false))
+        if (((s32) fighter_data2->nessVars.AttackHi4.yoyoCurrentFrame == 13) &&
+            ((s32) fighter_data2->nessVars.AttackHi4.isChargeDisable == false))
         {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -820,8 +816,7 @@ void ftNess_AttackHi4_Charge_Anim(
     if ((u32) fighter_data2->x2200_ftcmd_var0 == 0U) {
         if ((s32) fighter_data2->nessVars.AttackHi4.yoyoRehitTimer > 0) {
             fighter_data2->nessVars.AttackHi4.yoyoRehitTimer--;
-            if ((s32) fighter_data2->nessVars.AttackHi4.yoyoRehitTimer == 0)
-            {
+            if ((s32) fighter_data2->nessVars.AttackHi4.yoyoRehitTimer == 0) {
                 lbColl_80008440(fighter_data2->x914);
                 lbColl_80008434(fighter_data2->x914);
             }

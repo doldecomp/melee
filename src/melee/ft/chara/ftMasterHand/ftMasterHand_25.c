@@ -41,8 +41,8 @@ void lbl_80154E14(HSD_GObj* gobj)
     MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
 
     func_80085134(gobj);
-    func_8015BE40(gobj, &fp->masterhandVars.x234C_pos, &fp->masterhandVars.x2358, attr->x2C,
-                  attr->x28);
+    func_8015BE40(gobj, &fp->masterhandVars.x234C_pos,
+                  &fp->masterhandVars.x2358, attr->x2C, attr->x28);
 }
 
 // 80154E74 151A54

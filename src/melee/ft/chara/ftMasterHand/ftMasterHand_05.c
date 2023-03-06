@@ -142,8 +142,7 @@ void lbl_801516B4(HSD_GObj* gobj)
         }
         r31_fp->x2200_ftcmd_var0 = 0U;
     }
-    if (r31_fp->masterhandVars.x2348 > 0 && !ftAnim_IsFramesRemaining(gobj))
-    {
+    if (r31_fp->masterhandVars.x2348 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0.0f;
         Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, temp_f1, 1.0f,
                                            temp_f1);

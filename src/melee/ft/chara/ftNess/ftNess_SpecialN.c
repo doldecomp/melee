@@ -274,8 +274,7 @@ SetPKFlashAttr(HSD_GObj* fighter_gobj) // Inline to set all variables and match
         ness_attr->x4_PKFLASH_TIMER2_LOOPFRAMES;
     fp->nessVars.SpecialN.gravityDelay = ness_attr->x8_PKFLASH_GRAVITY_DELAY;
     fp->sa.ness.x2240_flashGObj = NULL;
-    fp->nessVars.SpecialN.flashTimerMin =
-        ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
+    fp->nessVars.SpecialN.flashTimerMin = ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }

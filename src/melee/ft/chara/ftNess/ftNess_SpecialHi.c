@@ -686,8 +686,7 @@ void ftNess_SpecialAirHi_Action(
                                        NULL, 0.0f, 1.0f, 0.0f);
     fighter_data2 = GET_FIGHTER(fighter_gobj);
     temp_attr = getFtSpecialAttrs(fighter_data2);
-    fighter_data2->nessVars.SpecialHi.unkVar =
-        temp_attr->x58_PK_THUNDER_2_UNK1;
+    fighter_data2->nessVars.SpecialHi.unkVar = temp_attr->x58_PK_THUNDER_2_UNK1;
     fighter_data3 = GET_FIGHTER(fighter_gobj);
     func_8007592C(
         fighter_data3, 0,
@@ -1173,8 +1172,7 @@ inline void ThunderPhysTimer(HSD_GObj* fighter_gobj)
     temp_fp = fighter_gobj->user_data;
     thunderPhysTimer = temp_fp->nessVars.SpecialHi.gravityDelay;
     if (thunderPhysTimer != 0) {
-        temp_fp->nessVars.SpecialHi.gravityDelay =
-            (s32) (thunderPhysTimer - 1);
+        temp_fp->nessVars.SpecialHi.gravityDelay = (s32) (thunderPhysTimer - 1);
     }
 }
 

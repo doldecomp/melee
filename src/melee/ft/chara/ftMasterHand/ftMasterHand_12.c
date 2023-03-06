@@ -80,7 +80,9 @@ void lbl_801527B8(HSD_GObj* gobj)
     func_80085134(gobj);
 
     tmp = ++r31_fp->masterhandVars.x2340_unk;
-    if (tmp > r30_attributes->xB0 && r31_fp->masterhandVars.x2340_unk < r30_attributes->xB4) {
+    if (tmp > r30_attributes->xB0 &&
+        r31_fp->masterhandVars.x2340_unk < r30_attributes->xB4)
+    {
         func_8015C010(gobj, r30_attributes->xB8);
     } else {
         r31_fp->x80_self_vel.x = 0.0f;

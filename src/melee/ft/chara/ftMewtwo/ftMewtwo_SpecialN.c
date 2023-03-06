@@ -345,8 +345,7 @@ void ftMewtwo_SpecialN_PlayChargeSFX(HSD_GObj* fighter_gobj)
                               SFX_PAN_MID);
             }
         } else {
-            fp->mewtwoVars.SpecialN.chargeLevel =
-                (f32) 9.999999747378752e-5f;
+            fp->mewtwoVars.SpecialN.chargeLevel = (f32) 9.999999747378752e-5f;
             func_80088510(fp, shadowBallSFX[0], SFX_VOLUME_MAX, SFX_PAN_MID);
         }
     }

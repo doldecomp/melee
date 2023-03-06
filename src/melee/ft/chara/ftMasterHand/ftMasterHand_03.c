@@ -124,8 +124,9 @@ void lbl_80150F68(HSD_GObj* gobj)
     r30_ft_attributes = r4_ftdata->ext_attr;
 
     func_80085134(gobj);
-    func_8015BE40(gobj, &r31_fp->masterhandVars.x234C_pos, &r31_fp->masterhandVars.x2358,
-                  r30_ft_attributes->x2C, r30_ft_attributes->x28);
+    func_8015BE40(gobj, &r31_fp->masterhandVars.x234C_pos,
+                  &r31_fp->masterhandVars.x2358, r30_ft_attributes->x2C,
+                  r30_ft_attributes->x28);
 }
 
 // 80150FC8 0014DBA8

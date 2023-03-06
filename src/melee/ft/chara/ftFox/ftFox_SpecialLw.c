@@ -633,8 +633,7 @@ inline void ftFox_SpecialLwTurn_SetVarAll(HSD_GObj* fighter_gobj)
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
     fp->x2218_flag.bits.b3 = 1;
     fp->cb.x21C8_callback_OnReflectHit = ftFox_SpecialLwHit_Action;
-    fp->foxVars.SpecialLw.turnFrames =
-        foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES;
+    fp->foxVars.SpecialLw.turnFrames = foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES;
     fp->x2200_ftcmd_var0 = 0;
     ftFox_SpecialLw_Turn(fighter_gobj);
 }
