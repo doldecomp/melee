@@ -152,11 +152,11 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj)
     fp->xB0_pos.z = 0.0f;
     fp->x2368 = 0;
     fp->x236C = 0;
-    fp->x2370 = 0;
-    fp->x2374 = 0;
-    fp->x2378 = -1;
-    fp->x237C = -1;
-    fp->x2380 = -1;
+    fp->masterhandVars[0].x2370 = 0;
+    fp->masterhandVars[0].x2374 = 0;
+    fp->masterhandVars[0].x2378 = -1;
+    fp->masterhandVars[0].x237C = -1;
+    fp->masterhandVars[0].x2380 = -1;
     fp->x235C = 0.0f;
     fp->x2360 = 0;
     fp->sa.masterhand.x222C = func_8015C244(fighter_gobj, &fp->xB0_pos);

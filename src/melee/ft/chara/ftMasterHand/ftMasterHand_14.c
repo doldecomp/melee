@@ -22,9 +22,9 @@ void lbl_80152BCC(HSD_GObj* arg0)
     temp_r31 = arg0->user_data;
     Fighter_ActionStateChange_800693AC(arg0, 0x169, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
-    temp_r31->x2368 = -1;
-    temp_r31->x236C = -1;
-    temp_r31->x2370 = -1;
+    temp_r31->masterhandVars[0].x2368 = -1;
+    temp_r31->masterhandVars[0].x236C = -1;
+    temp_r31->masterhandVars[0].x2370 = -1;
 }
 
 // 80152C34 14F814
@@ -133,9 +133,9 @@ void lbl_80152E28(HSD_GObj* gobj)
         func_8000B1CC(fp->x5E8_fighterBones[26].x0_jobj, 0, &sp10);
         fp->x2380 =
             func_802F0340(gobj, &sp10, &sp10, 0x1A, 0x7D, fp->facing_dir);
-        fp->x2368 = func_800237A8(0x4E204, 0x7F, 0x40);
-        fp->x236C = func_800237A8(0x4E205, 0x7F, 0x40);
-        fp->x2370 = func_800237A8(0x4E206, 0x7F, 0x40);
+        fp->masterhandVars[0].x2368 = func_800237A8(0x4E204, 0x7F, 0x40);
+        fp->masterhandVars[0].x236C = func_800237A8(0x4E205, 0x7F, 0x40);
+        fp->masterhandVars[0].x2370 = func_800237A8(0x4E206, 0x7F, 0x40);
         fp->x2200_ftcmd_var0 = 0;
     }
 }
@@ -147,10 +147,10 @@ void func_80152F80(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     Fighter_ActionStateChange_800693AC(gobj, 0x16B, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    func_800236B8(fp->x2368);
-    func_800236B8(fp->x236C);
-    func_800236B8(fp->x2370);
-    fp->x2368 = -1;
-    fp->x236C = -1;
-    fp->x2370 = -1;
+    func_800236B8(fp->masterhandVars[0].x2368);
+    func_800236B8(fp->masterhandVars[0].x236C);
+    func_800236B8(fp->masterhandVars[0].x2370);
+    fp->masterhandVars[0].x2368 = -1;
+    fp->masterhandVars[0].x236C = -1;
+    fp->masterhandVars[0].x2370 = -1;
 }

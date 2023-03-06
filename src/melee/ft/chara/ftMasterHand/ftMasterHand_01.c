@@ -181,11 +181,11 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj)
     fp->x2378 = 0;
     fp->x237C = 0;
     fp->x2380 = 0;
-    fp->x2368 = -1;
-    fp->x236C = -1;
-    fp->x2370 = -1;
-    fp->x235C = 0.0f;
-    fp->x2360 = 0;
+    fp->masterhandVars[0].x2368 = -1;
+    fp->masterhandVars[0].x236C = -1;
+    fp->masterhandVars[0].x2370 = -1;
+    fp->masterhandVars[0].x235C = 0.0f;
+    fp->masterhandVars[0].x2360 = 0;
     fp->sa.masterhand.x222C = func_8015C244(gobj, &fp->xB0_pos);
     fp->sa.masterhand.x2238 = 1.0f;
     fp->sa.masterhand.x224C = 0;

@@ -73,9 +73,9 @@ void func_80151918(HSD_GObj* gobj)
 
     r8_fp = gobj->user_data;
     r7_attributes = r8_fp->x10C_ftData->ext_attr;
-    r8_fp->x234C_pos.x = (r8_fp->xB0_pos.x - r7_attributes->x3C);
-    r8_fp->x234C_pos.y = r7_attributes->x38;
-    r8_fp->x234C_pos.z = 0.0f;
+    r8_fp->masterhandVars[0].x234C_pos.x = (r8_fp->xB0_pos.x - r7_attributes->x3C);
+    r8_fp->masterhandVars[0].x234C_pos.y = r7_attributes->x38;
+    r8_fp->masterhandVars[0].x234C_pos.z = 0.0f;
 
     Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
@@ -100,9 +100,9 @@ void lbl_8015198C(HSD_GObj* gobj)
         }
         temp_r8 = gobj->user_data;
         temp_r7 = temp_r8->x10C_ftData->ext_attr;
-        temp_r8->x234C_pos.x = temp_r8->xB0_pos.x - temp_r7->x3C;
-        temp_r8->x234C_pos.y = temp_r7->x38;
-        temp_r8->x234C_pos.z = 0.0f;
+        temp_r8->masterhandVars[0].x234C_pos.x = temp_r8->xB0_pos.x - temp_r7->x3C;
+        temp_r8->masterhandVars[0].x234C_pos.y = temp_r7->x38;
+        temp_r8->masterhandVars[0].x234C_pos.z = 0.0f;
         Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }
@@ -127,7 +127,7 @@ void lbl_80151A88(HSD_GObj* gobj)
 
     r5_fp = gobj->user_data;
     r6_attributes = r5_fp->x10C_ftData->ext_attr;
-    func_8015BE40(gobj, &r5_fp->x234C_pos, &r5_fp->x2358_stateVar7,
+    func_8015BE40(gobj, &r5_fp->masterhandVars[0].x234C_pos, &r5_fp->masterhandVars[0].x2358,
                   r6_attributes->x2C, r6_attributes->x28);
 }
 

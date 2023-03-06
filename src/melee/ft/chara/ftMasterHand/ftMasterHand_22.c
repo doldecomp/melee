@@ -17,7 +17,7 @@ void lbl_80154230(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         r4_fp = gobj->user_data;
-        (r4_fp->x2344_callback)(gobj);
+        (r4_fp->masterhandVars[0].x2344_callback)(gobj);
     }
 }
 
@@ -54,7 +54,7 @@ void func_801542E0(HSD_GObj* gobj)
     Fighter_ActionStateChange_800693AC(
         gobj, 0x175, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftAnim_SetAnimRate(gobj, r30_attributes->x110_pos.y);
-    r31_fp->x2348_stateVar3 = (s32) r30_attributes->x110_pos.x;
+    r31_fp->masterhandVars[0].x2348 = (s32) r30_attributes->x110_pos.x;
 }
 
 // 80154360 150F40
@@ -67,9 +67,9 @@ void lbl_80154360(HSD_GObj* gobj)
     u32 temp_r0;
 
     temp_r4 = gobj->user_data;
-    temp_r0 = temp_r4->x2348_stateVar3 - 1;
+    temp_r0 = temp_r4->masterhandVars[0].x2348 - 1;
     temp_cr0_eq = temp_r0 == 0U;
-    temp_r4->x2348_stateVar3 = temp_r0;
+    temp_r4->masterhandVars[0].x2348 = temp_r0;
     if (temp_cr0_eq) {
         ftAnim_SetAnimRate(gobj, 1.0f);
         func_801545A0(gobj);
@@ -163,7 +163,7 @@ void func_801545A0(HSD_GObj* gobj)
     Fighter_ActionStateChange_800693AC(gobj, 0x176, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     func_8007E2D0(temp_r31, 0x80U, &lbl_80154A2C, 0U, &lbl_80155A58);
-    temp_r31->x2360 = 0;
+    temp_r31->masterhandVars[0].x2360 = 0;
 }
 
 // 80154620 151200
@@ -216,9 +216,9 @@ void func_801546D8(HSD_GObj* gobj)
     temp_r30 = r31_fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(gobj, 0x17D, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    r31_fp->x234C_pos.x = temp_r30->x30_pos2.x;
-    r31_fp->x234C_pos.y = temp_r30->x30_pos2.y;
-    r31_fp->x234C_pos.z = 0.0f;
+    r31_fp->masterhandVars[0].x234C_pos.x = temp_r30->x30_pos2.x;
+    r31_fp->masterhandVars[0].x234C_pos.y = temp_r30->x30_pos2.y;
+    r31_fp->masterhandVars[0].x234C_pos.z = 0.0f;
 }
 
 // 80154758 151338
@@ -249,7 +249,7 @@ void lbl_801547D8(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
     func_80085134(gobj);
-    func_8015BE40(gobj, &r31_fp->x234C_pos, &r31_fp->x2358_stateVar7,
+    func_8015BE40(gobj, &r31_fp->masterhandVars[0].x234C_pos, &r31_fp->masterhandVars[0].x2358,
                   r30_attributes->x2C, r30_attributes->x28);
 }
 
@@ -270,14 +270,14 @@ void func_8015483C(HSD_GObj* gobj)
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(gobj, 0x177, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    r31_fp->x2364 = r30_attributes->x120;
+    r31_fp->masterhandVars[0].x2364 = r30_attributes->x120;
     r31_fp->x2200_ftcmd_var0 = 1;
     r31_fp->x80_self_vel.x = 0.0f;
     r31_fp->x80_self_vel.y = 0.0f;
     r31_fp->x80_self_vel.z = 0.0f;
-    r31_fp->x234C_pos.x = r30_attributes->x30_pos2.x;
-    r31_fp->x234C_pos.y = r30_attributes->x30_pos2.y;
-    r31_fp->x234C_pos.z = 0.0f;
+    r31_fp->masterhandVars[0].x234C_pos.x = r30_attributes->x30_pos2.x;
+    r31_fp->masterhandVars[0].x234C_pos.y = r30_attributes->x30_pos2.y;
+    r31_fp->masterhandVars[0].x234C_pos.z = 0.0f;
 }
 
 // 801548D8 1514B8
@@ -286,9 +286,9 @@ void lbl_801548D8(HSD_GObj* gobj)
 {
     Fighter* r31_fp = gobj->user_data;
 
-    if (--r31_fp->x2364 <= 0.0f && r31_fp->x2200_ftcmd_var0) {
+    if (--r31_fp->masterhandVars[0].x2364 <= 0.0f && r31_fp->x2200_ftcmd_var0) {
         func_80155D1C(r31_fp->x1A58_interactedFighter);
-        r31_fp->x2360 = 0;
+        r31_fp->masterhandVars[0].x2360 = 0;
         r31_fp->x2200_ftcmd_var0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -315,7 +315,7 @@ void lbl_801549A8(HSD_GObj* arg0)
     temp_r31 = arg0->user_data;
     temp_r30 = temp_r31->x10C_ftData->ext_attr;
     func_80085134(arg0);
-    func_8015BE40(arg0, &temp_r31->x234C_pos, &temp_r31->x2358_stateVar7,
+    func_8015BE40(arg0, &temp_r31->masterhandVars[0].x234C_pos, &temp_r31->masterhandVars[0].x2358,
                   temp_r30->x2C, temp_r30->x28);
 }
 
@@ -327,7 +327,7 @@ void lbl_80154A08(HSD_GObj* arg0)
     Fighter* temp_r3;
 
     temp_r3 = arg0->user_data;
-    if (temp_r3->x2358_stateVar7 == 0.0f) {
+    if (temp_r3->masterhandVars[0].x2358 == 0.0f) {
         temp_r3->x80_self_vel.z = 0.0f;
         temp_r3->x80_self_vel.y = 0.0f;
         temp_r3->x80_self_vel.x = 0.0f;
@@ -345,7 +345,7 @@ void lbl_80154A2C(HSD_GObj* arg0)
     temp_r5->x80_self_vel.z = 0.0f;
     temp_r5->x80_self_vel.y = 0.0f;
     temp_r5->x80_self_vel.x = 0.0f;
-    temp_r5->x2360 = 1;
+    temp_r5->masterhandVars[0].x2360 = 1;
     temp_r5->x221E_flag.bits.b6 = 0;
     func_80154C78(arg0);
 }
