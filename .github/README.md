@@ -14,16 +14,96 @@ v1.02 - main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
 
 # Building
 
-## Required tools
+## Windows
 
+The easiest way to get set up is with [scoop](https://scoop.sh/). You will also need our [compilers](https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip).
+
+1. Open a PowerShell window (`Win+X`). You do not need admin privileges.
+1. Install `scoop`, `git`, `python`, and `mingw`. You can skip these if you already have `git`, `python` (3.9+), `bash`, `gcc`, and `make` in your `PATH`.
+    ```ps1
+    Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
+    irm get.scoop.sh | iex
+    scoop install git python mingw
+    ```
+1. Clone the repository and change directory into it.
+    ```ps1
+    cd ~/Documents # Or wherever you want to put Melee
+    git clone 'https://github.com/doldecomp/melee.git'
+    cd melee
+    ```
+1. Download our [compilers zip archive](https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip) and rename the `GC` subfolder to `mwcc_compiler`, and place it in `/tools`. You can do this manually, or use the following PowerShell snippet (from inside your melee directory):
+    ```ps1
+    $url = 'https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip'
+    $tmp = New-TemporaryFile
+    Invoke-WebRequest -Uri $url -OutFile $tmp
+    $zip = Rename-Item $tmp -NewName ($tmp.BaseName + '.zip') -PassThru
+
+    $dir = New-Item -ItemType Directory `
+        -Path (Join-Path $env:Temp 'MELEE_COMPILERS')
+
+    Expand-Archive -Path $zip -DestinationPath $dir
+
+    $path = Get-ChildItem -Path $dir.FullName | `
+            Select-Object -ExpandProperty FullName
+    Copy-Item -Path $path -Destination "tools/mwcc_compiler" -Recurse
+
+    Remove-Item -Force $zip
+    Remove-Item -Recurse -Force $dir
+    ```
+1. Run `make` using `bash` to build the project:
+    ```ps1
+    bash -c 'make -j"$NUMBER_OF_PROCESSORS" GENERATE_MAP=1'
+    ```
+1. Optional: Install a Python [virtual environment](https://docs.python.org/3/library/venv.html).
+    If you want to use the Python tooling we have in `/tools`, you can create a `venv`. This tooling is not required to build the project, but you'll need it if you want to use `asm-differ`, `m2ctx`, etc.
+    ```ps1
+    python -m venv --upgrade-deps 'venv'
+    ```
+    * You'll need to activate it whenever you open a new shell.
+        ```ps1
+        venv/Scripts/Activate.ps1
+        ```
+    * After that, you can install or update our packages with:
+        ```ps1
+        pip install -r 'requirements.txt' --use-pep517
+        ```
+    * Now you can run `m2ctx` to get a context to use with [decomp.me](https://doldecomp.github.io/melee/getting_started.html#autotoc_md2). The following command will add it to your clipboard automatically; you can run with `--help` to see all the options:
+        ```ps1
+        python tools/m2ctx/m2ctx.py -px
+        ```
+1. Check out our [Getting Started guide](https://doldecomp.github.io/melee/getting_started.html)!
+
+## Linux
+
+### Requirements
 * [devkitPro](https://devkitpro.org/wiki/Getting_Started)
-* Python3 (`pacman -S msys/python3`)
-* gcc (`pacman -S gcc`)
+* `python3` (`pacman -S python3`)
+* `gcc` (`pacman -S gcc`)
 
-## Instructions
+### Instructions
 
-1. Download GC_WII_COMPILERS.zip from (https://cdn.discordapp.com/attachments/727918646525165659/917185027656286218/GC_WII_COMPILERS.zip) and extract the GC compilers to tools/mwcc_compiler/.
-2. Run the `make` command
+1. Download [`MELEE_COMPILERS.zip`](https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip) and extract the GC compilers to `tools/mwcc_compiler/`.
+2. Run the `make` command:
+    ```sh
+    make -j$(nproc) GENERATE_MAP=1
+    ```
+
+You can refer to [`setup.sh`](/.github/packages/build-linux/setup.sh) and [`entrypoint.sh`](/.github/packages/build-linux/entrypoint.sh) to see how our CI builds on Ubuntu.
+
+## Containers
+
+We offer containerized [Linux](https://github.com/doldecomp/melee/pkgs/container/melee%2Fbuild-linux) and [Windows](https://github.com/doldecomp/melee/pkgs/container/melee%2Fbuild-windows) build environments, which you can run through `podman` or `docker` on any supported platform, including macOS.
+```sh
+cd melee
+
+# This will overwrite ./build but you can specify any path to map to /output
+build_target="$PWD/build"
+docker run --rm \
+  --volume "$PWD:/input:ro" \
+  --volume "$build_target:/output" \
+  --env MAKE_FLAGS="GENERATE_MAP=1" \
+  ghcr.io/doldecomp/melee/build-linux:latest
+```
 
 # Contributing
 
