@@ -117,33 +117,33 @@ static void lbl_801511FC(HSD_GObj* gobj)
         break;
     case 4:
         func_8002F274();
-        fp->x2348_stateVar3 = 0x78;
+        fp->masterhandVars.x2348 = 0x78;
         fp->x2340_stateVar1 = 5;
         break;
     case 5:
-        if (--fp->x2348_stateVar3 == 0) {
+        if (--fp->masterhandVars.x2348 == 0) {
             func_8002EC7C(-0.3490658402442932f);
             func_8002EF14();
             func_8002ED9C(120.0f);
-            fp->x2348_stateVar3 = 0x1E;
+            fp->masterhandVars.x2348 = 0x1E;
             fp->x2340_stateVar1 = 6;
         }
         break;
     case 6:
-        if (--fp->x2348_stateVar3 == 0) {
+        if (--fp->masterhandVars.x2348 == 0) {
             func_8002EC7C(0.3490658402442932f);
             func_8002EF14();
-            fp->x2348_stateVar3 = 0x1E;
+            fp->masterhandVars.x2348 = 0x1E;
             fp->x2340_stateVar1 = 7;
         }
         break;
     case 7:
-        if (--fp->x2348_stateVar3 == 0) {
+        if (--fp->masterhandVars.x2348 == 0) {
             func_8002ED9C(180.0f);
             func_8002EC7C(-1.5707963705062866f);
             func_8002EB5C(-0.3490658402442932f);
             func_8002EF14();
-            fp->x2348_stateVar3 = 0x32;
+            fp->masterhandVars.x2348 = 0x32;
             fp->x2340_stateVar1 = 8;
         }
         break;
@@ -152,7 +152,7 @@ static void lbl_801511FC(HSD_GObj* gobj)
         fp->x2340_stateVar1 = 9;
         break;
     case 9:
-        if (--fp->x2348_stateVar3 == 0) {
+        if (--fp->masterhandVars.x2348 == 0) {
             func_8002F474();
             fp->x2340_stateVar1 = 10;
         }

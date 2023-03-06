@@ -9,6 +9,7 @@
 #include <melee/ft/chara/ftGameWatch/ftGameWatch_StateVars.h>
 #include <melee/ft/chara/ftLuigi/ftLuigi_StateVars.h>
 #include <melee/ft/chara/ftMario/ftMario_StateVars.h>
+#include <melee/ft/chara/ftMasterHand/ftMasterhand_StateVars.h>
 #include <melee/ft/chara/ftMewtwo/ftMewtwo_StateVars.h>
 #include <melee/ft/chara/ftNess/ftNess_StateVars.h>
 #include <melee/ft/chara/ftSeak/ftSeak_StateVars.h>

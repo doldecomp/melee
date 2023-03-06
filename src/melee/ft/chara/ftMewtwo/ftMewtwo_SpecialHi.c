@@ -69,7 +69,7 @@ void ftMewtwo_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 
     fp->x2200_ftcmd_var0 = 0;
-    fp->mewtwoVars[0].SpecialHi.unk4 = 0;
+    fp->mewtwoVars.SpecialHi.unk4 = 0;
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialHi_CreateGFX;
 }
 
@@ -91,7 +91,7 @@ void ftMewtwo_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 
     fp->x2200_ftcmd_var0 = 0;
-    fp->mewtwoVars[0].SpecialHi.unk4 = 0;
+    fp->mewtwoVars.SpecialHi.unk4 = 0;
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialHi_CreateGFX;
 }
 
@@ -210,8 +210,8 @@ void ftMewtwo_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->mewtwoVars[0].SpecialHi.travelFrames--;
-    if (fp->mewtwoVars[0].SpecialHi.travelFrames <= 0) {
+    fp->mewtwoVars.SpecialHi.travelFrames--;
+    if (fp->mewtwoVars.SpecialHi.travelFrames <= 0) {
         ftMewtwo_SpecialHiLost_Action(fighter_gobj);
     }
 }
@@ -223,8 +223,8 @@ void ftMewtwo_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->mewtwoVars[0].SpecialHi.travelFrames--;
-    if (fp->mewtwoVars[0].SpecialHi.travelFrames <= 0) {
+    fp->mewtwoVars.SpecialHi.travelFrames--;
+    if (fp->mewtwoVars.SpecialHi.travelFrames <= 0) {
         ftMewtwo_SpecialAirHiLost_Action(fighter_gobj);
     }
 }
@@ -285,7 +285,7 @@ bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
 
-    if ((f32) fp->mewtwoVars[0].SpecialHi.unk4 >=
+    if ((f32) fp->mewtwoVars.SpecialHi.unk4 >=
         mewtwoAttrs->x54_MEWTWO_TELEPORT_UNK2)
     {
         return true;
@@ -308,7 +308,7 @@ void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
     u32 envFlags;
     u32 var;
 
-    fp->mewtwoVars[0].SpecialHi.unk4++;
+    fp->mewtwoVars.SpecialHi.unk4++;
     if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_O(fp)) != false) {
         if (ftMewtwo_SpecialHi_CheckTimer(fighter_gobj) != false) {
             ftMewtwo_SpecialAirHi_AirToGround(fighter_gobj);
@@ -384,7 +384,7 @@ static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
     fp = GET_FIGHTER(fighter_gobj);
     fp = GET_FIGHTER(fighter_gobj);
 
-    fp->mewtwoVars[0].SpecialHi.travelFrames =
+    fp->mewtwoVars.SpecialHi.travelFrames =
         (s32) mewtwoAttrs->x50_MEWTWO_TELEPORT_DURATION;
 
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
@@ -446,8 +446,8 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* fighter_gobj)
             vel = atan2f(fp->input.x624_lstick_y,
                          fp->input.x620_lstick_x * fp->facing_dir);
 
-            fp->mewtwoVars[0].SpecialHi.stickX = stickVec.x;
-            fp->mewtwoVars[0].SpecialHi.stickY = stickVec.y;
+            fp->mewtwoVars.SpecialHi.stickX = stickVec.x;
+            fp->mewtwoVars.SpecialHi.stickY = stickVec.y;
             fp->xEC_ground_vel =
                 fp->facing_dir *
                 (((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick) +
@@ -508,13 +508,13 @@ void ftMewtwo_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 
         floatVar = atan2f(fp->input.x624_lstick_y,
                           fp->input.x620_lstick_x * fp->facing_dir);
-        fp->mewtwoVars[0].SpecialHi.stickX = fp->input.x620_lstick_x;
-        fp->mewtwoVars[0].SpecialHi.stickY = fp->input.x624_lstick_y;
+        fp->mewtwoVars.SpecialHi.stickX = fp->input.x620_lstick_x;
+        fp->mewtwoVars.SpecialHi.stickY = fp->input.x624_lstick_y;
     } else {
         func_8007DA24(fp);
         floatVar = (f32) M_PI_2;
-        fp->mewtwoVars[0].SpecialHi.stickX = 0.0f;
-        sqrt_stick = fp->mewtwoVars[0].SpecialHi.stickY = 1.0f;
+        fp->mewtwoVars.SpecialHi.stickX = 0.0f;
+        sqrt_stick = fp->mewtwoVars.SpecialHi.stickY = 1.0f;
     }
 
     fp->x80_self_vel.x =
@@ -645,9 +645,9 @@ void ftMewtwo_SpecialHiLost_GroundToAir(HSD_GObj* fighter_gobj)
 static inline void ftMewtwo_SpecialHiLost_SetVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    fp->mewtwoVars[0].SpecialHi.velX = fp->x80_self_vel.x;
-    fp->mewtwoVars[0].SpecialHi.velY = (f32) fp->x80_self_vel.y;
-    fp->mewtwoVars[0].SpecialHi.groundVelX = (f32) fp->xEC_ground_vel;
+    fp->mewtwoVars.SpecialHi.velX = fp->x80_self_vel.x;
+    fp->mewtwoVars.SpecialHi.velY = (f32) fp->x80_self_vel.y;
+    fp->mewtwoVars.SpecialHi.groundVelX = (f32) fp->xEC_ground_vel;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
     fp->xEC_ground_vel = 0.0f;
@@ -669,7 +669,7 @@ void ftMewtwo_SpecialHiLost_Action(HSD_GObj* fighter_gobj)
 
     ftMewtwo_SpecialHiLost_SetVars(fighter_gobj);
 
-    fp->xEC_ground_vel = fp->mewtwoVars[0].SpecialHi.groundVelX *
+    fp->xEC_ground_vel = fp->mewtwoVars.SpecialHi.groundVelX *
                          mewtwoAttrs->x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
 }
 
@@ -687,8 +687,8 @@ void ftMewtwo_SpecialAirHiLost_Action(HSD_GObj* fighter_gobj)
 
     ftMewtwo_SpecialHiLost_SetVars(fighter_gobj);
 
-    fp->x80_self_vel.x = fp->mewtwoVars[0].SpecialHi.velX *
+    fp->x80_self_vel.x = fp->mewtwoVars.SpecialHi.velX *
                          mewtwoAttrs->x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
-    fp->x80_self_vel.y = fp->mewtwoVars[0].SpecialHi.velY *
+    fp->x80_self_vel.y = fp->mewtwoVars.SpecialHi.velY *
                          mewtwoAttrs->x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
 }

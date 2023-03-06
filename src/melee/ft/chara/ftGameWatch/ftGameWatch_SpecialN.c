@@ -151,10 +151,10 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
     gawAttrs = getFtSpecialAttrs(fp);
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = randomInt = 0;
-        if (((f32) fp->gameWatchVars[0].SpecialN.maxSausage) <
+        if (((f32) fp->gameWatchVars.SpecialN.maxSausage) <
             gawAttrs->x1C_GAMEWATCH_CHEF_MAX)
         {
-            fp->gameWatchVars[0].SpecialN.maxSausage++;
+            fp->gameWatchVars.SpecialN.maxSausage++;
             sp38.x = 2.5f;
             sp38.y = 6.5f;
             sp38.z = 0.0f;
@@ -189,8 +189,8 @@ static inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2208_ftcmd_var2 = 0;
-    fp->gameWatchVars[0].SpecialN.isChefLoopDisable = false;
-    fp->gameWatchVars[0].SpecialN.maxSausage = 0;
+    fp->gameWatchVars.SpecialN.isChefLoopDisable = false;
+    fp->gameWatchVars.SpecialN.maxSausage = 0;
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_SpecialN_CreateSausage;
 }
 
@@ -225,9 +225,9 @@ static inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* fighter_gobj)
 
     if ((u32) fp->x2208_ftcmd_var2 != 0U) {
         fp->x2208_ftcmd_var2 = 0U;
-        if (((f32) fp->gameWatchVars[0].SpecialN.maxSausage <
+        if (((f32) fp->gameWatchVars.SpecialN.maxSausage <
              gawAttrs->x1C_GAMEWATCH_CHEF_MAX) &&
-            ((s32) fp->gameWatchVars[0].SpecialN.isChefLoopDisable == false))
+            ((s32) fp->gameWatchVars.SpecialN.isChefLoopDisable == false))
         {
             ftGameWatch_SpecialN_Loop(fighter_gobj,
                                       gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
@@ -256,8 +256,8 @@ static inline void ftGameWatch_SpecialAirN_ChefLoop(HSD_GObj* fighter_gobj)
 
     if ((u32) fp->x2208_ftcmd_var2 != 0U) {
         fp->x2208_ftcmd_var2 = 0U;
-        if (((s32) fp->gameWatchVars[0].SpecialN.isChefLoopDisable == false) &&
-            ((f32) fp->gameWatchVars[0].SpecialN.maxSausage <
+        if (((s32) fp->gameWatchVars.SpecialN.isChefLoopDisable == false) &&
+            ((f32) fp->gameWatchVars.SpecialN.maxSausage <
              gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
         {
             ftGameWatch_SpecialAirN_Loop(
@@ -288,10 +288,10 @@ void ftGameWatch_SpecialN_IASA(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
-        fp->gameWatchVars[0].SpecialN.isChefLoopDisable = true;
+        fp->gameWatchVars.SpecialN.isChefLoopDisable = true;
     }
     if (((u32) fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_BUTTON_B) &&
-        ((f32) fp->gameWatchVars[0].SpecialN.maxSausage <
+        ((f32) fp->gameWatchVars.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
         ftGameWatch_SpecialN_Loop(fighter_gobj,
@@ -308,10 +308,10 @@ void ftGameWatch_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
-        fp->gameWatchVars[0].SpecialN.isChefLoopDisable = true;
+        fp->gameWatchVars.SpecialN.isChefLoopDisable = true;
     }
     if (((u32) fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_BUTTON_B) &&
-        ((f32) fp->gameWatchVars[0].SpecialN.maxSausage <
+        ((f32) fp->gameWatchVars.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
         ftGameWatch_SpecialAirN_Loop(fighter_gobj,
@@ -403,7 +403,7 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2208_ftcmd_var2 = 0;
-    fp->gameWatchVars[0].SpecialN.isChefLoopDisable = false;
+    fp->gameWatchVars.SpecialN.isChefLoopDisable = false;
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_SpecialN_CreateSausage;
 }
 
@@ -428,6 +428,6 @@ void ftGameWatch_SpecialAirN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2208_ftcmd_var2 = 0;
-    fp->gameWatchVars[0].SpecialN.isChefLoopDisable = false;
+    fp->gameWatchVars.SpecialN.isChefLoopDisable = false;
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_SpecialN_CreateSausage;
 }

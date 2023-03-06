@@ -55,7 +55,7 @@ void ftFox_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
     fp = GET_FIGHTER(fighter_gobj);
     foxAttrs = getFtSpecialAttrs(fp);
 
-    fp->foxVars[0].SpecialHi.gravityDelay =
+    fp->foxVars.SpecialHi.gravityDelay =
         (s32) foxAttrs->x54_FOX_FIREFOX_GRAVITY_DELAY;
     fp->xEC_ground_vel /= foxAttrs->x58_FOX_FIREFOX_VEL_X;
 
@@ -71,7 +71,7 @@ void ftFox_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
 
-    fp->foxVars[0].SpecialHi.gravityDelay =
+    fp->foxVars.SpecialHi.gravityDelay =
         (s32) foxAttrs->x54_FOX_FIREFOX_GRAVITY_DELAY;
     fp->x80_self_vel.x /= foxAttrs->x58_FOX_FIREFOX_VEL_X;
     fp->x80_self_vel.y = 0.0f;
@@ -88,7 +88,7 @@ void ftFox_SpecialHi_RotateModel(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007592C(fp, func_8007500C(fp, 2),
-                  DOUBLE_PI32 - fp->foxVars[0].SpecialHi.rotateModel);
+                  DOUBLE_PI32 - fp->foxVars.SpecialHi.rotateModel);
 }
 
 void ftFox_SpecialHiHold_Anim(HSD_GObj* fighter_gobj)
@@ -144,8 +144,8 @@ void ftFox_SpecialHiHoldAir_Phys(HSD_GObj* fighter_gobj)
     u8 unused[8];
 #endif
 
-    if (fp->foxVars[0].SpecialHi.gravityDelay != 0) {
-        fp->foxVars[0].SpecialHi.gravityDelay -= 1;
+    if (fp->foxVars.SpecialHi.gravityDelay != 0) {
+        fp->foxVars.SpecialHi.gravityDelay -= 1;
     } else {
         func_8007D494(fp, foxAttrs->x60_FOX_FIREFOX_FALL_ACCEL,
                       ftAttrs->x170_TerminalVelocity);
@@ -212,9 +212,9 @@ void ftFox_SpecialHi_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     /// @todo Common inline with #ftFox_SpecialAirHi_Anim.
-    fp->foxVars[0].SpecialHi.travelFrames--;
+    fp->foxVars.SpecialHi.travelFrames--;
 
-    if (fp->foxVars[0].SpecialHi.travelFrames <= 0) {
+    if (fp->foxVars.SpecialHi.travelFrames <= 0) {
         if (fp->xE0_ground_or_air == GA_Air) {
             ftFox_SpecialHiLanding_GroundToAir(fighter_gobj);
             return;
@@ -228,9 +228,9 @@ void ftFox_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->foxVars[0].SpecialHi.travelFrames--;
+    fp->foxVars.SpecialHi.travelFrames--;
 
-    if (fp->foxVars[0].SpecialHi.travelFrames <= 0) {
+    if (fp->foxVars.SpecialHi.travelFrames <= 0) {
         if (fp->xE0_ground_or_air == GA_Air) {
             ftFox_SpecialHiLanding_GroundToAir(fighter_gobj);
             return;
@@ -256,9 +256,9 @@ void ftFox_SpecialHi_Phys(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
 
-    fp->foxVars[0].SpecialHi.unk++;
+    fp->foxVars.SpecialHi.unk++;
 
-    if (fp->foxVars[0].SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END)
+    if (fp->foxVars.SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END)
         func_8007C930(fp, foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL);
 
     func_8007CB74(fighter_gobj);
@@ -269,16 +269,15 @@ void ftFox_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = foxAttrs = getFtSpecialAttrs(fp);
 
-    fp->foxVars[0].SpecialHi.unk++;
+    fp->foxVars.SpecialHi.unk++;
 
-    if (fp->foxVars[0].SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END)
-    {
+    if (fp->foxVars.SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END) {
         fp->x80_self_vel.x =
             -((fp->facing_dir * (foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL *
-                                 cosf(fp->foxVars[0].SpecialHi.rotateModel))) -
+                                 cosf(fp->foxVars.SpecialHi.rotateModel))) -
               fp->x80_self_vel.x);
         fp->x80_self_vel.y = -((foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL *
-                                sinf(fp->foxVars[0].SpecialHi.rotateModel)) -
+                                sinf(fp->foxVars.SpecialHi.rotateModel)) -
                                fp->x80_self_vel.y);
     }
 }
@@ -288,7 +287,7 @@ void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     CollData* collData = &fp->x6F0_collData;
 
-    fp->foxVars[0].SpecialHi.unk2 += 1;
+    fp->foxVars.SpecialHi.unk2 += 1;
 
     if (func_80082708(fighter_gobj) == false) {
         ftFox_SpecialHi_GroundToAir(fighter_gobj);
@@ -296,7 +295,7 @@ void ftFox_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     }
 
     if (collData->x134_envFlags & 0x18000) {
-        fp->foxVars[0].SpecialHi.rotateModel =
+        fp->foxVars.SpecialHi.rotateModel =
             atan2f(-collData->x14C_ground.normal.x * fp->facing_dir,
                    collData->x14C_ground.normal.y);
         ftFox_SpecialHi_RotateModel(fighter_gobj);
@@ -308,7 +307,7 @@ static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
-    if (fp->foxVars[0].SpecialHi.unk2 >= foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR)
+    if (fp->foxVars.SpecialHi.unk2 >= foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR)
         return true;
     else if (func_8009A134(fighter_gobj) != false)
         return false;
@@ -385,7 +384,7 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
                 facingDir = -1.0f;
 
             fp->facing_dir = facingDir;
-            fp->foxVars[0].SpecialHi.rotateModel =
+            fp->foxVars.SpecialHi.rotateModel =
                 atan2f(fp->x80_self_vel.y, fp->x80_self_vel.x * fp->facing_dir);
             ftFox_SpecialHi_RotateModel(fighter_gobj);
         }
@@ -454,16 +453,16 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
             tempAttrs = fp->x2D4_specialAttributes;
             fp->x2223_flag.bits.b4 = 1;
 
-            fp->foxVars[0].SpecialHi.travelFrames =
+            fp->foxVars.SpecialHi.travelFrames =
                 (u32) (s32) tempAttrs->x68_FOX_FIREFOX_DURATION;
 
-            fp->foxVars[0].SpecialHi.unk = 0.0f;
-            fp->foxVars[0].SpecialHi.unk2 = 0.0f;
+            fp->foxVars.SpecialHi.unk = 0.0f;
+            fp->foxVars.SpecialHi.unk2 = 0.0f;
 
             fp->xEC_ground_vel =
                 foxAttrs->x74_FOX_FIREFOX_SPEED * fp->facing_dir;
 
-            fp->foxVars[0].SpecialHi.rotateModel =
+            fp->foxVars.SpecialHi.rotateModel =
                 atan2f(-collData->x14C_ground.normal.x * fp->facing_dir,
                        collData->x14C_ground.normal.y);
 
@@ -509,10 +508,10 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
         if (temp_stick > foxAttrs->x88_FOX_FIREFOX_FACING_STICK_RANGE_MIN) {
             func_8007D9FC(fp);
         }
-        fp->foxVars[0].SpecialHi.rotateModel = atan2f(
+        fp->foxVars.SpecialHi.rotateModel = atan2f(
             fp->input.x624_lstick_y, fp->input.x620_lstick_x * fp->facing_dir);
     } else {
-        fp->foxVars[0].SpecialHi.rotateModel = HALF_PI32;
+        fp->foxVars.SpecialHi.rotateModel = HALF_PI32;
     }
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRHI, 0,
@@ -521,16 +520,16 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
     tempAttrs = fp->x2D4_specialAttributes;
     fp->x2223_flag.bits.b4 = 1;
 
-    fp->foxVars[0].SpecialHi.travelFrames =
+    fp->foxVars.SpecialHi.travelFrames =
         (u32) (s32) tempAttrs->x68_FOX_FIREFOX_DURATION;
-    fp->foxVars[0].SpecialHi.unk = 0;
-    fp->foxVars[0].SpecialHi.unk2 = 0;
+    fp->foxVars.SpecialHi.unk = 0;
+    fp->foxVars.SpecialHi.unk2 = 0;
 
     fp->x80_self_vel.x =
         fp->facing_dir * (foxAttrs->x74_FOX_FIREFOX_SPEED *
-                          cosf(fp->foxVars[0].SpecialHi.rotateModel));
+                          cosf(fp->foxVars.SpecialHi.rotateModel));
     fp->x80_self_vel.y = foxAttrs->x74_FOX_FIREFOX_SPEED *
-                         sinf(fp->foxVars[0].SpecialHi.rotateModel);
+                         sinf(fp->foxVars.SpecialHi.rotateModel);
     ftFox_SpecialHi_RotateModel(fighter_gobj);
     fp->cb.x21F8_callback = func_8007F76C;
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateLaunchGFX;
