@@ -24,7 +24,7 @@ void func_80152880(HSD_GObj* gobj)
     attr = fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    fp->x2340_f32 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
+    fp->masterhandVars.x2340_unk = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
     fp->x2344_f32 = 0.0f;
 }
 
@@ -40,7 +40,7 @@ void lbl_80152928(HSD_GObj* gobj)
         temp_r4 = gobj->user_data;
         temp_r4->x2344_f32 = 1.0f;
 
-        if (--temp_r4->x2340_f32 < 0.0f) {
+        if (--temp_r4->masterhandVars.x2340_unk < 0.0f) {
             temp_r4->x2344_f32 = 0.0f;
             temp_r4->x80_self_vel.x = 0.0f;
             temp_r4->x80_self_vel.y = 0.0f;

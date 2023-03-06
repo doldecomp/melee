@@ -1942,156 +1942,96 @@ struct Fighter {
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
 
-    /* The following series of individual unions with array size 0 is a
-    temporary hack to bypass compiler errors and size shifts for this mess of a
-    struct. These StateVar structs should be one big union once the rest is
-    cleaned up. */
+    union { // 0x2340
+        ftCommonStateVars commonVars;
+        ftMarioStateVars marioVars;
+        ftCaptainStateVars captainVars;
+        ftFoxStateVars foxVars;
+        ftSeakStateVars seakVars;
+        ftNessStateVars nessVars;
+        ftLuigiStateVars luigiVars;
+        ftMewtwoStateVars mewtwoVars;
+        ftGameWatchStateVars gameWatchVars;
+        ftMasterhandStateVars masterhandVars;
 
-    union {
-        union {
-            ftCommonStateVars commonVars[0]; // 0x2340
-        };
-        union {
-            ftMarioStateVars marioVars[0]; // 0x2340
-        };
-        union {
-            ftCaptainStateVars captainVars[0]; // 0x2340
-        };
-        union {
-            ftFoxStateVars foxVars[0]; // 0x2340
-        };
-        union {
-            ftSeakStateVars seakVars[0]; // 0x2340
-        };
-        union {
-            ftNessStateVars nessVars[0]; // 0x2340
-        };
-        union {
-            ftLuigiStateVars luigiVars[0]; // 0x2340
-        };
-        union {
-            ftMewtwoStateVars mewtwoVars[0]; // 0x2340
-        };
-        union {
-            ftGameWatchStateVars gameWatchVars[0]; // 0x2340
-        };
-        /* 0x2340 */ s32 x2340_stateVar1;
-        /* 0x2340 */ u32 x2340_stateVar1_u32;
-        /* 0x2340 */ f32 x2340_f32;
-    };
-    union {
-        u32 x2344_stateVar2;
-        s32 x2344_stateVar2_s32;
-        void (*x2344_callback)(HSD_GObj*);
-        f32 x2344_f32;
+        // Avoid adding members to this struct.
+        // This is a hack, all these members should eventually
+        // migrate to the character-specific union members above.
         struct {
             union {
-                Vec3 x2344_foxSpecialS[0];
+                /* 0x2340 */ s32 x2340_stateVar1;
+                /* 0x2340 */ u32 x2340_stateVar1_u32;
+                /* 0x2340 */ f32 x2340_f32;
             };
+            union {
+                u32 x2344_stateVar2;
+                s32 x2344_stateVar2_s32;
+                f32 x2344_f32;
+            };
+            union {
+                /* 0x2348 */ u32 x2348_stateVar3;
+                /* 0x2348 */ s32 x2348_stateVar3_s32;
+                /* 0x2348 */ f32 x2348_stateVar3_f32;
+            };
+            union {
+                struct {
+                    union {
+                        /* 0x234C */ u32 x234C_stateVar4;
+                        /* 0x234C */ s32 x234C_stateVar4_s32;
+                        /* 0x234C */ f32 x234C_stateVar4_f32;
+                    };
+                    union {
+                        /* 0x2350 */ u32 x2350_stateVar5;
+                        /* 0x2350 */ s32 x2350_stateVar5_s32;
+                        /* 0x2350 */ f32 x2350_stateVar5_f32;
+                    };
+                    union {
+                        /* 0x2354 */ u32 x2354_stateVar6;
+                        /* 0x2354 */ s32 x2354_stateVar6_s32;
+                        /* 0x2354 */ f32 x2354_stateVar6_f32;
+                    };
+                };
+                /* 0x234C */ Vec3 x234C_pos;
+            };
+            union {
+                /* 0x2358 */ f32 x2358_stateVar7;
+                /* 0x2358 */ s32 x2358_stateVar7_s32;
+            };
+            union {
+                /* 0x235C */ f32 x235C;
+                /* 0x235C */ u32 x235C_u32;
+                /* 0x235C */ f32 x235C_f32;
+            };
+            union {
+                /* 0x2360 */ u32 x2360_u32;
+                /* 0x2360 */ s32 x2360;
+                /* 0x2360 */ f32 x2360_f32;
+            };
+            /* 0x2364 */ f32 x2364;
+            /* 0x2368 */ u32 x2368;
+            /* 0x236C */ u32 x236C;
+            /* 0x2370 */ u32 x2370;
+            union {
+                struct {
+                    /* 0x2374 */ u32 x2374;
+                    /* 0x2378 */ u32 x2378;
+                    /* 0x237C */ u32 x237C;
+                };
+                /* 0x2374 */ Vec3 x2374_Vec3;
+            };
+            /* 0x2380 */ u32 x2380;
+            /* 0x2384 */ u32 x2384;
+            /* 0x2388 */ u32 x2388;
+            /* 0x238C */ u32 x238C;
+            /* 0x2390 */ f32 x2390;
+            /* 0x2394 */ s32 x2394;
+            /* 0x2394 */ Vec3 x2398;
+            /* 0x2394 */ Vec3 x23A4;
+            /* 0x23B0 */ s32 x23B0;
+            /* 0x23B4 */ s32 x23B4;
+            /* 0x23B8 */ s32 x23B8;
         };
     };
-    union {
-        /* 0x2348 */ u32 x2348_stateVar3;
-        /* 0x2348 */ s32 x2348_stateVar3_s32;
-        /* 0x2348 */ f32 x2348_stateVar3_f32;
-    };
-    union {
-        struct {
-            union {
-                /* 0x234C */ u32 x234C_stateVar4;
-                /* 0x234C */ s32 x234C_stateVar4_s32;
-                /* 0x234C */ f32 x234C_stateVar4_f32;
-            };
-            union {
-                /* 0x2350 */ u32 x2350_stateVar5;
-                /* 0x2350 */ s32 x2350_stateVar5_s32;
-                /* 0x2350 */ f32 x2350_stateVar5_f32;
-            };
-            union {
-                /* 0x2354 */ u32 x2354_stateVar6;
-                /* 0x2354 */ s32 x2354_stateVar6_s32;
-                /* 0x2354 */ f32 x2354_stateVar6_f32;
-            };
-        };
-        /* 0x234C */ Vec3 x234C_pos;
-    };
-    union {
-        /* 0x2358 */ f32 x2358_stateVar7;
-        /* 0x2358 */ s32 x2358_stateVar7_s32;
-    };
-    union {
-        /* 0x235C */ f32 x235C;
-        /* 0x235C */ u32 x235C_u32;
-        /* 0x235C */ s32 x235C_s32;
-        /* 0x235C */ f32 x235C_f32;
-    };
-    union {
-        /* 0x2360 */ u32 x2360_u32;
-        /* 0x2360 */ s32 x2360;
-        /* 0x2360 */ f32 x2360_f32;
-    };
-    union {
-        /* 0x2364 */ u32 x2364_u32;
-        /* 0x2364 */ f32 x2364;
-        /* 0x2364 */ f32 x2364_f32;
-    };
-    union {
-        /* 0x2368 */ u32 x2368;
-        /* 0x2368 */ f32 x2368_f32;
-    };
-    union {
-        /* 0x236C */ u32 x236C;
-        /* 0x236C */ f32 x236C_f32;
-    };
-    union {
-        /* 0x2370 */ u32 x2370;
-        /* 0x2370 */ f32 x2370_f32;
-    };
-    union {
-        struct {
-            union {
-                /* 0x2374 */ u32 x2374;
-                /* 0x2374 */ f32 x2374_f32;
-                /* 0x2374 */ f32 x2374_foxArray[0];
-            };
-            union {
-                /* 0x2378 */ u32 x2378;
-                /* 0x2378 */ f32 x2378_f32;
-            };
-            union {
-                /* 0x237C */ u32 x237C;
-                /* 0x237C */ f32 x237C_f32;
-            };
-        };
-        /* 0x2374 */ Vec3 x2374_Vec3;
-    };
-    union {
-        /* 0x2380 */ u32 x2380;
-        /* 0x2380 */ f32 x2380_f32;
-    };
-    union {
-        /* 0x2384 */ u32 x2384_u32;
-        /* 0x2384 */ s32 x2384_s32;
-        /* 0x2384 */ f32 x2384_f32;
-        /* 0x2384 */ HSD_GObj* x2384_GObj;
-    };
-    union {
-        /* 0x2388 */ u32 x2388_u32;
-        /* 0x2388 */ s32 x2388_s32;
-        /* 0x2388 */ f32 x2388_f32;
-    };
-    union {
-        /* 0x238C */ u32 x238C_u32;
-        /* 0x238C */ f32 x238C;
-        /* 0x238C */ f32 x238C_f32;
-    };
-    /* 0x2390 */ f32 x2390;
-    /* 0x2394 */ s32 x2394;
-    /* 0x2394 */ Vec3 x2398;
-    /* 0x2394 */ Vec3 x23A4;
-    /* 0x23B0 */ s32 x23B0;
-    /* 0x23B4 */ s32 x23B4;
-    /* 0x23B8 */ s32 x23B8;
     u8 filler_x23B8[0x23E8 - 0x23B8];
 };
 

@@ -11,7 +11,7 @@ void ftNess_AttackLw4_Action(
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->x2218_flag.bits.b0 = 0;
-    fp->nessVars[0].AttackLw4.isChargeDisable = false;
+    fp->nessVars.AttackLw4.isChargeDisable = false;
     ftNess_YoyoSetVarAll(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
@@ -28,11 +28,11 @@ void ftNess_AttackLw4_Anim(
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->nessVars[0].AttackLw4.yoyoCurrentFrame++;
+    fp->nessVars.AttackLw4.yoyoCurrentFrame++;
     if (ftNess_YoyoThink_IsRemove(fighter_gobj) == false) {
         ftNess_YoyoCheckTimedRehit(fighter_gobj);
-        if (((s32) fp->nessVars[0].AttackLw4.yoyoCurrentFrame == 13) &&
-            ((s32) fp->nessVars[0].AttackLw4.isChargeDisable == false) &&
+        if (((s32) fp->nessVars.AttackLw4.yoyoCurrentFrame == 13) &&
+            ((s32) fp->nessVars.AttackLw4.isChargeDisable == false) &&
             (ftNess_YoyoCheckNoObstruct(fighter_gobj) != false))
         {
             ftNess_AttackLw4_Charge_Action(fighter_gobj);
@@ -51,7 +51,7 @@ void ftNess_AttackLw4_IASA(
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_A) == false) {
-        fp->nessVars[0].AttackLw4.isChargeDisable = true;
+        fp->nessVars.AttackLw4.isChargeDisable = true;
     }
     if (fp->x2218_flag.bits.b0 != 0) {
         func_8008A4D4(fighter_gobj);
@@ -90,12 +90,12 @@ void ftNess_AttackLw4_Charge_Anim(
     ftNessAttributes* ness_attr;
 
     fp = GET_FIGHTER(fighter_gobj);
-    yoyoSmashFrameCurr = fp->nessVars[0].AttackLw4.yoyoCurrentFrame;
+    yoyoSmashFrameCurr = fp->nessVars.AttackLw4.yoyoCurrentFrame;
     ness_attr = fp->x2D4_specialAttributes;
-    fp->nessVars[0].AttackLw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
+    fp->nessVars.AttackLw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
     ftNess_YoyoSetUnkRate(fighter_gobj);
     ftNess_YoyoCheckTimedRehit(fighter_gobj);
-    if ((f32) fp->nessVars[0].AttackLw4.yoyoCurrentFrame >=
+    if ((f32) fp->nessVars.AttackLw4.yoyoCurrentFrame >=
         ness_attr->xAC_YOYO_CHARGE_DURATION)
     {
         ftNess_AttackLw4_Release_Action(fighter_gobj);
@@ -162,8 +162,8 @@ void ftNess_AttackLw4_Release_Anim(
     Fighter* fp;
 
     fp = GET_FIGHTER(fighter_gobj);
-    yoyoSmashFrameCurr = fp->nessVars[0].AttackLw4.yoyoCurrentFrame;
-    fp->nessVars[0].AttackLw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
+    yoyoSmashFrameCurr = fp->nessVars.AttackLw4.yoyoCurrentFrame;
+    fp->nessVars.AttackLw4.yoyoCurrentFrame = (s32) (yoyoSmashFrameCurr + 1);
     if (ftNess_YoyoThink_IsRemove(fighter_gobj) == false) {
         ftNess_YoyoCheckTimedRehit(fighter_gobj);
         if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -194,7 +194,7 @@ void ftNess_AttackLw4_Release_Phys(
 
     fp = GET_FIGHTER(fighter_gobj);
     func_80084F3C(fighter_gobj);
-    yoyoSmashFrameCurr = fp->nessVars[0].AttackLw4.yoyoCurrentFrame;
+    yoyoSmashFrameCurr = fp->nessVars.AttackLw4.yoyoCurrentFrame;
     if (yoyoSmashFrameCurr < 0x13) {
         yoyoSmashUnk =
             0.20000000298023224f * ((f32) yoyoSmashFrameCurr - 14.0f);

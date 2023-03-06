@@ -108,7 +108,7 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.z = 0.0f;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
-    fp->captainVars[0].SpecialS.gravity = 0.0f;
+    fp->captainVars.SpecialS.gravity = 0.0f;
     func_8007D60C(fp);
 }
 
@@ -383,15 +383,15 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 
     func_80085134(fighter_gobj);
     if ((u32) fp->x2204_ftcmd_var1 == 1U) {
-        fp->captainVars[0].SpecialS.gravity -=
+        fp->captainVars.SpecialS.gravity -=
             captainAttrs->x18_CAPTAIN_RAPTORBOOST_GRAVITY;
-        if (fp->captainVars[0].SpecialS.gravity <
+        if (fp->captainVars.SpecialS.gravity <
             -captainAttrs->x1C_CAPTAIN_RAPTORBOOST_TERMINAL_VELOCITY)
         {
-            fp->captainVars[0].SpecialS.gravity =
+            fp->captainVars.SpecialS.gravity =
                 -captainAttrs->x1C_CAPTAIN_RAPTORBOOST_TERMINAL_VELOCITY;
         }
-        fp->x80_self_vel.y = fp->captainVars[0].SpecialS.gravity;
+        fp->x80_self_vel.y = fp->captainVars.SpecialS.gravity;
     }
 }
 
@@ -409,15 +409,15 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 #endif
 
     func_80085134(fighter_gobj);
-    fp->captainVars[0].SpecialS.gravity -=
+    fp->captainVars.SpecialS.gravity -=
         captainAttrs->x18_CAPTAIN_RAPTORBOOST_GRAVITY;
-    if (fp->captainVars[0].SpecialS.gravity <
+    if (fp->captainVars.SpecialS.gravity <
         -captainAttrs->x1C_CAPTAIN_RAPTORBOOST_TERMINAL_VELOCITY)
     {
-        fp->captainVars[0].SpecialS.gravity =
+        fp->captainVars.SpecialS.gravity =
             -captainAttrs->x1C_CAPTAIN_RAPTORBOOST_TERMINAL_VELOCITY;
     }
-    fp->x80_self_vel.y = fp->captainVars[0].SpecialS.gravity;
+    fp->x80_self_vel.y = fp->captainVars.SpecialS.gravity;
 }
 
 // 0x800E3C38

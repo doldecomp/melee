@@ -21,10 +21,9 @@ static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->luigiVars[0].SpecialLw.groundVelX = (f32) 0.0f;
-    fp->luigiVars[0].SpecialLw.unk =
-        (s32) luigiAttrs->x88_LUIGI_CYCLONE_UNK + 1;
-    fp->luigiVars[0].SpecialLw.isUnkColl = false;
+    fp->luigiVars.SpecialLw.groundVelX = (f32) 0.0f;
+    fp->luigiVars.SpecialLw.unk = (s32) luigiAttrs->x88_LUIGI_CYCLONE_UNK + 1;
+    fp->luigiVars.SpecialLw.isUnkColl = false;
 }
 
 static inline void ftLuigi_SpecialLw_SetCall(HSD_GObj* fighter_gobj)
@@ -196,9 +195,9 @@ void ftLuigi_SpecialLw_Phys(HSD_GObj* fighter_gobj)
     luigiAttrs = getFtSpecialAttrs(fp);
     var2 = luigiAttrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND;
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
-        fp->luigiVars[0].SpecialLw.groundVelX -=
+        fp->luigiVars.SpecialLw.groundVelX -=
             luigiAttrs->x84_LUIGI_CYCLONE_FRICTION_END;
-        var2 += fp->luigiVars[0].SpecialLw.groundVelX;
+        var2 += fp->luigiVars.SpecialLw.groundVelX;
         if (var2 < 0.0f) {
             var2 = 0.0f;
         }
@@ -238,9 +237,9 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
     var = luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR;
     luigiAttrs2 = fp->x2D4_specialAttributes;
     if ((u32) fp->x2200_ftcmd_var0 != 0) {
-        fp->luigiVars[0].SpecialLw.groundVelX -=
+        fp->luigiVars.SpecialLw.groundVelX -=
             luigiAttrs2->x84_LUIGI_CYCLONE_FRICTION_END;
-        var += fp->luigiVars[0].SpecialLw.groundVelX;
+        var += fp->luigiVars.SpecialLw.groundVelX;
         if (var < 0.0f) {
             var = 0.0f;
         }
@@ -257,7 +256,7 @@ static inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (((u32) fp->x220C_ftcmd_var3 != 0U) &&
-        ((s32) fp->luigiVars[0].SpecialLw.isUnkColl != false))
+        ((s32) fp->luigiVars.SpecialLw.isUnkColl != false))
     {
         func_8007592C(fp, 0,
                       fp->facing_dir *
@@ -281,17 +280,17 @@ void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj)
             false)
         {
             ftLuigi_SpecialLw_GroundToAir(fighter_gobj);
-            fp->luigiVars[0].SpecialLw.isUnkColl = false;
+            fp->luigiVars.SpecialLw.isUnkColl = false;
         } else {
-            fp->luigiVars[0].SpecialLw.isUnkColl = true;
+            fp->luigiVars.SpecialLw.isUnkColl = true;
         }
     } else if (func_800824A0(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) ==
                false)
     {
         ftLuigi_SpecialLw_GroundToAir(fighter_gobj);
-        fp->luigiVars[0].SpecialLw.isUnkColl = false;
+        fp->luigiVars.SpecialLw.isUnkColl = false;
     } else {
-        fp->luigiVars[0].SpecialLw.isUnkColl = true;
+        fp->luigiVars.SpecialLw.isUnkColl = true;
     }
     ftLuigi_SpecialLw_UnkAngle(fighter_gobj);
 }
@@ -325,9 +324,9 @@ void ftLuigi_SpecialAirLw_Coll(HSD_GObj* fighter_gobj)
 
     if (func_800824A0(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) != false) {
         ftLuigi_SpecialAirLw_AirToGround(fighter_gobj);
-        fp->luigiVars[0].SpecialLw.isUnkColl = true;
+        fp->luigiVars.SpecialLw.isUnkColl = true;
     } else {
-        fp->luigiVars[0].SpecialLw.isUnkColl = false;
+        fp->luigiVars.SpecialLw.isUnkColl = false;
     }
     ftLuigi_SpecialLw_UnkAngle(fighter_gobj);
 }

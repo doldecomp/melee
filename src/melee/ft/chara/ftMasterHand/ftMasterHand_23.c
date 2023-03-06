@@ -24,9 +24,9 @@ void func_80154A78(HSD_GObj* gobj)
     func_8007E2F4(fp, 0x1FFU);
     func_8007E2FC(gobj);
     func_80155B80(fp->x1A58_interactedFighter);
-    fp->x234C_pos.x = attr->x118_pos.x;
-    fp->x234C_pos.y = attr->x118_pos.y;
-    fp->x234C_pos.z = 0.0f;
+    fp->masterhandVars.x234C_pos.x = attr->x118_pos.x;
+    fp->masterhandVars.x234C_pos.y = attr->x118_pos.y;
+    fp->masterhandVars.x234C_pos.z = 0.0f;
 }
 
 // 80154B2C 15170C
@@ -69,8 +69,8 @@ void lbl_80154BF4(HSD_GObj* gobj)
     fp = gobj->user_data;
     attr = fp->x10C_ftData->ext_attr;
     func_80085134(gobj);
-    func_8015BE40(gobj, &fp->x234C_pos, &fp->x2358_stateVar7, attr->x2C,
-                  attr->x28);
+    func_8015BE40(gobj, &fp->masterhandVars.x234C_pos,
+                  &fp->masterhandVars.x2358, attr->x2C, attr->x28);
 }
 
 // 80154C54 151834
@@ -81,7 +81,7 @@ void lbl_80154C54(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = gobj->user_data;
-    if (fp->x2358_stateVar7 == 0.0f) {
+    if (fp->masterhandVars.x2358 == 0.0f) {
         fp->x80_self_vel.z = 0.0f;
         fp->x80_self_vel.y = 0.0f;
         fp->x80_self_vel.x = 0.0f;

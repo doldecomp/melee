@@ -134,8 +134,8 @@ inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->gameWatchVars[0].SpecialLw.isRelease = false;
-    fp->gameWatchVars[0].SpecialLw.turnFrames = 0;
+    fp->gameWatchVars.SpecialLw.isRelease = false;
+    fp->gameWatchVars.SpecialLw.turnFrames = 0;
 }
 
 // 0x8014CEF0
@@ -206,7 +206,7 @@ void ftGameWatch_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     if ((38.0f == fp->x894_currentAnimFrame) &&
-        ((s32) fp->gameWatchVars[0].SpecialLw.isRelease == false))
+        ((s32) fp->gameWatchVars.SpecialLw.isRelease == false))
     {
         ftGameWatch_SpecialLw_UpdateAction(fighter_gobj, 5.0f);
     }
@@ -230,7 +230,7 @@ void ftGameWatch_SpecialAirLw_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     if ((38.0f == fp->x894_currentAnimFrame) &&
-        ((s32) fp->gameWatchVars[0].SpecialLw.isRelease == false))
+        ((s32) fp->gameWatchVars.SpecialLw.isRelease == false))
     {
         ftGameWatch_SpecialAirLw_UpdateAction(fighter_gobj, 5.0f);
     }
@@ -254,10 +254,10 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs;
 
     fp = GET_FIGHTER(fighter_gobj);
-    turnFrames = fp->gameWatchVars[0].SpecialLw.turnFrames;
+    turnFrames = fp->gameWatchVars.SpecialLw.turnFrames;
     gawAttrs = getFtSpecialAttrs(fp);
     if (turnFrames > 0) {
-        fp->gameWatchVars[0].SpecialLw.turnFrames = turnFrames - 1;
+        fp->gameWatchVars.SpecialLw.turnFrames = turnFrames - 1;
     } else {
         stick_range = fp->input.x620_lstick_x;
         if (stick_range < 0.0f) {
@@ -267,13 +267,13 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* fighter_gobj)
             facingDir = fp->facing_dir;
             func_8007D9FC(fp);
             if (facingDir != fp->facing_dir) {
-                fp->gameWatchVars[0].SpecialLw.turnFrames =
+                fp->gameWatchVars.SpecialLw.turnFrames =
                     (s32) gawAttrs->x7C_GAMEWATCH_PANIC_TURN_FRAMES;
             }
         }
     }
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
-        fp->gameWatchVars[0].SpecialLw.isRelease = true;
+        fp->gameWatchVars.SpecialLw.isRelease = true;
     }
 }
 
@@ -289,10 +289,10 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs;
 
     fp = GET_FIGHTER(fighter_gobj);
-    turnFrames = fp->gameWatchVars[0].SpecialLw.turnFrames;
+    turnFrames = fp->gameWatchVars.SpecialLw.turnFrames;
     gawAttrs = getFtSpecialAttrs(fp);
     if (turnFrames > 0) {
-        fp->gameWatchVars[0].SpecialLw.turnFrames = turnFrames - 1;
+        fp->gameWatchVars.SpecialLw.turnFrames = turnFrames - 1;
     } else {
         stick_range = fp->input.x620_lstick_x;
         if (stick_range < 0.0f) {
@@ -302,13 +302,13 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* fighter_gobj)
             facingDir = fp->facing_dir;
             func_8007D9FC(fp);
             if (facingDir != fp->facing_dir) {
-                fp->gameWatchVars[0].SpecialLw.turnFrames =
+                fp->gameWatchVars.SpecialLw.turnFrames =
                     (s32) gawAttrs->x7C_GAMEWATCH_PANIC_TURN_FRAMES;
             }
         }
     }
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
-        fp->gameWatchVars[0].SpecialLw.isRelease = true;
+        fp->gameWatchVars.SpecialLw.isRelease = true;
     }
 }
 
