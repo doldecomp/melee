@@ -88,7 +88,7 @@ The easiest way to get set up is with [scoop](https://scoop.sh/). You will also 
     make -j$(nproc) GENERATE_MAP=1
     ```
 
-You can refer to [`setup.sh`](/.github/packages/build-linux/setup.sh) and [`entrypoint.sh`](/.github/packages/build-linux/entrypoint.sh) to see how our CI builds on Ubuntu.
+You can refer to our [`Dockerfile`](/.github/packages/build-linux/Dockerfile) to see how our CI builds on Ubuntu.
 
 ## Containers
 
