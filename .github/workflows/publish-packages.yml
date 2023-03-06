@@ -1,0 +1,207 @@
+name: publish-packages
+run-name: Publish packages
+
+on:
+  push:
+    paths:
+      - .github/workflows/publish-packages.yml
+      - .github/packages/**
+  pull_request:
+    paths:
+      - .github/workflows/publish-packages.yml
+      - .github/packages/**
+  schedule:
+    # Monday at 5am EST
+    - cron: "0 10 * * 1"
+
+concurrency:
+  group: "packages"
+  cancel-in-progress: true
+
+jobs:
+  build-linux:
+    name: Publish package
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}/${{ matrix.target }}
+      CONTAINERFILE: .github/packages/${{ matrix.target }}/Dockerfile
+    strategy:
+      matrix:
+        target: [ "build-linux", "gen-pages" ]
+      fail-fast: false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build package
+        id: build
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ${{ env.CONTAINERFILE }}
+          target: ${{ matrix.target }}
+          load: true
+          tags: ${{ env.IMAGE_NAME }}:test
+
+      - name: Try building Melee (GENERATE_MAP=1)
+        if: startsWith(matrix.target, 'build-')
+        run: |
+          docker run --rm \
+            --volume "$PWD:/input:ro" \
+            --volume /tmp/output/generate_map:/output \
+            --env MAKE_FLAGS="GENERATE_MAP=1" \
+            "$IMAGE_NAME:test"
+
+      - name: Try building Melee (NON_MATCHING=1)
+        if: startsWith(matrix.target, 'build-')
+        run: |
+          docker run --rm \
+            --volume "$PWD":/input:ro \
+            --volume /tmp/output/non_matching:/output \
+            --env MAKE_FLAGS="NON_MATCHING=1" \
+            "$IMAGE_NAME:test"
+
+      - name: Try generating pages
+        if: matrix.target == 'gen-pages'
+        run: |
+          docker run --rm \
+            --volume "$PWD:/input:ro" \
+            --volume /tmp/output:/output \
+            "$IMAGE_NAME:test"
+
+      - name: Extract tags and labels
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,priority=1000,value=latest,enable={{is_default_branch}}
+            type=schedule,pattern={{date 'YYYYMMDD'}}
+            type=ref,event=branch
+            type=ref,event=pr
+            type=edge
+            type=sha
+
+      - name: Log into container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push package
+        uses: docker/build-push-action@v4
+        if: github.event_name == 'push'
+        with:
+          context: .
+          file: ${{ env.CONTAINERFILE }}
+          target: ${{ matrix.target }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  build-windows:
+    name: Publish package
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}/${{ matrix.target }}
+      CONTAINERFILE: .github/packages/${{ matrix.target }}/Dockerfile
+    strategy:
+      matrix:
+        target: [ "build-windows" ]
+      fail-fast: false
+    runs-on: windows-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # build-push-action and buildx are not supported on Windows hosts
+      - name: Build package
+        env:
+          IMAGE_TARGET: ${{ matrix.target }}
+        shell: bash
+        run: |
+          docker build \
+            --target "$IMAGE_TARGET" \
+            --tag "$IMAGE_NAME:test" \
+            --file "$CONTAINERFILE" \
+            .
+
+      - name: Try building Melee (GENERATE_MAP=1)
+        if: startsWith(matrix.target, 'build-')
+        run: |
+          $output = New-Item `
+            -Path "$env:TEMP/Output/GenerateMap" `
+            -ItemType Directory `
+            -Force
+
+          # the container's user needs to be able to write to the runner's dir
+          icacls $output /T /grant 'Everyone:(OI)(CI)(F)'
+
+          docker run --rm `
+          --volume "${PWD}:C:/Input:ro" `
+          --volume "${output}:C:/Output" `
+          --env MAKE_FLAGS="GENERATE_MAP=1" `
+          "${env:IMAGE_NAME}:test"
+
+      - name: Try building Melee (NON_MATCHING=1)
+        if: startsWith(matrix.target, 'build-')
+        run: |
+          $output = New-Item `
+            -Path "$env:TEMP/Output/NonMatching" `
+            -ItemType Directory `
+            -Force
+
+          # the container's user needs to be able to write to the runner's dir
+          icacls $output /T /grant 'Everyone:(OI)(CI)(F)'
+
+          docker run --rm `
+          --volume "${PWD}:C:/Input:ro" `
+          --volume "${output}:C:/Output" `
+          --env MAKE_FLAGS="NON_MATCHING=1" `
+          ${env:IMAGE_NAME}:test
+
+      - name: Extract tags and labels
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,priority=1000,value=latest,enable={{is_default_branch}}
+            type=schedule,pattern={{date 'YYYYMMDD'}}
+            type=ref,event=branch
+            type=ref,event=pr
+            type=edge
+            type=sha
+
+      - name: Log into container registry
+        uses: docker/login-action@v2.1.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push package
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          echo $(
+            echo "$DOCKER_METADATA_OUTPUT_TAGS" | xargs -I{} echo --tag \'{}\'
+            echo "$DOCKER_METADATA_OUTPUT_LABELS" | xargs -I{} echo --label \'{}\'
+          ) | xargs docker build -f "$CONTAINERFILE" .
+          docker push --all-tags "$REGISTRY/$IMAGE_NAME"
