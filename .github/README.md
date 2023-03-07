@@ -110,7 +110,11 @@ docker run --rm \
 
 # Contributing
 
-If you're new to decomp or getting started, check out our [Getting Started guide](https://doldecomp.github.io/melee/getting_started.html)! Once you're in a place that you're ready to open a PR, check out our [Contributing guidelines](CONTRIBUTING.md).
+Contributions are welcome! If you're new to decomp, check out our [Getting Started guide](https://doldecomp.github.io/melee/getting_started.html). Before [opening a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request), please read our [contributing guidelines](CONTRIBUTING.md).
+
+We're also happy to answer any questions in the `#melee` channel on Discord.
+
+[![Gamecube/Wii Decompilation Discord](https://discordapp.com/api/guilds/727908905392275526/widget.png?style=banner2)](https://discord.gg/hKx3FJJgrV)
 
 # FAQ
 ## What can be done after decompiling Melee?
@@ -128,14 +132,3 @@ So creating mods would be a lot easier as C code is much easier to consume than 
 Considering we don't have the source for the compiler, this is kind of "anything goes" territory. Unfortunately [register allocation is an NP-hard problem](https://en.wikipedia.org/wiki/Register_allocation?oldformat=true) which means there are all types of heuristics you can use to select registers, some of which can be confused by things as silly as variable names.
 
 One option is to attempt to automatically [permute the source code](https://github.com/simonlindholm/decomp-permuter) to get the correct register allocation.
-
-### How do I set up the source permuter?
-
-TODO
-
-
-## Contributions
-[Contributions and PRs](https://github.com/doldecomp/melee/compare) are welcome. Please read the [contributing guidelines](CONTRIBUTING.md).
-
-[![Gamecube/Wii Decompilation Discord](https://discordapp.com/api/guilds/727908905392275526/widget.png?style=banner2)](https://discord.gg/hKx3FJJgrV)
-
