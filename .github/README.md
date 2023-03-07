@@ -15,7 +15,7 @@ v1.02 - main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
 
 ## Windows
 
-The easiest way to get set up is with [scoop](https://scoop.sh/). You will also need our [compilers](https://cdn.discordapp.com/attachments/727909624342380615/1079286377230909440/MELEE_COMPILERS.zip).
+The easiest way to get set up is with [scoop](https://scoop.sh/). You will also need our compilers (linked below).
 
 1. Open a PowerShell window (`Win+X`). You do not need admin privileges.
 1. Install `scoop`, `git`, `python`, and `mingw`. You can skip these if you already have `git`, `python` (3.9+), `bash`, `gcc`, and `make` in your `PATH`.
