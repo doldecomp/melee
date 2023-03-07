@@ -1,5 +1,9 @@
 # Super Smash Bros Melee
-[![build-melee](https://github.com/doldecomp/melee/actions/workflows/build-melee.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/build-melee.yml) [![publish-packages](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml) [![publish-pages](https://github.com/doldecomp/melee/actions/workflows/publish-pages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-pages.yml)
+[![build-melee](https://github.com/doldecomp/melee/actions/workflows/build-melee.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/build-melee.yml)
+[![publish-packages](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml)
+[![publish-pages](https://github.com/doldecomp/melee/actions/workflows/publish-pages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-pages.yml)
+
+[![](https://dcbadge.vercel.app/api/server/hKx3FJJgrV)](https://discord.gg/hKx3FJJgrV)
 
 This repo contains a WIP decompilation of Super Smash Bros Melee (US).
 
@@ -136,4 +140,3 @@ TODO
 Gamecube/Wii Decompilation Discord: https://discord.gg/hKx3FJJgrV
 
 Contributions and PRs are welcome.
-
