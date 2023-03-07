@@ -91,16 +91,17 @@ You can refer to our [`Dockerfile`](/.github/packages/build-linux/Dockerfile) to
 
 ## Containers
 
-We offer containerized [Linux](https://github.com/doldecomp/melee/pkgs/container/melee%2Fbuild-linux) and [Windows](https://github.com/doldecomp/melee/pkgs/container/melee%2Fbuild-windows) build environments, which you can run through `podman` or `docker` on any supported platform, including macOS.
-```sh
-cd melee
+We offer containerized [Linux](https://github.com/doldecomp/melee/pkgs/container/melee%2Fbuild-linux) and [Windows](https://github.com/doldecomp/melee/pkgs/container/melee%2Fbuild-windows) build environments, which you can run through [`podman`](https://podman.io/getting-started/) or [`docker`](https://www.docker.com/get-started/) on any supported platform, including macOS.
 
-# This will overwrite ./build but you can specify any path to map to /output
-build_target="$PWD/build"
+```sh
+melee_path="$PWD"
+make_flags='GENERATE_MAP=1'
+build_target="$melee_path/build"
+
 docker run --rm \
-  --volume "$PWD:/input:ro" \
+  --volume "$melee_path:/input:ro" \
   --volume "$build_target:/output" \
-  --env MAKE_FLAGS="GENERATE_MAP=1" \
+  --env MAKE_FLAGS="$make_flags" \
   ghcr.io/doldecomp/melee/build-linux:latest
 ```
 
