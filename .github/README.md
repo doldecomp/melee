@@ -3,12 +3,9 @@
 
 This repo contains a WIP decompilation of Super Smash Bros Melee (US).
 
-```diff
-- INFORMATION! -
-
-The DOL this repository builds can be shifted! Meaning you are able to now
-add and remove code as you see fit, for modding or research purposes.
-```
+> **Note**
+>
+> The DOL this repository builds can be shifted! Meaning you are able to now add and remove code as you see fit, for modding or research purposes.
 
 It builds the following DOL:
 v1.02 - main.dol: `sha1: 08e0bf20134dfcb260699671004527b2d6bb1a45`
