@@ -135,7 +135,7 @@ TODO
 
 
 ## Contributions
+[Contributions and PRs](https://github.com/doldecomp/melee/compare) are welcome. Please read the [contributing guidelines](CONTRIBUTING.md).
 
-Gamecube/Wii Decompilation Discord: https://discord.gg/hKx3FJJgrV
+[![Gamecube/Wii Decompilation Discord](https://discordapp.com/api/guilds/727908905392275526/widget.png?style=banner2)](https://discord.gg/hKx3FJJgrV)
 
-Contributions and PRs are welcome.
