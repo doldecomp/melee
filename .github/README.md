@@ -1,4 +1,5 @@
 # Super Smash Bros Melee
+[![build-melee](https://github.com/doldecomp/melee/actions/workflows/build-melee.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/build-melee.yml) [![publish-packages](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-packages.yml) [![publish-pages](https://github.com/doldecomp/melee/actions/workflows/publish-pages.yml/badge.svg)](https://github.com/doldecomp/melee/actions/workflows/publish-pages.yml)
 
 This repo contains a WIP decompilation of Super Smash Bros Melee (US).
 
