@@ -25,12 +25,12 @@
 #   2: .sdata2 section not found in the file
 #   3: Unable to find and parse floats data from sdata2
 
+import errno
+import math
 import os
+import struct
 import sys
 import time
-import math
-import errno
-import struct
 from collections import OrderedDict
 
 debugging = False
@@ -162,19 +162,19 @@ def userConfirms():
     return userInput.lower()[0] == "y"
 
 
-def grammarfyList( theList ):
+def grammarfyList(theList):
+    """Converts a given iterable to a human-readable string. For example:
+    the list [apple, pear, banana] will be returned as the string 'apple, pear, and banana'
+    """
 
-    """ Converts a given iterable to a human-readable string. For example: 
-        the list [apple, pear, banana] will be returned as the string 'apple, pear, and banana' """
+    theList = list(theList)  # Ensure it's a list (could be a set, tuple, etc.)
 
-    theList = list( theList )  # Ensure it's a list (could be a set, tuple, etc.)
-
-    if len( theList ) == 1:
-        return str( theList[0] )
-    elif len( theList ) == 2:
-        return str( theList[0] ) + ' and ' + str( theList[1] )
+    if len(theList) == 1:
+        return str(theList[0])
+    elif len(theList) == 2:
+        return str(theList[0]) + " and " + str(theList[1])
     else:
-        return ', '.join( theList[:-1] ) + ', and ' + str( theList[-1] )
+        return ", ".join(theList[:-1]) + ", and " + str(theList[-1])
 
 
 # Parse the map file for function names
@@ -215,7 +215,7 @@ with open(fileToSplit, "r") as sourceFile:
             currentSection = sectionName
 
             # Ensure the last function from the data section is collected
-            if len( fileSections ) == 2:  # Assumes .text is always first
+            if len(fileSections) == 2:  # Assumes .text is always first
                 functions.append(currentFunction)
 
             continue
@@ -243,7 +243,9 @@ with open(fileToSplit, "r") as sourceFile:
                             # The value is already decoded; need to re-encode the value as raw bytes
                             valueBytes += struct.pack(">f", float(stringValue))
                         else:
-                            valueBytes += bytearray.fromhex(stringValue.replace("0x", ""))
+                            valueBytes += bytearray.fromhex(
+                                stringValue.replace("0x", "")
+                            )
 
                         # Decode the value as a double and store it
                         value = struct.unpack(">d", valueBytes)[0]
@@ -260,16 +262,24 @@ with open(fileToSplit, "r") as sourceFile:
                         continue
 
                     if line.startswith(".float"):
-                        # The value is already decoded; need to re-encode the 
+                        # The value is already decoded; need to re-encode the
                         # value as raw bytes (in case this is actually a double).
                         valueBytes = struct.pack(">f", float(stringValue))
 
                         if floatType == "f32":
-                            floatsData[lastLabel] = (lastLabel, "f32", float(stringValue))
-                        else: # convert_data.py thought this was a single, but it's a double
-                            print("{} is described in the file as a single, but appears to be a double.".format(lastLabel))
+                            floatsData[lastLabel] = (
+                                lastLabel,
+                                "f32",
+                                float(stringValue),
+                            )
+                        else:  # convert_data.py thought this was a single, but it's a double
+                            print(
+                                "{} is described in the file as a single, but appears to be a double.".format(
+                                    lastLabel
+                                )
+                            )
 
-                    else: # Handling for an undetermined .4byte
+                    else:  # Handling for an undetermined .4byte
                         valueBytes = bytearray.fromhex(stringValue.replace("0x", ""))
 
                         if floatType == "f32":
@@ -288,16 +298,14 @@ with open(fileToSplit, "r") as sourceFile:
                 # Get the type that this script found
                 floatType = floatTypes.get(lastLabel)
                 if not floatType:
-                    print(
-                        "Warning! Unable to determine a float type for " + lastLabel
-                    )
+                    print("Warning! Unable to determine a float type for " + lastLabel)
                     continue
-                
+
                 # Store this literal as a double or a single
                 if floatType == "f64":
                     floatsData[lastLabel] = (lastLabel, "f64", float(stringValue))
 
-                else: # convert_data.py thought this was a double, but it's a single
+                else:  # convert_data.py thought this was a double, but it's a single
                     # There may be a file boundary here.
                     susPadding.append(lastLabel)
 
@@ -305,7 +313,11 @@ with open(fileToSplit, "r") as sourceFile:
                     valueBytes = struct.pack(">d", float(stringValue))
                     value = struct.unpack(">f", valueBytes[:4])[0]
                     floatsData[lastLabel] = (lastLabel, "f32", value)
-                    print("{} is described in the file as a double, but appears to be a single.".format(lastLabel))
+                    print(
+                        "{} is described in the file as a double, but appears to be a single.".format(
+                            lastLabel
+                        )
+                    )
 
         # Function processing
         elif currentSection == ".text":
@@ -608,9 +620,17 @@ for section, byteTotal in fileSections.items():
     print("  {:28}0x{:X} bytes".format(sectionName, byteTotal))
 if uncertainBytecounts:
     if len(uncertainBytecounts) == 1:
-        print('(The bytecount for ' + next(iter(uncertainBytecounts)) + ' is uncertain, because it contains ints of unknown size.)' )
+        print(
+            "(The bytecount for "
+            + next(iter(uncertainBytecounts))
+            + " is uncertain, because it contains ints of unknown size.)"
+        )
     else:
-        print('(The bytecounts for ' + grammarfyList(uncertainBytecounts) + ' are uncertain, because they contain ints of unknown size.)' )
+        print(
+            "(The bytecounts for "
+            + grammarfyList(uncertainBytecounts)
+            + " are uncertain, because they contain ints of unknown size.)"
+        )
 
 if mapNames:
     print("\n\t(Function names found in the map file are shown to the right.)")
@@ -698,8 +718,8 @@ while True:
     if tail == "melee":  # The new path will start with this
         includePath = "#include <{}.h>".format("/".join(pathParts))
         break
-    elif not tail: # Failsafe; reached the drive root directory
-        print('Warning: Unable to determine an include path for headers.')
+    elif not tail:  # Failsafe; reached the drive root directory
+        print("Warning: Unable to determine an include path for headers.")
         includePath = ""
         break
 
@@ -719,7 +739,7 @@ for i, functionList in enumerate(fileList, start=1):
         if includePath:
             cFile.write(includePath)
 
-        # Write out all of the floats that will be referenced 
+        # Write out all of the floats that will be referenced
         # in the following functions (i.e. those from sdata2).
         alreadyWritten = []
         for function in functionList:
