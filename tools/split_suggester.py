@@ -1,5 +1,5 @@
 # Created by Daniel R. Cappel ("DRGN")
-# Version 1.1
+# Version 1.2
 #
 # Analyzes float constants used within a source ASM (.s) file
 # to determine file boundaries. This considers duplicate float
@@ -18,13 +18,19 @@
 # included in the generated function headers. If your data,
 # text, and sdata sections are not in the same file, you may
 # create a new file with them all included and input that.
+#
+# Exit codes:
+#   0: Success; all parsing properly completed
+#   1: Invalid program input
+#   2: .sdata2 section not found in the file
+#   3: Unable to find and parse floats data from sdata2
 
-import errno
-import math
 import os
-import struct
 import sys
 import time
+import math
+import errno
+import struct
 from collections import OrderedDict
 
 debugging = False
@@ -39,20 +45,24 @@ else:
 mapFilePath = ""
 if len(sys.argv) < 2:
     print("Invalid input; you must provide one .s file to split.")
-    exit(1)
+    sys.exit(1)
 elif len(sys.argv) == 3:
     if sys.argv[2].lower().endswith(".map"):
         mapFilePath = sys.argv[2]
     else:
         print("Invalid input; the second argument is expected to be a .map file.")
-        exit(1)
+        sys.exit(1)
 elif len(sys.argv) > 3:
     print("Invalid input; got more than the expected one or two arguments.")
-    exit(1)
+    sys.exit(1)
 
+
+# Tracking for which section is being parsed
+fileSections = OrderedDict([])  # Key=sectionName, value=sectionSize
+currentSection = ""
+uncertainBytecounts = set()
 
 # For function processing
-reachedDataSection = False
 functionEndLikely = True
 functionEndCertain = False
 floatsData = OrderedDict([])
@@ -61,16 +71,10 @@ functions = []
 mapNames = {}
 
 # For sData processing
-reachedSdata = False
 firstValueProcessed = False
 floatTypes = {}
 susPadding = []
 lastLabel = ""
-
-# Running totals for section bytecounts
-textBytes = 0
-dataBytes = 0
-sdataBytes = 0
 
 
 class Function(object):
@@ -80,7 +84,8 @@ class Function(object):
         self.start = -1
         self.end = -1
         self.lines = []
-        self.labels = []
+        self.labels = []  # Contains all refs in order, which may include duplicates
+        self.uniqueLabels = []
 
         self._length = -1
 
@@ -110,6 +115,12 @@ class Function(object):
             name = mapNames.get(self.start)
             if name and not name.startswith("zz") and not name.endswith("_"):
                 self.mapName = name
+
+    def addLabel(self, label):
+        self.labels.append(label)
+
+        if label not in self.uniqueLabels:
+            self.uniqueLabels.append(label)
 
 
 def align(x, base=32):
@@ -151,6 +162,21 @@ def userConfirms():
     return userInput.lower()[0] == "y"
 
 
+def grammarfyList( theList ):
+
+    """ Converts a given iterable to a human-readable string. For example: 
+        the list [apple, pear, banana] will be returned as the string 'apple, pear, and banana' """
+
+    theList = list( theList )  # Ensure it's a list (could be a set, tuple, etc.)
+
+    if len( theList ) == 1:
+        return str( theList[0] )
+    elif len( theList ) == 2:
+        return str( theList[0] ) + ' and ' + str( theList[1] )
+    else:
+        return ', '.join( theList[:-1] ) + ', and ' + str( theList[-1] )
+
+
 # Parse the map file for function names
 if mapFilePath:
     with open(mapFilePath, "r") as mapFile:
@@ -174,7 +200,7 @@ with open(fileToSplit, "r") as sourceFile:
     for line in sourceFile:
         line = line.split("//")[0]  # Removes comments
         line = line.split("#")[0]  # Removes comments
-        line = line.strip()  # Removes leading/trailing whitespace
+        line = line.strip()  # Removes leading and trailing whitespace
 
         if not line:
             continue
@@ -182,60 +208,107 @@ with open(fileToSplit, "r") as sourceFile:
             functionEndCertain = True
             continue
 
-        elif reachedSdata:
+        # Track what file section we're in
+        elif line.startswith(".section"):
+            sectionName = line.split()[1].replace(",", "")
+            fileSections[sectionName] = 0  # Initialize section data length
+            currentSection = sectionName
+
+            # Ensure the last function from the data section is collected
+            if len( fileSections ) == 2:  # Assumes .text is always first
+                functions.append(currentFunction)
+
+            continue
+
+        # Start parsing for specific sections
+        elif currentSection == ".sdata2":
             if line.endswith(":"):
                 lastLabel = line[:-1]  # Strips colon
                 firstValueProcessed = False
-            elif line.startswith(".4byte"):
+
+            elif line.startswith(".4byte") or line.startswith(".float"):
                 stringValue = line.split()[-1]
+                if stringValue == "NULL":
+                    stringValue = "00000000"
 
                 if firstValueProcessed:
-                    if floatType == "single":
+                    # Now processing for the latter 4 bytes of what could be a double
+                    if floatType == "f32":
                         # There may be a file boundary here.
                         susPadding.append(lastLabel)
 
-                    elif floatType == "double":
-                        valueBytes += bytearray.fromhex(stringValue.replace("0x", ""))
-                        value = struct.unpack(">d", valueBytes)[0]
-                        floatsData[lastLabel] = (lastLabel, "double", value)
-                else:
-                    floatType = floatTypes.get(lastLabel)
+                    elif floatType == "f64":
+                        # Combine these bytes with those from the previous line
+                        if line.startswith(".float"):
+                            # The value is already decoded; need to re-encode the value as raw bytes
+                            valueBytes += struct.pack(">f", float(stringValue))
+                        else:
+                            valueBytes += bytearray.fromhex(stringValue.replace("0x", ""))
 
+                        # Decode the value as a double and store it
+                        value = struct.unpack(">d", valueBytes)[0]
+                        floatsData[lastLabel] = (lastLabel, "f64", value)
+
+                # Process a single or the first 4 bytes of a double
+                else:
+                    # Get the type that this script found
+                    floatType = floatTypes.get(lastLabel)
                     if not floatType:
                         print(
                             "Warning! Unable to determine a float type for " + lastLabel
                         )
                         continue
 
-                    valueBytes = bytearray.fromhex(stringValue.replace("0x", ""))
+                    if line.startswith(".float"):
+                        # The value is already decoded; need to re-encode the 
+                        # value as raw bytes (in case this is actually a double).
+                        valueBytes = struct.pack(">f", float(stringValue))
 
-                    if floatType == "single":
-                        value = struct.unpack(">f", valueBytes)[0]
-                        floatsData[lastLabel] = (lastLabel, "single", value)
+                        if floatType == "f32":
+                            floatsData[lastLabel] = (lastLabel, "f32", float(stringValue))
+                        else: # convert_data.py thought this was a single, but it's a double
+                            print("{} is described in the file as a single, but appears to be a double.".format(lastLabel))
+
+                    else: # Handling for an undetermined .4byte
+                        valueBytes = bytearray.fromhex(stringValue.replace("0x", ""))
+
+                        if floatType == "f32":
+                            value = struct.unpack(">f", valueBytes)[0]
+                            floatsData[lastLabel] = (lastLabel, "f32", value)
 
                     firstValueProcessed = True
 
-                sdataBytes += 4
+                fileSections[".sdata2"] += 4
 
-        elif reachedDataSection:
-            # Check for next section
-            if line == ".section .sdata2":
-                reachedSdata = True
-                functions.append(currentFunction)
+            elif line.startswith(".double"):
+                stringValue = line.split()[-1]
+                if stringValue == "NULL":
+                    stringValue = "00000000"
 
-            # Tally byte total
-            elif line.startswith(".4byte"):
-                dataBytes += 4
-            elif line.startswith(".asciz"):
-                stringLength = len(line.split('"')[1])
-                dataBytes += align(stringLength + 1, 4)
+                # Get the type that this script found
+                floatType = floatTypes.get(lastLabel)
+                if not floatType:
+                    print(
+                        "Warning! Unable to determine a float type for " + lastLabel
+                    )
+                    continue
+                
+                # Store this literal as a double or a single
+                if floatType == "f64":
+                    floatsData[lastLabel] = (lastLabel, "f64", float(stringValue))
 
-        else:  # Function processing
-            # Check for next section
-            if line == ".section .data":
-                reachedDataSection = True
-                continue
+                else: # convert_data.py thought this was a double, but it's a single
+                    # There may be a file boundary here.
+                    susPadding.append(lastLabel)
 
+                    # Re-encode the value back to 8 bytes, and decode just the first 4 as a single
+                    valueBytes = struct.pack(">d", float(stringValue))
+                    value = struct.unpack(">f", valueBytes[:4])[0]
+                    floatsData[lastLabel] = (lastLabel, "f32", value)
+                    print("{} is described in the file as a double, but appears to be a single.".format(lastLabel))
+
+        # Function processing
+        elif currentSection == ".text":
             if line.startswith("/*"):  # Indicates a code line
                 if line.endswith("blr"):
                     functionEndLikely = True
@@ -248,11 +321,11 @@ with open(fileToSplit, "r") as sourceFile:
                     label = labelPortion.split("@")[0].lstrip()
 
                     if asm.startswith("lfs "):
-                        floatTypes[label] = "single"
-                        currentFunction.labels.append(label)
+                        floatTypes[label] = "f32"
+                        currentFunction.addLabel(label)
                     elif asm.startswith("lfd "):
-                        floatTypes[label] = "double"
-                        currentFunction.labels.append(label)
+                        floatTypes[label] = "f64"
+                        currentFunction.addLabel(label)
 
                 # Set the function's start address and the last function's end address
                 if currentFunction.start == -1:
@@ -263,7 +336,7 @@ with open(fileToSplit, "r") as sourceFile:
                         functions[-1].end = lineParts[1]  # Previous function
 
                 currentFunction.lines.append(line)
-                textBytes += 4
+                fileSections[".text"] += 4
 
             # Check if this is the start of a new function
             elif line.endswith(":"):
@@ -293,20 +366,32 @@ with open(fileToSplit, "r") as sourceFile:
                 else:
                     currentFunction.lines.append(line)
 
+        # Tally byte totals for other sections
+        elif line.startswith(".4byte") or line.startswith(".float"):
+            fileSections[currentSection] += 4
+        elif line.startswith(".asciz"):
+            stringLength = len(line.split('"')[1])
+            fileSections[currentSection] += align(stringLength + 1, 4)
+        elif line.startswith(".skip"):
+            skipAmount = int(line.split()[1], 16)
+            fileSections[currentSection] += skipAmount
+        elif line.startswith(".int"):
+            fileSections[currentSection] += 4  # Can these be single bytes or halfwords?
+            uncertainBytecounts.add(currentSection)
+
 
 # Sanity checks
-if not reachedSdata:
-    print("Unable to find the sdata2 section of the file!")
-    exit(2)
+if ".sdata2" not in fileSections:
+    print("Unable to find the .sdata2 section of the file!")
+    sys.exit(2)
 elif not floatsData:
     print("Unable to parse floats data from sdata2!")
-    exit(3)
+    sys.exit(3)
 
 
 # Account for alignment padding in byte usage totals
-textBytes = align(textBytes, 8)
-dataBytes = align(dataBytes, 8)
-sdataBytes = align(sdataBytes, 8)
+for section, byteTotal in list(fileSections.items())[:1]:  # Skips last section!
+    fileSections[section] = align(byteTotal, 8)
 
 
 # Set the last function's end address (the rest are set in the loop above)
@@ -322,7 +407,7 @@ if susPadding:
     checkNextType = False
     for name, floatType, value in floatsData.values():
         if checkNextType:
-            if floatType == "single":
+            if floatType == "f32":
                 paddingBreaks.append(name)
             checkNextType = False
 
@@ -345,12 +430,13 @@ functionNames = [func.name for func in functions]
 
 """     Separate functions - Pass 1
 
-    Here, a multidimentional list is created, wherein the main list represents a list of files,
+    Here, a multi-dimentional list is created, wherein the main list represents a list of files,
     and each list within that will be a list of functions within that file. This pass checks for
     float literal usage, and identifies file boundaries when new labels are used for floats that
     were already available in sdata. File breaks determined from analyzing the padding among the
     floats will also be applied here. """
 
+floatWarnings = set()
 labelsUsed = set()
 fileList = [
     []
@@ -367,7 +453,9 @@ for func in functions:
     for label in func.labels:
         floatInstance = floatsData.get(label)
         if not floatInstance:
-            print("Warning! Unable to find a float for this label: " + label)
+            if label not in floatWarnings:  # Prevent duplicate warnings
+                print("Warning! Unable to parse float information for " + label)
+                floatWarnings.add(label)
             continue
 
         # Check for breaks due to usage of new instances of existing float literals
@@ -513,17 +601,25 @@ for functionList in reversed(fileList):
 
 
 # Print results
-print("Total functions: " + str(len(functions)))
-print("Total floats:    " + str(len(floatTypes)))
-print("Text Section:    0x{:X} bytes".format(textBytes))
-print("Data Section:    0x{:X} bytes".format(dataBytes))
-print("sdata2 Section:  0x{:X} bytes".format(sdataBytes))
+print("  Total functions:            " + str(len(functions)))
+print("  Total floats (in sdata2):   " + str(len(floatTypes)))
+for section, byteTotal in fileSections.items():
+    sectionName = section + " section:"
+    print("  {:28}0x{:X} bytes".format(sectionName, byteTotal))
+if uncertainBytecounts:
+    if len(uncertainBytecounts) == 1:
+        print('(The bytecount for ' + next(iter(uncertainBytecounts)) + ' is uncertain, because it contains ints of unknown size.)' )
+    else:
+        print('(The bytecounts for ' + grammarfyList(uncertainBytecounts) + ' are uncertain, because they contain ints of unknown size.)' )
+
 if mapNames:
     print("\n\t(Function names found in the map file are shown to the right.)")
 fileCount = len(fileList)
 if debugging:
-    print("All floats data:")
+    print("\nAll floats data:")
     print(floatsData)
+    print("\nAll float types:")
+    print(floatTypes)
     print("")
     if fileCount == 1:
         print("\nSuggesting 1 file  (after 2nd pass):")
@@ -553,10 +649,10 @@ createFolders(newParentDir)
 
 
 # Ask if the user would like to create files and function headers
-print("\nWould you like to create files and function headers with these results?")
+print("\nWould you like to create files and function headers with these results? (y/n)")
 print('These will be created in "{}"'.format(newParentDir))
 if not userConfirms():
-    exit(0)
+    sys.exit(0)
 
 
 # Check for existing files
@@ -578,11 +674,11 @@ for i, functionList in enumerate(fileList, start=1):
 # Prompt to overwrite existing files
 if allExist:
     print("\nThe suggested files already exist.")
-    print("Would you like to overwrite them?")
+    print("Would you like to overwrite them? (y/n)")
     overwrite = userConfirms()
 elif someExist:
     print("\nSome of the suggested files already exist.")
-    print("Would you like to overwrite these?")
+    print("Would you like to overwrite these? (y/n)")
     print("")
     for line in lines:
         print(line)
@@ -600,12 +696,17 @@ while True:
     pathParts.insert(0, tail)
 
     if tail == "melee":  # The new path will start with this
+        includePath = "#include <{}.h>".format("/".join(pathParts))
         break
-includePath = "#include <{}.h>".format("/".join(pathParts))
+    elif not tail: # Failsafe; reached the drive root directory
+        print('Warning: Unable to determine an include path for headers.')
+        includePath = ""
+        break
 
 
 # Write output files
 for i, functionList in enumerate(fileList, start=1):
+    # Create the file name and path
     newFileName = filename + str(i) + ".c"
     newFilePath = os.path.join(newParentDir, newFileName)
 
@@ -615,7 +716,19 @@ for i, functionList in enumerate(fileList, start=1):
         newFilePath = os.path.join(newParentDir, newFileName)
 
     with open(newFilePath, "w") as cFile:
-        cFile.write(includePath)
+        if includePath:
+            cFile.write(includePath)
+
+        # Write out all of the floats that will be referenced 
+        # in the following functions (i.e. those from sdata2).
+        alreadyWritten = []
+        for function in functionList:
+            for label in function.uniqueLabels:
+                if label not in alreadyWritten:
+                    name, floatType, value = floatsData.get(label)
+                    cFile.write("\n// {} const {} = {};".format(floatType, name, value))
+                    alreadyWritten.append(label)
+        cFile.write("\n")
 
         # Write headers for each function
         for function in functionList:
@@ -630,11 +743,8 @@ for i, functionList in enumerate(fileList, start=1):
             cFile.write("\n// ")  # Placeholder line for scratch link
 
             # Write the float literals this function references
-            uniqueSamples = set()
-            for label in function.labels:
-                if label not in uniqueSamples:
-                    name, floatType, value = floatsData.get(label)
-                    cFile.write("\n// {} ({}: {})".format(name, floatType, value))
-                    uniqueSamples.add(label)
+            for label in function.uniqueLabels:
+                name, floatType, value = floatsData.get(label)
+                cFile.write("\n// {} ({}: {})".format(name, floatType, value))
 
 print("\nFile templates created.")
