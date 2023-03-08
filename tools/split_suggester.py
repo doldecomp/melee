@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Created by Daniel R. Cappel ("DRGN")
 # Version 1.2
 #
@@ -34,11 +35,6 @@ import time
 from collections import OrderedDict
 
 debugging = False
-
-if sys.version_info[0] == 3:
-    runningPython3 = True
-else:
-    runningPython3 = False
 
 # Parse command line arguments
 # Expecting the file to split and [optionally] a map file
