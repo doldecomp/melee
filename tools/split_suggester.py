@@ -37,6 +37,12 @@ from collections import OrderedDict
 Version = "1.2.1"
 
 
+class ProgramError(RuntimeError):
+    def __init__(self, message: str, error_code: int):
+        super().__init__(message)
+        self.error_code = error_code
+
+
 class Function(object):
     def __init__(self, name):
         self.name = name
@@ -180,8 +186,8 @@ def parseArguments():
         args = parser.parse_args()
 
     except Exception as err:
-        print("Encountered an error while parsing command-line arguments; {err}")
-        sys.exit(1)
+        message = "Encountered an error while parsing command-line arguments."
+        raise ProgramError(message, 1) from err
 
     return args
 
@@ -523,11 +529,9 @@ def main(args):
 
     # Sanity checks
     if ".sdata2" not in fileSections:
-        print("Unable to find the .sdata2 section of the file!")
-        sys.exit(2)
+        raise ProgramError("Unable to find the .sdata2 section of the file!", 2)
     elif not floatsData:
-        print("Unable to parse floats data from sdata2!")
-        sys.exit(3)
+        raise ProgramError("Unable to parse floats data from sdata2!", 3)
 
     # Account for alignment padding in byte usage totals
     for section, byteTotal in list(fileSections.items())[:1]:  # Skips last section!
@@ -750,7 +754,7 @@ def main(args):
 
     # Done, if not wanting the template files
     if args.debug or args.consoleOnly:
-        sys.exit(0)
+        return
 
     # Determine (and create) a directory to create the new files in
     newParentDir = parentDir.replace("\\asm\\", "\\src\\")
@@ -765,7 +769,7 @@ def main(args):
         'These will be created in "{}"'.format(newParentDir)
     )
     if not userConfirms():
-        sys.exit(0)
+        return
 
     # Check for existing files
     allExist = True
@@ -865,8 +869,14 @@ def main(args):
 
 
 if __name__ == "__main__":
-    # Parse command line arguments
     args = parseArguments()
 
-    # Run the script
-    main(args)
+    try:
+        main(args)
+        exit(0)
+    except ProgramError as err:
+        message: str
+        code: int
+        message, code = err.args
+        print(message, file=sys.stderr)
+        exit(code)
