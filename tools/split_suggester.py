@@ -37,24 +37,6 @@ from collections import OrderedDict
 
 Version = '1.2.1'
 
-# Tracking for which section is being parsed
-fileSections = OrderedDict([])  # Key=sectionName, value=sectionSize
-currentSection = ""
-uncertainBytecounts = set()
-
-# For function processing
-functionEndLikely = True
-functionEndCertain = False
-floatsData = OrderedDict([])
-currentFunction = None
-functions = []
-
-# For sData processing
-firstValueProcessed = False
-floatTypes = {}
-susPadding = []
-lastLabel = ""
-
 
 class Function(object):
     def __init__(self, name):
@@ -153,29 +135,6 @@ def grammarfyList(theList):
         return ", ".join(theList[:-1]) + ", and " + str(theList[-1])
 
 
-def parseMapFile( mapFilePath ):
-    """ Opens and reads the given .map file to parse out function names. 
-        Returns a dictionary of the form key=functionStartAddress, value=functionName """
-
-    mapNames = {}
-
-    with open(mapFilePath, "r") as mapFile:
-        for line in mapFile:
-            line = line.strip()
-            if not line or line.startswith("."):
-                continue
-
-            try:
-                lineParts = line.split()
-                funcStart = lineParts[0].upper()
-                funcName = lineParts[-1]
-                mapNames[funcStart] = funcName
-            except:
-                print(f'Unable to parse map file line: "{line}"')
-
-    return mapNames
-
-
 def parseArguments():
     try:
         parser = argparse.ArgumentParser( description=
@@ -207,15 +166,49 @@ def parseArguments():
     return args
 
 
-if __name__ == "__main__":
-    # Parse command line arguments
-    args = parseArguments()
+def parseMapFile( mapFilePath ):
+    """ Opens and reads the given .map file to parse out function names. 
+        Returns a dictionary of the form key=functionStartAddress, value=functionName """
 
-    # Parse the map file for function names
-    if args.mapFile:
-        mapNames = parseMapFile(args.mapFile)
-    else:
-        mapNames = {}
+    global mapNames
+    mapNames = {}
+
+    with open(mapFilePath, "r") as mapFile:
+        for line in mapFile:
+            line = line.strip()
+            if not line or line.startswith("."):
+                continue
+
+            try:
+                lineParts = line.split()
+                funcStart = lineParts[0].upper()
+                funcName = lineParts[-1]
+                mapNames[funcStart] = funcName
+            except:
+                print(f'Unable to parse map file line: "{line}"')
+
+    return mapNames
+
+
+def parseAssemblyFile( args ):
+    
+    # Tracking for which section is being parsed
+    fileSections = OrderedDict([])  # Key=sectionName, value=sectionSize
+    currentSection = ""
+    uncertainBytecounts = set()
+
+    # For function processing
+    functionEndLikely = True
+    functionEndCertain = False
+    floatsData = OrderedDict([])
+    currentFunction = None
+    functions = []
+
+    # For sData processing
+    firstValueProcessed = False
+    floatTypes = {}
+    susPadding = []
+    lastLabel = ""
 
     # Open the file to be split and parse its contents
     with open(args.asmFile, "r") as sourceFile:
@@ -413,6 +406,67 @@ if __name__ == "__main__":
                 fileSections[currentSection] += 4  # Can these be single bytes or halfwords?
                 uncertainBytecounts.add(currentSection)
 
+    return functions, floatsData, floatTypes, fileSections, uncertainBytecounts, susPadding
+
+
+def printResults( functions, floatTypes, fileSections, uncertainBytecounts, fileList, floatsData, filename, ext ):
+    
+    # Print total functions and floats, and byte length totals for each section
+    print(f"  Total functions:            {len(functions)}\n"
+          f"  Total floats (in sdata2):   {len(floatTypes)}")
+    for section, byteTotal in fileSections.items():
+        sectionName = section + " section:"
+        print("  {:28}0x{:X} bytes".format(sectionName, byteTotal))
+    if uncertainBytecounts:
+        if len(uncertainBytecounts) == 1:
+            print(
+                "(The bytecount for "
+                + next(iter(uncertainBytecounts))
+                + " is uncertain, because it contains ints of unknown size.)"
+            )
+        else:
+            print(
+                "(The bytecounts for "
+                + grammarfyList(uncertainBytecounts)
+                + " are uncertain, because they contain ints of unknown size.)"
+            )
+
+    if mapNames:
+        print("\n\t(Function names found in the map file are shown to the right.)")
+
+    fileCount = len(fileList)
+    if args.debug:
+        print(f"\nAll floats data:\n{floatsData}\n\n"
+              f"All float types:\n{floatTypes}\n")
+
+        if fileCount == 1:
+            print("\nSuggesting 1 file  (after 2nd pass):")
+        else:
+            print("\nSuggesting {} files  (after 2nd pass):".format(fileCount))
+    else:
+        if fileCount == 1:
+            print("\nSuggesting 1 file:")
+        else:
+            print("\nSuggesting {} files:".format(fileCount))
+    for i, functionList in enumerate(fileList, start=1):
+        newFileName = filename + str(i) + ext
+        print("\n\t{}  |  {} functions".format(newFileName, len(functionList)))
+        for func in functionList:
+            if func.mapName:
+                print("\t\t{}\t\t({})".format(func.name, func.mapName))
+            else:
+                print("\t\t" + func.name)
+
+
+def main( args ):
+    # Parse the map file for function names
+    if args.mapFile:
+        mapNames = parseMapFile(args.mapFile)
+    else:
+        mapNames = {}
+
+    # Parse the assembly file for ASM functions and literals
+    functions, floatsData, floatTypes, fileSections, uncertainBytecounts, susPadding = parseAssemblyFile( args )
 
     # Sanity checks
     if ".sdata2" not in fileSections:
@@ -422,18 +476,15 @@ if __name__ == "__main__":
         print("Unable to parse floats data from sdata2!")
         sys.exit(3)
 
-
     # Account for alignment padding in byte usage totals
     for section, byteTotal in list(fileSections.items())[:1]:  # Skips last section!
         fileSections[section] = align(byteTotal, 8)
-
 
     # Set the last function's end address (the rest are set in the loop above)
     lastCodeLine = functions[-1].lines[-1]
     lineParts = lastCodeLine.split()
     lineAddress = int(lineParts[1], 16)
     functions[-1].end = "{:X}".format(lineAddress + 4)
-
 
     # Analyze padding among literals to look for file breaks
     paddingBreaks = []
@@ -455,11 +506,9 @@ if __name__ == "__main__":
     elif args.debug:
         print("No suspicious padding.")
 
-
     # Remove leading 'None' in functions list and get all function names
     functions = functions[1:]
     functionNames = [func.name for func in functions]
-
 
     """     Separate functions - Pass 1
 
@@ -533,12 +582,10 @@ if __name__ == "__main__":
             # Add the float data collected for this function to those used in this file
             labelsUsed.update(floatsInThisFunction)
 
-
     # Parse the given file for directory, filename, and extension
     parentDir = os.path.dirname(args.asmFile)
     filename = os.path.basename(args.asmFile)  # Includes extension
     filename, ext = os.path.splitext(filename)
-
 
     if args.debug:  # Print results so far
         print("\nSuggesting {} files (after 1st pass):".format(len(fileList)))
@@ -632,51 +679,8 @@ if __name__ == "__main__":
 
         currentFileIndex -= 1
 
-
-    # Print results
-    print(f"  Total functions:            {len(functions)}\n"
-          f"  Total floats (in sdata2):   {len(floatTypes)}")
-    for section, byteTotal in fileSections.items():
-        sectionName = section + " section:"
-        print("  {:28}0x{:X} bytes".format(sectionName, byteTotal))
-    if uncertainBytecounts:
-        if len(uncertainBytecounts) == 1:
-            print(
-                "(The bytecount for "
-                + next(iter(uncertainBytecounts))
-                + " is uncertain, because it contains ints of unknown size.)"
-            )
-        else:
-            print(
-                "(The bytecounts for "
-                + grammarfyList(uncertainBytecounts)
-                + " are uncertain, because they contain ints of unknown size.)"
-            )
-
-    if mapNames:
-        print("\n\t(Function names found in the map file are shown to the right.)")
-    fileCount = len(fileList)
-    if args.debug:
-        print(f"\nAll floats data:\n{floatsData}\n\n"
-              f"All float types:\n{floatTypes}\n")
-
-        if fileCount == 1:
-            print("\nSuggesting 1 file  (after 2nd pass):")
-        else:
-            print("\nSuggesting {} files  (after 2nd pass):".format(fileCount))
-    else:
-        if fileCount == 1:
-            print("\nSuggesting 1 file:")
-        else:
-            print("\nSuggesting {} files:".format(fileCount))
-    for i, functionList in enumerate(fileList, start=1):
-        newFileName = filename + str(i) + ext
-        print("\n\t{}  |  {} functions".format(newFileName, len(functionList)))
-        for func in functionList:
-            if func.mapName:
-                print("\t\t{}\t\t({})".format(func.name, func.mapName))
-            else:
-                print("\t\t" + func.name)
+    # Output findings to the console
+    printResults( functions, floatTypes, fileSections, uncertainBytecounts, fileList, floatsData, filename, ext )
 
     # Done, if not wanting the template files
     if args.debug or args.consoleOnly:
@@ -784,3 +788,11 @@ if __name__ == "__main__":
                     cFile.write("\n// {} ({}: {})".format(name, floatType, value))
 
     print("\nFile templates created.")
+
+
+if __name__ == "__main__":
+    # Parse command line arguments
+    args = parseArguments()
+
+    # Run the script
+    main( args )
