@@ -32,10 +32,9 @@ import os
 import struct
 import sys
 import time
-
 from collections import OrderedDict
 
-Version = '1.2.1'
+Version = "1.2.1"
 
 
 class Function(object):
@@ -137,25 +136,46 @@ def grammarfyList(theList):
 
 def parseArguments():
     try:
-        parser = argparse.ArgumentParser( description=
-            """ Analyzes float constants used within the given ASM (.s) file
+        parser = argparse.ArgumentParser(
+            description=""" Analyzes float constants used within the given ASM (.s) file
                 to determine file boundaries. This considers duplicate float
                 usage, calls that a function makes to other functions within
                 the source file, and padding between single-precision floats.
 
                 This will also offer to create the new source (.c) files for
                 the user, with function headers including some function info. """,
-            exit_on_error=False # Currently bugged in argparse, I think
+            exit_on_error=False,  # Currently bugged in argparse, I think
         )
 
-        parser.add_argument( "-s", "--asmFile", nargs='?', required=True, help="Provide a filepath for the assembly file you want to split." )
-        parser.add_argument( "-m", "--mapFile", nargs='?', help="You may provide a filepath for a .map file if you'd like to check for "
-                                                                "known function names. If a function has a good name in the map file "
-                                                                "(i.e. not starting with 'zz', and ending with '_') then it will be included "
-                                                                "in console output as well as its header in the generated .c file templates." )
-        parser.add_argument( "-d", "--debug", action="store_true", help="Use this flag to give higher verbosity in console printouts; useful for debugging this program." )
-        parser.add_argument( "-c", "--consoleOnly", action="store_true", help="Console display only; prevents creation of the .c file templates." )
-        parser.add_argument( "-v", "--version", action="version", version=Version )
+        parser.add_argument(
+            "-s",
+            "--asmFile",
+            nargs="?",
+            required=True,
+            help="Provide a filepath for the assembly file you want to split.",
+        )
+        parser.add_argument(
+            "-m",
+            "--mapFile",
+            nargs="?",
+            help="You may provide a filepath for a .map file if you'd like to check for "
+            "known function names. If a function has a good name in the map file "
+            "(i.e. not starting with 'zz', and ending with '_') then it will be included "
+            "in console output as well as its header in the generated .c file templates.",
+        )
+        parser.add_argument(
+            "-d",
+            "--debug",
+            action="store_true",
+            help="Use this flag to give higher verbosity in console printouts; useful for debugging this program.",
+        )
+        parser.add_argument(
+            "-c",
+            "--consoleOnly",
+            action="store_true",
+            help="Console display only; prevents creation of the .c file templates.",
+        )
+        parser.add_argument("-v", "--version", action="version", version=Version)
 
         args = parser.parse_args()
 
@@ -166,9 +186,9 @@ def parseArguments():
     return args
 
 
-def parseMapFile( mapFilePath ):
-    """ Opens and reads the given .map file to parse out function names. 
-        Returns a dictionary of the form key=functionStartAddress, value=functionName """
+def parseMapFile(mapFilePath):
+    """Opens and reads the given .map file to parse out function names.
+    Returns a dictionary of the form key=functionStartAddress, value=functionName"""
 
     global mapNames
     mapNames = {}
@@ -190,8 +210,7 @@ def parseMapFile( mapFilePath ):
     return mapNames
 
 
-def parseAssemblyFile( args ):
-    
+def parseAssemblyFile(args):
     # Tracking for which section is being parsed
     fileSections = OrderedDict([])  # Key=sectionName, value=sectionSize
     currentSection = ""
@@ -272,7 +291,8 @@ def parseAssemblyFile( args ):
                         floatType = floatTypes.get(lastLabel)
                         if not floatType:
                             print(
-                                "Warning! Unable to determine a float type for " + lastLabel
+                                "Warning! Unable to determine a float type for "
+                                + lastLabel
                             )
                             continue
 
@@ -295,7 +315,9 @@ def parseAssemblyFile( args ):
                                 )
 
                         else:  # Handling for an undetermined .4byte
-                            valueBytes = bytearray.fromhex(stringValue.replace("0x", ""))
+                            valueBytes = bytearray.fromhex(
+                                stringValue.replace("0x", "")
+                            )
 
                             if floatType == "f32":
                                 value = struct.unpack(">f", valueBytes)[0]
@@ -313,7 +335,9 @@ def parseAssemblyFile( args ):
                     # Get the type that this script found
                     floatType = floatTypes.get(lastLabel)
                     if not floatType:
-                        print("Warning! Unable to determine a float type for " + lastLabel)
+                        print(
+                            "Warning! Unable to determine a float type for " + lastLabel
+                        )
                         continue
 
                     # Store this literal as a double or a single
@@ -379,8 +403,10 @@ def parseAssemblyFile( args ):
                                 if label in asm and asm.startswith("b"):
                                     functionEndLikely = False
                                     if args.debug:
-                                        print(f'Discredited function end on line "{line}",\n'
-                                              f'considering line "{funcLine}".')
+                                        print(
+                                            f'Discredited function end on line "{line}",\n'
+                                            f'considering line "{funcLine}".'
+                                        )
                                     break
 
                     if functionEndLikely or functionEndCertain:
@@ -403,17 +429,36 @@ def parseAssemblyFile( args ):
                 skipAmount = int(line.split()[1], 16)
                 fileSections[currentSection] += skipAmount
             elif line.startswith(".int"):
-                fileSections[currentSection] += 4  # Can these be single bytes or halfwords?
+                fileSections[
+                    currentSection
+                ] += 4  # Can these be single bytes or halfwords?
                 uncertainBytecounts.add(currentSection)
 
-    return functions, floatsData, floatTypes, fileSections, uncertainBytecounts, susPadding
+    return (
+        functions,
+        floatsData,
+        floatTypes,
+        fileSections,
+        uncertainBytecounts,
+        susPadding,
+    )
 
 
-def printResults( functions, floatTypes, fileSections, uncertainBytecounts, fileList, floatsData, filename, ext ):
-    
+def printResults(
+    functions,
+    floatTypes,
+    fileSections,
+    uncertainBytecounts,
+    fileList,
+    floatsData,
+    filename,
+    ext,
+):
     # Print total functions and floats, and byte length totals for each section
-    print(f"  Total functions:            {len(functions)}\n"
-          f"  Total floats (in sdata2):   {len(floatTypes)}")
+    print(
+        f"  Total functions:            {len(functions)}\n"
+        f"  Total floats (in sdata2):   {len(floatTypes)}"
+    )
     for section, byteTotal in fileSections.items():
         sectionName = section + " section:"
         print("  {:28}0x{:X} bytes".format(sectionName, byteTotal))
@@ -436,8 +481,9 @@ def printResults( functions, floatTypes, fileSections, uncertainBytecounts, file
 
     fileCount = len(fileList)
     if args.debug:
-        print(f"\nAll floats data:\n{floatsData}\n\n"
-              f"All float types:\n{floatTypes}\n")
+        print(
+            f"\nAll floats data:\n{floatsData}\n\n" f"All float types:\n{floatTypes}\n"
+        )
 
         if fileCount == 1:
             print("\nSuggesting 1 file  (after 2nd pass):")
@@ -458,7 +504,7 @@ def printResults( functions, floatTypes, fileSections, uncertainBytecounts, file
                 print("\t\t" + func.name)
 
 
-def main( args ):
+def main(args):
     # Parse the map file for function names
     if args.mapFile:
         mapNames = parseMapFile(args.mapFile)
@@ -466,7 +512,14 @@ def main( args ):
         mapNames = {}
 
     # Parse the assembly file for ASM functions and literals
-    functions, floatsData, floatTypes, fileSections, uncertainBytecounts, susPadding = parseAssemblyFile( args )
+    (
+        functions,
+        floatsData,
+        floatTypes,
+        fileSections,
+        uncertainBytecounts,
+        susPadding,
+    ) = parseAssemblyFile(args)
 
     # Sanity checks
     if ".sdata2" not in fileSections:
@@ -563,7 +616,9 @@ def main( args ):
             if not moveToNewFile:
                 if label in paddingBreaks:
                     if args.debug:
-                        print("Moving {} to a new file due to padding.".format(func.name))
+                        print(
+                            "Moving {} to a new file due to padding.".format(func.name)
+                        )
                     moveToNewFile = True
                     paddingBreaks.remove(label)
 
@@ -595,7 +650,6 @@ def main( args ):
 
             for func in functionList:
                 print("\t\t" + func.name)
-
 
     """     Separate functions - Pass 2
 
@@ -642,7 +696,10 @@ def main( args ):
                     for functionIndex, funct in enumerate(fileList[previousFileIndex]):
                         if funct.name in requiredFunctions:
                             # Remember the earliest file index and function index
-                            if earliestFunction == -1 or functionIndex < earliestFunction:
+                            if (
+                                earliestFunction == -1
+                                or functionIndex < earliestFunction
+                            ):
                                 if args.debug:
                                     print(
                                         " -> setting earliest funct to "
@@ -680,7 +737,16 @@ def main( args ):
         currentFileIndex -= 1
 
     # Output findings to the console
-    printResults( functions, floatTypes, fileSections, uncertainBytecounts, fileList, floatsData, filename, ext )
+    printResults(
+        functions,
+        floatTypes,
+        fileSections,
+        uncertainBytecounts,
+        fileList,
+        floatsData,
+        filename,
+        ext,
+    )
 
     # Done, if not wanting the template files
     if args.debug or args.consoleOnly:
@@ -694,8 +760,10 @@ def main( args ):
     createFolders(newParentDir)
 
     # Ask if the user would like to create files and function headers
-    print("\nWould you like to create files and function headers with these results? (y/n)\n"
-          'These will be created in "{}"'.format(newParentDir))
+    print(
+        "\nWould you like to create files and function headers with these results? (y/n)\n"
+        'These will be created in "{}"'.format(newParentDir)
+    )
     if not userConfirms():
         sys.exit(0)
 
@@ -716,12 +784,16 @@ def main( args ):
 
     # Prompt to overwrite existing files
     if allExist:
-        print("\nThe suggested files already exist.\n"
-              "Would you like to overwrite them? (y/n)")
+        print(
+            "\nThe suggested files already exist.\n"
+            "Would you like to overwrite them? (y/n)"
+        )
         overwrite = userConfirms()
     elif someExist:
-        print("\nSome of the suggested files already exist.\n"
-              "Would you like to overwrite these? (y/n)\n")
+        print(
+            "\nSome of the suggested files already exist.\n"
+            "Would you like to overwrite these? (y/n)\n"
+        )
         for line in lines:
             print(line)
         overwrite = userConfirms()
@@ -766,7 +838,9 @@ def main( args ):
                 for label in function.uniqueLabels:
                     if label not in alreadyWritten:
                         name, floatType, value = floatsData.get(label)
-                        cFile.write("\n// {} const {} = {};".format(floatType, name, value))
+                        cFile.write(
+                            "\n// {} const {} = {};".format(floatType, name, value)
+                        )
                         alreadyWritten.append(label)
             cFile.write("\n")
 
@@ -795,4 +869,4 @@ if __name__ == "__main__":
     args = parseArguments()
 
     # Run the script
-    main( args )
+    main(args)
