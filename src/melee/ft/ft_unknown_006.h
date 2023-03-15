@@ -90,7 +90,7 @@ s32 func_8008E984(Fighter*);
 s32 func_80093694(void);
 s32 func_8009515C(HSD_GObj*);
 s32 func_800964FC(Fighter*);
-s32 func_8009EF68(HSD_GObj*);
+bool func_8009EF68(HSD_GObj*);
 s32 func_800A198C(Fighter*);
 s32 func_800CAE80(HSD_GObj*);
 s32 func_800D67C4(Fighter*);
