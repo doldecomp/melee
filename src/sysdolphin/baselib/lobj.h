@@ -80,11 +80,11 @@ typedef struct _HSD_LightAttn {
     f32 k2;
 } HSD_LightAttn;
 
-typedef struct _HSD_LObj {
+struct HSD_LObj {
     /* 0x00 - 0x04 */ HSD_Obj parent;
     /* 0x08 */ u16 flags;
     /* 0x0A */ u16 priority;
-    /* 0x0C */ struct _HSD_LObj* next;
+    /* 0x0C */ struct HSD_LObj* next;
     /* 0x10 */ GXColor color;
     /* 0x14 */ GXColor hw_color;
     /* 0x18 */ struct _HSD_WObj* position;
@@ -101,7 +101,7 @@ typedef struct _HSD_LObj {
     /* 0x50 */ GXLightObj lightobj;
     /* 0x90 */ GXLightID spec_id;
     /* 0x94 */ GXLightObj spec_lightobj;
-} HSD_LObj;
+};
 
 typedef struct _HSD_LightDesc {
     /* 0x00 */ char* class_name;
