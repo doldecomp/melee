@@ -102,7 +102,7 @@ jobs:
 
       - name: Push package
         uses: docker/build-push-action@v4
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         with:
           context: .
           file: ${{ env.CONTAINERFILE }}
@@ -197,7 +197,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push package
-        if: github.event_name == 'push'
+        if: github.event_name != 'pull_request'
         shell: bash
         run: |
           echo $(
