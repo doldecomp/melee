@@ -1,6 +1,7 @@
 /** @file
  * @todo Should be called @c OS.c.
  */
+#include "stddef.h"
 #include <dolphin/os/OSInit.h>
 
 #include <dolphin/base/PPCArch.h>
@@ -378,9 +379,10 @@ void OSExceptionInit(void)
         } else {
             // make sure the opcodes are still nop
             u32* ops = (u32*) __DBVECTOR;
-            int cb;
+            uint cb;
 
-            for (cb = 0; cb < (u32) __OSDBJUMPEND - (u32) __OSDBJUMPSTART;
+            for (cb = 0;
+                 cb < (uintptr_t) __OSDBJUMPEND - (uintptr_t) __OSDBJUMPSTART;
                  cb += sizeof(u32))
             {
                 *ops++ = NOP;
