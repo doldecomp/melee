@@ -840,53 +840,59 @@ void ftNess_SpecialHiHold_Anim(
     }
 }
 
-// 0x80118900
-// https://decomp.me/scratch/to1Tc
-void ftNess_SpecialHiEnd_Anim(
-    HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder End Animation callback
+/// Ness's grounded PK Thunder End Animation callback
+void ftNess_SpecialHiEnd_Anim(HSD_GObj* fighter_gobj)
 {
-    s32 filler[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
 }
 
-// 0x8011893C
-// https://decomp.me/scratch/TxjqG
-void ftNess_SpecialHi_Anim(HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder
-                                                   // 2 Animation callback
+/// Ness's grounded PK Thunder 2 Animation callback
+void ftNess_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 {
-    f32 temp_f1;
-    s32 ASID;
-    Fighter* fp;
-    Fighter* fighter_data2;
-    Fighter* temp_fp;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
-    temp_fp = fighter_gobj->user_data;
-    temp_fp->nessVars.SpecialHi.jibakuGFX =
-        (s32) (temp_fp->nessVars.SpecialHi.jibakuGFX + 1);
-    if ((s32) temp_fp->nessVars.SpecialHi.jibakuGFX == 1) {
-        fp = fighter_gobj->user_data;
-        ftNess_SpecialHiStopGFX(fighter_gobj);
-        ef_Spawn(0x4EF, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
-        fp->sa.ness.x224C_thunderGFX = true;
+    {
+        Fighter* temp_fp = fighter_gobj->user_data;
+        temp_fp->nessVars.SpecialHi.jibakuGFX =
+            temp_fp->nessVars.SpecialHi.jibakuGFX + 1;
+
+        if (temp_fp->nessVars.SpecialHi.jibakuGFX == 1) {
+            Fighter* fp = fighter_gobj->user_data;
+            ftNess_SpecialHiStopGFX(fighter_gobj);
+            ef_Spawn(0x4EF, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
+            fp->sa.ness.x224C_thunderGFX = true;
+        }
     }
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALHI_END,
                                            0, NULL, 0.0f, 1.0f, 0.0f);
-        fighter_data2 = fighter_gobj->user_data;
-        ASID = fighter_data2->action_id;
-        switch (ASID) {
-        case AS_NESS_SPECIALHI_START:
-        case AS_NESS_SPECIALHI_HOLD:
-        case AS_NESS_SPECIALHI_END:
-        case AS_NESS_SPECIALHI:
-        case AS_NESS_SPECIALAIRHI_START:
-        case AS_NESS_SPECIALAIRHI_HOLD:
-        case AS_NESS_SPECIALAIRHI_END:
-        case AS_NESS_SPECIALAIRHI:
-        case AS_NESS_SPECIALAIRHI_HITWALL:
-            efLib_DestroyAll(fighter_gobj);
-            fighter_data2->sa.ness.x224C_thunderGFX = false;
+        {
+            Fighter* fp = fighter_gobj->user_data;
+            enum_t asid = fp->action_id;
+
+            switch (asid) {
+            case AS_NESS_SPECIALHI_START:
+            case AS_NESS_SPECIALHI_HOLD:
+            case AS_NESS_SPECIALHI_END:
+            case AS_NESS_SPECIALHI:
+            case AS_NESS_SPECIALAIRHI_START:
+            case AS_NESS_SPECIALAIRHI_HOLD:
+            case AS_NESS_SPECIALAIRHI_END:
+            case AS_NESS_SPECIALAIRHI:
+            case AS_NESS_SPECIALAIRHI_HITWALL:
+                efLib_DestroyAll(fighter_gobj);
+                fp->sa.ness.x224C_thunderGFX = false;
+            }
         }
     }
 }
