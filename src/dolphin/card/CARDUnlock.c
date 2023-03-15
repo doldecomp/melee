@@ -219,7 +219,12 @@ s32 __CARDUnlock(s32 chan, u8 flashID[12])
     u8 fsts;
     u32 wk, wk1;
     u32 Ans1 = 0;
-    u32 Ans2 = 0;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     u32* dp;
     u8 rbuf[64];
     u32 para1A = 0;
