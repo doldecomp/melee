@@ -15,7 +15,10 @@ s32 func_80325F18(void)
 
 s32 __write_console(s32 arg0, s32 arg1, s32* arg2)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
     s32 uart_status = 0;
     if (!lbl_804D7080) {
         uart_status = InitializeUART(0xE100);
@@ -35,11 +38,15 @@ s32 __write_console(s32 arg0, s32 arg1, s32* arg2)
 
 u8 __read_console(u32 arg0, u8* buf, u32* n)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     s32 init_status = 0;
     s32 read_status;
     s32 return_status;
-    s32 bytes_to_read;
+    u32 bytes_to_read;
 
     if (lbl_804D7080 == false) {
         init_status = InitializeUART(0xE100);
@@ -53,7 +60,7 @@ u8 __read_console(u32 arg0, u8* buf, u32* n)
     bytes_to_read = *n;
     read_status = 0;
     *n = 0;
-    while (*n <= (unsigned) bytes_to_read && read_status == 0) {
+    while (*n <= bytes_to_read && read_status == 0) {
         read_status = ReadUARTN(buf, 1);
         *n += 1;
         if (*buf == '\r') {
