@@ -6,12 +6,12 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
 
-struct _UnkGeneratorStruct* func_801C96F8(s32, s8, S32Vec3*);
+struct UnkGeneratorStruct* func_801C96F8(s32, s8, S32Vec3*);
 void func_801C97DC(s32, s32, HSD_JObj*);
 void func_801C9808(s32, s32, HSD_JObj*);
-void func_801C9834(struct _UnkGeneratorStruct* arg0);
+void func_801C9834(struct UnkGeneratorStruct* arg0);
 void func_801C9854(s32);
-void func_801C9874(struct _UnkGeneratorStruct*);
+void func_801C9874(struct UnkGeneratorStruct*);
 void func_801C98A0(HSD_JObj*);
 void func_801C9908(HSD_JObj*);
 void func_801C99C0(s32, s32, HSD_JObj*, s32);

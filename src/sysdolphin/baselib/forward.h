@@ -31,6 +31,9 @@ typedef struct HSD_GObjProc HSD_GObjProc;
 typedef struct HSD_AObjDesc HSD_AObjDesc;
 typedef struct HSD_Spline HSD_Spline;
 
+/// @remarks MexTK: Particle
+typedef struct UnkGeneratorStruct UnkGeneratorStruct;
+
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);
 typedef void (*HSD_DevComCallback)(int, int, int, bool cancelflag);
 typedef void (*HSD_GObjEvent)(HSD_GObj* gobj);
