@@ -4311,7 +4311,7 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, UNK_T arg2, s32 arg3,
 {
     Vec3 sp74;
     Vec3 sp68;
-    f32* sp38;
+    f32* sp38 = NULL;
     int* sp8;
     HSD_JObj* temp_r29;
     HSD_JObj* temp_r29_2;
