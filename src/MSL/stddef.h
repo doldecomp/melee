@@ -4,9 +4,12 @@
 #define __STDDEF_H__
 
 typedef unsigned short wchar_t;
-typedef signed long ssize_t;
+typedef signed int ssize_t;
+
+/// @todo This should be <tt>unsigned int</tt>.
 typedef unsigned long size_t;
-typedef int intptr_t;
+
+typedef signed int intptr_t;
 typedef unsigned int uintptr_t;
 
 /// A null pointer
