@@ -726,11 +726,10 @@ void ftFox_SpecialLwHit_Anim(HSD_GObj* fighter_gobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
-
-// 0x800E97B4
-// https://decomp.me/scratch/A9W0B // Fox & Falco's aerial Reflector Hit
-// Animation callback
+#endif
+/// Fox & Falco's aerial Reflector Hit Animation callback
 void ftFox_SpecialAirLwHit_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
@@ -749,8 +748,9 @@ void ftFox_SpecialAirLwHit_Anim(HSD_GObj* fighter_gobj)
         fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateLoopGFX;
     }
 }
-
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 // 0x800E9844 - Fox & Falco's grounded Reflector Hit IASA callback
 void ftFox_SpecialLwHit_IASA(HSD_GObj* fighter_gobj)
