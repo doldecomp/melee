@@ -1564,8 +1564,7 @@ bool func_80269DC8(HSD_GObj* item_gobj)
 
     if (item_data->xDCE_flag.bits.b5 && item_data->ground_or_air == 1 &&
         (item_data->xDCE_flag.bits.b4 ||
-         item_data->xC54 <
-             (f32) (M_PI / 180) * (90.0f + lbl_804D6D28->x80_float[24])))
+         item_data->xC54 < (f32) M_PI / 180 * (90 + lbl_804D6D28->unk_degrees)))
     {
         if (item_data->xDCE_flag.bits.b4 == 0) {
             item_data->xC54 -= M_PI / 2;
