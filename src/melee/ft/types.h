@@ -770,7 +770,7 @@ typedef struct _ftData {
     s32 filler_x14[10];
     struct UnkFloat6_Camera* x3C;
     s32 filler_x40[2];
-    /* 0x48 */ void** x48_items;
+    /* 0x48 */ UNK_T* x48_items;
     FtCollisionData* x4C_collisionData;
     s32 filler_x50[2];
     void* x58;

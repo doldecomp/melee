@@ -63,10 +63,7 @@ void ftSeak_80110490(Fighter* fp)
 void ftSeak_80110610(HSD_GObj* fighter_gobj, s32 arg1, f32 arg2)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-
-    /// @todo This is the wrong type. #Fighter::x48_items needs to be a list of
-    ///       structs.
-    int** items = fp->x10C_ftData->x48_items;
+    UNK_T* items = fp->x10C_ftData->x48_items;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
