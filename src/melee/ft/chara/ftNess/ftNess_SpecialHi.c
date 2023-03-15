@@ -1298,15 +1298,15 @@ void ftNess_SpecialAirHiStart_Phys(HSD_GObj* fighter_gobj)
 
     if (gravity_timer != 0) {
         fp->nessVars.SpecialHi.gravityDelay = gravity_timer - 1;
-        goto block_friction;
+    } else {
+        func_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
+                      fp->x110_attr.x170_TerminalVelocity);
     }
-    func_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                  fp->x110_attr.x170_TerminalVelocity);
 
-block_friction : {
-    f32 friction = fp->x110_attr.x180_AerialFriction;
-    func_8007CE94(fp, friction);
-}
+    {
+        f32 friction = fp->x110_attr.x180_AerialFriction;
+        func_8007CE94(fp, friction);
+    }
 }
 
 // 0x80119194
@@ -1315,24 +1315,26 @@ void ftNess_SpecialAirHiHold_Phys(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Thunder Control Loop Physics
                             // callback
 {
-    s32 filler[2];
-    f32 friction;
-    s32 thunderPhysTimer;
-    Fighter* fp;
-    ftNessAttributes* ness_attr;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
-    fp = fighter_gobj->user_data;
-    thunderPhysTimer = fp->nessVars.SpecialHi.gravityDelay;
-    ness_attr = fp->x2D4_specialAttributes;
-    if (thunderPhysTimer != 0) {
-        fp->nessVars.SpecialHi.gravityDelay = thunderPhysTimer - 1;
-        goto block_friction;
+    Fighter* fp = fighter_gobj->user_data;
+    int gravity_timer = fp->nessVars.SpecialHi.gravityDelay;
+    ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
+
+    if (gravity_timer != 0) {
+        fp->nessVars.SpecialHi.gravityDelay = gravity_timer - 1;
+    } else {
+        func_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
+                      fp->x110_attr.x170_TerminalVelocity);
     }
-    func_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                  fp->x110_attr.x170_TerminalVelocity);
-block_friction:
-    friction = fp->x110_attr.x180_AerialFriction;
-    func_8007CE94(fp, friction);
+
+    {
+        f32 friction = fp->x110_attr.x180_AerialFriction;
+        func_8007CE94(fp, friction);
+    }
 }
 
 // 0x801191F4
