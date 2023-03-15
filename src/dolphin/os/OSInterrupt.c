@@ -7,6 +7,7 @@
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSThread.h>
+#include <MetroTRK/intrinsics.h>
 #include <placeholder.h>
 #include <string.h>
 
