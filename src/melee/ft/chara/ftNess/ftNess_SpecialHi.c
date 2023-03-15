@@ -1284,30 +1284,29 @@ void ftNess_SpecialHi_Phys(HSD_GObj* fighter_gobj)
             1.5707963705062866f);
 }
 
-// 0x80119134
-// https://decomp.me/scratch/s2U1l
-void ftNess_SpecialAirHiStart_Phys(
-    HSD_GObj* fighter_gobj) // Ness's aerial PK Thunder Start Physics callback
+/// Ness's aerial PK Thunder Start Physics callback
+void ftNess_SpecialAirHiStart_Phys(HSD_GObj* fighter_gobj)
 {
-    s32 filler[2];
-    f32 friction;
-    s32 thunderPhysTimer;
-    Fighter* fp;
-    ftNessAttributes* ness_attr;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
-    fp = fighter_gobj->user_data;
-    thunderPhysTimer = fp->nessVars.SpecialHi.gravityDelay;
-    ness_attr = fp->x2D4_specialAttributes;
-    if (thunderPhysTimer != 0) {
-        fp->nessVars.SpecialHi.gravityDelay = thunderPhysTimer - 1;
+    Fighter* fp = fighter_gobj->user_data;
+    int gravity_timer = fp->nessVars.SpecialHi.gravityDelay;
+    ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
+
+    if (gravity_timer != 0) {
+        fp->nessVars.SpecialHi.gravityDelay = gravity_timer - 1;
         goto block_friction;
     }
     func_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
                   fp->x110_attr.x170_TerminalVelocity);
 
-block_friction:
-    friction = fp->x110_attr.x180_AerialFriction;
+block_friction : {
+    f32 friction = fp->x110_attr.x180_AerialFriction;
     func_8007CE94(fp, friction);
+}
 }
 
 // 0x80119194
