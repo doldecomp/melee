@@ -1247,41 +1247,39 @@ void ftNess_SpecialHi_Phys(HSD_GObj* fighter_gobj)
     u8 unused[16];
 #endif
 
-    f32 temp_f2;
-    f32 temp_f3;
-    Fighter* fp;
-    Fighter* temp_fp;
-    ftNessAttributes* ness_attr;
+    Fighter* fp0 = fighter_gobj->user_data;
+    f32 ground_vel = fp0->xEC_ground_vel;
+    f32 vel_y = fp0->x80_self_vel.y;
+    ftNessAttributes* ness_attr = fp0->x2D4_specialAttributes;
 
-    temp_fp = fighter_gobj->user_data;
-    temp_f2 = temp_fp->xEC_ground_vel;
-    temp_f3 = temp_fp->x80_self_vel.y;
-    ness_attr = temp_fp->x2D4_specialAttributes;
-    temp_fp->xEC_ground_vel =
-        (f32) -
-        ((ness_attr->x5C_PK_THUNDER_2_DECELERATION_RATE * temp_fp->facing_dir) -
-         temp_f2);
-    if (1.0f == temp_fp->facing_dir) {
-        if (temp_fp->xEC_ground_vel <= vel_epsilon) {
-            temp_fp->xEC_ground_vel = temp_f2;
-        }
-    } else if (temp_fp->xEC_ground_vel >= -vel_epsilon) {
-        temp_fp->xEC_ground_vel = temp_f2;
+    fp0->xEC_ground_vel =
+        -(ness_attr->x5C_PK_THUNDER_2_DECELERATION_RATE * fp0->facing_dir -
+          ground_vel);
+
+    if (fp0->facing_dir == +1) {
+        if (fp0->xEC_ground_vel <= vel_epsilon)
+            fp0->xEC_ground_vel = ground_vel;
+    } else if (fp0->xEC_ground_vel >= -vel_epsilon) {
+        fp0->xEC_ground_vel = ground_vel;
     }
-    if (1.0f == temp_fp->nessVars.SpecialHi.facingDir) {
-        if (temp_fp->x80_self_vel.y <= vel_epsilon) {
-            temp_fp->x80_self_vel.y = temp_f3;
-        }
-    } else if (temp_fp->x80_self_vel.y >= -vel_epsilon) {
-        temp_fp->x80_self_vel.y = temp_f3;
+
+    if (fp0->nessVars.SpecialHi.facingDir == +1) {
+        if (fp0->x80_self_vel.y <= vel_epsilon)
+            fp0->x80_self_vel.y = vel_y;
+    } else if (fp0->x80_self_vel.y >= -vel_epsilon) {
+        fp0->x80_self_vel.y = vel_y;
     }
-    temp_fp->x2374_Vec3 = temp_fp->x80_self_vel;
+
+    fp0->x2374_Vec3 = fp0->x80_self_vel;
     func_8007CB74(fighter_gobj);
-    fp = fighter_gobj->user_data;
-    func_8007592C(
-        fp, 0,
-        (fp->facing_dir * atan2f(fp->x80_self_vel.x, fp->x80_self_vel.y)) -
-            1.5707963705062866f);
+
+    {
+        Fighter* fp = fighter_gobj->user_data;
+        func_8007592C(fp, 0,
+                      fp->facing_dir *
+                              atan2f(fp->x80_self_vel.x, fp->x80_self_vel.y) -
+                          (f32) M_PI_2);
+    }
 }
 
 /// Ness's aerial PK Thunder Start Physics callback
