@@ -1710,12 +1710,14 @@ void func_8007F9B4(HSD_GObj* gobj)
 
 void func_8007FA00(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    Vec3* vec;
-    u32 unused[2];
+    Fighter* fp = gobj->user_data;
+    Vec3* vec = &fp->x110_attr.x224;
 
-    fp = gobj->user_data;
-    vec = &fp->x110_attr.x224;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     func_80294EB0(fp->x197C, &vec[1], &vec[0]);
     func_80294E78(fp->x197C, fp->x34_scale.y * vec[2].x);
 }
