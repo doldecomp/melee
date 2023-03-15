@@ -737,6 +737,7 @@ bool func_8015D984(u32 arg0)
         func_8015DA40(arg0);
         return true;
     }
+
     return false;
 }
 #endif
