@@ -1684,16 +1684,16 @@ u8 Player_GetFlagsAEBit1(s32 slot)
     return bit1;
 }
 
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wreturn-type"
-#endif
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
     player_slots[slot].flagsAE.b1 = bit1;
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreturn-type"
+#endif
 }
 #ifdef __clang__
 #pragma clang diagnostic pop
