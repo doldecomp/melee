@@ -405,7 +405,7 @@ f32 func_8026B684(Vec3* pos)
  */
 f32 func_8026B6A8(Vec3* pos, HSD_GObj* arg1)
 {
-    func_800864A8(pos, arg1);
+    return func_800864A8(pos, arg1);
 }
 
 bool func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item?
