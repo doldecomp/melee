@@ -48,6 +48,8 @@ s32 __CARDSeek(CARDFileInfo* fileInfo, s32 length, s32 offset,
         }
     }
     fat = __CARDGetFatBlock(card);
+
+    /// @todo #CARDFileInfo::offset seems like #size_t.
     while ((unsigned) fileInfo->offset < TRUNC(offset, card->sectorSize)) {
         fileInfo->offset += card->sectorSize;
         fileInfo->iBlock = fat[fileInfo->iBlock];
