@@ -129,7 +129,7 @@ fn process_index(
     result
 }
 
-fn process_glob<'p>(
+fn process_glob(
     index: CXIndex,
     args: *const *const i8,
     n_args: i32,
@@ -144,7 +144,7 @@ fn process_glob<'p>(
         })
 }
 
-fn process_tu<'p>(
+fn process_tu(
     path_buf: PathBuf,
     args: *const *const i8,
     n_args: i32,
@@ -179,7 +179,7 @@ fn process_tu<'p>(
     result
 }
 
-fn process_diagnostics<'p>(
+fn process_diagnostics(
     tu: CXTranslationUnit,
     str_interner: &mut StringInterner,
     items: &mut HashSet<DiagnosticInfo>,
@@ -201,7 +201,7 @@ fn process_diagnostics<'p>(
     result
 }
 
-fn process_diagnostic<'p>(
+fn process_diagnostic(
     diagnostics: CXDiagnosticSet,
     diagnostic_idx: u32,
     str_interner: &mut StringInterner,
@@ -227,7 +227,7 @@ fn resolve_str(
         .ok_or(anyhow!("Failed resolve the symbol."))
 }
 
-fn process_info<'p>(
+fn process_info(
     diagnostic: CXDiagnostic,
     str_interner: &mut StringInterner,
 ) -> anyhow::Result<DiagnosticInfo> {
