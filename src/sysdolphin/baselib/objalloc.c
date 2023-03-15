@@ -22,7 +22,6 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
     u32 pool_end;
     u32 pool_size;
     u8* pool_start;
-    int i;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -55,11 +54,16 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
         }
         obj_heap.remain -= pool_size;
     }
-    for (i = 0; i < num - 1; i++) {
-        *(void**) (pool_start + data->size * i) =
-            (void*) (pool_start + data->size * (i + 1));
+
+    {
+        int i;
+        for (i = 0; (unsigned) i < num - 1; i++) {
+            *(void**) (pool_start + data->size * i) =
+                (void*) (pool_start + data->size * (i + 1));
+        }
+        *(void**) (pool_start + data->size * i) = data->freehead;
     }
-    *(void**) (pool_start + data->size * i) = data->freehead;
+
     data->freehead = (HSD_ObjAllocLink*) pool_start;
     data->free += num;
     return num;
