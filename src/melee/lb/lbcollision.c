@@ -7681,7 +7681,6 @@ lbl_8000AB0C:
 #pragma pop
 
 #else
-
 bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
 {
     f32 sp9C;
@@ -7711,7 +7710,7 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
     } else {
         var_r0 = 2U;
     }
-    if (var_r0 == arg1) {
+    if (var_r0 == (u32) arg1) {
         if (!(((u8) M2C_FIELD(arg0, u8*, 4) >> 7U) & 1)) {
             func_8000B1CC(arg0->bone, &arg0->offset, &arg0->pos);
             if (arg2 != NULL) {
