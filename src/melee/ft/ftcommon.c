@@ -1724,19 +1724,27 @@ void func_8007FA00(HSD_GObj* gobj)
 
 void func_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
 {
+    Fighter* fp = gobj->user_data;
     Vec3 vec;
-    Fighter* fp;
-    Fighter* fp2;
-    u32 unused[7];
 
-    fp = fp2 = gobj->user_data;
-    if (fp2->x197C != NULL) {
-        fp->x2014 = func_8026B54C(arg1);
-        func_80088148(fp, 0x117, 0x7F, 0x40);
-        func_8007EBAC(fp, 0x10, 0);
-        func_8026A8EC(arg1);
-        return;
+    /// @todo This is an inline.
+    {
+        Fighter* fp2 = fp;
+
+        /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 unused[24];
+#endif
+
+        if (fp2->x197C != NULL) {
+            fp->x2014 = func_8026B54C(arg1);
+            func_80088148(fp, 0x117, 0x7F, 0x40);
+            func_8007EBAC(fp, 0x10, 0);
+            func_8026A8EC(arg1);
+            return;
+        }
     }
+
     vec = lbl_803B74A0;
     func_8026BD0C(arg1);
     func_8026ABD8(arg1, &vec, 0);
@@ -1755,7 +1763,11 @@ void func_8007FC7C(HSD_GObj* gobj, f32 arg8)
     HSD_GObj* item_gobj;
     Fighter* fp;
     s32 sp20;
-    u32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     fp = gobj->user_data;
     sp20 = arg8 * p_ftCommonData->x704;
@@ -1794,7 +1806,11 @@ void func_8007FDA0(HSD_GObj* gobj)
     f32 temp_f1;
     Vec3* temp_r30;
     f32 phi_f31;
-    u32 unused[4];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     fp = gobj->user_data;
     temp_r30 = &fp->x110_attr.x240;
@@ -1811,7 +1827,11 @@ void func_8007FDA0(HSD_GObj* gobj)
 
 void func_8007FE84(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2, f32 arg3)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter* fp = gobj->user_data;
     fp->x1980 = item_gobj;
     fp->x2018 = arg2;
