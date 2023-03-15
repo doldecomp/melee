@@ -4797,8 +4797,8 @@ void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst)
     HitVictim* var_r7;
     HitVictim* var_r8;
     HitVictim* var_r9;
-    s32 temp_r0;
-    s32 temp_r0_2;
+    UNK_T temp_r0;
+    UNK_T temp_r0_2;
     s32 var_ctr;
 
     dst->victims_1[0].victim = src->victims_1[0].victim;
@@ -5015,7 +5015,7 @@ loop_1:
             } else if (arg1 < 9) {
             block_9:
                 arg0->victims_1[var_r7].x4 =
-                    (int) (s8) ((u16) M2C_FIELD(arg0, u16*, 0x40) >> 4U);
+                    (UNK_T) (M2C_FIELD(arg0, u16*, 0x40) >> 4U);
             }
         }
         return 0;
@@ -5074,7 +5074,7 @@ loop_1:
             if (arg1 < 9) {
             block_30:
                 arg0->victims_1[var_r0].x4 =
-                    (int) (s8) ((u16) M2C_FIELD(arg0, u16*, 0x40) >> 4U);
+                    (UNK_T) (M2C_FIELD(arg0, u16*, 0x40) >> 4U);
             } else {
                 goto block_31;
             }
