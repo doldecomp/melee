@@ -1,4 +1,3 @@
-
 #include <dolphin/os/os.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
@@ -146,14 +145,13 @@ void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
             break;
         default:
             OSReport("couldn't get walk frame\n");
-            __assert("ftwalkcommon.c", 0x47U, "0");
-            break;
+            HSD_ASSERT(71, 0);
         }
         float_result = func_8006F484(fighter_gobj);
         init_animFrame = fp->x894_currentAnimFrame;
         quotient = init_animFrame / float_result;
         adjusted_animFrame =
-            fp->x894_currentAnimFrame - (float_result * quotient);
+            fp->x894_currentAnimFrame - float_result * quotient;
         final_animFrame = var_f31 * (adjusted_animFrame / float_result);
         arg_cb(fighter_gobj, final_animFrame);
     }
