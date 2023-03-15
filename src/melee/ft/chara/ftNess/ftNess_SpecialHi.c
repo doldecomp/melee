@@ -1691,16 +1691,25 @@ void ftNess_SpecialAirHiEnd_Coll(
     }
 }
 
-void ftNess_SpecialAirHi_Coll(
-    HSD_GObj* fighter_gobj) // Ness's aerial PK Thunder 2 Collision callback
+/// Ness's aerial PK Thunder 2 Collision callback
+void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* new_var;
 
-    f32 unkFloat;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused0[4];
+#endif
+
     Vec3 spC4;
     Vec3 spB8;
     Vec3 spAC;
-    s32 topfiller[35];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused1[140];
+#endif
+
     s32 ledgeGrabDir;
     f32 temp_f0_2;
     f32 temp_f0_3;
@@ -1714,9 +1723,14 @@ void ftNess_SpecialAirHi_Coll(
     f32 temp_f1_2;
     f32 temp_f1_5;
     f32 temp_f1_8;
-    f32 temp_f1_9;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused2[4];
+#endif
+
     f32 DriftMax;
-    s32 ASID;
+    s32 asid;
     s32 ecbFlag;
     ftNessAttributes* ness_attr;
     Fighter* fighter_data2;
@@ -1725,8 +1739,12 @@ void ftNess_SpecialAirHi_Coll(
     Fighter* fighter_data5;
     Fighter* fighter_r31;
     f32 phi_f0;
-    f32 phi_f0_2;
-    f32 phi_f0_3;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused3[8];
+#endif
+
     fighter_r31 = fighter_gobj->user_data;
     ness_attr = fighter_r31->x2D4_specialAttributes;
     fighter_r31->x80_self_vel = fighter_r31->x2374_Vec3;
@@ -1746,40 +1764,34 @@ void ftNess_SpecialAirHi_Coll(
             fighter_r31->x80_self_vel.y = 0.0f;
             fighter_r31->x80_self_vel.x = 0.0f;
             fighter_data2 = fighter_gobj->user_data;
-            ASID = fighter_data2->action_id;
-            switch (ASID) {
+            asid = fighter_data2->action_id;
+            switch (asid) {
             case AS_NESS_SPECIALHI_START:
-
             case AS_NESS_SPECIALHI_HOLD:
-
             case AS_NESS_SPECIALHI_END:
-
             case AS_NESS_SPECIALHI:
-
             case AS_NESS_SPECIALAIRHI_START:
-
             case AS_NESS_SPECIALAIRHI_HOLD:
-
             case AS_NESS_SPECIALAIRHI_END:
-
             case AS_NESS_SPECIALAIRHI:
-
             case AS_NESS_SPECIALAIRHI_HITWALL:
                 efLib_DestroyAll(fighter_gobj);
                 fighter_data2->sa.ness.x224C_thunderGFX = false;
             }
 
-            func_8007592C(fighter_r31, 0, 0.0f);
+            func_8007592C(fighter_r31, 0, 0);
             func_80097D40(fighter_gobj);
             return;
         }
+
         func_8007D7FC(fighter_r31);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_NESS_SPECIALHI, FTNESS_JIBAKU_COLL_FLAG, NULL,
-            fighter_r31->x894_currentAnimFrame, 1.0f, 0.0f);
+            fighter_r31->x894_currentAnimFrame, 1, 0);
         return;
     }
-    if (func_80081298(fighter_gobj) != 0) {
+
+    if (func_80081298(fighter_gobj)) {
         func_80081370(fighter_gobj);
         return;
     }
@@ -1909,7 +1921,11 @@ void ftNess_SpecialAirHi_Coll(
 /// Ness's PK Thunder 2 Wall Rebound Collision callback
 void ftNess_SpecialAirHiRebound_Coll(HSD_GObj* fighter_gobj)
 {
-    s32 filler[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter* fp;
     Fighter* fighter_data2;
     enum_t asid;
