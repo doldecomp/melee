@@ -66,19 +66,16 @@ void ftMario_SpecialLw_SetVar(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
 }
 
-// https://decomp.me/scratch/4saR2
 void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp;
+    Fighter* fp = gobj->user_data;
+    ftMarioAttributes* sa = fp->x2D4_specialAttributes;
 
-    ftMarioAttributes* sa;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[28];
+#endif
 
-    void* hsd_obj_ptr;
-    u8 padding[24];
-
-    fp = gobj->user_data;
-
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     ftMario_SpecialLw_SetVar(gobj);
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRLW, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
@@ -91,20 +88,17 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-// https://decomp.me/scratch/nQT5V
 void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
 {
     f32 sub_val;
-    Fighter* fp;
+    Fighter* fp = gobj->user_data;
+    ftMarioAttributes* sa = fp->x2D4_specialAttributes;
 
-    ftMarioAttributes* sa;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[28];
+#endif
 
-    void* hsd_obj_ptr;
-    u8 padding[24];
-
-    fp = gobj->user_data;
-
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     ftMario_SpecialLw_SetVar(gobj);
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRLW, 0, NULL,
                                        0.0f, 1.0f, 0.0f);

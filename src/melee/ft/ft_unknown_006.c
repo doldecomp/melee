@@ -540,20 +540,16 @@ lbl_8008803C:
 
 #else
 
-// https://decomp.me/scratch/QCKGz
 s32 func_80087D0C(Fighter* fighter, s32 arg1)
 {
-    s32 sp18;
-    s32 sp14;
-    enum FighterKind ftKind;
-    s32 var_r30;
-    s32 sfx;
-    int new_var;
-    s32 ssm_id;
-    s32 var_r4;
+    enum_t sfx = func_800233EC(arg1);
+    enum_t ssm_id = func_80023130();
 
-    sfx = func_800233EC(arg1);
-    ssm_id = func_80023130();
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[12];
+#endif
+
     switch (ssm_id) {
     case 0:
         switch (sfx) {
@@ -602,26 +598,29 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         case 0x155:
         case 0x14F:
         case 0x14C:
-            sfx = func_80087C70(
-                fighter,
-                sfx); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
+            // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
+            sfx = func_80087C70(fighter, sfx);
             break;
         }
         break;
-    case 13:
-        ftKind = fighter->x4_fighterKind;
-        if ((ftKind < 0xc) && (10 > ftKind)) {
-            if ((0x1fbfd < sfx) &&
-                ((sfx < 0x1fc62 && (func_80080144(fighter) == 1))))
+    case 13: {
+        FighterKind ftKind = fighter->x4_fighterKind;
+
+        /// @todo What a weird comparison, is it part of a macro?
+        if (ftKind < FTKIND_PIKACHU && ftKind <= FTKIND_POPO) {
+            if (0x1FBFD < sfx && sfx < 0x1FC62 &&
+                func_80080144(fighter) == true)
             {
                 sfx += 0x66;
             }
-            if (((0x1fc63 < sfx) && (sfx < 0x1fcc8)) &&
-                (func_80080144(fighter) != 1))
+
+            if (0x1FC63 < sfx && sfx < 0x1FCC8 &&
+                func_80080144(fighter) != true)
             {
                 sfx -= 0x66;
             }
         }
+    }
     case 6:
     case 7:
     case 8:
@@ -647,13 +646,16 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
     case 29:
     case 30:
     case 31:
-    case 33:
-        if ((func_800230C8(ssm_id, &sp18, &sp14) == 0) &&
-            (sfx >= ((s32) (sp18 + func_80023220(ssm_id)))))
+    case 33: {
+        int sfx_offset;
+        int unused_output;
+        if (func_800230C8(ssm_id, &sfx_offset, &unused_output) == 0 &&
+            sfx >= sfx_offset + func_80023220(ssm_id))
         {
             sfx = func_80087C70(fighter, sfx);
         }
         break;
+    }
     default:
         break;
     }
