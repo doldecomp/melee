@@ -15,6 +15,9 @@ Short for "attack."
 @section glossary_cam cam
 Short for "camera."
 
+@section glossary_cb cb
+Short for "callback."
+
 @section glossary_chan chan
 Short for "channel."
 

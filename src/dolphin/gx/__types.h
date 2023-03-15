@@ -68,8 +68,9 @@ typedef struct GXContext {
     u8 x208_pad[0x2D0 - 0x208];                         // at 0x208
     struct {
         u32 unk[4];
-    } x2D0[(0x410 - 0x2D0) / 16]; // at 0x2D0
-    u32 x410, x414;
+    } x2D0[(0x410 - 0x2D0) / 16];       // at 0x2D0
+    GXTexRegionCallback tex_region_cb;  // at 0x410
+    GXTexRegionCallback tlut_region_cb; // at 0x414
     u32 x418;                           // at 0x418
     GXBool x41C;                        // at 0x41C
     GXBool x41D;                        // at 0x41D
