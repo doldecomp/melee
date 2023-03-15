@@ -53,7 +53,7 @@ u8 __read_console(u32 arg0, u8* buf, u32* n)
     bytes_to_read = *n;
     read_status = 0;
     *n = 0;
-    while (*n <= bytes_to_read && read_status == 0) {
+    while (*n <= (unsigned) bytes_to_read && read_status == 0) {
         read_status = ReadUARTN(buf, 1);
         *n += 1;
         if (*buf == '\r') {
