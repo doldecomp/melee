@@ -124,7 +124,11 @@ void func_8007CB74(HSD_GObj* gobj)
     f32 temp_f1;
     Vec3* ground_normal;
     Fighter* fp = gobj->user_data;
-    u32 unused[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     ground_normal = &fp->x6F0_collData.x14C_ground.normal;
     temp_f1 = Stage_GetGroundFrictionMultiplier(fp);
@@ -321,6 +325,8 @@ void func_8007CE94(Fighter* fp, f32 val)
     fp->x74_anim_vel.x = val;
 }
 
+#ifdef MUST_MATCH
+/// @todo This surely calls #func_8007CE94 somehow...
 void func_8007CEF4(Fighter* fp)
 {
     f32 result = fp->x110_attr.x180_AerialFriction;
@@ -333,6 +339,13 @@ void func_8007CEF4(Fighter* fp)
     }
     fp->x74_anim_vel.x = result;
 }
+
+#else
+void func_8007CEF4(Fighter* fp)
+{
+    func_8007CE94(fp, fp->x110_attr.x180_AerialFriction);
+}
+#endif
 
 bool func_8007CF58(Fighter* fp)
 {
