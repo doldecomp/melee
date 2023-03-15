@@ -1719,8 +1719,16 @@ void resolveIKJoint1(HSD_JObj* jobj)
         PSVECSubtract(&var_r28->translate, &spB0, &sp8C);
         temp_f31 = PSVECDotProduct(&sp8C, &sp8C);
 
-        /// @todo @c sometimes-uninitialized
+        /// @todo Variables @c var_f27 and @c var_f28 are used uninitialized
+        ///       whenever 'if' condition is false.
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
+#endif
         if (temp_f31 > var_f5) {
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
             sp68 = sp8C;
             if (HSD_RObjGetGlobalPosition(jobj->robj, 3, &sp5C)) {
                 PSVECSubtract(&sp5C, &spB0, &sp5C);
