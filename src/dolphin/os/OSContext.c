@@ -197,7 +197,7 @@ asm void OSLoadFPUContext(register OSContext* fpuctx)
     b __OSLoadFPUContext
 } // clang-format on
 #else
-void OSLoadFPUContext(u32 unused1, u32 unused2, OSContext* fpuctx)
+void OSLoadFPUContext(OSContext* fpuctx)
 {
     NOT_IMPLEMENTED;
 }
