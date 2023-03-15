@@ -198,7 +198,7 @@ void OSInit(void)
             // if the top of the heap is already set
 
             // grab whatever's stored at 0x800030E8
-            BI2DebugFlagHolder = (u32*) *((u8*) DEBUGFLAG_ADDR);
+            BI2DebugFlagHolder = (u32*) (uintptr_t) (*(u8*) DEBUGFLAG_ADDR);
             // flag is then address of flag holder
             BI2DebugFlag = (u32*) &BI2DebugFlagHolder;
             // pad spec is whatever's at 0x800030E9
