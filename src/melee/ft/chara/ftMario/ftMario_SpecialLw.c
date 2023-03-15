@@ -43,7 +43,12 @@ void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMarioAttributes* sa;
-    void* hsd_obj_ptr;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     fp = GET_FIGHTER(gobj);
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;

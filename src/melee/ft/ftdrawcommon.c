@@ -13,13 +13,14 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/state.h>
 
+#ifdef MWERKS_GEKKO
 static char lbl_803C0EB0[] = "translate";
 static s32 lbl_804D3A88 = -128;
 static s32 lbl_804D3A8C = 0x8080FF80;
 static s32 lbl_804D3A90 = 0x80808080;
-
 static char lbl_804D3A94[] = "jobj.h";
 static char lbl_804D3A9C[] = "jobj";
+#endif
 
 extern f32 lbl_804D8368;
 extern s32 lbl_804D836C[1];
