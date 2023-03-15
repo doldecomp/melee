@@ -63,7 +63,7 @@ bool func_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy
 {
     Item* temp_item = item_gobj->user_data;
 
-    if (temp_item->xCC_item_attr->x0_is_heavy != 0)
+    if (temp_item->xCC_item_attr->x0_is_heavy)
         return true;
 
     return false;
