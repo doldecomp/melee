@@ -14,22 +14,20 @@ extern HSD_GObjProc** lbl_804D7840;
 extern s32 lbl_804D7834;
 extern s32 lbl_804D783C;
 
-inline u8 GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
+inline void GObj_SetFlag1_inline(HSD_GObjProc* proc, u8 value)
 {
     while (proc != NULL) {
         proc->flags_1 = value;
         proc = proc->child;
     }
-    /// @todo Missing return statement
 }
 
-inline u8 GObj_SetFlag2_inline(HSD_GObjProc* proc, u8 value)
+inline void GObj_SetFlag2_inline(HSD_GObjProc* proc, u8 value)
 {
     while (proc != NULL) {
         proc->flags_2 = value;
         proc = proc->child;
     }
-    /// @todo Missing return statement
 }
 
 void func_80390C5C(HSD_GObj* gobj)
