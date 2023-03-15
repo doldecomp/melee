@@ -1027,6 +1027,7 @@ inline HSD_LObj* lobj_next(HSD_LObj* lobj)
     return lobj->next;
 }
 
+/// @todo Missing return statement
 HSD_LObj* func_8000CDC0(HSD_LObj* cur)
 {
     while (cur != NULL) {
@@ -1037,9 +1038,14 @@ HSD_LObj* func_8000CDC0(HSD_LObj* cur)
         }
         cur = lobj_next(cur);
     }
-
-    /// @todo Missing return statement
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreturn-type"
+#endif
 }
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 
 void func_8000CE30(HSD_DObj* dobj, HSD_DObj* next)
 {
