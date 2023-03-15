@@ -434,9 +434,8 @@ lbl_803405B4:
 #pragma pop
 #endif
 
-static u32 lbl_804014E0[] = { 0, 1, 0, 1, 0, 1, 7, 5, 6, 0 };
-
 #ifdef MWERKS_GEKKO
+static u32 lbl_804014E0[] = { 0, 1, 0, 1, 0, 1, 7, 5, 6, 0 };
 #pragma push
 asm void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map,
                        GXChannelID color)
