@@ -19,15 +19,16 @@ void ftLuigi_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
-// 0x80144024
-// https://decomp.me/scratch/sBqKg // Luigi's aerial Super Jump Punch Action
-// State handler
+/// Luigi's aerial Super Jump Punch Action State handler
 void ftLuigi_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
-    f32 vel;
-    f32 mul;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
@@ -38,16 +39,17 @@ void ftLuigi_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
-// 0x80144098
-// https://decomp.me/scratch/03dix // Luigi's grounded Super Jump Punch
-// Animation callback
+/// Luigi's grounded Super Jump Punch Animation callback
 void ftLuigi_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 {
-    ftLuigiAttributes* luigiAttrs;
-    f32 freefall;
-    f32 landing;
+    ftLuigiAttributes* luigiAttrs =
+        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
 
-    luigiAttrs = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_80096900(fighter_gobj, 0, 1, 0,
                       luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
@@ -55,17 +57,17 @@ void ftLuigi_SpecialHi_Anim(HSD_GObj* fighter_gobj)
     }
 }
 
-// 0x801440F8
-// https://decomp.me/scratch/03dix // Luigi's aerial Super Jump Punch Animation
-// callback
+/// Luigi's aerial Super Jump Punch Animation callback
 void ftLuigi_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 {
-    ftLuigiAttributes* luigiAttrs;
-    f32 freefall;
-    f32 landing;
-    f32 landing2;
+    ftLuigiAttributes* luigiAttrs =
+        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
 
-    luigiAttrs = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[12];
+#endif
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_80096900(fighter_gobj, 0, 1, 0,
                       luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
@@ -140,32 +142,27 @@ void ftLuigi_SpecialHi_IASA(HSD_GObj* fighter_gobj)
     }
 }
 
-// 0x801442A0
-// https://decomp.me/scratch/d8dBe // Luigi's aerial Super Jump Punch IASA
-// callback
+/// Luigi's aerial Super Jump Punch IASA callback
 void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    ftLuigiAttributes* luigiAttrs;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    f32 stick_x = fp->input.x620_lstick_x;
+    ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
+    f32 stick_range = stickGetDir(fp->input.x620_lstick_x, 0.0f);
     f32 temp_range;
     f32 superJump_StickRange;
-    f32 stick_x;
     f32 control;
     f32 control_2;
-    f32 stick_range;
     f32 stick_range_2;
     f32 stick_angle;
-    f32 range;
-    f32 range2;
-    f32 range3;
-    f32 range4;
     bool flag;
 
-    fp = GET_FIGHTER(fighter_gobj);
-    stick_x = fp->input.x620_lstick_x;
-    luigiAttrs = fp->x2D4_specialAttributes;
-    stick_range = stickGetDir(fp->input.x620_lstick_x, 0.0f);
-    if ((u32) fp->x2200_ftcmd_var0 == 0U) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[12];
+#endif
+
+    if (fp->x2200_ftcmd_var0 == 0) {
         superJump_StickRange =
             luigiAttrs->x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE;
         if (stick_range > superJump_StickRange) {
