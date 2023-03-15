@@ -288,7 +288,11 @@ void Player_SetMoreFlagsBit1(s32 slot, u8 bit1);
 s32 Player_GetUnk4D(s32 slot);
 void Player_SetUnk4D(s32 slot, s8 unk4D);
 u8 Player_GetFlagsAEBit1(s32 slot);
-u8 Player_SetFlagsAEBit1(s32 slot, u8 bit1); /// actually returns void
+
+/// @remarks Output is actually @c void, but needs #u8 to match.
+///          Most likely a typo by HAL.
+u8 Player_SetFlagsAEBit1(int slot, u8 bit1);
+
 u8 Player_GetUnk4C(s32 slot);
 void Player_SetUnk4C(s32 slot, u8 unk4C);
 void Player_80036058(s32 slot);
