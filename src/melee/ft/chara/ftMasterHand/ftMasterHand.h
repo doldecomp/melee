@@ -6,7 +6,7 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
-typedef struct _MasterHandAttributes {
+struct MasterHandAttributes {
     s32 x0;
     s32 x4;
     s32 x8;
@@ -87,7 +87,7 @@ typedef struct _MasterHandAttributes {
     s32 x170;
     s32 x174;
     f32 x178;
-} MasterHandAttributes;
+};
 
 extern ActionState as_table_masterhand[];
 extern char lbl_803D4070[];
