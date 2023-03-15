@@ -32,7 +32,7 @@ typedef struct __GXFifoObj {
     u8 x20_pad[4];   // at 0x20
 } __GXFifoObj;
 
-typedef struct GXContext {
+struct GXContext {
     union {
         u32 u32;
         u16 u16[2];
@@ -89,15 +89,15 @@ typedef struct GXContext {
     GXFifoObj* fifo;                    // at 0x4F4
     u8 x4F8_pad[0x570 - 0x4F8];         // at 0x4F8
     u32 dirtyFlags;                     // at 0x570
-} GXContext;
+};
 
-typedef struct GXSettings {
+struct GXSettings {
     u16 z_mode;
     u16 color_settings;
     u16 dst_alpha;
     u16 x6;
     u16 x8;
-} GXSettings;
+};
 
 extern volatile u32* __piReg;
 extern volatile u16* __peReg;
@@ -123,10 +123,10 @@ typedef struct __GXGPFifo {
     u8 x8_pad[0x38 - 0x8];
 } __GXGPFifo;
 
-typedef struct GXContexts {
+struct GXContexts {
     GXContext* main;
     GXContext* null;
-} GXContexts;
+};
 
 struct GXTexObj {
     u8 x0_pad[0x8];
