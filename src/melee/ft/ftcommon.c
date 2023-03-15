@@ -384,7 +384,11 @@ bool func_8007CF58(Fighter* fp)
 
 bool func_8007D050(Fighter* fp, f32 val)
 {
-    f32 temp_f2;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     f32 temp_f3;
     f32 phi_f0;
     f32 phi_f0_2;
@@ -886,7 +890,11 @@ inline f32 fabsf(f32 x)
 
 void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
 {
-    u8 unused2[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused0[4];
+#endif
+
     Vec2* temp_r31;
     Vec3 sp24;
     Fighter* arg_ft;
@@ -897,7 +905,11 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
     HSD_GObj* cur;
     bool phi_r28;
     Vec2* vtmp;
-    u8 unused[0x14];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused1[20];
+#endif
 
     arg_ft = gobj->user_data;
     phi_r28 = false;
@@ -953,7 +965,11 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
 
 void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
 {
-    u8 unused2[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused0[4];
+#endif
+
     Vec3 sp1C;
     Vec2* temp_r31;
     HSD_GObj* new_var;
@@ -964,7 +980,11 @@ void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
     s32 temp_r0;
     s32 temp_r30;
     Vec2* tmp;
-    u8 unused[0xC];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused1[12];
+#endif
 
     fp = gobj->user_data;
     temp_r31 = &fp->x2C4;
@@ -992,7 +1012,12 @@ void func_8007E0E4(HSD_GObj* gobj)
 {
     Vec3 sp10;
     Fighter* fp;
-    u8 temp_r3;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     f32 phi_f0;
     f32 phi_f31;
     f32 phi_f30;
@@ -1111,13 +1136,15 @@ void func_8007E358(HSD_GObj* gobj)
 
 void func_8007E3EC(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    HSD_JObj* jobj;
+    Fighter* fp = gobj->user_data;
+    HSD_JObj* jobj = fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj;
     Vec3 sp10;
-    u32 unused[1];
 
-    fp = gobj->user_data;
-    jobj = fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     if (HSD_JObjMtxIsDirty(jobj)) {
         HSD_JObjGetTranslation(jobj, &sp10);
         sp10.x -= fp->x1A7C.x;
@@ -1335,10 +1362,13 @@ void func_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
 void func_8007EC30(u32 arg0, u32 arg1)
 {
     Fighter* fp;
-    HSD_GObj* cur;
-    u32 unused[4];
+    HSD_GObj* cur = lbl_804D782C->x20_fighters;
 
-    cur = lbl_804D782C->x20_fighters;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
     while (cur != NULL) {
         fp = cur->user_data;
         func_8007EBAC(fp, arg0, arg1);
@@ -1348,9 +1378,8 @@ void func_8007EC30(u32 arg0, u32 arg1)
 
 void func_8007ECD4(Fighter* fp, s32 arg1)
 {
-    if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4)) {
+    if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4))
         func_80378280(fp->x618_player_id, arg1 + 2);
-    }
 }
 
 void func_8007ED2C(Fighter* fp)
@@ -1405,15 +1434,16 @@ void func_8007EFC0(Fighter* fp, u32 val)
 
 void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
 {
-    Fighter* src;
-    HSD_GObj* dst_gobj;
-    Fighter* dst;
+    Fighter* src = gobj->user_data;
+    HSD_GObj* dst_gobj = Player_GetEntityAtIndex(src->xC_playerID, 1);
+    Fighter* dst = dst_gobj->user_data;
     s32 tmp_bit;
-    u32 unused[4];
 
-    src = gobj->user_data;
-    dst_gobj = Player_GetEntityAtIndex(src->xC_playerID, 1);
-    dst = dst_gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
     Player_SwapTransformedStates(src->xC_playerID, src->x221F_flag.bits.b4,
                                  dst->x221F_flag.bits.b4);
     tmp_bit = src->x221F_flag.bits.b4;
@@ -1558,12 +1588,14 @@ void func_8007F578(HSD_GObj* gobj)
 
 void func_8007F5CC(HSD_GObj* gobj, s32 arg1)
 {
-    Fighter* fp;
-    HSD_GObj* item;
-    u32 unused[2];
+    Fighter* fp = gobj->user_data;
+    HSD_GObj* item = fp->x1974_heldItem;
 
-    fp = gobj->user_data;
-    item = fp->x1974_heldItem;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if (item != NULL && fp->x221E_flag.bits.b3 != arg1) {
         if (arg1 == 0) {
             func_8007F578(gobj);
