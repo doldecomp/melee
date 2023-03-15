@@ -71,7 +71,7 @@ void func_80378280(u8 a, int b)
 
     while (r7 != NULL) {
         HSD_PadRumbleListData* r6 = r7->next;
-        if (r7->id == b)
+        if (r7->id == (unsigned) b)
             func_80378128(r31, r7);
         r7 = r6;
     }

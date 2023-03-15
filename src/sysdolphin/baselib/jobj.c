@@ -1075,14 +1075,12 @@ void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
 
 char lbl_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
 
-static inline int iref_INC(void* o)
+static inline void iref_INC(void* o)
 {
     HSD_OBJ(o)->ref_count_individual += 1;
     HSD_OBJ(o)->ref_count_individual != 0
         ? (void) 0
         : __assert(lbl_804068E4, 0x9E, lbl_80406918);
-
-    /// @todo Missing return statement
 }
 
 static inline bool iref_none(void* o)
