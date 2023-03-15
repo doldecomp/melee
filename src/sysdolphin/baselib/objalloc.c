@@ -74,7 +74,7 @@ void* HSD_ObjAlloc(HSD_ObjAllocData* data)
         return NULL;
     }
     if (data->heap_limit_flag) {
-        if (data->heap_limit_num == -1) {
+        if (data->heap_limit_num == (unsigned) -1) {
             if (obj_heap.top != 0) {
                 size = obj_heap.remain;
             } else {
