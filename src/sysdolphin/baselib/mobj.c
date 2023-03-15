@@ -361,10 +361,12 @@ void HSD_MObjCompileTev(HSD_MObj* mobj)
     }
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused1[] = "hsdIsDescendantOf(info, &hsdMObj)";
 #pragma pop
+#endif
 
 void MObjSetupTev(HSD_MObj* mobj, HSD_TObj* tobj, u32 arg2)
 {
@@ -504,10 +506,12 @@ void HSD_MObjAddShadowTexture(HSD_TObj* tobj)
     tobj_shadows = tobj;
 }
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
 static char unused2[] = "mobj->rendermode&RENDER_SPECULAR";
 #pragma pop
+#endif
 
 void HSD_MObjDeleteShadowTexture(HSD_TObj* tobj)
 {

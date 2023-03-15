@@ -13,6 +13,6 @@ void func_80081118(void);
 void func_80081140(void);
 void func_80081168(void);
 void func_80081200(void);
-void func_80080C28(void);
+void func_80080C28(HSD_GObj* gobj, s32 arg1);
 
 #endif

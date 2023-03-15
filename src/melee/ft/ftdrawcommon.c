@@ -817,7 +817,7 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80080C28(void)
+asm void func_80080C28(HSD_GObj*, s32)
 { // clang-format off
     nofralloc
 /* 80080C28 0007D808  7C 08 02 A6 */	mflr r0

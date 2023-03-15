@@ -34,10 +34,9 @@ void func_8014FE58(HSD_GObj* gobj)
     return;
 }
 
+#ifdef MUST_MATCH
 #pragma dont_inline on
-
-// 8014FE5C 0014CA3C
-// https://decomp.me/scratch/7T8fr
+#endif
 void func_8014FE5C(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -57,8 +56,6 @@ void func_8014FE5C(HSD_GObj* gobj)
     fp->sa.masterhand.x2258 = 341;
 }
 
-// 8014FF1C 0014CAFC
-// https://decomp.me/scratch/cG41T
 void func_8014FF1C(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -78,8 +75,6 @@ void func_8014FF1C(HSD_GObj* gobj)
     fp->sa.masterhand.x2258 = 342;
 }
 
-// 8014FFDC 0014CBBC
-// https://decomp.me/scratch/0Gtar
 void lbl_8014FFDC(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
@@ -116,8 +111,6 @@ void lbl_8014FFDC(HSD_GObj* gobj)
     r31_fp->sa.masterhand.x2258 = 0x155;
 }
 
-// 80150144 0014CD24
-// https://decomp.me/scratch/S2AJH
 void func_80150144(HSD_GObj* gobj)
 {
     MasterHandAttributes* r5_attributes;
@@ -145,8 +138,9 @@ void func_80150144(HSD_GObj* gobj)
     }
     fp_1->sa.masterhand.x2258 = 341;
 }
-
+#ifdef MUST_MATCH
 #pragma dont_inline off
+#endif
 
 typedef struct {
     u8 a;

@@ -135,7 +135,6 @@ void GXSetTevColor(GXTevRegID id, GXColor color)
 }
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void GXSetTevColorS10(s32, GXColor*)
 { // clang-format off
@@ -171,18 +170,9 @@ asm void GXSetTevColorS10(s32, GXColor*)
 /* 803402D0 0033CEB0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetTevColorS10(s32 arg0, GXColor* arg1)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void GXSetTevKColor(GXTevKColorID id, GXColor color)
 { // clang-format off
@@ -218,18 +208,9 @@ asm void GXSetTevKColor(GXTevKColorID id, GXColor color)
 /* 80340344 0033CF24  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetTevKColor(GXTevKColorID id, GXColor color)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void GXSetTevKColorSel(GXTevStageID stage, GXTevKColorSel sel)
 { // clang-format off
@@ -265,18 +246,9 @@ lbl_80340390:
 /* 803403B0 0033CF90  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetTevKColorSel(GXTevStageID stage, GXTevKColorSel sel)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void GXSetTevKAlphaSel(GXTevStageID stage, GXTevKAlphaSel sel)
 { // clang-format off
@@ -312,18 +284,9 @@ lbl_803403FC:
 /* 8034041C 0033CFFC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetTevKAlphaSel(GXTevStageID stage, GXTevKAlphaSel sel)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel,
                           GXTevSwapSel tex_sel)
@@ -353,19 +316,9 @@ asm void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel,
 /* 80340474 0033D054  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetTevSwapMode(GXTevStageID stage, GXTevSwapSel ras_sel,
-                      GXTevSwapSel tex_sel)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
                                GXTevColorChan green, GXTevColorChan blue,
@@ -414,16 +367,6 @@ asm void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
 /* 80340514 0033D0F4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetTevSwapModeTable(GXTevSwapSel table, GXTevColorChan red,
-                           GXTevColorChan green, GXTevColorChan blue,
-                           GXTevColorChan alpha)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 void GXSetTevClampMode(s32 arg0, s32 arg1) {}
@@ -444,7 +387,6 @@ void GXSetAlphaCompare(GXCompare comp0, u8 ref0, GXAlphaOp op, GXCompare comp1,
 }
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void GXSetZTexture(GXZTexOp op, GXTexFmt fmt, u32 bias)
 { // clang-format off
@@ -490,20 +432,11 @@ lbl_803405B4:
 /* 803405EC 0033D1CC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetZTexture(GXZTexOp op, GXTexFmt fmt, u32 bias)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 static u32 lbl_804014E0[] = { 0, 1, 0, 1, 0, 1, 7, 5, 6, 0 };
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map,
                        GXChannelID color)
@@ -626,22 +559,11 @@ lbl_8034075C:
 /* 8034078C 0033D36C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void GXSetTevOrder(GXTevStageID stage, GXTexCoordID coord, GXTexMapID map,
-                   GXChannelID color)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 void GXSetNumTevStages(u8 arg0)
 {
-    __GXContexts.main->callbacks[0x15] =
-        (GXTexRegionCallback) (((u32) __GXContexts.main->callbacks[0x15] &
-                                0xFFFFC3FF) |
-                               ((arg0 - 1) << 10));
-    __GXContexts.main->x4F0_flags |= 4;
+    u32 temp = (arg0 - 1) << 10;
+    __GXContexts.main->x204 = (__GXContexts.main->x204 & ~0x3C00) | temp;
+    __GXContexts.main->x4F0_flags |= (1 << 2);
 }

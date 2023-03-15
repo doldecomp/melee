@@ -4163,7 +4163,8 @@ f32 const lbl_804D7A40 = 5;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32){
+asm bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32)
+{
     // clang-format off
     nofralloc
 /* 8000805C 00004C3C  7C 08 02 A6 */	mflr r0
@@ -4305,11 +4306,12 @@ lbl_8000821C:
 #pragma pop
 #else
 
-s32 lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, void* arg2, s32 arg3,
-                    f32 arg4, f32 arg5, f32 arg6)
+bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, UNK_T arg2, s32 arg3,
+                     f32 arg4, f32 arg5, f32 arg6)
 {
     Vec3 sp74;
     Vec3 sp68;
+    f32* sp38;
     s32* sp8;
     HSD_JObj* temp_r29;
     HSD_JObj* temp_r29_2;
@@ -4337,7 +4339,7 @@ s32 lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, void* arg2, s32 arg3,
         if (arg2 != NULL) {
             temp_r29 = arg1->bone;
             if (temp_r29 == NULL) {
-                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
             }
             lbColl_JObjSetupMatrix(temp_r29);
             PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r29->mtx[0],
@@ -4348,7 +4350,7 @@ s32 lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, void* arg2, s32 arg3,
         } else {
             temp_r29_2 = arg1->bone;
             if (temp_r29_2 == NULL) {
-                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
             }
             lbColl_JObjSetupMatrix(temp_r29_2);
             var_r9 = temp_r29_2->mtx[0];
@@ -4649,7 +4651,7 @@ void lbColl_80008440(HitCapsule* arg0)
     if (8U < 0xCU) {
         do {
             M2C_FIELD(var_r5, Fighter**, 0x74) = NULL;
-            var_r5 += (s32*) 2;
+            var_r5 += 2;
             var_ctr -= 1;
         } while (var_ctr != 0);
     }
@@ -6149,7 +6151,7 @@ lbl_8000968C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbColl_800096B4(UNK_PARAMS)
+asm void lbColl_800096B4(MtxPtr, UNK_T, UNK_T, UNK_T, UNK_T, f32)
 { // clang-format off
     nofralloc
 /* 800096B4 00006294  7C 08 02 A6 */	mflr r0
@@ -7682,6 +7684,7 @@ lbl_8000AB0C:
 
 bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
 {
+    f32 sp9C;
     f32 sp98;
     f32 sp94;
     f32 sp90;
@@ -7694,6 +7697,7 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
     f32 sp74;
     f32 sp70;
     s32 sp6C;
+    f32 sp3C;
     Vec3 sp30;
     Vec3 sp24;
     HSD_JObj* temp_r31;
@@ -7722,7 +7726,7 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
             }
             lbColl_JObjSetupMatrix(temp_r31);
             PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r31->mtx[0],
-                        (f32(*)[4]) & sp9C[0]);
+                        (f32(*)[4]) & sp9C);
         }
         temp_f31 = arg0->size;
         sp84 = arg0->pos.x;
@@ -7732,29 +7736,30 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
         sp94 = arg0->pos.y;
         sp98 = arg0->pos.z;
         if (arg2 != NULL) {
-            var_r31 = &sp9C[0];
+            var_r31 = &sp9C;
         } else {
             temp_r31_2 = arg0->bone;
             if (temp_r31_2 == NULL) {
-                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
             }
             lbColl_JObjSetupMatrix(temp_r31_2);
             var_r31 = temp_r31_2->mtx[0];
         }
-        HSD_MtxInverse((f32(*)[4]) var_r31, (f32(*)[4]) & sp3C[0]);
-        PSMTXMUltiVec((f32(*)[4]) & sp3C[0], (Vec3*) &sp90, &sp24);
-        PSMTXMUltiVec((f32(*)[4]) & sp3C[0], (Vec3*) &sp84, &sp30);
-        sp78 = (s32) sp30;
-        sp6C = (s32) sp24;
+        HSD_MtxInverse((f32(*)[4]) var_r31, (f32(*)[4]) & sp3C);
+        PSMTXMUltiVec((f32(*)[4]) & sp3C, (Vec3*) &sp90, &sp24);
+        PSMTXMUltiVec((f32(*)[4]) & sp3C, (Vec3*) &sp84, &sp30);
+        sp78 = (s32) sp30.x;
+        sp6C = (s32) sp24.x;
         sp7C = sp30.y;
         sp70 = sp24.y;
         sp80 = sp30.z;
         sp74 = sp24.z;
         lbColl_800096B4((f32(*)[4]) var_r31, &sp6C, &sp78, &lbl_804D36CC,
                         &lbl_804D36D0, temp_f31);
-        return 1;
+        return true;
     }
-    return 0;
+
+    return false;
 }
 
 #endif

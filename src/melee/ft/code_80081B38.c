@@ -109,14 +109,6 @@ lbl_80081C6C:
 /* 80081C84 0007E864  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80081B38(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -162,14 +154,6 @@ lbl_80081CE0:
 /* 80081D08 0007E8E8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80081C88(HSD_GObj* dst_gobj, f32 scl_y)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -235,14 +219,6 @@ lbl_80081DB4:
 /* 80081DD0 0007E9B0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-bool func_80081D0C(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -347,14 +323,6 @@ lbl_80081F0C:
 /* 80081F28 0007EB08  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80081DD4(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -459,14 +427,6 @@ lbl_80082064:
 /* 80082080 0007EC60  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80081F2C(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -571,14 +531,6 @@ lbl_800821BC:
 /* 800821D8 0007EDB8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80082084(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -642,14 +594,6 @@ lbl_80082284:
 /* 800822A0 0007EE80  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-bool func_800821DC(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -729,14 +673,6 @@ lbl_8008237C:
 /* 80082398 0007EF78  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-bool EnvColl_CheckGroundAndLedge(HSD_GObj* fighter_gobj, s32 direction)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -895,14 +831,6 @@ lbl_80082558:
 /* 80082574 0007F154  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-bool func_800824A0(HSD_GObj* arg0, ftCollisionBox* arg1)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -965,14 +893,6 @@ lbl_8008261C:
 /* 80082634 0007F214  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80082578(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1039,14 +959,6 @@ lbl_800826EC:
 /* 80082704 0007F2E4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80082638(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1097,14 +1009,6 @@ lbl_80082788:
 /* 8008279C 0007F37C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-bool func_80082708(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1155,14 +1059,6 @@ lbl_80082820:
 /* 80082834 0007F414  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-bool func_800827A0(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1194,14 +1090,6 @@ lbl_80082880:
 /* 80082884 0007F464  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80082838(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1276,14 +1164,6 @@ lbl_80082960:
 /* 80082974 0007F554  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-bool func_80082888(HSD_GObj* arg0, ftCollisionBox* arg1)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1359,14 +1239,6 @@ lbl_80082A50:
 /* 80082A64 0007F644  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80082978(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1424,14 +1296,6 @@ lbl_80082B04:
 /* 80082B18 0007F6F8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-bool func_80082A68(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1467,14 +1331,6 @@ lbl_80082B60:
 /* 80082B74 0007F754  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80082B1C(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1553,14 +1409,6 @@ lbl_80082C54:
 /* 80082C70 0007F850  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80082B78(HSD_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1626,14 +1474,6 @@ lbl_80082D2C:
 /* 80082D3C 0007F91C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80082C74(HSD_GObj* arg0, HSD_GObjEvent arg1)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1713,20 +1553,13 @@ lbl_80082E1C:
 /* 80082E38 0007FA18  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80082D40(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm HSD_GObj* func_80082E3C(HSD_GObj* fighter_gobj){
+asm HSD_GObj* func_80082E3C(HSD_GObj* fighter_gobj)
+{
     // clang-format off
     nofralloc
 /* 80082E3C 0007FA1C  7C 08 02 A6 */	mflr r0
@@ -1795,14 +1628,6 @@ lbl_80082F04:
 /* 80082F24 0007FB04  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-HSD_GObj* func_80082E3C(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -1915,14 +1740,6 @@ lbl_80083070:
 /* 8008308C 0007FC6C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80082F28(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2023,14 +1840,6 @@ lbl_800831B8:
 /* 800831C8 0007FDA8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083090(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2135,14 +1944,6 @@ lbl_80083304:
 /* 80083314 0007FEF4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800831CC(HSD_GObj* arg0, HSD_GObjPredicate arg1, HSD_GObjEvent arg2)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2247,14 +2048,6 @@ lbl_80083450:
 /* 80083460 00080040  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083318(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2359,14 +2152,6 @@ lbl_8008359C:
 /* 800835AC 0008018C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083464(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2475,14 +2260,6 @@ lbl_800836F8:
 /* 80083708 000802E8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800835B0(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2582,14 +2359,6 @@ lbl_80083830:
 /* 80083840 00080420  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_8008370C(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2656,14 +2425,6 @@ lbl_800838FC:
 /* 8008390C 000804EC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083844(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2763,14 +2524,6 @@ lbl_80083A34:
 /* 80083A44 00080624  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083910(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2862,14 +2615,6 @@ lbl_80083B54:
 /* 80083B64 00080744  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083A48(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2918,14 +2663,6 @@ asm void func_80083B68(HSD_GObj* fighter_gobj)
 /* 80083BFC 000807DC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083B68(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -2998,14 +2735,6 @@ lbl_80083CC4:
 /* 80083CE0 000808C0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083C00(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3079,14 +2808,6 @@ lbl_80083DAC:
 /* 80083DC8 000809A8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083CE4(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3135,14 +2856,6 @@ asm void func_80083DCC(void)
 /* 80083E60 00080A40  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083DCC(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3233,14 +2946,6 @@ lbl_80083F74:
 /* 80083F84 00080B64  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083E64(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3299,14 +3004,6 @@ lbl_80084020:
 /* 80084038 00080C18  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80083F88(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3370,14 +3067,6 @@ lbl_800840E4:
 /* 80084100 00080CE0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_8008403C(HSD_GObj* arg0, HSD_GObjEvent arg1)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3436,14 +3125,6 @@ lbl_8008419C:
 /* 800841B4 00080D94  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084104(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3508,14 +3189,6 @@ lbl_80084260:
 /* 8008427C 00080E5C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800841B8(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3628,14 +3301,6 @@ lbl_800843E0:
 /* 800843F8 00080FD8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084280(HSD_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3712,14 +3377,6 @@ lbl_800844D0:
 /* 800844E8 000810C8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800843FC(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3785,14 +3442,6 @@ lbl_80084598:
 /* 800845B0 00081190  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800844EC(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3873,14 +3522,6 @@ lbl_80084694:
 /* 800846AC 0008128C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800845B4(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -3969,14 +3610,6 @@ lbl_800847B0:
 /* 800847CC 000813AC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800846B0(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -4060,14 +3693,6 @@ lbl_800848C0:
 /* 800848D8 000814B8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800847D0(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -4153,14 +3778,6 @@ lbl_800849CC:
 /* 800849E8 000815C8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800848DC(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -4182,18 +3799,9 @@ asm void func_800849EC(Fighter*, Fighter*)
 /* 80084A14 000815F4  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800849EC(Fighter* arg0, Fighter* arg1)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm bool func_80084A18(HSD_GObj*)
 { // clang-format off
@@ -4210,20 +3818,12 @@ asm bool func_80084A18(HSD_GObj*)
 /* 80084A3C 0008161C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-bool func_80084A18(HSD_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
-asm f32 Stage_GetGroundFrictionMultiplier(Fighter* fp){
+asm f32 Stage_GetGroundFrictionMultiplier(Fighter* fp)
+{
     // clang-format off
     nofralloc
 /* 80084A40 00081620  7C 08 02 A6 */	mflr r0
@@ -4247,18 +3847,9 @@ lbl_80084A70:
 /* 80084A7C 0008165C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-f32 Stage_GetGroundFrictionMultiplier(Fighter* fp)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void func_80084A80(void)
 {
@@ -4377,18 +3968,9 @@ lbl_80084BE8:
 /* 80084BF8 000817D8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084A80(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void func_80084BFC(void)
 { // clang-format off
@@ -4410,18 +3992,9 @@ asm void func_80084BFC(void)
 /* 80084C34 00081814  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084BFC(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void func_80084C38(void)
 { // clang-format off
@@ -4443,18 +4016,9 @@ asm void func_80084C38(void)
 /* 80084C70 00081850  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084C38(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void func_80084C74(void)
 { // clang-format off
@@ -4476,18 +4040,9 @@ asm void func_80084C74(void)
 /* 80084CAC 0008188C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084C74(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void func_80084CB0(void)
 { // clang-format off
@@ -4507,18 +4062,9 @@ asm void func_80084CB0(void)
 /* 80084CE0 000818C0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084CB0(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm bool func_80084CE4(Fighter* attacker, Fighter* victim)
 {
@@ -4580,18 +4126,9 @@ lbl_80084DA0:
 /* 80084DAC 0008198C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084CE4(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void func_80084DB0(HSD_GObj*)
 { // clang-format off
@@ -4627,14 +4164,6 @@ lbl_80084DFC:
 /* 80084E18 000819F8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084DB0(HSD_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -4704,14 +4233,6 @@ lbl_80084EBC:
 /* 80084EE8 00081AC8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084E1C(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -4742,14 +4263,6 @@ asm void func_80084EEC(HSD_GObj* fighter_gobj)
 /* 80084F38 00081B18  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084EEC(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -4790,14 +4303,6 @@ lbl_80084F88:
 /* 80084FA4 00081B84  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084F3C(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 void func_80085030(void);
@@ -4835,14 +4340,6 @@ lbl_80084FEC:
 /* 80085000 00081BE0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80084FA8(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -4864,14 +4361,6 @@ asm void func_80085004(void)
 /* 8008502C 00081C0C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80085004(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -4907,14 +4396,6 @@ lbl_8008506C:
 /* 80085084 00081C64  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80085030(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 void func_80085030(void);
@@ -4939,14 +4420,6 @@ asm void func_80085088(HSD_GObj*)
 /* 800850B0 00081C90  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80085088(HSD_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -4968,14 +4441,6 @@ asm void func_800850B4(void)
 /* 800850DC 00081CBC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800850B4(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -5010,14 +4475,6 @@ lbl_80085118:
 /* 80085130 00081D10  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800850E0(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -5036,14 +4493,6 @@ asm void func_80085134(HSD_GObj* fighter_gobj)
 /* 80085150 00081D30  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80085134(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -5081,14 +4530,6 @@ asm void func_80085154(HSD_GObj* fighter_gobj)
 /* 800851BC 00081D9C  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80085154(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -5103,14 +4544,6 @@ asm void func_800851C0(HSD_GObj*)
 /* 800851CC 00081DAC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800851C0(HSD_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -5136,14 +4569,6 @@ lbl_800851F8:
 /* 80085200 00081DE0  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_800851D0(void)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
 
 #ifdef MWERKS_GEKKO
@@ -5160,12 +4585,4 @@ asm void func_80085204(HSD_GObj* fighter_gobj)
 /* 80085218 00081DF8  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void func_80085204(HSD_GObj* fighter_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif
