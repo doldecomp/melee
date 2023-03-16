@@ -187,7 +187,7 @@ void ftMario_SpecialS_Phys(HSD_GObj* gobj)
                       &coords);
 
         coords.x += 3.0f * fp->facing_dir;
-        func_800119DC(&coords, 120, 0.9, 0.02, (f32) M_PI_3);
+        func_800119DC(&coords, 120, 0.9, 0.02, M_PI_3);
     }
 
     func_80084F3C(gobj);
