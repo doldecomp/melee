@@ -999,7 +999,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
         fp->x2220_flag.bits.b4 = 0;
     }
 
-    if ((arg2 & FIGHTER_SKIP_UNK_0x2222) == 0) {
+    if ((arg2 & FIGHTER_STATE_CHANGE_B19) == 0) {
         fp->x2222_flag.bits.b2 = 0;
     }
 
@@ -1007,7 +1007,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
         fp->x2223_flag.bits.b4 = 0;
     }
 
-    if ((arg2 & FIGHTER_UNK_0x2227) == 0) {
+    if ((arg2 & FIGHTER_STATE_CHANGE_B27) == 0) {
         fp->x2227_flag.bits.b2 = 0;
     }
 
@@ -1150,7 +1150,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
         fp->x100 = -1.0f;
     }
 
-    if ((arg2 & FIGHTER_UNK_0x1000000) == 0) {
+    if ((arg2 & FIGHTER_STATE_CHANGE_B24) == 0) {
         fp->x221C_u16_y = 0;
     }
 

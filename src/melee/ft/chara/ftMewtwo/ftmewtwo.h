@@ -48,40 +48,40 @@ typedef enum ftMewtwoAction {
 
 #define FTMEWTWO_SPECIALN_ACTION_FLAG                                          \
     FIGHTER_MATANIM_NOUPDATE | FIGHTER_SFX_PRESERVE | FIGHTER_CMD_UPDATE |     \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19
 
 #define FTMEWTWO_SPECIALN_COLL_FLAG                                            \
     FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+        FIGHTER_STATE_CHANGE_B27
 
 // SpecialS/SpecialAirS //
 
 #define FTMEWTWO_SPECIALS_COLL_FLAG                                            \
     FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE |                          \
         FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+        FIGHTER_STATE_CHANGE_B27
 
 // SpecialHi/SpecialAirHi //
 
 #define FTMEWTWO_SPECIALHI_COLL_FLAG                                           \
     FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
         FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+        FIGHTER_STATE_CHANGE_B27
 
 // SpecialLw/SpecialAirLw //
 
 #define FTMEWTWO_SPECIALLW_COLL_FLAG                                           \
     FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE |                          \
         FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+        FIGHTER_STATE_CHANGE_B27
 
 typedef struct _ftMewtwoAttributes {
     // NEUTRAL SPECIAL - SHADOW BALL (SpecialN/SpecialAirN) //

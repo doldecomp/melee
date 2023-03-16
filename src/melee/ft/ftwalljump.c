@@ -28,12 +28,13 @@ bool func_8008169C(HSD_GObj* pPlayerEntityStruct /*r3*/)
     // is a walljump character? is airborne?
     if (fp_r31->x2224_flag.bits.b7) {
         pCollData_r6 = &fp_r31->x6F0_collData;
-        if ((fp_r31->x6F0_collData.x134_envFlags & 0x800) ||
-            (pCollData_r6->x134_envFlags & 0x20))
+        if ((fp_r31->x6F0_collData.x134_envFlags & MPCOLL_FLAGS_B11) ||
+            (pCollData_r6->x134_envFlags & MPCOLL_FLAGS_B5))
         {
-            wallSideFlag_r0 = pCollData_r6->x134_envFlags & 0x800;
-            wallSide_f31 =
-                wallSideFlag_r0 ? -1.0f : 1.0f; // side of the collision?
+            wallSideFlag_r0 = pCollData_r6->x134_envFlags & MPCOLL_FLAGS_B11;
+
+            // side of the collision?
+            wallSide_f31 = wallSideFlag_r0 ? -1.0f : +1.0f;
 
             // x210C_walljumpInputTimer = some walljump animation/input timer?
             // is initialized in the else-block when the user does the right

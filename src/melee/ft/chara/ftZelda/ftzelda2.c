@@ -199,8 +199,8 @@ void ftZelda_80139AD4(HSD_GObj* fighter_gobj)
 static u32 const transition_flags0 =
     FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |
     FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE |
-    FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |
-    FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227;
+    FIGHTER_STATE_CHANGE_B19 | FIGHTER_MODELPART_VIS_NOUPDATE |
+    FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_STATE_CHANGE_B27;
 
 static u32 const transition_flags1 =
     transition_flags0 | FIGHTER_HITSTATUS_COLANIM_PRESERVE;
@@ -256,20 +256,17 @@ void ftZelda_80139C9C(HSD_GObj* fighter_gobj)
 
 void ftZelda_80139CBC(HSD_GObj* fighter_gobj) {}
 
-/// @todo Move these somewhere reusable
-static u32 const env_lo = (1 << 6) - 1;
-static u32 const env_hi = env_lo << 6;
-
 void ftZelda_80139CC0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     CollData* collData = &fp->x6F0_collData;
-
     u32 env_flags;
 
     if (func_80082708(fighter_gobj) == 0) {
         env_flags = collData->x134_envFlags;
-        if ((env_flags & env_lo) != 0 || (env_flags & env_hi) != 0) {
+        if ((env_flags & MPCOLL_RIGHTWALL) != 0 ||
+            (env_flags & MPCOLL_LEFTWALL) != 0)
+        {
             func_8007D60C(fp);
             ftZelda_8013A764(fighter_gobj);
             return;
@@ -278,7 +275,8 @@ void ftZelda_80139CC0(HSD_GObj* fighter_gobj)
         ftZelda_80139F6C(fighter_gobj);
     } else {
         env_flags = collData->x134_envFlags;
-        if ((env_flags & env_lo) != 0 || (env_flags & env_hi) != 0)
+        if ((env_flags & MPCOLL_RIGHTWALL) != 0 ||
+            (env_flags & MPCOLL_LEFTWALL) != 0)
             ftZelda_8013A6A8(fighter_gobj);
     }
 }
@@ -301,61 +299,59 @@ bool ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj)
 
     return result;
 }
+
 void ftZelda_80139D60(HSD_GObj* fighter_gobj)
 {
-    s32 ledgeGrabDir;
-    bool returnVar;
-    Fighter* fp;
-    ftZeldaAttributes* attributes;
-    CollData* collData;
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 unused[12];
 #endif
 
-    // Get the character, collision data, and character attributes
-    fp = GET_FIGHTER(fighter_gobj);
-    collData = &fp->x6F0_collData;
-    attributes = fp->x2D4_specialAttributes;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo @c sa can't move below @c coll_data,
+    ///       which suggests a function boundary.
+    ftZeldaAttributes* sa;
+    CollData* coll_data = &fp->x6F0_collData;
+    sa = fp->x2D4_specialAttributes;
+
     fp->x234C_stateVar4_s32++;
 
-    // Determine facing direction
-    if (fp->facing_dir < 0.0f) {
-        ledgeGrabDir = -1;
-    } else {
-        ledgeGrabDir = 1;
+    {
+        int ledge_grab_dir;
+
+        if (fp->facing_dir < 0)
+            ledge_grab_dir = -1;
+        else
+            ledge_grab_dir = +1;
+
+        if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledge_grab_dir)) {
+            if (ftZelda_80139D60_Helper(fighter_gobj)) {
+                ftZelda_80139FE8(fighter_gobj);
+                return;
+            }
+        }
     }
 
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledgeGrabDir) != 0) {
-        returnVar = ftZelda_80139D60_Helper(fighter_gobj);
-        if (returnVar != 0) {
-            ftZelda_80139FE8(fighter_gobj);
-            return;
+    if (!func_80081298(fighter_gobj)) {
+        if ((coll_data->x134_envFlags & MPCOLL_CEIL) != 0) {
+            f32 angle = lbvector_AngleXY(&coll_data->x188_ceiling.normal,
+                                         &fp->x80_self_vel);
+            if (angle > DEG_TO_RAD * (90.0F + sa->x60))
+                ftZelda_8013A764(fighter_gobj);
         }
-    }
 
-    if (func_80081298(fighter_gobj) == 0) {
-        if ((collData->x134_envFlags & 0x6000) != 0) {
-            f32 angle1 = lbvector_AngleXY(&collData->x188_ceiling.normal,
-                                          &fp->x80_self_vel);
-            if (angle1 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
+        if ((coll_data->x134_envFlags & MPCOLL_RIGHTWALL) != 0) {
+            f32 angle = lbvector_AngleXY(&coll_data->x160_rightwall.normal,
+                                         &fp->x80_self_vel);
+            if (angle > (DEG_TO_RAD * (90.0F + sa->x60)))
                 ftZelda_8013A764(fighter_gobj);
-            }
         }
-        if ((collData->x134_envFlags & 0x3F) != 0) {
-            f32 angle2 = lbvector_AngleXY(&collData->x160_rightwall.normal,
-                                          &fp->x80_self_vel);
-            if (angle2 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
+        if ((coll_data->x134_envFlags & MPCOLL_LEFTWALL) != 0) {
+            f32 angle = lbvector_AngleXY(&coll_data->x174_leftwall.normal,
+                                         &fp->x80_self_vel);
+            if (angle > (DEG_TO_RAD * (90.0F + sa->x60)))
                 ftZelda_8013A764(fighter_gobj);
-            }
-        }
-        if ((collData->x134_envFlags & 0xFC0) != 0) {
-            f32 angle3 = lbvector_AngleXY(&collData->x174_leftwall.normal,
-                                          &fp->x80_self_vel);
-            if (angle3 > (DEG_TO_RAD * (90.0f + attributes->x60))) {
-                ftZelda_8013A764(fighter_gobj);
-            }
         }
     }
 }
@@ -364,7 +360,7 @@ void ftZelda_80139F6C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 unused8;
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);

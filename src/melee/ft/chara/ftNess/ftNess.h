@@ -53,38 +53,38 @@ typedef enum ftNessAction {
 // SpecialN/SpecialAirN (PK Flash)
 #define FTNESS_SPECIALN_COLL_FLAG                                              \
     FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+        FIGHTER_STATE_CHANGE_B27
 
 // SpecialHi/SpecialAirHi (PK Thunder)
 #define FTNESS_SPECIALHI_COLL_FLAG                                             \
     FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+        FIGHTER_STATE_CHANGE_B27
 
 // SpecialHi Jibaku (PK Thunder 2 Self-Hit)
 #define FTNESS_JIBAKU_COLL_FLAG                                                \
     FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
         FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+        FIGHTER_STATE_CHANGE_B27
 
 // SpecialLw (PSI Magnet)
 #define FTNESS_SPECIALLW_COLL_FLAG                                             \
     FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE |                          \
         FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+        FIGHTER_STATE_CHANGE_B27
 
 #define FTNESS_SPECIALLW_END_FLAG                                              \
     FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE | \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
+        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
         FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+        FIGHTER_STATE_CHANGE_B27
 
 // Special Attributes
 

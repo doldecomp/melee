@@ -7,26 +7,38 @@
 #include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
 
-// Most of these should be moved to independent headers once they are created //
+// Most of these should be moved to independent headers once they are created
 
-// SOUND EFFECTS //
+// SOUND EFFECTS
 
 #define SFX_VOLUME_MAX 0x7FU
 #define SFX_PAN_MID 0x40U
 
-// HSD_PAD //
+// HSD_PAD
 
-#define HSD_BUTTON_DPAD_DOWN 0x4
-#define HSD_BUTTON_A 0x100 // Also covers Z-Button macro in-game //
-#define HSD_BUTTON_B 0x200
-#define HSD_BUTTON_LR 0x80000000 // Digital input of either L or R
+#define HSD_BUTTON_DPAD_DOWN (1 << 2)
 
-// COLLISION FLAGS //
+/// @remarks Also covers Z-Button macro in-game.
+#define HSD_BUTTON_A (1 << 8)
 
-#define MPCOLL_GRPUSH 0x8000 // From Ness's Yo-Yo collision check //
-#define MPCOLL_LEFTWALL 0xFC0
-#define MPCOLL_RIGHTWALL 0x3F
-#define MPCOLL_CEIL 0x6000
+#define HSD_BUTTON_B (1 << 9)
+
+#define HSD_BUTTON_AB (HSD_BUTTON_A | HSD_BUTTON_B)
+
+/// Digital input of either L or R
+#define HSD_BUTTON_LR (1U << 31)
+
+// COLLISION FLAGS
+
+// From Ness's Yo-Yo collision check
+
+/// @todo These (and #CollData::x134_envFlags) should be a bitfield struct
+#define MPCOLL_RIGHTWALL 0x3F ///< Bits 0-5
+#define MPCOLL_FLAGS_B5 (1 << 5)
+#define MPCOLL_LEFTWALL 0xFC0 ///< Bits 6-11
+#define MPCOLL_FLAGS_B11 (1 << 11)
+#define MPCOLL_CEIL 0x6000 ///< Bits 13-14
+#define MPCOLL_GRPUSH (1 << 15)
 
 typedef union _UnkFlagStruct {
     u8 u8;
@@ -49,8 +61,9 @@ typedef struct _ReflectDesc {
     f32 x14_size;
     f32 x18_damage_mul;
     f32 x1C_speed_mul;
-    u8 x20_behavior : 8; // Setting this to 0x1 causes the reflector to skip
-                         // ownership change //
+
+    /// @remarks Setting this to 1 causes the reflector to skip ownership change
+    u8 x20_behavior : 8;
 
 } ReflectDesc;
 

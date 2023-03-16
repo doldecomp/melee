@@ -112,7 +112,7 @@ typedef enum CharacterKind {
 #define FIGHTER_MODEL_NOUPDATE (1 << 4)
 
 #define FIGHTER_ANIMVEL_NOUPDATE (1 << 5)
-#define FIGHTER_UNK_0x40 (1 << 6)
+#define FIGHTER_STATE_CHANGE_B6 (1 << 6)
 
 /// Ignore switching to character's "hurt" textures (?)
 #define FIGHTER_MATANIM_NOUPDATE (1 << 7)
@@ -147,7 +147,7 @@ typedef enum CharacterKind {
 #define FIGHTER_ITEMVIS_NOUPDATE (1 << 18)
 
 /// Skips updating bit 0x20 of 0x2222?
-#define FIGHTER_SKIP_UNK_0x2222 (1 << 19)
+#define FIGHTER_STATE_CHANGE_B19 (1 << 19)
 
 #define FIGHTER_PHYS_UNKUPDATE (1 << 20)
 
@@ -156,20 +156,20 @@ typedef enum CharacterKind {
 
 #define FIGHTER_MODELPART_VIS_NOUPDATE (1 << 22)
 #define FIGHTER_METALB_NOUPDATE (1 << 23)
-#define FIGHTER_UNK_0x1000000 (1 << 24)
+#define FIGHTER_STATE_CHANGE_B24 (1 << 24)
 #define FIGHTER_ATTACKCOUNT_NOUPDATE (1 << 25)
 #define FIGHTER_MODEL_FLAG_NOUPDATE (1 << 26)
-#define FIGHTER_UNK_0x2227 (1 << 27)
+#define FIGHTER_STATE_CHANGE_B27 (1 << 27)
 #define FIGHTER_HITSTUN_FLAG_NOUPDATE (1 << 28)
 
 /// Keeps current fp animation?
 #define FIGHTER_ANIM_NOUPDATE (1 << 29)
 
 /// Unused?
-#define FIGHTER_UNK_0x40000000 (1 << 30)
+#define FIGHTER_STATE_CHANGE_B30 (1 << 30)
 
 /// Unused?
-#define FIGHTER_UNK_0x80000000 (1 << 31)
+#define FIGHTER_STATE_CHANGE_B31 (1 << 31)
 
 // LandingFallSpecial flags
 
