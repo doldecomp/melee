@@ -59,9 +59,9 @@ void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
         {
             enum_t asid;
             if (fp1->xE0_ground_or_air == GA_Ground)
-                asid = 0x15D;
+                asid = 349;
             else
-                asid = 0x166;
+                asid = 358;
 
             Fighter_ActionStateChange_800693AC(gobj, asid, 0, 0, 0, 1, 0);
         }
@@ -513,14 +513,14 @@ void ftMars_80137FF8(HSD_GObj* gobj)
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
     switch (fp->action_id) {
-    case 0x163:
-        asid = 0x16C;
+    case 355:
+        asid = 364;
         break;
-    case 0x165:
-        asid = 0x16E;
+    case 357:
+        asid = 366;
         break;
-    case 0x164:
-        asid = 0x16D;
+    case 356:
+        asid = 365;
         break;
         // default:
         // thing uninitialized
@@ -541,14 +541,14 @@ void ftMars_8013809C(HSD_GObj* gobj)
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
     switch (fp->action_id) {
-    case 0x16C:
-        thing = 0x163;
+    case 364:
+        thing = 355;
         break;
-    case 0x16E:
-        thing = 0x165;
+    case 366:
+        thing = 357;
         break;
-    case 0x16D:
-        thing = 0x164;
+    case 365:
+        thing = 356;
         break;
         // default:
         // thing uninitialized
@@ -571,22 +571,22 @@ void ftMars_80138148(HSD_GObj* gobj)
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
         if (fp->xE0_ground_or_air == GA_Ground) {
-            thing = 0x163;
+            thing = 355;
         } else {
-            thing = 0x16C;
+            thing = 364;
         }
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
             if (fp->xE0_ground_or_air == GA_Ground) {
-                thing = 0x165;
+                thing = 357;
             } else {
-                thing = 0x16E;
+                thing = 366;
             }
         } else {
             if (fp->xE0_ground_or_air == GA_Ground) {
-                thing = 0x164;
+                thing = 356;
             } else {
-                thing = 0x16D;
+                thing = 365;
             }
         }
     }
