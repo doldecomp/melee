@@ -266,8 +266,7 @@ bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = fp->x2D4_specialAttributes;
 
-    if ((f32) fp->mewtwoVars.SpecialHi.unk4 >=
-        mewtwoAttrs->x54_MEWTWO_TELEPORT_UNK2)
+    if (fp->mewtwoVars.SpecialHi.unk4 >= mewtwoAttrs->x54_MEWTWO_TELEPORT_UNK2)
     {
         return true;
     }
@@ -281,15 +280,18 @@ bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* fighter_gobj)
 /// Mewtwo's aerial Teleport Zoom Collision callback
 void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
     CollData* collData = collData = getFtColl(fp);
-    u32 envFlags;
-    u32 var;
 
     fp->mewtwoVars.SpecialHi.unk4++;
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_O(fp)) != false) {
-        if (ftMewtwo_SpecialHi_CheckTimer(fighter_gobj) != false) {
+    if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_O(fp))) {
+        if (ftMewtwo_SpecialHi_CheckTimer(fighter_gobj)) {
             ftMewtwo_SpecialAirHi_AirToGround(fighter_gobj);
             return;
         }
@@ -555,7 +557,7 @@ void ftMewtwo_SpecialAirHiLost_Phys(HSD_GObj* fighter_gobj)
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
     f32 velY;
 
-    if ((u32) fp->x2200_ftcmd_var0 != 0U) {
+    if ((u32) fp->x2200_ftcmd_var0) {
         func_8007D4B8(fp);
         func_8007D440(fp, mewtwoAttrs->x64_MEWTWO_TELEPORT_DRIFT *
                               fp->x110_attr.x17C_AerialDriftMax);
@@ -580,7 +582,7 @@ void ftMewtwo_SpecialAirHiLost_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_O(fp)) != false) {
+    if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_O(fp))) {
         func_800D5CB0(fighter_gobj, 0,
                       mewtwoAttrs->x74_MEWTWO_TELEPORT_LANDING_LAG);
         return;
