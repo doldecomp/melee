@@ -269,25 +269,20 @@ void ftZelda_80139C58(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftZelda_80139C94(HSD_GObj* fighter_gobj)
-{
-    return;
-}
-void ftZelda_80139C98(HSD_GObj* fighter_gobj)
-{
-    return;
-}
+void ftZelda_80139C94(HSD_GObj* fighter_gobj) {}
 
-// 80139C9C - 80139CBC (0x20 bytes)
+void ftZelda_80139C98(HSD_GObj* fighter_gobj) {}
+
 void ftZelda_80139C9C(HSD_GObj* fighter_gobj)
 {
     func_8007CB74(fighter_gobj);
 }
 
-void ftZelda_80139CBC(HSD_GObj* fighter_gobj)
-{
-    return;
-}
+void ftZelda_80139CBC(HSD_GObj* fighter_gobj) {}
+
+/// @todo Move these somewhere reusable
+static u32 const env_lo = (1 << 6) - 1;
+static u32 const env_hi = env_lo << 6;
 
 // 80139CC0 - 80139D60 (0xA0 bytes)
 // https://decomp.me/scratch/UKBQL
