@@ -454,8 +454,6 @@ void func_80137E0C(HSD_GObj* gobj)
                                        0, 0, 1, 0);
 }
 
-// 80137ECC 00134AAC
-// https://decomp.me/scratch/5uXTE
 void lbl_80137ECC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
