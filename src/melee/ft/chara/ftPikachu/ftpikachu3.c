@@ -348,33 +348,43 @@ void ftPikachu_ActionChange_801257D4(HSD_GObj* fighter_gobj)
 
 void ftPikachu_ActionChange_80125834(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
-    Fighter* fp;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, 347, 0, 0, 0, 1, 0);
-    fp = GET_FIGHTER(fighter_gobj);
-    fp->x2200_ftcmd_var0 = 0;
-    func_8007DB24(fighter_gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124D2C;
+    {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
+        fp->x2200_ftcmd_var0 = 0;
+        func_8007DB24(fighter_gobj);
+        fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124D2C;
+    }
 }
 
 void ftPikachu_ActionChange_801258A0(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
-    Fighter* fp;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, 352, 0, 0, 0, 1, 0);
-    fp = GET_FIGHTER(fighter_gobj);
-    fp->x2200_ftcmd_var0 = 0;
-    func_8007DB24(fighter_gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124D2C;
+
+    {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
+        fp->x2200_ftcmd_var0 = 0;
+        func_8007DB24(fighter_gobj);
+        fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124D2C;
+    }
 }
 
 void ftPikachu_Stub_8012590C(HSD_GObj* arg0) {}
 
 void ftPikachu_80125910(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         ftPikachu_ActionChange_80125D28(fighter_gobj);
-    }
 }
 
 void ftPikachu_Stub_8012594C(HSD_GObj* arg0) {}
@@ -385,19 +395,21 @@ void ftPikachu_Stub_80125954(HSD_GObj* arg0) {}
 
 void ftPikachu_80125958(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
 
-    if (fp->x2200_ftcmd_var0) {
+    if (fp->x2200_ftcmd_var0 != 0)
         func_8007D494(fp, pika_attr->x58, pika_attr->x4C);
-    } else {
+    else
         func_8007D494(fp, pika_attr->x48, pika_attr->x4C);
-    }
 
-    if (fp->x2200_ftcmd_var0) {
+    if (fp->x2200_ftcmd_var0 != 0)
         func_8007CE94(fp, pika_attr->x54);
-    }
 }
 
 void ftPikachu_Stub_801259D4(HSD_GObj* arg0) {}
@@ -412,28 +424,34 @@ void ftPikachu_801259D8(HSD_GObj* fighter_gobj)
         ftPikachu_ActionChange_80125CD0(fighter_gobj);
     }
 
-    if (collData->x134_envFlags & 63 || collData->x134_envFlags & 4032) {
+    if (collData->x134_envFlags & MPCOLL_RIGHTWALL ||
+        collData->x134_envFlags & MPCOLL_LEFTWALL)
+    {
         ftPikachu_ActionChange_80125D28(fighter_gobj);
     }
 }
 
+static u32 const transition_flags3 =
+    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE;
+
 void ftPikachu_ActionChange_80125A54(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
+    ftPikachuAttributes* sa = fp->x2D4_specialAttributes;
 
     fp->x2200_ftcmd_var0 = 0;
 
-    fp->x80_self_vel.x =
-        (pika_attr->x40 * fp->x2340_stateVar1) + pika_attr->x3C;
+    fp->x80_self_vel.x = sa->x40 * fp->x2340_stateVar1 + sa->x3C;
     fp->x80_self_vel.x *= fp->facing_dir;
 
-    fp->x80_self_vel.y =
-        (0.5f * pika_attr->x44) +
-        (pika_attr->x44 * (0.5f * fp->x2340_stateVar1 / pika_attr->x24));
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 350, 10, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    {
+        f32 temp = 0.5f * fp->x2340_stateVar1 / sa->x24;
+        fp->x80_self_vel.y = 0.5f * sa->x44 + sa->x44 * temp;
+    }
+
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 350, transition_flags3, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
+
     fp->cb.x21F8_callback = &func_8007F76C;
     fp->cb.x21C0_callback_OnGiveDamage = &ftPikachu_ZeroVelocity_80124F24;
 }
