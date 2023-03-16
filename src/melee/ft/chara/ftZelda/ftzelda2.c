@@ -85,12 +85,11 @@ void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighterPlus(fighter_gobj);
 
-    fp->xEC_ground_vel = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = 0.0f;
+    fp->xEC_ground_vel = 0;
+    fp->x80_self_vel.y = 0;
+    fp->x80_self_vel.x = 0;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15D, 0, NULL, 0.0f, 1.0,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 349, 0, NULL, 0, 1, 0);
     func_8006EBA4(fighter_gobj);
 
     fp = getFighterPlus(fighter_gobj);
@@ -132,15 +131,13 @@ void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
             HSD_JObj* jObj = fp->x5E8_fighterBones[boneIndex].x0_jobj;
 
             func_8000B1CC(jObj, NULL, &vec);
-            func_800119DC(&vec, 120, 1.5f, 0.02f, 60 * (f32) M_PI / 180);
+            func_800119DC(&vec, 120, 1.5, 0.02, 60 * (f32) M_PI / 180);
         }
 
         fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
     }
 }
 
-// 801399B4 - 801399F0 (0x3C bytes)
-// https://decomp.me/scratch/wsgNa
 void ftZelda_801399B4(HSD_GObj* fighter_gobj)
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -148,33 +145,21 @@ void ftZelda_801399B4(HSD_GObj* fighter_gobj)
     }
 }
 
-// Animation_ZeldaUpBStartAir
-// 801399F0 - 80139A2C (0x3C bytes)
-// https://decomp.me/scratch/3f62U
 void ftZelda_801399F0(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         ftZelda_8013A244(fighter_gobj);
-    }
 }
 
-void ftZelda_80139A2C(HSD_GObj* fighter_gobj)
-{
-    return;
-}
-void ftZelda_80139A30(HSD_GObj* fighter_gobj)
-{
-    return;
-}
+void ftZelda_80139A2C(HSD_GObj* fighter_gobj) {}
 
-// 80139A34 - 80139A54 (0x20 bytes)
+void ftZelda_80139A30(HSD_GObj* fighter_gobj) {}
+
 void ftZelda_80139A34(HSD_GObj* fighter_gobj)
 {
     func_80084F3C(fighter_gobj);
 }
 
-// 80139A54 - 80139A98 (0x44 bytes)
-// https://decomp.me/scratch/dA7X6
 void ftZelda_80139A54(HSD_GObj* fighter_gobj)
 {
     f32 attrs[2];
