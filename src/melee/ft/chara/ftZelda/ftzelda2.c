@@ -220,7 +220,7 @@ void ftZelda_80139B44(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D60C(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x160, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1.0,
+                                       fp->x894_currentAnimFrame, 1,
                                        0); // lbl_804D9BA8, lbl_804D9BA4
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
