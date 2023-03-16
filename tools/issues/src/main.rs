@@ -161,7 +161,7 @@ fn process_tu(
     let mut tu: CXTranslationUnit = null_mut();
 
     let cx_result = unsafe {
-        clang_parseTranslationUnit2FullArgv(
+        clang_parseTranslationUnit2(
             index,
             path_ptr,
             args,
