@@ -185,14 +185,16 @@ fn process_diagnostics(
     items: &mut HashSet<DiagnosticInfo>,
 ) -> anyhow::Result<()> {
     let diagnostics = unsafe { clang_getDiagnosticSetFromTU(tu) };
+    let count = unsafe { clang_getNumDiagnosticsInSet(diagnostics) };
 
-    let result = (0..unsafe { clang_getNumDiagnosticsInSet(diagnostics) })
-        .try_for_each(|i| {
-            let diagnostic_info =
-                process_diagnostic(diagnostics, i, str_interner)?;
-            items.insert(diagnostic_info);
-            Ok(())
-        });
+    debug!("Found {count} diagnostics.");
+
+    let result = (0..count).try_for_each(|i| {
+        let diagnostic_info =
+            process_diagnostic(diagnostics, i, str_interner)?;
+        items.insert(diagnostic_info);
+        Ok(())
+    });
 
     unsafe {
         clang_disposeDiagnosticSet(diagnostics);
