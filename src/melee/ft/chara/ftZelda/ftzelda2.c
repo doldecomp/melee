@@ -14,17 +14,13 @@
 #include <melee/lb/lbunknown_003.h>
 #include <MSL/trigf.h>
 
-// 801396AC - 801396E0 (0x34 bytes)
-// https://decomp.me/scratch/UHxFc
 void ftZelda_801396AC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftZelda_801396E0(fighter_gobj);
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-// 801396E0 - 8013979C (0xBC bytes)
-// https://decomp.me/scratch/ZIrBS
 void ftZelda_801396E0(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
@@ -39,15 +35,13 @@ void ftZelda_801396E0(HSD_GObj* fighter_gobj)
         } else {
             ef_Spawn(0x4F7, fighter_gobj, fp->x5E8_fighterBones->x0_jobj);
         }
-        fp->x2219_flag.bits.b0 = 1L;
+        fp->x2219_flag.bits.b0 = true;
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
-// 8013979C - 80139834 (0x98 bytes)
-// https://decomp.me/scratch/yRI2F
 void ftZelda_8013979C(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
