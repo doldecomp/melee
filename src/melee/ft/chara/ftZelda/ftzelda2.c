@@ -296,9 +296,6 @@ void ftZelda_80139CC0(HSD_GObj* fighter_gobj)
     }
 }
 
-// 80139D60 - 80139F6C (0x20C bytes)
-// https://decomp.me/scratch/LfvOU (with helper)
-// https://decomp.me/scratch/OJ62l (single function)
 bool ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj)
 {
     bool var_r0;
@@ -506,9 +503,6 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj)
     ftZelda_8013A244(fighter_gobj);
 }
 
-// AS_ZeldaUpBTravelAir
-// 8013A244 - 8013A448 (0x204 bytes)
-// https://decomp.me/scratch/70TAa
 void ftZelda_8013A244(HSD_GObj* fighter_gobj)
 {
     volatile float y;
@@ -600,14 +594,12 @@ void ftZelda_8013A244(HSD_GObj* fighter_gobj)
     fp->x221E_flag.bits.b0 = 1;
 }
 
-// 8013A448 - 8013A484 (0x3C bytes)
-// https://decomp.me/scratch/iQFL9
 void ftZelda_8013A448(HSD_GObj* fighter_gobj)
 {
     u32 unused[2];
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 // 8013A484 - 8013A4E4 (0x60 bytes)
