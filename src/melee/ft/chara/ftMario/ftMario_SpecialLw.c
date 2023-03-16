@@ -152,7 +152,7 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
             func_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 0, IS_INTERRUPTIBLE, 1.0f,
+        func_80096900(gobj, 1, 0, true, 1.0f,
                       (f32) sa->x5C_MARIO_TORNADO_LANDING_LAG);
     }
 }

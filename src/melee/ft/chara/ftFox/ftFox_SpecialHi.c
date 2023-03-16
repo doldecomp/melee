@@ -557,7 +557,7 @@ void ftFox_SpecialHiFall_Anim(HSD_GObj* fighter_gobj)
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
+        func_80096900(fighter_gobj, 1, 0, true,
                       foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                       foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
     }
@@ -602,7 +602,7 @@ void ftFox_SpecialHiLanding_Coll(HSD_GObj* fighter_gobj)
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (func_80082708(fighter_gobj) == false) {
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
+        func_80096900(fighter_gobj, 1, 0, true,
                       foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                       foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
     }
@@ -690,7 +690,7 @@ void ftFox_SpecialHiBound_Anim(HSD_GObj* fighter_gobj)
     if (((u32) fp->x2200_ftcmd_var0 != 0U) &&
         ((s32) fp->xE0_ground_or_air == GA_Air))
     {
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
+        func_80096900(fighter_gobj, 1, 0, true,
                       foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                       foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
         fp->x1968_jumpsUsed = (u8) ftAttrs->x168_MaxJumps;
@@ -698,7 +698,7 @@ void ftFox_SpecialHiBound_Anim(HSD_GObj* fighter_gobj)
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if ((s32) fp->xE0_ground_or_air == GA_Air) {
-            func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
+            func_80096900(fighter_gobj, 1, 0, true,
                           foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                           foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
             fp->x1968_jumpsUsed = (u8) ftAttrs->x168_MaxJumps;

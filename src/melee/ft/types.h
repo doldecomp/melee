@@ -171,10 +171,6 @@ typedef enum CharacterKind {
 /// Unused?
 #define FIGHTER_STATE_CHANGE_B31 (1 << 31)
 
-// LandingFallSpecial flags
-
-#define IS_INTERRUPTIBLE 1
-
 // Ledge Grab Macros
 
 #define CLIFFCATCH_BOTH 0

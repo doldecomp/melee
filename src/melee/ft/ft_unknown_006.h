@@ -280,7 +280,7 @@ void func_80096228(HSD_GObj*);
 void func_8009634C(HSD_GObj*);
 void func_80096470(HSD_GObj*);
 void func_800968C8(HSD_GObj*);
-void func_80096900(HSD_GObj*, s32, s32, s32, f32, f32);
+void func_80096900(HSD_GObj*, s32, s32, bool is_interruptable, f32, f32);
 void func_800969D8(HSD_GObj*, s32, s32, s32, f32, f32, f32);
 void func_80096AA0(HSD_GObj*);
 void func_80096AF4(HSD_GObj*);

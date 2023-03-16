@@ -487,7 +487,7 @@ void ftFox_SpecialAirSEnd_Anim(HSD_GObj* fighter_gobj)
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
+        func_80096900(fighter_gobj, 1, 0, true,
                       foxAttrs->x4C_FOX_ILLUSION_FREEFALL_MOBILITY,
                       foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
     }

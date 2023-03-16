@@ -403,7 +403,7 @@ void ftNess_SpecialAirNEnd_Anim(
             func_800CC730(fighter_gobj);
             return;
         }
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, 1.0f,
+        func_80096900(fighter_gobj, 1, 0, true, 1.0f,
                       ness_attr->x1C_PKFLASH_LANDING_LAG);
     }
 }

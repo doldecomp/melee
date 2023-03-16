@@ -67,13 +67,6 @@ typedef enum ftMewtwoAction {
 
 // SpecialHi/SpecialAirHi //
 
-#define FTMEWTWO_SPECIALHI_COLL_FLAG                                           \
-    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_STATE_CHANGE_B27
-
 // SpecialLw/SpecialAirLw //
 
 #define FTMEWTWO_SPECIALLW_COLL_FLAG                                           \
