@@ -150,26 +150,22 @@ void func_801376E8(HSD_GObj* gobj)
                                        fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 80137748 00134328
-// MarthSideBAirToGround
-// https://decomp.me/scratch/fpZ5r
 void func_80137748(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->sa.mars.x222C = 0;
+
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, 349, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 801377B0 00134390
-// https://decomp.me/scratch/baBIS
 void lbl_801377B0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    // FrameTimerCheck
+    Fighter* fp = GET_FIGHTER(gobj);
+
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
@@ -181,29 +177,29 @@ void lbl_801377B0(HSD_GObj* gobj)
     }
 }
 
-// 80137810 001343F0
-// https://decomp.me/scratch/wl5uM
 void lbl_80137810(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+
     if (fp->x2200_ftcmd_var0 != 0) {
-        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & 0x300) != 0) {
+        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
             func_80137E0C(gobj);
-        }
     } else {
-        if ((fp->input.x668 & 0x300) != 0) {
+        if ((fp->input.x668 & HSD_BUTTON_AB) != 0) {
             fp->x2204_ftcmd_var1 = 1;
         }
     }
 }
 
-// 80137870 00134450
-// https://decomp.me/scratch/iRZdQ
 void lbl_80137870(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 unused1, unused2, unused3, unused4;
+    Fighter* fp = GET_FIGHTER(gobj);
+    MarsAttributes* attr = getFtSpecialAttrsD(fp);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // Physics_Friction
@@ -215,113 +211,105 @@ void lbl_80137870(HSD_GObj* gobj)
     }
 }
 
-// 801378D4 001344B4
-// Collision_MarthSideB2Air
-// https://decomp.me/scratch/MqEA1
 void lbl_801378D4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 unused1, unused2;
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (func_800827A0(gobj) == 0) {
+        if (!func_800827A0(gobj))
             func_80137940(gobj);
-        }
+    } else if (func_80081D0C(gobj)) {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
-    } else if (func_80081D0C(gobj) != 0) {
+
         // MarthSideB2Air->Ground
         func_801379D0(gobj);
     }
 }
 
-// 80137940 00134520
-// https://decomp.me/scratch/HjsYm
 void func_80137940(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
+    Fighter* fp = GET_FIGHTER(gobj);
+    enum_t asid;
 
     func_8007D5D4(fp);
+
     switch (fp->action_id) {
-    case 0x15E:
-        thing = 0x167;
+    case 350:
+        asid = 359;
         break;
-    case 0x15F:
-        thing = 0x168;
+    case 351:
+        asid = 360;
         break;
-        // default:
-        // thing uninitialized
+#ifndef MUST_MATCH
+    default:
+        HSD_ASSERT(__LINE__, false);
+#endif
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 801379D0 001345B0
-// MarthSideB2AirToGround
-// https://decomp.me/scratch/711pp
 void func_801379D0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    s32 thing;
+    enum_t asid;
 
     fp->sa.mars.x222C = 0;
     func_8007D7FC(fp);
+
     switch (fp->action_id) {
-    case 0x167:
-        thing = 0x15E;
+    case 359:
+        asid = 350;
         break;
-    case 0x168:
-        thing = 0x15F;
+    case 360:
+        asid = 351;
         break;
-        // default:
-        // thing uninitialized
+#ifndef MUST_MATCH
+    default:
+        HSD_ASSERT(__LINE__, false);
+#endif
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 80137A68 00134648
-// https://decomp.me/scratch/5NC31
 void lbl_80137A68(HSD_GObj* gobj)
 {
     func_80089824(gobj);
     func_800892A0(gobj);
 }
 
-// 80137A9C 0013467C
-// https://decomp.me/scratch/CVXJ2
 void func_80137A9C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    s32 thing;
+    enum_t asid;
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->cb.x21EC_callback = &lbl_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            thing = 0x15E;
-        } else {
-            thing = 0x167;
-        }
+        if (fp->xE0_ground_or_air == GA_Ground)
+            asid = 350;
+        else
+            asid = 359;
     } else {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            thing = 0x15F;
-        } else {
-            thing = 0x168;
-        }
+        if (fp->xE0_ground_or_air == GA_Ground)
+            asid = 351;
+        else
+            asid = 360;
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, asid, FIGHTER_ATTACKCOUNT_NOUPDATE,
+                                       0, 0, 1, 0);
 }
 
-// 80137B34 00134714
-// https://decomp.me/scratch/nDoR1
 void lbl_80137B34(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground) {
@@ -334,37 +322,35 @@ void lbl_80137B34(HSD_GObj* gobj)
     }
 }
 
-// 80137B94 00134774
-// https://decomp.me/scratch/5TRaz
 void lbl_80137B94(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & 0x300) != 0) {
+        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
             func_80138148(gobj);
-        }
     } else {
-        if ((fp->input.x668 & 0x300) != 0) {
+        if ((fp->input.x668 & HSD_BUTTON_AB) != 0)
             fp->x2204_ftcmd_var1 = 1;
-        }
     }
 }
 
-// 80137BF4 001347D4
-// https://decomp.me/scratch/vI7hc
 void lbl_80137BF4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 unused1, unused2, unused3, unused4;
+    Fighter* fp = GET_FIGHTER(gobj);
+    MarsAttributes* sa = getFtSpecialAttrsD(fp);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // somethingFriction
         func_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, attr->x20, attr->x24);
+        func_8007D494(fp, sa->x20, sa->x24);
         func_80085204(gobj);
     }
 }
