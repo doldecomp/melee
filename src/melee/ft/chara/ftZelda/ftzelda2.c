@@ -69,7 +69,7 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 
 #ifdef MUST_MATCH
     // Trick to use more stack space
-    unused[0] = 1.5;
+    unused[0] = 0;
 #endif
 
     boneIndex = func_8007500C(fp, 4);
@@ -77,7 +77,7 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 
     func_8000B1CC(jObj, NULL, &vec);
 
-    func_800119DC(&vec, 0x78, 1.5, 0.02, 60 * (f32) M_PI / 180);
+    func_800119DC(&vec, 0x78, 1.5f, 0.02, 60 * (f32) M_PI / 180);
 }
 
 void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
