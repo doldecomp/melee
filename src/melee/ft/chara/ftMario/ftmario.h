@@ -43,7 +43,7 @@ typedef enum ftMarioAction {
 typedef struct _ftMarioAttributes {
     // SIDE SPECIAL - CAPE / SUPER SHEET //
 
-    /* 0x00 */ u8 x0_padding[0x04 - 0x0];
+    /* 0x00 */ f32 vel_x_decay;
     /* 0x04 */ f32 x4_MARIO_CAPE_VEL_X;
     /* 0x08 */ f32 x8_MARIO_CAPE_VEL_Y;
     /* 0x0C */ f32 xC_MARIO_CAPE_GRAVITY;

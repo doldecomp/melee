@@ -22,33 +22,38 @@ void ftMario_SpecialS_SetCall(Fighter* fp)
     fp->cb.x21D8_callback_ExitHitlag = ftMario_SpecialS_ExitHitlag;
 }
 
-// 0x800E1248
-// https://decomp.me/scratch/AmeqW
 void ftMario_SpecialS_CreateCape(HSD_GObj* gobj)
 {
-    Vec3 coords;
-    HSD_GObj* gobj2;
-    Fighter* fp = getFighter(gobj);
-    ftMarioAttributes* sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
-    u8 padding[8];
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMarioAttributes* sa = fp->x2D4_specialAttributes;
 
-    if (fp->x2208_ftcmd_var2 == 0) {
-        fp->x2208_ftcmd_var2 = 1;
-        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj,
+    if (!fp->x2208_ftcmd_var2) {
+        /// @todo Can't move below @c unused.
+        Vec3 coords;
+
+        /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 unused[4];
+#endif
+
+        fp->x2208_ftcmd_var2 = true;
+        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 49)].x0_jobj,
                       NULL, &coords);
 
-        gobj2 =
-            func_802B2560(gobj, fp->facing_dir, &coords,
-                          func_8007500C(fp, 0x31), sa->x14_MARIO_CAPE_IT_KIND);
+        {
+            HSD_GObj* cape = func_802B2560(gobj, fp->facing_dir, &coords,
+                                           func_8007500C(fp, 49),
+                                           sa->x14_MARIO_CAPE_IT_KIND);
 
-        fp->sa.mario.x223C_capeGObj = gobj2;
+            fp->sa.mario.x223C_capeGObj = cape;
+        }
+
         fp->x1984_heldItemSpec = fp->sa.mario.x223C_capeGObj;
         ftMario_SpecialS_SetCall(fp);
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
 
-// 0x800E132C
 void ftMario_SpecialS_SetNULL(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -58,7 +63,6 @@ void ftMario_SpecialS_SetNULL(HSD_GObj* gobj)
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-// 0x800E1368
 void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -69,7 +73,6 @@ void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj)
     }
 }
 
-// 0x800E13C8
 void ftMario_SpecialS_EnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -77,7 +80,6 @@ void ftMario_SpecialS_EnterHitlag(HSD_GObj* gobj)
         func_802B26C0(fp->sa.mario.x223C_capeGObj);
 }
 
-// 0x800E13F8
 void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -85,75 +87,77 @@ void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
         func_802B26E0(fp->sa.mario.x223C_capeGObj);
 }
 
-// 0x800E1428
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    enum_t asid = fp->action_id;
 
-    s32 asid = fp->action_id;
-
-    if ((asid >= AS_MARIO_SPECIALS) && (asid <= AS_MARIO_SPECIALAIRS))
+    if (asid >= AS_MARIO_SPECIALS && asid <= AS_MARIO_SPECIALAIRS)
         return false;
 
     return true;
 }
 
-void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, s32 new_action_state_index)
+void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, enum_t asid)
 {
-    Fighter* fp;
-    Fighter_ActionStateChange_800693AC(gobj, new_action_state_index, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, asid, 0, NULL, 0, 1, 0);
     func_8006EBA4(gobj);
-    fp = GET_FIGHTER(gobj);
-    fp->x2208_ftcmd_var2 = 0;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->marioVars.SpecialS.isReflect = false;
-    fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialS_CreateCape;
+
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->x2208_ftcmd_var2 = 0;
+        fp->x2204_ftcmd_var1 = 0;
+        fp->x2200_ftcmd_var0 = 0;
+        fp->marioVars.SpecialS.isReflect = false;
+        fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialS_CreateCape;
+    }
 }
 
 void ftMario_SpecialS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
     u8 unused[8];
-    fp = GET_FIGHTER(gobj);
-    fp->x80_self_vel.y = 0.0f;
+#endif
+
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x80_self_vel.y = 0;
 
     ftMario_SpecialS_ChangeAction(gobj, AS_MARIO_SPECIALS);
 }
 
 void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftMarioAttributes* sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
-    u8 unused[8];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
-    fp->x80_self_vel.x = (fp->x80_self_vel.x / ((Vec3*) (sa))->x);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMarioAttributes* sa = fp->x2D4_specialAttributes;
+
+    fp->x80_self_vel.x /= sa->vel_x_decay;
 
     ftMario_SpecialS_ChangeAction(gobj, AS_MARIO_SPECIALAIRS);
 }
 
-// 0x800E1550
 void ftMario_SpecialS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
         func_8008A2BC(gobj);
 }
 
-// 0x800E158C
 void ftMario_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
         func_800CC730(gobj);
 }
 
-// 0x800E15C8
 void ftMario_SpecialS_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-// 0x800E15CC
 void ftMario_SpecialAirS_IASA(HSD_GObj* gobj)
 {
     return;
@@ -182,7 +186,6 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
 /// @todo Move elsewhere.
 #define PI_3 (3.14159265359f / 3.0f)
 
-// 0x800E15D0
 void ftMario_SpecialS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -204,7 +207,6 @@ void ftMario_SpecialS_Phys(HSD_GObj* gobj)
     ftMario_SpecialS_ReflectThink(gobj);
 }
 
-// 0x800E16E0
 void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     u32 ftcmd_var0_tmp;
@@ -244,7 +246,6 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
     ftMario_SpecialS_ReflectThink(gobj);
 }
 
-// 0x800E1840
 void ftMario_SpecialS_Coll(HSD_GObj* gobj)
 {
     if (func_800827A0(gobj) == false) {
@@ -252,7 +253,6 @@ void ftMario_SpecialS_Coll(HSD_GObj* gobj)
     }
 }
 
-// 0x800E187C
 void ftMario_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     if (func_80081D0C(gobj) != false) {
@@ -270,7 +270,6 @@ void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialS_CreateCape;
 }
 
-// 0x800E18B8
 void ftMario_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -285,7 +284,6 @@ void ftMario_SpecialS_GroundToAir(HSD_GObj* gobj)
     ftMario_SpecialS_UpdateVarsColl(gobj);
 }
 
-// 0x800E198C
 void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp;
