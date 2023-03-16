@@ -162,72 +162,66 @@ void ftZelda_80139A34(HSD_GObj* fighter_gobj)
 
 void ftZelda_80139A54(HSD_GObj* fighter_gobj)
 {
-    f32 attrs[2];
-    Fighter* fp;
-    ftZeldaAttributes* attributes;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+    Vec2 vec;
 
-    fp = GET_FIGHTER(fighter_gobj);
-    attributes = fp->x2D4_specialAttributes;
-    attrs[0] = attributes->x40;
-    attrs[1] = attributes->x44;
+    vec.x = attributes->x40;
+    vec.y = attributes->x44;
 
-    func_8007D494(fp, attrs[0], attrs[1]);
+    func_8007D494(fp, vec.x, vec.y);
     func_8007CEF4(fp);
 }
 
-// 80139A98 - 80139AD4 (0x3C bytes)
 void ftZelda_80139A98(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == 0) {
+    if (!func_80082708(fighter_gobj))
         ftZelda_80139B44(fighter_gobj);
-    }
 }
 
-// 80139AD4 - 80139B44 (0x70 bytes)
-// https://decomp.me/scratch/btfXC
 void ftZelda_80139AD4(HSD_GObj* fighter_gobj)
 {
-    f32 facingDirection;
-    s32 ledgeGrabDir;
-
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    facingDirection = fp->facing_dir;
+    f32 facing_dir = fp->facing_dir;
+    int ledge_grab_dir;
 
-    if (facingDirection < 0) { // lbl_804D9BA4
-        ledgeGrabDir = -1;
-    } else {
-        ledgeGrabDir = 1;
-    }
+    if (facing_dir < 0)
+        ledge_grab_dir = -1;
+    else
+        ledge_grab_dir = +1;
 
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledgeGrabDir) != 0) {
+    if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledge_grab_dir))
         ftZelda_80139BB0(fighter_gobj);
-    } else if (!func_80081298(fighter_gobj)) {
+    else if (!func_80081298(fighter_gobj))
         return;
-    }
 }
 
-// 80139B44 - 80139BB0 (0x6C bytes)
-// https://decomp.me/scratch/XI2m5
+static u32 const transition_flags =
+    FIGHTER_GFX_PRESERVE | FIGHTER_HITSTATUS_COLANIM_PRESERVE |
+    FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE |
+    FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |
+    FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |
+    FIGHTER_UNK_0x2227;
+
 void ftZelda_80139B44(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D60C(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x160, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1,
-                                       0); // lbl_804D9BA8, lbl_804D9BA4
+
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 352, transition_flags,
+                                       NULL, fp->x894_currentAnimFrame, 1, 0);
+
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
-
-static u32 const transition_flags =
-    (1 << 1) | (1 << 2) | (1 << 3) | (1 << 7) | (1 << 12) | (1 << 14) |
-    (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
 
 void ftZelda_80139BB0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15D, transition_flags,
+
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 349, transition_flags,
                                        NULL, fp->x894_currentAnimFrame, 1, 0);
+
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
 
@@ -364,23 +358,21 @@ void ftZelda_80139D60(HSD_GObj* fighter_gobj)
     }
 }
 
-// 80139F6C - 80139FE8 (0x7C bytes)
-// https://decomp.me/scratch/HtMY4
 void ftZelda_80139F6C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    f32 temp_f2;
-    s32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
-    fp = getFighter(fighter_gobj);
-
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D60C(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x161, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 0.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 353, transition_flags,
+                                       NULL, fp->x894_currentAnimFrame, 0, 0);
 
-    fp->x2223_flag.bits.b4 = 1;
-    fp->x221E_flag.bits.b0 = 1;
+    fp->x2223_flag.bits.b4 = true;
+    fp->x221E_flag.bits.b0 = true;
 }
 
 void ftZelda_80139FE8(HSD_GObj* fighter_gobj)
