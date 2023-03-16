@@ -1,3 +1,4 @@
+#include "melee/ft/types.h"
 #include <melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.h>
 
 #include <melee/ef/eflib.h>
@@ -14,7 +15,6 @@
 void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-
     ftMewtwo_SpecialHi_SetStartGFX(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
@@ -22,50 +22,62 @@ void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj)
 /// Setup Teleport Start GFX
 void ftMewtwo_SpecialHi_SetStartGFX(HSD_GObj* fighter_gobj)
 {
-    Vec3 pos;
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp0 = GET_FIGHTER(fighter_gobj);
 
-    if (fp->x2219_flag.bits.b0 == 0) {
-        func_8000B1CC(fp->x5E8_fighterBones[5].x0_jobj, NULL, &pos);
-        ef_Spawn(0x4E8, fighter_gobj, &pos);
-        fp->x2219_flag.bits.b0 = 1;
+    {
+        Fighter* fp1 = fp0;
+        Vec3 pos;
+
+        if (!fp1->x2219_flag.bits.b0) {
+            func_8000B1CC(fp1->x5E8_fighterBones[WaistN].x0_jobj, NULL, &pos);
+            ef_Spawn(0x4E8, fighter_gobj, &pos);
+            fp1->x2219_flag.bits.b0 = true;
+        }
     }
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+
+    fp0->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fp0->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
 /// Setup Teleport End GFX
 void ftMewtwo_SpecialHi_SetEndGFX(HSD_GObj* fighter_gobj)
 {
-    Vec3 pos;
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp0 = GET_FIGHTER(fighter_gobj);
 
-    if (fp->x2219_flag.bits.b0 == 0) {
-        func_8000B1CC(fp->x5E8_fighterBones[5].x0_jobj, NULL, &pos);
-        fp->x2219_flag.bits.b0 = 1;
+    {
+        Fighter* fp1 = fp0;
+        Vec3 pos;
+
+        if (!fp1->x2219_flag.bits.b0) {
+            func_8000B1CC(fp1->x5E8_fighterBones[WaistN].x0_jobj, NULL, &pos);
+            fp1->x2219_flag.bits.b0 = true;
+        }
     }
-    fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
-    fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = NULL;
+
+    fp0->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
+    fp0->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
+    fp0->cb.x21BC_callback_Accessory4 = NULL;
 }
 
 /// Mewtwo's grounded Teleport Start Action State handler
 void ftMewtwo_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-    void (*cb_Accessory4)(HSD_GObj*);
+    Fighter* fp0 = GET_FIGHTER(fighter_gobj);
 
-    fp->xEC_ground_vel = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = 0.0f;
+    {
+        Fighter* fp1 = fp0;
+        fp1->xEC_ground_vel = 0;
+        fp1->x80_self_vel.y = 0;
+        fp1->x80_self_vel.x = 0;
+    }
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALHI_START,
-                                       0, NULL, 0.0f, 1.0f, 0.0f);
+                                       0, NULL, 0, 1, 0);
     func_8006EBA4(fighter_gobj);
 
-    fp->x2200_ftcmd_var0 = 0;
-    fp->mewtwoVars.SpecialHi.unk4 = 0;
-    fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialHi_CreateGFX;
+    fp0->x2200_ftcmd_var0 = 0;
+    fp0->mewtwoVars.SpecialHi.unk4 = 0;
+    fp0->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialHi_CreateGFX;
 }
 
 /// Mewtwo's aerial Teleport Start Action State handler
@@ -80,7 +92,7 @@ void ftMewtwo_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.y /= mewtwoAttrs->x44_MEWTWO_TELEPORT_VEL_DIV_Y;
 
     Fighter_ActionStateChange_800693AC(
-        fighter_gobj, AS_MEWTWO_SPECIALAIRHI_START, 0, NULL, 0.0f, 1.0f, 0.0f);
+        fighter_gobj, AS_MEWTWO_SPECIALAIRHI_START, 0, NULL, 0, 1, 0);
     func_8006EBA4(fighter_gobj);
 
     fp->x2200_ftcmd_var0 = 0;
