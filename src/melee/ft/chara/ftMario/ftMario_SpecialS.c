@@ -175,19 +175,30 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
 
 void ftMario_SpecialS_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
     u8 unused0[4];
-    Vec3 coords;
-    u8 unused1[20];
+#endif
 
-    fp = gobj->user_data;
-    if (fp->x2200_ftcmd_var0 == 1U) {
-        fp->x2200_ftcmd_var0 = 2U;
-        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, NULL,
-                      &coords);
+    {
+        /// @todo Cannot be moved above @c unused0 or below @c unused1.
+        Vec3 coords;
 
-        coords.x += 3.0f * fp->facing_dir;
-        func_800119DC(&coords, 120, 0.9, 0.02, M_PI_3);
+        /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 unused1[16];
+#endif
+
+        Fighter* fp = GET_FIGHTER(gobj);
+
+        if (fp->x2200_ftcmd_var0 == 1U) {
+            fp->x2200_ftcmd_var0 = 2U;
+            func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj,
+                          NULL, &coords);
+
+            coords.x += 3 * fp->facing_dir;
+            func_800119DC(&coords, 120, 0.9, 0.02, M_PI_3);
+        }
     }
 
     func_80084F3C(gobj);
@@ -213,22 +224,23 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
     if (ftcmd_var0_tmp >= 1U) {
         if (ftcmd_var0_tmp == 1U) {
             fp->x2200_ftcmd_var0 = 2U;
-            if ((s32) fp->sa.mario.x2238_isCapeBoost == false) {
+            if (!fp->sa.mario.x2238_isCapeBoost) {
                 fp->sa.mario.x2238_isCapeBoost = true;
                 fp->x80_self_vel.y = sa->x8_MARIO_CAPE_VEL_Y;
             } else {
-                fp->x80_self_vel.y = 0.0f;
+                fp->x80_self_vel.y = 0;
             }
             func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj,
                           NULL, &coords);
-            coords.x += 3.0f * fp->facing_dir;
-            func_800119DC(&coords, 120, 3.0f, 0.1f, (f32) M_PI_3);
+            coords.x += 3 * fp->facing_dir;
+            func_800119DC(&coords, 120, 3, 0.1, M_PI_3);
         }
         func_8007D494(fp, sa->xC_MARIO_CAPE_GRAVITY,
                       sa->x10_MARIO_CAPE_TERMINAL_VELOCITY);
     } else {
         func_8007D4B8(fp);
     }
+
     func_8007CE94(fp, sa->x4_MARIO_CAPE_VEL_X);
     ftMario_SpecialS_ReflectThink(gobj);
 }
