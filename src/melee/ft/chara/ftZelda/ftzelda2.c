@@ -226,13 +226,16 @@ void ftZelda_80139B44(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
 
+static u32 const transition_flags =
+    (1 << 1) | (1 << 2) | (1 << 3) | (1 << 7) | (1 << 12) | (1 << 14) |
+    (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
+
 void ftZelda_80139BB0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15D, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1.0,
-                                       0); // lbl_804D9BA8, lbl_804D9BA4
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15D, transition_flags,
+                                       NULL, fp->x894_currentAnimFrame, 1, 0);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
 
