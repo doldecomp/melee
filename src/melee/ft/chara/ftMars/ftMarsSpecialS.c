@@ -471,67 +471,62 @@ void ftMars_80137ECC(HSD_GObj* gobj)
 
 void ftMars_80137F2C(HSD_GObj* gobj) {}
 
-// 80137F30 00134B10
-// https://decomp.me/scratch/zDuRP
 void ftMars_80137F30(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 unused[4];
+    Fighter* fp = GET_FIGHTER(gobj);
+    MarsAttributes* sa = getFtSpecialAttrsD(fp);
+
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // somethingFriction
         func_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, attr->x20, attr->x24);
+        func_8007D494(fp, sa->x20, sa->x24);
         func_80085204(gobj);
     }
 }
 
-// 80137F8C 00134B6C
-// https://decomp.me/scratch/qwYn8
 void ftMars_80137F8C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 unused[2];
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (func_800827A0(gobj) == 0) {
+        if (func_800827A0(gobj) == 0)
             ftMars_80137FF8(gobj);
-        }
     } else {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
-        if (func_80081D0C(gobj) != 0) {
+        if (func_80081D0C(gobj) != 0)
             ftMars_8013809C(gobj);
-        }
     }
 }
 
-// 80137FF8 00134BD8
-// https://decomp.me/scratch/9o4hn
 void ftMars_80137FF8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    s32 thing;
+    enum_t asid;
+
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
     switch (fp->action_id) {
     case 0x163:
-        thing = 0x16C;
+        asid = 0x16C;
         break;
     case 0x165:
-        thing = 0x16E;
+        asid = 0x16E;
         break;
     case 0x164:
-        thing = 0x16D;
+        asid = 0x16D;
         break;
         // default:
         // thing uninitialized
     }
     // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
+    Fighter_ActionStateChange_800693AC(gobj, asid, 0x0C4E508C, 0,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
