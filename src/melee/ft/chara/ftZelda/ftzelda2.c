@@ -273,32 +273,30 @@ static u32 const env_hi = env_lo << 6;
 
 void ftZelda_80139CC0(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    s32 envFlags;
-    CollData* collData;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    CollData* collData = &fp->x6F0_collData;
 
-    fp = GET_FIGHTER(fighter_gobj);
-    collData = &fp->x6F0_collData;
+    u32 env_flags;
 
     if (func_80082708(fighter_gobj) == 0) {
-        envFlags = collData->x134_envFlags;
-        if (((envFlags & 0x3F) != 0) || ((envFlags & 0xFC0) != 0)) {
+        env_flags = collData->x134_envFlags;
+        if ((env_flags & env_lo) != 0 || (env_flags & env_hi) != 0) {
             func_8007D60C(fp);
             ftZelda_8013A764(fighter_gobj);
             return;
         }
+
         ftZelda_80139F6C(fighter_gobj);
     } else {
-        envFlags = collData->x134_envFlags;
-        if (((envFlags & 0x3F) != 0) || ((envFlags & 0xFC0) != 0)) {
+        env_flags = collData->x134_envFlags;
+        if ((env_flags & env_lo) != 0 || (env_flags & env_hi) != 0)
             ftZelda_8013A6A8(fighter_gobj);
-        }
     }
 }
 
 bool ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj)
 {
-    bool var_r0;
+    bool result;
     Fighter* fighter2;
     ftZeldaAttributes* attributes2;
 
@@ -306,13 +304,13 @@ bool ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj)
     attributes2 = fighter2->x2D4_specialAttributes;
 
     if (fighter2->x234C_stateVar4_s32 >= attributes2->x4C)
-        var_r0 = true;
+        result = true;
     else if (func_8009A134(fighter_gobj))
-        var_r0 = false;
+        result = false;
     else
-        var_r0 = true;
+        result = true;
 
-    return var_r0;
+    return result;
 }
 void ftZelda_80139D60(HSD_GObj* fighter_gobj)
 {
