@@ -245,8 +245,6 @@ void ftZelda_80139BB0(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
 
-// 80139C1C - 80139C58 (0x3C bytes)
-// https://decomp.me/scratch/VCHRF
 void ftZelda_80139C1C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -256,8 +254,6 @@ void ftZelda_80139C1C(HSD_GObj* fighter_gobj)
     }
 }
 
-// 80139C58 - 80139C94 (0x3C bytes)
-// https://decomp.me/scratch/VCHRF
 void ftZelda_80139C58(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
@@ -284,8 +280,6 @@ void ftZelda_80139CBC(HSD_GObj* fighter_gobj) {}
 static u32 const env_lo = (1 << 6) - 1;
 static u32 const env_hi = env_lo << 6;
 
-// 80139CC0 - 80139D60 (0xA0 bytes)
-// https://decomp.me/scratch/UKBQL
 void ftZelda_80139CC0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
