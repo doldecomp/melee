@@ -166,7 +166,7 @@ fn process_tu(
             n_args,
             null_mut(),
             0,
-            CXTranslationUnit_None,
+            CXTranslationUnit_KeepGoing,
         )
     };
 
