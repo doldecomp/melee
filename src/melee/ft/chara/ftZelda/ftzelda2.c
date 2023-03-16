@@ -103,32 +103,39 @@ void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 
 void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
-    Vec3 sp28;
-    s32 unused[7];
-    s32 boneIndex;
-    Fighter* fp = getFighter(fighter_gobj);
-    HSD_JObj* jObj;
-    ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+    {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
+        ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
 
-    fp->x80_self_vel.x = fp->x80_self_vel.x / attributes->x38;
-    fp->x80_self_vel.y = fp->x80_self_vel.y / attributes->x3C;
+        fp->x80_self_vel.x = fp->x80_self_vel.x / attributes->x38;
+        fp->x80_self_vel.y = fp->x80_self_vel.y / attributes->x3C;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x160, 0, NULL, 0, 1.0,
-                                       0); // lbl_804D9BA4, lbl_804D9BA8
-    func_8006EBA4(fighter_gobj);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 352, 0, NULL, 0, 1, 0);
+        func_8006EBA4(fighter_gobj);
+    }
 
-    fp = getFighter(fighter_gobj);
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x234C_stateVar4 = 0;
+    {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
+        fp->x2200_ftcmd_var0 = 0;
+        fp->x234C_stateVar4 = 0;
 
-    boneIndex = func_8007500C(fp, 4);
-    jObj = fp->x5E8_fighterBones[boneIndex].x0_jobj;
-    func_8000B1CC(jObj, NULL, &sp28);
+        {
+            Vec3 vec;
 
-    func_800119DC(&sp28, 0x78, 1.5, 0.02,
-                  60 * (f32) M_PI /
-                      180); // lbl_804D9B98, lbl_804D9B9C, lbl_804D9BA0
-    fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
+            /// @todo Unused stack.
+#ifdef MUST_MATCH
+            u8 unused[20];
+#endif
+
+            ssize_t boneIndex = func_8007500C(fp, 4);
+            HSD_JObj* jObj = fp->x5E8_fighterBones[boneIndex].x0_jobj;
+
+            func_8000B1CC(jObj, NULL, &vec);
+            func_800119DC(&vec, 120, 1.5f, 0.02f, 60 * (f32) M_PI / 180);
+        }
+
+        fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
+    }
 }
 
 // 801399B4 - 801399F0 (0x3C bytes)
