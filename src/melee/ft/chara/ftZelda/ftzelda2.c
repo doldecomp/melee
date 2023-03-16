@@ -61,10 +61,6 @@ void ftZelda_8013979C(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = 0;
 }
 
-// AS_ZeldaUpBStartGround
-// 80139834 - 801398E8 (0xB4 bytes)
-// https://decomp.me/scratch/KUdnf (with helper)
-// https://decomp.me/scratch/52XE3 (as single function)
 void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 {
     HSD_JObj* jObj;
@@ -106,9 +102,6 @@ void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
 
-// AS_ZeldaUpBStartAir
-// 801398E8 - 801399B4 (0xCC bytes)
-// https://decomp.me/scratch/9NUks
 void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Vec3 sp28;
@@ -233,8 +226,6 @@ void ftZelda_80139B44(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
 
-// 80139BB0 - 80139C1C (0x6C bytes)
-// https://decomp.me/scratch/KOA33
 void ftZelda_80139BB0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
