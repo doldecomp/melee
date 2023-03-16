@@ -43,16 +43,16 @@ void ftZelda_801396E0(HSD_GObj* fighter_gobj)
 
 void ftZelda_8013979C(HSD_GObj* fighter_gobj)
 {
-    Vec3 sp10;
-    u8 flag;
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8000B1CC(fp->x5E8_fighterBones[4].x0_jobj, NULL, &sp10);
+    {
+        Vec3 vec;
+        func_8000B1CC(fp->x5E8_fighterBones[4].x0_jobj, NULL, &vec);
 
-    flag = fp->x2219_flag.bits.b0;
-    if (flag == 0) {
-        ef_Spawn(0x505, fighter_gobj, &sp10);
-        fp->x2219_flag.bits.b0 = 1;
+        if (!fp->x2219_flag.bits.b0) {
+            ef_Spawn(0x505, fighter_gobj, &vec);
+            fp->x2219_flag.bits.b0 = true;
+        }
     }
 
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
