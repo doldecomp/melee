@@ -240,22 +240,20 @@ void ftZelda_80139BB0(HSD_GObj* fighter_gobj)
 
 void ftZelda_80139C1C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2340_stateVar1 -= 1;
-    if (fp->x2340_stateVar1 <= 0) {
+
+    if (fp->x2340_stateVar1 <= 0)
         ftZelda_8013A6A8(fighter_gobj);
-    }
 }
 
 void ftZelda_80139C58(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-
-    fp = getFighter(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2340_stateVar1 -= 1;
-    if (fp->x2340_stateVar1 <= 0) {
+
+    if (fp->x2340_stateVar1 <= 0)
         ftZelda_8013A764(fighter_gobj);
-    }
 }
 
 void ftZelda_80139C94(HSD_GObj* fighter_gobj) {}
