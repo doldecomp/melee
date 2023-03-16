@@ -355,111 +355,103 @@ void lbl_80137BF4(HSD_GObj* gobj)
     }
 }
 
-// 80137C50 00134830
-// https://decomp.me/scratch/uvl0U
 void lbl_80137C50(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 unused1, unused2;
+    Fighter* fp = GET_FIGHTER(gobj);
+
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (func_800827A0(gobj) == 0) {
+        if (!func_800827A0(gobj))
             func_80137CBC(gobj);
-        }
     } else {
         // EnvironmentCollision_CheckForGroundOnly_NoLedgeGrab
-        if (func_80081D0C(gobj) != 0) {
+        if (func_80081D0C(gobj))
             func_80137D60(gobj);
-        }
     }
 }
 
-// 80137CBC 0013489C
-// https://decomp.me/scratch/vJNoz
 void func_80137CBC(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
+    Fighter* fp = GET_FIGHTER(gobj);
+    enum_t asid;
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
     switch (fp->action_id) {
-    case 0x160:
-        thing = 0x169;
+    case 352:
+        asid = 361;
         break;
-    case 0x162:
-        thing = 0x16B;
+    case 354:
+        asid = 363;
         break;
-    case 0x161:
-        thing = 0x16A;
+    case 353:
+        asid = 362;
         break;
-        // default:
-        // thing uninitialized
+#ifndef MUST_MATCH
+    default:
+        HSD_ASSERT(__LINE__, false);
+#endif
     }
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 80137D60 00134940
-// https://decomp.me/scratch/yYIRO
 void func_80137D60(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
+    Fighter* fp = GET_FIGHTER(gobj);
+    enum_t asid;
     fp->sa.mars.x222C = 0;
-    // // Air_SetAsGrounded2
+
+    // Air_SetAsGrounded2
     func_8007D7FC(fp);
+
     switch (fp->action_id) {
-    case 0x169:
-        thing = 0x160;
+    case 361:
+        asid = 352;
         break;
-    case 0x16B:
-        thing = 0x162;
+    case 363:
+        asid = 354;
         break;
-    case 0x16A:
-        thing = 0x161;
+    case 362:
+        asid = 353;
         break;
     }
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 80137E0C 001349EC
-// https://decomp.me/scratch/zlWGu
 void func_80137E0C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
+    Fighter* fp = GET_FIGHTER(gobj);
+    enum_t asid;
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->cb.x21EC_callback = &lbl_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            thing = 0x160;
-        } else {
-            thing = 0x169;
-        }
+        if (fp->xE0_ground_or_air == GA_Ground)
+            asid = 352;
+        else
+            asid = 361;
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
-            if (fp->xE0_ground_or_air == GA_Ground) {
-                thing = 0x162;
-            } else {
-                thing = 0x16B;
-            }
+            if (fp->xE0_ground_or_air == GA_Ground)
+                asid = 354;
+            else
+                asid = 363;
         } else {
-            if (fp->xE0_ground_or_air == GA_Ground) {
-                thing = 0x161;
-            } else {
-                thing = 0x16A;
-            }
+            if (fp->xE0_ground_or_air == GA_Ground)
+                asid = 353;
+            else
+                asid = 362;
         }
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f,
-                                       0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, FIGHTER_ATTACKCOUNT_NOUPDATE,
+                                       0, 0, 1, 0);
 }
 
 // 80137ECC 00134AAC
