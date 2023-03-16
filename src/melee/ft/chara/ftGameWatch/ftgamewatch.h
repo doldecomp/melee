@@ -306,7 +306,7 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemJudgementRemove(HSD_GObj* fighter_gobj);
 bool ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj);
-s32 ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj);
+int ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialS_Anim(HSD_GObj* fighter_gobj);

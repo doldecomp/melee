@@ -99,40 +99,57 @@ bool ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj)
     return true;
 }
 
-// 0x8014C6B4 - shououts to EstexNT
-// https://decomp.me/scratch/Dn1jh // Roll Judgement RNG value
-s32 ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj)
+int ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj)
 {
+    /// @todo #getFighter can be factored out somehow.
     Fighter* fp = getFighter(fighter_gobj);
-    ftGameWatchAttributes* gawAttrs = getFtSpecialAttrs(fp);
-    ftGameWatchJudge sp3C;
-    ftGameWatchJudge sp18;
-    s32 randomInt;
-    s32 judgeVar;
-    s32 returnRNG;
-    s32 i;
+    ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
-    judgeVar = 9;
-    for (judgeVar -= 9, i = 0, randomInt = 0; judgeVar < 9; judgeVar++) {
-        if ((judgeVar != fp->sa.gaw.x222C_judgeVar1) &&
-            (judgeVar != fp->sa.gaw.x2230_judgeVar2))
-        {
-            (&sp3C)->rollVar[i] = judgeVar;
-            randomInt += gawAttrs->x34_GAMEWATCH_JUDGE_ROLL[judgeVar];
-            (&sp18)->rollVar[i] = randomInt;
-            i++;
+    ftGameWatchJudge gw_judge0;
+    ftGameWatchJudge gw_judge1;
+    size_t i;
+    int rand;
+
+    {
+        int const judge_max = 9;
+        int judge = judge_max;
+
+        for (judge -= judge_max, i = 0, rand = 0; judge < judge_max; judge++) {
+            if (judge != fp->sa.gaw.x222C_judgeVar1 &&
+                judge != fp->sa.gaw.x2230_judgeVar2)
+            {
+                gw_judge0.rollVar[i] = judge;
+                rand += sa->x34_GAMEWATCH_JUDGE_ROLL[judge];
+                gw_judge1.rollVar[i] = rand;
+                i++;
+            }
         }
     }
-    randomInt = HSD_Randi(randomInt);
-    for (i = 0; i < 9; i++) {
-        if (randomInt < (&sp18)->rollVar[i]) {
-            returnRNG = sp3C.rollVar[i];
-            break;
+
+    rand = HSD_Randi(rand);
+
+    {
+        int result;
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
+#endif
+        for (i = 0; i < ARRAY_SIZE(gw_judge1.rollVar); i++) {
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+            /// @remarks If this condition is never hit, @c result is
+            ///          uninitialized and its value is undefined.
+            if (rand < gw_judge1.rollVar[i]) {
+                result = gw_judge0.rollVar[i];
+                break;
+            }
         }
+
+        fp->sa.gaw.x2230_judgeVar2 = fp->sa.gaw.x222C_judgeVar1;
+        fp->sa.gaw.x222C_judgeVar1 = result;
+        return result;
     }
-    fp->sa.gaw.x2230_judgeVar2 = fp->sa.gaw.x222C_judgeVar1;
-    fp->sa.gaw.x222C_judgeVar1 = returnRNG;
-    return returnRNG;
 }
 
 static inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* fighter_gobj)
