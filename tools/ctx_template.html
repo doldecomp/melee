@@ -9,7 +9,7 @@
             var copyButton = document.getElementById('copy-button');
             copyButton.addEventListener('click', function() {{
                 var text = document.querySelector('#ctx-text')
-                    .innerText.trim();
+                    .textContent.trim();
                 navigator.clipboard.writeText(text).then(function() {{
                     console.log('Copied text to clipboard');
                 }}, function(err) {{
