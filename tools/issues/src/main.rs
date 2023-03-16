@@ -2,7 +2,7 @@ use anyhow::{anyhow, Context};
 use clang_sys::{CXDiagnosticSeverity, *};
 use glob::glob;
 use itertools::Itertools;
-use log::{debug, info};
+use log::{debug, info, warn};
 use std::{
     cmp::Ordering::{Equal, Greater, Less},
     collections::{HashMap, HashSet},
@@ -158,19 +158,27 @@ fn process_tu(
     get_or_intern(&path_str, str_interner);
     let path_ptr = path_str.as_ptr() as *const i8;
 
-    let tu = unsafe {
-        clang_parseTranslationUnit(
+    let mut tu: CXTranslationUnit = null_mut();
+
+    let cx_result = unsafe {
+        clang_parseTranslationUnit2FullArgv(
             index,
             path_ptr,
             args,
             n_args,
             null_mut(),
             0,
-            CXTranslationUnit_KeepGoing,
+            clang_defaultEditingTranslationUnitOptions(),
+            &mut tu,
         )
     };
 
-    let result = process_diagnostics(tu, str_interner, items);
+    let result = if cx_result == CXError_Success {
+        process_diagnostics(tu, str_interner, items)
+    } else {
+        warn!("Failed to parse \"{path_str}\" with error code {cx_result}.");
+        Ok(())
+    };
 
     unsafe {
         clang_disposeTranslationUnit(tu);
