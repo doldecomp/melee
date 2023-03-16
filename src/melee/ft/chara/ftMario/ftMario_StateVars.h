@@ -5,9 +5,8 @@
 #include <sysdolphin/baselib/gobj.h>
 
 typedef struct ftMarioSpecialS {
-    bool
-        isReflect; // 0x2340 - bool to check if reflect bubble should be enabled
-
+    /// 0x2340 - bool to check if reflect bubble should be enabled
+    bool isReflect;
 } ftMarioSpecialS;
 
 typedef struct ftMarioSpecialLw {

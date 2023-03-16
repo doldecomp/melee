@@ -130,14 +130,12 @@ void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 unused[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftMarioAttributes* sa = fp->x2D4_specialAttributes;
-
     fp->x80_self_vel.x /= sa->vel_x_decay;
-
     ftMario_SpecialS_ChangeAction(gobj, AS_MARIO_SPECIALAIRS);
 }
 
@@ -153,28 +151,20 @@ void ftMario_SpecialAirS_Anim(HSD_GObj* gobj)
         func_800CC730(gobj);
 }
 
-void ftMario_SpecialS_IASA(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMario_SpecialS_IASA(HSD_GObj* gobj) {}
 
-void ftMario_SpecialAirS_IASA(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMario_SpecialAirS_IASA(HSD_GObj* gobj) {}
 
 void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMarioAttributes* sa_tmp = fp->x2D4_specialAttributes;
 
-    if ((fp->x2204_ftcmd_var1 == 1U) &&
-        ((s32) fp->marioVars.SpecialS.isReflect == false))
-    {
+    if (fp->x2204_ftcmd_var1 == 1U && !fp->marioVars.SpecialS.isReflect) {
         fp->marioVars.SpecialS.isReflect = true;
         ftColl_CreateReflectHit(gobj, &sa_tmp->x60_MARIO_CAPE_REFLECTION, NULL);
     } else if ((fp->x2204_ftcmd_var1 == 0U) &&
-               ((s32) fp->marioVars.SpecialS.isReflect == true))
+               fp->marioVars.SpecialS.isReflect == true)
     {
         fp->marioVars.SpecialS.isReflect = false;
         fp->x2218_flag.bits.b3 = 0;
@@ -182,9 +172,6 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
 
     func_8007AEF8(gobj);
 }
-
-/// @todo Move elsewhere.
-#define PI_3 (3.14159265359f / 3.0f)
 
 void ftMario_SpecialS_Phys(HSD_GObj* gobj)
 {
@@ -200,7 +187,7 @@ void ftMario_SpecialS_Phys(HSD_GObj* gobj)
                       NULL, &coords);
 
         coords.x += 3.0f * fp->facing_dir;
-        func_800119DC(&coords, 0x78, 0.9f, 0.02f, PI_3);
+        func_800119DC(&coords, 0x78, 0.9f, 0.02f, (f32) M_PI_3);
     }
 
     func_80084F3C(gobj);
@@ -235,7 +222,7 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
             func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x4)].x0_jobj,
                           NULL, &coords);
             coords.x += 3.0f * fp->facing_dir;
-            func_800119DC(&coords, 0x78, 3.0f, 0.1f, PI_3);
+            func_800119DC(&coords, 0x78, 3.0f, 0.1f, (f32) M_PI_3);
         }
         func_8007D494(fp, sa->xC_MARIO_CAPE_GRAVITY,
                       sa->x10_MARIO_CAPE_TERMINAL_VELOCITY);
