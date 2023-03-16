@@ -62,22 +62,23 @@ void ftZelda_8013979C(HSD_GObj* fighter_gobj)
 
 void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 {
-    HSD_JObj* jObj;
-    s32 unused[1];
-    int boneIndex;
-    Vec3 vec;
-
+    /// @todo Unused stack.
 #ifdef MUST_MATCH
-    // Trick to use more stack space
+    u8 unused[4];
     unused[0] = 0;
 #endif
 
-    boneIndex = func_8007500C(fp, 4);
-    jObj = fp->x5E8_fighterBones[boneIndex].x0_jobj;
+    {
+        ssize_t boneIndex = func_8007500C(fp, 4);
+        HSD_JObj* jObj = fp->x5E8_fighterBones[boneIndex].x0_jobj;
 
-    func_8000B1CC(jObj, NULL, &vec);
+        {
+            Vec3 vec;
+            func_8000B1CC(jObj, NULL, &vec);
 
-    func_800119DC(&vec, 0x78, 1.5f, 0.02, 60 * (f32) M_PI / 180);
+            func_800119DC(&vec, 0x78, 1.5f, 0.02, 60 * (f32) M_PI / 180);
+        }
+    }
 }
 
 void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
