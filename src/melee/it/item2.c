@@ -750,72 +750,78 @@ void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
     ip->x52C_item_script = NULL;
 }
 
-void func_8026BAE8(HSD_GObj* item_gobj,
-                   f32 scale_mul) // Multiply item's scale
+/// Multiply item's scale
+void func_8026BAE8(HSD_GObj* item_gobj, f32 scl_mul)
 {
-    f32 scale;
+    f32 scl;
     Item* item_data;
     HSD_JObj* item_jobj;
 
     item_data = item_gobj->user_data;
     item_jobj = item_gobj->hsd_obj;
-    scale = scale_mul * item_data->xCC_item_attr->x60_scale;
-    item_data->scl = scale;
-    func_80272F7C(item_jobj, scale);
+    scl = scl_mul * item_data->xCC_item_attr->x60_scale;
+    item_data->scl = scl;
+    func_80272F7C(item_jobj, scl);
 }
 
-void func_8026BB20(HSD_GObj* item_gobj) // Clear JObj flags on item model
+/// Clear JObj flags on item model
+void func_8026BB20(HSD_GObj* item_gobj)
 {
     func_80272A18(item_gobj->hsd_obj);
 }
 
-void func_8026BB44(HSD_GObj* item_gobj) // Set JObj flags on item model
+/// Set JObj flags on item model
+void func_8026BB44(HSD_GObj* item_gobj)
 {
     func_80272A3C(item_gobj->hsd_obj);
 }
 
 extern void func_80086990(HSD_GObj*, Vec3*);
 
-void func_8026BB68(HSD_GObj* fighter_gobj,
-                   Vec3* pos) // Adjust item's position to fp bone
+/// Adjust item's position to fp bone
+void func_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos)
 {
     func_80086990(fighter_gobj, pos);
 }
 
-void func_8026BB88(HSD_GObj* item_gobj,
-                   Vec3* pos) // Adjust item's position based on ECB?
+/// Adjust item's position based on ECB?
+void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos)
 {
-    Item* item_data = item_gobj->user_data;
-    f32 temp_float;
-    f32 temp_float2 = 0.0f;
+    Item* ip = GET_ITEM(item_gobj);
+    ftECB* ecb = &ip->x378_itemColl.xA4_ecbCurrCorrect;
 
-    temp_float = 0.5f * (item_data->x378_itemColl.xA4_ecbCurrCorrect.top.y +
-                         item_data->x378_itemColl.xA4_ecbCurrCorrect.bottom.y);
-    pos->x = item_data->pos.x + temp_float2;
-    pos->y = item_data->pos.y + temp_float;
-    pos->z = item_data->pos.z + temp_float2;
+    /// @todo Why is this always zero? Stripped something?
+    f32 xz_offset = 0.0f;
+
+    f32 y_offset = 0.5f * (ecb->top.y + ecb->bottom.y);
+
+    pos->x = ip->pos.x + xz_offset;
+    pos->y = ip->pos.y + y_offset;
+    pos->z = ip->pos.z + xz_offset;
 }
 
-void func_8026BBCC(HSD_GObj* item_gobj,
-                   Vec3* pos) // Adjust item's ECB position?
+/// Adjust item's ECB position?
+void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos)
 {
-    f32 temp_float = 0.0f;
-    f32 temp_float2;
-    Item* item_data = item_gobj->user_data;
-    CollData* collData = &item_data->x378_itemColl;
+    Item* ip = item_gobj->user_data;
+    CollData* coll_data = &ip->x378_itemColl;
+    ftECB* ecb = &coll_data->xE4_ecb;
 
-    temp_float2 =
-        (0.5f * (collData->xE4_ecb.top.y + collData->xE4_ecb.bottom.y));
-    pos->x = collData->x1C_vec.x + temp_float;
-    pos->y = collData->x1C_vec.y + temp_float2;
-    pos->z = collData->x1C_vec.z + temp_float;
+    /// @todo Why is this always zero? Stripped something?
+    f32 xz_offset = 0.0f;
+
+    f32 y_offset = 0.5f * (ecb->top.y + ecb->bottom.y);
+
+    pos->x = coll_data->x1C_vec.x + xz_offset;
+    pos->y = coll_data->x1C_vec.y + y_offset;
+    pos->z = coll_data->x1C_vec.z + xz_offset;
 }
 
 extern bool func_80086960(HSD_GObj*);
 extern void func_80086A4C(HSD_GObj*, f32);
 
-void func_8026BC14(
-    HSD_GObj* item_gobj) // Check if item owner is a fp + decrement hitlag
+/// Check if item owner is a fighter + decrement hitlag
+void func_8026BC14(HSD_GObj* item_gobj)
 {
     Item* item_data;
 
