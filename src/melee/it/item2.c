@@ -823,25 +823,22 @@ extern void func_80086A4C(HSD_GObj*, f32);
 /// Check if item owner is a fighter + decrement hitlag
 void func_8026BC14(HSD_GObj* item_gobj)
 {
-    Item* item_data;
-
-    item_data = item_gobj->user_data;
-    if ((item_data->owner != NULL) &&
-        (func_80086960(item_data->owner) != false))
-    {
-        func_80086A4C(item_data->owner, item_data->xCBC_hitlagFrames - 1.0f);
-    }
+    Item* ip = GET_ITEM(item_gobj);
+    if (ip->owner != NULL && func_80086960(ip->owner))
+        func_80086A4C(ip->owner, ip->xCBC_hitlagFrames - 1);
 }
 
-s32 func_8026BC68(HSD_GObj* item_gobj) // Return bit 0 of 0xDD0
+/// @returns #Item::xDD0_flag::bits::b0 of @p item_gobj.
+bool func_8026BC68(HSD_GObj* item_gobj)
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = GET_ITEM(item_gobj);
     return item_data->xDD0_flag.bits.b0;
 }
 
+/// @returns #Item::owner of @p item_gobj.
 HSD_GObj* func_8026BC78(HSD_GObj* item_gobj) // Get item owner
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = GET_ITEM(item_gobj);
     return item_data->owner;
 }
 
