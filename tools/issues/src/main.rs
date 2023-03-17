@@ -156,7 +156,9 @@ fn process_tu(
 
     info!("Parsing \"{path_str}\".");
     get_or_intern(&path_str, str_interner);
-    let path_ptr = path_str.as_ptr() as *const i8;
+
+    let path_cstr = CString::new(path_str.to_string())?;
+    let path_ptr = path_cstr.as_ptr() as *const i8;
 
     let mut tu: CXTranslationUnit = null_mut();
 
