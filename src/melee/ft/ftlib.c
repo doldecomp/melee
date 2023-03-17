@@ -381,17 +381,20 @@ void func_800867E8(HSD_GObj* gobj)
 
 void func_80086824(void)
 {
-    u32 unused[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
+    for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next)
         func_800867E8(cur);
-    }
 }
 
 void func_8008688C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    fp->x221D_flag.bits.b4 = 0;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x221D_flag.bits.b4 = false;
 }
 
 void func_800868A4(void)
