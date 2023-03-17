@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_CHARA_FTCAPTAIN_FTFALCON_4_H
-#define MELEE_FT_CHARA_FTCAPTAIN_FTFALCON_4_H
+#ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALLW_H
+#define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALLW_H
 
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
