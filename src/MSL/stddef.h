@@ -6,8 +6,11 @@
 typedef unsigned short wchar_t;
 typedef signed int ssize_t;
 
-/// @todo This should be <tt>unsigned int</tt>.
+/// @deprecated Use #usize_t.
 typedef unsigned long size_t;
+
+/// @todo Rename to @c size_t when #size_t is deleted.
+typedef unsigned int usize_t;
 
 typedef signed int intptr_t;
 typedef unsigned int uintptr_t;
