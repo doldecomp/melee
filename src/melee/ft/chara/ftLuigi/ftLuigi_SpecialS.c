@@ -540,7 +540,7 @@ void ftLuigi_SpecialSMisfire_Anim(HSD_GObj* fighter_gobj)
                       fighter_gobj);
     }
 
-    if (fp->x2200_ftcmd_var0 != 0U) {
+    if (fp->x2200_ftcmd_var0 != 0) {
         func_8007D5D4(fp);
         ftLuigi_SpecialSFly_Action(fighter_gobj);
     }
@@ -549,9 +549,13 @@ void ftLuigi_SpecialSMisfire_Anim(HSD_GObj* fighter_gobj)
 /// Luigi's aerial Green Missile Misfire Animation callback
 void ftLuigi_SpecialAirSMisfire_Anim(HSD_GObj* fighter_gobj)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftLuigiAttributes* sa = getFtSpecialAttrs(fp);
-    s32 stateVar;
+    ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
     if (!fp->luigiVars.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
@@ -848,6 +852,7 @@ void ftLuigi_SpecialAirSEnd_Action(HSD_GObj* fighter_gobj)
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x80_self_vel.x /= sa->x38_LUIGI_GREENMISSILE_FRICTION_END;
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRS_END,
                                        0, NULL, 0, 1, 0);
 }
