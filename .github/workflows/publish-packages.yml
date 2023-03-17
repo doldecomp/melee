@@ -23,7 +23,6 @@ jobs:
     name: Publish package
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}/${{ matrix.target }}
       CONTAINERFILE: .github/packages/${{ matrix.target }}/Dockerfile
     strategy:
       matrix:
@@ -35,6 +34,14 @@ jobs:
       packages: write
 
     steps:
+      - name: Get image name
+        env:
+          REPO_NAME: ${{ github.repository }}
+          IMAGE_SUFFIX: ${{ matrix.target }}
+        run: |
+          result=$(echo "$REPO_NAME/$IMAGE_SUFFIX" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE=$result" >> $GITHUB_ENV
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -52,7 +59,7 @@ jobs:
           file: ${{ env.CONTAINERFILE }}
           target: ${{ matrix.target }}
           load: true
-          tags: ${{ env.IMAGE_NAME }}:test
+          tags: ${{ env.IMAGE }}:test
 
       - name: Try building Melee (GENERATE_MAP=1)
         if: startsWith(matrix.target, 'build-')
@@ -61,7 +68,7 @@ jobs:
             --volume "$PWD:/input:ro" \
             --volume /tmp/output/generate_map:/output \
             --env MAKE_FLAGS="GENERATE_MAP=1" \
-            "$IMAGE_NAME:test"
+            "$IMAGE:test"
 
       - name: Try building Melee (NON_MATCHING=1)
         if: startsWith(matrix.target, 'build-')
@@ -70,7 +77,7 @@ jobs:
             --volume "$PWD":/input:ro \
             --volume /tmp/output/non_matching:/output \
             --env MAKE_FLAGS="NON_MATCHING=1" \
-            "$IMAGE_NAME:test"
+            "$IMAGE:test"
 
       - name: Try generating pages
         if: matrix.target == 'gen-pages'
@@ -78,13 +85,13 @@ jobs:
           docker run --rm \
             --volume "$PWD:/input:ro" \
             --volume /tmp/output:/output \
-            "$IMAGE_NAME:test"
+            "$IMAGE:test"
 
       - name: Extract tags and labels
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
           tags: |
             type=raw,priority=1000,value=latest,enable={{is_default_branch}}
             type=schedule,pattern={{date 'YYYYMMDD'}}
@@ -115,7 +122,6 @@ jobs:
     name: Publish package
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: ${{ github.repository }}/${{ matrix.target }}
       CONTAINERFILE: .github/packages/${{ matrix.target }}/Dockerfile
     strategy:
       matrix:
@@ -127,6 +133,15 @@ jobs:
       packages: write
 
     steps:
+      - name: Get image name
+        env:
+          REPO_NAME: ${{ github.repository }}
+          IMAGE_SUFFIX: ${{ matrix.target }}
+        shell: bash
+        run: |
+          result=$(echo "$REPO_NAME/$IMAGE_SUFFIX" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE=$result" >> $GITHUB_ENV
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -138,7 +153,7 @@ jobs:
         run: |
           docker build \
             --target "$IMAGE_TARGET" \
-            --tag "$IMAGE_NAME:test" \
+            --tag "$IMAGE:test" \
             --file "$CONTAINERFILE" \
             .
 
@@ -157,7 +172,7 @@ jobs:
           --volume "${PWD}:C:/Input:ro" `
           --volume "${output}:C:/Output" `
           --env MAKE_FLAGS="GENERATE_MAP=1" `
-          "${env:IMAGE_NAME}:test"
+          "${env:IMAGE}:test"
 
       - name: Try building Melee (NON_MATCHING=1)
         if: startsWith(matrix.target, 'build-')
@@ -174,13 +189,13 @@ jobs:
           --volume "${PWD}:C:/Input:ro" `
           --volume "${output}:C:/Output" `
           --env MAKE_FLAGS="NON_MATCHING=1" `
-          ${env:IMAGE_NAME}:test
+          ${env:IMAGE}:test
 
       - name: Extract tags and labels
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE }}
           tags: |
             type=raw,priority=1000,value=latest,enable={{is_default_branch}}
             type=schedule,pattern={{date 'YYYYMMDD'}}
@@ -204,4 +219,4 @@ jobs:
             echo "$DOCKER_METADATA_OUTPUT_TAGS" | xargs -I{} echo --tag \'{}\'
             echo "$DOCKER_METADATA_OUTPUT_LABELS" | xargs -I{} echo --label \'{}\'
           ) | xargs docker build -f "$CONTAINERFILE" .
-          docker push --all-tags "$REGISTRY/$IMAGE_NAME"
+          docker push --all-tags "$REGISTRY/$IMAGE"
