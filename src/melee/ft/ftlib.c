@@ -830,55 +830,62 @@ s32 func_8008731C(HSD_GObj* gobj)
 
 bool func_8008732C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->action_id >= 0 && fp->action_id <= 10) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->action_id >= ASID_DEADDOWN &&
+        fp->action_id <= ASID_DEADUPFALLHITCAMERAICE)
+    {
         return true;
     }
+
     return false;
 }
 
 bool func_80087354(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->action_id >= 3 && fp->action_id <= 10) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->action_id >= ASID_DEADUP &&
+        fp->action_id <= ASID_DEADUPFALLHITCAMERAICE)
+    {
         return true;
     }
+
     return false;
 }
 
 bool func_8008737C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->action_id >= 4 && fp->action_id <= 5) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->action_id >= ASID_DEADUPSTAR && fp->action_id <= ASID_DEADUPSTARICE)
         return true;
-    }
+
     return false;
 }
 
 bool func_800873A4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->action_id >= 6 && fp->action_id <= 10) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->action_id >= ASID_DEADUPFALL &&
+        fp->action_id <= ASID_DEADUPFALLHITCAMERAICE)
         return true;
-    }
+
     return false;
 }
 
 bool func_800873CC(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->action_id >= 12 && fp->action_id <= 13) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->action_id >= ASID_REBIRTH && fp->action_id <= ASID_REBIRTHWAIT)
         return true;
-    }
+
     return false;
 }
 
 bool func_800873F4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->action_id >= 0x142 && fp->action_id <= 0x144) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->action_id >= ASID_ENTRY && fp->action_id <= ASID_ENTRYEND)
         return true;
-    }
+
     return false;
 }
 
@@ -886,7 +893,8 @@ HSD_GObj* func_8008741C(u32 i)
 {
     HSD_GObj* cur;
     for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
-        Fighter* fp = cur->user_data;
+        Fighter* fp = GET_FIGHTER(cur);
+
         /// @todo Is @c i really #u32?
         if ((unsigned) fp->x8_spawnNum == i)
             return cur;
@@ -896,35 +904,35 @@ HSD_GObj* func_8008741C(u32 i)
 
 f32 func_80087454(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18A4_knockbackMagnitude;
 }
 
 u32 func_80087460(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x8_spawnNum;
 }
 
 s32 func_8008746C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80080144(fp)) {
+    if (func_80080144(fp))
         return 0x1FBD1;
-    }
+
     return fp->x10C_ftData->x4C_collisionData->x34;
 }
 
 s32 func_800874BC(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221F_flag.bits.b4;
 }
 
 void func_800874CC(HSD_GObj* gobj, s32 arg1, s32 arg2)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     func_8003E4A4(fp->xC_playerID, fp->x221F_flag.bits.b4, arg1, arg2);
 }
 
@@ -942,9 +950,10 @@ void func_80087574(s8 arg)
     u8 i;
     func_8008572C(arg);
     func_8006737C(lbl_803C26FC[arg]);
-    for (i = 0; i < CostumeListsForeachCharacter[arg].unk4; i++) {
+
+    for (i = 0; i < CostumeListsForeachCharacter[arg].unk4; i++)
         func_80085820(arg, i);
-    }
+
     func_80085A14(arg);
     func_800857E0(arg);
 }
@@ -955,9 +964,8 @@ void func_80087610(u8 arg0)
     for (i = 0; i <= 25; i++) {
         if (func_80164840(i)) {
             func_800EED50(Player_800325C8(i, 0), arg0);
-            if ((u8) (i - 18) <= 1) {
+            if ((u8) (i - 18) <= 1)
                 func_800EED50(Player_800325C8(i, 1), arg0);
-            }
         }
     }
 }
@@ -969,65 +977,65 @@ void func_800876B4(HSD_GObj* gobj)
 
 bool func_800876D4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->x2114_SmashAttr.x2114_state == 2) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x2114_SmashAttr.x2114_state == 2)
         return true;
-    } else {
+    else
         return false;
-    }
 }
 
 s32 func_800876F4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18CC;
 }
 
 s32 func_80087700(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18D0;
 }
 
 void func_8008770C(HSD_GObj* gobj, void* dst)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->x4_fighterKind == FTKIND_GAMEWATCH) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x4_fighterKind == FTKIND_GAMEWATCH)
         ftGameWatch_8014A7F4(gobj, dst);
-    } else {
+    else
         func_800EEB00(gobj, dst);
-    }
 }
 
 void func_80087744(HSD_GObj* gobj, void* dst)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->x4_fighterKind == FTKIND_GAMEWATCH) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x4_fighterKind == FTKIND_GAMEWATCH)
         ftGameWatch_8014A814(gobj, dst);
-    } else {
+    else
         func_800EEB1C(gobj, dst);
-    }
 }
 
 void func_8008777C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     CollData* cd;
-    u32 unused[2];
 
-    if (fp->xE0_ground_or_air != GA_Ground) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    if (fp->xE0_ground_or_air != GA_Ground)
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
-    }
+
     cd = &fp->x6F0_collData;
     atan2f(-cd->x14C_ground.normal.x, cd->x14C_ground.normal.y);
 }
 
 bool func_800877D4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->xF8_playerNudgeVel.x != 0) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->xF8_playerNudgeVel.x != 0)
         return true;
-    } else {
+    else
         return false;
-    }
 }
