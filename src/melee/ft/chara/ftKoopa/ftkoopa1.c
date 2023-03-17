@@ -553,11 +553,11 @@ void func_801336CC(HSD_GObj* gobj)
 #ifdef MUST_MATCH
         u8 unused0[8];
 #endif
+
         Fighter* fp1 = fp0;
 
         {
             ftKoopaAttributes* koopaAttr = fp1->x2D4_specialAttributes;
-            u8 unused1[8];
 
             if (fp1->x2200_ftcmd_var0 != 0 &&
                 (signed) fp1->x2344_stateVar2 != 0)
@@ -574,15 +574,16 @@ void func_801336CC(HSD_GObj* gobj)
             fp1->x2344_stateVar2 = true;
 
             {
-                fp0 = gobj->user_data;
+                /// @todo Combine @c fp0 with other branch somehow
+                fp0 = GET_FIGHTER(gobj);
 
                 if ((signed) fp0->x2344_stateVar2 != false) {
                     Fighter_ActionStateChange_800693AC(
-                        gobj, 0x15D, transition_flags0, 0, lbl_804D9AD8,
+                        gobj, 349, transition_flags0, 0, lbl_804D9AD8,
                         lbl_804D9ADC, lbl_804D9AD8);
                 } else {
                     Fighter_ActionStateChange_800693AC(
-                        gobj, 0x15C, FtStateChange_None, 0, lbl_804D9AD8,
+                        gobj, 348, FtStateChange_None, 0, lbl_804D9AD8,
                         lbl_804D9ADC, lbl_804D9AD8);
                 }
 
@@ -594,19 +595,18 @@ void func_801336CC(HSD_GObj* gobj)
             }
 
             func_800BC9C8(fp1->x1A58_interactedFighter);
-            return;
-        }
 
-        {
-            fp1 = gobj->user_data;
-            Fighter_ActionStateChange_800693AC(gobj, 0x15E, transition_flags3,
-                                               0, fp1->x894_currentAnimFrame,
+        } else {
+            /// @todo Combine @c fp0 with other branch somehow
+            fp0 = GET_FIGHTER(gobj);
+            Fighter_ActionStateChange_800693AC(gobj, 350, transition_flags3, 0,
+                                               fp0->x894_currentAnimFrame,
                                                lbl_804D9ADC, lbl_804D9AD8);
 
             func_8006F0FC(gobj, lbl_804D9AD8);
-            fp1->x2340_stateVar1 = 0;
-            fp1->x2200_ftcmd_var0 = 0;
-            func_8007E2F4(fp1, 511);
+            fp0->x2340_stateVar1 = 0;
+            fp0->x2200_ftcmd_var0 = 0;
+            func_8007E2F4(fp0, 511);
         }
     }
 }
