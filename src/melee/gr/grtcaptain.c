@@ -1,4 +1,4 @@
-#include <melee/gr/grtfalcon.h>
+#include <melee/gr/grtcaptain.h>
 
 #include <dolphin/os/os.h>
 #include <melee/gr/granime.h>
