@@ -697,54 +697,57 @@ static inline void What(HSD_GObj* item_gobj,
 /// Transfer item on character transformation (Zelda <-> Sheik)
 void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
 {
-    Vec3 sp1C;
-    Item* item_data; // r29
-    struct ItemStateDesc* itemStateDesc;
-    HSD_JObj* item_jobj2;                 // r27
-    struct ItemStateDesc* temp_stateDesc; // r6
-    ItemStateArray* temp_stateArray;      // r5
+    Vec3 vec;
+    Item* ip = GET_ITEM(item_gobj);
+    ItemStateArray* states = ip->xC4_article_data->xC_itemStates;
 
-    item_data = item_gobj->user_data;
-    temp_stateArray = item_data->xC4_article_data->xC_itemStates;
-    item_jobj2 = item_gobj->hsd_obj;
-    itemStateDesc = &temp_stateArray->x0_itemStateDesc[item_data->anim_id];
-    sp1C.z = 0.0f;
-    sp1C.y = 0.0f;
-    sp1C.x = 0.0f;
-    func_8027429C(item_gobj, &sp1C);
+    ItemStateDesc* state_desc;
+
+    /// @todo Not enough stack for #GET_JOBJ.
+    HSD_JObj* jobj0 = item_gobj->hsd_obj;
+
+    state_desc = &states->x0_itemStateDesc[ip->anim_id];
+    vec.z = 0.0f;
+    vec.y = 0.0f;
+    vec.x = 0.0f;
+    func_8027429C(item_gobj, &vec);
     func_802742F4(item_gobj, arg1, arg2);
+
     {
-        struct ItemStateDesc* temp_stateDesc;
-        HSD_JObj* item_jobj; // r30
+        ItemStateDesc* temp_stateDesc;
+        HSD_JObj* jobj1;
 
-        item_jobj = NULL;
-        item_data->xD54_throwNum -= 1;
-        item_data->xDC8_word.flags.x14 = 0;
-        if ((s32) item_data->anim_id != -1) {
-            item_data->xD0_itemStateDesc = itemStateDesc;
-            if (item_data->xD0_itemStateDesc != NULL) {
-                HSD_JObjRemoveAnimAll(item_jobj2);
-                if (item_data->xC8_joint != NULL) {
-                    item_jobj = (item_jobj2 == NULL) ? NULL : item_jobj2->child;
+        jobj1 = NULL;
+        ip->xD54_throwNum -= 1;
+        ip->xDC8_word.flags.x14 = 0;
 
-                    func_8000B804(item_jobj, item_data->xC8_joint->child);
+        if (ip->anim_id != -1) {
+            ip->xD0_itemStateDesc = state_desc;
+            if (ip->xD0_itemStateDesc != NULL) {
+                HSD_JObjRemoveAnimAll(jobj0);
+                if (ip->xC8_joint != NULL) {
+                    jobj1 = (jobj0 == NULL) ? NULL : jobj0->child;
+
+                    func_8000B804(jobj1, ip->xC8_joint->child);
                 }
-                temp_stateDesc = item_data->xD0_itemStateDesc;
-                HSD_JObjAddAnimAll(item_jobj2, temp_stateDesc->x0_anim_joint,
+                temp_stateDesc = ip->xD0_itemStateDesc;
+                HSD_JObjAddAnimAll(jobj0, temp_stateDesc->x0_anim_joint,
                                    temp_stateDesc->x4_matanim_joint,
                                    temp_stateDesc->x8_parameters);
-                func_8000BA0C(item_jobj2, item_data->x5D0_animFrameSpeed);
-                HSD_JObjReqAnimAll(item_jobj2, 0.0f);
-                func_80268E40(item_data, itemStateDesc);
+                func_8000BA0C(jobj0, ip->x5D0_animFrameSpeed);
+                HSD_JObjReqAnimAll(jobj0, 0.0f);
+                func_80268E40(ip, state_desc);
             }
-            HSD_JObjAnimAll(item_jobj2);
+
+            HSD_JObjAnimAll(jobj0);
             func_80279BE0(item_gobj);
             func_802799E4(item_gobj);
             return;
         }
-        HSD_JObjRemoveAnimAll(item_jobj2);
-        item_data->x52C_item_script = NULL;
     }
+
+    HSD_JObjRemoveAnimAll(jobj0);
+    ip->x52C_item_script = NULL;
 }
 
 void func_8026BAE8(HSD_GObj* item_gobj,
