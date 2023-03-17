@@ -710,7 +710,7 @@ bool func_80086FD4(HSD_GObj* gobj0, HSD_GObj* gobj1)
 
 bool func_8008701C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221F_flag.bits.b3;
 }
 
@@ -726,7 +726,7 @@ void func_80087050(s32 arg0)
 
 bool func_80087074(HSD_GObj* gobj, Vec3* v)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x18B8 || fp->dmg.x18BC) {
         v->x = fp->dmg.x18B8;
         v->y = fp->dmg.x18BC;
@@ -738,7 +738,7 @@ bool func_80087074(HSD_GObj* gobj, Vec3* v)
 
 bool func_800870BC(HSD_GObj* gobj, void** val)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x61A_controller_index) {
         *val = p_ftCommonData->x6D8[fp->x61A_controller_index];
         return true;
@@ -748,20 +748,20 @@ bool func_800870BC(HSD_GObj* gobj, void** val)
 
 void func_800870F0(HSD_GObj* gobj, s32 x)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x1830_percent = x;
 }
 
 s32 func_80087120(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     s32 result = fp->dmg.x1830_percent;
     return result;
 }
 
 void func_80087140(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x221F_flag.bits.b3) {
         func_800D4F24(gobj, 1);
         func_8007ED2C(fp);
@@ -772,8 +772,7 @@ void func_80087140(HSD_GObj* gobj)
 
 void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {
-    Fighter* fp = gobj->user_data;
-    u32 unused[2];
+    Fighter* fp = GET_FIGHTER(gobj);
     HSD_ASSERT(1117, itGetKind(item_gobj) == It_Kind_MetalB);
     func_800C8348(gobj, func_8026B560(item_gobj), func_8026B574(item_gobj));
     func_800D105C(gobj);
@@ -785,48 +784,47 @@ void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
 
 bool func_80087284(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->action_id >= 0x6C) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->action_id >= ASID_LIGHTTHROWF4)
         return true;
-    } else {
-        return false;
-    }
+
+    return false;
 }
 
 FighterKind func_800872A4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x4_fighterKind;
 }
 
 void* func_800872B0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return &fp->x20A4;
 }
 
 bool func_800872BC(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return !fp->x221E_flag.bits.b1 && !fp->x2226_flag.bits.b4 &&
            !fp->x221F_flag.bits.b4;
 }
 
 s32 func_80087300(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->dmg.x18c4_source_ply;
 }
 
 s32 func_8008730C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221F_flag.bits.b5;
 }
 
 s32 func_8008731C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221F_flag.bits.b3;
 }
 
