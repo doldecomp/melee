@@ -132,7 +132,7 @@ void ftMars_8013767C(HSD_GObj* gobj)
     }
 }
 
-static u32 const transition_flags =
+static Fighter_ActionStateChangeFlags const transition_flags =
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_PreserveSwordTrail |

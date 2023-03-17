@@ -101,7 +101,7 @@ void ftPikachu_801250C0(HSD_GObj* fighter_gobj)
         ftPikachu_ActionChange_8012515C(fighter_gobj);
 }
 
-static const u32 transition_flags0 =
+static const Fighter_ActionStateChangeFlags transition_flags0 =
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_PreserveSfx | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
@@ -202,7 +202,7 @@ void ftPikachu_801253D8(HSD_GObj* fighter_gobj)
         ftPikachu_ActionChange_80125474(fighter_gobj);
 }
 
-static u32 const transition_flags1 =
+static Fighter_ActionStateChangeFlags const transition_flags1 =
     FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_PreserveSfx |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
@@ -324,7 +324,7 @@ void ftPikachu_80125738(HSD_GObj* fighter_gobj)
         ftPikachu_ActionChange_801257D4(fighter_gobj);
 }
 
-static u32 const transition_flags2 =
+static Fighter_ActionStateChangeFlags const transition_flags2 =
     FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
@@ -432,7 +432,7 @@ void ftPikachu_801259D8(HSD_GObj* fighter_gobj)
     }
 }
 
-static u32 const transition_flags3 =
+static Fighter_ActionStateChangeFlags const transition_flags3 =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit;
 
 void ftPikachu_ActionChange_80125A54(HSD_GObj* fighter_gobj)

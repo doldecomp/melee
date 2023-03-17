@@ -623,7 +623,7 @@ void ftSeak_80111404(HSD_GObj* fighter_gobj)
         ftSeak_801114E4(fighter_gobj);
 }
 
-static enum_t const transition_flags =
+static Fighter_ActionStateChangeFlags const transition_flags =
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
