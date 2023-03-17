@@ -1,3 +1,4 @@
+#include "melee/ft/inlines.h"
 #include <melee/ft/ftlib.h>
 
 #include <melee/cm/camera.h>
@@ -433,7 +434,7 @@ bool func_80086960(HSD_GObj* arg)
 CollData* func_80086984(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return &fp->x6F0_collData;
+    return Fighter_GetCollData(fp);
 }
 
 inline void vector_add(Vec3* dst, Vec3* src, f32 x, f32 y, f32 z)
@@ -1017,18 +1018,14 @@ void func_80087744(HSD_GObj* gobj, void* dst)
 void func_8008777C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    CollData* cd;
-
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 unused[8];
-#endif
 
     if (fp->xE0_ground_or_air != GA_Ground)
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
 
-    cd = &fp->x6F0_collData;
-    atan2f(-cd->x14C_ground.normal.x, cd->x14C_ground.normal.y);
+    {
+        CollData* cd = Fighter_GetCollData(fp);
+        atan2f(-cd->x14C_ground.normal.x, cd->x14C_ground.normal.y);
+    }
 }
 
 bool func_800877D4(HSD_GObj* gobj)
