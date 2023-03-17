@@ -9,6 +9,7 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>
+#include <sysdolphin/baselib/gobj.h>
 
 typedef enum {
     Gm_PKind_Human,
@@ -18,8 +19,9 @@ typedef enum {
     Gm_PKind_Boss,
 } Gm_PKind;
 
+/// @todo Float reorder hack until hopefully fixing #my_sqrtf fixes it.
 static float get_zero(void)
-{ // float reorder hack until hopefully fixing sqrtf fixes it
+{
     return 0.0f;
 }
 
@@ -53,17 +55,23 @@ static inline float my_sqrtf(float x)
 {
     static const double _half = .5;
     static const double _three = 3.0;
-    s32 unused = 0; // fakematch
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4] = { 0 };
+#endif
+
     volatile float y;
     if (x > 0.0f) {
-        double guess = __frsqrte((double) x); // returns an approximation to
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 12 sig bits
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 24 sig bits
-        guess = _half * guess *
-                (_three - guess * guess * x); // now have 32 sig bits
-        y = (float) (x * guess);
+        // returns an approximation to
+        double guess = __frsqrte((double) x);
+        // now have 12 sig bits
+        guess = _half * guess * (_three - guess * guess * x);
+        // now have 24 sig bits
+        guess = _half * guess * (_three - guess * guess * x);
+        // now have 32 sig bits
+        guess = _half * guess * (_three - guess * guess * x);
+        y = x * guess;
         return y;
     }
     return x;
@@ -76,110 +84,92 @@ static inline float my_lbvector_Len(Vec3* vec)
 
 void func_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3, f32 arg4)
 {
-    Fighter* fp;
+    Fighter* fp = gobj->user_data;
     Vec3 diff;
-    f32 distance;
+    lbvector_Diff(arg1, &fp->xB0_pos, &diff);
 
-    fp = gobj->user_data;
-    lbvector_Diff(arg1, &fp->xB0_pos, &diff); // third argument is result
-    distance = my_lbvector_Len(&diff);
-    if (distance < arg3) {
-        *arg2 = 0.0f;
-    } else {
-        *arg2 = distance;
-        lbvector_Normalize(&diff);
-        diff.x *= distance * arg4;
-        diff.y *= distance * arg4;
-        diff.z *= distance * arg4;
+    {
+        f32 distance = my_lbvector_Len(&diff);
+        if (distance < arg3) {
+            *arg2 = 0.0f;
+        } else {
+            *arg2 = distance;
+            lbvector_Normalize(&diff);
+            diff.x *= distance * arg4;
+            diff.y *= distance * arg4;
+            diff.z *= distance * arg4;
+        }
     }
+
     fp->x80_self_vel.x = diff.x;
     fp->x80_self_vel.y = diff.y;
 }
 
-void func_8015BF74(HSD_GObj* arg0, f32 arg1)
+void func_8015BF74(HSD_GObj* fighter_gobj, f32 x_diff_max)
 {
-    Vec3 sp14;
-    Fighter* fp;
-    f32 temp_f1;
-    f32 phi_f0;
-    f32 phi_f1;
+    Fighter* fp = fighter_gobj->user_data;
+    Vec3 vec;
 
-    fp = arg0->user_data;
-    func_8015C208(arg0, &sp14);
-    temp_f1 = sp14.x - fp->xB0_pos.x;
-    phi_f0 = fabs_inline(temp_f1);
-    if (phi_f0 > arg1) {
-        if (temp_f1 > get_zero()) { // float reorder hack
-            phi_f1 = arg1;
-        } else {
-            phi_f1 = -arg1;
-        }
-        fp->x80_self_vel.x += phi_f1;
-    } else {
-        fp->x80_self_vel.x += temp_f1;
+    func_8015C208(fighter_gobj, &vec);
+
+    {
+        f32 x_diff = vec.x - fp->xB0_pos.x;
+        f32 abs_x_diff = fabs_inline(x_diff);
+        if (abs_x_diff > x_diff_max)
+            fp->x80_self_vel.x += x_diff > 0 ? x_diff_max : -x_diff_max;
+        else
+            fp->x80_self_vel.x += x_diff;
     }
 }
 
-void func_8015C010(HSD_GObj* arg0, f32 arg1)
+void func_8015C010(HSD_GObj* fighter_gobj, f32 x_diff_max)
 {
-    Vec3 sp14;
-    Fighter* fp;
-    f32 temp_f1;
-    f32 phi_f0;
-    f32 phi_f0_2;
+    Vec3 vec;
+    Fighter* fp = fighter_gobj->user_data;
+    func_8015C208(fighter_gobj, &vec);
 
-    fp = arg0->user_data;
-    func_8015C208(arg0, &sp14);
-    temp_f1 = sp14.x - fp->xB0_pos.x;
-    phi_f0 = fabs_inline(temp_f1);
-    if (phi_f0 > arg1) {
-        if (temp_f1 > 0.0f) {
-            phi_f0_2 = arg1;
-        } else {
-            phi_f0_2 = -arg1;
-        }
-        fp->x80_self_vel.x = phi_f0_2;
-    } else {
-        fp->x80_self_vel.x = temp_f1;
+    {
+        f32 x_diff = vec.x - fp->xB0_pos.x;
+        f32 abs_x_diff = fabs_inline(x_diff);
+        if (abs_x_diff > x_diff_max)
+            fp->x80_self_vel.x = x_diff > 0 ? x_diff_max : -x_diff_max;
+        else
+            fp->x80_self_vel.x = x_diff;
     }
 }
 
-void func_8015C09C(HSD_GObj* arg0, f32 arg1)
+void func_8015C09C(HSD_GObj* fighter_gobj, f32 facing_dir)
 {
-    HSD_JObj* jobj = arg0->hsd_obj;
-    Fighter* fp = arg0->user_data;
+    HSD_JObj* jobj = GET_JOBJ(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     Quaternion quat = { 0 };
-    s32 unused[2];
 
-    fp->facing_dir = arg1;
-    quat.y = M_PI / 2 * fp->facing_dir;
+    fp->facing_dir = facing_dir;
+    quat.y = M_PI_2 * fp->facing_dir;
     HSD_JObjSetRotation(jobj, &quat);
 }
 
 void func_8015C190(HSD_GObj* arg0)
 {
-    Fighter* fp;
-    s32 unused1;
-    Vec3 sp10;
-    s32 unused2;
+    Fighter* fp = GET_FIGHTER(arg0);
+    Vec3 vec;
 
-    fp = arg0->user_data;
-    func_80053FF4(0, &sp10);
-    if (fp->xB0_pos.x > sp10.x) {
-        fp->xB0_pos.x = sp10.x;
-        fp->x80_self_vel.x = 0.0f;
+    func_80053FF4(0, &vec);
+    if (fp->xB0_pos.x > vec.x) {
+        fp->xB0_pos.x = vec.x;
+        fp->x80_self_vel.x = 0;
     }
-    func_80054158(0, &sp10);
-    if (fp->xB0_pos.x < sp10.x) {
-        fp->xB0_pos.x = sp10.x;
-        fp->x80_self_vel.x = 0.0f;
+
+    func_80054158(0, &vec);
+    if (fp->xB0_pos.x < vec.x) {
+        fp->xB0_pos.x = vec.x;
+        fp->x80_self_vel.x = 0;
     }
 }
 
 void func_8015C208(HSD_GObj* arg0, Vec3* arg1)
 {
-    s32 unused;
-    Fighter* fp = arg0->user_data;
+    Fighter* fp = GET_FIGHTER(arg0);
     HSD_GObj* gobj = func_8015C244(arg0, &fp->xB0_pos);
     func_80086644(gobj, arg1);
 }
@@ -191,92 +181,107 @@ HSD_GObj* func_8015C244(HSD_GObj* arg0, Vec3* arg1)
 
 bool func_8015C270(void)
 {
-    if (func_8015C44C(FTKIND_MASTERH) == 0x157) {
+    /// @todo Get ASID
+    if (func_8015C44C(FTKIND_MASTERH) == 0x157)
         return 1;
-    }
+
     return 0;
 }
 
 bool func_8015C2A8(void)
 {
-    if (func_8015C44C(FTKIND_CREZYH) == 0x183) {
-        return 1;
-    }
-    return 0;
+    /// @todo Get ASID
+    if (func_8015C44C(FTKIND_CREZYH) == 0x183)
+        return true;
+
+    return false;
 }
 
 bool func_8015C2E0(void)
 {
-    s32 x = func_8015C44C(FTKIND_MASTERH);
-    if (x == 0x158 || x == 0x159) {
-        return 1;
-    }
-    return 0;
+    /// @todo Get ASIDs
+    enum_t asid = func_8015C44C(FTKIND_MASTERH);
+    if (asid == 0x158 || asid == 0x159)
+        return true;
+
+    return false;
 }
 
 bool func_8015C31C(void)
 {
-    s32 x = func_8015C44C(FTKIND_CREZYH);
-    if (x == 0x181 || x == 0x182) {
-        return 1;
-    }
-    return 0;
+    /// @todo Get ASIDs
+    enum_t asid = func_8015C44C(FTKIND_CREZYH);
+    if (asid == 0x181 || asid == 0x182)
+        return true;
+
+    return false;
 }
 
 bool func_8015C358(void)
 {
     HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
-    if (gobj && ((Fighter*) gobj->user_data)->x221F_flag.bits.b3) {
-        return 1;
-    }
-    return 0;
+    if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3)
+        return true;
+
+    return false;
 }
 
 bool func_8015C3A0(void)
 {
     HSD_GObj* gobj = func_8015C3E8(FTKIND_CREZYH);
-    if (gobj && ((Fighter*) gobj->user_data)->x221F_flag.bits.b3) {
-        return 1;
-    }
-    return 0;
+    if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3)
+        return true;
+
+    return false;
 }
 
-HSD_GObj* func_8015C3E8(FighterKind arg0)
-{ // get_fighter_gobj(FighterKind)
-    HSD_GObj* phi_r31;
-    s32 unused[2];
+/// get_fighter_gobj(FighterKind)
+HSD_GObj* func_8015C3E8(FighterKind kind)
+{
+    HSD_GObj* cur;
 
-    for (phi_r31 = lbl_804D782C->x20_fighters; phi_r31; phi_r31 = phi_r31->next)
-    {
-        if (arg0 == func_800872A4(phi_r31)) {
-            return phi_r31;
-        }
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    for (cur = lbl_804D782C->x20_fighters; cur; cur = cur->next) {
+        if (kind == func_800872A4(cur))
+            return cur;
     }
 
-    return 0;
+    return NULL;
 }
 
 enum_t func_8015C44C(FighterKind kind)
 {
-    HSD_GObj* gobj;
-    s32 unused[4];
+    HSD_GObj* gobj = func_8015C3E8(kind);
 
-    gobj = func_8015C3E8(kind);
-    if (gobj) {
-        return func_80086C0C(gobj); // DataOffset_ActionStateLoad
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
+    if (gobj != NULL) {
+        // DataOffset_ActionStateLoad
+        return func_80086C0C(gobj);
     } else {
-        return 0;
+        return ASID_DEADDOWN;
     }
 }
 
 s32 func_8015C4C4(void)
 {
-    HSD_GObj* gobj;
-    s32 unused[6];
-    gobj = func_8015C3E8(FTKIND_CREZYH);
-    if (gobj) {
-        return ((Fighter*) gobj->user_data)->sa.masterhand.x2250;
-    }
+    HSD_GObj* gobj = func_8015C3E8(FTKIND_CREZYH);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
+
+    if (gobj)
+        return GET_FIGHTER(gobj)->sa.masterhand.x2250;
+
     return 0;
 }
 
