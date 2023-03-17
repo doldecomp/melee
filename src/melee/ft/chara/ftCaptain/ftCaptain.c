@@ -2,7 +2,7 @@
 
 #include <melee/ft/chara/ftCaptain/ftCaptain.h>
 #include <melee/ft/chara/ftCaptain/ftCaptain_SpecialN.h>
-#include <melee/ft/chara/ftCaptain/ftfalcon_3.h>
+#include <melee/ft/chara/ftCaptain/ftCaptain_SpecialHi.h>
 #include <melee/ft/chara/ftCaptain/ftfalcon_4.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
