@@ -568,12 +568,9 @@ lbl_getVar:
 /// @todo Requires @c -g compiler flag / Frank modifications to match.
 s32 func_8026B924(HSD_GObj* item_gobj)
 {
-    enum_t kind;
     s32 result;
-    Item* item_data;
-
-    item_data = item_gobj->user_data;
-    kind = item_data->kind;
+    Item* ip = GET_ITEM(item_gobj);
+    enum_t kind = ip->kind;
     result = -1;
     switch (kind) {
     case It_Kind_Freeze:
@@ -587,7 +584,7 @@ s32 func_8026B924(HSD_GObj* item_gobj)
     case It_Kind_StarRod:
     case It_Kind_L_Gun:
     case It_Kind_F_Flower:
-        result = item_data->xD4C;
+        result = ip->xD4C;
     }
     return result;
 }
@@ -595,15 +592,14 @@ s32 func_8026B924(HSD_GObj* item_gobj)
 #endif
 
 #ifdef MUST_MATCH
-
 #pragma push
 f32 func_8026B960(register HSD_GObj* item_gobj)
 { // clang-format off
     register s32 kind;
-    register Item* item_data;
     register f32 unk_timer = -1.0f;
 
-    item_data = item_gobj->user_data;
+    register Item* item_data;
+    item_data = GET_ITEM(item_gobj);
     kind = item_data->kind;
 
     asm {
@@ -627,7 +623,6 @@ lbl_block:
     return unk_timer;
 } // clang-format on
 #pragma pop
-
 #else
 
 /// Return float result of item kind and state checks
