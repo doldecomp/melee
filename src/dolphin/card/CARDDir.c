@@ -6,11 +6,14 @@
 #include <dolphin/card/CARDRdwr.h>
 #include <dolphin/os/OSCache.h>
 #include <Runtime/__mem.h>
+#include <stddef.h>
 
 CARDDir* __CARDGetDirBlock(CARDControl* card)
 {
     return card->currentDir;
 }
+
+static usize_t const card_size = 0x2000;
 
 static void WriteCallback(s32 chan, s32 result)
 {
@@ -19,15 +22,15 @@ static void WriteCallback(s32 chan, s32 result)
 
     card = &__CARDBlock[chan];
     if (0 <= result) {
-        CARDDir* dir0 = (CARDDir*) ((uintptr_t) card->workArea + 0x2000);
-        CARDDir* dir1 = (CARDDir*) ((uintptr_t) card->workArea + 0x4000);
+        CARDDir* dir0 = (CARDDir*) ((uintptr_t) card->workArea + card_size);
+        CARDDir* dir1 = (CARDDir*) ((uintptr_t) card->workArea + card_size * 2);
 
         if (card->currentDir == dir0) {
             card->currentDir = dir1;
-            memcpy(dir1, dir0, 0x2000);
+            memcpy(dir1, dir0, card_size);
         } else {
             card->currentDir = dir0;
-            memcpy(dir0, dir1, 0x2000);
+            memcpy(dir0, dir1, card_size);
         }
     }
 
@@ -43,22 +46,27 @@ static void WriteCallback(s32 chan, s32 result)
 
 static void EraseCallback(s32 chan, s32 result)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     CARDControl* card;
     CARDCallback callback;
     CARDDir* dir;
-    u32 tmp[2];
-    u32 addr;
+    uintptr_t addr;
 
     card = &__CARDBlock[chan];
     if (result < 0)
         goto error;
 
     dir = __CARDGetDirBlock(card);
-    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / 0x2000 *
+    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / card_size *
            card->sectorSize;
 
     /// @todo Eliminate cast to #CARDCallback.
-    result = __CARDWrite(chan, addr, 0x2000, dir, (CARDCallback) WriteCallback);
+    result =
+        __CARDWrite(chan, addr, card_size, dir, (CARDCallback) WriteCallback);
 
     if (result < 0)
         goto error;
@@ -78,26 +86,29 @@ error:
 
 s32 __CARDUpdateDir(s32 chan, CARDCallback callback)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     CARDControl* card;
     CARDDirCheck* check;
-    u32 tmp[2];
-    u32 addr;
+    uintptr_t addr;
     CARDDir* dir;
 
     card = &__CARDBlock[chan];
-    if (!card->attached) {
+    if (!card->attached)
         return CARD_RESULT_NOCARD;
-    }
 
     dir = __CARDGetDirBlock(card);
     check = __CARDGetDirCheck(dir);
     ++check->checkCode;
-    __CARDCheckSum(dir, 0x2000 - sizeof(u32), &check->checkSum,
+    __CARDCheckSum(dir, card_size - sizeof(uintptr_t), &check->checkSum,
                    &check->checkSumInv);
-    DCStoreRange(dir, 0x2000);
+    DCStoreRange(dir, card_size);
 
     card->eraseCallback = callback;
-    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / 0x2000 *
+    addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / card_size *
            card->sectorSize;
 
     /// @todo Eliminate cast to #CARDCallback.
