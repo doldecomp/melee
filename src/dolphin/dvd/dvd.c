@@ -56,8 +56,9 @@ extern volatile struct _IO {
 
 static DVDBuffer tmpBuffer;
 
+/// @todo Unused @c .bss.
 #ifdef MUST_MATCH
-static u8 pad[0x60];
+static u8 unused[0x60];
 #endif
 
 DVDCommandBlock DummyCommandBlock;
