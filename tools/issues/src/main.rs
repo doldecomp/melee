@@ -389,10 +389,8 @@ fn sort_info(
                     }
 
                     // Sort lexicographically within each depth level
-                    for (a_component, b_component) in
-                        a.components().zip(b.components())
-                    {
-                        match a_component.cmp(&b_component) {
+                    for (a, b) in a.components().zip(b.components()) {
+                        match a.cmp(&b) {
                             Equal => continue,
                             order => return order,
                         }
@@ -402,7 +400,15 @@ fn sort_info(
                 })
                 .then_with(|| a.line.cmp(&b.line))
                 .then_with(|| a.column.cmp(&b.column))
-                .then_with(|| a.spelling.cmp(&b.spelling))
+                .then_with(|| {
+                    let a = resolve_str(a.spelling, str_interner);
+                    let b = resolve_str(b.spelling, str_interner);
+
+                    match (a, b) {
+                        (Ok(a), Ok(b)) => a.cmp(&b),
+                        _ => Equal,
+                    }
+                })
         })
         .collect()
 }
@@ -413,17 +419,25 @@ fn print_info(
 ) -> anyhow::Result<()> {
     info!("Printing items.");
 
-    let indent = " ".repeat(4);
+    let indent = "    ";
     let depth = 0;
 
     for (key, items) in &items.into_iter().group_by(|i| i.severity.clone()) {
-        println!("{}{}", indent.repeat(depth), key);
+        let items = items.collect_vec();
+        let margin = indent.repeat(depth);
+        let count = items.len();
+
+        println!("{margin}{key} ({count})");
         let depth = depth + 1;
 
         for (key, items) in &items.into_iter().group_by(|i| i.category.clone())
         {
             let key = resolve_str(key, &str_interner)?;
-            println!("{}{}", indent.repeat(depth), key);
+            let items = items.collect_vec();
+            let margin = indent.repeat(depth);
+            let count = items.len();
+
+            println!("{margin}{key} ({count})");
             let depth = depth + 1;
 
             for (key, items) in
@@ -435,15 +449,22 @@ fn print_info(
                     }
                     None => "required".into(),
                 };
+                let items = items.collect_vec();
+                let margin = indent.repeat(depth);
+                let count = items.len();
 
-                println!("{}{}", indent.repeat(depth), key);
+                println!("{margin}{key} ({count})");
                 let depth = depth + 1;
 
                 for (key, items) in
                     &items.into_iter().group_by(|i| i.filename.clone())
                 {
                     let key = resolve_str(key, &str_interner)?;
-                    println!("{}{}", indent.repeat(depth), key);
+                    let items = items.collect_vec();
+                    let margin = indent.repeat(depth);
+                    let count = items.len();
+
+                    println!("{margin}{key} ({count})");
                     let depth = depth + 1;
 
                     for item in items {
