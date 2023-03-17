@@ -2,8 +2,8 @@
 --target=ppc32-none-eabi
 -std=c99
 -nostdinc
--Isrc
--Isrc/MSL
+-isystemsrc
+-isystemsrc/MSL
 -Wall
 -Wextra
 -Werror
