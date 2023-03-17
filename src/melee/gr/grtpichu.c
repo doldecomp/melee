@@ -1,12 +1,12 @@
-#include <melee/gr/grtpichu.h>
+#include "grtpichu.h"
 
+#include "gr/granime.h"
+#include "gr/grdisplay.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "lb/lbunknown_003.h"
+#include <baselib/gobjgxlink.h>
 #include <dolphin/os/os.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E91B0[] = {
     { lbl_80222D24, lbl_80222D50, lbl_80222D58, lbl_80222D5C, FLAGS_ZERO },
@@ -106,8 +106,12 @@ static void lbl_80222D5C(HSD_GObj* arg0) {}
 
 static void lbl_80222D60(HSD_GObj* gobj)
 {
-    u32 unused[2];
-    Ground* gp = gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
+    Ground* gp = GET_GROUND(gobj);
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }
@@ -124,14 +128,15 @@ static void lbl_80222DB8(HSD_GObj* gobj)
 }
 
 static void lbl_80222DEC(HSD_GObj* arg0) {}
+
 static void lbl_80222DF0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 unused[4];
 #endif
 
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }

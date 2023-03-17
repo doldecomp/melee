@@ -1,49 +1,49 @@
-#include <melee/gr/ground.h>
+#include "gr/ground.h"
 
+#include "cm/camera.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftlib.h"
+#include "gm/code_801601C4.h"
+#include "grcorneria.h"
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grizumi.h"
+#include "grkongo.h"
+#include "grmaterial.h"
+#include "groldkongo.h"
+#include "grstadium.h"
+#include "grzebes.h"
+#include "it/code_80266F3C.h"
+#include "it/code_8027CF30.h"
+#include "it/item.h"
+#include "it/itkind.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbdvd.h"
+#include "lb/lbshadow.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
+#include "lb/lbvector.h"
+#include "mp/mplib.h"
+#include "pl/player.h"
+#include "stage.h"
+#include "text_4.h"
+#include <baselib/fog.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/memory.h>
+#include <baselib/psstructs.h>
+#include <baselib/random.h>
+#include <baselib/spline.h>
+#include <baselib/wobj.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
-#include <melee/cm/camera.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gr/grcorneria.h>
-#include <melee/gr/grdatfiles.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/grizumi.h>
-#include <melee/gr/grkongo.h>
-#include <melee/gr/grmaterial.h>
-#include <melee/gr/groldkongo.h>
-#include <melee/gr/grstadium.h>
-#include <melee/gr/grzebes.h>
-#include <melee/gr/stage.h>
-#include <melee/it/code_80266F3C.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/it/item.h>
-#include <melee/it/itkind.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbshadow.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mplib.h>
-#include <melee/pl/player.h>
-#include <melee/text_4.h>
-#include <MSL/trigf.h>
 #include <placeholder.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/psstructs.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/spline.h>
-#include <sysdolphin/baselib/wobj.h>
+#include <trigf.h>
 
 StageInfo stage_info;
 
@@ -2020,13 +2020,12 @@ bool func_801C28AC(s32 arg0, u32 arg1, s32* arg2)
     return func_801C24F8(arg0, arg1, arg2);
 }
 
-static char str1[] =
-    "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n";
-static char str2[] =
-    "             check StageParam.csv or StageItem.csv, stdata.c\n";
-static char str3[] = " stageid=%d\n";
-
 #ifdef MWERKS_GEKKO
+static char msg0[] =
+    "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n";
+static char msg1[] =
+    "             check StageParam.csv or StageItem.csv, stdata.c\n";
+static char msg2[] = " stageid=%d\n";
 
 #pragma push
 static asm void func_801C28CC(unk_t, s32)
@@ -2357,9 +2356,8 @@ bool func_801C2ED0(HSD_JObj* jobj, s32 arg1)
     return result;
 }
 
-static s16 lbl_804D6954;
-
 #ifdef MWERKS_GEKKO
+static s16 lbl_804D6954;
 
 #pragma push
 asm void func_801C2FE0(HSD_GObj*)

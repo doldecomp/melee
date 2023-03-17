@@ -236,6 +236,9 @@ void func_8026B0B4(HSD_GObj* item_gobj);
 void Item_OnUserDataRemove(any_t user_data);
 void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it);
 
+#define GET_ITEM(gobj) ((Item*) HSD_GObjGetUserData(gobj))
+
+/// @deprecated Use #GET_ITEM instead.
 static inline Item* GetItemData(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;

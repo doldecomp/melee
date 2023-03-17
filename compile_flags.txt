@@ -2,8 +2,10 @@
 --target=ppc32-none-eabi
 -std=c99
 -nostdinc
+-Isrc/melee
 -isystemsrc
 -isystemsrc/MSL
+-isystemsrc/sysdolphin
 -Wall
 -Wextra
 -Werror
