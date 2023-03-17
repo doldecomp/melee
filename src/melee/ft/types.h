@@ -98,6 +98,7 @@ typedef enum CharacterKind {
 } CharacterKind;
 
 typedef enum Fighter_ActionStateChangeFlags {
+    FtStateChange_None,
     FtStateChange_PreserveFastFall = (1 << 0),
     FtStateChange_PreserveGfx = (1 << 1),
 
