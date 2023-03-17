@@ -552,7 +552,7 @@ void func_80086BEC(HSD_GObj* gobj, Vec3* v)
     *v = fp->xC8_pos_delta;
 }
 
-s32 func_80086C0C(HSD_GObj* gobj)
+enum_t func_80086C0C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     return fp->action_id;

@@ -241,7 +241,7 @@ bool func_8015C3A0(void)
     return 0;
 }
 
-HSD_GObj* func_8015C3E8(s32 arg0)
+HSD_GObj* func_8015C3E8(FighterKind arg0)
 { // get_fighter_gobj(FighterKind)
     HSD_GObj* phi_r31;
     s32 unused[2];
@@ -256,12 +256,12 @@ HSD_GObj* func_8015C3E8(s32 arg0)
     return 0;
 }
 
-s32 func_8015C44C(s32 arg0)
-{ // Fighter_GetState(FighterKind)
+enum_t func_8015C44C(FighterKind kind)
+{
     HSD_GObj* gobj;
     s32 unused[4];
 
-    gobj = func_8015C3E8(arg0);
+    gobj = func_8015C3E8(kind);
     if (gobj) {
         return func_80086C0C(gobj); // DataOffset_ActionStateLoad
     } else {

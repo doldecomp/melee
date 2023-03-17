@@ -52,7 +52,10 @@ void func_80086B90(HSD_GObj*, Vec3* v);
 void func_80086BB4(HSD_GObj*);
 u8 func_80086BE0(HSD_GObj*);
 void func_80086BEC(HSD_GObj*, Vec3*);
-s32 func_80086C0C(HSD_GObj*);
+
+/// @returns A fighter action state ID.
+enum_t func_80086C0C(HSD_GObj*);
+
 void func_80086C18(HSD_GObj*, s32, s32);
 void func_80086C9C(s32, s32);
 void func_80086D40(HSD_GObj*, s32, s32);
