@@ -274,51 +274,50 @@ f32 func_800865C0(HSD_GObj* gobj)
 
 s32 func_800865CC(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->xE0_ground_or_air;
 }
 
 void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     *x = fp->input.x620_lstick_x;
     *y = fp->input.x624_lstick_y;
 }
 
 void* func_800865F0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj;
 }
 
 void* func_80086630(HSD_GObj* gobj, s32 i)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x5E8_fighterBones[i].x0_jobj;
 }
 
 void func_80086644(HSD_GObj* gobj, Vec3* pos)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     *pos = fp->xB0_pos;
 }
 
 void func_80086664(HSD_GObj* gobj, Vec3* pos)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->xB0_pos = *pos;
 }
 
 void func_80086684(HSD_GObj* gobj, Vec3* pos)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     *pos = fp->xBC_prevPos;
 }
 
 void ftData_SetScale(HSD_GObj* gobj, f32 val)
 {
-    u32 unused[2];
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->x34_scale.y = val;
     Fighter_UpdateModelScale(gobj);
     func_80080174(fp);
@@ -326,7 +325,7 @@ void ftData_SetScale(HSD_GObj* gobj, f32 val)
 
 void func_800866DC(HSD_GObj* gobj, Vec3* v)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     struct attr* r4 = &fp->x110_attr;
     s32 i = fp->x10C_ftData->x0->x16C_idx;
     func_8000B1CC(func_80086630(gobj, i), &r4->x280, v);
@@ -334,45 +333,42 @@ void func_800866DC(HSD_GObj* gobj, Vec3* v)
 
 void func_80086724(HSD_GObj* gobj, HSD_GObj* other)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->x1974_heldItem != NULL || fp->x1978 != NULL) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x1974_heldItem != NULL || fp->x1978 != NULL)
         func_8007E6DC(gobj, other, 1);
-    }
 }
 
 void func_80086764(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->x1984_heldItemSpec != NULL) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x1984_heldItemSpec != NULL)
         func_8007E82C(gobj);
-    }
 }
 
 HSD_GObj* func_80086794(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x1974_heldItem;
 }
 
 bool func_800867A0(HSD_GObj* gobj, HSD_GObj* arg1)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->x1974_heldItem == arg1 || fp->x1978 == arg1) {
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->x1974_heldItem == arg1 || fp->x1978 == arg1)
         return true;
-    } else {
+    else
         return false;
-    }
 }
 
 HSD_GObj* func_800867CC(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x1984_heldItemSpec;
 }
 
 bool func_800867D8(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->x221D_flag.bits.b4;
 }
 
