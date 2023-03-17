@@ -146,9 +146,13 @@ void func_80390908(HSD_GObj* gobj, u8 gx_link, u8 priority)
 
 void func_803909D8(HSD_GObj* gobj, HSD_GObj* other)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[12];
+#endif
+
     u8 link;
     u8 prio;
-    u32 unused[3];
 
     prio = other->render_priority;
     link = other->gx_link;

@@ -337,7 +337,10 @@ void func_8015C5F8(HSD_GObj* gobj)
 
 MasterHandAttributes* func_8015C6BC(void)
 {
-    s32 unused[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     {
         HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
