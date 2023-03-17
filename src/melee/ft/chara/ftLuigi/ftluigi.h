@@ -41,13 +41,6 @@ typedef enum ftLuigiAction {
 
 // Misfire
 
-#define FTLUIGI_SPECIALS_MISFIRE_FLAG                                          \
-    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
-        FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_STATE_CHANGE_B27
-
 // SpecialLw (Luigi Cyclone)
 
 #define FTLUIGI_SPECIALLW_FLAG                                                 \
