@@ -376,7 +376,7 @@ void func_800867E8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Fighter_ResetInputData_80068854(gobj);
-    fp->x221D_flag.bits.b4 = 1;
+    fp->x221D_flag.bits.b4 = true;
 }
 
 void func_80086824(void)
@@ -407,19 +407,21 @@ void func_800868A4(void)
 
 bool func_800868D4(HSD_GObj* gobj, HSD_GObj* arg1)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+
     if ((fp->x1974_heldItem != arg1) && (fp->x197C != arg1) &&
         (fp->x1980 != arg1))
     {
-        return 1;
+        return true;
     }
+
     if (fp->x221E_flag.bits.b0 || fp->x221E_flag.bits.b5 ||
         (!fp->x221E_flag.bits.b3 && fp->x1974_heldItem == arg1) ||
         (!fp->x221E_flag.bits.b4 && (fp->x197C == arg1 || fp->x1980 == arg1)))
     {
-        return 0;
+        return false;
     } else {
-        return 1;
+        return true;
     }
 }
 
