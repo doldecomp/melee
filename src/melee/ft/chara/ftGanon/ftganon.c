@@ -119,7 +119,7 @@ void ftGanon_OnLoad(HSD_GObj* gobj)
 
 void ftGanon_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    ftCFalcon_LoadSpecialAttrs(gobj);
+    ftCaptain_LoadSpecialAttrs(gobj);
 }
 
 void ftGanon_OnKnockbackEnter(HSD_GObj* gobj)
