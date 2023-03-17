@@ -56,7 +56,10 @@ extern volatile struct _IO {
 
 static DVDBuffer tmpBuffer;
 
+#ifdef MUST_MATCH
 static u8 pad[0x60];
+#endif
+
 DVDCommandBlock DummyCommandBlock;
 OSAlarm ResetAlarm;
 
