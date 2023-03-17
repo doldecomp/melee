@@ -94,19 +94,23 @@ Fighter_CostumeStrings lbl_803CF26C[] = {
 
 void ftKoopa_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* koopaAttr = fp->x2D4_specialAttributes;
-    ftKoopaVars* ftVars;
-    f32 unk = 0.0;
-    f32 unk1 = 0.0;
 
     func_80074A4C(gobj, 0, 0);
 
-    ftVars = (ftKoopaVars*) &fp->sa.koopa.x222C;
+    {
+        ftKoopaVars* vars = (ftKoopaVars*) &fp->sa.koopa.x222C;
 
-    fp->dmg.x18B0 = koopaAttr->x0;
-    ftVars->x0 = koopaAttr->x10;
-    ftVars->x4 = koopaAttr->x18;
+        fp->dmg.x18B0 = koopaAttr->x0;
+        vars->x0 = koopaAttr->x10;
+        vars->x4 = koopaAttr->x18;
+    }
 }
 
 /* static */ void func_80134D78(HSD_GObj* gobj);
@@ -114,7 +118,6 @@ void ftKoopa_OnDeath(HSD_GObj* gobj)
 void func_80132A64(HSD_GObj* gobj)
 {
     func_80134D78(gobj);
-    return;
 }
 
 void ftKoopa_OnLoadForGKoopa(Fighter* fp)
@@ -124,25 +127,18 @@ void ftKoopa_OnLoadForGKoopa(Fighter* fp)
 
 void ftKoopa_OnLoad(HSD_GObj* gobj)
 {
-    ftData* ftDataInfo;
-    void** items;
-    Fighter* fp;
+    /// @todo #GET_FIGHTER is 8 bytes too much stack but it should be possible
+    Fighter* fp = gobj->user_data;
 
-    fp = (Fighter*) gobj->user_data;
-    ftDataInfo = fp->x10C_ftData;
-    items = ftDataInfo->x48_items;
+    ftData* ftDataInfo = fp->x10C_ftData;
+    UNK_T* items = ftDataInfo->x48_items;
 
     PUSH_ATTRS(fp, ftKoopaAttributes);
-
     func_8026B3F8(items[0], It_Kind_Koopa_Flame);
-
-    fp->x2226_flag.bits.b1 = 1;
+    fp->x2226_flag.bits.b1 = true;
 }
 
-void func_80132B38(void)
-{
-    return;
-}
+void func_80132B38(void) {}
 
 void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
@@ -181,131 +177,149 @@ void ftKoopa_OnKnockbackExit(HSD_GObj* gobj)
 
 f32 func_80132DC0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    return ((ftKoopaAttributes*) fp->x2D4_specialAttributes)->x4C;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
+    return sa->x4C;
 }
 
 f32 func_80132DD0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    return ((ftKoopaAttributes*) fp->x2D4_specialAttributes)->x48;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
+    return sa->x48;
 }
 
 f32 func_80132DE0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    return ((ftKoopaAttributes*) fp->x2D4_specialAttributes)->x44;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
+    return sa->x44;
 }
 
 f32 func_80132DF0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    return ((ftKoopaAttributes*) fp->x2D4_specialAttributes)->x40;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
+    return sa->x40;
 }
 
 f32 func_80132E00(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    return ((ftKoopaAttributes*) fp->x2D4_specialAttributes)->x3C;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
+    return sa->x3C;
 }
 
 f32 func_80132E10(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    return ((ftKoopaAttributes*) fp->x2D4_specialAttributes)->x34;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
+    return sa->x34;
 }
 
 f32 func_80132E20(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    return ((ftKoopaAttributes*) fp->x2D4_specialAttributes)->x38;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
+    return sa->x38;
 }
 
 void func_80132E30(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    HSD_GObj* temp;
-    bool flag_set;
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    fp = gobj->user_data;
-    if (fp->x2210_ThrowFlags.b4 != 0) {
-        fp->x2210_ThrowFlags.b4 = 0;
-        flag_set = true;
-    } else {
-        flag_set = false;
-    }
-    if (flag_set != false) {
-        fp->facing_dir = -fp->facing_dir;
-        fp->x234C_stateVar4 = 1;
-    }
-    if ((u32) fp->x2200_ftcmd_var0 != 0) {
-        if (fp->x1A58_interactedFighter != 0) {
-            temp = fp->x1A58_interactedFighter;
-            func_8007E2F4(fp, 0);
-            func_800DE2A8(gobj, temp);
-            func_800DE7C0(temp, 0, 0);
-            fp->x2200_ftcmd_var0 = 0;
+    {
+        bool throw_flag;
+        if (fp->x2210_ThrowFlags.b4) {
+            fp->x2210_ThrowFlags.b4 = false;
+            throw_flag = true;
+        } else {
+            throw_flag = false;
         }
+
+        if (throw_flag) {
+            fp->facing_dir = -fp->facing_dir;
+            fp->x234C_stateVar4 = true;
+        }
+    }
+
+    if (fp->x2200_ftcmd_var0 == 0)
+        return;
+
+    if (fp->x1A58_interactedFighter == NULL)
+        return;
+
+    {
+        HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
+        func_8007E2F4(fp, 0);
+        func_800DE2A8(gobj, victim_gobj);
+        func_800DE7C0(victim_gobj, 0, 0);
+        fp->x2200_ftcmd_var0 = 0;
     }
 }
 
 void ftKoopa_SpecialS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
 
-    f64 unk = 0.0;
+        fp->x2210_ThrowFlags.flags = 0;
+        fp->x2200_ftcmd_var0 = 0;
+        fp->x2344_stateVar2 = 0;
+        fp->x234C_stateVar4 = 0;
+    }
 
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2344_stateVar2 = 0;
-    fp->x234C_stateVar4 = 0;
-
-    Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, lbl_804D9AD8,
+    Fighter_ActionStateChange_800693AC(gobj, 347, 0, 0, lbl_804D9AD8,
                                        lbl_804D9ADC, lbl_804D9AD8);
 
     func_8006EBA4(gobj);
 
-    fp = gobj->user_data;
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007E2D0(fp, 8, func_8013302C, NULL, func_800BC7E0);
+        func_8007E2D0(fp, 8, func_8013302C, NULL, func_800BC7E0);
 
-    fp->x2340_stateVar1 = 0;
-    fp->x2348_stateVar3 = 0;
+        fp->x2340_stateVar1 = 0;
+        fp->x2348_stateVar3 = 0;
+    }
 }
 
 void ftKoopa_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
 
-    f64 unk = 0.0;
+        fp->x2210_ThrowFlags.flags = 0;
+        fp->x2200_ftcmd_var0 = 0;
+        fp->x2344_stateVar2 = 0;
+        fp->x234C_stateVar4 = 0;
+    }
 
-    fp->x2210_ThrowFlags.flags = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2344_stateVar2 = 0;
-    fp->x234C_stateVar4 = 0;
-
-    Fighter_ActionStateChange_800693AC(gobj, 0x161, 0, 0, lbl_804D9AD8,
+    Fighter_ActionStateChange_800693AC(gobj, 353, 0, 0, lbl_804D9AD8,
                                        lbl_804D9ADC, lbl_804D9AD8);
 
     func_8006EBA4(gobj);
 
-    fp = gobj->user_data;
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007E2D0(fp, 8, func_801330E4, NULL, func_800BC8D4);
+        func_8007E2D0(fp, 8, func_801330E4, NULL, func_800BC8D4);
 
-    fp->x2340_stateVar1 = 0;
-    fp->x2348_stateVar3 = 0;
+        fp->x2340_stateVar1 = 0;
+        fp->x2348_stateVar3 = 0;
+    }
 }
 
 void func_8013302C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if ((s32) fp->x2344_stateVar2 != 0) {
-        Fighter_ActionStateChange_800693AC(gobj, 349, 0x80, 0, lbl_804D9AD8,
-                                           lbl_804D9ADC, lbl_804D9AD8);
+    if ((signed) fp->x2344_stateVar2 != 0) {
+        Fighter_ActionStateChange_800693AC(gobj, 349, FIGHTER_MATANIM_NOUPDATE,
+                                           0, lbl_804D9AD8, lbl_804D9ADC,
+                                           lbl_804D9AD8);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 348, 0x0, 0, lbl_804D9AD8,
+        Fighter_ActionStateChange_800693AC(gobj, 348, 0, 0, lbl_804D9AD8,
                                            lbl_804D9ADC, lbl_804D9AD8);
     }
     fp->x2222_flag.bits.b2 = 1;

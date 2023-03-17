@@ -97,79 +97,77 @@ typedef enum CharacterKind {
     CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
-// Action State Change flags
+enum Fighter_ActionStateChangeFlags {
+    FIGHTER_FASTFALL_PRESERVE = (1 << 0),
+    FIGHTER_GFX_PRESERVE = (1 << 1),
 
-#define FIGHTER_FASTFALL_PRESERVE (1 << 0)
-#define FIGHTER_GFX_PRESERVE (1 << 1)
+    /// Preserve full body collision state
+    FIGHTER_HITSTATUS_COLANIM_PRESERVE = (1 << 2),
 
-/// Preserve full body collision state
-#define FIGHTER_HITSTATUS_COLANIM_PRESERVE (1 << 2)
+    /// Keep hitboxes
+    FIGHTER_HIT_NOUPDATE = (1 << 3),
 
-/// Keep hitboxes
-#define FIGHTER_HIT_NOUPDATE (1 << 3)
+    /// Ignore model state change (?)
+    FIGHTER_MODEL_NOUPDATE = (1 << 4),
 
-/// Ignore model state change (?)
-#define FIGHTER_MODEL_NOUPDATE (1 << 4)
+    FIGHTER_ANIMVEL_NOUPDATE = (1 << 5),
+    FIGHTER_STATE_CHANGE_B6 = (1 << 6),
 
-#define FIGHTER_ANIMVEL_NOUPDATE (1 << 5)
-#define FIGHTER_STATE_CHANGE_B6 (1 << 6)
+    /// Ignore switching to character's "hurt" textures (?)
+    FIGHTER_MATANIM_NOUPDATE = (1 << 7),
 
-/// Ignore switching to character's "hurt" textures (?)
-#define FIGHTER_MATANIM_NOUPDATE (1 << 7)
+    /// Resets thrower GObj pointer to NULL if false?
+    FIGHTER_THROW_EXCEPTION_NOUPDATE = (1 << 8),
 
-/// Resets thrower GObj pointer to NULL if false?
-#define FIGHTER_THROW_EXCEPTION_NOUPDATE (1 << 8)
+    FIGHTER_SFX_PRESERVE = (1 << 9),
 
-#define FIGHTER_SFX_PRESERVE (1 << 9)
+    /// Ignore Parasol state change
+    FIGHTER_PARASOL_NOUPDATE = (1 << 10),
 
-/// Ignore Parasol state change
-#define FIGHTER_PARASOL_NOUPDATE (1 << 10)
+    /// Ignore rumble update?
+    FIGHTER_RUMBLE_NOUPDATE = (1 << 11),
 
-/// Ignore rumble update?
-#define FIGHTER_RUMBLE_NOUPDATE (1 << 11)
+    FIGHTER_COLANIM_NOUPDATE = (1 << 12),
 
-#define FIGHTER_COLANIM_NOUPDATE (1 << 12)
+    /// Keep respawn platform?
+    FIGHTER_ACCESSORY_PRESERVE = (1 << 13),
 
-/// Keep respawn platform?
-#define FIGHTER_ACCESSORY_PRESERVE (1 << 13)
+    /// Run all Subaction Events up to the current animation frame
+    FIGHTER_CMD_UPDATE = (1 << 14),
 
-/// Run all Subaction Events up to the current animation frame
-#define FIGHTER_CMD_UPDATE (1 << 14)
+    FIGHTER_NAMETAGVIS_NOUPDATE = (1 << 15),
 
-#define FIGHTER_NAMETAGVIS_NOUPDATE (1 << 15)
+    /// Assume this is for individual bones?
+    FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE = (1 << 16),
 
-/// Assume this is for individual bones?
-#define FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE (1 << 16)
+    FIGHTER_SWORDTRAIL_PRESERVE = (1 << 17),
 
-#define FIGHTER_SWORDTRAIL_PRESERVE (1 << 17)
+    /// Used by Ness during Up/Down Smash
+    FIGHTER_ITEMVIS_NOUPDATE = (1 << 18),
 
-/// Used by Ness during Up/Down Smash
-#define FIGHTER_ITEMVIS_NOUPDATE (1 << 18)
+    /// Skips updating bit 0x20 of 0x2222?
+    FIGHTER_STATE_CHANGE_B19 = (1 << 19),
 
-/// Skips updating bit 0x20 of 0x2222?
-#define FIGHTER_STATE_CHANGE_B19 (1 << 19)
+    FIGHTER_PHYS_UNKUPDATE = (1 << 20),
 
-#define FIGHTER_PHYS_UNKUPDATE (1 << 20)
+    /// Sets anim rate to 0x and some other stuff
+    FIGHTER_FREEZESTATE = (1 << 21),
 
-/// Sets anim rate to 0x and some other stuff
-#define FIGHTER_FREEZESTATE (1 << 21)
+    FIGHTER_MODELPART_VIS_NOUPDATE = (1 << 22),
+    FIGHTER_METALB_NOUPDATE = (1 << 23),
+    FIGHTER_STATE_CHANGE_B24 = (1 << 24),
+    FIGHTER_ATTACKCOUNT_NOUPDATE = (1 << 25),
+    FIGHTER_MODEL_FLAG_NOUPDATE = (1 << 26),
+    FIGHTER_STATE_CHANGE_B27 = (1 << 27),
+    FIGHTER_HITSTUN_FLAG_NOUPDATE = (1 << 28),
 
-#define FIGHTER_MODELPART_VIS_NOUPDATE (1 << 22)
-#define FIGHTER_METALB_NOUPDATE (1 << 23)
-#define FIGHTER_STATE_CHANGE_B24 (1 << 24)
-#define FIGHTER_ATTACKCOUNT_NOUPDATE (1 << 25)
-#define FIGHTER_MODEL_FLAG_NOUPDATE (1 << 26)
-#define FIGHTER_STATE_CHANGE_B27 (1 << 27)
-#define FIGHTER_HITSTUN_FLAG_NOUPDATE (1 << 28)
+    /// Keeps current fp animation?
+    FIGHTER_ANIM_NOUPDATE = (1 << 29),
 
-/// Keeps current fp animation?
-#define FIGHTER_ANIM_NOUPDATE (1 << 29)
-
-/// Unused?
-#define FIGHTER_STATE_CHANGE_B30 (1 << 30)
-
-/// Unused?
-#define FIGHTER_STATE_CHANGE_B31 (1 << 31)
+    /// Unused?
+    FIGHTER_STATE_CHANGE_B30 = (1 << 30),
+    FIGHTER_STATE_CHANGE_B31 = (1 << 31),
+};
 
 // Ledge Grab Macros
 
