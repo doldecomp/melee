@@ -616,7 +616,6 @@ static void stateReady(void)
 #define MIN(a, b) (((a) > (b)) ? (b) : (a))
 static void stateBusy(DVDCommandBlock* block)
 {
-    DVDCommandBlock* finished;
     LastState = stateBusy;
     switch (block->command) {
     case 5:
