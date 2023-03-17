@@ -12,15 +12,19 @@ bool __DSP_rude_task_pending;
 
 void __DSPHandler(__OSInterrupt intr, OSContext* ctx)
 {
-    u8 pad[8];
-    OSContext sp10;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    OSContext new_ctx;
     u32 msg;
     u16 temp;
 
     temp = __DSPRegs[5];
     __DSPRegs[5] = (temp & -41) | 0x80;
-    OSClearContext(&sp10);
-    OSSetCurrentContext(&sp10);
+    OSClearContext(&new_ctx);
+    OSSetCurrentContext(&new_ctx);
     while (DSPCheckMailFromDSP() == 0)
         continue;
     msg = DSPReadMailFromDSP();
@@ -134,7 +138,7 @@ void __DSPHandler(__OSInterrupt intr, OSContext* ctx)
             __DSP_curr_task->req_cb(__DSP_curr_task);
         break;
     }
-    OSClearContext(&sp10);
+    OSClearContext(&new_ctx);
     OSSetCurrentContext(ctx);
 }
 
