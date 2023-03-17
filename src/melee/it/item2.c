@@ -842,7 +842,7 @@ HSD_GObj* func_8026BC78(HSD_GObj* item_gobj) // Get item owner
     return item_data->owner;
 }
 
-// Get item attack kind
+/// @returns #Item::xD88_attackID of @p item_gobj.
 bool func_8026BC84(HSD_GObj* item_gobj)
 {
     Item* item_data = item_gobj->user_data;
@@ -851,47 +851,49 @@ bool func_8026BC84(HSD_GObj* item_gobj)
 
 extern void func_80086644(HSD_GObj*, Vec3*);
 
-void func_8026BC90(HSD_GObj* item_gobj,
-                   Vec3* pos) // Unknown item ECB / position update
+/// Unknown item ECB / position update
+void func_8026BC90(HSD_GObj* item_gobj, Vec3* pos)
 {
-    pos->z = 0.0f;
-    pos->y = 0.0f;
-    pos->x = 0.0f;
-    if ((item_gobj != NULL) && (func_80086960(item_gobj) != false)) {
+    pos->z = 0;
+    pos->y = 0;
+    pos->x = 0;
+
+    if (item_gobj != NULL && func_80086960(item_gobj))
         func_80086644(item_gobj, pos);
-    }
 }
 
-void func_8026BCF4(HSD_GObj* item_gobj) // Toggle bit 2 of 0xDCD OFF
+/// Unsets #Item::xDCD_flag::bits::b2 of @p item_gobj.
+void func_8026BCF4(HSD_GObj* item_gobj)
 {
-    Item* item_data = item_gobj->user_data;
-    item_data->xDCD_flag.bits.b2 = 0;
+    Item* item_data = GET_ITEM(item_gobj);
+    item_data->xDCD_flag.bits.b2 = false;
 }
 
-// This function is identical to 0x8026BCF4
-// except for the toggle being 1 instead
-void func_8026BD0C(HSD_GObj* item_gobj) // Toggle bit 2 of 0xDCD ON
+/// Sets #Item::xDCD_flag::bits::b2 of @p item_gobj.
+void func_8026BD0C(HSD_GObj* item_gobj)
 {
-    Item* item_data = item_gobj->user_data;
-    item_data->xDCD_flag.bits.b2 = 1;
+    Item* item_data = GET_ITEM(item_gobj);
+    item_data->xDCD_flag.bits.b2 = true;
 }
 
-void func_8026BD24(HSD_GObj* item_gobj) // Toggle bit 3 of 0xDD0 ON
+/// Sets #Item::xDD0_flag::bits::b3 of @p item_gobj.
+void func_8026BD24(HSD_GObj* item_gobj)
 {
-    Item* item_data = item_gobj->user_data;
-    item_data->xDD0_flag.bits.b3 = 1;
+    Item* item_data = GET_ITEM(item_gobj);
+    item_data->xDD0_flag.bits.b3 = true;
 }
 
-void func_8026BD3C(HSD_GObj* item_gobj) // Toggle bit 3 of 0xDCC ON
+/// Sets #Item::xDCC_flag::bits::b3 of @p item_gobj.
+void func_8026BD3C(HSD_GObj* item_gobj)
 {
-    Item* item_data = item_gobj->user_data;
-    item_data->xDCC_flag.b3 = 1;
+    Item* item_data = GET_ITEM(item_gobj);
+    item_data->xDCC_flag.b3 = true;
 }
 
-// 0x8026BD54 // Identical to previous function except for the toggle bit
-void func_8026BD54(HSD_GObj* item_gobj) // Toggle bit 3 of 0xDCC OFF
+/// Unsets #Item::xDCC_flag::bits::b3 of @p item_gobj.
+void func_8026BD54(HSD_GObj* item_gobj)
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = GET_ITEM(item_gobj);
     item_data->xDCC_flag.b3 = 0;
 }
 

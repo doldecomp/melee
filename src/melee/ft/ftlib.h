@@ -33,7 +33,6 @@ void func_8008688C(HSD_GObj*);
 void func_800868A4(void);
 bool func_800868D4(HSD_GObj*, HSD_GObj*);
 
-/// Check if entity is a fighter
 /// @returns @c true if @p gobj is a #Fighter, otherwise @c false.
 bool func_80086960(HSD_GObj* gobj);
 
