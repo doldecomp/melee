@@ -223,14 +223,16 @@ inline s32 sgn(f32 x)
 
 f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
 {
-    Vec3 sp20;
-    Fighter* cur_fp;
+    Vec3 vec;
     Fighter* fp;
     HSD_GObj* cur;
-    s32 phi_r0;
-    u32 unused[3];
 
-    s32 result = 0;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[12];
+#endif
+
+    int result = 0;
 
     if (gobj != NULL)
         fp = gobj->user_data;
@@ -241,25 +243,22 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
         if (func_80086FD4(gobj, cur))
             continue;
 
-        cur_fp = cur->user_data;
-        if (cur_fp->x221F_flag.bits.b3 || (func_8016B168() && fp != NULL &&
-                                           cur_fp->x61B_team == fp->x61B_team))
         {
-            continue;
+            Fighter* cur_fp = cur->user_data;
+            if (cur_fp->x221F_flag.bits.b3 ||
+                (func_8016B168() && fp != NULL &&
+                 cur_fp->x61B_team == fp->x61B_team))
+            {
+                continue;
+            }
+
+            func_800866DC(cur, &vec);
+            result += sgn(vec.x - v->x);
         }
-
-        func_800866DC(cur, &sp20);
-        result += sgn(sp20.x - v->x);
     }
 
-    if (result == 0) {
-        if (HSD_Randi(2) != 0)
-            phi_r0 = +1;
-        else
-            phi_r0 = -1;
-
-        result = phi_r0;
-    }
+    if (result == 0)
+        result = HSD_Randi(2) != 0 ? +1 : -1;
 
     if (result < 0)
         return -1;
@@ -269,7 +268,7 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
 
 f32 func_800865C0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->facing_dir;
 }
 
