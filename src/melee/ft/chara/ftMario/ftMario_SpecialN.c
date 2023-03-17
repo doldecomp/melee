@@ -171,7 +171,7 @@ void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(
         gobj, AS_MARIO_SPECIALAIRN,
-        (FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE), NULL,
+        (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
@@ -184,7 +184,7 @@ void ftMario_SpecialAirN_AirToGround(HSD_GObj* gobj)
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(
         gobj, AS_MARIO_SPECIALN,
-        (FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE), NULL,
+        (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;

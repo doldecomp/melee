@@ -133,11 +133,12 @@ void ftMars_8013767C(HSD_GObj* gobj)
 }
 
 static u32 const transition_flags =
-    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE |
-    FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |
-    FIGHTER_SWORDTRAIL_PRESERVE | FIGHTER_ITEMVIS_NOUPDATE |
-    FIGHTER_STATE_CHANGE_B19 | FIGHTER_MODELPART_VIS_NOUPDATE |
-    FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_STATE_CHANGE_B27;
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
+    FtStateChange_UpdateCmd | FtStateChange_PreserveSwordTrail |
+    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
+    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
+    FtStateChange_Unk_27;
 
 void ftMars_801376E8(HSD_GObj* gobj)
 {
@@ -302,8 +303,8 @@ void ftMars_80137A9C(HSD_GObj* gobj)
         else
             asid = 360;
     }
-    Fighter_ActionStateChange_800693AC(gobj, asid, FIGHTER_ATTACKCOUNT_NOUPDATE,
-                                       0, 0, 1, 0);
+    Fighter_ActionStateChange_800693AC(
+        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
 }
 
 void ftMars_80137B34(HSD_GObj* gobj)
@@ -450,8 +451,8 @@ void ftMars_80137E0C(HSD_GObj* gobj)
         }
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, FIGHTER_ATTACKCOUNT_NOUPDATE,
-                                       0, 0, 1, 0);
+    Fighter_ActionStateChange_800693AC(
+        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
 }
 
 void ftMars_80137ECC(HSD_GObj* gobj)
@@ -590,6 +591,6 @@ void ftMars_80138148(HSD_GObj* gobj)
                 asid = 365;
         }
     }
-    Fighter_ActionStateChange_800693AC(gobj, asid, FIGHTER_ATTACKCOUNT_NOUPDATE,
-                                       0, 0, 1, 0);
+    Fighter_ActionStateChange_800693AC(
+        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
 }

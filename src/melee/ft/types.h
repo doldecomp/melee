@@ -98,75 +98,76 @@ typedef enum CharacterKind {
 } CharacterKind;
 
 enum Fighter_ActionStateChangeFlags {
-    FIGHTER_FASTFALL_PRESERVE = (1 << 0),
-    FIGHTER_GFX_PRESERVE = (1 << 1),
+    FtStateChange_PreserveFastFall = (1 << 0),
+    FtStateChange_PreserveGfx = (1 << 1),
 
     /// Preserve full body collision state
-    FIGHTER_HITSTATUS_COLANIM_PRESERVE = (1 << 2),
+    FtStateChange_PreserveColAnimHitStatus = (1 << 2),
 
     /// Keep hitboxes
-    FIGHTER_HIT_NOUPDATE = (1 << 3),
+    FtStateChange_SkipUpdateHit = (1 << 3),
 
     /// Ignore model state change (?)
-    FIGHTER_MODEL_NOUPDATE = (1 << 4),
+    FtStateChange_SkipUpdateModel = (1 << 4),
 
-    FIGHTER_ANIMVEL_NOUPDATE = (1 << 5),
-    FIGHTER_STATE_CHANGE_B6 = (1 << 6),
+    FtStateChange_SkipUpdateAnimVel = (1 << 5),
+    FtStateChange_Unk_6 = (1 << 6),
 
     /// Ignore switching to character's "hurt" textures (?)
-    FIGHTER_MATANIM_NOUPDATE = (1 << 7),
+    FtStateChange_SkipUpdateMatAnim = (1 << 7),
 
     /// Resets thrower GObj pointer to NULL if false?
-    FIGHTER_THROW_EXCEPTION_NOUPDATE = (1 << 8),
+    FtStateChange_SkipUpdateThrowException = (1 << 8),
 
-    FIGHTER_SFX_PRESERVE = (1 << 9),
+    FtStateChange_PreserveSfx = (1 << 9),
 
     /// Ignore Parasol state change
-    FIGHTER_PARASOL_NOUPDATE = (1 << 10),
+    FtStateChange_SkipUpdateParasol = (1 << 10),
 
     /// Ignore rumble update?
-    FIGHTER_RUMBLE_NOUPDATE = (1 << 11),
+    FtStateChange_SkipUpdateRumble = (1 << 11),
 
-    FIGHTER_COLANIM_NOUPDATE = (1 << 12),
+    FtStateChange_SkipUpdateColAnim = (1 << 12),
 
     /// Keep respawn platform?
-    FIGHTER_ACCESSORY_PRESERVE = (1 << 13),
+    FtStateChange_PreserveAccessory = (1 << 13),
 
     /// Run all Subaction Events up to the current animation frame
-    FIGHTER_CMD_UPDATE = (1 << 14),
+    FtStateChange_UpdateCmd = (1 << 14),
 
-    FIGHTER_NAMETAGVIS_NOUPDATE = (1 << 15),
+    FtStateChange_SkipUpdateNametagVis = (1 << 15),
 
     /// Assume this is for individual bones?
-    FIGHTER_PART_HITSTATUS_COLANIM_PRESERVE = (1 << 16),
+    FtStateChange_PreserveColaNimPartHitStatus = (1 << 16),
 
-    FIGHTER_SWORDTRAIL_PRESERVE = (1 << 17),
+    FtStateChange_PreserveSwordTrail = (1 << 17),
 
     /// Used by Ness during Up/Down Smash
-    FIGHTER_ITEMVIS_NOUPDATE = (1 << 18),
+    FtStateChange_SkipUpdateItemVis = (1 << 18),
 
-    /// Skips updating bit 0x20 of 0x2222?
-    FIGHTER_STATE_CHANGE_B19 = (1 << 19),
+    /// Skips updating bit 5 of #Fighter::x2222_flag?
+    FtStateChange_Unk_19 = (1 << 19),
 
-    FIGHTER_PHYS_UNKUPDATE = (1 << 20),
+    FtStateChange_Unk_UpdatePhys = (1 << 20),
 
-    /// Sets anim rate to 0x and some other stuff
-    FIGHTER_FREEZESTATE = (1 << 21),
+    /// Sets anim rate to 0 and some other stuff
+    FtStateChange_FreezeState = (1 << 21),
 
-    FIGHTER_MODELPART_VIS_NOUPDATE = (1 << 22),
-    FIGHTER_METALB_NOUPDATE = (1 << 23),
-    FIGHTER_STATE_CHANGE_B24 = (1 << 24),
-    FIGHTER_ATTACKCOUNT_NOUPDATE = (1 << 25),
-    FIGHTER_MODEL_FLAG_NOUPDATE = (1 << 26),
-    FIGHTER_STATE_CHANGE_B27 = (1 << 27),
-    FIGHTER_HITSTUN_FLAG_NOUPDATE = (1 << 28),
+    FtStateChange_SkipUpdateModelPartVis = (1 << 22),
+    FtStateChange_SkipUpdateMetalB = (1 << 23),
+    FtStateChange_Unk_24 = (1 << 24),
+    FtStateChange_SkipUpdateAttackCount = (1 << 25),
+    FtStateChange_SkipUpdateModelFlag = (1 << 26),
+    FtStateChange_Unk_27 = (1 << 27),
+    FtStateChange_SkipUpdateHitStunFlag = (1 << 28),
 
-    /// Keeps current fp animation?
-    FIGHTER_ANIM_NOUPDATE = (1 << 29),
+    /// Keeps current fighter animation?
+    FtStateChange_SkipUpdateAnim = (1 << 29),
+
+    FtStateChange_Unk_30 = (1 << 30),
 
     /// Unused?
-    FIGHTER_STATE_CHANGE_B30 = (1 << 30),
-    FIGHTER_STATE_CHANGE_B31 = (1 << 31),
+    FtStateChange_Unk_31 = (1 << 31),
 };
 
 // Ledge Grab Macros

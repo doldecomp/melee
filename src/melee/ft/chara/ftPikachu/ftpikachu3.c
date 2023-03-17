@@ -102,11 +102,11 @@ void ftPikachu_801250C0(HSD_GObj* fighter_gobj)
 }
 
 static const u32 transition_flags0 =
-    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_MATANIM_NOUPDATE |
-    FIGHTER_SFX_PRESERVE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |
-    FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |
-    FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |
-    FIGHTER_STATE_CHANGE_B27;
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateMatAnim |
+    FtStateChange_PreserveSfx | FtStateChange_SkipUpdateColAnim |
+    FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
+    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
 void ftPikachu_ActionChange_801250FC(HSD_GObj* fighter_gobj)
 {
@@ -203,11 +203,12 @@ void ftPikachu_801253D8(HSD_GObj* fighter_gobj)
 }
 
 static u32 const transition_flags1 =
-    FIGHTER_GFX_PRESERVE | FIGHTER_HITSTATUS_COLANIM_PRESERVE |
-    FIGHTER_MATANIM_NOUPDATE | FIGHTER_SFX_PRESERVE | FIGHTER_COLANIM_NOUPDATE |
-    FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |
-    FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |
-    FIGHTER_STATE_CHANGE_B27;
+    FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_PreserveSfx |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
+    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
+    FtStateChange_Unk_27;
 
 void ftPikachu_ActionChange_80125414(HSD_GObj* fighter_gobj)
 {
@@ -231,8 +232,8 @@ void ftPikachu_ActionChange_801254D4(HSD_GObj* fighter_gobj)
     u8 unused[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 344, FIGHTER_SFX_PRESERVE,
-                                       0, 0, 1, 0);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 344,
+                                       FtStateChange_PreserveSfx, 0, 0, 1, 0);
 
     {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -247,8 +248,8 @@ void ftPikachu_ActionChange_80125528(HSD_GObj* fighter_gobj)
     u8 unused[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 349, FIGHTER_SFX_PRESERVE,
-                                       0, 0, 1, 0);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 349,
+                                       FtStateChange_PreserveSfx, 0, 0, 1, 0);
 
     {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -324,11 +325,11 @@ void ftPikachu_80125738(HSD_GObj* fighter_gobj)
 }
 
 static u32 const transition_flags2 =
-    FIGHTER_GFX_PRESERVE | FIGHTER_HITSTATUS_COLANIM_PRESERVE |
-    FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |
-    FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |
-    FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |
-    FIGHTER_STATE_CHANGE_B27;
+    FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
+    FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
+    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
 void ftPikachu_ActionChange_80125774(HSD_GObj* fighter_gobj)
 {
@@ -432,7 +433,7 @@ void ftPikachu_801259D8(HSD_GObj* fighter_gobj)
 }
 
 static u32 const transition_flags3 =
-    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE;
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit;
 
 void ftPikachu_ActionChange_80125A54(HSD_GObj* fighter_gobj)
 {

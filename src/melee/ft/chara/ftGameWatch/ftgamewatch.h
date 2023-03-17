@@ -20,21 +20,21 @@
 
 // Chef (SpecialN/SpecialAirN) //
 #define FTGAMEWATCH_SPECIALN_COLL_FLAG                                         \
-    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE |                \
-        FIGHTER_MODEL_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |                    \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_STATE_CHANGE_B27
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |     \
+        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |      \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |            \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
+        FtStateChange_SkipUpdateModelPartVis |                                 \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // Judgement (SpecialS/SpecialAirS) //
 #define FTGAMEWATCH_SPECIALS_COLL_FLAG                                         \
-    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE |                \
-        FIGHTER_MODEL_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |                    \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |                  \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_STATE_CHANGE_B27
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |     \
+        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |      \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |            \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
+        FtStateChange_SkipUpdateModelPartVis |                                 \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // Oil Panic (SpecialLw/SpecialAirLw) //
 

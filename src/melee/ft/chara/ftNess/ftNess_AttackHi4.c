@@ -879,8 +879,8 @@ void ftNess_AttackHi4_Charge_Action(
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKHI4_CHARGE,
-                                       FIGHTER_ITEMVIS_NOUPDATE, NULL, 12.0f,
-                                       1.0f, 0.0f);
+                                       FtStateChange_SkipUpdateItemVis, NULL,
+                                       12.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     ftAnim_SetAnimRate(fighter_gobj, 0.0f);
     ftNess_YoyoApplySmash(fighter_gobj);
@@ -1022,8 +1022,8 @@ void ftNess_AttackHi4_Release_Action(HSD_GObj* fighter_gobj)
 
     fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKHI4_RELEASE,
-                                       FIGHTER_ITEMVIS_NOUPDATE, NULL, 13.0f,
-                                       1.0f, 0.0f);
+                                       FtStateChange_SkipUpdateItemVis, NULL,
+                                       13.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 
     fighter_data2 = getFighter(fighter_gobj);

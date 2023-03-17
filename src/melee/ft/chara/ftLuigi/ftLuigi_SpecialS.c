@@ -163,11 +163,11 @@ void ftLuigi_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
 }
 
 static u32 const transition_flags0 =
-    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_MATANIM_NOUPDATE |
-    FIGHTER_SFX_PRESERVE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE |
-    FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |
-    FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |
-    FIGHTER_STATE_CHANGE_B27;
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateMatAnim |
+    FtStateChange_PreserveSfx | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
+    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
 /// Luigi's Green Missile Start ground -> air Action State handler
 void ftLuigi_SpecialSStart_GroundToAir(HSD_GObj* fighter_gobj)
@@ -284,7 +284,8 @@ void ftLuigi_SpecialAirSHold_Coll(HSD_GObj* fighter_gobj)
         ftLuigi_SpecialAirSHold_AirToGround(fighter_gobj);
 }
 
-static u32 const transition_flags1 = transition_flags0 | FIGHTER_GFX_PRESERVE;
+static u32 const transition_flags1 =
+    transition_flags0 | FtStateChange_PreserveGfx;
 
 /// Luigi's Green Missile Charge ground -> air Acion State handler
 void ftLuigi_SpecialSHold_GroundToAir(HSD_GObj* fighter_gobj)
@@ -319,7 +320,8 @@ void ftLuigi_SpecialSHold_Action(HSD_GObj* fighter_gobj)
     /// @todo Shared @c inline with #ftLuigi_SpecialAirSHold_Action.
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALS_HOLD,
-                                       FIGHTER_SFX_PRESERVE, NULL, 0, 1, 0);
+                                       FtStateChange_PreserveSfx, NULL, 0, 1,
+                                       0);
 
     {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -336,7 +338,8 @@ void ftLuigi_SpecialAirSHold_Action(HSD_GObj* fighter_gobj)
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRS_HOLD,
-                                       FIGHTER_SFX_PRESERVE, NULL, 0, 1, 0);
+                                       FtStateChange_PreserveSfx, NULL, 0, 1,
+                                       0);
     {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftLuigi_SpecialS_SetGFX;
@@ -430,11 +433,11 @@ void ftLuigi_SpecialAirSLaunch_Coll(HSD_GObj* fighter_gobj)
 
 /// @todo Combine common flags with #transition_flags0.
 static u32 const transition_flags2 =
-    FIGHTER_GFX_PRESERVE | FIGHTER_HITSTATUS_COLANIM_PRESERVE |
-    FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE |
-    FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_STATE_CHANGE_B19 |
-    FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |
-    FIGHTER_STATE_CHANGE_B27;
+    FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
+    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
 /// Luigi's Green Missile Launch ground -> air Acion State handler
 void ftLuigi_SpecialSLaunch_GroundToAir(HSD_GObj* fighter_gobj)
@@ -723,10 +726,11 @@ void ftLuigi_SpecialAirSFly_Coll(HSD_GObj* fighter_gobj)
 
 /// @todo Combine common flags with #transition_flags0.
 static u32 const transition_flags3 =
-    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |
-    FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |
-    FIGHTER_STATE_CHANGE_B19 | FIGHTER_MODELPART_VIS_NOUPDATE |
-    FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_STATE_CHANGE_B27;
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
+    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
 /// Luigi's Green Missile Fly Setup
 void ftLuigi_SpecialSFly_Action(HSD_GObj* fighter_gobj)

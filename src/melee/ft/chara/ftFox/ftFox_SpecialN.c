@@ -311,8 +311,8 @@ void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_FOX_SPECIALN_LOOP,
-            (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f,
-            0.0f);
+            (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx), NULL,
+            0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
         func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
@@ -338,8 +338,8 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
             temp_r28->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_FOX_SPECIALN_LOOP,
-                (FIGHTER_ATTACKCOUNT_NOUPDATE | FIGHTER_MODEL_NOUPDATE |
-                 FIGHTER_GFX_PRESERVE),
+                (FtStateChange_SkipUpdateAttackCount |
+                 FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
                 NULL, 0.0f, 1.0f, 0.0f);
             temp_r28->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
             temp_r28->foxVars.SpecialN.isBlasterLoop = false;
@@ -348,8 +348,8 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
             HSD_GObj* temp;
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_FOX_SPECIALN_END,
-                (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f,
-                1.0f, 0.0f);
+                (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
+                NULL, 0.0f, 1.0f, 0.0f);
             temp = temp_r28->sa.fox.x222C_blasterGObj;
             temp_r28->x2204_ftcmd_var1 = 1;
             func_802ADDD0(temp, 1);
@@ -456,8 +456,8 @@ void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_FOX_SPECIALAIRN_LOOP,
-            (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f,
-            0.0f);
+            (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx), NULL,
+            0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
         func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
@@ -483,8 +483,8 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
             fp->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_FOX_SPECIALAIRN_LOOP,
-                (FIGHTER_ATTACKCOUNT_NOUPDATE | FIGHTER_MODEL_NOUPDATE |
-                 FIGHTER_GFX_PRESERVE),
+                (FtStateChange_SkipUpdateAttackCount |
+                 FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
                 NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(fighter_gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
@@ -495,8 +495,8 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_FOX_SPECIALAIRN_END,
-                (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f,
-                1.0f, 0.0f);
+                (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
+                NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(fighter_gobj);
 
             temp = fp->sa.fox.x222C_blasterGObj;

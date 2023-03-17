@@ -1825,7 +1825,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
             ftNess_SpecialHiStopGFX(fighter_gobj);
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_NESS_SPECIALAIRHI_HITWALL,
-                FIGHTER_GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
+                FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f, 0.0f);
             func_8006EBA4(fighter_gobj);
             spC4.x = atan2f(-fighter_r31->x6F0_collData.x188_ceiling.normal.x,
                             fighter_r31->x6F0_collData.x188_ceiling.normal.y);
@@ -1863,7 +1863,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
                 ftNess_SpecialHiStopGFX(fighter_gobj);
                 Fighter_ActionStateChange_800693AC(
                     fighter_gobj, AS_NESS_SPECIALAIRHI_HITWALL,
-                    FIGHTER_GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
+                    FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f, 0.0f);
                 func_8006EBA4(fighter_gobj);
                 spB8.x =
                     atan2f(-fighter_r31->x6F0_collData.x160_rightwall.normal.x,
@@ -1904,7 +1904,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
                 ftNess_SpecialHiStopGFX(fighter_gobj);
                 Fighter_ActionStateChange_800693AC(
                     fighter_gobj, AS_NESS_SPECIALAIRHI_HITWALL,
-                    FIGHTER_GFX_PRESERVE, NULL, 0.0f, 1.0f, 0.0f);
+                    FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f, 0.0f);
                 func_8006EBA4(fighter_gobj);
                 spAC.x =
                     atan2f(-fighter_r31->x6F0_collData.x174_leftwall.normal.x,

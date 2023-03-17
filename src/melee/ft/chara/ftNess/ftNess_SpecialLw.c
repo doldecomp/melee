@@ -445,8 +445,8 @@ void ftNess_SpecialLwHold_Action(
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HOLD,
-                                       FIGHTER_GFX_PRESERVE, NULL, 0.0f, 1.0f,
-                                       0.0f);
+                                       FtStateChange_PreserveGfx, NULL, 0.0f,
+                                       1.0f, 0.0f);
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
     ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
@@ -467,8 +467,8 @@ void ftNess_SpecialAirLwHold_Action(
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HOLD,
-                                       FIGHTER_GFX_PRESERVE, NULL, 0.0f, 1.0f,
-                                       0.0f);
+                                       FtStateChange_PreserveGfx, NULL, 0.0f,
+                                       1.0f, 0.0f);
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
     ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
@@ -682,15 +682,15 @@ bool ftNess_SpecialLwHold_GroundOrAir(
     }
     if ((s32) temp_r3->xE0_ground_or_air == GA_Ground) {
         Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD,
-                                           FIGHTER_GFX_PRESERVE, NULL, 0.0f,
-                                           1.0f, 0.0f);
+                                           FtStateChange_PreserveGfx, NULL,
+                                           0.0f, 1.0f, 0.0f);
         temp_r3 = arg0->user_data;
         attrs = temp_r3->x2D4_specialAttributes;
         ftColl_CreateAbsorbHit(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION);
     } else {
         Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALAIRLW_HOLD,
-                                           FIGHTER_GFX_PRESERVE, NULL, 0.0f,
-                                           1.0f, 0.0f);
+                                           FtStateChange_PreserveGfx, NULL,
+                                           0.0f, 1.0f, 0.0f);
         temp_r3 = arg0->user_data;
         attrs = temp_r3->x2D4_specialAttributes;
         ftColl_CreateAbsorbHit(arg0, &attrs->x98_PSI_MAGNET_ABSORPTION);
@@ -751,16 +751,16 @@ void ftNess_SpecialLwHit_Anim(
         } else {
             if ((s32) temp_r3_2->xE0_ground_or_air == GA_Ground) {
                 Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD,
-                                                   FIGHTER_GFX_PRESERVE, NULL,
-                                                   0.0f, 1.0f, 0.0f);
+                                                   FtStateChange_PreserveGfx,
+                                                   NULL, 0.0f, 1.0f, 0.0f);
 
                 temp_e1 = arg0->user_data;
                 attr = temp_e1->x2D4_specialAttributes;
                 ftColl_CreateAbsorbHit(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
             } else {
                 Fighter_ActionStateChange_800693AC(
-                    arg0, AS_NESS_SPECIALAIRLW_HOLD, FIGHTER_GFX_PRESERVE, NULL,
-                    0.0f, 1.0f, 0.0f);
+                    arg0, AS_NESS_SPECIALAIRLW_HOLD, FtStateChange_PreserveGfx,
+                    NULL, 0.0f, 1.0f, 0.0f);
                 temp_e2 = arg0->user_data;
                 attr = temp_e2->x2D4_specialAttributes;
                 ftColl_CreateAbsorbHit(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);

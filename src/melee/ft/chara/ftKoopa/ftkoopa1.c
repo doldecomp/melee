@@ -315,9 +315,9 @@ void func_8013302C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if ((signed) fp->x2344_stateVar2 != 0) {
-        Fighter_ActionStateChange_800693AC(gobj, 349, FIGHTER_MATANIM_NOUPDATE,
-                                           0, lbl_804D9AD8, lbl_804D9ADC,
-                                           lbl_804D9AD8);
+        Fighter_ActionStateChange_800693AC(
+            gobj, 349, FtStateChange_SkipUpdateMatAnim, 0, lbl_804D9AD8,
+            lbl_804D9ADC, lbl_804D9AD8);
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 348, 0, 0, lbl_804D9AD8,
                                            lbl_804D9ADC, lbl_804D9AD8);

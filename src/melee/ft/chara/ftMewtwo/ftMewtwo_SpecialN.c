@@ -1068,7 +1068,7 @@ void ftMewtwo_SpecialNLoop_Coll(HSD_GObj* fighter_gobj)
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_MEWTWO_SPECIALAIRN_LOOP,
-            (FIGHTER_SFX_PRESERVE | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
+            (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftMewtwo_SpecialN_SetCall(fighter_gobj);
     }
@@ -1088,7 +1088,7 @@ void ftMewtwo_SpecialNFull_Coll(HSD_GObj* fighter_gobj)
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_MEWTWO_SPECIALAIRN_FULL,
-            (FIGHTER_SFX_PRESERVE | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
+            (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftMewtwo_SpecialN_SetCall(fighter_gobj);
     }
@@ -1167,7 +1167,7 @@ void ftMewtwo_SpecialAirNLoop_Coll(HSD_GObj* fighter_gobj)
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_MEWTWO_SPECIALN_LOOP,
-            (FIGHTER_SFX_PRESERVE | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
+            (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftMewtwo_SpecialN_SetCall(fighter_gobj);
     }
@@ -1187,7 +1187,7 @@ void ftMewtwo_SpecialAirNFull_Coll(HSD_GObj* fighter_gobj)
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_MEWTWO_SPECIALN_FULL,
-            (FIGHTER_SFX_PRESERVE | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
+            (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftMewtwo_SpecialN_SetCall(fighter_gobj);
     }

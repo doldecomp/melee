@@ -403,7 +403,7 @@ void ftFox_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj)
 
     Fighter_ActionStateChange_800693AC(
         fighter_gobj, AS_FOX_SPECIALAIRHI,
-        (FIGHTER_HIT_NOUPDATE | FTFOX_SPECIALHI_COLL_FLAG), NULL,
+        (FtStateChange_SkipUpdateHit | FTFOX_SPECIALHI_COLL_FLAG), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     fp->x2223_flag.bits.b4 = true;
@@ -634,8 +634,8 @@ void ftFox_SpecialHiFall_Action(HSD_GObj* fighter_gobj)
     func_8007D7FC(GET_FIGHTER(fighter_gobj));
     Fighter_ActionStateChange_800693AC(
         fighter_gobj, AS_FOX_SPECIALHI_LANDING,
-        (FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE), NULL, 13.0f, 1.0f,
-        0.0f);
+        (FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd), NULL,
+        13.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
 }
 

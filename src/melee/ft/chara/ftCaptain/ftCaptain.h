@@ -29,18 +29,19 @@ typedef enum ftCaptainAction {
 
 // SpecialN/SpecialAirN (Falcon / Warlock Punch)
 #define FTCAPTAIN_SPECIALN_COLL_FLAG                                           \
-    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE |                          \
-        FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE |                         \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
-        FIGHTER_STATE_CHANGE_B19 | FIGHTER_MODELPART_VIS_NOUPDATE |            \
-        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_STATE_CHANGE_B27
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
+        FtStateChange_SkipUpdateRumble | FtStateChange_UpdateCmd |             \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |    \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // SpecialS/SpecialAirS (Raptor Boost / Gerudo Dragon)
 #define FTCAPTAIN_SPECIALS_FLAG                                                \
-    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |     \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
-        FIGHTER_STATE_CHANGE_B19 | FIGHTER_MODELPART_VIS_NOUPDATE |            \
-        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_STATE_CHANGE_B27
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |            \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
+        FtStateChange_SkipUpdateModelPartVis |                                 \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 typedef struct _ftCaptainAttributes {
     f32 x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG; // Minimum control stick range
