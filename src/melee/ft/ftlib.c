@@ -37,63 +37,74 @@ s32 func_800860C4(void)
 
 bool func_800860E8(void)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     HSD_GObj* cur;
     for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
-        if (func_800872A4(cur) == 0x1B) {
+        if (func_800872A4(cur) == FTKIND_MASTERH)
             return true;
-        }
     }
+
     return false;
 }
 
 bool func_80086140(void)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     HSD_GObj* cur;
     for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
-        if (func_800872A4(cur) == 0x1C) {
+        if (func_800872A4(cur) == FTKIND_CREZYH)
             return true;
-        }
     }
+
     return false;
 }
 
 HSD_GObj* func_80086198(HSD_GObj* gobj)
 {
+    /// @todo Figure out how these are really declared
     Fighter* fp;
     HSD_GObj* cur;
     HSD_GObj* result;
-    Fighter* fp2;
-    s32 min_percent = 999;
-    int unused[4];
+    int min_percent = 999;
 
-    if (gobj != NULL) {
-        fp = gobj->user_data;
-    } else {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    if (gobj != NULL)
+        fp = GET_FIGHTER(gobj);
+    else
         fp = NULL;
-    }
 
     result = NULL;
     for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
-        // skip if same player
-        if (func_80086FD4(gobj, cur)) {
-            continue;
-        }
-        fp2 = cur->user_data;
-        if (fp2->x221F_flag.bits.b3) {
-            continue;
-        }
-        // skip if same team
-        if (func_8016B168() && fp != NULL && fp2->x61B_team == fp->x61B_team) {
-            continue;
-        }
+        if (!func_80086FD4(gobj, cur)) {
+            // If not same player
+            Fighter* cur_fp = GET_FIGHTER(cur);
+            if (cur_fp->x221F_flag.bits.b3)
+                continue;
 
-        if (fp2->dmg.x1830_percent < min_percent) {
-            min_percent = fp2->dmg.x1830_percent;
-            result = cur;
+            // Skip if same team
+            if (func_8016B168() && fp != NULL &&
+                cur_fp->x61B_team == fp->x61B_team)
+                continue;
+
+            if (cur_fp->dmg.x1830_percent < min_percent) {
+                min_percent = cur_fp->dmg.x1830_percent;
+                result = cur;
+            }
         }
     }
+
     return result;
 }
 
@@ -108,22 +119,25 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
     Fighter* fp;
     HSD_GObj* cur;
     HSD_GObj* result;
-    u32 unused[4];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     f32 min_dist = F32_MAX;
 
-    if (gobj != NULL) {
+    if (gobj != NULL)
         fp = gobj->user_data;
-    } else {
+    else
         fp = NULL;
-    }
 
     result = NULL;
     for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         // skip if same player
-        if (func_80086FD4(gobj, cur)) {
+        if (func_80086FD4(gobj, cur))
             continue;
-        }
+
         cur_fp = cur->user_data;
         // skip if same team
         if (cur_fp->x221F_flag.bits.b3 || (func_8016B168() && fp != NULL &&
@@ -131,10 +145,12 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
         {
             continue;
         }
+
         func_800866DC(cur, &cur_v);
         dx = v->x - cur_v.x;
         dy = v->y - cur_v.y;
         dist = (dx * dx) + (dy * dy);
+
         if (dist < min_dist) {
             min_dist = dist;
             result = cur;
@@ -152,21 +168,24 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 facing_dir)
     Fighter* fp;
     HSD_GObj* cur;
     HSD_GObj* result;
-    u32 unused[4];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     f32 min_diff = F32_MAX;
 
-    if (gobj != NULL) {
+    if (gobj != NULL)
         fp = gobj->user_data;
-    } else {
+    else
         fp = NULL;
-    }
 
     result = NULL;
     for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
-        if (func_80086FD4(gobj, cur)) {
+        if (func_80086FD4(gobj, cur))
             continue;
-        }
+
         cur_fp = cur->user_data;
         if (cur_fp->x221F_flag.bits.b3 || (func_8016B168() && fp != NULL &&
                                            cur_fp->x61B_team == fp->x61B_team))
@@ -174,8 +193,9 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 facing_dir)
             continue;
         }
         func_800866DC(cur, &sp24);
-        if ((facing_dir == -1.0f && sp24.x > v->x) ||
-            (facing_dir == +1.0f && sp24.x < v->x))
+
+        if ((facing_dir == -1 && sp24.x > v->x) ||
+            (facing_dir == +1 && sp24.x < v->x))
         {
             continue;
         }
@@ -183,6 +203,7 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 facing_dir)
         dx = v->x - sp24.x;
         dy = v->y - sp24.y;
         diff = dx * dx + dy * dy;
+
         if (diff < min_diff) {
             min_diff = diff;
             result = cur;
@@ -211,38 +232,39 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
 
     s32 result = 0;
 
-    if (gobj != NULL) {
+    if (gobj != NULL)
         fp = gobj->user_data;
-    } else {
+    else
         fp = NULL;
-    }
 
     for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
-        if (func_80086FD4(gobj, cur)) {
+        if (func_80086FD4(gobj, cur))
             continue;
-        }
+
         cur_fp = cur->user_data;
         if (cur_fp->x221F_flag.bits.b3 || (func_8016B168() && fp != NULL &&
                                            cur_fp->x61B_team == fp->x61B_team))
         {
             continue;
         }
+
         func_800866DC(cur, &sp20);
         result += sgn(sp20.x - v->x);
     }
+
     if (result == 0) {
-        if (HSD_Randi(2) != 0) {
+        if (HSD_Randi(2) != 0)
             phi_r0 = +1;
-        } else {
+        else
             phi_r0 = -1;
-        }
+
         result = phi_r0;
     }
-    if (result < 0) {
-        return -1.0f;
-    } else {
-        return +1.0f;
-    }
+
+    if (result < 0)
+        return -1;
+    else
+        return +1;
 }
 
 f32 func_800865C0(HSD_GObj* gobj)
