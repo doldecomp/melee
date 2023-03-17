@@ -30,7 +30,7 @@ bool func_8015C270(void);
 bool func_8015C2A8(void);
 bool func_8015C2E0(void);
 bool func_8015C358(void);
-s32 func_8015C530(u32 arg0);
+s32 func_8015C530(enum_t arg0);
 MasterHandAttributes* func_8015C6BC(void);
 s32 func_8015C74C(void);
 s32 func_8015C7EC(void);

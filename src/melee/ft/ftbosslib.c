@@ -285,15 +285,17 @@ s32 func_8015C4C4(void)
     return 0;
 }
 
-s32 func_8015C530(u32 arg0)
+s32 func_8015C530(enum_t arg0)
 {
-    MasterHandAttributes* attr;
-    HSD_GObj* gobj;
-    s32 unused[4];
+    HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
 
-    gobj = func_8015C3E8(FTKIND_MASTERH);
-    if (gobj) {
-        attr = GET_FIGHTER(gobj)->x10C_ftData->ext_attr;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
+    if (gobj != NULL) {
+        MasterHandAttributes* attr = GET_FIGHTER(gobj)->x10C_ftData->ext_attr;
         switch (arg0) {
         case 0:
             return attr->x0;
@@ -316,111 +318,141 @@ s32 func_8015C530(u32 arg0)
 
 void func_8015C5F8(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     switch (HSD_Randi(4)) {
     case 0:
-        func_80088148(fp, 0x4E21A, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21A, 0x7F, 0x40);
         return;
     case 1:
-        func_80088148(fp, 0x4E21B, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21B, 0x7F, 0x40);
         return;
     case 2:
-        func_80088148(fp, 0x4E21C, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21C, 0x7F, 0x40);
         return;
     case 3:
-        func_80088148(fp, 0x4E21D, 0x7F, 0x40); // SFX_PlayCharacterSFX
+        func_80088148(fp, 0x4E21D, 0x7F, 0x40);
         return;
     }
 }
 
 MasterHandAttributes* func_8015C6BC(void)
 {
-    HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
-    Fighter* fp;
-    MasterHandAttributes* attr;
     s32 unused[4];
 
-    if (!gobj) {
-        return 0;
+    {
+        HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
+        if (gobj == NULL)
+            return NULL;
+
+        {
+            /// @todo Can be #GET_FIGHTER when inlines are fixed.
+            Fighter* fp = gobj->user_data;
+            if (fp == NULL)
+                return NULL;
+
+            {
+                MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
+                if (attr == NULL)
+                    return NULL;
+
+                return attr;
+            }
+        }
     }
-    fp = gobj->user_data;
-    if (!fp) {
-        return 0;
-    }
-    attr = fp->x10C_ftData->ext_attr;
-    if (!attr) {
-        return 0;
-    }
-    return attr;
 }
 
 s32 func_8015C74C(void)
 {
-    s32 unused[6];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
+
     MasterHandAttributes* attr = func_8015C6BC();
-    if (attr == 0U) {
+    if (attr == NULL)
         return -1;
-    }
+
     return attr->x164;
 }
 
 s32 func_8015C7EC(void)
 {
-    s32 unused[6];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
+
     MasterHandAttributes* attr = func_8015C6BC();
-    if (attr == 0U) {
+    if (attr == NULL)
         return -1;
-    }
+
     return attr->x168;
 }
 
 s32 func_8015C88C(void)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
+
     MasterHandAttributes* attr = func_8015C6BC();
-    s32 unused[6];
-    if (attr == 0) {
+    if (attr == NULL)
         return -1;
-    }
+
     return attr->x16C;
 }
 
 s32 func_8015C92C(void)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
+
     MasterHandAttributes* attr = func_8015C6BC();
-    s32 unused[6];
-    if (attr == 0) {
+    if (attr == NULL)
         return -1;
-    }
+
     return attr->x170;
 }
 
 s32 func_8015C9CC(void)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
+
     MasterHandAttributes* attr = func_8015C6BC();
-    s32 unused[6];
-    if (attr == 0) {
+    if (attr == NULL)
         return -1;
-    }
+
     return attr->x174;
 }
 
 void func_8015CA6C_inline(s32 arg0)
 {
-    HSD_GObj* crazy_hand = func_8015C3E8(FTKIND_CREZYH);
-    if (crazy_hand) {
-        func_80086A4C(crazy_hand, arg0);
-    }
+    HSD_GObj* ch_gobj = func_8015C3E8(FTKIND_CREZYH);
+    if (ch_gobj)
+        func_80086A4C(ch_gobj, arg0);
 }
+
 void func_8015CA6C(s32 arg0)
 {
-    HSD_GObj* master_hand;
-    s32 unused[8];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[32];
+#endif
 
     Player_80036790(0, arg0);
-    master_hand = func_8015C3E8(FTKIND_MASTERH);
-    if (master_hand) {
-        func_80086A4C(master_hand, arg0);
+
+    {
+        HSD_GObj* mh_gobj = func_8015C3E8(FTKIND_MASTERH);
+        if (mh_gobj)
+            func_80086A4C(mh_gobj, arg0);
     }
+
     func_8015CA6C_inline(arg0);
     func_8026C3FC();
 }
@@ -432,25 +464,18 @@ void func_8015CB7C(void)
 
 void func_8015CB9C_inline(Vec3 spC)
 {
-    f32 phi_f1;
-    MasterHandAttributes* attr;
-    attr = func_8015C6BC();
-    if (attr == 0) {
-        phi_f1 = -1.0f;
-    } else {
-        phi_f1 = attr->x178;
-    }
-    spC.z += phi_f1;
+    MasterHandAttributes* attr = func_8015C6BC();
+    spC.z += attr == NULL ? -1 : attr->x178;
     func_8002EA64(&spC);
     func_8002F0E4(0xA);
 }
+
 void func_8015CB9C(s32 arg0)
 {
-    Vec3 sp18;
-
-    Player_LoadPlayerCoords(arg0, &sp18);
-    func_8002E818(&sp18);
-    func_8015CB9C_inline(sp18);
+    Vec3 vec;
+    Player_LoadPlayerCoords(arg0, &vec);
+    func_8002E818(&vec);
+    func_8015CB9C_inline(vec);
 }
 
 void func_8015CC14(void)
