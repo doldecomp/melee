@@ -65,7 +65,7 @@ typedef struct _ftCaptainAttributes {
     f32 x28_CAPTAIN_RAPTORBOOST_UNK3;
     f32 x2C_CAPTAIN_RAPTORBOOST_UNK4;
     f32 x30_CAPTAIN_RAPTORBOOST_UNK5;
-    f32 x34_CAPTAIN_RAPTORBOOST_UNK6; // All of these Unk variables are _
+    f32 x34_CAPTAIN_RAPTORBOOST_UNK6; // All of these Unk variables are unused
     f32 x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG;
     f32 x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG;
 
