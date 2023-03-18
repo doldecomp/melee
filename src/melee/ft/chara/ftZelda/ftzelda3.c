@@ -1,21 +1,20 @@
-#include <melee/ft/chara/ftZelda/ftzelda.h>
+#include "ftzelda.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
 
 void ftZelda_8013A830(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp; // r31
-
-    fp = GET_FIGHTER(fighter_gobj);
-    if (fp->x2219_flag.bits.b0 == 0) {
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    if (!fp->x2219_flag.bits.b0) {
         ef_Spawn(0x4F4, fighter_gobj, fp->x5E8_fighterBones[1].x0_jobj);
-        fp->x2219_flag.bits.b0 = 1;
+        fp->x2219_flag.bits.b0 = true;
     }
+
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21BC_callback_Accessory4 = 0;
@@ -67,14 +66,16 @@ void ftZelda_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
 void ftZelda_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp; // r31
-    ftZeldaAttributes* attributes;
-    f32 unused[5];
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
 
-    fp = GET_FIGHTER(fighter_gobj);
-    attributes = (ftZeldaAttributes*) fp->x2D4_specialAttributes;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[20];
+#endif
+
     fp->x80_self_vel.y = 0;
-    fp->x80_self_vel.x = fp->x80_self_vel.x / attributes->x8;
+    fp->x80_self_vel.x = fp->x80_self_vel.x / sa->x8;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x156, 0, NULL, 0, 1.0, 0);
     func_8006EBA4(fighter_gobj);
@@ -159,24 +160,22 @@ void ftZelda_8013AB68(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/juoPH
 void ftZelda_8013AB9C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    s32 stateVar1;
-    attr* fighterAttr;
-    ftZeldaAttributes* charAttr;
-    f32 arg2, arg3;
-    s32 unused[2];
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp = GET_FIGHTER(fighter_gobj);
-    stateVar1 = fp->x2340_stateVar1;
-    fighterAttr = &fp->x110_attr;
-    charAttr = fp->x2D4_specialAttributes;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
-    if (stateVar1 != 0) {
-        fp->x2340_stateVar1 = stateVar1 - 1;
-    } else {
-        arg2 = charAttr->xC;
-        arg3 = fighterAttr->x170_TerminalVelocity;
-        func_8007D494(fp, arg2, arg3);
+    {
+        s32 var1 = fp->x2340_stateVar1;
+        attr* attr = &fp->x110_attr;
+        ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
+
+        if (var1 != 0)
+            fp->x2340_stateVar1 = var1 - 1;
+        else
+            func_8007D494(fp, sa->xC, attr->x170_TerminalVelocity);
     }
 
     func_8007CF58(fp);
@@ -187,9 +186,8 @@ void ftZelda_8013AB9C(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/CT7dz
 void ftZelda_8013AC10(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == 0) {
+    if (!func_80082708(fighter_gobj))
         ftZelda_8013AC88(fighter_gobj);
-    }
 }
 
 // 8013AC4C - 8013AC88 (0x3C bytes)

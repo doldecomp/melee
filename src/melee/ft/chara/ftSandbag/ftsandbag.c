@@ -1,11 +1,11 @@
-#include <melee/ft/chara/ftSandbag/ftsandbag.h>
+#include "ftsandbag.h"
 
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "lb/lbunknown_001.h"
 
 ActionState as_table_sandbag[] = {
     { 295, 0, 0x01400000, func_8014FC20, func_8014FC24, func_8014FC28,
@@ -83,12 +83,10 @@ void ftSandbag_OnKnockbackExit(HSD_GObj* arg0) {}
 
 void func_8014FBA4(HSD_GObj* gobj)
 {
-    f32 temp_f1;
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter* fp = gobj->user_data;
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if (fp->xE0_ground_or_air == GA_Air)
         func_8007D7FC(fp);
-    }
 
     Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8007EFC0(fp, p_ftCommonData->x5F0);

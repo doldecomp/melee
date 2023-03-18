@@ -1,13 +1,14 @@
-#include <melee/ft/chara/ftZelda/ftzelda5.h>
+#include "ftzelda5.h"
 
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftZelda/ftzelda.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ftzelda.h"
+
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 // 8013B638 - 8013B6D8 (0xA0 bytes)
 // https://decomp.me/scratch/QnXK1
@@ -323,45 +324,38 @@ void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/fsXpu
 void ftZelda_8013BD10(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    f32 temp_f2;
-    ftZeldaAttributes* attributes; // r31
-    ftZeldaAttributes* attributes2;
-
-    /// @todf32o Unused stack.
-#ifdef MUST_MATCH
-    u8 unused[4];
-#endif
-
-    fp = GET_FIGHTER(fighter_gobj);
-    attributes = fp->x2D4_specialAttributes;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
 
     func_8007592C(fp, 0, 0);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        fp = GET_FIGHTER(fighter_gobj);
-        attributes2 = getFtSpecialAttrs(fp);
+        {
+            /// @todo Unused stack.
+#ifdef MUST_MATCH
+            u8 unused[4];
+#endif
 
-        fp->x2340_stateVar1 = attributes2->x10;
-        fp->x2344_stateVar2_s32 = attributes2->x14;
-        fp->x2348_stateVar3_s32 = attributes2->x18;
-        fp->sa.zelda.x222C = 0;
-        fp->x234C_stateVar4_s32 = attributes2->x1C;
-        fp->cb.x21E4_callback_OnDeath2 = 0;
-        fp->cb.x21DC_callback_OnTakeDamage = 0;
+            Fighter* fp = GET_FIGHTER(fighter_gobj);
+            ftZeldaAttributes* sa = getFtSpecialAttrs(fp);
 
-        if (0 == attributes->x34) {
-            func_800CC730(fighter_gobj);
-            return;
+            fp->x2340_stateVar1 = sa->x10;
+            fp->x2344_stateVar2_s32 = sa->x14;
+            fp->x2348_stateVar3_s32 = sa->x18;
+            fp->sa.zelda.x222C = 0;
+            fp->x234C_stateVar4_s32 = sa->x1C;
+            fp->cb.x21E4_callback_OnDeath2 = 0;
+            fp->cb.x21DC_callback_OnTakeDamage = 0;
         }
-        func_80096900(fighter_gobj, 1, 0, 1, 1.0, attributes->x34);
+
+        if (sa->x34 == 0)
+            func_800CC730(fighter_gobj);
+        else
+            func_80096900(fighter_gobj, 1, 0, 1, 1, sa->x34);
     }
 }
 
-void ftZelda_8013BDD0(HSD_GObj* fighter_gobj)
-{
-    return;
-}
+void ftZelda_8013BDD0(HSD_GObj* fighter_gobj) {}
 
 // 8013BDD4 - 8013BE50 (0x7C bytes)
 // https://decomp.me/scratch/MaYEA

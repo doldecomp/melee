@@ -1,10 +1,10 @@
-#include <melee/ft/chara/ftZelda/ftzelda.h>
+#include "ftzelda.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState as_table_zelda[] = {
     { 295, 0x00341011, 0x12000000, ftZelda_8013AA38, ftZelda_8013AB60,
@@ -128,10 +128,15 @@ void ftZelda_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftZeldaAttributes);
 }
 
+/// Zelda_RemoveDress
 void ftZelda_801395C8(HSD_GObj* fighter_gobj)
-{ // Zelda_RemoveDress
-    s32 unused[2];
-    s32 result = func_80074A74(fighter_gobj, 1);
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    int result = func_80074A74(fighter_gobj, 1);
     if (result == -1) {
         func_80074A4C(fighter_gobj, 1, 0);
     } else {

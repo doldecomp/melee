@@ -148,7 +148,7 @@ void ftZelda_8013B400(HSD_GObj* fighter_gobj);
 void ftZelda_8013B46C(HSD_GObj* fighter_gobj);
 void ftZelda_8013B4D8(HSD_GObj* fighter_gobj);
 s32 ftZelda_8013B540(HSD_GObj* fighter_gobj);
-s32 ftZelda_8013B574(HSD_GObj* fighter_gobj);
+bool ftZelda_8013B574(HSD_GObj* fighter_gobj);
 void ftZelda_8013B5C4(HSD_GObj* fighter_gobj);
 void ftZelda_8013B5EC(HSD_GObj* fighter_gobj);
 

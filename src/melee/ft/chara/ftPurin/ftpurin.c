@@ -1,23 +1,24 @@
-#include <melee/ft/chara/ftPurin/ftpurin.h>
+#include "ftpurin.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_005.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gr/grstadium.h>
-#include <melee/it/item2.h>
-#include <melee/mp/mplib.h>
-#include <MSL/trigf.h>
-#include <sysdolphin/baselib/gobj.h>
+#include "cm/camera.h"
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_005.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftcoll.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "gm/code_801601C4.h"
+#include "gr/grstadium.h"
+#include "it/item2.h"
+#include "mp/mplib.h"
+
+#include <baselib/gobj.h>
+#include <trigf.h>
 
 ActionState as_table_purin[] = {
     { 295, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
@@ -160,30 +161,28 @@ void ftPurin_OnUserDataRemove(HSD_GObj* fighter_gobj)
 
 void func_8013C360(HSD_GObj* fighter_gobj)
 {
-    s32 unused;
-
-    HSD_Joint** joint_list = lbl_8045A1E0;
+    HSD_Joint** joints = lbl_8045A1E0;
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (lbl_803D05B4[fp->x619_costume_id]) {
-        void** item_list = fp->x10C_ftData->x48_items;
-        void** item_list_shifted = item_list[1];
-        if (!joint_list[fp->x619_costume_id]) {
+        UNK_T* items = fp->x10C_ftData->x48_items;
+        UNK_T* items_shifted = items[1];
+        if (!joints[fp->x619_costume_id]) {
             UnkCostumeStruct* costume_list =
                 CostumeListsForeachCharacter[fp->x4_fighterKind].costume_list;
-            joint_list[fp->x619_costume_id] = HSD_ArchiveGetPublicAddress(
+            joints[fp->x619_costume_id] = HSD_ArchiveGetPublicAddress(
                 costume_list[fp->x619_costume_id].x14_archive,
                 lbl_803D05B4[fp->x619_costume_id]);
         }
 
         fp->sa.purin.x2244 = HSD_ObjAlloc(&lbl_80459080);
         func_80074148();
-        fp->sa.purin.x223C = HSD_JObjLoadJoint(joint_list[fp->x619_costume_id]);
-        fp->x2225_b2 = 1;
+        fp->sa.purin.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
+        fp->x2225_b2 = true;
         func_80074170();
         func_80075650(fighter_gobj, fp->sa.purin.x223C, &fp->sa.purin.x2240);
 
-        func_8007487C(&item_list_shifted[1], &fp->sa.purin.x2248,
+        func_8007487C(&items_shifted[1], &fp->sa.purin.x2248,
                       fp->x619_costume_id, &fp->sa.purin.x2240,
                       &fp->sa.purin.x2240);
         func_8009DC54(fp);
@@ -207,7 +206,10 @@ void func_8013C494(HSD_GObj* fighter_gobj)
 
 void func_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
@@ -229,12 +231,10 @@ void func_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx)
 void func_8013C614(Fighter* fp, int arg1, bool arg2)
 {
     if (fp->sa.purin.x223C) {
-        if (arg2) {
+        if (arg2)
             func_80074CA0(&fp->sa.purin.x2248, arg1, &fp->sa.purin.x2240);
-            return;
-        }
-
-        func_80074D7C(&fp->sa.purin.x2248, arg1, &fp->sa.purin.x2240);
+        else
+            func_80074D7C(&fp->sa.purin.x2248, arg1, &fp->sa.purin.x2240);
     }
 }
 
