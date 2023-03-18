@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
+#include "ftMasterHand_34.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
+#include "ftMasterHand.h"
+
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
 
 // 80155D1C 1528FC
 // https://decomp.me/scratch/YDeLe
@@ -44,12 +45,10 @@ void func_80155D68(HSD_GObj* gobj)
 // https://decomp.me/scratch/y3wmm
 void func_80155D6C(HSD_GObj* gobj, s32 arg1)
 {
-    Fighter* fp;
-    s32 unused[6];
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* victim_fp = GET_FIGHTER(fp->x1A58_interactedFighter);
 
-    fp = gobj->user_data;
-    fp->facing_dir =
-        ((Fighter*) fp->x1A58_interactedFighter->user_data)->facing_dir;
+    fp->facing_dir = victim_fp->facing_dir;
     fp->x2340_stateVar1 = 0;
     Fighter_ActionStateChange_800693AC(gobj, 0x14A, 0, 0, 0.0f, 1.0f, 0.0f);
     fp->x221E_flag.bits.b0 = 0;

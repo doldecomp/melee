@@ -1,16 +1,18 @@
-#include <melee/ft/chara/ftNess/ftNess_AttackHi4.h>
+#include "ftNess_AttackHi4.h"
 
-#include <melee/ft/chara/ftNess/ftNess.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/forward.h>
-#include <melee/lb/lbcollision.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/mp/mpcoll.h>
-#include <sysdolphin/baselib/gobj.h>
+#include "ftNess.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
+#include "it/code_8027CF30.h"
+#include "lb/forward.h"
+#include "lb/lbcollision.h"
+#include "lb/lbunknown_001.h"
+#include "mp/mpcoll.h"
+
+#include <baselib/gobj.h>
 
 void ftNess_YoyoUpdateHitPos(HSD_GObj* fighter_gobj)
 {
@@ -28,8 +30,7 @@ void ftNess_YoyoUpdateHitPos(HSD_GObj* fighter_gobj)
 
 void ftNess_YoyoCheckTimedRehit(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
-    HitCapsule* hitbox_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x2200_ftcmd_var0 == 0) {
         if (fp->nessVars.AttackHi4.yoyoRehitTimer > 0) {
@@ -141,21 +142,26 @@ s32 ftNess_YoyoCheckEnvColl(HSD_GObj* fighter_gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
     return retval;
 }
 
+/// @todo Remove @c dont_inline.
+///       This is probably a result of incorrectly splitting out the function.
 #ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
 #endif
-
 void ftNess_YoyoSetUnkPos(HSD_GObj* fighter_gobj, Vec3* pos)
 {
     Vec3 sp20;
     Vec3 sp14;
-    Fighter* fp;
-    CollData* collData;
-    s32 filler;
 
-    fp = fighter_gobj->user_data;
-    collData = &fp->x6F0_collData;
+    /// @todo #GET_FIGHTER is prevented by @c dont_inline.
+    Fighter* fp = fighter_gobj->user_data;
+
+    CollData* collData = &fp->x6F0_collData;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     if (!fp->nessVars.AttackHi4.isPosUpdateMod) {
         func_8000B1CC(fp->x5E8_fighterBones[0x3D].x0_jobj, NULL, pos);
@@ -171,7 +177,6 @@ void ftNess_YoyoSetUnkPos(HSD_GObj* fighter_gobj, Vec3* pos)
                             collData->x14C_ground.normal.y));
     lbvector_Add(pos, &sp14);
 }
-
 #ifdef MUST_MATCH
 #pragma pop
 #endif
@@ -182,15 +187,15 @@ void ftNess_YoyoSetHitPos(HSD_GObj* fighter_gobj)
     Vec3 sp20;
     Vec3 sp14;
 
-    /// @todo Unused, not sure how to generate stack without regswaps caused by
-    /// #getFighter
-    Vec3* temp_r3;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
+    /// @todo Can't move below @c fp.
     CollData* collData;
-    Fighter* fp;
-    s32 filler;
 
-    fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     collData = &fp->x6F0_collData;
 
     if (!fp->nessVars.AttackHi4.isPosUpdateMod) {
@@ -216,11 +221,17 @@ void ftNess_YoyoSetHitPosUnk(HSD_GObj* fighter_gobj, f32 pos_unk)
     Vec3 sp24;
     Vec3 sp18;
     f32 pos_update;
-    CollData* collData;
-    Fighter* fp;
-    s32 filler[2];
 
-    fp = fighter_gobj->user_data;
+    /// @todo Can't move below @c fp.
+    CollData* collData;
+
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     collData = &fp->x6F0_collData;
 
     if (!fp->nessVars.AttackHi4.isPosUpdateMod) {
@@ -305,9 +316,17 @@ static Vec3 const AttackHi4Pos = { 0 };
 void ftNess_YoyoApplySmash(HSD_GObj* fighter_gobj)
 {
     HSD_GObj* yoyo_GObj;
-    s32 filler;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     Vec3 sp18;
-    Fighter* fp;
+
+    /// @todo Stack is too messed up for #GET_FIGHTER.
+    Fighter* fp = fighter_gobj->user_data;
+
     HSD_GObj* temp_yoyo;
     u32 colAnimID;
     f32 posX;
@@ -317,7 +336,6 @@ void ftNess_YoyoApplySmash(HSD_GObj* fighter_gobj)
     SmashAttr* smash_attr;
     s32 smashColAnimID;
 
-    fp = fighter_gobj->user_data;
     fp->nessVars.AttackHi4.yoyoCurrentFrame = 0;
     temp_yoyo = fp->sa.ness.x222C_yoyoGObj;
     yoyo_GObj = temp_yoyo;
@@ -418,16 +436,22 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj)
     s32 yoyoSpawnFrame;
     HSD_GObj* yoyo_GObj;
     itYoyoAttributes* yoyo_attr;
-    Fighter* fp;
+
+    /// @todo Stack is too messed up for #GET_FIGHTER.
+    Fighter* fp = fighter_gobj->user_data;
+
     s32 yoyoDespawnFrame;
     Article* yoyo_article;
     Item* yoyo_itemdata;
     s32 yoyoRotFrame;
     s32 yoyoNudgeFrame;
     Vec3 sp14;
-    s32 filler[2];
 
-    fp = fighter_gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         fp->nessVars.AttackHi4.isPosUpdateMod = 0;
     }
@@ -532,10 +556,8 @@ void ftNess_YoyoSetUnkRate(HSD_GObj* fighter_gobj)
 void ftNess_YoyoCreateItem(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
-    s32 ASID;
-    Fighter* fp;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp = fighter_gobj->user_data;
     func_8000B1CC(fp->x5E8_fighterBones[0x2A].x0_jobj, NULL, &sp10);
     fp->sa.ness.x222C_yoyoGObj =
         func_802BE9D8(fp->facing_dir, fighter_gobj, &sp10, fp->action_id);
@@ -579,7 +601,7 @@ void ftNess_YoyoItemDespawn(HSD_GObj* fighter_gobj)
 
 void ftNess_YoyoItemSetUnk(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->sa.ness.x222C_yoyoGObj != NULL) {
         func_802BE598(fp->sa.ness.x222C_yoyoGObj);
     }
@@ -587,7 +609,7 @@ void ftNess_YoyoItemSetUnk(HSD_GObj* fighter_gobj)
 
 void ftNess_YoyoItemSetUnk2(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->sa.ness.x222C_yoyoGObj)
         func_802BE5B8(fp->sa.ness.x222C_yoyoGObj);
@@ -596,25 +618,28 @@ void ftNess_YoyoItemSetUnk2(HSD_GObj* fighter_gobj)
 void ftNess_AttackHi4_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp;
-    Fighter* temp_fp;
 
     fp = GET_FIGHTER(fighter_gobj);
     fp->x2218_flag.bits.b0 = 0;
     fp->nessVars.AttackHi4.isChargeDisable = false;
 
-    temp_fp = GET_FIGHTER(fighter_gobj);
-    temp_fp->x2204_ftcmd_var1 = 0;
-    temp_fp->x2200_ftcmd_var0 = 0;
-    temp_fp->nessVars.AttackHi4.yoyoCurrentFrame = 1;
-    temp_fp->nessVars.AttackHi4.yoyoRehitTimer = 0;
+    {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
+        fp->x2204_ftcmd_var1 = 0;
+        fp->x2200_ftcmd_var0 = 0;
+        fp->nessVars.AttackHi4.yoyoCurrentFrame = 1;
+        fp->nessVars.AttackHi4.yoyoRehitTimer = 0;
 
-    temp_fp->nessVars.AttackHi4.isPosUpdateMod = 1;
-    temp_fp->sa.ness.x2230_yoyoHitboxPos.z = 0.0f;
-    temp_fp->sa.ness.x2230_yoyoHitboxPos.y = 0.0f;
-    temp_fp->sa.ness.x2230_yoyoHitboxPos.x = 0.0f;
-    temp_fp->sa.ness.x223C = 0.0f;
+        fp->nessVars.AttackHi4.isPosUpdateMod = 1;
+        fp->sa.ness.x2230_yoyoHitboxPos.z = 0.0f;
+        fp->sa.ness.x2230_yoyoHitboxPos.y = 0.0f;
+        fp->sa.ness.x2230_yoyoHitboxPos.x = 0.0f;
+        fp->sa.ness.x223C = 0.0f;
+    }
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKHI4, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
+
     func_8006EBA4(fighter_gobj);
     fp->x2222_flag.bits.b2 = 1;
     fp->cb.x21C0_callback_OnGiveDamage = ftNess_YoyoStartTimedRehit;

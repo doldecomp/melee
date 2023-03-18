@@ -1,14 +1,15 @@
-#include <melee/ft/chara/ftNess/ftNess_SpecialLw.h>
+#include "ftNess_SpecialLw.h"
 
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/chara/ftNess/ftNess.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/pl/pl_unknown_001.h>
+#include "ftNess.h"
+
+#include "ef/efasync.h"
+#include "ef/eflib.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
+#include "pl/pl_unknown_001.h"
 
 // 0x80119E14
 // https://decomp.me/scratch/LwTKg

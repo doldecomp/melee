@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
+#include "ftmewtwo.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
 
 // 0x8014665C
 // https://decomp.me/scratch/ktG8y // Set flags
@@ -18,12 +19,7 @@ void ftMewtwo_SpecialS_SetFlags(HSD_GObj* fighter_gobj)
 
 static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
 {
-/// @todo Fix double assignment.
-#ifdef MUST_MATCH
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-#else
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-#endif
 
     if (fp->x1A58_interactedFighter == NULL) {
         func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
@@ -38,9 +34,12 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
 // handler
 void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-    f32 var;
-    f32 var2;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -57,12 +56,7 @@ void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
 static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
 {
-/// @todo Fix double assignment.
-#ifdef MUST_MATCH
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-#else
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-#endif
 
     if (fp->x1A58_interactedFighter == NULL) {
         func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
@@ -77,15 +71,14 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
 // handler
 void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
-/// @todo Fix double assignment.
-#ifdef MUST_MATCH
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-#else
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-#endif
 
-    ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
-    f32 var;
+    ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;

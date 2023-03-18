@@ -171,10 +171,7 @@ void lbl_801520D4(HSD_GObj* arg0) {}
 // https://decomp.me/scratch/HUhGv
 void func_801520D8(HSD_GObj* gobj)
 {
-    Fighter* r31_fp;
-    f32 temp_f1;
-
-    r31_fp = gobj->user_data;
+    Fighter* r31_fp = GET_FIGHTER(gobj);
     Fighter_ActionStateChange_800693AC(gobj, 0x160, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     r31_fp->x80_self_vel.x = 0.0f;
