@@ -29,7 +29,7 @@ static void __DBExceptionDestinationAux(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     OSContext* ctx = (void*) (0x80000000 + *(u32*) 0xC0); // WTF??

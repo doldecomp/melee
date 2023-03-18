@@ -160,7 +160,7 @@ void ftNess_YoyoSetUnkPos(HSD_GObj* fighter_gobj, Vec3* pos)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (!fp->nessVars.AttackHi4.isPosUpdateMod) {
@@ -189,7 +189,7 @@ void ftNess_YoyoSetHitPos(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     /// @todo Can't move below @c fp.
@@ -229,7 +229,7 @@ void ftNess_YoyoSetHitPosUnk(HSD_GObj* fighter_gobj, f32 pos_unk)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     collData = &fp->x6F0_collData;
@@ -319,7 +319,7 @@ void ftNess_YoyoApplySmash(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Vec3 sp18;
@@ -387,7 +387,7 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -449,7 +449,7 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
@@ -532,7 +532,7 @@ void ftNess_YoyoSetUnkRate(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -588,7 +588,7 @@ void ftNess_YoyoItemDespawn(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->sa.ness.x222C_yoyoGObj != NULL) {
@@ -699,7 +699,7 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj)
         {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
-            u8 unused[8];
+            u8 _[8];
 #endif
 
             fighter_data2 = getFighter(fighter_gobj);
@@ -1042,7 +1042,7 @@ void ftNess_AttackHi4_Release_Action(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);

@@ -15,12 +15,12 @@ void ftGameWatch_ItemPanicSetup(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
 
     if (fp->sa.gaw.x2268_panicGObj == NULL) {
-        /// @todo Can't move below @c unused.
+        /// @todo Can't move below @c _.
         Vec3 vec;
 
         /// @todo Unused stack.
 #ifdef MUST_MATCH
-        u8 unused[16];
+        u8 _[16];
 #endif
 
         func_8000B1CC(fp->x5E8_fighterBones[TopN].x0_jobj, NULL, &vec);
@@ -201,7 +201,7 @@ void ftGameWatch_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirLw_Anim.
@@ -227,7 +227,7 @@ void ftGameWatch_SpecialAirLw_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x894_currentAnimFrame == anim_update_frame &&
@@ -247,7 +247,7 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirLw_IASA.
@@ -329,7 +329,7 @@ void ftGameWatch_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -387,7 +387,7 @@ void ftGameWatch_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_8007D5D4(fp);
@@ -404,7 +404,7 @@ void ftGameWatch_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_8007D7FC(fp);
@@ -595,7 +595,7 @@ void ftGameWatch_SpecialLwShoot_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirLwShoot_Anim.
@@ -610,7 +610,7 @@ void ftGameWatch_SpecialAirLwShoot_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     ftGameWatch_SpecialLwShoot_ApplyDamage(fighter_gobj);
@@ -686,7 +686,7 @@ void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirLwShoot_ReleaseOil
@@ -726,7 +726,7 @@ void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(

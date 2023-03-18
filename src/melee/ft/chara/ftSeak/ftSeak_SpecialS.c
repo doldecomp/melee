@@ -67,7 +67,7 @@ void ftSeak_80110610(HSD_GObj* fighter_gobj, s32 arg1, f32 arg2)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     int* item;
@@ -380,7 +380,7 @@ void ftSeak_CheckAndDestroyChain(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->sa.seak.x2234 == NULL)
@@ -597,7 +597,7 @@ void ftSeak_8011136C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -682,7 +682,7 @@ void ftSeak_80111588(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -716,7 +716,7 @@ void ftSeak_80111648(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -866,7 +866,7 @@ void ftSeak_80111A48(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[36];
+    u8 _[36];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -906,7 +906,7 @@ void ftSeak_80111B1C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[36];
+    u8 _[36];
 #endif
 
     Fighter* fp = fighter_gobj->user_data;
@@ -976,7 +976,7 @@ void ftSeak_80111CB0(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);

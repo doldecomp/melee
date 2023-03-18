@@ -21,7 +21,7 @@ void ftDonkey_8010DCD8(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
@@ -86,7 +86,7 @@ void ftDonkey_8010DE88_inner(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!fp->x2219_flag.bits.b0) {
@@ -113,7 +113,7 @@ void ftDonkey_8010DF5C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))

@@ -66,7 +66,7 @@ void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8,
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -172,7 +172,7 @@ void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     Fighter* fp;
@@ -187,7 +187,7 @@ void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
 /// @todo Unused assignment.
 #ifdef MUST_MATCH
     {
-        f32 unused = ftx2360_f5;
+        f32 _ = ftx2360_f5;
     }
 #endif
 

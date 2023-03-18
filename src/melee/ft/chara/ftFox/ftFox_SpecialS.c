@@ -169,7 +169,7 @@ void ftFox_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->foxVars.SpecialS.gravityDelay != 0) {
@@ -268,7 +268,7 @@ void ftFox_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -284,7 +284,7 @@ void ftFox_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -454,7 +454,7 @@ void ftFox_SpecialS_Action(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[28];
+    u8 _[28];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALS,
@@ -470,7 +470,7 @@ void ftFox_SpecialAirS_Action(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[36];
+    u8 _[36];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRS,
@@ -525,7 +525,7 @@ void ftFox_SpecialSEnd_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->foxVars.SpecialS.gravityDelay != 0) {
@@ -547,7 +547,7 @@ void ftFox_SpecialAirSEnd_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->foxVars.SpecialS.gravityDelay != 0) {
@@ -566,7 +566,7 @@ void ftFox_SpecialSEnd_Coll(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (func_800827A0(fighter_gobj) == false) {
@@ -584,7 +584,7 @@ void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     int cliffCatchDir;

@@ -159,7 +159,7 @@ void ftZelda_8013B110(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -252,7 +252,7 @@ void ftZelda_8013B344(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -316,7 +316,7 @@ void ftZelda_8013B4D8(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     {

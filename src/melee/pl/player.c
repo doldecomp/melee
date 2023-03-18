@@ -171,7 +171,7 @@ bool Player_800319C4(int slot, bool arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     int i;
@@ -331,7 +331,7 @@ void Player_80031FB0(int slot, s32 entity_index)
 {
 /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     StaticPlayer* player;
@@ -409,7 +409,7 @@ enum_t Player_GetPlayerCharacter(int slot)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     StaticPlayer* player;
@@ -558,7 +558,7 @@ void Player_800328D4(int slot, Vec3* arg_vec)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Player_CheckSlot(slot);
@@ -687,7 +687,7 @@ void Player_80032FA4(s32 slot, s32 arg)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Player_CheckSlot(slot);
@@ -699,7 +699,7 @@ f32 Player_GetFacingDirection(s32 slot)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
     StaticPlayer* player;
     Player_CheckSlot(slot);
@@ -719,7 +719,7 @@ void Player_SetFacingDirectionConditional(s32 slot, bool b, f32 direction)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (!b) {
@@ -1322,7 +1322,7 @@ void Player_SetFalls(int slot, s32 falls)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     StaticPlayer* player;
@@ -1354,7 +1354,7 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Player_CheckSlot(slot);
@@ -1405,7 +1405,7 @@ void Player_UpdateMatchFrameCount(int slot, bool condition)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     StaticPlayer* player;
@@ -1473,7 +1473,7 @@ bool Player_8003544C(s32 slot, bool condition)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (!condition) {
@@ -1538,7 +1538,7 @@ void Player_UnsetFlagsBit1(int slot)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[1];
+    u8 _[1];
 #endif
 
     StaticPlayer* player;
@@ -1914,7 +1914,7 @@ void Player_80036978(s32 slot, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Player_CheckSlot(slot);
@@ -1934,7 +1934,7 @@ void Player_InitOrResetPlayer(s32 slot)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[56];
+    u8 _[56];
 #endif
 
     Player_CheckSlot(slot);
@@ -2110,7 +2110,7 @@ void Player_80036F34(s32 slot, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused;
+    u8 _;
 #endif
 
     StaticPlayer* player;
@@ -2142,7 +2142,7 @@ void Player_80037054(s32 slot, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused;
+    u8 _;
 #endif
 
     StaticPlayer* player;

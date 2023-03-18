@@ -168,7 +168,7 @@ void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     GET_FIGHTER(fighter_gobj)->x80_self_vel.y = 0.0f;
@@ -191,7 +191,7 @@ void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     GET_FIGHTER(fighter_gobj)->x80_self_vel.x /=
@@ -257,7 +257,7 @@ void ftGameWatch_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     if (ftcmd_var >= 1U) {
@@ -319,7 +319,7 @@ static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     func_8007D5D4(fp);
@@ -341,7 +341,7 @@ static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp->sa.gaw.x2234 = 0;

@@ -55,7 +55,7 @@ void ftLuigi_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     temp_fp = (fp = GET_FIGHTER(fighter_gobj));
@@ -88,7 +88,7 @@ void ftLuigi_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     temp_fp = (fp = GET_FIGHTER(fighter_gobj));
@@ -124,7 +124,7 @@ void ftLuigi_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -185,7 +185,7 @@ void ftLuigi_SpecialLw_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -221,7 +221,7 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -283,7 +283,7 @@ void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
@@ -329,7 +329,7 @@ void ftLuigi_SpecialAirLw_Coll(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     if (func_800824A0(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) != false) {

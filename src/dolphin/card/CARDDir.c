@@ -48,7 +48,7 @@ static void EraseCallback(s32 chan, s32 result)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     CARDControl* card;
@@ -88,7 +88,7 @@ s32 __CARDUpdateDir(s32 chan, CARDCallback callback)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     CARDControl* card;

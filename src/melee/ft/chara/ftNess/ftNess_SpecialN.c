@@ -91,7 +91,7 @@ void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     {
@@ -131,7 +131,7 @@ void ftNess_SpecialAirNStart_Action(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -182,12 +182,12 @@ void ftNess_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
     {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
         if (fp->sa.ness.x2240_flashGObj == NULL) {
-            /// @todo Can't move below @c unused.
+            /// @todo Can't move below @c _.
             Vec3 vec;
 
             /// @todo Unused stack.
 #ifdef MUST_MATCH
-            u8 unused[20];
+            u8 _[20];
 #endif
 
             func_8000B1CC(fp->x5E8_fighterBones[L2ndNa].x0_jobj, NULL, &vec);
@@ -280,7 +280,7 @@ void ftNess_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     SetPKFlashAttr(fighter_gobj);
@@ -309,7 +309,7 @@ void ftNess_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
 
                 /// @todo Unused stack.
 #ifdef MUST_MATCH
-                u8 unused[20];
+                u8 _[20];
 #endif
 
                 func_8000B1CC(fighter_data2->x5E8_fighterBones[L2ndNa].x0_jobj,
@@ -388,7 +388,7 @@ void ftNess_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     SetPKFlashAttr(fighter_gobj);
@@ -539,7 +539,7 @@ void ftNess_SpecialAirNStart_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -562,7 +562,7 @@ void ftNess_SpecialAirNHold_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -586,7 +586,7 @@ void ftNess_SpecialAirNEnd_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);

@@ -56,7 +56,7 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     if (r32_fp->sa.masterhand.x2258 == 0x156) {
@@ -92,7 +92,7 @@ void lbl_80150F00(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -150,7 +150,7 @@ void func_80151018(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     r6_fp = GET_FIGHTER(gobj);

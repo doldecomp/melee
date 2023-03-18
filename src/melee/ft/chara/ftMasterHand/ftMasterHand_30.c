@@ -84,7 +84,7 @@ void lbl_801556C4(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2200_ftcmd_var0 != 0) {

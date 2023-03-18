@@ -73,7 +73,7 @@ static void lbl_801511FC(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     switch (fp->x2340_stateVar1) {

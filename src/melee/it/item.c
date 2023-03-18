@@ -398,8 +398,8 @@ void func_802676F4(HSD_GObj* item_gobj)
 
 /// @private
 /// @remarks #func_8026862C loads two integers into this,
-///          but the second one goes unused?
-bool func_8026784C(enum_t dropItem, int unused)
+///          but the second one goes _?
+bool func_8026784C(enum_t dropItem, int _)
 {
     bool result = false;
 
@@ -704,7 +704,7 @@ extern void* lbl_803F1F90[];
 void func_8026814C(HSD_GObj* item_gobj)
 {
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     HSD_MObj* temp_r0;
     HSD_DObj* var_r0;
@@ -1134,7 +1134,7 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     HSD_JObj* item_jobj1_2;
@@ -1289,7 +1289,7 @@ void func_802694CC(HSD_GObj* item_gobj)
 void lbl_80269528(HSD_GObj* item_gobj)
 {
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
     if (item_data->xDC8_word.flags.x9 == 0) {
@@ -1366,7 +1366,7 @@ void func_802697D4(HSD_GObj* item_gobj)
 {
     Vec3 sp1C;
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -1489,7 +1489,7 @@ void lbl_80269C5C(HSD_GObj* item_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_8026F9A0();
@@ -2018,7 +2018,7 @@ void func_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -2033,7 +2033,7 @@ void func_8026ABD8(HSD_GObj* this, Vec3* pos, f32 arg2)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     Item* item_data = (Item*) HSD_GObjGetUserData(this);
 

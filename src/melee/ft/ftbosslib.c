@@ -58,7 +58,7 @@ static inline float my_sqrtf(float x)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4] = { 0 };
+    u8 _[4] = { 0 };
 #endif
 
     volatile float y;
@@ -242,7 +242,7 @@ HSD_GObj* func_8015C3E8(FighterKind kind)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     for (cur = lbl_804D782C->x20_fighters; cur; cur = cur->next) {
@@ -259,7 +259,7 @@ enum_t func_8015C44C(FighterKind kind)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     if (gobj != NULL) {
@@ -276,7 +276,7 @@ s32 func_8015C4C4(void)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     if (gobj)
@@ -291,7 +291,7 @@ s32 func_8015C530(enum_t arg0)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     if (gobj != NULL) {
@@ -339,7 +339,7 @@ MasterHandAttributes* func_8015C6BC(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     {
@@ -368,7 +368,7 @@ s32 func_8015C74C(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     MasterHandAttributes* attr = func_8015C6BC();
@@ -382,7 +382,7 @@ s32 func_8015C7EC(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     MasterHandAttributes* attr = func_8015C6BC();
@@ -396,7 +396,7 @@ s32 func_8015C88C(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     MasterHandAttributes* attr = func_8015C6BC();
@@ -410,7 +410,7 @@ s32 func_8015C92C(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     MasterHandAttributes* attr = func_8015C6BC();
@@ -424,7 +424,7 @@ s32 func_8015C9CC(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     MasterHandAttributes* attr = func_8015C6BC();
@@ -445,7 +445,7 @@ void func_8015CA6C(s32 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[32];
+    u8 _[32];
 #endif
 
     Player_80036790(0, arg0);

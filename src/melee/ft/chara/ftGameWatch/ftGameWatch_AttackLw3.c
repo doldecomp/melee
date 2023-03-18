@@ -18,7 +18,7 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = getFighter(fighter_gobj);
@@ -73,7 +73,7 @@ void ftGameWatch_ItemManholeOnDamage(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = getFighter(fighter_gobj);
@@ -138,7 +138,7 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))

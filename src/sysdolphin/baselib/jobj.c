@@ -403,7 +403,7 @@ void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     bool has_dobj;
@@ -902,7 +902,7 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
 
                 /// @todo Unused stack.
 #ifdef MUST_MATCH
-                u8 unused[8];
+                u8 _[8];
 #endif
 
                 HSD_CObj* cobj;
@@ -1036,7 +1036,7 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (jobj == NULL || joint == NULL)
@@ -1060,7 +1060,7 @@ void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     while (jobj != NULL && joint != NULL) {
@@ -1658,7 +1658,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     f32 var_f4_3;
@@ -1812,7 +1812,7 @@ void resolveIKJoint2(HSD_JObj* jobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     HSD_JObj* var_r29;

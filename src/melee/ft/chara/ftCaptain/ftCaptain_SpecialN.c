@@ -73,7 +73,7 @@ void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp->x2204_ftcmd_var1 = 0;
@@ -92,7 +92,7 @@ void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->x2204_ftcmd_var1 = 0;

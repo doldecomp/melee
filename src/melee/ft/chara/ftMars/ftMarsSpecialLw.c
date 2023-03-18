@@ -30,7 +30,7 @@ void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     {
@@ -55,7 +55,7 @@ void lbl_80138AA8(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -79,7 +79,7 @@ void lbl_80138B64(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -113,7 +113,7 @@ void lbl_80138C5C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = gobj->user_data;
@@ -145,7 +145,7 @@ void func_80138D38(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     {
@@ -170,7 +170,7 @@ void func_80138DD0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     {
@@ -198,7 +198,7 @@ void lbl_80138E68(HSD_GObj* gobj)
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     s32 hb;
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -243,7 +243,7 @@ void lbl_80138F14(HSD_GObj* gobj)
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     s32 hb;
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);

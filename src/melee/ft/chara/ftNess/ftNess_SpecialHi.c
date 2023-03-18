@@ -401,7 +401,7 @@ void ftNess_SpecialHi_StartAction(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     ftNessAttributes* temp_attr;
@@ -477,7 +477,7 @@ void ftNess_SpecialAirHiStart_Action(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
 /// @todo Unused assignment.
@@ -553,7 +553,7 @@ void ftNess_SpecialHi_Action(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     Fighter* fighter_data3;
 
@@ -604,7 +604,7 @@ void ftNess_SpecialHi_Action(
                     {
                         /// @todo Unused stack.
 #ifdef MUST_MATCH
-                        u8 unused[4];
+                        u8 _[4];
 #endif
 
                         Fighter_ActionStateChange_800693AC(
@@ -713,7 +713,7 @@ void ftNess_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     NessFloatMath_PKThunder2(fighter_gobj);
@@ -740,7 +740,7 @@ void ftNess_SpecialHiStart_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[32];
+    u8 _[32];
 #endif
 
     Fighter* fp = fighter_gobj->user_data;
@@ -862,7 +862,7 @@ void ftNess_SpecialHiEnd_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
@@ -874,7 +874,7 @@ void ftNess_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     {
@@ -921,7 +921,7 @@ void ftNess_SpecialAirHiStart_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[32];
+    u8 _[32];
 #endif
 
     HSD_GObj* pkt_ptr;
@@ -970,7 +970,7 @@ void ftNess_SpecialAirHiHold_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[44];
+    u8 _[44];
 #endif
 
     Fighter* fp0 = fighter_gobj->user_data;
@@ -1071,7 +1071,7 @@ void ftNess_SpecialAirHiEnd_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = fighter_gobj->user_data;
@@ -1097,7 +1097,7 @@ void ftNess_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp0;
@@ -1138,7 +1138,7 @@ void ftNess_SpecialAirHiRebound_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp0 = fighter_gobj->user_data;
@@ -1261,7 +1261,7 @@ void ftNess_SpecialHi_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp0 = fighter_gobj->user_data;
@@ -1304,7 +1304,7 @@ void ftNess_SpecialAirHiStart_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = fighter_gobj->user_data;
@@ -1332,7 +1332,7 @@ void ftNess_SpecialAirHiHold_Phys(
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = fighter_gobj->user_data;
@@ -1357,7 +1357,7 @@ void ftNess_SpecialAirHiEnd_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = fighter_gobj->user_data;
@@ -1383,7 +1383,7 @@ inline void ftNess_atan2(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4] = { 0 };
+    u8 _[4] = { 0 };
 #endif
 
     func_8007592C(
@@ -1397,7 +1397,7 @@ inline void* getFtSpecialAttrs2(Fighter* fp)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4] = { 0 };
+    u8 _[4] = { 0 };
 #endif
 
     return fp->x2D4_specialAttributes;
@@ -1418,7 +1418,7 @@ void ftNess_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     f32 phi_f1;
@@ -1545,7 +1545,7 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp0;
@@ -1625,7 +1625,7 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     {
         /// @todo Unused stack.
 #ifdef MUST_MATCH
-        u8 unused[4];
+        u8 _[4];
 #endif
 
         if (fp0->x6F0_collData.x14C_ground.normal.y > 0.0f) {
@@ -1937,7 +1937,7 @@ void ftNess_SpecialAirHiRebound_Coll(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp;

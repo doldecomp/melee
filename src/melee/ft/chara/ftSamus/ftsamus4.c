@@ -51,7 +51,7 @@ void ftSamus_8012A380(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
@@ -62,7 +62,7 @@ void ftSamus_8012A3BC(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
@@ -82,7 +82,7 @@ void ftSamus_8012A420(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -110,7 +110,7 @@ void ftSamus_8012A4E0(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
@@ -121,7 +121,7 @@ void ftSamus_8012A51C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
@@ -141,7 +141,7 @@ void ftSamus_8012A580(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[40];
+    u8 _[40];
 #endif
 
     Fighter* fighter2;
@@ -175,7 +175,7 @@ void ftSamus_8012A640(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     efLib_DestroyAll(fighter_gobj);

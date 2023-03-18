@@ -2511,7 +2511,7 @@ void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (!fp->x221F_flag.bits.b3) {

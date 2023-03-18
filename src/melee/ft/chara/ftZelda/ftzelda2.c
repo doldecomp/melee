@@ -65,8 +65,8 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
-    unused[0] = 0;
+    u8 _[4];
+    _[0] = 0;
 #endif
 
     {
@@ -125,7 +125,7 @@ void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 
             /// @todo Unused stack.
 #ifdef MUST_MATCH
-            u8 unused[20];
+            u8 _[20];
 #endif
 
             ssize_t boneIndex = func_8007500C(fp, 4);
@@ -306,7 +306,7 @@ void ftZelda_80139D60(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -406,7 +406,7 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -497,7 +497,7 @@ void ftZelda_8013A244(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     f64 _half;
@@ -577,7 +577,7 @@ void ftZelda_8013A448(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
@@ -610,7 +610,7 @@ void ftZelda_8013A50C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -640,7 +640,7 @@ void ftZelda_8013A5C4(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);

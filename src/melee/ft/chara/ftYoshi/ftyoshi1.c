@@ -82,7 +82,7 @@ void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     struct S_UNK_YOSHI1* unk_struct1;
@@ -127,7 +127,7 @@ void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (unk_struct_arg) {
@@ -163,7 +163,7 @@ void func_8012B8A4(HSD_GObj* fighter_gobj)
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     f32 tempf = attr->xC * (1.0f - (fp->x1998_shieldHealth /
                                     p_ftCommonData->x260_startShieldHealth));

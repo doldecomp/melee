@@ -30,12 +30,12 @@ void ftMario_SpecialS_CreateCape(HSD_GObj* gobj)
     ftMarioAttributes* sa = fp->x2D4_specialAttributes;
 
     if (!fp->x2208_ftcmd_var2) {
-        /// @todo Can't move below @c unused.
+        /// @todo Can't move below @c _.
         Vec3 coords;
 
         /// @todo Unused stack.
 #ifdef MUST_MATCH
-        u8 unused[4];
+        u8 _[4];
 #endif
 
         fp->x2208_ftcmd_var2 = true;
@@ -119,7 +119,7 @@ void ftMario_SpecialS_StartAction(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -132,7 +132,7 @@ void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -299,7 +299,7 @@ void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = gobj->user_data;

@@ -32,7 +32,7 @@ void ftMewtwo_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->x2210_ThrowFlags.flags = 0;
@@ -55,7 +55,7 @@ void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->x2210_ThrowFlags.flags = 0;
@@ -201,7 +201,7 @@ void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {

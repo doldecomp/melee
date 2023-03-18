@@ -48,7 +48,7 @@ void ftLuigi_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo Shared @c inline with #ftLuigi_SpecialAirS_StartAction.
@@ -69,7 +69,7 @@ void ftLuigi_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -133,7 +133,7 @@ void ftLuigi_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -196,7 +196,7 @@ void ftLuigi_SpecialSHold_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo Shared @c inline with #ftLuigi_SpecialAirSHold_Anim.
@@ -222,7 +222,7 @@ void ftLuigi_SpecialAirSHold_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -314,7 +314,7 @@ void ftLuigi_SpecialSHold_Action(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo Shared @c inline with #ftLuigi_SpecialAirSHold_Action.
@@ -334,7 +334,7 @@ void ftLuigi_SpecialAirSHold_Action(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRS_HOLD,
@@ -352,7 +352,7 @@ void ftLuigi_SpecialSLaunch_Anim(HSD_GObj* fighter_gobj)
     /// @todo Shared @c inline with #ftLuigi_SpecialAirSLaunch_Anim.
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -379,7 +379,7 @@ void ftLuigi_SpecialAirSLaunch_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -488,7 +488,7 @@ void ftLuigi_SpecialSLaunch_Action(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -527,7 +527,7 @@ void ftLuigi_SpecialSMisfire_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -554,7 +554,7 @@ void ftLuigi_SpecialAirSMisfire_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -633,7 +633,7 @@ void ftLuigi_SpecialSMisfire_Action(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALS_MISFIRE,
@@ -648,7 +648,7 @@ void ftLuigi_SpecialAirSMisfire_Action(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(
@@ -682,7 +682,7 @@ void ftLuigi_SpecialAirSFly_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = getFighter(fighter_gobj);
@@ -737,7 +737,7 @@ void ftLuigi_SpecialSFly_Action(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp;

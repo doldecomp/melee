@@ -30,7 +30,7 @@ void ftPikachu_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo Can't move below @c fp.
@@ -58,7 +58,7 @@ void ftPikachu_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo Can't move below @c fp.
@@ -109,7 +109,7 @@ void ftPikachu_80125F78(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -171,7 +171,7 @@ void ftPikachu_80126144(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->x2344_stateVar2_s32--;
@@ -213,7 +213,7 @@ void ftPikachu_801262B4(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->x2344_stateVar2_s32--;
@@ -316,7 +316,7 @@ void ftPikachu_80126614(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     /// @todo Eliminate cast (by changing type of field)
@@ -379,7 +379,7 @@ void ftPikachu_801267C8(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     fp->x2358_stateVar7_s32++;
@@ -439,7 +439,7 @@ void ftPikachu_ActionChange_80126A2C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_8007D60C(fp);
@@ -467,7 +467,7 @@ void ftPikachu_ActionChange_80126AA4(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fighter2 = GET_FIGHTER(fighter_gobj);
@@ -684,7 +684,7 @@ bool ftPikachu_80127064(HSD_GObj* fighter_gobj)
 
         /// @todo Unused stack.
 #ifdef MUST_MATCH
-        u8 unused[4];
+        u8 _[4];
 #endif
 
         // push current stick to temporary vector
@@ -732,7 +732,7 @@ void ftPikachu_80127228(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -766,7 +766,7 @@ void ftPikachu_80127310(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -805,7 +805,7 @@ void ftPikachu_801273D4(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (func_8008239C(fighter_gobj, fp->facing_dir, (f32*) box)) {
@@ -828,7 +828,7 @@ void ftPikachu_ActionChangeUpdateVel_801274AC(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     ftPikachuAttributes* pika_attr;
@@ -851,7 +851,7 @@ void ftPikachu_ActionChangeUpdateVel_80127534(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     ftPikachuAttributes* pika_attr;

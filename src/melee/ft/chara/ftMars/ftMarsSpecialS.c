@@ -9,7 +9,7 @@ void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     {
@@ -99,7 +99,7 @@ void ftMars_80137618(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -199,7 +199,7 @@ void ftMars_80137870(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
@@ -343,7 +343,7 @@ void ftMars_80137BF4(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
@@ -478,7 +478,7 @@ void ftMars_80137F30(HSD_GObj* gobj)
     MarsAttributes* sa = getFtSpecialAttrsD(fp);
 
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {

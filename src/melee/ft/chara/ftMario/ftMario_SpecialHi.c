@@ -26,7 +26,7 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = GET_FIGHTER(gobj);
@@ -60,7 +60,7 @@ void ftMario_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     ftMario_SpecialHi_Anim(gobj);
@@ -135,7 +135,7 @@ void ftMario_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     ftMario_SpecialHi_CalcAngle(gobj);

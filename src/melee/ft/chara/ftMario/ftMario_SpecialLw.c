@@ -47,7 +47,7 @@ void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = GET_FIGHTER(gobj);
@@ -74,7 +74,7 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[28];
+    u8 _[28];
 #endif
 
     ftMario_SpecialLw_SetVar(gobj);
@@ -97,7 +97,7 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[28];
+    u8 _[28];
 #endif
 
     ftMario_SpecialLw_SetVar(gobj);
@@ -130,7 +130,7 @@ void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -199,7 +199,7 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp = GET_FIGHTER(gobj);
@@ -241,7 +241,7 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp = getFighter(gobj);
@@ -297,7 +297,7 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
@@ -344,7 +344,7 @@ void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);

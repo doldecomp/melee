@@ -547,7 +547,7 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     switch (ssm_id) {

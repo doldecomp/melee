@@ -75,7 +75,7 @@ void lbl_8012C030(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
@@ -198,7 +198,7 @@ void lbl_8012C2F4(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -250,7 +250,7 @@ void func_8012C49C(HSD_GObj* fighter_gobj)
         {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
-            u8 unused[8];
+            u8 _[8];
 #endif
 
             s32* x1CC = &fp0->x110_attr.x1CC;
@@ -270,7 +270,7 @@ void lbl_8012C54C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);

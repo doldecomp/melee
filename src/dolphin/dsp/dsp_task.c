@@ -15,7 +15,7 @@ void __DSPHandler(__OSInterrupt intr, OSContext* ctx)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     OSContext new_ctx;
@@ -263,7 +263,7 @@ void __DSP_boot_task(DSPTaskInfo* task)
 #ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-static char unused[] = "__DSP_add_task() : Added task    : 0x%08X\n";
+static char _[] = "__DSP_add_task() : Added task    : 0x%08X\n";
 #pragma pop
 #endif
 

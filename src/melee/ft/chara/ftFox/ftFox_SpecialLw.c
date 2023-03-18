@@ -75,7 +75,7 @@ void ftFox_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_START, 0,
@@ -133,7 +133,7 @@ void ftFox_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
@@ -196,7 +196,7 @@ void ftFox_SpecialAirLwStart_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = fighter_gobj->user_data;
@@ -458,7 +458,7 @@ static void ftFox_SpecialLw_Turn(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->foxVars.SpecialLw.turnFrames--;
@@ -506,7 +506,7 @@ void ftFox_SpecialLwTurn_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
@@ -527,7 +527,7 @@ void ftFox_SpecialAirLwTurn_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
@@ -572,7 +572,7 @@ void ftFox_SpecialAirLwTurn_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->foxVars.SpecialLw.gravityDelay != 0) {
@@ -726,7 +726,7 @@ void ftFox_SpecialLwHit_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
@@ -753,7 +753,7 @@ void ftFox_SpecialAirLwHit_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
@@ -803,7 +803,7 @@ void ftFox_SpecialAirLwHit_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->foxVars.SpecialLw.gravityDelay != 0) {
@@ -904,7 +904,7 @@ void ftFox_SpecialLwEnd_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -918,7 +918,7 @@ void ftFox_SpecialAirLwEnd_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -954,7 +954,7 @@ void ftFox_SpecialAirLwEnd_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->foxVars.SpecialLw.gravityDelay != 0) {

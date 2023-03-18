@@ -107,7 +107,7 @@ static void lbl_802203F0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = GET_GROUND(gobj);
@@ -132,7 +132,7 @@ static void lbl_80220480(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = GET_GROUND(gobj);

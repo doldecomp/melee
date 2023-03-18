@@ -54,7 +54,7 @@ void func_80151484(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* r3_fp = GET_FIGHTER(gobj);

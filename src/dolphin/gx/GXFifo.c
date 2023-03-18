@@ -21,7 +21,7 @@ static void __GXFifoLink(GXBool flag);
 static void __GXFifoReadEnable(void);
 static void __GXFifoReadDisable(void);
 
-static void GXCPInterruptHandler(__OSInterrupt unused, OSContext* ctx)
+static void GXCPInterruptHandler(__OSInterrupt _, OSContext* ctx)
 {
     OSContext sp10;
     __GXContexts.main->xC = __cpReg[0];

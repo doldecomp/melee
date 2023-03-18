@@ -10,7 +10,7 @@ void ftPikachu_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -27,7 +27,7 @@ void ftPikachu_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -128,7 +128,7 @@ void ftPikachu_801251BC(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -149,7 +149,7 @@ void ftPikachu_8012525C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -229,7 +229,7 @@ void ftPikachu_ActionChange_80125474(HSD_GObj* fighter_gobj)
 void ftPikachu_ActionChange_801254D4(HSD_GObj* fighter_gobj)
 {
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 344,
@@ -245,7 +245,7 @@ void ftPikachu_ActionChange_80125528(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 349,
@@ -261,7 +261,7 @@ void ftPikachu_8012557C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -282,7 +282,7 @@ void ftPikachu_8012561C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -351,7 +351,7 @@ void ftPikachu_ActionChange_80125834(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 347, 0, 0, 0, 1, 0);
@@ -367,7 +367,7 @@ void ftPikachu_ActionChange_801258A0(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 352, 0, 0, 0, 1, 0);
@@ -398,7 +398,7 @@ void ftPikachu_80125958(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -477,7 +477,7 @@ void ftPikachu_80125BB4(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -490,7 +490,7 @@ void ftPikachu_80125BF4(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -518,7 +518,7 @@ void ftPikachu_ActionChange_80125CD0(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -534,7 +534,7 @@ void ftPikachu_ActionChange_80125D28(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);

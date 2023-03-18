@@ -12,7 +12,7 @@ typedef struct ftMarioSpecialS {
 typedef struct ftMarioSpecialLw {
     f32 groundVelX; // 0x2340 - Grounded momentum of Mario / Dr. Tornado
     s32 unk;        // 0x2344 - Set but never used?
-    s32 unused;     // 0x2348 - Skipped entirely
+    s32 _;          // 0x2348 - Skipped entirely
     bool isUnkColl; // 0x234C - Checked in collision, related to some angle
                     // calculation
 

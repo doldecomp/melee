@@ -35,9 +35,9 @@ void OSClearContext(OSContext*);
 void OSInitContext(OSContext* ctx, u32 pc, u32 newsp);
 void OSDumpContext(const OSContext*);
 void __OSContextInit(void);
-void __OSLoadFPUContext(u32 unused, OSContext* fpuctx);
+void __OSLoadFPUContext(u32 _, OSContext* fpuctx);
 void OSLoadFPUContext(OSContext* fpuctx);
-void OSSwitchFPUContext(OSException unused, OSContext* ctx);
+void OSSwitchFPUContext(OSException _, OSContext* ctx);
 void __OSSaveFPUContext(u32 unused1, u32 unused2, OSContext* fpuctx);
 
 #endif

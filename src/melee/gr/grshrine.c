@@ -141,7 +141,7 @@ static void func_80201E9C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -170,7 +170,7 @@ static bool func_80201F44(bool arg0)
     return false;
 }
 
-static bool func_80201F4C(Vec3* a, int unused, HSD_JObj* joint)
+static bool func_80201F4C(Vec3* a, int _, HSD_JObj* joint)
 {
     Vec3 b;
     func_8000B1CC(joint, 0, &b);

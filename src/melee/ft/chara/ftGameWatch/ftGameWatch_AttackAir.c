@@ -101,7 +101,7 @@ void ftGameWatch_ItemTurtleSetup(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->sa.gaw.x225C_turtleGObj != NULL) {
@@ -192,7 +192,7 @@ void ftGameWatch_ItemSparkySetup(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
@@ -389,7 +389,7 @@ void ftGameWatch_LandingAirN_Action(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->sa.gaw.x2258_parachuteGObj != NULL)
@@ -461,7 +461,7 @@ void ftGameWatch_LandingAirB_Action(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->sa.gaw.x2258_parachuteGObj != NULL)
@@ -523,7 +523,7 @@ void ftGameWatch_LandingAirHi_Action(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->sa.gaw.x2258_parachuteGObj != NULL)

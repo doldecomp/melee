@@ -15,7 +15,7 @@ void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = getFighter(fighter_gobj);
@@ -52,7 +52,7 @@ void ftGameWatch_ItemTorchOnDamage(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->sa.gaw.x2254_fireGObj != NULL) {
@@ -103,7 +103,7 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp->x2218_flag.bits.b0 = 0;

@@ -43,7 +43,7 @@ OSTime __OSGetSystemTime(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     bool intr = OSDisableInterrupts();
@@ -56,7 +56,7 @@ OSTime __OSTimeToSystemTime(s64 time)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     bool intr = OSDisableInterrupts();

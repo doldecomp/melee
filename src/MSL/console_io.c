@@ -17,7 +17,7 @@ s32 __write_console(s32 arg0, s32 arg1, s32* arg2)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     s32 uart_status = 0;
     if (!lbl_804D7080) {
@@ -40,7 +40,7 @@ u8 __read_console(u32 arg0, u8* buf, u32* n)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     s32 init_status = 0;

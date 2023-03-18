@@ -51,7 +51,7 @@ void ftZelda_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[11];
+    u8 _[11];
 #endif
 
     temp_f1 = 0;
@@ -71,7 +71,7 @@ void ftZelda_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     fp->x80_self_vel.y = 0;
@@ -91,7 +91,7 @@ void ftZelda_8013AA38(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -119,7 +119,7 @@ void ftZelda_8013AACC(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -164,7 +164,7 @@ void ftZelda_8013AB9C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     {
@@ -207,7 +207,7 @@ void ftZelda_8013AC88(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -233,7 +233,7 @@ void ftZelda_8013AD1C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);

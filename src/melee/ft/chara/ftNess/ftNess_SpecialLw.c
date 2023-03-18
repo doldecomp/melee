@@ -22,7 +22,7 @@ void ftNess_SpecialLwStart_Action(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     temp_fp = GET_FIGHTER(fighter_gobj);
@@ -49,7 +49,7 @@ void ftNess_SpecialAirLwStart_Action(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     temp_fp = GET_FIGHTER(fighter_gobj);
@@ -111,7 +111,7 @@ void ftNess_SpecialAirLwStart_Anim(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fighter_data2 = fp = GET_FIGHTER(fighter_gobj);
@@ -164,7 +164,7 @@ void ftNess_SpecialAirLwStart_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -280,7 +280,7 @@ void ftNess_SpecialAirLwHold_Anim(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -339,7 +339,7 @@ void ftNess_SpecialAirLwHold_Phys(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -393,7 +393,7 @@ void ftNess_SpecialLwHold_GroundToAir(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -417,7 +417,7 @@ void ftNess_SpecialAirLwHold_AirToGround(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -442,7 +442,7 @@ void ftNess_SpecialLwHold_Action(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALLW_HOLD,
@@ -464,7 +464,7 @@ void ftNess_SpecialAirLwHold_Action(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRLW_HOLD,
@@ -499,12 +499,12 @@ static inline void getAttrStuff(HSD_GObj* arg0)
           func_80075F48(temp_r30, 0)));
 }
 
-/// Ness's grounded PSI Magnet Turnaround Animation callback - unused
+/// Ness's grounded PSI Magnet Turnaround Animation callback - _
 void ftNess_SpecialLwTurn_Anim(HSD_GObj* arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp0 = arg0->user_data;
@@ -528,12 +528,12 @@ void ftNess_SpecialLwTurn_Anim(HSD_GObj* arg0)
     }
 }
 
-/// Ness's aerial PSI Magnet Turnaround Animation callback - unused
+/// Ness's aerial PSI Magnet Turnaround Animation callback - _
 void ftNess_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp0 = arg0->user_data;
@@ -559,7 +559,7 @@ void ftNess_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
 // 0x8011A920
 void ftNess_SpecialLwTurn_IASA(
     HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Turnaround IASA
-                            // callback - unused
+                            // callback - _
 {
     return;
 }
@@ -567,7 +567,7 @@ void ftNess_SpecialLwTurn_IASA(
 // 0x8011A924
 void ftNess_SpecialAirLwTurn_IASA(
     HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Turnaround IASA callback
-                            // - unused
+                            // - _
 {
     return;
 }
@@ -575,7 +575,7 @@ void ftNess_SpecialAirLwTurn_IASA(
 // 0x8011A928
 void ftNess_SpecialLwTurn_Phys(
     HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Turnaround Physics
-                            // callback - unused
+                            // callback - _
 {
     func_80084F3C(fighter_gobj);
     func_8007AF10(fighter_gobj);
@@ -584,13 +584,13 @@ void ftNess_SpecialLwTurn_Phys(
 // 0x8011A95C
 void ftNess_SpecialAirLwTurn_Phys(
     HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Turnaround Physics
-                            // callback - unused
+                            // callback - _
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     s32 magnetTimer;
@@ -614,7 +614,7 @@ void ftNess_SpecialAirLwTurn_Phys(
 // https://decomp.me/scratch/E3jqW
 void ftNess_SpecialLwTurn_Coll(
     HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet Turnaround Collision
-                            // callback - unused
+                            // callback - _
 {
     if (func_80082708(fighter_gobj) == false) {
         ftNess_SpecialLwTurn_GroundToAir(fighter_gobj);
@@ -625,7 +625,7 @@ void ftNess_SpecialLwTurn_Coll(
 // https://decomp.me/scratch/qkeXm
 void ftNess_SpecialAirLwTurn_Coll(
     HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Turnaround Collision
-                            // callback - unused
+                            // callback - _
 {
     if (func_80081D0C(fighter_gobj) != false) {
         ftNess_SpecialAirLwTurn_AirToGround(fighter_gobj);
@@ -636,7 +636,7 @@ void ftNess_SpecialAirLwTurn_Coll(
 // https://decomp.me/scratch/Myul8
 void ftNess_SpecialLwTurn_GroundToAir(
     HSD_GObj* fighter_gobj) // Ness's ground->air PSI Magnet Turnaround Action
-                            // State handler - unused
+                            // State handler - _
 {
     Fighter* fp;
 
@@ -651,7 +651,7 @@ void ftNess_SpecialLwTurn_GroundToAir(
 // https://decomp.me/scratch/rfuLo
 void ftNess_SpecialAirLwTurn_AirToGround(
     HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet Turnaround Action
-                            // State handler - unused
+                            // State handler - _
 {
     Fighter* fp;
 
@@ -670,7 +670,7 @@ bool ftNess_SpecialLwHold_GroundOrAir(
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     Fighter* fp = GET_FIGHTER(arg0);
@@ -732,7 +732,7 @@ void ftNess_SpecialLwHit_Anim(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[44];
+    u8 _[44];
 #endif
 
     s32 phi_r0;
@@ -803,7 +803,7 @@ void ftNess_SpecialAirLwHit_Anim(
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(arg0);
@@ -871,7 +871,7 @@ void ftNess_SpecialAirLwHit_Phys(
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     s32 temp_r3;
@@ -925,7 +925,7 @@ void ftNess_SpecialLwHit_GroundToAir(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -949,7 +949,7 @@ void ftNess_SpecialAirLwHit_AirToGround(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -970,7 +970,7 @@ void ftNess_AbsorbThink_DecideAction(
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     enum_t asid;
@@ -1021,7 +1021,7 @@ void ftNess_SpecialLwEnd_Anim(
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -1037,7 +1037,7 @@ void ftNess_SpecialAirLwEnd_Anim(
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -1075,7 +1075,7 @@ void ftNess_SpecialAirLwEnd_Phys(
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     Fighter* fp = GET_FIGHTER(arg0);

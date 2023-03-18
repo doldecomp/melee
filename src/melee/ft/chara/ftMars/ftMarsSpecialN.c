@@ -16,7 +16,7 @@ void ftMars_SpecialN_StartAction(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->cb.x21EC_callback = &lbl_80136730;
@@ -33,7 +33,7 @@ void ftMars_SpecialAirN_StartAction(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->cb.x21EC_callback = &lbl_80136730;
@@ -95,7 +95,7 @@ void lbl_8013691C(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_8007C930(fp, attr->x10);
@@ -109,7 +109,7 @@ void lbl_8013695C(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_8007D4B8(fp);
@@ -162,7 +162,7 @@ void lbl_80136ADC(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[28];
+    u8 _[28];
 #endif
 
     if (fp->x2340_stateVar1 % 30 == 0) {
@@ -187,7 +187,7 @@ void lbl_80136BB4(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[28];
+    u8 _[28];
 #endif
 
     if ((s32) fp->x2340_stateVar1 % 30 == 0) {
@@ -330,7 +330,7 @@ void lbl_80136EE4(HSD_GObj* gobj)
 
         /// @todo Unused stack.
 #ifdef MUST_MATCH
-        u8 unused[20];
+        u8 _[20];
 #endif
 
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
@@ -394,7 +394,7 @@ void lbl_80137010(HSD_GObj* gobj)
 
         /// @todo Unused stack.
 #ifdef MUST_MATCH
-        u8 unused[20];
+        u8 _[20];
 #endif
 
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)

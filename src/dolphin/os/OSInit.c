@@ -71,7 +71,7 @@ extern u8 __ArenaHi[];
 extern u8 __ArenaLo[];
 
 #ifdef MUST_MATCH
-/// Peephole bug triggered by inline asm function __OSFPRInit (unused in melee)
+/// Peephole bug triggered by inline asm function __OSFPRInit (_ in melee)
 #pragma peephole off
 #endif
 
@@ -140,7 +140,7 @@ extern vu16 __OSDeviceCode AT_ADDRESS(OS_BASE_CACHED | 0x30E6);
 extern volatile struct {
     u32 x0;
     u32 intr;
-    u8 unused[0x2C - 0x8];
+    u8 _[0x2C - 0x8];
     u32 x2C;
 } OS_PI AT_ADDRESS(0xCC003000);
 

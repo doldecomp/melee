@@ -164,7 +164,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
@@ -281,7 +281,7 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp = temp_fp;
@@ -307,7 +307,7 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if ((u32) fp->sa.captain.x2230_isSpecialSGFX == false) {
@@ -391,7 +391,7 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_80085134(fighter_gobj);
@@ -418,7 +418,7 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_80085134(fighter_gobj);
@@ -485,7 +485,7 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp = temp_fp;

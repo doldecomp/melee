@@ -96,7 +96,7 @@ void func_80378330(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     int i;
@@ -108,7 +108,7 @@ void func_803783B0(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     int i;
@@ -224,7 +224,7 @@ void HSD_PadRumbleInterpret(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     struct RumbleInfo* r31 = &HSD_PadLibData.rumble_info;
     struct Struct804C22E0* r30 = lbl_804C22E0;

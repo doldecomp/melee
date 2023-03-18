@@ -46,7 +46,7 @@ void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_800892A0(fighter_gobj);
@@ -150,7 +150,7 @@ void ftFox_RemoveBlaster(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->sa.fox.x222C_blasterGObj != NULL) {
@@ -176,7 +176,7 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     ftFoxAttributes* foxAttrs;
@@ -317,7 +317,7 @@ void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
@@ -393,7 +393,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
 /// @todo Unused assignment.
 #ifdef MUST_MATCH
         {
-            Fighter* unused = GET_FIGHTER(fighter_gobj);
+            Fighter* _ = GET_FIGHTER(fighter_gobj);
         }
 #endif
 
@@ -447,7 +447,7 @@ void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, fp->x2204_ftcmd_var1);
@@ -476,7 +476,7 @@ void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
@@ -554,7 +554,7 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 /// @todo Unused assignment.
 #ifdef MUST_MATCH
         {
-            Fighter* unused = GET_FIGHTER(fighter_gobj);
+            Fighter* _ = GET_FIGHTER(fighter_gobj);
         }
 #endif
 

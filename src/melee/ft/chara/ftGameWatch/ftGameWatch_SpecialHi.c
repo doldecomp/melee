@@ -112,7 +112,7 @@ void ftGameWatch_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fp->x74_anim_vel.y = 0.0f;
@@ -132,7 +132,7 @@ void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     func_8007D60C(fp);
@@ -156,7 +156,7 @@ void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     ftGameWatchAttributes* gawAttrs;
@@ -240,7 +240,7 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);

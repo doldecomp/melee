@@ -245,7 +245,7 @@ void func_80391260(struct _GObjUnkStruct* arg0)
 }
 
 struct _GObjUnkStruct {
-    u32 unused;
+    u32 _;
     GObjFuncs foo;
 };
 

@@ -13,7 +13,7 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = getFighter(fighter_gobj);
@@ -92,7 +92,7 @@ void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
@@ -152,7 +152,7 @@ void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (func_80094790(fighter_gobj) == false) {
@@ -176,7 +176,7 @@ void ftGameWatch_Attack11_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {

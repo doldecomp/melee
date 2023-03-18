@@ -91,7 +91,7 @@ static inline float my_sqrtf(float x)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4] = { 0 };
+    u8 _[4] = { 0 };
 #endif
 
     volatile float y;
@@ -122,7 +122,7 @@ void lbl_8015442C(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     func_80085134(gobj);

@@ -36,7 +36,7 @@ bool func_8008169C(HSD_GObj* fighter_gobj)
 
                 /// @todo Unused stack.
 #ifdef MUST_MATCH
-                u8 unused[8];
+                u8 _[8];
 #endif
 
                 if (env_flags) {

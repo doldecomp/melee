@@ -147,7 +147,7 @@ int main(void)
 {
 #ifdef MUST_MATCH
     char* unused_format_string = "Data %lx\n";
-    u32 unused[2];
+    u32 _[2];
 #endif
 
     OSInit();

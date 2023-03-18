@@ -47,7 +47,7 @@ void func_801530A4(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     s32 rand;
@@ -107,7 +107,7 @@ static inline float my_sqrtf(float x)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4] = { 0 };
+    u8 _[4] = { 0 };
 #endif
 
     volatile float y;
@@ -140,7 +140,7 @@ void lbl_80153254(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     func_80085134(gobj);
@@ -293,7 +293,7 @@ void func_80153730(HSD_GObj* arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(arg0, 0x16E, 0, 0, 0.0f, 1.0f, 0.0f);

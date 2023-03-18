@@ -129,7 +129,7 @@ void func_8007CB74(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     ground_normal = &fp->x6F0_collData.x14C_ground.normal;
@@ -388,7 +388,7 @@ bool func_8007D050(Fighter* fp, f32 val)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     f32 temp_f3;
@@ -402,7 +402,7 @@ bool func_8007D050(Fighter* fp, f32 val)
 
 #ifdef MUST_MATCH
     {
-        f32 unused = fabs_inline(temp_f3);
+        f32 _ = fabs_inline(temp_f3);
     }
 #endif
 
@@ -1022,7 +1022,7 @@ void func_8007E0E4(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     f32 phi_f0;
@@ -1149,7 +1149,7 @@ void func_8007E3EC(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (HSD_JObjMtxIsDirty(jobj)) {
@@ -1373,7 +1373,7 @@ void func_8007EC30(u32 arg0, u32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     while (cur != NULL) {
@@ -1448,7 +1448,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Player_SwapTransformedStates(src->xC_playerID, src->x221F_flag.bits.b4,
@@ -1600,7 +1600,7 @@ void func_8007F5CC(HSD_GObj* gobj, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (item != NULL && fp->x221E_flag.bits.b3 != arg1) {
@@ -1722,7 +1722,7 @@ void func_8007FA00(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_80294EB0(fp->x197C, &vec[1], &vec[0]);
@@ -1740,7 +1740,7 @@ void func_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
 
         /// @todo Unused stack.
 #ifdef MUST_MATCH
-        u8 unused[24];
+        u8 _[24];
 #endif
 
         if (fp2->x197C != NULL) {
@@ -1773,7 +1773,7 @@ void func_8007FC7C(HSD_GObj* gobj, f32 arg8)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = gobj->user_data;
@@ -1816,7 +1816,7 @@ void func_8007FDA0(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fp = gobj->user_data;
@@ -1836,7 +1836,7 @@ void func_8007FE84(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2, f32 arg3)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = gobj->user_data;
@@ -1909,7 +1909,7 @@ void func_80080174(Fighter* fp)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     if (fp->x197C != NULL) {
@@ -1934,7 +1934,7 @@ void func_8008021C(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp->dmg.x18BC = 0;

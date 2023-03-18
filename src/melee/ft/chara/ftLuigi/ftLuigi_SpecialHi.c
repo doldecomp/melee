@@ -27,7 +27,7 @@ void ftLuigi_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp->x2200_ftcmd_var0 = 0;
@@ -47,7 +47,7 @@ void ftLuigi_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -65,7 +65,7 @@ void ftLuigi_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -159,7 +159,7 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     if (fp->x2200_ftcmd_var0 == 0) {

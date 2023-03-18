@@ -125,7 +125,7 @@ void func_802675A8(HSD_GObj* item_gobj);
 
 void func_802676F4(HSD_GObj* item_gobj);
 
-bool func_8026784C(enum_t dropItem, int unused);
+bool func_8026784C(enum_t dropItem, int _);
 
 /// Store Item Pointers
 void func_80267978(HSD_GObj* item_gobj);

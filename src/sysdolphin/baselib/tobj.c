@@ -377,7 +377,7 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     bool no_assert = false;

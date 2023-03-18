@@ -88,7 +88,7 @@ void ftDrMario_OnLoad(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp = gobj->user_data;
@@ -145,7 +145,7 @@ void func_801497CC(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (gobj != NULL) {

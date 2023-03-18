@@ -30,7 +30,7 @@ void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->x2208_ftcmd_var2 = 0;
@@ -68,7 +68,7 @@ void lbl_80138348(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     // FrameTimerCheck
@@ -130,7 +130,7 @@ void lbl_801384F0(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
@@ -167,7 +167,7 @@ void lbl_80138638(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[32];
+    u8 _[32];
 #endif
 
     s32 num;
@@ -213,7 +213,7 @@ void lbl_8013873C(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[40];
+    u8 _[40];
 #endif
 
     if (fp->x2200_ftcmd_var0 != 0) {

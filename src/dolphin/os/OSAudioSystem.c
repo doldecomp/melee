@@ -29,7 +29,7 @@ void __OSInitAudioSystem(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     u32 r28;

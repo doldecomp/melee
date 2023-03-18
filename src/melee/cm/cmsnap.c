@@ -6,7 +6,7 @@
 typedef struct {
     int unk0;
     int unk1;
-    int unused[6];
+    int _[6];
 } _cmsnap_data;
 static _cmsnap_data cmsnap_data;
 

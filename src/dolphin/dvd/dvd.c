@@ -58,7 +58,7 @@ static DVDBuffer tmpBuffer;
 
 /// @todo Unused @c .bss.
 #ifdef MUST_MATCH
-static u8 unused[0x60];
+static u8 _[0x60];
 #endif
 
 DVDCommandBlock DummyCommandBlock;
@@ -118,7 +118,7 @@ void DVDInit(void)
     }
 }
 
-static void stateReadingFST(DVDCommandBlock* unused)
+static void stateReadingFST(DVDCommandBlock* _)
 {
     LastState = stateReadingFST;
     DVDLowRead(bootInfo->fst_start, OSRoundUp32B(tmpBuffer.FSTLength),
@@ -418,12 +418,12 @@ static void stateCheckID(void)
     }
 }
 
-static void stateCheckID3(DVDCommandBlock* unused)
+static void stateCheckID3(DVDCommandBlock* _)
 {
     DVDLowAudioBufferConfig(currID->streaming, 10, cbForStateCheckID3);
 }
 
-static void stateCheckID2(DVDCommandBlock* unused)
+static void stateCheckID2(DVDCommandBlock* _)
 {
     DVDLowRead(&tmpBuffer, sizeof(tmpBuffer), 0x420, cbForStateCheckID2);
 }

@@ -241,7 +241,7 @@ void func_8015D00C(u8 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
@@ -312,7 +312,7 @@ void func_8015D134(u8 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
@@ -360,7 +360,7 @@ void func_8015D25C(u8 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
@@ -408,7 +408,7 @@ void func_8015D384(u8 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
@@ -620,7 +620,7 @@ s32 func_8015D818(u32 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[40];
+    u8 _[40];
 #endif
 
     if ((signed) func_8015D94C(arg0) == 0) {
@@ -725,7 +725,7 @@ bool func_8015D984(u32 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     if (func_8015DA90(arg0) == 0) {

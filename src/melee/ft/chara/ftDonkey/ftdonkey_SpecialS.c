@@ -11,7 +11,7 @@ void ftDonkey_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17B, 0, NULL, 0.0f, 1.0f,
@@ -67,7 +67,7 @@ void ftDonkey_8010E35C(HSD_GObj* fighter_gobj)
     }
     func_8007CE94(fp, donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
     if (fp->x2200_ftcmd_var0 != 0) {
-        /// unused or removed code here
+        /// _ or removed code here
     }
 }
 

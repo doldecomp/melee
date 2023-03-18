@@ -142,7 +142,7 @@ void ftFox_SpecialHiHoldAir_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->foxVars.SpecialHi.gravityDelay != 0) {
@@ -323,7 +323,7 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
@@ -403,7 +403,7 @@ void ftFox_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_8007D60C(fp);
@@ -430,7 +430,7 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = getFighter(fighter_gobj);
@@ -502,7 +502,7 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     ftAttrs = &fp->x110_attr;
@@ -558,7 +558,7 @@ void ftFox_SpecialHiLanding_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
@@ -632,7 +632,7 @@ void ftFox_SpecialHiFall_Coll(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (EnvColl_CheckGroundAndLedge(fighter_gobj, CLIFFCATCH_BOTH) != false) {
@@ -697,7 +697,7 @@ void ftFox_SpecialHiBound_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);

@@ -148,7 +148,7 @@ void func_803909D8(HSD_GObj* gobj, HSD_GObj* other)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     u8 link;

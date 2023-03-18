@@ -75,7 +75,7 @@ void lbl_8014FFDC(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     if (r31_fp->sa.masterhand.x2258 == 0x186) {
@@ -196,7 +196,7 @@ void lbl_80150230(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -215,7 +215,7 @@ void lbl_80150230(HSD_GObj* gobj)
 
             /// @todo Unused stack.
 #ifdef MUST_MATCH
-            u8 unused[20];
+            u8 _[20];
 #endif
 
             func_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C,

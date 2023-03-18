@@ -99,7 +99,7 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = gobj->user_data;

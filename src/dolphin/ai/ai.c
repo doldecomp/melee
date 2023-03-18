@@ -297,7 +297,7 @@ static void __AI_SRC_INIT(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     OSTime rise48 = 0;

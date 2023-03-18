@@ -14,7 +14,7 @@ void func_80149954(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     fp = gobj->user_data;

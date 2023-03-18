@@ -109,7 +109,7 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = gobj->user_data;
@@ -134,7 +134,7 @@ void ftCLink_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = gobj->user_data;
@@ -160,7 +160,7 @@ void ftCLink_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = gobj->user_data;
@@ -181,7 +181,7 @@ void ftCLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
@@ -222,7 +222,7 @@ void func_8014919C(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = gobj->user_data;
@@ -261,7 +261,7 @@ void func_80149268(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     checkFighter2244(gobj);

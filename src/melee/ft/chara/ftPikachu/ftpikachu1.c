@@ -123,7 +123,7 @@ void ftPikachu_OnDeath(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_80074A4C(fighter_gobj, 0, 0);
@@ -154,7 +154,7 @@ void ftPikachu_8012467C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_80074A4C(fighter_gobj, 1, -1);
@@ -165,7 +165,7 @@ void ftPikachu_801246C0(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_80074A4C(fighter_gobj, 1, 0);

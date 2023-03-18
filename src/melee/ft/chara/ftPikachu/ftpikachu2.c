@@ -41,7 +41,7 @@ void ftPikachu_80124908(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->x2200_ftcmd_var0 == 1) {
@@ -78,7 +78,7 @@ void ftPikachu_80124A20(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->x2200_ftcmd_var0 == 1) {

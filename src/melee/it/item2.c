@@ -484,7 +484,7 @@ void func_8026B7F8(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     HSD_GObj *cur, *owner;
@@ -1016,7 +1016,7 @@ HSD_GObj* func_8026BE84(BobOmbRain* bobOmbRain)
         if (bobOmbGObj != NULL) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
-            u8 unused[8];
+            u8 _[8];
 #endif
 
             ip = GET_ITEM(bobOmbGObj);

@@ -40,7 +40,7 @@ bool func_800860E8(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     HSD_GObj* cur;
@@ -56,7 +56,7 @@ bool func_80086140(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     HSD_GObj* cur;
@@ -78,7 +78,7 @@ HSD_GObj* func_80086198(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (gobj != NULL)
@@ -123,7 +123,7 @@ HSD_GObj* func_8008627C(Vec3* v, HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     f32 min_dist = F32_MAX;
@@ -172,7 +172,7 @@ HSD_GObj* func_80086368(Vec3* v, HSD_GObj* gobj, f32 facing_dir)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     f32 min_diff = F32_MAX;
@@ -230,7 +230,7 @@ f32 func_800864A8(Vec3* v, HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     int result = 0;
@@ -384,7 +384,7 @@ void func_80086824(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     HSD_GObj* cur;
@@ -505,7 +505,7 @@ bool func_80086A8C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     struct {
@@ -606,7 +606,7 @@ void func_80086C9C(s32 arg0, s32 arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     HSD_GObj* cur;
@@ -623,7 +623,7 @@ void func_80086DC4(s32 arg0, s32 arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     HSD_GObj* cur;

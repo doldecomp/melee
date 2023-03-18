@@ -133,7 +133,7 @@ void ftZelda_801395C8(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     int result = func_80074A74(fighter_gobj, 1);

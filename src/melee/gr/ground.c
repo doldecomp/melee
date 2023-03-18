@@ -111,7 +111,7 @@ static u8* lbl_804D6950;
 
 static void func_801BFFA8(void) {}
 
-static void func_801BFFAC(bool unused) {}
+static void func_801BFFAC(bool _) {}
 
 static void zeroStageInfoArrays(void)
 {
@@ -128,7 +128,7 @@ void func_801BFFB0(void)
 {
     /// @todo Unused stack
 #ifdef MUST_MATCH
-    u32 unused[2];
+    u32 _[2];
 #endif
 
     func_801C6288();
@@ -467,10 +467,10 @@ static bool func_801C0A70(Vec3* pos)
             ONETT,
             FOURSIDE,
             // ICEMTN disabled
-            // id 0x17 unused/unknown?
+            // id 0x17 _/unknown?
             INISHIE1,
             INISHIE2,
-            // id 0x1A unused/unknown?
+            // id 0x1A _/unknown?
             // FLATZONE disabled
             OLDPUPUPU,
             OLDYOSHI,
@@ -483,9 +483,9 @@ static bool func_801C0A70(Vec3* pos)
         enum_t player_slot;
         size_t nstages = sizeof(enabled_stages) / sizeof(enabled_stages[0]);
 
-        /// @todo Fix unused stack
+        /// @todo Fix _ stack
 #ifdef MUST_MATCH
-        u32 unused[5];
+        u32 _[5];
 #endif
 
         size_t i;
@@ -1283,7 +1283,7 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
 
     /// @todo Unused stack
 #ifdef MUST_MATCH
-    u32 unused;
+    u32 _;
 #endif
 
     HSD_Joint sp18;
@@ -1358,7 +1358,7 @@ static void func_801C1CD0(HSD_GObj* gobj)
 {
     /// @todo Unused stack space
 #ifdef MUST_MATCH
-    u32 unused[2];
+    u32 _[2];
 #endif
 
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -2263,7 +2263,7 @@ bool func_801C2D24(enum_t arg0, Vec3* arg1)
 
     /// @todo Unused stack
 #ifdef MUST_MATCH
-    u32 unused;
+    u32 _;
 #endif
 
     if (arg0 == 8) {
@@ -2318,7 +2318,7 @@ bool func_801C2ED0(HSD_JObj* jobj, s32 arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     bool result = false;
@@ -2542,7 +2542,7 @@ s32 func_801C32D4(s32 arg0, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     s32 result;
@@ -2589,7 +2589,7 @@ s32 func_801C33C0(s32 arg0, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     s32 result;
@@ -3214,7 +3214,7 @@ void func_801C3BB4(void)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     f32 lft;
@@ -3537,7 +3537,7 @@ s32 func_801C4210(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo With a hard-coded range for @c i, very unlikely it's not returning
@@ -3640,7 +3640,7 @@ void func_801C445C(HSD_LObj* lobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     HSD_WObj* wobj;
@@ -3996,7 +3996,7 @@ void func_801C4A08(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     if (gobj == NULL)
@@ -4713,7 +4713,7 @@ int func_801C5940(void)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     int vals[vals_count];

@@ -126,7 +126,7 @@ void ftIceClimber_OnLoad(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -226,7 +226,7 @@ void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);

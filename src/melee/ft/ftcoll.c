@@ -3118,7 +3118,7 @@ void func_80078A2C(HSD_GObj* this_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
     u32 i;
     HitCapsule* this_hit;
