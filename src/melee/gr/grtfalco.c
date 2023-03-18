@@ -15,14 +15,14 @@
         lbl_802209B0,
         lbl_802209B8,
         lbl_802209BC,
-        FLAGS_ZERO,
+        0,
     },
     {
         lbl_80220A50,
         lbl_80220AA0,
         lbl_80220AA8,
         lbl_80220AC8,
-        FLAGS_ZERO,
+        0,
     },
     {
         lbl_802209C0,

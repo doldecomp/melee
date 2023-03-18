@@ -203,7 +203,7 @@ extern f32 const lbl_804D983C;
 void ftIceClimber_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
-    fp->x2210_ThrowFlags.flags = FLAGS_ZERO;
+    fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->sa.nana.x222C = 0;
 
@@ -226,7 +226,7 @@ void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
     ftIceClimberAttributes* icattr = fp->x2D4_specialAttributes;
 
-    fp->x2210_ThrowFlags.flags = FLAGS_ZERO;
+    fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->sa.nana.x222C = 0;
 

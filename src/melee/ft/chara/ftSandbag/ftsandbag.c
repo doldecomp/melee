@@ -8,7 +8,7 @@
 #include <melee/lb/lbunknown_001.h>
 
 ActionState as_table_sandbag[] = {
-    { 295, FLAGS_ZERO, 0x01400000, func_8014FC20, func_8014FC24, func_8014FC28,
+    { 295, 0, 0x01400000, func_8014FC20, func_8014FC24, func_8014FC28,
       func_8014FC48, func_800761C8 },
 };
 

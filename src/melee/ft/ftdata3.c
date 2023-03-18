@@ -167,7 +167,7 @@ ActionState ActionStateList[] = {
     {
         // 14
         2,
-        FLAGS_ZERO,
+        0,
         0x01C00000,
         func_8008A494,
         func_8008A4D4,
@@ -266,7 +266,7 @@ ActionState ActionStateList[] = {
     {
         // 23
         14,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_800CAC9C,
         func_800CADB0,
@@ -277,7 +277,7 @@ ActionState ActionStateList[] = {
     {
         // 24
         15,
-        FLAGS_ZERO,
+        0,
         0x01C00000,
         func_800CB528,
         func_800CB5FC,
@@ -332,7 +332,7 @@ ActionState ActionStateList[] = {
     {
         // 29
         20,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_800CCA00,
         func_800CCD34,
@@ -343,7 +343,7 @@ ActionState ActionStateList[] = {
     {
         // 30
         -1,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_800CCA00,
         func_800CCD34,
@@ -354,7 +354,7 @@ ActionState ActionStateList[] = {
     {
         // 31
         -1,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_800CCA00,
         func_800CCD34,
@@ -365,7 +365,7 @@ ActionState ActionStateList[] = {
     {
         // 32
         23,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_800CCDFC,
         func_800CCE50,
@@ -376,7 +376,7 @@ ActionState ActionStateList[] = {
     {
         // 33
         24,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_800CCA00,
         func_800CCE50,
@@ -387,7 +387,7 @@ ActionState ActionStateList[] = {
     {
         // 34
         25,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_800CCA00,
         func_800CCE50,
@@ -398,7 +398,7 @@ ActionState ActionStateList[] = {
     {
         // 35
         26,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_80096AA0,
         func_80096AF4,
@@ -409,7 +409,7 @@ ActionState ActionStateList[] = {
     {
         // 36
         27,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_80096AA0,
         func_80096AF4,
@@ -420,7 +420,7 @@ ActionState ActionStateList[] = {
     {
         // 37
         28,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_80096AA0,
         func_80096AF4,
@@ -475,7 +475,7 @@ ActionState ActionStateList[] = {
     {
         // 42
         35,
-        FLAGS_ZERO,
+        0,
         0x01400000,
         func_800D5D3C,
         func_800D5D78,
@@ -486,7 +486,7 @@ ActionState ActionStateList[] = {
     {
         // 43
         36,
-        FLAGS_ZERO,
+        0,
         0x01400000,
         func_800D5D3C,
         func_800D5D78,
@@ -3269,7 +3269,7 @@ ActionState ActionStateList[] = {
     {
         // 296
         16,
-        FLAGS_ZERO,
+        0,
         0x01800000,
         func_800C1460,
         func_800C14B0,
@@ -3599,7 +3599,7 @@ ActionState ActionStateList[] = {
     {
         // 326
         20,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         func_80091988,
         func_800919D8,
@@ -3766,7 +3766,7 @@ ActionState ActionStateList[] = {
 ActionState lbl_803C52A0[] = {
     {
         0x0,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         func_800BED84,
         0x00000000,
@@ -3776,7 +3776,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0x1,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,
@@ -3786,7 +3786,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0x2,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         func_800BEF00,
         0x00000000,
@@ -3796,7 +3796,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0x3,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,
@@ -3806,7 +3806,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0x4,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,
@@ -3816,7 +3816,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0x5,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         func_800BEFD0,
         0x00000000,
@@ -3826,7 +3826,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0x6,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,
@@ -3836,7 +3836,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0x7,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,
@@ -3846,7 +3846,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0x8,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,
@@ -3856,7 +3856,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0x9,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,
@@ -3866,7 +3866,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0xA,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,
@@ -3876,7 +3876,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0xB,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,
@@ -3886,7 +3886,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0xC,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,
@@ -3896,7 +3896,7 @@ ActionState lbl_803C52A0[] = {
     },
     {
         0xD,
-        FLAGS_ZERO,
+        0,
         0x01000000,
         0x00000000,
         0x00000000,

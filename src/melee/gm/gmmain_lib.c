@@ -623,7 +623,7 @@ s32 func_8015D818(u32 arg0)
     u8 unused[40];
 #endif
 
-    if ((signed) func_8015D94C(arg0) == FLAGS_ZERO) {
+    if ((signed) func_8015D94C(arg0) == 0) {
         struct gmm_x1868* base = &lbl_804D3EE0->thing;
         u32* q = &base->x1B80[arg0];
         *q = func_8000AFBC();
@@ -728,7 +728,7 @@ bool func_8015D984(u32 arg0)
     u8 unused[16];
 #endif
 
-    if (func_8015DA90(arg0) == FLAGS_ZERO) {
+    if (func_8015DA90(arg0) == 0) {
         u32* base = &lbl_804D3EE0->x6C[0];
         u32* qwe = &base[arg0];
         *qwe = func_8000AFBC();

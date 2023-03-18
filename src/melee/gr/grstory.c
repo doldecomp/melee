@@ -18,9 +18,9 @@
 extern StageInfo stage_info;
 
 static StageCallbacks lbl_803E26F0[4] = {
-    { NULL, NULL, NULL, NULL, FLAGS_ZERO },
-    { func_801E31C0, func_801E3224, func_801E322C, func_801E3230, FLAGS_ZERO },
-    { func_801E3370, func_801E33D8, func_801E33E0, func_801E3414, FLAGS_ZERO },
+    { NULL, NULL, NULL, NULL, 0 },
+    { func_801E31C0, func_801E3224, func_801E322C, func_801E3230, 0 },
+    { func_801E3370, func_801E33D8, func_801E33E0, func_801E3414, 0 },
     { func_801E3234, func_801E332C, func_801E3334, func_801E336C,
       (1 << 30) | (1 << 31) },
 };

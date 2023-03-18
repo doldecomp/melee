@@ -10,12 +10,12 @@
 #include <melee/lb/lbmthp.h>
 
 ActionState as_table_peach[] = {
-    { 295, FLAGS_ZERO, 0x01000000, ftPeach_8011BC38, ftPeach_8011BC8C,
-      ftPeach_8011BD18, ftPeach_8011BD3C, func_800761C8 },
-    { 296, FLAGS_ZERO, 0x01000000, ftPeach_8011BDF0, ftPeach_8011BE2C,
-      ftPeach_8011BE30, ftPeach_8011BE50, func_800761C8 },
-    { 297, FLAGS_ZERO, 0x01000000, ftPeach_8011BDF0, ftPeach_8011BE2C,
-      ftPeach_8011BE30, ftPeach_8011BE50, func_800761C8 },
+    { 295, 0, 0x01000000, ftPeach_8011BC38, ftPeach_8011BC8C, ftPeach_8011BD18,
+      ftPeach_8011BD3C, func_800761C8 },
+    { 296, 0, 0x01000000, ftPeach_8011BDF0, ftPeach_8011BE2C, ftPeach_8011BE30,
+      ftPeach_8011BE50, func_800761C8 },
+    { 297, 0, 0x01000000, ftPeach_8011BDF0, ftPeach_8011BE2C, ftPeach_8011BE30,
+      ftPeach_8011BE50, func_800761C8 },
     { 68, 0x0024040C, 0x0D000000, ftPeach_8011BF88, ftPeach_8011C044,
       ftPeach_8011C160, ftPeach_8011C198, func_800761C8 },
     { 69, 0x0024040D, 0x0E000000, ftPeach_8011BF88, ftPeach_8011C044,

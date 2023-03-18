@@ -832,7 +832,7 @@ void ftSeak_80111830(HSD_GObj* fighter_gobj)
             s32 flags =
                 ftNess_YoyoCheckEnvColl(fighter_gobj, &vec0, &vec1, 0.5F);
 
-            if (flags != FLAGS_ZERO)
+            if (flags != 0)
                 ftSeak_80111DF8(fighter_gobj);
         }
     }

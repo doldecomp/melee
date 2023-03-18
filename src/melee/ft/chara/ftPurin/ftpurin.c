@@ -20,15 +20,15 @@
 #include <sysdolphin/baselib/gobj.h>
 
 ActionState as_table_purin[] = {
-    { 295, FLAGS_ZERO, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
+    { 295, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
-    { 296, FLAGS_ZERO, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
+    { 296, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
-    { 297, FLAGS_ZERO, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
+    { 297, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
-    { 298, FLAGS_ZERO, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
+    { 298, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
-    { 299, FLAGS_ZERO, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
+    { 299, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
     { 300, 0x00340211, 0x12000000, lbl_8013E014, lbl_8013FF00, lbl_80140620,
       lbl_80140FA4, func_800761C8 },

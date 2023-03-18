@@ -162,17 +162,11 @@ typedef void (*Event)(void);
 #define S32_MAX 0x7FFFFFFF
 #define F32_MAX 3.4028235E38
 
-/// @deprecated Use a literal 0.
-#define FLAGS_ZERO 0
-
 /// @deprecated Use raw bit manipulation.
 #define FLAGS_ANY(value, flag) ((value) & (flag))
 
 /// @deprecated Use raw bit manipulation.
 #define FLAGS_NONE(value, flag) (!((value) & (flag)))
-
-/// @deprecated Use raw bit manipulation.
-#define FLAGS_ALL(value, flag) (((value) & (flag)) == (flag))
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 
