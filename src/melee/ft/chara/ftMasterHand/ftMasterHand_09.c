@@ -1,12 +1,13 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_09.h>
+#include "ftMasterHand_09.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_08.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftlib.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mplib.h>
+#include "ftMasterHand.h"
+#include "ftMasterHand_08.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
+#include "ft/ftlib.h"
+#include "lb/lbvector.h"
+#include "mp/mplib.h"
 
 // 80151D20 14E900
 // https://decomp.me/scratch/wVowU
@@ -82,7 +83,12 @@ static inline float my_sqrtf(float x)
 {
     static const double _half = .5;
     static const double _three = 3.0;
-    s32 unused = 0; // fakematch
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4] = { 0 };
+#endif
+
     volatile float y;
     if (x > 0.0f) {
         double guess = __frsqrte((double) x); // returns an approximation to
@@ -107,12 +113,16 @@ void lbl_80151F00(HSD_GObj* gobj)
 {
     Vec3 sp28;
     Vec3 sp1C_resultVector;
-    Fighter* r31_fp;
-    MasterHandAttributes* r30_attributes;
-    s32 unk2[1];
 
-    r31_fp = gobj->user_data;
-    r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    /// @todo #GET_FIGHTER uses slightly too much stack; inline issue.
+    Fighter* r31_fp = gobj->user_data;
+    MasterHandAttributes* r30_attributes = r31_fp->x10C_ftData->ext_attr;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     func_800866DC(func_8015C244(gobj, &r31_fp->xB0_pos), &sp28);
     lbvector_Diff(&sp28, &r31_fp->xB0_pos, &sp1C_resultVector);
 

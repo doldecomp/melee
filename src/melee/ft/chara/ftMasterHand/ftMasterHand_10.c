@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_10.h>
+#include "ftMasterHand_10.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
+#include "ftMasterHand.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
 
 // 80152138 14ED18
 // https://decomp.me/scratch/NAMEj
@@ -36,10 +37,13 @@ void lbl_801521D8(HSD_GObj* arg0) {}
 // https://decomp.me/scratch/0Dq4d
 void lbl_801521DC(HSD_GObj* arg0)
 {
-    Fighter* temp_r31;
-    s32 unk[2];
+    Fighter* temp_r31 = GET_FIGHTER(arg0);
 
-    temp_r31 = arg0->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter_ActionStateChange_800693AC(arg0, 0x162, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
     temp_r31->masterhandVars.x2340_unk = 107.0f;

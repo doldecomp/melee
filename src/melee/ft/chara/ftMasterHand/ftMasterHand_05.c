@@ -1,21 +1,18 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_05.h>
+#include "ftMasterHand_05.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ftMasterHand.h"
+#include "ftMasterHand_34.h"
+
+#include "ft/ft_unknown_006.h"
+#include "ft/ftbosslib.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbunknown_001.h"
 
 u32 lbl_80151428(Vec3* vec)
 {
-    HSD_GObj* fetched_gobj;
-    // Fighter* ft_userdata;
+    HSD_GObj* fetched_gobj = func_8015C3E8(0x1B);
 
-    fetched_gobj = func_8015C3E8(0x1B);
-
-    // ft_userdata = ((Fighter*) temp_r3->user_data);
     if (fetched_gobj) {
         func_8000B1CC(
             ((Fighter*) fetched_gobj->user_data)->x5E8_fighterBones[5].x0_jobj,
@@ -55,10 +52,12 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
 
 void func_80151484(HSD_GObj* gobj)
 {
-    s32 unused[2];
-    Fighter* r3_fp;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
-    r3_fp = gobj->user_data;
+    Fighter* r3_fp = GET_FIGHTER(gobj);
     r3_fp->x2200_ftcmd_var0 = 0;
 
     func_80151484_inline1(gobj);
@@ -119,14 +118,12 @@ void lbl_801515B8(HSD_GObj* gobj)
 void lbl_801516B4(HSD_GObj* gobj)
 {
     f32 temp_f1;
-    s32 temp_cr0_eq;
     s32 temp_r0;
     s32 temp_r3;
     s32 temp_r3_2;
-    Fighter* r31_fp;
     MasterHandAttributes* r4_attributes;
+    Fighter* r31_fp = GET_FIGHTER(gobj);
 
-    r31_fp = gobj->user_data;
     if ((u32) r31_fp->x2200_ftcmd_var0 != 0U) {
         r4_attributes = r31_fp->x10C_ftData->ext_attr;
         temp_r3 = r31_fp->x23B4 + 1;
