@@ -1,13 +1,13 @@
-#include <melee/ft/chara/ftPeach/ftpeach.h>
+#include "ftpeach.h"
 
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/itkind.h>
-#include <melee/lb/lbmthp.h>
+#include "ft/forward.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftdata.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "it/itkind.h"
+#include "lb/lbmthp.h"
 
 ActionState as_table_peach[] = {
     { 295, 0, 0x01000000, ftPeach_8011BC38, ftPeach_8011BC8C, ftPeach_8011BD18,
@@ -202,7 +202,11 @@ void ftPeach_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
 
 void ftPeach_8011B93C(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     s32 result = func_80074A74(fighter_gobj, 2);
 
     if (result == -1)
