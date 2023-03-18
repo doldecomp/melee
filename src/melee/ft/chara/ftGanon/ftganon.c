@@ -5,6 +5,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/ftCaptain.h"
+#include "ftCaptain/ftCaptain_SpecialN.h"
 #include "ftCaptain/ftCaptain_SpecialS.h"
 
 ActionState as_table_ganon[] = {

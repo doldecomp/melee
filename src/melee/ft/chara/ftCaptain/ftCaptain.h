@@ -111,19 +111,6 @@ void ftCaptain_OnItemVisible(HSD_GObj* fighter_gobj);
 void ftCaptain_OnItemDrop(HSD_GObj* fighter_gobj, bool unk1);
 void ftCaptain_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 
-// Neutral Special - Falcon/Warlock Punch (SpecialN)
-
-void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialN_Anim(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirN_Anim(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialN_IASA(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj);
-
 void ftCaptain_LoadSpecialAttrs(HSD_GObj*);
 void ftCaptain_SpecialAirHi_StartAction(HSD_GObj*);
 void ftCaptain_SpecialAirLw_StartAction(HSD_GObj*);

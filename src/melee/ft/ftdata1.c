@@ -5,6 +5,7 @@
 #include "types.h"
 
 #include "ftCaptain/ftCaptain.h"
+#include "ftCaptain/ftCaptain_SpecialN.h"
 #include "ftCaptain/ftCaptain_SpecialS.h"
 #include "ftCLink/ftclink.h"
 #include "ftCrazyHand/ftcrazyhand.h"
