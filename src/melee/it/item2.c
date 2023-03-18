@@ -1276,7 +1276,6 @@ void func_8026C3FC(void)
 void func_8026C42C(void)
 {
     HSD_GObj* cur;
-
     for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
 
