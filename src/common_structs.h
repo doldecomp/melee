@@ -17,25 +17,27 @@
 // HSD_PAD
 /// @todo @c PascalCase members
 typedef enum HSD_Buttons {
-    HSD_BUTTON_DPAD_LEFT = (1 << 0),
-    HSD_BUTTON_DPAD_RIGHT = (1 << 1),
-    HSD_BUTTON_DPAD_DOWN = (1 << 2),
-    HSD_BUTTON_DPAD_UP = (1 << 3),
-    HSD_BUTTON_Z = (1 << 4),
-    HSD_BUTTON_R = (1 << 5),
-    HSD_BUTTON_L = (1 << 6),
+    HSD_BUTTON_DPAD_LEFT = 1 << 0,
+    HSD_BUTTON_DPAD_RIGHT = 1 << 1,
+    HSD_BUTTON_DPAD_DOWN = 1 << 2,
+    HSD_BUTTON_DPAD_UP = 1 << 3,
+    HSD_BUTTON_Z = 1 << 4,
+    HSD_BUTTON_R = 1 << 5,
+    HSD_BUTTON_L = 1 << 6,
+    HSD_BUTTON_UNK_7 = 1 << 7,
 
     /// @remarks Also covers Z-Button macro in-game.
-    HSD_BUTTON_A = (1 << 8),
+    HSD_BUTTON_A = 1 << 8,
 
-    HSD_BUTTON_B = (1 << 9),
-    HSD_BUTTON_AB = (HSD_BUTTON_A | HSD_BUTTON_B),
-    HSD_BUTTON_X = (1 << 10),
-    HSD_BUTTON_Y = (1 << 11),
-    HSD_BUTTON_START = (1 << 12),
+    HSD_BUTTON_B = 1 << 9,
+    HSD_BUTTON_X = 1 << 10,
+    HSD_BUTTON_Y = 1 << 11,
+    HSD_BUTTON_START = 1 << 12,
 
     /// Digital input of either L or R
-    HSD_BUTTON_LR = (1 << 31),
+    HSD_BUTTON_LR = 1 << 31,
+
+    HSD_BUTTON_AB = HSD_BUTTON_A | HSD_BUTTON_B,
 } HSD_Buttons;
 
 // COLLISION FLAGS
