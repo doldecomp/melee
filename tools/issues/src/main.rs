@@ -32,11 +32,11 @@ impl std::fmt::Display for Severity {
 impl Severity {
     fn to_static_string(&self) -> &'static str {
         match &self {
-            Severity::Ignored => "ignored",
-            Severity::Note => "note",
-            Severity::Warning => "warning",
-            Severity::Error => "error",
-            Severity::Fatal => "fatal",
+            Severity::Ignored => "Ignored",
+            Severity::Note => "Note",
+            Severity::Warning => "Warning",
+            Severity::Error => "Error",
+            Severity::Fatal => "Fatal",
         }
     }
 }
@@ -71,7 +71,26 @@ struct DiagnosticInfo {
     spelling: SymbolU32,
 }
 
-fn main() -> anyhow::Result<()> {
+fn main() -> ! {
+    let code = match process_issues() {
+        Ok(0) => {
+            println!("Issues: OK");
+            exitcode::OK
+        }
+        Ok(count) => {
+            eprintln!("Issues: {}", count);
+            exitcode::DATAERR
+        }
+        Err(e) => {
+            eprintln!("Error: {}", e);
+            exitcode::IOERR
+        }
+    };
+
+    std::process::exit(code);
+}
+
+fn process_issues() -> anyhow::Result<usize> {
     env_logger::builder().format_timestamp_nanos().init();
     set_current_dir()?;
 
@@ -98,8 +117,11 @@ fn main() -> anyhow::Result<()> {
 
     let paths_map = map_paths(&str_interner, &items)?;
     let items = sort_info(items, paths_map, &str_interner);
+    let count = items.len();
 
-    print_info(items, &str_interner)
+    print_info(items, &str_interner)?;
+
+    Ok(count)
 }
 
 fn set_current_dir() -> anyhow::Result<()> {
