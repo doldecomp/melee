@@ -67,7 +67,7 @@ void ftDonkey_8010E35C(HSD_GObj* fighter_gobj)
     }
     func_8007CE94(fp, donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
     if (fp->x2200_ftcmd_var0 != 0) {
-        /// _ or removed code here
+        /// @todo Fix control flow.
     }
 }
 
