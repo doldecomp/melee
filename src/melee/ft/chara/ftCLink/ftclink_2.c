@@ -1,10 +1,11 @@
 #include "ftclink_2.h"
 
+#include "ftclink.h"
+
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftanim.h"
 #include "ft/ftparts.h"
-#include "ftCLink/ftclink.h"
 #include "ftLink/ftlink.h"
 #include "it/code_8027CF30.h"
 
