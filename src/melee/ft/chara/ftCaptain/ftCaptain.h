@@ -1,47 +1,12 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_H
 #define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_H
 
+#include "forward.h"
+
 #include "ft/fighter.h"
 
 #include <baselib/gobj.h>
 #include <platform.h>
-
-typedef enum ftCaptainAction {
-    AS_CAPTAIN_SWING42_SWORD = ASID_MAX,
-    AS_CAPTAIN_SWING42_2,
-    AS_CAPTAIN_SWING42_3,
-    AS_CAPTAIN_SWING42_4,
-    AS_CAPTAIN_SWING42_5,
-    AS_CAPTAIN_SWING42_6,
-    AS_CAPTAIN_SPECIALN,
-    AS_CAPTAIN_SPECIALAIRN,
-    AS_CAPTAIN_SPECIALS_START,
-    AS_CAPTAIN_SPECIALS,
-    AS_CAPTAIN_SPECIALAIRS_START,
-    AS_CAPTAIN_SPECIALAIRS,
-    AS_CAPTAIN_SPECIALHI,
-    AS_CAPTAIN_SPECIALAIRHI,
-    AS_CAPTAIN_SPECIALHI_CATCH,
-    AS_CAPTAIN_SPECIALHI_THROW,
-} ftCaptainAction;
-
-// Flags used by Captain Falcon and Ganondorf in ActionStateChange
-
-// SpecialN/SpecialAirN (Falcon / Warlock Punch)
-#define FTCAPTAIN_SPECIALN_COLL_FLAG                                           \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
-        FtStateChange_SkipUpdateRumble | FtStateChange_UpdateCmd |             \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |    \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
-
-// SpecialS/SpecialAirS (Raptor Boost / Gerudo Dragon)
-#define FTCAPTAIN_SPECIALS_FLAG                                                \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |            \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
-        FtStateChange_SkipUpdateModelPartVis |                                 \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 typedef struct _ftCaptainAttributes {
     f32 x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG; // Minimum control stick range
@@ -104,7 +69,7 @@ extern Fighter_DemoStrings lbl_803C772C;
 
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj);
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj);
-void lbl_800E28C8(HSD_GObj* fighter_gobj);
+void ftCaptain_800E28C8(HSD_GObj* fighter_gobj);
 void ftCaptain_OnItemPickup(HSD_GObj* fighter_gobj, bool unk_var);
 void ftCaptain_OnItemInvisible(HSD_GObj* fighter_gobj);
 void ftCaptain_OnItemVisible(HSD_GObj* fighter_gobj);

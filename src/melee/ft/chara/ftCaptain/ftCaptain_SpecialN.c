@@ -1,5 +1,6 @@
 #include "ftCaptain_SpecialN.h"
 
+#include "ft/types.h"
 #include "ftCaptain.h"
 
 #include "ef/eflib.h"
@@ -228,14 +229,21 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
     }
 }
 
+static Fighter_ActionStateChangeFlags const transition_flags =
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |
+    FtStateChange_SkipUpdateRumble | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
+    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
+
 void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
 {
     if (func_800827A0(fighter_gobj) == false) {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_CAPTAIN_SPECIALAIRN, FTCAPTAIN_SPECIALN_COLL_FLAG,
-            NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+            fighter_gobj, AS_CAPTAIN_SPECIALAIRN, transition_flags, NULL,
+            fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         func_8007D468(fp);
@@ -248,8 +256,8 @@ void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
         Fighter* fp = GET_FIGHTER(fighter_gobj);
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_CAPTAIN_SPECIALN, FTCAPTAIN_SPECIALN_COLL_FLAG,
-            NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+            fighter_gobj, AS_CAPTAIN_SPECIALN, transition_flags, NULL,
+            fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }

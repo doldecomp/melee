@@ -102,7 +102,7 @@ void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
     fp->sa.captain.x222C_isSpecialSStartGFX = 0;
 }
 
-void lbl_800E28C8(HSD_GObj* fighter_gobj)
+void ftCaptain_800E28C8(HSD_GObj* fighter_gobj)
 {
     ftCaptain_SpecialS_RemoveGFX(fighter_gobj);
 }

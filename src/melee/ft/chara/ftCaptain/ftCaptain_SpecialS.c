@@ -1,5 +1,6 @@
 #include "ftCaptain_SpecialS.h"
 
+#include "ft/types.h"
 #include "ftCaptain.h"
 
 #include "ef/eflib.h"
@@ -25,8 +26,8 @@ void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
 inline void ftCaptain_SpecialS_SetCall(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = &lbl_800E28C8;
-    fp->cb.x21E4_callback_OnDeath2 = &lbl_800E28C8;
+    fp->cb.x21DC_callback_OnTakeDamage = &ftCaptain_800E28C8;
+    fp->cb.x21E4_callback_OnDeath2 = &ftCaptain_800E28C8;
 }
 
 // 0x800E32B0
@@ -115,14 +116,21 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     func_8007D60C(fp);
 }
 
+static Fighter_ActionStateChangeFlags const transition_flags =
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |
+    FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |
+    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
+    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
+    FtStateChange_Unk_27;
+
 inline void ftCaptain_SpecialS_Switch0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS,
-                                       FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0f,
-                                       1.0f, 0.0f);
+                                       transition_flags, NULL, 0.0f, 1.0f,
+                                       0.0f);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     fp->x80_self_vel.z = 0.0f;
     fp->x80_self_vel.y = 0.0f;
@@ -135,8 +143,8 @@ inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS,
-                                       FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0f,
-                                       1.0f, 0.0f);
+                                       transition_flags, NULL, 0.0f, 1.0f,
+                                       0.0f);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     fp->x80_self_vel.z = 0.0f;
     fp->x80_self_vel.y = 0.0f;
@@ -147,8 +155,8 @@ inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRS,
-                                       FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0f,
-                                       1.0f, 0.0f);
+                                       transition_flags, NULL, 0.0f, 1.0f,
+                                       0.0f);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     fp->x80_self_vel.z = 0.0f;
 }
@@ -179,8 +187,8 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
                 captainAttrs = getFtSpecialAttrsD(fp);
                 func_8007D7FC(fp);
                 Fighter_ActionStateChange_800693AC(
-                    fighter_gobj, AS_CAPTAIN_SPECIALS, FTCAPTAIN_SPECIALS_FLAG,
-                    NULL, 0.0f, 1.0f, 0.0f);
+                    fighter_gobj, AS_CAPTAIN_SPECIALS, transition_flags, NULL,
+                    0.0f, 1.0f, 0.0f);
                 ftCaptain_SpecialS_SetCall(fighter_gobj);
                 fp->x80_self_vel.z = 0.0f;
                 fp->x80_self_vel.y = 0.0f;
@@ -190,8 +198,8 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
 
             case AS_CAPTAIN_SPECIALAIRS_START:
                 Fighter_ActionStateChange_800693AC(
-                    fighter_gobj, AS_CAPTAIN_SPECIALAIRS,
-                    FTCAPTAIN_SPECIALS_FLAG, NULL, 0.0f, 1.0f, 0.0f);
+                    fighter_gobj, AS_CAPTAIN_SPECIALAIRS, transition_flags,
+                    NULL, 0.0f, 1.0f, 0.0f);
                 ftCaptain_SpecialS_SetCall(fighter_gobj);
                 fp->x80_self_vel.z = 0.0f;
                 return;
