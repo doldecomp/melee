@@ -1,10 +1,10 @@
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include "ftgamewatch.h"
 
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj);
 static void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fighter_gobj);
@@ -165,7 +165,11 @@ static inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* fighter_gobj)
 void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 asid;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     GET_FIGHTER(fighter_gobj)->x80_self_vel.y = 0.0f;
 
@@ -184,7 +188,11 @@ void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
-    s32 asid;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     GET_FIGHTER(fighter_gobj)->x80_self_vel.x /=
         gawAttrs->x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE;
@@ -246,7 +254,11 @@ void ftGameWatch_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     u32 ftcmd_var = fp->x2200_ftcmd_var0;
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
-    f32 ftGameWatchPhys[4];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     if (ftcmd_var >= 1U) {
         if (ftcmd_var == 1) {
@@ -304,7 +316,11 @@ static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* fighter_gobj)
 static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 ASID;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     func_8007D5D4(fp);
     !fighter_gobj;
@@ -322,7 +338,11 @@ static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 ASID;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     fp->sa.gaw.x2234 = 0;
     func_8007D7FC(fp);

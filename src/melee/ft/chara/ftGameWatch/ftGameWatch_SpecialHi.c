@@ -1,12 +1,12 @@
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include "ftgamewatch.h"
 
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj);
 static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj);
@@ -154,9 +154,12 @@ void ftGameWatch_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     ftGameWatchAttributes* gawAttrs;
-    f32 temp;
 
     gawAttrs = (GET_FIGHTER(fighter_gobj))->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {

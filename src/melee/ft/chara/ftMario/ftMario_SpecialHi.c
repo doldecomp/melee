@@ -1,10 +1,11 @@
-#include <melee/ft/chara/ftMario/ftmario.h>
+#include "ftmario.h"
 
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/itkind.h>
-#include <sysdolphin/baselib/random.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftparts.h"
+#include "it/itkind.h"
+
+#include <baselib/random.h>
 
 void ftMario_SpecialHi_StartAction(HSD_GObj* gobj)
 {
@@ -22,7 +23,11 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMarioAttributes* sa;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
     u8 unused[4];
+#endif
 
     fp = GET_FIGHTER(gobj);
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
@@ -53,7 +58,11 @@ void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
 // 0x800E1B84
 void ftMario_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
     u8 unused[8];
+#endif
+
     ftMario_SpecialHi_Anim(gobj);
 }
 
@@ -124,7 +133,11 @@ void ftMario_SpecialHi_IASA(HSD_GObj* gobj)
 // 0x800E1D2C
 void ftMario_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
-    u8 padding[16];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
     ftMario_SpecialHi_CalcAngle(gobj);
 }
 

@@ -1,16 +1,18 @@
-#include <melee/ft/chara/ftIceClimber/fticeclimber1.h>
+#include "fticeclimber1.h"
 
-#include <melee/ft/chara/ftIceClimber/fticeclimber.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
-#include <sysdolphin/baselib/gobj.h>
+#include "fticeclimber.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/forward.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
+
+#include <baselib/gobj.h>
 
 ActionState as_table_iceclimber[] = {
     { 295, 0x00340111, 0x12800000, lbl_8011F318, lbl_8011F390, lbl_8011F398,
@@ -122,7 +124,11 @@ void ftIceClimber_OnLoadForNana(Fighter* fp)
 
 void ftIceClimber_OnLoad(HSD_GObj* fighter_gobj)
 {
-    s32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     void** item_list = fp->x10C_ftData->x48_items;
     fp->x2222_flag.bits.b5 = 1;

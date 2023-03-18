@@ -1,11 +1,12 @@
-#include <melee/ft/chara/ftGameWatch/ftGameWatch_SpecialN.h>
+#include "ftGameWatch_SpecialN.h"
 
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ftgamewatch.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 f32 ftGameWatch_SpecialN_SetFloatOrder1(void)
 {
@@ -142,9 +143,13 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
     s32 temp_r5;
     s32 temp_r6;
     s32 randomInt;
-    s32 var2;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     s32 sausageCount[5];
-    s32 var;
     ftGameWatchAttributes* gawAttrs;
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -240,8 +245,10 @@ static inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_SpecialN_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
-    ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[20];
+#endif
 
     ftGameWatch_SpecialN_ChefLoop(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -271,8 +278,10 @@ static inline void ftGameWatch_SpecialAirN_ChefLoop(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
-    ftGameWatchAttributes* gawAttrs = getFtSpecialAttrsD(fp);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[20];
+#endif
 
     ftGameWatch_SpecialAirN_ChefLoop(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
@@ -386,7 +395,11 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 {
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirN_Loop.
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-    f32 var;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN,
                                        FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
@@ -413,7 +426,11 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 void ftGameWatch_SpecialAirN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-    f32 var;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN,
                                        FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,

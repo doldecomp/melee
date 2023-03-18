@@ -1,15 +1,15 @@
-#include <melee/ft/chara/ftLink/ftlink.h>
+#include "ftlink.h"
 
-#include <melee/ft/chara/ftCLink/ftclink.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/lb/lbmthp.h>
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/forward.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftdata.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCLink/ftclink.h"
+#include "lb/lbmthp.h"
 
 ActionState as_table_link[] = {
     { 295, 0x00240009, 0x0A000000, func_800CEDE0, func_800CEE00, func_800CEE30,
@@ -192,7 +192,11 @@ void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 
 void ftLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 

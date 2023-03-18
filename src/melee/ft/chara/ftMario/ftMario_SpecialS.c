@@ -1,15 +1,17 @@
-#include <melee/ft/chara/ftMario/ftMario_SpecialS.h>
+#include "ftMario_SpecialS.h"
 
-#include <melee/ft/chara/ftMario/ftmario.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/it/itkind.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/random.h>
+#include "ftmario.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "it/itkind.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
+
+#include <baselib/random.h>
 
 void ftMario_SpecialS_SetCall(Fighter* fp)
 {
@@ -212,9 +214,17 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
     Fighter* fp;
     ftMarioAttributes* sa;
 
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
     u8 unused0[4];
+#endif
+
     Vec3 coords;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
     u8 unused1[24];
+#endif
 
     fp = gobj->user_data;
 
@@ -286,7 +296,11 @@ void ftMario_SpecialS_GroundToAir(HSD_GObj* gobj)
 void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
     u8 unused[4];
+#endif
 
     fp = gobj->user_data;
     fp->sa.mario.x2238_isCapeBoost = false;

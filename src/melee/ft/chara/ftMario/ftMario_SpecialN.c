@@ -1,14 +1,16 @@
-#include <melee/ft/chara/ftMario/ftMario_SpecialN.h>
+#include "ftMario_SpecialN.h"
 
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftMario/ftmario.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/it/itkind.h>
-#include <melee/lb/lbunknown_001.h>
-#include <sysdolphin/baselib/random.h>
+#include "ftmario.h"
+
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "it/itkind.h"
+#include "lb/lbunknown_001.h"
+
+#include <baselib/random.h>
 
 int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos)
 {
@@ -95,7 +97,10 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
 
     int rand_val_800E0D1C;
 
-    u8 padding[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     fp = gobj->user_data;
 

@@ -12,7 +12,11 @@ void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
     Fighter* fp;
-    HSD_GObj* x2254_fireGObj;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     fp = getFighter(fighter_gobj);
     func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
@@ -45,7 +49,11 @@ void ftGameWatch_ItemTorchSetFlag(HSD_GObj* fighter_gobj)
 void ftGameWatch_ItemTorchOnDamage(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* fireGObj;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     if (fp->sa.gaw.x2254_fireGObj != NULL) {
         func_802C6A2C(fp->sa.gaw.x2254_fireGObj);
@@ -92,7 +100,11 @@ bool ftGameWatch_ItemCheckTorchRemove(HSD_GObj* fighter_gobj)
 void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     fp->x2218_flag.bits.b0 = 0;
     fp->x2200_ftcmd_var0 = 0;

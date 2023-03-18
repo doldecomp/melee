@@ -1,11 +1,11 @@
-#include <melee/ft/chara/ftGigaKoopa/ftgigakoopa.h>
+#include "ftgigakoopa.h"
 
-#include <melee/ft/chara/ftKoopa/ftkoopa.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/itkind.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftKoopa/ftkoopa.h"
+#include "it/itkind.h"
 
 ActionState as_table_gkoopa[] = {
     { 295, 0x00340011, 0x12000000, lbl_80134F48, lbl_801351B0, lbl_80135438,
@@ -77,7 +77,11 @@ Fighter_CostumeStrings lbl_803D3988[] = {
 
 void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftKoopaAttributes* koopaAttr = fp->x2D4_specialAttributes;
 
