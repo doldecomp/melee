@@ -209,7 +209,7 @@ void ftLuigi_SpecialLw_Phys(HSD_GObj* fighter_gobj)
 
     func_8007CB74(fighter_gobj);
 
-    if (fp->x2208_ftcmd_var2 != 0 && FLAGS_ANY(fp->input.x668, HSD_BUTTON_B)) {
+    if (fp->x2208_ftcmd_var2 != 0 && (fp->input.x668 & HSD_BUTTON_B)) {
         fp->x80_self_vel.y += attrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
         ftLuigi_SpecialLw_GroundToAir(fighter_gobj);
     }
@@ -228,7 +228,7 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
     ftLuigiAttributes* attrs0 = fp->x2D4_specialAttributes;
 
     if (!fp->sa.luigi.x222C_cycloneCharge && fp->x2208_ftcmd_var2 != 0 &&
-        FLAGS_ANY(fp->input.x668, HSD_BUTTON_B))
+        (fp->input.x668 & HSD_BUTTON_B))
     {
         func_8007D508(fp, attrs0->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX,
                       attrs0->x90_LUIGI_CYCLONE_TAP_GRAVITY);

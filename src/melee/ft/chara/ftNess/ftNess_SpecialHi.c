@@ -1537,9 +1537,7 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     if (func_80082708(fighter_gobj) == false) {
         u32 env_flags = fp0->x6F0_collData.x134_envFlags;
 
-        if (FLAGS_ANY(env_flags, 0b111111) ||
-            FLAGS_ANY(env_flags, 0b111111 << 6))
-        {
+        if ((env_flags & 0b111111) || (env_flags & 0b111111 << 6)) {
             func_8007D60C(fp0);
             {
                 Fighter* fp1 = fighter_gobj->user_data;
@@ -1579,9 +1577,8 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     {
         u32 env_flags = fp0->x6F0_collData.x134_envFlags;
 
-        if (FLAGS_ANY(env_flags, 0b11 << 13) ||
-            FLAGS_ANY(env_flags, 0b111111) ||
-            FLAGS_ANY(env_flags, 0b111111 << 6))
+        if ((env_flags & 0b11 << 13) || (env_flags & 0b111111) ||
+            (env_flags & 0b111111 << 6))
         {
             fp0->xEC_ground_vel = 0;
             {

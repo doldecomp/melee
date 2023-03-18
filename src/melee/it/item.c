@@ -1162,7 +1162,7 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
         func_80274EF8(item_gobj);
     }
 
-    if (FLAGS_ANY(flags, ITEM_MODEL_UPDATE))
+    if ((flags & ITEM_MODEL_UPDATE))
         func_80274740(item_gobj);
 
     if (!(flags & ITEM_COLANIM_PRESERVE) &&
@@ -1176,7 +1176,7 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
 
     HSD_JObjSetFacingDirItem(item_jobj, item_data);
 
-    if (FLAGS_ANY(flags, ITEM_DROP_UPDATE))
+    if ((flags & ITEM_DROP_UPDATE))
         item_data->xC40 = item_data->xC44;
     else
         item_data->xC40 = 1.0F;
@@ -1199,10 +1199,10 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
 
         temp_r23 = (new_var3 = item_data->xD0_itemStateDesc);
 
-        if (temp_r23 != NULL && FLAGS_ANY(flags, ITEM_ANIM_UPDATE)) {
+        if (temp_r23 != NULL && (flags & ITEM_ANIM_UPDATE)) {
             func_80268D34(item_gobj, temp_r23);
 
-            if (FLAGS_ANY(flags, ITEM_UNK_UPDATE)) {
+            if ((flags & ITEM_UNK_UPDATE)) {
                 item_jobj1_2 = item_gobj->hsd_obj;
                 item_data3 = GetItemData(item_gobj);
                 item_data3->scl = item_data3->xCC_item_attr->x60_scale;
@@ -1220,7 +1220,7 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0;
             item_data->x524 = 0.0F;
-        } else if (temp_r23 != NULL && FLAGS_ANY(flags, ITEM_CMD_UPDATE)) {
+        } else if (temp_r23 != NULL && (flags & ITEM_CMD_UPDATE)) {
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0U;
             item_data->x524 = 0.0f;
