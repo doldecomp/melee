@@ -1,3 +1,5 @@
+#include "ftCaptain_SpecialS.h"
+
 #include "ftCaptain.h"
 
 #include "ef/eflib.h"

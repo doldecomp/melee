@@ -3,6 +3,7 @@
 #include "ftCaptain_SpecialHi.h"
 #include "ftCaptain_SpecialLw.h"
 #include "ftCaptain_SpecialN.h"
+#include "ftCaptain_SpecialS.h"
 
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"

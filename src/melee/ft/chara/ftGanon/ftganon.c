@@ -1,11 +1,11 @@
-#include <melee/ft/chara/ftGanon/ftganon.h>
+#include "ftganon.h"
 
-#include <melee/ft/chara/ftCaptain/ftCaptain.h>
-#include <melee/ft/chara/ftGanon/ftganon.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCaptain/ftCaptain.h"
+#include "ftCaptain/ftCaptain_SpecialS.h"
 
 ActionState as_table_ganon[] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },

@@ -1,9 +1,10 @@
-#ifndef _ftcaptain_h_
-#define _ftcaptain_h_
+#ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_H
+#define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_H
 
-#include <melee/ft/fighter.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
+#include "ft/fighter.h"
+
+#include <baselib/gobj.h>
+#include <platform.h>
 
 typedef enum ftCaptainAction {
     AS_CAPTAIN_SWING42_SWORD = ASID_MAX,
@@ -22,10 +23,9 @@ typedef enum ftCaptainAction {
     AS_CAPTAIN_SPECIALAIRHI,
     AS_CAPTAIN_SPECIALHI_CATCH,
     AS_CAPTAIN_SPECIALHI_THROW,
-
 } ftCaptainAction;
 
-// Flags used by Captain Falcon and Ganondorf in ActionStateChange //
+// Flags used by Captain Falcon and Ganondorf in ActionStateChange
 
 // SpecialN/SpecialAirN (Falcon / Warlock Punch)
 #define FTCAPTAIN_SPECIALN_COLL_FLAG                                           \
@@ -100,7 +100,7 @@ extern Fighter_CostumeStrings lbl_803C773C[];
 extern char lbl_803C76A0[];
 extern Fighter_DemoStrings lbl_803C772C;
 
-// Captain Falcon & Ganondorf functions //
+// Captain Falcon & Ganondorf functions
 
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj);
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj);
@@ -111,7 +111,7 @@ void ftCaptain_OnItemVisible(HSD_GObj* fighter_gobj);
 void ftCaptain_OnItemDrop(HSD_GObj* fighter_gobj, bool unk1);
 void ftCaptain_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 
-// Neutral Special - Falcon/Warlock Punch (SpecialN) //
+// Neutral Special - Falcon/Warlock Punch (SpecialN)
 
 void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
@@ -123,30 +123,6 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj);
-
-// Side Special - Raptor Boost / Gerudo Dragon (SpecialS) //
-
-void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialSStart_Anim(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialSStart_IASA(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialS_IASA(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirSStart_IASA(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirS_IASA(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialSStart_Phys(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialS_Phys(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj);
-void ftCaptain_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
-void ftCaptain_OnLoadForGanon(Fighter*);
 
 void ftCaptain_LoadSpecialAttrs(HSD_GObj*);
 void ftCaptain_SpecialAirHi_StartAction(HSD_GObj*);
