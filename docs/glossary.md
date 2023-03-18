@@ -103,6 +103,9 @@ Short for "sound effect(s)."
 @section glossary_spd spd
 Short for "speed."
 
+@section glossary_sq sq
+Short for "square."
+
 @section glossary_src src
 Short for "source."
 

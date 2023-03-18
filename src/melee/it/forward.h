@@ -44,8 +44,9 @@ typedef enum Item_StateChangeFlags {
 
 typedef enum Item_UnkKinds {
     ITEM_UNK_MATO = 4,
-    ITEM_UNK_LOCKON = 5,
-    ITEM_UNK_ENEMY = 6,
+    ITEM_UNK_LOCKON,
+    ITEM_UNK_ENEMY,
+    ITEM_UNK_7
 } Item_UnkKinds;
 
 #endif

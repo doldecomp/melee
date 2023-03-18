@@ -401,10 +401,8 @@ void func_8026B718(HSD_GObj* item_gobj,
 
 void func_8026B724(HSD_GObj* item_gobj) // Toggle bit 3 of 0xDC8 word ON
 {
-    Item* ip;
-
-    ip = item_gobj->user_data;
-    ip->xDC8_word.flags.x3 = 1;
+    Item* ip = item_gobj->user_data;
+    ip->xDC8_word.flags.x3 = true;
 }
 
 void func_8026B73C(HSD_GObj* item_gobj) // Toggle bits in 0xDC8 word
@@ -789,13 +787,13 @@ void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos)
     ftECB* ecb = &ip->x378_itemColl.xA4_ecbCurrCorrect;
 
     /// @todo Why is this always zero? Stripped something?
-    f32 xz_offset = 0.0f;
+    f32 offset_xz = 0.0f;
 
-    f32 y_offset = 0.5f * (ecb->top.y + ecb->bottom.y);
+    f32 offset_y = 0.5f * (ecb->top.y + ecb->bottom.y);
 
-    pos->x = ip->pos.x + xz_offset;
-    pos->y = ip->pos.y + y_offset;
-    pos->z = ip->pos.z + xz_offset;
+    pos->x = ip->pos.x + offset_xz;
+    pos->y = ip->pos.y + offset_y;
+    pos->z = ip->pos.z + offset_xz;
 }
 
 /// Adjust item's ECB position?
@@ -806,13 +804,13 @@ void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos)
     ftECB* ecb = &coll_data->xE4_ecb;
 
     /// @todo Why is this always zero? Stripped something?
-    f32 xz_offset = 0.0f;
+    f32 offset_xz = 0.0f;
 
-    f32 y_offset = 0.5f * (ecb->top.y + ecb->bottom.y);
+    f32 offset_y = 0.5f * (ecb->top.y + ecb->bottom.y);
 
-    pos->x = coll_data->x1C_vec.x + xz_offset;
-    pos->y = coll_data->x1C_vec.y + y_offset;
-    pos->z = coll_data->x1C_vec.z + xz_offset;
+    pos->x = coll_data->x1C_vec.x + offset_xz;
+    pos->y = coll_data->x1C_vec.y + offset_y;
+    pos->z = coll_data->x1C_vec.z + offset_xz;
 }
 
 extern bool func_80086960(HSD_GObj*);
@@ -1185,78 +1183,62 @@ void func_8026C220(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj)
     ip->xCB0_source_ply = (u8) func_80086BE0(fighter_gobj);
 }
 
-extern f32 lbl_804DC690;
-
-// Find the closest item to the given position? Used by Samus's Homing Missile
-// to lock onto certain items
-HSD_GObj* func_8026C258(Vec3* vector, f32 facing_dir)
+/// Find the closest item to the given position?
+/// @remarks Used by Samus's Homing Missile to lock onto certain items.
+/// @returns The nearest #HSD_GObj to @p pos that fits the criteria.
+HSD_GObj* func_8026C258(Vec3* pos, f32 facing_dir)
 {
-    f32 minMagnitude = F32_MAX;
-    f32 magnitude;
-    f32 xDist;
-    f32 yDist;
-    enum_t holdKind;
-    Item* ip;
-    HSD_GObj* item_gobj; // r5
-    HSD_GObj* closest_item_gobj;
-
-    closest_item_gobj = NULL;
-    item_gobj = lbl_804D782C->x24_items;
-
-    while (item_gobj != NULL) {
-        ip = item_gobj->user_data;
+    f32 min_sq_dist = F32_MAX;
+    HSD_GObj *cur, *result = NULL;
+    for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
+        Item* ip = GET_ITEM(cur);
 
         // Might not actually be (exclusively) hold kind in the end???
-        holdKind = ip->hold_kind;
+        enum_t hold_kind = ip->hold_kind;
 
         // Decide lock-on type for Samus Missile?
-        /// @todo Why is this cast to @c short necessary?
-        if (holdKind == ITEM_UNK_MATO || holdKind == 5 ||
-            (short) (holdKind == ITEM_UNK_ENEMY) || holdKind == 7)
+        if ((hold_kind == ITEM_UNK_MATO || hold_kind == ITEM_UNK_LOCKON ||
+             /// @todo Why is this cast to @c short necessary?
+             (short) (hold_kind == ITEM_UNK_ENEMY) ||
+             hold_kind == ITEM_UNK_7) &&
+            ip->grab_victim == NULL &&
+            (!ip->xDC8_word.flags.x13 || ip->owner == NULL) &&
+            (facing_dir != -1 || !(ip->pos.x > pos->x)) &&
+            (facing_dir != +1 || !(ip->pos.x < pos->x)))
         {
-            if (ip->grab_victim == NULL) {
-                if (!ip->xDC8_word.flags.x13 || ip->owner == NULL) {
-                    if (facing_dir != -1.0f || !(ip->pos.x > vector->x)) {
-                        if (facing_dir != 1.0f || !(ip->pos.x < vector->x)) {
-                            xDist = vector->x - ip->pos.x;
-                            yDist = vector->y - ip->pos.y;
-                            magnitude = (xDist * xDist) + (yDist * yDist);
-                            if (magnitude < minMagnitude) {
-                                minMagnitude = magnitude;
-                                closest_item_gobj = item_gobj;
-                            }
-                        }
-                    }
-                }
+            f32 dist_x = pos->x - ip->pos.x;
+            f32 dist_y = pos->y - ip->pos.y;
+            f32 sq_dist = dist_x * dist_x + dist_y * dist_y;
+
+            if (sq_dist < min_sq_dist) {
+                min_sq_dist = sq_dist;
+                result = cur;
             }
         }
-
-        item_gobj = item_gobj->next;
     }
 
-    return closest_item_gobj;
+    return result;
 }
 
 /// Unknown item position / ECB update
 void func_8026C334(HSD_GObj* item_gobj, Vec3* pos)
 {
-    Item* ip = item_gobj->user_data;
-    f32 temp_ECBvar = ip->x378_itemColl.xA4_ecbCurrCorrect.bottom.y;
-    f32 temp_zero = 0.0f;
+    Item* ip = GET_ITEM(item_gobj);
+    f32 offset_xz = 0.0f;
+    f32 offset_y = ip->x378_itemColl.xA4_ecbCurrCorrect.bottom.y;
 
-    pos->x = ip->pos.x + temp_zero;
-    pos->y = ip->pos.y + temp_ECBvar;
-    pos->z = ip->pos.z + temp_zero;
+    pos->x = ip->pos.x + offset_xz;
+    pos->y = ip->pos.y + offset_y;
+    pos->z = ip->pos.z + offset_xz;
 }
 
 /// Run bomb item explosion callbacks
 void func_8026C368(HSD_GObj* item_gobj)
 {
-    ItemKind kind;
-    Item* ip = item_gobj->user_data;
+    Item* ip = GET_ITEM(item_gobj);
 
     if (ip->x378_itemColl.x34_flags.bits.b7) {
-        kind = ip->kind;
+        ItemKind kind = ip->kind;
         switch (kind) {
         case It_Kind_BombHei:
             func_8027D730(item_gobj);
@@ -1282,34 +1264,26 @@ void func_8026C368(HSD_GObj* item_gobj)
     }
 }
 
-// Toggle bit 3 of 0xDC8 ON for all active item GObjs?
+/// Toggle bit 3 of 0xDC8 ON for all active item GObjs?
 void func_8026C3FC(void)
 {
-    HSD_GObj* item_gobj = lbl_804D782C->x24_items;
-    Item* ip;
-
-    while (item_gobj != NULL) {
-        ip = item_gobj->user_data;
-        ip->xDC8_word.flags.x3 = true;
-        item_gobj = item_gobj->next;
-    }
+    HSD_GObj* cur;
+    for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next)
+        func_8026B724(cur);
 }
 
 /// Toggle bits in 0xDC8 for all active item GObjs?
 void func_8026C42C(void)
 {
-    Item* ip;
-    HSD_GObj* cur = lbl_804D782C->x24_items;
+    HSD_GObj* cur;
 
-    while (cur != NULL) {
-        ip = cur->user_data;
+    for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
+        Item* ip = GET_ITEM(cur);
 
         if (ip->xDC8_word.flags.x7)
             ip->xDC8_word.flags.x5 = true;
 
         if (ip->xDC8_word.flags.x3)
             ip->xDC8_word.flags.x3 = false;
-
-        cur = cur->next;
     }
 }
