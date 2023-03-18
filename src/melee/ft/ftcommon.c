@@ -1,26 +1,28 @@
-#include <melee/ft/ftcommon.h>
+#include "ftcommon.h"
 
+#include "code_80081B38.h"
+#include "fighter.h"
+#include "ft_unknown_006.h"
+#include "ftcamera.h"
+#include "ftcoll.h"
+#include "ftlib.h"
+#include "ftparts.h"
+
+#include "ef/eflib.h"
+#include "gm/code_801601C4.h"
+#include "it/code_8027CF30.h"
+#include "it/item.h"
+#include "it/item2.h"
+#include "it/itkind.h"
+#include "lb/lbunknown_003.h"
+#include "mp/mplib.h"
+#include "pl/pl_unknown_001.h"
+#include "text_4.h"
+
+#include <baselib/rumble.h>
 #include <dolphin/os/os.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftparts.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/it/item.h>
-#include <melee/it/item2.h>
-#include <melee/it/itkind.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/mp/mplib.h>
-#include <melee/pl/pl_unknown_001.h>
-#include <melee/text_4.h>
-#include <sysdolphin/baselib/rumble.h>
 
-const Vec3 lbl_803B74A0 = { 0, 0, 0 };
+const Vec3 lbl_803B74A0 = { 0 };
 
 void func_8007C930(Fighter* fp, f32 result)
 {
@@ -390,7 +392,6 @@ bool func_8007D050(Fighter* fp, f32 val)
 #endif
 
     f32 temp_f3;
-    f32 phi_f0;
     f32 phi_f0_2;
     f32 phi_f1;
     f32 phi_f2;
@@ -398,7 +399,13 @@ bool func_8007D050(Fighter* fp, f32 val)
     f32 phi_f1_2;
 
     temp_f3 = fp->x80_self_vel.x;
-    phi_f0 = fabs_inline(temp_f3);
+
+#ifdef MUST_MATCH
+    {
+        f32 unused = fabs_inline(temp_f3);
+    }
+#endif
+
     if (fabs_inline(temp_f3) > val) {
         phi_f2 = p_ftCommonData->x1FC;
         phi_f1 = fabs_inline(temp_f3);

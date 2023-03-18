@@ -1,8 +1,9 @@
 #include "ftwalkcommon.h"
 
-#include "ft/code_80081B38.h"
-#include "ft/fighter.h"
-#include "ft/ftcommon.h"
+#include "code_80081B38.h"
+#include "fighter.h"
+#include "ftcommon.h"
+
 #include <dolphin/os/os.h>
 
 s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
@@ -179,10 +180,17 @@ void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
     f32 temp_f4;
     f32 ftx2360_f5;
     f32 velocity_f1;
-    f32 unused_float;
 
     fp = GET_FIGHTER(fighter_gobj);
-    unused_float = ftx2360_f5 = fp->x2360_f32;
+    ftx2360_f5 = fp->x2360_f32;
+
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+    {
+        f32 unused = ftx2360_f5;
+    }
+#endif
+
     velocity_f1 = fp->input.x620_lstick_x *
                   fp->x110_attr.x110_WalkInitialVelocity * ftx2360_f5;
     velocity_f1 += getFtWalkAcceleration(fp, ftx2360_f5);

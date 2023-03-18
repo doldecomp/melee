@@ -1,15 +1,16 @@
-#include <melee/pl/player.h>
+#include "player.h"
 
+#include "ft/ft_unknown_006.h"
+#include "ft/ftdata.h"
+#include "ft/ftlib.h"
+#include "ftKirby/ftkirby.h"
+#include "gm/code_801601C4.h"
+#include "if/ifstatus.h"
+#include "lb/lbarchive.h"
+#include "pl/pl_unknown_001.h"
+
+#include <baselib/gobjplink.h>
 #include <dolphin/os/os.h>
-#include <melee/ft/chara/ftKirby/ftkirby.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/if/ifstatus.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/pl/pl_unknown_001.h>
-#include <sysdolphin/baselib/gobjplink.h>
 
 typedef struct _ftMapping {
     s8 internal_id;
@@ -1686,9 +1687,15 @@ u8 Player_GetFlagsAEBit1(s32 slot)
 
 u8 Player_SetFlagsAEBit1(int slot, u8 bit1)
 {
-    StaticPlayer* player;
     Player_CheckSlot(slot);
-    player = &player_slots[slot];
+
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+    {
+        StaticPlayer* player = &player_slots[slot];
+    }
+#endif
+
     player_slots[slot].flagsAE.b1 = bit1;
 #ifdef __clang__
 #pragma clang diagnostic push

@@ -1,9 +1,9 @@
-#include <dolphin/dvd/fstload.h>
+#include "fstload.h"
 
+#include <__mem.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSArena.h>
-#include <Runtime/__mem.h>
 
 static u32 status;
 static struct bb2struct* bb2;
@@ -44,10 +44,15 @@ void cb(s32 param_1, DVDCommandBlock* block)
 void __fstLoad(void)
 {
     u8 auStack64[64];
-    void* arenaHi;
     struct DiskInfo* info;
 
-    arenaHi = OSGetArenaHi(); // not used
+#ifdef MUST_MATCH
+    /// @todo Unused assignment.
+    {
+        void* arenaHi = OSGetArenaHi();
+    }
+#endif
+
     idTmp = (void*) OSRoundUp32B(auStack64);
     bb2 = (void*) OSRoundUp32B(bb2Buf);
     DVDReset();

@@ -1,16 +1,16 @@
-#include <melee/ft/chara/ftNess/ftNess.h>
+#include "ftNess.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 #include <MetroTRK/intrinsics.h>
-#include <MSL/trigf.h>
+#include <trigf.h>
 
 // Setup float order
 static f32 return_float1(void) // -0x62B0
@@ -404,7 +404,6 @@ void ftNess_SpecialHi_StartAction(
     u8 unused[4];
 #endif
 
-    f32 temp_f1_2;
     ftNessAttributes* temp_attr;
     f64 phi_f0;
 
@@ -425,7 +424,14 @@ void ftNess_SpecialHi_StartAction(
             (s32) temp_attr->x44_PK_THUNDER_LOOP2;
         temp_fp->nessVars.SpecialHi.gravityDelay =
             (s32) temp_attr->x48_PK_THUNDER_GRAVITY_DELAY;
-        temp_f1_2 = 0.0f;
+
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        {
+            f32 temp_f1_2 = 0.0f;
+        }
+#endif
+
         temp_fp->nessVars.SpecialHi.fallAccel = 0.0f;
         temp_fp->nessVars.SpecialHi.unkVector1.z = 0.0f;
         temp_fp->nessVars.SpecialHi.unkVector1.y = 0.0f;
@@ -463,8 +469,6 @@ void ftNess_SpecialAirHiStart_Action(
     HSD_GObj*
         fighter_gobj) // Ness's aerial PK Thunder Start Action State handler
 {
-    f32 temp_f1;
-    f32 temp_f1_2;
     Fighter* fp;
     ftNessAttributes* ness_attr;
     Fighter* temp_fp;
@@ -476,7 +480,13 @@ void ftNess_SpecialAirHiStart_Action(
     u8 unused[12];
 #endif
 
-    temp_f1 = 0.0f;
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+    {
+        f32 _ = 0.0f;
+    }
+#endif
+
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRHI_START,
@@ -493,7 +503,14 @@ void ftNess_SpecialAirHiStart_Action(
         (s32) temp_attr->x44_PK_THUNDER_LOOP2;
     temp_fp->nessVars.SpecialHi.gravityDelay =
         (s32) temp_attr->x48_PK_THUNDER_GRAVITY_DELAY;
-    temp_f1_2 = 0.0f;
+
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+    {
+        f32 _ = 0.0f;
+    }
+#endif
+
     temp_fp->nessVars.SpecialHi.fallAccel = 0.0f;
     temp_fp->nessVars.SpecialHi.unkVector1.z = 0.0f;
     temp_fp->nessVars.SpecialHi.unkVector1.y = 0.0f;

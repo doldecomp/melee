@@ -376,12 +376,12 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
     }
     {
         Vec3 sp2C;
-        Fighter* unused;
         ftFoxAttributes* foxAttrs;
         Fighter* fp;
         f64 launchAngle;
         FighterKind ftKind;
 
+        /// @todo Fake assignment.
 #ifdef MUST_MATCH
         fp = fp = GET_FIGHTER(fighter_gobj);
 #else
@@ -389,10 +389,16 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
 #endif
 
         foxAttrs = getFtSpecialAttrs(fp);
-        unused = GET_FIGHTER(fighter_gobj);
 
-        if ((u32) fp->x2208_ftcmd_var2 != 0U) {
-            fp->x2208_ftcmd_var2 = 0U;
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        {
+            Fighter* unused = GET_FIGHTER(fighter_gobj);
+        }
+#endif
+
+        if (fp->x2208_ftcmd_var2 != 0) {
+            fp->x2208_ftcmd_var2 = 0;
             ftFox_FtGetHoldJoint(fighter_gobj, &sp2C);
             sp2C.z = 0.0f;
 
@@ -533,10 +539,10 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
     }
     {
         Vec3 sp2C;
-        Fighter* unused;
         ftFoxAttributes* foxAttrs;
         Fighter* fp;
 
+        /// @todo Fake assignment.
 #ifdef MUST_MATCH
         fp = fp = GET_FIGHTER(fighter_gobj);
 #else
@@ -544,7 +550,13 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 #endif
 
         foxAttrs = getFtSpecialAttrs(fp);
-        unused = GET_FIGHTER(fighter_gobj);
+
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        {
+            Fighter* unused = GET_FIGHTER(fighter_gobj);
+        }
+#endif
 
         if ((u32) fp->x2208_ftcmd_var2 != 0U) {
             f64 launchAngle;

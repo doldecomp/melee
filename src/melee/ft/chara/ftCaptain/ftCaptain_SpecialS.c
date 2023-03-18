@@ -440,7 +440,6 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
-    f32 facingDir;
 
     if ((u32) fp->x2208_ftcmd_var2 == 0U) {
         func_80084104(fighter_gobj);
@@ -458,12 +457,16 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
                       captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG);
         return;
     }
-    if ((u32) fp->x2200_ftcmd_var0 == 1U) {
-        facingDir = fp->facing_dir;
-        if (((1.0f == fp->facing_dir) &&
-             (fp->x6F0_collData.x134_envFlags & 0x3F)) ||
-            (((-1.0f) == fp->facing_dir) &&
-             (fp->x6F0_collData.x134_envFlags & 0xFC0)))
+    if (fp->x2200_ftcmd_var0 == 1) {
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        f32 facingDir = fp->facing_dir;
+#endif
+
+        if ((fp->facing_dir == +1 &&
+             (fp->x6F0_collData.x134_envFlags & MPCOLL_RIGHTWALL)) ||
+            (fp->facing_dir == -1 &&
+             fp->x6F0_collData.x134_envFlags & MPCOLL_LEFTWALL))
         {
             efLib_DestroyAll(fighter_gobj);
             func_8008A2BC(fighter_gobj);

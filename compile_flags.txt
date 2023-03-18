@@ -6,11 +6,11 @@
 -Isrc/melee/ft/chara
 -isystemsrc
 -isystemsrc/MSL
+-isystemsrc/Runtime
 -isystemsrc/sysdolphin
 -Wall
 -Wextra
 -Werror
--Wno-unused-but-set-variable
 -Wno-unused-function
 -Wno-unused-parameter
 -Wno-unused-value

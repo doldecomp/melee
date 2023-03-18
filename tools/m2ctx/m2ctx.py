@@ -42,6 +42,8 @@ MWCC_FLAGS = [
     "-i",
     "src/MSL",
     "-i",
+    "src/Runtime",
+    "-i",
     "src/sysdolphin",
     "-DM2CTX",
 ]
@@ -54,6 +56,8 @@ PCPP_FLAGS = [
     "src",
     "-I",
     "src/MSL",
+    "-I",
+    "src/Runtime",
     "-I",
     "src/sysdolphin",
     "-I",

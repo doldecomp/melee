@@ -1,5 +1,14 @@
-#include <melee/lb/lbcollision.h>
+#include "lbcollision.h"
 
+#include "forward.h"
+#include "lbaudio_ax.h"
+#include "lbunknown_001.h"
+#include "lbvector.h"
+
+#include <baselib/baselib_shared_data_003.h>
+#include <baselib/mtx.h>
+#include <baselib/state.h>
+#include <baselib/tev.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXDisplayList.h>
 #include <dolphin/gx/GXGeometry.h>
@@ -8,15 +17,7 @@
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <math.h>
-#include <melee/lb/forward.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbvector.h>
 #include <MetroTRK/intrinsics.h>
-#include <sysdolphin/baselib/baselib_shared_data_003.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/tev.h>
 
 /// @todo Toggle for WIP functions
 #if 0
@@ -3761,7 +3762,6 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
 {
     Vec3 sp74;
     Vec3 sp68;
-    int* sp8;
     HSD_JObj* temp_r29;
     HSD_JObj* temp_r29_2;
     Vec3* temp_r5;
@@ -3807,7 +3807,14 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
     } else {
         var_f1 = arg0->scl * arg4;
     }
-    sp8 = &arg0->x70;
+
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+    {
+        int* sp8 = &arg0->x70;
+    }
+#endif
+
     temp_r5 = &shield_hit->pos;
     return lbColl_80006E58(&arg0->x58, &arg0->x4C, temp_r5, temp_r5, &sp74,
                            &sp68, (f32(*)[4]) var_r9, &arg0->x64, var_f1,
@@ -4108,7 +4115,6 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
 {
     Vec3 sp70;
     Vec3 sp64;
-    int* sp8;
     HSD_JObj* temp_r31;
     HSD_JObj* temp_r31_2;
     Mtx* var_r9;
@@ -4149,7 +4155,12 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
         } else {
             var_f1 = arg0->scl * hit_scl_y;
         }
-        sp8 = &arg0->x70;
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        {
+            int* sp8 = &arg0->x70;
+        }
+#endif
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
                                &arg1->b_pos, &sp70, &sp64, *var_r9, &arg0->x64,
                                var_f1, arg1->scl, 3.0f * hurt_scl_y);
@@ -4312,7 +4323,6 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, UNK_T arg2, s32 arg3,
     Vec3 sp74;
     Vec3 sp68;
     f32* sp38 = NULL;
-    int* sp8;
     HSD_JObj* temp_r29;
     HSD_JObj* temp_r29_2;
     f32* var_r9;
@@ -4360,7 +4370,12 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, UNK_T arg2, s32 arg3,
         } else {
             var_f1 = arg0->scl * arg4;
         }
-        sp8 = &arg0->x70;
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        {
+            int* sp8 = &arg0->x70;
+        }
+#endif
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
                                &arg1->b_pos, &sp74, &sp68, (f32(*)[4]) var_r9,
                                &arg0->x64, var_f1, arg1->scl, 3.0f * arg5);
@@ -7683,6 +7698,11 @@ lbl_8000AB0C:
 #else
 bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
 {
+/// @todo Combine these into #Vec3 instances.
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-but-set-variable"
+#endif
     f32 sp9C;
     f32 sp98;
     f32 sp94;
@@ -7697,6 +7717,10 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
     f32 sp70;
     s32 sp6C;
     f32 sp3C;
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+
     Vec3 sp30;
     Vec3 sp24;
     HSD_JObj* temp_r31;

@@ -1,6 +1,7 @@
-#include <dolphin/dsp/dsp.h>
+#include "dsp.h"
+
 #include <dolphin/os/OSInterrupt.h>
-#include <Runtime/platform.h>
+#include <platform.h>
 #include <stddef.h>
 
 DSPTaskInfo* __DSP_curr_task;
@@ -205,16 +206,21 @@ void __DSP_exec_task(DSPTaskInfo* a, DSPTaskInfo* b)
 
 void __DSP_boot_task(DSPTaskInfo* task)
 {
-    volatile u32 msg;
-
     while (DSPCheckMailFromDSP() == 0)
         continue;
 
-    msg = DSPReadMailFromDSP();
+        /// @todo Unused assignment.
+        ///       Is this writing to a hardware reg?
+#ifdef MUST_MATCH
+    {
+        vu32 msg = DSPReadMailFromDSP();
+    }
+#endif
+
     DSPSendMailToDSP(0x80F3A001);
     while (DSPCheckMailToDSP() != 0)
         continue;
-    DSPSendMailToDSP((u32) task->iram_mmem_addr);
+    DSPSendMailToDSP((uintptr_t) task->iram_mmem_addr);
     while (DSPCheckMailToDSP() != 0)
         continue;
     DSPSendMailToDSP(0x80F3C002);
