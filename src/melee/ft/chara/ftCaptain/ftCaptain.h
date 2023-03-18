@@ -92,7 +92,7 @@ typedef struct _ftCaptainAttributes {
 
 } ftCaptainAttributes;
 
-extern ActionState as_table_cfalcon[];
+extern ActionState as_table_captain[];
 extern char lbl_803C7598[];
 extern char lbl_803C75A4[];
 extern Fighter_CostumeStrings lbl_803C773C[];
@@ -104,11 +104,11 @@ extern Fighter_DemoStrings lbl_803C772C;
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj);
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj);
 void lbl_800E28C8(HSD_GObj* fighter_gobj);
-void ftCFalcon_OnItemPickup(HSD_GObj* fighter_gobj, bool unk_var);
-void ftCFalcon_OnItemInvisible(HSD_GObj* fighter_gobj);
-void ftCFalcon_OnItemVisible(HSD_GObj* fighter_gobj);
-void ftCFalcon_OnItemDrop(HSD_GObj* fighter_gobj, bool unk1);
-void ftCFalcon_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
+void ftCaptain_OnItemPickup(HSD_GObj* fighter_gobj, bool unk_var);
+void ftCaptain_OnItemInvisible(HSD_GObj* fighter_gobj);
+void ftCaptain_OnItemVisible(HSD_GObj* fighter_gobj);
+void ftCaptain_OnItemDrop(HSD_GObj* fighter_gobj, bool unk1);
+void ftCaptain_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
 
 // Neutral Special - Falcon/Warlock Punch (SpecialN) //
 
@@ -148,10 +148,10 @@ void ftCaptain_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_OnLoadForGanon(Fighter*);
 
 /// @todo @c ftCaptain prefix
-void ftCFalcon_LoadSpecialAttrs(HSD_GObj*);
-void ftCFalcon_SpecialAirHi_StartAction(HSD_GObj*);
-void ftCFalcon_SpecialAirLw_StartAction(HSD_GObj*);
-void ftCFalcon_SpecialLw_StartAction(HSD_GObj*);
-void ftFalcon_SpecialHi_StartAction(HSD_GObj*);
+void ftCaptain_LoadSpecialAttrs(HSD_GObj*);
+void ftCaptain_SpecialAirHi_StartAction(HSD_GObj*);
+void ftCaptain_SpecialAirLw_StartAction(HSD_GObj*);
+void ftCaptain_SpecialLw_StartAction(HSD_GObj*);
+void ftCaptain_SpecialHi_StartAction(HSD_GObj*);
 
 #endif

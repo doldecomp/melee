@@ -118,8 +118,8 @@ lbl_800E400C:
 /* 800E4038 000E0C18  D0 05 23 44 */	stfs f0, 0x2344(r5)
 /* 800E403C 000E0C1C  4E 80 00 20 */	blr
 
-.global ftCFalcon_SpecialLw_StartAction
-ftCFalcon_SpecialLw_StartAction:
+.global ftCaptain_SpecialLw_StartAction
+ftCaptain_SpecialLw_StartAction:
 /* 800E4040 000E0C20  7C 08 02 A6 */	mflr r0
 /* 800E4044 000E0C24  38 80 01 65 */	li r4, 0x165
 /* 800E4048 000E0C28  90 01 00 04 */	stw r0, 4(r1)
@@ -159,8 +159,8 @@ ftCFalcon_SpecialLw_StartAction:
 /* 800E40D0 000E0CB0  7C 08 03 A6 */	mtlr r0
 /* 800E40D4 000E0CB4  4E 80 00 20 */	blr
 
-.global ftCFalcon_SpecialAirLw_StartAction
-ftCFalcon_SpecialAirLw_StartAction:
+.global ftCaptain_SpecialAirLw_StartAction
+ftCaptain_SpecialAirLw_StartAction:
 /* 800E40D8 000E0CB8  7C 08 02 A6 */	mflr r0
 /* 800E40DC 000E0CBC  38 80 01 67 */	li r4, 0x167
 /* 800E40E0 000E0CC0  90 01 00 04 */	stw r0, 4(r1)

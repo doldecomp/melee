@@ -1,5 +1,5 @@
-#ifndef _grtfalcon_h_
-#define _grtfalcon_h_
+#ifndef MELEE_GR_GRTCAPTAIN_H
+#define MELEE_GR_GRTCAPTAIN_H
 
 #include <melee/gr/stage.h>
 #include <sysdolphin/baselib/gobj.h>

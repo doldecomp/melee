@@ -31,7 +31,9 @@ jobs:
               result="$PR_REPO_NAME"
               ;;
           esac
-          echo "IMAGE=$result/$IMAGE_SUFFIX" >> $GITHUB_ENV
+
+          result=$(echo "$result/$IMAGE_SUFFIX" | tr '[:upper:]' '[:lower:]')
+          echo "IMAGE=$result" >> $GITHUB_ENV
 
       - name: Checkout Melee repository
         uses: actions/checkout@v3
