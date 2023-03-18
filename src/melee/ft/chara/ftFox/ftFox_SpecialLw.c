@@ -136,7 +136,7 @@ void ftFox_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj)
     u8 unused[4];
 #endif
 
-    if (FLAGS_NONE(fp->input.x65C_heldInputs, HSD_BUTTON_B)) {
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
         fp->foxVars.SpecialLw.isRelease = true;
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -509,7 +509,7 @@ void ftFox_SpecialLwTurn_Anim(HSD_GObj* fighter_gobj)
     u8 unused[16];
 #endif
 
-    if (FLAGS_NONE(fp->input.x65C_heldInputs, HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
         fp->foxVars.SpecialLw.isRelease = true;
 
     if (fp->foxVars.SpecialLw.releaseLag > 0)
@@ -530,7 +530,7 @@ void ftFox_SpecialAirLwTurn_Anim(HSD_GObj* fighter_gobj)
     u8 unused[20];
 #endif
 
-    if (FLAGS_NONE(fp->input.x65C_heldInputs, HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
         fp->foxVars.SpecialLw.isRelease = true;
 
     if (fp->foxVars.SpecialLw.releaseLag > 0)
@@ -729,7 +729,7 @@ void ftFox_SpecialLwHit_Anim(HSD_GObj* fighter_gobj)
     u8 unused[4];
 #endif
 
-    if (FLAGS_NONE(fp->input.x65C_heldInputs, HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
         fp->foxVars.SpecialLw.isRelease = true;
 
     if (fp->foxVars.SpecialLw.releaseLag > 0)
@@ -756,7 +756,7 @@ void ftFox_SpecialAirLwHit_Anim(HSD_GObj* fighter_gobj)
     u8 unused[8];
 #endif
 
-    if (FLAGS_NONE(fp->input.x65C_heldInputs, HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
         fp->foxVars.SpecialLw.isRelease = true;
 
     if (fp->foxVars.SpecialLw.releaseLag > 0)

@@ -749,7 +749,7 @@ void ftSeak_80111708(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (FLAGS_NONE(fp->input.x65C_heldInputs, HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
         fp->x2344_stateVar2_s32 = true;
 
     ftSeak_80110788(fighter_gobj);
@@ -759,7 +759,7 @@ void ftSeak_80111740(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (FLAGS_NONE(fp->input.x65C_heldInputs, HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
         fp->x2344_stateVar2_s32 = true;
 
     ftSeak_80110788(fighter_gobj);

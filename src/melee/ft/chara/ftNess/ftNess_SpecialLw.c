@@ -77,7 +77,7 @@ void ftNess_SpecialLwStart_Anim(
 
     fighter_data2 = GET_FIGHTER(fighter_gobj);
 
-    if (FLAGS_NONE(fighter_data2->input.x65C_heldInputs, HSD_BUTTON_B)) {
+    if (!(fighter_data2->input.x65C_heldInputs & HSD_BUTTON_B)) {
         fighter_data2->nessVars.SpecialLw.isRelease = 1;
     }
 
@@ -511,7 +511,7 @@ void ftNess_SpecialLwTurn_Anim(HSD_GObj* arg0)
     {
         Fighter* fp1 = fp0;
 
-        if (FLAGS_NONE(fp1->input.x65C_heldInputs, HSD_BUTTON_B))
+        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B))
             fp1->nessVars.SpecialLw.isRelease = true;
 
         if (fp1->nessVars.SpecialLw.releaseLag > 0) {
@@ -540,7 +540,7 @@ void ftNess_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
     {
         Fighter* fp1 = fp0;
 
-        if (FLAGS_NONE(fp1->input.x65C_heldInputs, HSD_BUTTON_B))
+        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B))
             fp1->nessVars.SpecialLw.isRelease = true;
 
         if (fp1->nessVars.SpecialLw.releaseLag > 0) {
@@ -729,7 +729,7 @@ void ftNess_SpecialLwHit_Anim(
     ftNessAttributes* attr;
 
     temp_r4 = arg0->user_data;
-    if (FLAGS_NONE(temp_r4->input.x65C_heldInputs, HSD_BUTTON_B)) {
+    if (!(temp_r4->input.x65C_heldInputs & HSD_BUTTON_B)) {
         temp_r4->nessVars.SpecialLw.isRelease = 1;
     }
 

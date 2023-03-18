@@ -1165,13 +1165,13 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
     if (FLAGS_ANY(flags, ITEM_MODEL_UPDATE))
         func_80274740(item_gobj);
 
-    if (FLAGS_NONE(flags, ITEM_COLANIM_PRESERVE) &&
+    if (!(flags & ITEM_COLANIM_PRESERVE) &&
         lbl_804D6D04[item_data->x548_colorOverlay.x28_colanim].x5_unk != 0)
     {
         func_80279BBC(item_data);
     }
 
-    if (FLAGS_NONE(flags, ITEM_SFX_PRESERVE))
+    if (!(flags & ITEM_SFX_PRESERVE))
         func_8026B074(item_data);
 
     HSD_JObjSetFacingDirItem(item_jobj, item_data);
@@ -1181,7 +1181,7 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
     else
         item_data->xC40 = 1.0F;
 
-    if (FLAGS_NONE(flags, ITEM_HIT_PRESERVE) && item_data->xDC8_word.flags.x16)
+    if (!(flags & ITEM_HIT_PRESERVE) && item_data->xDC8_word.flags.x16)
         func_802725D4(item_gobj);
 
     item_data->xCC8_knockback = 0.0F;
