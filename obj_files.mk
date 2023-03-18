@@ -122,8 +122,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_SpecialS.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_3.s.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftfalcon_4.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCaptain_SpecialHi.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCaptain_SpecialLw.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftFox/ftfox.c.o\
@@ -395,7 +395,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gr/grhomerun.s.o\
     $(BUILD_DIR)/asm/melee/gr/grheal.s.o\
     $(BUILD_DIR)/asm/melee/gr/grtmario.s.o\
-    $(BUILD_DIR)/src/melee/gr/grtfalcon.c.o\
+    $(BUILD_DIR)/src/melee/gr/grtcaptain.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtclink.s.o\
     $(BUILD_DIR)/src/melee/gr/grtdonkey.c.o\
     $(BUILD_DIR)/asm/melee/gr/grtdrmario.s.o\

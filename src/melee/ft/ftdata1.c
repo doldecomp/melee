@@ -117,7 +117,7 @@ HSD_GObjEvent ft_OnUserDataRemove[FTKIND_MAX] = {
 ActionState* ActionStateTableByCharacter[FTKIND_MAX] = {
     as_table_mario,
     as_table_fox,
-    as_table_cfalcon,
+    as_table_captain,
     as_table_donkey,
     as_table_kirby,
     as_table_koopa,
@@ -197,7 +197,7 @@ HSD_GObjEvent ft_SpecialS[FTKIND_MAX] = {
 HSD_GObjEvent ft_SpecialAirHi[FTKIND_MAX] = {
     ftMario_SpecialAirHi_StartAction,
     ftFox_SpecialAirHi_StartAction,
-    ftCFalcon_SpecialAirHi_StartAction,
+    ftCaptain_SpecialAirHi_StartAction,
     ftDonkey_SpecialAirHi_StartAction,
     ftKirby_SpecialAirHi_StartAction,
     ftKoopa_SpecialAirHi_StartAction,
@@ -220,7 +220,7 @@ HSD_GObjEvent ft_SpecialAirHi[FTKIND_MAX] = {
     ftFox_SpecialAirHi_StartAction,
     ftPikachu_SpecialAirHi_StartAction,
     ftGameWatch_SpecialAirHi_StartAction,
-    ftCFalcon_SpecialAirHi_StartAction,
+    ftCaptain_SpecialAirHi_StartAction,
     ftMars_SpecialAirHi_StartAction,
     NULL,
     NULL,
@@ -233,7 +233,7 @@ HSD_GObjEvent ft_SpecialAirHi[FTKIND_MAX] = {
 HSD_GObjEvent ft_SpecialAirLw[FTKIND_MAX] = {
     ftMario_SpecialAirLw_StartAction,
     ftFox_SpecialAirLw_StartAction,
-    ftCFalcon_SpecialAirLw_StartAction,
+    ftCaptain_SpecialAirLw_StartAction,
     NULL,
     ftKirby_SpecialAirLw_StartAction,
     ftKoopa_SpecialAirLw_StartAction,
@@ -256,7 +256,7 @@ HSD_GObjEvent ft_SpecialAirLw[FTKIND_MAX] = {
     ftFox_SpecialAirLw_StartAction,
     ftPikachu_SpecialAirLw_StartAction,
     ftGameWatch_SpecialAirLw_StartAction,
-    ftCFalcon_SpecialAirLw_StartAction,
+    ftCaptain_SpecialAirLw_StartAction,
     ftMars_SpecialAirLw_StartAction,
     NULL,
     NULL,
@@ -377,7 +377,7 @@ HSD_GObjEvent ft_SpecialN[FTKIND_MAX] = {
 HSD_GObjEvent ft_SpecialLw[FTKIND_MAX] = {
     ftMario_SpecialLw_StartAction,
     ftFox_SpecialLw_StartAction,
-    ftCFalcon_SpecialLw_StartAction,
+    ftCaptain_SpecialLw_StartAction,
     ftDonkey_SpecialLw_StartAction,
     ftKirby_SpecialLw_StartAction,
     ftKoopa_SpecialLw_StartAction,
@@ -400,7 +400,7 @@ HSD_GObjEvent ft_SpecialLw[FTKIND_MAX] = {
     ftFox_SpecialLw_StartAction,
     ftPikachu_SpecialLw_StartAction,
     ftGameWatch_SpecialLw_StartAction,
-    ftCFalcon_SpecialLw_StartAction,
+    ftCaptain_SpecialLw_StartAction,
     ftMars_SpecialLw_StartAction,
     NULL,
     NULL,
@@ -413,7 +413,7 @@ HSD_GObjEvent ft_SpecialLw[FTKIND_MAX] = {
 HSD_GObjEvent ft_SpecialHi[FTKIND_MAX] = {
     ftMario_SpecialHi_StartAction,
     ftFox_SpecialHi_StartAction,
-    ftFalcon_SpecialHi_StartAction,
+    ftCaptain_SpecialHi_StartAction,
     ftDonkey_SpecialHi_StartAction,
     ftKirby_SpecialHi_StartAction,
     ftKoopa_SpecialHi_StartAction,
@@ -436,7 +436,7 @@ HSD_GObjEvent ft_SpecialHi[FTKIND_MAX] = {
     ftFox_SpecialHi_StartAction,
     ftPikachu_SpecialHi_StartAction,
     ftGameWatch_SpecialHi_StartAction,
-    ftFalcon_SpecialHi_StartAction,
+    ftCaptain_SpecialHi_StartAction,
     ftMars_SpecialHi_StartAction,
     NULL,
     NULL,
@@ -485,7 +485,7 @@ HSD_GObjEvent ft_OnAbsorb[FTKIND_MAX] = {
 Fighter_ItemEvent ft_OnItemPickupExt[FTKIND_MAX] = {
     ftMario_OnItemPickup,
     ftFox_OnItemPickup,
-    ftCFalcon_OnItemPickup,
+    ftCaptain_OnItemPickup,
     ftDonkey_OnItemPickup,
     ftKirby_OnItemPickup,
     ftKoopa_OnItemPickup,
@@ -521,7 +521,7 @@ Fighter_ItemEvent ft_OnItemPickupExt[FTKIND_MAX] = {
 HSD_GObjEvent ft_OnItemInvisible[FTKIND_MAX] = {
     ftMario_OnItemInvisible,
     ftFox_OnItemInvisible,
-    ftCFalcon_OnItemInvisible,
+    ftCaptain_OnItemInvisible,
     ftDonkey_OnItemInvisible,
     ftKirby_OnItemInvisible,
     ftKoopa_OnItemInvisible,
@@ -557,7 +557,7 @@ HSD_GObjEvent ft_OnItemInvisible[FTKIND_MAX] = {
 HSD_GObjEvent ft_OnItemVisible[FTKIND_MAX] = {
     ftMario_OnItemVisible,
     ftFox_OnItemVisible,
-    ftCFalcon_OnItemVisible,
+    ftCaptain_OnItemVisible,
     ftDonkey_OnItemVisible,
     ftKirby_OnItemVisible,
     ftKoopa_OnItemVisible,
@@ -593,7 +593,7 @@ HSD_GObjEvent ft_OnItemVisible[FTKIND_MAX] = {
 Fighter_ItemEvent ft_OnItemDropExt[FTKIND_MAX] = {
     ftMario_OnItemDrop,
     ftFox_OnItemDrop,
-    ftCFalcon_OnItemDrop,
+    ftCaptain_OnItemDrop,
     ftDonkey_OnItemDrop,
     ftKirby_OnItemDrop,
     ftKoopa_OnItemDrop,
@@ -629,7 +629,7 @@ Fighter_ItemEvent ft_OnItemDropExt[FTKIND_MAX] = {
 Fighter_ItemEvent ft_OnItemPickup[FTKIND_MAX] = {
     ftMario_OnItemPickup,
     ftFox_OnItemPickup,
-    ftCFalcon_OnItemPickup,
+    ftCaptain_OnItemPickup,
     ftDonkey_OnItemPickup,
     ftKirby_OnItemPickup,
     ftKoopa_OnItemPickup,
@@ -665,7 +665,7 @@ Fighter_ItemEvent ft_OnItemPickup[FTKIND_MAX] = {
 Fighter_ItemEvent ft_OnItemDrop[FTKIND_MAX] = {
     ftMario_OnItemDrop,
     ftFox_OnItemDrop,
-    ftCFalcon_OnItemDrop,
+    ftCaptain_OnItemDrop,
     ftDonkey_OnItemDrop,
     ftKirby_OnItemDrop,
     ftKoopa_OnItemDrop,
@@ -887,7 +887,7 @@ HSD_GObjEvent lbl_803C1E38[FTKIND_MAX] = {
 
 HSD_GObjEvent ft_LoadSpecialAttrs[FTKIND_MAX] = {
     ftMario_LoadSpecialAttrs,      ftFox_LoadSpecialAttrs,
-    ftCFalcon_LoadSpecialAttrs,    ftDonkey_LoadSpecialAttrs,
+    ftCaptain_LoadSpecialAttrs,    ftDonkey_LoadSpecialAttrs,
     ftKirby_LoadSpecialAttrs,      ftKoopa_LoadSpecialAttrs,
     ftLink_LoadSpecialAttrs,       ftSeak_LoadSpecialAttrs,
     ftNess_LoadSpecialAttrs,       ftPeach_LoadSpecialAttrs,
