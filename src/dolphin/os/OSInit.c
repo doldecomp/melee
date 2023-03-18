@@ -71,7 +71,7 @@ extern u8 __ArenaHi[];
 extern u8 __ArenaLo[];
 
 #ifdef MUST_MATCH
-/// Peephole bug triggered by inline asm function __OSFPRInit (_ in melee)
+/// Peephole bug triggered by inline asm function __OSFPRInit (unused in melee)
 #pragma peephole off
 #endif
 
