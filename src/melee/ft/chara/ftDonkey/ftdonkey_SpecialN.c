@@ -1,12 +1,13 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialN.h>
+#include "ftdonkey_SpecialN.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/lb/forward.h>
+#include "ftdonkey.h"
+
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "lb/forward.h"
 
 void ftDonkey_SetCallbacks_SpecialN(HSD_GObj* fighter_gobj)
 {
@@ -263,7 +264,11 @@ void ftDonkey_8010ECE8(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010ED88(HSD_GObj* fighter_gobj)
 {
-    s32 unsued[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftDonkey_NullCallbacks(fighter_gobj);
         func_800CC730(fighter_gobj);

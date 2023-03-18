@@ -1,12 +1,11 @@
-#include <melee/ft/chara/ftDrMario/ftdrmario.h>
+#include "ftdrmario.h"
 
-#include <melee/ft/chara/ftDrMario/ftdrmario.h>
-#include <melee/ft/chara/ftMario/ftmario.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/code_8027CF30.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftMario/ftmario.h"
+#include "it/code_8027CF30.h"
 
 ActionState as_table_drmario[] = {
     { 239, 0x00000071, 0x01000000, func_80149954, func_80149A6C, func_80149A8C,
@@ -86,7 +85,11 @@ void ftDrMario_OnLoad(HSD_GObj* gobj)
     Fighter* fp;
     void** items;
     ftDrMarioAttributes* sa;
-    int unused[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     fp = gobj->user_data;
     items = fp->x10C_ftData->x48_items;
@@ -139,7 +142,11 @@ void ftDrMario_OnKnockbackExit(HSD_GObj* gobj)
 void func_801497CC(HSD_GObj* gobj)
 {
     Fighter* fp;
-    int unused[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     if (gobj != NULL) {
         fp = gobj->user_data;

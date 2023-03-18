@@ -1,9 +1,9 @@
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include "ftgamewatch.h"
 
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 // 0x8014A848 //
 // https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up

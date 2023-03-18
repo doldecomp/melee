@@ -1,12 +1,12 @@
-#include <melee/ft/chara/ftFox/ftfox.h>
+#include "ftfox.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
 
 // 0x800E9DF8
 // https://decomp.me/scratch/5Qwzg // Create Fox Illusion / Falco Phantasm GFX
@@ -266,7 +266,10 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* fighter_gobj)
 // Dash Animation callback
 void ftFox_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
-    s32 filler[6];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftFox_SpecialSEnd_Action(fighter_gobj);
@@ -279,7 +282,10 @@ void ftFox_SpecialS_Anim(HSD_GObj* fighter_gobj)
 // Dash Animation callback
 void ftFox_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
-    s32 filler[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftFox_SpecialAirSEnd_Action(fighter_gobj);
@@ -446,8 +452,10 @@ inline void ftFox_SpecialS_SetVars(HSD_GObj* fighter_gobj)
 // Dash Action State handler
 void ftFox_SpecialS_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 unused[6];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[28];
+#endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALS,
                                        FtStateChange_SkipUpdateRumble, NULL,
@@ -460,8 +468,10 @@ void ftFox_SpecialS_Action(HSD_GObj* fighter_gobj)
 // Dash Action State handler
 void ftFox_SpecialAirS_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 unused[8];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[36];
+#endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRS,
                                        FtStateChange_SkipUpdateRumble, NULL,

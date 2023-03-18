@@ -1,12 +1,14 @@
+#include "ftfox.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftlib.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "it/item.h"
+#include "lb/lbunknown_001.h"
+
 #include <dolphin/os/os.h>
-#include <melee/ft/chara/ftFox/ftfox.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/it/item.h>
-#include <melee/lb/lbunknown_001.h>
 
 void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 {
@@ -42,7 +44,10 @@ void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 // function
 void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     func_800892A0(fighter_gobj);
     func_80089824(fighter_gobj);
@@ -142,7 +147,11 @@ void ftFox_ClearBlaster(HSD_GObj* fighter_gobj)
 void ftFox_RemoveBlaster(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* blasterGObj;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     if (fp->sa.fox.x222C_blasterGObj != NULL) {
         func_802AEAB4(fp->sa.fox.x222C_blasterGObj);
@@ -164,7 +173,12 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
      * #ftFox_SpecialAirNLoop_Anim.
      */
     Vec3 sp2C;
-    s32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     ftFoxAttributes* foxAttrs;
     Fighter* fp;
     f64 launchAngle;
@@ -300,7 +314,11 @@ void ftFox_SpecialAirN_StartAction(
 void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* blasterGObj;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
     if ((fp->x220C_ftcmd_var3 == 1U) && (fp->sa.fox.x222C_blasterGObj != NULL))
@@ -420,7 +438,11 @@ static inline void ftFox_SpecialN_RemoveBlasterNULL(HSD_GObj* fighter_gobj)
 void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    HSD_GObj* blasterGObj;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, fp->x2204_ftcmd_var1);
 
@@ -445,7 +467,11 @@ void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* blasterGObj;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
     if ((fp->x220C_ftcmd_var3 == 1U) && (fp->sa.fox.x222C_blasterGObj != NULL))

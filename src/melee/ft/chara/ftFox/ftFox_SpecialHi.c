@@ -1,13 +1,14 @@
-#include <melee/ft/chara/ftFox/ftfox.h>
+#include "ftfox.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftparts.h>
-#include <MSL/trigf.h>
-#include <sysdolphin/baselib/gobjproc.h>
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftparts.h"
+
+#include <baselib/gobjproc.h>
+#include <trigf.h>
 
 /// @todo Move elsewhere.
 #define HALF_PI32 (1.5707963705062866f)
@@ -319,7 +320,12 @@ static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* fighter_gobj)
 void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 {
     f32 facingDir;
-    s32 envFlags;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = foxAttrs = getFtSpecialAttrs(fp);
     CollData* collData = collData = getFtColl(fp);
@@ -395,9 +401,10 @@ void ftFox_SpecialHi_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    /// @todo Probably missing arguments.
-    HSD_GObjEvent cb;
-    s32 var;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     func_8007D60C(fp);
 
@@ -420,7 +427,11 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* fighter_gobj)
     f32 temp_stick;
     f32 stick_x;
     f32 stick_y;
-    s32 var;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     fp = getFighter(fighter_gobj);
     stick_y = fp->input.x624_lstick_y;
@@ -488,7 +499,11 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
     f32 stick_x;
     f32 stick_y;
     f32 temp_stick;
-    f32 var;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     ftAttrs = &fp->x110_attr;
     foxAttrs = fp->x2D4_specialAttributes;
@@ -541,11 +556,13 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 // End Animation callback
 void ftFox_SpecialHiLanding_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 // 0x800E7E78

@@ -1,10 +1,10 @@
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include "ftgamewatch.h"
 
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj*);
 static void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj*);
@@ -15,7 +15,12 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
     HSD_GObj* manholeGObj;
-    HSD_GObj* manholeGObj2;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     Fighter* fp = getFighter(fighter_gobj);
 
     if (fp->sa.gaw.x2250_manholeGObj2 == NULL) {
@@ -66,8 +71,11 @@ void ftGameWatch_ItemManholeRemove(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/09CUB // Remove Manhole on damage
 void ftGameWatch_ItemManholeOnDamage(HSD_GObj* fighter_gobj)
 {
-    HSD_GObj* manholeGObj;
-    HSD_GObj* manholeGObj2;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter* fp = getFighter(fighter_gobj);
 
     if (fp->sa.gaw.x2250_manholeGObj2 != NULL) {
@@ -128,11 +136,13 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj); // Filler
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_800D638C(fighter_gobj);
-    }
 }
 
 // 0x8014AE78

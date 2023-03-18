@@ -1,11 +1,12 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialLw.h>
+#include "ftdonkey_SpecialLw.h"
 
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
+#include "ftdonkey.h"
+
+#include "ef/efasync.h"
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
 
 void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
@@ -18,10 +19,13 @@ void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DCD8(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2]; // needs either unused filler, or arg params
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         ftDonkey_8010DE88(fighter_gobj);
-    }
 }
 
 void ftDonkey_8010DD14(HSD_GObj* fighter_gobj) {}
@@ -107,10 +111,13 @@ void ftDonkey_8010DE88(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DF5C(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 void ftDonkey_8010DF98(HSD_GObj* fighter_gobj) {}

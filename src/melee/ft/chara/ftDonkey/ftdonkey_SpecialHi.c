@@ -1,11 +1,12 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.h>
+#include "ftdonkey_SpecialHi.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
+#include "ftdonkey.h"
+
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcliffcommon.h"
 
 void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* fighter_gobj)
 {
@@ -102,7 +103,11 @@ void ftDonkey_8010FDA4(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010FDEC(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2]; /// get inline break the regalloc, this seems cleanest
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     f32 gravity_scalar;
