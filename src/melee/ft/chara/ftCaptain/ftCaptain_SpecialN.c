@@ -1,7 +1,9 @@
 #include "ftCaptain_SpecialN.h"
 
-#include "ft/types.h"
 #include "ftCaptain.h"
+#include "types.h"
+
+#include "ft/types.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
