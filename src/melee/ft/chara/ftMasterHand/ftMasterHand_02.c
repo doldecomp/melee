@@ -1,13 +1,14 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include "ftMasterHand.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_13.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_15.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_16.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_21.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_22.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/mp/mplib.h>
+#include "ftMasterHand_13.h"
+#include "ftMasterHand_15.h"
+#include "ftMasterHand_16.h"
+#include "ftMasterHand_21.h"
+#include "ftMasterHand_22.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
+#include "mp/mplib.h"
 
 // 8014FDD0 0014C9B0
 // https://decomp.me/scratch/HWef2
@@ -34,14 +35,9 @@ void func_8014FE58(HSD_GObj* gobj)
     return;
 }
 
-#ifdef MUST_MATCH
-#pragma dont_inline on
-#endif
 void func_8014FE5C(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
-    fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->action_id == 341) || (fp->action_id == 342)) {
         fp->xB0_pos = fp->sa.masterhand.x2240_pos;
     } else {
@@ -58,9 +54,7 @@ void func_8014FE5C(HSD_GObj* gobj)
 
 void func_8014FF1C(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
-    fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->action_id == 341) || (fp->action_id == 342)) {
         fp->xB0_pos = fp->sa.masterhand.x2240_pos;
     } else {
@@ -77,10 +71,13 @@ void func_8014FF1C(HSD_GObj* gobj)
 
 void lbl_8014FFDC(HSD_GObj* gobj)
 {
-    Fighter* r31_fp;
-    u32 unk[4];
+    Fighter* r31_fp = GET_FIGHTER(gobj);
 
-    r31_fp = gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
+
     if (r31_fp->sa.masterhand.x2258 == 0x186) {
         if ((r31_fp->action_id == 0x155) || (r31_fp->action_id == 0x156)) {
             r31_fp->xB0_pos = r31_fp->sa.masterhand.x2240_pos;
@@ -114,17 +111,15 @@ void lbl_8014FFDC(HSD_GObj* gobj)
 void func_80150144(HSD_GObj* gobj)
 {
     MasterHandAttributes* r5_attributes;
-    Fighter* fp;
-    Fighter* fp_1; // todo: dup?
-    Vec2 unusedPos;
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp_1;
 
-    fp = gobj->user_data;
     r5_attributes = fp->x10C_ftData->ext_attr;
     fp->sa.masterhand.x2258 = 341;
     fp->action_id = 343;
     fp->xB0_pos.x = r5_attributes->x30_pos2.x;
     fp->xB0_pos.y = r5_attributes->x30_pos2.y;
-    fp_1 = gobj->user_data;
+    fp_1 = GET_FIGHTER(gobj);
     if ((fp_1->action_id == 341) || (fp_1->action_id == 342)) {
         fp_1->xB0_pos = fp_1->sa.masterhand.x2240_pos;
     } else {
@@ -138,9 +133,6 @@ void func_80150144(HSD_GObj* gobj)
     }
     fp_1->sa.masterhand.x2258 = 341;
 }
-#ifdef MUST_MATCH
-#pragma dont_inline off
-#endif
 
 typedef struct {
     u8 a;
@@ -198,18 +190,15 @@ inline void lbl_80150230_inline_2(HSD_GObj* gobj)
     }
 }
 
-// 80150230 0014CE10
-// https://decomp.me/scratch/NJIf7
 void lbl_80150230(HSD_GObj* gobj)
 {
-    // r31 = &lbl_803D40D0
-    // r30 = fp
-    // r29 = ft_inline / attr
-    // r28 = gobj
-    // r27 = tmp
-    // r26 = tmp2?
-    Fighter* fp = gobj->user_data;
-    s32 unused[2];
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
+
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_80150894(gobj);
         if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -223,7 +212,12 @@ void lbl_80150230(HSD_GObj* gobj)
         if (--fp->sa.masterhand.x223C < 0.0f) {
             MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
             Vec3 vec;
-            s32 unused[6];
+
+            /// @todo Unused stack.
+#ifdef MUST_MATCH
+            u8 unused[20];
+#endif
+
             func_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C,
                           fp->sa.masterhand.x2238, attr->x18, attr->x20,
                           attr->x1C);
@@ -365,7 +359,7 @@ void lbl_80150230(HSD_GObj* gobj)
 // https://decomp.me/scratch/rgMOD
 void lbl_8015082C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_8015BD20(gobj);
     }
@@ -386,77 +380,71 @@ void lbl_80150890(HSD_GObj* gobj)
 
 // 80150894 0014D474
 // https://decomp.me/scratch/nuumS
-#define DPAD_LEFT 1
-#define DPAD_RIGHT 2
-#define DPAD_DOWN 4
-#define DPAD_UP 8
-#define BUTTON_Z 0x10
-#define BUTTON_R 0x20
-#define BUTTON_L 0x40
-#define BUTTON_A 0x100
-#define BUTTON_B 0x200
-#define BUTTON_X 0x400
-#define BUTTON_Y 0x800
-#define BUTTON_START 0x1000
 #define r6_button (HSD_PadMasterStatus[2].button)
 #include <sysdolphin/baselib/controller.h>
 extern HSD_PadStatus HSD_PadMasterStatus[4];
 void func_80150894(HSD_GObj* gobj)
 {
-    Fighter* r4_fp = gobj->user_data;
+    Fighter* r4_fp = GET_FIGHTER(gobj);
     MasterHandAttributes* r31_attributes = r4_fp->x10C_ftData->ext_attr;
     Vec3 sp10_pos;
-    s32 unused;
-    u32 l_pressed = r6_button & BUTTON_L;
+    u32 l_pressed = r6_button & HSD_BUTTON_L;
     // why just l_pressed and not temps for the others?
 
-    if (l_pressed && (r6_button & DPAD_UP)) {
+    if (l_pressed && (r6_button & HSD_BUTTON_DPAD_UP)) {
         // Stage-Wide Slap
         func_80053FF4(0, &sp10_pos);
         sp10_pos.y = r31_attributes->x38;
         func_80150DC4(gobj, &lbl_80151828, &sp10_pos);
-    } else if (l_pressed && (r6_button & DPAD_RIGHT)) {
+    } else if (l_pressed && (r6_button & HSD_BUTTON_DPAD_RIGHT)) {
         // Sweep
         func_80053FF4(0, &sp10_pos);
         sp10_pos.y = r31_attributes->x50.y;
         func_80150DC4(gobj, &lbl_80151BB8, &sp10_pos);
-    } else if (l_pressed && (r6_button & DPAD_DOWN)) {
+    } else if (l_pressed && (r6_button & HSD_BUTTON_DPAD_DOWN)) {
         // Walk
         sp10_pos.x = r31_attributes->x40_pos.x;
         sp10_pos.y = r31_attributes->x40_pos.y;
         sp10_pos.z = 0.0f;
         func_80150DC4(gobj, &lbl_80151DC4, &sp10_pos);
-    } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_UP)) {
+    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_UP)) {
         // Drill
         sp10_pos.x = r31_attributes->x88_pos.x;
         sp10_pos.y = r31_attributes->x88_pos.y;
         sp10_pos.z = 0.0f;
         func_80150DC4(gobj, &lbl_801521DC, &sp10_pos);
-    } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_RIGHT)) {
+    } else if ((r6_button & HSD_BUTTON_R) &&
+               (r6_button & HSD_BUTTON_DPAD_RIGHT))
+    {
         // Punch
         sp10_pos.x = r31_attributes->xA8_pos.x;
         sp10_pos.y = r31_attributes->xA8_pos.y;
         sp10_pos.z = 0.0f;
         func_80150DC4(gobj, &lbl_80152370, &sp10_pos);
-    } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_DOWN)) {
+    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_DOWN))
+    {
         // Ground Slap
         sp10_pos.x = r31_attributes->xBC_pos.x;
         sp10_pos.y = r31_attributes->xBC_pos.y;
         sp10_pos.z = 0.0f;
         func_80150DC4(gobj, &lbl_801526D8, &sp10_pos);
-    } else if ((r6_button & BUTTON_R) && (r6_button & DPAD_LEFT)) {
+    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_LEFT))
+    {
         // Poke
         func_80152880(gobj);
-    } else if ((r6_button & BUTTON_A) && (r6_button & DPAD_UP)) {
+    } else if ((r6_button & HSD_BUTTON_A) && (r6_button & HSD_BUTTON_DPAD_UP)) {
         // Jet
         func_80153820(gobj);
-    } else if ((r6_button & BUTTON_A) && (r6_button & DPAD_RIGHT)) {
+    } else if ((r6_button & HSD_BUTTON_A) &&
+               (r6_button & HSD_BUTTON_DPAD_RIGHT))
+    {
         // Ram
         func_801541C8(gobj, &lbl_80153B90);
-    } else if ((r6_button & BUTTON_A) && (r6_button & DPAD_DOWN)) {
+    } else if ((r6_button & HSD_BUTTON_A) && (r6_button & HSD_BUTTON_DPAD_DOWN))
+    {
         // Crush
         func_801541C8(gobj, &lbl_80153D2C);
-    } else if ((r6_button & BUTTON_B) && (r6_button & DPAD_UP)) {
+    } else if ((r6_button & HSD_BUTTON_B) && (r6_button & HSD_BUTTON_DPAD_UP)) {
         // Lasers
         f32 rand;
         rand = HSD_Randf();
@@ -467,18 +455,25 @@ void func_80150894(HSD_GObj* gobj)
                      r31_attributes->xC4_pos.y - r31_attributes->xCC_pos.y;
         sp10_pos.z = 0.0f;
         func_80150DC4(gobj, &lbl_80152BCC, &sp10_pos);
-    } else if ((r6_button & BUTTON_B) && ((r6_button & DPAD_RIGHT))) {
+    } else if ((r6_button & HSD_BUTTON_B) &&
+               ((r6_button & HSD_BUTTON_DPAD_RIGHT)))
+    {
         // Gun
         func_801530A4(gobj);
-    } else if ((r6_button & BUTTON_Z) && ((r6_button & DPAD_UP))) {
+    } else if ((r6_button & HSD_BUTTON_Z) && ((r6_button & HSD_BUTTON_DPAD_UP)))
+    {
         // Grab
         r4_fp->sa.masterhand.x2250 = 0x17B;
         func_801542E0(gobj);
-    } else if ((r6_button & BUTTON_Z) && ((r6_button & DPAD_RIGHT))) {
+    } else if ((r6_button & HSD_BUTTON_Z) &&
+               ((r6_button & HSD_BUTTON_DPAD_RIGHT)))
+    {
         // Grab
         r4_fp->sa.masterhand.x2250 = 0x17C;
         func_801542E0(gobj);
-    } else if (((r6_button & BUTTON_Y)) && ((r6_button & DPAD_UP))) {
+    } else if (((r6_button & HSD_BUTTON_Y)) &&
+               ((r6_button & HSD_BUTTON_DPAD_UP)))
+    {
         // Crazy Hand Combo Attack
         switch (func_8015C4C4()) {
         case 0x179: {

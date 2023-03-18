@@ -1,15 +1,15 @@
-#include <melee/ft/chara/ftMars/ftMars.h>
+#include "ftMars.h"
 
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F
 void ftMars_SpecialHi_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
 
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -25,9 +25,13 @@ void ftMars_SpecialHi_StartAction(HSD_GObj* gobj)
 // https://decomp.me/scratch/PuVdx
 void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 unused[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -45,9 +49,8 @@ void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj)
 // https://decomp.me/scratch/56Ycw
 void lbl_801382E8(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 unused[2];
 
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -60,9 +63,13 @@ void lbl_801382E8(HSD_GObj* gobj)
 // https://decomp.me/scratch/WdpFi
 void lbl_80138348(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 unused[4];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
 
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -79,13 +86,12 @@ void lbl_80138348(HSD_GObj* gobj)
 // https://decomp.me/scratch/0VOrt
 void lbl_801383A8(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
 
     f32 abs_lstick_x = abs(fp->input.x620_lstick_x);
 
     s32 phi_r0;
-    s32 unused;
 
     if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
         f32 temp_f1 =
@@ -115,13 +121,17 @@ void lbl_801383A8(HSD_GObj* gobj)
 // https://decomp.me/scratch/2yXhH
 void lbl_801384F0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
 
     f32 abs_lstick_x = abs(fp->input.x620_lstick_x);
 
     s32 phi_r0;
-    s32 unused[6];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     if (fp->x2200_ftcmd_var0 == 0 && abs_lstick_x > attr->x34) {
         f32 temp_f1 =
@@ -153,8 +163,13 @@ void lbl_80138638(HSD_GObj* gobj)
 {
     struct attr* attr2;
     MarsAttributes* attr;
-    Fighter* fp = gobj->user_data;
-    s32 unused[8];
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[32];
+#endif
+
     s32 num;
 
     // this is required, dunno why
@@ -191,11 +206,15 @@ void lbl_80138638(HSD_GObj* gobj)
 // https://decomp.me/scratch/9gz2V
 void lbl_8013873C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
     struct attr* attr2 = &fp->x110_attr;
     s32 num;
-    s32 unused[10];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[40];
+#endif
 
     if (fp->x2200_ftcmd_var0 != 0) {
         if (fp->x2208_ftcmd_var2 == 0) {
