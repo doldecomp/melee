@@ -1899,7 +1899,11 @@ void func_80080174(Fighter* fp)
     f32 phi_f2;
     f32 phi_f3;
     Vec3* v;
-    u32 unused[4];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[16];
+#endif
 
     if (fp->x197C != NULL) {
         func_80294E78(fp->x197C, fp->x34_scale.y * fp->x110_attr.x23C);
@@ -1920,7 +1924,11 @@ void func_8008021C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     Vec2 shift;
     Vec2* result;
-    u32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[4];
+#endif
 
     fp->dmg.x18BC = 0;
     fp->dmg.x18B8 = 0;

@@ -1,8 +1,9 @@
+#include "ftwalkcommon.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ftcommon.h"
 #include <dolphin/os/os.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftwalkcommon.h>
 
 s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
 {
@@ -168,7 +169,11 @@ inline f32 getFtWalkAcceleration(Fighter* fp, f32 multiplier)
 
 void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
 {
-    s32 unused[5];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[20];
+#endif
+
     Fighter* fp;
     f32 temp_f0;
     f32 temp_f4;

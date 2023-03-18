@@ -1,23 +1,23 @@
-#include "melee/ft/inlines.h"
-#include <melee/ft/ftlib.h>
+#include "ftlib.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ef/efasync.h>
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
-#include <melee/ft/chara/ftKirby/ftkirby.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftparts.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/it/itkind.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/pl/pl_unknown_001.h>
-#include <melee/pl/player.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/rumble.h>
+#include "cm/camera.h"
+#include "ef/efasync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
+#include "ft/ftdata.h"
+#include "ft/ftparts.h"
+#include "ft/inlines.h"
+#include "ftGameWatch/ftgamewatch.h"
+#include "ftKirby/ftkirby.h"
+#include "gm/code_801601C4.h"
+#include "it/itkind.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
+#include "pl/pl_unknown_001.h"
+#include "pl/player.h"
+#include <baselib/jobj.h>
+#include <baselib/rumble.h>
 
 extern struct {
     void* unk0;
@@ -503,7 +503,11 @@ bool func_80086A58(HSD_GObj* gobj, S32Vec2* x)
 
 bool func_80086A8C(HSD_GObj* gobj)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
     struct {
         u8 x0_fill[0x28];
         void* unk28;

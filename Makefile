@@ -84,7 +84,7 @@ FORMAT  := clang-format -i -style=file
 FRANK := tools/frank.py
 
 # Options
-INCLUDE_DIRS = $(*D) src/melee
+INCLUDE_DIRS = $(*D) src/melee src/melee/ft/chara
 # TODO dolphin and sysdolphin as system includes
 #      Then fix include statements to use quotes for other paths
 #      And make sure that all tools understand this distinction.

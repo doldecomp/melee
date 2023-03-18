@@ -1,12 +1,12 @@
-#include <sysdolphin/baselib/mobj.h>
+#include "mobj.h"
 
+#include "class.h"
+#include "memory.h"
+#include "state.h"
+#include "tev.h"
+#include "texp.h"
 #include <dolphin/os/os.h>
 #include <string.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/tev.h>
-#include <sysdolphin/baselib/texp.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_MObj* current_mobj;
@@ -185,14 +185,17 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
     HSD_TExp *exp, *exp_2, *exp_3;
     HSD_TObj *tobj, *tobj_2, *tobj_3, *tobj_4, *toon = NULL;
     u32 done = 0;
-    u32 unused[5];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[20];
+#endif
 
     HSD_ASSERT(416, list);
     *list = NULL;
     for (tobj = tobj_top; tobj != NULL; tobj = tobj->next) {
-        if (tobj_coord(tobj) == TEX_COORD_TOON) {
+        if (tobj_coord(tobj) == TEX_COORD_TOON)
             toon = tobj;
-        }
     }
 
     if (mobj->rendermode & RENDER_VERTEX) {

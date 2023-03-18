@@ -3,6 +3,7 @@
 -std=c99
 -nostdinc
 -Isrc/melee
+-Isrc/melee/ft/chara
 -isystemsrc
 -isystemsrc/MSL
 -isystemsrc/sysdolphin
