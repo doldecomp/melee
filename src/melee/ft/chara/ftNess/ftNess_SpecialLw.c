@@ -586,24 +586,26 @@ void ftNess_SpecialAirLwTurn_Phys(
     HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Turnaround Physics
                             // callback - unused
 {
-    Fighter* fp;
-    s32 unused[6];
-    s32 magnetTimer;
-    ftNessAttributes* ness_attr;
-    attr* attr;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp = GET_FIGHTER(fighter_gobj);
-    ness_attr = fp->x2D4_specialAttributes;
-    attr = &fp->x110_attr;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[24];
+#endif
+
+    s32 magnetTimer;
+    ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
+    attr* attr = &fp->x110_attr;
 
     magnetTimer = fp->nessVars.SpecialLw.gravityDelay;
+
     if (magnetTimer != 0) {
         fp->nessVars.SpecialLw.gravityDelay = magnetTimer - 1;
-        goto block_end;
+    } else {
+        func_8007D494(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
+                      attr->x170_TerminalVelocity);
     }
-    func_8007D494(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
-                  attr->x170_TerminalVelocity);
-block_end:
+
     func_8007CF58(fp);
     func_8007AF10(fighter_gobj);
 }
