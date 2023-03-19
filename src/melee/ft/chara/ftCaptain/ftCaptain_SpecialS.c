@@ -171,23 +171,23 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
             switch (fp->action_id) {
             case ftCaptain_AS_SpecialS_Start: {
                 onDetectGround(fighter_gobj);
-                return;
+                break;
             }
 
             case ftCaptain_AS_SpecialAirS_Start:
                 onDetectAir(fighter_gobj);
-                return;
+                break;
             }
         } else if (classifier == HSD_GOBJ_CLASS_ITEM) {
             if (itGetKind(detectGObj) < It_Kind_BombHei) {
                 switch (fp->action_id) {
                 case ftCaptain_AS_SpecialS_Start:
                     onDetectGround(fighter_gobj);
-                    return;
+                    break;
 
                 case ftCaptain_AS_SpecialAirS_Start:
                     onDetectAir(fighter_gobj);
-                    return;
+                    break;
                 }
             } else if ((itGetKind(detectGObj) >= It_Kind_Kuriboh &&
                         itGetKind(detectGObj) < It_Kind_Octarock_Stone) ||
@@ -198,11 +198,11 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
                 switch (fp->action_id) {
                 case ftCaptain_AS_SpecialS_Start:
                     onDetectGround(fighter_gobj);
-                    return;
+                    break;
 
                 case ftCaptain_AS_SpecialAirS_Start:
                     onDetectAir(fighter_gobj);
-                    return;
+                    break;
                 }
             }
         }
