@@ -100,8 +100,19 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj);
 
 void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj);
+
+/**
+ * Captain Falcon & Ganondorf's grounded Raptor Boost / Gerudo Dragon Hit
+ * Collision callback
+ */
 void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj);
+
+/**
+ * Captain Falcon & Ganondorf's aerial Raptor Boost / Gerudo Dragon Start
+ * Collision callback
+ */
 void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj);
+
 void ftCaptain_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_OnLoadForGanon(Fighter*);
 

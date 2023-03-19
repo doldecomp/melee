@@ -370,8 +370,13 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 // Raptor Boost / Gerudo Dragon Start Collision callback
 void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-    ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused[8];
+#endif
+
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftCaptainAttributes* sa = sa = fp->x2D4_specialAttributes;
 
     if (fp->x2208_ftcmd_var2 == 0) {
         func_80084104(fighter_gobj);
@@ -381,13 +386,12 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
     if (func_80082708(fighter_gobj) == false) {
         efLib_DestroyAll(fighter_gobj);
         func_8007D60C(fp);
-        if (captainAttrs->specials_miss_landing_lag == 0) {
+        if (sa->specials_miss_landing_lag == 0) {
             func_800CC730(fighter_gobj);
             return;
         }
         func_8007D468(fp);
-        func_80096900(fighter_gobj, 1, 1, 0, 1,
-                      captainAttrs->specials_miss_landing_lag);
+        func_80096900(fighter_gobj, 1, 1, 0, 1, sa->specials_miss_landing_lag);
         return;
     }
 
@@ -408,8 +412,6 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
     }
 }
 
-// Captain Falcon & Ganondorf's grounded Raptor Boost / Gerudo Dragon Hit
-// Collision callback
 void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* temp_fp = GET_FIGHTER(fighter_gobj);
@@ -435,8 +437,6 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
     }
 }
 
-// Captain Falcon & Ganondorf's aerial Raptor Boost / Gerudo Dragon Start
-// Collision callback
 void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
