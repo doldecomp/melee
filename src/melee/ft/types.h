@@ -1,25 +1,35 @@
 #ifndef MELEE_FT_TYPES_H
 #define MELEE_FT_TYPES_H
 
-#include <common_structs.h>
+#include "common_structs.h"
+#include "ft/ftanim.h"
+#include "ft/ftstatevars.h"
+#include "ftCaptain/types.h"
+#include "ftFox/ftFox_StateVars.h"
+#include "ftGameWatch/ftGameWatch_StateVars.h"
+#include "ftLuigi/ftLuigi_StateVars.h"
+#include "ftMario/ftMario_StateVars.h"
+#include "ftMasterHand/ftMasterhand_StateVars.h"
+#include "ftMewtwo/ftMewtwo_StateVars.h"
+#include "ftNess/ftNess_StateVars.h"
+#include "ftSeak/ftSeak_StateVars.h"
+#include "gr/stage.h"
+#include "lb/lbcollision.h"
+#include "lb/lbrefract.h"
+#include "pl/player.h"
+
+#include <baselib/archive.h>
+#include <baselib/controller.h>
+#include <baselib/dobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/random.h>
 #include <dolphin/mtx/types.h>
 #include <math.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftstatevars.h>
-#include <melee/gr/stage.h>
-#include <melee/lb/lbcollision.h>
-#include <melee/lb/lbrefract.h>
-#include <melee/pl/player.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/random.h>
+#include <platform.h>
 
 typedef enum FighterKind {
     FTKIND_MARIO,

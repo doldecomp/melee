@@ -1,8 +1,8 @@
 #ifndef _FTLUIGI_STATEVARS_H_
 #define _FTLUIGI_STATEVARS_H_
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
+#include <platform.h>
 
 typedef struct ftLuigiSpecialS {
     s32 chargeFrames; // 0x2340 - Number of frames Green Missile has been

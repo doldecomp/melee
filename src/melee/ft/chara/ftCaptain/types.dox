@@ -148,3 +148,8 @@
 /** @var ftCaptainAttributes::speciallw_air_landing_traction
  * @at{88} @sz{4}
  */
+
+/** @var ftCaptainSpecialS::grav
+ * Gravity of aerial Raptor Boost.
+ * @at{0} @sz{4}
+ */

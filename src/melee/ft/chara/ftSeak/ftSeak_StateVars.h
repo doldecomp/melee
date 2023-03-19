@@ -1,8 +1,8 @@
 #ifndef _FTSEAK_STATEVARS_H_
 #define _FTSEAK_STATEVARS_H_
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
+#include <platform.h>
 
 typedef struct ftSeakSpecialN {
     s32 x2340;

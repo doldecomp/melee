@@ -1,9 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_TYPES_H
 #define MELEE_FT_CHARA_FTCAPTAIN_TYPES_H
 
+#include "ftCaptain/forward.h"
 #include <platform.h>
 
-typedef struct ftCaptainAttributes {
+struct ftCaptainAttributes {
     f32 specialn_stick_range_y_neg;
     f32 specialn_stick_range_y_pos;
     f32 specialn_angle_diff;
@@ -39,6 +40,14 @@ typedef struct ftCaptainAttributes {
     f32 speciallw_landing_lag_mul;
     f32 speciallw_ground_traction;
     f32 speciallw_air_landing_traction;
-} ftCaptainAttributes;
+};
+
+struct ftCaptainSpecialS {
+    f32 grav;
+};
+
+union ftCaptainStateVars {
+    ftCaptainSpecialS specials;
+};
 
 #endif

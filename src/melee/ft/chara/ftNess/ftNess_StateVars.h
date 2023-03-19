@@ -1,8 +1,8 @@
 #ifndef _FTNESS_STATEVARS_H_
 #define _FTNESS_STATEVARS_H_
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
+#include <platform.h>
 
 typedef struct ftNessYoyo {
     s32 yoyoCurrentFrame; // 0x2340 - Current frame of Up/Down Smash animation
