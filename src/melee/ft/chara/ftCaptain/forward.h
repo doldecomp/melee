@@ -4,22 +4,22 @@
 #include "ft/forward.h"
 
 typedef enum ftCaptainAction {
-    AS_CAPTAIN_SWING42_SWORD = ASID_MAX,
-    AS_CAPTAIN_SWING42_2,
-    AS_CAPTAIN_SWING42_3,
-    AS_CAPTAIN_SWING42_4,
-    AS_CAPTAIN_SWING42_5,
-    AS_CAPTAIN_SWING42_6,
-    AS_CAPTAIN_SPECIALN,
-    AS_CAPTAIN_SPECIALAIRN,
-    AS_CAPTAIN_SPECIALS_START,
-    AS_CAPTAIN_SPECIALS,
-    AS_CAPTAIN_SPECIALAIRS_START,
-    AS_CAPTAIN_SPECIALAIRS,
-    AS_CAPTAIN_SPECIALHI,
-    AS_CAPTAIN_SPECIALAIRHI,
-    AS_CAPTAIN_SPECIALHI_CATCH,
-    AS_CAPTAIN_SPECIALHI_THROW,
+    ftCaptain_AS_Swing42_Sword = ASID_MAX,
+    ftCaptain_AS_Swing42_2,
+    ftCaptain_AS_Swing42_3,
+    ftCaptain_AS_Swing42_4,
+    ftCaptain_AS_Swing42_5,
+    ftCaptain_AS_Swing42_6,
+    ftCaptain_AS_SpecialN,
+    ftCaptain_AS_SpecialAirN,
+    ftCaptain_AS_SpecialS_Start,
+    ftCaptain_AS_SpecialS,
+    ftCaptain_AS_SpecialAirS_Start,
+    ftCaptain_AS_SpecialAirS,
+    ftCaptain_AS_SpecialHi,
+    ftCaptain_AS_SpecialAirHi,
+    ftCaptain_AS_SpecialHi_Catch,
+    ftCaptain_AS_SpecialHi_Throw,
 } ftCaptainAction;
 
 #endif

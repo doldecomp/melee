@@ -81,7 +81,7 @@ void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALN, 0,
+    Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialN, 0,
                                        NULL, 0.0f, 1.0f, 0.0f);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -100,8 +100,8 @@ void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRN, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialAirN,
+                                       0, NULL, 0.0f, 1.0f, 0.0f);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     func_8006EBA4(fighter_gobj);
@@ -239,7 +239,7 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
         Fighter* fp = GET_FIGHTER(fighter_gobj);
         func_8007D5D4(fp);
         Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_CAPTAIN_SPECIALAIRN, transition_flags, NULL,
+            fighter_gobj, ftCaptain_AS_SpecialAirN, transition_flags, NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -253,7 +253,7 @@ void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
         Fighter* fp = GET_FIGHTER(fighter_gobj);
         func_8007D7FC(fp);
         Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_CAPTAIN_SPECIALN, transition_flags, NULL,
+            fighter_gobj, ftCaptain_AS_SpecialN, transition_flags, NULL,
             fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

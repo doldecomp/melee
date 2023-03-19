@@ -49,8 +49,8 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS_START,
-                                       0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, ftCaptain_AS_SpecialS_Start, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     func_8006EBA4(fighter_gobj);
 
@@ -92,8 +92,9 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    Fighter_ActionStateChange_800693AC(
-        fighter_gobj, AS_CAPTAIN_SPECIALAIRS_START, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj,
+                                       ftCaptain_AS_SpecialAirS_Start, 0, NULL,
+                                       0.0f, 1.0f, 0.0f);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     func_8006EBA4(fighter_gobj);
     ftKind = func_800872A4(fighter_gobj);
@@ -130,7 +131,7 @@ inline void ftCaptain_SpecialS_Switch0(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS,
+    Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialS,
                                        transition_flags, NULL, 0.0f, 1.0f,
                                        0.0f);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
@@ -144,7 +145,7 @@ inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALS,
+    Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialS,
                                        transition_flags, NULL, 0.0f, 1.0f,
                                        0.0f);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
@@ -156,7 +157,7 @@ inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
 inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_CAPTAIN_SPECIALAIRS,
+    Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialAirS,
                                        transition_flags, NULL, 0.0f, 1.0f,
                                        0.0f);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
@@ -185,11 +186,11 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
         if (entityClass == HSD_GOBJ_CLASS_FIGHTER) {
             ASID = fp->action_id;
             switch (ASID) {
-            case AS_CAPTAIN_SPECIALS_START:
+            case ftCaptain_AS_SpecialS_Start:
                 captainAttrs = getFtSpecialAttrsD(fp);
                 func_8007D7FC(fp);
                 Fighter_ActionStateChange_800693AC(
-                    fighter_gobj, AS_CAPTAIN_SPECIALS, transition_flags, NULL,
+                    fighter_gobj, ftCaptain_AS_SpecialS, transition_flags, NULL,
                     0.0f, 1.0f, 0.0f);
                 ftCaptain_SpecialS_SetCall(fighter_gobj);
                 fp->x80_self_vel.z = 0.0f;
@@ -197,9 +198,9 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
                 fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
                 return;
 
-            case AS_CAPTAIN_SPECIALAIRS_START:
+            case ftCaptain_AS_SpecialAirS_Start:
                 Fighter_ActionStateChange_800693AC(
-                    fighter_gobj, AS_CAPTAIN_SPECIALAIRS, transition_flags,
+                    fighter_gobj, ftCaptain_AS_SpecialAirS, transition_flags,
                     NULL, 0.0f, 1.0f, 0.0f);
                 ftCaptain_SpecialS_SetCall(fighter_gobj);
                 fp->x80_self_vel.z = 0.0f;
@@ -209,11 +210,11 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
             if (itGetKind(detectGObj) < It_Kind_BombHei) {
                 ASID = fp->action_id;
                 switch (ASID) {
-                case AS_CAPTAIN_SPECIALS_START:
+                case ftCaptain_AS_SpecialS_Start:
                     ftCaptain_SpecialS_Switch1(fighter_gobj);
                     return;
 
-                case AS_CAPTAIN_SPECIALAIRS_START:
+                case ftCaptain_AS_SpecialAirS_Start:
                     ftCaptain_SpecialS_Switch2(fighter_gobj);
                     return;
                 }
@@ -224,11 +225,11 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
                         (itGetKind(detectGObj) == Pokemon_Random)))
             {
                 switch (ASID = fp->action_id) {
-                case AS_CAPTAIN_SPECIALS_START:
+                case ftCaptain_AS_SpecialS_Start:
                     ftCaptain_SpecialS_Switch0(fighter_gobj);
                     return;
 
-                case AS_CAPTAIN_SPECIALAIRS_START:
+                case ftCaptain_AS_SpecialAirS_Start:
                     ftCaptain_SpecialS_Switch2(fighter_gobj);
                     return;
 
