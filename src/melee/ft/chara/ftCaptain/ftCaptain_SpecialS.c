@@ -129,10 +129,11 @@ static Fighter_ActionStateChangeFlags const transition_flags =
     FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
     FtStateChange_Unk_27;
 
-inline void ftCaptain_SpecialS_Switch0(HSD_GObj* fighter_gobj)
+static inline void onDetectGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
+    ftCaptainAttributes* sa = getFtSpecialAttrsD(fp);
+
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialS,
                                        transition_flags, NULL, 0, 1, 0);
@@ -143,40 +144,24 @@ inline void ftCaptain_SpecialS_Switch0(HSD_GObj* fighter_gobj)
         vel->y = vel->z = 0;
     }
 
-    fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
+    fp->xEC_ground_vel *= sa->specials_gr_vel_x;
 }
 
-inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
+static inline void onDetectAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
-    func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialS,
-                                       transition_flags, NULL, 0, 1, 0);
-    setCallbacks(fighter_gobj);
-    fp->x80_self_vel.z = 0;
-    fp->x80_self_vel.y = 0;
-    fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
-}
-
-inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
-{
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialAirS,
                                        transition_flags, NULL, 0, 1, 0);
     setCallbacks(fighter_gobj);
     fp->x80_self_vel.z = 0;
 }
 
-// 0x800E350C
-// https://decomp.me/scratch/8YN1Z // Captain Falcon & Ganondorf's Raptor Boost
-// / Gerudo Dragon Detect function
 void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs;
     HSD_GObj* detectGObj;
-    s32 ASID;
+    s32 asid;
     u16 entityClass;
 
     /// @todo Unused stack.
@@ -188,8 +173,8 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
         detectGObj = fp->x20AC;
         entityClass = detectGObj->classifier;
         if (entityClass == HSD_GOBJ_CLASS_FIGHTER) {
-            ASID = fp->action_id;
-            switch (ASID) {
+            asid = fp->action_id;
+            switch (asid) {
             case ftCaptain_AS_SpecialS_Start:
                 captainAttrs = getFtSpecialAttrsD(fp);
                 func_8007D7FC(fp);
@@ -212,14 +197,14 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
             }
         } else if (entityClass == HSD_GOBJ_CLASS_ITEM) {
             if (itGetKind(detectGObj) < It_Kind_BombHei) {
-                ASID = fp->action_id;
-                switch (ASID) {
+                asid = fp->action_id;
+                switch (asid) {
                 case ftCaptain_AS_SpecialS_Start:
-                    ftCaptain_SpecialS_Switch1(fighter_gobj);
+                    onDetectGround(fighter_gobj);
                     return;
 
                 case ftCaptain_AS_SpecialAirS_Start:
-                    ftCaptain_SpecialS_Switch2(fighter_gobj);
+                    onDetectAir(fighter_gobj);
                     return;
                 }
             } else if ((((itGetKind(detectGObj) >= It_Kind_Kuriboh) &&
@@ -228,13 +213,13 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
                          (itGetKind(detectGObj) < It_Kind_Arwing_Laser)) ||
                         (itGetKind(detectGObj) == Pokemon_Random)))
             {
-                switch (ASID = fp->action_id) {
+                switch (asid = fp->action_id) {
                 case ftCaptain_AS_SpecialS_Start:
-                    ftCaptain_SpecialS_Switch0(fighter_gobj);
+                    onDetectGround(fighter_gobj);
                     return;
 
                 case ftCaptain_AS_SpecialAirS_Start:
-                    ftCaptain_SpecialS_Switch2(fighter_gobj);
+                    onDetectAir(fighter_gobj);
                     return;
 
                 default:
