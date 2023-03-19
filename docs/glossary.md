@@ -49,6 +49,12 @@ Stands for "environmental collision box."
 @section glossary_ft ft
 Short for "fighter."
 
+@section glossary_gr gr
+Short for "ground."
+
+@section glossary_grav grav
+Short for "gravity."
+
 @section glossary_id id
 Short for "identifier." Not an acronym.
 

@@ -51,12 +51,12 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 
     stick_y = stickGetDir(fp->input.x624_lstick_y, 0.0f);
 
-    stickRangeMinPos = tempAttrs->x4_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_POS;
+    stickRangeMinPos = tempAttrs->specialn_stick_range_y_pos;
     if (stick_y > stickRangeMinPos) {
         stick_y = stickRangeMinPos;
     }
 
-    stickRangeMinNeg = tempAttrs->x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG;
+    stickRangeMinNeg = tempAttrs->specialn_stick_range_y_neg;
     stick_y -= stickRangeMinNeg;
 
     if (stick_y < 0.0f) {
@@ -65,9 +65,8 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
     if (fp->input.x624_lstick_y < 0.0f) {
         stick_y = -stick_y;
     }
-    return floatVar *
-           ((stick_y * tempAttrs->x8_CAPTAIN_FALCONPUNCH_ANGLE_DIFF) /
-            (stickRangeMinPos - stickRangeMinNeg));
+    return floatVar * ((stick_y * tempAttrs->specialn_angle_diff) /
+                       (stickRangeMinPos - stickRangeMinNeg));
 }
 
 void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj)
@@ -141,11 +140,9 @@ void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         fp->x2200_ftcmd_var0 = 0U;
         vel = ftCaptain_SpecialN_GetAngleVel(fp);
-        fp->x80_self_vel.y =
-            (f32) (captainAttrs->xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X * sinf(vel));
+        fp->x80_self_vel.y = (f32) (captainAttrs->specialn_vel_x * sinf(vel));
         fp->x80_self_vel.x =
-            (f32) (captainAttrs->xC_CAPTAIN_FALCONPUNCH_MOMENTUM_X *
-                   (fp->facing_dir * cosf(vel)));
+            (f32) (captainAttrs->specialn_vel_x * (fp->facing_dir * cosf(vel)));
     }
 }
 
@@ -220,10 +217,8 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
         break;
 
     case 1:
-        fp->x80_self_vel.y *=
-            captainAttrs->x10_CAPTAIN_FALCONPUNCH_MOMENTUM_MUL;
-        fp->x80_self_vel.x *=
-            captainAttrs->x10_CAPTAIN_FALCONPUNCH_MOMENTUM_MUL;
+        fp->x80_self_vel.y *= captainAttrs->specialn_vel_mul;
+        fp->x80_self_vel.x *= captainAttrs->specialn_vel_mul;
         break;
 
     case 2:

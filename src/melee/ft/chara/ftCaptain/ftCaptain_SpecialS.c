@@ -136,7 +136,7 @@ inline void ftCaptain_SpecialS_Switch0(HSD_GObj* fighter_gobj)
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     fp->x80_self_vel.z = 0.0f;
     fp->x80_self_vel.y = 0.0f;
-    fp->xEC_ground_vel *= captainAttrs->x14_CAPTAIN_RAPTORBOOST_GROUND_VEL_X;
+    fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
 }
 
 inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
@@ -150,7 +150,7 @@ inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     fp->x80_self_vel.z = 0.0f;
     fp->x80_self_vel.y = 0.0f;
-    fp->xEC_ground_vel *= captainAttrs->x14_CAPTAIN_RAPTORBOOST_GROUND_VEL_X;
+    fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
 }
 
 inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
@@ -194,8 +194,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
                 ftCaptain_SpecialS_SetCall(fighter_gobj);
                 fp->x80_self_vel.z = 0.0f;
                 fp->x80_self_vel.y = 0.0f;
-                fp->xEC_ground_vel *=
-                    captainAttrs->x14_CAPTAIN_RAPTORBOOST_GROUND_VEL_X;
+                fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
                 return;
 
             case AS_CAPTAIN_SPECIALAIRS_START:
@@ -299,12 +298,12 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
     fp = temp_fp;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG) {
+        if (0.0f == captainAttrs->specials_miss_landing_lag) {
             func_800CC730(fighter_gobj);
             return;
         }
         func_80096900(fighter_gobj, 1, 1, 0, 1.0f,
-                      captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG);
+                      captainAttrs->specials_miss_landing_lag);
     }
 }
 
@@ -342,12 +341,12 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG) {
+        if (0.0f == captainAttrs->specials_hit_landing_lag) {
             func_800CC730(fighter_gobj);
             return;
         }
         func_80096900(fighter_gobj, 1, 1, 0, 1.0f,
-                      captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG);
+                      captainAttrs->specials_hit_landing_lag);
     }
 }
 
@@ -408,13 +407,12 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 
     func_80085134(fighter_gobj);
     if ((u32) fp->x2204_ftcmd_var1 == 1U) {
-        fp->captainVars.SpecialS.gravity -=
-            captainAttrs->x18_CAPTAIN_RAPTORBOOST_GRAVITY;
+        fp->captainVars.SpecialS.gravity -= captainAttrs->specials_grav;
         if (fp->captainVars.SpecialS.gravity <
-            -captainAttrs->x1C_CAPTAIN_RAPTORBOOST_TERMINAL_VELOCITY)
+            -captainAttrs->specials_terminal_vel)
         {
             fp->captainVars.SpecialS.gravity =
-                -captainAttrs->x1C_CAPTAIN_RAPTORBOOST_TERMINAL_VELOCITY;
+                -captainAttrs->specials_terminal_vel;
         }
         fp->x80_self_vel.y = fp->captainVars.SpecialS.gravity;
     }
@@ -434,13 +432,10 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 #endif
 
     func_80085134(fighter_gobj);
-    fp->captainVars.SpecialS.gravity -=
-        captainAttrs->x18_CAPTAIN_RAPTORBOOST_GRAVITY;
-    if (fp->captainVars.SpecialS.gravity <
-        -captainAttrs->x1C_CAPTAIN_RAPTORBOOST_TERMINAL_VELOCITY)
+    fp->captainVars.SpecialS.gravity -= captainAttrs->specials_grav;
+    if (fp->captainVars.SpecialS.gravity < -captainAttrs->specials_terminal_vel)
     {
-        fp->captainVars.SpecialS.gravity =
-            -captainAttrs->x1C_CAPTAIN_RAPTORBOOST_TERMINAL_VELOCITY;
+        fp->captainVars.SpecialS.gravity = -captainAttrs->specials_terminal_vel;
     }
     fp->x80_self_vel.y = fp->captainVars.SpecialS.gravity;
 }
@@ -460,13 +455,13 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
     if (func_80082708(fighter_gobj) == false) {
         efLib_DestroyAll(fighter_gobj);
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG) {
+        if (0.0f == captainAttrs->specials_miss_landing_lag) {
             func_800CC730(fighter_gobj);
             return;
         }
         func_8007D468(fp);
         func_80096900(fighter_gobj, 1, 1, 0, 1.0f,
-                      captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG);
+                      captainAttrs->specials_miss_landing_lag);
         return;
     }
     if (fp->x2200_ftcmd_var0 == 1) {
@@ -504,13 +499,13 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
     if (func_80082708(fighter_gobj) == false) {
         efLib_DestroyAll(fighter_gobj);
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG) {
+        if (0.0f == captainAttrs->specials_hit_landing_lag) {
             func_800CC730(fighter_gobj);
             return;
         }
         func_8007D468(fp);
         func_80096900(fighter_gobj, 1, 1, 0, 1.0f,
-                      captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG);
+                      captainAttrs->specials_hit_landing_lag);
     }
 }
 
@@ -524,8 +519,7 @@ void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
 
     if (func_80081D0C(fighter_gobj) == true) {
         efLib_DestroyAll(fighter_gobj);
-        func_800D5CB0(fighter_gobj, 0,
-                      captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG);
+        func_800D5CB0(fighter_gobj, 0, captainAttrs->specials_miss_landing_lag);
     }
 }
 
@@ -540,7 +534,6 @@ void ftCaptain_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
     if (func_80081D0C(fighter_gobj) == true) {
         fp->xEC_ground_vel = fp->x80_self_vel.x;
         efLib_DestroyAll(fighter_gobj);
-        func_800D5CB0(fighter_gobj, 0,
-                      captainAttrs->x3C_CAPTAIN_RAPTORBOOST_HIT_LANDING_LAG);
+        func_800D5CB0(fighter_gobj, 0, captainAttrs->specials_hit_landing_lag);
     }
 }
