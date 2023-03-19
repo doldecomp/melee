@@ -1,0 +1,8 @@
+/** @fn ftCaptain_SpecialS_RemoveGFX
+ * Remove all GFX and set GFX flags to @c false.
+ */
+
+/** @fn ftCaptain_SpecialS_StartAction
+ * Captain Falcon & Ganondorf's grounded Raptor Boost/Gerudo Dragon Start Action
+ * State handler.
+ */

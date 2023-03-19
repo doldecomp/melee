@@ -12,9 +12,8 @@
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "it/itkind.h"
+#include <baselib/forward.h>
 
-// 0x800E3278
-// https://decomp.me/scratch/yi9xr // Remove all GFX and set GFX flags to false
 void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -32,37 +31,36 @@ inline void ftCaptain_SpecialS_SetCall(HSD_GObj* fighter_gobj)
     fp->cb.x21E4_callback_OnDeath2 = &ftCaptain_800E28C8;
 }
 
-// 0x800E32B0
-// https://decomp.me/scratch/uyovM // Captain Falcon & Ganondorf's grounded
-// Raptor Boost/Gerudo Dragon Start Action State handler
-void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
+static inline void resetCmdVarsGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 ftKind;
-
-    fp = GET_FIGHTER(fighter_gobj);
-
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-
     func_8007D7FC(fp);
+}
+
+void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
+{
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    resetCmdVarsGround(fighter_gobj);
 
     Fighter_ActionStateChange_800693AC(
-        fighter_gobj, ftCaptain_AS_SpecialS_Start, 0, NULL, 0.0f, 1.0f, 0.0f);
+        fighter_gobj, ftCaptain_AS_SpecialS_Start, 0, NULL, 0, 1, 0);
+
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     func_8006EBA4(fighter_gobj);
 
-    ftKind = func_800872A4(fighter_gobj);
-    switch (ftKind) {
+    switch (func_800872A4(fighter_gobj)) {
     case FTKIND_CAPTAIN:
-        ef_Spawn(0x491, fighter_gobj, fp->x5E8_fighterBones[0x22].x0_jobj);
+        ef_Spawn(0x491, fighter_gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
         fp->sa.captain.during_specials_start = true;
         break;
 
     case FTKIND_GANON:
-        ef_Spawn(0x50D, fighter_gobj, fp->x5E8_fighterBones[0x19].x0_jobj);
+        ef_Spawn(0x50D, fighter_gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
         fp->sa.captain.during_specials_start = true;
         break;
     }
@@ -72,10 +70,10 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21F4_callback = ftCaptain_SpecialS_OnDetect;
 
-    fp->x80_self_vel.z = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = 0.0f;
-    fp->xEC_ground_vel = 0.0f;
+    fp->x80_self_vel.z = 0;
+    fp->x80_self_vel.y = 0;
+    fp->x80_self_vel.x = 0;
+    fp->xEC_ground_vel = 0;
 }
 
 // 0x800E350C
@@ -92,9 +90,9 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj,
-                                       ftCaptain_AS_SpecialAirS_Start, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, ftCaptain_AS_SpecialAirS_Start, 0, NULL, 0, 1, 0);
+
     ftCaptain_SpecialS_SetCall(fighter_gobj);
     func_8006EBA4(fighter_gobj);
     ftKind = func_800872A4(fighter_gobj);
@@ -112,10 +110,10 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21F4_callback = ftCaptain_SpecialS_OnDetect;
-    fp->x80_self_vel.z = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = 0.0f;
-    fp->captainVars.SpecialS.gravity = 0.0f;
+    fp->x80_self_vel.z = 0;
+    fp->x80_self_vel.y = 0;
+    fp->x80_self_vel.x = 0;
+    fp->captainVars.SpecialS.gravity = 0;
     func_8007D60C(fp);
 }
 
@@ -132,11 +130,10 @@ inline void ftCaptain_SpecialS_Switch0(HSD_GObj* fighter_gobj)
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialS,
-                                       transition_flags, NULL, 0.0f, 1.0f,
-                                       0.0f);
+                                       transition_flags, NULL, 0, 1, 0);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
-    fp->x80_self_vel.z = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.z = 0;
+    fp->x80_self_vel.y = 0;
     fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
 }
 
@@ -146,11 +143,10 @@ inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialS,
-                                       transition_flags, NULL, 0.0f, 1.0f,
-                                       0.0f);
+                                       transition_flags, NULL, 0, 1, 0);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
-    fp->x80_self_vel.z = 0.0f;
-    fp->x80_self_vel.y = 0.0f;
+    fp->x80_self_vel.z = 0;
+    fp->x80_self_vel.y = 0;
     fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
 }
 
@@ -158,10 +154,9 @@ inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialAirS,
-                                       transition_flags, NULL, 0.0f, 1.0f,
-                                       0.0f);
+                                       transition_flags, NULL, 0, 1, 0);
     ftCaptain_SpecialS_SetCall(fighter_gobj);
-    fp->x80_self_vel.z = 0.0f;
+    fp->x80_self_vel.z = 0;
 }
 
 // 0x800E350C
@@ -191,19 +186,19 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
                 func_8007D7FC(fp);
                 Fighter_ActionStateChange_800693AC(
                     fighter_gobj, ftCaptain_AS_SpecialS, transition_flags, NULL,
-                    0.0f, 1.0f, 0.0f);
+                    0, 1, 0);
                 ftCaptain_SpecialS_SetCall(fighter_gobj);
-                fp->x80_self_vel.z = 0.0f;
-                fp->x80_self_vel.y = 0.0f;
+                fp->x80_self_vel.z = 0;
+                fp->x80_self_vel.y = 0;
                 fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
                 return;
 
             case ftCaptain_AS_SpecialAirS_Start:
                 Fighter_ActionStateChange_800693AC(
                     fighter_gobj, ftCaptain_AS_SpecialAirS, transition_flags,
-                    NULL, 0.0f, 1.0f, 0.0f);
+                    NULL, 0, 1, 0);
                 ftCaptain_SpecialS_SetCall(fighter_gobj);
-                fp->x80_self_vel.z = 0.0f;
+                fp->x80_self_vel.z = 0;
                 return;
             }
         } else if (entityClass == HSD_GOBJ_CLASS_ITEM) {
@@ -299,11 +294,11 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
     fp = temp_fp;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->specials_miss_landing_lag) {
+        if (0 == captainAttrs->specials_miss_landing_lag) {
             func_800CC730(fighter_gobj);
             return;
         }
-        func_80096900(fighter_gobj, 1, 1, 0, 1.0f,
+        func_80096900(fighter_gobj, 1, 1, 0, 1,
                       captainAttrs->specials_miss_landing_lag);
     }
 }
@@ -342,11 +337,11 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->specials_hit_landing_lag) {
+        if (0 == captainAttrs->specials_hit_landing_lag) {
             func_800CC730(fighter_gobj);
             return;
         }
-        func_80096900(fighter_gobj, 1, 1, 0, 1.0f,
+        func_80096900(fighter_gobj, 1, 1, 0, 1,
                       captainAttrs->specials_hit_landing_lag);
     }
 }
@@ -456,12 +451,12 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
     if (func_80082708(fighter_gobj) == false) {
         efLib_DestroyAll(fighter_gobj);
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->specials_miss_landing_lag) {
+        if (0 == captainAttrs->specials_miss_landing_lag) {
             func_800CC730(fighter_gobj);
             return;
         }
         func_8007D468(fp);
-        func_80096900(fighter_gobj, 1, 1, 0, 1.0f,
+        func_80096900(fighter_gobj, 1, 1, 0, 1,
                       captainAttrs->specials_miss_landing_lag);
         return;
     }
@@ -500,12 +495,12 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
     if (func_80082708(fighter_gobj) == false) {
         efLib_DestroyAll(fighter_gobj);
         func_8007D60C(fp);
-        if (0.0f == captainAttrs->specials_hit_landing_lag) {
+        if (0 == captainAttrs->specials_hit_landing_lag) {
             func_800CC730(fighter_gobj);
             return;
         }
         func_8007D468(fp);
-        func_80096900(fighter_gobj, 1, 1, 0, 1.0f,
+        func_80096900(fighter_gobj, 1, 1, 0, 1,
                       captainAttrs->specials_hit_landing_lag);
     }
 }
