@@ -149,12 +149,12 @@ void ftIceClimber_OnDeath(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0U, 0);
     func_80074A4C(fighter_gobj, 1U, 0);
-    fp->sa.nana.x2234 = 0;
-    fp->sa.nana.x222C = 0;
-    fp->sa.nana.x2230.bits.b0 = false;
-    fp->sa.nana.x2238 = 0;
-    fp->sa.nana.x224C = 0;
-    fp->sa.nana.x2250 = 0.0f;
+    fp->ev.nana.x2234 = 0;
+    fp->ev.nana.x222C = 0;
+    fp->ev.nana.x2230.bits.b0 = false;
+    fp->ev.nana.x2238 = 0;
+    fp->ev.nana.x224C = 0;
+    fp->ev.nana.x2250 = 0.0f;
 }
 
 void ftIceClimber_8011F060(HSD_GObj* fighter_gobj)
@@ -184,10 +184,10 @@ void func_8011F16C(HSD_GObj* fighter_gobj, uint i)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
 
-    if (i != fp->sa.nana.x222C)
+    if (i != fp->ev.nana.x222C)
         return;
 
-    fp->sa.nana.x222C = 0;
+    fp->ev.nana.x222C = 0;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -196,11 +196,11 @@ void func_8011F190(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
 
-    if (fp->sa.nana.x222C == 0)
+    if (fp->ev.nana.x222C == 0)
         return;
 
-    func_802C17DC(fp->sa.nana.x222C);
-    func_8011F16C(fighter_gobj, fp->sa.nana.x222C);
+    func_802C17DC(fp->ev.nana.x222C);
+    func_8011F16C(fighter_gobj, fp->ev.nana.x222C);
 }
 
 extern f32 const lbl_804D9838;
@@ -211,7 +211,7 @@ void ftIceClimber_SpecialN_StartAction(HSD_GObj* fighter_gobj)
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sa.nana.x222C = 0;
+    fp->ev.nana.x222C = 0;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 341, 0, NULL, lbl_804D9838,
                                        lbl_804D983C, lbl_804D9838);
@@ -234,14 +234,14 @@ void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sa.nana.x222C = 0;
+    fp->ev.nana.x222C = 0;
 
-    if ((s32) fp->sa.nana.x224C == false) {
+    if ((s32) fp->ev.nana.x224C == false) {
         fp->x80_self_vel.y = icattr->x4;
-        fp->sa.nana.x224C = true;
-        fp->sa.nana.x2250 = lbl_804D9838;
+        fp->ev.nana.x224C = true;
+        fp->ev.nana.x2250 = lbl_804D9838;
     } else {
-        fp->sa.nana.x2250 = lbl_804D9840;
+        fp->ev.nana.x2250 = lbl_804D9840;
     }
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 342, 0, NULL, lbl_804D9838,
@@ -282,12 +282,12 @@ void lbl_8011F3D8(HSD_GObj* fighter_gobj)
     if (!func_80082708(fighter_gobj)) {
         Fighter* fp1;
         fp1 = GET_FIGHTER(fighter_gobj);
-        if (fp1->sa.nana.x222C != 0U) {
+        if (fp1->ev.nana.x222C != 0U) {
             Fighter* fp2;
-            func_802C17DC(fp1->sa.nana.x222C);
+            func_802C17DC(fp1->ev.nana.x222C);
             fp2 = GET_FIGHTER(fighter_gobj);
-            if ((u32) fp1->sa.nana.x222C == (u32) fp2->sa.nana.x222C) {
-                fp2->sa.nana.x222C = 0U;
+            if ((u32) fp1->ev.nana.x222C == (u32) fp2->ev.nana.x222C) {
+                fp2->ev.nana.x222C = 0U;
                 fp2->cb.x21E4_callback_OnDeath2 = 0U;
                 fp2->cb.x21DC_callback_OnTakeDamage = 0U;
             }

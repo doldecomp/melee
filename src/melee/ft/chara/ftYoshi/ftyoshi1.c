@@ -183,7 +183,7 @@ void ftYoshi_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, 0);
-    fp->sa.yoshi.x2238 = 0;
+    fp->ev.yoshi.x2238 = 0;
 }
 
 // https://decomp.me/scratch/5TPxg

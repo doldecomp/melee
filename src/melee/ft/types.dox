@@ -1,11 +1,4 @@
-/** @var SpecialAttrs_Captain::during_specials_start
- * @c true during the Raptor Boost startup state. Used to keep track of the GFX.
- * Cleared when the state ends and on death.
- * @at{222C} @sz{4}
- */
-
-/** @var SpecialAttrs_Captain::during_specials
- * @c true during the Raptor Boost lunge state. Used to keep track of the GFX.
- * Cleared when the state ends and on death.
- * @at{2230} @sz{4}
+/** @var Fighter::ev
+ * A different struct for each fighter to store non-transient variables.
+ * @see @ref glossary_ev
  */

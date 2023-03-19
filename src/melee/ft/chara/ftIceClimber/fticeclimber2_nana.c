@@ -135,12 +135,12 @@ void ftNana_OnDeath(HSD_GObj* fighter_gobj)
     fp->dmg.x18B0 = attr->xC8;
     func_80074A4C(fighter_gobj, 0U, 0);
     func_80074A4C(fighter_gobj, 1U, 0);
-    fp->sa.nana.x2234 = 0;
-    fp->sa.nana.x222C = 0;
-    fp->sa.nana.x2230.bits.b0 = 0;
-    fp->sa.nana.x2238 = 0;
-    fp->sa.nana.x224C = 0;
-    fp->sa.nana.x2250 = lbl_804D9898;
+    fp->ev.nana.x2234 = 0;
+    fp->ev.nana.x222C = 0;
+    fp->ev.nana.x2230.bits.b0 = 0;
+    fp->ev.nana.x2238 = 0;
+    fp->ev.nana.x224C = 0;
+    fp->ev.nana.x2250 = lbl_804D9898;
 }
 
 /* static */ void func_801238E4(HSD_GObj* fighter_gobj);

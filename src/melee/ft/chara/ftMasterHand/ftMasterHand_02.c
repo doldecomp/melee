@@ -39,34 +39,34 @@ void func_8014FE5C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->action_id == 341) || (fp->action_id == 342)) {
-        fp->xB0_pos = fp->sa.masterhand.x2240_pos;
+        fp->xB0_pos = fp->ev.masterhand.x2240_pos;
     } else {
-        fp->sa.masterhand.x2240_pos = fp->xB0_pos;
+        fp->ev.masterhand.x2240_pos = fp->xB0_pos;
     }
-    if (fp->sa.masterhand.x2258 == 389) {
+    if (fp->ev.masterhand.x2258 == 389) {
         Fighter_ActionStateChange_800693AC(
             gobj, 341, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
     }
-    fp->sa.masterhand.x2258 = 341;
+    fp->ev.masterhand.x2258 = 341;
 }
 
 void func_8014FF1C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->action_id == 341) || (fp->action_id == 342)) {
-        fp->xB0_pos = fp->sa.masterhand.x2240_pos;
+        fp->xB0_pos = fp->ev.masterhand.x2240_pos;
     } else {
-        fp->sa.masterhand.x2240_pos = fp->xB0_pos;
+        fp->ev.masterhand.x2240_pos = fp->xB0_pos;
     }
-    if (fp->sa.masterhand.x2258 == 390) {
+    if (fp->ev.masterhand.x2258 == 390) {
         Fighter_ActionStateChange_800693AC(
             gobj, 342, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 342, 0, 0, 0.0f, 1.0f, 0.0f);
     }
-    fp->sa.masterhand.x2258 = 342;
+    fp->ev.masterhand.x2258 = 342;
 }
 
 void lbl_8014FFDC(HSD_GObj* gobj)
@@ -78,34 +78,34 @@ void lbl_8014FFDC(HSD_GObj* gobj)
     u8 _[16];
 #endif
 
-    if (r31_fp->sa.masterhand.x2258 == 0x186) {
+    if (r31_fp->ev.masterhand.x2258 == 0x186) {
         if ((r31_fp->action_id == 0x155) || (r31_fp->action_id == 0x156)) {
-            r31_fp->xB0_pos = r31_fp->sa.masterhand.x2240_pos;
+            r31_fp->xB0_pos = r31_fp->ev.masterhand.x2240_pos;
         } else {
-            r31_fp->sa.masterhand.x2240_pos = r31_fp->xB0_pos;
+            r31_fp->ev.masterhand.x2240_pos = r31_fp->xB0_pos;
         }
-        if (r31_fp->sa.masterhand.x2258 == 0x186) {
+        if (r31_fp->ev.masterhand.x2258 == 0x186) {
             Fighter_ActionStateChange_800693AC(
                 gobj, 0x156, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
         } else {
             Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, 0.0f, 1.0f,
                                                0.0f);
         }
-        r31_fp->sa.masterhand.x2258 = 0x156;
+        r31_fp->ev.masterhand.x2258 = 0x156;
         return;
     }
     if ((r31_fp->action_id == 0x155) || (r31_fp->action_id == 0x156)) {
-        r31_fp->xB0_pos = r31_fp->sa.masterhand.x2240_pos;
+        r31_fp->xB0_pos = r31_fp->ev.masterhand.x2240_pos;
     } else {
-        r31_fp->sa.masterhand.x2240_pos = r31_fp->xB0_pos;
+        r31_fp->ev.masterhand.x2240_pos = r31_fp->xB0_pos;
     }
-    if (r31_fp->sa.masterhand.x2258 == 0x185) {
+    if (r31_fp->ev.masterhand.x2258 == 0x185) {
         Fighter_ActionStateChange_800693AC(
             gobj, 0x155, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     }
-    r31_fp->sa.masterhand.x2258 = 0x155;
+    r31_fp->ev.masterhand.x2258 = 0x155;
 }
 
 void func_80150144(HSD_GObj* gobj)
@@ -115,23 +115,23 @@ void func_80150144(HSD_GObj* gobj)
     Fighter* fp_1;
 
     r5_attributes = fp->x10C_ftData->ext_attr;
-    fp->sa.masterhand.x2258 = 341;
+    fp->ev.masterhand.x2258 = 341;
     fp->action_id = 343;
     fp->xB0_pos.x = r5_attributes->x30_pos2.x;
     fp->xB0_pos.y = r5_attributes->x30_pos2.y;
     fp_1 = GET_FIGHTER(gobj);
     if ((fp_1->action_id == 341) || (fp_1->action_id == 342)) {
-        fp_1->xB0_pos = fp_1->sa.masterhand.x2240_pos;
+        fp_1->xB0_pos = fp_1->ev.masterhand.x2240_pos;
     } else {
-        fp_1->sa.masterhand.x2240_pos = fp_1->xB0_pos;
+        fp_1->ev.masterhand.x2240_pos = fp_1->xB0_pos;
     }
-    if (fp_1->sa.masterhand.x2258 == 389) {
+    if (fp_1->ev.masterhand.x2258 == 389) {
         Fighter_ActionStateChange_800693AC(
             gobj, 341, 0, 0, fp_1->x894_currentAnimFrame, 1.0f, 0.0f);
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
     }
-    fp_1->sa.masterhand.x2258 = 341;
+    fp_1->ev.masterhand.x2258 = 341;
 }
 
 typedef struct {
@@ -167,23 +167,23 @@ inline void lbl_80150230_inline_1(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->action_id == 0x155 || fp->action_id == 0x156) {
-        fp->xB0_pos = fp->sa.masterhand.x2240_pos;
+        fp->xB0_pos = fp->ev.masterhand.x2240_pos;
     } else {
-        fp->sa.masterhand.x2240_pos = fp->xB0_pos;
+        fp->ev.masterhand.x2240_pos = fp->xB0_pos;
     }
-    if (fp->sa.masterhand.x2258 == 0x186) {
+    if (fp->ev.masterhand.x2258 == 0x186) {
         Fighter_ActionStateChange_800693AC(
             gobj, 0x156, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
     }
-    fp->sa.masterhand.x2258 = 0x156;
+    fp->ev.masterhand.x2258 = 0x156;
 }
 
 inline void lbl_80150230_inline_2(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->sa.masterhand.x2258 == 0x186) {
+    if (fp->ev.masterhand.x2258 == 0x186) {
         func_8014FF1C(gobj);
     } else {
         func_8014FE5C(gobj);
@@ -209,7 +209,7 @@ void lbl_80150230(HSD_GObj* gobj)
             }
         }
     } else {
-        if (--fp->sa.masterhand.x223C < 0.0f) {
+        if (--fp->ev.masterhand.x223C < 0.0f) {
             MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
             Vec3 vec;
 
@@ -218,8 +218,8 @@ void lbl_80150230(HSD_GObj* gobj)
             u8 _[20];
 #endif
 
-            func_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C,
-                          fp->sa.masterhand.x2238, attr->x18, attr->x20,
+            func_8015BD24(fp->x1A98, &fp->ev.masterhand.x223C,
+                          fp->ev.masterhand.x2238, attr->x18, attr->x20,
                           attr->x1C);
             if (func_8015C44C(0x1C) == 0x180) {
                 // Crazy Hand Combo Attack
@@ -253,18 +253,18 @@ void lbl_80150230(HSD_GObj* gobj)
                 s32 tmp2;
                 u8_pair* qwe;
                 f32 rand;
-                if (fp->sa.masterhand.x2254 == attr->x24) {
-                    fp->sa.masterhand.x2254 = 0;
+                if (fp->ev.masterhand.x2254 == attr->x24) {
+                    fp->ev.masterhand.x2254 = 0;
                     tmp = 2;
                 } else {
                     s32 qwe4 =
                         lbl_803D40D0
-                            .x54[fp->sa.masterhand.x224C * 5 + HSD_Randi(5)];
+                            .x54[fp->ev.masterhand.x224C * 5 + HSD_Randi(5)];
                     tmp = qwe4;
                     if (qwe4 == 2) {
-                        fp->sa.masterhand.x2254 = 0;
+                        fp->ev.masterhand.x2254 = 0;
                     } else {
-                        fp->sa.masterhand.x2254++;
+                        fp->ev.masterhand.x2254++;
                     }
                 }
                 // cast required, don't know why
@@ -272,8 +272,8 @@ void lbl_80150230(HSD_GObj* gobj)
                 tmp2 = lbl_803D40D0
                            .x0[lbl_803D40D0.x38[qwe->a + HSD_Randi(qwe->b)]];
 
-                fp->sa.masterhand.x224C = tmp;
-                fp->sa.masterhand.x2250 = tmp2;
+                fp->ev.masterhand.x224C = tmp;
+                fp->ev.masterhand.x2250 = tmp2;
                 if (fp->x221D_flag.bits.b4) {
                     tmp2 = 0x155;
                 }
@@ -463,13 +463,13 @@ void func_80150894(HSD_GObj* gobj)
     } else if ((r6_button & HSD_BUTTON_Z) && ((r6_button & HSD_BUTTON_DPAD_UP)))
     {
         // Grab
-        r4_fp->sa.masterhand.x2250 = 0x17B;
+        r4_fp->ev.masterhand.x2250 = 0x17B;
         func_801542E0(gobj);
     } else if ((r6_button & HSD_BUTTON_Z) &&
                ((r6_button & HSD_BUTTON_DPAD_RIGHT)))
     {
         // Grab
-        r4_fp->sa.masterhand.x2250 = 0x17C;
+        r4_fp->ev.masterhand.x2250 = 0x17C;
         func_801542E0(gobj);
     } else if (((r6_button & HSD_BUTTON_Y)) &&
                ((r6_button & HSD_BUTTON_DPAD_UP)))

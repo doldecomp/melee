@@ -43,7 +43,7 @@ void lbl_80154B2C(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp->sa.masterhand.x2250 == 0x17B)
+        if (fp->ev.masterhand.x2250 == 0x17B)
             func_80154E78(gobj);
         else
             func_80155014(gobj);

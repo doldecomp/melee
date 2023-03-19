@@ -87,8 +87,8 @@ void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj)
 
     func_80074A4C(fighter_gobj, 0, 0);
     fp->dmg.x18B0 = koopaAttr->x0;
-    fp->sa.gkoopa.x222C = koopaAttr->x10;
-    fp->sa.gkoopa.x2230 = koopaAttr->x18;
+    fp->ev.gkoopa.x222C = koopaAttr->x10;
+    fp->ev.gkoopa.x2230 = koopaAttr->x18;
 }
 
 void func_8014F698(HSD_GObj* gobj)

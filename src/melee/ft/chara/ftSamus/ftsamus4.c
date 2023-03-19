@@ -179,5 +179,5 @@ void ftSamus_8012A640(HSD_GObj* fighter_gobj)
 #endif
 
     efLib_DestroyAll(fighter_gobj);
-    fp->sa.samus.x2244 = 0;
+    fp->ev.samus.x2244 = 0;
 }

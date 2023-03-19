@@ -137,9 +137,9 @@ static inline void checkFighter2244(HSD_GObj* gobj)
         return;
 
     fp = gobj->user_data;
-    if (fp != NULL && fp->sa.clink.x2244 != 0) {
-        func_802C8C34(fp->sa.clink.x2244);
-        fp->sa.clink.x2244 = 0;
+    if (fp != NULL && fp->ev.clink.x2244 != 0) {
+        func_802C8C34(fp->ev.clink.x2244);
+        fp->ev.clink.x2244 = 0;
     }
 
     if (gobj == NULL)

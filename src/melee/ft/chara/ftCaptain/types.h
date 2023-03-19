@@ -4,6 +4,11 @@
 #include "ftCaptain/forward.h"
 #include <platform.h>
 
+struct ftCaptain_EntityVars {
+    /* 0x222C */ uint during_specials_start;
+    /* 0x2230 */ uint during_specials;
+};
+
 struct ftCaptainAttributes {
     f32 specialn_stick_range_y_neg;
     f32 specialn_stick_range_y_pos;
@@ -43,7 +48,7 @@ struct ftCaptainAttributes {
 };
 
 union ftCaptainStateVars {
-    struct ftCaptainSpecialS {
+    struct ftCaptainSpecialSVars {
         f32 grav;
     } specials;
 };

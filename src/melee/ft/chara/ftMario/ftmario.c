@@ -46,12 +46,12 @@ void ftMario_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_80074A4C(gobj, 0, 0);
-    fp->sa.mario.x222C_vitaminCurr = 9;
-    fp->sa.mario.x2230_vitaminPrev = 9;
-    fp->sa.mario.x2234_tornadoCharge = false;
-    fp->sa.mario.x2238_isCapeBoost = false;
-    fp->sa.mario.x223C_capeGObj = NULL;
-    fp->sa.mario.x2240 = 0;
+    fp->ev.mr.x222C_vitaminCurr = 9;
+    fp->ev.mr.x2230_vitaminPrev = 9;
+    fp->ev.mr.x2234_tornadoCharge = false;
+    fp->ev.mr.x2238_isCapeBoost = false;
+    fp->ev.mr.x223C_capeGObj = NULL;
+    fp->ev.mr.x2240 = 0;
 }
 
 void ftMario_OnLoadForDrMario(Fighter* fp)

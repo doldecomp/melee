@@ -553,11 +553,6 @@ struct SpecialAttrs_Fox {
     /* 0x222C */ HSD_GObj* x222C_blasterGObj;
 };
 
-struct SpecialAttrs_Captain {
-    /* 0x222C */ uint during_specials_start;
-    /* 0x2230 */ uint during_specials;
-};
-
 struct SpecialAttrs_DK {
     /* 0x222C */ s32 x222C;
     /* 0x2230 */ s32 x2230;
@@ -1347,13 +1342,14 @@ struct Fighter {
 
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
+
     // Some of these are clones of each other (they just use another struct)
-    // and some of them dont have specials so dont exist in the union. TODO:
-    // Clean-up
-    union {
-        struct SpecialAttrs_Mario mario;
-        struct SpecialAttrs_Fox fox;
-        struct SpecialAttrs_Captain captain;
+    // and some of them dont have specials so dont exist in the union.
+    /// @todo Clean-up
+    union FighterEntityVars {
+        struct SpecialAttrs_Mario mr;
+        struct SpecialAttrs_Fox fx, fc;
+        struct ftCaptain_EntityVars ca, gn;
         struct SpecialAttrs_DK dk;
         struct SpecialAttrs_Kirby kirby;
         struct SpecialAttrs_Koopa koopa;
@@ -1385,8 +1381,8 @@ struct Fighter {
         struct SpecialAttrs_Girl girl;
         struct SpecialAttrs_GKoopa gkoopa;
         struct SpecialAttrs_Sandbag sandbag;
+    } ev;
 
-    } sa;
     /* 0x232C */ s32 x232C;
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;

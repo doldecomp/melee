@@ -104,7 +104,7 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRLW, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    if ((s32) fp->sa.mario.x2234_tornadoCharge != 0) {
+    if ((s32) fp->ev.mr.x2234_tornadoCharge != 0) {
         sub_val = 0.0f;
     } else {
         sub_val = sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX;
@@ -148,7 +148,7 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
 
     if ((u32) fp->x2204_ftcmd_var1 != 0U) {
         fp->x2204_ftcmd_var1 = 0U;
-        fp->sa.mario.x2234_tornadoCharge = 1;
+        fp->ev.mr.x2234_tornadoCharge = 1;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMario_SpecialLw_SetNULL(gobj);
@@ -247,7 +247,7 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
     fp = getFighter(gobj);
     sa = fp->x2D4_specialAttributes;
 
-    if (((s32) fp->sa.mario.x2234_tornadoCharge == false) &&
+    if (((s32) fp->ev.mr.x2234_tornadoCharge == false) &&
         ((u32) fp->x2208_ftcmd_var2 != 0U) &&
         ((fp->input.x668 & HSD_BUTTON_B) != 0))
     {
@@ -329,7 +329,7 @@ void _ftMario_800E2778_helper(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     func_8007D7FC(fp);
     fp->x80_self_vel.y = 0.0f;
-    fp->sa.mario.x2234_tornadoCharge = 0;
+    fp->ev.mr.x2234_tornadoCharge = 0;
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALLW,
                                        FTMARIO_SPECIALLW_COLL_FLAG, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);

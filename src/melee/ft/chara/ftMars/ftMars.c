@@ -117,7 +117,7 @@ void ftMars_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, 0);
-    fp->sa.mars.x222C = 0;
+    fp->ev.mars.x222C = 0;
 }
 
 // 801362B0 00132E90
