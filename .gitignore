@@ -19,6 +19,7 @@ build/
 *.elf
 *.map
 *.dol
+*.pdb
 
 # Temporary files
 *.swp
@@ -39,6 +40,7 @@ tools/doxygen-awesome-css
 epilogue/
 
 __pycache__
+**/*.rs.bk
 *.exe
 *.dll
 *.bat
