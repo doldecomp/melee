@@ -125,12 +125,12 @@ void ftGanon_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftGanon_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0f);
-    ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 3, 3, 0);
+    ftAnim_ApplyPartAnim(gobj, 4, 3, 0);
 }
 
 void ftGanon_OnKnockbackExit(HSD_GObj* gobj)
 {
-    ftAnim_ApplyPartAnim(gobj, 3, 2, 0.0f);
-    ftAnim_ApplyPartAnim(gobj, 4, 2, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 3, 2, 0);
+    ftAnim_ApplyPartAnim(gobj, 4, 2, 0);
 }
