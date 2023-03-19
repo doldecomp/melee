@@ -280,7 +280,7 @@ s32 func_8015C4C4(void)
 #endif
 
     if (gobj)
-        return GET_FIGHTER(gobj)->ev.masterhand.x2250;
+        return GET_FIGHTER(gobj)->ev.mh.x2250;
 
     return 0;
 }

@@ -37,7 +37,7 @@ void ftZelda_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fighter2->x2340_stateVar1 = attributes->x10;
     fighter2->x2344_stateVar2_s32 = attributes->x14;
     fighter2->x2348_stateVar3_s32 = attributes->x18;
-    fighter2->ev.zelda.x222C = 0;
+    fighter2->ev.zd.x222C = 0;
     fighter2->x234C_stateVar4_s32 = attributes->x1C;
     fighter2->cb.x21E4_callback_OnDeath2 = 0;
     fighter2->cb.x21DC_callback_OnTakeDamage = 0;
@@ -72,7 +72,7 @@ void ftZelda_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fighter2->x2340_stateVar1 = attributes->x10;
     fighter2->x2344_stateVar2_s32 = attributes->x14;
     fighter2->x2348_stateVar3_s32 = attributes->x18;
-    fighter2->ev.zelda.x222C = 0;
+    fighter2->ev.zd.x222C = 0;
     fighter2->x234C_stateVar4_s32 = attributes->x1C;
     fighter2->cb.x21E4_callback_OnDeath2 = 0;
     fighter2->cb.x21DC_callback_OnTakeDamage = 0;
@@ -98,7 +98,7 @@ void ftZelda_8013B780(HSD_GObj* fighter_gobj)
     fp = GET_FIGHTER(fighter_gobj);
     attributes = fp->x2D4_specialAttributes;
 
-    if (fp->x2200_ftcmd_var0 == 1U && fp->ev.zelda.x222C == 0U) {
+    if (fp->x2200_ftcmd_var0 == 1U && fp->ev.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
         func_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp24);
 
@@ -108,7 +108,7 @@ void ftZelda_8013B780(HSD_GObj* fighter_gobj)
         sp24.y += attributes->x24;
 
         temp_r3 = func_802C3BAC(fighter_gobj, &sp24, fp->facing_dir, temp_f2);
-        fp->ev.zelda.x222C = temp_r3;
+        fp->ev.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
             fp->cb.x21E4_callback_OnDeath2 = &ftZelda_801393AC;
@@ -145,7 +145,7 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
     fp = GET_FIGHTER(fighter_gobj);
     attributes = fp->x2D4_specialAttributes;
 
-    if ((fp->x2200_ftcmd_var0 == 1U) && (fp->ev.zelda.x222C == 0U)) {
+    if ((fp->x2200_ftcmd_var0 == 1U) && (fp->ev.zd.x222C == 0U)) {
         fp->x2200_ftcmd_var0 = 0U;
         func_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp20);
 
@@ -156,7 +156,7 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
 
         temp_r3_u32 =
             func_802C3BAC(fighter_gobj, &sp20, fp->facing_dir, temp_f2);
-        fp->ev.zelda.x222C = temp_r3_u32;
+        fp->ev.zd.x222C = temp_r3_u32;
 
         if (temp_r3_u32 != 0) {
             fp->cb.x21E4_callback_OnDeath2 = &ftZelda_801393AC;
@@ -173,7 +173,7 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
         fp->x2344_stateVar2_s32 -= 1;
     }
 
-    temp_r3_u32 = fp->ev.zelda.x222C;
+    temp_r3_u32 = fp->ev.zd.x222C;
     if (temp_r3_u32 == NULL) {
         if (fp->x2340_stateVar1 <= 0 && fp->x2344_stateVar2_s32 <= 0) {
             temp_f1 = 0;
@@ -181,10 +181,10 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
                                                temp_f1, 1.0, temp_f1);
         }
     } else {
-        temp_r3 = func_802C3AF0(fp->ev.zelda.x222C);
+        temp_r3 = func_802C3AF0(fp->ev.zd.x222C);
 
         if (temp_r3 != fighter_gobj)
-            fp->ev.zelda.x222C = NULL;
+            fp->ev.zd.x222C = NULL;
     }
 }
 
@@ -206,7 +206,7 @@ void ftZelda_8013BA04(HSD_GObj* fighter_gobj)
         fp->x2340_stateVar1 = attributes->x10;
         fp->x2344_stateVar2_s32 = attributes->x14;
         fp->x2348_stateVar3_s32 = attributes->x18;
-        fp->ev.zelda.x222C = 0;
+        fp->ev.zd.x222C = 0;
         fp->x234C_stateVar4_s32 = attributes->x1C;
         fp->cb.x21E4_callback_OnDeath2 = 0;
         fp->cb.x21DC_callback_OnTakeDamage = 0;
@@ -233,7 +233,7 @@ void ftZelda_8013BA8C(HSD_GObj* fighter_gobj)
 
     fp = GET_FIGHTER(fighter_gobj);
     attributes = fp->x2D4_specialAttributes;
-    if (fp->x2200_ftcmd_var0 == 1U && fp->ev.zelda.x222C == 0U) {
+    if (fp->x2200_ftcmd_var0 == 1U && fp->ev.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
         func_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp24);
 
@@ -243,7 +243,7 @@ void ftZelda_8013BA8C(HSD_GObj* fighter_gobj)
         sp24.y += attributes->x24;
 
         temp_r3 = func_802C3BAC(fighter_gobj, &sp24, fp->facing_dir, temp_f2);
-        fp->ev.zelda.x222C = temp_r3;
+        fp->ev.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
             fp->cb.x21E4_callback_OnDeath2 = &ftZelda_801393AC;
@@ -279,7 +279,7 @@ void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
     fp = GET_FIGHTER(fighter_gobj);
     attributes = fp->x2D4_specialAttributes;
 
-    if (fp->x2200_ftcmd_var0 == 1U && fp->ev.zelda.x222C == 0U) {
+    if (fp->x2200_ftcmd_var0 == 1U && fp->ev.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
         func_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp20);
 
@@ -289,7 +289,7 @@ void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
         sp20.y += attributes->x24;
 
         temp_r3 = func_802C3BAC(fighter_gobj, &sp20, fp->facing_dir, temp_f2);
-        fp->ev.zelda.x222C = temp_r3;
+        fp->ev.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
             fp->cb.x21E4_callback_OnDeath2 = &ftZelda_801393AC;
@@ -306,17 +306,17 @@ void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
         fp->x2344_stateVar2_s32 -= 1;
     }
 
-    if (fp->ev.zelda.x222C == 0U) {
+    if (fp->ev.zd.x222C == 0U) {
         if (fp->x2340_stateVar1 <= 0 && fp->x2344_stateVar2_s32 <= 0) {
             temp_f1 = 0;
             Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15C, 0, NULL,
                                                temp_f1, 1.0, temp_f1);
         }
     } else {
-        temp_r3 = func_802C3AF0(fp->ev.zelda.x222C);
+        temp_r3 = func_802C3AF0(fp->ev.zd.x222C);
 
         if (temp_r3 != fighter_gobj)
-            fp->ev.zelda.x222C = NULL;
+            fp->ev.zd.x222C = NULL;
     }
 }
 
@@ -342,7 +342,7 @@ void ftZelda_8013BD10(HSD_GObj* fighter_gobj)
             fp->x2340_stateVar1 = sa->x10;
             fp->x2344_stateVar2_s32 = sa->x14;
             fp->x2348_stateVar3_s32 = sa->x18;
-            fp->ev.zelda.x222C = 0;
+            fp->ev.zd.x222C = 0;
             fp->x234C_stateVar4_s32 = sa->x1C;
             fp->cb.x21E4_callback_OnDeath2 = 0;
             fp->cb.x21DC_callback_OnTakeDamage = 0;

@@ -169,17 +169,17 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
             temp_fp = GET_FIGHTER(fighter_gobj);
             i = 5;
             for (i -= 5; i < 5; i++) {
-                if ((i != temp_fp->ev.gaw.x2240_chefVar1) &&
-                    (i != temp_fp->ev.gaw.x2244_chefVar2))
+                if ((i != temp_fp->ev.gw.x2240_chefVar1) &&
+                    (i != temp_fp->ev.gw.x2244_chefVar2))
                 {
                     sausageCount[randomInt] = i;
                     randomInt++;
                 }
             }
             temp_r5 = sausageCount[HSD_Randi(randomInt)];
-            temp_fp->ev.gaw.x2244_chefVar2 = temp_fp->ev.gaw.x2240_chefVar1;
+            temp_fp->ev.gw.x2244_chefVar2 = temp_fp->ev.gw.x2240_chefVar1;
             temp_r6 = temp_r5;
-            temp_fp->ev.gaw.x2240_chefVar1 = temp_r5;
+            temp_fp->ev.gw.x2240_chefVar1 = temp_r5;
             func_802C837C(fighter_gobj, &sp44, 0x7A, temp_r6, fp->facing_dir);
         }
         fp->cb.x21BC_callback_Accessory4 = NULL;

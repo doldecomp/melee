@@ -113,7 +113,7 @@ void ftRoy_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, 0);
     func_80074A4C(gobj, 2, -1);
-    fp->ev.mars.x222C = 0;
+    fp->ev.ms.x222C = 0;
 }
 
 void ftRoy_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)

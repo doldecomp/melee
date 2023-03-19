@@ -105,7 +105,7 @@ void ftLuigi_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, false);
-    fp->ev.luigi.x2234 = 0;
+    fp->ev.lg.x2234 = 0;
 }
 
 void ftLuigi_OnLoad(HSD_GObj* fighter_gobj)

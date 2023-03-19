@@ -163,22 +163,22 @@ void ftGameWatch_OnDeath(HSD_GObj* fighter_gobj)
     func_80074A4C(fighter_gobj, 8U, -1);
     func_80074A4C(fighter_gobj, 9U, -1);
     func_80074A4C(fighter_gobj, 0xAU, -1);
-    fp->ev.gaw.x222C_judgeVar1 = 1;
-    fp->ev.gaw.x2230_judgeVar2 = 0;
-    fp->ev.gaw.x2234 = 0;
-    fp->ev.gaw.x223C_panicDamage = 0;
-    fp->ev.gaw.x2240_chefVar1 = 1;
-    fp->ev.gaw.x2244_chefVar2 = 3;
-    fp->ev.gaw.x2248_manholeGObj = NULL;
-    fp->ev.gaw.x224C_greenhouseGObj = NULL;
-    fp->ev.gaw.x2250_manholeGObj2 = NULL;
-    fp->ev.gaw.x2254_fireGObj = NULL;
-    fp->ev.gaw.x2258_parachuteGObj = NULL;
-    fp->ev.gaw.x225C_turtleGObj = NULL;
-    fp->ev.gaw.x2260_sparkyGObj = NULL;
-    fp->ev.gaw.x2264_judgementGObj = NULL;
-    fp->ev.gaw.x2268_panicGObj = NULL;
-    fp->ev.gaw.x226C_rescueGObj = NULL;
+    fp->ev.gw.x222C_judgeVar1 = 1;
+    fp->ev.gw.x2230_judgeVar2 = 0;
+    fp->ev.gw.x2234 = 0;
+    fp->ev.gw.x223C_panicDamage = 0;
+    fp->ev.gw.x2240_chefVar1 = 1;
+    fp->ev.gw.x2244_chefVar2 = 3;
+    fp->ev.gw.x2248_manholeGObj = NULL;
+    fp->ev.gw.x224C_greenhouseGObj = NULL;
+    fp->ev.gw.x2250_manholeGObj2 = NULL;
+    fp->ev.gw.x2254_fireGObj = NULL;
+    fp->ev.gw.x2258_parachuteGObj = NULL;
+    fp->ev.gw.x225C_turtleGObj = NULL;
+    fp->ev.gw.x2260_sparkyGObj = NULL;
+    fp->ev.gw.x2264_judgementGObj = NULL;
+    fp->ev.gw.x2268_panicGObj = NULL;
+    fp->ev.gw.x226C_rescueGObj = NULL;
 }
 
 void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj)
@@ -191,7 +191,7 @@ void ftGameWatch_OnLoad(HSD_GObj* fighter_gobj)
     fp->x2224_flag.bits.b0 = 1;
 
     PUSH_ATTRS(fp, ftGameWatchAttributes);
-    fp->ev.gaw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
+    fp->ev.gw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
 
     {
         ftGameWatchAttributes* attr = fp->x2D4_specialAttributes;
@@ -274,7 +274,7 @@ void ftGameWatch_8014A77C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->ev.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
         func_800BFFD0(fp, 5, 0);
     }
 }

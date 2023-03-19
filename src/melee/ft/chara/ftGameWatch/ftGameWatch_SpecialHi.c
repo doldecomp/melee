@@ -20,12 +20,12 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
     HSD_GObj* rescueGObj;
 
     fp = GET_FIGHTER(fighter_gobj);
-    if (fp->ev.gaw.x226C_rescueGObj == NULL) {
+    if (fp->ev.gw.x226C_rescueGObj == NULL) {
         func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * Fighter_GetModelScale(fp)) - sp10.y);
         rescueGObj = func_802C8038(fighter_gobj, &sp10, 0,
                                    fp->action_id - 0x175, fp->facing_dir, 2.5f);
-        fp->ev.gaw.x226C_rescueGObj = rescueGObj;
+        fp->ev.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
@@ -57,7 +57,7 @@ void ftGameWatch_ItemRescueSetNULL(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->ev.gaw.x226C_rescueGObj = NULL;
+    fp->ev.gw.x226C_rescueGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -67,8 +67,8 @@ void ftGameWatch_ItemRescueRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->ev.gaw.x226C_rescueGObj != NULL) {
-        func_802C8158(fp->ev.gaw.x226C_rescueGObj);
+    if (fp->ev.gw.x226C_rescueGObj != NULL) {
+        func_802C8158(fp->ev.gw.x226C_rescueGObj);
         ftGameWatch_ItemRescueSetNULL(fighter_gobj);
     }
 }
@@ -78,8 +78,8 @@ static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->ev.gaw.x226C_rescueGObj != NULL) {
-        func_802C81C8(fp->ev.gaw.x226C_rescueGObj);
+    if (fp->ev.gw.x226C_rescueGObj != NULL) {
+        func_802C81C8(fp->ev.gw.x226C_rescueGObj);
     }
 }
 
@@ -88,8 +88,8 @@ static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->ev.gaw.x226C_rescueGObj != NULL) {
-        func_802C81E8(fp->ev.gaw.x226C_rescueGObj);
+    if (fp->ev.gw.x226C_rescueGObj != NULL) {
+        func_802C81E8(fp->ev.gw.x226C_rescueGObj);
     }
 }
 

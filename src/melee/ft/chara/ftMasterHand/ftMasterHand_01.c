@@ -186,12 +186,12 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj)
     fp->masterhandVars.x2370 = -1;
     fp->masterhandVars.x235C = 0.0f;
     fp->masterhandVars.x2360 = 0;
-    fp->ev.masterhand.x222C = func_8015C244(gobj, &fp->xB0_pos);
-    fp->ev.masterhand.x2238 = 1.0f;
-    fp->ev.masterhand.x224C = 0;
-    fp->ev.masterhand.x2250 = 0x15B;
-    fp->ev.masterhand.x2254 = 0;
+    fp->ev.mh.x222C = func_8015C244(gobj, &fp->xB0_pos);
+    fp->ev.mh.x2238 = 1.0f;
+    fp->ev.mh.x224C = 0;
+    fp->ev.mh.x2250 = 0x15B;
+    fp->ev.mh.x2254 = 0;
     fp->x1A98 = 1;
-    func_8015BD24(fp->x1A98, &fp->ev.masterhand.x223C, fp->ev.masterhand.x2238,
+    func_8015BD24(fp->x1A98, &fp->ev.mh.x223C, fp->ev.mh.x2238,
                   ftData_attr->x18, ftData_attr->x20, ftData_attr->x1C);
 }

@@ -175,32 +175,31 @@ void func_8013C360(HSD_GObj* fighter_gobj)
                 lbl_803D05B4[fp->x619_costume_id]);
         }
 
-        fp->ev.purin.x2244 = HSD_ObjAlloc(&lbl_80459080);
+        fp->ev.pr.x2244 = HSD_ObjAlloc(&lbl_80459080);
         func_80074148();
-        fp->ev.purin.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
+        fp->ev.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
         fp->x2225_b2 = true;
         func_80074170();
-        func_80075650(fighter_gobj, fp->ev.purin.x223C, &fp->ev.purin.x2240);
+        func_80075650(fighter_gobj, fp->ev.pr.x223C, &fp->ev.pr.x2240);
 
-        func_8007487C(&items_shifted[1], &fp->ev.purin.x2248,
-                      fp->x619_costume_id, &fp->ev.purin.x2240,
-                      &fp->ev.purin.x2240);
+        func_8007487C(&items_shifted[1], &fp->ev.pr.x2248, fp->x619_costume_id,
+                      &fp->ev.pr.x2240, &fp->ev.pr.x2240);
         func_8009DC54(fp);
         return;
     }
 
-    fp->ev.purin.x223C = 0;
+    fp->ev.pr.x223C = 0;
 }
 
 void func_8013C494(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->ev.purin.x223C != NULL) {
-        HSD_JObjRemoveAll(fp->ev.purin.x223C);
-        fp->ev.purin.x223C = NULL;
-        HSD_ObjFree(&lbl_80459080, fp->ev.purin.x2244);
-        fp->ev.purin.x2244 = NULL;
+    if (fp->ev.pr.x223C != NULL) {
+        HSD_JObjRemoveAll(fp->ev.pr.x223C);
+        fp->ev.pr.x223C = NULL;
+        HSD_ObjFree(&lbl_80459080, fp->ev.pr.x2244);
+        fp->ev.pr.x2244 = NULL;
     }
 }
 
@@ -213,28 +212,28 @@ void func_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx)
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->ev.purin.x223C && fp->x2225_b2) {
+    if (fp->ev.pr.x223C && fp->x2225_b2) {
         Mtx* mtx;
         HSD_JObj* jobj;
         HSD_JObj* bone_jobj = fp->x5E8_fighterBones[6].x0_jobj;
         HSD_JObjGetMtx(fp->x5E8_fighterBones[6].x0_jobj);
         mtx = (0, &bone_jobj->mtx);
-        jobj = fp->ev.purin.x223C;
-        HSD_JObjCopyMtx(fp->ev.purin.x223C, *mtx);
+        jobj = fp->ev.pr.x223C;
+        HSD_JObjCopyMtx(fp->ev.pr.x223C, *mtx);
         jobj->flags |= 0x03800000;
         HSD_JObjSetMtxDirty(jobj);
 
-        HSD_JObjDispAll(fp->ev.purin.x223C, vmtx, func_80390EB8(arg1), 0);
+        HSD_JObjDispAll(fp->ev.pr.x223C, vmtx, func_80390EB8(arg1), 0);
     }
 }
 
 void func_8013C614(Fighter* fp, int arg1, bool arg2)
 {
-    if (fp->ev.purin.x223C) {
+    if (fp->ev.pr.x223C) {
         if (arg2)
-            func_80074CA0(&fp->ev.purin.x2248, arg1, &fp->ev.purin.x2240);
+            func_80074CA0(&fp->ev.pr.x2248, arg1, &fp->ev.pr.x2240);
         else
-            func_80074D7C(&fp->ev.purin.x2248, arg1, &fp->ev.purin.x2240);
+            func_80074D7C(&fp->ev.pr.x2248, arg1, &fp->ev.pr.x2240);
     }
 }
 
@@ -242,8 +241,8 @@ void* func_8013C664(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->ev.purin.x223C)
-        return fp->ev.purin.x223C;
+    if (fp->ev.pr.x223C)
+        return fp->ev.pr.x223C;
 
     return fighter_gobj;
 }

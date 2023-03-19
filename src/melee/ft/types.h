@@ -584,7 +584,8 @@ struct SpecialAttrs_Kirby {
 };
 
 struct SpecialAttrs_Koopa {
-    /* 0x222C */ u32 x222C;
+    /* 0x222C */ f32 x222C;
+    /* 0x2230 */ f32 x2230;
 };
 
 struct SpecialAttrs_Link {
@@ -629,10 +630,6 @@ struct SpecialAttrs_Peach {
 };
 
 struct SpecialAttrs_Popo {
-    char filler0[0x100];
-};
-
-struct SpecialAttrs_Nana {
     /* 0x222C */ uint x222C;
     /* 0x2230 */ UnkFlagStruct x2230;
     /* 0x2231 */ u8 filler_x2231[3];
@@ -774,11 +771,6 @@ struct SpecialAttrs_Boy {
 
 struct SpecialAttrs_Girl {
     char filler0[0x100];
-};
-
-struct SpecialAttrs_GKoopa {
-    /* 0x222C */ f32 x222C;
-    /* 0x2230 */ f32 x2230;
 };
 
 struct SpecialAttrs_Sandbag {
@@ -1352,35 +1344,24 @@ struct Fighter {
         struct ftCaptain_EntityVars ca, gn;
         struct SpecialAttrs_DK dk;
         struct SpecialAttrs_Kirby kb;
-        struct SpecialAttrs_Koopa kp;
-        struct SpecialAttrs_Link link;
-        struct SpecialAttrs_Seak seak;
-        struct SpecialAttrs_Ness ness;
-        struct SpecialAttrs_Peach peach;
-        struct SpecialAttrs_Popo popo;
-        struct SpecialAttrs_Nana nana;
-        struct SpecialAttrs_Pikachu pikachu;
-        struct SpecialAttrs_Samus samus;
-        struct SpecialAttrs_Yoshi yoshi;
-        struct SpecialAttrs_Purin purin;
-        struct SpecialAttrs_Mewtwo mewtwo;
-        struct SpecialAttrs_Luigi luigi;
-        struct SpecialAttrs_Mars mars;
-        struct SpecialAttrs_Zelda zelda;
-        struct SpecialAttrs_CLink clink;
-
-        // Mario SpecialAttrs struct is used for DrMario
-        // Fox SpecialAttrs struct is used for Falco
-        struct SpecialAttrs_Pichu pichu;
-        struct SpecialAttrs_GameWatch gaw;
-        // Cpt Falcon SpecialAttrs struct is used for Ganondorf
-        // Mars (Marth) struct is used for Emblem (Roy)
-        struct SpecialAttrs_Masterhand masterhand;
-        struct SpecialAttrs_Crazyhand crazyhand;
-        struct SpecialAttrs_Boy boy;
-        struct SpecialAttrs_Girl girl;
-        struct SpecialAttrs_GKoopa gkoopa;
-        struct SpecialAttrs_Sandbag sandbag;
+        struct SpecialAttrs_Koopa kp, gk;
+        struct SpecialAttrs_Link lk, cl;
+        struct SpecialAttrs_Seak sk;
+        struct SpecialAttrs_Ness ns;
+        struct SpecialAttrs_Peach pe;
+        struct SpecialAttrs_Popo pp, nn;
+        struct SpecialAttrs_Pikachu pk, pc;
+        struct SpecialAttrs_Samus ss;
+        struct SpecialAttrs_Yoshi ys;
+        struct SpecialAttrs_Purin pr;
+        struct SpecialAttrs_Mewtwo mt;
+        struct SpecialAttrs_Luigi lg;
+        struct SpecialAttrs_Mars ms;
+        struct SpecialAttrs_Zelda zd;
+        struct SpecialAttrs_GameWatch gw;
+        struct SpecialAttrs_Masterhand mh, ch;
+        struct SpecialAttrs_Boy bo, gl;
+        struct SpecialAttrs_Sandbag sb;
     } ev;
 
     /* 0x232C */ s32 x232C;

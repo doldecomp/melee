@@ -20,11 +20,11 @@ s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* fighter_gobj, s32* chargeLevel,
         fp = getFighter(fighter_gobj);
         mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-        if (fp->ev.mewtwo.x2230_shadowHeldGObj == NULL) {
+        if (fp->ev.mt.x2230_shadowHeldGObj == NULL) {
             return -1;
         }
 
-        *chargeLevel = fp->ev.mewtwo.x2234_shadowBallCharge;
+        *chargeLevel = fp->ev.mt.x2234_shadowBallCharge;
         *chargeCycles = mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
         return 0;
     }
@@ -93,9 +93,9 @@ static inline void ftMewtwo_SpecialN_ClearGObj(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj != NULL) {
         Fighter* fp = getFighter(fighter_gobj);
-        if (fp->ev.mewtwo.x2238_shadowBallGObj != NULL) {
+        if (fp->ev.mt.x2238_shadowBallGObj != NULL) {
             efLib_DestroyAll(fighter_gobj);
-            fp->ev.mewtwo.x2238_shadowBallGObj = NULL;
+            fp->ev.mt.x2238_shadowBallGObj = NULL;
         }
     }
 }
@@ -107,8 +107,8 @@ void ftMewtwo_SpecialN_SetNULL(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj != NULL) {
         Fighter* fp = getFighter(fighter_gobj);
-        if (fp->ev.mewtwo.x2230_shadowHeldGObj != NULL) {
-            fp->ev.mewtwo.x2230_shadowHeldGObj = NULL;
+        if (fp->ev.mt.x2230_shadowHeldGObj != NULL) {
+            fp->ev.mt.x2230_shadowHeldGObj = NULL;
         }
         ftMewtwo_SpecialN_ClearGObj(fighter_gobj);
     }
@@ -121,19 +121,19 @@ ftMewtwo_SpecialN_RemoveHeldShadowBall(HSD_GObj* fighter_gobj)
     Fighter* fp2 = fp = getFighter(fighter_gobj);
 
     if (fighter_gobj != NULL) {
-        if (fp->ev.mewtwo.x2230_shadowHeldGObj != NULL) {
-            func_802C573C(fp->ev.mewtwo.x2230_shadowHeldGObj);
-            fp->ev.mewtwo.x2230_shadowHeldGObj = NULL;
+        if (fp->ev.mt.x2230_shadowHeldGObj != NULL) {
+            func_802C573C(fp->ev.mt.x2230_shadowHeldGObj);
+            fp->ev.mt.x2230_shadowHeldGObj = NULL;
         }
         if (fighter_gobj != NULL) {
             Fighter* fp2 = fp2 = getFighter(fighter_gobj);
-            if (fp2->ev.mewtwo.x2238_shadowBallGObj != NULL) {
+            if (fp2->ev.mt.x2238_shadowBallGObj != NULL) {
                 efLib_DestroyAll(fighter_gobj);
-                fp2->ev.mewtwo.x2238_shadowBallGObj = NULL;
+                fp2->ev.mt.x2238_shadowBallGObj = NULL;
             }
         }
     }
-    fp2->ev.mewtwo.x2234_shadowBallCharge = 0;
+    fp2->ev.mt.x2234_shadowBallCharge = 0;
     func_800BFFAC(fp2);
     efLib_DestroyAll(fighter_gobj);
 }
@@ -168,22 +168,22 @@ void ftMewtwo_SpecialN_OnDeath(HSD_GObj* fighter_gobj)
         fp2 = fp = getFighter(fighter_gobj);
 
         if (fighter_gobj != NULL) {
-            if (fp->ev.mewtwo.x2230_shadowHeldGObj != NULL) {
-                func_802C573C(fp->ev.mewtwo.x2230_shadowHeldGObj);
-                fp->ev.mewtwo.x2230_shadowHeldGObj = NULL;
+            if (fp->ev.mt.x2230_shadowHeldGObj != NULL) {
+                func_802C573C(fp->ev.mt.x2230_shadowHeldGObj);
+                fp->ev.mt.x2230_shadowHeldGObj = NULL;
             }
             if (fighter_gobj != NULL) {
                 Fighter* fp2 = fp2 = getFighter(fighter_gobj);
-                if (fp2->ev.mewtwo.x2238_shadowBallGObj != NULL) {
+                if (fp2->ev.mt.x2238_shadowBallGObj != NULL) {
                     efLib_DestroyAll(fighter_gobj);
-                    fp2->ev.mewtwo.x2238_shadowBallGObj = NULL;
+                    fp2->ev.mt.x2238_shadowBallGObj = NULL;
                 }
             }
         }
-        if ((f32) fp2->ev.mewtwo.x2234_shadowBallCharge !=
+        if ((f32) fp2->ev.mt.x2234_shadowBallCharge !=
             mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {
-            fp2->ev.mewtwo.x2234_shadowBallCharge = 0;
+            fp2->ev.mt.x2234_shadowBallCharge = 0;
             func_800BFFAC(fp2);
             efLib_DestroyAll(fighter_gobj);
         }
@@ -209,7 +209,7 @@ void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* fighter_gobj)
     {
         fp->x80_self_vel.x =
             fp->facing_dir * (mewtwoAttrs->x8_MEWTWO_SHADOWBALL_AIR_RECOIL_X *
-                              (f32) fp->ev.mewtwo.x2234_shadowBallCharge);
+                              (f32) fp->ev.mt.x2234_shadowBallCharge);
     }
     if (((s32) fp->action_id == AS_MEWTWO_SPECIALN_END) ||
         ((s32) fp->xE0_ground_or_air == GA_Ground))
@@ -217,7 +217,7 @@ void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* fighter_gobj)
         fp->xEC_ground_vel =
             fp->facing_dir *
             (mewtwoAttrs->x4_MEWTWO_SHADOWBALL_GROUND_RECOIL_X *
-             (f32) fp->ev.mewtwo.x2234_shadowBallCharge);
+             (f32) fp->ev.mt.x2234_shadowBallCharge);
     }
 }
 
@@ -247,7 +247,7 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj)
 #endif
 
     if (((u32) fp->x2204_ftcmd_var1 == 1U) &&
-        (fp->ev.mewtwo.x2230_shadowHeldGObj != NULL))
+        (fp->ev.mt.x2230_shadowHeldGObj != NULL))
     {
         Vec3 sp38;
         fp->x2204_ftcmd_var1 = 2;
@@ -258,12 +258,11 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj)
         } else {
             facingDir = M_PI;
         }
-        func_802C53F0(fp->ev.mewtwo.x2230_shadowHeldGObj, &sp38,
-                      (f32) facingDir,
-                      (f32) (u32) fp->ev.mewtwo.x2234_shadowBallCharge,
+        func_802C53F0(fp->ev.mt.x2230_shadowHeldGObj, &sp38, (f32) facingDir,
+                      (f32) (u32) fp->ev.mt.x2234_shadowBallCharge,
                       mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES);
         ftMewtwo_SpecialN_SetRecoil(fighter_gobj);
-        fp->ev.mewtwo.x2234_shadowBallCharge = 0;
+        fp->ev.mt.x2234_shadowBallCharge = 0;
         if (fighter_gobj != NULL) {
 /// @todo Missing @c inline function(s).
 #ifdef MUST_MATCH
@@ -272,8 +271,8 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj)
             temp_fp = getFighter(fighter_gobj);
 #endif
 
-            if (temp_fp->ev.mewtwo.x2230_shadowHeldGObj != NULL) {
-                temp_fp->ev.mewtwo.x2230_shadowHeldGObj = NULL;
+            if (temp_fp->ev.mt.x2230_shadowHeldGObj != NULL) {
+                temp_fp->ev.mt.x2230_shadowHeldGObj = NULL;
             }
             if (fighter_gobj != NULL) {
 /// @todo Missing @c inline function(s).
@@ -283,14 +282,14 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj)
                 fp2 = getFighter(fighter_gobj);
 #endif
 
-                if (fp2->ev.mewtwo.x2238_shadowBallGObj != NULL) {
+                if (fp2->ev.mt.x2238_shadowBallGObj != NULL) {
                     efLib_DestroyAll(fighter_gobj);
-                    fp2->ev.mewtwo.x2238_shadowBallGObj = NULL;
+                    fp2->ev.mt.x2238_shadowBallGObj = NULL;
                 }
             }
         }
         fp->x1974_heldItem = shadowBallGObj;
-        if ((f32) fp->ev.mewtwo.x2234_shadowBallCharge ==
+        if ((f32) fp->ev.mt.x2234_shadowBallCharge ==
             mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {
             func_80088148(fp, 0x30DB6U, SFX_VOLUME_MAX, SFX_PAN_MID);
@@ -315,8 +314,8 @@ void ftMewtwo_SpecialN_PlayChargeSFX(HSD_GObj* fighter_gobj)
 #endif
 
     if ((u32) fp->x2208_ftcmd_var2 != 0U) {
-        if (fp->ev.mewtwo.x2234_shadowBallCharge != 0) {
-            chargeLevel = (f32) fp->ev.mewtwo.x2234_shadowBallCharge /
+        if (fp->ev.mt.x2234_shadowBallCharge != 0) {
+            chargeLevel = (f32) fp->ev.mt.x2234_shadowBallCharge /
                           mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
         } else {
             chargeLevel = 0.0f;
@@ -393,7 +392,7 @@ inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* fighter_gobj)
     fp->mewtwoVars.SpecialN.isFull = false;
     fp->mewtwoVars.SpecialN.x2344 = (u32) 0;
 
-    if ((s32) fp->ev.mewtwo.x2234_shadowBallCharge == 0) {
+    if ((s32) fp->ev.mt.x2234_shadowBallCharge == 0) {
         releaseLag = mewtwoAttrs->x10_MEWTWO_SHADOWBALL_RELEASE_LAG;
     }
     fp->mewtwoVars.SpecialN.releaseLag = releaseLag;
@@ -431,7 +430,7 @@ inline void ftMewtwo_SpecialAirN_ChangeAction(HSD_GObj* fighter_gobj)
     fp->mewtwoVars.SpecialN.isFull = false;
     fp->mewtwoVars.SpecialN.x2344 = (u32) 0;
 
-    if ((s32) fp->ev.mewtwo.x2234_shadowBallCharge == 0) {
+    if ((s32) fp->ev.mt.x2234_shadowBallCharge == 0) {
         releaseLag = mewtwoAttrs->x10_MEWTWO_SHADOWBALL_RELEASE_LAG;
     }
 
@@ -468,7 +467,7 @@ void ftMewtwo_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     if (((u32) fp->x220C_ftcmd_var3 == 1U) &&
-        (fp->ev.mewtwo.x2230_shadowHeldGObj == NULL))
+        (fp->ev.mt.x2230_shadowHeldGObj == NULL))
     {
         sp2C.z = 2.0f;
         sp2C.y = 0.0f;
@@ -478,16 +477,16 @@ void ftMewtwo_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
         shadowHeldGObj =
             func_802C5000(fighter_gobj, &sp20, 0x23, It_Kind_Mewtwo_ShadowBall,
                           fp->facing_dir);
-        fp->ev.mewtwo.x2230_shadowHeldGObj = shadowHeldGObj;
+        fp->ev.mt.x2230_shadowHeldGObj = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
             ftMewtwo_SpecialN_SetCall(fighter_gobj);
         } else {
-            fp->ev.mewtwo.x2230_shadowHeldGObj = NULL;
+            fp->ev.mt.x2230_shadowHeldGObj = NULL;
         }
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if (((s32) fp->mewtwoVars.SpecialN.isFull == true) ||
-            ((f32) fp->ev.mewtwo.x2234_shadowBallCharge ==
+            ((f32) fp->ev.mt.x2234_shadowBallCharge ==
              mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES))
         {
             Fighter_ActionStateChange_800693AC(fighter_gobj,
@@ -509,7 +508,7 @@ inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* fighter_gobj,
     Fighter* fp = getFighter(fighter_gobj);
 
     if (((u32) fp->x220C_ftcmd_var3 == 1U) &&
-        (fp->ev.mewtwo.x2230_shadowHeldGObj == NULL))
+        (fp->ev.mt.x2230_shadowHeldGObj == NULL))
     {
         HSD_GObj* shadowHeldGObj;
 
@@ -521,11 +520,11 @@ inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* fighter_gobj,
         shadowHeldGObj =
             func_802C5000(fighter_gobj, pos2, 0x23, It_Kind_Mewtwo_ShadowBall,
                           fp->facing_dir);
-        fp->ev.mewtwo.x2230_shadowHeldGObj = shadowHeldGObj;
+        fp->ev.mt.x2230_shadowHeldGObj = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
             ftMewtwo_SpecialN_SetCall(fighter_gobj);
         } else {
-            fp->ev.mewtwo.x2230_shadowHeldGObj = NULL;
+            fp->ev.mt.x2230_shadowHeldGObj = NULL;
         }
     }
 }
@@ -557,15 +556,15 @@ void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
                 (s32) mewtwoAttrs->xC_MEWTWO_SHADOWBALL_CHARGE_ITERATIONS)
             {
                 fp->mewtwoVars.SpecialN.x2344 = 0;
-                fp->ev.mewtwo.x2234_shadowBallCharge++;
-                if ((f32) fp->ev.mewtwo.x2234_shadowBallCharge >=
+                fp->ev.mt.x2234_shadowBallCharge++;
+                if ((f32) fp->ev.mt.x2234_shadowBallCharge >=
                     mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
                 {
                     Fighter_ActionStateChange_800693AC(
                         fighter_gobj, AS_MEWTWO_SPECIALN_FULL,
                         FTMEWTWO_SPECIALN_ACTION_FLAG, NULL,
                         fp->x894_currentAnimFrame, 1.0f, 0.0f);
-                    fp->ev.mewtwo.x2234_shadowBallCharge =
+                    fp->ev.mt.x2234_shadowBallCharge =
                         (s32) mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
                     fp->mewtwoVars.SpecialN.x2348 = true;
                     func_8007EBAC(fp, 0xCU, 0U);
@@ -587,7 +586,7 @@ void ftMewtwo_SpecialNFull_Anim(HSD_GObj* fighter_gobj)
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
 
     fp->mewtwoVars.SpecialN.x2348 = true;
-    fp->ev.mewtwo.x2234_shadowBallCharge =
+    fp->ev.mt.x2234_shadowBallCharge =
         mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 }
 
@@ -596,9 +595,9 @@ inline void ftMewtwo_SpecialN_RemoveShadowBall2(HSD_GObj* fighter_gobj)
     if (fighter_gobj != NULL) {
         Fighter* fp = getFighter(fighter_gobj);
 
-        if (fp->ev.mewtwo.x2230_shadowHeldGObj != NULL) {
-            func_802C573C(fp->ev.mewtwo.x2230_shadowHeldGObj);
-            fp->ev.mewtwo.x2230_shadowHeldGObj = NULL;
+        if (fp->ev.mt.x2230_shadowHeldGObj != NULL) {
+            func_802C573C(fp->ev.mt.x2230_shadowHeldGObj);
+            fp->ev.mt.x2230_shadowHeldGObj = NULL;
         }
         ftMewtwo_SpecialN_ClearGObj(fighter_gobj);
     }
@@ -649,7 +648,7 @@ void ftMewtwo_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     if (((u32) fp->x220C_ftcmd_var3 == 1U) &&
-        (fp->ev.mewtwo.x2230_shadowHeldGObj == NULL))
+        (fp->ev.mt.x2230_shadowHeldGObj == NULL))
     {
         sp2C.z = 2.0f;
         sp2C.y = 0.0f;
@@ -659,17 +658,17 @@ void ftMewtwo_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
         shadowHeldGObj =
             func_802C5000(fighter_gobj, &sp20, 0x23, It_Kind_Mewtwo_ShadowBall,
                           fp->facing_dir);
-        fp->ev.mewtwo.x2230_shadowHeldGObj = shadowHeldGObj;
+        fp->ev.mt.x2230_shadowHeldGObj = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
             ftMewtwo_SpecialN_SetCall(fighter_gobj);
         } else {
-            fp->ev.mewtwo.x2230_shadowHeldGObj = NULL;
+            fp->ev.mt.x2230_shadowHeldGObj = NULL;
         }
     }
     fp->mewtwoVars.SpecialN.isFull = false;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if (((s32) fp->mewtwoVars.SpecialN.isFull == true) ||
-            ((f32) fp->ev.mewtwo.x2234_shadowBallCharge ==
+            ((f32) fp->ev.mt.x2234_shadowBallCharge ==
              mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES))
         {
             Fighter_ActionStateChange_800693AC(fighter_gobj,
@@ -712,15 +711,15 @@ void ftMewtwo_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
                 (s32) mewtwoAttrs->xC_MEWTWO_SHADOWBALL_CHARGE_ITERATIONS)
             {
                 fp->mewtwoVars.SpecialN.x2344 = 0;
-                fp->ev.mewtwo.x2234_shadowBallCharge++;
-                if ((f32) fp->ev.mewtwo.x2234_shadowBallCharge >=
+                fp->ev.mt.x2234_shadowBallCharge++;
+                if ((f32) fp->ev.mt.x2234_shadowBallCharge >=
                     mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
                 {
                     Fighter_ActionStateChange_800693AC(
                         fighter_gobj, AS_MEWTWO_SPECIALAIRN_FULL,
                         FTMEWTWO_SPECIALN_ACTION_FLAG, NULL,
                         fp->x894_currentAnimFrame, 1.0f, 0.0f);
-                    fp->ev.mewtwo.x2234_shadowBallCharge =
+                    fp->ev.mt.x2234_shadowBallCharge =
                         (s32) mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
                     fp->mewtwoVars.SpecialN.x2348 = 1;
                     func_8007EBAC(fp, 0xCU, 0U);
@@ -743,7 +742,7 @@ void ftMewtwo_SpecialAirNFull_Anim(HSD_GObj* fighter_gobj)
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
 
     fp->mewtwoVars.SpecialN.x2348 = false;
-    fp->ev.mewtwo.x2234_shadowBallCharge =
+    fp->ev.mt.x2234_shadowBallCharge =
         mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 }
 

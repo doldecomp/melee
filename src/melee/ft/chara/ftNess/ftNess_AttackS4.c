@@ -40,7 +40,7 @@ void ftNess_AttackS4_Action(
     baseballBatGObj = func_802AD478(fighter_gobj, &fp->xB0_pos,
                                     0x2A /* Item Hold Bone */, fp->facing_dir);
 
-    fp->ev.ness.x2248_baseballBatGObj = baseballBatGObj;
+    fp->ev.ns.x2248_baseballBatGObj = baseballBatGObj;
 
     if (baseballBatGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftNess_OnDamage;
@@ -60,7 +60,7 @@ bool ftNess_CheckNessBatRemove(
         return true;
     }
 
-    if (fp->ev.ness.x2248_baseballBatGObj == NULL) {
+    if (fp->ev.ns.x2248_baseballBatGObj == NULL) {
         return true;
     }
 
@@ -73,9 +73,9 @@ void ftNess_ItemNessBatRemove(HSD_GObj* fighter_gobj) // Remove Baseball Bat
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->ev.ness.x2248_baseballBatGObj != NULL) {
-        func_802AD6B8(fp->ev.ness.x2248_baseballBatGObj);
-        fp->ev.ness.x2248_baseballBatGObj = NULL;
+    if (fp->ev.ns.x2248_baseballBatGObj != NULL) {
+        func_802AD6B8(fp->ev.ns.x2248_baseballBatGObj);
+        fp->ev.ns.x2248_baseballBatGObj = NULL;
     }
 };
 
@@ -86,8 +86,8 @@ void ftNess_ItemNessBatSetNULL(
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->ev.ness.x2248_baseballBatGObj != NULL) {
-        fp->ev.ness.x2248_baseballBatGObj = NULL;
+    if (fp->ev.ns.x2248_baseballBatGObj != NULL) {
+        fp->ev.ns.x2248_baseballBatGObj = NULL;
     }
 };
 
@@ -120,12 +120,12 @@ void ftNess_AttackS4_Anim(
     {
         Fighter* fighter_data2;
         fighter_data2 = GET_FIGHTER(fighter_gobj);
-        if (fighter_data2->ev.ness.x2248_baseballBatGObj != NULL) {
+        if (fighter_data2->ev.ns.x2248_baseballBatGObj != NULL) {
             func_802AD6B8(
-                fighter_data2->ev.ness
+                fighter_data2->ev.ns
                     .x2248_baseballBatGObj); // Despawn the Baseball Bat if
                                              // animation is over
-            fighter_data2->ev.ness.x2248_baseballBatGObj = NULL;
+            fighter_data2->ev.ns.x2248_baseballBatGObj = NULL;
         }
         func_8008A2BC(fighter_gobj);
     }
@@ -144,9 +144,9 @@ void ftNess_AttackS4_IASA(
 #endif
 
     if (fp->x2218_flag.bits.b0 != 0) {
-        if (fp->ev.ness.x2248_baseballBatGObj != NULL) {
-            func_802AD6B8(fp->ev.ness.x2248_baseballBatGObj);
-            fp->ev.ness.x2248_baseballBatGObj = NULL;
+        if (fp->ev.ns.x2248_baseballBatGObj != NULL) {
+            func_802AD6B8(fp->ev.ns.x2248_baseballBatGObj);
+            fp->ev.ns.x2248_baseballBatGObj = NULL;
         }
         func_8008A4D4(fighter_gobj);
     }

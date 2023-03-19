@@ -37,7 +37,7 @@ void lbl_80151168(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* r4_fp = GET_FIGHTER(gobj);
-        r4_fp->ev.masterhand.x2258 = 0x155;
+        r4_fp->ev.mh.x2258 = 0x155;
         func_80151018(gobj);
     }
 }
