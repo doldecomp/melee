@@ -1351,8 +1351,8 @@ struct Fighter {
         struct SpecialAttrs_Fox fx, fc;
         struct ftCaptain_EntityVars ca, gn;
         struct SpecialAttrs_DK dk;
-        struct SpecialAttrs_Kirby kirby;
-        struct SpecialAttrs_Koopa koopa;
+        struct SpecialAttrs_Kirby kb;
+        struct SpecialAttrs_Koopa kp;
         struct SpecialAttrs_Link link;
         struct SpecialAttrs_Seak seak;
         struct SpecialAttrs_Ness ness;
