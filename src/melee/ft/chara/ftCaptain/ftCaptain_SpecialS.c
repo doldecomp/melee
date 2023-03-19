@@ -24,11 +24,11 @@ void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
     fp->sa.captain.during_specials_start = false;
 }
 
-inline void ftCaptain_SpecialS_SetCall(HSD_GObj* fighter_gobj)
+static inline void setCallbacks(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = &ftCaptain_800E28C8;
-    fp->cb.x21E4_callback_OnDeath2 = &ftCaptain_800E28C8;
+    fp->cb.x21DC_callback_OnTakeDamage = ftCaptain_800E28C8;
+    fp->cb.x21E4_callback_OnDeath2 = ftCaptain_800E28C8;
 }
 
 static inline void resetCmdVarsGround(HSD_GObj* fighter_gobj)
@@ -50,7 +50,7 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     Fighter_ActionStateChange_800693AC(
         fighter_gobj, ftCaptain_AS_SpecialS_Start, 0, NULL, 0, 1, 0);
 
-    ftCaptain_SpecialS_SetCall(fighter_gobj);
+    setCallbacks(fighter_gobj);
     func_8006EBA4(fighter_gobj);
 
     switch (func_800872A4(fighter_gobj)) {
@@ -93,7 +93,7 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     Fighter_ActionStateChange_800693AC(
         fighter_gobj, ftCaptain_AS_SpecialAirS_Start, 0, NULL, 0, 1, 0);
 
-    ftCaptain_SpecialS_SetCall(fighter_gobj);
+    setCallbacks(fighter_gobj);
     func_8006EBA4(fighter_gobj);
     ftKind = func_800872A4(fighter_gobj);
     switch (ftKind) {
@@ -131,7 +131,7 @@ inline void ftCaptain_SpecialS_Switch0(HSD_GObj* fighter_gobj)
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialS,
                                        transition_flags, NULL, 0, 1, 0);
-    ftCaptain_SpecialS_SetCall(fighter_gobj);
+    setCallbacks(fighter_gobj);
     fp->x80_self_vel.z = 0;
     fp->x80_self_vel.y = 0;
     fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
@@ -144,7 +144,7 @@ inline void ftCaptain_SpecialS_Switch1(HSD_GObj* fighter_gobj)
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialS,
                                        transition_flags, NULL, 0, 1, 0);
-    ftCaptain_SpecialS_SetCall(fighter_gobj);
+    setCallbacks(fighter_gobj);
     fp->x80_self_vel.z = 0;
     fp->x80_self_vel.y = 0;
     fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
@@ -155,7 +155,7 @@ inline void ftCaptain_SpecialS_Switch2(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialAirS,
                                        transition_flags, NULL, 0, 1, 0);
-    ftCaptain_SpecialS_SetCall(fighter_gobj);
+    setCallbacks(fighter_gobj);
     fp->x80_self_vel.z = 0;
 }
 
@@ -187,7 +187,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
                 Fighter_ActionStateChange_800693AC(
                     fighter_gobj, ftCaptain_AS_SpecialS, transition_flags, NULL,
                     0, 1, 0);
-                ftCaptain_SpecialS_SetCall(fighter_gobj);
+                setCallbacks(fighter_gobj);
                 fp->x80_self_vel.z = 0;
                 fp->x80_self_vel.y = 0;
                 fp->xEC_ground_vel *= captainAttrs->specials_gr_vel_x;
@@ -197,7 +197,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
                 Fighter_ActionStateChange_800693AC(
                     fighter_gobj, ftCaptain_AS_SpecialAirS, transition_flags,
                     NULL, 0, 1, 0);
-                ftCaptain_SpecialS_SetCall(fighter_gobj);
+                setCallbacks(fighter_gobj);
                 fp->x80_self_vel.z = 0;
                 return;
             }
