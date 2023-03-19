@@ -756,8 +756,8 @@ struct SpecialAttrs_Fox {
 };
 
 struct SpecialAttrs_Captain {
-    /* 0x222C */ bool during_specials_start;
-    /* 0x2230 */ bool during_specials;
+    /* 0x222C */ uint during_specials_start;
+    /* 0x2230 */ uint during_specials;
 };
 
 struct SpecialAttrs_DK {

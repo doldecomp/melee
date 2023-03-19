@@ -214,9 +214,8 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
 // Raptor Boost / Gerudo Dragon Start Animation callback
 void ftCaptain_SpecialSStart_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 // 0x800E3888
@@ -225,11 +224,9 @@ void ftCaptain_SpecialSStart_Anim(HSD_GObj* fighter_gobj)
 void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 ftKind;
 
-    if ((u32) fp->sa.captain.during_specials == false) {
-        ftKind = func_800872A4(fighter_gobj);
-        switch (ftKind) {
+    if (!fp->sa.captain.during_specials) {
+        switch (func_800872A4(fighter_gobj)) {
         case FTKIND_CAPTAIN:
             ef_Spawn(1170, fighter_gobj, fp->x5E8_fighterBones[1].x0_jobj,
                      &fp->facing_dir);
@@ -242,12 +239,13 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
             fp->sa.captain.during_specials = true;
             break;
         }
+
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 // 0x800E3964
@@ -283,37 +281,39 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
-    s32 ftKind;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    if ((u32) fp->sa.captain.during_specials == false) {
-        ftKind = func_800872A4(fighter_gobj);
-        switch (ftKind) {
+    if (!fp->sa.captain.during_specials) {
+        switch (func_800872A4(fighter_gobj)) {
         case FTKIND_CAPTAIN:
-            ef_Spawn(1171, fighter_gobj, fp->x5E8_fighterBones[1].x0_jobj,
+            ef_Spawn(1171, fighter_gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
                      &fp->facing_dir);
             fp->sa.captain.during_specials = true;
             break;
 
         case FTKIND_GANON:
-            ef_Spawn(1295, fighter_gobj, fp->x5E8_fighterBones[1].x0_jobj,
+            ef_Spawn(1295, fighter_gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
                      &fp->facing_dir);
             fp->sa.captain.during_specials = true;
             break;
         }
+
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_8007D60C(fp);
-        if (0 == captainAttrs->specials_hit_landing_lag) {
-            func_800CC730(fighter_gobj);
-            return;
-        }
+
+    if (ftAnim_IsFramesRemaining(fighter_gobj))
+        return;
+
+    func_8007D60C(fp);
+
+    if (captainAttrs->specials_hit_landing_lag == 0) {
+        func_800CC730(fighter_gobj);
+    } else {
         func_80096900(fighter_gobj, 1, 1, 0, 1,
                       captainAttrs->specials_hit_landing_lag);
     }
