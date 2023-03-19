@@ -158,7 +158,7 @@ static inline void onDetectAir(HSD_GObj* fighter_gobj)
 
 void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x2200_ftcmd_var0 == 0)
         return;
@@ -202,9 +202,6 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
 
                 case ftCaptain_AS_SpecialAirS_Start:
                     onDetectAir(fighter_gobj);
-                    return;
-
-                default:
                     return;
                 }
             }
