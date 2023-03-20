@@ -67,9 +67,6 @@ void ftMario_SpecialAirHi_Anim(HSD_GObj* gobj)
     ftMario_SpecialHi_Anim(gobj);
 }
 
-#define DEGREES_TO_RADIANS (3.14159265359f / 180.0f)
-#define HALF_PI (M_PI / 2)
-
 #define abs(x) (x < 0.0f ? -x : x)
 
 // https://decomp.me/scratch/9AoMu
@@ -96,9 +93,8 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
                        ((f64) (lstick_x - sa->specialhi.momentum_stick_range) /
                         (1.0 - (f64) sa->specialhi.momentum_stick_range)));
 
-            tmp = (fp->input.x620_lstick_x > 0)
-                      ? -(DEGREES_TO_RADIANS * tmp_expr)
-                      : DEGREES_TO_RADIANS * tmp_expr;
+            tmp = (fp->input.x620_lstick_x > 0) ? -(DEG_TO_RAD * tmp_expr)
+                                                : DEG_TO_RAD * tmp_expr;
             inputStickangle = fp->x6BC_inputStickangle;
 
             if (abs(tmp) > abs(inputStickangle)) {
