@@ -82,21 +82,21 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
     f32 tmp_expr;
     f32 tmp;
 
-    bool throwflag_flag;
+    bool throwflags_b3;
     fp = GET_FIGHTER(gobj);
 
     sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
 
     lstick_x = abs(fp->input.x620_lstick_x);
 
-    if (fp->x2200_ftcmd_var0 == 0U) {
+    if (fp->x2200_ftcmd_var0 == 0) {
         if (lstick_x > sa->specialhi.momentum_stick_range) {
             tmp_expr =
                 (f32) ((f64) sa->specialhi.angle_diff *
                        ((f64) (lstick_x - sa->specialhi.momentum_stick_range) /
                         (1.0 - (f64) sa->specialhi.momentum_stick_range)));
 
-            tmp = (fp->input.x620_lstick_x > 0.0f)
+            tmp = (fp->input.x620_lstick_x > 0)
                       ? -(DEGREES_TO_RADIANS * tmp_expr)
                       : DEGREES_TO_RADIANS * tmp_expr;
             inputStickangle = fp->x6BC_inputStickangle;
@@ -107,14 +107,14 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
         }
     }
 
-    if (fp->x2210_ThrowFlags.b3 != 0) {
-        fp->x2210_ThrowFlags.b3 = 0;
-        throwflag_flag = 1;
+    if (fp->x2210_ThrowFlags.b3) {
+        fp->x2210_ThrowFlags.b3 = false;
+        throwflags_b3 = true;
     } else {
-        throwflag_flag = 0;
+        throwflags_b3 = false;
     }
 
-    if (throwflag_flag != 0) {
+    if (throwflags_b3) {
         if (abs(fp->input.x620_lstick_x) > sa->specialhi.reverse_stick_range) {
             func_8007D9FC(fp);
             func_80075AF0(fp, 0, (f32) (HALF_PI * (f64) fp->facing_dir));
