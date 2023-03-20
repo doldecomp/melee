@@ -2,7 +2,7 @@
 
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
-#include "ftMario/ftMario_Init.h"
+#include "ftMario/ftMario_SpecialN.h"
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
