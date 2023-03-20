@@ -93,11 +93,9 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
 
         f32 rad = fp->input.x620_lstick_x > 0 ? -(DEG_TO_RAD * deg)
                                               : +(DEG_TO_RAD * deg);
-        f32 inputStickangle = fp->x6BC_inputStickangle;
 
-        if (abs(rad) > abs(inputStickangle)) {
+        if (abs(rad) > abs(fp->x6BC_inputStickangle))
             fp->x6BC_inputStickangle = rad;
-        }
     }
 
     if (fp->x2210_ThrowFlags.b3) {
