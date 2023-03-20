@@ -78,7 +78,7 @@ void ftMario_OnLoad(HSD_GObj* gobj)
     sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
 
     func_8026B3F8(items[0], It_Kind_Mario_Fire);
-    func_8026B3F8(items[2], sa->x14_MARIO_CAPE_IT_KIND);
+    func_8026B3F8(items[2], sa->specials_cape_kind);
 }
 
 // 0x800E0A00

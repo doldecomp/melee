@@ -7,41 +7,41 @@
 typedef struct ftMario_DatAttrs {
     // SIDE SPECIAL - CAPE / SUPER SHEET //
 
-    /* 0x00 */ f32 vel_x_decay;
-    /* 0x04 */ f32 x4_MARIO_CAPE_VEL_X;
-    /* 0x08 */ f32 x8_MARIO_CAPE_VEL_Y;
-    /* 0x0C */ f32 xC_MARIO_CAPE_GRAVITY;
-    /* 0x10 */ f32 x10_MARIO_CAPE_TERMINAL_VELOCITY;
-    /* 0x14 */ s32 x14_MARIO_CAPE_IT_KIND;
+    /* 0x00 */ f32 specials_vel_x_decay;
+    /* 0x04 */ f32 specials_vel_x;
+    /* 0x08 */ f32 specials_vel_y;
+    /* 0x0C */ f32 specials_grav;
+    /* 0x10 */ f32 specials_terminal_vel;
+    /* 0x14 */ s32 specials_cape_kind;
 
     // UP SPECIAL - SUPER JUMP PUNCH //
 
-    /* 0x18 */ f32 x18_MARIO_SUPERJUMP_FREEFALL_MOBILITY;
-    /* 0x1C */ f32 x1C_MARIO_SUPERJUMP_LANDING_LAG;
-    /* 0x20 */ f32 x20_MARIO_SUPERJUMP_REVERSE_STICK_RANGE;
-    /* 0x24 */ f32 x24_MARIO_SUPERJUMP_MOMENTUM_STICK_RANGE;
-    /* 0x28 */ f32 x28_MARIO_SUPERJUMP_ANGLE_DIFF;
-    /* 0x2C */ f32 x2C_MARIO_SUPERJUMP_VEL_X;
-    /* 0x30 */ f32 x30_MARIO_SUPERJUMP_GRAVITY;
-    /* 0x34 */ f32 x34_MARIO_SUPERJUMP_VEL_MUL;
+    /* 0x18 */ f32 specialhi_freefall_mobility;
+    /* 0x1C */ f32 specialhi_landing_lag;
+    /* 0x20 */ f32 specialhi_reverse_stick_range;
+    /* 0x24 */ f32 specialhi_momentum_stick_range;
+    /* 0x28 */ f32 specialhi_angle_diff;
+    /* 0x2C */ f32 specialhi_vel_x;
+    /* 0x30 */ f32 specialhi_grav;
+    /* 0x34 */ f32 specialhi_vel_mul;
 
     // DOWN SPECIAL - MARIO TORNADO / DR. TORNADO //
 
-    /* 0x38 */ f32 x38_MARIO_TORNADO_GROUND_VEL_Y; // Vertical momentum from
-                                                   // inital grounded B-tap
-    /* 0x3C */ f32 x3C_MARIO_TORNADO_MOMENTUM_X_GROUND;
-    /* 0x40 */ f32 x40_MARIO_TORNADO_MOMENTUM_X_AIR;
-    /* 0x44 */ f32 x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND;
-    /* 0x48 */ f32 x48_MARIO_TORNADO_MOMENTUM_X_MUL_AIR;
-    /* 0x4C */ f32 x4C_MARIO_TORNADO_FRICTION_END;
-    /* 0x50 */ s32 x50_MARIO_TORNADO_UNK;
-    /* 0x54 */ f32 x54_MARIO_TORNADO_TAP_Y_VEL_MAX;
-    /* 0x58 */ f32 x58_MARIO_TORNADO_TAP_GRAVITY;
-    /* 0x5C */ s32 x5C_MARIO_TORNADO_LANDING_LAG;
+    /* 0x38 */ f32 speciallw_vel_y; // Vertical momentum from
+                                    // inital grounded B-tap
+    /* 0x3C */ f32 speciallw_momentum_x;
+    /* 0x40 */ f32 specialairlw_momentum_x;
+    /* 0x44 */ f32 speciallw_momentum_x_mul;
+    /* 0x48 */ f32 specialairlw_momentum_x_mul;
+    /* 0x4C */ f32 speciallw_friction_end;
+    /* 0x50 */ s32 speciallw_unk0;
+    /* 0x54 */ f32 speciallw_tap_y_vel_max;
+    /* 0x58 */ f32 speciallw_tap_grav;
+    /* 0x5C */ s32 speciallw_landing_lag;
 
     // CAPE / SUPER SHEET REFLECTION //
 
-    /* 0x60 */ ReflectDesc x60_MARIO_CAPE_REFLECTION;
+    /* 0x60 */ ReflectDesc specials_reflection;
 
 } ftMario_DatAttrs;
 

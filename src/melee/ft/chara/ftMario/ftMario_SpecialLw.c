@@ -59,7 +59,7 @@ static void doStartAction(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->sv.mr.SpecialLw.groundVelX = (f32) 0.0f;
-    fp->sv.mr.SpecialLw.unk = (s32) (sa->x50_MARIO_TORNADO_UNK + 1);
+    fp->sv.mr.SpecialLw.unk = (s32) (sa->speciallw_unk0 + 1);
     fp->sv.mr.SpecialLw.isUnkColl = 0;
     ftMario_SpecialLw_SetCall(gobj);
     ftMario_SpecialLw_SetGFX(gobj);
@@ -85,9 +85,9 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialAirLw, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    fp->x80_self_vel.y = (f32) (sa->x38_MARIO_TORNADO_GROUND_VEL_Y -
-                                sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX);
-    func_8007D440(fp, sa->x40_MARIO_TORNADO_MOMENTUM_X_AIR);
+    fp->x80_self_vel.y =
+        (f32) (sa->speciallw_vel_y - sa->speciallw_tap_y_vel_max);
+    func_8007D440(fp, sa->specialairlw_momentum_x);
     doStartAction(gobj);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
@@ -111,10 +111,10 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
     if ((s32) fp->ev.mr.x2234_tornadoCharge != 0) {
         sub_val = 0.0f;
     } else {
-        sub_val = sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX;
+        sub_val = sa->speciallw_tap_y_vel_max;
     }
-    fp->x80_self_vel.y = (f32) (sa->x38_MARIO_TORNADO_GROUND_VEL_Y - sub_val);
-    func_8007D440(fp, sa->x40_MARIO_TORNADO_MOMENTUM_X_AIR);
+    fp->x80_self_vel.y = (f32) (sa->speciallw_vel_y - sub_val);
+    func_8007D440(fp, sa->specialairlw_momentum_x);
     doStartAction(gobj);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
@@ -152,12 +152,11 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMario_SpecialLw_SetNULL(gobj);
-        if (0.0 == (f64) sa->x5C_MARIO_TORNADO_LANDING_LAG) {
+        if (0.0 == (f64) sa->speciallw_landing_lag) {
             func_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 0, true, 1.0f,
-                      (f32) sa->x5C_MARIO_TORNADO_LANDING_LAG);
+        func_80096900(gobj, 1, 0, true, 1.0f, (f32) sa->speciallw_landing_lag);
     }
 }
 
@@ -181,8 +180,8 @@ static void doPhys(HSD_GObj* gobj)
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialAirLw,
                                        transition_flags, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    ftComm_ClampFallSpeed(fp, sa->x58_MARIO_TORNADO_TAP_GRAVITY);
-    func_8007D440(fp, sa->x40_MARIO_TORNADO_MOMENTUM_X_AIR);
+    ftComm_ClampFallSpeed(fp, sa->speciallw_tap_grav);
+    func_8007D440(fp, sa->specialairlw_momentum_x);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
@@ -196,11 +195,11 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
 
     Fighter* fp0 = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = GetMarioAttr(fp0);
-    f32 vel_y = sa->x3C_MARIO_TORNADO_MOMENTUM_X_GROUND;
+    f32 vel_y = sa->speciallw_momentum_x;
 
     if (fp0->x2200_ftcmd_var0 != 0) {
-        fp0->sv.mr.SpecialLw.groundVelX = fp0->sv.mr.SpecialLw.groundVelX -
-                                          sa->x4C_MARIO_TORNADO_FRICTION_END;
+        fp0->sv.mr.SpecialLw.groundVelX =
+            fp0->sv.mr.SpecialLw.groundVelX - sa->speciallw_friction_end;
         vel_y += fp0->sv.mr.SpecialLw.groundVelX;
         if (vel_y < 0.0f)
             vel_y = 0.0f;
@@ -208,12 +207,11 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
 
     {
         Fighter* fp1 = fp0;
-        func_8007CADC(fp1, 0.0f, sa->x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND,
-                      vel_y);
+        func_8007CADC(fp1, 0.0f, sa->speciallw_momentum_x_mul, vel_y);
         func_8007CB74(gobj);
         if (fp0->x2208_ftcmd_var2 != 0 && (fp0->input.x668 & HSD_BUTTON_B)) {
             vel_y = fp0->x80_self_vel.y;
-            fp0->x80_self_vel.y = vel_y + sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX;
+            fp0->x80_self_vel.y = vel_y + sa->speciallw_tap_y_vel_max;
             doPhys(gobj);
         }
     }
@@ -238,22 +236,20 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
         ((u32) fp->x2208_ftcmd_var2 != 0U) &&
         ((fp->input.x668 & HSD_BUTTON_B) != 0))
     {
-        func_8007D508(fp, sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX,
-                      sa->x58_MARIO_TORNADO_TAP_GRAVITY);
+        func_8007D508(fp, sa->speciallw_tap_y_vel_max, sa->speciallw_tap_grav);
     }
     func_8007D4B8(fp);
-    flt_var = sa->x40_MARIO_TORNADO_MOMENTUM_X_AIR;
+    flt_var = sa->specialairlw_momentum_x;
     sa_2 = fp->x2D4_specialAttributes;
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
-        fp->sv.mr.SpecialLw.groundVelX =
-            (f32) (fp->sv.mr.SpecialLw.groundVelX -
-                   sa_2->x4C_MARIO_TORNADO_FRICTION_END);
+        fp->sv.mr.SpecialLw.groundVelX = (f32) (fp->sv.mr.SpecialLw.groundVelX -
+                                                sa_2->speciallw_friction_end);
         flt_var += fp->sv.mr.SpecialLw.groundVelX;
         if (flt_var < 0.0f) {
             flt_var = 0.0f;
         }
     }
-    func_8007D3A8(fp, 0.0f, sa->x48_MARIO_TORNADO_MOMENTUM_X_MUL_AIR, flt_var);
+    func_8007D3A8(fp, 0.0f, sa->specialairlw_momentum_x_mul, flt_var);
 }
 
 static void doColl(HSD_GObj* gobj)
@@ -316,7 +312,7 @@ static void doAirCollIfUnk(HSD_GObj* gobj)
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialLw,
                                        transition_flags, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    func_8007CC78(ft_tmp = fp, sa->x3C_MARIO_TORNADO_MOMENTUM_X_GROUND);
+    func_8007CC78(ft_tmp = fp, sa->speciallw_momentum_x);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
