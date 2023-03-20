@@ -1376,7 +1376,9 @@ struct Fighter {
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
 
-    union Fighter_StateVars { // 0x2340
+    /// @at{2340} @sz{7C}
+    union Fighter_StateVars {
+        u8 _[0x7C];
         union ftCaptain_StateVars ca, gn;
         union ftCommon_StateVars co;
         union ftDonkey_StateVars dk;
@@ -1395,84 +1397,6 @@ struct Fighter {
         union ftSeak_StateVars sk;
         union ftYoshi_StateVars ys;
         union ftZelda_StateVars zd;
-
-        // Avoid adding members to this struct.
-        // This is a hack, all these members should eventually
-        // migrate to the character-specific union members above.
-        struct {
-            union {
-                /* 0x2340 */ s32 x2340_stateVar1;
-                /* 0x2340 */ u32 x2340_stateVar1_u32;
-                /* 0x2340 */ f32 x2340_f32;
-            };
-            union {
-                u32 x2344_stateVar2;
-                s32 x2344_stateVar2_s32;
-                f32 x2344_f32;
-            };
-            union {
-                /* 0x2348 */ u32 x2348_stateVar3;
-                /* 0x2348 */ s32 x2348_stateVar3_s32;
-                /* 0x2348 */ f32 x2348_stateVar3_f32;
-            };
-            union {
-                struct {
-                    union {
-                        /* 0x234C */ u32 x234C_stateVar4;
-                        /* 0x234C */ s32 x234C_stateVar4_s32;
-                        /* 0x234C */ f32 x234C_stateVar4_f32;
-                    };
-                    union {
-                        /* 0x2350 */ u32 x2350_stateVar5;
-                        /* 0x2350 */ s32 x2350_stateVar5_s32;
-                        /* 0x2350 */ f32 x2350_stateVar5_f32;
-                    };
-                    union {
-                        /* 0x2354 */ u32 x2354_stateVar6;
-                        /* 0x2354 */ s32 x2354_stateVar6_s32;
-                        /* 0x2354 */ f32 x2354_stateVar6_f32;
-                    };
-                };
-                /* 0x234C */ Vec3 x234C_pos;
-            };
-            union {
-                /* 0x2358 */ f32 x2358_stateVar7;
-                /* 0x2358 */ s32 x2358_stateVar7_s32;
-            };
-            union {
-                /* 0x235C */ f32 x235C;
-                /* 0x235C */ u32 x235C_u32;
-                /* 0x235C */ f32 x235C_f32;
-            };
-            union {
-                /* 0x2360 */ u32 x2360_u32;
-                /* 0x2360 */ s32 x2360;
-                /* 0x2360 */ f32 x2360_f32;
-            };
-            /* 0x2364 */ f32 x2364;
-            /* 0x2368 */ u32 x2368;
-            /* 0x236C */ u32 x236C;
-            /* 0x2370 */ u32 x2370;
-            union {
-                struct {
-                    /* 0x2374 */ u32 x2374;
-                    /* 0x2378 */ u32 x2378;
-                    /* 0x237C */ u32 x237C;
-                };
-                /* 0x2374 */ Vec3 x2374_Vec3;
-            };
-            /* 0x2380 */ u32 x2380;
-            /* 0x2384 */ u32 x2384;
-            /* 0x2388 */ u32 x2388;
-            /* 0x238C */ u32 x238C;
-            /* 0x2390 */ f32 x2390;
-            /* 0x2394 */ s32 x2394;
-            /* 0x2394 */ Vec3 x2398;
-            /* 0x2394 */ Vec3 x23A4;
-            /* 0x23B0 */ s32 x23B0;
-            /* 0x23B4 */ s32 x23B4;
-            /* 0x23B8 */ s32 x23B8;
-        };
     } sv;
     u8 filler_x23B8[0x23E8 - 0x23B8];
 };
