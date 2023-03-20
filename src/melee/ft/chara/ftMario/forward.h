@@ -4,9 +4,6 @@
 #include "ft/forward.h"
 #include "ftMario/types.h"
 
-typedef struct ftMario_SpecialHi_DatAttrs ftMario_SpecialHi_DatAttrs;
-typedef struct ftMario_SpecialS_DatAttrs ftMario_SpecialS_DatAttrs;
-
 typedef enum ftMarioAction {
     ftMario_AS_Unk_341 = ASID_MAX,
     ftMario_AS_Unk_342,
