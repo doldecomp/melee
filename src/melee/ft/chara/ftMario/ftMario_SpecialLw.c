@@ -213,7 +213,7 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     }
 
     {
-        Fighter* ft_tmp = fp;
+        Fighter* ft_tmp = GET_FIGHTER(gobj);
         func_8007CADC(ft_tmp, 0.0f, sa->x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND,
                       vel_y);
         func_8007CB74(gobj);
