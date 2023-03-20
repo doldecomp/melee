@@ -569,7 +569,7 @@ void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* fighter_gobj)
     if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
         func_800BFFD0(fp, 5, 0);
 
-    if (fp->xE0_ground_or_air == GA_Ground)
+    if (fp->ground_or_air == GA_Ground)
         asid = AS_GAMEWATCH_SPECIALLW_CATCH;
     else
         asid = AS_GAMEWATCH_SPECIALAIRLW_CATCH;

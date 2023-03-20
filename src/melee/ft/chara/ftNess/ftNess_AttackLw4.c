@@ -75,7 +75,7 @@ void ftNess_AttackLw4_Coll(
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_80084104(fighter_gobj);
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         ftNess_YoyoItemDespawn(fighter_gobj);
     }
 }
@@ -130,7 +130,7 @@ void ftNess_AttackLw4_Charge_Coll(
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_80084104(fighter_gobj);
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         ftNess_YoyoItemDespawn(fighter_gobj);
     }
 }
@@ -220,7 +220,7 @@ void ftNess_AttackLw4_Release_Coll(
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_80084104(fighter_gobj);
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         ftNess_YoyoItemDespawn(fighter_gobj);
     }
 }

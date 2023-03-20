@@ -1102,7 +1102,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
         fp->x20A0_accessory = 0U;
     }
 
-    if (fp->xE0_ground_or_air == 0) {
+    if (fp->ground_or_air == 0) {
         if (fp->x4_fighterKind == 9) {
             fp->ev.pe.x222C = 1;
         }
@@ -1168,7 +1168,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
         new_action_state = &fp->x1C_actionStateList[new_action_state_index];
     }
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         if ((arg2 & 0x40) == 0) {
             if (new_action_state->x9_flags.bits.b1 != 0 && fp->dmg.x18C8 == -1)
             {
@@ -1309,7 +1309,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
                         fp->x698 = fp->x68C_transNPos;
                     } else if (((arg2 & FtStateChange_SkipUpdateAnimVel) ==
                                 0) &&
-                               (fp->xE0_ground_or_air == GA_Ground))
+                               (fp->ground_or_air == GA_Ground))
                     {
                         f32 temp_vel =
                             fp->x6A4_transNOffset.z * fp->facing_dir;
@@ -1326,7 +1326,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
                         fp->x6CC = fp->x6C0;
                     } else if (((arg2 & FtStateChange_SkipUpdateAnimVel) ==
                                 0) &&
-                               (fp->xE0_ground_or_air == GA_Ground))
+                               (fp->ground_or_air == GA_Ground))
                     {
                         f32 temp_vel = fp->x6D8.z * fp->facing_dir;
                         fp->x80_self_vel.x = temp_vel;
@@ -2163,7 +2163,7 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj)
 
         p_kb_vel = &fp->x8c_kb_vel;
         if ((kb_vel_x = p_kb_vel->x) != 0 || p_kb_vel->y != 0) {
-            if (fp->xE0_ground_or_air == GA_Air) {
+            if (fp->ground_or_air == GA_Air) {
                 kb_vel_x = p_kb_vel->x;
                 kb_vel_y = p_kb_vel->y;
 
@@ -2217,7 +2217,7 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj)
         // Now handle the attacker's shield knockback in a similar way
         pAtkShieldKB = &fp->x98_atk_shield_kb;
         if ((atkShieldKB_X = pAtkShieldKB->x) != 0 || pAtkShieldKB->y != 0) {
-            if (fp->xE0_ground_or_air == GA_Air) {
+            if (fp->ground_or_air == GA_Air) {
                 float kb_x = pAtkShieldKB->x;
                 float kb_y = pAtkShieldKB->y;
                 float atkShieldKBAngle = atan2f(kb_y, kb_x);
@@ -2359,7 +2359,7 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj)
         fp->cb.x21D0_callback_EveryHitlag(fighter_gobj);
     }
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         Vec3 difference;
         // I think this function always returns r3=1, but it contains two
         // __assert functions. But I guess these just stop or reset the game.
@@ -2484,7 +2484,7 @@ void Fighter_8006C27C(HSD_GObj* fighter_gobj)
             func_800F1D24(fighter_gobj);
         }
 
-        if (fp->xE0_ground_or_air == GA_Ground) {
+        if (fp->ground_or_air == GA_Ground) {
             func_80041280(fp->xC_playerID, fp->x221F_flag.bits.b4);
         }
 
@@ -2563,7 +2563,7 @@ void Fighter_8006C80C(HSD_GObj* fighter_gobj)
             HSD_JObjAnimAll(fp->x20A0_accessory);
         }
 
-        if (fp->xE0_ground_or_air == GA_Air &&
+        if (fp->ground_or_air == GA_Air &&
             fp->xB0_pos.y < Stage_GetCamBoundsBottomOffset())
         {
             if (func_802FB6E8(fp->xC_playerID) == 3) {
@@ -2856,7 +2856,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
 
         forceAppliedOnHit = fp->dmg.x1850_forceApplied;
         if (forceAppliedOnHit) {
-            s32 ground_or_air = fp->xE0_ground_or_air;
+            s32 ground_or_air = fp->ground_or_air;
             bool damage_bool;
 
             fp->dmg.x189C_unk_num_frames = 0.0f;

@@ -322,7 +322,7 @@ void ftZelda_8013B4D8(HSD_GObj* fighter_gobj)
 
     {
         enum_t asid;
-        if (fp->xE0_ground_or_air == 0)
+        if (fp->ground_or_air == 0)
             asid = 0x164;
         else
             asid = 0x166;

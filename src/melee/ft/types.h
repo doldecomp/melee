@@ -801,19 +801,19 @@ struct Fighter {
     /* 0x34 */ Vec3 x34_scale;
     /* 0x40 */ f32 x40;
     /* 0x44 */ Mtx x44_mtx;
-    Vec3 x74_anim_vel;             // 0x74
-    Vec3 x80_self_vel;             // 0x80
-    Vec3 x8c_kb_vel;               // 0x8C
-    Vec3 x98_atk_shield_kb;        // 0x98
-    Vec3 xA4_unk_vel;              // 0xA4
-    Vec3 xB0_pos;                  // 0xb0
-    Vec3 xBC_prevPos;              // 0xBC
-    Vec3 xC8_pos_delta;            // 0xC8
-    Vec3 xD4_unk_vel;              // 0xD4
-    GroundOrAir xE0_ground_or_air; // 0xE0
-    f32 xE4_ground_accel_1;        // 0xE4
-    f32 xE8_ground_accel_2;        // 0xE8
-    f32 xEC_ground_vel;            // 0xEC
+    Vec3 x74_anim_vel;         // 0x74
+    Vec3 x80_self_vel;         // 0x80
+    Vec3 x8c_kb_vel;           // 0x8C
+    Vec3 x98_atk_shield_kb;    // 0x98
+    Vec3 xA4_unk_vel;          // 0xA4
+    Vec3 xB0_pos;              // 0xb0
+    Vec3 xBC_prevPos;          // 0xBC
+    Vec3 xC8_pos_delta;        // 0xC8
+    Vec3 xD4_unk_vel;          // 0xD4
+    GroundOrAir ground_or_air; // 0xE0
+    f32 xE4_ground_accel_1;    // 0xE4
+    f32 xE8_ground_accel_2;    // 0xE8
+    f32 xEC_ground_vel;        // 0xEC
     f32 xF0_ground_kb_vel;
     f32 xF4_ground_attacker_shield_kb_vel;
     Vec2 xF8_playerNudgeVel;

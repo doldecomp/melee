@@ -26,7 +26,7 @@ void ftDonkey_800DF980(HSD_GObj* fighter_gobj)
     u8 _[4];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         func_8007D7FC(fp);
     }
     donkey_attr = getFtSpecialAttrs2CC(fp);

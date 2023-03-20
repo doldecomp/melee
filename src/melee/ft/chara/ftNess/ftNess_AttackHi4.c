@@ -785,7 +785,7 @@ void ftNess_AttackHi4_Coll(
 
     func_80084104(fighter_gobj);
 
-    if (((s32) fp->xE0_ground_or_air == GA_Air) &&
+    if (((s32) fp->ground_or_air == GA_Air) &&
         ((yoyo_GObj = GetFighterData_x222C(fighter_gobj)) != NULL))
     {
         func_802BE958(yoyo_GObj);
@@ -882,7 +882,7 @@ void ftNess_AttackHi4_Charge_Coll(
 
     fp = getFighter(fighter_gobj);
     func_80084104(fighter_gobj);
-    if (((s32) fp->xE0_ground_or_air == GA_Air) &&
+    if (((s32) fp->ground_or_air == GA_Air) &&
         ((yoyo_GObj = GetFighterData_x222C(fighter_gobj)) != NULL))
 
     {
@@ -1010,7 +1010,7 @@ void ftNess_AttackHi4_Release_Coll(
     fp = getFighter(fighter_gobj);
     func_80084104(fighter_gobj);
 
-    if (((s32) fp->xE0_ground_or_air == GA_Air) &&
+    if (((s32) fp->ground_or_air == GA_Air) &&
         ((yoyo_GObj = GetFighterData_x222C(fighter_gobj)) != NULL))
     {
         func_802BE958(yoyo_GObj);

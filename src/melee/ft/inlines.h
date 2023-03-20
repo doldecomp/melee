@@ -100,7 +100,7 @@ static inline CollData* getFtColl(Fighter* fp)
 
 static inline bool ftGetGroundAir(Fighter* fp)
 {
-    return fp->xE0_ground_or_air;
+    return fp->ground_or_air;
 }
 
 static inline f32 stickGetDir(f32 x1, f32 x2)

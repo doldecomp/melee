@@ -152,7 +152,7 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj)
     }
     if (fp->sv.dk.specialn.x8 == 1) {
         fp->sv.dk.specialn.x8++;
-        if (fp->xE0_ground_or_air == GA_Air) {
+        if (fp->ground_or_air == GA_Air) {
             ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj,
                      &fp->facing_dir);
         } else {
@@ -211,7 +211,7 @@ void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj)
 
     if (fp->sv.dk.specialn.x8 == 1) {
         fp->sv.dk.specialn.x8++;
-        if (fp->xE0_ground_or_air == GA_Air) {
+        if (fp->ground_or_air == GA_Air) {
             ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj,
                      &fp->facing_dir);
         } else {
@@ -292,7 +292,7 @@ void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj)
     }
     if (fp->sv.dk.specialn.x8 == 1) {
         fp->sv.dk.specialn.x8++;
-        if (fp->xE0_ground_or_air == GA_Air) {
+        if (fp->ground_or_air == GA_Air) {
             ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj,
                      &fp->facing_dir);
         } else {
@@ -349,7 +349,7 @@ void ftDonkey_8010EF7C(HSD_GObj* fighter_gobj)
 
     if (fp->sv.dk.specialn.x8 == 1) {
         fp->sv.dk.specialn.x8++;
-        if (fp->xE0_ground_or_air == GA_Air) {
+        if (fp->ground_or_air == GA_Air) {
             ef_Spawn(0x4C9, fighter_gobj, fp->x5E8_fighterBones[0].x0_jobj,
                      &fp->facing_dir);
         } else {

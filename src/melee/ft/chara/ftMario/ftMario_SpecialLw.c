@@ -279,7 +279,7 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
     u8 _[24];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         if (func_80082888(gobj, &coll_box) == false) {
             doPhys(gobj);
             fp->sv.mr.SpecialLw.isUnkColl = false;

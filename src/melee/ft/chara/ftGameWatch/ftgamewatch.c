@@ -228,7 +228,7 @@ void ftGameWatch_OnDamage(HSD_GObj* fighter_gobj)
 void ftGameWatch_8014A538(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         ftGameWatch_ItemGreenhouseRemove(fighter_gobj);
         ftGameWatch_ItemManholeOnDamage(fighter_gobj);
         ftGameWatch_ItemTorchOnDamage(fighter_gobj);

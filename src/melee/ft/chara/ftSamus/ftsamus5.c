@@ -172,7 +172,7 @@ void ftSamus_8012AB0C(HSD_GObj* fighter_gobj)
         fp->x2200_ftcmd_var0 = 0;
         fp->x80_self_vel.x = samus_attr->x38 * fp->facing_dir;
     }
-    if (fp->xE0_ground_or_air == 1) {
+    if (fp->ground_or_air == 1) {
         func_800851C0(fighter_gobj);
         func_8007D344(fp, 0.0f, samus_attr->x3C, samus_attr->x40);
         func_8007D268(fp);
@@ -205,7 +205,7 @@ void ftSamus_8012AC00(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         int direction;
 
         if (fp->x80_self_vel.y >= 0.0f) {
@@ -241,7 +241,7 @@ void ftSamus_8012ACF8(HSD_GObj* fighter_gobj)
     u8 _[4];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         int direction;
 
         if (fp->x80_self_vel.y >= 0.0f) {

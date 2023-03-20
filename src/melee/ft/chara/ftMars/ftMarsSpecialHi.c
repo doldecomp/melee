@@ -173,9 +173,9 @@ void lbl_80138638(HSD_GObj* gobj)
     s32 num;
 
     // this is required, dunno why
-    fp->xE0_ground_or_air;
+    fp->ground_or_air;
 
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         if (fp->x2208_ftcmd_var2 == 0) {
             func_80085154(gobj);
             if (fp->x80_self_vel.x < 0.0f) {
@@ -259,7 +259,7 @@ void lbl_80138884(HSD_GObj* gobj)
 void lbl_801388B4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
         } else if (fp->x2204_ftcmd_var1 == 0) {
@@ -278,7 +278,7 @@ void lbl_801388B4(HSD_GObj* gobj)
 void lbl_80138940(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
         } else if (fp->x2204_ftcmd_var1 == 0) {

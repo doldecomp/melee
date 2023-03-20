@@ -212,7 +212,7 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialHi_Phys(HSD_GObj* fighter_gobj)
 {
-    if ((s32) GET_FIGHTER(fighter_gobj)->xE0_ground_or_air == GA_Air) {
+    if ((s32) GET_FIGHTER(fighter_gobj)->ground_or_air == GA_Air) {
         func_80085154(fighter_gobj);
         return;
     }
@@ -257,7 +257,7 @@ void ftLuigi_SpecialHi_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
         {
             func_80083B68(fighter_gobj);
@@ -277,7 +277,7 @@ void ftLuigi_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
         {
             func_80083B68(fighter_gobj);

@@ -97,7 +97,7 @@ void ftFox_SpecialHiHold_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if ((s32) fp->xE0_ground_or_air == GA_Air) {
+        if ((s32) fp->ground_or_air == GA_Air) {
             ftFox_SpecialAirHi_Action(fighter_gobj);
             return;
         }
@@ -111,7 +111,7 @@ void ftFox_SpecialHiHoldAir_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if ((s32) fp->xE0_ground_or_air == GA_Air) {
+        if ((s32) fp->ground_or_air == GA_Air) {
             ftFox_SpecialAirHi_Action(fighter_gobj);
             return;
         }
@@ -216,7 +216,7 @@ void ftFox_SpecialHi_Anim(HSD_GObj* fighter_gobj)
     fp->sv.fx.SpecialHi.travelFrames--;
 
     if (fp->sv.fx.SpecialHi.travelFrames <= 0) {
-        if (fp->xE0_ground_or_air == GA_Air) {
+        if (fp->ground_or_air == GA_Air) {
             ftFox_SpecialHiLanding_GroundToAir(fighter_gobj);
             return;
         }
@@ -232,7 +232,7 @@ void ftFox_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
     fp->sv.fx.SpecialHi.travelFrames--;
 
     if (fp->sv.fx.SpecialHi.travelFrames <= 0) {
-        if (fp->xE0_ground_or_air == GA_Air) {
+        if (fp->ground_or_air == GA_Air) {
             ftFox_SpecialHiLanding_GroundToAir(fighter_gobj);
             return;
         }
@@ -664,7 +664,7 @@ void ftFox_SpecialHiFall_AirToGround(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007DB24(fighter_gobj);
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         func_8007D7FC(fp);
     }
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALHI_LANDING,
@@ -705,7 +705,7 @@ void ftFox_SpecialHiBound_Anim(HSD_GObj* fighter_gobj)
     foxAttrs = fp->x2D4_specialAttributes;
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) &&
-        ((s32) fp->xE0_ground_or_air == GA_Air))
+        ((s32) fp->ground_or_air == GA_Air))
     {
         func_80096900(fighter_gobj, 1, 0, true,
                       foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
@@ -714,7 +714,7 @@ void ftFox_SpecialHiBound_Anim(HSD_GObj* fighter_gobj)
         return;
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if ((s32) fp->xE0_ground_or_air == GA_Air) {
+        if ((s32) fp->ground_or_air == GA_Air) {
             func_80096900(fighter_gobj, 1, 0, true,
                           foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                           foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
@@ -755,7 +755,7 @@ void ftFox_SpecialHiBound_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 cliffCatchDir;
 
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         if (fp->facing_dir < 0.0f) {
             cliffCatchDir = -1;
         } else {

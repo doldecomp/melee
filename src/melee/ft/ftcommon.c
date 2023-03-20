@@ -185,7 +185,7 @@ void func_8007CCA0(Fighter* fp, f32 arg1)
 void func_8007CCE8(Fighter* fp)
 {
     Vec3* ground_normal;
-    if (fp->xE0_ground_or_air == GA_Ground && fp->xF0_ground_kb_vel == 0) {
+    if (fp->ground_or_air == GA_Ground && fp->xF0_ground_kb_vel == 0) {
         ground_normal = &fp->x6F0_collData.x14C_ground.normal;
         fp->xF0_ground_kb_vel = fp->x8c_kb_vel.x;
         if (fp->xF0_ground_kb_vel > p_ftCommonData->x164) {
@@ -638,7 +638,7 @@ void func_8007D5BC(Fighter* fp)
 
 void func_8007D5D4(Fighter* fp)
 {
-    fp->xE0_ground_or_air = GA_Air;
+    fp->ground_or_air = GA_Air;
     fp->xEC_ground_vel = 0;
     fp->x98_atk_shield_kb.z = 0;
     fp->xB0_pos.z = 0;
@@ -654,7 +654,7 @@ void func_8007D60C(Fighter* fp)
     if (fp->x2227_flag.bits.b0 && fp->x1968_jumpsUsed <= 1) {
         func_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
     }
-    fp->xE0_ground_or_air = GA_Air;
+    fp->ground_or_air = GA_Air;
     fp->xEC_ground_vel = 0;
     fp->x74_anim_vel.y = 0;
     fp->x1968_jumpsUsed = attr->x168_MaxJumps;
@@ -679,7 +679,7 @@ void func_8007D6A4(Fighter* fp)
     } else if (fp->xEC_ground_vel > tmp) {
         fp->xEC_ground_vel = tmp;
     }
-    fp->xE0_ground_or_air = GA_Ground;
+    fp->ground_or_air = GA_Ground;
     fp->xEC_ground_vel = fp->x80_self_vel.x;
     fp->x1968_jumpsUsed = 0;
     fp->x1969_walljumpUsed = 0;
@@ -695,7 +695,7 @@ void func_8007D6A4(Fighter* fp)
 
 void func_8007D780(Fighter* fp)
 {
-    if (fp->xE0_ground_or_air != GA_Air) {
+    if (fp->ground_or_air != GA_Air) {
         return;
     }
 
@@ -712,7 +712,7 @@ void func_8007D780(Fighter* fp)
 void func_8007D7FC(Fighter* fp)
 {
     f32 fmp;
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         if (func_803224DC(fp->x8_spawnNum, fp->xB0_pos.x,
                           fp->dmg.x18A4_knockbackMagnitude))
         {
@@ -731,7 +731,7 @@ void func_8007D7FC(Fighter* fp)
     } else if (fp->xEC_ground_vel > fmp) {
         fp->xEC_ground_vel = fmp;
     }
-    fp->xE0_ground_or_air = GA_Ground;
+    fp->ground_or_air = GA_Ground;
     fp->xEC_ground_vel = fp->x80_self_vel.x;
     fp->x1968_jumpsUsed = 0;
     fp->x1969_walljumpUsed = 0;
@@ -748,7 +748,7 @@ void func_8007D7FC(Fighter* fp)
 void func_8007D92C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->xE0_ground_or_air == 1) {
+    if (fp->ground_or_air == 1) {
         func_800CC730(gobj);
     } else {
         func_8008A2BC(gobj);
@@ -924,7 +924,7 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
         temp_r31 = &arg_ft->x2C4;
         if (cur != gobj && !func_80086FD4(cur, gobj)) {
             cur_ft = cur->user_data;
-            if (cur_ft->x221F_flag.bits.b3 || cur_ft->xE0_ground_or_air != 0 ||
+            if (cur_ft->x221F_flag.bits.b3 || cur_ft->ground_or_air != 0 ||
                 cur_ft->x1A58_interactedFighter != NULL ||
                 cur_ft->x221F_flag.bits.b4)
             {
@@ -997,7 +997,7 @@ void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
     temp_r31 = &fp->x2C4;
     new_var = Player_GetEntity(fp->xC_playerID);
     temp_r3 = new_var->user_data;
-    if (!temp_r3->x221F_flag.bits.b3 && temp_r3->xE0_ground_or_air == 0) {
+    if (!temp_r3->x221F_flag.bits.b3 && temp_r3->ground_or_air == 0) {
         temp_r0 = fp->x6F0_collData.x14C_ground.index;
         temp_r30 = (new_var2 = temp_r3->x6F0_collData.x14C_ground.index);
         if (temp_r0 == temp_r30 || temp_r30 == func_8004DB78(temp_r0) ||
@@ -1033,7 +1033,7 @@ void func_8007E0E4(HSD_GObj* gobj)
     fp->xF8_playerNudgeVel.y = 0;
     fp->xF8_playerNudgeVel.x = 0;
     if (!fp->x2219_flag.bits.b1 && !fp->x2219_flag.bits.b5 &&
-        fp->xE0_ground_or_air == 0)
+        fp->ground_or_air == 0)
     {
         if (!fp->x221F_flag.bits.b4) {
             phi_f30 = p_ftCommonData->x454;
@@ -1165,7 +1165,7 @@ void func_8007E3EC(HSD_GObj* gobj)
 }
 
 // to match assert statement
-#define ground_or_air xE0_ground_or_air
+#define ground_or_air ground_or_air
 
 void func_8007E5AC(Fighter* fp)
 {
@@ -1467,7 +1467,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
                         dst->dmg.x1830_percent);
     dst->dmg.x18F0 = src->dmg.x18F0;
     dst->x80_self_vel = src->x80_self_vel;
-    dst->xE0_ground_or_air = src->xE0_ground_or_air;
+    dst->ground_or_air = src->ground_or_air;
     dst->xEC_ground_vel = src->xEC_ground_vel;
     dst->xF0_ground_kb_vel = src->xF0_ground_kb_vel;
     dst->xF4_ground_attacker_shield_kb_vel =
@@ -2017,7 +2017,7 @@ f32 func_800804EC(Fighter* fp)
 
 void func_800804FC(Fighter* fp)
 {
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         fp->dmg.x18c4_source_ply = 6;
         fp->dmg.x18C8 = -1;
     }

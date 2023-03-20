@@ -34,7 +34,7 @@ void ftZelda_801396E0(HSD_GObj* fighter_gobj)
         Vec3 vec;
         func_8000B1CC(fp->x5E8_fighterBones[4].x0_jobj, NULL, &vec);
 
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->ground_or_air == GA_Ground)
             ef_Spawn(0x4F6, fighter_gobj, fp->x5E8_fighterBones->x0_jobj);
         else
             ef_Spawn(0x4F7, fighter_gobj, fp->x5E8_fighterBones->x0_jobj);

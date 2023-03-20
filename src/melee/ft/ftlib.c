@@ -277,7 +277,7 @@ f32 func_800865C0(HSD_GObj* gobj)
 s32 func_800865CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->xE0_ground_or_air;
+    return fp->ground_or_air;
 }
 
 void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
@@ -1025,7 +1025,7 @@ void func_8008777C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air != GA_Ground)
+    if (fp->ground_or_air != GA_Ground)
         __assert("ftlib.c", 1517, "fp->ground_or_air == GA_Ground");
 
     {

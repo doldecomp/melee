@@ -116,7 +116,7 @@ void func_80076528(HSD_GObj* fighter_gobj)
     if (temp_r3 != 0) {
         fp->x2092 = (u16) (temp_r3 - 1);
         if ((fp->x1A58_interactedFighter == NULL) &&
-            (fp->xE0_ground_or_air == GA_Ground))
+            (fp->ground_or_air == GA_Ground))
         {
             comboCount_Push(fp);
         }
@@ -3145,10 +3145,9 @@ void func_80078A2C(HSD_GObj* this_gobj)
                     if ((this_hit->state != HitCapsule_Disabled) &&
                         (this_hit->element == (u32) HitElement_Catch) &&
                         ((((this_hit->x40_b2) &&
-                           (victim_fp->xE0_ground_or_air == GA_Air)) ||
+                           (victim_fp->ground_or_air == GA_Air)) ||
                           ((((u8) this_hit->x40_b3) &&
-                            ((s32) victim_fp->xE0_ground_or_air ==
-                             GA_Ground))))))
+                            ((s32) victim_fp->ground_or_air == GA_Ground))))))
                     {
                         if (lbColl_8000ACFC(victim_fp, this_hit) == false) {
                             for (j = 0; j < victim_fp->x119E_hurtboxNum; j++) {

@@ -301,7 +301,7 @@ void ftFox_SpecialS_IASA(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x668 & HSD_BUTTON_B) != false) {
-        if ((s32) fp->xE0_ground_or_air == GA_Air) {
+        if ((s32) fp->ground_or_air == GA_Air) {
             ftFox_SpecialAirSEnd_Action(fighter_gobj);
             return;
         } else
@@ -317,7 +317,7 @@ void ftFox_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x668 & HSD_BUTTON_B) != false) {
-        if ((s32) fp->xE0_ground_or_air == GA_Air) {
+        if ((s32) fp->ground_or_air == GA_Air) {
             ftFox_SpecialAirSEnd_Action(fighter_gobj);
             return;
         } else

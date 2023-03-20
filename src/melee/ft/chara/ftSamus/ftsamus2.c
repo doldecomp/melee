@@ -97,7 +97,7 @@ void ftSamus_80128B1C(HSD_GObj* fighter_gobj, f32 angle, f32 arg9, f32 argA)
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->sv.ss.unk2.x0 = 0;
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         func_8007D5D4(fighter2);
     }
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x156, 0, 0, arg9, argA,

@@ -708,7 +708,7 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
     }
     if (fighter->x21FC_flag.bits.b3 != 0) {
         temp_r24 = &fighter->x294_itPickup;
-        if (fighter->xE0_ground_or_air == GA_Ground) {
+        if (fighter->ground_or_air == GA_Ground) {
             if (func_8001E2F8(&temp_r24->x0_ground_light_offset,
                               &fighter->xB0_pos, &lbl_804D3A88, arg1,
                               fighter->facing_dir) != 0)

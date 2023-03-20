@@ -531,7 +531,7 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* fighter_gobj)
         fp->sv.sk.specials.x1C = specialAttributes->x18;
 
         if (fp->ev.sk.x2234 == NULL) {
-            if (fp->xE0_ground_or_air == GA_Air)
+            if (fp->ground_or_air == GA_Air)
                 func_800CC730(fighter_gobj);
             else
                 func_8008A2BC(fighter_gobj);

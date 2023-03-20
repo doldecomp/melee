@@ -93,7 +93,7 @@ void ftNess_SpecialLwStart_Anim(
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         fighter_data2->sv.ns.speciallw.x10 = 0;
-        if ((s32) fighter_data2->xE0_ground_or_air == GA_Ground) {
+        if ((s32) fighter_data2->ground_or_air == GA_Ground) {
             ftNess_SpecialLwHold_Action(fighter_gobj);
             return;
         }
@@ -132,7 +132,7 @@ void ftNess_SpecialAirLwStart_Anim(
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         fighter_data2->sv.ns.speciallw.x10 = 0;
-        if ((s32) fighter_data2->xE0_ground_or_air == GA_Ground) {
+        if ((s32) fighter_data2->ground_or_air == GA_Ground) {
             ftNess_SpecialLwHold_Action(fighter_gobj);
             return;
         }
@@ -256,7 +256,7 @@ void ftNess_SpecialLwHold_Anim(
     if (((s32) fp->sv.ns.speciallw.releaseLag <= 0) &&
         ((s32) fp->sv.ns.speciallw.isRelease != 0))
     {
-        if ((s32) fp->xE0_ground_or_air == GA_Ground) {
+        if ((s32) fp->ground_or_air == GA_Ground) {
             ftNess_SpecialLwEnd_Action(fighter_gobj);
         } else {
             ftNess_SpecialAirLwEnd_Action(fighter_gobj);
@@ -297,7 +297,7 @@ void ftNess_SpecialAirLwHold_Anim(
     if (((s32) fp->sv.ns.speciallw.releaseLag <= 0) &&
         ((s32) fp->sv.ns.speciallw.isRelease != 0))
     {
-        if ((s32) fp->xE0_ground_or_air == GA_Ground) {
+        if ((s32) fp->ground_or_air == GA_Ground) {
             ftNess_SpecialLwEnd_Action(fighter_gobj);
         } else {
             ftNess_SpecialAirLwEnd_Action(fighter_gobj);
@@ -683,7 +683,7 @@ bool ftNess_SpecialLwHold_GroundOrAir(
     Fighter* fp = GET_FIGHTER(arg0);
 
     if (fp->sv.ns.speciallw.releaseLag <= 0 && fp->sv.ns.speciallw.isRelease) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
+        if (fp->ground_or_air == GA_Ground) {
             ftNess_SpecialLwEnd_Action(arg0);
         } else {
             ftNess_SpecialAirLwEnd_Action(arg0);
@@ -691,7 +691,7 @@ bool ftNess_SpecialLwHold_GroundOrAir(
 
         return false;
     }
-    if ((s32) fp->xE0_ground_or_air == GA_Ground) {
+    if ((s32) fp->ground_or_air == GA_Ground) {
         Fighter_ActionStateChange_800693AC(arg0, AS_NESS_SPECIALLW_HOLD,
                                            FtStateChange_PreserveGfx, NULL,
                                            0.0f, 1.0f, 0.0f);
@@ -760,14 +760,14 @@ void ftNess_SpecialLwHit_Anim(
         if (((s32) temp_r3_2->sv.ns.speciallw.releaseLag <= 0) &&
             ((s32) temp_r3_2->sv.ns.speciallw.isRelease != 0))
         {
-            if ((s32) temp_r3_2->xE0_ground_or_air == GA_Ground) {
+            if ((s32) temp_r3_2->ground_or_air == GA_Ground) {
                 ftNess_SpecialLwEnd_Action(arg0);
             } else {
                 ftNess_SpecialAirLwEnd_Action(arg0);
             }
             phi_r0 = 0;
         } else {
-            if ((s32) temp_r3_2->xE0_ground_or_air == GA_Ground) {
+            if ((s32) temp_r3_2->ground_or_air == GA_Ground) {
                 Fighter_ActionStateChange_800693AC(
                     arg0, AS_NESS_SPECIALLW_HOLD, FtStateChange_PreserveGfx,
                     NULL, 0.0f, 1.0f, 0.0f);
@@ -1010,7 +1010,7 @@ void ftNess_AbsorbThink_DecideAction(
         !(fp->x894_currentAnimFrame <= sa->x7C_PSI_MAGNET_UNK2))
     {
         enum_t asid;
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->ground_or_air == GA_Ground)
             asid = AS_NESS_SPECIALLW_HIT;
         else
             asid = AS_NESS_SPECIALAIRLW_HIT;

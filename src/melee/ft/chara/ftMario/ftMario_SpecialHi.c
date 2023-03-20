@@ -143,7 +143,7 @@ void ftMario_SpecialAirHi_IASA(HSD_GObj* gobj)
 void ftMario_SpecialHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         func_80085154(gobj);
     } else {
         func_80084FA8(gobj);
@@ -177,7 +177,7 @@ void ftMario_SpecialHi_CheckLanding(HSD_GObj* gobj)
 void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->xE0_ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
         } else {

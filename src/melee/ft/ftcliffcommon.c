@@ -152,7 +152,7 @@ void func_80081644(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     func_800761C8(gobj);
-    if ((s32) fp->xE0_ground_or_air == GA_Air) {
+    if ((s32) fp->ground_or_air == GA_Air) {
         func_8005811C(&fp->x6F0_collData, fp->sv.co.cliff.ledge_id);
         fp->x890_cameraBox->xC_flag.bits.b0 = 1;
     }

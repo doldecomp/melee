@@ -55,7 +55,7 @@ void ftDonkey_800E07E4(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8008F744(fighter_gobj);
     if (!fp->x221C_flag.bits.b6) {
-        if (fp->xE0_ground_or_air == GA_Air) {
+        if (fp->ground_or_air == GA_Air) {
             ftDonkey_800E0294(fighter_gobj);
         } else {
             ftDonkey_800DF980(fighter_gobj);
@@ -71,7 +71,7 @@ void ftDonkey_800E0848(HSD_GObj* fighter_gobj)
 void ftDonkey_800E0868(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         if (!func_80082708(fighter_gobj)) {
             func_8007D5D4(fp);
         }

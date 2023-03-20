@@ -25,7 +25,7 @@ void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
 
         {
             enum_t asid;
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->ground_or_air == GA_Ground)
                 asid = 349;
             else
                 asid = 358;
@@ -58,7 +58,7 @@ void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
 
         {
             enum_t asid;
-            if (fp1->xE0_ground_or_air == GA_Ground)
+            if (fp1->ground_or_air == GA_Ground)
                 asid = 349;
             else
                 asid = 358;
@@ -75,7 +75,7 @@ void ftMars_80137558(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->ground_or_air == GA_Ground)
             func_8008A2BC(gobj);
         else
             func_800CC730(gobj);
@@ -105,7 +105,7 @@ void ftMars_80137618(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // Physics_Friction
         func_80084F3C(gobj);
     } else {
@@ -119,7 +119,7 @@ void ftMars_8013767C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (!func_800827A0(gobj))
             ftMars_801376E8(gobj);
@@ -168,7 +168,7 @@ void ftMars_801377B0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
+        if (fp->ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
         } else {
@@ -202,7 +202,7 @@ void ftMars_80137870(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // Physics_Friction
         func_80084F3C(gobj);
     } else {
@@ -216,7 +216,7 @@ void ftMars_801378D4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (!func_800827A0(gobj))
             ftMars_80137940(gobj);
@@ -293,12 +293,12 @@ void ftMars_80137A9C(HSD_GObj* gobj)
     fp->cb.x21EC_callback = &ftMars_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->ground_or_air == GA_Ground)
             asid = 350;
         else
             asid = 359;
     } else {
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->ground_or_air == GA_Ground)
             asid = 351;
         else
             asid = 360;
@@ -313,7 +313,7 @@ void ftMars_80137B34(HSD_GObj* gobj)
 
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
+        if (fp->ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
         } else {
@@ -346,7 +346,7 @@ void ftMars_80137BF4(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // somethingFriction
         func_80084FA8(gobj);
     } else {
@@ -360,7 +360,7 @@ void ftMars_80137C50(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (!func_800827A0(gobj))
             ftMars_80137CBC(gobj);
@@ -433,18 +433,18 @@ void ftMars_80137E0C(HSD_GObj* gobj)
     fp->cb.x21EC_callback = &ftMars_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->ground_or_air == GA_Ground)
             asid = 352;
         else
             asid = 361;
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->ground_or_air == GA_Ground)
                 asid = 354;
             else
                 asid = 363;
         } else {
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->ground_or_air == GA_Ground)
                 asid = 353;
             else
                 asid = 362;
@@ -460,7 +460,7 @@ void ftMars_80137ECC(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
+        if (fp->ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
         } else {
@@ -481,7 +481,7 @@ void ftMars_80137F30(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // somethingFriction
         func_80084FA8(gobj);
     } else {
@@ -495,7 +495,7 @@ void ftMars_80137F8C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Ground) {
+    if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
         if (func_800827A0(gobj) == 0)
             ftMars_80137FF8(gobj);
@@ -574,18 +574,18 @@ void ftMars_80138148(HSD_GObj* gobj)
     fp->cb.x21EC_callback = &ftMars_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->ground_or_air == GA_Ground)
             asid = 355;
         else
             asid = 364;
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->ground_or_air == GA_Ground)
                 asid = 357;
             else
                 asid = 366;
         } else {
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->ground_or_air == GA_Ground)
                 asid = 356;
             else
                 asid = 365;

@@ -116,7 +116,7 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj)
         }
         x2230 = fp->ev.ss.x2230;
         func_802B56E4(fp->ev.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
-        if ((fp->action_id == 0x15C) || (fp->xE0_ground_or_air == GA_Air)) {
+        if ((fp->action_id == 0x15C) || (fp->ground_or_air == GA_Air)) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
             u8 unused1[28];

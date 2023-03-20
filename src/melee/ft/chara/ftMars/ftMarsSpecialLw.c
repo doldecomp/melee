@@ -370,7 +370,7 @@ void lbl_80139140(HSD_GObj* gobj)
         {
             enum_t asid;
 
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->ground_or_air == GA_Ground)
                 asid = 0x172;
             else
                 asid = 0x174;

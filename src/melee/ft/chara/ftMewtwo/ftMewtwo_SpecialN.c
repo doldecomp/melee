@@ -204,14 +204,14 @@ void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
     if (((s32) fp->action_id == AS_MEWTWO_SPECIALAIRN_END) ||
-        ((s32) fp->xE0_ground_or_air == GA_Air))
+        ((s32) fp->ground_or_air == GA_Air))
     {
         fp->x80_self_vel.x =
             fp->facing_dir * (mewtwoAttrs->x8_MEWTWO_SHADOWBALL_AIR_RECOIL_X *
                               (f32) fp->ev.mt.x2234_shadowBallCharge);
     }
     if (((s32) fp->action_id == AS_MEWTWO_SPECIALN_END) ||
-        ((s32) fp->xE0_ground_or_air == GA_Ground))
+        ((s32) fp->ground_or_air == GA_Ground))
     {
         fp->xEC_ground_vel =
             fp->facing_dir *
