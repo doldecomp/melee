@@ -7,12 +7,14 @@
 typedef struct ftMario_DatAttrs {
     // SIDE SPECIAL - CAPE / SUPER SHEET //
 
-    /* 0x00 */ f32 specials_vel_x_decay;
-    /* 0x04 */ f32 specials_vel_x;
-    /* 0x08 */ f32 specials_vel_y;
-    /* 0x0C */ f32 specials_grav;
-    /* 0x10 */ f32 specials_terminal_vel;
-    /* 0x14 */ s32 specials_cape_kind;
+    struct ftMario_SpecialS_DatAttrs {
+        f32 vel_x_decay;
+        f32 vel_x;
+        f32 vel_y;
+        f32 grav;
+        f32 terminal_vel;
+        s32 cape_kind;
+    } specials;
 
     // UP SPECIAL - SUPER JUMP PUNCH //
 

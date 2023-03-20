@@ -49,7 +49,7 @@ void ftMario_SpecialS_CreateCape(HSD_GObj* gobj)
         {
             HSD_GObj* cape =
                 func_802B2560(gobj, fp->facing_dir, &coords,
-                              func_8007500C(fp, 49), sa->specials_cape_kind);
+                              func_8007500C(fp, 49), sa->specials.cape_kind);
 
             fp->ev.mr.x223C_capeGObj = cape;
         }
@@ -141,7 +141,7 @@ void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
-    fp->x80_self_vel.x /= sa->specials_vel_x_decay;
+    fp->x80_self_vel.x /= sa->specials.vel_x_decay;
     ftMario_SpecialS_ChangeAction(gobj, ftMario_AS_SpecialAirS);
 }
 
@@ -240,7 +240,7 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
             fp->x2200_ftcmd_var0 = 2U;
             if (!fp->ev.mr.x2238_isCapeBoost) {
                 fp->ev.mr.x2238_isCapeBoost = true;
-                fp->x80_self_vel.y = sa->specials_vel_y;
+                fp->x80_self_vel.y = sa->specials.vel_y;
             } else {
                 fp->x80_self_vel.y = 0;
             }
@@ -249,12 +249,12 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
             coords.x += 3 * fp->facing_dir;
             func_800119DC(&coords, 120, 3, 0.1, M_PI_3);
         }
-        func_8007D494(fp, sa->specials_grav, sa->specials_terminal_vel);
+        func_8007D494(fp, sa->specials.grav, sa->specials.terminal_vel);
     } else {
         func_8007D4B8(fp);
     }
 
-    func_8007CE94(fp, sa->specials_vel_x);
+    func_8007CE94(fp, sa->specials.vel_x);
     ftMario_SpecialS_ReflectThink(gobj);
 }
 
