@@ -197,7 +197,7 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     sa = GetMarioAttr(fp0);
 
     vel_y = sa->x3C_MARIO_TORNADO_MOMENTUM_X_GROUND;
-    if (fp0->x2200_ftcmd_var0 != 0) {
+    if ((u32) fp0->x2200_ftcmd_var0 != 0U) {
         fp0->sv.mr.SpecialLw.groundVelX = fp0->sv.mr.SpecialLw.groundVelX -
                                           sa->x4C_MARIO_TORNADO_FRICTION_END;
         vel_y += fp0->sv.mr.SpecialLw.groundVelX;
