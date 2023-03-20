@@ -1,5 +1,5 @@
-#ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_H
-#define MELEE_FT_CHARA_FTMARIO_FTMARIO_H
+#ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_INIT_H
+#define MELEE_FT_CHARA_FTMARIO_FTMARIO_INIT_H
 
 #include "ft/fighter.h"
 #include "ft/forward.h"

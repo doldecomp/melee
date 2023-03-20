@@ -1,7 +1,7 @@
 #include "ftMario_SpecialS.h"
 
 #include "forward.h"
-#include "ftmario.h"
+#include "ftMario_Init.h"
 #include "types.h"
 
 #include "ft/code_80081B38.h"

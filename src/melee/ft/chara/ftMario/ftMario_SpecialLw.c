@@ -1,7 +1,7 @@
 #include "ftMario_SpecialLw.h"
 
 #include "forward.h"
-#include "ftmario.h"
+#include "ftMario_Init.h"
 #include "inlines.h"
 #include "types.h"
 

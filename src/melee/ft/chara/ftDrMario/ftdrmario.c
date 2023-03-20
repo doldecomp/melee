@@ -4,7 +4,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftMario/ftmario.h"
+#include "ftMario/ftMario_Init.h"
 #include "it/code_8027CF30.h"
 
 ActionState as_table_drmario[] = {

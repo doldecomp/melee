@@ -1,4 +1,4 @@
-#include "ftMario/ftmario.h"
+#include "ftMario/ftMario_Init.h"
 
 #include "ftmario2.h"
 #include "ftMario_SpecialN.h"

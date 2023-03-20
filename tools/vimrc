@@ -1,5 +1,5 @@
 
-set colorcolumn=81
+set colorcolumn=80
 highlight colorcolumn ctermbg=darkgray
 
 augroup project

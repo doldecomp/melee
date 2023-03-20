@@ -112,7 +112,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey9.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_Init.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialS.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialHi.c.o\
