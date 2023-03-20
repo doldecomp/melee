@@ -1376,9 +1376,9 @@ struct Fighter {
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
 
-    /// @at{2340} @sz{7C}
+    /// @at{2340} @sz{AC}
     union Fighter_StateVars {
-        u8 _[0x78];
+        u8 _[0xAC];
         union ftCaptain_StateVars ca, gn;
         union ftCommon_StateVars co;
         union ftDonkey_StateVars dk;
@@ -1398,7 +1398,6 @@ struct Fighter {
         union ftYoshi_StateVars ys;
         union ftZelda_StateVars zd;
     } sv;
-    u8 filler_x23B8[0x23E8 - 0x23B8];
 };
 
 #endif
