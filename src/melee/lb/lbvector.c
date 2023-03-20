@@ -374,7 +374,7 @@ Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Mtx projMtx;

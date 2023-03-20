@@ -1,10 +1,11 @@
-#include <sysdolphin/baselib/class.h>
+#include "class.h"
 
+#include <baselib/hash.h>
+#include <baselib/memory.h>
+#include <baselib/object.h>
 #include <dolphin/os/os.h>
+#include <stddef.h>
 #include <string.h>
-#include <sysdolphin/baselib/hash.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/object.h>
 
 void _hsdClassInfoInit(void);
 HSD_ClassInfo hsdClass = { _hsdClassInfoInit };
@@ -125,12 +126,15 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
     }
 
     {
-        s32 i;
-        u32 size;
+        ssize_t i;
         bool found;
         HSD_MemoryEntry* entry;
 
-        size = idx * 4;
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        usize_t size = idx * 4;
+#endif
+
         if (memory_list[idx] == NULL) {
             entry = HSD_MemAlloc(sizeof(HSD_MemoryEntry));
             if (entry == NULL) {

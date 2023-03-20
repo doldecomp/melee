@@ -1,19 +1,19 @@
-#include <melee/gr/grtpichu.h>
+#include "grtpichu.h"
 
+#include "gr/granime.h"
+#include "gr/grdisplay.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "lb/lbunknown_003.h"
+#include <baselib/gobjgxlink.h>
 #include <dolphin/os/os.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E91B0[] = {
-    { lbl_80222D24, lbl_80222D50, lbl_80222D58, lbl_80222D5C, FLAGS_ZERO },
-    { lbl_80222DF0, lbl_80222E40, lbl_80222E48, lbl_80222E68, FLAGS_ZERO },
+    { lbl_80222D24, lbl_80222D50, lbl_80222D58, lbl_80222D5C, 0 },
+    { lbl_80222DF0, lbl_80222E40, lbl_80222E48, lbl_80222E68, 0 },
     { lbl_80222D60, lbl_80222DB0, lbl_80222DB8, lbl_80222DEC,
       (1 << 30) | (1 << 31) },
-    { NULL, NULL, NULL, NULL, FLAGS_ZERO }
+    { NULL, NULL, NULL, NULL, 0 }
 };
 
 StageData lbl_803E920C = {
@@ -27,7 +27,7 @@ StageData lbl_803E920C = {
     lbl_80222C34,
     lbl_80222E6C,
     lbl_80222E74,
-    FLAGS_ZERO,
+    0,
     NULL,
     0,
 };
@@ -106,8 +106,12 @@ static void lbl_80222D5C(HSD_GObj* arg0) {}
 
 static void lbl_80222D60(HSD_GObj* gobj)
 {
-    u32 unused[2];
-    Ground* gp = gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
+    Ground* gp = GET_GROUND(gobj);
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }
@@ -124,14 +128,15 @@ static void lbl_80222DB8(HSD_GObj* gobj)
 }
 
 static void lbl_80222DEC(HSD_GObj* arg0) {}
+
 static void lbl_80222DF0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[4];
 #endif
 
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }

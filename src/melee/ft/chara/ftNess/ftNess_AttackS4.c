@@ -23,7 +23,7 @@ void ftNess_AttackS4_Action(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -140,7 +140,7 @@ void ftNess_AttackS4_IASA(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2218_flag.bits.b0 != 0) {

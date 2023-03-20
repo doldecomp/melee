@@ -35,41 +35,21 @@ typedef enum ftLuigiAction {
 
 // SpecialN/SpecialAirN (Fireball)
 
-#define FTLUIGI_SPECIALN_COLL_FLAG FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE
+#define FTLUIGI_SPECIALN_COLL_FLAG                                             \
+    FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim
 
 // SpecialS/SpecialAirS (Green Missile)
 
-#define FTLUIGI_SPECIALS_COLL_FLAG                                             \
-    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_MATANIM_NOUPDATE |            \
-        FIGHTER_SFX_PRESERVE | FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE | \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
-
-#define FTLUIGI_SPECIALS_GROUND_AIR_FLAG                                       \
-    FIGHTER_GFX_PRESERVE | FIGHTER_HITSTATUS_COLANIM_PRESERVE |                \
-        FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
-        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
-        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
-
 // Misfire
-
-#define FTLUIGI_SPECIALS_MISFIRE_FLAG                                          \
-    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
-        FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
 
 // SpecialLw (Luigi Cyclone)
 
 #define FTLUIGI_SPECIALLW_FLAG                                                 \
-    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
-        FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |                  \
+        FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |            \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |    \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 typedef struct _ftLuigiAttributes {
     // SIDE SPECIAL - GREEN MISSILE //

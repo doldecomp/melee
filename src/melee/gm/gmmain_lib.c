@@ -239,9 +239,13 @@ s32 func_8015CFCC(u8 arg0)
 
 void func_8015D00C(u8 arg0)
 {
-    s32 unused[3];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[12];
+#endif
+
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
-    base[arg0].x7A.bits.b0 = 1;
+    base[arg0].x7A.bits.b0 = true;
     func_8015ED98()->xC |= 1 << arg0;
 }
 
@@ -306,9 +310,13 @@ s32 func_8015D0F4(u8 arg0)
 
 void func_8015D134(u8 arg0)
 {
-    s32 unused[3];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[12];
+#endif
+
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
-    base[arg0].x7C.bits.b4 = 1;
+    base[arg0].x7C.bits.b4 = true;
     func_8015ED98()->x10 |= 1 << arg0;
 }
 
@@ -350,9 +358,13 @@ s32 func_8015D21C(u8 arg0)
 
 void func_8015D25C(u8 arg0)
 {
-    s32 unused[3];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[12];
+#endif
+
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
-    base[arg0].x7C.bits.b5 = 1;
+    base[arg0].x7C.bits.b5 = true;
     func_8015ED98()->x14 |= 1 << arg0;
 }
 
@@ -394,9 +406,13 @@ s32 func_8015D344(u8 arg0)
 
 void func_8015D384(u8 arg0)
 {
-    s32 unused[3];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[12];
+#endif
+
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
-    base[arg0].x7C.bits.b6 = 1;
+    base[arg0].x7C.bits.b6 = true;
     func_8015ED98()->x18 |= 1 << arg0;
 }
 
@@ -602,8 +618,12 @@ void* func_8015D804(s32 arg0)
 
 s32 func_8015D818(u32 arg0)
 {
-    s32 unused[10];
-    if (func_8015D94C(arg0) == 0) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[40];
+#endif
+
+    if ((signed) func_8015D94C(arg0) == 0) {
         struct gmm_x1868* base = &lbl_804D3EE0->thing;
         u32* q = &base->x1B80[arg0];
         *q = func_8000AFBC();
@@ -644,27 +664,25 @@ void func_8015D924(u32 arg0)
     thing[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
-s32 func_8015D94C(u32 arg0)
+u32 func_8015D94C(u32 arg0)
 {
     u32* thing = &lbl_804D3EE0->thing.x1B4C[0];
     u32 flag = thing[arg0 / 32];
     return flag & (1 << (arg0 % 32));
 }
 
-s32* func_8015D970(s32 arg0)
+u32* func_8015D970(ssize_t idx)
 {
-    s32* base = &lbl_804D3EE0->x6C[0];
-    return &base[arg0];
+    u32* base = &lbl_804D3EE0->x6C[0];
+    return &base[idx];
 }
 
-s32 func_8015DA90(u32 arg0);
 void func_8015D9F4(u32 arg0);
 void func_8015DA40(u32 arg0);
 
 #ifdef MUST_MATCH
-
 #pragma push
-asm s32 func_8015D984(s32 arg0)
+asm bool func_8015D984(u32 arg0)
 { // clang-format off
     nofralloc
 /* 8015D984 0015A564  7C 08 02 A6 */	mflr r0
@@ -701,24 +719,27 @@ lbl_8015D9DC:
 #pragma pop
 
 #else
-
 // https://decomp.me/scratch/CJy8X
 // register swap
-s32 func_8015D984(s32 arg0)
+bool func_8015D984(u32 arg0)
 {
-    s32 unused[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
+
     if (func_8015DA90(arg0) == 0) {
-        s32* base = &lbl_804D3EE0->x6C[0];
-        s32* qwe = &base[arg0];
+        u32* base = &lbl_804D3EE0->x6C[0];
+        u32* qwe = &base[arg0];
         *qwe = func_8000AFBC();
 
         func_8015D9F4(arg0);
         func_8015DA40(arg0);
-        return 1;
+        return true;
     }
-    return 0;
-}
 
+    return false;
+}
 #endif
 
 void func_8015D9F4(u32 arg0)
@@ -745,7 +766,7 @@ void func_8015DA68(u32 arg0)
     base[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
-s32 func_8015DA90(u32 arg0)
+u32 func_8015DA90(u32 arg0)
 {
     u32* base = &lbl_804D3EE0->thing.x1B58[0];
     u32* qwe = &base[arg0 / 32];

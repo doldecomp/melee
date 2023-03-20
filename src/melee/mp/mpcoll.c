@@ -30,7 +30,7 @@ void func_80041C8C(CollData* cd)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     lbl_804D64A0 = 0;
@@ -835,7 +835,7 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     f32 dist_right_x;

@@ -14,7 +14,7 @@ void func_8002438C(s32);
 void func_80024B1C(s32, s32);
 void func_80024B58(s32, s32);
 s32 func_80023220(s32);
-s32 func_800230C8(s32, s32*, s32*);
+s32 func_800230C8(s32, int*, int*);
 s32 func_80023130(void);
 s32 func_800233EC(s32);
 void func_80024DC4(void);

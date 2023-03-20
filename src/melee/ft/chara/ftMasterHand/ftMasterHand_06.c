@@ -1,15 +1,16 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_06.h>
+#include "ftMasterHand_06.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/mp/mplib.h>
+#include "ftMasterHand.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
+#include "mp/mplib.h"
 
 // 801517B0 14E390
 // https://decomp.me/scratch/ayfDz
 void lbl_801517B0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!Player_GetPlayerSlotType(fp->xC_playerID))
         func_8015BD20(gobj);
 }
@@ -18,11 +19,8 @@ void lbl_801517B0(HSD_GObj* gobj)
 // https://decomp.me/scratch/TjBLH
 void lbl_801517F4(HSD_GObj* gobj)
 {
-    MasterHandAttributes* r3_attributes;
-    Fighter* r4_fp;
-
-    r4_fp = gobj->user_data;
-    r3_attributes = r4_fp->x10C_ftData->ext_attr;
+    Fighter* r4_fp = GET_FIGHTER(gobj);
+    MasterHandAttributes* r3_attributes = r4_fp->x10C_ftData->ext_attr;
     r4_fp->x80_self_vel.y += r3_attributes->x150;
     r4_fp->x80_self_vel.z += r3_attributes->x158;
 }
@@ -89,7 +87,11 @@ void lbl_8015198C(HSD_GObj* gobj)
     Fighter* temp_r31;
     Fighter* temp_r8;
     Vec3 sp14;
-    u32 unk[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_r31 = gobj->user_data;

@@ -6,7 +6,7 @@
 typedef struct HSD_AObj HSD_AObj;
 typedef struct _HSD_DObj HSD_DObj;
 typedef struct _HSD_Fog HSD_Fog;
-typedef struct _HSD_LObj HSD_LObj;
+typedef struct HSD_LObj HSD_LObj;
 typedef struct _HSD_Obj HSD_Obj;
 typedef struct HSD_GObj HSD_GObj;
 typedef union _HSD_ObjData HSD_ObjData;
@@ -30,6 +30,9 @@ typedef struct HSD_PEDesc HSD_PEDesc;
 typedef struct HSD_GObjProc HSD_GObjProc;
 typedef struct HSD_AObjDesc HSD_AObjDesc;
 typedef struct HSD_Spline HSD_Spline;
+
+/// @remarks MexTK: Particle
+typedef struct UnkGeneratorStruct UnkGeneratorStruct;
 
 typedef void (*HSD_ObjUpdateFunc)(any_t obj, enum_t type, HSD_ObjData* fval);
 typedef void (*HSD_DevComCallback)(int, int, int, bool cancelflag);

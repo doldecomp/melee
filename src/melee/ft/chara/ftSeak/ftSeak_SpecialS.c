@@ -63,14 +63,11 @@ void ftSeak_80110490(Fighter* fp)
 void ftSeak_80110610(HSD_GObj* fighter_gobj, s32 arg1, f32 arg2)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-
-    /// @todo This is the wrong type. #Fighter::x48_items needs to be a list of
-    ///       structs.
-    int** items = fp->x10C_ftData->x48_items;
+    UNK_T* items = fp->x10C_ftData->x48_items;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     int* item;
@@ -383,7 +380,7 @@ void ftSeak_CheckAndDestroyChain(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->sa.seak.x2234 == NULL)
@@ -600,7 +597,7 @@ void ftSeak_8011136C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -626,11 +623,12 @@ void ftSeak_80111404(HSD_GObj* fighter_gobj)
         ftSeak_801114E4(fighter_gobj);
 }
 
-static enum_t const transition_flags =
-    FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_COLANIM_NOUPDATE |
-    FIGHTER_CMD_UPDATE | FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |
-    FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |
-    FIGHTER_UNK_0x2227;
+static Fighter_ActionStateChangeFlags const transition_flags =
+    FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateMatAnim |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
+    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
+    FtStateChange_Unk_27;
 
 void ftSeak_80111440(HSD_GObj* fighter_gobj)
 {
@@ -684,7 +682,7 @@ void ftSeak_80111588(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -718,7 +716,7 @@ void ftSeak_80111648(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -751,7 +749,7 @@ void ftSeak_80111708(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (FLAGS_NONE(fp->input.x65C_heldInputs, HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
         fp->x2344_stateVar2_s32 = true;
 
     ftSeak_80110788(fighter_gobj);
@@ -761,7 +759,7 @@ void ftSeak_80111740(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (FLAGS_NONE(fp->input.x65C_heldInputs, HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
         fp->x2344_stateVar2_s32 = true;
 
     ftSeak_80110788(fighter_gobj);
@@ -834,7 +832,7 @@ void ftSeak_80111830(HSD_GObj* fighter_gobj)
             s32 flags =
                 ftNess_YoyoCheckEnvColl(fighter_gobj, &vec0, &vec1, 0.5F);
 
-            if (flags != FLAGS_ZERO)
+            if (flags != 0)
                 ftSeak_80111DF8(fighter_gobj);
         }
     }
@@ -868,7 +866,7 @@ void ftSeak_80111A48(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[36];
+    u8 _[36];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -908,7 +906,7 @@ void ftSeak_80111B1C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[36];
+    u8 _[36];
 #endif
 
     Fighter* fp = fighter_gobj->user_data;
@@ -978,7 +976,7 @@ void ftSeak_80111CB0(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);

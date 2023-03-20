@@ -3,10 +3,10 @@
 
 #include <Runtime/platform.h>
 
-void __assert(char*, u32, char*);
+ATTRIBUTE_NORETURN void __assert(char*, u32, char*);
 
 void func_803881E4(void);
-void HSD_Panic(char*, u32, char*);
+ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
 
 /// @todo Take @c file as another arg, ignore it if @c !MUST_MATCH.
 /// @todo Add another variant that takes a string for @c cond.

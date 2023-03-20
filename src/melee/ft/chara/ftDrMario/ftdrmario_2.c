@@ -1,17 +1,21 @@
-#include <melee/ft/chara/ftDrMario/ftdrmario.h>
+#include "ftdrmario.h"
 
-#include <melee/ft/chara/ftMario/ftmario.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ftMario/ftmario.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 void func_80149954(HSD_GObj* gobj)
 {
     Vec3 sp18;
     Fighter* fp;
     u32 tmp;
-    int unused2[3];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[12];
+#endif
 
     fp = gobj->user_data;
     if (fp->x2200_ftcmd_var0 == 1 && fp->sa.mario.x2240 == 0U) {

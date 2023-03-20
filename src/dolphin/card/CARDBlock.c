@@ -49,7 +49,12 @@ static void EraseCallback(s32 chan, s32 result)
 {
     CARDControl* card;
     CARDCallback callback;
-    u32 temp[2]; /* this compiler sucks */
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     u16* fat;
     u32 addr;
 
@@ -138,10 +143,14 @@ s32 __CARDFreeBlock(s32 chan, u16 nBlock, CARDCallback callback)
     u16* fat;
     u16 nextBlock;
 
-    card = card = &__CARDBlock[chan];
-    if (!card->attached) {
+/// @todo Looks like a missing inline.
+#ifdef MUST_MATCH
+    card =
+#endif
+        card = &__CARDBlock[chan];
+
+    if (!card->attached)
         return CARD_RESULT_NOCARD;
-    }
 
     fat = __CARDGetFatBlock(card);
     while (nBlock != 0xFFFF) {

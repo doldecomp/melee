@@ -90,7 +90,7 @@ s32 func_8008E984(Fighter*);
 s32 func_80093694(void);
 s32 func_8009515C(HSD_GObj*);
 s32 func_800964FC(Fighter*);
-s32 func_8009EF68(HSD_GObj*);
+bool func_8009EF68(HSD_GObj*);
 s32 func_800A198C(Fighter*);
 s32 func_800CAE80(HSD_GObj*);
 s32 func_800D67C4(Fighter*);
@@ -124,7 +124,10 @@ void func_80088080(Fighter*);
 void func_800880AC(Fighter*);
 void func_800880D8(Fighter*);
 void func_80088110(Fighter*);
+
+// SFX_PlayCharacterSFX
 void func_80088148(Fighter*, enum_t, int, int);
+
 void func_800881D8(Fighter*, u32, u32, u32);
 void func_80088478(Fighter*, s32, s32, s32);
 void func_80088510(Fighter*, s32, u8, u8);
@@ -280,7 +283,7 @@ void func_80096228(HSD_GObj*);
 void func_8009634C(HSD_GObj*);
 void func_80096470(HSD_GObj*);
 void func_800968C8(HSD_GObj*);
-void func_80096900(HSD_GObj*, s32, s32, s32, f32, f32);
+void func_80096900(HSD_GObj*, s32, s32, bool is_interruptable, f32, f32);
 void func_800969D8(HSD_GObj*, s32, s32, s32, f32, f32, f32);
 void func_80096AA0(HSD_GObj*);
 void func_80096AF4(HSD_GObj*);
@@ -529,7 +532,7 @@ void func_800BCD5C(HSD_GObj*);
 void func_800BCDD4(HSD_GObj*);
 void func_800BCDD8(HSD_GObj*);
 void func_800BCDDC(HSD_GObj*);
-void func_800BCE64(HSD_GObj*, enum_t);
+void func_800BCE64(HSD_GObj*, enum_t asid);
 void func_800BCED8(HSD_GObj*);
 void func_800BCEDC(HSD_GObj*);
 void func_800BCEE0(HSD_GObj*);

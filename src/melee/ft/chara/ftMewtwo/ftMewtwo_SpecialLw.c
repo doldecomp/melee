@@ -1,9 +1,10 @@
-#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ftmewtwo.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
@@ -28,7 +29,11 @@ void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    f32 var;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -47,7 +52,11 @@ void ftMewtwo_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    f32 var;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -136,7 +145,6 @@ inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    f32 var;
 
     func_8007D5D4(fp);
 
@@ -159,7 +167,6 @@ void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
 void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    f32 var;
 
     func_8007D7FC(fp);
 
@@ -194,7 +201,7 @@ void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {

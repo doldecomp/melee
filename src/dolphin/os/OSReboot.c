@@ -7,13 +7,15 @@
 #include <MetroTRK/intrinsics.h>
 #include <placeholder.h>
 
+#ifdef MWERKS_GEKKO
 static unk_t Header[0x20 / sizeof(unk_t)];
 static unk_t SaveStart;
 static unk_t SaveEnd;
+#endif
+
 static bool Prepared;
 
 #ifdef MWERKS_GEKKO
-
 void Run(register Event callback)
 {
     OSDisableInterrupts();
@@ -25,14 +27,12 @@ void Run(register Event callback)
         blr
     }
 }
-
 #else
 
 void Run(Event arg0)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 static void Callback(void)
@@ -41,7 +41,6 @@ static void Callback(void)
 }
 
 #ifdef MWERKS_GEKKO
-
 #pragma push
 asm void __OSReboot(u32 resetCode, bool forceMenu)
 { // clang-format off
@@ -178,12 +177,4 @@ lbl_803482E0:
 /* 8034830C 00344EEC  4E 80 00 20 */	blr
 } // clang-format on
 #pragma pop
-
-#else
-
-void __OSReboot(u32 resetCode, bool forceMenu)
-{
-    NOT_IMPLEMENTED;
-}
-
 #endif

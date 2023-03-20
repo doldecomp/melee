@@ -55,22 +55,25 @@ typedef enum ftFoxAction {
 // SpecialHi (Firefox/Firebird)
 
 #define FTFOX_SPECIALHI_COLL_FLAG                                              \
-    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |     \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
-        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
-        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |            \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
+        FtStateChange_SkipUpdateModelPartVis |                                 \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 #define FTFOX_SPECIALLW_COLL_FLAG                                              \
-    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |     \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
-        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
-        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |            \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
+        FtStateChange_SkipUpdateModelPartVis |                                 \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 #define FTFOX_SPECIALS_COLL_FLAG                                               \
-    FIGHTER_MATANIM_NOUPDATE | FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE |  \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
-        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
-        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateRumble |         \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |            \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
+        FtStateChange_SkipUpdateModelPartVis |                                 \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 typedef struct _ftFoxAttributes {
     // NEUTRAL SPECIAL - BLASTER //

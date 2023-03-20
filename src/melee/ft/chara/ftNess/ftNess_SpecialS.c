@@ -21,7 +21,7 @@ void ftNess_ItemPKFireSpawn(
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     f32 PKFireRot;
@@ -74,7 +74,7 @@ void ftNess_SpecialS_StartAction(
 
     fp = GET_FIGHTER(fighter_gobj);
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
-    fp->x2200_ftcmd_var0 = 0; // Set ftcmd flag0 to 0; unused in PK Fire? //
+    fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; _ in PK Fire? //
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALS, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
@@ -91,7 +91,7 @@ void ftNess_SpecialAirS_Action(
 
     fp = GET_FIGHTER(fighter_gobj);
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
-    fp->x2200_ftcmd_var0 = 0; // Set ftcmd flag0 to 0; unused in PK Fire? //
+    fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; _ in PK Fire? //
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRS, 0,
                                        NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);

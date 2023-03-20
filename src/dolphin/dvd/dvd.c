@@ -56,7 +56,11 @@ extern volatile struct _IO {
 
 static DVDBuffer tmpBuffer;
 
-static u8 pad[0x60];
+/// @todo Unused @c .bss.
+#ifdef MUST_MATCH
+static u8 _[0x60];
+#endif
+
 DVDCommandBlock DummyCommandBlock;
 OSAlarm ResetAlarm;
 
@@ -114,7 +118,7 @@ void DVDInit(void)
     }
 }
 
-static void stateReadingFST(DVDCommandBlock* unused)
+static void stateReadingFST(DVDCommandBlock* _)
 {
     LastState = stateReadingFST;
     DVDLowRead(bootInfo->fst_start, OSRoundUp32B(tmpBuffer.FSTLength),
@@ -414,12 +418,12 @@ static void stateCheckID(void)
     }
 }
 
-static void stateCheckID3(DVDCommandBlock* unused)
+static void stateCheckID3(DVDCommandBlock* _)
 {
     DVDLowAudioBufferConfig(currID->streaming, 10, cbForStateCheckID3);
 }
 
-static void stateCheckID2(DVDCommandBlock* unused)
+static void stateCheckID2(DVDCommandBlock* _)
 {
     DVDLowRead(&tmpBuffer, sizeof(tmpBuffer), 0x420, cbForStateCheckID2);
 }
@@ -616,7 +620,6 @@ static void stateReady(void)
 #define MIN(a, b) (((a) > (b)) ? (b) : (a))
 static void stateBusy(DVDCommandBlock* block)
 {
-    DVDCommandBlock* finished;
     LastState = stateBusy;
     switch (block->command) {
     case 5:

@@ -1,22 +1,20 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_22.h>
+#include "ftMasterHand_22.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_24.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/lb/lbvector.h>
+#include "ftMasterHand.h"
+#include "ftMasterHand_24.h"
+#include "ftMasterHand_34.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
+#include "ft/ftcommon.h"
+#include "lb/lbvector.h"
 
 // 80154230 150E10
 // https://decomp.me/scratch/dpg50
 void lbl_80154230(HSD_GObj* gobj)
 {
-    Fighter* r4_fp;
-    u32 unk[2];
-
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        r4_fp = gobj->user_data;
+        Fighter* r4_fp = GET_FIGHTER(gobj);
         (r4_fp->masterhandVars.x2344_callback)(gobj);
     }
 }
@@ -24,10 +22,9 @@ void lbl_80154230(HSD_GObj* gobj)
 // 80154278 150E58
 void lbl_80154278(HSD_GObj* arg0)
 {
-    Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
+    Fighter* fp = GET_FIGHTER(arg0);
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(arg0);
-    }
 }
 
 // 801542BC 150E9C
@@ -46,11 +43,8 @@ void lbl_801542DC(HSD_GObj* gobj)
 // https://decomp.me/scratch/pmJHD
 void func_801542E0(HSD_GObj* gobj)
 {
-    Fighter* r31_fp;
-    MasterHandAttributes* r30_attributes;
-
-    r31_fp = gobj->user_data;
-    r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    Fighter* r31_fp = GET_FIGHTER(gobj);
+    MasterHandAttributes* r30_attributes = r31_fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(
         gobj, 0x175, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftAnim_SetAnimRate(gobj, r30_attributes->x110_pos.y);
@@ -61,12 +55,10 @@ void func_801542E0(HSD_GObj* gobj)
 // https://decomp.me/scratch/rwb1V
 void lbl_80154360(HSD_GObj* gobj)
 {
-    Fighter* temp_r4;
-    f32 temp_f1;
+    Fighter* temp_r4 = GET_FIGHTER(gobj);
     s32 temp_cr0_eq;
     u32 temp_r0;
 
-    temp_r4 = gobj->user_data;
     temp_r0 = temp_r4->masterhandVars.x2348 - 1;
     temp_cr0_eq = temp_r0 == 0U;
     temp_r4->masterhandVars.x2348 = temp_r0;
@@ -74,6 +66,7 @@ void lbl_80154360(HSD_GObj* gobj)
         ftAnim_SetAnimRate(gobj, 1.0f);
         func_801545A0(gobj);
     }
+
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
@@ -95,7 +88,12 @@ static inline float my_sqrtf(float x)
 {
     static const double _half = .5;
     static const double _three = 3.0;
-    s32 unk = 0; // fakematch
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4] = { 0 };
+#endif
+
     volatile float y;
     if (x > 0.0f) {
         double guess = __frsqrte((double) x);
@@ -114,17 +112,19 @@ static inline float my_lbvector_Len(Vec3* vec)
 
 void lbl_8015442C(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    MasterHandAttributes* attr;
+    /// @todo #GET_FIGHTER doesn't fit the stack.
+    Fighter* fp = gobj->user_data;
+    MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
     f32 len;
     f32 speed;
     Vec3 sp28_pos;
     Vec3 sp1C_vel;
-    s32 unk[1];
 
-    fp = gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
-    attr = fp->x10C_ftData->ext_attr;
     func_80085134(gobj);
     func_8015C208(gobj, &sp28_pos);
     sp28_pos.x += attr->x108;
@@ -156,10 +156,7 @@ void lbl_8015459C(HSD_GObj* gobj)
 // https://decomp.me/scratch/K86rj
 void func_801545A0(HSD_GObj* gobj)
 {
-    Fighter* temp_r31;
-    f32 temp_f1;
-
-    temp_r31 = gobj->user_data;
+    Fighter* temp_r31 = GET_FIGHTER(gobj);
     Fighter_ActionStateChange_800693AC(gobj, 0x176, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     func_8007E2D0(temp_r31, 0x80U, &lbl_80154A2C, 0U, &lbl_80155A58);
@@ -325,10 +322,8 @@ void lbl_801549A8(HSD_GObj* arg0)
 // https://decomp.me/scratch/5adNV
 void lbl_80154A08(HSD_GObj* arg0)
 {
-    f32 temp_f1;
-    Fighter* temp_r3;
+    Fighter* temp_r3 = GET_FIGHTER(arg0);
 
-    temp_r3 = arg0->user_data;
     if (temp_r3->masterhandVars.x2358 == 0.0f) {
         temp_r3->x80_self_vel.z = 0.0f;
         temp_r3->x80_self_vel.y = 0.0f;
@@ -340,10 +335,7 @@ void lbl_80154A08(HSD_GObj* arg0)
 // https://decomp.me/scratch/j1RLj
 void lbl_80154A2C(HSD_GObj* arg0)
 {
-    f32 temp_f0;
-    Fighter* temp_r5;
-
-    temp_r5 = arg0->user_data;
+    Fighter* temp_r5 = GET_FIGHTER(arg0);
     temp_r5->x80_self_vel.z = 0.0f;
     temp_r5->x80_self_vel.y = 0.0f;
     temp_r5->x80_self_vel.x = 0.0f;

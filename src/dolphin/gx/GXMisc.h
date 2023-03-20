@@ -17,9 +17,9 @@ void GXPokeColorUpdate(bool update_enable);
 void GXPokeDstAlpha(bool enable, u8 alpha);
 void GXPokeDither(s32 dither);
 void GXPokeZMode(bool compare_enable, GXCompare func, bool update_enable);
-void GXTokenInterruptHandler(__OSInterrupt unused, OSContext* current_ctx);
+void GXTokenInterruptHandler(__OSInterrupt _, OSContext* current_ctx);
 GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb);
-void GXFinishInterruptHandler(__OSInterrupt unused, OSContext* current_ctx);
+void GXFinishInterruptHandler(__OSInterrupt _, OSContext* current_ctx);
 void __GXPEInit(void);
 void GXPokeBlendMode(GXBlendMode type, GXBlendFactor src_factor,
                      GXBlendFactor dst_factor, GXLogicOp op);

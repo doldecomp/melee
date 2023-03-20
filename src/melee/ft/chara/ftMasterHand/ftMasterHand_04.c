@@ -1,9 +1,9 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include "ftMasterHand.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftlib.h>
+#include "cm/camera.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftbosslib.h"
+#include "ft/ftlib.h"
 
 static void lbl_801511FC(HSD_GObj* gobj);
 
@@ -35,11 +35,8 @@ void func_801510B0(HSD_GObj* gobj)
 // https://decomp.me/scratch/896fc
 void lbl_80151168(HSD_GObj* gobj)
 {
-    Fighter* r4_fp;
-    u32 unk[2];
-
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        r4_fp = gobj->user_data;
+        Fighter* r4_fp = GET_FIGHTER(gobj);
         r4_fp->sa.masterhand.x2258 = 0x155;
         func_80151018(gobj);
     }
@@ -72,17 +69,22 @@ void lbl_801511F8(HSD_GObj* gobj)
 // 801511FC 14DDDC
 static void lbl_801511FC(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    HSD_GObj* tmp_gobj;
-    s32 unused[4];
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
+
     switch (fp->x2340_stateVar1) {
-    case 0:
-        tmp_gobj = func_8008627C(&fp->xB0_pos, gobj);
-        if (tmp_gobj != 0) {
-            func_8002E6FC((s32) func_80086BE0(tmp_gobj));
-        } else {
+    case 0: {
+        HSD_GObj* nearest_enemy = func_8008627C(&fp->xB0_pos, gobj);
+
+        if (nearest_enemy != NULL)
+            func_8002E6FC((s32) func_80086BE0(nearest_enemy));
+        else
             func_8002E6FC(0);
-        }
+
         func_8002ED9C(40.0f);
         func_8002EEC8(45.0f);
         func_8002EC7C(-M_PI);
@@ -91,6 +93,7 @@ static void lbl_801511FC(HSD_GObj* gobj)
         func_8002F0E4(0x78);
         fp->x2340_stateVar1 = 1;
         break;
+    }
     case 1:
         if (func_8002F260() != 0) {
             func_8002E948(&lbl_80151428);
@@ -157,6 +160,9 @@ static void lbl_801511FC(HSD_GObj* gobj)
             fp->x2340_stateVar1 = 10;
         }
         break;
-        // no default
+#ifndef MUST_MATCH
+    default:
+        HSD_ASSERT(__LINE__, false);
+#endif
     }
 }

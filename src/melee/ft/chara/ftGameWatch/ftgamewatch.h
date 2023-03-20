@@ -20,37 +20,23 @@
 
 // Chef (SpecialN/SpecialAirN) //
 #define FTGAMEWATCH_SPECIALN_COLL_FLAG                                         \
-    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE |                \
-        FIGHTER_MODEL_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |                    \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |     \
+        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |      \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |            \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
+        FtStateChange_SkipUpdateModelPartVis |                                 \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // Judgement (SpecialS/SpecialAirS) //
 #define FTGAMEWATCH_SPECIALS_COLL_FLAG                                         \
-    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE |                \
-        FIGHTER_MODEL_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |                    \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |     \
+        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |      \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |            \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
+        FtStateChange_SkipUpdateModelPartVis |                                 \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // Oil Panic (SpecialLw/SpecialAirLw) //
-#define FTGAMEWATCH_SPECIALLW_COLL_FLAG                                        \
-    FIGHTER_GFX_PRESERVE | FIGHTER_HITSTATUS_COLANIM_PRESERVE |                \
-        FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |                      \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
-
-#define FTGAMEWATCH_SPECIALLW_UPDATE_FLAG                                      \
-    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
 
 // Mr. Game & Watch Action State IDs //
 
@@ -306,7 +292,7 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemJudgementRemove(HSD_GObj* fighter_gobj);
 bool ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj);
-s32 ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj);
+int ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialS_Anim(HSD_GObj* fighter_gobj);

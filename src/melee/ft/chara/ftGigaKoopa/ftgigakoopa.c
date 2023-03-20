@@ -1,11 +1,11 @@
-#include <melee/ft/chara/ftGigaKoopa/ftgigakoopa.h>
+#include "ftgigakoopa.h"
 
-#include <melee/ft/chara/ftKoopa/ftkoopa.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/itkind.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftKoopa/ftkoopa.h"
+#include "it/itkind.h"
 
 ActionState as_table_gkoopa[] = {
     { 295, 0x00340011, 0x12000000, lbl_80134F48, lbl_801351B0, lbl_80135438,
@@ -57,7 +57,7 @@ ActionState as_table_gkoopa[] = {
 };
 
 ActionState lbl_803D38C8[] = {
-    { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C74AC, NULL, NULL },
+    { 14, 0, 0x01000000, NULL, NULL, func_800C74AC, NULL, NULL },
 };
 
 char lbl_803D38E8[] = "PlGk.dat";
@@ -77,7 +77,11 @@ Fighter_CostumeStrings lbl_803D3988[] = {
 
 void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftKoopaAttributes* koopaAttr = fp->x2D4_specialAttributes;
 

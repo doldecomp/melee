@@ -1,11 +1,11 @@
-#include <sysdolphin/baselib/tobj.h>
+#include "tobj.h"
 
+#include "aobj.h"
+#include "memory.h"
+#include "mtx.h"
 #include <dolphin/mtx.h>
 #include <math.h>
 #include <MetroTRK/intrinsics.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/mtx.h>
 
 extern void TObjInfoInit(void);
 
@@ -374,16 +374,19 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
     Mtx m;
     Vec3 trans;
     Quaternion rot;
-    u32 unused[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     bool no_assert = false;
 
-    if (tobj->repeat_s && tobj->repeat_t) {
+    if (tobj->repeat_s && tobj->repeat_t)
         no_assert = true;
-    }
 
-    if (!no_assert) {
+    if (!no_assert)
         __assert(lbl_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
-    }
 
     scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON
                   ? 0.0F

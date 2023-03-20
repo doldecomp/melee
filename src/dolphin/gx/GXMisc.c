@@ -236,7 +236,7 @@ void GXPokeZMode(bool compare_enable, GXCompare func, bool update_enable)
         ((update_enable * 0x10) & 0xFF0);
 }
 
-void GXTokenInterruptHandler(__OSInterrupt unused, OSContext* current_ctx)
+void GXTokenInterruptHandler(__OSInterrupt _, OSContext* current_ctx)
 {
     u16 temp_r31 = __peReg[7];
     if (lbl_804D7320 != NULL) {
@@ -259,7 +259,7 @@ GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb)
     return previous;
 }
 
-void GXFinishInterruptHandler(__OSInterrupt unused, OSContext* current_ctx)
+void GXFinishInterruptHandler(__OSInterrupt _, OSContext* current_ctx)
 {
     __peReg[5] = (__peReg[5] & ~8) | 8;
     lbl_804D7328[0] = GX_TRUE;

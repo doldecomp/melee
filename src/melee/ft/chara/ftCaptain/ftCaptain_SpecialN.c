@@ -1,16 +1,17 @@
-#include <melee/ft/chara/ftCaptain/ftCaptain_SpecialN.h>
+#include "ftCaptain_SpecialN.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCaptain/ftCaptain.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftlib.h>
-#include <melee/lb/lbunknown_003.h>
-#include <MSL/trigf.h>
+#include "ftCaptain.h"
 
-// Create Aesthetic Wind Effect for Warlock Punch
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
+#include "ft/ftlib.h"
+#include "lb/lbunknown_003.h"
+#include <trigf.h>
+
+/// Create Aesthetic Wind Effect for Warlock Punch
 void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj)
 {
     s32 currentAnimFrame;
@@ -35,7 +36,7 @@ void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj)
     }
 }
 
-// Calculate angle from control stick input - inline
+/// Calculate angle from control stick input - inline
 f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 {
     ftCaptainAttributes* tempAttrs = fp->x2D4_specialAttributes;
@@ -66,16 +67,13 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
             (stickRangeMinPos - stickRangeMinNeg));
 }
 
-// 0x800E2B80
-// https://decomp.me/scratch/4yplr // Captain Falcon & Ganondorf's grounded
-// Falcon/Warlock Punch Action State handler
 void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp->x2204_ftcmd_var1 = 0;
@@ -88,16 +86,13 @@ void ftCaptain_SpecialN_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
-// 0x800E2C00
-// https://decomp.me/scratch/CcfiS // Captain Falcon & Ganondorf's aerial
-// Falcon/Warlock Punch Action State handler
 void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->x2204_ftcmd_var1 = 0;
@@ -110,9 +105,6 @@ void ftCaptain_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     func_8006EBA4(fighter_gobj);
 }
 
-// 0x800E2C80
-// https://decomp.me/scratch/3nbJC // Captain Falcon & Ganondorf's grounded
-// Falcon/Warlock Punch Animation callback
 void ftCaptain_SpecialN_Anim(HSD_GObj* fighter_gobj)
 {
     ftCaptain_SpecialN_CreateWindEffect(fighter_gobj);
@@ -122,9 +114,6 @@ void ftCaptain_SpecialN_Anim(HSD_GObj* fighter_gobj)
     }
 }
 
-// 0x800E2D5C
-// https://decomp.me/scratch/TPyx9 // Captain Falcon & Ganondorf's aerial
-// Falcon/Warlock Punch Animation callback
 void ftCaptain_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 {
     ftCaptain_SpecialN_CreateWindEffect(fighter_gobj);
@@ -134,16 +123,11 @@ void ftCaptain_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
     }
 }
 
-// 0x800E2E38 - Captain Falcon & Ganondorf's grounded Falcon/Warlock Punch IASA
-// callback
 void ftCaptain_SpecialN_IASA(HSD_GObj* fighter_gobj)
 {
     return;
 }
 
-// 0x800E2E3C
-// https://decomp.me/scratch/4rsQA // Captain Falcon & Ganondorf's aerial
-// Falcon/Warlock Punch IASA callback
 void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -162,9 +146,6 @@ void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
     }
 }
 
-// 0x800E2F2C
-// https://decomp.me/scratch/YdpbL // Captain Falcon & Ganondorf's grounded
-// Falcon/Warlock Punch Physics callback
 void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -199,16 +180,12 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj)
     func_80084FA8(fighter_gobj);
 }
 
-// 0x800E3018
-// https://decomp.me/scratch/CiZfS // Captain Falcon & Ganondorf's aerial
-// Falcon/Warlock Punch Physics callback
 void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
     s32 ftKind;
     s32 flag;
-    s32 var;
 
     if (fp->x2210_ThrowFlags.b1 != 0) {
         fp->x2210_ThrowFlags.b1 = 0;
@@ -251,9 +228,6 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
     }
 }
 
-// 0x800E3168
-// https://decomp.me/scratch/34fFe // Captain Falcon & Ganondorf's grounded
-// Falcon/Warlock Punch Collision callback
 void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
 {
     if (func_800827A0(fighter_gobj) == false) {
@@ -268,9 +242,6 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
     }
 }
 
-// 0x800E31F4
-// https://decomp.me/scratch/LiPmy // Captain Falcon & Ganondorf's aerial
-// Falcon/Warlock Punch Collision callback
 void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
 {
     if (func_80081D0C(fighter_gobj) != false) {

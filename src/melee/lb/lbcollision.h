@@ -1,6 +1,7 @@
 #ifndef MELEE_LB_LBCOLLISION_H
 #define MELEE_LB_LBCOLLISION_H
 
+#include "dolphin/mtx/types.h"
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 #include <placeholder.h>
@@ -148,7 +149,7 @@ UNK_RET lbColl_80008820(UNK_PARAMS);
 int lbColl_80005BB0(HitCapsule*, int);
 bool lbColl_80007ECC(HitCapsule*, HurtCapsule*, Mtx, f32 hit_scl_y,
                      f32 hurt_scl_y, f32 hurt_pos_z);
-bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32);
+bool lbColl_8000805C(HitCapsule*, HurtCapsule*, UNK_T, s32, f32, f32, f32);
 bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, unk_t, s32, f32, f32,
                      f32);
 bool lbColl_80007AFC(HitCapsule*, HitCapsule*, f32, f32);
@@ -173,7 +174,7 @@ UNK_RET lbColl_800089B8(UNK_PARAMS);
 UNK_RET lbColl_80008A5C(UNK_PARAMS);
 UNK_RET lbColl_80008DA4(UNK_PARAMS);
 UNK_RET lbColl_80008FC8(UNK_PARAMS);
-UNK_RET lbColl_800096B4(UNK_PARAMS);
+void lbColl_800096B4(MtxPtr, UNK_T, UNK_T, UNK_T, UNK_T, f32);
 UNK_RET lbColl_80009DD4(UNK_PARAMS);
 UNK_RET lbColl_80009F54(UNK_PARAMS);
 UNK_RET lbColl_8000A044(UNK_PARAMS);

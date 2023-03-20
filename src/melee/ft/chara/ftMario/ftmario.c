@@ -11,8 +11,8 @@
 #include <sysdolphin/baselib/random.h>
 
 ActionState as_table_mario[] = {
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { 295, 0x00340111, 0x12000000, ftMario_SpecialN_Anim, ftMario_SpecialN_IASA,
       ftMario_SpecialN_Phys, ftMario_SpecialN_Coll, func_800761C8 },
     { 296, 0x00340511, 0x12000000, ftMario_SpecialAirN_Anim,
@@ -38,8 +38,8 @@ ActionState as_table_mario[] = {
 };
 
 ActionState lbl_803C7260[] = {
-    { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
-    { 15, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
+    { 14, 0, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
+    { 15, 0, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };
 
 void ftMario_OnDeath(HSD_GObj* gobj)

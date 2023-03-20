@@ -1,49 +1,49 @@
-#include <melee/gr/ground.h>
+#include "gr/ground.h"
 
+#include "cm/camera.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftlib.h"
+#include "gm/code_801601C4.h"
+#include "grcorneria.h"
+#include "grdatfiles.h"
+#include "grdisplay.h"
+#include "grizumi.h"
+#include "grkongo.h"
+#include "grmaterial.h"
+#include "groldkongo.h"
+#include "grstadium.h"
+#include "grzebes.h"
+#include "it/code_80266F3C.h"
+#include "it/code_8027CF30.h"
+#include "it/item.h"
+#include "it/itkind.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbdvd.h"
+#include "lb/lbshadow.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
+#include "lb/lbvector.h"
+#include "mp/mplib.h"
+#include "pl/player.h"
+#include "stage.h"
+#include "text_4.h"
+#include <baselib/fog.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/memory.h>
+#include <baselib/psstructs.h>
+#include <baselib/random.h>
+#include <baselib/spline.h>
+#include <baselib/wobj.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
-#include <melee/cm/camera.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gr/grcorneria.h>
-#include <melee/gr/grdatfiles.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/grizumi.h>
-#include <melee/gr/grkongo.h>
-#include <melee/gr/grmaterial.h>
-#include <melee/gr/groldkongo.h>
-#include <melee/gr/grstadium.h>
-#include <melee/gr/grzebes.h>
-#include <melee/gr/stage.h>
-#include <melee/it/code_80266F3C.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/it/item.h>
-#include <melee/it/itkind.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbshadow.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mplib.h>
-#include <melee/pl/player.h>
-#include <melee/text_4.h>
-#include <MSL/trigf.h>
 #include <placeholder.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/psstructs.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/spline.h>
-#include <sysdolphin/baselib/wobj.h>
+#include <trigf.h>
 
 StageInfo stage_info;
 
@@ -111,7 +111,7 @@ static u8* lbl_804D6950;
 
 static void func_801BFFA8(void) {}
 
-static void func_801BFFAC(bool unused) {}
+static void func_801BFFAC(bool _) {}
 
 static void zeroStageInfoArrays(void)
 {
@@ -128,7 +128,7 @@ void func_801BFFB0(void)
 {
     /// @todo Unused stack
 #ifdef MUST_MATCH
-    u32 unused[2];
+    u32 _[2];
 #endif
 
     func_801C6288();
@@ -467,10 +467,10 @@ static bool func_801C0A70(Vec3* pos)
             ONETT,
             FOURSIDE,
             // ICEMTN disabled
-            // id 0x17 unused/unknown?
+            // id 0x17 _/unknown?
             INISHIE1,
             INISHIE2,
-            // id 0x1A unused/unknown?
+            // id 0x1A _/unknown?
             // FLATZONE disabled
             OLDPUPUPU,
             OLDYOSHI,
@@ -483,9 +483,9 @@ static bool func_801C0A70(Vec3* pos)
         enum_t player_slot;
         size_t nstages = sizeof(enabled_stages) / sizeof(enabled_stages[0]);
 
-        /// @todo Fix unused stack
+        /// @todo Fix _ stack
 #ifdef MUST_MATCH
-        u32 unused[5];
+        u32 _[5];
 #endif
 
         size_t i;
@@ -1283,7 +1283,7 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
 
     /// @todo Unused stack
 #ifdef MUST_MATCH
-    u32 unused;
+    u32 _;
 #endif
 
     HSD_Joint sp18;
@@ -1358,7 +1358,7 @@ static void func_801C1CD0(HSD_GObj* gobj)
 {
     /// @todo Unused stack space
 #ifdef MUST_MATCH
-    u32 unused[2];
+    u32 _[2];
 #endif
 
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -2020,13 +2020,12 @@ bool func_801C28AC(s32 arg0, u32 arg1, s32* arg2)
     return func_801C24F8(arg0, arg1, arg2);
 }
 
-static char str1[] =
-    "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n";
-static char str2[] =
-    "             check StageParam.csv or StageItem.csv, stdata.c\n";
-static char str3[] = " stageid=%d\n";
-
 #ifdef MWERKS_GEKKO
+static char msg0[] =
+    "%s:%d: not found stage param in DAT(grkind=%d stkind=%d,num=%d)\n";
+static char msg1[] =
+    "             check StageParam.csv or StageItem.csv, stdata.c\n";
+static char msg2[] = " stageid=%d\n";
 
 #pragma push
 static asm void func_801C28CC(unk_t, s32)
@@ -2264,7 +2263,7 @@ bool func_801C2D24(enum_t arg0, Vec3* arg1)
 
     /// @todo Unused stack
 #ifdef MUST_MATCH
-    u32 unused;
+    u32 _;
 #endif
 
     if (arg0 == 8) {
@@ -2319,7 +2318,7 @@ bool func_801C2ED0(HSD_JObj* jobj, s32 arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     bool result = false;
@@ -2357,9 +2356,8 @@ bool func_801C2ED0(HSD_JObj* jobj, s32 arg1)
     return result;
 }
 
-static s16 lbl_804D6954;
-
 #ifdef MWERKS_GEKKO
+static s16 lbl_804D6954;
 
 #pragma push
 asm void func_801C2FE0(HSD_GObj*)
@@ -2544,7 +2542,7 @@ s32 func_801C32D4(s32 arg0, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     s32 result;
@@ -2591,7 +2589,7 @@ s32 func_801C33C0(s32 arg0, s32 arg1)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     s32 result;
@@ -3216,7 +3214,7 @@ void func_801C3BB4(void)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     f32 lft;
@@ -3539,7 +3537,7 @@ s32 func_801C4210(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     /// @todo With a hard-coded range for @c i, very unlikely it's not returning
@@ -3642,7 +3640,7 @@ void func_801C445C(HSD_LObj* lobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     HSD_WObj* wobj;
@@ -3998,7 +3996,7 @@ void func_801C4A08(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     if (gobj == NULL)
@@ -4715,7 +4713,7 @@ int func_801C5940(void)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     int vals[vals_count];

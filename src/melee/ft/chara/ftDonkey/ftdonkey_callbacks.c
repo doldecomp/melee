@@ -233,7 +233,7 @@ void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2210_ThrowFlags.b3) {
@@ -243,7 +243,7 @@ void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj)
         bool1 = false;
     }
 
-    if (bool1 && FLAGS_ANY(colldata->x134_envFlags, 0x18000)) {
+    if (bool1 && (colldata->x134_envFlags & 0x18000)) {
         Vec3 vec_list[4];
 
         int i;

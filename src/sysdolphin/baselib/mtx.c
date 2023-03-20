@@ -276,7 +276,12 @@ void HSD_MtxGetTranslate(Mtx mat, Vec3* vec)
 void HSD_MtxGetScale(Mtx arg0, Vec3* arg1)
 {
     f64 scale;
-    f64 filler;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     Vec3 vec1;
     Vec3 vec2;
     Vec3 vec3;

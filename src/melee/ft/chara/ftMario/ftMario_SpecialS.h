@@ -5,7 +5,7 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
 
-void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, s32 new_action_state_index);
+void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, enum_t asid);
 void ftMario_SpecialS_SetCall(Fighter* fp);
 void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj);
 void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj);

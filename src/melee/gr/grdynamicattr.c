@@ -29,7 +29,7 @@ grDynamicAttr_UnkStruct* func_801CA0F8(s32 arg0, Vec3* v, enum_t floor_id,
                                        f32 f, s32 arg3)
 {
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     grDynamicAttr_UnkStruct* tmp;

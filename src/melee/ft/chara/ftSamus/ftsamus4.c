@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftSamus/ftsamus4.h>
+#include "ftsamus4.h"
 
-#include <melee/ft/chara/ftSamus/ftsamus.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
+#include "ftsamus.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
 
 void ftSamus_ClearThrowFlagsUnk(HSD_GObj* fighter_gobj)
 {
@@ -48,18 +49,24 @@ void ftSamus_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 
 void ftSamus_8012A380(HSD_GObj* fighter_gobj)
 {
-    s32 unsued[2]; /// don't know how to remove this filler without unused data
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 void ftSamus_8012A3BC(HSD_GObj* fighter_gobj)
 {
-    s32 unsued[2]; /// don't know how to remove this filler without unused data
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_800CC730(fighter_gobj);
-    }
 }
 
 void ftSamus_8012A3F8(HSD_GObj* fighter_gobj) {}
@@ -75,7 +82,7 @@ void ftSamus_8012A420(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -101,14 +108,22 @@ void ftSamus_8012A4A4(HSD_GObj* fighter_gobj)
 
 void ftSamus_8012A4E0(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
 }
 
 void ftSamus_8012A51C(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_800CC730(fighter_gobj);
 }
@@ -126,7 +141,7 @@ void ftSamus_8012A580(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[40];
+    u8 _[40];
 #endif
 
     Fighter* fighter2;
@@ -160,7 +175,7 @@ void ftSamus_8012A640(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     efLib_DestroyAll(fighter_gobj);

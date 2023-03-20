@@ -6,9 +6,11 @@
 #include <placeholder.h>
 #include <Runtime/platform.h>
 
+#ifdef MWERKS_GEKKO
 static u32 lbl_804D5BB0 = 0x00040102;
 static u32 lbl_804D5BB4 = 0x00080102;
 static u64 lbl_804D5BB8 = 0x000C010200000000;
+#endif
 
 void lbl_8033CA6C(void);
 void lbl_8033CA8C(void);
@@ -246,7 +248,6 @@ void GXSetVtxDesc(s32 arg0, s32 arg1)
 }
 
 #ifdef MWERKS_GEKKO
-
 // https://decomp.me/scratch/NAwYO // 4529 (49.68%)
 #pragma push
 asm void __GXSetVCD(void)
@@ -444,6 +445,7 @@ void GXSetVtxAttrFmt(u32 arg0, u32 arg1, s32 arg2, u32 arg3, u8 arg4)
     __GXContexts.main->x4EE |= (u8) (1 << (u8) arg0);
 }
 
+#ifdef MWERKS_GEKKO
 static jtbl_t jtbl_804010F4 = { &lbl_8033CA6C, &lbl_8033CA8C, &lbl_8033CAAC,
                                 &lbl_8033CACC, &lbl_8033CAEC, &lbl_8033CB04,
                                 &lbl_8033CB24 };
@@ -455,6 +457,7 @@ static jtbl_t jtbl_80401110 = { &lbl_8033C8E0, &lbl_8033C8EC, &lbl_8033C8F8,
                                 &lbl_8033C95C, &lbl_8033C95C, &lbl_8033C95C,
                                 &lbl_8033C95C, &lbl_8033C95C, &lbl_8033C95C,
                                 &lbl_8033C95C, &lbl_8033C910, &lbl_8033C918 };
+#endif
 
 void __GXSetVAT(void)
 {

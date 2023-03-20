@@ -149,7 +149,7 @@ void func_80016580(const char* basename, HSD_Archive* arg1, s32* arg2,
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     const char* filename = func_80016204(basename);

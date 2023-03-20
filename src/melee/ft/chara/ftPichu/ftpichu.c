@@ -1,10 +1,10 @@
-#include <melee/ft/chara/ftPichu/ftpichu.h>
+#include "ftpichu.h"
 
-#include <melee/ft/chara/ftPikachu/ftpikachu.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftPikachu/ftpikachu.h"
 
 ActionState as_table_pichu[] = {
     { 295, 0x00340111, 0x12000000, ftPikachu_80124908, ftPikachu_Stub_80124B6C,
@@ -100,18 +100,18 @@ Fighter_CostumeStrings lbl_803D23B4[] = {
 
 void ftPichu_OnLoad(HSD_GObj* gobj)
 {
-    ftPichuAttributes* attrs;
-    u32 unused[2];
-
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     ftData* ftdata = fp->x10C_ftData;
     void** items = ftdata->x48_items;
-    fp->x2224_flag.bits.b7 = 1;
+    fp->x2224_flag.bits.b7 = true;
     ftPikachu_OnLoadForPichu(fp);
-    attrs = fp->x2D4_specialAttributes;
-    func_8026B3F8(items[0], attrs->xDC);
-    func_8026B3F8(items[1], attrs->x14);
-    func_8026B3F8(items[2], attrs->x18);
+
+    {
+        ftPichuAttributes* attrs = fp->x2D4_specialAttributes;
+        func_8026B3F8(items[0], attrs->xDC);
+        func_8026B3F8(items[1], attrs->x14);
+        func_8026B3F8(items[2], attrs->x18);
+    }
 }
 
 void ftPichu_OnDeath(HSD_GObj* gobj)

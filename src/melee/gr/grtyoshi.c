@@ -9,11 +9,11 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E9578[] = {
-    { lbl_80223CD4, lbl_80223D00, lbl_80223D08, lbl_80223D0C, FLAGS_ZERO },
-    { lbl_80223DA0, lbl_80223DF0, lbl_80223DF8, lbl_80223E18, FLAGS_ZERO },
+    { lbl_80223CD4, lbl_80223D00, lbl_80223D08, lbl_80223D0C, 0 },
+    { lbl_80223DA0, lbl_80223DF0, lbl_80223DF8, lbl_80223E18, 0 },
     { lbl_80223D10, lbl_80223D60, lbl_80223D68, lbl_80223D9C,
       (1 << 30) | (1 << 31) },
-    { NULL, NULL, NULL, NULL, FLAGS_ZERO }
+    { NULL, NULL, NULL, NULL, 0 }
 };
 
 StageData lbl_803E95D4 = {
@@ -102,7 +102,7 @@ static void lbl_80223D10(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -127,7 +127,7 @@ static void lbl_80223DA0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;

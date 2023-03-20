@@ -157,12 +157,10 @@ typedef void (*Event)(void);
 #define U8_MAX 0xFF
 #define U16_MAX 0xFFFF
 #define U32_MAX 0xFFFFFFFF
+#define S8_MAX 0x7F
+#define S16_MAX 0x7FFF
+#define S32_MAX 0x7FFFFFFF
 #define F32_MAX 3.4028235E38
-
-#define FLAGS_ZERO 0
-#define FLAGS_ANY(value, flag) ((value) & (flag))
-#define FLAGS_NONE(value, flag) (!((value) & (flag)))
-#define FLAGS_ALL(value, flag) (((value) & (flag)) == (flag))
 
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 

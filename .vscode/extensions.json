@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "llvm-vs-code-extensions.vscode-clangd",
+        "ms-python.python",
+        "bhughes339.replacerules"
+    ]
+}

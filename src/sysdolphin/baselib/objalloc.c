@@ -22,8 +22,11 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
     u32 pool_end;
     u32 pool_size;
     u8* pool_start;
-    int i;
-    u32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
     HSD_ASSERT(0xEE, data);
     pool_size = data->size * num;
@@ -51,11 +54,16 @@ s32 HSD_ObjAllocAddFree(HSD_ObjAllocData* data, u32 num)
         }
         obj_heap.remain -= pool_size;
     }
-    for (i = 0; i < num - 1; i++) {
-        *(void**) (pool_start + data->size * i) =
-            (void*) (pool_start + data->size * (i + 1));
+
+    {
+        int i;
+        for (i = 0; (unsigned) i < num - 1; i++) {
+            *(void**) (pool_start + data->size * i) =
+                (void*) (pool_start + data->size * (i + 1));
+        }
+        *(void**) (pool_start + data->size * i) = data->freehead;
     }
-    *(void**) (pool_start + data->size * i) = data->freehead;
+
     data->freehead = (HSD_ObjAllocLink*) pool_start;
     data->free += num;
     return num;
@@ -70,7 +78,7 @@ void* HSD_ObjAlloc(HSD_ObjAllocData* data)
         return NULL;
     }
     if (data->heap_limit_flag) {
-        if (data->heap_limit_num == -1) {
+        if (data->heap_limit_num == (unsigned) -1) {
             if (obj_heap.top != 0) {
                 size = obj_heap.remain;
             } else {

@@ -1,6 +1,7 @@
 /** @file
  * @todo Should be called @c OS.c.
  */
+#include "stddef.h"
 #include <dolphin/os/OSInit.h>
 
 #include <dolphin/base/PPCArch.h>
@@ -139,18 +140,18 @@ extern vu16 __OSDeviceCode AT_ADDRESS(OS_BASE_CACHED | 0x30E6);
 extern volatile struct {
     u32 x0;
     u32 intr;
-    u8 unused[0x2C - 0x8];
+    u8 _[0x2C - 0x8];
     u32 x2C;
 } OS_PI AT_ADDRESS(0xCC003000);
 
+/**
+ * Initializes the Dolphin operating system.
+ *     - most of the main operations get farmed out to other functions
+ *     - loading debug info and setting up heap bounds largely happen here
+ *     - a lot of OS reporting also gets controlled here
+ */
 void OSInit(void)
 {
-    /*
-    Initializes the Dolphin operating system.
-        - most of the main operations get farmed out to other functions
-        - loading debug info and setting up heap bounds largely happen here
-        - a lot of OS reporting also gets controlled here
-    */
     // pretty sure this is the min(/max) amount of pointers etc for the stack to
     // match
     BI2Debug* DebugInfo;
@@ -159,20 +160,25 @@ void OSInit(void)
 
     // check if we've already done all this or not
     if (!AreWeInitialized) {
-        AreWeInitialized =
-            true; // flag to make sure we don't have to do this again
+        // flag to make sure we don't have to do this again
+        AreWeInitialized = true;
 
-        // SYSTEM //
+        // SYSTEM
+
         __OSStartTime = __OSGetSystemTime();
         OSDisableInterrupts();
 
-        // DEBUG //
-        // load some DVD stuff
-        BI2DebugFlag = 0; // debug flag from the DVD BI2 header
-        BootInfo = (OSBootInfo*) OS_BASE_CACHED; // set pointer to BootInfo
+        // DEBUG
 
-        __DVDLongFileNameFlag = false; // flag to tell us whether we make it
-                                       // through the debug loading
+        // load some DVD stuff
+
+        // debug flag from the DVD BI2 header
+        BI2DebugFlag = 0;
+        // set pointer to BootInfo
+        BootInfo = (OSBootInfo*) OS_BASE_CACHED;
+
+        // flag to tell us whether we make it through the debug loading
+        __DVDLongFileNameFlag = false;
 
         // time to grab a bunch of debug info from the DVD
         // the address for where the BI2 debug info is, is stored at
@@ -181,33 +187,37 @@ void OSInit(void)
 
         // if the debug info address exists, grab some debug info
         if (DebugInfo != NULL) {
-            BI2DebugFlag = &DebugInfo->debugFlag; // debug flag from DVD BI2
-            __PADSpec =
-                (u32) DebugInfo->padSpec; // some other info from DVD BI2
-            *((u8*) DEBUGFLAG_ADDR) = (u8) *BI2DebugFlag; // store flag in mem
-            *((u8*) OS_DEBUG_ADDRESS_2) =
-                (u8) __PADSpec;         // store other info in mem
-        } else if (BootInfo->arenaHi) { // if the top of the heap is already set
-            BI2DebugFlagHolder = (u32*) *(
-                (u8*) DEBUGFLAG_ADDR); // grab whatever's stored at 0x800030E8
-            BI2DebugFlag = (u32*) &BI2DebugFlagHolder; // flag is then address
-                                                       // of flag holder
-            __PADSpec =
-                (u32) * ((u8*) OS_DEBUG_ADDRESS_2); // pad spec is whatever's at
-                                                    // 0x800030E9
+            // debug flag from DVD BI2
+            BI2DebugFlag = &DebugInfo->debugFlag;
+            // some other info from DVD BI2
+            __PADSpec = (u32) DebugInfo->padSpec;
+            // store flag in mem
+            *((u8*) DEBUGFLAG_ADDR) = (u8) *BI2DebugFlag;
+            // store other info in mem
+            *((u8*) OS_DEBUG_ADDRESS_2) = (u8) __PADSpec;
+        } else if (BootInfo->arenaHi) {
+            // if the top of the heap is already set
+
+            // grab whatever's stored at 0x800030E8
+            BI2DebugFlagHolder = (u32*) (uintptr_t) (*(u8*) DEBUGFLAG_ADDR);
+            // flag is then address of flag holder
+            BI2DebugFlag = (u32*) &BI2DebugFlagHolder;
+            // pad spec is whatever's at 0x800030E9
+            __PADSpec = (u32) * ((u8*) OS_DEBUG_ADDRESS_2);
         }
 
-        __DVDLongFileNameFlag = true; // we made it through debug!
+        // we made it through debug!
+        __DVDLongFileNameFlag = true;
 
         // HEAP
+
         // set up bottom of heap (ArenaLo)
         // grab address from BootInfo if it exists, otherwise use default
         // __ArenaLo
         OSSetArenaLo(BootInfo->arenaLo == NULL ? __ArenaLo : BootInfo->arenaLo);
 
         // if the input arenaLo is null, and debug flag location exists (and
-        // flag is < 2),
-        //     set arenaLo to just past the end of the db stack
+        // flag is < 2), set arenaLo to just past the end of the db stack
         if (BootInfo->arenaLo == NULL && BI2DebugFlag != NULL &&
             *BI2DebugFlag < 2)
         {
@@ -220,7 +230,8 @@ void OSInit(void)
         // __ArenaHi
         OSSetArenaHi(BootInfo->arenaHi == NULL ? __ArenaHi : BootInfo->arenaHi);
 
-        // OS INIT AND REPORT //
+        // OS INIT AND REPORT
+
         // initialise a whole bunch of OS stuff
         OSExceptionInit();
         __OSInitSystemCall();
@@ -256,17 +267,22 @@ void OSInit(void)
 
         if (BootInfo == NULL || (inputConsoleType = BootInfo->consoleType) == 0)
         {
-            inputConsoleType = OS_CONSOLE_ARTHUR; // default console type
+            // default console type
+            inputConsoleType = OS_CONSOLE_ARTHUR;
         } else {
             inputConsoleType = BootInfo->consoleType;
         }
 
         // work out what console type this corresponds to and report it
         // consoleTypeSwitchHi = inputConsoleType & 0xF0000000;
-        if (!(inputConsoleType & 0x10000000)) { // check first bit
+        if (!(inputConsoleType & 0x10000000)) {
+            // check first bit
+
             OSReport("Retail %d\n", inputConsoleType);
         } else {
-            switch (inputConsoleType) { // if first bit is set, check "the rest"
+            // if first bit is set, check "the rest"
+
+            switch (inputConsoleType) {
             case OS_CONSOLE_EMULATOR:
                 OSReport("Mac Emulator\n");
                 break;
@@ -363,9 +379,10 @@ void OSExceptionInit(void)
         } else {
             // make sure the opcodes are still nop
             u32* ops = (u32*) __DBVECTOR;
-            int cb;
+            uint cb;
 
-            for (cb = 0; cb < (u32) __OSDBJUMPEND - (u32) __OSDBJUMPSTART;
+            for (cb = 0;
+                 cb < (uintptr_t) __OSDBJUMPEND - (uintptr_t) __OSDBJUMPSTART;
                  cb += sizeof(u32))
             {
                 *ops++ = NOP;

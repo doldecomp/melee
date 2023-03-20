@@ -1,9 +1,10 @@
+#include "ftwalkcommon.h"
+
+#include "code_80081B38.h"
+#include "fighter.h"
+#include "ftcommon.h"
 
 #include <dolphin/os/os.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftwalkcommon.h>
 
 s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
 {
@@ -65,7 +66,7 @@ void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8,
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -146,14 +147,13 @@ void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
             break;
         default:
             OSReport("couldn't get walk frame\n");
-            __assert("ftwalkcommon.c", 0x47U, "0");
-            break;
+            HSD_ASSERT(71, 0);
         }
         float_result = func_8006F484(fighter_gobj);
         init_animFrame = fp->x894_currentAnimFrame;
         quotient = init_animFrame / float_result;
         adjusted_animFrame =
-            fp->x894_currentAnimFrame - (float_result * quotient);
+            fp->x894_currentAnimFrame - float_result * quotient;
         final_animFrame = var_f31 * (adjusted_animFrame / float_result);
         arg_cb(fighter_gobj, final_animFrame);
     }
@@ -170,16 +170,27 @@ inline f32 getFtWalkAcceleration(Fighter* fp, f32 multiplier)
 
 void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
 {
-    s32 unused[5];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[20];
+#endif
+
     Fighter* fp;
     f32 temp_f0;
     f32 temp_f4;
     f32 ftx2360_f5;
     f32 velocity_f1;
-    f32 unused_float;
 
     fp = GET_FIGHTER(fighter_gobj);
-    unused_float = ftx2360_f5 = fp->x2360_f32;
+    ftx2360_f5 = fp->x2360_f32;
+
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+    {
+        f32 _ = ftx2360_f5;
+    }
+#endif
+
     velocity_f1 = fp->input.x620_lstick_x *
                   fp->x110_attr.x110_WalkInitialVelocity * ftx2360_f5;
     velocity_f1 += getFtWalkAcceleration(fp, ftx2360_f5);

@@ -10,10 +10,10 @@
 #include <melee/lb/lbunknown_001.h>
 
 ActionState as_table_samus[] = {
-    { 295, FLAGS_ZERO, 0x01000000, ftSamus_80128C04, ftSamus_80128D3C,
-      ftSamus_80128E88, ftSamus_80128F60, func_800761C8 },
-    { 296, FLAGS_ZERO, 0x01000000, ftSamus_80128CA0, ftSamus_80128E68,
-      ftSamus_80128EF8, ftSamus_80128FD4, func_800761C8 },
+    { 295, 0, 0x01000000, ftSamus_80128C04, ftSamus_80128D3C, ftSamus_80128E88,
+      ftSamus_80128F60, func_800761C8 },
+    { 296, 0, 0x01000000, ftSamus_80128CA0, ftSamus_80128E68, ftSamus_80128EF8,
+      ftSamus_80128FD4, func_800761C8 },
     { 297, 0x00340111, 0x12000000, ftSamus_80129684, ftSamus_80129B18,
       ftSamus_80129C88, ftSamus_80129D48, func_800761C8 },
     { 298, 0x00340111, 0x12000000, ftSamus_80129774, ftSamus_80129B1C,

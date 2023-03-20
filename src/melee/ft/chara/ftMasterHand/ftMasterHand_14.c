@@ -1,11 +1,12 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_14.h>
+#include "ftMasterHand_14.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ftMasterHand.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbunknown_001.h"
 
 // 80152BC8 14F7A8
 void lbl_80152BC8(HSD_GObj* gobj)
@@ -115,10 +116,8 @@ void lbl_80152E24(HSD_GObj* gobj)
 // https://decomp.me/scratch/Uqf2Q
 void lbl_80152E28(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 unk1;
+    Fighter* fp = GET_FIGHTER(gobj);
     Vec3 sp10;
-    s32 unk2;
 
     if (fp->x2200_ftcmd_var0 != 0) {
         func_8000B1CC(fp->x5E8_fighterBones[11].x0_jobj, 0, &sp10);

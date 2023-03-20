@@ -62,8 +62,8 @@ ActionState as_table_luigi[] = {
 };
 
 ActionState lbl_803D0868[] = {
-    { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
-    { 15, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
+    { 14, 0, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
+    { 15, 0, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };
 
 char lbl_803D08A8[] = "PlLg.dat";

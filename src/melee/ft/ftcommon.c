@@ -1,26 +1,28 @@
-#include <melee/ft/ftcommon.h>
+#include "ftcommon.h"
 
+#include "code_80081B38.h"
+#include "fighter.h"
+#include "ft_unknown_006.h"
+#include "ftcamera.h"
+#include "ftcoll.h"
+#include "ftlib.h"
+#include "ftparts.h"
+
+#include "ef/eflib.h"
+#include "gm/code_801601C4.h"
+#include "it/code_8027CF30.h"
+#include "it/item.h"
+#include "it/item2.h"
+#include "it/itkind.h"
+#include "lb/lbunknown_003.h"
+#include "mp/mplib.h"
+#include "pl/pl_unknown_001.h"
+#include "text_4.h"
+
+#include <baselib/rumble.h>
 #include <dolphin/os/os.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftparts.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/it/item.h>
-#include <melee/it/item2.h>
-#include <melee/it/itkind.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/mp/mplib.h>
-#include <melee/pl/pl_unknown_001.h>
-#include <melee/text_4.h>
-#include <sysdolphin/baselib/rumble.h>
 
-const Vec3 lbl_803B74A0 = { 0, 0, 0 };
+const Vec3 lbl_803B74A0 = { 0 };
 
 void func_8007C930(Fighter* fp, f32 result)
 {
@@ -124,7 +126,11 @@ void func_8007CB74(HSD_GObj* gobj)
     f32 temp_f1;
     Vec3* ground_normal;
     Fighter* fp = gobj->user_data;
-    u32 unused[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     ground_normal = &fp->x6F0_collData.x14C_ground.normal;
     temp_f1 = Stage_GetGroundFrictionMultiplier(fp);
@@ -321,6 +327,8 @@ void func_8007CE94(Fighter* fp, f32 val)
     fp->x74_anim_vel.x = val;
 }
 
+#ifdef MUST_MATCH
+/// @todo This surely calls #func_8007CE94 somehow...
 void func_8007CEF4(Fighter* fp)
 {
     f32 result = fp->x110_attr.x180_AerialFriction;
@@ -333,6 +341,13 @@ void func_8007CEF4(Fighter* fp)
     }
     fp->x74_anim_vel.x = result;
 }
+
+#else
+void func_8007CEF4(Fighter* fp)
+{
+    func_8007CE94(fp, fp->x110_attr.x180_AerialFriction);
+}
+#endif
 
 bool func_8007CF58(Fighter* fp)
 {
@@ -371,9 +386,12 @@ bool func_8007CF58(Fighter* fp)
 
 bool func_8007D050(Fighter* fp, f32 val)
 {
-    f32 temp_f2;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
     f32 temp_f3;
-    f32 phi_f0;
     f32 phi_f0_2;
     f32 phi_f1;
     f32 phi_f2;
@@ -381,7 +399,13 @@ bool func_8007D050(Fighter* fp, f32 val)
     f32 phi_f1_2;
 
     temp_f3 = fp->x80_self_vel.x;
-    phi_f0 = fabs_inline(temp_f3);
+
+#ifdef MUST_MATCH
+    {
+        f32 _ = fabs_inline(temp_f3);
+    }
+#endif
+
     if (fabs_inline(temp_f3) > val) {
         phi_f2 = p_ftCommonData->x1FC;
         phi_f1 = fabs_inline(temp_f3);
@@ -873,7 +897,11 @@ inline f32 fabsf(f32 x)
 
 void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
 {
-    u8 unused2[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused0[4];
+#endif
+
     Vec2* temp_r31;
     Vec3 sp24;
     Fighter* arg_ft;
@@ -884,7 +912,11 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
     HSD_GObj* cur;
     bool phi_r28;
     Vec2* vtmp;
-    u8 unused[0x14];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused1[20];
+#endif
 
     arg_ft = gobj->user_data;
     phi_r28 = false;
@@ -940,7 +972,11 @@ void func_8007DD7C(HSD_GObj* gobj, Vec3* v)
 
 void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
 {
-    u8 unused2[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused0[4];
+#endif
+
     Vec3 sp1C;
     Vec2* temp_r31;
     HSD_GObj* new_var;
@@ -951,7 +987,11 @@ void func_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
     s32 temp_r0;
     s32 temp_r30;
     Vec2* tmp;
-    u8 unused[0xC];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 unused1[12];
+#endif
 
     fp = gobj->user_data;
     temp_r31 = &fp->x2C4;
@@ -979,7 +1019,12 @@ void func_8007E0E4(HSD_GObj* gobj)
 {
     Vec3 sp10;
     Fighter* fp;
-    u8 temp_r3;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
     f32 phi_f0;
     f32 phi_f31;
     f32 phi_f30;
@@ -1098,13 +1143,15 @@ void func_8007E358(HSD_GObj* gobj)
 
 void func_8007E3EC(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    HSD_JObj* jobj;
+    Fighter* fp = gobj->user_data;
+    HSD_JObj* jobj = fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj;
     Vec3 sp10;
-    u32 unused[1];
 
-    fp = gobj->user_data;
-    jobj = fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
     if (HSD_JObjMtxIsDirty(jobj)) {
         HSD_JObjGetTranslation(jobj, &sp10);
         sp10.x -= fp->x1A7C.x;
@@ -1322,10 +1369,13 @@ void func_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
 void func_8007EC30(u32 arg0, u32 arg1)
 {
     Fighter* fp;
-    HSD_GObj* cur;
-    u32 unused[4];
+    HSD_GObj* cur = lbl_804D782C->x20_fighters;
 
-    cur = lbl_804D782C->x20_fighters;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
+
     while (cur != NULL) {
         fp = cur->user_data;
         func_8007EBAC(fp, arg0, arg1);
@@ -1335,9 +1385,8 @@ void func_8007EC30(u32 arg0, u32 arg1)
 
 void func_8007ECD4(Fighter* fp, s32 arg1)
 {
-    if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4)) {
+    if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4))
         func_80378280(fp->x618_player_id, arg1 + 2);
-    }
 }
 
 void func_8007ED2C(Fighter* fp)
@@ -1392,15 +1441,16 @@ void func_8007EFC0(Fighter* fp, u32 val)
 
 void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
 {
-    Fighter* src;
-    HSD_GObj* dst_gobj;
-    Fighter* dst;
+    Fighter* src = gobj->user_data;
+    HSD_GObj* dst_gobj = Player_GetEntityAtIndex(src->xC_playerID, 1);
+    Fighter* dst = dst_gobj->user_data;
     s32 tmp_bit;
-    u32 unused[4];
 
-    src = gobj->user_data;
-    dst_gobj = Player_GetEntityAtIndex(src->xC_playerID, 1);
-    dst = dst_gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
+
     Player_SwapTransformedStates(src->xC_playerID, src->x221F_flag.bits.b4,
                                  dst->x221F_flag.bits.b4);
     tmp_bit = src->x221F_flag.bits.b4;
@@ -1545,12 +1595,14 @@ void func_8007F578(HSD_GObj* gobj)
 
 void func_8007F5CC(HSD_GObj* gobj, s32 arg1)
 {
-    Fighter* fp;
-    HSD_GObj* item;
-    u32 unused[2];
+    Fighter* fp = gobj->user_data;
+    HSD_GObj* item = fp->x1974_heldItem;
 
-    fp = gobj->user_data;
-    item = fp->x1974_heldItem;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     if (item != NULL && fp->x221E_flag.bits.b3 != arg1) {
         if (arg1 == 0) {
             func_8007F578(gobj);
@@ -1665,31 +1717,41 @@ void func_8007F9B4(HSD_GObj* gobj)
 
 void func_8007FA00(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    Vec3* vec;
-    u32 unused[2];
+    Fighter* fp = gobj->user_data;
+    Vec3* vec = &fp->x110_attr.x224;
 
-    fp = gobj->user_data;
-    vec = &fp->x110_attr.x224;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     func_80294EB0(fp->x197C, &vec[1], &vec[0]);
     func_80294E78(fp->x197C, fp->x34_scale.y * vec[2].x);
 }
 
 void func_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
 {
+    Fighter* fp = gobj->user_data;
     Vec3 vec;
-    Fighter* fp;
-    Fighter* fp2;
-    u32 unused[7];
 
-    fp = fp2 = gobj->user_data;
-    if (fp2->x197C != NULL) {
-        fp->x2014 = func_8026B54C(arg1);
-        func_80088148(fp, 0x117, 0x7F, 0x40);
-        func_8007EBAC(fp, 0x10, 0);
-        func_8026A8EC(arg1);
-        return;
+    /// @todo This is an inline.
+    {
+        Fighter* fp2 = fp;
+
+        /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 _[24];
+#endif
+
+        if (fp2->x197C != NULL) {
+            fp->x2014 = func_8026B54C(arg1);
+            func_80088148(fp, 0x117, 0x7F, 0x40);
+            func_8007EBAC(fp, 0x10, 0);
+            func_8026A8EC(arg1);
+            return;
+        }
     }
+
     vec = lbl_803B74A0;
     func_8026BD0C(arg1);
     func_8026ABD8(arg1, &vec, 0);
@@ -1708,7 +1770,11 @@ void func_8007FC7C(HSD_GObj* gobj, f32 arg8)
     HSD_GObj* item_gobj;
     Fighter* fp;
     s32 sp20;
-    u32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
     fp = gobj->user_data;
     sp20 = arg8 * p_ftCommonData->x704;
@@ -1747,7 +1813,11 @@ void func_8007FDA0(HSD_GObj* gobj)
     f32 temp_f1;
     Vec3* temp_r30;
     f32 phi_f31;
-    u32 unused[4];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
 
     fp = gobj->user_data;
     temp_r30 = &fp->x110_attr.x240;
@@ -1764,7 +1834,11 @@ void func_8007FDA0(HSD_GObj* gobj)
 
 void func_8007FE84(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2, f32 arg3)
 {
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     Fighter* fp = gobj->user_data;
     fp->x1980 = item_gobj;
     fp->x2018 = arg2;
@@ -1832,7 +1906,11 @@ void func_80080174(Fighter* fp)
     f32 phi_f2;
     f32 phi_f3;
     Vec3* v;
-    u32 unused[4];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
 
     if (fp->x197C != NULL) {
         func_80294E78(fp->x197C, fp->x34_scale.y * fp->x110_attr.x23C);
@@ -1853,7 +1931,11 @@ void func_8008021C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     Vec2 shift;
     Vec2* result;
-    u32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
     fp->dmg.x18BC = 0;
     fp->dmg.x18B8 = 0;

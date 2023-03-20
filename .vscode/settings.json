@@ -64,5 +64,10 @@
         "editor.insertSpaces": true,
         "editor.tabSize": 4,
         "editor.detectIndentation": false
+    },
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
     }
 }

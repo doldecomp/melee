@@ -7,7 +7,11 @@
 static AISCallback __AIS_Callback;
 static AIDCallback __AID_Callback;
 static u8* __CallbackStack;
+
+#ifdef MWERKS_GEKKO
 static u8* __OldStack;
+#endif
+
 static vs32 __AI_init_flag;
 static OSTime bound_32KHz;
 static OSTime bound_48KHz;
@@ -98,9 +102,8 @@ void AISetDSPSampleRate(u32 rate)
     u8 right;
     u32 sampleRate;
 
-    if (rate == AIGetDSPSampleRate()) {
+    if (rate == AIGetDSPSampleRate())
         return;
-    }
 
     __AIRegs[0] &= ~0x40;
     if (rate == 0) {
@@ -129,9 +132,8 @@ u32 AIGetDSPSampleRate(void)
 
 void AISetStreamSampleRate(u32 rate)
 {
-    if (rate == 1) {
+    if (rate == 1)
         __AI_set_stream_sample_rate(rate);
-    }
 }
 
 static void __AI_set_stream_sample_rate(u32 rate)
@@ -190,9 +192,8 @@ u8 AIGetStreamVolRight(void)
 
 void AIInit(u8* stack)
 {
-    if (__AI_init_flag == true) {
+    if (__AI_init_flag == true)
         return;
-    }
 
     bound_32KHz = OSNanosecondsToTicks(31524);
     bound_48KHz = OSNanosecondsToTicks(42024);
@@ -249,7 +250,6 @@ static void __AIDHandler(__OSInterrupt interrupt, struct OSContext* context)
 }
 
 #ifdef MWERKS_GEKKO
-
 static asm void __AICallbackStackSwitch(register AIDCallback cb)
 { // clang-format off
     fralloc
@@ -277,74 +277,72 @@ static asm void __AICallbackStackSwitch(register AIDCallback cb)
     frfree
     blr
 } // clang-format on
-
 #else
 
 static void __AICallbackStackSwitch(AIDCallback cb)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
+
+static inline void waitForAIRegs(void)
+{
+    u32 temp = __AIRegs[2];
+
+    while (temp == __AIRegs[2])
+        continue;
+}
 
 static void __AI_SRC_INIT(void)
 {
-    OSTime rise32 = 0;
-    OSTime rise48 = 0;
-    OSTime diff = 0;
-    OSTime unused1 = 0;
-    OSTime temp = 0;
-    u32 temp0 = 0;
-    u32 temp1 = 0;
-    u32 done = 0;
-    u32 walking = 0;
-    u32 unused2 = 0;
-    u32 initCnt = 0;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
 
-    walking = 0;
-    initCnt = 0;
-    temp = 0;
+    OSTime rise48 = 0;
+    uint done = false;
+    OSTime temp = 0;
 
     while (!done) {
-        __AIRegs[0] = (__AIRegs[0] & ~0x20) | 0x20;
-        __AIRegs[0] &= ~2;
-        __AIRegs[0] = (__AIRegs[0] & ~1) | 1;
+        OSTime diff;
 
-        temp0 = __AIRegs[2];
+        __AIRegs[0] = (__AIRegs[0] & ~(1 << 5)) | (1 << 5);
+        __AIRegs[0] &= ~(1 << 1);
+        __AIRegs[0] = (__AIRegs[0] & ~(1 << 0)) | (1 << 0);
 
-        while (temp0 == __AIRegs[2]) {
+        waitForAIRegs();
+
+        {
+            /// @todo Probably its own function, but it has two return values
+            ///       (@c rise48 and @c diff).
+            OSTime rise32 = OSGetTime();
+
+            __AIRegs[0] = (__AIRegs[0] & ~(1 << 1)) | (1 << 1);
+            __AIRegs[0] = (__AIRegs[0] & ~(1 << 0)) | (1 << 0);
+
+            waitForAIRegs();
+
+            rise48 = OSGetTime();
+
+            diff = rise48 - rise32;
         }
-        rise32 = OSGetTime();
 
-        __AIRegs[0] = (__AIRegs[0] & ~2) | 2;
-        __AIRegs[0] = (__AIRegs[0] & ~1) | 1;
-
-        temp1 = __AIRegs[2];
-        while (temp1 == __AIRegs[2]) {
-        }
-
-        rise48 = OSGetTime();
-
-        diff = rise48 - rise32;
-        __AIRegs[0] &= ~2;
-        __AIRegs[0] &= ~1;
+        __AIRegs[0] &= ~(1 << 1);
+        __AIRegs[0] &= ~(1 << 0);
 
         if (diff < bound_32KHz - buffer) {
             temp = min_wait;
-            done = 1;
-            ++initCnt;
+            done = true;
         } else if (diff >= bound_32KHz + buffer && diff < bound_48KHz - buffer)
         {
             temp = max_wait;
-            done = 1;
-            ++initCnt;
+            done = true;
         } else {
-            done = 0;
-            walking = 1;
-            ++initCnt;
+            done = false;
         }
     }
 
-    while (rise48 + temp > OSGetTime()) {
-    }
+    while (rise48 + temp > OSGetTime())
+        continue;
 }

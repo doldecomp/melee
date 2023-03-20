@@ -13,7 +13,7 @@ void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     ft_1 = gobj_1->user_data;

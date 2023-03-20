@@ -9,7 +9,7 @@
 extern struct {
     enum_t status;
     u32 xy;
-    s32 unused[0x20 - 0x8];
+    s32 _[0x20 - 0x8];
 } lbl_80402358;
 
 bool SIBusy(void)

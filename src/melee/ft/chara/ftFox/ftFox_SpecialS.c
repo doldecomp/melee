@@ -1,12 +1,12 @@
-#include <melee/ft/chara/ftFox/ftfox.h>
+#include "ftfox.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
 
 // 0x800E9DF8
 // https://decomp.me/scratch/5Qwzg // Create Fox Illusion / Falco Phantasm GFX
@@ -169,7 +169,7 @@ void ftFox_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->foxVars.SpecialS.gravityDelay != 0) {
@@ -266,7 +266,10 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* fighter_gobj)
 // Dash Animation callback
 void ftFox_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
-    s32 filler[6];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[24];
+#endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftFox_SpecialSEnd_Action(fighter_gobj);
@@ -279,7 +282,10 @@ void ftFox_SpecialS_Anim(HSD_GObj* fighter_gobj)
 // Dash Animation callback
 void ftFox_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
-    s32 filler[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftFox_SpecialAirSEnd_Action(fighter_gobj);
@@ -401,8 +407,8 @@ void ftFox_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
     func_8007D60C(fp);
     Fighter_ActionStateChange_800693AC(
         fighter_gobj, AS_FOX_SPECIALAIRS,
-        (FIGHTER_HITSTATUS_COLANIM_PRESERVE | FTFOX_SPECIALS_COLL_FLAG), NULL,
-        fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        (FtStateChange_PreserveColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
+        NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x2208_ftcmd_var2 = 0;
 }
 
@@ -416,8 +422,8 @@ void ftFox_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(
         fighter_gobj, AS_FOX_SPECIALS,
-        (FIGHTER_HITSTATUS_COLANIM_PRESERVE | FTFOX_SPECIALS_COLL_FLAG), NULL,
-        fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        (FtStateChange_PreserveColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
+        NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x2208_ftcmd_var2 = 0;
 }
 
@@ -446,12 +452,14 @@ inline void ftFox_SpecialS_SetVars(HSD_GObj* fighter_gobj)
 // Dash Action State handler
 void ftFox_SpecialS_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 unused[6];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[28];
+#endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALS,
-                                       FIGHTER_RUMBLE_NOUPDATE, NULL, 0.0f,
-                                       1.0f, 0.0f);
+                                       FtStateChange_SkipUpdateRumble, NULL,
+                                       0.0f, 1.0f, 0.0f);
     ftFox_SpecialS_SetVars(fighter_gobj);
 }
 
@@ -460,12 +468,14 @@ void ftFox_SpecialS_Action(HSD_GObj* fighter_gobj)
 // Dash Action State handler
 void ftFox_SpecialAirS_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 unused[8];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[36];
+#endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRS,
-                                       FIGHTER_RUMBLE_NOUPDATE, NULL, 0.0f,
-                                       1.0f, 0.0f);
+                                       FtStateChange_SkipUpdateRumble, NULL,
+                                       0.0f, 1.0f, 0.0f);
     ftFox_SpecialS_SetVars(fighter_gobj);
 }
 
@@ -487,7 +497,7 @@ void ftFox_SpecialAirSEnd_Anim(HSD_GObj* fighter_gobj)
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE,
+        func_80096900(fighter_gobj, 1, 0, true,
                       foxAttrs->x4C_FOX_ILLUSION_FREEFALL_MOBILITY,
                       foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
     }
@@ -515,7 +525,7 @@ void ftFox_SpecialSEnd_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->foxVars.SpecialS.gravityDelay != 0) {
@@ -537,7 +547,7 @@ void ftFox_SpecialAirSEnd_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->foxVars.SpecialS.gravityDelay != 0) {
@@ -556,7 +566,7 @@ void ftFox_SpecialSEnd_Coll(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (func_800827A0(fighter_gobj) == false) {
@@ -574,7 +584,7 @@ void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     int cliffCatchDir;
@@ -612,8 +622,8 @@ void ftFox_SpecialSEnd_Action(HSD_GObj* fighter_gobj)
         foxAttrs->x34_FOX_ILLUSION_GROUND_END_VEL_X * fp->facing_dir;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALS_END,
-                                       FIGHTER_RUMBLE_NOUPDATE, NULL, 0.0f,
-                                       1.0f, 0.0f);
+                                       FtStateChange_SkipUpdateRumble, NULL,
+                                       0.0f, 1.0f, 0.0f);
     ftFox_SpecialSEnd_SetVars(fighter_gobj);
 }
 
@@ -629,7 +639,7 @@ void ftFox_SpecialAirSEnd_Action(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.y = 0.0f;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRS_END,
-                                       FIGHTER_RUMBLE_NOUPDATE, NULL, 0.0f,
-                                       1.0f, 0.0f);
+                                       FtStateChange_SkipUpdateRumble, NULL,
+                                       0.0f, 1.0f, 0.0f);
     ftFox_SpecialSEnd_SetVars(fighter_gobj);
 }

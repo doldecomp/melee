@@ -18,9 +18,9 @@
 extern StageInfo stage_info;
 
 static StageCallbacks lbl_803E26F0[4] = {
-    { NULL, NULL, NULL, NULL, FLAGS_ZERO },
-    { func_801E31C0, func_801E3224, func_801E322C, func_801E3230, FLAGS_ZERO },
-    { func_801E3370, func_801E33D8, func_801E33E0, func_801E3414, FLAGS_ZERO },
+    { NULL, NULL, NULL, NULL, 0 },
+    { func_801E31C0, func_801E3224, func_801E322C, func_801E3230, 0 },
+    { func_801E3370, func_801E33D8, func_801E33E0, func_801E3414, 0 },
     { func_801E3234, func_801E332C, func_801E3334, func_801E336C,
       (1 << 30) | (1 << 31) },
 };
@@ -48,7 +48,7 @@ StageData lbl_803E274C = {
     0,
 };
 
-static void func_801E302C(bool unused) {}
+static void func_801E302C(bool _) {}
 
 void func_801E3030(void)
 {
@@ -110,7 +110,7 @@ void func_801E31C0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -174,7 +174,7 @@ void func_801E3370(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_801C2ED0(gobj->hsd_obj, data->x14);
@@ -221,7 +221,7 @@ void func_801E3418(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     UnkUserData2* gp = gobj->user_data;
@@ -300,7 +300,7 @@ static bool func_801E36D0(bool arg0)
     return false;
 }
 
-bool func_801E36D8(Vec3* a, int unused, HSD_JObj* joint)
+bool func_801E36D8(Vec3* a, int _, HSD_JObj* joint)
 {
     Vec3 b;
     func_8000B1CC(joint, NULL, &b);
@@ -313,7 +313,7 @@ bool func_801E36D8(Vec3* a, int unused, HSD_JObj* joint)
 }
 
 #ifdef MUST_MATCH
-static u32 unused[] = {
+static u32 _[] = {
     0xC3920000, 0x42D20000, 0xC3920000, 0x42960000, 0xC3920000, 0x42480000,
     0x43980000, 0x42DC0000, 0x43980000, 0x42B40000, 0,          0,
 };
