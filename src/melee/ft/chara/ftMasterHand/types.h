@@ -2,10 +2,10 @@
 #define MELEE_FT_CHARA_FTMASTERHAND_TYPES_H
 
 #include "forward.h"
-#include <baselib/forward.h>
-#include <platform.h>
 
+#include <platform.h>
 #include <dolphin/mtx/types.h>
+#include <baselib/forward.h>
 
 struct ftMasterHand_SpecialAttrs {
     s32 x0;

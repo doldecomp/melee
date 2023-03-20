@@ -1,8 +1,7 @@
-#include <dolphin/card/CARDOpen.h>
-
 #include <cstring.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDOpen.h>
 #include <dolphin/os/OSExi.h>
 
 extern DVDDiskID __CARDDiskNone;

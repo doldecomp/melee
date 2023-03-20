@@ -1,8 +1,8 @@
 #ifndef _ftsandbag_h_
 #define _ftsandbag_h_
 
-#include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
 
 extern ActionState as_table_sandbag[];
 extern char lbl_803D39B8[];

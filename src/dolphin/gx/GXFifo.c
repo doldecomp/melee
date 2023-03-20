@@ -1,4 +1,5 @@
 #include "stddef.h"
+
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/os/OSInterrupt.h>

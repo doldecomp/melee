@@ -1,13 +1,12 @@
 #ifndef _ftluigi_h_
 #define _ftluigi_h_
 
-#include <melee/ft/ftcommon.h>
-#include <melee/lb/lbvector.h>
-
 #include <common_structs.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
 #include <melee/it/item.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbvector.h>
 
 typedef enum ftLuigiAction {
     AS_LUIGI_SPECIALN = ASID_MAX,

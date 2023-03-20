@@ -1,9 +1,8 @@
-#include <dolphin/gx/GXGeometry.h>
-
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__types.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXBump.h>
+#include <dolphin/gx/GXGeometry.h>
 #include <dolphin/gx/GXTexture.h>
 
 static void __GXSetGenMode(void);

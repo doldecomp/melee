@@ -1,10 +1,9 @@
-#include <dolphin/os/OSRtc.h>
-
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSRtc.h>
 
 #define RTC_CMD_READ 0x20000000
 #define RTC_CMD_WRITE 0xA0000000

@@ -7,6 +7,7 @@
 #include "ftcoll.h"
 #include "ftlib.h"
 #include "ftparts.h"
+#include "text_4.h"
 
 #include "ef/eflib.h"
 #include "gm/code_801601C4.h"
@@ -17,10 +18,9 @@
 #include "lb/lbunknown_003.h"
 #include "mp/mplib.h"
 #include "pl/pl_unknown_001.h"
-#include "text_4.h"
 
-#include <baselib/rumble.h>
 #include <dolphin/os/os.h>
+#include <baselib/rumble.h>
 
 const Vec3 lbl_803B74A0 = { 0 };
 

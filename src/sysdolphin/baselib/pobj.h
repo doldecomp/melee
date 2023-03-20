@@ -6,8 +6,8 @@
 #include "baselib/forward.h"
 #include "baselib/object.h"
 
-#include <dolphin/gx/GXEnum.h>
 #include <platform.h>
+#include <dolphin/gx/GXEnum.h>
 
 struct unk_struct_pobj {
     u32 data[8];

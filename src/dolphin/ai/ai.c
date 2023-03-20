@@ -1,8 +1,7 @@
+#include <placeholder.h>
 #include <dolphin/ai/ai.h>
-
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/OSTime.h>
-#include <placeholder.h>
 
 static AISCallback __AIS_Callback;
 static AIDCallback __AID_Callback;

@@ -1,10 +1,9 @@
-#include <dolphin/os/OSContext.h>
-
+#include <placeholder.h>
 #include <dolphin/db/db.h>
 #include <dolphin/os/os.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <placeholder.h>
 
 #ifdef MWERKS_GEKKO
 asm void __OSLoadFPUContext(u32 _, register OSContext* fpuctx)

@@ -1,6 +1,5 @@
-#include <MSL/math.h>
-
 #include <MetroTRK/intrinsics.h>
+#include <MSL/math.h>
 
 const double lbl_804DE190 = 1.8014398509481984e+16;
 

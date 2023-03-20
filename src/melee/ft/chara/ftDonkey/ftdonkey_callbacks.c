@@ -1,5 +1,3 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey_callbacks.h>
-
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey1.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey4.h>
@@ -8,6 +6,7 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey7.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey8.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey9.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_callbacks.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialLw.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialN.h>

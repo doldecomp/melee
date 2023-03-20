@@ -1,9 +1,5 @@
 #include "gr/ground.h"
 
-#include "cm/camera.h"
-#include "ft/ft_unknown_006.h"
-#include "ft/ftlib.h"
-#include "gm/code_801601C4.h"
 #include "grcorneria.h"
 #include "grdatfiles.h"
 #include "grdisplay.h"
@@ -13,6 +9,13 @@
 #include "groldkongo.h"
 #include "grstadium.h"
 #include "grzebes.h"
+#include "stage.h"
+#include "text_4.h"
+
+#include "cm/camera.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftlib.h"
+#include "gm/code_801601C4.h"
 #include "it/code_80266F3C.h"
 #include "it/code_8027CF30.h"
 #include "it/item.h"
@@ -25,8 +28,12 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
-#include "stage.h"
-#include "text_4.h"
+
+#include <placeholder.h>
+#include <trigf.h>
+#include <dolphin/mtx.h>
+#include <dolphin/mtx/vec.h>
+#include <dolphin/os/os.h>
 #include <baselib/fog.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -39,11 +46,6 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 #include <baselib/wobj.h>
-#include <dolphin/mtx.h>
-#include <dolphin/mtx/vec.h>
-#include <dolphin/os/os.h>
-#include <placeholder.h>
-#include <trigf.h>
 
 StageInfo stage_info;
 

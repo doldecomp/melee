@@ -5,8 +5,8 @@
 
 #include "ft/fighter.h"
 
-#include <baselib/gobj.h>
 #include <platform.h>
+#include <baselib/gobj.h>
 
 extern ActionState as_table_captain[];
 extern char lbl_803C7598[];

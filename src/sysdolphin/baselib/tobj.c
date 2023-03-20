@@ -3,8 +3,9 @@
 #include "aobj.h"
 #include "memory.h"
 #include "mtx.h"
-#include <dolphin/mtx.h>
+
 #include <math.h>
+#include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 
 extern void TObjInfoInit(void);

@@ -1,9 +1,9 @@
 #ifndef _ftmars_h_
 #define _ftmars_h_
 
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
 #include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
 
 extern ActionState as_table_mars[];
 extern char lbl_803CF820[];

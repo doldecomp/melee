@@ -1,9 +1,8 @@
-#include "ftdata.h"
-
-#include "types.h"
-
 #include "forward.h"
 #include "ft_unknown_006.h"
+#include "ftdata.h"
+#include "types.h"
+
 #include "ftCaptain/ftCaptain.h"
 #include "ftCaptain/ftCaptain_SpecialHi.h"
 #include "ftCaptain/ftCaptain_SpecialLw.h"

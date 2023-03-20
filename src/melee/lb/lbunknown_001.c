@@ -1,8 +1,5 @@
-#include <melee/lb/lbunknown_001.h>
-
-#include <dolphin/mtx/mtxvec.h>
-#include <melee/sc/scene.h>
 #include <placeholder.h>
+#include <dolphin/mtx/mtxvec.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -11,6 +8,8 @@
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/quatlib.h>
 #include <sysdolphin/baselib/robj.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/sc/scene.h>
 
 static s32 lbl_803B9FC0[] = { 14, 14, 14, 14, 2, 4, 6, 0 };
 static s32 lbl_803B9FE0[] = { 12, 13, 14, 15 };

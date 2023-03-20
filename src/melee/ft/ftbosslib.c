@@ -9,8 +9,8 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
 #include <dolphin/os/os.h>
+#include <baselib/gobj.h>
 
 typedef enum {
     Gm_PKind_Human,

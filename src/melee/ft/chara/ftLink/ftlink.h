@@ -1,10 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTLINK_FTLINK_H
 #define MELEE_FT_CHARA_FTLINK_FTLINK_H
 
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
 
 typedef struct _ftLinkAttributes {
     s32 x0;

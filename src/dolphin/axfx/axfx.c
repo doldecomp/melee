@@ -1,5 +1,4 @@
 #include <dolphin/axfx/axfx.h>
-
 #include <dolphin/os/OSAlloc.h>
 
 any_t AXFXAllocFunction(size_t);

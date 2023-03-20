@@ -1,12 +1,11 @@
 #ifndef _ftMewTwo_h_
 #define _ftMewTwo_h_
 
-#include <melee/ft/ftcommon.h>
-#include <melee/lb/lbvector.h>
-
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
 #include <melee/it/item.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbvector.h>
 
 typedef enum ftMewtwoAction {
     AS_MEWTWO_SPECIALN_START = ASID_MAX,

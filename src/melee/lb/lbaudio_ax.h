@@ -1,8 +1,8 @@
 #ifndef MELEE_LB_LBAUDIO_AX_H
 #define MELEE_LB_LBAUDIO_AX_H
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 /// @todo Create an @c enum for SFX IDs.
 #define SFX_NONE -1

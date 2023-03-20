@@ -2,7 +2,9 @@
 
 #include "fighter.h"
 #include "ft_unknown_006.h"
+
 #include "mp/mplib.h"
+
 #include <baselib/gobj.h>
 
 static int const max_input_frames = 254;

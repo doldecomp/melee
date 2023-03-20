@@ -1,6 +1,5 @@
-#include <sysdolphin/baselib/gobj.h>
-
 #include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>

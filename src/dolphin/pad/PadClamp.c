@@ -1,6 +1,5 @@
-#include <dolphin/pad/PadClamp.h>
-
 #include <dolphin/pad/Pad.h>
+#include <dolphin/pad/PadClamp.h>
 #include <Runtime/platform.h>
 
 typedef struct PADClampRegion {

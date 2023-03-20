@@ -1,5 +1,4 @@
 #include <melee/ft/chara/ftSeak/ftSeak_Init.h>
-
 #include <melee/ft/chara/ftSeak/ftSeak_SpecialLw.h>
 #include <melee/ft/chara/ftSeak/ftSeak_SpecialN.h>
 #include <melee/ft/chara/ftSeak/ftSeak_SpecialS.h>

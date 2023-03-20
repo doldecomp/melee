@@ -1,9 +1,9 @@
 #include "lobj.h"
 
+#include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
-#include <placeholder.h>
 
 void LObjInfoInit(void);
 

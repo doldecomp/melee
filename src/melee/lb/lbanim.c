@@ -1,5 +1,5 @@
-#include <melee/lb/lbanim.h>
 #include <sysdolphin/baselib/aobj.h>
+#include <melee/lb/lbanim.h>
 
 /* 0001B140 */ extern unk_t local_8001E560(unk_t, s8 arg1);
 /* 0001B1EC */ extern unk_t local_8001E60C(unk_t, s8 arg1);

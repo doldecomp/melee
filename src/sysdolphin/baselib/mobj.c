@@ -5,8 +5,9 @@
 #include "state.h"
 #include "tev.h"
 #include "texp.h"
-#include <dolphin/os/os.h>
+
 #include <string.h>
+#include <dolphin/os/os.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_MObj* current_mobj;

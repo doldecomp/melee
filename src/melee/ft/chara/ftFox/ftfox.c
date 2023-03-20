@@ -1,6 +1,4 @@
 #include <melee/ft/chara/ftFox/ftfox.h>
-
-#include <melee/ft/chara/ftFox/ftfox.h>
 #include <melee/ft/chara/ftFox/ftFox_SpecialN.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>

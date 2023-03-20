@@ -2,8 +2,8 @@
 #define MELEE_GR_GRTFALCO_H
 
 #include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
+#include <Runtime/platform.h>
 
 void lbl_80220984(HSD_GObj*);
 bool lbl_802209B0(HSD_GObj*);

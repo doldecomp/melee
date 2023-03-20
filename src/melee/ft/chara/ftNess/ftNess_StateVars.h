@@ -1,8 +1,8 @@
 #ifndef _FTNESS_STATEVARS_H_
 #define _FTNESS_STATEVARS_H_
 
-#include <dolphin/mtx/types.h>
 #include <platform.h>
+#include <dolphin/mtx/types.h>
 
 union ftNess_StateVars {
     struct ftNess_YoyoVars {

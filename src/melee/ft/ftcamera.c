@@ -1,6 +1,5 @@
-#include <melee/ft/ftcamera.h>
-
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftcamera.h>
 #include <melee/ft/ftlib.h>
 
 struct UnkFloat6_Camera {

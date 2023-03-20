@@ -1,7 +1,6 @@
-#include <dolphin/gx/GXLight.h>
-
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/GX_unknown_001/__GX_unknown_001.h>
+#include <dolphin/gx/GXLight.h>
 #include <MSL/trigf.h>
 
 void GXInitLightAttn(GXLightObj* light, f32 aa, f32 ab, f32 ac, f32 ka, f32 kb,

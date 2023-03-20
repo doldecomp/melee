@@ -1,5 +1,6 @@
 #include "ftMario_SpecialN.h"
 
+#include "forward.h"
 #include "ftmario.h"
 
 #include "ef/efsync.h"

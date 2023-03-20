@@ -1,6 +1,5 @@
-#include <dolphin/dvd/dvd.h>
-
 #include <cstring.h>
+#include <dolphin/dvd/dvd.h>
 #include <dolphin/dvd/dvderror.h>
 #include <dolphin/dvd/dvdfs.h>
 #include <dolphin/dvd/dvdlow.h>

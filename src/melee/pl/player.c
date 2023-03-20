@@ -9,8 +9,8 @@
 #include "lb/lbarchive.h"
 #include "pl/pl_unknown_001.h"
 
-#include <baselib/gobjplink.h>
 #include <dolphin/os/os.h>
+#include <baselib/gobjplink.h>
 
 typedef struct _ftMapping {
     s8 internal_id;

@@ -1,12 +1,11 @@
-#include <melee/gr/grtcaptain.h>
-
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grtcaptain.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E8608[] = {
     { lbl_8021FDEC, lbl_8021FE18, lbl_8021FE20, lbl_8021FE24, 0 },

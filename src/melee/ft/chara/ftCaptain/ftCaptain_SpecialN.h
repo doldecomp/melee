@@ -5,8 +5,8 @@
 
 #include "ft/forward.h"
 
-#include <baselib/forward.h>
 #include <platform.h>
+#include <baselib/forward.h>
 
 f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp);
 void ftCaptain_SpecialAirN_Anim(HSD_GObj* fighter_gobj);

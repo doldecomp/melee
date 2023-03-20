@@ -1,6 +1,5 @@
-#include <melee/ft/chara/ftSamus/ftsamus6.h>
-
 #include <melee/ft/chara/ftSamus/ftsamus.h>
+#include <melee/ft/chara/ftSamus/ftsamus6.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>

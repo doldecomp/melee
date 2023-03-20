@@ -1,4 +1,7 @@
+#include "forward.h"
 #include "ftmario.h"
+#include "inlines.h"
+#include "types.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
@@ -22,7 +25,7 @@ void ftMario_SpecialHi_StartAction(HSD_GObj* gobj)
 void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftMarioAttributes* sa;
+    ftMario_DatAttrs* sa;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -30,7 +33,7 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
 #endif
 
     fp = GET_FIGHTER(gobj);
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
+    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
     fp->x80_self_vel.y = 0.0f;
@@ -45,10 +48,10 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
 void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftMarioAttributes* sa;
+    ftMario_DatAttrs* sa;
 
     fp = GET_FIGHTER(gobj);
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
+    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80096900(gobj, 0, 1, 0, sa->x18_MARIO_SUPERJUMP_FREEFALL_MOBILITY,
                       sa->x1C_MARIO_SUPERJUMP_LANDING_LAG);
@@ -75,7 +78,7 @@ void ftMario_SpecialAirHi_Anim(HSD_GObj* gobj)
 inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftMarioAttributes* sa;
+    ftMario_DatAttrs* sa;
 
     f32 inputStickangle, lstick_x;
     f32 tmp_expr;
@@ -84,7 +87,7 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
     s32 throwflag_flag;
     fp = GET_FIGHTER(gobj);
 
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
+    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
 
     lstick_x = abs(fp->input.x620_lstick_x);
 
@@ -158,7 +161,7 @@ void ftMario_SpecialHi_Phys(HSD_GObj* gobj)
 void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftMarioAttributes* sa;
+    ftMario_DatAttrs* sa;
     struct attr* attr_ptr;
 
     fp = getFighter(gobj);
@@ -185,11 +188,11 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
 void ftMario_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftMarioAttributes* sa;
+    ftMario_DatAttrs* sa;
 
     fp = GET_FIGHTER(gobj);
 
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
+    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
     func_800D5CB0(gobj, 0, sa->x1C_MARIO_SUPERJUMP_LANDING_LAG);
 }
 

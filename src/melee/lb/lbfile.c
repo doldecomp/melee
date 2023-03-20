@@ -1,16 +1,15 @@
-#include <melee/lb/lbfile.h>
-
+#include <string.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbheap.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbunknown_004.h>
-#include <string.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
+#include <melee/lb/lbdvd.h>
+#include <melee/lb/lbfile.h>
+#include <melee/lb/lbheap.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/lb/lbunknown_004.h>
 
 static char lbl_803BA508[] = __FILE__;
 

@@ -3,18 +3,17 @@
 #include "ftCaptain.h"
 #include "types.h"
 
-#include "ft/types.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
+#include "ft/types.h"
 #include "it/itkind.h"
 
-#include <baselib/forward.h>
 #include <dolphin/mtx/types.h>
+#include <baselib/forward.h>
 
 void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
 {

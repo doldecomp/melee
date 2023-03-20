@@ -1,13 +1,12 @@
-#include <melee/gr/grtmars.h>
-
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grtmars.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 
 extern StageInfo stage_info;
 

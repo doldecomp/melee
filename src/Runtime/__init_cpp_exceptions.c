@@ -1,6 +1,5 @@
-#include <Runtime/__init_cpp_exceptions.h>
-
 #include <placeholder.h>
+#include <Runtime/__init_cpp_exceptions.h>
 #include <Runtime/Gecko_ExceptionPPC.h>
 #include <Runtime/platform.h>
 

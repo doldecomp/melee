@@ -1,6 +1,5 @@
-#include <melee/ft/chara/ftLuigi/ftluigi.h>
-
 #include <melee/ef/efsync.h>
+#include <melee/ft/chara/ftLuigi/ftluigi.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>

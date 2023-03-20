@@ -17,8 +17,8 @@
 #include "it/item2.h"
 #include "mp/mplib.h"
 
-#include <baselib/gobj.h>
 #include <trigf.h>
+#include <baselib/gobj.h>
 
 ActionState as_table_purin[] = {
     { 295, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,

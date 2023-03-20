@@ -1,10 +1,9 @@
-#include <dolphin/gx/GXMisc.h>
-
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/gx/__GXFifo.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/forward.h>
 #include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXMisc.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>

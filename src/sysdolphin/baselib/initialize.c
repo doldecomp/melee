@@ -1,17 +1,16 @@
-#include <sysdolphin/baselib/initialize.h>
-
+#include <stdarg.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/vi/vi.h>
-#include <stdarg.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/id.h>
+#include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/leak.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mtx.h>

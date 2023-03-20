@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_5_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_5_H
 
-#include <baselib/forward.h>
-#include <dolphin/mtx/types.h>
 #include <platform.h>
+#include <dolphin/mtx/types.h>
+#include <baselib/forward.h>
 
 /// Probably isCrazyHandLoaded func.
 u32 lbl_80151428(Vec3* vec);

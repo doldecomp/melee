@@ -1,5 +1,4 @@
 #include <dolphin/ar/ar.h>
-
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/os.h>
 #include <Runtime/platform.h>

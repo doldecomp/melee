@@ -1,9 +1,9 @@
 #ifndef _lbrefract_h_
 #define _lbrefract_h_
 
+#include <string.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/os/OSCache.h>
-#include <string.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/pobj.h>

@@ -1,7 +1,6 @@
-#include <dolphin/os/OSTime.h>
-
-#include <dolphin/os/OSInterrupt.h>
 #include <placeholder.h>
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSTime.h>
 
 #ifdef MWERKS_GEKKO
 

@@ -1,9 +1,8 @@
-#include <melee/gr/grtness.h>
-
 #include <dolphin/os/os.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grtness.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lbunknown_003.h>

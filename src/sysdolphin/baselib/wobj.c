@@ -1,10 +1,9 @@
-#include <sysdolphin/baselib/wobj.h>
-
 #include <dolphin/mtx/mtxvec.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/robj.h>
 #include <sysdolphin/baselib/spline.h>
+#include <sysdolphin/baselib/wobj.h>
 
 static void WObjInfoInit(void);
 

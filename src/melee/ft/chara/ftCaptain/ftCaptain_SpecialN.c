@@ -3,15 +3,15 @@
 #include "ftCaptain.h"
 #include "types.h"
 
-#include "ft/types.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
+#include "ft/types.h"
 #include "lb/lbunknown_003.h"
+
 #include <trigf.h>
 
 /// Create Aesthetic Wind Effect for Warlock Punch

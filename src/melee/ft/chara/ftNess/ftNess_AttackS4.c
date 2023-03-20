@@ -1,6 +1,5 @@
-#include <melee/ft/chara/ftNess/ftNess_AttackS4.h>
-
 #include <melee/ft/chara/ftNess/ftNess.h>
+#include <melee/ft/chara/ftNess/ftNess_AttackS4.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>

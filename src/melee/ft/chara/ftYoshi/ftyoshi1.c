@@ -11,8 +11,8 @@
 #include "ft/types.h"
 #include "it/itkind.h"
 
-#include <dolphin/os/os.h>
 #include <placeholder.h>
+#include <dolphin/os/os.h>
 
 ActionState as_table_yoshi[] = {
     { 37, 0x00100000, 0x01000000, lbl_8012C030, lbl_8012C114, lbl_8012C194,

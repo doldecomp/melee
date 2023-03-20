@@ -1,7 +1,6 @@
-#include <melee/cm/cmsnap.h>
-
-#include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
+#include <melee/cm/cmsnap.h>
+#include <melee/lb/lbunknown_003.h>
 
 typedef struct {
     int unk0;

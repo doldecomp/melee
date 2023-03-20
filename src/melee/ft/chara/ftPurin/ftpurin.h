@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTPURIN_FTPURIN_H
 
 #include "melee/ft/forward.h"
+
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/types.h>
 #include <melee/lb/lbvector.h>

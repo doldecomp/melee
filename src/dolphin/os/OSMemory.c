@@ -1,9 +1,8 @@
-#include <dolphin/os/OSMemory.h>
-
+#include <placeholder.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSReset.h>
-#include <placeholder.h>
 
 extern volatile u32 Mem_Size AT_ADDRESS(0x80000028);
 extern volatile u32 Simulated_Mem AT_ADDRESS(0x800000F0);

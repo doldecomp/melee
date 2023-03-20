@@ -1,10 +1,9 @@
-#include <dolphin/os/OSSerial.h>
-
+#include <placeholder.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSRtc.h>
+#include <dolphin/os/OSSerial.h>
 #include <dolphin/os/OSTime.h>
-#include <placeholder.h>
 
 extern struct {
     enum_t status;

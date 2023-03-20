@@ -1,14 +1,13 @@
-#include <dolphin/os/OSReset.h>
-
+#include <placeholder.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSAudioSystem.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSReboot.h>
+#include <dolphin/os/OSReset.h>
 #include <dolphin/os/OSRtc.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/pad/Pad.h>
-#include <placeholder.h>
 #include <Runtime/__mem.h>
 
 typedef struct OSResetQueue {

@@ -1,6 +1,5 @@
-#include <dolphin/dvd/dvdqueue.h>
-
 #include <dolphin/dvd/dvd.h>
+#include <dolphin/dvd/dvdqueue.h>
 #include <dolphin/dvd/forward.h>
 #include <dolphin/os/OSInterrupt.h>
 

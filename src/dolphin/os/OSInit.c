@@ -2,8 +2,8 @@
  * @todo Should be called @c OS.c.
  */
 #include "stddef.h"
-#include <dolphin/os/OSInit.h>
 
+#include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db/db.h>
 #include <dolphin/dvd/dvd.h>
@@ -15,6 +15,7 @@
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSExi.h>
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSLink.h>
 #include <dolphin/os/OSMemory.h>
@@ -26,7 +27,6 @@
 #include <dolphin/os/OSTime.h>
 #include <MetroTRK/dolphin_trk.h>
 #include <MetroTRK/intrinsics.h>
-#include <placeholder.h>
 #include <Runtime/__mem.h>
 #include <Runtime/platform.h>
 

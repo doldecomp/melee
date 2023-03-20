@@ -1,6 +1,6 @@
 #include "sysdolphin/baselib/forward.h"
-#include <sysdolphin/baselib/fobj.h>
 
+#include <sysdolphin/baselib/fobj.h>
 #include <sysdolphin/baselib/spline.h>
 
 HSD_ObjAllocData fobj_alloc_data;

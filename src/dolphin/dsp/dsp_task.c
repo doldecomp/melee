@@ -1,8 +1,8 @@
 #include "dsp.h"
 
-#include <dolphin/os/OSInterrupt.h>
 #include <platform.h>
 #include <stddef.h>
+#include <dolphin/os/OSInterrupt.h>
 
 DSPTaskInfo* __DSP_curr_task;
 DSPTaskInfo* __DSP_first_task;

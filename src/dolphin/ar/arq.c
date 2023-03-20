@@ -1,6 +1,5 @@
-#include <dolphin/ar/arq.h>
-
 #include <dolphin/ar/ar.h>
+#include <dolphin/ar/arq.h>
 #include <dolphin/os/OSInterrupt.h>
 
 static ARQRequest* __ARQRequestQueueHi;

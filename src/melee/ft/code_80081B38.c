@@ -1,5 +1,5 @@
+#include <placeholder.h>
 #include <melee/ft/code_80081B38.h>
-
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcommon.h>
@@ -7,7 +7,6 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <MSL/trigf.h>
-#include <placeholder.h>
 #include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO

@@ -7,8 +7,8 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftparts.h"
 
-#include <baselib/gobjproc.h>
 #include <trigf.h>
+#include <baselib/gobjproc.h>
 
 /// @todo Move elsewhere.
 #define HALF_PI32 (1.5707963705062866f)

@@ -1,12 +1,11 @@
 #ifndef MELEE_FT_TYPES_H
 #define MELEE_FT_TYPES_H
 
-#include "common_structs.h"
 #include "ft/ftanim.h"
 #include "ftCaptain/types.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
-#include "ftFox/ftFox_StateVars.h"
+#include "ftFox/types.h"
 #include "ftGameWatch/ftGameWatch_StateVars.h"
 #include "ftKoopa/types.h"
 #include "ftLuigi/ftLuigi_StateVars.h"
@@ -26,6 +25,10 @@
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
+#include <common_structs.h>
+#include <math.h>
+#include <platform.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
@@ -35,9 +38,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <dolphin/mtx/types.h>
-#include <math.h>
-#include <platform.h>
 
 struct RGBA {
     u8 r;

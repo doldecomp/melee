@@ -1,8 +1,8 @@
 #ifndef MELEE_LB_LBUNKNOWN_003_H
 #define MELEE_LB_LBUNKNOWN_003_H
 
-#include <melee/lb/types.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/lb/types.h>
 
 unk_t func_80014638(void);
 void func_8001044C(void*, void*, s32, f32, s32, s32, s32, s32);

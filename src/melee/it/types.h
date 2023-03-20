@@ -2,8 +2,17 @@
 #define MELEE_IT_TYPES_H
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
 #include <math.h>
+#include <dolphin/mtx/types.h>
+#include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ft/types.h>
 #include <melee/gr/stage.h>
 #include <melee/it/forward.h>
@@ -14,15 +23,6 @@
 #include <melee/it/itYoyo.h>
 #include <melee/pl/player.h>
 #include <Runtime/platform.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/random.h>
 
 /// @todo Size unknown.
 struct ItemStateTable {

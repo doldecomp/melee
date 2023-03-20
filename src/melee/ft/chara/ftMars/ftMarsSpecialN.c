@@ -1,6 +1,5 @@
-#include <melee/ft/chara/ftMars/ftMars.h>
-
 #include <melee/ef/eflib.h>
+#include <melee/ft/chara/ftMars/ftMars.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>

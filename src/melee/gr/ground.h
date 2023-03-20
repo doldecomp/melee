@@ -1,9 +1,9 @@
 #ifndef _ground_h_
 #define _ground_h_
 
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/types.h>
-#include <sysdolphin/baselib/gobj.h>
 
 extern StageInfo stage_info;
 

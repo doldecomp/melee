@@ -1,9 +1,9 @@
 #ifndef _grtmars_h_
 #define _grtmars_h_
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <Runtime/platform.h>
 
 static void GrTMars_80221EF4(int);
 static void GrTMars_80221EF8(void);

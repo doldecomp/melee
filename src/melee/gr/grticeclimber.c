@@ -1,19 +1,18 @@
-#include <melee/gr/grticeclimber.h>
-
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/grmaterial.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grticeclimber.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/gr/types.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
 
 /* static */ StageCallbacks lbl_803E8A98[4] = {
     {

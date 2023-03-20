@@ -1,6 +1,5 @@
-#include <dolphin/os/init/__start.h>
-
 #include <placeholder.h>
+#include <dolphin/os/init/__start.h>
 
 #define RESET_BUTTON_MASK 0x0EEF
 

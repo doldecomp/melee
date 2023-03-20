@@ -1,9 +1,8 @@
-#include <dolphin/os/OSThread.h>
-
+#include <placeholder.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMutex.h>
-#include <placeholder.h>
+#include <dolphin/os/OSThread.h>
 
 extern s32 Reschedule;
 extern u32 RunQueueBits;

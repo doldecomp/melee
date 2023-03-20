@@ -2,6 +2,7 @@
 #define DOLPHIN_OS_INIT___START_H
 
 #include "dolphin/os/OSReset.h"
+
 #include <Runtime/__mem.h>
 #include <Runtime/platform.h>
 

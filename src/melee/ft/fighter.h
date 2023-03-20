@@ -1,18 +1,19 @@
 #ifndef _fighter_h_
 #define _fighter_h_
 
+#include "ft/ftanim.h"
+#include "ft/inlines.h"
+#include "ft/types.h"
+#include "gr/stage.h"
+#include "it/item2.h"
+#include "lb/lbcollision.h"
+#include "lb/lbrefract.h"
+#include "pl/player.h"
+
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
 #include <math.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-#include <melee/gr/stage.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbcollision.h>
-#include <melee/lb/lbrefract.h>
-#include <melee/pl/player.h>
-#include <Runtime/platform.h>
+#include <platform.h>
+#include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>

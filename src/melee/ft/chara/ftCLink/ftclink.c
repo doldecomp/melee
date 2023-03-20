@@ -1,6 +1,4 @@
 #include <melee/ft/chara/ftCLink/ftclink.h>
-
-#include <melee/ft/chara/ftCLink/ftclink.h>
 #include <melee/ft/chara/ftLink/ftlink.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>

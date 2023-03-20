@@ -1,14 +1,17 @@
-#include <melee/ft/chara/ftMario/ftmario.h>
+#include "ftMario/ftmario.h"
 
-#include <melee/ft/chara/ftMario/ftmario2.h>
-#include <melee/ft/chara/ftMario/ftMario_SpecialN.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/itkind.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/random.h>
+#include "ftmario2.h"
+#include "ftMario_SpecialN.h"
+#include "types.h"
+
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "it/itkind.h"
+
+#include <platform.h>
+#include <baselib/random.h>
 
 ActionState as_table_mario[] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
@@ -56,23 +59,23 @@ void ftMario_OnDeath(HSD_GObj* gobj)
 
 void ftMario_OnLoadForDrMario(Fighter* fp)
 {
-    PUSH_ATTRS(fp, ftMarioAttributes);
+    PUSH_ATTRS(fp, ftMario_DatAttrs);
 }
 
 void ftMario_OnLoad(HSD_GObj* gobj)
 {
     ftData* ftDataInfo;
     void** items;
-    ftMarioAttributes* sa;
+    ftMario_DatAttrs* sa;
     Fighter* fp = gobj->user_data;
     ftDataInfo = fp->x10C_ftData;
     items = ftDataInfo->x48_items;
 
     fp->x2224_flag.bits.b7 = 1;
 
-    PUSH_ATTRS(fp, ftMarioAttributes);
+    PUSH_ATTRS(fp, ftMario_DatAttrs);
 
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
+    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
 
     func_8026B3F8(items[0], It_Kind_Mario_Fire);
     func_8026B3F8(items[2], sa->x14_MARIO_CAPE_IT_KIND);
@@ -106,7 +109,7 @@ void ftMario_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftMario_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftMarioAttributes);
+    COPY_ATTRS(gobj, ftMario_DatAttrs);
 }
 
 void ftMario_OnKnockbackEnter(HSD_GObj* gobj)

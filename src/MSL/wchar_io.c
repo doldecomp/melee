@@ -1,6 +1,5 @@
-#include <MSL/wchar_io.h>
-
 #include <stdio.h>
+#include <MSL/wchar_io.h>
 
 int fwide(FILE* stream, int mode)
 {

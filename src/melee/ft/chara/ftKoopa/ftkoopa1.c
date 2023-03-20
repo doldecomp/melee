@@ -1,6 +1,4 @@
 #include <melee/ft/chara/ftKoopa/ftkoopa.h>
-
-#include <melee/ft/chara/ftKoopa/ftkoopa.h>
 #include <melee/ft/forward.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>

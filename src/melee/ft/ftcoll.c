@@ -1,9 +1,15 @@
-#include <melee/ft/ftcoll.h>
-
 #include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
-#include <math.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
@@ -22,14 +28,6 @@
 #include <MSL/trigf.h>
 #include <Runtime/platform.h>
 #include <Runtime/runtime.h>
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 /// Combo Count Logic
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID)

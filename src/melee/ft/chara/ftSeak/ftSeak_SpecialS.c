@@ -1,9 +1,8 @@
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialS.h>
-
 #include <common_structs.h>
 #include <math.h>
 #include <melee/ft/chara/ftNess/ftNess.h>
 #include <melee/ft/chara/ftSeak/ftSeak_Init.h>
+#include <melee/ft/chara/ftSeak/ftSeak_SpecialS.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>

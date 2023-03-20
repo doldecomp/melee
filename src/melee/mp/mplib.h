@@ -2,6 +2,7 @@
 #define MELEE_MP_MPLIB_H
 
 #include "ft/fighter.h"
+
 #include <dolphin/mtx/types.h>
 
 typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);

@@ -1,6 +1,8 @@
 #include "ftMario_SpecialS.h"
 
+#include "forward.h"
 #include "ftmario.h"
+#include "types.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
@@ -27,7 +29,7 @@ void ftMario_SpecialS_SetCall(Fighter* fp)
 void ftMario_SpecialS_CreateCape(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMarioAttributes* sa = fp->x2D4_specialAttributes;
+    ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
 
     if (!fp->x2208_ftcmd_var2) {
         /// @todo Can't move below @c _.
@@ -136,7 +138,7 @@ void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMarioAttributes* sa = fp->x2D4_specialAttributes;
+    ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
     fp->x80_self_vel.x /= sa->vel_x_decay;
     ftMario_SpecialS_ChangeAction(gobj, AS_MARIO_SPECIALAIRS);
 }
@@ -160,7 +162,7 @@ void ftMario_SpecialAirS_IASA(HSD_GObj* gobj) {}
 void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMarioAttributes* sa_tmp = fp->x2D4_specialAttributes;
+    ftMario_DatAttrs* sa_tmp = fp->x2D4_specialAttributes;
 
     if (fp->x2204_ftcmd_var1 == 1U && !fp->sv.mr.SpecialS.isReflect) {
         fp->sv.mr.SpecialS.isReflect = true;
@@ -212,7 +214,7 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
     u32 ftcmd_var0_tmp;
 
     Fighter* fp;
-    ftMarioAttributes* sa;
+    ftMario_DatAttrs* sa;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -229,7 +231,7 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
     fp = gobj->user_data;
 
     ftcmd_var0_tmp = fp->x2200_ftcmd_var0;
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
+    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
 
     if (ftcmd_var0_tmp >= 1U) {
         if (ftcmd_var0_tmp == 1U) {

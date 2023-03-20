@@ -1,6 +1,4 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
-
-#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>

@@ -1,10 +1,12 @@
-#include <melee/it/item.h>
-
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db_unknown_001.h>
 #include <melee/ef/efasync.h>
@@ -14,15 +16,12 @@
 #include <melee/gr/grlib.h>
 #include <melee/it/code_80266F3C.h>
 #include <melee/it/forward.h>
+#include <melee/it/item.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
 
 /// Check if items are enabled
 bool func_80266F3C(void)

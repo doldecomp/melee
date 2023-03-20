@@ -3,9 +3,8 @@
 
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx/types.h>
-#include <melee/lb/lbrefract.h>
-
 #include <sysdolphin/baselib/cobj.h>
+#include <melee/lb/lbrefract.h>
 
 extern inline float sqrtf_accurate(float x);
 

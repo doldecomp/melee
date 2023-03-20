@@ -1,13 +1,12 @@
-#include <dolphin/card/CARDCreate.h>
-
 #include <cstring.h>
+#include <string.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDBlock.h>
+#include <dolphin/card/CARDCreate.h>
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDOpen.h>
 #include <Runtime/__mem.h>
-#include <string.h>
 
 #define CARDSetIconSpeed(stat, n, f)                                           \
     ((stat)->iconSpeed =                                                       \

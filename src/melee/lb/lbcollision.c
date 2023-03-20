@@ -5,10 +5,7 @@
 #include "lbunknown_001.h"
 #include "lbvector.h"
 
-#include <baselib/baselib_shared_data_003.h>
-#include <baselib/mtx.h>
-#include <baselib/state.h>
-#include <baselib/tev.h>
+#include <math.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXDisplayList.h>
 #include <dolphin/gx/GXGeometry.h>
@@ -16,7 +13,10 @@
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/mtx/mtxvec.h>
-#include <math.h>
+#include <baselib/baselib_shared_data_003.h>
+#include <baselib/mtx.h>
+#include <baselib/state.h>
+#include <baselib/tev.h>
 #include <MetroTRK/intrinsics.h>
 
 /// @todo Toggle for WIP functions

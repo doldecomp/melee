@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTCAPTAIN_TYPES_H
 
 #include "ftCaptain/forward.h"
+
 #include <platform.h>
 
 struct ftCaptain_EntityVars {

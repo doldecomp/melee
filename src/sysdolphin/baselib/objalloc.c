@@ -1,8 +1,7 @@
-#include <sysdolphin/baselib/objalloc.h>
-
 #include <string.h>
 #include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/memory.h>
+#include <sysdolphin/baselib/objalloc.h>
 
 static objheap obj_heap = { 0, 0, -1, -1 };
 

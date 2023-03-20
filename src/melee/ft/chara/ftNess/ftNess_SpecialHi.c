@@ -9,8 +9,9 @@
 #include "ft/ftparts.h"
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
-#include <MetroTRK/intrinsics.h>
+
 #include <trigf.h>
+#include <MetroTRK/intrinsics.h>
 
 // Setup float order
 static f32 return_float1(void) // -0x62B0

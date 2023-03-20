@@ -1,11 +1,10 @@
-#include <dolphin/card/CARDWrite.h>
-
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDOpen.h>
 #include <dolphin/card/CARDRdwr.h>
 #include <dolphin/card/CARDRead.h>
+#include <dolphin/card/CARDWrite.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSExi.h>
 

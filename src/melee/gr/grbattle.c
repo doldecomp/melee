@@ -1,17 +1,16 @@
-#include <melee/gr/grbattle.h>
-
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/gm/code_801601C4.h>
 #include <melee/gr/granime.h>
+#include <melee/gr/grbattle.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/grlib.h>
 #include <melee/gr/grmaterial.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 extern StageInfo stage_info;
 

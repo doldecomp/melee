@@ -1,9 +1,9 @@
 #include "melee/ft/inlines.h"
-#include <melee/ft/chara/ftSamus/ftsamus3.h>
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/chara/ftSamus/ftsamus.h>
+#include <melee/ft/chara/ftSamus/ftsamus3.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/code_8027CF30.h>

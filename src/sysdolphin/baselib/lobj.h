@@ -1,10 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_LOBJ_H
 #define SYSDOLPHIN_BASELIB_LOBJ_H
 
-#include "baselib/forward.h"
-
 #include "baselib/cobj.h"
 #include "baselib/fobj.h"
+#include "baselib/forward.h"
 #include "baselib/object.h"
 #include "baselib/wobj.h"
 

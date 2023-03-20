@@ -5,8 +5,9 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "lb/lbunknown_003.h"
-#include <baselib/gobjgxlink.h>
+
 #include <dolphin/os/os.h>
+#include <baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E91B0[] = {
     { lbl_80222D24, lbl_80222D50, lbl_80222D58, lbl_80222D5C, 0 },

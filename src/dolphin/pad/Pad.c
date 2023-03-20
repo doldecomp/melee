@@ -1,8 +1,7 @@
-#include <dolphin/pad/Pad.h>
-
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSRtc.h>
 #include <dolphin/os/OSSerial.h>
+#include <dolphin/pad/Pad.h>
 #include <MetroTRK/intrinsics.h>
 #include <Runtime/__mem.h>
 

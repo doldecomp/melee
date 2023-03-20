@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/os.h>
@@ -6,7 +7,6 @@
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSThread.h>
 #include <dolphin/os/OSTime.h>
-#include <stdio.h>
 
 void OSReport(char* msg, ...)
 {

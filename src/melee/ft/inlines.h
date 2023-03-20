@@ -9,6 +9,10 @@
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
+#include <common_structs.h>
+#include <math.h>
+#include <platform.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
@@ -18,10 +22,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <common_structs.h>
-#include <dolphin/mtx/types.h>
-#include <math.h>
-#include <platform.h>
 
 #define PUSH_ATTRS(fp, attributeName)                                          \
     do {                                                                       \

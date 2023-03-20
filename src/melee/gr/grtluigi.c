@@ -1,14 +1,13 @@
-#include <melee/gr/grtluigi.h>
-
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grtluigi.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/gr/types.h>
 #include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 
 /* static */ StageCallbacks lbl_803E8DF0[4] = {
     {

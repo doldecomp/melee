@@ -1,7 +1,6 @@
-#include <dolphin/card/CARDRdwr.h>
-
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDRdwr.h>
 
 static void BlockReadCallback(s32 chan, s32 result)
 {

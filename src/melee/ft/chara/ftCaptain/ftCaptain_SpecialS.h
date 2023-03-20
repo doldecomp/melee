@@ -6,8 +6,8 @@
 
 #include "ft/forward.h"
 
-#include <baselib/gobj.h>
 #include <platform.h>
+#include <baselib/gobj.h>
 
 /**
  * Remove all GFX and set GFX flags to @c false.

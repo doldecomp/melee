@@ -1,7 +1,9 @@
-#include <melee/ft/fighter.h>
-
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/lobj.h>
+#include <sysdolphin/baselib/mtx.h>
 #include <melee/cm/camera.h>
 #include <melee/db/db_unknown_001.h>
 #include <melee/ef/efasync.h>
@@ -12,6 +14,7 @@
 #include <melee/ft/code_8007C630.h>
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/code_80081B38.h>
+#include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_005.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftaction.h>
@@ -39,10 +42,6 @@
 #include <melee/text_2.h>
 #include <melee/text_4.h>
 #include <MSL/trigf.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/mtx.h>
 
 /// @todo Move elsewhere.
 #define HALF_PI (1.5707963267948966)

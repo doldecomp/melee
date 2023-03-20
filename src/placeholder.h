@@ -1,8 +1,8 @@
 #ifndef PLACEHOLDER_H
 #define PLACEHOLDER_H
 
-#include <dolphin/os/os.h>
 #include <m2c_macros.h>
+#include <dolphin/os/os.h>
 
 #define NOT_IMPLEMENTED                                                        \
     OSPanic(__FILE__, __LINE__, "%s is not implemented!", __func__)
@@ -28,6 +28,14 @@
 #define UNK_PARAMS
 #else
 #define UNK_PARAMS void
+#endif
+#endif
+
+#ifndef UNK_SIZE_ARRAY
+#if defined(__MWERKS__) && !defined(M2CTX)
+#define UNK_SIZE_ARRAY []
+#else
+#define UNK_SIZE_ARRAY [0]
 #endif
 #endif
 

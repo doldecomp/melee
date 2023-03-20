@@ -1,11 +1,15 @@
 #include "ftMario_SpecialLw.h"
 
+#include "forward.h"
+#include "ftmario.h"
+#include "inlines.h"
+#include "types.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftparts.h"
-#include "ftMario/ftmario.h"
 #include "it/itkind.h"
 
 #include <baselib/random.h>
@@ -43,7 +47,7 @@ void ftMario_SpecialLw_SetCall(HSD_GObj* gobj)
 void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftMarioAttributes* sa;
+    ftMario_DatAttrs* sa;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -51,7 +55,7 @@ void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj)
 #endif
 
     fp = GET_FIGHTER(gobj);
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
+    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->sv.mr.SpecialLw.groundVelX = (f32) 0.0f;
@@ -70,7 +74,7 @@ void ftMario_SpecialLw_SetVar(HSD_GObj* gobj)
 void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftMarioAttributes* sa = fp->x2D4_specialAttributes;
+    ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -93,7 +97,7 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
 {
     f32 sub_val;
     Fighter* fp = gobj->user_data;
-    ftMarioAttributes* sa = fp->x2D4_specialAttributes;
+    ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -144,7 +148,7 @@ void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
 void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMarioAttributes* sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
+    ftMario_DatAttrs* sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
 
     if ((u32) fp->x2204_ftcmd_var1 != 0U) {
         fp->x2204_ftcmd_var1 = 0U;
@@ -176,7 +180,7 @@ void ftMario_SpecialAirLw_IASA(HSD_GObj* gobj)
 void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftMarioAttributes* sa = GetMarioAttr(fp);
+    ftMario_DatAttrs* sa = GetMarioAttr(fp);
     fp->x2208_ftcmd_var2 = 0;
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRLW,
@@ -193,7 +197,7 @@ void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj)
 void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
 {
     f32 flt_var;
-    ftMarioAttributes* sa;
+    ftMario_DatAttrs* sa;
     Fighter* fp;
     Fighter* ft_tmp;
 
@@ -235,8 +239,8 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
 void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     f32 flt_var;
-    ftMarioAttributes* sa;
-    ftMarioAttributes* sa_2;
+    ftMario_DatAttrs* sa;
+    ftMario_DatAttrs* sa_2;
     Fighter* fp;
 
     /// @todo Unused stack.
@@ -323,7 +327,7 @@ void _ftMario_800E2778_helper(HSD_GObj* gobj)
 {
     Fighter* ft_tmp;
     Fighter* fp;
-    ftMarioAttributes* sa;
+    ftMario_DatAttrs* sa;
     fp = getFighter(gobj);
     sa = GetMarioAttr(fp);
     fp->x2208_ftcmd_var2 = 0;

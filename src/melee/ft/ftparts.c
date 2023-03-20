@@ -1,13 +1,7 @@
-#include <melee/ft/ftparts.h>
-
+#include <placeholder.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os/os.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftdata.h>
-#include <melee/lb/lbrefract.h>
-#include <placeholder.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
@@ -15,6 +9,11 @@
 #include <sysdolphin/baselib/perf.h>
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/util.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftparts.h>
+#include <melee/lb/lbrefract.h>
 
 #define MAX_FT_PARTS 140
 

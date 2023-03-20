@@ -1,6 +1,5 @@
-#include <sysdolphin/baselib/id.h>
-
 #include <string.h>
+#include <sysdolphin/baselib/id.h>
 
 HSD_ObjAllocData hsd_iddata;
 

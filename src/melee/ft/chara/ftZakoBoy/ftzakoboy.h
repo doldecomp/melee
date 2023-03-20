@@ -1,8 +1,8 @@
 #ifndef _ftzakoboy_h_
 #define _ftzakoboy_h_
 
-#include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
 
 typedef struct _ftZakoboyAttributes {
     s32 x0;

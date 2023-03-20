@@ -1,6 +1,4 @@
 #include <melee/ft/chara/ftKirby/ftkirby.h>
-
-#include <melee/ft/chara/ftKirby/ftkirby.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/forward.h>
 #include <melee/ft/ft_unknown_006.h>

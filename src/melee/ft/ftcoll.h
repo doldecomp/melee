@@ -2,10 +2,9 @@
 #define _ftcoll_h_
 
 #include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
-
 #include <melee/ft/fighter.h>
+#include <Runtime/platform.h>
 
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
                    s32 attackID); // Combo Count Logic //

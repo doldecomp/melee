@@ -1,10 +1,10 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey5.h>
+#include "ftDonkey/ftdonkey5.h"
 
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey1.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey6.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ftDonkey/ftdonkey.h"
+#include "ftDonkey/ftdonkey1.h"
+#include "ftDonkey/ftdonkey6.h"
 
 void ftDonkey_800E01BC(HSD_GObj* fighter_gobj)
 {
