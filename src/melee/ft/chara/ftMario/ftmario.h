@@ -9,7 +9,7 @@
 #include <baselib/forward.h>
 
 extern ActionState as_table_mario[AS_MARIO_MAX - ASID_MAX];
-extern ActionState lbl_803C7260[];
+extern ActionState lbl_803C7260[MARIO_AUX_STATES_COUNT];
 
 // ftmario1
 void ftMario_OnDeath(HSD_GObj*);
