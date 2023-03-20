@@ -13,6 +13,7 @@
 #include "ft/ftparts.h"
 #include "it/itkind.h"
 
+#include <stddef.h>
 #include <baselib/random.h>
 
 // 0x800E2050
@@ -178,6 +179,13 @@ void ftMario_SpecialAirLw_IASA(HSD_GObj* gobj)
     return;
 }
 
+static usize_t const transition_flags =
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
+    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
+
 void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
@@ -185,7 +193,7 @@ void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialAirLw,
-                                       FTMARIO_SPECIALLW_COLL_FLAG, NULL,
+                                       transition_flags, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftComm_ClampFallSpeed(fp, sa->x58_MARIO_TORNADO_TAP_GRAVITY);
     func_8007D440(fp, sa->x40_MARIO_TORNADO_MOMENTUM_X_AIR);
@@ -336,7 +344,7 @@ void _ftMario_800E2778_helper(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0.0f;
     fp->ev.mr.x2234_tornadoCharge = 0;
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialLw,
-                                       FTMARIO_SPECIALLW_COLL_FLAG, NULL,
+                                       transition_flags, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007CC78(ft_tmp = fp, sa->x3C_MARIO_TORNADO_MOMENTUM_X_GROUND);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;

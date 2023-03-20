@@ -14,6 +14,7 @@
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 
+#include <stddef.h>
 #include <baselib/random.h>
 
 void ftMario_SpecialS_SetCall(Fighter* fp)
@@ -282,12 +283,19 @@ void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialS_CreateCape;
 }
 
+static usize_t const transition_flags =
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
+    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
+
 void ftMario_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialAirS,
-                                       FTMARIO_SPECIALS_COLL_FLAG, NULL,
+                                       transition_flags, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     if ((s32) fp->x2200_ftcmd_var0 == 1U) {
         fp->x2200_ftcmd_var0 = 2U;
@@ -309,7 +317,7 @@ void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj)
     fp->ev.mr.x2238_isCapeBoost = false;
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialS,
-                                       FTMARIO_SPECIALS_COLL_FLAG, NULL,
+                                       transition_flags, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     ftMario_SpecialS_UpdateVarsColl(gobj);

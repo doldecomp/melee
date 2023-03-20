@@ -17,26 +17,4 @@ typedef enum ftMarioAction {
     ftMario_AS_Count,
 } ftMarioAction;
 
-// Flags used by Mario & Dr. Mario in Action State Change //
-
-// SpecialN/SpecialAirN (Fireball / Megavitamin) //
-
-// SpecialS/SpecialAirS (Cape / Super Sheet) //
-
-#define FTMARIO_SPECIALS_COLL_FLAG                                             \
-    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |     \
-        FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |            \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |    \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
-
-// SpecialLw/SpecialAirLw (Mario / Dr. Tornado ) //
-
-#define FTMARIO_SPECIALLW_COLL_FLAG                                            \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |                  \
-        FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |            \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |    \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
-
 #endif
