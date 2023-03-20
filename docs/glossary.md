@@ -31,6 +31,9 @@ GameCube controller.
 @section glossary_cur cur
 Short for "current" or "cursor."
 
+@section glossary_deg deg
+Short for "degrees."
+
 @section glossary_dir dir
 Short for "direction."
 
@@ -100,6 +103,9 @@ Short for "position."
 
 @section glossary_prev prev
 Short for "previous."
+
+@section glossary_rad rad
+Short for "radians."
 
 @section glossary_rot rot
 Short for "rotation."
