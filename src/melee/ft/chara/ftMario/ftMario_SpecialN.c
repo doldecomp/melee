@@ -14,7 +14,7 @@
 
 #include <baselib/random.h>
 
-int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos)
+static int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos)
 {
     int r3;
     r3 = (int) arr[HSD_Randi(outpos)];

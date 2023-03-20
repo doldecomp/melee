@@ -14,7 +14,6 @@ extern ActionState as_table_mario[states_count];
 static usize_t const aux_states_count = 2;
 extern ActionState lbl_803C7260[aux_states_count];
 
-// ftmario1
 void ftMario_OnDeath(HSD_GObj*);
 void ftMario_OnLoadForDrMario(Fighter*);
 void ftMario_OnLoad(HSD_GObj*);
@@ -27,23 +26,7 @@ void ftMario_LoadSpecialAttrs(HSD_GObj*);
 void ftMario_OnKnockbackEnter(HSD_GObj*);
 void ftMario_OnKnockbackExit(HSD_GObj*);
 void ftMario_func_800E0CAC(s32, s32*, s32*);
-unk_t ftMario_func_800E0CE0(enum_t arg0);
-
-// ftmario2
-int ftMario_SpecialN_VitaminRandom(HSD_GObj*);
-void ftMario_SpecialN_StartAction(HSD_GObj*);
-void ftMario_SpecialN_Anim(HSD_GObj*);
-void ftMario_SpecialN_IASA(HSD_GObj*);
-void ftMario_SpecialN_Phys(HSD_GObj*);
-void ftMario_SpecialN_Coll(HSD_GObj*);
-void ftMario_SpecialN_ItemFireSpawn(HSD_GObj*);
-void ftMario_SpecialAirN_StartAction(HSD_GObj*);
-void ftMario_SpecialAirN_Anim(HSD_GObj*);
-void ftMario_SpecialAirN_IASA(HSD_GObj*);
-void ftMario_SpecialAirN_Phys(HSD_GObj*);
-void ftMario_SpecialAirN_Coll(HSD_GObj*);
-void ftMario_SpecialN_GroundToAir(HSD_GObj*);
-void ftMario_SpecialAirN_AirToGround(HSD_GObj*);
+UNK_T ftMario_func_800E0CE0(enum_t);
 
 // ftmario3
 void ftMario_SpecialS_CreateCape(HSD_GObj*);
