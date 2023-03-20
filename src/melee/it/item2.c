@@ -4,8 +4,8 @@
 #include "gm/code_801601C4.h"
 #include "it/code_80266F3C.h"
 #include "it/code_8027CF30.h"
+#include "it/forward.h"
 #include "it/item.h"
-#include "it/itkind.h"
 
 #include <common_structs.h>
 #include <math.h>

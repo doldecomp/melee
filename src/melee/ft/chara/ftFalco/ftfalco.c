@@ -5,7 +5,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftFox/ftfox.h"
-#include "it/itkind.h"
+#include "it/forward.h"
 
 ActionState as_table_falco[] = {
     { 295, 0x00340111, 0x12000000, ftFox_SpecialNStart_Anim,

@@ -6,7 +6,7 @@
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
-#include <melee/it/itkind.h>
+#include <melee/it/forward.h>
 
 ActionState as_table_koopa[] = {
     { 295, 0x00340011, 0x12000000, lbl_80134F48, lbl_801351B0, lbl_80135438,

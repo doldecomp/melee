@@ -1,12 +1,12 @@
 #ifndef MELEE_IT_CODE_8027CF30_H
 #define MELEE_IT_CODE_8027CF30_H
 
+#include "ftSeak/types.h"
+#include "it/types.h"
+
 #include <placeholder.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
-#include <melee/ft/chara/ftSeak/types.h>
-#include <melee/it/itkind.h>
-#include <melee/it/types.h>
 
 void func_8027D730(HSD_GObj*);
 HSD_GObj* func_80283AE4(s32, Vec3*, s32);

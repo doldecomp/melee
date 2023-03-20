@@ -11,7 +11,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "it/itkind.h"
+#include "it/forward.h"
 
 #include <stddef.h>
 #include <baselib/random.h>

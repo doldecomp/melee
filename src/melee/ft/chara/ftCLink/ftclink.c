@@ -6,7 +6,7 @@
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
-#include <melee/it/itkind.h>
+#include <melee/it/forward.h>
 #include <melee/lb/lbmthp.h>
 
 ActionState as_table_clink[] = {

@@ -1,28 +1,28 @@
 #ifndef MELEE_IT_TYPES_H
 #define MELEE_IT_TYPES_H
 
+#include "ft/types.h"
+#include "gr/stage.h"
+#include "it/forward.h"
+#include "it/itCommonItems.h"
+#include "it/itPKFlash.h"
+#include "it/itPKThunder.h"
+#include "it/itYoyo.h"
+#include "pl/player.h"
+
 #include <common_structs.h>
 #include <math.h>
+#include <platform.h>
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <melee/ft/types.h>
-#include <melee/gr/stage.h>
-#include <melee/it/forward.h>
-#include <melee/it/itCommonItems.h>
-#include <melee/it/itkind.h>
-#include <melee/it/itPKFlash.h>
-#include <melee/it/itPKThunder.h>
-#include <melee/it/itYoyo.h>
-#include <melee/pl/player.h>
-#include <Runtime/platform.h>
+#include <baselib/aobj.h>
+#include <baselib/controller.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/mobj.h>
+#include <baselib/random.h>
 
 /// @todo Size unknown.
 struct ItemStateTable {

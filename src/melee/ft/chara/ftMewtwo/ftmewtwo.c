@@ -3,7 +3,7 @@
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
-#include <melee/it/itkind.h>
+#include <melee/it/forward.h>
 
 ActionState as_table_mewtwo[] = {
     { 295, 0x00340111, 0x12000000, ftMewtwo_SpecialNStart_Anim,

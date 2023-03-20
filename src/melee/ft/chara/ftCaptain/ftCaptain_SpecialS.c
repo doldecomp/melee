@@ -10,7 +10,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/types.h"
-#include "it/itkind.h"
+#include "it/forward.h"
 
 #include <dolphin/mtx/types.h>
 #include <baselib/forward.h>

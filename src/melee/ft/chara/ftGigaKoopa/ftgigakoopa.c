@@ -5,7 +5,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftKoopa/ftkoopa.h"
-#include "it/itkind.h"
+#include "it/forward.h"
 
 ActionState as_table_gkoopa[] = {
     { 295, 0x00340011, 0x12000000, lbl_80134F48, lbl_801351B0, lbl_80135438,

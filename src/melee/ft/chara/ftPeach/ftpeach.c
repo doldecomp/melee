@@ -6,7 +6,7 @@
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "it/itkind.h"
+#include "it/forward.h"
 #include "lb/lbmthp.h"
 
 ActionState as_table_peach[] = {

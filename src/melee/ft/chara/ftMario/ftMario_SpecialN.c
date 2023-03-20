@@ -9,7 +9,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "it/code_8027CF30.h"
-#include "it/itkind.h"
+#include "it/forward.h"
 #include "lb/lbunknown_001.h"
 
 #include <baselib/random.h>

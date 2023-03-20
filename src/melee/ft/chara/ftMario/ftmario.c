@@ -8,7 +8,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "it/itkind.h"
+#include "it/forward.h"
 
 #include <platform.h>
 #include <baselib/random.h>

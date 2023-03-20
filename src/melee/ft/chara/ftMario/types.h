@@ -1,6 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTMARIO_TYPES_H
 #define MELEE_FT_CHARA_FTMARIO_TYPES_H
 
+#include "it/forward.h"
+
 #include <common_structs.h>
 #include <platform.h>
 #include <dolphin/mtx/types.h>
@@ -13,7 +15,7 @@ typedef struct ftMario_DatAttrs {
         Vec2 vel;
         f32 grav;
         f32 terminal_vel;
-        s32 cape_kind;
+        ItemKind cape_kind;
     } specials;
 
     // UP SPECIAL - SUPER JUMP PUNCH //
