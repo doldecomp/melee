@@ -216,7 +216,7 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
     u32 ftcmd_var0_tmp;
 
     Fighter* fp;
-    ftMario_SpecialS_DatAttrs* sa;
+    ftMario_DatAttrs* sa;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -233,14 +233,14 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
     fp = gobj->user_data;
 
     ftcmd_var0_tmp = fp->x2200_ftcmd_var0;
-    sa = &((ftMario_DatAttrs*) fp->x2D4_specialAttributes)->specials;
+    sa = fp->x2D4_specialAttributes;
 
     if (ftcmd_var0_tmp >= 1U) {
         if (ftcmd_var0_tmp == 1U) {
             fp->x2200_ftcmd_var0 = 2U;
             if (!fp->ev.mr.x2238_isCapeBoost) {
                 fp->ev.mr.x2238_isCapeBoost = true;
-                fp->x80_self_vel.y = sa->vel.y;
+                fp->x80_self_vel.y = sa->specials.vel.y;
             } else {
                 fp->x80_self_vel.y = 0;
             }
@@ -249,12 +249,12 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
             coords.x += 3 * fp->facing_dir;
             func_800119DC(&coords, 120, 3, 0.1, M_PI_3);
         }
-        func_8007D494(fp, sa->grav, sa->terminal_vel);
+        func_8007D494(fp, sa->specials.grav, sa->specials.terminal_vel);
     } else {
         func_8007D4B8(fp);
     }
 
-    func_8007CE94(fp, sa->vel.x);
+    func_8007CE94(fp, sa->specials.vel.x);
     ftMario_SpecialS_ReflectThink(gobj);
 }
 
