@@ -88,10 +88,11 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
         if (lstick_x > sa->specialhi.momentum_stick_range) {
             f32 deg = (lstick_x - sa->specialhi.momentum_stick_range) /
                       (1.0 - sa->specialhi.momentum_stick_range);
+            f32 rad;
             deg = (f64) sa->specialhi.angle_diff * deg;
 
-            f32 rad = fp->input.x620_lstick_x > 0 ? -(DEG_TO_RAD * deg)
-                                                  : +(DEG_TO_RAD * deg);
+            rad = fp->input.x620_lstick_x > 0 ? -(DEG_TO_RAD * deg)
+                                              : +(DEG_TO_RAD * deg);
             inputStickangle = fp->x6BC_inputStickangle;
 
             if (abs(rad) > abs(inputStickangle)) {
