@@ -216,7 +216,7 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
     u32 ftcmd_var0_tmp;
 
     Fighter* fp;
-    struct ftMario_SpecialS_DatAttrs* sa;
+    ftMario_SpecialS_DatAttrs* sa;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -240,7 +240,7 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
             fp->x2200_ftcmd_var0 = 2U;
             if (!fp->ev.mr.x2238_isCapeBoost) {
                 fp->ev.mr.x2238_isCapeBoost = true;
-                fp->x80_self_vel.y = sa->vel_y;
+                fp->x80_self_vel.y = sa->vel.y;
             } else {
                 fp->x80_self_vel.y = 0;
             }
@@ -254,7 +254,7 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
         func_8007D4B8(fp);
     }
 
-    func_8007CE94(fp, sa->vel_x);
+    func_8007CE94(fp, sa->vel.x);
     ftMario_SpecialS_ReflectThink(gobj);
 }
 

@@ -3,14 +3,14 @@
 
 #include <common_structs.h>
 #include <platform.h>
+#include <dolphin/mtx/types.h>
 
 typedef struct ftMario_DatAttrs {
     // SIDE SPECIAL - CAPE / SUPER SHEET //
 
     struct ftMario_SpecialS_DatAttrs {
         f32 vel_x_decay;
-        f32 vel_x;
-        f32 vel_y;
+        Vec2 vel;
         f32 grav;
         f32 terminal_vel;
         s32 cape_kind;
