@@ -1378,7 +1378,7 @@ struct Fighter {
 
     /// @at{2340} @sz{AC}
     union Fighter_StateVars {
-        u8 _[0xAC];
+        u8 _[0x23EC - 0x2340];
         union ftCaptain_StateVars ca, gn;
         union ftCommon_StateVars co;
         union ftDonkey_StateVars dk;
