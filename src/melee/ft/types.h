@@ -652,7 +652,7 @@ struct ftPopo_EntityVars {
 };
 
 struct ftPikachu_EntityVars {
-    char filler0[0x100];
+    u8 _[1];
 };
 
 struct ftSamus_EntityVars {
@@ -774,15 +774,11 @@ struct SpecialAttrs_Crazyhand {
 };
 
 struct ftZakoBoy_EntityVars {
-    char filler0[0x100];
-};
-
-struct SpecialAttrs_Girl {
-    char filler0[0x100];
+    u8 filler0[1];
 };
 
 struct ftSandbag_EntityVars {
-    char filler0[0x100];
+    u8 _[1];
 };
 
 /// @todo Rename this and its members; investigate using it elsewhere.
@@ -1344,29 +1340,30 @@ struct Fighter {
     u8 filler_x222B;
 
     union Fighter_EntityVars {
-        struct ftMario_EntityVars mr;
-        struct ftFox_EntityVars fx, fc;
+        u8 _[0x100];
         struct ftCaptain_EntityVars ca, gn;
         struct ftDonkey_EntityVars dk;
+        struct ftFox_EntityVars fx, fc;
+        struct ftGameWatch_EntityVars gw;
         struct ftKirby_EntityVars kb;
         struct ftKoopa_EntityVars kp, gk;
         struct ftLink_EntityVars lk, cl;
-        struct ftSeak_EntityVars sk;
+        struct ftLuigi_EntityVars lg;
+        struct ftMario_EntityVars mr;
+        struct ftMars_EntityVars ms;
+        struct ftMasterHand_EntityVars mh, ch;
+        struct ftMewtwo_EntityVars mt;
         struct ftNess_EntityVars ns;
         struct ftPeach_EntityVars pe;
-        struct ftPopo_EntityVars pp, nn;
         struct ftPikachu_EntityVars pk, pc;
-        struct ftSamus_EntityVars ss;
-        struct ftYoshi_EntityVars ys;
+        struct ftPopo_EntityVars pp, nn;
         struct ftPurin_EntityVars pr;
-        struct ftMewtwo_EntityVars mt;
-        struct ftLuigi_EntityVars lg;
-        struct ftMars_EntityVars ms;
-        struct ftZelda_EntityVars zd;
-        struct ftGameWatch_EntityVars gw;
-        struct ftMasterHand_EntityVars mh, ch;
-        struct ftZakoBoy_EntityVars bo, gl;
+        struct ftSamus_EntityVars ss;
         struct ftSandbag_EntityVars sb;
+        struct ftSeak_EntityVars sk;
+        struct ftYoshi_EntityVars ys;
+        struct ftZakoBoy_EntityVars bo, gl;
+        struct ftZelda_EntityVars zd;
     } ev;
 
     /* 0x232C */ s32 x232C;
