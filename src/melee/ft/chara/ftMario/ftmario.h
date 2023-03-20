@@ -6,9 +6,11 @@
 #include "ft/ftcommon.h"
 #include "ftMario/forward.h"
 
+#include <stddef.h>
 #include <baselib/forward.h>
 
-extern ActionState as_table_mario[AS_MARIO_MAX - ASID_MAX];
+static usize_t const states_count = AS_MARIO_MAX - ASID_MAX;
+extern ActionState as_table_mario[states_count];
 
 static usize_t const aux_states_count = 2;
 extern ActionState lbl_803C7260[aux_states_count];
