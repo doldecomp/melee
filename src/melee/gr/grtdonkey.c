@@ -8,22 +8,33 @@
 #include <melee/lb/lbunknown_003.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 
-static StageCallbacks lbl_803E8790[4] = {
-    { lbl_802203B4, lbl_802203E0, lbl_802203E8, lbl_802203EC, 0UL },
-    { lbl_80220480, lbl_802204D0, lbl_802204D8, lbl_802204F8, 0UL },
-    { lbl_802203F0, lbl_80220440, lbl_80220448, lbl_8022047C, 0xC0000000 },
-    { NULL, NULL, NULL, NULL, 0UL }
+static StageCallbacks lbl_803E8790[] = {
+    { lbl_802203B4, lbl_802203E0, lbl_802203E8, lbl_802203EC, 0 },
+    { lbl_80220480, lbl_802204D0, lbl_802204D8, lbl_802204F8, 0 },
+    { lbl_802203F0, lbl_80220440, lbl_80220448, lbl_8022047C,
+      (1 << 30) | (1 << 31) },
+    { NULL, NULL, NULL, NULL, 0 },
 };
 
-extern StageData lbl_803E87EC = { 0x0000002B,   lbl_803E8790,  "/GrTDk.dat",
-                                  lbl_8022022C, func_80220228, lbl_8022029C,
-                                  lbl_802202A0, lbl_802202C4,  lbl_802204FC,
-                                  lbl_80220504, 0x00000001,    NULL,
-                                  0UL };
+StageData lbl_803E87EC = {
+    43,
+    lbl_803E8790,
+    "/GrTDk.dat",
+    lbl_8022022C,
+    func_80220228,
+    lbl_8022029C,
+    lbl_802202A0,
+    lbl_802202C4,
+    lbl_802204FC,
+    lbl_80220504,
+    (1 << 0),
+    NULL,
+    0,
+};
 
 extern StageInfo stage_info;
 
-static void func_80220228(int) {}
+static void func_80220228(int arg0) {}
 
 static void lbl_8022022C(void)
 {
@@ -83,24 +94,28 @@ static void lbl_802203B4(HSD_GObj* gobj)
     func_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool lbl_802203E0(HSD_GObj*)
+static bool lbl_802203E0(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void lbl_802203E8(HSD_GObj*) {}
+static void lbl_802203E8(HSD_GObj* arg0) {}
 
-static void lbl_802203EC(HSD_GObj*) {}
+static void lbl_802203EC(HSD_GObj* arg0) {}
 
 static void lbl_802203F0(HSD_GObj* gobj)
 {
-    u32 unused[2];
-    Ground* gp = gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    Ground* gp = GET_GROUND(gobj);
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, 0);
+    func_801C8138(gobj, gp->map_id, false);
 }
 
-static bool lbl_80220440(HSD_GObj*)
+static bool lbl_80220440(HSD_GObj* arg0)
 {
     return false;
 }
@@ -111,21 +126,21 @@ static void lbl_80220448(HSD_GObj* gobj)
     func_801C2FE0(gobj);
 }
 
-static void lbl_8022047C(HSD_GObj*) {}
+static void lbl_8022047C(HSD_GObj* arg0) {}
 
 static void lbl_80220480(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, 0);
+    func_801C8138(gobj, gp->map_id, false);
 }
 
-static bool lbl_802204D0(HSD_GObj*)
+static bool lbl_802204D0(HSD_GObj* arg0)
 {
     return false;
 }
@@ -135,14 +150,14 @@ static void lbl_802204D8(HSD_GObj* arg0)
     func_801C2FE0(arg0);
 }
 
-static void lbl_802204F8(HSD_GObj*) {}
+static void lbl_802204F8(HSD_GObj* arg0) {}
 
-static bool lbl_802204FC(int)
+static bool lbl_802204FC(int arg0)
 {
     return false;
 }
 
-static bool lbl_80220504(Vec3*, int, HSD_JObj*)
+static bool lbl_80220504(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }

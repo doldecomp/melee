@@ -106,7 +106,7 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->x2210_ThrowFlags.b3) {

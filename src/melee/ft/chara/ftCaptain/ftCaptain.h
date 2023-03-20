@@ -29,18 +29,19 @@ typedef enum ftCaptainAction {
 
 // SpecialN/SpecialAirN (Falcon / Warlock Punch)
 #define FTCAPTAIN_SPECIALN_COLL_FLAG                                           \
-    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE |                          \
-        FIGHTER_RUMBLE_NOUPDATE | FIGHTER_CMD_UPDATE |                         \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
-        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
-        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
+        FtStateChange_SkipUpdateRumble | FtStateChange_UpdateCmd |             \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |    \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // SpecialS/SpecialAirS (Raptor Boost / Gerudo Dragon)
 #define FTCAPTAIN_SPECIALS_FLAG                                                \
-    FIGHTER_GFX_PRESERVE | FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |     \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
-        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
-        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |            \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
+        FtStateChange_SkipUpdateModelPartVis |                                 \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 typedef struct _ftCaptainAttributes {
     f32 x0_CAPTAIN_FALCONPUNCH_STICK_RANGE_Y_NEG; // Minimum control stick range
@@ -147,7 +148,6 @@ void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirS_Coll(HSD_GObj* fighter_gobj);
 void ftCaptain_OnLoadForGanon(Fighter*);
 
-/// @todo @c ftCaptain prefix
 void ftCaptain_LoadSpecialAttrs(HSD_GObj*);
 void ftCaptain_SpecialAirHi_StartAction(HSD_GObj*);
 void ftCaptain_SpecialAirLw_StartAction(HSD_GObj*);

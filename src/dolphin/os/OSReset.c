@@ -98,7 +98,7 @@ lbl_80348400:
 
 #else
 
-static void Reset(s32 unused)
+static void Reset(s32 _)
 {
     NOT_IMPLEMENTED;
 }
@@ -158,7 +158,7 @@ void __OSDoHotReset(s32 arg0)
 void OSResetSystem(int reset, u32 resetCode, bool forceMenu)
 {
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     // Not initialized in all branches?

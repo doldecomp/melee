@@ -398,8 +398,8 @@ void func_802676F4(HSD_GObj* item_gobj)
 
 /// @private
 /// @remarks #func_8026862C loads two integers into this,
-///          but the second one goes unused?
-bool func_8026784C(enum_t dropItem, int unused)
+///          but the second one goes _?
+bool func_8026784C(enum_t dropItem, int _)
 {
     bool result = false;
 
@@ -704,7 +704,7 @@ extern void* lbl_803F1F90[];
 void func_8026814C(HSD_GObj* item_gobj)
 {
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     HSD_MObj* temp_r0;
     HSD_DObj* var_r0;
@@ -1134,7 +1134,7 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     HSD_JObj* item_jobj1_2;
@@ -1162,26 +1162,26 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
         func_80274EF8(item_gobj);
     }
 
-    if (FLAGS_ANY(flags, ITEM_MODEL_UPDATE))
+    if ((flags & ITEM_MODEL_UPDATE))
         func_80274740(item_gobj);
 
-    if (FLAGS_NONE(flags, ITEM_COLANIM_PRESERVE) &&
+    if (!(flags & ITEM_COLANIM_PRESERVE) &&
         lbl_804D6D04[item_data->x548_colorOverlay.x28_colanim].x5_unk != 0)
     {
         func_80279BBC(item_data);
     }
 
-    if (FLAGS_NONE(flags, ITEM_SFX_PRESERVE))
+    if (!(flags & ITEM_SFX_PRESERVE))
         func_8026B074(item_data);
 
     HSD_JObjSetFacingDirItem(item_jobj, item_data);
 
-    if (FLAGS_ANY(flags, ITEM_DROP_UPDATE))
+    if ((flags & ITEM_DROP_UPDATE))
         item_data->xC40 = item_data->xC44;
     else
         item_data->xC40 = 1.0F;
 
-    if (FLAGS_NONE(flags, ITEM_HIT_PRESERVE) && item_data->xDC8_word.flags.x16)
+    if (!(flags & ITEM_HIT_PRESERVE) && item_data->xDC8_word.flags.x16)
         func_802725D4(item_gobj);
 
     item_data->xCC8_knockback = 0.0F;
@@ -1199,10 +1199,10 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
 
         temp_r23 = (new_var3 = item_data->xD0_itemStateDesc);
 
-        if (temp_r23 != NULL && FLAGS_ANY(flags, ITEM_ANIM_UPDATE)) {
+        if (temp_r23 != NULL && (flags & ITEM_ANIM_UPDATE)) {
             func_80268D34(item_gobj, temp_r23);
 
-            if (FLAGS_ANY(flags, ITEM_UNK_UPDATE)) {
+            if ((flags & ITEM_UNK_UPDATE)) {
                 item_jobj1_2 = item_gobj->hsd_obj;
                 item_data3 = GetItemData(item_gobj);
                 item_data3->scl = item_data3->xCC_item_attr->x60_scale;
@@ -1220,7 +1220,7 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0;
             item_data->x524 = 0.0F;
-        } else if (temp_r23 != NULL && FLAGS_ANY(flags, ITEM_CMD_UPDATE)) {
+        } else if (temp_r23 != NULL && (flags & ITEM_CMD_UPDATE)) {
             item_data->x52C_item_script = temp_r29->xC_script;
             item_data->x530 = 0U;
             item_data->x524 = 0.0f;
@@ -1289,7 +1289,7 @@ void func_802694CC(HSD_GObj* item_gobj)
 void lbl_80269528(HSD_GObj* item_gobj)
 {
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
     if (item_data->xDC8_word.flags.x9 == 0) {
@@ -1366,7 +1366,7 @@ void func_802697D4(HSD_GObj* item_gobj)
 {
     Vec3 sp1C;
 #ifdef MUST_MATCH
-    u8 unused[12];
+    u8 _[12];
 #endif
 
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -1489,7 +1489,7 @@ void lbl_80269C5C(HSD_GObj* item_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_8026F9A0();
@@ -1564,8 +1564,7 @@ bool func_80269DC8(HSD_GObj* item_gobj)
 
     if (item_data->xDCE_flag.bits.b5 && item_data->ground_or_air == 1 &&
         (item_data->xDCE_flag.bits.b4 ||
-         item_data->xC54 <
-             (f32) (M_PI / 180) * (90.0f + lbl_804D6D28->x80_float[24])))
+         item_data->xC54 < (f32) M_PI / 180 * (90 + lbl_804D6D28->unk_degrees)))
     {
         if (item_data->xDCE_flag.bits.b4 == 0) {
             item_data->xC54 -= M_PI / 2;
@@ -2019,7 +2018,7 @@ void func_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
@@ -2034,7 +2033,7 @@ void func_8026ABD8(HSD_GObj* this, Vec3* pos, f32 arg2)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     Item* item_data = (Item*) HSD_GObjGetUserData(this);
 

@@ -16,7 +16,7 @@ void ftSamus_8012ADF0(HSD_GObj* fighter_gobj)
 
 /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2210_ThrowFlags.b0) {
@@ -98,7 +98,7 @@ void ftSamus_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->x80_self_vel.x *= samus_attr->x70;
@@ -345,7 +345,7 @@ void ftSamus_8012B41C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     func_8007D4B8(fp);
     func_8007D3A8(fp, 0.0f,
@@ -360,7 +360,7 @@ void ftSamus_8012B488(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2200_ftcmd_var0) {
@@ -382,7 +382,7 @@ void ftSamus_8012B4FC(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2200_ftcmd_var0) {

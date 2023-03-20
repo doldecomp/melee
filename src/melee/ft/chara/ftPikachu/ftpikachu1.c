@@ -1,11 +1,11 @@
-#include <melee/ft/chara/ftPikachu/ftpikachu1.h>
+#include "ftPikachu/ftpikachu1.h"
 
-#include <melee/ft/chara/ftPikachu/ftpikachu.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftPikachu/ftpikachu.h"
 
 ActionState as_table_pikachu[] = {
     { 295, 0x00340111, 0x12000000, ftPikachu_80124908, ftPikachu_Stub_80124B6C,
@@ -121,7 +121,11 @@ void ftPikachu_OnLoad(HSD_GObj* fighter_gobj)
 
 void ftPikachu_OnDeath(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     func_80074A4C(fighter_gobj, 0, 0);
     func_80074A4C(fighter_gobj, 1, 0);
 }
@@ -148,14 +152,22 @@ void ftPikachu_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
 
 void ftPikachu_8012467C(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     func_80074A4C(fighter_gobj, 1, -1);
     func_80074B0C(fighter_gobj, 1, 0);
 }
 
 void ftPikachu_801246C0(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     func_80074A4C(fighter_gobj, 1, 0);
     func_80074B0C(fighter_gobj, 1, 0);
 }

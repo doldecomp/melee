@@ -1,3 +1,4 @@
+#include "dolphin/gx/forward.h"
 #include <dolphin/gx/GXTexture.h>
 
 #include <common_structs.h>
@@ -947,16 +948,16 @@ void GXInvalidateTexAll(GXContext* arg0, s32 arg1, u8* arg2)
 GXTexRegionCallback GXSetTexRegionCallback(GXTexRegionCallback arg0)
 {
     GXContext* main = __GXContexts.main;
-    GXTexRegionCallback result = main->callbacks[0x98];
-    main->callbacks[0x98] = arg0;
+    GXTexRegionCallback result = main->tex_region_cb;
+    main->tex_region_cb = arg0;
     return result;
 }
 
 GXTexRegionCallback GXSetTlutRegionCallback(GXTexRegionCallback arg0)
 {
     GXContext* main = __GXContexts.main;
-    GXTexRegionCallback result = main->callbacks[0x99];
-    main->callbacks[0x99] = arg0;
+    GXTexRegionCallback result = main->tlut_region_cb;
+    main->tlut_region_cb = arg0;
     return result;
 }
 

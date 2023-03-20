@@ -180,6 +180,11 @@ static inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 0;
 }
 
+static inline CollData* Fighter_GetCollData(Fighter* fp)
+{
+    return &fp->x6F0_collData;
+}
+
 // Ternary macro for fcmpo-based facing direction check
 
 #define CLIFFCATCH_O(fp)                                                       \

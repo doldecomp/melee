@@ -1,12 +1,11 @@
-#include <melee/ft/chara/ftFalco/ftfalco.h>
+#include "ftfalco.h"
 
-#include <melee/ft/chara/ftFalco/ftfalco.h>
-#include <melee/ft/chara/ftFox/ftfox.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/itkind.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftFox/ftfox.h"
+#include "it/itkind.h"
 
 ActionState as_table_falco[] = {
     { 295, 0x00340111, 0x12000000, ftFox_SpecialNStart_Anim,
@@ -171,7 +170,11 @@ void ftFalco_OnLoad(HSD_GObj* gobj)
     ftData* ftdata = fp->x10C_ftData;
     s32* sa2;
     void** items = ftdata->x48_items;
-    int unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp->x2224_flag.bits.b7 = 1;
     ftFox_OnLoadForFalco(fp);

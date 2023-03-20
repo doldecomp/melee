@@ -1,3 +1,4 @@
+#include "stddef.h"
 #include <string.h>
 
 #include <dolphin/os/os.h>
@@ -5,7 +6,7 @@
 
 inline void Locate(HSD_Archive* archive)
 {
-    int i;
+    uint i;
     u32* ptr;
 
     for (i = 0; i < archive->header.nb_reloc; i++) {
@@ -62,50 +63,51 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, u32 file_size)
 
 void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, char* symbols)
 {
-    int i;
+    uint i;
 
     for (i = 0; i < archive->header.nb_public; i++) {
-        if (strcmp(archive->symbols + archive->public_info[i].symbol,
-                   symbols) ==
-            0) // If both strings are equal, we've found the node
+        int comparison =
+            strcmp(archive->symbols + archive->public_info[i].symbol, symbols);
+
+        if (comparison == 0)
+            // If both strings are equal, we've found the node
             return archive->data + archive->public_info[i].offset;
-        ;
     }
 
     return NULL;
 }
 
-char* HSD_ArchiveGetExtern(HSD_Archive* archive, s32 offset)
+char* HSD_ArchiveGetExtern(HSD_Archive* archive, int offset)
 {
-    if (offset < 0 || archive->header.nb_extern <= offset) {
+    if (offset < 0 || archive->header.nb_extern <= (unsigned) offset)
         return NULL;
-    }
+
     return archive->symbols + archive->extern_info[offset].symbol;
 }
 
 void HSD_ArchiveLocateExtern(HSD_Archive* archive, char* symbols, void* addr)
 {
-    u32 next;
-    u32 offset;
-    int i;
+    uintptr_t next;
+    uintptr_t offset = -1;
+    uint i;
 
-    offset = -1;
     for (i = 0; i < archive->header.nb_extern; i++) {
-        if (strcmp(symbols,
-                   archive->symbols + archive->extern_info[i].symbol) == 0)
-        {
+        int comparison =
+            strcmp(symbols, archive->symbols + archive->extern_info[i].symbol);
+
+        if (comparison == 0) {
             offset = archive->extern_info[i].offset;
             break;
         }
     }
 
-    if (offset == -1) {
+    if (offset == -1U) {
         return;
     }
 
-    while (offset != -1 && offset < archive->header.data_size) {
-        next = *(u32*) ((u32) archive->data + offset);
-        *(u32*) ((u32) archive->data + offset) = (u32) addr;
+    while (offset != -1U && offset < archive->header.data_size) {
+        next = *(uintptr_t*) ((uintptr_t) archive->data + offset);
+        *(u32*) ((uintptr_t) archive->data + offset) = (uintptr_t) addr;
         offset = next;
     }
 }

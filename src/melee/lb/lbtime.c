@@ -10,9 +10,9 @@ u32 func_8000AEC8(u32 a, u32 b)
 u32 func_8000AEE4(u32 a, int b)
 {
     if (b > 0) {
-        return -1 - a > b ? a + b : -1;
+        return -1 - a > (unsigned) b ? a + b : -1;
     } else {
-        return a > -b ? a + b : 0;
+        return a > (unsigned) -b ? a + b : 0;
     }
 }
 
@@ -21,7 +21,7 @@ u32 func_8000AF24(u32 a, int b, int c)
     if (b > 0) {
         unsigned int ab = a & 0x0000ffff;
         c = 0x0000ffff;
-        if (c - ab > b)
+        if (c - ab > (unsigned) b)
             return a + b;
         else
             return c;
@@ -42,7 +42,7 @@ u32 func_8000AF74(u32 a, int b)
         u32 r0 = a & 0xff;
         r0 = 0xff - r0;
 
-        return (r0 > b) ? a + b : 0xff;
+        return (r0 > (unsigned) b) ? a + b : 0xff;
     } else {
         int c = a & 0xff;
 

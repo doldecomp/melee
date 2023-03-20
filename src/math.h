@@ -5,12 +5,11 @@
 #include <Runtime/platform.h>
 
 #define M_PI 3.14159265358979323846
-#define M_PI_2 1.57079632679489655799
+#define M_PI_2 (M_PI / 2)
+#define M_PI_3 (M_PI / 3)
 
-#define DEG_TO_RAD 0.01745329252F
-#define RAD_TO_DEG 57.29578F
-
-#define M_PI_F 3.14159265358979323846F
+#define DEG_TO_RAD ((float) (M_PI / 180))
+#define RAD_TO_DEG ((float) (180 / M_PI))
 
 #ifdef __MWERKS__
 #pragma push

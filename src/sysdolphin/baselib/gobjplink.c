@@ -139,7 +139,7 @@ void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     HSD_ASSERT(0x1A3, p_link <= HSD_GObjLibInitData.p_link_max);

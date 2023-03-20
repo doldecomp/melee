@@ -1,16 +1,21 @@
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include "ftgamewatch.h"
 
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 // 0x8014BDB0
 // https://decomp.me/scratch/7BADg // Create Insecticide Spray Item
 void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
-    HSD_GObj* greenhouseGObj;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
     Fighter* fp = getFighter(fighter_gobj);
 
     if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
@@ -84,7 +89,11 @@ void ftGameWatch_ItemGreenhouseSetFlag(HSD_GObj* fighter_gobj)
 void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* greenhouseGObj;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
     if (fp->sa.gaw.x224C_greenhouseGObj != NULL) {
         func_802C6328(fp->sa.gaw.x224C_greenhouseGObj);
@@ -140,7 +149,11 @@ bool ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* fighter_gobj)
 void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
     if (func_80094790(fighter_gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
@@ -161,8 +174,10 @@ void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation callback
 void ftGameWatch_Attack11_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    Fighter* fp2;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);

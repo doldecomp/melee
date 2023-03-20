@@ -1,30 +1,29 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_29.h>
+#include "ftMasterHand_29.h"
 
-#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
+#include "ftMasterHand.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
+#include "ftCrazyHand/ftcrazyhand.h"
 
 // 80155388 151F68
 // https://decomp.me/scratch/6nLDB
 void lbl_80155388(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    Fighter* ft_2;
-    s32 unused[2];
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    fp = gobj->user_data;
     if (fp->x2204_ftcmd_var1 != 0) {
         func_8015C5F8(gobj);
         fp->x2204_ftcmd_var1 = 0;
     }
-    // inlined? possibly shared with lbl_8015521C
+
+    /// @todo  inlined? possibly shared with lbl_8015521C
     if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) ||
         (!ftAnim_IsFramesRemaining(gobj)))
     {
-        ft_2 = gobj->user_data;
+        Fighter* fp = GET_FIGHTER(gobj);
         Fighter_UnkSetFlag_8006CFBC(gobj);
-        ft_2->x1A5C = 0;
+        fp->x1A5C = 0;
         func_80151018(gobj);
     }
 }

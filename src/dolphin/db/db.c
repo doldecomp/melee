@@ -19,7 +19,7 @@ void DBInit(void)
 bool DBIsDebuggerPresent(void)
 {
     if (__DBInterface == NULL) {
-        return 0;
+        return false;
     }
 
     return (bool) __DBInterface->bPresent;
@@ -27,7 +27,11 @@ bool DBIsDebuggerPresent(void)
 
 static void __DBExceptionDestinationAux(void)
 {
-    u8 dummy[8];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     OSContext* ctx = (void*) (0x80000000 + *(u32*) 0xC0); // WTF??
     OSReport("DBExceptionDestination\n");
     OSDumpContext(ctx);
@@ -35,7 +39,6 @@ static void __DBExceptionDestinationAux(void)
 }
 
 #ifdef MWERKS_GEKKO
-
 static asm void __DBExceptionDestination(void)
 { // clang-format off
     nofralloc
@@ -46,7 +49,6 @@ static asm void __DBExceptionDestination(void)
 } // clang-format on
 
 #elif defined(__GNUC__) && defined(__PPCGEKKO__)
-
 static void __DBExceptionDestination(void)
 {
     asm("mfmsr %r3\n"
@@ -56,12 +58,10 @@ static void __DBExceptionDestination(void)
 }
 
 #else
-
 static void __DBExceptionDestination(void)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 bool __DBIsExceptionMarked(u8 exception)

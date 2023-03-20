@@ -63,7 +63,7 @@ HSD_GObjProc* func_8038FD54(HSD_GObj* gobj, void (*func)(HSD_GObj*), u8 pri)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     gproc = HSD_ObjAlloc(&gobjproc_alloc_data);

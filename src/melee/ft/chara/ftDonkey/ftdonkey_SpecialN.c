@@ -1,12 +1,13 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialN.h>
+#include "ftdonkey_SpecialN.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/lb/forward.h>
+#include "ftdonkey.h"
+
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "lb/forward.h"
 
 void ftDonkey_SetCallbacks_SpecialN(HSD_GObj* fighter_gobj)
 {
@@ -34,7 +35,7 @@ void ftDonkey_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->sa.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
@@ -70,7 +71,7 @@ void ftDonkey_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->sa.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
@@ -200,7 +201,7 @@ void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2200_ftcmd_var0) {
@@ -263,7 +264,11 @@ void ftDonkey_8010ECE8(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010ED88(HSD_GObj* fighter_gobj)
 {
-    s32 unsued[4];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
+
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftDonkey_NullCallbacks(fighter_gobj);
         func_800CC730(fighter_gobj);
@@ -277,7 +282,7 @@ void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2200_ftcmd_var0) {
@@ -333,7 +338,7 @@ void ftDonkey_8010EF7C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2200_ftcmd_var0) {
@@ -372,7 +377,7 @@ void ftDonkey_8010F098(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!func_8009917C(fighter_gobj)) {
@@ -409,7 +414,7 @@ void ftDonkey_8010F1E8(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if ((fp->input.x668 & 0x200)) {

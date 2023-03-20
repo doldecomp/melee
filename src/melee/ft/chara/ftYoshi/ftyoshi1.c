@@ -1,14 +1,15 @@
-#include <melee/ft/chara/ftYoshi/ftyoshi1.h>
+#include "ftyoshi1.h"
+
+#include "ef/efasync.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftanim.h"
+#include "ft/ftcamera.h"
+#include "ft/ftcoll.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "it/itkind.h"
 
 #include <dolphin/os/os.h>
-#include <melee/ef/efasync.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/itkind.h>
 #include <placeholder.h>
 
 ActionState as_table_yoshi[] = {
@@ -79,7 +80,10 @@ extern char* lbl_804D3E78;
 /// https://decomp.me/scratch/ufrFK
 void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
 {
-    s32 filler[5];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[20];
+#endif
 
     struct S_UNK_YOSHI1* unk_struct1;
     s32* ptr2EndIndex;
@@ -121,7 +125,10 @@ void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
 void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
                    f32 start_frame)
 {
-    s32 filler[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     if (unk_struct_arg) {
         struct S_UNK_YOSHI2* unk_struct = unk_struct_arg->unk_struct;
@@ -156,7 +163,7 @@ void func_8012B8A4(HSD_GObj* fighter_gobj)
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     f32 tempf = attr->xC * (1.0f - (fp->x1998_shieldHealth /
                                     p_ftCommonData->x260_startShieldHealth));

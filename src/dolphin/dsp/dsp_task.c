@@ -1,6 +1,7 @@
-#include <dolphin/dsp/dsp.h>
+#include "dsp.h"
+
 #include <dolphin/os/OSInterrupt.h>
-#include <Runtime/platform.h>
+#include <platform.h>
 #include <stddef.h>
 
 DSPTaskInfo* __DSP_curr_task;
@@ -12,15 +13,19 @@ bool __DSP_rude_task_pending;
 
 void __DSPHandler(__OSInterrupt intr, OSContext* ctx)
 {
-    u8 pad[8];
-    OSContext sp10;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    OSContext new_ctx;
     u32 msg;
     u16 temp;
 
     temp = __DSPRegs[5];
     __DSPRegs[5] = (temp & -41) | 0x80;
-    OSClearContext(&sp10);
-    OSSetCurrentContext(&sp10);
+    OSClearContext(&new_ctx);
+    OSSetCurrentContext(&new_ctx);
     while (DSPCheckMailFromDSP() == 0)
         continue;
     msg = DSPReadMailFromDSP();
@@ -134,7 +139,7 @@ void __DSPHandler(__OSInterrupt intr, OSContext* ctx)
             __DSP_curr_task->req_cb(__DSP_curr_task);
         break;
     }
-    OSClearContext(&sp10);
+    OSClearContext(&new_ctx);
     OSSetCurrentContext(ctx);
 }
 
@@ -201,16 +206,21 @@ void __DSP_exec_task(DSPTaskInfo* a, DSPTaskInfo* b)
 
 void __DSP_boot_task(DSPTaskInfo* task)
 {
-    volatile u32 msg;
-
     while (DSPCheckMailFromDSP() == 0)
         continue;
 
-    msg = DSPReadMailFromDSP();
+        /// @todo Unused assignment.
+        ///       Is this writing to a hardware reg?
+#ifdef MUST_MATCH
+    {
+        vu32 msg = DSPReadMailFromDSP();
+    }
+#endif
+
     DSPSendMailToDSP(0x80F3A001);
     while (DSPCheckMailToDSP() != 0)
         continue;
-    DSPSendMailToDSP((u32) task->iram_mmem_addr);
+    DSPSendMailToDSP((uintptr_t) task->iram_mmem_addr);
     while (DSPCheckMailToDSP() != 0)
         continue;
     DSPSendMailToDSP(0x80F3C002);
@@ -253,7 +263,7 @@ void __DSP_boot_task(DSPTaskInfo* task)
 #ifdef MUST_MATCH
 #pragma push
 #pragma force_active on
-static char unused[] = "__DSP_add_task() : Added task    : 0x%08X\n";
+static char _[] = "__DSP_add_task() : Added task    : 0x%08X\n";
 #pragma pop
 #endif
 

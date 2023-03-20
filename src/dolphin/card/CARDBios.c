@@ -14,7 +14,7 @@ static OSResetFunctionInfo ResetFunctionInfo = { OnReset, 127 };
 
 void __CARDDefaultApiCallback(s32 chan, s32 result) {}
 
-void __CARDSyncCallback(s32 i, s32)
+void __CARDSyncCallback(s32 i, s32 arg1)
 {
     OSWakeupThread(&__CARDBlock[i].threadQueue);
 }

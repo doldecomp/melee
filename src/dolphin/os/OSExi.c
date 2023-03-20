@@ -306,7 +306,7 @@ lbl_8034613C:
 
 #else
 
-bool EXISync(EXIChannel unused)
+bool EXISync(EXIChannel _)
 {
     NOT_IMPLEMENTED;
     return false;

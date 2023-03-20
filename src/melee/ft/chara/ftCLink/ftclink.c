@@ -107,14 +107,17 @@ void ftCLink_OnDeath(HSD_GObj* gobj)
 
 void ftCLink_OnLoad(HSD_GObj* gobj)
 {
-    int unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->x10C_ftData;
     CLinkAttributes* attrs = (void*) ftdata->ext_attr;
     void** items = ftdata->x48_items;
 
-    fp->x2224_flag.bits.b7 = 1;
+    fp->x2224_flag.bits.b7 = true;
     attrs->x54 = func_8001E8F8(func_80085E50(fp, 0x48));
     ftLink_OnLoadForCLink(fp);
     attrs = fp->x2D4_specialAttributes;
@@ -129,11 +132,16 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
 
 void ftCLink_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
 {
-    int unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
     Fighter* fp = gobj->user_data;
-    if (func_8026B2B4(fp->x1974_heldItem) == 1) {
+
+    if (func_8026B2B4(fp->x1974_heldItem) == true)
         func_80074A4C(gobj, 1, 1);
-    }
+
     func_80074A4C(gobj, 2, 1);
     ftCLink_OnItemPickup(gobj, arg1);
 }
@@ -150,11 +158,16 @@ void ftCLink_OnItemVisible(HSD_GObj* gobj)
 
 void ftCLink_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 {
-    int unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
     Fighter* fp = gobj->user_data;
-    if (func_8026B2B4(fp->x1974_heldItem) == 1) {
+
+    if (func_8026B2B4(fp->x1974_heldItem) == true)
         func_80074A4C(gobj, 1, 0);
-    }
+
     func_80074A4C(gobj, 2, 0);
     ftCLink_OnItemDrop(gobj, arg1);
 }
@@ -168,7 +181,7 @@ void ftCLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
@@ -206,15 +219,19 @@ void func_80149114(HSD_GObj* gobj)
 void func_8014919C(HSD_GObj* gobj)
 {
     CLinkAttributes* attrs;
-    s32 unused[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     Fighter* fp = gobj->user_data;
     if (fp->x5F8 == 0) {
         attrs = (void*) fp->x2D4_specialAttributes;
         func_8007B1B8(gobj, &attrs->xC4, func_80149114);
-        fp->x221B_b3 = 1;
-        fp->x221B_b4 = 1;
-        fp->x221B_b2 = 1;
+        fp->x221B_b3 = true;
+        fp->x221B_b4 = true;
+        fp->x221B_b2 = true;
     }
 }
 
@@ -242,7 +259,11 @@ bool func_8014920C(HSD_GObj* gobj)
 
 void func_80149268(HSD_GObj* gobj)
 {
-    int unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     checkFighter2244(gobj);
 }
 

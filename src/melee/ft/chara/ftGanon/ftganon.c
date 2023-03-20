@@ -8,12 +8,12 @@
 #include <melee/ft/types.h>
 
 ActionState as_table_ganon[] = {
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { 301, 0x00340211, 0x12000000, ftCaptain_SpecialN_Anim,
       ftCaptain_SpecialN_IASA, ftCaptain_SpecialN_Phys, ftCaptain_SpecialN_Coll,
       func_800761C8 },

@@ -1,12 +1,14 @@
-#include <melee/ft/chara/ftIceClimber/fticeclimber2_nana.h>
+#include "fticeclimber2_nana.h"
+
+#include "fticeclimber.h"
+
+#include "ft/fighter.h"
+#include "ft/forward.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 #include <dolphin/mtx/types.h>
-#include <melee/ft/chara/ftIceClimber/fticeclimber.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 
 char lbl_803CD7F8[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 
@@ -108,7 +110,7 @@ void ftNana_OnLoad(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -123,7 +125,11 @@ void ftNana_OnLoad(HSD_GObj* fighter_gobj)
 
 void ftNana_OnDeath(HSD_GObj* fighter_gobj)
 {
-    s32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
     fp->dmg.x18B0 = attr->xC8;

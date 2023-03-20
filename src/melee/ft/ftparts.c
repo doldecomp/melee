@@ -41,23 +41,39 @@ HSD_PObjInfo ftPObj = { Fighter_PObjInfoInit };
 static char lbl_803C09E0[] = "fighter_class_library";
 static char lbl_803C09F8[] = "ft_intp_jobj";
 static char lbl_803C0A08[] = "ftparts.c";
+
+#ifdef MUST_MATCH
 static char lbl_803C0A14[] = "envelope";
 static char lbl_803C0A20[] = "envelope->jobj";
 static char lbl_803C0A30[] = "jp->envelopemtx";
 static char lbl_803C0A40[] = "fighter parts model dobj num over! player %d\n";
 static char lbl_803C0A70[] = "fighter dobj num over! player %d\n";
+#endif
+
 static char lbl_803C0A94[] = "fighter parts num over! player %d\n";
 static char lbl_803C0AB8[] = "fighter parts num not match! player %d\n";
+
+#ifdef MWERKS_GEKKO
 static char lbl_803C0AE0[] = "fighter parts model num over!\n";
 static char lbl_803C0B00[] = "can't find tobj!\n";
 static char lbl_803C0B14[] = "fighter parts model dobj num over!\n";
+#endif
+
+#ifdef MUST_MATCH
 static char lbl_803C0B38[] = "cant set fighter rot x!\n";
 static char lbl_803C0B54[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 static char lbl_803C0B7C[] = "cant set fighter rot y!\n";
 static char lbl_803C0B98[] = "cant set fighter rot z!\n";
+#endif
+
+#ifdef MWERKS_GEKKO
 static char lbl_803C0BB4[] = "cant get fighter rot x!\n";
 static char lbl_803C0BD0[] = "cant get fighter rot y!\n";
+#endif
+
+#ifdef MUST_MATCH
 static char lbl_803C0BEC[] = "cant get fighter rot z!\n";
+#endif
 
 // .bss
 struct {
@@ -70,10 +86,17 @@ struct {
 static char lbl_804D3A30[] = "jobj.h";
 static char lbl_804D3A38[] = "jobj";
 static char lbl_804D3A40[] = "ft_jobj";
+
+#ifdef MWERKS_GEKKO
 static char lbl_804D3A48[] = "jp->mtx";
+#endif
+
 static char lbl_804D3A50[] = "ft_pobj";
 static char lbl_804D3A58[] = "0";
+
+#ifdef MWERKS_GEKKO
 static char lbl_804D3A5C[] = "rotate";
+#endif
 
 /// @todo Remove when strings can be reused
 static inline f32 _HSD_JObjGetScaleX(HSD_JObj* jobj)

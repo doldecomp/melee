@@ -15,6 +15,9 @@ Short for "attack."
 @section glossary_cam cam
 Short for "camera."
 
+@section glossary_cb cb
+Short for "callback."
+
 @section glossary_chan chan
 Short for "channel."
 
@@ -99,6 +102,9 @@ Short for "sound effect(s)."
 
 @section glossary_spd spd
 Short for "speed."
+
+@section glossary_sq sq
+Short for "square."
 
 @section glossary_src src
 Short for "source."

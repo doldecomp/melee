@@ -167,7 +167,7 @@ void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos);
 void func_8026BC14(HSD_GObj* item_gobj);
 
 /// Return bit 0 of 0xDD0
-s32 func_8026BC68(HSD_GObj* item_gobj);
+bool func_8026BC68(HSD_GObj* item_gobj);
 
 /// Get item owner
 HSD_GObj* func_8026BC78(HSD_GObj* item_gobj);

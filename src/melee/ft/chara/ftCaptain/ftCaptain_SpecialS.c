@@ -1,11 +1,12 @@
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftCaptain/ftCaptain.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftlib.h>
-#include <melee/it/itkind.h>
+#include "ftCaptain.h"
+
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
+#include "ft/ftlib.h"
+#include "it/itkind.h"
 
 // 0x800E3278
 // https://decomp.me/scratch/yi9xr // Remove all GFX and set GFX flags to false
@@ -160,7 +161,11 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
     HSD_GObj* detectGObj;
     s32 ASID;
     u16 entityClass;
-    s32 unused[5];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[20];
+#endif
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         detectGObj = fp->x20AC;
@@ -273,7 +278,11 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp;
     Fighter* temp_fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = temp_fp->x2D4_specialAttributes;
-    f32 var;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp = temp_fp;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -295,7 +304,11 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
     s32 ftKind;
-    f32 var;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     if ((u32) fp->sa.captain.x2230_isSpecialSGFX == false) {
         ftKind = func_800872A4(fighter_gobj);
@@ -378,7 +391,7 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_80085134(fighter_gobj);
@@ -405,7 +418,7 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_80085134(fighter_gobj);
@@ -427,7 +440,6 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
-    f32 facingDir;
 
     if ((u32) fp->x2208_ftcmd_var2 == 0U) {
         func_80084104(fighter_gobj);
@@ -445,12 +457,16 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
                       captainAttrs->x38_CAPTAIN_RAPTORBOOST_MISS_LANDING_LAG);
         return;
     }
-    if ((u32) fp->x2200_ftcmd_var0 == 1U) {
-        facingDir = fp->facing_dir;
-        if (((1.0f == fp->facing_dir) &&
-             (fp->x6F0_collData.x134_envFlags & 0x3F)) ||
-            (((-1.0f) == fp->facing_dir) &&
-             (fp->x6F0_collData.x134_envFlags & 0xFC0)))
+    if (fp->x2200_ftcmd_var0 == 1) {
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        f32 facingDir = fp->facing_dir;
+#endif
+
+        if ((fp->facing_dir == +1 &&
+             (fp->x6F0_collData.x134_envFlags & MPCOLL_RIGHTWALL)) ||
+            (fp->facing_dir == -1 &&
+             fp->x6F0_collData.x134_envFlags & MPCOLL_LEFTWALL))
         {
             efLib_DestroyAll(fighter_gobj);
             func_8008A2BC(fighter_gobj);
@@ -466,7 +482,11 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
     Fighter* temp_fp = GET_FIGHTER(fighter_gobj);
     Fighter* fp;
     ftCaptainAttributes* captainAttrs = temp_fp->x2D4_specialAttributes;
-    f32 var;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp = temp_fp;
     if (func_80082708(fighter_gobj) == false) {

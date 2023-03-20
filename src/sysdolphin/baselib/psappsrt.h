@@ -16,8 +16,8 @@ typedef struct _UnkGeneratorMember { // MexTK: GeneratorAppSRT
     s8 xA2;
 } UnkGeneratorMember;
 
-typedef struct _UnkGeneratorStruct { // MexTK: Particle
-    struct _UnkGeneratorStruct* next;
+struct UnkGeneratorStruct { // MexTK: Particle
+    struct UnkGeneratorStruct* next;
     u8 x4_fill[0xC];
     HSD_JObj* x10_jobj;
     u16 x14_fill;
@@ -26,7 +26,7 @@ typedef struct _UnkGeneratorStruct { // MexTK: Particle
     f32 x24, x28, x2C;
     u8 x30_fill[0x54 - 0x30];
     UnkGeneratorMember* x54;
-} UnkGeneratorStruct;
+};
 
 u16 psRemoveGeneratorSRT(unk_t);
 u16 psRemoveParticleAppSRT(unk_t);

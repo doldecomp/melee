@@ -25,25 +25,25 @@ typedef enum ftMarioAction {
 // SpecialS/SpecialAirS (Cape / Super Sheet) //
 
 #define FTMARIO_SPECIALS_COLL_FLAG                                             \
-    FIGHTER_HITSTATUS_COLANIM_PRESERVE | FIGHTER_HIT_NOUPDATE |                \
-        FIGHTER_MATANIM_NOUPDATE | FIGHTER_CMD_UPDATE |                        \
-        FIGHTER_COLANIM_NOUPDATE | FIGHTER_ITEMVIS_NOUPDATE |                  \
-        FIGHTER_SKIP_UNK_0x2222 | FIGHTER_MODELPART_VIS_NOUPDATE |             \
-        FIGHTER_MODEL_FLAG_NOUPDATE | FIGHTER_UNK_0x2227
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |     \
+        FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |            \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |    \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // SpecialLw/SpecialAirLw (Mario / Dr. Tornado ) //
 
 #define FTMARIO_SPECIALLW_COLL_FLAG                                            \
-    FIGHTER_GFX_PRESERVE | FIGHTER_HIT_NOUPDATE | FIGHTER_MATANIM_NOUPDATE |   \
-        FIGHTER_CMD_UPDATE | FIGHTER_COLANIM_NOUPDATE |                        \
-        FIGHTER_ITEMVIS_NOUPDATE | FIGHTER_SKIP_UNK_0x2222 |                   \
-        FIGHTER_MODELPART_VIS_NOUPDATE | FIGHTER_MODEL_FLAG_NOUPDATE |         \
-        FIGHTER_UNK_0x2227
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |                  \
+        FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |            \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |    \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 typedef struct _ftMarioAttributes {
     // SIDE SPECIAL - CAPE / SUPER SHEET //
 
-    /* 0x00 */ u8 x0_padding[0x04 - 0x0];
+    /* 0x00 */ f32 vel_x_decay;
     /* 0x04 */ f32 x4_MARIO_CAPE_VEL_X;
     /* 0x08 */ f32 x8_MARIO_CAPE_VEL_Y;
     /* 0x0C */ f32 xC_MARIO_CAPE_GRAVITY;

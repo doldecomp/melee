@@ -6,7 +6,7 @@
 int wcstombs(void* dst, const void* src, size_t len)
 {
     char c;
-    int i;
+    uint i;
 
     char* cdst = (char*) dst;
     const wchar_t* wsrc = (const wchar_t*) src;

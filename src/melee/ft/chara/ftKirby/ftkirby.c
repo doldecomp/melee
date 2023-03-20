@@ -471,10 +471,10 @@ ftKirby_UnkArrayThing* lbl_803C9FC8[FTKIND_MAX] = {
 };
 
 ActionState lbl_803CA04C[] = {
-    { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
-    { 15, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
-    { 16, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
-    { 17, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7414, NULL, NULL },
+    { 14, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
+    { 15, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
+    { 16, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
+    { 17, 0, 0x01000000, NULL, NULL, func_800C7414, NULL, NULL },
 };
 
 /* static */ void lbl_800EE854(void);
@@ -1133,7 +1133,7 @@ void ftKirby_800EE7B8(HSD_GObj* fighter_gobj)
 
 void func_800EE818(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    s32 _[2];
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftKirbyAttributes* attr = fp->x2D4_specialAttributes;
     switch (fp->sa.kirby.x2238) {

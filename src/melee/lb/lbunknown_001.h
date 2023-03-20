@@ -47,7 +47,7 @@ static s32 lbGetFreeAlphaRegImpl(s32 i0, struct _HSD_TevDesc* cur,
 s32 func_8000CD60(s32 i0, HSD_MObj*, union _HSD_TExp*);
 s32 func_8000CD90(s32 i);
 s32 func_8000CDA8(s32 i);
-struct _HSD_LObj* func_8000CDC0(struct _HSD_LObj*);
+struct HSD_LObj* func_8000CDC0(struct HSD_LObj*);
 void func_8000CE30(struct _HSD_DObj*, struct _HSD_DObj*);
 void func_8000CE40(HSD_JObj*, struct _HSD_DObj*);
 

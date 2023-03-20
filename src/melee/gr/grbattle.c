@@ -199,7 +199,7 @@ static void func_8021A11C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -224,7 +224,7 @@ static void func_8021A19C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -246,7 +246,7 @@ static void func_8021A20C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -272,7 +272,7 @@ static void func_8021A274(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -295,7 +295,7 @@ static void func_8021A2DC(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -319,7 +319,7 @@ static void func_8021A344(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -347,7 +347,7 @@ static void func_8021A3BC(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[28];
+    u8 _[28];
 #endif
 
     switch (gp->xC4) {

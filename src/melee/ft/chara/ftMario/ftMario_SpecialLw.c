@@ -1,13 +1,14 @@
-#include <melee/ft/chara/ftMario/ftMario_SpecialLw.h>
+#include "ftMario_SpecialLw.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftMario/ftmario.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/itkind.h>
-#include <sysdolphin/baselib/random.h>
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftparts.h"
+#include "ftMario/ftmario.h"
+#include "it/itkind.h"
+
+#include <baselib/random.h>
 
 // 0x800E2050
 // https://decomp.me/scratch/8zo4V
@@ -43,7 +44,12 @@ void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMarioAttributes* sa;
-    void* hsd_obj_ptr;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
     fp = GET_FIGHTER(gobj);
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
@@ -61,19 +67,16 @@ void ftMario_SpecialLw_SetVar(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
 }
 
-// https://decomp.me/scratch/4saR2
 void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp;
+    Fighter* fp = gobj->user_data;
+    ftMarioAttributes* sa = fp->x2D4_specialAttributes;
 
-    ftMarioAttributes* sa;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[28];
+#endif
 
-    void* hsd_obj_ptr;
-    u8 padding[24];
-
-    fp = gobj->user_data;
-
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     ftMario_SpecialLw_SetVar(gobj);
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRLW, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
@@ -86,20 +89,17 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-// https://decomp.me/scratch/nQT5V
 void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
 {
     f32 sub_val;
-    Fighter* fp;
+    Fighter* fp = gobj->user_data;
+    ftMarioAttributes* sa = fp->x2D4_specialAttributes;
 
-    ftMarioAttributes* sa;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[28];
+#endif
 
-    void* hsd_obj_ptr;
-    u8 padding[24];
-
-    fp = gobj->user_data;
-
-    sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     ftMario_SpecialLw_SetVar(gobj);
     Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRLW, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
@@ -128,7 +128,10 @@ void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj)
 // https://decomp.me/scratch/FT3Fl
 void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
 {
-    Fighter* fp;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMario_SpecialLw_SetNULL(gobj);
@@ -153,7 +156,7 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
             func_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 0, IS_INTERRUPTIBLE, 1.0f,
+        func_80096900(gobj, 1, 0, true, 1.0f,
                       (f32) sa->x5C_MARIO_TORNADO_LANDING_LAG);
     }
 }
@@ -194,7 +197,10 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     Fighter* fp;
     Fighter* ft_tmp;
 
-    u8 padding[8];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp = GET_FIGHTER(gobj);
     sa = GetMarioAttr(fp);
@@ -232,7 +238,11 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftMarioAttributes* sa;
     ftMarioAttributes* sa_2;
     Fighter* fp;
-    u8 padding[8];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp = getFighter(gobj);
     sa = fp->x2D4_specialAttributes;
@@ -262,7 +272,6 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
 void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
-    ftMarioAttributes* sa = GetMarioAttr(fp);
 
     if ((fp->x220C_ftcmd_var3 != 0U) &&
         ((s32) (fp->marioVars.SpecialLw.isUnkColl) != 0))
@@ -285,6 +294,11 @@ static ftCollisionBox ftMario_SpecialLw_CollisionBox = {
 void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[24];
+#endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         if (func_80082888(gobj, &ftMario_SpecialLw_CollisionBox) == false) {
@@ -328,7 +342,12 @@ void _ftMario_800E2778_helper(HSD_GObj* gobj)
 // https://decomp.me/scratch/v3srn
 void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
+
+    Fighter* fp = GET_FIGHTER(gobj);
     if (func_800824A0(gobj, &ftMario_SpecialLw_CollisionBox) != 0) {
         _ftMario_800E2778_helper(gobj);
         fp->marioVars.SpecialLw.isUnkColl = 1;

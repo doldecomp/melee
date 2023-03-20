@@ -16,7 +16,7 @@ void ftSamus_801293BC_inner(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     s32 x2230 = fp->sa.samus.x2230;
@@ -27,7 +27,7 @@ void ftSamus_801291F0(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fighter_gobj) {
@@ -43,7 +43,7 @@ void ftSamus_80129258(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fighter_gobj) {
@@ -62,7 +62,7 @@ s32 ftSamus_801292E4(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter* fp = getFighter(fighter_gobj);
@@ -138,7 +138,7 @@ void ftSamus_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL, 0.0f, 1.0f,
@@ -163,7 +163,7 @@ void ftSamus_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0, NULL, 0.0f, 1.0f,
@@ -186,7 +186,7 @@ void ftSamus_80129684(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     ftSamus_801292E4(fighter_gobj);
@@ -257,7 +257,7 @@ void ftSamus_80129940(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[20];
+    u8 _[20];
 #endif
 
     ftSamus_UnkAndDestroyAllEF(fighter_gobj);
@@ -270,7 +270,7 @@ void ftSamus_801299D0(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     ftSamus_801293BC(fighter_gobj);
@@ -315,7 +315,7 @@ void ftSamus_80129B1C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[32];
+    u8 _[32];
 #endif
 
     if (func_8009917C(fighter_gobj)) {
@@ -478,7 +478,7 @@ void ftSamus_8012A074(HSD_GObj* fighter_gobj)
         if ((fp->action_id == 0x15D) || (fp->action_id == 0x15F)) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
-            u8 unused[8];
+            u8 _[8];
 #endif
 
             func_802B62D0(fighter_gobj, &position, 0, fp->facing_dir);

@@ -71,7 +71,7 @@ void func_80378280(u8 a, int b)
 
     while (r7 != NULL) {
         HSD_PadRumbleListData* r6 = r7->next;
-        if (r7->id == b)
+        if (r7->id == (unsigned) b)
             func_80378128(r31, r7);
         r7 = r6;
     }
@@ -94,18 +94,24 @@ void func_80378330_inline(u8 a, int b)
 
 void func_80378330(void)
 {
-    int i;
-    u8 dummy[8];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
+    int i;
     for (i = 0; i < 4; i++)
         func_80378330_inline(i, 1);
 }
 
 void func_803783B0(void)
 {
-    int i;
-    u8 dummy[8];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
+    int i;
     for (i = 0; i < 4; i++)
         func_80378330_inline(i, 0);
 }
@@ -216,13 +222,16 @@ void HSD_PadRumbleInterpret_inline(HSD_PadRumbleListData** r6,
 
 void HSD_PadRumbleInterpret(void)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
     struct RumbleInfo* r31 = &HSD_PadLibData.rumble_info;
     struct Struct804C22E0* r30 = lbl_804C22E0;
     HSD_PadRumbleListData* r29;
     HSD_PadRumbleListData* r28;
-    int i;
-    u8 dummy[8];
 
+    int i;
     for (i = 0; i < 4; i++, r30++) {
         r30->unk1 = 0;
         if (r31->unk2 == 0) {

@@ -3,6 +3,7 @@
 
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/forward.h>
 
 typedef struct {
     unk_t x0;

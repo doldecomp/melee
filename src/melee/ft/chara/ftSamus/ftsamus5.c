@@ -14,7 +14,7 @@ void ftSamus_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x161, 0, NULL, 0.0f, 1.0f,
@@ -110,7 +110,7 @@ void ftSamus_8012A96C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if ((!fp->x2204_ftcmd_var1) && (!fp->x2340_stateVar1)) {
@@ -141,7 +141,7 @@ void ftSamus_8012AA3C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if ((!fp->x2204_ftcmd_var1) && (!fp->x2340_stateVar1)) {
@@ -189,7 +189,7 @@ void ftSamus_8012ABB4(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_80084DB0(fighter_gobj);
@@ -203,7 +203,7 @@ void ftSamus_8012AC00(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->xE0_ground_or_air == GA_Air) {
@@ -239,7 +239,7 @@ void ftSamus_8012ACF8(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->xE0_ground_or_air == GA_Air) {
