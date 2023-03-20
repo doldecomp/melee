@@ -264,7 +264,7 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
     func_8007D3A8(fp, 0.0f, sa->x48_MARIO_TORNADO_MOMENTUM_X_MUL_AIR, flt_var);
 }
 
-void doColl(HSD_GObj* gobj)
+void _doColl(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
