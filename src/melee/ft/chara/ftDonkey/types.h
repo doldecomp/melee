@@ -3,6 +3,11 @@
 
 #include <platform.h>
 
+struct ftDonkey_EntityVars {
+    /* 0x222C */ s32 x222C;
+    /* 0x2230 */ s32 x2230;
+};
+
 union ftDonkey_StateVars {
     struct ftDonkey_SpecialNVars {
         s32 x0;

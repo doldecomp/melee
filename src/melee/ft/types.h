@@ -545,7 +545,7 @@ struct Fighter_DemoStrings {
 };
 
 // --------------------------------------------------------------------------------
-// UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fp
+// UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fighter
 // header includes or something.
 // --------------------------------------------------------------------------------
 struct ftMario_EntityVars {
@@ -561,11 +561,6 @@ struct ftMario_EntityVars {
 
 struct ftFox_EntityVars {
     /* 0x222C */ HSD_GObj* x222C_blasterGObj;
-};
-
-struct ftDonkey_EntityVars {
-    /* 0x222C */ s32 x222C;
-    /* 0x2230 */ s32 x2230;
 };
 
 struct ftKirby_EntityVars {
