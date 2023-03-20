@@ -193,16 +193,16 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     ftMario_DatAttrs* sa;
     Fighter* fp0;
 
-    fp0 = GET_FIGHTER(gobj);
-    sa = GetMarioAttr(fp0);
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
+    fp0 = GET_FIGHTER(gobj);
+    sa = GetMarioAttr(fp0);
+
     vel_y = sa->x3C_MARIO_TORNADO_MOMENTUM_X_GROUND;
-    if ((u32) fp0->x2200_ftcmd_var0 != 0U) {
+    if (fp0->x2200_ftcmd_var0 != 0) {
         fp0->sv.mr.SpecialLw.groundVelX = fp0->sv.mr.SpecialLw.groundVelX -
                                           sa->x4C_MARIO_TORNADO_FRICTION_END;
         vel_y += fp0->sv.mr.SpecialLw.groundVelX;
