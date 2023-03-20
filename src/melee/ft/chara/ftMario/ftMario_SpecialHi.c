@@ -82,14 +82,14 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
     f32 tmp_expr;
     f32 tmp;
 
-    s32 throwflag_flag;
+    bool throwflag_flag;
     fp = GET_FIGHTER(gobj);
 
     sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
 
     lstick_x = abs(fp->input.x620_lstick_x);
 
-    if ((s32) fp->x2200_ftcmd_var0 == 0U) {
+    if (fp->x2200_ftcmd_var0 == 0U) {
         if (lstick_x > sa->specialhi.momentum_stick_range) {
             tmp_expr =
                 (f32) ((f64) sa->specialhi.angle_diff *
@@ -98,7 +98,7 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
 
             tmp = (fp->input.x620_lstick_x > 0.0f)
                       ? -(DEGREES_TO_RADIANS * tmp_expr)
-                      : (DEGREES_TO_RADIANS * tmp_expr);
+                      : DEGREES_TO_RADIANS * tmp_expr;
             inputStickangle = fp->x6BC_inputStickangle;
 
             if (abs(tmp) > abs(inputStickangle)) {
@@ -113,6 +113,7 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
     } else {
         throwflag_flag = 0;
     }
+
     if (throwflag_flag != 0) {
         if (abs(fp->input.x620_lstick_x) > sa->specialhi.reverse_stick_range) {
             func_8007D9FC(fp);
@@ -121,13 +122,11 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
     }
 }
 
-// 0x800E1BE4
 void ftMario_SpecialHi_IASA(HSD_GObj* gobj)
 {
     ftMario_SpecialHi_CalcAngle(gobj);
 }
 
-// 0x800E1D2C
 void ftMario_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -138,16 +137,13 @@ void ftMario_SpecialAirHi_IASA(HSD_GObj* gobj)
     ftMario_SpecialHi_CalcAngle(gobj);
 }
 
-// 0x800E1E74
-// https://decomp.me/scratch/8axfI
 void ftMario_SpecialHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ground_or_air == GA_Air) {
+    if (fp->ground_or_air == GA_Air)
         func_80085154(gobj);
-    } else {
+    else
         func_80084FA8(gobj);
-    }
 }
 
 void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
