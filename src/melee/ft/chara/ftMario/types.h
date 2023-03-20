@@ -28,7 +28,6 @@ typedef struct ftMario_DatAttrs {
     } specialhi;
 
     struct ftMario_SpecialLw_DatAttrs {
-        /// Vertical momentum from inital grounded B-tap
         f32 vel_y;
 
         f32 momentum_x;
@@ -42,10 +41,7 @@ typedef struct ftMario_DatAttrs {
         s32 landing_lag;
     } speciallw;
 
-    // CAPE / SUPER SHEET REFLECTION //
-
-    /* 0x60 */ ReflectDesc cape_reflection;
-
+    ReflectDesc cape_reflection;
 } ftMario_DatAttrs;
 
 typedef struct ftMario_SpecialLw_ECB {
