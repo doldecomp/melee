@@ -192,7 +192,6 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     f32 vel_y;
     ftMario_DatAttrs* sa;
     Fighter* fp;
-    Fighter* ft_tmp;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -214,7 +213,7 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     }
 
     {
-        ft_tmp = fp;
+        Fighter* ft_tmp = fp;
         func_8007CADC(ft_tmp, 0.0f, sa->x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND,
                       vel_y);
         func_8007CB74(gobj);
