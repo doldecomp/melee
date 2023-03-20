@@ -168,7 +168,7 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
 
     if (fp->x2204_ftcmd_var1 == 1U && !fp->sv.mr.SpecialS.isReflect) {
         fp->sv.mr.SpecialS.isReflect = true;
-        ftColl_CreateReflectHit(gobj, &sa_tmp->specials_reflection, NULL);
+        ftColl_CreateReflectHit(gobj, &sa_tmp->cape_reflection, NULL);
     } else if ((fp->x2204_ftcmd_var1 == 0U) &&
                fp->sv.mr.SpecialS.isReflect == true)
     {

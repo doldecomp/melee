@@ -27,23 +27,24 @@ typedef struct ftMario_DatAttrs {
         f32 vel_mul;
     } specialhi;
 
-    // DOWN SPECIAL - MARIO TORNADO / DR. TORNADO //
+    struct ftMario_SpecialLw_DatAttrs {
+        /// Vertical momentum from inital grounded B-tap
+        f32 vel_y;
 
-    /* 0x38 */ f32 speciallw_vel_y; // Vertical momentum from
-                                    // inital grounded B-tap
-    /* 0x3C */ f32 speciallw_momentum_x;
-    /* 0x40 */ f32 specialairlw_momentum_x;
-    /* 0x44 */ f32 speciallw_momentum_x_mul;
-    /* 0x48 */ f32 specialairlw_momentum_x_mul;
-    /* 0x4C */ f32 speciallw_friction_end;
-    /* 0x50 */ s32 speciallw_unk0;
-    /* 0x54 */ f32 speciallw_tap_y_vel_max;
-    /* 0x58 */ f32 speciallw_tap_grav;
-    /* 0x5C */ s32 speciallw_landing_lag;
+        f32 momentum_x;
+        f32 air_momentum_x;
+        f32 momentum_x_mul;
+        f32 air_momentum_x_mul;
+        f32 friction_end;
+        s32 unk0;
+        f32 tap_y_vel_max;
+        f32 tap_grav;
+        s32 landing_lag;
+    } speciallw;
 
     // CAPE / SUPER SHEET REFLECTION //
 
-    /* 0x60 */ ReflectDesc specials_reflection;
+    /* 0x60 */ ReflectDesc cape_reflection;
 
 } ftMario_DatAttrs;
 
