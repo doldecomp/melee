@@ -196,6 +196,11 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     fp0 = GET_FIGHTER(gobj);
     sa = GetMarioAttr(fp0);
 
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     vel_y = sa->x3C_MARIO_TORNADO_MOMENTUM_X_GROUND;
     if ((u32) fp0->x2200_ftcmd_var0 != 0U) {
         fp0->sv.mr.SpecialLw.groundVelX = fp0->sv.mr.SpecialLw.groundVelX -
