@@ -2,11 +2,13 @@
 #define MELEE_FT_CHARA_FTMARIO_FTMARIO_H
 
 #include "ft/fighter.h"
+#include "ft/forward.h"
 #include "ft/ftcommon.h"
+#include "ftMario/forward.h"
 
 #include <baselib/forward.h>
 
-extern ActionState as_table_mario[];
+extern ActionState as_table_mario[AS_MARIO_MAX - ASID_MAX];
 extern ActionState lbl_803C7260[];
 
 // ftmario1
