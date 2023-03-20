@@ -8,8 +8,6 @@
 #include <dolphin/mtx/types.h>
 
 typedef struct ftMario_DatAttrs {
-    // SIDE SPECIAL - CAPE / SUPER SHEET //
-
     struct ftMario_SpecialS_DatAttrs {
         f32 vel_x_decay;
         Vec2 vel;
@@ -18,16 +16,16 @@ typedef struct ftMario_DatAttrs {
         ItemKind cape_kind;
     } specials;
 
-    // UP SPECIAL - SUPER JUMP PUNCH //
-
-    /* 0x18 */ f32 specialhi_freefall_mobility;
-    /* 0x1C */ f32 specialhi_landing_lag;
-    /* 0x20 */ f32 specialhi_reverse_stick_range;
-    /* 0x24 */ f32 specialhi_momentum_stick_range;
-    /* 0x28 */ f32 specialhi_angle_diff;
-    /* 0x2C */ f32 specialhi_vel_x;
-    /* 0x30 */ f32 specialhi_grav;
-    /* 0x34 */ f32 specialhi_vel_mul;
+    struct ftMario_SpecialHi_DatAttrs {
+        f32 freefall_mobility;
+        f32 landing_lag;
+        f32 reverse_stick_range;
+        f32 momentum_stick_range;
+        f32 angle_diff;
+        f32 vel_x;
+        f32 grav;
+        f32 vel_mul;
+    } specialhi;
 
     // DOWN SPECIAL - MARIO TORNADO / DR. TORNADO //
 

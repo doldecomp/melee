@@ -11,6 +11,9 @@
 
 #include <baselib/random.h>
 
+#define GET_ATTRS(fp)                                                          \
+    (&((ftMario_DatAttrs*) (fp)->x2D4_specialAttributes)->specialhi)
+
 void ftMario_SpecialHi_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -38,7 +41,7 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
     fp->x80_self_vel.y = 0.0f;
-    fp->x80_self_vel.x = (f32) (fp->x80_self_vel.x * sa->specialhi_vel_x);
+    fp->x80_self_vel.x = (f32) (fp->x80_self_vel.x * sa->specialhi.vel_x);
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialAirHi, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
@@ -53,8 +56,8 @@ void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80096900(gobj, 0, 1, 0, sa->specialhi_freefall_mobility,
-                      sa->specialhi_landing_lag);
+        func_80096900(gobj, 0, 1, 0, sa->specialhi.freefall_mobility,
+                      sa->specialhi.landing_lag);
     }
 }
 
@@ -92,11 +95,11 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
     lstick_x = abs(fp->input.x620_lstick_x);
 
     if ((s32) fp->x2200_ftcmd_var0 == 0U) {
-        if (lstick_x > sa->specialhi_momentum_stick_range) {
+        if (lstick_x > sa->specialhi.momentum_stick_range) {
             tmp_expr =
-                (f32) ((f64) sa->specialhi_angle_diff *
-                       ((f64) (lstick_x - sa->specialhi_momentum_stick_range) /
-                        (1.0 - (f64) sa->specialhi_momentum_stick_range)));
+                (f32) ((f64) sa->specialhi.angle_diff *
+                       ((f64) (lstick_x - sa->specialhi.momentum_stick_range) /
+                        (1.0 - (f64) sa->specialhi.momentum_stick_range)));
 
             tmp = (fp->input.x620_lstick_x > 0.0f)
                       ? -(DEGREES_TO_RADIANS * tmp_expr)
@@ -116,7 +119,7 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
         throwflag_flag = 0;
     }
     if (throwflag_flag != 0) {
-        if (abs(fp->input.x620_lstick_x) > sa->specialhi_reverse_stick_range) {
+        if (abs(fp->input.x620_lstick_x) > sa->specialhi.reverse_stick_range) {
             func_8007D9FC(fp);
             func_80075AF0(fp, 0, (f32) (HALF_PI * (f64) fp->facing_dir));
         }
@@ -166,12 +169,12 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         func_80085154(gobj);
-        fp->x80_self_vel.x = (f32) (fp->x80_self_vel.x * sa->specialhi_vel_mul);
-        fp->x80_self_vel.y = (f32) (fp->x80_self_vel.y * sa->specialhi_vel_mul);
-        fp->x80_self_vel.z = (f32) (fp->x80_self_vel.z * sa->specialhi_vel_mul);
+        fp->x80_self_vel.x = (f32) (fp->x80_self_vel.x * sa->specialhi.vel_mul);
+        fp->x80_self_vel.y = (f32) (fp->x80_self_vel.y * sa->specialhi.vel_mul);
+        fp->x80_self_vel.z = (f32) (fp->x80_self_vel.z * sa->specialhi.vel_mul);
         return;
     }
-    func_8007D494(fp, sa->specialhi_grav, attr_ptr->x170_TerminalVelocity);
+    func_8007D494(fp, sa->specialhi.grav, attr_ptr->x170_TerminalVelocity);
     func_8007CF58(fp);
 }
 
@@ -180,12 +183,12 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
 void ftMario_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftMario_DatAttrs* sa;
+    ftMario_SpecialHi_DatAttrs* sa;
 
     fp = GET_FIGHTER(gobj);
 
-    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
-    func_800D5CB0(gobj, 0, sa->specialhi_landing_lag);
+    sa = GET_ATTRS(fp);
+    func_800D5CB0(gobj, 0, sa->landing_lag);
 }
 
 // 0x800E1F70
