@@ -44,7 +44,7 @@ void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->mewtwoVars.SpecialS.isConfusionReflect = false;
+    fp->sv.mt.SpecialS.isConfusionReflect = false;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS, 0,
                                        NULL, 0.0f, 1.0f, 0.0f);
@@ -83,7 +83,7 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->mewtwoVars.SpecialS.isConfusionReflect = false;
+    fp->sv.mt.SpecialS.isConfusionReflect = false;
 
     if (fp->ev.mt.x223C_isConfusionBoost == false) {
         fp->x80_self_vel.y = mewtwoAttrs->x18_MEWTWO_CONFUSION_AIR_BOOST;
@@ -168,7 +168,7 @@ void ftMewtwo_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->mewtwoVars.SpecialS.isConfusionReflect != false) {
+    if (fp->sv.mt.SpecialS.isConfusionReflect != false) {
         fp->x2218_flag.bits.b3 = 1;
         fp->x2218_flag.bits.b4 = 1;
         fp->cb.x21C8_callback_OnReflectHit = ftMewtwo_SpecialS_OnReflect;
@@ -247,16 +247,16 @@ void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj)
                                           // returns instead of just NULL? //
         fp->x2218_flag.bits.b4 =
             1; // Here it is... the reason Confusion cannot change ownership.
-        fp->mewtwoVars.SpecialS.isConfusionReflect = true;
+        fp->sv.mt.SpecialS.isConfusionReflect = true;
         fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
         return;
 
     case CONFUSION_REFLECT_OFF:
-        if (fp->mewtwoVars.SpecialS.isConfusionReflect != false) {
+        if (fp->sv.mt.SpecialS.isConfusionReflect != false) {
             fp->x2218_flag.bits.b3 = 0;
             fp->x2218_flag.bits.b4 = 0;
             fp->cb.x21C8_callback_OnReflectHit = NULL;
-            fp->mewtwoVars.SpecialS.isConfusionReflect = false;
+            fp->sv.mt.SpecialS.isConfusionReflect = false;
         }
         fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
         return;

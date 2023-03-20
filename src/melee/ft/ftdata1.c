@@ -1,9 +1,9 @@
 #include "ftdata.h"
 
-#include "forward.h"
-#include "ft_unknown_006.h"
 #include "types.h"
 
+#include "forward.h"
+#include "ft_unknown_006.h"
 #include "ftCaptain/ftCaptain.h"
 #include "ftCaptain/ftCaptain_SpecialHi.h"
 #include "ftCaptain/ftCaptain_SpecialLw.h"
@@ -33,7 +33,8 @@
 #include "ftMario/ftmario.h"
 #include "ftMario/ftmario2.h"
 #include "ftMars/ftMars.h"
-#include "ftMasterHand/ftMasterHand.h"
+#include "ftMasterHand/ftMasterHand_01.h"
+#include "ftMasterHand/ftMasterHand_02.h"
 #include "ftMewtwo/ftmewtwo.h"
 #include "ftNess/ftNess.h"
 #include "ftPeach/ftpeach.h"

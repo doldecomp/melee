@@ -43,7 +43,7 @@ struct HSD_AObj {
     f32 end_frame;
     f32 framerate;
     HSD_FObj* fobj;
-    struct _HSD_Obj* hsd_obj;
+    struct HSD_Obj* hsd_obj;
 };
 
 struct HSD_AObjDesc {
@@ -53,13 +53,13 @@ struct HSD_AObjDesc {
     u32 obj_id;
 };
 
-typedef struct _HSD_AnimJoint {
-    struct _HSD_AnimJoint* child;
-    struct _HSD_AnimJoint* next;
+struct HSD_AnimJoint {
+    HSD_AnimJoint* child;
+    HSD_AnimJoint* next;
     HSD_AObjDesc* aobjdesc;
-    struct _HSD_RObjAnimJoint* robj_anim;
+    HSD_RObjAnimJoint* robj_anim;
     u32 flags;
-} HSD_AnimJoint;
+};
 
 void HSD_AObjInitAllocData(void);
 HSD_ObjAllocData* HSD_AObjGetAllocData(void);

@@ -17,7 +17,7 @@ typedef struct _TextGlyphTexture {
     /*0x00*/ u8 data[512];
 } TextGlyphTexture;
 
-struct _TextKerning {
+struct TextKerning {
     /*0x00*/ u8 left;
     /*0x01*/ u8 right;
 };

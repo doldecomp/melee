@@ -1,6 +1,6 @@
 #include "ftMasterHand_07.h"
 
-#include "ftMasterHand.h"
+#include "ftMasterHand_03.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"

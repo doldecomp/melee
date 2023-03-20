@@ -1,4 +1,4 @@
-#include <sysdolphin/baselib/lobj.h>
+#include "lobj.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>

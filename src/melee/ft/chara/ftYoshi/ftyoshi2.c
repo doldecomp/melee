@@ -79,7 +79,7 @@ void lbl_8012C030(HSD_GObj* fighter_gobj)
 #endif
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->x2340_f32 += lbl_804D9A28;
+    fp->sv.ys.unk2.x0 += lbl_804D9A28;
     func_80092BCC(fighter_gobj);
     if (func_800925A4(fighter_gobj)) {
         spawnEffect(fighter_gobj);
@@ -203,12 +203,12 @@ void lbl_8012C2F4(HSD_GObj* fighter_gobj)
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->x2340_f32 += lbl_804D9A28;
+    fp->sv.ys.unk2.x0 += lbl_804D9A28;
     func_80092BCC(fighter_gobj);
 
     if (func_800925A4(fighter_gobj)) {
         spawnEffect(fighter_gobj);
-    } else if (fp->x234C_stateVar4_s32 != 0 ||
+    } else if (fp->sv.ys.unk2.xC != 0 ||
                (!(fp->x221B_b0 & 1) && !(fp->x2218_flag.bits.b3)))
     {
         func_80092BE8(fighter_gobj);
@@ -274,7 +274,7 @@ void lbl_8012C54C(HSD_GObj* fighter_gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    fp->x2340_f32 = fp->x2340_f32 + lbl_804D9A28;
+    fp->sv.ys.unk2.x0 = fp->sv.ys.unk2.x0 + lbl_804D9A28;
 
     if (ftAnim_IsFramesRemaining(fighter_gobj) == 0)
         func_8008A2BC(fighter_gobj);
@@ -424,7 +424,7 @@ void lbl_8012C7A4(HSD_GObj* fighter_gobj)
 
     func_80093BC0(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if (fp->x234C_stateVar4_s32) {
+        if (fp->sv.ys.unk2.xC) {
             func_80092BE8(fighter_gobj);
         } else {
             func_800928CC(fighter_gobj);
@@ -484,9 +484,9 @@ void func_8012C850(HSD_GObj* fighter_gobj)
     fp->x221C_flag.bits.b1 = true;
     fp->x221C_flag.bits.b2 = true;
 
-    fp->x2354_stateVar6_f32 = p_ftCommonData->x2A4;
+    fp->sv.ys.unk2.x14 = p_ftCommonData->x2A4;
     temp_r5 = p_ftCommonData;
-    fp->x2358_stateVar7 = temp_r5->x2B4;
+    fp->sv.ys.unk2.x18 = temp_r5->x2B4;
     func_8009370C(fighter_gobj, lbl_8012CACC, temp_r5);
 }
 

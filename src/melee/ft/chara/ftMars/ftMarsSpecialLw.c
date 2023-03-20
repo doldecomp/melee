@@ -1,15 +1,15 @@
-#include "melee/ft/inlines.h"
-#include <melee/ft/chara/ftMars/ftMars.h>
+#include "ftMars.h"
 
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftparts.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
+#include "ft/ftlib.h"
+#include "ft/ftparts.h"
+#include "ft/inlines.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
 
 void ftMars_SpecialLw_StartAction(HSD_GObj* gobj)
 {
@@ -22,7 +22,7 @@ void ftMars_SpecialLw_StartAction(HSD_GObj* gobj)
     {
         Fighter* fp1 = GET_FIGHTER(gobj);
         fp1->x2204_ftcmd_var1 = 0;
-        fp1->x2340_stateVar1 = 0;
+        fp1->sv.ms.speciallw.x0 = 0;
     }
 }
 
@@ -47,7 +47,7 @@ void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj)
         Fighter* fp;
         fp = GET_FIGHTER(gobj);
         fp->x2204_ftcmd_var1 = 0;
-        fp->x2340_stateVar1 = 0;
+        fp->sv.ms.speciallw.x0 = 0;
     }
 }
 
@@ -202,17 +202,17 @@ void lbl_80138E68(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 sv1 = fp->x2340_stateVar1;
+    s32 sv1 = fp->sv.ms.speciallw.x0;
 
     /// @todo required for some reason
-    fp->x2340_stateVar1;
+    fp->sv.ms.speciallw.x0;
 
     if (sv1 > 0 && func_800872A4(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
 #ifndef MUST_MATCH
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
-                func_8007ABD0(&fp->x914[idx], fp->x2340_stateVar1, gobj);
+                func_8007ABD0(&fp->x914[idx], fp->sv.ms.speciallw.x0, gobj);
             }
         }
 
@@ -222,8 +222,8 @@ void lbl_80138E68(HSD_GObj* gobj)
         hb = (s32) fp;
         while (idx < 4) {
             if (*(s32*) (hb + 0x914) == HitCapsule_Enabled) {
-                func_8007ABD0((HitCapsule*) (hb + 0x914), fp->x2340_stateVar1,
-                              gobj);
+                func_8007ABD0((HitCapsule*) (hb + 0x914),
+                              fp->sv.ms.speciallw.x0, gobj);
             }
             idx++;
             hb += 0x138;
@@ -247,17 +247,17 @@ void lbl_80138F14(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 sv1 = fp->x2340_stateVar1;
+    s32 sv1 = fp->sv.ms.speciallw.x0;
 
     /// @todo required for some reason
-    fp->x2340_stateVar1;
+    fp->sv.ms.speciallw.x0;
 
     if (sv1 > 0 && func_800872A4(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
 #ifndef MUST_MATCH
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
-                func_8007ABD0(&fp->x914[idx], fp->x2340_stateVar1, gobj);
+                func_8007ABD0(&fp->x914[idx], fp->sv.ms.speciallw.x0, gobj);
             }
         }
 
@@ -267,8 +267,8 @@ void lbl_80138F14(HSD_GObj* gobj)
         hb = (s32) fp;
         while (idx < 4) {
             if (*(s32*) (hb + 0x914) == HitCapsule_Enabled) {
-                func_8007ABD0((HitCapsule*) (hb + 0x914), fp->x2340_stateVar1,
-                              gobj);
+                func_8007ABD0((HitCapsule*) (hb + 0x914),
+                              fp->sv.ms.speciallw.x0, gobj);
             }
             idx++;
             hb += 0x138;
@@ -361,7 +361,7 @@ void lbl_80139140(HSD_GObj* gobj)
         temp_r0 = (s32) fp->x19A4;
 
         if (temp_r0 > 0)
-            fp->x2340_stateVar1 = (s32) (temp_r0 * attr->x5C);
+            fp->sv.ms.speciallw.x0 = (s32) (temp_r0 * attr->x5C);
 
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
                       &sp18);

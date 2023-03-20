@@ -4,7 +4,7 @@
 #include "ft/forward.h"
 
 typedef struct ftCaptainAttributes ftCaptainAttributes;
-typedef union ftCaptainStateVars ftCaptainStateVars;
+typedef union ftCaptain_StateVars ftCaptain_StateVars;
 
 typedef enum ftCaptainAction {
     ftCaptain_AS_Swing42_Sword = ASID_MAX,

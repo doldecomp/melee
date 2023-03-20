@@ -1,6 +1,6 @@
 #include "ftMasterHand_27.h"
 
-#include "ftMasterHand.h"
+#include "ftMasterHand_03.h"
 #include "ftMasterHand_34.h"
 
 #include "ft/code_80081B38.h"
@@ -29,7 +29,7 @@ void lbl_80155074(HSD_GObj* gobj)
             func_800DE2A8(gobj, victim);
             func_800DE7C0(victim, 0, 0);
         }
-        fp->masterhandVars.x2360 = 0;
+        fp->sv.mh.unk0.x20 = 0;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj))

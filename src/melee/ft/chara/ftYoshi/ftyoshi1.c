@@ -1,5 +1,7 @@
 #include "ftyoshi1.h"
 
+#include "types.h"
+
 #include "ef/efasync.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftanim.h"

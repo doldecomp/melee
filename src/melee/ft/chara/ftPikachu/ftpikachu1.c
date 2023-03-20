@@ -1,5 +1,7 @@
 #include "ftPikachu/ftpikachu1.h"
 
+#include "types.h"
+
 #include "ft/fighter.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"

@@ -53,7 +53,7 @@ void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index,
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    *ghostPos = fp->foxVars.SpecialS.ghostEffectPos[index];
+    *ghostPos = fp->sv.fx.SpecialS.ghostEffectPos[index];
 }
 
 // 0x800E9ED4
@@ -61,7 +61,7 @@ void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index,
 // Falco's Illusion/Phantasm
 f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* fighter_gobj, s32 index)
 {
-    return getFighter(fighter_gobj)->foxVars.SpecialS.blendFrames[index];
+    return getFighter(fighter_gobj)->sv.fx.SpecialS.blendFrames[index];
 }
 
 // 0x800E9EE8
@@ -76,9 +76,9 @@ void ftFox_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     foxAttrs = fp->x2D4_specialAttributes;
 
     fp->x2208_ftcmd_var2 = 0;
-    fp->foxVars.SpecialS.gravityDelay =
+    fp->sv.fx.SpecialS.gravityDelay =
         (s32) foxAttrs->x24_FOX_ILLUSION_GRAVITY_DELAY;
-    fp->foxVars.SpecialS.ghostGObj = NULL;
+    fp->sv.fx.SpecialS.ghostGObj = NULL;
 
     fp->xEC_ground_vel /= foxAttrs->x28_FOX_ILLUSION_GROUND_VEL_X;
 
@@ -99,9 +99,9 @@ void ftFox_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     foxAttrs = getFtSpecialAttrs(fp);
 
     fp->x2208_ftcmd_var2 = 0;
-    fp->foxVars.SpecialS.gravityDelay =
+    fp->sv.fx.SpecialS.gravityDelay =
         (s32) foxAttrs->x24_FOX_ILLUSION_GRAVITY_DELAY;
-    fp->foxVars.SpecialS.ghostGObj = NULL;
+    fp->sv.fx.SpecialS.ghostGObj = NULL;
 
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x /= foxAttrs->x28_FOX_ILLUSION_GROUND_VEL_X;
@@ -152,8 +152,8 @@ void ftFox_SpecialSStart_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->foxVars.SpecialS.gravityDelay != 0) {
-        fp->foxVars.SpecialS.gravityDelay--;
+    if (fp->sv.fx.SpecialS.gravityDelay != 0) {
+        fp->sv.fx.SpecialS.gravityDelay--;
     }
     func_80084F3C(fighter_gobj);
 }
@@ -172,8 +172,8 @@ void ftFox_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    if (fp->foxVars.SpecialS.gravityDelay != 0) {
-        fp->foxVars.SpecialS.gravityDelay--;
+    if (fp->sv.fx.SpecialS.gravityDelay != 0) {
+        fp->sv.fx.SpecialS.gravityDelay--;
     } else {
         func_8007D494(fp, foxAttrs->x30_FOX_ILLUSION_UNK2,
                       ftAttrs->x170_TerminalVelocity);
@@ -255,7 +255,7 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* fighter_gobj)
                 func_8029CEB4(fighter_gobj, &fp->xB0_pos, 0x39, fp->facing_dir);
         }
         if (ghostGObj != NULL) {
-            fp->foxVars.SpecialS.ghostGObj = ghostGObj;
+            fp->sv.fx.SpecialS.ghostGObj = ghostGObj;
             fp->x2222_flag.bits.b2 = 1;
         }
     }
@@ -331,20 +331,17 @@ static inline void ftFox_SpecialS_SetPhys(HSD_GObj* fighter_gobj)
 
     fp = GET_FIGHTER(fighter_gobj);
 
-    fp->foxVars.SpecialS.ghostEffectPos[3] =
-        fp->foxVars.SpecialS.ghostEffectPos[2];
-    fp->foxVars.SpecialS.ghostEffectPos[2] =
-        fp->foxVars.SpecialS.ghostEffectPos[1];
-    fp->foxVars.SpecialS.ghostEffectPos[1] =
-        fp->foxVars.SpecialS.ghostEffectPos[0];
+    fp->sv.fx.SpecialS.ghostEffectPos[3] = fp->sv.fx.SpecialS.ghostEffectPos[2];
+    fp->sv.fx.SpecialS.ghostEffectPos[2] = fp->sv.fx.SpecialS.ghostEffectPos[1];
+    fp->sv.fx.SpecialS.ghostEffectPos[1] = fp->sv.fx.SpecialS.ghostEffectPos[0];
 
-    fp->foxVars.SpecialS.ghostEffectPos[0] = fp->xB0_pos;
+    fp->sv.fx.SpecialS.ghostEffectPos[0] = fp->xB0_pos;
 
-    fp->foxVars.SpecialS.blendFrames[3] = fp->foxVars.SpecialS.blendFrames[2];
-    fp->foxVars.SpecialS.blendFrames[2] = fp->foxVars.SpecialS.blendFrames[1];
-    fp->foxVars.SpecialS.blendFrames[1] = fp->foxVars.SpecialS.blendFrames[0];
+    fp->sv.fx.SpecialS.blendFrames[3] = fp->sv.fx.SpecialS.blendFrames[2];
+    fp->sv.fx.SpecialS.blendFrames[2] = fp->sv.fx.SpecialS.blendFrames[1];
+    fp->sv.fx.SpecialS.blendFrames[1] = fp->sv.fx.SpecialS.blendFrames[0];
 
-    fp->foxVars.SpecialS.blendFrames[0] = func_80075E78(fp, 0);
+    fp->sv.fx.SpecialS.blendFrames[0] = func_80075E78(fp, 0);
 }
 
 // 0x800EA47C
@@ -432,17 +429,17 @@ inline void ftFox_SpecialS_SetVars(HSD_GObj* fighter_gobj)
     f32 var;
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->foxVars.SpecialS.ghostEffectPos[3] = fp->xB0_pos;
-    fp->foxVars.SpecialS.ghostEffectPos[2] = fp->xB0_pos;
-    fp->foxVars.SpecialS.ghostEffectPos[1] = fp->xB0_pos;
-    fp->foxVars.SpecialS.ghostEffectPos[0] = fp->xB0_pos;
+    fp->sv.fx.SpecialS.ghostEffectPos[3] = fp->xB0_pos;
+    fp->sv.fx.SpecialS.ghostEffectPos[2] = fp->xB0_pos;
+    fp->sv.fx.SpecialS.ghostEffectPos[1] = fp->xB0_pos;
+    fp->sv.fx.SpecialS.ghostEffectPos[0] = fp->xB0_pos;
 
     var = func_80075E78(fp, 0);
 
-    fp->foxVars.SpecialS.blendFrames[3] = var;
-    fp->foxVars.SpecialS.blendFrames[2] = var;
-    fp->foxVars.SpecialS.blendFrames[1] = var;
-    fp->foxVars.SpecialS.blendFrames[0] = var;
+    fp->sv.fx.SpecialS.blendFrames[3] = var;
+    fp->sv.fx.SpecialS.blendFrames[2] = var;
+    fp->sv.fx.SpecialS.blendFrames[1] = var;
+    fp->sv.fx.SpecialS.blendFrames[0] = var;
 
     fp->cb.x21BC_callback_Accessory4 = &ftFox_SpecialS_CreateGFX;
 }
@@ -528,8 +525,8 @@ void ftFox_SpecialSEnd_Phys(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    if (fp->foxVars.SpecialS.gravityDelay != 0) {
-        fp->foxVars.SpecialS.gravityDelay--;
+    if (fp->sv.fx.SpecialS.gravityDelay != 0) {
+        fp->sv.fx.SpecialS.gravityDelay--;
     }
     func_8007C930(fp, foxAttrs->x38_FOX_ILLUSION_GROUND_FRICTION);
     func_8007CB74(fighter_gobj);
@@ -550,8 +547,8 @@ void ftFox_SpecialAirSEnd_Phys(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    if (fp->foxVars.SpecialS.gravityDelay != 0) {
-        fp->foxVars.SpecialS.gravityDelay--;
+    if (fp->sv.fx.SpecialS.gravityDelay != 0) {
+        fp->sv.fx.SpecialS.gravityDelay--;
     } else
         func_8007D494(fp, foxAttrs->x48_FOX_ILLUSION_TERMINAL_VELOCITY,
                       ftAttrs->x170_TerminalVelocity);
@@ -606,7 +603,7 @@ inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
-    fp->foxVars.SpecialS.gravityDelay = foxAttrs->x44_FOX_ILLUSION_FALL_ACCEL;
+    fp->sv.fx.SpecialS.gravityDelay = foxAttrs->x44_FOX_ILLUSION_FALL_ACCEL;
     fp->x2222_flag.bits.b2 = 1;
 }
 

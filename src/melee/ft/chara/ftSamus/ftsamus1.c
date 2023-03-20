@@ -1,13 +1,15 @@
-#include <melee/ft/chara/ftSamus/ftsamus1.h>
+#include "ftsamus1.h"
 
-#include <melee/ft/chara/ftSamus/ftsamus.h>
-#include <melee/ft/chara/ftSamus/ftsamus3.h>
-#include <melee/ft/chara/ftSamus/ftsamus4.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ftsamus.h"
+#include "ftsamus3.h"
+#include "ftsamus4.h"
+#include "types.h"
+
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "lb/lbunknown_001.h"
 
 ActionState as_table_samus[] = {
     { 295, 0, 0x01000000, ftSamus_80128C04, ftSamus_80128D3C, ftSamus_80128E88,

@@ -21,7 +21,7 @@ void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         fp->x2204_ftcmd_var1 = 0;
         fp->x2200_ftcmd_var0 = 0;
-        fp->x2340_stateVar1 = 0;
+        fp->sv.ms.specials.x0 = 0;
 
         {
             enum_t asid;
@@ -54,7 +54,7 @@ void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
         Fighter* fp1 = GET_FIGHTER(gobj);
         fp1->x2204_ftcmd_var1 = 0;
         fp1->x2200_ftcmd_var0 = 0;
-        fp1->x2340_stateVar1 = 0;
+        fp1->sv.ms.specials.x0 = 0;
 
         {
             enum_t asid;

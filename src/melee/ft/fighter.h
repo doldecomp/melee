@@ -5,7 +5,6 @@
 #include <dolphin/mtx/types.h>
 #include <math.h>
 #include <melee/ft/ftanim.h>
-#include <melee/ft/ftstatevars.h>
 #include <melee/ft/inlines.h>
 #include <melee/ft/types.h>
 #include <melee/gr/stage.h>

@@ -1,15 +1,16 @@
-#include <melee/ft/ftbosslib.h>
+#include "ftbosslib.h"
 
+#include "fighter.h"
+#include "ft_unknown_006.h"
+#include "ftlib.h"
+
+#include "cm/camera.h"
+#include "it/item.h"
+#include "lb/lbvector.h"
+#include "mp/mplib.h"
+
+#include <baselib/gobj.h>
 #include <dolphin/os/os.h>
-#include <melee/cm/camera.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftlib.h>
-#include <melee/it/item.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mplib.h>
-#include <sysdolphin/baselib/gobj.h>
 
 typedef enum {
     Gm_PKind_Human,
@@ -295,7 +296,8 @@ s32 func_8015C530(enum_t arg0)
 #endif
 
     if (gobj != NULL) {
-        MasterHandAttributes* attr = GET_FIGHTER(gobj)->x10C_ftData->ext_attr;
+        ftMasterHand_SpecialAttrs* attr =
+            GET_FIGHTER(gobj)->x10C_ftData->ext_attr;
         switch (arg0) {
         case 0:
             return attr->x0;
@@ -335,7 +337,7 @@ void func_8015C5F8(HSD_GObj* gobj)
     }
 }
 
-MasterHandAttributes* func_8015C6BC(void)
+ftMasterHand_SpecialAttrs* func_8015C6BC(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -354,7 +356,7 @@ MasterHandAttributes* func_8015C6BC(void)
                 return NULL;
 
             {
-                MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
+                ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
                 if (attr == NULL)
                     return NULL;
 
@@ -371,7 +373,7 @@ s32 func_8015C74C(void)
     u8 _[24];
 #endif
 
-    MasterHandAttributes* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
     if (attr == NULL)
         return -1;
 
@@ -385,7 +387,7 @@ s32 func_8015C7EC(void)
     u8 _[24];
 #endif
 
-    MasterHandAttributes* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
     if (attr == NULL)
         return -1;
 
@@ -399,7 +401,7 @@ s32 func_8015C88C(void)
     u8 _[24];
 #endif
 
-    MasterHandAttributes* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
     if (attr == NULL)
         return -1;
 
@@ -413,7 +415,7 @@ s32 func_8015C92C(void)
     u8 _[24];
 #endif
 
-    MasterHandAttributes* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
     if (attr == NULL)
         return -1;
 
@@ -427,7 +429,7 @@ s32 func_8015C9CC(void)
     u8 _[24];
 #endif
 
-    MasterHandAttributes* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
     if (attr == NULL)
         return -1;
 
@@ -467,7 +469,7 @@ void func_8015CB7C(void)
 
 void func_8015CB9C_inline(Vec3 spC)
 {
-    MasterHandAttributes* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
     spC.z += attr == NULL ? -1 : attr->x178;
     func_8002EA64(&spC);
     func_8002F0E4(0xA);

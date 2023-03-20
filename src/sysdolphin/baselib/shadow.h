@@ -8,20 +8,20 @@
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/tobj.h>
 
-typedef struct _HSD_Shadow {
-    struct _HSD_SList* objects; // 0x0
-    struct _HSD_CObj* camera;   // 0x4
-    HSD_TObj* texture;          // 0x8
-    f32 scaleS;                 // 0xC
-    f32 scaleT;                 // 0x10
-    f32 transS;                 // 0x14
-    f32 transT;                 // 0x18
-    bool active;                // 0x1C
-    u8 intensity;               // 0x20
-    void* user_data;            // 0x24
-} HSD_Shadow;
+struct HSD_Shadow {
+    HSD_SList* objects; // 0x0
+    HSD_CObj* camera;   // 0x4
+    HSD_TObj* texture;  // 0x8
+    f32 scaleS;         // 0xC
+    f32 scaleT;         // 0x10
+    f32 transS;         // 0x14
+    f32 transT;         // 0x18
+    bool active;        // 0x1C
+    u8 intensity;       // 0x20
+    void* user_data;    // 0x24
+};
 
-typedef struct _HSD_ViewingRect {
+struct HSD_ViewingRect {
     Vec3 origin;
     Vec3 up_v;
     Vec3 right_v;
@@ -33,7 +33,7 @@ typedef struct _HSD_ViewingRect {
     f32 left;
     f32 right;
     f32 perspective;
-} HSD_ViewingRect;
+};
 
 HSD_ObjAllocData* HSD_ShadowGetAllocData(void);
 void HSD_ShadowInitAllocData(void);

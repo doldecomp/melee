@@ -55,7 +55,7 @@ typedef struct _HSD_FObjDesc {
     u8* ad;
 } HSD_FObjDesc;
 
-union _HSD_ObjData {
+union HSD_ObjData {
     f32 fv;
     s32 iv;
     Vec3 p;

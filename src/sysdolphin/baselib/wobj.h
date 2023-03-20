@@ -1,33 +1,33 @@
-#ifndef _wobj_h_
-#define _wobj_h_
+#ifndef SYSDOLPHIN_BASELIB_WOBJ_H
+#define SYSDOLPHIN_BASELIB_WOBJ_H
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/object.h>
+#include "baselib/aobj.h"
+#include "baselib/object.h"
 
-typedef struct _HSD_WObj {
+struct HSD_WObj {
     HSD_Obj parent;
     u32 flags;
     Vec3 pos;
     HSD_AObj* aobj;
     HSD_RObj* robj;
-} HSD_WObj;
+};
 
-typedef struct _HSD_WObjDesc {
+struct HSD_WObjDesc {
     char* class_name;
     Vec3 pos;
-    struct _HSD_RObjDesc* robjdesc;
-    struct _HSD_WObjDesc* next;
-} HSD_WObjDesc;
+    HSD_RObjDesc* robjdesc;
+    HSD_WObjDesc* next;
+};
 
-typedef struct _HSD_WObjInfo {
+struct HSD_WObjInfo {
     HSD_ObjInfo parent;
     int (*load)(HSD_WObj* wobj, HSD_WObjDesc* desc);
-} HSD_WObjInfo;
+};
 
-typedef struct _HSD_WObjAnim {
+struct HSD_WObjAnim {
     HSD_AObjDesc* aobjdesc;
-    struct _HSD_RObjAnimJoint* robjanim;
-} HSD_WObjAnim;
+    HSD_RObjAnimJoint* robjanim;
+};
 
 extern HSD_WObjInfo hsdWObj;
 

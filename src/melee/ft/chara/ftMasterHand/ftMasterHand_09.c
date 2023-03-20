@@ -1,6 +1,6 @@
 #include "ftMasterHand_09.h"
 
-#include "ftMasterHand.h"
+#include "ftMasterHand_03.h"
 #include "ftMasterHand_08.h"
 
 #include "ft/code_80081B38.h"
@@ -116,7 +116,7 @@ void lbl_80151F00(HSD_GObj* gobj)
 
     /// @todo #GET_FIGHTER uses slightly too much stack; inline issue.
     Fighter* r31_fp = gobj->user_data;
-    MasterHandAttributes* r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* r30_attributes = r31_fp->x10C_ftData->ext_attr;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -156,7 +156,7 @@ void lbl_80152090(HSD_GObj* gobj)
 {
     ftData* r4_ftData;
     Fighter* r31_fp;
-    MasterHandAttributes* r30_attributes;
+    ftMasterHand_SpecialAttrs* r30_attributes;
 
     r31_fp = gobj->user_data;
     r4_ftData = r31_fp->x10C_ftData;

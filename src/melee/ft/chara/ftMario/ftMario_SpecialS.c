@@ -110,7 +110,7 @@ void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, enum_t asid)
         fp->x2208_ftcmd_var2 = 0;
         fp->x2204_ftcmd_var1 = 0;
         fp->x2200_ftcmd_var0 = 0;
-        fp->marioVars.SpecialS.isReflect = false;
+        fp->sv.mr.SpecialS.isReflect = false;
         fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialS_CreateCape;
     }
 }
@@ -162,13 +162,13 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMarioAttributes* sa_tmp = fp->x2D4_specialAttributes;
 
-    if (fp->x2204_ftcmd_var1 == 1U && !fp->marioVars.SpecialS.isReflect) {
-        fp->marioVars.SpecialS.isReflect = true;
+    if (fp->x2204_ftcmd_var1 == 1U && !fp->sv.mr.SpecialS.isReflect) {
+        fp->sv.mr.SpecialS.isReflect = true;
         ftColl_CreateReflectHit(gobj, &sa_tmp->x60_MARIO_CAPE_REFLECTION, NULL);
     } else if ((fp->x2204_ftcmd_var1 == 0U) &&
-               fp->marioVars.SpecialS.isReflect == true)
+               fp->sv.mr.SpecialS.isReflect == true)
     {
-        fp->marioVars.SpecialS.isReflect = false;
+        fp->sv.mr.SpecialS.isReflect = false;
         fp->x2218_flag.bits.b3 = 0;
     }
 
@@ -272,7 +272,7 @@ void ftMario_SpecialAirS_Coll(HSD_GObj* gobj)
 void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((s32) fp->marioVars.SpecialS.isReflect != false) {
+    if ((s32) fp->sv.mr.SpecialS.isReflect != false) {
         fp->x2218_flag.bits.b3 = 1;
     }
     ftMario_SpecialS_SetCall(fp);

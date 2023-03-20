@@ -1,7 +1,6 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_18.h>
+#include "ftMasterHand_18.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/ftbosslib.h>
+#include "ft/ftbosslib.h"
 
 // 801539EC 1505CC
 void lbl_801539EC(HSD_GObj* arg0)
@@ -16,7 +15,7 @@ void lbl_801539EC(HSD_GObj* arg0)
 void lbl_80153A30(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    MasterHandAttributes* r4_attributes = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* r4_attributes = fp->x10C_ftData->ext_attr;
 
     func_8015BF74(gobj, r4_attributes->x58);
 }
@@ -32,7 +31,7 @@ void lbl_80153A60(HSD_GObj* gobj)
 void func_80153A64(HSD_GObj* arg0)
 {
     Fighter* temp_r31;
-    MasterHandAttributes* temp_r30;
+    ftMasterHand_SpecialAttrs* temp_r30;
 
     temp_r31 = arg0->user_data;
     temp_r30 = temp_r31->x10C_ftData->ext_attr;

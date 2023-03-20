@@ -30,17 +30,16 @@ void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 0;
 
     if (fp->x673 < sa->x4_LUIGI_GREENMISSILE_SMASH) {
-        fp->luigiVars.SpecialS.chargeFrames =
-            sa->x8_LUIGI_GREENMISSILE_CHARGE_RATE;
+        fp->sv.lg.SpecialS.chargeFrames = sa->x8_LUIGI_GREENMISSILE_CHARGE_RATE;
         fp->x2070.x2072_b4 = true;
     } else {
-        fp->luigiVars.SpecialS.chargeFrames = 0;
+        fp->sv.lg.SpecialS.chargeFrames = 0;
     }
 
     if (HSD_Randi(sa->x44_LUIGI_GREENMISSILE_MISFIRE_CHANCE) == 0)
-        fp->luigiVars.SpecialS.isMisfire = true;
+        fp->sv.lg.SpecialS.isMisfire = true;
     else
-        fp->luigiVars.SpecialS.isMisfire = false;
+        fp->sv.lg.SpecialS.isMisfire = false;
 }
 
 /// Luigi's grounded Green Missile Action State handler
@@ -208,9 +207,9 @@ void ftLuigi_SpecialSHold_Anim(HSD_GObj* fighter_gobj)
         fp->cb.x21BC_callback_Accessory4 = ftLuigi_SpecialS_SetGFX;
     }
 
-    fp->luigiVars.SpecialS.chargeFrames++;
+    fp->sv.lg.SpecialS.chargeFrames++;
 
-    if (fp->luigiVars.SpecialS.chargeFrames >
+    if (fp->sv.lg.SpecialS.chargeFrames >
         sa->xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES)
     {
         ftLuigi_SpecialSLaunch_Action(fighter_gobj);
@@ -233,9 +232,9 @@ void ftLuigi_SpecialAirSHold_Anim(HSD_GObj* fighter_gobj)
         fp->cb.x21BC_callback_Accessory4 = ftLuigi_SpecialS_SetGFX;
     }
 
-    fp->luigiVars.SpecialS.chargeFrames++;
+    fp->sv.lg.SpecialS.chargeFrames++;
 
-    if (fp->luigiVars.SpecialS.chargeFrames >
+    if (fp->sv.lg.SpecialS.chargeFrames >
         sa->xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES)
     {
         ftLuigi_SpecialAirSLaunch_Action(fighter_gobj);
@@ -358,11 +357,11 @@ void ftLuigi_SpecialSLaunch_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    if (!fp->luigiVars.SpecialS.isMisfire &&
+    if (!fp->sv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
-                      fp->luigiVars.SpecialS.chargeFrames *
+                      fp->sv.lg.SpecialS.chargeFrames *
                               sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
                           sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
                       fighter_gobj);
@@ -385,11 +384,11 @@ void ftLuigi_SpecialAirSLaunch_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    if (!fp->luigiVars.SpecialS.isMisfire &&
+    if (!fp->sv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
-                      fp->luigiVars.SpecialS.chargeFrames *
+                      fp->sv.lg.SpecialS.chargeFrames *
                               sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
                           sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
                       fighter_gobj);
@@ -493,7 +492,7 @@ void ftLuigi_SpecialSLaunch_Action(HSD_GObj* fighter_gobj)
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->luigiVars.SpecialS.isMisfire) {
+    if (fp->sv.lg.SpecialS.isMisfire) {
         ftLuigi_SpecialSMisfire_Action(fighter_gobj);
         return;
     }
@@ -510,7 +509,7 @@ void ftLuigi_SpecialAirSLaunch_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->luigiVars.SpecialS.isMisfire) {
+    if (fp->sv.lg.SpecialS.isMisfire) {
         ftLuigi_SpecialAirSMisfire_Action(fighter_gobj);
         return;
     }
@@ -533,11 +532,11 @@ void ftLuigi_SpecialSMisfire_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    if (!fp->luigiVars.SpecialS.isMisfire &&
+    if (!fp->sv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
-                      fp->luigiVars.SpecialS.chargeFrames *
+                      fp->sv.lg.SpecialS.chargeFrames *
                               sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
                           sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
                       fighter_gobj);
@@ -560,11 +559,11 @@ void ftLuigi_SpecialAirSMisfire_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    if (!fp->luigiVars.SpecialS.isMisfire &&
+    if (!fp->sv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
-                      fp->luigiVars.SpecialS.chargeFrames *
+                      fp->sv.lg.SpecialS.chargeFrames *
                               sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
                           sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
                       fighter_gobj);
@@ -747,24 +746,24 @@ void ftLuigi_SpecialSFly_Action(HSD_GObj* fighter_gobj)
     sa = getFtSpecialAttrsD(fp);
     fp->x2200_ftcmd_var0 = 0;
 
-    if (fp->luigiVars.SpecialS.isMisfire) {
+    if (fp->sv.lg.SpecialS.isMisfire) {
         fp->x80_self_vel.x = sa->x48_LUIGI_GREENMISSILE_MISFIRE_VEL_X;
     } else {
-        fp->x80_self_vel.x = sa->x28_LUIGI_GREENMISSILE_MUL_X *
-                                 fp->luigiVars.SpecialS.chargeFrames +
-                             sa->x24_LUIGI_GREENMISSILE_VEL_X;
+        fp->x80_self_vel.x =
+            sa->x28_LUIGI_GREENMISSILE_MUL_X * fp->sv.lg.SpecialS.chargeFrames +
+            sa->x24_LUIGI_GREENMISSILE_VEL_X;
     }
 
     fp->x80_self_vel.x *= fp->facing_dir;
 
-    if (fp->luigiVars.SpecialS.isMisfire) {
+    if (fp->sv.lg.SpecialS.isMisfire) {
         fp->x80_self_vel.y = sa->x4C_LUIGI_GREENMISSILE_MISFIRE_VEL_Y;
     } else {
         f32 vel_y = sa->x2C_LUIGI_GREENMISSILE_VEL_Y;
 
         fp->x80_self_vel.y =
             0.5f * vel_y +
-            vel_y * (0.5f * fp->luigiVars.SpecialS.chargeFrames /
+            vel_y * (0.5f * fp->sv.lg.SpecialS.chargeFrames /
                      sa->xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES);
     }
 

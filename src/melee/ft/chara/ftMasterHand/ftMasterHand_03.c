@@ -1,6 +1,6 @@
 #include "ftMasterHand_03.h"
 
-#include "ftMasterHand.h"
+#include "ftMasterHand_02.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
@@ -74,8 +74,8 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
         }
         r32_fp->ev.mh.x2258 = 0x185;
     }
-    r32_fp->masterhandVars.x2344_callback = arg1_stateVar2;
-    r32_fp->masterhandVars.x234C_pos = *arg2_pos;
+    r32_fp->sv.mh.unk0.x4 = arg1_stateVar2;
+    r32_fp->sv.mh.unk0.xC = *arg2_pos;
 }
 
 // 80150F00 0014DAE0
@@ -100,7 +100,7 @@ void lbl_80150F00(HSD_GObj* gobj)
 void lbl_80150F68(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
-    MasterHandAttributes* r30_ft_attributes;
+    ftMasterHand_SpecialAttrs* r30_ft_attributes;
     ftData* r4_ftdata;
 
     r31_fp = gobj->user_data;
@@ -108,9 +108,8 @@ void lbl_80150F68(HSD_GObj* gobj)
     r30_ft_attributes = r4_ftdata->ext_attr;
 
     func_80085134(gobj);
-    func_8015BE40(gobj, &r31_fp->masterhandVars.x234C_pos,
-                  &r31_fp->masterhandVars.x2358, r30_ft_attributes->x2C,
-                  r30_ft_attributes->x28);
+    func_8015BE40(gobj, &r31_fp->sv.mh.unk0.xC, &r31_fp->sv.mh.unk0.x18,
+                  r30_ft_attributes->x2C, r30_ft_attributes->x28);
 }
 
 // 80150FC8 0014DBA8
@@ -120,13 +119,13 @@ void lbl_80150FC8(HSD_GObj* gobj)
     Fighter* r4_fp;
 
     r4_fp = gobj->user_data;
-    if (0 == r4_fp->masterhandVars.x2358) {
+    if (0 == r4_fp->sv.mh.unk0.x18) {
         r4_fp->x80_self_vel.z = 0;
         r4_fp->x80_self_vel.y = 0;
         r4_fp->x80_self_vel.x = 0;
 
-        if (r4_fp->x2344_stateVar2) {
-            ((void (*)(HSD_GObj*)) r4_fp->x2344_stateVar2)(gobj);
+        if (r4_fp->sv.mh.unk0.x4) {
+            r4_fp->sv.mh.unk0.x4(gobj);
         }
     }
 }
@@ -136,7 +135,7 @@ void lbl_80150FC8(HSD_GObj* gobj)
 void func_80151018(HSD_GObj* gobj)
 {
     Vec3 sp1C_pos;
-    MasterHandAttributes* r5_attributes;
+    ftMasterHand_SpecialAttrs* r5_attributes;
     Fighter* r6_fp;
     Fighter* r31_fp;
 
@@ -147,7 +146,7 @@ void func_80151018(HSD_GObj* gobj)
 
     r6_fp = GET_FIGHTER(gobj);
     r5_attributes = r6_fp->x10C_ftData->ext_attr;
-    r6_fp->masterhandVars.x2360 = 0;
+    r6_fp->sv.mh.unk0.x20 = 0;
     sp1C_pos.x = r5_attributes->x30_pos2.x;
     sp1C_pos.y = r5_attributes->x30_pos2.y;
     sp1C_pos.z = 0;
@@ -158,6 +157,6 @@ void func_80151018(HSD_GObj* gobj)
     } else {
         func_80150C8C(gobj);
     }
-    r31_fp->masterhandVars.x2344_callback = lbl_8014FFDC;
-    r31_fp->masterhandVars.x234C_pos = sp1C_pos;
+    r31_fp->sv.mh.unk0.x4 = lbl_8014FFDC;
+    r31_fp->sv.mh.unk0.xC = sp1C_pos;
 }

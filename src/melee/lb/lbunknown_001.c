@@ -384,7 +384,7 @@ void func_8000C07C(HSD_JObj* jobj, s32 i, HSD_AnimJoint** arg3,
     HSD_JObjAddAnimAll(jobj, phi_r4, phi_r5, phi_r6);
 }
 
-void func_8000C0E8(HSD_JObj* jobj, s32 i, struct _DynamicModelDesc* arg2)
+void func_8000C0E8(HSD_JObj* jobj, s32 i, DynamicModelDesc* arg2)
 {
     func_8000C07C(jobj, i, arg2->anims, arg2->matanims, arg2->shapeanims);
 }

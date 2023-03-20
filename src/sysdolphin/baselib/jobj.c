@@ -1669,7 +1669,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
     Vec3 sp98;
     Vec3 sp8C;
     Vec3 sp80;
-    struct _HSD_IKHint* new_var;
+    HSD_IKHint* new_var;
     Vec3 sp74;
     Vec3 sp68;
     Vec3 sp5C;

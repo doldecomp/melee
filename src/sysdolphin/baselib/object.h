@@ -53,7 +53,7 @@ typedef enum _HSD_TypeMask {
     ALL_TYPE_MASK = MASK_OF(HSD_MAX_TYPE) - 1,
 } HSD_TypeMask;
 
-struct _HSD_Obj {
+struct HSD_Obj {
     struct _HSD_Class parent;
     u16 ref_count;
     u16 ref_count_individual;

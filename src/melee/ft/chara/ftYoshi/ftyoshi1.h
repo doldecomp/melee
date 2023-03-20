@@ -1,41 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-#include <melee/lb/lbvector.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/mobj.h>
+#include "forward.h"
+#include "ft/forward.h"
+#include <baselib/forward.h>
 
-typedef struct _ftYoshiAttributes {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
-    s32 x28;
-    s32 x2C;
-    u8 data_filler1[0xEF];
-    f32 x120;
-    u8 data_filler2[0x14];
-} ftYoshiAttributes;
-
-struct S_UNK_YOSHI2 {
-    s32 x0;
-    s32 x4;
-    s32 x8_end_index;
-    u8* xC_start_index;
-};
-
-struct S_UNK_YOSHI1 {
-    s32 x0;
-    struct S_UNK_YOSHI2* unk_struct;
-};
+#include "ft/types.h"
 
 extern ActionState as_table_yoshi[];
 

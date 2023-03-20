@@ -5,11 +5,11 @@
 #include <dolphin/mtx/types.h>
 #include <platform.h>
 
-typedef struct UnkFloat6_Camera UnkFloat6_Camera;
-typedef struct Fighter Fighter;
 typedef struct ActionState ActionState;
+typedef struct Fighter Fighter;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;
+typedef struct UnkFloat6_Camera UnkFloat6_Camera;
 
 typedef enum ftCommonAction {
     ASID_DEADDOWN,

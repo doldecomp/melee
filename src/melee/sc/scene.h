@@ -1,28 +1,30 @@
 #ifndef MELEE_SC_SCENE_H
 #define MELEE_SC_SCENE_H
 
-// Model with a single animation or no animation
-typedef struct _StaticModelDesc {
-    struct _HSD_Joint* joint;
-    struct _HSD_AnimJoint* animjoint;
-    struct _HSD_MatAnimJoint* matanim_joint;
-    struct _HSD_ShapeAnimJoint* shapeanim_joint;
-} StaticModelDesc;
+#include <baselib/forward.h>
 
-// Model with multiple animations
-typedef struct _DynamicModelDesc {
-    struct _HSD_Joint* joint;
-    struct _HSD_AnimJoint** anims;
-    struct _HSD_MatAnimJoint** matanims;
-    struct _HSD_ShapeAnimJoint** shapeanims;
-} DynamicModelDesc;
+/// Model with a single animation or no animation
+struct StaticModelDesc {
+    HSD_Joint* joint;
+    HSD_AnimJoint* animjoint;
+    HSD_MatAnimJoint* matanim_joint;
+    HSD_ShapeAnimJoint* shapeanim_joint;
+};
+
+/// Model with multiple animations
+struct DynamicModelDesc {
+    HSD_Joint* joint;
+    HSD_AnimJoint** anims;
+    HSD_MatAnimJoint** matanims;
+    HSD_ShapeAnimJoint** shapeanims;
+};
 
 // The basis of a rendered scene, like a stage, menu, or HUD overlay
-typedef struct _SceneDesc {
+struct SceneDesc {
     DynamicModelDesc** models;
-    struct _HSD_CObjDesc** cameras;
-    struct _HSD_LObjDesc** lights;
-    struct _HSD_FogDesc** fogs;
-} SceneDesc;
+    HSD_CObjDesc** cameras;
+    HSD_LightDesc** lights;
+    HSD_FogDesc** fogs;
+};
 
 #endif

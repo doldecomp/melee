@@ -30,11 +30,11 @@ typedef struct ftMewtwoSpecialN {
 
 } ftMewtwoSpecialN;
 
-typedef union ftMewtwoStateVars {
+typedef union ftMewtwo_StateVars {
     ftMewtwoSpecialN SpecialN;
     ftMewtwoSpecialS SpecialS;
     ftMewtwoSpecialHi SpecialHi;
 
-} ftMewtwoStateVars;
+} ftMewtwo_StateVars;
 
 #endif

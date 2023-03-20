@@ -1,6 +1,6 @@
 #include "ftMasterHand_25.h"
 
-#include "ftMasterHand.h"
+#include "ftMasterHand_03.h"
 #include "ftMasterHand_22.h"
 #include "ftMasterHand_23.h"
 #include "ftMasterHand_34.h"
@@ -17,7 +17,7 @@ void lbl_80154D78(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        if (fp->masterhandVars.x2360 == 1)
+        if (fp->sv.mh.unk0.x20 == 1)
             func_80154A78(gobj);
         else
             func_801546D8(gobj);
@@ -38,11 +38,11 @@ void lbl_80154DD0(HSD_GObj* arg0)
 void lbl_80154E14(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
 
     func_80085134(gobj);
-    func_8015BE40(gobj, &fp->masterhandVars.x234C_pos,
-                  &fp->masterhandVars.x2358, attr->x2C, attr->x28);
+    func_8015BE40(gobj, &fp->sv.mh.unk0.xC, &fp->sv.mh.unk0.x18, attr->x2C,
+                  attr->x28);
 }
 
 // 80154E74 151A54
@@ -81,7 +81,7 @@ void lbl_80154ED8(HSD_GObj* gobj)
             victim_fp->dmg.x1844_direction *= -1.0f;
             func_800DE7C0(victim, 0, 0);
         }
-        fp->masterhandVars.x2360 = 0;
+        fp->sv.mh.unk0.x20 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80151018(gobj);

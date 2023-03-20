@@ -3,16 +3,24 @@
 
 #include "common_structs.h"
 #include "ft/ftanim.h"
-#include "ft/ftstatevars.h"
 #include "ftCaptain/types.h"
+#include "ftCommon/types.h"
+#include "ftDonkey/types.h"
 #include "ftFox/ftFox_StateVars.h"
 #include "ftGameWatch/ftGameWatch_StateVars.h"
+#include "ftKoopa/types.h"
 #include "ftLuigi/ftLuigi_StateVars.h"
 #include "ftMario/ftMario_StateVars.h"
-#include "ftMasterHand/ftMasterhand_StateVars.h"
+#include "ftMars/types.h"
+#include "ftMasterHand/types.h"
 #include "ftMewtwo/ftMewtwo_StateVars.h"
 #include "ftNess/ftNess_StateVars.h"
-#include "ftSeak/ftSeak_StateVars.h"
+#include "ftPikachu/types.h"
+#include "ftPurin/types.h"
+#include "ftSamus/types.h"
+#include "ftSeak/types.h"
+#include "ftYoshi/types.h"
+#include "ftZelda/types.h"
 #include "gr/stage.h"
 #include "lb/lbcollision.h"
 #include "lb/lbrefract.h"
@@ -1368,17 +1376,25 @@ struct Fighter {
     /* 0x2330 */ Vec2 x2330;
     /* 0x2338 */ Vec2 x2338;
 
-    union { // 0x2340
-        ftCommonStateVars commonVars;
-        ftMarioStateVars marioVars;
-        ftCaptainStateVars captainVars;
-        ftFoxStateVars foxVars;
-        ftSeakStateVars seakVars;
-        ftNessStateVars nessVars;
-        ftLuigiStateVars luigiVars;
-        ftMewtwoStateVars mewtwoVars;
-        ftGameWatchStateVars gameWatchVars;
-        ftMasterhandStateVars masterhandVars;
+    union Fighter_StateVars { // 0x2340
+        union ftCaptain_StateVars ca, gn;
+        union ftCommon_StateVars co;
+        union ftDonkey_StateVars dk;
+        union ftFox_StateVars fx, fc;
+        union ftGameWatch_StateVars gw;
+        union ftKoopa_StateVars kp;
+        union ftLuigi_StateVars lg;
+        union ftMario_StateVars mr, dr;
+        union ftMars_StateVars ms, fe;
+        union ftMasterHand_StateVars mh, ch;
+        union ftMewtwo_StateVars mt;
+        union ftNess_StateVars ns;
+        union ftPikachu_StateVars pk, pc;
+        union ftPurin_StateVars pr;
+        union ftSamus_StateVars ss;
+        union ftSeak_StateVars sk;
+        union ftYoshi_StateVars ys;
+        union ftZelda_StateVars zd;
 
         // Avoid adding members to this struct.
         // This is a hack, all these members should eventually
@@ -1457,7 +1473,7 @@ struct Fighter {
             /* 0x23B4 */ s32 x23B4;
             /* 0x23B8 */ s32 x23B8;
         };
-    };
+    } sv;
     u8 filler_x23B8[0x23E8 - 0x23B8];
 };
 

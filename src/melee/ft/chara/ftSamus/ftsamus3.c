@@ -150,9 +150,9 @@ void ftSamus_SpecialN_StartAction(HSD_GObj* fighter_gobj)
     self_vel = &fp->x80_self_vel;
     self_vel->y = 0.0f;
     ftSamus_updateDamageDeathCBs(fighter_gobj);
-    fp->x2340_stateVar1 = 0;
-    fp->x2344_stateVar2 = 0;
-    fp->x2348_stateVar3_f32 = 0.0f;
+    fp->sv.ss.unk3.x0 = 0;
+    fp->sv.ss.unk3.x4 = 0;
+    fp->sv.ss.unk3.x8 = 0.0f;
     func_8006EBA4(fighter_gobj);
 }
 
@@ -172,9 +172,9 @@ void ftSamus_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     ftSamus_updateDamageDeathCBs(fighter_gobj);
-    fp->x2340_stateVar1 = 1;
-    fp->x2344_stateVar2 = 0;
-    fp->x2348_stateVar3_f32 = 0.0f;
+    fp->sv.ss.unk3.x0 = 1;
+    fp->sv.ss.unk3.x4 = 0;
+    fp->sv.ss.unk3.x8 = 0.0f;
     func_8006EBA4(fighter_gobj);
 }
 
@@ -190,8 +190,7 @@ void ftSamus_80129684(HSD_GObj* fighter_gobj)
 
     ftSamus_801292E4(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if ((fp->x2340_stateVar1 == 1) || (fp->ev.ss.x2230 == samus_attr->x18))
-        {
+        if ((fp->sv.ss.unk3.x0 == 1) || (fp->ev.ss.x2230 == samus_attr->x18)) {
             Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15A, 0, NULL,
                                                0.0f, 1.0f, 0.0f);
         } else {
@@ -236,9 +235,9 @@ void ftSamus_80129774(HSD_GObj* fighter_gobj)
         func_80088510(fighter2, lbl_803CE6B8[index], 0x7F, 0x40);
     }
 
-    fp->x2344_stateVar2 += 1;
-    if (fp->x2344_stateVar2_s32 > samus_attr->x20) {
-        fp->x2344_stateVar2 = 0;
+    fp->sv.ss.unk3.x4 += 1;
+    if (fp->sv.ss.unk3.x4 > samus_attr->x20) {
+        fp->sv.ss.unk3.x4 = 0;
         fp->ev.ss.x2230 += 1;
         if (fp->ev.ss.x2230 >= samus_attr->x18) {
             func_800BFFD0(fp, 0x35, 0);
@@ -282,7 +281,7 @@ void ftSamus_80129A14(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftSamus_801292E4(fighter_gobj);
-    fp->x2340_stateVar1 = 1;
+    fp->sv.ss.unk3.x0 = 1;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15C, 0, NULL, 0.0f,
                                            1.0f, 0.0f);

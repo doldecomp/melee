@@ -1,19 +1,23 @@
-#include "melee/ft/types.h"
-#include <melee/ft/chara/ftZelda/ftzelda2.h>
+#include "ftzelda2.h"
+
+#include "ftzelda.h"
+
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
+#include "lb/lbvector.h"
 
 #include <math.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftZelda/ftzelda.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftparts.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
-#include <MSL/trigf.h>
+#include <trigf.h>
 
 void ftZelda_801396AC(HSD_GObj* fighter_gobj)
 {
@@ -95,7 +99,7 @@ void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 
     fp = getFighterPlus(fighter_gobj);
     fp->x2200_ftcmd_var0 = 0;
-    fp->x234C_stateVar4 = 0;
+    fp->sv.zd.specialhi.xC = 0;
 
     ftZelda_SpecialHi_StartAction_Helper(fp);
 
@@ -118,7 +122,7 @@ void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
         fp->x2200_ftcmd_var0 = 0;
-        fp->x234C_stateVar4 = 0;
+        fp->sv.zd.specialhi.xC = 0;
 
         {
             Vec3 vec;
@@ -232,18 +236,18 @@ void ftZelda_80139BB0(HSD_GObj* fighter_gobj)
 void ftZelda_80139C1C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    fp->x2340_stateVar1 -= 1;
+    fp->sv.zd.specialhi.x0 -= 1;
 
-    if (fp->x2340_stateVar1 <= 0)
+    if (fp->sv.zd.specialhi.x0 <= 0)
         ftZelda_8013A6A8(fighter_gobj);
 }
 
 void ftZelda_80139C58(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    fp->x2340_stateVar1 -= 1;
+    fp->sv.zd.specialhi.x0 -= 1;
 
-    if (fp->x2340_stateVar1 <= 0)
+    if (fp->sv.zd.specialhi.x0 <= 0)
         ftZelda_8013A764(fighter_gobj);
 }
 
@@ -292,7 +296,7 @@ bool ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj)
     fighter2 = getFighter(fighter_gobj);
     attributes2 = fighter2->x2D4_specialAttributes;
 
-    if (fighter2->x234C_stateVar4_s32 >= attributes2->x4C)
+    if (fighter2->sv.zd.specialhi.xC >= attributes2->x4C)
         result = true;
     else if (func_8009A134(fighter_gobj))
         result = false;
@@ -317,7 +321,7 @@ void ftZelda_80139D60(HSD_GObj* fighter_gobj)
     CollData* coll_data = &fp->x6F0_collData;
     sa = fp->x2D4_specialAttributes;
 
-    fp->x234C_stateVar4_s32++;
+    fp->sv.zd.specialhi.xC++;
 
     {
         int ledge_grab_dir;
@@ -453,8 +457,8 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj)
                 temp_f5 = atan2f(fp->input.x624_lstick_y,
                                  fp->input.x620_lstick_x * fp->facing_dir);
 
-                fp->x2344_f32 = inputVector.x;
-                fp->x2348_stateVar3_f32 = inputVector.y;
+                fp->sv.zd.specialhi.x4.x = inputVector.x;
+                fp->sv.zd.specialhi.x4.y = inputVector.y;
 
                 // Update ground velocity
                 temp_f6 = ((attributes->x54 * var_f31) + attributes->x58) *
@@ -468,7 +472,7 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj)
 
                 fp = GET_FIGHTER(fighter_gobj);
                 attributes = fp->x2D4_specialAttributes;
-                fp->x2340_stateVar1 = attributes->x48;
+                fp->sv.zd.specialhi.x0 = attributes->x48;
                 fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
                 fp->x2223_flag.bits.b4 = 1;
 
@@ -542,13 +546,13 @@ void ftZelda_8013A244(HSD_GObj* fighter_gobj)
         }
         var_f30 = atan2f(fp->input.x624_lstick_y,
                          fp->input.x620_lstick_x * fp->facing_dir);
-        fp->x2344_f32 = fp->input.x620_lstick_x;
-        fp->x2348_stateVar3_f32 = fp->input.x624_lstick_y;
+        fp->sv.zd.specialhi.x4.x = fp->input.x620_lstick_x;
+        fp->sv.zd.specialhi.x4.y = fp->input.x624_lstick_y;
     } else {
         func_8007DA24(fp);
         var_f30 = (f32) M_PI_2;
-        fp->x2344_f32 = 0;
-        var_f31 = fp->x2348_stateVar3_f32 = 1.0;
+        fp->sv.zd.specialhi.x4.x = 0;
+        var_f31 = fp->sv.zd.specialhi.x4.y = 1.0;
     }
 
     fp->x80_self_vel.x =
@@ -564,7 +568,7 @@ void ftZelda_8013A244(HSD_GObj* fighter_gobj)
 
     fp = GET_FIGHTER(fighter_gobj);
     attributes = fp->x2D4_specialAttributes;
-    fp->x2340_stateVar1 = attributes->x48;
+    fp->sv.zd.specialhi.x0 = attributes->x48;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     fp->x2223_flag.bits.b4 = 1;
 
@@ -682,9 +686,9 @@ void ftZelda_8013A6A8(HSD_GObj* fighter_gobj)
 
     {
         Fighter* fp1 = GET_FIGHTER(fighter_gobj);
-        fp1->x2350_stateVar5_f32 = fp1->x80_self_vel.x;
-        fp1->x2354_stateVar6_f32 = fp1->x80_self_vel.y;
-        fp1->x2358_stateVar7 = fp1->xEC_ground_vel;
+        fp1->sv.zd.specialhi.x10.x = fp1->x80_self_vel.x;
+        fp1->sv.zd.specialhi.x10.y = fp1->x80_self_vel.y;
+        fp1->sv.zd.specialhi.x18 = fp1->xEC_ground_vel;
         fp1->x80_self_vel.y = 0;
         fp1->x80_self_vel.x = 0;
         fp1->xEC_ground_vel = 0;
@@ -692,7 +696,7 @@ void ftZelda_8013A6A8(HSD_GObj* fighter_gobj)
         fp1->cb.x21BC_callback_Accessory4 = &ftZelda_8013979C;
     }
 
-    fp0->xEC_ground_vel = fp0->x2358_stateVar7 * attributes->x64;
+    fp0->xEC_ground_vel = fp0->sv.zd.specialhi.x18 * attributes->x64;
 }
 
 void ftZelda_8013A764(HSD_GObj* fighter_gobj)
@@ -706,9 +710,9 @@ void ftZelda_8013A764(HSD_GObj* fighter_gobj)
     {
         Fighter* fp1;
         fp1 = GET_FIGHTER(fighter_gobj);
-        fp1->x2350_stateVar5_f32 = fp1->x80_self_vel.x;
-        fp1->x2354_stateVar6_f32 = fp1->x80_self_vel.y;
-        fp1->x2358_stateVar7 = fp1->xEC_ground_vel;
+        fp1->sv.zd.specialhi.x10.x = fp1->x80_self_vel.x;
+        fp1->sv.zd.specialhi.x10.y = fp1->x80_self_vel.y;
+        fp1->sv.zd.specialhi.x18 = fp1->xEC_ground_vel;
         fp1->x80_self_vel.y = 0;
         fp1->x80_self_vel.x = 0;
         fp1->xEC_ground_vel = 0;
@@ -716,6 +720,6 @@ void ftZelda_8013A764(HSD_GObj* fighter_gobj)
         fp1->cb.x21BC_callback_Accessory4 = &ftZelda_8013979C;
     }
 
-    fp0->x80_self_vel.x = fp0->x2350_stateVar5_f32 * sa->x64;
-    fp0->x80_self_vel.y = fp0->x2354_stateVar6_f32 * sa->x64;
+    fp0->x80_self_vel.x = fp0->sv.zd.specialhi.x10.x * sa->x64;
+    fp0->x80_self_vel.y = fp0->sv.zd.specialhi.x10.y * sa->x64;
 }

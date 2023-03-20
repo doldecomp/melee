@@ -344,9 +344,9 @@ inline void ftPurin_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &lbl_8013C94C;
 
     if (func_8016B1D8() && func_801D4FF8(fp->xC_playerID))
-        fp->x2340_stateVar1 = true;
+        fp->sv.pr.specialhi.x0 = true;
     else
-        fp->x2340_stateVar1 = false;
+        fp->sv.pr.specialhi.x0 = false;
 }
 
 inline void

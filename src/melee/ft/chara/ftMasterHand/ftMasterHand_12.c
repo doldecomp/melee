@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_12.h>
+#include "ftMasterHand_12.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
+#include "ftMasterHand_03.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
 
 // 80152634 14F214
 // https://decomp.me/scratch/ZAr9B
@@ -44,7 +45,7 @@ void lbl_801526D8(HSD_GObj* arg0)
     temp_r31 = arg0->user_data;
     Fighter_ActionStateChange_800693AC(arg0, 0x166, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
-    temp_r31->masterhandVars.x2340_unk = 0.0f;
+    temp_r31->sv.mh.unk0.x0 = 0.0f;
 }
 
 // 80152738 14F318
@@ -71,7 +72,7 @@ void lbl_80152774(HSD_GObj* arg0)
 void lbl_801527B8(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
-    MasterHandAttributes* r30_attributes;
+    ftMasterHand_SpecialAttrs* r30_attributes;
     f32 tmp;
 
     r31_fp = gobj->user_data;
@@ -79,9 +80,9 @@ void lbl_801527B8(HSD_GObj* gobj)
 
     func_80085134(gobj);
 
-    tmp = ++r31_fp->masterhandVars.x2340_unk;
+    tmp = ++r31_fp->sv.mh.unk0.x0;
     if (tmp > r30_attributes->xB0 &&
-        r31_fp->masterhandVars.x2340_unk < r30_attributes->xB4)
+        r31_fp->sv.mh.unk0.x0 < r30_attributes->xB4)
     {
         func_8015C010(gobj, r30_attributes->xB8);
     } else {

@@ -1,34 +1,39 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
+#include "ftMasterHand_01.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_05.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_06.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_07.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_08.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_09.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_10.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_11.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_12.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_13.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_14.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_15.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_16.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_17.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_18.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_19.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_20.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_22.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_23.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_25.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_26.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_27.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_28.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_29.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_30.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/types.h>
+#include "ftMasterHand_02.h"
+#include "ftMasterHand_03.h"
+#include "ftMasterHand_04.h"
+#include "ftMasterHand_05.h"
+#include "ftMasterHand_06.h"
+#include "ftMasterHand_07.h"
+#include "ftMasterHand_08.h"
+#include "ftMasterHand_09.h"
+#include "ftMasterHand_10.h"
+#include "ftMasterHand_11.h"
+#include "ftMasterHand_12.h"
+#include "ftMasterHand_13.h"
+#include "ftMasterHand_14.h"
+#include "ftMasterHand_15.h"
+#include "ftMasterHand_16.h"
+#include "ftMasterHand_17.h"
+#include "ftMasterHand_18.h"
+#include "ftMasterHand_19.h"
+#include "ftMasterHand_20.h"
+#include "ftMasterHand_21.h"
+#include "ftMasterHand_22.h"
+#include "ftMasterHand_23.h"
+#include "ftMasterHand_25.h"
+#include "ftMasterHand_26.h"
+#include "ftMasterHand_27.h"
+#include "ftMasterHand_28.h"
+#include "ftMasterHand_29.h"
+#include "ftMasterHand_30.h"
+#include "types.h"
+
+#include "ft/ft_unknown_006.h"
+#include "ft/ftbosslib.h"
+#include "ft/ftcamera.h"
+#include "ft/types.h"
 
 ActionState as_table_masterhand[] = {
     { 295, 0, 0x01000000, lbl_80150230, lbl_8015082C, lbl_80150870,
@@ -154,7 +159,7 @@ void ftMasterhand_OnDeath(HSD_GObj* gobj)
 void ftMasterhand_OnLoad(HSD_GObj* gobj)
 {
     ftData* ftdata;
-    MasterHandAttributes* ftData_attr;
+    ftMasterHand_SpecialAttrs* ftData_attr;
     void** items;
     Fighter* fp;
 
@@ -163,7 +168,7 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj)
     ftData_attr = ftdata->ext_attr;
     items = ftdata->x48_items;
 
-    PUSH_ATTRS(fp, MasterHandAttributes);
+    PUSH_ATTRS(fp, ftMasterHand_SpecialAttrs);
 
     func_8015BDB4(gobj);
     func_8026B3F8(items[0], 0x7D);
@@ -177,15 +182,15 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj)
     fp->xB0_pos.x = ftData_attr->x30_pos2.x;
     fp->xB0_pos.y = ftData_attr->x30_pos2.y;
     fp->xB0_pos.z = 0.0f;
-    fp->masterhandVars.x2374 = 0;
-    fp->masterhandVars.x2378 = 0;
-    fp->masterhandVars.x237C = 0;
-    fp->x2380 = 0;
-    fp->masterhandVars.x2368 = -1;
-    fp->masterhandVars.x236C = -1;
-    fp->masterhandVars.x2370 = -1;
-    fp->masterhandVars.x235C = 0.0f;
-    fp->masterhandVars.x2360 = 0;
+    fp->sv.mh.unk0.x34 = 0;
+    fp->sv.mh.unk0.x38 = 0;
+    fp->sv.mh.unk0.x3C = 0;
+    fp->sv.mh.unk0.x40 = 0;
+    fp->sv.mh.unk0.x28 = -1;
+    fp->sv.mh.unk0.x2C = -1;
+    fp->sv.mh.unk0.x30 = -1;
+    fp->sv.mh.unk0.x1C = 0.0f;
+    fp->sv.mh.unk0.x20 = 0;
     fp->ev.mh.x222C = func_8015C244(gobj, &fp->xB0_pos);
     fp->ev.mh.x2238 = 1.0f;
     fp->ev.mh.x224C = 0;

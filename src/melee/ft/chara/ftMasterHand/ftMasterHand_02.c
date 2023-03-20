@@ -1,10 +1,25 @@
-#include "ftMasterHand.h"
+#include "ftMasterHand_02.h"
 
+#include "ftMasterHand_03.h"
+#include "ftMasterHand_04.h"
+#include "ftMasterHand_06.h"
+#include "ftMasterHand_07.h"
+#include "ftMasterHand_09.h"
+#include "ftMasterHand_10.h"
+#include "ftMasterHand_11.h"
+#include "ftMasterHand_12.h"
 #include "ftMasterHand_13.h"
+#include "ftMasterHand_14.h"
 #include "ftMasterHand_15.h"
 #include "ftMasterHand_16.h"
+#include "ftMasterHand_19.h"
+#include "ftMasterHand_20.h"
 #include "ftMasterHand_21.h"
 #include "ftMasterHand_22.h"
+#include "ftMasterHand_27.h"
+#include "ftMasterHand_28.h"
+#include "ftMasterHand_29.h"
+#include "ftMasterHand_31.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
@@ -14,7 +29,7 @@
 // https://decomp.me/scratch/HWef2
 void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, MasterHandAttributes);
+    COPY_ATTRS(gobj, ftMasterHand_SpecialAttrs);
 }
 
 // 8014FE10 0014C9F0
@@ -110,7 +125,7 @@ void lbl_8014FFDC(HSD_GObj* gobj)
 
 void func_80150144(HSD_GObj* gobj)
 {
-    MasterHandAttributes* r5_attributes;
+    ftMasterHand_SpecialAttrs* r5_attributes;
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* fp_1;
 
@@ -210,7 +225,7 @@ void lbl_80150230(HSD_GObj* gobj)
         }
     } else {
         if (--fp->ev.mh.x223C < 0.0f) {
-            MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
+            ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
             Vec3 vec;
 
             /// @todo Unused stack.
@@ -384,7 +399,7 @@ extern HSD_PadStatus HSD_PadMasterStatus[4];
 void func_80150894(HSD_GObj* gobj)
 {
     Fighter* r4_fp = GET_FIGHTER(gobj);
-    MasterHandAttributes* r31_attributes = r4_fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* r31_attributes = r4_fp->x10C_ftData->ext_attr;
     Vec3 sp10_pos;
     u32 l_pressed = r6_button & HSD_BUTTON_L;
     // why just l_pressed and not temps for the others?
