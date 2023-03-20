@@ -16,8 +16,6 @@
 #include <stddef.h>
 #include <baselib/random.h>
 
-// 0x800E2050
-// https://decomp.me/scratch/8zo4V
 void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -130,8 +128,6 @@ void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj)
     fp->cb.x21E4_callback_OnDeath2 = NULL;
 }
 
-// 0x800E22BC
-// https://decomp.me/scratch/FT3Fl
 void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -145,8 +141,6 @@ void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
     }
 }
 
-// 0x800E2308
-// https://decomp.me/scratch/QF5fb
 void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -167,17 +161,9 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
     }
 }
 
-// 0x800E23DC
-void ftMario_SpecialLw_IASA(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMario_SpecialLw_IASA(HSD_GObj* gobj) {}
 
-// 0x800E23E0
-void ftMario_SpecialAirLw_IASA(HSD_GObj* gobj)
-{
-    return;
-}
+void ftMario_SpecialAirLw_IASA(HSD_GObj* gobj) {}
 
 static usize_t const transition_flags =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |
@@ -201,8 +187,6 @@ void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-// 0x800E23E4
-// https://decomp.me/scratch/aJPK4
 void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
 {
     f32 flt_var;
@@ -243,8 +227,6 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     }
 }
 
-// 0x800E2508
-// https://decomp.me/scratch/sjB2k
 void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     f32 flt_var;
@@ -282,7 +264,7 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
     func_8007D3A8(fp, 0.0f, sa->x48_MARIO_TORNADO_MOMENTUM_X_MUL_AIR, flt_var);
 }
 
-void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj)
+void doColl(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -298,12 +280,8 @@ void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj)
     }
 }
 
-static ftCollisionBox ftMario_SpecialLw_CollisionBox = {
-    12.0F, 0.0F, { -6.0F, 6.0F }, { 6.0F, 6.0F }
-};
+static ftCollisionBox coll_box = { 12, 0, { -6, +6 }, { 6, 6 } };
 
-// 0x800E25C4
-// https://decomp.me/scratch/ykJHP
 void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -314,14 +292,14 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
 #endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
-        if (func_80082888(gobj, &ftMario_SpecialLw_CollisionBox) == false) {
+        if (func_80082888(gobj, &coll_box) == false) {
             _ftMario_800E23E4_800E25C4_helper_0(gobj);
             fp->sv.mr.SpecialLw.isUnkColl = false;
         } else {
             fp->sv.mr.SpecialLw.isUnkColl = true;
         }
     } else {
-        if (func_800824A0(gobj, &ftMario_SpecialLw_CollisionBox) == false) {
+        if (func_800824A0(gobj, &coll_box) == false) {
             _ftMario_800E23E4_800E25C4_helper_0(gobj);
             fp->sv.mr.SpecialLw.isUnkColl = false;
         } else {
@@ -329,7 +307,7 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
         }
     }
 
-    _ftMario_800E25C4_800E2778_helper(gobj);
+    doColl(gobj);
 }
 
 void _ftMario_800E2778_helper(HSD_GObj* gobj)
@@ -351,8 +329,6 @@ void _ftMario_800E2778_helper(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-// 0x800E2778
-// https://decomp.me/scratch/v3srn
 void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -361,12 +337,12 @@ void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    if (func_800824A0(gobj, &ftMario_SpecialLw_CollisionBox) != 0) {
+    if (func_800824A0(gobj, &coll_box) != 0) {
         _ftMario_800E2778_helper(gobj);
         fp->sv.mr.SpecialLw.isUnkColl = 1;
     } else {
         fp->sv.mr.SpecialLw.isUnkColl = 0;
     }
 
-    _ftMario_800E25C4_800E2778_helper(gobj);
+    doColl(gobj);
 }
