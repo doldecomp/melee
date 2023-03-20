@@ -549,8 +549,10 @@ struct Fighter_DemoStrings {
 // header includes or something.
 // --------------------------------------------------------------------------------
 struct ftMario_EntityVars {
-    /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo
-    /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo
+    /// Current Megavitamin color combo
+    /* 0x222C */ s32 x222C_vitaminCurr;
+    /// Previous Megavitamin color combo
+    /* 0x2230 */ s32 x2230_vitaminPrev;
     /* 0x2234 */ bool x2234_tornadoCharge;
     /* 0x2238 */ bool x2238_isCapeBoost;
     /* 0x223C */ HSD_GObj* x223C_capeGObj;
@@ -623,7 +625,8 @@ struct ftNess_EntityVars {
     /* 0x2240 */ HSD_GObj* x2240_flashGObj;
     /* 0x2244 */ HSD_GObj* x2244_pkThunderGObj;
     /* 0x2248 */ HSD_GObj* x2248_baseballBatGObj;
-    /* 0x224C */ u32 x224C_thunderGFX; // bool for PK Thunder GFX?
+    /// bool for PK Thunder GFX?
+    /* 0x224C */ u32 x224C_thunderGFX;
 };
 
 struct ftPeach_EntityVars {
@@ -691,10 +694,10 @@ struct ftPurin_EntityVars {
 
 struct ftMewtwo_EntityVars {
     /* 0x222C */ HSD_GObj* x222C_disableGObj;
-    /* 0x2230 */ HSD_GObj*
-        x2230_shadowHeldGObj; // GObj of Shadow Ball while in Mewtwo's hands?
-    /* 0x2234 */ s32
-        x2234_shadowBallCharge; // Number of cycles Shadow Ball has been charged
+    /// GObj of Shadow Ball while in Mewtwo's hands?
+    /* 0x2230 */ HSD_GObj* x2230_shadowHeldGObj;
+    /// Number of cycles Shadow Ball has been charged
+    /* 0x2234 */ s32 x2234_shadowBallCharge;
     /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
     /* 0x223C */ bool x223C_isConfusionBoost;
 };
