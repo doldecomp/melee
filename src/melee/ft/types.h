@@ -723,10 +723,6 @@ struct SpecialAttrs_CLink {
     /* 0x2244 */ u32 x2244;
 };
 
-struct SpecialAttrs_Pichu {
-    char filler0[0x100];
-};
-
 struct ftGameWatch_EntityVars {
     /* 0x222C */ s32 x222C_judgeVar1;
     /* 0x2230 */ s32 x2230_judgeVar2;
@@ -760,21 +756,8 @@ struct ftMasterHand_EntityVars {
     /* 0x2258 */ s32 x2258;
 };
 
-struct SpecialAttrs_Crazyhand {
-    /* 0x222C */ HSD_GObj* x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ f32 x2238;
-    /* 0x223C */ f32 x223C;
-    /* 0x2240 */ Vec3 x2240_pos;
-    /* 0x224C */ u32 x224C;
-    /* 0x2250 */ s32 x2250;
-    /* 0x2254 */ s32 x2254;
-    /* 0x2258 */ s32 x2258;
-};
-
 struct ftZakoBoy_EntityVars {
-    u8 filler0[1];
+    u8 _[1];
 };
 
 struct ftSandbag_EntityVars {
