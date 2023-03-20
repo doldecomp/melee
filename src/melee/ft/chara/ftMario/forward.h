@@ -4,17 +4,17 @@
 #include "ft/forward.h"
 
 typedef enum ftMarioAction {
-    AS_MARIO_UNK1 = ASID_MAX,
-    AS_MARIO_UNK2,
-    AS_MARIO_SPECIALN,
-    AS_MARIO_SPECIALAIRN,
-    AS_MARIO_SPECIALS,
-    AS_MARIO_SPECIALAIRS,
-    AS_MARIO_SPECIALHI,
-    AS_MARIO_SPECIALAIRHI,
-    AS_MARIO_SPECIALLW,
-    AS_MARIO_SPECIALAIRLW,
-    AS_MARIO_MAX,
+    ftMario_AS_Unk_341 = ASID_MAX,
+    ftMario_AS_Unk_342,
+    ftMario_AS_SpecialN,
+    ftMario_AS_SpecialAirN,
+    ftMario_AS_SpecialS,
+    ftMario_AS_SpecialAirS,
+    ftMario_AS_SpecialHi,
+    ftMario_AS_SpecialAirHi,
+    ftMario_AS_SpecialLw,
+    ftMario_AS_SpecialAirLw,
+    ftMario_AS_Count,
 } ftMarioAction;
 
 // Flags used by Mario & Dr. Mario in Action State Change //

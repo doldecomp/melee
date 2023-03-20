@@ -8,7 +8,7 @@
 #include <stddef.h>
 #include <baselib/forward.h>
 
-static usize_t const states_count = AS_MARIO_MAX - ASID_MAX;
+static usize_t const states_count = ftMario_AS_Count - ASID_MAX;
 extern ActionState as_table_mario[states_count];
 
 static usize_t const aux_states_count = 2;
