@@ -11,9 +11,6 @@
 
 #include <baselib/random.h>
 
-#define GET_ATTRS(fp)                                                          \
-    (&((ftMario_DatAttrs*) (fp)->x2D4_specialAttributes)->specialhi)
-
 void ftMario_SpecialHi_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -29,7 +26,7 @@ void ftMario_SpecialHi_StartAction(HSD_GObj* gobj)
 void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMario_SpecialHi_DatAttrs* sa = GET_ATTRS(fp);
+    ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -39,7 +36,7 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
     fp->x80_self_vel.y = 0;
-    fp->x80_self_vel.x = fp->x80_self_vel.x * sa->vel_x;
+    fp->x80_self_vel.x = fp->x80_self_vel.x * sa->specialhi.vel_x;
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialAirHi, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
@@ -179,8 +176,8 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
 void ftMario_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMario_SpecialHi_DatAttrs* sa = GET_ATTRS(fp);
-    func_800D5CB0(gobj, 0, sa->landing_lag);
+    ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
+    func_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
 }
 
 // 0x800E1F70
