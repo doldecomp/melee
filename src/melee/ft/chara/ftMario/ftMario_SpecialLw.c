@@ -191,30 +191,29 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
 {
     f32 vel_y;
     ftMario_DatAttrs* sa;
-    Fighter* fp;
+    Fighter* fp0;
 
-    fp = GET_FIGHTER(gobj);
-    sa = GetMarioAttr(fp);
+    fp0 = GET_FIGHTER(gobj);
+    sa = GetMarioAttr(fp0);
 
     vel_y = sa->x3C_MARIO_TORNADO_MOMENTUM_X_GROUND;
-    if ((u32) fp->x2200_ftcmd_var0 != 0U) {
-        fp->sv.mr.SpecialLw.groundVelX =
-            (f32) (fp->sv.mr.SpecialLw.groundVelX -
-                   sa->x4C_MARIO_TORNADO_FRICTION_END);
-        vel_y += fp->sv.mr.SpecialLw.groundVelX;
+    if (fp0->x2200_ftcmd_var0 != 0) {
+        fp0->sv.mr.SpecialLw.groundVelX = fp0->sv.mr.SpecialLw.groundVelX -
+                                          sa->x4C_MARIO_TORNADO_FRICTION_END;
+        vel_y += fp0->sv.mr.SpecialLw.groundVelX;
         if (vel_y < 0.0f) {
             vel_y = 0.0f;
         }
     }
 
     {
-        Fighter* ft_tmp = GET_FIGHTER(gobj);
-        func_8007CADC(ft_tmp, 0.0f, sa->x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND,
+        Fighter* fp1 = fp0;
+        func_8007CADC(fp1, 0.0f, sa->x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND,
                       vel_y);
         func_8007CB74(gobj);
-        if (fp->x2208_ftcmd_var2 != 0 && (fp->input.x668 & HSD_BUTTON_B)) {
-            vel_y = fp->x80_self_vel.y;
-            fp->x80_self_vel.y = vel_y + sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX;
+        if (fp0->x2208_ftcmd_var2 != 0 && (fp0->input.x668 & HSD_BUTTON_B)) {
+            vel_y = fp0->x80_self_vel.y;
+            fp0->x80_self_vel.y = vel_y + sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX;
             doPhys(gobj);
         }
     }
