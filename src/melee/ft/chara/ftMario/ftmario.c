@@ -40,7 +40,7 @@ ActionState as_table_mario[AS_MARIO_MAX - ASID_MAX] = {
       ftMario_SpecialAirLw_Coll, func_800761C8 },
 };
 
-ActionState lbl_803C7260[MARIO_AUX_STATES_COUNT] = {
+ActionState lbl_803C7260[aux_states_count] = {
     { 14, 0, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
     { 15, 0, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };

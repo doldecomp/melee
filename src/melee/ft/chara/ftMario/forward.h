@@ -17,8 +17,6 @@ typedef enum ftMarioAction {
     AS_MARIO_MAX,
 } ftMarioAction;
 
-#define MARIO_AUX_STATES_COUNT 2
-
 // Flags used by Mario & Dr. Mario in Action State Change //
 
 // SpecialN/SpecialAirN (Fireball / Megavitamin) //
