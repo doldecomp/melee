@@ -1343,10 +1343,7 @@ struct Fighter {
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
 
-    // Some of these are clones of each other (they just use another struct)
-    // and some of them dont have specials so dont exist in the union.
-    /// @todo Clean-up
-    union FighterEntityVars {
+    union Fighter_EntityVars {
         struct SpecialAttrs_Mario mr;
         struct SpecialAttrs_Fox fx, fc;
         struct ftCaptain_EntityVars ca, gn;
