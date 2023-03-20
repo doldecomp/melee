@@ -150,17 +150,11 @@ void ftMario_SpecialHi_Phys(HSD_GObj* gobj)
     }
 }
 
-// 0x800E1EAC
-// https://decomp.me/scratch/1jYsR
 void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    ftMario_DatAttrs* sa;
-    struct attr* attr_ptr;
-
-    fp = getFighter(gobj);
-    sa = GetMarioAttr(fp);
-    attr_ptr = &(fp->x110_attr);
+    Fighter* fp = getFighter(gobj);
+    ftMario_DatAttrs* sa = GetMarioAttr(fp);
+    attr* attrs = &fp->x110_attr;
 
     if (fp->x2200_ftcmd_var0 != 0) {
         func_80085154(gobj);
@@ -168,7 +162,7 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
         fp->x80_self_vel.y *= sa->specialhi.vel_mul;
         fp->x80_self_vel.z *= sa->specialhi.vel_mul;
     } else {
-        func_8007D494(fp, sa->specialhi.grav, attr_ptr->x170_TerminalVelocity);
+        func_8007D494(fp, sa->specialhi.grav, attrs->x170_TerminalVelocity);
         func_8007CF58(fp);
     }
 }
@@ -180,13 +174,9 @@ void ftMario_SpecialHi_CheckLanding(HSD_GObj* gobj)
     func_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
 }
 
-// 0x800E1F70
-// https://decomp.me/scratch/k2DCy
 void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
 {
-    Fighter* fp;
-
-    fp = GET_FIGHTER(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->xE0_ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
             func_80083B68(gobj);
@@ -199,7 +189,6 @@ void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
-// 0x800E1FE0
 void ftMario_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     ftMario_SpecialHi_Coll(gobj);
