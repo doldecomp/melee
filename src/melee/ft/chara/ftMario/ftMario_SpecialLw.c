@@ -217,12 +217,9 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     func_8007CADC(ft_tmp, 0.0f, sa->x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND,
                   flt_var);
     func_8007CB74(gobj);
-    if (((u32) fp->x2208_ftcmd_var2 != 0U) &&
-        ((fp->input.x668 & HSD_BUTTON_B) != 0))
-    {
+    if (fp->x2208_ftcmd_var2 != 0 && (fp->input.x668 & HSD_BUTTON_B)) {
         flt_var = fp->x80_self_vel.y;
-        fp->x80_self_vel.y =
-            (f32) (flt_var + sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX);
+        fp->x80_self_vel.y = flt_var + sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX;
         doPhys(gobj);
     }
 }
