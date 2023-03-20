@@ -195,7 +195,7 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 _[8];
+    u8 _[16];
 #endif
 
     fp = GET_FIGHTER(gobj);
