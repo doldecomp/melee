@@ -44,7 +44,7 @@ void ftMario_SpecialLw_SetCall(HSD_GObj* gobj)
     fp->cb.x21E4_callback_OnDeath2 = &ftMario_SpecialLw_UpdateRot;
 }
 
-void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj)
+static void doStartAction(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMario_DatAttrs* sa;
@@ -88,7 +88,7 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
     fp->x80_self_vel.y = (f32) (sa->x38_MARIO_TORNADO_GROUND_VEL_Y -
                                 sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX);
     func_8007D440(fp, sa->x40_MARIO_TORNADO_MOMENTUM_X_AIR);
-    _ftMario_800E207C_800E2194_helper(gobj);
+    doStartAction(gobj);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
@@ -115,7 +115,7 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
     }
     fp->x80_self_vel.y = (f32) (sa->x38_MARIO_TORNADO_GROUND_VEL_Y - sub_val);
     func_8007D440(fp, sa->x40_MARIO_TORNADO_MOMENTUM_X_AIR);
-    _ftMario_800E207C_800E2194_helper(gobj);
+    doStartAction(gobj);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
@@ -172,7 +172,7 @@ static usize_t const transition_flags =
     FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
     FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
-void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj)
+static void doPhys(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftMario_DatAttrs* sa = GetMarioAttr(fp);
@@ -223,7 +223,7 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
         flt_var = fp->x80_self_vel.y;
         fp->x80_self_vel.y =
             (f32) (flt_var + sa->x54_MARIO_TORNADO_TAP_Y_VEL_MAX);
-        _ftMario_800E23E4_800E25C4_helper_0(gobj);
+        doPhys(gobj);
     }
 }
 
@@ -264,7 +264,7 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
     func_8007D3A8(fp, 0.0f, sa->x48_MARIO_TORNADO_MOMENTUM_X_MUL_AIR, flt_var);
 }
 
-void _doColl(HSD_GObj* gobj)
+static void doColl(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -293,14 +293,14 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         if (func_80082888(gobj, &coll_box) == false) {
-            _ftMario_800E23E4_800E25C4_helper_0(gobj);
+            doPhys(gobj);
             fp->sv.mr.SpecialLw.isUnkColl = false;
         } else {
             fp->sv.mr.SpecialLw.isUnkColl = true;
         }
     } else {
         if (func_800824A0(gobj, &coll_box) == false) {
-            _ftMario_800E23E4_800E25C4_helper_0(gobj);
+            doPhys(gobj);
             fp->sv.mr.SpecialLw.isUnkColl = false;
         } else {
             fp->sv.mr.SpecialLw.isUnkColl = true;
@@ -310,7 +310,7 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
     doColl(gobj);
 }
 
-void _ftMario_800E2778_helper(HSD_GObj* gobj)
+static void doAirCollIfUnk(HSD_GObj* gobj)
 {
     Fighter* ft_tmp;
     Fighter* fp;
@@ -338,7 +338,7 @@ void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     if (func_800824A0(gobj, &coll_box) != 0) {
-        _ftMario_800E2778_helper(gobj);
+        doAirCollIfUnk(gobj);
         fp->sv.mr.SpecialLw.isUnkColl = 1;
     } else {
         fp->sv.mr.SpecialLw.isUnkColl = 0;

@@ -4,13 +4,9 @@
 #include <sysdolphin/baselib/forward.h>
 #include <Runtime/platform.h>
 
-void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj);
-void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj);
-void ftMario_SpecialLw_SetGFX(HSD_GObj* gobj);
-void _ftMario_800E25C4_800E2778_helper(HSD_GObj* gobj);
-void _ftMario_800E2778_helper(HSD_GObj* gobj);
 void ftMario_SpecialLw_SetCall(HSD_GObj* gobj);
-void _ftMario_800E207C_800E2194_helper(HSD_GObj* gobj);
+void ftMario_SpecialLw_SetGFX(HSD_GObj* gobj);
+void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj);
 void ftMario_SpecialLw_SetVar(HSD_GObj* gobj);
 
 #endif
