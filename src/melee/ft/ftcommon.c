@@ -224,7 +224,7 @@ char lbl_803C0D64[] = "fp->kind == Ft_Kind_Sandbag";
 // Not sure why this is needed
 // Maybe __FILE__ is allocated separate from ordinary string literals?
 #undef HSD_ASSERT
-#define HSD_ASSERT(line, cond)                                                 \
+#define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(lbl_803C0D58, line, #cond))
 
 asm f32 func_8007CDA4(Fighter*)
@@ -464,8 +464,8 @@ void func_8007D174(Fighter* fp, f32 arg8, f32 arg9, f32 argA, f32 argB)
                 if (arg8 + phi_f2 >
                     fp->x110_attr.x188_HorizontalAirMobilityConstant)
                 {
-                    phi_f2 =
-                        fp->x110_attr.x188_HorizontalAirMobilityConstant - arg8;
+                    phi_f2 = fp->x110_attr.x188_HorizontalAirMobilityConstant -
+                             arg8;
                 }
             }
         } else if (arg8 + arg9 < argA) {
@@ -1083,8 +1083,8 @@ HSD_GObj* func_8007E2A4(HSD_GObj* gobj)
     CollData* colldata = &fp->x6F0_collData;
     fp->x98_atk_shield_kb.x =
         colldata->x14C_ground.normal.y * fp->xF4_ground_attacker_shield_kb_vel;
-    fp->x98_atk_shield_kb.y =
-        -colldata->x14C_ground.normal.x * fp->xF4_ground_attacker_shield_kb_vel;
+    fp->x98_atk_shield_kb.y = -colldata->x14C_ground.normal.x *
+                              fp->xF4_ground_attacker_shield_kb_vel;
     return gobj;
 }
 
@@ -1917,8 +1917,8 @@ void func_80080174(Fighter* fp)
     }
     if (fp->x1980 != NULL) {
         v = &fp->x110_attr.x240;
-        if ((phi_f2 = p_ftCommonData->x710 * fp->x2024 + p_ftCommonData->x708) >
-            (phi_f3 = p_ftCommonData->x70C))
+        if ((phi_f2 = p_ftCommonData->x710 * fp->x2024 +
+                      p_ftCommonData->x708) > (phi_f3 = p_ftCommonData->x70C))
         {
             phi_f2 = phi_f3;
         }

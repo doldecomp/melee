@@ -196,7 +196,8 @@ void ftSeak_8011097C(HSD_GObj* fighter_gobj)
     return;
 }
 
-void ftSeak_UpdateHitboxes(HSD_GObj* fighter_gobj, Vec3* new_pos, s32 hitbox_id)
+void ftSeak_UpdateHitboxes(HSD_GObj* fighter_gobj, Vec3* new_pos,
+                           s32 hitbox_id)
 {
     if (fighter_gobj == NULL)
         return;

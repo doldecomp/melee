@@ -5,8 +5,9 @@
 #include <melee/ft/types.h>
 
 ActionState as_table_luigi[] = {
-    { 295, 0x00340111, 0x12000000, ftLuigi_SpecialN_Anim, ftLuigi_SpecialN_IASA,
-      ftLuigi_SpecialN_Phys, ftLuigi_SpecialN_Coll, func_800761C8 },
+    { 295, 0x00340111, 0x12000000, ftLuigi_SpecialN_Anim,
+      ftLuigi_SpecialN_IASA, ftLuigi_SpecialN_Phys, ftLuigi_SpecialN_Coll,
+      func_800761C8 },
     { 296, 0x00340511, 0x12000000, ftLuigi_SpecialAirN_Anim,
       ftLuigi_SpecialAirN_IASA, ftLuigi_SpecialAirN_Phys,
       ftLuigi_SpecialAirN_Coll, func_800761C8 },

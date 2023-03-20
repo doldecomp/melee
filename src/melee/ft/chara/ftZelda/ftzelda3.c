@@ -78,7 +78,8 @@ void ftZelda_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.y = 0;
     fp->x80_self_vel.x = fp->x80_self_vel.x / sa->x8;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x156, 0, NULL, 0, 1.0, 0);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x156, 0, NULL, 0, 1.0,
+                                       0);
     func_8006EBA4(fighter_gobj);
 
     startActionHelper(fighter_gobj);

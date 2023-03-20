@@ -48,8 +48,8 @@ void ftGameWatch_Attack100Loop_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACK100LOOP,
-                                       0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, AS_GAMEWATCH_ATTACK100LOOP, 0, NULL, 0.0f, 1.0f, 0.0f);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_Attack11_DecideAction;
 }
 

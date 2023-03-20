@@ -57,8 +57,8 @@ void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index,
 }
 
 // 0x800E9ED4
-// https://decomp.me/scratch/bkSg9 // Return float from array @ 0x2374 for Fox &
-// Falco's Illusion/Phantasm
+// https://decomp.me/scratch/bkSg9 // Return float from array @ 0x2374 for Fox
+// & Falco's Illusion/Phantasm
 f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* fighter_gobj, s32 index)
 {
     return getFighter(fighter_gobj)->sv.fx.SpecialS.blendFrames[index];
@@ -248,11 +248,11 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* fighter_gobj)
     if ((u32) fp->x2208_ftcmd_var2 == 1U) {
         fp->x2208_ftcmd_var2 = 0U;
         if ((s32) fp->x4_fighterKind == FTKIND_FOX) {
-            ghostGObj =
-                func_8029CEB4(fighter_gobj, &fp->xB0_pos, 0x38, fp->facing_dir);
+            ghostGObj = func_8029CEB4(fighter_gobj, &fp->xB0_pos, 0x38,
+                                      fp->facing_dir);
         } else {
-            ghostGObj =
-                func_8029CEB4(fighter_gobj, &fp->xB0_pos, 0x39, fp->facing_dir);
+            ghostGObj = func_8029CEB4(fighter_gobj, &fp->xB0_pos, 0x39,
+                                      fp->facing_dir);
         }
         if (ghostGObj != NULL) {
             fp->sv.fx.SpecialS.ghostGObj = ghostGObj;
@@ -331,9 +331,12 @@ static inline void ftFox_SpecialS_SetPhys(HSD_GObj* fighter_gobj)
 
     fp = GET_FIGHTER(fighter_gobj);
 
-    fp->sv.fx.SpecialS.ghostEffectPos[3] = fp->sv.fx.SpecialS.ghostEffectPos[2];
-    fp->sv.fx.SpecialS.ghostEffectPos[2] = fp->sv.fx.SpecialS.ghostEffectPos[1];
-    fp->sv.fx.SpecialS.ghostEffectPos[1] = fp->sv.fx.SpecialS.ghostEffectPos[0];
+    fp->sv.fx.SpecialS.ghostEffectPos[3] =
+        fp->sv.fx.SpecialS.ghostEffectPos[2];
+    fp->sv.fx.SpecialS.ghostEffectPos[2] =
+        fp->sv.fx.SpecialS.ghostEffectPos[1];
+    fp->sv.fx.SpecialS.ghostEffectPos[1] =
+        fp->sv.fx.SpecialS.ghostEffectPos[0];
 
     fp->sv.fx.SpecialS.ghostEffectPos[0] = fp->xB0_pos;
 
@@ -486,8 +489,8 @@ void ftFox_SpecialSEnd_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x800EA944
-// https://decomp.me/scratch/YLYPn // Fox & Falco's aerial Illusion/Phantasm End
-// Animation callback
+// https://decomp.me/scratch/YLYPn // Fox & Falco's aerial Illusion/Phantasm
+// End Animation callback
 void ftFox_SpecialAirSEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -534,8 +537,8 @@ void ftFox_SpecialSEnd_Phys(HSD_GObj* fighter_gobj)
 }
 
 // 0x800EAA8C
-// https://decomp.me/scratch/qGaVf // Fox & Falco's aerial Illusion/Phantasm End
-// Physics callback
+// https://decomp.me/scratch/qGaVf // Fox & Falco's aerial Illusion/Phantasm
+// End Physics callback
 void ftFox_SpecialAirSEnd_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
@@ -572,8 +575,8 @@ void ftFox_SpecialSEnd_Coll(HSD_GObj* fighter_gobj)
 }
 
 // 0x800EABCC
-// https://decomp.me/scratch/pd3IU // Fox & Falco's aerial Illusion/Phantasm End
-// Collision callback
+// https://decomp.me/scratch/pd3IU // Fox & Falco's aerial Illusion/Phantasm
+// End Collision callback
 void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -608,8 +611,8 @@ inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* fighter_gobj)
 }
 
 // 0x800EAC50
-// https://decomp.me/scratch/ZZTJW // Fox & Falco's grounded Illusion End Action
-// State handler
+// https://decomp.me/scratch/ZZTJW // Fox & Falco's grounded Illusion End
+// Action State handler
 void ftFox_SpecialSEnd_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);

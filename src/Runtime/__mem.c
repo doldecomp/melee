@@ -10,12 +10,12 @@ void* memset(void* dst, int val, unsigned long /*size_t*/ n)
 #ifdef __MWERKS__
 #define INCREMENT_ASSIGN(ptr, type, value) (*++((type*) (ptr)) = (value))
 #else
-#define INCREMENT_ASSIGN(ptr, type, value)                                     \
-    do {                                                                       \
-        type* __INCREMENT_ASSIGN_tmp;                                          \
-        (ptr) = ((type*) (ptr)) + 1;                                           \
-        __INCREMENT_ASSIGN_tmp = ((type*) (ptr));                              \
-        *__INCREMENT_ASSIGN_tmp = (value);                                     \
+#define INCREMENT_ASSIGN(ptr, type, value)                                    \
+    do {                                                                      \
+        type* __INCREMENT_ASSIGN_tmp;                                         \
+        (ptr) = ((type*) (ptr)) + 1;                                          \
+        __INCREMENT_ASSIGN_tmp = ((type*) (ptr));                             \
+        *__INCREMENT_ASSIGN_tmp = (value);                                    \
     } while (false);
 #endif
 

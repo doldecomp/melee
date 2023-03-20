@@ -30,7 +30,8 @@ void ftLuigi_SpecialS_SetVars(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 0;
 
     if (fp->x673 < sa->x4_LUIGI_GREENMISSILE_SMASH) {
-        fp->sv.lg.SpecialS.chargeFrames = sa->x8_LUIGI_GREENMISSILE_CHARGE_RATE;
+        fp->sv.lg.SpecialS.chargeFrames =
+            sa->x8_LUIGI_GREENMISSILE_CHARGE_RATE;
         fp->x2070.x2072_b4 = true;
     } else {
         fp->sv.lg.SpecialS.chargeFrames = 0;
@@ -57,8 +58,8 @@ void ftLuigi_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->cb.x21EC_callback = ftLuigi_SpecialS_SetVars;
     fp->xEC_ground_vel /= sa->x18_LUIGI_GREENMISSILE_TRACTION;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALS_START, 0,
-                                       NULL, 0, 1, 0);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALS_START,
+                                       0, NULL, 0, 1, 0);
 
     func_8006EBA4(fighter_gobj);
 }
@@ -78,8 +79,8 @@ void ftLuigi_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.x /= sa->x18_LUIGI_GREENMISSILE_TRACTION;
     fp->x80_self_vel.y = 0;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRS_START,
-                                       0, NULL, 0, 1, 0);
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, AS_LUIGI_SPECIALAIRS_START, 0, NULL, 0, 1, 0);
 
     func_8006EBA4(fighter_gobj);
 }
@@ -174,9 +175,9 @@ void ftLuigi_SpecialSStart_GroundToAir(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRS_START,
-                                       transition_flags0, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, AS_LUIGI_SPECIALAIRS_START, transition_flags0, NULL,
+        fp->x894_currentAnimFrame, 1, 0);
 }
 
 /// Luigi's Green Missile Start air -> ground Action State handler
@@ -749,9 +750,9 @@ void ftLuigi_SpecialSFly_Action(HSD_GObj* fighter_gobj)
     if (fp->sv.lg.SpecialS.isMisfire) {
         fp->x80_self_vel.x = sa->x48_LUIGI_GREENMISSILE_MISFIRE_VEL_X;
     } else {
-        fp->x80_self_vel.x =
-            sa->x28_LUIGI_GREENMISSILE_MUL_X * fp->sv.lg.SpecialS.chargeFrames +
-            sa->x24_LUIGI_GREENMISSILE_VEL_X;
+        fp->x80_self_vel.x = sa->x28_LUIGI_GREENMISSILE_MUL_X *
+                                 fp->sv.lg.SpecialS.chargeFrames +
+                             sa->x24_LUIGI_GREENMISSILE_VEL_X;
     }
 
     fp->x80_self_vel.x *= fp->facing_dir;

@@ -164,8 +164,8 @@ static void HSD_OSInit(void)
     memReport.total = OSGetPhysicalMemSize();
     memReport.system = memReport.total - (u32) OSGetArenaHi() +
                        (u32) OSGetArenaLo() - memReport.xfb - memReport.gxfifo;
-    old_arena_lo = (u32) OSInitAlloc((void*) old_arena_lo, (void*) old_arena_hi,
-                                     iparam_heap_max_num);
+    old_arena_lo = (u32) OSInitAlloc(
+        (void*) old_arena_lo, (void*) old_arena_hi, iparam_heap_max_num);
     OSSetArenaLo((void*) old_arena_lo);
 
     new_arena_lo = OSRoundUp32B(old_arena_lo);
@@ -222,7 +222,8 @@ OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
         hsd_heap_next_arena_hi = hi;
     }
     OSDestroyHeap(current_heap);
-    current_heap = OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
+    current_heap =
+        OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
     OSSetCurrentHeap(current_heap);
     HSD_ObjSetHeap((u32) hsd_heap_next_arena_hi - (u32) hsd_heap_next_arena_lo,
                    NULL);
@@ -331,7 +332,8 @@ void HSD_ObjDumpStat(void)
     HSD_ObjAllocInfo* i;
     for (i = objs; i->name != NULL; i++) {
         OSReport("objalloc: %s\tusing %d\tfreed %d\tpeak %d\n", i->name,
-                 HSD_ObjAllocUsed(i), HSD_ObjAllocFree(i), HSD_ObjAllocPeak(i));
+                 HSD_ObjAllocUsed(i), HSD_ObjAllocFree(i),
+                 HSD_ObjAllocPeak(i));
     }
 }
 

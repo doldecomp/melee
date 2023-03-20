@@ -241,8 +241,8 @@ static inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014E73C
-// https://decomp.me/scratch/thHUb // Mr. Game & Watch's grounded Chef Animation
-// callback
+// https://decomp.me/scratch/thHUb // Mr. Game & Watch's grounded Chef
+// Animation callback
 void ftGameWatch_SpecialN_Anim(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
@@ -299,7 +299,8 @@ void ftGameWatch_SpecialN_IASA(HSD_GObj* fighter_gobj)
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
         fp->sv.gw.SpecialN.isChefLoopDisable = true;
     }
-    if (((u32) fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_BUTTON_B) &&
+    if (((u32) fp->x2204_ftcmd_var1 != 0U) &&
+        (fp->input.x668 & HSD_BUTTON_B) &&
         ((f32) fp->sv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
@@ -319,7 +320,8 @@ void ftGameWatch_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
         fp->sv.gw.SpecialN.isChefLoopDisable = true;
     }
-    if (((u32) fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_BUTTON_B) &&
+    if (((u32) fp->x2204_ftcmd_var1 != 0U) &&
+        (fp->input.x668 & HSD_BUTTON_B) &&
         ((f32) fp->sv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
@@ -341,8 +343,8 @@ void ftGameWatch_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014E9C4
-// https://decomp.me/scratch/SfsYX // Mr. Game & Watch's grounded Chef Collision
-// callback
+// https://decomp.me/scratch/SfsYX // Mr. Game & Watch's grounded Chef
+// Collision callback
 void ftGameWatch_SpecialN_Coll(HSD_GObj* fighter_gobj)
 {
     if (func_800827A0(fighter_gobj) == false)
@@ -421,8 +423,8 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 }
 
 // 0x8014EB8C
-// https://decomp.me/scratch/KLilJ // Mr. Game & Watch's aerial Chef Loop Action
-// State handler
+// https://decomp.me/scratch/KLilJ // Mr. Game & Watch's aerial Chef Loop
+// Action State handler
 void ftGameWatch_SpecialAirN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);

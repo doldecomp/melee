@@ -178,7 +178,8 @@ void func_80073758(HSD_JObj* arg0)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm s32 Fighter_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
+asm s32 Fighter_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint,
+                             HSD_JObj* parent)
 { // clang-format off
     nofralloc
 /* 80073780 00070360  7C 08 02 A6 */	mflr r0

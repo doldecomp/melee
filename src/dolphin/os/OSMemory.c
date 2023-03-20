@@ -38,8 +38,8 @@ static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
     __MEMRegs[0x10] = 0;
 
     if (__OSErrorTable[OS_ERROR_PROTECTION]) {
-        __OSErrorTable[OS_ERROR_PROTECTION](OS_ERROR_PROTECTION, context, cause,
-                                            addr);
+        __OSErrorTable[OS_ERROR_PROTECTION](OS_ERROR_PROTECTION, context,
+                                            cause, addr);
         return;
     }
 

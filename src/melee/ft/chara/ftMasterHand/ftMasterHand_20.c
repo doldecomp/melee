@@ -118,7 +118,8 @@ void lbl_80154158(HSD_GObj* gobj)
 #endif
 
     if (--r3_fp->sv.mh.unk0.x0 > 0.0f) {
-        ftMasterHand_SpecialAttrs* r4_attributes = r3_fp->x10C_ftData->ext_attr;
+        ftMasterHand_SpecialAttrs* r4_attributes =
+            r3_fp->x10C_ftData->ext_attr;
         func_8015BF74(gobj, r4_attributes->x58);
     } else {
         r3_fp->x80_self_vel.x = 0.0f;

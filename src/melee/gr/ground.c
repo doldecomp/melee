@@ -1967,7 +1967,8 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                 } else if (arg1 & 2) {
                     /// @todo Weird comparison, but typing
                     ///       #UnkBgmStruct::x10 as @c signed doesn't match and
-                    ///       neither does typing #BGM_Undefined as @c unsigned.
+                    ///       neither does typing #BGM_Undefined as @c
+                    ///       unsigned.
                     if (phi_r30->x10 != (unsigned) BGM_Undefined) {
                         bgm = phi_r30->x10;
                         result = true;
@@ -3542,8 +3543,10 @@ s32 func_801C4210(void)
     u8 _[8];
 #endif
 
-    /// @todo With a hard-coded range for @c i, very unlikely it's not returning
-    ///       an @c enum. Probably preset joints (accesses a list of #HSD_JObj).
+    /// @todo With a hard-coded range for @c i, very unlikely it's not
+    /// returning
+    ///       an @c enum. Probably preset joints (accesses a list of
+    ///       #HSD_JObj).
 
     enum_t count = 0;
     enum_t i;

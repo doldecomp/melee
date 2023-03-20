@@ -386,8 +386,8 @@ void func_8013322C(HSD_GObj* gobj)
     func_8007D7FC(fp1);
 
     Fighter_ActionStateChange_800693AC(gobj, 347, transition_flags1, 0,
-                                       fp1->x894_currentAnimFrame, lbl_804D9ADC,
-                                       lbl_804D9AD8);
+                                       fp1->x894_currentAnimFrame,
+                                       lbl_804D9ADC, lbl_804D9AD8);
 
     {
         fp0 = GET_FIGHTER(gobj);

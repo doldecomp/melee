@@ -241,8 +241,8 @@ void HSD_DObjSetDefaultClass(HSD_ClassInfo* info)
 {
     if (info) {
         if (!hsdIsDescendantOf(info, &hsdDObj)) {
-            // The line number here is totally made up, this function is removed
-            // in practice but the string isn't
+            // The line number here is totally made up, this function is
+            // removed in practice but the string isn't
             __assert(lbl_804D5C78, 498, "hsdIsDescendantOf(info, &hsdDObj)");
         }
     }
@@ -268,7 +268,8 @@ void HSD_DObjResolveRefs(HSD_DObj* dobj, HSD_DObjDesc* desc)
 
 void HSD_DObjResolveRefsAll(HSD_DObj* dobj, HSD_DObjDesc* desc)
 {
-    for (; dobj != NULL && desc != NULL; dobj = dobj->next, desc = desc->next) {
+    for (; dobj != NULL && desc != NULL; dobj = dobj->next, desc = desc->next)
+    {
         HSD_DObjResolveRefs(dobj, desc);
     }
 }
@@ -276,8 +277,8 @@ void HSD_DObjResolveRefsAll(HSD_DObj* dobj, HSD_DObjDesc* desc)
 void forceStringAllocation(
     HSD_DObj* dobj,
     HSD_MObj*
-        mobj) // This function exists for the sole purpose of causing strings to
-              // end up in data by the compiler despite not being used
+        mobj) // This function exists for the sole purpose of causing strings
+              // to end up in data by the compiler despite not being used
 {
     if (dobj->pobj == NULL) {
         __assert(lbl_804D5C78, 700, "can not find specified pobj in link.\n");

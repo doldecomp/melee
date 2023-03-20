@@ -33,7 +33,8 @@ void ARStartDMA(u32 type, u32 mainmem_addr, u32 aram_addr, u32 length)
 {
     bool enabled = OSDisableInterrupts();
 
-    __DSPRegs[16] = (u16) (__DSPRegs[16] & ~0x3ff) | (u16) (mainmem_addr >> 16);
+    __DSPRegs[16] =
+        (u16) (__DSPRegs[16] & ~0x3ff) | (u16) (mainmem_addr >> 16);
     __DSPRegs[17] =
         (u16) (__DSPRegs[17] & ~0xffe0) | (u16) (mainmem_addr & 0xffff);
     __DSPRegs[18] = (u16) (__DSPRegs[18] & ~0x3ff) | (u16) (aram_addr >> 16);

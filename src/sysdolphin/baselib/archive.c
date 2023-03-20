@@ -40,7 +40,8 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, u32 file_size)
         offset = archive->header.data_size + 0x20;
     }
     if (archive->header.nb_reloc != 0) { // Relocation Size
-        archive->reloc_info = (HSD_ArchiveRelocationInfo*) ((s32) src + offset);
+        archive->reloc_info =
+            (HSD_ArchiveRelocationInfo*) ((s32) src + offset);
         offset = offset + archive->header.nb_reloc * 4;
     }
     if (archive->header.nb_public != 0) { // Root Size

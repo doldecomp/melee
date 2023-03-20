@@ -45,8 +45,8 @@ void ftNess_SpecialNSetNULL(HSD_GObj* fighter_gobj)
     }
 }
 
-/// Clear PK Flash's owner GObj pointer, Ness's pointer to PK Flash's item GObj,
-/// and reset callbacks
+/// Clear PK Flash's owner GObj pointer, Ness's pointer to PK Flash's item
+/// GObj, and reset callbacks
 void ftNess_ItemPKFlushSetNULL(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj == NULL)
@@ -97,8 +97,8 @@ void ftNess_SpecialNStart_Action(HSD_GObj* fighter_gobj)
         Fighter* fp0;
         fp0 = GET_FIGHTER(fighter_gobj);
 
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALN_START,
-                                           0, NULL, 0, 1, 0);
+        Fighter_ActionStateChange_800693AC(
+            fighter_gobj, AS_NESS_SPECIALN_START, 0, NULL, 0, 1, 0);
 
         fp0->x220C_ftcmd_var3 = 0;
         fp0->x2208_ftcmd_var2 = 0;
@@ -402,7 +402,8 @@ void ftNess_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
             return;
         }
 
-        func_80096900(fighter_gobj, 1, 0, true, 1, sa->x1C_PKFLASH_LANDING_LAG);
+        func_80096900(fighter_gobj, 1, 0, true, 1,
+                      sa->x1C_PKFLASH_LANDING_LAG);
     }
 }
 

@@ -241,8 +241,9 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
     flt_var = sa->speciallw.air_momentum_x;
     sa_2 = fp->x2D4_specialAttributes;
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
-        fp->sv.mr.SpecialLw.groundVelX = (f32) (fp->sv.mr.SpecialLw.groundVelX -
-                                                sa_2->speciallw.friction_end);
+        fp->sv.mr.SpecialLw.groundVelX =
+            (f32) (fp->sv.mr.SpecialLw.groundVelX -
+                   sa_2->speciallw.friction_end);
         flt_var += fp->sv.mr.SpecialLw.groundVelX;
         if (flt_var < 0) {
             flt_var = 0;

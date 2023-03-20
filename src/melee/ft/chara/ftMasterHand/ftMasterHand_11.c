@@ -70,7 +70,8 @@ void lbl_801524C8(HSD_GObj* gobj)
         func_801525E0(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x164, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x164, 0, 0, 0.0f, 1.0f,
+                                           0.0f);
         func_8006EBA4(gobj);
     }
 }

@@ -103,7 +103,8 @@ void lbl_8015198C(HSD_GObj* gobj)
         temp_r8->sv.mh.unk0.xC.x = temp_r8->xB0_pos.x - temp_r7->x3C;
         temp_r8->sv.mh.unk0.xC.y = temp_r7->x38;
         temp_r8->sv.mh.unk0.xC.z = 0.0f;
-        Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0f, 1.0f,
+                                           0.0f);
         func_8006EBA4(gobj);
     }
 }

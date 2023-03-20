@@ -98,7 +98,8 @@ HSD_GObj* func_80221CB4(int arg0)
             func_8038FD54(gobj, cb->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtluigi.c", 0xC3, arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtluigi.c", 0xC3,
+                 arg0);
     }
     return gobj;
 }

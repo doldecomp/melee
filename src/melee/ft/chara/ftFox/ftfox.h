@@ -53,25 +53,25 @@ typedef enum ftFoxAction {
 
 // SpecialHi (Firefox/Firebird)
 
-#define FTFOX_SPECIALHI_COLL_FLAG                                              \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |            \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
-        FtStateChange_SkipUpdateModelPartVis |                                 \
+#define FTFOX_SPECIALHI_COLL_FLAG                                             \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
-#define FTFOX_SPECIALLW_COLL_FLAG                                              \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |            \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
-        FtStateChange_SkipUpdateModelPartVis |                                 \
+#define FTFOX_SPECIALLW_COLL_FLAG                                             \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
-#define FTFOX_SPECIALS_COLL_FLAG                                               \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateRumble |         \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |            \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
-        FtStateChange_SkipUpdateModelPartVis |                                 \
+#define FTFOX_SPECIALS_COLL_FLAG                                              \
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateRumble |        \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 typedef struct _ftFoxAttributes {
@@ -132,8 +132,9 @@ typedef struct _ftFoxAttributes {
 
     f32 x98_FOX_REFLECTOR_RELEASE_LAG; // Auto lag frames after initializing
                                        // Reflector if B is not being held.
-                                       // Reflector is immediately released with
-                                       // no lag once these frames have passed.
+                                       // Reflector is immediately released
+                                       // with no lag once these frames have
+                                       // passed.
     f32 x9C_FOX_REFLECTOR_TURN_FRAMES; // Amount of turn frames for changing
                                        // Reflector direction
     f32 xA0_FOX_REFLECTOR_UNK1;

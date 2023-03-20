@@ -55,22 +55,22 @@
 #define TOBJ_TEVREG_ACTIVE_KONST_G (0x01 << 1)
 #define TOBJ_TEVREG_ACTIVE_KONST_B (0x01 << 2)
 #define TOBJ_TEVREG_ACTIVE_KONST_A (0x01 << 3)
-#define TOBJ_TEVREG_ACTIVE_KONST                                               \
-    (TOBJ_TEVREG_ACTIVE_KONST_R | TOBJ_TEVREG_ACTIVE_KONST_G |                 \
+#define TOBJ_TEVREG_ACTIVE_KONST                                              \
+    (TOBJ_TEVREG_ACTIVE_KONST_R | TOBJ_TEVREG_ACTIVE_KONST_G |                \
      TOBJ_TEVREG_ACTIVE_KONST_B | TOBJ_TEVREG_ACTIVE_KONST_A)
 #define TOBJ_TEVREG_ACTIVE_TEV0_R (0x01 << 4)
 #define TOBJ_TEVREG_ACTIVE_TEV0_G (0x01 << 5)
 #define TOBJ_TEVREG_ACTIVE_TEV0_B (0x01 << 6)
 #define TOBJ_TEVREG_ACTIVE_TEV0_A (0x01 << 7)
-#define TOBJ_TEVREG_ACTIVE_TEV0                                                \
-    (TOBJ_TEVREG_ACTIVE_TEV0_R | TOBJ_TEVREG_ACTIVE_TEV0_G |                   \
+#define TOBJ_TEVREG_ACTIVE_TEV0                                               \
+    (TOBJ_TEVREG_ACTIVE_TEV0_R | TOBJ_TEVREG_ACTIVE_TEV0_G |                  \
      TOBJ_TEVREG_ACTIVE_TEV0_B | TOBJ_TEVREG_ACTIVE_TEV0_A)
 #define TOBJ_TEVREG_ACTIVE_TEV1_R (0x01 << 8)
 #define TOBJ_TEVREG_ACTIVE_TEV1_G (0x01 << 9)
 #define TOBJ_TEVREG_ACTIVE_TEV1_B (0x01 << 10)
 #define TOBJ_TEVREG_ACTIVE_TEV1_A (0x01 << 11)
-#define TOBJ_TEVREG_ACTIVE_TEV1                                                \
-    (TOBJ_TEVREG_ACTIVE_TEV1_R | TOBJ_TEVREG_ACTIVE_TEV1_G |                   \
+#define TOBJ_TEVREG_ACTIVE_TEV1                                               \
+    (TOBJ_TEVREG_ACTIVE_TEV1_R | TOBJ_TEVREG_ACTIVE_TEV1_G |                  \
      TOBJ_TEVREG_ACTIVE_TEV1_B | TOBJ_TEVREG_ACTIVE_TEV1_A)
 #define TOBJ_TEVREG_ACTIVE_COLOR_TEV (0x01 << 30)
 #define TOBJ_TEVREG_ACTIVE_ALPHA_TEV (0x01U << 31)
@@ -113,8 +113,8 @@
 #define TEX_LIGHTMAP_AMBIENT (0x1 << 6)
 #define TEX_LIGHTMAP_EXT (0x1 << 7)
 #define TEX_LIGHTMAP_SHADOW (0x1 << 8)
-#define TEX_LIGHTMAP_MASK                                                      \
-    (TEX_LIGHTMAP_DIFFUSE | TEX_LIGHTMAP_SPECULAR | TEX_LIGHTMAP_AMBIENT |     \
+#define TEX_LIGHTMAP_MASK                                                     \
+    (TEX_LIGHTMAP_DIFFUSE | TEX_LIGHTMAP_SPECULAR | TEX_LIGHTMAP_AMBIENT |    \
      TEX_LIGHTMAP_EXT | TEX_LIGHTMAP_SHADOW)
 #define tobj_lightmap(T) ((T)->flags & TEX_LIGHTMAP_MASK)
 

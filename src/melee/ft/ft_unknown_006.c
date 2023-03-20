@@ -57,7 +57,8 @@ s32 func_80087900(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if ((fp->x1974_heldItem != NULL) && (itGetKind(fp->x1974_heldItem) == 0x1E))
+    if ((fp->x1974_heldItem != NULL) &&
+        (itGetKind(fp->x1974_heldItem) == 0x1E))
         return true;
 
     return false;
@@ -108,7 +109,8 @@ s32 func_80087A18(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->x2226_flag.bits.b4) &&
-        ((var1 = func_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) &&
+        ((var1 = func_800C06B4(fp), ((var1 == 0x7B) != 0)) ||
+         (var1 == 0x80)) &&
         ((fp->x2226_flag.bits.b5)))
         return true;
 

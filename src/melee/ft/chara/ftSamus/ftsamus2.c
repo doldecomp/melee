@@ -147,7 +147,8 @@ void ftSamus_80128D3C(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    if ((fp->x2204_ftcmd_var1) && (fp->input.x624_lstick_y < samus_attr->x14)) {
+    if ((fp->x2204_ftcmd_var1) && (fp->input.x624_lstick_y < samus_attr->x14))
+    {
         fp->x2204_ftcmd_var1 = 0;
         func_800D638C(fighter_gobj);
         return;

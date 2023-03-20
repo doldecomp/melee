@@ -861,7 +861,8 @@ bool func_80087354(HSD_GObj* gobj)
 bool func_8008737C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ASID_DEADUPSTAR && fp->action_id <= ASID_DEADUPSTARICE)
+    if (fp->action_id >= ASID_DEADUPSTAR &&
+        fp->action_id <= ASID_DEADUPSTARICE)
         return true;
 
     return false;

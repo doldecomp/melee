@@ -327,8 +327,8 @@ void ftZelda_8013B4D8(HSD_GObj* fighter_gobj)
         else
             asid = 0x166;
 
-        Fighter_ActionStateChange_800693AC(fighter_gobj, asid, 0, NULL, sa->x80,
-                                           1.0, 0);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, asid, 0, NULL,
+                                           sa->x80, 1.0, 0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AE30;
 }

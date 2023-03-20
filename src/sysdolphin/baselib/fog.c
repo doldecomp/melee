@@ -31,8 +31,8 @@ void HSD_FogSet(HSD_Fog* fog)
     if (cobj == NULL) {
         HSD_Panic(__FILE__, 0x4D, "You must specify CObj first.\n");
     }
-    GXSetFog(fog->type, fog->color, fog->start, fog->end, HSD_CObjGetNear(cobj),
-             HSD_CObjGetFar(cobj));
+    GXSetFog(fog->type, fog->color, fog->start, fog->end,
+             HSD_CObjGetNear(cobj), HSD_CObjGetFar(cobj));
 
     if (fog->fog_adj != NULL) {
         GXGetViewportv(v);

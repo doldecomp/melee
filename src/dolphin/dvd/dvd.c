@@ -767,8 +767,8 @@ static void cbForStateBusy(u32 intType)
                 finished->callback(finished->transferredSize, finished);
             }
             stateReady();
-        } else if (CurrCommand == 9 || CurrCommand == 10 || CurrCommand == 11 ||
-                   CurrCommand == 12)
+        } else if (CurrCommand == 9 || CurrCommand == 10 ||
+                   CurrCommand == 11 || CurrCommand == 12)
         {
             s32 result;
 
@@ -996,7 +996,8 @@ bool DVDStopStreamAtEndAsync(DVDCommandBlock* block, DVDCBCallback callback)
     return idle;
 }
 
-bool DVDInquiryAsync(DVDCommandBlock* block, void* addr, DVDCBCallback callback)
+bool DVDInquiryAsync(DVDCommandBlock* block, void* addr,
+                     DVDCBCallback callback)
 {
     bool idle;
     block->command = 14;

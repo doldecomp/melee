@@ -74,7 +74,8 @@ s32 ftSamus_801292E4(HSD_GObj* fighter_gobj)
         vec2.x = 0.0f;
         func_8000B1CC(fp->x5E8_fighterBones[50].x0_jobj, &vec2, &vec1);
         vec1.z = 0.0f;
-        result = func_802B55C8(fighter_gobj, &vec1, 0x32, 0x5E, fp->facing_dir);
+        result =
+            func_802B55C8(fighter_gobj, &vec1, 0x32, 0x5E, fp->facing_dir);
         fp->ev.ss.x222C = result;
         if (result != NULL) {
             ftSamus_updateDamageDeathCBs(fighter_gobj);
@@ -140,8 +141,8 @@ void ftSamus_SpecialN_StartAction(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL, 0.0f,
+                                       1.0f, 0.0f);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -165,8 +166,8 @@ void ftSamus_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0, NULL, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15B, 0, NULL, 0.0f,
+                                       1.0f, 0.0f);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;

@@ -10,7 +10,7 @@
   AllowShortIfStatementsOnASingleLine: false,
   AllowShortEnumsOnASingleLine: false,
   IndentCaseLabels: false,
-  ColumnLimit: 80,
+  ColumnLimit: 79,
   AccessModifierOffset: -4,
   NamespaceIndentation: All,
   FixNamespaceComments: false,

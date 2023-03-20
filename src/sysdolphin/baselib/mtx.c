@@ -175,8 +175,8 @@ void HSD_MtxInverseTranspose(Mtx src, Mtx dest)
 
         det = 1.0f / det;
 
-        // This needs to be in a different order than in HSD_MtxInverse for some
-        // reason
+        // This needs to be in a different order than in HSD_MtxInverse for
+        // some reason
         dest[0][0] =
             (((*m)[1][1] * (*m)[2][2]) - ((*m)[2][1] * (*m)[1][2])) * det;
         dest[1][0] =

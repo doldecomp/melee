@@ -295,7 +295,8 @@ void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 
     {
         Fighter* fp1 = fp0;
-        ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp0);
+        ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs =
+            getFtSpecialAttrsD(fp0);
         CollData* collData = collData = getFtColl(fp1);
         fp0->sv.mt.SpecialHi.unk4++;
 

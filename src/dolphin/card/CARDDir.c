@@ -22,7 +22,8 @@ static void WriteCallback(s32 chan, s32 result)
     card = &__CARDBlock[chan];
     if (0 <= result) {
         CARDDir* dir0 = (CARDDir*) ((uintptr_t) card->workArea + card_size);
-        CARDDir* dir1 = (CARDDir*) ((uintptr_t) card->workArea + card_size * 2);
+        CARDDir* dir1 =
+            (CARDDir*) ((uintptr_t) card->workArea + card_size * 2);
 
         if (card->currentDir == dir0) {
             card->currentDir = dir1;

@@ -189,7 +189,8 @@ f32 func_8026B424(s32 damage) // Item Damage Math
 {
     ItemCommonData* itCommonData = lbl_804D6D28;
 
-    return (f32) (s32) (((f32) damage * itCommonData->xB8) + itCommonData->xBC);
+    return (f32) (s32) (((f32) damage * itCommonData->xB8) +
+                        itCommonData->xBC);
 }
 
 s32 func_8026B47C(HSD_GObj* item_gobj) // Get heal value of healing items
@@ -1012,8 +1013,8 @@ HSD_GObj* func_8026BE84(BobOmbRain* bobOmbRain)
         break;
 
     case 8:
-        bobOmbGObj =
-            func_80283AE4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
+        bobOmbGObj = func_80283AE4(bobOmbRain->x0, &bobOmbRain->x8_vec,
+                                   bobOmbRain->x18);
         if (bobOmbGObj != NULL) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1034,8 +1035,8 @@ HSD_GObj* func_8026BE84(BobOmbRain* bobOmbRain)
         break;
 
     case 9:
-        bobOmbGObj =
-            func_802841B4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
+        bobOmbGObj = func_802841B4(bobOmbRain->x0, &bobOmbRain->x8_vec,
+                                   bobOmbRain->x18);
         if (bobOmbGObj != NULL) {
             ip = GetItemData(bobOmbGObj);
             kind1 = ip->kind;

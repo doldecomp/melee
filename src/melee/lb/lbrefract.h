@@ -31,10 +31,10 @@ f32 atanf(f32);
 
 struct _RefractCallbackData;
 
-typedef void (*RefractCallbackTypeA)(struct _RefractCallbackData*, s32, u32, s8,
-                                     s8);
-typedef void (*RefractCallbackTypeB)(struct _RefractCallbackData*, s32, u32, s8,
-                                     s8, s8, s8);
+typedef void (*RefractCallbackTypeA)(struct _RefractCallbackData*, s32, u32,
+                                     s8, s8);
+typedef void (*RefractCallbackTypeB)(struct _RefractCallbackData*, s32, u32,
+                                     s8, s8, s8, s8);
 typedef void (*RefractCallbackTypeC)(struct _RefractCallbackData*, s32, u32,
                                      s32*, s32*, s32*, s32*);
 typedef struct _RefractCallbackData {

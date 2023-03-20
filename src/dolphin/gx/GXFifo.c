@@ -16,7 +16,8 @@ static s32 __GXOverflowCount;
 
 static void __GXWriteFifoIntReset(u8 arg0, u8 arg1);
 static void GXInitFifoPtrs(GXFifoObj* fifo, void* readPtr, void* writePtr);
-static void GXInitFifoLimits(GXFifoObj* fifo, u32 hiWaterMark, u32 loWaterMark);
+static void GXInitFifoLimits(GXFifoObj* fifo, u32 hiWaterMark,
+                             u32 loWaterMark);
 static void __GXWriteFifoIntEnable(GXBool flag0, GXBool flag1);
 static void __GXFifoLink(GXBool flag);
 static void __GXFifoReadEnable(void);
@@ -35,7 +36,8 @@ static void GXCPInterruptHandler(__OSInterrupt _, OSContext* ctx)
         __GXWriteFifoIntReset(1, 1);
         __GXWriteFifoIntEnable(1, 0);
     }
-    if ((uintptr_t) __GXContexts.main->x8 >> 2 & 1 && __GXContexts.main->xC & 1)
+    if ((uintptr_t) __GXContexts.main->x8 >> 2 & 1 &&
+        __GXContexts.main->xC & 1)
     {
         __GXOverflowCount++;
         __GXWriteFifoIntEnable(0, 1);

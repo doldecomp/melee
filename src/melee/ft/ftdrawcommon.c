@@ -798,8 +798,8 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             func_8009F7F8(fighter);
         }
         if ((u32) fighter->x20A0_accessory != 0U) {
-            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1),
-                            0);
+            HSD_JObjDispAll(fighter->x20A0_accessory, NULL,
+                            func_80390EB8(arg1), 0);
         }
         func_800C2600(gobj, arg1);
     }
@@ -1012,7 +1012,8 @@ void func_80080C28(HSD_GObj* gobj, s32 arg1)
             }
 
             temp_r27 = gobj->hsd_obj;
-            HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, func_80390EB8(arg1), 0);
+            HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, func_80390EB8(arg1),
+                            0);
             if (lbl_803C20CC[fighter->x4_fighterKind] != NULL) {
                 lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1,
                                                       (MtxPtr) phi_r28);
@@ -1021,8 +1022,8 @@ void func_80080C28(HSD_GObj* gobj, s32 arg1)
             func_8009F7F8(fighter);
         }
         if (fighter->x20A0_accessory != NULL) {
-            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1),
-                            0);
+            HSD_JObjDispAll(fighter->x20A0_accessory, NULL,
+                            func_80390EB8(arg1), 0);
         }
     }
 }

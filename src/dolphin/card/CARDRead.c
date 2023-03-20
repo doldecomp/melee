@@ -156,9 +156,9 @@ s32 CARDReadAsync(CARDFileInfo* fileInfo, void* buf, s32 length, s32 offset,
                                                   : card->sectorSize - offset;
 
     /// @todo Eliminate cast to #CARDCallback.
-    result =
-        __CARDRead(fileInfo->chan, card->sectorSize * fileInfo->iBlock + offset,
-                   length, buf, (CARDCallback) ReadCallback);
+    result = __CARDRead(fileInfo->chan,
+                        card->sectorSize * fileInfo->iBlock + offset, length,
+                        buf, (CARDCallback) ReadCallback);
 
     if (result < 0)
         __CARDPutControlBlock(card, result);

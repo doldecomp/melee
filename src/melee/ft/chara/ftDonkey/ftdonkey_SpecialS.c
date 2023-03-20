@@ -13,8 +13,8 @@ void ftDonkey_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17B, 0, NULL, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17B, 0, NULL, 0.0f,
+                                       1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     Fighter_UnsetCmdVar0(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010E0CC;
@@ -26,8 +26,8 @@ void ftDonkey_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     fp->x80_self_vel.x /= donkey_attr->SpecialS.x3C_MIN_STICK_X_MOMENTUM;
     fp->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17C, 0, NULL, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17C, 0, NULL, 0.0f,
+                                       1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     Fighter_UnsetCmdVar0(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010E148;

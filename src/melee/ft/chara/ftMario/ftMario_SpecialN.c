@@ -53,8 +53,8 @@ void ftMario_SpecialN_StartAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialN, 0, NULL, 0.0f,
-                                       1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialN, 0, NULL,
+                                       0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
 }

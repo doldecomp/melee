@@ -22,8 +22,8 @@ void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
     sp14.y = 1.2325000762939453f;
     sp14.z = 4.263599872589111f;
 
-    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj, &sp14,
-                  pos);
+    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj,
+                  &sp14, pos);
 }
 
 void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
@@ -35,8 +35,8 @@ void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
     sp14.y = 1.2325000762939453f;
     sp14.z = 0.013600001111626625f;
 
-    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj, &sp14,
-                  pos);
+    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj,
+                  &sp14, pos);
 }
 
 // 0x800E5D90
@@ -216,8 +216,8 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
             return;
 
         case FTKIND_FALCO:
-            func_80088148(fp, falcoSFX[-1.0f == fp->facing_dir], SFX_VOLUME_MAX,
-                          SFX_PAN_MID);
+            func_80088148(fp, falcoSFX[-1.0f == fp->facing_dir],
+                          SFX_VOLUME_MAX, SFX_PAN_MID);
             return;
         }
     }
@@ -276,7 +276,8 @@ void ftFox_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 // 0x800E61A8
 // https://decomp.me/scratch/TUDhU
 void ftFox_SpecialAirN_StartAction(
-    HSD_GObj* fighter_gobj) // Fox & Falco's aerial Blaster Action State handler
+    HSD_GObj*
+        fighter_gobj) // Fox & Falco's aerial Blaster Action State handler
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
@@ -321,7 +322,8 @@ void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     func_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
-    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->ev.fx.x222C_blasterGObj != NULL)) {
+    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->ev.fx.x222C_blasterGObj != NULL))
+    {
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE538(fp->ev.fx.x222C_blasterGObj);
     }
@@ -479,7 +481,8 @@ void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     func_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
-    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->ev.fx.x222C_blasterGObj != NULL)) {
+    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->ev.fx.x222C_blasterGObj != NULL))
+    {
         fp->x220C_ftcmd_var3 = 0U;
         func_802AE538(fp->ev.fx.x222C_blasterGObj);
     }
@@ -595,8 +598,8 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E69BC
-// https://decomp.me/scratch/OAWla // Fox & Falco's aerial Blaster End Animation
-// callback
+// https://decomp.me/scratch/OAWla // Fox & Falco's aerial Blaster End
+// Animation callback
 void ftFox_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -630,7 +633,8 @@ void ftFox_SpecialNStart_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
+    {
         fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -642,7 +646,8 @@ void ftFox_SpecialNLoop_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
+    {
         fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -660,7 +665,8 @@ void ftFox_SpecialAirNStart_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
+    {
         fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -672,7 +678,8 @@ void ftFox_SpecialAirNLoop_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
+    {
         fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }

@@ -164,9 +164,12 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         func_80085154(gobj);
-        fp->x80_self_vel.x = (f32) (fp->x80_self_vel.x * sa->specialhi.vel_mul);
-        fp->x80_self_vel.y = (f32) (fp->x80_self_vel.y * sa->specialhi.vel_mul);
-        fp->x80_self_vel.z = (f32) (fp->x80_self_vel.z * sa->specialhi.vel_mul);
+        fp->x80_self_vel.x =
+            (f32) (fp->x80_self_vel.x * sa->specialhi.vel_mul);
+        fp->x80_self_vel.y =
+            (f32) (fp->x80_self_vel.y * sa->specialhi.vel_mul);
+        fp->x80_self_vel.z =
+            (f32) (fp->x80_self_vel.z * sa->specialhi.vel_mul);
         return;
     }
     func_8007D494(fp, sa->specialhi.grav, attr_ptr->x170_TerminalVelocity);

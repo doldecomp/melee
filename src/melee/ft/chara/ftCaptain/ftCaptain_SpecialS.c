@@ -440,7 +440,8 @@ void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
 
     if (func_80081D0C(fighter_gobj) == true) {
         efLib_DestroyAll(fighter_gobj);
-        func_800D5CB0(fighter_gobj, 0, captainAttrs->specials_miss_landing_lag);
+        func_800D5CB0(fighter_gobj, 0,
+                      captainAttrs->specials_miss_landing_lag);
     }
 }
 

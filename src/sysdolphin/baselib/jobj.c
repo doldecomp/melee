@@ -161,8 +161,8 @@ void HSD_JObjMakeMatrix(HSD_JObj* jobj)
         } else {
             scl = NULL;
         }
-        HSD_MtxSRTQuat(jobj->mtx, &jobj->scale, &jobj->rotate, &jobj->translate,
-                       scl);
+        HSD_MtxSRTQuat(jobj->mtx, &jobj->scale, &jobj->rotate,
+                       &jobj->translate, scl);
     } else {
         if (has_scl(jobj->parent)) {
             scl = jobj->parent->scl;
@@ -1959,9 +1959,9 @@ void HSD_JObjSetupMatrixSub(HSD_JObj* jobj)
                     sp10.x = parent->mtx[0][0];
                     sp10.y = parent->mtx[1][0];
                     sp10.z = parent->mtx[2][0];
-                    PSVECScale(
-                        &sp10, &sp10,
-                        sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp10, &sp10))));
+                    PSVECScale(&sp10, &sp10,
+                               sqrtf(1.0F / (1e-10F +
+                                             PSVECDotProduct(&sp10, &sp10))));
                     if (parent->scl != NULL) {
                         x_scale = parent->scl->x;
                     }

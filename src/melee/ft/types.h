@@ -824,8 +824,8 @@ struct Fighter {
     /* 0x107 */ s8 x107;
     /* 0x108 */ HSD_Joint* x108_costume_joint;
     /* 0x10C */ ftData* x10C_ftData;
-    // TODO: Ask Psi how many of those are confirmed, only a fraction of them is
-    // used right now
+    // TODO: Ask Psi how many of those are confirmed, only a fraction of them
+    // is used right now
     attr x110_attr;
     /* 0x294 */ itPickup x294_itPickup;
     /* 0x2C4 */ Vec2 x2C4;

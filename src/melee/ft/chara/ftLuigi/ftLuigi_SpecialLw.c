@@ -332,7 +332,8 @@ void ftLuigi_SpecialAirLw_Coll(HSD_GObj* fighter_gobj)
     u8 _[24];
 #endif
 
-    if (func_800824A0(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) != false) {
+    if (func_800824A0(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) != false)
+    {
         ftLuigi_SpecialAirLw_AirToGround(fighter_gobj);
         fp->sv.lg.SpecialLw.isUnkColl = true;
     } else {

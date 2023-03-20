@@ -100,7 +100,8 @@ void lbl_801515B8(HSD_GObj* gobj)
 
     // sv.mh.unk0.x8 does that make sense if its u32?
     if (r31_fp->sv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, 0.0f, 1.0f,
+                                           0.0f);
         func_8006EBA4(gobj);
     }
     temp_r0 = r31_fp->sv.mh.unk0.x8 - 1;

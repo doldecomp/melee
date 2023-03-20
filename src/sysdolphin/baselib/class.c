@@ -112,8 +112,8 @@ HSD_MemoryEntry* GetMemoryEntry(s32 idx)
             memcpy(new_list, memory_list, 4 * nb_memory_list);
             memset(&new_list[nb_memory_list], 0,
                    4 * (new_nb -
-                        nb_memory_list)); // You start *after* existing ptrs and
-                                          // make sure memory is zero'd
+                        nb_memory_list)); // You start *after* existing ptrs
+                                          // and make sure memory is zero'd
 
             old_list = memory_list;
             old_nb = OSRoundDown32B(nb_memory_list * 4);

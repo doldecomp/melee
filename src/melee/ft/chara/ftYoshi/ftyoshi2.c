@@ -239,8 +239,9 @@ void lbl_8012C47C(HSD_GObj* arg0)
 
 void func_8012C49C(HSD_GObj* fighter_gobj)
 {
-    Fighter_ActionStateChange_800693AC(
-        fighter_gobj, 0x157, 0, NULL, lbl_804D9A2C, lbl_804D9A28, lbl_804D9A2C);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL,
+                                       lbl_804D9A2C, lbl_804D9A28,
+                                       lbl_804D9A2C);
 
     {
         Fighter* fp0 = GET_FIGHTER(fighter_gobj);
@@ -777,24 +778,28 @@ f32 func_8012CCC4(HSD_GObj* fighter_gobj)
 
 f32 func_8012CCD0(HSD_GObj* fighter_gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr =
+        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x18;
 }
 
 f32 func_8012CCE0(HSD_GObj* fighter_gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr =
+        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x1C;
 }
 
 f32 func_8012CCF0(HSD_GObj* fighter_gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr =
+        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x20;
 }
 
 f32 func_8012CD00(HSD_GObj* fighter_gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr =
+        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x24;
 }

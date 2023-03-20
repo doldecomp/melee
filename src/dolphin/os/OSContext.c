@@ -513,7 +513,8 @@ void OSDumpContext(const OSContext* context)
         OSReport("\n\nPSFs----------\n");
         for (i = 0; i < 32; i += 2) {
             OSReport("ps%d \t= 0x%x \t ps%d \t= 0x%x\n", i,
-                     (u32) context->psfs[i], i + 1, (u32) context->psfs[i + 1]);
+                     (u32) context->psfs[i], i + 1,
+                     (u32) context->psfs[i + 1]);
         }
 
         OSClearContext(&fpuContext);

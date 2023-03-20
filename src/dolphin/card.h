@@ -166,7 +166,8 @@ typedef struct CARDControl {
 extern CARDControl __CARDBlock[2];
 
 typedef struct CARDID {
-    u8 serial[32]; // flashID[12] + timebase[8] + counterBias[4] + language[4] +
+    u8 serial[32]; // flashID[12] + timebase[8] + counterBias[4] + language[4]
+                   // +
                    // XXX[4]
     u16 deviceID;
     u16 size;
@@ -192,7 +193,7 @@ void __CARDSyncCallback(s32, s32);
 
 #define __CARDGetDirCheck(dir) ((CARDDirCheck*) &(dir)[CARD_MAX_FILE])
 
-#define CARDIsValidBlockNo(card, iBlock)                                       \
+#define CARDIsValidBlockNo(card, iBlock)                                      \
     (CARD_NUM_SYSTEM_BLOCK <= (iBlock) && (iBlock) < (card)->cBlock)
 
 #endif

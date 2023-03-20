@@ -41,8 +41,8 @@ s32 CARDRenameAsync(s32 chan, const char* old, const char* new,
 
         if (memcmp(ent->gameName, card->diskID->gameName,
                    sizeof(ent->gameName)) != 0 ||
-            memcmp(ent->company, card->diskID->company, sizeof(ent->company)) !=
-                0)
+            memcmp(ent->company, card->diskID->company,
+                   sizeof(ent->company)) != 0)
         {
             continue;
         }

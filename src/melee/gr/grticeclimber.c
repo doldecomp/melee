@@ -210,8 +210,8 @@ void func_80221288(HSD_GObj* ground_gobj)
         enum_t result_0 = func_801C33C0(2, lbl_803E8B5C[i]);
         if (result_0 != -1) {
             bool result_1 =
-                func_801C8CFC(0, 0, gp, func_801C3FA4(ground_gobj, result_0), 0,
-                              lbl_80221208, 0);
+                func_801C8CFC(0, 0, gp, func_801C3FA4(ground_gobj, result_0),
+                              0, lbl_80221208, 0);
 
             if (result_1) {
                 func_801C8DE0(result_1, -1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F,

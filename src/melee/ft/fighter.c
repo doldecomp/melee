@@ -87,8 +87,8 @@ HSD_ObjAllocData lbl_80459054;
 HSD_ObjAllocData lbl_80459080;
 HSD_ObjAllocData lbl_804590AC;
 
-// TODO: verify that this is really a spawn number counter, then rename this var
-// globally
+// TODO: verify that this is really a spawn number counter, then rename this
+// var globally
 u32 lbl_804D64F8 = 0;
 #define g_spawnNumCounter lbl_804D64F8
 
@@ -654,9 +654,9 @@ static void Fighter_UnkInitLoad_80068914_Inner1(HSD_GObj* fighter_gobj)
                 fp->x670_timer_lstick_tilt_x = fp->x671_timer_lstick_tilt_y =
                     fp->x672_input_timer_counter = 0xFE;
 
-    fp->x67C = fp->x67D = fp->x67E = fp->x681 = fp->x682 = fp->x67F = fp->x680 =
-        fp->x683 = fp->x684 = fp->x685 = fp->x686 = fp->x687 = fp->x688 =
-            fp->x689 = fp->x68A = fp->x68B = 0xFF;
+    fp->x67C = fp->x67D = fp->x67E = fp->x681 = fp->x682 = fp->x67F =
+        fp->x680 = fp->x683 = fp->x684 = fp->x685 = fp->x686 = fp->x687 =
+            fp->x688 = fp->x689 = fp->x68A = fp->x68B = 0xFF;
 }
 
 void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj,
@@ -688,7 +688,8 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj,
 
     if (fp->x61A_controller_index != 0) {
         struct RGBA* color =
-            &p_ftCommonData->x6DC_colorsByPlayer[fp->x61A_controller_index - 1];
+            &p_ftCommonData
+                 ->x6DC_colorsByPlayer[fp->x61A_controller_index - 1];
         fp->x610_color_rgba[0].r = (color->r * color->a) / 0xff;
         fp->x610_color_rgba[0].g = (color->g * color->a) / 0xff;
         fp->x610_color_rgba[0].b = (color->b * color->a) / 0xff;
@@ -1310,7 +1311,8 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
                                 0) &&
                                (fp->xE0_ground_or_air == GA_Ground))
                     {
-                        f32 temp_vel = fp->x6A4_transNOffset.z * fp->facing_dir;
+                        f32 temp_vel =
+                            fp->x6A4_transNOffset.z * fp->facing_dir;
                         fp->x80_self_vel.x = temp_vel;
                         fp->xEC_ground_vel = temp_vel;
                     }
@@ -1540,7 +1542,8 @@ void Fighter_8006A360(HSD_GObj* fighter_gobj)
             fp->x201C--;
 
             if (fp->x201C == 0) {
-                Fighter_TakeDamage_8006CC7C(fp, p_ftCommonData->x6F4_unkDamage);
+                Fighter_TakeDamage_8006CC7C(fp,
+                                            p_ftCommonData->x6F4_unkDamage);
                 fp->x201C = p_ftCommonData->x6F8;
             }
 
@@ -1598,8 +1601,8 @@ void Fighter_8006A360(HSD_GObj* fighter_gobj)
                 }
 
                 if (fp->dmg.x1910 >= p_ftCommonData->x7AC) {
-                    Fighter_TakeDamage_8006CC7C(fp,
-                                                p_ftCommonData->x7B4_unkDamage);
+                    Fighter_TakeDamage_8006CC7C(
+                        fp, p_ftCommonData->x7B4_unkDamage);
                     fp->dmg.x1910 = 0;
                 }
             }
@@ -1740,14 +1743,14 @@ void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighter_gobj)
     }
 }
 
-// the stick pairs seen in input structs might make more sense as an array of 2,
-// or a struct of 2 floats.. if it still matches.
-#define SET_STICKS(stickXPtr, stickYPtr, x, y)                                 \
-    do {                                                                       \
-        f32* stickX = (f32*) &stickXPtr;                                       \
-        f32* stickY = (f32*) &stickYPtr;                                       \
-        *stickX = x;                                                           \
-        *stickY = y;                                                           \
+// the stick pairs seen in input structs might make more sense as an array of
+// 2, or a struct of 2 floats.. if it still matches.
+#define SET_STICKS(stickXPtr, stickYPtr, x, y)                                \
+    do {                                                                      \
+        f32* stickX = (f32*) &stickXPtr;                                      \
+        f32* stickY = (f32*) &stickYPtr;                                      \
+        *stickX = x;                                                          \
+        *stickY = y;                                                          \
     } while (0)
 
 static void Fighter_Spaghetti_8006AD10_Inner1(Fighter* fp)
@@ -1841,11 +1844,13 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
                 fp->input.x624_lstick_y = 0.0f;
             }
 
-            if (fabs_inline(fp->input.x638_lsubStick_x) <= p_ftCommonData->x0) {
+            if (fabs_inline(fp->input.x638_lsubStick_x) <= p_ftCommonData->x0)
+            {
                 fp->input.x638_lsubStick_x = 0.0f;
             }
 
-            if (fabs_inline(fp->input.x63C_lsubStick_y) <= p_ftCommonData->x4) {
+            if (fabs_inline(fp->input.x63C_lsubStick_y) <= p_ftCommonData->x4)
+            {
                 fp->input.x63C_lsubStick_y = 0.0f;
             }
 
@@ -2005,10 +2010,10 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
                 fp->x671_timer_lstick_tilt_y = 0xFE;
             }
 
-            if (func_8000D148(fp->input.x628_lstick_x2,
-                              fp->input.x62C_lstick_y2, fp->input.x620_lstick_x,
-                              fp->input.x624_lstick_y, 0.0f, 0.0f,
-                              p_ftCommonData->x8_someStickThreshold))
+            if (func_8000D148(
+                    fp->input.x628_lstick_x2, fp->input.x62C_lstick_y2,
+                    fp->input.x620_lstick_x, fp->input.x624_lstick_y, 0.0f,
+                    0.0f, p_ftCommonData->x8_someStickThreshold))
             {
                 fp->x67A_y = 0;
                 fp->x679_x = 0;
@@ -2122,11 +2127,11 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj)
 }
 
 //// https://decomp.me/scratch/oFu1o
-#define VEC_CLEAR(vec)                                                         \
-    do {                                                                       \
-        Vec3* vecLocal = (void*) &vec;                                         \
-        f32 c = 0;                                                             \
-        vecLocal->x = vecLocal->y = vecLocal->z = c;                           \
+#define VEC_CLEAR(vec)                                                        \
+    do {                                                                      \
+        Vec3* vecLocal = (void*) &vec;                                        \
+        f32 c = 0;                                                            \
+        vecLocal->x = vecLocal->y = vecLocal->z = c;                          \
     } while (0)
 
 void Fighter_procUpdate(HSD_GObj* fighter_gobj)
@@ -2163,9 +2168,11 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj)
                 kb_vel_y = p_kb_vel->y;
 
                 if (fp->x2228_flag.bits.b2) {
-                    p_kb_vel->x = func_8007CD6C(p_kb_vel->x, func_8007CDA4(fp));
+                    p_kb_vel->x =
+                        func_8007CD6C(p_kb_vel->x, func_8007CDA4(fp));
                     ;
-                    p_kb_vel->y = func_8007CD6C(p_kb_vel->y, func_8007CDF8(fp));
+                    p_kb_vel->y =
+                        func_8007CD6C(p_kb_vel->y, func_8007CDF8(fp));
                     ;
                 } else {
                     float kb_angle = atan2f(kb_vel_y, kb_vel_x);
@@ -2219,8 +2226,8 @@ void Fighter_procUpdate(HSD_GObj* fighter_gobj)
                     p_ftCommonData->x3E8_shieldKnockbackFrameDecay)
                 {
                     // BUG IN THE MELEE CODE THAT CAUSES THE INVISIBLE CEILING
-                    // GLITCH The next line should be 'pAtkShieldKB->y = 0', but
-                    // instead it is:
+                    // GLITCH The next line should be 'pAtkShieldKB->y = 0',
+                    // but instead it is:
                     pAtkShieldKB->x = p_kb_vel->y = 0;
                 } else {
                     // again, the better implementation would be:
@@ -2425,7 +2432,8 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj)
         Vec3 translation;
         Quaternion rotation;
 
-        /// @todo This usually implies an inline, but inlines reserve more stack
+        /// @todo This usually implies an inline, but inlines reserve more
+        /// stack
         ///       (usually in 8 byte increments) than a single allocation
         ///       (removed) like this.
         jobj = GET_JOBJ(fighter_gobj);
@@ -2805,7 +2813,8 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
 
     if (!fp->x221F_flag.bits.b3) {
         if (!fp->x221A_flag.bits.b7) {
-            if (fp->x1998_shieldHealth < p_ftCommonData->x260_startShieldHealth)
+            if (fp->x1998_shieldHealth <
+                p_ftCommonData->x260_startShieldHealth)
             {
                 fp->x1998_shieldHealth += p_ftCommonData->x27C;
                 if (fp->x1998_shieldHealth >
@@ -2959,8 +2968,8 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj)
         func_800C8D00(fighter_gobj);
 
         if (bool1) {
-            fp->dmg.x195c_hitlag_frames =
-                func_8007DA74(bool1, action_state_index, fp->x1960_vibrateMult);
+            fp->dmg.x195c_hitlag_frames = func_8007DA74(
+                bool1, action_state_index, fp->x1960_vibrateMult);
             if (fp->dmg.x195c_hitlag_frames < fp->x1964) {
                 fp->dmg.x195c_hitlag_frames = fp->x1964;
             }

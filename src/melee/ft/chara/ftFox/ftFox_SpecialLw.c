@@ -468,9 +468,10 @@ static void ftFox_SpecialLw_Turn(HSD_GObj* fighter_gobj)
         fp->x2200_ftcmd_var0 = 1;
         fp->facing_dir = -fp->facing_dir;
     }
-    func_80075AF0(fp, 0,
-                  -(180 / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES * DEG_TO_RAD -
-                    func_80075F48(fp, 0)));
+    func_80075AF0(
+        fp, 0,
+        -(180 / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES * DEG_TO_RAD -
+          func_80075F48(fp, 0)));
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -613,8 +614,8 @@ inline void ftFox_SpecialLw_SetReflectVars(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E9324
-// https://decomp.me/scratch/L2Rcy // Fox & Falco's ground -> air Reflector Turn
-// Action State handler
+// https://decomp.me/scratch/L2Rcy // Fox & Falco's ground -> air Reflector
+// Turn Action State handler
 void ftFox_SpecialLwTurn_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -627,8 +628,8 @@ void ftFox_SpecialLwTurn_GroundToAir(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E93A4
-// https://decomp.me/scratch/BwZlC // Fox & Falco's air -> ground Reflector Turn
-// Action State handler
+// https://decomp.me/scratch/BwZlC // Fox & Falco's air -> ground Reflector
+// Turn Action State handler
 void ftFox_SpecialAirLwTurn_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -860,8 +861,8 @@ void ftFox_SpecialAirLwHit_AirToGround(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E9A44
-// https://decomp.me/scratch/XIxX1 // Toggle bit flag and set OnReflect callback
-// for Reflector
+// https://decomp.me/scratch/XIxX1 // Toggle bit flag and set OnReflect
+// callback for Reflector
 void ftFox_SpecialLwHit_SetCall(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -884,7 +885,8 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* fighter_gobj)
     func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, NULL,
                   &sp14);
 
-    func_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f, 1.0471975803375244f);
+    func_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f,
+                  1.0471975803375244f);
 
     if ((s32) fp->xE0_ground_or_air == GA_Ground) {
         ASID = 0x16A;
@@ -1026,6 +1028,6 @@ void ftFox_SpecialLwEnd_Action(HSD_GObj* fighter_gobj)
 // 0x800E9DC0 - Fox & Falco's aerial Reflector End Action State handler
 void ftFox_SpecialAirLwEnd_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_END, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_END,
+                                       0, NULL, 0.0f, 1.0f, 0.0f);
 }

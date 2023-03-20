@@ -158,7 +158,8 @@ void ftMewtwo_SpecialS_Phys(HSD_GObj* fighter_gobj)
 }
 
 // 0x801469BC
-// https://decomp.me/scratch/o5TC6 // Mewtwo's aerial Confusion Physics callback
+// https://decomp.me/scratch/o5TC6 // Mewtwo's aerial Confusion Physics
+// callback
 void ftMewtwo_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084EEC(fighter_gobj);

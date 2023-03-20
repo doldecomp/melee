@@ -5,17 +5,17 @@
 #include <dolphin/card/CARDStat.h>
 #include <Runtime/__mem.h>
 
-#define CARDGetBannerFormat(stat)                                              \
+#define CARDGetBannerFormat(stat)                                             \
     (((stat)->bannerFormat) & CARD_STAT_BANNER_MASK)
 #define CARDGetIconAnim(stat) (((stat)->bannerFormat) & CARD_STAT_ANIM_MASK)
-#define CARDGetIconFormat(stat, n)                                             \
+#define CARDGetIconFormat(stat, n)                                            \
     (((stat)->iconFormat >> (2 * (n))) & CARD_STAT_ICON_MASK)
-#define CARDGetIconSpeed(stat, n)                                              \
+#define CARDGetIconSpeed(stat, n)                                             \
     (((stat)->iconSpeed >> (2 * (n))) & CARD_STAT_SPEED_MASK)
 
-#define CARDSetIconSpeed(stat, n, f)                                           \
-    ((stat)->iconSpeed =                                                       \
-         (u16) (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |   \
+#define CARDSetIconSpeed(stat, n, f)                                          \
+    ((stat)->iconSpeed =                                                      \
+         (u16) (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |  \
                 ((f) << (2 * (n)))))
 
 struct CARDStat {

@@ -252,8 +252,8 @@ void ftGameWatch_OnItemInvisible(HSD_GObj* gobj)
 }
 
 // 0x8014A6E0
-// https://decomp.me/scratch/ibIxi // Make held item visible (restores picked up
-// item's hand held animation)
+// https://decomp.me/scratch/ibIxi // Make held item visible (restores picked
+// up item's hand held animation)
 void ftGameWatch_OnItemVisible(HSD_GObj* fighter_gobj)
 {
     Fighter_OnItemVisible(fighter_gobj, 1);

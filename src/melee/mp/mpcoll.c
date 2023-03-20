@@ -45,8 +45,8 @@ void func_80041C8C(CollData* cd)
                     func_800874BC(cd->x0_gobj), cd->x4_vec.x, cd->x4_vec.y);
             } else {
                 OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n",
-                         "mpcoll.c", 212, cd->x0_gobj->classifier, cd->x4_vec.x,
-                         cd->x4_vec.y);
+                         "mpcoll.c", 212, cd->x0_gobj->classifier,
+                         cd->x4_vec.x, cd->x4_vec.y);
                 if (cd->x0_gobj->p_link == 9) {
                     OSReport("itkind=%d\n", itGetKind(cd->x0_gobj));
                 }
@@ -165,9 +165,9 @@ void func_80041EE4(CollData* cd)
 }
 
 // 80042078 https://decomp.me/scratch/hM7h8
-void func_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1, HSD_JObj* arg2,
-                   HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5,
-                   HSD_JObj* arg6, HSD_JObj* arg7, f32 arg9)
+void func_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
+                   HSD_JObj* arg2, HSD_JObj* arg3, HSD_JObj* arg4,
+                   HSD_JObj* arg5, HSD_JObj* arg6, HSD_JObj* arg7, f32 arg9)
 {
     cd->x0_gobj = gobj;
     cd->x104 = 1;
@@ -321,11 +321,11 @@ void func_800424DC(CollData* cd, u32 flags)
         left_x = right_x = vec.x - temp_x;
         bottom_y = top_y = vec.y - temp_y;
 
-#define EXPAND_ECB_FOR(joint)                                                  \
-    func_8000B1CC(joint, NULL, &vec);                                          \
-    dx = vec.x - temp_x;                                                       \
-    dy = vec.y - temp_y;                                                       \
-    update_min_max(&left_x, &right_x, dx);                                     \
+#define EXPAND_ECB_FOR(joint)                                                 \
+    func_8000B1CC(joint, NULL, &vec);                                         \
+    dx = vec.x - temp_x;                                                      \
+    dy = vec.y - temp_y;                                                      \
+    update_min_max(&left_x, &right_x, dx);                                    \
     update_min_max(&bottom_y, &top_y, dy);
 
         EXPAND_ECB_FOR(cd->x10C_joint[1]);
@@ -606,7 +606,8 @@ void func_80042DB0(CollData* ecb, f32 time)
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.bottom,
                      &ecb->x84_ecb.bottom);
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.left, &ecb->x84_ecb.left);
-    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.right, &ecb->x84_ecb.right);
+    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.right,
+                     &ecb->x84_ecb.right);
     if (fpclassify(ecb->xA4_ecbCurrCorrect.top.x) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.top.y) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.bottom.x) == FP_NAN ||
@@ -1198,8 +1199,9 @@ void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
                              arg0->xA4_ecbCurrCorrect.bottom.y)) -
                  temp_f2);
         sp8 = 0;
-        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48, arg0->x4C,
-                          0, temp_f1_3, temp_f2, sp20, sp24, 0.0f) != 0)
+        if (func_8004F008(&arg0->x140, 0, 0, 0, arg0->x3C, arg0->x48,
+                          arg0->x4C, 0, temp_f1_3, temp_f2, sp20, sp24,
+                          0.0f) != 0)
         {
             sp20 = arg0->x140.x;
             if (arg2 != 0) {

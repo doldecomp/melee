@@ -19,8 +19,8 @@ OSContext lbl_804C2608;
 
 #ifdef MUST_MATCH
 /*
- * Unused symbol probably used by the myStrippedFunction below, but since it got
- * stripped there's no telling what it was for.
+ * Unused symbol probably used by the myStrippedFunction below, but since it
+ * got stripped there's no telling what it was for.
  *
  * Regarding the pragma, normally this works, but in this case the Metrowerks
  * toolchain is out for fuckin' blood or something. See the FORCEACTIVE section

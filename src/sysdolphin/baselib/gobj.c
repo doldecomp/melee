@@ -138,7 +138,8 @@ void func_80390ED0(HSD_GObj* gobj, u32 mask)
             while (prios) {
                 if (prios & 1) {
                     HSD_GObj* cur;
-                    for (cur = lbl_804D7824[j]; cur != NULL; cur = cur->next_gx)
+                    for (cur = lbl_804D7824[j]; cur != NULL;
+                         cur = cur->next_gx)
                     {
                         if (cur->render_cb != NULL) {
                             render_gobj(cur, i);

@@ -105,8 +105,8 @@ void GXPixModeSync(void)
  * EFB using the source alpha channel as a template. If the compare function is
  * true, the source color will be written to the EFB based on the result of the
  * Z compare (see GXPokeZMode). If the alpha compare function is false, the
- * source color is not written to the EFB. The alpha compare test happens before
- * the Z compare and before blending (see GXPokeBlendMode).
+ * source color is not written to the EFB. The alpha compare test happens
+ * before the Z compare and before blending (see GXPokeBlendMode).
  */
 void GXPokeAlphaMode(GXCompare func, u8 threshold)
 {
@@ -117,8 +117,8 @@ void GXPokeAlphaMode(GXCompare func, u8 threshold)
  * This function determines what value of alpha will be read from the Embedded
  * Frame Buffer (EFB).The mode only applies to GXPeek* functions.  The GXPeek*
  * functions allow the CPU to directly read the EFB. Note that this feature
- * works no matter what pixel type (see GXSetPixelFmt) you are using. If you are
- * using the EFB with alpha plane, it is recommended that you should use
+ * works no matter what pixel type (see GXSetPixelFmt) you are using. If you
+ * are using the EFB with alpha plane, it is recommended that you should use
  * GX_READ_NONE so that you can read correct alpha value from the EFB. If you
  * are using the EFB with no alpha, you should set either of GX_READ_00 or
  * GX_READ_FF in order to get certain value.
@@ -129,27 +129,29 @@ void GXPokeAlphaRead(s32 mode)
 }
 
 /*
- * This function enables or disables alpha-buffer updates for GXPoke* functions.
- * The normal rendering state (GXSetAlphaUpdate) is not effected.
+ * This function enables or disables alpha-buffer updates for GXPoke*
+ * functions. The normal rendering state (GXSetAlphaUpdate) is not effected.
  */
 void GXPokeAlphaUpdate(bool update_enable)
 {
     u16 old = __peReg[PE_POKE_CMODE0_ID];
 
     // PEReg[2].bit11 = update_enable (PowerPC bit-ordering)
-    __peReg[PE_POKE_CMODE0_ID] = (old & ~0x10) | ((update_enable << 4) & 0xFF0);
+    __peReg[PE_POKE_CMODE0_ID] =
+        (old & ~0x10) | ((update_enable << 4) & 0xFF0);
 }
 
 /*
  * This function determines how the source image, written using the GXPoke*
- * functions, is blended with the current Embedded Frame Buffer (EFB). When type
- * is set to GX_CM_NONE, no color data is written to the EFB.  When type is set
- * to GX_CM_BLEND, the source and EFB pixels are blended using the following
- * equation: dst_pix_clr = src_pix_clr * src_factor + dst_pix_clr * dst_factor
- * The dst_factor can be used only when the frame buffer has GX_PF_RGBA6_Z24 as
- * the pixel format (see GXSetPixelFmt). When type is set to GX_CM_LOGIC, the
- * source and EFB pixels are blended using logical bitwise operations. This
- * function does not effect the normal rendering state, GXSetBlendMode.
+ * functions, is blended with the current Embedded Frame Buffer (EFB). When
+ * type is set to GX_CM_NONE, no color data is written to the EFB.  When type
+ * is set to GX_CM_BLEND, the source and EFB pixels are blended using the
+ * following equation: dst_pix_clr = src_pix_clr * src_factor + dst_pix_clr *
+ * dst_factor The dst_factor can be used only when the frame buffer has
+ * GX_PF_RGBA6_Z24 as the pixel format (see GXSetPixelFmt). When type is set to
+ * GX_CM_LOGIC, the source and EFB pixels are blended using logical bitwise
+ * operations. This function does not effect the normal rendering state,
+ * GXSetBlendMode.
  *
  * HW2 adds a new type: GX_BM_SUBTRACT.    When this type is used, the
  * destination pixel is computed as follows: dst_pix_clr = dst_pix_clr -
@@ -187,11 +189,11 @@ void GXPokeColorUpdate(bool update_enable)
 
 /*
  * This function sets a constant alpha value for writing to the Embedded Frame
- * Buffer (EFB) using the GXPoke* functions. The GXPoke* functions allow the CPU
- * direct access to the EFB. The EFB pixel type must have an alpha channel for
- * this function to be effective, see GXSetPixelFmt. The blending operations
- * (see GXPokeBlendMode) still use source alpha but when writing the pixel
- * color, the constant alpha will replace the pixel alpha in the EFB.
+ * Buffer (EFB) using the GXPoke* functions. The GXPoke* functions allow the
+ * CPU direct access to the EFB. The EFB pixel type must have an alpha channel
+ * for this function to be effective, see GXSetPixelFmt. The blending
+ * operations (see GXPokeBlendMode) still use source alpha but when writing the
+ * pixel color, the constant alpha will replace the pixel alpha in the EFB.
  */
 void GXPokeDstAlpha(bool enable, u8 alpha)
 {
@@ -280,5 +282,6 @@ void __GXPEInit(void)
     OSInitThreadQueue(&GXDrawDoneThreadQueue);
     __OSUnmaskInterrupts(0x2000);
     __OSUnmaskInterrupts(0x1000);
-    __peReg[5] = ((((((((__peReg[5] & ~4) | 4) & ~8) | 8) & ~1) | 1) & ~2) | 2);
+    __peReg[5] =
+        ((((((((__peReg[5] & ~4) | 4) & ~8) | 8) & ~1) | 1) & ~2) | 2);
 }

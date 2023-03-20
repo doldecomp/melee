@@ -3157,14 +3157,15 @@ void func_80078A2C(HSD_GObj* this_gobj)
                                 {
                                     if (lbColl_80007ECC(
                                             this_hit,
-                                            &victim_fp->x11A0_fighterHurtbox[j],
+                                            &victim_fp
+                                                 ->x11A0_fighterHurtbox[j],
                                             *func_8007F804(victim_fp),
                                             this_fp->x34_scale.y,
                                             victim_fp->x34_scale.y,
                                             victim_fp->xB0_pos.z) != 0)
                                     {
-                                        if (func_80084CE4(this_fp, victim_fp) ==
-                                            false)
+                                        if (func_80084CE4(this_fp,
+                                                          victim_fp) == false)
                                         {
                                             func_80076808(this_fp, this_hit, 0,
                                                           victim_fp, 0);

@@ -36,7 +36,8 @@ Vec3* func_8000DE38(Mtx m, Vec3* v, float c);
 
 Vec3* lbvector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
                                   Vec3* c);
-Vec3* lbvector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a, Vec3* c);
+Vec3* lbvector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a,
+                                         Vec3* c);
 Vec3* lbvector_ApplyEulerRotation(Vec3* v, Vec3* angles);
 float lbvector_sqrtf_accurate(float x);
 

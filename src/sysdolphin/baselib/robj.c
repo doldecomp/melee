@@ -173,7 +173,8 @@ void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim)
         return;
     }
 
-    for (i = robj, j = anim; i != NULL && j != NULL; i = i->next, j = j->next) {
+    for (i = robj, j = anim; i != NULL && j != NULL; i = i->next, j = j->next)
+    {
         HSD_RObjAddAnim(i, j);
     }
 }

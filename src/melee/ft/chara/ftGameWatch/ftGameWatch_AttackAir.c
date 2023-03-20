@@ -32,7 +32,8 @@ void ftGameWatch_ItemParachuteSetup(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014B074
-// https://decomp.me/scratch/TaqkV // Parachute Accessory Callback - Landing Lag
+// https://decomp.me/scratch/TaqkV // Parachute Accessory Callback - Landing
+// Lag
 void ftGameWatch_ItemParachuteOnLand(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -46,14 +47,15 @@ void ftGameWatch_ItemParachuteOnLand(HSD_GObj* fighter_gobj)
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
         fp->cb.x21D4_callback_EnterHitlag =
             ftGameWatch_AttackAir_EnterItemHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGameWatch_AttackAir_ExitItemHitlag;
+        fp->cb.x21D8_callback_ExitHitlag =
+            ftGameWatch_AttackAir_ExitItemHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
 
 // 0x8014B0F0
-// https://decomp.me/scratch/8jiZT // Parachute item flag update on land + clear
-// pointers
+// https://decomp.me/scratch/8jiZT // Parachute item flag update on land +
+// clear pointers
 void ftGameWatch_ItemParachuteSetFlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -138,7 +140,8 @@ static void ftGameWatch_ItemTurtleOnLand(HSD_GObj* fighter_gobj)
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
         fp->cb.x21D4_callback_EnterHitlag =
             ftGameWatch_AttackAir_EnterItemHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGameWatch_AttackAir_ExitItemHitlag;
+        fp->cb.x21D8_callback_ExitHitlag =
+            ftGameWatch_AttackAir_ExitItemHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
@@ -176,7 +179,8 @@ bool ftGameWatch_ItemCheckTurtleRemove(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     s32 ASID = fp->action_id;
 
-    if ((ASID >= AS_GAMEWATCH_ATTACKAIRB) && (ASID <= AS_GAMEWATCH_LANDINGAIRB))
+    if ((ASID >= AS_GAMEWATCH_ATTACKAIRB) &&
+        (ASID <= AS_GAMEWATCH_LANDINGAIRB))
     {
         return false;
     }
@@ -228,7 +232,8 @@ void ftGameWatch_ItemSparkyOnLand(HSD_GObj* fighter_gobj)
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
         fp->cb.x21D4_callback_EnterHitlag =
             ftGameWatch_AttackAir_EnterItemHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGameWatch_AttackAir_ExitItemHitlag;
+        fp->cb.x21D8_callback_ExitHitlag =
+            ftGameWatch_AttackAir_ExitItemHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
@@ -259,7 +264,8 @@ void ftGameWatch_ItemSparkyRemove(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014B574
-// https://decomp.me/scratch/EsqL3 // Apply hitlag for available AttackAir items
+// https://decomp.me/scratch/EsqL3 // Apply hitlag for available AttackAir
+// items
 void ftGameWatch_AttackAir_EnterItemHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -292,8 +298,8 @@ static void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014B624
-// https://decomp.me/scratch/vpCdl // Check if Mr. Game & Watch is performing Up
-// Aerial / Up Aerial Landing Lag
+// https://decomp.me/scratch/vpCdl // Check if Mr. Game & Watch is performing
+// Up Aerial / Up Aerial Landing Lag
 bool ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);

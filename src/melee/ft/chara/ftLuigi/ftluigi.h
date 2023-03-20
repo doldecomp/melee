@@ -34,7 +34,7 @@ typedef enum ftLuigiAction {
 
 // SpecialN/SpecialAirN (Fireball)
 
-#define FTLUIGI_SPECIALN_COLL_FLAG                                             \
+#define FTLUIGI_SPECIALN_COLL_FLAG                                            \
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim
 
 // SpecialS/SpecialAirS (Green Missile)
@@ -43,11 +43,11 @@ typedef enum ftLuigiAction {
 
 // SpecialLw (Luigi Cyclone)
 
-#define FTLUIGI_SPECIALLW_FLAG                                                 \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |                  \
-        FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |            \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |    \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+#define FTLUIGI_SPECIALLW_FLAG                                                \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |                 \
+        FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |   \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 typedef struct _ftLuigiAttributes {
@@ -80,8 +80,8 @@ typedef struct _ftLuigiAttributes {
     f32 x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY; // Multiplies Luigi's max
                                                // horionztal aerial mobility
     f32 x54_LUIGI_SUPERJUMP_LANDING_LAG;
-    f32 x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE; // Minimum stick range required
-                                                 // for turnaround
+    f32 x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE;  // Minimum stick range
+                                                  // required for turnaround
     f32 x5C_LUIGI_SUPERJUMP_MOMENTUM_STICK_RANGE; // Minimum stick range
                                                   // required for horionztal
                                                   // momentum?

@@ -33,7 +33,7 @@ typedef enum ftMewtwoAction {
 
 // Flag values read during Confusion's reflect think function
 
-#define CONFUSION_REFLECT_NONE                                                 \
+#define CONFUSION_REFLECT_NONE                                                \
     0 // Effectively a "wait" state for Confusion (i.e. wait until the flag is
       // either 1 or 2 because 0 does nothing).
 
@@ -45,35 +45,35 @@ typedef enum ftMewtwoAction {
 
 // SpecialN/SpecialAirN //
 
-#define FTMEWTWO_SPECIALN_ACTION_FLAG                                          \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_PreserveSfx |              \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |            \
+#define FTMEWTWO_SPECIALN_ACTION_FLAG                                         \
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_PreserveSfx |             \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
         FtStateChange_Unk_19
 
-#define FTMEWTWO_SPECIALN_COLL_FLAG                                            \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |        \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |            \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+#define FTMEWTWO_SPECIALN_COLL_FLAG                                           \
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |       \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // SpecialS/SpecialAirS //
 
-#define FTMEWTWO_SPECIALS_COLL_FLAG                                            \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |            \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
-        FtStateChange_SkipUpdateModelPartVis |                                 \
+#define FTMEWTWO_SPECIALS_COLL_FLAG                                           \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // SpecialHi/SpecialAirHi //
 
 // SpecialLw/SpecialAirLw //
 
-#define FTMEWTWO_SPECIALLW_COLL_FLAG                                           \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |            \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
-        FtStateChange_SkipUpdateModelPartVis |                                 \
+#define FTMEWTWO_SPECIALLW_COLL_FLAG                                          \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 typedef struct _ftMewtwoAttributes {
@@ -83,8 +83,8 @@ typedef struct _ftMewtwoAttributes {
                                             // cycle lasts?
     f32 x4_MEWTWO_SHADOWBALL_GROUND_RECOIL_X;
     f32 x8_MEWTWO_SHADOWBALL_AIR_RECOIL_X;
-    s32 xC_MEWTWO_SHADOWBALL_CHARGE_ITERATIONS; // Number of iterations required
-                                                // for full charge
+    s32 xC_MEWTWO_SHADOWBALL_CHARGE_ITERATIONS; // Number of iterations
+                                                // required for full charge
     s32 x10_MEWTWO_SHADOWBALL_RELEASE_LAG;
     f32 x14_MEWTWO_SHADOWBALL_LANDING_LAG;
 

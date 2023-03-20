@@ -208,7 +208,8 @@ char* strncpy(char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src,
     return (dst);
 }
 
-char*(strcpy) (char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src)
+char*(strcpy) (char* ATTRIBUTE_RESTRICT dst,
+               const char* ATTRIBUTE_RESTRICT src)
 {
     /*
      *	strcpy routine designed to minimized the number of

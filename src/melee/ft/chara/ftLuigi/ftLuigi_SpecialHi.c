@@ -244,10 +244,10 @@ void ftLuigi_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/l7min // Luigi's Super Jump Punch Landing check
 void ftLuigi_SpecialHi_CheckLanding(HSD_GObj* fighter_gobj)
 {
-    func_800D5CB0(
-        fighter_gobj, 0,
-        ((ftLuigiAttributes*) GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes)
-            ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+    func_800D5CB0(fighter_gobj, 0,
+                  ((ftLuigiAttributes*) GET_FIGHTER(fighter_gobj)
+                       ->x2D4_specialAttributes)
+                      ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
 }
 
 // 0x801444E4

@@ -118,7 +118,8 @@ void lbl_8014FFDC(HSD_GObj* gobj)
         Fighter_ActionStateChange_800693AC(
             gobj, 0x155, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f,
+                                           0.0f);
     }
     r31_fp->ev.mh.x2258 = 0x155;
 }
@@ -190,7 +191,8 @@ inline void lbl_80150230_inline_1(HSD_GObj* gobj)
         Fighter_ActionStateChange_800693AC(
             gobj, 0x156, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, 0.0f, 1.0f,
+                                           0.0f);
     }
     fp->ev.mh.x2258 = 0x156;
 }
@@ -420,7 +422,8 @@ void func_80150894(HSD_GObj* gobj)
         sp10_pos.y = r31_attributes->x40_pos.y;
         sp10_pos.z = 0.0f;
         func_80150DC4(gobj, &lbl_80151DC4, &sp10_pos);
-    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_UP)) {
+    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_UP))
+    {
         // Drill
         sp10_pos.x = r31_attributes->x88_pos.x;
         sp10_pos.y = r31_attributes->x88_pos.y;
@@ -434,18 +437,21 @@ void func_80150894(HSD_GObj* gobj)
         sp10_pos.y = r31_attributes->xA8_pos.y;
         sp10_pos.z = 0.0f;
         func_80150DC4(gobj, &lbl_80152370, &sp10_pos);
-    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_DOWN))
+    } else if ((r6_button & HSD_BUTTON_R) &&
+               (r6_button & HSD_BUTTON_DPAD_DOWN))
     {
         // Ground Slap
         sp10_pos.x = r31_attributes->xBC_pos.x;
         sp10_pos.y = r31_attributes->xBC_pos.y;
         sp10_pos.z = 0.0f;
         func_80150DC4(gobj, &lbl_801526D8, &sp10_pos);
-    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_LEFT))
+    } else if ((r6_button & HSD_BUTTON_R) &&
+               (r6_button & HSD_BUTTON_DPAD_LEFT))
     {
         // Poke
         func_80152880(gobj);
-    } else if ((r6_button & HSD_BUTTON_A) && (r6_button & HSD_BUTTON_DPAD_UP)) {
+    } else if ((r6_button & HSD_BUTTON_A) && (r6_button & HSD_BUTTON_DPAD_UP))
+    {
         // Jet
         func_80153820(gobj);
     } else if ((r6_button & HSD_BUTTON_A) &&
@@ -453,11 +459,13 @@ void func_80150894(HSD_GObj* gobj)
     {
         // Ram
         func_801541C8(gobj, &lbl_80153B90);
-    } else if ((r6_button & HSD_BUTTON_A) && (r6_button & HSD_BUTTON_DPAD_DOWN))
+    } else if ((r6_button & HSD_BUTTON_A) &&
+               (r6_button & HSD_BUTTON_DPAD_DOWN))
     {
         // Crush
         func_801541C8(gobj, &lbl_80153D2C);
-    } else if ((r6_button & HSD_BUTTON_B) && (r6_button & HSD_BUTTON_DPAD_UP)) {
+    } else if ((r6_button & HSD_BUTTON_B) && (r6_button & HSD_BUTTON_DPAD_UP))
+    {
         // Lasers
         f32 rand;
         rand = HSD_Randf();
@@ -473,7 +481,8 @@ void func_80150894(HSD_GObj* gobj)
     {
         // Gun
         func_801530A4(gobj);
-    } else if ((r6_button & HSD_BUTTON_Z) && ((r6_button & HSD_BUTTON_DPAD_UP)))
+    } else if ((r6_button & HSD_BUTTON_Z) &&
+               ((r6_button & HSD_BUTTON_DPAD_UP)))
     {
         // Grab
         r4_fp->ev.mh.x2250 = 0x17B;

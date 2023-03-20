@@ -69,7 +69,8 @@ void lbl_80154360(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, 0.0f, 1.0f,
+                                           0.0f);
         func_8006EBA4(gobj);
     }
 }

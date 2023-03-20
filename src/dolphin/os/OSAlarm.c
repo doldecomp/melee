@@ -51,7 +51,8 @@ static void InsertAlarm(OSAlarm* alarm, OSTime fire, OSAlarmHandler handler)
 
         fire = alarm->start;
         if (alarm->start < time) {
-            fire += alarm->period * ((time - alarm->start) / alarm->period + 1);
+            fire +=
+                alarm->period * ((time - alarm->start) / alarm->period + 1);
         }
     }
 

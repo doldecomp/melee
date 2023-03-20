@@ -16,7 +16,8 @@ extern inline float sqrtf_accurate(float x)
                 (_three - guess * guess * x); // now have 24 sig bits
         guess = _half * guess *
                 (_three - guess * guess * x); // now have 32 sig bits
-        guess = _half * guess * (_three - guess * guess * x); // extra iteration
+        guess =
+            _half * guess * (_three - guess * guess * x); // extra iteration
         y = (float) (x * guess);
         return y;
     }
@@ -263,14 +264,15 @@ float dummy(void)
 // the plane that is perpendicular to b and contains the origin.
 void lbvector_Mirror(Vec3* a, Vec3* unit_mirror_axis)
 {
-    float f = (unit_mirror_axis->x * a->x + unit_mirror_axis->y * a->y) * -2.0f;
+    float f =
+        (unit_mirror_axis->x * a->x + unit_mirror_axis->y * a->y) * -2.0f;
 
     a->x += unit_mirror_axis->x * f;
     a->y += unit_mirror_axis->y * f;
 }
 
-// 8000DCA8 - returns <a/|a|, b/|b|>, which is the cosine of the angle between a
-// and b.
+// 8000DCA8 - returns <a/|a|, b/|b|>, which is the cosine of the angle between
+// a and b.
 float lbvector_CosAngle(Vec3* a, Vec3* b)
 {
     return (a->x * b->x + a->y * b->y) / (sqrtf(a->x * a->x + a->y * a->y) *
@@ -278,8 +280,8 @@ float lbvector_CosAngle(Vec3* a, Vec3* b)
 }
 
 // 8000DDAC - linearly interpolates between a and b as f goes from 0 to 1,
-// returns a + f*(b-a). The numerical error can be large for f=1 when b is small
-// compared to a.
+// returns a + f*(b-a). The numerical error can be large for f=1 when b is
+// small compared to a.
 Vec3* lbvector_Lerp(Vec3* a, Vec3* b, Vec3* result, float f)
 {
     lbvector_Diff(b, a, result);
@@ -339,9 +341,9 @@ Vec3* lbvector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
 }
 
 // 8000DFF4 - returns lbvector_EulerAnglesFromONB(result_angles, a, c cross a,
-// c). When rotating about the x,y,z angles about the euler angles returned from
-// that function in that order, the standard basis (e1,e2,e3) is rotated onto (c
-// cross a,c,a).
+// c). When rotating about the x,y,z angles about the euler angles returned
+// from that function in that order, the standard basis (e1,e2,e3) is rotated
+// onto (c cross a,c,a).
 Vec3* lbvector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a, Vec3* c)
 {
     Vec3 b;
@@ -518,7 +520,8 @@ float lbvector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
         return lbvector_Len(&c_a);
     } else {
         Vec3 v3;
-        float f1 = (b_a.x * c_a.x + b_a.y * c_a.y + b_a.z * c_a.z) / sqrlen_b_a;
+        float f1 =
+            (b_a.x * c_a.x + b_a.y * c_a.y + b_a.z * c_a.z) / sqrlen_b_a;
 
         d->x = a->x + b_a.x * f1;
         d->y = a->y + b_a.y * f1;

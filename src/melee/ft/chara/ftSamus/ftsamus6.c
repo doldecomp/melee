@@ -84,8 +84,8 @@ void ftSamus_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
         ftSamus_8012B5F0(fighter_gobj);
         return;
     }
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0, NULL, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x163, 0, NULL, 0.0f,
+                                       1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     ftSamus_SpecialLw_StartAction_inner(fighter_gobj);
 }
@@ -103,8 +103,8 @@ void ftSamus_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.x *= samus_attr->x70;
     fp->x80_self_vel.y = samus_attr->x58;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0, NULL, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x164, 0, NULL, 0.0f,
+                                       1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     ftSamus_SpecialLw_StartAction_inner(fighter_gobj);
 }
@@ -312,7 +312,8 @@ void ftSamus_8012B358(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
-    if ((fp->x2208_ftcmd_var2) && (fp->input.x624_lstick_y < samus_attr->x80)) {
+    if ((fp->x2208_ftcmd_var2) && (fp->input.x624_lstick_y < samus_attr->x80))
+    {
         fp->x2208_ftcmd_var2 = 0;
         func_800D638C(fighter_gobj);
     }

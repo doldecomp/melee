@@ -6,7 +6,7 @@
 
 extern DVDDiskID __CARDDiskNone;
 
-#define CARDIsValidBlockNo(card, iBlock)                                       \
+#define CARDIsValidBlockNo(card, iBlock)                                      \
     (CARD_NUM_SYSTEM_BLOCK <= (iBlock) && (iBlock) < (card)->cBlock)
 
 bool __CARDCompareFileName(CARDDir* ent, const char* filename)

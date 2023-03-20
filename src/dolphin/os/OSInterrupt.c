@@ -105,7 +105,8 @@ OSInterruptHandler __OSGetInterruptHandler(__OSInterrupt id)
     return InterruptHandlerTable[id];
 }
 
-static void ExternalInterruptHandler(OSException exception, OSContext* context);
+static void ExternalInterruptHandler(OSException exception,
+                                     OSContext* context);
 
 extern volatile struct {
     u32 x0;

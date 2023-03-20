@@ -16,7 +16,8 @@ extern const f32 neg1;
 // https://decomp.me/scratch/wrO5N
 void lbl_8015550C(HSD_GObj* gobj)
 {
-    if (func_8015C31C() || func_8015C3A0() || !ftAnim_IsFramesRemaining(gobj)) {
+    if (func_8015C31C() || func_8015C3A0() || !ftAnim_IsFramesRemaining(gobj))
+    {
         Fighter* fp = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         fp->x1A5C = 0;
@@ -48,7 +49,8 @@ void lbl_801555E4(HSD_GObj* gobj)
 // https://decomp.me/scratch/mvCUe
 void lbl_801555E8(HSD_GObj* gobj)
 {
-    if (func_8015C31C() || func_8015C3A0() || !ftAnim_IsFramesRemaining(gobj)) {
+    if (func_8015C31C() || func_8015C3A0() || !ftAnim_IsFramesRemaining(gobj))
+    {
         Fighter* fp = gobj->user_data;
         Fighter_UnkSetFlag_8006CFBC(gobj);
         fp->x1A5C = 0;

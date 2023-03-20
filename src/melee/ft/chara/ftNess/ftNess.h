@@ -51,39 +51,39 @@ typedef enum ftNessAction {
 // Flags used by Ness in Action State Change
 
 // SpecialN/SpecialAirN (PK Flash)
-#define FTNESS_SPECIALN_COLL_FLAG                                              \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |        \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |            \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+#define FTNESS_SPECIALN_COLL_FLAG                                             \
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |       \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // SpecialHi/SpecialAirHi (PK Thunder)
-#define FTNESS_SPECIALHI_COLL_FLAG                                             \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |        \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |            \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+#define FTNESS_SPECIALHI_COLL_FLAG                                            \
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |       \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // SpecialHi Jibaku (PK Thunder 2 Self-Hit)
-#define FTNESS_JIBAKU_COLL_FLAG                                                \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |                  \
-        FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |    \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |            \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+#define FTNESS_JIBAKU_COLL_FLAG                                               \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |                 \
+        FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |   \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // SpecialLw (PSI Magnet)
-#define FTNESS_SPECIALLW_COLL_FLAG                                             \
-    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |              \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |            \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
-        FtStateChange_SkipUpdateModelPartVis |                                 \
+#define FTNESS_SPECIALLW_COLL_FLAG                                            \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
-#define FTNESS_SPECIALLW_END_FLAG                                              \
-    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |        \
-        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |            \
-        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |          \
+#define FTNESS_SPECIALLW_END_FLAG                                             \
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |       \
+        FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |           \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // Special Attributes
@@ -119,11 +119,11 @@ typedef struct ftNessAttributes {
     f32 x54_PK_THUNDER_2_MOMENTUM;
     f32 x58_PK_THUNDER_2_UNK1;
     f32 x5C_PK_THUNDER_2_DECELERATION_RATE;
-    f32 x60_PK_THUNDER_2_KNOCKDOWN_ANGLE; // Angle to determine whether to enter
-                                          // PK Thunder 2 or DownBound state
-                                          // (Ground Only)
-    f32 x64_PK_THUNDER_2_WALLHUG_ANGLE; // Surface angle to determine whether PK
-                                        // Thunder 2 wallhugs or bounces
+    f32 x60_PK_THUNDER_2_KNOCKDOWN_ANGLE; // Angle to determine whether to
+                                          // enter PK Thunder 2 or DownBound
+                                          // state (Ground Only)
+    f32 x64_PK_THUNDER_2_WALLHUG_ANGLE;   // Surface angle to determine whether
+                                          // PK Thunder 2 wallhugs or bounces
     f32 x68_PK_THUNDER_2_UNK2;
     f32 x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND; // Amount of animation blend
                                               // frames Ness goes through when
@@ -134,9 +134,9 @@ typedef struct ftNessAttributes {
                                       // loses his double jump.
     // Down Special - PSI Magnet
     f32 x74_PSI_MAGNET_RELEASE_LAG; // Auto lag frames after initializing PSI
-                                    // Magnet if B is not being held. PSI Magnet
-                                    // is immediately released with no lag once
-                                    // these frames have passed.
+                                    // Magnet if B is not being held. PSI
+                                    // Magnet is immediately released with no
+                                    // lag once these frames have passed.
     f32 x78_PSI_MAGNET_UNK1; // Note: Reminiscent of Fox and Falco's Reflector
                              // turn duration attribute? Unused.
     f32 x7C_PSI_MAGNET_UNK2; // Note: Reminiscent of Fox and Falco's Reflector
@@ -151,8 +151,8 @@ typedef struct ftNessAttributes {
     AbsorbDesc x98_PSI_MAGNET_ABSORPTION;
     // Up/Down Smash - Yo-Yo
     f32 xAC_YOYO_CHARGE_DURATION; // Amount of frames Yo-Yo can be charged
-    f32 xB0_YOYO_DAMAGE_MUL; // Charged Yo-Yo damage multiplier; 350 by default,
-                             // identical to the Smash Charge standard
+    f32 xB0_YOYO_DAMAGE_MUL;      // Charged Yo-Yo damage multiplier; 350 by
+                             // default, identical to the Smash Charge standard
     f32 xB4_YOYO_REHIT_RATE; // Amount of frames needed for the Yo-Yo to hit
                              // again after colliding with a hurtbox
     // Forward Smash - Baseball Bat

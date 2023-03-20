@@ -119,12 +119,12 @@ static void func_8015FDA4(void)
 
 static inline void init_spr_unk(void)
 {
-#define MTSPR(spr, val)                                                        \
-    asm { li r3, val }                                                         \
-    asm                                                                        \
-    {                                                                          \
-        oris r3, r3, val                                                       \
-    }                                                                          \
+#define MTSPR(spr, val)                                                       \
+    asm { li r3, val }                                                        \
+    asm                                                                       \
+    {                                                                         \
+        oris r3, r3, val                                                      \
+    }                                                                         \
     asm { mtspr spr, r3 }
 
     MTSPR(0x392, 4);

@@ -471,8 +471,8 @@ void DMAErrorHandler(OSError error, OSContext* context, ...)
     OSReport("The following errors have been detected and cleared :\n");
 
     if (hid2 & HID2_DCHERR) {
-        OSReport(
-            "\t- Requested a locked cache tag that was already in the cache\n");
+        OSReport("\t- Requested a locked cache tag that was already in the "
+                 "cache\n");
     }
 
     if (hid2 & HID2_DNCERR) {

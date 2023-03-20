@@ -100,7 +100,8 @@ void GXInitLightDistAttn(GXLightObj* light, f32 ref_distance,
         break;
     case GX_DA_MEDIUM:
         ka = 1.0f;
-        kb = (0.5f * (1.0f - ref_brightness)) / (ref_brightness * ref_distance);
+        kb =
+            (0.5f * (1.0f - ref_brightness)) / (ref_brightness * ref_distance);
         kc = (0.5f * (1.0f - ref_brightness)) /
              (ref_brightness * ref_distance * ref_distance);
         break;

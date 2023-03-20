@@ -17,8 +17,8 @@ s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
     {
         return 2;
     } else if (walking_velocity >=
-               (fp->sv.co.walk.x20 *
-                (p_ftCommonData->x28 * fp->x110_attr.x118_WalkMaximumVelocity)))
+               (fp->sv.co.walk.x20 * (p_ftCommonData->x28 *
+                                      fp->x110_attr.x118_WalkMaximumVelocity)))
     {
         return 1;
     } else {
@@ -26,7 +26,8 @@ s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
     }
 }
 
-static inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
+static inline s32
+ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 walking_velocity = fabs_inline(fp->xEC_ground_vel);
@@ -36,8 +37,8 @@ static inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
     {
         return 2;
     } else if (walking_velocity >=
-               (tempf *
-                (p_ftCommonData->x28 * fp->x110_attr.x118_WalkMaximumVelocity)))
+               (tempf * (p_ftCommonData->x28 *
+                         fp->x110_attr.x118_WalkMaximumVelocity)))
     {
         return 1;
     } else {
@@ -56,9 +57,9 @@ bool ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
     return false;
 }
 
-void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8,
-                           f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD,
-                           f32 argE, f32 argF)
+void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2,
+                           f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC,
+                           f32 argD, f32 argE, f32 argF)
 {
     s32 new_action_state;
     s32 walking_state;
@@ -123,7 +124,8 @@ void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
     s32 action_state_sum;
     s32 action_state_base;
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 walk_action_type = ftWalkCommon_GetWalkType_800DFBF8_fake(fighter_gobj);
+    s32 walk_action_type =
+        ftWalkCommon_GetWalkType_800DFBF8_fake(fighter_gobj);
 
     action_state_base = fp->sv.co.walk.x4;
     action_state_sum = action_state_base + walk_action_type;

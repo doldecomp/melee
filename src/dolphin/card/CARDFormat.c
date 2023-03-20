@@ -123,7 +123,8 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback)
         fat = (u16*) ((u8*) card->workArea + (3 + i) * CARD_SYSTEM_BLOCK_SIZE);
         memset(fat, 0x00, CARD_SYSTEM_BLOCK_SIZE);
         fat[CARD_FAT_CHECKCODE] = (u16) i;
-        fat[CARD_FAT_FREEBLOCKS] = (u16) (card->cBlock - CARD_NUM_SYSTEM_BLOCK);
+        fat[CARD_FAT_FREEBLOCKS] =
+            (u16) (card->cBlock - CARD_NUM_SYSTEM_BLOCK);
         fat[CARD_FAT_LASTSLOT] = CARD_NUM_SYSTEM_BLOCK - 1;
         __CARDCheckSum(&fat[CARD_FAT_CHECKCODE],
                        CARD_SYSTEM_BLOCK_SIZE - sizeof(u32),

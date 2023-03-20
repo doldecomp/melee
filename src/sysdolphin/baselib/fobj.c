@@ -214,8 +214,9 @@ void FObjUpdateAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update)
     case HSD_A_OP_SPL:
     case HSD_A_OP_SLP:
         if (fobj->fterm != 0) {
-            fobjdata.fv = splGetHelmite(1.0 / fobj->fterm, fobj->time, fobj->p0,
-                                        fobj->p1, fobj->d0, fobj->d1);
+            fobjdata.fv =
+                splGetHelmite(1.0 / fobj->fterm, fobj->time, fobj->p0,
+                              fobj->p1, fobj->d0, fobj->d1);
         } else {
             fobjdata.fv = fobj->p1;
         }

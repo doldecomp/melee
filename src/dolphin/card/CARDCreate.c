@@ -8,9 +8,9 @@
 #include <dolphin/card/CARDOpen.h>
 #include <Runtime/__mem.h>
 
-#define CARDSetIconSpeed(stat, n, f)                                           \
-    ((stat)->iconSpeed =                                                       \
-         (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |         \
+#define CARDSetIconSpeed(stat, n, f)                                          \
+    ((stat)->iconSpeed =                                                      \
+         (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |        \
           ((f) << (2 * (n)))))
 
 static void CreateCallbackFat(s32 chan, s32 result)

@@ -115,8 +115,8 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014AA88
-// https://decomp.me/scratch/41MqW // Mr. Game & Watch's Forward Smash Animation
-// callback
+// https://decomp.me/scratch/41MqW // Mr. Game & Watch's Forward Smash
+// Animation callback
 void ftGameWatch_AttackS4_Anim(HSD_GObj* fighter_gobj)
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj))

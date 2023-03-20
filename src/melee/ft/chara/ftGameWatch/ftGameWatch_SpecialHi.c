@@ -23,8 +23,9 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
     if (fp->ev.gw.x226C_rescueGObj == NULL) {
         func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * Fighter_GetModelScale(fp)) - sp10.y);
-        rescueGObj = func_802C8038(fighter_gobj, &sp10, 0,
-                                   fp->action_id - 0x175, fp->facing_dir, 2.5f);
+        rescueGObj =
+            func_802C8038(fighter_gobj, &sp10, 0, fp->action_id - 0x175,
+                          fp->facing_dir, 2.5f);
         fp->ev.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -179,8 +180,8 @@ void ftGameWatch_SpecialHi_IASA(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014E2B0
-// https://decomp.me/scratch/2aEQN // Mr. Game & Watch's aerial Fire Rescue IASA
-// callback
+// https://decomp.me/scratch/2aEQN // Mr. Game & Watch's aerial Fire Rescue
+// IASA callback
 void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);

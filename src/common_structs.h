@@ -74,7 +74,8 @@ typedef struct _ReflectDesc {
     f32 x18_damage_mul;
     f32 x1C_speed_mul;
 
-    /// @remarks Setting this to 1 causes the reflector to skip ownership change
+    /// @remarks Setting this to 1 causes the reflector to skip ownership
+    /// change
     u8 x20_behavior : 8;
 
 } ReflectDesc;
@@ -87,23 +88,23 @@ typedef struct _AbsorbDesc {
 } AbsorbDesc;
 
 typedef struct ColorOverlay {
-    s32 x0_timer;           // 0x0
-    s32 x4_pri;             // 0x4  this colanims priority, lower = will persist
-    s32* x8_ptr1;           // 0x8
-    s32 xC_loop;            // 0xc
-    s32* x10_ptr2;          // 0x10
-    s32 x14;                // 0x14
-    s32* x18_alloc;         // 0x18
-    s32 x1c;                // 0x1c
-    s32 x20;                // 0x20
-    s32 x24;                // 0x24
-    s32 x28_colanim;        // 0x28, id for the color animation in effect
-    GXColor x2C_hex;        // 0x2C
-    f32 x30_color_red;      // 0x30
-    f32 x34_color_green;    // 0x34
-    f32 x38_color_blue;     // 0x38
-    f32 x3C_color_alpha;    // 0x3C
-    f32 x40_colorblend_red; // 0x40
+    s32 x0_timer;        // 0x0
+    s32 x4_pri;          // 0x4  this colanims priority, lower = will persist
+    s32* x8_ptr1;        // 0x8
+    s32 xC_loop;         // 0xc
+    s32* x10_ptr2;       // 0x10
+    s32 x14;             // 0x14
+    s32* x18_alloc;      // 0x18
+    s32 x1c;             // 0x1c
+    s32 x20;             // 0x20
+    s32 x24;             // 0x24
+    s32 x28_colanim;     // 0x28, id for the color animation in effect
+    GXColor x2C_hex;     // 0x2C
+    f32 x30_color_red;   // 0x30
+    f32 x34_color_green; // 0x34
+    f32 x38_color_blue;  // 0x38
+    f32 x3C_color_alpha; // 0x3C
+    f32 x40_colorblend_red;   // 0x40
     f32 x44_colorblend_green; // 0x44
     f32 x48_colorblend_blue;  // 0x48
     f32 x4C_colorblend_alpha; // 0x4C

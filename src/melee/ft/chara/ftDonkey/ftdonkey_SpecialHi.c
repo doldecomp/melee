@@ -21,8 +21,8 @@ void ftDonkey_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17D, 0, NULL, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17D, 0, NULL, 0.0f,
+                                       1.0f, 0.0f);
     ftDonkey_SetCallbacks_SpecialHi(fighter_gobj);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -46,8 +46,8 @@ void ftDonkey_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17E, 0, NULL, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17E, 0, NULL, 0.0f,
+                                       1.0f, 0.0f);
     ftDonkey_SetCallbacks_SpecialHi(fighter_gobj);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;

@@ -34,7 +34,8 @@ struct plAllocInfo {
     } bits;
 };
 
-/// @todo Probably the same struct as above, figure out how to make them work as
+/// @todo Probably the same struct as above, figure out how to make them work
+/// as
 ///       one.
 struct plAllocInfo2 {
     s32 internal_id;
@@ -115,9 +116,9 @@ void Player_80031790(int slot)
 
     if ((player->slot_type == 0) || (player->slot_type == 1)) {
         for (i = 0; i < 2; i++) {
-            /// transformed will either be [1,0] (normal) or [0,1] (transformed)
-            /// checks to see if the player is in a transformed state, and calls
-            /// the function only once depending on the state
+            /// transformed will either be [1,0] (normal) or [0,1]
+            /// (transformed) checks to see if the player is in a transformed
+            /// state, and calls the function only once depending on the state
             if ((player->player_entity[player->transformed[i]])) {
                 func_800867E8(player->player_entity[player->transformed[i]]);
             }
@@ -135,9 +136,9 @@ void Player_80031848(int slot)
 
     if ((player->slot_type == 0) || (player->slot_type == 1)) {
         for (i = 0; i < 2; i++) {
-            /// transformed will either be [1,0] (normal) or [0,1] (transformed)
-            /// checks to see if the player is in a transformed state, and calls
-            /// the function only once depending on the state
+            /// transformed will either be [1,0] (normal) or [0,1]
+            /// (transformed) checks to see if the player is in a transformed
+            /// state, and calls the function only once depending on the state
             if ((player->player_entity[player->transformed[i]])) {
                 func_8008688C(player->player_entity[player->transformed[i]]);
             }
@@ -297,9 +298,9 @@ void Player_80031DC8(void func_arg(s32, s32))
         Player_CheckSlot(slot);
 
         if (player_slots[slot].player_state) {
-            func_arg(
-                ftMapping_list[player_slots[slot].player_character].internal_id,
-                0);
+            func_arg(ftMapping_list[player_slots[slot].player_character]
+                         .internal_id,
+                     0);
             if (hasExtraFighterId(
                     &ftMapping_list[player_slots[slot].player_character]))
             {
@@ -319,8 +320,10 @@ void Player_80031EBC(int slot)
     for (i = 0; i < 2; i++) {
         StaticPlayer* player = &player_slots[slot];
         if ((player->player_entity[player->transformed[i]])) {
-            if (!func_8008701C(player->player_entity[player->transformed[i]])) {
-                func_800D4F24(player->player_entity[player->transformed[i]], 1);
+            if (!func_8008701C(player->player_entity[player->transformed[i]]))
+            {
+                func_800D4F24(player->player_entity[player->transformed[i]],
+                              1);
             }
             func_80390228(player->player_entity[player->transformed[i]]);
         }
@@ -2082,7 +2085,8 @@ void Player_80036E20(s32 arg0, s32 arg1, s32 arg2)
     struct Unk_Struct_w_Array* unkStruct =
         (struct Unk_Struct_w_Array*) &str_PdPmdat_start_of_data;
     func_800BEB60(unkStruct->vec_arr[arg0].x, arg1, arg2);
-    if ((unkStruct->vec_arr[arg0].y != -1) && (unkStruct->vec_arr[arg0].z == 0))
+    if ((unkStruct->vec_arr[arg0].y != -1) &&
+        (unkStruct->vec_arr[arg0].z == 0))
     {
         func_800BEB60(unkStruct->vec_arr[arg0].y, arg1, arg2);
     }

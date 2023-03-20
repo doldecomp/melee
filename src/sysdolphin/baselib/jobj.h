@@ -76,7 +76,7 @@
 
 #define union_type_ptcl(o) ((o)->flags & JOBJ_PTCL ? true : false)
 #define union_type_spline(o) ((o)->flags & JOBJ_SPLINE ? true : false)
-#define union_type_dobj(o)                                                     \
+#define union_type_dobj(o)                                                    \
     ((o)->flags & (JOBJ_PTCL | JOBJ_SPLINE) ? false : true)
 
 #define HSD_JOBJ_INFO(i) ((HSD_JObjInfo*) (i))
@@ -196,11 +196,11 @@ static inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
 }
 
 // Why does this seem to be a define while the others are inline functions?
-#define HSD_JObjSetMtxDirty(jobj)                                              \
-    {                                                                          \
-        if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {                       \
-            HSD_JObjSetMtxDirtySub(jobj);                                      \
-        }                                                                      \
+#define HSD_JObjSetMtxDirty(jobj)                                             \
+    {                                                                         \
+        if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {                      \
+            HSD_JObjSetMtxDirtySub(jobj);                                     \
+        }                                                                     \
     }
 
 static inline void HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
@@ -410,7 +410,8 @@ void JObjAnimAll(HSD_JObj* jobj);
 s32 JObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent);
 
 void HSD_JObjAddAnim(HSD_JObj*, HSD_AnimJoint* an_joint,
-                     HSD_MatAnimJoint* mat_joint, HSD_ShapeAnimJoint* sh_joint);
+                     HSD_MatAnimJoint* mat_joint,
+                     HSD_ShapeAnimJoint* sh_joint);
 void HSD_JObjWalkTree0(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
                        f32** cb_args);
 

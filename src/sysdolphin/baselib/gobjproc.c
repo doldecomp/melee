@@ -22,8 +22,8 @@ void func_8038FC18(HSD_GObjProc* gproc)
             lbl_804D7844[temp_r7 + temp_r8 * (HSD_GObjLibInitData.p_link_max +
                                               1)] = gproc->prev;
         } else {
-            lbl_804D7844[temp_r7 +
-                         temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)] = NULL;
+            lbl_804D7844[temp_r7 + temp_r8 * (HSD_GObjLibInitData.p_link_max +
+                                              1)] = NULL;
         }
     }
     if (gproc->prev != NULL) {

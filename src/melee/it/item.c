@@ -522,7 +522,8 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->entity = item_gobj;
     func_80267978(item_gobj);
     item_data->asid = -1;
-    item_data->xC8_joint = item_data->xC4_article_data->x10_modelDesc->x0_joint;
+    item_data->xC8_joint =
+        item_data->xC4_article_data->x10_modelDesc->x0_joint;
     item_data->xCC_item_attr = item_data->xC4_article_data->x0_common_attr;
     item_data->owner = NULL;
     item_data->xDC8_word.flags.x0 = 0;
@@ -796,7 +797,8 @@ bool func_802682F0(HSD_GObj* item_gobj)
                         var_r3 = (var_r5 == NULL) ? NULL : var_r5->parent;
                         var_r0 = (var_r3 == NULL) ? NULL : var_r3->next;
                         if (var_r0 != NULL) {
-                            var_r3_2 = (var_r5 == NULL) ? NULL : var_r5->parent;
+                            var_r3_2 =
+                                (var_r5 == NULL) ? NULL : var_r5->parent;
                             var_r5 = var_r0 =
                                 (var_r3_2 == NULL) ? NULL : var_r3_2->next;
                         } else {
@@ -1095,8 +1097,8 @@ void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc)
         func_8000B804(bonestruct_arg, item_data->xC8_joint->child);
     }
     func_80268BE0(item_jobj, itemStateDesc->x0_anim_joint,
-                  itemStateDesc->x4_matanim_joint, itemStateDesc->x8_parameters,
-                  item_data);
+                  itemStateDesc->x4_matanim_joint,
+                  itemStateDesc->x8_parameters, item_data);
     func_8000BA0C(item_jobj, item_data->x5D0_animFrameSpeed);
     HSD_JObjReqAnimAll(item_jobj, 0.0f);
 }
@@ -1184,7 +1186,8 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
         func_802725D4(item_gobj);
 
     item_data->xCC8_knockback = 0.0F;
-    temp_r30 = (new_var = &item_data->xBC_itemStateContainer->stateTable[asid]);
+    temp_r30 =
+        (new_var = &item_data->xBC_itemStateContainer->stateTable[asid]);
     item_data->anim_id = temp_r30->asid;
     item_data->x5CC_currentAnimFrame = 0.0F;
     temp_r0 = item_data->anim_id;
@@ -1563,7 +1566,8 @@ bool func_80269DC8(HSD_GObj* item_gobj)
 
     if (item_data->xDCE_flag.bits.b5 && item_data->ground_or_air == 1 &&
         (item_data->xDCE_flag.bits.b4 ||
-         item_data->xC54 < (f32) M_PI / 180 * (90 + lbl_804D6D28->unk_degrees)))
+         item_data->xC54 <
+             (f32) M_PI / 180 * (90 + lbl_804D6D28->unk_degrees)))
     {
         if (item_data->xDCE_flag.bits.b4 == 0) {
             item_data->xC54 -= M_PI / 2;
@@ -1640,7 +1644,8 @@ bool func_80269F14(HSD_GObj* item_gobj)
                 if (var_r27 > lbl_804D6D28->xD8) {
                     var_r27 = lbl_804D6D28->xD8;
                 }
-                func_80272460(&temp_item->x5D4_hitboxes[i], var_r27, item_gobj);
+                func_80272460(&temp_item->x5D4_hitboxes[i], var_r27,
+                              item_gobj);
             }
         }
     }
@@ -1691,7 +1696,8 @@ void func_8026A158(HSD_GObj* item_gobj)
         item_data->entered_hitlag(item_gobj);
     }
     item_data->xDC8_word.flags.x9 = 1;
-    if (item_data->atk_victim != NULL && func_80272D1C(item_data->atk_victim) &&
+    if (item_data->atk_victim != NULL &&
+        func_80272D1C(item_data->atk_victim) &&
         item_data->xDC8_word.flags.x8 == 0)
     {
         func_8026A158_helper(item_data->atk_victim);
@@ -1720,7 +1726,8 @@ void func_8026A1E8(HSD_GObj* item_gobj)
         item_data->exited_hitlag(item_gobj);
     }
     item_data->xDC8_word.flags.x9 = 0;
-    if (item_data->atk_victim != NULL && func_80272D1C(item_data->atk_victim) &&
+    if (item_data->atk_victim != NULL &&
+        func_80272D1C(item_data->atk_victim) &&
         item_data->xDC8_word.flags.x8 == 0)
     {
         func_8026A1E8_inline(item_data->atk_victim);
@@ -1728,7 +1735,8 @@ void func_8026A1E8(HSD_GObj* item_gobj)
 }
 
 /// @private
-bool processCallback(HSD_GObjPredicate cb, HSD_GObj* item_gobj, Item* item_data)
+bool processCallback(HSD_GObjPredicate cb, HSD_GObj* item_gobj,
+                     Item* item_data)
 {
     if (cb && cb(item_gobj)) {
         item_data->destroy_type = 2;
@@ -1863,8 +1871,8 @@ void lbl_8026A788(HSD_GObj* item_gobj)
 
     func_80272304(item_gobj);
     for (i = 0; i < dynamicBonesNum; i++, dynamicBones++) {
-        func_8001044C(&dynamicBones->unk_ptr, &item_data->xB6C, item_data->xB68,
-                      0.0f, 0, dynamicBones->flags, 0, 1);
+        func_8001044C(&dynamicBones->unk_ptr, &item_data->xB6C,
+                      item_data->xB68, 0.0f, 0, dynamicBones->flags, 0, 1);
     }
 }
 

@@ -17,8 +17,8 @@ void func_80150C8C(HSD_GObj* gobj)
     /// @todo the @c #pragma above is preventing use of #GET_FIGHTER.
     Fighter* r31_fp = gobj->user_data;
     if ((r31_fp->ev.mh.x2258 == 0x155) || (r31_fp->ev.mh.x2258 == 0x185)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0,
-                                           r31_fp->x894_currentAnimFrame, 1, 0);
+        Fighter_ActionStateChange_800693AC(
+            gobj, 0x185, 0, 0, r31_fp->x894_currentAnimFrame, 1, 0);
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 0x185, 0, 0, 0, 1, 0);
         func_8006EBA4(gobj);
@@ -32,8 +32,8 @@ void func_80150D28(HSD_GObj* gobj)
 {
     Fighter* r31_fp = gobj->user_data;
     if ((r31_fp->ev.mh.x2258 == 0x156) || (r31_fp->ev.mh.x2258 == 0x186)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x186, 0, 0,
-                                           r31_fp->x894_currentAnimFrame, 1, 0);
+        Fighter_ActionStateChange_800693AC(
+            gobj, 0x186, 0, 0, r31_fp->x894_currentAnimFrame, 1, 0);
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 0x186, 0, 0, 0, 1, 0);
         func_8006EBA4(gobj);

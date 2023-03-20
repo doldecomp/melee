@@ -89,9 +89,10 @@ void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar)
                  context->srr0, dar);
         break;
     case OS_ERROR_PROGRAM:
-        OSReport("\nProgram exception : Possible illegal instruction/operation "
-                 "at or around 0x%x (read from SRR0)\n",
-                 context->srr0, dar);
+        OSReport(
+            "\nProgram exception : Possible illegal instruction/operation "
+            "at or around 0x%x (read from SRR0)\n",
+            context->srr0, dar);
         break;
     case 15:
         OSReport("\n");

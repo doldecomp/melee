@@ -15,8 +15,8 @@ void func_8007646C(HSD_GObj* attackItem,
 void func_800764DC(HSD_GObj* fighter_gobj); // Check to end combo for victim //
 void func_80076528(
     HSD_GObj* fighter_gobj);          // Combo count something + adjust TopN //
-void func_800765AC(HSD_GObj* victim); // Clear victim pointer from attacker upon
-                                      // freeing memory? //
+void func_800765AC(HSD_GObj* victim); // Clear victim pointer from attacker
+                                      // upon freeing memory? //
 void func_800765E0(void); // Reset hitbox and phantom collision count? //
 f32 func_800765F0(Fighter* fp, HSD_GObj* victim,
                   f32 unk_floatvar); // Unk knockback related ? //
@@ -57,7 +57,8 @@ void func_8007B8A8(HitCapsule*, Vec3*);
 /// Enable Reflect Bubble Update
 void func_8007AEF8(HSD_GObj*);
 
-void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, HSD_GObjEvent on_reflect);
+void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*,
+                             HSD_GObjEvent on_reflect);
 void ftColl_CreateAbsorbHit(HSD_GObj*, AbsorbDesc*);
 void func_8007AF10(HSD_GObj*);
 void func_8007B5AC(void* arg0, void* arg1, void* arg2);

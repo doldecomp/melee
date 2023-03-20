@@ -115,7 +115,8 @@ void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
         fp->x80_self_vel.x = fp->x80_self_vel.x / attributes->x38;
         fp->x80_self_vel.y = fp->x80_self_vel.y / attributes->x3C;
 
-        Fighter_ActionStateChange_800693AC(fighter_gobj, 352, 0, NULL, 0, 1, 0);
+        Fighter_ActionStateChange_800693AC(fighter_gobj, 352, 0, NULL, 0, 1,
+                                           0);
         func_8006EBA4(fighter_gobj);
     }
 
@@ -465,8 +466,8 @@ void ftZelda_8013A058(HSD_GObj* fighter_gobj)
                           cosf(temp_f5);
                 fp->xEC_ground_vel = fp->facing_dir * temp_f6;
 
-                Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15E, 0, NULL,
-                                                   35.0, 1.0, 0);
+                Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15E, 0,
+                                                   NULL, 35.0, 1.0, 0);
                 func_8006EBA4(fighter_gobj);
                 ftAnim_SetAnimRate(fighter_gobj, 0);
 

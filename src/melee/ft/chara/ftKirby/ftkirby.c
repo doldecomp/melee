@@ -647,9 +647,10 @@ jtbl_t jtbl_803CA294 = {
 /* static */ void lbl_800F1D08(void);
 /* static */ void lbl_800F1D00(void);
 
-jtbl_t jtbl_803CA2CC = { lbl_800F1D08, lbl_800F1D08, lbl_800F1D00, lbl_800F1D08,
-                         lbl_800F1D08, lbl_800F1D08, lbl_800F1D08, lbl_800F1D00,
-                         lbl_800F1D08, lbl_800F1D08, lbl_800F1D00, lbl_800F1D00,
+jtbl_t jtbl_803CA2CC = { lbl_800F1D08, lbl_800F1D08, lbl_800F1D00,
+                         lbl_800F1D08, lbl_800F1D08, lbl_800F1D08,
+                         lbl_800F1D08, lbl_800F1D00, lbl_800F1D08,
+                         lbl_800F1D08, lbl_800F1D00, lbl_800F1D00,
                          lbl_800F1D08, lbl_800F1D00, NULL };
 
 char lbl_803CA308[] = "PlKb.dat";

@@ -45,8 +45,8 @@ inline void gobj_first_higher_prio(HSD_GObj* gobj)
     while (var_r4 != NULL && var_r4->p_priority < gobj->p_priority) {
         var_r4 = var_r4->next;
     }
-    GObj_PReorder(gobj,
-                  var_r4 != NULL ? var_r4->prev : plinklow_gobjs[gobj->p_link]);
+    GObj_PReorder(gobj, var_r4 != NULL ? var_r4->prev
+                                       : plinklow_gobjs[gobj->p_link]);
 }
 
 extern char lbl_804084B8[];

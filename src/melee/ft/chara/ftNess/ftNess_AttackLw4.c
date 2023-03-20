@@ -13,8 +13,8 @@ void ftNess_AttackLw4_Action(
     fp->x2218_flag.bits.b0 = 0;
     fp->sv.ns.attacklw4.isChargeDisable = false;
     ftNess_YoyoSetVarAll(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_ATTACKLW4, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     fp->x2222_flag.bits.b2 = 1;
     fp->cb.x21C0_callback_OnGiveDamage = ftNess_YoyoStartTimedRehit;

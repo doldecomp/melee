@@ -141,8 +141,8 @@ void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
         fp->x2200_ftcmd_var0 = 0U;
         vel = ftCaptain_SpecialN_GetAngleVel(fp);
         fp->x80_self_vel.y = (f32) (captainAttrs->specialn_vel_x * sinf(vel));
-        fp->x80_self_vel.x =
-            (f32) (captainAttrs->specialn_vel_x * (fp->facing_dir * cosf(vel)));
+        fp->x80_self_vel.x = (f32) (captainAttrs->specialn_vel_x *
+                                    (fp->facing_dir * cosf(vel)));
     }
 }
 

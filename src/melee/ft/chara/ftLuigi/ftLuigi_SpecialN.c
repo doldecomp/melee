@@ -15,8 +15,8 @@ void ftLuigi_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALN, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALN, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
 }

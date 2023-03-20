@@ -124,8 +124,8 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
 
     if (func_80094790(fighter_gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACKLW3,
-                                           0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ActionStateChange_800693AC(
+            fighter_gobj, AS_GAMEWATCH_ATTACKLW3, 0, NULL, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemManholeSetup;
     }
@@ -146,7 +146,8 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014AE78
-// https://decomp.me/scratch/qzCi0 // Mr. Game & Watch's Down Tilt IASA callback
+// https://decomp.me/scratch/qzCi0 // Mr. Game & Watch's Down Tilt IASA
+// callback
 void ftGameWatch_AttackLw3_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);

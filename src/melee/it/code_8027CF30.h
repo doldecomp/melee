@@ -163,8 +163,8 @@ void func_802C1590(HSD_GObj*);
 void func_802BB20C(HSD_GObj*);
 void func_802BAEEC(HSD_GObj*);
 void func_802BAF0C(HSD_GObj*);
-void func_802BCFC4(HSD_GObj* item_gobj, f32* arg1, itChainSegment* chainSegment,
-                   Item* item_data, f32 arg4);
+void func_802BCFC4(HSD_GObj* item_gobj, f32* arg1,
+                   itChainSegment* chainSegment, Item* item_data, f32 arg4);
 HSD_GObj* func_802BB290(HSD_GObj* fighter_gobj, Vec3* arg1, f32 facing_dir);
 void func_802BCF84(HSD_GObj*);
 

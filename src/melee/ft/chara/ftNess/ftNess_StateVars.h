@@ -13,14 +13,15 @@ union ftNess_StateVars {
         s32 yoyoRehitTimer;
         // 0x2348 - bool to indicate whether Ness can charge the Yo-Yo
         bool isChargeDisable;
-        // 0x234C - bool to indicate whether Yo-Yo hitbox position should update
-        // based on raw Vec3 input (false) or modified calculations (true)
+        // 0x234C - bool to indicate whether Yo-Yo hitbox position should
+        // update based on raw Vec3 input (false) or modified calculations
+        // (true)
         bool isPosUpdateMod;
     } attackhi4, attacklw4;
 
     struct ftNess_SpecialNVars {
-        // 0x2340 - Number of frames Ness remains in the "charge loop" animation
-        // after releasing PK Flash
+        // 0x2340 - Number of frames Ness remains in the "charge loop"
+        // animation after releasing PK Flash
         s32 flashTimerLoop1;
         // 0x2344 - Number of extra frames Ness remains in the "charge loop"
         // animation after releasing PK Flash?
@@ -68,8 +69,8 @@ union ftNess_StateVars {
 
     struct ftNess_SpecialLwVars {
         // 0x2340 - Auto lag frames after initializing PSI Magnet if B is not
-        // being held; PSI Magnet is immediately released with no lag once these
-        // frames have passed
+        // being held; PSI Magnet is immediately released with no lag once
+        // these frames have passed
         s32 releaseLag;
         // 0x2344 - Unused turnaround timer
         s32 turnFrames;

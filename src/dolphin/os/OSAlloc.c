@@ -8,7 +8,7 @@ static any_t ArenaStart;
 static any_t ArenaEnd;
 volatile OSHeapHandle __OSCurrHeap = -1;
 
-#define InRange(addr, start, end)                                              \
+#define InRange(addr, start, end)                                             \
     ((u8*) (start) <= (u8*) (addr) && (u8*) (addr) < (u8*) (end))
 #define OFFSET(addr, align) (((uintptr_t) (addr) & ((align) -1)))
 
@@ -205,10 +205,10 @@ size_t OSCheckHeap(OSHeapHandle heap)
     int total = 0;
     int totalFree = 0;
 
-#define CHECK(line, condition)                                                 \
-    if (!(condition)) {                                                        \
-        OSReport("OSCheckHeap: Failed " #condition " in %d", line);            \
-        return -1;                                                             \
+#define CHECK(line, condition)                                                \
+    if (!(condition)) {                                                       \
+        OSReport("OSCheckHeap: Failed " #condition " in %d", line);           \
+        return -1;                                                            \
     }
 
     CHECK(893, HeapArray)

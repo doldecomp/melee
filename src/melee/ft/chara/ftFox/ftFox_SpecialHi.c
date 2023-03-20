@@ -390,8 +390,8 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
                 facingDir = -1.0f;
 
             fp->facing_dir = facingDir;
-            fp->sv.fx.SpecialHi.rotateModel =
-                atan2f(fp->x80_self_vel.y, fp->x80_self_vel.x * fp->facing_dir);
+            fp->sv.fx.SpecialHi.rotateModel = atan2f(
+                fp->x80_self_vel.y, fp->x80_self_vel.x * fp->facing_dir);
             ftFox_SpecialHi_RotateModel(fighter_gobj);
         }
     }
@@ -543,8 +543,8 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.x =
         fp->facing_dir * (foxAttrs->x74_FOX_FIREFOX_SPEED *
                           cosf(fp->sv.fx.SpecialHi.rotateModel));
-    fp->x80_self_vel.y =
-        foxAttrs->x74_FOX_FIREFOX_SPEED * sinf(fp->sv.fx.SpecialHi.rotateModel);
+    fp->x80_self_vel.y = foxAttrs->x74_FOX_FIREFOX_SPEED *
+                         sinf(fp->sv.fx.SpecialHi.rotateModel);
     ftFox_SpecialHi_RotateModel(fighter_gobj);
     fp->cb.x21F8_callback = func_8007F76C;
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateLaunchGFX;
@@ -762,7 +762,8 @@ void ftFox_SpecialHiBound_Coll(HSD_GObj* fighter_gobj)
             cliffCatchDir = 1;
         }
 
-        if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != false) {
+        if (EnvColl_CheckGroundAndLedge(fighter_gobj, cliffCatchDir) != false)
+        {
             func_8007D7FC(fp);
             return;
         }
