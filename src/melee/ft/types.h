@@ -548,7 +548,7 @@ struct Fighter_DemoStrings {
 // UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fp
 // header includes or something.
 // --------------------------------------------------------------------------------
-struct SpecialAttrs_Mario {
+struct ftMario_EntityVars {
     /* 0x222C */ s32 x222C_vitaminCurr; // Current Megavitamin color combo
     /* 0x2230 */ s32 x2230_vitaminPrev; // Previous Megavitamin color combo
     /* 0x2234 */ bool x2234_tornadoCharge;
@@ -557,16 +557,16 @@ struct SpecialAttrs_Mario {
     /* 0x2240 */ u32 x2240;
 };
 
-struct SpecialAttrs_Fox {
+struct ftFox_EntityVars {
     /* 0x222C */ HSD_GObj* x222C_blasterGObj;
 };
 
-struct SpecialAttrs_DK {
+struct ftDonkey_EntityVars {
     /* 0x222C */ s32 x222C;
     /* 0x2230 */ s32 x2230;
 };
 
-struct SpecialAttrs_Kirby {
+struct ftKirby_EntityVars {
     /* 0x222C */ s32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ UnkFlagStruct x2234;
@@ -591,12 +591,12 @@ struct SpecialAttrs_Kirby {
     /* 0x22E8 */ s32 x22E8;
 };
 
-struct SpecialAttrs_Koopa {
+struct ftKoopa_EntityVars {
     /* 0x222C */ f32 x222C;
     /* 0x2230 */ f32 x2230;
 };
 
-struct SpecialAttrs_Link {
+struct ftLink_EntityVars {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -607,7 +607,7 @@ struct SpecialAttrs_Link {
     /* 0x2248 */ u32 x2248;
 };
 
-struct SpecialAttrs_Seak {
+struct ftSeak_EntityVars {
     /* 0x222C */ int x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ HSD_GObj* x2234;
@@ -616,7 +616,7 @@ struct SpecialAttrs_Seak {
     /* 0x2298 */ Vec3 lstick_delta;
 };
 
-struct SpecialAttrs_Ness {
+struct ftNess_EntityVars {
     /* 0x222C */ HSD_GObj* x222C_yoyoGObj;
     /* 0x2230 */ Vec3 x2230_yoyoHitboxPos;
     /* 0x223C */ f32 x223C;
@@ -626,7 +626,7 @@ struct SpecialAttrs_Ness {
     /* 0x224C */ u32 x224C_thunderGFX; // bool for PK Thunder GFX?
 };
 
-struct SpecialAttrs_Peach {
+struct ftPeach_EntityVars {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -637,7 +637,7 @@ struct SpecialAttrs_Peach {
     /* 0x2248 */ u32 x2248;
 };
 
-struct SpecialAttrs_Popo {
+struct ftPopo_EntityVars {
     /* 0x222C */ uint x222C;
     /* 0x2230 */ UnkFlagStruct x2230;
     /* 0x2231 */ u8 filler_x2231[3];
@@ -651,11 +651,11 @@ struct SpecialAttrs_Popo {
     /* 0x2250 */ f32 x2250;
 };
 
-struct SpecialAttrs_Pikachu {
+struct ftPikachu_EntityVars {
     char filler0[0x100];
 };
 
-struct SpecialAttrs_Samus {
+struct ftSamus_EntityVars {
     /* 0x222C */ HSD_GObj* x222C;
     /* 0x2230 */ s32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -671,14 +671,14 @@ struct SpecialAttrs_Samus {
     /* 0x2248 */ u32 x2248;
 };
 
-struct SpecialAttrs_Yoshi {
+struct ftYoshi_EntityVars {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
 };
 
-struct SpecialAttrs_Purin {
+struct ftPurin_EntityVars {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -689,7 +689,7 @@ struct SpecialAttrs_Purin {
     /* 0x2248 */ u32 x2248;
 };
 
-struct SpecialAttrs_Mewtwo {
+struct ftMewtwo_EntityVars {
     /* 0x222C */ HSD_GObj* x222C_disableGObj;
     /* 0x2230 */ HSD_GObj*
         x2230_shadowHeldGObj; // GObj of Shadow Ball while in Mewtwo's hands?
@@ -699,17 +699,17 @@ struct SpecialAttrs_Mewtwo {
     /* 0x223C */ bool x223C_isConfusionBoost;
 };
 
-struct SpecialAttrs_Luigi {
+struct ftLuigi_EntityVars {
     /* 0x222C */ bool x222C_cycloneCharge;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
 };
 
-struct SpecialAttrs_Mars {
+struct ftMars_EntityVars {
     /* 0x222C */ u32 x222C;
 };
 
-struct SpecialAttrs_Zelda {
+struct ftZelda_EntityVars {
     /* 0x222C */ HSD_GObj* x222C;
 };
 
@@ -727,7 +727,7 @@ struct SpecialAttrs_Pichu {
     char filler0[0x100];
 };
 
-struct SpecialAttrs_GameWatch {
+struct ftGameWatch_EntityVars {
     /* 0x222C */ s32 x222C_judgeVar1;
     /* 0x2230 */ s32 x2230_judgeVar2;
     /* 0x2234 */ u32 x2234;
@@ -747,7 +747,7 @@ struct SpecialAttrs_GameWatch {
     /* 0x226C */ HSD_GObj* x226C_rescueGObj;
 };
 
-struct SpecialAttrs_Masterhand {
+struct ftMasterHand_EntityVars {
     /* 0x222C */ HSD_GObj* x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -773,7 +773,7 @@ struct SpecialAttrs_Crazyhand {
     /* 0x2258 */ s32 x2258;
 };
 
-struct SpecialAttrs_Boy {
+struct ftZakoBoy_EntityVars {
     char filler0[0x100];
 };
 
@@ -781,7 +781,7 @@ struct SpecialAttrs_Girl {
     char filler0[0x100];
 };
 
-struct SpecialAttrs_Sandbag {
+struct ftSandbag_EntityVars {
     char filler0[0x100];
 };
 
@@ -1344,29 +1344,29 @@ struct Fighter {
     u8 filler_x222B;
 
     union Fighter_EntityVars {
-        struct SpecialAttrs_Mario mr;
-        struct SpecialAttrs_Fox fx, fc;
+        struct ftMario_EntityVars mr;
+        struct ftFox_EntityVars fx, fc;
         struct ftCaptain_EntityVars ca, gn;
-        struct SpecialAttrs_DK dk;
-        struct SpecialAttrs_Kirby kb;
-        struct SpecialAttrs_Koopa kp, gk;
-        struct SpecialAttrs_Link lk, cl;
-        struct SpecialAttrs_Seak sk;
-        struct SpecialAttrs_Ness ns;
-        struct SpecialAttrs_Peach pe;
-        struct SpecialAttrs_Popo pp, nn;
-        struct SpecialAttrs_Pikachu pk, pc;
-        struct SpecialAttrs_Samus ss;
-        struct SpecialAttrs_Yoshi ys;
-        struct SpecialAttrs_Purin pr;
-        struct SpecialAttrs_Mewtwo mt;
-        struct SpecialAttrs_Luigi lg;
-        struct SpecialAttrs_Mars ms;
-        struct SpecialAttrs_Zelda zd;
-        struct SpecialAttrs_GameWatch gw;
-        struct SpecialAttrs_Masterhand mh, ch;
-        struct SpecialAttrs_Boy bo, gl;
-        struct SpecialAttrs_Sandbag sb;
+        struct ftDonkey_EntityVars dk;
+        struct ftKirby_EntityVars kb;
+        struct ftKoopa_EntityVars kp, gk;
+        struct ftLink_EntityVars lk, cl;
+        struct ftSeak_EntityVars sk;
+        struct ftNess_EntityVars ns;
+        struct ftPeach_EntityVars pe;
+        struct ftPopo_EntityVars pp, nn;
+        struct ftPikachu_EntityVars pk, pc;
+        struct ftSamus_EntityVars ss;
+        struct ftYoshi_EntityVars ys;
+        struct ftPurin_EntityVars pr;
+        struct ftMewtwo_EntityVars mt;
+        struct ftLuigi_EntityVars lg;
+        struct ftMars_EntityVars ms;
+        struct ftZelda_EntityVars zd;
+        struct ftGameWatch_EntityVars gw;
+        struct ftMasterHand_EntityVars mh, ch;
+        struct ftZakoBoy_EntityVars bo, gl;
+        struct ftSandbag_EntityVars sb;
     } ev;
 
     /* 0x232C */ s32 x232C;
