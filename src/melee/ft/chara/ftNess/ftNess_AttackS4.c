@@ -16,7 +16,7 @@ void ftNess_AttackS4_OnReflect(
 // 0x80114C24
 // https://decomp.me/scratch/66eaB
 void ftNess_AttackS4_Action(
-    HSD_GObj* gobj) // Ness's F-Smash Action State handler
+    HSD_GObj* gobj) // Ness's F-Smash Motion State handler
 {
     Fighter* fp;
     HSD_GObj* baseballBatGObj;

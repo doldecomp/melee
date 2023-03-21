@@ -41,7 +41,7 @@ typedef enum ftMewtwoAction {
 
 #define CONFUSION_REFLECT_OFF 2 // Toggle reflect bubble off.
 
-// Flags used by Mewtwo in Action State Change //
+// Flags used by Mewtwo in Motion State Change //
 
 // SpecialN/SpecialAirN //
 

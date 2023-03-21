@@ -374,7 +374,7 @@ static Fighter_MotionStateChangeFlags const transition_flags =
 
 // 0x8014EA3C
 // https://decomp.me/scratch/mtcx1 // Mr. Game & Watch's ground -> air Chef
-// Action State handler
+// Motion State handler
 void ftGameWatch_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -388,7 +388,7 @@ void ftGameWatch_SpecialN_GroundToAir(HSD_GObj* gobj)
 
 // 0x8014EAAC
 // https://decomp.me/scratch/SLxV6 // Mr. Game & Watch's air -> ground Chef
-// Action State handler
+// Motion State handler
 void ftGameWatch_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -402,7 +402,7 @@ void ftGameWatch_SpecialAirN_AirToGround(HSD_GObj* gobj)
 
 // 0x8014EB1C
 // https://decomp.me/scratch/KLilJ // Mr. Game & Watch's grounded Chef Loop
-// Action State handler
+// Motion State handler
 void ftGameWatch_SpecialN_Loop(HSD_GObj* gobj, f32 anim_frame)
 {
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirN_Loop.
@@ -433,7 +433,7 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* gobj, f32 anim_frame)
 
 // 0x8014EB8C
 // https://decomp.me/scratch/KLilJ // Mr. Game & Watch's aerial Chef Loop
-// Action State handler
+// Motion State handler
 void ftGameWatch_SpecialAirN_Loop(HSD_GObj* gobj, f32 anim_frame)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);

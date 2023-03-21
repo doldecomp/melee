@@ -404,7 +404,7 @@ inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
 
 // 0x80147320
 // https://decomp.me/scratch/zcZ5Y // Mewtwo's grounded Shadow Ball Start
-// Action State handler
+// Motion State handler
 void ftMewtwo_SpecialN_StartAction(HSD_GObj* gobj)
 {
     ftMewtwo_SpecialN_ChangeAction(gobj);

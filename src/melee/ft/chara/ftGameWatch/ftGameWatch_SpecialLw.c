@@ -82,7 +82,7 @@ void ftGameWatch_ItemPanicExitHitlag(HSD_GObj* gobj)
         func_802C7F00(fp->fv.gw.x2268_panicGObj);
 }
 
-/// Check if Mr. Game & Watch is in any of his Oil Panic Action States
+/// Check if Mr. Game & Watch is in any of his Oil Panic Motion States
 bool ftGameWatch_ItemCheckPanicRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -139,7 +139,7 @@ inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* gobj)
     fp->mv.gw.SpecialLw.turnFrames = 0;
 }
 
-/// Mr. Game & Watch's Oil Panic Start Action State handler
+/// Mr. Game & Watch's Oil Panic Start Motion State handler
 void ftGameWatch_SpecialLw_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -453,7 +453,7 @@ void ftGameWatch_SpecialAirLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
 }
 
-/// Mr. Game & Watch's grounded Oil Panic Fill Action State handler
+/// Mr. Game & Watch's grounded Oil Panic Fill Motion State handler
 void ftGameWatch_SpecialLwCatch_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -525,7 +525,7 @@ void ftGameWatch_SpecialAirLwCatch_Coll(HSD_GObj* gobj)
         ftGameWatch_SpecialAirLwCatch_AirToGround(gobj);
 }
 
-/// Mr. Game & Watch's ground -> air Oil Panic Fill Action State handler
+/// Mr. Game & Watch's ground -> air Oil Panic Fill Motion State handler
 void ftGameWatch_SpecialLwCatch_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -536,7 +536,7 @@ void ftGameWatch_SpecialLwCatch_GroundToAir(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
-/// Mr. Game & Watch's air -> ground Oil Panic Fill Action State handler
+/// Mr. Game & Watch's air -> ground Oil Panic Fill Motion State handler
 void ftGameWatch_SpecialAirLwCatch_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -640,7 +640,7 @@ void ftGameWatch_SpecialAirLwShoot_Coll(HSD_GObj* gobj)
         ftGameWatch_SpecialAirLwShoot_AirToGround(gobj);
 }
 
-/// Mr. Game & Watch's ground -> air Oil Panic Release Action State handler
+/// Mr. Game & Watch's ground -> air Oil Panic Release Motion State handler
 void ftGameWatch_SpecialLwShoot_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -655,7 +655,7 @@ void ftGameWatch_SpecialLwShoot_GroundToAir(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemPanicSetup;
 }
 
-/// Mr. Game & Watch's air -> ground Oil Panic Release Action State handler
+/// Mr. Game & Watch's air -> ground Oil Panic Release Motion State handler
 void ftGameWatch_SpecialAirLwShoot_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

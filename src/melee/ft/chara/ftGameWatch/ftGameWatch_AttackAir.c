@@ -318,7 +318,7 @@ static void ftGameWatch_AttackAirHi_Action(HSD_GObj*);
 
 // 0x8014B64C
 // https://decomp.me/scratch/Ads9W // Decide Mr. Game & Watch's Aerial Attack
-// Action State
+// Motion State
 void ftGameWatch_AttackAir_DecideAction(HSD_GObj* gobj)
 {
     enum_t msid = func_8008CE68(GET_FIGHTER(gobj));
@@ -488,7 +488,7 @@ void ftGameWatch_LandingAirB_Action(HSD_GObj* gobj)
     ftGameWatch_OnDamage(gobj);
 }
 
-/// Mr. Game & Watch's Up Aerial Action State handler
+/// Mr. Game & Watch's Up Aerial Motion State handler
 static void ftGameWatch_AttackAirHi_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

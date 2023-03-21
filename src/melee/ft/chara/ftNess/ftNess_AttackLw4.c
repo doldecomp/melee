@@ -6,7 +6,7 @@
 // 0x8011659C
 // https://decomp.me/scratch/xVTx7
 void ftNess_AttackLw4_Action(
-    HSD_GObj* gobj) // Ness's Down Smash Action State handler
+    HSD_GObj* gobj) // Ness's Down Smash Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -137,7 +137,7 @@ void ftNess_AttackLw4_Charge_Coll(
 // 0x801168C4
 // https://decomp.me/scratch/KJ6kU
 void ftNess_AttackLw4_Charge_Action(
-    HSD_GObj* gobj) // Ness's Down Smash Charge Action State handler
+    HSD_GObj* gobj) // Ness's Down Smash Charge Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -227,7 +227,7 @@ void ftNess_AttackLw4_Release_Coll(
 // 0x80116AE8
 // https://decomp.me/scratch/qsqMH
 void ftNess_AttackLw4_Release_Action(
-    HSD_GObj* gobj) // Ness's Down Smash Post-Charge Action State handler
+    HSD_GObj* gobj) // Ness's Down Smash Post-Charge Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

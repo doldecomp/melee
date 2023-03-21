@@ -14,7 +14,7 @@
 // 0x80119E14
 // https://decomp.me/scratch/LwTKg
 void ftNess_SpecialLwStart_Action(HSD_GObj* gobj) // Ness's grounded PSI Magnet
-                                                  // Start Action State handler
+                                                  // Start Motion State handler
 {
     ftNessAttributes* ness_attr;
     Fighter* temp_fp;
@@ -39,7 +39,7 @@ void ftNess_SpecialLwStart_Action(HSD_GObj* gobj) // Ness's grounded PSI Magnet
 // 0x80119E90
 // https://decomp.me/scratch/ckNxx
 void ftNess_SpecialAirLwStart_Action(
-    HSD_GObj* gobj) // Ness's aerial PSI Magnet Start Action State handler
+    HSD_GObj* gobj) // Ness's aerial PSI Magnet Start Motion State handler
 {
     Fighter* temp_fp;
     ftNessAttributes* ness_attr;
@@ -201,7 +201,7 @@ void ftNess_SpecialAirLwStart_Coll(
 // 0x8011A1E0
 // https://decomp.me/scratch/erSzB
 void ftNess_SpecialLwStart_GroundToAir(
-    HSD_GObj* gobj) // Ness's ground->air PSI Magnet Start Action State
+    HSD_GObj* gobj) // Ness's ground->air PSI Magnet Start Motion State
                     // handler
 {
     Fighter* fp;
@@ -216,7 +216,7 @@ void ftNess_SpecialLwStart_GroundToAir(
 // 0x8011A240
 // https://decomp.me/scratch/153K2
 void ftNess_SpecialAirLwStart_AirToGround(
-    HSD_GObj* gobj) // Ness's air->ground PSI Magnet Start Action State
+    HSD_GObj* gobj) // Ness's air->ground PSI Magnet Start Motion State
                     // handler
 {
     Fighter* fp;
@@ -378,7 +378,7 @@ void ftNess_SpecialAirLwHold_Coll(
 // 0x8011A560
 // https://decomp.me/scratch/noqpv
 void ftNess_SpecialLwHold_GroundToAir(
-    HSD_GObj* gobj) // Ness's ground->air PSI Magnet Hold Action State
+    HSD_GObj* gobj) // Ness's ground->air PSI Magnet Hold Motion State
                     // handler
 {
     Fighter* fp;
@@ -402,7 +402,7 @@ void ftNess_SpecialLwHold_GroundToAir(
 // 0x8011A5D4
 // https://decomp.me/scratch/PCAft
 void ftNess_SpecialAirLwHold_AirToGround(
-    HSD_GObj* gobj) // Ness's air->ground PSI Magnet Hold Action State
+    HSD_GObj* gobj) // Ness's air->ground PSI Magnet Hold Motion State
                     // handler
 {
     Fighter* fp;
@@ -427,7 +427,7 @@ void ftNess_SpecialAirLwHold_AirToGround(
 // 0x8011A650
 // https://decomp.me/scratch/YoMqy
 void ftNess_SpecialLwHold_Action(
-    HSD_GObj* gobj) // Ness's grounded PSI Magnet Hold Action State handler
+    HSD_GObj* gobj) // Ness's grounded PSI Magnet Hold Motion State handler
 {
     Fighter* fp;
     ftNessAttributes* ness_attr;
@@ -448,7 +448,7 @@ void ftNess_SpecialLwHold_Action(
 // 0x8011A6A8
 // https://decomp.me/scratch/TjjOK
 void ftNess_SpecialAirLwHold_Action(
-    HSD_GObj* gobj) // Ness's aerial PSI Magnet Hold Action State handler
+    HSD_GObj* gobj) // Ness's aerial PSI Magnet Hold Motion State handler
 {
     Fighter* fp;
     ftNessAttributes* ness_attr;
@@ -1099,7 +1099,7 @@ void ftNess_SpecialAirLwEnd_Coll(
 // 0x8011B3E4
 // https://decomp.me/scratch/9ihkO
 void ftNess_SpecialLwEnd_GroundToAir(
-    HSD_GObj* gobj) // Ness's ground->air PSI Magnet End Action State
+    HSD_GObj* gobj) // Ness's ground->air PSI Magnet End Motion State
                     // handler
 {
     Fighter* fp;
@@ -1114,7 +1114,7 @@ void ftNess_SpecialLwEnd_GroundToAir(
 // 0x8011B444
 // https://decomp.me/scratch/uJw37
 void ftNess_SpecialAirLwEnd_AirToGround(
-    HSD_GObj* gobj) // Ness's air->ground PSI Magnet End Action State
+    HSD_GObj* gobj) // Ness's air->ground PSI Magnet End Motion State
                     // handler
 {
     Fighter* temp_r31;
@@ -1130,7 +1130,7 @@ void ftNess_SpecialAirLwEnd_AirToGround(
 // 0x8011B4AC
 // https://decomp.me/scratch/6wpwg
 void ftNess_SpecialLwEnd_Action(
-    HSD_GObj* gobj) // Ness's grounded PSI Magnet End Action State handler
+    HSD_GObj* gobj) // Ness's grounded PSI Magnet End Motion State handler
 {
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALLW_END, 0, NULL, 0.0f, 1.0f,
                               0.0f);
@@ -1139,7 +1139,7 @@ void ftNess_SpecialLwEnd_Action(
 // 0x8011B4E4
 // https://decomp.me/scratch/sbrLt
 void ftNess_SpecialAirLwEnd_Action(
-    HSD_GObj* gobj) // Ness's aerial PSI Magnet End Action State handler
+    HSD_GObj* gobj) // Ness's aerial PSI Magnet End Motion State handler
 {
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRLW_END, 0, NULL, 0.0f,
                               1.0f, 0.0f);

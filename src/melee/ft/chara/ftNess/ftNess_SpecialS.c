@@ -68,7 +68,7 @@ void ftNess_ItemPKFireSpawn(
 // 0x80116C94 //
 // https://decomp.me/scratch/XdzmF //
 void ftNess_SpecialS_StartAction(
-    HSD_GObj* gobj) // Ness's grounded PK Fire Action State handler //
+    HSD_GObj* gobj) // Ness's grounded PK Fire Motion State handler //
 {
     Fighter* fp;
 
@@ -85,7 +85,7 @@ void ftNess_SpecialS_StartAction(
 // 0x80116D04 //
 // https://decomp.me/scratch/fnaSW //
 void ftNess_SpecialAirS_Action(
-    HSD_GObj* gobj) // Ness's aerial PK Fire Action State handler //
+    HSD_GObj* gobj) // Ness's aerial PK Fire Motion State handler //
 {
     Fighter* fp;
 

@@ -27,7 +27,7 @@ void ftFox_SpecialS_CreateGFX(HSD_GObj* gobj)
 
 // 0x800E9E78
 // https://decomp.me/scratch/Er9l6 // Check if Fox or Falco are in any of their
-// Illusion/Phantasm Action States
+// Illusion/Phantasm Motion States
 bool ftFox_SpecialS_CheckGhostRemove(HSD_GObj* gobj)
 {
     /// @todo @c enum
@@ -66,7 +66,7 @@ f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index)
 
 // 0x800E9EE8
 // https://decomp.me/scratch/7sYVM // Fox & Falco's grounded Illusion/Phantasm
-// Start Action State handler
+// Start Motion State handler
 void ftFox_SpecialS_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -89,7 +89,7 @@ void ftFox_SpecialS_StartAction(HSD_GObj* gobj)
 
 // 0x800E9F6C
 // https://decomp.me/scratch/Sm9I3 // Fox & Falco's aerial Illusion/Phantasm
-// Start Action State handler
+// Start Motion State handler
 void ftFox_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -216,7 +216,7 @@ void ftFox_SpecialAirSStart_Coll(HSD_GObj* gobj)
 
 // 0x800EA1D4
 // https://decomp.me/scratch/P6TMv // Fox & Falco's ground -> air
-// Illusion/Phantasm Start Action State handler
+// Illusion/Phantasm Start Motion State handler
 void ftFox_SpecialSStart_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -229,7 +229,7 @@ void ftFox_SpecialSStart_GroundToAir(HSD_GObj* gobj)
 
 // 0x800EA234
 // https://decomp.me/scratch/sPuow // Fox & Falco's air -> ground
-// Illusion/Phantasm Start Action State handler
+// Illusion/Phantasm Start Motion State handler
 void ftFox_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -399,7 +399,7 @@ void ftFox_SpecialAirS_Coll(HSD_GObj* gobj)
 
 // 0x800EA698
 // https://decomp.me/scratch/ARHkv // Fox & Falco's ground -> air
-// Illusion/Phantasm Dash Action State handler
+// Illusion/Phantasm Dash Motion State handler
 void ftFox_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -414,7 +414,7 @@ void ftFox_SpecialS_GroundToAir(HSD_GObj* gobj)
 
 // 0x800EA700
 // https://decomp.me/scratch/SsE2h // Fox & Falco's air -> ground
-// Illusion/Phantasm Dash Action State handler
+// Illusion/Phantasm Dash Motion State handler
 void ftFox_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -449,7 +449,7 @@ inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
 
 // 0x800EA768
 // https://decomp.me/scratch/orLir // Fox & Falco's grounded Illusion/Phantasm
-// Dash Action State handler
+// Dash Motion State handler
 void ftFox_SpecialS_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -465,7 +465,7 @@ void ftFox_SpecialS_Action(HSD_GObj* gobj)
 
 // 0x800EA838
 // https://decomp.me/scratch/ij6np // Fox & Falco's aerial Illusion/Phantasm
-// Dash Action State handler
+// Dash Motion State handler
 void ftFox_SpecialAirS_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -612,7 +612,7 @@ inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* gobj)
 
 // 0x800EAC50
 // https://decomp.me/scratch/ZZTJW // Fox & Falco's grounded Illusion End
-// Action State handler
+// Motion State handler
 void ftFox_SpecialSEnd_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

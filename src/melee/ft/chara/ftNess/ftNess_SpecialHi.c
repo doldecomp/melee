@@ -395,7 +395,7 @@ void ftNess_SpecialAirHi_CollisionModVel(
 // 0x80118120
 // https://decomp.me/scratch/ARLRd
 void ftNess_SpecialHi_StartAction(HSD_GObj* gobj) // Ness's grounded PK Thunder
-                                                  // Start Action State handler
+                                                  // Start Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* ness_attr = fp->x2D4_specialAttributes;
@@ -467,7 +467,7 @@ void ftNess_SpecialHi_StartAction(HSD_GObj* gobj) // Ness's grounded PK Thunder
 // 0x80118250
 // https://decomp.me/scratch/D08nX
 void ftNess_SpecialAirHiStart_Action(
-    HSD_GObj* gobj) // Ness's aerial PK Thunder Start Action State handler
+    HSD_GObj* gobj) // Ness's aerial PK Thunder Start Motion State handler
 {
     Fighter* fp;
     ftNessAttributes* ness_attr;
@@ -544,7 +544,7 @@ void ftNess_SpecialAirHiStart_Action(
 
 /// @todo Rewrite this.
 void ftNess_SpecialHi_Action(
-    HSD_GObj* gobj) // Ness's grounded PK Thunder 2 Action State handler
+    HSD_GObj* gobj) // Ness's grounded PK Thunder 2 Motion State handler
 {
     /// @todo Try to move these close to usage
     Vec3 sp40;
@@ -702,7 +702,7 @@ NessFloatMath_PKThunder2(HSD_GObj* gobj) // Required for 0x80118570 to match
                                 sinf(fp->mv.ns.specialhi.aerialVel));
 }
 
-/// Ness's PK Thunder 2 Action State handler if Ness is launching into
+/// Ness's PK Thunder 2 Motion State handler if Ness is launching into
 /// SpecialAirHi from SpecialHiHold
 void ftNess_SpecialAirHi_Action(HSD_GObj* gobj)
 {

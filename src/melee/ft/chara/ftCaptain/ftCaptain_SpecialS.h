@@ -89,7 +89,7 @@ void ftCaptain_SpecialS_Phys(HSD_GObj* gobj);
 
 /**
  * Captain Falcon & Ganondorf's grounded Raptor Boost/Gerudo Dragon Start
- * Action State handler.
+ * Motion State handler.
  */
 void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* gobj);
 

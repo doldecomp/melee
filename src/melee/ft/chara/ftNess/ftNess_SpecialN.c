@@ -88,7 +88,7 @@ f32 return_void3(void)
     return 1.0f;
 }
 
-/// Ness's grounded PK Flash Start Action State handler
+/// Ness's grounded PK Flash Start Motion State handler
 void ftNess_SpecialNStart_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -126,7 +126,7 @@ void ftNess_SpecialNStart_Action(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-/// Ness's aerial PK Flash Start Action State handler
+/// Ness's aerial PK Flash Start Motion State handler
 void ftNess_SpecialAirNStart_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.

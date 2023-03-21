@@ -25,7 +25,7 @@ typedef enum ftLuigiAction {
     MS_LUIGI_SPECIALAIRLW,
 } ftLuigiAction;
 
-// Flags used by Luigi in Action State Change //
+// Flags used by Luigi in Motion State Change //
 
 // SpecialN/SpecialAirN (Fireball)
 

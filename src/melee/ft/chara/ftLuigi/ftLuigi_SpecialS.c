@@ -45,7 +45,7 @@ void ftLuigi_SpecialS_SetVars(HSD_GObj* gobj)
         fp->mv.lg.SpecialS.isMisfire = false;
 }
 
-/// Luigi's grounded Green Missile Action State handler
+/// Luigi's grounded Green Missile Motion State handler
 void ftLuigi_SpecialS_StartAction(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -65,7 +65,7 @@ void ftLuigi_SpecialS_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-/// Luigi's aerial Green Missile Action State handler
+/// Luigi's aerial Green Missile Motion State handler
 void ftLuigi_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -170,7 +170,7 @@ static Fighter_MotionStateChangeFlags const transition_flags0 =
     FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
     FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
-/// Luigi's Green Missile Start ground -> air Action State handler
+/// Luigi's Green Missile Start ground -> air Motion State handler
 void ftLuigi_SpecialSStart_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -181,7 +181,7 @@ void ftLuigi_SpecialSStart_GroundToAir(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
-/// Luigi's Green Missile Start air -> ground Action State handler
+/// Luigi's Green Missile Start air -> ground Motion State handler
 void ftLuigi_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -298,7 +298,7 @@ void ftLuigi_SpecialSHold_GroundToAir(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
-/// Luigi's Green Missile Charge air -> ground Action State handler
+/// Luigi's Green Missile Charge air -> ground Motion State handler
 void ftLuigi_SpecialAirSHold_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -308,7 +308,7 @@ void ftLuigi_SpecialAirSHold_AirToGround(HSD_GObj* gobj)
                               NULL, fp->x894_currentAnimFrame, 1, 0);
 }
 
-/// Luigi's grounded Green Missile Charge Action State handler
+/// Luigi's grounded Green Missile Charge Motion State handler
 void ftLuigi_SpecialSHold_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -327,7 +327,7 @@ void ftLuigi_SpecialSHold_Action(HSD_GObj* gobj)
     }
 }
 
-/// Luigi's aerial Green Missile Charge Action State handler
+/// Luigi's aerial Green Missile Charge Motion State handler
 void ftLuigi_SpecialAirSHold_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -447,7 +447,7 @@ void ftLuigi_SpecialSLaunch_GroundToAir(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
-/// Luigi's Green Missile Launch air -> ground Action State handler
+/// Luigi's Green Missile Launch air -> ground Motion State handler
 void ftLuigi_SpecialAirSLaunch_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -480,7 +480,7 @@ static inline void ftLuigi_SpecialS_Setup(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-/// Luigi's grounded Green Missile Launch Action State handler
+/// Luigi's grounded Green Missile Launch Motion State handler
 void ftLuigi_SpecialSLaunch_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -502,7 +502,7 @@ void ftLuigi_SpecialSLaunch_Action(HSD_GObj* gobj)
     ftLuigi_SpecialS_Setup(gobj);
 }
 
-/// Luigi's aerial Green Missile Launch Action State handler
+/// Luigi's aerial Green Missile Launch Motion State handler
 void ftLuigi_SpecialAirSLaunch_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -603,7 +603,7 @@ void ftLuigi_SpecialAirSMisfire_Coll(HSD_GObj* gobj)
         ftLuigi_SpecialAirSMisfire_AirToGround(gobj);
 }
 
-/// Luigi's Green Missile Misfire ground -> air Action State handler
+/// Luigi's Green Missile Misfire ground -> air Motion State handler
 void ftLuigi_SpecialSMisfire_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -614,7 +614,7 @@ void ftLuigi_SpecialSMisfire_GroundToAir(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
-/// Luigi's Green Missile Misfire air -> ground Action State Handler
+/// Luigi's Green Missile Misfire air -> ground Motion State Handler
 void ftLuigi_SpecialAirSMisfire_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -625,7 +625,7 @@ void ftLuigi_SpecialAirSMisfire_AirToGround(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
-/// Luigi's grounded Green Missile Misfire Action State handler
+/// Luigi's grounded Green Missile Misfire Motion State handler
 void ftLuigi_SpecialSMisfire_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -640,7 +640,7 @@ void ftLuigi_SpecialSMisfire_Action(HSD_GObj* gobj)
     ftLuigi_SpecialS_Setup(gobj);
 }
 
-/// Luigi's aerial Green Missile Misfire Action State handler
+/// Luigi's aerial Green Missile Misfire Motion State handler
 void ftLuigi_SpecialAirSMisfire_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -832,7 +832,7 @@ void ftLuigi_SpecialAirSEnd_Coll(HSD_GObj* gobj)
     }
 }
 
-/// Luigi's Green Missile End air -> ground Action State handler
+/// Luigi's Green Missile End air -> ground Motion State handler
 void ftLuigi_SpecialSEnd_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -843,7 +843,7 @@ void ftLuigi_SpecialSEnd_Action(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_END, 0, NULL, 0, 1, 0);
 }
 
-/// Luigi's Green Missile End ground -> air Action State handler
+/// Luigi's Green Missile End ground -> air Motion State handler
 void ftLuigi_SpecialAirSEnd_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

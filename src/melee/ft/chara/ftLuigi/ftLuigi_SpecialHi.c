@@ -20,7 +20,7 @@ void ftLuigi_SpecialHi_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-/// Luigi's aerial Super Jump Punch Action State handler
+/// Luigi's aerial Super Jump Punch Motion State handler
 void ftLuigi_SpecialAirHi_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

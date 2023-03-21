@@ -894,7 +894,7 @@ void ftNess_AttackHi4_Charge_Coll(
 // 0x80116178
 // https://decomp.me/scratch/dY1wZ
 void ftNess_AttackHi4_Charge_Action(
-    HSD_GObj* gobj) // Ness's Up Smash Charge Action State handler
+    HSD_GObj* gobj) // Ness's Up Smash Charge Motion State handler
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

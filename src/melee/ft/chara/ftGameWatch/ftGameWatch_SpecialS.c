@@ -90,7 +90,7 @@ static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* gobj)
 
 // 0x8014C68C
 // https://decomp.me/scratch/MTdOC // Check if Mr. Game & Watch is in any of
-// his SpecialS Action States
+// his SpecialS Motion States
 bool ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* gobj)
 {
     /// @todo @c enum
@@ -337,7 +337,7 @@ static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* gobj)
     ftGameWatch_SpecialS_SetCall(gobj);
 }
 
-// 0x8014CB44 - Mr. Game & Watch's air -> ground Judgement Action State Handler
+// 0x8014CB44 - Mr. Game & Watch's air -> ground Judgement Motion State Handler
 static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

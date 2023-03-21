@@ -277,7 +277,7 @@ void ftFox_SpecialN_StartAction(HSD_GObj* gobj)
 // 0x800E61A8
 // https://decomp.me/scratch/TUDhU
 void ftFox_SpecialAirN_StartAction(
-    HSD_GObj* gobj) // Fox & Falco's aerial Blaster Action State handler
+    HSD_GObj* gobj) // Fox & Falco's aerial Blaster Motion State handler
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
