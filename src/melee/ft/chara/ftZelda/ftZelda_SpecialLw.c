@@ -1,6 +1,6 @@
 #include <platform.h>
 
-#include "ftzelda4.h"
+#include "ftZelda_SpecialLw.h"
 
 #include "ftzelda.h"
 
