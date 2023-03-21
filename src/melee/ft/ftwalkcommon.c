@@ -160,7 +160,7 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
     }
 }
 
-inline float getFtWalkAcceleration(Fighter* fp, float mul)
+static inline float getWalkAccel(Fighter* fp, float mul)
 {
     return fp->input.x620_lstick_x > 0
                ? mul * +fp->x110_attr.x114_WalkAcceleration
@@ -192,7 +192,7 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
 
     velocity_f1 = fp->input.x620_lstick_x *
                   fp->x110_attr.x110_WalkInitialVelocity * ftx2360_f5;
-    velocity_f1 += getFtWalkAcceleration(fp, ftx2360_f5);
+    velocity_f1 += getWalkAccel(fp, ftx2360_f5);
     temp_f0 =
         (fp->input.x620_lstick_x * fp->x110_attr.x118_WalkMaximumVelocity) *
         ftx2360_f5;
