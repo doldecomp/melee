@@ -28,10 +28,10 @@ const Vec3 lbl_803B74A0 = { 0 };
 
 void func_8007C930(Fighter* fp, f32 result)
 {
-    f32 absvel = fabs_inline(fp->xEC_ground_vel);
+    f32 absvel = fabs_inline(fp->gr_vel);
     if (fabs_inline(result) > absvel) {
-        result = -fp->xEC_ground_vel;
-    } else if (fp->xEC_ground_vel > 0) {
+        result = -fp->gr_vel;
+    } else if (fp->gr_vel > 0) {
         result = -result;
     }
     fp->xE4_ground_accel_1 = result;
@@ -49,42 +49,42 @@ void func_8007C98C(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
     phi_f3 = argA;
     result = arg8;
     if (!arg9) {
-        phi_f1 = fabs_inline(fp->xEC_ground_vel);
+        phi_f1 = fabs_inline(fp->gr_vel);
         phi_f0 = fabs_inline(argA);
         if (phi_f0 > phi_f1) {
-            phi_f3 = -fp->xEC_ground_vel;
-        } else if (fp->xEC_ground_vel > 0) {
+            phi_f3 = -fp->gr_vel;
+        } else if (fp->gr_vel > 0) {
             phi_f3 = -argA;
         }
         fp->xE4_ground_accel_1 = phi_f3;
         return;
     }
-    if (!(fp->xEC_ground_vel * arg8 < 0)) {
+    if (!(fp->gr_vel * arg8 < 0)) {
         if (arg8 > 0) {
-            if (fp->xEC_ground_vel + arg8 > arg9) {
+            if (fp->gr_vel + arg8 > arg9) {
                 temp_f1 = -argA;
                 phi_f1_2 = temp_f1;
-                if (fp->xEC_ground_vel + temp_f1 < arg9) {
-                    phi_f1_2 = arg9 - fp->xEC_ground_vel;
+                if (fp->gr_vel + temp_f1 < arg9) {
+                    phi_f1_2 = arg9 - fp->gr_vel;
                 }
                 result = phi_f1_2;
-                if (fp->xEC_ground_vel + phi_f1_2 >
+                if (fp->gr_vel + phi_f1_2 >
                     fp->x110_attr.x144_GroundedMaxHorizontalVelocity)
                 {
                     result = fp->x110_attr.x144_GroundedMaxHorizontalVelocity -
-                             fp->xEC_ground_vel;
+                             fp->gr_vel;
                 }
             }
-        } else if (fp->xEC_ground_vel + arg8 < arg9) {
+        } else if (fp->gr_vel + arg8 < arg9) {
             result = argA;
-            if (fp->xEC_ground_vel + argA > arg9) {
-                result = arg9 - fp->xEC_ground_vel;
+            if (fp->gr_vel + argA > arg9) {
+                result = arg9 - fp->gr_vel;
             }
-            if (fp->xEC_ground_vel + result <
+            if (fp->gr_vel + result <
                 -fp->x110_attr.x144_GroundedMaxHorizontalVelocity)
             {
                 result = -fp->x110_attr.x144_GroundedMaxHorizontalVelocity -
-                         fp->xEC_ground_vel;
+                         fp->gr_vel;
             }
         }
     }
@@ -94,14 +94,14 @@ void func_8007C98C(Fighter* fp, f32 arg8, f32 arg9, f32 argA)
 void func_8007CA80(Fighter* fp, f32 result, f32 arg9)
 {
     if (!arg9) {
-        result = -fp->xEC_ground_vel;
-    } else if (!(fp->xEC_ground_vel * result < 0)) {
+        result = -fp->gr_vel;
+    } else if (!(fp->gr_vel * result < 0)) {
         if (result > 0) {
-            if (fp->xEC_ground_vel + result > arg9) {
-                result = arg9 - fp->xEC_ground_vel;
+            if (fp->gr_vel + result > arg9) {
+                result = arg9 - fp->gr_vel;
             }
-        } else if (fp->xEC_ground_vel + result < arg9) {
-            result = arg9 - fp->xEC_ground_vel;
+        } else if (fp->gr_vel + result < arg9) {
+            result = arg9 - fp->gr_vel;
         }
     }
     fp->xE4_ground_accel_1 = result;
@@ -142,8 +142,8 @@ void func_8007CB74(HSD_GObj* gobj)
     fp->x74_anim_vel.x = +ground_normal->y * fp->xE4_ground_accel_1;
     fp->x74_anim_vel.y = -ground_normal->x * fp->xE4_ground_accel_1;
     fp->x74_anim_vel.z = 0;
-    fp->x80_self_vel.x = +ground_normal->y * fp->xEC_ground_vel;
-    fp->x80_self_vel.y = -ground_normal->x * fp->xEC_ground_vel;
+    fp->x80_self_vel.x = +ground_normal->y * fp->gr_vel;
+    fp->x80_self_vel.y = -ground_normal->x * fp->gr_vel;
     fp->x80_self_vel.z = 0;
 }
 
@@ -154,18 +154,18 @@ HSD_GObj* func_8007CC1C(HSD_GObj* gobj)
     fp->x74_anim_vel.x = +ground_normal->y * fp->xE4_ground_accel_1;
     fp->x74_anim_vel.y = -ground_normal->x * fp->xE4_ground_accel_1;
     fp->x74_anim_vel.z = 0;
-    fp->x80_self_vel.x = +ground_normal->y * fp->xEC_ground_vel;
-    fp->x80_self_vel.y = -ground_normal->x * fp->xEC_ground_vel;
+    fp->x80_self_vel.x = +ground_normal->y * fp->gr_vel;
+    fp->x80_self_vel.y = -ground_normal->x * fp->gr_vel;
     fp->x80_self_vel.z = 0;
     return gobj;
 }
 
 void func_8007CC78(Fighter* fp, f32 max)
 {
-    if (fp->xEC_ground_vel < -max) {
-        fp->xEC_ground_vel = -max;
-    } else if (fp->xEC_ground_vel > max) {
-        fp->xEC_ground_vel = +max;
+    if (fp->gr_vel < -max) {
+        fp->gr_vel = -max;
+    } else if (fp->gr_vel > max) {
+        fp->gr_vel = +max;
     }
 }
 
@@ -641,7 +641,7 @@ void func_8007D5BC(Fighter* fp)
 void func_8007D5D4(Fighter* fp)
 {
     fp->ground_or_air = GA_Air;
-    fp->xEC_ground_vel = 0;
+    fp->gr_vel = 0;
     fp->x98_atk_shield_kb.z = 0;
     fp->cur_pos.z = 0;
     fp->x74_anim_vel.y = 0;
@@ -657,7 +657,7 @@ void func_8007D60C(Fighter* fp)
         func_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
     }
     fp->ground_or_air = GA_Air;
-    fp->xEC_ground_vel = 0;
+    fp->gr_vel = 0;
     fp->x74_anim_vel.y = 0;
     fp->x1968_jumpsUsed = attr->x168_MaxJumps;
     fp->x6F0_collData.x19C = 5;
@@ -676,13 +676,13 @@ void func_8007D6A4(Fighter* fp)
         fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->facing_dir;
     }
     tmp = fp->x110_attr.x144_GroundedMaxHorizontalVelocity;
-    if (fp->xEC_ground_vel < -tmp) {
-        fp->xEC_ground_vel = -tmp;
-    } else if (fp->xEC_ground_vel > tmp) {
-        fp->xEC_ground_vel = tmp;
+    if (fp->gr_vel < -tmp) {
+        fp->gr_vel = -tmp;
+    } else if (fp->gr_vel > tmp) {
+        fp->gr_vel = tmp;
     }
     fp->ground_or_air = GA_Ground;
-    fp->xEC_ground_vel = fp->x80_self_vel.x;
+    fp->gr_vel = fp->x80_self_vel.x;
     fp->x1968_jumpsUsed = 0;
     fp->x1969_walljumpUsed = 0;
     fp->x2227_flag.bits.b0 = 0;
@@ -728,13 +728,13 @@ void func_8007D7FC(Fighter* fp)
         fp->x80_self_vel.x = fp->x6A4_transNOffset.z * fp->facing_dir;
     }
     fmp = fp->x110_attr.x144_GroundedMaxHorizontalVelocity;
-    if (fp->xEC_ground_vel < -fmp) {
-        fp->xEC_ground_vel = -fmp;
-    } else if (fp->xEC_ground_vel > fmp) {
-        fp->xEC_ground_vel = fmp;
+    if (fp->gr_vel < -fmp) {
+        fp->gr_vel = -fmp;
+    } else if (fp->gr_vel > fmp) {
+        fp->gr_vel = fmp;
     }
     fp->ground_or_air = GA_Ground;
-    fp->xEC_ground_vel = fp->x80_self_vel.x;
+    fp->gr_vel = fp->x80_self_vel.x;
     fp->x1968_jumpsUsed = 0;
     fp->x1969_walljumpUsed = 0;
     fp->x2227_flag.bits.b0 = 0;
@@ -1113,7 +1113,7 @@ inline void _func_8007E2FC_inline(HSD_GObj* gobj)
     fp->x74_anim_vel.z = 0;
     fp->x74_anim_vel.y = 0;
     fp->x74_anim_vel.x = 0;
-    fp->xEC_ground_vel = 0;
+    fp->gr_vel = 0;
     fp->x80_self_vel.z = 0;
     fp->x80_self_vel.y = 0;
     fp->x80_self_vel.x = 0;
@@ -1470,7 +1470,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->dmg.x18F0 = src->dmg.x18F0;
     dst->x80_self_vel = src->x80_self_vel;
     dst->ground_or_air = src->ground_or_air;
-    dst->xEC_ground_vel = src->xEC_ground_vel;
+    dst->gr_vel = src->gr_vel;
     dst->xF0_ground_kb_vel = src->xF0_ground_kb_vel;
     dst->xF4_ground_attacker_shield_kb_vel =
         src->xF4_ground_attacker_shield_kb_vel;
@@ -1634,14 +1634,14 @@ void func_8007F6A4(Fighter* fp, HSD_JObj* jobj)
 void func_8007F76C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->xEC_ground_vel = fp->facing_dir * fabs_inline(fp->xEC_ground_vel);
+    fp->gr_vel = fp->facing_dir * fabs_inline(fp->gr_vel);
     fp->x80_self_vel.x = fp->facing_dir * fabs_inline(fp->x80_self_vel.x);
 }
 
 void func_8007F7B4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->xEC_ground_vel = -fp->facing_dir * fabs_inline(fp->xEC_ground_vel);
+    fp->gr_vel = -fp->facing_dir * fabs_inline(fp->gr_vel);
     fp->x80_self_vel.x = -fp->facing_dir * fabs_inline(fp->x80_self_vel.x);
 }
 

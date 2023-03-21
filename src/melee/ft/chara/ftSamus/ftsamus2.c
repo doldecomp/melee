@@ -201,7 +201,7 @@ void ftSamus_80128E88(HSD_GObj* gobj)
         f32 samus_attr_xC = samus_attr->xC;
         func_8007CADC(fp, 0.0f,
                       ftAttr->x110_WalkInitialVelocity * samus_attr_xC,
-                      ftAttr->x118_WalkMaximumVelocity * samus_attr_xC);
+                      ftAttr->walk_max_vel * samus_attr_xC);
         func_8007CB74(gobj);
     } else {
         func_80084F3C(gobj);

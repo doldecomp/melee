@@ -229,12 +229,12 @@ void ftLink_800EB334(HSD_GObj* gobj)
     ftLinkAttributes* link_attr = fp->ft_data->ext_attr;
 
     f32 resultf = func_80092ED8(fp->x19A4, link_attr, link_attr->xD8);
-    fp->xEC_ground_vel = resultf * p_ftCommonData->x294;
+    fp->gr_vel = resultf * p_ftCommonData->x294;
     if (fp->x19AC < 0.0f) {
-        new_ground_vel = fp->xEC_ground_vel;
+        new_ground_vel = fp->gr_vel;
     } else {
-        new_ground_vel = -fp->xEC_ground_vel;
+        new_ground_vel = -fp->gr_vel;
     }
-    fp->xEC_ground_vel = new_ground_vel;
+    fp->gr_vel = new_ground_vel;
     func_80088148(fp, 0x2716AU, 0x7FU, 0x40U);
 }

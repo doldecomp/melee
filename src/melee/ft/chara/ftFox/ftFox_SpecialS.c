@@ -79,7 +79,7 @@ void ftFox_SpecialS_StartMotion(HSD_GObj* gobj)
         (s32) foxAttrs->x24_FOX_ILLUSION_GRAVITY_DELAY;
     fp->mv.fx.SpecialS.ghostGObj = NULL;
 
-    fp->xEC_ground_vel /= foxAttrs->x28_FOX_ILLUSION_GROUND_VEL_X;
+    fp->gr_vel /= foxAttrs->x28_FOX_ILLUSION_GROUND_VEL_X;
 
     Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS_START, 0, NULL, 0.0f, 1.0f,
                               0.0f);
@@ -617,8 +617,7 @@ void ftFox_SpecialSEnd_Action(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
-    fp->xEC_ground_vel =
-        foxAttrs->x34_FOX_ILLUSION_GROUND_END_VEL_X * fp->facing_dir;
+    fp->gr_vel = foxAttrs->x34_FOX_ILLUSION_GROUND_END_VEL_X * fp->facing_dir;
 
     Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS_END,
                               FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,

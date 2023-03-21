@@ -609,7 +609,7 @@ void ftNess_SpecialHi_Action(
 
                         Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALHI, 0,
                                                   NULL, 0.0f, 1.0f, 0.0f);
-                        fp->xEC_ground_vel =
+                        fp->gr_vel =
                             (f32) (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
                                    fp->facing_dir);
                         fp = getFighter(gobj);
@@ -1260,19 +1260,19 @@ void ftNess_SpecialHi_Phys(HSD_GObj* gobj)
 #endif
 
     Fighter* fp0 = gobj->user_data;
-    f32 ground_vel = fp0->xEC_ground_vel;
+    f32 ground_vel = fp0->gr_vel;
     f32 vel_y = fp0->x80_self_vel.y;
     ftNessAttributes* ness_attr = fp0->x2D4_specialAttributes;
 
-    fp0->xEC_ground_vel =
+    fp0->gr_vel =
         -(ness_attr->x5C_PK_THUNDER_2_DECELERATION_RATE * fp0->facing_dir -
           ground_vel);
 
     if (fp0->facing_dir == +1) {
-        if (fp0->xEC_ground_vel <= vel_epsilon)
-            fp0->xEC_ground_vel = ground_vel;
-    } else if (fp0->xEC_ground_vel >= -vel_epsilon) {
-        fp0->xEC_ground_vel = ground_vel;
+        if (fp0->gr_vel <= vel_epsilon)
+            fp0->gr_vel = ground_vel;
+    } else if (fp0->gr_vel >= -vel_epsilon) {
+        fp0->gr_vel = ground_vel;
     }
 
     if (fp0->mv.ns.specialhi.facingDir == +1) {
@@ -1588,7 +1588,7 @@ void ftNess_SpecialHi_Coll(HSD_GObj* gobj)
         if ((env_flags & 0b11 << 13) || (env_flags & 0b111111) ||
             (env_flags & 0b111111 << 6))
         {
-            fp0->xEC_ground_vel = 0;
+            fp0->gr_vel = 0;
             {
                 Fighter* fighter_data2 = gobj->user_data;
                 s32 msid = fighter_data2->motion_id;

@@ -74,7 +74,7 @@ void ftCaptain_SpecialS_StartMotion(HSD_GObj* gobj)
         vel->x = vel->y = vel->z = 0;
     }
 
-    fp->xEC_ground_vel = 0;
+    fp->gr_vel = 0;
 }
 
 static inline void setupAirStart(HSD_GObj* gobj)
@@ -144,7 +144,7 @@ static void onDetectGround(HSD_GObj* gobj)
         vel->y = vel->z = 0;
     }
 
-    fp->xEC_ground_vel *= sa->specials_gr_vel_x;
+    fp->gr_vel *= sa->specials_gr_vel_x;
 }
 
 static void onDetectAir(HSD_GObj* gobj)
@@ -452,7 +452,7 @@ void ftCaptain_SpecialAirS_Coll(HSD_GObj* gobj)
     ftCaptain_DatAttrs* captainAttrs = getFtSpecialAttrsD(fp);
 
     if (func_80081D0C(gobj) == true) {
-        fp->xEC_ground_vel = fp->x80_self_vel.x;
+        fp->gr_vel = fp->x80_self_vel.x;
         efLib_DestroyAll(gobj);
         func_800D5CB0(gobj, 0, captainAttrs->specials_hit_landing_lag);
     }

@@ -16,7 +16,7 @@ void ftSamus_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
-    fp->xEC_ground_vel /= samus_attr->x2C;
+    fp->gr_vel /= samus_attr->x2C;
     fp->x80_self_vel.y = 0.0f;
     if (fp->x673 < samus_attr->x28) {
         Fighter_ChangeMotionState(gobj, 0x15E, 0, NULL, 0.0f, 1.0f, 0.0f);

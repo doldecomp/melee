@@ -22,7 +22,7 @@
 void ftPikachu_UpdateVel_80125D80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->xEC_ground_vel = fp->facing_dir * fabs_inline(fp->xEC_ground_vel);
+    fp->gr_vel = fp->facing_dir * fabs_inline(fp->gr_vel);
     fp->x80_self_vel.x = fp->facing_dir * fabs_inline(fp->x80_self_vel.x);
     fp->mv.pk.unk4.x10.x = fp->facing_dir * fabs_inline(fp->mv.pk.unk4.x10.x);
 }
@@ -47,7 +47,7 @@ void ftPikachu_SpecialHi_StartMotion(HSD_GObj* gobj)
 
     fp->mv.pk.unk4.x8 = 0;
     fp->mv.pk.unk4.x18 = 0;
-    fp->xEC_ground_vel = 0.0f;
+    fp->gr_vel = 0.0f;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
     Fighter_ChangeMotionState(gobj, 0x161, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -74,7 +74,7 @@ void ftPikachu_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 
     fp->mv.pk.unk4.x8 = 0;
     fp->mv.pk.unk4.x18 = 0;
-    fp->xEC_ground_vel = 0.0f;
+    fp->gr_vel = 0.0f;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
     Fighter_ChangeMotionState(gobj, 0x164, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -539,13 +539,13 @@ void ftPikachu_80126C0C(HSD_GObj* gobj)
 
             // set ground velocity to (zip_slope * stick_mag) + zip_intercept
             // and then flip based on facing direction
-            fp->xEC_ground_vel = (pika_attr->x90 * stick_mag) + pika_attr->x94;
-            fp->xEC_ground_vel *= fp->facing_dir;
+            fp->gr_vel = (pika_attr->x90 * stick_mag) + pika_attr->x94;
+            fp->gr_vel *= fp->facing_dir;
 
             // if second zip
             if (fp->mv.pk.unk4.x8) {
                 // multiply ground velocity by second_zip_decay
-                fp->xEC_ground_vel *= pika_attr->x98;
+                fp->gr_vel *= pika_attr->x98;
 
                 Fighter_ChangeMotionState(gobj, 0x162, 2, 0, 12.0f, 1.0f,
                                           0.0f);
@@ -827,12 +827,12 @@ void ftPikachu_ActionChangeUpdateVel_801274AC(HSD_GObj* gobj)
     pika_attr = fp->x2D4_specialAttributes;
     fp->mv.pk.unk4.x1C.x = fp->x80_self_vel.x;
     fp->mv.pk.unk4.x1C.y = fp->x80_self_vel.y;
-    fp->mv.pk.unk4.x24 = fp->xEC_ground_vel;
+    fp->mv.pk.unk4.x24 = fp->gr_vel;
 
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
-    fp->xEC_ground_vel = 0.0f;
-    fp->xEC_ground_vel = fp->mv.pk.unk4.x24 * pika_attr->xA4;
+    fp->gr_vel = 0.0f;
+    fp->gr_vel = fp->mv.pk.unk4.x24 * pika_attr->xA4;
     Fighter_ChangeMotionState(gobj, 0x163, 2, 0, 0.0f, 1.0f, 0.0f);
     fp->cb.x21F8_callback = &ftPikachu_UpdateVel_80125D80;
 }
@@ -849,11 +849,11 @@ void ftPikachu_ActionChangeUpdateVel_80127534(HSD_GObj* gobj)
     pika_attr = fp->x2D4_specialAttributes;
     fp->mv.pk.unk4.x1C.x = fp->x80_self_vel.x;
     fp->mv.pk.unk4.x1C.y = fp->x80_self_vel.y;
-    fp->mv.pk.unk4.x24 = fp->xEC_ground_vel;
+    fp->mv.pk.unk4.x24 = fp->gr_vel;
 
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
-    fp->xEC_ground_vel = 0.0f;
+    fp->gr_vel = 0.0f;
     fp->x80_self_vel.x = fp->mv.pk.unk4.x1C.x * pika_attr->xA4;
     fp->x80_self_vel.y = fp->mv.pk.unk4.x1C.y * pika_attr->xA4;
     Fighter_ChangeMotionState(gobj, 0x166, 2, 0, 0.0f, 1.0f, 0.0f);

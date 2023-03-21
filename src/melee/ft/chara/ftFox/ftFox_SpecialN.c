@@ -250,7 +250,7 @@ void ftFox_SpecialN_StartMotion(HSD_GObj* gobj)
 
     func_8006EBA4(gobj);
 
-    fp->xEC_ground_vel = 0.0f;
+    fp->gr_vel = 0.0f;
     fp->x80_self_vel.z = 0.0f;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;

@@ -78,7 +78,7 @@ void ftSamus_SpecialLw_StartMotion(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
-    fp->xEC_ground_vel *= samus_attr->x6C;
+    fp->gr_vel *= samus_attr->x6C;
     if (fp->motion_id == 0x28) {
         Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 3.0f, 1.0f, 0.0f);
         ftSamus_SpecialLw_StartMotion_inner(gobj);
@@ -330,7 +330,7 @@ void ftSamus_8012B3A8(HSD_GObj* gobj)
     if (fp->x2200_ftcmd_var0) {
         func_8007CADC(fp, 0.0f,
                       ft_attr->x110_WalkInitialVelocity * samus_attr->x64,
-                      ft_attr->x118_WalkMaximumVelocity * samus_attr->x5C);
+                      ft_attr->walk_max_vel * samus_attr->x5C);
         func_8007CB74(gobj);
     } else {
         func_80084F3C(gobj);

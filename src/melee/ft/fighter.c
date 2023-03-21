@@ -1313,7 +1313,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                         f32 temp_vel =
                             fp->x6A4_transNOffset.z * fp->facing_dir;
                         fp->x80_self_vel.x = temp_vel;
-                        fp->xEC_ground_vel = temp_vel;
+                        fp->gr_vel = temp_vel;
                     }
                 }
 
@@ -1329,7 +1329,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                     {
                         f32 temp_vel = fp->x6D8.z * fp->facing_dir;
                         fp->x80_self_vel.x = temp_vel;
-                        fp->xEC_ground_vel = temp_vel;
+                        fp->gr_vel = temp_vel;
                     }
                 }
                 if ((arg2 & FtStateChange_UpdateCmd) != 0) {
@@ -2205,8 +2205,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                               /*effective friction - ground multiplier is
                                  usually 1. last factor was 1 when I looked*/
                               Stage_GetGroundFrictionMultiplier(fp) *
-                                  pAttr->x128_GroundFriction *
-                                  p_ftCommonData->x200);
+                                  pAttr->gr_friction * p_ftCommonData->x200);
 
                 // set knockback velocity to ground_kb_vel * surfaceTangent
                 p_kb_vel->x = pNormal->y * fp->xF0_ground_kb_vel;
@@ -2259,7 +2258,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                     /* effectiveFriction - the last constant variable differs
                        from the one for the knockback friction above*/
                     Stage_GetGroundFrictionMultiplier(fp) *
-                        pAttr->x128_GroundFriction *
+                        pAttr->gr_friction *
                         p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
 
                 /* effectiveFriction - the last constant variable differs from
@@ -2271,7 +2270,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
             }
         }
 
-        fp->xEC_ground_vel += fp->xE4_ground_accel_1 + fp->xE8_ground_accel_2;
+        fp->gr_vel += fp->xE4_ground_accel_1 + fp->xE8_ground_accel_2;
         fp->xE4_ground_accel_1 = fp->xE8_ground_accel_2 = 0;
 
         // self_vel += anim_vel

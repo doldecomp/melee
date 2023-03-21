@@ -18,7 +18,7 @@ void ftPikachu_SpecialS_StartMotion(HSD_GObj* gobj)
 
     fp->cb.x21EC_callback = ftPikachu_80124DC8;
 
-    fp->xEC_ground_vel /= sa->x30;
+    fp->gr_vel /= sa->x30;
     Fighter_ChangeMotionState(gobj, 343, 0, 0, 0, 1, 0);
     func_8006EBA4(gobj);
 }
@@ -525,7 +525,7 @@ void ftPikachu_ActionChange_80125CD0(HSD_GObj* gobj)
     ftPikachuAttributes* sa = fp->x2D4_specialAttributes;
 
     fp->x2200_ftcmd_var0 = 0;
-    fp->xEC_ground_vel /= sa->x50;
+    fp->gr_vel /= sa->x50;
 
     Fighter_ChangeMotionState(gobj, 346, 0, 0, 0, 1, 0);
 }

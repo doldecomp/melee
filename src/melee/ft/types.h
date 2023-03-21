@@ -248,12 +248,12 @@ typedef struct _ThrowFlags {
 
 typedef struct attr {
     /* 0x110 */ f32 x110_WalkInitialVelocity;
-    /* 0x114 */ f32 x114_WalkAcceleration;
-    /* 0x118 */ f32 x118_WalkMaximumVelocity;
+    /* 0x114 */ f32 walk_accel;
+    /* 0x118 */ f32 walk_max_vel;
     /* 0x11C */ f32 x11C_SlowWalkMax;
     /* 0x120 */ f32 x120_MidWalkPoint;
     /* 0x124 */ f32 x124_FastWalkMin;
-    /* 0x128 */ f32 x128_GroundFriction; // used
+    /* 0x128 */ f32 gr_friction; // used
     /* 0x12C */ f32 x12C_DashInitialVelocity;
     /* 0x130 */ f32 x130_DashrunAccelerationA;
     /* 0x134 */ f32 x134_DashrunAccelerationB;
@@ -785,7 +785,7 @@ struct Fighter {
     GroundOrAir ground_or_air; // 0xE0
     f32 xE4_ground_accel_1;    // 0xE4
     f32 xE8_ground_accel_2;    // 0xE8
-    f32 xEC_ground_vel;        // 0xEC
+    f32 gr_vel;                // 0xEC
     f32 xF0_ground_kb_vel;
     f32 xF4_ground_attacker_shield_kb_vel;
     Vec2 xF8_playerNudgeVel;

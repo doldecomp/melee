@@ -58,7 +58,7 @@ void ftLuigi_SpecialS_StartMotion(HSD_GObj* gobj)
     ftLuigiAttributes* sa = fp->x2D4_specialAttributes;
 
     fp->cb.x21EC_callback = ftLuigi_SpecialS_SetVars;
-    fp->xEC_ground_vel /= sa->x18_LUIGI_GREENMISSILE_TRACTION;
+    fp->gr_vel /= sa->x18_LUIGI_GREENMISSILE_TRACTION;
 
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_START, 0, NULL, 0, 1, 0);
 
@@ -839,7 +839,7 @@ void ftLuigi_SpecialSEnd_Action(HSD_GObj* gobj)
     ftLuigiAttributes* sa = fp->x2D4_specialAttributes;
 
     fp->x2200_ftcmd_var0 = 0;
-    fp->xEC_ground_vel /= sa->x38_LUIGI_GREENMISSILE_FRICTION_END;
+    fp->gr_vel /= sa->x38_LUIGI_GREENMISSILE_FRICTION_END;
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_END, 0, NULL, 0, 1, 0);
 }
 

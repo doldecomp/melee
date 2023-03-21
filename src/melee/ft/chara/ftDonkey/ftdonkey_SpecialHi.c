@@ -28,7 +28,7 @@ void ftDonkey_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     func_8007CC78(fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
-    fp->x80_self_vel.x = fp->xEC_ground_vel;
+    fp->x80_self_vel.x = fp->gr_vel;
     fp->x80_self_vel.y = 0.0f;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     func_8006EBA4(gobj);

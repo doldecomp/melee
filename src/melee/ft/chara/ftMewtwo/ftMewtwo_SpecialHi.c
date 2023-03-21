@@ -68,7 +68,7 @@ void ftMewtwo_SpecialHi_StartMotion(HSD_GObj* gobj)
 
     {
         Fighter* fp1 = fp0;
-        fp1->xEC_ground_vel = 0;
+        fp1->gr_vel = 0;
         fp1->x80_self_vel.y = 0;
         fp1->x80_self_vel.x = 0;
     }
@@ -441,7 +441,7 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* gobj)
 
             fp->mv.mt.SpecialHi.stickX = stickVec.x;
             fp->mv.mt.SpecialHi.stickY = stickVec.y;
-            fp->xEC_ground_vel =
+            fp->gr_vel =
                 fp->facing_dir *
                 (((mewtwoAttrs->x5C_MEWTWO_TELEPORT_MOMENTUM * sqrt_stick) +
                   mewtwoAttrs->x60_MEWTWO_TELEPORT_MOMENTUM_ADD) *
@@ -622,10 +622,10 @@ static inline void ftMewtwo_SpecialHiLost_SetVars(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.mt.SpecialHi.velX = fp->x80_self_vel.x;
     fp->mv.mt.SpecialHi.velY = fp->x80_self_vel.y;
-    fp->mv.mt.SpecialHi.groundVelX = fp->xEC_ground_vel;
+    fp->mv.mt.SpecialHi.groundVelX = fp->gr_vel;
     fp->x80_self_vel.y = 0;
     fp->x80_self_vel.x = 0;
-    fp->xEC_ground_vel = 0;
+    fp->gr_vel = 0;
     fp->x221E_flag.bits.b0 = false;
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialHi_SetEndGFX;
 }
@@ -642,8 +642,8 @@ void ftMewtwo_SpecialHiLost_Action(HSD_GObj* gobj)
 
     ftMewtwo_SpecialHiLost_SetVars(gobj);
 
-    fp->xEC_ground_vel = fp->mv.mt.SpecialHi.groundVelX *
-                         mewtwoAttrs->x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
+    fp->gr_vel = fp->mv.mt.SpecialHi.groundVelX *
+                 mewtwoAttrs->x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
 }
 
 /// Mewtwo's aerial Teleport End Motion State handler

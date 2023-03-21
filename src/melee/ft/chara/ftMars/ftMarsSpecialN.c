@@ -22,7 +22,7 @@ void ftMars_SpecialN_StartMotion(HSD_GObj* gobj)
 
     fp->cb.x21EC_callback = &lbl_80136730;
 
-    fp->xEC_ground_vel /= attrs->xC;
+    fp->gr_vel /= attrs->xC;
     Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }

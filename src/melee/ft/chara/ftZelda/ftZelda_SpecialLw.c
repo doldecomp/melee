@@ -76,7 +76,7 @@ void ftZelda_SpecialLw_StartMotion_Helper(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->x80_self_vel.x = fp->x80_self_vel.x / attributes->x70;
     fp->x80_self_vel.y = fp->x80_self_vel.y / attributes->x74;
-    fp->xEC_ground_vel = fp->xEC_ground_vel / attributes->x70;
+    fp->gr_vel = fp->gr_vel / attributes->x70;
 
     func_8000B1CC(fp->ft_bones[0].x0_jobj, NULL, &sp20);
     func_800119DC(&sp20, 0x78, 0.4, 0.003, 60 * M_PI / 180);

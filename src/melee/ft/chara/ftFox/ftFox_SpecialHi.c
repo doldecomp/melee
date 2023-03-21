@@ -57,7 +57,7 @@ void ftFox_SpecialHi_StartMotion(HSD_GObj* gobj)
 
     fp->mv.fx.SpecialHi.gravityDelay =
         (s32) foxAttrs->x54_FOX_FIREFOX_GRAVITY_DELAY;
-    fp->xEC_ground_vel /= foxAttrs->x58_FOX_FIREFOX_VEL_X;
+    fp->gr_vel /= foxAttrs->x58_FOX_FIREFOX_VEL_X;
 
     Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALHI_HOLD, 0, NULL, 0.0f, 1.0f,
                               0.0f);
@@ -469,8 +469,7 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* gobj)
             fp->mv.fx.SpecialHi.unk = 0.0f;
             fp->mv.fx.SpecialHi.unk2 = 0.0f;
 
-            fp->xEC_ground_vel =
-                foxAttrs->x74_FOX_FIREFOX_SPEED * fp->facing_dir;
+            fp->gr_vel = foxAttrs->x74_FOX_FIREFOX_SPEED * fp->facing_dir;
 
             fp->mv.fx.SpecialHi.rotateModel =
                 atan2f(-collData->x14C_ground.normal.x * fp->facing_dir,

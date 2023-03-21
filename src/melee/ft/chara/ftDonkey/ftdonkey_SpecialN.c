@@ -24,7 +24,7 @@ void ftDonkey_UpdateDKVelocityAfterPunch(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
-    fp->xEC_ground_vel =
+    fp->gr_vel =
         fp->facing_dir * (donkey_attr->SpecialN.x34_PUNCH_HORIZONTAL_VEL *
                           fp->mv.dk.specialn.xC);
 }

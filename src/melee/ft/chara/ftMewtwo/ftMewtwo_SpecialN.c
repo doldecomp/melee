@@ -215,10 +215,9 @@ void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* gobj)
     if (((s32) fp->motion_id == MS_MEWTWO_SPECIALN_END) ||
         ((s32) fp->ground_or_air == GA_Ground))
     {
-        fp->xEC_ground_vel =
-            fp->facing_dir *
-            (mewtwoAttrs->x4_MEWTWO_SHADOWBALL_GROUND_RECOIL_X *
-             (f32) fp->fv.mt.x2234_shadowBallCharge);
+        fp->gr_vel = fp->facing_dir *
+                     (mewtwoAttrs->x4_MEWTWO_SHADOWBALL_GROUND_RECOIL_X *
+                      (f32) fp->fv.mt.x2234_shadowBallCharge);
     }
 }
 
