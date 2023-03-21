@@ -1,5 +1,6 @@
 #include "ftGameWatch_SpecialN.h"
 
+#include "forward.h"
 #include "ftgamewatch.h"
 
 #include "ft/code_80081B38.h"
