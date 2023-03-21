@@ -463,7 +463,7 @@ s32 Player_8003248C(s32 slot, bool arg1)
     return slot_type;
 }
 
-void Player_SetSlottype(s32 slot, s32 value)
+void Player_SetSlottype(s32 slot, enum_t value)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);

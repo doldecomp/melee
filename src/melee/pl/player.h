@@ -183,7 +183,7 @@ enum_t Player_GetPlayerCharacter(int slot);
 void Player_SetPlayerCharacter(s32 slot, s32 value);
 enum_t Player_GetPlayerSlotType(s32 slot);
 s32 Player_8003248C(s32 slot, bool arg1);
-void Player_SetSlottype(s32 slot, s32 value);
+void Player_SetSlottype(s32 slot, enum_t value);
 s8 Player_800325C8(s32 slot, bool b);
 s8 Player_80032610(s32 slot, bool arg1);
 void Player_LoadPlayerCoords(s32 slot, Vec3* out_vec);
