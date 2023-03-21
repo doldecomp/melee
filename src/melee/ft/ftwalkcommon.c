@@ -185,7 +185,7 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
 /// @todo Unused assignment.
 #ifdef MUST_MATCH
     {
-        float _ = ftx2360_f5;
+        float _ = accel_mul;
     }
 #endif
 
