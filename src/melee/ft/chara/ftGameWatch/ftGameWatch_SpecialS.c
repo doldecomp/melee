@@ -2,6 +2,7 @@
 #include "ftgamewatch.h"
 
 #include "ft/code_80081B38.h"
+#include "ft/forward.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftparts.h"
 #include "it/code_8027CF30.h"
@@ -313,9 +314,15 @@ static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemJudgementSetup;
 }
 
-// 0x8014CA88
-// https://decomp.me/scratch/FPdQK // Mr. Game & Watch's ground -> air
-// Judgement Acion State handler
+static Fighter_MotionStateChangeFlags const transition_flags =
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
+    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
+    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
+    FtStateChange_Unk_27;
+
+/// Mr. Game & Watch's ground -> air Judgement Motion State handler
 static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -327,10 +334,9 @@ static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* gobj)
 
     func_8007D5D4(fp);
     !gobj;
-    Fighter_ChangeMotionState(gobj,
-                              fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialAirS1,
-                              FTGAMEWATCH_SPECIALS_COLL_FLAG, NULL,
-                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(
+        gobj, fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialAirS1,
+        transition_flags, NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     if ((u32) fp->x2200_ftcmd_var0 == 1) {
         fp->x2200_ftcmd_var0 = 2;
     }
@@ -350,9 +356,8 @@ static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* gobj)
     fp->fv.gw.x2234 = 0;
     func_8007D7FC(fp);
     !gobj;
-    Fighter_ChangeMotionState(gobj,
-                              fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1,
-                              FTGAMEWATCH_SPECIALS_COLL_FLAG, NULL,
-                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(
+        gobj, fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1, transition_flags,
+        NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftGameWatch_SpecialS_SetCall(gobj);
 }
