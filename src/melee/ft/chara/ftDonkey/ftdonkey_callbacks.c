@@ -189,7 +189,7 @@ void ftDonkey_OnItemDrop(HSD_GObj* gobj, bool bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_8010D96C(HSD_GObj* gobj)
+void ftDonkey_8010D96C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* attr = fp->x2D4_specialAttributes;

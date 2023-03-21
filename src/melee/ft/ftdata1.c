@@ -902,7 +902,7 @@ HSD_GObjEvent lbl_803C1E38[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
-    func_8010D96C,
+    ftDonkey_8010D96C,
     ftKirby_800EE818,
     NULL,
     NULL,
