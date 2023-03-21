@@ -174,10 +174,9 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
 #endif
 
     Fighter* fp;
-    float temp_f0;
-    float temp_f4;
+    float stick_mul;
     float accel_mul;
-    float velocity_f1;
+    float vel;
 
     fp = GET_FIGHTER(gobj);
     accel_mul = fp->mv.co.walk.accel_mul;
@@ -189,18 +188,19 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
     }
 #endif
 
-    velocity_f1 = fp->input.x620_lstick_x *
-                  fp->x110_attr.x110_WalkInitialVelocity * accel_mul;
-    velocity_f1 += getWalkAccel(fp, accel_mul);
-    temp_f0 =
-        (fp->input.x620_lstick_x * fp->x110_attr.walk_max_vel) * accel_mul;
-    if (temp_f0) {
-        temp_f4 = fp->gr_vel / temp_f0;
-        if (temp_f4 > 0 && temp_f4 < 1) {
-            velocity_f1 *= (1 - temp_f4) * p_ftCommonData->x30;
-        }
+    vel = fp->input.x620_lstick_x * fp->x110_attr.walk_init_vel * accel_mul;
+    vel += getWalkAccel(fp, accel_mul);
+
+    stick_mul =
+        fp->input.x620_lstick_x * fp->x110_attr.walk_max_vel * accel_mul;
+
+    if (stick_mul != 0) {
+        float temp_f4 = fp->gr_vel / stick_mul;
+
+        if (temp_f4 > 0 && temp_f4 < 1)
+            vel *= (1 - temp_f4) * p_ftCommonData->x30;
     }
-    fp->mv.co.walk.x0 = temp_f0 * p_ftCommonData->x440;
-    func_8007C98C(fp, velocity_f1, temp_f0, fp->x110_attr.gr_friction);
+    fp->mv.co.walk.x0 = stick_mul * p_ftCommonData->x440;
+    func_8007C98C(fp, vel, stick_mul, fp->x110_attr.gr_friction);
     func_8007CB74(gobj);
 }

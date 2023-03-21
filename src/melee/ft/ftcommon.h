@@ -9,7 +9,7 @@
 #include <baselib/jobj.h>
 
 void func_8007C930(Fighter*, f32);
-void func_8007C98C(Fighter*, f32 vel, f32, f32 gr_friction);
+void func_8007C98C(Fighter*, float vel, float, float gr_friction);
 void func_8007CA80(Fighter*, f32, f32);
 void func_8007CADC(Fighter*, f32, f32, f32);
 void func_8007CB74(HSD_GObj*);

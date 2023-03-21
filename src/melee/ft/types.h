@@ -247,7 +247,7 @@ typedef struct _ThrowFlags {
 } ThrowFlags;
 
 typedef struct attr {
-    /* 0x110 */ f32 x110_WalkInitialVelocity;
+    /* 0x110 */ f32 walk_init_vel;
     /* 0x114 */ f32 walk_accel;
     /* 0x118 */ f32 walk_max_vel;
     /* 0x11C */ f32 x11C_SlowWalkMax;
