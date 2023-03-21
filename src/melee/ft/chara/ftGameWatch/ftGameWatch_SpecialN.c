@@ -364,7 +364,7 @@ void ftGameWatch_SpecialAirN_Coll(HSD_GObj* gobj)
         ftGameWatch_SpecialAirN_AirToGround(gobj);
 }
 
-static Fighter_MotionStateChangeFlags transition_flags =
+static Fighter_MotionStateChangeFlags const transition_flags =
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
     FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
