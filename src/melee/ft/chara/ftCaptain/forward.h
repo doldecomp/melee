@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTCAPTAIN_FORWARD_H
 
 #include "ft/forward.h"
+#include "ftCommon/forward.h"
 
 typedef struct ftCaptainAttributes ftCaptainAttributes;
 typedef union ftCaptain_StateVars ftCaptain_StateVars;

@@ -3,6 +3,7 @@
 
 #include "ft/ftanim.h"
 #include "ft/types.h"
+#include "ftCommon/forward.h"
 #include "gr/stage.h"
 #include "it/item2.h"
 #include "lb/lbcollision.h"

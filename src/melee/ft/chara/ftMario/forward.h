@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTMARIO_FORWARD_H
 
 #include "ft/forward.h"
+#include "ftCommon/forward.h"
 #include "ftMario/types.h"
 
 typedef enum ftMario_ActionState {

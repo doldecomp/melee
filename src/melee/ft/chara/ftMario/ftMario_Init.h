@@ -3,6 +3,7 @@
 
 #include "ft/fighter.h"
 #include "ft/forward.h"
+#include "ftCommon/forward.h"
 #include "ftMario/forward.h"
 
 #include <stddef.h>
