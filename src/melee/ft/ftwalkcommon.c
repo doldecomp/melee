@@ -6,9 +6,9 @@
 
 #include <dolphin/os/os.h>
 
-s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
+s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     f32 ground_vel = fp->xEC_ground_vel;
     f32 walking_velocity = fabs_inline(ground_vel);
     if (walking_velocity >=
@@ -26,10 +26,9 @@ s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
     }
 }
 
-static inline s32
-ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
+static inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     f32 walking_velocity = fabs_inline(fp->xEC_ground_vel);
     f32 tempf = fp->sv.co.walk.x20;
     if (walking_velocity >= (tempf * (p_ftCommonData->x2C *
@@ -46,9 +45,9 @@ ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* fighter_gobj)
     }
 }
 
-bool ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
+bool ftWalkCommon_800DFC70(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.x620_lstick_x * fp->facing_dir) >= p_ftCommonData->x24) {
         return true;
@@ -57,9 +56,9 @@ bool ftWalkCommon_800DFC70(HSD_GObj* fighter_gobj)
     return false;
 }
 
-void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2,
-                           f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC,
-                           f32 argD, f32 argE, f32 argF)
+void ftWalkCommon_800DFCA4(HSD_GObj* gobj, s32 arg1, s32 arg2, f32 arg8,
+                           f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD,
+                           f32 argE, f32 argF)
 {
     s32 new_action_state;
     s32 walking_state;
@@ -70,13 +69,13 @@ void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2,
     u8 _[20];
 #endif
 
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = GET_FIGHTER(gobj);
     fp->sv.co.walk.x20 = argF;
-    walking_state = ftWalkCommon_GetWalkType_800DFBF8_fake(fighter_gobj);
+    walking_state = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
     new_action_state = arg1 + walking_state;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, new_action_state, arg2, 0,
-                                       arg8, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ActionStateChange_800693AC(gobj, new_action_state, arg2, 0, arg8,
+                                       1.0f, 0.0f);
+    func_8006EBA4(gobj);
     fp->sv.co.walk.x0 = fp->xEC_ground_vel;
     fp->sv.co.walk.x4 = arg1;
     fp->sv.co.walk.x8 = arg9;
@@ -87,12 +86,12 @@ void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2,
     fp->sv.co.walk.x1C = argE;
 }
 
-void ftWalkCommon_800DFDDC(HSD_GObj* fighter_gobj)
+void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
 {
     f32 velocity_f2;
     f32 anim_rate;
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (Stage_GetGroundFrictionMultiplier(fp) < 1.0f) {
         velocity_f2 = fp->sv.co.walk.x0;
@@ -115,17 +114,15 @@ void ftWalkCommon_800DFDDC(HSD_GObj* fighter_gobj)
             break;
         }
     }
-    ftAnim_SetAnimRate(fighter_gobj, anim_rate);
+    ftAnim_SetAnimRate(gobj, anim_rate);
 }
 
-void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
-                           void (*arg_cb)(HSD_GObj*, f32))
+void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
 {
     s32 action_state_sum;
     s32 action_state_base;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 walk_action_type =
-        ftWalkCommon_GetWalkType_800DFBF8_fake(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 walk_action_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
 
     action_state_base = fp->sv.co.walk.x4;
     action_state_sum = action_state_base + walk_action_type;
@@ -151,13 +148,13 @@ void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
             OSReport("couldn't get walk frame\n");
             HSD_ASSERT(71, 0);
         }
-        float_result = func_8006F484(fighter_gobj);
+        float_result = func_8006F484(gobj);
         init_animFrame = fp->x894_currentAnimFrame;
         quotient = init_animFrame / float_result;
         adjusted_animFrame =
             fp->x894_currentAnimFrame - float_result * quotient;
         final_animFrame = var_f31 * (adjusted_animFrame / float_result);
-        arg_cb(fighter_gobj, final_animFrame);
+        arg_cb(gobj, final_animFrame);
     }
 }
 
@@ -170,7 +167,7 @@ inline f32 getFtWalkAcceleration(Fighter* fp, f32 multiplier)
     }
 }
 
-void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
+void ftWalkCommon_800E0060(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -183,7 +180,7 @@ void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
     f32 ftx2360_f5;
     f32 velocity_f1;
 
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = GET_FIGHTER(gobj);
     ftx2360_f5 = fp->sv.co.walk.x20;
 
 /// @todo Unused assignment.
@@ -207,5 +204,5 @@ void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
     }
     fp->sv.co.walk.x0 = temp_f0 * p_ftCommonData->x440;
     func_8007C98C(fp, velocity_f1, temp_f0, fp->x110_attr.x128_GroundFriction);
-    func_8007CB74(fighter_gobj);
+    func_8007CB74(gobj);
 }

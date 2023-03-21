@@ -4,6 +4,6 @@
 #include <sysdolphin/baselib/forward.h>
 #include <Runtime/platform.h>
 
-void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* fighter_gobj);
+void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj);
 
 #endif

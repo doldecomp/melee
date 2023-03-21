@@ -108,9 +108,9 @@ inline void comboCount_Push(Fighter* fp)
 }
 
 /// Combo count something + adjust TopN
-void func_80076528(HSD_GObj* fighter_gobj)
+void func_80076528(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     u16 temp_r3 = fp->x2092;
 
     if (temp_r3 != 0) {

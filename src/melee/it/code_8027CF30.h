@@ -147,7 +147,7 @@ HSD_GObj* func_802C4A40(HSD_GObj*, Vec3*, f32);
 void func_802C573C(HSD_GObj*);
 HSD_GObj* func_802C5000(HSD_GObj*, Vec3*, s32, s32, f32);
 void func_802C519C(HSD_GObj*, Vec3*, s32, s32, f32, f32);
-void func_802B4AC8(HSD_GObj* fighter_gobj, Vec3*, f32 facing_dir, f32 x);
+void func_802B4AC8(HSD_GObj* gobj, Vec3*, f32 facing_dir, f32 x);
 void func_802C53F0(HSD_GObj*, Vec3*, f32, f32, f32);
 s32 func_802E5F8C(HSD_GObj*, Vec3*, s32, bool, f32, f32);
 void func_80284FC4(HSD_GObj*, s32, f32);
@@ -165,7 +165,7 @@ void func_802BAEEC(HSD_GObj*);
 void func_802BAF0C(HSD_GObj*);
 void func_802BCFC4(HSD_GObj* item_gobj, f32* arg1,
                    itChainSegment* chainSegment, Item* item_data, f32 arg4);
-HSD_GObj* func_802BB290(HSD_GObj* fighter_gobj, Vec3* arg1, f32 facing_dir);
+HSD_GObj* func_802BB290(HSD_GObj* gobj, Vec3* arg1, f32 facing_dir);
 void func_802BCF84(HSD_GObj*);
 
 #endif

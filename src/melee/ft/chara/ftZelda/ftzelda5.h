@@ -4,6 +4,6 @@
 #include <sysdolphin/baselib/forward.h>
 #include <Runtime/platform.h>
 
-void ftZelda_8013BED8(HSD_GObj* fighter_gobj);
+void ftZelda_8013BED8(HSD_GObj* gobj);
 
 #endif

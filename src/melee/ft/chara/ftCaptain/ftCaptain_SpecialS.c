@@ -15,51 +15,51 @@
 #include <dolphin/mtx/types.h>
 #include <baselib/forward.h>
 
-void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    efLib_DestroyAll(fighter_gobj);
+    efLib_DestroyAll(gobj);
 
     fp->ev.ca.during_specials = false;
     fp->ev.ca.during_specials_start = false;
 }
 
-static void setCallbacks(HSD_GObj* fighter_gobj)
+static void setCallbacks(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21DC_callback_OnTakeDamage = ftCaptain_800E28C8;
     fp->cb.x21E4_callback_OnDeath2 = ftCaptain_800E28C8;
 }
 
-static void resetCmdVarsGround(HSD_GObj* fighter_gobj)
+static void resetCmdVarsGround(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     u32* vars = (u32*) &fp->x2200_ftcmd_var0;
     vars[0] = vars[1] = vars[2] = vars[3] = 0;
     func_8007D7FC(fp);
 }
 
-void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    resetCmdVarsGround(fighter_gobj);
+    resetCmdVarsGround(gobj);
 
-    Fighter_ActionStateChange_800693AC(
-        fighter_gobj, ftCaptain_AS_SpecialS_Start, 0, NULL, 0, 1, 0);
+    Fighter_ActionStateChange_800693AC(gobj, ftCaptain_AS_SpecialS_Start, 0,
+                                       NULL, 0, 1, 0);
 
-    setCallbacks(fighter_gobj);
-    func_8006EBA4(fighter_gobj);
+    setCallbacks(gobj);
+    func_8006EBA4(gobj);
 
-    switch (func_800872A4(fighter_gobj)) {
+    switch (func_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
-        ef_Spawn(1169, fighter_gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
+        ef_Spawn(1169, gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
         fp->ev.ca.during_specials_start = true;
         break;
 
     case FTKIND_GANON:
-        ef_Spawn(1293, fighter_gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
+        ef_Spawn(1293, gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
         fp->ev.ca.during_specials_start = true;
         break;
     }
@@ -77,28 +77,28 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->xEC_ground_vel = 0;
 }
 
-static inline void setupAirStart(HSD_GObj* fighter_gobj)
+static inline void setupAirStart(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     {
         u32* vars = &fp->x2200_ftcmd_var0;
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
     }
 
-    Fighter_ActionStateChange_800693AC(
-        fighter_gobj, ftCaptain_AS_SpecialAirS_Start, 0, NULL, 0, 1, 0);
+    Fighter_ActionStateChange_800693AC(gobj, ftCaptain_AS_SpecialAirS_Start, 0,
+                                       NULL, 0, 1, 0);
 
-    setCallbacks(fighter_gobj);
-    func_8006EBA4(fighter_gobj);
+    setCallbacks(gobj);
+    func_8006EBA4(gobj);
 
-    switch (func_800872A4(fighter_gobj)) {
+    switch (func_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
-        ef_Spawn(1169, fighter_gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
+        ef_Spawn(1169, gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
         fp->ev.ca.during_specials_start = true;
         break;
     case FTKIND_GANON:
-        ef_Spawn(1293, fighter_gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
+        ef_Spawn(1293, gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
         fp->ev.ca.during_specials_start = true;
         break;
     }
@@ -114,10 +114,10 @@ static inline void setupAirStart(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftCaptain_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    setupAirStart(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
+    setupAirStart(gobj);
     fp->sv.ca.specials.grav = 0;
     func_8007D60C(fp);
 }
@@ -129,15 +129,15 @@ static Fighter_ActionStateChangeFlags const transition_flags =
     FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
     FtStateChange_Unk_27;
 
-static void onDetectGround(HSD_GObj* fighter_gobj)
+static void onDetectGround(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCaptainAttributes* sa = getFtSpecialAttrsD(fp);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialS,
+    Fighter_ActionStateChange_800693AC(gobj, ftCaptain_AS_SpecialS,
                                        transition_flags, NULL, 0, 1, 0);
-    setCallbacks(fighter_gobj);
+    setCallbacks(gobj);
 
     {
         Vec3* vel = &fp->x80_self_vel;
@@ -147,18 +147,18 @@ static void onDetectGround(HSD_GObj* fighter_gobj)
     fp->xEC_ground_vel *= sa->specials_gr_vel_x;
 }
 
-static void onDetectAir(HSD_GObj* fighter_gobj)
+static void onDetectAir(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, ftCaptain_AS_SpecialAirS,
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ActionStateChange_800693AC(gobj, ftCaptain_AS_SpecialAirS,
                                        transition_flags, NULL, 0, 1, 0);
-    setCallbacks(fighter_gobj);
+    setCallbacks(gobj);
     fp->x80_self_vel.z = 0;
 }
 
-void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2200_ftcmd_var0 == 0)
         return;
@@ -169,23 +169,23 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
         if (fp->x20AC->classifier == HSD_GOBJ_CLASS_FIGHTER) {
             switch (fp->action_id) {
             case ftCaptain_AS_SpecialS_Start: {
-                onDetectGround(fighter_gobj);
+                onDetectGround(gobj);
                 break;
             }
 
             case ftCaptain_AS_SpecialAirS_Start:
-                onDetectAir(fighter_gobj);
+                onDetectAir(gobj);
                 break;
             }
         } else if (fp->x20AC->classifier == HSD_GOBJ_CLASS_ITEM) {
             if (itGetKind(detected_gobj) < It_Kind_BombHei) {
                 switch (fp->action_id) {
                 case ftCaptain_AS_SpecialS_Start:
-                    onDetectGround(fighter_gobj);
+                    onDetectGround(gobj);
                     break;
 
                 case ftCaptain_AS_SpecialAirS_Start:
-                    onDetectAir(fighter_gobj);
+                    onDetectAir(gobj);
                     break;
                 }
             } else if ((itGetKind(detected_gobj) >= It_Kind_Kuriboh &&
@@ -196,11 +196,11 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
             {
                 switch (fp->action_id) {
                 case ftCaptain_AS_SpecialS_Start:
-                    onDetectGround(fighter_gobj);
+                    onDetectGround(gobj);
                     break;
 
                 case ftCaptain_AS_SpecialAirS_Start:
-                    onDetectAir(fighter_gobj);
+                    onDetectAir(gobj);
                     break;
                 }
             }
@@ -208,26 +208,26 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftCaptain_SpecialSStart_Anim(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialSStart_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-        func_8008A2BC(fighter_gobj);
+    if (!ftAnim_IsFramesRemaining(gobj))
+        func_8008A2BC(gobj);
 }
 
-void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialS_Anim(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->ev.ca.during_specials) {
-        switch (func_800872A4(fighter_gobj)) {
+        switch (func_800872A4(gobj)) {
         case FTKIND_CAPTAIN:
-            ef_Spawn(1170, fighter_gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            ef_Spawn(1170, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
                      &fp->facing_dir);
             fp->ev.ca.during_specials = true;
             break;
 
         case FTKIND_GANON:
-            ef_Spawn(1294, fighter_gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            ef_Spawn(1294, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
                      &fp->facing_dir);
             fp->ev.ca.during_specials = true;
             break;
@@ -237,34 +237,34 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-        func_8008A2BC(fighter_gobj);
+    if (!ftAnim_IsFramesRemaining(gobj))
+        func_8008A2BC(gobj);
 }
 
-void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_8007D60C(fp);
         if (captainAttrs->specials_miss_landing_lag == 0) {
-            func_800CC730(fighter_gobj);
+            func_800CC730(gobj);
         } else {
-            func_80096900(fighter_gobj, 1, 1, 0, 1,
+            func_80096900(gobj, 1, 1, 0, 1,
                           captainAttrs->specials_miss_landing_lag);
         }
     }
 }
 
-void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -273,15 +273,15 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     if (!fp->ev.ca.during_specials) {
-        switch (func_800872A4(fighter_gobj)) {
+        switch (func_800872A4(gobj)) {
         case FTKIND_CAPTAIN:
-            ef_Spawn(1171, fighter_gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            ef_Spawn(1171, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
                      &fp->facing_dir);
             fp->ev.ca.during_specials = true;
             break;
 
         case FTKIND_GANON:
-            ef_Spawn(1295, fighter_gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            ef_Spawn(1295, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
                      &fp->facing_dir);
             fp->ev.ca.during_specials = true;
             break;
@@ -291,39 +291,39 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         func_8007D60C(fp);
 
         if (captainAttrs->specials_hit_landing_lag == 0) {
-            func_800CC730(fighter_gobj);
+            func_800CC730(gobj);
         } else {
-            func_80096900(fighter_gobj, 1, 1, 0, 1,
+            func_80096900(gobj, 1, 1, 0, 1,
                           captainAttrs->specials_hit_landing_lag);
         }
     }
 }
 
-void ftCaptain_SpecialSStart_IASA(HSD_GObj* fighter_gobj) {}
+void ftCaptain_SpecialSStart_IASA(HSD_GObj* gobj) {}
 
-void ftCaptain_SpecialS_IASA(HSD_GObj* fighter_gobj) {}
+void ftCaptain_SpecialS_IASA(HSD_GObj* gobj) {}
 
-void ftCaptain_SpecialAirSStart_IASA(HSD_GObj* fighter_gobj) {}
+void ftCaptain_SpecialAirSStart_IASA(HSD_GObj* gobj) {}
 
-void ftCaptain_SpecialAirS_IASA(HSD_GObj* fighter_gobj) {}
+void ftCaptain_SpecialAirS_IASA(HSD_GObj* gobj) {}
 
-void ftCaptain_SpecialSStart_Phys(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialSStart_Phys(HSD_GObj* gobj)
 {
-    func_80084FA8(fighter_gobj);
+    func_80084FA8(gobj);
 }
 
-void ftCaptain_SpecialS_Phys(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialS_Phys(HSD_GObj* gobj)
 {
-    func_80084FA8(fighter_gobj);
+    func_80084FA8(gobj);
 }
 
-void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -331,7 +331,7 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    func_80085134(fighter_gobj);
+    func_80085134(gobj);
     if (fp->x2204_ftcmd_var1 == 1) {
         fp->sv.ca.specials.grav -= captainAttrs->specials_grav;
 
@@ -343,9 +343,9 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirS_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -353,7 +353,7 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    func_80085134(fighter_gobj);
+    func_80085134(gobj);
     fp->sv.ca.specials.grav -= captainAttrs->specials_grav;
 
     if (fp->sv.ca.specials.grav < -captainAttrs->specials_terminal_vel)
@@ -364,30 +364,30 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 
 // Captain Falcon & Ganondorf's grounded
 // Raptor Boost / Gerudo Dragon Start Collision callback
-void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialSStart_Coll(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 unused[8];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCaptainAttributes* sa = sa = fp->x2D4_specialAttributes;
 
     if (fp->x2208_ftcmd_var2 == 0) {
-        func_80084104(fighter_gobj);
+        func_80084104(gobj);
         return;
     }
 
-    if (func_80082708(fighter_gobj) == false) {
-        efLib_DestroyAll(fighter_gobj);
+    if (func_80082708(gobj) == false) {
+        efLib_DestroyAll(gobj);
         func_8007D60C(fp);
         if (sa->specials_miss_landing_lag == 0) {
-            func_800CC730(fighter_gobj);
+            func_800CC730(gobj);
             return;
         }
         func_8007D468(fp);
-        func_80096900(fighter_gobj, 1, 1, 0, 1, sa->specials_miss_landing_lag);
+        func_80096900(gobj, 1, 1, 0, 1, sa->specials_miss_landing_lag);
         return;
     }
 
@@ -402,15 +402,15 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* fighter_gobj)
             (fp->facing_dir == -1 &&
              fp->x6F0_collData.x134_envFlags & MPCOLL_LEFTWALL))
         {
-            efLib_DestroyAll(fighter_gobj);
-            func_8008A2BC(fighter_gobj);
+            efLib_DestroyAll(gobj);
+            func_8008A2BC(gobj);
         }
     }
 }
 
-void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialS_Coll(HSD_GObj* gobj)
 {
-    Fighter* temp_fp = GET_FIGHTER(fighter_gobj);
+    Fighter* temp_fp = GET_FIGHTER(gobj);
     Fighter* fp;
     ftCaptainAttributes* captainAttrs = temp_fp->x2D4_specialAttributes;
 
@@ -420,41 +420,40 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* fighter_gobj)
 #endif
 
     fp = temp_fp;
-    if (func_80082708(fighter_gobj) == false) {
-        efLib_DestroyAll(fighter_gobj);
+    if (func_80082708(gobj) == false) {
+        efLib_DestroyAll(gobj);
         func_8007D60C(fp);
         if (0 == captainAttrs->specials_hit_landing_lag) {
-            func_800CC730(fighter_gobj);
+            func_800CC730(gobj);
             return;
         }
         func_8007D468(fp);
-        func_80096900(fighter_gobj, 1, 1, 0, 1,
+        func_80096900(gobj, 1, 1, 0, 1,
                       captainAttrs->specials_hit_landing_lag);
     }
 }
 
-void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
 
-    if (func_80081D0C(fighter_gobj) == true) {
-        efLib_DestroyAll(fighter_gobj);
-        func_800D5CB0(fighter_gobj, 0,
-                      captainAttrs->specials_miss_landing_lag);
+    if (func_80081D0C(gobj) == true) {
+        efLib_DestroyAll(gobj);
+        func_800D5CB0(gobj, 0, captainAttrs->specials_miss_landing_lag);
     }
 }
 
 // Captain Falcon & Ganondorf's aerial Raptor Boost / Gerudo Dragon Hit
 // Collision callback
-void ftCaptain_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirS_Coll(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
 
-    if (func_80081D0C(fighter_gobj) == true) {
+    if (func_80081D0C(gobj) == true) {
         fp->xEC_ground_vel = fp->x80_self_vel.x;
-        efLib_DestroyAll(fighter_gobj);
-        func_800D5CB0(fighter_gobj, 0, captainAttrs->specials_hit_landing_lag);
+        efLib_DestroyAll(gobj);
+        func_800D5CB0(gobj, 0, captainAttrs->specials_hit_landing_lag);
     }
 }

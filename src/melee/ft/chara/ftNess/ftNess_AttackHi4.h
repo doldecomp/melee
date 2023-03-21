@@ -7,6 +7,6 @@
 
 void ftNess_YoyoItemDespawn(HSD_GObj*);
 
-Fighter* GetFighterData(HSD_GObj* fighter_gobj);
+Fighter* GetFighterData(HSD_GObj* gobj);
 
 #endif

@@ -117,26 +117,26 @@ Fighter_CostumeStrings lbl_803D4868[] = {
     { lbl_803D4834, lbl_803D4840, NULL },
 };
 
-void ftCrazyhand_OnDeath(HSD_GObj* fighter_gobj)
+void ftCrazyhand_OnDeath(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj)
+void ftCrazyhand_OnLoad(HSD_GObj* gobj)
 {
     ftData* ftdata;
     ftCrazyHandAttributes* ftData_attr;
     void** items;
     Fighter* fp;
 
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = GET_FIGHTER(gobj);
     ftdata = fp->x10C_ftData;
     ftData_attr = ftdata->ext_attr;
     items = ftdata->x48_items;
 
     PUSH_ATTRS(fp, ftCrazyHandAttributes);
 
-    func_8015BDB4(fighter_gobj);
+    func_8015BDB4(gobj);
     func_8026B3F8(items[0], 0x7F);
     func_8026B3F8(items[1], 0x80);
     func_8026B3F8(items[2], 0x81);
@@ -158,7 +158,7 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj)
     fp->sv.mh.unk0.x40 = -1;
     fp->sv.mh.unk0.x1C = 0.0f;
     fp->sv.mh.unk0.x20 = 0;
-    fp->ev.mh.x222C = func_8015C244(fighter_gobj, &fp->xB0_pos);
+    fp->ev.mh.x222C = func_8015C244(gobj, &fp->xB0_pos);
     fp->ev.mh.x2238 = 1.0f;
     fp->ev.mh.x224C = 0;
     fp->ev.mh.x2250 = 0x159;

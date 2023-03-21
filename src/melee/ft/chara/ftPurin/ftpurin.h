@@ -32,21 +32,21 @@ extern Fighter_DemoStrings lbl_803D04F8;
 
 /// functions
 
-void ftPurin_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
-void ftPurin_OnDeath(HSD_GObj* fighter_gobj);
-void ftPurin_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1);
-void ftPurin_OnItemInvisible(HSD_GObj* fighter_gobj);
-void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
-void ftPurin_OnItemVisible(HSD_GObj* fighter_gobj);
-void ftPurin_OnKnockbackEnter(HSD_GObj* fighter_gobj);
-void ftPurin_OnKnockbackExit(HSD_GObj* fighter_gobj);
-void ftPurin_OnLoad(HSD_GObj* fighter_gobj);
-void ftPurin_OnUserDataRemove(HSD_GObj* fighter_gobj);
+void ftPurin_LoadSpecialAttrs(HSD_GObj* gobj);
+void ftPurin_OnDeath(HSD_GObj* gobj);
+void ftPurin_OnItemDrop(HSD_GObj* gobj, bool bool1);
+void ftPurin_OnItemInvisible(HSD_GObj* gobj);
+void ftPurin_OnItemPickup(HSD_GObj* gobj, bool bool);
+void ftPurin_OnItemVisible(HSD_GObj* gobj);
+void ftPurin_OnKnockbackEnter(HSD_GObj* gobj);
+void ftPurin_OnKnockbackExit(HSD_GObj* gobj);
+void ftPurin_OnLoad(HSD_GObj* gobj);
+void ftPurin_OnUserDataRemove(HSD_GObj* gobj);
 void ftPurin_SpecialAirHi_StartAction(HSD_GObj*);
 void ftPurin_SpecialAirLw_StartAction(HSD_GObj*);
 void ftPurin_SpecialAirN_StartAction(HSD_GObj*);
 void ftPurin_SpecialAirS_StartAction(HSD_GObj*);
-void ftPurin_SpecialHi_SetVars(HSD_GObj* fighter_gobj);
+void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj);
 void ftPurin_SpecialHi_StartAction(HSD_GObj*);
 void ftPurin_SpecialLw_StartAction(HSD_GObj*);
 void ftPurin_SpecialN_StartAction(HSD_GObj*);
@@ -56,9 +56,9 @@ void func_800D7614(HSD_GObj*);
 void func_800D7634(HSD_GObj*);
 void func_800D767C(HSD_GObj*);
 void func_8013C2F8(void);
-void func_8013C360(HSD_GObj* fighter_gobj);
-void func_8013C494(HSD_GObj* fighter_gobj);
-void func_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx);
+void func_8013C360(HSD_GObj* gobj);
+void func_8013C494(HSD_GObj* gobj);
+void func_8013C4F0(HSD_GObj* gobj, int arg1, Mtx vmtx);
 void func_8013C614(Fighter* fp, int arg1, bool arg2);
 void func_8013CD34(HSD_GObj*);
 void func_8013CDD8(HSD_GObj*);
@@ -152,6 +152,6 @@ void lbl_80141FB8(HSD_GObj*);
 void lbl_80142070(HSD_GObj*);
 void lbl_801420D0(HSD_GObj*);
 void lbl_8014222C(HSD_GObj*);
-void* func_8013C664(HSD_GObj* fighter_gobj);
+void* func_8013C664(HSD_GObj* gobj);
 
 #endif

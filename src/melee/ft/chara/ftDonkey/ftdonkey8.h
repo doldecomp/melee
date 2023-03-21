@@ -4,9 +4,9 @@
 #include <sysdolphin/baselib/forward.h>
 #include <Runtime/platform.h>
 
-void ftDonkey_800E05A4(HSD_GObj* fighter_gobj);
-void ftDonkey_800E05C4(HSD_GObj* fighter_gobj);
-void ftDonkey_800E0648(HSD_GObj* fighter_gobj);
-void ftDonkey_800E0568(HSD_GObj* fighter_gobj);
+void ftDonkey_800E05A4(HSD_GObj* gobj);
+void ftDonkey_800E05C4(HSD_GObj* gobj);
+void ftDonkey_800E0648(HSD_GObj* gobj);
+void ftDonkey_800E0568(HSD_GObj* gobj);
 
 #endif

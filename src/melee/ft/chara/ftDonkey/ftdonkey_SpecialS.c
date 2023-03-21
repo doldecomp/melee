@@ -4,60 +4,58 @@
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 
-void ftDonkey_SpecialS_StartAction(HSD_GObj* fighter_gobj)
+void ftDonkey_SpecialS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17B, 0, NULL, 0.0f,
-                                       1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
-    Fighter_UnsetCmdVar0(fighter_gobj);
+    Fighter_ActionStateChange_800693AC(gobj, 0x17B, 0, NULL, 0.0f, 1.0f, 0.0f);
+    func_8006EBA4(gobj);
+    Fighter_UnsetCmdVar0(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010E0CC;
 }
 
-void ftDonkey_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
+void ftDonkey_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     fp->x80_self_vel.x /= donkey_attr->SpecialS.x3C_MIN_STICK_X_MOMENTUM;
     fp->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17C, 0, NULL, 0.0f,
-                                       1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
-    Fighter_UnsetCmdVar0(fighter_gobj);
+    Fighter_ActionStateChange_800693AC(gobj, 0x17C, 0, NULL, 0.0f, 1.0f, 0.0f);
+    func_8006EBA4(gobj);
+    Fighter_UnsetCmdVar0(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010E148;
 }
 
-void ftDonkey_8010E2BC(HSD_GObj* fighter_gobj)
+void ftDonkey_8010E2BC(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
-        func_8008A2BC(fighter_gobj);
+    if (!ftAnim_IsFramesRemaining(gobj))
+        func_8008A2BC(gobj);
 }
 
-void ftDonkey_8010E2F8(HSD_GObj* fighter_gobj)
+void ftDonkey_8010E2F8(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_800CC730(fighter_gobj);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        func_800CC730(gobj);
     }
 }
 
-void ftDonkey_8010E334(HSD_GObj* fighter_gobj) {}
+void ftDonkey_8010E334(HSD_GObj* gobj) {}
 
-void ftDonkey_8010E338(HSD_GObj* fighter_gobj) {}
+void ftDonkey_8010E338(HSD_GObj* gobj) {}
 
-void ftDonkey_8010E33C(HSD_GObj* fighter_gobj)
+void ftDonkey_8010E33C(HSD_GObj* gobj)
 {
-    func_80084F3C(fighter_gobj);
+    func_80084F3C(gobj);
 }
 
-void ftDonkey_8010E35C(HSD_GObj* fighter_gobj)
+void ftDonkey_8010E35C(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
     attr* ft_attr = &fp->x110_attr;
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     if (fp->x2200_ftcmd_var0) {
@@ -70,30 +68,30 @@ void ftDonkey_8010E35C(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010E3BC(HSD_GObj* fighter_gobj)
+void ftDonkey_8010E3BC(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {
-        if (!func_800827A0(fighter_gobj)) {
-            ftDonkey_8010E464(fighter_gobj);
+        if (!func_800827A0(gobj)) {
+            ftDonkey_8010E464(gobj);
         }
-    } else if (!func_80082708(fighter_gobj)) {
-        ftDonkey_8010E464(fighter_gobj);
+    } else if (!func_80082708(gobj)) {
+        ftDonkey_8010E464(gobj);
     }
 }
 
-void ftDonkey_8010E428(HSD_GObj* fighter_gobj)
+void ftDonkey_8010E428(HSD_GObj* gobj)
 {
-    if (func_80081D0C(fighter_gobj)) {
-        ftDonkey_8010E4EC(fighter_gobj);
+    if (func_80081D0C(gobj)) {
+        ftDonkey_8010E4EC(gobj);
     }
 }
 
-void ftDonkey_8010E464(HSD_GObj* fighter_gobj)
+void ftDonkey_8010E464(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17C, 0x0C4C508A, NULL,
+    Fighter_ActionStateChange_800693AC(gobj, 0x17C, 0x0C4C508A, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     if (fp->x2219_flag.bits.b0 == 1) {
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -101,11 +99,11 @@ void ftDonkey_8010E464(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftDonkey_8010E4EC(HSD_GObj* fighter_gobj)
+void ftDonkey_8010E4EC(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17B, 0x0C4C508A, NULL,
+    Fighter_ActionStateChange_800693AC(gobj, 0x17B, 0x0C4C508A, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
     if (fp->x2219_flag.bits.b0 == 1) {
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

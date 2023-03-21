@@ -1885,7 +1885,7 @@ void func_8026A810(HSD_GObj* item_gobj)
         temp_item->xB8_itemLogicTable->spawned(item_gobj);
 }
 
-void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj)
+void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* gobj)
 {
     Item* temp_item = (Item*) HSD_GObjGetUserData(item_gobj);
 
@@ -1893,10 +1893,10 @@ void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj)
         temp_item->kind != 59 && temp_item->kind != 99 &&
         temp_item->kind != 103)
     {
-        if (func_800867CC(fighter_gobj) == item_gobj)
-            func_80086764(fighter_gobj);
-    } else if (func_800867A0(fighter_gobj, item_gobj)) {
-        func_80086724(fighter_gobj, item_gobj);
+        if (func_800867CC(gobj) == item_gobj)
+            func_80086764(gobj);
+    } else if (func_800867A0(gobj, item_gobj)) {
+        func_80086724(gobj, item_gobj);
     }
 }
 

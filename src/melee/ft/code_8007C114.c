@@ -12,10 +12,10 @@ static f32 const lbl_804D8324 = 1.0F;
 
 extern unk_t func_800C555C();
 
-void func_8007C224(HSD_GObj* fighter_gobj);
+void func_8007C224(HSD_GObj* gobj);
 
 #pragma push
-asm void func_8007C114(HSD_GObj* fighter_gobj)
+asm void func_8007C114(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C114 00078CF4  7C 08 02 A6 */	mflr r0
@@ -51,7 +51,7 @@ lbl_8007C154:
 
 #else
 
-void func_8007C114(HSD_GObj* fighter_gobj)
+void func_8007C114(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -61,7 +61,7 @@ void func_8007C114(HSD_GObj* fighter_gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_8007C17C(HSD_GObj* fighter_gobj)
+asm void func_8007C17C(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C17C 00078D5C  7C 08 02 A6 */	mflr r0
@@ -111,7 +111,7 @@ asm void func_8007C17C(HSD_GObj* fighter_gobj)
 
 #else
 
-void func_8007C17C(HSD_GObj* fighter_gobj)
+void func_8007C17C(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -121,7 +121,7 @@ void func_8007C17C(HSD_GObj* fighter_gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_8007C224(HSD_GObj* fighter_gobj)
+asm void func_8007C224(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C224 00078E04  7C 08 02 A6 */	mflr r0
@@ -181,7 +181,7 @@ lbl_8007C2CC:
 
 #else
 
-void func_8007C224(HSD_GObj* fighter_gobj)
+void func_8007C224(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -338,7 +338,7 @@ void func_8007C2E0(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_8007C4BC(HSD_GObj* fighter_gobj)
+asm void func_8007C4BC(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C4BC 0007909C  7C 08 02 A6 */	mflr r0
@@ -449,7 +449,7 @@ lbl_8007C61C:
 
 #else
 
-void func_8007C4BC(HSD_GObj* fighter_gobj)
+void func_8007C4BC(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }

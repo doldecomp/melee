@@ -6,42 +6,42 @@
 #include "ftDonkey/ftdonkey1.h"
 #include "ftDonkey/ftdonkey6.h"
 
-void ftDonkey_800E01BC(HSD_GObj* fighter_gobj)
+void ftDonkey_800E01BC(HSD_GObj* gobj)
 {
-    func_800C9924(fighter_gobj);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        ftDonkey_800DF980(fighter_gobj);
+    func_800C9924(gobj);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftDonkey_800DF980(gobj);
     }
 }
 
-void ftDonkey_800E0200(HSD_GObj* fighter_gobj)
+void ftDonkey_800E0200(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->sv.dk.unk5.x0 && !func_80094EA4(fighter_gobj)) {
-        bool result = ftDonkey_800E0378(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->sv.dk.unk5.x0 && !func_80094EA4(gobj)) {
+        bool result = ftDonkey_800E0378(gobj);
 
         if (result)
             return;
     }
 }
 
-void ftDonkey_800E0254(HSD_GObj* fighter_gobj)
+void ftDonkey_800E0254(HSD_GObj* gobj)
 {
-    func_80084F3C(fighter_gobj);
+    func_80084F3C(gobj);
 }
 
-void ftDonkey_800E0274(HSD_GObj* fighter_gobj)
+void ftDonkey_800E0274(HSD_GObj* gobj)
 {
-    ftDonkey_800DFA70(fighter_gobj);
+    ftDonkey_800DFA70(gobj);
 }
 
-void ftDonkey_800E0294(HSD_GObj* fighter_gobj)
+void ftDonkey_800E0294(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
-    Fighter_ActionStateChange_800693AC(
-        fighter_gobj, donkey_attr->action_state + 6, 1, NULL, 0.0f, 1.0, 0.0f);
-    ftAnim_SetAnimRate(fighter_gobj, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, donkey_attr->action_state + 6, 1,
+                                       NULL, 0.0f, 1.0, 0.0f);
+    ftAnim_SetAnimRate(gobj, 0.0f);
     if (fp->ground_or_air == GA_Ground) {
         func_8007D5D4(fp);
     }

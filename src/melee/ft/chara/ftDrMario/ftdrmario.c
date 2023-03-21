@@ -106,9 +106,9 @@ void func_80149540(HSD_GObj* gobj)
     func_801497CC(gobj);
 }
 
-void ftDrMario_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftDrMario_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
 void ftDrMario_OnItemInvisible(HSD_GObj* gobj)

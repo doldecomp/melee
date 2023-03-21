@@ -191,9 +191,9 @@ f32 ftNess_GetAbsorbHeal(Fighter* fp)
         ->x94_PSI_MAGNET_HEAL_MUL;
 }
 
-void ftNess_OnItemPickup(HSD_GObj* fighter_gobj, bool catchItemFlag)
+void ftNess_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag)
 {
-    Fighter_OnItemPickup(fighter_gobj, catchItemFlag, 1, 1);
+    Fighter_OnItemPickup(gobj, catchItemFlag, 1, 1);
 }
 
 void ftNess_OnItemInvisible(HSD_GObj* gobj)
@@ -221,7 +221,7 @@ void ftNess_OnKnockbackEnter(HSD_GObj* gobj)
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftNess_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftNess_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(gobj, 1);
 }

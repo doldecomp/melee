@@ -8,15 +8,15 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>
 
-void ftSamus_80128428(HSD_GObj* fighter_gobj);
-void ftSamus_80129048(HSD_GObj* fighter_gobj);
-void ftSamus_801290A4(HSD_GObj* fighter_gobj);
-void ftSamus_801291F0(HSD_GObj* fighter_gobj);
-void ftSamus_8012A168(HSD_GObj* fighter_gobj, Vec3* spawnlocation);
-void ftSamus_8012A074(HSD_GObj* fighter_gobj);
-void ftSamus_8012B570(HSD_GObj* fighter_gobj);
-void ftSamus_8012B5F0(HSD_GObj* fighter_gobj);
-void ftSamus_8012B668(HSD_GObj* fighter_gobj);
+void ftSamus_80128428(HSD_GObj* gobj);
+void ftSamus_80129048(HSD_GObj* gobj);
+void ftSamus_801290A4(HSD_GObj* gobj);
+void ftSamus_801291F0(HSD_GObj* gobj);
+void ftSamus_8012A168(HSD_GObj* gobj, Vec3* spawnlocation);
+void ftSamus_8012A074(HSD_GObj* gobj);
+void ftSamus_8012B570(HSD_GObj* gobj);
+void ftSamus_8012B5F0(HSD_GObj* gobj);
+void ftSamus_8012B668(HSD_GObj* gobj);
 
 void ftSamus_80128C04(HSD_GObj*);
 void ftSamus_80128D3C(HSD_GObj*);
@@ -91,41 +91,41 @@ void func_800C4388(HSD_GObj*);
 void func_800C4438(HSD_GObj*);
 void func_80082B78(HSD_GObj*);
 
-static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* fighter_gobj)
+static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21DC_callback_OnTakeDamage = &ftSamus_80128428;
     fp->cb.x21E4_callback_OnDeath2 = &ftSamus_80128428;
 }
 
 //// only used in ftsamus3 so far (maybe move to there)
-static inline void ftSamus_SetAttrx2334(HSD_GObj* fighter_gobj)
+static inline void ftSamus_SetAttrx2334(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->ev.ss.x2234 = 0;
 }
 
-static inline void ftSamus_destroyAllEF(HSD_GObj* fighter_gobj)
+static inline void ftSamus_destroyAllEF(HSD_GObj* gobj)
 {
-    if (fighter_gobj) {
-        Fighter* fp = GET_FIGHTER(fighter_gobj);
+    if (gobj) {
+        Fighter* fp = GET_FIGHTER(gobj);
         if (fp->ev.ss.x2234) {
-            efLib_DestroyAll(fighter_gobj);
+            efLib_DestroyAll(gobj);
             fp->ev.ss.x2234 = 0;
         }
     }
 }
 
-static inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* fighter_gobj)
+static inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* gobj)
 {
-    if (fighter_gobj) {
-        Fighter* fp = fighter_gobj->user_data;
+    if (gobj) {
+        Fighter* fp = gobj->user_data;
         HSD_GObj* x222C = fp->ev.ss.x222C;
         if (x222C != NULL) {
             func_802B5974(x222C);
             fp->ev.ss.x222C = NULL;
         }
-        ftSamus_destroyAllEF(fighter_gobj);
+        ftSamus_destroyAllEF(gobj);
     }
 }
 

@@ -7,6 +7,6 @@
 #include <Runtime/platform.h>
 
 void ftMewtwo_SpecialN_GetPos(Fighter* fp, Vec3* sp38);
-void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* gobj);
 
 #endif

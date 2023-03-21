@@ -8,24 +8,23 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
-static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj);
-static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj);
+static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* gobj);
+static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* gobj);
 
 // 0x8014DEF0
 // https://decomp.me/scratch/6Vtu9 // Create Fire Rescue item
-void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
+void ftGameWatch_ItemRescueSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
     Fighter* fp;
     HSD_GObj* rescueGObj;
 
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = GET_FIGHTER(gobj);
     if (fp->ev.gw.x226C_rescueGObj == NULL) {
         func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * Fighter_GetModelScale(fp)) - sp10.y);
-        rescueGObj =
-            func_802C8038(fighter_gobj, &sp10, 0, fp->action_id - 0x175,
-                          fp->facing_dir, 2.5f);
+        rescueGObj = func_802C8038(gobj, &sp10, 0, fp->action_id - 0x175,
+                                   fp->facing_dir, 2.5f);
         fp->ev.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -40,9 +39,9 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
 // 0x8014DFB8
 // https://decomp.me/scratch/Wu4WV // Check if Mr. Game & Watch is performing
 // Fire Rescue
-bool ftGameWatch_ItemCheckRescueRemove(HSD_GObj* fighter_gobj)
+bool ftGameWatch_ItemCheckRescueRemove(HSD_GObj* gobj)
 {
-    enum_t ASID = GET_FIGHTER(fighter_gobj)->action_id;
+    enum_t ASID = GET_FIGHTER(gobj)->action_id;
 
     switch (ASID) {
     case AS_GAMEWATCH_SPECIALHI:
@@ -54,9 +53,9 @@ bool ftGameWatch_ItemCheckRescueRemove(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014DFE4 - Set Fire Rescue GObj pointer and callbacks to NULL
-void ftGameWatch_ItemRescueSetNULL(HSD_GObj* fighter_gobj)
+void ftGameWatch_ItemRescueSetNULL(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     fp->ev.gw.x226C_rescueGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
@@ -64,20 +63,20 @@ void ftGameWatch_ItemRescueSetNULL(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014DFFC - Remove Fire Rescue item
-void ftGameWatch_ItemRescueRemove(HSD_GObj* fighter_gobj)
+void ftGameWatch_ItemRescueRemove(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->ev.gw.x226C_rescueGObj != NULL) {
         func_802C8158(fp->ev.gw.x226C_rescueGObj);
-        ftGameWatch_ItemRescueSetNULL(fighter_gobj);
+        ftGameWatch_ItemRescueSetNULL(gobj);
     }
 }
 
 // 0x8014E04C - Apply hitlag to Fire Rescue item
-static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj)
+static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->ev.gw.x226C_rescueGObj != NULL) {
         func_802C81C8(fp->ev.gw.x226C_rescueGObj);
@@ -85,18 +84,18 @@ static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014E06C - Remove hitlag for Fire Rescue item
-static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj)
+static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->ev.gw.x226C_rescueGObj != NULL) {
         func_802C81E8(fp->ev.gw.x226C_rescueGObj);
     }
 }
 
-static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
+static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -107,9 +106,9 @@ static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
 // 0x8014E0AC
 // https://decomp.me/scratch/4Dc4b // Mr. Game & Watch's grounded Fire Rescue
 // Action State handler
-void ftGameWatch_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialHi_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -119,17 +118,17 @@ void ftGameWatch_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
     fp->x74_anim_vel.y = 0.0f;
     fp->x80_self_vel.y = 0.0f;
     func_8007D60C(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALHI, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
-    ftGameWatch_SpecialHi_SetVars(fighter_gobj);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ActionStateChange_800693AC(gobj, AS_GAMEWATCH_SPECIALHI, 0, NULL,
+                                       0.0f, 1.0f, 0.0f);
+    ftGameWatch_SpecialHi_SetVars(gobj);
+    func_8006EBA4(gobj);
     func_80088510(fp, 0x46D12, 0x7F, 0x40);
 }
 
 // 0x8014E158 - Mr. Game & Watch's aerial Fire Rescue Action State handler
-void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -137,23 +136,23 @@ void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 #endif
 
     func_8007D60C(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRHI,
-                                       0, NULL, 0.0f, 1.0f, 0.0f);
-    ftGameWatch_SpecialHi_SetVars(fighter_gobj);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ActionStateChange_800693AC(gobj, AS_GAMEWATCH_SPECIALAIRHI, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
+    ftGameWatch_SpecialHi_SetVars(gobj);
+    func_8006EBA4(gobj);
     func_80088510(fp, 0x46D12, 0x7F, 0x40);
 }
 
 // 0x8014E1F8 - Mr. Game & Watch's grounded Fire Rescue Animation callback
-void ftGameWatch_SpecialHi_Anim(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialHi_Anim(HSD_GObj* gobj)
 {
-    ftGameWatch_SpecialAirHi_Anim(fighter_gobj);
+    ftGameWatch_SpecialAirHi_Anim(gobj);
 }
 
 // 0x8014E218
 // https://decomp.me/scratch/QRkS8 // Mr. Game & Watch's aerial Fire Rescue
 // Animation callback
-void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -162,29 +161,29 @@ void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 
     ftGameWatchAttributes* gawAttrs;
 
-    gawAttrs = (GET_FIGHTER(fighter_gobj))->x2D4_specialAttributes;
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    gawAttrs = (GET_FIGHTER(gobj))->x2D4_specialAttributes;
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == gawAttrs->x60_GAMEWATCH_RESCUE_LANDING) {
-            func_800CC730(fighter_gobj);
+            func_800CC730(gobj);
             return;
         }
-        func_80096900(fighter_gobj, 1, 0, 1, 1.0f,
+        func_80096900(gobj, 1, 0, 1, 1.0f,
                       gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
     }
 }
 
 // 0x8014E290 - Mr. Game & Watch's grounded Fire Rescue IASA callback
-void ftGameWatch_SpecialHi_IASA(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialHi_IASA(HSD_GObj* gobj)
 {
-    ftGameWatch_SpecialAirHi_IASA(fighter_gobj);
+    ftGameWatch_SpecialAirHi_IASA(gobj);
 }
 
 // 0x8014E2B0
 // https://decomp.me/scratch/2aEQN // Mr. Game & Watch's aerial Fire Rescue
 // IASA callback
-void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
     f32 stick_x;
     f32 temp;
@@ -213,27 +212,27 @@ void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014E374 - Mr. Game & Watch's grounded Fire Rescue Physics callback
-void ftGameWatch_SpecialHi_Phys(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialHi_Phys(HSD_GObj* gobj)
 {
-    ftGameWatch_SpecialAirHi_Phys(fighter_gobj);
+    ftGameWatch_SpecialAirHi_Phys(gobj);
 }
 
 // 0x8014E394 - Mr. Game & Watch's aerial Fire Rescue Physics callback
-void ftGameWatch_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
-    func_80085154(fighter_gobj);
+    func_80085154(gobj);
 }
 
 // 0x8014E3B4 - Mr. Game & Watch's grounded Fire Rescue Collision callback
-void ftGameWatch_SpecialHi_Coll(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialHi_Coll(HSD_GObj* gobj)
 {
-    ftGameWatch_SpecialAirHi_Coll(fighter_gobj);
+    ftGameWatch_SpecialAirHi_Coll(gobj);
 }
 
 // 0x8014E3D4
 // https://decomp.me/scratch/4IC4C // Mr. Game & Watch's aerial Fire Rescue
 // Collision callback
-void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftGameWatchAttributes* gawAttrs;
@@ -244,16 +243,15 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = GET_FIGHTER(gobj);
     gawAttrs = fp->x2D4_specialAttributes;
 
     if (fp->x894_currentAnimFrame > 4.0f) {
         if (fp->x80_self_vel.y >= 0.0f) {
-            if (func_80081D0C(fighter_gobj) != false) {
-                ftGameWatch_ItemRescueRemove(fighter_gobj);
+            if (func_80081D0C(gobj) != false) {
+                ftGameWatch_ItemRescueRemove(gobj);
                 func_8007D7FC(fp);
-                func_800D5CB0(fighter_gobj, 0,
-                              gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+                func_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 fp->cb.x21E4_callback_OnDeath2 = NULL;
                 fp->cb.x21DC_callback_OnTakeDamage = NULL;
             }
@@ -262,15 +260,12 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
                 ledgeGrabDir = 1;
             } else
                 ledgeGrabDir = -1;
-            if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledgeGrabDir) !=
-                false)
-            {
-                func_800D5CB0(fighter_gobj, 0,
-                              gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+            if (EnvColl_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
+                func_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 return;
             }
-            if (func_80081298(fighter_gobj) != false) {
-                func_80081370(fighter_gobj);
+            if (func_80081298(gobj) != false) {
+                func_80081370(gobj);
             }
         }
     }

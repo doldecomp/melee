@@ -89,7 +89,7 @@ void func_80133690(HSD_GObj* gobj);
 void func_801336CC(HSD_GObj* gobj);
 void ftKoopa_OnLoad(HSD_GObj* gobj);
 void func_80132B38(void);
-void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftKoopa_OnItemPickup(HSD_GObj* gobj, bool bool);
 void ftKoopa_OnItemInvisible(HSD_GObj* gobj);
 void ftKoopa_OnItemVisible(HSD_GObj* gobj);
 void ftKoopa_OnItemDrop(HSD_GObj* gobj, bool bool1);

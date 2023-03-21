@@ -74,7 +74,7 @@ void func_80269978(HSD_GObj* item_gobj);
 void func_80269CA0(Item* item_data, s32 damage);
 
 /// Remove Item from Player
-void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj);
+void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* gobj);
 
 /// Destroy Item
 void func_8026A8EC(HSD_GObj* item_gobj);

@@ -2748,7 +2748,7 @@ void func_800755E8(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80075650(HSD_GObj* fighter_gobj, HSD_JObj*, u32*)
+asm void func_80075650(HSD_GObj* gobj, HSD_JObj*, u32*)
 { // clang-format off
     nofralloc
 /* 80075650 00072230  7C 08 02 A6 */	mflr r0
@@ -2915,7 +2915,7 @@ lbl_80075830:
 
 #else
 
-void func_80075650(HSD_GObj* fighter_gobj, HSD_JObj* arg1, u32* arg2)
+void func_80075650(HSD_GObj* gobj, HSD_JObj* arg1, u32* arg2)
 {
     NOT_IMPLEMENTED;
 }

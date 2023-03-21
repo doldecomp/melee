@@ -75,17 +75,17 @@ Fighter_CostumeStrings lbl_803D3988[] = {
     { lbl_803D3904, lbl_803D3910, lbl_803D3928 },
 };
 
-void ftGKoopa_OnDeath(HSD_GObj* fighter_gobj)
+void ftGKoopa_OnDeath(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* koopaAttr = fp->x2D4_specialAttributes;
 
-    func_80074A4C(fighter_gobj, 0, 0);
+    func_80074A4C(gobj, 0, 0);
     fp->dmg.x18B0 = koopaAttr->x0;
     fp->ev.gk.x222C = koopaAttr->x10;
     fp->ev.gk.x2230 = koopaAttr->x18;
@@ -109,9 +109,9 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     fp->x222A_flag.bits.b0 = true;
 }
 
-void ftGKoopa_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftGKoopa_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, true, true);
+    Fighter_OnItemPickup(gobj, bool, true, true);
 }
 
 void ftGKoopa_OnItemInvisible(HSD_GObj* gobj)

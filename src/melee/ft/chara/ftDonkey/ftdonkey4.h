@@ -3,8 +3,8 @@
 
 #include <sysdolphin/baselib/gobj.h>
 
-bool ftDonkey_800E0134(HSD_GObj* fighter_gobj);
+bool ftDonkey_800E0134(HSD_GObj* gobj);
 
-bool ftDonkey_800E0134(HSD_GObj* fighter_gobj);
+bool ftDonkey_800E0134(HSD_GObj* gobj);
 
 #endif

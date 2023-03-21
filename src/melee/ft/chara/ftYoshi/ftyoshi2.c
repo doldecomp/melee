@@ -52,49 +52,48 @@ Fighter_CostumeStrings lbl_803CECFC[] = {
 
 /* static */ extern f32 const lbl_804D9A28;
 
-static inline void spawnEffect(HSD_GObj* fighter_gobj)
+static inline void spawnEffect(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
     s32 bone_idx;
     Fighter* fp2;
     s32* x1CC;
     Fighter* fp;
-    fp = GET_FIGHTER(fighter_gobj);
-    func_80074B0C(fighter_gobj, 0, 0);
-    func_8007B0C0(fighter_gobj, 0);
+    fp = GET_FIGHTER(gobj);
+    func_80074B0C(gobj, 0, 0);
+    func_8007B0C0(gobj, 0);
 
     x1CC = &fp->x110_attr.x1CC;
     bone_idx = func_8007500C(fp, 4);
-    fp2 = GET_FIGHTER(fighter_gobj);
+    fp2 = GET_FIGHTER(gobj);
     jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
 
-    efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CFU, jobj, x1CC);
+    efAsync_Spawn(gobj, &fp2->x60C, 4U, 0x4CFU, jobj, x1CC);
 }
 
-void lbl_8012C030(HSD_GObj* fighter_gobj)
+void lbl_8012C030(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     fp->sv.ys.unk2.x0 += lbl_804D9A28;
-    func_80092BCC(fighter_gobj);
-    if (func_800925A4(fighter_gobj)) {
-        spawnEffect(fighter_gobj);
-    } else if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_800928CC(fighter_gobj);
+    func_80092BCC(gobj);
+    if (func_800925A4(gobj)) {
+        spawnEffect(gobj);
+    } else if (!ftAnim_IsFramesRemaining(gobj)) {
+        func_800928CC(gobj);
     } else {
-        func_8012B8A4(fighter_gobj);
+        func_8012B8A4(gobj);
     }
 }
 
-void lbl_8012C114(HSD_GObj* fighter_gobj)
+void lbl_8012C114(HSD_GObj* gobj)
 {
-    if (!func_80093694() && !func_8009515C(fighter_gobj) &&
-        !func_80099794(fighter_gobj) && !func_8009917C(fighter_gobj) &&
-        !func_800D8990(fighter_gobj) && !func_8009A080(fighter_gobj))
+    if (!func_80093694() && !func_8009515C(gobj) && !func_80099794(gobj) &&
+        !func_8009917C(gobj) && !func_800D8990(gobj) && !func_8009A080(gobj))
     {
         return;
     }
@@ -194,34 +193,33 @@ asm void func_8012C1D4(HSD_GObj*)
 #pragma pop
 #endif
 
-void lbl_8012C2F4(HSD_GObj* fighter_gobj)
+void lbl_8012C2F4(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[12];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     fp->sv.ys.unk2.x0 += lbl_804D9A28;
-    func_80092BCC(fighter_gobj);
+    func_80092BCC(gobj);
 
-    if (func_800925A4(fighter_gobj)) {
-        spawnEffect(fighter_gobj);
+    if (func_800925A4(gobj)) {
+        spawnEffect(gobj);
     } else if (fp->sv.ys.unk2.xC != 0 ||
                (!(fp->x221B_b0 & 1) && !(fp->x2218_flag.bits.b3)))
     {
-        func_80092BE8(fighter_gobj);
+        func_80092BE8(gobj);
     } else {
-        func_8012B8A4(fighter_gobj);
+        func_8012B8A4(gobj);
     }
 }
 
-void lbl_8012C3EC(HSD_GObj* fighter_gobj)
+void lbl_8012C3EC(HSD_GObj* gobj)
 {
-    if (!func_8009515C(fighter_gobj) && !func_80099794(fighter_gobj) &&
-        !func_8009917C(fighter_gobj) && !func_800D8990(fighter_gobj) &&
-        !func_8009A080(fighter_gobj))
+    if (!func_8009515C(gobj) && !func_80099794(gobj) && !func_8009917C(gobj) &&
+        !func_800D8990(gobj) && !func_8009A080(gobj))
     {
         return;
     }
@@ -237,16 +235,15 @@ void lbl_8012C47C(HSD_GObj* arg0)
     func_80092BAC(arg0);
 }
 
-void func_8012C49C(HSD_GObj* fighter_gobj)
+void func_8012C49C(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL,
-                                       lbl_804D9A2C, lbl_804D9A28,
-                                       lbl_804D9A2C);
+    Fighter_ActionStateChange_800693AC(gobj, 0x157, 0, NULL, lbl_804D9A2C,
+                                       lbl_804D9A28, lbl_804D9A2C);
 
     {
-        Fighter* fp0 = GET_FIGHTER(fighter_gobj);
-        func_80074B0C(fighter_gobj, 0, 0);
-        func_8007B0C0(fighter_gobj, 0);
+        Fighter* fp0 = GET_FIGHTER(gobj);
+        func_80074B0C(gobj, 0, 0);
+        func_8007B0C0(gobj, 0);
 
         {
             /// @todo Unused stack.
@@ -257,28 +254,28 @@ void func_8012C49C(HSD_GObj* fighter_gobj)
             s32* x1CC = &fp0->x110_attr.x1CC;
 
             ssize_t bone_idx = func_8007500C(fp0, 4);
-            Fighter* fp1 = GET_FIGHTER(fighter_gobj);
+            Fighter* fp1 = GET_FIGHTER(gobj);
 
             /// @todo Why is this still using @c fp0?
             HSD_JObj* jobj = fp0->x5E8_fighterBones[bone_idx].x0_jobj;
 
-            efAsync_Spawn(fighter_gobj, &fp1->x60C, 4U, 0x4CF, jobj, x1CC);
+            efAsync_Spawn(gobj, &fp1->x60C, 4U, 0x4CF, jobj, x1CC);
         }
     }
 }
 
-void lbl_8012C54C(HSD_GObj* fighter_gobj)
+void lbl_8012C54C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->sv.ys.unk2.x0 = fp->sv.ys.unk2.x0 + lbl_804D9A28;
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0)
-        func_8008A2BC(fighter_gobj);
+    if (ftAnim_IsFramesRemaining(gobj) == 0)
+        func_8008A2BC(gobj);
 }
 
 void lbl_8012C59C(HSD_GObj* arg0)
@@ -419,16 +416,16 @@ lbl_8012C774:
 #pragma pop
 #endif
 
-void lbl_8012C7A4(HSD_GObj* fighter_gobj)
+void lbl_8012C7A4(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    func_80093BC0(fighter_gobj);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    func_80093BC0(gobj);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->sv.ys.unk2.xC) {
-            func_80092BE8(fighter_gobj);
+            func_80092BE8(gobj);
         } else {
-            func_800928CC(fighter_gobj);
+            func_800928CC(gobj);
         }
     }
 }
@@ -469,13 +466,13 @@ asm void lbl_8012C830(HSD_GObj*)
 #pragma pop
 #endif
 
-void func_8012C850(HSD_GObj* fighter_gobj)
+void func_8012C850(HSD_GObj* gobj)
 {
     ftCommonData* temp_r5;
     Fighter* fp;
 
-    fp = getFighter(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x10, NULL,
+    fp = getFighter(gobj);
+    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x10, NULL,
                                        fp->x894_currentAnimFrame, lbl_804D9A28,
                                        lbl_804D9A2C);
     fp->x672_input_timer_counter = 254;
@@ -488,7 +485,7 @@ void func_8012C850(HSD_GObj* fighter_gobj)
     fp->sv.ys.unk2.x14 = p_ftCommonData->x2A4;
     temp_r5 = p_ftCommonData;
     fp->sv.ys.unk2.x18 = temp_r5->x2B4;
-    func_8009370C(fighter_gobj, lbl_8012CACC, temp_r5);
+    func_8009370C(gobj, lbl_8012CACC, temp_r5);
 }
 
 extern char* const lbl_804D3E58;
@@ -741,65 +738,61 @@ asm void lbl_8012CBFC(HSD_GObj*)
 #pragma pop
 #endif
 
-bool func_8012CC1C(HSD_GObj* fighter_gobj)
+bool func_8012CC1C(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->input.x65C_heldInputs & 0x80000000) &&
         (fp->x1998_shieldHealth >= lbl_804D9A2C))
     {
-        func_800928CC(fighter_gobj);
+        func_800928CC(gobj);
         return true;
     }
 
     return false;
 }
 
-void func_8012CC6C(HSD_GObj* fighter_gobj)
+void func_8012CC6C(HSD_GObj* gobj)
 {
-    func_8007500C(GET_FIGHTER(fighter_gobj), 52);
+    func_8007500C(GET_FIGHTER(gobj), 52);
 }
 
 extern f32 const lbl_804D9A38;
 
-void func_8012CC94(HSD_GObj* fighter_gobj, Vec3* out)
+void func_8012CC94(HSD_GObj* gobj, Vec3* out)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
     out->x = (-fp->facing_dir * attr->x10);
     out->y = attr->x14;
     out->z = lbl_804D9A38;
 }
 
-f32 func_8012CCC4(HSD_GObj* fighter_gobj)
+f32 func_8012CCC4(HSD_GObj* gobj)
 {
-    return GET_FIGHTER(fighter_gobj)->facing_dir;
+    return GET_FIGHTER(gobj)->facing_dir;
 }
 
-f32 func_8012CCD0(HSD_GObj* fighter_gobj)
+f32 func_8012CCD0(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr =
-        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
     return attr->x18;
 }
 
-f32 func_8012CCE0(HSD_GObj* fighter_gobj)
+f32 func_8012CCE0(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr =
-        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
     return attr->x1C;
 }
 
-f32 func_8012CCF0(HSD_GObj* fighter_gobj)
+f32 func_8012CCF0(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr =
-        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
     return attr->x20;
 }
 
-f32 func_8012CD00(HSD_GObj* fighter_gobj)
+f32 func_8012CD00(HSD_GObj* gobj)
 {
-    ftYoshiAttributes* attr =
-        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
     return attr->x24;
 }

@@ -101,16 +101,16 @@ Fighter_CostumeStrings lbl_803D0AB4[] = {
     { lbl_803D099C, lbl_803D09A8, lbl_803D09C4 },
 };
 
-void ftLuigi_OnDeath(HSD_GObj* fighter_gobj)
+void ftLuigi_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    func_80074A4C(fighter_gobj, 0, false);
+    Fighter* fp = GET_FIGHTER(gobj);
+    func_80074A4C(gobj, 0, false);
     fp->ev.lg.x2234 = 0;
 }
 
-void ftLuigi_OnLoad(HSD_GObj* fighter_gobj)
+void ftLuigi_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftLuigiAttributes);
@@ -118,39 +118,39 @@ void ftLuigi_OnLoad(HSD_GObj* fighter_gobj)
     func_8026B3F8(item_list[0], It_Kind_Luigi_Fire);
 }
 
-void ftLuigi_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftLuigi_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
-void ftLuigi_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftLuigi_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftLuigi_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftLuigi_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftLuigi_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
+void ftLuigi_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(fighter_gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftLuigi_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftLuigi_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftLuigiAttributes);
+    COPY_ATTRS(gobj, ftLuigiAttributes);
 }
 
-void ftLuigi_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftLuigi_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftLuigi_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftLuigi_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
 void ftLuigi_8014260C(s32 arg0, s32* arg1, s32* arg2)

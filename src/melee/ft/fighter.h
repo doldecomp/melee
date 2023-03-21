@@ -61,52 +61,51 @@ extern HSD_ObjAllocData lbl_804590AC;
 void Fighter_800679B0(void);
 void Fighter_FirstInitialize_80067A84(void);
 void Fighter_LoadCommonData(void);
-void Fighter_UpdateModelScale(HSD_GObj* fighter_gobj);
+void Fighter_UpdateModelScale(HSD_GObj* gobj);
 void Fighter_UnkInitReset_80067C98(Fighter*);
-void Fighter_UnkProcessDeath_80068354(HSD_GObj* fighter_gobj);
-void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* fighter_gobj);
+void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj);
+void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* gobj);
 void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp);
-void Fighter_ResetInputData_80068854(HSD_GObj* fighter_gobj);
-void Fighter_UnkInitLoad_80068914(HSD_GObj* fighter_gobj,
-                                  struct S_TEMP1* argdata);
+void Fighter_ResetInputData_80068854(HSD_GObj* gobj);
+void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata);
 u32 Fighter_NewSpawn_80068E40(void);
-void Fighter_80068E64(HSD_GObj* fighter_gobj);
+void Fighter_80068E64(HSD_GObj* gobj);
 HSD_GObj* Fighter_Create(struct S_TEMP1* input);
-void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj,
+void Fighter_ActionStateChange_800693AC(HSD_GObj* gobj,
                                         s32 new_action_state_index, s32 flags,
                                         HSD_GObj* otherObj, f32 animStart,
                                         f32 animSpeed, f32 animBlend);
-void Fighter_8006A1BC(HSD_GObj* fighter_gobj);
-void Fighter_8006A360(HSD_GObj* fighter_gobj);
-void Fighter_8006ABA0(HSD_GObj* fighter_gobj);
-void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* fighter_gobj);
-void Fighter_Spaghetti_8006AD10(HSD_GObj* fighter_gobj);
-void Fighter_procUpdate(HSD_GObj* fighter_gobj);
-void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* fighter_gobj);
-void Fighter_8006C27C(HSD_GObj* fighter_gobj);
-void Fighter_8006C5F4(HSD_GObj* fighter_gobj);
-void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* fighter_gobj);
-void Fighter_8006C80C(HSD_GObj* fighter_gobj);
-void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* fighter_gobj);
-void Fighter_8006CB94(HSD_GObj* fighter_gobj);
+void Fighter_8006A1BC(HSD_GObj* gobj);
+void Fighter_8006A360(HSD_GObj* gobj);
+void Fighter_8006ABA0(HSD_GObj* gobj);
+void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* gobj);
+void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj);
+void Fighter_procUpdate(HSD_GObj* gobj);
+void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* gobj);
+void Fighter_8006C27C(HSD_GObj* gobj);
+void Fighter_8006C5F4(HSD_GObj* gobj);
+void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* gobj);
+void Fighter_8006C80C(HSD_GObj* gobj);
+void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj);
+void Fighter_8006CB94(HSD_GObj* gobj);
 void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, f32 damage_amount);
 void Fighter_TakeDamage_8006CC7C(Fighter*, f32);
 void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3);
 void Fighter_8006CF5C(Fighter* fp, s32 arg1);
-void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* fighter_gobj);
-void Fighter_8006CFE0(HSD_GObj* fighter_gobj);
-void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* fighter_gobj);
-void Fighter_8006D10C(HSD_GObj* fighter_gobj);
-void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* fighter_gobj);
-void Fighter_8006D9AC(HSD_GObj* fighter_gobj);
-void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* fighter_gobj);
-void Fighter_8006DA4C(HSD_GObj* fighter_gobj);
+void Fighter_UnkSetFlag_8006CFBC(HSD_GObj* gobj);
+void Fighter_8006CFE0(HSD_GObj* gobj);
+void Fighter_UnkRecursiveFunc_8006D044(HSD_GObj* gobj);
+void Fighter_8006D10C(HSD_GObj* gobj);
+void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj);
+void Fighter_8006D9AC(HSD_GObj* gobj);
+void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* gobj);
+void Fighter_8006DA4C(HSD_GObj* gobj);
 void Fighter_Unload_8006DABC(void* user_data);
 
 void Fighter_UnkProcessDeath_80068354(HSD_GObj*);
 u32 Fighter_NewSpawn_80068E40(void);
 
-void Fighter_ActionStateChange_800693AC(HSD_GObj* fighter_gobj, s32 newAction,
+void Fighter_ActionStateChange_800693AC(HSD_GObj* gobj, s32 newAction,
                                         s32 flags, HSD_GObj* otherObj,
                                         f32 animStart, f32 animSpeed,
                                         f32 animBlend);

@@ -91,9 +91,9 @@ void ftMario_OnTakeDamage(HSD_GObj* gobj)
     ftMario_SpecialS_RemoveCape(gobj);
 }
 
-void ftMario_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftMario_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
 void ftMario_OnItemInvisible(HSD_GObj* gobj)

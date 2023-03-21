@@ -5,7 +5,7 @@
 #include <melee/ft/forward.h>
 #include <Runtime/platform.h>
 
-bool ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj);
+bool ftZelda_80139D60_Helper(HSD_GObj* gobj);
 void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp);
 
 #endif

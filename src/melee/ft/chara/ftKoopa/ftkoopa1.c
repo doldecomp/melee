@@ -138,9 +138,9 @@ void ftKoopa_OnLoad(HSD_GObj* gobj)
 
 void func_80132B38(void) {}
 
-void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftKoopa_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, true, true);
+    Fighter_OnItemPickup(gobj, bool, true, true);
 }
 
 void ftKoopa_OnItemInvisible(HSD_GObj* gobj)

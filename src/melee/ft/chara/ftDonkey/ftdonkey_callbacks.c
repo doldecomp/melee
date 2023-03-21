@@ -151,32 +151,32 @@ Fighter_CostumeStrings lbl_803CC020[] = {
     { lbl_803CBF3C, lbl_803CBF48, lbl_803CBF64 },
 };
 
-void ftDonkey_OnDeath(HSD_GObj* fighter_gobj)
+void ftDonkey_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->ev.dk.x222C = 0;
-    func_80074A4C(fighter_gobj, 0, 0);
+    func_80074A4C(gobj, 0, 0);
 }
 
-void ftDonkey_8010D774(HSD_GObj* fighter_gobj)
+void ftDonkey_8010D774(HSD_GObj* gobj)
 {
-    ftDonkey_DestroyAllEffectsPlus(fighter_gobj);
-    ftDonkey_DestroyAllEffects_SpecialHi(fighter_gobj);
+    ftDonkey_DestroyAllEffectsPlus(gobj);
+    ftDonkey_DestroyAllEffects_SpecialHi(gobj);
 }
 
-void ftDonkey_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftDonkey_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
-void ftDonkey_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftDonkey_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftDonkey_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftDonkey_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
 void ftDonkey_OnItemDrop(HSD_GObj* gobj, bool bool1)
@@ -184,18 +184,18 @@ void ftDonkey_OnItemDrop(HSD_GObj* gobj, bool bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void func_8010D96C(HSD_GObj* fighter_gobj)
+void func_8010D96C(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* attr = fp->x2D4_specialAttributes;
 
     if (fp->ev.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS)
         func_800BFFD0(fp, 0x39, 0);
 }
 
-void ftDonkey_OnLoad(HSD_GObj* fighter_gobj)
+void ftDonkey_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->x10C_ftData;
     ftDonkeyAttributes* ftData_attr = ftdata->ext_attr;
 
@@ -208,25 +208,25 @@ void ftDonkey_OnLoad(HSD_GObj* fighter_gobj)
     fp->x2CC = fp->x2D4_specialAttributes;
 }
 
-void ftDonkey_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftDonkey_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftDonkeyAttributes);
+    COPY_ATTRS(gobj, ftDonkeyAttributes);
 }
 
-void ftDonkey_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftDonkey_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftDonkey_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftDonkey_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj)
+void ftDonkey_8010DB3C(HSD_GObj* gobj)
 {
     bool bool1;
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     CollData* colldata = &fp->x6F0_collData;
 

@@ -4,6 +4,6 @@
 #include <sysdolphin/baselib/forward.h>
 #include <Runtime/platform.h>
 
-bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* fighter_gobj);
+bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj);
 
 #endif

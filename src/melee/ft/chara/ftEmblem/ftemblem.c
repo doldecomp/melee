@@ -115,9 +115,9 @@ void ftRoy_OnDeath(HSD_GObj* gobj)
     fp->ev.ms.x222C = 0;
 }
 
-void ftRoy_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftRoy_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 0, 1);
+    Fighter_OnItemPickup(gobj, bool, 0, 1);
 }
 
 void ftRoy_OnItemInvisible(HSD_GObj* gobj)

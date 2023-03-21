@@ -33,9 +33,9 @@ static inline bool ftFox_CheckAppealSCount(void)
     return false;
 }
 
-bool ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
+bool ftFox_AppealS_CheckInput(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     s32 ftKind = fp->x4_fighterKind;
 
     if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) &&
@@ -44,7 +44,7 @@ bool ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
         ((u8) fp->x682 == true))
     {
         if (ftFox_CheckAppealSCount() == 0) {
-            ftFox_AppealS_Action(fighter_gobj);
+            ftFox_AppealS_Action(gobj);
             func_80040120(fp->xC_playerID, fp->x221F_flag.bits.b4);
             return true;
         }
@@ -73,12 +73,12 @@ static s32 ASID_AppealS[2][3] = {
     { AS_FOX_APPEALS_START_L, AS_FOX_APPEALS_L, AS_FOX_APPEALS_END_L }
 };
 
-void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
+void ftFox_AppealS_Action(HSD_GObj* gobj)
 {
     s32 facingDir;
     s32 actionDir;
     s32 animCount;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     fp->sv.fx.AppealS.animCount = 0;
     facingDir = ftFox_AppealS_GetLR(1.0f, fp->facing_dir);
@@ -89,19 +89,18 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     actionDir = fp->sv.fx.AppealS.facingDir;
     animCount = fp->sv.fx.AppealS.animCount;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj,
-                                       ASID_AppealS[actionDir][animCount], 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(
+        gobj, ASID_AppealS[actionDir][animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
 }
 
 /// Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback
 static void ftFox_AppealS_OnTakeDamage(HSD_GObj*);
 
-void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
+void ftFox_AppealS_Anim(HSD_GObj* gobj)
 {
     FighterKind ftKind;
     bool flag;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -132,39 +131,39 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
             break;
         }
     }
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->sv.fx.AppealS.animCount++;
         if ((s32) fp->sv.fx.AppealS.animCount >= 3) {
-            func_8008A324(fighter_gobj);
+            func_8008A324(gobj);
             return;
         }
 
         Fighter_ActionStateChange_800693AC(
-            fighter_gobj,
+            gobj,
             ASID_AppealS[fp->sv.fx.AppealS.facingDir]
                         [fp->sv.fx.AppealS.animCount],
             0, NULL, 0.0f, 1.0f, 0.0f);
     }
 }
 
-void ftFox_AppealS_IASA(HSD_GObj* fighter_gobj)
+void ftFox_AppealS_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftFox_AppealS_Phys(HSD_GObj* fighter_gobj)
+void ftFox_AppealS_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(fighter_gobj);
+    func_80084F3C(gobj);
 }
 
-void ftFox_AppealS_Coll(HSD_GObj* fighter_gobj)
+void ftFox_AppealS_Coll(HSD_GObj* gobj)
 {
-    func_80084280(fighter_gobj);
+    func_80084280(gobj);
 }
 
-static void ftFox_AppealS_OnTakeDamage(HSD_GObj* fighter_gobj)
+static void ftFox_AppealS_OnTakeDamage(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     func_801E2AF4();
     fp->cb.x21E0_callback_OnDeath = NULL;

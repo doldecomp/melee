@@ -164,65 +164,65 @@ void ftPeach_OnLoad(HSD_GObj* gobj)
     func_8026B3F8(items[4], It_Kind_Peach_ToadSpore);
 }
 
-/* static */ void ftPeach_8011D598(HSD_GObj* fighter_gobj);
-/* static */ void ftPeach_8011E2E8(HSD_GObj* fighter_gobj);
-/* static */ void ftPeach_8011CFA0(HSD_GObj* fighter_gobj);
+/* static */ void ftPeach_8011D598(HSD_GObj* gobj);
+/* static */ void ftPeach_8011E2E8(HSD_GObj* gobj);
+/* static */ void ftPeach_8011CFA0(HSD_GObj* gobj);
 
-void ftPeach_8011B704(HSD_GObj* fighter_gobj)
+void ftPeach_8011B704(HSD_GObj* gobj)
 {
-    ftPeach_8011D598(fighter_gobj);
-    ftPeach_8011E2E8(fighter_gobj);
-    ftPeach_8011CFA0(fighter_gobj);
+    ftPeach_8011D598(gobj);
+    ftPeach_8011E2E8(gobj);
+    ftPeach_8011CFA0(gobj);
 }
 
-void ftPeach_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftPeach_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
-void ftPeach_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftPeach_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftPeach_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftPeach_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftPeach_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
+void ftPeach_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(fighter_gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftPeach_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftPeach_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftPeachAttributes);
+    COPY_ATTRS(gobj, ftPeachAttributes);
 }
 
-void ftPeach_8011B93C(HSD_GObj* fighter_gobj)
+void ftPeach_8011B93C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    s32 result = func_80074A74(fighter_gobj, 2);
+    s32 result = func_80074A74(gobj, 2);
 
     if (result == -1)
-        func_80074A4C(fighter_gobj, 2, 0);
+        func_80074A4C(gobj, 2, 0);
     else
-        func_80074A4C(fighter_gobj, 2, -1);
+        func_80074A4C(gobj, 2, -1);
 }
 
-void ftPeach_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftPeach_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftPeach_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftPeach_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
 s32 ftPeach_8011BA20(Fighter* fp)

@@ -482,7 +482,7 @@ inline void RunCallbackUnk(HSD_GObjInteraction proc, HSD_GObj* gobj0,
 }
 
 /// Remove item from player on death?
-void func_8026B7F8(HSD_GObj* fighter_gobj)
+void func_8026B7F8(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -493,9 +493,9 @@ void func_8026B7F8(HSD_GObj* fighter_gobj)
     for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
         owner = ip->owner;
-        RunCallbackUnk(ip->xB8_itemLogicTable->evt_unk, cur, fighter_gobj);
+        RunCallbackUnk(ip->xB8_itemLogicTable->evt_unk, cur, gobj);
 
-        if (ip->xDC8_word.flags.x13 && owner == fighter_gobj)
+        if (ip->xDC8_word.flags.x13 && owner == gobj)
             func_8026A8EC(cur);
     }
 }
@@ -777,9 +777,9 @@ void func_8026BB44(HSD_GObj* item_gobj)
 extern void func_80086990(HSD_GObj*, Vec3*);
 
 /// Adjust item's position to fp bone
-void func_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos)
+void func_8026BB68(HSD_GObj* gobj, Vec3* pos)
 {
-    func_80086990(fighter_gobj, pos);
+    func_80086990(gobj, pos);
 }
 
 /// Adjust item's position based on ECB?
@@ -1179,10 +1179,10 @@ bool func_8026C1E8(HSD_GObj* item_gobj)
 }
 
 /// Get item owner's port number
-void func_8026C220(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj)
+void func_8026C220(HSD_GObj* item_gobj, HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(item_gobj);
-    ip->xCB0_source_ply = (u8) func_80086BE0(fighter_gobj);
+    ip->xCB0_source_ply = (u8) func_80086BE0(gobj);
 }
 
 /// Find the closest item to the given position?

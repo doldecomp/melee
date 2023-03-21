@@ -106,12 +106,12 @@ void func_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3, f32 arg4)
     fp->x80_self_vel.y = diff.y;
 }
 
-void func_8015BF74(HSD_GObj* fighter_gobj, f32 x_diff_max)
+void func_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Vec3 vec;
 
-    func_8015C208(fighter_gobj, &vec);
+    func_8015C208(gobj, &vec);
 
     {
         f32 x_diff = vec.x - fp->xB0_pos.x;
@@ -123,11 +123,11 @@ void func_8015BF74(HSD_GObj* fighter_gobj, f32 x_diff_max)
     }
 }
 
-void func_8015C010(HSD_GObj* fighter_gobj, f32 x_diff_max)
+void func_8015C010(HSD_GObj* gobj, f32 x_diff_max)
 {
     Vec3 vec;
-    Fighter* fp = fighter_gobj->user_data;
-    func_8015C208(fighter_gobj, &vec);
+    Fighter* fp = gobj->user_data;
+    func_8015C208(gobj, &vec);
 
     {
         f32 x_diff = vec.x - fp->xB0_pos.x;
@@ -139,10 +139,10 @@ void func_8015C010(HSD_GObj* fighter_gobj, f32 x_diff_max)
     }
 }
 
-void func_8015C09C(HSD_GObj* fighter_gobj, f32 facing_dir)
+void func_8015C09C(HSD_GObj* gobj, f32 facing_dir)
 {
-    HSD_JObj* jobj = GET_JOBJ(fighter_gobj);
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     Quaternion quat = { 0 };
 
     fp->facing_dir = facing_dir;

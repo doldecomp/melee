@@ -12,7 +12,7 @@ static f32 const lbl_804D83A0 = -1.0F;
 static f32 const lbl_804D83A4 = 1.0F;
 
 #pragma push
-asm void func_80081938(HSD_GObj* fighter_gobj)
+asm void func_80081938(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80081938 0007E518  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -48,7 +48,7 @@ asm void func_80081938(HSD_GObj* fighter_gobj)
 
 #else
 
-void func_80081938(HSD_GObj* fighter_gobj)
+void func_80081938(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -58,7 +58,7 @@ void func_80081938(HSD_GObj* fighter_gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800819A8(HSD_GObj* fighter_gobj)
+asm void func_800819A8(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 800819A8 0007E588  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -88,7 +88,7 @@ asm void func_800819A8(HSD_GObj* fighter_gobj)
 
 #else
 
-void func_800819A8(HSD_GObj* fighter_gobj)
+void func_800819A8(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }

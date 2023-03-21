@@ -6,19 +6,19 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 
-bool ftDonkey_800DF938(HSD_GObj* fighter_gobj)
+bool ftDonkey_800DF938(HSD_GObj* gobj)
 {
-    if (func_8008A1FC(fighter_gobj)) {
-        ftDonkey_800DF980(fighter_gobj);
+    if (func_8008A1FC(gobj)) {
+        ftDonkey_800DF980(gobj);
         return true;
     }
 
     return false;
 }
 
-void ftDonkey_800DF980(HSD_GObj* fighter_gobj)
+void ftDonkey_800DF980(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr;
 
     /// @todo Unused stack.
@@ -30,28 +30,28 @@ void ftDonkey_800DF980(HSD_GObj* fighter_gobj)
         func_8007D7FC(fp);
     }
     donkey_attr = getFtSpecialAttrs2CC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, donkey_attr->action_state,
-                                       0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(gobj, donkey_attr->action_state, 0,
+                                       NULL, 0.0f, 1.0f, 0.0f);
 }
 
-void ftDonkey_800DF9F0(HSD_GObj* fighter_gobj)
+void ftDonkey_800DF9F0(HSD_GObj* gobj)
 {
-    if ((!func_80094EA4(fighter_gobj)) && (!ftDonkey_800E0378(fighter_gobj)) &&
-        (!ftDonkey_800E0134(fighter_gobj)))
+    if ((!func_80094EA4(gobj)) && (!ftDonkey_800E0378(gobj)) &&
+        (!ftDonkey_800E0134(gobj)))
     {
-        s32 result = ftDonkey_800DFA98(fighter_gobj);
+        s32 result = ftDonkey_800DFA98(gobj);
 
         if (result)
             return;
     }
 }
 
-void ftDonkey_800DFA50(HSD_GObj* fighter_gobj)
+void ftDonkey_800DFA50(HSD_GObj* gobj)
 {
-    func_80084F3C(fighter_gobj);
+    func_80084F3C(gobj);
 }
 
-void ftDonkey_800DFA70(HSD_GObj* fighter_gobj)
+void ftDonkey_800DFA70(HSD_GObj* gobj)
 {
-    func_8008403C(fighter_gobj, &ftDonkey_800E0294);
+    func_8008403C(gobj, &ftDonkey_800E0294);
 }

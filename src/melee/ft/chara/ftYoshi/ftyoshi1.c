@@ -159,9 +159,9 @@ void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
     }
 }
 
-void func_8012B8A4(HSD_GObj* fighter_gobj)
+void func_8012B8A4(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -173,23 +173,23 @@ void func_8012B8A4(HSD_GObj* fighter_gobj)
     func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, tempf);
 }
 
-void func_8012B918(HSD_GObj* fighter_gobj)
+void func_8012B918(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, 0.0f);
     func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, 0.0f);
 }
 
-void ftYoshi_OnDeath(HSD_GObj* fighter_gobj)
+void ftYoshi_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    func_80074A4C(fighter_gobj, 0, 0);
+    Fighter* fp = GET_FIGHTER(gobj);
+    func_80074A4C(gobj, 0, 0);
     fp->ev.ys.x2238 = 0;
 }
 
 // https://decomp.me/scratch/5TPxg
-void ftYoshi_OnLoad(HSD_GObj* fighter_gobj)
+void ftYoshi_OnLoad(HSD_GObj* gobj)
 {
     void** item_list;
     ftYoshiAttributes* other_attr;
@@ -199,7 +199,7 @@ void ftYoshi_OnLoad(HSD_GObj* fighter_gobj)
     struct S_UNK_YOSHI1* temp_r27;
     Fighter* fp;
 
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = GET_FIGHTER(gobj);
     temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5B8;
     ft = fp->x10C_ftData;
     temp_r28 = (struct S_UNK_YOSHI1*) fp->x5BC;
@@ -221,13 +221,13 @@ void ftYoshi_OnLoad(HSD_GObj* fighter_gobj)
     fp->x2226_flag.bits.b1 = 1;
 }
 
-/* static */ void func_8012E270(HSD_GObj* fighter_gobj);
-/* static */ void func_8012DF18(HSD_GObj* fighter_gobj);
+/* static */ void func_8012E270(HSD_GObj* gobj);
+/* static */ void func_8012DF18(HSD_GObj* gobj);
 
-void ftYoshi_8012BA8C(HSD_GObj* fighter_gobj)
+void ftYoshi_8012BA8C(HSD_GObj* gobj)
 {
-    func_8012E270(fighter_gobj);
-    func_8012DF18(fighter_gobj);
+    func_8012E270(gobj);
+    func_8012DF18(gobj);
 }
 
 f32 ftYoshi_8012BAC0(Fighter* fp)
@@ -236,43 +236,43 @@ f32 ftYoshi_8012BAC0(Fighter* fp)
     return attr->x120;
 }
 
-void ftYoshi_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftYoshi_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
-void ftYoshi_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftYoshi_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftYoshi_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftYoshi_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftYoshi_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
+void ftYoshi_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(fighter_gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftYoshi_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftYoshi_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftYoshiAttributes);
+    COPY_ATTRS(gobj, ftYoshiAttributes);
 }
 
-void ftYoshi_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftYoshi_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 1);
-    ftAnim_ApplyPartAnim(fighter_gobj, 3, 3, 0.0f);
-    ftAnim_ApplyPartAnim(fighter_gobj, 4, 3, 0.0f);
+    Fighter_OnKnockbackEnter(gobj, 1);
+    ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
 }
 
-void ftYoshi_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftYoshi_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
-    ftAnim_ApplyPartAnim(fighter_gobj, 3, 2, 0.0f);
-    ftAnim_ApplyPartAnim(fighter_gobj, 4, 2, 0.0f);
+    Fighter_OnKnockbackExit(gobj, 1);
+    ftAnim_ApplyPartAnim(gobj, 3, 2, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 4, 2, 0.0f);
 }
 
 /* static */ extern f32 const lbl_804D9A28;
@@ -328,20 +328,20 @@ asm unk_t func_8012BDA0(void)
 
 #endif
 
-void func_8012BE3C(HSD_GObj* fighter_gobj) {
+void func_8012BE3C(HSD_GObj* gobj) {
     s32* x1CC;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     s32 bone_idx;
     Fighter* fp2;
     HSD_JObj* jobj;
-    func_80074B0C(fighter_gobj, 0, 0);
-    func_8007B0C0(fighter_gobj, 0);
+    func_80074B0C(gobj, 0, 0);
+    func_8007B0C0(gobj, 0);
 
     x1CC = &fp->x110_attr.x1CC;
     bone_idx = func_8007500C(fp, 4);
-    fp2 = GET_FIGHTER(fighter_gobj);
+    fp2 = GET_FIGHTER(gobj);
     jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
-    efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
+    efAsync_Spawn(gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
 }
 
 #ifdef MWERKS_GEKKO

@@ -133,7 +133,7 @@ s32 func_8026B7E0(void);
 s32 func_8026B7E8(HSD_GObj* item_gobj);
 
 /// Remove item from player on death?
-void func_8026B7F8(HSD_GObj* fighter_gobj);
+void func_8026B7F8(HSD_GObj* gobj);
 
 /// Remove all GObj interaction references from item
 bool func_8026B894(HSD_GObj* item_gobj, HSD_GObj* referenced_gobj);
@@ -156,7 +156,7 @@ void func_8026BB20(HSD_GObj* item_gobj);
 void func_8026BB44(HSD_GObj* item_gobj);
 
 /// Adjust item's position to fp bone
-void func_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos);
+void func_8026BB68(HSD_GObj* gobj, Vec3* pos);
 
 /// Adjust item's position based on ECB?
 void func_8026BB88(HSD_GObj* item_gobj, Vec3* pos);
@@ -231,7 +231,7 @@ u32 func_8026C1D4(void);
 bool func_8026C1E8(HSD_GObj* item_gobj);
 
 /// Get item owner's port number
-void func_8026C220(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj);
+void func_8026C220(HSD_GObj* item_gobj, HSD_GObj* gobj);
 
 /// Find the closest item to the given position?
 HSD_GObj* func_8026C258(Vec3* vector, f32 facingDir);

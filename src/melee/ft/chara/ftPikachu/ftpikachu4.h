@@ -4,6 +4,6 @@
 #include <sysdolphin/baselib/forward.h>
 #include <Runtime/platform.h>
 
-bool ftPikachu_GetBool(HSD_GObj* fighter_gobj);
+bool ftPikachu_GetBool(HSD_GObj* gobj);
 
 #endif

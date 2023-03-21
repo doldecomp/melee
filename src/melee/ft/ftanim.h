@@ -8,8 +8,8 @@
 
 void func_8006E9B4(HSD_GObj*);
 void func_8006EBA4(HSD_GObj*);
-void func_8006EBE8(HSD_GObj* fighter_gobj, f32, f32, f32);
-void func_8006F0FC(HSD_GObj* fighter_gobj, f32);
+void func_8006EBE8(HSD_GObj* gobj, f32, f32, f32);
+void func_8006F0FC(HSD_GObj* gobj, f32);
 void ftAnim_SetAnimRate(HSD_GObj*, f32);
 bool ftAnim_IsFramesRemaining(HSD_GObj*);
 f32 func_8006F484(void*);
