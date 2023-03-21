@@ -2,6 +2,7 @@
 
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
+#include "ft/inlines.h"
 
 void lbl_8015236C(HSD_GObj* arg0) {}
 

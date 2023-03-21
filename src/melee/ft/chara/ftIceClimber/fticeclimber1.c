@@ -1,5 +1,3 @@
-#include "ft/forward.h"
-
 #include "fticeclimber1.h"
 
 #include "fticeclimber.h"
@@ -9,6 +7,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"

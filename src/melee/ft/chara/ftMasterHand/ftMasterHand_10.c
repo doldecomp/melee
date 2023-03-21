@@ -5,6 +5,7 @@
 
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
+#include "ft/inlines.h"
 
 // 80152138 14ED18
 // https://decomp.me/scratch/NAMEj

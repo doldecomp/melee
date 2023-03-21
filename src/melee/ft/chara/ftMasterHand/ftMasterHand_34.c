@@ -2,6 +2,7 @@
 
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 
 // 80155D1C 1528FC
 // https://decomp.me/scratch/YDeLe

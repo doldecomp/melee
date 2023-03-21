@@ -6,6 +6,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftSeak/ftSeak_SpecialLw.h"
 #include "ftSeak/ftSeak_SpecialN.h"

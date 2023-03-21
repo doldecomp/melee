@@ -4,6 +4,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 
 // 0x8014665C
 // https://decomp.me/scratch/ktG8y // Set flags

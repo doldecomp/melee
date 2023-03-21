@@ -6,6 +6,7 @@
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
+#include "ft/inlines.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 

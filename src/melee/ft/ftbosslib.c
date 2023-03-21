@@ -5,6 +5,7 @@
 #include "ftlib.h"
 
 #include "cm/camera.h"
+#include "ft/inlines.h"
 #include "it/item.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"

@@ -7,6 +7,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
+#include "ft/inlines.h"
 
 static void lbl_801511FC(HSD_GObj* gobj);
 

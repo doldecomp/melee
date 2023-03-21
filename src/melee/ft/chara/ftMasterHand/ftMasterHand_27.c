@@ -7,6 +7,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ftCrazyHand/ftcrazyhand.h"
 
 // 80155074 151C54

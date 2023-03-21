@@ -9,6 +9,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 
 // 80154D78 151958
 // https://decomp.me/scratch/DzZiN

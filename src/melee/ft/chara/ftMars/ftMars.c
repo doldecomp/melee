@@ -6,6 +6,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <common_structs.h>

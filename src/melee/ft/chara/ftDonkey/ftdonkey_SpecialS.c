@@ -3,6 +3,7 @@
 #include "ef/eflib.h"
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
+#include "ft/inlines.h"
 #include "ftDonkey/ftdonkey.h"
 
 void ftDonkey_SpecialS_StartMotion(HSD_GObj* gobj)

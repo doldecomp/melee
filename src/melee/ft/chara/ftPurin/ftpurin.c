@@ -11,6 +11,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "gm/code_801601C4.h"
 #include "gr/grstadium.h"

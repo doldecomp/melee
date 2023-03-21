@@ -4,6 +4,7 @@
 
 #include "ft/fighter.h"
 #include "ft/ftbosslib.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <dolphin/mtx/types.h>

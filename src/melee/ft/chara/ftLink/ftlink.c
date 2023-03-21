@@ -8,6 +8,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCLink/ftCLink_Init.h"
 #include "lb/lbmthp.h"

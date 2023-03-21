@@ -1,6 +1,7 @@
 #include "ftZakoBoy/ftzakoboy.h"
 
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 char lbl_803D34E8[] = "PlBo.dat";

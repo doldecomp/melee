@@ -1,6 +1,7 @@
 #include "ftZakoGirl/ftzakogirl.h"
 
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 
 char lbl_803D3568[] = "PlGl.dat";
 char lbl_803D3574[] = "ftDataGirl";

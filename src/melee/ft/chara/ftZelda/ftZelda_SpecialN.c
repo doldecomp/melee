@@ -7,6 +7,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 
 void ftZelda_8013A830(HSD_GObj* gobj)
 {

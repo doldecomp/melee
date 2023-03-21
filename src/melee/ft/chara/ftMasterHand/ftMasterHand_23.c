@@ -8,6 +8,7 @@
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 
 // 80154A78 151658
 // https://decomp.me/scratch/ci0xf

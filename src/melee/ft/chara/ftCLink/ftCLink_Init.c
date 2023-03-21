@@ -7,6 +7,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftLink/ftlink.h"
 #include "lb/lbmthp.h"

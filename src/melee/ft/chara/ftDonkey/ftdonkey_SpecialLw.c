@@ -7,6 +7,7 @@
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
+#include "ft/inlines.h"
 
 void ftDonkey_SpecialLw_StartMotion(HSD_GObj* gobj)
 {

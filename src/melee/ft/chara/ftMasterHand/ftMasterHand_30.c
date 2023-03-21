@@ -8,6 +8,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 
 /// @todo Fix weird forward declaration
 extern const f32 neg1;

@@ -2,6 +2,7 @@
 
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
+#include "ft/inlines.h"
 #include "it/code_8027CF30.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbunknown_001.h"

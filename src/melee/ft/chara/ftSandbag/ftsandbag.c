@@ -4,6 +4,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "lb/lbunknown_001.h"
 

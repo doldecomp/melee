@@ -6,6 +6,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
+#include "ft/inlines.h"
 #include "ftMewtwo/ftmewtwo.h"
 #include "lb/lbunknown_001.h"
 #include "melee/ft/types.h"

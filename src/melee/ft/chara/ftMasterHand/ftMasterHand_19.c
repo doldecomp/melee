@@ -4,6 +4,7 @@
 
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
+#include "ft/inlines.h"
 
 #include <dolphin/mtx/types.h>
 

@@ -9,6 +9,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "pl/pl_unknown_001.h"
 
 // 0x80119E14

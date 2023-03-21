@@ -6,6 +6,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
+#include "ft/inlines.h"
 #include "ftNess/ftNess.h"
 #include "ftSeak/ftSeak_Init.h"
 #include "it/code_8027CF30.h"

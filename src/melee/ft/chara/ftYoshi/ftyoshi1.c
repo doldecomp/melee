@@ -10,6 +10,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <placeholder.h>

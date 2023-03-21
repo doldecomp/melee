@@ -7,6 +7,7 @@
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/inlines.h"
 
 void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* gobj)
 {

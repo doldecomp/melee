@@ -4,6 +4,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 MotionState ftCrazyHand_MotionStateTable[] = {

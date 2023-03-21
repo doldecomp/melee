@@ -4,6 +4,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F
