@@ -142,7 +142,7 @@ Vec3 lbl_803D0610[] = {
 };
 /* static */ extern char* lbl_803D05B4[5];
 
-void func_8013C2F8(void)
+void ftPurin_8013C2F8(void)
 {
     lbl_8045A1E0[0] = NULL;
     lbl_8045A1E0[1] = NULL;
@@ -158,10 +158,10 @@ void ftPurin_OnDeath(HSD_GObj* gobj)
 
 void ftPurin_OnUserDataRemove(HSD_GObj* gobj)
 {
-    func_8013C494(gobj);
+    ftPurin_8013C494(gobj);
 }
 
-void func_8013C360(HSD_GObj* gobj)
+void ftPurin_8013C360(HSD_GObj* gobj)
 {
     HSD_Joint** joints = lbl_8045A1E0;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -193,7 +193,7 @@ void func_8013C360(HSD_GObj* gobj)
     fp->fv.pr.x223C = 0;
 }
 
-void func_8013C494(HSD_GObj* gobj)
+void ftPurin_8013C494(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -205,7 +205,7 @@ void func_8013C494(HSD_GObj* gobj)
     }
 }
 
-void func_8013C4F0(HSD_GObj* gobj, int arg1, Mtx vmtx)
+void ftPurin_8013C4F0(HSD_GObj* gobj, int arg1, Mtx vmtx)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -229,7 +229,7 @@ void func_8013C4F0(HSD_GObj* gobj, int arg1, Mtx vmtx)
     }
 }
 
-void func_8013C614(Fighter* fp, int arg1, bool arg2)
+void ftPurin_8013C614(Fighter* fp, int arg1, bool arg2)
 {
     if (fp->fv.pr.x223C) {
         if (arg2)
@@ -239,7 +239,7 @@ void func_8013C614(Fighter* fp, int arg1, bool arg2)
     }
 }
 
-void* func_8013C664(HSD_GObj* gobj)
+void* ftPurin_8013C664(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -255,7 +255,7 @@ void ftPurin_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftPurinAttributes);
     fp->x2222_flag.bits.b1 = 1;
     fp->x2D0 = fp->x2D4_specialAttributes;
-    func_8013C360(gobj);
+    ftPurin_8013C360(gobj);
 }
 
 void ftPurin_OnItemPickup(HSD_GObj* gobj, bool bool)
@@ -535,7 +535,7 @@ asm void lbl_8013CCA8(HSD_GObj*)
 /* 8013CCC0 001398A0  2C 03 00 00 */	cmpwi r3, 0
 /* 8013CCC4 001398A4  40 82 00 0C */	bne lbl_8013CCD0
 /* 8013CCC8 001398A8  7F E3 FB 78 */	mr r3, r31
-/* 8013CCCC 001398AC  48 00 00 69 */	bl func_8013CD34
+/* 8013CCCC 001398AC  48 00 00 69 */	bl ftPurin_8013CD34
 lbl_8013CCD0:
 /* 8013CCD0 001398B0  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013CCD4 001398B4  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -561,7 +561,7 @@ asm void lbl_8013CCE4(HSD_GObj*)
 /* 8013CD00 001398E0  2C 03 00 00 */	cmpwi r3, 0
 /* 8013CD04 001398E4  41 82 00 10 */	beq lbl_8013CD14
 /* 8013CD08 001398E8  7F E3 FB 78 */	mr r3, r31
-/* 8013CD0C 001398EC  48 00 00 CD */	bl func_8013CDD8
+/* 8013CD0C 001398EC  48 00 00 CD */	bl ftPurin_8013CDD8
 /* 8013CD10 001398F0  48 00 00 10 */	b lbl_8013CD20
 lbl_8013CD14:
 /* 8013CD14 001398F4  7F E3 FB 78 */	mr r3, r31
@@ -577,7 +577,7 @@ lbl_8013CD20:
 #pragma pop
 #endif
 
-void func_8013CD34(HSD_GObj* gobj)
+void ftPurin_8013CD34(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -597,7 +597,7 @@ void func_8013CD34(HSD_GObj* gobj)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8013CDD8(HSD_GObj*)
+asm void ftPurin_8013CDD8(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CDD8 001399B8  7C 08 02 A6 */	mflr r0
@@ -870,7 +870,7 @@ asm void lbl_8013D08C(HSD_GObj*)
 /* 8013D0A4 00139C84  2C 03 00 00 */	cmpwi r3, 0
 /* 8013D0A8 00139C88  40 82 00 0C */	bne lbl_8013D0B4
 /* 8013D0AC 00139C8C  7F E3 FB 78 */	mr r3, r31
-/* 8013D0B0 00139C90  48 00 00 55 */	bl func_8013D104
+/* 8013D0B0 00139C90  48 00 00 55 */	bl ftPurin_8013D104
 lbl_8013D0B4:
 /* 8013D0B4 00139C94  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013D0B8 00139C98  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -895,7 +895,7 @@ asm void lbl_8013D0C8(HSD_GObj*)
 /* 8013D0E0 00139CC0  2C 03 00 00 */	cmpwi r3, 0
 /* 8013D0E4 00139CC4  41 82 00 0C */	beq lbl_8013D0F0
 /* 8013D0E8 00139CC8  7F E3 FB 78 */	mr r3, r31
-/* 8013D0EC 00139CCC  48 00 00 B1 */	bl func_8013D19C
+/* 8013D0EC 00139CCC  48 00 00 B1 */	bl ftPurin_8013D19C
 lbl_8013D0F0:
 /* 8013D0F0 00139CD0  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013D0F4 00139CD4  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -908,7 +908,7 @@ lbl_8013D0F0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8013D104(HSD_GObj*)
+asm void ftPurin_8013D104(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D104 00139CE4  7C 08 02 A6 */	mflr r0
@@ -957,7 +957,7 @@ lbl_8013D184:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8013D19C(HSD_GObj*)
+asm void ftPurin_8013D19C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D19C 00139D7C  7C 08 02 A6 */	mflr r0
@@ -1279,7 +1279,7 @@ asm void lbl_8013D518(HSD_GObj*)
 /* 8013D530 0013A110  2C 03 00 00 */	cmpwi r3, 0
 /* 8013D534 0013A114  40 82 00 0C */	bne lbl_8013D540
 /* 8013D538 0013A118  7F E3 FB 78 */	mr r3, r31
-/* 8013D53C 0013A11C  48 00 00 55 */	bl func_8013D590
+/* 8013D53C 0013A11C  48 00 00 55 */	bl ftPurin_8013D590
 lbl_8013D540:
 /* 8013D540 0013A120  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013D544 0013A124  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -1304,7 +1304,7 @@ asm void lbl_8013D554(HSD_GObj*)
 /* 8013D56C 0013A14C  2C 03 00 00 */	cmpwi r3, 0
 /* 8013D570 0013A150  41 82 00 0C */	beq lbl_8013D57C
 /* 8013D574 0013A154  7F E3 FB 78 */	mr r3, r31
-/* 8013D578 0013A158  48 00 00 79 */	bl func_8013D5F0
+/* 8013D578 0013A158  48 00 00 79 */	bl ftPurin_8013D5F0
 lbl_8013D57C:
 /* 8013D57C 0013A15C  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013D580 0013A160  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -1317,7 +1317,7 @@ lbl_8013D57C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8013D590(HSD_GObj*)
+asm void ftPurin_8013D590(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D590 0013A170  7C 08 02 A6 */	mflr r0
@@ -1350,7 +1350,7 @@ asm void func_8013D590(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8013D5F0(HSD_GObj*)
+asm void ftPurin_8013D5F0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D5F0 0013A1D0  7C 08 02 A6 */	mflr r0
@@ -1594,7 +1594,7 @@ asm void lbl_8013D8B0(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8013D8E4(HSD_GObj*)
+asm void ftPurin_8013D8E4(HSD_GObj*)
 {
     // clang-format off
     nofralloc
@@ -1696,7 +1696,7 @@ extern f32 const lbl_804D9C50;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8013DA24(HSD_GObj*)
+asm void ftPurin_8013DA24(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013DA24 0013A604  7C 08 02 A6 */	mflr r0
@@ -1861,7 +1861,7 @@ lbl_8013DC24:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8013DC64(HSD_GObj*)
+asm void ftPurin_8013DC64(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013DC64 0013A844  7C 08 02 A6 */	mflr r0
@@ -1935,7 +1935,7 @@ extern f32 const lbl_804D9C60;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8013DD54(HSD_GObj*)
+asm void ftPurin_8013DD54(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013DD54 0013A934  7C 08 02 A6 */	mflr r0
@@ -2082,7 +2082,7 @@ lbl_8013DEF0:
 /* 8013DF20 0013AB00  90 1F 22 00 */	stw r0, 0x2200(r31)
 /* 8013DF24 0013AB04  4B F3 0C 81 */	bl func_8006EBA4
 /* 8013DF28 0013AB08  7F A3 EB 78 */	mr r3, r29
-/* 8013DF2C 0013AB0C  4B FF FD 39 */	bl func_8013DC64
+/* 8013DF2C 0013AB0C  4B FF FD 39 */	bl ftPurin_8013DC64
 /* 8013DF30 0013AB10  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
 /* 8013DF34 0013AB14  D0 1F 00 78 */	stfs f0, 0x78(r31)
 /* 8013DF38 0013AB18  D0 1F 00 84 */	stfs f0, 0x84(r31)
@@ -2139,7 +2139,7 @@ lbl_8013DFA8:
 /* 8013DFD8 0013ABB8  90 1F 22 00 */	stw r0, 0x2200(r31)
 /* 8013DFDC 0013ABBC  4B F3 0B C9 */	bl func_8006EBA4
 /* 8013DFE0 0013ABC0  7F A3 EB 78 */	mr r3, r29
-/* 8013DFE4 0013ABC4  4B FF FC 81 */	bl func_8013DC64
+/* 8013DFE4 0013ABC4  4B FF FC 81 */	bl ftPurin_8013DC64
 /* 8013DFE8 0013ABC8  C0 1E 00 3C */	lfs f0, 0x3c(r30)
 /* 8013DFEC 0013ABCC  D0 1F 00 78 */	stfs f0, 0x78(r31)
 /* 8013DFF0 0013ABD0  C0 1E 00 54 */	lfs f0, 0x54(r30)
@@ -2240,7 +2240,7 @@ asm void lbl_8013E0F0(HSD_GObj*)
 /* 8013E10C 0013ACEC  7C 7D 1B 78 */	mr r29, r3
 /* 8013E110 0013ACF0  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8013E114 0013ACF4  83 DF 02 D4 */	lwz r30, 0x2d4(r31)
-/* 8013E118 0013ACF8  4B FF FC 3D */	bl func_8013DD54
+/* 8013E118 0013ACF8  4B FF FC 3D */	bl ftPurin_8013DD54
 /* 8013E11C 0013ACFC  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
 /* 8013E120 0013AD00  3C 60 43 30 */	lis r3, 0x4330
 /* 8013E124 0013AD04  D0 1F 23 60 */	stfs f0, 0x2360(r31)
@@ -2363,7 +2363,7 @@ asm void lbl_8013E2A0(HSD_GObj*)
 /* 8013E2BC 0013AE9C  7C 7D 1B 78 */	mr r29, r3
 /* 8013E2C0 0013AEA0  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8013E2C4 0013AEA4  83 DF 02 D4 */	lwz r30, 0x2d4(r31)
-/* 8013E2C8 0013AEA8  4B FF FA 8D */	bl func_8013DD54
+/* 8013E2C8 0013AEA8  4B FF FA 8D */	bl ftPurin_8013DD54
 /* 8013E2CC 0013AEAC  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
 /* 8013E2D0 0013AEB0  3C 60 43 30 */	lis r3, 0x4330
 /* 8013E2D4 0013AEB4  D0 1F 23 60 */	stfs f0, 0x2360(r31)
@@ -2473,7 +2473,7 @@ asm void lbl_8013E410(HSD_GObj*)
 /* 8013E42C 0013B00C  7C 7B 1B 78 */	mr r27, r3
 /* 8013E430 0013B010  83 A3 00 2C */	lwz r29, 0x2c(r3)
 /* 8013E434 0013B014  83 9D 02 D4 */	lwz r28, 0x2d4(r29)
-/* 8013E438 0013B018  4B FF F9 1D */	bl func_8013DD54
+/* 8013E438 0013B018  4B FF F9 1D */	bl ftPurin_8013DD54
 /* 8013E43C 0013B01C  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
 /* 8013E440 0013B020  D0 1D 23 60 */	stfs f0, 0x2360(r29)
 /* 8013E444 0013B024  83 DB 00 2C */	lwz r30, 0x2c(r27)
@@ -2607,7 +2607,7 @@ lbl_8013E5D8:
 /* 8013E61C 0013B1FC  90 04 23 4C */	stw r0, 0x234c(r4)
 lbl_8013E620:
 /* 8013E620 0013B200  7F 63 DB 78 */	mr r3, r27
-/* 8013E624 0013B204  4B FF F2 C1 */	bl func_8013D8E4
+/* 8013E624 0013B204  4B FF F2 C1 */	bl ftPurin_8013D8E4
 /* 8013E628 0013B208  80 7D 23 6C */	lwz r3, 0x236c(r29)
 /* 8013E62C 0013B20C  3C 00 43 30 */	lis r0, 0x4330
 /* 8013E630 0013B210  C8 22 A2 98 */	lfd f1, lbl_804D9C78(r2)
@@ -2681,7 +2681,7 @@ lbl_8013E6BC:
 /* 8013E730 0013B310  38 A4 00 12 */	addi r5, r4, 0x00040012@l
 /* 8013E734 0013B314  38 7B 00 00 */	addi r3, r27, 0
 /* 8013E738 0013B318  38 80 00 00 */	li r4, 0
-/* 8013E73C 0013B31C  4B FF F2 E9 */	bl func_8013DA24
+/* 8013E73C 0013B31C  4B FF F2 E9 */	bl ftPurin_8013DA24
 /* 8013E740 0013B320  48 00 00 84 */	b lbl_8013E7C4
 lbl_8013E744:
 /* 8013E744 0013B324  C0 22 A2 6C */	lfs f1, lbl_804D9C4C(r2)
@@ -2701,7 +2701,7 @@ lbl_8013E758:
 /* 8013E778 0013B358  38 A4 00 12 */	addi r5, r4, 0x00040012@l
 /* 8013E77C 0013B35C  38 7B 00 00 */	addi r3, r27, 0
 /* 8013E780 0013B360  38 80 00 00 */	li r4, 0
-/* 8013E784 0013B364  4B FF F2 A1 */	bl func_8013DA24
+/* 8013E784 0013B364  4B FF F2 A1 */	bl ftPurin_8013DA24
 /* 8013E788 0013B368  48 00 00 3C */	b lbl_8013E7C4
 lbl_8013E78C:
 /* 8013E78C 0013B36C  C0 22 A2 6C */	lfs f1, lbl_804D9C4C(r2)
@@ -2746,7 +2746,7 @@ asm void lbl_8013E7E0(HSD_GObj*)
 /* 8013E7F8 0013B3D8  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 8013E7FC 0013B3DC  83 85 02 D4 */	lwz r28, 0x2d4(r5)
 /* 8013E800 0013B3E0  7C BD 2B 78 */	mr r29, r5
-/* 8013E804 0013B3E4  4B FF F5 51 */	bl func_8013DD54
+/* 8013E804 0013B3E4  4B FF F5 51 */	bl ftPurin_8013DD54
 /* 8013E808 0013B3E8  83 DB 00 2C */	lwz r30, 0x2c(r27)
 /* 8013E80C 0013B3EC  83 FB 00 28 */	lwz r31, 0x28(r27)
 /* 8013E810 0013B3F0  80 1E 23 48 */	lwz r0, 0x2348(r30)
@@ -2909,7 +2909,7 @@ lbl_8013EA04:
 /* 8013EA4C 0013B62C  FC 00 00 50 */	fneg f0, f0
 /* 8013EA50 0013B630  D0 1D 23 74 */	stfs f0, 0x2374(r29)
 /* 8013EA54 0013B634  C0 22 A2 68 */	lfs f1, lbl_804D9C48(r2)
-/* 8013EA58 0013B638  4B FF EF CD */	bl func_8013DA24
+/* 8013EA58 0013B638  4B FF EF CD */	bl ftPurin_8013DA24
 /* 8013EA5C 0013B63C  48 00 00 68 */	b lbl_8013EAC4
 lbl_8013EA60:
 /* 8013EA60 0013B640  80 9D 23 64 */	lwz r4, 0x2364(r29)
@@ -3234,7 +3234,7 @@ asm void lbl_8013EE84(HSD_GObj*)
 /* 8013EEA0 0013BA80  7C 7D 1B 78 */	mr r29, r3
 /* 8013EEA4 0013BA84  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8013EEA8 0013BA88  83 DF 02 D4 */	lwz r30, 0x2d4(r31)
-/* 8013EEAC 0013BA8C  4B FF EE A9 */	bl func_8013DD54
+/* 8013EEAC 0013BA8C  4B FF EE A9 */	bl ftPurin_8013DD54
 /* 8013EEB0 0013BA90  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
 /* 8013EEB4 0013BA94  3C 60 43 30 */	lis r3, 0x4330
 /* 8013EEB8 0013BA98  D0 1F 23 60 */	stfs f0, 0x2360(r31)
@@ -3357,7 +3357,7 @@ asm void lbl_8013F034(HSD_GObj*)
 /* 8013F050 0013BC30  7C 7D 1B 78 */	mr r29, r3
 /* 8013F054 0013BC34  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8013F058 0013BC38  83 DF 02 D4 */	lwz r30, 0x2d4(r31)
-/* 8013F05C 0013BC3C  4B FF EC F9 */	bl func_8013DD54
+/* 8013F05C 0013BC3C  4B FF EC F9 */	bl ftPurin_8013DD54
 /* 8013F060 0013BC40  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
 /* 8013F064 0013BC44  3C 60 43 30 */	lis r3, 0x4330
 /* 8013F068 0013BC48  D0 1F 23 60 */	stfs f0, 0x2360(r31)
@@ -3465,7 +3465,7 @@ asm void lbl_8013F1A4(HSD_GObj*)
 /* 8013F1C8 0013BDA8  38 80 00 00 */	li r4, 0
 /* 8013F1CC 0013BDAC  83 83 00 2C */	lwz r28, 0x2c(r3)
 /* 8013F1D0 0013BDB0  83 7C 02 D4 */	lwz r27, 0x2d4(r28)
-/* 8013F1D4 0013BDB4  4B FF EB 81 */	bl func_8013DD54
+/* 8013F1D4 0013BDB4  4B FF EB 81 */	bl ftPurin_8013DD54
 /* 8013F1D8 0013BDB8  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
 /* 8013F1DC 0013BDBC  D0 1C 23 60 */	stfs f0, 0x2360(r28)
 /* 8013F1E0 0013BDC0  83 BA 00 2C */	lwz r29, 0x2c(r26)
@@ -3594,7 +3594,7 @@ lbl_8013F360:
 /* 8013F3A4 0013BF84  90 04 23 4C */	stw r0, 0x234c(r4)
 lbl_8013F3A8:
 /* 8013F3A8 0013BF88  7F 43 D3 78 */	mr r3, r26
-/* 8013F3AC 0013BF8C  4B FF E5 39 */	bl func_8013D8E4
+/* 8013F3AC 0013BF8C  4B FF E5 39 */	bl ftPurin_8013D8E4
 /* 8013F3B0 0013BF90  80 7C 23 6C */	lwz r3, 0x236c(r28)
 /* 8013F3B4 0013BF94  3C 00 43 30 */	lis r0, 0x4330
 /* 8013F3B8 0013BF98  C8 22 A2 98 */	lfd f1, lbl_804D9C78(r2)
@@ -3670,7 +3670,7 @@ lbl_8013F44C:
 /* 8013F4C0 0013C0A0  38 A4 00 12 */	addi r5, r4, 0x00040012@l
 /* 8013F4C4 0013C0A4  38 7A 00 00 */	addi r3, r26, 0
 /* 8013F4C8 0013C0A8  38 80 00 01 */	li r4, 1
-/* 8013F4CC 0013C0AC  4B FF E5 59 */	bl func_8013DA24
+/* 8013F4CC 0013C0AC  4B FF E5 59 */	bl ftPurin_8013DA24
 /* 8013F4D0 0013C0B0  48 00 02 1C */	b lbl_8013F6EC
 lbl_8013F4D4:
 /* 8013F4D4 0013C0B4  80 7C 05 E8 */	lwz r3, 0x5e8(r28)
@@ -3728,7 +3728,7 @@ lbl_8013F570:
 /* 8013F590 0013C170  38 A4 00 12 */	addi r5, r4, 0x00040012@l
 /* 8013F594 0013C174  38 7A 00 00 */	addi r3, r26, 0
 /* 8013F598 0013C178  38 80 00 01 */	li r4, 1
-/* 8013F59C 0013C17C  4B FF E4 89 */	bl func_8013DA24
+/* 8013F59C 0013C17C  4B FF E4 89 */	bl ftPurin_8013DA24
 /* 8013F5A0 0013C180  48 00 01 4C */	b lbl_8013F6EC
 lbl_8013F5A4:
 /* 8013F5A4 0013C184  80 7C 05 E8 */	lwz r3, 0x5e8(r28)
@@ -3849,7 +3849,7 @@ asm void lbl_8013F708(HSD_GObj*)
 /* 8013F720 0013C300  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 8013F724 0013C304  83 85 02 D4 */	lwz r28, 0x2d4(r5)
 /* 8013F728 0013C308  7C BD 2B 78 */	mr r29, r5
-/* 8013F72C 0013C30C  4B FF E6 29 */	bl func_8013DD54
+/* 8013F72C 0013C30C  4B FF E6 29 */	bl ftPurin_8013DD54
 /* 8013F730 0013C310  83 DB 00 2C */	lwz r30, 0x2c(r27)
 /* 8013F734 0013C314  83 FB 00 28 */	lwz r31, 0x28(r27)
 /* 8013F738 0013C318  80 1E 23 48 */	lwz r0, 0x2348(r30)
@@ -4014,7 +4014,7 @@ lbl_8013F934:
 /* 8013F97C 0013C55C  FC 00 00 50 */	fneg f0, f0
 /* 8013F980 0013C560  D0 1D 23 74 */	stfs f0, 0x2374(r29)
 /* 8013F984 0013C564  C0 22 A2 68 */	lfs f1, lbl_804D9C48(r2)
-/* 8013F988 0013C568  4B FF E0 9D */	bl func_8013DA24
+/* 8013F988 0013C568  4B FF E0 9D */	bl ftPurin_8013DA24
 /* 8013F98C 0013C56C  48 00 00 20 */	b lbl_8013F9AC
 lbl_8013F990:
 /* 8013F990 0013C570  80 BD 23 64 */	lwz r5, 0x2364(r29)
@@ -5165,7 +5165,7 @@ lbl_80140810:
 /* 8014088C 0013D46C  38 7D 00 00 */	addi r3, r29, 0
 /* 80140890 0013D470  38 A4 00 12 */	addi r5, r4, 0x00040012@l
 /* 80140894 0013D474  38 80 00 00 */	li r4, 0
-/* 80140898 0013D478  4B FF D1 8D */	bl func_8013DA24
+/* 80140898 0013D478  4B FF D1 8D */	bl ftPurin_8013DA24
 lbl_8014089C:
 /* 8014089C 0013D47C  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 801408A0 0013D480  83 E1 00 3C */	lwz r31, 0x3c(r1)
@@ -5581,7 +5581,7 @@ lbl_80140D54:
 /* 80140DCC 0013D9AC  38 7D 00 00 */	addi r3, r29, 0
 /* 80140DD0 0013D9B0  38 A4 00 12 */	addi r5, r4, 0x00040012@l
 /* 80140DD4 0013D9B4  38 80 00 01 */	li r4, 1
-/* 80140DD8 0013D9B8  4B FF CC 4D */	bl func_8013DA24
+/* 80140DD8 0013D9B8  4B FF CC 4D */	bl ftPurin_8013DA24
 lbl_80140DDC:
 /* 80140DDC 0013D9BC  80 01 00 4C */	lwz r0, 0x4c(r1)
 /* 80140DE0 0013D9C0  83 E1 00 44 */	lwz r31, 0x44(r1)
@@ -6299,7 +6299,7 @@ asm void lbl_801416D0(HSD_GObj*)
 /* 80141708 0013E2E8  38 7E 00 00 */	addi r3, r30, 0
 /* 8014170C 0013E2EC  38 A4 50 92 */	addi r5, r4, 0x0C4C5092@l
 /* 80141710 0013E2F0  38 80 00 01 */	li r4, 1
-/* 80141714 0013E2F4  4B FF C3 11 */	bl func_8013DA24
+/* 80141714 0013E2F4  4B FF C3 11 */	bl ftPurin_8013DA24
 lbl_80141718:
 /* 80141718 0013E2F8  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8014171C 0013E2FC  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -7018,7 +7018,7 @@ asm void lbl_80142070(HSD_GObj*)
 /* 801420A8 0013EC88  38 7E 00 00 */	addi r3, r30, 0
 /* 801420AC 0013EC8C  38 A4 50 92 */	addi r5, r4, 0x0C4C5092@l
 /* 801420B0 0013EC90  38 80 00 00 */	li r4, 0
-/* 801420B4 0013EC94  4B FF B9 71 */	bl func_8013DA24
+/* 801420B4 0013EC94  4B FF B9 71 */	bl ftPurin_8013DA24
 lbl_801420B8:
 /* 801420B8 0013EC98  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 801420BC 0013EC9C  83 E1 00 14 */	lwz r31, 0x14(r1)

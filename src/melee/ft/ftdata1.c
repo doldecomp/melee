@@ -89,9 +89,11 @@ ftData_UnkCountStruct lbl_803C0FC8[FTKIND_MAX] = {
 };
 
 Event lbl_803C10D0[FTKIND_MAX] = {
-    NULL, NULL, NULL, NULL, func_800EE528, NULL, NULL, NULL, NULL, NULL, NULL,
-    NULL, NULL, NULL, NULL, func_8013C2F8, NULL, NULL, NULL, NULL, NULL, NULL,
-    NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, func_800EE528, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, NULL,          NULL, NULL, ftPurin_8013C2F8,
+    NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL,
+    NULL,
 };
 
 HSD_GObjEvent ft_OnLoad[FTKIND_MAX] = {
@@ -949,25 +951,29 @@ HSD_GObjEvent lbl_803C2048[FTKIND_MAX] = {
 };
 
 Fighter_UnkMtxEvent lbl_803C20CC[FTKIND_MAX] = {
-    NULL, NULL, NULL, NULL, func_800EEF04, NULL, NULL, NULL, NULL, NULL, NULL,
-    NULL, NULL, NULL, NULL, func_8013C4F0, NULL, NULL, NULL, NULL, NULL, NULL,
-    NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, func_800EEF04, NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, NULL,          NULL, NULL, ftPurin_8013C4F0,
+    NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL,
+    NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL,
+    NULL,
 };
 
 /// Character model group (e.g. high poly, low poly, metal) visibility change
 /// callbacks
 ftData_UnkModelStruct lbl_803C2150 = {
     {
-        NULL, NULL, NULL, NULL, func_800EF87C, NULL, NULL,          NULL, NULL,
-        NULL, NULL, NULL, NULL, NULL,          NULL, func_8013C614, NULL, NULL,
-        NULL, NULL, NULL, NULL, NULL,          NULL, NULL,          NULL, NULL,
-        NULL, NULL, NULL, NULL, NULL,          NULL,
+        NULL, NULL, NULL, NULL, func_800EF87C, NULL, NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL,          NULL, NULL, ftPurin_8013C614,
+        NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL,
+        NULL,
     },
     {
-        NULL, NULL, NULL, NULL, func_800EF028, NULL, NULL,          NULL, NULL,
-        NULL, NULL, NULL, NULL, NULL,          NULL, func_8013C664, NULL, NULL,
-        NULL, NULL, NULL, NULL, NULL,          NULL, NULL,          NULL, NULL,
-        NULL, NULL, NULL, NULL, NULL,          NULL,
+        NULL, NULL, NULL, NULL, func_800EF028, NULL, NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL,          NULL, NULL, ftPurin_8013C664,
+        NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL,          NULL, NULL, NULL,
+        NULL,
     },
 };
 
