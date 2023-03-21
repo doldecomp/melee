@@ -1091,7 +1091,7 @@ Fighter_MotionFileStringGetter lbl_803C24EC[FTKIND_MAX] = {
 };
 
 Fighter_UnkPtrEvent lbl_803C2570[FTKIND_MAX] = {
-    ftMario_func_800E0CAC,
+    ftMario_800E0CAC,
     NULL,
     NULL,
     NULL,

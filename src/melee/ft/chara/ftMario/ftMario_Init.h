@@ -25,7 +25,7 @@ void ftMario_OnItemDrop(HSD_GObj*, bool);
 void ftMario_LoadSpecialAttrs(HSD_GObj*);
 void ftMario_OnKnockbackEnter(HSD_GObj*);
 void ftMario_OnKnockbackExit(HSD_GObj*);
-void ftMario_func_800E0CAC(s32, s32*, s32*);
+void ftMario_800E0CAC(s32, s32*, s32*);
 char* ftMario_GetMotionFileString(enum_t);
 
 // ftmario5
