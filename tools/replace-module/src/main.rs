@@ -24,7 +24,7 @@ lazy_static! {
         builder.build().unwrap()
     };
     static ref SYMBOL_REGEX: Regex =
-        Regex::new(r"(lbl|func_)([[:xdigit:]]{8})").unwrap();
+        Regex::new(r"(?:lbl|func_)([[:xdigit:]]{8})").unwrap();
 }
 
 fn main() -> Result<()> {
@@ -33,13 +33,12 @@ fn main() -> Result<()> {
     melee_utils::set_current_dir()?;
 
     let addrs = SYMBOL_REGEX
-        .find_iter(&cli.symbols)
-        .map(|m| m.as_str().to_string())
-        .into_iter()
+        .captures_iter(&cli.symbols)
+        .filter_map(|m| m.get(1).map(|m| m.as_str()))
         .unique()
         .join("|");
 
-    let regex = Regex::new(&format!(r"\b(lbl|func)_({})\b", addrs))?;
+    let regex = Regex::new(&format!(r"\b(?:lbl|func)_({})\b", addrs))?;
     debug!("{regex}");
 
     for entry in WalkDir::new(".") {
@@ -55,9 +54,19 @@ fn main() -> Result<()> {
 
 fn replace_symbols(module: &str, regex: &Regex, path: &Path) -> Result<()> {
     let content = fs::read_to_string(path)?;
+    debug!("{path:?}");
 
-    let expr = format!("{module}_$2");
+    let expr = format!("{module}_$1");
     let replaced = regex.replace_all(&content, expr);
+    // debug!(
+    //     "{}",
+    //     regex
+    //         .find_iter(&content)
+    //         .map(|m| m.as_str().to_string())
+    //         .collect_vec()
+    //         .join("\n")
+    // );
+    debug!("{regex}");
     fs::write(path, replaced.as_ref())?;
 
     Ok(())
