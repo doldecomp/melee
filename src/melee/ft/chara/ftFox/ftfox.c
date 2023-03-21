@@ -137,7 +137,7 @@ Fighter_CostumeStrings lbl_803C7D9C[] = {
     { lbl_803C7CCC, lbl_803C7CD8, lbl_803C7CF0 },
 };
 
-bool func_800E5534(HSD_GObj* gobj)
+bool ftFox_800E5534(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
 
@@ -152,7 +152,7 @@ void ftFox_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
 }
 
-void func_800E5588(HSD_GObj* gobj)
+void ftFox_800E5588(HSD_GObj* gobj)
 {
     ftFox_RemoveBlaster(gobj);
 }

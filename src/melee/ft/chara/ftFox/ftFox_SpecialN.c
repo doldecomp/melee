@@ -157,7 +157,7 @@ void ftFox_RemoveBlaster(HSD_GObj* gobj)
         func_802AEAB4(fp->fv.fx.x222C_blasterGObj);
         fp->fv.fx.x222C_blasterGObj = NULL;
     }
-    if (func_800E5534(gobj) == false) {
+    if (ftFox_800E5534(gobj) == false) {
         ftFox_SpecialN_SetNULL(gobj);
     }
 }
@@ -226,8 +226,8 @@ void ftFox_CreateBlasterShot(HSD_GObj* gobj)
 inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = func_800E5588;
-    fp->cb.x21E4_callback_OnDeath2 = func_800E5588;
+    fp->cb.x21DC_callback_OnTakeDamage = ftFox_800E5588;
+    fp->cb.x21E4_callback_OnDeath2 = ftFox_800E5588;
 }
 
 // 0x800E608C
