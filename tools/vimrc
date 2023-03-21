@@ -5,6 +5,7 @@ highlight colorcolumn ctermbg=darkgray
 augroup project
   autocmd!
   autocmd BufRead,BufNewFile *.h,*.c,*.dox set filetype=c | set syntax=c.doxygen
+  autocmd BufRead,BufNewFile .clang-format set filetype=yaml | set syntax=yaml
 augroup END
 
 let &path.="src,src/melee,src/melee/ft/chara,src/MSL,src/sysdolphin,src/dolphin,"

@@ -59,11 +59,11 @@ struct ftMario_FighterVars {
 typedef struct ftMario_SpecialLw_ECB {
     u8 x0_str_arr[3];
     u8 x3_balign;
-    u32 x4;
-    u32 x8;
-    u32 xC;
-    u32 x10;
-    u32 x14;
+    uint x4;
+    uint x8;
+    uint xC;
+    uint x10;
+    uint x14;
 } ftMario_SpecialLw_ECB;
 
 #endif
