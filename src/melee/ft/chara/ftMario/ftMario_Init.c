@@ -151,5 +151,5 @@ char* ftMario_GetMotionFileString(enum_t arg0)
         offset = 15;
     }
 
-    return lbl_803C5A20[offset - 14];
+    return ftMario_DemoViMotionFilenames[offset - 14];
 }

@@ -20,14 +20,14 @@ char lbl_803C591C[] = "PlyMario5KGr_Share_joint";
 char lbl_803C5938[] = "PlyMario5KGr_Share_matanim_joint";
 char lbl_803C595C[] = "PlMrAJ.dat";
 
-Fighter_DemoStrings lbl_803C59D8 = {
+Fighter_DemoStrings ftMario_DemoMotionFilenames = {
     "ftDemoResultMotionFileMario",
     "ftDemoIntroMotionFileMario",
     "ftDemoEndingMotionFileMario",
     "ftDemoViWaitMotionFileMario",
 };
 
-char* lbl_803C5A20[] = {
+char* ftMario_DemoViMotionFilenames[] = {
     "ftDemoVi0102MotionFileMario",
     "ftDemoVi1101MotionFileMario",
 };
