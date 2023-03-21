@@ -1,5 +1,7 @@
-#include <melee/ft/chara/ftFox/ftfox.h>
-#include <melee/ft/chara/ftFox/ftFox_AppealS.h>
+#include "ftFox/ftFox_AppealS.h"
+
+#include "ftFox/ftfox.h"
+
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/gr/grcorneria.h>

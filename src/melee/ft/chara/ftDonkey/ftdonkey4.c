@@ -1,5 +1,7 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey4.h>
+#include "ftDonkey/ftdonkey4.h"
+
+#include "ftDonkey/ftdonkey.h"
+
 #include <melee/ft/ft_unknown_006.h>
 
 bool ftDonkey_800E0134(HSD_GObj* gobj)

@@ -1,8 +1,10 @@
-#include <melee/ft/chara/ftSeak/ftSeak_Init.h>
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialLw.h>
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialN.h>
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialS.h>
-#include <melee/ft/chara/ftSeak/types.h>
+#include "ftSeak/ftSeak_Init.h"
+
+#include "ftSeak/ftSeak_SpecialLw.h"
+#include "ftSeak/ftSeak_SpecialN.h"
+#include "ftSeak/ftSeak_SpecialS.h"
+#include "ftSeak/types.h"
+
 #include <melee/ft/fighter.h>
 #include <melee/ft/forward.h>
 #include <melee/ft/ft_unknown_006.h>

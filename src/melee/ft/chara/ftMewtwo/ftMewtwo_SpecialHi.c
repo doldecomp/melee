@@ -1,9 +1,10 @@
+#include "ftMewtwo/ftMewtwo_SpecialHi.h"
+
+#include "ftMewtwo/ftmewtwo.h"
 #include "melee/ft/types.h"
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
-#include <melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcliffcommon.h>

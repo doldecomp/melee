@@ -1,5 +1,7 @@
-#include <melee/ft/chara/ftNess/ftNess.h>
-#include <melee/ft/chara/ftNess/ftNess_SpecialLw.h>
+#include "ftNess/ftNess.h"
+
+#include "ftNess/ftNess_SpecialLw.h"
+
 #include <melee/ft/forward.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>

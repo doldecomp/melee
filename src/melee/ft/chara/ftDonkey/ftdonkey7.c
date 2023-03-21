@@ -1,6 +1,8 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey6.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey7.h>
+#include "ftDonkey/ftdonkey7.h"
+
+#include "ftDonkey/ftdonkey.h"
+#include "ftDonkey/ftdonkey6.h"
+
 #include <melee/ft/ft_unknown_006.h>
 
 void ftDonkey_800E0440(HSD_GObj* gobj)

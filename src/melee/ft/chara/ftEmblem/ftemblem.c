@@ -1,5 +1,7 @@
-#include <melee/ft/chara/ftEmblem/ftemblem.h>
-#include <melee/ft/chara/ftMars/ftMars.h>
+#include "ftEmblem/ftemblem.h"
+
+#include "ftMars/ftMars.h"
+
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>

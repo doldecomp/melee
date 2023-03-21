@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
-#include <melee/ft/chara/ftKirby/ftkirby.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_32.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_33.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
+#include "ftCrazyHand/ftcrazyhand.h"
+#include "ftKirby/ftkirby.h"
+#include "ftMasterHand/ftMasterHand_32.h"
+#include "ftMasterHand/ftMasterHand_33.h"
+#include "ftMasterHand/ftMasterHand_34.h"
+
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcliffcommon.h>

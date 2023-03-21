@@ -1,4 +1,5 @@
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include "ftGameWatch/ftgamewatch.h"
+
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>

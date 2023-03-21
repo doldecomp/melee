@@ -1,3 +1,7 @@
+#include "ftCrazyHand/ftcrazyhand.h"
+#include "ftKirby/ftkirby.h"
+#include "ftMasterHand/ftMasterHand_02.h"
+
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -7,9 +11,6 @@
 #include <melee/cm/camera.h>
 #include <melee/db/db_unknown_001.h>
 #include <melee/ef/efasync.h>
-#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
-#include <melee/ft/chara/ftKirby/ftkirby.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_02.h>
 #include <melee/ft/code_8007C114.h>
 #include <melee/ft/code_8007C630.h>
 #include <melee/ft/code_80081938.h>

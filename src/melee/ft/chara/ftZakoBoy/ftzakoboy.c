@@ -1,4 +1,5 @@
-#include <melee/ft/chara/ftZakoBoy/ftzakoboy.h>
+#include "ftZakoBoy/ftzakoboy.h"
+
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 

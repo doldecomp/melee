@@ -1,4 +1,5 @@
-#include <melee/ft/chara/ftZakoGirl/ftzakogirl.h>
+#include "ftZakoGirl/ftzakogirl.h"
+
 #include <melee/ft/ftparts.h>
 
 char lbl_803D3568[] = "PlGl.dat";

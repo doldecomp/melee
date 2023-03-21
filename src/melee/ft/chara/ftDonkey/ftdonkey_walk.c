@@ -1,7 +1,9 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey1.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey6.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey_walk.h>
+#include "ftDonkey/ftdonkey_walk.h"
+
+#include "ftDonkey/ftdonkey.h"
+#include "ftDonkey/ftdonkey1.h"
+#include "ftDonkey/ftdonkey6.h"
+
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftwalkcommon.h>
 #include <melee/it/code_8027CF30.h>

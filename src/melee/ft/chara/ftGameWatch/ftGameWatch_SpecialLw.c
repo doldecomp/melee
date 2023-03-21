@@ -1,5 +1,6 @@
+#include "ftGameWatch/ftgamewatch.h"
+
 #include <sysdolphin/baselib/gobjproc.h>
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
