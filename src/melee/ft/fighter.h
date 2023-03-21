@@ -13,10 +13,6 @@
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
-#include <common_structs.h>
-#include <math.h>
-#include <dolphin/mtx/types.h>
-
 /// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers
 extern void* lbl_804D64FC;
