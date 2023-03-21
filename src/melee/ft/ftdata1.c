@@ -64,6 +64,7 @@
 #include "ftZakoBoy/ftzakoboy.h"
 #include "ftZakoGirl/ftzakogirl.h"
 #include "ftZelda/ftzelda.h"
+#include "ftZelda/ftzelda1.h"
 
 #include <dolphin/mtx/types.h>
 

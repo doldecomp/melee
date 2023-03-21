@@ -13,19 +13,6 @@ extern Fighter_CostumeStrings lbl_803CFEB0[];
 extern char lbl_803CFE24[];
 extern Fighter_DemoStrings lbl_803CFEA0;
 
-// ftzelda 1
-void ftZelda_OnDeath(HSD_GObj* gobj);
-void ftZelda_OnLoad(HSD_GObj* gobj);
-void ftZelda_801393AC(HSD_GObj* gobj);
-void ftZelda_OnItemPickup(HSD_GObj* gobj, bool bool);
-void ftZelda_OnItemInvisible(HSD_GObj* gobj);
-void ftZelda_OnItemVisible(HSD_GObj* gobj);
-void ftZelda_OnItemDrop(HSD_GObj* gobj, bool bool1);
-void ftZelda_LoadSpecialAttrs(HSD_GObj* gobj);
-void ftZelda_801395C8(HSD_GObj* gobj);
-void ftZelda_OnKnockbackEnter(HSD_GObj* gobj);
-void ftZelda_OnKnockbackExit(HSD_GObj* gobj);
-
 // ftzelda 2
 void ftZelda_801396AC(HSD_GObj* gobj);
 void ftZelda_801396E0(HSD_GObj* gobj);
