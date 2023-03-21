@@ -139,7 +139,7 @@ void ftMario_func_800E0CAC(s32 arg0, s32* arg1, s32* arg2)
     }
 }
 
-char* ftMario_func_800E0CE0(enum_t arg0)
+char* ftMario_800E0CE0(enum_t arg0)
 {
     int offset;
 

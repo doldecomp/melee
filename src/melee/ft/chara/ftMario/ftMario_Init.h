@@ -26,7 +26,7 @@ void ftMario_LoadSpecialAttrs(HSD_GObj*);
 void ftMario_OnKnockbackEnter(HSD_GObj*);
 void ftMario_OnKnockbackExit(HSD_GObj*);
 void ftMario_func_800E0CAC(s32, s32*, s32*);
-UNK_T ftMario_800E0CE0(enum_t);
+char* ftMario_800E0CE0(enum_t);
 
 // ftmario4
 void ftMario_SpecialHi_StartAction(HSD_GObj*);
