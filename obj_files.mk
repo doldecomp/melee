@@ -215,7 +215,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZelda_Init.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda2.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZelda_SpecialHi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda3.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda4.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda5.c.o\
