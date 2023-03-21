@@ -757,7 +757,7 @@ union Struct2070 {
 };
 
 struct Fighter {
-    /* 0x0 */ HSD_GObj* x0_fighter;
+    /* 0x0 */ HSD_GObj* gobj;
     /* 0x4 */ FighterKind x4_fighterKind;
     /* 0x8 */ s32 x8_spawnNum;
     /* 0xC */ u8 xC_playerID;

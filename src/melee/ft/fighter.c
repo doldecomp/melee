@@ -476,7 +476,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2225_b0 = 0;
     fp->x2225_b2 = 1;
     fp->x2225_b4 = 0;
-    func_800DEEA8(fp->x0_fighter);
+    func_800DEEA8(fp->gobj);
     fp->dmg.x18BC = 0.0f;
     fp->dmg.x18B8 = 0.0f;
     fp->x2226_flag.bits.b2 = 0;
@@ -707,7 +707,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
 
     fp->x619_costume_id = costume_id;
     fp->x61B_team = Player_GetTeam(fp->xC_playerID);
-    fp->x0_fighter = gobj;
+    fp->gobj = gobj;
     fp->ft_data = gFtDataList[fp->x4_fighterKind];
     func_800D0FA0(gobj);
     fp->x2CC = 0;
@@ -2658,7 +2658,7 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
                             fp->dmg.x1830_percent);
         func_8003EC9C(fp->xC_playerID, fp->x221F_flag.bits.b4,
                       fp->dmg.x1830_percent, damage_amount);
-        func_800C8C84(fp->x0_fighter);
+        func_800C8C84(fp->gobj);
     }
 }
 
@@ -2694,9 +2694,9 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
         }
         if (fp->x197C) {
             if (HSD_Randi(p_ftCommonData->x418) < arg1) {
-                func_8007F8E8(fp->x0_fighter);
+                func_8007F8E8(fp->gobj);
                 func_8026ABD8(fp->x197C, &vec, 1.0f);
-                func_8007F9B4(fp->x0_fighter);
+                func_8007F9B4(fp->gobj);
             }
         }
     }
@@ -3094,16 +3094,16 @@ void Fighter_Unload_8006DABC(void* user_data)
     int kind = fp->x4_fighterKind;
 
     if (ft_OnUserDataRemove[kind]) {
-        ft_OnUserDataRemove[kind](fp->x0_fighter);
+        ft_OnUserDataRemove[kind](fp->gobj);
     }
 
-    func_8007B8E8(fp->x0_fighter);
+    func_8007B8E8(fp->gobj);
     func_80067688(&fp->x60C);
-    func_8026B7F8(fp->x0_fighter);
+    func_8026B7F8(fp->gobj);
     func_800290D4(fp->x890_cameraBox);
     func_8009E0D4(fp);
-    func_800765AC(fp->x0_fighter);
-    func_80088C5C(fp->x0_fighter);
+    func_800765AC(fp->gobj);
+    func_80088C5C(fp->gobj);
     func_8000EE8C(&fp->x20A4);
 
     if (fp->x20A0_accessory) {

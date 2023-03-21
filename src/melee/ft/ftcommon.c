@@ -688,7 +688,7 @@ void func_8007D6A4(Fighter* fp)
     fp->x2227_flag.bits.b0 = 0;
     fp->x6F0_collData.x19C = 0;
     fp->x6F0_collData.x130_flags &= 0xFFFFFFEF;
-    if (!func_80084A18(fp->x0_fighter)) {
+    if (!func_80084A18(fp->gobj)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID,
                  fp->motion_id);
         HSD_ASSERT(686, 0);
@@ -740,7 +740,7 @@ void func_8007D7FC(Fighter* fp)
     fp->x2227_flag.bits.b0 = 0;
     fp->x6F0_collData.x19C = 0;
     fp->x6F0_collData.x130_flags &= 0xFFFFFFEF;
-    if (!func_80084A18(fp->x0_fighter)) {
+    if (!func_80084A18(fp->gobj)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID,
                  fp->motion_id);
         HSD_ASSERT(0x2AE, 0);
@@ -1350,9 +1350,9 @@ void func_8007EA90(Fighter* fp, s32 arg1)
     } else {
         phi_f31 = M_PI / 2;
         phi_f30 = p_ftCommonData->x5C0;
-        func_800866DC(fp->x0_fighter, &sp10);
+        func_800866DC(fp->gobj, &sp10);
     }
-    temp_r31 = func_802E5F8C(fp->x0_fighter, &sp10, arg1, 1, phi_f31, phi_f30);
+    temp_r31 = func_802E5F8C(fp->gobj, &sp10, arg1, 1, phi_f31, phi_f30);
     if (fp->dmg.x18c4_source_ply != 6) {
         Player_SetUnk98(fp->dmg.x18c4_source_ply,
                         temp_r31 + Player_GetUnk98(fp->dmg.x18c4_source_ply));

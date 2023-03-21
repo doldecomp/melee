@@ -3102,7 +3102,7 @@ inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
         grab_dist = -grab_dist;
 
     if (grab_dist < this_fp->unk_grab_val) {
-        HSD_GObj* grabbed_fighter = victim_fp->x0_fighter;
+        HSD_GObj* grabbed_fighter = victim_fp->gobj;
         this_fp->x1A5C = grabbed_fighter;
         this_fp->x1A58_interactedFighter = grabbed_fighter;
         this_fp->x221B_b5 = true;
