@@ -1,4 +1,4 @@
-#include "ftzelda5.h"
+#include "ftZelda_SpecialS.h"
 
 #include "ftzelda.h"
 #include "ftZelda_Init.h"

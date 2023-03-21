@@ -218,7 +218,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZelda_SpecialHi.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZelda_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZelda_SpecialLw.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftzelda5.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftZelda/ftZelda_SpecialS.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPurin/ftpurin.c.o\
