@@ -53,15 +53,6 @@ typedef enum ftGameWatch_PanicLevel {
     ftGw_Panic_Full,
 } ftGameWatch_PanicLevel;
 
-// Chef (SpecialN/SpecialAirN) //
-#define FTGAMEWATCH_SPECIALN_COLL_FLAG                                        \
-    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |    \
-        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |     \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
-        FtStateChange_SkipUpdateModelPartVis |                                \
-        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
-
 // Judgement (SpecialS/SpecialAirS) //
 #define FTGAMEWATCH_SPECIALS_COLL_FLAG                                        \
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |    \

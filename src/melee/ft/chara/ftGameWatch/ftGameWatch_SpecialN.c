@@ -4,6 +4,7 @@
 #include "ftgamewatch.h"
 
 #include "ft/code_80081B38.h"
+#include "ft/forward.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftparts.h"
 #include "it/code_8027CF30.h"
@@ -363,6 +364,14 @@ void ftGameWatch_SpecialAirN_Coll(HSD_GObj* gobj)
         ftGameWatch_SpecialAirN_AirToGround(gobj);
 }
 
+static Fighter_MotionStateChangeFlags transition_flags =
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
+    FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
+    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
+    FtStateChange_Unk_27;
+
 // 0x8014EA3C
 // https://decomp.me/scratch/mtcx1 // Mr. Game & Watch's ground -> air Chef
 // Action State handler
@@ -371,9 +380,8 @@ void ftGameWatch_SpecialN_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN,
-                              FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
-                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, transition_flags,
+                              NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     GET_FIGHTER(gobj)->cb.x21BC_callback_Accessory4 =
         &ftGameWatch_SpecialN_CreateSausage;
 }
@@ -386,8 +394,7 @@ void ftGameWatch_SpecialAirN_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN,
-                              FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
     GET_FIGHTER(gobj)->cb.x21BC_callback_Accessory4 =
         &ftGameWatch_SpecialN_CreateSausage;
@@ -406,8 +413,7 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* gobj, f32 anim_frame)
     u8 _[4];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN,
-                              FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags, NULL,
                               anim_frame - 1.0f, 1.0f, 0.0f);
 
     func_8006EBA4(gobj);
@@ -437,9 +443,8 @@ void ftGameWatch_SpecialAirN_Loop(HSD_GObj* gobj, f32 anim_frame)
     u8 _[4];
 #endif
 
-    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN,
-                              FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
-                              anim_frame - 1.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, transition_flags,
+                              NULL, anim_frame - 1.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 
 #ifdef MUST_MATCH
