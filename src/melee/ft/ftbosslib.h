@@ -1,10 +1,10 @@
 #ifndef MELEE_FT_FTBOSSLIB_H
 #define MELEE_FT_FTBOSSLIB_H
 
-#include "forward.h"
+#include "ft/forward.h"
+#include "ftMasterHand/forward.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
+#include <baselib/gobj.h>
 
 HSD_GObj* func_8015C3E8(FighterKind arg0);
 

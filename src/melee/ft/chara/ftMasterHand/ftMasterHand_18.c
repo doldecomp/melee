@@ -1,6 +1,10 @@
 #include "ftMasterHand_18.h"
 
+#include "types.h"
+
+#include "ft/fighter.h"
 #include "ft/ftbosslib.h"
+#include "ft/types.h"
 
 // 801539EC 1505CC
 void lbl_801539EC(HSD_GObj* arg0)
