@@ -29,8 +29,8 @@ void func_80152880(HSD_GObj* gobj)
 
     Fighter_ActionStateChange_800693AC(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    fp->sv.mh.unk13.x0 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
-    fp->sv.mh.unk13.x4 = 0.0f;
+    fp->mv.mh.unk13.x0 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
+    fp->mv.mh.unk13.x4 = 0.0f;
 }
 
 // 80152928 14F508
@@ -42,10 +42,10 @@ void lbl_80152928(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_r4 = GET_FIGHTER(gobj);
-        temp_r4->sv.mh.unk13.x4 = 1.0f;
+        temp_r4->mv.mh.unk13.x4 = 1.0f;
 
-        if (--temp_r4->sv.mh.unk13.x0 < 0.0f) {
-            temp_r4->sv.mh.unk13.x4 = 0.0f;
+        if (--temp_r4->mv.mh.unk13.x0 < 0.0f) {
+            temp_r4->mv.mh.unk13.x4 = 0.0f;
             temp_r4->x80_self_vel.x = 0.0f;
             temp_r4->x80_self_vel.y = 0.0f;
             temp_r31 = GET_FIGHTER(gobj);
@@ -119,7 +119,7 @@ void lbl_80152A50(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     func_80085134(gobj);
-    if (fp->sv.mh.unk13.x4) {
+    if (fp->mv.mh.unk13.x4) {
         ftData = fp->x10C_ftData;
         attr = ftData->ext_attr;
         func_8015C208(gobj, &sp28_pos);

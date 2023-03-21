@@ -47,7 +47,7 @@ void func_80155D6C(HSD_GObj* gobj, s32 arg1)
     Fighter* victim_fp = GET_FIGHTER(fp->x1A58_interactedFighter);
 
     fp->facing_dir = victim_fp->facing_dir;
-    fp->sv.mh.unk4.x0 = 0;
+    fp->mv.mh.unk4.x0 = 0;
     Fighter_ActionStateChange_800693AC(gobj, 0x14A, 0, 0, 0.0f, 1.0f, 0.0f);
     fp->x221E_flag.bits.b0 = 0;
     fp->cb.x21B0_callback_Accessory1 = &func_800DE508;

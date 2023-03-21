@@ -26,7 +26,7 @@ void lbl_801523BC(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
     func_8015247C(gobj);
-    r31_fp->sv.mh.unk0.x8 = r30_attributes->xA0;
+    r31_fp->mv.mh.unk0.x8 = r30_attributes->xA0;
 }
 
 // 80152414 14EFF4
@@ -66,7 +66,7 @@ void lbl_801524C8(HSD_GObj* gobj)
 {
     Fighter* temp_r4 = GET_FIGHTER(gobj);
 
-    if (!--temp_r4->sv.mh.unk0.x8) {
+    if (!--temp_r4->mv.mh.unk0.x8) {
         func_801525E0(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {

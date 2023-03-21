@@ -134,8 +134,8 @@ inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sv.gw.SpecialLw.isRelease = false;
-    fp->sv.gw.SpecialLw.turnFrames = 0;
+    fp->mv.gw.SpecialLw.isRelease = false;
+    fp->mv.gw.SpecialLw.turnFrames = 0;
 }
 
 /// Mr. Game & Watch's Oil Panic Start Action State handler
@@ -209,7 +209,7 @@ void ftGameWatch_SpecialLw_Anim(HSD_GObj* gobj)
 
     /// @todo Frame number constant
     if (fp->x894_currentAnimFrame == anim_update_frame &&
-        !fp->sv.gw.SpecialLw.isRelease)
+        !fp->mv.gw.SpecialLw.isRelease)
     {
         ftGameWatch_SpecialLw_UpdateAction(gobj, 5);
     }
@@ -231,7 +231,7 @@ void ftGameWatch_SpecialAirLw_Anim(HSD_GObj* gobj)
 #endif
 
     if (fp->x894_currentAnimFrame == anim_update_frame &&
-        !fp->sv.gw.SpecialLw.isRelease)
+        !fp->mv.gw.SpecialLw.isRelease)
     {
         ftGameWatch_SpecialAirLw_UpdateAction(gobj, 5);
     }
@@ -255,11 +255,11 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* gobj)
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        int turn_frames = fp->sv.gw.SpecialLw.turnFrames;
+        int turn_frames = fp->mv.gw.SpecialLw.turnFrames;
         ftGameWatchAttributes* sa = getFtSpecialAttrsD(fp);
 
         if (turn_frames > 0) {
-            fp->sv.gw.SpecialLw.turnFrames = turn_frames - 1;
+            fp->mv.gw.SpecialLw.turnFrames = turn_frames - 1;
         } else {
             f32 stick_range = fp->input.x620_lstick_x;
 
@@ -272,7 +272,7 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* gobj)
                 func_8007D9FC(fp);
 
                 if (facing_dir != fp->facing_dir) {
-                    fp->sv.gw.SpecialLw.turnFrames =
+                    fp->mv.gw.SpecialLw.turnFrames =
                         sa->x7C_GAMEWATCH_PANIC_TURN_FRAMES;
                 }
             }
@@ -280,7 +280,7 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* gobj)
     }
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
-        fp->sv.gw.SpecialLw.isRelease = true;
+        fp->mv.gw.SpecialLw.isRelease = true;
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Loop IASA callback
@@ -290,11 +290,11 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* gobj)
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        int turnFrames = fp->sv.gw.SpecialLw.turnFrames;
+        int turnFrames = fp->mv.gw.SpecialLw.turnFrames;
         ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
         if (turnFrames > 0) {
-            fp->sv.gw.SpecialLw.turnFrames = turnFrames - 1;
+            fp->mv.gw.SpecialLw.turnFrames = turnFrames - 1;
         } else {
             f32 stick_range = fp->input.x620_lstick_x;
 
@@ -306,7 +306,7 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* gobj)
                 func_8007D9FC(fp);
 
                 if (facingDir != fp->facing_dir) {
-                    fp->sv.gw.SpecialLw.turnFrames =
+                    fp->mv.gw.SpecialLw.turnFrames =
                         sa->x7C_GAMEWATCH_PANIC_TURN_FRAMES;
                 }
             }
@@ -314,7 +314,7 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* gobj)
     }
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
-        fp->sv.gw.SpecialLw.isRelease = true;
+        fp->mv.gw.SpecialLw.isRelease = true;
 }
 
 /// Mr. Game & Watch's grounded Oil Panic Loop Physics callback

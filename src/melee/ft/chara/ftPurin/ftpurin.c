@@ -345,9 +345,9 @@ inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &lbl_8013C94C;
 
     if (func_8016B1D8() && func_801D4FF8(fp->xC_playerID))
-        fp->sv.pr.specialhi.x0 = true;
+        fp->mv.pr.specialhi.x0 = true;
     else
-        fp->sv.pr.specialhi.x0 = false;
+        fp->mv.pr.specialhi.x0 = false;
 }
 
 inline void ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj,

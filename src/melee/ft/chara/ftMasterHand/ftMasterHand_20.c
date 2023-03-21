@@ -46,21 +46,21 @@ void lbl_80153D2C(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
 
-    fp->sv.mh.unk0.x0 = attr->x74;
-    fp->sv.mh.unk0.x70 = attr->x7C;
+    fp->mv.mh.unk0.x0 = attr->x74;
+    fp->mv.mh.unk0.x70 = attr->x7C;
 
     HSD_JObjGetScale(jobj, &scale);
-    fp->sv.mh.unk0.x64.x = scale.x;
-    fp->sv.mh.unk0.x64.y = scale.y;
-    fp->sv.mh.unk0.x64.z = scale.z;
+    fp->mv.mh.unk0.x64.x = scale.x;
+    fp->mv.mh.unk0.x64.y = scale.y;
+    fp->mv.mh.unk0.x64.z = scale.z;
 
-    fp->sv.mh.unk0.x58.x = scale.x - attr->x78;
-    fp->sv.mh.unk0.x58.y = scale.y - attr->x78;
-    fp->sv.mh.unk0.x58.z = scale.z - attr->x78;
+    fp->mv.mh.unk0.x58.x = scale.x - attr->x78;
+    fp->mv.mh.unk0.x58.y = scale.y - attr->x78;
+    fp->mv.mh.unk0.x58.z = scale.z - attr->x78;
 
-    fp->sv.mh.unk0.x58.x /= attr->x7C;
-    fp->sv.mh.unk0.x58.y /= attr->x7C;
-    fp->sv.mh.unk0.x58.z /= attr->x7C;
+    fp->mv.mh.unk0.x58.x /= attr->x7C;
+    fp->mv.mh.unk0.x58.y /= attr->x7C;
+    fp->mv.mh.unk0.x58.z /= attr->x7C;
 
     scale.x = attr->x78;
     scale.y = attr->x78;
@@ -81,16 +81,16 @@ void lbl_80153F8C(HSD_GObj* gobj_arg)
     if (fp->x2200_ftcmd_var0 != 0) {
         /// @todo #GET_JOBJ
         HSD_JObj* jobj = get_jobj(gobj);
-        if (--fp->sv.mh.unk0.x70 < 0) {
+        if (--fp->mv.mh.unk0.x70 < 0) {
             fp->x2200_ftcmd_var0 = 0;
-            scale.x = fp->sv.mh.unk0.x64.x;
-            scale.y = fp->sv.mh.unk0.x64.y;
-            scale.z = fp->sv.mh.unk0.x64.z;
+            scale.x = fp->mv.mh.unk0.x64.x;
+            scale.y = fp->mv.mh.unk0.x64.y;
+            scale.z = fp->mv.mh.unk0.x64.z;
         } else {
             HSD_JObjGetScale(jobj, &scale);
-            scale.x += fp->sv.mh.unk0.x58.x;
-            scale.y += fp->sv.mh.unk0.x58.y;
-            scale.z += fp->sv.mh.unk0.x58.z;
+            scale.x += fp->mv.mh.unk0.x58.x;
+            scale.y += fp->mv.mh.unk0.x58.y;
+            scale.z += fp->mv.mh.unk0.x58.z;
         }
         HSD_JObjSetScale(jobj, &scale);
     }
@@ -121,7 +121,7 @@ void lbl_80154158(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (--r3_fp->sv.mh.unk0.x0 > 0.0f) {
+    if (--r3_fp->mv.mh.unk0.x0 > 0.0f) {
         ftMasterHand_SpecialAttrs* r4_attributes =
             r3_fp->x10C_ftData->ext_attr;
         func_8015BF74(gobj, r4_attributes->x58);

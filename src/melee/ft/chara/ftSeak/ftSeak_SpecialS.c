@@ -36,21 +36,21 @@ void ftSeak_80110490(Fighter* fp)
     if (v3 > 359)
         v3 = 359;
 
-    v5 = v3 - fp->sv.sk.specials.x18;
+    v5 = v3 - fp->mv.sk.specials.x18;
 
     if (v5 > 180)
         v5 -= 360;
     else if (v5 < -180)
         v5 += 360;
 
-    v6 = v5 * COMMON_DATA_F32[275] + fp->sv.sk.specials.x18;
+    v6 = v5 * COMMON_DATA_F32[275] + fp->mv.sk.specials.x18;
 
     if (v6 > 360)
         v6 -= 360;
     else if (v6 < 0)
         v6 += 360;
 
-    fp->sv.sk.specials.x18 = v6;
+    fp->mv.sk.specials.x18 = v6;
 
     v8 = sqrtf(fp->input.x620_lstick_x * fp->input.x620_lstick_x +
                fp->input.x624_lstick_y * fp->input.x624_lstick_y);
@@ -58,8 +58,8 @@ void ftSeak_80110490(Fighter* fp)
     if (v8 > 1)
         v8 = 1;
 
-    fp->sv.sk.specials.x14 +=
-        COMMON_DATA_F32[275] * (v8 - fp->sv.sk.specials.x14);
+    fp->mv.sk.specials.x14 +=
+        COMMON_DATA_F32[275] * (v8 - fp->mv.sk.specials.x14);
 }
 
 void ftSeak_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
@@ -82,18 +82,18 @@ void ftSeak_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
     ftSeak_80110490(fp);
 
     {
-        f32 f = 0.0556F * fp->sv.sk.specials.x18 + 4;
+        f32 f = 0.0556F * fp->mv.sk.specials.x18 + 4;
 
-        if (fp->sv.sk.specials.x14) {
+        if (fp->mv.sk.specials.x14) {
             HSD_JObj* bone = fp->x8AC_animSkeleton;
             func_8006F4C8(fp, 1, func_80085E50(fp, arg1));
             func_80070710(bone, f);
             func_8006FB88(fp, 1, fp->x108_costume_joint->child);
             HSD_JObjAnimAll(bone);
 
-            if (fp->sv.sk.specials.x14 < 1) {
-                func_80070108(fp, 1, item[2], 1 - fp->sv.sk.specials.x14,
-                              fp->sv.sk.specials.x14);
+            if (fp->mv.sk.specials.x14 < 1) {
+                func_80070108(fp, 1, item[2], 1 - fp->mv.sk.specials.x14,
+                              fp->mv.sk.specials.x14);
             }
 
             if (arg2 < 1) {
@@ -123,10 +123,10 @@ void ftSeak_80110788(HSD_GObj* gobj)
         fp->input.x624_lstick_y - fp->input.x62C_lstick_y2;
 
     {
-        s32 stateVar3 = fp->sv.sk.specials.x8;
+        s32 stateVar3 = fp->mv.sk.specials.x8;
 
         if (stateVar3 > 0) {
-            fp->sv.sk.specials.x8 = stateVar3 - 1;
+            fp->mv.sk.specials.x8 = stateVar3 - 1;
         } else {
             const enum_t flags = (1 << 3) | (1 << 6) | (1 << 8) | (1 << 9) |
                                  (1 << 10) | (1 << 11) | (1 << 12) | (1 << 18);
@@ -135,18 +135,18 @@ void ftSeak_80110788(HSD_GObj* gobj)
                 (fp->facing_dir == -1 && fp->ev.sk.lstick_delta.x < -0.3F))
             {
                 func_80088148(fp, flags, 127, 64);
-                fp->sv.sk.specials.x8 = 6;
+                fp->mv.sk.specials.x8 = 6;
             } else if (fp->ev.sk.lstick_delta.y > 0.5F) {
                 func_80088148(fp, flags, 127, 64);
-                fp->sv.sk.specials.x8 = 12;
+                fp->mv.sk.specials.x8 = 12;
             }
         }
     }
 
     {
-        s32 stateVar4 = fp->sv.sk.specials.xC;
+        s32 stateVar4 = fp->mv.sk.specials.xC;
         if (stateVar4 > 0) {
-            fp->sv.sk.specials.xC = stateVar4 - 1;
+            fp->mv.sk.specials.xC = stateVar4 - 1;
         } else {
             const enum_t flags = (1 << 0) | (1 << 1) | (1 << 3) | (1 << 6) |
                                  (1 << 8) | (1 << 9) | (1 << 10) | (1 << 11) |
@@ -158,7 +158,7 @@ void ftSeak_80110788(HSD_GObj* gobj)
                  fp->input.x620_lstick_x > 0))
             {
                 func_80088148(fp, flags, 127, 64);
-                fp->sv.sk.specials.xC = 6;
+                fp->mv.sk.specials.xC = 6;
             }
         }
     }
@@ -331,10 +331,10 @@ void ftSeak_80110BCC(HSD_GObj* gobj)
                 fp->ev.sk.x2268[i].y = fp->ev.sk.x2238[i].y;
             }
 
-            if (fp->sv.sk.specials.x1C > 0) {
-                fp->sv.sk.specials.x1C--;
+            if (fp->mv.sk.specials.x1C > 0) {
+                fp->mv.sk.specials.x1C--;
 
-                if (fp->sv.sk.specials.x1C == 0)
+                if (fp->mv.sk.specials.x1C == 0)
                     ftSeakSpecialS_LoopChainHitCollisions(gobj);
             }
 
@@ -347,16 +347,16 @@ void ftSeak_80110BCC(HSD_GObj* gobj)
                     sums_of_squares[2] > chain_val_sq ||
                     sums_of_squares[3] > chain_val_sq)
                 {
-                    if (fp->sv.sk.specials.x1C <= 0) {
-                        fp->sv.sk.specials.x1C = specialAttributes->x18;
+                    if (fp->mv.sk.specials.x1C <= 0) {
+                        fp->mv.sk.specials.x1C = specialAttributes->x18;
                         ftSeakSpecialS_LoopChainHitActivate(gobj);
                     }
                 } else {
-                    s32 var = fp->sv.sk.specials.x20;
+                    s32 var = fp->mv.sk.specials.x20;
                     if (var > 0) {
-                        fp->sv.sk.specials.x20--;
+                        fp->mv.sk.specials.x20--;
                     } else {
-                        fp->sv.sk.specials.x1C = 0;
+                        fp->mv.sk.specials.x1C = 0;
                         ftSeakSpecialS_LoopChainHitCollisions(gobj);
                     }
                 }
@@ -413,7 +413,7 @@ void ftSeak_ChainSomething(HSD_GObj* gobj)
 
     if (fp->ev.sk.x2234) {
         func_802BAF0C(fp->ev.sk.x2234);
-        fp->sv.sk.specials.x20 = 2;
+        fp->mv.sk.specials.x20 = 2;
     }
 }
 
@@ -434,20 +434,20 @@ void ftSeak_80110F70(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     fp->x2200_ftcmd_var0 = 0;
 
-    fp->sv.sk.specials.x0 = 0;
-    fp->sv.sk.specials.x4 = 0;
-    fp->sv.sk.specials.x8 = 0;
-    fp->sv.sk.specials.xC = 0;
+    fp->mv.sk.specials.x0 = 0;
+    fp->mv.sk.specials.x4 = 0;
+    fp->mv.sk.specials.x8 = 0;
+    fp->mv.sk.specials.xC = 0;
 
     {
         f32 var = 0.0;
 
-        fp->sv.sk.specials.x10 = var;
-        fp->sv.sk.specials.x18 = 4.0;
-        fp->sv.sk.specials.x14 = var;
+        fp->mv.sk.specials.x10 = var;
+        fp->mv.sk.specials.x18 = 4.0;
+        fp->mv.sk.specials.x14 = var;
 
-        fp->sv.sk.specials.x1C = 0;
-        fp->sv.sk.specials.x20 = 0;
+        fp->mv.sk.specials.x1C = 0;
+        fp->mv.sk.specials.x20 = 0;
         fp->ev.sk.x2234 = 0;
 
         {
@@ -507,10 +507,10 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
-    fp->sv.sk.specials.x0 += 1;
+    fp->mv.sk.specials.x0 += 1;
 
     /// @todo Probably an inline.
-    if (fp->sv.sk.specials.x0 == specialAttributes->x1C) {
+    if (fp->mv.sk.specials.x0 == specialAttributes->x1C) {
         /// @todo Unused stack.
 #ifdef MUST_MATCH
         u8 unused2[12];
@@ -530,7 +530,7 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
 
         fp2->cb.x21D4_callback_EnterHitlag = &ftSeak_80110EE8;
         fp2->cb.x21D8_callback_ExitHitlag = &ftSeak_ChainSomething;
-        fp->sv.sk.specials.x1C = specialAttributes->x18;
+        fp->mv.sk.specials.x1C = specialAttributes->x18;
 
         if (fp->ev.sk.x2234 == NULL) {
             if (fp->ground_or_air == GA_Air)
@@ -540,7 +540,7 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
         }
     }
 
-    if (fp->sv.sk.specials.x0 == specialAttributes->x1C + 1) {
+    if (fp->mv.sk.specials.x0 == specialAttributes->x1C + 1) {
         static Vec3 const vec0_init = { 1.8, 0, 0 };
 
         vec0 = vec0_init;
@@ -561,7 +561,7 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
         }
     }
 
-    if (fp->sv.sk.specials.x0 > specialAttributes->x20)
+    if (fp->mv.sk.specials.x0 > specialAttributes->x20)
         return true;
 
     return false;
@@ -689,14 +689,14 @@ void ftSeak_80111588(HSD_GObj* gobj)
 
     ftSeak_80110BCC(gobj);
 
-    fp->sv.sk.specials.x0 += 1;
+    fp->mv.sk.specials.x0 += 1;
 
     {
         bool result;
-        if (fp->sv.sk.specials.x0 > specialAttributes->x14 &&
-            fp->sv.sk.specials.x4)
+        if (fp->mv.sk.specials.x0 > specialAttributes->x14 &&
+            fp->mv.sk.specials.x4)
         {
-            fp->sv.sk.specials.x4 = false;
+            fp->mv.sk.specials.x4 = false;
             result = true;
         } else {
             result = false;
@@ -722,14 +722,14 @@ void ftSeak_80111648(HSD_GObj* gobj)
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
 
     ftSeak_80110BCC(gobj);
-    fp->sv.sk.specials.x0 += 1;
+    fp->mv.sk.specials.x0 += 1;
 
     {
         bool result;
-        if (fp->sv.sk.specials.x0 > specialAttributes->x14 &&
-            fp->sv.sk.specials.x4)
+        if (fp->mv.sk.specials.x0 > specialAttributes->x14 &&
+            fp->mv.sk.specials.x4)
         {
-            fp->sv.sk.specials.x4 = false;
+            fp->mv.sk.specials.x4 = false;
             result = true;
         } else {
             result = false;
@@ -749,7 +749,7 @@ void ftSeak_80111708(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
-        fp->sv.sk.specials.x4 = true;
+        fp->mv.sk.specials.x4 = true;
 
     ftSeak_80110788(gobj);
 }
@@ -759,7 +759,7 @@ void ftSeak_80111740(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
-        fp->sv.sk.specials.x4 = true;
+        fp->mv.sk.specials.x4 = true;
 
     ftSeak_80110788(gobj);
 }
@@ -799,7 +799,7 @@ void ftSeak_80111830(HSD_GObj* gobj)
     ftSeak_80110610(gobj, 305, 0);
 
     fp2 = gobj->user_data;
-    fp2->sv.sk.specials.x0 = 0;
+    fp2->mv.sk.specials.x0 = 0;
 
     ftSeak_80110AEC(gobj);
 
@@ -843,7 +843,7 @@ void ftSeak_80111988(HSD_GObj* gobj)
 
     {
         Fighter* fp = gobj->user_data;
-        fp->sv.sk.specials.x0 = 0;
+        fp->mv.sk.specials.x0 = 0;
 
         ftSeak_80110AEC(gobj);
 
@@ -868,10 +868,10 @@ void ftSeak_80111A48(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
-    fp->sv.sk.specials.x0 += 1;
+    fp->mv.sk.specials.x0 += 1;
 
     {
-        s32 temp_r3 = fp->sv.sk.specials.x0;
+        s32 temp_r3 = fp->mv.sk.specials.x0;
         f32 temp_f1 = specialAttributes->x28;
 
         HSD_GObj* item_gobj;
@@ -908,10 +908,10 @@ void ftSeak_80111B1C(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
-    fp->sv.sk.specials.x0 += 1;
+    fp->mv.sk.specials.x0 += 1;
 
     {
-        s32 stateVar1 = fp->sv.sk.specials.x0;
+        s32 stateVar1 = fp->mv.sk.specials.x0;
         f32 temp_f1 = specialAttributes->x28;
 
         HSD_GObj* item_gobj;
@@ -1025,9 +1025,9 @@ void ftSeak_80111DF8(HSD_GObj* gobj)
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->sv.sk.specials.x0 = 0;
+        fp->mv.sk.specials.x0 = 0;
 
-        if (fp->sv.sk.specials.x1C != 0)
+        if (fp->mv.sk.specials.x1C != 0)
             ftSeak_80110AEC(gobj);
 
         if (fp->ev.sk.x2234 != NULL) {
@@ -1048,9 +1048,9 @@ void ftSeak_80111EB4(HSD_GObj* gobj)
 
     {
         Fighter* fp = gobj->user_data;
-        fp->sv.sk.specials.x0 = 0;
+        fp->mv.sk.specials.x0 = 0;
 
-        if (fp->sv.sk.specials.x1C != 0)
+        if (fp->mv.sk.specials.x1C != 0)
             ftSeak_80110AEC(gobj);
 
         if (fp->ev.sk.x2234 != NULL) {

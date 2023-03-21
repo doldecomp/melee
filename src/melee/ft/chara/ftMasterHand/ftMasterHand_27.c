@@ -29,7 +29,7 @@ void lbl_80155074(HSD_GObj* gobj)
             func_800DE2A8(gobj, victim);
             func_800DE7C0(victim, 0, 0);
         }
-        fp->sv.mh.unk0.x20 = 0;
+        fp->mv.mh.unk0.x20 = 0;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj))

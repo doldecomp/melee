@@ -118,7 +118,7 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     setupAirStart(gobj);
-    fp->sv.ca.specials.grav = 0;
+    fp->mv.ca.specials.grav = 0;
     func_8007D60C(fp);
 }
 
@@ -333,13 +333,13 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* gobj)
 
     func_80085134(gobj);
     if (fp->x2204_ftcmd_var1 == 1) {
-        fp->sv.ca.specials.grav -= captainAttrs->specials_grav;
+        fp->mv.ca.specials.grav -= captainAttrs->specials_grav;
 
-        if (fp->sv.ca.specials.grav < -captainAttrs->specials_terminal_vel) {
-            fp->sv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
+        if (fp->mv.ca.specials.grav < -captainAttrs->specials_terminal_vel) {
+            fp->mv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
         }
 
-        fp->x80_self_vel.y = fp->sv.ca.specials.grav;
+        fp->x80_self_vel.y = fp->mv.ca.specials.grav;
     }
 }
 
@@ -354,12 +354,12 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* gobj)
 #endif
 
     func_80085134(gobj);
-    fp->sv.ca.specials.grav -= captainAttrs->specials_grav;
+    fp->mv.ca.specials.grav -= captainAttrs->specials_grav;
 
-    if (fp->sv.ca.specials.grav < -captainAttrs->specials_terminal_vel)
-        fp->sv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
+    if (fp->mv.ca.specials.grav < -captainAttrs->specials_terminal_vel)
+        fp->mv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
 
-    fp->x80_self_vel.y = fp->sv.ca.specials.grav;
+    fp->x80_self_vel.y = fp->mv.ca.specials.grav;
 }
 
 // Captain Falcon & Ganondorf's grounded

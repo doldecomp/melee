@@ -245,5 +245,5 @@ void lbl_80136730(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sv.ms.specialn.x0 = 0;
+    fp->mv.ms.specialn.x0 = 0;
 }

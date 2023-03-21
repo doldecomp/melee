@@ -45,7 +45,7 @@ void ftPikachu_80127608(HSD_GObj* gobj)
 void ftPikachu_SetState_8012764C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->sv.pk.unk4.x4 = 3;
+    fp->mv.pk.unk4.x4 = 3;
 }
 
 static inline f32 nested_sum_fabs(f32 fighter_pos_y, f32 pika_attr_xBC,
@@ -62,9 +62,9 @@ bool ftPikachu_8012765C(HSD_GObj* gobj)
     Vec3 vec;
     Fighter* fp = gobj->user_data;
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
-    u32 state_var = fp->sv.pk.unk4.x0;
+    u32 state_var = fp->mv.pk.unk4.x0;
 
-    if (!fp->sv.pk.unk4.x4)
+    if (!fp->mv.pk.unk4.x4)
         return false;
 
     if (state_var)
@@ -76,10 +76,10 @@ bool ftPikachu_8012765C(HSD_GObj* gobj)
         f32 final_y_pos = nested_sum_fabs(fp->xB0_pos.y, pika_attr->xBC,
                                           fabs_inline(pika_attr->xBC), vec.y);
 
-        if ((final_y_pos < pika_attr->xC8) && fp->sv.pk.unk4.x0 != 0 &&
-            !func_802B1DEC(fp->sv.pk.unk4.x0))
+        if ((final_y_pos < pika_attr->xC8) && fp->mv.pk.unk4.x0 != 0 &&
+            !func_802B1DEC(fp->mv.pk.unk4.x0))
         {
-            func_802B1FC8(fp->sv.pk.unk4.x0);
+            func_802B1FC8(fp->mv.pk.unk4.x0);
             return true;
         }
     }
@@ -90,7 +90,7 @@ bool ftPikachu_8012765C(HSD_GObj* gobj)
 void ftPikachu_SetState_8012779C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->sv.pk.unk4.x4 = 0;
+    fp->mv.pk.unk4.x4 = 0;
 }
 
 void ftPikachu_EfSpawn_801277AC(HSD_GObj* gobj)
@@ -122,7 +122,7 @@ void ftPikachu_EfSpawn_801277AC(HSD_GObj* gobj)
             result = false;
         }
 
-        if (result && fp->sv.pk.unk4.x0 == 0) {
+        if (result && fp->mv.pk.unk4.x0 == 0) {
             pos = fp->xB0_pos;
 
             pos.y += pika_attr->xD0;
@@ -133,7 +133,7 @@ void ftPikachu_EfSpawn_801277AC(HSD_GObj* gobj)
                 vec.z = 0.0f;
                 vec.x = 0.0f;
                 vec.y = pika_attr->xC0;
-                fp->sv.pk.unk4.x0 =
+                fp->mv.pk.unk4.x0 =
                     func_802B1DF8(gobj, &pos, &vec, pika_attr->xD4,
                                   pika_attr->xD8, pika_attr->xDC);
             }
@@ -146,8 +146,8 @@ void ftPikachu_SpecialLw_StartAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     *((u32*) (&fp->x2210_ThrowFlags)) = 0;
-    fp->sv.pk.unk4.x4 = 1;
-    fp->sv.pk.unk4.x0 = 0;
+    fp->mv.pk.unk4.x4 = 1;
+    fp->mv.pk.unk4.x0 = 0;
     Fighter_ActionStateChange_800693AC(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
@@ -157,8 +157,8 @@ void ftPikachu_SpecialAirLw_StartAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     *((u32*) (&fp->x2210_ThrowFlags)) = 0;
-    fp->sv.pk.unk4.x4 = 1;
-    fp->sv.pk.unk4.x0 = 0;
+    fp->mv.pk.unk4.x4 = 1;
+    fp->mv.pk.unk4.x0 = 0;
     Fighter_ActionStateChange_800693AC(gobj, 0x16B, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
@@ -283,7 +283,7 @@ void ftPikachu_ActionChange_80127DE4(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->sv.pk.unk4.x4 == 3) || fp->x2200_ftcmd_var0) {
+    if ((fp->mv.pk.unk4.x4 == 3) || fp->x2200_ftcmd_var0) {
         fp->cb.x21DC_callback_OnTakeDamage = 0;
         Fighter_ActionStateChange_800693AC(gobj, 0x16A, 0, 0, 0.0f, 1.0f,
                                            0.0f);
@@ -309,7 +309,7 @@ void ftPikachu_ActionChange_80127EC0(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->sv.pk.unk4.x4 == 3) || fp->x2200_ftcmd_var0) {
+    if ((fp->mv.pk.unk4.x4 == 3) || fp->x2200_ftcmd_var0) {
         fp->cb.x21DC_callback_OnTakeDamage = 0;
         Fighter_ActionStateChange_800693AC(gobj, 0x16E, 0, 0, 0.0f, 1.0f,
                                            0.0f);

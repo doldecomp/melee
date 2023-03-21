@@ -1373,7 +1373,7 @@ struct Fighter {
         union ftSeak_MotionVars sk;
         union ftYoshi_MotionVars ys;
         union ftZelda_MotionVars zd;
-    } sv;
+    } mv;
 };
 
 #endif

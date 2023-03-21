@@ -47,7 +47,7 @@ void lbl_801521DC(HSD_GObj* arg0)
 
     Fighter_ActionStateChange_800693AC(arg0, 0x162, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
-    temp_r31->sv.mh.unk0.x0 = 107.0f;
+    temp_r31->mv.mh.unk0.x0 = 107.0f;
 }
 
 // 8015223C 14EE1C
@@ -82,8 +82,8 @@ void lbl_801522BC(HSD_GObj* gobj)
     r30_attributes = r4_ftData->ext_attr;
     func_80085134(gobj);
 
-    if ((--r31_fp->sv.mh.unk0.x0 > r30_attributes->x84) ||
-        (r31_fp->sv.mh.unk0.x0 < 0.0f))
+    if ((--r31_fp->mv.mh.unk0.x0 > r30_attributes->x84) ||
+        (r31_fp->mv.mh.unk0.x0 < 0.0f))
     {
         r31_fp->x80_self_vel.x = 0.0f;
     } else {

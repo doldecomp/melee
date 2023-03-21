@@ -66,7 +66,7 @@ void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.b0 = 0;
-    fp->sv.ss.unk6.x0 = 0;
+    fp->mv.ss.unk6.x0 = 0;
     if (fp->x894_currentAnimFrame == 3.0f) {
         fp->x2204_ftcmd_var1 = 1;
     }
@@ -114,13 +114,13 @@ inline void checkStateVar1(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if ((fp->x2200_ftcmd_var0) && (!fp->sv.ss.unk6.x0)) {
+    if ((fp->x2200_ftcmd_var0) && (!fp->mv.ss.unk6.x0)) {
         ftSamus_8012AEBC(gobj);
-        fp->sv.ss.unk6.x0 = 1;
+        fp->mv.ss.unk6.x0 = 1;
     }
-    if ((!fp->x2200_ftcmd_var0) && (fp->sv.ss.unk6.x0)) {
+    if ((!fp->x2200_ftcmd_var0) && (fp->mv.ss.unk6.x0)) {
         func_8007B0C0(gobj, 0);
-        fp->sv.ss.unk6.x0 = 0;
+        fp->mv.ss.unk6.x0 = 0;
     }
 }
 
@@ -402,7 +402,7 @@ void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     fp->x2204_ftcmd_var1 = 2;
-    fp->sv.ss.unk6.x0 = 0;
+    fp->mv.ss.unk6.x0 = 0;
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012ADF0;
 }
 

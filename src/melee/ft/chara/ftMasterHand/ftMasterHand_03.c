@@ -76,8 +76,8 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
         }
         r32_fp->ev.mh.x2258 = 0x185;
     }
-    r32_fp->sv.mh.unk0.x4 = arg1_stateVar2;
-    r32_fp->sv.mh.unk0.xC = *arg2_pos;
+    r32_fp->mv.mh.unk0.x4 = arg1_stateVar2;
+    r32_fp->mv.mh.unk0.xC = *arg2_pos;
 }
 
 // 80150F00 0014DAE0
@@ -110,7 +110,7 @@ void lbl_80150F68(HSD_GObj* gobj)
     r30_ft_attributes = r4_ftdata->ext_attr;
 
     func_80085134(gobj);
-    func_8015BE40(gobj, &r31_fp->sv.mh.unk0.xC, &r31_fp->sv.mh.unk0.x18,
+    func_8015BE40(gobj, &r31_fp->mv.mh.unk0.xC, &r31_fp->mv.mh.unk0.x18,
                   r30_ft_attributes->x2C, r30_ft_attributes->x28);
 }
 
@@ -121,13 +121,13 @@ void lbl_80150FC8(HSD_GObj* gobj)
     Fighter* r4_fp;
 
     r4_fp = gobj->user_data;
-    if (0 == r4_fp->sv.mh.unk0.x18) {
+    if (0 == r4_fp->mv.mh.unk0.x18) {
         r4_fp->x80_self_vel.z = 0;
         r4_fp->x80_self_vel.y = 0;
         r4_fp->x80_self_vel.x = 0;
 
-        if (r4_fp->sv.mh.unk0.x4) {
-            r4_fp->sv.mh.unk0.x4(gobj);
+        if (r4_fp->mv.mh.unk0.x4) {
+            r4_fp->mv.mh.unk0.x4(gobj);
         }
     }
 }
@@ -148,7 +148,7 @@ void func_80151018(HSD_GObj* gobj)
 
     r6_fp = GET_FIGHTER(gobj);
     r5_attributes = r6_fp->x10C_ftData->ext_attr;
-    r6_fp->sv.mh.unk0.x20 = 0;
+    r6_fp->mv.mh.unk0.x20 = 0;
     sp1C_pos.x = r5_attributes->x30_pos2.x;
     sp1C_pos.y = r5_attributes->x30_pos2.y;
     sp1C_pos.z = 0;
@@ -159,6 +159,6 @@ void func_80151018(HSD_GObj* gobj)
     } else {
         func_80150C8C(gobj);
     }
-    r31_fp->sv.mh.unk0.x4 = lbl_8014FFDC;
-    r31_fp->sv.mh.unk0.xC = sp1C_pos;
+    r31_fp->mv.mh.unk0.x4 = lbl_8014FFDC;
+    r31_fp->mv.mh.unk0.xC = sp1C_pos;
 }

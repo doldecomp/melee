@@ -95,7 +95,7 @@ void ftSamus_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
     ftSamus_80128B1C_inner(gobj, angle);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->sv.ss.unk2.x0 = 0;
+    fp->mv.ss.unk2.x0 = 0;
     if (fp->ground_or_air == GA_Ground) {
         func_8007D5D4(fighter2);
     }
@@ -106,13 +106,13 @@ void ftSamus_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
 void ftSamus_80128C04(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->x2200_ftcmd_var0) && (!fp->sv.ss.unk2.x0)) {
+    if ((fp->x2200_ftcmd_var0) && (!fp->mv.ss.unk2.x0)) {
         ftSamus_8012AEBC(gobj);
-        fp->sv.ss.unk2.x0 = 1;
+        fp->mv.ss.unk2.x0 = 1;
     }
-    if ((!fp->x2200_ftcmd_var0) && (fp->sv.ss.unk2.x0)) {
+    if ((!fp->x2200_ftcmd_var0) && (fp->mv.ss.unk2.x0)) {
         ftSamus_8012AF38(gobj);
-        fp->sv.ss.unk2.x0 = 0;
+        fp->mv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_8008A2BC(gobj);
@@ -122,13 +122,13 @@ void ftSamus_80128C04(HSD_GObj* gobj)
 void ftSamus_80128CA0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->x2200_ftcmd_var0) && (!fp->sv.ss.unk2.x0)) {
+    if ((fp->x2200_ftcmd_var0) && (!fp->mv.ss.unk2.x0)) {
         ftSamus_8012AEBC(gobj);
-        fp->sv.ss.unk2.x0 = 1;
+        fp->mv.ss.unk2.x0 = 1;
     }
-    if ((!fp->x2200_ftcmd_var0) && (fp->sv.ss.unk2.x0)) {
+    if ((!fp->x2200_ftcmd_var0) && (fp->mv.ss.unk2.x0)) {
         ftSamus_8012AF38(gobj);
-        fp->sv.ss.unk2.x0 = 0;
+        fp->mv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_800CC730(gobj);

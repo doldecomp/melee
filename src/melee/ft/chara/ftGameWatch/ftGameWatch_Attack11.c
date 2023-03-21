@@ -167,7 +167,7 @@ void ftGameWatch_Attack11_Action(HSD_GObj* gobj)
         fp->x196C_hitlag_mult = (f32) fp->x110_attr.x18C_Jab_2InputWindow;
         fp->x1970 = 44;
         fp->x2218_flag.bits.b2 = 0;
-        fp->sv.gw.Attack11.unk = 0;
+        fp->mv.gw.Attack11.unk = 0;
         fp->x1A54 = 0;
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemGreenhouseSetup;
     }

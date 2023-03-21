@@ -58,9 +58,9 @@ static void doStartAction(HSD_GObj* gobj)
     sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->sv.mr.SpecialLw.groundVelX = (f32) 0;
-    fp->sv.mr.SpecialLw.unk = (s32) (sa->speciallw.unk0 + 1);
-    fp->sv.mr.SpecialLw.isUnkColl = 0;
+    fp->mv.mr.SpecialLw.groundVelX = (f32) 0;
+    fp->mv.mr.SpecialLw.unk = (s32) (sa->speciallw.unk0 + 1);
+    fp->mv.mr.SpecialLw.isUnkColl = 0;
     setCallbacks(gobj);
     setGfx(gobj);
 }
@@ -197,9 +197,9 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     f32 vel_y = sa->speciallw.momentum_x;
 
     if (fp0->x2200_ftcmd_var0 != 0) {
-        fp0->sv.mr.SpecialLw.groundVelX =
-            fp0->sv.mr.SpecialLw.groundVelX - sa->speciallw.friction_end;
-        vel_y += fp0->sv.mr.SpecialLw.groundVelX;
+        fp0->mv.mr.SpecialLw.groundVelX =
+            fp0->mv.mr.SpecialLw.groundVelX - sa->speciallw.friction_end;
+        vel_y += fp0->mv.mr.SpecialLw.groundVelX;
         if (vel_y < 0)
             vel_y = 0;
     }
@@ -241,10 +241,10 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
     flt_var = sa->speciallw.air_momentum_x;
     sa_2 = fp->x2D4_specialAttributes;
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
-        fp->sv.mr.SpecialLw.groundVelX =
-            (f32) (fp->sv.mr.SpecialLw.groundVelX -
+        fp->mv.mr.SpecialLw.groundVelX =
+            (f32) (fp->mv.mr.SpecialLw.groundVelX -
                    sa_2->speciallw.friction_end);
-        flt_var += fp->sv.mr.SpecialLw.groundVelX;
+        flt_var += fp->mv.mr.SpecialLw.groundVelX;
         if (flt_var < 0) {
             flt_var = 0;
         }
@@ -257,7 +257,7 @@ static void doColl(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if ((fp->x220C_ftcmd_var3 != 0U) &&
-        ((s32) (fp->sv.mr.SpecialLw.isUnkColl) != 0))
+        ((s32) (fp->mv.mr.SpecialLw.isUnkColl) != 0))
     {
         func_8007592C(fp, 0,
                       fp->facing_dir *
@@ -282,16 +282,16 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
     if (fp->ground_or_air == GA_Ground) {
         if (func_80082888(gobj, &coll_box) == false) {
             doPhys(gobj);
-            fp->sv.mr.SpecialLw.isUnkColl = false;
+            fp->mv.mr.SpecialLw.isUnkColl = false;
         } else {
-            fp->sv.mr.SpecialLw.isUnkColl = true;
+            fp->mv.mr.SpecialLw.isUnkColl = true;
         }
     } else {
         if (func_800824A0(gobj, &coll_box) == false) {
             doPhys(gobj);
-            fp->sv.mr.SpecialLw.isUnkColl = false;
+            fp->mv.mr.SpecialLw.isUnkColl = false;
         } else {
-            fp->sv.mr.SpecialLw.isUnkColl = true;
+            fp->mv.mr.SpecialLw.isUnkColl = true;
         }
     }
 
@@ -327,9 +327,9 @@ void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (func_800824A0(gobj, &coll_box)) {
         doAirCollIfUnk(gobj);
-        fp->sv.mr.SpecialLw.isUnkColl = true;
+        fp->mv.mr.SpecialLw.isUnkColl = true;
     } else {
-        fp->sv.mr.SpecialLw.isUnkColl = false;
+        fp->mv.mr.SpecialLw.isUnkColl = false;
     }
 
     doColl(gobj);

@@ -257,7 +257,7 @@ void ftFox_SpecialN_StartAction(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
 
-    fp->sv.fx.SpecialN.isBlasterLoop = false;
+    fp->mv.fx.SpecialN.isBlasterLoop = false;
 
     blasterGObj = func_802AE8A8(fp->facing_dir, gobj, &fp->xB0_pos,
                                 func_8007500C(fp, 0x31),
@@ -293,7 +293,7 @@ void ftFox_SpecialAirN_StartAction(
 
     func_8006EBA4(gobj);
 
-    fp->sv.fx.SpecialN.isBlasterLoop = false;
+    fp->mv.fx.SpecialN.isBlasterLoop = false;
     blasterGObj = func_802AE8A8(fp->facing_dir, gobj, &fp->xB0_pos,
                                 func_8007500C(fp, 0x31),
                                 foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
@@ -353,7 +353,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* gobj)
         func_802AE538(temp_r28->ev.fx.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if ((s32) temp_r28->sv.fx.SpecialN.isBlasterLoop == true) {
+        if ((s32) temp_r28->mv.fx.SpecialN.isBlasterLoop == true) {
             temp_r28->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
             Fighter_ActionStateChange_800693AC(
                 gobj, AS_FOX_SPECIALN_LOOP,
@@ -361,7 +361,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* gobj)
                  FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
                 NULL, 0.0f, 1.0f, 0.0f);
             temp_r28->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
-            temp_r28->sv.fx.SpecialN.isBlasterLoop = false;
+            temp_r28->mv.fx.SpecialN.isBlasterLoop = false;
             func_802ADDD0(temp_r28->ev.fx.x222C_blasterGObj, 1);
         } else {
             HSD_GObj* temp;
@@ -511,7 +511,7 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* gobj)
         func_802AE538(fp->ev.fx.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if ((s32) fp->sv.fx.SpecialN.isBlasterLoop == true) {
+        if ((s32) fp->mv.fx.SpecialN.isBlasterLoop == true) {
             fp->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
             Fighter_ActionStateChange_800693AC(
                 gobj, AS_FOX_SPECIALAIRN_LOOP,
@@ -520,7 +520,7 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* gobj)
                 NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
-            fp->sv.fx.SpecialN.isBlasterLoop = false;
+            fp->mv.fx.SpecialN.isBlasterLoop = false;
             func_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
         } else {
             HSD_GObj* temp;
@@ -633,7 +633,7 @@ void ftFox_SpecialNStart_IASA(HSD_GObj* gobj)
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
     {
-        fp->sv.fx.SpecialN.isBlasterLoop = true;
+        fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }
 
@@ -646,7 +646,7 @@ void ftFox_SpecialNLoop_IASA(HSD_GObj* gobj)
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
     {
-        fp->sv.fx.SpecialN.isBlasterLoop = true;
+        fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }
 
@@ -665,7 +665,7 @@ void ftFox_SpecialAirNStart_IASA(HSD_GObj* gobj)
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
     {
-        fp->sv.fx.SpecialN.isBlasterLoop = true;
+        fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }
 
@@ -678,7 +678,7 @@ void ftFox_SpecialAirNLoop_IASA(HSD_GObj* gobj)
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
     {
-        fp->sv.fx.SpecialN.isBlasterLoop = true;
+        fp->mv.fx.SpecialN.isBlasterLoop = true;
     }
 }
 

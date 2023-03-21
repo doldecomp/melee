@@ -32,17 +32,17 @@ void ftLuigi_SpecialS_SetVars(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
 
     if (fp->x673 < sa->x4_LUIGI_GREENMISSILE_SMASH) {
-        fp->sv.lg.SpecialS.chargeFrames =
+        fp->mv.lg.SpecialS.chargeFrames =
             sa->x8_LUIGI_GREENMISSILE_CHARGE_RATE;
         fp->x2070.x2072_b4 = true;
     } else {
-        fp->sv.lg.SpecialS.chargeFrames = 0;
+        fp->mv.lg.SpecialS.chargeFrames = 0;
     }
 
     if (HSD_Randi(sa->x44_LUIGI_GREENMISSILE_MISFIRE_CHANCE) == 0)
-        fp->sv.lg.SpecialS.isMisfire = true;
+        fp->mv.lg.SpecialS.isMisfire = true;
     else
-        fp->sv.lg.SpecialS.isMisfire = false;
+        fp->mv.lg.SpecialS.isMisfire = false;
 }
 
 /// Luigi's grounded Green Missile Action State handler
@@ -210,9 +210,9 @@ void ftLuigi_SpecialSHold_Anim(HSD_GObj* gobj)
         fp->cb.x21BC_callback_Accessory4 = ftLuigi_SpecialS_SetGFX;
     }
 
-    fp->sv.lg.SpecialS.chargeFrames++;
+    fp->mv.lg.SpecialS.chargeFrames++;
 
-    if (fp->sv.lg.SpecialS.chargeFrames >
+    if (fp->mv.lg.SpecialS.chargeFrames >
         sa->xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES)
     {
         ftLuigi_SpecialSLaunch_Action(gobj);
@@ -235,9 +235,9 @@ void ftLuigi_SpecialAirSHold_Anim(HSD_GObj* gobj)
         fp->cb.x21BC_callback_Accessory4 = ftLuigi_SpecialS_SetGFX;
     }
 
-    fp->sv.lg.SpecialS.chargeFrames++;
+    fp->mv.lg.SpecialS.chargeFrames++;
 
-    if (fp->sv.lg.SpecialS.chargeFrames >
+    if (fp->mv.lg.SpecialS.chargeFrames >
         sa->xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES)
     {
         ftLuigi_SpecialAirSLaunch_Action(gobj);
@@ -360,11 +360,11 @@ void ftLuigi_SpecialSLaunch_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    if (!fp->sv.lg.SpecialS.isMisfire &&
+    if (!fp->mv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
-                      fp->sv.lg.SpecialS.chargeFrames *
+                      fp->mv.lg.SpecialS.chargeFrames *
                               sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
                           sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
                       gobj);
@@ -387,11 +387,11 @@ void ftLuigi_SpecialAirSLaunch_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    if (!fp->sv.lg.SpecialS.isMisfire &&
+    if (!fp->mv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
-                      fp->sv.lg.SpecialS.chargeFrames *
+                      fp->mv.lg.SpecialS.chargeFrames *
                               sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
                           sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
                       gobj);
@@ -495,7 +495,7 @@ void ftLuigi_SpecialSLaunch_Action(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->sv.lg.SpecialS.isMisfire) {
+    if (fp->mv.lg.SpecialS.isMisfire) {
         ftLuigi_SpecialSMisfire_Action(gobj);
         return;
     }
@@ -512,7 +512,7 @@ void ftLuigi_SpecialAirSLaunch_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->sv.lg.SpecialS.isMisfire) {
+    if (fp->mv.lg.SpecialS.isMisfire) {
         ftLuigi_SpecialAirSMisfire_Action(gobj);
         return;
     }
@@ -535,11 +535,11 @@ void ftLuigi_SpecialSMisfire_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    if (!fp->sv.lg.SpecialS.isMisfire &&
+    if (!fp->mv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
-                      fp->sv.lg.SpecialS.chargeFrames *
+                      fp->mv.lg.SpecialS.chargeFrames *
                               sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
                           sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
                       gobj);
@@ -562,11 +562,11 @@ void ftLuigi_SpecialAirSMisfire_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = getFtSpecialAttrsD(fp);
 
-    if (!fp->sv.lg.SpecialS.isMisfire &&
+    if (!fp->mv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
         func_8007ABD0(&fp->x914[0],
-                      fp->sv.lg.SpecialS.chargeFrames *
+                      fp->mv.lg.SpecialS.chargeFrames *
                               sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
                           sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
                       gobj);
@@ -749,24 +749,24 @@ void ftLuigi_SpecialSFly_Action(HSD_GObj* gobj)
     sa = getFtSpecialAttrsD(fp);
     fp->x2200_ftcmd_var0 = 0;
 
-    if (fp->sv.lg.SpecialS.isMisfire) {
+    if (fp->mv.lg.SpecialS.isMisfire) {
         fp->x80_self_vel.x = sa->x48_LUIGI_GREENMISSILE_MISFIRE_VEL_X;
     } else {
         fp->x80_self_vel.x = sa->x28_LUIGI_GREENMISSILE_MUL_X *
-                                 fp->sv.lg.SpecialS.chargeFrames +
+                                 fp->mv.lg.SpecialS.chargeFrames +
                              sa->x24_LUIGI_GREENMISSILE_VEL_X;
     }
 
     fp->x80_self_vel.x *= fp->facing_dir;
 
-    if (fp->sv.lg.SpecialS.isMisfire) {
+    if (fp->mv.lg.SpecialS.isMisfire) {
         fp->x80_self_vel.y = sa->x4C_LUIGI_GREENMISSILE_MISFIRE_VEL_Y;
     } else {
         f32 vel_y = sa->x2C_LUIGI_GREENMISSILE_VEL_Y;
 
         fp->x80_self_vel.y =
             0.5f * vel_y +
-            vel_y * (0.5f * fp->sv.lg.SpecialS.chargeFrames /
+            vel_y * (0.5f * fp->mv.lg.SpecialS.chargeFrames /
                      sa->xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES);
     }
 

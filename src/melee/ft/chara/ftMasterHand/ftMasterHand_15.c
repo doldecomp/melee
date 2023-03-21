@@ -57,7 +57,7 @@ void func_801530A4(HSD_GObj* gobj)
     Fighter_ActionStateChange_800693AC(gobj, 0x16C, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     rand = HSD_Randi(attr->xE8 - attr->xE4);
-    fp->sv.mh.unk0.x50 = attr->xE4 + rand;
+    fp->mv.mh.unk0.x50 = attr->xE4 + rand;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -74,17 +74,17 @@ void lbl_80153160(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->x2208_ftcmd_var2 = 1;
-        temp_f1 = fp->sv.mh.unk0.x50 - 1.0f;
-        fp->sv.mh.unk0.x50 = temp_f1;
+        temp_f1 = fp->mv.mh.unk0.x50 - 1.0f;
+        fp->mv.mh.unk0.x50 = temp_f1;
         if (temp_f1 < 0.0f) {
             ftData = fp->x10C_ftData;
             temp_r29 = ftData->ext_attr;
             func_801533CC(gobj);
 
             if (func_80087120(gobj) > temp_r29->xEC)
-                fp->sv.mh.unk0.x54 = temp_r29->xF0;
+                fp->mv.mh.unk0.x54 = temp_r29->xF0;
             else
-                fp->sv.mh.unk0.x54 = 1;
+                fp->mv.mh.unk0.x54 = 1;
 
             fp->x2208_ftcmd_var2 = 0;
         }
@@ -214,7 +214,7 @@ void lbl_8015346C(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* ft4 = GET_FIGHTER(gobj);
-        if (--ft4->sv.mh.unk0.x54 == 0) {
+        if (--ft4->mv.mh.unk0.x54 == 0) {
             ftAnim_SetAnimRate(gobj, 1.0f);
             func_80153730(gobj);
         } else {

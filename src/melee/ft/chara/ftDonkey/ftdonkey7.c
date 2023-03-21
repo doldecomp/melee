@@ -26,9 +26,9 @@ void ftDonkey_800E04A4(HSD_GObj* gobj, s32 arg1)
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
     ftDonkeyAttributes* donkey_attr2;
-    fp->sv.dk.unk7.x4 = arg1;
-    fp->sv.dk.unk7.x0 = 0;
-    fp->sv.dk.unk7.x8 = donkey_attr->cargo_hold.x24_JUMP_STARTUP_LAG;
+    fp->mv.dk.unk7.x4 = arg1;
+    fp->mv.dk.unk7.x0 = 0;
+    fp->mv.dk.unk7.x8 = donkey_attr->cargo_hold.x24_JUMP_STARTUP_LAG;
     donkey_attr2 = getFtSpecialAttrs2CC(fp);
 
     Fighter_ActionStateChange_800693AC(gobj, donkey_attr2->action_state + 5, 0,
@@ -39,8 +39,8 @@ void ftDonkey_800E04A4(HSD_GObj* gobj, s32 arg1)
 void ftDonkey_800E0518(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->sv.dk.unk7.x8 <= 0.0f) {
+    if (fp->mv.dk.unk7.x8 <= 0.0f) {
         ftDonkey_800E03C0(gobj);
     }
-    fp->sv.dk.unk7.x8 -= 1.0f;
+    fp->mv.dk.unk7.x8 -= 1.0f;
 }

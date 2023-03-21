@@ -11,7 +11,7 @@
 void ftDonkey_SpecialLw_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->sv.dk.speciallw.x0 = 0;
+    fp->mv.dk.speciallw.x0 = 0;
     Fighter_ActionStateChange_800693AC(gobj, 0x17F, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
@@ -44,8 +44,8 @@ void ftDonkey_8010DD74(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->sv.dk.speciallw.x0) {
-            fp->sv.dk.speciallw.x0 = 0;
+        if (fp->mv.dk.speciallw.x0) {
+            fp->mv.dk.speciallw.x0 = 0;
             ftDonkey_8010DE88(gobj);
         } else {
             ftDonkey_8010DFF8(gobj);
@@ -57,7 +57,7 @@ void ftDonkey_8010DDDC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.x668 & 0x200) {
-        fp->sv.dk.speciallw.x0 = 1;
+        fp->mv.dk.speciallw.x0 = 1;
     }
 }
 

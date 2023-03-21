@@ -26,7 +26,7 @@ void ftSamus_SpecialHi_StartAction(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sv.ss.unk5.x0 = 0;
+    fp->mv.ss.unk5.x0 = 0;
     func_8006EBA4(gobj);
     ef_Spawn(0x482, gobj, fp->x5E8_fighterBones[3].x0_jobj);
     fp->ev.ss.x2244 = 1;
@@ -46,7 +46,7 @@ void ftSamus_SpecialAirHi_StartAction(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sv.ss.unk5.x0 = 0;
+    fp->mv.ss.unk5.x0 = 0;
     fp->x80_self_vel.y = samus_attr->x44;
     func_8007D440(fp, samus_attr->x40);
     func_8006EBA4(gobj);
@@ -111,7 +111,7 @@ void ftSamus_8012A96C(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if ((!fp->x2204_ftcmd_var1) && (!fp->sv.ss.unk5.x0)) {
+    if ((!fp->x2204_ftcmd_var1) && (!fp->mv.ss.unk5.x0)) {
         if ((lstick_x = fp->input.x620_lstick_x) < 0.0f) {
             mag = -lstick_x;
         } else {
@@ -122,7 +122,7 @@ void ftSamus_8012A96C(HSD_GObj* gobj)
                 ((fp->facing_dir == -1.0f) && (lstick_x > 0.0f)))
             {
                 fp->x2204_ftcmd_var1 = 1;
-                fp->sv.ss.unk5.x0 = 1;
+                fp->mv.ss.unk5.x0 = 1;
                 func_8007D9FC(fp);
                 func_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }
@@ -142,7 +142,7 @@ void ftSamus_8012AA3C(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if ((!fp->x2204_ftcmd_var1) && (!fp->sv.ss.unk5.x0)) {
+    if ((!fp->x2204_ftcmd_var1) && (!fp->mv.ss.unk5.x0)) {
         if ((lstick_x = fp->input.x620_lstick_x) < 0.0f) {
             mag = -lstick_x;
         } else {
@@ -153,7 +153,7 @@ void ftSamus_8012AA3C(HSD_GObj* gobj)
                 ((fp->facing_dir == -1.0f) && (lstick_x > 0.0f)))
             {
                 fp->x2204_ftcmd_var1 = 1;
-                fp->sv.ss.unk5.x0 = 1;
+                fp->mv.ss.unk5.x0 = 1;
                 func_8007D9FC(fp);
                 func_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }

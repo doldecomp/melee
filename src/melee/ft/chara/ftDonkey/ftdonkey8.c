@@ -25,7 +25,7 @@ void ftDonkey_800E05E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
-    fp->sv.dk.unk8.x4 = donkey_attr->cargo_hold.x28_LANDING_LAG;
+    fp->mv.dk.unk8.x4 = donkey_attr->cargo_hold.x28_LANDING_LAG;
     donkey_attr = getFtSpecialAttrs2CC(fp);
     func_800D5AEC(gobj, donkey_attr->action_state + 8, 1, 0, fp, 0.0f, 1.0f);
     ftAnim_SetAnimRate(gobj, 0.0f);
@@ -35,8 +35,8 @@ void ftDonkey_800E0648(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->sv.dk.unk8.x4 <= 0.0f)
+    if (fp->mv.dk.unk8.x4 <= 0.0f)
         ftDonkey_800DF980(gobj);
 
-    fp->sv.dk.unk8.x4 -= 1.0f;
+    fp->mv.dk.unk8.x4 -= 1.0f;
 }

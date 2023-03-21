@@ -113,12 +113,12 @@ void ftNess_SpecialNStart_Action(HSD_GObj* gobj)
         Fighter* fp1 = GET_FIGHTER(gobj);
         ftNessAttributes* sa = getFtSpecialAttrs(fp1);
 
-        fp1->sv.ns.specialn.flashTimerLoop1 = sa->x0_PKFLASH_TIMER1_LOOPFRAMES;
-        fp1->sv.ns.specialn.flashTimerLoop2 = sa->x4_PKFLASH_TIMER2_LOOPFRAMES;
-        fp1->sv.ns.specialn.gravityDelay = sa->x8_PKFLASH_GRAVITY_DELAY;
+        fp1->mv.ns.specialn.flashTimerLoop1 = sa->x0_PKFLASH_TIMER1_LOOPFRAMES;
+        fp1->mv.ns.specialn.flashTimerLoop2 = sa->x4_PKFLASH_TIMER2_LOOPFRAMES;
+        fp1->mv.ns.specialn.gravityDelay = sa->x8_PKFLASH_GRAVITY_DELAY;
 
         fp1->ev.ns.x2240_flashGObj = NULL;
-        fp1->sv.ns.specialn.flashTimerMin = sa->xC_PKFLASH_MINCHARGEFRAMES;
+        fp1->mv.ns.specialn.flashTimerMin = sa->xC_PKFLASH_MINCHARGEFRAMES;
         fp1->cb.x21E4_callback_OnDeath2 = NULL;
         fp1->cb.x21DC_callback_OnTakeDamage = NULL;
     }
@@ -149,16 +149,16 @@ void ftNess_SpecialAirNStart_Action(HSD_GObj* gobj)
         Fighter* temp_fp = GET_FIGHTER(gobj);
         ftNessAttributes* ness_attr = getFtSpecialAttrs(temp_fp);
 
-        temp_fp->sv.ns.specialn.flashTimerLoop1 =
+        temp_fp->mv.ns.specialn.flashTimerLoop1 =
             ness_attr->x0_PKFLASH_TIMER1_LOOPFRAMES;
-        temp_fp->sv.ns.specialn.flashTimerLoop2 =
+        temp_fp->mv.ns.specialn.flashTimerLoop2 =
             ness_attr->x4_PKFLASH_TIMER2_LOOPFRAMES;
-        temp_fp->sv.ns.specialn.gravityDelay =
+        temp_fp->mv.ns.specialn.gravityDelay =
             ness_attr->x8_PKFLASH_GRAVITY_DELAY;
 
         temp_fp->ev.ns.x2240_flashGObj = NULL;
 
-        temp_fp->sv.ns.specialn.flashTimerMin =
+        temp_fp->mv.ns.specialn.flashTimerMin =
             ness_attr->xC_PKFLASH_MINCHARGEFRAMES;
 
         temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
@@ -216,18 +216,18 @@ void ftNess_SpecialNHold_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->sv.ns.specialn.flashTimerLoop1 != 0)
-        fp->sv.ns.specialn.flashTimerLoop1--;
+    if (fp->mv.ns.specialn.flashTimerLoop1 != 0)
+        fp->mv.ns.specialn.flashTimerLoop1--;
 
     if (fp->ev.ns.x2240_flashGObj == NULL &&
-        fp->sv.ns.specialn.flashTimerLoop2 != 0)
+        fp->mv.ns.specialn.flashTimerLoop2 != 0)
     {
-        fp->sv.ns.specialn.flashTimerLoop2--;
+        fp->mv.ns.specialn.flashTimerLoop2--;
     }
 
     if (fp->ev.ns.x2240_flashGObj == NULL) {
-        if (fp->sv.ns.specialn.flashTimerLoop1 <= 0 &&
-            fp->sv.ns.specialn.flashTimerLoop2 <= 0)
+        if (fp->mv.ns.specialn.flashTimerLoop1 <= 0 &&
+            fp->mv.ns.specialn.flashTimerLoop2 <= 0)
         {
             Fighter_ActionStateChange_800693AC(gobj, AS_NESS_SPECIALN_END, 0,
                                                NULL, 0, 1, 0);
@@ -264,11 +264,11 @@ inline void SetPKFlashAttr(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = fp->x2D4_specialAttributes;
 
-    fp->sv.ns.specialn.flashTimerLoop1 = sa->x0_PKFLASH_TIMER1_LOOPFRAMES;
-    fp->sv.ns.specialn.flashTimerLoop2 = sa->x4_PKFLASH_TIMER2_LOOPFRAMES;
-    fp->sv.ns.specialn.gravityDelay = sa->x8_PKFLASH_GRAVITY_DELAY;
+    fp->mv.ns.specialn.flashTimerLoop1 = sa->x0_PKFLASH_TIMER1_LOOPFRAMES;
+    fp->mv.ns.specialn.flashTimerLoop2 = sa->x4_PKFLASH_TIMER2_LOOPFRAMES;
+    fp->mv.ns.specialn.gravityDelay = sa->x8_PKFLASH_GRAVITY_DELAY;
     fp->ev.ns.x2240_flashGObj = NULL;
-    fp->sv.ns.specialn.flashTimerMin = sa->xC_PKFLASH_MINCHARGEFRAMES;
+    fp->mv.ns.specialn.flashTimerMin = sa->xC_PKFLASH_MINCHARGEFRAMES;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -341,18 +341,18 @@ void ftNess_SpecialAirNHold_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->sv.ns.specialn.flashTimerLoop1 != 0)
-        fp->sv.ns.specialn.flashTimerLoop1--;
+    if (fp->mv.ns.specialn.flashTimerLoop1 != 0)
+        fp->mv.ns.specialn.flashTimerLoop1--;
 
     if (fp->ev.ns.x2240_flashGObj == NULL &&
-        fp->sv.ns.specialn.flashTimerLoop2 != 0)
+        fp->mv.ns.specialn.flashTimerLoop2 != 0)
     {
-        fp->sv.ns.specialn.flashTimerLoop2--;
+        fp->mv.ns.specialn.flashTimerLoop2--;
     }
 
     if (fp->ev.ns.x2240_flashGObj == NULL) {
-        if (fp->sv.ns.specialn.flashTimerLoop1 <= 0 &&
-            fp->sv.ns.specialn.flashTimerLoop2 <= 0)
+        if (fp->mv.ns.specialn.flashTimerLoop1 <= 0 &&
+            fp->mv.ns.specialn.flashTimerLoop2 <= 0)
         {
             Fighter_ActionStateChange_800693AC(gobj, AS_NESS_SPECIALAIRN_END,
                                                0, NULL, 0, 1, 0);
@@ -417,13 +417,13 @@ void ftNess_SpecialNHold_IASA(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        fp->sv.ns.specialn.flashTimerMin--;
+        fp->mv.ns.specialn.flashTimerMin--;
 
         {
             /// @todo Nested return value
             bool result;
-            if (fp->sv.ns.specialn.flashTimerMin <= 0) {
-                fp->sv.ns.specialn.flashTimerMin = 0;
+            if (fp->mv.ns.specialn.flashTimerMin <= 0) {
+                fp->mv.ns.specialn.flashTimerMin = 0;
                 result = true;
             } else {
                 result = false;
@@ -465,14 +465,14 @@ void ftNess_SpecialAirNHold_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->sv.ns.specialn.flashTimerMin = fp->sv.ns.specialn.flashTimerMin - 1;
+    fp->mv.ns.specialn.flashTimerMin = fp->mv.ns.specialn.flashTimerMin - 1;
 
     {
         /// @todo Nested return value
         bool result;
 
-        if (fp->sv.ns.specialn.flashTimerMin <= 0) {
-            fp->sv.ns.specialn.flashTimerMin = 0;
+        if (fp->mv.ns.specialn.flashTimerMin <= 0) {
+            fp->mv.ns.specialn.flashTimerMin = 0;
             result = true;
         } else {
             result = false;
@@ -510,8 +510,8 @@ inline void GravityDelay(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->sv.ns.specialn.gravityDelay != 0)
-        fp->sv.ns.specialn.gravityDelay--;
+    if (fp->mv.ns.specialn.gravityDelay != 0)
+        fp->mv.ns.specialn.gravityDelay--;
 }
 
 /// Ness's grounded PK Flash Start Physics callback
@@ -544,8 +544,8 @@ void ftNess_SpecialAirNStart_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = fp->x2D4_specialAttributes;
 
-    if (fp->sv.ns.specialn.gravityDelay != 0) {
-        fp->sv.ns.specialn.gravityDelay--;
+    if (fp->mv.ns.specialn.gravityDelay != 0) {
+        fp->mv.ns.specialn.gravityDelay--;
     } else
         func_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
                       fp->x110_attr.x170_TerminalVelocity);
@@ -567,8 +567,8 @@ void ftNess_SpecialAirNHold_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = fp->x2D4_specialAttributes;
 
-    if (fp->sv.ns.specialn.gravityDelay != 0) {
-        fp->sv.ns.specialn.gravityDelay--;
+    if (fp->mv.ns.specialn.gravityDelay != 0) {
+        fp->mv.ns.specialn.gravityDelay--;
     } else {
         func_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
                       fp->x110_attr.x170_TerminalVelocity);
@@ -591,8 +591,8 @@ void ftNess_SpecialAirNEnd_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = fp->x2D4_specialAttributes;
 
-    if (fp->sv.ns.specialn.gravityDelay != 0) {
-        fp->sv.ns.specialn.gravityDelay--;
+    if (fp->mv.ns.specialn.gravityDelay != 0) {
+        fp->mv.ns.specialn.gravityDelay--;
     } else {
         func_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
                       fp->x110_attr.x170_TerminalVelocity);

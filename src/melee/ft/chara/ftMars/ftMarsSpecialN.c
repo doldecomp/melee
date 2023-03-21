@@ -166,15 +166,15 @@ void lbl_80136ADC(HSD_GObj* gobj)
     u8 _[28];
 #endif
 
-    if (fp->sv.ms.specialn.x0 % 30 == 0) {
+    if (fp->mv.ms.specialn.x0 % 30 == 0) {
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
                       &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
 
-    fp->sv.ms.specialn.x0++;
+    fp->mv.ms.specialn.x0++;
 
-    if ((s32) fp->sv.ms.specialn.x0 > *specialAttrs * 30) {
+    if ((s32) fp->mv.ms.specialn.x0 > *specialAttrs * 30) {
         fp->x2200_ftcmd_var0 = 1;
         func_80137354(gobj);
     }
@@ -191,13 +191,13 @@ void lbl_80136BB4(HSD_GObj* gobj)
     u8 _[28];
 #endif
 
-    if ((s32) fp->sv.ms.specialn.x0 % 30 == 0) {
+    if ((s32) fp->mv.ms.specialn.x0 % 30 == 0) {
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
                       &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
-    fp->sv.ms.specialn.x0++;
-    if ((s32) fp->sv.ms.specialn.x0 > attrs->x0 * 30) {
+    fp->mv.ms.specialn.x0++;
+    if ((s32) fp->mv.ms.specialn.x0 > attrs->x0 * 30) {
         fp->x2200_ftcmd_var0 = 1;
         func_801373B8(gobj);
     }
@@ -315,9 +315,9 @@ void lbl_80136EE4(HSD_GObj* gobj)
                     (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
-                    (f32) (attr->x4 + fp->sv.ms.specialn.x0 / 30 * attr->x8),
+                    (f32) (attr->x4 + fp->mv.ms.specialn.x0 / 30 * attr->x8),
 #else
-                    attr->x4 + fp->sv.ms.specialn.x0 / 30.0F * attr->x8,
+                    attr->x4 + fp->mv.ms.specialn.x0 / 30.0F * attr->x8,
 #endif
 
                     gobj);
@@ -366,7 +366,7 @@ void lbl_80137010(HSD_GObj* gobj)
         //     if (fp->x914[ndx].x0 == 1) {
         //         // Hitbox_ApplyDamageStalingAndMore
         //         func_8007ABD0(&fp->x914[ndx], (f32) (attr->x4 +
-        //         (s32)fp->sv.ms.specialn.x0 / 30 * attr->x8), gobj);
+        //         (s32)fp->mv.ms.specialn.x0 / 30 * attr->x8), gobj);
         //     }
         // }
 
@@ -379,9 +379,9 @@ void lbl_80137010(HSD_GObj* gobj)
                     (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
-                    (f32) (attr->x4 + fp->sv.ms.specialn.x0 / 30 * attr->x8),
+                    (f32) (attr->x4 + fp->mv.ms.specialn.x0 / 30 * attr->x8),
 #else
-                    attr->x4 + fp->sv.ms.specialn.x0 / 30.0F * attr->x8,
+                    attr->x4 + fp->mv.ms.specialn.x0 / 30.0F * attr->x8,
 #endif
 
                     gobj);

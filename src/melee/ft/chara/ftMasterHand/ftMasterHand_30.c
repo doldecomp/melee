@@ -171,7 +171,7 @@ void lbl_80155904(HSD_GObj* gobj)
 void lbl_80155908(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if ((--fp->sv.mh.unk0.x24 <= 0.0f) && (fp->x2200_ftcmd_var0 != 0)) {
+    if ((--fp->mv.mh.unk0.x24 <= 0.0f) && (fp->x2200_ftcmd_var0 != 0)) {
         func_80155D1C(fp->x1A58_interactedFighter);
         fp->x2200_ftcmd_var0 = 0;
     }
@@ -195,7 +195,7 @@ void lbl_801559D4(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
     func_80085134(gobj);
-    func_8015BE40(gobj, &fp->sv.mh.unk0.xC, &fp->sv.mh.unk0.x18, attr->x2C,
+    func_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, attr->x2C,
                   attr->x28);
 }
 
@@ -205,7 +205,7 @@ void lbl_80155A34(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if (fp->sv.mh.unk0.x18 == 0.0f) {
+    if (fp->mv.mh.unk0.x18 == 0.0f) {
         fp->x80_self_vel.z = 0.0f;
         fp->x80_self_vel.y = 0.0f;
         fp->x80_self_vel.x = 0.0f;
