@@ -27,7 +27,7 @@ typedef struct _ftKirbyAttributes {
     u8 data_filler_4[0x424 - 0x388];
 } ftKirbyAttributes;
 
-extern MotionState as_table_kirby[];
+extern MotionState ms_table_kirby[];
 extern MotionState lbl_803CA04C[];
 extern char lbl_803CA308[];
 extern char lbl_803CA314[];

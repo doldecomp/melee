@@ -10,7 +10,7 @@
 #include <baselib/forward.h>
 
 static usize_t const states_count = ftMario_MS_Count - ftCo_MS_Count;
-extern MotionState as_table_mario[states_count];
+extern MotionState ms_table_mario[states_count];
 
 static usize_t const aux_states_count = 2;
 extern MotionState lbl_803C7260[aux_states_count];

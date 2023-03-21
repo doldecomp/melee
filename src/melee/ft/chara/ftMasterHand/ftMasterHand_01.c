@@ -35,7 +35,7 @@
 #include "ft/ftcamera.h"
 #include "ft/types.h"
 
-MotionState as_table_masterhand[] = {
+MotionState ms_table_masterhand[] = {
     { 295, 0, 0x01000000, lbl_80150230, lbl_8015082C, lbl_80150870,
       lbl_80150890, func_800761C8 },
     { 296, 0, 0x01000000, lbl_80150230, lbl_8015082C, lbl_80150870,

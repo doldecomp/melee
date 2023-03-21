@@ -13,7 +13,7 @@ typedef struct _ftPichuAttributes {
     /* 0xDC */ u32 xDC;
 } ftPichuAttributes;
 
-extern MotionState as_table_pichu[];
+extern MotionState ms_table_pichu[];
 extern char lbl_803D21E8[];
 extern char lbl_803D21F4[];
 extern Fighter_CostumeStrings lbl_803D23B4[];

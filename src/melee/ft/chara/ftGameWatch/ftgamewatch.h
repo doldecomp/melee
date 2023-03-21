@@ -76,7 +76,7 @@ typedef struct _ftGameWatchAttributes {
 
 } ftGameWatchAttributes;
 
-extern MotionState as_table_gamewatch[];
+extern MotionState ms_table_gamewatch[];
 extern char lbl_803D28E8[];
 extern char lbl_803D28F4[];
 extern Fighter_CostumeStrings lbl_803D29C8[];

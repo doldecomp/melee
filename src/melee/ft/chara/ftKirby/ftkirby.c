@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx/types.h>
 
-MotionState as_table_kirby[] = {
+MotionState ms_table_kirby[] = {
     { 295, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
     { 296, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,

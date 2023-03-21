@@ -8,7 +8,7 @@
 #include <platform.h>
 #include <baselib/gobj.h>
 
-extern MotionState as_table_captain[];
+extern MotionState ms_table_captain[];
 extern char lbl_803C7598[];
 extern char lbl_803C75A4[];
 extern Fighter_CostumeStrings lbl_803C773C[];

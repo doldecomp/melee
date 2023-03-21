@@ -9,7 +9,7 @@
 #include "it/forward.h"
 #include "lb/lbmthp.h"
 
-MotionState as_table_peach[] = {
+MotionState ms_table_peach[] = {
     { 295, 0, 0x01000000, ftPeach_8011BC38, ftPeach_8011BC8C, ftPeach_8011BD18,
       ftPeach_8011BD3C, func_800761C8 },
     { 296, 0, 0x01000000, ftPeach_8011BDF0, ftPeach_8011BE2C, ftPeach_8011BE30,

@@ -6,7 +6,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-MotionState as_table_zelda[] = {
+MotionState ms_table_zelda[] = {
     { 295, 0x00341011, 0x12000000, ftZelda_8013AA38, ftZelda_8013AB60,
       ftZelda_8013AB68, ftZelda_8013AC10, func_800761C8 },
     { 296, 0x00341411, 0x12000000, ftZelda_8013AACC, ftZelda_8013AB64,

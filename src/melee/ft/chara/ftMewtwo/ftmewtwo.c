@@ -6,7 +6,7 @@
 #include "ft/types.h"
 #include "it/forward.h"
 
-MotionState as_table_mewtwo[] = {
+MotionState ms_table_mewtwo[] = {
     { 295, 0x00340111, 0x12000000, ftMewtwo_SpecialNStart_Anim,
       ftMewtwo_SpecialNStart_IASA, ftMewtwo_SpecialNStart_Phys,
       ftMewtwo_SpecialNStart_Coll, func_800761C8 },

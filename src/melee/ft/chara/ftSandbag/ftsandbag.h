@@ -5,7 +5,7 @@
 
 #include <baselib/gobj.h>
 
-extern MotionState as_table_sandbag[];
+extern MotionState ms_table_sandbag[];
 extern char lbl_803D39B8[];
 extern char lbl_803D39C4[];
 extern Fighter_CostumeStrings lbl_803D3A24[];

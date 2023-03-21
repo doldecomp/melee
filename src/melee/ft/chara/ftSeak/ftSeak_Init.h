@@ -6,7 +6,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-extern MotionState as_table_seak[];
+extern MotionState ms_table_seak[];
 extern char lbl_803CC360[];
 extern char lbl_803CC36C[];
 extern char lbl_803CC4CC[];

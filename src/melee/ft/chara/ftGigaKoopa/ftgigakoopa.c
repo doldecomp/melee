@@ -7,7 +7,7 @@
 #include "ftKoopa/ftkoopa.h"
 #include "it/forward.h"
 
-MotionState as_table_gkoopa[] = {
+MotionState ms_table_gkoopa[] = {
     { 295, 0x00340011, 0x12000000, lbl_80134F48, lbl_801351B0, lbl_80135438,
       lbl_801354F8, func_800761C8 },
     { 296, 0x003C0011, 0x12000000, lbl_80134F9C, lbl_801351B4, lbl_80135458,

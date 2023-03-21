@@ -76,7 +76,7 @@ typedef struct _ftCrazyHandAttributes {
     Vec2 x13C_pos;
 } ftCrazyHandAttributes;
 
-extern MotionState as_table_crazyhand[];
+extern MotionState ms_table_crazyhand[];
 extern char lbl_803D4818[];
 extern char lbl_803D4824[];
 extern Fighter_CostumeStrings lbl_803D4868[];

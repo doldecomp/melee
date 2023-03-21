@@ -11,7 +11,7 @@ typedef struct _ftPeachAttributes {
     u8 padding[0xB8];
 } ftPeachAttributes;
 
-extern MotionState as_table_peach[];
+extern MotionState ms_table_peach[];
 extern char ftPeach_str_PlPe_dat[];
 extern char ftPeach_str_ftDataPeach[];
 extern Fighter_CostumeStrings ftPeach_str_arr_Costumes[];

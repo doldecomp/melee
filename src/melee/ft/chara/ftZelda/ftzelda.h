@@ -6,7 +6,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-extern MotionState as_table_zelda[];
+extern MotionState ms_table_zelda[];
 extern char lbl_803CFC98[];
 extern char lbl_803CFCA4[];
 extern Fighter_CostumeStrings lbl_803CFEB0[];

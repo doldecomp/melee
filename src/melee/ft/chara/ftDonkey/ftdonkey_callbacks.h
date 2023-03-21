@@ -6,7 +6,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-extern MotionState as_table_donkey[];
+extern MotionState ms_table_donkey[];
 extern char lbl_803CBDF8[];
 extern char lbl_803CBE04[];
 extern Fighter_CostumeStrings lbl_803CC020[];
