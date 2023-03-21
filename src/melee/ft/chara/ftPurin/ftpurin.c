@@ -33,60 +33,60 @@ MotionState ftPurin_MotionStateTable[] = {
       func_800D767C, func_800761C8 },
     { 299, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
-    { 300, 0x00340211, 0x12000000, lbl_8013E014, lbl_8013FF00, lbl_80140620,
-      lbl_80140FA4, func_800761C8 },
-    { 301, 0x00340211, 0x12000000, lbl_8013E014, lbl_8013FF00, lbl_80140620,
-      lbl_80140FA4, func_800761C8 },
-    { 302, 0x003C0211, 0x12000000, lbl_8013E0F0, lbl_8013FF04, lbl_80140650,
-      lbl_80141054, func_800761C8 },
-    { 303, 0x003C0211, 0x12000000, lbl_8013E2A0, lbl_80140064, lbl_80140680,
-      lbl_80141154, func_800761C8 },
-    { 304, 0x00340211, 0x12000000, lbl_8013E410, lbl_801401C4, lbl_801406B0,
-      lbl_80141254, func_800761C8 },
-    { 305, 0x00340211, 0x12000000, lbl_8013E7E0, lbl_80140344, lbl_801408B8,
-      lbl_801415F4, func_800761C8 },
-    { 306, 0x00340211, 0x12000000, lbl_8013EAD8, lbl_80140348, lbl_80140BAC,
-      lbl_801416D0, func_800761C8 },
-    { 307, 0x00340211, 0x12000000, lbl_8013EAD8, lbl_80140348, lbl_80140BAC,
-      lbl_801416D0, func_800761C8 },
-    { 308, 0x00340611, 0x12000000, lbl_8013EDB0, lbl_8014034C, lbl_80140BE8,
-      lbl_80141730, func_800761C8 },
-    { 309, 0x00340611, 0x12000000, lbl_8013EDB0, lbl_8014034C, lbl_80140BE8,
-      lbl_80141730, func_800761C8 },
-    { 310, 0x003C0611, 0x12000000, lbl_8013EE84, lbl_80140350, lbl_80140C18,
-      lbl_801417E0, func_800761C8 },
-    { 311, 0x003C0611, 0x12000000, lbl_8013F034, lbl_801404B0, lbl_80140C48,
-      lbl_801418E0, func_800761C8 },
-    { 312, 0x00340611, 0x12000000, lbl_8013F1A4, lbl_80140610, lbl_80140C78,
-      lbl_801419E0, func_800761C8 },
-    { 313, 0x00340211, 0x12000000, lbl_8013F708, lbl_80140614, lbl_80140DF8,
-      lbl_80141FB8, func_800761C8 },
-    { 314, 0x00340611, 0x12000000, lbl_8013F9C0, lbl_80140618, lbl_80140F10,
-      lbl_80142070, func_800761C8 },
-    { 315, 0x00340611, 0x12000000, lbl_8013F9C0, lbl_80140618, lbl_80140F10,
-      lbl_80142070, func_800761C8 },
-    { 316, 0x00340611, 0x12000000, lbl_8013FCAC, lbl_8014061C, lbl_80140F40,
-      lbl_801420D0, func_800761C8 },
-    { 317, 0x00340212, 0x13000000, lbl_8013D30C, lbl_8013D384, lbl_8013D38C,
-      lbl_8013D518, func_800761C8 },
-    { 318, 0x00340612, 0x13000000, lbl_8013D348, lbl_8013D388, lbl_8013D3AC,
-      lbl_8013D554, func_800761C8 },
-    { 319, 0x00340013, 0x14000000, lbl_8013CB68, lbl_8013CC60, lbl_8013CC68,
-      lbl_8013CCA8, func_800761C8 },
-    { 320, 0x00340413, 0x14000000, lbl_8013CBE4, lbl_8013CC64, lbl_8013CC88,
-      lbl_8013CCE4, func_800761C8 },
-    { 321, 0x00340013, 0x14000000, lbl_8013CB68, lbl_8013CC60, lbl_8013CC68,
-      lbl_8013CCA8, func_800761C8 },
-    { 322, 0x00340413, 0x14000000, lbl_8013CBE4, lbl_8013CC64, lbl_8013CC88,
-      lbl_8013CCE4, func_800761C8 },
-    { 323, 0x00340014, 0x15000000, lbl_8013CFCC, lbl_8013D044, lbl_8013D04C,
-      lbl_8013D08C, func_800761C8 },
-    { 324, 0x00340414, 0x15000000, lbl_8013D008, lbl_8013D048, lbl_8013D06C,
-      lbl_8013D0C8, func_800761C8 },
-    { 325, 0x00340014, 0x15000000, lbl_8013CFCC, lbl_8013D044, lbl_8013D04C,
-      lbl_8013D08C, func_800761C8 },
-    { 326, 0x00340414, 0x15000000, lbl_8013D008, lbl_8013D048, lbl_8013D06C,
-      lbl_8013D0C8, func_800761C8 },
+    { 300, 0x00340211, 0x12000000, ftPurin_8013E014, ftPurin_8013FF00,
+      ftPurin_80140620, ftPurin_80140FA4, func_800761C8 },
+    { 301, 0x00340211, 0x12000000, ftPurin_8013E014, ftPurin_8013FF00,
+      ftPurin_80140620, ftPurin_80140FA4, func_800761C8 },
+    { 302, 0x003C0211, 0x12000000, ftPurin_8013E0F0, ftPurin_8013FF04,
+      ftPurin_80140650, ftPurin_80141054, func_800761C8 },
+    { 303, 0x003C0211, 0x12000000, ftPurin_8013E2A0, ftPurin_80140064,
+      ftPurin_80140680, ftPurin_80141154, func_800761C8 },
+    { 304, 0x00340211, 0x12000000, ftPurin_8013E410, ftPurin_801401C4,
+      ftPurin_801406B0, ftPurin_80141254, func_800761C8 },
+    { 305, 0x00340211, 0x12000000, ftPurin_8013E7E0, ftPurin_80140344,
+      ftPurin_801408B8, ftPurin_801415F4, func_800761C8 },
+    { 306, 0x00340211, 0x12000000, ftPurin_8013EAD8, ftPurin_80140348,
+      ftPurin_80140BAC, ftPurin_801416D0, func_800761C8 },
+    { 307, 0x00340211, 0x12000000, ftPurin_8013EAD8, ftPurin_80140348,
+      ftPurin_80140BAC, ftPurin_801416D0, func_800761C8 },
+    { 308, 0x00340611, 0x12000000, ftPurin_8013EDB0, ftPurin_8014034C,
+      ftPurin_80140BE8, ftPurin_80141730, func_800761C8 },
+    { 309, 0x00340611, 0x12000000, ftPurin_8013EDB0, ftPurin_8014034C,
+      ftPurin_80140BE8, ftPurin_80141730, func_800761C8 },
+    { 310, 0x003C0611, 0x12000000, ftPurin_8013EE84, ftPurin_80140350,
+      ftPurin_80140C18, ftPurin_801417E0, func_800761C8 },
+    { 311, 0x003C0611, 0x12000000, ftPurin_8013F034, ftPurin_801404B0,
+      ftPurin_80140C48, ftPurin_801418E0, func_800761C8 },
+    { 312, 0x00340611, 0x12000000, ftPurin_8013F1A4, ftPurin_80140610,
+      ftPurin_80140C78, ftPurin_801419E0, func_800761C8 },
+    { 313, 0x00340211, 0x12000000, ftPurin_8013F708, ftPurin_80140614,
+      ftPurin_80140DF8, ftPurin_80141FB8, func_800761C8 },
+    { 314, 0x00340611, 0x12000000, ftPurin_8013F9C0, ftPurin_80140618,
+      ftPurin_80140F10, ftPurin_80142070, func_800761C8 },
+    { 315, 0x00340611, 0x12000000, ftPurin_8013F9C0, ftPurin_80140618,
+      ftPurin_80140F10, ftPurin_80142070, func_800761C8 },
+    { 316, 0x00340611, 0x12000000, ftPurin_8013FCAC, ftPurin_8014061C,
+      ftPurin_80140F40, ftPurin_801420D0, func_800761C8 },
+    { 317, 0x00340212, 0x13000000, ftPurin_8013D30C, ftPurin_8013D384,
+      ftPurin_8013D38C, ftPurin_8013D518, func_800761C8 },
+    { 318, 0x00340612, 0x13000000, ftPurin_8013D348, ftPurin_8013D388,
+      ftPurin_8013D3AC, ftPurin_8013D554, func_800761C8 },
+    { 319, 0x00340013, 0x14000000, ftPurin_8013CB68, ftPurin_8013CC60,
+      ftPurin_8013CC68, ftPurin_8013CCA8, func_800761C8 },
+    { 320, 0x00340413, 0x14000000, ftPurin_8013CBE4, ftPurin_8013CC64,
+      ftPurin_8013CC88, ftPurin_8013CCE4, func_800761C8 },
+    { 321, 0x00340013, 0x14000000, ftPurin_8013CB68, ftPurin_8013CC60,
+      ftPurin_8013CC68, ftPurin_8013CCA8, func_800761C8 },
+    { 322, 0x00340413, 0x14000000, ftPurin_8013CBE4, ftPurin_8013CC64,
+      ftPurin_8013CC88, ftPurin_8013CCE4, func_800761C8 },
+    { 323, 0x00340014, 0x15000000, ftPurin_8013CFCC, ftPurin_8013D044,
+      ftPurin_8013D04C, ftPurin_8013D08C, func_800761C8 },
+    { 324, 0x00340414, 0x15000000, ftPurin_8013D008, ftPurin_8013D048,
+      ftPurin_8013D06C, ftPurin_8013D0C8, func_800761C8 },
+    { 325, 0x00340014, 0x15000000, ftPurin_8013CFCC, ftPurin_8013D044,
+      ftPurin_8013D04C, ftPurin_8013D08C, func_800761C8 },
+    { 326, 0x00340414, 0x15000000, ftPurin_8013D008, ftPurin_8013D048,
+      ftPurin_8013D06C, ftPurin_8013D0C8, func_800761C8 },
 };
 
 char lbl_803D02F0[] = "PlPr.dat";
@@ -319,7 +319,7 @@ void ftPurin_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
 }
-void lbl_8013C94C(HSD_GObj* gobj)
+void ftPurin_8013C94C(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
@@ -343,7 +343,7 @@ inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 
     fp->x2200_ftcmd_var0 = 0;
 
-    fp->cb.x21BC_callback_Accessory4 = &lbl_8013C94C;
+    fp->cb.x21BC_callback_Accessory4 = &ftPurin_8013C94C;
 
     if (func_8016B1D8() && func_801D4FF8(fp->xC_playerID))
         fp->mv.pr.specialhi.x0 = true;
@@ -401,7 +401,7 @@ void ftPurin_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013CB68(HSD_GObj*)
+asm void ftPurin_8013CB68(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CB68 00139748  7C 08 02 A6 */	mflr r0
@@ -443,7 +443,7 @@ lbl_8013CBD0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013CBE4(HSD_GObj*)
+asm void ftPurin_8013CBE4(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CBE4 001397C4  7C 08 02 A6 */	mflr r0
@@ -483,13 +483,13 @@ lbl_8013CC4C:
 #pragma pop
 #endif
 
-void lbl_8013CC60(HSD_GObj* arg0) {}
+void ftPurin_8013CC60(HSD_GObj* arg0) {}
 
-void lbl_8013CC64(HSD_GObj* arg0) {}
+void ftPurin_8013CC64(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013CC68(HSD_GObj*)
+asm void ftPurin_8013CC68(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CC68 00139848  7C 08 02 A6 */	mflr r0
@@ -506,7 +506,7 @@ asm void lbl_8013CC68(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013CC88(HSD_GObj*)
+asm void ftPurin_8013CC88(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CC88 00139868  7C 08 02 A6 */	mflr r0
@@ -523,7 +523,7 @@ asm void lbl_8013CC88(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013CCA8(HSD_GObj*)
+asm void ftPurin_8013CCA8(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CCA8 00139888  7C 08 02 A6 */	mflr r0
@@ -548,7 +548,7 @@ lbl_8013CCD0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013CCE4(HSD_GObj*)
+asm void ftPurin_8013CCE4(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CCE4 001398C4  7C 08 02 A6 */	mflr r0
@@ -592,7 +592,7 @@ void ftPurin_8013CD34(HSD_GObj* gobj)
                                   fp->x894_currentAnimFrame, lbl_804D9C18,
                                   lbl_804D9C14);
 
-    fp->cb.x21BC_callback_Accessory4 = lbl_8013C94C;
+    fp->cb.x21BC_callback_Accessory4 = ftPurin_8013C94C;
 }
 
 #ifdef MWERKS_GEKKO
@@ -634,8 +634,8 @@ lbl_8013CE34:
 /* 8013CE50 00139A30  38 C0 00 00 */	li r6, 0
 /* 8013CE54 00139A34  4B F2 C5 59 */	bl Fighter_ChangeMotionState
 lbl_8013CE58:
-/* 8013CE58 00139A38  3C 60 80 14 */	lis r3, lbl_8013C94C@ha
-/* 8013CE5C 00139A3C  38 03 C9 4C */	addi r0, r3, lbl_8013C94C@l
+/* 8013CE58 00139A38  3C 60 80 14 */	lis r3, ftPurin_8013C94C@ha
+/* 8013CE5C 00139A3C  38 03 C9 4C */	addi r0, r3, ftPurin_8013C94C@l
 /* 8013CE60 00139A40  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 8013CE64 00139A44  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013CE68 00139A48  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -649,7 +649,7 @@ lbl_8013CE58:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013CE7C(HSD_GObj*)
+asm void ftPurin_8013CE7C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CE7C 00139A5C  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -702,9 +702,9 @@ lbl_8013CEF8:
 /* 8013CEFC 00139ADC  4B F3 1C A9 */	bl func_8006EBA4
 /* 8013CF00 00139AE0  80 9F 00 2C */	lwz r4, 0x2c(r31)
 /* 8013CF04 00139AE4  38 00 00 00 */	li r0, 0
-/* 8013CF08 00139AE8  3C 60 80 14 */	lis r3, lbl_8013CE7C@ha
+/* 8013CF08 00139AE8  3C 60 80 14 */	lis r3, ftPurin_8013CE7C@ha
 /* 8013CF0C 00139AEC  90 04 22 00 */	stw r0, 0x2200(r4)
-/* 8013CF10 00139AF0  38 03 CE 7C */	addi r0, r3, lbl_8013CE7C@l
+/* 8013CF10 00139AF0  38 03 CE 7C */	addi r0, r3, ftPurin_8013CE7C@l
 /* 8013CF14 00139AF4  90 04 21 BC */	stw r0, 0x21bc(r4)
 /* 8013CF18 00139AF8  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8013CF1C 00139AFC  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -753,9 +753,9 @@ lbl_8013CF98:
 /* 8013CF9C 00139B7C  4B F3 1C 09 */	bl func_8006EBA4
 /* 8013CFA0 00139B80  80 9F 00 2C */	lwz r4, 0x2c(r31)
 /* 8013CFA4 00139B84  38 00 00 00 */	li r0, 0
-/* 8013CFA8 00139B88  3C 60 80 14 */	lis r3, lbl_8013CE7C@ha
+/* 8013CFA8 00139B88  3C 60 80 14 */	lis r3, ftPurin_8013CE7C@ha
 /* 8013CFAC 00139B8C  90 04 22 00 */	stw r0, 0x2200(r4)
-/* 8013CFB0 00139B90  38 03 CE 7C */	addi r0, r3, lbl_8013CE7C@l
+/* 8013CFB0 00139B90  38 03 CE 7C */	addi r0, r3, ftPurin_8013CE7C@l
 /* 8013CFB4 00139B94  90 04 21 BC */	stw r0, 0x21bc(r4)
 /* 8013CFB8 00139B98  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 8013CFBC 00139B9C  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -768,7 +768,7 @@ lbl_8013CF98:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013CFCC(HSD_GObj*)
+asm void ftPurin_8013CFCC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CFCC 00139BAC  7C 08 02 A6 */	mflr r0
@@ -793,7 +793,7 @@ lbl_8013CFF4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D008(HSD_GObj*)
+asm void ftPurin_8013D008(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D008 00139BE8  7C 08 02 A6 */	mflr r0
@@ -816,13 +816,13 @@ lbl_8013D030:
 #pragma pop
 #endif
 
-void lbl_8013D044(HSD_GObj* arg0) {}
+void ftPurin_8013D044(HSD_GObj* arg0) {}
 
-void lbl_8013D048(HSD_GObj* arg0) {}
+void ftPurin_8013D048(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D04C(HSD_GObj*)
+asm void ftPurin_8013D04C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D04C 00139C2C  7C 08 02 A6 */	mflr r0
@@ -839,7 +839,7 @@ asm void lbl_8013D04C(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D06C(HSD_GObj*)
+asm void ftPurin_8013D06C(HSD_GObj*)
 {
     // clang-format off
     nofralloc
@@ -857,7 +857,7 @@ asm void lbl_8013D06C(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D08C(HSD_GObj*)
+asm void ftPurin_8013D08C(HSD_GObj*)
 {
     // clang-format off
     nofralloc
@@ -883,7 +883,7 @@ lbl_8013D0B4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D0C8(HSD_GObj*)
+asm void ftPurin_8013D0C8(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D0C8 00139CA8  7C 08 02 A6 */	mflr r0
@@ -1081,7 +1081,7 @@ asm void ftPurin_SpecialAirS_StartMotion(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D30C(HSD_GObj*)
+asm void ftPurin_8013D30C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D30C 00139EEC  7C 08 02 A6 */	mflr r0
@@ -1106,7 +1106,7 @@ lbl_8013D334:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D348(HSD_GObj*)
+asm void ftPurin_8013D348(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D348 00139F28  7C 08 02 A6 */	mflr r0
@@ -1129,13 +1129,13 @@ lbl_8013D370:
 #pragma pop
 #endif
 
-void lbl_8013D384(HSD_GObj* arg0) {}
+void ftPurin_8013D384(HSD_GObj* arg0) {}
 
-void lbl_8013D388(HSD_GObj* arg0) {}
+void ftPurin_8013D388(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D38C(HSD_GObj*)
+asm void ftPurin_8013D38C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D38C 00139F6C  7C 08 02 A6 */	mflr r0
@@ -1154,7 +1154,7 @@ extern f32 const lbl_804D9C34;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D3AC(HSD_GObj*)
+asm void ftPurin_8013D3AC(HSD_GObj*)
 {
     // clang-format off
     nofralloc
@@ -1266,7 +1266,7 @@ lbl_8013D4F8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D518(HSD_GObj*)
+asm void ftPurin_8013D518(HSD_GObj*)
 {
     // clang-format off
     nofralloc
@@ -1292,7 +1292,7 @@ lbl_8013D540:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D554(HSD_GObj*)
+asm void ftPurin_8013D554(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D554 0013A134  7C 08 02 A6 */	mflr r0
@@ -1391,7 +1391,7 @@ extern f32 const lbl_804D9C48;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D658(HSD_GObj*)
+asm void ftPurin_8013D658(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D658 0013A238  7C 08 02 A6 */	mflr r0
@@ -1475,7 +1475,7 @@ extern f32 const lbl_804D9C4C;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D764(HSD_GObj*)
+asm void ftPurin_8013D764(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D764 0013A344  7C 08 02 A6 */	mflr r0
@@ -1518,8 +1518,8 @@ lbl_8013D7B8:
 /* 8013D7F0 0013A3D0  38 80 01 6A */	li r4, 0x16a
 /* 8013D7F4 0013A3D4  38 C0 00 00 */	li r6, 0
 /* 8013D7F8 0013A3D8  4B F2 BB B5 */	bl Fighter_ChangeMotionState
-/* 8013D7FC 0013A3DC  3C 60 80 14 */	lis r3, lbl_8013D658@ha
-/* 8013D800 0013A3E0  38 63 D6 58 */	addi r3, r3, lbl_8013D658@l
+/* 8013D7FC 0013A3DC  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
+/* 8013D800 0013A3E0  38 63 D6 58 */	addi r3, r3, ftPurin_8013D658@l
 /* 8013D804 0013A3E4  90 7F 21 E4 */	stw r3, 0x21e4(r31)
 /* 8013D808 0013A3E8  38 00 00 00 */	li r0, 0
 /* 8013D80C 0013A3EC  90 7F 21 DC */	stw r3, 0x21dc(r31)
@@ -1572,7 +1572,7 @@ lbl_8013D894:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013D8B0(HSD_GObj*)
+asm void ftPurin_8013D8B0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D8B0 0013A490  7C 08 02 A6 */	mflr r0
@@ -1768,15 +1768,15 @@ lbl_8013DAD8:
 /* 8013DB18 0013A6F8  D0 1F 00 E4 */	stfs f0, 0xe4(r31)
 /* 8013DB1C 0013A6FC  D0 1F 00 EC */	stfs f0, 0xec(r31)
 lbl_8013DB20:
-/* 8013DB20 0013A700  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 8013DB20 0013A700  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 8013DB24 0013A704  80 BB 00 2C */	lwz r5, 0x2c(r27)
-/* 8013DB28 0013A708  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 8013DB28 0013A708  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 8013DB2C 0013A70C  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 8013DB30 0013A710  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 8013DB34 0013A714  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
+/* 8013DB30 0013A710  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 8013DB34 0013A714  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
 /* 8013DB38 0013A718  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 8013DB3C 0013A71C  3C 60 80 14 */	lis r3, lbl_8014222C@ha
-/* 8013DB40 0013A720  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 8013DB3C 0013A71C  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
+/* 8013DB40 0013A720  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 8013DB44 0013A724  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 8013DB48 0013A728  90 05 21 F8 */	stw r0, 0x21f8(r5)
 /* 8013DB4C 0013A72C  83 DB 00 28 */	lwz r30, 0x28(r27)
@@ -1888,15 +1888,15 @@ lbl_8013DCA0:
 /* 8013DCB4 0013A894  48 24 A5 6D */	bl __assert
 lbl_8013DCB8:
 /* 8013DCB8 0013A898  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 8013DCBC 0013A89C  3C 80 80 14 */	lis r4, lbl_8013D764@ha
+/* 8013DCBC 0013A89C  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
 /* 8013DCC0 0013A8A0  80 1E 00 30 */	lwz r0, 0x30(r30)
-/* 8013DCC4 0013A8A4  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 8013DCC4 0013A8A4  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 8013DCC8 0013A8A8  38 C0 FF FF */	li r6, -1
 /* 8013DCCC 0013A8AC  90 BF 22 30 */	stw r5, 0x2230(r31)
 /* 8013DCD0 0013A8B0  38 A0 00 00 */	li r5, 0
-/* 8013DCD4 0013A8B4  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
+/* 8013DCD4 0013A8B4  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
 /* 8013DCD8 0013A8B8  90 1F 22 34 */	stw r0, 0x2234(r31)
-/* 8013DCDC 0013A8BC  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 8013DCDC 0013A8BC  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 8013DCE0 0013A8C0  80 7E 00 34 */	lwz r3, 0x34(r30)
 /* 8013DCE4 0013A8C4  90 7F 22 38 */	stw r3, 0x2238(r31)
 /* 8013DCE8 0013A8C8  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
@@ -2159,7 +2159,7 @@ extern f32 const lbl_804D9C64;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013E014(HSD_GObj*)
+asm void ftPurin_8013E014(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013E014 0013ABF4  7C 08 02 A6 */	mflr r0
@@ -2184,15 +2184,15 @@ asm void lbl_8013E014(HSD_GObj*)
 /* 8013E060 0013AC40  38 80 01 5C */	li r4, 0x15c
 /* 8013E064 0013AC44  38 C0 00 00 */	li r6, 0
 /* 8013E068 0013AC48  4B F2 B3 45 */	bl Fighter_ChangeMotionState
-/* 8013E06C 0013AC4C  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 8013E06C 0013AC4C  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 8013E070 0013AC50  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 8013E074 0013AC54  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 8013E074 0013AC54  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 8013E078 0013AC58  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 8013E07C 0013AC5C  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 8013E080 0013AC60  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
+/* 8013E07C 0013AC5C  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 8013E080 0013AC60  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
 /* 8013E084 0013AC64  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 8013E088 0013AC68  3C 60 80 14 */	lis r3, lbl_8014222C@ha
-/* 8013E08C 0013AC6C  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 8013E088 0013AC68  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
+/* 8013E08C 0013AC6C  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 8013E090 0013AC70  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 8013E094 0013AC74  7F C3 F3 78 */	mr r3, r30
 /* 8013E098 0013AC78  90 05 21 F8 */	stw r0, 0x21f8(r5)
@@ -2227,7 +2227,7 @@ extern f64 const lbl_804D9C70;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013E0F0(HSD_GObj*)
+asm void ftPurin_8013E0F0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013E0F0 0013ACD0  7C 08 02 A6 */	mflr r0
@@ -2350,7 +2350,7 @@ lbl_8013E260:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013E2A0(HSD_GObj*)
+asm void ftPurin_8013E2A0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013E2A0 0013AE80  7C 08 02 A6 */	mflr r0
@@ -2460,7 +2460,7 @@ extern f64 const lbl_804D9C88;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013E410(HSD_GObj*)
+asm void ftPurin_8013E410(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013E410 0013AFF0  7C 08 02 A6 */	mflr r0
@@ -2734,7 +2734,7 @@ lbl_8013E7C4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013E7E0(HSD_GObj*)
+asm void ftPurin_8013E7E0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013E7E0 0013B3C0  7C 08 02 A6 */	mflr r0
@@ -2950,7 +2950,7 @@ lbl_8013EAC4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013EAD8(HSD_GObj*)
+asm void ftPurin_8013EAD8(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013EAD8 0013B6B8  7C 08 02 A6 */	mflr r0
@@ -3158,7 +3158,7 @@ lbl_8013ED90:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013EDB0(HSD_GObj*)
+asm void ftPurin_8013EDB0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013EDB0 0013B990  7C 08 02 A6 */	mflr r0
@@ -3183,15 +3183,15 @@ asm void lbl_8013EDB0(HSD_GObj*)
 /* 8013EDFC 0013B9DC  38 80 01 64 */	li r4, 0x164
 /* 8013EE00 0013B9E0  38 C0 00 00 */	li r6, 0
 /* 8013EE04 0013B9E4  4B F2 A5 A9 */	bl Fighter_ChangeMotionState
-/* 8013EE08 0013B9E8  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 8013EE08 0013B9E8  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 8013EE0C 0013B9EC  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 8013EE10 0013B9F0  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 8013EE10 0013B9F0  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 8013EE14 0013B9F4  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 8013EE18 0013B9F8  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 8013EE1C 0013B9FC  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
+/* 8013EE18 0013B9F8  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 8013EE1C 0013B9FC  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
 /* 8013EE20 0013BA00  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 8013EE24 0013BA04  3C 60 80 14 */	lis r3, lbl_8014222C@ha
-/* 8013EE28 0013BA08  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 8013EE24 0013BA04  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
+/* 8013EE28 0013BA08  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 8013EE2C 0013BA0C  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 8013EE30 0013BA10  7F C3 F3 78 */	mr r3, r30
 /* 8013EE34 0013BA14  90 05 21 F8 */	stw r0, 0x21f8(r5)
@@ -3221,7 +3221,7 @@ lbl_8013EE6C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013EE84(HSD_GObj*)
+asm void ftPurin_8013EE84(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013EE84 0013BA64  7C 08 02 A6 */	mflr r0
@@ -3344,7 +3344,7 @@ lbl_8013EFF4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013F034(HSD_GObj*)
+asm void ftPurin_8013F034(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013F034 0013BC14  7C 08 02 A6 */	mflr r0
@@ -3450,7 +3450,7 @@ lbl_8013F164:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013F1A4(HSD_GObj*)
+asm void ftPurin_8013F1A4(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013F1A4 0013BD84  7C 08 02 A6 */	mflr r0
@@ -3837,7 +3837,7 @@ lbl_8013F6EC:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013F708(HSD_GObj*)
+asm void ftPurin_8013F708(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013F708 0013C2E8  7C 08 02 A6 */	mflr r0
@@ -4036,7 +4036,7 @@ lbl_8013F9AC:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013F9C0(HSD_GObj*)
+asm void ftPurin_8013F9C0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013F9C0 0013C5A0  7C 08 02 A6 */	mflr r0
@@ -4250,7 +4250,7 @@ lbl_8013FC98:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013FCAC(HSD_GObj*)
+asm void ftPurin_8013FCAC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013FCAC 0013C88C  7C 08 02 A6 */	mflr r0
@@ -4420,11 +4420,11 @@ lbl_8013FEC8:
 #pragma pop
 #endif
 
-void lbl_8013FF00(HSD_GObj* arg0) {}
+void ftPurin_8013FF00(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8013FF04(HSD_GObj*)
+asm void ftPurin_8013FF04(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013FF04 0013CAE4  7C 08 02 A6 */	mflr r0
@@ -4448,15 +4448,15 @@ asm void lbl_8013FF04(HSD_GObj*)
 /* 8013FF4C 0013CB2C  38 80 01 5E */	li r4, 0x15e
 /* 8013FF50 0013CB30  38 C0 00 00 */	li r6, 0
 /* 8013FF54 0013CB34  4B F2 94 59 */	bl Fighter_ChangeMotionState
-/* 8013FF58 0013CB38  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 8013FF58 0013CB38  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 8013FF5C 0013CB3C  80 BD 00 2C */	lwz r5, 0x2c(r29)
-/* 8013FF60 0013CB40  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 8013FF60 0013CB40  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 8013FF64 0013CB44  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 8013FF68 0013CB48  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 8013FF6C 0013CB4C  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 8013FF68 0013CB48  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 8013FF6C 0013CB4C  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 8013FF70 0013CB50  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 8013FF74 0013CB54  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 8013FF78 0013CB58  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 8013FF74 0013CB54  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 8013FF78 0013CB58  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 8013FF7C 0013CB5C  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 8013FF80 0013CB60  7F A3 EB 78 */	mr r3, r29
 /* 8013FF84 0013CB64  90 05 21 F8 */	stw r0, 0x21f8(r5)
@@ -4526,7 +4526,7 @@ lbl_80140048:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140064(HSD_GObj*)
+asm void ftPurin_80140064(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140064 0013CC44  7C 08 02 A6 */	mflr r0
@@ -4550,15 +4550,15 @@ asm void lbl_80140064(HSD_GObj*)
 /* 801400AC 0013CC8C  38 80 01 5E */	li r4, 0x15e
 /* 801400B0 0013CC90  38 C0 00 00 */	li r6, 0
 /* 801400B4 0013CC94  4B F2 92 F9 */	bl Fighter_ChangeMotionState
-/* 801400B8 0013CC98  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 801400B8 0013CC98  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 801400BC 0013CC9C  80 BD 00 2C */	lwz r5, 0x2c(r29)
-/* 801400C0 0013CCA0  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 801400C0 0013CCA0  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 801400C4 0013CCA4  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 801400C8 0013CCA8  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 801400CC 0013CCAC  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 801400C8 0013CCA8  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 801400CC 0013CCAC  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 801400D0 0013CCB0  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 801400D4 0013CCB4  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 801400D8 0013CCB8  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 801400D4 0013CCB4  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 801400D8 0013CCB8  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 801400DC 0013CCBC  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 801400E0 0013CCC0  7F A3 EB 78 */	mr r3, r29
 /* 801400E4 0013CCC4  90 05 21 F8 */	stw r0, 0x21f8(r5)
@@ -4630,7 +4630,7 @@ extern f32 const lbl_804D9C90;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_801401C4(HSD_GObj*)
+asm void ftPurin_801401C4(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801401C4 0013CDA4  7C 08 02 A6 */	mflr r0
@@ -4679,15 +4679,15 @@ lbl_80140228:
 /* 80140260 0013CE40  38 C0 00 00 */	li r6, 0
 /* 80140264 0013CE44  FC 60 10 90 */	fmr f3, f2
 /* 80140268 0013CE48  4B F2 91 45 */	bl Fighter_ChangeMotionState
-/* 8014026C 0013CE4C  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 8014026C 0013CE4C  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 80140270 0013CE50  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80140274 0013CE54  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 80140274 0013CE54  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 80140278 0013CE58  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 8014027C 0013CE5C  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 80140280 0013CE60  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 8014027C 0013CE5C  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 80140280 0013CE60  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 80140284 0013CE64  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 80140288 0013CE68  38 04 D7 64 */	addi r0, r4, lbl_8013D764@l
-/* 8014028C 0013CE6C  38 63 22 2C */	addi r3, r3, lbl_8014222C@l
+/* 80140288 0013CE68  38 04 D7 64 */	addi r0, r4, ftPurin_8013D764@l
+/* 8014028C 0013CE6C  38 63 22 2C */	addi r3, r3, ftPurin_8014222C@l
 /* 80140290 0013CE70  90 05 21 C0 */	stw r0, 0x21c0(r5)
 /* 80140294 0013CE74  38 00 00 00 */	li r0, 0
 /* 80140298 0013CE78  90 65 21 F8 */	stw r3, 0x21f8(r5)
@@ -4742,15 +4742,15 @@ lbl_80140328:
 #pragma pop
 #endif
 
-void lbl_80140344(HSD_GObj* arg0) {}
+void ftPurin_80140344(HSD_GObj* arg0) {}
 
-void lbl_80140348(HSD_GObj* arg0) {}
+void ftPurin_80140348(HSD_GObj* arg0) {}
 
-void lbl_8014034C(HSD_GObj* arg0) {}
+void ftPurin_8014034C(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140350(HSD_GObj*)
+asm void ftPurin_80140350(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140350 0013CF30  7C 08 02 A6 */	mflr r0
@@ -4774,15 +4774,15 @@ asm void lbl_80140350(HSD_GObj*)
 /* 80140398 0013CF78  38 80 01 66 */	li r4, 0x166
 /* 8014039C 0013CF7C  38 C0 00 00 */	li r6, 0
 /* 801403A0 0013CF80  4B F2 90 0D */	bl Fighter_ChangeMotionState
-/* 801403A4 0013CF84  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 801403A4 0013CF84  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 801403A8 0013CF88  80 BD 00 2C */	lwz r5, 0x2c(r29)
-/* 801403AC 0013CF8C  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 801403AC 0013CF8C  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 801403B0 0013CF90  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 801403B4 0013CF94  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 801403B8 0013CF98  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 801403B4 0013CF94  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 801403B8 0013CF98  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 801403BC 0013CF9C  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 801403C0 0013CFA0  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 801403C4 0013CFA4  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 801403C0 0013CFA0  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 801403C4 0013CFA4  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 801403C8 0013CFA8  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 801403CC 0013CFAC  7F A3 EB 78 */	mr r3, r29
 /* 801403D0 0013CFB0  90 05 21 F8 */	stw r0, 0x21f8(r5)
@@ -4852,7 +4852,7 @@ lbl_80140494:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_801404B0(HSD_GObj*)
+asm void ftPurin_801404B0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801404B0 0013D090  7C 08 02 A6 */	mflr r0
@@ -4876,15 +4876,15 @@ asm void lbl_801404B0(HSD_GObj*)
 /* 801404F8 0013D0D8  38 80 01 66 */	li r4, 0x166
 /* 801404FC 0013D0DC  38 C0 00 00 */	li r6, 0
 /* 80140500 0013D0E0  4B F2 8E AD */	bl Fighter_ChangeMotionState
-/* 80140504 0013D0E4  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 80140504 0013D0E4  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 80140508 0013D0E8  80 BD 00 2C */	lwz r5, 0x2c(r29)
-/* 8014050C 0013D0EC  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 8014050C 0013D0EC  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 80140510 0013D0F0  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 80140514 0013D0F4  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 80140518 0013D0F8  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 80140514 0013D0F4  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 80140518 0013D0F8  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 8014051C 0013D0FC  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 80140520 0013D100  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 80140524 0013D104  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 80140520 0013D100  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 80140524 0013D104  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 80140528 0013D108  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 8014052C 0013D10C  7F A3 EB 78 */	mr r3, r29
 /* 80140530 0013D110  90 05 21 F8 */	stw r0, 0x21f8(r5)
@@ -4952,17 +4952,17 @@ lbl_801405F4:
 #pragma pop
 #endif
 
-void lbl_80140610(HSD_GObj* arg0) {}
+void ftPurin_80140610(HSD_GObj* arg0) {}
 
-void lbl_80140614(HSD_GObj* arg0) {}
+void ftPurin_80140614(HSD_GObj* arg0) {}
 
-void lbl_80140618(HSD_GObj* arg0) {}
+void ftPurin_80140618(HSD_GObj* arg0) {}
 
-void lbl_8014061C(HSD_GObj* arg0) {}
+void ftPurin_8014061C(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140620(HSD_GObj*)
+asm void ftPurin_80140620(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140620 0013D200  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -4983,7 +4983,7 @@ asm void lbl_80140620(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140650(HSD_GObj*)
+asm void ftPurin_80140650(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140650 0013D230  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -5004,7 +5004,7 @@ asm void lbl_80140650(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140680(HSD_GObj*)
+asm void ftPurin_80140680(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140680 0013D260  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -5025,7 +5025,7 @@ asm void lbl_80140680(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_801406B0(HSD_GObj*)
+asm void ftPurin_801406B0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801406B0 0013D290  7C 08 02 A6 */	mflr r0
@@ -5180,7 +5180,7 @@ lbl_8014089C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_801408B8(HSD_GObj*)
+asm void ftPurin_801408B8(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801408B8 0013D498  7C 08 02 A6 */	mflr r0
@@ -5265,8 +5265,8 @@ lbl_801409D4:
 /* 801409D4 0013D5B4  FC 03 10 40 */	fcmpo cr0, f3, f2
 /* 801409D8 0013D5B8  4C 41 13 82 */	cror 2, 1, 2
 /* 801409DC 0013D5BC  40 82 01 4C */	bne lbl_80140B28
-/* 801409E0 0013D5C0  3C 60 80 14 */	lis r3, lbl_8013D8B0@ha
-/* 801409E4 0013D5C4  38 03 D8 B0 */	addi r0, r3, lbl_8013D8B0@l
+/* 801409E0 0013D5C0  3C 60 80 14 */	lis r3, ftPurin_8013D8B0@ha
+/* 801409E4 0013D5C4  38 03 D8 B0 */	addi r0, r3, ftPurin_8013D8B0@l
 /* 801409E8 0013D5C8  90 1F 21 EC */	stw r0, 0x21ec(r31)
 /* 801409EC 0013D5CC  3C 80 02 04 */	lis r4, 0x02040010@ha
 /* 801409F0 0013D5D0  38 7E 00 00 */	addi r3, r30, 0
@@ -5277,15 +5277,15 @@ lbl_801409D4:
 /* 80140A04 0013D5E4  FC 60 10 90 */	fmr f3, f2
 /* 80140A08 0013D5E8  38 C0 00 00 */	li r6, 0
 /* 80140A0C 0013D5EC  4B F2 89 A1 */	bl Fighter_ChangeMotionState
-/* 80140A10 0013D5F0  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 80140A10 0013D5F0  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 80140A14 0013D5F4  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80140A18 0013D5F8  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 80140A18 0013D5F8  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 80140A1C 0013D5FC  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 80140A20 0013D600  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 80140A24 0013D604  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 80140A20 0013D600  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 80140A24 0013D604  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 80140A28 0013D608  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 80140A2C 0013D60C  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 80140A30 0013D610  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 80140A2C 0013D60C  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 80140A30 0013D610  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 80140A34 0013D614  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 80140A38 0013D618  90 05 21 F8 */	stw r0, 0x21f8(r5)
 /* 80140A3C 0013D61C  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
@@ -5318,8 +5318,8 @@ lbl_80140A98:
 /* 80140A98 0013D678  FC 03 10 40 */	fcmpo cr0, f3, f2
 /* 80140A9C 0013D67C  4C 41 13 82 */	cror 2, 1, 2
 /* 80140AA0 0013D680  40 82 00 88 */	bne lbl_80140B28
-/* 80140AA4 0013D684  3C 60 80 14 */	lis r3, lbl_8013D8B0@ha
-/* 80140AA8 0013D688  38 03 D8 B0 */	addi r0, r3, lbl_8013D8B0@l
+/* 80140AA4 0013D684  3C 60 80 14 */	lis r3, ftPurin_8013D8B0@ha
+/* 80140AA8 0013D688  38 03 D8 B0 */	addi r0, r3, ftPurin_8013D8B0@l
 /* 80140AAC 0013D68C  90 1F 21 EC */	stw r0, 0x21ec(r31)
 /* 80140AB0 0013D690  3C 80 02 04 */	lis r4, 0x02040012@ha
 /* 80140AB4 0013D694  38 7E 00 00 */	addi r3, r30, 0
@@ -5330,15 +5330,15 @@ lbl_80140A98:
 /* 80140AC8 0013D6A8  FC 60 10 90 */	fmr f3, f2
 /* 80140ACC 0013D6AC  38 C0 00 00 */	li r6, 0
 /* 80140AD0 0013D6B0  4B F2 88 DD */	bl Fighter_ChangeMotionState
-/* 80140AD4 0013D6B4  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 80140AD4 0013D6B4  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 80140AD8 0013D6B8  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80140ADC 0013D6BC  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 80140ADC 0013D6BC  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 80140AE0 0013D6C0  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 80140AE4 0013D6C4  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 80140AE8 0013D6C8  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 80140AE4 0013D6C4  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 80140AE8 0013D6C8  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 80140AEC 0013D6CC  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 80140AF0 0013D6D0  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 80140AF4 0013D6D4  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 80140AF0 0013D6D0  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 80140AF4 0013D6D4  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 80140AF8 0013D6D8  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 80140AFC 0013D6DC  90 05 21 F8 */	stw r0, 0x21f8(r5)
 /* 80140B00 0013D6E0  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
@@ -5396,7 +5396,7 @@ lbl_80140B7C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140BAC(HSD_GObj*)
+asm void ftPurin_80140BAC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140BAC 0013D78C  7C 08 02 A6 */	mflr r0
@@ -5420,7 +5420,7 @@ asm void lbl_80140BAC(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140BE8(HSD_GObj*)
+asm void ftPurin_80140BE8(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140BE8 0013D7C8  7C 08 02 A6 */	mflr r0
@@ -5441,7 +5441,7 @@ asm void lbl_80140BE8(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140C18(HSD_GObj*)
+asm void ftPurin_80140C18(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140C18 0013D7F8  7C 08 02 A6 */	mflr r0
@@ -5462,7 +5462,7 @@ asm void lbl_80140C18(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140C48(HSD_GObj*)
+asm void ftPurin_80140C48(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140C48 0013D828  7C 08 02 A6 */	mflr r0
@@ -5483,7 +5483,7 @@ asm void lbl_80140C48(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140C78(HSD_GObj*)
+asm void ftPurin_80140C78(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140C78 0013D858  7C 08 02 A6 */	mflr r0
@@ -5596,7 +5596,7 @@ lbl_80140DDC:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140DF8(HSD_GObj*)
+asm void ftPurin_80140DF8(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140DF8 0013D9D8  7C 08 02 A6 */	mflr r0
@@ -5685,7 +5685,7 @@ lbl_80140EE4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140F10(HSD_GObj*)
+asm void ftPurin_80140F10(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140F10 0013DAF0  7C 08 02 A6 */	mflr r0
@@ -5706,7 +5706,7 @@ asm void lbl_80140F10(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140F40(HSD_GObj*)
+asm void ftPurin_80140F40(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140F40 0013DB20  7C 08 02 A6 */	mflr r0
@@ -5741,7 +5741,7 @@ lbl_80140F7C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80140FA4(HSD_GObj*)
+asm void ftPurin_80140FA4(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80140FA4 0013DB84  7C 08 02 A6 */	mflr r0
@@ -5773,15 +5773,15 @@ lbl_80140FF0:
 /* 80141004 0013DBE4  38 A5 50 92 */	addi r5, r5, 0x0C4C5092@l
 /* 80141008 0013DBE8  38 C0 00 00 */	li r6, 0
 /* 8014100C 0013DBEC  4B F2 83 A1 */	bl Fighter_ChangeMotionState
-/* 80141010 0013DBF0  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 80141010 0013DBF0  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 80141014 0013DBF4  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80141018 0013DBF8  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 80141018 0013DBF8  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 8014101C 0013DBFC  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 80141020 0013DC00  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 80141024 0013DC04  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 80141020 0013DC00  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 80141024 0013DC04  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 80141028 0013DC08  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 8014102C 0013DC0C  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 80141030 0013DC10  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 8014102C 0013DC0C  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 80141030 0013DC10  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 80141034 0013DC14  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 80141038 0013DC18  90 05 21 F8 */	stw r0, 0x21f8(r5)
 lbl_8014103C:
@@ -5797,7 +5797,7 @@ lbl_8014103C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80141054(HSD_GObj*)
+asm void ftPurin_80141054(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80141054 0013DC34  7C 08 02 A6 */	mflr r0
@@ -5821,15 +5821,15 @@ asm void lbl_80141054(HSD_GObj*)
 /* 8014109C 0013DC7C  38 80 01 64 */	li r4, 0x164
 /* 801410A0 0013DC80  38 C0 00 00 */	li r6, 0
 /* 801410A4 0013DC84  4B F2 83 09 */	bl Fighter_ChangeMotionState
-/* 801410A8 0013DC88  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 801410A8 0013DC88  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 801410AC 0013DC8C  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 801410B0 0013DC90  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 801410B0 0013DC90  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 801410B4 0013DC94  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 801410B8 0013DC98  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 801410BC 0013DC9C  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 801410B8 0013DC98  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 801410BC 0013DC9C  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 801410C0 0013DCA0  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 801410C4 0013DCA4  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 801410C8 0013DCA8  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 801410C4 0013DCA4  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 801410C8 0013DCA8  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 801410CC 0013DCAC  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 801410D0 0013DCB0  38 7F 00 00 */	addi r3, r31, 0
 /* 801410D4 0013DCB4  38 80 00 00 */	li r4, 0
@@ -5875,7 +5875,7 @@ lbl_8014113C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80141154(HSD_GObj*)
+asm void ftPurin_80141154(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80141154 0013DD34  7C 08 02 A6 */	mflr r0
@@ -5899,15 +5899,15 @@ asm void lbl_80141154(HSD_GObj*)
 /* 8014119C 0013DD7C  38 80 01 65 */	li r4, 0x165
 /* 801411A0 0013DD80  38 C0 00 00 */	li r6, 0
 /* 801411A4 0013DD84  4B F2 82 09 */	bl Fighter_ChangeMotionState
-/* 801411A8 0013DD88  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 801411A8 0013DD88  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 801411AC 0013DD8C  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 801411B0 0013DD90  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 801411B0 0013DD90  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 801411B4 0013DD94  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 801411B8 0013DD98  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 801411BC 0013DD9C  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 801411B8 0013DD98  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 801411BC 0013DD9C  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 801411C0 0013DDA0  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 801411C4 0013DDA4  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 801411C8 0013DDA8  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 801411C4 0013DDA4  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 801411C8 0013DDA8  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 801411CC 0013DDAC  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 801411D0 0013DDB0  38 7F 00 00 */	addi r3, r31, 0
 /* 801411D4 0013DDB4  38 80 00 00 */	li r4, 0
@@ -5955,7 +5955,7 @@ extern f32 const lbl_804D9C54;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80141254(HSD_GObj*)
+asm void ftPurin_80141254(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80141254 0013DE34  7C 08 02 A6 */	mflr r0
@@ -6156,15 +6156,15 @@ lbl_80141510:
 /* 80141538 0013E118  38 80 01 66 */	li r4, 0x166
 /* 8014153C 0013E11C  38 C0 00 00 */	li r6, 0
 /* 80141540 0013E120  4B F2 7E 6D */	bl Fighter_ChangeMotionState
-/* 80141544 0013E124  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 80141544 0013E124  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 80141548 0013E128  80 BC 00 2C */	lwz r5, 0x2c(r28)
-/* 8014154C 0013E12C  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 8014154C 0013E12C  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 80141550 0013E130  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 80141554 0013E134  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 80141558 0013E138  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 80141554 0013E134  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 80141558 0013E138  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 8014155C 0013E13C  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 80141560 0013E140  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 80141564 0013E144  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 80141560 0013E140  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 80141564 0013E144  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 80141568 0013E148  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 8014156C 0013E14C  90 05 21 F8 */	stw r0, 0x21f8(r5)
 /* 80141570 0013E150  80 7C 00 2C */	lwz r3, 0x2c(r28)
@@ -6211,7 +6211,7 @@ lbl_801415E0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_801415F4(HSD_GObj*)
+asm void ftPurin_801415F4(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801415F4 0013E1D4  7C 08 02 A6 */	mflr r0
@@ -6255,15 +6255,15 @@ lbl_80141658:
 /* 80141680 0013E260  38 80 01 67 */	li r4, 0x167
 /* 80141684 0013E264  38 C0 00 00 */	li r6, 0
 /* 80141688 0013E268  4B F2 7D 25 */	bl Fighter_ChangeMotionState
-/* 8014168C 0013E26C  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 8014168C 0013E26C  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 80141690 0013E270  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80141694 0013E274  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 80141694 0013E274  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 80141698 0013E278  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 8014169C 0013E27C  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 801416A0 0013E280  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 8014169C 0013E27C  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 801416A0 0013E280  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 801416A4 0013E284  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 801416A8 0013E288  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 801416AC 0013E28C  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 801416A8 0013E288  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 801416AC 0013E28C  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 801416B0 0013E290  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 801416B4 0013E294  90 05 21 F8 */	stw r0, 0x21f8(r5)
 lbl_801416B8:
@@ -6279,7 +6279,7 @@ lbl_801416B8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_801416D0(HSD_GObj*)
+asm void ftPurin_801416D0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801416D0 0013E2B0  7C 08 02 A6 */	mflr r0
@@ -6313,7 +6313,7 @@ lbl_80141718:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80141730(HSD_GObj*)
+asm void ftPurin_80141730(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80141730 0013E310  7C 08 02 A6 */	mflr r0
@@ -6345,15 +6345,15 @@ lbl_8014177C:
 /* 80141790 0013E370  38 A5 50 92 */	addi r5, r5, 0x0C4C5092@l
 /* 80141794 0013E374  38 C0 00 00 */	li r6, 0
 /* 80141798 0013E378  4B F2 7C 15 */	bl Fighter_ChangeMotionState
-/* 8014179C 0013E37C  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 8014179C 0013E37C  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 801417A0 0013E380  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 801417A4 0013E384  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 801417A4 0013E384  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 801417A8 0013E388  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 801417AC 0013E38C  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 801417B0 0013E390  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 801417AC 0013E38C  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 801417B0 0013E390  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 801417B4 0013E394  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 801417B8 0013E398  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 801417BC 0013E39C  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 801417B8 0013E398  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 801417BC 0013E39C  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 801417C0 0013E3A0  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 801417C4 0013E3A4  90 05 21 F8 */	stw r0, 0x21f8(r5)
 lbl_801417C8:
@@ -6369,7 +6369,7 @@ lbl_801417C8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_801417E0(HSD_GObj*)
+asm void ftPurin_801417E0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801417E0 0013E3C0  7C 08 02 A6 */	mflr r0
@@ -6393,15 +6393,15 @@ asm void lbl_801417E0(HSD_GObj*)
 /* 80141828 0013E408  38 80 01 5C */	li r4, 0x15c
 /* 8014182C 0013E40C  38 C0 00 00 */	li r6, 0
 /* 80141830 0013E410  4B F2 7B 7D */	bl Fighter_ChangeMotionState
-/* 80141834 0013E414  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 80141834 0013E414  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 80141838 0013E418  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 8014183C 0013E41C  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 8014183C 0013E41C  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 80141840 0013E420  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 80141844 0013E424  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 80141848 0013E428  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 80141844 0013E424  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 80141848 0013E428  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 8014184C 0013E42C  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 80141850 0013E430  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 80141854 0013E434  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 80141850 0013E430  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 80141854 0013E434  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 80141858 0013E438  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 8014185C 0013E43C  38 7F 00 00 */	addi r3, r31, 0
 /* 80141860 0013E440  38 80 00 00 */	li r4, 0
@@ -6447,7 +6447,7 @@ lbl_801418C8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_801418E0(HSD_GObj*)
+asm void ftPurin_801418E0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801418E0 0013E4C0  7C 08 02 A6 */	mflr r0
@@ -6471,15 +6471,15 @@ asm void lbl_801418E0(HSD_GObj*)
 /* 80141928 0013E508  38 80 01 5D */	li r4, 0x15d
 /* 8014192C 0013E50C  38 C0 00 00 */	li r6, 0
 /* 80141930 0013E510  4B F2 7A 7D */	bl Fighter_ChangeMotionState
-/* 80141934 0013E514  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 80141934 0013E514  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 80141938 0013E518  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 8014193C 0013E51C  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 8014193C 0013E51C  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 80141940 0013E520  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 80141944 0013E524  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 80141948 0013E528  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 80141944 0013E524  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 80141948 0013E528  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 8014194C 0013E52C  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 80141950 0013E530  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 80141954 0013E534  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 80141950 0013E530  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 80141954 0013E534  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 80141958 0013E538  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 8014195C 0013E53C  38 7F 00 00 */	addi r3, r31, 0
 /* 80141960 0013E540  38 80 00 00 */	li r4, 0
@@ -6525,7 +6525,7 @@ lbl_801419C8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_801419E0(HSD_GObj*)
+asm void ftPurin_801419E0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801419E0 0013E5C0  7C 08 02 A6 */	mflr r0
@@ -6736,15 +6736,15 @@ lbl_80141CB8:
 /* 80141CE8 0013E8C8  38 80 01 5E */	li r4, 0x15e
 /* 80141CEC 0013E8CC  38 C0 00 00 */	li r6, 0
 /* 80141CF0 0013E8D0  4B F2 76 BD */	bl Fighter_ChangeMotionState
-/* 80141CF4 0013E8D4  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 80141CF4 0013E8D4  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 80141CF8 0013E8D8  80 BC 00 2C */	lwz r5, 0x2c(r28)
-/* 80141CFC 0013E8DC  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 80141CFC 0013E8DC  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 80141D00 0013E8E0  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 80141D04 0013E8E4  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 80141D08 0013E8E8  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 80141D04 0013E8E4  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 80141D08 0013E8E8  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 80141D0C 0013E8EC  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 80141D10 0013E8F0  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 80141D14 0013E8F4  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 80141D10 0013E8F0  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 80141D14 0013E8F4  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 80141D18 0013E8F8  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 80141D1C 0013E8FC  90 05 21 F8 */	stw r0, 0x21f8(r5)
 /* 80141D20 0013E900  C0 3F 23 58 */	lfs f1, 0x2358(r31)
@@ -6942,7 +6942,7 @@ lbl_80141FA4:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80141FB8(HSD_GObj*)
+asm void ftPurin_80141FB8(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80141FB8 0013EB98  7C 08 02 A6 */	mflr r0
@@ -6969,15 +6969,15 @@ asm void lbl_80141FB8(HSD_GObj*)
 /* 8014200C 0013EBEC  38 80 01 5F */	li r4, 0x15f
 /* 80142010 0013EBF0  38 C0 00 00 */	li r6, 0
 /* 80142014 0013EBF4  4B F2 73 99 */	bl Fighter_ChangeMotionState
-/* 80142018 0013EBF8  3C 60 80 14 */	lis r3, lbl_8013D658@ha
+/* 80142018 0013EBF8  3C 60 80 14 */	lis r3, ftPurin_8013D658@ha
 /* 8014201C 0013EBFC  80 BE 00 2C */	lwz r5, 0x2c(r30)
-/* 80142020 0013EC00  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
+/* 80142020 0013EC00  38 03 D6 58 */	addi r0, r3, ftPurin_8013D658@l
 /* 80142024 0013EC04  90 05 21 E4 */	stw r0, 0x21e4(r5)
-/* 80142028 0013EC08  3C 80 80 14 */	lis r4, lbl_8013D764@ha
-/* 8014202C 0013EC0C  3C 60 80 14 */	lis r3, lbl_8014222C@ha
+/* 80142028 0013EC08  3C 80 80 14 */	lis r4, ftPurin_8013D764@ha
+/* 8014202C 0013EC0C  3C 60 80 14 */	lis r3, ftPurin_8014222C@ha
 /* 80142030 0013EC10  90 05 21 DC */	stw r0, 0x21dc(r5)
-/* 80142034 0013EC14  38 84 D7 64 */	addi r4, r4, lbl_8013D764@l
-/* 80142038 0013EC18  38 03 22 2C */	addi r0, r3, lbl_8014222C@l
+/* 80142034 0013EC14  38 84 D7 64 */	addi r4, r4, ftPurin_8013D764@l
+/* 80142038 0013EC18  38 03 22 2C */	addi r0, r3, ftPurin_8014222C@l
 /* 8014203C 0013EC1C  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 80142040 0013EC20  90 05 21 F8 */	stw r0, 0x21f8(r5)
 /* 80142044 0013EC24  C0 1F 00 80 */	lfs f0, 0x80(r31)
@@ -6998,7 +6998,7 @@ lbl_80142058:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80142070(HSD_GObj*)
+asm void ftPurin_80142070(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80142070 0013EC50  7C 08 02 A6 */	mflr r0
@@ -7032,7 +7032,7 @@ lbl_801420B8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_801420D0(HSD_GObj*)
+asm void ftPurin_801420D0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801420D0 0013ECB0  7C 08 02 A6 */	mflr r0
@@ -7136,7 +7136,7 @@ lbl_80142218:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8014222C(HSD_GObj*)
+asm void ftPurin_8014222C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8014222C 0013EE0C  7C 08 02 A6 */	mflr r0
