@@ -918,7 +918,7 @@ void func_800EF87C(Fighter*, int, bool);
 unk_t func_800EF028(HSD_GObj*);
 void func_800EF9BC(HSD_GObj*);
 void func_800EF9FC(HSD_GObj*);
-char* func_800EEBF8(enum_t);
+char* ftKirby_GetMotionFileString(enum_t);
 void func_800EEBC0(s32, s32*, s32*);
 void func_8010AA1C(HSD_GObj*);
 void func_8010AA20(HSD_GObj*);

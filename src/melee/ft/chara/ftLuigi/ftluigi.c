@@ -166,7 +166,7 @@ void ftLuigi_8014260C(s32 arg0, s32* arg1, s32* arg2)
     }
 }
 
-char* func_80142640(enum_t arg0)
+char* ftLuigi_GetMotionFileString(enum_t arg0)
 {
     int offset;
 

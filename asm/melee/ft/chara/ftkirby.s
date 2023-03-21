@@ -305,8 +305,8 @@ lbl_800EEBE8:
 /* 800EEBF0 000EB7D0  90 04 00 00 */	stw r0, 0(r4)
 /* 800EEBF4 000EB7D4  4E 80 00 20 */	blr
 
-.global func_800EEBF8
-func_800EEBF8:
+.global ftKirby_GetMotionFileString
+ftKirby_GetMotionFileString:
 /* 800EEBF8 000EB7D8  2C 03 00 0E */	cmpwi r3, 0xe
 /* 800EEBFC 000EB7DC  41 82 00 1C */	beq lbl_800EEC18
 /* 800EEC00 000EB7E0  40 80 00 1C */	bge lbl_800EEC1C
