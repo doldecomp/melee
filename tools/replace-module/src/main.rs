@@ -18,7 +18,8 @@ struct Opts {
 lazy_static! {
     static ref GLOBSET: GlobSet = {
         let mut builder = GlobSetBuilder::new();
-        builder.add(Glob::new("./{asm,docs,src}/**/*.{c,h,dox,md}").unwrap());
+        builder
+            .add(Glob::new("./{asm,docs,src}/**/*.{s,c,h,dox,md}").unwrap());
         builder.build().unwrap()
     };
     static ref SYMBOL_REGEX: Regex =
