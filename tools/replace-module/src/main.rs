@@ -16,12 +16,11 @@ struct Opts {
 }
 
 lazy_static! {
-    static ref GLOBSET: GlobSet = {
-        let mut builder = GlobSetBuilder::new();
-        builder
-            .add(Glob::new("./{asm,docs,src}/**/*.{s,c,h,dox,md}").unwrap());
-        builder.build().unwrap()
-    };
+    static ref GLOBSET: GlobSet = GlobSetBuilder::new()
+        .add(Glob::new("./{asm,docs,src}/**/*.{s,c,h,dox,md}").unwrap())
+        .add(Glob::new("./obj_files.mk").unwrap())
+        .build()
+        .unwrap();
     static ref SYMBOL_RE: Regex =
         Regex::new(r"(?:lbl|func)_([[:xdigit:]]{8})").unwrap();
 }
