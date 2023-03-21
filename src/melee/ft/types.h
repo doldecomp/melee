@@ -545,17 +545,6 @@ struct Fighter_DemoStrings {
     char* vi_wait_filename;
 };
 
-struct ftMario_FighterVars {
-    /// Current Megavitamin color combo
-    /* 0x222C */ int x222C_vitaminCurr;
-    /// Previous Megavitamin color combo
-    /* 0x2230 */ int x2230_vitaminPrev;
-    /* 0x2234 */ bool x2234_tornadoCharge;
-    /* 0x2238 */ bool x2238_isCapeBoost;
-    /* 0x223C */ HSD_GObj* x223C_capeGObj;
-    /* 0x2240 */ uint x2240;
-};
-
 struct ftFox_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_blasterGObj;
 };
