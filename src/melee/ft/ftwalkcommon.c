@@ -28,7 +28,7 @@ FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
     }
 }
 
-static inline enum_t ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
+static inline FtWalkType ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 walking_velocity = fabs_inline(fp->gr_vel);
@@ -56,11 +56,13 @@ bool ftWalkCommon_800DFC70(HSD_GObj* gobj)
     return false;
 }
 
-void ftWalkCommon_800DFCA4(HSD_GObj* gobj, ftCommon_MotionState msid, s32 arg2,
-                           f32 arg8, f32 arg9, f32 argA, f32 argB, f32 argC,
-                           f32 argD, f32 argE, f32 argF)
+void ftWalkCommon_800DFCA4(HSD_GObj* gobj, ftCommon_MotionState msid,
+                           Fighter_MotionStateChangeFlags ms_flags, float arg8,
+                           float arg9, float argA, float argB, float argC,
+                           float argD, float argE, float argF)
 {
-    s32 walk_type;
+    ftCommon_MotionState new_msid;
+    FtWalkType walk_type;
     Fighter* fp;
 
     /// @todo Unused stack.
@@ -71,8 +73,8 @@ void ftWalkCommon_800DFCA4(HSD_GObj* gobj, ftCommon_MotionState msid, s32 arg2,
     fp = GET_FIGHTER(gobj);
     fp->mv.co.walk.accel_mul = argF;
     walk_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
-    Fighter_ChangeMotionState(gobj, msid + walk_type, arg2, 0, arg8, 1.0f,
-                              0.0f);
+    new_msid = msid + walk_type;
+    Fighter_ChangeMotionState(gobj, new_msid, ms_flags, 0, arg8, 1, 0);
     func_8006EBA4(gobj);
     fp->mv.co.walk.x0 = fp->gr_vel;
     fp->mv.co.walk.x4 = msid;
