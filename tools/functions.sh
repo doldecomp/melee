@@ -5,8 +5,8 @@ function replace_symbol {
     local find=${find//[.]/\\.}
     local replace=${2//\//\\\/}
     echo "$find -> $replace"
-    find asm src -type f -regex 'Makefile\|.*\.\(c\|h\|s\|mk\|dox\|md\)$' \
-      -exec sed -i "s/\b$find\b/$replace/g" {} +
+    find asm src obj_files.mk -type f -regex '.*\.\(c\|h\|s\|mk\|dox\|md\)$' \
+        -exec sed -i "s/\b$find\b/$replace/g" {} +
 }
 
 function reverse_symbol {
@@ -14,16 +14,14 @@ function reverse_symbol {
 }
 
 function rename_module_symbols_asm {
-    sed -rn 's/^(func|lbl)_([0-9A-F]{8})\b:$/\1_\2/pg' "$1" | while read line
-    do
+    sed -rn 's/^(func|lbl)_([0-9A-F]{8})\b:$/\1_\2/pg' "$1" | while read line; do
         new_line="$2_${line#*_}"
         replace_symbol "$line" "$new_line"
     done
 }
 
 function rename_module_symbols_c {
-    sed -rn 's/^(static )?(inline )?(asm )?\w+\**\s+(func|lbl)_([0-9A-F]{8})\(.*\);?$/\4_\5/p' "$1" | while read line
-    do
+    sed -rn 's/^(static )?(inline )?(asm )?\w+\**\s+(func|lbl)_([0-9A-F]{8})\(.*\);?$/\4_\5/p' "$1" | while read line; do
         new_line="$2_${line#*_}"
         replace_symbol "$line" "$new_line"
     done

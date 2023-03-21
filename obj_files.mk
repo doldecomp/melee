@@ -96,7 +96,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftunk07.c.o\
     $(BUILD_DIR)/src/melee/ft/ftitempickup.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftmario2.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_Strings.c.o\
     $(BUILD_DIR)/src/melee/ft/ft_unknown_006.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_unknown_006.s.o\
 
