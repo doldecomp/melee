@@ -191,15 +191,15 @@ typedef struct _ftCommonData {
 } ftCommonData;
 
 typedef struct _FtCollisionData {
-    u8 data_filler_0[0x28];
+    u8 x0[0x28];
     u32 x28;
-    u8 data_filler_2C[0x30 - 0x2C];
+    u8 x2C[0x30 - 0x2C];
     s32 x30;
     s32 x34;
 } FtCollisionData;
 
 typedef struct _DObjList {
-    u32 count;
+    usize_t count;
     HSD_DObj** data;
 } DObjList;
 
