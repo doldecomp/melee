@@ -101,7 +101,7 @@ void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
     zero_float = 0.0f;
 
     for (i = 0; i < *ptr2EndIndex; i++) {
-        HSD_DObj* dobj_r3 = fp->x5EC_dobj_list.data[index[i]];
+        HSD_DObj* dobj_r3 = fp->dobj_list.data[index[i]];
         HSD_MObj* mobj_r3;
         HSD_AObj* aobj_r24;
 
@@ -143,7 +143,7 @@ void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
         ptr2EndIndex = (s32*) &unk_struct->x8_end_index;
 
         for (i = 0; i < *ptr2EndIndex; i++) {
-            HSD_DObj* dobj_r3 = fp->x5EC_dobj_list.data[index[i]];
+            HSD_DObj* dobj_r3 = fp->dobj_list.data[index[i]];
             HSD_MObj* mobj_r3;
             HSD_MObj* mobj;
 

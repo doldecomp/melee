@@ -1218,7 +1218,7 @@ void Fighter_SetupParts(HSD_GObj* fighter_obj)
         }
     }
 
-    fighter->x5EC_dobj_list.count = dobj_count;
+    fighter->dobj_list.count = dobj_count;
 
     if (part != ftPartsTable[fighter->x4_fighterKind]->parts_num) {
         OSReport(lbl_803C0AB8, fighter->xC_playerID);
