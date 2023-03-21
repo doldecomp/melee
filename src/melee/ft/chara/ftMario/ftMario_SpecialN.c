@@ -14,10 +14,9 @@
 
 #include <baselib/random.h>
 
-static int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos)
+static int getRandomInt(Fighter* fp, int* arr, int outpos)
 {
-    int r3;
-    r3 = (int) arr[HSD_Randi(outpos)];
+    int r3 = arr[HSD_Randi(outpos)];
     fp->ev.mr.x2230_vitaminPrev = fp->ev.mr.x222C_vitaminCurr;
     fp->ev.mr.x222C_vitaminCurr = r3;
     return r3;
@@ -43,7 +42,7 @@ int ftMario_SpecialN_VitaminRandom(
         }
     }
 
-    r3 = ftDrMario_SpecialN_GetRandomInt(fp, arr, r3);
+    r3 = getRandomInt(fp, arr, r3);
 
     return r3;
 }
