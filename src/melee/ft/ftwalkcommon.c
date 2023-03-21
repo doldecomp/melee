@@ -1,3 +1,5 @@
+#include "ft/forward.h"
+
 #include "ftwalkcommon.h"
 
 #include "code_80081B38.h"
@@ -6,7 +8,7 @@
 
 #include <dolphin/os/os.h>
 
-s32 ftWalkCommon_GetWalkType(HSD_GObj* gobj)
+FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     float gr_vel = fp->gr_vel;
@@ -14,14 +16,14 @@ s32 ftWalkCommon_GetWalkType(HSD_GObj* gobj)
     if (walk_vel >= (fp->mv.co.walk.accel_mul *
                      (p_ftCommonData->x2C * fp->x110_attr.walk_max_vel)))
     {
-        return 2;
+        return FtWalkType_Fast;
     } else if (walk_vel >=
                (fp->mv.co.walk.accel_mul *
                 (p_ftCommonData->x28 * fp->x110_attr.walk_max_vel)))
     {
-        return 1;
+        return FtWalkType_Middle;
     } else {
-        return 0;
+        return FtWalkType_Slow;
     }
 }
 

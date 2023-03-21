@@ -1,6 +1,8 @@
 #ifndef MELEE_FT_FTWALKCOMMON_H
 #define MELEE_FT_FTWALKCOMMON_H
 
+#include "ft/forward.h"
+
 #include "ft/fighter.h"
 
 void ftWalkCommon_800DFCA4(HSD_GObj* gobj, s32 arg1, s32 arg2, f32 arg8,
@@ -14,6 +16,6 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32));
 void ftWalkCommon_800E0060(HSD_GObj* gobj);
 bool ftWalkCommon_800DFC70(HSD_GObj* gobj);
 
-s32 ftWalkCommon_GetWalkType(HSD_GObj* gobj);
+FtWalkType ftWalkCommon_GetWalkType(HSD_GObj* gobj);
 
 #endif

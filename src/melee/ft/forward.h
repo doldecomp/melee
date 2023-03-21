@@ -230,4 +230,10 @@ typedef enum _ftPart {
     TransN2
 } ftPart;
 
+typedef enum FtWalkType {
+    FtWalkType_Slow,
+    FtWalkType_Middle,
+    FtWalkType_Fast,
+} FtWalkType;
+
 #endif
