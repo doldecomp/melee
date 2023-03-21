@@ -3,6 +3,7 @@
 #include "db/db_unknown_001.h"
 #include "ft/ftlib.h"
 #include "gr/grdynamicattr.h"
+#include "it/item2.h"
 #include "lb/lbunknown_001.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"

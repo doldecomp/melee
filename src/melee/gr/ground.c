@@ -1,6 +1,4 @@
-#include "it/forward.h"
-
-#include "gr/ground.h"
+#include "ground.h"
 
 #include "grcorneria.h"
 #include "grdatfiles.h"
@@ -21,6 +19,7 @@
 #include "it/code_80266F3C.h"
 #include "it/code_8027CF30.h"
 #include "it/item.h"
+#include "it/item2.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
 #include "lb/lbshadow.h"

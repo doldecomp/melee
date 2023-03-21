@@ -1,6 +1,9 @@
-#include "it/forward.h"
+#include "forward.h"
 
-#include "it/item.h"
+#include "item.h"
+
+#include "code_80266F3C.h"
+#include "item2.h"
 
 #include "cm/camera.h"
 #include "db/db_unknown_001.h"
@@ -9,7 +12,6 @@
 #include "ft/ftlib.h"
 #include "gm/code_801601C4.h"
 #include "gr/grlib.h"
-#include "it/code_80266F3C.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
