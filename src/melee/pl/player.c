@@ -289,7 +289,7 @@ void Player_80031D2C(enum_t id, int slot)
 
 void Player_80031DA8(s32 param_1, s32 param_2)
 {
-    func_800EED50(param_1, param_2);
+    ftKirby_800EED50(param_1, param_2);
 }
 
 void Player_80031DC8(void func_arg(s32, s32))

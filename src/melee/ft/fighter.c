@@ -2481,7 +2481,7 @@ void Fighter_8006C27C(HSD_GObj* gobj)
 
         if (fp->cb.x21A8_callback_Coll) {
             fp->cb.x21A8_callback_Coll(gobj);
-            func_800F1D24(gobj);
+            ftKirby_800F1D24(gobj);
         }
 
         if (fp->ground_or_air == GA_Ground) {
@@ -2862,7 +2862,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
             fp->dmg.x189C_unk_num_frames = 0.0f;
             Fighter_UnkTakeDamage_8006CC30(fp, fp->dmg.x1838_percentTemp);
             func_8008D930(fp);
-            func_800F5BA4(fp);
+            ftKirby_800F5BA4(fp);
 
             if (fp->cb.x21F0_callback) {
                 fp->cb.x21F0_callback(gobj);
@@ -2962,7 +2962,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
 
         if (!forceAppliedOnHit && fp->dmg.x1838_percentTemp) {
             Fighter_UnkTakeDamage_8006CC30(fp, fp->dmg.x1838_percentTemp);
-            func_800F5C34(fp);
+            ftKirby_800F5C34(fp);
             func_800804FC(fp);
         }
         func_800C8D00(gobj);

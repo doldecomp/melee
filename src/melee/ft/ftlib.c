@@ -973,9 +973,9 @@ void func_80087610(u8 arg0)
     u8 i;
     for (i = 0; i <= 25; i++) {
         if (func_80164840(i)) {
-            func_800EED50(Player_800325C8(i, 0), arg0);
+            ftKirby_800EED50(Player_800325C8(i, 0), arg0);
             if ((u8) (i - 18) <= 1)
-                func_800EED50(Player_800325C8(i, 1), arg0);
+                ftKirby_800EED50(Player_800325C8(i, 1), arg0);
         }
     }
 }
@@ -1012,7 +1012,7 @@ void func_8008770C(HSD_GObj* gobj, void* dst)
     if (fp->x4_fighterKind == FTKIND_GAMEWATCH)
         ftGameWatch_8014A7F4(gobj, dst);
     else
-        func_800EEB00(gobj, dst);
+        ftKirby_800EEB00(gobj, dst);
 }
 
 void func_80087744(HSD_GObj* gobj, void* dst)
@@ -1021,7 +1021,7 @@ void func_80087744(HSD_GObj* gobj, void* dst)
     if (fp->x4_fighterKind == FTKIND_GAMEWATCH)
         ftGameWatch_8014A814(gobj, dst);
     else
-        func_800EEB1C(gobj, dst);
+        ftKirby_800EEB1C(gobj, dst);
 }
 
 void func_8008777C(HSD_GObj* gobj)
