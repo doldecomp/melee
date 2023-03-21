@@ -55,14 +55,14 @@ union ftZelda_MotionVars {
 
     struct ftZelda_SpecialNVars {
         int x0;
-    } unk3;
+    } specialn;
 
-    struct ftZelda_Unk5MotionVars {
+    struct ftZelda_SpecialSVars {
         int x0;
         int x4;
         int x8;
         int xC;
-    } unk5;
+    } specials;
 };
 
 #endif
