@@ -1171,13 +1171,13 @@ void Fighter_SetupParts(HSD_GObj* fighter_obj)
 
     while (jobj != NULL) {
         if (func_8007506C(fighter->x4_fighterKind, part) != 0) {
-            fighter->x5E8_fighterBones[part].x0_jobj = NULL;
+            fighter->ft_bones[part].x0_jobj = NULL;
             part++;
             continue;
         }
 
-        func_80074194(fighter, &fighter->x5E8_fighterBones[part], jobj,
-                      &dobj_count, tree_depth);
+        func_80074194(fighter, &fighter->ft_bones[part], jobj, &dobj_count,
+                      tree_depth);
         part++;
 
         if (!(HSD_JObjGetFlags(jobj) & JOBJ_INSTANCE) &&

@@ -159,8 +159,7 @@ void ftPikachu_EfSpawn_80124C90(HSD_GObj* gobj)
     if (!fp->x2219_flag.bits.b0) {
         s32 index = func_8007500C(fp, 4);
         tempObj = gobj;
-        ef_Spawn(0x4BE, tempObj2 = tempObj,
-                 fp->x5E8_fighterBones[index].x0_jobj);
+        ef_Spawn(0x4BE, tempObj2 = tempObj, fp->ft_bones[index].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -178,8 +177,7 @@ void ftPikachu_EfSpawn_80124D2C(HSD_GObj* gobj)
     if (!fp->x2219_flag.bits.b0) {
         s32 index = func_8007500C(fp, 4);
         tempObj = gobj;
-        ef_Spawn(0x4BF, tempObj2 = tempObj,
-                 fp->x5E8_fighterBones[index].x0_jobj);
+        ef_Spawn(0x4BF, tempObj2 = tempObj, fp->ft_bones[index].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;

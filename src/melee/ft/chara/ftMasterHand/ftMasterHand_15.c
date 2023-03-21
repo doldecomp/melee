@@ -254,13 +254,11 @@ void lbl_801535B0(HSD_GObj* gobj)
     fp = gobj->user_data;
     attr = fp->x10C_ftData->ext_attr;
     if (fp->x2200_ftcmd_var0 != 0) {
-        func_8015364C(gobj, fp->x5E8_fighterBones[8].x0_jobj, attr->xF8,
-                      attr->xFC);
+        func_8015364C(gobj, fp->ft_bones[8].x0_jobj, attr->xF8, attr->xFC);
         fp->x2200_ftcmd_var0 = 0;
     }
     if (fp->x2204_ftcmd_var1 != 0) {
-        func_8015364C(gobj, fp->x5E8_fighterBones[13].x0_jobj, attr->x100,
-                      attr->x104);
+        func_8015364C(gobj, fp->ft_bones[13].x0_jobj, attr->x100, attr->x104);
         fp->x2204_ftcmd_var1 = 0;
     }
 }

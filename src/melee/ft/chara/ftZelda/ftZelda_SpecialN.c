@@ -12,7 +12,7 @@ void ftZelda_8013A830(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        ef_Spawn(0x4F4, gobj, fp->x5E8_fighterBones[1].x0_jobj);
+        ef_Spawn(0x4F4, gobj, fp->ft_bones[1].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -27,7 +27,7 @@ void ftZelda_8013A8AC(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (fp->x2219_flag.bits.b0 == 0) {
-        ef_Spawn(0x4F5, gobj, fp->x5E8_fighterBones[1].x0_jobj);
+        ef_Spawn(0x4F5, gobj, fp->ft_bones[1].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

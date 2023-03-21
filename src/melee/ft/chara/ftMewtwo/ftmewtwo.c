@@ -119,7 +119,7 @@ void ftMewtwo_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftMewtwoAttributes);
 
     {
-        fp->x5E8_fighterBones[1].flags.bits.b4 = 1;
+        fp->ft_bones[1].flags.bits.b4 = 1;
         fp->x2221_flag.bits.b2 = 1;
     }
     func_8026B3F8(item_list[0], It_Kind_Mewtwo_Disable);

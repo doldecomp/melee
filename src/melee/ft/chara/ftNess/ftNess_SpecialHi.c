@@ -752,8 +752,8 @@ void ftNess_SpecialHiStart_Anim(HSD_GObj* gobj)
             Fighter* fighter_data2 = gobj->user_data;
             HSD_GObj* pkt_ptr = fighter_data2->fv.ns.pkthunder_gobj;
             if (pkt_ptr == NULL) {
-                func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj,
-                              NULL, &pkt_pos);
+                func_8000B1CC(fighter_data2->ft_bones[24].x0_jobj, NULL,
+                              &pkt_pos);
 
                 pkt_pos.z = 0.0f;
 
@@ -777,7 +777,7 @@ void ftNess_SpecialHiStart_Anim(HSD_GObj* gobj)
 
         ftNess_SpecialHiStopGFX(gobj);
 
-        ef_Spawn(0x4EE, gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        ef_Spawn(0x4EE, gobj, fp->ft_bones[4].x0_jobj);
 
         fp->fv.ns.pkthunder_gfx = true;
     }
@@ -884,7 +884,7 @@ void ftNess_SpecialHi_Anim(HSD_GObj* gobj)
         if (temp_fp->mv.ns.specialhi.jibakuGFX == 1) {
             Fighter* fp = gobj->user_data;
             ftNess_SpecialHiStopGFX(gobj);
-            ef_Spawn(0x4EF, gobj, fp->x5E8_fighterBones[4].x0_jobj);
+            ef_Spawn(0x4EF, gobj, fp->ft_bones[4].x0_jobj);
             fp->fv.ns.pkthunder_gfx = true;
         }
     }
@@ -935,8 +935,7 @@ void ftNess_SpecialAirHiStart_Anim(HSD_GObj* gobj)
             pkt_ptr = fp2->fv.ns.pkthunder_gobj;
 
             if (pkt_ptr == 0) {
-                func_8000B1CC(fp2->x5E8_fighterBones[24].x0_jobj, NULL,
-                              &pkt_pos);
+                func_8000B1CC(fp2->ft_bones[24].x0_jobj, NULL, &pkt_pos);
 
                 pkt_pos.z = 0.0f;
 
@@ -957,7 +956,7 @@ void ftNess_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 
         ftNess_SpecialHiStopGFX(gobj);
 
-        ef_Spawn(0x4EE, gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        ef_Spawn(0x4EE, gobj, fp->ft_bones[4].x0_jobj);
 
         fp->fv.ns.pkthunder_gfx = true;
     }
@@ -1105,7 +1104,7 @@ void ftNess_SpecialAirHi_Anim(HSD_GObj* gobj)
     if (fp1->mv.ns.specialhi.jibakuGFX == 1) {
         fp0 = gobj->user_data;
         ftNess_SpecialHiStopGFX(gobj);
-        ef_Spawn(0x4EF, gobj, fp0->x5E8_fighterBones[4].x0_jobj);
+        ef_Spawn(0x4EF, gobj, fp0->ft_bones[4].x0_jobj);
         fp0->fv.ns.pkthunder_gfx = true;
     }
 

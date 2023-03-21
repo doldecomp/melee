@@ -23,8 +23,7 @@ void ftFox_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
     sp14.y = 1.2325000762939453f;
     sp14.z = 4.263599872589111f;
 
-    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj,
-                  &sp14, pos);
+    func_8000B1CC(fp->ft_bones[func_8007500C(fp, 0x31)].x0_jobj, &sp14, pos);
 }
 
 void ftFox_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
@@ -36,8 +35,7 @@ void ftFox_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
     sp14.y = 1.2325000762939453f;
     sp14.z = 0.013600001111626625f;
 
-    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj,
-                  &sp14, pos);
+    func_8000B1CC(fp->ft_bones[func_8007500C(fp, 0x31)].x0_jobj, &sp14, pos);
 }
 
 // 0x800E5D90

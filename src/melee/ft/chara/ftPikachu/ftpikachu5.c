@@ -293,7 +293,7 @@ void ftPikachu_ActionChange_80127DE4(HSD_GObj* gobj)
         fighter_copy->cb.x21DC_callback_OnTakeDamage = 0;
         fp = GET_FIGHTER(gobj);
         efAsync_Spawn(gobj, &fp->x60C, 0, 0x4C0,
-                      fighter_copy->x5E8_fighterBones[0].x0_jobj);
+                      fighter_copy->ft_bones[0].x0_jobj);
     }
 }
 
@@ -319,7 +319,7 @@ void ftPikachu_ActionChange_80127EC0(HSD_GObj* gobj)
         fighter_copy->x80_self_vel.y = (f32) pika_attr->xB4;
         fp = GET_FIGHTER(gobj);
         efAsync_Spawn(gobj, &fp->x60C, 0, 0x4C0,
-                      fighter_copy->x5E8_fighterBones[0].x0_jobj);
+                      fighter_copy->ft_bones[0].x0_jobj);
     }
 }
 

@@ -187,5 +187,5 @@ void ftSamus_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
     HSD_JObjReqAnimAll(fighter_copy->x20A0_accessory, 0.0f);
     HSD_JObjAnimAll(fighter_copy->x20A0_accessory);
     func_8000C2F8(fighter_copy->x20A0_accessory,
-                  fighter_copy->x5E8_fighterBones[ThrowN].x0_jobj);
+                  fighter_copy->ft_bones[ThrowN].x0_jobj);
 }

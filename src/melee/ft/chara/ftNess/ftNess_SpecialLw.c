@@ -83,7 +83,7 @@ void ftNess_SpecialLwStart_Anim(
 
         if (fp->x2219_flag.bits.b0 == 0) {
             efAsync_Spawn(gobj, &fp->x60C, 0U, 0x4F0U,
-                          fp->x5E8_fighterBones[23].x0_jobj);
+                          fp->ft_bones[23].x0_jobj);
             fp->x2219_flag.bits.b0 = 1;
         }
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -121,7 +121,7 @@ void ftNess_SpecialAirLwStart_Anim(
 
         if (fp->x2219_flag.bits.b0 == 0) {
             efAsync_Spawn(gobj, &fp->x60C, 0U, 0x4F0U,
-                          fp->x5E8_fighterBones[23].x0_jobj);
+                          fp->ft_bones[23].x0_jobj);
             fp->x2219_flag.bits.b0 = 1;
         }
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -773,7 +773,7 @@ void ftNess_SpecialLwHit_Anim(
             temp_r30 = arg0->user_data;
             if (temp_r30->x2219_flag.bits.b0 == 0) {
                 efAsync_Spawn(arg0, &temp_r30->x60C, 0U, 0x4F0U,
-                              temp_r30->x5E8_fighterBones[23].x0_jobj);
+                              temp_r30->ft_bones[23].x0_jobj);
                 temp_r30->x2219_flag.bits.b0 = 1;
             }
             temp_r30->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -811,7 +811,7 @@ void ftNess_SpecialAirLwHit_Anim(
             Fighter* fp = GET_FIGHTER(arg0);
             if (!fp->x2219_flag.bits.b0) {
                 efAsync_Spawn(arg0, &fp->x60C, 0U, 0x4F0U,
-                              fp->x5E8_fighterBones[23].x0_jobj);
+                              fp->ft_bones[23].x0_jobj);
                 fp->x2219_flag.bits.b0 = true;
             }
             fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

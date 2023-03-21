@@ -517,7 +517,7 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
 #endif
         Fighter* fp2 = gobj->user_data;
 
-        func_8000B1CC(fp2->x5E8_fighterBones[26].x0_jobj, NULL, &vec1);
+        func_8000B1CC(fp2->ft_bones[26].x0_jobj, NULL, &vec1);
 
         fp2->fv.sk.x2234 = func_802BB290(gobj, &vec1, fp2->facing_dir);
 
@@ -825,7 +825,7 @@ void ftSeak_80111830(HSD_GObj* gobj)
         vec0.y += fp->cur_pos.y;
         vec0.z += fp->cur_pos.z;
 
-        func_8000B1CC(fp->x5E8_fighterBones[26].x0_jobj, NULL, &vec1);
+        func_8000B1CC(fp->ft_bones[26].x0_jobj, NULL, &vec1);
 
         {
             s32 flags = ftNess_YoyoCheckEnvColl(gobj, &vec0, &vec1, 0.5F);

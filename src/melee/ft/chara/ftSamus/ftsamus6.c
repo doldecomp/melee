@@ -29,7 +29,7 @@ void ftSamus_8012ADF0(HSD_GObj* gobj)
     }
     if (bool1) {
         f32 vec_x;
-        func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &vec);
+        func_8000B1CC(fp->ft_bones[0].x0_jobj, NULL, &vec);
         vec_x = samus_attr->x74_vec.x;
         vec.x += (vec_x * fp->facing_dir);
         vec.y += samus_attr->x74_vec.y;

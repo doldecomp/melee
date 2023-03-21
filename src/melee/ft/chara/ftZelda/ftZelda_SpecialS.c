@@ -101,7 +101,7 @@ void ftZelda_8013B780(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        func_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp24);
+        func_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp24);
 
         sp24.z = 0;
         temp_f2 = attributes->x20;
@@ -115,7 +115,7 @@ void ftZelda_8013B780(HSD_GObj* gobj)
             fp->cb.x21E4_callback_OnDeath2 = &ftZelda_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZelda_801393AC;
         }
-        ef_Spawn(0x4FB, gobj, fp->x5E8_fighterBones[0x4C].x0_jobj);
+        ef_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -147,7 +147,7 @@ void ftZelda_8013B89C(HSD_GObj* gobj)
 
     if ((fp->x2200_ftcmd_var0 == 1U) && (fp->fv.zd.x222C == 0U)) {
         fp->x2200_ftcmd_var0 = 0U;
-        func_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp20);
+        func_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp20);
 
         sp20.z = 0;
         temp_f2 = attributes->x20;
@@ -161,7 +161,7 @@ void ftZelda_8013B89C(HSD_GObj* gobj)
             fp->cb.x21E4_callback_OnDeath2 = &ftZelda_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZelda_801393AC;
         }
-        ef_Spawn(0x4FB, gobj, fp->x5E8_fighterBones[0x4C].x0_jobj);
+        ef_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
     }
 
     if (fp->mv.zd.specials.x0 != 0) {
@@ -234,7 +234,7 @@ void ftZelda_8013BA8C(HSD_GObj* gobj)
     attributes = fp->x2D4_specialAttributes;
     if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        func_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp24);
+        func_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp24);
 
         sp24.z = 0;
         temp_f2 = attributes->x20;
@@ -248,7 +248,7 @@ void ftZelda_8013BA8C(HSD_GObj* gobj)
             fp->cb.x21E4_callback_OnDeath2 = &ftZelda_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZelda_801393AC;
         }
-        ef_Spawn(0x4FB, gobj, fp->x5E8_fighterBones[0x4C].x0_jobj);
+        ef_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -279,7 +279,7 @@ void ftZelda_8013BBA8(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        func_8000B1CC(fp->x5E8_fighterBones[0x59].x0_jobj, NULL, &sp20);
+        func_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp20);
 
         sp20.z = 0;
         temp_f2 = attributes->x20;
@@ -293,7 +293,7 @@ void ftZelda_8013BBA8(HSD_GObj* gobj)
             fp->cb.x21E4_callback_OnDeath2 = &ftZelda_801393AC;
             fp->cb.x21DC_callback_OnTakeDamage = &ftZelda_801393AC;
         }
-        ef_Spawn(0x4FB, gobj, fp->x5E8_fighterBones[0x4C].x0_jobj);
+        ef_Spawn(0x4FB, gobj, fp->ft_bones[0x4C].x0_jobj);
     }
 
     if (fp->mv.zd.specials.x0 != 0) {

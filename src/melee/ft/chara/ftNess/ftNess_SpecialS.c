@@ -36,7 +36,7 @@ void ftNess_ItemPKFireSpawn(
     }
 
     if (FlagResult != false) {
-        func_8000B1CC(fp->x5E8_fighterBones[42].x0_jobj, NULL, &ItemBonePos);
+        func_8000B1CC(fp->ft_bones[42].x0_jobj, NULL, &ItemBonePos);
 
         ItemBonePos.x += ness_attr->x30_PKFIRE_SPAWN_X * fp->facing_dir;
         ItemBonePos.y += ness_attr->x34_PKFIRE_SPAWN_Y;

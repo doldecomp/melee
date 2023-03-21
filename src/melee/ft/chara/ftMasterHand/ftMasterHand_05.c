@@ -14,8 +14,7 @@ u32 lbl_80151428(Vec3* vec)
 
     if (fetched_gobj) {
         func_8000B1CC(
-            ((Fighter*) fetched_gobj->user_data)->x5E8_fighterBones[5].x0_jobj,
-            0, vec);
+            ((Fighter*) fetched_gobj->user_data)->ft_bones[5].x0_jobj, 0, vec);
         return 1;
     }
     return 0;

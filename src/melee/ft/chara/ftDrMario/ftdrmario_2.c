@@ -21,7 +21,7 @@ void func_80149954(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     if (fp->x2200_ftcmd_var0 == 1 && fp->fv.mr.x2240 == 0U) {
-        func_8000B1CC(fp->x5E8_fighterBones->x0_jobj, 0, &sp18);
+        func_8000B1CC(fp->ft_bones->x0_jobj, 0, &sp18);
         tmp = ftMario_SpecialN_VitaminRandom(gobj);
         tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
         fp->fv.mr.x2240 = tmp;

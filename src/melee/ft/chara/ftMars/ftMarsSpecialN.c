@@ -167,8 +167,7 @@ void lbl_80136ADC(HSD_GObj* gobj)
 #endif
 
     if (fp->mv.ms.specialn.x0 % 30 == 0) {
-        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
-                      &sp28);
+        func_8000B1CC(fp->ft_bones[func_8007500C(fp, 4)].x0_jobj, 0, &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
 
@@ -192,8 +191,7 @@ void lbl_80136BB4(HSD_GObj* gobj)
 #endif
 
     if ((s32) fp->mv.ms.specialn.x0 % 30 == 0) {
-        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
-                      &sp28);
+        func_8000B1CC(fp->ft_bones[func_8007500C(fp, 4)].x0_jobj, 0, &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
     fp->mv.ms.specialn.x0++;
@@ -334,7 +332,7 @@ void lbl_80136EE4(HSD_GObj* gobj)
 
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
-        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
+        func_8000B1CC(fp->ft_bones[func_8007500C(fp, 4)].x0_jobj, 0,
                       &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
         func_800119DC(&position, 120, 0.9f, 0.02f, 60 * M_PI / 180);
@@ -398,7 +396,7 @@ void lbl_80137010(HSD_GObj* gobj)
 
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
-        func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
+        func_8000B1CC(fp->ft_bones[func_8007500C(fp, 4)].x0_jobj, 0,
                       &position);
         // AestheticWindEffect(r3=sourcelocation,r4=duration,f1=radiusSize,f2=effectdegradation,f3=unk)
         func_800119DC(&position, 120, 0.9f, 0.02f, 60 * M_PI / 180);

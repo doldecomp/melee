@@ -168,9 +168,8 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* gobj)
             sp38.x = 2.5f;
             sp38.y = 6.5f;
             sp38.z = 0.0f;
-            func_8000B1CC(
-                fp->x5E8_fighterBones[func_8007500C(fp, 0x1F)].x0_jobj, &sp38,
-                &sp44);
+            func_8000B1CC(fp->ft_bones[func_8007500C(fp, 0x1F)].x0_jobj, &sp38,
+                          &sp44);
             temp_fp = GET_FIGHTER(gobj);
             i = 5;
             for (i -= 5; i < 5; i++) {

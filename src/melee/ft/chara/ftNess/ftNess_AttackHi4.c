@@ -166,12 +166,12 @@ void ftNess_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* pos)
 #endif
 
     if (!fp->mv.ns.attackhi4.isPosUpdateMod) {
-        func_8000B1CC(fp->x5E8_fighterBones[0x3D].x0_jobj, NULL, pos);
+        func_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, pos);
         return;
     }
 
-    func_8000B1CC(fp->x5E8_fighterBones[0x3D].x0_jobj, NULL, &sp20);
-    func_8000B1CC(fp->x5E8_fighterBones[0x2].x0_jobj, NULL, &sp14);
+    func_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp20);
+    func_8000B1CC(fp->ft_bones[0x2].x0_jobj, NULL, &sp14);
     *pos = sp20;
     lbvector_Sub(pos, &sp14);
     lbvector_Rotate(pos, 4,
@@ -201,10 +201,10 @@ void ftNess_YoyoSetHitPos(HSD_GObj* gobj)
     collData = &fp->x6F0_collData;
 
     if (!fp->mv.ns.attackhi4.isPosUpdateMod) {
-        func_8000B1CC(fp->x5E8_fighterBones[0x3D].x0_jobj, NULL, &sp2C);
+        func_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp2C);
     } else {
-        func_8000B1CC(fp->x5E8_fighterBones[0x3D].x0_jobj, NULL, &sp14);
-        func_8000B1CC(fp->x5E8_fighterBones[0x2].x0_jobj, NULL, &sp20);
+        func_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp14);
+        func_8000B1CC(fp->ft_bones[0x2].x0_jobj, NULL, &sp20);
         sp2C = sp14;
         lbvector_Sub(&sp2C, &sp20);
         lbvector_Rotate(&sp2C, 4,
@@ -237,10 +237,10 @@ void ftNess_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 pos_unk)
     collData = &fp->x6F0_collData;
 
     if (!fp->mv.ns.attackhi4.isPosUpdateMod) {
-        func_8000B1CC(fp->x5E8_fighterBones[0x3D].x0_jobj, NULL, &sp3C);
+        func_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp3C);
     } else {
-        func_8000B1CC(fp->x5E8_fighterBones[0x3D].x0_jobj, NULL, &sp18);
-        func_8000B1CC(fp->x5E8_fighterBones[0x2].x0_jobj, NULL, &sp24);
+        func_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp18);
+        func_8000B1CC(fp->ft_bones[0x2].x0_jobj, NULL, &sp24);
         sp3C = sp18;
         lbvector_Sub(&sp3C, &sp24);
         lbvector_Rotate(&sp3C, 4,
@@ -559,7 +559,7 @@ void ftNess_YoyoCreateItem(HSD_GObj* gobj)
     Vec3 sp10;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8000B1CC(fp->x5E8_fighterBones[0x2A].x0_jobj, NULL, &sp10);
+    func_8000B1CC(fp->ft_bones[0x2A].x0_jobj, NULL, &sp10);
     fp->fv.ns.yoyo_gobj =
         func_802BE9D8(fp->facing_dir, gobj, &sp10, fp->motion_id);
     fp->x1984_heldItemSpec = fp->fv.ns.yoyo_gobj;

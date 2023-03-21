@@ -292,13 +292,13 @@ void func_800865D8(HSD_GObj* gobj, f32* x, f32* y)
 void* func_800865F0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj;
+    return fp->ft_bones[func_8007500C(fp, 4)].x0_jobj;
 }
 
 void* func_80086630(HSD_GObj* gobj, s32 i)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x5E8_fighterBones[i].x0_jobj;
+    return fp->ft_bones[i].x0_jobj;
 }
 
 void func_80086644(HSD_GObj* gobj, Vec3* pos)

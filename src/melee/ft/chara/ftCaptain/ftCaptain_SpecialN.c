@@ -164,12 +164,12 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* gobj)
             ftKind = func_800872A4(gobj);
             switch (ftKind) {
             case 2:
-                ef_Spawn(0x48F, gobj, fp->x5E8_fighterBones[0].x0_jobj,
-                         fp->x5E8_fighterBones[0x39].x0_jobj);
+                ef_Spawn(0x48F, gobj, fp->ft_bones[0].x0_jobj,
+                         fp->ft_bones[0x39].x0_jobj);
                 break;
             case 25:
-                ef_Spawn(0x50B, gobj, fp->x5E8_fighterBones[0].x0_jobj,
-                         fp->x5E8_fighterBones[0x4E].x0_jobj);
+                ef_Spawn(0x50B, gobj, fp->ft_bones[0].x0_jobj,
+                         fp->ft_bones[0x4E].x0_jobj);
                 break;
             }
             fp->x2219_flag.bits.b0 = 1;
@@ -198,12 +198,12 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
             ftKind = func_800872A4(gobj);
             switch (ftKind) {
             case 2:
-                ef_Spawn(0x48F, gobj, fp->x5E8_fighterBones[0].x0_jobj,
-                         fp->x5E8_fighterBones[0x39].x0_jobj);
+                ef_Spawn(0x48F, gobj, fp->ft_bones[0].x0_jobj,
+                         fp->ft_bones[0x39].x0_jobj);
                 break;
             case 25:
-                ef_Spawn(0x50B, gobj, fp->x5E8_fighterBones[0].x0_jobj,
-                         fp->x5E8_fighterBones[0x4E].x0_jobj);
+                ef_Spawn(0x50B, gobj, fp->ft_bones[0].x0_jobj,
+                         fp->ft_bones[0x4E].x0_jobj);
                 break;
             }
             fp->x2219_flag.bits.b0 = 1;

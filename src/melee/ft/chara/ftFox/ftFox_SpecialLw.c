@@ -16,7 +16,7 @@ void ftFox_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x488, gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        ef_Spawn(0x488, gobj, fp->ft_bones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -31,7 +31,7 @@ void ftFox_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x489, gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        ef_Spawn(0x489, gobj, fp->ft_bones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -45,7 +45,7 @@ void ftFox_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x48A, gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        ef_Spawn(0x48A, gobj, fp->ft_bones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
         fp->x2219_flag.bits.b0 = true;
     }
@@ -875,8 +875,7 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* gobj)
 
     fp->facing_dir = fp->ReflectAttr.x1A2C_reflectHitDirection;
 
-    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, NULL,
-                  &sp14);
+    func_8000B1CC(fp->ft_bones[func_8007500C(fp, 4)].x0_jobj, NULL, &sp14);
 
     func_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f,
                   1.0471975803375244f);

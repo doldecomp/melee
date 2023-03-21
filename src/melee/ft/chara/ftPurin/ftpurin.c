@@ -216,8 +216,8 @@ void func_8013C4F0(HSD_GObj* gobj, int arg1, Mtx vmtx)
     if (fp->fv.pr.x223C && fp->x2225_b2) {
         Mtx* mtx;
         HSD_JObj* jobj;
-        HSD_JObj* bone_jobj = fp->x5E8_fighterBones[6].x0_jobj;
-        HSD_JObjGetMtx(fp->x5E8_fighterBones[6].x0_jobj);
+        HSD_JObj* bone_jobj = fp->ft_bones[6].x0_jobj;
+        HSD_JObjGetMtx(fp->ft_bones[6].x0_jobj);
         mtx = (0, &bone_jobj->mtx);
         jobj = fp->fv.pr.x223C;
         HSD_JObjCopyMtx(fp->fv.pr.x223C, *mtx);
@@ -323,7 +323,7 @@ void lbl_8013C94C(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (!fp->x2219_flag.bits.b0) {
-        ef_Spawn(1238, gobj, fp->x5E8_fighterBones[5].x0_jobj);
+        ef_Spawn(1238, gobj, fp->ft_bones[5].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 

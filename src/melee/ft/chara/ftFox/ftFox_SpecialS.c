@@ -15,8 +15,7 @@ void ftFox_SpecialS_CreateGFX(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x48D, gobj, fp->x5E8_fighterBones[0].x0_jobj,
-                 &fp->facing_dir);
+        ef_Spawn(0x48D, gobj, fp->ft_bones[0].x0_jobj, &fp->facing_dir);
         fp->x2219_flag.bits.b0 = true;
     }
 

@@ -26,7 +26,7 @@ void ftGameWatch_ItemPanicSetup(HSD_GObj* gobj)
         u8 _[16];
 #endif
 
-        func_8000B1CC(fp->x5E8_fighterBones[TopN].x0_jobj, NULL, &vec);
+        func_8000B1CC(fp->ft_bones[TopN].x0_jobj, NULL, &vec);
 
         fp->fv.gw.x2268_panicGObj =
             func_802C7D60(gobj, &vec, 0, fp->facing_dir);

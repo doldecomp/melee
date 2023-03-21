@@ -31,7 +31,7 @@ void ftMewtwo_SpecialHi_SetStartGFX(HSD_GObj* gobj)
         Vec3 pos;
 
         if (!fp1->x2219_flag.bits.b0) {
-            func_8000B1CC(fp1->x5E8_fighterBones[WaistN].x0_jobj, NULL, &pos);
+            func_8000B1CC(fp1->ft_bones[WaistN].x0_jobj, NULL, &pos);
             ef_Spawn(0x4E8, gobj, &pos);
             fp1->x2219_flag.bits.b0 = true;
         }
@@ -51,7 +51,7 @@ void ftMewtwo_SpecialHi_SetEndGFX(HSD_GObj* gobj)
         Vec3 pos;
 
         if (!fp1->x2219_flag.bits.b0) {
-            func_8000B1CC(fp1->x5E8_fighterBones[WaistN].x0_jobj, NULL, &pos);
+            func_8000B1CC(fp1->ft_bones[WaistN].x0_jobj, NULL, &pos);
             fp1->x2219_flag.bits.b0 = true;
         }
     }

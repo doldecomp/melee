@@ -54,12 +54,12 @@ void ftCaptain_SpecialS_StartMotion(HSD_GObj* gobj)
 
     switch (func_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
-        ef_Spawn(1169, gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
+        ef_Spawn(1169, gobj, fp->ft_bones[HeadN].x0_jobj);
         fp->fv.ca.during_specials_start = true;
         break;
 
     case FTKIND_GANON:
-        ef_Spawn(1293, gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
+        ef_Spawn(1293, gobj, fp->ft_bones[L2ndNb].x0_jobj);
         fp->fv.ca.during_specials_start = true;
         break;
     }
@@ -94,11 +94,11 @@ static inline void setupAirStart(HSD_GObj* gobj)
 
     switch (func_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
-        ef_Spawn(1169, gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
+        ef_Spawn(1169, gobj, fp->ft_bones[HeadN].x0_jobj);
         fp->fv.ca.during_specials_start = true;
         break;
     case FTKIND_GANON:
-        ef_Spawn(1293, gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
+        ef_Spawn(1293, gobj, fp->ft_bones[L2ndNb].x0_jobj);
         fp->fv.ca.during_specials_start = true;
         break;
     }
@@ -221,13 +221,13 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* gobj)
     if (!fp->fv.ca.during_specials) {
         switch (func_800872A4(gobj)) {
         case FTKIND_CAPTAIN:
-            ef_Spawn(1170, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            ef_Spawn(1170, gobj, fp->ft_bones[TransN].x0_jobj,
                      &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;
 
         case FTKIND_GANON:
-            ef_Spawn(1294, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            ef_Spawn(1294, gobj, fp->ft_bones[TransN].x0_jobj,
                      &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;
@@ -275,13 +275,13 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* gobj)
     if (!fp->fv.ca.during_specials) {
         switch (func_800872A4(gobj)) {
         case FTKIND_CAPTAIN:
-            ef_Spawn(1171, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            ef_Spawn(1171, gobj, fp->ft_bones[TransN].x0_jobj,
                      &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;
 
         case FTKIND_GANON:
-            ef_Spawn(1295, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
+            ef_Spawn(1295, gobj, fp->ft_bones[TransN].x0_jobj,
                      &fp->facing_dir);
             fp->fv.ca.during_specials = true;
             break;

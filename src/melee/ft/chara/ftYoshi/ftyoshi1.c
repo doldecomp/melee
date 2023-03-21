@@ -341,7 +341,7 @@ void func_8012BE3C(HSD_GObj* gobj) {
     x1CC = &fp->x110_attr.x1CC;
     bone_idx = func_8007500C(fp, 4);
     fp2 = GET_FIGHTER(gobj);
-    jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
+    jobj = fp->ft_bones[bone_idx].x0_jobj;
     efAsync_Spawn(gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
 }
 
