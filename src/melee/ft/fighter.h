@@ -16,15 +16,6 @@
 #include <common_structs.h>
 #include <math.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/archive.h>
-#include <baselib/controller.h>
-#include <baselib/dobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/lobj.h>
-#include <baselib/random.h>
 
 /// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers
