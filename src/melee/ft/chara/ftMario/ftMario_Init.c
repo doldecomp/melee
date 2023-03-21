@@ -2,6 +2,7 @@
 
 #include "ftmario2.h"
 #include "ftMario_SpecialN.h"
+#include "ftMario_SpecialS.h"
 #include "types.h"
 
 #include "ft/ft_unknown_006.h"
