@@ -1,7 +1,7 @@
 #include "ftzelda5.h"
 
 #include "ftzelda.h"
-#include "ftzelda1.h"
+#include "ftZelda_Init.h"
 
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
