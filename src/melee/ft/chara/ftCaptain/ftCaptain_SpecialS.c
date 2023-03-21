@@ -46,8 +46,7 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* gobj)
 
     resetCmdVarsGround(gobj);
 
-    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialS_Start, 0, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS_Start, 0, NULL, 0, 1, 0);
 
     setCallbacks(gobj);
     func_8006EBA4(gobj);
@@ -86,8 +85,8 @@ static inline void setupAirStart(HSD_GObj* gobj)
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialAirS_Start, 0, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirS_Start, 0, NULL, 0, 1,
+                              0);
 
     setCallbacks(gobj);
     func_8006EBA4(gobj);
@@ -135,8 +134,8 @@ static void onDetectGround(HSD_GObj* gobj)
     ftCaptainAttributes* sa = getFtSpecialAttrsD(fp);
 
     func_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialS, transition_flags,
-                              NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS, transition_flags, NULL,
+                              0, 1, 0);
     setCallbacks(gobj);
 
     {
@@ -150,7 +149,7 @@ static void onDetectGround(HSD_GObj* gobj)
 static void onDetectAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialAirS, transition_flags,
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirS, transition_flags,
                               NULL, 0, 1, 0);
     setCallbacks(gobj);
     fp->x80_self_vel.z = 0;
@@ -168,23 +167,23 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
 
         if (fp->x20AC->classifier == HSD_GOBJ_CLASS_FIGHTER) {
             switch (fp->action_id) {
-            case ftCaptain_MS_SpecialS_Start: {
+            case ftCa_MS_SpecialS_Start: {
                 onDetectGround(gobj);
                 break;
             }
 
-            case ftCaptain_MS_SpecialAirS_Start:
+            case ftCa_MS_SpecialAirS_Start:
                 onDetectAir(gobj);
                 break;
             }
         } else if (fp->x20AC->classifier == HSD_GOBJ_CLASS_ITEM) {
             if (itGetKind(detected_gobj) < It_Kind_BombHei) {
                 switch (fp->action_id) {
-                case ftCaptain_MS_SpecialS_Start:
+                case ftCa_MS_SpecialS_Start:
                     onDetectGround(gobj);
                     break;
 
-                case ftCaptain_MS_SpecialAirS_Start:
+                case ftCa_MS_SpecialAirS_Start:
                     onDetectAir(gobj);
                     break;
                 }
@@ -195,11 +194,11 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
                        itGetKind(detected_gobj) == Pokemon_Random)
             {
                 switch (fp->action_id) {
-                case ftCaptain_MS_SpecialS_Start:
+                case ftCa_MS_SpecialS_Start:
                     onDetectGround(gobj);
                     break;
 
-                case ftCaptain_MS_SpecialAirS_Start:
+                case ftCa_MS_SpecialAirS_Start:
                     onDetectAir(gobj);
                     break;
                 }

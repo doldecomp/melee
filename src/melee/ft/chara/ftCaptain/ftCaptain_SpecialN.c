@@ -81,7 +81,7 @@ void ftCaptain_SpecialN_StartAction(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -100,8 +100,8 @@ void ftCaptain_SpecialAirN_StartAction(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialAirN, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     func_8006EBA4(gobj);
@@ -238,9 +238,8 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* gobj)
     if (func_800827A0(gobj) == false) {
         Fighter* fp = GET_FIGHTER(gobj);
         func_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialAirN,
-                                  transition_flags, NULL,
-                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, transition_flags,
+                                  NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         func_8007D468(fp);
@@ -252,9 +251,8 @@ void ftCaptain_SpecialAirN_Coll(HSD_GObj* gobj)
     if (func_80081D0C(gobj) != false) {
         Fighter* fp = GET_FIGHTER(gobj);
         func_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialN,
-                                  transition_flags, NULL,
-                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, transition_flags,
+                                  NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
