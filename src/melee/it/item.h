@@ -9,9 +9,6 @@
 
 #include "it/types.h"
 
-#include <baselib/gobj.h>
-#include <baselib/jobj.h>
-
 extern HSD_ObjAllocData itemAllocData;
 extern HSD_ObjAllocData unkAllocData1;
 extern HSD_ObjAllocData lbl_804A0C38;
