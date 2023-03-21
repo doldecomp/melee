@@ -1,3 +1,5 @@
+#include "ftZelda_SpecialN.h"
+
 #include "ftzelda.h"
 
 #include "ef/eflib.h"

@@ -1,6 +1,7 @@
 #include "ftZelda_Init.h"
 
 #include "ftzelda.h"
+#include "ftZelda_SpecialLw.h"
 
 #include "ft/fighter.h"
 #include "ft/ft_unknown_006.h"
