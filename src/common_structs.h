@@ -1,7 +1,6 @@
 /// @file
 /// @todo Delete this.
 #ifndef _common_structs_h_
-#include <dolphin/mtx/types.h>
 #define _common_structs_h_
 
 #include <platform.h>
