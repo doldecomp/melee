@@ -48,7 +48,7 @@ struct ftCaptainAttributes {
     f32 speciallw_air_landing_traction;
 };
 
-union ftCaptain_StateVars {
+union ftCaptain_MotionVars {
     struct ftCaptainSpecialSVars {
         f32 grav;
     } specials;

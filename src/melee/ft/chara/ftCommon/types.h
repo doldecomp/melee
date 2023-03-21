@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-union ftCommon_StateVars {
+union ftCommon_MotionVars {
     struct ftCommon_CliffVars {
         /// 0x2340 - Used to check against opponent's variable @ 0x213C while
         /// they're occupying a ledge within grab range

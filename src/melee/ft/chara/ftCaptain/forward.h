@@ -5,7 +5,7 @@
 #include "ftCommon/forward.h"
 
 typedef struct ftCaptainAttributes ftCaptainAttributes;
-typedef union ftCaptain_StateVars ftCaptain_StateVars;
+typedef union ftCaptain_MotionVars ftCaptain_MotionVars;
 
 typedef enum ftCaptainAction {
     ftCaptain_AS_Swing42_Sword = ftCo_AS_Count,

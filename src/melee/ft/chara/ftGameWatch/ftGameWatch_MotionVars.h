@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <baselib/gobj.h>
 
-typedef union ftGameWatch_StateVars {
+typedef union ftGameWatch_MotionVars {
     struct ftGameWatch_Attack11Vars {
         bool unk; // 0x2340 - Set to 0 but never used?
     } Attack11;
@@ -24,6 +24,6 @@ typedef union ftGameWatch_StateVars {
         /// command
         s32 turnFrames;
     } SpecialLw;
-} ftGameWatch_StateVars;
+} ftGameWatch_MotionVars;
 
 #endif

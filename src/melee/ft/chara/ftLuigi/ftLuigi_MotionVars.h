@@ -20,10 +20,10 @@ typedef struct ftLuigiSpecialLw {
 
 } ftLuigiSpecialLw;
 
-typedef union ftLuigi_StateVars {
+typedef union ftLuigi_MotionVars {
     ftLuigiSpecialS SpecialS;
     ftLuigiSpecialLw SpecialLw;
 
-} ftLuigi_StateVars;
+} ftLuigi_MotionVars;
 
 #endif

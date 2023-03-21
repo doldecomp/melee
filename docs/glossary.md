@@ -80,6 +80,9 @@ Short for "knockback."
 @section glossary_lstick lstick
 Short for "left stick," the gray analog stick on the GameCube controller.
 
+@section glossary_lr lr
+Stands for "left/right." Synonymous with "facing direction."
+
 @section glossary_mag mag
 Short for "magnitude."
 
@@ -88,6 +91,10 @@ Short for "minimum."
 
 @section glossary_mul mul
 Short for "multiplier" or "multiply."
+
+@section glossary_mv mv
+Stands for "motion variables." Used by #HSD_GObj::user_data structs (such as
+#Fighter::mv) to store polymorphic variables specific to an #ActionState.
 
 @section glossary_phys phys
 Short for "physics."
@@ -124,10 +131,6 @@ Short for "square."
 
 @section glossary_src src
 Short for "source."
-
-@section glossary_sv SV
-Stands for "State Variables." Used by #HSD_GObj::user_data structs (such as
-#Fighter::sv) to store polymorphic variables specific to an #ActionState.
 
 @section glossary_sz sz
 Short for "size."

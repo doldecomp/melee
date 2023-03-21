@@ -34,8 +34,8 @@ typedef struct _MarsAttributes {
     u8 data_filler_68[0x98 - 0x68];
 } MarsAttributes;
 
-union ftMars_StateVars {
-    struct ftMars_Unk0StateVars {
+union ftMars_MotionVars {
+    struct ftMars_Unk0MotionVars {
         bool x0;
     } unk0;
 

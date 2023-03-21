@@ -43,7 +43,7 @@ typedef struct _ftZeldaAttributes {
     ReflectDesc x84;
 } ftZeldaAttributes;
 
-union ftZelda_StateVars {
+union ftZelda_MotionVars {
     struct ftZelda_SpecialHiVars {
         int x0;
         Vec2 x4;
@@ -52,11 +52,11 @@ union ftZelda_StateVars {
         f32 x18;
     } specialhi;
 
-    struct ftZelda_Unk3StateVars {
+    struct ftZelda_Unk3MotionVars {
         int x0;
     } unk3;
 
-    struct ftZelda_Unk5StateVars {
+    struct ftZelda_Unk5MotionVars {
         int x0;
         int x4;
         int x8;

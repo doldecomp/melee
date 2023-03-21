@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-union ftPurin_StateVars {
+union ftPurin_MotionVars {
     struct ftPurin_SpecialHiVars {
         bool x0;
     } specialhi;

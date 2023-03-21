@@ -34,7 +34,7 @@ struct S_UNK_YOSHI1 {
     struct S_UNK_YOSHI2* unk_struct;
 };
 
-union ftYoshi_StateVars {
+union ftYoshi_MotionVars {
     /// @todo Proper state name.
     struct ftYoshi_State2Vars {
         f32 x0;

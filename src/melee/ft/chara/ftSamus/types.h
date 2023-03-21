@@ -56,7 +56,7 @@ struct UNK_SAMUS_S2 {
     f32 single_float;
 };
 
-union ftSamus_StateVars {
+union ftSamus_MotionVars {
     /// @todo Proper state name.
     struct ftSamus_State2Vars {
         s32 x0;

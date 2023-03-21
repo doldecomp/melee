@@ -90,7 +90,7 @@ struct ftMasterHand_SpecialAttrs {
     f32 x178;
 };
 
-union ftMasterHand_StateVars {
+union ftMasterHand_MotionVars {
     struct ftMasterHand_Unk0Vars {
         f32 x0;
         HSD_GObjEvent x4;

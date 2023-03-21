@@ -56,12 +56,12 @@ typedef struct ftFoxAppealS {
     s32 animCount;
 } ftFoxAppealS;
 
-typedef union ftFox_StateVars {
+typedef union ftFox_MotionVars {
     ftFoxSpecialN SpecialN;
     ftFoxSpecialS SpecialS;
     ftFoxSpecialHi SpecialHi;
     ftFoxSpecialLw SpecialLw;
     ftFoxAppealS AppealS;
-} ftFox_StateVars;
+} ftFox_MotionVars;
 
 #endif

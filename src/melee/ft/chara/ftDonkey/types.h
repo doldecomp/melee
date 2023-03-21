@@ -8,7 +8,7 @@ struct ftDonkey_EntityVars {
     /* 0x2230 */ s32 x2230;
 };
 
-union ftDonkey_StateVars {
+union ftDonkey_MotionVars {
     struct ftDonkey_SpecialNVars {
         s32 x0;
         s32 x4;

@@ -7,14 +7,14 @@
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
 #include "ftFox/types.h"
-#include "ftGameWatch/ftGameWatch_StateVars.h"
+#include "ftGameWatch/ftGameWatch_MotionVars.h"
 #include "ftKoopa/types.h"
-#include "ftLuigi/ftLuigi_StateVars.h"
-#include "ftMario/ftMario_StateVars.h"
+#include "ftLuigi/ftLuigi_MotionVars.h"
+#include "ftMario/ftMario_MotionVars.h"
 #include "ftMars/types.h"
 #include "ftMasterHand/types.h"
-#include "ftMewtwo/ftMewtwo_StateVars.h"
-#include "ftNess/ftNess_StateVars.h"
+#include "ftMewtwo/ftMewtwo_MotionVars.h"
+#include "ftNess/ftNess_MotionVars.h"
 #include "ftPikachu/types.h"
 #include "ftPurin/types.h"
 #include "ftSamus/types.h"
@@ -1353,26 +1353,26 @@ struct Fighter {
     /* 0x2338 */ Vec2 x2338;
 
     /// @at{2340} @sz{AC}
-    union Fighter_StateVars {
+    union Fighter_MotionVars {
         u8 _[0x23EC - 0x2340];
-        union ftCaptain_StateVars ca, gn;
-        union ftCommon_StateVars co;
-        union ftDonkey_StateVars dk;
-        union ftFox_StateVars fx, fc;
-        union ftGameWatch_StateVars gw;
-        union ftKoopa_StateVars kp;
-        union ftLuigi_StateVars lg;
-        union ftMario_StateVars mr, dr;
-        union ftMars_StateVars ms, fe;
-        union ftMasterHand_StateVars mh, ch;
-        union ftMewtwo_StateVars mt;
-        union ftNess_StateVars ns;
-        union ftPikachu_StateVars pk, pc;
-        union ftPurin_StateVars pr;
-        union ftSamus_StateVars ss;
-        union ftSeak_StateVars sk;
-        union ftYoshi_StateVars ys;
-        union ftZelda_StateVars zd;
+        union ftCaptain_MotionVars ca, gn;
+        union ftCommon_MotionVars co;
+        union ftDonkey_MotionVars dk;
+        union ftFox_MotionVars fx, fc;
+        union ftGameWatch_MotionVars gw;
+        union ftKoopa_MotionVars kp;
+        union ftLuigi_MotionVars lg;
+        union ftMario_MotionVars mr, dr;
+        union ftMars_MotionVars ms, fe;
+        union ftMasterHand_MotionVars mh, ch;
+        union ftMewtwo_MotionVars mt;
+        union ftNess_MotionVars ns;
+        union ftPikachu_MotionVars pk, pc;
+        union ftPurin_MotionVars pr;
+        union ftSamus_MotionVars ss;
+        union ftSeak_MotionVars sk;
+        union ftYoshi_MotionVars ys;
+        union ftZelda_MotionVars zd;
     } sv;
 };
 

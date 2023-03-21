@@ -52,7 +52,7 @@ typedef struct itChainSegment {
     f32 x50;
 } itChainSegment;
 
-union ftSeak_StateVars {
+union ftSeak_MotionVars {
     struct ftSeak_SpecialNVars {
         s32 x0;
         s32 x4;

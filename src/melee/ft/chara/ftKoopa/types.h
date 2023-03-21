@@ -4,7 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
-union ftKoopa_StateVars {
+union ftKoopa_MotionVars {
     /// @todo Proper state name.
     struct ftKoopa_State1Vars {
         UNK_T x0;

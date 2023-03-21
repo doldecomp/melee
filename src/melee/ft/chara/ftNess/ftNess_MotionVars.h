@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <dolphin/mtx/types.h>
 
-union ftNess_StateVars {
+union ftNess_MotionVars {
     struct ftNess_YoyoVars {
         // 0x2340 - Current frame of Up/Down Smash animation as an integer
         s32 yoyoCurrentFrame;
