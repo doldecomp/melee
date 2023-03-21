@@ -67,21 +67,20 @@ void ftMario_OnLoadForDrMario(Fighter* fp)
 
 void ftMario_OnLoad(HSD_GObj* gobj)
 {
-    ftData* ftDataInfo;
-    void** items;
-    ftMario_DatAttrs* sa;
     Fighter* fp = gobj->user_data;
-    ftDataInfo = fp->x10C_ftData;
-    items = ftDataInfo->x48_items;
+    ftData* ftDataInfo = fp->x10C_ftData;
+    void** items = ftDataInfo->x48_items;
 
-    fp->x2224_flag.bits.b7 = 1;
+    fp->x2224_flag.bits.b7 = true;
 
     PUSH_ATTRS(fp, ftMario_DatAttrs);
 
-    sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
+    {
+        ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
 
-    func_8026B3F8(items[0], It_Kind_Mario_Fire);
-    func_8026B3F8(items[2], sa->specials.cape_kind);
+        func_8026B3F8(items[0], It_Kind_Mario_Fire);
+        func_8026B3F8(items[2], sa->specials.cape_kind);
+    }
 }
 
 // 0x800E0A00
