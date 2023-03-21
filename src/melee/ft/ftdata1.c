@@ -32,6 +32,7 @@
 #include "ftMario/ftmario2.h"
 #include "ftMario/ftMario_Init.h"
 #include "ftMario/ftMario_SpecialN.h"
+#include "ftMario/ftMario_SpecialS.h"
 #include "ftMars/ftMars.h"
 #include "ftMasterHand/ftMasterHand_01.h"
 #include "ftMasterHand/ftMasterHand_02.h"
