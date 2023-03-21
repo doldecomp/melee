@@ -20,10 +20,10 @@ f32 const lbl_804D9694 = 10.0F;
 
 // 80113038 - 801130D0 (0x98 bytes)
 
-// AS_SheikUpBStartGround
+// MS_SheikUpBStartGround
 // 801130D0 - 8011312C (0x5C bytes)
 
-// Sheik_AS_358_Up-B_Vanish
+// Sheik_MS_358_Up-B_Vanish
 // 8011312C - 80113194 (0x68 bytes)
 
 // 80113194 - 801131D0 (0x3C bytes)
@@ -66,16 +66,16 @@ f32 const lbl_804D9694 = 10.0F;
 
 // 80113540 - 8011374C (0x20C bytes)
 
-// AS_SheikUpBGroundtoAirFall?
+// MS_SheikUpBGroundtoAirFall?
 // 8011374C - 801137C8 (0x7C bytes)
 
-// AS_SheikUpBLand
+// MS_SheikUpBLand
 // 801137C8 - 80113838 (0x70 bytes)
 
-// AS_SheikUpBTravelGround
+// MS_SheikUpBTravelGround
 // 80113838 - 80113A30 (0x1F8 bytes)
 
-// AS_SheikUpBTravelAir
+// MS_SheikUpBTravelAir
 // 80113A30 - 80113C40 (0x210 bytes)
 
 // 80113C40 - 80113C7C (0x3C bytes)
@@ -99,5 +99,5 @@ f32 const lbl_804D9694 = 10.0F;
 
 // 80113EAC - 80113F68 (0xBC bytes)
 
-// AS_SheikUpBFall
+// MS_SheikUpBFall
 // 80113F68 - 80114034 (0xCC bytes)

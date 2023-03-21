@@ -58,8 +58,7 @@ void ftZelda_SpecialN_StartAction(HSD_GObj* gobj)
     temp_f1 = 0;
     fp = GET_FIGHTER(gobj);
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, NULL, temp_f1, 1.0,
-                                       temp_f1);
+    Fighter_ChangeMotionState(gobj, 0x155, 0, NULL, temp_f1, 1.0, temp_f1);
     func_8006EBA4(gobj);
     startActionHelper(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A830;
@@ -78,7 +77,7 @@ void ftZelda_SpecialAirN_StartAction(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0;
     fp->x80_self_vel.x = fp->x80_self_vel.x / sa->x8;
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, NULL, 0, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 0x156, 0, NULL, 0, 1.0, 0);
     func_8006EBA4(gobj);
 
     startActionHelper(gobj);
@@ -211,8 +210,8 @@ void ftZelda_8013AC88(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 0x156, 0x0C4C508E, NULL,
+                              fp->x894_currentAnimFrame, 1.0, 0);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->x2D4_specialAttributes;
@@ -236,8 +235,8 @@ void ftZelda_8013AD1C(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 0x155, 0x0C4C508E, NULL,
+                              fp->x894_currentAnimFrame, 1.0, 0);
 
     fighter2 = GET_FIGHTER(gobj);
     attributes = fighter2->x2D4_specialAttributes;

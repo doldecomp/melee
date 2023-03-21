@@ -148,7 +148,7 @@ void ftPikachu_SpecialLw_StartAction(HSD_GObj* gobj)
     *((u32*) (&fp->x2210_ThrowFlags)) = 0;
     fp->mv.pk.unk4.x4 = 1;
     fp->mv.pk.unk4.x0 = 0;
-    Fighter_ActionStateChange_800693AC(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -159,7 +159,7 @@ void ftPikachu_SpecialAirLw_StartAction(HSD_GObj* gobj)
     *((u32*) (&fp->x2210_ThrowFlags)) = 0;
     fp->mv.pk.unk4.x4 = 1;
     fp->mv.pk.unk4.x0 = 0;
-    Fighter_ActionStateChange_800693AC(gobj, 0x16B, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x16B, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -167,16 +167,16 @@ void ftPikachu_ActionChange_8012798C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x167, 0xC4C5086, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x167, 0xC4C5086, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 void ftPikachu_ActionChange_801279EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x16B, 0xC4C5086, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x16B, 0xC4C5086, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fp);
 }
 
@@ -184,8 +184,8 @@ void ftPikachu_ActionChange_80127A54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x168, 0xC4C588E, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x168, 0xC4C588E, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->cb.x21DC_callback_OnTakeDamage = &ftPikachu_SetState_8012779C;
     fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_801277AC;
 }
@@ -194,8 +194,8 @@ void ftPikachu_ActionChange_80127ACC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x16C, 0xC4C588E, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x16C, 0xC4C588E, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->cb.x21DC_callback_OnTakeDamage = &ftPikachu_SetState_8012779C;
     fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_801277AC;
     func_8007D468(fp);
@@ -205,16 +205,16 @@ void ftPikachu_ActionChange_80127B4C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x169, 0xC4C508E, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x169, 0xC4C508E, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 void ftPikachu_ActionChange_80127BAC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x16D, 0xC4C508E, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x16D, 0xC4C508E, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fp);
 }
 
@@ -222,16 +222,16 @@ void ftPikachu_ActionChange_80127C14(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x16A, 0xC4C5086, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x16A, 0xC4C5086, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 void ftPikachu_ActionChange_80127C74(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x16E, 0xC4C5086, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x16E, 0xC4C5086, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     func_8007D468(fp);
 }
 
@@ -245,8 +245,7 @@ void ftPikachu_ActionChange_80127CDC(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
         Fighter* fp = GET_FIGHTER(gobj);
-        Fighter_ActionStateChange_800693AC(gobj, 0x168, 0x800, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x168, 0x800, 0, 0.0f, 1.0f, 0.0f);
         fighter_copy = GET_FIGHTER(gobj);
         *((u32*) (&fighter_copy->x2210_ThrowFlags)) = 0;
         fighter_copy->cb.x21DC_callback_OnTakeDamage =
@@ -265,8 +264,7 @@ void ftPikachu_ActionChange_80127D60(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter_copy;
         Fighter* fp = GET_FIGHTER(gobj);
-        Fighter_ActionStateChange_800693AC(gobj, 0x16C, 0x800, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x16C, 0x800, 0, 0.0f, 1.0f, 0.0f);
         fighter_copy = GET_FIGHTER(gobj);
         *((u32*) (&fighter_copy->x2210_ThrowFlags)) = 0;
         fighter_copy->cb.x21DC_callback_OnTakeDamage =
@@ -285,14 +283,12 @@ void ftPikachu_ActionChange_80127DE4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->mv.pk.unk4.x4 == 3) || fp->x2200_ftcmd_var0) {
         fp->cb.x21DC_callback_OnTakeDamage = 0;
-        Fighter_ActionStateChange_800693AC(gobj, 0x16A, 0, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x16A, 0, 0, 0.0f, 1.0f, 0.0f);
         return;
     }
     if (ftPikachu_8012765C(gobj)) {
         Fighter* fighter_copy = GET_FIGHTER(gobj);
-        Fighter_ActionStateChange_800693AC(gobj, 0x169, 0, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x169, 0, 0, 0.0f, 1.0f, 0.0f);
         fighter_copy->x2200_ftcmd_var0 = 0;
         fighter_copy->cb.x21DC_callback_OnTakeDamage = 0;
         fp = GET_FIGHTER(gobj);
@@ -311,15 +307,13 @@ void ftPikachu_ActionChange_80127EC0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->mv.pk.unk4.x4 == 3) || fp->x2200_ftcmd_var0) {
         fp->cb.x21DC_callback_OnTakeDamage = 0;
-        Fighter_ActionStateChange_800693AC(gobj, 0x16E, 0, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x16E, 0, 0, 0.0f, 1.0f, 0.0f);
         return;
     }
     if (ftPikachu_8012765C(gobj)) {
         Fighter* fighter_copy = GET_FIGHTER(gobj);
         ftPikachuAttributes* pika_attr = fighter_copy->x2D4_specialAttributes;
-        Fighter_ActionStateChange_800693AC(gobj, 0x16D, 0, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
         fighter_copy->x2200_ftcmd_var0 = 0;
         fighter_copy->cb.x21DC_callback_OnTakeDamage = 0;
         fighter_copy->x80_self_vel.y = (f32) pika_attr->xB4;
@@ -334,8 +328,7 @@ void ftPikachu_ActionChange_80127FB0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {
         fp->cb.x21DC_callback_OnTakeDamage = 0;
-        Fighter_ActionStateChange_800693AC(gobj, 0x16A, 0, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x16A, 0, 0, 0.0f, 1.0f, 0.0f);
     }
 }
 
@@ -344,8 +337,7 @@ void ftPikachu_ActionChange_80128000(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {
         fp->cb.x21DC_callback_OnTakeDamage = 0;
-        Fighter_ActionStateChange_800693AC(gobj, 0x16E, 0, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x16E, 0, 0, 0.0f, 1.0f, 0.0f);
     }
 }
 

@@ -10,7 +10,7 @@
 
 #include <platform.h>
 
-MotionState ActionStateList[] = {
+MotionState MotionStateList[] = {
     {
         // 0
         -1,

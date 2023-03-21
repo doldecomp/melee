@@ -111,7 +111,7 @@ static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* gobj)
 bool ftGameWatch_ItemCheckManholeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id == AS_GAMEWATCH_ATTACKLW3) {
+    if (fp->action_id == MS_GAMEWATCH_ATTACKLW3) {
         return false;
     }
     return true;
@@ -126,8 +126,8 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* gobj)
 
     if (func_80094790(gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
-        Fighter_ActionStateChange_800693AC(gobj, AS_GAMEWATCH_ATTACKLW3, 0,
-                                           NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_ATTACKLW3, 0, NULL, 0.0f,
+                                  1.0f, 0.0f);
         func_8006EBA4(gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemManholeSetup;
     }

@@ -125,7 +125,7 @@ HSD_GObjEvent ft_OnUserDataRemove[FTKIND_MAX] = {
     NULL,
 };
 
-MotionState* ActionStateTableByCharacter[FTKIND_MAX] = {
+MotionState* MotionStateTableByCharacter[FTKIND_MAX] = {
     as_table_mario,
     as_table_fox,
     as_table_captain,

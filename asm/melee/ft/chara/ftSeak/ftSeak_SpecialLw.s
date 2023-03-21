@@ -98,7 +98,7 @@ ftSeak_SpecialLw_StartAction:
 /* 80114180 00110D60  C0 22 9C C4 */	lfs f1, lbl_804D96A4@sda21(r2)
 /* 80114184 00110D64  C0 42 9C C8 */	lfs f2, lbl_804D96A8@sda21(r2)
 /* 80114188 00110D68  FC 60 08 90 */	fmr f3, f1
-/* 8011418C 00110D6C  4B F5 52 21 */	bl Fighter_ActionStateChange_800693AC
+/* 8011418C 00110D6C  4B F5 52 21 */	bl Fighter_ChangeMotionState
 /* 80114190 00110D70  7F E3 FB 78 */	mr r3, r31
 /* 80114194 00110D74  4B F5 AA 11 */	bl func_8006EBA4
 /* 80114198 00110D78  83 FF 00 2C */	lwz r31, 0x2c(r31)
@@ -150,7 +150,7 @@ ftSeak_SpecialAirLw_StartAction:
 /* 80114244 00110E24  C0 22 9C C4 */	lfs f1, lbl_804D96A4@sda21(r2)
 /* 80114248 00110E28  C0 42 9C C8 */	lfs f2, lbl_804D96A8@sda21(r2)
 /* 8011424C 00110E2C  FC 60 08 90 */	fmr f3, f1
-/* 80114250 00110E30  4B F5 51 5D */	bl Fighter_ActionStateChange_800693AC
+/* 80114250 00110E30  4B F5 51 5D */	bl Fighter_ChangeMotionState
 /* 80114254 00110E34  7F E3 FB 78 */	mr r3, r31
 /* 80114258 00110E38  4B F5 A9 4D */	bl func_8006EBA4
 /* 8011425C 00110E3C  83 FF 00 2C */	lwz r31, 0x2c(r31)
@@ -325,7 +325,7 @@ ftSeak_8011444C:
 /* 80114484 00111064  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
 /* 80114488 00111068  38 80 01 6B */	li r4, 0x16b
 /* 8011448C 0011106C  38 C0 00 00 */	li r6, 0
-/* 80114490 00111070  4B F5 4F 1D */	bl Fighter_ActionStateChange_800693AC
+/* 80114490 00111070  4B F5 4F 1D */	bl Fighter_ChangeMotionState
 /* 80114494 00111074  3C 60 80 11 */	lis r3, ftSeak_80114034@ha
 /* 80114498 00111078  38 03 40 34 */	addi r0, r3, ftSeak_80114034@l
 /* 8011449C 0011107C  90 1F 21 BC */	stw r0, 0x21bc(r31)
@@ -355,7 +355,7 @@ ftSeak_801144B8:
 /* 801144F0 001110D0  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
 /* 801144F4 001110D4  38 80 01 69 */	li r4, 0x169
 /* 801144F8 001110D8  38 C0 00 00 */	li r6, 0
-/* 801144FC 001110DC  4B F5 4E B1 */	bl Fighter_ActionStateChange_800693AC
+/* 801144FC 001110DC  4B F5 4E B1 */	bl Fighter_ChangeMotionState
 /* 80114500 001110E0  3C 60 80 11 */	lis r3, ftSeak_80114034@ha
 /* 80114504 001110E4  38 03 40 34 */	addi r0, r3, ftSeak_80114034@l
 /* 80114508 001110E8  90 1F 21 BC */	stw r0, 0x21bc(r31)
@@ -500,7 +500,7 @@ ftSeak_80114680:
 /* 801146B8 00111298  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
 /* 801146BC 0011129C  38 80 01 6C */	li r4, 0x16c
 /* 801146C0 001112A0  38 C0 00 00 */	li r6, 0
-/* 801146C4 001112A4  4B F5 4C E9 */	bl Fighter_ActionStateChange_800693AC
+/* 801146C4 001112A4  4B F5 4C E9 */	bl Fighter_ChangeMotionState
 /* 801146C8 001112A8  3C 60 80 11 */	lis r3, ftSeak_801140B0@ha
 /* 801146CC 001112AC  38 03 40 B0 */	addi r0, r3, ftSeak_801140B0@l
 /* 801146D0 001112B0  90 1F 21 BC */	stw r0, 0x21bc(r31)
@@ -530,7 +530,7 @@ ftSeak_801146EC:
 /* 80114724 00111304  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
 /* 80114728 00111308  38 80 01 6A */	li r4, 0x16a
 /* 8011472C 0011130C  38 C0 00 00 */	li r6, 0
-/* 80114730 00111310  4B F5 4C 7D */	bl Fighter_ActionStateChange_800693AC
+/* 80114730 00111310  4B F5 4C 7D */	bl Fighter_ChangeMotionState
 /* 80114734 00111314  3C 60 80 11 */	lis r3, ftSeak_801140B0@ha
 /* 80114738 00111318  38 03 40 B0 */	addi r0, r3, ftSeak_801140B0@l
 /* 8011473C 0011131C  90 1F 21 BC */	stw r0, 0x21bc(r31)
@@ -562,7 +562,7 @@ lbl_80114788:
 /* 80114790 00111370  C0 42 9C C8 */	lfs f2, lbl_804D96A8@sda21(r2)
 /* 80114794 00111374  38 C0 00 00 */	li r6, 0
 /* 80114798 00111378  C0 62 9C C4 */	lfs f3, lbl_804D96A4@sda21(r2)
-/* 8011479C 0011137C  4B F5 4C 11 */	bl Fighter_ActionStateChange_800693AC
+/* 8011479C 0011137C  4B F5 4C 11 */	bl Fighter_ChangeMotionState
 /* 801147A0 00111380  3C 60 80 11 */	lis r3, ftSeak_801140B0@ha
 /* 801147A4 00111384  38 03 40 B0 */	addi r0, r3, ftSeak_801140B0@l
 /* 801147A8 00111388  90 1F 21 BC */	stw r0, 0x21bc(r31)

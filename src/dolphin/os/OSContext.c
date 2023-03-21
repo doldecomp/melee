@@ -308,13 +308,13 @@ bool OSSaveContext(OSContext* ctx)
 asm void OSLoadContext(register OSContext* ctx)
 { // clang-format off
     nofralloc
-    lis r4, __RAS_OSDisableInterrupts_begin@ha
+    lis r4, __RMS_OSDisableInterrupts_begin@ha
     lwz r6, ctx->srr0
-    addi r5, r4, __RAS_OSDisableInterrupts_begin@l
+    addi r5, r4, __RMS_OSDisableInterrupts_begin@l
     cmplw r6, r5
     blt not_in_ras
-    lis r4, __RAS_OSDisableInterrupts_end@ha
-    addi r0, r4, __RAS_OSDisableInterrupts_end@l
+    lis r4, __RMS_OSDisableInterrupts_end@ha
+    addi r0, r4, __RMS_OSDisableInterrupts_end@l
     cmplw r6, r0
     bgt not_in_ras
     stw r5, ctx->srr0

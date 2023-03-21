@@ -38,7 +38,7 @@ ftNess_AttackS4_Action:
 # SPLIT NO EARLIER THAN HERE
 /* 80114C64 00111844  C0 42 9C DC */	lfs f2, lbl_804D96BC/*1.0f*/@sda21(r2)
 /* 80114C68 00111848  FC 60 08 90 */	fmr f3, f1
-/* 80114C6C 0011184C  4B F5 47 41 */	bl Fighter_ActionStateChange_800693AC
+/* 80114C6C 0011184C  4B F5 47 41 */	bl Fighter_ChangeMotionState
 /* 80114C70 00111850  7F C3 F3 78 */	mr r3, r30
 /* 80114C74 00111854  4B F5 9F 31 */	bl func_8006EBA4
 /* 80114C78 00111858  C0 3F 00 2C */	lfs f1, 0x2c(r31)

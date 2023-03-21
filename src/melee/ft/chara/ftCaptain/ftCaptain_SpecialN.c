@@ -81,8 +81,8 @@ void ftCaptain_SpecialN_StartAction(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(gobj, ftCaptain_AS_SpecialN, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     func_8006EBA4(gobj);
@@ -100,8 +100,8 @@ void ftCaptain_SpecialAirN_StartAction(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(gobj, ftCaptain_AS_SpecialAirN, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialAirN, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     func_8006EBA4(gobj);
@@ -226,7 +226,7 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
     }
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags =
+static Fighter_MotionStateChangeFlags const transition_flags =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateRumble | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
@@ -238,9 +238,9 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* gobj)
     if (func_800827A0(gobj) == false) {
         Fighter* fp = GET_FIGHTER(gobj);
         func_8007D5D4(fp);
-        Fighter_ActionStateChange_800693AC(
-            gobj, ftCaptain_AS_SpecialAirN, transition_flags, NULL,
-            fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialAirN,
+                                  transition_flags, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
         func_8007D468(fp);
@@ -252,9 +252,9 @@ void ftCaptain_SpecialAirN_Coll(HSD_GObj* gobj)
     if (func_80081D0C(gobj) != false) {
         Fighter* fp = GET_FIGHTER(gobj);
         func_8007D7FC(fp);
-        Fighter_ActionStateChange_800693AC(
-            gobj, ftCaptain_AS_SpecialN, transition_flags, NULL,
-            fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialN,
+                                  transition_flags, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }

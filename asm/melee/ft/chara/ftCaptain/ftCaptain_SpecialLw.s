@@ -65,7 +65,7 @@ ftCaptain_SpecialHi_StartAction:
 /* 800E4AB0 000E1690  C0 22 98 50 */	lfs f1, lbl_804D9230/*0.0f*/@sda21(r2)
 /* 800E4AB4 000E1694  C0 42 98 54 */	lfs f2, lbl_804D9234/*1.0f*/@sda21(r2)
 /* 800E4AB8 000E1698  FC 60 08 90 */	fmr f3, f1
-/* 800E4ABC 000E169C  4B F8 48 F1 */	bl Fighter_ActionStateChange_800693AC
+/* 800E4ABC 000E169C  4B F8 48 F1 */	bl Fighter_ChangeMotionState
 /* 800E4AC0 000E16A0  3C 80 80 0E */	lis r4, lbl_800E5128@ha
 /* 800E4AC4 000E16A4  3C 60 80 0A */	lis r3, func_8009CA0C@ha
 /* 800E4AC8 000E16A8  38 A4 51 28 */	addi r5, r4, lbl_800E5128@l
@@ -240,7 +240,7 @@ ftCaptain_SpecialAirHi_StartAction:
 /* 800E4D2C 000E190C  C0 22 98 50 */	lfs f1, lbl_804D9230/*0.0f*/@sda21(r2)
 /* 800E4D30 000E1910  C0 42 98 54 */	lfs f2, lbl_804D9234/*1.0f*/@sda21(r2)
 /* 800E4D34 000E1914  FC 60 08 90 */	fmr f3, f1
-/* 800E4D38 000E1918  4B F8 46 75 */	bl Fighter_ActionStateChange_800693AC
+/* 800E4D38 000E1918  4B F8 46 75 */	bl Fighter_ChangeMotionState
 /* 800E4D3C 000E191C  3C 80 80 0E */	lis r4, lbl_800E5128@ha
 /* 800E4D40 000E1920  3C 60 80 0A */	lis r3, func_8009CA0C@ha
 /* 800E4D44 000E1924  38 A4 51 28 */	addi r5, r4, lbl_800E5128@l
@@ -542,7 +542,7 @@ lbl_800E5128:
 /* 800E5160 000E1D40  C0 42 98 54 */	lfs f2, lbl_804D9234/*1.0f*/@sda21(r2)
 /* 800E5164 000E1D44  83 C5 00 2C */	lwz r30, 0x2c(r5)
 /* 800E5168 000E1D48  38 A0 00 02 */	li r5, 2
-/* 800E516C 000E1D4C  4B F8 42 41 */	bl Fighter_ActionStateChange_800693AC
+/* 800E516C 000E1D4C  4B F8 42 41 */	bl Fighter_ChangeMotionState
 /* 800E5170 000E1D50  88 1D 22 22 */	lbz r0, 0x2222(r29)
 /* 800E5174 000E1D54  3B E0 00 01 */	li r31, 1
 /* 800E5178 000E1D58  53 E0 2E B4 */	rlwimi r0, r31, 5, 0x1a, 0x1a
@@ -648,7 +648,7 @@ func_800E526C:
 /* 800E52BC 000E1E9C  FC 60 08 90 */	fmr f3, f1
 /* 800E52C0 000E1EA0  D0 3F 23 48 */	stfs f1, 0x2348(r31)
 /* 800E52C4 000E1EA4  C0 42 98 54 */	lfs f2, lbl_804D9234/*1.0f*/@sda21(r2)
-/* 800E52C8 000E1EA8  4B F8 40 E5 */	bl Fighter_ActionStateChange_800693AC
+/* 800E52C8 000E1EA8  4B F8 40 E5 */	bl Fighter_ChangeMotionState
 /* 800E52CC 000E1EAC  38 7F 00 00 */	addi r3, r31, 0
 /* 800E52D0 000E1EB0  38 80 00 00 */	li r4, 0
 /* 800E52D4 000E1EB4  4B F9 90 21 */	bl func_8007E2F4

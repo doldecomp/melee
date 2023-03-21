@@ -75,8 +75,8 @@ void ftNess_SpecialS_StartAction(
     fp = GET_FIGHTER(gobj);
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
     fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; _ in PK Fire? //
-    Fighter_ActionStateChange_800693AC(gobj, AS_NESS_SPECIALS, 0, NULL, 0.0f,
-                                       1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALS, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     func_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 =
         ftNess_ItemPKFireSpawn; // Store PK Fire spawn function //
@@ -92,8 +92,8 @@ void ftNess_SpecialAirS_Action(
     fp = GET_FIGHTER(gobj);
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
     fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; _ in PK Fire? //
-    Fighter_ActionStateChange_800693AC(gobj, AS_NESS_SPECIALAIRS, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRS, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     func_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftNess_ItemPKFireSpawn;
 }

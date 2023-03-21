@@ -60,8 +60,7 @@ void ftLuigi_SpecialS_StartAction(HSD_GObj* gobj)
     fp->cb.x21EC_callback = ftLuigi_SpecialS_SetVars;
     fp->xEC_ground_vel /= sa->x18_LUIGI_GREENMISSILE_TRACTION;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALS_START, 0, NULL,
-                                       0, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_START, 0, NULL, 0, 1, 0);
 
     func_8006EBA4(gobj);
 }
@@ -81,8 +80,8 @@ void ftLuigi_SpecialAirS_StartAction(HSD_GObj* gobj)
     fp->x80_self_vel.x /= sa->x18_LUIGI_GREENMISSILE_TRACTION;
     fp->x80_self_vel.y = 0;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRS_START, 0,
-                                       NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_START, 0, NULL, 0, 1,
+                              0);
 
     func_8006EBA4(gobj);
 }
@@ -164,7 +163,7 @@ void ftLuigi_SpecialAirSStart_Coll(HSD_GObj* gobj)
         ftLuigi_SpecialAirSStart_AirToGround(gobj);
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags0 =
+static Fighter_MotionStateChangeFlags const transition_flags0 =
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_PreserveSfx | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
@@ -177,9 +176,9 @@ void ftLuigi_SpecialSStart_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRS_START,
-                                       transition_flags0, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_START,
+                              transition_flags0, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 /// Luigi's Green Missile Start air -> ground Action State handler
@@ -188,9 +187,8 @@ void ftLuigi_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALS_START,
-                                       transition_flags0, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_START, transition_flags0,
+                              NULL, fp->x894_currentAnimFrame, 1, 0);
 }
 
 /// Luigi's grounded Green Missile Charge Animation callback
@@ -286,7 +284,7 @@ void ftLuigi_SpecialAirSHold_Coll(HSD_GObj* gobj)
         ftLuigi_SpecialAirSHold_AirToGround(gobj);
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags1 =
+static Fighter_MotionStateChangeFlags const transition_flags1 =
     transition_flags0 | FtStateChange_PreserveGfx;
 
 /// Luigi's Green Missile Charge ground -> air Acion State handler
@@ -295,9 +293,9 @@ void ftLuigi_SpecialSHold_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRS_HOLD,
-                                       transition_flags1, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_HOLD,
+                              transition_flags1, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 /// Luigi's Green Missile Charge air -> ground Action State handler
@@ -306,9 +304,8 @@ void ftLuigi_SpecialAirSHold_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALS_HOLD,
-                                       transition_flags1, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_HOLD, transition_flags1,
+                              NULL, fp->x894_currentAnimFrame, 1, 0);
 }
 
 /// Luigi's grounded Green Missile Charge Action State handler
@@ -321,9 +318,8 @@ void ftLuigi_SpecialSHold_Action(HSD_GObj* gobj)
 
     /// @todo Shared @c inline with #ftLuigi_SpecialAirSHold_Action.
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALS_HOLD,
-                                       FtStateChange_PreserveSfx, NULL, 0, 1,
-                                       0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_HOLD,
+                              FtStateChange_PreserveSfx, NULL, 0, 1, 0);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -339,9 +335,8 @@ void ftLuigi_SpecialAirSHold_Action(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRS_HOLD,
-                                       FtStateChange_PreserveSfx, NULL, 0, 1,
-                                       0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_HOLD,
+                              FtStateChange_PreserveSfx, NULL, 0, 1, 0);
     {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->cb.x21BC_callback_Accessory4 = ftLuigi_SpecialS_SetGFX;
@@ -434,7 +429,7 @@ void ftLuigi_SpecialAirSLaunch_Coll(HSD_GObj* gobj)
 }
 
 /// @todo Combine common flags with #transition_flags0.
-static Fighter_ActionStateChangeFlags const transition_flags2 =
+static Fighter_MotionStateChangeFlags const transition_flags2 =
     FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
@@ -447,9 +442,9 @@ void ftLuigi_SpecialSLaunch_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRS_LAUNCH,
-                                       transition_flags2, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_LAUNCH,
+                              transition_flags2, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 /// Luigi's Green Missile Launch air -> ground Action State handler
@@ -458,9 +453,9 @@ void ftLuigi_SpecialAirSLaunch_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALS_LAUNCH,
-                                       transition_flags2, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_LAUNCH,
+                              transition_flags2, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 static inline void ftLuigi_SpecialS_RemoveGFX(HSD_GObj* gobj)
@@ -500,8 +495,8 @@ void ftLuigi_SpecialSLaunch_Action(HSD_GObj* gobj)
         return;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALS_LAUNCH, 0, NULL,
-                                       0, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_LAUNCH, 0, NULL, 0, 1,
+                              0);
 
     ftLuigi_SpecialS_RemoveGFX(gobj);
     ftLuigi_SpecialS_Setup(gobj);
@@ -517,8 +512,8 @@ void ftLuigi_SpecialAirSLaunch_Action(HSD_GObj* gobj)
         return;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRS_LAUNCH, 0,
-                                       NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_LAUNCH, 0, NULL, 0, 1,
+                              0);
 
     ftLuigi_SpecialS_RemoveGFX(gobj);
     ftLuigi_SpecialS_Setup(gobj);
@@ -614,9 +609,9 @@ void ftLuigi_SpecialSMisfire_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRS_MISFIRE,
-                                       transition_flags2, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_MISFIRE,
+                              transition_flags2, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 /// Luigi's Green Missile Misfire air -> ground Action State Handler
@@ -625,9 +620,9 @@ void ftLuigi_SpecialAirSMisfire_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALS_MISFIRE,
-                                       transition_flags2, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_MISFIRE,
+                              transition_flags2, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 /// Luigi's grounded Green Missile Misfire Action State handler
@@ -638,8 +633,8 @@ void ftLuigi_SpecialSMisfire_Action(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALS_MISFIRE, 0,
-                                       NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_MISFIRE, 0, NULL, 0, 1,
+                              0);
 
     ftLuigi_SpecialS_RemoveGFX(gobj);
     ftLuigi_SpecialS_Setup(gobj);
@@ -653,8 +648,8 @@ void ftLuigi_SpecialAirSMisfire_Action(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRS_MISFIRE, 0,
-                                       NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_MISFIRE, 0, NULL, 0,
+                              1, 0);
 
     ftLuigi_SpecialS_RemoveGFX(gobj);
     ftLuigi_SpecialS_Setup(gobj);
@@ -727,7 +722,7 @@ void ftLuigi_SpecialAirSFly_Coll(HSD_GObj* gobj)
 }
 
 /// @todo Combine common flags with #transition_flags0.
-static Fighter_ActionStateChangeFlags const transition_flags3 =
+static Fighter_MotionStateChangeFlags const transition_flags3 =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |
@@ -770,9 +765,9 @@ void ftLuigi_SpecialSFly_Action(HSD_GObj* gobj)
                      sa->xC_LUIGI_GREENMISSILE_MAX_CHARGE_FRAMES);
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRS_FLY,
-                                       transition_flags3, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_FLY,
+                              transition_flags3, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 
     fp->cb.x21F8_callback = func_8007F76C;
     fp->cb.x21C0_callback_OnGiveDamage = ftLuigi_SpecialS_OnGiveDamage;
@@ -845,8 +840,7 @@ void ftLuigi_SpecialSEnd_Action(HSD_GObj* gobj)
 
     fp->x2200_ftcmd_var0 = 0;
     fp->xEC_ground_vel /= sa->x38_LUIGI_GREENMISSILE_FRICTION_END;
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALS_END, 0, NULL, 0,
-                                       1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_END, 0, NULL, 0, 1, 0);
 }
 
 /// Luigi's Green Missile End ground -> air Action State handler
@@ -858,6 +852,6 @@ void ftLuigi_SpecialAirSEnd_Action(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->x80_self_vel.x /= sa->x38_LUIGI_GREENMISSILE_FRICTION_END;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRS_END, 0, NULL,
-                                       0, 1, 0);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_END, 0, NULL, 0, 1,
+                              0);
 }

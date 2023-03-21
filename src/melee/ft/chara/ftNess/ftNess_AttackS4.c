@@ -32,8 +32,8 @@ void ftNess_AttackS4_Action(
 
     fp->x2200_ftcmd_var0 = false;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_NESS_ATTACKS4, 0, NULL, 0.0f,
-                                       1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKS4, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
 
     func_8006EBA4(gobj);
 
@@ -55,7 +55,7 @@ bool ftNess_CheckNessBatRemove(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->action_id != AS_NESS_ATTACKS4) {
+    if (fp->action_id != MS_NESS_ATTACKS4) {
         return true;
     }
 

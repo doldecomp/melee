@@ -36,7 +36,7 @@ void lbl_80153D2C(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     func_8015C208(gobj, &sp1C);
     fp->xB0_pos.x = sp1C.x;

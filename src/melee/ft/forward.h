@@ -93,7 +93,7 @@ typedef enum CharacterKind {
     CHKIND_MAX = CHKIND_NONE
 } CharacterKind;
 
-typedef enum Fighter_ActionStateChangeFlags {
+typedef enum Fighter_MotionStateChangeFlags {
     FtStateChange_None,
     FtStateChange_PreserveFastFall = (1 << 0),
     FtStateChange_PreserveGfx = (1 << 1),
@@ -165,7 +165,7 @@ typedef enum Fighter_ActionStateChangeFlags {
 
     /// Unused?
     FtStateChange_Unk_31 = (1 << 31),
-} Fighter_ActionStateChangeFlags;
+} Fighter_MotionStateChangeFlags;
 
 // Ledge Grab Macros
 

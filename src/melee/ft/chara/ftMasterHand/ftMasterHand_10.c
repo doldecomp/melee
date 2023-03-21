@@ -45,7 +45,7 @@ void lbl_801521DC(HSD_GObj* arg0)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(arg0, 0x162, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(arg0, 0x162, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
     temp_r31->mv.mh.unk0.x0 = 107.0f;
 }

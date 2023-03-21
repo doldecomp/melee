@@ -61,7 +61,7 @@ void func_80151484(HSD_GObj* gobj)
 
     func_80151484_inline1(gobj);
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x158, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x158, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 
     // r3_fp now stored in r28
@@ -100,8 +100,7 @@ void lbl_801515B8(HSD_GObj* gobj)
 
     // mv.mh.unk0.x8 does that make sense if its u32?
     if (r31_fp->mv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }
     temp_r0 = r31_fp->mv.mh.unk0.x8 - 1;
@@ -141,8 +140,7 @@ void lbl_801516B4(HSD_GObj* gobj)
     }
     if (r31_fp->mv.mh.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
         temp_f1 = 0.0f;
-        Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, temp_f1, 1.0f,
-                                           temp_f1);
+        Fighter_ChangeMotionState(gobj, 0x159, 0, 0, temp_f1, 1.0f, temp_f1);
         func_8006EBA4(gobj);
     }
     temp_r0 = r31_fp->mv.mh.unk0.x8 - 1;

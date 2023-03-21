@@ -100,7 +100,7 @@ bool func_8008169C(HSD_GObj* gobj)
                 fp0->x670_timer_lstick_tilt_x < p_ftCommonData->x770)
             {
                 // do a walljump!
-                func_800C1E64(gobj, ftCo_AS_PassiveWallJump,
+                func_800C1E64(gobj, ftCo_MS_PassiveWallJump,
                               p_ftCommonData->x774, fp0->x1969_walljumpUsed,
                               fp0->x2110_walljumpWallSide);
 

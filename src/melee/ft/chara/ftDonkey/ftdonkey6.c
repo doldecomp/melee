@@ -40,8 +40,8 @@ void ftDonkey_800E03C0(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr;
     func_8007D5D4(fp);
     donkey_attr = getFtSpecialAttrs2CC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, donkey_attr->action_state + 7, 0,
-                                       NULL, 0.0f, 1.0, 0.0f);
+    Fighter_ChangeMotionState(gobj, donkey_attr->action_state + 7, 0, NULL,
+                              0.0f, 1.0, 0.0f);
     ftAnim_SetAnimRate(gobj, 0.0f);
     func_800CB110(gobj, 1, 1.0f);
 }

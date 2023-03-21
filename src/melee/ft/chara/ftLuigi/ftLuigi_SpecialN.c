@@ -19,8 +19,8 @@ void ftLuigi_SpecialN_StartAction(HSD_GObj* gobj)
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALN, 0, NULL, 0.0f,
-                                       1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALN, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     func_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
 }
@@ -32,8 +32,8 @@ void ftLuigi_SpecialAirN_StartAction(HSD_GObj* gobj)
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRN, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRN, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     func_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
 }
@@ -91,9 +91,9 @@ void ftLuigi_SpecialN_Coll(HSD_GObj* gobj)
     if (func_80082708(gobj) == false) {
         fp = GET_FIGHTER(gobj);
         func_8007D5D4(fp);
-        Fighter_ActionStateChange_800693AC(
-            gobj, AS_LUIGI_SPECIALAIRN, FTLUIGI_SPECIALN_COLL_FLAG, NULL,
-            fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRN,
+                                  FTLUIGI_SPECIALN_COLL_FLAG, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
     }
 }
@@ -106,9 +106,9 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* gobj)
     if (func_80081D0C(gobj) != false) {
         fp = GET_FIGHTER(gobj);
         func_8007D7FC(fp);
-        Fighter_ActionStateChange_800693AC(
-            gobj, AS_LUIGI_SPECIALN, FTLUIGI_SPECIALN_COLL_FLAG, NULL,
-            fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALN,
+                                  FTLUIGI_SPECIALN_COLL_FLAG, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
     }
 }

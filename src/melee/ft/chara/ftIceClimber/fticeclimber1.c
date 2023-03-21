@@ -213,8 +213,8 @@ void ftIceClimber_SpecialN_StartAction(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->fv.nn.x222C = 0;
 
-    Fighter_ActionStateChange_800693AC(gobj, 341, 0, NULL, lbl_804D9838,
-                                       lbl_804D983C, lbl_804D9838);
+    Fighter_ChangeMotionState(gobj, 341, 0, NULL, lbl_804D9838, lbl_804D983C,
+                              lbl_804D9838);
 
     func_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &lbl_8011F500;
@@ -244,8 +244,8 @@ void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* gobj)
         fp->fv.nn.x2250 = lbl_804D9840;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, 342, 0, NULL, lbl_804D9838,
-                                       lbl_804D983C, lbl_804D9838);
+    Fighter_ChangeMotionState(gobj, 342, 0, NULL, lbl_804D9838, lbl_804D983C,
+                              lbl_804D9838);
 
     func_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &lbl_8011F500;

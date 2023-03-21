@@ -29,7 +29,7 @@ void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
             else
                 asid = 358;
 
-            Fighter_ActionStateChange_800693AC(gobj, asid, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, asid, 0, 0, 0, 1, 0);
         }
     }
 
@@ -62,7 +62,7 @@ void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
             else
                 asid = 358;
 
-            Fighter_ActionStateChange_800693AC(gobj, asid, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, asid, 0, 0, 0, 1, 0);
         }
     }
 
@@ -131,7 +131,7 @@ void ftMars_8013767C(HSD_GObj* gobj)
     }
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags =
+static Fighter_MotionStateChangeFlags const transition_flags =
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_PreserveSwordTrail |
@@ -146,8 +146,8 @@ void ftMars_801376E8(HSD_GObj* gobj)
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, 358, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 358, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80137748(HSD_GObj* gobj)
@@ -158,8 +158,8 @@ void ftMars_80137748(HSD_GObj* gobj)
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, 349, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 349, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_801377B0(HSD_GObj* gobj)
@@ -168,10 +168,10 @@ void ftMars_801377B0(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
-            // AS_014_Wait_PlayerCheck
+            // MS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
         } else {
-            // AS_029_Fall
+            // MS_029_Fall
             func_800CC730(gobj);
         }
     }
@@ -247,8 +247,8 @@ void ftMars_80137940(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_801379D0(HSD_GObj* gobj)
@@ -272,8 +272,8 @@ void ftMars_801379D0(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80137A68(HSD_GObj* gobj)
@@ -302,8 +302,8 @@ void ftMars_80137A9C(HSD_GObj* gobj)
         else
             asid = 360;
     }
-    Fighter_ActionStateChange_800693AC(
-        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,
+                              0, 0, 1, 0);
 }
 
 void ftMars_80137B34(HSD_GObj* gobj)
@@ -313,10 +313,10 @@ void ftMars_80137B34(HSD_GObj* gobj)
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
-            // AS_014_Wait_PlayerCheck
+            // MS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
         } else {
-            // AS_029_Fall
+            // MS_029_Fall
             func_800CC730(gobj);
         }
     }
@@ -393,8 +393,8 @@ void ftMars_80137CBC(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80137D60(HSD_GObj* gobj)
@@ -418,8 +418,8 @@ void ftMars_80137D60(HSD_GObj* gobj)
         break;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80137E0C(HSD_GObj* gobj)
@@ -450,8 +450,8 @@ void ftMars_80137E0C(HSD_GObj* gobj)
         }
     }
 
-    Fighter_ActionStateChange_800693AC(
-        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,
+                              0, 0, 1, 0);
 }
 
 void ftMars_80137ECC(HSD_GObj* gobj)
@@ -460,10 +460,10 @@ void ftMars_80137ECC(HSD_GObj* gobj)
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
-            // AS_014_Wait_PlayerCheck
+            // MS_014_Wait_PlayerCheck
             func_8008A2BC(gobj);
         } else {
-            // AS_029_Fall
+            // MS_029_Fall
             func_800CC730(gobj);
         }
     }
@@ -529,8 +529,8 @@ void ftMars_80137FF8(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_8013809C(HSD_GObj* gobj)
@@ -559,8 +559,8 @@ void ftMars_8013809C(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80138148(HSD_GObj* gobj)
@@ -590,6 +590,6 @@ void ftMars_80138148(HSD_GObj* gobj)
                 asid = 365;
         }
     }
-    Fighter_ActionStateChange_800693AC(
-        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,
+                              0, 0, 1, 0);
 }

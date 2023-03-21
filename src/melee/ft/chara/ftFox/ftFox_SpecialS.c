@@ -33,7 +33,7 @@ bool ftFox_SpecialS_CheckGhostRemove(HSD_GObj* gobj)
     /// @todo @c enum
     enum_t asid = GET_FIGHTER(gobj)->action_id;
 
-    if (asid >= AS_FOX_SPECIALS_START && asid <= AS_FOX_SPECIALAIRS_END)
+    if (asid >= MS_FOX_SPECIALS_START && asid <= MS_FOX_SPECIALAIRS_END)
         return false;
 
     return true;
@@ -82,8 +82,8 @@ void ftFox_SpecialS_StartAction(HSD_GObj* gobj)
 
     fp->xEC_ground_vel /= foxAttrs->x28_FOX_ILLUSION_GROUND_VEL_X;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_FOX_SPECIALS_START, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS_START, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -106,8 +106,8 @@ void ftFox_SpecialAirS_StartAction(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x /= foxAttrs->x28_FOX_ILLUSION_GROUND_VEL_X;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_FOX_SPECIALAIRS_START, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRS_START, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
     func_8006EBA4(gobj);
 
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
@@ -222,9 +222,9 @@ void ftFox_SpecialSStart_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_8007D60C(fp);
-    Fighter_ActionStateChange_800693AC(gobj, AS_FOX_SPECIALAIRS_START,
-                                       FTFOX_SPECIALS_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRS_START,
+                              FTFOX_SPECIALS_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 0x800EA234
@@ -235,9 +235,9 @@ void ftFox_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, AS_FOX_SPECIALS_START,
-                                       FTFOX_SPECIALS_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS_START,
+                              FTFOX_SPECIALS_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
@@ -405,8 +405,8 @@ void ftFox_SpecialS_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_8007D60C(fp);
-    Fighter_ActionStateChange_800693AC(
-        gobj, AS_FOX_SPECIALAIRS,
+    Fighter_ChangeMotionState(
+        gobj, MS_FOX_SPECIALAIRS,
         (FtStateChange_PreserveColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
         NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x2208_ftcmd_var2 = 0;
@@ -420,8 +420,8 @@ void ftFox_SpecialAirS_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(
-        gobj, AS_FOX_SPECIALS,
+    Fighter_ChangeMotionState(
+        gobj, MS_FOX_SPECIALS,
         (FtStateChange_PreserveColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
         NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x2208_ftcmd_var2 = 0;
@@ -457,9 +457,9 @@ void ftFox_SpecialS_Action(HSD_GObj* gobj)
     u8 _[28];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_FOX_SPECIALS,
-                                       FtStateChange_SkipUpdateRumble, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS,
+                              FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftFox_SpecialS_SetVars(gobj);
 }
 
@@ -473,9 +473,9 @@ void ftFox_SpecialAirS_Action(HSD_GObj* gobj)
     u8 _[36];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_FOX_SPECIALAIRS,
-                                       FtStateChange_SkipUpdateRumble, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRS,
+                              FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftFox_SpecialS_SetVars(gobj);
 }
 
@@ -621,9 +621,9 @@ void ftFox_SpecialSEnd_Action(HSD_GObj* gobj)
     fp->xEC_ground_vel =
         foxAttrs->x34_FOX_ILLUSION_GROUND_END_VEL_X * fp->facing_dir;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_FOX_SPECIALS_END,
-                                       FtStateChange_SkipUpdateRumble, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS_END,
+                              FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftFox_SpecialSEnd_SetVars(gobj);
 }
 
@@ -638,8 +638,8 @@ void ftFox_SpecialAirSEnd_Action(HSD_GObj* gobj)
         foxAttrs->x3C_FOX_ILLUSION_AIR_END_VEL_X * fp->facing_dir;
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_FOX_SPECIALAIRS_END,
-                                       FtStateChange_SkipUpdateRumble, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRS_END,
+                              FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftFox_SpecialSEnd_SetVars(gobj);
 }

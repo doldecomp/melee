@@ -42,7 +42,7 @@ void lbl_80153B90(HSD_GObj* arg0)
     ftMasterHand_SpecialAttrs* temp_r30 = temp_r31->x10C_ftData->ext_attr;
     Vec3 sp10;
 
-    Fighter_ActionStateChange_800693AC(arg0, 0x172, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(arg0, 0x172, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
     temp_r31->mv.mh.unk0.x0 = temp_r30->x6C;
     func_8015C208(arg0, &sp10);

@@ -9,7 +9,7 @@ void func_80154C78(HSD_GObj* arg0)
 
     temp_r31 = arg0->user_data;
     temp_r30 = temp_r31->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(arg0, 0x178, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(arg0, 0x178, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
     temp_r31->mv.mh.unk0.xC.x = temp_r30->x118_pos.x;
     temp_r31->mv.mh.unk0.xC.y = temp_r30->x118_pos.y;
@@ -25,7 +25,7 @@ void func_80154CF8(HSD_GObj* gobj, Fighter* fp)
 
     temp_r31 = gobj->user_data;
     temp_r30 = temp_r31->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x179, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x179, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     temp_r31->mv.mh.unk0.xC.x = temp_r30->x30_pos2.x;
     temp_r31->mv.mh.unk0.xC.y = temp_r30->x30_pos2.y;

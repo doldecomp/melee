@@ -357,11 +357,11 @@ inline void ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj,
     Fighter* fighter = getFighter(gobj);
 
     if (lbl_804D9C10 == fighter->facing_dir)
-        Fighter_ActionStateChange_800693AC(
-            gobj, left_id, 0, NULL, lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
+        Fighter_ChangeMotionState(gobj, left_id, 0, NULL, lbl_804D9C14,
+                                  lbl_804D9C18, lbl_804D9C14);
     else
-        Fighter_ActionStateChange_800693AC(
-            gobj, right_id, 0, NULL, lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
+        Fighter_ChangeMotionState(gobj, right_id, 0, NULL, lbl_804D9C14,
+                                  lbl_804D9C18, lbl_804D9C14);
 }
 
 inline void startHi(HSD_GObj* gobj, int left_id, int right_id)
@@ -375,11 +375,11 @@ inline void startHi(HSD_GObj* gobj, int left_id, int right_id)
     fighter = (Fighter*) HSD_GObjGetUserData(gobj);
 
     if (lbl_804D9C10 == fighter->facing_dir)
-        Fighter_ActionStateChange_800693AC(
-            gobj, left_id, 0, NULL, lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
+        Fighter_ChangeMotionState(gobj, left_id, 0, NULL, lbl_804D9C14,
+                                  lbl_804D9C18, lbl_804D9C14);
     else
-        Fighter_ActionStateChange_800693AC(
-            gobj, right_id, 0, NULL, lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
+        Fighter_ChangeMotionState(gobj, right_id, 0, NULL, lbl_804D9C14,
+                                  lbl_804D9C18, lbl_804D9C14);
 }
 
 void ftPurin_SpecialHi_StartAction(HSD_GObj* gobj)
@@ -583,13 +583,13 @@ void func_8013CD34(HSD_GObj* gobj)
     func_8007D5D4(fp);
 
     if (lbl_804D9C10 == fp->facing_dir)
-        Fighter_ActionStateChange_800693AC(gobj, 366, 0x0C4C508A, NULL,
-                                           fp->x894_currentAnimFrame,
-                                           lbl_804D9C18, lbl_804D9C14);
+        Fighter_ChangeMotionState(gobj, 366, 0x0C4C508A, NULL,
+                                  fp->x894_currentAnimFrame, lbl_804D9C18,
+                                  lbl_804D9C14);
     else
-        Fighter_ActionStateChange_800693AC(gobj, 368, 0x0C4C508A, NULL,
-                                           fp->x894_currentAnimFrame,
-                                           lbl_804D9C18, lbl_804D9C14);
+        Fighter_ChangeMotionState(gobj, 368, 0x0C4C508A, NULL,
+                                  fp->x894_currentAnimFrame, lbl_804D9C18,
+                                  lbl_804D9C14);
 
     fp->cb.x21BC_callback_Accessory4 = lbl_8013C94C;
 }
@@ -620,7 +620,7 @@ asm void func_8013CDD8(HSD_GObj*)
 /* 8013CE20 00139A00  38 A4 50 8A */	addi r5, r4, 0x0C4C508A@l
 /* 8013CE24 00139A04  38 80 01 6D */	li r4, 0x16d
 /* 8013CE28 00139A08  38 C0 00 00 */	li r6, 0
-/* 8013CE2C 00139A0C  4B F2 C5 81 */	bl Fighter_ActionStateChange_800693AC
+/* 8013CE2C 00139A0C  4B F2 C5 81 */	bl Fighter_ChangeMotionState
 /* 8013CE30 00139A10  48 00 00 28 */	b lbl_8013CE58
 lbl_8013CE34:
 /* 8013CE34 00139A14  3C 80 0C 4C */	lis r4, 0x0C4C508A@ha
@@ -631,7 +631,7 @@ lbl_8013CE34:
 /* 8013CE48 00139A28  38 A4 50 8A */	addi r5, r4, 0x0C4C508A@l
 /* 8013CE4C 00139A2C  38 80 01 6F */	li r4, 0x16f
 /* 8013CE50 00139A30  38 C0 00 00 */	li r6, 0
-/* 8013CE54 00139A34  4B F2 C5 59 */	bl Fighter_ActionStateChange_800693AC
+/* 8013CE54 00139A34  4B F2 C5 59 */	bl Fighter_ChangeMotionState
 lbl_8013CE58:
 /* 8013CE58 00139A38  3C 60 80 14 */	lis r3, lbl_8013C94C@ha
 /* 8013CE5C 00139A3C  38 03 C9 4C */	addi r0, r3, lbl_8013C94C@l
@@ -685,7 +685,7 @@ asm void ftPurin_SpecialLw_StartAction(HSD_GObj*)
 /* 8013CEC4 00139AA4  FC 60 08 90 */	fmr f3, f1
 /* 8013CEC8 00139AA8  38 A0 00 00 */	li r5, 0
 /* 8013CECC 00139AAC  38 C0 00 00 */	li r6, 0
-/* 8013CED0 00139AB0  4B F2 C4 DD */	bl Fighter_ActionStateChange_800693AC
+/* 8013CED0 00139AB0  4B F2 C4 DD */	bl Fighter_ChangeMotionState
 /* 8013CED4 00139AB4  48 00 00 24 */	b lbl_8013CEF8
 lbl_8013CED8:
 /* 8013CED8 00139AB8  C0 22 A2 44 */	lfs f1, lbl_804D9C24(r2)
@@ -695,7 +695,7 @@ lbl_8013CED8:
 /* 8013CEE8 00139AC8  FC 60 08 90 */	fmr f3, f1
 /* 8013CEEC 00139ACC  38 A0 00 00 */	li r5, 0
 /* 8013CEF0 00139AD0  38 C0 00 00 */	li r6, 0
-/* 8013CEF4 00139AD4  4B F2 C4 B9 */	bl Fighter_ActionStateChange_800693AC
+/* 8013CEF4 00139AD4  4B F2 C4 B9 */	bl Fighter_ChangeMotionState
 lbl_8013CEF8:
 /* 8013CEF8 00139AD8  7F E3 FB 78 */	mr r3, r31
 /* 8013CEFC 00139ADC  4B F3 1C A9 */	bl func_8006EBA4
@@ -736,7 +736,7 @@ asm void ftPurin_SpecialAirLw_StartAction(HSD_GObj*)
 /* 8013CF64 00139B44  FC 60 08 90 */	fmr f3, f1
 /* 8013CF68 00139B48  38 A0 00 00 */	li r5, 0
 /* 8013CF6C 00139B4C  38 C0 00 00 */	li r6, 0
-/* 8013CF70 00139B50  4B F2 C4 3D */	bl Fighter_ActionStateChange_800693AC
+/* 8013CF70 00139B50  4B F2 C4 3D */	bl Fighter_ChangeMotionState
 /* 8013CF74 00139B54  48 00 00 24 */	b lbl_8013CF98
 lbl_8013CF78:
 /* 8013CF78 00139B58  C0 22 A2 44 */	lfs f1, lbl_804D9C24(r2)
@@ -746,7 +746,7 @@ lbl_8013CF78:
 /* 8013CF88 00139B68  FC 60 08 90 */	fmr f3, f1
 /* 8013CF8C 00139B6C  38 A0 00 00 */	li r5, 0
 /* 8013CF90 00139B70  38 C0 00 00 */	li r6, 0
-/* 8013CF94 00139B74  4B F2 C4 19 */	bl Fighter_ActionStateChange_800693AC
+/* 8013CF94 00139B74  4B F2 C4 19 */	bl Fighter_ChangeMotionState
 lbl_8013CF98:
 /* 8013CF98 00139B78  7F E3 FB 78 */	mr r3, r31
 /* 8013CF9C 00139B7C  4B F3 1C 09 */	bl func_8006EBA4
@@ -931,7 +931,7 @@ asm void func_8013D104(HSD_GObj*)
 /* 8013D14C 00139D2C  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
 /* 8013D150 00139D30  38 80 01 72 */	li r4, 0x172
 /* 8013D154 00139D34  38 C0 00 00 */	li r6, 0
-/* 8013D158 00139D38  4B F2 C2 55 */	bl Fighter_ActionStateChange_800693AC
+/* 8013D158 00139D38  4B F2 C2 55 */	bl Fighter_ChangeMotionState
 /* 8013D15C 00139D3C  48 00 00 28 */	b lbl_8013D184
 lbl_8013D160:
 /* 8013D160 00139D40  3C 80 0C 4C */	lis r4, 0x0C4C508E@ha
@@ -942,7 +942,7 @@ lbl_8013D160:
 /* 8013D174 00139D54  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
 /* 8013D178 00139D58  38 80 01 74 */	li r4, 0x174
 /* 8013D17C 00139D5C  38 C0 00 00 */	li r6, 0
-/* 8013D180 00139D60  4B F2 C2 2D */	bl Fighter_ActionStateChange_800693AC
+/* 8013D180 00139D60  4B F2 C2 2D */	bl Fighter_ChangeMotionState
 lbl_8013D184:
 /* 8013D184 00139D64  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013D188 00139D68  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -980,7 +980,7 @@ asm void func_8013D19C(HSD_GObj*)
 /* 8013D1E4 00139DC4  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
 /* 8013D1E8 00139DC8  38 80 01 71 */	li r4, 0x171
 /* 8013D1EC 00139DCC  38 C0 00 00 */	li r6, 0
-/* 8013D1F0 00139DD0  4B F2 C1 BD */	bl Fighter_ActionStateChange_800693AC
+/* 8013D1F0 00139DD0  4B F2 C1 BD */	bl Fighter_ChangeMotionState
 /* 8013D1F4 00139DD4  48 00 00 28 */	b lbl_8013D21C
 lbl_8013D1F8:
 /* 8013D1F8 00139DD8  3C 80 0C 4C */	lis r4, 0x0C4C508E@ha
@@ -991,7 +991,7 @@ lbl_8013D1F8:
 /* 8013D20C 00139DEC  38 A4 50 8E */	addi r5, r4, 0x0C4C508E@l
 /* 8013D210 00139DF0  38 80 01 73 */	li r4, 0x173
 /* 8013D214 00139DF4  38 C0 00 00 */	li r6, 0
-/* 8013D218 00139DF8  4B F2 C1 95 */	bl Fighter_ActionStateChange_800693AC
+/* 8013D218 00139DF8  4B F2 C1 95 */	bl Fighter_ChangeMotionState
 lbl_8013D21C:
 /* 8013D21C 00139DFC  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013D220 00139E00  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -1024,7 +1024,7 @@ asm void ftPurin_SpecialS_StartAction(HSD_GObj*)
 /* 8013D25C 00139E3C  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8013D260 00139E40  FC 60 08 90 */	fmr f3, f1
 /* 8013D264 00139E44  C0 42 A2 58 */	lfs f2, lbl_804D9C38(r2)
-/* 8013D268 00139E48  4B F2 C1 45 */	bl Fighter_ActionStateChange_800693AC
+/* 8013D268 00139E48  4B F2 C1 45 */	bl Fighter_ChangeMotionState
 /* 8013D26C 00139E4C  7F C3 F3 78 */	mr r3, r30
 /* 8013D270 00139E50  4B F3 19 35 */	bl func_8006EBA4
 /* 8013D274 00139E54  38 00 00 00 */	li r0, 0
@@ -1060,7 +1060,7 @@ asm void ftPurin_SpecialAirS_StartAction(HSD_GObj*)
 /* 8013D2C8 00139EA8  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8013D2CC 00139EAC  FC 60 08 90 */	fmr f3, f1
 /* 8013D2D0 00139EB0  C0 42 A2 58 */	lfs f2, lbl_804D9C38(r2)
-/* 8013D2D4 00139EB4  4B F2 C0 D9 */	bl Fighter_ActionStateChange_800693AC
+/* 8013D2D4 00139EB4  4B F2 C0 D9 */	bl Fighter_ChangeMotionState
 /* 8013D2D8 00139EB8  7F C3 F3 78 */	mr r3, r30
 /* 8013D2DC 00139EBC  4B F3 18 C9 */	bl func_8006EBA4
 /* 8013D2E0 00139EC0  38 00 00 00 */	li r0, 0
@@ -1336,7 +1336,7 @@ asm void func_8013D590(HSD_GObj*)
 /* 8013D5C8 0013A1A8  38 A4 50 8A */	addi r5, r4, 0x0C4C508A@l
 /* 8013D5CC 0013A1AC  38 80 01 6C */	li r4, 0x16c
 /* 8013D5D0 0013A1B0  38 C0 00 00 */	li r6, 0
-/* 8013D5D4 0013A1B4  4B F2 BD D9 */	bl Fighter_ActionStateChange_800693AC
+/* 8013D5D4 0013A1B4  4B F2 BD D9 */	bl Fighter_ChangeMotionState
 /* 8013D5D8 0013A1B8  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 8013D5DC 0013A1BC  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8013D5E0 0013A1C0  83 C1 00 10 */	lwz r30, 0x10(r1)
@@ -1369,7 +1369,7 @@ asm void func_8013D5F0(HSD_GObj*)
 /* 8013D628 0013A208  38 A4 50 8A */	addi r5, r4, 0x0C4C508A@l
 /* 8013D62C 0013A20C  38 80 01 6B */	li r4, 0x16b
 /* 8013D630 0013A210  38 C0 00 00 */	li r6, 0
-/* 8013D634 0013A214  4B F2 BD 79 */	bl Fighter_ActionStateChange_800693AC
+/* 8013D634 0013A214  4B F2 BD 79 */	bl Fighter_ChangeMotionState
 /* 8013D638 0013A218  7F E3 FB 78 */	mr r3, r31
 /* 8013D63C 0013A21C  4B F3 FE 2D */	bl func_8007D468
 /* 8013D640 0013A220  80 01 00 1C */	lwz r0, 0x1c(r1)
@@ -1516,7 +1516,7 @@ lbl_8013D7B8:
 /* 8013D7EC 0013A3CC  38 A4 02 92 */	addi r5, r4, 0x0C4C0292@l
 /* 8013D7F0 0013A3D0  38 80 01 6A */	li r4, 0x16a
 /* 8013D7F4 0013A3D4  38 C0 00 00 */	li r6, 0
-/* 8013D7F8 0013A3D8  4B F2 BB B5 */	bl Fighter_ActionStateChange_800693AC
+/* 8013D7F8 0013A3D8  4B F2 BB B5 */	bl Fighter_ChangeMotionState
 /* 8013D7FC 0013A3DC  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 8013D800 0013A3E0  38 63 D6 58 */	addi r3, r3, lbl_8013D658@l
 /* 8013D804 0013A3E4  90 7F 21 E4 */	stw r3, 0x21e4(r31)
@@ -1729,7 +1729,7 @@ lbl_8013DA80:
 /* 8013DA8C 0013A66C  38 7B 00 00 */	addi r3, r27, 0
 /* 8013DA90 0013A670  38 BD 00 00 */	addi r5, r29, 0
 /* 8013DA94 0013A674  38 C0 00 00 */	li r6, 0
-/* 8013DA98 0013A678  4B F2 B9 15 */	bl Fighter_ActionStateChange_800693AC
+/* 8013DA98 0013A678  4B F2 B9 15 */	bl Fighter_ChangeMotionState
 /* 8013DA9C 0013A67C  C0 3F 00 EC */	lfs f1, 0xec(r31)
 /* 8013DAA0 0013A680  C0 1C 00 90 */	lfs f0, 0x90(r28)
 /* 8013DAA4 0013A684  EC 01 00 32 */	fmuls f0, f1, f0
@@ -1754,7 +1754,7 @@ lbl_8013DAD8:
 /* 8013DAE4 0013A6C4  38 7B 00 00 */	addi r3, r27, 0
 /* 8013DAE8 0013A6C8  38 BD 00 00 */	addi r5, r29, 0
 /* 8013DAEC 0013A6CC  38 C0 00 00 */	li r6, 0
-/* 8013DAF0 0013A6D0  4B F2 B8 BD */	bl Fighter_ActionStateChange_800693AC
+/* 8013DAF0 0013A6D0  4B F2 B8 BD */	bl Fighter_ChangeMotionState
 /* 8013DAF4 0013A6D4  C0 3F 00 80 */	lfs f1, 0x80(r31)
 /* 8013DAF8 0013A6D8  C0 1C 00 90 */	lfs f0, 0x90(r28)
 /* 8013DAFC 0013A6DC  EC 01 00 32 */	fmuls f0, f1, f0
@@ -2072,7 +2072,7 @@ lbl_8013DEF0:
 /* 8013DEFC 0013AADC  38 A0 00 00 */	li r5, 0
 /* 8013DF00 0013AAE0  FC 60 08 90 */	fmr f3, f1
 /* 8013DF04 0013AAE4  38 C0 00 00 */	li r6, 0
-/* 8013DF08 0013AAE8  4B F2 B4 A5 */	bl Fighter_ActionStateChange_800693AC
+/* 8013DF08 0013AAE8  4B F2 B4 A5 */	bl Fighter_ChangeMotionState
 /* 8013DF0C 0013AAEC  38 00 00 00 */	li r0, 0
 /* 8013DF10 0013AAF0  90 1F 22 0C */	stw r0, 0x220c(r31)
 /* 8013DF14 0013AAF4  7F A3 EB 78 */	mr r3, r29
@@ -2129,7 +2129,7 @@ lbl_8013DFA8:
 /* 8013DFB4 0013AB94  38 A0 00 00 */	li r5, 0
 /* 8013DFB8 0013AB98  FC 60 08 90 */	fmr f3, f1
 /* 8013DFBC 0013AB9C  38 C0 00 00 */	li r6, 0
-/* 8013DFC0 0013ABA0  4B F2 B3 ED */	bl Fighter_ActionStateChange_800693AC
+/* 8013DFC0 0013ABA0  4B F2 B3 ED */	bl Fighter_ChangeMotionState
 /* 8013DFC4 0013ABA4  38 00 00 00 */	li r0, 0
 /* 8013DFC8 0013ABA8  90 1F 22 0C */	stw r0, 0x220c(r31)
 /* 8013DFCC 0013ABAC  7F A3 EB 78 */	mr r3, r29
@@ -2182,7 +2182,7 @@ asm void lbl_8013E014(HSD_GObj*)
 /* 8013E05C 0013AC3C  FC 60 08 90 */	fmr f3, f1
 /* 8013E060 0013AC40  38 80 01 5C */	li r4, 0x15c
 /* 8013E064 0013AC44  38 C0 00 00 */	li r6, 0
-/* 8013E068 0013AC48  4B F2 B3 45 */	bl Fighter_ActionStateChange_800693AC
+/* 8013E068 0013AC48  4B F2 B3 45 */	bl Fighter_ChangeMotionState
 /* 8013E06C 0013AC4C  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 8013E070 0013AC50  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 8013E074 0013AC54  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -2288,7 +2288,7 @@ lbl_8013E1B0:
 /* 8013E1CC 0013ADAC  38 80 01 5D */	li r4, 0x15d
 /* 8013E1D0 0013ADB0  FC 60 10 90 */	fmr f3, f2
 /* 8013E1D4 0013ADB4  38 C0 00 00 */	li r6, 0
-/* 8013E1D8 0013ADB8  4B F2 B1 D5 */	bl Fighter_ActionStateChange_800693AC
+/* 8013E1D8 0013ADB8  4B F2 B1 D5 */	bl Fighter_ChangeMotionState
 lbl_8013E1DC:
 /* 8013E1DC 0013ADBC  80 7F 23 6C */	lwz r3, 0x236c(r31)
 /* 8013E1E0 0013ADC0  3C 00 43 30 */	lis r0, 0x4330
@@ -3181,7 +3181,7 @@ asm void lbl_8013EDB0(HSD_GObj*)
 /* 8013EDF8 0013B9D8  FC 60 08 90 */	fmr f3, f1
 /* 8013EDFC 0013B9DC  38 80 01 64 */	li r4, 0x164
 /* 8013EE00 0013B9E0  38 C0 00 00 */	li r6, 0
-/* 8013EE04 0013B9E4  4B F2 A5 A9 */	bl Fighter_ActionStateChange_800693AC
+/* 8013EE04 0013B9E4  4B F2 A5 A9 */	bl Fighter_ChangeMotionState
 /* 8013EE08 0013B9E8  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 8013EE0C 0013B9EC  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 8013EE10 0013B9F0  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -3282,7 +3282,7 @@ lbl_8013EF44:
 /* 8013EF60 0013BB40  38 80 01 65 */	li r4, 0x165
 /* 8013EF64 0013BB44  FC 60 10 90 */	fmr f3, f2
 /* 8013EF68 0013BB48  38 C0 00 00 */	li r6, 0
-/* 8013EF6C 0013BB4C  4B F2 A4 41 */	bl Fighter_ActionStateChange_800693AC
+/* 8013EF6C 0013BB4C  4B F2 A4 41 */	bl Fighter_ChangeMotionState
 lbl_8013EF70:
 /* 8013EF70 0013BB50  80 7F 23 6C */	lwz r3, 0x236c(r31)
 /* 8013EF74 0013BB54  3C 00 43 30 */	lis r0, 0x4330
@@ -4446,7 +4446,7 @@ asm void lbl_8013FF04(HSD_GObj*)
 /* 8013FF48 0013CB28  38 A4 10 92 */	addi r5, r4, 0x00041092@l
 /* 8013FF4C 0013CB2C  38 80 01 5E */	li r4, 0x15e
 /* 8013FF50 0013CB30  38 C0 00 00 */	li r6, 0
-/* 8013FF54 0013CB34  4B F2 94 59 */	bl Fighter_ActionStateChange_800693AC
+/* 8013FF54 0013CB34  4B F2 94 59 */	bl Fighter_ChangeMotionState
 /* 8013FF58 0013CB38  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 8013FF5C 0013CB3C  80 BD 00 2C */	lwz r5, 0x2c(r29)
 /* 8013FF60 0013CB40  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -4548,7 +4548,7 @@ asm void lbl_80140064(HSD_GObj*)
 /* 801400A8 0013CC88  38 A4 10 92 */	addi r5, r4, 0x00041092@l
 /* 801400AC 0013CC8C  38 80 01 5E */	li r4, 0x15e
 /* 801400B0 0013CC90  38 C0 00 00 */	li r6, 0
-/* 801400B4 0013CC94  4B F2 92 F9 */	bl Fighter_ActionStateChange_800693AC
+/* 801400B4 0013CC94  4B F2 92 F9 */	bl Fighter_ChangeMotionState
 /* 801400B8 0013CC98  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 801400BC 0013CC9C  80 BD 00 2C */	lwz r5, 0x2c(r29)
 /* 801400C0 0013CCA0  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -4677,7 +4677,7 @@ lbl_80140228:
 /* 8014025C 0013CE3C  C0 3F 08 94 */	lfs f1, 0x894(r31)
 /* 80140260 0013CE40  38 C0 00 00 */	li r6, 0
 /* 80140264 0013CE44  FC 60 10 90 */	fmr f3, f2
-/* 80140268 0013CE48  4B F2 91 45 */	bl Fighter_ActionStateChange_800693AC
+/* 80140268 0013CE48  4B F2 91 45 */	bl Fighter_ChangeMotionState
 /* 8014026C 0013CE4C  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 80140270 0013CE50  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 80140274 0013CE54  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -4772,7 +4772,7 @@ asm void lbl_80140350(HSD_GObj*)
 /* 80140394 0013CF74  38 A4 10 92 */	addi r5, r4, 0x00041092@l
 /* 80140398 0013CF78  38 80 01 66 */	li r4, 0x166
 /* 8014039C 0013CF7C  38 C0 00 00 */	li r6, 0
-/* 801403A0 0013CF80  4B F2 90 0D */	bl Fighter_ActionStateChange_800693AC
+/* 801403A0 0013CF80  4B F2 90 0D */	bl Fighter_ChangeMotionState
 /* 801403A4 0013CF84  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 801403A8 0013CF88  80 BD 00 2C */	lwz r5, 0x2c(r29)
 /* 801403AC 0013CF8C  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -4874,7 +4874,7 @@ asm void lbl_801404B0(HSD_GObj*)
 /* 801404F4 0013D0D4  38 A4 10 92 */	addi r5, r4, 0x00041092@l
 /* 801404F8 0013D0D8  38 80 01 66 */	li r4, 0x166
 /* 801404FC 0013D0DC  38 C0 00 00 */	li r6, 0
-/* 80140500 0013D0E0  4B F2 8E AD */	bl Fighter_ActionStateChange_800693AC
+/* 80140500 0013D0E0  4B F2 8E AD */	bl Fighter_ChangeMotionState
 /* 80140504 0013D0E4  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 80140508 0013D0E8  80 BD 00 2C */	lwz r5, 0x2c(r29)
 /* 8014050C 0013D0EC  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -5275,7 +5275,7 @@ lbl_801409D4:
 /* 80140A00 0013D5E0  38 80 01 5E */	li r4, 0x15e
 /* 80140A04 0013D5E4  FC 60 10 90 */	fmr f3, f2
 /* 80140A08 0013D5E8  38 C0 00 00 */	li r6, 0
-/* 80140A0C 0013D5EC  4B F2 89 A1 */	bl Fighter_ActionStateChange_800693AC
+/* 80140A0C 0013D5EC  4B F2 89 A1 */	bl Fighter_ChangeMotionState
 /* 80140A10 0013D5F0  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 80140A14 0013D5F4  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 80140A18 0013D5F8  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -5328,7 +5328,7 @@ lbl_80140A98:
 /* 80140AC4 0013D6A4  38 80 01 5E */	li r4, 0x15e
 /* 80140AC8 0013D6A8  FC 60 10 90 */	fmr f3, f2
 /* 80140ACC 0013D6AC  38 C0 00 00 */	li r6, 0
-/* 80140AD0 0013D6B0  4B F2 88 DD */	bl Fighter_ActionStateChange_800693AC
+/* 80140AD0 0013D6B0  4B F2 88 DD */	bl Fighter_ChangeMotionState
 /* 80140AD4 0013D6B4  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 80140AD8 0013D6B8  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 80140ADC 0013D6BC  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -5771,7 +5771,7 @@ lbl_80140FF0:
 /* 80141000 0013DBE0  C0 62 A2 68 */	lfs f3, lbl_804D9C48(r2)
 /* 80141004 0013DBE4  38 A5 50 92 */	addi r5, r5, 0x0C4C5092@l
 /* 80141008 0013DBE8  38 C0 00 00 */	li r6, 0
-/* 8014100C 0013DBEC  4B F2 83 A1 */	bl Fighter_ActionStateChange_800693AC
+/* 8014100C 0013DBEC  4B F2 83 A1 */	bl Fighter_ChangeMotionState
 /* 80141010 0013DBF0  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 80141014 0013DBF4  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 80141018 0013DBF8  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -5819,7 +5819,7 @@ asm void lbl_80141054(HSD_GObj*)
 /* 80141098 0013DC78  38 A4 10 92 */	addi r5, r4, 0x00041092@l
 /* 8014109C 0013DC7C  38 80 01 64 */	li r4, 0x164
 /* 801410A0 0013DC80  38 C0 00 00 */	li r6, 0
-/* 801410A4 0013DC84  4B F2 83 09 */	bl Fighter_ActionStateChange_800693AC
+/* 801410A4 0013DC84  4B F2 83 09 */	bl Fighter_ChangeMotionState
 /* 801410A8 0013DC88  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 801410AC 0013DC8C  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 801410B0 0013DC90  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -5897,7 +5897,7 @@ asm void lbl_80141154(HSD_GObj*)
 /* 80141198 0013DD78  38 A4 10 92 */	addi r5, r4, 0x00041092@l
 /* 8014119C 0013DD7C  38 80 01 65 */	li r4, 0x165
 /* 801411A0 0013DD80  38 C0 00 00 */	li r6, 0
-/* 801411A4 0013DD84  4B F2 82 09 */	bl Fighter_ActionStateChange_800693AC
+/* 801411A4 0013DD84  4B F2 82 09 */	bl Fighter_ChangeMotionState
 /* 801411A8 0013DD88  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 801411AC 0013DD8C  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 801411B0 0013DD90  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -6154,7 +6154,7 @@ lbl_80141510:
 /* 80141534 0013E114  38 A4 50 9A */	addi r5, r4, 0x0C4C509A@l
 /* 80141538 0013E118  38 80 01 66 */	li r4, 0x166
 /* 8014153C 0013E11C  38 C0 00 00 */	li r6, 0
-/* 80141540 0013E120  4B F2 7E 6D */	bl Fighter_ActionStateChange_800693AC
+/* 80141540 0013E120  4B F2 7E 6D */	bl Fighter_ChangeMotionState
 /* 80141544 0013E124  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 80141548 0013E128  80 BC 00 2C */	lwz r5, 0x2c(r28)
 /* 8014154C 0013E12C  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -6253,7 +6253,7 @@ lbl_80141658:
 /* 8014167C 0013E25C  38 A4 50 92 */	addi r5, r4, 0x0C4C5092@l
 /* 80141680 0013E260  38 80 01 67 */	li r4, 0x167
 /* 80141684 0013E264  38 C0 00 00 */	li r6, 0
-/* 80141688 0013E268  4B F2 7D 25 */	bl Fighter_ActionStateChange_800693AC
+/* 80141688 0013E268  4B F2 7D 25 */	bl Fighter_ChangeMotionState
 /* 8014168C 0013E26C  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 80141690 0013E270  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 80141694 0013E274  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -6343,7 +6343,7 @@ lbl_8014177C:
 /* 8014178C 0013E36C  C0 62 A2 68 */	lfs f3, lbl_804D9C48(r2)
 /* 80141790 0013E370  38 A5 50 92 */	addi r5, r5, 0x0C4C5092@l
 /* 80141794 0013E374  38 C0 00 00 */	li r6, 0
-/* 80141798 0013E378  4B F2 7C 15 */	bl Fighter_ActionStateChange_800693AC
+/* 80141798 0013E378  4B F2 7C 15 */	bl Fighter_ChangeMotionState
 /* 8014179C 0013E37C  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 801417A0 0013E380  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 801417A4 0013E384  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -6391,7 +6391,7 @@ asm void lbl_801417E0(HSD_GObj*)
 /* 80141824 0013E404  38 A4 10 92 */	addi r5, r4, 0x00041092@l
 /* 80141828 0013E408  38 80 01 5C */	li r4, 0x15c
 /* 8014182C 0013E40C  38 C0 00 00 */	li r6, 0
-/* 80141830 0013E410  4B F2 7B 7D */	bl Fighter_ActionStateChange_800693AC
+/* 80141830 0013E410  4B F2 7B 7D */	bl Fighter_ChangeMotionState
 /* 80141834 0013E414  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 80141838 0013E418  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 8014183C 0013E41C  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -6469,7 +6469,7 @@ asm void lbl_801418E0(HSD_GObj*)
 /* 80141924 0013E504  38 A4 10 92 */	addi r5, r4, 0x00041092@l
 /* 80141928 0013E508  38 80 01 5D */	li r4, 0x15d
 /* 8014192C 0013E50C  38 C0 00 00 */	li r6, 0
-/* 80141930 0013E510  4B F2 7A 7D */	bl Fighter_ActionStateChange_800693AC
+/* 80141930 0013E510  4B F2 7A 7D */	bl Fighter_ChangeMotionState
 /* 80141934 0013E514  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 80141938 0013E518  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 8014193C 0013E51C  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -6734,7 +6734,7 @@ lbl_80141CB8:
 /* 80141CE4 0013E8C4  38 A4 50 9A */	addi r5, r4, 0x0C4C509A@l
 /* 80141CE8 0013E8C8  38 80 01 5E */	li r4, 0x15e
 /* 80141CEC 0013E8CC  38 C0 00 00 */	li r6, 0
-/* 80141CF0 0013E8D0  4B F2 76 BD */	bl Fighter_ActionStateChange_800693AC
+/* 80141CF0 0013E8D0  4B F2 76 BD */	bl Fighter_ChangeMotionState
 /* 80141CF4 0013E8D4  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 80141CF8 0013E8D8  80 BC 00 2C */	lwz r5, 0x2c(r28)
 /* 80141CFC 0013E8DC  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l
@@ -6967,7 +6967,7 @@ asm void lbl_80141FB8(HSD_GObj*)
 /* 80142008 0013EBE8  38 A4 50 92 */	addi r5, r4, 0x0C4C5092@l
 /* 8014200C 0013EBEC  38 80 01 5F */	li r4, 0x15f
 /* 80142010 0013EBF0  38 C0 00 00 */	li r6, 0
-/* 80142014 0013EBF4  4B F2 73 99 */	bl Fighter_ActionStateChange_800693AC
+/* 80142014 0013EBF4  4B F2 73 99 */	bl Fighter_ChangeMotionState
 /* 80142018 0013EBF8  3C 60 80 14 */	lis r3, lbl_8013D658@ha
 /* 8014201C 0013EBFC  80 BE 00 2C */	lwz r5, 0x2c(r30)
 /* 80142020 0013EC00  38 03 D6 58 */	addi r0, r3, lbl_8013D658@l

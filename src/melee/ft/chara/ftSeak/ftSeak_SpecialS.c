@@ -474,7 +474,7 @@ void ftSeak_80110F70(HSD_GObj* gobj)
 
 void ftSeak_SpecialS_StartAction(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 349, 0, NULL, 0.0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 349, 0, NULL, 0.0, 1, 0);
     func_8006EBA4(gobj);
     ftSeak_80110F70(gobj);
 }
@@ -484,7 +484,7 @@ void ftSeak_SpecialAirS_StartAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x80_self_vel.y = 0;
 
-    Fighter_ActionStateChange_800693AC(gobj, 352, 0, NULL, 0.0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 352, 0, NULL, 0.0, 1, 0);
     func_8006EBA4(gobj);
     ftSeak_80110F70(gobj);
 }
@@ -624,7 +624,7 @@ void ftSeak_80111404(HSD_GObj* gobj)
         ftSeak_801114E4(gobj);
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags =
+static Fighter_MotionStateChangeFlags const transition_flags =
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
@@ -637,8 +637,8 @@ void ftSeak_80111440(HSD_GObj* gobj)
 
     func_8007D5D4(fp);
     {
-        Fighter_ActionStateChange_800693AC(gobj, 352, transition_flags, NULL,
-                                           fp->x894_currentAnimFrame, 1, 0);
+        Fighter_ChangeMotionState(gobj, 352, transition_flags, NULL,
+                                  fp->x894_currentAnimFrame, 1, 0);
     }
 
     {
@@ -660,8 +660,8 @@ void ftSeak_801114E4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 349, transition_flags, NULL,
-                                       fp->x894_currentAnimFrame, 1.0, 0.0);
+    Fighter_ChangeMotionState(gobj, 349, transition_flags, NULL,
+                              fp->x894_currentAnimFrame, 1.0, 0.0);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);
@@ -795,7 +795,7 @@ void ftSeak_80111830(HSD_GObj* gobj)
 
     Fighter* fp = gobj->user_data;
 
-    Fighter_ActionStateChange_800693AC(gobj, 350, 8, NULL, 0.0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 350, 8, NULL, 0.0, 1, 0);
     ftSeak_80110610(gobj, 305, 0);
 
     fp2 = gobj->user_data;
@@ -838,7 +838,7 @@ void ftSeak_80111830(HSD_GObj* gobj)
 
 void ftSeak_80111988(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 353, 8, NULL, 0.0, 1.0, 0.0);
+    Fighter_ChangeMotionState(gobj, 353, 8, NULL, 0.0, 1.0, 0.0);
     ftSeak_80110610(gobj, 308, 0.0);
 
     {
@@ -979,8 +979,8 @@ void ftSeak_80111CB0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, 354, transition_flags, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 354, transition_flags, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 
     {
         Fighter* fp2 = gobj->user_data;
@@ -996,14 +996,14 @@ void ftSeak_80111CB0(HSD_GObj* gobj)
     }
 }
 
-// AS_SheikRetractChainGround
+// MS_SheikRetractChainGround
 void ftSeak_80111D54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, 351, transition_flags, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 351, transition_flags, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 
     {
         Fighter* fp2 = GET_FIGHTER(gobj);
@@ -1021,7 +1021,7 @@ void ftSeak_80111D54(HSD_GObj* gobj)
 
 void ftSeak_80111DF8(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 351, 8, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 351, 8, NULL, 0, 1, 0);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -1044,7 +1044,7 @@ void ftSeak_80111DF8(HSD_GObj* gobj)
 
 void ftSeak_80111EB4(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 354, 8, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 354, 8, NULL, 0, 1, 0);
 
     {
         Fighter* fp = gobj->user_data;

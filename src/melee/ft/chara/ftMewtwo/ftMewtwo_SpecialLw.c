@@ -41,8 +41,8 @@ void ftMewtwo_SpecialLw_StartAction(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->fv.mt.x222C_disableGObj = NULL;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_MEWTWO_SPECIALLW, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALLW, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     func_8006EBA4(gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
@@ -65,8 +65,8 @@ void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* gobj)
     fp->fv.mt.x222C_disableGObj = NULL;
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_MEWTWO_SPECIALAIRLW, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRLW, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
     func_8006EBA4(gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
@@ -150,9 +150,9 @@ void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* gobj)
 
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_MEWTWO_SPECIALAIRLW,
-                                       FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRLW,
+                              FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
 
@@ -170,9 +170,9 @@ void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_MEWTWO_SPECIALLW,
-                                       FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALLW,
+                              FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
 

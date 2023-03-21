@@ -99,7 +99,7 @@ void ftSamus_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
     if (fp->ground_or_air == GA_Ground) {
         func_8007D5D4(fighter2);
     }
-    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, arg9, argA, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x156, 0, 0, arg9, argA, 0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -273,18 +273,16 @@ void ftSamus_80129048(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0x10, 0,
-                                       fp->x894_currentAnimFrame,
-                                       fp->x89C_frameSpeedMul, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x156, 0x10, 0, fp->x894_currentAnimFrame,
+                              fp->x89C_frameSpeedMul, 0.0f);
 }
 
 void ftSamus_801290A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0x10, 0,
-                                       fp->x894_currentAnimFrame,
-                                       fp->x89C_frameSpeedMul, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x155, 0x10, 0, fp->x894_currentAnimFrame,
+                              fp->x89C_frameSpeedMul, 0.0f);
 }
 
 int ftSamus_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)

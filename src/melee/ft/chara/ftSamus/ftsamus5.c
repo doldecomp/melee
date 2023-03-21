@@ -17,7 +17,7 @@ void ftSamus_SpecialHi_StartAction(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x161, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x161, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftSamus_updateDamageDeathCBs(gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -37,7 +37,7 @@ void ftSamus_SpecialAirHi_StartAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x162, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x162, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftSamus_updateDamageDeathCBs(gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

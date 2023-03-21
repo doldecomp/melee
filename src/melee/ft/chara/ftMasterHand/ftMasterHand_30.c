@@ -134,7 +134,7 @@ void lbl_80155814(HSD_GObj* gobj)
 // https://decomp.me/scratch/qSDro
 void func_80155818(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 0x183, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x183, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 

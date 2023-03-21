@@ -12,7 +12,7 @@ void ftDonkey_SpecialLw_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.dk.speciallw.x0 = 0;
-    Fighter_ActionStateChange_800693AC(gobj, 0x17F, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x17F, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -102,7 +102,7 @@ void ftDonkey_8010DE88(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21EC_callback = &ftDonkey_8010DE54;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(gobj, 0x180, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x180, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftDonkey_8010DE88_inner(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010DB3C;
 }
@@ -134,7 +134,7 @@ void ftDonkey_8010DFBC(HSD_GObj* gobj)
 
 void ftDonkey_8010DFF8(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 0x181, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x181, 0, NULL, 0.0f, 1.0f, 0.0f);
 }
 
 void ftDonkey_8010E030(HSD_GObj* gobj)

@@ -15,9 +15,9 @@ void ftMars_SpecialHi_StartAction(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x16F, 0, NULL, 0.0f, 1.0f, 0.0f);
-    // AS_AnimationFrameUpdate&More
+    // MotionStateChange
+    Fighter_ChangeMotionState(gobj, 0x16F, 0, NULL, 0.0f, 1.0f, 0.0f);
+    // MS_AnimationFrameUpdate&More
     func_8006EBA4(gobj);
 }
 
@@ -39,9 +39,9 @@ void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x *= attr->x3C;
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x170, 0, NULL, 0.0f, 1.0f, 0.0f);
-    // AS_AnimationFrameUpdate&More
+    // MotionStateChange
+    Fighter_ChangeMotionState(gobj, 0x170, 0, NULL, 0.0f, 1.0f, 0.0f);
+    // MS_AnimationFrameUpdate&More
     func_8006EBA4(gobj);
 }
 
@@ -54,7 +54,7 @@ void lbl_801382E8(HSD_GObj* gobj)
 
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        // AS_035_FallSpecial
+        // MS_035_FallSpecial
         func_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }
 }
@@ -73,7 +73,7 @@ void lbl_80138348(HSD_GObj* gobj)
 
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        // AS_035_FallSpecial
+        // MS_035_FallSpecial
         func_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }
 }

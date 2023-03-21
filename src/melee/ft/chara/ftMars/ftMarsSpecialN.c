@@ -23,7 +23,7 @@ void ftMars_SpecialN_StartAction(HSD_GObj* gobj)
     fp->cb.x21EC_callback = &lbl_80136730;
 
     fp->xEC_ground_vel /= attrs->xC;
-    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -45,7 +45,7 @@ void ftMars_SpecialAirN_StartAction(HSD_GObj* gobj)
         fp->x80_self_vel.y = 0.0f;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 
@@ -140,8 +140,8 @@ void func_80136A1C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     func_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x0C4C5084, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x159, 0x0C4C5084, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136A7C 0013365C
@@ -151,8 +151,8 @@ void func_80136A7C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x155, 0x0C4C5084, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x155, 0x0C4C5084, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 void lbl_80136ADC(HSD_GObj* gobj)
@@ -265,8 +265,8 @@ void func_80136DB4(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     func_8007D5D4(gobj->user_data);
-    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x0C4C5A86, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C5A86, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136E14 001339F4
@@ -276,24 +276,22 @@ void func_80136E14(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0x0C4C5A86, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x156, 0x0C4C5A86, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 // 80136E74 00133A54
 // https://decomp.me/scratch/M7HBN
 void func_80136E74(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 0x156, 0x1200, 0, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ChangeMotionState(gobj, 0x156, 0x1200, 0, 0.0f, 1.0f, 0.0f);
 }
 
 // 80136EAC 00133A8C
 // https://decomp.me/scratch/RkI7l
 void func_80136EAC(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 0x15A, 0x1200, 0, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ChangeMotionState(gobj, 0x15A, 0x1200, 0, 0.0f, 1.0f, 0.0f);
 }
 
 // 80136EE4 00133AC4
@@ -343,7 +341,7 @@ void lbl_80136EE4(HSD_GObj* gobj)
     }
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        // AS_014_Wait_PlayerCheck
+        // MS_014_Wait_PlayerCheck
         func_8008A2BC(gobj);
     }
     return;
@@ -407,7 +405,7 @@ void lbl_80137010(HSD_GObj* gobj)
     }
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        // AS_029_Fall
+        // MS_029_Fall
         func_800CC730(gobj);
     }
     return;
@@ -467,9 +465,9 @@ void func_801371FC(HSD_GObj* gobj)
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4C508E, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    // MotionStateChange
+    Fighter_ChangeMotionState(gobj, thing, 0x0C4C508E, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     if (fp->x2219_flag.bits.b0 == 1) {
         fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -478,7 +476,7 @@ void func_801371FC(HSD_GObj* gobj)
 }
 
 // 801372A8 00133E88
-// AS_MarthNeutralBHitAir->Ground
+// MS_MarthNeutralBHitAir->Ground
 // https://decomp.me/scratch/IV8RT
 void func_801372A8(HSD_GObj* gobj)
 {
@@ -493,9 +491,9 @@ void func_801372A8(HSD_GObj* gobj)
 
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4C508E, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    // MotionStateChange
+    Fighter_ChangeMotionState(gobj, thing, 0x0C4C508E, 0,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     if (fp->x2219_flag.bits.b0 == 1) {
         fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -504,7 +502,7 @@ void func_801372A8(HSD_GObj* gobj)
 }
 
 // 80137354 00133F34
-// AS_RoyNeutralBSwing
+// MS_RoyNeutralBSwing
 // https://decomp.me/scratch/4CbiS
 void func_80137354(HSD_GObj* gobj)
 {
@@ -517,7 +515,7 @@ void func_80137354(HSD_GObj* gobj)
         thing = 0x158;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 1.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, thing, 0, 0, 1.0f, 1.0f, 0.0f);
     fp->cb.x21BC_callback_Accessory4 = &lbl_801365A8;
 }
 
@@ -534,6 +532,6 @@ void func_801373B8(HSD_GObj* gobj)
         thing = 0x15C;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 1.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, thing, 0, 0, 1.0f, 1.0f, 0.0f);
     fp->cb.x21BC_callback_Accessory4 = &lbl_8013666C;
 }

@@ -18,7 +18,7 @@ void ftMars_SpecialLw_StartAction(HSD_GObj* gobj)
     Fighter* fp0 = GET_FIGHTER(gobj);
     fp0->x80_self_vel.y = 0;
 
-    Fighter_ActionStateChange_800693AC(gobj, 369, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 369, 0, NULL, 0, 1, 0);
     func_8006EBA4(gobj);
 
     {
@@ -42,7 +42,7 @@ void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj)
         fp->x80_self_vel.y = 0;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, 371, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 371, 0, NULL, 0, 1, 0);
     func_8006EBA4(gobj);
 
     {
@@ -153,8 +153,8 @@ void func_80138D38(HSD_GObj* gobj)
     {
         Fighter* fp = gobj->user_data;
         func_8007D5D4(fp);
-        Fighter_ActionStateChange_800693AC(gobj, 371, 0x0C4C508C, NULL,
-                                           fp->x894_currentAnimFrame, 1, 0);
+        Fighter_ChangeMotionState(gobj, 371, 0x0C4C508C, NULL,
+                                  fp->x894_currentAnimFrame, 1, 0);
     }
 
     {
@@ -178,8 +178,8 @@ void func_80138DD0(HSD_GObj* gobj)
     {
         Fighter* fp0 = gobj->user_data;
         func_8007D7FC(fp0);
-        Fighter_ActionStateChange_800693AC(gobj, 369, 0x0C4C508C, NULL,
-                                           fp0->x894_currentAnimFrame, 1, 0);
+        Fighter_ChangeMotionState(gobj, 369, 0x0C4C508C, NULL,
+                                  fp0->x894_currentAnimFrame, 1, 0);
     }
 
     {
@@ -326,8 +326,8 @@ void func_80139080(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x174, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 0x174, 0x0C4C508E, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 // 801390E0 00135CC0
@@ -336,8 +336,8 @@ void func_801390E0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x172, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 0x172, 0x0C4C508E, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void lbl_80139140(HSD_GObj* gobj)
@@ -377,7 +377,7 @@ void lbl_80139140(HSD_GObj* gobj)
             else
                 asid = 0x174;
 
-            Fighter_ActionStateChange_800693AC(gobj, asid, 0, NULL, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, asid, 0, NULL, 0, 1, 0);
         }
     }
 

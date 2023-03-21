@@ -27,7 +27,7 @@ void func_80152880(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     fp->mv.mh.unk13.x0 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
     fp->mv.mh.unk13.x4 = 0.0f;
@@ -49,8 +49,7 @@ void lbl_80152928(HSD_GObj* gobj)
             temp_r4->x80_self_vel.x = 0.0f;
             temp_r4->x80_self_vel.y = 0.0f;
             temp_r31 = GET_FIGHTER(gobj);
-            Fighter_ActionStateChange_800693AC(gobj, 0x168, 0, 0, 0.0f, 1.0f,
-                                               0.0f);
+            Fighter_ChangeMotionState(gobj, 0x168, 0, 0, 0.0f, 1.0f, 0.0f);
             func_8006EBA4(gobj);
             func_80088148(temp_r31, 0x4E207, 0x7F, 0x40);
         }

@@ -13,8 +13,8 @@ void ftNess_AttackLw4_Action(
     fp->x2218_flag.bits.b0 = 0;
     fp->mv.ns.attacklw4.isChargeDisable = false;
     ftNess_YoyoSetVarAll(gobj);
-    Fighter_ActionStateChange_800693AC(gobj, AS_NESS_ATTACKLW4, 0, NULL, 0.0f,
-                                       1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKLW4, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     func_8006EBA4(gobj);
     fp->x2222_flag.bits.b2 = 1;
     fp->cb.x21C0_callback_OnGiveDamage = ftNess_YoyoStartTimedRehit;
@@ -141,9 +141,9 @@ void ftNess_AttackLw4_Charge_Action(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_NESS_ATTACKLW4_CHARGE,
-                                       FtStateChange_SkipUpdateItemVis, NULL,
-                                       12.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKLW4_CHARGE,
+                              FtStateChange_SkipUpdateItemVis, NULL, 12.0f,
+                              1.0f, 0.0f);
     func_8006EBA4(gobj);
     ftAnim_SetAnimRate(gobj, 0.0f);
     ftNess_YoyoApplySmash(gobj);
@@ -231,9 +231,9 @@ void ftNess_AttackLw4_Release_Action(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_NESS_ATTACKLW4_RELEASE,
-                                       FtStateChange_SkipUpdateItemVis, NULL,
-                                       13.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKLW4_RELEASE,
+                              FtStateChange_SkipUpdateItemVis, NULL, 13.0f,
+                              1.0f, 0.0f);
     func_8006EBA4(gobj);
     ftNess_YoyoSetChargeDamage(gobj);
     fp->x2222_flag.bits.b2 = 1;

@@ -24,7 +24,7 @@ ftNess_SpecialAirNHold_Coll:
 /* 80117ADC 001146BC  38 A4 50 80 */	addi r5, r4, 0x0C4C5080@l
 /* 80117AE0 001146C0  38 80 01 5D */	li r4, 0x15d
 /* 80117AE4 001146C4  38 C0 00 00 */	li r6, 0
-/* 80117AE8 001146C8  4B F5 18 C5 */	bl Fighter_ActionStateChange_800693AC
+/* 80117AE8 001146C8  4B F5 18 C5 */	bl Fighter_ChangeMotionState
 lbl_80117AEC:
 /* 80117AEC 001146CC  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80117AF0 001146D0  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -55,7 +55,7 @@ ftNess_SpecialAirNEnd_Coll:
 /* 80117B48 00114728  38 A4 50 80 */	addi r5, r4, 0x0C4C5080@l
 /* 80117B4C 0011472C  38 80 01 5F */	li r4, 0x15f
 /* 80117B50 00114730  38 C0 00 00 */	li r6, 0
-/* 80117B54 00114734  4B F5 18 59 */	bl Fighter_ActionStateChange_800693AC
+/* 80117B54 00114734  4B F5 18 59 */	bl Fighter_ChangeMotionState
 lbl_80117B58:
 /* 80117B58 00114738  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80117B5C 0011473C  83 E1 00 14 */	lwz r31, 0x14(r1)

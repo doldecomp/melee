@@ -265,10 +265,10 @@ enum_t func_8015C44C(FighterKind kind)
 #endif
 
     if (gobj != NULL) {
-        // DataOffset_ActionStateLoad
+        // DataOffset_MotionStateLoad
         return func_80086C0C(gobj);
     } else {
-        return ftCo_AS_DeadDown;
+        return ftCo_MS_DeadDown;
     }
 }
 

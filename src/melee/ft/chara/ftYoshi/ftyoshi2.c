@@ -132,7 +132,7 @@ asm void func_8012C1D4(HSD_GObj*)
 /* 8012C200 00128DE0  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8012C204 00128DE4  FC 60 08 90 */	fmr f3, f1
 /* 8012C208 00128DE8  C0 42 A0 48 */	lfs f2, lbl_804D9A28(r2)
-/* 8012C20C 00128DEC  4B F3 D1 A1 */	bl Fighter_ActionStateChange_800693AC
+/* 8012C20C 00128DEC  4B F3 D1 A1 */	bl Fighter_ChangeMotionState
 /* 8012C210 00128DF0  80 BF 01 08 */	lwz r5, 0x108(r31)
 /* 8012C214 00128DF4  38 7F 00 00 */	addi r3, r31, 0
 /* 8012C218 00128DF8  38 80 00 01 */	li r4, 1
@@ -238,8 +238,8 @@ void lbl_8012C47C(HSD_GObj* arg0)
 
 void func_8012C49C(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 0x157, 0, NULL, lbl_804D9A2C,
-                                       lbl_804D9A28, lbl_804D9A2C);
+    Fighter_ChangeMotionState(gobj, 0x157, 0, NULL, lbl_804D9A2C, lbl_804D9A28,
+                              lbl_804D9A2C);
 
     {
         Fighter* fp0 = GET_FIGHTER(gobj);
@@ -320,7 +320,7 @@ asm void func_8012C600(HSD_GObj*)
 /* 8012C634 00129214  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8012C638 00129218  FC 60 08 90 */	fmr f3, f1
 /* 8012C63C 0012921C  C0 42 A0 48 */	lfs f2, lbl_804D9A28
-/* 8012C640 00129220  4B F3 CD 6D */	bl Fighter_ActionStateChange_800693AC
+/* 8012C640 00129220  4B F3 CD 6D */	bl Fighter_ChangeMotionState
 /* 8012C644 00129224  3C 60 80 09 */	lis r3, func_80093240@ha
 /* 8012C648 00129228  38 03 32 40 */	addi r0, r3, func_80093240@l
 /* 8012C64C 0012922C  90 1F 21 D0 */	stw r0, 0x21d0(r31)
@@ -473,9 +473,9 @@ void func_8012C850(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = getFighter(gobj);
-    Fighter_ActionStateChange_800693AC(gobj, 0x159, 0x10, NULL,
-                                       fp->x894_currentAnimFrame, lbl_804D9A28,
-                                       lbl_804D9A2C);
+    Fighter_ChangeMotionState(gobj, 0x159, 0x10, NULL,
+                              fp->x894_currentAnimFrame, lbl_804D9A28,
+                              lbl_804D9A2C);
     fp->x672_input_timer_counter = 254;
     fp->x221A_flag.bits.b7 = false;
     fp->x221B_b0 = false;
@@ -511,7 +511,7 @@ asm void func_8012C914(HSD_GObj*)
 /* 8012C940 00129520  83 A3 00 2C */	lwz r29, 0x2c(r3)
 /* 8012C944 00129524  FC 60 08 90 */	fmr f3, f1
 /* 8012C948 00129528  C0 42 A0 48 */	lfs f2, lbl_804D9A28
-/* 8012C94C 0012952C  4B F3 CA 61 */	bl Fighter_ActionStateChange_800693AC
+/* 8012C94C 0012952C  4B F3 CA 61 */	bl Fighter_ChangeMotionState
 /* 8012C950 00129530  7F E3 FB 78 */	mr r3, r31
 /* 8012C954 00129534  4B F4 22 51 */	bl func_8006EBA4
 /* 8012C958 00129538  38 00 00 FE */	li r0, 0xfe

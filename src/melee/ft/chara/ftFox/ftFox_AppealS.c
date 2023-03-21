@@ -70,8 +70,8 @@ static inline bool ftFox_AppealS_GetLR(f32 x1, f32 x2)
 }
 
 static s32 ASID_AppealS[2][3] = {
-    { AS_FOX_APPEALS_START_R, AS_FOX_APPEALS_R, AS_FOX_APPEALS_END_R },
-    { AS_FOX_APPEALS_START_L, AS_FOX_APPEALS_L, AS_FOX_APPEALS_END_L }
+    { MS_FOX_APPEALS_START_R, MS_FOX_APPEALS_R, MS_FOX_APPEALS_END_R },
+    { MS_FOX_APPEALS_START_L, MS_FOX_APPEALS_L, MS_FOX_APPEALS_END_L }
 };
 
 void ftFox_AppealS_Action(HSD_GObj* gobj)
@@ -90,8 +90,8 @@ void ftFox_AppealS_Action(HSD_GObj* gobj)
     actionDir = fp->mv.fx.AppealS.facingDir;
     animCount = fp->mv.fx.AppealS.animCount;
 
-    Fighter_ActionStateChange_800693AC(
-        gobj, ASID_AppealS[actionDir][animCount], 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ASID_AppealS[actionDir][animCount], 0,
+                              NULL, 0.0f, 1.0f, 0.0f);
 }
 
 /// Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback
@@ -139,11 +139,10 @@ void ftFox_AppealS_Anim(HSD_GObj* gobj)
             return;
         }
 
-        Fighter_ActionStateChange_800693AC(
-            gobj,
-            ASID_AppealS[fp->mv.fx.AppealS.facingDir]
-                        [fp->mv.fx.AppealS.animCount],
-            0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj,
+                                  ASID_AppealS[fp->mv.fx.AppealS.facingDir]
+                                              [fp->mv.fx.AppealS.animCount],
+                                  0, NULL, 0.0f, 1.0f, 0.0f);
     }
 }
 

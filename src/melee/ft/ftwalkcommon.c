@@ -73,8 +73,8 @@ void ftWalkCommon_800DFCA4(HSD_GObj* gobj, s32 arg1, s32 arg2, f32 arg8,
     fp->mv.co.walk.x20 = argF;
     walking_state = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
     new_action_state = arg1 + walking_state;
-    Fighter_ActionStateChange_800693AC(gobj, new_action_state, arg2, 0, arg8,
-                                       1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, new_action_state, arg2, 0, arg8, 1.0f,
+                              0.0f);
     func_8006EBA4(gobj);
     fp->mv.co.walk.x0 = fp->xEC_ground_vel;
     fp->mv.co.walk.x4 = arg1;

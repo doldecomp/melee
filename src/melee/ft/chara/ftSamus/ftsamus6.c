@@ -80,14 +80,13 @@ void ftSamus_SpecialLw_StartAction(HSD_GObj* gobj)
 
     fp->xEC_ground_vel *= samus_attr->x6C;
     if (fp->action_id == 0x28) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x163, 0, NULL, 3.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 3.0f, 1.0f, 0.0f);
         ftSamus_SpecialLw_StartAction_inner(gobj);
         fp->x2204_ftcmd_var1 = 2;
         ftSamus_8012B5F0(gobj);
         return;
     }
-    Fighter_ActionStateChange_800693AC(gobj, 0x163, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ftSamus_SpecialLw_StartAction_inner(gobj);
 }
@@ -105,7 +104,7 @@ void ftSamus_SpecialAirLw_StartAction(HSD_GObj* gobj)
     fp->x80_self_vel.x *= samus_attr->x70;
     fp->x80_self_vel.y = samus_attr->x58;
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x164, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x164, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ftSamus_SpecialLw_StartAction_inner(gobj);
 }
@@ -410,8 +409,8 @@ void ftSamus_8012B570(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x164, 0x0C4C509C, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftSamus_UnkSetStateAndCb(gobj);
 }
 
@@ -421,8 +420,8 @@ void ftSamus_8012B5F0(HSD_GObj* gobj)
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     fp->x80_self_vel.y = samus_attr->x54;
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x164, 0x0C4C509C, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->cb.x21BC_callback_Accessory4 = ftSamus_8012ADF0;
 }
 
@@ -430,7 +429,7 @@ void ftSamus_8012B668(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x163, 0x0C4C509C, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x163, 0x0C4C509C, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftSamus_UnkSetStateAndCb(gobj);
 }

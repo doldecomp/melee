@@ -61,10 +61,10 @@ void func_8014FE5C(HSD_GObj* gobj)
         fp->fv.mh.x2240_pos = fp->xB0_pos;
     }
     if (fp->fv.mh.x2258 == 389) {
-        Fighter_ActionStateChange_800693AC(
-            gobj, 341, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 341, 0, 0, fp->x894_currentAnimFrame,
+                                  1.0f, 0.0f);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
     }
     fp->fv.mh.x2258 = 341;
 }
@@ -78,10 +78,10 @@ void func_8014FF1C(HSD_GObj* gobj)
         fp->fv.mh.x2240_pos = fp->xB0_pos;
     }
     if (fp->fv.mh.x2258 == 390) {
-        Fighter_ActionStateChange_800693AC(
-            gobj, 342, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 342, 0, 0, fp->x894_currentAnimFrame,
+                                  1.0f, 0.0f);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 342, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 342, 0, 0, 0.0f, 1.0f, 0.0f);
     }
     fp->fv.mh.x2258 = 342;
 }
@@ -102,11 +102,10 @@ void lbl_8014FFDC(HSD_GObj* gobj)
             r31_fp->fv.mh.x2240_pos = r31_fp->xB0_pos;
         }
         if (r31_fp->fv.mh.x2258 == 0x186) {
-            Fighter_ActionStateChange_800693AC(
+            Fighter_ChangeMotionState(
                 gobj, 0x156, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
         } else {
-            Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, 0.0f, 1.0f,
-                                               0.0f);
+            Fighter_ChangeMotionState(gobj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
         }
         r31_fp->fv.mh.x2258 = 0x156;
         return;
@@ -117,11 +116,10 @@ void lbl_8014FFDC(HSD_GObj* gobj)
         r31_fp->fv.mh.x2240_pos = r31_fp->xB0_pos;
     }
     if (r31_fp->fv.mh.x2258 == 0x185) {
-        Fighter_ActionStateChange_800693AC(
-            gobj, 0x155, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 0x155, 0, 0,
+                                  r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x155, 0, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     }
     r31_fp->fv.mh.x2258 = 0x155;
 }
@@ -144,10 +142,10 @@ void func_80150144(HSD_GObj* gobj)
         fp_1->fv.mh.x2240_pos = fp_1->xB0_pos;
     }
     if (fp_1->fv.mh.x2258 == 389) {
-        Fighter_ActionStateChange_800693AC(
-            gobj, 341, 0, 0, fp_1->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 341, 0, 0, fp_1->x894_currentAnimFrame,
+                                  1.0f, 0.0f);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 341, 0, 0, 0.0f, 1.0f, 0.0f);
     }
     fp_1->fv.mh.x2258 = 341;
 }
@@ -190,11 +188,10 @@ inline void lbl_80150230_inline_1(HSD_GObj* gobj)
         fp->fv.mh.x2240_pos = fp->xB0_pos;
     }
     if (fp->fv.mh.x2258 == 0x186) {
-        Fighter_ActionStateChange_800693AC(
-            gobj, 0x156, 0, 0, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(gobj, 0x156, 0, 0, fp->x894_currentAnimFrame,
+                                  1.0f, 0.0f);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x156, 0, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
     }
     fp->fv.mh.x2258 = 0x156;
 }

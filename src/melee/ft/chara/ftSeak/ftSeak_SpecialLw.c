@@ -23,10 +23,10 @@ void ftSeak_8011412C(HSD_GObj* fighterObj)
 }
 #endif
 
-// Sheik_AS_361_Transform_Grounded
+// Sheik_MS_361_Transform_Grounded
 // 80114160 - 80114224 (0xC4 bytes)
 
-// Sheik_AS_363_Transform_Aerial
+// Sheik_MS_363_Transform_Aerial
 // 80114224 - 801142E8 (0xC4 bytes)
 
 // Animation_SheikTransformStartGround
@@ -70,5 +70,5 @@ void ftSeak_8011412C(HSD_GObj* fighterObj)
 
 // 801146EC - 80114758 (0x6C bytes)
 
-// AS_SheikFinishTransformation
+// MS_SheikFinishTransformation
 // 80114758 - 801147C0 (0x68 bytes)

@@ -46,8 +46,8 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* gobj)
 
     resetCmdVarsGround(gobj);
 
-    Fighter_ActionStateChange_800693AC(gobj, ftCaptain_AS_SpecialS_Start, 0,
-                                       NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialS_Start, 0, NULL, 0, 1,
+                              0);
 
     setCallbacks(gobj);
     func_8006EBA4(gobj);
@@ -86,8 +86,8 @@ static inline void setupAirStart(HSD_GObj* gobj)
         vars[0] = vars[1] = vars[2] = vars[3] = 0;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, ftCaptain_AS_SpecialAirS_Start, 0,
-                                       NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialAirS_Start, 0, NULL, 0,
+                              1, 0);
 
     setCallbacks(gobj);
     func_8006EBA4(gobj);
@@ -122,7 +122,7 @@ void ftCaptain_SpecialAirS_StartAction(HSD_GObj* gobj)
     func_8007D60C(fp);
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags =
+static Fighter_MotionStateChangeFlags const transition_flags =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim |
     FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
@@ -135,8 +135,8 @@ static void onDetectGround(HSD_GObj* gobj)
     ftCaptainAttributes* sa = getFtSpecialAttrsD(fp);
 
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, ftCaptain_AS_SpecialS,
-                                       transition_flags, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialS, transition_flags,
+                              NULL, 0, 1, 0);
     setCallbacks(gobj);
 
     {
@@ -150,8 +150,8 @@ static void onDetectGround(HSD_GObj* gobj)
 static void onDetectAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ActionStateChange_800693AC(gobj, ftCaptain_AS_SpecialAirS,
-                                       transition_flags, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftCaptain_MS_SpecialAirS, transition_flags,
+                              NULL, 0, 1, 0);
     setCallbacks(gobj);
     fp->x80_self_vel.z = 0;
 }
@@ -168,23 +168,23 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
 
         if (fp->x20AC->classifier == HSD_GOBJ_CLASS_FIGHTER) {
             switch (fp->action_id) {
-            case ftCaptain_AS_SpecialS_Start: {
+            case ftCaptain_MS_SpecialS_Start: {
                 onDetectGround(gobj);
                 break;
             }
 
-            case ftCaptain_AS_SpecialAirS_Start:
+            case ftCaptain_MS_SpecialAirS_Start:
                 onDetectAir(gobj);
                 break;
             }
         } else if (fp->x20AC->classifier == HSD_GOBJ_CLASS_ITEM) {
             if (itGetKind(detected_gobj) < It_Kind_BombHei) {
                 switch (fp->action_id) {
-                case ftCaptain_AS_SpecialS_Start:
+                case ftCaptain_MS_SpecialS_Start:
                     onDetectGround(gobj);
                     break;
 
-                case ftCaptain_AS_SpecialAirS_Start:
+                case ftCaptain_MS_SpecialAirS_Start:
                     onDetectAir(gobj);
                     break;
                 }
@@ -195,11 +195,11 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
                        itGetKind(detected_gobj) == Pokemon_Random)
             {
                 switch (fp->action_id) {
-                case ftCaptain_AS_SpecialS_Start:
+                case ftCaptain_MS_SpecialS_Start:
                     onDetectGround(gobj);
                     break;
 
-                case ftCaptain_AS_SpecialAirS_Start:
+                case ftCaptain_MS_SpecialAirS_Start:
                     onDetectAir(gobj);
                     break;
                 }

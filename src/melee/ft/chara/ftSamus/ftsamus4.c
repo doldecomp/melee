@@ -19,12 +19,10 @@ void ftSamus_SpecialS_StartAction(HSD_GObj* gobj)
     fp->xEC_ground_vel /= samus_attr->x2C;
     fp->x80_self_vel.y = 0.0f;
     if (fp->x673 < samus_attr->x28) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x15E, 0, NULL, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x15E, 0, NULL, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0, NULL, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x15D, 0, NULL, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }
     ftSamus_ClearThrowFlagsUnk(gobj);
@@ -36,12 +34,10 @@ void ftSamus_SpecialAirS_StartAction(HSD_GObj* gobj)
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     fp->x80_self_vel.x /= samus_attr->x2C;
     if (fp->x673 < samus_attr->x28) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x160, 0, NULL, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x160, 0, NULL, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     } else {
-        Fighter_ActionStateChange_800693AC(gobj, 0x15F, 0, NULL, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x15F, 0, NULL, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }
     ftSamus_ClearThrowFlagsUnk(gobj);

@@ -8,22 +8,22 @@ typedef struct ftCaptainAttributes ftCaptainAttributes;
 typedef union ftCaptain_MotionVars ftCaptain_MotionVars;
 
 typedef enum ftCaptainAction {
-    ftCaptain_AS_Swing42_Sword = ftCo_AS_Count,
-    ftCaptain_AS_Swing42_2,
-    ftCaptain_AS_Swing42_3,
-    ftCaptain_AS_Swing42_4,
-    ftCaptain_AS_Swing42_5,
-    ftCaptain_AS_Swing42_6,
-    ftCaptain_AS_SpecialN,
-    ftCaptain_AS_SpecialAirN,
-    ftCaptain_AS_SpecialS_Start,
-    ftCaptain_AS_SpecialS,
-    ftCaptain_AS_SpecialAirS_Start,
-    ftCaptain_AS_SpecialAirS,
-    ftCaptain_AS_SpecialHi,
-    ftCaptain_AS_SpecialAirHi,
-    ftCaptain_AS_SpecialHi_Catch,
-    ftCaptain_AS_SpecialHi_Throw,
+    ftCaptain_MS_Swing42_Sword = ftCo_MS_Count,
+    ftCaptain_MS_Swing42_2,
+    ftCaptain_MS_Swing42_3,
+    ftCaptain_MS_Swing42_4,
+    ftCaptain_MS_Swing42_5,
+    ftCaptain_MS_Swing42_6,
+    ftCaptain_MS_SpecialN,
+    ftCaptain_MS_SpecialAirN,
+    ftCaptain_MS_SpecialS_Start,
+    ftCaptain_MS_SpecialS,
+    ftCaptain_MS_SpecialAirS_Start,
+    ftCaptain_MS_SpecialAirS,
+    ftCaptain_MS_SpecialHi,
+    ftCaptain_MS_SpecialAirHi,
+    ftCaptain_MS_SpecialHi_Catch,
+    ftCaptain_MS_SpecialHi_Throw,
 } ftCaptainAction;
 
 #endif

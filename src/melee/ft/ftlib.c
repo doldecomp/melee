@@ -478,9 +478,9 @@ bool func_80086A18(HSD_GObj* gobj)
     bool result = false;
 
     switch (fp->action_id) {
-    case ftCo_AS_GuardOn:
-    case ftCo_AS_Guard:
-    case ftCo_AS_GuardSetOff:
+    case ftCo_MS_GuardOn:
+    case ftCo_MS_Guard:
+    case ftCo_MS_GuardSetOff:
         result = true;
     }
 
@@ -688,10 +688,10 @@ bool func_80086FA8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     switch (fp->action_id) {
-    case ftCo_AS_SwordSwing1:
-    case ftCo_AS_SwordSwing3:
-    case ftCo_AS_SwordSwing4:
-    case ftCo_AS_SwordSwingDash:
+    case ftCo_MS_SwordSwing1:
+    case ftCo_MS_SwordSwing3:
+    case ftCo_MS_SwordSwing4:
+    case ftCo_MS_SwordSwingDash:
         return true;
     }
 
@@ -792,7 +792,7 @@ void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
 bool func_80087284(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ftCo_AS_LightThrowF4)
+    if (fp->action_id >= ftCo_MS_LightThrowF4)
         return true;
 
     return false;
@@ -838,8 +838,8 @@ s32 func_8008731C(HSD_GObj* gobj)
 bool func_8008732C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ftCo_AS_DeadDown &&
-        fp->action_id <= ftCo_AS_DeadUpFallHitCameraIce)
+    if (fp->action_id >= ftCo_MS_DeadDown &&
+        fp->action_id <= ftCo_MS_DeadUpFallHitCameraIce)
     {
         return true;
     }
@@ -850,8 +850,8 @@ bool func_8008732C(HSD_GObj* gobj)
 bool func_80087354(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ftCo_AS_DeadUp &&
-        fp->action_id <= ftCo_AS_DeadUpFallHitCameraIce)
+    if (fp->action_id >= ftCo_MS_DeadUp &&
+        fp->action_id <= ftCo_MS_DeadUpFallHitCameraIce)
     {
         return true;
     }
@@ -862,8 +862,8 @@ bool func_80087354(HSD_GObj* gobj)
 bool func_8008737C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ftCo_AS_DeadUpStar &&
-        fp->action_id <= ftCo_AS_DeadUpStarIce)
+    if (fp->action_id >= ftCo_MS_DeadUpStar &&
+        fp->action_id <= ftCo_MS_DeadUpStarIce)
         return true;
 
     return false;
@@ -872,8 +872,8 @@ bool func_8008737C(HSD_GObj* gobj)
 bool func_800873A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ftCo_AS_DeadUpFall &&
-        fp->action_id <= ftCo_AS_DeadUpFallHitCameraIce)
+    if (fp->action_id >= ftCo_MS_DeadUpFall &&
+        fp->action_id <= ftCo_MS_DeadUpFallHitCameraIce)
         return true;
 
     return false;
@@ -882,8 +882,8 @@ bool func_800873A4(HSD_GObj* gobj)
 bool func_800873CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ftCo_AS_Rebirth &&
-        fp->action_id <= ftCo_AS_RebirthWait)
+    if (fp->action_id >= ftCo_MS_Rebirth &&
+        fp->action_id <= ftCo_MS_RebirthWait)
         return true;
 
     return false;
@@ -892,7 +892,7 @@ bool func_800873CC(HSD_GObj* gobj)
 bool func_800873F4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id >= ftCo_AS_Entry && fp->action_id <= ftCo_AS_EntryEnd)
+    if (fp->action_id >= ftCo_MS_Entry && fp->action_id <= ftCo_MS_EntryEnd)
         return true;
 
     return false;

@@ -21,7 +21,7 @@ void ftDonkey_SpecialHi_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x17D, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x17D, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftDonkey_SetCallbacks_SpecialHi(gobj);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -45,7 +45,7 @@ void ftDonkey_SpecialAirHi_StartAction(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x17E, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x17E, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftDonkey_SetCallbacks_SpecialHi(gobj);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -128,9 +128,8 @@ void ftDonkey_8010FE60(HSD_GObj* gobj)
 
     if (!func_80082708(gobj)) {
         func_8007D60C(fp);
-        Fighter_ActionStateChange_800693AC(gobj, 0x17E, 0x0C4C5080, NULL,
-                                           fp->x894_currentAnimFrame, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x17E, 0x0C4C5080, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialHi(gobj);
         func_8007D440(fp,
                       donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
@@ -150,9 +149,8 @@ void ftDonkey_8010FF14(HSD_GObj* gobj)
     if (fp->x80_self_vel.y >= 0.0f) {
         if (func_80081D0C(gobj)) {
             func_8007D7FC(fp);
-            Fighter_ActionStateChange_800693AC(gobj, 0x17D, 0x0C4C5080, NULL,
-                                               fp->x894_currentAnimFrame, 1.0f,
-                                               0.0f);
+            Fighter_ChangeMotionState(gobj, 0x17D, 0x0C4C5080, NULL,
+                                      fp->x894_currentAnimFrame, 1.0f, 0.0f);
             ftDonkey_SetCallbacks_SpecialHi(gobj);
             func_8007CC78(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
@@ -160,9 +158,8 @@ void ftDonkey_8010FF14(HSD_GObj* gobj)
     } else {
         if (EnvColl_CheckGroundAndLedge(gobj, 0)) {
             func_8007D7FC(fp);
-            Fighter_ActionStateChange_800693AC(gobj, 0x17D, 0x0C4C5080, NULL,
-                                               fp->x894_currentAnimFrame, 1.0f,
-                                               0.0f);
+            Fighter_ChangeMotionState(gobj, 0x17D, 0x0C4C5080, NULL,
+                                      fp->x894_currentAnimFrame, 1.0f, 0.0f);
             ftDonkey_SetCallbacks_SpecialHi(gobj);
             func_8007CC78(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);

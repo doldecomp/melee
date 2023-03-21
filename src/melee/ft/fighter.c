@@ -67,8 +67,8 @@ extern fn_ptr_t lbl_803C10D0[FTKIND_MAX];
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
 extern ftData* gFtDataList[FTKIND_MAX];
-extern MotionState ActionStateList[341];
-extern MotionState* ActionStateTableByCharacter[FTKIND_MAX];
+extern MotionState MotionStateList[341];
+extern MotionState* MotionStateTableByCharacter[FTKIND_MAX];
 
 extern s8 lbl_803C26FC[FTKIND_MAX];
 
@@ -714,8 +714,8 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
     fp->x2CC = 0;
     fp->x2D0 = 0;
     fp->x18 = 0x155;
-    fp->x1C_actionStateList = ActionStateList;
-    fp->x20_actionStateList = ActionStateTableByCharacter[fp->x4_fighterKind];
+    fp->x1C_actionStateList = MotionStateList;
+    fp->x20_actionStateList = MotionStateTableByCharacter[fp->x4_fighterKind];
     fp->x24 = fp->x10C_ftData->xC;
     fp->x28 = fp->x10C_ftData->x10;
 
@@ -910,10 +910,9 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     return gobj;
 }
 
-void Fighter_ActionStateChange_800693AC(HSD_GObj* gobj,
-                                        s32 new_action_state_index, s32 arg2,
-                                        HSD_GObj* otherObj, f32 arg8, f32 arg9,
-                                        f32 argA)
+void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_action_state_index,
+                               s32 arg2, HSD_GObj* otherObj, f32 arg8,
+                               f32 arg9, f32 argA)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);

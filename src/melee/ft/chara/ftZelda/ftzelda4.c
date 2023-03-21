@@ -85,26 +85,26 @@ void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013ADB4;
 }
 
-// Zelda_AS_355_Transform_Grounded
+// Zelda_MS_355_Transform_Grounded
 // 8013AEE0 - 8013AFA4 (0xC4 bytes)
 // https://decomp.me/scratch/jZJgg (with helper)
 // https://decomp.me/scratch/Lw6fO (single function)
 void ftZelda_SpecialLw_StartAction(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 0x163, 0, NULL, 0.0f, 1.0, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 0.0f, 1.0, 0.0f);
 
     func_8006EBA4(gobj);
 
     ftZelda_SpecialLw_StartAction_Helper(gobj);
 }
 
-// Zelda_AS_357_Transform_Aerial
+// Zelda_MS_357_Transform_Aerial
 // 8013AFA4 - 8013B068 (0xC4 bytes)
 // For a scratch using helper function, see the above function.
 // https://decomp.me/scratch/8W7ZF (single function)
 void ftZelda_SpecialAirLw_StartAction(HSD_GObj* gobj)
 {
-    Fighter_ActionStateChange_800693AC(gobj, 0x165, 0, NULL, 0.0f, 1.0, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x165, 0, NULL, 0.0f, 1.0, 0.0f);
 
     func_8006EBA4(gobj);
 
@@ -195,8 +195,8 @@ void ftZelda_8013B1CC(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x165, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 0x165, 0x0C4C508E, NULL,
+                              fp->x894_currentAnimFrame, 1.0, 0);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013ADB4;
 }
 
@@ -207,8 +207,8 @@ void ftZelda_8013B238(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x163, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 0x163, 0x0C4C508E, NULL,
+                              fp->x894_currentAnimFrame, 1.0, 0);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013ADB4;
 }
 
@@ -288,8 +288,8 @@ void ftZelda_8013B400(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x166, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 0x166, 0x0C4C508E, NULL,
+                              fp->x894_currentAnimFrame, 1.0, 0);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AE30;
 }
 
@@ -301,12 +301,12 @@ void ftZelda_8013B46C(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x164, 0x0C4C508E, NULL,
-                                       fp->x894_currentAnimFrame, 1.0, 0);
+    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C508E, NULL,
+                              fp->x894_currentAnimFrame, 1.0, 0);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AE30;
 }
 
-// AS_ZeldaFinishTransformation
+// MS_ZeldaFinishTransformation
 // 8013B4D8 - 8013B540 (0x68 bytes)
 // https://decomp.me/scratch/wpEbJ
 void ftZelda_8013B4D8(HSD_GObj* gobj)
@@ -326,8 +326,7 @@ void ftZelda_8013B4D8(HSD_GObj* gobj)
         else
             asid = 0x166;
 
-        Fighter_ActionStateChange_800693AC(gobj, asid, 0, NULL, sa->x80, 1.0,
-                                           0);
+        Fighter_ChangeMotionState(gobj, asid, 0, NULL, sa->x80, 1.0, 0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AE30;
 }

@@ -14,7 +14,7 @@ void ftDonkey_SpecialS_StartAction(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x17B, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x17B, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     Fighter_UnsetCmdVar0(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010E0CC;
@@ -26,7 +26,7 @@ void ftDonkey_SpecialAirS_StartAction(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     fp->x80_self_vel.x /= donkey_attr->SpecialS.x3C_MIN_STICK_X_MOMENTUM;
     fp->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(gobj, 0x17C, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x17C, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     Fighter_UnsetCmdVar0(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010E148;
@@ -92,8 +92,8 @@ void ftDonkey_8010E464(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x17C, 0x0C4C508A, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x17C, 0x0C4C508A, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     if (fp->x2219_flag.bits.b0 == 1) {
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
@@ -104,8 +104,8 @@ void ftDonkey_8010E4EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0x17B, 0x0C4C508A, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x17B, 0x0C4C508A, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     if (fp->x2219_flag.bits.b0 == 1) {
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

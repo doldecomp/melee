@@ -19,7 +19,7 @@ void func_80154A78(HSD_GObj* gobj)
     fp = gobj->user_data;
     attr = fp->x10C_ftData->ext_attr;
     fp->x2204_ftcmd_var1 = 0;
-    Fighter_ActionStateChange_800693AC(gobj, 0x17A, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x17A, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     fp->x2222_flag.bits.b2 = 1;
     func_8007E2F4(fp, 0x1FFU);

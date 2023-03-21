@@ -68,7 +68,7 @@ void func_80081370(HSD_GObj* gobj)
     }
     func_8007D780(fp);
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(gobj, 0xFC, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0xFC, 0, NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     func_8007D5D4(fp);
     func_8007EFC0(fp, p_ftCommonData->x5F0);

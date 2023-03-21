@@ -48,8 +48,8 @@ void func_801542E0(HSD_GObj* gobj)
 {
     Fighter* r31_fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* r30_attributes = r31_fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(
-        gobj, 0x175, 0, 0, r31_fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x175, 0, 0, r31_fp->x894_currentAnimFrame,
+                              1.0f, 0.0f);
     ftAnim_SetAnimRate(gobj, r30_attributes->x110_pos.y);
     r31_fp->mv.mh.unk0.x8 = (s32) r30_attributes->x110_pos.x;
 }
@@ -71,8 +71,7 @@ void lbl_80154360(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, 0, 0.0f, 1.0f,
-                                           0.0f);
+        Fighter_ChangeMotionState(gobj, 0x175, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }
 }
@@ -161,7 +160,7 @@ void lbl_8015459C(HSD_GObj* gobj)
 void func_801545A0(HSD_GObj* gobj)
 {
     Fighter* temp_r31 = GET_FIGHTER(gobj);
-    Fighter_ActionStateChange_800693AC(gobj, 0x176, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x176, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     func_8007E2D0(temp_r31, 0x80U, &lbl_80154A2C, 0U, &lbl_80155A58);
     temp_r31->mv.mh.unk0.x20 = 0;
@@ -215,7 +214,7 @@ void func_801546D8(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     // temp_f1 = ;
     temp_r30 = r31_fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x17D, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x17D, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     r31_fp->mv.mh.unk0.xC.x = temp_r30->x30_pos2.x;
     r31_fp->mv.mh.unk0.xC.y = temp_r30->x30_pos2.y;
@@ -269,7 +268,7 @@ void func_8015483C(HSD_GObj* gobj)
 
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
-    Fighter_ActionStateChange_800693AC(gobj, 0x177, 0, 0, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, 0x177, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     r31_fp->mv.mh.unk0.x24 = r30_attributes->x120;
     r31_fp->x2200_ftcmd_var0 = 1;

@@ -41,7 +41,7 @@ void ftFox_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
 }
 
 // 0x800E5D90
-// https://decomp.me/scratch/DRgo9 // Fox & Falco's Blaster OnActionStateChange
+// https://decomp.me/scratch/DRgo9 // Fox & Falco's Blaster OnMotionStateChange
 // function
 void ftFox_SpecialN_OnChangeAction(HSD_GObj* gobj)
 {
@@ -77,19 +77,19 @@ s32 ftFox_GetBlasterAction(HSD_GObj* gobj)
         if (fp != NULL) {
             s32 currASID = fp->action_id;
             switch (currASID) {
-            case AS_FOX_SPECIALN_START:
-            case AS_FOX_SPECIALN_LOOP:
-            case AS_FOX_SPECIALN_END:
-            case AS_FOX_SPECIALAIRN_START:
-            case AS_FOX_SPECIALAIRN_LOOP:
-            case AS_FOX_SPECIALAIRN_END:
-                ASID = currASID - AS_FOX_SPECIALN_START;
+            case MS_FOX_SPECIALN_START:
+            case MS_FOX_SPECIALN_LOOP:
+            case MS_FOX_SPECIALN_END:
+            case MS_FOX_SPECIALAIRN_START:
+            case MS_FOX_SPECIALAIRN_LOOP:
+            case MS_FOX_SPECIALAIRN_END:
+                ASID = currASID - MS_FOX_SPECIALN_START;
                 break;
 
-            case ftCo_AS_ThrowB:
-            case ftCo_AS_ThrowHi:
-            case ftCo_AS_ThrowLw:
-                ASID = currASID - ftCo_AS_CatchDash;
+            case ftCo_MS_ThrowB:
+            case ftCo_MS_ThrowHi:
+            case ftCo_MS_ThrowLw:
+                ASID = currASID - ftCo_MS_CatchDash;
             }
         }
     }
@@ -105,15 +105,15 @@ bool ftFox_CheckBlasterAction(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         s32 ASID = fp->action_id;
         switch (ASID) {
-        case AS_FOX_SPECIALN_START:
-        case AS_FOX_SPECIALN_LOOP:
-        case AS_FOX_SPECIALN_END:
-        case AS_FOX_SPECIALAIRN_START:
-        case AS_FOX_SPECIALAIRN_LOOP:
-        case AS_FOX_SPECIALAIRN_END:
-        case ftCo_AS_ThrowB:
-        case ftCo_AS_ThrowHi:
-        case ftCo_AS_ThrowLw:
+        case MS_FOX_SPECIALN_START:
+        case MS_FOX_SPECIALN_LOOP:
+        case MS_FOX_SPECIALN_END:
+        case MS_FOX_SPECIALAIRN_START:
+        case MS_FOX_SPECIALAIRN_LOOP:
+        case MS_FOX_SPECIALAIRN_END:
+        case ftCo_MS_ThrowB:
+        case ftCo_MS_ThrowHi:
+        case ftCo_MS_ThrowLw:
 
             if (fp->x2070.x2071_b6 != false) {
                 return true;
@@ -242,8 +242,8 @@ void ftFox_SpecialN_StartAction(HSD_GObj* gobj)
 
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_FOX_SPECIALN_START, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALN_START, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
 
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -283,8 +283,8 @@ void ftFox_SpecialAirN_StartAction(
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
     HSD_GObj* blasterGObj;
 
-    Fighter_ActionStateChange_800693AC(gobj, AS_FOX_SPECIALAIRN_START, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRN_START, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
 
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -328,8 +328,8 @@ void ftFox_SpecialNStart_Anim(HSD_GObj* gobj)
         func_802AE538(fp->fv.fx.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(
-            gobj, AS_FOX_SPECIALN_LOOP,
+        Fighter_ChangeMotionState(
+            gobj, MS_FOX_SPECIALN_LOOP,
             (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx), NULL,
             0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(gobj);
@@ -355,18 +355,18 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((s32) temp_r28->mv.fx.SpecialN.isBlasterLoop == true) {
             temp_r28->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
-            Fighter_ActionStateChange_800693AC(
-                gobj, AS_FOX_SPECIALN_LOOP,
-                (FtStateChange_SkipUpdateAttackCount |
-                 FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
-                NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALN_LOOP,
+                                      (FtStateChange_SkipUpdateAttackCount |
+                                       FtStateChange_SkipUpdateModel |
+                                       FtStateChange_PreserveGfx),
+                                      NULL, 0.0f, 1.0f, 0.0f);
             temp_r28->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
             temp_r28->mv.fx.SpecialN.isBlasterLoop = false;
             func_802ADDD0(temp_r28->fv.fx.x222C_blasterGObj, 1);
         } else {
             HSD_GObj* temp;
-            Fighter_ActionStateChange_800693AC(
-                gobj, AS_FOX_SPECIALN_END,
+            Fighter_ChangeMotionState(
+                gobj, MS_FOX_SPECIALN_END,
                 (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
                 NULL, 0.0f, 1.0f, 0.0f);
             temp = temp_r28->fv.fx.x222C_blasterGObj;
@@ -486,8 +486,8 @@ void ftFox_SpecialAirNStart_Anim(HSD_GObj* gobj)
         func_802AE538(fp->fv.fx.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ActionStateChange_800693AC(
-            gobj, AS_FOX_SPECIALAIRN_LOOP,
+        Fighter_ChangeMotionState(
+            gobj, MS_FOX_SPECIALAIRN_LOOP,
             (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx), NULL,
             0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(gobj);
@@ -513,11 +513,11 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((s32) fp->mv.fx.SpecialN.isBlasterLoop == true) {
             fp->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
-            Fighter_ActionStateChange_800693AC(
-                gobj, AS_FOX_SPECIALAIRN_LOOP,
-                (FtStateChange_SkipUpdateAttackCount |
-                 FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
-                NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRN_LOOP,
+                                      (FtStateChange_SkipUpdateAttackCount |
+                                       FtStateChange_SkipUpdateModel |
+                                       FtStateChange_PreserveGfx),
+                                      NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
             fp->mv.fx.SpecialN.isBlasterLoop = false;
@@ -525,8 +525,8 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* gobj)
         } else {
             HSD_GObj* temp;
 
-            Fighter_ActionStateChange_800693AC(
-                gobj, AS_FOX_SPECIALAIRN_END,
+            Fighter_ChangeMotionState(
+                gobj, MS_FOX_SPECIALAIRN_END,
                 (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
                 NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(gobj);
@@ -823,9 +823,9 @@ void ftFox_Throw_Anim(HSD_GObj* gobj)
                     sp44.z = 0.0f;
                     sp50.z = 0.0f;
                     switch (ftGetAction(fp)) {
-                    case ftCo_AS_ThrowB:
-                    case ftCo_AS_ThrowHi:
-                    case ftCo_AS_ThrowLw:
+                    case ftCo_MS_ThrowB:
+                    case ftCo_MS_ThrowHi:
+                    case ftCo_MS_ThrowLw:
 
                         func_8029C6CC(atan2f(sp50.y - sp44.y, sp50.x - sp44.x),
                                       foxAttrs->x14_FOX_BLASTER_VEL, gobj,
@@ -842,8 +842,8 @@ void ftFox_Throw_Anim(HSD_GObj* gobj)
                     }
                     func_802AE1D0(fp->fv.fx.x222C_blasterGObj);
                     switch (ftGetAction(fp)) {
-                    case ftCo_AS_ThrowHi:
-                    case ftCo_AS_ThrowLw: {
+                    case ftCo_MS_ThrowHi:
+                    case ftCo_MS_ThrowLw: {
                         switch (func_800872A4(gobj)) {
                         case FTKIND_FOX:
                             func_80088148(fp, 0x1AE1DU, SFX_VOLUME_MAX,
@@ -857,7 +857,7 @@ void ftFox_Throw_Anim(HSD_GObj* gobj)
                     default:
                         break;
                     }
-                    case ftCo_AS_ThrowB:
+                    case ftCo_MS_ThrowB:
                         switch (func_800872A4(gobj)) {
                         case FTKIND_FOX:
                             func_80088148(fp, foxSFX[1.0f == fp->facing_dir],

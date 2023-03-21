@@ -9,7 +9,7 @@
 #include <stddef.h>
 #include <baselib/forward.h>
 
-static usize_t const states_count = ftMario_AS_Count - ftCo_AS_Count;
+static usize_t const states_count = ftMario_MS_Count - ftCo_MS_Count;
 extern MotionState as_table_mario[states_count];
 
 static usize_t const aux_states_count = 2;
