@@ -549,16 +549,16 @@ struct ftKirby_FighterVars {
     /* 0x222C */ s32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ UnkFlagStruct x2234;
-    /* 0x2235 */ u8 filler_x2235[3];
+    /* 0x2235 */ u8 x2235[3];
     /* 0x2238 */ u32 x2238;
     /* 0x223C */ u32 x223C;
     /* 0x2240 */ u32 x2240;
     /* 0x2244 */ u32 x2244;
     /* 0x2248 */ u32 x2248;
-    /* 0x224C */ u8 filler1[0x228C - 0x224C];
+    /* 0x224C */ u8 x224C[0x228C - 0x224C];
     /* 0x228C */ u32 x228C;
     /* 0x2290 */ u32 x2290;
-    /* 0x2294 */ u8 filler2[0x22C8 - 0x2294];
+    /* 0x2294 */ u8 x2294[0x22C8 - 0x2294];
     /* 0x22C8 */ s32 x22C8;
     /* 0x22CC */ s32 x22CC;
     /* 0x22D0 */ s32 x22D0;
@@ -596,14 +596,14 @@ struct ftSeak_FighterVars {
 };
 
 struct ftNess_FighterVars {
-    /* 0x222C */ HSD_GObj* x222C_yoyoGObj;
-    /* 0x2230 */ Vec3 x2230_yoyoHitboxPos;
+    /* 0x222C */ HSD_GObj* yoyo_gobj;
+    /* 0x2230 */ Vec3 yoyo_hitbox_pos;
     /* 0x223C */ f32 x223C;
-    /* 0x2240 */ HSD_GObj* x2240_flashGObj;
-    /* 0x2244 */ HSD_GObj* x2244_pkThunderGObj;
-    /* 0x2248 */ HSD_GObj* x2248_baseballBatGObj;
+    /* 0x2240 */ HSD_GObj* pkflash_gobj;
+    /* 0x2244 */ HSD_GObj* pkthunder_gobj;
+    /* 0x2248 */ HSD_GObj* bat_gobj;
     /// bool for PK Thunder GFX?
-    /* 0x224C */ u32 x224C_thunderGFX;
+    /* 0x224C */ u32 pkthunder_gfx;
 };
 
 struct ftPeach_FighterVars {
