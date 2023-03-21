@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTCOMMON_FORWARD_H
 #define MELEE_FT_CHARA_FTCOMMON_FORWARD_H
 
-typedef enum ftCommonAction {
+typedef enum ftCommon_MotionState {
     ftCo_MS_DeadDown,
     ftCo_MS_DeadLeft,
     ftCo_MS_DeadRight,
@@ -344,6 +344,6 @@ typedef enum ftCommonAction {
     ftCo_MS_ThrownCrazyHand,
     ftCo_MS_Barrel,
     ftCo_MS_Count
-} ftCommonAction;
+} ftCommon_MotionState;
 
 #endif

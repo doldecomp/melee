@@ -7,7 +7,7 @@
 typedef struct ftCaptainAttributes ftCaptainAttributes;
 typedef union ftCaptain_MotionVars ftCaptain_MotionVars;
 
-typedef enum ftCaptainAction {
+typedef enum ftCaptain_MotionState {
     ftCa_MS_Swing42_Sword = ftCo_MS_Count,
     ftCa_MS_Swing42_2,
     ftCa_MS_Swing42_3,
@@ -24,6 +24,6 @@ typedef enum ftCaptainAction {
     ftCa_MS_SpecialAirHi,
     ftCa_MS_SpecialHi_Catch,
     ftCa_MS_SpecialHi_Throw,
-} ftCaptainAction;
+} ftCaptain_MotionState;
 
 #endif
