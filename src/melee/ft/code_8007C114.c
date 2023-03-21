@@ -1,63 +1,31 @@
 #include <melee/ft/code_8007C114.h>
 
 #include <melee/ft/fighter.h>
+#include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
 #include <melee/it/item2.h>
 #include <melee/lb/lbunknown_001.h>
 #include <placeholder.h>
 
 #ifdef MWERKS_GEKKO
-
 static f32 const lbl_804D8320 = 0.0F;
 static f32 const lbl_804D8324 = 1.0F;
-
-extern unk_t func_800C555C();
+#endif
 
 void func_8007C224(HSD_GObj* fighter_gobj);
 
-#pragma push
-asm void func_8007C114(HSD_GObj* fighter_gobj)
-{ // clang-format off
-    nofralloc
-/* 8007C114 00078CF4  7C 08 02 A6 */	mflr r0
-/* 8007C118 00078CF8  90 01 00 04 */	stw r0, 4(r1)
-/* 8007C11C 00078CFC  94 21 FF E8 */	stwu r1, -0x18(r1)
-/* 8007C120 00078D00  93 E1 00 14 */	stw r31, 0x14(r1)
-/* 8007C124 00078D04  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 8007C128 00078D08  7C 7E 1B 78 */	mr r30, r3
-/* 8007C12C 00078D0C  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 8007C130 00078D10  80 7F 19 74 */	lwz r3, 0x1974(r31)
-/* 8007C134 00078D14  28 03 00 00 */	cmplwi r3, 0
-/* 8007C138 00078D18  41 82 00 1C */	beq lbl_8007C154
-/* 8007C13C 00078D1C  48 1E F1 C5 */	bl itGetKind
-/* 8007C140 00078D20  2C 03 00 1C */	cmpwi r3, 0x1c
-/* 8007C144 00078D24  41 82 00 08 */	beq lbl_8007C14C
-/* 8007C148 00078D28  48 00 00 0C */	b lbl_8007C154
-lbl_8007C14C:
-/* 8007C14C 00078D2C  7F C3 F3 78 */	mr r3, r30
-/* 8007C150 00078D30  48 04 94 0D */	bl func_800C555C
-lbl_8007C154:
-/* 8007C154 00078D34  88 1F 22 19 */	lbz r0, 0x2219(r31)
-/* 8007C158 00078D38  38 60 00 00 */	li r3, 0
-/* 8007C15C 00078D3C  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
-/* 8007C160 00078D40  98 1F 22 19 */	stb r0, 0x2219(r31)
-/* 8007C164 00078D44  80 01 00 1C */	lwz r0, 0x1c(r1)
-/* 8007C168 00078D48  83 E1 00 14 */	lwz r31, 0x14(r1)
-/* 8007C16C 00078D4C  83 C1 00 10 */	lwz r30, 0x10(r1)
-/* 8007C170 00078D50  38 21 00 18 */	addi r1, r1, 0x18
-/* 8007C174 00078D54  7C 08 03 A6 */	mtlr r0
-/* 8007C178 00078D58  4E 80 00 20 */	blr
-} // clang-format on
-#pragma pop
-
-#else
-
 void func_8007C114(HSD_GObj* fighter_gobj)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = fighter_gobj->user_data;
+    if (fp->x1974_heldItem != NULL) {
+        switch (itGetKind(fp->x1974_heldItem)) {
+        case It_Kind_Hammer:
+            func_800C555C(fighter_gobj);
+            break;
+        }
+    }
+    fp->x2219_flag.bits.b4 = 0;
 }
-
-#endif
 
 #ifdef MWERKS_GEKKO
 
