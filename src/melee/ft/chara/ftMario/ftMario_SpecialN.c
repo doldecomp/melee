@@ -169,7 +169,6 @@ void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
 }
 
-// 0x800E11E0
 void ftMario_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

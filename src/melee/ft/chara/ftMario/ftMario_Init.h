@@ -28,27 +28,6 @@ void ftMario_OnKnockbackExit(HSD_GObj*);
 void ftMario_func_800E0CAC(s32, s32*, s32*);
 UNK_T ftMario_func_800E0CE0(enum_t);
 
-// ftmario3
-void ftMario_SpecialS_CreateCape(HSD_GObj*);
-void ftMario_SpecialS_SetNULL(HSD_GObj*);
-void ftMario_SpecialS_RemoveCape(HSD_GObj*);
-void ftMario_SpecialS_EnterHitlag(HSD_GObj*);
-void ftMario_SpecialS_ExitHitlag(HSD_GObj*);
-void ftMario_SpecialS_ExitHitlag(HSD_GObj*);
-bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj*);
-void ftMario_SpecialS_StartAction(HSD_GObj*);
-void ftMario_SpecialAirS_StartAction(HSD_GObj*);
-void ftMario_SpecialS_Anim(HSD_GObj*);
-void ftMario_SpecialAirS_Anim(HSD_GObj*);
-void ftMario_SpecialS_IASA(HSD_GObj*);
-void ftMario_SpecialAirS_IASA(HSD_GObj*);
-void ftMario_SpecialS_Phys(HSD_GObj*);
-void ftMario_SpecialAirS_Phys(HSD_GObj*);
-void ftMario_SpecialS_Coll(HSD_GObj*);
-void ftMario_SpecialAirS_Coll(HSD_GObj*);
-void ftMario_SpecialS_GroundToAir(HSD_GObj*);
-void ftMario_SpecialAirS_AirToGround(HSD_GObj*);
-
 // ftmario4
 void ftMario_SpecialHi_StartAction(HSD_GObj*);
 void ftMario_SpecialAirHi_StartAction(HSD_GObj*);

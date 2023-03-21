@@ -104,7 +104,7 @@ bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
     return true;
 }
 
-void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, enum_t asid)
+static void changeAction(HSD_GObj* gobj, ftMario_ActionState asid)
 {
     Fighter_ActionStateChange_800693AC(gobj, asid, 0, NULL, 0, 1, 0);
     func_8006EBA4(gobj);
@@ -129,7 +129,7 @@ void ftMario_SpecialS_StartAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x80_self_vel.y = 0;
 
-    ftMario_SpecialS_ChangeAction(gobj, ftMario_AS_SpecialS);
+    changeAction(gobj, ftMario_AS_SpecialS);
 }
 
 void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
@@ -142,7 +142,7 @@ void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
     fp->x80_self_vel.x /= sa->specials.vel_x_decay;
-    ftMario_SpecialS_ChangeAction(gobj, ftMario_AS_SpecialAirS);
+    changeAction(gobj, ftMario_AS_SpecialAirS);
 }
 
 void ftMario_SpecialS_Anim(HSD_GObj* gobj)

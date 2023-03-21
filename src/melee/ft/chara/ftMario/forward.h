@@ -4,7 +4,7 @@
 #include "ft/forward.h"
 #include "ftMario/types.h"
 
-typedef enum ftMarioAction {
+typedef enum ftMario_ActionState {
     ftMario_AS_Unk_341 = ASID_MAX,
     ftMario_AS_Unk_342,
     ftMario_AS_SpecialN,
@@ -16,6 +16,6 @@ typedef enum ftMarioAction {
     ftMario_AS_SpecialLw,
     ftMario_AS_SpecialAirLw,
     ftMario_AS_Count,
-} ftMarioAction;
+} ftMario_ActionState;
 
 #endif
