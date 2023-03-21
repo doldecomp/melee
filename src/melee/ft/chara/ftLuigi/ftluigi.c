@@ -5,7 +5,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-MotionState ms_table_luigi[] = {
+MotionState ftLuigi_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftLuigi_SpecialN_Anim,
       ftLuigi_SpecialN_IASA, ftLuigi_SpecialN_Phys, ftLuigi_SpecialN_Coll,
       func_800761C8 },

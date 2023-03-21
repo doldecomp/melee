@@ -674,13 +674,13 @@ lbl_800EF0D0:
 .global func_800EF0E4
 func_800EF0E4:
 /* 800EF0E4 000EBCC4  7C 08 02 A6 */	mflr r0
-/* 800EF0E8 000EBCC8  3C C0 80 3D */	lis r6, ms_table_kirby@ha
+/* 800EF0E8 000EBCC8  3C C0 80 3D */	lis r6, ftKirby_MotionStateTable@ha
 /* 800EF0EC 000EBCCC  90 01 00 04 */	stw r0, 4(r1)
 /* 800EF0F0 000EBCD0  94 21 FF A0 */	stwu r1, -0x60(r1)
 /* 800EF0F4 000EBCD4  BE A1 00 34 */	stmw r21, 0x34(r1)
 /* 800EF0F8 000EBCD8  3A A4 00 00 */	addi r21, r4, 0
 /* 800EF0FC 000EBCDC  3B 45 00 00 */	addi r26, r5, 0
-/* 800EF100 000EBCE0  3B E6 83 68 */	addi r31, r6, ms_table_kirby@l
+/* 800EF100 000EBCE0  3B E6 83 68 */	addi r31, r6, ftKirby_MotionStateTable@l
 /* 800EF104 000EBCE4  83 A3 00 2C */	lwz r29, 0x2c(r3)
 /* 800EF108 000EBCE8  4B F8 50 41 */	bl func_80074148
 /* 800EF10C 000EBCEC  56 A3 10 3A */	slwi r3, r21, 2
@@ -925,9 +925,9 @@ func_800EF438:
 /* 800EF440 000EC020  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 800EF444 000EC024  BE C1 00 28 */	stmw r22, 0x28(r1)
 /* 800EF448 000EC028  82 E4 00 14 */	lwz r23, 0x14(r4)
-/* 800EF44C 000EC02C  3C 80 80 3D */	lis r4, ms_table_kirby@ha
+/* 800EF44C 000EC02C  3C 80 80 3D */	lis r4, ftKirby_MotionStateTable@ha
 /* 800EF450 000EC030  83 A3 00 2C */	lwz r29, 0x2c(r3)
-/* 800EF454 000EC034  3B E4 83 68 */	addi r31, r4, ms_table_kirby@l
+/* 800EF454 000EC034  3B E4 83 68 */	addi r31, r4, ftKirby_MotionStateTable@l
 /* 800EF458 000EC038  28 17 00 00 */	cmplwi r23, 0
 /* 800EF45C 000EC03C  41 82 02 20 */	beq lbl_800EF67C
 /* 800EF460 000EC040  4B F8 4C E9 */	bl func_80074148

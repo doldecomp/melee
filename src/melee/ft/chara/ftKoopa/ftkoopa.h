@@ -53,7 +53,7 @@ typedef struct _ftKoopaVars {
     f32 x4;
 } ftKoopaVars;
 
-extern MotionState ms_table_koopa[];
+extern MotionState ftKoopa_MotionStateTable[];
 extern char lbl_803CF0A0[];
 extern char lbl_803CF0AC[];
 extern Fighter_CostumeStrings lbl_803CF26C[];

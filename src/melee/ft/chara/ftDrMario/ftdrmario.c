@@ -7,7 +7,7 @@
 #include "ftMario/ftMario_Init.h"
 #include "it/code_8027CF30.h"
 
-MotionState ms_table_drmario[] = {
+MotionState ftDrMario_MotionStateTable[] = {
     { 239, 0x00000071, 0x01000000, func_80149954, func_80149A6C, func_80149A8C,
       func_80149AAC, func_800761C8 },
     { 240, 0x00000071, 0x01000000, func_80149954, func_80149A6C, func_80149A8C,

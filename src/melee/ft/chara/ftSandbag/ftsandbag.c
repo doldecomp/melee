@@ -7,7 +7,7 @@
 #include "ft/types.h"
 #include "lb/lbunknown_001.h"
 
-MotionState ms_table_sandbag[] = {
+MotionState ftSandbag_MotionStateTable[] = {
     { 295, 0, 0x01400000, func_8014FC20, func_8014FC24, func_8014FC28,
       func_8014FC48, func_800761C8 },
 };

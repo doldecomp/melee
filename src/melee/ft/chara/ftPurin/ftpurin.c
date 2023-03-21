@@ -21,7 +21,7 @@
 #include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 
-MotionState ms_table_purin[] = {
+MotionState ftPurin_MotionStateTable[] = {
     { 295, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
     { 296, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,

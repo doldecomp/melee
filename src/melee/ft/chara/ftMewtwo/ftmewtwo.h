@@ -121,7 +121,7 @@ typedef struct _ftMewtwoAttributes {
 
 } ftMewtwoAttributes;
 
-extern MotionState ms_table_mewtwo[];
+extern MotionState ftMewtwo_MotionStateTable[];
 extern char lbl_803D0D80[];
 extern char lbl_803D0D8C[];
 extern Fighter_CostumeStrings lbl_803D0F5C[];

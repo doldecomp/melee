@@ -17,7 +17,7 @@
 
 #include <baselib/random.h>
 
-MotionState ms_table_mario[states_count] = {
+MotionState ftMario_MotionStateTable[states_count] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { 295, 0x00340111, 0x12000000, ftMario_SpecialN_Anim,

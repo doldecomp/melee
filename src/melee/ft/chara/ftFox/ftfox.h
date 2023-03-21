@@ -147,7 +147,7 @@ typedef struct _ftFoxAttributes {
 
 } ftFoxAttributes;
 
-extern MotionState ms_table_fox[];
+extern MotionState ftFox_MotionStateTable[];
 extern char lbl_803C7BE8[];
 extern char lbl_803C7BF4[];
 extern Fighter_CostumeStrings lbl_803C7D9C[];

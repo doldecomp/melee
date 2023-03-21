@@ -162,7 +162,7 @@ typedef struct ftNessAttributes {
 
 } ftNessAttributes;
 
-extern MotionState ms_table_ness[];
+extern MotionState ftNess_MotionStateTable[];
 extern char lbl_803CCAD0[];
 extern char lbl_803CCADC[];
 extern Fighter_CostumeStrings lbl_803CCC84[];

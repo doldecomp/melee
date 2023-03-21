@@ -66,7 +66,7 @@ typedef struct _ftLuigiAttributes {
 
 } ftLuigiAttributes;
 
-extern MotionState ms_table_luigi[];
+extern MotionState ftLuigi_MotionStateTable[];
 extern MotionState lbl_803D0868[];
 extern char lbl_803D08A8[];
 extern char lbl_803D08B4[];

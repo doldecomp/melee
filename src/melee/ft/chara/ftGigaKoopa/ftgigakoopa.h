@@ -5,7 +5,7 @@
 
 #include <baselib/gobj.h>
 
-extern MotionState ms_table_gkoopa[];
+extern MotionState ftGigaKoopa_MotionStateTable[];
 extern MotionState lbl_803D38C8[];
 extern char lbl_803D38E8[];
 extern char lbl_803D38F4[];

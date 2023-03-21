@@ -15,7 +15,7 @@
 
 #include <baselib/gobj.h>
 
-MotionState ms_table_iceclimber[] = {
+MotionState ftPopo_MotionStateTable[] = {
     { 295, 0x00340111, 0x12800000, lbl_8011F318, lbl_8011F390, lbl_8011F398,
       lbl_8011F3D8, func_800761C8 },
     { 296, 0x00340511, 0x12800000, lbl_8011F354, lbl_8011F394, lbl_8011F3B8,

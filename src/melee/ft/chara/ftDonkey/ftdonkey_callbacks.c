@@ -26,7 +26,7 @@
 
 #include <dolphin/mtx/types.h>
 
-MotionState ms_table_donkey[] = {
+MotionState ftDonkey_MotionStateTable[] = {
     { 295, 0x00480000, 0x35400000, NULL, ftDonkey_800DF9F0, ftDonkey_800DFA50,
       ftDonkey_800DFA70, func_800761C8 },
     { 296, 0x00484066, 0x35000000, ftDonkey_800DFB34, ftDonkey_800DFB54,

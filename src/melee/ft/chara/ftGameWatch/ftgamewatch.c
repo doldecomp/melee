@@ -7,7 +7,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-MotionState ms_table_gamewatch[] = {
+MotionState ftGameWatch_MotionStateTable[] = {
     { 46, 0x002C0201, 0x02800000, ftGameWatch_Attack11_Anim,
       ftGameWatch_Attack11_IASA, ftGameWatch_Attack11_Phys,
       ftGameWatch_Attack11_Coll, func_800761C8 },

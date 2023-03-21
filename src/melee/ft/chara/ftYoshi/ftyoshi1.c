@@ -15,7 +15,7 @@
 #include <placeholder.h>
 #include <dolphin/os/os.h>
 
-MotionState ms_table_yoshi[] = {
+MotionState ftYoshi_MotionStateTable[] = {
     { 37, 0x00100000, 0x01000000, lbl_8012C030, lbl_8012C114, lbl_8012C194,
       lbl_8012C1B4, func_800761C8 },
     { -1, 0x00180000, 0x01000000, lbl_8012C2F4, lbl_8012C3EC, lbl_8012C45C,

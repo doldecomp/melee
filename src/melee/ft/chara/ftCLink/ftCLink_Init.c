@@ -11,7 +11,7 @@
 #include "ftLink/ftlink.h"
 #include "lb/lbmthp.h"
 
-MotionState ms_table_clink[] = {
+MotionState ftCLink_MotionStateTable[] = {
     { 295, 0x00240009, 0x0A000000, func_800CEDE0, func_800CEE00, func_800CEE30,
       func_800CEE50, func_800761C8 },
     { 239, 0x00000071, 0x01000000, func_80149354, func_8014943C, func_8014945C,

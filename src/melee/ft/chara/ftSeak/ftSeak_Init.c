@@ -12,7 +12,7 @@
 #include "ftSeak/ftSeak_SpecialS.h"
 #include "ftSeak/types.h"
 
-MotionState ms_table_seak[] = {
+MotionState ftSeak_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftSeak_80112248, ftSeak_801126C8,
       ftSeak_80112878, ftSeak_80112978, func_800761C8 },
     { 296, 0x003C0111, 0x12000000, ftSeak_801122D8, ftSeak_801126CC,

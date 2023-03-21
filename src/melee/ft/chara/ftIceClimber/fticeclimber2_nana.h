@@ -6,7 +6,7 @@
 
 #include "ft/types.h"
 
-extern MotionState ms_table_nana[];
+extern MotionState ftNana_MotionStateTable[];
 extern char lbl_803CDB78[];
 extern char lbl_803CDB84[];
 extern Fighter_CostumeStrings lbl_803CDD2C[];

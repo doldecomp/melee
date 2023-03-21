@@ -14,7 +14,7 @@
 
 #include <dolphin/mtx/types.h>
 
-MotionState ms_table_link[] = {
+MotionState ftLink_MotionStateTable[] = {
     { 295, 0x00240009, 0x0A000000, func_800CEDE0, func_800CEE00, func_800CEE30,
       func_800CEE50, func_800761C8 },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
