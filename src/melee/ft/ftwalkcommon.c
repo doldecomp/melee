@@ -93,13 +93,13 @@ void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (Stage_GetGroundFrictionMultiplier(fp) < 1.0f) {
+    if (Stage_GetGroundFrictionMultiplier(fp) < 1) {
         velocity_f2 = fp->mv.co.walk.x0;
     } else {
         velocity_f2 = fp->gr_vel;
     }
-    if ((velocity_f2 * fp->facing_dir) <= 0.0f) {
-        anim_rate = 0.0f;
+    if ((velocity_f2 * fp->facing_dir) <= 0) {
+        anim_rate = 0;
     } else {
         velocity_f2 = fabs_inline(velocity_f2);
         switch (fp->motion_id - fp->mv.co.walk.x4) {
@@ -174,30 +174,30 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
 #endif
 
     Fighter* fp;
-    f32 temp_f0;
-    f32 temp_f4;
-    f32 ftx2360_f5;
-    f32 velocity_f1;
+    float temp_f0;
+    float temp_f4;
+    float accel_mul;
+    float velocity_f1;
 
     fp = GET_FIGHTER(gobj);
-    ftx2360_f5 = fp->mv.co.walk.accel_mul;
+    accel_mul = fp->mv.co.walk.accel_mul;
 
 /// @todo Unused assignment.
 #ifdef MUST_MATCH
     {
-        f32 _ = ftx2360_f5;
+        float _ = ftx2360_f5;
     }
 #endif
 
     velocity_f1 = fp->input.x620_lstick_x *
-                  fp->x110_attr.x110_WalkInitialVelocity * ftx2360_f5;
-    velocity_f1 += getWalkAccel(fp, ftx2360_f5);
+                  fp->x110_attr.x110_WalkInitialVelocity * accel_mul;
+    velocity_f1 += getWalkAccel(fp, accel_mul);
     temp_f0 =
-        (fp->input.x620_lstick_x * fp->x110_attr.walk_max_vel) * ftx2360_f5;
+        (fp->input.x620_lstick_x * fp->x110_attr.walk_max_vel) * accel_mul;
     if (temp_f0) {
         temp_f4 = fp->gr_vel / temp_f0;
-        if (temp_f4 > 0.0f && temp_f4 < 1.0f) {
-            velocity_f1 *= (1.0f - temp_f4) * p_ftCommonData->x30;
+        if (temp_f4 > 0 && temp_f4 < 1) {
+            velocity_f1 *= (1 - temp_f4) * p_ftCommonData->x30;
         }
     }
     fp->mv.co.walk.x0 = temp_f0 * p_ftCommonData->x440;
