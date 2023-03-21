@@ -1,10 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALS_H
 #define MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALS_H
 
+#include <platform.h>
 #include "ft/forward.h"
 #include <baselib/forward.h>
-
-#include <platform.h>
 
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj);
 void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj);

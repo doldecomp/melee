@@ -1,9 +1,8 @@
 #ifndef __DOLPHIN_DVD_H_
 #define __DOLPHIN_DVD_H_
 
-#include <dolphin/dvd/forward.h>
-
 #include <platform.h>
+#include <dolphin/dvd/forward.h>
 
 struct bb2struct {
     u32 _00;

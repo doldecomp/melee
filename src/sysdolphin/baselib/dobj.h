@@ -1,13 +1,12 @@
 #ifndef SYSDOLPHIN_BASELIB_DOBJ_H
 #define SYSDOLPHIN_BASELIB_DOBJ_H
 
+#include <platform.h>
 #include "baselib/forward.h"
 
 #include "baselib/class.h"
 #include "baselib/fobj.h"
 #include "baselib/mobj.h"
-
-#include <platform.h>
 
 struct HSD_DObj {
     HSD_Class parent;

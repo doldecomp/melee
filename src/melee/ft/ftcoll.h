@@ -1,9 +1,10 @@
 #ifndef _ftcoll_h_
 #define _ftcoll_h_
 
+#include <platform.h>
+
 #include "ft/fighter.h"
 
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>
 

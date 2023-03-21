@@ -26,6 +26,9 @@ WhitespaceSensitiveMacros:
   - 'CHECK'
 IncludeBlocks: Regroup
 IncludeCategories:
+  - Regex: '^<platform\.h>$'
+    Priority: -1
+    SortPriority: -6
   - Regex: '^"forward\.h"$'
     Priority: -1
     SortPriority: -5

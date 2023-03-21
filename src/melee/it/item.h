@@ -5,9 +5,10 @@
 #ifndef MELEE_IT_ITEM_H
 #define MELEE_IT_ITEM_H
 
+#include <platform.h>
+
 #include "it/types.h"
 
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

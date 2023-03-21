@@ -1,9 +1,10 @@
 #ifndef _ftdrmario_h_
 #define _ftdrmario_h_
 
+#include <platform.h>
+
 #include "ft/fighter.h"
 
-#include <platform.h>
 #include <baselib/gobj.h>
 
 typedef struct _ftDrMarioAttributes {

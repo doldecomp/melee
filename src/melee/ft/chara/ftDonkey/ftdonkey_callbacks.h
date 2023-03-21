@@ -1,11 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTDONKEY_FTDONKEY_CALLBACKS_H
 #define MELEE_FT_CHARA_FTDONKEY_FTDONKEY_CALLBACKS_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
-
-#include <platform.h>
 
 extern MotionState ms_table_donkey[];
 extern char lbl_803CBDF8[];

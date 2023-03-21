@@ -2,6 +2,7 @@
 #define _FTGAMEWATCH_STATEVARS_H_
 
 #include <platform.h>
+
 #include <baselib/gobj.h>
 
 typedef union ftGameWatch_MotionVars {

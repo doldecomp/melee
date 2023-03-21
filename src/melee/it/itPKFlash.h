@@ -2,6 +2,7 @@
 #define _itPKFlash_h_
 
 #include <platform.h>
+
 #include <baselib/gobj.h>
 
 typedef struct PKFlashVars {

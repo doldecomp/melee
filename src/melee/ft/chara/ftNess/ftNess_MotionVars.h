@@ -2,6 +2,7 @@
 #define _FTNESS_STATEVARS_H_
 
 #include <platform.h>
+
 #include <dolphin/mtx/types.h>
 
 union ftNess_MotionVars {

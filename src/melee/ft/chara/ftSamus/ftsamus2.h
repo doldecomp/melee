@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTSAMUS_FTSAMUS2_H
 
 #include <platform.h>
+
 #include <baselib/gobj.h>
 
 f32 ftSamus_80128AC8(HSD_GObj* gobj, f32 farg1, f32 farg2);

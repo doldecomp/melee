@@ -2,6 +2,7 @@
 #define SYSDOLPHIN_BASELIB_BASELIB_UNKNOWN_002_H
 
 #include <platform.h>
+
 #include <baselib/jobj.h>
 
 bool func_803931A4(s32);

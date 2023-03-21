@@ -1,8 +1,9 @@
 #ifndef _WCHAR_IO_H_
 #define _WCHAR_IO_H_
 
-#include <common_structs.h>
 #include <platform.h>
+
+#include <common_structs.h>
 #include <stdio.h>
 
 enum __file_kinds {

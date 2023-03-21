@@ -2,6 +2,7 @@
 #define _lbarchive_h_
 
 #include <platform.h>
+
 #include <baselib/archive.h>
 
 void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length);

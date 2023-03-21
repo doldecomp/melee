@@ -1,9 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_SISLIB_H
 #define SYSDOLPHIN_BASELIB_SISLIB_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
-#include <platform.h>
 #include <baselib/archive.h>
 
 typedef struct {

@@ -1,6 +1,7 @@
 #ifndef _fighter_h_
 #define _fighter_h_
 
+#include <platform.h>
 #include "ftCommon/forward.h"
 
 #include "ft/ftanim.h"
@@ -14,7 +15,6 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>

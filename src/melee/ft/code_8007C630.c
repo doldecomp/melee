@@ -1,6 +1,8 @@
 /** @file
  * @todo Rename to @c ftUnk1.c
  */
+#include <platform.h>
+
 #include "ft/code_8007C630.h"
 
 #include "text_2.h"
@@ -13,7 +15,6 @@
 #include "lb/lbunknown_001.h"
 
 #include <placeholder.h>
-#include <platform.h>
 
 #ifdef MWERKS_GEKKO
 

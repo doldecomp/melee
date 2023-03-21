@@ -1,11 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_FTSAMUS1_H
 #define MELEE_FT_CHARA_FTSAMUS_FTSAMUS1_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
-
-#include <platform.h>
 
 extern MotionState ms_table_samus[];
 extern char lbl_803CE510[];

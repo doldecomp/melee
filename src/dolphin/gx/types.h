@@ -1,9 +1,8 @@
 #ifndef DOLPHIN_GX_TYPES_H
 #define DOLPHIN_GX_TYPES_H
 
-#include <dolphin/gx/forward.h>
-
 #include <platform.h>
+#include <dolphin/gx/forward.h>
 
 #define GX_FIFO_OBJSIZE 128
 

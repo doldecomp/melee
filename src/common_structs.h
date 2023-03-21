@@ -5,6 +5,7 @@
 #define _common_structs_h_
 
 #include <platform.h>
+
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 

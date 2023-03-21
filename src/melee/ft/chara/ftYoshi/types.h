@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_TYPES_H
 #define MELEE_FT_CHARA_FTYOSHI_TYPES_H
 
-#include <placeholder.h>
 #include <platform.h>
+
+#include <placeholder.h>
 
 typedef struct _ftYoshiAttributes {
     f32 x0;

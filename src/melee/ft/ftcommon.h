@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_FTCOMMON_H
 #define MELEE_FT_FTCOMMON_H
 
+#include <platform.h>
 #include "ft/forward.h"
 
-#include <platform.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>

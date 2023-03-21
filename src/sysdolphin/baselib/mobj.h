@@ -1,9 +1,9 @@
 #ifndef _mobj_h_
 #define _mobj_h_
 
+#include <platform.h>
 #include <baselib/forward.h>
 
-#include <platform.h>
 #include <baselib/aobj.h>
 #include <baselib/class.h>
 #include <baselib/texp.h>

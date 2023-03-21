@@ -1,9 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTNESS_FTNESS_SPECIALN_H
 #define MELEE_FT_CHARA_FTNESS_FTNESS_SPECIALN_H
 
-#include <baselib/forward.h>
-
 #include <platform.h>
+#include <baselib/forward.h>
 
 void ftNess_ItemPKFlushSetNULL(HSD_GObj*);
 

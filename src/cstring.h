@@ -2,6 +2,7 @@
 #define __CSTRING_H__
 
 #include <platform.h>
+
 #include <stddef.h>
 
 int wcstombs(void* dst, const void* src, size_t len);

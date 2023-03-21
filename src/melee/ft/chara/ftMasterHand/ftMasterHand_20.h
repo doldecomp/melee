@@ -3,9 +3,8 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_20_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_20_H
 
-#include <baselib/forward.h>
-
 #include <platform.h>
+#include <baselib/forward.h>
 
 void lbl_80153D28(HSD_GObj* gobj);
 void lbl_80153D2C(HSD_GObj* gobj);

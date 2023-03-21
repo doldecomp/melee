@@ -1,9 +1,9 @@
 #ifndef _lbfile_h_
 #define _lbfile_h_
 
+#include <platform.h>
 #include <baselib/forward.h>
 
-#include <platform.h>
 #include <baselib/archive.h>
 
 void lbFile_8001615C(int, int, int, bool cancelflag);

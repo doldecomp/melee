@@ -1,12 +1,13 @@
 #ifndef _ftness_h_
 #define _ftness_h_
 
+#include <platform.h>
+
 #include "ft/fighter.h"
 #include "it/item.h"
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <platform.h>
 #include <baselib/gobj.h>
 
 typedef enum ftNessAction {

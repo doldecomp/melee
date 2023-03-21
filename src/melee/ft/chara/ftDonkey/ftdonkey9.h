@@ -1,9 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTDONKEY_FTDONKEY9_H
 #define MELEE_FT_CHARA_FTDONKEY_FTDONKEY9_H
 
-#include <baselib/forward.h>
-
 #include <platform.h>
+#include <baselib/forward.h>
 
 void ftDonkey_800E06B8(HSD_GObj* gobj);
 void ftDonkey_800E06D8(HSD_GObj* gobj);

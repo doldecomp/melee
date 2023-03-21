@@ -1,9 +1,9 @@
 #ifndef _jobj_h_
 #define _jobj_h_
 
+#include <platform.h>
 #include <baselib/forward.h>
 
-#include <platform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/aobj.h>

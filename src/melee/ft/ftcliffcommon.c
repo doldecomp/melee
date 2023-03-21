@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ft/ftcliffcommon.h"
 
 #include "ef/efasync.h"
@@ -7,8 +9,6 @@
 #include "ft/ftcommon.h"
 #include "mp/mplib.h"
 #include "pl/pl_unknown_001.h"
-
-#include <platform.h>
 
 bool func_80081298(HSD_GObj* gobj)
 {

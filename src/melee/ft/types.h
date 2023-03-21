@@ -1,6 +1,7 @@
 #ifndef MELEE_FT_TYPES_H
 #define MELEE_FT_TYPES_H
 
+#include <platform.h>
 #include "ftCommon/forward.h"
 
 #include "ft/ftanim.h"
@@ -30,7 +31,6 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>

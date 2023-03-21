@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_FORWARD_H
 #define MELEE_FT_FORWARD_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 
 typedef struct MotionState MotionState;

@@ -1,11 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_H
 #define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_H
 
+#include <platform.h>
 #include "forward.h"
 
 #include "ft/fighter.h"
 
-#include <platform.h>
 #include <baselib/gobj.h>
 
 extern MotionState ms_table_captain[];

@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
@@ -7,8 +9,6 @@
 #include "ftMasterHand/ftMasterHand_32.h"
 #include "ftMasterHand/ftMasterHand_33.h"
 #include "ftMasterHand/ftMasterHand_34.h"
-
-#include <platform.h>
 
 MotionState MotionStateList[] = {
     {

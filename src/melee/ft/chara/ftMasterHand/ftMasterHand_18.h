@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_18_H
 
 #include <platform.h>
+
 #include <baselib/gobj.h>
 
 void func_80153A64(HSD_GObj*);

@@ -1,9 +1,10 @@
 #ifndef MELEE_IF_IFSTATUS_H
 #define MELEE_IF_IFSTATUS_H
 
+#include <platform.h>
+
 #include "pl/player.h"
 
-#include <platform.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>

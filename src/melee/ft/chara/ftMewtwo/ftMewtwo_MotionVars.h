@@ -2,6 +2,7 @@
 #define _FTMEWTWO_STATEVARS_H_
 
 #include <platform.h>
+
 #include <baselib/gobj.h>
 
 typedef struct ftMewtwoSpecialHi {

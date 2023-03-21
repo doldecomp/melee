@@ -2,6 +2,7 @@
 #define __DOLPHIN_DSP_H_
 
 #include <platform.h>
+
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSTime.h>
 

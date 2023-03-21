@@ -1,3 +1,4 @@
+#include <platform.h>
 #include "lb/forward.h"
 
 #include "ft/ftcoll.h"
@@ -18,7 +19,6 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <platform.h>
 #include <runtime.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>

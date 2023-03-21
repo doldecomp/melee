@@ -2,6 +2,7 @@
 #define MELEE_LB_LBAUDIO_AX_H
 
 #include <platform.h>
+
 #include <baselib/gobj.h>
 
 /// @todo Create an @c enum for SFX IDs.

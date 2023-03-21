@@ -1,9 +1,9 @@
 #ifndef DOLPHIN_GX_GXPIXEL_H
 #define DOLPHIN_GX_GXPIXEL_H
 
+#include <platform.h>
 #include <dolphin/gx/forward.h>
 
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 
 typedef struct _GXFogAdjTbl {

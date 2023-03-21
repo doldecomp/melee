@@ -2,6 +2,7 @@
 #define MELEE_LB_LBDVD_H
 
 #include <platform.h>
+
 #include <baselib/archive.h>
 
 void func_80018F68(void);

@@ -2,6 +2,7 @@
 #define DOLPHIN_OS_OSMUTEX_H
 
 #include <platform.h>
+
 #include <dolphin/os/OSThread.h>
 
 typedef struct OSMutex {

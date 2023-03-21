@@ -1,9 +1,10 @@
 #ifndef _stage_h_
 #define _stage_h_
 
+#include <platform.h>
+
 #include "gr/types.h"
 
-#include <platform.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>

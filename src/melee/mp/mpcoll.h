@@ -1,9 +1,9 @@
 #ifndef MELEE_MP_MPCOLL_H
 #define MELEE_MP_MPCOLL_H
 
-#include "ft/fighter.h"
-
 #include <platform.h>
+
+#include "ft/fighter.h"
 
 void func_80042374(CollData*, f32, f32, f32);
 void func_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj*, HSD_JObj*,

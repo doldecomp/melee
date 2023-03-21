@@ -2,6 +2,7 @@
 #define _shadow_h_
 
 #include <platform.h>
+
 #include <dolphin/mtx/types.h>
 #include <baselib/cobj.h>
 #include <baselib/list.h>

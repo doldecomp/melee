@@ -2,6 +2,7 @@
 #define _initialize_h_
 
 #include <platform.h>
+
 #include <dolphin/gx/types.h>
 #include <dolphin/os/OSAlloc.h>
 #include <baselib/video.h>

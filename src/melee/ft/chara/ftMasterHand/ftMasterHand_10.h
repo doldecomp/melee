@@ -5,6 +5,7 @@
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_10_H
 
 #include <platform.h>
+
 #include <baselib/gobj.h>
 
 void lbl_80152138(HSD_GObj* gobj);

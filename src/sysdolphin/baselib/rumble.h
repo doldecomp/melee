@@ -1,9 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_RUMBLE_H
 #define SYSDOLPHIN_BASELIB_RUMBLE_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
-#include <platform.h>
 #include <dolphin/pad/Pad.h>
 
 struct HSD_RumbleData {

@@ -1,10 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTLINK_FTLINK_H
 #define MELEE_FT_CHARA_FTLINK_FTLINK_H
 
+#include <platform.h>
+
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
-#include <platform.h>
 #include <baselib/gobj.h>
 
 typedef struct _ftLinkAttributes {

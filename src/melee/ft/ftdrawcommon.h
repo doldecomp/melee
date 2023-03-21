@@ -2,6 +2,7 @@
 #define MELEE_FT_FTDRAWCOMMON_H
 
 #include <platform.h>
+
 #include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 

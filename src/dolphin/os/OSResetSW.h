@@ -1,9 +1,9 @@
 #ifndef DOLPHIN_OS_OSRESETSW_H
 #define DOLPHIN_OS_OSRESETSW_H
 
+#include <platform.h>
 #include <dolphin/os/forward.h>
 
-#include <platform.h>
 #include <dolphin/gx/types.h>
 
 struct _OSResetSW_Unk1;

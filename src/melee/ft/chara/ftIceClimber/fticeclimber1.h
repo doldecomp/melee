@@ -1,11 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER1_H
 #define MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER1_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
-
-#include <platform.h>
 
 extern MotionState ms_table_iceclimber[];
 extern char lbl_803CD610[];

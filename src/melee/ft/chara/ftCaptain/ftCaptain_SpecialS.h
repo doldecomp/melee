@@ -4,9 +4,9 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALS_H
 #define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALS_H
 
+#include <platform.h>
 #include "ft/forward.h"
 
-#include <platform.h>
 #include <baselib/gobj.h>
 
 /**

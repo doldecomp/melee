@@ -2,6 +2,7 @@
 #define DOLPHIN_GX_FORWARD_H
 
 #include <platform.h>
+
 #include <dolphin/gx/GXEnum.h>
 
 typedef struct GXTexObj GXTexObj;

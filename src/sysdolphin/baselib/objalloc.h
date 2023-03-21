@@ -1,8 +1,9 @@
 #ifndef _objalloc_h_
 #define _objalloc_h_
 
-#include <common_structs.h>
 #include <platform.h>
+
+#include <common_structs.h>
 #include <baselib/debug.h>
 
 typedef struct _objheap {

@@ -1,9 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTZELDA_TYPES_H
 #define MELEE_FT_CHARA_FTZELDA_TYPES_H
 
+#include <platform.h>
+
 #include <common_structs.h>
 #include <placeholder.h>
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 
 typedef struct _ftZeldaAttributes {

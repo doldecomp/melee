@@ -2,6 +2,7 @@
 #define MELEE_DB_DB_UNKNOWN_001_H
 
 #include <platform.h>
+
 #include <baselib/gobj.h>
 
 extern enum_t g_debugLevel;

@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include <MSL/math.h>
 
 f32 cos__Ff(f32);

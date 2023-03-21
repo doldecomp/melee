@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ft/code_80081B38.h"
 
 #include "ft/ft_unknown_006.h"
@@ -8,7 +10,6 @@
 #include "mp/mplib.h"
 
 #include <placeholder.h>
-#include <platform.h>
 #include <MSL/trigf.h>
 
 #ifdef MWERKS_GEKKO

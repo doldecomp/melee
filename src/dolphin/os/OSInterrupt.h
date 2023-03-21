@@ -3,6 +3,7 @@
 #ifndef _OS_INTERRUPT_H_
 #define _OS_INTERRUPT_H_
 #include <platform.h>
+
 #include <dolphin/os/OSContext.h>
 
 #define OS_INTRMASK_MEM_0 (0x80000000U >> OS_INTR_MEM_0)

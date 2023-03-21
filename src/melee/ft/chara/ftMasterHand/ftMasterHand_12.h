@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_12_H
 
 #include <platform.h>
+
 #include <baselib/gobj.h>
 
 /// 12 Ground Slap

@@ -1,9 +1,10 @@
 #ifndef _ftmars_h_
 #define _ftmars_h_
 
+#include <platform.h>
+
 #include "ft/fighter.h"
 
-#include <platform.h>
 #include <baselib/gobj.h>
 
 extern MotionState ms_table_mars[];

@@ -1,11 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI2_H
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI2_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include "ft/types.h"
 
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 
 extern char lbl_803CEA98[];

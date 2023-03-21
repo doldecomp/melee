@@ -1,9 +1,10 @@
+#include <platform.h>
+
 #include "gr/grdynamicattr.h"
 
 #include "mp/mplib.h"
 
 #include <math.h>
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/debug.h>
 

@@ -4,6 +4,7 @@
 #define _OSTHREAD_H_
 
 #include <platform.h>
+
 #include <dolphin/os/OSContext.h>
 
 #define OS_PRIORITY_MIN 0

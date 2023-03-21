@@ -1,9 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_32_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_32_H
 
-#include <baselib/forward.h>
-
 #include <platform.h>
+#include <baselib/forward.h>
 
 void func_80155B80(HSD_GObj*);
 

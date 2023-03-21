@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTMARS_TYPES_H
 #define MELEE_FT_CHARA_FTMARS_TYPES_H
 
-#include <placeholder.h>
 #include <platform.h>
+
+#include <placeholder.h>
 
 typedef struct _MarsAttributes {
     s32 x0;

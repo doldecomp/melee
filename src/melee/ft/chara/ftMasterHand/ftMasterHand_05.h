@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_5_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_5_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 
 /// Probably isCrazyHandLoaded func.

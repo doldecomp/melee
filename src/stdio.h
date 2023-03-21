@@ -2,6 +2,7 @@
 #define _STDIO_H_
 
 #include <platform.h>
+
 #include <stdarg.h>
 
 typedef struct {

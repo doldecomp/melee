@@ -1,11 +1,12 @@
 /** @file
  * @todo Should be called @c OS.c.
  */
+#include <platform.h>
+
 #include "stddef.h"
 
 #include <__mem.h>
 #include <placeholder.h>
-#include <platform.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db/db.h>
 #include <dolphin/dvd/dvd.h>

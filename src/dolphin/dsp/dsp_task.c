@@ -1,6 +1,7 @@
+#include <platform.h>
+
 #include "dsp.h"
 
-#include <platform.h>
 #include <stddef.h>
 #include <dolphin/os/OSInterrupt.h>
 

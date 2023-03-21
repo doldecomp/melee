@@ -1,9 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_FTSAMUS5_H
 #define MELEE_FT_CHARA_FTSAMUS_FTSAMUS5_H
 
-#include <baselib/forward.h>
-
 #include <platform.h>
+#include <baselib/forward.h>
 
 void ftSamus_SpecialHi_StartAction(HSD_GObj* gobj);
 void ftSamus_8012AA3C(HSD_GObj* gobj);

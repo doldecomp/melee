@@ -1,10 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_3_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_3_H
 
+#include <platform.h>
 #include <baselib/forward.h>
 
 #include <placeholder.h>
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 
 void func_80150C8C(HSD_GObj* gobj);

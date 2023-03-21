@@ -1,9 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI4_H
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI4_H
 
-#include <baselib/forward.h>
-
 #include <platform.h>
+#include <baselib/forward.h>
 
 void ftYoshi_SpecialS_StartAction(HSD_GObj*);
 void ftYoshi_SpecialAirHi_StartAction(HSD_GObj*);

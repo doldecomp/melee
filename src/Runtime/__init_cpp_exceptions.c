@@ -1,7 +1,8 @@
+#include <platform.h>
+
 #include <__init_cpp_exceptions.h>
 #include <Gecko_ExceptionPPC.h>
 #include <placeholder.h>
-#include <platform.h>
 
 static int fragmentID = -2;
 

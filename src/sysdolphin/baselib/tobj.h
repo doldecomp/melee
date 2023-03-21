@@ -1,9 +1,9 @@
 #ifndef _hsd_tobj_h_
 #define _hsd_tobj_h_
 
+#include <platform.h>
 #include <baselib/forward.h>
 
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/fobj.h>
 #include <baselib/object.h>

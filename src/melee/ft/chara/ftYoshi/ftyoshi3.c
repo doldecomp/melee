@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include <dolphin/mtx/types.h>
 
 bool lbl_803CED48[] = {

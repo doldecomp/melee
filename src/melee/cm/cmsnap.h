@@ -2,6 +2,7 @@
 #define _CMSNAP_H_
 
 #include <platform.h>
+
 #include <baselib/gobj.h>
 
 void func_800315C8(void);

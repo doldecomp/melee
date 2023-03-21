@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include "ft/ftdrawcommon.h"
 
 #include "ft/fighter.h"
@@ -6,7 +8,6 @@
 #include "ft/ftlib.h"
 
 #include <placeholder.h>
-#include <platform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/types.h>

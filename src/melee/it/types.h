@@ -1,6 +1,7 @@
 #ifndef MELEE_IT_TYPES_H
 #define MELEE_IT_TYPES_H
 
+#include <platform.h>
 #include "it/forward.h"
 
 #include "ft/types.h"
@@ -13,7 +14,6 @@
 
 #include <common_structs.h>
 #include <math.h>
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/aobj.h>
 #include <baselib/controller.h>

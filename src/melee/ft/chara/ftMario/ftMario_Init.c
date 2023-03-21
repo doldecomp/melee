@@ -1,3 +1,4 @@
+#include <platform.h>
 #include "it/forward.h"
 
 #include "ftMario_Init.h"
@@ -14,7 +15,6 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-#include <platform.h>
 #include <baselib/random.h>
 
 MotionState ms_table_mario[states_count] = {

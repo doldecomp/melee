@@ -1,9 +1,10 @@
 #ifndef _player_h_
 #define _player_h_
 
+#include <platform.h>
+
 #include "pl/types.h"
 
-#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

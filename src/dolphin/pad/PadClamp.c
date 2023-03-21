@@ -1,4 +1,5 @@
 #include <platform.h>
+
 #include <dolphin/pad/Pad.h>
 #include <dolphin/pad/PadClamp.h>
 
