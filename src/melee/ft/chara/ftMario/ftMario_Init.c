@@ -131,11 +131,11 @@ void ftMario_func_800E0CAC(s32 arg0, s32* arg1, s32* arg2)
             return;
         if (arg0 < 9)
             return;
-        *arg2 = 0xE;
-        *arg1 = 0xE;
+        *arg2 = 14;
+        *arg1 = 14;
     } else {
-        *arg2 = 0xF;
-        *arg1 = 0xF;
+        *arg2 = 15;
+        *arg1 = 15;
     }
 }
 
@@ -151,5 +151,5 @@ char* ftMario_GetMotionFileString(enum_t arg0)
         offset = 15;
     }
 
-    return lbl_803C5A20[offset - 0xE];
+    return lbl_803C5A20[offset - 14];
 }
