@@ -545,13 +545,9 @@ struct Fighter_DemoStrings {
     char* vi_wait_filename;
 };
 
-// --------------------------------------------------------------------------------
-// UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fighter
-// header includes or something.
-// --------------------------------------------------------------------------------
 struct ftMario_FighterVars {
     /// Current Megavitamin color combo
-    /* 0x222C */ s32 x222C_vitaminCurr;
+    /* 0x222C */ int x222C_vitaminCurr;
     /// Previous Megavitamin color combo
     /* 0x2230 */ s32 x2230_vitaminPrev;
     /* 0x2234 */ bool x2234_tornadoCharge;
@@ -710,16 +706,6 @@ struct ftMars_FighterVars {
 
 struct ftZelda_FighterVars {
     /* 0x222C */ HSD_GObj* x222C;
-};
-
-struct SpecialAttrs_CLink {
-    /* 0x222C */ u32 x222C;
-    /* 0x2230 */ u32 x2230;
-    /* 0x2234 */ u32 x2234;
-    /* 0x2238 */ u32 x2238;
-    /* 0x223C */ u32 x223C;
-    /* 0x2240 */ u32 x2240;
-    /* 0x2244 */ u32 x2244;
 };
 
 struct ftGameWatch_FighterVars {
