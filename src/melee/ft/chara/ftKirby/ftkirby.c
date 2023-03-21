@@ -1,11 +1,11 @@
 #include "ftKirby/ftkirby.h"
 
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/fighter.h"
+#include "ft/forward.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState as_table_kirby[] = {
     { 295, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,

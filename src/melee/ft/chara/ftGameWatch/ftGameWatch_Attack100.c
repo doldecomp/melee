@@ -1,7 +1,6 @@
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
 #include "ftGameWatch/ftgamewatch.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
 
 // 0x8014C1E8
 // https://decomp.me/scratch/AyScb // Mr. Game & Watch's Rapid Jab Start Action

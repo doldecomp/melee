@@ -1,13 +1,12 @@
+#include "ef/eflib.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
 #include "ftMars/ftMars.h"
-
-#include <melee/ef/eflib.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
 
 void ftMars_SpecialN_StartAction(HSD_GObj* gobj)
 {

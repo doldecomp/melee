@@ -1,15 +1,14 @@
 #include "ftCLink/ftclink.h"
 
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftcoll.h"
+#include "ft/ftdata.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftLink/ftlink.h"
-
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/forward.h>
-#include <melee/lb/lbmthp.h>
+#include "it/forward.h"
+#include "lb/lbmthp.h"
 
 ActionState as_table_clink[] = {
     { 295, 0x00240009, 0x0A000000, func_800CEDE0, func_800CEE00, func_800CEE30,

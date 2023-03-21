@@ -1,12 +1,14 @@
+#include "gr/grtfalco.h"
+
+#include "gr/grdisplay.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "lb/lbunknown_003.h"
+#include "mp/mplib.h"
+
 #include <dolphin/os/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grtfalco.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/mp/mplib.h>
 
 /* static */ StageCallbacks lbl_803E8918[4] = {
     {

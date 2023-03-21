@@ -1,16 +1,15 @@
 #include "ftSeak/ftSeak_Init.h"
 
+#include "ft/fighter.h"
+#include "ft/forward.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftSeak/ftSeak_SpecialLw.h"
 #include "ftSeak/ftSeak_SpecialN.h"
 #include "ftSeak/ftSeak_SpecialS.h"
 #include "ftSeak/types.h"
-
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 
 ActionState as_table_seak[] = {
     { 295, 0x00340111, 0x12000000, ftSeak_80112248, ftSeak_801126C8,

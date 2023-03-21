@@ -1,11 +1,13 @@
+#include "gr/grtdonkey.h"
+
+#include "gr/granime.h"
+#include "gr/grdisplay.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "lb/lbunknown_003.h"
+
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grtdonkey.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/lb/lbunknown_003.h>
 
 static StageCallbacks lbl_803E8790[] = {
     { lbl_802203B4, lbl_802203E0, lbl_802203E8, lbl_802203EC, 0 },

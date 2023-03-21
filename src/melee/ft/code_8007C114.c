@@ -1,9 +1,11 @@
+#include "ft/code_8007C114.h"
+
+#include "ft/fighter.h"
+#include "ft/ftcoll.h"
+#include "it/item2.h"
+#include "lb/lbunknown_001.h"
+
 #include <placeholder.h>
-#include <melee/ft/code_8007C114.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbunknown_001.h>
 
 #ifdef MWERKS_GEKKO
 

@@ -1,3 +1,16 @@
+#include "if/ifstatus.h"
+
+#include "text_3.h"
+#include "text_4.h"
+
+#include "gm/code_801601C4.h"
+#include "if/ifall.h"
+#include "if/ifstock.h"
+#include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
+
 #include <placeholder.h>
 #include <dolphin/os/os.h>
 #include <baselib/gobj.h>
@@ -6,16 +19,6 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/if/ifall.h>
-#include <melee/if/ifstatus.h>
-#include <melee/if/ifstock.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/text_3.h>
-#include <melee/text_4.h>
 
 HudIndex* func_802F4910(void)
 {

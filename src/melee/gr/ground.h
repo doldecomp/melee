@@ -1,9 +1,10 @@
 #ifndef _ground_h_
 #define _ground_h_
 
+#include "gr/granime.h"
+#include "gr/types.h"
+
 #include <baselib/gobj.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/types.h>
 
 extern StageInfo stage_info;
 

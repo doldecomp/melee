@@ -1,3 +1,10 @@
+#include "ft/ftdrawcommon.h"
+
+#include "ft/fighter.h"
+#include "ft/ftcommon.h"
+#include "ft/ftdata.h"
+#include "ft/ftlib.h"
+
 #include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
@@ -5,11 +12,6 @@
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/state.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftdrawcommon.h>
-#include <melee/ft/ftlib.h>
 #include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO

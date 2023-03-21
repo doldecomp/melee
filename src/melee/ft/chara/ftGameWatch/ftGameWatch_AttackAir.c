@@ -1,9 +1,8 @@
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
 #include "ftGameWatch/ftgamewatch.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 static void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj*);
 

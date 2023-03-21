@@ -1,10 +1,11 @@
 #ifndef MELEE_GR_GRMATERIAL_H
 #define MELEE_GR_GRMATERIAL_H
 
+#include "gr/ground.h"
+
 #include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <melee/gr/ground.h>
 
 void func_801C95C4(HSD_GObj*);
 void func_801C9698(HSD_GObj*);

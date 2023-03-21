@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTDONKEY_FTDONKEY_H
 #define MELEE_FT_CHARA_FTDONKEY_FTDONKEY_H
 
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftwalkcommon.h>
-#include <melee/lb/lbvector.h>
+#include "ft/ftcommon.h"
+#include "ft/ftwalkcommon.h"
+#include "lb/lbvector.h"
 
 typedef struct _ftDonkeyAttributes {
     s32 action_state;

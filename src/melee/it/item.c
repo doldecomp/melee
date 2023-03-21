@@ -1,3 +1,20 @@
+#include "it/item.h"
+
+#include "cm/camera.h"
+#include "db/db_unknown_001.h"
+#include "ef/efasync.h"
+#include "ef/eflib.h"
+#include "ft/ftlib.h"
+#include "gm/code_801601C4.h"
+#include "gr/grlib.h"
+#include "it/code_80266F3C.h"
+#include "it/forward.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
+#include "mp/mpcoll.h"
+#include "mp/mplib.h"
+
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
@@ -7,21 +24,6 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
-#include <melee/cm/camera.h>
-#include <melee/db/db_unknown_001.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gr/grlib.h>
-#include <melee/it/code_80266F3C.h>
-#include <melee/it/forward.h>
-#include <melee/it/item.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/mp/mplib.h>
 
 /// Check if items are enabled
 bool func_80266F3C(void)

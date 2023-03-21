@@ -1,10 +1,11 @@
 #ifndef _lbvector_h_
 #define _lbvector_h_
 
+#include "lb/lbrefract.h"
+
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/cobj.h>
-#include <melee/lb/lbrefract.h>
 
 extern inline float sqrtf_accurate(float x);
 

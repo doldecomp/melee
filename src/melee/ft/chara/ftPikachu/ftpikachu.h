@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTPIKACHU_FTPIKACHU_H
 #define MELEE_FT_CHARA_FTPIKACHU_FTPIKACHU_H
 
-#include <melee/ft/ftcommon.h>
-#include <melee/lb/lbvector.h>
+#include "ft/ftcommon.h"
+#include "lb/lbvector.h"
 
 /// pika1
 void ftPikachu_OnLoadForPichu(Fighter* fp);

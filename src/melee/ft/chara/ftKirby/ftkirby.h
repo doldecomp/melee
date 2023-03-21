@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTKIRBY_FTKIRBY_H
 #define MELEE_FT_CHARA_FTKIRBY_FTKIRBY_H
 
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-#include <melee/lb/lbvector.h>
+#include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "lb/lbvector.h"
 
 typedef struct _ftKirbyAttributes {
     f32 x0;

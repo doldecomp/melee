@@ -1,3 +1,20 @@
+#include "ft/ftcoll.h"
+
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
+#include "ft/ftlib.h"
+#include "gm/code_801601C4.h"
+#include "gr/stage.h"
+#include "it/code_80266F3C.h"
+#include "it/item.h"
+#include "lb/forward.h"
+#include "lb/lbunknown_001.h"
+#include "pl/pl_unknown_001.h"
+#include "pl/player.h"
+
 #include <common_structs.h>
 #include <math.h>
 #include <dolphin/mtx/types.h>
@@ -10,21 +27,6 @@
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gr/stage.h>
-#include <melee/it/code_80266F3C.h>
-#include <melee/it/item.h>
-#include <melee/lb/forward.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/pl/pl_unknown_001.h>
-#include <melee/pl/player.h>
 #include <MSL/trigf.h>
 #include <Runtime/platform.h>
 #include <Runtime/runtime.h>

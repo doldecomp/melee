@@ -1,12 +1,12 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_FTSAMUS_H
 #define MELEE_FT_CHARA_FTSAMUS_FTSAMUS_H
 
-#include <melee/ef/eflib.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/inlines.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/it/item.h>
-#include <melee/lb/lbvector.h>
+#include "ef/eflib.h"
+#include "ft/ftcommon.h"
+#include "ft/inlines.h"
+#include "it/code_8027CF30.h"
+#include "it/item.h"
+#include "lb/lbvector.h"
 
 void ftSamus_80128428(HSD_GObj* gobj);
 void ftSamus_80129048(HSD_GObj* gobj);

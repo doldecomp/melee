@@ -1,3 +1,5 @@
+#include "lb/lbrefract.h"
+
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXMisc.h>
@@ -8,7 +10,6 @@
 #include <baselib/psdisp.h>
 #include <baselib/state.h>
 #include <baselib/util.h>
-#include <melee/lb/lbrefract.h>
 
 typedef struct {
     u8 filename[9];

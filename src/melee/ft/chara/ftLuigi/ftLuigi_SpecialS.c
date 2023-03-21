@@ -1,13 +1,13 @@
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
 #include "ftLuigi/ftluigi.h"
+#include "lb/forward.h"
 #include "melee/ft/inlines.h"
 
 #include <baselib/gobjproc.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/lb/forward.h>
 
 /// Luigi's Green Missile GFX callback
 void ftLuigi_SpecialS_SetGFX(HSD_GObj* gobj)

@@ -1,13 +1,12 @@
 #include "ftMewtwo/ftMewtwo_SpecialN.h"
 
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
 #include "ftMewtwo/ftmewtwo.h"
-
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 // 0x80146CCC
 // https://decomp.me/scratch/qxdYd

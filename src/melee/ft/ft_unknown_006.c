@@ -1,7 +1,8 @@
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/lb/lbaudio_ax.h>
+#include "ft/ft_unknown_006.h"
+
+#include "ft/fighter.h"
+#include "ft/ftcommon.h"
+#include "lb/lbaudio_ax.h"
 
 #define TEST(expr) (expr) ? true : false
 

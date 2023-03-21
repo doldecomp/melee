@@ -1,11 +1,10 @@
 #include "ftEmblem/ftemblem.h"
 
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftMars/ftMars.h"
-
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 
 ActionState as_table_roy[] = {
     { 295, 0x00340211, 0x12000000, lbl_80136844, lbl_80136914, lbl_8013691C,

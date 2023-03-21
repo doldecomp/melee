@@ -1,8 +1,10 @@
+#include "gr/grdynamicattr.h"
+
+#include "mp/mplib.h"
+
 #include <math.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/debug.h>
-#include <melee/gr/grdynamicattr.h>
-#include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
 
 static const s32 GC_Id_None = -1;

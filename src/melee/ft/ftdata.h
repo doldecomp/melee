@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_FTDATA_H
 #define MELEE_FT_FTDATA_H
 
+#include "ft/fighter.h"
+
 #include <baselib/gobj.h>
-#include <melee/ft/fighter.h>
 
 typedef struct ftData_UnkModelStruct {
     Fighter_ModelEvent model_events[FTKIND_MAX];

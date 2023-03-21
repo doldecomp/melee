@@ -1,10 +1,10 @@
 #include "ftMewtwo/ftmewtwo.h"
 
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/forward.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "it/forward.h"
 
 ActionState as_table_mewtwo[] = {
     { 295, 0x00340111, 0x12000000, ftMewtwo_SpecialNStart_Anim,

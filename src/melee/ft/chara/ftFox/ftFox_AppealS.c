@@ -1,12 +1,11 @@
 #include "ftFox/ftFox_AppealS.h"
 
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
 #include "ftFox/ftfox.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/gr/grcorneria.h>
-#include <melee/it/item2.h>
-#include <melee/pl/pl_unknown_001.h>
+#include "gr/grcorneria.h"
+#include "it/item2.h"
+#include "pl/pl_unknown_001.h"
 
 bool ftFox_AppealS_CheckIfUsed(Fighter* fp)
 {

@@ -1,8 +1,9 @@
 #ifndef _ftcliffcommon_h_
 #define _ftcliffcommon_h_
 
+#include "ft/fighter.h"
+
 #include <baselib/gobj.h>
-#include <melee/ft/fighter.h>
 #include <Runtime/platform.h>
 
 bool func_80081298(HSD_GObj* gobj);

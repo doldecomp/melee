@@ -1,10 +1,11 @@
 #ifndef _stage_h_
 #define _stage_h_
 
+#include "gr/types.h"
+
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>
-#include <melee/gr/types.h>
 #include <Runtime/platform.h>
 
 f32 Stage_GetCamBoundsLeftOffset(void);

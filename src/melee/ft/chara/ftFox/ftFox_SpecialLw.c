@@ -1,13 +1,12 @@
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/ftparts.h"
 #include "ftFox/ftfox.h"
-
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftparts.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
 
 void ftFox_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
 {

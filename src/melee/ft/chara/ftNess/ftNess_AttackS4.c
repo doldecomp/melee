@@ -1,11 +1,10 @@
 #include "ftNess/ftNess_AttackS4.h"
 
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
 #include "ftNess/ftNess.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/it/code_8027CF30.h>
+#include "it/code_8027CF30.h"
 
 // 0x80114BF4
 void ftNess_AttackS4_OnReflect(

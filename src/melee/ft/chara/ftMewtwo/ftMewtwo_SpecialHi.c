@@ -1,15 +1,15 @@
 #include "ftMewtwo/ftMewtwo_SpecialHi.h"
 
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftcoll.h"
 #include "ftMewtwo/ftmewtwo.h"
+#include "lb/lbunknown_001.h"
 #include "melee/ft/types.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/lb/lbunknown_001.h>
 #include <MSL/trigf.h>
 
 /// Create Teleport Start GFX

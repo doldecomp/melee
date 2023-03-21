@@ -1,9 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTCLINK_FTCLINK_H
 #define MELEE_FT_CHARA_FTCLINK_FTCLINK_H
 
+#include "ft/fighter.h"
+#include "it/code_8027CF30.h"
+
 #include <baselib/gobj.h>
-#include <melee/ft/fighter.h>
-#include <melee/it/code_8027CF30.h>
 
 /// @todo this is #ftLinkAttributes.
 typedef struct _CLinkAttributes {

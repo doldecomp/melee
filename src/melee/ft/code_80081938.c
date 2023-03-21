@@ -1,10 +1,12 @@
+#include "ft/code_80081938.h"
+
+#include "ft/ft_unknown_006.h"
+#include "it/item.h"
+#include "it/item2.h"
+#include "lb/lbunknown_003.h"
+
 #include <placeholder.h>
 #include <baselib/gobj.h>
-#include <melee/ft/code_80081938.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/item.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbunknown_003.h>
 
 #ifdef MWERKS_GEKKO
 

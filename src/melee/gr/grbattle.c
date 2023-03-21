@@ -1,16 +1,18 @@
+#include "gr/grbattle.h"
+
+#include "gm/code_801601C4.h"
+#include "gr/granime.h"
+#include "gr/grdisplay.h"
+#include "gr/grlib.h"
+#include "gr/grmaterial.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "lb/lbunknown_003.h"
+
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grbattle.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/grmaterial.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/lb/lbunknown_003.h>
 
 extern StageInfo stage_info;
 

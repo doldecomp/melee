@@ -1,10 +1,11 @@
 #ifndef MELEE_FT_FTANIM_H
 #define MELEE_FT_FTANIM_H
 
+#include "ft/forward.h"
+
 #include <placeholder.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <melee/ft/forward.h>
 
 void func_8006E9B4(HSD_GObj*);
 void func_8006EBA4(HSD_GObj*);

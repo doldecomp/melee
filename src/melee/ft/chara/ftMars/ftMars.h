@@ -1,8 +1,9 @@
 #ifndef _ftmars_h_
 #define _ftmars_h_
 
+#include "ft/fighter.h"
+
 #include <baselib/gobj.h>
-#include <melee/ft/fighter.h>
 #include <Runtime/platform.h>
 
 extern ActionState as_table_mars[];

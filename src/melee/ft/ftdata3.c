@@ -1,13 +1,13 @@
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/types.h"
 #include "ftCrazyHand/ftcrazyhand.h"
 #include "ftKirby/ftkirby.h"
 #include "ftMasterHand/ftMasterHand_32.h"
 #include "ftMasterHand/ftMasterHand_33.h"
 #include "ftMasterHand/ftMasterHand_34.h"
 
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/types.h>
 #include <Runtime/platform.h>
 
 ActionState ActionStateList[] = {

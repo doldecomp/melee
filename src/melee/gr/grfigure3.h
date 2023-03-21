@@ -1,8 +1,9 @@
 #ifndef _grfigure3_h_
 #define _grfigure3_h_
 
+#include "gr/stage.h"
+
 #include <baselib/gobj.h>
-#include <melee/gr/stage.h>
 
 static void func_8020E504(int number);
 static void lbl_8020E508(void);

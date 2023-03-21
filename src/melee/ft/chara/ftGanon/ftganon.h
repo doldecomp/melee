@@ -1,8 +1,9 @@
 #ifndef _ftganon_h_
 #define _ftganon_h_
 
+#include "ft/fighter.h"
+
 #include <baselib/gobj.h>
-#include <melee/ft/fighter.h>
 
 extern ActionState as_table_ganon[];
 extern char lbl_803D2CD8[];

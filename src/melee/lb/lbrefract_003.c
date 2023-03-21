@@ -1,5 +1,6 @@
+#include "lb/lbrefract.h"
+
 #include <math.h>
-#include <melee/lb/lbrefract.h>
 #include <MetroTRK/intrinsics.h>
 
 #pragma region trigf

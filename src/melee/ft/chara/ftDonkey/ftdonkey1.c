@@ -1,12 +1,11 @@
 #include "ftDonkey/ftdonkey1.h"
 
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
 #include "ftDonkey/ftdonkey.h"
 #include "ftDonkey/ftdonkey4.h"
 #include "ftDonkey/ftdonkey6.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
 
 bool ftDonkey_800DF938(HSD_GObj* gobj)
 {

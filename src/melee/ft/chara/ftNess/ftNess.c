@@ -1,11 +1,10 @@
 #include "ftNess/ftNess.h"
 
+#include "ft/forward.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftNess/ftNess_SpecialLw.h"
-
-#include <melee/ft/forward.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 
 ActionState as_table_ness[] = {
     { 62, 0x00241A09, 0x0A000000, ftNess_AttackS4_Anim, ftNess_AttackS4_IASA,

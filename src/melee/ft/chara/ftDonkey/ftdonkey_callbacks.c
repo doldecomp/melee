@@ -1,5 +1,12 @@
 #include "ftDonkey/ftdonkey_callbacks.h"
 
+#include "ft/code_80081B38.h"
+#include "ft/forward.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftcoll.h"
+#include "ft/ftdata.h"
+#include "ft/ftparts.h"
 #include "ftDonkey/ftdonkey.h"
 #include "ftDonkey/ftdonkey1.h"
 #include "ftDonkey/ftdonkey4.h"
@@ -13,16 +20,8 @@
 #include "ftDonkey/ftdonkey_SpecialN.h"
 #include "ftDonkey/ftdonkey_SpecialS.h"
 #include "ftDonkey/ftdonkey_walk.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftparts.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/mp/mplib.h>
+#include "lb/lbmthp.h"
+#include "mp/mplib.h"
 
 ActionState as_table_donkey[] = {
     { 295, 0x00480000, 0x35400000, NULL, ftDonkey_800DF9F0, ftDonkey_800DFA50,

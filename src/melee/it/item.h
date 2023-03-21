@@ -5,10 +5,11 @@
 #ifndef MELEE_IT_ITEM_H
 #define MELEE_IT_ITEM_H
 
+#include "it/types.h"
+
 #include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <melee/it/types.h>
 #include <Runtime/platform.h>
 
 extern HSD_ObjAllocData itemAllocData;

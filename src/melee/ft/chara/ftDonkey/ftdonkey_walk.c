@@ -1,12 +1,11 @@
 #include "ftDonkey/ftdonkey_walk.h"
 
+#include "ft/ft_unknown_006.h"
+#include "ft/ftwalkcommon.h"
 #include "ftDonkey/ftdonkey.h"
 #include "ftDonkey/ftdonkey1.h"
 #include "ftDonkey/ftdonkey6.h"
-
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftwalkcommon.h>
-#include <melee/it/code_8027CF30.h>
+#include "it/code_8027CF30.h"
 
 bool ftDonkey_800DFA98(HSD_GObj* gobj)
 {

@@ -1,8 +1,9 @@
 #ifndef _grshrine_h_
 #define _grshrine_h_
 
+#include "gr/stage.h"
+
 #include <baselib/gobj.h>
-#include <melee/gr/stage.h>
 
 static void func_80201C60(int);
 static void func_80201C64(void);

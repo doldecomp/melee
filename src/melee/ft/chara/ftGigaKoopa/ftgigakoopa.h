@@ -1,8 +1,9 @@
 #ifndef _ftgigakoopa_h_
 #define _ftgigakoopa_h_
 
+#include "ft/fighter.h"
+
 #include <baselib/gobj.h>
-#include <melee/ft/fighter.h>
 
 extern ActionState as_table_gkoopa[];
 extern ActionState lbl_803D38C8[];

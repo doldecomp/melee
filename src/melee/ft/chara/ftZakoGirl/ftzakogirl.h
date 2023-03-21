@@ -1,8 +1,9 @@
 #ifndef _ftzakogirl_h_
 #define _ftzakogirl_h_
 
+#include "ft/fighter.h"
+
 #include <baselib/gobj.h>
-#include <melee/ft/fighter.h>
 
 extern char lbl_803D3568[];
 extern char lbl_803D3574[];

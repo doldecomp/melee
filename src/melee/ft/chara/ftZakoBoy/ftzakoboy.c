@@ -1,7 +1,7 @@
 #include "ftZakoBoy/ftzakoboy.h"
 
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 char lbl_803D34E8[] = "PlBo.dat";
 char lbl_803D34F4[] = "ftDataBoy";

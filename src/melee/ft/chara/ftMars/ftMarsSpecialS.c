@@ -1,9 +1,8 @@
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
 #include "ftMars/ftMars.h"
 #include "melee/ft/inlines.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
 
 void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
 {

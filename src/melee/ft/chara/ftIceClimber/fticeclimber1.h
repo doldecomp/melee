@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER1_H
 #define MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER1_H
 
+#include "ft/types.h"
+
 #include <baselib/forward.h>
-#include <melee/ft/types.h>
 #include <Runtime/platform.h>
 
 extern ActionState as_table_iceclimber[];

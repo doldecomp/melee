@@ -1,15 +1,18 @@
 /** @file
  * @todo Rename to @c ftUnk1.c
  */
+#include "ft/code_8007C630.h"
+
+#include "text_2.h"
+
+#include "ef/efsync.h"
+#include "ft/ftcoll.h"
+#include "ft/ftlib.h"
+#include "it/item.h"
+#include "it/item2.h"
+#include "lb/lbunknown_001.h"
+
 #include <placeholder.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_8007C630.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftlib.h>
-#include <melee/it/item.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/text_2.h>
 #include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO

@@ -1,11 +1,12 @@
 #ifndef MELEE_IF_IFSTATUS_H
 #define MELEE_IF_IFSTATUS_H
 
+#include "pl/player.h"
+
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 #include <baselib/tobj.h>
-#include <melee/pl/player.h>
 #include <Runtime/platform.h>
 
 typedef struct _HudFlags {

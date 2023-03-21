@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTPEACH_FTPEACH_H
 #define MELEE_FT_CHARA_FTPEACH_FTPEACH_H
 
+#include "ft/fighter.h"
+
 #include <baselib/gobj.h>
-#include <melee/ft/fighter.h>
 
 typedef struct _ftPeachAttributes {
     f32 unk0;

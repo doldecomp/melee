@@ -1,10 +1,9 @@
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/inlines.h"
 #include "ftPikachu/ftpikachu.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/inlines.h>
-#include <melee/lb/forward.h>
+#include "lb/forward.h"
 
 void ftPikachu_SpecialS_StartAction(HSD_GObj* gobj)
 {

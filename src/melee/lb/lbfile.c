@@ -1,3 +1,10 @@
+#include "lb/lbfile.h"
+
+#include "lb/lbdvd.h"
+#include "lb/lbheap.h"
+#include "lb/lblanguage.h"
+#include "lb/lbunknown_004.h"
+
 #include <string.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/os.h>
@@ -5,11 +12,6 @@
 #include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbfile.h>
-#include <melee/lb/lbheap.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbunknown_004.h>
 
 static char lbl_803BA508[] = __FILE__;
 

@@ -1,8 +1,9 @@
 #ifndef MELEE_GR_GRDYNAMICATTR_H
 #define MELEE_GR_GRDYNAMICATTR_H
 
+#include "gr/forward.h"
+
 #include <dolphin/mtx/types.h>
-#include <melee/gr/forward.h>
 #include <Runtime/platform.h>
 
 struct grDynamicAttr_UnkStruct {

@@ -1,9 +1,9 @@
 #include "ftGameWatch/ftgamewatch.h"
 
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState as_table_gamewatch[] = {
     { 46, 0x002C0201, 0x02800000, ftGameWatch_Attack11_Anim,

@@ -1,14 +1,13 @@
 #include "ftSamus/ftsamus3.h"
 
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
 #include "ftSamus/ftsamus.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 #include "melee/ft/inlines.h"
-
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
 
 void ftSamus_801293BC_inner(HSD_GObj* gobj)
 {

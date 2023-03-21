@@ -1,11 +1,13 @@
+#include "gr/grtkoopa.h"
+
+#include "gr/granime.h"
+#include "gr/grdisplay.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "lb/lbunknown_003.h"
+
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grtkoopa.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/lb/lbunknown_003.h>
 
 extern StageInfo stage_info;
 

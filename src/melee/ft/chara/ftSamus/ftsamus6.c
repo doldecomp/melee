@@ -1,12 +1,11 @@
 #include "ftSamus/ftsamus6.h"
 
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
 #include "ftSamus/ftsamus.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/lb/lbunknown_001.h>
+#include "lb/lbunknown_001.h"
 
 void ftSamus_8012ADF0(HSD_GObj* gobj)
 {

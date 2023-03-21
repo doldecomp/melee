@@ -1,7 +1,8 @@
 #ifndef MELEE_MP_MPCOLL_H
 #define MELEE_MP_MPCOLL_H
 
-#include <melee/ft/fighter.h>
+#include "ft/fighter.h"
+
 #include <Runtime/platform.h>
 
 void func_80042374(CollData*, f32, f32, f32);

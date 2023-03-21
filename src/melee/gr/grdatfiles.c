@@ -1,10 +1,12 @@
+#include "gr/grdatfiles.h"
+
+#include "lb/lbarchive.h"
+#include "lb/lbheap.h"
+#include "lb/lbunknown_001.h"
+
 #include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <baselib/psstructs.h>
-#include <melee/gr/grdatfiles.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbheap.h>
-#include <melee/lb/lbunknown_001.h>
 
 extern StageInfo stage_info;
 

@@ -1,13 +1,12 @@
 #include "ftSamus/ftsamus5.h"
 
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftparts.h"
 #include "ftSamus/ftsamus.h"
-
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftparts.h>
 
 void ftSamus_SpecialHi_StartAction(HSD_GObj* gobj)
 {

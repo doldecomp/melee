@@ -1,8 +1,9 @@
 #ifndef _grtbattle_h_
 #define _grtbattle_h_
 
+#include "gr/stage.h"
+
 #include <baselib/gobj.h>
-#include <melee/gr/stage.h>
 
 static void func_80219C98(int);
 static void func_80219CA4(void);

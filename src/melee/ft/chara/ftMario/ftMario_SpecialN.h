@@ -1,7 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALN_H
 #define MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALN_H
 
-#include <melee/ft/forward.h>
+#include "ft/forward.h"
+
 #include <Runtime/platform.h>
 
 int ftMario_SpecialN_VitaminRandom(HSD_GObj*);

@@ -1,10 +1,9 @@
 #include "ftFox/ftfox.h"
 
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 #include "ftFox/ftFox_SpecialN.h"
-
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 
 ActionState as_table_fox[] = {
     { 295, 0x00340111, 0x12000000, ftFox_SpecialNStart_Anim,

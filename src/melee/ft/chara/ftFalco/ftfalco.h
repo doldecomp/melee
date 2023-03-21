@@ -1,8 +1,9 @@
 #ifndef _ftfalco_h_
 #define _ftfalco_h_
 
+#include "ft/fighter.h"
+
 #include <baselib/gobj.h>
-#include <melee/ft/fighter.h>
 
 extern ActionState as_table_falco[];
 extern char lbl_803D1CA8[];

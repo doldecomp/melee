@@ -1,12 +1,11 @@
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
 #include "ftLuigi/ftluigi.h"
 #include "melee/ft/inlines.h"
-
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
 
 // 0x801445C4
 // https://decomp.me/scratch/TTyNT // Luigi Cyclone Rotation Update

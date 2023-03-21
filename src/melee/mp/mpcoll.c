@@ -1,12 +1,14 @@
+#include "mp/mpcoll.h"
+
+#include "db/db_unknown_001.h"
+#include "ft/ftlib.h"
+#include "gr/grdynamicattr.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbvector.h"
+#include "mp/mplib.h"
+
 #include <placeholder.h>
 #include <dolphin/os/os.h>
-#include <melee/db/db_unknown_001.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gr/grdynamicattr.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/mp/mplib.h>
 #include <MSL/trigf.h>
 
 extern s32 lbl_804D64A0;

@@ -1,11 +1,10 @@
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftparts.h"
 #include "ftLuigi/ftluigi.h"
-
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 // 0x8014267C
 // https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Action State

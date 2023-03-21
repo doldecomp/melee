@@ -1,16 +1,18 @@
+#include "gr/grlib.h"
+
+#include "cm/camera.h"
+#include "gr/grbigblue.h"
+#include "gr/gricemt.h"
+#include "gr/ground.h"
+#include "gr/grrcruise.h"
+#include "it/item2.h"
+#include "lb/lbunknown_003.h"
+
 #include <placeholder.h>
 #include <baselib/baselib_unknown_002.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/psappsrt.h>
-#include <melee/cm/camera.h>
-#include <melee/gr/grbigblue.h>
-#include <melee/gr/gricemt.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grrcruise.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbunknown_003.h>
 
 extern StageInfo stage_info;
 extern u8 lbl_804D7849;

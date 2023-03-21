@@ -1,18 +1,18 @@
 #include "ftSeak/ftSeak_SpecialS.h"
 
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
+#include "ft/ftdata.h"
 #include "ftNess/ftNess.h"
 #include "ftSeak/ftSeak_Init.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 #include <common_structs.h>
 #include <math.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftdata.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
 
 /// @todo Fix common data struct
 #define COMMON_DATA_F32 ((f32*) p_ftCommonData)

@@ -1,8 +1,9 @@
 #ifndef _grtyoshi_h_
 #define _grtyoshi_h_
 
+#include "gr/stage.h"
+
 #include <baselib/gobj.h>
-#include <melee/gr/stage.h>
 
 static void func_80223B48(int);
 static void lbl_80223B4C(void);

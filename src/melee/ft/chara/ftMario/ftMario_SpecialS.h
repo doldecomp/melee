@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALS_H
 #define MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALS_H
 
+#include "ft/forward.h"
+
 #include <baselib/forward.h>
-#include <melee/ft/forward.h>
 #include <Runtime/platform.h>
 
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj);

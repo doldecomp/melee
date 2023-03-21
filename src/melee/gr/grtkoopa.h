@@ -1,8 +1,9 @@
 #ifndef _grtkoopa_h_
 #define _grtkoopa_h_
 
+#include "gr/stage.h"
+
 #include <baselib/gobj.h>
-#include <melee/gr/stage.h>
 
 static void func_80221648(int);
 static void lbl_8022164C(void);

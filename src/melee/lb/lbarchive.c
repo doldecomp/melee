@@ -1,6 +1,7 @@
+#include "lb/lbarchive.h"
+
 #include <dolphin/os/os.h>
 #include <baselib/debug.h>
-#include <melee/lb/lbarchive.h>
 
 extern char lbl_803BA588[]; //"HSD_ArchiveParse error!\n"
 extern char lbl_803BA5A4[]; //"lbarchive.c"

@@ -1,13 +1,12 @@
 #include "ftNess/ftNess_SpecialN.h"
 
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
 #include "ftNess/ftNess.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 /// Ness PK Flash Charge ASID check
 bool ftNess_CheckSpecialNHold(HSD_GObj* gobj)

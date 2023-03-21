@@ -1,9 +1,10 @@
 #ifndef _ftcoll_h_
 #define _ftcoll_h_
 
+#include "ft/fighter.h"
+
 #include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>
-#include <melee/ft/fighter.h>
 #include <Runtime/platform.h>
 
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim,

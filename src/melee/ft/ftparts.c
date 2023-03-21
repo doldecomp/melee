@@ -1,3 +1,10 @@
+#include "ft/ftparts.h"
+
+#include "ft/fighter.h"
+#include "ft/ftanim.h"
+#include "ft/ftdata.h"
+#include "lb/lbrefract.h"
+
 #include <placeholder.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
@@ -9,11 +16,6 @@
 #include <baselib/perf.h>
 #include <baselib/pobj.h>
 #include <baselib/util.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftparts.h>
-#include <melee/lb/lbrefract.h>
 
 #define MAX_FT_PARTS 140
 

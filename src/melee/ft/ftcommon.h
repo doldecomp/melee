@@ -1,10 +1,11 @@
 #ifndef MELEE_FT_FTCOMMON_H
 #define MELEE_FT_FTCOMMON_H
 
+#include "ft/forward.h"
+
 #include <dolphin/mtx.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
-#include <melee/ft/forward.h>
 #include <Runtime/platform.h>
 
 void func_8007C930(Fighter*, f32);

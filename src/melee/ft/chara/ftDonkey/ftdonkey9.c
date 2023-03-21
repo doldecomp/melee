@@ -1,11 +1,10 @@
 #include "ftDonkey/ftdonkey9.h"
 
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
 #include "ftDonkey/ftdonkey.h"
 #include "ftDonkey/ftdonkey1.h"
-
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/item.h>
+#include "it/item.h"
 
 void ftDonkey_800E0698(HSD_GObj* gobj)
 {

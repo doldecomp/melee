@@ -1,9 +1,10 @@
-#include <melee/gm/code_801601C4.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/stage.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbvector.h>
-#include <melee/mp/mplib.h>
+#include "gr/stage.h"
+
+#include "gm/code_801601C4.h"
+#include "gr/ground.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbvector.h"
+#include "mp/mplib.h"
 
 extern struct StageInfo stage_info;
 

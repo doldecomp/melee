@@ -1,8 +1,9 @@
 #ifndef _ftkoopa_h_
 #define _ftkoopa_h_
 
+#include "ft/fighter.h"
+
 #include <baselib/gobj.h>
-#include <melee/ft/fighter.h>
 
 typedef struct _ftKoopaAttributes {
     f32 x0;

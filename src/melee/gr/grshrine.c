@@ -1,13 +1,15 @@
+#include "gr/grshrine.h"
+
+#include "gr/granime.h"
+#include "gr/grdisplay.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
+
 #include <math.h>
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grshrine.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
 
 static void* lbl_804D6A18;
 
