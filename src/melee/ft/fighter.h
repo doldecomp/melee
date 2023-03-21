@@ -3,15 +3,9 @@
 
 #include <platform.h>
 #include "ftCommon/forward.h"
+#include <baselib/forward.h>
 
-#include "ft/ftanim.h"
-#include "ft/inlines.h"
-#include "ft/types.h"
-#include "gr/stage.h"
-#include "it/item2.h"
-#include "lb/lbcollision.h"
-#include "lb/lbrefract.h"
-#include "pl/player.h"
+#include "types.h"
 
 /// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers
