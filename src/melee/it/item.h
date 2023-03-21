@@ -9,7 +9,6 @@
 
 #include "it/types.h"
 
-#include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
