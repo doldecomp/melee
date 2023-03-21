@@ -5,9 +5,9 @@
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcoll.h"
+#include "ft/inlines.h"
 #include "ftLuigi/ftluigi.h"
 #include "lb/forward.h"
-#include "melee/ft/inlines.h"
 
 #include <baselib/gobjproc.h>
 
