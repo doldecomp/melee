@@ -15,42 +15,60 @@
 #include <baselib/gobj.h>
 
 MotionState ftPopo_MotionStateTable[] = {
-    { 295, 0x00340111, 0x12800000, lbl_8011F318, lbl_8011F390, lbl_8011F398,
-      lbl_8011F3D8, func_800761C8 },
-    { 296, 0x00340511, 0x12800000, lbl_8011F354, lbl_8011F394, lbl_8011F3B8,
-      lbl_8011F454, func_800761C8 },
-    { 297, 0x00340212, 0x13800000, lbl_8011FC78, lbl_8011FF40, lbl_80120080,
-      lbl_80120660, func_800761C8 },
-    { 298, 0x00340212, 0x13800000, lbl_8011FCD0, lbl_8011FF90, lbl_80120230,
-      lbl_80120854, func_800761C8 },
-    { 299, 0x00340612, 0x13800000, lbl_8011FD9C, lbl_8011FFE0, lbl_801203E0,
-      lbl_80120A48, func_800761C8 },
-    { 300, 0x00340612, 0x13800000, lbl_8011FE48, lbl_80120030, lbl_80120520,
-      lbl_80120C58, func_800761C8 },
-    { 301, 0x00340213, 0x14000000, lbl_801212C4, lbl_801214D4, lbl_801215DC,
-      lbl_80121740, func_800761C8 },
-    { 302, 0x00340213, 0x14000000, lbl_80121944, lbl_80121AC8, lbl_80121AD0,
-      lbl_80121C34, func_800761C8 },
-    { 303, 0x00340213, 0x14000000, lbl_801223B8, lbl_8012248C, lbl_80122494,
-      lbl_80122664, func_800761C8 },
-    { 304, 0x00340213, 0x14000000, lbl_80121E10, lbl_80121EB0, lbl_80121EB8,
-      lbl_80121F2C, func_800761C8 },
-    { 305, 0x00340213, 0x14000000, lbl_80122110, lbl_801221AC, lbl_801221B4,
-      lbl_80122228, func_800761C8 },
-    { 306, 0x00340613, 0x14000000, lbl_801213CC, lbl_80121558, lbl_80121680,
-      lbl_8012177C, func_800761C8 },
-    { 307, 0x00340613, 0x14000000, lbl_801219F4, lbl_80121ACC, lbl_80121B74,
-      lbl_80121C70, func_800761C8 },
-    { 308, 0x00340613, 0x14000000, lbl_80122410, lbl_80122490, lbl_80122538,
-      lbl_801226A0, func_800761C8 },
-    { 309, 0x00340613, 0x14000000, lbl_80121E4C, lbl_80121EB4, lbl_80121ED8,
-      lbl_80121F68, func_800761C8 },
-    { 310, 0x00340613, 0x14000000, lbl_8012214C, lbl_801221B0, lbl_801221D4,
-      lbl_80122264, func_800761C8 },
-    { 311, 0x00340014, 0x15800000, lbl_80122A0C, lbl_80122B0C, lbl_80122B14,
-      lbl_80122C18, func_800761C8 },
-    { 312, 0x00340414, 0x15800000, lbl_80122A8C, lbl_80122B10, lbl_80122B34,
-      lbl_80122D04, func_800761C8 },
+    { 295, 0x00340111, 0x12800000, ftIceClimber_8011F318,
+      ftIceClimber_8011F390, ftIceClimber_8011F398, ftIceClimber_8011F3D8,
+      func_800761C8 },
+    { 296, 0x00340511, 0x12800000, ftIceClimber_8011F354,
+      ftIceClimber_8011F394, ftIceClimber_8011F3B8, ftIceClimber_8011F454,
+      func_800761C8 },
+    { 297, 0x00340212, 0x13800000, ftIceClimber_8011FC78,
+      ftIceClimber_8011FF40, ftIceClimber_80120080, ftIceClimber_80120660,
+      func_800761C8 },
+    { 298, 0x00340212, 0x13800000, ftIceClimber_8011FCD0,
+      ftIceClimber_8011FF90, ftIceClimber_80120230, ftIceClimber_80120854,
+      func_800761C8 },
+    { 299, 0x00340612, 0x13800000, ftIceClimber_8011FD9C,
+      ftIceClimber_8011FFE0, ftIceClimber_801203E0, ftIceClimber_80120A48,
+      func_800761C8 },
+    { 300, 0x00340612, 0x13800000, ftIceClimber_8011FE48,
+      ftIceClimber_80120030, ftIceClimber_80120520, ftIceClimber_80120C58,
+      func_800761C8 },
+    { 301, 0x00340213, 0x14000000, ftIceClimber_801212C4,
+      ftIceClimber_801214D4, ftIceClimber_801215DC, ftIceClimber_80121740,
+      func_800761C8 },
+    { 302, 0x00340213, 0x14000000, ftIceClimber_80121944,
+      ftIceClimber_80121AC8, ftIceClimber_80121AD0, ftIceClimber_80121C34,
+      func_800761C8 },
+    { 303, 0x00340213, 0x14000000, ftIceClimber_801223B8,
+      ftIceClimber_8012248C, ftIceClimber_80122494, ftIceClimber_80122664,
+      func_800761C8 },
+    { 304, 0x00340213, 0x14000000, ftIceClimber_80121E10,
+      ftIceClimber_80121EB0, ftIceClimber_80121EB8, ftIceClimber_80121F2C,
+      func_800761C8 },
+    { 305, 0x00340213, 0x14000000, ftIceClimber_80122110,
+      ftIceClimber_801221AC, ftIceClimber_801221B4, ftIceClimber_80122228,
+      func_800761C8 },
+    { 306, 0x00340613, 0x14000000, ftIceClimber_801213CC,
+      ftIceClimber_80121558, ftIceClimber_80121680, ftIceClimber_8012177C,
+      func_800761C8 },
+    { 307, 0x00340613, 0x14000000, ftIceClimber_801219F4,
+      ftIceClimber_80121ACC, ftIceClimber_80121B74, ftIceClimber_80121C70,
+      func_800761C8 },
+    { 308, 0x00340613, 0x14000000, ftIceClimber_80122410,
+      ftIceClimber_80122490, ftIceClimber_80122538, ftIceClimber_801226A0,
+      func_800761C8 },
+    { 309, 0x00340613, 0x14000000, ftIceClimber_80121E4C,
+      ftIceClimber_80121EB4, ftIceClimber_80121ED8, ftIceClimber_80121F68,
+      func_800761C8 },
+    { 310, 0x00340613, 0x14000000, ftIceClimber_8012214C,
+      ftIceClimber_801221B0, ftIceClimber_801221D4, ftIceClimber_80122264,
+      func_800761C8 },
+    { 311, 0x00340014, 0x15800000, ftIceClimber_80122A0C,
+      ftIceClimber_80122B0C, ftIceClimber_80122B14, ftIceClimber_80122C18,
+      func_800761C8 },
+    { 312, 0x00340414, 0x15800000, ftIceClimber_80122A8C,
+      ftIceClimber_80122B10, ftIceClimber_80122B34, ftIceClimber_80122D04,
+      func_800761C8 },
     { 313, 0x00340212, 0x13800000, lbl_80123CA4, lbl_80123E58, lbl_80123E60,
       lbl_80123F98, func_800761C8 },
     { 314, 0x00340612, 0x13800000, lbl_80123D68, lbl_80123E5C, lbl_80123EFC,
@@ -159,10 +177,10 @@ void ftIceClimber_OnDeath(HSD_GObj* gobj)
 
 void ftIceClimber_8011F060(HSD_GObj* gobj)
 {
-    func_8011F190(gobj);
-    func_80122898(gobj);
-    func_80121164(gobj);
-    func_8011F68C(gobj);
+    ftIceClimber_8011F190(gobj);
+    ftIceClimber_80122898(gobj);
+    ftIceClimber_80121164(gobj);
+    ftIceClimber_8011F68C(gobj);
 }
 
 void ftIceClimber_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -180,7 +198,7 @@ void ftIceClimber_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, true);
 }
 
-void func_8011F16C(HSD_GObj* gobj, uint i)
+void ftIceClimber_8011F16C(HSD_GObj* gobj, uint i)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
@@ -192,7 +210,7 @@ void func_8011F16C(HSD_GObj* gobj, uint i)
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-void func_8011F190(HSD_GObj* gobj)
+void ftIceClimber_8011F190(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
 
@@ -200,7 +218,7 @@ void func_8011F190(HSD_GObj* gobj)
         return;
 
     func_802C17DC(fp->fv.nn.x222C);
-    func_8011F16C(gobj, fp->fv.nn.x222C);
+    ftIceClimber_8011F16C(gobj, fp->fv.nn.x222C);
 }
 
 extern f32 const lbl_804D9838;
@@ -217,7 +235,7 @@ void ftIceClimber_SpecialN_StartMotion(HSD_GObj* gobj)
                               lbl_804D9838);
 
     func_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &lbl_8011F500;
+    fp->cb.x21BC_callback_Accessory4 = &ftIceClimber_8011F500;
 }
 
 extern f32 const lbl_804D9840;
@@ -248,36 +266,36 @@ void ftIceClimber_SpecialAirN_StartMotion(HSD_GObj* gobj)
                               lbl_804D9838);
 
     func_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &lbl_8011F500;
+    fp->cb.x21BC_callback_Accessory4 = &ftIceClimber_8011F500;
 }
 
-void lbl_8011F318(HSD_GObj* gobj)
+void ftIceClimber_8011F318(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
         func_8008A2BC(gobj);
 }
 
-void lbl_8011F354(HSD_GObj* gobj)
+void ftIceClimber_8011F354(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
         func_800CC730(gobj);
 }
 
-void lbl_8011F390(HSD_GObj* arg0) {}
+void ftIceClimber_8011F390(HSD_GObj* arg0) {}
 
-void lbl_8011F394(HSD_GObj* arg0) {}
+void ftIceClimber_8011F394(HSD_GObj* arg0) {}
 
-void lbl_8011F398(HSD_GObj* gobj)
+void ftIceClimber_8011F398(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
 }
 
-void lbl_8011F3B8(HSD_GObj* gobj)
+void ftIceClimber_8011F3B8(HSD_GObj* gobj)
 {
     func_80084EEC(gobj);
 }
 
-void lbl_8011F3D8(HSD_GObj* gobj)
+void ftIceClimber_8011F3D8(HSD_GObj* gobj)
 {
     if (!func_80082708(gobj)) {
         Fighter* fp1;
@@ -298,7 +316,7 @@ void lbl_8011F3D8(HSD_GObj* gobj)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8011F454(HSD_GObj*)
+asm void ftIceClimber_8011F454(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F454 0011C034  7C 08 02 A6 */	mflr r0
@@ -352,7 +370,7 @@ lbl_8011F4E0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8011F500(HSD_GObj*)
+asm void ftIceClimber_8011F500(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F500 0011C0E0  7C 08 02 A6 */	mflr r0
@@ -467,7 +485,7 @@ extern f32 const lbl_804D9848;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8011F68C(HSD_GObj*)
+asm void ftIceClimber_8011F68C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F68C 0011C26C  7C 08 02 A6 */	mflr r0
@@ -503,7 +521,7 @@ lbl_8011F6DC:
 #pragma pop
 #endif
 
-bool func_8011F6FC(HSD_GObj* gobj)
+bool ftIceClimber_8011F6FC(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
