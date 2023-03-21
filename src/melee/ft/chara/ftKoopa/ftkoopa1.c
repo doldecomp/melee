@@ -498,7 +498,7 @@ void func_801334E4(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
 
     if (fp->x1A58_interactedFighter != NULL)
-        func_800BCE64(fp->x1A58_interactedFighter, ASID_THROWNKOOPAF);
+        func_800BCE64(fp->x1A58_interactedFighter, ftCo_AS_ThrownKoopaF);
 
     func_8007E2F4(fp, 511);
     func_8007E2FC(gobj);
@@ -521,7 +521,7 @@ void func_8013359C(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
 
     if (fp->x1A58_interactedFighter != NULL)
-        func_800BCE64(fp->x1A58_interactedFighter, ASID_THROWNKOOPAB);
+        func_800BCE64(fp->x1A58_interactedFighter, ftCo_AS_ThrownKoopaB);
 
     func_8007E2F4(fp, 511);
     func_8007E2FC(gobj);

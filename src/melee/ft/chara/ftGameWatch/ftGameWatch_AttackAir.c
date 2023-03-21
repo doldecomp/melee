@@ -326,19 +326,19 @@ void ftGameWatch_AttackAir_DecideAction(HSD_GObj* gobj)
     enum_t ASID = func_8008CE68(GET_FIGHTER(gobj));
 
     switch (ASID) {
-    case ASID_ATTACKAIRN:
+    case ftCo_AS_AttackAirN:
         ftGameWatch_AttackAirN_Action(gobj);
         return;
-    case ASID_ATTACKAIRF:
+    case ftCo_AS_AttackAirF:
         func_8008CFAC(gobj, ASID);
         return;
-    case ASID_ATTACKAIRB:
+    case ftCo_AS_AttackAirB:
         ftGameWatch_AttackAirB_Action(gobj);
         return;
-    case ASID_ATTACKAIRHI:
+    case ftCo_AS_AttackAirHi:
         ftGameWatch_AttackAirHi_Action(gobj);
         return;
-    case ASID_ATTACKAIRLW:
+    case ftCo_AS_AttackAirLw:
         func_8008CFAC(gobj, ASID);
         return;
     }

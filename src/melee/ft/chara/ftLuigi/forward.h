@@ -5,7 +5,7 @@
 #include "ftCommon/forward.h"
 
 typedef enum ftLuigiAction {
-    AS_LUIGI_SPECIALN = ASID_MAX,
+    AS_LUIGI_SPECIALN = ftCo_AS_Count,
     AS_LUIGI_SPECIALAIRN,
     AS_LUIGI_SPECIALS_START,
     AS_LUIGI_SPECIALS_HOLD,

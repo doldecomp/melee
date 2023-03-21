@@ -157,7 +157,7 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 arg2)
     if (cur != NULL && !fp->x221B_b5 && cur != victim)
         arg2 *= p_ftCommonData->x128;
 
-    if (fp->action_id == ASID_DAMAGEICE)
+    if (fp->action_id == ftCo_AS_DamageIce)
         arg2 *= p_ftCommonData->x714;
 
     return arg2 * fp->dmg.x182c_behavior;

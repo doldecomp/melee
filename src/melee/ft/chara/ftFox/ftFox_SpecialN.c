@@ -86,10 +86,10 @@ s32 ftFox_GetBlasterAction(HSD_GObj* gobj)
                 ASID = currASID - AS_FOX_SPECIALN_START;
                 break;
 
-            case ASID_THROWB:
-            case ASID_THROWHI:
-            case ASID_THROWLW:
-                ASID = currASID - ASID_CATCHDASH;
+            case ftCo_AS_ThrowB:
+            case ftCo_AS_ThrowHi:
+            case ftCo_AS_ThrowLw:
+                ASID = currASID - ftCo_AS_CatchDash;
             }
         }
     }
@@ -111,9 +111,9 @@ bool ftFox_CheckBlasterAction(HSD_GObj* gobj)
         case AS_FOX_SPECIALAIRN_START:
         case AS_FOX_SPECIALAIRN_LOOP:
         case AS_FOX_SPECIALAIRN_END:
-        case ASID_THROWB:
-        case ASID_THROWHI:
-        case ASID_THROWLW:
+        case ftCo_AS_ThrowB:
+        case ftCo_AS_ThrowHi:
+        case ftCo_AS_ThrowLw:
 
             if (fp->x2070.x2071_b6 != false) {
                 return true;
@@ -823,9 +823,9 @@ void ftFox_Throw_Anim(HSD_GObj* gobj)
                     sp44.z = 0.0f;
                     sp50.z = 0.0f;
                     switch (ftGetAction(fp)) {
-                    case ASID_THROWB:
-                    case ASID_THROWHI:
-                    case ASID_THROWLW:
+                    case ftCo_AS_ThrowB:
+                    case ftCo_AS_ThrowHi:
+                    case ftCo_AS_ThrowLw:
 
                         func_8029C6CC(atan2f(sp50.y - sp44.y, sp50.x - sp44.x),
                                       foxAttrs->x14_FOX_BLASTER_VEL, gobj,
@@ -842,8 +842,8 @@ void ftFox_Throw_Anim(HSD_GObj* gobj)
                     }
                     func_802AE1D0(fp->ev.fx.x222C_blasterGObj);
                     switch (ftGetAction(fp)) {
-                    case ASID_THROWHI:
-                    case ASID_THROWLW: {
+                    case ftCo_AS_ThrowHi:
+                    case ftCo_AS_ThrowLw: {
                         switch (func_800872A4(gobj)) {
                         case FTKIND_FOX:
                             func_80088148(fp, 0x1AE1DU, SFX_VOLUME_MAX,
@@ -857,7 +857,7 @@ void ftFox_Throw_Anim(HSD_GObj* gobj)
                     default:
                         break;
                     }
-                    case ASID_THROWB:
+                    case ftCo_AS_ThrowB:
                         switch (func_800872A4(gobj)) {
                         case FTKIND_FOX:
                             func_80088148(fp, foxSFX[1.0f == fp->facing_dir],

@@ -100,8 +100,8 @@ bool func_8008169C(HSD_GObj* gobj)
                 fp0->x670_timer_lstick_tilt_x < p_ftCommonData->x770)
             {
                 // do a walljump!
-                func_800C1E64(gobj, ASID_PASSIVEWALLJUMP, p_ftCommonData->x774,
-                              fp0->x1969_walljumpUsed,
+                func_800C1E64(gobj, ftCo_AS_PassiveWallJump,
+                              p_ftCommonData->x774, fp0->x1969_walljumpUsed,
                               fp0->x2110_walljumpWallSide);
 
                 fp0->x210C_walljumpInputTimer = max_input_frames;

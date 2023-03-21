@@ -8,7 +8,7 @@ typedef struct ftCaptainAttributes ftCaptainAttributes;
 typedef union ftCaptain_StateVars ftCaptain_StateVars;
 
 typedef enum ftCaptainAction {
-    ftCaptain_AS_Swing42_Sword = ASID_MAX,
+    ftCaptain_AS_Swing42_Sword = ftCo_AS_Count,
     ftCaptain_AS_Swing42_2,
     ftCaptain_AS_Swing42_3,
     ftCaptain_AS_Swing42_4,

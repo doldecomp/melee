@@ -268,7 +268,7 @@ enum_t func_8015C44C(FighterKind kind)
         // DataOffset_ActionStateLoad
         return func_80086C0C(gobj);
     } else {
-        return ASID_DEADDOWN;
+        return ftCo_AS_DeadDown;
     }
 }
 

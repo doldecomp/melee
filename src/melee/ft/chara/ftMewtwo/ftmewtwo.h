@@ -8,7 +8,7 @@
 #include "lb/lbvector.h"
 
 typedef enum ftMewtwoAction {
-    AS_MEWTWO_SPECIALN_START = ASID_MAX,
+    AS_MEWTWO_SPECIALN_START = ftCo_AS_Count,
     AS_MEWTWO_SPECIALN_LOOP,
     AS_MEWTWO_SPECIALN_FULL,
     AS_MEWTWO_SPECIALN_CANCEL,

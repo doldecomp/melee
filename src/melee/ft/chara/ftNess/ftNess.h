@@ -10,7 +10,7 @@
 #include <baselib/gobj.h>
 
 typedef enum ftNessAction {
-    AS_NESS_ATTACKS4 = ASID_MAX,
+    AS_NESS_ATTACKS4 = ftCo_AS_Count,
     AS_NESS_ATTACKHI4,
     AS_NESS_ATTACKHI4_CHARGE,
     AS_NESS_ATTACKHI4_RELEASE,
