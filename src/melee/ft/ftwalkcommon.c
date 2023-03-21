@@ -26,7 +26,7 @@ s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* gobj)
     }
 }
 
-static inline s32 ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
+static inline enum_t ftWalkCommon_GetWalkType_800DFBF8_fake(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     f32 walking_velocity = fabs_inline(fp->xEC_ground_vel);
@@ -119,16 +119,17 @@ void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
 
 void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
 {
-    s32 motion_state_sum;
-    s32 motion_state_base;
+    int motion_state_sum;
+    int motion_state_base;
     Fighter* fp = GET_FIGHTER(gobj);
     s32 walk_action_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
 
     motion_state_base = fp->mv.co.walk.x4;
     motion_state_sum = motion_state_base + walk_action_type;
-    if (motion_state_sum != fp->motion_id) {
+
+    if (motion_state_sum != (int) fp->motion_id) {
         f32 float_result;
-        f32 var_f31;
+        f32 frame;
         f32 init_animFrame;
         f32 adjusted_animFrame;
         s32 final_animFrame;
@@ -136,24 +137,25 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
 
         switch (motion_state_sum - motion_state_base) {
         case 0:
-            var_f31 = fp->mv.co.walk.x8;
+            frame = fp->mv.co.walk.x8;
             break;
         case 1:
-            var_f31 = fp->mv.co.walk.xC;
+            frame = fp->mv.co.walk.xC;
             break;
         case 2:
-            var_f31 = fp->mv.co.walk.x10;
+            frame = fp->mv.co.walk.x10;
             break;
         default:
             OSReport("couldn't get walk frame\n");
             HSD_ASSERT(71, 0);
         }
+
         float_result = func_8006F484(gobj);
         init_animFrame = fp->x894_currentAnimFrame;
         quotient = init_animFrame / float_result;
         adjusted_animFrame =
             fp->x894_currentAnimFrame - float_result * quotient;
-        final_animFrame = var_f31 * (adjusted_animFrame / float_result);
+        final_animFrame = frame * (adjusted_animFrame / float_result);
         arg_cb(gobj, final_animFrame);
     }
 }
