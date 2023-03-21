@@ -192,7 +192,7 @@ void ftGameWatch_OnLoad(HSD_GObj* gobj)
     fp->x2224_flag.bits.b0 = 1;
 
     PUSH_ATTRS(fp, ftGameWatchAttributes);
-    fp->fv.gw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
+    fp->fv.gw.x2238_panicCharge = ftGw_Panic_Empty;
 
     {
         ftGameWatchAttributes* attr = fp->x2D4_specialAttributes;
@@ -274,7 +274,7 @@ void ftGameWatch_8014A77C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
         func_800BFFD0(fp, 5, 0);
     }
 }

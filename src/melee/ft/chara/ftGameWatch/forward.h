@@ -49,10 +49,10 @@ typedef enum ftGameWatchAction {
 // Oil Panic Charge Level Macros //
 
 typedef enum ftGameWatch_PanicLevel {
-    GAMEWATCH_PANIC_EMPTY,
-    GAMEWATCH_PANIC_LOW,
-    GAMEWATCH_PANIC_MID,
-    GAMEWATCH_PANIC_FULL,
+    ftGw_Panic_Empty,
+    ftGw_Panic_Low,
+    ftGw_Panic_Mid,
+    ftGw_Panic_Full,
 } ftGameWatch_PanicLevel;
 
 // Mr. Game & Watch Action State Change Flags //

@@ -106,23 +106,23 @@ void ftGameWatch_SpecialLw_UpdateBucketModel(HSD_GObj* gobj)
     func_80074B0C(gobj, 5, 2);
 
     switch (fp->fv.gw.x2238_panicCharge) {
-    case GAMEWATCH_PANIC_EMPTY:
+    case ftGw_Panic_Empty:
         /// @todo @c enum for parts
         func_80074B0C(gobj, 6, -1);
         func_80074B0C(gobj, 7, -1);
         func_80074B0C(gobj, 8, -1);
         return;
-    case GAMEWATCH_PANIC_LOW:
+    case ftGw_Panic_Low:
         func_80074B0C(gobj, 6, 0);
         func_80074B0C(gobj, 7, -1);
         func_80074B0C(gobj, 8, -1);
         return;
-    case GAMEWATCH_PANIC_MID:
+    case ftGw_Panic_Mid:
         func_80074B0C(gobj, 6, 0);
         func_80074B0C(gobj, 7, 0);
         func_80074B0C(gobj, 8, -1);
         return;
-    case GAMEWATCH_PANIC_FULL:
+    case ftGw_Panic_Full:
     default:
         func_80074B0C(gobj, 6, 0);
         func_80074B0C(gobj, 7, 0);
@@ -145,7 +145,7 @@ void ftGameWatch_SpecialLw_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
         ftGameWatch_SpecialLwShoot_ReleaseOil(gobj);
         return;
     }
@@ -163,7 +163,7 @@ void ftGameWatch_SpecialAirLw_StartAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
 
-    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
         ftGameWatch_SpecialAirLwShoot_ReleaseOil(gobj);
         return;
     }
@@ -464,7 +464,7 @@ void ftGameWatch_SpecialLwCatch_Anim(HSD_GObj* gobj)
     if (ftAnim_IsFramesRemaining(gobj))
         return;
 
-    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
         func_8008A2BC(gobj);
         return;
     }
@@ -484,7 +484,7 @@ void ftGameWatch_SpecialAirLwCatch_Anim(HSD_GObj* gobj)
     if (ftAnim_IsFramesRemaining(gobj))
         return;
 
-    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
         func_800CC730(gobj);
         return;
     }
@@ -561,7 +561,7 @@ void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* gobj)
     fp->fv.gw.x2238_panicCharge += fp->AbsorbAttr.x1A48_hitsTaken;
     fp->fv.gw.x223C_panicDamage += fp->AbsorbAttr.x1A44_damageTaken;
 
-    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
+    if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full)
         func_800BFFD0(fp, 5, 0);
 
     if (fp->ground_or_air == GA_Ground)
@@ -704,7 +704,7 @@ void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
                     fp->x2204_ftcmd_var1 + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
 
                 fp->x2204_ftcmd_var1 = panicDamage;
-                fp->fv.gw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
+                fp->fv.gw.x2238_panicCharge = ftGw_Panic_Empty;
                 fp->fv.gw.x223C_panicDamage = 0;
             }
         }
