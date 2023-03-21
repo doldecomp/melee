@@ -13,21 +13,21 @@
 
 // 80154D78 151958
 // https://decomp.me/scratch/DzZiN
-void lbl_80154D78(HSD_GObj* gobj)
+void ftMasterHand_80154D78(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
 
         if (fp->mv.mh.unk0.x20 == 1)
-            func_80154A78(gobj);
+            ftMasterHand_80154A78(gobj);
         else
-            func_801546D8(gobj);
+            ftMasterHand_801546D8(gobj);
     }
 }
 
 // 80154DD0 1519B0
 // https://decomp.me/scratch/5olg2
-void lbl_80154DD0(HSD_GObj* arg0)
+void ftMasterHand_80154DD0(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
@@ -36,7 +36,7 @@ void lbl_80154DD0(HSD_GObj* arg0)
 
 // 80154E14 1519F4
 // https://decomp.me/scratch/2yMnG
-void lbl_80154E14(HSD_GObj* gobj)
+void ftMasterHand_80154E14(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
@@ -48,14 +48,14 @@ void lbl_80154E14(HSD_GObj* gobj)
 
 // 80154E74 151A54
 // https://decomp.me/scratch/0wwnm
-void lbl_80154E74(HSD_GObj* gobj)
+void ftMasterHand_80154E74(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80154E78 151A58
 // https://decomp.me/scratch/lmtfb
-void func_80154E78(HSD_GObj* gobj)
+void ftMasterHand_80154E78(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -67,13 +67,13 @@ void func_80154E78(HSD_GObj* gobj)
 
 // 80154ED8 151AB8
 // https://decomp.me/scratch/6H8xW
-void lbl_80154ED8(HSD_GObj* gobj)
+void ftMasterHand_80154ED8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = 0;
-        func_80155D6C(fp->x1A58_interactedFighter, 0x14A);
+        ftMasterHand_80155D6C(fp->x1A58_interactedFighter, 0x14A);
         if (fp->x1A58_interactedFighter != 0) {
             HSD_GObj* victim = fp->x1A58_interactedFighter;
             Fighter* victim_fp = GET_FIGHTER(victim);
@@ -85,6 +85,6 @@ void lbl_80154ED8(HSD_GObj* gobj)
         fp->mv.mh.unk0.x20 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }

@@ -9,7 +9,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbunknown_001.h"
 
-u32 lbl_80151428(Vec3* vec)
+u32 ftMasterHand_80151428(Vec3* vec)
 {
     HSD_GObj* fetched_gobj = func_8015C3E8(0x1B);
 
@@ -42,14 +42,14 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     func_800236B8(r29_fp->mv.mh.unk0.x2C);
     func_800236B8(r29_fp->mv.mh.unk0.x30);
     if (r29_fp->mv.mh.unk0.x20) {
-        func_80155D1C(r29_fp->x1A58_interactedFighter);
+        ftMasterHand_80155D1C(r29_fp->x1A58_interactedFighter);
     }
     r29_fp->x80_self_vel.y = temp_r30->x14C;
     r29_fp->x80_self_vel.z = temp_r30->x154;
     r29_fp->mv.mh.unk0.x8 = temp_r30->x15C;
 }
 
-void func_80151484(HSD_GObj* gobj)
+void ftMasterHand_80151484(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -73,7 +73,7 @@ void func_80151484(HSD_GObj* gobj)
 
 // 801515B8 14E198
 // https://decomp.me/scratch/I5KfO
-void lbl_801515B8(HSD_GObj* gobj)
+void ftMasterHand_801515B8(HSD_GObj* gobj)
 {
     s32 temp_r0;
     s32 temp_r3;
@@ -114,7 +114,7 @@ void lbl_801515B8(HSD_GObj* gobj)
 
 // 801516B4 14E294
 // https://decomp.me/scratch/AmIVW
-void lbl_801516B4(HSD_GObj* gobj)
+void ftMasterHand_801516B4(HSD_GObj* gobj)
 {
     f32 temp_f1;
     s32 temp_r0;

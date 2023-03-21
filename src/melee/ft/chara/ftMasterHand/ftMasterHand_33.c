@@ -5,26 +5,26 @@
 #include "ft/ftcommon.h"
 
 // 80155C88 152868
-void func_80155C88(HSD_GObj* gobj)
+void ftMasterHand_80155C88(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155C8C 15286C
-void func_80155C8C(HSD_GObj* gobj)
+void ftMasterHand_80155C8C(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155C90 152870
-void func_80155C90(HSD_GObj* gobj)
+void ftMasterHand_80155C90(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155C94 152874
 // https://decomp.me/scratch/8Kpd7
-void func_80155C94(HSD_GObj* gobj)
+void ftMasterHand_80155C94(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, 0x149, 0, 0, 0.0f, 1.0f, 0.0f);

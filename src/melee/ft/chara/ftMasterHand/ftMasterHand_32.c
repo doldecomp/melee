@@ -7,32 +7,32 @@
 #include "ft/ftcommon.h"
 
 // 80155B70 152750
-void func_80155B70(HSD_GObj* gobj)
+void ftMasterHand_80155B70(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155B74 152754
-void func_80155B74(HSD_GObj* gobj)
+void ftMasterHand_80155B74(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155B78 152758
-void func_80155B78(HSD_GObj* gobj)
+void ftMasterHand_80155B78(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155B7C 15275C
-void func_80155B7C(HSD_GObj* gobj)
+void ftMasterHand_80155B7C(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155B80 152760
 // https://decomp.me/scratch/BFD9X
-void func_80155B80(HSD_GObj* gobj)
+void ftMasterHand_80155B80(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -46,14 +46,14 @@ void func_80155B80(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-void func_80155C20(HSD_GObj* gobj)
+void ftMasterHand_80155C20(HSD_GObj* gobj)
 {
     Fighter* fp;
 
     fp = gobj->user_data;
     func_8007DC08(fp, p_ftCommonData->x3A8);
     if (fp->x1A4C <= 0.0f) {
-        func_80155C94(gobj);
-        func_8015483C(fp->x1A58_interactedFighter);
+        ftMasterHand_80155C94(gobj);
+        ftMasterHand_8015483C(fp->x1A58_interactedFighter);
     }
 }

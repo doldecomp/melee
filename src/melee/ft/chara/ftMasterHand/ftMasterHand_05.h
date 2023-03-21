@@ -7,10 +7,10 @@
 #include <dolphin/mtx/types.h>
 
 /// Probably isCrazyHandLoaded func.
-u32 lbl_80151428(Vec3* vec);
+u32 ftMasterHand_80151428(Vec3* vec);
 
-void func_80151484(HSD_GObj* gobj);
-void lbl_801515B8(HSD_GObj* gobj);
-void lbl_801516B4(HSD_GObj* gobj);
+void ftMasterHand_80151484(HSD_GObj* gobj);
+void ftMasterHand_801515B8(HSD_GObj* gobj);
+void ftMasterHand_801516B4(HSD_GObj* gobj);
 
 #endif

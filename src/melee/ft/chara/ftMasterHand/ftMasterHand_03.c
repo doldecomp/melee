@@ -15,7 +15,7 @@
 #endif
 // 80150C8C 0014D86C
 // https://decomp.me/scratch/Nhsvo
-void func_80150C8C(HSD_GObj* gobj)
+void ftMasterHand_80150C8C(HSD_GObj* gobj)
 {
     /// @todo the @c #pragma above is preventing use of #GET_FIGHTER.
     Fighter* r31_fp = gobj->user_data;
@@ -31,7 +31,7 @@ void func_80150C8C(HSD_GObj* gobj)
 
 // 80150D28 0014D908
 // https://decomp.me/scratch/ntaE2
-void func_80150D28(HSD_GObj* gobj)
+void ftMasterHand_80150D28(HSD_GObj* gobj)
 {
     Fighter* r31_fp = gobj->user_data;
     if ((r31_fp->fv.mh.x2258 == 0x156) || (r31_fp->fv.mh.x2258 == 0x186)) {
@@ -49,7 +49,8 @@ void func_80150D28(HSD_GObj* gobj)
 
 // 80150DC4 0014D9A4
 // https://decomp.me/scratch/vZOBB
-void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
+void ftMasterHand_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2,
+                           Vec3* arg2_pos)
 {
     Fighter* r32_fp = GET_FIGHTER(gobj);
 
@@ -83,7 +84,7 @@ void func_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
 
 // 80150F00 0014DAE0
 // https://decomp.me/scratch/tAkIF
-void lbl_80150F00(HSD_GObj* gobj)
+void ftMasterHand_80150F00(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -100,7 +101,7 @@ void lbl_80150F00(HSD_GObj* gobj)
 
 // 80150F68 0014DB48
 // https://decomp.me/scratch/kHlJR
-void lbl_80150F68(HSD_GObj* gobj)
+void ftMasterHand_80150F68(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
     ftMasterHand_SpecialAttrs* r30_ft_attributes;
@@ -117,7 +118,7 @@ void lbl_80150F68(HSD_GObj* gobj)
 
 // 80150FC8 0014DBA8
 // https://decomp.me/scratch/8qlZ7
-void lbl_80150FC8(HSD_GObj* gobj)
+void ftMasterHand_80150FC8(HSD_GObj* gobj)
 {
     Fighter* r4_fp;
 
@@ -135,7 +136,7 @@ void lbl_80150FC8(HSD_GObj* gobj)
 
 // 80151018 0014DBF8
 // https://decomp.me/scratch/rjK44
-void func_80151018(HSD_GObj* gobj)
+void ftMasterHand_80151018(HSD_GObj* gobj)
 {
     Vec3 sp1C_pos;
     ftMasterHand_SpecialAttrs* r5_attributes;
@@ -156,10 +157,10 @@ void func_80151018(HSD_GObj* gobj)
     r6_fp->fv.mh.x2258 = 0x186;
     r31_fp = GET_FIGHTER(gobj);
     if (r31_fp->fv.mh.x2258 == 0x156) {
-        func_80150D28(gobj);
+        ftMasterHand_80150D28(gobj);
     } else {
-        func_80150C8C(gobj);
+        ftMasterHand_80150C8C(gobj);
     }
-    r31_fp->mv.mh.unk0.x4 = lbl_8014FFDC;
+    r31_fp->mv.mh.unk0.x4 = ftMasterHand_8014FFDC;
     r31_fp->mv.mh.unk0.xC = sp1C_pos;
 }

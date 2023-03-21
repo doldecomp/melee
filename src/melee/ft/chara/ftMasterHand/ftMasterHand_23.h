@@ -5,12 +5,12 @@
 
 #include <baselib/gobj.h>
 
-void func_80154A78(HSD_GObj*);
+void ftMasterHand_80154A78(HSD_GObj*);
 
-void func_80154A78(HSD_GObj* gobj);
-void lbl_80154B2C(HSD_GObj* gobj);
-void lbl_80154BB0(HSD_GObj* arg0);
-void lbl_80154BF4(HSD_GObj* gobj);
-void lbl_80154C54(HSD_GObj* gobj);
+void ftMasterHand_80154A78(HSD_GObj* gobj);
+void ftMasterHand_80154B2C(HSD_GObj* gobj);
+void ftMasterHand_80154BB0(HSD_GObj* arg0);
+void ftMasterHand_80154BF4(HSD_GObj* gobj);
+void ftMasterHand_80154C54(HSD_GObj* gobj);
 
 #endif

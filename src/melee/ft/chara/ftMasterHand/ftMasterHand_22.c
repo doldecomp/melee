@@ -15,7 +15,7 @@
 
 // 80154230 150E10
 // https://decomp.me/scratch/dpg50
-void lbl_80154230(HSD_GObj* gobj)
+void ftMasterHand_80154230(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* r4_fp = GET_FIGHTER(gobj);
@@ -24,7 +24,7 @@ void lbl_80154230(HSD_GObj* gobj)
 }
 
 // 80154278 150E58
-void lbl_80154278(HSD_GObj* arg0)
+void ftMasterHand_80154278(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
@@ -32,20 +32,20 @@ void lbl_80154278(HSD_GObj* arg0)
 }
 
 // 801542BC 150E9C
-void lbl_801542BC(HSD_GObj* gobj)
+void ftMasterHand_801542BC(HSD_GObj* gobj)
 {
     func_80085134(gobj);
 }
 
 // 801542DC 150EBC
-void lbl_801542DC(HSD_GObj* gobj)
+void ftMasterHand_801542DC(HSD_GObj* gobj)
 {
     return;
 }
 
 // 801542E0 150EC0
 // https://decomp.me/scratch/pmJHD
-void func_801542E0(HSD_GObj* gobj)
+void ftMasterHand_801542E0(HSD_GObj* gobj)
 {
     Fighter* r31_fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* r30_attributes = r31_fp->ft_data->ext_attr;
@@ -57,7 +57,7 @@ void func_801542E0(HSD_GObj* gobj)
 
 // 80154360 150F40
 // https://decomp.me/scratch/rwb1V
-void lbl_80154360(HSD_GObj* gobj)
+void ftMasterHand_80154360(HSD_GObj* gobj)
 {
     Fighter* temp_r4 = GET_FIGHTER(gobj);
     s32 temp_cr0_eq;
@@ -68,7 +68,7 @@ void lbl_80154360(HSD_GObj* gobj)
     temp_r4->mv.mh.unk0.x8 = temp_r0;
     if (temp_cr0_eq) {
         ftAnim_SetAnimRate(gobj, 1.0f);
-        func_801545A0(gobj);
+        ftMasterHand_801545A0(gobj);
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -78,7 +78,7 @@ void lbl_80154360(HSD_GObj* gobj)
 }
 
 // 801543E8 150FC8
-void lbl_801543E8(HSD_GObj* arg0)
+void ftMasterHand_801543E8(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -114,7 +114,7 @@ static inline float my_lbvector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void lbl_8015442C(HSD_GObj* gobj)
+void ftMasterHand_8015442C(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER doesn't fit the stack.
     Fighter* fp = gobj->user_data;
@@ -151,25 +151,26 @@ void lbl_8015442C(HSD_GObj* gobj)
 }
 
 // 8015459C 15117C
-void lbl_8015459C(HSD_GObj* gobj)
+void ftMasterHand_8015459C(HSD_GObj* gobj)
 {
     return;
 }
 
 // 801545A0 151180
 // https://decomp.me/scratch/K86rj
-void func_801545A0(HSD_GObj* gobj)
+void ftMasterHand_801545A0(HSD_GObj* gobj)
 {
     Fighter* temp_r31 = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x176, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    func_8007E2D0(temp_r31, 0x80U, &lbl_80154A2C, 0U, &lbl_80155A58);
+    func_8007E2D0(temp_r31, 0x80U, &ftMasterHand_80154A2C, 0U,
+                  &ftMasterHand_80155A58);
     temp_r31->mv.mh.unk0.x20 = 0;
 }
 
 // 80154620 151200
 // https://decomp.me/scratch/iJH90
-void lbl_80154620(HSD_GObj* gobj)
+void ftMasterHand_80154620(HSD_GObj* gobj)
 {
     Fighter* temp_r4;
     f32 temp_f0;
@@ -180,12 +181,12 @@ void lbl_80154620(HSD_GObj* gobj)
         temp_r4->x80_self_vel.z = temp_f0;
         temp_r4->x80_self_vel.y = temp_f0;
         temp_r4->x80_self_vel.x = temp_f0;
-        func_80154CF8(gobj, temp_r4);
+        ftMasterHand_80154CF8(gobj, temp_r4);
     }
 }
 
 // 80154670 151250
-void lbl_80154670(HSD_GObj* arg0)
+void ftMasterHand_80154670(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -194,20 +195,20 @@ void lbl_80154670(HSD_GObj* arg0)
 }
 
 // 801546B4 151294
-void lbl_801546B4(HSD_GObj* gobj)
+void ftMasterHand_801546B4(HSD_GObj* gobj)
 {
     func_80085134(gobj);
 }
 
 // 801546D4 1512B4
-void lbl_801546D4(HSD_GObj* gobj)
+void ftMasterHand_801546D4(HSD_GObj* gobj)
 {
     return;
 }
 
 // 801546D8 1512B8
 // https://decomp.me/scratch/UYsam
-void func_801546D8(HSD_GObj* gobj)
+void ftMasterHand_801546D8(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
     ftMasterHand_SpecialAttrs* temp_r30;
@@ -224,15 +225,15 @@ void func_801546D8(HSD_GObj* gobj)
 
 // 80154758 151338
 // https://decomp.me/scratch/D8LVZ
-void lbl_80154758(HSD_GObj* arg0)
+void ftMasterHand_80154758(HSD_GObj* arg0)
 {
     if (!ftAnim_IsFramesRemaining(arg0)) {
-        func_80151018(arg0);
+        ftMasterHand_80151018(arg0);
     }
 }
 
 // 80154794 151374
-void lbl_80154794(HSD_GObj* arg0)
+void ftMasterHand_80154794(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -242,7 +243,7 @@ void lbl_80154794(HSD_GObj* arg0)
 
 // 801547D8 1513B8
 // https://decomp.me/scratch/e8kBC
-void lbl_801547D8(HSD_GObj* gobj)
+void ftMasterHand_801547D8(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
     ftMasterHand_SpecialAttrs* r30_attributes;
@@ -255,14 +256,14 @@ void lbl_801547D8(HSD_GObj* gobj)
 }
 
 // 80154838 151418
-void lbl_80154838(HSD_GObj* gobj)
+void ftMasterHand_80154838(HSD_GObj* gobj)
 {
     return;
 }
 
 // 8015483C 15141C
 // https://decomp.me/scratch/rkMCg
-void func_8015483C(HSD_GObj* gobj)
+void ftMasterHand_8015483C(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
     ftMasterHand_SpecialAttrs* r30_attributes;
@@ -283,22 +284,22 @@ void func_8015483C(HSD_GObj* gobj)
 
 // 801548D8 1514B8
 // https://decomp.me/scratch/rGeOV
-void lbl_801548D8(HSD_GObj* gobj)
+void ftMasterHand_801548D8(HSD_GObj* gobj)
 {
     Fighter* r31_fp = gobj->user_data;
 
     if (--r31_fp->mv.mh.unk0.x24 <= 0.0f && r31_fp->x2200_ftcmd_var0) {
-        func_80155D1C(r31_fp->x1A58_interactedFighter);
+        ftMasterHand_80155D1C(r31_fp->x1A58_interactedFighter);
         r31_fp->mv.mh.unk0.x20 = 0;
         r31_fp->x2200_ftcmd_var0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 
 // 80154964 151544
-void lbl_80154964(HSD_GObj* arg0)
+void ftMasterHand_80154964(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -308,7 +309,7 @@ void lbl_80154964(HSD_GObj* arg0)
 
 // 801549A8 151588
 // https://decomp.me/scratch/18DIk
-void lbl_801549A8(HSD_GObj* arg0)
+void ftMasterHand_801549A8(HSD_GObj* arg0)
 {
     Fighter* temp_r31;
     ftMasterHand_SpecialAttrs* temp_r30;
@@ -322,7 +323,7 @@ void lbl_801549A8(HSD_GObj* arg0)
 
 // 80154A08 1515E8
 // https://decomp.me/scratch/5adNV
-void lbl_80154A08(HSD_GObj* arg0)
+void ftMasterHand_80154A08(HSD_GObj* arg0)
 {
     Fighter* temp_r3 = GET_FIGHTER(arg0);
 
@@ -335,7 +336,7 @@ void lbl_80154A08(HSD_GObj* arg0)
 
 // 80154A2C 15160C
 // https://decomp.me/scratch/j1RLj
-void lbl_80154A2C(HSD_GObj* arg0)
+void ftMasterHand_80154A2C(HSD_GObj* arg0)
 {
     Fighter* temp_r5 = GET_FIGHTER(arg0);
     temp_r5->x80_self_vel.z = 0.0f;
@@ -343,5 +344,5 @@ void lbl_80154A2C(HSD_GObj* arg0)
     temp_r5->x80_self_vel.x = 0.0f;
     temp_r5->mv.mh.unk0.x20 = 1;
     temp_r5->x221E_flag.bits.b6 = 0;
-    func_80154C78(arg0);
+    ftMasterHand_80154C78(arg0);
 }

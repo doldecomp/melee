@@ -6,14 +6,14 @@
 #include "ft/ftbosslib.h"
 #include "ft/types.h"
 
-void lbl_801539EC(HSD_GObj* gobj)
+void ftMasterHand_801539EC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
         func_8015BD20(gobj);
 }
 
-void lbl_80153A30(HSD_GObj* gobj)
+void ftMasterHand_80153A30(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* sa = fp->ft_data->ext_attr;
@@ -21,9 +21,9 @@ void lbl_80153A30(HSD_GObj* gobj)
     func_8015BF74(gobj, sa->x58);
 }
 
-void lbl_80153A60(HSD_GObj* gobj) {}
+void ftMasterHand_80153A60(HSD_GObj* gobj) {}
 
-void func_80153A64(HSD_GObj* gobj)
+void ftMasterHand_80153A64(HSD_GObj* gobj)
 {
     Fighter* temp_r31;
     ftMasterHand_SpecialAttrs* temp_r30;

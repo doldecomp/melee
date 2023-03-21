@@ -5,10 +5,10 @@
 
 #include <baselib/gobj.h>
 
-void lbl_8015386C(HSD_GObj* arg0);
-void lbl_801538A8(HSD_GObj* arg0);
-void lbl_801538EC(HSD_GObj* gobj);
-void lbl_8015390C(HSD_GObj* gobj);
-void lbl_801539A4(HSD_GObj* arg0);
+void ftMasterHand_8015386C(HSD_GObj* arg0);
+void ftMasterHand_801538A8(HSD_GObj* arg0);
+void ftMasterHand_801538EC(HSD_GObj* gobj);
+void ftMasterHand_8015390C(HSD_GObj* gobj);
+void ftMasterHand_801539A4(HSD_GObj* arg0);
 
 #endif

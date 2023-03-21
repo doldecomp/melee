@@ -10,7 +10,7 @@
 #include <dolphin/mtx/types.h>
 
 // 80153D28 150908
-void lbl_80153D28(HSD_GObj* gobj)
+void ftMasterHand_80153D28(HSD_GObj* gobj)
 {
     return;
 }
@@ -21,7 +21,7 @@ static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
     return gobj->hsd_obj;
 }
 
-void lbl_80153D2C(HSD_GObj* gobj)
+void ftMasterHand_80153D2C(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER and #GET_JOBJ both cause regswaps here,
     ///       but they probably shouldn't.
@@ -73,7 +73,7 @@ void lbl_80153D2C(HSD_GObj* gobj)
 
 // 80153F8C 150B6C
 // https://decomp.me/scratch/w6kte
-void lbl_80153F8C(HSD_GObj* gobj_arg)
+void ftMasterHand_80153F8C(HSD_GObj* gobj_arg)
 {
     HSD_GObj* gobj = gobj_arg;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -98,12 +98,12 @@ void lbl_80153F8C(HSD_GObj* gobj_arg)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->x80_self_vel.x = 0.0f;
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 
 // 80154114 150CF4
-void lbl_80154114(HSD_GObj* arg0)
+void ftMasterHand_80154114(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -113,7 +113,7 @@ void lbl_80154114(HSD_GObj* arg0)
 
 // 80154158 150D38
 // https://decomp.me/scratch/rgPDD
-void lbl_80154158(HSD_GObj* gobj)
+void ftMasterHand_80154158(HSD_GObj* gobj)
 {
     Fighter* r3_fp = GET_FIGHTER(gobj);
 

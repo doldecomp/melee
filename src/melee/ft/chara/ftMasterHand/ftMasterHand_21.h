@@ -4,7 +4,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void func_801541C8(HSD_GObj* gobj, void*);
-void lbl_801541C4(HSD_GObj* gobj);
+void ftMasterHand_801541C8(HSD_GObj* gobj, void*);
+void ftMasterHand_801541C4(HSD_GObj* gobj);
 
 #endif

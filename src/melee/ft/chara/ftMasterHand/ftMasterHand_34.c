@@ -6,7 +6,7 @@
 
 // 80155D1C 1528FC
 // https://decomp.me/scratch/YDeLe
-void func_80155D1C(HSD_GObj* gobj)
+void ftMasterHand_80155D1C(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -17,32 +17,32 @@ void func_80155D1C(HSD_GObj* gobj)
 }
 
 // 80155D5C 15293C
-void func_80155D5C(HSD_GObj* gobj)
+void ftMasterHand_80155D5C(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155D60 152940
-void func_80155D60(HSD_GObj* gobj)
+void ftMasterHand_80155D60(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155D64 152944
-void func_80155D64(HSD_GObj* gobj)
+void ftMasterHand_80155D64(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155D68 152948
-void func_80155D68(HSD_GObj* gobj)
+void ftMasterHand_80155D68(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155D6C 15294C
 // https://decomp.me/scratch/y3wmm
-void func_80155D6C(HSD_GObj* gobj, s32 arg1)
+void ftMasterHand_80155D6C(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* victim_fp = GET_FIGHTER(fp->x1A58_interactedFighter);
@@ -57,25 +57,25 @@ void func_80155D6C(HSD_GObj* gobj, s32 arg1)
 }
 
 // 80155E08 1529E8
-void func_80155E08(HSD_GObj* gobj)
+void ftMasterHand_80155E08(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155E0C 1529EC
-void func_80155E0C(HSD_GObj* gobj)
+void ftMasterHand_80155E0C(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155E10 1529F0
-void func_80155E10(HSD_GObj* gobj)
+void ftMasterHand_80155E10(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80155E14 1529F4
-void func_80155E14(HSD_GObj* gobj)
+void ftMasterHand_80155E14(HSD_GObj* gobj)
 {
     return;
 }

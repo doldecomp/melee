@@ -9,11 +9,11 @@
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 
-static void lbl_801511FC(HSD_GObj* gobj);
+static void ftMasterHand_801511FC(HSD_GObj* gobj);
 
 // 801510B0 14DC90
 // https://decomp.me/scratch/sIqel
-void func_801510B0(HSD_GObj* gobj)
+void ftMasterHand_801510B0(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
     ftMasterHand_SpecialAttrs* r30_attributes;
@@ -25,30 +25,31 @@ void func_801510B0(HSD_GObj* gobj)
     r31_fp->cur_pos.x = r30_attributes->x30_pos2.x;
     r31_fp->cur_pos.y = r30_attributes->x30_pos2.y;
     r31_fp->cur_pos.z = 0.0f;
-    r31_fp->cb.x21BC_callback_Accessory4 = &lbl_801511FC;
+    r31_fp->cb.x21BC_callback_Accessory4 = &ftMasterHand_801511FC;
     r31_fp->mv.mh.unk4.x0 = 0;
 
-    /// @todo Probably same file if #lbl_801511FC is getting implicitly passed.
-    func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, lbl_801511FC */);
-    // func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, lbl_801511FC);
+    /// @todo Probably same file if #ftMasterHand_801511FC is getting
+    /// implicitly passed.
+    func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, ftMasterHand_801511FC */);
+    // func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, ftMasterHand_801511FC);
 
     func_8015C09C(gobj, -1.0f);
 }
 
 // 80151168 14DD48
 // https://decomp.me/scratch/896fc
-void lbl_80151168(HSD_GObj* gobj)
+void ftMasterHand_80151168(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* r4_fp = GET_FIGHTER(gobj);
         r4_fp->fv.mh.x2258 = 0x155;
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 
 // 801511B0 14DD90
 // https://decomp.me/scratch/lkMK2
-void lbl_801511B0(HSD_GObj* gobj)
+void ftMasterHand_801511B0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
@@ -58,20 +59,20 @@ void lbl_801511B0(HSD_GObj* gobj)
 
 // 801511F4 14DDD4
 // https://decomp.me/scratch/xs8Nh
-void lbl_801511F4(HSD_GObj* gobj)
+void ftMasterHand_801511F4(HSD_GObj* gobj)
 {
     return;
 }
 
 // 801511F8 14DDD8
 // https://decomp.me/scratch/5Mb62
-void lbl_801511F8(HSD_GObj* gobj)
+void ftMasterHand_801511F8(HSD_GObj* gobj)
 {
     return;
 }
 
 // 801511FC 14DDDC
-static void lbl_801511FC(HSD_GObj* gobj)
+static void ftMasterHand_801511FC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -100,7 +101,7 @@ static void lbl_801511FC(HSD_GObj* gobj)
     }
     case 1:
         if (func_8002F260() != 0) {
-            func_8002E948(&lbl_80151428);
+            func_8002E948(&ftMasterHand_80151428);
             func_8002ED9C(120.0f);
             func_8002F0E4(0x14);
             fp->mv.mh.unk4.x0 = 2;

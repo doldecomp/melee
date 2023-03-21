@@ -6,13 +6,13 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void lbl_80153B90(HSD_GObj* gobj);
-void lbl_80153B28(HSD_GObj* gobj);
-void lbl_80153B6C(HSD_GObj* gobj);
-void lbl_80153B8C(HSD_GObj* gobj);
-void lbl_80153C48(HSD_GObj* arg0);
-void lbl_80153C90(HSD_GObj* arg0);
-void lbl_80153CD4(HSD_GObj* gobj);
-void lbl_80153AEC(HSD_GObj* gobj);
+void ftMasterHand_80153B90(HSD_GObj* gobj);
+void ftMasterHand_80153B28(HSD_GObj* gobj);
+void ftMasterHand_80153B6C(HSD_GObj* gobj);
+void ftMasterHand_80153B8C(HSD_GObj* gobj);
+void ftMasterHand_80153C48(HSD_GObj* arg0);
+void ftMasterHand_80153C90(HSD_GObj* arg0);
+void ftMasterHand_80153CD4(HSD_GObj* gobj);
+void ftMasterHand_80153AEC(HSD_GObj* gobj);
 
 #endif
