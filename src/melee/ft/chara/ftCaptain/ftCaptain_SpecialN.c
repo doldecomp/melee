@@ -1,6 +1,6 @@
 #include "ftCaptain_SpecialN.h"
 
-#include "ftCaptain.h"
+#include "ftCaptain_Init.h"
 #include "types.h"
 
 #include "ef/eflib.h"

@@ -4,7 +4,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCaptain/ftCaptain.h"
+#include "ftCaptain/ftCaptain_Init.h"
 #include "ftCaptain/ftCaptain_SpecialN.h"
 #include "ftCaptain/ftCaptain_SpecialS.h"
 

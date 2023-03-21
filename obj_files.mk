@@ -119,7 +119,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_SpecialLw.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_Init.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_SpecialN.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftCaptain/ftCaptain_SpecialS.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftCaptain/ftCaptain_SpecialHi.s.o\

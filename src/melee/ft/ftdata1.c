@@ -3,7 +3,7 @@
 #include "ftdata.h"
 #include "types.h"
 
-#include "ftCaptain/ftCaptain.h"
+#include "ftCaptain/ftCaptain_Init.h"
 #include "ftCaptain/ftCaptain_SpecialHi.h"
 #include "ftCaptain/ftCaptain_SpecialLw.h"
 #include "ftCaptain/ftCaptain_SpecialN.h"
