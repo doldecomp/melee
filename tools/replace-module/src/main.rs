@@ -33,7 +33,7 @@ fn main() -> Result<()> {
     let addrs: Vec<String> = cli
         .symbols
         .iter()
-        .filter_map(|symbol| queue_symbol(symbol))
+        .filter_map(|s| SYMBOL_REGEX.captures(s).map(|c| c[2].to_string()))
         .collect();
 
     let regex = Regex::new(&format!(r"\b(lbl|func)_({})\b", addrs.join("|")))?;
@@ -49,21 +49,12 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn queue_symbol(symbol: &str) -> Option<String> {
-    if let Some(captures) = SYMBOL_REGEX.captures(symbol) {
-        Some(captures[2].to_string())
-    } else {
-        None
-    }
-}
-
 fn replace_symbols(module: &str, regex: &Regex, path: &Path) -> Result<()> {
     let content = fs::read_to_string(path)?;
 
     let expr = format!("{module}_$2");
     let replaced = regex.replace_all(&content, expr);
-    debug!("{replaced}");
-    // fs::write(path, replaced.as_ref())?;
+    fs::write(path, replaced.as_ref())?;
 
     Ok(())
 }
