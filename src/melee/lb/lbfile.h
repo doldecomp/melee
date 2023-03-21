@@ -1,8 +1,8 @@
 #ifndef _lbfile_h_
 #define _lbfile_h_
 
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/archive.h>
+#include <baselib/forward.h>
 #include <Runtime/platform.h>
 
 void lbFile_8001615C(int, int, int, bool cancelflag);

@@ -1,5 +1,5 @@
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjobject.h>
 
 extern void (**lbl_804D7810)(void*);
 

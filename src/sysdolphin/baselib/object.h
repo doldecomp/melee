@@ -1,8 +1,8 @@
 #ifndef _object_h_
 #define _object_h_
 
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/class.h>
+#include <baselib/forward.h>
 
 #define HSD_OBJ_NOREF ((u16) -1)
 

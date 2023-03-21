@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTSEAK_FTSEAK_SPECIALS_H
 #define MELEE_FT_CHARA_FTSEAK_FTSEAK_SPECIALS_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 #include <melee/ft/forward.h>
 #include <Runtime/platform.h>
 

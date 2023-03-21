@@ -1,7 +1,7 @@
 #ifndef _grtyoshi_h_
 #define _grtyoshi_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/gr/stage.h>
 
 static void func_80223B48(int);

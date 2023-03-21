@@ -1,8 +1,8 @@
 #ifndef _grtlib_h_
 #define _grtlib_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/types.h>
 

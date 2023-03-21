@@ -5,8 +5,8 @@
 #define MELEE_FT_CODE_80081B38_H
 
 #include <placeholder.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
 #include <melee/ft/fighter.h>
 
 HSD_GObj* func_80082E3C(HSD_GObj* gobj);

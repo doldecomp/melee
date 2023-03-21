@@ -1,4 +1,4 @@
-#include <sysdolphin/baselib/gobjuserdata.h>
+#include <baselib/gobjuserdata.h>
 
 void GObj_InitUserData(HSD_GObj* gobj, u8 kind,
                        void (*remove_func)(any_t user_data), void* data)

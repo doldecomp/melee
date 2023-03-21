@@ -1,7 +1,7 @@
 #ifndef _ftcliffcommon_h_
 #define _ftcliffcommon_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/ft/fighter.h>
 #include <Runtime/platform.h>
 

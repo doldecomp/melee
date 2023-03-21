@@ -1,7 +1,7 @@
 #ifndef _grtdonkey_h_
 #define _grtdonkey_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/gr/stage.h>
 
 static void func_80220228(int);

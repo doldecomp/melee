@@ -1,7 +1,7 @@
 #ifndef _grtbattle_h_
 #define _grtbattle_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/gr/stage.h>
 
 static void func_80219C98(int);

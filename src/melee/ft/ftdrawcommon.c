@@ -1,10 +1,10 @@
 #include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/state.h>
+#include <baselib/cobj.h>
+#include <baselib/debug.h>
+#include <baselib/jobj.h>
+#include <baselib/state.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ftcommon.h>
 #include <melee/ft/ftdata.h>

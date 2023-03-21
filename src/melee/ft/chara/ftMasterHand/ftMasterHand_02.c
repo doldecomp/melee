@@ -396,7 +396,7 @@ void lbl_80150890(HSD_GObj* gobj)
 // 80150894 0014D474
 // https://decomp.me/scratch/nuumS
 #define r6_button (HSD_PadMasterStatus[2].button)
-#include <sysdolphin/baselib/controller.h>
+#include <baselib/controller.h>
 extern HSD_PadStatus HSD_PadMasterStatus[4];
 void func_80150894(HSD_GObj* gobj)
 {

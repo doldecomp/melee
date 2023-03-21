@@ -2,7 +2,7 @@
 #define _mncharsel_h_
 
 #include <common_structs.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 #include <Runtime/platform.h>
 
 typedef enum _Mode {

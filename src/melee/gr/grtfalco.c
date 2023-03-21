@@ -1,6 +1,6 @@
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grtfalco.h>

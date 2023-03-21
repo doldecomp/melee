@@ -1,7 +1,7 @@
 #ifndef _ftemblem_h_
 #define _ftemblem_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/ft/fighter.h>
 
 extern ActionState as_table_roy[];

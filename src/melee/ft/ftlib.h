@@ -1,7 +1,7 @@
 #ifndef _ftlib_h_
 #define _ftlib_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/ft/fighter.h>
 
 s32 func_800860C4(void);

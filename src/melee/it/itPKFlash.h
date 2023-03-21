@@ -1,7 +1,7 @@
 #ifndef _itPKFlash_h_
 #define _itPKFlash_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <Runtime/platform.h>
 
 typedef struct PKFlashVars {

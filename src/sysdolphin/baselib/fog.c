@@ -1,8 +1,8 @@
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/fog.h>
+#include <baselib/cobj.h>
+#include <baselib/fog.h>
 
 static void FogInfoInit(void);
 static void FogAdjInfoInit(void);

@@ -4,7 +4,7 @@
 #include "dolphin/mtx/types.h"
 
 #include <placeholder.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/jobj.h>
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
 

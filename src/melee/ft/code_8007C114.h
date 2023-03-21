@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CODE_8007C114_H
 #define MELEE_FT_CODE_8007C114_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 void func_8007C17C(HSD_GObj* gobj);
 void func_8007C114(HSD_GObj* gobj);

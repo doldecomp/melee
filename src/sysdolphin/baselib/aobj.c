@@ -1,13 +1,13 @@
 #include <placeholder.h>
 #include <stdarg.h>
 #include <string.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/robj.h>
-#include <sysdolphin/baselib/tobj.h>
+#include <baselib/aobj.h>
+#include <baselib/debug.h>
+#include <baselib/dobj.h>
+#include <baselib/forward.h>
+#include <baselib/jobj.h>
+#include <baselib/robj.h>
+#include <baselib/tobj.h>
 #include <MetroTRK/intrinsics.h>
 
 HSD_ObjAllocData aobj_alloc_data;

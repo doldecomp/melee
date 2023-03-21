@@ -1,7 +1,7 @@
 #ifndef _ground_h_
 #define _ground_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/types.h>
 

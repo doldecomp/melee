@@ -2,7 +2,7 @@
 #define MELEE_GR_GRTLUIGI_H
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 #include <Runtime/platform.h>
 
 void lbl_80221D9C(HSD_GObj*);

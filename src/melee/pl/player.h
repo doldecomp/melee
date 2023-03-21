@@ -1,8 +1,8 @@
 #ifndef _player_h_
 #define _player_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <melee/pl/types.h>
 #include <Runtime/platform.h>
 

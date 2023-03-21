@@ -1,7 +1,7 @@
 #ifndef MELEE_GR_GRTCAPTAIN_H
 #define MELEE_GR_GRTCAPTAIN_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/gr/stage.h>
 
 static void func_8021FC60(int);

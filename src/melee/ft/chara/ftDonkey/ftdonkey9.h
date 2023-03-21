@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTDONKEY_FTDONKEY9_H
 #define MELEE_FT_CHARA_FTDONKEY_FTDONKEY9_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 #include <Runtime/platform.h>
 
 void ftDonkey_800E06B8(HSD_GObj* gobj);

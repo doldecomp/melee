@@ -1,8 +1,8 @@
 #include <placeholder.h>
-#include <sysdolphin/baselib/baselib_unknown_002.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/psappsrt.h>
+#include <baselib/baselib_unknown_002.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/psappsrt.h>
 #include <melee/cm/camera.h>
 #include <melee/gr/grbigblue.h>
 #include <melee/gr/gricemt.h>

@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALLW_H
 #define MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALLW_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 #include <Runtime/platform.h>
 
 void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj);

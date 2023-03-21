@@ -1,7 +1,7 @@
 #include "ftLuigi/ftluigi.h"
 #include "melee/ft/inlines.h"
 
-#include <sysdolphin/baselib/gobjproc.h>
+#include <baselib/gobjproc.h>
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/code_80081B38.h>

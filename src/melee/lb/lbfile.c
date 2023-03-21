@@ -2,9 +2,9 @@
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/devcom.h>
+#include <baselib/archive.h>
+#include <baselib/debug.h>
+#include <baselib/devcom.h>
 #include <melee/lb/lbdvd.h>
 #include <melee/lb/lbfile.h>
 #include <melee/lb/lbheap.h>

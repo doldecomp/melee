@@ -1,10 +1,10 @@
 #ifndef _hsd_tobj_h_
 #define _hsd_tobj_h_
 
-#include <sysdolphin/baselib/fobj.h>
-#include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/object.h>
-#include <sysdolphin/baselib/texp.h>
+#include <baselib/fobj.h>
+#include <baselib/forward.h>
+#include <baselib/object.h>
+#include <baselib/texp.h>
 #include <Runtime/platform.h>
 
 #define TOBJ_ANIM 0x10

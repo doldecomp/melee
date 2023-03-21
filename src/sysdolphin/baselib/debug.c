@@ -1,6 +1,6 @@
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSContext.h>
-#include <sysdolphin/baselib/debug.h>
+#include <baselib/debug.h>
 
 struct UnkStruct80400430 {
     char filler0[0x52];

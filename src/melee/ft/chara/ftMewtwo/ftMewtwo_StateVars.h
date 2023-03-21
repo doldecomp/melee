@@ -1,7 +1,7 @@
 #ifndef _FTMEWTWO_STATEVARS_H_
 #define _FTMEWTWO_STATEVARS_H_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <Runtime/platform.h>
 
 typedef struct ftMewtwoSpecialHi {

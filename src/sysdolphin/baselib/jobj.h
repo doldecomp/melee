@@ -2,13 +2,13 @@
 #define _jobj_h_
 
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/list.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/object.h>
-#include <sysdolphin/baselib/pobj.h>
+#include <baselib/aobj.h>
+#include <baselib/class.h>
+#include <baselib/forward.h>
+#include <baselib/list.h>
+#include <baselib/mobj.h>
+#include <baselib/object.h>
+#include <baselib/pobj.h>
 #include <Runtime/platform.h>
 
 #define HSD_A_J_ROTX 1

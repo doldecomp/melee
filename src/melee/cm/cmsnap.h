@@ -1,7 +1,7 @@
 #ifndef _CMSNAP_H_
 #define _CMSNAP_H_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <Runtime/platform.h>
 
 void func_800315C8(void);

@@ -1,8 +1,8 @@
 #include <string.h>
-#include <sysdolphin/baselib/__baselib.h>
-#include <sysdolphin/baselib/objalloc.h>
-#include <sysdolphin/baselib/psappsrt.h>
-#include <sysdolphin/baselib/psstructs.h>
+#include <baselib/__baselib.h>
+#include <baselib/objalloc.h>
+#include <baselib/psappsrt.h>
+#include <baselib/psstructs.h>
 
 /* 004D4538 */ extern u16 lbl_804D7958[4];
 /* 004CDC90 */ extern HSD_ObjAllocData lbl_804D10B0;

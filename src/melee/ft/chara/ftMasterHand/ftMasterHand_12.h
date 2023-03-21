@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_12_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_12_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <Runtime/platform.h>
 
 /// 12 Ground Slap

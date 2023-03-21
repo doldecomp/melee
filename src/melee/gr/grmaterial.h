@@ -2,8 +2,8 @@
 #define MELEE_GR_GRMATERIAL_H
 
 #include <placeholder.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <melee/gr/ground.h>
 
 void func_801C95C4(HSD_GObj*);

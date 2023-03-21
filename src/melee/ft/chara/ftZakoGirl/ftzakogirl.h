@@ -1,7 +1,7 @@
 #ifndef _ftzakogirl_h_
 #define _ftzakogirl_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/ft/fighter.h>
 
 extern char lbl_803D3568[];

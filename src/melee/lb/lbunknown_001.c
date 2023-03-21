@@ -1,13 +1,13 @@
 #include <placeholder.h>
 #include <dolphin/mtx/mtxvec.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/pobj.h>
-#include <sysdolphin/baselib/quatlib.h>
-#include <sysdolphin/baselib/robj.h>
+#include <baselib/aobj.h>
+#include <baselib/dobj.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/mobj.h>
+#include <baselib/pobj.h>
+#include <baselib/quatlib.h>
+#include <baselib/robj.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/sc/scene.h>
 

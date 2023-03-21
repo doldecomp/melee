@@ -1,12 +1,12 @@
 #ifndef _aobj_h_
 #define _aobj_h_
 
-#include <sysdolphin/baselib/fobj.h>
-#include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/id.h>
-#include <sysdolphin/baselib/list.h>
-#include <sysdolphin/baselib/objalloc.h>
-#include <sysdolphin/baselib/object.h>
+#include <baselib/fobj.h>
+#include <baselib/forward.h>
+#include <baselib/id.h>
+#include <baselib/list.h>
+#include <baselib/objalloc.h>
+#include <baselib/object.h>
 #include <Runtime/platform.h>
 
 #define AOBJ_REWINDED (1 << 26)

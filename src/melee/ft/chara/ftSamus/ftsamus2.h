@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_FTSAMUS2_H
 #define MELEE_FT_CHARA_FTSAMUS_FTSAMUS2_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <Runtime/platform.h>
 
 f32 ftSamus_80128AC8(HSD_GObj* gobj, f32 farg1, f32 farg2);

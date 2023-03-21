@@ -1,9 +1,9 @@
 #ifndef MELEE_GR_TYPES_H
 #define MELEE_GR_TYPES_H
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 #include <melee/it/forward.h>
 #include <melee/sc/scene.h>
 

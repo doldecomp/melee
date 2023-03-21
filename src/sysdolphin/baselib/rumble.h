@@ -2,7 +2,7 @@
 #define SYSDOLPHIN_BASELIB_RUMBLE_H
 
 #include <dolphin/pad/Pad.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 #include <Runtime/platform.h>
 
 struct HSD_RumbleData {

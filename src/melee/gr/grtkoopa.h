@@ -1,7 +1,7 @@
 #ifndef _grtkoopa_h_
 #define _grtkoopa_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/gr/stage.h>
 
 static void func_80221648(int);

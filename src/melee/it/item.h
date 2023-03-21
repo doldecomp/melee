@@ -6,8 +6,8 @@
 #define MELEE_IT_ITEM_H
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <melee/it/types.h>
 #include <Runtime/platform.h>
 

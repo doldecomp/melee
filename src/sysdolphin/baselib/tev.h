@@ -1,7 +1,7 @@
 #ifndef _tev_h_
 #define _tev_h_
 
-#include <sysdolphin/baselib/objalloc.h>
+#include <baselib/objalloc.h>
 
 void HSD_RenderInitAllocData(void);
 HSD_ObjAllocData* HSD_RenderGetAllocData(void);

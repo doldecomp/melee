@@ -2,8 +2,8 @@
 #define MELEE_FT_FTANIM_H
 
 #include <placeholder.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 #include <melee/ft/forward.h>
 
 void func_8006E9B4(HSD_GObj*);

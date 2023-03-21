@@ -1,7 +1,7 @@
 #ifndef MELEE_LB_LBDVD_H
 #define MELEE_LB_LBDVD_H
 
-#include <sysdolphin/baselib/archive.h>
+#include <baselib/archive.h>
 #include <Runtime/platform.h>
 
 void func_80018F68(void);

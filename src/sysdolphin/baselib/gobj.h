@@ -1,8 +1,8 @@
 #ifndef _gobj_h_
 #define _gobj_h_
 
-#include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/objalloc.h>
+#include <baselib/forward.h>
+#include <baselib/objalloc.h>
 #include <Runtime/platform.h>
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)

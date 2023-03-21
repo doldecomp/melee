@@ -2,7 +2,7 @@
 #define _itPKThunder_h_
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <Runtime/platform.h>
 
 typedef struct itPKThunderAttributes {

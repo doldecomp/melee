@@ -1,6 +1,6 @@
 #include <math.h>
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/debug.h>
+#include <baselib/debug.h>
 #include <melee/gr/grdynamicattr.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>

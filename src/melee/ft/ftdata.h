@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_FTDATA_H
 #define MELEE_FT_FTDATA_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/ft/fighter.h>
 
 typedef struct ftData_UnkModelStruct {

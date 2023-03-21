@@ -1,5 +1,5 @@
 
-#include <sysdolphin/baselib/sislib.h>
+#include <baselib/sislib.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/it/item2.h>
 #include <melee/lb/lblanguage.h>

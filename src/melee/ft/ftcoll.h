@@ -2,7 +2,7 @@
 #define _ftcoll_h_
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/gobjproc.h>
+#include <baselib/gobjproc.h>
 #include <melee/ft/fighter.h>
 #include <Runtime/platform.h>
 

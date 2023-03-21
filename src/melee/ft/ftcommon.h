@@ -2,8 +2,8 @@
 #define MELEE_FT_FTCOMMON_H
 
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 #include <melee/ft/forward.h>
 #include <Runtime/platform.h>
 

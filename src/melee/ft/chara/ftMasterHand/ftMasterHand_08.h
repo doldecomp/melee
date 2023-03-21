@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_8_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_8_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 void func_80151CA8(HSD_GObj*);
 

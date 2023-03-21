@@ -1,7 +1,7 @@
 #ifndef _grfigure1_h_
 #define _grfigure1_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/gr/stage.h>
 
 static void func_8020DFDC(int);

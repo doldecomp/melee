@@ -2,7 +2,7 @@
 #define SYSDOLPHIN_BASELIB_S
 
 #include <dolphin/gx/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 #include <Runtime/platform.h>
 
 void HSD_StateSetZMode(u32, u32, u32);

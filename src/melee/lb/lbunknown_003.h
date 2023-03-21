@@ -1,7 +1,7 @@
 #ifndef MELEE_LB_LBUNKNOWN_003_H
 #define MELEE_LB_LBUNKNOWN_003_H
 
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/jobj.h>
 #include <melee/lb/types.h>
 
 unk_t func_80014638(void);

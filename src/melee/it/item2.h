@@ -1,7 +1,7 @@
 #ifndef MELEE_IT_ITEM2_H
 #define MELEE_IT_ITEM2_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/it/types.h>
 
 /// Transfer item on character swap - used for Zelda <-> Sheik

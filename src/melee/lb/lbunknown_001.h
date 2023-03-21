@@ -2,7 +2,7 @@
 #define _code_8000B074_h_
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/jobj.h>
 #include <melee/sc/scene.h>
 
 bool func_8000B074(HSD_JObj*);

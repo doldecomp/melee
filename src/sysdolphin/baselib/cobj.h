@@ -1,9 +1,9 @@
 #ifndef _cobj_h_
 #define _cobj_h_
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/object.h>
-#include <sysdolphin/baselib/wobj.h>
+#include <baselib/aobj.h>
+#include <baselib/object.h>
+#include <baselib/wobj.h>
 
 #define PROJ_PERSPECTIVE 1
 #define PROJ_FRUSTRUM 2

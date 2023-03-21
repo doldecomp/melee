@@ -1,7 +1,7 @@
 #ifndef _grtstory_h_
 #define _grtstory_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/gr/stage.h>
 
 static void func_801E302C(bool);

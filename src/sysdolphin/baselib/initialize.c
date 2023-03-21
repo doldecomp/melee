@@ -5,21 +5,21 @@
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/vi/vi.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/id.h>
-#include <sysdolphin/baselib/initialize.h>
-#include <sysdolphin/baselib/leak.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/objalloc.h>
-#include <sysdolphin/baselib/random.h>
-#include <sysdolphin/baselib/robj.h>
-#include <sysdolphin/baselib/shadow.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/tev.h>
+#include <baselib/aobj.h>
+#include <baselib/class.h>
+#include <baselib/debug.h>
+#include <baselib/displayfunc.h>
+#include <baselib/id.h>
+#include <baselib/initialize.h>
+#include <baselib/leak.h>
+#include <baselib/lobj.h>
+#include <baselib/mtx.h>
+#include <baselib/objalloc.h>
+#include <baselib/random.h>
+#include <baselib/robj.h>
+#include <baselib/shadow.h>
+#include <baselib/state.h>
+#include <baselib/tev.h>
 
 extern OSHeapHandle lbl_804D6018;
 extern GXRenderModeObj GXNtsc480IntDf;

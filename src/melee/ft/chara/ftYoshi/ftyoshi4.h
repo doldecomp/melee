@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTYOSHI_FTYOSHI4_H
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI4_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 #include <Runtime/platform.h>
 
 void ftYoshi_SpecialS_StartAction(HSD_GObj*);

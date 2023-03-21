@@ -64,7 +64,7 @@
 #include "ftZelda/ftzelda.h"
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
 typedef struct ftData_UnkCountStruct {
     /// Always zero; could be #NULL or the high part of a 64-bit integer.

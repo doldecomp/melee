@@ -1,7 +1,7 @@
 #ifndef MELEE_GR_GRDISPLAY_H
 #define MELEE_GR_GRDISPLAY_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 #include <Runtime/platform.h>
 
 void func_801C5DB0(HSD_GObj*, s32);

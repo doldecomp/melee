@@ -1,7 +1,7 @@
 #ifndef _gobjgxlink_h_
 #define _gobjgxlink_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <Runtime/platform.h>
 
 void GObj_GXReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj);

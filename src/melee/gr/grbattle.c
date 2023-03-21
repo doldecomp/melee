@@ -1,7 +1,7 @@
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
 #include <melee/gm/code_801601C4.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grbattle.h>

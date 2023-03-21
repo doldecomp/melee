@@ -2,7 +2,7 @@
 #define MELEE_FT_FTDRAWCOMMON_H
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <Runtime/platform.h>
 
 void func_80080E18(HSD_GObj*, long);

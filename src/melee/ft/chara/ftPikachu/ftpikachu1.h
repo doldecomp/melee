@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTPIKACHU_FTPIKACHU1_H
 #define MELEE_FT_CHARA_FTPIKACHU_FTPIKACHU1_H
 
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
 

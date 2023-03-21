@@ -1,7 +1,7 @@
 #ifndef _ftzakoboy_h_
 #define _ftzakoboy_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/ft/fighter.h>
 
 typedef struct _ftZakoboyAttributes {

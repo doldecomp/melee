@@ -2,7 +2,7 @@
 #define _ftness_h_
 
 #include <math.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>

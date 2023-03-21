@@ -1,4 +1,4 @@
-#include <sysdolphin/baselib/gobjgxlink.h>
+#include <baselib/gobjgxlink.h>
 
 #ifdef MUST_MATCH
 #pragma push

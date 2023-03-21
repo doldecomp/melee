@@ -1,13 +1,13 @@
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/robj.h>
-#include <sysdolphin/baselib/spline.h>
+#include <baselib/class.h>
+#include <baselib/displayfunc.h>
+#include <baselib/dobj.h>
+#include <baselib/jobj.h>
+#include <baselib/mtx.h>
+#include <baselib/robj.h>
+#include <baselib/spline.h>
 
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };

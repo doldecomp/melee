@@ -1,7 +1,7 @@
 #ifndef _grtpichu_h_
 #define _grtpichu_h_
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/gr/stage.h>
 
 static void func_80222B98(int);

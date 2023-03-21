@@ -1,5 +1,5 @@
 #include <placeholder.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 #include <melee/ft/code_80081938.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/item.h>

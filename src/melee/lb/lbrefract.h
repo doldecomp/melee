@@ -4,10 +4,10 @@
 #include <string.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/os/OSCache.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/memory.h>
-#include <sysdolphin/baselib/pobj.h>
-#include <sysdolphin/baselib/tobj.h>
+#include <baselib/cobj.h>
+#include <baselib/memory.h>
+#include <baselib/pobj.h>
+#include <baselib/tobj.h>
 
 void func_800222A4(void);
 void func_8002247C(HSD_CObj*);
