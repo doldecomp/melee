@@ -20,7 +20,7 @@ union ftCommon_MotionVars {
         f32 x14;
         f32 x18;
         f32 x1C;
-        f32 x20;
+        float accel_mul;
     } walk;
 };
 
