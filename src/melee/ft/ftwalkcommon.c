@@ -6,17 +6,16 @@
 
 #include <dolphin/os/os.h>
 
-s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* gobj)
+s32 ftWalkCommon_GetWalkType(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    f32 ground_vel = fp->gr_vel;
-    f32 walking_velocity = fabs_inline(ground_vel);
-    if (walking_velocity >=
-        (fp->mv.co.walk.accel_mul *
-         (p_ftCommonData->x2C * fp->x110_attr.walk_max_vel)))
+    float gr_vel = fp->gr_vel;
+    float walk_vel = fabs_inline(gr_vel);
+    if (walk_vel >= (fp->mv.co.walk.accel_mul *
+                     (p_ftCommonData->x2C * fp->x110_attr.walk_max_vel)))
     {
         return 2;
-    } else if (walking_velocity >=
+    } else if (walk_vel >=
                (fp->mv.co.walk.accel_mul *
                 (p_ftCommonData->x28 * fp->x110_attr.walk_max_vel)))
     {
