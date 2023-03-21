@@ -1,3 +1,5 @@
+#include "ftzelda1.h"
+
 #include "ftzelda.h"
 
 #include "ft/fighter.h"
