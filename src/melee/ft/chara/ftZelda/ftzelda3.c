@@ -6,6 +6,7 @@
 #include "ft/fighter.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
 
 void ftZelda_8013A830(HSD_GObj* fighter_gobj)
 {
@@ -41,7 +42,7 @@ inline void startActionHelper(HSD_GObj* fighter_gobj)
     fighter2 = GET_FIGHTER(fighter_gobj);
     attributes = fighter2->x2D4_specialAttributes;
     fighter2->x2200_ftcmd_var0 = 0;
-    fighter2->x2340_stateVar1 = attributes->x4;
+    fighter2->sv.zd.unk3.x0 = attributes->x4;
 }
 
 void ftZelda_SpecialN_StartAction(HSD_GObj* fighter_gobj)
@@ -168,12 +169,12 @@ void ftZelda_8013AB9C(HSD_GObj* fighter_gobj)
 #endif
 
     {
-        s32 var1 = fp->x2340_stateVar1;
+        s32 var1 = fp->sv.zd.unk3.x0;
         attr* attr = &fp->x110_attr;
         ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
 
         if (var1 != 0)
-            fp->x2340_stateVar1 = var1 - 1;
+            fp->sv.zd.unk3.x0 = var1 - 1;
         else
             func_8007D494(fp, sa->xC, attr->x170_TerminalVelocity);
     }

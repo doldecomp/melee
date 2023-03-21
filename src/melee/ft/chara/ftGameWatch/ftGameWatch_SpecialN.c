@@ -156,10 +156,10 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
     gawAttrs = getFtSpecialAttrs(fp);
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = randomInt = 0;
-        if (((f32) fp->gameWatchVars.SpecialN.maxSausage) <
+        if (((f32) fp->sv.gw.SpecialN.maxSausage) <
             gawAttrs->x1C_GAMEWATCH_CHEF_MAX)
         {
-            fp->gameWatchVars.SpecialN.maxSausage++;
+            fp->sv.gw.SpecialN.maxSausage++;
             sp38.x = 2.5f;
             sp38.y = 6.5f;
             sp38.z = 0.0f;
@@ -169,17 +169,17 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
             temp_fp = GET_FIGHTER(fighter_gobj);
             i = 5;
             for (i -= 5; i < 5; i++) {
-                if ((i != temp_fp->sa.gaw.x2240_chefVar1) &&
-                    (i != temp_fp->sa.gaw.x2244_chefVar2))
+                if ((i != temp_fp->ev.gw.x2240_chefVar1) &&
+                    (i != temp_fp->ev.gw.x2244_chefVar2))
                 {
                     sausageCount[randomInt] = i;
                     randomInt++;
                 }
             }
             temp_r5 = sausageCount[HSD_Randi(randomInt)];
-            temp_fp->sa.gaw.x2244_chefVar2 = temp_fp->sa.gaw.x2240_chefVar1;
+            temp_fp->ev.gw.x2244_chefVar2 = temp_fp->ev.gw.x2240_chefVar1;
             temp_r6 = temp_r5;
-            temp_fp->sa.gaw.x2240_chefVar1 = temp_r5;
+            temp_fp->ev.gw.x2240_chefVar1 = temp_r5;
             func_802C837C(fighter_gobj, &sp44, 0x7A, temp_r6, fp->facing_dir);
         }
         fp->cb.x21BC_callback_Accessory4 = NULL;
@@ -194,8 +194,8 @@ static inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* fighter_gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2208_ftcmd_var2 = 0;
-    fp->gameWatchVars.SpecialN.isChefLoopDisable = false;
-    fp->gameWatchVars.SpecialN.maxSausage = 0;
+    fp->sv.gw.SpecialN.isChefLoopDisable = false;
+    fp->sv.gw.SpecialN.maxSausage = 0;
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_SpecialN_CreateSausage;
 }
 
@@ -230,9 +230,9 @@ static inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* fighter_gobj)
 
     if ((u32) fp->x2208_ftcmd_var2 != 0U) {
         fp->x2208_ftcmd_var2 = 0U;
-        if (((f32) fp->gameWatchVars.SpecialN.maxSausage <
+        if (((f32) fp->sv.gw.SpecialN.maxSausage <
              gawAttrs->x1C_GAMEWATCH_CHEF_MAX) &&
-            ((s32) fp->gameWatchVars.SpecialN.isChefLoopDisable == false))
+            ((s32) fp->sv.gw.SpecialN.isChefLoopDisable == false))
         {
             ftGameWatch_SpecialN_Loop(fighter_gobj,
                                       gawAttrs->x18_GAMEWATCH_CHEF_LOOPFRAME);
@@ -263,8 +263,8 @@ static inline void ftGameWatch_SpecialAirN_ChefLoop(HSD_GObj* fighter_gobj)
 
     if ((u32) fp->x2208_ftcmd_var2 != 0U) {
         fp->x2208_ftcmd_var2 = 0U;
-        if (((s32) fp->gameWatchVars.SpecialN.isChefLoopDisable == false) &&
-            ((f32) fp->gameWatchVars.SpecialN.maxSausage <
+        if (((s32) fp->sv.gw.SpecialN.isChefLoopDisable == false) &&
+            ((f32) fp->sv.gw.SpecialN.maxSausage <
              gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
         {
             ftGameWatch_SpecialAirN_Loop(
@@ -297,10 +297,10 @@ void ftGameWatch_SpecialN_IASA(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
-        fp->gameWatchVars.SpecialN.isChefLoopDisable = true;
+        fp->sv.gw.SpecialN.isChefLoopDisable = true;
     }
     if (((u32) fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_BUTTON_B) &&
-        ((f32) fp->gameWatchVars.SpecialN.maxSausage <
+        ((f32) fp->sv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
         ftGameWatch_SpecialN_Loop(fighter_gobj,
@@ -317,10 +317,10 @@ void ftGameWatch_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
     ftGameWatchAttributes* gawAttrs = gawAttrs = getFtSpecialAttrsD(fp);
 
     if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
-        fp->gameWatchVars.SpecialN.isChefLoopDisable = true;
+        fp->sv.gw.SpecialN.isChefLoopDisable = true;
     }
     if (((u32) fp->x2204_ftcmd_var1 != 0U) && (fp->input.x668 & HSD_BUTTON_B) &&
-        ((f32) fp->gameWatchVars.SpecialN.maxSausage <
+        ((f32) fp->sv.gw.SpecialN.maxSausage <
          gawAttrs->x1C_GAMEWATCH_CHEF_MAX))
     {
         ftGameWatch_SpecialAirN_Loop(fighter_gobj,
@@ -416,7 +416,7 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2208_ftcmd_var2 = 0;
-    fp->gameWatchVars.SpecialN.isChefLoopDisable = false;
+    fp->sv.gw.SpecialN.isChefLoopDisable = false;
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_SpecialN_CreateSausage;
 }
 
@@ -445,6 +445,6 @@ void ftGameWatch_SpecialAirN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2208_ftcmd_var2 = 0;
-    fp->gameWatchVars.SpecialN.isChefLoopDisable = false;
+    fp->sv.gw.SpecialN.isChefLoopDisable = false;
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_SpecialN_CreateSausage;
 }

@@ -1,9 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALLW_H
 #define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALLW_H
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
+#include <platform.h>
 
+void ftCaptain_SpecialLw_StartAction(HSD_GObj*);
+void ftCaptain_SpecialAirLw_StartAction(HSD_GObj*);
 void func_800E4B00(HSD_GObj*);
 void func_800E4BF8(HSD_GObj*);
 void func_800E4E1C(HSD_GObj*);

@@ -1,11 +1,10 @@
-#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
+#include "ftcrazyhand.h"
 
-#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/types.h>
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftbosslib.h"
+#include "ft/ftcamera.h"
+#include "ft/types.h"
 
 ActionState as_table_crazyhand[] = {
     { 295, 0, 0x01000000, lbl_80156404, lbl_80156A70, lbl_80156AB4,
@@ -150,23 +149,23 @@ void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj)
     fp->xB0_pos.x = ftData_attr->x18;
     fp->xB0_pos.y = ftData_attr->x1C;
     fp->xB0_pos.z = 0.0f;
-    fp->x2368 = 0;
-    fp->x236C = 0;
-    fp->masterhandVars.x2370 = 0;
-    fp->masterhandVars.x2374 = 0;
-    fp->masterhandVars.x2378 = -1;
-    fp->masterhandVars.x237C = -1;
-    fp->masterhandVars.x2380 = -1;
-    fp->x235C = 0.0f;
-    fp->x2360 = 0;
-    fp->sa.masterhand.x222C = func_8015C244(fighter_gobj, &fp->xB0_pos);
-    fp->sa.masterhand.x2238 = 1.0f;
-    fp->sa.masterhand.x224C = 0;
-    fp->sa.masterhand.x2250 = 0x159;
-    fp->sa.masterhand.x2254 = 0;
+    fp->sv.mh.unk0.x28 = 0;
+    fp->sv.mh.unk0.x2C = 0;
+    fp->sv.mh.unk0.x30 = 0;
+    fp->sv.mh.unk0.x34 = 0;
+    fp->sv.mh.unk0.x38 = -1;
+    fp->sv.mh.unk0.x3C = -1;
+    fp->sv.mh.unk0.x40 = -1;
+    fp->sv.mh.unk0.x1C = 0.0f;
+    fp->sv.mh.unk0.x20 = 0;
+    fp->ev.mh.x222C = func_8015C244(fighter_gobj, &fp->xB0_pos);
+    fp->ev.mh.x2238 = 1.0f;
+    fp->ev.mh.x224C = 0;
+    fp->ev.mh.x2250 = 0x159;
+    fp->ev.mh.x2254 = 0;
     fp->x1A98 = 1;
-    func_8015BD24(fp->x1A98, &fp->sa.masterhand.x223C, fp->sa.crazyhand.x2238,
-                  ftData_attr->x0, ftData_attr->x8, ftData_attr->x4);
+    func_8015BD24(fp->x1A98, &fp->ev.mh.x223C, fp->ev.ch.x2238, ftData_attr->x0,
+                  ftData_attr->x8, ftData_attr->x4);
 }
 
 void ftCrazyHand_LoadSpecialAttrs(HSD_GObj* gobj)

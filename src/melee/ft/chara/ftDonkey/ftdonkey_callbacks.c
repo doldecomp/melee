@@ -155,7 +155,7 @@ Fighter_CostumeStrings lbl_803CC020[] = {
 void ftDonkey_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    fp->sa.dk.x222C = 0;
+    fp->ev.dk.x222C = 0;
     func_80074A4C(fighter_gobj, 0, 0);
 }
 
@@ -190,7 +190,7 @@ void func_8010D96C(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* attr = fp->x2D4_specialAttributes;
 
-    if (fp->sa.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS)
+    if (fp->ev.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS)
         func_800BFFD0(fp, 0x39, 0);
 }
 

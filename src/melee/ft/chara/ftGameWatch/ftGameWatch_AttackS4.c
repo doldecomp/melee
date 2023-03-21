@@ -20,9 +20,9 @@ void ftGameWatch_ItemTorchSetup(HSD_GObj* fighter_gobj)
 
     fp = getFighter(fighter_gobj);
     func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
-    fp->sa.gaw.x2254_fireGObj =
+    fp->ev.gw.x2254_fireGObj =
         func_802C68F8(fighter_gobj, &sp10, 0x20, fp->facing_dir);
-    if (fp->sa.gaw.x2254_fireGObj != NULL) {
+    if (fp->ev.gw.x2254_fireGObj != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         }
@@ -41,7 +41,7 @@ void ftGameWatch_ItemTorchSetFlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftGameWatch_ItemTorchExitHitlag(fighter_gobj);
-    fp->sa.gaw.x2254_fireGObj = NULL;
+    fp->ev.gw.x2254_fireGObj = NULL;
 }
 
 // 0x8014A938 //
@@ -55,8 +55,8 @@ void ftGameWatch_ItemTorchOnDamage(HSD_GObj* fighter_gobj)
     u8 _[4];
 #endif
 
-    if (fp->sa.gaw.x2254_fireGObj != NULL) {
-        func_802C6A2C(fp->sa.gaw.x2254_fireGObj);
+    if (fp->ev.gw.x2254_fireGObj != NULL) {
+        func_802C6A2C(fp->ev.gw.x2254_fireGObj);
         ftGameWatch_ItemTorchSetFlag(fighter_gobj);
     }
 }
@@ -66,8 +66,8 @@ void ftGameWatch_ItemTorchOnDamage(HSD_GObj* fighter_gobj)
 void ftGameWatch_ItemTorchEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->sa.gaw.x2254_fireGObj != NULL) {
-        func_802C6A78(fp->sa.gaw.x2254_fireGObj);
+    if (fp->ev.gw.x2254_fireGObj != NULL) {
+        func_802C6A78(fp->ev.gw.x2254_fireGObj);
     }
 }
 
@@ -76,8 +76,8 @@ void ftGameWatch_ItemTorchEnterHitlag(HSD_GObj* fighter_gobj)
 void ftGameWatch_ItemTorchExitHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->sa.gaw.x2254_fireGObj != NULL) {
-        func_802C6A98(fp->sa.gaw.x2254_fireGObj);
+    if (fp->ev.gw.x2254_fireGObj != NULL) {
+        func_802C6A98(fp->ev.gw.x2254_fireGObj);
     }
 }
 

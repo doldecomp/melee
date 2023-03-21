@@ -16,8 +16,8 @@ int ftDrMario_SpecialN_GetRandomInt(Fighter* fp, int* arr, int outpos)
 {
     int r3;
     r3 = (int) arr[HSD_Randi(outpos)];
-    fp->sa.mario.x2230_vitaminPrev = fp->sa.mario.x222C_vitaminCurr;
-    fp->sa.mario.x222C_vitaminCurr = r3;
+    fp->ev.mr.x2230_vitaminPrev = fp->ev.mr.x222C_vitaminCurr;
+    fp->ev.mr.x222C_vitaminCurr = r3;
     return r3;
 }
 
@@ -33,8 +33,8 @@ int ftMario_SpecialN_VitaminRandom(
     fp = gobj->user_data;
 
     for (i = r3 = 0; i < 9; i++) {
-        if (i != (int) fp->sa.mario.x222C_vitaminCurr &&
-            i != (int) fp->sa.mario.x2230_vitaminPrev)
+        if (i != (int) fp->ev.mr.x222C_vitaminCurr &&
+            i != (int) fp->ev.mr.x2230_vitaminPrev)
         {
             arr[r3] = i;
             r3++;

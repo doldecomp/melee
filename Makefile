@@ -84,7 +84,7 @@ FORMAT  := clang-format -i -style=file
 FRANK := tools/frank.py
 
 # Options
-INCLUDE_DIRS = $(*D) src/melee src/melee/ft/chara
+INCLUDE_DIRS = src/melee src/melee/ft/chara
 # TODO dolphin and sysdolphin as system includes
 #      Then fix include statements to use quotes for other paths
 #      And make sure that all tools understand this distinction.
@@ -109,7 +109,8 @@ CFLAGS = -msgstyle $(MSG_STYLE) \
 		-fp_contract on -O4,p \
 		-enum int \
 		-nodefaults \
-		-inline auto $(INCLUDES) \
+		-inline auto \
+		$(INCLUDES) \
 		-maxerrors $(MAX_ERRORS)
 
 ifneq ($(NON_MATCHING),1)
@@ -126,6 +127,10 @@ endif
 
 ifeq ($(WARN_ERROR),1)
 	CFLAGS += -warn iserror
+endif
+
+ifeq ($(VERBOSE),1)
+	CFLAGS += -verbose
 endif
 
 $(BUILD_DIR)/src/melee/pl/player.c.o: CC_EPI := $(CC)

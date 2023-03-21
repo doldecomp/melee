@@ -96,7 +96,7 @@ bool func_800EAD64(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.link.x2234)
+    if (fp->ev.lk.x2234)
         return true;
 
     return false;
@@ -110,13 +110,13 @@ void ftLink_OnDeath(HSD_GObj* fighter_gobj)
     func_80074A4C(fighter_gobj, 1, 0);
     func_80074A4C(fighter_gobj, 2, 0);
 
-    fp->sa.link.x222C = 0;
-    fp->sa.link.x2234 = 0;
-    fp->sa.link.x2238 = 0;
-    fp->sa.link.x223C = 0;
-    fp->sa.link.x2240 = 0;
-    fp->sa.link.x2238 = 0;
-    fp->sa.link.x2244 = 0;
+    fp->ev.lk.x222C = 0;
+    fp->ev.lk.x2234 = 0;
+    fp->ev.lk.x2238 = 0;
+    fp->ev.lk.x223C = 0;
+    fp->ev.lk.x2240 = 0;
+    fp->ev.lk.x2238 = 0;
+    fp->ev.lk.x2244 = 0;
 }
 
 void ftLink_OnLoadForCLink(Fighter* fp)

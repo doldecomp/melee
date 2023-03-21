@@ -25,7 +25,7 @@ void ftDonkey_800E05E4(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
-    fp->x2344_f32 = donkey_attr->cargo_hold.x28_LANDING_LAG;
+    fp->sv.dk.unk8.x4 = donkey_attr->cargo_hold.x28_LANDING_LAG;
     donkey_attr = getFtSpecialAttrs2CC(fp);
     func_800D5AEC(fighter_gobj, donkey_attr->action_state + 8, 1, 0, fp, 0.0f,
                   1.0f);
@@ -36,8 +36,8 @@ void ftDonkey_800E0648(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->x2344_f32 <= 0.0f)
+    if (fp->sv.dk.unk8.x4 <= 0.0f)
         ftDonkey_800DF980(fighter_gobj);
 
-    fp->x2344_f32 -= 1.0f;
+    fp->sv.dk.unk8.x4 -= 1.0f;
 }

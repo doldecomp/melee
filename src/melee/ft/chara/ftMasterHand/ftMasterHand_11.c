@@ -1,7 +1,5 @@
 #include "ftMasterHand_11.h"
 
-#include "ftMasterHand.h"
-
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
 
@@ -20,7 +18,7 @@ void lbl_80152370(HSD_GObj* arg0)
 void lbl_801523BC(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
-    MasterHandAttributes* r30_attributes;
+    ftMasterHand_SpecialAttrs* r30_attributes;
 
     if (ftAnim_IsFramesRemaining(gobj))
         return;
@@ -28,7 +26,7 @@ void lbl_801523BC(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
     func_8015247C(gobj);
-    r31_fp->masterhandVars.x2348 = r30_attributes->xA0;
+    r31_fp->sv.mh.unk0.x8 = r30_attributes->xA0;
 }
 
 // 80152414 14EFF4
@@ -68,7 +66,7 @@ void lbl_801524C8(HSD_GObj* gobj)
 {
     Fighter* temp_r4 = GET_FIGHTER(gobj);
 
-    if (!--temp_r4->masterhandVars.x2348) {
+    if (!--temp_r4->sv.mh.unk0.x8) {
         func_801525E0(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -93,7 +91,7 @@ void lbl_80152588(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftData* r4_ftData = fp->x10C_ftData;
-    MasterHandAttributes* r31_attributes = r4_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* r31_attributes = r4_ftData->ext_attr;
 
     func_80085134(gobj);
     func_8015C010(gobj, r31_attributes->xA4);

@@ -5,36 +5,6 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
-typedef struct _MarsAttributes {
-    s32 x0;
-    s32 x4;
-    s32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
-    f32 x28;
-    f32 x2C;
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    f32 x3C;
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    f32 x4C;
-    f32 x50;
-    f32 x54;
-    f32 x58;
-    f32 x5C;
-    f32 x60;
-    f32 x64;
-    u8 data_filler_68[0x98 - 0x68];
-} MarsAttributes;
-
 extern ActionState as_table_mars[];
 extern char lbl_803CF820[];
 extern char lbl_803CF82C[];

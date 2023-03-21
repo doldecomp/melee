@@ -3,6 +3,8 @@
 #include "ftCaptain_SpecialHi.h"
 #include "ftCaptain_SpecialLw.h"
 #include "ftCaptain_SpecialN.h"
+#include "ftCaptain_SpecialS.h"
+#include "types.h"
 
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
@@ -97,18 +99,18 @@ void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, 0);
-    fp->sa.captain.x2230_isSpecialSGFX = 0;
-    fp->sa.captain.x222C_isSpecialSStartGFX = 0;
+    fp->ev.ca.during_specials = 0;
+    fp->ev.ca.during_specials_start = false;
 }
 
-void lbl_800E28C8(HSD_GObj* fighter_gobj)
+void ftCaptain_800E28C8(HSD_GObj* fighter_gobj)
 {
     ftCaptain_SpecialS_RemoveGFX(fighter_gobj);
 }
 
-void ftCaptain_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftCaptain_OnItemPickup(HSD_GObj* fighter_gobj, bool arg1)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(fighter_gobj, arg1, 1, 1);
 }
 
 void ftCaptain_OnItemInvisible(HSD_GObj* fighter_gobj)

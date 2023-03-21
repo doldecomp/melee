@@ -81,14 +81,14 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     s32 animCount;
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->foxVars.AppealS.animCount = 0;
+    fp->sv.fx.AppealS.animCount = 0;
     facingDir = ftFox_AppealS_GetLR(1.0f, fp->facing_dir);
 
-    fp->foxVars.AppealS.facingDir = facingDir;
+    fp->sv.fx.AppealS.facingDir = facingDir;
     fp->x2210_ThrowFlags.flags = 0;
 
-    actionDir = fp->foxVars.AppealS.facingDir;
-    animCount = fp->foxVars.AppealS.animCount;
+    actionDir = fp->sv.fx.AppealS.facingDir;
+    animCount = fp->sv.fx.AppealS.animCount;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj,
                                        ASID_AppealS[actionDir][animCount], 0,
@@ -134,16 +134,16 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
         }
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        fp->foxVars.AppealS.animCount++;
-        if ((s32) fp->foxVars.AppealS.animCount >= 3) {
+        fp->sv.fx.AppealS.animCount++;
+        if ((s32) fp->sv.fx.AppealS.animCount >= 3) {
             func_8008A324(fighter_gobj);
             return;
         }
 
         Fighter_ActionStateChange_800693AC(
             fighter_gobj,
-            ASID_AppealS[fp->foxVars.AppealS.facingDir]
-                        [fp->foxVars.AppealS.animCount],
+            ASID_AppealS[fp->sv.fx.AppealS.facingDir]
+                        [fp->sv.fx.AppealS.animCount],
             0, NULL, 0.0f, 1.0f, 0.0f);
     }
 }

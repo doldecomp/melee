@@ -51,13 +51,13 @@ typedef struct ftFoxAppealS {
 
 } ftFoxAppealS;
 
-typedef union ftFoxStateVars {
+typedef union ftFox_StateVars {
     ftFoxSpecialN SpecialN;
     ftFoxSpecialS SpecialS;
     ftFoxSpecialHi SpecialHi;
     ftFoxSpecialLw SpecialLw;
     ftFoxAppealS AppealS;
 
-} ftFoxStateVars;
+} ftFox_StateVars;
 
 #endif

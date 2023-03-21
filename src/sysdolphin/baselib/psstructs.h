@@ -235,7 +235,7 @@ extern int td;
 #endif
 
 #ifndef _NFUNCPROTO
-void psSetFog(struct _HSD_Fog* fog);
+void psSetFog(struct HSD_Fog* fog);
 
 void psRemoveFog(void);
 #endif

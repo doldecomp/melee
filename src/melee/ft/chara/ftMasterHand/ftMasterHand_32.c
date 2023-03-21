@@ -1,10 +1,10 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_32.h>
+#include "ftMasterHand_32.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_22.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_33.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
+#include "ftMasterHand_22.h"
+#include "ftMasterHand_33.h"
+
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
 
 // 80155B70 152750
 void func_80155B70(HSD_GObj* gobj)

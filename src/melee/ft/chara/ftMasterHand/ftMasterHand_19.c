@@ -1,6 +1,6 @@
-#include "ftMasterHand/ftMasterHand.h"
-
 #include "ftMasterHand_19.h"
+
+#include "ftMasterHand_03.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
@@ -37,12 +37,12 @@ void lbl_80153B8C(HSD_GObj* gobj)
 void lbl_80153B90(HSD_GObj* arg0)
 {
     Fighter* temp_r31 = GET_FIGHTER(arg0);
-    MasterHandAttributes* temp_r30 = temp_r31->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* temp_r30 = temp_r31->x10C_ftData->ext_attr;
     Vec3 sp10;
 
     Fighter_ActionStateChange_800693AC(arg0, 0x172, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
-    temp_r31->masterhandVars.x2340_unk = temp_r30->x6C;
+    temp_r31->sv.mh.unk0.x0 = temp_r30->x6C;
     func_8015C208(arg0, &sp10);
     temp_r31->xB0_pos.x = sp10.x;
     temp_r31->xB0_pos.y = temp_r30->x68;
@@ -76,9 +76,10 @@ void lbl_80153C90(HSD_GObj* arg0)
 void lbl_80153CD4(HSD_GObj* gobj)
 {
     Fighter* r4_fp = GET_FIGHTER(gobj);
-    if (--r4_fp->masterhandVars.x2340_unk > 0.0f) {
+    if (--r4_fp->sv.mh.unk0.x0 > 0.0f) {
         func_8015BF74(
-            gobj, ((MasterHandAttributes*) r4_fp->x10C_ftData->ext_attr)->x58);
+            gobj,
+            ((ftMasterHand_SpecialAttrs*) r4_fp->x10C_ftData->ext_attr)->x58);
     } else {
         r4_fp->x80_self_vel.x = 0.0f;
     }

@@ -22,9 +22,9 @@ static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->luigiVars.SpecialLw.groundVelX = (f32) 0.0f;
-    fp->luigiVars.SpecialLw.unk = (s32) luigiAttrs->x88_LUIGI_CYCLONE_UNK + 1;
-    fp->luigiVars.SpecialLw.isUnkColl = false;
+    fp->sv.lg.SpecialLw.groundVelX = (f32) 0.0f;
+    fp->sv.lg.SpecialLw.unk = (s32) luigiAttrs->x88_LUIGI_CYCLONE_UNK + 1;
+    fp->sv.lg.SpecialLw.isUnkColl = false;
 }
 
 static inline void ftLuigi_SpecialLw_SetCall(HSD_GObj* fighter_gobj)
@@ -98,7 +98,7 @@ void ftLuigi_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALAIRLW, 0,
                                        NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
-    if (fp2->sa.luigi.x222C_cycloneCharge != 0) {
+    if (fp2->ev.lg.x222C_cycloneCharge != 0) {
         cycloneVar = 0.0f;
     } else
         cycloneVar = luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
@@ -141,7 +141,7 @@ void ftLuigi_SpecialAirLw_Anim(HSD_GObj* fighter_gobj)
 
     if (fp->x2204_ftcmd_var1 != 0) {
         fp->x2204_ftcmd_var1 = 0;
-        fp->sa.luigi.x222C_cycloneCharge = true;
+        fp->ev.lg.x222C_cycloneCharge = true;
     }
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -195,9 +195,9 @@ void ftLuigi_SpecialLw_Phys(HSD_GObj* fighter_gobj)
         f32 var2 = attrs->x74_LUIGI_CYCLONE_MOMENTUM_X_GROUND;
 
         if (fp->x2200_ftcmd_var0 != 0) {
-            fp->luigiVars.SpecialLw.groundVelX -=
+            fp->sv.lg.SpecialLw.groundVelX -=
                 attrs->x84_LUIGI_CYCLONE_FRICTION_END;
-            var2 += fp->luigiVars.SpecialLw.groundVelX;
+            var2 += fp->sv.lg.SpecialLw.groundVelX;
 
             if (var2 < 0)
                 var2 = 0;
@@ -227,7 +227,7 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftLuigiAttributes* attrs0 = fp->x2D4_specialAttributes;
 
-    if (!fp->sa.luigi.x222C_cycloneCharge && fp->x2208_ftcmd_var2 != 0 &&
+    if (!fp->ev.lg.x222C_cycloneCharge && fp->x2208_ftcmd_var2 != 0 &&
         (fp->input.x668 & HSD_BUTTON_B))
     {
         func_8007D508(fp, attrs0->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX,
@@ -243,9 +243,9 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
             ftLuigiAttributes* attrs1 = fp->x2D4_specialAttributes;
 
             if (fp->x2200_ftcmd_var0 != 0) {
-                fp->luigiVars.SpecialLw.groundVelX -=
+                fp->sv.lg.SpecialLw.groundVelX -=
                     attrs1->x84_LUIGI_CYCLONE_FRICTION_END;
-                spd_x += fp->luigiVars.SpecialLw.groundVelX;
+                spd_x += fp->sv.lg.SpecialLw.groundVelX;
 
                 if (spd_x < 0)
                     spd_x = 0;
@@ -265,7 +265,7 @@ static inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (((u32) fp->x220C_ftcmd_var3 != 0U) &&
-        ((s32) fp->luigiVars.SpecialLw.isUnkColl != false))
+        ((s32) fp->sv.lg.SpecialLw.isUnkColl != false))
     {
         func_8007592C(fp, 0,
                       fp->facing_dir *
@@ -289,17 +289,17 @@ void ftLuigi_SpecialLw_Coll(HSD_GObj* fighter_gobj)
     if (fp->xE0_ground_or_air == GA_Ground) {
         if (!func_80082888(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox)) {
             ftLuigi_SpecialLw_GroundToAir(fighter_gobj);
-            fp->luigiVars.SpecialLw.isUnkColl = false;
+            fp->sv.lg.SpecialLw.isUnkColl = false;
         } else {
-            fp->luigiVars.SpecialLw.isUnkColl = true;
+            fp->sv.lg.SpecialLw.isUnkColl = true;
         }
     } else if (func_800824A0(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) ==
                false)
     {
         ftLuigi_SpecialLw_GroundToAir(fighter_gobj);
-        fp->luigiVars.SpecialLw.isUnkColl = false;
+        fp->sv.lg.SpecialLw.isUnkColl = false;
     } else {
-        fp->luigiVars.SpecialLw.isUnkColl = true;
+        fp->sv.lg.SpecialLw.isUnkColl = true;
     }
 
     ftLuigi_SpecialLw_UnkAngle(fighter_gobj);
@@ -312,7 +312,7 @@ static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
     fp->x2208_ftcmd_var2 = 0;
     func_8007D7FC(fp);
     fp->x80_self_vel.y = 0.0f;
-    fp->sa.luigi.x222C_cycloneCharge = false;
+    fp->ev.lg.x222C_cycloneCharge = false;
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_LUIGI_SPECIALLW,
                                        FTLUIGI_SPECIALLW_FLAG, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -334,9 +334,9 @@ void ftLuigi_SpecialAirLw_Coll(HSD_GObj* fighter_gobj)
 
     if (func_800824A0(fighter_gobj, &ftLuigi_SpecialLw_CollisionBox) != false) {
         ftLuigi_SpecialAirLw_AirToGround(fighter_gobj);
-        fp->luigiVars.SpecialLw.isUnkColl = true;
+        fp->sv.lg.SpecialLw.isUnkColl = true;
     } else {
-        fp->luigiVars.SpecialLw.isUnkColl = false;
+        fp->sv.lg.SpecialLw.isUnkColl = false;
     }
     ftLuigi_SpecialLw_UnkAngle(fighter_gobj);
 }

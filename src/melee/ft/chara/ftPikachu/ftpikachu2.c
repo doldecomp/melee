@@ -1,13 +1,15 @@
-#include <melee/ft/chara/ftPikachu/ftpikachu.h>
+#include "ftpikachu.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
+#include "types.h"
+
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftlib.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
 
 void ftPikachu_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
@@ -200,9 +202,9 @@ void ftPikachu_80124DC8(HSD_GObj* fighter_gobj)
 
     pika_attr_1C = pika_attr->x1C;
     if (fighter_x673_byte < pika_attr_1C) {
-        fp->x2340_stateVar1 = pika_attr->x20;
+        fp->sv.pk.unk2.x0 = pika_attr->x20;
         fp->x2070.x2072_b4 = 1;
     } else {
-        fp->x2340_stateVar1 = 0;
+        fp->sv.pk.unk2.x0 = 0;
     }
 }

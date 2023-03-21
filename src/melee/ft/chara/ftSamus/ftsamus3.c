@@ -19,7 +19,7 @@ void ftSamus_801293BC_inner(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    s32 x2230 = fp->sa.samus.x2230;
+    s32 x2230 = fp->ev.ss.x2230;
     fp->x80_self_vel.x = (fp->facing_dir * (samus_attr->x1C * x2230));
 }
 
@@ -32,8 +32,8 @@ void ftSamus_801291F0(HSD_GObj* fighter_gobj)
 
     if (fighter_gobj) {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
-        if (fp->sa.samus.x222C) {
-            fp->sa.samus.x222C = 0;
+        if (fp->ev.ss.x222C) {
+            fp->ev.ss.x222C = 0;
         }
         ftSamus_destroyAllEF(fighter_gobj);
     }
@@ -49,7 +49,7 @@ void ftSamus_80129258(HSD_GObj* fighter_gobj)
     if (fighter_gobj) {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
         ftSamus_UnkAndDestroyAllEF(fighter_gobj);
-        fp->sa.samus.x2230 = 0;
+        fp->ev.ss.x2230 = 0;
     }
 }
 
@@ -67,7 +67,7 @@ s32 ftSamus_801292E4(HSD_GObj* fighter_gobj)
 
     Fighter* fp = getFighter(fighter_gobj);
 
-    if ((fp->x2200_ftcmd_var0 == 1U) && (!fp->sa.samus.x222C)) {
+    if ((fp->x2200_ftcmd_var0 == 1U) && (!fp->ev.ss.x222C)) {
         fp->x2200_ftcmd_var0 = 0U;
         vec2.z = 4.0f;
         vec2.y = 0.0f;
@@ -75,11 +75,11 @@ s32 ftSamus_801292E4(HSD_GObj* fighter_gobj)
         func_8000B1CC(fp->x5E8_fighterBones[50].x0_jobj, &vec2, &vec1);
         vec1.z = 0.0f;
         result = func_802B55C8(fighter_gobj, &vec1, 0x32, 0x5E, fp->facing_dir);
-        fp->sa.samus.x222C = result;
+        fp->ev.ss.x222C = result;
         if (result != NULL) {
             ftSamus_updateDamageDeathCBs(fighter_gobj);
         } else {
-            fp->sa.samus.x222C = 0U;
+            fp->ev.ss.x222C = 0U;
             return 1;
         }
     }
@@ -100,7 +100,7 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj)
     fp = getFighterPlus(fighter_gobj);
     samus_attr = fp->x2D4_specialAttributes;
 
-    if ((fp->x2204_ftcmd_var1 == 1) && (fp->sa.samus.x222C)) {
+    if ((fp->x2204_ftcmd_var1 == 1) && (fp->ev.ss.x222C)) {
         Vec3 vec1;
         u32 x2230;
 
@@ -113,9 +113,8 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj)
         } else {
             var_f0 = M_PI;
         }
-        x2230 = fp->sa.samus.x2230;
-        func_802B56E4(fp->sa.samus.x222C, &vec1, var_f0, x2230,
-                      samus_attr->x18);
+        x2230 = fp->ev.ss.x2230;
+        func_802B56E4(fp->ev.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
         if ((fp->action_id == 0x15C) || (fp->xE0_ground_or_air == GA_Air)) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -123,7 +122,7 @@ void ftSamus_801293BC(HSD_GObj* fighter_gobj)
 #endif
             ftSamus_801293BC_inner(fighter_gobj);
         }
-        fp->sa.samus.x2230 = 0U;
+        fp->ev.ss.x2230 = 0U;
 
         ftSamus_801291F0(fighter_gobj);
         ef_Spawn(0x486, fighter_gobj, &vec1, &fp->facing_dir);
@@ -151,9 +150,9 @@ void ftSamus_SpecialN_StartAction(HSD_GObj* fighter_gobj)
     self_vel = &fp->x80_self_vel;
     self_vel->y = 0.0f;
     ftSamus_updateDamageDeathCBs(fighter_gobj);
-    fp->x2340_stateVar1 = 0;
-    fp->x2344_stateVar2 = 0;
-    fp->x2348_stateVar3_f32 = 0.0f;
+    fp->sv.ss.unk3.x0 = 0;
+    fp->sv.ss.unk3.x4 = 0;
+    fp->sv.ss.unk3.x8 = 0.0f;
     func_8006EBA4(fighter_gobj);
 }
 
@@ -173,9 +172,9 @@ void ftSamus_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     ftSamus_updateDamageDeathCBs(fighter_gobj);
-    fp->x2340_stateVar1 = 1;
-    fp->x2344_stateVar2 = 0;
-    fp->x2348_stateVar3_f32 = 0.0f;
+    fp->sv.ss.unk3.x0 = 1;
+    fp->sv.ss.unk3.x4 = 0;
+    fp->sv.ss.unk3.x8 = 0.0f;
     func_8006EBA4(fighter_gobj);
 }
 
@@ -191,9 +190,7 @@ void ftSamus_80129684(HSD_GObj* fighter_gobj)
 
     ftSamus_801292E4(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if ((fp->x2340_stateVar1 == 1) ||
-            (fp->sa.samus.x2230 == samus_attr->x18))
-        {
+        if ((fp->sv.ss.unk3.x0 == 1) || (fp->ev.ss.x2230 == samus_attr->x18)) {
             Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15A, 0, NULL,
                                                0.0f, 1.0f, 0.0f);
         } else {
@@ -229,8 +226,8 @@ void ftSamus_80129774(HSD_GObj* fighter_gobj)
         f32 var_f1;
         s32 index;
         fighter2->x2208_ftcmd_var2 = 0;
-        if (fighter2->sa.samus.x2230) {
-            var_f1 = fighter2->sa.samus.x2230 / samus_attr->x18;
+        if (fighter2->ev.ss.x2230) {
+            var_f1 = fighter2->ev.ss.x2230 / samus_attr->x18;
         } else {
             var_f1 = 0.f;
         }
@@ -238,13 +235,13 @@ void ftSamus_80129774(HSD_GObj* fighter_gobj)
         func_80088510(fighter2, lbl_803CE6B8[index], 0x7F, 0x40);
     }
 
-    fp->x2344_stateVar2 += 1;
-    if (fp->x2344_stateVar2_s32 > samus_attr->x20) {
-        fp->x2344_stateVar2 = 0;
-        fp->sa.samus.x2230 += 1;
-        if (fp->sa.samus.x2230 >= samus_attr->x18) {
+    fp->sv.ss.unk3.x4 += 1;
+    if (fp->sv.ss.unk3.x4 > samus_attr->x20) {
+        fp->sv.ss.unk3.x4 = 0;
+        fp->ev.ss.x2230 += 1;
+        if (fp->ev.ss.x2230 >= samus_attr->x18) {
             func_800BFFD0(fp, 0x35, 0);
-            fp->sa.samus.x2230 = samus_attr->x18;
+            fp->ev.ss.x2230 = samus_attr->x18;
             Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0, 0, 0.0f,
                                                1.0f, 0.0f);
             ftSamus_UnkAndDestroyAllEF(fighter_gobj);
@@ -284,7 +281,7 @@ void ftSamus_80129A14(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftSamus_801292E4(fighter_gobj);
-    fp->x2340_stateVar1 = 1;
+    fp->sv.ss.unk3.x0 = 1;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(fighter_gobj, 0x15C, 0, NULL, 0.0f,
                                            1.0f, 0.0f);
@@ -454,7 +451,7 @@ void ftSamus_80129FE8(HSD_GObj* fighter_gobj)
 s32 ftSamus_8012A068(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    return fp->sa.samus.x2238;
+    return fp->ev.ss.x2238;
 }
 
 void ftSamus_8012A074(HSD_GObj* fighter_gobj)
@@ -471,7 +468,7 @@ void ftSamus_8012A074(HSD_GObj* fighter_gobj)
     }
     if (bool1) {
         Vec3 position;
-        fp->sa.samus.x2238++;
+        fp->ev.ss.x2238++;
         func_8000B1CC(fp->x5E8_fighterBones[56].x0_jobj, NULL, &position);
         position.x += (samus_attr->x34 * fp->facing_dir);
 

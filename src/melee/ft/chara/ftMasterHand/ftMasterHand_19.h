@@ -1,9 +1,12 @@
+/// @file
+/// 19 Ram
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_19_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_19_H
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/forward.h>
+#include <platform.h>
 
+void lbl_80153B90(HSD_GObj* gobj);
 void lbl_80153B28(HSD_GObj* gobj);
 void lbl_80153B6C(HSD_GObj* gobj);
 void lbl_80153B8C(HSD_GObj* gobj);

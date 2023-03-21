@@ -1,10 +1,13 @@
-#include <melee/ft/chara/ftSamus/ftsamus2.h>
+#include "ftsamus2.h"
 
-#include <melee/ft/chara/ftSamus/ftsamus.h>
-#include <melee/ft/chara/ftSamus/ftsamus6.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <MSL/trigf.h>
+#include "ftsamus.h"
+#include "ftsamus6.h"
+#include "types.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+
+#include <trigf.h>
 
 void ftSamus_80128944(HSD_GObj* fighter_gobj, f32 farg1, f32 farg2)
 {
@@ -93,7 +96,7 @@ void ftSamus_80128B1C(HSD_GObj* fighter_gobj, f32 angle, f32 arg9, f32 argA)
     ftSamus_80128B1C_inner(fighter_gobj, angle);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->x2340_stateVar1 = 0;
+    fp->sv.ss.unk2.x0 = 0;
     if (fp->xE0_ground_or_air == GA_Ground) {
         func_8007D5D4(fighter2);
     }
@@ -105,13 +108,13 @@ void ftSamus_80128B1C(HSD_GObj* fighter_gobj, f32 angle, f32 arg9, f32 argA)
 void ftSamus_80128C04(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if ((fp->x2200_ftcmd_var0) && (!fp->x2340_stateVar1)) {
+    if ((fp->x2200_ftcmd_var0) && (!fp->sv.ss.unk2.x0)) {
         ftSamus_8012AEBC(fighter_gobj);
-        fp->x2340_stateVar1 = 1;
+        fp->sv.ss.unk2.x0 = 1;
     }
-    if ((!fp->x2200_ftcmd_var0) && (fp->x2340_stateVar1)) {
+    if ((!fp->x2200_ftcmd_var0) && (fp->sv.ss.unk2.x0)) {
         ftSamus_8012AF38(fighter_gobj);
-        fp->x2340_stateVar1 = 0;
+        fp->sv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_8008A2BC(fighter_gobj);
@@ -121,13 +124,13 @@ void ftSamus_80128C04(HSD_GObj* fighter_gobj)
 void ftSamus_80128CA0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if ((fp->x2200_ftcmd_var0) && (!fp->x2340_stateVar1)) {
+    if ((fp->x2200_ftcmd_var0) && (!fp->sv.ss.unk2.x0)) {
         ftSamus_8012AEBC(fighter_gobj);
-        fp->x2340_stateVar1 = 1;
+        fp->sv.ss.unk2.x0 = 1;
     }
-    if ((!fp->x2200_ftcmd_var0) && (fp->x2340_stateVar1)) {
+    if ((!fp->x2200_ftcmd_var0) && (fp->sv.ss.unk2.x0)) {
         ftSamus_8012AF38(fighter_gobj);
-        fp->x2340_stateVar1 = 0;
+        fp->sv.ss.unk2.x0 = 0;
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         func_800CC730(fighter_gobj);
@@ -296,10 +299,10 @@ int ftSamus_80129100(HSD_GObj* fighter_gobj, s32* arg1, s32* arg2)
         u8 _[4];
 #endif
 
-        if (!fp->sa.samus.x222C)
+        if (!fp->ev.ss.x222C)
             return -1;
 
-        *arg1 = fp->sa.samus.x2230;
+        *arg1 = fp->ev.ss.x2230;
         *arg2 = samus_attr->x18;
         return 0;
     }

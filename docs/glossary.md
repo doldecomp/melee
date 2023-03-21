@@ -46,8 +46,18 @@ Short for "dynamic."
 @section glossary_ecb ECB
 Stands for "environmental collision box."
 
+@section glossary_ev EV
+Stands for "Entity Variables." Used by #HSD_GObj::user_data structs (such as
+#Fighter::ev) to store polymorphic variables.
+
 @section glossary_ft ft
 Short for "fighter."
+
+@section glossary_gr gr
+Short for "ground."
+
+@section glossary_grav grav
+Short for "gravity."
 
 @section glossary_id id
 Short for "identifier." Not an acronym.
@@ -108,6 +118,10 @@ Short for "square."
 
 @section glossary_src src
 Short for "source."
+
+@section glossary_sv SV
+Stands for "State Variables." Used by #HSD_GObj::user_data structs (such as
+#Fighter::sv) to store polymorphic variables specific to an #ActionState.
 
 @section glossary_sz sz
 Short for "size."

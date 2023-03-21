@@ -7,6 +7,7 @@
 #include "ft/code_80081B38.h"
 #include "ft/fighter.h"
 #include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
 #include "ftSeak/ftSeak_SpecialLw.h"
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
@@ -343,7 +344,7 @@ s32 ftZelda_8013B540(HSD_GObj* fighter_gobj)
     actionStateIndex = fp->action_id;
 
     if (((actionStateIndex == 0x158) || (actionStateIndex == 0x15B)) &&
-        (fp->sa.zelda.x222C != 0U))
+        (fp->ev.zd.x222C != 0U))
     {
         return 1;
     }
@@ -357,7 +358,7 @@ bool ftZelda_8013B574(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.zelda.x222C != 0) {
+    if (fp->ev.zd.x222C != 0) {
         switch (fp->action_id) {
         case 0x15C:
         case 0x159:
@@ -379,8 +380,8 @@ void ftZelda_8013B5C4(HSD_GObj* fighter_gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(fighter_gobj);
-    if (fp->sa.zelda.x222C != 0) {
-        fp->sa.zelda.x222C = 0;
+    if (fp->ev.zd.x222C != 0) {
+        fp->ev.zd.x222C = 0;
     }
 
     fp->cb.x21E4_callback_OnDeath2 = 0;
@@ -393,9 +394,9 @@ void ftZelda_8013B5EC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.zelda.x222C != NULL) {
-        func_802C3D44(fp->sa.zelda.x222C);
-        fp->sa.zelda.x222C = NULL;
+    if (fp->ev.zd.x222C != NULL) {
+        func_802C3D44(fp->ev.zd.x222C);
+        fp->ev.zd.x222C = NULL;
     }
 
     fp->cb.x21E4_callback_OnDeath2 = 0;

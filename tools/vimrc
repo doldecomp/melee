@@ -7,5 +7,5 @@ augroup project
   autocmd BufRead,BufNewFile *.h,*.c,*.dox set filetype=c | set syntax=c.doxygen
 augroup END
 
-let &path.="src,src/melee,src/MSL,src/sysdolphin,src/dolphin,"
+let &path.="src,src/melee,src/melee/ft/chara,src/MSL,src/sysdolphin,src/dolphin,"
 

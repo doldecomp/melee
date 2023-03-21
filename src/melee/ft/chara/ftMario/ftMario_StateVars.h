@@ -1,8 +1,8 @@
 #ifndef _FTMARIO_STATEVARS_H_
 #define _FTMARIO_STATEVARS_H_
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
+#include <platform.h>
 
 typedef struct ftMarioSpecialS {
     /// 0x2340 - bool to check if reflect bubble should be enabled
@@ -18,10 +18,9 @@ typedef struct ftMarioSpecialLw {
 
 } ftMarioSpecialLw;
 
-typedef union ftMarioStateVars {
+typedef union ftMario_StateVars {
     ftMarioSpecialS SpecialS;
     ftMarioSpecialLw SpecialLw;
-
-} ftMarioStateVars;
+} ftMario_StateVars;
 
 #endif

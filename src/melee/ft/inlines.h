@@ -1,27 +1,27 @@
 #ifndef MELEE_FT_INLINES_H
 #define MELEE_FT_INLINES_H
 
+#include "ft/ftanim.h"
+#include "ft/types.h"
+#include "gr/stage.h"
+#include "it/item2.h"
+#include "lb/lbcollision.h"
+#include "lb/lbrefract.h"
+#include "pl/player.h"
+
+#include <baselib/archive.h>
+#include <baselib/controller.h>
+#include <baselib/dobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/random.h>
 #include <common_structs.h>
 #include <dolphin/mtx/types.h>
 #include <math.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftstatevars.h>
-#include <melee/ft/types.h>
-#include <melee/gr/stage.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbcollision.h>
-#include <melee/lb/lbrefract.h>
-#include <melee/pl/player.h>
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/random.h>
+#include <platform.h>
 
 #define PUSH_ATTRS(fp, attributeName)                                          \
     do {                                                                       \

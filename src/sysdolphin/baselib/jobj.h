@@ -92,7 +92,7 @@ struct HSD_JObj {
     /* 0x14 */ u32 flags;
     /* 0x18 */ union {
         HSD_SList* ptcl;
-        struct _HSD_DObj* dobj;
+        struct HSD_DObj* dobj;
         HSD_Spline* spline;
     } u;
     /* 0x1C */ Quaternion rotate;
@@ -106,22 +106,22 @@ struct HSD_JObj {
     /* 0x84 */ u32 id;
 };
 
-typedef struct _HSD_Joint {
+struct HSD_Joint {
     char* class_name;
     u32 flags;
-    struct _HSD_Joint* child;
-    struct _HSD_Joint* next;
+    HSD_Joint* child;
+    HSD_Joint* next;
     union {
-        struct _HSD_DObjDesc* dobjdesc;
+        HSD_DObjDesc* dobjdesc;
         HSD_Spline* spline;
-        struct _HSD_SList* ptcl;
+        HSD_SList* ptcl;
     } u;
     Vec3 rotation;
     Vec3 scale;
     Vec3 position;
     MtxPtr mtx;
-    struct _HSD_RObjDesc* robjdesc;
-} HSD_Joint;
+    HSD_RObjDesc* robjdesc;
+};
 
 typedef struct _HSD_JObjInfo {
     HSD_ObjInfo parent;
@@ -149,7 +149,7 @@ void HSD_JObjSetMtxDirtySub(HSD_JObj*);
 void HSD_JObjUnref(HSD_JObj* jobj);
 HSD_JObj* HSD_JObjRemove(HSD_JObj* jobj);
 void HSD_JObjRemoveAll(HSD_JObj*); // sysdolphin/baselib/jobj.s
-struct _HSD_DObj* HSD_JObjGetDObj(HSD_JObj* jobj);
+struct HSD_DObj* HSD_JObjGetDObj(HSD_JObj* jobj);
 HSD_JObj* HSD_JObjLoadJoint(HSD_Joint*);
 void HSD_JObjAddAnimAll(HSD_JObj*, HSD_AnimJoint*, HSD_MatAnimJoint*,
                         HSD_ShapeAnimJoint*);

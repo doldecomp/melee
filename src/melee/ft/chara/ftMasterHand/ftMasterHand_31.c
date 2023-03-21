@@ -1,8 +1,7 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_31.h>
+#include "ftMasterHand_31.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
 
 // 80155A58 152638
 // https://decomp.me/scratch/Q3fan

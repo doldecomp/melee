@@ -4,8 +4,7 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
 
-void func_801541C8(HSD_GObj*, void*);
-
-void func_801541C8(HSD_GObj* gobj, void* arg1);
+void func_801541C8(HSD_GObj* gobj, void*);
+void lbl_801541C4(HSD_GObj* gobj);
 
 #endif

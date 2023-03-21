@@ -139,9 +139,9 @@ void ftPikachu_801251BC(HSD_GObj* fighter_gobj)
         fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124C90;
     }
 
-    fp->x2340_stateVar1++;
+    fp->sv.pk.unk3.x0++;
 
-    if (fp->x2340_stateVar1 > sa->x24)
+    if (fp->sv.pk.unk3.x0 > sa->x24)
         ftPikachu_ActionChange_80125834(fighter_gobj);
 }
 
@@ -160,9 +160,9 @@ void ftPikachu_8012525C(HSD_GObj* fighter_gobj)
         fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124C90;
     }
 
-    fp->x2340_stateVar1++;
+    fp->sv.pk.unk3.x0++;
 
-    if (fp->x2340_stateVar1 > sa->x24)
+    if (fp->sv.pk.unk3.x0 > sa->x24)
         ftPikachu_ActionChange_801258A0(fighter_gobj);
 }
 
@@ -268,7 +268,7 @@ void ftPikachu_8012557C(HSD_GObj* fighter_gobj)
     ftPikachuAttributes* sa = fp->x2D4_specialAttributes;
 
     if (fp->x914[0].state == HitCapsule_Enabled) {
-        f32 damage_amount = fp->x2340_stateVar1 * sa->x2C + sa->x28;
+        f32 damage_amount = fp->sv.pk.unk3.x0 * sa->x2C + sa->x28;
         func_8007ABD0(&fp->x914[0], damage_amount, fighter_gobj);
     }
 
@@ -289,7 +289,7 @@ void ftPikachu_8012561C(HSD_GObj* fighter_gobj)
     ftPikachuAttributes* sa = fp->x2D4_specialAttributes;
 
     if (fp->x914[0].state == HitCapsule_Enabled) {
-        f32 damage_amount = fp->x2340_stateVar1 * sa->x2C + sa->x28;
+        f32 damage_amount = fp->sv.pk.unk3.x0 * sa->x2C + sa->x28;
         func_8007ABD0(&fp->x914[0], damage_amount, fighter_gobj);
     }
 
@@ -442,11 +442,11 @@ void ftPikachu_ActionChange_80125A54(HSD_GObj* fighter_gobj)
 
     fp->x2200_ftcmd_var0 = 0;
 
-    fp->x80_self_vel.x = sa->x40 * fp->x2340_stateVar1 + sa->x3C;
+    fp->x80_self_vel.x = sa->x40 * fp->sv.pk.unk3.x0 + sa->x3C;
     fp->x80_self_vel.x *= fp->facing_dir;
 
     {
-        f32 temp = 0.5f * fp->x2340_stateVar1 / sa->x24;
+        f32 temp = 0.5f * fp->sv.pk.unk3.x0 / sa->x24;
         fp->x80_self_vel.y = 0.5f * sa->x44 + sa->x44 * temp;
     }
 

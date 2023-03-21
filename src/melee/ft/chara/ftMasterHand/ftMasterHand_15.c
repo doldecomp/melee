@@ -1,6 +1,6 @@
 #include "ftMasterHand_15.h"
 
-#include "ftMasterHand.h"
+#include "ftMasterHand_03.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
@@ -43,7 +43,7 @@ void lbl_801530A0(HSD_GObj* arg0)
 void func_801530A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -55,7 +55,7 @@ void func_801530A4(HSD_GObj* gobj)
     Fighter_ActionStateChange_800693AC(gobj, 0x16C, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     rand = HSD_Randi(attr->xE8 - attr->xE4);
-    fp->x2390 = attr->xE4 + rand;
+    fp->sv.mh.unk0.x50 = attr->xE4 + rand;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2208_ftcmd_var2 = 0;
@@ -66,23 +66,23 @@ void func_801530A4(HSD_GObj* gobj)
 void lbl_80153160(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    MasterHandAttributes* temp_r29;
+    ftMasterHand_SpecialAttrs* temp_r29;
     ftData* ftData;
     f32 temp_f1;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->x2208_ftcmd_var2 = 1;
-        temp_f1 = fp->x2390 - 1.0f;
-        fp->x2390 = temp_f1;
+        temp_f1 = fp->sv.mh.unk0.x50 - 1.0f;
+        fp->sv.mh.unk0.x50 = temp_f1;
         if (temp_f1 < 0.0f) {
             ftData = fp->x10C_ftData;
             temp_r29 = ftData->ext_attr;
             func_801533CC(gobj);
 
             if (func_80087120(gobj) > temp_r29->xEC)
-                fp->x2394 = temp_r29->xF0;
+                fp->sv.mh.unk0.x54 = temp_r29->xF0;
             else
-                fp->x2394 = 1;
+                fp->sv.mh.unk0.x54 = 1;
 
             fp->x2208_ftcmd_var2 = 0;
         }
@@ -132,7 +132,7 @@ void lbl_80153254(HSD_GObj* gobj)
     /// @todo Not enough stack for #GET_FIGHTER; inline issue.
     Fighter* fp = gobj->user_data;
 
-    MasterHandAttributes* attr;
+    ftMasterHand_SpecialAttrs* attr;
     f32 len;
     f32 speed;
     Vec3 sp28_pos;
@@ -178,7 +178,7 @@ void lbl_801533C8(HSD_GObj* gobj)
 void func_801533CC(HSD_GObj* arg0)
 {
     Fighter* fp;
-    MasterHandAttributes* attr;
+    ftMasterHand_SpecialAttrs* attr;
 
     fp = arg0->user_data;
     attr = fp->x10C_ftData->ext_attr;
@@ -197,7 +197,7 @@ void func_801533CC(HSD_GObj* arg0)
 static inline void lbl_8015346C_inline(HSD_GObj* gobj)
 {
     Fighter* ft30 = gobj->user_data;
-    MasterHandAttributes* attr = ft30->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = ft30->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(gobj, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     if (func_80087120(gobj) > attr->xEC) {
@@ -212,7 +212,7 @@ void lbl_8015346C(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* ft4 = GET_FIGHTER(gobj);
-        if (--ft4->x2394 == 0) {
+        if (--ft4->sv.mh.unk0.x54 == 0) {
             ftAnim_SetAnimRate(gobj, 1.0f);
             func_80153730(gobj);
         } else {
@@ -247,7 +247,7 @@ void lbl_801535AC(HSD_GObj* gobj)
 void lbl_801535B0(HSD_GObj* gobj)
 {
     Fighter* fp;
-    MasterHandAttributes* attr;
+    ftMasterHand_SpecialAttrs* attr;
 
     fp = gobj->user_data;
     attr = fp->x10C_ftData->ext_attr;
@@ -268,7 +268,7 @@ void lbl_801535B0(HSD_GObj* gobj)
 void func_8015364C(HSD_GObj* arg0, HSD_JObj* arg1, f32 arg2, f32 arg3)
 {
     Fighter* fp = GET_FIGHTER(arg0);
-    MasterHandAttributes* attr;
+    ftMasterHand_SpecialAttrs* attr;
     s32 phi_r29;
     Vec3 sp28_leek;
     Vec3 sp1C_carrot;

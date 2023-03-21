@@ -1,5 +1,7 @@
 #include "ftyoshi1.h"
 
+#include "types.h"
+
 #include "ef/efasync.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftanim.h"
@@ -183,7 +185,7 @@ void ftYoshi_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, 0);
-    fp->sa.yoshi.x2238 = 0;
+    fp->ev.ys.x2238 = 0;
 }
 
 // https://decomp.me/scratch/5TPxg

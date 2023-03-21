@@ -1,12 +1,15 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_7_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_7_H
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
+#include <platform.h>
+
+/// 7 Sweep
+void lbl_80151BB8(HSD_GObj* gobj);
 
 void lbl_80151B50(HSD_GObj* arg0);
 void lbl_80151B70(HSD_GObj* gobj);
-void lbl_80151BB4(HSD_GObj*);
-void lbl_80151B14(HSD_GObj* arg0);
+void lbl_80151BB4(HSD_GObj* gobj);
+void lbl_80151B14(HSD_GObj* gobj);
 
 #endif

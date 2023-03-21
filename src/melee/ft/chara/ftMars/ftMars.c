@@ -1,13 +1,14 @@
-#include <melee/ft/chara/ftMars/ftMars.h>
+#include "ftMars.h"
+
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftlib.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 #include <common_structs.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 
 ActionState as_table_mars[] = {
     { 295, 0x00340211, 0x12000000, lbl_80136844, lbl_80136914, lbl_8013691C,
@@ -117,7 +118,7 @@ void ftMars_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, 0);
-    fp->sa.mars.x222C = 0;
+    fp->ev.ms.x222C = 0;
 }
 
 // 801362B0 00132E90
@@ -244,5 +245,5 @@ void lbl_80136730(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->x2200_ftcmd_var0 = 0;
-    fp->x2340_stateVar1 = 0;
+    fp->sv.ms.specialn.x0 = 0;
 }
