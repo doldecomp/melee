@@ -131,15 +131,15 @@ void ftMario_func_800E0CAC(s32 arg0, s32* arg1, s32* arg2)
             return;
         if (arg0 < 9)
             return;
-        *arg2 = 0xe;
-        *arg1 = 0xe;
+        *arg2 = 0xE;
+        *arg1 = 0xE;
     } else {
-        *arg2 = 0xf;
-        *arg1 = 0xf;
+        *arg2 = 0xF;
+        *arg1 = 0xF;
     }
 }
 
-unk_t ftMario_800E0CE0(enum_t arg0)
+char* ftMario_func_800E0CE0(enum_t arg0)
 {
     int offset;
 
@@ -151,5 +151,5 @@ unk_t ftMario_800E0CE0(enum_t arg0)
         offset = 15;
     }
 
-    return lbl_803C5A20[offset - 0xe];
+    return lbl_803C5A20[offset - 0xE];
 }
