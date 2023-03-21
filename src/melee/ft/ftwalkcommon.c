@@ -162,10 +162,9 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
 
 inline float getFtWalkAcceleration(Fighter* fp, float mul)
 {
-    if (fp->input.x620_lstick_x > 0)
-        return mul * fp->x110_attr.x114_WalkAcceleration;
-    else
-        return mul * -fp->x110_attr.x114_WalkAcceleration;
+    return fp->input.x620_lstick_x > 0
+               ? mul * fp->x110_attr.x114_WalkAcceleration
+               : mul * -fp->x110_attr.x114_WalkAcceleration;
 }
 
 void ftWalkCommon_800E0060(HSD_GObj* gobj)
