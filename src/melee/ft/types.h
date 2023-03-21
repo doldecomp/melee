@@ -31,6 +31,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
@@ -41,13 +42,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-
-struct RGBA {
-    u8 r;
-    u8 g;
-    u8 b;
-    u8 a;
-};
 
 // Table in PlCo.dat
 typedef struct _FighterPartsTable {
@@ -156,7 +150,7 @@ typedef struct _ftCommonData {
     /* 0x5F0 */ u32 x5F0;
     u8 filler_x5F4[0x6D8 - 0x5F4];
     /* 0x6D8 */ void* x6D8[1]; // TODO expand to actual size
-    struct RGBA x6DC_colorsByPlayer[4];
+    GXColor x6DC_colorsByPlayer[4];
     u8 filler_x6EC[0x6F4 - 0x6EC];
     /* 0x6F4 */ s32 x6F4_unkDamage;
     /* 0x6F8 */ s32 x6F8;
@@ -857,7 +851,7 @@ struct Fighter {
     u8 filler_x5FC[0x60C - 0x5F9];
     /* 0x60C */ void* x60C;
     union {
-        /* 0x610 */ struct RGBA x610_color_rgba[2];
+        /* 0x610 */ GXColor x610_color_rgba[2];
         struct {
             /* 0x610 */ s32 x610;
             /* 0x614 */ s32 x614;

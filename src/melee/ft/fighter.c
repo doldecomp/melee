@@ -690,7 +690,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
     }
 
     if (fp->x61A_controller_index != 0) {
-        struct RGBA* color =
+        GXColor* color =
             &p_ftCommonData
                  ->x6DC_colorsByPlayer[fp->x61A_controller_index - 1];
         fp->x610_color_rgba[0].r = (color->r * color->a) / 0xff;
