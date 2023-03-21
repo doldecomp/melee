@@ -10,15 +10,15 @@
 
 #include <dolphin/mtx/types.h>
 
-/// Ness PK Flash Charge ASID check
+/// Ness PK Flash Charge msid check
 bool ftNess_CheckSpecialNHold(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL && fp->fv.ns.x2240_flashGObj != NULL) {
-            enum_t asid = fp->action_id;
-            if (asid == MS_NESS_SPECIALN_HOLD ||
-                asid == MS_NESS_SPECIALAIRN_HOLD)
+            enum_t msid = fp->motion_id;
+            if (msid == MS_NESS_SPECIALN_HOLD ||
+                msid == MS_NESS_SPECIALAIRN_HOLD)
             {
                 return true;
             }
@@ -234,7 +234,7 @@ void ftNess_SpecialNHold_Anim(HSD_GObj* gobj)
             return;
         }
 
-        if (fp->action_id != MS_NESS_SPECIALN_HOLD_RELEASE) {
+        if (fp->motion_id != MS_NESS_SPECIALN_HOLD_RELEASE) {
             Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_HOLD_RELEASE, 0,
                                       NULL, fp->x894_currentAnimFrame, 1, 0);
         }
@@ -248,7 +248,7 @@ void ftNess_SpecialNHold_Anim(HSD_GObj* gobj)
     }
 
     if (func_802AA7F0(fp->fv.ns.x2240_flashGObj) == true &&
-        fp->action_id != MS_NESS_SPECIALN_HOLD_RELEASE)
+        fp->motion_id != MS_NESS_SPECIALN_HOLD_RELEASE)
     {
         Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_HOLD_RELEASE, 0, NULL,
                                   fp->x894_currentAnimFrame, 1, 0);
@@ -356,7 +356,7 @@ void ftNess_SpecialAirNHold_Anim(HSD_GObj* gobj)
             return;
         }
 
-        if (fp->action_id != MS_NESS_SPECIALAIRN_HOLD_RELEASE) {
+        if (fp->motion_id != MS_NESS_SPECIALAIRN_HOLD_RELEASE) {
             Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_HOLD_RELEASE,
                                       0, NULL, fp->x894_currentAnimFrame, 1,
                                       0);
@@ -368,7 +368,7 @@ void ftNess_SpecialAirNHold_Anim(HSD_GObj* gobj)
         }
 
         if (func_802AA7F0(fp->fv.ns.x2240_flashGObj) == true &&
-            fp->action_id != MS_NESS_SPECIALAIRN_HOLD_RELEASE)
+            fp->motion_id != MS_NESS_SPECIALAIRN_HOLD_RELEASE)
         {
             Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_HOLD_RELEASE,
                                       0, NULL, fp->x894_currentAnimFrame, 1,

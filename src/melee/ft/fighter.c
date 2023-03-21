@@ -910,20 +910,20 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     return gobj;
 }
 
-void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_action_state_index,
+void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                                s32 arg2, HSD_GObj* otherObj, f32 arg8,
                                f32 arg9, f32 argA)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);
-    MotionState* new_action_state;
+    MotionState* new_motion_state;
     struct S_TEMP4* unk_struct_x18;
     s32 bone_index;
     u8* unk_byte_ptr;
     bool animflags_bool;
     union Struct2070 x2070;
 
-    fp->action_id = new_action_state_index;
+    fp->motion_id = new_motion_state_index;
     fp->x30_facingDirectionRepeated = fp->facing_dir;
 
     HSD_JObjSetTranslate(jobj, &fp->xB0_pos);
@@ -1126,8 +1126,8 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_action_state_index,
         fp->x2180 = 6;
     }
 
-    if ((new_action_state_index != 0xE) && (new_action_state_index != 0xF) &&
-        (new_action_state_index != 0x10) && (new_action_state_index != 0x11))
+    if ((new_motion_state_index != 0xE) && (new_motion_state_index != 0xF) &&
+        (new_motion_state_index != 0x10) && (new_motion_state_index != 0x11))
     {
         fp->x196C_hitlag_mult = 0.0f;
     }
@@ -1163,16 +1163,16 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_action_state_index,
     func_80075AF0(fp, 0, (HALF_PI * fp->facing_dir));
     func_80075CB4(fp, 0, 0.0f);
 
-    if (new_action_state_index >= fp->x18) {
-        new_action_state =
-            &fp->x20_actionStateList[(new_action_state_index - fp->x18)];
+    if (new_motion_state_index >= fp->x18) {
+        new_motion_state =
+            &fp->x20_actionStateList[(new_motion_state_index - fp->x18)];
     } else {
-        new_action_state = &fp->x1C_actionStateList[new_action_state_index];
+        new_motion_state = &fp->x1C_actionStateList[new_motion_state_index];
     }
 
     if (fp->ground_or_air == GA_Ground) {
         if ((arg2 & 0x40) == 0) {
-            if (new_action_state->x9_flags.bits.b1 != 0 && fp->dmg.x18C8 == -1)
+            if (new_motion_state->x9_flags.bits.b1 != 0 && fp->dmg.x18C8 == -1)
             {
                 if (p_ftCommonData->x814 > 0) {
                     fp->dmg.x18C8 = p_ftCommonData->x814;
@@ -1186,9 +1186,9 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_action_state_index,
     {
         // load in the union.
         x2070 = fp->x2070;
-        func_800890D0(fp, new_action_state->move_id);
-        func_800895E0(fp, new_action_state->x4_flags);
-        fp->x2225_b3 = new_action_state->x9_flags.bits.b0;
+        func_800890D0(fp, new_motion_state->move_id);
+        func_800895E0(fp, new_motion_state->x4_flags);
+        fp->x2225_b3 = new_motion_state->x9_flags.bits.b0;
 
         if (fp->x2226_flag.bits.b4 != 0U) {
             if (fp->x2070.x2071_b5 != 0U) {
@@ -1208,7 +1208,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_action_state_index,
             func_80037C60(gobj, x2070.x2070_int);
         }
 
-        fp->anim_id = new_action_state->anim_id;
+        fp->anim_id = new_motion_state->anim_id;
         fp->x89C_frameSpeedMul = arg9;
         fp->x8A0_unk = arg9;
 
@@ -1366,11 +1366,11 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_action_state_index,
             }
         }
 
-        fp->cb.x21A0_callback_Anim = new_action_state->animated;
-        fp->cb.x219C_callback_IASA = new_action_state->input_updated;
-        fp->cb.x21A4_callback_Phys = new_action_state->physics_updated;
-        fp->cb.x21A8_callback_Coll = new_action_state->collided;
-        fp->cb.x21AC_callback_Cam = new_action_state->camera_updated;
+        fp->cb.x21A0_callback_Anim = new_motion_state->animated;
+        fp->cb.x219C_callback_IASA = new_motion_state->input_updated;
+        fp->cb.x21A4_callback_Phys = new_motion_state->physics_updated;
+        fp->cb.x21A8_callback_Coll = new_motion_state->collided;
+        fp->cb.x21AC_callback_Cam = new_motion_state->camera_updated;
 
         fp->cb.x21B0_callback_Accessory1 = 0;
         fp->cb.x21BC_callback_Accessory4 = 0;
@@ -2680,7 +2680,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
                    func_8008E984(fp)));
     vec = vec3_803B7494;
 
-    if (fp->action_id != 0x145 && (unsigned) fp->action_id - 0x122 > 1 &&
+    if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
         fp->dmg.x1860_dealt != 0xAU && !fp->x2226_flag.bits.b2)
     {
         if ( ///// giant if condition
@@ -2807,7 +2807,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool bool1 = 0;
-    s32 action_state_index = fp->action_id;
+    s32 motion_state_index = fp->motion_id;
     bool bool2 = 0;
     bool bool3 = 0;
     bool bool4 = 0;
@@ -2892,7 +2892,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                 damage_bool = fp->dmg.x183C_applied;
                 bool2 = 1;
                 func_80090594(fp, fp->dmg.x1860_dealt, damage_bool,
-                              action_state_index, ground_or_air,
+                              motion_state_index, ground_or_air,
                               fp->x1960_vibrateMult);
                 func_8007ED50(fp, fp->dmg.x1838_percentTemp);
                 bool1 = damage_bool;
@@ -2971,7 +2971,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
 
         if (bool1) {
             fp->dmg.x195c_hitlag_frames = func_8007DA74(
-                bool1, action_state_index, fp->x1960_vibrateMult);
+                bool1, motion_state_index, fp->x1960_vibrateMult);
             if (fp->dmg.x195c_hitlag_frames < fp->x1964) {
                 fp->dmg.x195c_hitlag_frames = fp->x1964;
             }

@@ -71,10 +71,10 @@ void func_80076444(HSD_GObj* attacker, HSD_GObj* victim)
 void func_8007646C(HSD_GObj* attackItem, HSD_GObj* victim)
 {
     HSD_GObj* owner = func_8026BC78(attackItem);
-    enum_t asid = func_8026BC84(attackItem);
+    enum_t msid = func_8026BC84(attackItem);
 
     if (func_80086960(owner))
-        func_800763C0(owner, victim, asid);
+        func_800763C0(owner, victim, msid);
 }
 
 /// Check to end combo for victim
@@ -157,7 +157,7 @@ f32 func_800765F0(Fighter* fp, HSD_GObj* victim, f32 arg2)
     if (cur != NULL && !fp->x221B_b5 && cur != victim)
         arg2 *= p_ftCommonData->x128;
 
-    if (fp->action_id == ftCo_MS_DamageIce)
+    if (fp->motion_id == ftCo_MS_DamageIce)
         arg2 *= p_ftCommonData->x714;
 
     return arg2 * fp->dmg.x182c_behavior;

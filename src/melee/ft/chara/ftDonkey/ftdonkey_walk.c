@@ -21,7 +21,7 @@ void ftDonkey_800DFAE4(HSD_GObj* gobj, f32 argf)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
-    ftWalkCommon_800DFCA4(gobj, donkey_attr->action_state + 1, 0, argf,
+    ftWalkCommon_800DFCA4(gobj, donkey_attr->motion_state + 1, 0, argf,
                           donkey_attr->x8, donkey_attr->xC, donkey_attr->x10,
                           donkey_attr->x14, donkey_attr->x18, donkey_attr->x1C,
                           1.0f);

@@ -55,7 +55,7 @@ bool ftNess_CheckNessBatRemove(
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->action_id != MS_NESS_ATTACKS4) {
+    if (fp->motion_id != MS_NESS_ATTACKS4) {
         return true;
     }
 

@@ -435,7 +435,7 @@ bool func_8026B774(HSD_GObj* item_gobj,
 s32 func_8026B7A4(HSD_GObj* item_gobj) // Get Item State ID
 {
     Item* ip = item_gobj->user_data;
-    return ip->asid;
+    return ip->msid;
 }
 
 u8 func_8026B7B0(HSD_GObj* item_gobj) // Get Item Team ID
@@ -615,7 +615,7 @@ f32 func_8026B960(register HSD_GObj* item_gobj)
     return unk_timer = ip->xDD4_itemVar.BobOmb.xDEC;
 
 lbl_block:
-    if (ip->asid != 0x5) {
+    if (ip->msid != 0x5) {
         return unk_timer = ip->xD44_lifeTimer;
     }
 
@@ -636,12 +636,12 @@ f32 func_8026B960(HSD_GObj* item_gobj)
     kind = ip->kind;
     switch (kind) {
     case It_Kind_BombHei:
-        if ((s32) ip->asid != 0xB) {
+        if ((s32) ip->msid != 0xB) {
             unk_timer = ip->xDD4_itemVar.BobOmb.xDEC;
         }
         break;
     case It_Kind_Link_Bomb:
-        if ((s32) ip->asid != 5) {
+        if ((s32) ip->msid != 5) {
             unk_timer = ip->xD44_lifeTimer;
         }
     }

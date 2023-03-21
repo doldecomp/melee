@@ -117,7 +117,7 @@ void ftSamus_801293BC(HSD_GObj* gobj)
         }
         x2230 = fp->fv.ss.x2230;
         func_802B56E4(fp->fv.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
-        if ((fp->action_id == 0x15C) || (fp->ground_or_air == GA_Air)) {
+        if ((fp->motion_id == 0x15C) || (fp->ground_or_air == GA_Air)) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
             u8 unused1[28];
@@ -460,7 +460,7 @@ void ftSamus_8012A074(HSD_GObj* gobj)
         func_8000B1CC(fp->x5E8_fighterBones[56].x0_jobj, NULL, &position);
         position.x += (samus_attr->x34 * fp->facing_dir);
 
-        if ((fp->action_id == 0x15D) || (fp->action_id == 0x15F)) {
+        if ((fp->motion_id == 0x15D) || (fp->motion_id == 0x15F)) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
             u8 _[8];

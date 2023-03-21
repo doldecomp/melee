@@ -79,7 +79,7 @@ void ftSamus_SpecialLw_StartAction(HSD_GObj* gobj)
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
     fp->xEC_ground_vel *= samus_attr->x6C;
-    if (fp->action_id == 0x28) {
+    if (fp->motion_id == 0x28) {
         Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 3.0f, 1.0f, 0.0f);
         ftSamus_SpecialLw_StartAction_inner(gobj);
         fp->x2204_ftcmd_var1 = 2;

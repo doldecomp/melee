@@ -179,7 +179,7 @@ bool func_80149844(HSD_GObj* gobj)
     if (fp == NULL) {
         return true;
     }
-    tmp = fp->action_id;
+    tmp = fp->motion_id;
     if (tmp != 0x155 && tmp != 0x156) {
         return true;
     }

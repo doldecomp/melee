@@ -31,7 +31,7 @@ void ftDonkey_800E04A4(HSD_GObj* gobj, s32 arg1)
     fp->mv.dk.unk7.x8 = donkey_attr->cargo_hold.x24_JUMP_STARTUP_LAG;
     donkey_attr2 = getFtSpecialAttrs2CC(fp);
 
-    Fighter_ChangeMotionState(gobj, donkey_attr2->action_state + 5, 0, NULL,
+    Fighter_ChangeMotionState(gobj, donkey_attr2->motion_state + 5, 0, NULL,
                               0.0f, 1.0f, 0.0f);
     ftAnim_SetAnimRate(gobj, 0.0f);
 }

@@ -70,7 +70,7 @@ typedef struct ftData_UnkCountStruct {
     /// Always zero; could be #NULL or the high part of a 64-bit integer.
     int zero;
 
-    /// A count or ASID.
+    /// A count or msid.
     int count;
 } ftData_UnkCountStruct;
 

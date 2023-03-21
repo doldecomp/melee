@@ -55,7 +55,7 @@ void func_8014FE58(HSD_GObj* gobj)
 void func_8014FE5C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->action_id == 341) || (fp->action_id == 342)) {
+    if ((fp->motion_id == 341) || (fp->motion_id == 342)) {
         fp->xB0_pos = fp->fv.mh.x2240_pos;
     } else {
         fp->fv.mh.x2240_pos = fp->xB0_pos;
@@ -72,7 +72,7 @@ void func_8014FE5C(HSD_GObj* gobj)
 void func_8014FF1C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((fp->action_id == 341) || (fp->action_id == 342)) {
+    if ((fp->motion_id == 341) || (fp->motion_id == 342)) {
         fp->xB0_pos = fp->fv.mh.x2240_pos;
     } else {
         fp->fv.mh.x2240_pos = fp->xB0_pos;
@@ -96,7 +96,7 @@ void lbl_8014FFDC(HSD_GObj* gobj)
 #endif
 
     if (r31_fp->fv.mh.x2258 == 0x186) {
-        if ((r31_fp->action_id == 0x155) || (r31_fp->action_id == 0x156)) {
+        if ((r31_fp->motion_id == 0x155) || (r31_fp->motion_id == 0x156)) {
             r31_fp->xB0_pos = r31_fp->fv.mh.x2240_pos;
         } else {
             r31_fp->fv.mh.x2240_pos = r31_fp->xB0_pos;
@@ -110,7 +110,7 @@ void lbl_8014FFDC(HSD_GObj* gobj)
         r31_fp->fv.mh.x2258 = 0x156;
         return;
     }
-    if ((r31_fp->action_id == 0x155) || (r31_fp->action_id == 0x156)) {
+    if ((r31_fp->motion_id == 0x155) || (r31_fp->motion_id == 0x156)) {
         r31_fp->xB0_pos = r31_fp->fv.mh.x2240_pos;
     } else {
         r31_fp->fv.mh.x2240_pos = r31_fp->xB0_pos;
@@ -132,11 +132,11 @@ void func_80150144(HSD_GObj* gobj)
 
     r5_attributes = fp->x10C_ftData->ext_attr;
     fp->fv.mh.x2258 = 341;
-    fp->action_id = 343;
+    fp->motion_id = 343;
     fp->xB0_pos.x = r5_attributes->x30_pos2.x;
     fp->xB0_pos.y = r5_attributes->x30_pos2.y;
     fp_1 = GET_FIGHTER(gobj);
-    if ((fp_1->action_id == 341) || (fp_1->action_id == 342)) {
+    if ((fp_1->motion_id == 341) || (fp_1->motion_id == 342)) {
         fp_1->xB0_pos = fp_1->fv.mh.x2240_pos;
     } else {
         fp_1->fv.mh.x2240_pos = fp_1->xB0_pos;
@@ -182,7 +182,7 @@ struct MasterHandDataStuff lbl_803D40D0 = {
 inline void lbl_80150230_inline_1(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->action_id == 0x155 || fp->action_id == 0x156) {
+    if (fp->motion_id == 0x155 || fp->motion_id == 0x156) {
         fp->xB0_pos = fp->fv.mh.x2240_pos;
     } else {
         fp->fv.mh.x2240_pos = fp->xB0_pos;
@@ -218,9 +218,9 @@ void lbl_80150230(HSD_GObj* gobj)
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         func_80150894(gobj);
         if (!ftAnim_IsFramesRemaining(gobj)) {
-            if (fp->action_id == 0x155) {
+            if (fp->motion_id == 0x155) {
                 lbl_80150230_inline_1(gobj);
-            } else if (fp->action_id == 0x156) {
+            } else if (fp->motion_id == 0x156) {
                 lbl_80150230_inline_2(gobj);
             }
         }
@@ -360,9 +360,9 @@ void lbl_80150230(HSD_GObj* gobj)
                 }
             }
         } else if (!ftAnim_IsFramesRemaining(gobj)) {
-            if (fp->action_id == 0x155) {
+            if (fp->motion_id == 0x155) {
                 lbl_80150230_inline_1(gobj);
-            } else if (fp->action_id == 0x156) {
+            } else if (fp->motion_id == 0x156) {
                 lbl_80150230_inline_2(gobj);
             }
         }

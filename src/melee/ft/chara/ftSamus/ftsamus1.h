@@ -22,7 +22,7 @@ void ftSamus_OnItemDrop(HSD_GObj* gobj, bool bool1);
 void ftSamus_80128628(HSD_GObj* gobj);
 void ftSamus_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftSamus_80128770(HSD_AObj* gobj, f32 rate);
-void ftSamus_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 action_state,
+void ftSamus_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
                                     f32 anim_speed);
 
 #endif

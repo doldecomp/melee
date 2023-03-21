@@ -112,7 +112,7 @@ static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* gobj)
 bool ftGameWatch_ItemCheckManholeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->action_id == ftGw_MS_AttackLw3) {
+    if (fp->motion_id == ftGw_MS_AttackLw3) {
         return false;
     }
     return true;

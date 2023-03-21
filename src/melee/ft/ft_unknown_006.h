@@ -533,7 +533,7 @@ void func_800BCD5C(HSD_GObj*);
 void func_800BCDD4(HSD_GObj*);
 void func_800BCDD8(HSD_GObj*);
 void func_800BCDDC(HSD_GObj*);
-void func_800BCE64(HSD_GObj*, enum_t asid);
+void func_800BCE64(HSD_GObj*, enum_t msid);
 void func_800BCED8(HSD_GObj*);
 void func_800BCEDC(HSD_GObj*);
 void func_800BCEE0(HSD_GObj*);

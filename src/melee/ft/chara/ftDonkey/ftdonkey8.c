@@ -27,7 +27,7 @@ void ftDonkey_800E05E4(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
     fp->mv.dk.unk8.x4 = donkey_attr->cargo_hold.x28_LANDING_LAG;
     donkey_attr = getFtSpecialAttrs2CC(fp);
-    func_800D5AEC(gobj, donkey_attr->action_state + 8, 1, 0, fp, 0.0f, 1.0f);
+    func_800D5AEC(gobj, donkey_attr->motion_state + 8, 1, 0, fp, 0.0f, 1.0f);
     ftAnim_SetAnimRate(gobj, 0.0f);
 }
 

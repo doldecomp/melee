@@ -91,7 +91,7 @@ bool ftGameWatch_ItemCheckTorchRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->action_id == ftGw_MS_AttackS4)
+    if (fp->motion_id == ftGw_MS_AttackS4)
         return false;
 
     return true;

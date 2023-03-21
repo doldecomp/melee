@@ -60,7 +60,7 @@ void ftWalkCommon_800DFCA4(HSD_GObj* gobj, s32 arg1, s32 arg2, f32 arg8,
                            f32 arg9, f32 argA, f32 argB, f32 argC, f32 argD,
                            f32 argE, f32 argF)
 {
-    s32 new_action_state;
+    s32 new_motion_state;
     s32 walking_state;
     Fighter* fp;
 
@@ -72,8 +72,8 @@ void ftWalkCommon_800DFCA4(HSD_GObj* gobj, s32 arg1, s32 arg2, f32 arg8,
     fp = GET_FIGHTER(gobj);
     fp->mv.co.walk.x20 = argF;
     walking_state = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
-    new_action_state = arg1 + walking_state;
-    Fighter_ChangeMotionState(gobj, new_action_state, arg2, 0, arg8, 1.0f,
+    new_motion_state = arg1 + walking_state;
+    Fighter_ChangeMotionState(gobj, new_motion_state, arg2, 0, arg8, 1.0f,
                               0.0f);
     func_8006EBA4(gobj);
     fp->mv.co.walk.x0 = fp->xEC_ground_vel;
@@ -102,7 +102,7 @@ void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
         anim_rate = 0.0f;
     } else {
         velocity_f2 = fabs_inline(velocity_f2);
-        switch (fp->action_id - fp->mv.co.walk.x4) {
+        switch (fp->motion_id - fp->mv.co.walk.x4) {
         case 0:
             anim_rate = velocity_f2 / fp->mv.co.walk.x14;
             break;
@@ -119,14 +119,14 @@ void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
 
 void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
 {
-    s32 action_state_sum;
-    s32 action_state_base;
+    s32 motion_state_sum;
+    s32 motion_state_base;
     Fighter* fp = GET_FIGHTER(gobj);
     s32 walk_action_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
 
-    action_state_base = fp->mv.co.walk.x4;
-    action_state_sum = action_state_base + walk_action_type;
-    if (action_state_sum != fp->action_id) {
+    motion_state_base = fp->mv.co.walk.x4;
+    motion_state_sum = motion_state_base + walk_action_type;
+    if (motion_state_sum != fp->motion_id) {
         f32 float_result;
         f32 var_f31;
         f32 init_animFrame;
@@ -134,7 +134,7 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
         s32 final_animFrame;
         s32 quotient;
 
-        switch (action_state_sum - action_state_base) {
+        switch (motion_state_sum - motion_state_base) {
         case 0:
             var_f31 = fp->mv.co.walk.x8;
             break;

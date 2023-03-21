@@ -39,9 +39,9 @@ bool ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = getFighter(gobj);
-        s32 ASID = fp->action_id;
+        s32 msid = fp->motion_id;
 
-        switch (ASID) {
+        switch (msid) {
         case MS_MEWTWO_SPECIALN_START:
         case MS_MEWTWO_SPECIALN_LOOP:
         case MS_MEWTWO_SPECIALN_FULL:
@@ -67,11 +67,11 @@ bool ftMewtwo_SpecialN_CheckShadowBallRemove(HSD_GObj* gobj)
 // https://decomp.me/scratch/s3eQH // Check to stash Shadow Ball?
 bool ftMewtwo_SpecialN_CheckShadowBallCancel(HSD_GObj* gobj)
 {
-    s32 ASID;
+    s32 msid;
 
     if (gobj != NULL) {
-        ASID = getFighter(gobj)->action_id;
-        switch (ASID) {
+        msid = getFighter(gobj)->motion_id;
+        switch (msid) {
         case MS_MEWTWO_SPECIALN_START:
         case MS_MEWTWO_SPECIALN_LOOP:
         case MS_MEWTWO_SPECIALN_FULL:
@@ -205,14 +205,14 @@ void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
-    if (((s32) fp->action_id == MS_MEWTWO_SPECIALAIRN_END) ||
+    if (((s32) fp->motion_id == MS_MEWTWO_SPECIALAIRN_END) ||
         ((s32) fp->ground_or_air == GA_Air))
     {
         fp->x80_self_vel.x =
             fp->facing_dir * (mewtwoAttrs->x8_MEWTWO_SHADOWBALL_AIR_RECOIL_X *
                               (f32) fp->fv.mt.x2234_shadowBallCharge);
     }
-    if (((s32) fp->action_id == MS_MEWTWO_SPECIALN_END) ||
+    if (((s32) fp->motion_id == MS_MEWTWO_SPECIALN_END) ||
         ((s32) fp->ground_or_air == GA_Ground))
     {
         fp->xEC_ground_vel =

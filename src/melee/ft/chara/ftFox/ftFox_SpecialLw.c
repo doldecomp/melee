@@ -871,7 +871,7 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* gobj)
 {
     Vec3 sp14;
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    s32 ASID;
+    s32 msid;
 
     fp->facing_dir = fp->ReflectAttr.x1A2C_reflectHitDirection;
 
@@ -882,11 +882,11 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* gobj)
                   1.0471975803375244f);
 
     if ((s32) fp->ground_or_air == GA_Ground) {
-        ASID = 0x16A;
+        msid = 0x16A;
     } else
-        ASID = 0x16F;
+        msid = 0x16F;
 
-    Fighter_ChangeMotionState(gobj, ASID, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftFox_SpecialLwHit_SetCall(gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateReflectGFX;

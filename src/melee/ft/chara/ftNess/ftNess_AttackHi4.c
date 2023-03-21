@@ -431,7 +431,7 @@ static Vec3 const YoyoThinkPos = { 0 };
 
 bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj)
 {
-    s32 ASID;
+    s32 msid;
     s32 yoyoSmashFrameCurr;
     s32 yoyoSmashFrameCurr2;
     s32 yoyoSpawnFrame;
@@ -456,8 +456,8 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj)
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         fp->mv.ns.attackhi4.isPosUpdateMod = 0;
     }
-    ASID = fp->action_id;
-    if ((ASID >= MS_NESS_ATTACKHI4) && (ASID <= MS_NESS_ATTACKHI4_RELEASE)) {
+    msid = fp->motion_id;
+    if ((msid >= MS_NESS_ATTACKHI4) && (msid <= MS_NESS_ATTACKHI4_RELEASE)) {
         yoyoSpawnFrame = 2;
         yoyoDespawnFrame = 49;
     } else {
@@ -483,8 +483,8 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj)
             fp->fv.ns.x223C = 0.0f;
             func_80088510(fp, 0x334B0, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
-        ASID = fp->action_id;
-        if ((ASID >= MS_NESS_ATTACKHI4) && (ASID <= MS_NESS_ATTACKHI4_RELEASE))
+        msid = fp->motion_id;
+        if ((msid >= MS_NESS_ATTACKHI4) && (msid <= MS_NESS_ATTACKHI4_RELEASE))
         {
             yoyoRotFrame = yoyo_attr->x40_UPSMASH_YOYO_ROT_FRAME;
             yoyoNudgeFrame = yoyo_attr->x44_UPSMASH_YOYO_NUDGE_FRAME;
@@ -496,9 +496,9 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj)
         if (yoyoSmashFrameCurr2 == yoyoRotFrame) {
             sp14 = YoyoThinkPos;
             func_802C0010(yoyo_GObj, &sp14);
-            ASID = fp->action_id;
-            if ((ASID >= MS_NESS_ATTACKHI4) &&
-                (ASID <= MS_NESS_ATTACKHI4_RELEASE))
+            msid = fp->motion_id;
+            if ((msid >= MS_NESS_ATTACKHI4) &&
+                (msid <= MS_NESS_ATTACKHI4_RELEASE))
             {
                 func_80088510(fp, 0x334B3, SFX_VOLUME_MAX, SFX_PAN_MID);
             } else {
@@ -560,7 +560,7 @@ void ftNess_YoyoCreateItem(HSD_GObj* gobj)
 
     func_8000B1CC(fp->x5E8_fighterBones[0x2A].x0_jobj, NULL, &sp10);
     fp->fv.ns.x222C_yoyoGObj =
-        func_802BE9D8(fp->facing_dir, gobj, &sp10, fp->action_id);
+        func_802BE9D8(fp->facing_dir, gobj, &sp10, fp->motion_id);
     fp->x1984_heldItemSpec = fp->fv.ns.x222C_yoyoGObj;
     if (fp->fv.ns.x222C_yoyoGObj != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {

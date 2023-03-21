@@ -166,7 +166,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
         HSD_GObj* detected_gobj = fp->x20AC;
 
         if (fp->x20AC->classifier == HSD_GOBJ_CLASS_FIGHTER) {
-            switch (fp->action_id) {
+            switch (fp->motion_id) {
             case ftCa_MS_SpecialS_Start: {
                 onDetectGround(gobj);
                 break;
@@ -178,7 +178,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
             }
         } else if (fp->x20AC->classifier == HSD_GOBJ_CLASS_ITEM) {
             if (itGetKind(detected_gobj) < It_Kind_BombHei) {
-                switch (fp->action_id) {
+                switch (fp->motion_id) {
                 case ftCa_MS_SpecialS_Start:
                     onDetectGround(gobj);
                     break;
@@ -193,7 +193,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
                         itGetKind(detected_gobj) < It_Kind_Arwing_Laser) ||
                        itGetKind(detected_gobj) == Pokemon_Random)
             {
-                switch (fp->action_id) {
+                switch (fp->motion_id) {
                 case ftCa_MS_SpecialS_Start:
                     onDetectGround(gobj);
                     break;

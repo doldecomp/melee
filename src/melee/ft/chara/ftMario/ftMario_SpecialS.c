@@ -97,17 +97,17 @@ void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    enum_t asid = fp->action_id;
+    enum_t msid = fp->motion_id;
 
-    if (asid >= ftMario_MS_SpecialS && asid <= ftMario_MS_SpecialAirS)
+    if (msid >= ftMario_MS_SpecialS && msid <= ftMario_MS_SpecialAirS)
         return false;
 
     return true;
 }
 
-static void changeAction(HSD_GObj* gobj, ftMario_MotionState asid)
+static void changeAction(HSD_GObj* gobj, ftMario_MotionState msid)
 {
-    Fighter_ChangeMotionState(gobj, asid, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0, 1, 0);
     func_8006EBA4(gobj);
 
     {

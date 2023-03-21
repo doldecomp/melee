@@ -80,7 +80,7 @@ static inline s32 ftGetKind(Fighter* fp)
 
 static inline s32 ftGetAction(Fighter* fp)
 {
-    return fp->action_id;
+    return fp->motion_id;
 }
 
 static inline void* getFtSpecialAttrs2CC(Fighter* fp)

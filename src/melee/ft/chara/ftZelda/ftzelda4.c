@@ -320,13 +320,13 @@ void ftZelda_8013B4D8(HSD_GObj* gobj)
 #endif
 
     {
-        enum_t asid;
+        enum_t msid;
         if (fp->ground_or_air == 0)
-            asid = 0x164;
+            msid = 0x164;
         else
-            asid = 0x166;
+            msid = 0x166;
 
-        Fighter_ChangeMotionState(gobj, asid, 0, NULL, sa->x80, 1.0, 0);
+        Fighter_ChangeMotionState(gobj, msid, 0, NULL, sa->x80, 1.0, 0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AE30;
 }
@@ -339,7 +339,7 @@ s32 ftZelda_8013B540(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    actionStateIndex = fp->action_id;
+    actionStateIndex = fp->motion_id;
 
     if (((actionStateIndex == 0x158) || (actionStateIndex == 0x15B)) &&
         (fp->fv.zd.x222C != 0U))
@@ -357,7 +357,7 @@ bool ftZelda_8013B574(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.zd.x222C != 0) {
-        switch (fp->action_id) {
+        switch (fp->motion_id) {
         case 0x15C:
         case 0x159:
             if (fp->x2204_ftcmd_var1 == 1) {

@@ -23,13 +23,13 @@ void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
         fp->mv.ms.specials.x0 = 0;
 
         {
-            enum_t asid;
+            enum_t msid;
             if (fp->ground_or_air == GA_Ground)
-                asid = 349;
+                msid = 349;
             else
-                asid = 358;
+                msid = 358;
 
-            Fighter_ChangeMotionState(gobj, asid, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, msid, 0, 0, 0, 1, 0);
         }
     }
 
@@ -56,13 +56,13 @@ void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
         fp1->mv.ms.specials.x0 = 0;
 
         {
-            enum_t asid;
+            enum_t msid;
             if (fp1->ground_or_air == GA_Ground)
-                asid = 349;
+                msid = 349;
             else
-                asid = 358;
+                msid = 358;
 
-            Fighter_ChangeMotionState(gobj, asid, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, msid, 0, 0, 0, 1, 0);
         }
     }
 
@@ -230,16 +230,16 @@ void ftMars_801378D4(HSD_GObj* gobj)
 void ftMars_80137940(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    enum_t asid;
+    enum_t msid;
 
     func_8007D5D4(fp);
 
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 350:
-        asid = 359;
+        msid = 359;
         break;
     case 351:
-        asid = 360;
+        msid = 360;
         break;
 #ifndef MUST_MATCH
     default:
@@ -247,24 +247,24 @@ void ftMars_80137940(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_801379D0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    enum_t asid;
+    enum_t msid;
 
     fp->fv.ms.x222C = 0;
     func_8007D7FC(fp);
 
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 359:
-        asid = 350;
+        msid = 350;
         break;
     case 360:
-        asid = 351;
+        msid = 351;
         break;
 #ifndef MUST_MATCH
     default:
@@ -272,7 +272,7 @@ void ftMars_801379D0(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
@@ -285,7 +285,7 @@ void ftMars_80137A68(HSD_GObj* gobj)
 void ftMars_80137A9C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    enum_t asid;
+    enum_t msid;
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -293,16 +293,16 @@ void ftMars_80137A9C(HSD_GObj* gobj)
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground)
-            asid = 350;
+            msid = 350;
         else
-            asid = 359;
+            msid = 359;
     } else {
         if (fp->ground_or_air == GA_Ground)
-            asid = 351;
+            msid = 351;
         else
-            asid = 360;
+            msid = 360;
     }
-    Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,
+    Fighter_ChangeMotionState(gobj, msid, FtStateChange_SkipUpdateAttackCount,
                               0, 0, 1, 0);
 }
 
@@ -373,19 +373,19 @@ void ftMars_80137C50(HSD_GObj* gobj)
 void ftMars_80137CBC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    enum_t asid;
+    enum_t msid;
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 352:
-        asid = 361;
+        msid = 361;
         break;
     case 354:
-        asid = 363;
+        msid = 363;
         break;
     case 353:
-        asid = 362;
+        msid = 362;
         break;
 #ifndef MUST_MATCH
     default:
@@ -393,39 +393,39 @@ void ftMars_80137CBC(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80137D60(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    enum_t asid;
+    enum_t msid;
     fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
 
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 361:
-        asid = 352;
+        msid = 352;
         break;
     case 363:
-        asid = 354;
+        msid = 354;
         break;
     case 362:
-        asid = 353;
+        msid = 353;
         break;
     }
 
-    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80137E0C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    enum_t asid;
+    enum_t msid;
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -433,24 +433,24 @@ void ftMars_80137E0C(HSD_GObj* gobj)
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground)
-            asid = 352;
+            msid = 352;
         else
-            asid = 361;
+            msid = 361;
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
             if (fp->ground_or_air == GA_Ground)
-                asid = 354;
+                msid = 354;
             else
-                asid = 363;
+                msid = 363;
         } else {
             if (fp->ground_or_air == GA_Ground)
-                asid = 353;
+                msid = 353;
             else
-                asid = 362;
+                msid = 362;
         }
     }
 
-    Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,
+    Fighter_ChangeMotionState(gobj, msid, FtStateChange_SkipUpdateAttackCount,
                               0, 0, 1, 0);
 }
 
@@ -508,20 +508,20 @@ void ftMars_80137F8C(HSD_GObj* gobj)
 void ftMars_80137FF8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    enum_t asid;
+    enum_t msid;
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
 
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 355:
-        asid = 364;
+        msid = 364;
         break;
     case 357:
-        asid = 366;
+        msid = 366;
         break;
     case 356:
-        asid = 365;
+        msid = 365;
         break;
 #ifndef MUST_MATCH
     default:
@@ -529,29 +529,29 @@ void ftMars_80137FF8(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_8013809C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    enum_t asid;
+    enum_t msid;
 
     fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
 
-    switch (fp->action_id) {
+    switch (fp->motion_id) {
     case 364:
-        asid = 355;
+        msid = 355;
         break;
     case 366:
-        asid = 357;
+        msid = 357;
         break;
     case 365:
-        asid = 356;
+        msid = 356;
         break;
 #ifndef MUST_MATCH
     default:
@@ -559,14 +559,14 @@ void ftMars_8013809C(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+    Fighter_ChangeMotionState(gobj, msid, transition_flags, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80138148(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    enum_t asid;
+    enum_t msid;
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -574,22 +574,22 @@ void ftMars_80138148(HSD_GObj* gobj)
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
         if (fp->ground_or_air == GA_Ground)
-            asid = 355;
+            msid = 355;
         else
-            asid = 364;
+            msid = 364;
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
             if (fp->ground_or_air == GA_Ground)
-                asid = 357;
+                msid = 357;
             else
-                asid = 366;
+                msid = 366;
         } else {
             if (fp->ground_or_air == GA_Ground)
-                asid = 356;
+                msid = 356;
             else
-                asid = 365;
+                msid = 365;
         }
     }
-    Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,
+    Fighter_ChangeMotionState(gobj, msid, FtStateChange_SkipUpdateAttackCount,
                               0, 0, 1, 0);
 }

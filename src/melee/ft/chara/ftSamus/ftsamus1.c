@@ -162,7 +162,7 @@ void ftSamus_80128770(HSD_AObj* gobj, f32 rate)
     }
 }
 
-void ftSamus_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 action_state,
+void ftSamus_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
                                     f32 anim_speed)
 {
     Fighter* fighter_copy;
@@ -179,7 +179,7 @@ void ftSamus_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 action_state,
     HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory, beam->x8_anim_joint,
                        beam->xC_matanim_joint, 0);
     HSD_JObjAddAnimAll(fighter_copy->x20A0_accessory,
-                       beam->x4_anim_joints[action_state - ftCo_MS_ThrowF], 0,
+                       beam->x4_anim_joints[motion_state - ftCo_MS_ThrowF], 0,
                        0);
     HSD_ForeachAnim(fighter_copy->x20A0_accessory, JOBJ_TYPE,
                     ALL_TYPE_MASK & ~TOBJ_MASK & ~MOBJ_MASK, &ftSamus_80128770,

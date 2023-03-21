@@ -59,7 +59,7 @@ void func_80268DD4(HSD_GObj* item_gobj, f32 arg8);
 void func_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc);
 
 /// Item State Change
-void func_80268E5C(HSD_GObj* item_gobj, enum_t asid,
+void func_80268E5C(HSD_GObj* item_gobj, enum_t msid,
                    Item_StateChangeFlags flags);
 
 /// Advance item animation + script?

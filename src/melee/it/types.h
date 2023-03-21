@@ -27,7 +27,7 @@
 /// @todo Size unknown.
 struct ItemStateTable {
     /// @at{0} @sz{4}
-    enum_t asid;
+    enum_t msid;
 
     /// @at{4} @sz{4}
     HSD_GObjPredicate animated;
@@ -348,7 +348,7 @@ struct Item {
     u8 x23;
 
     /// @at{24} @sz{4}
-    enum_t asid;
+    enum_t msid;
 
     /// @at{28} @sz{4}
     enum_t anim_id;

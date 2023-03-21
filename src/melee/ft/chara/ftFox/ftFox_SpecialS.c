@@ -31,9 +31,9 @@ void ftFox_SpecialS_CreateGFX(HSD_GObj* gobj)
 bool ftFox_SpecialS_CheckGhostRemove(HSD_GObj* gobj)
 {
     /// @todo @c enum
-    enum_t asid = GET_FIGHTER(gobj)->action_id;
+    enum_t msid = GET_FIGHTER(gobj)->motion_id;
 
-    if (asid >= MS_FOX_SPECIALS_START && asid <= MS_FOX_SPECIALAIRS_END)
+    if (msid >= MS_FOX_SPECIALS_START && msid <= MS_FOX_SPECIALAIRS_END)
         return false;
 
     return true;

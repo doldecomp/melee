@@ -183,7 +183,7 @@ HSD_GObj* func_8015C244(HSD_GObj* arg0, Vec3* arg1)
 
 bool func_8015C270(void)
 {
-    /// @todo Get ASID
+    /// @todo Get msid
     if (func_8015C44C(FTKIND_MASTERH) == 0x157)
         return 1;
 
@@ -192,7 +192,7 @@ bool func_8015C270(void)
 
 bool func_8015C2A8(void)
 {
-    /// @todo Get ASID
+    /// @todo Get msid
     if (func_8015C44C(FTKIND_CREZYH) == 0x183)
         return true;
 
@@ -202,8 +202,8 @@ bool func_8015C2A8(void)
 bool func_8015C2E0(void)
 {
     /// @todo Get ASIDs
-    enum_t asid = func_8015C44C(FTKIND_MASTERH);
-    if (asid == 0x158 || asid == 0x159)
+    enum_t msid = func_8015C44C(FTKIND_MASTERH);
+    if (msid == 0x158 || msid == 0x159)
         return true;
 
     return false;
@@ -212,8 +212,8 @@ bool func_8015C2E0(void)
 bool func_8015C31C(void)
 {
     /// @todo Get ASIDs
-    enum_t asid = func_8015C44C(FTKIND_CREZYH);
-    if (asid == 0x181 || asid == 0x182)
+    enum_t msid = func_8015C44C(FTKIND_CREZYH);
+    if (msid == 0x181 || msid == 0x182)
         return true;
 
     return false;

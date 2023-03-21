@@ -44,7 +44,7 @@ void ftGameWatch_ItemParachuteOnLand(HSD_GObj* gobj)
 
     if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(gobj);
-        if (fp->action_id == ftGw_MS_LandingAirN) {
+        if (fp->motion_id == ftGw_MS_LandingAirN) {
             func_802C6E50(fp->fv.gw.x2258_parachuteGObj);
         }
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -87,9 +87,9 @@ void ftGameWatch_ItemParachuteRemove(HSD_GObj* gobj)
 bool ftGameWatch_ItemCheckParachuteRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 asid = fp->action_id;
+    s32 msid = fp->motion_id;
 
-    if (asid >= ftGw_MS_AttackAirN && asid <= ftGw_MS_LandingAirN)
+    if (msid >= ftGw_MS_AttackAirN && msid <= ftGw_MS_LandingAirN)
         return false;
 
     return true;
@@ -136,8 +136,8 @@ static void ftGameWatch_ItemTurtleOnLand(HSD_GObj* gobj)
     if (fp->fv.gw.x225C_turtleGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(gobj);
 
-        // Deliberate ASID mismatch to prevent item animation from freezing???
-        if (fp->action_id == ftGw_MS_LandingAirN)
+        // Deliberate msid mismatch to prevent item animation from freezing???
+        if (fp->motion_id == ftGw_MS_LandingAirN)
             func_802C7158(fp->fv.gw.x225C_turtleGObj);
 
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -181,9 +181,9 @@ void ftGameWatch_ItemTurtleRemove(HSD_GObj* gobj)
 bool ftGameWatch_ItemCheckTurtleRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 ASID = fp->action_id;
+    s32 msid = fp->motion_id;
 
-    if ((ASID >= ftGw_MS_AttackAirB) && (ASID <= ftGw_MS_LandingAirB)) {
+    if ((msid >= ftGw_MS_AttackAirB) && (msid <= ftGw_MS_LandingAirB)) {
         return false;
     }
     return true;
@@ -227,7 +227,7 @@ void ftGameWatch_ItemSparkyOnLand(HSD_GObj* gobj)
     if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(gobj);
 
-        if (fp->action_id == ftGw_MS_LandingAirN)
+        if (fp->motion_id == ftGw_MS_LandingAirN)
             func_802C7424(fp->fv.gw.x2260_sparkyGObj);
 
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -305,9 +305,9 @@ static void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* gobj)
 bool ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 ASID = fp->action_id;
+    s32 msid = fp->motion_id;
 
-    if ((ASID >= ftGw_MS_AttackAirHi) && (ASID <= ftGw_MS_LandingAirHi)) {
+    if ((msid >= ftGw_MS_AttackAirHi) && (msid <= ftGw_MS_LandingAirHi)) {
         return false;
     }
     return true;
@@ -321,14 +321,14 @@ static void ftGameWatch_AttackAirHi_Action(HSD_GObj*);
 // Action State
 void ftGameWatch_AttackAir_DecideAction(HSD_GObj* gobj)
 {
-    enum_t ASID = func_8008CE68(GET_FIGHTER(gobj));
+    enum_t msid = func_8008CE68(GET_FIGHTER(gobj));
 
-    switch (ASID) {
+    switch (msid) {
     case ftCo_MS_AttackAirN:
         ftGameWatch_AttackAirN_Action(gobj);
         return;
     case ftCo_MS_AttackAirF:
-        func_8008CFAC(gobj, ASID);
+        func_8008CFAC(gobj, msid);
         return;
     case ftCo_MS_AttackAirB:
         ftGameWatch_AttackAirB_Action(gobj);
@@ -337,7 +337,7 @@ void ftGameWatch_AttackAir_DecideAction(HSD_GObj* gobj)
         ftGameWatch_AttackAirHi_Action(gobj);
         return;
     case ftCo_MS_AttackAirLw:
-        func_8008CFAC(gobj, ASID);
+        func_8008CFAC(gobj, msid);
         return;
     }
 }
@@ -569,7 +569,7 @@ void ftGameWatch_LandingAirN_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_800D5D3C(gobj);
-    if (fp->action_id != ftGw_MS_LandingAirN) {
+    if (fp->motion_id != ftGw_MS_LandingAirN) {
         ftGameWatch_OnDamage(gobj);
     }
 }
@@ -596,7 +596,7 @@ void ftGameWatch_LandingAirN_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_800D5F38(gobj);
-    if (fp->action_id != ftGw_MS_LandingAirN) {
+    if (fp->motion_id != ftGw_MS_LandingAirN) {
         ftGameWatch_OnDamage(gobj);
     }
 }
@@ -620,7 +620,7 @@ void ftGameWatch_LandingAirB_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_800D5D3C(gobj);
-    if (fp->action_id != ftGw_MS_LandingAirB) {
+    if (fp->motion_id != ftGw_MS_LandingAirB) {
         ftGameWatch_OnDamage(gobj);
     }
 }
@@ -647,7 +647,7 @@ void ftGameWatch_LandingAirB_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_800D5F38(gobj);
-    if (fp->action_id != ftGw_MS_LandingAirB) {
+    if (fp->motion_id != ftGw_MS_LandingAirB) {
         ftGameWatch_OnDamage(gobj);
     }
 }
@@ -672,7 +672,7 @@ void ftGameWatch_LandingAirHi_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_800D5D3C(gobj);
-    if (fp->action_id != ftGw_MS_LandingAirHi) {
+    if (fp->motion_id != ftGw_MS_LandingAirHi) {
         ftGameWatch_OnDamage(gobj);
     }
 }
@@ -699,7 +699,7 @@ void ftGameWatch_LandingAirHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     func_800D5F38(gobj);
-    if (fp->action_id != ftGw_MS_LandingAirHi) {
+    if (fp->motion_id != ftGw_MS_LandingAirHi) {
         ftGameWatch_OnDamage(gobj);
     }
 }

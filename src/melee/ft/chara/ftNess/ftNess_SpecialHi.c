@@ -119,12 +119,12 @@ static f64 return_float20(void)
 // https://decomp.me/scratch/242L6
 void ftNess_SpecialHiStopGFX(HSD_GObj* gobj) // Removes GFX
 {
-    s32 ASID;
+    s32 msid;
     Fighter* fp;
 
     fp = gobj->user_data;
-    ASID = fp->action_id;
-    switch (ASID) {
+    msid = fp->motion_id;
+    switch (msid) {
     case MS_NESS_SPECIALHI_START:
     case MS_NESS_SPECIALHI_HOLD:
     case MS_NESS_SPECIALHI_END:
@@ -228,8 +228,8 @@ bool ftNess_CheckSpecialHiHold(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    return fp->action_id == MS_NESS_SPECIALHI_HOLD ||
-                   fp->action_id == MS_NESS_SPECIALAIRHI_HOLD
+    return fp->motion_id == MS_NESS_SPECIALHI_HOLD ||
+                   fp->motion_id == MS_NESS_SPECIALAIRHI_HOLD
                ? true
                : false;
 }
@@ -240,15 +240,15 @@ void ftNess_ItemPKThunderRemove(HSD_GObj* gobj) // OnTakeDamage?
 {
     Fighter* fp;
     Fighter* temp_fp;
-    s32 ASID;
+    s32 msid;
 
     temp_fp = gobj->user_data;
     if (temp_fp->fv.ns.x2244_pkThunderGObj != NULL) {
         temp_fp->fv.ns.x2244_pkThunderGObj = NULL;
     }
     fp = GET_FIGHTER(gobj);
-    ASID = fp->action_id;
-    switch (ASID) {
+    msid = fp->motion_id;
+    switch (msid) {
     case MS_NESS_SPECIALHI_START:
     case MS_NESS_SPECIALHI_HOLD:
     case MS_NESS_SPECIALHI_END:
@@ -272,7 +272,7 @@ void ftNess_ItemPKThunderRemove(HSD_GObj* gobj) // OnTakeDamage?
 // https://decomp.me/scratch/MTTJq
 void ftNess_SpecialHiTakeDamage(HSD_GObj* gobj) // OnTakeDamage again?
 {
-    s32 ASID;
+    s32 msid;
     Fighter* fp;
     Fighter* fighter_data2;
     Fighter* temp_fp;
@@ -284,8 +284,8 @@ void ftNess_SpecialHiTakeDamage(HSD_GObj* gobj) // OnTakeDamage again?
         fp->fv.ns.x2244_pkThunderGObj = NULL;
     }
     fighter_data2 = GET_FIGHTER(gobj);
-    ASID = fighter_data2->action_id;
-    switch (ASID) {
+    msid = fighter_data2->motion_id;
+    switch (msid) {
     case MS_NESS_SPECIALHI_START:
     case MS_NESS_SPECIALHI_HOLD:
     case MS_NESS_SPECIALHI_END:
@@ -647,8 +647,8 @@ block_stuff : {
 #endif
 
     {
-        enum_t asid = fighter_data3->action_id;
-        switch (asid) {
+        enum_t msid = fighter_data3->motion_id;
+        switch (msid) {
         case MS_NESS_SPECIALHI_START:
         case MS_NESS_SPECIALHI_HOLD:
         case MS_NESS_SPECIALHI_END:
@@ -789,7 +789,7 @@ void ftNess_SpecialHiHold_Anim(
     HSD_GObj* gobj) // Ness's grounded PK Thunder Control Loop
                     // Animation callback
 {
-    s32 ASID;
+    s32 msid;
     s32 ASID2;
     s32 thunderTimer;
     s32 thunderTimer2;
@@ -815,8 +815,8 @@ void ftNess_SpecialHiHold_Anim(
             Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALHI_END, 0, NULL,
                                       0.0f, 1.0f, 0.0f);
             fighter_data2 = gobj->user_data;
-            ASID = fighter_data2->action_id;
-            switch (ASID) {
+            msid = fighter_data2->motion_id;
+            switch (msid) {
             case MS_NESS_SPECIALHI_START:
             case MS_NESS_SPECIALHI_HOLD:
             case MS_NESS_SPECIALHI_END:
@@ -839,7 +839,7 @@ void ftNess_SpecialHiHold_Anim(
         Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALHI_END, 0, NULL, 0.0f,
                                   1.0f, 0.0f);
         fighter_data3 = gobj->user_data;
-        ASID2 = fighter_data3->action_id;
+        ASID2 = fighter_data3->motion_id;
         switch (ASID2) {
         case MS_NESS_SPECIALHI_START:
         case MS_NESS_SPECIALHI_HOLD:
@@ -894,9 +894,9 @@ void ftNess_SpecialHi_Anim(HSD_GObj* gobj)
                                   1.0f, 0.0f);
         {
             Fighter* fp = gobj->user_data;
-            enum_t asid = fp->action_id;
+            enum_t msid = fp->motion_id;
 
-            switch (asid) {
+            switch (msid) {
             case MS_NESS_SPECIALHI_START:
             case MS_NESS_SPECIALHI_HOLD:
             case MS_NESS_SPECIALHI_END:
@@ -994,8 +994,8 @@ void ftNess_SpecialAirHiHold_Anim(HSD_GObj* gobj)
                                       0, 1, 0);
             {
                 Fighter* fp1 = gobj->user_data;
-                enum_t asid = fp1->action_id;
-                switch (asid) {
+                enum_t msid = fp1->motion_id;
+                switch (msid) {
                 case MS_NESS_SPECIALHI_START:
                 case MS_NESS_SPECIALHI_HOLD:
                 case MS_NESS_SPECIALHI_END:
@@ -1045,8 +1045,8 @@ void ftNess_SpecialAirHiHold_Anim(HSD_GObj* gobj)
                                   0.0f, 1.0f, 0.0f);
         {
             Fighter* fp1 = gobj->user_data;
-            enum_t asid = fp1->action_id;
-            switch (asid) {
+            enum_t msid = fp1->motion_id;
+            switch (msid) {
             case MS_NESS_SPECIALHI_START:
             case MS_NESS_SPECIALHI_HOLD:
             case MS_NESS_SPECIALHI_END:
@@ -1592,9 +1592,9 @@ void ftNess_SpecialHi_Coll(HSD_GObj* gobj)
             fp0->xEC_ground_vel = 0;
             {
                 Fighter* fighter_data2 = gobj->user_data;
-                s32 asid = fighter_data2->action_id;
+                s32 msid = fighter_data2->motion_id;
 
-                switch (asid) {
+                switch (msid) {
                 case MS_NESS_SPECIALHI_START:
                 case MS_NESS_SPECIALHI_HOLD:
                 case MS_NESS_SPECIALHI_END:
@@ -1736,7 +1736,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
 #endif
 
     f32 DriftMax;
-    s32 asid;
+    s32 msid;
     s32 ecbFlag;
     ftNessAttributes* ness_attr;
     Fighter* fighter_data2;
@@ -1770,8 +1770,8 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
             fighter_r31->x80_self_vel.y = 0.0f;
             fighter_r31->x80_self_vel.x = 0.0f;
             fighter_data2 = gobj->user_data;
-            asid = fighter_data2->action_id;
-            switch (asid) {
+            msid = fighter_data2->motion_id;
+            switch (msid) {
             case MS_NESS_SPECIALHI_START:
             case MS_NESS_SPECIALHI_HOLD:
             case MS_NESS_SPECIALHI_END:
@@ -1935,7 +1935,7 @@ void ftNess_SpecialAirHiRebound_Coll(HSD_GObj* gobj)
 
     Fighter* fp;
     Fighter* fighter_data2;
-    enum_t asid;
+    enum_t msid;
 
     fp = gobj->user_data;
     if (EnvColl_CheckGroundAndLedge(gobj, 0) == true) {
@@ -1943,8 +1943,8 @@ void ftNess_SpecialAirHiRebound_Coll(HSD_GObj* gobj)
         fp->x80_self_vel.y = 0.0f;
         fp->x80_self_vel.x = 0.0f;
         fighter_data2 = gobj->user_data;
-        asid = fighter_data2->action_id;
-        switch (asid) {
+        msid = fighter_data2->motion_id;
+        switch (msid) {
         case MS_NESS_SPECIALHI_START:
         case MS_NESS_SPECIALHI_HOLD:
         case MS_NESS_SPECIALHI_END:

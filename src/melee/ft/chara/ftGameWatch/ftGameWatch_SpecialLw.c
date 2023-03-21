@@ -87,9 +87,9 @@ bool ftGameWatch_ItemCheckPanicRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     /// @todo @c enum
-    enum_t asid = fp->action_id;
+    enum_t msid = fp->motion_id;
 
-    if (asid >= ftGw_MS_SpecialLw_Shoot && asid <= ftGw_MS_SpecialAirLw_Shoot)
+    if (msid >= ftGw_MS_SpecialLw_Shoot && msid <= ftGw_MS_SpecialAirLw_Shoot)
     {
         return false;
     }
@@ -552,7 +552,7 @@ void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo @c enum
-    enum_t asid;
+    enum_t msid;
 
     fp->fv.gw.x2238_panicCharge += fp->AbsorbAttr.x1A48_hitsTaken;
     fp->fv.gw.x223C_panicDamage += fp->AbsorbAttr.x1A44_damageTaken;
@@ -561,11 +561,11 @@ void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* gobj)
         func_800BFFD0(fp, 5, 0);
 
     if (fp->ground_or_air == GA_Ground)
-        asid = ftGw_MS_SpecialLw_Catch;
+        msid = ftGw_MS_SpecialLw_Catch;
     else
-        asid = ftGw_MS_SpecialAirLw_Catch;
+        msid = ftGw_MS_SpecialAirLw_Catch;
 
-    Fighter_ChangeMotionState(gobj, asid, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0, 1, 0);
     ftGameWatch_SpecialLw_UpdateBucketModel(gobj);
 }
 

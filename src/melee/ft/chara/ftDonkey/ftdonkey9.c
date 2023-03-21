@@ -50,7 +50,7 @@ void ftDonkey_800E07B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2CC;
-    func_8008DCE0(gobj, donkey_attr->action_state + 9, 0.0f);
+    func_8008DCE0(gobj, donkey_attr->motion_state + 9, 0.0f);
 }
 
 void ftDonkey_800E07E4(HSD_GObj* gobj)

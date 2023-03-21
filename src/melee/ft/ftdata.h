@@ -21,7 +21,7 @@ void func_80085820(FighterKind, s32 costume_id);
 void func_800859A8(Fighter*);
 void func_80085A14(bool);
 void func_80085B10(Fighter*);
-void func_80085CD8(Fighter*, Fighter*, s32 asid);
+void func_80085CD8(Fighter*, Fighter*, s32 msid);
 u32 func_80085E50(Fighter*, u32);
 void func_80085560(s32, bool);
 

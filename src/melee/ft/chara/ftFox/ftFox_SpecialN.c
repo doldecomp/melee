@@ -66,16 +66,16 @@ bool ftFox_CheckRemoveBlaster(HSD_GObj* gobj)
 }
 
 // 0x800E5DE4 - shoutouts to Olifr� for figuring this one out!
-// https://decomp.me/scratch/aatYF // Get ASID for Fox/Falco moves that require
+// https://decomp.me/scratch/aatYF // Get msid for Fox/Falco moves that require
 // the Blaster item
 s32 ftFox_GetBlasterAction(HSD_GObj* gobj)
 {
-    s32 ASID = 9;
+    s32 msid = 9;
 
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL) {
-            s32 currASID = fp->action_id;
+            s32 currASID = fp->motion_id;
             switch (currASID) {
             case MS_FOX_SPECIALN_START:
             case MS_FOX_SPECIALN_LOOP:
@@ -83,17 +83,17 @@ s32 ftFox_GetBlasterAction(HSD_GObj* gobj)
             case MS_FOX_SPECIALAIRN_START:
             case MS_FOX_SPECIALAIRN_LOOP:
             case MS_FOX_SPECIALAIRN_END:
-                ASID = currASID - MS_FOX_SPECIALN_START;
+                msid = currASID - MS_FOX_SPECIALN_START;
                 break;
 
             case ftCo_MS_ThrowB:
             case ftCo_MS_ThrowHi:
             case ftCo_MS_ThrowLw:
-                ASID = currASID - ftCo_MS_CatchDash;
+                msid = currASID - ftCo_MS_CatchDash;
             }
         }
     }
-    return ASID;
+    return msid;
 }
 
 // 0x800E5E38
@@ -103,8 +103,8 @@ bool ftFox_CheckBlasterAction(HSD_GObj* gobj)
 {
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
-        s32 ASID = fp->action_id;
-        switch (ASID) {
+        s32 msid = fp->motion_id;
+        switch (msid) {
         case MS_FOX_SPECIALN_START:
         case MS_FOX_SPECIALN_LOOP:
         case MS_FOX_SPECIALN_END:

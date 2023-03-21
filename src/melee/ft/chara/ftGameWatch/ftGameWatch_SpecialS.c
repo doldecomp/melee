@@ -94,9 +94,9 @@ static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* gobj)
 bool ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* gobj)
 {
     /// @todo @c enum
-    enum_t asid = GET_FIGHTER(gobj)->action_id;
+    enum_t msid = GET_FIGHTER(gobj)->motion_id;
 
-    if (asid >= ftGw_MS_SpecialS1 && asid <= ftGw_MS_SpecialAirS9)
+    if (msid >= ftGw_MS_SpecialS1 && msid <= ftGw_MS_SpecialAirS9)
         return false;
 
     return true;

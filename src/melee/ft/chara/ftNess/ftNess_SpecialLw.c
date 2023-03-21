@@ -957,7 +957,7 @@ void ftNess_AbsorbThink_DecideAction(
     u8 _[8];
 #endif
 
-    enum_t asid;
+    enum_t msid;
     Fighter* fp = GET_FIGHTER(gobj);
     ftNessAttributes* sa = fp->x2D4_specialAttributes;
 
@@ -982,18 +982,18 @@ void ftNess_AbsorbThink_DecideAction(
     }
 
     fp->facing_dir = (f32) fp->AbsorbAttr.x1A40_absorbHitDirection;
-    asid = fp->action_id;
+    msid = fp->motion_id;
 
-    if ((asid != MS_NESS_SPECIALLW_HIT && asid != MS_NESS_SPECIALAIRLW_HIT) ||
+    if ((msid != MS_NESS_SPECIALLW_HIT && msid != MS_NESS_SPECIALAIRLW_HIT) ||
         !(fp->x894_currentAnimFrame <= sa->x7C_PSI_MAGNET_UNK2))
     {
-        enum_t asid;
+        enum_t msid;
         if (fp->ground_or_air == GA_Ground)
-            asid = MS_NESS_SPECIALLW_HIT;
+            msid = MS_NESS_SPECIALLW_HIT;
         else
-            asid = MS_NESS_SPECIALAIRLW_HIT;
+            msid = MS_NESS_SPECIALAIRLW_HIT;
 
-        Fighter_ChangeMotionState(gobj, asid, 2, NULL, 0, 1, 0);
+        Fighter_ChangeMotionState(gobj, msid, 2, NULL, 0, 1, 0);
         ftColl_CreateAbsorbHit(gobj, &sa->x98_PSI_MAGNET_ABSORPTION);
     }
 }
