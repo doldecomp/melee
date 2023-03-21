@@ -102,7 +102,7 @@ void ftDrMario_OnLoad(HSD_GObj* gobj)
     func_8026B3F8(items[3], sa->x14);
 }
 
-void func_80149540(HSD_GObj* gobj)
+void ftDrMario_80149540(HSD_GObj* gobj)
 {
     ftDrMario_801497CC(gobj);
 }

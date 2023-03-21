@@ -25,7 +25,7 @@ extern Fighter_DemoStrings lbl_803D17FC;
 
 void ftDrMario_OnDeath(HSD_GObj*);
 void ftDrMario_OnLoad(HSD_GObj*);
-void func_80149540(HSD_GObj*);
+void ftDrMario_80149540(HSD_GObj*);
 void ftDrMario_OnItemPickup(HSD_GObj*, bool);
 void ftDrMario_OnItemInvisible(HSD_GObj*);
 void ftDrMario_OnItemVisible(HSD_GObj*);

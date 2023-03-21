@@ -26,8 +26,8 @@ void ftDrMario_80149954(HSD_GObj* gobj)
         tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
         fp->fv.mr.x2240 = tmp;
         if (tmp != 0) {
-            fp->cb.x21E4_callback_OnDeath2 = func_80149540;
-            fp->cb.x21DC_callback_OnTakeDamage = func_80149540;
+            fp->cb.x21E4_callback_OnDeath2 = ftDrMario_80149540;
+            fp->cb.x21DC_callback_OnTakeDamage = ftDrMario_80149540;
         }
     } else if (fp->x2200_ftcmd_var0 == 2) {
         ftDrMario_801497CC(gobj);
