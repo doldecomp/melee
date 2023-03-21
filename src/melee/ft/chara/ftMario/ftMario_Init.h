@@ -6,7 +6,7 @@
 #include "ftMario/forward.h"
 #include <baselib/forward.h>
 
-#include "ft/fighter.h"
+#include "ft/types.h"
 
 #include <stddef.h>
 
