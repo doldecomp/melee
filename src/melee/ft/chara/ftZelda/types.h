@@ -53,7 +53,7 @@ union ftZelda_MotionVars {
         f32 x18;
     } specialhi;
 
-    struct ftZelda_Unk3MotionVars {
+    struct ftZelda_SpecialNVars {
         int x0;
     } unk3;
 
