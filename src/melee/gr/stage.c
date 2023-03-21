@@ -6,6 +6,8 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
+#include <dolphin/mtx/types.h>
+
 extern struct StageInfo stage_info;
 
 struct StructStageIDWithUnks {

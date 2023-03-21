@@ -5,6 +5,8 @@
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
 
+#include <dolphin/mtx/types.h>
+
 // 80153AEC 1506CC
 void lbl_80153AEC(HSD_GObj* gobj)
 {

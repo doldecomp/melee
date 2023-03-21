@@ -8,6 +8,7 @@
 #include "it/item.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 
 void ftFox_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)

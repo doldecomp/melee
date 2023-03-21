@@ -6,6 +6,7 @@
 #include "lb/forward.h"
 
 #include <placeholder.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>
 
 struct HitResult {

@@ -8,6 +8,8 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 // 0x8014267C
 // https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Action State
 // handler

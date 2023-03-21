@@ -8,6 +8,7 @@
 #include "ft/ftparts.h"
 
 #include <trigf.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>
 
 /// @todo Move elsewhere.

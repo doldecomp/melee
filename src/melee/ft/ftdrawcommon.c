@@ -9,6 +9,7 @@
 #include <platform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/jobj.h>

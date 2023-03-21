@@ -7,6 +7,8 @@
 #include "ftSamus/ftsamus.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 void ftSamus_8012ADF0(HSD_GObj* gobj)
 {
     Vec3 vec;

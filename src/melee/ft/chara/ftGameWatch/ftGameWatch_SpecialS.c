@@ -6,6 +6,8 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* gobj);
 static void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* gobj);
 

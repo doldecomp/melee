@@ -4,6 +4,7 @@
 #include "it/forward.h"
 #include "sc/scene.h"
 
+#include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>

@@ -14,6 +14,7 @@
 #include "lb/lbunknown_003.h"
 
 #include <platform.h>
+#include <dolphin/mtx/types.h>
 
 // 8013ADB4 - 8013AE30 (0x7C bytes)
 // https://decomp.me/scratch/LbMVE

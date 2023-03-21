@@ -5,6 +5,7 @@
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/forward.h>
 #include <dolphin/gx/GXFrameBuf.h>
+#include <dolphin/mtx/types.h>
 
 Vec2 const lbl_804DE220 = { 256.0F, 0.0F };
 Vec2 const lbl_804DE228 = { 176.0F, 0.0F };

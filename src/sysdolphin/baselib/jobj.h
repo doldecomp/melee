@@ -3,6 +3,7 @@
 
 #include <platform.h>
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/aobj.h>
 #include <baselib/class.h>
 #include <baselib/forward.h>

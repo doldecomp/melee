@@ -15,6 +15,7 @@
 #include "lb/lbunknown_003.h"
 
 #include <stddef.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/random.h>
 
 void ftMario_SpecialS_SetCall(Fighter* fp)

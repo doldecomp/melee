@@ -8,6 +8,8 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* gobj);
 static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* gobj);
 

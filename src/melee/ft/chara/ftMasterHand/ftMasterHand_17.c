@@ -5,6 +5,8 @@
 #include "ft/code_80081B38.h"
 #include "ft/ftbosslib.h"
 
+#include <dolphin/mtx/types.h>
+
 static void func_80153910(HSD_GObj*);
 
 // 8015386C 15044C

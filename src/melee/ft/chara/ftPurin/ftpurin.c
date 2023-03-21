@@ -18,6 +18,7 @@
 #include "mp/mplib.h"
 
 #include <trigf.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 
 ActionState as_table_purin[] = {

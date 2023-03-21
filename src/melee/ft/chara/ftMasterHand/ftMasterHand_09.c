@@ -9,6 +9,8 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 
+#include <dolphin/mtx/types.h>
+
 // 80151D20 14E900
 // https://decomp.me/scratch/wVowU
 void lbl_80151D20(HSD_GObj* arg0)

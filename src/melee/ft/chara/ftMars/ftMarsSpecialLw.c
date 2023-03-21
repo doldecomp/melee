@@ -11,6 +11,8 @@
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 
+#include <dolphin/mtx/types.h>
+
 void ftMars_SpecialLw_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);

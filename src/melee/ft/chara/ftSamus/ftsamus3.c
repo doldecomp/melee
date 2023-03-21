@@ -9,6 +9,8 @@
 #include "lb/lbunknown_001.h"
 #include "melee/ft/inlines.h"
 
+#include <dolphin/mtx/types.h>
+
 void ftSamus_801293BC_inner(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

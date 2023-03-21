@@ -9,6 +9,8 @@
 #include "lb/lbunknown_001.h"
 #include "lb/lbvector.h"
 
+#include <dolphin/mtx/types.h>
+
 // 80153000 14FBE0
 // https://decomp.me/scratch/erd6U
 void lbl_80153000(HSD_GObj* arg0)

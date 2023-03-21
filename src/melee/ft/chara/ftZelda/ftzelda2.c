@@ -18,6 +18,7 @@
 
 #include <math.h>
 #include <trigf.h>
+#include <dolphin/mtx/types.h>
 
 void ftZelda_801396AC(HSD_GObj* gobj)
 {

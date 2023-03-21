@@ -17,6 +17,7 @@
 #include "pl/pl_unknown_001.h"
 #include "pl/player.h"
 
+#include <dolphin/mtx/types.h>
 #include <baselib/jobj.h>
 #include <baselib/rumble.h>
 

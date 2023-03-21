@@ -11,6 +11,8 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 // 8013B638 - 8013B6D8 (0xA0 bytes)
 // https://decomp.me/scratch/QnXK1
 void ftZelda_SpecialS_StartAction(HSD_GObj* gobj)

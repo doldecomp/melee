@@ -13,6 +13,7 @@
 #include "lb/lbunknown_001.h"
 
 #include <trigf.h>
+#include <dolphin/mtx/types.h>
 
 /// @todo Move elsewhere.
 #define MAX_STICK_MAG 0.999f

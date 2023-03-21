@@ -6,6 +6,8 @@
 #include "ftDonkey/ftdonkey1.h"
 #include "it/item.h"
 
+#include <dolphin/mtx/types.h>
+
 void ftDonkey_800E0698(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);

@@ -5,6 +5,7 @@
 
 #include "mp/mplib.h"
 
+#include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 
 static int const max_input_frames = 254;

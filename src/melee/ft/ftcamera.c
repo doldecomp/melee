@@ -3,6 +3,8 @@
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
 
+#include <dolphin/mtx/types.h>
+
 struct UnkFloat6_Camera {
     Vec3 x0;
     Vec3 xC;

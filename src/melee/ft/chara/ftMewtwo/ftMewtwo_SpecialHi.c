@@ -10,6 +10,7 @@
 #include "lb/lbunknown_001.h"
 #include "melee/ft/types.h"
 
+#include <dolphin/mtx/types.h>
 #include <MSL/trigf.h>
 
 /// Create Teleport Start GFX

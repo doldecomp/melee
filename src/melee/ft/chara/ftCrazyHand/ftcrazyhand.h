@@ -5,6 +5,8 @@
 #include "ft/types.h"
 #include "lb/lbvector.h"
 
+#include <dolphin/mtx/types.h>
+
 typedef struct _ftCrazyHandAttributes {
     s32 x0;
     s32 x4;

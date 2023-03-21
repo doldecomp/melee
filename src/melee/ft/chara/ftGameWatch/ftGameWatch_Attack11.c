@@ -5,6 +5,8 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 // 0x8014BDB0
 // https://decomp.me/scratch/7BADg // Create Insecticide Spray Item
 void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* gobj)

@@ -12,6 +12,7 @@
 #include "lb/lbunknown_001.h"
 #include "mp/mpcoll.h"
 
+#include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 
 void ftNess_YoyoUpdateHitPos(HSD_GObj* gobj)

@@ -1,4 +1,5 @@
 #include <dolphin/mtx/mtxvec.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/class.h>
 #include <baselib/jobj.h>
 #include <baselib/robj.h>

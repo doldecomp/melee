@@ -4,6 +4,8 @@
 #include "ft/ftbosslib.h"
 #include "mp/mplib.h"
 
+#include <dolphin/mtx/types.h>
+
 // 801517B0 14E390
 // https://decomp.me/scratch/ayfDz
 void lbl_801517B0(HSD_GObj* gobj)

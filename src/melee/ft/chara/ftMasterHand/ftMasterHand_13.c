@@ -7,6 +7,8 @@
 #include "ft/ftbosslib.h"
 #include "lb/lbvector.h"
 
+#include <dolphin/mtx/types.h>
+
 // 8015287C 14F45C
 void lbl_8015287C(HSD_GObj* gobj)
 {

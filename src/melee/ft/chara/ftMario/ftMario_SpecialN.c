@@ -12,6 +12,7 @@
 #include "it/forward.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
 #include <baselib/random.h>
 
 static int pickMegavitamin(Fighter* fp, int* arr, int outpos)

@@ -9,6 +9,7 @@
 #include "lb/lbunknown_003.h"
 
 #include <placeholder.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/baselib_unknown_002.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>

@@ -8,6 +8,8 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 // 0x80146CCC
 // https://decomp.me/scratch/qxdYd
 s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,

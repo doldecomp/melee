@@ -6,6 +6,8 @@
 #include "ft/ftbosslib.h"
 #include "ft/types.h"
 
+#include <dolphin/mtx/types.h>
+
 // 80153D28 150908
 void lbl_80153D28(HSD_GObj* gobj)
 {

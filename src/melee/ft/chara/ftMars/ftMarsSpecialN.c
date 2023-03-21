@@ -8,6 +8,8 @@
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 
+#include <dolphin/mtx/types.h>
+
 void ftMars_SpecialN_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

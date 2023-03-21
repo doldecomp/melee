@@ -2,6 +2,7 @@
 #define _fobj_h_
 
 #include <platform.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/forward.h>
 #include <baselib/objalloc.h>
 #include <baselib/object.h>

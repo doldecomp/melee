@@ -4,6 +4,7 @@
 
 #include <placeholder.h>
 #include <dolphin/mtx/mtxvec.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/aobj.h>
 #include <baselib/dobj.h>
 #include <baselib/jobj.h>

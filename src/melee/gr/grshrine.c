@@ -8,6 +8,7 @@
 #include "lb/lbunknown_003.h"
 
 #include <math.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <baselib/gobjgxlink.h>
 

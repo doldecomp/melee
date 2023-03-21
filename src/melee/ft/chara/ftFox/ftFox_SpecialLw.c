@@ -8,6 +8,8 @@
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 
+#include <dolphin/mtx/types.h>
+
 void ftFox_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
 {
     /// @todo Shared @c inline with #ftFox_SpecialLw_CreateStartGFX.

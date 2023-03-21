@@ -11,6 +11,7 @@
 #include "it/forward.h"
 
 #include <stddef.h>
+#include <dolphin/mtx/types.h>
 
 char lbl_803CEA98[] = "PlYs.dat";
 char lbl_803CEAA4[] = "ftDataYoshi";

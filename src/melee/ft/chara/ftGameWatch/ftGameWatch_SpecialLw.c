@@ -7,6 +7,7 @@
 #include "lb/forward.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>
 
 /// Create Oil Panic Item

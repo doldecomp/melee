@@ -6,6 +6,8 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
 void ftMewtwo_SpecialLw_ClearDisableGObj(HSD_GObj* gobj)

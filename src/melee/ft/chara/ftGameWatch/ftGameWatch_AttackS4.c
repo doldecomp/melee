@@ -5,6 +5,8 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 // 0x8014A848 //
 // https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up
 // callbacks //

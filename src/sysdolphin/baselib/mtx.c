@@ -1,4 +1,5 @@
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <baselib/mtx.h>
 #include <MSL/trigf.h>

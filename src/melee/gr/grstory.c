@@ -11,6 +11,7 @@
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>

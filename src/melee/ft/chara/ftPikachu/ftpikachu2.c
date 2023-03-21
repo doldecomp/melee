@@ -10,6 +10,8 @@
 #include "ft/ftparts.h"
 #include "it/code_8027CF30.h"
 
+#include <dolphin/mtx/types.h>
+
 void ftPikachu_SpecialN_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

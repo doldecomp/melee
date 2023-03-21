@@ -4,6 +4,8 @@
 #include "baselib/aobj.h"
 #include "baselib/object.h"
 
+#include <dolphin/mtx/types.h>
+
 struct HSD_WObj {
     HSD_Obj parent;
     u32 flags;

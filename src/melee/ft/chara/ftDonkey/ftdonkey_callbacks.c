@@ -23,6 +23,8 @@
 #include "lb/lbmthp.h"
 #include "mp/mplib.h"
 
+#include <dolphin/mtx/types.h>
+
 ActionState as_table_donkey[] = {
     { 295, 0x00480000, 0x35400000, NULL, ftDonkey_800DF9F0, ftDonkey_800DFA50,
       ftDonkey_800DFA70, func_800761C8 },

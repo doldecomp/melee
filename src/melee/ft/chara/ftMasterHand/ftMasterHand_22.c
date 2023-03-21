@@ -10,6 +10,8 @@
 #include "ft/ftcommon.h"
 #include "lb/lbvector.h"
 
+#include <dolphin/mtx/types.h>
+
 // 80154230 150E10
 // https://decomp.me/scratch/dpg50
 void lbl_80154230(HSD_GObj* gobj)

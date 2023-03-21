@@ -8,6 +8,7 @@
 #include "mp/mplib.h"
 
 #include <placeholder.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <MSL/trigf.h>
 

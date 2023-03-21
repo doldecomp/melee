@@ -8,6 +8,8 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 /// Ness PK Flash Charge ASID check
 bool ftNess_CheckSpecialNHold(HSD_GObj* gobj)
 {

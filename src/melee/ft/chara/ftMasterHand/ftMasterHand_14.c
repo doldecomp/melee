@@ -6,6 +6,8 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 // 80152BC8 14F7A8
 void lbl_80152BC8(HSD_GObj* gobj)
 {

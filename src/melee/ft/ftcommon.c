@@ -19,6 +19,7 @@
 #include "mp/mplib.h"
 #include "pl/pl_unknown_001.h"
 
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <baselib/rumble.h>
 

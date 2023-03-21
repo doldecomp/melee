@@ -4,6 +4,7 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
 #include <MSL/trigf.h>
 
 // https://decomp.me/scratch/apf7Y //

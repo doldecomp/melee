@@ -6,6 +6,7 @@
 
 #include <math.h>
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/types.h>
 #include <MetroTRK/intrinsics.h>
 
 extern void TObjInfoInit(void);

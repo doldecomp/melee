@@ -10,6 +10,7 @@
 #include <common_structs.h>
 #include <math.h>
 #include <placeholder.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/forward.h>
 #include <baselib/gobj.h>
 

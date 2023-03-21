@@ -13,6 +13,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <dolphin/mtx/types.h>
 
 /// @todo Fix common data struct
 #define COMMON_DATA_F32 ((f32*) p_ftCommonData)

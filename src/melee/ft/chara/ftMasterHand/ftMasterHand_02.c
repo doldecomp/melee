@@ -25,6 +25,8 @@
 #include "ft/ftbosslib.h"
 #include "mp/mplib.h"
 
+#include <dolphin/mtx/types.h>
+
 // 8014FDD0 0014C9B0
 // https://decomp.me/scratch/HWef2
 void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj)

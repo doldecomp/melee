@@ -11,6 +11,8 @@
 #include "ft/types.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 ActionState as_table_samus[] = {
     { 295, 0, 0x01000000, ftSamus_80128C04, ftSamus_80128D3C, ftSamus_80128E88,
       ftSamus_80128F60, func_800761C8 },

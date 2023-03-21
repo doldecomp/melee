@@ -11,6 +11,7 @@
 #include "lb/lbunknown_001.h"
 
 #include <trigf.h>
+#include <dolphin/mtx/types.h>
 #include <MetroTRK/intrinsics.h>
 
 // Setup float order

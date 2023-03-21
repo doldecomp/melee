@@ -1,6 +1,7 @@
 #ifndef _cobj_h_
 #define _cobj_h_
 
+#include <dolphin/mtx/types.h>
 #include <baselib/aobj.h>
 #include <baselib/object.h>
 #include <baselib/wobj.h>

@@ -4,6 +4,7 @@
 #include <common_structs.h>
 #include <placeholder.h>
 #include <platform.h>
+#include <dolphin/mtx/types.h>
 
 typedef struct _ftZeldaAttributes {
     f32 x0;

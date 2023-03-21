@@ -8,6 +8,8 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
+#include <dolphin/mtx/types.h>
+
 f32 ftGameWatch_SpecialN_SetFloatOrder1(void)
 {
     return 2.5f;

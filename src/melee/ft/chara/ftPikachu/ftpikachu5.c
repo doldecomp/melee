@@ -8,6 +8,8 @@
 #include "ft/ft_unknown_006.h"
 #include "it/code_8027CF30.h"
 
+#include <dolphin/mtx/types.h>
+
 bool ftPikachu_CheckProperty_801275CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
