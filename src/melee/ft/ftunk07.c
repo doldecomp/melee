@@ -1,4 +1,4 @@
-#include <Runtime/platform.h>
+#include <platform.h>
 
 /* static */ void lbl_8008C388(void);
 /* static */ void lbl_8008C390(void);

@@ -3,10 +3,10 @@
 
 #include "ft/forward.h"
 
+#include <platform.h>
 #include <dolphin/mtx.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
-#include <Runtime/platform.h>
 
 void func_8007C930(Fighter*, f32);
 void func_8007C98C(Fighter*, f32 vel, f32, f32 gr_friction);

@@ -1,7 +1,7 @@
 #ifndef _vi_h_
 #define _vi_h_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 s32 VIGetTvFormat(void);
 void VIConfigure(s32);

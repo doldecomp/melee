@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_DEBUG_H
 #define SYSDOLPHIN_BASELIB_DEBUG_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 ATTRIBUTE_NORETURN void __assert(char*, u32, char*);
 

@@ -3,8 +3,8 @@
 
 #include "gr/forward.h"
 
+#include <platform.h>
 #include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
 
 struct grDynamicAttr_UnkStruct {
     grDynamicAttr_UnkStruct* next;

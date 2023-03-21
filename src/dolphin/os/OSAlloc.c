@@ -1,6 +1,6 @@
+#include <platform.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSAlloc.h>
-#include <Runtime/platform.h>
 
 static Heap* HeapArray;
 static ssize_t NumHeaps;

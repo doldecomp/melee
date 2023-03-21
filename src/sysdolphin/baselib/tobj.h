@@ -1,11 +1,11 @@
 #ifndef _hsd_tobj_h_
 #define _hsd_tobj_h_
 
+#include <platform.h>
 #include <baselib/fobj.h>
 #include <baselib/forward.h>
 #include <baselib/object.h>
 #include <baselib/texp.h>
-#include <Runtime/platform.h>
 
 #define TOBJ_ANIM 0x10
 

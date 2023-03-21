@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_GX_GXBUMP_H
 #define DOLPHIN_GX_GXBUMP_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 void __GXUpdateBPMask(void);
 void GXSetIndTexCoordScale(s32, s32, s32);

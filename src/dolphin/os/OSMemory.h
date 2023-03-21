@@ -1,7 +1,7 @@
 #ifndef __DOLPHIN_OSMEMORY_H_
 #define __DOLPHIN_OSMEMORY_H_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 extern volatile u16 __MEMRegs[64] AT_ADDRESS(0xCC004000);
 

@@ -3,9 +3,9 @@
 
 #include "ft/types.h"
 
+#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/forward.h>
-#include <Runtime/platform.h>
 
 extern char lbl_803CEA98[];
 extern char lbl_803CEAA4[];

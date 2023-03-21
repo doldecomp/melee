@@ -17,6 +17,8 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <platform.h>
+#include <runtime.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <baselib/archive.h>
@@ -28,8 +30,6 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 #include <MSL/trigf.h>
-#include <Runtime/platform.h>
-#include <Runtime/runtime.h>
 
 /// Combo Count Logic
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID)

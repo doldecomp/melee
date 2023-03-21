@@ -1,7 +1,7 @@
 #ifndef MELEE_GM_CODE_801601C4_H
 #define MELEE_GM_CODE_801601C4_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 struct datetime {
     u16 year;

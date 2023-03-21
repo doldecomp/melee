@@ -1,8 +1,8 @@
 #ifndef DOLPHIN_OS_OSRTC
 #define DOLPHIN_OS_OSRTC
 
+#include <platform.h>
 #include <dolphin/os/forward.h>
-#include <Runtime/platform.h>
 
 typedef struct OSSram {
     u16 checkSum;

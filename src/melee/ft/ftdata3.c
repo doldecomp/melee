@@ -8,7 +8,7 @@
 #include "ftMasterHand/ftMasterHand_33.h"
 #include "ftMasterHand/ftMasterHand_34.h"
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 ActionState ActionStateList[] = {
     {

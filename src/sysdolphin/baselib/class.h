@@ -1,9 +1,9 @@
 #ifndef _class_h_
 #define _class_h_
 
+#include <platform.h>
 #include <baselib/debug.h>
 #include <baselib/forward.h>
-#include <Runtime/platform.h>
 
 #define HSD_CLASS_INFO(o) ((HSD_ClassInfo*) o)
 #define HSD_CLASS_METHOD(o) (((HSD_Class*) o)->class_info)

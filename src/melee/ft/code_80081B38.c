@@ -8,8 +8,8 @@
 #include "mp/mplib.h"
 
 #include <placeholder.h>
+#include <platform.h>
 #include <MSL/trigf.h>
-#include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO
 

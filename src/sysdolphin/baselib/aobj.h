@@ -1,13 +1,13 @@
 #ifndef _aobj_h_
 #define _aobj_h_
 
+#include <platform.h>
 #include <baselib/fobj.h>
 #include <baselib/forward.h>
 #include <baselib/id.h>
 #include <baselib/list.h>
 #include <baselib/objalloc.h>
 #include <baselib/object.h>
-#include <Runtime/platform.h>
 
 #define AOBJ_REWINDED (1 << 26)
 #define AOBJ_FIRST_PLAY (1 << 27)

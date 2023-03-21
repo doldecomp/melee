@@ -1,7 +1,7 @@
+#include <Gecko_setjmp.h>
 #include <string.h>
 #include <baselib/__baselib.h>
 #include <baselib/baselib_unknown_008.h>
-#include <Runtime/Gecko_setjmp.h>
 
 void func_803B3344(u8 byte)
 {

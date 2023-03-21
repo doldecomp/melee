@@ -7,10 +7,10 @@
 
 #include "it/types.h"
 
+#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <Runtime/platform.h>
 
 extern HSD_ObjAllocData itemAllocData;
 extern HSD_ObjAllocData unkAllocData1;

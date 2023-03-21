@@ -1,11 +1,11 @@
 #ifndef _shadow_h_
 #define _shadow_h_
 
+#include <platform.h>
 #include <baselib/cobj.h>
 #include <baselib/list.h>
 #include <baselib/objalloc.h>
 #include <baselib/tobj.h>
-#include <Runtime/platform.h>
 
 struct HSD_Shadow {
     HSD_SList* objects; // 0x0

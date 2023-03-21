@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTDONKEY_FTDONKEY_SPECIALS_H
 #define MELEE_FT_CHARA_FTDONKEY_FTDONKEY_SPECIALS_H
 
+#include <platform.h>
 #include <baselib/forward.h>
-#include <Runtime/platform.h>
 
 void ftDonkey_SpecialAirS_StartAction(HSD_GObj* gobj);
 void ftDonkey_8010E2BC(HSD_GObj* gobj);

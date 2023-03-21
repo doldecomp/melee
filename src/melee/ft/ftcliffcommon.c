@@ -8,7 +8,7 @@
 #include "mp/mplib.h"
 #include "pl/pl_unknown_001.h"
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 bool func_80081298(HSD_GObj* gobj)
 {

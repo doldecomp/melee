@@ -3,8 +3,8 @@
 
 #include "dolphin/os/OSReset.h"
 
-#include <Runtime/__mem.h>
-#include <Runtime/platform.h>
+#include <__mem.h>
+#include <platform.h>
 
 #define PAD3_BUTTON_ADDR 0x800030E4
 #define EXCEPTIONMASK_ADDR 0x80000044

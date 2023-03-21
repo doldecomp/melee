@@ -3,9 +3,9 @@
 
 #include "pl/types.h"
 
+#include <platform.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <Runtime/platform.h>
 
 typedef struct _StaticPlayer {
     /// @at{0} @sz{4}

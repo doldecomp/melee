@@ -3,11 +3,11 @@
 
 #include "pl/player.h"
 
+#include <platform.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
 #include <baselib/tobj.h>
-#include <Runtime/platform.h>
 
 typedef struct _HudFlags {
     u8 explode_animation : 1;

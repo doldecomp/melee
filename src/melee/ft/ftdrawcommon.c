@@ -6,13 +6,13 @@
 #include "ft/ftlib.h"
 
 #include <placeholder.h>
+#include <platform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/state.h>
-#include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO
 static char lbl_803C0EB0[] = "translate";

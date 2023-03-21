@@ -3,8 +3,8 @@
 
 #include "ft/forward.h"
 
+#include <platform.h>
 #include <baselib/forward.h>
-#include <Runtime/platform.h>
 
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj);
 void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj);

@@ -6,8 +6,8 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
+#include <platform.h>
 #include <baselib/gobj.h>
-#include <Runtime/platform.h>
 
 typedef enum ftNessAction {
     AS_NESS_ATTACKS4 = ASID_MAX,

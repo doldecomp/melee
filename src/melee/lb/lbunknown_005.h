@@ -1,7 +1,7 @@
 #ifndef MELEE_LB_LBUNKNOWN_005_H
 #define MELEE_LB_LBUNKNOWN_005_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 void func_80019AAC(Event);
 void func_8001C5BC(void);

@@ -1,7 +1,7 @@
 #ifndef __MEM_TRK_H__
 #define __MEM_TRK_H__
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 SECTION_INIT void* TRK_memcpy(void* dst, const void* src, unsigned long n);
 

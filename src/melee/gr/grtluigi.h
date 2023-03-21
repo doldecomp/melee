@@ -1,9 +1,9 @@
 #ifndef MELEE_GR_GRTLUIGI_H
 #define MELEE_GR_GRTLUIGI_H
 
+#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/forward.h>
-#include <Runtime/platform.h>
 
 void lbl_80221D9C(HSD_GObj*);
 bool lbl_80221DC8(HSD_GObj*);

@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_OS_OSLINK_H
 #define DOLPHIN_OS_OSLINK_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 void __OSModuleInit(void);
 

@@ -1,8 +1,8 @@
 #ifndef _STDIO_H_
 #define _STDIO_H_
 
+#include <platform.h>
 #include <stdarg.h>
-#include <Runtime/platform.h>
 
 typedef struct {
     uint open_mode : 2;

@@ -1,7 +1,7 @@
 #ifndef MELEE_LB_TYPES_H
 #define MELEE_LB_TYPES_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef struct _UnkAnimStruct {
     unk_t x0_data;

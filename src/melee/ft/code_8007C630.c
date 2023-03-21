@@ -13,7 +13,7 @@
 #include "lb/lbunknown_001.h"
 
 #include <placeholder.h>
-#include <Runtime/platform.h>
+#include <platform.h>
 
 #ifdef MWERKS_GEKKO
 

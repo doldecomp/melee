@@ -1,8 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_GOBJPROC_H
 #define SYSDOLPHIN_BASELIB_GOBJPROC_H
 
+#include <platform.h>
 #include <baselib/forward.h>
-#include <Runtime/platform.h>
 
 struct HSD_GObjProc {
     /* 0x00 */ HSD_GObjProc* child;

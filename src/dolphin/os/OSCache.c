@@ -1,11 +1,11 @@
 #include <placeholder.h>
+#include <platform.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <MetroTRK/intrinsics.h>
-#include <Runtime/platform.h>
 
 #define MSR_IR 0x00000020
 #define MSR_DR 0x00000010

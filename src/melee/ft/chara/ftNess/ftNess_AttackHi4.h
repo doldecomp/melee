@@ -3,8 +3,8 @@
 
 #include "ft/forward.h"
 
+#include <platform.h>
 #include <baselib/forward.h>
-#include <Runtime/platform.h>
 
 void ftNess_YoyoItemDespawn(HSD_GObj*);
 

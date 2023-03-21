@@ -1,7 +1,7 @@
 #ifndef __DOLPHIN_OSALLOC_H_
 #define __DOLPHIN_OSALLOC_H_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef struct _HeapCell {
     struct _HeapCell* prev;

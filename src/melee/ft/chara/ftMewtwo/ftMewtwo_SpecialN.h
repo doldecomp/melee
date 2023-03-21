@@ -3,9 +3,9 @@
 
 #include "ft/forward.h"
 
+#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/forward.h>
-#include <Runtime/platform.h>
 
 void ftMewtwo_SpecialN_GetPos(Fighter* fp, Vec3* sp38);
 void ftMewtwo_SpecialN_SetRecoil(HSD_GObj* gobj);

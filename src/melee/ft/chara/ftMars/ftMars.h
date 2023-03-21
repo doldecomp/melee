@@ -3,8 +3,8 @@
 
 #include "ft/fighter.h"
 
+#include <platform.h>
 #include <baselib/gobj.h>
-#include <Runtime/platform.h>
 
 extern ActionState as_table_mars[];
 extern char lbl_803CF820[];

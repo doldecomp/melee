@@ -3,7 +3,7 @@
 
 #include "ft/forward.h"
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 int ftMario_SpecialN_VitaminRandom(HSD_GObj*);
 void ftMario_SpecialN_StartAction(HSD_GObj*);

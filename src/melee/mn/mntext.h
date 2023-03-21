@@ -2,6 +2,6 @@
 #define _mntext_h_
 
 #include <common_structs.h>
-#include <Runtime/platform.h>
+#include <platform.h>
 
 #endif

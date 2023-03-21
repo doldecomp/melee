@@ -1,4 +1,4 @@
-#include <Runtime/__mem.h>
+#include <__mem.h>
 
 void* memset(void* dst, int val, unsigned long /*size_t*/ n)
 {

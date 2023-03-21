@@ -3,7 +3,7 @@
 
 #include "ft/fighter.h"
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 void func_80042374(CollData*, f32, f32, f32);
 void func_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj*, HSD_JObj*,

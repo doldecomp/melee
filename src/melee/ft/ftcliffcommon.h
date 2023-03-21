@@ -3,8 +3,8 @@
 
 #include "ft/fighter.h"
 
+#include <platform.h>
 #include <baselib/gobj.h>
-#include <Runtime/platform.h>
 
 bool func_80081298(HSD_GObj* gobj);
 void func_80081370(HSD_GObj* gobj);

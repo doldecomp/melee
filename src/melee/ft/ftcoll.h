@@ -3,9 +3,9 @@
 
 #include "ft/fighter.h"
 
+#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobjproc.h>
-#include <Runtime/platform.h>
 
 void func_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
                    s32 attackID); // Combo Count Logic //

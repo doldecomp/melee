@@ -1,10 +1,10 @@
 #include <common_structs.h>
 #include <placeholder.h>
+#include <runtime.h>
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/forward.h>
 #include <dolphin/gx/GXFrameBuf.h>
-#include <Runtime/runtime.h>
 
 Vec2 const lbl_804DE220 = { 256.0F, 0.0F };
 Vec2 const lbl_804DE228 = { 176.0F, 0.0F };

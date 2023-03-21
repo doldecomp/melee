@@ -4,8 +4,8 @@
 #ifndef DOLPHIN_OS_OS_H
 #define DOLPHIN_OS_OS_H
 
+#include <platform.h>
 #include <dolphin/os/OSContext.h>
-#include <Runtime/platform.h>
 
 extern vu32 __DIRegs[0x10] AT_ADDRESS(0xCC006000);
 

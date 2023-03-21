@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_FTDRAWCOMMON_H
 #define MELEE_FT_FTDRAWCOMMON_H
 
+#include <platform.h>
 #include <dolphin/mtx/types.h>
 #include <baselib/gobj.h>
-#include <Runtime/platform.h>
 
 void func_80080E18(HSD_GObj*, long);
 MtxPtr func_8008051C(HSD_GObj*, MtxPtr);

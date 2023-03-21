@@ -1,4 +1,4 @@
-#include <Runtime/platform.h>
+#include <platform.h>
 
 enum_t lbl_803CF2A0[] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,

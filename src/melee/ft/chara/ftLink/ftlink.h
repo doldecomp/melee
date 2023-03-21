@@ -4,8 +4,8 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
+#include <platform.h>
 #include <baselib/gobj.h>
-#include <Runtime/platform.h>
 
 typedef struct _ftLinkAttributes {
     s32 x0;

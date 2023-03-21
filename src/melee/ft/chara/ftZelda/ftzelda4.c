@@ -13,7 +13,7 @@
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 // 8013ADB4 - 8013AE30 (0x7C bytes)
 // https://decomp.me/scratch/LbMVE

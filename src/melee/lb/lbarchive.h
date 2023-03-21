@@ -1,8 +1,8 @@
 #ifndef _lbarchive_h_
 #define _lbarchive_h_
 
+#include <platform.h>
 #include <baselib/archive.h>
-#include <Runtime/platform.h>
 
 void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length);
 void func_80016EFC(void);

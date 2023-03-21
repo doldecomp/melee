@@ -1,4 +1,4 @@
-#include <Runtime/platform.h>
+#include <platform.h>
 
 int lbl_803C5520[] = {
     81, 78, 75, 82, 79, 76, 83, 80, 77, 89, 88, 87,

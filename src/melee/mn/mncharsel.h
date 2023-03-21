@@ -2,8 +2,8 @@
 #define _mncharsel_h_
 
 #include <common_structs.h>
+#include <platform.h>
 #include <baselib/forward.h>
-#include <Runtime/platform.h>
 
 typedef enum _Mode {
     Mode_Time,

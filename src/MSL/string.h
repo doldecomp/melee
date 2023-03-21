@@ -1,7 +1,7 @@
 #ifndef MSL_STRING_H
 #define MSL_STRING_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 char* strncpy(char* ATTRIBUTE_RESTRICT dst, const char* ATTRIBUTE_RESTRICT src,
               unsigned long n);

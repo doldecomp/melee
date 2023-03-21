@@ -1,9 +1,9 @@
 #include <common_structs.h>
 #include <placeholder.h>
+#include <runtime.h>
 #include <dolphin/gx/__GXBump.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/GXPixel.h>
-#include <Runtime/runtime.h>
 
 #ifdef MWERKS_GEKKO
 
