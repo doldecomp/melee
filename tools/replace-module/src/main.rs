@@ -1,9 +1,11 @@
 use anyhow::Result;
 use clap::Parser;
 use globset::{Glob, GlobSet, GlobSetBuilder};
+use itertools::Itertools;
 use lazy_static::lazy_static;
 use log::{debug, error, info, warn};
 use regex::Regex;
+use std::collections::{HashMap, HashSet};
 use std::path::Path;
 use std::{env, fs};
 use walkdir::WalkDir;
@@ -12,7 +14,7 @@ use walkdir::WalkDir;
 #[command(author, version, about, long_about = None)]
 struct Opts {
     module: String,
-    symbols: Vec<String>,
+    symbols: String,
 }
 
 lazy_static! {
@@ -30,13 +32,15 @@ fn main() -> Result<()> {
     let cli: Opts = Opts::parse();
     melee_utils::set_current_dir()?;
 
-    let addrs: Vec<String> = cli
-        .symbols
-        .iter()
-        .filter_map(|s| SYMBOL_REGEX.captures(s).map(|c| c[2].to_string()))
-        .collect();
+    let addrs = SYMBOL_REGEX
+        .find_iter(&cli.symbols)
+        .map(|m| m.as_str().to_string())
+        .into_iter()
+        .unique()
+        .join("|");
 
-    let regex = Regex::new(&format!(r"\b(lbl|func)_({})\b", addrs.join("|")))?;
+    let regex = Regex::new(&format!(r"\b(lbl|func)_({})\b", addrs))?;
+    debug!("{regex}");
 
     for entry in WalkDir::new(".") {
         let entry = entry?;

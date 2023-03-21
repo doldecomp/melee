@@ -310,6 +310,7 @@ dependencies = [
  "clap",
  "env_logger",
  "globset",
+ "itertools",
  "lazy_static",
  "log",
  "melee-utils",
