@@ -152,8 +152,8 @@ void func_8014F98C(s32 arg0, s32* arg1, s32* arg2)
     }
 }
 
-/// @remarks UB warning: this function may use offset uninitialized
-unk_t func_8014F9A4(enum_t arg0)
+/// @warning UB warning: this function may use offset uninitialized
+char* func_8014F9A4(enum_t arg0)
 {
     int offset;
 
