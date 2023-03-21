@@ -131,17 +131,17 @@ void ftCaptain_OnItemDrop(HSD_GObj* gobj, bool bool1)
 
 void ftCaptain_OnLoadForGanon(Fighter* fp)
 {
-    PUSH_ATTRS(fp, ftCaptainAttributes);
+    PUSH_ATTRS(fp, ftCaptain_DatAttrs);
 }
 
 void ftCaptain_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2224_flag.bits.b7 = true;
-    PUSH_ATTRS(fp, ftCaptainAttributes);
+    PUSH_ATTRS(fp, ftCaptain_DatAttrs);
 }
 
 void ftCaptain_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(gobj, ftCaptainAttributes);
+    COPY_ATTRS(gobj, ftCaptain_DatAttrs);
 }

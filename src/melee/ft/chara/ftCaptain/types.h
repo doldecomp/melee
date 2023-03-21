@@ -10,7 +10,7 @@ struct ftCaptain_FighterVars {
     /* 0x2230 */ uint during_specials;
 };
 
-struct ftCaptainAttributes {
+struct ftCaptain_DatAttrs {
     f32 specialn_stick_range_y_neg;
     f32 specialn_stick_range_y_pos;
     f32 specialn_angle_diff;

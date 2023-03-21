@@ -10,154 +10,154 @@
  * @at{2230} @sz{4}
  */
 
-/** @struct ftCaptainAttributes
+/** @struct ftCaptain_DatAttrs
  * @sz{8C}
  */
 
-/** @var ftCaptainAttributes::specialn_stick_range_y_neg
+/** @var ftCaptain_DatAttrs::specialn_stick_range_y_neg
  * Minimum control stick range required for downward angle (Negative Y).
  * @at{0} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialn_stick_range_y_pos
+/** @var ftCaptain_DatAttrs::specialn_stick_range_y_pos
  * Minimum control stick range required for upward angle (Positive Y).
  * @at{4} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialn_angle_diff
+/** @var ftCaptain_DatAttrs::specialn_angle_diff
  * Maximum angle change from control stick input.
  * @at{8} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialn_vel_x
+/** @var ftCaptain_DatAttrs::specialn_vel_x
  * Momentum gained from aerial Falcon/Warlock Punch.
  * @at{C} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialn_vel_mul
+/** @var ftCaptain_DatAttrs::specialn_vel_mul
  * Additional momentum from angled Falcon/Warlock Punch.
  * @at{10} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_gr_vel_x
+/** @var ftCaptain_DatAttrs::specials_gr_vel_x
  * @at{14} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_grav
+/** @var ftCaptain_DatAttrs::specials_grav
  * @at{18} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_terminal_vel
+/** @var ftCaptain_DatAttrs::specials_terminal_vel
  * @at{1C} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_unk0
+/** @var ftCaptain_DatAttrs::specials_unk0
  * @at{20} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_unk1
+/** @var ftCaptain_DatAttrs::specials_unk1
  * @at{24} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_unk2
+/** @var ftCaptain_DatAttrs::specials_unk2
  * @at{28} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_unk3
+/** @var ftCaptain_DatAttrs::specials_unk3
  * @at{2C} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_unk4
+/** @var ftCaptain_DatAttrs::specials_unk4
  * @at{30} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_unk5
+/** @var ftCaptain_DatAttrs::specials_unk5
  * @remarks All of these Unk variables are unused.
  * @at{34} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_miss_landing_lag
+/** @var ftCaptain_DatAttrs::specials_miss_landing_lag
  * @at{38} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specials_hit_landing_lag
+/** @var ftCaptain_DatAttrs::specials_hit_landing_lag
  * @at{3C} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialhi_air_friction_mul
+/** @var ftCaptain_DatAttrs::specialhi_air_friction_mul
  * @at{40} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialhi_horz_vel
+/** @var ftCaptain_DatAttrs::specialhi_horz_vel
  * @at{44} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialhi_freefall_air_spd_mul
+/** @var ftCaptain_DatAttrs::specialhi_freefall_air_spd_mul
  * @at{48} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialhi_landing_lag
+/** @var ftCaptain_DatAttrs::specialhi_landing_lag
  * @at{4C} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialhi_unk0
+/** @var ftCaptain_DatAttrs::specialhi_unk0
  * @at{50} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialhi_unk1
+/** @var ftCaptain_DatAttrs::specialhi_unk1
  * @at{54} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialhi_input_var
+/** @var ftCaptain_DatAttrs::specialhi_input_var
  * @at{58} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialhi_unk2
+/** @var ftCaptain_DatAttrs::specialhi_unk2
  * @at{5C} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialhi_catch_grav
+/** @var ftCaptain_DatAttrs::specialhi_catch_grav
  * @at{60} @sz{4}
  */
 
-/** @var ftCaptainAttributes::specialhi_air_var
+/** @var ftCaptain_DatAttrs::specialhi_air_var
  * @at{64} @sz{4}
  */
 
-/** @var ftCaptainAttributes::x68
+/** @var ftCaptain_DatAttrs::x68
  * Completely unknown.
  * @at{68} @sz{4}
  */
 
-/** @var ftCaptainAttributes::speciallw_unk1
+/** @var ftCaptain_DatAttrs::speciallw_unk1
  * @at{6C} @sz{4}
  */
 
-/** @var ftCaptainAttributes::speciallw_flame_particle_angle
+/** @var ftCaptain_DatAttrs::speciallw_flame_particle_angle
  * @at{70} @sz{4}
  */
 
-/** @var ftCaptainAttributes::speciallw_on_hit_spd_modifier
+/** @var ftCaptain_DatAttrs::speciallw_on_hit_spd_modifier
  * @at{74} @sz{4}
  */
 
-/** @var ftCaptainAttributes::speciallw_unk2
+/** @var ftCaptain_DatAttrs::speciallw_unk2
  * @at{78} @sz{4}
  */
 
-/** @var ftCaptainAttributes::speciallw_ground_lag_mul
+/** @var ftCaptain_DatAttrs::speciallw_ground_lag_mul
  * @at{7C} @sz{4}
  */
 
-/** @var ftCaptainAttributes::speciallw_landing_lag_mul
+/** @var ftCaptain_DatAttrs::speciallw_landing_lag_mul
  * @at{80} @sz{4}
  */
 
-/** @var ftCaptainAttributes::speciallw_ground_traction
+/** @var ftCaptain_DatAttrs::speciallw_ground_traction
  * @at{84} @sz{4}
  */
 
-/** @var ftCaptainAttributes::speciallw_air_landing_traction
+/** @var ftCaptain_DatAttrs::speciallw_air_landing_traction
  * @at{88} @sz{4}
  */
 

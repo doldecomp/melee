@@ -187,9 +187,9 @@ void ftGameWatch_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     void** items = fp->x10C_ftData->x48_items;
 
-    fp->x2222_flag.bits.b6 = 0;
-    fp->x2223_flag.bits.b1 = 1;
-    fp->x2224_flag.bits.b0 = 1;
+    fp->x2222_flag.bits.b6 = false;
+    fp->x2223_flag.bits.b1 = true;
+    fp->x2224_flag.bits.b0 = true;
 
     PUSH_ATTRS(fp, ftGameWatchAttributes);
     fp->fv.gw.x2238_panicCharge = ftGw_Panic_Empty;

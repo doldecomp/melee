@@ -42,7 +42,7 @@ void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 /// Calculate angle from control stick input - inline
 f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 {
-    ftCaptainAttributes* tempAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* tempAttrs = fp->x2D4_specialAttributes;
 
     f32 stickRangeMinPos;
     f32 stickRangeMinNeg;
@@ -133,7 +133,7 @@ void ftCaptain_SpecialN_IASA(HSD_GObj* gobj)
 void ftCaptain_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
+    ftCaptain_DatAttrs* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
 
     f32 vel;
 
@@ -183,7 +183,7 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* gobj)
 void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
+    ftCaptain_DatAttrs* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
     s32 ftKind;
     s32 flag;
 

@@ -4,7 +4,7 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-typedef struct ftCaptainAttributes ftCaptainAttributes;
+typedef struct ftCaptain_DatAttrs ftCaptain_DatAttrs;
 typedef union ftCaptain_MotionVars ftCaptain_MotionVars;
 
 typedef enum ftCaptain_MotionState {

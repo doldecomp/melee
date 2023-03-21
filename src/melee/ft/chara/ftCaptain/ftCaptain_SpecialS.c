@@ -131,7 +131,7 @@ static Fighter_MotionStateChangeFlags const transition_flags =
 static void onDetectGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* sa = getFtSpecialAttrsD(fp);
+    ftCaptain_DatAttrs* sa = getFtSpecialAttrsD(fp);
 
     func_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS, transition_flags, NULL,
@@ -248,7 +248,7 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_8007D60C(fp);
@@ -264,7 +264,7 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* gobj)
 void ftCaptain_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -323,7 +323,7 @@ void ftCaptain_SpecialS_Phys(HSD_GObj* gobj)
 void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -345,7 +345,7 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* gobj)
 void ftCaptain_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -371,7 +371,7 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* sa = sa = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* sa = sa = fp->x2D4_specialAttributes;
 
     if (fp->x2208_ftcmd_var2 == 0) {
         func_80084104(gobj);
@@ -411,7 +411,7 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* gobj)
 {
     Fighter* temp_fp = GET_FIGHTER(gobj);
     Fighter* fp;
-    ftCaptainAttributes* captainAttrs = temp_fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = temp_fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -435,7 +435,7 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* gobj)
 void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = fp->x2D4_specialAttributes;
+    ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     if (func_80081D0C(gobj) == true) {
         efLib_DestroyAll(gobj);
@@ -448,7 +448,7 @@ void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* gobj)
 void ftCaptain_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCaptainAttributes* captainAttrs = getFtSpecialAttrsD(fp);
+    ftCaptain_DatAttrs* captainAttrs = getFtSpecialAttrsD(fp);
 
     if (func_80081D0C(gobj) == true) {
         fp->xEC_ground_vel = fp->x80_self_vel.x;
