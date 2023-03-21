@@ -22,8 +22,8 @@ lazy_static! {
             .add(Glob::new("./{asm,docs,src}/**/*.{s,c,h,dox,md}").unwrap());
         builder.build().unwrap()
     };
-    static ref SYMBOL_REGEX: Regex =
-        Regex::new(r"(?:lbl|func_)([[:xdigit:]]{8})").unwrap();
+    static ref SYMBOL_RE: Regex =
+        Regex::new(r"(?:lbl|func)_([[:xdigit:]]{8})").unwrap();
 }
 
 fn main() -> Result<()> {
@@ -31,9 +31,9 @@ fn main() -> Result<()> {
     let cli: Opts = Opts::parse();
     melee_utils::set_current_dir()?;
 
-    let addrs = SYMBOL_REGEX
+    let addrs = SYMBOL_RE
         .captures_iter(&cli.symbols)
-        .filter_map(|m| m.get(1).map(|m| m.as_str()))
+        .map(|c| c[1].to_owned())
         .unique()
         .join("|");
 
