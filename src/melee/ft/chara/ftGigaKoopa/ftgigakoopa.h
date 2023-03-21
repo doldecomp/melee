@@ -23,6 +23,6 @@ void ftGKoopa_LoadSpecialAttrs(HSD_GObj*);
 void ftGKoopa_OnKnockbackEnter(HSD_GObj*);
 void ftGKoopa_OnKnockbackExit(HSD_GObj*);
 void func_8014F98C(s32, s32*, s32*);
-unk_t func_8014F9A4(enum_t);
+char* func_8014F9A4(enum_t);
 
 #endif
