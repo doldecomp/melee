@@ -4,9 +4,16 @@
 #include <sysdolphin/baselib/forward.h>
 #include <Runtime/platform.h>
 
-void ftMario_SpecialLw_SetCall(HSD_GObj* gobj);
-void ftMario_SpecialLw_SetGFX(HSD_GObj* gobj);
-void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj);
-void ftMario_SpecialLw_SetVar(HSD_GObj* gobj);
+void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj);
+void ftMario_SpecialLw_StartAction(HSD_GObj* gobj);
+void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj);
+void ftMario_SpecialLw_Anim(HSD_GObj* gobj);
+void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj);
+void ftMario_SpecialLw_IASA(HSD_GObj* gobj);
+void ftMario_SpecialAirLw_IASA(HSD_GObj* gobj);
+void ftMario_SpecialLw_Phys(HSD_GObj* gobj);
+void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj);
+void ftMario_SpecialLw_Coll(HSD_GObj* gobj);
+void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj);
 
 #endif

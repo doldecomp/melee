@@ -24,7 +24,7 @@ void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj)
     func_8007592C(fp, 0, 0);
 }
 
-void ftMario_SpecialLw_SetGFX(HSD_GObj* gobj)
+static void setGfx(HSD_GObj* gobj)
 {
     void* hsd_obj_ptr;
     Fighter* fp;
@@ -37,7 +37,7 @@ void ftMario_SpecialLw_SetGFX(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-void ftMario_SpecialLw_SetCall(HSD_GObj* gobj)
+static void setCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21DC_callback_OnTakeDamage = &ftMario_SpecialLw_UpdateRot;
@@ -61,11 +61,11 @@ static void doStartAction(HSD_GObj* gobj)
     fp->sv.mr.SpecialLw.groundVelX = (f32) 0;
     fp->sv.mr.SpecialLw.unk = (s32) (sa->speciallw.unk0 + 1);
     fp->sv.mr.SpecialLw.isUnkColl = 0;
-    ftMario_SpecialLw_SetCall(gobj);
-    ftMario_SpecialLw_SetGFX(gobj);
+    setCallbacks(gobj);
+    setGfx(gobj);
 }
 
-void ftMario_SpecialLw_SetVar(HSD_GObj* gobj)
+static void setCmdVar2(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->x2208_ftcmd_var2 = 0;
@@ -81,7 +81,7 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
     u8 _[28];
 #endif
 
-    ftMario_SpecialLw_SetVar(gobj);
+    setCmdVar2(gobj);
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialAirLw, 0, NULL,
                                        0, 1, 0);
     func_8006EBA4(gobj);
@@ -103,7 +103,7 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
     u8 _[28];
 #endif
 
-    ftMario_SpecialLw_SetVar(gobj);
+    setCmdVar2(gobj);
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialAirLw, 0, NULL,
                                        0, 1, 0);
     func_8006EBA4(gobj);
@@ -119,7 +119,7 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj)
+static void unsetCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -135,7 +135,7 @@ void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMario_SpecialLw_SetNULL(gobj);
+        unsetCallbacks(gobj);
         func_8008A2BC(gobj);
     }
 }
@@ -150,7 +150,7 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
         fp->ev.mr.x2234_tornadoCharge = 1;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMario_SpecialLw_SetNULL(gobj);
+        unsetCallbacks(gobj);
         if (0.0 == (f64) sa->speciallw.landing_lag) {
             func_800CC730(gobj);
             return;
