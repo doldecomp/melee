@@ -55,7 +55,7 @@ function gen_header {
     local guard=$(get_include_guard $out_path)
     local text="$guard
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 #endif"
 
