@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"

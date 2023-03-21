@@ -1,8 +1,10 @@
+#include "forward.h"
+#include "ftluigi.h"
+
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftparts.h"
-#include "ftLuigi/ftluigi.h"
 
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action
