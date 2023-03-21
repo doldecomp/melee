@@ -11,6 +11,7 @@
 #include "ftKoopa/types.h"
 #include "ftLuigi/ftLuigi_MotionVars.h"
 #include "ftMario/ftMario_MotionVars.h"
+#include "ftMario/types.h"
 #include "ftMars/types.h"
 #include "ftMasterHand/types.h"
 #include "ftMewtwo/ftMewtwo_MotionVars.h"
