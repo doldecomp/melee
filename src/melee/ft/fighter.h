@@ -6,7 +6,6 @@
 
 #include "ft/types.h"
 #include "lb/lbrefract.h"
-#include "pl/player.h"
 
 /// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers
