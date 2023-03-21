@@ -14,18 +14,16 @@
 
 #include <baselib/random.h>
 
-static int getRandomInt(Fighter* fp, int* arr, int outpos)
+static int pickMegavitamin(Fighter* fp, int* arr, int outpos)
 {
-    int r3 = arr[HSD_Randi(outpos)];
+    int result = arr[HSD_Randi(outpos)];
     fp->ev.mr.x2230_vitaminPrev = fp->ev.mr.x222C_vitaminCurr;
-    fp->ev.mr.x222C_vitaminCurr = r3;
-    return r3;
+    fp->ev.mr.x222C_vitaminCurr = result;
+    return result;
 }
 
-// 0x800E0D1C
-// https://decomp.me/scratch/od8nq
-int ftMario_SpecialN_VitaminRandom(
-    HSD_GObj* gobj) // Get random Megavitamin color combo for Dr. Mario //
+// Get random Megavitamin color combo for Dr. Mario //
+int ftMario_SpecialN_VitaminRandom(HSD_GObj* gobj)
 {
     Fighter* fp;
     int arr[9];
@@ -42,7 +40,7 @@ int ftMario_SpecialN_VitaminRandom(
         }
     }
 
-    r3 = getRandomInt(fp, arr, r3);
+    r3 = pickMegavitamin(fp, arr, r3);
 
     return r3;
 }
