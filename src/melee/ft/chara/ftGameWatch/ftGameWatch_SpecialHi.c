@@ -47,8 +47,8 @@ bool ftGameWatch_ItemCheckRescueRemove(HSD_GObj* gobj)
     enum_t ASID = GET_FIGHTER(gobj)->action_id;
 
     switch (ASID) {
-    case MS_GAMEWATCH_SPECIALHI:
-    case MS_GAMEWATCH_SPECIALAIRHI:
+    case ftGw_MS_SpecialHi:
+    case ftGw_MS_SpecialAirHi:
         return false;
     default:
         return true;
@@ -121,8 +121,8 @@ void ftGameWatch_SpecialHi_StartAction(HSD_GObj* gobj)
     fp->x74_anim_vel.y = 0.0f;
     fp->x80_self_vel.y = 0.0f;
     func_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALHI, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
     func_8006EBA4(gobj);
     func_80088510(fp, 0x46D12, 0x7F, 0x40);
@@ -139,8 +139,8 @@ void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* gobj)
 #endif
 
     func_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALAIRHI, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
     func_8006EBA4(gobj);
     func_80088510(fp, 0x46D12, 0x7F, 0x40);

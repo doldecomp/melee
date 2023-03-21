@@ -91,7 +91,7 @@ bool ftGameWatch_ItemCheckTorchRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->action_id == MS_GAMEWATCH_ATTACKS4)
+    if (fp->action_id == ftGw_MS_AttackS4)
         return false;
 
     return true;
@@ -111,7 +111,7 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* gobj)
 
     fp->x2218_flag.bits.b0 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_ATTACKS4, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftGw_MS_AttackS4, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     func_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemTorchSetup;

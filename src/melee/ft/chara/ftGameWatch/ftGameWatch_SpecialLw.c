@@ -89,8 +89,7 @@ bool ftGameWatch_ItemCheckPanicRemove(HSD_GObj* gobj)
     /// @todo @c enum
     enum_t asid = fp->action_id;
 
-    if (asid >= MS_GAMEWATCH_SPECIALLW_SHOOT &&
-        asid <= MS_GAMEWATCH_SPECIALAIRLW_SHOOT)
+    if (asid >= ftGw_MS_SpecialLw_Shoot && asid <= ftGw_MS_SpecialAirLw_Shoot)
     {
         return false;
     }
@@ -152,7 +151,7 @@ void ftGameWatch_SpecialLw_StartAction(HSD_GObj* gobj)
 
     fp->x80_self_vel.y = 0;
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALLW, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, 0, NULL, 0, 1, 0);
 
     func_8006EBA4(gobj);
     ftGameWatch_SpecialLw_SetVars(gobj);
@@ -171,8 +170,7 @@ void ftGameWatch_SpecialAirLw_StartAction(HSD_GObj* gobj)
     fp->x80_self_vel.x /= sa->x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE;
     fp->x80_self_vel.y = 0;
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALAIRLW, 0, NULL, 0, 1,
-                              0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, 0, NULL, 0, 1, 0);
 
     func_8006EBA4(gobj);
     ftGameWatch_SpecialLw_SetVars(gobj);
@@ -391,9 +389,8 @@ void ftGameWatch_SpecialLw_GroundToAir(HSD_GObj* gobj)
 #endif
 
     func_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALAIRLW,
-                              transition_flags0, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags0,
+                              NULL, fp->x894_currentAnimFrame, 1, 0);
 
     ftGameWatch_SpecialLw_UpdateVarsColl(gobj);
 }
@@ -409,8 +406,8 @@ void ftGameWatch_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 
     func_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALLW, transition_flags0,
-                              NULL, fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, transition_flags0, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
 
     ftGameWatch_SpecialLw_UpdateVarsColl(gobj);
 }
@@ -440,8 +437,8 @@ static Fighter_MotionStateChangeFlags const transition_flags1 =
 
 void ftGameWatch_SpecialLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
 {
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALLW, transition_flags1,
-                              NULL, anim_frame - 1, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, transition_flags1, NULL,
+                              anim_frame - 1, 1, 0);
 
     func_8006EBA4(gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
@@ -449,8 +446,8 @@ void ftGameWatch_SpecialLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
 
 void ftGameWatch_SpecialAirLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
 {
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALAIRLW,
-                              transition_flags1, NULL, anim_frame - 1, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags1,
+                              NULL, anim_frame - 1, 1, 0);
 
     func_8006EBA4(gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
@@ -469,8 +466,8 @@ void ftGameWatch_SpecialLwCatch_Anim(HSD_GObj* gobj)
         return;
     }
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALLW, transition_flags1,
-                              NULL, 4, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, transition_flags1, NULL,
+                              4, 1, 0);
 
     func_8006EBA4(gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
@@ -489,8 +486,8 @@ void ftGameWatch_SpecialAirLwCatch_Anim(HSD_GObj* gobj)
         return;
     }
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALAIRLW,
-                              transition_flags1, NULL, 4, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags1,
+                              NULL, 4, 1, 0);
 
     func_8006EBA4(gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
@@ -534,7 +531,7 @@ void ftGameWatch_SpecialLwCatch_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALAIRLW_CATCH,
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw_Catch,
                               transition_flags0, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -545,9 +542,8 @@ void ftGameWatch_SpecialAirLwCatch_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALLW_CATCH,
-                              transition_flags0, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw_Catch, transition_flags0,
+                              NULL, fp->x894_currentAnimFrame, 1, 0);
 }
 
 /// Check to enter grounded or aerial Oil Panic Fill
@@ -565,9 +561,9 @@ void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* gobj)
         func_800BFFD0(fp, 5, 0);
 
     if (fp->ground_or_air == GA_Ground)
-        asid = MS_GAMEWATCH_SPECIALLW_CATCH;
+        asid = ftGw_MS_SpecialLw_Catch;
     else
-        asid = MS_GAMEWATCH_SPECIALAIRLW_CATCH;
+        asid = ftGw_MS_SpecialAirLw_Catch;
 
     Fighter_ChangeMotionState(gobj, asid, 0, NULL, 0, 1, 0);
     ftGameWatch_SpecialLw_UpdateBucketModel(gobj);
@@ -651,7 +647,7 @@ void ftGameWatch_SpecialLwShoot_GroundToAir(HSD_GObj* gobj)
 
     func_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALAIRLW_SHOOT,
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw_Shoot,
                               transition_flags0, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 
@@ -666,9 +662,8 @@ void ftGameWatch_SpecialAirLwShoot_AirToGround(HSD_GObj* gobj)
 
     func_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALLW_SHOOT,
-                              transition_flags0, NULL,
-                              fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw_Shoot, transition_flags0,
+                              NULL, fp->x894_currentAnimFrame, 1, 0);
 
     ftGameWatch_SpecialLw_UpdateBucketModel(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemPanicSetup;
@@ -685,8 +680,7 @@ void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirLwShoot_ReleaseOil
     /// @todo Please for the love of god stop copy-pasting code
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALLW_SHOOT, 0, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw_Shoot, 0, NULL, 0, 1, 0);
 
     func_8006EBA4(gobj);
 
@@ -722,8 +716,8 @@ void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(gobj, MS_GAMEWATCH_SPECIALAIRLW_SHOOT, 0, NULL,
-                              0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw_Shoot, 0, NULL, 0, 1,
+                              0);
 
     func_8006EBA4(gobj);
 
