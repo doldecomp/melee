@@ -1,0 +1,6 @@
+#ifndef MELEE_FT_CHARA_FTZELDA_FTZELDA_SPECIALN_H
+#define MELEE_FT_CHARA_FTZELDA_FTZELDA_SPECIALN_H
+
+#include <platform.h>
+
+#endif
