@@ -3,11 +3,9 @@ use clap::Parser;
 use globset::{Glob, GlobSet, GlobSetBuilder};
 use itertools::Itertools;
 use lazy_static::lazy_static;
-use log::{debug, error, info, warn};
+use log::{debug, info};
 use regex::Regex;
-use std::collections::{HashMap, HashSet};
-use std::path::Path;
-use std::{env, fs};
+use std::{fs, path::Path};
 use walkdir::WalkDir;
 
 #[derive(Parser)]
@@ -39,7 +37,7 @@ fn main() -> Result<()> {
         .join("|");
 
     let regex = Regex::new(&format!(r"\b(?:lbl|func)_({})\b", addrs))?;
-    debug!("{regex}");
+    info!("Regex is `{regex}`.");
 
     for entry in WalkDir::new(".") {
         let entry = entry?;
@@ -54,19 +52,10 @@ fn main() -> Result<()> {
 
 fn replace_symbols(module: &str, regex: &Regex, path: &Path) -> Result<()> {
     let content = fs::read_to_string(path)?;
-    debug!("{path:?}");
+    debug!("Searching {path:?}.");
 
     let expr = format!("{module}_$1");
     let replaced = regex.replace_all(&content, expr);
-    // debug!(
-    //     "{}",
-    //     regex
-    //         .find_iter(&content)
-    //         .map(|m| m.as_str().to_string())
-    //         .collect_vec()
-    //         .join("\n")
-    // );
-    debug!("{regex}");
     fs::write(path, replaced.as_ref())?;
 
     Ok(())
