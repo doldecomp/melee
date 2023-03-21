@@ -1038,7 +1038,7 @@ Fighter_DemoStrings* lbl_803C2468[FTKIND_MAX] = {
 };
 
 Fighter_DemoGetter lbl_803C24EC[FTKIND_MAX] = {
-    ftMario_func_800E0CE0,
+    ftMario_800E0CE0,
     NULL,
     NULL,
     NULL,

@@ -67,6 +67,7 @@ void ftMario_OnLoadForDrMario(Fighter* fp)
 
 void ftMario_OnLoad(HSD_GObj* gobj)
 {
+    /// @todo #GET_FIGHTER is too much stack. Problem with #PUSH_ATTRS?
     Fighter* fp = gobj->user_data;
     ftData* ftDataInfo = fp->x10C_ftData;
     void** items = ftDataInfo->x48_items;
@@ -83,7 +84,6 @@ void ftMario_OnLoad(HSD_GObj* gobj)
     }
 }
 
-// 0x800E0A00
 void ftMario_OnTakeDamage(HSD_GObj* gobj)
 {
     ftMario_SpecialS_RemoveCape(gobj);
@@ -139,7 +139,7 @@ void ftMario_func_800E0CAC(s32 arg0, s32* arg1, s32* arg2)
     }
 }
 
-unk_t ftMario_func_800E0CE0(enum_t arg0)
+unk_t ftMario_800E0CE0(enum_t arg0)
 {
     int offset;
 
