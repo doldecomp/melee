@@ -9,7 +9,7 @@
 #include "ftLink/ftlink.h"
 #include "it/code_8027CF30.h"
 
-void func_80149354(HSD_GObj* gobj)
+void ftCLink_80149354(HSD_GObj* gobj)
 {
     void* temp_r3;
     Fighter* fp;
@@ -39,17 +39,17 @@ void func_80149354(HSD_GObj* gobj)
     }
 }
 
-void func_8014943C(HSD_GObj* gobj)
+void ftCLink_8014943C(HSD_GObj* gobj)
 {
     func_800DED30(gobj);
 }
 
-void func_8014945C(HSD_GObj* gobj)
+void ftCLink_8014945C(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
 }
 
-void func_8014947C(HSD_GObj* gobj)
+void ftCLink_8014947C(HSD_GObj* gobj)
 {
     func_80084280(gobj);
 }
