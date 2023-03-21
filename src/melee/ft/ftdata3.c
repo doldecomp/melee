@@ -10,7 +10,7 @@
 
 #include <platform.h>
 
-ActionState ActionStateList[] = {
+MotionState ActionStateList[] = {
     {
         // 0
         -1,
@@ -3764,7 +3764,7 @@ ActionState ActionStateList[] = {
     },
 };
 
-ActionState lbl_803C52A0[] = {
+MotionState lbl_803C52A0[] = {
     {
         0x0,
         0,

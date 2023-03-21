@@ -6,7 +6,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-extern ActionState as_table_nana[];
+extern MotionState as_table_nana[];
 extern char lbl_803CDB78[];
 extern char lbl_803CDB84[];
 extern Fighter_CostumeStrings lbl_803CDD2C[];

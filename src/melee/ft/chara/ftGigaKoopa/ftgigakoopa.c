@@ -7,7 +7,7 @@
 #include "ftKoopa/ftkoopa.h"
 #include "it/forward.h"
 
-ActionState as_table_gkoopa[] = {
+MotionState as_table_gkoopa[] = {
     { 295, 0x00340011, 0x12000000, lbl_80134F48, lbl_801351B0, lbl_80135438,
       lbl_801354F8, func_800761C8 },
     { 296, 0x003C0011, 0x12000000, lbl_80134F9C, lbl_801351B4, lbl_80135458,
@@ -56,7 +56,7 @@ ActionState as_table_gkoopa[] = {
       lbl_80134A20, func_800761C8 },
 };
 
-ActionState lbl_803D38C8[] = {
+MotionState lbl_803D38C8[] = {
     { 14, 0, 0x01000000, NULL, NULL, func_800C74AC, NULL, NULL },
 };
 

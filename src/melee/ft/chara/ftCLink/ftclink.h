@@ -26,7 +26,7 @@ typedef struct _CLinkAttributes {
     f32 xD8;
 } CLinkAttributes;
 
-extern ActionState as_table_clink[];
+extern MotionState as_table_clink[];
 extern char lbl_803D1240[];
 extern char lbl_803D124C[];
 extern Fighter_CostumeStrings lbl_803D1458[];

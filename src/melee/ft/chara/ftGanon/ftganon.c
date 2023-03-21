@@ -8,7 +8,7 @@
 #include "ftCaptain/ftCaptain_SpecialN.h"
 #include "ftCaptain/ftCaptain_SpecialS.h"
 
-ActionState as_table_ganon[] = {
+MotionState as_table_ganon[] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },

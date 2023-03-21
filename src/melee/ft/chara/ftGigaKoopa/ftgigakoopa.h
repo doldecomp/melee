@@ -5,8 +5,8 @@
 
 #include <baselib/gobj.h>
 
-extern ActionState as_table_gkoopa[];
-extern ActionState lbl_803D38C8[];
+extern MotionState as_table_gkoopa[];
+extern MotionState lbl_803D38C8[];
 extern char lbl_803D38E8[];
 extern char lbl_803D38F4[];
 extern Fighter_CostumeStrings lbl_803D3988[];

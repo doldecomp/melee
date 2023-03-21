@@ -6,7 +6,7 @@
 #include "ft/ftcamera.h"
 #include "ft/types.h"
 
-ActionState as_table_crazyhand[] = {
+MotionState as_table_crazyhand[] = {
     { 295, 0, 0x01000000, lbl_80156404, lbl_80156A70, lbl_80156AB4,
       lbl_80156AD4, func_800761C8 },
     { 296, 0, 0x01000000, lbl_80156404, lbl_80156A70, lbl_80156AB4,

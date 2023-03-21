@@ -6,7 +6,7 @@
 #include "ft/types.h"
 #include "ftNess/ftNess_SpecialLw.h"
 
-ActionState as_table_ness[] = {
+MotionState as_table_ness[] = {
     { 62, 0x00241A09, 0x0A000000, ftNess_AttackS4_Anim, ftNess_AttackS4_IASA,
       ftNess_AttackS4_Phys, ftNess_AttackS4_Coll, func_800761C8 },
     { 66, 0x00240A0A, 0x0B800000, ftNess_AttackHi4_Anim, ftNess_AttackHi4_IASA,

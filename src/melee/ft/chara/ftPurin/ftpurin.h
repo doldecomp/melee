@@ -22,7 +22,7 @@ typedef struct _ftPurinAttributes {
     u8 data_filler_1[0x100 - 0x30];
 } ftPurinAttributes;
 
-extern ActionState as_table_purin[];
+extern MotionState as_table_purin[];
 extern char lbl_803D02F0[];
 extern char lbl_803D02FC[];
 extern Fighter_CostumeStrings lbl_803D0508[];

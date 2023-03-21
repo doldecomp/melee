@@ -6,7 +6,7 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-extern ActionState as_table_iceclimber[];
+extern MotionState as_table_iceclimber[];
 extern char lbl_803CD610[];
 extern char lbl_803CD61C[];
 extern Fighter_CostumeStrings lbl_803CD7C4[];

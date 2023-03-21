@@ -10,7 +10,7 @@
 
 #include <common_structs.h>
 
-ActionState as_table_mars[] = {
+MotionState as_table_mars[] = {
     { 295, 0x00340211, 0x12000000, lbl_80136844, lbl_80136914, lbl_8013691C,
       lbl_801369A4, func_800761C8 },
     { 296, 0x00340211, 0x12000000, lbl_80136ADC, lbl_80136C8C, lbl_80136CFC,

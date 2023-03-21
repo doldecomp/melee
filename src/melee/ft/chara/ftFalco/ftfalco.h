@@ -5,7 +5,7 @@
 
 #include <baselib/gobj.h>
 
-extern ActionState as_table_falco[];
+extern MotionState as_table_falco[];
 extern char lbl_803D1CA8[];
 extern char lbl_803D1CB4[];
 extern Fighter_CostumeStrings lbl_803D1E74[];

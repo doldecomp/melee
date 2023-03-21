@@ -6,7 +6,7 @@
 #include <platform.h>
 #include <baselib/gobj.h>
 
-extern ActionState as_table_mars[];
+extern MotionState as_table_mars[];
 extern char lbl_803CF820[];
 extern char lbl_803CF82C[];
 extern Fighter_CostumeStrings lbl_803CFA18[];

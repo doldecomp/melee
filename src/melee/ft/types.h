@@ -501,7 +501,7 @@ struct S_TEMP1 {
     UnkFlagStruct flags;
 };
 
-struct ActionState {
+struct MotionState {
     enum_t anim_id;
 
     s32 x4_flags;
@@ -793,8 +793,8 @@ struct Fighter {
     /* 0x10 */ enum_t action_id;
     /* 0x14 */ enum_t anim_id;
     /* 0x18 */ s32 x18;
-    /* 0x1C */ ActionState* x1C_actionStateList;
-    /* 0x20 */ ActionState* x20_actionStateList;
+    /* 0x1C */ MotionState* x1C_actionStateList;
+    /* 0x20 */ MotionState* x20_actionStateList;
     /* 0x24 */ struct S_TEMP4* x24;
     /* 0x28 */ u8* x28;
     /* 0x2C */ f32 facing_dir;

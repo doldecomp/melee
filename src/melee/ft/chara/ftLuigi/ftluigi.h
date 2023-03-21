@@ -65,8 +65,8 @@ typedef struct _ftLuigiAttributes {
 
 } ftLuigiAttributes;
 
-extern ActionState as_table_luigi[];
-extern ActionState lbl_803D0868[];
+extern MotionState as_table_luigi[];
+extern MotionState lbl_803D0868[];
 extern char lbl_803D08A8[];
 extern char lbl_803D08B4[];
 extern Fighter_CostumeStrings lbl_803D0AB4[];

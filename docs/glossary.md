@@ -94,7 +94,7 @@ Short for "multiplier" or "multiply."
 
 @section glossary_mv mv
 Stands for "motion variables." Used by #HSD_GObj::user_data structs (such as
-#Fighter::mv) to store polymorphic variables specific to an #ActionState.
+#Fighter::mv) to store polymorphic variables specific to an #MotionState.
 
 @section glossary_phys phys
 Short for "physics."

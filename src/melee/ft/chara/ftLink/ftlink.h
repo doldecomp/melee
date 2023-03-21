@@ -27,7 +27,7 @@ typedef struct _ftLinkAttributes {
     f32 xD8;
 } ftLinkAttributes;
 
-extern ActionState as_table_link[];
+extern MotionState as_table_link[];
 extern char lbl_803C80B8[];
 extern char lbl_803C80C4[];
 extern Fighter_CostumeStrings lbl_803C82B0[];

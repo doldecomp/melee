@@ -5,7 +5,7 @@
 
 #include <baselib/forward.h>
 
-extern ActionState as_table_masterhand[];
+extern MotionState as_table_masterhand[];
 extern char lbl_803D4070[];
 extern char lbl_803D407C[];
 extern Fighter_CostumeStrings lbl_803D40C4[];

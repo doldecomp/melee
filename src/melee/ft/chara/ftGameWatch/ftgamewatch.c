@@ -5,7 +5,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-ActionState as_table_gamewatch[] = {
+MotionState as_table_gamewatch[] = {
     { 46, 0x002C0201, 0x02800000, ftGameWatch_Attack11_Anim,
       ftGameWatch_Attack11_IASA, ftGameWatch_Attack11_Phys,
       ftGameWatch_Attack11_Coll, func_800761C8 },

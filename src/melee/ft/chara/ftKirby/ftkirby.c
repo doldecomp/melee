@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx/types.h>
 
-ActionState as_table_kirby[] = {
+MotionState as_table_kirby[] = {
     { 295, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
     { 296, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
@@ -471,7 +471,7 @@ ftKirby_UnkArrayThing* lbl_803C9FC8[FTKIND_MAX] = {
     NULL, NULL,          NULL,          NULL,          NULL,
 };
 
-ActionState lbl_803CA04C[] = {
+MotionState lbl_803CA04C[] = {
     { 14, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
     { 15, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
     { 16, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },

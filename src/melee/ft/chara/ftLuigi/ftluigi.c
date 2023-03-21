@@ -5,7 +5,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-ActionState as_table_luigi[] = {
+MotionState as_table_luigi[] = {
     { 295, 0x00340111, 0x12000000, ftLuigi_SpecialN_Anim,
       ftLuigi_SpecialN_IASA, ftLuigi_SpecialN_Phys, ftLuigi_SpecialN_Coll,
       func_800761C8 },
@@ -62,7 +62,7 @@ ActionState as_table_luigi[] = {
       ftLuigi_SpecialAirLw_Coll, func_800761C8 },
 };
 
-ActionState lbl_803D0868[] = {
+MotionState lbl_803D0868[] = {
     { 14, 0, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
     { 15, 0, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };

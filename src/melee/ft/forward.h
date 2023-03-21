@@ -5,7 +5,7 @@
 #include <dolphin/mtx/types.h>
 #include <baselib/forward.h>
 
-typedef struct ActionState ActionState;
+typedef struct MotionState MotionState;
 typedef struct Fighter Fighter;
 typedef struct Fighter_CostumeStrings Fighter_CostumeStrings;
 typedef struct Fighter_DemoStrings Fighter_DemoStrings;

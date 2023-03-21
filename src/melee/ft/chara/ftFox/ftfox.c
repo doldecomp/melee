@@ -5,7 +5,7 @@
 #include "ft/types.h"
 #include "ftFox/ftFox_SpecialN.h"
 
-ActionState as_table_fox[] = {
+MotionState as_table_fox[] = {
     { 295, 0x00340111, 0x12000000, ftFox_SpecialNStart_Anim,
       ftFox_SpecialNStart_IASA, ftFox_SpecialNStart_Phys,
       ftFox_SpecialNStart_Coll, func_800761C8 },

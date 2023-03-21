@@ -9,7 +9,7 @@
 #include "ft/types.h"
 #include "ftPikachu/ftpikachu.h"
 
-ActionState as_table_pikachu[] = {
+MotionState as_table_pikachu[] = {
     { 295, 0x00340111, 0x12000000, ftPikachu_80124908, ftPikachu_Stub_80124B6C,
       ftPikachu_80124B74, ftPikachu_ActionChange_80124BB4, func_800761C8 },
     { 296, 0x00340511, 0x12000000, ftPikachu_80124A20, ftPikachu_Stub_80124B70,

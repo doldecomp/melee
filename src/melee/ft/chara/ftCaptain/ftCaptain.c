@@ -11,7 +11,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-ActionState as_table_captain[] = {
+MotionState as_table_captain[] = {
     { 295, 0x00440842, 0x41000000, func_800CD390, func_800CD3B0, func_800CD3D0,
       func_800CD3F0, func_800761C8 },
     { 296, 0x00440846, 0x45000000, func_800CD458, func_800CD478, func_800CD498,

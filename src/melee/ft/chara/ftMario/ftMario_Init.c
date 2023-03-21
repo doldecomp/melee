@@ -16,7 +16,7 @@
 #include <platform.h>
 #include <baselib/random.h>
 
-ActionState as_table_mario[states_count] = {
+MotionState as_table_mario[states_count] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { 295, 0x00340111, 0x12000000, ftMario_SpecialN_Anim,
@@ -45,7 +45,7 @@ ActionState as_table_mario[states_count] = {
       ftMario_SpecialAirLw_Coll, func_800761C8 },
 };
 
-ActionState lbl_803C7260[aux_states_count] = {
+MotionState lbl_803C7260[aux_states_count] = {
     { 14, 0, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
     { 15, 0, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };

@@ -5,7 +5,7 @@
 
 #include <baselib/gobj.h>
 
-extern ActionState as_table_ganon[];
+extern MotionState as_table_ganon[];
 extern char lbl_803D2CD8[];
 extern char lbl_803D2CE4[];
 extern Fighter_CostumeStrings lbl_803D2E40[];
