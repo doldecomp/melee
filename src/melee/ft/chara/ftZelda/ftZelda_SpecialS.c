@@ -1,6 +1,5 @@
 #include "ftZelda_SpecialS.h"
 
-#include "ftzelda.h"
 #include "ftZelda_Init.h"
 
 #include "ef/efsync.h"

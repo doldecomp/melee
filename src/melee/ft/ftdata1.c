@@ -63,7 +63,6 @@
 #include "ftYoshi/ftyoshi4.h"
 #include "ftZakoBoy/ftzakoboy.h"
 #include "ftZakoGirl/ftzakogirl.h"
-#include "ftZelda/ftzelda.h"
 #include "ftZelda/ftZelda_Init.h"
 #include "ftZelda/ftZelda_SpecialHi.h"
 #include "ftZelda/ftZelda_SpecialLw.h"

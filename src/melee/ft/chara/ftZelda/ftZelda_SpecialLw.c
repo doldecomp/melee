@@ -2,8 +2,6 @@
 
 #include "ftZelda_SpecialLw.h"
 
-#include "ftzelda.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"

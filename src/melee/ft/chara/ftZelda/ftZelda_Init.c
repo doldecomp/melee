@@ -1,6 +1,5 @@
 #include "ftZelda_Init.h"
 
-#include "ftzelda.h"
 #include "ftZelda_SpecialHi.h"
 #include "ftZelda_SpecialLw.h"
 #include "ftZelda_SpecialN.h"
