@@ -8,7 +8,7 @@
 #include "ftCaptain/ftCaptain_SpecialLw.h"
 #include "ftCaptain/ftCaptain_SpecialN.h"
 #include "ftCaptain/ftCaptain_SpecialS.h"
-#include "ftCLink/ftclink.h"
+#include "ftCLink/ftCLink_Init.h"
 #include "ftCrazyHand/ftcrazyhand.h"
 #include "ftDonkey/ftdonkey_callbacks.h"
 #include "ftDonkey/ftdonkey_SpecialHi.h"

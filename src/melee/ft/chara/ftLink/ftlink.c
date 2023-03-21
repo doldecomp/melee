@@ -8,7 +8,7 @@
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCLink/ftclink.h"
+#include "ftCLink/ftCLink_Init.h"
 #include "lb/lbmthp.h"
 
 #include <dolphin/mtx/types.h>

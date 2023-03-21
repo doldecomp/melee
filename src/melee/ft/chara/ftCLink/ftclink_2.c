@@ -1,6 +1,6 @@
 #include "ftclink_2.h"
 
-#include "ftclink.h"
+#include "ftCLink_Init.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
