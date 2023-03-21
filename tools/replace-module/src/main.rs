@@ -1,18 +1,18 @@
-use anyhow::Result;
+use anyhow::{Context, Result};
 use clap::Parser;
 use globset::{Glob, GlobSet, GlobSetBuilder};
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use log::{debug, info};
 use regex::Regex;
-use std::{fs, path::Path};
+use std::{fs, io::Read, path::Path};
 use walkdir::WalkDir;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 struct Opts {
     module: String,
-    symbols: String,
+    symbols: Option<String>,
 }
 
 lazy_static! {
@@ -29,16 +29,35 @@ lazy_static! {
 fn main() -> Result<()> {
     env_logger::builder().format_timestamp_nanos().init();
     let cli: Opts = Opts::parse();
-    melee_utils::set_current_dir()?;
+
+    let symbols = match &cli.symbols.filter(|s| s != "-") {
+        Some(path) => {
+            let mut contents = String::new();
+            fs::File::open(path)
+                .with_context(|| {
+                    format!("Failed to open symbols file: {:?}", path)
+                })?
+                .read_to_string(&mut contents)
+                .with_context(|| {
+                    format!("Failed to read symbols file: {:?}", path)
+                })?;
+            contents
+        }
+        None => {
+            let mut buffer = String::new();
+            std::io::stdin().read_to_string(&mut buffer)?;
+            buffer
+        }
+    };
 
     let addrs = SYMBOL_RE
-        .captures_iter(&cli.symbols)
+        .captures_iter(&symbols)
         .map(|c| c[1].to_owned())
         .unique()
         .join("|");
 
     let regex = Regex::new(&format!(r"\b(?:lbl|func)_({})\b", addrs))?;
-    info!("Regex is `{regex}`.");
+    info!("Regex is `{}`.", regex);
 
     for entry in WalkDir::new(".") {
         let entry = entry?;
@@ -53,7 +72,7 @@ fn main() -> Result<()> {
 
 fn replace_symbols(module: &str, regex: &Regex, path: &Path) -> Result<()> {
     let content = fs::read_to_string(path)?;
-    debug!("Searching {path:?}.");
+    debug!("Searching {:?}.", path);
 
     let expr = format!("{module}_$1");
     let replaced = regex.replace_all(&content, expr);
