@@ -1,6 +1,3 @@
-#include "it/forward.h"
-#include <baselib/forward.h>
-
 #include "ftCaptain_SpecialS.h"
 
 #include "ftCaptain_Init.h"
@@ -12,6 +9,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <dolphin/mtx/types.h>

@@ -1,9 +1,11 @@
-#include "ftDonkey/ftdonkey9.h"
+#include "ftdonkey9.h"
+
+#include "ftdonkey.h"
+#include "ftdonkey1.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
-#include "ftDonkey/ftdonkey.h"
-#include "ftDonkey/ftdonkey1.h"
+#include "ft/inlines.h"
 #include "it/item.h"
 
 #include <dolphin/mtx/types.h>

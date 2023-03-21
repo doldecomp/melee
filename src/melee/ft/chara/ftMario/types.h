@@ -2,6 +2,7 @@
 #define MELEE_FT_CHARA_FTMARIO_TYPES_H
 
 #include <platform.h>
+#include "forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>
 

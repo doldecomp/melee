@@ -4,8 +4,6 @@
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 
-#include "ftMario/types.h"
-
 typedef enum ftMario_MotionState {
     ftMario_MS_Unk_341 = ftCo_MS_Count,
     ftMario_MS_Unk_342,

@@ -1,7 +1,9 @@
-#include "ftDonkey/ftdonkey4.h"
+#include "ftdonkey4.h"
+
+#include "ftdonkey.h"
 
 #include "ft/ft_unknown_006.h"
-#include "ftDonkey/ftdonkey.h"
+#include "ft/inlines.h"
 
 bool ftDonkey_800E0134(HSD_GObj* gobj)
 {

@@ -1,6 +1,3 @@
-#include <platform.h>
-#include "it/forward.h"
-
 #include "ftMario_Init.h"
 
 #include "ftMario_SpecialHi.h"
@@ -13,6 +10,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 
 #include <baselib/random.h>

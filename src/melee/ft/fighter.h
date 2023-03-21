@@ -4,7 +4,6 @@
 #include <platform.h>
 #include "ftCommon/forward.h"
 
-#include "ft/inlines.h"
 #include "ft/types.h"
 #include "gr/stage.h"
 #include "it/item2.h"

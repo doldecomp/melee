@@ -6,6 +6,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "it/code_8027CF30.h"
 
 // 0x800E9DF8

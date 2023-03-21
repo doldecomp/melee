@@ -1,10 +1,12 @@
-#include "ftDonkey/ftdonkey5.h"
+#include "ftdonkey5.h"
+
+#include "ftdonkey.h"
+#include "ftdonkey1.h"
+#include "ftdonkey6.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
-#include "ftDonkey/ftdonkey.h"
-#include "ftDonkey/ftdonkey1.h"
-#include "ftDonkey/ftdonkey6.h"
+#include "ft/inlines.h"
 
 void ftDonkey_800E01BC(HSD_GObj* gobj)
 {

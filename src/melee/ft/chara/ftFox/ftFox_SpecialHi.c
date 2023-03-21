@@ -6,6 +6,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 
 #include <trigf.h>
 #include <dolphin/mtx/types.h>

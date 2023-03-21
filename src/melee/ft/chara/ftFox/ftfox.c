@@ -1,9 +1,11 @@
 #include "ftFox/ftfox.h"
 
+#include "ftFox_SpecialN.h"
+
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftFox/ftFox_SpecialN.h"
 
 MotionState ftFox_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftFox_SpecialNStart_Anim,

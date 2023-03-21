@@ -1,14 +1,16 @@
 #include <platform.h>
 #include "lb/forward.h"
 
-#include "ft/ftcoll.h"
+#include "ftcoll.h"
+
+#include "code_80081B38.h"
+#include "fighter.h"
+#include "ft_unknown_006.h"
+#include "ftcommon.h"
+#include "ftlib.h"
+#include "inlines.h"
 
 #include "ef/efsync.h"
-#include "ft/code_80081B38.h"
-#include "ft/fighter.h"
-#include "ft/ft_unknown_006.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
 #include "gm/code_801601C4.h"
 #include "gr/stage.h"
 #include "it/code_80266F3C.h"

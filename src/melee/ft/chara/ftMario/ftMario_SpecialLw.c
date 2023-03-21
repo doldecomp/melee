@@ -1,6 +1,3 @@
-#include "forward.h"
-#include "it/forward.h"
-
 #include "ftMario_SpecialLw.h"
 
 #include "ftMario_Init.h"
@@ -13,6 +10,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 
 #include <stddef.h>
 #include <baselib/random.h>

@@ -1,7 +1,8 @@
-#include "ft/ftcamera.h"
+#include "ftcamera.h"
 
-#include "ft/fighter.h"
-#include "ft/ftlib.h"
+#include "fighter.h"
+#include "ftlib.h"
+#include "inlines.h"
 
 #include <dolphin/mtx/types.h>
 

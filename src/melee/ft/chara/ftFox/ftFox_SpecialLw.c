@@ -1,10 +1,12 @@
+#include "ftfox.h"
+
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
-#include "ftFox/ftfox.h"
+#include "ft/inlines.h"
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 

@@ -1,8 +1,10 @@
 #include "ftFox/ftFox_AppealS.h"
 
+#include "ftfox.h"
+
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
-#include "ftFox/ftfox.h"
+#include "ft/inlines.h"
 #include "gr/grcorneria.h"
 #include "it/item2.h"
 #include "pl/pl_unknown_001.h"

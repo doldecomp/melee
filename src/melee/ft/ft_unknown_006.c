@@ -1,7 +1,9 @@
-#include "ft/ft_unknown_006.h"
+#include "ft_unknown_006.h"
 
-#include "ft/fighter.h"
-#include "ft/ftcommon.h"
+#include "fighter.h"
+#include "ftcommon.h"
+#include "inlines.h"
+
 #include "lb/lbaudio_ax.h"
 
 #define TEST(expr) (expr) ? true : false
