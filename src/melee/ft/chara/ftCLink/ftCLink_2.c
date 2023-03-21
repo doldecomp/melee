@@ -1,4 +1,4 @@
-#include "ftclink_2.h"
+#include "ftCLink_2.h"
 
 #include "ftCLink_Init.h"
 

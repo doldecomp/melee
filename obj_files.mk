@@ -241,7 +241,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftCLink_Init.c.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftclink_2.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftCLink/ftCLink_2.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDrMario/ftdrmario.c.o\
