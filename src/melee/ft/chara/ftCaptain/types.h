@@ -5,7 +5,7 @@
 
 #include <platform.h>
 
-struct ftCaptain_EntityVars {
+struct ftCaptain_FighterVars {
     /* 0x222C */ uint during_specials_start;
     /* 0x2230 */ uint during_specials;
 };

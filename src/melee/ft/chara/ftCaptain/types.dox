@@ -1,10 +1,10 @@
-/** @var ftCaptain_EntityVars::during_specials_start
+/** @var ftCaptain_FighterVars::during_specials_start
  * @c true during the Raptor Boost startup state. Used to keep track of the GFX.
  * Cleared when the state ends and on death.
  * @at{222C} @sz{4}
  */
 
-/** @var ftCaptain_EntityVars::during_specials
+/** @var ftCaptain_FighterVars::during_specials
  * @c true during the Raptor Boost lunge state. Used to keep track of the GFX.
  * Cleared when the state ends and on death.
  * @at{2230} @sz{4}

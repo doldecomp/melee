@@ -20,7 +20,7 @@
 
 void ftMario_SpecialS_SetCall(Fighter* fp)
 {
-    if (fp->ev.mr.x223C_capeGObj != NULL) {
+    if (fp->fv.mr.x223C_capeGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftMario_OnTakeDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftMario_OnTakeDamage;
     }
@@ -52,10 +52,10 @@ void ftMario_SpecialS_CreateCape(HSD_GObj* gobj)
                 func_802B2560(gobj, fp->facing_dir, &coords,
                               func_8007500C(fp, 49), sa->specials.cape_kind);
 
-            fp->ev.mr.x223C_capeGObj = cape;
+            fp->fv.mr.x223C_capeGObj = cape;
         }
 
-        fp->x1984_heldItemSpec = fp->ev.mr.x223C_capeGObj;
+        fp->x1984_heldItemSpec = fp->fv.mr.x223C_capeGObj;
         ftMario_SpecialS_SetCall(fp);
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
@@ -65,7 +65,7 @@ void ftMario_SpecialS_SetNULL(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_SpecialS_ExitHitlag(gobj);
-    fp->ev.mr.x223C_capeGObj = NULL;
+    fp->fv.mr.x223C_capeGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -74,8 +74,8 @@ void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.mr.x223C_capeGObj != NULL) {
-        func_802B2674(fp->ev.mr.x223C_capeGObj);
+    if (fp->fv.mr.x223C_capeGObj != NULL) {
+        func_802B2674(fp->fv.mr.x223C_capeGObj);
         ftMario_SpecialS_SetNULL(gobj);
     }
 }
@@ -83,15 +83,15 @@ void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj)
 void ftMario_SpecialS_EnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.mr.x223C_capeGObj != NULL)
-        func_802B26C0(fp->ev.mr.x223C_capeGObj);
+    if (fp->fv.mr.x223C_capeGObj != NULL)
+        func_802B26C0(fp->fv.mr.x223C_capeGObj);
 }
 
 void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.mr.x223C_capeGObj != NULL)
-        func_802B26E0(fp->ev.mr.x223C_capeGObj);
+    if (fp->fv.mr.x223C_capeGObj != NULL)
+        func_802B26E0(fp->fv.mr.x223C_capeGObj);
 }
 
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
@@ -239,8 +239,8 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
     if (ftcmd_var0_tmp >= 1U) {
         if (ftcmd_var0_tmp == 1U) {
             fp->x2200_ftcmd_var0 = 2U;
-            if (!fp->ev.mr.x2238_isCapeBoost) {
-                fp->ev.mr.x2238_isCapeBoost = true;
+            if (!fp->fv.mr.x2238_isCapeBoost) {
+                fp->fv.mr.x2238_isCapeBoost = true;
                 fp->x80_self_vel.y = sa->specials.vel.y;
             } else {
                 fp->x80_self_vel.y = 0;
@@ -314,7 +314,7 @@ void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj)
 #endif
 
     fp = gobj->user_data;
-    fp->ev.mr.x2238_isCapeBoost = false;
+    fp->fv.mr.x2238_isCapeBoost = false;
     func_8007D7FC(fp);
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialS,
                                        transition_flags, NULL,

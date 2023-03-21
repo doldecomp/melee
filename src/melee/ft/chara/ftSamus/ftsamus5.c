@@ -29,7 +29,7 @@ void ftSamus_SpecialHi_StartAction(HSD_GObj* gobj)
     fp->mv.ss.unk5.x0 = 0;
     func_8006EBA4(gobj);
     ef_Spawn(0x482, gobj, fp->x5E8_fighterBones[3].x0_jobj);
-    fp->ev.ss.x2244 = 1;
+    fp->fv.ss.x2244 = 1;
 }
 
 void ftSamus_SpecialAirHi_StartAction(HSD_GObj* gobj)
@@ -51,14 +51,14 @@ void ftSamus_SpecialAirHi_StartAction(HSD_GObj* gobj)
     func_8007D440(fp, samus_attr->x40);
     func_8006EBA4(gobj);
     ef_Spawn(0x482, gobj, fp->x5E8_fighterBones[3].x0_jobj);
-    fp->ev.ss.x2244 = 1;
+    fp->fv.ss.x2244 = 1;
 }
 
 void ftSamus_DestroyAllUnsetx2444(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     efLib_DestroyAll(gobj);
-    fp->ev.ss.x2244 = 0;
+    fp->fv.ss.x2244 = 0;
 }
 
 void ftSamus_8012A81C(HSD_GObj* gobj)

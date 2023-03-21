@@ -18,8 +18,8 @@
 static int pickMegavitamin(Fighter* fp, int* arr, int outpos)
 {
     int result = arr[HSD_Randi(outpos)];
-    fp->ev.mr.x2230_vitaminPrev = fp->ev.mr.x222C_vitaminCurr;
-    fp->ev.mr.x222C_vitaminCurr = result;
+    fp->fv.mr.x2230_vitaminPrev = fp->fv.mr.x222C_vitaminCurr;
+    fp->fv.mr.x222C_vitaminCurr = result;
     return result;
 }
 
@@ -33,8 +33,8 @@ int ftMario_SpecialN_VitaminRandom(HSD_GObj* gobj)
     fp = gobj->user_data;
 
     for (i = r3 = 0; i < 9; i++) {
-        if (i != (int) fp->ev.mr.x222C_vitaminCurr &&
-            i != (int) fp->ev.mr.x2230_vitaminPrev)
+        if (i != (int) fp->fv.mr.x222C_vitaminCurr &&
+            i != (int) fp->fv.mr.x2230_vitaminPrev)
         {
             arr[r3] = i;
             r3++;

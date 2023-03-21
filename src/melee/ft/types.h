@@ -549,7 +549,7 @@ struct Fighter_DemoStrings {
 // UNION DEFS FOR FIGHTER STRUCTS. TODO: Maybe move these to per-fighter
 // header includes or something.
 // --------------------------------------------------------------------------------
-struct ftMario_EntityVars {
+struct ftMario_FighterVars {
     /// Current Megavitamin color combo
     /* 0x222C */ s32 x222C_vitaminCurr;
     /// Previous Megavitamin color combo
@@ -560,11 +560,11 @@ struct ftMario_EntityVars {
     /* 0x2240 */ u32 x2240;
 };
 
-struct ftFox_EntityVars {
+struct ftFox_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_blasterGObj;
 };
 
-struct ftKirby_EntityVars {
+struct ftKirby_FighterVars {
     /* 0x222C */ s32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ UnkFlagStruct x2234;
@@ -589,12 +589,12 @@ struct ftKirby_EntityVars {
     /* 0x22E8 */ s32 x22E8;
 };
 
-struct ftKoopa_EntityVars {
+struct ftKoopa_FighterVars {
     /* 0x222C */ f32 x222C;
     /* 0x2230 */ f32 x2230;
 };
 
-struct ftLink_EntityVars {
+struct ftLink_FighterVars {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -605,7 +605,7 @@ struct ftLink_EntityVars {
     /* 0x2248 */ u32 x2248;
 };
 
-struct ftSeak_EntityVars {
+struct ftSeak_FighterVars {
     /* 0x222C */ int x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ HSD_GObj* x2234;
@@ -614,7 +614,7 @@ struct ftSeak_EntityVars {
     /* 0x2298 */ Vec3 lstick_delta;
 };
 
-struct ftNess_EntityVars {
+struct ftNess_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_yoyoGObj;
     /* 0x2230 */ Vec3 x2230_yoyoHitboxPos;
     /* 0x223C */ f32 x223C;
@@ -625,7 +625,7 @@ struct ftNess_EntityVars {
     /* 0x224C */ u32 x224C_thunderGFX;
 };
 
-struct ftPeach_EntityVars {
+struct ftPeach_FighterVars {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -636,7 +636,7 @@ struct ftPeach_EntityVars {
     /* 0x2248 */ u32 x2248;
 };
 
-struct ftPopo_EntityVars {
+struct ftPopo_FighterVars {
     /* 0x222C */ uint x222C;
     /* 0x2230 */ UnkFlagStruct x2230;
     /* 0x2231 */ u8 filler_x2231[3];
@@ -650,11 +650,11 @@ struct ftPopo_EntityVars {
     /* 0x2250 */ f32 x2250;
 };
 
-struct ftPikachu_EntityVars {
+struct ftPikachu_FighterVars {
     u8 _[1];
 };
 
-struct ftSamus_EntityVars {
+struct ftSamus_FighterVars {
     /* 0x222C */ HSD_GObj* x222C;
     /* 0x2230 */ s32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -670,14 +670,14 @@ struct ftSamus_EntityVars {
     /* 0x2248 */ u32 x2248;
 };
 
-struct ftYoshi_EntityVars {
+struct ftYoshi_FighterVars {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
     /* 0x2238 */ u32 x2238;
 };
 
-struct ftPurin_EntityVars {
+struct ftPurin_FighterVars {
     /* 0x222C */ u32 x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -688,7 +688,7 @@ struct ftPurin_EntityVars {
     /* 0x2248 */ u32 x2248;
 };
 
-struct ftMewtwo_EntityVars {
+struct ftMewtwo_FighterVars {
     /* 0x222C */ HSD_GObj* x222C_disableGObj;
     /// GObj of Shadow Ball while in Mewtwo's hands?
     /* 0x2230 */ HSD_GObj* x2230_shadowHeldGObj;
@@ -698,17 +698,17 @@ struct ftMewtwo_EntityVars {
     /* 0x223C */ bool x223C_isConfusionBoost;
 };
 
-struct ftLuigi_EntityVars {
+struct ftLuigi_FighterVars {
     /* 0x222C */ bool x222C_cycloneCharge;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
 };
 
-struct ftMars_EntityVars {
+struct ftMars_FighterVars {
     /* 0x222C */ u32 x222C;
 };
 
-struct ftZelda_EntityVars {
+struct ftZelda_FighterVars {
     /* 0x222C */ HSD_GObj* x222C;
 };
 
@@ -722,7 +722,7 @@ struct SpecialAttrs_CLink {
     /* 0x2244 */ u32 x2244;
 };
 
-struct ftGameWatch_EntityVars {
+struct ftGameWatch_FighterVars {
     /* 0x222C */ s32 x222C_judgeVar1;
     /* 0x2230 */ s32 x2230_judgeVar2;
     /* 0x2234 */ u32 x2234;
@@ -742,7 +742,7 @@ struct ftGameWatch_EntityVars {
     /* 0x226C */ HSD_GObj* x226C_rescueGObj;
 };
 
-struct ftMasterHand_EntityVars {
+struct ftMasterHand_FighterVars {
     /* 0x222C */ HSD_GObj* x222C;
     /* 0x2230 */ u32 x2230;
     /* 0x2234 */ u32 x2234;
@@ -755,11 +755,11 @@ struct ftMasterHand_EntityVars {
     /* 0x2258 */ s32 x2258;
 };
 
-struct ftZakoBoy_EntityVars {
+struct ftZakoBoy_FighterVars {
     u8 _[1];
 };
 
-struct ftSandbag_EntityVars {
+struct ftSandbag_FighterVars {
     u8 _[1];
 };
 
@@ -1321,32 +1321,32 @@ struct Fighter {
     /* 0x222A */ UnkFlagStruct x222A_flag;
     u8 filler_x222B;
 
-    union Fighter_EntityVars {
+    union Fighter_FighterVars {
         u8 _[0x100];
-        struct ftCaptain_EntityVars ca, gn;
-        struct ftDonkey_EntityVars dk;
-        struct ftFox_EntityVars fx, fc;
-        struct ftGameWatch_EntityVars gw;
-        struct ftKirby_EntityVars kb;
-        struct ftKoopa_EntityVars kp, gk;
-        struct ftLink_EntityVars lk, cl;
-        struct ftLuigi_EntityVars lg;
-        struct ftMario_EntityVars mr;
-        struct ftMars_EntityVars ms;
-        struct ftMasterHand_EntityVars mh, ch;
-        struct ftMewtwo_EntityVars mt;
-        struct ftNess_EntityVars ns;
-        struct ftPeach_EntityVars pe;
-        struct ftPikachu_EntityVars pk, pc;
-        struct ftPopo_EntityVars pp, nn;
-        struct ftPurin_EntityVars pr;
-        struct ftSamus_EntityVars ss;
-        struct ftSandbag_EntityVars sb;
-        struct ftSeak_EntityVars sk;
-        struct ftYoshi_EntityVars ys;
-        struct ftZakoBoy_EntityVars bo, gl;
-        struct ftZelda_EntityVars zd;
-    } ev;
+        struct ftCaptain_FighterVars ca, gn;
+        struct ftDonkey_FighterVars dk;
+        struct ftFox_FighterVars fx, fc;
+        struct ftGameWatch_FighterVars gw;
+        struct ftKirby_FighterVars kb;
+        struct ftKoopa_FighterVars kp, gk;
+        struct ftLink_FighterVars lk, cl;
+        struct ftLuigi_FighterVars lg;
+        struct ftMario_FighterVars mr;
+        struct ftMars_FighterVars ms;
+        struct ftMasterHand_FighterVars mh, ch;
+        struct ftMewtwo_FighterVars mt;
+        struct ftNess_FighterVars ns;
+        struct ftPeach_FighterVars pe;
+        struct ftPikachu_FighterVars pk, pc;
+        struct ftPopo_FighterVars pp, nn;
+        struct ftPurin_FighterVars pr;
+        struct ftSamus_FighterVars ss;
+        struct ftSandbag_FighterVars sb;
+        struct ftSeak_FighterVars sk;
+        struct ftYoshi_FighterVars ys;
+        struct ftZakoBoy_FighterVars bo, gl;
+        struct ftZelda_FighterVars zd;
+    } fv;
 
     /* 0x232C */ s32 x232C;
     /* 0x2330 */ Vec2 x2330;

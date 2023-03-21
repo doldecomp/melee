@@ -102,16 +102,16 @@ static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* gobj)
 static inline void ftSamus_SetAttrx2334(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->ev.ss.x2234 = 0;
+    fp->fv.ss.x2234 = 0;
 }
 
 static inline void ftSamus_destroyAllEF(HSD_GObj* gobj)
 {
     if (gobj) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp->ev.ss.x2234) {
+        if (fp->fv.ss.x2234) {
             efLib_DestroyAll(gobj);
-            fp->ev.ss.x2234 = 0;
+            fp->fv.ss.x2234 = 0;
         }
     }
 }
@@ -120,10 +120,10 @@ static inline void ftSamus_UnkAndDestroyAllEF(HSD_GObj* gobj)
 {
     if (gobj) {
         Fighter* fp = gobj->user_data;
-        HSD_GObj* x222C = fp->ev.ss.x222C;
+        HSD_GObj* x222C = fp->fv.ss.x222C;
         if (x222C != NULL) {
             func_802B5974(x222C);
-            fp->ev.ss.x222C = NULL;
+            fp->fv.ss.x222C = NULL;
         }
         ftSamus_destroyAllEF(gobj);
     }

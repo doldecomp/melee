@@ -140,7 +140,7 @@ Fighter_CostumeStrings lbl_803D1E74[] = {
 void ftFalco_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    fp->ev.fx.x222C_blasterGObj = 0;
+    fp->fv.fx.x222C_blasterGObj = 0;
     func_80074A4C(gobj, 0, 0);
 }
 

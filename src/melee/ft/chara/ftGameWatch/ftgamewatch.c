@@ -162,22 +162,22 @@ void ftGameWatch_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 8U, -1);
     func_80074A4C(gobj, 9U, -1);
     func_80074A4C(gobj, 0xAU, -1);
-    fp->ev.gw.x222C_judgeVar1 = 1;
-    fp->ev.gw.x2230_judgeVar2 = 0;
-    fp->ev.gw.x2234 = 0;
-    fp->ev.gw.x223C_panicDamage = 0;
-    fp->ev.gw.x2240_chefVar1 = 1;
-    fp->ev.gw.x2244_chefVar2 = 3;
-    fp->ev.gw.x2248_manholeGObj = NULL;
-    fp->ev.gw.x224C_greenhouseGObj = NULL;
-    fp->ev.gw.x2250_manholeGObj2 = NULL;
-    fp->ev.gw.x2254_fireGObj = NULL;
-    fp->ev.gw.x2258_parachuteGObj = NULL;
-    fp->ev.gw.x225C_turtleGObj = NULL;
-    fp->ev.gw.x2260_sparkyGObj = NULL;
-    fp->ev.gw.x2264_judgementGObj = NULL;
-    fp->ev.gw.x2268_panicGObj = NULL;
-    fp->ev.gw.x226C_rescueGObj = NULL;
+    fp->fv.gw.x222C_judgeVar1 = 1;
+    fp->fv.gw.x2230_judgeVar2 = 0;
+    fp->fv.gw.x2234 = 0;
+    fp->fv.gw.x223C_panicDamage = 0;
+    fp->fv.gw.x2240_chefVar1 = 1;
+    fp->fv.gw.x2244_chefVar2 = 3;
+    fp->fv.gw.x2248_manholeGObj = NULL;
+    fp->fv.gw.x224C_greenhouseGObj = NULL;
+    fp->fv.gw.x2250_manholeGObj2 = NULL;
+    fp->fv.gw.x2254_fireGObj = NULL;
+    fp->fv.gw.x2258_parachuteGObj = NULL;
+    fp->fv.gw.x225C_turtleGObj = NULL;
+    fp->fv.gw.x2260_sparkyGObj = NULL;
+    fp->fv.gw.x2264_judgementGObj = NULL;
+    fp->fv.gw.x2268_panicGObj = NULL;
+    fp->fv.gw.x226C_rescueGObj = NULL;
 }
 
 void ftGameWatch_OnLoad(HSD_GObj* gobj)
@@ -190,7 +190,7 @@ void ftGameWatch_OnLoad(HSD_GObj* gobj)
     fp->x2224_flag.bits.b0 = 1;
 
     PUSH_ATTRS(fp, ftGameWatchAttributes);
-    fp->ev.gw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
+    fp->fv.gw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
 
     {
         ftGameWatchAttributes* attr = fp->x2D4_specialAttributes;
@@ -272,7 +272,7 @@ void ftGameWatch_8014A77C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
         func_800BFFD0(fp, 5, 0);
     }
 }

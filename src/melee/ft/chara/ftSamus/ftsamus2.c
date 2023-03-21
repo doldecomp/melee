@@ -298,10 +298,10 @@ int ftSamus_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)
         u8 _[4];
 #endif
 
-        if (!fp->ev.ss.x222C)
+        if (!fp->fv.ss.x222C)
             return -1;
 
-        *arg1 = fp->ev.ss.x2230;
+        *arg1 = fp->fv.ss.x2230;
         *arg2 = samus_attr->x18;
         return 0;
     }

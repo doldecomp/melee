@@ -1075,13 +1075,13 @@ void ftKirby_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, 0);
-    fp->ev.kb.x222C = 0;
-    fp->ev.kb.x2230 = (s32) (HSD_Randi(5) + 1);
-    fp->ev.kb.x223C = 0;
-    fp->ev.kb.x2238 = 4;
-    fp->ev.kb.x2244 = 0;
-    fp->ev.kb.x228C = 0;
-    fp->ev.kb.x2290 = 0;
+    fp->fv.kb.x222C = 0;
+    fp->fv.kb.x2230 = (s32) (HSD_Randi(5) + 1);
+    fp->fv.kb.x223C = 0;
+    fp->fv.kb.x2238 = 4;
+    fp->fv.kb.x2244 = 0;
+    fp->fv.kb.x228C = 0;
+    fp->fv.kb.x2290 = 0;
     if (Player_GetFlagsBit1(fp->xC_playerID) &&
         Player_GetUnk4D(fp->xC_playerID) != 4)
     {
@@ -1098,7 +1098,7 @@ void ftKirby_OnLoad(HSD_GObj* gobj)
 
     fp->x2222_flag.bits.b1 = 1;
     fp->x2D0 = fp->x2D4_specialAttributes;
-    fp->ev.kb.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
+    fp->fv.kb.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
     func_8026B3F8(item_list[0], 0x32);
     func_8026B3F8(item_list[1], 0x33);
     func_8026B3F8(item_list[2], 0x34);
@@ -1138,25 +1138,25 @@ void func_800EE818(HSD_GObj* gobj)
     s32 _[2];
     Fighter* fp = GET_FIGHTER(gobj);
     ftKirbyAttributes* attr = fp->x2D4_specialAttributes;
-    switch (fp->ev.kb.x2238) {
+    switch (fp->fv.kb.x2238) {
     case 3:
-        if (fp->ev.kb.x22E8 == attr->x190) {
+        if (fp->fv.kb.x22E8 == attr->x190) {
             func_800BFFD0(fp, 0x3A, 0);
         }
         break;
     case 13:
-        if (fp->ev.kb.x22D4 == attr->x168) {
+        if (fp->fv.kb.x22D4 == attr->x168) {
             func_800BFFD0(fp, 0x36, 0);
         }
         break;
     case 16:
-        if (fp->ev.kb.x22C8 == attr->x384) {
+        if (fp->fv.kb.x22C8 == attr->x384) {
             func_800BFFD0(fp, 0x5D, 0);
             return;
         }
         break;
     case 7:
-        if (fp->ev.kb.x22E0 == 6) {
+        if (fp->fv.kb.x22E0 == 6) {
             func_800BFFD0(fp, 0x57, 0);
         }
         break;

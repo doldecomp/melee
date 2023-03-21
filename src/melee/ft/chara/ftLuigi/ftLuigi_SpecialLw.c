@@ -99,7 +99,7 @@ void ftLuigi_SpecialAirLw_StartAction(HSD_GObj* gobj)
     Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALAIRLW, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    if (fp2->ev.lg.x222C_cycloneCharge != 0) {
+    if (fp2->fv.lg.x222C_cycloneCharge != 0) {
         cycloneVar = 0.0f;
     } else
         cycloneVar = luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
@@ -142,7 +142,7 @@ void ftLuigi_SpecialAirLw_Anim(HSD_GObj* gobj)
 
     if (fp->x2204_ftcmd_var1 != 0) {
         fp->x2204_ftcmd_var1 = 0;
-        fp->ev.lg.x222C_cycloneCharge = true;
+        fp->fv.lg.x222C_cycloneCharge = true;
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -228,7 +228,7 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* attrs0 = fp->x2D4_specialAttributes;
 
-    if (!fp->ev.lg.x222C_cycloneCharge && fp->x2208_ftcmd_var2 != 0 &&
+    if (!fp->fv.lg.x222C_cycloneCharge && fp->x2208_ftcmd_var2 != 0 &&
         (fp->input.x668 & HSD_BUTTON_B))
     {
         func_8007D508(fp, attrs0->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX,
@@ -311,7 +311,7 @@ static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     func_8007D7FC(fp);
     fp->x80_self_vel.y = 0.0f;
-    fp->ev.lg.x222C_cycloneCharge = false;
+    fp->fv.lg.x222C_cycloneCharge = false;
     Fighter_ActionStateChange_800693AC(gobj, AS_LUIGI_SPECIALLW,
                                        FTLUIGI_SPECIALLW_FLAG, NULL,
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);

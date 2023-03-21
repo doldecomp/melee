@@ -85,9 +85,9 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->mv.mt.SpecialS.isConfusionReflect = false;
 
-    if (fp->ev.mt.x223C_isConfusionBoost == false) {
+    if (fp->fv.mt.x223C_isConfusionBoost == false) {
         fp->x80_self_vel.y = mewtwoAttrs->x18_MEWTWO_CONFUSION_AIR_BOOST;
-        fp->ev.mt.x223C_isConfusionBoost = true;
+        fp->fv.mt.x223C_isConfusionBoost = true;
     }
 
     Fighter_ActionStateChange_800693AC(gobj, AS_MEWTWO_SPECIALAIRS, 0, NULL,
@@ -214,7 +214,7 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* gobj)
     ftMewtwo_SpecialS_SetGrab(gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialS_ReflectThink;
-    fp->ev.mt.x223C_isConfusionBoost = false;
+    fp->fv.mt.x223C_isConfusionBoost = false;
 
     ftMewtwo_SpecialS_SetReflect(gobj);
 }

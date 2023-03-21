@@ -23,10 +23,10 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* gobj)
         fp->x2204_ftcmd_var1 = 0;
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj,
                       NULL, &sp20);
-        fp->ev.gw.x2264_judgementGObj =
+        fp->fv.gw.x2264_judgementGObj =
             func_802C7774(fp->facing_dir, gobj, &sp20, func_8007500C(fp, 0x31),
-                          fp->ev.gw.x222C_judgeVar1);
-        if ((s32) fp->ev.gw.x222C_judgeVar1 == 6) {
+                          fp->fv.gw.x222C_judgeVar1);
+        if ((s32) fp->fv.gw.x222C_judgeVar1 == 6) {
             sp14.z = 0.0f;
             sp14.x = 0.0f;
             sp14.y = 5.0f;
@@ -35,7 +35,7 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* gobj)
                 &sp20);
             func_8028FAF4(gobj, &sp20);
         }
-        if (fp->ev.gw.x2264_judgementGObj != NULL) {
+        if (fp->fv.gw.x2264_judgementGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
         }
@@ -53,7 +53,7 @@ void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftGameWatch_ItemJudgementExitHitlag(gobj);
-    fp->ev.gw.x2264_judgementGObj = NULL;
+    fp->fv.gw.x2264_judgementGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -64,8 +64,8 @@ void ftGameWatch_ItemJudgementRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2264_judgementGObj != NULL) {
-        func_802C7A84(fp->ev.gw.x2264_judgementGObj);
+    if (fp->fv.gw.x2264_judgementGObj != NULL) {
+        func_802C7A84(fp->fv.gw.x2264_judgementGObj);
         ftGameWatch_ItemJudgementSetFlag(gobj);
     }
 }
@@ -75,16 +75,16 @@ void ftGameWatch_ItemJudgementRemove(HSD_GObj* gobj)
 static void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.gw.x2264_judgementGObj != NULL)
-        func_802C7AD0(fp->ev.gw.x2264_judgementGObj);
+    if (fp->fv.gw.x2264_judgementGObj != NULL)
+        func_802C7AD0(fp->fv.gw.x2264_judgementGObj);
 }
 
 // 0x8014C65C - Remove hitlag for Judgement item
 static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.gw.x2264_judgementGObj != NULL)
-        func_802C7AF0(fp->ev.gw.x2264_judgementGObj);
+    if (fp->fv.gw.x2264_judgementGObj != NULL)
+        func_802C7AF0(fp->fv.gw.x2264_judgementGObj);
 }
 
 // 0x8014C68C
@@ -117,8 +117,8 @@ int ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* gobj)
         int judge = judge_max;
 
         for (judge -= judge_max, i = 0, rand = 0; judge < judge_max; judge++) {
-            if (judge != fp->ev.gw.x222C_judgeVar1 &&
-                judge != fp->ev.gw.x2230_judgeVar2)
+            if (judge != fp->fv.gw.x222C_judgeVar1 &&
+                judge != fp->fv.gw.x2230_judgeVar2)
             {
                 gw_judge0.rollVar[i] = judge;
                 rand += sa->x34_GAMEWATCH_JUDGE_ROLL[judge];
@@ -148,8 +148,8 @@ int ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* gobj)
             }
         }
 
-        fp->ev.gw.x2230_judgeVar2 = fp->ev.gw.x222C_judgeVar1;
-        fp->ev.gw.x222C_judgeVar1 = result;
+        fp->fv.gw.x2230_judgeVar2 = fp->fv.gw.x222C_judgeVar1;
+        fp->fv.gw.x222C_judgeVar1 = result;
         return result;
     }
 }
@@ -178,7 +178,7 @@ void ftGameWatch_SpecialS_StartAction(HSD_GObj* gobj)
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirS_StartAction.
     ftGameWatch_SpecialS_GetRandomInt(gobj);
     Fighter_ActionStateChange_800693AC(
-        gobj, fp->ev.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1, 0, NULL,
+        gobj, fp->fv.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1, 0, NULL,
         0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ftGameWatch_SpecialS_SetVars(gobj);
@@ -201,7 +201,7 @@ void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* gobj)
 
     ftGameWatch_SpecialS_GetRandomInt(gobj);
     Fighter_ActionStateChange_800693AC(
-        gobj, fp->ev.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1, 0, NULL,
+        gobj, fp->fv.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1, 0, NULL,
         0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     ftGameWatch_SpecialS_SetVars(gobj);
@@ -265,8 +265,8 @@ void ftGameWatch_SpecialAirS_Phys(HSD_GObj* gobj)
     if (ftcmd_var >= 1U) {
         if (ftcmd_var == 1) {
             fp->x2200_ftcmd_var0 = 2;
-            if ((s32) fp->ev.gw.x2234 == 0) {
-                fp->ev.gw.x2234 = 1;
+            if ((s32) fp->fv.gw.x2234 == 0) {
+                fp->fv.gw.x2234 = 1;
                 fp->x80_self_vel.y = gawAttrs->x28_GAMEWATCH_JUDGE_VEL_Y;
             } else
                 fp->x80_self_vel.y = 0.0f;
@@ -302,7 +302,7 @@ static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2264_judgementGObj != NULL) {
+    if (fp->fv.gw.x2264_judgementGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
     }
@@ -327,7 +327,7 @@ static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* gobj)
     func_8007D5D4(fp);
     !gobj;
     Fighter_ActionStateChange_800693AC(
-        gobj, fp->ev.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1,
+        gobj, fp->fv.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1,
         FTGAMEWATCH_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f,
         0.0f);
     if ((u32) fp->x2200_ftcmd_var0 == 1) {
@@ -346,11 +346,11 @@ static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    fp->ev.gw.x2234 = 0;
+    fp->fv.gw.x2234 = 0;
     func_8007D7FC(fp);
     !gobj;
     Fighter_ActionStateChange_800693AC(
-        gobj, fp->ev.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1,
+        gobj, fp->fv.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1,
         FTGAMEWATCH_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f,
         0.0f);
     ftGameWatch_SpecialS_SetCall(gobj);

@@ -42,8 +42,8 @@ void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
     MarsAttributes* attr = getFtSpecialAttrsD(fp0);
 
     fp0->x80_self_vel.x = fp0->x80_self_vel.x / attr->x14;
-    if ((signed) fp0->ev.ms.x222C == 0) {
-        fp0->ev.ms.x222C = 1;
+    if ((signed) fp0->fv.ms.x222C == 0) {
+        fp0->fv.ms.x222C = 1;
         fp0->x80_self_vel.y = attr->x1C;
     } else {
         fp0->x80_self_vel.y = 0;
@@ -153,7 +153,7 @@ void ftMars_801376E8(HSD_GObj* gobj)
 void ftMars_80137748(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->ev.ms.x222C = 0;
+    fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
@@ -256,7 +256,7 @@ void ftMars_801379D0(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     enum_t asid;
 
-    fp->ev.ms.x222C = 0;
+    fp->fv.ms.x222C = 0;
     func_8007D7FC(fp);
 
     switch (fp->action_id) {
@@ -401,7 +401,7 @@ void ftMars_80137D60(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t asid;
-    fp->ev.ms.x222C = 0;
+    fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
@@ -538,7 +538,7 @@ void ftMars_8013809C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t asid;
 
-    fp->ev.ms.x222C = 0;
+    fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
     func_8007D7FC(fp);

@@ -103,11 +103,11 @@ void ftMewtwo_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
     func_80074A4C(gobj, 0, 0);
-    fp->ev.mt.x222C_disableGObj = NULL;
-    fp->ev.mt.x2230_shadowHeldGObj = NULL;
-    fp->ev.mt.x2234_shadowBallCharge = 0;
-    fp->ev.mt.x2238_shadowBallGObj = NULL;
-    fp->ev.mt.x223C_isConfusionBoost = false;
+    fp->fv.mt.x222C_disableGObj = NULL;
+    fp->fv.mt.x2230_shadowHeldGObj = NULL;
+    fp->fv.mt.x2234_shadowBallCharge = 0;
+    fp->fv.mt.x2238_shadowBallGObj = NULL;
+    fp->fv.mt.x223C_isConfusionBoost = false;
 }
 
 void ftMewtwo_OnLoad(HSD_GObj* gobj)
@@ -160,7 +160,7 @@ void ftMewTwo_80144F58(HSD_GObj* gobj)
     ftMewtwoAttributes* attr = fp->x2D4_specialAttributes;
     f32 attr_value = attr->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
-    if (fp->ev.mt.x2234_shadowBallCharge == attr_value)
+    if (fp->fv.mt.x2234_shadowBallCharge == attr_value)
         func_800BFFD0(fp, 0x5C, 0);
 }
 

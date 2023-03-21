@@ -107,7 +107,7 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialAirLw, 0, NULL,
                                        0, 1, 0);
     func_8006EBA4(gobj);
-    if ((s32) fp->ev.mr.x2234_tornadoCharge != 0) {
+    if ((s32) fp->fv.mr.x2234_tornadoCharge != 0) {
         sub_val = 0;
     } else {
         sub_val = sa->speciallw.tap_y_vel_max;
@@ -147,7 +147,7 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
 
     if ((u32) fp->x2204_ftcmd_var1 != 0U) {
         fp->x2204_ftcmd_var1 = 0U;
-        fp->ev.mr.x2234_tornadoCharge = 1;
+        fp->fv.mr.x2234_tornadoCharge = 1;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         unsetCallbacks(gobj);
@@ -231,7 +231,7 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
     fp = getFighter(gobj);
     sa = fp->x2D4_specialAttributes;
 
-    if (((s32) fp->ev.mr.x2234_tornadoCharge == false) &&
+    if (((s32) fp->fv.mr.x2234_tornadoCharge == false) &&
         ((u32) fp->x2208_ftcmd_var2 != 0U) &&
         ((fp->input.x668 & HSD_BUTTON_B) != 0))
     {
@@ -308,7 +308,7 @@ static void doAirCollIfUnk(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     func_8007D7FC(fp);
     fp->x80_self_vel.y = 0;
-    fp->ev.mr.x2234_tornadoCharge = 0;
+    fp->fv.mr.x2234_tornadoCharge = 0;
     Fighter_ActionStateChange_800693AC(gobj, ftMario_AS_SpecialLw,
                                        transition_flags, NULL,
                                        fp->x894_currentAnimFrame, 1, 0);

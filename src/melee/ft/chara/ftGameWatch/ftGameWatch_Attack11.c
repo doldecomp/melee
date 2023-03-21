@@ -20,13 +20,13 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* gobj)
 
     Fighter* fp = getFighter(gobj);
 
-    if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
+    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
         ftGameWatch_Attack11_DecideAction(gobj);
     } else {
         func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
-        fp->ev.gw.x224C_greenhouseGObj =
+        fp->fv.gw.x224C_greenhouseGObj =
             func_802C61F4(gobj, &sp10, 0x20, fp->facing_dir);
-        if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
+        if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
             if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
                 fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             }
@@ -49,16 +49,16 @@ void ftGameWatch_Attack11_DecideAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 ASID;
 
-    if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
+    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
         ASID = fp->action_id;
         if (ASID == AS_GAMEWATCH_ATTACK11) {
-            func_802C6430(fp->ev.gw.x224C_greenhouseGObj);
+            func_802C6430(fp->fv.gw.x224C_greenhouseGObj);
         } else if (ASID == AS_GAMEWATCH_ATTACK100START) {
-            func_802C6458(fp->ev.gw.x224C_greenhouseGObj);
+            func_802C6458(fp->fv.gw.x224C_greenhouseGObj);
         } else if (ASID == AS_GAMEWATCH_ATTACK100LOOP) {
-            func_802C6480(fp->ev.gw.x224C_greenhouseGObj);
+            func_802C6480(fp->fv.gw.x224C_greenhouseGObj);
         } else if (ASID == AS_GAMEWATCH_ATTACK100END) {
-            func_802C64A8(fp->ev.gw.x224C_greenhouseGObj);
+            func_802C64A8(fp->fv.gw.x224C_greenhouseGObj);
         }
 
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
@@ -83,7 +83,7 @@ void ftGameWatch_ItemGreenhouseSetFlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftGameWatch_ItemGreenhouseExitHitlag(gobj);
-    fp->ev.gw.x224C_greenhouseGObj = NULL;
+    fp->fv.gw.x224C_greenhouseGObj = NULL;
 }
 
 // 0x8014BF7C
@@ -98,8 +98,8 @@ void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
-        func_802C6328(fp->ev.gw.x224C_greenhouseGObj);
+    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
+        func_802C6328(fp->fv.gw.x224C_greenhouseGObj);
         ftGameWatch_ItemGreenhouseSetFlag(gobj);
     }
 }
@@ -110,8 +110,8 @@ void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* gobj)
 void ftGameWatch_ItemGreenhouseEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
-        func_802C6374(fp->ev.gw.x224C_greenhouseGObj);
+    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
+        func_802C6374(fp->fv.gw.x224C_greenhouseGObj);
     }
 }
 
@@ -119,8 +119,8 @@ void ftGameWatch_ItemGreenhouseEnterHitlag(HSD_GObj* gobj)
 void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
-        func_802C6394(fp->ev.gw.x224C_greenhouseGObj);
+    if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
+        func_802C6394(fp->fv.gw.x224C_greenhouseGObj);
     }
 }
 

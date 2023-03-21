@@ -89,8 +89,8 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, -1);
-    fp->ev.gn.during_specials = false;
-    fp->ev.gn.during_specials_start = false;
+    fp->fv.gn.during_specials = false;
+    fp->fv.gn.during_specials_start = false;
 }
 
 void ftGanon_OnItemPickup(HSD_GObj* gobj, bool bool)

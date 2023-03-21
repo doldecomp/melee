@@ -15,7 +15,7 @@ void ftGameWatch_ItemPanicSetup(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    if (fp->ev.gw.x2268_panicGObj == NULL) {
+    if (fp->fv.gw.x2268_panicGObj == NULL) {
         /// @todo Can't move below @c _.
         Vec3 vec;
 
@@ -26,11 +26,11 @@ void ftGameWatch_ItemPanicSetup(HSD_GObj* gobj)
 
         func_8000B1CC(fp->x5E8_fighterBones[TopN].x0_jobj, NULL, &vec);
 
-        fp->ev.gw.x2268_panicGObj =
+        fp->fv.gw.x2268_panicGObj =
             func_802C7D60(gobj, &vec, 0, fp->facing_dir);
     }
 
-    if (fp->ev.gw.x2268_panicGObj != NULL) {
+    if (fp->fv.gw.x2268_panicGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
     }
@@ -46,7 +46,7 @@ void ftGameWatch_ItemPanicSetFlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftGameWatch_ItemPanicExitHitlag(gobj);
-    fp->ev.gw.x2268_panicGObj = NULL;
+    fp->fv.gw.x2268_panicGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -56,8 +56,8 @@ void ftGameWatch_ItemPanicRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2268_panicGObj != NULL) {
-        func_802C7E94(fp->ev.gw.x2268_panicGObj);
+    if (fp->fv.gw.x2268_panicGObj != NULL) {
+        func_802C7E94(fp->fv.gw.x2268_panicGObj);
         ftGameWatch_ItemPanicSetFlag(gobj);
     }
 }
@@ -67,8 +67,8 @@ void ftGameWatch_ItemPanicEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2268_panicGObj != NULL)
-        func_802C7EE0(fp->ev.gw.x2268_panicGObj);
+    if (fp->fv.gw.x2268_panicGObj != NULL)
+        func_802C7EE0(fp->fv.gw.x2268_panicGObj);
 }
 
 /// Remove hitlag for Oil Panic item
@@ -76,8 +76,8 @@ void ftGameWatch_ItemPanicExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2268_panicGObj != NULL)
-        func_802C7F00(fp->ev.gw.x2268_panicGObj);
+    if (fp->fv.gw.x2268_panicGObj != NULL)
+        func_802C7F00(fp->fv.gw.x2268_panicGObj);
 }
 
 /// Check if Mr. Game & Watch is in any of his Oil Panic Action States
@@ -103,7 +103,7 @@ void ftGameWatch_SpecialLw_UpdateBucketModel(HSD_GObj* gobj)
 
     func_80074B0C(gobj, 5, 2);
 
-    switch (fp->ev.gw.x2238_panicCharge) {
+    switch (fp->fv.gw.x2238_panicCharge) {
     case GAMEWATCH_PANIC_EMPTY:
         /// @todo @c enum for parts
         func_80074B0C(gobj, 6, -1);
@@ -143,7 +143,7 @@ void ftGameWatch_SpecialLw_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
         ftGameWatch_SpecialLwShoot_ReleaseOil(gobj);
         return;
     }
@@ -162,7 +162,7 @@ void ftGameWatch_SpecialAirLw_StartAction(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
 
-    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
         ftGameWatch_SpecialAirLwShoot_ReleaseOil(gobj);
         return;
     }
@@ -466,7 +466,7 @@ void ftGameWatch_SpecialLwCatch_Anim(HSD_GObj* gobj)
     if (ftAnim_IsFramesRemaining(gobj))
         return;
 
-    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
         func_8008A2BC(gobj);
         return;
     }
@@ -486,7 +486,7 @@ void ftGameWatch_SpecialAirLwCatch_Anim(HSD_GObj* gobj)
     if (ftAnim_IsFramesRemaining(gobj))
         return;
 
-    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
         func_800CC730(gobj);
         return;
     }
@@ -560,10 +560,10 @@ void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* gobj)
     /// @todo @c enum
     enum_t asid;
 
-    fp->ev.gw.x2238_panicCharge += fp->AbsorbAttr.x1A48_hitsTaken;
-    fp->ev.gw.x223C_panicDamage += fp->AbsorbAttr.x1A44_damageTaken;
+    fp->fv.gw.x2238_panicCharge += fp->AbsorbAttr.x1A48_hitsTaken;
+    fp->fv.gw.x223C_panicDamage += fp->AbsorbAttr.x1A44_damageTaken;
 
-    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
+    if (fp->fv.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
         func_800BFFD0(fp, 5, 0);
 
     if (fp->ground_or_air == GA_Ground)
@@ -698,7 +698,7 @@ void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
         {
             ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
-            fp->x2204_ftcmd_var1 = fp->ev.gw.x223C_panicDamage *
+            fp->x2204_ftcmd_var1 = fp->fv.gw.x223C_panicDamage *
                                    sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
 
             {
@@ -706,8 +706,8 @@ void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
                     fp->x2204_ftcmd_var1 + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
 
                 fp->x2204_ftcmd_var1 = panicDamage;
-                fp->ev.gw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
-                fp->ev.gw.x223C_panicDamage = 0;
+                fp->fv.gw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
+                fp->fv.gw.x223C_panicDamage = 0;
             }
         }
 
@@ -735,7 +735,7 @@ void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
         {
             ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
-            fp->x2204_ftcmd_var1 = fp->ev.gw.x223C_panicDamage *
+            fp->x2204_ftcmd_var1 = fp->fv.gw.x223C_panicDamage *
                                    sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
 
             {
@@ -744,8 +744,8 @@ void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
                 fp->x2204_ftcmd_var1 = panicDamage;
             }
 
-            fp->ev.gw.x2238_panicCharge = 0;
-            fp->ev.gw.x223C_panicDamage = 0;
+            fp->fv.gw.x2238_panicCharge = 0;
+            fp->fv.gw.x223C_panicDamage = 0;
         }
 
         ftGameWatch_SpecialLw_UpdateBucketModel(gobj);

@@ -1107,7 +1107,7 @@ void Fighter_ActionStateChange_800693AC(HSD_GObj* gobj,
 
     if (fp->ground_or_air == 0) {
         if (fp->x4_fighterKind == 9) {
-            fp->ev.pe.x222C = 1;
+            fp->fv.pe.x222C = 1;
         }
         fp->x2221_flag.bits.b5 = 0;
         fp->x2221_flag.bits.b7 = 1;

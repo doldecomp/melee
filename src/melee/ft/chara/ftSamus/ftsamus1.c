@@ -83,12 +83,12 @@ void ftSamus_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_80074A4C(gobj, 0, 0);
-    fp->ev.ss.x222C = 0;
-    fp->ev.ss.x2230 = 0;
-    fp->ev.ss.x2238 = 0;
-    fp->ev.ss.x2244 = 0;
-    fp->ev.ss.x223C = 0;
-    fp->ev.ss.x2240 = 0;
+    fp->fv.ss.x222C = 0;
+    fp->fv.ss.x2230 = 0;
+    fp->fv.ss.x2238 = 0;
+    fp->fv.ss.x2244 = 0;
+    fp->fv.ss.x223C = 0;
+    fp->fv.ss.x2240 = 0;
 }
 
 void ftSamus_OnLoad(HSD_GObj* gobj)
@@ -137,7 +137,7 @@ void ftSamus_80128628(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* attr = fp->x2D4_specialAttributes;
-    s32 samus_x2230 = fp->ev.ss.x2230;
+    s32 samus_x2230 = fp->fv.ss.x2230;
     if (samus_x2230 == attr->x18) {
         func_800BFFD0(fp, 0x35, 0);
     }

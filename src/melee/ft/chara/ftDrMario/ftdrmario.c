@@ -76,10 +76,10 @@ void ftDrMario_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
     func_80074A4C(gobj, 0, 0);
-    fp->ev.mr.x2234_tornadoCharge = 0;
-    fp->ev.mr.x2238_isCapeBoost = false;
-    fp->ev.mr.x223C_capeGObj = NULL;
-    fp->ev.mr.x2240 = 0;
+    fp->fv.mr.x2234_tornadoCharge = 0;
+    fp->fv.mr.x2238_isCapeBoost = false;
+    fp->fv.mr.x223C_capeGObj = NULL;
+    fp->fv.mr.x2240 = 0;
 }
 
 void ftDrMario_OnLoad(HSD_GObj* gobj)
@@ -152,9 +152,9 @@ void func_801497CC(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         fp = gobj->user_data;
-        if (fp != NULL && fp->ev.mr.x2240 != 0) {
-            func_802C0DBC(fp->ev.mr.x2240);
-            fp->ev.mr.x2240 = 0;
+        if (fp != NULL && fp->fv.mr.x2240 != 0) {
+            func_802C0DBC(fp->fv.mr.x2240);
+            fp->fv.mr.x2240 = 0;
         }
     }
 
@@ -183,7 +183,7 @@ bool func_80149844(HSD_GObj* gobj)
     if (tmp != 0x155 && tmp != 0x156) {
         return true;
     }
-    if (fp->ev.mr.x2240 == 0) {
+    if (fp->fv.mr.x2240 == 0) {
         return true;
     }
     return false;
@@ -195,8 +195,8 @@ void func_801498A0(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         fp = gobj->user_data;
-        if (fp != NULL && fp->ev.mr.x2240 != 0) {
-            fp->ev.mr.x2240 = 0;
+        if (fp != NULL && fp->fv.mr.x2240 != 0) {
+            fp->fv.mr.x2240 = 0;
         }
     }
     if (gobj != NULL) {

@@ -135,12 +135,12 @@ void ftNana_OnDeath(HSD_GObj* gobj)
     fp->dmg.x18B0 = attr->xC8;
     func_80074A4C(gobj, 0U, 0);
     func_80074A4C(gobj, 1U, 0);
-    fp->ev.nn.x2234 = 0;
-    fp->ev.nn.x222C = 0;
-    fp->ev.nn.x2230.bits.b0 = 0;
-    fp->ev.nn.x2238 = 0;
-    fp->ev.nn.x224C = 0;
-    fp->ev.nn.x2250 = lbl_804D9898;
+    fp->fv.nn.x2234 = 0;
+    fp->fv.nn.x222C = 0;
+    fp->fv.nn.x2230.bits.b0 = 0;
+    fp->fv.nn.x2238 = 0;
+    fp->fv.nn.x224C = 0;
+    fp->fv.nn.x2250 = lbl_804D9898;
 }
 
 /* static */ void func_801238E4(HSD_GObj* gobj);

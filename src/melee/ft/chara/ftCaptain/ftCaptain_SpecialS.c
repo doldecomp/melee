@@ -21,8 +21,8 @@ void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* gobj)
 
     efLib_DestroyAll(gobj);
 
-    fp->ev.ca.during_specials = false;
-    fp->ev.ca.during_specials_start = false;
+    fp->fv.ca.during_specials = false;
+    fp->fv.ca.during_specials_start = false;
 }
 
 static void setCallbacks(HSD_GObj* gobj)
@@ -55,16 +55,16 @@ void ftCaptain_SpecialS_StartAction(HSD_GObj* gobj)
     switch (func_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
         ef_Spawn(1169, gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
-        fp->ev.ca.during_specials_start = true;
+        fp->fv.ca.during_specials_start = true;
         break;
 
     case FTKIND_GANON:
         ef_Spawn(1293, gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
-        fp->ev.ca.during_specials_start = true;
+        fp->fv.ca.during_specials_start = true;
         break;
     }
 
-    fp->ev.ca.during_specials = false;
+    fp->fv.ca.during_specials = false;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21F4_callback = ftCaptain_SpecialS_OnDetect;
@@ -95,15 +95,15 @@ static inline void setupAirStart(HSD_GObj* gobj)
     switch (func_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
         ef_Spawn(1169, gobj, fp->x5E8_fighterBones[HeadN].x0_jobj);
-        fp->ev.ca.during_specials_start = true;
+        fp->fv.ca.during_specials_start = true;
         break;
     case FTKIND_GANON:
         ef_Spawn(1293, gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
-        fp->ev.ca.during_specials_start = true;
+        fp->fv.ca.during_specials_start = true;
         break;
     }
 
-    fp->ev.ca.during_specials = false;
+    fp->fv.ca.during_specials = false;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     fp->cb.x21F4_callback = ftCaptain_SpecialS_OnDetect;
@@ -218,18 +218,18 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!fp->ev.ca.during_specials) {
+    if (!fp->fv.ca.during_specials) {
         switch (func_800872A4(gobj)) {
         case FTKIND_CAPTAIN:
             ef_Spawn(1170, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
                      &fp->facing_dir);
-            fp->ev.ca.during_specials = true;
+            fp->fv.ca.during_specials = true;
             break;
 
         case FTKIND_GANON:
             ef_Spawn(1294, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
                      &fp->facing_dir);
-            fp->ev.ca.during_specials = true;
+            fp->fv.ca.during_specials = true;
             break;
         }
 
@@ -272,18 +272,18 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!fp->ev.ca.during_specials) {
+    if (!fp->fv.ca.during_specials) {
         switch (func_800872A4(gobj)) {
         case FTKIND_CAPTAIN:
             ef_Spawn(1171, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
                      &fp->facing_dir);
-            fp->ev.ca.during_specials = true;
+            fp->fv.ca.during_specials = true;
             break;
 
         case FTKIND_GANON:
             ef_Spawn(1295, gobj, fp->x5E8_fighterBones[TransN].x0_jobj,
                      &fp->facing_dir);
-            fp->ev.ca.during_specials = true;
+            fp->fv.ca.during_specials = true;
             break;
         }
 

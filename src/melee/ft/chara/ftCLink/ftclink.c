@@ -95,13 +95,13 @@ void ftCLink_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, 0);
     func_80074A4C(gobj, 2, 0);
-    fp->ev.cl.x222C = 0;
-    fp->ev.cl.x2234 = 0;
-    fp->ev.cl.x2238 = 0;
-    fp->ev.cl.x223C = 0;
-    fp->ev.cl.x2240 = 0;
-    fp->ev.cl.x2238 = 0;
-    fp->ev.cl.x2244 = 0;
+    fp->fv.cl.x222C = 0;
+    fp->fv.cl.x2234 = 0;
+    fp->fv.cl.x2238 = 0;
+    fp->fv.cl.x223C = 0;
+    fp->fv.cl.x2240 = 0;
+    fp->fv.cl.x2238 = 0;
+    fp->fv.cl.x2244 = 0;
 }
 
 void ftCLink_OnLoad(HSD_GObj* gobj)
@@ -250,7 +250,7 @@ bool func_8014920C(HSD_GObj* gobj)
     if (temp_r0 != 0x156 && temp_r0 != 0x157) {
         return true;
     }
-    if (fp->ev.cl.x2244 == 0) {
+    if (fp->fv.cl.x2244 == 0) {
         return true;
     }
     return false;
@@ -275,8 +275,8 @@ void func_801492C4(HSD_GObj* gobj)
     }
 
     fp = gobj->user_data;
-    if (fp != NULL && fp->ev.cl.x2244 != 0) {
-        fp->ev.cl.x2244 = 0;
+    if (fp != NULL && fp->fv.cl.x2244 != 0) {
+        fp->fv.cl.x2244 = 0;
     };
 
     if (gobj == NULL) {

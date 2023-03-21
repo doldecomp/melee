@@ -12,16 +12,16 @@
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
 void ftMewtwo_SpecialLw_ClearDisableGObj(HSD_GObj* gobj)
 {
-    GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj = NULL;
+    GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
 }
 
 // 0x801461A8
 // https://decomp.me/scratch/d5gF6 // Remove Disable projectile
 void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj != NULL) {
-        func_802C49E0(GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj);
-        GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj = NULL;
+    if (GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj != NULL) {
+        func_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
+        GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
     }
 }
 
@@ -39,7 +39,7 @@ void ftMewtwo_SpecialLw_StartAction(HSD_GObj* gobj)
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->ev.mt.x222C_disableGObj = NULL;
+    fp->fv.mt.x222C_disableGObj = NULL;
 
     Fighter_ActionStateChange_800693AC(gobj, AS_MEWTWO_SPECIALLW, 0, NULL,
                                        0.0f, 1.0f, 0.0f);
@@ -62,7 +62,7 @@ void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* gobj)
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->ev.mt.x222C_disableGObj = NULL;
+    fp->fv.mt.x222C_disableGObj = NULL;
     fp->x80_self_vel.y = 0.0f;
 
     Fighter_ActionStateChange_800693AC(gobj, AS_MEWTWO_SPECIALAIRLW, 0, NULL,
@@ -78,9 +78,9 @@ void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* gobj)
 void ftMewtwo_SpecialLw_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj != NULL) {
-            func_802C49E0(GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj);
-            GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj = NULL;
+        if (GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj != NULL) {
+            func_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
+            GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
         }
 
         func_8008A2BC(gobj);
@@ -91,9 +91,9 @@ void ftMewtwo_SpecialLw_Anim(HSD_GObj* gobj)
 void ftMewtwo_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj != NULL) {
-            func_802C49E0(GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj);
-            GET_FIGHTER(gobj)->ev.mt.x222C_disableGObj = NULL;
+        if (GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj != NULL) {
+            func_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
+            GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
         }
         func_800CC730(gobj);
     }
@@ -133,7 +133,7 @@ void ftMewtwo_SpecialAirLw_Phys(HSD_GObj* gobj)
 inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.mt.x222C_disableGObj != NULL) {
+    if (fp->fv.mt.x222C_disableGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftMewtwo_OnDeath2;
         fp->cb.x21DC_callback_OnTakeDamage = ftMewtwo_OnTakeDamage;
     }
@@ -212,7 +212,7 @@ void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* gobj)
         sp18.x += (mewtwoAttrs->x80_MEWTWO_DISABLE_OFFSET_X * fp->facing_dir);
         sp18.y += mewtwoAttrs->x84_MEWTWO_DISABLE_OFFSET_Y;
 
-        fp->ev.mt.x222C_disableGObj =
+        fp->fv.mt.x222C_disableGObj =
             func_802C4A40(gobj, &sp18, fp->facing_dir);
 
         ftMewtwo_SpecialLw_SetCall(gobj);

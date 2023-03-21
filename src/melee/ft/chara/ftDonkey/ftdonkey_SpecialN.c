@@ -38,12 +38,12 @@ void ftDonkey_SpecialN_StartAction(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->ev.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
+    if (fp->fv.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         Fighter_ActionStateChange_800693AC(gobj, 0x175, 0, NULL, 0.0f, 1.0f,
                                            0.0f);
         fp->mv.dk.specialn.x8 = 1;
-        fp->mv.dk.specialn.xC = fp->ev.dk.x222C;
-        fp->ev.dk.x222C = 0;
+        fp->mv.dk.specialn.xC = fp->fv.dk.x222C;
+        fp->fv.dk.x222C = 0;
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 0x171, 0, NULL, 0.0f, 1.0f,
                                            0.0f);
@@ -74,12 +74,12 @@ void ftDonkey_SpecialAirN_StartAction(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->ev.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
+    if (fp->fv.dk.x222C == donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         Fighter_ActionStateChange_800693AC(gobj, 0x17A, 0, NULL, 0.0f, 1.0f,
                                            0.0f);
         fp->mv.dk.specialn.x8 = 1;
-        fp->mv.dk.specialn.xC = fp->ev.dk.x222C;
-        fp->ev.dk.x222C = 0;
+        fp->mv.dk.specialn.xC = fp->fv.dk.x222C;
+        fp->fv.dk.x222C = 0;
     } else {
         Fighter_ActionStateChange_800693AC(gobj, 0x176, 0, NULL, 0.0f, 1.0f,
                                            0.0f);
@@ -121,11 +121,11 @@ void ftDonkey_8010E840(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     if (0.0f == fp->x894_currentAnimFrame) {
-        fp->ev.dk.x222C += 1;
-        if (fp->ev.dk.x222C >= donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
+        fp->fv.dk.x222C += 1;
+        if (fp->fv.dk.x222C >= donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
             Fighter* fighter2 = fp;
             func_800BFFD0(fighter2, 0x39, 0);
-            fighter2->ev.dk.x222C = donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS;
+            fighter2->fv.dk.x222C = donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS;
             ftDonkey_NullCallbacks(gobj);
             func_8008A2BC(gobj);
         }
@@ -189,7 +189,7 @@ void ftDonkey_8010E930(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->ev.dk.x222C = 0;
+        fp->fv.dk.x222C = 0;
         ftDonkey_NullCallbacks(gobj);
         func_8008A2BC(gobj);
     }
@@ -230,7 +230,7 @@ void ftDonkey_8010EB0C(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->ev.dk.x222C = 0;
+        fp->fv.dk.x222C = 0;
         ftDonkey_NullCallbacks(gobj);
         func_8008A2BC(gobj);
     }
@@ -251,11 +251,11 @@ void ftDonkey_8010ECE8(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
 
     if (fp->x894_currentAnimFrame == 0.0f) {
-        fp->ev.dk.x222C += 1;
-        if (fp->ev.dk.x222C >= donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
+        fp->fv.dk.x222C += 1;
+        if (fp->fv.dk.x222C >= donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
             Fighter* fighter2 = fp;
             func_800BFFD0(fighter2, 0x39, 0);
-            fp->ev.dk.x222C = donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS;
+            fp->fv.dk.x222C = donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS;
             ftDonkey_NullCallbacks(gobj);
             func_800CC730(gobj);
         }
@@ -320,7 +320,7 @@ void ftDonkey_8010EDD8(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->ev.dk.x222C = 0;
+        fp->fv.dk.x222C = 0;
         ftDonkey_NullCallbacks(gobj);
         if (donkey_attr->SpecialN.x38_LANDING_LAG == 0.0f) {
             func_800CC730(gobj);
@@ -359,7 +359,7 @@ void ftDonkey_8010EF7C(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        fp->ev.dk.x222C = 0;
+        fp->fv.dk.x222C = 0;
         ftDonkey_NullCallbacks(gobj);
         if (donkey_attr->SpecialN.x38_LANDING_LAG == 0.0f) {
             func_800CC730(gobj);
@@ -384,8 +384,8 @@ void ftDonkey_8010F098(HSD_GObj* gobj)
         if ((fp->input.x668 & 0x200)) {
             Fighter_ActionStateChange_800693AC(gobj, 0x174, 0, NULL, 0.0f,
                                                1.0f, 0.0f);
-            fp->mv.dk.specialn.xC = fp->ev.dk.x222C;
-            fp->ev.dk.x222C = 0;
+            fp->mv.dk.specialn.xC = fp->fv.dk.x222C;
+            fp->fv.dk.x222C = 0;
             ftDonkey_SetCallbacks_SpecialN(gobj);
             func_8006EBA4(gobj);
         }
@@ -420,8 +420,8 @@ void ftDonkey_8010F1E8(HSD_GObj* gobj)
     if ((fp->input.x668 & 0x200)) {
         Fighter_ActionStateChange_800693AC(gobj, 0x179, 0, NULL, 0.0f, 1.0f,
                                            0.0f);
-        fp->mv.dk.specialn.xC = fp->ev.dk.x222C;
-        fp->ev.dk.x222C = 0;
+        fp->mv.dk.specialn.xC = fp->fv.dk.x222C;
+        fp->fv.dk.x222C = 0;
         ftDonkey_SetCallbacks_SpecialN(gobj);
         func_8006EBA4(gobj);
     }
@@ -629,6 +629,6 @@ void ftDonkey_DestroyAllEffects(HSD_GObj* gobj)
 void ftDonkey_DestroyAllEffectsPlus(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->ev.dk.x222C = 0;
+    fp->fv.dk.x222C = 0;
     efLib_DestroyAll(gobj);
 }

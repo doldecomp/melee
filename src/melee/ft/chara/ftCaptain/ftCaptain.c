@@ -99,8 +99,8 @@ void ftCaptain_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_80074A4C(gobj, 0, 0);
-    fp->ev.ca.during_specials = 0;
-    fp->ev.ca.during_specials_start = false;
+    fp->fv.ca.during_specials = 0;
+    fp->fv.ca.during_specials_start = false;
 }
 
 void ftCaptain_800E28C8(HSD_GObj* gobj)

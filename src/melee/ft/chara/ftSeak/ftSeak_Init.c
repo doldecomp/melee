@@ -99,9 +99,9 @@ Fighter_CostumeStrings lbl_803CC558[] = {
 void ftSeak_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->ev.sk.x222C = 0;
-    fp->ev.sk.x2230 = 0;
-    fp->ev.sk.x2234 = 0;
+    fp->fv.sk.x222C = 0;
+    fp->fv.sk.x2230 = 0;
+    fp->fv.sk.x2234 = 0;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, -1);
 }
@@ -133,7 +133,7 @@ void ftSeak_80110198(HSD_GObj* gobj)
 void ftSeak_801101CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.sk.x222C == 6) {
+    if (fp->fv.sk.x222C == 6) {
         func_800BFFD0(fp, 0x56, 0);
     }
 }

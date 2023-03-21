@@ -103,7 +103,7 @@ void ftKoopa_OnDeath(HSD_GObj* gobj)
     func_80074A4C(gobj, 0, 0);
 
     {
-        ftKoopaVars* vars = (ftKoopaVars*) &fp->ev.kp.x222C;
+        ftKoopaVars* vars = (ftKoopaVars*) &fp->fv.kp.x222C;
 
         fp->dmg.x18B0 = koopaAttr->x0;
         vars->x0 = koopaAttr->x10;

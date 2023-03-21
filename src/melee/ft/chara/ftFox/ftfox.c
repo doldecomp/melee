@@ -139,14 +139,14 @@ bool func_800E5534(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
 
-    return fp->ev.fx.x222C_blasterGObj ? true : false;
+    return fp->fv.fx.x222C_blasterGObj ? true : false;
 }
 
 void ftFox_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
 
-    fp->ev.fx.x222C_blasterGObj = 0;
+    fp->fv.fx.x222C_blasterGObj = 0;
     func_80074A4C(gobj, 0, 0);
 }
 

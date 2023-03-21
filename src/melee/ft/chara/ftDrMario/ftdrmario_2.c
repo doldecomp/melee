@@ -20,11 +20,11 @@ void func_80149954(HSD_GObj* gobj)
 #endif
 
     fp = gobj->user_data;
-    if (fp->x2200_ftcmd_var0 == 1 && fp->ev.mr.x2240 == 0U) {
+    if (fp->x2200_ftcmd_var0 == 1 && fp->fv.mr.x2240 == 0U) {
         func_8000B1CC(fp->x5E8_fighterBones->x0_jobj, 0, &sp18);
         tmp = ftMario_SpecialN_VitaminRandom(gobj);
         tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
-        fp->ev.mr.x2240 = tmp;
+        fp->fv.mr.x2240 = tmp;
         if (tmp != 0) {
             fp->cb.x21E4_callback_OnDeath2 = func_80149540;
             fp->cb.x21DC_callback_OnTakeDamage = func_80149540;
@@ -35,9 +35,9 @@ void func_80149954(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (gobj != NULL) {
             fp = gobj->user_data;
-            if (fp != NULL && fp->ev.mr.x2240 != 0) {
-                func_802C0DBC(fp->ev.mr.x2240);
-                fp->ev.mr.x2240 = 0;
+            if (fp != NULL && fp->fv.mr.x2240 != 0) {
+                func_802C0DBC(fp->fv.mr.x2240);
+                fp->fv.mr.x2240 = 0;
             }
         }
         if (gobj != NULL) {
