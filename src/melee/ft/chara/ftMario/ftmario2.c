@@ -32,7 +32,7 @@ char* ftMario_DemoViMotionFilenames[] = {
     "ftDemoVi1101MotionFileMario",
 };
 
-Fighter_CostumeStrings lbl_803C5A28[] = {
+Fighter_CostumeStrings ftMario_CostumeStrings[] = {
     { lbl_803C57E8, lbl_803C57F4, lbl_803C580C },
     { lbl_803C582C, lbl_803C5838, lbl_803C5854 },
     { lbl_803C5878, lbl_803C5884, lbl_803C58A0 },

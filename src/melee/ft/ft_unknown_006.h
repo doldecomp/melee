@@ -16,7 +16,7 @@ extern s32 lbl_80459B88[FTKIND_MAX];
 
 extern char lbl_803C57D0[];
 extern char lbl_803C57DC[];
-extern Fighter_CostumeStrings lbl_803C5A28[];
+extern Fighter_CostumeStrings ftMario_CostumeStrings[];
 extern char lbl_803C595C[];
 
 bool func_8007B868(HSD_GObj*);
