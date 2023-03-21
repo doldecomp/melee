@@ -429,7 +429,7 @@ void Player_SetPlayerCharacter(s32 slot, s32 value)
     player->player_character = value;
 }
 
-s32 Player_GetPlayerSlotType(s32 slot)
+enum_t Player_GetPlayerSlotType(s32 slot)
 {
     s32 slot_type;
     StaticPlayer* player;
