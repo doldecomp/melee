@@ -8,9 +8,9 @@
 
 #include <dolphin/mtx/types.h>
 
-// 0x8014A848 //
+// 0x8014A848
 // https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up
-// callbacks //
+// callbacks
 void ftGameWatch_ItemTorchSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
@@ -39,7 +39,7 @@ void ftGameWatch_ItemTorchSetup(HSD_GObj* gobj)
 }
 
 // 0x8014A904
-// https://decomp.me/scratch/rtVt4 // Set flags on Mr. Game & Watch's Torch //
+// https://decomp.me/scratch/rtVt4 // Set flags on Mr. Game & Watch's Torch
 void ftGameWatch_ItemTorchSetFlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -47,8 +47,8 @@ void ftGameWatch_ItemTorchSetFlag(HSD_GObj* gobj)
     fp->fv.gw.x2254_fireGObj = NULL;
 }
 
-// 0x8014A938 //
-// https://decomp.me/scratch/mIWB3 // Remove Mr. Game & Watch's Torch //
+// 0x8014A938
+// https://decomp.me/scratch/mIWB3 // Remove Mr. Game & Watch's Torch
 void ftGameWatch_ItemTorchOnDamage(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

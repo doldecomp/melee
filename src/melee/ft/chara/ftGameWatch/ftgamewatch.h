@@ -18,7 +18,7 @@ typedef struct ftGameWatchJudge {
 } ftGameWatchJudge;
 
 typedef struct _ftGameWatchAttributes {
-    // MISC. ATTRIBUTES //
+    // MISC. ATTRIBUTES
 
     f32 x0_GAMEWATCH_WIDTH;    // Mr. Game & Watch's Z-Axis stretch; 0.01 by
                                // default
@@ -26,14 +26,14 @@ typedef struct _ftGameWatchAttributes {
                                // Game & Watch costume color
     s32 x14_GAMEWATCH_OUTLINE; // Outline color of Mr. Game & Watch's model
 
-    // NEUTRAL SPECIAL - CHEF //
+    // NEUTRAL SPECIAL - CHEF
 
     f32 x18_GAMEWATCH_CHEF_LOOPFRAME; // Allow rapid-firing sausages from this
                                       // frame onward
     f32 x1C_GAMEWATCH_CHEF_MAX; // Maximum amount of sausages created per Chef
                                 // use
 
-    // SIDE SPECIAL - JUDGEMENT //
+    // SIDE SPECIAL - JUDGEMENT
 
     f32 x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE; // Horizontal momentum
                                                // preservation value
@@ -48,7 +48,7 @@ typedef struct _ftGameWatchAttributes {
                                      // Game panics if less than 2 numbers are
                                      // ON.
 
-    // UP SPECIAL - FIRE RESCUE //
+    // UP SPECIAL - FIRE RESCUE
 
     f32 x58_GAMEWATCH_RESCUE_STICK_RANGE; // Minimum control stick range
                                           // required for directional
@@ -59,7 +59,7 @@ typedef struct _ftGameWatchAttributes {
                                         // & Watch can angle Fire Rescue?
     f32 x60_GAMEWATCH_RESCUE_LANDING;   // Landing lag / Freefall toggle
 
-    // DOWN SPECIAL - OIL PANIC //
+    // DOWN SPECIAL - OIL PANIC
 
     f32 x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE; // Horizontal momentum
                                                // preservation value
@@ -83,9 +83,9 @@ extern Fighter_CostumeStrings lbl_803D29C8[];
 extern char lbl_803D292C[];
 extern Fighter_DemoStrings lbl_803D29B8;
 
-// Mr. Game & Watch Functions //
+// Mr. Game & Watch Functions
 
-// General callbacks //
+// General callbacks
 
 void ftGameWatch_OnDeath(HSD_GObj* gobj);
 void ftGameWatch_OnLoad(HSD_GObj* gobj);
@@ -101,7 +101,7 @@ void ftGameWatch_8014A7F4(HSD_GObj* gobj, ItemModStruct* item_mod);
 void ftGameWatch_8014A814(HSD_GObj* gobj, ItemModStruct* item_mod);
 void ftGameWatch_OnAbsorb(HSD_GObj* gobj);
 
-// Item-related callbacks //
+// Item-related callbacks
 
 void ftGameWatch_ItemTorchSetup(HSD_GObj* gobj);
 void ftGameWatch_ItemTorchSetFlag(HSD_GObj* gobj);
@@ -110,7 +110,7 @@ void ftGameWatch_ItemTorchEnterHitlag(HSD_GObj* gobj);
 void ftGameWatch_ItemTorchExitHitlag(HSD_GObj* gobj);
 bool ftGameWatch_ItemCheckTorchRemove(HSD_GObj* gobj);
 
-// Forward Smash (AttackS4) //
+// Forward Smash (AttackS4)
 
 void ftGameWatch_AttackS4_Action(HSD_GObj* gobj);
 void ftGameWatch_AttackS4_Anim(HSD_GObj* gobj);
@@ -118,7 +118,7 @@ void ftGameWatch_AttackS4_IASA(HSD_GObj* gobj);
 void ftGameWatch_AttackS4_Phys(HSD_GObj* gobj);
 void ftGameWatch_AttackS4_Coll(HSD_GObj* gobj);
 
-// Down Tilt (AttackLw3) //
+// Down Tilt (AttackLw3)
 
 void ftGameWatch_ItemManholeSetup(HSD_GObj* gobj);
 void ftGameWatch_ItemManholeRemove(HSD_GObj* gobj);
@@ -130,7 +130,7 @@ void ftGameWatch_AttackLw3_IASA(HSD_GObj* gobj);
 void ftGameWatch_AttackLw3_Phys(HSD_GObj* gobj);
 void ftGameWatch_AttackLw3_Coll(HSD_GObj* gobj);
 
-// Aerial Attack Item Setup (AttackAirN) //
+// Aerial Attack Item Setup (AttackAirN)
 
 void ftGameWatch_ItemParachuteSetup(HSD_GObj* gobj);
 void ftGameWatch_ItemParachuteOnLand(HSD_GObj* gobj);
@@ -149,7 +149,7 @@ void ftGameWatch_AttackAir_EnterItemHitlag(HSD_GObj* gobj);
 bool ftGameWatch_ItemCheckSparkyRemove(HSD_GObj* gobj);
 void ftGameWatch_AttackAir_DecideAction(HSD_GObj* gobj);
 
-// Aerial Attacks (AttackAir) //
+// Aerial Attacks (AttackAir)
 
 void ftGameWatch_AttackAirN_Action(HSD_GObj* gobj);
 void ftGameWatch_AttackAirN_Anim(HSD_GObj* gobj);
@@ -182,7 +182,7 @@ void ftGameWatch_LandingAirHi_IASA(HSD_GObj* gobj);
 void ftGameWatch_LandingAirHi_Phys(HSD_GObj* gobj);
 void ftGameWatch_LandingAirHi_Coll(HSD_GObj* gobj);
 
-// Neutral Attack - Greenhouse (Attack11, Attack100Start/Loop/End) //
+// Neutral Attack - Greenhouse (Attack11, Attack100Start/Loop/End)
 
 void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* gobj);
 void ftGameWatch_Attack11_DecideAction(HSD_GObj* gobj);
@@ -213,7 +213,7 @@ void ftGameWatch_Attack100End_IASA(HSD_GObj* gobj);
 void ftGameWatch_Attack100End_Phys(HSD_GObj* gobj);
 void ftGameWatch_Attack100End_Coll(HSD_GObj* gobj);
 
-// Side Special - Judgement (SpecialS) //
+// Side Special - Judgement (SpecialS)
 
 void ftGameWatch_ItemJudgementSetup(HSD_GObj* gobj);
 void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* gobj);
@@ -231,7 +231,7 @@ void ftGameWatch_SpecialAirS_Phys(HSD_GObj* gobj);
 void ftGameWatch_SpecialS_Coll(HSD_GObj* gobj);
 void ftGameWatch_SpecialAirS_Coll(HSD_GObj* gobj);
 
-// Up Special - Fire Rescue (SpeciialHi) //
+// Up Special - Fire Rescue (SpeciialHi)
 
 void ftGameWatch_ItemRescueSetup(HSD_GObj* gobj);
 bool ftGameWatch_ItemCheckRescueRemove(HSD_GObj* gobj);
@@ -248,7 +248,7 @@ void ftGameWatch_SpecialAirHi_Phys(HSD_GObj* gobj);
 void ftGameWatch_SpecialHi_Coll(HSD_GObj* gobj);
 void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* gobj);
 
-// Down Special - Oil Panic (SpecialLw) //
+// Down Special - Oil Panic (SpecialLw)
 
 void ftGameWatch_ItemPanicSetup(HSD_GObj* gobj);
 void ftGameWatch_ItemPanicSetFlag(HSD_GObj* gobj);
@@ -295,7 +295,7 @@ void ftGameWatch_SpecialAirLwShoot_AirToGround(HSD_GObj* gobj);
 void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj);
 void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj);
 
-// Neutral Special - Chef (SpecialN/) //
+// Neutral Special - Chef (SpecialN/)
 
 void ftGameWatch_SpecialN_StartAction(HSD_GObj* gobj);
 void ftGameWatch_SpecialAirN_StartAction(HSD_GObj* gobj);

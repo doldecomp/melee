@@ -50,15 +50,15 @@ typedef enum Item_UnkKinds {
 } Item_UnkKinds;
 
 // Based on "ID Lists" from the SSBM datasheet, in-game references, and further
-// research by VetriTheRetri //
+// research by VetriTheRetri
 // https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8
-// //
+//
 
 typedef enum ItemKind {
     // COMMON ITEMS
 
-    It_Kind_Capsule,  // Capsule //
-    It_Kind_Box,      // Crate //
+    It_Kind_Capsule,  // Capsule
+    It_Kind_Box,      // Crate
     It_Kind_Taru,     // Barrel
     It_Kind_Egg,      // Egg
     It_Kind_Kusudama, // Party Ball (Kusudama)
@@ -69,8 +69,8 @@ typedef enum ItemKind {
     It_Kind_Tomato,   // Maxim Tomato
     It_Kind_Star,     // Starman (Super Star)
     It_Kind_Bat,      // Home-Run Bat
-    It_Kind_Sword,    // Beam Sword //
-    It_Kind_Parasol,  // Parasol //
+    It_Kind_Sword,    // Beam Sword
+    It_Kind_Parasol,  // Parasol
     It_Kind_G_Shell,  // Green Shell (G Shell)
     It_Kind_R_Shell,  // Red Shell (R Shell)
     It_Kind_L_Gun,    // Ray Gun (L Gun)
@@ -114,12 +114,12 @@ typedef enum ItemKind {
 
     // CHARACTER-RELATED
 
-    It_Kind_Mario_Fire,                // Mario's fireball
-    It_Kind_DrMario_Vitamin,           // Dr. Mario's pill
-    It_Kind_Kirby_CBeam,               // Kirby's Cutter beam
-    It_Kind_Kirby_Hammer,              // Kirby's Hammer
-    It_Kind_Unk1,                      //
-    It_Kind_Unk2,                      //
+    It_Kind_Mario_Fire,      // Mario's fireball
+    It_Kind_DrMario_Vitamin, // Dr. Mario's pill
+    It_Kind_Kirby_CBeam,     // Kirby's Cutter beam
+    It_Kind_Kirby_Hammer,    // Kirby's Hammer
+    It_Kind_Unk1,
+    It_Kind_Unk2,
     It_Kind_Fox_Laser,                 // Fox's Laser
     It_Kind_Falco_Laser,               // Falco's Laser
     It_Kind_Fox_Illusion,              // Fox's Illusion
@@ -187,7 +187,7 @@ typedef enum ItemKind {
     It_Kind_GameWatch_Turtle,          // Mr. Game & Watch's Turtle
     It_Kind_GameWatch_Breath,          // Mr. Game & Watch's Sparky
     It_Kind_GameWatch_Judge,           // Mr. Game & Watch's Judge
-    It_Kind_GameWatch_Panic,           // Mr. Game & Watch's Oil Panic (?) //
+    It_Kind_GameWatch_Panic,           // Mr. Game & Watch's Oil Panic (?)
     It_Kind_GameWatch_Chef,            // Sausage
     It_Kind_CLink_Milk,                // Milk (Young Link)
     It_Kind_GameWatch_Rescue,          // Mr. Game & Watch's Firefighter

@@ -41,9 +41,9 @@ typedef enum ftMewtwoAction {
 
 #define CONFUSION_REFLECT_OFF 2 // Toggle reflect bubble off.
 
-// Flags used by Mewtwo in Motion State Change //
+// Flags used by Mewtwo in Motion State Change
 
-// SpecialN/SpecialAirN //
+// SpecialN/SpecialAirN
 
 #define FTMEWTWO_SPECIALN_ACTION_FLAG                                         \
     FtStateChange_SkipUpdateMatAnim | FtStateChange_PreserveSfx |             \
@@ -56,7 +56,7 @@ typedef enum ftMewtwoAction {
         FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
-// SpecialS/SpecialAirS //
+// SpecialS/SpecialAirS
 
 #define FTMEWTWO_SPECIALS_COLL_FLAG                                           \
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
@@ -65,9 +65,9 @@ typedef enum ftMewtwoAction {
         FtStateChange_SkipUpdateModelPartVis |                                \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
-// SpecialHi/SpecialAirHi //
+// SpecialHi/SpecialAirHi
 
-// SpecialLw/SpecialAirLw //
+// SpecialLw/SpecialAirLw
 
 #define FTMEWTWO_SPECIALLW_COLL_FLAG                                          \
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |             \
@@ -77,7 +77,7 @@ typedef enum ftMewtwoAction {
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 typedef struct _ftMewtwoAttributes {
-    // NEUTRAL SPECIAL - SHADOW BALL (SpecialN/SpecialAirN) //
+    // NEUTRAL SPECIAL - SHADOW BALL (SpecialN/SpecialAirN)
 
     f32 x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES; // Number of frames each iteration
                                             // cycle lasts?
@@ -88,12 +88,12 @@ typedef struct _ftMewtwoAttributes {
     s32 x10_MEWTWO_SHADOWBALL_RELEASE_LAG;
     f32 x14_MEWTWO_SHADOWBALL_LANDING_LAG;
 
-    // SIDE SPECIAL - CONFUSION (SpecialS/SpecialAirS) //
+    // SIDE SPECIAL - CONFUSION (SpecialS/SpecialAirS)
 
     f32 x18_MEWTWO_CONFUSION_AIR_BOOST;
     ReflectDesc x1C_MEWTWO_CONFUSION_REFLECTION;
 
-    // UP SPECIAL - TELEPORT (SpecialHi/SpecialAirHi) //
+    // UP SPECIAL - TELEPORT (SpecialHi/SpecialAirHi)
 
     f32 x40_MEWTWO_TELEPORT_VEL_DIV_X;
     f32 x44_MEWTWO_TELEPORT_VEL_DIV_Y;
@@ -111,7 +111,7 @@ typedef struct _ftMewtwoAttributes {
     f32 x70_MEWTWO_TELEPORT_FREEFALL_MOBILITY;
     f32 x74_MEWTWO_TELEPORT_LANDING_LAG;
 
-    // DOWN SPECIAL - DISABLE (SpecialLw/SpecialAirLw) //
+    // DOWN SPECIAL - DISABLE (SpecialLw/SpecialAirLw)
 
     f32 x78_MEWTWO_DISABLE_GRAVITY;
     f32 x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY;
@@ -127,13 +127,13 @@ extern Fighter_CostumeStrings lbl_803D0F5C[];
 extern char lbl_803D0EC4[];
 extern Fighter_DemoStrings lbl_803D0F4C;
 
-// Mewtwo functions //
+// Mewtwo functions
 
 void ftMewtwo_OnDeath(HSD_GObj* gobj);
 void ftMewtwo_OnDeath2(HSD_GObj* gobj);
 void ftMewtwo_OnTakeDamage(HSD_GObj* gobj);
 
-// Up Special - Teleport (SpecialHi/SpecialAirHi) //
+// Up Special - Teleport (SpecialHi/SpecialAirHi)
 
 void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* gobj);
 void ftMewtwo_SpecialHi_SetStartGFX(HSD_GObj* gobj);
@@ -174,7 +174,7 @@ void ftMewtwo_SpecialHiLost_GroundToAir(HSD_GObj* gobj);
 void ftMewtwo_SpecialHiLost_Action(HSD_GObj* gobj);
 void ftMewtwo_SpecialAirHiLost_Action(HSD_GObj* gobj);
 
-// Down Special - Disable (SpecialLw/SpecialAirLw) //
+// Down Special - Disable (SpecialLw/SpecialAirLw)
 
 void ftMewtwo_SpecialLw_ClearDisableGObj(HSD_GObj* gobj);
 void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* gobj);
@@ -192,7 +192,7 @@ void ftMewtwo_SpecialLw_Coll(HSD_GObj* gobj);
 void ftMewtwo_SpecialAirLw_Coll(HSD_GObj* gobj);
 void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* gobj);
 
-// Side Special - Confusion (SpecialS/SpecialAirS) //
+// Side Special - Confusion (SpecialS/SpecialAirS)
 
 void ftMewtwo_SpecialS_SetFlags(HSD_GObj* gobj);
 void ftMewtwo_SpecialS_StartAction(HSD_GObj* gobj);
@@ -210,7 +210,7 @@ void ftMewtwo_SpecialAirS_Coll(HSD_GObj* gobj);
 void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* gobj);
 void ftMewtwo_SpecialS_OnReflect(HSD_GObj* gobj);
 
-// Neutral Special - Shadow Ball (SpecialN/SpecialAirN) //
+// Neutral Special - Shadow Ball (SpecialN/SpecialAirN)
 
 s32 ftMewtwo_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
                                      s32* chargeCycles);

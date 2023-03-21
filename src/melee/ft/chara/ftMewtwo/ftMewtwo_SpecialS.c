@@ -245,7 +245,7 @@ void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* gobj)
         ftColl_CreateReflectHit(
             gobj, &mewtwoAttrs->x1C_MEWTWO_CONFUSION_REFLECTION,
             ftMewtwo_SpecialS_OnReflect); // Really? A callback that simply
-                                          // returns instead of just NULL? //
+                                          // returns instead of just NULL?
         fp->x2218_flag.bits.b4 =
             1; // Here it is... the reason Confusion cannot change ownership.
         fp->mv.mt.SpecialS.isConfusionReflect = true;

@@ -10,7 +10,7 @@
 #include <common_structs.h>
 
 typedef struct _ftLuigiAttributes {
-    // SIDE SPECIAL - GREEN MISSILE //
+    // SIDE SPECIAL - GREEN MISSILE
 
     f32 x0_LUIGI_GREENMISSILE_UNK1;
     f32 x4_LUIGI_GREENMISSILE_SMASH;
@@ -34,7 +34,7 @@ typedef struct _ftLuigiAttributes {
     f32 x48_LUIGI_GREENMISSILE_MISFIRE_VEL_X;
     f32 x4C_LUIGI_GREENMISSILE_MISFIRE_VEL_Y;
 
-    // UP SPECIAL - SUPER JUMP PUNCH //
+    // UP SPECIAL - SUPER JUMP PUNCH
 
     f32 x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY; // Multiplies Luigi's max
                                                // horionztal aerial mobility
@@ -49,7 +49,7 @@ typedef struct _ftLuigiAttributes {
     f32 x68_LUIGI_SUPERJUMP_GRAVITY_START;
     f32 x6C_LUIGI_SUPERJUMP_VEL_Y;
 
-    // DOWN SPECIAL - LUIGI CYCLONE //
+    // DOWN SPECIAL - LUIGI CYCLONE
 
     f32 x70_LUIGI_CYCLONE_TAP_MOMENTUM; // Vertical momentum from (first?) B
                                         // button tap
@@ -73,9 +73,9 @@ extern Fighter_CostumeStrings lbl_803D0AB4[];
 extern char lbl_803D09E8[];
 extern Fighter_DemoStrings lbl_803D0A64;
 
-// Luigi Functions //
+// Luigi Functions
 
-// Netural Special - Fireball (SpecialN) //
+// Netural Special - Fireball (SpecialN)
 
 void ftLuigi_SpecialN_StartAction(HSD_GObj* gobj);
 void ftLuigi_SpecialAirN_StartAction(HSD_GObj* gobj);
@@ -89,7 +89,7 @@ void ftLuigi_SpecialN_Coll(HSD_GObj* gobj);
 void ftLuigi_SpecialAirN_Coll(HSD_GObj* gobj);
 void ftLuigi_SpecialN_FireSpawn(HSD_GObj* gobj);
 
-// Side Special - Green Missile (SpecialS) //
+// Side Special - Green Missile (SpecialS)
 
 void ftLuigi_SpecialS_SetGFX(HSD_GObj* gobj);
 void ftLuigi_SpecialS_SetVars(HSD_GObj* gobj);

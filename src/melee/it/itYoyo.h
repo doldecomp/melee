@@ -15,7 +15,7 @@ typedef struct itYoyoAttributes {
     f32 x20_UNK_TEXANIM_MOD;
     f32 x24_YOYO_RELEASE_VEL_X;
     f32 x28_YOYO_PULL_STRENGTH;
-    f32 x2C_UNK3_MOD; // Resistance multiplier? //
+    f32 x2C_UNK3_MOD; // Resistance multiplier?
     f32 x30_YOYO_RELEASE_VEL_Y;
     f32 x34_GRAVITY;
     f32 x38_GRAVITY_MOD;

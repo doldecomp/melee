@@ -53,8 +53,8 @@ typedef enum ftGameWatch_PanicLevel {
     ftGw_Panic_Full,
 } ftGameWatch_PanicLevel;
 
-// Oil Panic (SpecialLw/SpecialAirLw) //
+// Oil Panic (SpecialLw/SpecialAirLw)
 
-// Mr. Game & Watch Motion State IDs //
+// Mr. Game & Watch Motion State IDs
 
 #endif
