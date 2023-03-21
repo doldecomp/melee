@@ -6,7 +6,7 @@
 
 typedef struct ftMarioSpecialS {
     /// 0x2340 - bool to check if reflect bubble should be enabled
-    bool isReflect;
+    bool reflecting;
 } ftMarioSpecialS;
 
 typedef struct ftMarioSpecialLw {
