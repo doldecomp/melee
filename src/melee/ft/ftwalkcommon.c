@@ -160,7 +160,7 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
     }
 }
 
-static inline float getWalkAccel(Fighter* fp, float mul)
+static float getWalkAccel(Fighter* fp, float mul)
 {
     return fp->input.x620_lstick_x > 0
                ? mul * +fp->x110_attr.x114_WalkAcceleration
