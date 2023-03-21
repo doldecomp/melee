@@ -5,7 +5,6 @@
 #include "ftCommon/forward.h"
 
 #include "ft/types.h"
-#include "lb/lbcollision.h"
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
