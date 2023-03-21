@@ -50,7 +50,7 @@ union ftZelda_MotionVars {
         Vec2 x4;
         int xC;
         Vec2 x10;
-        f32 x18;
+        float x18;
     } specialhi;
 
     struct ftZelda_SpecialNVars {
