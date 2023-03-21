@@ -328,8 +328,7 @@ void ftSamus_8012B3A8(HSD_GObj* gobj)
     attr* ft_attr = &fp->x110_attr;
 
     if (fp->x2200_ftcmd_var0) {
-        func_8007CADC(fp, 0.0f,
-                      ft_attr->walk_init_vel * samus_attr->x64,
+        func_8007CADC(fp, 0.0f, ft_attr->walk_init_vel * samus_attr->x64,
                       ft_attr->walk_max_vel * samus_attr->x5C);
         func_8007CB74(gobj);
     } else {
