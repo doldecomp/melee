@@ -32,8 +32,8 @@ void func_80153A64(HSD_GObj* gobj)
     temp_r30 = temp_r31->x10C_ftData->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x171, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    temp_r31->xB0_pos.x = temp_r30->x60;
-    temp_r31->xB0_pos.y = temp_r30->x64;
+    temp_r31->cur_pos.x = temp_r30->x60;
+    temp_r31->cur_pos.y = temp_r30->x64;
     temp_r31->x80_self_vel.z = 0.0f;
     temp_r31->x80_self_vel.y = 0.0f;
     temp_r31->x80_self_vel.x = 0.0f;

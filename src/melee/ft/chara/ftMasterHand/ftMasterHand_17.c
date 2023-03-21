@@ -48,8 +48,8 @@ static void func_80153910(HSD_GObj* arg0)
     Fighter_ChangeMotionState(arg0, 0x170, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
     func_8015C208(arg0, &sp10);
-    fp->xB0_pos.x = sp10.x;
-    fp->xB0_pos.y = attr->x5C;
+    fp->cur_pos.x = sp10.x;
+    fp->cur_pos.y = attr->x5C;
     fp->x80_self_vel.z = 0.0f;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;

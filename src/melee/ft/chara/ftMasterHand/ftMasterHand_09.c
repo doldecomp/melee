@@ -125,15 +125,15 @@ void lbl_80151F00(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    func_800866DC(func_8015C244(gobj, &r31_fp->xB0_pos), &sp28);
-    lbvector_Diff(&sp28, &r31_fp->xB0_pos, &sp1C_resultVector);
+    func_800866DC(func_8015C244(gobj, &r31_fp->cur_pos), &sp28);
+    lbvector_Diff(&sp28, &r31_fp->cur_pos, &sp1C_resultVector);
 
     if (my_lbvector_Len(&sp1C_resultVector) < r30_attributes->x4C)
         func_80151CA8(gobj);
 
     func_80054158(0, &sp28);
 
-    if (r31_fp->xB0_pos.x < sp28.x)
+    if (r31_fp->cur_pos.x < sp28.x)
         func_801520D8(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {

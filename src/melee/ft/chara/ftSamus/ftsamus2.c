@@ -45,7 +45,7 @@ bool ftSamus_80128A1C(HSD_GObj* gobj, unk_t arg1, f32 farg1)
     for (i = 0; i < fp->x119E_hurtboxNum; i++) {
         if (lbColl_80008248(arg1, &fp->x11A0_fighterHurtbox[i],
                             *func_8007F804(fp), farg1, fp->x34_scale.y,
-                            fp->xB0_pos.z))
+                            fp->cur_pos.z))
         {
             return true;
         }
@@ -58,7 +58,7 @@ f32 ftSamus_80128AC8(HSD_GObj* gobj, f32 farg1, f32 farg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* attr = getFtSpecialAttrs(fp);
-    f32 value = (fp->xB0_pos.x - farg1) / farg2;
+    f32 value = (fp->cur_pos.x - farg1) / farg2;
     if (value >= 1.0f) {
         value = 1.0f;
     }

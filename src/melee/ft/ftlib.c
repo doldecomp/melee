@@ -304,19 +304,19 @@ void* func_80086630(HSD_GObj* gobj, s32 i)
 void func_80086644(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    *pos = fp->xB0_pos;
+    *pos = fp->cur_pos;
 }
 
 void func_80086664(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->xB0_pos = *pos;
+    fp->cur_pos = *pos;
 }
 
 void func_80086684(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    *pos = fp->xBC_prevPos;
+    *pos = fp->prev_pos;
 }
 
 void ftData_SetScale(HSD_GObj* gobj, f32 val)
@@ -452,7 +452,7 @@ void func_80086990(HSD_GObj* gobj, Vec3* v)
     Fighter* fp = GET_FIGHTER(gobj);
     f32 tmp = 0.5f * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y +
                       fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
-    vector_add(v, &fp->xB0_pos, 0, tmp, 0);
+    vector_add(v, &fp->cur_pos, 0, tmp, 0);
 }
 
 f32 func_800869D4(HSD_GObj* gobj)
@@ -580,7 +580,7 @@ u8 func_80086BE0(HSD_GObj* gobj)
 void func_80086BEC(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    *v = fp->xC8_pos_delta;
+    *v = fp->pos_delta;
 }
 
 enum_t func_80086C0C(HSD_GObj* gobj)
@@ -786,7 +786,7 @@ void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
     func_800D105C(gobj);
     func_80081C88(gobj, fp->x34_scale.y);
     func_8007EBAC(fp, 0xC, 0);
-    func_80030E44(2, &fp->xB0_pos);
+    func_80030E44(2, &fp->cur_pos);
     func_80088148(fp, 0x121, 0x7F, 0x40);
 }
 

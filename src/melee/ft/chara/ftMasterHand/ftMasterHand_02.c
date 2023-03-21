@@ -56,9 +56,9 @@ void func_8014FE5C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->motion_id == 341) || (fp->motion_id == 342)) {
-        fp->xB0_pos = fp->fv.mh.x2240_pos;
+        fp->cur_pos = fp->fv.mh.x2240_pos;
     } else {
-        fp->fv.mh.x2240_pos = fp->xB0_pos;
+        fp->fv.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->fv.mh.x2258 == 389) {
         Fighter_ChangeMotionState(gobj, 341, 0, 0, fp->x894_currentAnimFrame,
@@ -73,9 +73,9 @@ void func_8014FF1C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->motion_id == 341) || (fp->motion_id == 342)) {
-        fp->xB0_pos = fp->fv.mh.x2240_pos;
+        fp->cur_pos = fp->fv.mh.x2240_pos;
     } else {
-        fp->fv.mh.x2240_pos = fp->xB0_pos;
+        fp->fv.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->fv.mh.x2258 == 390) {
         Fighter_ChangeMotionState(gobj, 342, 0, 0, fp->x894_currentAnimFrame,
@@ -97,9 +97,9 @@ void lbl_8014FFDC(HSD_GObj* gobj)
 
     if (r31_fp->fv.mh.x2258 == 0x186) {
         if ((r31_fp->motion_id == 0x155) || (r31_fp->motion_id == 0x156)) {
-            r31_fp->xB0_pos = r31_fp->fv.mh.x2240_pos;
+            r31_fp->cur_pos = r31_fp->fv.mh.x2240_pos;
         } else {
-            r31_fp->fv.mh.x2240_pos = r31_fp->xB0_pos;
+            r31_fp->fv.mh.x2240_pos = r31_fp->cur_pos;
         }
         if (r31_fp->fv.mh.x2258 == 0x186) {
             Fighter_ChangeMotionState(
@@ -111,9 +111,9 @@ void lbl_8014FFDC(HSD_GObj* gobj)
         return;
     }
     if ((r31_fp->motion_id == 0x155) || (r31_fp->motion_id == 0x156)) {
-        r31_fp->xB0_pos = r31_fp->fv.mh.x2240_pos;
+        r31_fp->cur_pos = r31_fp->fv.mh.x2240_pos;
     } else {
-        r31_fp->fv.mh.x2240_pos = r31_fp->xB0_pos;
+        r31_fp->fv.mh.x2240_pos = r31_fp->cur_pos;
     }
     if (r31_fp->fv.mh.x2258 == 0x185) {
         Fighter_ChangeMotionState(gobj, 0x155, 0, 0,
@@ -133,13 +133,13 @@ void func_80150144(HSD_GObj* gobj)
     r5_attributes = fp->x10C_ftData->ext_attr;
     fp->fv.mh.x2258 = 341;
     fp->motion_id = 343;
-    fp->xB0_pos.x = r5_attributes->x30_pos2.x;
-    fp->xB0_pos.y = r5_attributes->x30_pos2.y;
+    fp->cur_pos.x = r5_attributes->x30_pos2.x;
+    fp->cur_pos.y = r5_attributes->x30_pos2.y;
     fp_1 = GET_FIGHTER(gobj);
     if ((fp_1->motion_id == 341) || (fp_1->motion_id == 342)) {
-        fp_1->xB0_pos = fp_1->fv.mh.x2240_pos;
+        fp_1->cur_pos = fp_1->fv.mh.x2240_pos;
     } else {
-        fp_1->fv.mh.x2240_pos = fp_1->xB0_pos;
+        fp_1->fv.mh.x2240_pos = fp_1->cur_pos;
     }
     if (fp_1->fv.mh.x2258 == 389) {
         Fighter_ChangeMotionState(gobj, 341, 0, 0, fp_1->x894_currentAnimFrame,
@@ -183,9 +183,9 @@ inline void lbl_80150230_inline_1(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->motion_id == 0x155 || fp->motion_id == 0x156) {
-        fp->xB0_pos = fp->fv.mh.x2240_pos;
+        fp->cur_pos = fp->fv.mh.x2240_pos;
     } else {
-        fp->fv.mh.x2240_pos = fp->xB0_pos;
+        fp->fv.mh.x2240_pos = fp->cur_pos;
     }
     if (fp->fv.mh.x2258 == 0x186) {
         Fighter_ChangeMotionState(gobj, 0x156, 0, 0, fp->x894_currentAnimFrame,

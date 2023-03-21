@@ -124,9 +124,9 @@ void func_80081544(HSD_GObj* gobj)
         } else {
             func_80053DA4(fp->mv.co.cliff.ledge_id, sp10);
         }
-        fp->xB0_pos.x =
+        fp->cur_pos.x =
             (f32) ((fp->x68C_transNPos.z * fp->facing_dir) + sp10[0]);
-        fp->xB0_pos.y = (f32) (sp10[1] + fp->x68C_transNPos.y);
+        fp->cur_pos.y = (f32) (sp10[1] + fp->x68C_transNPos.y);
         return;
     }
     func_800CC730(gobj);

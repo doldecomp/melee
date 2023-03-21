@@ -44,9 +44,9 @@ void func_80076064(Fighter* fp)
     camera_box->x48.z = spC.xC.z;
     camera_box->x2C = camera_box->x40;
     camera_box->x34 = camera_box->x48;
-    camera_box->x10.x = fp->xB0_pos.x;
-    camera_box->x10.y = fp->xB0_pos.y + spC.x0.x;
-    camera_box->x10.z = fp->xB0_pos.z;
+    camera_box->x10.x = fp->cur_pos.x;
+    camera_box->x10.y = fp->cur_pos.y + spC.x0.x;
+    camera_box->x10.z = fp->cur_pos.z;
     camera_box->x1C = camera_box->x10;
 }
 
@@ -77,9 +77,9 @@ void func_800761C8(HSD_GObj* gobj)
         /// @todo this line changes everything lol
         cam_floats.xC;
 
-        camera_box->x10.x = fp->xB0_pos.x;
-        camera_box->x10.y = fp->xB0_pos.y + cam_floats.x0.x;
-        camera_box->x10.z = fp->xB0_pos.z;
+        camera_box->x10.x = fp->cur_pos.x;
+        camera_box->x10.y = fp->cur_pos.y + cam_floats.x0.x;
+        camera_box->x10.z = fp->cur_pos.z;
     }
 
     camera_box->xC_flag.bits.b0 = false;

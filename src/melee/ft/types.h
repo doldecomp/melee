@@ -778,9 +778,9 @@ struct Fighter {
     Vec3 x8c_kb_vel;           // 0x8C
     Vec3 x98_atk_shield_kb;    // 0x98
     Vec3 xA4_unk_vel;          // 0xA4
-    Vec3 xB0_pos;              // 0xb0
-    Vec3 xBC_prevPos;          // 0xBC
-    Vec3 xC8_pos_delta;        // 0xC8
+    Vec3 cur_pos;              // 0xb0
+    Vec3 prev_pos;             // 0xBC
+    Vec3 pos_delta;            // 0xC8
     Vec3 xD4_unk_vel;          // 0xD4
     GroundOrAir ground_or_air; // 0xE0
     f32 xE4_ground_accel_1;    // 0xE4

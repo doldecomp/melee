@@ -259,7 +259,7 @@ void ftFox_SpecialN_StartMotion(HSD_GObj* gobj)
 
     fp->mv.fx.SpecialN.isBlasterLoop = false;
 
-    blasterGObj = func_802AE8A8(fp->facing_dir, gobj, &fp->xB0_pos,
+    blasterGObj = func_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,
                                 func_8007500C(fp, 0x31),
                                 foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
     fp->fv.fx.x222C_blasterGObj = blasterGObj;
@@ -294,7 +294,7 @@ void ftFox_SpecialAirN_StartMotion(
     func_8006EBA4(gobj);
 
     fp->mv.fx.SpecialN.isBlasterLoop = false;
-    blasterGObj = func_802AE8A8(fp->facing_dir, gobj, &fp->xB0_pos,
+    blasterGObj = func_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,
                                 func_8007500C(fp, 0x31),
                                 foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
     fp->fv.fx.x222C_blasterGObj = blasterGObj;
@@ -779,7 +779,7 @@ void ftFox_Throw_Anim(HSD_GObj* gobj)
         case 1:
             if (fp->fv.fx.x222C_blasterGObj == NULL) {
                 HSD_GObj* blasterGObj =
-                    func_802AE8A8(fp->facing_dir, gobj, &fp->xB0_pos,
+                    func_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,
                                   func_8007500C(fp, 0x31),
                                   foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
 

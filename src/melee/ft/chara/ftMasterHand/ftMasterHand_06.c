@@ -71,7 +71,7 @@ void func_80151918(HSD_GObj* gobj)
 
     r8_fp = gobj->user_data;
     r7_attributes = r8_fp->x10C_ftData->ext_attr;
-    r8_fp->mv.mh.unk0.xC.x = (r8_fp->xB0_pos.x - r7_attributes->x3C);
+    r8_fp->mv.mh.unk0.xC.x = (r8_fp->cur_pos.x - r7_attributes->x3C);
     r8_fp->mv.mh.unk0.xC.y = r7_attributes->x38;
     r8_fp->mv.mh.unk0.xC.z = 0.0f;
 
@@ -96,13 +96,13 @@ void lbl_8015198C(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_r31 = gobj->user_data;
         func_80054158(0, &sp14);
-        if (temp_r31->xB0_pos.x < sp14.x) {
+        if (temp_r31->cur_pos.x < sp14.x) {
             func_80151AC8(gobj);
             return;
         }
         temp_r8 = gobj->user_data;
         temp_r7 = temp_r8->x10C_ftData->ext_attr;
-        temp_r8->mv.mh.unk0.xC.x = temp_r8->xB0_pos.x - temp_r7->x3C;
+        temp_r8->mv.mh.unk0.xC.x = temp_r8->cur_pos.x - temp_r7->x3C;
         temp_r8->mv.mh.unk0.xC.y = temp_r7->x38;
         temp_r8->mv.mh.unk0.xC.z = 0.0f;
         Fighter_ChangeMotionState(gobj, 0x15B, 0, 0, 0.0f, 1.0f, 0.0f);

@@ -217,16 +217,16 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     player_coords.x = fp->facing_dir * func_800804EC(fp) + player_coords.x;
     x = player_coords.x;
-    fp->xB0_pos.x = x;
-    fp->xBC_prevPos.x = x;
+    fp->cur_pos.x = x;
+    fp->prev_pos.x = x;
 
     y = player_coords.y;
-    fp->xB0_pos.y = y;
-    fp->xBC_prevPos.y = y;
+    fp->cur_pos.y = y;
+    fp->prev_pos.y = y;
 
     z = player_coords.z;
-    fp->xB0_pos.z = z;
-    fp->xBC_prevPos.z = z;
+    fp->cur_pos.z = z;
+    fp->prev_pos.z = z;
 
     fp->x30_facingDirectionRepeated = fp->facing_dir;
     fp->x34_scale.y = fp->x34_scale.x;
@@ -254,9 +254,9 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
 
     fp->x61D = 255;
 
-    fp->xC8_pos_delta.z = 0.0f;
-    fp->xC8_pos_delta.y = 0.0f;
-    fp->xC8_pos_delta.x = 0.0f;
+    fp->pos_delta.z = 0.0f;
+    fp->pos_delta.y = 0.0f;
+    fp->pos_delta.x = 0.0f;
     fp->x894_currentAnimFrame = 0.0f;
     fp->x898_unk = 0.0f;
 
@@ -500,7 +500,7 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     Fighter_UnkInitReset_80067C98(fp);
-    HSD_JObjSetTranslate(GET_JOBJ(gobj), &fp->xB0_pos);
+    HSD_JObjSetTranslate(GET_JOBJ(gobj), &fp->cur_pos);
 
     func_800D105C(gobj);
     func_800C09B4(gobj);
@@ -520,7 +520,7 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
         func_8007D5D4(fp);
     func_80076064(fp);
 
-    HSD_JObjSetTranslate(GET_JOBJ(gobj), &fp->xB0_pos);
+    HSD_JObjSetTranslate(GET_JOBJ(gobj), &fp->cur_pos);
     Fighter_UnkApplyTransformation_8006C0F0(gobj);
     Fighter_UpdateModelScale(gobj);
 
@@ -926,7 +926,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     fp->motion_id = new_motion_state_index;
     fp->x30_facingDirectionRepeated = fp->facing_dir;
 
-    HSD_JObjSetTranslate(jobj, &fp->xB0_pos);
+    HSD_JObjSetTranslate(jobj, &fp->cur_pos);
     func_80067624(gobj, &fp->x60C);
 
     if ((arg2 & FtStateChange_SkipUpdateHit) == 0) {
@@ -1445,11 +1445,11 @@ void Fighter_8006A360(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x221F_flag.bits.b3) {
-        fp->xC8_pos_delta.x = fp->xB0_pos.x - fp->xBC_prevPos.x;
-        fp->xC8_pos_delta.y = fp->xB0_pos.y - fp->xBC_prevPos.y;
-        fp->xC8_pos_delta.z = fp->xB0_pos.z - fp->xBC_prevPos.z;
+        fp->pos_delta.x = fp->cur_pos.x - fp->prev_pos.x;
+        fp->pos_delta.y = fp->cur_pos.y - fp->prev_pos.y;
+        fp->pos_delta.z = fp->cur_pos.z - fp->prev_pos.z;
 
-        fp->xBC_prevPos = fp->xB0_pos;
+        fp->prev_pos = fp->cur_pos;
 
         if (fp->dmg.x18C8 != -1 && fp->dmg.x18C8 > 0) {
             fp->dmg.x18C8--;
@@ -2309,9 +2309,9 @@ void Fighter_procUpdate(HSD_GObj* gobj)
 
         // add some horizontal+depth offset to the position? Why is there no
         // vertical component?
-        fp->xB0_pos.x += fp->xF8_playerNudgeVel.x;
-        fp->xB0_pos.y += 0;
-        fp->xB0_pos.z += fp->xF8_playerNudgeVel.y;
+        fp->cur_pos.x += fp->xF8_playerNudgeVel.x;
+        fp->cur_pos.y += 0;
+        fp->cur_pos.z += fp->xF8_playerNudgeVel.y;
 
         if (fp->x2222_flag.bits.b6 && !fp->x2222_flag.bits.b7) {
             s32 bit;
@@ -2332,21 +2332,21 @@ void Fighter_procUpdate(HSD_GObj* gobj)
             /// @todo @c incompatible-pointer-types because bad headers
             if (bit || func_80070FD0(fp) || fp->x594_animCurrFlags1.bits.b7) {
                 // fp->xB0_position += fp->xD4_unk_vel
-                PSVECAdd(&fp->xB0_pos, &fp->xD4_unk_vel, &fp->xB0_pos);
+                PSVECAdd(&fp->cur_pos, &fp->xD4_unk_vel, &fp->cur_pos);
                 /// @todo We set this velocity to 0 after applying it.
                 ///       Is this SDI or ASDI?
                 VEC_CLEAR(fp->xD4_unk_vel);
             }
             // fp->xB0_position += *pAtkShieldKB
-            PSVECAdd(&fp->xB0_pos, (Vec3*) pAtkShieldKB, &fp->xB0_pos);
+            PSVECAdd(&fp->cur_pos, (Vec3*) pAtkShieldKB, &fp->cur_pos);
         } else {
             // fp@r31.position@0xB0.xyz += selfVel + pAtkShieldKB
-            PSVECAdd(&fp->xB0_pos, &selfVel, &fp->xB0_pos);
-            fp->xB0_pos.x += p_kb_vel->x;
-            fp->xB0_pos.y += p_kb_vel->y;
-            fp->xB0_pos.z += 0;
+            PSVECAdd(&fp->cur_pos, &selfVel, &fp->cur_pos);
+            fp->cur_pos.x += p_kb_vel->x;
+            fp->cur_pos.y += p_kb_vel->y;
+            fp->cur_pos.z += 0;
 
-            PSVECAdd(&fp->xB0_pos, (Vec3*) pAtkShieldKB, &fp->xB0_pos);
+            PSVECAdd(&fp->cur_pos, (Vec3*) pAtkShieldKB, &fp->cur_pos);
         }
         // accumulate wind hazards into the windOffset vector
         func_getWindOffsetVec_8007B924(gobj,
@@ -2367,15 +2367,15 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         // __assert functions. But I guess these just stop or reset the game.
         // result is written to where r5 points to, which is 'difference' in
         // this case
-        if (func_800567C0(fp->x6F0_collData.x14C_ground.index, &fp->xB0_pos,
+        if (func_800567C0(fp->x6F0_collData.x14C_ground.index, &fp->cur_pos,
                           &difference))
             // fp->position += difference
-            PSVECAdd(&fp->xB0_pos, &difference, &fp->xB0_pos);
+            PSVECAdd(&fp->cur_pos, &difference, &fp->cur_pos);
     }
 
-    fp->xB0_pos.x += windOffset.x;
-    fp->xB0_pos.y += windOffset.y;
-    fp->xB0_pos.z += windOffset.z;
+    fp->cur_pos.x += windOffset.x;
+    fp->cur_pos.y += windOffset.y;
+    fp->cur_pos.z += windOffset.z;
 
     // TODO: do the bitflag tests here tell us if the player is dead?
     func_800D3158(gobj);
@@ -2384,8 +2384,8 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         // if position.y crossed
         // (0.25*stage.blastBottom+0.75*stage.cameraBottom) +
         // stage.crowdReactStart from below...
-        if (fp->xBC_prevPos.y <= Stage_CalcUnkCamYBounds() &&
-            fp->xB0_pos.y > Stage_CalcUnkCamYBounds())
+        if (fp->prev_pos.y <= Stage_CalcUnkCamYBounds() &&
+            fp->cur_pos.y > Stage_CalcUnkCamYBounds())
         {
             fp->x2225_b0 = 0;
         }
@@ -2393,8 +2393,8 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         if (!fp->x222A_flag.bits.b1 && !fp->x2228_flag.bits.b5) {
             // if position.y crossed 0.5*(stage.blastBottom+stage.cameraBottom)
             // + stage.crowdReactStart from above...
-            if (fp->xBC_prevPos.y >= Stage_CalcUnkCamY() &&
-                fp->xB0_pos.y < Stage_CalcUnkCamY())
+            if (fp->prev_pos.y >= Stage_CalcUnkCamY() &&
+                fp->cur_pos.y < Stage_CalcUnkCamY())
             {
                 // plays this sound you always hear when you get close to the
                 // bottom blast zone
@@ -2405,19 +2405,19 @@ void Fighter_procUpdate(HSD_GObj* gobj)
     }
 
     if (fp->dmg.x18A4_knockbackMagnitude && !fp->x221C_flag.bits.b6 &&
-        !func_80322258(fp->xB0_pos.x))
+        !func_80322258(fp->cur_pos.x))
     {
         fp->dmg.x18A4_knockbackMagnitude = 0.0f;
     }
 
     func_8007AF28(gobj);
 
-    if (g_debugLevel >= 3 && (fpclassify(fp->xB0_pos.x) == FP_NAN ||
-                              fpclassify(fp->xB0_pos.y) == FP_NAN ||
-                              fpclassify(fp->xB0_pos.z) == FP_NAN))
+    if (g_debugLevel >= 3 && (fpclassify(fp->cur_pos.x) == FP_NAN ||
+                              fpclassify(fp->cur_pos.y) == FP_NAN ||
+                              fpclassify(fp->cur_pos.z) == FP_NAN))
     {
         OSReport("fighter procUpdate pos error.\tpos.x=%f\tpos.y=%f\n",
-                 fp->xB0_pos.x, fp->xB0_pos.y);
+                 fp->cur_pos.x, fp->cur_pos.y);
         __assert(__FILE__, /*line*/ 2517, "0");
     }
 }
@@ -2457,12 +2457,12 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* gobj)
 
 static inline float Fighter_GetPosX(Fighter* fp)
 {
-    return fp->xB0_pos.x;
+    return fp->cur_pos.x;
 }
 
 static inline float Fighter_GetPosY(Fighter* fp)
 {
-    return fp->xB0_pos.y;
+    return fp->cur_pos.y;
 }
 
 void Fighter_8006C27C(HSD_GObj* gobj)
@@ -2479,7 +2479,7 @@ void Fighter_8006C27C(HSD_GObj* gobj)
 
         fp->x2223_flag.bits.b5 = 0;
 
-        HSD_JObjSetTranslate(gobj->hsd_obj, &fp->xB0_pos);
+        HSD_JObjSetTranslate(gobj->hsd_obj, &fp->cur_pos);
 
         if (fp->cb.x21A8_callback_Coll) {
             fp->cb.x21A8_callback_Coll(gobj);
@@ -2491,9 +2491,9 @@ void Fighter_8006C27C(HSD_GObj* gobj)
         }
 
         if (g_debugLevel >= 3) {
-            if (fpclassify(fp->xB0_pos.x) == FP_NAN ||
-                fpclassify(fp->xB0_pos.y) == FP_NAN ||
-                fpclassify(fp->xB0_pos.z) == FP_NAN)
+            if (fpclassify(fp->cur_pos.x) == FP_NAN ||
+                fpclassify(fp->cur_pos.y) == FP_NAN ||
+                fpclassify(fp->cur_pos.z) == FP_NAN)
             {
                 f32 x = Fighter_GetPosX(fp);
                 f32 y = Fighter_GetPosY(fp);
@@ -2503,7 +2503,7 @@ void Fighter_8006C27C(HSD_GObj* gobj)
             }
         }
 
-        HSD_JObjSetTranslate(gobj->hsd_obj, &fp->xB0_pos);
+        HSD_JObjSetTranslate(gobj->hsd_obj, &fp->cur_pos);
     }
 }
 
@@ -2533,12 +2533,12 @@ void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* gobj)
 
         if (fp->cb.x21B4_callback_Accessory2) {
             fp->cb.x21B4_callback_Accessory2(gobj);
-            HSD_JObjSetTranslate(gobj->hsd_obj, &fp->xB0_pos);
+            HSD_JObjSetTranslate(gobj->hsd_obj, &fp->cur_pos);
         }
 
         if (fp->cb.x21B0_callback_Accessory1) {
             fp->cb.x21B0_callback_Accessory1(gobj);
-            HSD_JObjSetTranslate(gobj->hsd_obj, &fp->xB0_pos);
+            HSD_JObjSetTranslate(gobj->hsd_obj, &fp->cur_pos);
         }
     }
 }
@@ -2566,14 +2566,14 @@ void Fighter_8006C80C(HSD_GObj* gobj)
         }
 
         if (fp->ground_or_air == GA_Air &&
-            fp->xB0_pos.y < Stage_GetCamBoundsBottomOffset())
+            fp->cur_pos.y < Stage_GetCamBoundsBottomOffset())
         {
             if (func_802FB6E8(fp->xC_playerID) == 3) {
                 Vec3 cam_offset;
                 Stage_UnkSetVec3TCam_Offset(&cam_offset);
 
-                if (fp->xB0_pos.y + cam_offset.y < fp->x2140) {
-                    fp->x2140 = fp->xB0_pos.y + cam_offset.y;
+                if (fp->cur_pos.y + cam_offset.y < fp->x2140) {
+                    fp->x2140 = fp->cur_pos.y + cam_offset.y;
                 }
             }
         }
@@ -3081,11 +3081,11 @@ void Fighter_8006DA4C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x221F_flag.bits.b3) {
-        Player_80032828(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->xB0_pos);
+        Player_80032828(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->cur_pos);
         Player_SetFacingDirectionConditional(
             fp->xC_playerID, fp->x221F_flag.bits.b4, fp->facing_dir);
-        func_8003FAA8(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->xB0_pos,
-                      &fp->xBC_prevPos);
+        func_8003FAA8(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->cur_pos,
+                      &fp->prev_pos);
     }
 }
 
