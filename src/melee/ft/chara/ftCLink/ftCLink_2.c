@@ -27,8 +27,8 @@ void ftCLink_80149354(HSD_GObj* gobj)
                                 fp->facing_dir);
         fp->fv.cl.x2244 = (u32) temp_r3;
         if (temp_r3 != NULL) {
-            fp->cb.x21E4_callback_OnDeath2 = func_800EAF58;
-            fp->cb.x21DC_callback_OnTakeDamage = func_800EAF58;
+            fp->cb.x21E4_callback_OnDeath2 = ftLink_800EAF58;
+            fp->cb.x21DC_callback_OnTakeDamage = ftLink_800EAF58;
         }
     } else if (ft2->x2204_ftcmd_var1 == 2) {
         ftCLink_80149268(gobj);
