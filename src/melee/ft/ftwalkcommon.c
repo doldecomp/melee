@@ -163,7 +163,7 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
 inline float getFtWalkAcceleration(Fighter* fp, float mul)
 {
     return fp->input.x620_lstick_x > 0
-               ? mul * fp->x110_attr.x114_WalkAcceleration
+               ? mul * +fp->x110_attr.x114_WalkAcceleration
                : mul * -fp->x110_attr.x114_WalkAcceleration;
 }
 
@@ -171,7 +171,7 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 _[20];
+    u8 _[12];
 #endif
 
     Fighter* fp;
