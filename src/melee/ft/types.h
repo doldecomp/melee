@@ -761,7 +761,7 @@ struct Fighter {
     /* 0x4 */ FighterKind x4_fighterKind;
     /* 0x8 */ s32 x8_spawnNum;
     /* 0xC */ u8 xC_playerID;
-    /* 0x10 */ enum_t motion_id;
+    /* 0x10 */ ftCommon_MotionState motion_id;
     /* 0x14 */ enum_t anim_id;
     /* 0x18 */ s32 x18;
     /* 0x1C */ MotionState* x1C_actionStateList;
