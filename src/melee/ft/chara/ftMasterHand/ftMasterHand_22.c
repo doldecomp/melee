@@ -47,7 +47,7 @@ void lbl_801542DC(HSD_GObj* gobj)
 void func_801542E0(HSD_GObj* gobj)
 {
     Fighter* r31_fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* r30_attributes = r31_fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x175, 0, 0, r31_fp->x894_currentAnimFrame,
                               1.0f, 0.0f);
     ftAnim_SetAnimRate(gobj, r30_attributes->x110_pos.y);
@@ -117,7 +117,7 @@ void lbl_8015442C(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER doesn't fit the stack.
     Fighter* fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
     f32 len;
     f32 speed;
     Vec3 sp28_pos;
@@ -213,7 +213,7 @@ void func_801546D8(HSD_GObj* gobj)
 
     r31_fp = gobj->user_data;
     // temp_f1 = ;
-    temp_r30 = r31_fp->x10C_ftData->ext_attr;
+    temp_r30 = r31_fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x17D, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     r31_fp->mv.mh.unk0.xC.x = temp_r30->x30_pos2.x;
@@ -247,7 +247,7 @@ void lbl_801547D8(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* r30_attributes;
 
     r31_fp = gobj->user_data;
-    r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    r30_attributes = r31_fp->ft_data->ext_attr;
     func_80085134(gobj);
     func_8015BE40(gobj, &r31_fp->mv.mh.unk0.xC, &r31_fp->mv.mh.unk0.x18,
                   r30_attributes->x2C, r30_attributes->x28);
@@ -267,7 +267,7 @@ void func_8015483C(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* r30_attributes;
 
     r31_fp = gobj->user_data;
-    r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    r30_attributes = r31_fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x177, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     r31_fp->mv.mh.unk0.x24 = r30_attributes->x120;
@@ -313,7 +313,7 @@ void lbl_801549A8(HSD_GObj* arg0)
     ftMasterHand_SpecialAttrs* temp_r30;
 
     temp_r31 = arg0->user_data;
-    temp_r30 = temp_r31->x10C_ftData->ext_attr;
+    temp_r30 = temp_r31->ft_data->ext_attr;
     func_80085134(arg0);
     func_8015BE40(arg0, &temp_r31->mv.mh.unk0.xC, &temp_r31->mv.mh.unk0.x18,
                   temp_r30->x2C, temp_r30->x28);

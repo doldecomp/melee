@@ -1549,7 +1549,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     }
     dst->x221E_flag.bits.b4 = src->x221E_flag.bits.b4;
     if (src->x197C != NULL) {
-        func_8026B9A8(src->x197C, dst_gobj, dst->x10C_ftData->x8->unk12);
+        func_8026B9A8(src->x197C, dst_gobj, dst->ft_data->x8->unk12);
         func_802950D4(src->x197C, 0);
         func_8007F948(dst_gobj, src->x197C, src->x2014);
         func_8007FA00(gobj);
@@ -1557,7 +1557,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         dst->x197C = NULL;
     }
     if (src->x1980 != NULL) {
-        func_8026B9A8(src->x1980, dst_gobj, dst->x10C_ftData->x8->unk12);
+        func_8026B9A8(src->x1980, dst_gobj, dst->ft_data->x8->unk12);
         func_8007FE84(dst_gobj, src->x1980, src->x2018, src->x2024);
         func_8007FDA0(gobj);
     } else {
@@ -1571,8 +1571,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         dst->x1974_heldItem = src->x1974_heldItem;
         dst->x221E_flag.bits.b3 = src->x221E_flag.bits.b3;
         func_80094818(dst_gobj, 1);
-        func_8026B9A8(src->x1974_heldItem, dst_gobj,
-                      dst->x10C_ftData->x8->unk10);
+        func_8026B9A8(src->x1974_heldItem, dst_gobj, dst->ft_data->x8->unk10);
     }
     func_80322314();
     func_800BFD04(gobj);
@@ -1625,7 +1624,7 @@ f32 Fighter_GetModelScale(Fighter* fp)
 void func_8007F6A4(Fighter* fp, HSD_JObj* jobj)
 {
     Vec3 scale;
-    f32 val = 1.0f / fp->x10C_ftData->x0->x8C;
+    f32 val = 1.0f / fp->ft_data->x0->x8C;
     scale.z = val;
     scale.y = val;
     scale.x = val;
@@ -1757,7 +1756,7 @@ void func_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
     vec = lbl_803B74A0;
     func_8026BD0C(arg1);
     func_8026ABD8(arg1, &vec, 0);
-    func_8026AB54(arg1, gobj, fp->x10C_ftData->x8->unk12);
+    func_8026AB54(arg1, gobj, fp->ft_data->x8->unk12);
     func_8007F948(gobj, arg1, func_8026B54C(arg1));
     func_800D105C(gobj);
     func_80081C88(gobj, fp->x34_scale.y);
@@ -1789,8 +1788,8 @@ void func_8007FC7C(HSD_GObj* gobj, f32 arg8)
         fp->x2024 = sp20 + arg8;
         func_8007FDA0(gobj);
     } else {
-        item_gobj = func_8029A748(gobj, &fp->cur_pos,
-                                  fp->x10C_ftData->x8->unk12, fp->facing_dir);
+        item_gobj = func_8029A748(gobj, &fp->cur_pos, fp->ft_data->x8->unk12,
+                                  fp->facing_dir);
         if (item_gobj != NULL) {
             func_8007FE84(gobj, item_gobj, sp20, arg8);
             func_8007FDA0(gobj);

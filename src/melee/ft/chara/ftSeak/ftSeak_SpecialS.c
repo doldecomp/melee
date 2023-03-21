@@ -65,7 +65,7 @@ void ftSeak_80110490(Fighter* fp)
 void ftSeak_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    UNK_T* items = fp->x10C_ftData->x48_items;
+    UNK_T* items = fp->ft_data->x48_items;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH

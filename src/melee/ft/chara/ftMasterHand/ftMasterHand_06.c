@@ -20,7 +20,7 @@ void lbl_801517B0(HSD_GObj* gobj)
 void lbl_801517F4(HSD_GObj* gobj)
 {
     Fighter* r4_fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* r3_attributes = r4_fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* r3_attributes = r4_fp->ft_data->ext_attr;
     r4_fp->x80_self_vel.y += r3_attributes->x150;
     r4_fp->x80_self_vel.z += r3_attributes->x158;
 }
@@ -70,7 +70,7 @@ void func_80151918(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* r7_attributes;
 
     r8_fp = gobj->user_data;
-    r7_attributes = r8_fp->x10C_ftData->ext_attr;
+    r7_attributes = r8_fp->ft_data->ext_attr;
     r8_fp->mv.mh.unk0.xC.x = (r8_fp->cur_pos.x - r7_attributes->x3C);
     r8_fp->mv.mh.unk0.xC.y = r7_attributes->x38;
     r8_fp->mv.mh.unk0.xC.z = 0.0f;
@@ -101,7 +101,7 @@ void lbl_8015198C(HSD_GObj* gobj)
             return;
         }
         temp_r8 = gobj->user_data;
-        temp_r7 = temp_r8->x10C_ftData->ext_attr;
+        temp_r7 = temp_r8->ft_data->ext_attr;
         temp_r8->mv.mh.unk0.xC.x = temp_r8->cur_pos.x - temp_r7->x3C;
         temp_r8->mv.mh.unk0.xC.y = temp_r7->x38;
         temp_r8->mv.mh.unk0.xC.z = 0.0f;
@@ -128,7 +128,7 @@ void lbl_80151A88(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* r6_attributes;
 
     r5_fp = gobj->user_data;
-    r6_attributes = r5_fp->x10C_ftData->ext_attr;
+    r6_attributes = r5_fp->ft_data->ext_attr;
     func_8015BE40(gobj, &r5_fp->mv.mh.unk0.xC, &r5_fp->mv.mh.unk0.x18,
                   r6_attributes->x2C, r6_attributes->x28);
 }

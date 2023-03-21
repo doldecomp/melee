@@ -42,7 +42,7 @@ void lbl_8015390C(HSD_GObj* gobj)
 static void func_80153910(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
-    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
     Vec3 sp10;
 
     Fighter_ChangeMotionState(arg0, 0x170, 0, 0, 0.0f, 1.0f, 0.0f);

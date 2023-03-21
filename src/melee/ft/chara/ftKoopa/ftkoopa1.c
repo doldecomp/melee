@@ -129,7 +129,7 @@ void ftKoopa_OnLoad(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER is 8 bytes too much stack but it should be possible
     Fighter* fp = gobj->user_data;
 
-    ftData* ftDataInfo = fp->x10C_ftData;
+    ftData* ftDataInfo = fp->ft_data;
     UNK_T* items = ftDataInfo->x48_items;
 
     PUSH_ATTRS(fp, ftKoopaAttributes);

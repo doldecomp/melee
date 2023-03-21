@@ -39,7 +39,7 @@ void func_80151CA8(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* temp_r30;
 
     temp_r31 = gobj->user_data;
-    temp_r30 = temp_r31->x10C_ftData->ext_attr;
+    temp_r30 = temp_r31->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x161, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     temp_r31->cur_pos.y =

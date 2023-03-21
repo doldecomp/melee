@@ -17,7 +17,7 @@ void func_80154A78(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* attr;
 
     fp = gobj->user_data;
-    attr = fp->x10C_ftData->ext_attr;
+    attr = fp->ft_data->ext_attr;
     fp->x2204_ftcmd_var1 = 0;
     Fighter_ChangeMotionState(gobj, 0x17A, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
@@ -63,7 +63,7 @@ void lbl_80154BB0(HSD_GObj* arg0)
 void lbl_80154BF4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
     func_80085134(gobj);
     func_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, attr->x2C,
                   attr->x28);

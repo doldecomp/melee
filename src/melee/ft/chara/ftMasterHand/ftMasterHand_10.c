@@ -78,7 +78,7 @@ void lbl_801522BC(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* r30_attributes;
 
     r31_fp = gobj->user_data;
-    r4_ftData = r31_fp->x10C_ftData;
+    r4_ftData = r31_fp->ft_data;
     r30_attributes = r4_ftData->ext_attr;
     func_80085134(gobj);
 

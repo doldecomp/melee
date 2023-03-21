@@ -168,7 +168,7 @@ void ftFalco_OnItemDrop(HSD_GObj* gobj, bool bool1)
 void ftFalco_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftData* ftdata = fp->x10C_ftData;
+    ftData* ftdata = fp->ft_data;
     s32* sa2;
     void** items = ftdata->x48_items;
 

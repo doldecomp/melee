@@ -94,7 +94,7 @@ void ftDrMario_OnLoad(HSD_GObj* gobj)
 #endif
 
     fp = gobj->user_data;
-    items = fp->x10C_ftData->x48_items;
+    items = fp->ft_data->x48_items;
     ftMario_OnLoadForDrMario(fp);
     sa = fp->x2D4_specialAttributes;
     func_8026B3F8(items[1], 0x31);

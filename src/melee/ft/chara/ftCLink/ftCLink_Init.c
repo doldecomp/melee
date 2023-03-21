@@ -113,7 +113,7 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = gobj->user_data;
-    ftData* ftdata = fp->x10C_ftData;
+    ftData* ftdata = fp->ft_data;
     CLinkAttributes* attrs = (void*) ftdata->ext_attr;
     void** items = ftdata->x48_items;
 
@@ -204,7 +204,7 @@ void ftCLink_OnKnockbackExit(HSD_GObj* gobj)
 void func_80149114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    CLinkAttributes* temp_r4 = (void*) fp->x10C_ftData->ext_attr;
+    CLinkAttributes* temp_r4 = (void*) fp->ft_data->ext_attr;
     f32 ftmp = func_80092ED8(fp->x19A4, temp_r4, temp_r4->xD8);
     fp->xEC_ground_vel = ftmp * p_ftCommonData->x294;
     if (fp->x19AC < 0.0f) {

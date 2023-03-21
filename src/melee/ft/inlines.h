@@ -28,7 +28,7 @@
 #define PUSH_ATTRS(fp, attributeName)                                         \
     do {                                                                      \
         void* backup = (fp)->x2D8_specialAttributes2;                         \
-        attributeName* src = (attributeName*) (fp)->x10C_ftData->ext_attr;    \
+        attributeName* src = (attributeName*) (fp)->ft_data->ext_attr;        \
         void** attr = &(fp)->x2D4_specialAttributes;                          \
         *(attributeName*) (fp)->x2D8_specialAttributes2 = *src;               \
         *attr = backup;                                                       \
@@ -37,7 +37,7 @@
 #define COPY_ATTRS(gobj, attributeName)                                       \
     Fighter* fp = GET_FIGHTER(gobj);                                          \
     attributeName* sA2 = (attributeName*) fp->x2D4_specialAttributes;         \
-    attributeName* ext_attr = (attributeName*) fp->x10C_ftData->ext_attr;     \
+    attributeName* ext_attr = (attributeName*) fp->ft_data->ext_attr;         \
     *sA2 = *ext_attr;
 
 #define SCALE_HEIGHT_ATTRS(num_attrs)                                         \

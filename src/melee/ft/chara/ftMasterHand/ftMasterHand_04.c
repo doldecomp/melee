@@ -18,7 +18,7 @@ void func_801510B0(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* r30_attributes;
 
     r31_fp = gobj->user_data;
-    r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    r30_attributes = r31_fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x157, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     r31_fp->cur_pos.x = r30_attributes->x30_pos2.x;

@@ -27,7 +27,7 @@ void lbl_80153D2C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     HSD_JObj* jobj = get_jobj(gobj);
 
-    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
     Vec3 sp1C;
     Vec3 scale;
 
@@ -122,8 +122,7 @@ void lbl_80154158(HSD_GObj* gobj)
 #endif
 
     if (--r3_fp->mv.mh.unk0.x0 > 0.0f) {
-        ftMasterHand_SpecialAttrs* r4_attributes =
-            r3_fp->x10C_ftData->ext_attr;
+        ftMasterHand_SpecialAttrs* r4_attributes = r3_fp->ft_data->ext_attr;
         func_8015BF74(gobj, r4_attributes->x58);
     } else {
         r3_fp->x80_self_vel.x = 0.0f;

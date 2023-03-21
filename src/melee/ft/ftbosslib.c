@@ -297,8 +297,7 @@ s32 func_8015C530(enum_t arg0)
 #endif
 
     if (gobj != NULL) {
-        ftMasterHand_SpecialAttrs* attr =
-            GET_FIGHTER(gobj)->x10C_ftData->ext_attr;
+        ftMasterHand_SpecialAttrs* attr = GET_FIGHTER(gobj)->ft_data->ext_attr;
         switch (arg0) {
         case 0:
             return attr->x0;
@@ -357,7 +356,7 @@ ftMasterHand_SpecialAttrs* func_8015C6BC(void)
                 return NULL;
 
             {
-                ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+                ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
                 if (attr == NULL)
                     return NULL;
 

@@ -118,7 +118,7 @@ void lbl_80151F00(HSD_GObj* gobj)
 
     /// @todo #GET_FIGHTER uses slightly too much stack; inline issue.
     Fighter* r31_fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* r30_attributes = r31_fp->ft_data->ext_attr;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -161,7 +161,7 @@ void lbl_80152090(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* r30_attributes;
 
     r31_fp = gobj->user_data;
-    r4_ftData = r31_fp->x10C_ftData;
+    r4_ftData = r31_fp->ft_data;
     r30_attributes = r4_ftData->ext_attr;
     func_80085134(gobj);
     r31_fp->x80_self_vel.x = r30_attributes->x40_pos.z;

@@ -76,7 +76,7 @@ void lbl_801527B8(HSD_GObj* gobj)
     f32 tmp;
 
     r31_fp = gobj->user_data;
-    r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    r30_attributes = r31_fp->ft_data->ext_attr;
 
     func_80085134(gobj);
 

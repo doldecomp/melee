@@ -708,15 +708,15 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
     fp->x619_costume_id = costume_id;
     fp->x61B_team = Player_GetTeam(fp->xC_playerID);
     fp->x0_fighter = gobj;
-    fp->x10C_ftData = gFtDataList[fp->x4_fighterKind];
+    fp->ft_data = gFtDataList[fp->x4_fighterKind];
     func_800D0FA0(gobj);
     fp->x2CC = 0;
     fp->x2D0 = 0;
     fp->x18 = 0x155;
     fp->x1C_actionStateList = MotionStateList;
     fp->x20_actionStateList = MotionStateTableByCharacter[fp->x4_fighterKind];
-    fp->x24 = fp->x10C_ftData->xC;
-    fp->x28 = fp->x10C_ftData->x10;
+    fp->x24 = fp->ft_data->xC;
+    fp->x28 = fp->ft_data->x10;
 
     fp->input.x634 = 0.0f;
     fp->input.x630 = 0.0f;
@@ -2587,7 +2587,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj)
             func_80078A2C(gobj);
             if (fp->x1A58_interactedFighter) {
                 if (!fp->x2225_b1) {
-                    func_80088148(fp, fp->x10C_ftData->x4C_collisionData->x30,
+                    func_80088148(fp, fp->ft_data->x4C_collisionData->x30,
                                   0x7F, 0x40);
                 }
                 func_80078754(gobj, fp->x1A58_interactedFighter, 0);
@@ -2600,7 +2600,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj)
 
             if (fp->x1A60) {
                 if (!fp->x2225_b1) {
-                    func_80088148(fp, fp->x10C_ftData->x4C_collisionData->x30,
+                    func_80088148(fp, fp->ft_data->x4C_collisionData->x30,
                                   0x7F, 0x40);
                 }
                 func_8027B4A4(gobj, fp->x1A60);

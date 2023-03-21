@@ -24,7 +24,7 @@ void lbl_801523BC(HSD_GObj* gobj)
         return;
 
     r31_fp = gobj->user_data;
-    r30_attributes = r31_fp->x10C_ftData->ext_attr;
+    r30_attributes = r31_fp->ft_data->ext_attr;
     func_8015247C(gobj);
     r31_fp->mv.mh.unk0.x8 = r30_attributes->xA0;
 }
@@ -90,7 +90,7 @@ void lbl_80152544(HSD_GObj* gobj)
 void lbl_80152588(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftData* r4_ftData = fp->x10C_ftData;
+    ftData* r4_ftData = fp->ft_data;
     ftMasterHand_SpecialAttrs* r31_attributes = r4_ftData->ext_attr;
 
     func_80085134(gobj);

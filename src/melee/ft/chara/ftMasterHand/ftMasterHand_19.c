@@ -39,7 +39,7 @@ void lbl_80153B8C(HSD_GObj* gobj)
 void lbl_80153B90(HSD_GObj* arg0)
 {
     Fighter* temp_r31 = GET_FIGHTER(arg0);
-    ftMasterHand_SpecialAttrs* temp_r30 = temp_r31->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* temp_r30 = temp_r31->ft_data->ext_attr;
     Vec3 sp10;
 
     Fighter_ChangeMotionState(arg0, 0x172, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -81,7 +81,7 @@ void lbl_80153CD4(HSD_GObj* gobj)
     if (--r4_fp->mv.mh.unk0.x0 > 0.0f) {
         func_8015BF74(
             gobj,
-            ((ftMasterHand_SpecialAttrs*) r4_fp->x10C_ftData->ext_attr)->x58);
+            ((ftMasterHand_SpecialAttrs*) r4_fp->ft_data->ext_attr)->x58);
     } else {
         r4_fp->x80_self_vel.x = 0.0f;
     }

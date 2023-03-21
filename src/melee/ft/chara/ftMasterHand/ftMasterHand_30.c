@@ -193,7 +193,7 @@ void lbl_80155990(HSD_GObj* gobj)
 void lbl_801559D4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
     func_80085134(gobj);
     func_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, attr->x2C,
                   attr->x28);

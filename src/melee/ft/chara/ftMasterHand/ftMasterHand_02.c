@@ -130,7 +130,7 @@ void func_80150144(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* fp_1;
 
-    r5_attributes = fp->x10C_ftData->ext_attr;
+    r5_attributes = fp->ft_data->ext_attr;
     fp->fv.mh.x2258 = 341;
     fp->motion_id = 343;
     fp->cur_pos.x = r5_attributes->x30_pos2.x;
@@ -226,7 +226,7 @@ void lbl_80150230(HSD_GObj* gobj)
         }
     } else {
         if (--fp->fv.mh.x223C < 0.0f) {
-            ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+            ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
             Vec3 vec;
 
             /// @todo Unused stack.
@@ -400,7 +400,7 @@ extern HSD_PadStatus HSD_PadMasterStatus[4];
 void func_80150894(HSD_GObj* gobj)
 {
     Fighter* r4_fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* r31_attributes = r4_fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* r31_attributes = r4_fp->ft_data->ext_attr;
     Vec3 sp10_pos;
     u32 l_pressed = r6_button & HSD_BUTTON_L;
     // why just l_pressed and not temps for the others?

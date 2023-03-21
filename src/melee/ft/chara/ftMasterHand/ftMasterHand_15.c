@@ -45,7 +45,7 @@ void lbl_801530A0(HSD_GObj* arg0)
 void func_801530A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -77,7 +77,7 @@ void lbl_80153160(HSD_GObj* gobj)
         temp_f1 = fp->mv.mh.unk0.x50 - 1.0f;
         fp->mv.mh.unk0.x50 = temp_f1;
         if (temp_f1 < 0.0f) {
-            ftData = fp->x10C_ftData;
+            ftData = fp->ft_data;
             temp_r29 = ftData->ext_attr;
             func_801533CC(gobj);
 
@@ -147,7 +147,7 @@ void lbl_80153254(HSD_GObj* gobj)
 
     func_80085134(gobj);
     if (fp->x2208_ftcmd_var2 != 0) {
-        attr = fp->x10C_ftData->ext_attr;
+        attr = fp->ft_data->ext_attr;
         func_8015C208(gobj, &sp28_pos);
         sp28_pos.x += attr->xDC;
         sp28_pos.y += attr->xE0;
@@ -183,7 +183,7 @@ void func_801533CC(HSD_GObj* arg0)
     ftMasterHand_SpecialAttrs* attr;
 
     fp = arg0->user_data;
-    attr = fp->x10C_ftData->ext_attr;
+    attr = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(arg0, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
     if (func_80087120(arg0) > attr->xEC) {
@@ -199,7 +199,7 @@ void func_801533CC(HSD_GObj* arg0)
 static inline void lbl_8015346C_inline(HSD_GObj* gobj)
 {
     Fighter* ft30 = gobj->user_data;
-    ftMasterHand_SpecialAttrs* attr = ft30->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = ft30->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
     if (func_80087120(gobj) > attr->xEC) {
@@ -252,7 +252,7 @@ void lbl_801535B0(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* attr;
 
     fp = gobj->user_data;
-    attr = fp->x10C_ftData->ext_attr;
+    attr = fp->ft_data->ext_attr;
     if (fp->x2200_ftcmd_var0 != 0) {
         func_8015364C(gobj, fp->ft_bones[8].x0_jobj, attr->xF8, attr->xFC);
         fp->x2200_ftcmd_var0 = 0;
@@ -273,7 +273,7 @@ void func_8015364C(HSD_GObj* arg0, HSD_JObj* arg1, f32 arg2, f32 arg3)
     Vec3 sp28_leek;
     Vec3 sp1C_carrot;
 
-    attr = fp->x10C_ftData->ext_attr;
+    attr = fp->ft_data->ext_attr;
     phi_r29 = 0;
     func_8000B1CC(arg1, 0, &sp28_leek);
     sp1C_carrot = sp28_leek;

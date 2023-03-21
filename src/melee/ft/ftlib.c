@@ -331,7 +331,7 @@ void func_800866DC(HSD_GObj* gobj, Vec3* v)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     struct attr* r4 = &fp->x110_attr;
-    s32 i = fp->x10C_ftData->x0->x16C_idx;
+    s32 i = fp->ft_data->x0->x16C_idx;
     func_8000B1CC(func_80086630(gobj, i), &r4->x280, v);
 }
 
@@ -679,7 +679,7 @@ f32 func_80086F80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x221E_flag.bits.b0)
-        return fp->x10C_ftData->x0->xFC;
+        return fp->ft_data->x0->xFC;
 
     return fp->x110_attr.x20C_NametagHeight;
 }
@@ -931,7 +931,7 @@ s32 func_8008746C(HSD_GObj* gobj)
     if (func_80080144(fp))
         return 0x1FBD1;
 
-    return fp->x10C_ftData->x4C_collisionData->x34;
+    return fp->ft_data->x4C_collisionData->x34;
 }
 
 s32 func_800874BC(HSD_GObj* gobj)

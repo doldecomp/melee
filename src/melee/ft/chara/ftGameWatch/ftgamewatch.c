@@ -185,7 +185,7 @@ void ftGameWatch_OnDeath(HSD_GObj* gobj)
 void ftGameWatch_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    void** items = fp->x10C_ftData->x48_items;
+    void** items = fp->ft_data->x48_items;
 
     fp->x2222_flag.bits.b6 = false;
     fp->x2223_flag.bits.b1 = true;

@@ -94,7 +94,7 @@ void ftSamus_OnDeath(HSD_GObj* gobj)
 void ftSamus_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    void** item_list = fp->x10C_ftData->x48_items;
+    void** item_list = fp->ft_data->x48_items;
 
     fp->x2224_flag.bits.b7 = 1;
 
@@ -169,7 +169,7 @@ void ftSamus_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
     Vec3 scale;
 
     Fighter* fp = getFighter(gobj);
-    void** item_list = fp->x10C_ftData->x48_items;
+    void** item_list = fp->ft_data->x48_items;
     struct UNK_SAMUS_S1* beam = item_list[4];
     Fighter_SetAccessory(fp, beam->x0_joint);
 

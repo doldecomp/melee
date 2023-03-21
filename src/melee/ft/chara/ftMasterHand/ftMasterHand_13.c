@@ -20,7 +20,7 @@ void lbl_8015287C(HSD_GObj* gobj)
 void func_80152880(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -119,7 +119,7 @@ void lbl_80152A50(HSD_GObj* gobj)
     fp = gobj->user_data;
     func_80085134(gobj);
     if (fp->mv.mh.unk13.x4) {
-        ftData = fp->x10C_ftData;
+        ftData = fp->ft_data;
         attr = ftData->ext_attr;
         func_8015C208(gobj, &sp28_pos);
         sp28_pos.x += attr->x98;

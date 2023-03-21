@@ -25,7 +25,7 @@ u32 lbl_80151428(Vec3* vec)
 inline void func_80151484_inline1(HSD_GObj* gobj)
 {
     Fighter* r29_fp = gobj->user_data;
-    ftMasterHand_SpecialAttrs* temp_r30 = r29_fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* temp_r30 = r29_fp->ft_data->ext_attr;
     r29_fp->x80_self_vel.z = 0.0f;
     r29_fp->x80_self_vel.y = 0.0f;
     r29_fp->x80_self_vel.x = 0.0f;
@@ -82,7 +82,7 @@ void lbl_801515B8(HSD_GObj* gobj)
 
     r31_fp = gobj->user_data;
     if (r31_fp->x2200_ftcmd_var0) {
-        r4_attributes = r31_fp->x10C_ftData->ext_attr;
+        r4_attributes = r31_fp->ft_data->ext_attr;
         temp_r3 = r31_fp->mv.mh.unk0.x74 + 1;
         r31_fp->mv.mh.unk0.x74 = temp_r3;
         if (temp_r3 <= r4_attributes->x144) {
@@ -123,7 +123,7 @@ void lbl_801516B4(HSD_GObj* gobj)
     Fighter* r31_fp = GET_FIGHTER(gobj);
 
     if ((u32) r31_fp->x2200_ftcmd_var0 != 0U) {
-        r4_attributes = r31_fp->x10C_ftData->ext_attr;
+        r4_attributes = r31_fp->ft_data->ext_attr;
         temp_r3 = r31_fp->mv.mh.unk0.x74 + 1;
         r31_fp->mv.mh.unk0.x74 = temp_r3;
         if (temp_r3 <= r4_attributes->x144) {

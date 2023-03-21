@@ -157,7 +157,7 @@ void ftNess_OnDeath(HSD_GObj* gobj)
 void ftNess_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    void** item_list = fp->x10C_ftData->x48_items;
+    void** item_list = fp->ft_data->x48_items;
 
     PUSH_ATTRS(fp, ftNessAttributes);
 

@@ -150,8 +150,8 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
 void ftPeach_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftPeachAttributes* extAtrrs = fp->x10C_ftData->ext_attr;
-    void** items = fp->x10C_ftData->x48_items;
+    ftPeachAttributes* extAtrrs = fp->ft_data->ext_attr;
+    void** items = fp->ft_data->x48_items;
 
     extAtrrs->unk0 = func_8001E8F8(func_80085E50(fp, 18));
     extAtrrs->unk4 = func_8001E8F8(func_80085E50(fp, 19));

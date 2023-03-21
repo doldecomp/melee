@@ -106,7 +106,7 @@ void lbl_80150F68(HSD_GObj* gobj)
     ftData* r4_ftdata;
 
     r31_fp = gobj->user_data;
-    r4_ftdata = r31_fp->x10C_ftData;
+    r4_ftdata = r31_fp->ft_data;
     r30_ft_attributes = r4_ftdata->ext_attr;
 
     func_80085134(gobj);
@@ -147,7 +147,7 @@ void func_80151018(HSD_GObj* gobj)
 #endif
 
     r6_fp = GET_FIGHTER(gobj);
-    r5_attributes = r6_fp->x10C_ftData->ext_attr;
+    r5_attributes = r6_fp->ft_data->ext_attr;
     r6_fp->mv.mh.unk0.x20 = 0;
     sp1C_pos.x = r5_attributes->x30_pos2.x;
     sp1C_pos.y = r5_attributes->x30_pos2.y;

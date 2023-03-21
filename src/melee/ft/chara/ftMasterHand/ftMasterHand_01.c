@@ -164,7 +164,7 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = gobj->user_data;
-    ftdata = fp->x10C_ftData;
+    ftdata = fp->ft_data;
     ftData_attr = ftdata->ext_attr;
     items = ftdata->x48_items;
 

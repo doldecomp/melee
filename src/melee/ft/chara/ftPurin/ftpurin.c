@@ -166,7 +166,7 @@ void func_8013C360(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (lbl_803D05B4[fp->x619_costume_id]) {
-        UNK_T* items = fp->x10C_ftData->x48_items;
+        UNK_T* items = fp->ft_data->x48_items;
         UNK_T* items_shifted = items[1];
         if (!joints[fp->x619_costume_id]) {
             UnkCostumeStruct* costume_list =

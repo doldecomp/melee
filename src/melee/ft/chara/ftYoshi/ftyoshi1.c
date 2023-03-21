@@ -95,7 +95,7 @@ void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
     s32 i;
     f32 zero_float;
 
-    attr_r26 = fp->x10C_ftData->ext_attr;
+    attr_r26 = fp->ft_data->ext_attr;
     index = (unk_struct1 = unk_struct_arg)->unk_struct->xC_start_index;
     ptr2EndIndex = (s32*) (&unk_struct1->unk_struct->x8_end_index);
     zero_float = 0.0f;
@@ -202,7 +202,7 @@ void ftYoshi_OnLoad(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     temp = temp_r27 = (struct S_UNK_YOSHI1*) fp->x5B8;
-    ft = fp->x10C_ftData;
+    ft = fp->ft_data;
     temp_r28 = (struct S_UNK_YOSHI1*) fp->x5BC;
     item_list = ft->x48_items;
     other_attr = ft->ext_attr;

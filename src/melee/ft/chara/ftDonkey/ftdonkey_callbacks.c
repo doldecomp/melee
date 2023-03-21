@@ -200,7 +200,7 @@ void func_8010D96C(HSD_GObj* gobj)
 void ftDonkey_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftData* ftdata = fp->x10C_ftData;
+    ftData* ftdata = fp->ft_data;
     ftDonkeyAttributes* ftData_attr = ftdata->ext_attr;
 
     ftData_attr->x8 = func_8001E8F8(func_80085E50(fp, 0x128U));

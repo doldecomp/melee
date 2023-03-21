@@ -103,7 +103,7 @@ Fighter_CostumeStrings lbl_803D23B4[] = {
 void ftPichu_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftData* ftdata = fp->x10C_ftData;
+    ftData* ftdata = fp->ft_data;
     void** items = ftdata->x48_items;
     fp->x2224_flag.bits.b7 = true;
     ftPikachu_OnLoadForPichu(fp);

@@ -100,7 +100,7 @@ void func_8014F698(HSD_GObj* gobj)
 void ftGKoopa_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    ftData* ftdata = fp->x10C_ftData;
+    ftData* ftdata = fp->ft_data;
     void** items = ftdata->x48_items;
 
     ftKoopa_OnLoadForGKoopa(fp);

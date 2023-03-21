@@ -72,7 +72,7 @@ void ftMario_OnLoad(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER is too much stack. Problem with #PUSH_ATTRS?
     Fighter* fp = gobj->user_data;
-    ftData* ftDataInfo = fp->x10C_ftData;
+    ftData* ftDataInfo = fp->ft_data;
     void** items = ftDataInfo->x48_items;
 
     fp->x2224_flag.bits.b7 = true;

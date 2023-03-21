@@ -80,7 +80,7 @@ void func_80081370(HSD_GObj* gobj)
         fp->mv.co.cliff.ledge_id = fp->x6F0_collData.x40;
     }
     func_80081544(gobj);
-    func_800881D8(fp, fp->x10C_ftData->x4C_collisionData->x28, 0x7F, 0x40);
+    func_800881D8(fp, fp->ft_data->x4C_collisionData->x28, 0x7F, 0x40);
     func_8007E2F4(fp, 0x1FF);
     func_8007EBAC(fp, 0xC, 0);
 
