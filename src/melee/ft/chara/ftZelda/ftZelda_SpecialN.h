@@ -6,8 +6,6 @@
 
 void ftZelda_8013A830(HSD_GObj* gobj);
 void ftZelda_8013A8AC(HSD_GObj* gobj);
-void ftZelda_SpecialN_StartMotion(HSD_GObj* gobj);
-void ftZelda_SpecialAirN_StartMotion(HSD_GObj* gobj);
 void ftZelda_8013AA38(HSD_GObj* gobj);
 void ftZelda_8013AACC(HSD_GObj* gobj);
 void ftZelda_8013AB60(HSD_GObj* gobj);
@@ -19,5 +17,7 @@ void ftZelda_8013AC4C(HSD_GObj* gobj);
 void ftZelda_8013AC88(HSD_GObj* gobj);
 void ftZelda_8013AD1C(HSD_GObj* gobj);
 void ftZelda_8013ADB0(HSD_GObj* gobj);
+void ftZelda_SpecialAirN_StartMotion(HSD_GObj* gobj);
+void ftZelda_SpecialN_StartMotion(HSD_GObj* gobj);
 
 #endif
