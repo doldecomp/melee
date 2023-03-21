@@ -549,11 +549,11 @@ struct ftMario_FighterVars {
     /// Current Megavitamin color combo
     /* 0x222C */ int x222C_vitaminCurr;
     /// Previous Megavitamin color combo
-    /* 0x2230 */ s32 x2230_vitaminPrev;
+    /* 0x2230 */ int x2230_vitaminPrev;
     /* 0x2234 */ bool x2234_tornadoCharge;
     /* 0x2238 */ bool x2238_isCapeBoost;
     /* 0x223C */ HSD_GObj* x223C_capeGObj;
-    /* 0x2240 */ u32 x2240;
+    /* 0x2240 */ uint x2240;
 };
 
 struct ftFox_FighterVars {
