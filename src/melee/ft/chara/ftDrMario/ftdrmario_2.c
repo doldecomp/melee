@@ -8,7 +8,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void func_80149954(HSD_GObj* gobj)
+void ftDrMario_80149954(HSD_GObj* gobj)
 {
     Vec3 sp18;
     Fighter* fp;
@@ -30,7 +30,7 @@ void func_80149954(HSD_GObj* gobj)
             fp->cb.x21DC_callback_OnTakeDamage = func_80149540;
         }
     } else if (fp->x2200_ftcmd_var0 == 2) {
-        func_801497CC(gobj);
+        ftDrMario_801497CC(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (gobj != NULL) {
@@ -51,17 +51,17 @@ void func_80149954(HSD_GObj* gobj)
     }
 }
 
-void func_80149A6C(HSD_GObj* gobj)
+void ftDrMario_80149A6C(HSD_GObj* gobj)
 {
     func_800DED30(gobj);
 }
 
-void func_80149A8C(HSD_GObj* gobj)
+void ftDrMario_80149A8C(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
 }
 
-void func_80149AAC(HSD_GObj* gobj)
+void ftDrMario_80149AAC(HSD_GObj* gobj)
 {
     func_80084280(gobj);
 }

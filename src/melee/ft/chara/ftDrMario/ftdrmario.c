@@ -9,10 +9,10 @@
 #include "it/code_8027CF30.h"
 
 MotionState ftDrMario_MotionStateTable[] = {
-    { 239, 0x00000071, 0x01000000, func_80149954, func_80149A6C, func_80149A8C,
-      func_80149AAC, func_800761C8 },
-    { 240, 0x00000071, 0x01000000, func_80149954, func_80149A6C, func_80149A8C,
-      func_80149AAC, func_800761C8 },
+    { 239, 0x00000071, 0x01000000, ftDrMario_80149954, ftDrMario_80149A6C,
+      ftDrMario_80149A8C, ftDrMario_80149AAC, func_800761C8 },
+    { 240, 0x00000071, 0x01000000, ftDrMario_80149954, ftDrMario_80149A6C,
+      ftDrMario_80149A8C, ftDrMario_80149AAC, func_800761C8 },
     { 295, 0x00340111, 0x12000000, ftMario_SpecialN_Anim,
       ftMario_SpecialN_IASA, ftMario_SpecialN_Phys, ftMario_SpecialN_Coll,
       func_800761C8 },
@@ -104,7 +104,7 @@ void ftDrMario_OnLoad(HSD_GObj* gobj)
 
 void func_80149540(HSD_GObj* gobj)
 {
-    func_801497CC(gobj);
+    ftDrMario_801497CC(gobj);
 }
 
 void ftDrMario_OnItemPickup(HSD_GObj* gobj, bool bool)
@@ -142,7 +142,7 @@ void ftDrMario_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void func_801497CC(HSD_GObj* gobj)
+void ftDrMario_801497CC(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -168,7 +168,7 @@ void func_801497CC(HSD_GObj* gobj)
     }
 }
 
-bool func_80149844(HSD_GObj* gobj)
+bool ftDrMario_80149844(HSD_GObj* gobj)
 {
     s32 tmp;
     Fighter* fp;
@@ -190,7 +190,7 @@ bool func_80149844(HSD_GObj* gobj)
     return false;
 }
 
-void func_801498A0(HSD_GObj* gobj)
+void ftDrMario_801498A0(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -209,7 +209,7 @@ void func_801498A0(HSD_GObj* gobj)
     }
 }
 
-u32 func_801498EC(HSD_GObj* gobj)
+u32 ftDrMario_801498EC(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -223,7 +223,7 @@ u32 func_801498EC(HSD_GObj* gobj)
     return 0;
 }
 
-void func_80149910(HSD_GObj* gobj)
+void ftDrMario_80149910(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
