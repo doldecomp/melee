@@ -1,8 +1,9 @@
 #include "forward.h"
+#include "ft/forward.h"
+
 #include "ftgamewatch.h"
 
 #include "ft/code_80081B38.h"
-#include "ft/forward.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftparts.h"
 #include "it/code_8027CF30.h"

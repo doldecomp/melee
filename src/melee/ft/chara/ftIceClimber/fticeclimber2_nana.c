@@ -1,9 +1,10 @@
+#include "ft/forward.h"
+
 #include "fticeclimber2_nana.h"
 
 #include "fticeclimber.h"
 
 #include "ft/fighter.h"
-#include "ft/forward.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"

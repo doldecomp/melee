@@ -2,6 +2,7 @@
 #define MELEE_GR_TYPES_H
 
 #include "it/forward.h"
+
 #include "sc/scene.h"
 
 #include <dolphin/mtx/types.h>

@@ -1,6 +1,8 @@
+#include "forward.h"
+#include "it/forward.h"
+
 #include "ftMario_SpecialN.h"
 
-#include "forward.h"
 #include "ftMario_Init.h"
 
 #include "ef/efsync.h"
@@ -9,7 +11,6 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "it/code_8027CF30.h"
-#include "it/forward.h"
 #include "lb/lbunknown_001.h"
 
 #include <dolphin/mtx/types.h>

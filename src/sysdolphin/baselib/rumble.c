@@ -1,6 +1,7 @@
+#include <dolphin/pad/forward.h>
+
 #include <platform.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/pad/forward.h>
 #include <dolphin/pad/Pad.h>
 #include <baselib/controller.h>
 #include <baselib/rumble.h>

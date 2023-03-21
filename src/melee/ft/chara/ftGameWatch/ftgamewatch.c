@@ -1,6 +1,6 @@
-#include "ftGameWatch/ftgamewatch.h"
-
 #include "forward.h"
+
+#include "ftGameWatch/ftgamewatch.h"
 
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"

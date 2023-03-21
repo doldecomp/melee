@@ -1,13 +1,14 @@
 #ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_INIT_H
 #define MELEE_FT_CHARA_FTMARIO_FTMARIO_INIT_H
 
-#include "ft/fighter.h"
 #include "ft/forward.h"
 #include "ftCommon/forward.h"
 #include "ftMario/forward.h"
+#include <baselib/forward.h>
+
+#include "ft/fighter.h"
 
 #include <stddef.h>
-#include <baselib/forward.h>
 
 static usize_t const states_count = ftMario_MS_Count - ftCo_MS_Count;
 extern MotionState ms_table_mario[states_count];

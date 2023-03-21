@@ -1,8 +1,9 @@
 #ifndef SYSDOLPHIN_BASELIB_FOG_H
 #define SYSDOLPHIN_BASELIB_FOG_H
 
-#include "baselib/fobj.h"
 #include "baselib/forward.h"
+
+#include "baselib/fobj.h"
 #include "baselib/object.h"
 
 #include <dolphin/gx/types.h>

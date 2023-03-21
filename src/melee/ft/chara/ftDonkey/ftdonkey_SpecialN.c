@@ -1,3 +1,5 @@
+#include "lb/forward.h"
+
 #include "ftdonkey_SpecialN.h"
 
 #include "ftdonkey.h"
@@ -7,7 +9,6 @@
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcoll.h"
-#include "lb/forward.h"
 
 void ftDonkey_SetCallbacks_SpecialN(HSD_GObj* gobj)
 {

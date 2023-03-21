@@ -1,6 +1,8 @@
+#include "forward.h"
+#include "it/forward.h"
+
 #include "ftMario_SpecialS.h"
 
-#include "forward.h"
 #include "ftMario_Init.h"
 #include "types.h"
 
@@ -10,7 +12,6 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "it/code_8027CF30.h"
-#include "it/forward.h"
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 

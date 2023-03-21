@@ -1,7 +1,8 @@
+#include "ft/forward.h"
+
 #include "ftSeak/ftSeak_Init.h"
 
 #include "ft/fighter.h"
-#include "ft/forward.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"

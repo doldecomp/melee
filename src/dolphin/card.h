@@ -2,6 +2,7 @@
 #define DOLPHIN_CARD_H
 
 #include <dolphin/card/forward.h>
+
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSAlarm.h>

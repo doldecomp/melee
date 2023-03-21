@@ -1,9 +1,10 @@
 #ifndef _controller_h_
 #define _controller_h_
 
+#include <baselib/forward.h>
+
 #include <platform.h>
 #include <dolphin/pad/Pad.h>
-#include <baselib/forward.h>
 #include <baselib/rumble.h>
 
 typedef enum _HSD_FlushType {

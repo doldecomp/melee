@@ -1,12 +1,13 @@
+#include "ft/forward.h"
+#include "it/forward.h"
+
 #include "ftpeach.h"
 
-#include "ft/forward.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "it/forward.h"
 #include "lb/lbmthp.h"
 
 MotionState ms_table_peach[] = {

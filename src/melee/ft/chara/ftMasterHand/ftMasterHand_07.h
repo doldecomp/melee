@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_7_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_7_H
 
-#include <platform.h>
 #include <baselib/forward.h>
+
+#include <platform.h>
 
 /// 7 Sweep
 void lbl_80151BB8(HSD_GObj* gobj);

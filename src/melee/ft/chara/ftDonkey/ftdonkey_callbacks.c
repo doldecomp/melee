@@ -1,7 +1,8 @@
+#include "ft/forward.h"
+
 #include "ftDonkey/ftdonkey_callbacks.h"
 
 #include "ft/code_80081B38.h"
-#include "ft/forward.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"

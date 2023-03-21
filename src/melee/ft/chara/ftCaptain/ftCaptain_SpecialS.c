@@ -1,3 +1,6 @@
+#include "it/forward.h"
+#include <baselib/forward.h>
+
 #include "ftCaptain_SpecialS.h"
 
 #include "ftCaptain_Init.h"
@@ -10,10 +13,8 @@
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/types.h"
-#include "it/forward.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/forward.h>
 
 void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* gobj)
 {

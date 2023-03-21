@@ -1,9 +1,10 @@
 #ifndef _ftluigi_h_
 #define _ftluigi_h_
 
+#include "it/forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
-#include "it/forward.h"
 #include "it/item.h"
 #include "lb/lbvector.h"
 

@@ -1,8 +1,9 @@
 #ifndef _gobj_h_
 #define _gobj_h_
 
-#include <platform.h>
 #include <baselib/forward.h>
+
+#include <platform.h>
 #include <baselib/objalloc.h>
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)

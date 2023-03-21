@@ -2,6 +2,7 @@
 #define DOLPHIN_GX___TYPES_H
 
 #include <dolphin/gx/forward.h>
+
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>

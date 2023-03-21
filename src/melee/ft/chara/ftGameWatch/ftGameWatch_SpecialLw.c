@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "lb/forward.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
@@ -6,7 +7,6 @@
 #include "ft/ftparts.h"
 #include "ftGameWatch/ftgamewatch.h"
 #include "it/code_8027CF30.h"
-#include "lb/forward.h"
 #include "lb/lbunknown_001.h"
 
 #include <dolphin/mtx/types.h>

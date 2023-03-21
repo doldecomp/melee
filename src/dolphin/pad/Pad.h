@@ -1,9 +1,10 @@
 #ifndef _PAD_H_
 #define _PAD_H_
 
-#include <platform.h>
 #include <dolphin/os/forward.h>
 #include <dolphin/pad/forward.h>
+
+#include <platform.h>
 
 #define PAD_CHANMAX 4
 

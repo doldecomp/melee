@@ -1,9 +1,10 @@
 #ifndef _ftfox_h_
 #define _ftfox_h_
 
+#include "it/forward.h"
+
 #include "ft/fighter.h"
 #include "ft/ftcommon.h"
-#include "it/forward.h"
 #include "it/item.h"
 #include "lb/lbvector.h"
 

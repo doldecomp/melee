@@ -1,9 +1,10 @@
 #ifndef MELEE_FT_TYPES_H
 #define MELEE_FT_TYPES_H
 
+#include "ftCommon/forward.h"
+
 #include "ft/ftanim.h"
 #include "ftCaptain/types.h"
-#include "ftCommon/forward.h"
 #include "ftCommon/types.h"
 #include "ftDonkey/types.h"
 #include "ftFox/types.h"

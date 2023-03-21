@@ -1,10 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTPURIN_FTPURIN_H
 #define MELEE_FT_CHARA_FTPURIN_FTPURIN_H
 
+#include "melee/ft/forward.h"
+
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "lb/lbvector.h"
-#include "melee/ft/forward.h"
 
 typedef struct _ftPurinAttributes {
     f32 x0;

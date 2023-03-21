@@ -2,11 +2,10 @@
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI1_H
 
 #include "forward.h"
-
 #include "ft/forward.h"
-#include "ft/types.h"
-
 #include <baselib/forward.h>
+
+#include "ft/types.h"
 
 extern MotionState ms_table_yoshi[];
 

@@ -1,3 +1,5 @@
+#include "lb/forward.h"
+
 #include "ft/ftcoll.h"
 
 #include "ef/efsync.h"
@@ -10,7 +12,6 @@
 #include "gr/stage.h"
 #include "it/code_80266F3C.h"
 #include "it/item.h"
-#include "lb/forward.h"
 #include "lb/lbunknown_001.h"
 #include "pl/pl_unknown_001.h"
 #include "pl/player.h"

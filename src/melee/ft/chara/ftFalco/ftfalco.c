@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "ftfalco.h"
 
 #include "ft/ft_unknown_006.h"
@@ -5,7 +7,6 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftFox/ftfox.h"
-#include "it/forward.h"
 
 MotionState ms_table_falco[] = {
     { 295, 0x00340111, 0x12000000, ftFox_SpecialNStart_Anim,

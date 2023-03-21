@@ -1,6 +1,7 @@
+#include "ft/forward.h"
+
 #include "ftMario_Strings.h"
 
-#include "ft/forward.h"
 #include "ft/types.h"
 
 char lbl_803C57D0[] = "PlMr.dat";

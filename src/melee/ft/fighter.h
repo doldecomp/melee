@@ -1,10 +1,11 @@
 #ifndef _fighter_h_
 #define _fighter_h_
 
+#include "ftCommon/forward.h"
+
 #include "ft/ftanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/forward.h"
 #include "gr/stage.h"
 #include "it/item2.h"
 #include "lb/lbcollision.h"

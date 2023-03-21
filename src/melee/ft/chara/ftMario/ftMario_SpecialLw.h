@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALLW_H
 #define MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALLW_H
 
-#include <platform.h>
 #include <baselib/forward.h>
+
+#include <platform.h>
 
 void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj);
 void ftMario_SpecialLw_StartAction(HSD_GObj* gobj);

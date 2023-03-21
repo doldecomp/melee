@@ -1,9 +1,10 @@
 #ifndef _aobj_h_
 #define _aobj_h_
 
+#include <baselib/forward.h>
+
 #include <platform.h>
 #include <baselib/fobj.h>
-#include <baselib/forward.h>
 #include <baselib/id.h>
 #include <baselib/list.h>
 #include <baselib/objalloc.h>

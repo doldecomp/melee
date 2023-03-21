@@ -1,9 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTFOX_TYPES_H
 #define MELEE_FT_CHARA_FTFOX_TYPES_H
 
+#include <baselib/forward.h>
+
 #include <platform.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/forward.h>
 
 typedef struct ftFoxSpecialN {
     /// 0x2340 - Check to allow repeated blaster shots

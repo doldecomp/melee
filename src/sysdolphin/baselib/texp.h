@@ -1,9 +1,10 @@
 #ifndef _texp_h_
 #define _texp_h_
 
+#include <baselib/forward.h>
+
 #include <platform.h>
 #include <dolphin/gx/GXEnum.h>
-#include <baselib/forward.h>
 
 #define HSD_TEXP_RAS -2
 #define HSD_TEXP_TEX -1

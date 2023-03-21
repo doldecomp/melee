@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_01_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_01_H
 
-#include "ft/types.h"
-
 #include <baselib/forward.h>
+
+#include "ft/types.h"
 
 extern MotionState ms_table_masterhand[];
 extern char lbl_803D4070[];

@@ -1,10 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTSEAK_FTSEAK_INIT_H
 #define MELEE_FT_CHARA_FTSEAK_FTSEAK_INIT_H
 
+#include <baselib/forward.h>
+
 #include "ft/types.h"
 
 #include <platform.h>
-#include <baselib/forward.h>
 
 extern MotionState ms_table_seak[];
 extern char lbl_803CC360[];

@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "it/item.h"
 
 #include "cm/camera.h"
@@ -8,7 +10,6 @@
 #include "gm/code_801601C4.h"
 #include "gr/grlib.h"
 #include "it/code_80266F3C.h"
-#include "it/forward.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"

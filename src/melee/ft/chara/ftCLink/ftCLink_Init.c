@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "ftCLink/ftCLink_Init.h"
 
 #include "ft/ft_unknown_006.h"
@@ -7,7 +9,6 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftLink/ftlink.h"
-#include "it/forward.h"
 #include "lb/lbmthp.h"
 
 MotionState ms_table_clink[] = {

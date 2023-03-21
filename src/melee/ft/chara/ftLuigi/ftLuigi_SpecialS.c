@@ -1,4 +1,5 @@
 #include "forward.h"
+#include "lb/forward.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -7,7 +8,6 @@
 #include "ft/ftcoll.h"
 #include "ft/inlines.h"
 #include "ftLuigi/ftluigi.h"
-#include "lb/forward.h"
 
 #include <baselib/gobjproc.h>
 

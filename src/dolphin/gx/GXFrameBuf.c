@@ -1,9 +1,10 @@
+#include <dolphin/gx/forward.h>
+
 #include <common_structs.h>
 #include <placeholder.h>
 #include <runtime.h>
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
-#include <dolphin/gx/forward.h>
 #include <dolphin/gx/GXFrameBuf.h>
 #include <dolphin/mtx/types.h>
 

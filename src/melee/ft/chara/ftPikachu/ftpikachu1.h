@@ -1,10 +1,11 @@
 #ifndef MELEE_FT_CHARA_FTPIKACHU_FTPIKACHU1_H
 #define MELEE_FT_CHARA_FTPIKACHU_FTPIKACHU1_H
 
+#include <baselib/forward.h>
+
 #include "ft/types.h"
 
 #include <platform.h>
-#include <baselib/forward.h>
 
 extern MotionState ms_table_pikachu[];
 extern char lbl_803CE0B8[];

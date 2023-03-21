@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "ftcommon.h"
 
 #include "code_80081B38.h"
@@ -12,7 +14,6 @@
 #include "ef/eflib.h"
 #include "gm/code_801601C4.h"
 #include "it/code_8027CF30.h"
-#include "it/forward.h"
 #include "it/item.h"
 #include "it/item2.h"
 #include "lb/lbunknown_003.h"

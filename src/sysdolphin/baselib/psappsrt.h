@@ -1,9 +1,10 @@
 #ifndef SYSDOLPHIN_BASELIB_PSAPPSRT_H
 #define SYSDOLPHIN_BASELIB_PSAPPSRT_H
 
+#include <baselib/forward.h>
+
 #include <platform.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/forward.h>
 
 typedef struct _UnkGeneratorMember { // MexTK: GeneratorAppSRT
     u32 x0_fill[2];

@@ -1,3 +1,5 @@
+#include "lb/forward.h"
+
 #include "ftNess_AttackHi4.h"
 
 #include "ftNess.h"
@@ -7,7 +9,6 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "it/code_8027CF30.h"
-#include "lb/forward.h"
 #include "lb/lbcollision.h"
 #include "lb/lbunknown_001.h"
 #include "mp/mpcoll.h"

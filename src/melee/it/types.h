@@ -1,9 +1,10 @@
 #ifndef MELEE_IT_TYPES_H
 #define MELEE_IT_TYPES_H
 
+#include "it/forward.h"
+
 #include "ft/types.h"
 #include "gr/stage.h"
-#include "it/forward.h"
 #include "it/itCommonItems.h"
 #include "it/itPKFlash.h"
 #include "it/itPKThunder.h"

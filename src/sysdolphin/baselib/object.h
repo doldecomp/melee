@@ -1,8 +1,9 @@
 #ifndef _object_h_
 #define _object_h_
 
-#include <baselib/class.h>
 #include <baselib/forward.h>
+
+#include <baselib/class.h>
 
 #define HSD_OBJ_NOREF ((u16) -1)
 

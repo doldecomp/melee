@@ -2,11 +2,11 @@
 #define MELEE_FT_CHARA_FTMARIO_TYPES_H
 
 #include "it/forward.h"
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 #include <platform.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/forward.h>
 
 typedef struct ftMario_DatAttrs {
     struct ftMario_SpecialS_DatAttrs {

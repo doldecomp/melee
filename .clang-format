@@ -26,6 +26,21 @@ WhitespaceSensitiveMacros:
   - 'CHECK'
 IncludeBlocks: Regroup
 IncludeCategories:
+  - Regex: '^"forward\.h"$'
+    Priority: -1
+    SortPriority: -5
+  - Regex: '^".*/forward\.h"$'
+    Priority: -1
+    SortPriority: -4
+  - Regex: '^<dolphin(/.*)?/forward\.h>$'
+    Priority: -1
+    SortPriority: -2
+  - Regex: '^<(sysdolphin/)?baselib(/.*)?/forward\.h>$'
+    Priority: -1
+    SortPriority: -1
+  - Regex: '^<(.*/)?forward\.h>$'
+    Priority: -1
+    SortPriority: -3
   - Regex: '^<[^/]*>$'
     Priority: 3
     SortPriority: 3

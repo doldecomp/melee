@@ -1,17 +1,18 @@
+#include "it/forward.h"
+#include <baselib/forward.h>
+
 #include "item2.h"
 
 #include "ft/ftlib.h"
 #include "gm/code_801601C4.h"
 #include "it/code_80266F3C.h"
 #include "it/code_8027CF30.h"
-#include "it/forward.h"
 #include "it/item.h"
 
 #include <common_structs.h>
 #include <math.h>
 #include <placeholder.h>
 #include <dolphin/mtx/types.h>
-#include <baselib/forward.h>
 #include <baselib/gobj.h>
 
 static inline float _sqrtfItem(float x)

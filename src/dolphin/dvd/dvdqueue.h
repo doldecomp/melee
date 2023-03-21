@@ -1,8 +1,9 @@
 #ifndef DOLPHIN_DVD_DVDQUEUE_H
 #define DOLPHIN_DVD_DVDQUEUE_H
 
-#include <stdbool.h>
 #include <dolphin/dvd/forward.h>
+
+#include <stdbool.h>
 
 void __DVDClearWaitingQueue(void);
 bool __DVDCheckWaitingQueue(void);

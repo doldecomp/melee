@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "ftyoshi2.h"
 
 #include "ftyoshi1.h"
@@ -8,7 +10,6 @@
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "it/forward.h"
 
 #include <stddef.h>
 #include <dolphin/mtx/types.h>

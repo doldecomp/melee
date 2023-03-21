@@ -1,9 +1,10 @@
 #ifndef SYSDOLPHIN_BASELIB_S
 #define SYSDOLPHIN_BASELIB_S
 
-#include <platform.h>
 #include <dolphin/gx/forward.h>
 #include <baselib/forward.h>
+
+#include <platform.h>
 
 void HSD_StateSetZMode(u32, u32, u32);
 void HSD_StateInvalidate(s32);

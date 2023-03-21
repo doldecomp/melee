@@ -1,4 +1,6 @@
 #include "forward.h"
+#include <baselib/forward.h>
+
 #include "ft_unknown_006.h"
 #include "ftdata.h"
 #include "types.h"
@@ -64,7 +66,6 @@
 #include "ftZelda/ftzelda.h"
 
 #include <dolphin/mtx/types.h>
-#include <baselib/forward.h>
 
 typedef struct ftData_UnkCountStruct {
     /// Always zero; could be #NULL or the high part of a 64-bit integer.

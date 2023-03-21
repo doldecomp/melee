@@ -1,6 +1,7 @@
+#include "forward.h"
+
 #include "lbcollision.h"
 
-#include "forward.h"
 #include "lbaudio_ax.h"
 #include "lbunknown_001.h"
 #include "lbvector.h"

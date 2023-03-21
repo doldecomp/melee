@@ -4,9 +4,9 @@
 #define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALN_H
 
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
 #include <platform.h>
-#include <baselib/forward.h>
 
 f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp);
 void ftCaptain_SpecialAirN_Anim(HSD_GObj* gobj);

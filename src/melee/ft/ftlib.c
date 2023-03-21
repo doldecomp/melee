@@ -1,3 +1,5 @@
+#include "it/forward.h"
+
 #include "ftlib.h"
 
 #include "cm/camera.h"
@@ -11,7 +13,6 @@
 #include "ftGameWatch/ftgamewatch.h"
 #include "ftKirby/ftkirby.h"
 #include "gm/code_801601C4.h"
-#include "it/forward.h"
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 #include "pl/pl_unknown_001.h"

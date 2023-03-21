@@ -1,9 +1,10 @@
 #ifndef MELEE_LB_LBCOLLISION_H
 #define MELEE_LB_LBCOLLISION_H
 
-#include "dolphin/mtx/types.h"
 #include "ft/forward.h"
 #include "lb/forward.h"
+
+#include "dolphin/mtx/types.h"
 
 #include <placeholder.h>
 #include <dolphin/mtx/types.h>
