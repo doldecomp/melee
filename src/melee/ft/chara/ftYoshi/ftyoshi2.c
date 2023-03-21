@@ -74,7 +74,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
     efAsync_Spawn(gobj, &fp2->x60C, 4U, 0x4CFU, jobj, x1CC);
 }
 
-void lbl_8012C030(HSD_GObj* gobj)
+void ftYoshi_8012C030(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -89,11 +89,11 @@ void lbl_8012C030(HSD_GObj* gobj)
     } else if (!ftAnim_IsFramesRemaining(gobj)) {
         func_800928CC(gobj);
     } else {
-        func_8012B8A4(gobj);
+        ftYoshi_8012B8A4(gobj);
     }
 }
 
-void lbl_8012C114(HSD_GObj* gobj)
+void ftYoshi_8012C114(HSD_GObj* gobj)
 {
     if (!func_80093694() && !func_8009515C(gobj) && !func_80099794(gobj) &&
         !func_8009917C(gobj) && !func_800D8990(gobj) && !func_8009A080(gobj))
@@ -102,12 +102,12 @@ void lbl_8012C114(HSD_GObj* gobj)
     }
 }
 
-void lbl_8012C194(HSD_GObj* arg0)
+void ftYoshi_8012C194(HSD_GObj* arg0)
 {
     func_80092870(arg0);
 }
 
-void lbl_8012C1B4(HSD_GObj* arg0)
+void ftYoshi_8012C1B4(HSD_GObj* arg0)
 {
     func_800928AC(arg0);
 }
@@ -117,7 +117,7 @@ extern u8 lbl_803B75C0[];
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8012C1D4(HSD_GObj*)
+asm void ftYoshi_8012C1D4(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C1D4 00128DB4  7C 08 02 A6 */	mflr r0
@@ -182,7 +182,7 @@ asm void func_8012C1D4(HSD_GObj*)
 /* 8012C2C0 00128EA0  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
 /* 8012C2C4 00128EA4  98 1F 22 1E */	stb r0, 0x221e(r31)
 /* 8012C2C8 00128EA8  7F C3 F3 78 */	mr r3, r30
-/* 8012C2CC 00128EAC  4B FF F5 D9 */	bl func_8012B8A4
+/* 8012C2CC 00128EAC  4B FF F5 D9 */	bl ftYoshi_8012B8A4
 /* 8012C2D0 00128EB0  7F E3 FB 78 */	mr r3, r31
 /* 8012C2D4 00128EB4  4B F6 5A 85 */	bl func_80091D58
 /* 8012C2D8 00128EB8  80 01 00 6C */	lwz r0, 0x6c(r1)
@@ -196,7 +196,7 @@ asm void func_8012C1D4(HSD_GObj*)
 #pragma pop
 #endif
 
-void lbl_8012C2F4(HSD_GObj* gobj)
+void ftYoshi_8012C2F4(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -215,11 +215,11 @@ void lbl_8012C2F4(HSD_GObj* gobj)
     {
         func_80092BE8(gobj);
     } else {
-        func_8012B8A4(gobj);
+        ftYoshi_8012B8A4(gobj);
     }
 }
 
-void lbl_8012C3EC(HSD_GObj* gobj)
+void ftYoshi_8012C3EC(HSD_GObj* gobj)
 {
     if (!func_8009515C(gobj) && !func_80099794(gobj) && !func_8009917C(gobj) &&
         !func_800D8990(gobj) && !func_8009A080(gobj))
@@ -228,17 +228,17 @@ void lbl_8012C3EC(HSD_GObj* gobj)
     }
 }
 
-void lbl_8012C45C(HSD_GObj* arg0)
+void ftYoshi_8012C45C(HSD_GObj* arg0)
 {
     func_80092B70(arg0);
 }
 
-void lbl_8012C47C(HSD_GObj* arg0)
+void ftYoshi_8012C47C(HSD_GObj* arg0)
 {
     func_80092BAC(arg0);
 }
 
-void func_8012C49C(HSD_GObj* gobj)
+void ftYoshi_8012C49C(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 0x157, 0, NULL, lbl_804D9A2C, lbl_804D9A28,
                               lbl_804D9A2C);
@@ -267,7 +267,7 @@ void func_8012C49C(HSD_GObj* gobj)
     }
 }
 
-void lbl_8012C54C(HSD_GObj* gobj)
+void ftYoshi_8012C54C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -281,7 +281,7 @@ void lbl_8012C54C(HSD_GObj* gobj)
         func_8008A2BC(gobj);
 }
 
-void lbl_8012C59C(HSD_GObj* arg0)
+void ftYoshi_8012C59C(HSD_GObj* arg0)
 {
     if (!func_80099794(arg0)) {
         /// @todo Weird control flow.
@@ -289,12 +289,12 @@ void lbl_8012C59C(HSD_GObj* arg0)
     }
 }
 
-void lbl_8012C5C0(HSD_GObj* arg0)
+void ftYoshi_8012C5C0(HSD_GObj* arg0)
 {
     func_80092E10(arg0);
 }
 
-void lbl_8012C5E0(HSD_GObj* arg0)
+void ftYoshi_8012C5E0(HSD_GObj* arg0)
 {
     func_80092E30(arg0);
 }
@@ -303,7 +303,7 @@ extern f64 const lbl_804D9A30;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8012C600(HSD_GObj*)
+asm void ftYoshi_8012C600(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C600 001291E0  7C 08 02 A6 */	mflr r0
@@ -419,7 +419,7 @@ lbl_8012C774:
 #pragma pop
 #endif
 
-void lbl_8012C7A4(HSD_GObj* gobj)
+void ftYoshi_8012C7A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -433,11 +433,11 @@ void lbl_8012C7A4(HSD_GObj* gobj)
     }
 }
 
-void lbl_8012C80C(HSD_GObj* arg0) {}
+void ftYoshi_8012C80C(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012C810(HSD_GObj*)
+asm void ftYoshi_8012C810(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C810 001293F0  7C 08 02 A6 */	mflr r0
@@ -454,7 +454,7 @@ asm void lbl_8012C810(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012C830(HSD_GObj*)
+asm void ftYoshi_8012C830(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C830 00129410  7C 08 02 A6 */	mflr r0
@@ -469,7 +469,7 @@ asm void lbl_8012C830(HSD_GObj*)
 #pragma pop
 #endif
 
-void func_8012C850(HSD_GObj* gobj)
+void ftYoshi_8012C850(HSD_GObj* gobj)
 {
     ftCommonData* temp_r5;
     Fighter* fp;
@@ -488,7 +488,7 @@ void func_8012C850(HSD_GObj* gobj)
     fp->mv.ys.unk2.x14 = p_ftCommonData->x2A4;
     temp_r5 = p_ftCommonData;
     fp->mv.ys.unk2.x18 = temp_r5->x2B4;
-    func_8009370C(gobj, lbl_8012CACC, temp_r5);
+    func_8009370C(gobj, ftYoshi_8012CACC, temp_r5);
 }
 
 extern char* const lbl_804D3E58;
@@ -496,7 +496,7 @@ extern char* const lbl_804D3E60;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8012C914(HSD_GObj*)
+asm void ftYoshi_8012C914(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C914 001294F4  7C 08 02 A6 */	mflr r0
@@ -518,8 +518,8 @@ asm void func_8012C914(HSD_GObj*)
 /* 8012C954 00129534  4B F4 22 51 */	bl func_8006EBA4
 /* 8012C958 00129538  38 00 00 FE */	li r0, 0xfe
 /* 8012C95C 0012953C  98 1D 06 72 */	stb r0, 0x672(r29)
-/* 8012C960 00129540  3C 60 80 13 */	lis r3, lbl_8012CACC@ha
-/* 8012C964 00129544  38 83 CA CC */	addi r4, r3, lbl_8012CACC@l
+/* 8012C960 00129540  3C 60 80 13 */	lis r3, ftYoshi_8012CACC@ha
+/* 8012C964 00129544  38 83 CA CC */	addi r4, r3, ftYoshi_8012CACC@l
 /* 8012C968 00129548  88 1D 22 1C */	lbz r0, 0x221c(r29)
 /* 8012C96C 0012954C  38 A0 00 01 */	li r5, 1
 /* 8012C970 00129550  50 A0 26 F6 */	rlwimi r0, r5, 4, 0x1b, 0x1b
@@ -598,7 +598,7 @@ lbl_8012CA7C:
 /* 8012CA88 00129668  48 24 68 61 */	bl HSD_JObjSetMtxDirtySub
 lbl_8012CA8C:
 /* 8012CA8C 0012966C  7F E3 FB 78 */	mr r3, r31
-/* 8012CA90 00129670  4B FF EE 15 */	bl func_8012B8A4
+/* 8012CA90 00129670  4B FF EE 15 */	bl ftYoshi_8012B8A4
 /* 8012CA94 00129674  7F C3 F3 78 */	mr r3, r30
 /* 8012CA98 00129678  4B F6 52 C1 */	bl func_80091D58
 /* 8012CA9C 0012967C  38 7E 00 00 */	addi r3, r30, 0
@@ -617,11 +617,11 @@ lbl_8012CA8C:
 #pragma pop
 #endif
 
-void lbl_8012CACC(HSD_GObj* arg0) {}
+void ftYoshi_8012CACC(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012CAD0(HSD_GObj*)
+asm void ftYoshi_8012CAD0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CAD0 001296B0  7C 08 02 A6 */	mflr r0
@@ -677,7 +677,7 @@ lbl_8012CB7C:
 /* 8012CB94 00129774  48 00 00 0C */	b lbl_8012CBA0
 lbl_8012CB98:
 /* 8012CB98 00129778  7F A3 EB 78 */	mr r3, r29
-/* 8012CB9C 0012977C  4B FF ED 09 */	bl func_8012B8A4
+/* 8012CB9C 0012977C  4B FF ED 09 */	bl ftYoshi_8012B8A4
 lbl_8012CBA0:
 /* 8012CBA0 00129780  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8012CBA4 00129784  83 E1 00 34 */	lwz r31, 0x34(r1)
@@ -692,7 +692,7 @@ lbl_8012CBA0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012CBBC(HSD_GObj*)
+asm void ftYoshi_8012CBBC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CBBC 0012979C  7C 08 02 A6 */	mflr r0
@@ -709,7 +709,7 @@ asm void lbl_8012CBBC(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012CBDC(HSD_GObj*)
+asm void ftYoshi_8012CBDC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CBDC 001297BC  7C 08 02 A6 */	mflr r0
@@ -726,7 +726,7 @@ asm void lbl_8012CBDC(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012CBFC(HSD_GObj*)
+asm void ftYoshi_8012CBFC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CBFC 001297DC  7C 08 02 A6 */	mflr r0
@@ -741,7 +741,7 @@ asm void lbl_8012CBFC(HSD_GObj*)
 #pragma pop
 #endif
 
-bool func_8012CC1C(HSD_GObj* gobj)
+bool ftYoshi_8012CC1C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -755,14 +755,14 @@ bool func_8012CC1C(HSD_GObj* gobj)
     return false;
 }
 
-void func_8012CC6C(HSD_GObj* gobj)
+void ftYoshi_8012CC6C(HSD_GObj* gobj)
 {
     func_8007500C(GET_FIGHTER(gobj), 52);
 }
 
 extern f32 const lbl_804D9A38;
 
-void func_8012CC94(HSD_GObj* gobj, Vec3* out)
+void ftYoshi_8012CC94(HSD_GObj* gobj, Vec3* out)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
@@ -771,30 +771,30 @@ void func_8012CC94(HSD_GObj* gobj, Vec3* out)
     out->z = lbl_804D9A38;
 }
 
-f32 func_8012CCC4(HSD_GObj* gobj)
+f32 ftYoshi_8012CCC4(HSD_GObj* gobj)
 {
     return GET_FIGHTER(gobj)->facing_dir;
 }
 
-f32 func_8012CCD0(HSD_GObj* gobj)
+f32 ftYoshi_8012CCD0(HSD_GObj* gobj)
 {
     ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
     return attr->x18;
 }
 
-f32 func_8012CCE0(HSD_GObj* gobj)
+f32 ftYoshi_8012CCE0(HSD_GObj* gobj)
 {
     ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
     return attr->x1C;
 }
 
-f32 func_8012CCF0(HSD_GObj* gobj)
+f32 ftYoshi_8012CCF0(HSD_GObj* gobj)
 {
     ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
     return attr->x20;
 }
 
-f32 func_8012CD00(HSD_GObj* gobj)
+f32 ftYoshi_8012CD00(HSD_GObj* gobj)
 {
     ftYoshiAttributes* attr = GET_FIGHTER(gobj)->x2D4_specialAttributes;
     return attr->x24;

@@ -17,62 +17,62 @@
 #include <dolphin/os/os.h>
 
 MotionState ftYoshi_MotionStateTable[] = {
-    { 37, 0x00100000, 0x01000000, lbl_8012C030, lbl_8012C114, lbl_8012C194,
-      lbl_8012C1B4, func_800761C8 },
-    { -1, 0x00180000, 0x01000000, lbl_8012C2F4, lbl_8012C3EC, lbl_8012C45C,
-      lbl_8012C47C, func_800761C8 },
-    { 39, 0x00100000, 0x01000000, lbl_8012C54C, lbl_8012C59C, lbl_8012C5C0,
-      lbl_8012C5E0, func_800761C8 },
-    { 40, 0x00100000, 0x01000000, lbl_8012C7A4, lbl_8012C80C, lbl_8012C810,
-      lbl_8012C830, func_800761C8 },
-    { 37, 0x00101073, 0x01000000, lbl_8012CAD0, lbl_8012CBBC, lbl_8012CBDC,
-      lbl_8012CBFC, func_800761C8 },
-    { 295, 0x00340011, 0x12000000, lbl_8012D550, NULL, lbl_8012DC30,
-      lbl_8012DD70, func_800761C8 },
-    { 296, 0x00340011, 0x12000000, lbl_8012D658, NULL, lbl_8012DC90,
-      lbl_8012DDE8, func_800761C8 },
-    { 296, 0x00340011, 0x12000000, lbl_8012D5C8, NULL, lbl_8012DC70,
-      lbl_8012DDC0, func_800761C8 },
-    { 297, 0x00340011, 0x12000000, lbl_8012D948, NULL, lbl_8012DD10,
-      lbl_8012DE88, func_800761C8 },
-    { 297, 0x00340011, 0x12000000, lbl_8012D7D8, NULL, lbl_8012DCF0,
-      lbl_8012DE60, func_800761C8 },
-    { 298, 0x00340411, 0x12000000, lbl_8012D58C, NULL, lbl_8012DC50,
-      lbl_8012DD98, func_800761C8 },
-    { 299, 0x00340411, 0x12000000, lbl_8012D760, NULL, lbl_8012DCD0,
-      lbl_8012DE38, func_800761C8 },
-    { 299, 0x00340411, 0x12000000, lbl_8012D6D0, NULL, lbl_8012DCB0,
-      lbl_8012DE10, func_800761C8 },
-    { 300, 0x00340411, 0x12000000, lbl_8012DB74, NULL, lbl_8012DD50,
-      lbl_8012DED8, func_800761C8 },
-    { 300, 0x00340411, 0x12000000, lbl_8012DA04, NULL, lbl_8012DD30,
-      lbl_8012DEB0, func_800761C8 },
-    { 301, 0x00340212, 0x13000000, lbl_8012F654, lbl_80130DB8, lbl_801310C4,
-      lbl_801317DC, func_800761C8 },
-    { 302, 0x00340212, 0x13000000, lbl_8012F750, lbl_80130DBC, lbl_801310E8,
-      lbl_8013187C, func_800761C8 },
-    { 303, 0x00340212, 0x13000000, lbl_8012FAC4, lbl_80130F7C, lbl_801312EC,
-      lbl_80131B60, func_800761C8 },
-    { 304, 0x00340212, 0x13000000, lbl_8012FFF4, lbl_80130FD8, lbl_80131618,
-      lbl_80131E74, func_800761C8 },
-    { 305, 0x00340612, 0x13000000, lbl_80130368, lbl_80130FDC, lbl_80131654,
-      lbl_80131ED4, func_800761C8 },
-    { 306, 0x00340612, 0x13000000, lbl_80130428, lbl_80130FEC, lbl_8013168C,
-      lbl_80131F80, func_800761C8 },
-    { 307, 0x00340612, 0x13000000, lbl_801306A8, lbl_80131050, lbl_80131718,
-      lbl_8013245C, func_800761C8 },
-    { 308, 0x00340612, 0x13000000, lbl_80130A24, lbl_801310B4, lbl_801317A4,
-      lbl_801328F0, func_800761C8 },
-    { 309, 0x00340113, 0x14000000, lbl_8012E4DC, NULL, lbl_8012E594,
-      lbl_8012E5D4, func_800761C8 },
-    { 310, 0x00340513, 0x14000000, lbl_8012E538, NULL, lbl_8012E5B4,
-      lbl_8012E5FC, func_800761C8 },
-    { 311, 0x00340214, 0x15000000, lbl_8012E814, NULL, lbl_8012E88C,
-      lbl_8012E924, func_800761C8 },
-    { 312, 0x00340214, 0x15000000, lbl_8012EA40, NULL, lbl_8012EA7C,
-      lbl_8012EA9C, func_800761C8 },
-    { 313, 0x00340614, 0x15000000, lbl_8012E850, NULL, lbl_8012E8CC,
-      func_8012E944, func_800761C8 },
+    { 37, 0x00100000, 0x01000000, ftYoshi_8012C030, ftYoshi_8012C114,
+      ftYoshi_8012C194, ftYoshi_8012C1B4, func_800761C8 },
+    { -1, 0x00180000, 0x01000000, ftYoshi_8012C2F4, ftYoshi_8012C3EC,
+      ftYoshi_8012C45C, ftYoshi_8012C47C, func_800761C8 },
+    { 39, 0x00100000, 0x01000000, ftYoshi_8012C54C, ftYoshi_8012C59C,
+      ftYoshi_8012C5C0, ftYoshi_8012C5E0, func_800761C8 },
+    { 40, 0x00100000, 0x01000000, ftYoshi_8012C7A4, ftYoshi_8012C80C,
+      ftYoshi_8012C810, ftYoshi_8012C830, func_800761C8 },
+    { 37, 0x00101073, 0x01000000, ftYoshi_8012CAD0, ftYoshi_8012CBBC,
+      ftYoshi_8012CBDC, ftYoshi_8012CBFC, func_800761C8 },
+    { 295, 0x00340011, 0x12000000, ftYoshi_8012D550, NULL, ftYoshi_8012DC30,
+      ftYoshi_8012DD70, func_800761C8 },
+    { 296, 0x00340011, 0x12000000, ftYoshi_8012D658, NULL, ftYoshi_8012DC90,
+      ftYoshi_8012DDE8, func_800761C8 },
+    { 296, 0x00340011, 0x12000000, ftYoshi_8012D5C8, NULL, ftYoshi_8012DC70,
+      ftYoshi_8012DDC0, func_800761C8 },
+    { 297, 0x00340011, 0x12000000, ftYoshi_8012D948, NULL, ftYoshi_8012DD10,
+      ftYoshi_8012DE88, func_800761C8 },
+    { 297, 0x00340011, 0x12000000, ftYoshi_8012D7D8, NULL, ftYoshi_8012DCF0,
+      ftYoshi_8012DE60, func_800761C8 },
+    { 298, 0x00340411, 0x12000000, ftYoshi_8012D58C, NULL, ftYoshi_8012DC50,
+      ftYoshi_8012DD98, func_800761C8 },
+    { 299, 0x00340411, 0x12000000, ftYoshi_8012D760, NULL, ftYoshi_8012DCD0,
+      ftYoshi_8012DE38, func_800761C8 },
+    { 299, 0x00340411, 0x12000000, ftYoshi_8012D6D0, NULL, ftYoshi_8012DCB0,
+      ftYoshi_8012DE10, func_800761C8 },
+    { 300, 0x00340411, 0x12000000, ftYoshi_8012DB74, NULL, ftYoshi_8012DD50,
+      ftYoshi_8012DED8, func_800761C8 },
+    { 300, 0x00340411, 0x12000000, ftYoshi_8012DA04, NULL, ftYoshi_8012DD30,
+      ftYoshi_8012DEB0, func_800761C8 },
+    { 301, 0x00340212, 0x13000000, ftYoshi_8012F654, ftYoshi_80130DB8,
+      ftYoshi_801310C4, ftYoshi_801317DC, func_800761C8 },
+    { 302, 0x00340212, 0x13000000, ftYoshi_8012F750, ftYoshi_80130DBC,
+      ftYoshi_801310E8, ftYoshi_8013187C, func_800761C8 },
+    { 303, 0x00340212, 0x13000000, ftYoshi_8012FAC4, ftYoshi_80130F7C,
+      ftYoshi_801312EC, ftYoshi_80131B60, func_800761C8 },
+    { 304, 0x00340212, 0x13000000, ftYoshi_8012FFF4, ftYoshi_80130FD8,
+      ftYoshi_80131618, ftYoshi_80131E74, func_800761C8 },
+    { 305, 0x00340612, 0x13000000, ftYoshi_80130368, ftYoshi_80130FDC,
+      ftYoshi_80131654, ftYoshi_80131ED4, func_800761C8 },
+    { 306, 0x00340612, 0x13000000, ftYoshi_80130428, ftYoshi_80130FEC,
+      ftYoshi_8013168C, ftYoshi_80131F80, func_800761C8 },
+    { 307, 0x00340612, 0x13000000, ftYoshi_801306A8, ftYoshi_80131050,
+      ftYoshi_80131718, ftYoshi_8013245C, func_800761C8 },
+    { 308, 0x00340612, 0x13000000, ftYoshi_80130A24, ftYoshi_801310B4,
+      ftYoshi_801317A4, ftYoshi_801328F0, func_800761C8 },
+    { 309, 0x00340113, 0x14000000, ftYoshi_8012E4DC, NULL, ftYoshi_8012E594,
+      ftYoshi_8012E5D4, func_800761C8 },
+    { 310, 0x00340513, 0x14000000, ftYoshi_8012E538, NULL, ftYoshi_8012E5B4,
+      ftYoshi_8012E5FC, func_800761C8 },
+    { 311, 0x00340214, 0x15000000, ftYoshi_8012E814, NULL, ftYoshi_8012E88C,
+      ftYoshi_8012E924, func_800761C8 },
+    { 312, 0x00340214, 0x15000000, ftYoshi_8012EA40, NULL, ftYoshi_8012EA7C,
+      ftYoshi_8012EA9C, func_800761C8 },
+    { 313, 0x00340614, 0x15000000, ftYoshi_8012E850, NULL, ftYoshi_8012E8CC,
+      ftYoshi_8012E944, func_800761C8 },
 };
 
 extern char* lbl_804D3E58;
@@ -82,7 +82,7 @@ extern char* lbl_804D3E70;
 extern char* lbl_804D3E78;
 
 /// https://decomp.me/scratch/ufrFK
-void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
+void ftYoshi_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -126,8 +126,8 @@ void func_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
     }
 }
 
-void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
-                   f32 start_frame)
+void ftYoshi_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
+                      f32 start_frame)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -161,7 +161,7 @@ void func_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
     }
 }
 
-void func_8012B8A4(HSD_GObj* gobj)
+void ftYoshi_8012B8A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
@@ -171,16 +171,16 @@ void func_8012B8A4(HSD_GObj* gobj)
 #endif
     f32 tempf = attr->xC * (1.0f - (fp->x1998_shieldHealth /
                                     p_ftCommonData->x260_startShieldHealth));
-    func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, tempf);
-    func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, tempf);
+    ftYoshi_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, tempf);
+    ftYoshi_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, tempf);
 }
 
-void func_8012B918(HSD_GObj* gobj)
+void ftYoshi_8012B918(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, 0.0f);
-    func_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, 0.0f);
+    ftYoshi_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, 0.0f);
+    ftYoshi_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, 0.0f);
 }
 
 void ftYoshi_OnDeath(HSD_GObj* gobj)
@@ -214,8 +214,8 @@ void ftYoshi_OnLoad(HSD_GObj* gobj)
     }
 
     other_attr->xC = 0.0f;
-    func_8012B6E8(fp, temp_r27);
-    func_8012B6E8(fp, temp_r28);
+    ftYoshi_8012B6E8(fp, temp_r27);
+    ftYoshi_8012B6E8(fp, temp_r28);
     PUSH_ATTRS(fp, ftYoshiAttributes);
     func_8026B3F8(item_list[0], It_Kind_Yoshi_EggThrow);
     func_8026B3F8(item_list[1], It_Kind_Yoshi_Star);
@@ -223,13 +223,13 @@ void ftYoshi_OnLoad(HSD_GObj* gobj)
     fp->x2226_flag.bits.b1 = 1;
 }
 
-/* static */ void func_8012E270(HSD_GObj* gobj);
-/* static */ void func_8012DF18(HSD_GObj* gobj);
+/* static */ void ftYoshi_8012E270(HSD_GObj* gobj);
+/* static */ void ftYoshi_8012DF18(HSD_GObj* gobj);
 
 void ftYoshi_8012BA8C(HSD_GObj* gobj)
 {
-    func_8012E270(gobj);
-    func_8012DF18(gobj);
+    ftYoshi_8012E270(gobj);
+    ftYoshi_8012DF18(gobj);
 }
 
 f32 ftYoshi_8012BAC0(Fighter* fp)
@@ -283,7 +283,7 @@ void ftYoshi_OnKnockbackExit(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t func_8012BDA0(void)
+asm unk_t ftYoshi_8012BDA0(void)
 { // clang-format off
     nofralloc
 /* 8012BDA0 00128980  7C 08 02 A6 */	mflr r0
@@ -330,7 +330,7 @@ asm unk_t func_8012BDA0(void)
 
 #endif
 
-void func_8012BE3C(HSD_GObj* gobj) {
+void ftYoshi_8012BE3C(HSD_GObj* gobj) {
     s32* x1CC;
     Fighter* fp = GET_FIGHTER(gobj);
     s32 bone_idx;
@@ -352,10 +352,10 @@ void func_8012BE3C(HSD_GObj* gobj) {
 /* static */ extern f32 const lbl_804D9A28;
 
 #pragma push
-asm unk_t func_8012BECC(void)
+asm unk_t ftYoshi_8012BECC(void)
 { // clang-format off
     nofralloc
-func_8012BECC:
+ftYoshi_8012BECC:
 /* 8012BECC 00128AAC  7C 08 02 A6 */	mflr r0
 /* 8012BED0 00128AB0  38 80 01 55 */	li r4, 0x155
 /* 8012BED4 00128AB4  90 01 00 04 */	stw r0, 4(r1)
@@ -434,7 +434,7 @@ lbl_8012BFE0:
 /* 8012BFEC 00128BCC  48 24 72 FD */	bl HSD_JObjSetMtxDirtySub
 lbl_8012BFF0:
 /* 8012BFF0 00128BD0  7F E3 FB 78 */	mr r3, r31
-/* 8012BFF4 00128BD4  4B FF F8 B1 */	bl func_8012B8A4
+/* 8012BFF4 00128BD4  4B FF F8 B1 */	bl ftYoshi_8012B8A4
 /* 8012BFF8 00128BD8  7F C3 F3 78 */	mr r3, r30
 /* 8012BFFC 00128BDC  4B F6 5D 5D */	bl func_80091D58
 /* 8012C000 00128BE0  38 7E 00 00 */	addi r3, r30, 0
