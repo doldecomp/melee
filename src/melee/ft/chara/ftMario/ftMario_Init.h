@@ -28,19 +28,6 @@ void ftMario_OnKnockbackExit(HSD_GObj*);
 void ftMario_func_800E0CAC(s32, s32*, s32*);
 char* ftMario_GetMotionFileString(enum_t);
 
-// ftmario4
-void ftMario_SpecialHi_StartAction(HSD_GObj*);
-void ftMario_SpecialAirHi_StartAction(HSD_GObj*);
-void ftMario_SpecialHi_Anim(HSD_GObj*);
-void ftMario_SpecialAirHi_Anim(HSD_GObj*);
-void ftMario_SpecialHi_IASA(HSD_GObj*);
-void ftMario_SpecialAirHi_IASA(HSD_GObj*);
-void ftMario_SpecialHi_Phys(HSD_GObj*);
-void ftMario_SpecialAirHi_Phys(HSD_GObj*);
-void ftMario_SpecialHi_CheckLanding(HSD_GObj*);
-void ftMario_SpecialHi_Coll(HSD_GObj*);
-void ftMario_SpecialAirHi_Coll(HSD_GObj*);
-
 // ftmario5
 void ftMario_SpecialLw_UpdateRot(HSD_GObj*);
 void ftMario_SpecialLw_StartAction(HSD_GObj*);

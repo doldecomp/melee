@@ -1,6 +1,7 @@
 #include "ftMario/ftMario_Init.h"
 
 #include "ftmario2.h"
+#include "ftMario_SpecialHi.h"
 #include "ftMario_SpecialN.h"
 #include "ftMario_SpecialS.h"
 #include "types.h"

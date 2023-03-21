@@ -1,5 +1,6 @@
+#include "ftMario_SpecialHi.h"
+
 #include "forward.h"
-#include "ftMario_Init.h"
 #include "inlines.h"
 #include "types.h"
 

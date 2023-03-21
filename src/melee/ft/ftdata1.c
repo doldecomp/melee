@@ -31,6 +31,7 @@
 #include "ftLuigi/ftluigi.h"
 #include "ftMario/ftmario2.h"
 #include "ftMario/ftMario_Init.h"
+#include "ftMario/ftMario_SpecialHi.h"
 #include "ftMario/ftMario_SpecialN.h"
 #include "ftMario/ftMario_SpecialS.h"
 #include "ftMars/ftMars.h"
