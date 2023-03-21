@@ -65,6 +65,10 @@
 #include "ftZakoGirl/ftzakogirl.h"
 #include "ftZelda/ftzelda.h"
 #include "ftZelda/ftZelda_Init.h"
+#include "ftZelda/ftZelda_SpecialHi.h"
+#include "ftZelda/ftZelda_SpecialLw.h"
+#include "ftZelda/ftZelda_SpecialN.h"
+#include "ftZelda/ftZelda_SpecialS.h"
 
 #include <dolphin/mtx/types.h>
 
