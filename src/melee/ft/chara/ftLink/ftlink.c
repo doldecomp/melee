@@ -156,7 +156,7 @@ void func_800EAF58(HSD_GObj* gobj)
     func_800D94D8(gobj);
     func_800ECD04(gobj);
     func_800ECD58(gobj);
-    func_80149268(gobj);
+    ftCLink_80149268(gobj);
 }
 
 void ftLink_OnItemPickupExt(HSD_GObj* gobj, int arg1)

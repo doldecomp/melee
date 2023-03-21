@@ -202,7 +202,7 @@ void ftCLink_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void func_80149114(HSD_GObj* gobj)
+void ftCLink_80149114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     CLinkAttributes* temp_r4 = (void*) fp->ft_data->ext_attr;
@@ -217,7 +217,7 @@ void func_80149114(HSD_GObj* gobj)
     func_80088148(fp, 0x111DA, 0x7F, 0x40);
 }
 
-void func_8014919C(HSD_GObj* gobj)
+void ftCLink_8014919C(HSD_GObj* gobj)
 {
     CLinkAttributes* attrs;
 
@@ -229,14 +229,14 @@ void func_8014919C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     if (fp->x5F8 == 0) {
         attrs = (void*) fp->x2D4_specialAttributes;
-        func_8007B1B8(gobj, &attrs->xC4, func_80149114);
+        func_8007B1B8(gobj, &attrs->xC4, ftCLink_80149114);
         fp->x221B_b3 = true;
         fp->x221B_b4 = true;
         fp->x221B_b2 = true;
     }
 }
 
-bool func_8014920C(HSD_GObj* gobj)
+bool ftCLink_8014920C(HSD_GObj* gobj)
 {
     s32 temp_r0;
     Fighter* fp;
@@ -258,7 +258,7 @@ bool func_8014920C(HSD_GObj* gobj)
     return false;
 }
 
-void func_80149268(HSD_GObj* gobj)
+void ftCLink_80149268(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -268,7 +268,7 @@ void func_80149268(HSD_GObj* gobj)
     checkFighter2244(gobj);
 }
 
-void func_801492C4(HSD_GObj* gobj)
+void ftCLink_801492C4(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -286,7 +286,7 @@ void func_801492C4(HSD_GObj* gobj)
     }
 }
 
-u32 func_801492F4(HSD_GObj* gobj)
+u32 ftCLink_801492F4(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -299,7 +299,7 @@ u32 func_801492F4(HSD_GObj* gobj)
     return 0;
 }
 
-void func_80149318(HSD_GObj* gobj)
+void ftCLink_80149318(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     func_800DEAE8(gobj, 0x156, 0x157);

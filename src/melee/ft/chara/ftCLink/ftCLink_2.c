@@ -31,7 +31,7 @@ void ftCLink_80149354(HSD_GObj* gobj)
             fp->cb.x21DC_callback_OnTakeDamage = func_800EAF58;
         }
     } else if (ft2->x2204_ftcmd_var1 == 2) {
-        func_80149268(gobj);
+        ftCLink_80149268(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         checkFighter2244(gobj);
