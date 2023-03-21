@@ -109,7 +109,7 @@ void ftZelda_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+        ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
 
         fp->x80_self_vel.x = fp->x80_self_vel.x / attributes->x38;
         fp->x80_self_vel.y = fp->x80_self_vel.y / attributes->x3C;
@@ -167,7 +167,7 @@ void ftZelda_80139A34(HSD_GObj* gobj)
 void ftZelda_80139A54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
     Vec2 vec;
 
     vec.x = attributes->x40;
@@ -290,7 +290,7 @@ bool ftZelda_80139D60_Helper(HSD_GObj* gobj)
 {
     bool result;
     Fighter* fighter2;
-    ftZeldaAttributes* attributes2;
+    ftZelda_DatAttrs* attributes2;
 
     fighter2 = getFighter(gobj);
     attributes2 = fighter2->x2D4_specialAttributes;
@@ -316,7 +316,7 @@ void ftZelda_80139D60(HSD_GObj* gobj)
 
     /// @todo @c sa can't move below @c coll_data,
     ///       which suggests a function boundary.
-    ftZeldaAttributes* sa;
+    ftZelda_DatAttrs* sa;
     CollData* coll_data = &fp->x6F0_collData;
     sa = fp->x2D4_specialAttributes;
 
@@ -396,8 +396,8 @@ void ftZelda_8013A058(HSD_GObj* gobj)
     volatile float y;
     f64 _three;
     f64 _half;
-    Fighter* fp;                   // r30
-    ftZeldaAttributes* attributes; // r31
+    Fighter* fp;                  // r30
+    ftZelda_DatAttrs* attributes; // r31
     f32 temp_f0;
     f32 temp_f1;
     f32 temp_f2;
@@ -487,8 +487,8 @@ void ftZelda_8013A058(HSD_GObj* gobj)
 void ftZelda_8013A244(HSD_GObj* gobj)
 {
     volatile float y;
-    Fighter* fp;                   // r30
-    ftZeldaAttributes* attributes; // r31
+    Fighter* fp;                  // r30
+    ftZelda_DatAttrs* attributes; // r31
     f32 temp_f1;
     f32 temp_f2;
     f32 var_f4;
@@ -588,7 +588,7 @@ void ftZelda_8013A448(HSD_GObj* gobj)
 void ftZelda_8013A484(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         f32 x, y;
@@ -615,7 +615,7 @@ void ftZelda_8013A50C(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
 
     if (fp->x2200_ftcmd_var0 != 0) {
         func_8007D4B8(fp);
@@ -645,7 +645,7 @@ void ftZelda_8013A5C4(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* attributes = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
 
     {
         int ledge_grab_dir;
@@ -676,7 +676,7 @@ void ftZelda_8013A648(HSD_GObj* gobj)
 void ftZelda_8013A6A8(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
-    ftZeldaAttributes* attributes = fp0->x2D4_specialAttributes;
+    ftZelda_DatAttrs* attributes = fp0->x2D4_specialAttributes;
 
     Fighter_ChangeMotionState(gobj, 351, 0, NULL, 0, 1, 0);
     func_8006EBA4(gobj);
@@ -699,7 +699,7 @@ void ftZelda_8013A6A8(HSD_GObj* gobj)
 void ftZelda_8013A764(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
-    ftZeldaAttributes* sa = fp0->x2D4_specialAttributes;
+    ftZelda_DatAttrs* sa = fp0->x2D4_specialAttributes;
 
     Fighter_ChangeMotionState(gobj, 354, 0, NULL, 0, 1, 0);
     func_8006EBA4(gobj);

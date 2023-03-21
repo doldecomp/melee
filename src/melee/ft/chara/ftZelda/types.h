@@ -7,7 +7,7 @@
 #include <placeholder.h>
 #include <dolphin/mtx/types.h>
 
-typedef struct _ftZeldaAttributes {
+typedef struct ftZelda_DatAttrs {
     f32 x0;
     s32 x4; // Type confirmed
     f32 x8;
@@ -42,7 +42,7 @@ typedef struct _ftZeldaAttributes {
     f32 x7C; // Type confirmed
     f32 x80; // Type confirmed
     ReflectDesc x84;
-} ftZeldaAttributes;
+} ftZelda_DatAttrs;
 
 union ftZelda_MotionVars {
     struct ftZelda_SpecialHiVars {

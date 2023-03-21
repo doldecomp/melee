@@ -67,8 +67,8 @@ void ftZelda_8013AEAC(HSD_GObj* gobj)
 void ftZelda_SpecialLw_StartMotion_Helper(HSD_GObj* gobj)
 {
     Vec3 sp20;
-    Fighter* fp;                   // r31
-    ftZeldaAttributes* attributes; // r3
+    Fighter* fp;                  // r31
+    ftZelda_DatAttrs* attributes; // r3
 
     fp = getFighterPlus(gobj);
     attributes = getFtSpecialAttrs(fp);
@@ -154,7 +154,7 @@ void ftZelda_8013B0F0(HSD_GObj* gobj)
 void ftZelda_8013B110(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -247,7 +247,7 @@ void ftZelda_8013B324(HSD_GObj* gobj)
 void ftZelda_8013B344(HSD_GObj* gobj)
 {
     Fighter* fp;
-    ftZeldaAttributes* attributes;
+    ftZelda_DatAttrs* attributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -311,7 +311,7 @@ void ftZelda_8013B46C(HSD_GObj* gobj)
 void ftZelda_8013B4D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
+    ftZelda_DatAttrs* sa = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
