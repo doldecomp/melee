@@ -12,7 +12,7 @@ void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012A074;
 }
 
-void ftSamus_SpecialS_StartAction(HSD_GObj* gobj)
+void ftSamus_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
@@ -28,7 +28,7 @@ void ftSamus_SpecialS_StartAction(HSD_GObj* gobj)
     ftSamus_ClearThrowFlagsUnk(gobj);
 }
 
-void ftSamus_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftSamus_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);

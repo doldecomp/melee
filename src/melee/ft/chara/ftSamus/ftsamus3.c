@@ -132,7 +132,7 @@ void ftSamus_801293BC(HSD_GObj* gobj)
     }
 }
 
-void ftSamus_SpecialN_StartAction(HSD_GObj* gobj)
+void ftSamus_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Vec3* self_vel;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -157,7 +157,7 @@ void ftSamus_SpecialN_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-void ftSamus_SpecialAirN_StartAction(HSD_GObj* gobj)
+void ftSamus_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

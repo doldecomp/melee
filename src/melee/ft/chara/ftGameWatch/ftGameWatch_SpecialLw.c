@@ -140,7 +140,7 @@ inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* gobj)
 }
 
 /// Mr. Game & Watch's Oil Panic Start Motion State handler
-void ftGameWatch_SpecialLw_StartAction(HSD_GObj* gobj)
+void ftGameWatch_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -157,7 +157,7 @@ void ftGameWatch_SpecialLw_StartAction(HSD_GObj* gobj)
     ftGameWatch_SpecialLw_SetVars(gobj);
 }
 
-void ftGameWatch_SpecialAirLw_StartAction(HSD_GObj* gobj)
+void ftGameWatch_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;

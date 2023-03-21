@@ -41,7 +41,7 @@ static void resetCmdVarsGround(HSD_GObj* gobj)
     func_8007D7FC(fp);
 }
 
-void ftCaptain_SpecialS_StartAction(HSD_GObj* gobj)
+void ftCaptain_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -114,7 +114,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftCaptain_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     setupAirStart(gobj);

@@ -8,7 +8,7 @@
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 
-void ftDonkey_SpecialLw_StartAction(HSD_GObj* gobj)
+void ftDonkey_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.dk.speciallw.x0 = 0;

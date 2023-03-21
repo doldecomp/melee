@@ -12,7 +12,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftPikachu_SpecialN_StartAction(HSD_GObj* gobj)
+void ftPikachu_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -23,7 +23,7 @@ void ftPikachu_SpecialN_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-void ftPikachu_SpecialAirN_StartAction(HSD_GObj* gobj)
+void ftPikachu_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);

@@ -4,6 +4,6 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj);
+void ftZelda_SpecialLw_StartMotion_Helper(HSD_GObj* gobj);
 
 #endif

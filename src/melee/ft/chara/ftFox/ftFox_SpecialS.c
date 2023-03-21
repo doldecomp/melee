@@ -67,7 +67,7 @@ f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index)
 // 0x800E9EE8
 // https://decomp.me/scratch/7sYVM // Fox & Falco's grounded Illusion/Phantasm
 // Start Motion State handler
-void ftFox_SpecialS_StartAction(HSD_GObj* gobj)
+void ftFox_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
@@ -90,7 +90,7 @@ void ftFox_SpecialS_StartAction(HSD_GObj* gobj)
 // 0x800E9F6C
 // https://decomp.me/scratch/Sm9I3 // Fox & Falco's aerial Illusion/Phantasm
 // Start Motion State handler
-void ftFox_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftFox_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);

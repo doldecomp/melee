@@ -45,7 +45,7 @@ static void setCallbacks(HSD_GObj* gobj)
     fp->cb.x21E4_callback_OnDeath2 = &ftMario_SpecialLw_UpdateRot;
 }
 
-static void doStartAction(HSD_GObj* gobj)
+static void doStartMotion(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMario_DatAttrs* sa;
@@ -72,7 +72,7 @@ static void setCmdVar2(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
 }
 
-void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
+void ftMario_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
@@ -87,12 +87,12 @@ void ftMario_SpecialLw_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
     fp->x80_self_vel.y = sa->speciallw.vel_y - sa->speciallw.tap_y_vel_max;
     func_8007D440(fp, sa->speciallw.air_momentum_x);
-    doStartAction(gobj);
+    doStartMotion(gobj);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
+void ftMario_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
     f32 sub_val;
     Fighter* fp = gobj->user_data;
@@ -113,7 +113,7 @@ void ftMario_SpecialAirLw_StartAction(HSD_GObj* gobj)
     }
     fp->x80_self_vel.y = (f32) (sa->speciallw.vel_y - sub_val);
     func_8007D440(fp, sa->speciallw.air_momentum_x);
-    doStartAction(gobj);
+    doStartMotion(gobj);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }

@@ -64,9 +64,9 @@ void ftZelda_8013AEAC(HSD_GObj* gobj)
     func_8007EFC8(gobj, ftSeak_80114758);
 }
 
-// Helper function for both ftZelda_SpecialLw_StartAction /
-// ftZelda_SpecialAirLw_StartAction
-void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
+// Helper function for both ftZelda_SpecialLw_StartMotion /
+// ftZelda_SpecialAirLw_StartMotion
+void ftZelda_SpecialLw_StartMotion_Helper(HSD_GObj* gobj)
 {
     Vec3 sp20;
     Fighter* fp;                   // r31
@@ -90,26 +90,26 @@ void ftZelda_SpecialLw_StartAction_Helper(HSD_GObj* gobj)
 // 8013AEE0 - 8013AFA4 (0xC4 bytes)
 // https://decomp.me/scratch/jZJgg (with helper)
 // https://decomp.me/scratch/Lw6fO (single function)
-void ftZelda_SpecialLw_StartAction(HSD_GObj* gobj)
+void ftZelda_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 0.0f, 1.0, 0.0f);
 
     func_8006EBA4(gobj);
 
-    ftZelda_SpecialLw_StartAction_Helper(gobj);
+    ftZelda_SpecialLw_StartMotion_Helper(gobj);
 }
 
 // Zelda_MS_357_Transform_Aerial
 // 8013AFA4 - 8013B068 (0xC4 bytes)
 // For a scratch using helper function, see the above function.
 // https://decomp.me/scratch/8W7ZF (single function)
-void ftZelda_SpecialAirLw_StartAction(HSD_GObj* gobj)
+void ftZelda_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 0x165, 0, NULL, 0.0f, 1.0, 0.0f);
 
     func_8006EBA4(gobj);
 
-    ftZelda_SpecialLw_StartAction_Helper(gobj);
+    ftZelda_SpecialLw_StartMotion_Helper(gobj);
 }
 
 // 8013B068 - 8013B0A8 (0x40 bytes)

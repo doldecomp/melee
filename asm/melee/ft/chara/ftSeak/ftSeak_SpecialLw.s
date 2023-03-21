@@ -85,8 +85,8 @@ lbl_801140F8:
  /* 80114158 00110D38  7C 08 03 A6 */	mtlr r0
  /* 8011415C 00110D3C  4E 80 00 20 */	blr
 
-.global ftSeak_SpecialLw_StartAction
-ftSeak_SpecialLw_StartAction:
+.global ftSeak_SpecialLw_StartMotion
+ftSeak_SpecialLw_StartMotion:
 /* 80114160 00110D40  7C 08 02 A6 */	mflr r0
 /* 80114164 00110D44  38 80 01 69 */	li r4, 0x169
 /* 80114168 00110D48  90 01 00 04 */	stw r0, 4(r1)
@@ -137,8 +137,8 @@ ftSeak_SpecialLw_StartAction:
 /* 8011421C 00110DFC  7C 08 03 A6 */	mtlr r0
 /* 80114220 00110E00  4E 80 00 20 */	blr
 
-.global ftSeak_SpecialAirLw_StartAction
-ftSeak_SpecialAirLw_StartAction:
+.global ftSeak_SpecialAirLw_StartMotion
+ftSeak_SpecialAirLw_StartMotion:
 /* 80114224 00110E04  7C 08 02 A6 */	mflr r0
 /* 80114228 00110E08  38 80 01 6B */	li r4, 0x16b
 /* 8011422C 00110E0C  90 01 00 04 */	stw r0, 4(r1)

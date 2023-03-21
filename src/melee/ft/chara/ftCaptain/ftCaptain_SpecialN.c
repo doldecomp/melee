@@ -69,7 +69,7 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
                        (stickRangeMinPos - stickRangeMinNeg));
 }
 
-void ftCaptain_SpecialN_StartAction(HSD_GObj* gobj)
+void ftCaptain_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -88,7 +88,7 @@ void ftCaptain_SpecialN_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-void ftCaptain_SpecialAirN_StartAction(HSD_GObj* gobj)
+void ftCaptain_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

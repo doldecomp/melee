@@ -4,8 +4,8 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftSeak_SpecialLw_StartAction(HSD_GObj*);
-void ftSeak_SpecialAirLw_StartAction(HSD_GObj*);
+void ftSeak_SpecialLw_StartMotion(HSD_GObj*);
+void ftSeak_SpecialAirLw_StartMotion(HSD_GObj*);
 void ftSeak_8011412C(HSD_GObj* gobj);
 void ftSeak_80114758(HSD_GObj*);
 void ftSeak_801126C8(HSD_GObj*);

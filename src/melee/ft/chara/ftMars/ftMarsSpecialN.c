@@ -10,7 +10,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMars_SpecialN_StartAction(HSD_GObj* gobj)
+void ftMars_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->x2D4_specialAttributes;
@@ -27,7 +27,7 @@ void ftMars_SpecialN_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-void ftMars_SpecialAirN_StartAction(HSD_GObj* gobj)
+void ftMars_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->x2D4_specialAttributes;

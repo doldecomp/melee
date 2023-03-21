@@ -112,14 +112,14 @@ void func_800EB95C(HSD_GObj*);
 void func_800EB8E0(HSD_GObj*);
 void func_800EB93C(HSD_GObj*);
 void func_800EB9D4(HSD_GObj*);
-void ftLink_SpecialS_StartAction(HSD_GObj*);
-void ftLink_SpecialAirHi_StartAction(HSD_GObj*);
-void ftLink_SpecialAirLw_StartAction(HSD_GObj*);
-void ftLink_SpecialAirS_StartAction(HSD_GObj*);
-void ftLink_SpecialAirN_StartAction(HSD_GObj*);
-void ftLink_SpecialN_StartAction(HSD_GObj*);
-void ftLink_SpecialN_StartAction(HSD_GObj*);
-void ftLink_SpecialLw_StartAction(HSD_GObj*);
-void ftLink_SpecialHi_StartAction(HSD_GObj*);
+void ftLink_SpecialS_StartMotion(HSD_GObj*);
+void ftLink_SpecialAirHi_StartMotion(HSD_GObj*);
+void ftLink_SpecialAirLw_StartMotion(HSD_GObj*);
+void ftLink_SpecialAirS_StartMotion(HSD_GObj*);
+void ftLink_SpecialAirN_StartMotion(HSD_GObj*);
+void ftLink_SpecialN_StartMotion(HSD_GObj*);
+void ftLink_SpecialN_StartMotion(HSD_GObj*);
+void ftLink_SpecialLw_StartMotion(HSD_GObj*);
+void ftLink_SpecialHi_StartMotion(HSD_GObj*);
 
 #endif

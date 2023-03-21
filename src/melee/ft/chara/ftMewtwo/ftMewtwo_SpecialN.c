@@ -405,7 +405,7 @@ inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
 // 0x80147320
 // https://decomp.me/scratch/zcZ5Y // Mewtwo's grounded Shadow Ball Start
 // Motion State handler
-void ftMewtwo_SpecialN_StartAction(HSD_GObj* gobj)
+void ftMewtwo_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     ftMewtwo_SpecialN_ChangeAction(gobj);
 }
@@ -446,7 +446,7 @@ inline void ftMewtwo_SpecialAirN_ChangeAction(HSD_GObj* gobj)
 // 0x801473F4
 // https://decomp.me/scratch/okSqF // Mewtwo's aerial Shadow Ball Start Action
 // State handler
-void ftMewtwo_SpecialAirN_StartAction(HSD_GObj* gobj)
+void ftMewtwo_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     ftMewtwo_SpecialAirN_ChangeAction(gobj);
 }

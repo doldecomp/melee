@@ -78,8 +78,8 @@ extern Fighter_DemoStrings lbl_803D0A64;
 
 // Netural Special - Fireball (SpecialN)
 
-void ftLuigi_SpecialN_StartAction(HSD_GObj* gobj);
-void ftLuigi_SpecialAirN_StartAction(HSD_GObj* gobj);
+void ftLuigi_SpecialN_StartMotion(HSD_GObj* gobj);
+void ftLuigi_SpecialAirN_StartMotion(HSD_GObj* gobj);
 void ftLuigi_SpecialN_Anim(HSD_GObj* gobj);
 void ftLuigi_SpecialAirN_Anim(HSD_GObj* gobj);
 void ftLuigi_SpecialN_IASA(HSD_GObj* gobj);
@@ -94,8 +94,8 @@ void ftLuigi_SpecialN_FireSpawn(HSD_GObj* gobj);
 
 void ftLuigi_SpecialS_SetGFX(HSD_GObj* gobj);
 void ftLuigi_SpecialS_SetVars(HSD_GObj* gobj);
-void ftLuigi_SpecialS_StartAction(HSD_GObj* gobj);
-void ftLuigi_SpecialAirS_StartAction(HSD_GObj* gobj);
+void ftLuigi_SpecialS_StartMotion(HSD_GObj* gobj);
+void ftLuigi_SpecialAirS_StartMotion(HSD_GObj* gobj);
 void ftLuigi_SpecialS_OnGiveDamage(HSD_GObj* gobj);
 void ftLuigi_SpecialSStart_Anim(HSD_GObj* gobj);
 void ftLuigi_SpecialAirSStart_Anim(HSD_GObj* gobj);
@@ -165,8 +165,8 @@ void ftLuigi_SpecialAirSEnd_Action(HSD_GObj* gobj);
 
 // Up Special - Super Jump Punch (SpecialHi)
 
-void ftLuigi_SpecialHi_StartAction(HSD_GObj* gobj);
-void ftLuigi_SpecialAirHi_StartAction(HSD_GObj* gobj);
+void ftLuigi_SpecialHi_StartMotion(HSD_GObj* gobj);
+void ftLuigi_SpecialAirHi_StartMotion(HSD_GObj* gobj);
 void ftLuigi_SpecialHi_Anim(HSD_GObj* gobj);
 void ftLuigi_SpecialAirHi_Anim(HSD_GObj* gobj);
 void ftLuigi_SpecialHi_IASA(HSD_GObj* gobj);
@@ -180,8 +180,8 @@ void ftLuigi_SpecialAirHi_Coll(HSD_GObj* gobj);
 // Down Special - Luigi Cyclone (SpecialLw)
 
 void ftLuigi_SpecialLw_UpdateRot(HSD_GObj* gobj);
-void ftLuigi_SpecialLw_StartAction(HSD_GObj* gobj);
-void ftLuigi_SpecialAirLw_StartAction(HSD_GObj* gobj);
+void ftLuigi_SpecialLw_StartMotion(HSD_GObj* gobj);
+void ftLuigi_SpecialAirLw_StartMotion(HSD_GObj* gobj);
 void ftLuigi_SpecialLw_Anim(HSD_GObj* gobj);
 void ftLuigi_SpecialAirLw_Anim(HSD_GObj* gobj);
 void ftLuigi_SpecialLw_IASA(HSD_GObj* gobj);

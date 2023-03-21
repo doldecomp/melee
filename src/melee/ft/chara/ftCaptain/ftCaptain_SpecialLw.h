@@ -4,8 +4,8 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftCaptain_SpecialLw_StartAction(HSD_GObj*);
-void ftCaptain_SpecialAirLw_StartAction(HSD_GObj*);
+void ftCaptain_SpecialLw_StartMotion(HSD_GObj*);
+void ftCaptain_SpecialAirLw_StartMotion(HSD_GObj*);
 void func_800E4B00(HSD_GObj*);
 void func_800E4BF8(HSD_GObj*);
 void func_800E4E1C(HSD_GObj*);

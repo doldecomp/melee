@@ -167,7 +167,7 @@ static inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* gobj)
 
 // 0x8014C7A0
 // https://decomp.me/scratch/PnafK
-void ftGameWatch_SpecialS_StartAction(HSD_GObj* gobj)
+void ftGameWatch_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -178,7 +178,7 @@ void ftGameWatch_SpecialS_StartAction(HSD_GObj* gobj)
 
     GET_FIGHTER(gobj)->x80_self_vel.y = 0.0f;
 
-    /// @todo Shared @c inline with #ftGameWatch_SpecialAirS_StartAction.
+    /// @todo Shared @c inline with #ftGameWatch_SpecialAirS_StartMotion.
     ftGameWatch_SpecialS_GetRandomInt(gobj);
     Fighter_ChangeMotionState(gobj,
                               fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1, 0,
@@ -189,7 +189,7 @@ void ftGameWatch_SpecialS_StartAction(HSD_GObj* gobj)
 
 // 0x8014C828
 // https://decomp.me/scratch/IzXqX
-void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftGameWatch_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;

@@ -110,7 +110,7 @@ static inline void ftGameWatch_SpecialHi_SetVars(HSD_GObj* gobj)
 // 0x8014E0AC
 // https://decomp.me/scratch/4Dc4b // Mr. Game & Watch's grounded Fire Rescue
 // Motion State handler
-void ftGameWatch_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftGameWatch_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -130,7 +130,7 @@ void ftGameWatch_SpecialHi_StartAction(HSD_GObj* gobj)
 }
 
 // 0x8014E158 - Mr. Game & Watch's aerial Fire Rescue Motion State handler
-void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftGameWatch_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

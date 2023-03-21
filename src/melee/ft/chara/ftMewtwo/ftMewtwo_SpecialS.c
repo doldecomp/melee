@@ -32,7 +32,7 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* gobj)
 // 0x801466C4
 // https://decomp.me/scratch/X6OTU // Mewtwo's grounded Confusion Motion State
 // handler
-void ftMewtwo_SpecialS_StartAction(HSD_GObj* gobj)
+void ftMewtwo_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -69,7 +69,7 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* gobj)
 // 0x8014677C
 // https://decomp.me/scratch/4DvVc // Mewtwo's aerial Confusion Motion State
 // handler
-void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftMewtwo_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

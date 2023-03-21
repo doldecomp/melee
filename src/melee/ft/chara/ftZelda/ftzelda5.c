@@ -16,7 +16,7 @@
 
 // 8013B638 - 8013B6D8 (0xA0 bytes)
 // https://decomp.me/scratch/QnXK1
-void ftZelda_SpecialS_StartAction(HSD_GObj* gobj)
+void ftZelda_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     f32 temp_f1;
     Fighter* fp; // r31
@@ -49,7 +49,7 @@ void ftZelda_SpecialS_StartAction(HSD_GObj* gobj)
 
 // 8013B6D8 - 8013B780 (0xA8 bytes)
 // https://decomp.me/scratch/F0dW9
-void ftZelda_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftZelda_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     f32 temp_f1;
     Fighter* fp;

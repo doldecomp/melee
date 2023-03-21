@@ -257,7 +257,7 @@ void func_80132E30(HSD_GObj* gobj)
     }
 }
 
-void ftKoopa_SpecialS_StartAction(HSD_GObj* gobj)
+void ftKoopa_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -283,7 +283,7 @@ void ftKoopa_SpecialS_StartAction(HSD_GObj* gobj)
     }
 }
 
-void ftKoopa_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftKoopa_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);

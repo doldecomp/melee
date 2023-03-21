@@ -66,7 +66,7 @@ void ftZelda_8013979C(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
+void ftZelda_SpecialHi_StartMotion_Helper(Fighter* fp)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -87,7 +87,7 @@ void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp)
     }
 }
 
-void ftZelda_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftZelda_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = getFighterPlus(gobj);
 
@@ -102,12 +102,12 @@ void ftZelda_SpecialHi_StartAction(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->mv.zd.specialhi.xC = 0;
 
-    ftZelda_SpecialHi_StartAction_Helper(fp);
+    ftZelda_SpecialHi_StartMotion_Helper(fp);
 
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;
 }
 
-void ftZelda_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftZelda_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);

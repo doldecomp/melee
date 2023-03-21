@@ -6,6 +6,6 @@
 #include <baselib/forward.h>
 
 bool ftZelda_80139D60_Helper(HSD_GObj* gobj);
-void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp);
+void ftZelda_SpecialHi_StartMotion_Helper(Fighter* fp);
 
 #endif

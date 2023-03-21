@@ -11,7 +11,7 @@ void ftMario_SpecialAirS_Anim(HSD_GObj* gobj);
 void ftMario_SpecialAirS_Coll(HSD_GObj* gobj);
 void ftMario_SpecialAirS_IASA(HSD_GObj* gobj);
 void ftMario_SpecialAirS_Phys(HSD_GObj* gobj);
-void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj);
+void ftMario_SpecialAirS_StartMotion(HSD_GObj* gobj);
 void ftMario_SpecialS_Anim(HSD_GObj* gobj);
 void ftMario_SpecialS_Coll(HSD_GObj* gobj);
 void ftMario_SpecialS_CreateCape(HSD_GObj* gobj);
@@ -24,7 +24,7 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj);
 void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj);
 void ftMario_SpecialS_SetCall(Fighter* fp);
 void ftMario_SpecialS_SetNULL(HSD_GObj* gobj);
-void ftMario_SpecialS_StartAction(HSD_GObj* gobj);
+void ftMario_SpecialS_StartMotion(HSD_GObj* gobj);
 void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj);
 
 #endif

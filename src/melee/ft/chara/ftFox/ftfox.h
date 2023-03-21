@@ -203,8 +203,8 @@ bool ftFox_CheckBlasterAction(HSD_GObj* gobj);
 void ftFox_ClearBlaster(HSD_GObj* gobj);
 void ftFox_RemoveBlaster(HSD_GObj* gobj);
 void ftFox_CreateBlasterShot(HSD_GObj* gobj);
-void ftFox_SpecialN_StartAction(HSD_GObj* gobj);
-void ftFox_SpecialAirN_StartAction(HSD_GObj* gobj);
+void ftFox_SpecialN_StartMotion(HSD_GObj* gobj);
+void ftFox_SpecialAirN_StartMotion(HSD_GObj* gobj);
 void ftFox_SpecialNStart_Anim(HSD_GObj* gobj);
 void ftFox_SpecialNLoop_Anim(HSD_GObj* gobj);
 void ftFox_SpecialNEnd_Anim(HSD_GObj* gobj);
@@ -243,10 +243,10 @@ void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj);
 void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* gobj);
 
 /// Fox & Falco's grounded Firefox/Firebird Start Motion State handler
-void ftFox_SpecialHi_StartAction(HSD_GObj* gobj);
+void ftFox_SpecialHi_StartMotion(HSD_GObj* gobj);
 
 /// Fox & Falco's aerial Firefox/Firebird Start Motion State handler
-void ftFox_SpecialAirHi_StartAction(HSD_GObj* gobj);
+void ftFox_SpecialAirHi_StartMotion(HSD_GObj* gobj);
 
 void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj);
 
@@ -339,10 +339,10 @@ void ftFox_SpecialLw_CreateStartGFX(HSD_GObj* gobj);
 void ftFox_SpecialLw_CreateReflectGFX(HSD_GObj* gobj);
 
 /// Fox & Falco's grounded Reflector Start Motion State handler
-void ftFox_SpecialLw_StartAction(HSD_GObj* gobj);
+void ftFox_SpecialLw_StartMotion(HSD_GObj* gobj);
 
 /// Fox & Falco's aerial Reflector Start Motion State handler
-void ftFox_SpecialAirLw_StartAction(HSD_GObj* gobj);
+void ftFox_SpecialAirLw_StartMotion(HSD_GObj* gobj);
 
 void ftFox_SpecialLwStart_Anim(HSD_GObj* gobj);
 void ftFox_SpecialAirLwStart_Anim(HSD_GObj* gobj);
@@ -446,8 +446,8 @@ u32 ftFox_SpecialS_GetCmdVar2(HSD_GObj* gobj);
 void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* gobj, s32 index,
                                         Vec3* ghostPos);
 f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index);
-void ftFox_SpecialS_StartAction(HSD_GObj* gobj);
-void ftFox_SpecialAirS_StartAction(HSD_GObj* gobj);
+void ftFox_SpecialS_StartMotion(HSD_GObj* gobj);
+void ftFox_SpecialAirS_StartMotion(HSD_GObj* gobj);
 void ftFox_SpecialSStart_Anim(HSD_GObj* gobj);
 void ftFox_SpecialAirSStart_Anim(HSD_GObj* gobj);
 void ftFox_SpecialSStart_IASA(HSD_GObj* gobj);

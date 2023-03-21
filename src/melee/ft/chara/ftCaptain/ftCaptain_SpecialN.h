@@ -12,12 +12,12 @@ void ftCaptain_SpecialAirN_Anim(HSD_GObj* gobj);
 void ftCaptain_SpecialAirN_Coll(HSD_GObj* gobj);
 void ftCaptain_SpecialAirN_IASA(HSD_GObj* gobj);
 void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj);
-void ftCaptain_SpecialAirN_StartAction(HSD_GObj* gobj);
+void ftCaptain_SpecialAirN_StartMotion(HSD_GObj* gobj);
 void ftCaptain_SpecialN_Anim(HSD_GObj* gobj);
 void ftCaptain_SpecialN_Coll(HSD_GObj* gobj);
 void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj);
 void ftCaptain_SpecialN_IASA(HSD_GObj* gobj);
 void ftCaptain_SpecialN_Phys(HSD_GObj* gobj);
-void ftCaptain_SpecialN_StartAction(HSD_GObj* gobj);
+void ftCaptain_SpecialN_StartMotion(HSD_GObj* gobj);
 
 #endif

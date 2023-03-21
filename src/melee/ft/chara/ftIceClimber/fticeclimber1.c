@@ -207,7 +207,7 @@ void func_8011F190(HSD_GObj* gobj)
 extern f32 const lbl_804D9838;
 extern f32 const lbl_804D983C;
 
-void ftIceClimber_SpecialN_StartAction(HSD_GObj* gobj)
+void ftIceClimber_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(gobj);
     fp->x2210_ThrowFlags.flags = 0;
@@ -223,7 +223,7 @@ void ftIceClimber_SpecialN_StartAction(HSD_GObj* gobj)
 
 extern f32 const lbl_804D9840;
 
-void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* gobj)
+void ftIceClimber_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

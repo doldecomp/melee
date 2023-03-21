@@ -47,7 +47,7 @@ static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* gobj)
 
 // 0x801445F0
 // https://decomp.me/scratch/ // Luigi's grounded Cyclone Motion State handler
-void ftLuigi_SpecialLw_StartAction(HSD_GObj* gobj)
+void ftLuigi_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftLuigiAttributes* luigiAttrs;
@@ -79,7 +79,7 @@ void ftLuigi_SpecialLw_StartAction(HSD_GObj* gobj)
 // 0x80144708
 // https://decomp.me/scratch/egaIB // Luigi's aerial Cyclone Motion State
 // handler
-void ftLuigi_SpecialAirLw_StartAction(HSD_GObj* gobj)
+void ftLuigi_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftLuigiAttributes* luigiAttrs;

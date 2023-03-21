@@ -6,7 +6,7 @@
 
 void ftDonkey_8010DF5C(HSD_GObj* gobj);
 void ftDonkey_8010DF98(HSD_GObj* gobj);
-void ftDonkey_SpecialLw_StartAction(HSD_GObj* gobj);
+void ftDonkey_SpecialLw_StartMotion(HSD_GObj* gobj);
 void ftDonkey_8010DF9C(HSD_GObj* gobj);
 void ftDonkey_8010DFBC(HSD_GObj* gobj);
 void ftDonkey_8010E030(HSD_GObj* gobj);

@@ -10,7 +10,7 @@
 // 0x80143FC8
 // https://decomp.me/scratch/MAoxx // Luigi's grounded Super Jump Punch Action
 // State handler
-void ftLuigi_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftLuigi_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -22,7 +22,7 @@ void ftLuigi_SpecialHi_StartAction(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Super Jump Punch Motion State handler
-void ftLuigi_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftLuigi_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* luigiAttrs = fp->x2D4_specialAttributes;

@@ -60,7 +60,7 @@ extern Fighter_CostumeStrings lbl_803CF26C[];
 extern char lbl_803CF1E0[];
 extern Fighter_DemoStrings lbl_803CF25C;
 
-void ftKoopa_SpecialS_StartAction(HSD_GObj* gobj);
+void ftKoopa_SpecialS_StartMotion(HSD_GObj* gobj);
 void func_8013302C(HSD_GObj* gobj);
 void func_801330E4(HSD_GObj* gobj);
 void func_80132A64(HSD_GObj* gobj);
@@ -75,7 +75,7 @@ f32 func_80132E10(HSD_GObj* gobj);
 f32 func_80132E20(HSD_GObj* gobj);
 void ftKoopa_OnDeath(HSD_GObj* gobj);
 void func_80132E30(HSD_GObj* gobj);
-void ftKoopa_SpecialAirS_StartAction(HSD_GObj* gobj);
+void ftKoopa_SpecialAirS_StartMotion(HSD_GObj* gobj);
 void func_8013319C(HSD_GObj* gobj);
 void func_8013322C(HSD_GObj* gobj);
 void func_801332C4(HSD_GObj* gobj);
@@ -179,11 +179,11 @@ void func_801348C0(HSD_GObj*);
 void lbl_801349C4(HSD_GObj*);
 void lbl_80134A00(HSD_GObj*);
 void lbl_80134A20(HSD_GObj*);
-void ftKoopa_SpecialAirHi_StartAction(HSD_GObj*);
-void ftKoopa_SpecialAirLw_StartAction(HSD_GObj*);
-void ftKoopa_SpecialAirN_StartAction(HSD_GObj*);
-void ftKoopa_SpecialN_StartAction(HSD_GObj*);
-void ftKoopa_SpecialLw_StartAction(HSD_GObj*);
-void ftKoopa_SpecialHi_StartAction(HSD_GObj*);
+void ftKoopa_SpecialAirHi_StartMotion(HSD_GObj*);
+void ftKoopa_SpecialAirLw_StartMotion(HSD_GObj*);
+void ftKoopa_SpecialAirN_StartMotion(HSD_GObj*);
+void ftKoopa_SpecialN_StartMotion(HSD_GObj*);
+void ftKoopa_SpecialLw_StartMotion(HSD_GObj*);
+void ftKoopa_SpecialHi_StartMotion(HSD_GObj*);
 
 #endif

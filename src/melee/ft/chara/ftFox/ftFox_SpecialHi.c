@@ -49,7 +49,7 @@ void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-void ftFox_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftFox_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftFoxAttributes* foxAttrs;
@@ -68,7 +68,7 @@ void ftFox_SpecialHi_StartAction(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateChargeGFX;
 }
 
-void ftFox_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftFox_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);

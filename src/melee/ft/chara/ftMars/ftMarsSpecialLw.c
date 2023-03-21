@@ -13,7 +13,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMars_SpecialLw_StartAction(HSD_GObj* gobj)
+void ftMars_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
     fp0->x80_self_vel.y = 0;
@@ -28,7 +28,7 @@ void ftMars_SpecialLw_StartAction(HSD_GObj* gobj)
     }
 }
 
-void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj)
+void ftMars_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

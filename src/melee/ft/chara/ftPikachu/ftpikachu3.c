@@ -6,7 +6,7 @@
 #include "ft/inlines.h"
 #include "ftPikachu/ftpikachu.h"
 
-void ftPikachu_SpecialS_StartAction(HSD_GObj* gobj)
+void ftPikachu_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -23,7 +23,7 @@ void ftPikachu_SpecialS_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-void ftPikachu_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftPikachu_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

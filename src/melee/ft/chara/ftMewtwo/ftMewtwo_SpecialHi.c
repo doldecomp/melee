@@ -62,7 +62,7 @@ void ftMewtwo_SpecialHi_SetEndGFX(HSD_GObj* gobj)
 }
 
 /// Mewtwo's grounded Teleport Start Motion State handler
-void ftMewtwo_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftMewtwo_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
 
@@ -83,7 +83,7 @@ void ftMewtwo_SpecialHi_StartAction(HSD_GObj* gobj)
 }
 
 /// Mewtwo's aerial Teleport Start Motion State handler
-void ftMewtwo_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftMewtwo_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

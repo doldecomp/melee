@@ -8,7 +8,7 @@
 #include "ft/ftparts.h"
 #include "ftSamus/ftsamus.h"
 
-void ftSamus_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftSamus_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -32,7 +32,7 @@ void ftSamus_SpecialHi_StartAction(HSD_GObj* gobj)
     fp->fv.ss.x2244 = 1;
 }
 
-void ftSamus_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftSamus_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;

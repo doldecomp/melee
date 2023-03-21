@@ -83,8 +83,8 @@ lbl_80116C70:
 /* 80116C8C 0011386C  7C 08 03 A6 */	mtlr r0
 /* 80116C90 00113870  4E 80 00 20 */	blr
 
-.global ftNess_SpecialS_StartAction
-ftNess_SpecialS_StartAction:
+.global ftNess_SpecialS_StartMotion
+ftNess_SpecialS_StartMotion:
 /* 80116C94 00113874  7C 08 02 A6 */	mflr r0
 /* 80116C98 00113878  38 80 01 64 */	li r4, 0x164
 /* 80116C9C 0011387C  90 01 00 04 */	stw r0, 4(r1)

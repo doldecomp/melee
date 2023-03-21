@@ -47,7 +47,7 @@ int ftMario_SpecialN_VitaminRandom(HSD_GObj* gobj)
     return r3;
 }
 
-void ftMario_SpecialN_StartAction(HSD_GObj* gobj)
+void ftMario_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
@@ -122,7 +122,7 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
     }
 }
 
-void ftMario_SpecialAirN_StartAction(HSD_GObj* gobj)
+void ftMario_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;

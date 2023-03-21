@@ -29,7 +29,7 @@ void ftDonkey_UpdateDKVelocityAfterPunch(HSD_GObj* gobj)
                           fp->mv.dk.specialn.xC);
 }
 
-void ftDonkey_SpecialN_StartAction(HSD_GObj* gobj)
+void ftDonkey_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
@@ -63,7 +63,7 @@ void ftDonkey_SpecialN_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-void ftDonkey_SpecialAirN_StartAction(HSD_GObj* gobj)
+void ftDonkey_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;

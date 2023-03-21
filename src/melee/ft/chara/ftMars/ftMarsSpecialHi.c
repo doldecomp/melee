@@ -7,7 +7,7 @@
 
 // 80138208 00134DE8
 // https://decomp.me/scratch/lrV6F
-void ftMars_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftMars_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -23,7 +23,7 @@ void ftMars_SpecialHi_StartAction(HSD_GObj* gobj)
 
 // 8013826C 00134E4C
 // https://decomp.me/scratch/PuVdx
-void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftMars_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;

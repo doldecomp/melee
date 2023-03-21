@@ -472,14 +472,14 @@ void ftSeak_80110F70(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
 }
 
-void ftSeak_SpecialS_StartAction(HSD_GObj* gobj)
+void ftSeak_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 349, 0, NULL, 0.0, 1, 0);
     func_8006EBA4(gobj);
     ftSeak_80110F70(gobj);
 }
 
-void ftSeak_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftSeak_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x80_self_vel.y = 0;

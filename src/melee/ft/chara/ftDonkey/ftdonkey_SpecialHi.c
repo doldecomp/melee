@@ -17,7 +17,7 @@ void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
-void ftDonkey_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftDonkey_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
@@ -35,7 +35,7 @@ void ftDonkey_SpecialHi_StartAction(HSD_GObj* gobj)
     ef_Spawn(0x4CA, gobj, fp->x5E8_fighterBones[0].x0_jobj);
 }
 
-void ftDonkey_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftDonkey_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;

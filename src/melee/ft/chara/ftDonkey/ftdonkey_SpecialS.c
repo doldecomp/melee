@@ -5,7 +5,7 @@
 #include "ft/ft_unknown_006.h"
 #include "ftDonkey/ftdonkey.h"
 
-void ftDonkey_SpecialS_StartAction(HSD_GObj* gobj)
+void ftDonkey_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -20,7 +20,7 @@ void ftDonkey_SpecialS_StartAction(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010E0CC;
 }
 
-void ftDonkey_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftDonkey_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;

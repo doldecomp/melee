@@ -4,7 +4,7 @@
 #include "ftMars/ftMars.h"
 #include "melee/ft/inlines.h"
 
-void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
+void ftMars_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -36,7 +36,7 @@ void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftMars_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
     MarsAttributes* attr = getFtSpecialAttrsD(fp0);

@@ -121,7 +121,7 @@ static void changeAction(HSD_GObj* gobj, ftMario_MotionState msid)
     }
 }
 
-void ftMario_SpecialS_StartAction(HSD_GObj* gobj)
+void ftMario_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -134,7 +134,7 @@ void ftMario_SpecialS_StartAction(HSD_GObj* gobj)
     changeAction(gobj, ftMario_MS_SpecialS);
 }
 
-void ftMario_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftMario_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

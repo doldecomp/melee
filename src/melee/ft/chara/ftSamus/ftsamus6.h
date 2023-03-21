@@ -18,8 +18,8 @@ void ftSamus_8012B4FC(HSD_GObj* gobj);
 void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj);
 void ftSamus_8012AEBC(HSD_GObj* gobj);
 void ftSamus_8012AF38(HSD_GObj* gobj);
-void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* gobj);
-void ftSamus_SpecialLw_StartAction(HSD_GObj* gobj);
-void ftSamus_SpecialAirLw_StartAction(HSD_GObj* gobj);
+void ftSamus_SpecialLw_StartMotion_inner(HSD_GObj* gobj);
+void ftSamus_SpecialLw_StartMotion(HSD_GObj* gobj);
+void ftSamus_SpecialAirLw_StartMotion(HSD_GObj* gobj);
 
 #endif

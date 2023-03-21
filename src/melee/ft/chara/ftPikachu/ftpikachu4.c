@@ -27,7 +27,7 @@ void ftPikachu_UpdateVel_80125D80(HSD_GObj* gobj)
     fp->mv.pk.unk4.x10.x = fp->facing_dir * fabs_inline(fp->mv.pk.unk4.x10.x);
 }
 
-void ftPikachu_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftPikachu_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -54,7 +54,7 @@ void ftPikachu_SpecialHi_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-void ftPikachu_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftPikachu_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

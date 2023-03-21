@@ -831,8 +831,8 @@ func_80110F70:
 /* 80111030 0010DC10  90 06 21 BC */	stw r0, 0x21bc(r6)
 /* 80111034 0010DC14  4E 80 00 20 */	blr
 
-.global ftSeak_SpecialS_StartAction
-ftSeak_SpecialS_StartAction:
+.global ftSeak_SpecialS_StartMotion
+ftSeak_SpecialS_StartMotion:
 /* 80111038 0010DC18  7C 08 02 A6 */	mflr r0
 /* 8011103C 0010DC1C  38 80 01 5D */	li r4, 0x15d
 /* 80111040 0010DC20  90 01 00 04 */	stw r0, 4(r1)
@@ -855,8 +855,8 @@ ftSeak_SpecialS_StartAction:
 /* 80111084 0010DC64  7C 08 03 A6 */	mtlr r0
 /* 80111088 0010DC68  4E 80 00 20 */	blr
 
-.global ftSeak_SpecialAirS_StartAction
-ftSeak_SpecialAirS_StartAction:
+.global ftSeak_SpecialAirS_StartMotion
+ftSeak_SpecialAirS_StartMotion:
 /* 8011108C 0010DC6C  7C 08 02 A6 */	mflr r0
 /* 80111090 0010DC70  38 80 01 60 */	li r4, 0x160
 /* 80111094 0010DC74  90 01 00 04 */	stw r0, 4(r1)
@@ -2046,8 +2046,8 @@ func_801120D4:
 /* 801120E0 0010ECC0  90 03 21 E4 */	stw r0, 0x21e4(r3)
 /* 801120E4 0010ECC4  4E 80 00 20 */	blr
 
-.global ftSeak_SpecialN_StartAction
-ftSeak_SpecialN_StartAction:
+.global ftSeak_SpecialN_StartMotion
+ftSeak_SpecialN_StartMotion:
 /* 801120E8 0010ECC8  7C 08 02 A6 */	mflr r0
 /* 801120EC 0010ECCC  38 80 01 55 */	li r4, 0x155
 /* 801120F0 0010ECD0  90 01 00 04 */	stw r0, 4(r1)
@@ -2094,8 +2094,8 @@ lbl_80112158:
 /* 80112190 0010ED70  7C 08 03 A6 */	mtlr r0
 /* 80112194 0010ED74  4E 80 00 20 */	blr
 
-.global ftSeak_SpecialAirN_StartAction
-ftSeak_SpecialAirN_StartAction:
+.global ftSeak_SpecialAirN_StartMotion
+ftSeak_SpecialAirN_StartMotion:
 /* 80112198 0010ED78  7C 08 02 A6 */	mflr r0
 /* 8011219C 0010ED7C  38 80 01 59 */	li r4, 0x159
 /* 801121A0 0010ED80  90 01 00 04 */	stw r0, 4(r1)
@@ -3190,8 +3190,8 @@ lbl_80113098:
 /* 801130C8 0010FCA8  7C 08 03 A6 */	mtlr r0
 /* 801130CC 0010FCAC  4E 80 00 20 */	blr
 
-.global ftSeak_SpecialHi_StartAction
-ftSeak_SpecialHi_StartAction:
+.global ftSeak_SpecialHi_StartMotion
+ftSeak_SpecialHi_StartMotion:
 /* 801130D0 0010FCB0  7C 08 02 A6 */	mflr r0
 /* 801130D4 0010FCB4  38 80 01 63 */	li r4, 0x163
 /* 801130D8 0010FCB8  90 01 00 04 */	stw r0, 4(r1)
@@ -3216,8 +3216,8 @@ ftSeak_SpecialHi_StartAction:
 /* 80113124 0010FD04  7C 08 03 A6 */	mtlr r0
 /* 80113128 0010FD08  4E 80 00 20 */	blr
 
-.global ftSeak_SpecialAirHi_StartAction
-ftSeak_SpecialAirHi_StartAction:
+.global ftSeak_SpecialAirHi_StartMotion
+ftSeak_SpecialAirHi_StartMotion:
 /* 8011312C 0010FD0C  7C 08 02 A6 */	mflr r0
 /* 80113130 0010FD10  38 80 01 66 */	li r4, 0x166
 /* 80113134 0010FD14  90 01 00 04 */	stw r0, 4(r1)
@@ -4379,8 +4379,8 @@ lbl_801140F8:
  /* 80114158 00110D38  7C 08 03 A6 */	mtlr r0
  /* 8011415C 00110D3C  4E 80 00 20 */	blr
 
-.global ftSeak_SpecialLw_StartAction
-ftSeak_SpecialLw_StartAction:
+.global ftSeak_SpecialLw_StartMotion
+ftSeak_SpecialLw_StartMotion:
 /* 80114160 00110D40  7C 08 02 A6 */	mflr r0
 /* 80114164 00110D44  38 80 01 69 */	li r4, 0x169
 /* 80114168 00110D48  90 01 00 04 */	stw r0, 4(r1)
@@ -4431,8 +4431,8 @@ ftSeak_SpecialLw_StartAction:
 /* 8011421C 00110DFC  7C 08 03 A6 */	mtlr r0
 /* 80114220 00110E00  4E 80 00 20 */	blr
 
-.global ftSeak_SpecialAirLw_StartAction
-ftSeak_SpecialAirLw_StartAction:
+.global ftSeak_SpecialAirLw_StartMotion
+ftSeak_SpecialAirLw_StartMotion:
 /* 80114224 00110E04  7C 08 02 A6 */	mflr r0
 /* 80114228 00110E08  38 80 01 6B */	li r4, 0x16b
 /* 8011422C 00110E0C  90 01 00 04 */	stw r0, 4(r1)

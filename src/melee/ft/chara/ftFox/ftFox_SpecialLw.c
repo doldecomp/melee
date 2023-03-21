@@ -72,7 +72,7 @@ static inline void ftFox_SpecialLw_SetVars(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateStartGFX;
 }
 
-void ftFox_SpecialLw_StartAction(HSD_GObj* gobj)
+void ftFox_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -85,7 +85,7 @@ void ftFox_SpecialLw_StartAction(HSD_GObj* gobj)
     ftFox_SpecialLw_SetVars(gobj);
 }
 
-void ftFox_SpecialAirLw_StartAction(HSD_GObj* gobj)
+void ftFox_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;

@@ -28,8 +28,8 @@ void lbl_801365A8(HSD_GObj* gobj);
 void lbl_8013666C(HSD_GObj* gobj);
 void lbl_80136730(HSD_GObj* gobj);
 
-void ftMars_SpecialN_StartAction(HSD_GObj* gobj);
-void ftMars_SpecialAirN_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialN_StartMotion(HSD_GObj* gobj);
+void ftMars_SpecialAirN_StartMotion(HSD_GObj* gobj);
 void lbl_80136844(HSD_GObj* gobj);
 void lbl_801368AC(HSD_GObj* gobj);
 void lbl_80136914(HSD_GObj* gobj);
@@ -65,8 +65,8 @@ void func_801372A8(HSD_GObj* gobj);
 void func_80137354(HSD_GObj* gobj);
 void func_801373B8(HSD_GObj* gobj);
 
-void ftMars_SpecialS_StartAction(HSD_GObj* gobj);
-void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialS_StartMotion(HSD_GObj* gobj);
+void ftMars_SpecialAirS_StartMotion(HSD_GObj* gobj);
 void ftMars_80137558(HSD_GObj* gobj);
 void ftMars_801375B8(HSD_GObj* gobj);
 void ftMars_80137618(HSD_GObj* gobj);
@@ -96,8 +96,8 @@ void ftMars_80137FF8(HSD_GObj* gobj);
 void ftMars_8013809C(HSD_GObj* gobj);
 void ftMars_80138148(HSD_GObj* gobj);
 
-void ftMars_SpecialHi_StartAction(HSD_GObj* gobj);
-void ftMars_SpecialAirHi_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialHi_StartMotion(HSD_GObj* gobj);
+void ftMars_SpecialAirHi_StartMotion(HSD_GObj* gobj);
 void lbl_801382E8(HSD_GObj* gobj);
 void lbl_80138348(HSD_GObj* gobj);
 void lbl_801383A8(HSD_GObj* gobj);
@@ -108,8 +108,8 @@ void lbl_80138884(HSD_GObj* gobj);
 void lbl_801388B4(HSD_GObj* gobj);
 void lbl_80138940(HSD_GObj* gobj);
 
-void ftMars_SpecialLw_StartAction(HSD_GObj* gobj);
-void ftMars_SpecialAirLw_StartAction(HSD_GObj* gobj);
+void ftMars_SpecialLw_StartMotion(HSD_GObj* gobj);
+void ftMars_SpecialAirLw_StartMotion(HSD_GObj* gobj);
 void lbl_80138AA8(HSD_GObj* gobj);
 void lbl_80138B64(HSD_GObj* gobj);
 void lbl_80138C20(HSD_GObj* gobj);

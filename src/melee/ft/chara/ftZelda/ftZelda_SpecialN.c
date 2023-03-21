@@ -45,7 +45,7 @@ inline void startActionHelper(HSD_GObj* gobj)
     fighter2->mv.zd.unk3.x0 = attributes->x4;
 }
 
-void ftZelda_SpecialN_StartAction(HSD_GObj* gobj)
+void ftZelda_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     f32 temp_f1;
     Fighter* fp; // r31
@@ -64,7 +64,7 @@ void ftZelda_SpecialN_StartAction(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A830;
 }
 
-void ftZelda_SpecialAirN_StartAction(HSD_GObj* gobj)
+void ftZelda_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftZeldaAttributes* sa = fp->x2D4_specialAttributes;

@@ -684,8 +684,8 @@ lbl_8011C344:
 /* 8011C344 00118F24  90 85 23 40 */	stw r4, 0x2340(r5)
 /* 8011C348 00118F28  4E 80 00 20 */	blr
 
-.global ftPeach_SpecialS_StartAction
-ftPeach_SpecialS_StartAction:
+.global ftPeach_SpecialS_StartMotion
+ftPeach_SpecialS_StartMotion:
 /* 8011C34C 00118F2C  7C 08 02 A6 */	mflr r0
 /* 8011C350 00118F30  38 80 01 62 */	li r4, 0x162
 /* 8011C354 00118F34  90 01 00 04 */	stw r0, 4(r1)
@@ -717,8 +717,8 @@ ftPeach_SpecialS_StartAction:
 /* 8011C3BC 00118F9C  7C 08 03 A6 */	mtlr r0
 /* 8011C3C0 00118FA0  4E 80 00 20 */	blr
 
-.global ftPeach_SpecialAirS_StartAction
-ftPeach_SpecialAirS_StartAction:
+.global ftPeach_SpecialAirS_StartMotion
+ftPeach_SpecialAirS_StartMotion:
 /* 8011C3C4 00118FA4  7C 08 02 A6 */	mflr r0
 /* 8011C3C8 00118FA8  38 80 01 65 */	li r4, 0x165
 /* 8011C3CC 00118FAC  90 01 00 04 */	stw r0, 4(r1)
@@ -1719,8 +1719,8 @@ lbl_8011D100:
 /* 8011D114 00119CF4  7C 08 03 A6 */	mtlr r0
 /* 8011D118 00119CF8  4E 80 00 20 */	blr
 
-.global ftPeach_SpecialLw_StartAction
-ftPeach_SpecialLw_StartAction:
+.global ftPeach_SpecialLw_StartMotion
+ftPeach_SpecialLw_StartMotion:
 /* 8011D11C 00119CFC  7C 08 02 A6 */	mflr r0
 /* 8011D120 00119D00  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D124 00119D04  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1768,8 +1768,8 @@ lbl_8011D1AC:
 /* 8011D1BC 00119D9C  7C 08 03 A6 */	mtlr r0
 /* 8011D1C0 00119DA0  4E 80 00 20 */	blr
 
-.global ftPeach_SpecialAirLw_StartAction
-ftPeach_SpecialAirLw_StartAction:
+.global ftPeach_SpecialAirLw_StartMotion
+ftPeach_SpecialAirLw_StartMotion:
 /* 8011D1C4 00119DA4  7C 08 02 A6 */	mflr r0
 /* 8011D1C8 00119DA8  90 01 00 04 */	stw r0, 4(r1)
 /* 8011D1CC 00119DAC  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -2165,8 +2165,8 @@ lbl_8011D71C:
 /* 8011D724 0011A304  7C 08 03 A6 */	mtlr r0
 /* 8011D728 0011A308  4E 80 00 20 */	blr
 
-.global ftPeach_SpecialHi_StartAction
-ftPeach_SpecialHi_StartAction:
+.global ftPeach_SpecialHi_StartMotion
+ftPeach_SpecialHi_StartMotion:
 /* 8011D72C 0011A30C  7C 08 02 A6 */	mflr r0
 /* 8011D730 0011A310  38 80 01 69 */	li r4, 0x169
 /* 8011D734 0011A314  90 01 00 04 */	stw r0, 4(r1)
@@ -2220,8 +2220,8 @@ lbl_8011D7DC:
 /* 8011D7E8 0011A3C8  7C 08 03 A6 */	mtlr r0
 /* 8011D7EC 0011A3CC  4E 80 00 20 */	blr
 
-.global ftPeach_SpecialAirHi_StartAction
-ftPeach_SpecialAirHi_StartAction:
+.global ftPeach_SpecialAirHi_StartMotion
+ftPeach_SpecialAirHi_StartMotion:
 /* 8011D7F0 0011A3D0  7C 08 02 A6 */	mflr r0
 /* 8011D7F4 0011A3D4  38 80 01 6B */	li r4, 0x16b
 /* 8011D7F8 0011A3D8  90 01 00 04 */	stw r0, 4(r1)
@@ -3113,8 +3113,8 @@ lbl_8011E3C8:
 /* 8011E3C8 0011AFA8  38 60 00 01 */	li r3, 1
 /* 8011E3CC 0011AFAC  4E 80 00 20 */	blr
 
-.global ftPeach_SpecialN_StartAction
-ftPeach_SpecialN_StartAction:
+.global ftPeach_SpecialN_StartMotion
+ftPeach_SpecialN_StartMotion:
 /* 8011E3D0 0011AFB0  7C 08 02 A6 */	mflr r0
 /* 8011E3D4 0011AFB4  38 80 01 6D */	li r4, 0x16d
 /* 8011E3D8 0011AFB8  90 01 00 04 */	stw r0, 4(r1)
@@ -3151,8 +3151,8 @@ ftPeach_SpecialN_StartAction:
 /* 8011E454 0011B034  7C 08 03 A6 */	mtlr r0
 /* 8011E458 0011B038  4E 80 00 20 */	blr
 
-.global ftPeach_SpecialAirN_StartAction
-ftPeach_SpecialAirN_StartAction:
+.global ftPeach_SpecialAirN_StartMotion
+ftPeach_SpecialAirN_StartMotion:
 /* 8011E45C 0011B03C  7C 08 02 A6 */	mflr r0
 /* 8011E460 0011B040  38 80 01 6F */	li r4, 0x16f
 /* 8011E464 0011B044  90 01 00 04 */	stw r0, 4(r1)

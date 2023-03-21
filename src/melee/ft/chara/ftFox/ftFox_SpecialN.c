@@ -234,7 +234,7 @@ inline void ftFox_SpecialN_SetCall(HSD_GObj* gobj)
 // 0x800E608C
 // https://decomp.me/scratch/B3aTL // Fox & Falco's grounded Blaster Action
 // State handler
-void ftFox_SpecialN_StartAction(HSD_GObj* gobj)
+void ftFox_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
@@ -276,7 +276,7 @@ void ftFox_SpecialN_StartAction(HSD_GObj* gobj)
 
 // 0x800E61A8
 // https://decomp.me/scratch/TUDhU
-void ftFox_SpecialAirN_StartAction(
+void ftFox_SpecialAirN_StartMotion(
     HSD_GObj* gobj) // Fox & Falco's aerial Blaster Motion State handler
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);

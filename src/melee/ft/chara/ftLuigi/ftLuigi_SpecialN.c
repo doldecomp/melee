@@ -13,7 +13,7 @@
 // 0x8014267C
 // https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Motion State
 // handler
-void ftLuigi_SpecialN_StartAction(HSD_GObj* gobj)
+void ftLuigi_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -26,7 +26,7 @@ void ftLuigi_SpecialN_StartAction(HSD_GObj* gobj)
 }
 
 // 0x801426EC - Luigi's aerial Fireball Motion State handler
-void ftLuigi_SpecialAirN_StartAction(HSD_GObj* gobj)
+void ftLuigi_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

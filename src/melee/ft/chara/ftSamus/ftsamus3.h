@@ -5,9 +5,9 @@
 
 void ftSamus_80129258(HSD_GObj* gobj);
 
-void ftSamus_SpecialN_StartAction(HSD_GObj* gobj);
+void ftSamus_SpecialN_StartMotion(HSD_GObj* gobj);
 void ftSamus_801293BC_inner(HSD_GObj* gobj);
-void ftSamus_SpecialAirN_StartAction(HSD_GObj* gobj);
+void ftSamus_SpecialAirN_StartMotion(HSD_GObj* gobj);
 void ftSamus_80129684(HSD_GObj* gobj);
 void ftSamus_80129774(HSD_GObj* gobj);
 void ftSamus_80129940(HSD_GObj* gobj);

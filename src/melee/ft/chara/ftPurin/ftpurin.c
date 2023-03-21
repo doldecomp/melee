@@ -382,7 +382,7 @@ inline void startHi(HSD_GObj* gobj, int left_id, int right_id)
                                   lbl_804D9C18, lbl_804D9C14);
 }
 
-void ftPurin_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftPurin_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, 365, 367);
 
@@ -390,7 +390,7 @@ void ftPurin_SpecialHi_StartAction(HSD_GObj* gobj)
     ftPurin_SpecialHi_SetVars(gobj);
 }
 
-void ftPurin_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftPurin_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, 366, 368);
 
@@ -665,7 +665,7 @@ extern f32 const lbl_804D9C28;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPurin_SpecialLw_StartAction(HSD_GObj*)
+asm void ftPurin_SpecialLw_StartMotion(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CE8C 00139A6C  7C 08 02 A6 */	mflr r0
@@ -716,7 +716,7 @@ lbl_8013CEF8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPurin_SpecialAirLw_StartAction(HSD_GObj*)
+asm void ftPurin_SpecialAirLw_StartMotion(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013CF2C 00139B0C  7C 08 02 A6 */	mflr r0
@@ -1008,7 +1008,7 @@ extern f32 const lbl_804D9C38;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPurin_SpecialS_StartAction(HSD_GObj*)
+asm void ftPurin_SpecialS_StartMotion(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D234 00139E14  7C 08 02 A6 */	mflr r0
@@ -1044,7 +1044,7 @@ asm void ftPurin_SpecialS_StartAction(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPurin_SpecialAirS_StartAction(HSD_GObj*)
+asm void ftPurin_SpecialAirS_StartMotion(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013D2A0 00139E80  7C 08 02 A6 */	mflr r0
@@ -2043,7 +2043,7 @@ lbl_8013DE8C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPurin_SpecialN_StartAction(HSD_GObj*)
+asm void ftPurin_SpecialN_StartMotion(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013DEA8 0013AA88  7C 08 02 A6 */	mflr r0
@@ -2100,7 +2100,7 @@ lbl_8013DEF0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void ftPurin_SpecialAirN_StartAction(HSD_GObj*)
+asm void ftPurin_SpecialAirN_StartMotion(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8013DF60 0013AB40  7C 08 02 A6 */	mflr r0

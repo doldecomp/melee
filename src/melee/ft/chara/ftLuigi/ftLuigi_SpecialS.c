@@ -46,14 +46,14 @@ void ftLuigi_SpecialS_SetVars(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Green Missile Motion State handler
-void ftLuigi_SpecialS_StartAction(HSD_GObj* gobj)
+void ftLuigi_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    /// @todo Shared @c inline with #ftLuigi_SpecialAirS_StartAction.
+    /// @todo Shared @c inline with #ftLuigi_SpecialAirS_StartMotion.
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = fp->x2D4_specialAttributes;
 
@@ -66,7 +66,7 @@ void ftLuigi_SpecialS_StartAction(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Green Missile Motion State handler
-void ftLuigi_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftLuigi_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

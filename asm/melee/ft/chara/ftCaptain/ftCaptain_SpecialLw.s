@@ -46,8 +46,8 @@ lbl_800E49FC:
 /* 800E4A70 000E1650  7C 08 03 A6 */	mtlr r0
 /* 800E4A74 000E1654  4E 80 00 20 */	blr
 
-.global ftCaptain_SpecialHi_StartAction
-ftCaptain_SpecialHi_StartAction:
+.global ftCaptain_SpecialHi_StartMotion
+ftCaptain_SpecialHi_StartMotion:
 /* 800E4A78 000E1658  7C 08 02 A6 */	mflr r0
 /* 800E4A7C 000E165C  38 80 01 61 */	li r4, 0x161
 /* 800E4A80 000E1660  90 01 00 04 */	stw r0, 4(r1)
@@ -221,8 +221,8 @@ lbl_800E4C80:
 /* 800E4CEC 000E18CC  7C 08 03 A6 */	mtlr r0
 /* 800E4CF0 000E18D0  4E 80 00 20 */	blr
 
-.global ftCaptain_SpecialAirHi_StartAction
-ftCaptain_SpecialAirHi_StartAction:
+.global ftCaptain_SpecialAirHi_StartMotion
+ftCaptain_SpecialAirHi_StartMotion:
 /* 800E4CF4 000E18D4  7C 08 02 A6 */	mflr r0
 /* 800E4CF8 000E18D8  38 80 01 62 */	li r4, 0x162
 /* 800E4CFC 000E18DC  90 01 00 04 */	stw r0, 4(r1)
