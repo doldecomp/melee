@@ -5,8 +5,8 @@
 
 #include <baselib/archive.h>
 
-void func_80018F68(void);
-void func_800178E8(s32, char*, s32, s32, s32, s32, s32, s32, s32);
-HSD_Archive* func_8001819C(const char*);
+void lbDvd_80018F68(void);
+void lbDvd_800178E8(s32, char*, s32, s32, s32, s32, s32, s32, s32);
+HSD_Archive* lbDvd_8001819C(const char*);
 
 #endif

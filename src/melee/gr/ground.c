@@ -366,7 +366,7 @@ void Ground_801C06B8(InternalStageId arg0)
         return;
 
     if (lbl_803DFEDC[arg0]->data1 != NULL)
-        func_800178E8(4, lbl_803DFEDC[arg0]->data1, 4, 4, 0, 1, 7, 16, 0);
+        lbDvd_800178E8(4, lbl_803DFEDC[arg0]->data1, 4, 4, 0, 1, 7, 16, 0);
 
     switch (arg0) {
     case IZUMI:

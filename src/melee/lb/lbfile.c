@@ -196,7 +196,7 @@ inline s32 func_800163D8_inline(const char* arg1)
 
 bool lbFile_800168A0(s32 arg0, const char* arg1, HSD_Archive** arg2, s32* arg3)
 {
-    if ((*arg2 = func_8001819C(arg1))) {
+    if ((*arg2 = lbDvd_8001819C(arg1))) {
         *arg3 = func_800163D8_inline(arg1);
         return true;
     } else {
