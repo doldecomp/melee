@@ -1454,7 +1454,7 @@ static void Ground_801C1E2C(HSD_GObj* gobj)
     bool stage_is_something;
     HSD_JObj* jobj;
 
-    if (func_80030A78()) {
+    if (Camera_80030A78()) {
         return;
     }
 
@@ -1566,14 +1566,14 @@ lbl_801C1FA0:
 /* 801C1FB8 001BEB98  88 7D 00 18 */	lbz r3, 0x18(r29)
 /* 801C1FBC 001BEB9C  88 9D 00 19 */	lbz r4, 0x19(r29)
 /* 801C1FC0 001BEBA0  88 BD 00 1A */	lbz r5, 0x1a(r29)
-/* 801C1FC4 001BEBA4  4B E6 E7 7D */	bl func_80030740
+/* 801C1FC4 001BEBA4  4B E6 E7 7D */	bl Camera_80030740
 /* 801C1FC8 001BEBA8  93 DF 01 2C */	stw r30, 0x12c(r31)
 /* 801C1FCC 001BEBAC  48 00 00 14 */	b lbl_801C1FE0
 lbl_801C1FD0:
 /* 801C1FD0 001BEBB0  38 60 00 00 */	li r3, 0
 /* 801C1FD4 001BEBB4  38 80 00 00 */	li r4, 0
 /* 801C1FD8 001BEBB8  38 A0 00 00 */	li r5, 0
-/* 801C1FDC 001BEBBC  4B E6 E7 65 */	bl func_80030740
+/* 801C1FDC 001BEBBC  4B E6 E7 65 */	bl Camera_80030740
 lbl_801C1FE0:
 /* 801C1FE0 001BEBC0  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 801C1FE4 001BEBC4  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -1597,11 +1597,11 @@ static void Ground_801C1E94(void)
 void Ground_801C1FFC(void)
 {
     if (stage_info.x12C != NULL && stage_info.x12C->ptr != NULL) {
-        func_80030740(stage_info.x12C->ptr->color.r,
-                      stage_info.x12C->ptr->color.g,
-                      stage_info.x12C->ptr->color.b);
+        Camera_80030740(stage_info.x12C->ptr->color.r,
+                        stage_info.x12C->ptr->color.g,
+                        stage_info.x12C->ptr->color.b);
     } else {
-        func_80030740(0, 0, 0);
+        Camera_80030740(0, 0, 0);
     }
 }
 
@@ -4695,9 +4695,9 @@ f32 Ground_801C57F0(void)
 void Ground_801C5800(void)
 {
     if (stage_info.x6B0->x4C_fixed_cam) {
-        func_8002F8F4();
+        Camera_8002F8F4();
     } else {
-        func_8002F474();
+        Camera_8002F474();
     }
 }
 

@@ -34,8 +34,8 @@ extern void ft_8009F7F8(void);
 extern void ft_800C8AF0(void);
 extern void ft_8009F5AC(void);
 extern void HSD_CObjGetInvViewingMtxPtr(void);
-extern void func_800310B8(void);
-extern void func_80031060(void);
+extern void Camera_800310B8(void);
+extern void Camera_80031060(void);
 extern void ft_800C2600(void);
 extern void lbGx_8001E2F8(void);
 extern void lb_80014770(void);
@@ -1063,7 +1063,7 @@ asm void ftDrawCommmon_80080E18(HSD_GObj*, long)
 /* 80080E44 0007DA24  48 00 5C 49 */	bl ftLib_80086A8C
 /* 80080E48 0007DA28  2C 03 00 00 */	cmpwi r3, 0
 /* 80080E4C 0007DA2C  41 82 02 B8 */	beq lbl_80081104
-/* 80080E50 0007DA30  4B FB 02 11 */	bl func_80031060
+/* 80080E50 0007DA30  4B FB 02 11 */	bl Camera_80031060
 /* 80080E54 0007DA34  2C 03 00 01 */	cmpwi r3, 1
 /* 80080E58 0007DA38  41 82 00 14 */	beq lbl_80080E6C
 /* 80080E5C 0007DA3C  40 80 02 A8 */	bge lbl_80081104
@@ -1076,7 +1076,7 @@ lbl_80080E6C:
 /* 80080E74 0007DA54  41 82 00 C4 */	beq lbl_80080F38
 /* 80080E78 0007DA58  83 7C 00 2C */	lwz r27, 0x2c(r28)
 /* 80080E7C 0007DA5C  83 FC 00 28 */	lwz r31, 0x28(r28)
-/* 80080E80 0007DA60  4B FB 02 39 */	bl func_800310B8
+/* 80080E80 0007DA60  4B FB 02 39 */	bl Camera_800310B8
 /* 80080E84 0007DA64  48 2E 89 85 */	bl HSD_CObjGetInvViewingMtxPtr
 /* 80080E88 0007DA68  38 9E 23 50 */	addi r4, r30, 0x2350
 /* 80080E8C 0007DA6C  38 BB 00 B0 */	addi r5, r27, 0xb0

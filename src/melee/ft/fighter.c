@@ -876,7 +876,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     Fighter_Create_Inline2(gobj);
 
     ftColl_8007B320(gobj);
-    fp->x890_cameraBox = func_80029020();
+    fp->x890_cameraBox = Camera_80029020();
 
     jobj = GET_JOBJ(gobj);
     lbShadow_8000ED54(&fp->x20A4, jobj);
@@ -1599,7 +1599,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
             }
         }
 
-        if (!fp->x221F_flag.bits.b4 && func_80031144() == 1.0f) {
+        if (!fp->x221F_flag.bits.b4 && Camera_80031144() == 1.0f) {
             if (fp->dmg.x1830_percent < p_ftCommonData->x7B0) {
                 if (func_802FC998(fp->xC_playerID) &&
                     (Player_GetMoreFlagsBit3(fp->xC_playerID) != 0))
@@ -3119,7 +3119,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     ftColl_8007B8E8(fp->gobj);
     func_80067688(&fp->x60C);
     func_8026B7F8(fp->gobj);
-    func_800290D4(fp->x890_cameraBox);
+    Camera_800290D4(fp->x890_cameraBox);
     ft_8009E0D4(fp);
     ftColl_800765AC(fp->gobj);
     ft_80088C5C(fp->gobj);

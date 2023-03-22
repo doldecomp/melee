@@ -494,19 +494,19 @@ void func_8015CB9C_inline(Vec3 spC)
 {
     ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
     spC.z += attr == NULL ? -1 : attr->x178;
-    func_8002EA64(&spC);
-    func_8002F0E4(0xA);
+    Camera_8002EA64(&spC);
+    Camera_8002F0E4(0xA);
 }
 
 void ftBossLib_8015CB9C(s32 arg0)
 {
     Vec3 vec;
     Player_LoadPlayerCoords(arg0, &vec);
-    func_8002E818(&vec);
+    Camera_8002E818(&vec);
     func_8015CB9C_inline(vec);
 }
 
 void ftBossLib_8015CC14(void)
 {
-    func_8002F474();
+    Camera_8002F474();
 }

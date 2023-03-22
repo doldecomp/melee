@@ -87,83 +87,83 @@ static void ftMasterHand_801511FC(HSD_GObj* gobj)
         HSD_GObj* nearest_enemy = ftLib_8008627C(&fp->cur_pos, gobj);
 
         if (nearest_enemy != NULL) {
-            func_8002E6FC((s32) ftLib_80086BE0(nearest_enemy));
+            Camera_8002E6FC((s32) ftLib_80086BE0(nearest_enemy));
         } else {
-            func_8002E6FC(0);
+            Camera_8002E6FC(0);
         }
 
-        func_8002ED9C(40.0f);
-        func_8002EEC8(45.0f);
-        func_8002EC7C(-M_PI);
-        func_8002EF14();
-        func_8002EC7C(0.0f);
-        func_8002F0E4(0x78);
+        Camera_8002ED9C(40.0f);
+        Camera_8002EEC8(45.0f);
+        Camera_8002EC7C(-M_PI);
+        Camera_8002EF14();
+        Camera_8002EC7C(0.0f);
+        Camera_8002F0E4(0x78);
         fp->mv.mh.unk4.x0 = 1;
         break;
     }
     case 1:
-        if (func_8002F260() != 0) {
-            func_8002E948(&ftMasterHand_80151428);
-            func_8002ED9C(120.0f);
-            func_8002F0E4(0x14);
+        if (Camera_8002F260() != 0) {
+            Camera_8002E948(&ftMasterHand_80151428);
+            Camera_8002ED9C(120.0f);
+            Camera_8002F0E4(0x14);
             fp->mv.mh.unk4.x0 = 2;
         }
         break;
     case 2:
-        if (func_8002F260() != 0) {
-            func_8002EC7C(1.5707963705062866f);
-            func_8002F0E4(0x3C);
+        if (Camera_8002F260() != 0) {
+            Camera_8002EC7C(1.5707963705062866f);
+            Camera_8002F0E4(0x3C);
             fp->mv.mh.unk4.x0 = 3;
         }
         break;
     case 3:
-        if (func_8002F260() != 0) {
-            func_8002ED9C(90.0f);
-            func_8002EC7C(-0.3490658402442932f);
-            func_8002EB5C(-0.2617993950843811f);
-            func_8002EF14();
+        if (Camera_8002F260() != 0) {
+            Camera_8002ED9C(90.0f);
+            Camera_8002EC7C(-0.3490658402442932f);
+            Camera_8002EB5C(-0.2617993950843811f);
+            Camera_8002EF14();
             fp->mv.mh.unk4.x0 = 4;
         }
         break;
     case 4:
-        func_8002F274();
+        Camera_8002F274();
         fp->mv.mh.unk4.x8 = 0x78;
         fp->mv.mh.unk4.x0 = 5;
         break;
     case 5:
         if (--fp->mv.mh.unk4.x8 == 0) {
-            func_8002EC7C(-0.3490658402442932f);
-            func_8002EF14();
-            func_8002ED9C(120.0f);
+            Camera_8002EC7C(-0.3490658402442932f);
+            Camera_8002EF14();
+            Camera_8002ED9C(120.0f);
             fp->mv.mh.unk4.x8 = 0x1E;
             fp->mv.mh.unk4.x0 = 6;
         }
         break;
     case 6:
         if (--fp->mv.mh.unk4.x8 == 0) {
-            func_8002EC7C(0.3490658402442932f);
-            func_8002EF14();
+            Camera_8002EC7C(0.3490658402442932f);
+            Camera_8002EF14();
             fp->mv.mh.unk4.x8 = 0x1E;
             fp->mv.mh.unk4.x0 = 7;
         }
         break;
     case 7:
         if (--fp->mv.mh.unk4.x8 == 0) {
-            func_8002ED9C(180.0f);
-            func_8002EC7C(-1.5707963705062866f);
-            func_8002EB5C(-0.3490658402442932f);
-            func_8002EF14();
+            Camera_8002ED9C(180.0f);
+            Camera_8002EC7C(-1.5707963705062866f);
+            Camera_8002EB5C(-0.3490658402442932f);
+            Camera_8002EF14();
             fp->mv.mh.unk4.x8 = 0x32;
             fp->mv.mh.unk4.x0 = 8;
         }
         break;
     case 8:
-        func_8002F274();
+        Camera_8002F274();
         fp->mv.mh.unk4.x0 = 9;
         break;
     case 9:
         if (--fp->mv.mh.unk4.x8 == 0) {
-            func_8002F474();
+            Camera_8002F474();
             fp->mv.mh.unk4.x0 = 10;
         }
         break;

@@ -539,16 +539,16 @@ bool ftLib_80086A8C(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2229_b3 && !fp->x2220_flag.bits.b7) {
-        temp_r3 = func_80030A50();
+        temp_r3 = Camera_80030A50();
         if (temp_r3 != NULL) {
             void* temp_r30 = temp_r3->unk28;
             if (temp_r30 == HSD_CObjGetCurrent()) {
-                if (func_80030CD8(fp->x890_cameraBox, &fp->x2188)) {
+                if (Camera_80030CD8(fp->x890_cameraBox, &fp->x2188)) {
                     fp->x221F_flag.bits.b0 = false;
                     return true;
                 }
                 fp->x221F_flag.bits.b0 = true;
-                if (func_80030CFC(fp->x890_cameraBox, 15)) {
+                if (Camera_80030CFC(fp->x890_cameraBox, 15)) {
                     return true;
                 }
                 return false;
@@ -589,7 +589,7 @@ void ftLib_80086BB4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     CameraBox* cam = fp->x890_cameraBox;
-    func_80031154(&cam->x10);
+    Camera_80031154(&cam->x10);
 }
 
 u8 ftLib_80086BE0(HSD_GObj* gobj)
@@ -816,7 +816,7 @@ void ftLib_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
     ft_800D105C(gobj);
     ft_80081C88(gobj, fp->x34_scale.y);
     ftCommon_8007EBAC(fp, 0xC, 0);
-    func_80030E44(2, &fp->cur_pos);
+    Camera_80030E44(2, &fp->cur_pos);
     ft_80088148(fp, 0x121, 0x7F, 0x40);
 }
 

@@ -39,7 +39,7 @@ bool ftPikachu_CheckProperty_801275CC(HSD_GObj* gobj)
 void ftPikachu_80127608(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_80030E44(2, &fp->cur_pos);
+    Camera_80030E44(2, &fp->cur_pos);
     ftCommon_8007EBAC(fp, 0xB, 0);
 }
 

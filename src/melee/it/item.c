@@ -230,7 +230,7 @@ void func_80267454(HSD_GObj* item_gobj)
 
         (item_data->x520_cameraBox != NULL))
     {
-        func_800290D4(item_data->x520_cameraBox);
+        Camera_800290D4(item_data->x520_cameraBox);
         item_data->x520_cameraBox = NULL;
         item_data->xDCD_flag.bits.b01 = 0;
     }
@@ -880,7 +880,7 @@ void func_80268560(HSD_GObj* item_gobj)
     }
 }
 
-extern CameraBox* func_80029044(s32);
+extern CameraBox* Camera_80029044(s32);
 extern void ftLib_8008702C(s32);
 extern struct sdata_ItemGXLink lbl_803F1418[];
 extern struct sdata_ItemGXLink lbl_803F2310[];
@@ -927,9 +927,9 @@ void foobar3(HSD_GObj* gobj)
     CameraBox* cam_box;
     if (it->xDCD_flag.bits.b01 != 0) {
         if (it->xDCD_flag.bits.b01 == 1) {
-            it->x520_cameraBox = func_80029044(0);
+            it->x520_cameraBox = Camera_80029044(0);
         } else {
-            it->x520_cameraBox = func_80029044(2);
+            it->x520_cameraBox = Camera_80029044(2);
         }
         cam_box = it->x520_cameraBox;
         if (cam_box != NULL) {
@@ -2016,7 +2016,7 @@ void func_8026A8EC_inline3(HSD_GObj* item_gobj)
     Item* it = (Item*) HSD_GObjGetUserData(item_gobj);
 
     if (it->xDCD_flag.bits.b01 != 0 && it->x520_cameraBox != NULL) {
-        func_800290D4(it->x520_cameraBox);
+        Camera_800290D4(it->x520_cameraBox);
         it->x520_cameraBox = NULL;
         it->xDCD_flag.bits.b01 = 0;
     }
