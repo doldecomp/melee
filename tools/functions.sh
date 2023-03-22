@@ -49,10 +49,10 @@ function rename_header {
 }
 
 function gen_header {
-    local out_base="$(basename $1)"
+    local out_base="$(basename "$1")"
     local out_base="${out_base%.*}"
-    local out_path="$(dirname $1)/$out_base.h"
-    local guard=$(get_include_guard $out_path)
+    local out_path="$(dirname "$1")/$out_base.h"
+    local guard=$(get_include_guard "$out_path")
     local text="$guard
 
 #include <platform.h>
@@ -60,9 +60,9 @@ function gen_header {
 #endif"
 
     if [[ -f "$out_path" ]]; then
-        printf '%s\n\n%s\n' "$text" "$(cat $out_path)" >$out_path
+        printf '%s\n\n%s\n' "$text" "$(cat "$out_path")" >"$out_path"
     else
-        echo "$text" >$out_path
+        echo "$text" >"$out_path"
     fi
 }
 
@@ -70,7 +70,18 @@ function convert_hex {
     perl -Mbigint -lpi -e 's{\b0x[\da-f]{1,7}U?\b}{hex($&)}gie' "$1"
 }
 
+function rename_tu {
+    for ext in c s h; do
+        find asm src docs -name "$1.$ext" | while read -r file; do
+            new_file="$(dirname "$file")/$2.$ext"
+            mv "$file" "$new_file"
+        done
+    done
+    melee-sed "s/\b$1\(\.[ch]\)\b/$2\1/g"
+}
+
 alias qd='qalc -p 10'
 alias qx='qalc -p 16'
 
 export WINEDEBUG=-all
+export WINE=wibo
