@@ -106,7 +106,7 @@ s32 ftNess_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
     sp1C[3] = 0.0f;
     sp1C[5] = 0.0f;
 
-    func_80041EE4(&sp34);
+    mpColl_80041EE4(&sp34);
 
     // why do it like this?
     // original code:

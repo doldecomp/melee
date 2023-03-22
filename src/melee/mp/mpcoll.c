@@ -19,7 +19,7 @@ extern s32 lbl_804D64A8;
 extern u32 lbl_804D64AC;
 
 // 80041C78 https://decomp.me/scratch/V6eYQ
-void func_80041C78(void)
+void mpColl_80041C78(void)
 {
     lbl_804D64A0 = 0;
     lbl_804D64A4 = 0;
@@ -29,7 +29,7 @@ void func_80041C78(void)
 char lbl_804D3948[2] = "0";
 
 // 80041C8C https://decomp.me/scratch/VvSaI
-void func_80041C8C(CollData* cd)
+void mpColl_80041C8C(CollData* cd)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -76,7 +76,7 @@ inline void clamp_below(f32* value, f32 max)
     }
 }
 
-void func_80041DD0(CollData* cd, u32 flags)
+void mpColl_80041DD0(CollData* cd, u32 flags)
 {
     f32 left, bottom, right, top;
 
@@ -117,7 +117,7 @@ const f32 lbl_804D7FA0 = F32_MAX;
 
 // 80041EE4 https://decomp.me/scratch/j2TXK
 // CollDataInit
-void func_80041EE4(CollData* cd)
+void mpColl_80041EE4(CollData* cd)
 {
     cd->x0_gobj = NULL;
     cd->x34_flags.bits.b0 = 1;
@@ -169,9 +169,9 @@ void func_80041EE4(CollData* cd)
 }
 
 // 80042078 https://decomp.me/scratch/hM7h8
-void func_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
-                   HSD_JObj* arg2, HSD_JObj* arg3, HSD_JObj* arg4,
-                   HSD_JObj* arg5, HSD_JObj* arg6, HSD_JObj* arg7, f32 arg9)
+void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
+                     HSD_JObj* arg2, HSD_JObj* arg3, HSD_JObj* arg4,
+                     HSD_JObj* arg5, HSD_JObj* arg6, HSD_JObj* arg7, f32 arg9)
 {
     cd->x0_gobj = gobj;
     cd->x104 = 1;
@@ -205,8 +205,8 @@ void func_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
 }
 
 // 8004220C https://decomp.me/scratch/nOinn
-void func_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3,
-                   f32 arg4)
+void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2,
+                     f32 arg3, f32 arg4)
 {
     cd->x0_gobj = gobj;
     cd->x104 = 2;
@@ -233,7 +233,7 @@ void func_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3,
 }
 
 // 80042374 https://decomp.me/scratch/SgKfv
-void func_80042374(CollData* arg0, f32 arg8, f32 arg9, f32 argA)
+void mpColl_80042374(CollData* arg0, f32 arg8, f32 arg9, f32 argA)
 {
     arg0->x54 = arg8;
     arg0->x58 = arg9;
@@ -241,7 +241,7 @@ void func_80042374(CollData* arg0, f32 arg8, f32 arg9, f32 argA)
 }
 
 // 80042384 https://decomp.me/scratch/P8djI
-void func_80042384(CollData* cd)
+void mpColl_80042384(CollData* cd)
 {
     f32 tmp, tmp2;
 
@@ -292,7 +292,7 @@ inline void update_min_max(f32* min, f32* max, f32 val)
     }
 }
 
-void func_800424DC(CollData* cd, u32 flags)
+void mpColl_800424DC(CollData* cd, u32 flags)
 {
     Vec3 vec;
     f32 left_x, bottom_y;
@@ -427,7 +427,7 @@ inline void clamp_below_2(f32* value, f32 max)
     }
 }
 
-void func_8004293C(CollData* cd)
+void mpColl_8004293C(CollData* cd)
 {
     f32 angle;
     f32 sin;
@@ -545,7 +545,7 @@ void func_8004293C(CollData* cd)
 }
 
 // 80042C58 https://decomp.me/scratch/pqafT
-void func_80042C58(CollData* arg0, ftECB* arg1)
+void mpColl_80042C58(CollData* arg0, ftECB* arg1)
 {
     if ((arg0->x130_flags & 0x20) != 0) {
         arg0->xA4_ecbCurrCorrect.top.x = 0.0f;
@@ -571,7 +571,7 @@ void func_80042C58(CollData* arg0, ftECB* arg1)
 }
 
 // 80042D24 https://decomp.me/scratch/2MnVj
-void func_80042D24(CollData* cd)
+void mpColl_80042D24(CollData* cd)
 {
     f32 saved_bottom_x;
     f32 saved_bottom_y;
@@ -581,15 +581,15 @@ void func_80042D24(CollData* cd)
         saved_bottom_y = cd->x84_ecb.bottom.y;
     }
     if (cd->x104 == 1) {
-        func_800424DC(cd, 6);
+        mpColl_800424DC(cd, 6);
     } else {
-        func_8004293C(cd);
+        mpColl_8004293C(cd);
     }
     if ((cd->x130_flags & 0x10) != 0) {
         cd->x84_ecb.bottom.x = saved_bottom_x;
         cd->x84_ecb.bottom.y = saved_bottom_y;
     }
-    func_80042384(cd);
+    mpColl_80042384(cd);
 }
 
 // 80042DB0 https://decomp.me/scratch/GbMpk
@@ -599,7 +599,7 @@ inline void Vec2_Interpolate(f32 time, Vec2* dest, Vec2* src)
     dest->y += time * (src->y - dest->y);
 }
 
-void func_80042DB0(CollData* ecb, f32 time)
+void mpColl_80042DB0(CollData* ecb, f32 time)
 {
     ecb->xC4_ecb = ecb->xA4_ecbCurrCorrect;
     if (ecb->x34_flags.bits.b6) {
@@ -627,7 +627,7 @@ void func_80042DB0(CollData* ecb, f32 time)
 }
 
 // 80043268 https://decomp.me/scratch/GNwej
-void func_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
+void mpColl_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
 {
     mpLib_Callback sp1C;
     s32 sp18;
@@ -653,8 +653,8 @@ const char* dummy_string_data = "i<MPCOLL_WALLID_MAX";
 
 // 80043324
 void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
-{ // see func_80043268
-  /// @todo Fake, breaks func_80043558
+{ // see mpColl_80043268
+  /// @todo Fake, breaks mpColl_80043558
 #ifdef MUST_MATCH
     int dummy = 0;
 #endif
@@ -676,9 +676,9 @@ void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
 void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
 {
     // inhibit inlining
-    func_80043268(arg0, arg1, arg2, arg8);
+    mpColl_80043268(arg0, arg1, arg2, arg8);
 }
-void func_80043324(CollData* arg0, s32 arg1, s32 arg2)
+void mpColl_80043324(CollData* arg0, s32 arg1, s32 arg2)
 {
     s32 temp_r3;
 
@@ -733,7 +733,7 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2)
 
 #ifdef MUST_MATCH
 
-void func_80043558(CollData* arg0, s32 arg1)
+void mpColl_80043558(CollData* arg0, s32 arg1)
 {
     s32 sp1C;
     void (*sp18)(s32, s32, CollData*, s32, s32, f32);
@@ -768,12 +768,12 @@ void func_80043558(CollData* arg0, s32 arg1)
 #else
 
 /// @todo dummy stack in func_80043324_inline2 breaks this function
-void func_80043558(CollData* arg0, s32 arg1)
+void mpColl_80043558(CollData* arg0, s32 arg1)
 {
     enum_t temp_r3 = func_80054C6C(arg1);
 
     if (temp_r3 == 1) {
-        func_80043268(arg0, arg1, 0, 0.0f);
+        mpColl_80043268(arg0, arg1, 0, 0.0f);
     } else if (temp_r3 == 2) {
         func_80043324_inline2(arg0, arg1, 0, 0.0f);
     }
@@ -782,13 +782,13 @@ void func_80043558(CollData* arg0, s32 arg1)
 #endif
 
 // 80043670
-void func_80043670(CollData* arg0)
+void mpColl_80043670(CollData* arg0)
 {
     arg0->x130_flags |= 0x20;
 }
 
 // 80043680
-void func_80043680(CollData* arg0, Vec3* arg1)
+void mpColl_80043680(CollData* arg0, Vec3* arg1)
 {
     arg0->x4_vec = *arg1;
     arg0->x10_vec = arg0->x4_vec;
@@ -797,7 +797,7 @@ void func_80043680(CollData* arg0, Vec3* arg1)
 }
 
 // 800436D8
-void func_800436D8(CollData* arg0, int arg1)
+void mpColl_800436D8(CollData* arg0, int arg1)
 {
     arg0->x36 = arg1;
 }
@@ -811,7 +811,7 @@ static f32 six(void)
 
 // 800436E4
 #define M_TAU 6.283185307179586
-void func_800436E4(CollData* arg0, f32 arg1)
+void mpColl_800436E4(CollData* arg0, f32 arg1)
 {
     f32 var_f1;
 
@@ -836,7 +836,7 @@ inline f32 max_inline(f32 a, f32 b)
 {
     return (a > b) ? a : b;
 }
-s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
+s32 mpColl_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
 {
     Vec3 vel;
 
@@ -902,10 +902,10 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
     arg1->x4_vec = arg1->x1C_vec;
     arg1->x34_flags.bits.b5 = 0;
     while ((var_r31 < var_r30) && !arg1->x34_flags.bits.b5) {
-        func_80042DB0(arg1, 1.0f / (var_r30 - var_r31));
+        mpColl_80042DB0(arg1, 1.0f / (var_r30 - var_r31));
         arg1->x10_vec = arg1->x4_vec;
         lbVector_Add(&arg1->x4_vec, &vel);
-        func_80041DD0(arg1, arg2);
+        mpColl_80041DD0(arg1, arg2);
         ret = (*arg0)(arg1, arg2);
         func_80058AA0();
         var_r31 += 1;
@@ -915,7 +915,7 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
 }
 
 // 800439FC https://decomp.me/scratch/T1yAJ
-void func_800439FC(CollData* arg0)
+void mpColl_800439FC(CollData* arg0)
 {
     Vec3 sp10;
     f32 spC;
@@ -947,7 +947,7 @@ void func_800439FC(CollData* arg0)
 }
 
 // 80043ADC
-void func_80043ADC(CollData* arg0)
+void mpColl_80043ADC(CollData* arg0)
 {
     Vec3 sp10;
     f32 spC;
@@ -979,7 +979,7 @@ void func_80043ADC(CollData* arg0)
 }
 
 // 80043BBC
-bool func_80043BBC(CollData* arg0, s32* arg1)
+bool mpColl_80043BBC(CollData* arg0, s32* arg1)
 {
     s32 sp10;
     s32 temp_r31;
@@ -1003,7 +1003,7 @@ bool func_80043BBC(CollData* arg0, s32* arg1)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
+asm void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
 { // clang-format off
     nofralloc
 /* 80043C6C 0004084C  7C 08 02 A6 */	mflr r0
@@ -1156,7 +1156,7 @@ lbl_80043E70:
 
 #elif false
 
-void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
+void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
 {
     f32 sp30;
     f32 sp24;
@@ -1231,7 +1231,7 @@ void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
 
 #else
 
-void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
+void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
 {
     NOT_IMPLEMENTED;
 }

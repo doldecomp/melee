@@ -169,7 +169,7 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
             facing_dir = 1;
         }
 
-        func_800436D8(&item_data->x378_itemColl, facing_dir);
+        mpColl_800436D8(&item_data->x378_itemColl, facing_dir);
     }
 
     HSD_JObjSetFacingDirItem(model, item_data);

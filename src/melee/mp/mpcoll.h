@@ -5,12 +5,13 @@
 
 #include "ft/fighter.h"
 
-void func_80042374(CollData*, f32, f32, f32);
-void func_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj*, HSD_JObj*,
-                   HSD_JObj*, HSD_JObj*, HSD_JObj*, HSD_JObj*, HSD_JObj*, f32);
+void mpColl_80042374(CollData*, f32, f32, f32);
+void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj*, HSD_JObj*,
+                     HSD_JObj*, HSD_JObj*, HSD_JObj*, HSD_JObj*, HSD_JObj*,
+                     f32);
 
 /// "Coll_InitECB"
-void func_80041EE4(CollData*);
+void mpColl_80041EE4(CollData*);
 
 void func_800471F8(CollData*);
 void func_800473CC(CollData*);
@@ -21,7 +22,7 @@ void func_80048274(CollData*);
 void func_80048578(CollData*);
 void func_80048768(CollData*);
 void func_80048388(CollData*);
-void func_800436D8(CollData*, int facing_dir);
+void mpColl_800436D8(CollData*, int facing_dir);
 void func_800475F4(CollData*);
 void func_8004730C(CollData*, f32 (*x)[6]);
 void func_80047A08(CollData*);
@@ -44,29 +45,29 @@ void func_8004CC00(CollData*);
 void func_8004CA6C(CollData*);
 void func_8004CBF4(struct _CollData*);
 
-void func_80041C78(void);
-void func_80042384(CollData* cd);
-void func_800424DC(CollData* cd, u32 flags);
-void func_80041C8C(CollData* cd);
-void func_8004293C(CollData* cd);
-void func_80042C58(CollData* arg0, ftECB* arg1);
-void func_80042D24(CollData* cd);
-void func_80042DB0(CollData* ecb, f32 time);
-void func_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8);
+void mpColl_80041C78(void);
+void mpColl_80042384(CollData* cd);
+void mpColl_800424DC(CollData* cd, u32 flags);
+void mpColl_80041C8C(CollData* cd);
+void mpColl_8004293C(CollData* cd);
+void mpColl_80042C58(CollData* arg0, ftECB* arg1);
+void mpColl_80042D24(CollData* cd);
+void mpColl_80042DB0(CollData* ecb, f32 time);
+void mpColl_80043268(CollData* arg0, s32 arg1, s32 arg2, f32 arg8);
 void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8);
 void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, f32 arg8);
-void func_80043324(CollData* arg0, s32 arg1, s32 arg2);
-void func_80043558(CollData* arg0, s32 arg1);
-void func_80043670(CollData* arg0);
-void func_80041DD0(CollData* cd, u32 flags);
-void func_80043680(CollData* arg0, Vec3* arg1);
-void func_800436E4(CollData* arg0, f32 arg1);
-s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2);
-void func_800439FC(CollData* arg0);
-void func_80043ADC(CollData* arg0);
-bool func_80043BBC(CollData* arg0, s32* arg1);
-void func_80043C6C(CollData* arg0, s32 arg1, s32 arg2);
-void func_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3,
-                   f32 arg4);
+void mpColl_80043324(CollData* arg0, s32 arg1, s32 arg2);
+void mpColl_80043558(CollData* arg0, s32 arg1);
+void mpColl_80043670(CollData* arg0);
+void mpColl_80041DD0(CollData* cd, u32 flags);
+void mpColl_80043680(CollData* arg0, Vec3* arg1);
+void mpColl_800436E4(CollData* arg0, f32 arg1);
+s32 mpColl_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2);
+void mpColl_800439FC(CollData* arg0);
+void mpColl_80043ADC(CollData* arg0);
+bool mpColl_80043BBC(CollData* arg0, s32* arg1);
+void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2);
+void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2,
+                     f32 arg3, f32 arg4);
 
 #endif
