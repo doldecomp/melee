@@ -365,7 +365,7 @@ void ftMars_80139140(HSD_GObj* gobj)
         if (temp_r0 > 0)
             fp->mv.ms.speciallw.x0 = (s32) (temp_r0 * attr->x5C);
 
-        func_8000B1CC(fp->ft_bones[func_8007500C(fp, 4)].x0_jobj, 0, &sp18);
+        func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, 0, &sp18);
         func_800119DC(&sp18, 0x78, 0.9f, 0.02f, 1.0471975803375244f);
 
         {
@@ -388,12 +388,12 @@ void ftMars_80139140(HSD_GObj* gobj)
             switch (func_800872A4(gobj)) {
             case 0x12:
                 ef_Spawn(0x4F1, gobj,
-                         ft_2->ft_bones[func_8007500C(ft_2, 0x23)].x0_jobj,
+                         ft_2->ft_bones[ftParts_8007500C(ft_2, 0x23)].x0_jobj,
                          &ft_2->facing_dir);
                 break;
             case 0x1A:
                 ef_Spawn(0x510, gobj,
-                         ft_2->ft_bones[func_8007500C(ft_2, 0x23)].x0_jobj,
+                         ft_2->ft_bones[ftParts_8007500C(ft_2, 0x23)].x0_jobj,
                          &ft_2->facing_dir);
                 break;
             }

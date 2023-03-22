@@ -158,7 +158,7 @@ void ftPikachu_EfSpawn_80124C90(HSD_GObj* gobj)
     HSD_GObj* tempObj2;
 
     if (!fp->x2219_flag.bits.b0) {
-        s32 index = func_8007500C(fp, 4);
+        s32 index = ftParts_8007500C(fp, 4);
         tempObj = gobj;
         ef_Spawn(0x4BE, tempObj2 = tempObj, fp->ft_bones[index].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
@@ -176,7 +176,7 @@ void ftPikachu_EfSpawn_80124D2C(HSD_GObj* gobj)
     HSD_GObj* tempObj2;
 
     if (!fp->x2219_flag.bits.b0) {
-        s32 index = func_8007500C(fp, 4);
+        s32 index = ftParts_8007500C(fp, 4);
         tempObj = gobj;
         ef_Spawn(0x4BF, tempObj2 = tempObj, fp->ft_bones[index].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;

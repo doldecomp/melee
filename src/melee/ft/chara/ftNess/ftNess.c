@@ -148,7 +148,7 @@ Fighter_CostumeStrings lbl_803CCC84[] = {
 void ftNess_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
     fp->fv.ns.pkflash_gobj = NULL;
     fp->fv.ns.pkthunder_gobj = NULL;
     fp->fv.ns.bat_gobj = NULL;

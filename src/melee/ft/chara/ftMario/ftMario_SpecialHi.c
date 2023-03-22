@@ -108,7 +108,7 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
     if (throwflags_b3) {
         if (abs(fp->input.x620_lstick_x) > sa->specialhi.reverse_stick_range) {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (M_PI_2 * fp->facing_dir));
+            ftParts_80075AF0(fp, 0, (f32) (M_PI_2 * fp->facing_dir));
         }
     }
 }

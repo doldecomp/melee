@@ -129,10 +129,10 @@ void ftLuigi_SpecialN_FireSpawn(HSD_GObj* gobj)
         flag = false;
 
     if (flag != false) {
-        func_8000B1CC(fp->ft_bones[func_8007500C(fp, 0x17)].x0_jobj, NULL,
+        func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x17)].x0_jobj, NULL,
                       &sp10);
         func_802C01AC(gobj, &sp10, It_Kind_Luigi_Fire, fp->facing_dir);
-        ef_Spawn(0x507, gobj, fp->ft_bones[func_8007500C(fp, 0x17)].x0_jobj,
+        ef_Spawn(0x507, gobj, fp->ft_bones[ftParts_8007500C(fp, 0x17)].x0_jobj,
                  &fp->facing_dir);
     }
 }

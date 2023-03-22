@@ -103,30 +103,30 @@ void ftGameWatch_SpecialLw_UpdateBucketModel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_80074B0C(gobj, 5, 2);
+    ftParts_80074B0C(gobj, 5, 2);
 
     switch (fp->fv.gw.x2238_panicCharge) {
     case ftGw_Panic_Empty:
         /// @todo @c enum for parts
-        func_80074B0C(gobj, 6, -1);
-        func_80074B0C(gobj, 7, -1);
-        func_80074B0C(gobj, 8, -1);
+        ftParts_80074B0C(gobj, 6, -1);
+        ftParts_80074B0C(gobj, 7, -1);
+        ftParts_80074B0C(gobj, 8, -1);
         return;
     case ftGw_Panic_Low:
-        func_80074B0C(gobj, 6, 0);
-        func_80074B0C(gobj, 7, -1);
-        func_80074B0C(gobj, 8, -1);
+        ftParts_80074B0C(gobj, 6, 0);
+        ftParts_80074B0C(gobj, 7, -1);
+        ftParts_80074B0C(gobj, 8, -1);
         return;
     case ftGw_Panic_Mid:
-        func_80074B0C(gobj, 6, 0);
-        func_80074B0C(gobj, 7, 0);
-        func_80074B0C(gobj, 8, -1);
+        ftParts_80074B0C(gobj, 6, 0);
+        ftParts_80074B0C(gobj, 7, 0);
+        ftParts_80074B0C(gobj, 8, -1);
         return;
     case ftGw_Panic_Full:
     default:
-        func_80074B0C(gobj, 6, 0);
-        func_80074B0C(gobj, 7, 0);
-        func_80074B0C(gobj, 8, 0);
+        ftParts_80074B0C(gobj, 6, 0);
+        ftParts_80074B0C(gobj, 7, 0);
+        ftParts_80074B0C(gobj, 8, 0);
         return;
     }
 }

@@ -1139,14 +1139,14 @@ void func_8007E358(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
     Fighter* fp = gobj->user_data;
-    jobj = fp->ft_bones[func_8007500C(fp, 4)].x0_jobj;
+    jobj = fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj;
     HSD_JObjGetTranslation(jobj, &fp->x1A7C);
 }
 
 void func_8007E3EC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    HSD_JObj* jobj = fp->ft_bones[func_8007500C(fp, 4)].x0_jobj;
+    HSD_JObj* jobj = fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj;
     Vec3 sp10;
 
     /// @todo Unused stack.
@@ -1174,7 +1174,7 @@ void func_8007E5AC(Fighter* fp)
     Vec3* ground_normal = &fp->x6F0_collData.x14C_ground.normal;
     f32 tmp = -atan2f(ground_normal->x, ground_normal->y);
     HSD_ASSERT(1146, fp->ground_or_air == GA_Ground);
-    func_80075CB4(fp, 0, tmp);
+    ftParts_80075CB4(fp, 0, tmp);
 }
 
 void Fighter_SetAccessory(Fighter* fp, HSD_Joint* joint)

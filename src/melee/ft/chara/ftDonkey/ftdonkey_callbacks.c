@@ -160,7 +160,7 @@ void ftDonkey_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->fv.dk.x222C = 0;
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
 }
 
 void ftDonkey_8010D774(HSD_GObj* gobj)

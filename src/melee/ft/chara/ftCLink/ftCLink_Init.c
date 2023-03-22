@@ -94,9 +94,9 @@ Fighter_CostumeStrings lbl_803D1458[] = {
 void ftCLink_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_80074A4C(gobj, 0, 0);
-    func_80074A4C(gobj, 1, 0);
-    func_80074A4C(gobj, 2, 0);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
+    ftParts_80074A4C(gobj, 2, 0);
     fp->fv.cl.x222C = 0;
     fp->fv.cl.x2234 = 0;
     fp->fv.cl.x2238 = 0;
@@ -128,7 +128,7 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
     func_8026B3F8(items[3], attrs->xC);
     func_8026B3F8(items[4], attrs->x10);
     func_8026B3F8(items[5], It_Kind_CLink_Milk);
-    func_800753D4(fp, *lbl_804D6540[fp->x4_fighterKind], items[6]);
+    ftParts_800753D4(fp, *lbl_804D6540[fp->x4_fighterKind], items[6]);
 }
 
 void ftCLink_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
@@ -141,9 +141,9 @@ void ftCLink_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
     Fighter* fp = gobj->user_data;
 
     if (func_8026B2B4(fp->x1974_heldItem) == true)
-        func_80074A4C(gobj, 1, 1);
+        ftParts_80074A4C(gobj, 1, 1);
 
-    func_80074A4C(gobj, 2, 1);
+    ftParts_80074A4C(gobj, 2, 1);
     ftCLink_OnItemPickup(gobj, arg1);
 }
 
@@ -167,9 +167,9 @@ void ftCLink_OnItemDropExt(HSD_GObj* gobj, bool arg1)
     Fighter* fp = gobj->user_data;
 
     if (func_8026B2B4(fp->x1974_heldItem) == true)
-        func_80074A4C(gobj, 1, 0);
+        ftParts_80074A4C(gobj, 1, 0);
 
-    func_80074A4C(gobj, 2, 0);
+    ftParts_80074A4C(gobj, 2, 0);
     ftCLink_OnItemDrop(gobj, arg1);
 }
 

@@ -82,7 +82,7 @@ Fighter_CostumeStrings lbl_803CE678[] = {
 void ftSamus_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
     fp->fv.ss.x222C = 0;
     fp->fv.ss.x2230 = 0;
     fp->fv.ss.x2238 = 0;

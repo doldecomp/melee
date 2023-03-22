@@ -124,7 +124,7 @@ void ftSamus_8012A96C(HSD_GObj* gobj)
                 fp->x2204_ftcmd_var1 = 1;
                 fp->mv.ss.unk5.x0 = 1;
                 func_8007D9FC(fp);
-                func_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+                ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }
         }
     }
@@ -155,7 +155,7 @@ void ftSamus_8012AA3C(HSD_GObj* gobj)
                 fp->x2204_ftcmd_var1 = 1;
                 fp->mv.ss.unk5.x0 = 1;
                 func_8007D9FC(fp);
-                func_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+                ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
             }
         }
     }

@@ -76,7 +76,7 @@ Fighter_CostumeStrings lbl_803D180C[] = {
 void ftDrMario_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
     fp->fv.mr.x2234_tornadoCharge = 0;
     fp->fv.mr.x2238_isCapeBoost = false;
     fp->fv.mr.x223C_capeGObj = NULL;

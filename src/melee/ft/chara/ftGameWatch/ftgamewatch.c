@@ -154,17 +154,17 @@ Fighter_CostumeStrings lbl_803D29C8[] = {
 void ftGameWatch_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_80074A4C(gobj, 0U, 0);
-    func_80074A4C(gobj, 1U, -1);
-    func_80074A4C(gobj, 2U, 0);
-    func_80074A4C(gobj, 3U, 0);
-    func_80074A4C(gobj, 4U, -1);
-    func_80074A4C(gobj, 5U, -1);
-    func_80074A4C(gobj, 6U, -1);
-    func_80074A4C(gobj, 7U, -1);
-    func_80074A4C(gobj, 8U, -1);
-    func_80074A4C(gobj, 9U, -1);
-    func_80074A4C(gobj, 0xAU, -1);
+    ftParts_80074A4C(gobj, 0U, 0);
+    ftParts_80074A4C(gobj, 1U, -1);
+    ftParts_80074A4C(gobj, 2U, 0);
+    ftParts_80074A4C(gobj, 3U, 0);
+    ftParts_80074A4C(gobj, 4U, -1);
+    ftParts_80074A4C(gobj, 5U, -1);
+    ftParts_80074A4C(gobj, 6U, -1);
+    ftParts_80074A4C(gobj, 7U, -1);
+    ftParts_80074A4C(gobj, 8U, -1);
+    ftParts_80074A4C(gobj, 9U, -1);
+    ftParts_80074A4C(gobj, 0xAU, -1);
     fp->fv.gw.x222C_judgeVar1 = 1;
     fp->fv.gw.x2230_judgeVar2 = 0;
     fp->fv.gw.x2234 = 0;

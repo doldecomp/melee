@@ -1202,8 +1202,8 @@ void ftKirby_800EE528(void)
 void ftKirby_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_80074A4C(gobj, 0, 0);
-    func_80074A4C(gobj, 1, 0);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
     fp->fv.kb.x222C = 0;
     fp->fv.kb.x2230 = (s32) (HSD_Randi(5) + 1);
     fp->fv.kb.x223C = 0;

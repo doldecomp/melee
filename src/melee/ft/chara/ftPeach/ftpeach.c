@@ -126,22 +126,22 @@ void ftPeach_OnDeath(HSD_GObj* gobj)
     fp->fv.pe.x2238 = 0;
     fp->fv.pe.x2244 = 0;
     fp->fv.pe.x2248 = 0;
-    func_80074A4C(gobj, 0, 0);
-    func_80074A4C(gobj, 2, 0);
-    func_80074A4C(gobj, 3, -1);
-    func_80074A4C(gobj, 4, 0);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 2, 0);
+    ftParts_80074A4C(gobj, 3, -1);
+    ftParts_80074A4C(gobj, 4, 0);
 
     switch (fp->x619_costume_id) {
     case 1:
-        func_80074A4C(gobj, 1, -1);
-        func_80074A4C(gobj, 5, 0);
-        func_80074A4C(gobj, 6, -1);
+        ftParts_80074A4C(gobj, 1, -1);
+        ftParts_80074A4C(gobj, 5, 0);
+        ftParts_80074A4C(gobj, 6, -1);
         break;
 
     default:
-        func_80074A4C(gobj, 1, 0);
-        func_80074A4C(gobj, 5, -1);
-        func_80074A4C(gobj, 6, 0);
+        ftParts_80074A4C(gobj, 1, 0);
+        ftParts_80074A4C(gobj, 5, -1);
+        ftParts_80074A4C(gobj, 6, 0);
         break;
     }
 }
@@ -207,12 +207,12 @@ void ftPeach_8011B93C(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    s32 result = func_80074A74(gobj, 2);
+    s32 result = ftParts_80074A74(gobj, 2);
 
     if (result == -1)
-        func_80074A4C(gobj, 2, 0);
+        ftParts_80074A4C(gobj, 2, 0);
     else
-        func_80074A4C(gobj, 2, -1);
+        ftParts_80074A4C(gobj, 2, -1);
 }
 
 void ftPeach_OnKnockbackEnter(HSD_GObj* gobj)

@@ -113,7 +113,7 @@ void ftMars_801383A8(HSD_GObj* gobj)
     if (phi_r0 != 0) {
         if (abs(fp->input.x620_lstick_x) > attr->x30) {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
+            ftParts_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
         }
     }
 }
@@ -153,7 +153,7 @@ void ftMars_801384F0(HSD_GObj* gobj)
     if (phi_r0 != 0) {
         if (abs(fp->input.x620_lstick_x) > attr->x30) {
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
+            ftParts_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
         }
     }
 }

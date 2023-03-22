@@ -102,7 +102,7 @@ void ftKoopa_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* koopaAttr = fp->x2D4_specialAttributes;
 
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
 
     {
         ftKoopaVars* vars = (ftKoopaVars*) &fp->fv.kp.x222C;

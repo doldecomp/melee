@@ -117,8 +117,8 @@ Fighter_CostumeStrings lbl_803CFA18[] = {
 void ftMars_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_80074A4C(gobj, 0, 0);
-    func_80074A4C(gobj, 1, 0);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
     fp->fv.ms.x222C = 0;
 }
 

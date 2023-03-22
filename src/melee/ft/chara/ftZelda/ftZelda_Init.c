@@ -88,8 +88,8 @@ Fighter_CostumeStrings lbl_803CFEB0[] = {
 void ftZelda_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_80074A4C(gobj, 0, 0);
-    func_80074A4C(gobj, 1, 0);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
     fp->fv.zd.x222C = 0;
 }
 
@@ -142,11 +142,11 @@ void ftZelda_801395C8(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    int result = func_80074A74(gobj, 1);
+    int result = ftParts_80074A74(gobj, 1);
     if (result == -1) {
-        func_80074A4C(gobj, 1, 0);
+        ftParts_80074A4C(gobj, 1, 0);
     } else {
-        func_80074A4C(gobj, 1, -1);
+        ftParts_80074A4C(gobj, 1, -1);
     }
 }
 

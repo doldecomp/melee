@@ -466,10 +466,10 @@ static void ftFox_SpecialLw_Turn(HSD_GObj* gobj)
         fp->x2200_ftcmd_var0 = 1;
         fp->facing_dir = -fp->facing_dir;
     }
-    func_80075AF0(
+    ftParts_80075AF0(
         fp, 0,
         -(180 / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES * DEG_TO_RAD -
-          func_80075F48(fp, 0)));
+          ftParts_80075F48(fp, 0)));
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -491,10 +491,10 @@ static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* gobj)
     }
 
     /// @todo Degrees-to-radians constant.
-    func_80075AF0(fp, 0,
-                  -((0.01745329238474369f *
-                     (180.0f / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) -
-                    func_80075F48(fp, 0)));
+    ftParts_80075AF0(fp, 0,
+                     -((0.01745329238474369f *
+                        (180.0f / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) -
+                       ftParts_80075F48(fp, 0)));
 }
 
 void ftFox_SpecialLwTurn_Anim(HSD_GObj* gobj)
@@ -877,7 +877,7 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* gobj)
 
     fp->facing_dir = fp->ReflectAttr.x1A2C_reflectHitDirection;
 
-    func_8000B1CC(fp->ft_bones[func_8007500C(fp, 4)].x0_jobj, NULL, &sp14);
+    func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, NULL, &sp14);
 
     func_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f,
                   1.0471975803375244f);

@@ -186,7 +186,7 @@ void ftYoshi_8012B918(HSD_GObj* gobj)
 void ftYoshi_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
     fp->fv.ys.x2238 = 0;
 }
 
@@ -336,11 +336,11 @@ void ftYoshi_8012BE3C(HSD_GObj* gobj) {
     s32 bone_idx;
     Fighter* fp2;
     HSD_JObj* jobj;
-    func_80074B0C(gobj, 0, 0);
+    ftParts_80074B0C(gobj, 0, 0);
     ftColl_8007B0C0(gobj, 0);
 
     x1CC = &fp->x110_attr.x1CC;
-    bone_idx = func_8007500C(fp, 4);
+    bone_idx = ftParts_8007500C(fp, 4);
     fp2 = GET_FIGHTER(gobj);
     jobj = fp->ft_bones[bone_idx].x0_jobj;
     efAsync_Spawn(gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);

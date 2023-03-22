@@ -485,10 +485,10 @@ static inline void getAttrStuff(HSD_GObj* arg0)
         temp_r30->x2200_ftcmd_var0 = 1;
         temp_r30->facing_dir = -temp_r30->facing_dir;
     }
-    func_80075AF0(
+    ftParts_80075AF0(
         temp_r30, 0,
         -((0.01745329238474369f * (180.0f / temp_r31->x78_PSI_MAGNET_UNK1)) -
-          func_80075F48(temp_r30, 0)));
+          ftParts_80075F48(temp_r30, 0)));
 }
 
 /// Ness's grounded PSI Magnet Turnaround Animation callback - _

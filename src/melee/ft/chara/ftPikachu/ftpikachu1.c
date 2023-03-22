@@ -133,8 +133,8 @@ void ftPikachu_OnDeath(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_80074A4C(gobj, 0, 0);
-    func_80074A4C(gobj, 1, 0);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
 }
 
 void ftPikachu_OnItemPickup(HSD_GObj* gobj, bool bool)
@@ -164,8 +164,8 @@ void ftPikachu_8012467C(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_80074A4C(gobj, 1, -1);
-    func_80074B0C(gobj, 1, 0);
+    ftParts_80074A4C(gobj, 1, -1);
+    ftParts_80074B0C(gobj, 1, 0);
 }
 
 void ftPikachu_801246C0(HSD_GObj* gobj)
@@ -175,8 +175,8 @@ void ftPikachu_801246C0(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_80074A4C(gobj, 1, 0);
-    func_80074B0C(gobj, 1, 0);
+    ftParts_80074A4C(gobj, 1, 0);
+    ftParts_80074B0C(gobj, 1, 0);
 }
 
 void ftPikachu_LoadSpecialAttrs(HSD_GObj* gobj)

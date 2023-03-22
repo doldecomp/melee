@@ -124,29 +124,29 @@ void ftPichu_OnDeath(HSD_GObj* gobj)
     u8 temp_r0;
     Fighter* fp = gobj->user_data;
 
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
     temp_r0 = fp->x619_costume_id;
 
     switch (temp_r0) {
     case 0:
-        func_80074A4C(gobj, 1, -1);
-        func_80074A4C(gobj, 2, -1);
-        func_80074A4C(gobj, 3, -1);
+        ftParts_80074A4C(gobj, 1, -1);
+        ftParts_80074A4C(gobj, 2, -1);
+        ftParts_80074A4C(gobj, 3, -1);
         break;
     case 1:
-        func_80074A4C(gobj, 1, 0);
-        func_80074A4C(gobj, 2, -1);
-        func_80074A4C(gobj, 3, -1);
+        ftParts_80074A4C(gobj, 1, 0);
+        ftParts_80074A4C(gobj, 2, -1);
+        ftParts_80074A4C(gobj, 3, -1);
         break;
     case 2:
-        func_80074A4C(gobj, 1, -1);
-        func_80074A4C(gobj, 2, 0);
-        func_80074A4C(gobj, 3, -1);
+        ftParts_80074A4C(gobj, 1, -1);
+        ftParts_80074A4C(gobj, 2, 0);
+        ftParts_80074A4C(gobj, 3, -1);
         break;
     case 3:
-        func_80074A4C(gobj, 1, -1);
-        func_80074A4C(gobj, 2, -1);
-        func_80074A4C(gobj, 3, 0);
+        ftParts_80074A4C(gobj, 1, -1);
+        ftParts_80074A4C(gobj, 2, -1);
+        ftParts_80074A4C(gobj, 3, 0);
         break;
     }
 }

@@ -197,7 +197,7 @@ void ftZelda_8013BA04(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
 
-    func_8007592C(fp, 0, 0);
+    ftParts_8007592C(fp, 0, 0);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp = GET_FIGHTER(gobj);
@@ -326,7 +326,7 @@ void ftZelda_8013BD10(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* sa = fp->x2D4_specialAttributes;
 
-    func_8007592C(fp, 0, 0);
+    ftParts_8007592C(fp, 0, 0);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         {

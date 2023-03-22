@@ -104,7 +104,7 @@ Fighter_CostumeStrings lbl_803D0F5C[] = {
 void ftMewtwo_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
     fp->fv.mt.x222C_disableGObj = NULL;
     fp->fv.mt.x2230_shadowHeldGObj = NULL;
     fp->fv.mt.x2234_shadowBallCharge = 0;

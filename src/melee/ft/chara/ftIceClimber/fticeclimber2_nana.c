@@ -135,8 +135,8 @@ void ftNana_OnDeath(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
     fp->dmg.x18B0 = attr->xC8;
-    func_80074A4C(gobj, 0U, 0);
-    func_80074A4C(gobj, 1U, 0);
+    ftParts_80074A4C(gobj, 0U, 0);
+    ftParts_80074A4C(gobj, 1U, 0);
     fp->fv.nn.x2234 = 0;
     fp->fv.nn.x222C = 0;
     fp->fv.nn.x2230.bits.b0 = 0;

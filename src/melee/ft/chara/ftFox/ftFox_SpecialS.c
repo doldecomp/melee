@@ -344,7 +344,7 @@ static inline void ftFox_SpecialS_SetPhys(HSD_GObj* gobj)
     fp->mv.fx.SpecialS.blendFrames[2] = fp->mv.fx.SpecialS.blendFrames[1];
     fp->mv.fx.SpecialS.blendFrames[1] = fp->mv.fx.SpecialS.blendFrames[0];
 
-    fp->mv.fx.SpecialS.blendFrames[0] = func_80075E78(fp, 0);
+    fp->mv.fx.SpecialS.blendFrames[0] = ftParts_80075E78(fp, 0);
 }
 
 // 0x800EA47C
@@ -437,7 +437,7 @@ inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
     fp->mv.fx.SpecialS.ghostEffectPos[1] = fp->cur_pos;
     fp->mv.fx.SpecialS.ghostEffectPos[0] = fp->cur_pos;
 
-    var = func_80075E78(fp, 0);
+    var = ftParts_80075E78(fp, 0);
 
     fp->mv.fx.SpecialS.blendFrames[3] = var;
     fp->mv.fx.SpecialS.blendFrames[2] = var;

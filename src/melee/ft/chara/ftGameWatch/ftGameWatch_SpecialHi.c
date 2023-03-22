@@ -209,7 +209,7 @@ void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* gobj)
             temp = stick_range_threshold * facing_dir;
             angle = temp * gawAttrs->x5C_GAMEWATCH_RESCUE_ANGLE_UNK;
             func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
+            ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
             fp->x6BC_inputStickangle = -angle;
             fp->x2200_ftcmd_var0 = 1;
         }

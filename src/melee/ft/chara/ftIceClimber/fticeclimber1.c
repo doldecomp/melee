@@ -149,8 +149,8 @@ void ftPopo_OnLoad(HSD_GObj* gobj)
 void ftPopo_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_80074A4C(gobj, 0U, 0);
-    func_80074A4C(gobj, 1U, 0);
+    ftParts_80074A4C(gobj, 0U, 0);
+    ftParts_80074A4C(gobj, 1U, 0);
     fp->fv.nn.x2234 = 0;
     fp->fv.nn.x222C = 0;
     fp->fv.nn.x2230.bits.b0 = false;
@@ -482,7 +482,7 @@ asm void ftPopo_8011F68C(HSD_GObj*)
 /* 8011F6A8 0011C288  83 C3 00 2C */	lwz r30, 0x2c(r3)
 /* 8011F6AC 0011C28C  C0 22 9E 68 */	lfs f1, lbl_804D9848
 /* 8011F6B0 0011C290  38 7E 00 00 */	addi r3, r30, 0
-/* 8011F6B4 0011C294  4B F5 62 79 */	bl func_8007592C
+/* 8011F6B4 0011C294  4B F5 62 79 */	bl ftParts_8007592C
 /* 8011F6B8 0011C298  7F E3 FB 78 */	mr r3, r31
 /* 8011F6BC 0011C29C  4B F4 D9 01 */	bl Fighter_UnkSetFlag_8006CFBC
 /* 8011F6C0 0011C2A0  80 7E 1A 5C */	lwz r3, 0x1a5c(r30)

@@ -178,7 +178,8 @@ void ftPikachu_80126144(HSD_GObj* gobj)
         ftPikachu_ActionChangeUpdateVel_801274AC(gobj);
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
-            func_8000B1CC(fp->ft_bones[func_8007500C(fp, 2)].x0_jobj, 0, &vec);
+            func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj, 0,
+                          &vec);
             ef_Spawn(0x3F4, gobj, &vec);
             fp->x2219_flag.bits.b0 = 1;
             fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -188,7 +189,7 @@ void ftPikachu_80126144(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
             f32 tempf;
-            func_8000B1CC(fp->ft_bones[func_8007500C(fp, 2)].x0_jobj, 0,
+            func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj, 0,
                           &vec2);
             tempf = HSD_Randf();
             vec2.x += (6.0f * tempf) - 3.0f;
@@ -219,7 +220,8 @@ void ftPikachu_801262B4(HSD_GObj* gobj)
         ftPikachu_ActionChangeUpdateVel_80127534(gobj);
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
-            func_8000B1CC(fp->ft_bones[func_8007500C(fp, 2)].x0_jobj, 0, &vec);
+            func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj, 0,
+                          &vec);
             ef_Spawn(0x3F4, gobj, &vec);
             fp->x2219_flag.bits.b0 = 1;
             fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
@@ -229,7 +231,7 @@ void ftPikachu_801262B4(HSD_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         if (fp->x4_fighterKind != FTKIND_PICHU) {
             f32 tempf;
-            func_8000B1CC(fp->ft_bones[func_8007500C(fp, 2)].x0_jobj, 0,
+            func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj, 0,
                           &vec2);
             tempf = HSD_Randf();
             vec2.x += (10.0f * tempf) - 5.0f;
@@ -261,11 +263,11 @@ void ftPikachu_8012642C(HSD_GObj* gobj)
         (fp->facing_dir * atan2f(fp->x80_self_vel.x, fp->x80_self_vel.y)) +
         (pika_attr->x78 - half_pi);
 
-    func_8007592C(fp, func_8007500C(fp, 2), tempf);
+    ftParts_8007592C(fp, ftParts_8007500C(fp, 2), tempf);
     scale.x = pika_attr->x7C_scale.x;
     scale.y = pika_attr->x7C_scale.y;
     scale.z = pika_attr->x7C_scale.z;
-    jobj = fp->ft_bones[func_8007500C(fp, 2)].x0_jobj;
+    jobj = fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj;
     HSD_JObjSetScale(jobj, &scale);
 
     velocity_vec = fp->x80_self_vel;
@@ -339,12 +341,12 @@ void ftPikachu_80126614(HSD_GObj* gobj)
             f32 angle = atan2f(collData->x14C_ground.normal.x,
                                collData->x14C_ground.normal.y);
             f32 angle2 = (fighter2->facing_dir * angle) + pika_attr->x68;
-            func_8007592C(fighter2, func_8007500C(fighter2, 2), angle2);
+            ftParts_8007592C(fighter2, ftParts_8007500C(fighter2, 2), angle2);
         }
         scale.x = pika_attr->x6C_scale.x;
         scale.y = pika_attr->x6C_scale.y;
         scale.z = pika_attr->x6C_scale.z;
-        jobj = fighter2->ft_bones[func_8007500C(fighter2, 2)].x0_jobj;
+        jobj = fighter2->ft_bones[ftParts_8007500C(fighter2, 2)].x0_jobj;
         HSD_JObjSetScale(jobj, &scale);
     }
 
@@ -477,13 +479,13 @@ void ftPikachu_ActionChange_80126AA4(HSD_GObj* gobj)
         f32 angle = (fp->facing_dir * atan2f(collData->x14C_ground.normal.x,
                                              collData->x14C_ground.normal.y)) +
                     pika_attr->x68;
-        func_8007592C(fp, func_8007500C(fp, 2), angle);
+        ftParts_8007592C(fp, ftParts_8007500C(fp, 2), angle);
     }
 
     scale.x = pika_attr->x6C_scale.x;
     scale.y = pika_attr->x6C_scale.y;
     scale.z = pika_attr->x6C_scale.z;
-    jobj = fp->ft_bones[func_8007500C(fp, 2)].x0_jobj;
+    jobj = fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj;
     HSD_JObjSetScale(jobj, &scale);
 }
 

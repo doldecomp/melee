@@ -63,11 +63,11 @@ static inline void spawnEffect(HSD_GObj* gobj)
     s32* x1CC;
     Fighter* fp;
     fp = GET_FIGHTER(gobj);
-    func_80074B0C(gobj, 0, 0);
+    ftParts_80074B0C(gobj, 0, 0);
     ftColl_8007B0C0(gobj, 0);
 
     x1CC = &fp->x110_attr.x1CC;
-    bone_idx = func_8007500C(fp, 4);
+    bone_idx = ftParts_8007500C(fp, 4);
     fp2 = GET_FIGHTER(gobj);
     jobj = fp->ft_bones[bone_idx].x0_jobj;
 
@@ -143,7 +143,7 @@ asm void ftYoshi_8012C1D4(HSD_GObj*)
 /* 8012C224 00128E04  38 7E 00 00 */	addi r3, r30, 0
 /* 8012C228 00128E08  38 80 00 00 */	li r4, 0
 /* 8012C22C 00128E0C  38 A0 00 01 */	li r5, 1
-/* 8012C230 00128E10  4B F4 88 DD */	bl func_80074B0C
+/* 8012C230 00128E10  4B F4 88 DD */	bl ftParts_80074B0C
 /* 8012C234 00128E14  83 BE 00 2C */	lwz r29, 0x2c(r30)
 /* 8012C238 00128E18  38 7E 00 00 */	addi r3, r30, 0
 /* 8012C23C 00128E1C  38 80 00 02 */	li r4, 2
@@ -245,7 +245,7 @@ void ftYoshi_8012C49C(HSD_GObj* gobj)
 
     {
         Fighter* fp0 = GET_FIGHTER(gobj);
-        func_80074B0C(gobj, 0, 0);
+        ftParts_80074B0C(gobj, 0, 0);
         ftColl_8007B0C0(gobj, 0);
 
         {
@@ -256,7 +256,7 @@ void ftYoshi_8012C49C(HSD_GObj* gobj)
 
             s32* x1CC = &fp0->x110_attr.x1CC;
 
-            ssize_t bone_idx = func_8007500C(fp0, 4);
+            ssize_t bone_idx = ftParts_8007500C(fp0, 4);
             Fighter* fp1 = GET_FIGHTER(gobj);
 
             /// @todo Why is this still using @c fp0?
@@ -337,7 +337,7 @@ asm void ftYoshi_8012C600(HSD_GObj*)
 /* 8012C670 00129250  38 7D 00 00 */	addi r3, r29, 0
 /* 8012C674 00129254  38 80 00 00 */	li r4, 0
 /* 8012C678 00129258  38 A0 00 01 */	li r5, 1
-/* 8012C67C 0012925C  4B F4 84 91 */	bl func_80074B0C
+/* 8012C67C 0012925C  4B F4 84 91 */	bl ftParts_80074B0C
 lbl_8012C680:
 /* 8012C680 00129260  83 9D 00 2C */	lwz r28, 0x2c(r29)
 /* 8012C684 00129264  38 7D 00 00 */	addi r3, r29, 0
@@ -647,14 +647,14 @@ asm void ftYoshi_8012CAD0(HSD_GObj*)
 /* 8012CB20 00129700  38 7D 00 00 */	addi r3, r29, 0
 /* 8012CB24 00129704  38 80 00 00 */	li r4, 0
 /* 8012CB28 00129708  38 A0 00 00 */	li r5, 0
-/* 8012CB2C 0012970C  4B F4 7F E1 */	bl func_80074B0C
+/* 8012CB2C 0012970C  4B F4 7F E1 */	bl ftParts_80074B0C
 /* 8012CB30 00129710  38 7D 00 00 */	addi r3, r29, 0
 /* 8012CB34 00129714  38 80 00 00 */	li r4, 0
 /* 8012CB38 00129718  4B F4 E5 89 */	bl ftColl_8007B0C0
 /* 8012CB3C 0012971C  38 7F 00 00 */	addi r3, r31, 0
 /* 8012CB40 00129720  3B DF 01 CC */	addi r30, r31, 0x1cc
 /* 8012CB44 00129724  38 80 00 04 */	li r4, 4
-/* 8012CB48 00129728  4B F4 84 C5 */	bl func_8007500C
+/* 8012CB48 00129728  4B F4 84 C5 */	bl ftParts_8007500C
 /* 8012CB4C 0012972C  80 9F 05 E8 */	lwz r4, 0x5e8(r31)
 /* 8012CB50 00129730  54 60 20 36 */	slwi r0, r3, 4
 /* 8012CB54 00129734  80 BD 00 2C */	lwz r5, 0x2c(r29)
@@ -757,7 +757,7 @@ bool ftYoshi_8012CC1C(HSD_GObj* gobj)
 
 void ftYoshi_8012CC6C(HSD_GObj* gobj)
 {
-    func_8007500C(GET_FIGHTER(gobj), 52);
+    ftParts_8007500C(GET_FIGHTER(gobj), 52);
 }
 
 extern f32 const lbl_804D9A38;

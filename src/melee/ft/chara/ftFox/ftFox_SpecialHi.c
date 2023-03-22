@@ -23,7 +23,7 @@ void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x48C, gobj, fp->ft_bones[func_8007500C(fp, 4)].x0_jobj);
+        ef_Spawn(0x48C, gobj, fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj);
 
         fp->x2219_flag.bits.b0 = true;
     }
@@ -38,7 +38,7 @@ void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x48B, gobj, fp->ft_bones[func_8007500C(fp, 1)].x0_jobj);
+        ef_Spawn(0x48B, gobj, fp->ft_bones[ftParts_8007500C(fp, 1)].x0_jobj);
 
         fp->x2219_flag.bits.b0 = true;
     }
@@ -88,8 +88,8 @@ void ftFox_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007592C(fp, func_8007500C(fp, 2),
-                  DOUBLE_PI32 - fp->mv.fx.SpecialHi.rotateModel);
+    ftParts_8007592C(fp, ftParts_8007500C(fp, 2),
+                     DOUBLE_PI32 - fp->mv.fx.SpecialHi.rotateModel);
 }
 
 void ftFox_SpecialHiHold_Anim(HSD_GObj* gobj)

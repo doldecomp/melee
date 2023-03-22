@@ -553,10 +553,10 @@ void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* gobj)
     fp->x108_costume_joint = CostumeListsForeachCharacter[fp->x4_fighterKind]
                                  .costume_list[fp->x619_costume_id]
                                  .joint;
-    func_80074148();
+    ftParts_80074148();
     jobj = HSD_JObjLoadJoint(fp->x108_costume_joint);
-    func_80074170();
-    func_80073758(jobj);
+    ftParts_80074170();
+    ftParts_80073758(jobj);
 
     func_80390A70(gobj, lbl_804D7849, jobj);
 }
@@ -565,14 +565,14 @@ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
 {
     Vec3 vec;
     Vec3 vec2;
-    HSD_JObj* jobj = fp->ft_bones[func_8007500C(fp, 2)].x0_jobj;
+    HSD_JObj* jobj = fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj;
 
     HSD_JObjGetTranslation(jobj, &vec);
 
     fp->x1A6C = (vec.y / 8.55f);
 
     func_8000B1CC(jobj, 0, &vec);
-    func_8000B1CC(fp->ft_bones[func_8007500C(fp, 1)].x0_jobj, 0, &vec2);
+    func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 1)].x0_jobj, 0, &vec2);
     fp->x1A70.x = vec2.x - vec.x;
     fp->x1A70.y = vec2.y - vec.y;
     fp->x1A70.z = vec2.z - vec.z;
@@ -847,14 +847,14 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     Fighter_UnkUpdateCostumeJoint_800686E4(gobj);
 
     func_80085B10(fp);
-    func_80074E58(fp);
+    ftParts_80074E58(fp);
     Fighter_SetupParts(gobj);
     ftAnim_80070308(gobj);
     func_800C884C(gobj);
 
     Fighter_80068E64(gobj);
 
-    func_800749CC(gobj);
+    ftParts_800749CC(gobj);
     ftAnim_8007077C(gobj);
     func_8009CF84(fp);
     ftAnim_8006FE48(gobj);
@@ -959,7 +959,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     if (((arg2 & FtStateChange_SkipUpdateModel) == 0) &&
         (fp->x221D_flag.bits.b2 != 0U))
     {
-        func_80074A8C(gobj);
+        ftParts_80074A8C(gobj);
     }
 
     if (((arg2 & FtStateChange_SkipUpdateMatAnim) == 0) &&
@@ -1160,9 +1160,9 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
 
     fp->x6BC_inputStickangle = 0.0f;
 
-    func_8007592C(fp, 0, 0.0f);
-    func_80075AF0(fp, 0, (HALF_PI * fp->facing_dir));
-    func_80075CB4(fp, 0, 0.0f);
+    ftParts_8007592C(fp, 0, 0.0f);
+    ftParts_80075AF0(fp, 0, (HALF_PI * fp->facing_dir));
+    ftParts_80075CB4(fp, 0, 0.0f);
 
     if (new_motion_state_index >= fp->x18) {
         new_motion_state =

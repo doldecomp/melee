@@ -99,7 +99,7 @@ Fighter_CostumeStrings lbl_803C773C[] = {
 void ftCaptain_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
     fp->fv.ca.during_specials = 0;
     fp->fv.ca.during_specials_start = false;
 }

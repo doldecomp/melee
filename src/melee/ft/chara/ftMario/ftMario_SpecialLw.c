@@ -20,7 +20,7 @@ void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj)
     Fighter* fp;
     fp = GET_FIGHTER(gobj);
 
-    func_8007592C(fp, 0, 0);
+    ftParts_8007592C(fp, 0, 0);
 }
 
 static void setGfx(HSD_GObj* gobj)
@@ -255,12 +255,12 @@ static void doColl(HSD_GObj* gobj)
     if ((fp->x220C_ftcmd_var3 != 0U) &&
         ((s32) (fp->mv.mr.SpecialLw.isUnkColl) != 0))
     {
-        func_8007592C(fp, 0,
-                      fp->facing_dir *
-                          atan2f(fp->x6F0_collData.x14C_ground.normal.x,
-                                 fp->x6F0_collData.x14C_ground.normal.y));
+        ftParts_8007592C(fp, 0,
+                         fp->facing_dir *
+                             atan2f(fp->x6F0_collData.x14C_ground.normal.x,
+                                    fp->x6F0_collData.x14C_ground.normal.y));
     } else {
-        func_8007592C(fp, 0, 0);
+        ftParts_8007592C(fp, 0, 0);
     }
 }
 

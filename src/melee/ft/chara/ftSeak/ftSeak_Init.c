@@ -104,8 +104,8 @@ void ftSeak_OnDeath(HSD_GObj* gobj)
     fp->fv.sk.x222C = 0;
     fp->fv.sk.x2230 = 0;
     fp->fv.sk.x2234 = 0;
-    func_80074A4C(gobj, 0, 0);
-    func_80074A4C(gobj, 1, -1);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, -1);
 }
 
 void ftSeak_OnLoad(HSD_GObj* gobj)

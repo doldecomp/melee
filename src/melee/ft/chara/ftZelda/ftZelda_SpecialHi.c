@@ -74,7 +74,7 @@ void ftZelda_SpecialHi_StartMotion_Helper(Fighter* fp)
 #endif
 
     {
-        ssize_t boneIndex = func_8007500C(fp, 4);
+        ssize_t boneIndex = ftParts_8007500C(fp, 4);
         HSD_JObj* jObj = fp->ft_bones[boneIndex].x0_jobj;
 
         {
@@ -132,7 +132,7 @@ void ftZelda_SpecialAirHi_StartMotion(HSD_GObj* gobj)
             u8 _[20];
 #endif
 
-            ssize_t boneIndex = func_8007500C(fp, 4);
+            ssize_t boneIndex = ftParts_8007500C(fp, 4);
             HSD_JObj* jObj = fp->ft_bones[boneIndex].x0_jobj;
 
             func_8000B1CC(jObj, NULL, &vec);

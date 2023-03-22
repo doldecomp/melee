@@ -24,7 +24,8 @@ void ftFox_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
     sp14.y = 1.2325000762939453f;
     sp14.z = 4.263599872589111f;
 
-    func_8000B1CC(fp->ft_bones[func_8007500C(fp, 0x31)].x0_jobj, &sp14, pos);
+    func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x31)].x0_jobj, &sp14,
+                  pos);
 }
 
 void ftFox_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
@@ -36,7 +37,8 @@ void ftFox_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
     sp14.y = 1.2325000762939453f;
     sp14.z = 0.013600001111626625f;
 
-    func_8000B1CC(fp->ft_bones[func_8007500C(fp, 0x31)].x0_jobj, &sp14, pos);
+    func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x31)].x0_jobj, &sp14,
+                  pos);
 }
 
 // 0x800E5D90
@@ -259,7 +261,7 @@ void ftFox_SpecialN_StartMotion(HSD_GObj* gobj)
     fp->mv.fx.SpecialN.isBlasterLoop = false;
 
     blasterGObj = func_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,
-                                func_8007500C(fp, 0x31),
+                                ftParts_8007500C(fp, 0x31),
                                 foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
     fp->fv.fx.x222C_blasterGObj = blasterGObj;
 
@@ -294,7 +296,7 @@ void ftFox_SpecialAirN_StartMotion(
 
     fp->mv.fx.SpecialN.isBlasterLoop = false;
     blasterGObj = func_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,
-                                func_8007500C(fp, 0x31),
+                                ftParts_8007500C(fp, 0x31),
                                 foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
     fp->fv.fx.x222C_blasterGObj = blasterGObj;
 
@@ -779,7 +781,7 @@ void ftFox_Throw_Anim(HSD_GObj* gobj)
             if (fp->fv.fx.x222C_blasterGObj == NULL) {
                 HSD_GObj* blasterGObj =
                     func_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,
-                                  func_8007500C(fp, 0x31),
+                                  ftParts_8007500C(fp, 0x31),
                                   foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
 
                 fp->fv.fx.x222C_blasterGObj = blasterGObj;

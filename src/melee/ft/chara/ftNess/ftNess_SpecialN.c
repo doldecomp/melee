@@ -282,7 +282,7 @@ void ftNess_SpecialNEnd_Anim(HSD_GObj* gobj)
 #endif
 
     SetPKFlashAttr(gobj);
-    func_8007592C(fp, 0, 0);
+    ftParts_8007592C(fp, 0, 0);
 
     if (!ftAnim_IsFramesRemaining(gobj))
         func_8008A2BC(gobj);
@@ -390,7 +390,7 @@ void ftNess_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 #endif
 
     SetPKFlashAttr(gobj);
-    func_8007592C(fp, 0, 0);
+    ftParts_8007592C(fp, 0, 0);
 
     if (ftAnim_IsFramesRemaining(gobj))
         return;

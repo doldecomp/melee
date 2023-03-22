@@ -149,7 +149,7 @@ void ftFox_OnDeath(HSD_GObj* gobj)
     Fighter* fp = (Fighter*) gobj->user_data;
 
     fp->fv.fx.x222C_blasterGObj = 0;
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
 }
 
 void ftFox_800E5588(HSD_GObj* gobj)

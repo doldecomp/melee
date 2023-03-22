@@ -143,7 +143,7 @@ void ftFalco_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->fv.fx.x222C_blasterGObj = 0;
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
 }
 
 void ftFalco_OnItemPickup(HSD_GObj* gobj, bool bool)

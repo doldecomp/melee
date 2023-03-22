@@ -106,7 +106,7 @@ Fighter_CostumeStrings lbl_803D0AB4[] = {
 void ftLuigi_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_80074A4C(gobj, 0, false);
+    ftParts_80074A4C(gobj, 0, false);
     fp->fv.lg.x2234 = 0;
 }
 
