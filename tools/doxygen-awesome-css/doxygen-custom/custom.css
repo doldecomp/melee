@@ -43,12 +43,13 @@
     overflow: hidden;
     float: right;
     border: 1px solid var(--separator-color);
-    padding: var(--spacing-medium) calc(var(--spacing-large) / 2) var(--spacing-medium) var(--spacing-large);
+    padding: var(--spacing-medium) calc(var(--spacing-large) / 2)
+        var(--spacing-medium) var(--spacing-large);
     border-radius: var(--border-radius-medium);
     color: var(--page-secondary-foreground-color) !important;
     text-decoration: none;
     background-color: var(--page-background-color);
-    transition: color .08s ease-in-out, background-color .1s ease-in-out;
+    transition: color 0.08s ease-in-out, background-color 0.1s ease-in-out;
 }
 
 .next_section_button a:hover {
@@ -57,11 +58,11 @@
 }
 
 .next_section_button a::after {
-    content: '〉';
+    content: "〉";
     color: var(--page-secondary-foreground-color) !important;
     padding-left: var(--spacing-large);
     display: inline-block;
-    transition: color .08s ease-in-out, transform .09s ease-in-out;
+    transition: color 0.08s ease-in-out, transform 0.09s ease-in-out;
 }
 
 .next_section_button a:hover::after {
@@ -91,7 +92,7 @@ html.dark-mode .bordered_image object[type="image/svg+xml"] /* doxygen 1.9.3 */ 
 }
 
 .title_screenshot {
-    filter: drop-shadow(0px 3px 10px rgba(0,0,0,0.22));
+    filter: drop-shadow(0px 3px 10px rgba(0, 0, 0, 0.22));
     max-width: 500px;
     margin: var(--spacing-large) 0;
 }
