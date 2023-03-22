@@ -54,7 +54,9 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     // compute distance to the wall?
                     if (!func_800567C0(coll_data->x174_leftwall.index, &ecb,
                                        &wall_pos))
+                    {
                         wall_pos.x = 0.0f;
+                    }
                 } else {
                     // compute absolte position of the ECB's right vertex?
                     ecb.x = coll_data->xA4_ecbCurrCorrect.right.x;
@@ -66,7 +68,9 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     // compute distance to the wall?
                     if (!func_800567C0(coll_data->x160_rightwall.index, &ecb,
                                        &wall_pos))
+                    {
                         wall_pos.x = 0.0f;
+                    }
                 }
 
                 {
@@ -106,8 +110,9 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                             fp0->x2110_walljumpWallSide);
 
                 fp0->x210C_walljumpInputTimer = max_input_frames;
-                if (fp0->x1969_walljumpUsed < 255)
+                if (fp0->x1969_walljumpUsed < 255) {
                     fp0->x1969_walljumpUsed++;
+                }
                 return true;
             }
         } else {

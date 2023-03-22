@@ -48,8 +48,9 @@ void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
 
     entry = table->table[hash(id)];
     while (entry != NULL) {
-        if (entry->id == id)
+        if (entry->id == id) {
             break;
+        }
         entry = entry->next;
     }
 

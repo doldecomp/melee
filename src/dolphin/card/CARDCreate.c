@@ -108,8 +108,9 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size,
     fat = __CARDGetFatBlock(card);
 
     /// @todo #CARDControl::sectorSize is probably #size_t.
-    if ((unsigned) card->sectorSize * fat[CARD_FAT_FREEBLOCKS] < size)
+    if ((unsigned) card->sectorSize * fat[CARD_FAT_FREEBLOCKS] < size) {
         return __CARDPutControlBlock(card, CARD_RESULT_INSSPACE);
+    }
 
     /// @todo Eliminate cast to #CARDCallback.
     card->apiCallback =
@@ -128,8 +129,9 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size,
     result = __CARDAllocBlock(chan, size / card->sectorSize,
                               (CARDCallback) CreateCallbackFat);
 
-    if (result < 0)
+    if (result < 0) {
         return __CARDPutControlBlock(card, result);
+    }
 
     return result;
 }

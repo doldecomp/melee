@@ -145,8 +145,9 @@ void Fighter_800679B0(void)
     g_spawnNumCounter = 1;
 
     for (i = 0; i < FTKIND_MAX; i++) {
-        if (lbl_803C10D0[i])
+        if (lbl_803C10D0[i]) {
             lbl_803C10D0[i]();
+        }
     }
 }
 
@@ -197,10 +198,11 @@ void Fighter_UpdateModelScale(HSD_GObj* gobj)
     Vec3 scale;
     f32 modelScale = ftCommon_GetModelScale(fp);
 
-    if (fp->x34_scale.z != 1.0f)
+    if (fp->x34_scale.z != 1.0f) {
         scale.x = fp->x34_scale.z;
-    else
+    } else {
         scale.x = modelScale;
+    }
 
     scale.y = modelScale;
     scale.z = modelScale;
@@ -514,12 +516,14 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
     ft_80081938(gobj);
 
     if (fp->x2114_SmashAttr.x2135 == -1) {
-        if (ft_80082A68(gobj) && !fp->x2229_b6)
+        if (ft_80082A68(gobj) && !fp->x2229_b6) {
             ftCommon_8007D6A4(fp);
-        else
+        } else {
             ftCommon_8007D5D4(fp);
-    } else
+        }
+    } else {
         ftCommon_8007D5D4(fp);
+    }
     ftCamera_80076064(fp);
 
     HSD_JObjSetTranslate(GET_JOBJ(gobj), &fp->cur_pos);
@@ -534,8 +538,9 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
     ftColl_8007AFF8(gobj);
     ftColl_8007B0C0(gobj, 0);
 
-    if (ft_OnDeath[fp->x4_fighterKind])
+    if (ft_OnDeath[fp->x4_fighterKind]) {
         ft_OnDeath[fp->x4_fighterKind](gobj);
+    }
 
     ft_800A101C(fp, Player_GetCpuType(fp->xC_playerID),
                 Player_GetCpuLevel(fp->xC_playerID), 0);
@@ -798,8 +803,9 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
 u32 Fighter_NewSpawn_80068E40(void)
 {
     u32 spawnNum = g_spawnNumCounter++;
-    if (g_spawnNumCounter == 0)
+    if (g_spawnNumCounter == 0) {
         g_spawnNumCounter = 1;
+    }
     return spawnNum;
 }
 
@@ -1497,8 +1503,9 @@ void Fighter_8006A360(HSD_GObj* gobj)
         }
 
         if (fp->x2220_flag.bits.b5 || fp->x2220_flag.bits.b6) {
-            if (fp->x2008)
+            if (fp->x2008) {
                 fp->x2008--;
+            }
 
             if (fp->x2008 == 0) {
                 if (fp->x2220_flag.bits.b5) {
@@ -2150,11 +2157,13 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         Vec3 selfVel;
         float kb_vel_x, kb_vel_y, atkShieldKB_X;
 
-        if (fp->x2064_ledgeCooldown)
+        if (fp->x2064_ledgeCooldown) {
             fp->x2064_ledgeCooldown -= 1;
+        }
 
-        if (fp->x2108)
+        if (fp->x2108) {
             fp->x2108 -= 1;
+        }
 
         ft_800C0A98(gobj);
 
@@ -2197,8 +2206,9 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                 Vec3* pNormal = &fp->x6F0_collData.x14C_ground.normal;
                 struct attr* pAttr;
 
-                if (fp->xF0_ground_kb_vel == 0)
+                if (fp->xF0_ground_kb_vel == 0) {
                     fp->xF0_ground_kb_vel = kb_vel_x;
+                }
 
                 pAttr = &fp->x110_attr;
                 ftCommon_8007CCA0(
@@ -2251,8 +2261,9 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                                   // surface normal points out of the surface.
                 struct attr* pAttr;
 
-                if (fp->xF4_ground_attacker_shield_kb_vel == 0)
+                if (fp->xF4_ground_attacker_shield_kb_vel == 0) {
                     fp->xF4_ground_attacker_shield_kb_vel = atkShieldKB_X;
+                }
 
                 pAttr = &fp->x110_attr;
 
@@ -2301,8 +2312,9 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                         fp->xA4_unk_vel.y;
 
             fp->dmg.x194C--;
-            if (fp->dmg.x194C == 0)
+            if (fp->dmg.x194C == 0) {
                 fp->dmg.x1948 = 0;
+            }
         }
 
         // add some horizontal+depth offset to the position? Why is there no
@@ -2324,8 +2336,9 @@ void Fighter_procUpdate(HSD_GObj* gobj)
             if (fp->x2210_ThrowFlags.b2) {
                 fp->x2210_ThrowFlags.b2 = 0;
                 bit = 1;
-            } else
+            } else {
                 bit = 0;
+            }
 
             /// @todo @c incompatible-pointer-types because bad headers
             if (bit || ftAnim_80070FD0(fp) || fp->x594_animCurrFlags1.bits.b7)
@@ -2368,8 +2381,10 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         // this case
         if (func_800567C0(fp->x6F0_collData.x14C_ground.index, &fp->cur_pos,
                           &difference))
+        {
             // fp->position += difference
             PSVECAdd(&fp->cur_pos, &difference, &fp->cur_pos);
+        }
     }
 
     fp->cur_pos.x += windOffset.x;
@@ -2509,8 +2524,9 @@ void Fighter_8006C27C(HSD_GObj* gobj)
 void Fighter_8006C5F4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x221F_flag.bits.b3)
+    if (!fp->x221F_flag.bits.b3) {
         ft_80089B08(gobj);
+    }
 }
 
 void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* gobj)
@@ -3057,8 +3073,9 @@ void Fighter_8006D9AC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x221F_flag.bits.b3 || fp->x2219_flag.bits.b5)
+    if (fp->x221F_flag.bits.b3 || fp->x2219_flag.bits.b5) {
         return;
+    }
 
     ft_8009E0A8(gobj);
 }

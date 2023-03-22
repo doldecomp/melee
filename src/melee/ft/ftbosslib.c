@@ -120,10 +120,11 @@ void ftBossLib_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
     {
         f32 x_diff = vec.x - fp->cur_pos.x;
         f32 abs_x_diff = fabs_inline(x_diff);
-        if (abs_x_diff > x_diff_max)
+        if (abs_x_diff > x_diff_max) {
             fp->x80_self_vel.x += x_diff > 0 ? x_diff_max : -x_diff_max;
-        else
+        } else {
             fp->x80_self_vel.x += x_diff;
+        }
     }
 }
 
@@ -136,10 +137,11 @@ void ftBossLib_8015C010(HSD_GObj* gobj, f32 x_diff_max)
     {
         f32 x_diff = vec.x - fp->cur_pos.x;
         f32 abs_x_diff = fabs_inline(x_diff);
-        if (abs_x_diff > x_diff_max)
+        if (abs_x_diff > x_diff_max) {
             fp->x80_self_vel.x = x_diff > 0 ? x_diff_max : -x_diff_max;
-        else
+        } else {
             fp->x80_self_vel.x = x_diff;
+        }
     }
 }
 
@@ -187,8 +189,9 @@ HSD_GObj* ftBossLib_8015C244(HSD_GObj* arg0, Vec3* arg1)
 bool ftBossLib_8015C270(void)
 {
     /// @todo Get msid
-    if (ftBossLib_8015C44C(FTKIND_MASTERH) == 0x157)
+    if (ftBossLib_8015C44C(FTKIND_MASTERH) == 0x157) {
         return 1;
+    }
 
     return 0;
 }
@@ -196,8 +199,9 @@ bool ftBossLib_8015C270(void)
 bool ftBossLib_8015C2A8(void)
 {
     /// @todo Get msid
-    if (ftBossLib_8015C44C(FTKIND_CREZYH) == 0x183)
+    if (ftBossLib_8015C44C(FTKIND_CREZYH) == 0x183) {
         return true;
+    }
 
     return false;
 }
@@ -206,8 +210,9 @@ bool ftBossLib_8015C2E0(void)
 {
     /// @todo Get ASIDs
     enum_t msid = ftBossLib_8015C44C(FTKIND_MASTERH);
-    if (msid == 0x158 || msid == 0x159)
+    if (msid == 0x158 || msid == 0x159) {
         return true;
+    }
 
     return false;
 }
@@ -216,8 +221,9 @@ bool ftBossLib_8015C31C(void)
 {
     /// @todo Get ASIDs
     enum_t msid = ftBossLib_8015C44C(FTKIND_CREZYH);
-    if (msid == 0x181 || msid == 0x182)
+    if (msid == 0x181 || msid == 0x182) {
         return true;
+    }
 
     return false;
 }
@@ -225,8 +231,9 @@ bool ftBossLib_8015C31C(void)
 bool ftBossLib_8015C358(void)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
-    if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3)
+    if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3) {
         return true;
+    }
 
     return false;
 }
@@ -234,8 +241,9 @@ bool ftBossLib_8015C358(void)
 bool ftBossLib_8015C3A0(void)
 {
     HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
-    if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3)
+    if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3) {
         return true;
+    }
 
     return false;
 }
@@ -251,8 +259,9 @@ HSD_GObj* ftBossLib_8015C3E8(FighterKind kind)
 #endif
 
     for (cur = lbl_804D782C->x20_fighters; cur; cur = cur->next) {
-        if (kind == ftLib_800872A4(cur))
+        if (kind == ftLib_800872A4(cur)) {
             return cur;
+        }
     }
 
     return NULL;
@@ -284,8 +293,9 @@ s32 ftBossLib_8015C4C4(void)
     u8 _[24];
 #endif
 
-    if (gobj)
+    if (gobj) {
         return GET_FIGHTER(gobj)->fv.mh.x2250;
+    }
 
     return 0;
 }
@@ -349,19 +359,22 @@ ftMasterHand_SpecialAttrs* ftBossLib_8015C6BC(void)
 
     {
         HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
-        if (gobj == NULL)
+        if (gobj == NULL) {
             return NULL;
+        }
 
         {
             /// @todo Can be #GET_FIGHTER when inlines are fixed.
             Fighter* fp = gobj->user_data;
-            if (fp == NULL)
+            if (fp == NULL) {
                 return NULL;
+            }
 
             {
                 ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-                if (attr == NULL)
+                if (attr == NULL) {
                     return NULL;
+                }
 
                 return attr;
             }
@@ -377,8 +390,9 @@ s32 ftBossLib_8015C74C(void)
 #endif
 
     ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    if (attr == NULL)
+    if (attr == NULL) {
         return -1;
+    }
 
     return attr->x164;
 }
@@ -391,8 +405,9 @@ s32 ftBossLib_8015C7EC(void)
 #endif
 
     ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    if (attr == NULL)
+    if (attr == NULL) {
         return -1;
+    }
 
     return attr->x168;
 }
@@ -405,8 +420,9 @@ s32 ftBossLib_8015C88C(void)
 #endif
 
     ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    if (attr == NULL)
+    if (attr == NULL) {
         return -1;
+    }
 
     return attr->x16C;
 }
@@ -419,8 +435,9 @@ s32 ftBossLib_8015C92C(void)
 #endif
 
     ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    if (attr == NULL)
+    if (attr == NULL) {
         return -1;
+    }
 
     return attr->x170;
 }
@@ -433,8 +450,9 @@ s32 ftBossLib_8015C9CC(void)
 #endif
 
     ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
-    if (attr == NULL)
+    if (attr == NULL) {
         return -1;
+    }
 
     return attr->x174;
 }
@@ -442,8 +460,9 @@ s32 ftBossLib_8015C9CC(void)
 void func_8015CA6C_inline(s32 arg0)
 {
     HSD_GObj* ch_gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
-    if (ch_gobj)
+    if (ch_gobj) {
         ftLib_80086A4C(ch_gobj, arg0);
+    }
 }
 
 void ftBossLib_8015CA6C(s32 arg0)
@@ -457,8 +476,9 @@ void ftBossLib_8015CA6C(s32 arg0)
 
     {
         HSD_GObj* mh_gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
-        if (mh_gobj)
+        if (mh_gobj) {
             ftLib_80086A4C(mh_gobj, arg0);
+        }
     }
 
     func_8015CA6C_inline(arg0);

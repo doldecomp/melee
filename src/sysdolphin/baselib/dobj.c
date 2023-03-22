@@ -42,16 +42,18 @@ void HSD_DObjClearFlags(HSD_DObj* dobj, u32 flags)
 
 void HSD_DObjModifyFlags(HSD_DObj* dobj, u32 flags, u32 mask)
 {
-    if (dobj == NULL)
+    if (dobj == NULL) {
         return;
+    }
 
     dobj->flags = (dobj->flags & ~mask) | (flags & mask);
 }
 
 void HSD_DObjRemoveAnimByFlags(HSD_DObj* dobj, u32 flags)
 {
-    if (dobj == NULL)
+    if (dobj == NULL) {
         return;
+    }
 
     if ((flags & 2) != 0) {
         HSD_AObjRemove(dobj->aobj);
@@ -65,8 +67,9 @@ void HSD_DObjRemoveAnimAllByFlags(HSD_DObj* dobj, u32 flags)
 {
     HSD_DObj* dp;
 
-    if (dobj == NULL)
+    if (dobj == NULL) {
         return;
+    }
 
     for (dp = dobj; dp != NULL; dp = dp->next) {
         HSD_DObjRemoveAnimByFlags(dp, flags);
@@ -78,8 +81,9 @@ void HSD_DObjAddAnim(HSD_DObj* dobj, HSD_MatAnim* mat_anim,
 {
     HSD_ShapeAnim* shapeanim;
 
-    if (dobj == NULL)
+    if (dobj == NULL) {
         return;
+    }
 
     if (sh_anim != NULL) {
         shapeanim = sh_anim->shapeanim;
@@ -98,8 +102,9 @@ void HSD_DObjAddAnimAll(HSD_DObj* dobj, HSD_MatAnim* matanim,
     HSD_MatAnim* ma;
     HSD_ShapeAnimDObj* sd;
 
-    if (dobj == NULL)
+    if (dobj == NULL) {
         return;
+    }
 
     for (dp = dobj, ma = matanim, sd = shapeanimdobj; dp != NULL;
          dp = dp->next, ma = next_p(ma), sd = next_p(sd))
@@ -110,8 +115,9 @@ void HSD_DObjAddAnimAll(HSD_DObj* dobj, HSD_MatAnim* matanim,
 
 void HSD_DObjReqAnimByFlags(HSD_DObj* dobj, f32 startframe, u32 flags)
 {
-    if (dobj == NULL)
+    if (dobj == NULL) {
         return;
+    }
 
     HSD_PObjReqAnimAllByFlags(dobj->pobj, startframe, flags);
     HSD_MObjReqAnimByFlags(dobj->mobj, startframe, flags);
@@ -121,8 +127,9 @@ void HSD_DObjReqAnimAllByFlags(HSD_DObj* dobj, f32 startframe, u32 flags)
 {
     HSD_DObj* dp;
 
-    if (dobj == NULL)
+    if (dobj == NULL) {
         return;
+    }
 
     for (dp = dobj; dp != NULL; dp = dp->next) {
         HSD_DObjReqAnimByFlags(dp, startframe, flags);
@@ -133,8 +140,9 @@ void HSD_DObjReqAnimAll(HSD_DObj* dobj, f32 startframe)
 {
     HSD_DObj* dp;
 
-    if (dobj == NULL)
+    if (dobj == NULL) {
         return;
+    }
 
     for (dp = dobj; dp != NULL; dp = dp->next) {
         HSD_DObjReqAnimByFlags(dp, startframe, 0x7FF);
@@ -143,8 +151,9 @@ void HSD_DObjReqAnimAll(HSD_DObj* dobj, f32 startframe)
 
 void HSD_DObjAnim(HSD_DObj* dobj)
 {
-    if (dobj == NULL)
+    if (dobj == NULL) {
         return;
+    }
 
     HSD_PObjAnimAll(dobj->pobj);
     HSD_MObjAnim(dobj->mobj);
@@ -154,8 +163,9 @@ void HSD_DObjAnimAll(HSD_DObj* dobj)
 {
     HSD_DObj* dp;
 
-    if (dobj == NULL)
+    if (dobj == NULL) {
         return;
+    }
 
     for (dp = dobj; dp != NULL; dp = dp->next) {
         HSD_DObjAnim(dp);
@@ -195,8 +205,9 @@ HSD_DObj* HSD_DObjLoadDesc(HSD_DObjDesc* desc)
     HSD_DObj* dobj;
     HSD_ClassInfo* info;
 
-    if (desc == NULL)
+    if (desc == NULL) {
         return NULL;
+    }
 
     if (desc->class_name == NULL ||
         (info = hsdSearchClassInfo(desc->class_name)) == NULL)
@@ -215,8 +226,9 @@ HSD_DObj* HSD_DObjLoadDesc(HSD_DObjDesc* desc)
 
 inline void hsdDelete(void* object)
 {
-    if (object == NULL)
+    if (object == NULL) {
         return;
+    }
 
     HSD_CLASS_METHOD(object)->release((HSD_Class*) object);
     HSD_CLASS_METHOD(object)->destroy((HSD_Class*) object);
@@ -262,8 +274,9 @@ HSD_DObj* HSD_DObjAlloc(void)
 
 void HSD_DObjResolveRefs(HSD_DObj* dobj, HSD_DObjDesc* desc)
 {
-    if (dobj == NULL || desc == NULL)
+    if (dobj == NULL || desc == NULL) {
         return;
+    }
     HSD_PObjResolveRefsAll(dobj->pobj, desc->pobjdesc);
 }
 

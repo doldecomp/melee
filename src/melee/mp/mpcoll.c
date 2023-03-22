@@ -668,8 +668,9 @@ void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
         thing = 0;
         func_800581BC(temp_r29, &callback, &thing);
 
-        if (callback != NULL)
+        if (callback != NULL) {
             callback(thing, temp_r29, arg0, arg0->x50, 0, arg8);
+        }
     }
 }
 void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
@@ -771,10 +772,11 @@ void func_80043558(CollData* arg0, s32 arg1)
 {
     enum_t temp_r3 = func_80054C6C(arg1);
 
-    if (temp_r3 == 1)
+    if (temp_r3 == 1) {
         func_80043268(arg0, arg1, 0, 0.0f);
-    else if (temp_r3 == 2)
+    } else if (temp_r3 == 2) {
         func_80043324_inline2(arg0, arg1, 0, 0.0f);
+    }
 }
 
 #endif
@@ -862,8 +864,9 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
     dist_left_x = fabs_inline(dist_left_x);
 
     dist_right_x = arg1->x84_ecb.right.x - arg1->xA4_ecbCurrCorrect.right.x;
-    if (dist_right_x < 0)
+    if (dist_right_x < 0) {
         dist_right_x = -dist_right_x;
+    }
 
     if (dist_left_x < dist_right_x) {
         dist_left_x = dist_right_x;
@@ -874,8 +877,9 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
     dist_top_y = fabs_inline(dist_top_y);
 
     dist_right_y = arg1->x84_ecb.right.y - arg1->xA4_ecbCurrCorrect.right.y;
-    if (dist_right_y < 0)
+    if (dist_right_y < 0) {
         dist_right_y = -dist_right_y;
+    }
 
     if (dist_top_y < dist_right_y) {
         dist_top_y = dist_right_y;

@@ -51,8 +51,9 @@ bool ftWalkCommon_800DFC70(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->input.x620_lstick_x * fp->facing_dir >= p_ftCommonData->x24)
+    if (fp->input.x620_lstick_x * fp->facing_dir >= p_ftCommonData->x24) {
         return true;
+    }
 
     return false;
 }
@@ -196,8 +197,9 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
             if (stick_mul) {
                 float gr_vel = fp->gr_vel / stick_mul;
 
-                if (gr_vel > 0 && gr_vel < 1)
+                if (gr_vel > 0 && gr_vel < 1) {
                     walk_vel *= (1 - gr_vel) * p_ftCommonData->x30;
+                }
             }
 
             fp->mv.co.walk.x0 = stick_mul * p_ftCommonData->x440;

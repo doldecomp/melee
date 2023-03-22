@@ -70,8 +70,9 @@ void ftGameWatch_ItemPanicEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.gw.x2268_panicGObj != NULL)
+    if (fp->fv.gw.x2268_panicGObj != NULL) {
         func_802C7EE0(fp->fv.gw.x2268_panicGObj);
+    }
 }
 
 /// Remove hitlag for Oil Panic item
@@ -79,8 +80,9 @@ void ftGameWatch_ItemPanicExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.gw.x2268_panicGObj != NULL)
+    if (fp->fv.gw.x2268_panicGObj != NULL) {
         func_802C7F00(fp->fv.gw.x2268_panicGObj);
+    }
 }
 
 /// Check if Mr. Game & Watch is in any of his Oil Panic Motion States
@@ -190,8 +192,9 @@ static inline void ftGameWatch_SpecialLw_UpdateVars(HSD_GObj* gobj)
         fp->x2218_flag.bits.b6 = false;
     }
 
-    if (fp->x2200_ftcmd_var0 != 0)
+    if (fp->x2200_ftcmd_var0 != 0) {
         ftGameWatch_SpecialLw_UpdateBucketModel(gobj);
+    }
 }
 
 static int const anim_update_frame = 38;
@@ -216,8 +219,9 @@ void ftGameWatch_SpecialLw_Anim(HSD_GObj* gobj)
 
     ftGameWatch_SpecialLw_UpdateVars(gobj);
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Loop Animation callback
@@ -238,8 +242,9 @@ void ftGameWatch_SpecialAirLw_Anim(HSD_GObj* gobj)
 
     ftGameWatch_SpecialLw_UpdateVars(gobj);
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 /// Mr. Game & Watch's grounded Oil Panic Loop IASA callback
@@ -263,8 +268,9 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* gobj)
         } else {
             f32 stick_range = fp->input.x620_lstick_x;
 
-            if (stick_range < 0)
+            if (stick_range < 0) {
                 stick_range = -stick_range;
+            }
 
             if (stick_range > p_ftCommonData->x0) {
                 f32 facing_dir = fp->facing_dir;
@@ -279,8 +285,9 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
         fp->mv.gw.SpecialLw.isRelease = true;
+    }
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Loop IASA callback
@@ -298,8 +305,9 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* gobj)
         } else {
             f32 stick_range = fp->input.x620_lstick_x;
 
-            if (stick_range < 0)
+            if (stick_range < 0) {
                 stick_range = -stick_range;
+            }
 
             if (stick_range > p_ftCommonData->x0) {
                 f32 facingDir = fp->facing_dir;
@@ -313,8 +321,9 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* gobj)
         }
     }
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
         fp->mv.gw.SpecialLw.isRelease = true;
+    }
 }
 
 /// Mr. Game & Watch's grounded Oil Panic Loop Physics callback
@@ -345,15 +354,17 @@ void ftGameWatch_SpecialAirLw_Phys(HSD_GObj* gobj)
 /// Mr. Game & Watch's grounded Oil Panic Loop Collision callback
 void ftGameWatch_SpecialLw_Coll(HSD_GObj* gobj)
 {
-    if (ft_800827A0(gobj) == false)
+    if (ft_800827A0(gobj) == false) {
         ftGameWatch_SpecialLw_GroundToAir(gobj);
+    }
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Loop Collision callback
 void ftGameWatch_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(gobj) != false)
+    if (ft_80081D0C(gobj) != false) {
         ftGameWatch_SpecialAirLw_AirToGround(gobj);
+    }
 }
 
 static inline void ftGameWatch_SpecialLw_UpdateVarsColl(HSD_GObj* gobj)
@@ -368,8 +379,9 @@ static inline void ftGameWatch_SpecialLw_UpdateVarsColl(HSD_GObj* gobj)
         fp->x2218_flag.bits.b6 = false;
     }
 
-    if (fp->x2200_ftcmd_var0 != 0)
+    if (fp->x2200_ftcmd_var0 != 0) {
         ftGameWatch_SpecialLw_UpdateBucketModel(gobj);
+    }
 }
 
 static Fighter_MotionStateChangeFlags const transition_flags0 =
@@ -424,8 +436,9 @@ static inline void ftGameWatch_SpecialLw_UpdateVarsAction(HSD_GObj* gobj)
         ftColl_CreateAbsorbHit(gobj, &sa->x80_GAMEWATCH_PANIC_ABSORPTION);
     }
 
-    if (fp->x2200_ftcmd_var0 != 0)
+    if (fp->x2200_ftcmd_var0 != 0) {
         ftGameWatch_SpecialLw_UpdateBucketModel(gobj);
+    }
 }
 
 /// @todo Combine common flags with #transition_flags0.
@@ -459,8 +472,9 @@ void ftGameWatch_SpecialLwCatch_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ftAnim_IsFramesRemaining(gobj))
+    if (ftAnim_IsFramesRemaining(gobj)) {
         return;
+    }
 
     if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
         ft_8008A2BC(gobj);
@@ -479,8 +493,9 @@ void ftGameWatch_SpecialAirLwCatch_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ftAnim_IsFramesRemaining(gobj))
+    if (ftAnim_IsFramesRemaining(gobj)) {
         return;
+    }
 
     if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
         ft_800CC730(gobj);
@@ -515,15 +530,17 @@ void ftGameWatch_SpecialAirLwCatch_Phys(HSD_GObj* gobj)
 /// Mr. Game & Watch's grounded Oil Panic Fill Collision callback
 void ftGameWatch_SpecialLwCatch_Coll(HSD_GObj* gobj)
 {
-    if (!ft_80082708(gobj))
+    if (!ft_80082708(gobj)) {
         ftGameWatch_SpecialLwCatch_GroundToAir(gobj);
+    }
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Fill Collision callback
 void ftGameWatch_SpecialAirLwCatch_Coll(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(gobj))
+    if (ft_80081D0C(gobj)) {
         ftGameWatch_SpecialAirLwCatch_AirToGround(gobj);
+    }
 }
 
 /// Mr. Game & Watch's ground -> air Oil Panic Fill Motion State handler
@@ -558,13 +575,15 @@ void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* gobj)
     fp->fv.gw.x2238_panicCharge += fp->AbsorbAttr.x1A48_hitsTaken;
     fp->fv.gw.x223C_panicDamage += fp->AbsorbAttr.x1A44_damageTaken;
 
-    if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full)
+    if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
         ft_800BFFD0(fp, 5, 0);
+    }
 
-    if (fp->ground_or_air == GA_Ground)
+    if (fp->ground_or_air == GA_Ground) {
         msid = ftGw_MS_SpecialLw_Catch;
-    else
+    } else {
         msid = ftGw_MS_SpecialAirLw_Catch;
+    }
 
     Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0, 1, 0);
     ftGameWatch_SpecialLw_UpdateBucketModel(gobj);
@@ -575,9 +594,11 @@ static inline void ftGameWatch_SpecialLwShoot_ApplyDamage(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     int i;
-    for (i = 0; i < 4; i++)
-        if (fp->x914[i].state == HitCapsule_Enabled)
+    for (i = 0; i < 4; i++) {
+        if (fp->x914[i].state == HitCapsule_Enabled) {
             ftColl_8007ABD0(&fp->x914[i], fp->x2204_ftcmd_var1, gobj);
+        }
+    }
 }
 
 /// Mr. Game & Watch's grounded Oil Panic Release Animation callback
@@ -591,8 +612,9 @@ void ftGameWatch_SpecialLwShoot_Anim(HSD_GObj* gobj)
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirLwShoot_Anim.
     ftGameWatch_SpecialLwShoot_ApplyDamage(gobj);
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Release Animation callback
@@ -605,8 +627,9 @@ void ftGameWatch_SpecialAirLwShoot_Anim(HSD_GObj* gobj)
 
     ftGameWatch_SpecialLwShoot_ApplyDamage(gobj);
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 /// Mr. Game & Watch's grounded Oil Panic Release IASA callback
@@ -630,15 +653,17 @@ void ftGameWatch_SpecialAirLwShoot_Phys(HSD_GObj* gobj)
 /// Mr. Game & Watch's grounded Oil Panic Release Collision callback
 void ftGameWatch_SpecialLwShoot_Coll(HSD_GObj* gobj)
 {
-    if (!ft_80082708(gobj))
+    if (!ft_80082708(gobj)) {
         ftGameWatch_SpecialLwShoot_GroundToAir(gobj);
+    }
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Release Collision callback
 void ftGameWatch_SpecialAirLwShoot_Coll(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(gobj))
+    if (ft_80081D0C(gobj)) {
         ftGameWatch_SpecialAirLwShoot_AirToGround(gobj);
+    }
 }
 
 /// Mr. Game & Watch's ground -> air Oil Panic Release Motion State handler

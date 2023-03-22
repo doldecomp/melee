@@ -134,8 +134,9 @@ static inline void checkFighter2244(HSD_GObj* gobj)
 {
     Fighter* fp;
 
-    if (gobj == NULL)
+    if (gobj == NULL) {
         return;
+    }
 
     fp = gobj->user_data;
     if (fp != NULL && fp->fv.cl.x2244 != 0) {
@@ -143,8 +144,9 @@ static inline void checkFighter2244(HSD_GObj* gobj)
         fp->fv.cl.x2244 = 0;
     }
 
-    if (gobj == NULL)
+    if (gobj == NULL) {
         gobj == NULL;
+    }
 }
 
 #endif

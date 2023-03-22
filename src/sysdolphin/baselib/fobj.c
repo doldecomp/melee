@@ -17,38 +17,43 @@ void HSD_FObjInitAllocData(void)
 
 void HSD_FObjRemove(HSD_FObj* fobj)
 {
-    if (!fobj)
+    if (!fobj) {
         return;
+    }
 
     HSD_FObjFree(fobj);
 }
 
 void HSD_FObjRemoveAll(HSD_FObj* fobj)
 {
-    if (fobj == NULL)
+    if (fobj == NULL) {
         return;
+    }
     HSD_FObjRemoveAll(fobj->next);
     HSD_FObjRemove(fobj);
 }
 
 u8 HSD_FObjSetState(HSD_FObj* fobj, u8 state)
 {
-    if (fobj)
+    if (fobj) {
         fobj->flags = (state & 0xF) | (fobj->flags & 0xF0);
+    }
     return state;
 }
 
 u32 HSD_FObjGetState(HSD_FObj* fobj)
 {
-    if (!fobj)
+    if (!fobj) {
         return 0;
+    }
     return fobj->flags & 0xF;
 }
 
 inline void HSD_FObjReqAnim(HSD_FObj* fobj, f32 startframe)
 {
-    if (fobj == NULL)
+    if (fobj == NULL) {
         return;
+    }
 
     fobj->ad = fobj->ad_head;
     fobj->time = (f32) fobj->startframe + startframe;
@@ -68,8 +73,9 @@ void HSD_FObjReqAnimAll(HSD_FObj* fobj, f32 startframe)
 {
     HSD_FObj* fp;
 
-    if (fobj == NULL)
+    if (fobj == NULL) {
         return;
+    }
 
     for (fp = fobj; fp != NULL; fp = fp->next) {
         HSD_FObjReqAnim(fp, startframe);
@@ -87,8 +93,9 @@ inline void FObj_FlushKeyData(HSD_FObj* fobj, void* obj,
 void HSD_FObjStopAnim(HSD_FObj* fobj, void* obj, HSD_ObjUpdateFunc obj_update,
                       f32 rate)
 {
-    if (fobj == NULL)
+    if (fobj == NULL) {
         return;
+    }
 
     FObj_FlushKeyData(fobj, obj, obj_update, rate);
     HSD_FObjSetState(fobj, 0);

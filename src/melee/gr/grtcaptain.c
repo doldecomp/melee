@@ -73,14 +73,17 @@ static HSD_GObj* func_8021FD04(int gobj_id)
         gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
 
-        if (callbacks->callback3 != NULL)
+        if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
+        }
 
-        if (callbacks->callback0 != NULL)
+        if (callbacks->callback0 != NULL) {
             callbacks->callback0(gobj);
+        }
 
-        if (callbacks->callback2 != NULL)
+        if (callbacks->callback2 != NULL) {
             func_8038FD54(gobj, callbacks->callback2, 4);
+        }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtcaptain.c", 215,
                  gobj_id);

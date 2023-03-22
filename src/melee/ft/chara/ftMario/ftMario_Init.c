@@ -128,10 +128,12 @@ void ftMario_OnKnockbackExit(HSD_GObj* gobj)
 void ftMario_800E0CAC(s32 arg0, s32* arg1, s32* arg2)
 {
     if (arg0 != 10) {
-        if (arg0 >= 10)
+        if (arg0 >= 10) {
             return;
-        if (arg0 < 9)
+        }
+        if (arg0 < 9) {
             return;
+        }
         *arg2 = 14;
         *arg1 = 14;
     } else {

@@ -183,16 +183,20 @@ bool Player_800319C4(int slot, bool arg1)
     player = (&player_slots[slot]);
 
     if (arg1) {
-        for (i = 0; i < 2; i++)
-            if (!player->player_entity[player->transformed[i]])
+        for (i = 0; i < 2; i++) {
+            if (!player->player_entity[player->transformed[i]]) {
                 return false;
+            }
+        }
 
         return true;
     }
 
-    for (i = 0; i < 2; i++)
-        if (player->player_entity[player->transformed[i]])
+    for (i = 0; i < 2; i++) {
+        if (player->player_entity[player->transformed[i]]) {
             return false;
+        }
+    }
 
     return true;
 }
@@ -225,8 +229,9 @@ void Player_80031AD0(int slot)
     // temp_vec = unused_ptr = ftMapping_list;
     offset_arr = (s8*) (&ftMapping_list[0].extra_internal_id);
 
-    if (offset_arr[player->player_character * sizeof(ftMapping)] != -1)
+    if (offset_arr[player->player_character * sizeof(ftMapping)] != -1) {
         player->flags.b2 = true;
+    }
 
     internal_id = ftMapping_list[player->player_character].internal_id;
     Player_CheckSlot(slot);
@@ -260,31 +265,38 @@ void Player_80031AD0(int slot)
         player->player_entity[1] =
             Fighter_Create((struct S_TEMP1*) &second_struct);
 
-        if (player->player_state != 1)
+        if (player->player_state != 1) {
             player->player_state = 2;
+        }
     }
 
-    if (player->player_state == 2)
-        if (player->struct_func != NULL)
+    if (player->player_state == 2) {
+        if (player->struct_func != NULL) {
             player->struct_func(slot);
+        }
+    }
 }
 
 void Player_80031CB0(enum_t id, int slot)
 {
-    if (ftMapping_list[id].internal_id != -1)
+    if (ftMapping_list[id].internal_id != -1) {
         ftData_800855C8(ftMapping_list[id].internal_id, slot);
+    }
 
-    if (hasExtraFighterId(&ftMapping_list[id]))
+    if (hasExtraFighterId(&ftMapping_list[id])) {
         ftData_800855C8(ftMapping_list[id].extra_internal_id, slot);
+    }
 }
 
 void Player_80031D2C(enum_t id, int slot)
 {
-    if (ftMapping_list[id].internal_id != -1)
+    if (ftMapping_list[id].internal_id != -1) {
         ftData_8008578C(ftMapping_list[id].internal_id, slot);
+    }
 
-    if (hasExtraFighterId(&ftMapping_list[id]))
+    if (hasExtraFighterId(&ftMapping_list[id])) {
         ftData_8008578C(ftMapping_list[id].extra_internal_id, slot);
+    }
 }
 
 void Player_80031DA8(s32 param_1, s32 param_2)
@@ -343,8 +355,9 @@ void Player_80031FB0(int slot, s32 entity_index)
     player = &player_slots[slot];
     player->player_entity[player->transformed[entity_index]] = NULL;
 
-    if (player->flags.b2 == false || Player_800319C4(slot, 0))
+    if (player->flags.b2 == false || Player_800319C4(slot, 0)) {
         player->player_state = 0;
+    }
 }
 
 /// new match decomp.me/scratch/oHfiV  TODO
@@ -371,8 +384,9 @@ void Player_80032070(int slot, bool bool_arg)
         return;
     }
 
-    if (ftLib_800873CC(player->player_entity[player->transformed[0]]))
+    if (ftLib_800873CC(player->player_entity[player->transformed[0]])) {
         ft_800D4FF4(player->player_entity[player->transformed[1]]);
+    }
 }
 
 void Player_8003219C(int slot)
@@ -391,8 +405,9 @@ bool Player_8003221C(int slot)
         Player_CheckSlot(slot);
         player = &player_slots[slot];
 
-        if (!ftLib_8008701C(player->player_entity[player->transformed[0]]))
+        if (!ftLib_8008701C(player->player_entity[player->transformed[0]])) {
             return true;
+        }
     }
 
     return false;
@@ -576,9 +591,11 @@ void Player_800328D4(int slot, Vec3* arg_vec)
     dst_vec2 = &player_vecs2[player->transformed[1]];
     *dst_vec2 = *arg_vec;
 
-    for (i = 0; i < 2; i++)
-        if (player->player_entity[player->transformed[i]])
+    for (i = 0; i < 2; i++) {
+        if (player->player_entity[player->transformed[i]]) {
             ftLib_80087140(player->player_entity[player->transformed[i]]);
+        }
+    }
 }
 
 void Player_80032A04(int slot, Vec3* arg_vec)
@@ -611,9 +628,10 @@ void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 facing_dir)
     for (i = 0; i < 2; i++) {
         player->facing_direction = facing_dir;
 
-        if (player->player_entity[player->transformed[i]])
+        if (player->player_entity[player->transformed[i]]) {
             ft_SetFacingDirection(
                 player->player_entity[player->transformed[i]], facing_dir);
+        }
     }
 }
 
@@ -973,8 +991,9 @@ void Player_LoseStock(int slot)
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    if (player->stocks > 0)
+    if (player->stocks > 0) {
         player->stocks = player->stocks - 1;
+    }
 }
 
 int Player_GetCoins(int slot)
@@ -1367,8 +1386,9 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
     if (!bool_arg) {
         uint kos = player->kos_by_player[other_slot];
 
-        if (kos < U32_MAX)
+        if (kos < U32_MAX) {
             player->kos_by_player[other_slot]++;
+        }
 
         if (slot == other_slot) {
             func_802F6D10(other_slot);
@@ -1416,8 +1436,9 @@ void Player_UpdateMatchFrameCount(int slot, bool condition)
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    if ((condition == 0) && (player->match_frame_count + 0x10000) == 0xffff)
+    if ((condition == 0) && (player->match_frame_count + 0x10000) == 0xffff) {
         player->match_frame_count = gm_8016AEDC();
+    }
 }
 
 uint Player_GetSuicideCount(int slot)
@@ -1434,8 +1455,9 @@ void Player_SetSuicideCount(s32 slot, u32 suicide_count)
 {
     StaticPlayer* player;
 
-    if (suicide_count > 0xffff || 0 > (s32) suicide_count)
+    if (suicide_count > 0xffff || 0 > (s32) suicide_count) {
         return;
+    }
 
     Player_CheckSlot(slot);
     player = &player_slots[slot];
@@ -1486,8 +1508,9 @@ bool Player_8003544C(s32 slot, bool condition)
         Player_CheckSlot(slot);
         player = &player_slots[slot];
 
-        if (player->player_state == 2 && player->flags.b0)
+        if (player->player_state == 2 && player->flags.b0) {
             return true;
+        }
     }
 
     return false;
@@ -2105,9 +2128,10 @@ s32 Player_80036EA0(s32 slot)
 
     entity = player->player_entity[player->transformed[0]];
 
-    if (entity)
+    if (entity) {
         /// @todo Eliminate cast.
         return (s32) ftLib_800865F0(entity);
+    }
 
     return 0;
 }

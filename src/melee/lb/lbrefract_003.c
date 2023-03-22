@@ -38,17 +38,20 @@ extern f32 lbl_80400770[], lbl_80400774[];
 f32 atan2f(f32 y, f32 x)
 {
     if (GET_SIGN_BIT(x) == GET_SIGN_BIT(y)) {
-        if (GET_SIGN_BIT(x) != 0)
+        if (GET_SIGN_BIT(x) != 0) {
             return NEGATIVE_ZERO == x ? NEGATIVE_PI_2 : atanf(y / x) - PI;
+        }
 
         return x != ZERO ? atanf(y / x) : PI_2;
     }
 
-    if (x < ZERO)
+    if (x < ZERO) {
         return PI + atanf(y / x);
+    }
 
-    if (x != ZERO)
+    if (x != ZERO) {
         return atanf(y / x);
+    }
 
     *(u32*) &y = GET_SIGN_BIT(y) + BITWISE_PI_2;
 
@@ -140,8 +143,9 @@ static inline f32 local_80022DF8(f32 x)
         return guess;
     }
 
-    if (x != ZERO)
+    if (x != ZERO) {
         return NAN;
+    }
 
     return INF;
 }
@@ -225,21 +229,25 @@ f32 atanf(f32 x)
         lookup_index = 0;
         switch (BITWISE(x) & BITWISE_INF) {
         case BITWISE_0_5: {
-            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_0))
+            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_0)) {
                 lookup_index = 1;
+            }
 
-            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_1))
+            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_1)) {
                 lookup_index += 1;
+            }
 
             break;
         }
         case BITWISE_1_0: {
             lookup_index = 2;
-            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_2))
+            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_2)) {
                 lookup_index = 3;
+            }
 
-            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_3))
+            if (!(SIGNED_BITWISE(x) < BITWISE_THRESHOLD_3)) {
                 lookup_index += 1;
+            }
 
             break;
         }

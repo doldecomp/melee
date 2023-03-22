@@ -41,8 +41,9 @@ float lbVector_Normalize(Vec3* vec)
     float len = lbVector_Len(vec);
     float inv;
 
-    if (len == 0.0f)
+    if (len == 0.0f) {
         return 0.0f;
+    }
     inv = 1.0f / len;
     vec->x *= inv;
     vec->y *= inv;
@@ -55,8 +56,9 @@ float lbVector_NormalizeXY(Vec3* a)
     float len = sqrtf_accurate(a->x * a->x + a->y * a->y);
     float inv;
 
-    if (len == 0.0f)
+    if (len == 0.0f) {
         return 0.0f;
+    }
     inv = 1.0f / len;
     a->x *= inv;
     a->y *= inv;
@@ -108,10 +110,12 @@ float lbVector_Angle(Vec3* a, Vec3* b)
 
     if (lena_lenb > 0.0000000001f) {
         float cosine = (a->x * b->x + a->y * b->y + a->z * b->z) / lena_lenb;
-        if (cosine > 1.0f)
+        if (cosine > 1.0f) {
             cosine = 1.0f;
-        if (cosine < -1.0f)
+        }
+        if (cosine < -1.0f) {
             cosine = -1.0f;
+        }
 
         return acosf(cosine); // acos
     }
@@ -125,10 +129,12 @@ float lbVector_AngleXY(Vec3* a, Vec3* b)
 
     if (lena_lenb) {
         float cosine = (a->x * b->x + a->y * b->y) / lena_lenb;
-        if (cosine > 1.0f)
+        if (cosine > 1.0f) {
             cosine = 1.0f;
-        if (cosine < -1.0f)
+        }
+        if (cosine < -1.0f) {
             cosine = -1.0f;
+        }
         return acosf(cosine); // acos
     }
     return 0.0f;
@@ -141,10 +147,11 @@ float lbVector_AngleXY(Vec3* a, Vec3* b)
 
 static float sin(float angle)
 {
-    if (angle > M_PI)
+    if (angle > M_PI) {
         angle -= 2 * M_PI;
-    else if (angle < -M_PI)
+    } else if (angle < -M_PI) {
         angle += 2 * M_PI;
+    }
     return 0.9878619909286499f * angle -
            0.15527099370956421f * angle * angle * angle +
            0.0056429998949170113f * angle * angle * angle * angle * angle;
@@ -153,10 +160,11 @@ static float sin(float angle)
 static float cos(float angle)
 {
     angle += M_PI / 2;
-    if (angle > M_PI)
+    if (angle > M_PI) {
         angle -= 2 * M_PI;
-    else if (angle < -M_PI)
+    } else if (angle < -M_PI) {
         angle += 2 * M_PI;
+    }
     return 0.9878619909286499f * angle -
            0.15527099370956421f * angle * angle * angle +
            0.0056429998949170113f * angle * angle * angle * angle * angle;
@@ -299,10 +307,11 @@ Vec3* lbVector_8000DE38(Mtx m, Vec3* v, float c)
     float var1;
     float var2;
 
-    if (c > 1.0f)
+    if (c > 1.0f) {
         c = 1.0f;
-    else if (c < 0.0f)
+    } else if (c < 0.0f) {
         c = 0.0f;
+    }
 
     var1 = m[0][0] * 2.0f - m[0][3] * 4.0f + m[1][2] * 2.0f;
     var2 = m[0][0] * -3.0f + m[0][3] * 4.0f - m[1][2];
@@ -514,9 +523,11 @@ float lbVector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
     lbVector_Diff(c, a, &c_a);
     if (sqrlen_b_a < 9.9999997473787516e-06f &&
         sqrlen_b_a > -9.9999997473787516e-06f)
+    {
         tooSmall = 1;
-    else
+    } else {
         tooSmall = 0;
+    }
     if (tooSmall) {
         *d = *a;
         return lbVector_Len(&c_a);

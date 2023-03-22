@@ -109,8 +109,9 @@ static inline f32 stickGetDir(f32 x1, f32 x2)
 {
     if (x1 < x2) {
         return -x1;
-    } else
+    } else {
         return x1;
+    }
 }
 /// used for all fighters except Kirby and Purin
 static inline void Fighter_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag,

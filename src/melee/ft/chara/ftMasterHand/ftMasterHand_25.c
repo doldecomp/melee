@@ -18,10 +18,11 @@ void ftMasterHand_80154D78(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        if (fp->mv.mh.unk0.x20 == 1)
+        if (fp->mv.mh.unk0.x20 == 1) {
             ftMasterHand_80154A78(gobj);
-        else
+        } else {
             ftMasterHand_801546D8(gobj);
+        }
     }
 }
 
@@ -30,8 +31,9 @@ void ftMasterHand_80154D78(HSD_GObj* gobj)
 void ftMasterHand_80154DD0(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(arg0);
+    }
 }
 
 // 80154E14 1519F4

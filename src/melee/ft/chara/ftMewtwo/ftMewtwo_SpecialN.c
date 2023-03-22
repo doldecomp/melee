@@ -88,8 +88,9 @@ bool ftMewtwo_SpecialN_CheckShadowBallCancel(HSD_GObj* gobj)
         case MS_MEWTWO_SPECIALAIRN_CANCEL:
             return true;
         }
-    } else
+    } else {
         return true;
+    }
 }
 
 static inline void ftMewtwo_SpecialN_ClearGObj(HSD_GObj* gobj)
@@ -619,8 +620,9 @@ void ftMewtwo_SpecialNEnd_Anim(HSD_GObj* gobj)
 
     ftMewtwo_SpecialN_ReleaseShadowBall(gobj);
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 // 0x80147954

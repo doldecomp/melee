@@ -343,8 +343,9 @@ inline bool hsdChangeClass_inline(HSD_Obj* object, HSD_ClassInfo* class_info)
     if (!(var_r28->head.flags & 1)) {
         var_r28->head.info_init();
     }
-    if (var_r29->head.obj_size != var_r28->head.obj_size)
+    if (var_r29->head.obj_size != var_r28->head.obj_size) {
         return false;
+    }
     while (var_r29->head.parent != NULL &&
            var_r29->head.parent->head.obj_size == var_r29->head.obj_size)
     {

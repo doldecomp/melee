@@ -33,8 +33,9 @@ bool ftFox_SpecialS_CheckGhostRemove(HSD_GObj* gobj)
     /// @todo @c enum
     enum_t msid = GET_FIGHTER(gobj)->motion_id;
 
-    if (msid >= MS_FOX_SPECIALS_START && msid <= MS_FOX_SPECIALAIRS_END)
+    if (msid >= MS_FOX_SPECIALS_START && msid <= MS_FOX_SPECIALAIRS_END) {
         return false;
+    }
 
     return true;
 }
@@ -210,8 +211,9 @@ void ftFox_SpecialAirSStart_Coll(HSD_GObj* gobj)
         return;
     }
 
-    if (ftCliffCommon_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj)) {
         return;
+    }
 }
 
 // 0x800EA1D4
@@ -304,8 +306,9 @@ void ftFox_SpecialS_IASA(HSD_GObj* gobj)
         if ((s32) fp->ground_or_air == GA_Air) {
             ftFox_SpecialAirSEnd_Action(gobj);
             return;
-        } else
+        } else {
             ftFox_SpecialSEnd_Action(gobj);
+        }
     }
 }
 
@@ -320,8 +323,9 @@ void ftFox_SpecialAirS_IASA(HSD_GObj* gobj)
         if ((s32) fp->ground_or_air == GA_Air) {
             ftFox_SpecialAirSEnd_Action(gobj);
             return;
-        } else
+        } else {
             ftFox_SpecialSEnd_Action(gobj);
+        }
     }
 }
 
@@ -393,8 +397,9 @@ void ftFox_SpecialAirS_Coll(HSD_GObj* gobj)
         ftFox_SpecialAirS_AirToGround(gobj);
         return;
     }
-    if (ftCliffCommon_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj)) {
         return;
+    }
 }
 
 // 0x800EA698
@@ -484,8 +489,9 @@ void ftFox_SpecialAirS_Action(HSD_GObj* gobj)
 // End Animation callback
 void ftFox_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 // 0x800EA944
@@ -552,9 +558,10 @@ void ftFox_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
-    } else
+    } else {
         ftCommon_8007D494(fp, foxAttrs->x48_FOX_ILLUSION_TERMINAL_VELOCITY,
                           ftAttrs->x170_TerminalVelocity);
+    }
     ftCommon_8007CE94(fp, foxAttrs->x40_FOX_ILLUSION_AIR_MUL_X);
     ftFox_SpecialS_SetPhys(gobj);
 }
@@ -598,8 +605,9 @@ void ftFox_SpecialAirSEnd_Coll(HSD_GObj* gobj)
         ft_800D5CB0(gobj, 0, foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
         return;
     }
-    if (ftCliffCommon_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj)) {
         return;
+    }
 };
 
 inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* gobj)

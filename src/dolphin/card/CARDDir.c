@@ -57,8 +57,9 @@ static void EraseCallback(s32 chan, s32 result)
     uintptr_t addr;
 
     card = &__CARDBlock[chan];
-    if (result < 0)
+    if (result < 0) {
         goto error;
+    }
 
     dir = __CARDGetDirBlock(card);
     addr = ((uintptr_t) dir - (uintptr_t) card->workArea) / card_size *
@@ -68,8 +69,9 @@ static void EraseCallback(s32 chan, s32 result)
     result =
         __CARDWrite(chan, addr, card_size, dir, (CARDCallback) WriteCallback);
 
-    if (result < 0)
+    if (result < 0) {
         goto error;
+    }
 
     return;
 
@@ -97,8 +99,9 @@ s32 __CARDUpdateDir(s32 chan, CARDCallback callback)
     CARDDir* dir;
 
     card = &__CARDBlock[chan];
-    if (!card->attached)
+    if (!card->attached) {
         return CARD_RESULT_NOCARD;
+    }
 
     dir = __CARDGetDirBlock(card);
     check = __CARDGetDirCheck(dir);

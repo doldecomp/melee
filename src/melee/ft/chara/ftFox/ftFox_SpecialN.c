@@ -198,10 +198,11 @@ void ftFox_CreateBlasterShot(HSD_GObj* gobj)
         ftFox_FtGetHoldJoint(gobj, &sp2C);
         sp2C.z = 0.0f;
 
-        if (1.0f == fp->facing_dir)
+        if (1.0f == fp->facing_dir) {
             launchAngle = foxAttrs->x10_FOX_BLASTER_ANGLE;
-        else
+        } else {
             launchAngle = M_PI - foxAttrs->x10_FOX_BLASTER_ANGLE;
+        }
 
         func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, gobj, &sp2C,
                       foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
@@ -451,8 +452,9 @@ void ftFox_SpecialNEnd_Anim(HSD_GObj* gobj)
 
     func_802ADDD0(fp->fv.fx.x222C_blasterGObj, fp->x2204_ftcmd_var1);
 
-    if ((u32) fp->x2204_ftcmd_var1 == 2U)
+    if ((u32) fp->x2204_ftcmd_var1 == 2U) {
         ft_80094818(gobj, 0);
+    }
 
     if (((u32) fp->x220C_ftcmd_var3 == 2U) &&
         (fp->fv.fx.x222C_blasterGObj != NULL))

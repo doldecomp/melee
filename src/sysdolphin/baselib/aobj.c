@@ -65,11 +65,13 @@ void HSD_AObjClearFlags(HSD_AObj* aobj, u32 flags)
 
 void HSD_AObjSetFObj(HSD_AObj* aobj, HSD_FObj* fobj)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
-    if (aobj->fobj)
+    if (aobj->fobj) {
         HSD_FObjRemoveAll(aobj->fobj);
+    }
     aobj->fobj = fobj;
 }
 
@@ -97,8 +99,9 @@ void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
 {
     u32 flags;
 
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
     aobj->curr_frame = frame;
 
@@ -110,8 +113,9 @@ void HSD_AObjReqAnim(HSD_AObj* aobj, f32 frame)
 
 void HSD_AObjStopAnim(HSD_AObj* aobj, void* obj, HSD_ObjUpdateFunc func)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
     HSD_FObjStopAnimAll(aobj->fobj, obj, func, aobj->framerate);
     aobj->flags |= AOBJ_NO_ANIM;
@@ -122,8 +126,9 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
 {
     f32 rate = 0;
 
-    if (!aobj || aobj->flags & AOBJ_NO_ANIM)
+    if (!aobj || aobj->flags & AOBJ_NO_ANIM) {
         return;
+    }
 
     if (aobj->flags & AOBJ_FIRST_PLAY) {
         aobj->flags &= 0xF7FFFFFF;
@@ -174,8 +179,9 @@ void HSD_AObjInterpretAnim(HSD_AObj* aobj, void* obj,
 float fmod(float a, float b)
 {
     long long quotient;
-    if (__fabs(b) > __fabs(a))
+    if (__fabs(b) > __fabs(a)) {
         return a;
+    }
     quotient = a / b;
     return a - b * quotient;
 }
@@ -233,18 +239,21 @@ HSD_AObj* HSD_AObjLoadDesc(HSD_AObjDesc* aobjdesc)
 
 void HSD_AObjRemove(HSD_AObj* aobj)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
     if (aobj) {
-        if (aobj->fobj)
+        if (aobj->fobj) {
             HSD_FObjRemoveAll(aobj->fobj);
+        }
         aobj->fobj = NULL;
     }
 
     if (aobj) {
-        if (aobj->hsd_obj != NULL)
+        if (aobj->hsd_obj != NULL) {
             HSD_JObjUnref((HSD_JObj*) aobj->hsd_obj);
+        }
         aobj->hsd_obj = NULL;
     }
     HSD_AObjFree(aobj);
@@ -264,8 +273,9 @@ HSD_AObj* HSD_AObjAlloc(void)
 
 void HSD_AObjFree(HSD_AObj* aobj)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
     HSD_ObjFree(&aobj_alloc_data, (HSD_ObjAllocLink*) aobj);
 }
@@ -343,8 +353,9 @@ void RObjForeachAnim(HSD_RObj* robj, HSD_TypeMask mask, Event func,
 void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg)
 {
-    if (pobj == NULL)
+    if (pobj == NULL) {
         return;
+    }
 
     if ((pobj->flags & 0x3000) == 0x1000 && pobj->u.x14_unk != NULL &&
         pobj->u.x14_unk->aobj != NULL)
@@ -357,8 +368,9 @@ void PObjForeachAnim(HSD_PObj* pobj, HSD_TypeMask mask, Event func,
 void MObjForeachAnim(HSD_MObj* mobj, HSD_TypeMask mask, Event func,
                      AObj_Arg_Type arg_type, callbackArg* arg)
 {
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
 
     if (mask & MOBJ_MASK && mobj->aobj != NULL) {
         callbackForeachFunc(mobj->aobj, mobj, MOBJ_TYPE, func, arg_type, arg);
@@ -1154,29 +1166,33 @@ void HSD_ForeachAnim(void* obj, HSD_Type type, HSD_TypeMask mask, void* func,
 
 void HSD_AObjSetRate(HSD_AObj* aobj, f32 rate)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
     aobj->framerate = rate;
 }
 
 void HSD_AObjSetRewindFrame(HSD_AObj* aobj, f32 frame)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
     aobj->rewind_frame = frame;
 }
 
 void HSD_AObjSetEndFrame(HSD_AObj* aobj, f32 frame)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
     aobj->end_frame = frame;
 }
 
 void HSD_AObjSetCurrentFrame(HSD_AObj* aobj, f32 frame)
 {
-    if (!aobj)
+    if (!aobj) {
         return;
+    }
 
     if (!(aobj->flags & AOBJ_NO_ANIM) && aobj) {
         aobj->curr_frame = frame;

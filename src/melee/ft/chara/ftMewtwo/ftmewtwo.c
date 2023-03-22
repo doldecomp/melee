@@ -162,8 +162,9 @@ void ftMewTwo_80144F58(HSD_GObj* gobj)
     ftMewtwoAttributes* attr = fp->x2D4_specialAttributes;
     f32 attr_value = attr->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
-    if (fp->fv.mt.x2234_shadowBallCharge == attr_value)
+    if (fp->fv.mt.x2234_shadowBallCharge == attr_value) {
         ft_800BFFD0(fp, 0x5C, 0);
+    }
 }
 
 void ftMewTwo_LoadSpecialAttrs(HSD_GObj* gobj)

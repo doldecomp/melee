@@ -94,8 +94,9 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
         f32 rad = fp->input.x620_lstick_x > 0 ? -(DEG_TO_RAD * deg)
                                               : +(DEG_TO_RAD * deg);
 
-        if (abs(rad) > abs(fp->x6BC_inputStickangle))
+        if (abs(rad) > abs(fp->x6BC_inputStickangle)) {
             fp->x6BC_inputStickangle = rad;
+        }
     }
 
     if (fp->x2210_ThrowFlags.b3) {
@@ -131,10 +132,11 @@ void ftMario_SpecialAirHi_IASA(HSD_GObj* gobj)
 void ftMario_SpecialHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ground_or_air == GA_Air)
+    if (fp->ground_or_air == GA_Air) {
         ft_80085154(gobj);
-    else
+    } else {
         ft_80084FA8(gobj);
+    }
 }
 
 void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)

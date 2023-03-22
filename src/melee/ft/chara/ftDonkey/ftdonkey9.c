@@ -39,11 +39,13 @@ bool ftDonkey_800E0750(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (ft_8008E984(fp))
+    if (ft_8008E984(fp)) {
         return true;
+    }
 
-    if (ft_8008D8E8(ft_ScaleBy154(fp->dmg.x1850_forceApplied)) < 3)
+    if (ft_8008D8E8(ft_ScaleBy154(fp->dmg.x1850_forceApplied)) < 3) {
         return true;
+    }
 
     return false;
 }

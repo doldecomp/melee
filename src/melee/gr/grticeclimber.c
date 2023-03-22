@@ -88,14 +88,17 @@ HSD_GObj* func_80220FB4(int id)
         gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
 
-        if (cb->callback3 != NULL)
+        if (cb->callback3 != NULL) {
             gp->x1C_callback = cb->callback3;
+        }
 
-        if (cb->callback0 != NULL)
+        if (cb->callback0 != NULL) {
             cb->callback0(gobj);
+        }
 
-        if (cb->callback2 != NULL)
+        if (cb->callback2 != NULL) {
             func_8038FD54(gobj, cb->callback2, 4);
+        }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grticeclimber.c", 202,
                  id);

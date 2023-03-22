@@ -100,8 +100,9 @@ bool ftLink_800EAD64(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.lk.x2234)
+    if (fp->fv.lk.x2234) {
         return true;
+    }
 
     return false;
 }

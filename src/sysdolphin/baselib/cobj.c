@@ -169,8 +169,9 @@ void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
 {
     HSD_WObj* wobj;
 
-    if (cobj == NULL)
+    if (cobj == NULL) {
         return;
+    }
 
     HSD_AObjRemove(cobj->aobj);
     cobj->aobj = NULL;
@@ -182,8 +183,9 @@ void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
 
 void HSD_CObjRemoveAnim(HSD_CObj* cobj)
 {
-    if (cobj == NULL)
+    if (cobj == NULL) {
         return;
+    }
 
     HSD_CObjRemoveAnimByFlags(cobj, 0x7FF);
 }

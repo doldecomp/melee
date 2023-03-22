@@ -152,32 +152,45 @@ void ftSamus_80128D3C(HSD_GObj* gobj)
         return;
     }
 
-    if (ft_80096540(gobj))
+    if (ft_80096540(gobj)) {
         return;
-    if (ft_800D695C(gobj))
+    }
+    if (ft_800D695C(gobj)) {
         return;
-    if (ft_800D6824(gobj))
+    }
+    if (ft_800D6824(gobj)) {
         return;
-    if (ft_800D68C0(gobj))
+    }
+    if (ft_800D68C0(gobj)) {
         return;
-    if (ft_800D8990(gobj))
+    }
+    if (ft_800D8990(gobj)) {
         return;
-    if (ft_8008BFC4(gobj))
+    }
+    if (ft_8008BFC4(gobj)) {
         return;
-    if (ft_8008C830(gobj))
+    }
+    if (ft_8008C830(gobj)) {
         return;
-    if (ft_8008CB44(gobj))
+    }
+    if (ft_8008CB44(gobj)) {
         return;
-    if (ft_8008B658(gobj))
+    }
+    if (ft_8008B658(gobj)) {
         return;
-    if (ft_8008B980(gobj))
+    }
+    if (ft_8008B980(gobj)) {
         return;
-    if (ft_8008BB44(gobj))
+    }
+    if (ft_8008BB44(gobj)) {
         return;
-    if (ft_8008A9F8(gobj))
+    }
+    if (ft_8008A9F8(gobj)) {
         return;
-    if (ft_80099794(gobj))
+    }
+    if (ft_80099794(gobj)) {
         return;
+    }
 }
 
 void ftSamus_80128E68(HSD_GObj* gobj)
@@ -295,8 +308,9 @@ int ftSamus_80129100(HSD_GObj* gobj, s32* arg1, s32* arg2)
         u8 _[4];
 #endif
 
-        if (!fp->fv.ss.x222C)
+        if (!fp->fv.ss.x222C) {
             return -1;
+        }
 
         *arg1 = fp->fv.ss.x2230;
         *arg2 = samus_attr->x18;

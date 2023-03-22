@@ -132,18 +132,21 @@ s32 CARDReadAsync(CARDFileInfo* fileInfo, void* buf, s32 length, s32 offset,
 
     result = __CARDSeek(fileInfo, length, offset, &card);
 
-    if (result < 0)
+    if (result < 0) {
         return result;
+    }
 
     dir = __CARDGetDirBlock(card);
     ent = &dir[fileInfo->fileNo];
     result = __CARDAccess(card, ent);
 
-    if (result == CARD_RESULT_NOPERM)
+    if (result == CARD_RESULT_NOPERM) {
         result = __CARDIsPublic(ent);
+    }
 
-    if (result < 0)
+    if (result < 0) {
         return __CARDPutControlBlock(card, result);
+    }
 
     DCInvalidateRange(buf, length);
 
@@ -160,8 +163,9 @@ s32 CARDReadAsync(CARDFileInfo* fileInfo, void* buf, s32 length, s32 offset,
                         card->sectorSize * fileInfo->iBlock + offset, length,
                         buf, (CARDCallback) ReadCallback);
 
-    if (result < 0)
+    if (result < 0) {
         __CARDPutControlBlock(card, result);
+    }
 
     return result;
 }
@@ -172,8 +176,9 @@ int CARDRead(CARDFileInfo* fileinfo, void* buf, u32 length, u32 offset)
     int result = CARDReadAsync(fileinfo, buf, length, offset,
                                (CARDCallback) __CARDSyncCallback);
 
-    if (result < 0)
+    if (result < 0) {
         return result;
+    }
 
     return __CARDSync(fileinfo->chan);
 }

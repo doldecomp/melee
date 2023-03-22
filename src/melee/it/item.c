@@ -31,8 +31,9 @@
 /// Check if items are enabled
 bool func_80266F3C(void)
 {
-    if (gm_8016AE80() != -1)
+    if (gm_8016AE80() != -1) {
         return true;
+    }
 
     return false;
 }
@@ -127,8 +128,9 @@ void ItUnkHoldKind(HSD_GObj* item_gobj)
     case 6:
     case 7: {
         int temp_r3 = gm_8017E068();
-        if (temp_r3 >= 0)
+        if (temp_r3 >= 0) {
             it->xC3C = lbl_804D6D28->x80_float[temp_r3];
+        }
     }
     }
 }
@@ -143,8 +145,9 @@ void HSD_JObjSetScaleItem(Item* it, HSD_JObj* jobj, Vec3* scl)
 /// @private
 inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
 {
-    if (it->xDC8_word.flags.x19 == true)
+    if (it->xDC8_word.flags.x19 == true) {
         HSD_JObjSetRotationY(jobj, M_PI / 2 * it->facing_dir);
+    }
 }
 
 /// @private
@@ -160,10 +163,11 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     {
         int facing_dir;
 
-        if (item_data->facing_dir == -1.0F)
+        if (item_data->facing_dir == -1.0F) {
             facing_dir = -1;
-        else
+        } else {
             facing_dir = 1;
+        }
 
         func_800436D8(&item_data->x378_itemColl, facing_dir);
     }
@@ -186,10 +190,11 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     func_8026B390(item_gobj);
     item_data->xDC8_word.flags.x13 = false;
 
-    if (spawnItem->x48_ground_or_air == GA_Air)
+    if (spawnItem->x48_ground_or_air == GA_Air) {
         func_802762BC(item_data);
-    else
+    } else {
         func_802762B0(item_data);
+    }
 
     func_80275E98(item_gobj, spawnItem);
     func_80274DAC(item_gobj);
@@ -205,10 +210,11 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->exited_hitlag = NULL;
     item_data->jumped_on = NULL;
 
-    if (item_data->owner != NULL)
+    if (item_data->owner != NULL) {
         db_80225DD8(item_gobj, item_data->owner);
-    else
+    } else {
         db_80225D64(item_gobj, item_data->owner);
+    }
 
     func_8027B0C4(item_gobj, spawnItem);
     func_80279B64(item_data);
@@ -345,8 +351,9 @@ void func_802675A8(HSD_GObj* item_gobj)
         break;
     }
 
-    if (gm_8018841C() && item_data->x18 == 1)
+    if (gm_8018841C() && item_data->x18 == 1) {
         lbl_804A0C64.x60--;
+    }
 }
 
 /// @private
@@ -357,8 +364,9 @@ void func_802676F4(HSD_GObj* item_gobj)
     case 0:
         lbl_804A0C64.x0++;
 
-        if (item_data->kind == 34)
+        if (item_data->kind == 34) {
             lbl_804A0C64.x1C++;
+        }
 
         break;
     case 1:
@@ -396,8 +404,9 @@ void func_802676F4(HSD_GObj* item_gobj)
         break;
     }
 
-    if (gm_8018841C() && item_data->x18 == 1)
+    if (gm_8018841C() && item_data->x18 == 1) {
         lbl_804A0C64.x60++;
+    }
 }
 
 /// @private
@@ -409,38 +418,44 @@ bool func_8026784C(enum_t dropItem, int _)
 
     switch (dropItem) {
     case 0:
-        if (lbl_804A0C64.x0 >= lbl_804A0C64.x4)
+        if (lbl_804A0C64.x0 >= lbl_804A0C64.x4) {
             result = true;
+        }
 
         break;
 
     case 1:
-        if (lbl_804A0C64.x8 >= lbl_804A0C64.xC)
+        if (lbl_804A0C64.x8 >= lbl_804A0C64.xC) {
             result = true;
+        }
 
         break;
 
     case 2:
-        if (lbl_804A0C64.x10 >= lbl_804A0C64.x14)
+        if (lbl_804A0C64.x10 >= lbl_804A0C64.x14) {
             result = true;
+        }
 
         break;
 
     case 3:
-        if (lbl_804A0C64.x58 >= lbl_804A0C64.x5C)
+        if (lbl_804A0C64.x58 >= lbl_804A0C64.x5C) {
             result = true;
+        }
 
         break;
 
     case 5:
-        if (lbl_804A0C64.x40 >= lbl_804A0C64.x44)
+        if (lbl_804A0C64.x40 >= lbl_804A0C64.x44) {
             result = true;
+        }
 
         break;
 
     case 7:
-        if (lbl_804A0C64.x34 >= lbl_804A0C64.x38)
+        if (lbl_804A0C64.x34 >= lbl_804A0C64.x38) {
             result = true;
+        }
 
         break;
 
@@ -453,20 +468,23 @@ bool func_8026784C(enum_t dropItem, int _)
         break;
 
     case 10:
-        if (lbl_804A0C64.x24 >= lbl_804A0C64.x28)
+        if (lbl_804A0C64.x24 >= lbl_804A0C64.x28) {
             result = true;
+        }
 
         break;
 
     case 11:
-        if (lbl_804A0C64.x48 >= lbl_804A0C64.x4C)
+        if (lbl_804A0C64.x48 >= lbl_804A0C64.x4C) {
             result = true;
+        }
 
         break;
 
     case 12:
-        if (lbl_804A0C64.x50 >= lbl_804A0C64.x54)
+        if (lbl_804A0C64.x50 >= lbl_804A0C64.x54) {
             result = true;
+        }
     }
 
     return result;
@@ -649,10 +667,11 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     func_80275504(item_gobj);
     func_80274EF8(item_gobj);
 
-    if (ftLib_80086960(spawnItem->x0_parent_gobj))
+    if (ftLib_80086960(spawnItem->x0_parent_gobj)) {
         item_data->xDC8_word.flags.x1 = false;
-    else
+    } else {
         item_data->xDC8_word.flags.x1 = true;
+    }
 
     item_data->x5C8 = 0;
     item_data->xBC7 = 0;
@@ -669,8 +688,9 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
 
     item_data->xDAA_byte = 1;
 
-    if (db_80225B20() != NULL)
+    if (db_80225B20() != NULL) {
         item_data->xDAA_flag.bits.b4 = true;
+    }
 
     if (spawnItem->x0_parent_gobj == NULL) {
         item_data->x20_team_id = -1;
@@ -1029,6 +1049,7 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
         if (anim_joint != NULL) {
             for (temp_r0 = 0; temp_r0 < item_data->x374_dynamicBonesNum;
                  temp_r0++)
+            {
                 if (item_jobj == item_data->xD4_dynamicBones[temp_r0].skeleton)
                 {
                     if (anim_joint->next != NULL) {
@@ -1049,6 +1070,7 @@ void func_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
                     }
                     return;
                 }
+            }
         }
         HSD_JObjAddAnim(item_jobj, anim_joint, matanim_joint, shapeanim_joint);
         if (item_jobj->child != NULL) {
@@ -1168,8 +1190,9 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t msid,
         func_80274EF8(item_gobj);
     }
 
-    if ((flags & ITEM_MODEL_UPDATE))
+    if ((flags & ITEM_MODEL_UPDATE)) {
         func_80274740(item_gobj);
+    }
 
     if (!(flags & ITEM_COLANIM_PRESERVE) &&
         lbl_804D6D04[item_data->x548_colorOverlay.x28_colanim].x5_unk != 0)
@@ -1177,18 +1200,21 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t msid,
         func_80279BBC(item_data);
     }
 
-    if (!(flags & ITEM_SFX_PRESERVE))
+    if (!(flags & ITEM_SFX_PRESERVE)) {
         func_8026B074(item_data);
+    }
 
     HSD_JObjSetFacingDirItem(item_jobj, item_data);
 
-    if ((flags & ITEM_DROP_UPDATE))
+    if ((flags & ITEM_DROP_UPDATE)) {
         item_data->xC40 = item_data->xC44;
-    else
+    } else {
         item_data->xC40 = 1.0F;
+    }
 
-    if (!(flags & ITEM_HIT_PRESERVE) && item_data->xDC8_word.flags.x16)
+    if (!(flags & ITEM_HIT_PRESERVE) && item_data->xDC8_word.flags.x16) {
         func_802725D4(item_gobj);
+    }
 
     item_data->xCC8_knockback = 0.0F;
     temp_r30 =
@@ -1510,8 +1536,9 @@ void func_80269CA0(Item* item_data, s32 damage)
 {
     item_data->xC9C += damage;
 
-    if (item_data->xC9C > 999)
+    if (item_data->xC9C > 999) {
         item_data->xC9C = 999;
+    }
 }
 
 /// @private
@@ -1591,8 +1618,9 @@ bool func_80269DC8(HSD_GObj* item_gobj)
     } else {
         hit_shield = item_data->xB8_itemLogicTable->hit_shield;
 
-        if (func_80274C78(item_gobj))
+        if (func_80274C78(item_gobj)) {
             item_data->xCA8 = item_data->xC50;
+        }
 
         if (hit_shield != NULL && hit_shield(item_gobj)) {
             item_data->destroy_type = 2;
@@ -1790,8 +1818,9 @@ void EnterHitlagThink(HSD_GObj* item_gobj, Item* item_data)
 {
     if (!item_data->xDC8_word.flags.x9) {
         item_data = GetItemData(item_gobj);
-        if (item_data->entered_hitlag)
+        if (item_data->entered_hitlag) {
             item_data->entered_hitlag(item_gobj);
+        }
         item_data->xDC8_word.flags.x9 = 1;
 
         if ((item_data->atk_victim) && func_80272D1C(item_data->atk_victim) &&
@@ -1817,20 +1846,25 @@ void lbl_8026A294(HSD_GObj* item_gobj)
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
 
     if ((item_data->xCC8_knockback) || (item_data->xCA0)) {
-        if (OnTakeDamageThink(item_gobj, item_data))
+        if (OnTakeDamageThink(item_gobj, item_data)) {
             return;
+        }
     } else if (item_data->xC50) {
-        if (func_80269DC8(item_gobj))
+        if (func_80269DC8(item_gobj)) {
             return;
+        }
     } else if (item_data->xC48) {
-        if (OnClankThink(item_gobj, item_data))
+        if (OnClankThink(item_gobj, item_data)) {
             return;
+        }
     } else if ((item_data->xC34_damageDealt) || (item_data->xC4C)) {
-        if (OnGiveDamageThink(item_gobj, item_data))
+        if (OnGiveDamageThink(item_gobj, item_data)) {
             return;
+        }
     } else if (item_data->xC64_reflectGObj != NULL) {
-        if (func_80269F14(item_gobj))
+        if (func_80269F14(item_gobj)) {
             return;
+        }
     } else if (item_data->xC90_absorbGObj != NULL) {
         if (processCallback(item_data->xB8_itemLogicTable->absorbed, item_gobj,
                             item_data))
@@ -1886,8 +1920,9 @@ void func_8026A810(HSD_GObj* item_gobj)
 {
     Item* temp_item = (Item*) HSD_GObjGetUserData(item_gobj);
 
-    if (temp_item->xB8_itemLogicTable->spawned != NULL)
+    if (temp_item->xB8_itemLogicTable->spawned != NULL) {
         temp_item->xB8_itemLogicTable->spawned(item_gobj);
+    }
 }
 
 void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* gobj)
@@ -1898,8 +1933,9 @@ void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* gobj)
         temp_item->kind != 59 && temp_item->kind != 99 &&
         temp_item->kind != 103)
     {
-        if (ftLib_800867CC(gobj) == item_gobj)
+        if (ftLib_800867CC(gobj) == item_gobj) {
             ftLib_80086764(gobj);
+        }
     } else if (ftLib_800867A0(gobj, item_gobj)) {
         ftLib_80086724(gobj, item_gobj);
     }
@@ -1914,8 +1950,9 @@ void DestroyItemInline(HSD_GObj* this, Item* other_ip)
     if (ip->hold_kind == 8 && ip->kind != 58 && ip->kind != 59 &&
         ip->kind != 99 && ip->kind != 103)
     {
-        if (ftLib_800867CC(other) == this)
+        if (ftLib_800867CC(other) == this) {
             ftLib_80086764(other);
+        }
     } else if (ftLib_800867A0(other, this)) {
         ftLib_80086724(other, this);
     }
@@ -1948,8 +1985,9 @@ void ItemSwitch(HSD_GObj* item_gobj)
 /// @todo Could this be a higher-level inline in gobjproc.h or something?
 void RunCallback(HSD_GObj* this, HSD_GObjEvent arg1)
 {
-    if (arg1 != NULL)
+    if (arg1 != NULL) {
         arg1(this);
+    }
 }
 
 /// @private
@@ -2017,8 +2055,9 @@ void func_8026A8EC(HSD_GObj* this)
 
     {
         int i;
-        for (i = 0; i < ip->x374_dynamicBonesNum; i++)
+        for (i = 0; i < ip->x374_dynamicBonesNum; i++) {
             lb_8000FD18(&ip->xD4_dynamicBones[i].unk_ptr);
+        }
     }
 
     func_8026B0B4(this);
@@ -2056,8 +2095,9 @@ void func_8026ABD8(HSD_GObj* this, Vec3* pos, f32 arg2)
     func_80274198(this, 1);
     func_802754D4(this);
 
-    if (func_8026B6C8(this))
+    if (func_8026B6C8(this)) {
         func_80275390(this);
+    }
 }
 
 void func_8026AC74(HSD_GObj* this, enum_t drop_gfx, enum_t drop_sfx, f32 arg3)
@@ -2070,8 +2110,9 @@ void func_8026AC74(HSD_GObj* this, enum_t drop_gfx, enum_t drop_sfx, f32 arg3)
     func_802741F4(this, 1);
     func_802754D4(this);
 
-    if (func_8026B6C8(this))
+    if (func_8026B6C8(this)) {
         func_80275390(this);
+    }
 }
 
 void func_8026AD20(HSD_GObj* this, s32 drop_gfx, s32 drop_sfx, f32 arg8)
@@ -2098,8 +2139,9 @@ void Item_OnUserDataRemove(any_t user_data)
 {
     Item* item_data = (Item*) user_data;
 
-    if (item_data->xBBC_dynamicBoneTable != NULL)
+    if (item_data->xBBC_dynamicBoneTable != NULL) {
         HSD_ObjFree(&unkAllocData1, item_data->xBBC_dynamicBoneTable);
+    }
 
     HSD_ObjFree(&itemAllocData, item_data);
 }
@@ -2108,8 +2150,9 @@ uint func_8026AE60(void)
 {
     uint result = lbl_804D6D14++;
 
-    if (lbl_804D6D14 == 0)
+    if (lbl_804D6D14 == 0) {
         lbl_804D6D14++;
+    }
 
     return result;
 }
@@ -2117,10 +2160,11 @@ uint func_8026AE60(void)
 void func_8026AE84(Item* item_data, enum_t sfx, int pan, int volume)
 {
     if (sfx != 540000) {
-        if (sfx != 540001)
+        if (sfx != 540001) {
             item_data->xD6C = func_800237A8(func_800233EC(sfx), pan, volume);
-        else
+        } else {
             item_data->xD6C = func_800237A8(540000, pan, volume);
+        }
     }
 }
 
@@ -2156,16 +2200,18 @@ void func_8026AFA0(Item* item_data, enum_t sfx, int pan, int volume)
 
 void func_8026B034(Item* item_data)
 {
-    if (item_data->sfx_unk1 != SFX_NONE)
+    if (item_data->sfx_unk1 != SFX_NONE) {
         func_800236B8(item_data->sfx_unk1);
+    }
 
     item_data->sfx_unk1 = SFX_NONE;
 }
 
 void func_8026B074(Item* item_data)
 {
-    if (item_data->sfx_unk2 != SFX_NONE)
+    if (item_data->sfx_unk2 != SFX_NONE) {
         func_800236B8(item_data->sfx_unk2);
+    }
 
     item_data->sfx_unk2 = SFX_NONE;
 }
@@ -2199,13 +2245,15 @@ void func_8026B0B4(HSD_GObj* item_gobj)
         item_data->sfx_unk2 = SFX_NONE;
     }
 
-    if (item_data->sfx_unk1 != SFX_NONE)
+    if (item_data->sfx_unk1 != SFX_NONE) {
         func_800236B8(item_data->sfx_unk1);
+    }
 
     item_data->sfx_unk1 = SFX_NONE;
 
-    if (item_data->sfx_unk2 != SFX_NONE)
+    if (item_data->sfx_unk2 != SFX_NONE) {
         func_800236B8(item_data->sfx_unk2);
+    }
 
     item_data->sfx_unk2 = SFX_NONE;
     item_data->xD6C = SFX_NONE;

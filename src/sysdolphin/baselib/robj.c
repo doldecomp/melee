@@ -33,8 +33,9 @@ HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype)
     bool has_type;
     HSD_RObj* curr;
 
-    if (robj == NULL)
+    if (robj == NULL) {
         return NULL;
+    }
 
     for (curr = robj; curr != NULL; curr = curr->next) {
         if (curr->flags & 0x80000000) {

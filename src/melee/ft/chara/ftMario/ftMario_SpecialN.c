@@ -58,16 +58,18 @@ void ftMario_SpecialN_StartMotion(HSD_GObj* gobj)
 
 void ftMario_SpecialN_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftMario_SpecialN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2200_ftcmd_var0 != 0)
+    if (fp->x2200_ftcmd_var0 != 0) {
         ft_8008A4D4(gobj);
+    }
 }
 
 void ftMario_SpecialN_Phys(HSD_GObj* gobj)
@@ -77,8 +79,9 @@ void ftMario_SpecialN_Phys(HSD_GObj* gobj)
 
 void ftMario_SpecialN_Coll(HSD_GObj* gobj)
 {
-    if (ft_80082708(gobj) == false)
+    if (ft_80082708(gobj) == false) {
         ftMario_SpecialN_GroundToAir(gobj);
+    }
 }
 
 void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
@@ -153,8 +156,9 @@ void ftMario_SpecialAirN_Phys(HSD_GObj* gobj)
 
 void ftMario_SpecialAirN_Coll(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(gobj))
+    if (ft_80081D0C(gobj)) {
         ftMario_SpecialAirN_AirToGround(gobj);
+    }
 }
 
 void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)

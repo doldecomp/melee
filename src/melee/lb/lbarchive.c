@@ -20,9 +20,11 @@ void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length)
 
     while (true) {
         symbol = HSD_ArchiveGetExtern(archive, i++);
-        if (symbol != NULL)
+        if (symbol != NULL) {
             HSD_ArchiveLocateExtern(archive, symbol, NULL);
-        if (symbol == NULL)
+        }
+        if (symbol == NULL) {
             return;
+        }
     }
 }

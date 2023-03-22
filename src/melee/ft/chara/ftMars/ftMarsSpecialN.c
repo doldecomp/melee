@@ -56,10 +56,11 @@ void ftMars_80136844(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMars_80136E74(gobj);
 
-        if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS)
+        if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
             ft_800BFFD0(gobj->user_data, 0x63, 0);
-        else
+        } else {
             ft_800BFFD0(gobj->user_data, 0x64, 0);
+        }
     }
 }
 
@@ -70,10 +71,11 @@ void ftMars_801368AC(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMars_80136EAC(gobj);
 
-        if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS)
+        if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
             ft_800BFFD0(gobj->user_data, 0x63, 0);
-        else
+        } else {
             ft_800BFFD0(gobj->user_data, 0x64, 0);
+        }
     }
 }
 
@@ -121,16 +123,18 @@ void ftMars_8013695C(HSD_GObj* gobj)
 // https://decomp.me/scratch/bR5HF
 void ftMars_801369A4(HSD_GObj* gobj)
 {
-    if (!ft_80082708(gobj))
+    if (!ft_80082708(gobj)) {
         ftMars_80136A1C(gobj);
+    }
 }
 
 // 801369E0 001335C0
 // https://decomp.me/scratch/cCPAH
 void ftMars_801369E0(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(gobj))
+    if (ft_80081D0C(gobj)) {
         ftMars_80136A7C(gobj);
+    }
 }
 
 // 80136A1C 001335FC

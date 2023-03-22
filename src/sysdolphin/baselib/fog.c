@@ -181,8 +181,9 @@ void HSD_FogReqAnimByFlags(HSD_Fog* fog, u32 flags, f32 frame)
 
 void HSD_FogInterpretAnim(HSD_Fog* fog)
 {
-    if (fog != NULL)
+    if (fog != NULL) {
         HSD_AObjInterpretAnim(fog->aobj, fog, FogUpdateFunc);
+    }
 }
 
 void FogUpdateFunc(any_t obj, enum_t type, HSD_ObjData* val)

@@ -31,8 +31,9 @@ void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, u32 length)
     map_ptcl = HSD_ArchiveGetPublicAddress(archive, "map_ptcl");
     map_texg = HSD_ArchiveGetPublicAddress(archive, "map_texg");
 
-    if (map_ptcl != NULL && map_texg != NULL)
+    if (map_ptcl != NULL && map_texg != NULL) {
         psInitDataBankLocate(map_ptcl, map_texg, NULL);
+    }
 }
 
 void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)

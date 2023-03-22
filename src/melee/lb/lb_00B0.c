@@ -25,8 +25,9 @@ bool lb_8000B074(HSD_JObj* jobj)
 {
     HSD_AObj* aobj = jobj->aobj;
 
-    if (aobj != NULL && !(aobj->flags & AOBJ_NO_ANIM))
+    if (aobj != NULL && !(aobj->flags & AOBJ_NO_ANIM)) {
         return true;
+    }
 
     return false;
 }
@@ -445,8 +446,9 @@ void lb_8000C390(HSD_JObj* jobj)
     while (true) {
         cur = HSD_RObjGetByType(cur, REFTYPE_JOBJ, 0);
 
-        if (cur == NULL)
+        if (cur == NULL) {
             break;
+        }
 
         next = robj_next(cur);
         HSD_JObjDeleteRObj(jobj, cur);

@@ -158,8 +158,9 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2200_ftcmd_var0 == 0)
+    if (fp->x2200_ftcmd_var0 == 0) {
         return;
+    }
 
     {
         HSD_GObj* detected_gobj = fp->x20AC;
@@ -208,8 +209,9 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
 
 void ftCaptain_SpecialSStart_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftCaptain_SpecialS_Anim(HSD_GObj* gobj)
@@ -235,8 +237,9 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* gobj)
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* gobj)
@@ -354,8 +357,9 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* gobj)
     ft_80085134(gobj);
     fp->mv.ca.specials.grav -= captainAttrs->specials_grav;
 
-    if (fp->mv.ca.specials.grav < -captainAttrs->specials_terminal_vel)
+    if (fp->mv.ca.specials.grav < -captainAttrs->specials_terminal_vel) {
         fp->mv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
+    }
 
     fp->x80_self_vel.y = fp->mv.ca.specials.grav;
 }

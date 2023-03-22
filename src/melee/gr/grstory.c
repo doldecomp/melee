@@ -290,8 +290,9 @@ void grStory_801E366C(HSD_GObj* gobj)
 {
     UnkUserData* data = gobj->user_data;
 
-    if (data->xC4-- >= 0)
+    if (data->xC4-- >= 0) {
         return;
+    }
 
     if (data->xC8 != NULL) {
         grLib_801C97DC(0x2C, 0, data->xC8);

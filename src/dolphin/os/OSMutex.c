@@ -7,10 +7,11 @@ void __OSUnlockAllMutex(OSThread* thread)
         OSMutex* head = thread->mutexQueue.head;
         OSMutex* next = head->link.next;
 
-        if (next == NULL)
+        if (next == NULL) {
             thread->mutexQueue.tail = NULL;
-        else
+        } else {
             next->link.prev = NULL;
+        }
         thread->mutexQueue.head = next;
         head->lock = 0;
         head->thread = NULL;

@@ -203,8 +203,9 @@ void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* gobj)
                 stick_x - gawAttrs->x58_GAMEWATCH_RESCUE_STICK_RANGE;
             if (fp->input.x620_lstick_x > 0.0f) {
                 facing_dir = 1.0f;
-            } else
+            } else {
                 facing_dir = -1.0f;
+            }
 
             temp = stick_range_threshold * facing_dir;
             angle = temp * gawAttrs->x5C_GAMEWATCH_RESCUE_ANGLE_UNK;
@@ -263,8 +264,9 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* gobj)
         } else {
             if (1.0f == fp->facing_dir) {
                 ledgeGrabDir = 1;
-            } else
+            } else {
                 ledgeGrabDir = -1;
+            }
             if (ft_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
                 ft_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 return;

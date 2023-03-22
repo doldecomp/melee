@@ -21,8 +21,9 @@ void ftGameWatch_Attack100Start_Action(HSD_GObj* gobj)
 // Animation callback
 void ftGameWatch_Attack100Start_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftGameWatch_Attack100Loop_Action(gobj);
+    }
 }
 
 // 0x8014C260 - Mr. Game & Watch's Rapid Jab Start IASA callback

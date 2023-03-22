@@ -50,8 +50,9 @@ void ftSamus_8012A380(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftSamus_8012A3BC(HSD_GObj* gobj)
@@ -61,8 +62,9 @@ void ftSamus_8012A3BC(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 void ftSamus_8012A3F8(HSD_GObj* gobj) {}
@@ -98,8 +100,9 @@ void ftSamus_8012A468(HSD_GObj* gobj)
 
 void ftSamus_8012A4A4(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(gobj))
+    if (ft_80081D0C(gobj)) {
         ft_80082B1C(gobj);
+    }
 }
 
 void ftSamus_8012A4E0(HSD_GObj* gobj)
@@ -109,8 +112,9 @@ void ftSamus_8012A4E0(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftSamus_8012A51C(HSD_GObj* gobj)
@@ -120,8 +124,9 @@ void ftSamus_8012A51C(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 void ftSamus_8012A558(HSD_GObj* gobj) {}

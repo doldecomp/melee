@@ -77,8 +77,9 @@ static void BlockWriteCallback(s32 chan, s32 result)
     /// @todo Eliminate cast to #CARDCallback.
     result = __CARDWritePage(chan, (CARDCallback) BlockWriteCallback);
 
-    if (result < 0)
+    if (result < 0) {
         goto error;
+    }
 
     return;
 

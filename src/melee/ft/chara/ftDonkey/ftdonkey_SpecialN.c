@@ -154,11 +154,13 @@ void ftDonkey_8010E930(HSD_GObj* gobj)
         }
     }
     if (fp->x914[0].state != HitCapsule_Disabled) {
-        if (fp->mv.dk.specialn.x4 == 0)
+        if (fp->mv.dk.specialn.x4 == 0) {
             fp->mv.dk.specialn.x4 = 1;
+        }
 
-        if (fp->mv.dk.specialn.x10 == -1)
+        if (fp->mv.dk.specialn.x10 == -1) {
             fp->mv.dk.specialn.x10 = fp->x914[0].a_offset.z;
+        }
 
         ftColl_8007ABD0(&fp->x914[0],
                         fp->mv.dk.specialn.x10 +
@@ -166,8 +168,9 @@ void ftDonkey_8010E930(HSD_GObj* gobj)
                              donkey_attr->SpecialN.x30_DAMAGE_PER_SWING),
                         gobj);
 
-        if (fp->mv.dk.specialn.x14 == -1)
+        if (fp->mv.dk.specialn.x14 == -1) {
             fp->mv.dk.specialn.x14 = fp->x914[1].a_offset.z;
+        }
 
         ftColl_8007ABD0(&fp->x914[1],
                         fp->mv.dk.specialn.x14 +
@@ -198,8 +201,9 @@ void ftDonkey_8010EB0C(HSD_GObj* gobj)
 #endif
 
     if (fp->x2200_ftcmd_var0) {
-        if (fp->mv.dk.specialn.x8 == 0)
+        if (fp->mv.dk.specialn.x8 == 0) {
             fp->mv.dk.specialn.x8++;
+        }
     }
 
     if (fp->mv.dk.specialn.x8 == 1) {
@@ -213,7 +217,9 @@ void ftDonkey_8010EB0C(HSD_GObj* gobj)
 
     if (fp->x914[0].state != HitCapsule_Disabled &&
         (fp->mv.dk.specialn.x4 == 0))
+    {
         fp->mv.dk.specialn.x4 = 1;
+    }
 
     if (fp->mv.dk.specialn.x4 == 1) {
         fp->mv.dk.specialn.x4 = 2;

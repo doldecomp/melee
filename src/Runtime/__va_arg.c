@@ -34,8 +34,9 @@ void* __va_arg(va_list v_list, unsigned char type)
     if (type == 2) {
         size = 8;
         maxsize--;
-        if (g_reg & 1)
+        if (g_reg & 1) {
             even = 1;
+        }
         increment = 2;
     }
     if (g_reg < maxsize) {
@@ -48,8 +49,9 @@ void* __va_arg(va_list v_list, unsigned char type)
         addr = (char*) ALIGN(addr, size);
         v_list->input_arg_area = addr + size;
     }
-    if (type == 0)
+    if (type == 0) {
         addr = *((char**) addr);
+    }
 
     return addr;
 }

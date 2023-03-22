@@ -27,8 +27,9 @@ void FormatCallback(s32 chan, s32 result)
             __CARDEraseSector(chan, (u32) card->sectorSize * card->formatStep,
                               (CARDCallback) FormatCallback);
 
-        if (0 <= result)
+        if (0 <= result) {
             return;
+        }
     } else if (card->formatStep < 2 * CARD_NUM_SYSTEM_BLOCK) {
         int step = card->formatStep - CARD_NUM_SYSTEM_BLOCK;
 
@@ -38,8 +39,9 @@ void FormatCallback(s32 chan, s32 result)
             (u8*) card->workArea + (CARD_SYSTEM_BLOCK_SIZE * step),
             (CARDCallback) FormatCallback);
 
-        if (result >= 0)
+        if (result >= 0) {
             return;
+        }
     } else {
         card->currentDir = (CARDDir*) ((u8*) card->workArea +
                                        (1 + 0) * CARD_SYSTEM_BLOCK_SIZE);
@@ -143,8 +145,9 @@ s32 __CARDFormatRegionAsync(s32 chan, u16 encode, CARDCallback callback)
     result = __CARDEraseSector(chan, (u32) card->sectorSize * card->formatStep,
                                (CARDCallback) FormatCallback);
 
-    if (result < 0)
+    if (result < 0) {
         __CARDPutControlBlock(card, result);
+    }
 
     return result;
 }

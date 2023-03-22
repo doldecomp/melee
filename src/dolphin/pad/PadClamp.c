@@ -90,8 +90,9 @@ void PADClamp(PADStatus* status)
 {
     int i;
     for (i = 0; i < PAD_CHANMAX; i++, status++) {
-        if (status->err != PAD_ERR_NONE)
+        if (status->err != PAD_ERR_NONE) {
             continue;
+        }
 
         ClampStick(&status->stickX, &status->stickY, ClampRegion.maxStick,
                    ClampRegion.xyStick, ClampRegion.minStick);
@@ -101,15 +102,17 @@ void PADClamp(PADStatus* status)
         if (status->triggerLeft <= ClampRegion.minTrigger) {
             status->triggerLeft = 0;
         } else {
-            if (ClampRegion.maxTrigger < status->triggerLeft)
+            if (ClampRegion.maxTrigger < status->triggerLeft) {
                 status->triggerLeft = ClampRegion.maxTrigger;
+            }
             status->triggerLeft -= ClampRegion.minTrigger;
         }
         if (status->triggerRight <= ClampRegion.minTrigger) {
             status->triggerRight = 0;
         } else {
-            if (ClampRegion.maxTrigger < status->triggerRight)
+            if (ClampRegion.maxTrigger < status->triggerRight) {
                 status->triggerRight = ClampRegion.maxTrigger;
+            }
             status->triggerRight -= ClampRegion.minTrigger;
         }
     }

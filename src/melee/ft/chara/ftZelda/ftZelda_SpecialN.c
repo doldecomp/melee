@@ -103,11 +103,13 @@ void ftZelda_8013AA38(HSD_GObj* gobj)
         ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZelda_8013ADB0);
     }
 
-    if (fp->x2200_ftcmd_var0 == 0)
+    if (fp->x2200_ftcmd_var0 == 0) {
         fp->x2218_flag.bits.b3 = 0;
+    }
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 // 8013AACC - 8013AB60 (0x94 bytes)
@@ -171,10 +173,11 @@ void ftZelda_8013AB9C(HSD_GObj* gobj)
         attr* attr = &fp->x110_attr;
         ftZelda_DatAttrs* sa = fp->x2D4_specialAttributes;
 
-        if (var1 != 0)
+        if (var1 != 0) {
             fp->mv.zd.specialn.x0 = var1 - 1;
-        else
+        } else {
             ftCommon_8007D494(fp, sa->xC, attr->x170_TerminalVelocity);
+        }
     }
 
     ftCommon_8007CF58(fp);
@@ -185,8 +188,9 @@ void ftZelda_8013AB9C(HSD_GObj* gobj)
 // https://decomp.me/scratch/CT7dz
 void ftZelda_8013AC10(HSD_GObj* gobj)
 {
-    if (!ft_80082708(gobj))
+    if (!ft_80082708(gobj)) {
         ftZelda_8013AC88(gobj);
+    }
 }
 
 // 8013AC4C - 8013AC88 (0x3C bytes)

@@ -70,9 +70,10 @@ void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, char* symbols)
         int comparison =
             strcmp(archive->symbols + archive->public_info[i].symbol, symbols);
 
-        if (comparison == 0)
+        if (comparison == 0) {
             // If both strings are equal, we've found the node
             return archive->data + archive->public_info[i].offset;
+        }
     }
 
     return NULL;
@@ -80,8 +81,9 @@ void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, char* symbols)
 
 char* HSD_ArchiveGetExtern(HSD_Archive* archive, int offset)
 {
-    if (offset < 0 || archive->header.nb_extern <= (unsigned) offset)
+    if (offset < 0 || archive->header.nb_extern <= (unsigned) offset) {
         return NULL;
+    }
 
     return archive->symbols + archive->extern_info[offset].symbol;
 }

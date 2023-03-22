@@ -19,8 +19,9 @@ void GXInitLightSpot(GXLightObj* light, f32 angle, GXSpotFn fn)
     f32 rad, temp;
     f32 a, b, c;
 
-    if (angle <= 0.0f || angle > 90.0f)
+    if (angle <= 0.0f || angle > 90.0f) {
         fn = GX_SP_OFF;
+    }
 
     rad = cosf((3.1415927410125732f * angle) / 180.0f);
 
@@ -86,11 +87,13 @@ void GXInitLightDistAttn(GXLightObj* light, f32 ref_distance,
 {
     f32 ka, kb, kc;
 
-    if (ref_distance < 0.0f)
+    if (ref_distance < 0.0f) {
         dist_fn = GX_DA_OFF;
+    }
 
-    if (ref_brightness <= 0.0f || ref_brightness >= 1.0f)
+    if (ref_brightness <= 0.0f || ref_brightness >= 1.0f) {
         dist_fn = GX_DA_OFF;
+    }
 
     switch (dist_fn) {
     case GX_DA_GENTLE:
@@ -326,12 +329,13 @@ void GXSetChanCtrl(GXChannelID chan, GXBool enable, GXColorSrc amb_src,
     u32 reg;
     int r26;
 
-    if (chan == 4)
+    if (chan == 4) {
         r26 = 0;
-    else if (chan == 5)
+    } else if (chan == 5) {
         r26 = 1;
-    else
+    } else {
         r26 = chan;
+    }
 
     reg = 0;
     INSERT_FIELD(reg, enable, 1, 1);

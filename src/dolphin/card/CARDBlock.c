@@ -70,8 +70,9 @@ static void EraseCallback(s32 chan, s32 result)
     result = __CARDWrite(chan, addr, CARD_SYSTEM_BLOCK_SIZE, fat,
                          (CARDCallback) WriteCallback);
 
-    if (result < 0)
+    if (result < 0) {
         goto error;
+    }
 
     return;
 
@@ -148,8 +149,9 @@ s32 __CARDFreeBlock(s32 chan, u16 nBlock, CARDCallback callback)
 #endif
         card = &__CARDBlock[chan];
 
-    if (!card->attached)
+    if (!card->attached) {
         return CARD_RESULT_NOCARD;
+    }
 
     fat = __CARDGetFatBlock(card);
     while (nBlock != 0xFFFF) {

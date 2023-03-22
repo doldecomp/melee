@@ -109,15 +109,17 @@ void ftMewtwo_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 /// Mewtwo's grounded Teleport Start Animation callback
 void ftMewtwo_SpecialHiStart_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMewtwo_SpecialHi_Action(gobj);
+    }
 }
 
 /// Mewtwo's aerial Teleport Start Animation callback
 void ftMewtwo_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMewtwo_SpecialAirHi_Action(gobj);
+    }
 }
 
 // Mewtwo's grounded Teleport Start IASA callback
@@ -156,8 +158,9 @@ void ftMewtwo_SpecialAirHiStart_Phys(HSD_GObj* gobj)
 /// Mewtwo's grounded Teleport Start Collision callback
 void ftMewtwo_SpecialHiStart_Coll(HSD_GObj* gobj)
 {
-    if (!ft_80082708(gobj))
+    if (!ft_80082708(gobj)) {
         ftMewtwo_SpecialHiStart_GroundToAir(gobj);
+    }
 }
 
 /// Mewtwo's aerial Teleport Start Collision callback
@@ -170,8 +173,9 @@ void ftMewtwo_SpecialAirHiStart_Coll(HSD_GObj* gobj)
         return;
     }
 
-    if (ftCliffCommon_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj)) {
         return;
+    }
 }
 
 static Fighter_MotionStateChangeFlags const transition_flags0 =
@@ -216,8 +220,9 @@ void ftMewtwo_SpecialHi_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.mt.SpecialHi.travelFrames--;
 
-    if (fp->mv.mt.SpecialHi.travelFrames <= 0)
+    if (fp->mv.mt.SpecialHi.travelFrames <= 0) {
         ftMewtwo_SpecialHiLost_Action(gobj);
+    }
 }
 
 /// Mewtwo's aerial Teleport Zoom Animation callback
@@ -226,8 +231,9 @@ void ftMewtwo_SpecialAirHi_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.mt.SpecialHi.travelFrames--;
 
-    if (fp->mv.mt.SpecialHi.travelFrames <= 0)
+    if (fp->mv.mt.SpecialHi.travelFrames <= 0) {
         ftMewtwo_SpecialAirHiLost_Action(gobj);
+    }
 }
 
 // Mewtwo's grounded Teleport Zoom IASA callback
@@ -265,8 +271,9 @@ void ftMewtwo_SpecialHi_Coll(HSD_GObj* gobj)
             }
         } else {
             u32 env_flags = collData->x134_envFlags;
-            if (env_flags & MPCOLL_RIGHTWALL || env_flags & MPCOLL_LEFTWALL)
+            if (env_flags & MPCOLL_RIGHTWALL || env_flags & MPCOLL_LEFTWALL) {
                 ftMewtwo_SpecialHiLost_Action(gobj);
+            }
         }
     }
 }
@@ -280,8 +287,9 @@ bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj)
         return true;
     }
 
-    if (ft_8009A134(gobj))
+    if (ft_8009A134(gobj)) {
         return false;
+    }
 
     return true;
 }
@@ -310,8 +318,9 @@ void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* gobj)
             }
         }
 
-        if (ftCliffCommon_80081298(gobj))
+        if (ftCliffCommon_80081298(gobj)) {
             return;
+        }
 
         if ((collData->x134_envFlags & MPCOLL_CEIL) &&
             (lbVector_AngleXY(&collData->x188_ceiling.normal,
@@ -421,8 +430,9 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* gobj)
 
     sqrt_stick = sqrtf(stick_x + stick_y);
 
-    if (sqrt_stick > 1)
+    if (sqrt_stick > 1) {
         sqrt_stick = 1;
+    }
 
     if (!(sqrt_stick < mewtwoAttrs->x58_MEWTWO_TELEPORT_STICK_RANGE_MIN)) {
         Vec3 stickVec;
@@ -491,15 +501,17 @@ void ftMewtwo_SpecialAirHi_Action(HSD_GObj* gobj)
 
     sqrt_stick = sqrtf(stick_x + stick_y);
 
-    if (sqrt_stick > 1)
+    if (sqrt_stick > 1) {
         sqrt_stick = 1;
+    }
 
     if (sqrt_stick > mewtwoAttrs->x58_MEWTWO_TELEPORT_STICK_RANGE_MIN) {
         stick_x = stickGetDir(fp->input.x620_lstick_x, 0);
 
         /// @todo Express as a fraction or something.
-        if (stick_x > stick_epsilon)
+        if (stick_x > stick_epsilon) {
             ftCommon_8007D9FC(fp);
+        }
 
         floatVar = atan2f(fp->input.x624_lstick_y,
                           fp->input.x620_lstick_x * fp->facing_dir);
@@ -539,8 +551,9 @@ void ftMewtwo_SpecialHiLost_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 /// Mewtwo's aerial Teleport End Animation callback
@@ -588,8 +601,9 @@ void ftMewtwo_SpecialAirHiLost_Phys(HSD_GObj* gobj)
 /// Mewtwo's grounded Teleport End Collision callback
 void ftMewtwo_SpecialHiLost_Coll(HSD_GObj* gobj)
 {
-    if (!ft_800827A0(gobj))
+    if (!ft_800827A0(gobj)) {
         ftMewtwo_SpecialHiLost_GroundToAir(gobj);
+    }
 }
 
 /// Mewtwo's aerial Teleport End Collision callback
@@ -603,8 +617,9 @@ void ftMewtwo_SpecialAirHiLost_Coll(HSD_GObj* gobj)
         return;
     }
 
-    if (ftCliffCommon_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj)) {
         return;
+    }
 }
 
 /// Mewtwo's ground -> air Teleport End Motion State handler

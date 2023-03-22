@@ -1398,8 +1398,9 @@ void ftCommon_8007EC30(u32 arg0, u32 arg1)
 
 void ftCommon_8007ECD4(Fighter* fp, s32 arg1)
 {
-    if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4))
+    if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4)) {
         func_80378280(fp->x618_player_id, arg1 + 2);
+    }
 }
 
 void ftCommon_8007ED2C(Fighter* fp)

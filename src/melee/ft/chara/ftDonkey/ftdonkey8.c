@@ -9,8 +9,9 @@
 
 void ftDonkey_800E0568(HSD_GObj* gobj)
 {
-    if (!ft_80094EA4(gobj))
+    if (!ft_80094EA4(gobj)) {
         ft_800CB59C(gobj);
+    }
 }
 
 void ftDonkey_800E05A4(HSD_GObj* gobj)
@@ -37,8 +38,9 @@ void ftDonkey_800E0648(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->mv.dk.unk8.x4 <= 0.0f)
+    if (fp->mv.dk.unk8.x4 <= 0.0f) {
         ftDonkey_800DF980(gobj);
+    }
 
     fp->mv.dk.unk8.x4 -= 1.0f;
 }

@@ -10,8 +10,9 @@ double frexp(double x, int* exponent)
     ix = 0x7fffffff & hx;
     lx = MSL_LO(x);
     *exponent = 0;
-    if (ix >= 0x7ff00000 || ((ix | lx) == 0))
-        return x;          /* 0,inf,nan */
+    if (ix >= 0x7ff00000 || ((ix | lx) == 0)) {
+        return x; /* 0,inf,nan */
+    }
     if (ix < 0x00100000) { /* subnormal */
         x *= lbl_804DE190;
         hx = MSL_HI(x);

@@ -8,6 +8,7 @@ BreakBeforeBraces: Custom
 BraceWrapping:
   AfterFunction: true
   AfterControlStatement: MultiLine
+InsertBraces: true
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: false
 AllowShortEnumsOnASingleLine: false

@@ -146,8 +146,9 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800D638C(gobj);
+    }
 }
 
 // 0x8014AE78
@@ -156,32 +157,45 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* gobj)
 void ftGameWatch_AttackLw3_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->x2218_flag.bits.b0 == 0)
+    if (fp->x2218_flag.bits.b0 == 0) {
         return;
-    if (ft_8008BFC4(gobj) != false)
+    }
+    if (ft_8008BFC4(gobj) != false) {
         return;
-    if (ft_8008C830(gobj) != false)
+    }
+    if (ft_8008C830(gobj) != false) {
         return;
-    if (ft_8008CB44(gobj) != false)
+    }
+    if (ft_8008CB44(gobj) != false) {
         return;
-    if (ft_8008B658(gobj) != false)
+    }
+    if (ft_8008B658(gobj) != false) {
         return;
-    if (ft_8008B980(gobj) != false)
+    }
+    if (ft_8008B980(gobj) != false) {
         return;
-    if (ft_8008BB44(gobj) != false)
+    }
+    if (ft_8008BB44(gobj) != false) {
         return;
-    if (ft_8008A9F8(gobj) != false)
+    }
+    if (ft_8008A9F8(gobj) != false) {
         return;
-    if (ft_800CAED0(gobj) != false)
+    }
+    if (ft_800CAED0(gobj) != false) {
         return;
-    if (ft_800CA094(gobj) != false)
+    }
+    if (ft_800CA094(gobj) != false) {
         return;
-    if (ft_800D5F58(gobj) != false)
+    }
+    if (ft_800D5F58(gobj) != false) {
         return;
-    if (ft_800C97DC(gobj) != false)
+    }
+    if (ft_800C97DC(gobj) != false) {
         return;
-    if (ft_800C9468(gobj) != false)
+    }
+    if (ft_800C9468(gobj) != false) {
         return;
+    }
 }
 
 // 0x8014AF6C

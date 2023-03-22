@@ -22,8 +22,9 @@ void ftDonkey_800E0200(HSD_GObj* gobj)
     if (fp->mv.dk.unk5.x0 && !ft_80094EA4(gobj)) {
         bool result = ftDonkey_800E0378(gobj);
 
-        if (result)
+        if (result) {
             return;
+        }
     }
 }
 

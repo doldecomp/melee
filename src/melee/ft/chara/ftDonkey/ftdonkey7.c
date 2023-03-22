@@ -9,8 +9,9 @@
 void ftDonkey_800E0440(HSD_GObj* gobj)
 {
     s32 result = ft_80094EA4(gobj);
-    if (result)
+    if (result) {
         return;
+    }
 }
 
 void ftDonkey_800E0464(HSD_GObj* gobj)

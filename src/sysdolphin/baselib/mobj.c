@@ -24,20 +24,23 @@ void HSD_MObjSetCurrent(HSD_MObj* mobj)
 
 void HSD_MObjSetFlags(HSD_MObj* mobj, u32 flags)
 {
-    if (mobj != NULL)
+    if (mobj != NULL) {
         mobj->rendermode |= flags;
+    }
 }
 
 void HSD_MObjClearFlags(HSD_MObj* mobj, u32 flags)
 {
-    if (mobj != NULL)
+    if (mobj != NULL) {
         mobj->rendermode &= ~flags;
+    }
 }
 
 void HSD_MObjRemoveAnimByFlags(HSD_MObj* mobj, u32 flags)
 {
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
 
     if (flags & MOBJ_ANIM) {
         HSD_AObjRemove(mobj->aobj);
@@ -50,8 +53,9 @@ void HSD_MObjRemoveAnimByFlags(HSD_MObj* mobj, u32 flags)
 
 void HSD_MObjAddAnim(HSD_MObj* mobj, HSD_MatAnim* matanim)
 {
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
 
     if (matanim != NULL) {
         if (mobj->aobj != NULL) {
@@ -64,8 +68,9 @@ void HSD_MObjAddAnim(HSD_MObj* mobj, HSD_MatAnim* matanim)
 
 void HSD_MObjReqAnimByFlags(HSD_MObj* mobj, f32 startframe, u32 flags)
 {
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
     if (flags & MOBJ_ANIM) {
         HSD_AObjReqAnim(mobj->aobj, startframe);
     }
@@ -81,8 +86,9 @@ static void MObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_MObj* mobj = obj;
 
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
 
     switch (type) {
     case HSD_A_M_AMBIENT_R:
@@ -135,8 +141,9 @@ static void MObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 
 void HSD_MObjAnim(HSD_MObj* mobj)
 {
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
     HSD_AObjInterpretAnim(mobj->aobj, mobj, MObjUpdateFunc);
     HSD_TObjAnimAll(mobj->tobj);
 }
@@ -195,8 +202,9 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
     HSD_ASSERT(416, list);
     *list = NULL;
     for (tobj = tobj_top; tobj != NULL; tobj = tobj->next) {
-        if (tobj_coord(tobj) == TEX_COORD_TOON)
+        if (tobj_coord(tobj) == TEX_COORD_TOON) {
             toon = tobj;
+        }
     }
 
     if (mobj->rendermode & RENDER_VERTEX) {

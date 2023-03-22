@@ -120,11 +120,13 @@ static void zeroStageInfoArrays(void)
 {
     int i;
 
-    for (i = 0; i < 64; i++)
+    for (i = 0; i < 64; i++) {
         stage_info.x180[i] = NULL;
+    }
 
-    for (i = 0; i < 261; i++)
+    for (i = 0; i < 261; i++) {
         stage_info.x280[i] = NULL;
+    }
 }
 
 void Ground_801BFFB0(void)
@@ -206,8 +208,9 @@ void Ground_801BFFB0(void)
 static void zeroBuffer(void)
 {
     int i;
-    for (i = 0; i < _BUFFER_SZ; i++)
+    for (i = 0; i < _BUFFER_SZ; i++) {
         lbl_804D6950[i] = 0;
+    }
 }
 
 void Ground_801C0378(void)
@@ -228,10 +231,11 @@ f32 Ground_801C0498(void)
 {
     UnkStage6B0* temp_r3 = stage_info.x6B0;
 
-    if (temp_r3 != NULL)
+    if (temp_r3 != NULL) {
         return temp_r3->x0;
-    else
+    } else {
         return 1.0F;
+    }
 }
 
 static char get_userdata_ground[] = "%s:%d: couldn t get user data(Ground)\n";
@@ -240,10 +244,11 @@ void Ground_801C04BC(f32 arg8)
 {
     UnkStage6B0* temp_r3 = stage_info.x6B0;
 
-    if (temp_r3 != NULL)
+    if (temp_r3 != NULL) {
         temp_r3->x0 = arg8;
-    else
+    } else {
         HSD_ASSERT(521, 0);
+    }
 }
 
 s32 Ground_801C0508(void)
@@ -362,11 +367,13 @@ s32* Ground_801C06A4(void)
 
 void Ground_801C06B8(InternalStageId arg0)
 {
-    if (lbl_803DFEDC[arg0] == NULL)
+    if (lbl_803DFEDC[arg0] == NULL) {
         return;
+    }
 
-    if (lbl_803DFEDC[arg0]->data1 != NULL)
+    if (lbl_803DFEDC[arg0]->data1 != NULL) {
         lbDvd_800178E8(4, lbl_803DFEDC[arg0]->data1, 4, 4, 0, 1, 7, 16, 0);
+    }
 
     switch (arg0) {
     case IZUMI:
@@ -425,18 +432,23 @@ void Ground_801C0800(StructPairWithStageID* pair)
 
     {
         int i;
-        if (stage_info.x6A8 != NULL)
-            for (i = 0; stage_info.x6A8[i] != NULL; i++)
+        if (stage_info.x6A8 != NULL) {
+            for (i = 0; stage_info.x6A8[i] != NULL; i++) {
                 func_8026B40C(stage_info.x6A8[i]->unk4,
                               stage_info.x6A8[i]->unk0);
+            }
+        }
 
-        if (stage_info.x6B4 != NULL)
-            for (i = 1; stage_info.x6B4[i] != 0; i++)
+        if (stage_info.x6B4 != NULL) {
+            for (i = 1; stage_info.x6B4[i] != 0; i++) {
                 lbl_804D6D38->x1D4->xC[i].xC = stage_info.x6B4[i];
+            }
+        }
     }
 
-    if (stage_info.x6B8 != NULL && stage_info.x6BC != NULL)
+    if (stage_info.x6B8 != NULL && stage_info.x6BC != NULL) {
         psInitDataBankLoad(0x1E, stage_info.x6B8, stage_info.x6BC, 0, 0);
+    }
 
     func_8004D288(stage_info.x6AC);
     func_80058820();
@@ -495,9 +507,11 @@ static bool Ground_801C0A70(Vec3* pos)
 
         InternalStageId stage_id = stage_info.internal_stage_id;
 
-        for (i = 0; i < nstages; i++)
-            if (stage_id == enabled_stages[i])
+        for (i = 0; i < nstages; i++) {
+            if (stage_id == enabled_stages[i]) {
                 break;
+            }
+        }
 
         if (i != nstages) {
             player_slot = HSD_Randi(4);
@@ -512,10 +526,11 @@ static bool Ground_801C0A70(Vec3* pos)
         }
     }
 
-    if (Stage_80224FDC(pos) != 0)
+    if (Stage_80224FDC(pos) != 0) {
         return true;
-    else
+    } else {
         return false;
+    }
 }
 
 extern u32 lbl_803B7DEC[];
@@ -1299,8 +1314,9 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
     }
     temp_r3 = HSD_MemAlloc(0x204);
 
-    if (temp_r3 == NULL)
+    if (temp_r3 == NULL) {
         OSReport(get_userdata_ground, __FILE__, 0x1DA);
+    }
 
     gp = temp_r3;
 
@@ -1322,8 +1338,9 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
     gp->x18 = NULL;
     gp->x10_flags.b3 = 0;
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++) {
         gp->x20[i] = -1;
+    }
 
     grMaterial_801C95C4(temp_r30);
     temp_r29 = HSD_JObjLoadJoint(arg0);
@@ -1339,8 +1356,9 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
     if (temp_r3_4 == NULL) {
         OSReport(get_jobj, __FILE__, 0x4C4);
 
-        while (true)
+        while (true) {
             continue;
+        }
     }
     HSD_JObjAddNext(temp_r29, temp_r3_4);
 
@@ -1371,16 +1389,18 @@ static void Ground_801C1CD0(HSD_GObj* gobj)
     grMaterial_801C9698(gobj);
     lbl_804D64AC += 1;
 
-    if (gp->x8_callback != NULL)
+    if (gp->x8_callback != NULL) {
         gp->x8_callback(gobj);
+    }
 }
 
 static void Ground_801C1D38(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
-    if (gp->xC_callback != NULL)
+    if (gp->xC_callback != NULL) {
         gp->xC_callback(gobj);
+    }
 }
 
 void Ground_801C1D6C(u32 arg0)
@@ -1434,18 +1454,21 @@ static void Ground_801C1E2C(HSD_GObj* gobj)
     bool stage_is_something;
     HSD_JObj* jobj;
 
-    if (func_80030A78())
+    if (func_80030A78()) {
         return;
+    }
 
     stage_is_something = stage_info.unk8C.b2;
 
-    if (!stage_is_something)
+    if (!stage_is_something) {
         return;
+    }
 
     jobj = gobj->hsd_obj;
 
-    if (jobj != NULL)
+    if (jobj != NULL) {
         HSD_FogSet(gobj->hsd_obj);
+    }
 }
 
 void* Ground_801C1E84(void)
@@ -1858,8 +1881,9 @@ s32 Ground_801C247C(s32 arg0, s32 arg1)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
 
-    if (archive == NULL)
+    if (archive == NULL) {
         __assert(__FILE__, 0x7E1, lbl_804D44F8);
+    }
 
     if (archive->unk4 != NULL && arg1 < archive->unk4->unk14) {
         return archive->unk4->unk10[arg1];
@@ -1968,8 +1992,8 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     bgm = phi_r30->xC;
                 } else if (arg1 & 2) {
                     /// @todo Weird comparison, but typing
-                    ///       #UnkBgmStruct::x10 as @c signed doesn't match and
-                    ///       neither does typing #BGM_Undefined as @c
+                    ///       #UnkBgmStruct::x10 as @c signed doesn't match
+                    ///       and neither does typing #BGM_Undefined as @c
                     ///       unsigned.
                     if (phi_r30->x10 != (unsigned) BGM_Undefined) {
                         bgm = phi_r30->x10;
@@ -2012,10 +2036,11 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
 
     HSD_ASSERT(2242, bgm!=BGM_Undefined);
 
-    if (bgm == -2)
+    if (bgm == -2) {
         *arg2 = func_8002305C(Player_GetPlayerCharacter(0), HSD_Randi(2));
-    else
+    } else {
         *arg2 = bgm;
+    }
 
     return result;
 }
@@ -2296,11 +2321,13 @@ bool Ground_801C2D24(enum_t arg0, Vec3* arg1)
         return true;
     }
 
-    if ((unsigned) arg0 - 1 <= 2)
+    if ((unsigned) arg0 - 1 <= 2) {
         return Ground_801C2D24(0, arg1);
+    }
 
-    if ((unsigned) arg0 - 5 <= 2)
+    if ((unsigned) arg0 - 5 <= 2) {
         return Ground_801C2D24(4, arg1);
+    }
 
     if (arg0 == 0x7F) {
         if (Ground_801C2D24(0x94, arg1)) {
@@ -2484,7 +2511,8 @@ bool Ground_801C3128(s32 arg0, void (*arg1)(s16))
     result = false;
 
     {
-        /// @todo @c cur cannot be swapped below @c max, hinting at a missing
+        /// @todo @c cur cannot be swapped below @c max, hinting at a
+        /// missing
         ///       @c inline function.
         S16Vec3* cur;
         int max = lbl_803DFEDC[stage_info.internal_stage_id]->x30;
@@ -2565,9 +2593,11 @@ s32 Ground_801C32D4(s32 arg0, s32 arg1)
 
     result = -1;
 
-    for (i = 0; i < max; cur++, i++)
-        if (cur->y == arg0 && cur->z == arg1)
+    for (i = 0; i < max; cur++, i++) {
+        if (cur->y == arg0 && cur->z == arg1) {
             result = cur->x;
+        }
+    }
 
     {
         UnkArchiveStruct* tmp;
@@ -2578,9 +2608,11 @@ s32 Ground_801C32D4(s32 arg0, s32 arg1)
             max = tmp->unk4->unk8[arg0].unk24;
             cur = tmp->unk4->unk8[arg0].unk20;
 
-            for (i = 0; i < max; cur++, i++)
-                if (cur->z == arg1)
+            for (i = 0; i < max; cur++, i++) {
+                if (cur->z == arg1) {
                     result = cur->x;
+                }
+            }
         }
     }
 
@@ -2612,9 +2644,11 @@ s32 Ground_801C33C0(s32 arg0, s32 arg1)
 
     result = -1;
 
-    for (i = 0; i < max; cur++, i++)
-        if (cur->y == arg0 && cur->x == arg1)
+    for (i = 0; i < max; cur++, i++) {
+        if (cur->y == arg0 && cur->x == arg1) {
             result = cur->z;
+        }
+    }
 
     {
         UnkArchiveStruct* tmp;
@@ -2625,9 +2659,11 @@ s32 Ground_801C33C0(s32 arg0, s32 arg1)
             max = tmp->unk4->unk8[arg0].unk24;
             cur = tmp->unk4->unk8[arg0].unk20;
 
-            for (i = 0; i < max; cur++, i++)
-                if (cur->x == arg1)
+            for (i = 0; i < max; cur++, i++) {
+                if (cur->x == arg1) {
                     result = cur->z;
+                }
+            }
         }
     }
 
@@ -3355,8 +3391,9 @@ f32 Ground_801C3F20(HSD_JObj* arg0)
 {
     HSD_AObj* aobj = Ground_801C3E18(arg0);
 
-    if (aobj != NULL)
+    if (aobj != NULL) {
         return aobj->curr_frame;
+    }
 
     return 0.0F;
 }
@@ -3494,8 +3531,9 @@ HSD_JObj* Ground_801C3FA4(HSD_GObj* arg0, s32 depth)
 /// @todo Move to @c jobj.h.
 static inline HSD_JObj* jobjGetParent(HSD_JObj* jobj)
 {
-    if (jobj == NULL)
+    if (jobj == NULL) {
         return NULL;
+    }
 
     return jobj->parent;
 }
@@ -3503,8 +3541,9 @@ static inline HSD_JObj* jobjGetParent(HSD_JObj* jobj)
 /// @todo Move to @c jobj.h.
 static inline HSD_JObj* jobjGetChild(HSD_JObj* jobj)
 {
-    if (jobj == NULL)
+    if (jobj == NULL) {
         return NULL;
+    }
 
     return jobj->child;
 }
@@ -3512,8 +3551,9 @@ static inline HSD_JObj* jobjGetChild(HSD_JObj* jobj)
 /// @todo Move to @c jobj.h.
 static inline HSD_JObj* jobjGetNext(HSD_JObj* jobj)
 {
-    if (jobj == NULL)
+    if (jobj == NULL) {
         return NULL;
+    }
 
     return jobj->next;
 }
@@ -3521,18 +3561,22 @@ static inline HSD_JObj* jobjGetNext(HSD_JObj* jobj)
 /// @todo Why isn't this emitted to @c jobj.c?
 HSD_JObj* Ground_801C4100(HSD_JObj* jobj)
 {
-    if (!(jobj->flags & JOBJ_INSTANCE) && jobjGetChild(jobj) != NULL)
+    if (!(jobj->flags & JOBJ_INSTANCE) && jobjGetChild(jobj) != NULL) {
         return jobjGetChild(jobj);
+    }
 
-    if (jobjGetNext(jobj) != NULL)
+    if (jobjGetNext(jobj) != NULL) {
         return jobjGetNext(jobj);
+    }
 
     while (true) {
-        if (jobjGetParent(jobj) == NULL)
+        if (jobjGetParent(jobj) == NULL) {
             return NULL;
+        }
 
-        if (jobjGetNext(jobjGetParent(jobj)) != NULL)
+        if (jobjGetNext(jobjGetParent(jobj)) != NULL) {
             return jobjGetNext(jobjGetParent(jobj));
+        }
 
         jobj = jobjGetParent(jobj);
     }
@@ -3625,10 +3669,11 @@ bool Ground_801C43C4(void* arg0)
     if (arg0 != NULL && max != 0) {
         for (i = 0; i != max; i++, phi_r4++) {
             if (phi_r4->unk0 == arg0) {
-                if (phi_r4->flag)
+                if (phi_r4->flag) {
                     return true;
-                else
+                } else {
                     return false;
+                }
             }
         }
 
@@ -3654,19 +3699,22 @@ void Ground_801C445C(HSD_LObj* lobj)
     HSD_LObj* cur;
     f32 pos_mul;
 
-    if (lobj == NULL)
+    if (lobj == NULL) {
         return;
+    }
 
     for (cur = lobj; cur != NULL; cur = cur->next) {
         wobj = HSD_LObjGetPositionWObj(lobj);
 
-        if (wobj != NULL)
+        if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &pos0);
+        }
 
         wobj = HSD_LObjGetInterestWObj(lobj);
 
-        if (wobj != NULL)
+        if (wobj != NULL) {
             HSD_WObjGetPosition(wobj, &pos2);
+        }
 
         HSD_LObjAnim(cur);
 
@@ -3970,8 +4018,9 @@ unk_t Ground_801C49B4(void)
 {
     UnkArchiveStruct* archive = grDatFiles_801C6324();
 
-    if (stage_info.x6C4 != NULL)
+    if (stage_info.x6C4 != NULL) {
         return Ground_801C20E0(archive, stage_info.x6C4);
+    }
 
     return &lbl_803E06C8;
 }
@@ -4006,8 +4055,9 @@ void Ground_801C4A08(HSD_GObj* gobj)
     u8 _[24];
 #endif
 
-    if (gobj == NULL)
+    if (gobj == NULL) {
         return;
+    }
 
     gp = gobj->user_data;
     jobj = gobj->hsd_obj;
@@ -4015,11 +4065,13 @@ void Ground_801C4A08(HSD_GObj* gobj)
     if (gp != NULL) {
         map_id = gp->map_id;
 
-        if (gp->x1C_callback != NULL)
+        if (gp->x1C_callback != NULL) {
             gp->x1C_callback(gobj);
+        }
 
-        if (stage_info.x180[map_id] == gobj)
+        if (stage_info.x180[map_id] == gobj) {
             stage_info.x180[map_id] = NULL;
+        }
 
         Ground_801C55AC(gp);
 
@@ -4035,9 +4087,10 @@ void Ground_801C4A08(HSD_GObj* gobj)
 
         archive = grDatFiles_801C6330(gp->map_id);
 
-        if (archive != NULL)
+        if (archive != NULL) {
             Ground_801C36F4(gp->map_id, jobj,
                             archive->unk4->unk8[map_id].unk0);
+        }
     }
 
     func_80390228(gobj);
@@ -4060,8 +4113,9 @@ void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
     lbVector_Normalize(&vec0);
     y0 = vec0.y;
 
-    if (vec0.y < 0.0F)
+    if (vec0.y < 0.0F) {
         y0 = -vec0.y;
+    }
 
     if (y0 > 0.9L) {
         vec2.x = vec2.y = 0.0F;
@@ -4076,27 +4130,31 @@ void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
     result_y = asinf(vec1.z);
     z1 = vec1.z;
 
-    if (vec1.z < 0.0F)
+    if (vec1.z < 0.0F) {
         z1 = -vec1.z;
+    }
 
     if (z1 >= 0.99999F) {
         phi_f31 = asinf(-vec0.y);
 
-        if (vec0.x * cosf(phi_f31) * sinf(result_y) < 0.0F)
+        if (vec0.x * cosf(phi_f31) * sinf(result_y) < 0.0F) {
             phi_f31 = M_PI - phi_f31;
+        }
 
         result_x = phi_f31;
         result_z = 0.0F;
     } else {
         result_x = asinf(vec2.z / cosf(result_y));
 
-        if (vec0.z * cosf(result_x) * cosf(result_y) < 0)
+        if (vec0.z * cosf(result_x) * cosf(result_y) < 0) {
             result_x = M_PI - result_x;
+        }
 
         result_z = asinf(-vec1.y / cosf(result_y));
 
-        if (-vec1.x * cosf(result_y) * cosf(result_z) < 0)
+        if (-vec1.x * cosf(result_y) * cosf(result_z) < 0) {
             result_z = M_PI - result_z;
+        }
     }
 
     result->x = result_x;
@@ -4123,10 +4181,11 @@ bool Ground_801C4DD0(void)
 {
     InternalStageId stage_id = stage_info.internal_stage_id;
 
-    if (stage_id == KONGO)
+    if (stage_id == KONGO) {
         grKongo_801D8270(stage_info.x72C);
-    else if (stage_id == OLDKONGO)
+    } else if (stage_id == OLDKONGO) {
         func_802105AC(stage_info.x72C);
+    }
 
     return true;
 }
@@ -4135,10 +4194,11 @@ bool Ground_801C4E20(void)
 {
     InternalStageId stage_id = stage_info.internal_stage_id;
 
-    if (stage_id == KONGO)
+    if (stage_id == KONGO) {
         grKongo_801D828C(stage_info.x72C);
-    else if (stage_id == OLDKONGO)
+    } else if (stage_id == OLDKONGO) {
         func_802105C8(stage_info.x72C);
+    }
 
     return true;
 }
@@ -4491,14 +4551,17 @@ void Ground_801C5414(unk_t arg0, s32 arg1)
 
 void Ground_801C5440(Ground* gp, s32 i, u32 arg2)
 {
-    if (i < 0 || i >= 8)
+    if (i < 0 || i >= 8) {
         return;
+    }
 
-    if (gp == NULL)
+    if (gp == NULL) {
         return;
+    }
 
-    if (arg2 == 540000)
+    if (arg2 == 540000) {
         return;
+    }
 
     if (arg2 != 540001) {
         if (gp->x20[i] != -1) {
@@ -4514,22 +4577,26 @@ void Ground_801C5440(Ground* gp, s32 i, u32 arg2)
 
 bool Ground_801C54DC(Ground* gp, s32 i)
 {
-    if (i < 0 || i >= 8)
+    if (i < 0 || i >= 8) {
         return false;
+    }
 
-    if (gp != NULL && gp->x20[i] != -1 && func_80023710(gp->x20[i]))
+    if (gp != NULL && gp->x20[i] != -1 && func_80023710(gp->x20[i])) {
         return true;
+    }
 
     return false;
 }
 
 void Ground_801C5544(Ground* gp, s32 i)
 {
-    if (i < 0 || i >= 8)
+    if (i < 0 || i >= 8) {
         return;
+    }
 
-    if (gp == NULL)
+    if (gp == NULL) {
         return;
+    }
 
     if (gp->x20[i] != -1) {
         Ground* tmp_gp = gp;
@@ -4543,11 +4610,13 @@ static void Ground_801C55AC(Ground* gp)
 {
     int i;
 
-    if (gp == NULL)
+    if (gp == NULL) {
         return;
+    }
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++) {
         Ground_801C5544(gp, i);
+    }
 }
 
 void Ground_801C5630(Ground* gp, s32 i, f32 val)
@@ -4729,8 +4798,9 @@ int Ground_801C5940(void)
     archive = grDatFiles_801C6324();
     out_idx = 0;
 
-    if (archive->unk4->unk4 == 0)
+    if (archive->unk4->unk4 == 0) {
         return -1;
+    }
 
     phi_r8 = archive->unk4->unk0;
 
@@ -4745,8 +4815,9 @@ int Ground_801C5940(void)
         }
     }
 
-    if (out_idx == 0)
+    if (out_idx == 0) {
         return -1;
+    }
 
     return vals[randi(out_idx)];
 }
@@ -4802,12 +4873,15 @@ void Ground_801C5AEC(Vec3* v, Vec3* arg1, Vec3* arg2, Vec3* arg3)
 {
     lbVector_EulerAnglesFromONB(v, arg1, arg2, arg3);
 
-    if (!(fabsf(v->x) < 30000))
+    if (!(fabsf(v->x) < 30000)) {
         v->x = 0;
+    }
 
-    if (!(fabsf(v->y) < 30000))
+    if (!(fabsf(v->y) < 30000)) {
         v->y = 0;
+    }
 
-    if (!(fabsf(v->z) < 30000))
+    if (!(fabsf(v->z) < 30000)) {
         v->z = 0;
+    }
 }

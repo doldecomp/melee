@@ -35,8 +35,9 @@ void ftDonkey_SpecialAirS_StartMotion(HSD_GObj* gobj)
 
 void ftDonkey_8010E2BC(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftDonkey_8010E2F8(HSD_GObj* gobj)

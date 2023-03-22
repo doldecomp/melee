@@ -194,8 +194,9 @@ void ftDonkey_8010D96C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* attr = fp->x2D4_specialAttributes;
 
-    if (fp->fv.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS)
+    if (fp->fv.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         ft_800BFFD0(fp, 0x39, 0);
+    }
 }
 
 void ftDonkey_OnLoad(HSD_GObj* gobj)

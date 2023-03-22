@@ -24,8 +24,9 @@ void ftDonkey_8010DCD8(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftDonkey_8010DE88(gobj);
+    }
 }
 
 void ftDonkey_8010DD14(HSD_GObj* gobj) {}
@@ -37,8 +38,9 @@ void ftDonkey_8010DD18(HSD_GObj* gobj)
 
 void ftDonkey_8010DD38(HSD_GObj* gobj)
 {
-    if (!ft_80082708(gobj))
+    if (!ft_80082708(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 void ftDonkey_8010DD74(HSD_GObj* gobj)
@@ -114,8 +116,9 @@ void ftDonkey_8010DF5C(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftDonkey_8010DF98(HSD_GObj* gobj) {}

@@ -183,8 +183,9 @@ void ftZelda_8013B89C(HSD_GObj* gobj)
     } else {
         temp_r3 = func_802C3AF0(fp->fv.zd.x222C);
 
-        if (temp_r3 != gobj)
+        if (temp_r3 != gobj) {
             fp->fv.zd.x222C = NULL;
+        }
     }
 }
 
@@ -314,8 +315,9 @@ void ftZelda_8013BBA8(HSD_GObj* gobj)
     } else {
         temp_r3 = func_802C3AF0(fp->fv.zd.x222C);
 
-        if (temp_r3 != gobj)
+        if (temp_r3 != gobj) {
             fp->fv.zd.x222C = NULL;
+        }
     }
 }
 
@@ -347,10 +349,11 @@ void ftZelda_8013BD10(HSD_GObj* gobj)
             fp->cb.x21DC_callback_OnTakeDamage = 0;
         }
 
-        if (sa->x34 == 0)
+        if (sa->x34 == 0) {
             ft_800CC730(gobj);
-        else
+        } else {
             ft_80096900(gobj, 1, 0, 1, 1, sa->x34);
+        }
     }
 }
 

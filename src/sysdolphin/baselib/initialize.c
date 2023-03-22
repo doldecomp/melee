@@ -250,8 +250,9 @@ void HSD_StartRender(HSD_RenderPass pass)
 void func_803755A8(void)
 {
     // Does nothing, but need to force a comparison to make this match
-    if (current_render_pass == HSD_RP_OFFSCREEN)
+    if (current_render_pass == HSD_RP_OFFSCREEN) {
         current_render_pass == 0;
+    }
 }
 
 static void HSD_ObjInit(void)

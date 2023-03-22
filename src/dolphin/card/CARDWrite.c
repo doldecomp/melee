@@ -137,8 +137,9 @@ int CARDWrite(CARDFileInfo* info, void* buf, s32 length, s32 offset)
     int result = CARDWriteAsync(info, buf, length, offset,
                                 (CARDCallback) __CARDSyncCallback);
 
-    if (result < 0)
+    if (result < 0) {
         return result;
+    }
 
     return __CARDSync(info->chan);
 }

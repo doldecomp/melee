@@ -82,8 +82,9 @@ void GXInitFifoPtrs(GXFifoObj* fifo, void* readPtr, void* writePtr)
     __fifo->readPtr = readPtr;
     __fifo->writePtr = writePtr;
     __fifo->x1C = (u8*) writePtr - (u8*) readPtr;
-    if (__fifo->x1C < 0)
+    if (__fifo->x1C < 0) {
         __fifo->x1C += __fifo->size;
+    }
     OSRestoreInterrupts(intrEnabled);
 }
 

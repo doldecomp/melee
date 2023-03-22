@@ -78,16 +78,18 @@ void ftGameWatch_ItemJudgementRemove(HSD_GObj* gobj)
 static void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.gw.x2264_judgementGObj != NULL)
+    if (fp->fv.gw.x2264_judgementGObj != NULL) {
         func_802C7AD0(fp->fv.gw.x2264_judgementGObj);
+    }
 }
 
 // 0x8014C65C - Remove hitlag for Judgement item
 static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.gw.x2264_judgementGObj != NULL)
+    if (fp->fv.gw.x2264_judgementGObj != NULL) {
         func_802C7AF0(fp->fv.gw.x2264_judgementGObj);
+    }
 }
 
 // 0x8014C68C
@@ -98,8 +100,9 @@ bool ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* gobj)
     /// @todo @c enum
     enum_t msid = GET_FIGHTER(gobj)->motion_id;
 
-    if (msid >= ftGw_MS_SpecialS1 && msid <= ftGw_MS_SpecialAirS9)
+    if (msid >= ftGw_MS_SpecialS1 && msid <= ftGw_MS_SpecialAirS9) {
         return false;
+    }
 
     return true;
 }
@@ -215,15 +218,17 @@ void ftGameWatch_SpecialAirS_StartMotion(HSD_GObj* gobj)
 // Animation callback
 void ftGameWatch_SpecialS_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 // 0x8014C8F8 - Mr. Game & Watch's Aerial Judgement Animation callback
 void ftGameWatch_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 // 0x8014C934 - Mr. Game & Watch's Grounded Judgement IASA callback
@@ -245,8 +250,9 @@ void ftGameWatch_SpecialS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((u32) fp->x2200_ftcmd_var0 == 1U)
+    if ((u32) fp->x2200_ftcmd_var0 == 1U) {
         fp->x2200_ftcmd_var0 = 2U;
+    }
 
     ft_80084F3C(gobj);
 }
@@ -271,8 +277,9 @@ void ftGameWatch_SpecialAirS_Phys(HSD_GObj* gobj)
             if ((s32) fp->fv.gw.x2234 == 0) {
                 fp->fv.gw.x2234 = 1;
                 fp->x80_self_vel.y = gawAttrs->x28_GAMEWATCH_JUDGE_VEL_Y;
-            } else
+            } else {
                 fp->x80_self_vel.y = 0.0f;
+            }
         }
         ftCommon_8007D494(fp, gawAttrs->x2C_GAMEWATCH_JUDGE_FRICTION1,
                           gawAttrs->x30_GAMEWATCH_JUDGE_FRICTION2);
@@ -290,15 +297,17 @@ static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj*);
 // Collision callback
 void ftGameWatch_SpecialS_Coll(HSD_GObj* gobj)
 {
-    if (ft_800827A0(gobj) == false)
+    if (ft_800827A0(gobj) == false) {
         ftGameWatch_SpecialS_GroundToAir(gobj);
+    }
 }
 
 // 0x8014CA4C - Mr. Game & Watch's Aerial Judgement Collision callback
 void ftGameWatch_SpecialAirS_Coll(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(gobj) != false)
+    if (ft_80081D0C(gobj) != false) {
         ftGameWatch_SpecialAirS_AirToGround(gobj);
+    }
 }
 
 static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* gobj)

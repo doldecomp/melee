@@ -196,8 +196,9 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
         fp0->mv.mr.SpecialLw.groundVelX =
             fp0->mv.mr.SpecialLw.groundVelX - sa->speciallw.friction_end;
         vel_y += fp0->mv.mr.SpecialLw.groundVelX;
-        if (vel_y < 0)
+        if (vel_y < 0) {
             vel_y = 0;
+        }
     }
 
     {

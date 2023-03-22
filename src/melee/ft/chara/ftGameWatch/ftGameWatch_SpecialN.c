@@ -289,8 +289,9 @@ void ftGameWatch_SpecialAirN_Anim(HSD_GObj* gobj)
 #endif
 
     ftGameWatch_SpecialAirN_ChefLoop(gobj);
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 // 0x8014E87C
@@ -352,8 +353,9 @@ void ftGameWatch_SpecialAirN_Phys(HSD_GObj* gobj)
 // Collision callback
 void ftGameWatch_SpecialN_Coll(HSD_GObj* gobj)
 {
-    if (ft_800827A0(gobj) == false)
+    if (ft_800827A0(gobj) == false) {
         ftGameWatch_SpecialN_GroundToAir(gobj);
+    }
 }
 
 // 0x8014EA00
@@ -361,8 +363,9 @@ void ftGameWatch_SpecialN_Coll(HSD_GObj* gobj)
 // callback
 void ftGameWatch_SpecialAirN_Coll(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(gobj) != false)
+    if (ft_80081D0C(gobj) != false) {
         ftGameWatch_SpecialAirN_AirToGround(gobj);
+    }
 }
 
 static Fighter_MotionStateChangeFlags const transition_flags =

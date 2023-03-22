@@ -82,15 +82,17 @@ void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj)
 void ftMario_SpecialS_EnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.mr.x223C_capeGObj != NULL)
+    if (fp->fv.mr.x223C_capeGObj != NULL) {
         func_802B26C0(fp->fv.mr.x223C_capeGObj);
+    }
 }
 
 void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->fv.mr.x223C_capeGObj != NULL)
+    if (fp->fv.mr.x223C_capeGObj != NULL) {
         func_802B26E0(fp->fv.mr.x223C_capeGObj);
+    }
 }
 
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
@@ -98,8 +100,9 @@ bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t msid = fp->motion_id;
 
-    if (msid >= ftMario_MS_SpecialS && msid <= ftMario_MS_SpecialAirS)
+    if (msid >= ftMario_MS_SpecialS && msid <= ftMario_MS_SpecialAirS) {
         return false;
+    }
 
     return true;
 }
@@ -147,14 +150,16 @@ void ftMario_SpecialAirS_StartMotion(HSD_GObj* gobj)
 
 void ftMario_SpecialS_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftMario_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 void ftMario_SpecialS_IASA(HSD_GObj* gobj) {}

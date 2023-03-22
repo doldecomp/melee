@@ -321,10 +321,11 @@ void ftZelda_8013B4D8(HSD_GObj* gobj)
 
     {
         enum_t msid;
-        if (fp->ground_or_air == 0)
+        if (fp->ground_or_air == 0) {
             msid = 0x164;
-        else
+        } else {
             msid = 0x166;
+        }
 
         Fighter_ChangeMotionState(gobj, msid, 0, NULL, sa->x80, 1.0, 0);
     }

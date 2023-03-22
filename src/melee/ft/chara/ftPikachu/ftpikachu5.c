@@ -52,10 +52,11 @@ void ftPikachu_SetState_8012764C(HSD_GObj* gobj)
 static inline f32 nested_sum_fabs(f32 fighter_pos_y, f32 pika_attr_xBC,
                                   f32 pika_attr_xBC_abs, f32 vec_y)
 {
-    if (fighter_pos_y + pika_attr_xBC_abs - vec_y < 0.0f)
+    if (fighter_pos_y + pika_attr_xBC_abs - vec_y < 0.0f) {
         return -(fighter_pos_y + fabs_inline(pika_attr_xBC) - vec_y);
-    else
+    } else {
         return fighter_pos_y + fabs_inline(pika_attr_xBC) - vec_y;
+    }
 }
 
 bool ftPikachu_8012765C(HSD_GObj* gobj)
@@ -65,13 +66,15 @@ bool ftPikachu_8012765C(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
     u32 state_var = fp->mv.pk.unk4.x0;
 
-    if (!fp->mv.pk.unk4.x4)
+    if (!fp->mv.pk.unk4.x4) {
         return false;
+    }
 
-    if (state_var)
+    if (state_var) {
         func_802B1FE8(state_var, &vec);
-    else
+    } else {
         return false;
+    }
 
     if (fabs_inline(fp->cur_pos.x - vec.x) < fabs_inline(pika_attr->xC4)) {
         f32 final_y_pos = nested_sum_fabs(fp->cur_pos.y, pika_attr->xBC,
@@ -344,14 +347,16 @@ void ftPikachu_ActionChange_80128000(HSD_GObj* gobj)
 
 void ftPikachu_80128050(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftPikachu_8012808C(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 void ftPikachu_801280C8(HSD_GObj* gobj)

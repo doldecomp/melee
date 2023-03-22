@@ -5,8 +5,9 @@
 
 void __check_pad3(void)
 {
-    if ((Pad3Button & RESET_BUTTON_MASK) == RESET_BUTTON_MASK)
+    if ((Pad3Button & RESET_BUTTON_MASK) == RESET_BUTTON_MASK) {
         OSResetSystem(OS_RESET_RESTART, 0, false);
+    }
 }
 
 #ifdef MWERKS_GEKKO
@@ -131,8 +132,9 @@ inline static void __copy_rom_section(void* dst, void* const src, size_t size)
 
 inline static void __init_bss_section(void* dst, size_t size)
 {
-    if (size != 0)
+    if (size != 0) {
         memset(dst, 0, size);
+    }
 }
 
 void __init_data(void)
@@ -142,16 +144,18 @@ void __init_data(void)
 
     dci = _rom_copy_info;
     while (true) {
-        if (dci->size == 0)
+        if (dci->size == 0) {
             break;
+        }
         __copy_rom_section(dci->addr, dci->rom, dci->size);
         dci++;
     }
 
     bii = _bss_init_info;
     while (true) {
-        if (bii->size == 0)
+        if (bii->size == 0) {
             break;
+        }
         __init_bss_section(bii->addr, bii->size);
         bii++;
     }

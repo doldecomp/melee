@@ -147,10 +147,11 @@ void grLib_801C9908(HSD_JObj* jobj)
 
 void grLib_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
 {
-    if (arg3 != 0)
+    if (arg3 != 0) {
         func_8039EFAC(0, arg0, arg1, arg2);
-    else
+    } else {
         func_8039F6CC(0, arg0, arg1, arg2);
+    }
 }
 
 Vec3* grLib_801C9A10(void)

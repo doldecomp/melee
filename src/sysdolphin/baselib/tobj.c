@@ -45,8 +45,9 @@ static HSD_TexAnim* lookupTextureAnim(s32 id, HSD_TexAnim* texanim)
 {
     HSD_TexAnim* ta;
     for (ta = texanim; ta; ta = ta->next) {
-        if (ta->id == id)
+        if (ta->id == id) {
             return ta;
+        }
     }
     return NULL;
 }
@@ -131,8 +132,9 @@ static void TObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_TObj* tobj = obj;
 
-    if (tobj == NULL)
+    if (tobj == NULL) {
         return;
+    }
 
     switch (type) {
     case HSD_A_T_TIMG: {
@@ -325,8 +327,9 @@ HSD_TObj* _HSD_TObjGetCurrentByType(HSD_TObj* from, u32 mapping)
     }
 
     for (; tp != NULL; tp = tp->next) {
-        if (tobj_coord(tp) == mapping)
+        if (tobj_coord(tp) == mapping) {
             goto END;
+        }
     }
 
     tp = NULL;
@@ -384,11 +387,13 @@ static u32 HSD_TexMapID2PTTexMtx(GXTexMapID id)
 
     bool no_assert = false;
 
-    if (tobj->repeat_s && tobj->repeat_t)
+    if (tobj->repeat_s && tobj->repeat_t) {
         no_assert = true;
+    }
 
-    if (!no_assert)
+    if (!no_assert) {
         __assert(lbl_804D5C90, 589, "tobj->repeat_s && tobj->repeat_t");
+    }
 
     scale.x = __fabsf(tobj->scale.x) < FLT_EPSILON
                   ? 0.0F

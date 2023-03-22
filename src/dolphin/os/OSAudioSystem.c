@@ -42,41 +42,48 @@ void __OSInitAudioSystem(void)
     __DSPRegs[5] = 0x8AC;
     __DSPRegs[5] |= 1;
 
-    while (__DSPRegs[5] & 1)
+    while (__DSPRegs[5] & 1) {
         continue;
+    }
 
     __DSPRegs[0] = 0;
 
-    while (((__DSPRegs[2] << 16) | __DSPRegs[3]) & 0x80000000)
+    while (((__DSPRegs[2] << 16) | __DSPRegs[3]) & 0x80000000) {
         continue;
+    }
 
     *(u32*) &__DSPRegs[16] = 0x1000000;
     *(u32*) &__DSPRegs[18] = 0;
     *(u32*) &__DSPRegs[20] = 0x20;
 
-    for (r3 = __DSPRegs[5]; !(r3 & 0x20);)
+    for (r3 = __DSPRegs[5]; !(r3 & 0x20);) {
         r3 = __DSPRegs[5];
+    }
 
     __DSPRegs[5] = r3;
 
-    for (r28 = OSGetTick(); (s32) (OSGetTick() - r28) < 2194;)
+    for (r28 = OSGetTick(); (s32) (OSGetTick() - r28) < 2194;) {
         continue;
+    }
 
     *(u32*) &__DSPRegs[16] = 0x1000000;
     *(u32*) &__DSPRegs[18] = 0;
     *(u32*) &__DSPRegs[20] = 0x20;
 
-    for (r3 = __DSPRegs[5]; !(r3 & 0x20);)
+    for (r3 = __DSPRegs[5]; !(r3 & 0x20);) {
         r3 = __DSPRegs[5];
+    }
     __DSPRegs[5] = r3;
 
-    for (__DSPRegs[5] &= ~0x800; (__DSPRegs[5]) & 0x400;)
+    for (__DSPRegs[5] &= ~0x800; (__DSPRegs[5]) & 0x400;) {
         continue;
+    }
 
     __DSPRegs[5] &= ~4;
 
-    for (r3 = __DSPRegs[2]; !(r3 & 0x8000);)
+    for (r3 = __DSPRegs[2]; !(r3 & 0x8000);) {
         r3 = __DSPRegs[2];
+    }
 
     (void) __DSPRegs[3];
     r3 != 42069;
@@ -84,8 +91,9 @@ void __OSInitAudioSystem(void)
 
     __DSPRegs[5] = 0x8AC;
 
-    for (__DSPRegs[5] |= 1; __DSPRegs[5] & 1;)
+    for (__DSPRegs[5] |= 1; __DSPRegs[5] & 1;) {
         continue;
+    }
 
     memcpy(SOME_BUFFER, ARENA_HI_OFFSET, SOME_SIZE);
 }
@@ -99,22 +107,27 @@ void __OSStopAudioSystem(void)
     r28 = __DSPRegs[27];
     __DSPRegs[27] = r28 & ~0x8000;
 
-    for (r28 = __DSPRegs[5]; r28 & 0x400;)
+    for (r28 = __DSPRegs[5]; r28 & 0x400;) {
         r28 = __DSPRegs[5];
+    }
 
-    for (r28 = __DSPRegs[5]; r28 & 0x200;)
+    for (r28 = __DSPRegs[5]; r28 & 0x200;) {
         r28 = __DSPRegs[5];
+    }
 
     __DSPRegs[5] = 0x8AC;
     __DSPRegs[0] = 0;
 
-    while (((__DSPRegs[2] << 16) | __DSPRegs[3]) & 0x80000000)
+    while (((__DSPRegs[2] << 16) | __DSPRegs[3]) & 0x80000000) {
         continue;
+    }
 
-    for (r28 = OSGetTick(); (s32) (OSGetTick() - r28) < 44;)
+    for (r28 = OSGetTick(); (s32) (OSGetTick() - r28) < 44;) {
         continue;
+    }
 
     __DSPRegs[5] |= 1;
-    for (r28 = __DSPRegs[5]; r28 & 1;)
+    for (r28 = __DSPRegs[5]; r28 & 1;) {
         r28 = __DSPRegs[5];
+    }
 }

@@ -53,8 +53,9 @@ void ftMasterHand_801511B0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if (!Player_GetPlayerSlotType(fp->xC_playerID))
+    if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
         ftBossLib_8015BD20(gobj);
+    }
 }
 
 // 801511F4 14DDD4
@@ -85,10 +86,11 @@ static void ftMasterHand_801511FC(HSD_GObj* gobj)
     case 0: {
         HSD_GObj* nearest_enemy = ftLib_8008627C(&fp->cur_pos, gobj);
 
-        if (nearest_enemy != NULL)
+        if (nearest_enemy != NULL) {
             func_8002E6FC((s32) ftLib_80086BE0(nearest_enemy));
-        else
+        } else {
             func_8002E6FC(0);
+        }
 
         func_8002ED9C(40.0f);
         func_8002EEC8(45.0f);

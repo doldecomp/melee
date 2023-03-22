@@ -63,8 +63,9 @@ void __OSUnhandledException(u8 error, OSContext* context, u32 dsisr, u32 dar)
             __OSReschedule();
             OSLoadContext(context);
         }
-        if (error == OS_ERROR_DECREMENTER)
+        if (error == OS_ERROR_DECREMENTER) {
             OSLoadContext(context);
+        }
         OSReport("Unhandled Exception %d", error);
     }
 

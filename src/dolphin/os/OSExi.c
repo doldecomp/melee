@@ -114,11 +114,13 @@ bool EXIImmEx(EXIChannel chan, void* buf, s32 len, u32 mode)
     while (len) {
         s32 xLen = (len < 4) ? len : 4;
 
-        if (!EXIImm(chan, buf, xLen, mode, NULL))
+        if (!EXIImm(chan, buf, xLen, mode, NULL)) {
             return false;
+        }
 
-        if (!EXISync(chan))
+        if (!EXISync(chan)) {
             return false;
+        }
 
         buf = (u8*) buf + xLen;
 

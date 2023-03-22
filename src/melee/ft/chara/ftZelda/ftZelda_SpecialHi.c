@@ -34,10 +34,11 @@ void ftZelda_801396E0(HSD_GObj* gobj)
         Vec3 vec;
         lb_8000B1CC(fp->ft_bones[4].x0_jobj, NULL, &vec);
 
-        if (fp->ground_or_air == GA_Ground)
+        if (fp->ground_or_air == GA_Ground) {
             ef_Spawn(0x4F6, gobj, fp->ft_bones->x0_jobj);
-        else
+        } else {
             ef_Spawn(0x4F7, gobj, fp->ft_bones->x0_jobj);
+        }
 
         fp->x2219_flag.bits.b0 = true;
     }
@@ -152,8 +153,9 @@ void ftZelda_801399B4(HSD_GObj* gobj)
 
 void ftZelda_801399F0(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftZelda_8013A244(gobj);
+    }
 }
 
 void ftZelda_80139A2C(HSD_GObj* gobj) {}
@@ -180,8 +182,9 @@ void ftZelda_80139A54(HSD_GObj* gobj)
 
 void ftZelda_80139A98(HSD_GObj* gobj)
 {
-    if (!ft_80082708(gobj))
+    if (!ft_80082708(gobj)) {
         ftZelda_80139B44(gobj);
+    }
 }
 
 void ftZelda_80139AD4(HSD_GObj* gobj)
@@ -190,15 +193,17 @@ void ftZelda_80139AD4(HSD_GObj* gobj)
     f32 facing_dir = fp->facing_dir;
     int ledge_grab_dir;
 
-    if (facing_dir < 0)
+    if (facing_dir < 0) {
         ledge_grab_dir = -1;
-    else
+    } else {
         ledge_grab_dir = +1;
+    }
 
-    if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir))
+    if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir)) {
         ftZelda_80139BB0(gobj);
-    else if (!ftCliffCommon_80081298(gobj))
+    } else if (!ftCliffCommon_80081298(gobj)) {
         return;
+    }
 }
 
 static Fighter_MotionStateChangeFlags const transition_flags0 =
@@ -238,8 +243,9 @@ void ftZelda_80139C1C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.zd.specialhi.x0 -= 1;
 
-    if (fp->mv.zd.specialhi.x0 <= 0)
+    if (fp->mv.zd.specialhi.x0 <= 0) {
         ftZelda_8013A6A8(gobj);
+    }
 }
 
 void ftZelda_80139C58(HSD_GObj* gobj)
@@ -247,8 +253,9 @@ void ftZelda_80139C58(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.zd.specialhi.x0 -= 1;
 
-    if (fp->mv.zd.specialhi.x0 <= 0)
+    if (fp->mv.zd.specialhi.x0 <= 0) {
         ftZelda_8013A764(gobj);
+    }
 }
 
 void ftZelda_80139C94(HSD_GObj* gobj) {}
@@ -283,7 +290,9 @@ void ftZelda_80139CC0(HSD_GObj* gobj)
         env_flags = collData->x134_envFlags;
         if ((env_flags & MPCOLL_RIGHTWALL) != 0 ||
             (env_flags & MPCOLL_LEFTWALL) != 0)
+        {
             ftZelda_8013A6A8(gobj);
+        }
     }
 }
 
@@ -296,12 +305,13 @@ bool ftZelda_80139D60_Helper(HSD_GObj* gobj)
     fighter2 = getFighter(gobj);
     attributes2 = fighter2->x2D4_specialAttributes;
 
-    if (fighter2->mv.zd.specialhi.xC >= attributes2->x4C)
+    if (fighter2->mv.zd.specialhi.xC >= attributes2->x4C) {
         result = true;
-    else if (ft_8009A134(gobj))
+    } else if (ft_8009A134(gobj)) {
         result = false;
-    else
+    } else {
         result = true;
+    }
 
     return result;
 }
@@ -326,10 +336,11 @@ void ftZelda_80139D60(HSD_GObj* gobj)
     {
         int ledge_grab_dir;
 
-        if (fp->facing_dir < 0)
+        if (fp->facing_dir < 0) {
             ledge_grab_dir = -1;
-        else
+        } else {
             ledge_grab_dir = +1;
+        }
 
         if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir)) {
             if (ftZelda_80139D60_Helper(gobj)) {
@@ -343,21 +354,24 @@ void ftZelda_80139D60(HSD_GObj* gobj)
         if ((coll_data->x134_envFlags & MPCOLL_CEIL) != 0) {
             f32 angle = lbVector_AngleXY(&coll_data->x188_ceiling.normal,
                                          &fp->x80_self_vel);
-            if (angle > DEG_TO_RAD * (90.0F + sa->x60))
+            if (angle > DEG_TO_RAD * (90.0F + sa->x60)) {
                 ftZelda_8013A764(gobj);
+            }
         }
 
         if ((coll_data->x134_envFlags & MPCOLL_RIGHTWALL) != 0) {
             f32 angle = lbVector_AngleXY(&coll_data->x160_rightwall.normal,
                                          &fp->x80_self_vel);
-            if (angle > (DEG_TO_RAD * (90.0F + sa->x60)))
+            if (angle > (DEG_TO_RAD * (90.0F + sa->x60))) {
                 ftZelda_8013A764(gobj);
+            }
         }
         if ((coll_data->x134_envFlags & MPCOLL_LEFTWALL) != 0) {
             f32 angle = lbVector_AngleXY(&coll_data->x174_leftwall.normal,
                                          &fp->x80_self_vel);
-            if (angle > (DEG_TO_RAD * (90.0F + sa->x60)))
+            if (angle > (DEG_TO_RAD * (90.0F + sa->x60))) {
                 ftZelda_8013A764(gobj);
+            }
         }
     }
 }
@@ -582,8 +596,9 @@ void ftZelda_8013A448(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftZelda_8013A484(HSD_GObj* gobj)
@@ -635,8 +650,9 @@ void ftZelda_8013A50C(HSD_GObj* gobj)
 
 void ftZelda_8013A588(HSD_GObj* gobj)
 {
-    if (ft_800827A0(gobj) == 0)
+    if (ft_800827A0(gobj) == 0) {
         ftZelda_8013A648(gobj);
+    }
 }
 
 void ftZelda_8013A5C4(HSD_GObj* gobj)
@@ -652,10 +668,11 @@ void ftZelda_8013A5C4(HSD_GObj* gobj)
     {
         int ledge_grab_dir;
 
-        if (fp->facing_dir < 0)
+        if (fp->facing_dir < 0) {
             ledge_grab_dir = -1;
-        else
+        } else {
             ledge_grab_dir = +1;
+        }
 
         if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir) != 0) {
             ft_800D5CB0(gobj, 0, attributes->x6C);
@@ -663,8 +680,9 @@ void ftZelda_8013A5C4(HSD_GObj* gobj)
         }
     }
 
-    if (!ftCliffCommon_80081298(gobj))
+    if (!ftCliffCommon_80081298(gobj)) {
         return;
+    }
 }
 
 void ftZelda_8013A648(HSD_GObj* gobj)

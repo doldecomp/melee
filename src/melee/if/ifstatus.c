@@ -1579,8 +1579,9 @@ inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
 
 void lbl_802F5DE0(HSD_GObj* player, s32 arg1)
 {
-    if (!getPlayerByHUDParent(player)->flags.hide_all_digits)
+    if (!getPlayerByHUDParent(player)->flags.hide_all_digits) {
         func_80391070(player, arg1);
+    }
 }
 
 #ifdef MWERKS_GEKKO

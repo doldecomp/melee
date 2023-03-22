@@ -209,10 +209,11 @@ void ftPeach_8011B93C(HSD_GObj* gobj)
 
     s32 result = ftParts_80074A74(gobj, 2);
 
-    if (result == -1)
+    if (result == -1) {
         ftParts_80074A4C(gobj, 2, 0);
-    else
+    } else {
         ftParts_80074A4C(gobj, 2, -1);
+    }
 }
 
 void ftPeach_OnKnockbackEnter(HSD_GObj* gobj)
@@ -231,7 +232,9 @@ s32 ftPeach_8011BA20(Fighter* fp)
 
     if (!(fp->input.x624_lstick_y >= p_ftCommonData->x70_someLStickYMax) &&
         !(fp->input.x65C_heldInputs & 0xC00))
+    {
         result = 0;
+    }
 
     return result;
 }

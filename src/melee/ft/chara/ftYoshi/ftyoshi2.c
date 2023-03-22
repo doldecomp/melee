@@ -277,8 +277,9 @@ void ftYoshi_8012C54C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ys.unk2.x0 = fp->mv.ys.unk2.x0 + lbl_804D9A28;
 
-    if (ftAnim_IsFramesRemaining(gobj) == 0)
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftYoshi_8012C59C(HSD_GObj* arg0)

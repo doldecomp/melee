@@ -400,8 +400,9 @@ void OSClearContext(register OSContext* context)
 {
     context->mode = 0;
     context->state = 0;
-    if (context == __OSFPUContext)
+    if (context == __OSFPUContext) {
         __OSFPUContext = NULL;
+    }
 }
 
 #ifdef MWERKS_GEKKO

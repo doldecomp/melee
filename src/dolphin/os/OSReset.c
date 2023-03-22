@@ -120,8 +120,9 @@ bool __OSCallResetFunctions(bool funcs_arg)
     OSResetFunctionInfo* iter;
     bool anyReset = false;
 
-    for (iter = ResetFunctionQueue.first; iter != NULL; iter = iter->next)
+    for (iter = ResetFunctionQueue.first; iter != NULL; iter = iter->next) {
         anyReset |= !iter->func(funcs_arg);
+    }
 
     anyReset |= !__OSSyncSram();
 
@@ -166,11 +167,13 @@ void OSResetSystem(int reset, u32 resetCode, bool forceMenu)
     OSDisableScheduler();
     __OSStopAudioSystem();
 
-    if (reset == OS_RESET_SHUTDOWN)
+    if (reset == OS_RESET_SHUTDOWN) {
         disableRecalibration = __PADDisableRecalibration(true);
+    }
 
-    while (!__OSCallResetFunctions(false))
+    while (!__OSCallResetFunctions(false)) {
         continue;
+    }
 
     if (reset == OS_RESET_HOTRESET && forceMenu) {
         OSSram* sram = __OSLockSram();
@@ -178,8 +181,9 @@ void OSResetSystem(int reset, u32 resetCode, bool forceMenu)
 
         __OSUnlockSram(true);
 
-        while (!__OSSyncSram())
+        while (!__OSSyncSram()) {
             continue;
+        }
     }
 
     OSDisableInterrupts();
@@ -215,8 +219,9 @@ extern volatile Unk DAT_cc003000 AT_ADDRESS(0xCC003000);
 
 u32 OSGetResetCode(void)
 {
-    if (DAT_800030e2 != 0)
+    if (DAT_800030e2 != 0) {
         return 0x80000000;
+    }
 
     return ((DAT_cc003000.resetCode & ~7) >> 3);
 }

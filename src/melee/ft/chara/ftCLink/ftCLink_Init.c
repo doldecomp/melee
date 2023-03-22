@@ -140,8 +140,9 @@ void ftCLink_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
 
     Fighter* fp = gobj->user_data;
 
-    if (func_8026B2B4(fp->x1974_heldItem) == true)
+    if (func_8026B2B4(fp->x1974_heldItem) == true) {
         ftParts_80074A4C(gobj, 1, 1);
+    }
 
     ftParts_80074A4C(gobj, 2, 1);
     ftCLink_OnItemPickup(gobj, arg1);
@@ -166,8 +167,9 @@ void ftCLink_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 
     Fighter* fp = gobj->user_data;
 
-    if (func_8026B2B4(fp->x1974_heldItem) == true)
+    if (func_8026B2B4(fp->x1974_heldItem) == true) {
         ftParts_80074A4C(gobj, 1, 0);
+    }
 
     ftParts_80074A4C(gobj, 2, 0);
     ftCLink_OnItemDrop(gobj, arg1);

@@ -73,8 +73,9 @@ void ftMars_80138AA8(HSD_GObj* gobj)
         fp->x221B_b0 = false;
     }
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftMars_80138B64(HSD_GObj* gobj)
@@ -97,8 +98,9 @@ void ftMars_80138B64(HSD_GObj* gobj)
         fp->x221B_b0 = false;
     }
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 void ftMars_80138C20(HSD_GObj* gobj) {}
@@ -233,8 +235,9 @@ void ftMars_80138E68(HSD_GObj* gobj)
 #endif
     }
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 // https://decomp.me/scratch/Jx7Ov
@@ -278,8 +281,9 @@ void ftMars_80138F14(HSD_GObj* gobj)
 #endif
     }
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 // 80138FC0 00135BA0
@@ -362,8 +366,9 @@ void ftMars_80139140(HSD_GObj* gobj)
         fp->facing_dir = fp->x19AC;
         temp_r0 = (s32) fp->x19A4;
 
-        if (temp_r0 > 0)
+        if (temp_r0 > 0) {
             fp->mv.ms.speciallw.x0 = (s32) (temp_r0 * attr->x5C);
+        }
 
         lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, 0, &sp18);
         lb_800119DC(&sp18, 0x78, 0.9f, 0.02f, 1.0471975803375244f);
@@ -371,10 +376,11 @@ void ftMars_80139140(HSD_GObj* gobj)
         {
             enum_t msid;
 
-            if (fp->ground_or_air == GA_Ground)
+            if (fp->ground_or_air == GA_Ground) {
                 msid = 0x172;
-            else
+            } else {
                 msid = 0x174;
+            }
 
             Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0, 1, 0);
         }

@@ -21,20 +21,23 @@ static any_t DLAddFront(HeapCell* neighbor, HeapCell* cell)
 {
     cell->next = neighbor;
     cell->prev = NULL;
-    if (neighbor != NULL)
+    if (neighbor != NULL) {
         neighbor->prev = cell;
+    }
     return cell;
 }
 
 /// Removes @p cell from @p list and returns @p list. */
 static HeapCell* DLExtract(HeapCell* list, HeapCell* cell)
 {
-    if (cell->next != NULL)
+    if (cell->next != NULL) {
         cell->next->prev = cell->prev;
-    if (cell->prev == NULL)
+    }
+    if (cell->prev == NULL) {
         list = cell->next;
-    else
+    } else {
         cell->prev->next = cell->next;
+    }
 
     return list;
 }
@@ -48,8 +51,9 @@ static HeapCell* DLInsert(HeapCell* list, HeapCell* cell, unk_t _)
     HeapCell* after = list;
 
     while (after != NULL) {
-        if (cell <= after)
+        if (cell <= after) {
             break;
+        }
         before = after;
         after = after->next;
     }
@@ -61,8 +65,9 @@ static HeapCell* DLInsert(HeapCell* list, HeapCell* cell, unk_t _)
             cell->size += after->size;
             after = after->next;
             cell->next = after;
-            if (after != NULL)
+            if (after != NULL) {
                 after->prev = cell;
+            }
         }
     }
     if (before != NULL) {
@@ -70,8 +75,9 @@ static HeapCell* DLInsert(HeapCell* list, HeapCell* cell, unk_t _)
         if ((u8*) before + before->size == (u8*) cell) {
             before->size += cell->size;
             before->next = after;
-            if (after != NULL)
+            if (after != NULL) {
                 after->prev = before;
+            }
         }
         return list;
     }
@@ -86,12 +92,15 @@ any_t OSAllocFromHeap(OSHeapHandle heap, size_t size)
     size_t leftoverSpace;
 
     // find first cell with enough capacity
-    for (cell = hd->free; cell != NULL; cell = cell->next)
-        if ((signed) sizeAligned <= (signed) cell->size)
+    for (cell = hd->free; cell != NULL; cell = cell->next) {
+        if ((signed) sizeAligned <= (signed) cell->size) {
             break;
+        }
+    }
 
-    if (cell == NULL)
+    if (cell == NULL) {
         return NULL;
+    }
 
     leftoverSpace = cell->size - sizeAligned;
     if (leftoverSpace < MINOBJSIZE) {
@@ -105,12 +114,14 @@ any_t OSAllocFromHeap(OSHeapHandle heap, size_t size)
         newcell->size = leftoverSpace;
         newcell->prev = cell->prev;
         newcell->next = cell->next;
-        if (newcell->next != NULL)
+        if (newcell->next != NULL) {
             newcell->next->prev = newcell;
-        if (newcell->prev != NULL)
+        }
+        if (newcell->prev != NULL) {
             newcell->prev->next = newcell;
-        else
+        } else {
             hd->free = newcell;
+        }
     }
 
     // add the cell to the beginning of the allocated list
@@ -127,12 +138,14 @@ void OSFreeToHeap(OSHeapHandle heap, any_t ptr)
 
     // remove cell from the allocated list
     // hd->allocated = DLExtract(hd->allocated, cell);
-    if (cell->next != NULL)
+    if (cell->next != NULL) {
         cell->next->prev = cell->prev;
-    if (cell->prev == NULL)
+    }
+    if (cell->prev == NULL) {
         list = cell->next;
-    else
+    } else {
         cell->prev->next = cell->next;
+    }
 
     hd->allocated = list;
     hd->free = DLInsert(hd->free, cell, list);

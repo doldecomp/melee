@@ -194,8 +194,9 @@ bool ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 ret = false;
 
-    if (!fp->fv.ns.pkthunder_gobj)
+    if (!fp->fv.ns.pkthunder_gobj) {
         return false;
+    }
 
     switch (fp->mv.ns.specialhi.thunderColl) {
     case 0:
@@ -866,8 +867,9 @@ void ftNess_SpecialHiEnd_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 /// Ness's grounded PK Thunder 2 Animation callback
@@ -976,15 +978,17 @@ void ftNess_SpecialAirHiHold_Anim(HSD_GObj* gobj)
 
     {
         int pkt_timer0 = fp0->mv.ns.specialhi.thunderTimerLoop1;
-        if (pkt_timer0 > 0)
+        if (pkt_timer0 > 0) {
             fp0->mv.ns.specialhi.thunderTimerLoop1 = (s32) (pkt_timer0 - 1);
+        }
     }
 
     if (fp0->fv.ns.pkthunder_gobj == NULL) {
         int pkt_timer1 = fp0->mv.ns.specialhi.thunderTimerLoop2;
 
-        if (pkt_timer1 > 0)
+        if (pkt_timer1 > 0) {
             fp0->mv.ns.specialhi.thunderTimerLoop2 = (s32) (pkt_timer1 - 1);
+        }
     }
 
     if (fp0->fv.ns.pkthunder_gobj == NULL) {
@@ -1113,8 +1117,9 @@ void ftNess_SpecialAirHi_Anim(HSD_GObj* gobj)
         f32 temp_f1 = fp1->mv.ns.specialhi.fallAccel;
         f32 phi_f1 = temp_f1;
 
-        if (temp_f1 < 0)
+        if (temp_f1 < 0) {
             phi_f1 = -temp_f1;
+        }
 
         fp1->x80_self_vel.y = (f32) -phi_f1;
         ftCommon_8007D60C(fp1);
@@ -1269,15 +1274,17 @@ void ftNess_SpecialHi_Phys(HSD_GObj* gobj)
           ground_vel);
 
     if (fp0->facing_dir == +1) {
-        if (fp0->gr_vel <= vel_epsilon)
+        if (fp0->gr_vel <= vel_epsilon) {
             fp0->gr_vel = ground_vel;
+        }
     } else if (fp0->gr_vel >= -vel_epsilon) {
         fp0->gr_vel = ground_vel;
     }
 
     if (fp0->mv.ns.specialhi.facingDir == +1) {
-        if (fp0->x80_self_vel.y <= vel_epsilon)
+        if (fp0->x80_self_vel.y <= vel_epsilon) {
             fp0->x80_self_vel.y = vel_y;
+        }
     } else if (fp0->x80_self_vel.y >= -vel_epsilon) {
         fp0->x80_self_vel.y = vel_y;
     }
@@ -1448,8 +1455,9 @@ void ftNess_SpecialAirHi_Phys(HSD_GObj* gobj)
     temp_f2 = phi_f1 - ness_attr->x5C_PK_THUNDER_2_DECELERATION_RATE;
     phi_f31 = temp_f2;
 
-    if (temp_f2 <= vel_epsilon)
+    if (temp_f2 <= vel_epsilon) {
         phi_f31 = phi_f1;
+    }
 
     fp->x80_self_vel.x = phi_f31 * cosf(fp->mv.ns.specialhi.aerialVel);
     fp->x80_self_vel.y = phi_f31 * sinf(fp->mv.ns.specialhi.aerialVel);

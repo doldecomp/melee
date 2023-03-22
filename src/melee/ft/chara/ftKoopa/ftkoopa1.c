@@ -243,11 +243,13 @@ void ftKoopa_80132E30(HSD_GObj* gobj)
         }
     }
 
-    if (fp->x2200_ftcmd_var0 == 0)
+    if (fp->x2200_ftcmd_var0 == 0) {
         return;
+    }
 
-    if (fp->x1A58_interactedFighter == NULL)
+    if (fp->x1A58_interactedFighter == NULL) {
         return;
+    }
 
     {
         HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
@@ -487,18 +489,21 @@ void ftKoopa_801334E4(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    if ((signed) fp->mv.kp.unk1.xC != 0)
+    if ((signed) fp->mv.kp.unk1.xC != 0) {
         fp->facing_dir = -fp->facing_dir;
+    }
 
     Fighter_ChangeMotionState(gobj, 351, transition_flags1, 0,
                               fp->x894_currentAnimFrame, lbl_804D9ADC,
                               lbl_804D9AD8);
 
-    if ((s32) fp->mv.kp.unk1.xC != 0)
+    if ((s32) fp->mv.kp.unk1.xC != 0) {
         fp->facing_dir = -fp->facing_dir;
+    }
 
-    if (fp->x1A58_interactedFighter != NULL)
+    if (fp->x1A58_interactedFighter != NULL) {
         ft_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaF);
+    }
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -510,18 +515,21 @@ void ftKoopa_8013359C(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    if ((signed) fp->mv.kp.unk1.xC != 0)
+    if ((signed) fp->mv.kp.unk1.xC != 0) {
         fp->facing_dir = -fp->facing_dir;
+    }
 
     Fighter_ChangeMotionState(gobj, 352, transition_flags1, 0,
                               fp->x894_currentAnimFrame, lbl_804D9ADC,
                               lbl_804D9AD8);
 
-    if ((signed) fp->mv.kp.unk1.xC != 0)
+    if ((signed) fp->mv.kp.unk1.xC != 0) {
         fp->facing_dir = -fp->facing_dir;
+    }
 
-    if (fp->x1A58_interactedFighter != NULL)
+    if (fp->x1A58_interactedFighter != NULL) {
         ft_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaB);
+    }
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -529,14 +537,16 @@ void ftKoopa_8013359C(HSD_GObj* gobj)
 
 void ftKoopa_80133654(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftKoopa_80133690(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 static Fighter_MotionStateChangeFlags const transition_flags3 =
@@ -564,8 +574,9 @@ void ftKoopa_801336CC(HSD_GObj* gobj)
             }
         }
 
-        if (ftAnim_IsFramesRemaining(gobj))
+        if (ftAnim_IsFramesRemaining(gobj)) {
             return;
+        }
 
         if ((signed) fp1->mv.kp.unk1.x0 != 0) {
             fp1->mv.kp.unk1.x4 = true;

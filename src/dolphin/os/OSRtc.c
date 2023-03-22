@@ -68,8 +68,9 @@ bool WriteSram(void* buffer, u32 offset, u32 size)
     bool err;
     u32 cmd;
 
-    if (!EXILock(RTC_CHAN, RTC_DEV, WriteSramCallback))
+    if (!EXILock(RTC_CHAN, RTC_DEV, WriteSramCallback)) {
         return false;
+    }
 
     if (!EXISelect(RTC_CHAN, RTC_DEV, RTC_FREQ)) {
         EXIUnlock(RTC_CHAN);

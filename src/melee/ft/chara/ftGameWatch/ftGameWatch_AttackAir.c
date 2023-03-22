@@ -90,8 +90,9 @@ bool ftGameWatch_ItemCheckParachuteRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 msid = fp->motion_id;
 
-    if (msid >= ftGw_MS_AttackAirN && msid <= ftGw_MS_LandingAirN)
+    if (msid >= ftGw_MS_AttackAirN && msid <= ftGw_MS_LandingAirN) {
         return false;
+    }
 
     return true;
 }
@@ -138,8 +139,9 @@ static void ftGameWatch_ItemTurtleOnLand(HSD_GObj* gobj)
         ftGameWatch_AttackAir_ExitItemHitlag(gobj);
 
         // Deliberate msid mismatch to prevent item animation from freezing???
-        if (fp->motion_id == ftGw_MS_LandingAirN)
+        if (fp->motion_id == ftGw_MS_LandingAirN) {
             func_802C7158(fp->fv.gw.x225C_turtleGObj);
+        }
 
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
@@ -228,8 +230,9 @@ void ftGameWatch_ItemSparkyOnLand(HSD_GObj* gobj)
     if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(gobj);
 
-        if (fp->motion_id == ftGw_MS_LandingAirN)
+        if (fp->motion_id == ftGw_MS_LandingAirN) {
             func_802C7424(fp->fv.gw.x2260_sparkyGObj);
+        }
 
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
@@ -398,14 +401,17 @@ void ftGameWatch_LandingAirN_Action(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->fv.gw.x2258_parachuteGObj != NULL)
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         func_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
+    }
 
-    if (fp->fv.gw.x225C_turtleGObj != NULL)
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
         func_802C70E0(fp->fv.gw.x225C_turtleGObj);
+    }
 
-    if (fp->fv.gw.x2260_sparkyGObj != NULL)
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         func_802C73AC(fp->fv.gw.x2260_sparkyGObj);
+    }
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         ftGameWatch_LandingAirN_Init(gobj);
@@ -470,14 +476,17 @@ void ftGameWatch_LandingAirB_Action(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->fv.gw.x2258_parachuteGObj != NULL)
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         func_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
+    }
 
-    if (fp->fv.gw.x225C_turtleGObj != NULL)
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
         func_802C70E0(fp->fv.gw.x225C_turtleGObj);
+    }
 
-    if (fp->fv.gw.x2260_sparkyGObj != NULL)
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         func_802C73AC(fp->fv.gw.x2260_sparkyGObj);
+    }
 
     if ((u32) fp->x2200_ftcmd_var0 != 0) {
         ftGameWatch_LandingAirB_Init(gobj);
@@ -532,14 +541,17 @@ void ftGameWatch_LandingAirHi_Action(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (fp->fv.gw.x2258_parachuteGObj != NULL)
+    if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         func_802C6DD8(fp->fv.gw.x2258_parachuteGObj);
+    }
 
-    if (fp->fv.gw.x225C_turtleGObj != NULL)
+    if (fp->fv.gw.x225C_turtleGObj != NULL) {
         func_802C70E0(fp->fv.gw.x225C_turtleGObj);
+    }
 
-    if (fp->fv.gw.x2260_sparkyGObj != NULL)
+    if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         func_802C73AC(fp->fv.gw.x2260_sparkyGObj);
+    }
 
     if (fp->x2200_ftcmd_var0 != 0) {
         ftGameWatch_LandingAirHi_Init(gobj);

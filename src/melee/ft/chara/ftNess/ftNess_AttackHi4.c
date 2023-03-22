@@ -128,17 +128,21 @@ s32 ftNess_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
 
     /// @todo Define flags.
     retval = 0;
-    if ((sp34.x134_envFlags & 0x18000) != 0)
+    if ((sp34.x134_envFlags & 0x18000) != 0) {
         retval |= 0x8000;
+    }
 
-    if ((sp34.x134_envFlags & 0x3F) != 0)
+    if ((sp34.x134_envFlags & 0x3F) != 0) {
         retval |= 1;
+    }
 
-    if ((sp34.x134_envFlags & 0xFC0) != 0)
+    if ((sp34.x134_envFlags & 0xFC0) != 0) {
         retval |= 0x40;
+    }
 
-    if ((sp34.x134_envFlags & 0x6000) != 0)
+    if ((sp34.x134_envFlags & 0x6000) != 0) {
         retval |= 0x2000;
+    }
 
     return retval;
 }
@@ -364,8 +368,9 @@ void ftNess_YoyoApplySmash(HSD_GObj* gobj)
     fp->x2114_SmashAttr.x2128 = colAnimID;
     smashColAnimID = smash_attr->x2128;
 
-    if (smash_attr->x2128 != 0x7B)
+    if (smash_attr->x2128 != 0x7B) {
         ft_800BFFD0(fp, smashColAnimID, 0);
+    }
 
     ftCommon_8007EBAC(fp, 0x24U, 0U);
     ft_80088510(fp, 0x334A7, 0x7F, 0x40);
@@ -611,8 +616,9 @@ void ftNess_YoyoItemSetUnk2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->fv.ns.yoyo_gobj)
+    if (fp->fv.ns.yoyo_gobj) {
         func_802BE5B8(fp->fv.ns.yoyo_gobj);
+    }
 }
 
 void ftNess_AttackHi4_Action(HSD_GObj* gobj)

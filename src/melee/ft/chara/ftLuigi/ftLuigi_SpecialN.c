@@ -44,30 +44,34 @@ void ftLuigi_SpecialAirN_StartMotion(HSD_GObj* gobj)
 // callback
 void ftLuigi_SpecialN_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 // 0x80142798 - Luigi's aerial Fireball Animation callback
 void ftLuigi_SpecialAirN_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 // 0x801427D4
 // https://decomp.me/scratch/JesBp // Luigi's grounded Fireball IASA callback
 void ftLuigi_SpecialN_IASA(HSD_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->x2200_ftcmd_var0 != 0U)
+    if (GET_FIGHTER(gobj)->x2200_ftcmd_var0 != 0U) {
         ft_8008A4D4(gobj);
+    }
 }
 
 // 0x80142804 - Luigi's aerial Fireball IASA callback
 void ftLuigi_SpecialAirN_IASA(HSD_GObj* gobj)
 {
-    if (GET_FIGHTER(gobj)->x2200_ftcmd_var0 != 0U)
+    if (GET_FIGHTER(gobj)->x2200_ftcmd_var0 != 0U) {
         ft_800CCAAC(gobj);
+    }
 }
 
 // 0x80142834 - Luigi's grounded Fireball Physics callback
@@ -125,8 +129,9 @@ void ftLuigi_SpecialN_FireSpawn(HSD_GObj* gobj)
     if (fp->x2210_ThrowFlags.b0 != 0) {
         fp->x2210_ThrowFlags.b0 = 0;
         flag = true;
-    } else
+    } else {
         flag = false;
+    }
 
     if (flag != false) {
         lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x17)].x0_jobj, NULL,

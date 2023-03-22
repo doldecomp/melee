@@ -177,8 +177,9 @@ static bool func_80201F4C(Vec3* a, int _, HSD_JObj* joint)
     Vec3 b;
     lb_8000B1CC(joint, 0, &b);
 
-    if (a->y > b.y)
+    if (a->y > b.y) {
         return true;
-    else
+    } else {
         return false;
+    }
 }

@@ -168,18 +168,20 @@ void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* gobj)
     s32 facingDir;
 
     /// @todo Ternary operator should be possible here somehow.
-    if (fp->facing_dir < 0.0f)
+    if (fp->facing_dir < 0.0f) {
         facingDir = -1;
-    else
+    } else {
         facingDir = 1;
+    }
 
     if (ft_CheckGroundAndLedge(gobj, facingDir) != false) {
         ftFox_SpecialHiHoldAir_AirToGround(gobj);
         return;
     }
 
-    if (ftCliffCommon_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj)) {
         return;
+    }
 }
 
 void ftFox_SpecialHiHold_GroundToAir(HSD_GObj* gobj)
@@ -259,8 +261,9 @@ void ftFox_SpecialHi_Phys(HSD_GObj* gobj)
 
     fp->mv.fx.SpecialHi.unk++;
 
-    if (fp->mv.fx.SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END)
+    if (fp->mv.fx.SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END) {
         ftCommon_8007C930(fp, foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL);
+    }
 
     ftCommon_8007CB74(gobj);
 }
@@ -308,12 +311,13 @@ static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
-    if (fp->mv.fx.SpecialHi.unk2 >= foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR)
+    if (fp->mv.fx.SpecialHi.unk2 >= foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR) {
         return true;
-    else if (ft_8009A134(gobj) != false)
+    } else if (ft_8009A134(gobj) != false) {
         return false;
-    else
+    } else {
         return true;
+    }
 }
 
 /// @todo Rework this entire match.
@@ -373,10 +377,11 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* gobj)
 
             if (var < (0.01745329238474369f *
                        (90.0f + foxAttrs->x94_FOX_FIREFOX_BOUND_ANGLE)))
-
+            {
                 goto facingDir;
-            else
+            } else {
                 continue;
+            }
 
         } while (false); // What?
 
@@ -384,10 +389,11 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* gobj)
 
         {
         facingDir:
-            if (fp->x80_self_vel.x >= 0.0f)
+            if (fp->x80_self_vel.x >= 0.0f) {
                 facingDir = 1.0f;
-            else
+            } else {
                 facingDir = -1.0f;
+            }
 
             fp->facing_dir = facingDir;
             fp->mv.fx.SpecialHi.rotateModel = atan2f(
@@ -560,8 +566,9 @@ void ftFox_SpecialHiLanding_Anim(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 // 0x800E7E78
@@ -638,8 +645,9 @@ void ftFox_SpecialHiFall_Coll(HSD_GObj* gobj)
         ftFox_SpecialHiFall_Action(gobj);
         return;
     }
-    if (ftCliffCommon_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj)) {
         return;
+    }
 }
 
 // 0x800E7FF0

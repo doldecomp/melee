@@ -40,7 +40,9 @@ s32 ft_80087878(HSD_GObj* gobj, s32 arg1)
 
     if ((fp->x1968_jumpsUsed <= 1) && (fp->motion_id == 0) && (arg1 != 0x23) &&
         (arg1 != 0x24) && (arg1 != 0x25))
+    {
         return true;
+    }
 
     return false;
 }
@@ -51,7 +53,9 @@ s32 ft_800878BC(HSD_GObj* gobj)
 
     if ((fp->x1974_heldItem != NULL) &&
         (func_8026B2B4(fp->x1974_heldItem) == 1))
+    {
         return true;
+    }
 
     return false;
 }
@@ -62,7 +66,9 @@ s32 ft_80087900(HSD_GObj* gobj)
 
     if ((fp->x1974_heldItem != NULL) &&
         (itGetKind(fp->x1974_heldItem) == 0x1E))
+    {
         return true;
+    }
 
     return false;
 }
@@ -72,7 +78,9 @@ s32 ft_80087944(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((fp->x1974_heldItem != NULL) && (itGetKind(fp->x1974_heldItem) == 0x7))
+    {
         return true;
+    }
 
     return false;
 }
@@ -81,7 +89,9 @@ s32 ft_80087988(HSD_GObj* gobj)
 {
     if ((ftCommon_GetParasolStatus(gobj) == 4) ||
         (ftCommon_GetParasolStatus(gobj) == 5))
+    {
         return true;
+    }
 
     return false;
 }
@@ -90,8 +100,9 @@ s32 ft_800879D8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x1980 != 0)
+    if (fp->x1980 != 0) {
         return true;
+    }
 
     return false;
 }
@@ -100,8 +111,9 @@ s32 ft_800879F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x221D_flag.bits.b6 & 1)
+    if (fp->x221D_flag.bits.b6 & 1) {
         return true;
+    }
 
     return false;
 }
@@ -114,7 +126,9 @@ s32 ft_80087A18(HSD_GObj* gobj)
     if ((fp->x2226_flag.bits.b4) &&
         ((var1 = ft_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) &&
         ((fp->x2226_flag.bits.b5)))
+    {
         return true;
+    }
 
     return false;
 }
@@ -173,7 +187,9 @@ s32 ft_80087AEC(HSD_GObj* gobj)
     if ((fp->x34_scale.y != fp->x34_scale.x) ||
         ((fp->x2226_flag.bits.b4) || (fp->x2223_flag.bits.b7) ||
          (fp->x197C != 0)))
+    {
         return true;
+    }
 
     return false;
 }
@@ -193,7 +209,9 @@ s32 ft_80087B34(HSD_GObj* gobj)
     {
         if (fVar1 > ((atk_shield_kb_x * atk_shield_kb_x) +
                      (fp->x98_atk_shield_kb.y * fp->x98_atk_shield_kb.y)))
+        {
             return 0;
+        }
 
         return 2;
     }
@@ -201,7 +219,9 @@ s32 ft_80087B34(HSD_GObj* gobj)
     if ((fp->x8c_kb_vel.x * fp->x8c_kb_vel.x) +
             (fp->x8c_kb_vel.y * fp->x8c_kb_vel.y) >
         fVar2)
+    {
         return 1;
+    }
 
     return 2;
 }
@@ -703,10 +723,11 @@ void ft_80088148(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
 
     {
         int rand;
-        if (sfx_id >= 332 && sfx_id <= 370)
+        if (sfx_id >= 332 && sfx_id <= 370) {
             rand = HSD_Randi(200) - 100;
-        else
+        } else {
             rand = 0;
+        }
 
         func_80024B94(fp->x2160, rand);
     }

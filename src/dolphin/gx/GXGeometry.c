@@ -9,25 +9,32 @@ static void __GXSetGenMode(void);
 
 void __GXSetDirtyState(void)
 {
-    if (__GXContexts.main->x4F0_flags & 1)
+    if (__GXContexts.main->x4F0_flags & 1) {
         __GXSetSUTexSize();
-    if (__GXContexts.main->x4F0_flags & 2)
+    }
+    if (__GXContexts.main->x4F0_flags & 2) {
         __GXUpdateBPMask();
-    if (__GXContexts.main->x4F0_flags & 4)
+    }
+    if (__GXContexts.main->x4F0_flags & 4) {
         __GXSetGenMode();
-    if (__GXContexts.main->x4F0_flags & 8)
+    }
+    if (__GXContexts.main->x4F0_flags & 8) {
         __GXSetVCD();
-    if (__GXContexts.main->x4F0_flags & 0x10)
+    }
+    if (__GXContexts.main->x4F0_flags & 0x10) {
         __GXSetVAT();
+    }
     __GXContexts.main->x4F0_flags = 0;
 }
 
 void GXBegin(GXPrimitive type, GXVtxFmt vtxfmt, u16 nverts)
 {
-    if (__GXContexts.main->x4F0_flags != 0)
+    if (__GXContexts.main->x4F0_flags != 0) {
         __GXSetDirtyState();
-    if (__GXContexts.main->x0.u32 == 0)
+    }
+    if (__GXContexts.main->x0.u32 == 0) {
         __GXSendFlushPrim();
+    }
     WGPIPE.u8 = vtxfmt | type;
     WGPIPE.u16 = nverts;
 }
@@ -43,8 +50,9 @@ void __GXSendFlushPrim(void)
     WGPIPE.u8 = GX_DRAW_TRIANGLE_STRIP;
     WGPIPE.u16 = ctx->x4;
 
-    for (i = 0; i < size; i += 4)
+    for (i = 0; i < size; i += 4) {
         WGPIPE.u32 = 0;
+    }
 
     set_x2(GX_TRUE);
 }

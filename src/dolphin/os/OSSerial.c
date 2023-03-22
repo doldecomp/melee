@@ -13,8 +13,9 @@ extern struct {
 
 bool SIBusy(void)
 {
-    if (lbl_80402358.status != -1)
+    if (lbl_80402358.status != -1) {
         return true;
+    }
 
     return false;
 }
@@ -28,8 +29,9 @@ bool SIIsChanBusy(enum_t status)
 {
     bool result = true;
 
-    if (Packet[status].x0 == -1 && lbl_80402358.status != status)
+    if (Packet[status].x0 == -1 && lbl_80402358.status != status) {
         result = false;
+    }
 
     return result;
 }

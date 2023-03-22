@@ -122,8 +122,9 @@ void ftMewtwo_SpecialS_Anim(HSD_GObj* gobj)
 {
     ftMewtwo_SetGrabVictim(gobj);
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 // 0x801468EC
@@ -133,8 +134,9 @@ void ftMewtwo_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     ftMewtwo_SetGrabVictim(gobj);
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 // 0x80146980 - Mewtwo's grounded Confusion IASA callback

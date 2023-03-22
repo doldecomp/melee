@@ -93,8 +93,9 @@ bool ftGameWatch_ItemCheckTorchRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->motion_id == ftGw_MS_AttackS4)
+    if (fp->motion_id == ftGw_MS_AttackS4) {
         return false;
+    }
 
     return true;
 }
@@ -124,8 +125,9 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* gobj)
 // Animation callback
 void ftGameWatch_AttackS4_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 // 0x8014AAC4
@@ -135,8 +137,9 @@ void ftGameWatch_AttackS4_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2218_flag.bits.b0 != false)
+    if (fp->x2218_flag.bits.b0 != false) {
         ft_8008A4D4(gobj);
+    }
 }
 
 // 0x8014AAF4

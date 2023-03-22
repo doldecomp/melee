@@ -101,8 +101,9 @@ void ftLuigi_SpecialAirLw_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
     if (fp2->fv.lg.x222C_cycloneCharge != 0) {
         cycloneVar = 0.0f;
-    } else
+    } else {
         cycloneVar = luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
+    }
     fp2->x80_self_vel.y =
         (f32) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM - cycloneVar);
     ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
@@ -200,8 +201,9 @@ void ftLuigi_SpecialLw_Phys(HSD_GObj* gobj)
                 attrs->x84_LUIGI_CYCLONE_FRICTION_END;
             var2 += fp->mv.lg.SpecialLw.groundVelX;
 
-            if (var2 < 0)
+            if (var2 < 0) {
                 var2 = 0;
+            }
         }
 
         ftCommon_8007CADC(
@@ -248,8 +250,9 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* gobj)
                     attrs1->x84_LUIGI_CYCLONE_FRICTION_END;
                 spd_x += fp->mv.lg.SpecialLw.groundVelX;
 
-                if (spd_x < 0)
+                if (spd_x < 0) {
                     spd_x = 0;
+                }
             }
         }
 

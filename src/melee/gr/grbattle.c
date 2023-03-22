@@ -147,14 +147,17 @@ static HSD_GObj* func_80219D84(int gobj_id)
         gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
 
-        if (callbacks->callback3 != NULL)
+        if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
+        }
 
-        if (callbacks->callback0 != NULL)
+        if (callbacks->callback0 != NULL) {
             callbacks->callback0(gobj);
+        }
 
-        if (callbacks->callback2 != NULL)
+        if (callbacks->callback2 != NULL) {
             func_8038FD54(gobj, callbacks->callback2, 4);
+        }
 
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 232, gobj_id);
@@ -171,8 +174,9 @@ static void func_80219E6C(HSD_GObj* gobj)
 
     grAnime_801C8138(gobj, id, 0);
 
-    if (lbl_804D6AC8 == 0)
+    if (lbl_804D6AC8 == 0) {
         return;
+    }
 
     grLib_801C9A70(0, &v);
     HSD_JObjSetTranslate(Ground_801C2CF4(0), &v);

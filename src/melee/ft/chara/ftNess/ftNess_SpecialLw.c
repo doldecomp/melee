@@ -504,8 +504,9 @@ void ftNess_SpecialLwTurn_Anim(HSD_GObj* arg0)
     {
         Fighter* fp1 = fp0;
 
-        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B))
+        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B)) {
             fp1->mv.ns.speciallw.isRelease = true;
+        }
 
         if (fp1->mv.ns.speciallw.releaseLag > 0) {
             fp1->mv.ns.speciallw.releaseLag =
@@ -533,8 +534,9 @@ void ftNess_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
     {
         Fighter* fp1 = fp0;
 
-        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B))
+        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B)) {
             fp1->mv.ns.speciallw.isRelease = true;
+        }
 
         if (fp1->mv.ns.speciallw.releaseLag > 0) {
             fp1->mv.ns.speciallw.releaseLag =
@@ -543,8 +545,9 @@ void ftNess_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
 
         getAttrStuff(arg0);
 
-        if ((signed) fp1->mv.ns.speciallw.turnFrames <= 0)
+        if ((signed) fp1->mv.ns.speciallw.turnFrames <= 0) {
             ftNess_SpecialLwHold_GroundOrAir(arg0);
+        }
     }
 }
 
@@ -797,8 +800,9 @@ void ftNess_SpecialAirLwHit_Anim(
 
     Fighter* fp = GET_FIGHTER(arg0);
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
         fp->mv.ns.speciallw.isRelease = true;
+    }
 
     if (fp->mv.ns.speciallw.releaseLag > 0) {
         fp->mv.ns.speciallw.releaseLag = fp->mv.ns.speciallw.releaseLag - 1;
@@ -989,10 +993,11 @@ void ftNess_AbsorbThink_DecideAction(
         !(fp->x894_currentAnimFrame <= sa->x7C_PSI_MAGNET_UNK2))
     {
         enum_t msid;
-        if (fp->ground_or_air == GA_Ground)
+        if (fp->ground_or_air == GA_Ground) {
             msid = MS_NESS_SPECIALLW_HIT;
-        else
+        } else {
             msid = MS_NESS_SPECIALAIRLW_HIT;
+        }
 
         Fighter_ChangeMotionState(gobj, msid, 2, NULL, 0, 1, 0);
         ftColl_CreateAbsorbHit(gobj, &sa->x98_PSI_MAGNET_ABSORPTION);
@@ -1083,8 +1088,9 @@ void ftNess_SpecialAirLwEnd_Phys(
 void ftNess_SpecialLwEnd_Coll(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet End Collision callback
 {
-    if (!ft_80082708(gobj))
+    if (!ft_80082708(gobj)) {
         ftNess_SpecialLwEnd_GroundToAir(gobj);
+    }
 }
 
 // 0x8011B3A8

@@ -16,16 +16,18 @@
 // https://decomp.me/scratch/erd6U
 void ftMasterHand_80153000(HSD_GObj* arg0)
 {
-    if (!ftAnim_IsFramesRemaining(arg0))
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         ftMasterHand_80151018(arg0);
+    }
 }
 
 // 8015303C 14FC1C
 void ftMasterHand_8015303C(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(arg0);
+    }
 }
 
 // 80153080 14FC60
@@ -82,10 +84,11 @@ void ftMasterHand_80153160(HSD_GObj* gobj)
             temp_r29 = ftData->ext_attr;
             ftMasterHand_801533CC(gobj);
 
-            if (ftLib_80087120(gobj) > temp_r29->xEC)
+            if (ftLib_80087120(gobj) > temp_r29->xEC) {
                 fp->mv.mh.unk0.x54 = temp_r29->xF0;
-            else
+            } else {
                 fp->mv.mh.unk0.x54 = 1;
+            }
 
             fp->x2208_ftcmd_var2 = 0;
         }
@@ -97,8 +100,9 @@ void ftMasterHand_80153160(HSD_GObj* gobj)
 void ftMasterHand_80153210(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(arg0);
+    }
 }
 
 // 80153254 14FE34
@@ -229,8 +233,9 @@ void ftMasterHand_8015346C(HSD_GObj* gobj)
 void ftMasterHand_80153548(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(arg0);
+    }
 }
 
 // 8015358C 15016C
@@ -283,8 +288,9 @@ void ftMasterHand_8015364C(HSD_GObj* arg0, HSD_JObj* arg1, f32 arg2, f32 arg3)
     sp28_leek.x += arg2;
     sp28_leek.y += arg3;
 
-    if (ftLib_80087120(arg0) > attr->xEC)
+    if (ftLib_80087120(arg0) > attr->xEC) {
         phi_r29 = 1;
+    }
 
     func_802F0AE0(arg0, &sp28_leek, &sp1C_carrot, 0x7E, phi_r29,
                   fp->facing_dir, attr->xD4, attr->xD8);

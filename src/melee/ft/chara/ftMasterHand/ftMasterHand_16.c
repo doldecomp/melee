@@ -9,16 +9,18 @@
 // https://decomp.me/scratch/003fu
 void ftMasterHand_8015377C(HSD_GObj* arg0)
 {
-    if (!ftAnim_IsFramesRemaining(arg0))
+    if (!ftAnim_IsFramesRemaining(arg0)) {
         ftMasterHand_80151018(arg0);
+    }
 }
 
 // 801537B8 150398
 void ftMasterHand_801537B8(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(arg0);
+    }
 }
 
 // 801537FC 1503DC

@@ -42,8 +42,9 @@ static inline void GXSetMisc_inline_3(void)
 {
     GXContext* gx = __GXContexts.main;
 
-    if (gx->x4)
+    if (gx->x4) {
         gx->x4F0_flags |= 8;
+    }
 }
 
 void GXSetMisc(s32 arg0, u32 arg1)
@@ -69,11 +70,13 @@ void GXSetDrawDone(void)
     WGPIPE.u8 = GX_LOAD_BP_REG;
     WGPIPE.u32 = 0x45000002;
 
-    if (__GXContexts.main->x4F0_flags != 0)
+    if (__GXContexts.main->x4F0_flags != 0) {
         __GXSetDirtyState();
+    }
 
-    for (i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++) {
         WGPIPE.u32 = 0;
+    }
 
     PPCSync();
     lbl_804D7328[0] = GX_FALSE;
@@ -84,8 +87,9 @@ void GXWaitDrawDone(void)
 {
     u32 interrupt_enabled = OSDisableInterrupts();
 
-    while (!lbl_804D7328[0])
+    while (!lbl_804D7328[0]) {
         OSSleepThread(&GXDrawDoneThreadQueue);
+    }
 
     OSRestoreInterrupts(interrupt_enabled);
 }
