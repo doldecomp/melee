@@ -171,7 +171,7 @@ void ftSamus_CreateThrowGrappleBeam(HSD_GObj* gobj, s32 motion_state,
     Fighter* fp = getFighter(gobj);
     void** item_list = fp->ft_data->x48_items;
     struct UNK_SAMUS_S1* beam = item_list[4];
-    Fighter_SetAccessory(fp, beam->x0_joint);
+    ftCommon_SetAccessory(fp, beam->x0_joint);
 
     scale.x = scale.y = scale.z = fp->x34_scale.y;
     HSD_JObjSetScale((fighter_copy = fp)->x20A0_accessory, &scale);
