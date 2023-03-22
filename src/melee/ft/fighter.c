@@ -824,12 +824,12 @@ static void Fighter_Create_Inline2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2229_b5_no_normal_motion) {
-        fp->x2EC = func_8001E8F8(ftData_80085E50(fp, 0x23));
+        fp->x2EC = lbMthp_8001E8F8(ftData_80085E50(fp, 0x23));
         if (!fp->x2228_flag.bits.b2) {
-            fp->x2DC = func_8001E8F8(ftData_80085E50(fp, 7));
-            fp->x2E0 = func_8001E8F8(ftData_80085E50(fp, 8));
-            fp->x2E4 = func_8001E8F8(ftData_80085E50(fp, 9));
-            fp->x2E8 = func_8001E8F8(ftData_80085E50(fp, 0x25));
+            fp->x2DC = lbMthp_8001E8F8(ftData_80085E50(fp, 7));
+            fp->x2E0 = lbMthp_8001E8F8(ftData_80085E50(fp, 8));
+            fp->x2E4 = lbMthp_8001E8F8(ftData_80085E50(fp, 9));
+            fp->x2E8 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x25));
         }
     }
 }

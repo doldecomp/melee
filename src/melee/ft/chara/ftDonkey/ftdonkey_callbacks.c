@@ -205,9 +205,9 @@ void ftDonkey_OnLoad(HSD_GObj* gobj)
     ftData* ftdata = fp->ft_data;
     ftDonkeyAttributes* ftData_attr = ftdata->ext_attr;
 
-    ftData_attr->x8 = func_8001E8F8(ftData_80085E50(fp, 0x128U));
-    ftData_attr->xC = func_8001E8F8(ftData_80085E50(fp, 0x129U));
-    ftData_attr->x10 = func_8001E8F8(ftData_80085E50(fp, 0x12AU));
+    ftData_attr->x8 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x128U));
+    ftData_attr->xC = lbMthp_8001E8F8(ftData_80085E50(fp, 0x129U));
+    ftData_attr->x10 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x12AU));
     PUSH_ATTRS(fp, ftDonkeyAttributes);
 
     fp->x2222_flag.bits.b0 = 1;

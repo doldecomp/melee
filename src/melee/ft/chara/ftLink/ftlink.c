@@ -134,7 +134,7 @@ void ftLink_OnLoad(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLinkAttributes* link_attr = fp->ft_data->ext_attr;
     void** item_list = fp->ft_data->x48_items;
-    link_attr->x54 = func_8001E8F8(ftData_80085E50(fp, 0x48U));
+    link_attr->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x48U));
     PUSH_ATTRS(fp, ftLinkAttributes);
 
     link_attr = fp->x2D4_specialAttributes;
