@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
-void func_802F3424(void);
-void func_802F3690(void);
-void func_802F343C(void);
+void ifAll_802F3424(void);
+void ifAll_802F3690(void);
+void ifAll_802F343C(void);
 
 #endif
