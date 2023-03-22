@@ -451,8 +451,8 @@ ftColl_8007B918:
 /* 8007B91C 000784FC  40 82 FF DC */	bne ftColl_8007B8F8
 /* 8007B920 00078500  4E 80 00 20 */	blr
 
-.global func_getWindOffsetVec_8007B924
-func_getWindOffsetVec_8007B924:
+.global ftColl_GetWindOffsetVec
+ftColl_GetWindOffsetVec:
 /* 8007B924 00078504  7C 08 02 A6 */	mflr r0
 /* 8007B928 00078508  90 01 00 04 */	stw r0, 4(r1)
 /* 8007B92C 0007850C  94 21 FF C8 */	stwu r1, -0x38(r1)

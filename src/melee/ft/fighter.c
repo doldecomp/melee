@@ -2349,8 +2349,8 @@ void Fighter_procUpdate(HSD_GObj* gobj)
             PSVECAdd(&fp->cur_pos, (Vec3*) pAtkShieldKB, &fp->cur_pos);
         }
         // accumulate wind hazards into the windOffset vector
-        func_getWindOffsetVec_8007B924(gobj,
-                                       /*result vec3*/ &windOffset);
+        ftColl_GetWindOffsetVec(gobj,
+                                /*result vec3*/ &windOffset);
     } else {
         VEC_CLEAR(windOffset);
     }

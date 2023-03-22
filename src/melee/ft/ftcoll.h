@@ -45,7 +45,7 @@ void ftColl_8007B6EC(HSD_GObj*);
 void ftColl_8007B760(HSD_GObj*, s32);
 void ftColl_8007B8CC(Fighter*, HSD_GObj*);
 void ftColl_8007B8E8(HSD_GObj*);
-void func_getWindOffsetVec_8007B924(HSD_GObj*, Vec3* out_wind);
+void ftColl_GetWindOffsetVec(HSD_GObj*, Vec3* out_wind);
 void ftColl_8007BA0C(HSD_GObj*);
 void ftColl_8007BAC0(HSD_GObj*);
 f32 ftColl_8007BBCC(HSD_GObj*);
