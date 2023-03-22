@@ -94,7 +94,7 @@ void ftWalkCommon_800DFDDC(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (Stage_GetGroundFrictionMultiplier(fp) < 1) {
+    if (ft_81B_GetGroundFrictionMultiplier(fp) < 1) {
         velocity_f2 = fp->mv.co.walk.x0;
     } else {
         velocity_f2 = fp->gr_vel;

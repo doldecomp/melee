@@ -135,7 +135,7 @@ void ftCommon_8007CB74(HSD_GObj* gobj)
 #endif
 
     ground_normal = &fp->x6F0_collData.x14C_ground.normal;
-    temp_f1 = Stage_GetGroundFrictionMultiplier(fp);
+    temp_f1 = ft_81B_GetGroundFrictionMultiplier(fp);
     if (temp_f1 < 1) {
         fp->xE4_ground_accel_1 *= temp_f1;
     }
@@ -2016,7 +2016,7 @@ void ftCommon_800804A0(Fighter* fp, f32 arg8)
 {
     f32 temp_f1;
     f32 phi_f31 = arg8;
-    if ((temp_f1 = Stage_GetGroundFrictionMultiplier(fp)) < 1) {
+    if ((temp_f1 = ft_81B_GetGroundFrictionMultiplier(fp)) < 1) {
         phi_f31 *= temp_f1;
     }
     fp->xE8_ground_accel_2 = phi_f31;

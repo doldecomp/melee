@@ -6071,7 +6071,7 @@ ftKirby_800F3B94:
 /* 800F3BA0 000F0780  FF E0 00 90 */	fmr f31, f0
 ftKirby_800F3BA4:
 /* 800F3BA4 000F0784  7F E3 FB 78 */	mr r3, r31
-/* 800F3BA8 000F0788  4B F9 0E 99 */	bl Stage_GetGroundFrictionMultiplier
+/* 800F3BA8 000F0788  4B F9 0E 99 */	bl ft_81B_GetGroundFrictionMultiplier
 /* 800F3BAC 000F078C  C0 02 99 B0 */	lfs f0, lbl_804D9390@sda21(r2)
 /* 800F3BB0 000F0790  FC 1F 00 40 */	fcmpo cr0, f31, f0
 /* 800F3BB4 000F0794  40 80 00 0C */	bge ftKirby_800F3BC0
