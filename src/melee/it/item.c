@@ -1437,11 +1437,11 @@ void func_802697D4(HSD_GObj* item_gobj)
         if ((item_data->xDCE_flag.bits.b3 != 0) &&
             (func_8026D604(item_gobj) != 0))
         {
-            func_800567C0(item_data->xC30, &item_data->pos,
-                          &item_data->x64_vec_unk2);
+            mpLib_800567C0(item_data->xC30, &item_data->pos,
+                           &item_data->x64_vec_unk2);
         } else {
-            func_800567C0(item_data->x378_itemColl.x14C_ground.index,
-                          &item_data->pos, &item_data->x64_vec_unk2);
+            mpLib_800567C0(item_data->x378_itemColl.x14C_ground.index,
+                           &item_data->pos, &item_data->x64_vec_unk2);
         }
     }
     PSVECAdd(&item_data->pos, &item_data->x64_vec_unk2, &item_data->pos);

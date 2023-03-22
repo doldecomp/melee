@@ -294,12 +294,12 @@ void ftMasterHand_80150230(HSD_GObj* gobj)
                 }
                 switch (tmp2) {
                 case 0x15B: // Stage-Wide Slap
-                    func_80053FF4(0, &vec);
+                    mpLib_80053FF4(0, &vec);
                     vec.y = attr->x38;
                     ftMasterHand_80150DC4(gobj, &ftMasterHand_80151828, &vec);
                     break;
                 case 0x15D: // Sweep
-                    func_80053FF4(0, &vec);
+                    mpLib_80053FF4(0, &vec);
                     vec.y = attr->x50.y;
                     ftMasterHand_80150DC4(gobj, &ftMasterHand_80151BB8, &vec);
                     break;
@@ -408,12 +408,12 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
 
     if (l_pressed && (r6_button & HSD_BUTTON_DPAD_UP)) {
         // Stage-Wide Slap
-        func_80053FF4(0, &sp10_pos);
+        mpLib_80053FF4(0, &sp10_pos);
         sp10_pos.y = r31_attributes->x38;
         ftMasterHand_80150DC4(gobj, &ftMasterHand_80151828, &sp10_pos);
     } else if (l_pressed && (r6_button & HSD_BUTTON_DPAD_RIGHT)) {
         // Sweep
-        func_80053FF4(0, &sp10_pos);
+        mpLib_80053FF4(0, &sp10_pos);
         sp10_pos.y = r31_attributes->x50.y;
         ftMasterHand_80150DC4(gobj, &ftMasterHand_80151BB8, &sp10_pos);
     } else if (l_pressed && (r6_button & HSD_BUTTON_DPAD_DOWN)) {

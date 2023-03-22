@@ -169,10 +169,10 @@ void lbl_80220AC8(HSD_GObj* arg0) {}
 bool lbl_80220ACC(enum_t arg0)
 {
     if (arg0 != -1) {
-        enum_t i = func_80056B6C(arg0);
+        enum_t i = mpLib_80056B6C(arg0);
 
         if (i != -1 && i == 0) {
-            i = func_80054C6C(arg0);
+            i = mpLib_80054C6C(arg0);
 
             if (i == (1 << 0)) {
                 return lbl_804D6AF8->unk_0;

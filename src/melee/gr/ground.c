@@ -450,8 +450,8 @@ void Ground_801C0800(StructPairWithStageID* pair)
         psInitDataBankLoad(0x1E, stage_info.x6B8, stage_info.x6BC, 0, 0);
     }
 
-    func_8004D288(stage_info.x6AC);
-    func_80058820();
+    mpLib_8004D288(stage_info.x6AC);
+    mpLib_80058820();
     Ground_801C1E94();
     Ground_801C466C();
     stage_data->callback0();
@@ -2365,9 +2365,9 @@ bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
         max = temp_r3->unk4->unk8[arg1].unk24;
 
         for (i = 0; i < max; i++, cur++) {
-            func_800552B0(cur->x, jobj, cur->z);
-            func_80055E9C(cur->x);
-            func_80057424(cur->x);
+            mpLib_800552B0(cur->x, jobj, cur->z);
+            mpLib_80055E9C(cur->x);
+            mpLib_80057424(cur->x);
             result = true;
         }
     }
@@ -2377,9 +2377,9 @@ bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
 
     for (i = 0; i < max; i++, cur++) {
         if (cur->y == arg1) {
-            func_800552B0(cur->x, jobj, cur->z);
-            func_80055E9C(cur->x);
-            func_80057424(cur->x);
+            mpLib_800552B0(cur->x, jobj, cur->z);
+            mpLib_80055E9C(cur->x);
+            mpLib_80057424(cur->x);
             result = true;
         }
     }
@@ -2407,7 +2407,7 @@ asm void Ground_801C2FE0(HSD_GObj*)
 /* 801C3004 001BFBE4  28 00 00 00 */	cmplwi r0, 0
 /* 801C3008 001BFBE8  40 82 01 08 */	bne lbl_801C3110
 /* 801C300C 001BFBEC  3B A0 00 00 */	li r29, 0
-/* 801C3010 001BFBF0  4B E8 A1 6D */	bl func_8004D17C
+/* 801C3010 001BFBF0  4B E8 A1 6D */	bl mpLib_8004D17C
 /* 801C3014 001BFBF4  A8 CD B2 B4 */	lha r6, lbl_804D6954
 /* 801C3018 001BFBF8  3C A0 80 4A */	lis r5, stage_info@ha
 /* 801C301C 001BFBFC  3C 80 80 3E */	lis r4, lbl_803DFEDC@ha
@@ -2429,7 +2429,7 @@ lbl_801C3054:
 /* 801C3058 001BFC38  7C 00 F0 00 */	cmpw r0, r30
 /* 801C305C 001BFC3C  40 82 00 24 */	bne lbl_801C3080
 /* 801C3060 001BFC40  A8 7B 00 00 */	lha r3, 0(r27)
-/* 801C3064 001BFC44  4B E9 2E 39 */	bl func_80055E9C
+/* 801C3064 001BFC44  4B E9 2E 39 */	bl mpLib_80055E9C
 /* 801C3068 001BFC48  A8 1B 00 00 */	lha r0, 0(r27)
 /* 801C306C 001BFC4C  3B A0 00 01 */	li r29, 1
 /* 801C3070 001BFC50  A8 8D B2 B4 */	lha r4, lbl_804D6954
@@ -2462,7 +2462,7 @@ lbl_801C30C0:
 /* 801C30D0 001BFCB0  7C 1F 02 AE */	lhax r0, r31, r0
 /* 801C30D4 001BFCB4  7C 05 00 00 */	cmpw r5, r0
 /* 801C30D8 001BFCB8  41 82 00 20 */	beq lbl_801C30F8
-/* 801C30DC 001BFCBC  4B E9 2D C1 */	bl func_80055E9C
+/* 801C30DC 001BFCBC  4B E9 2D C1 */	bl mpLib_80055E9C
 /* 801C30E0 001BFCC0  A8 1C 00 00 */	lha r0, 0(r28)
 /* 801C30E4 001BFCC4  3B A0 00 01 */	li r29, 1
 /* 801C30E8 001BFCC8  A8 8D B2 B4 */	lha r4, lbl_804D6954
@@ -2507,7 +2507,7 @@ bool Ground_801C3128(s32 arg0, void (*arg1)(s16))
 
     bool result;
 
-    func_8004D17C();
+    mpLib_8004D17C();
     result = false;
 
     {
@@ -2549,7 +2549,7 @@ bool Ground_801C3214(int arg0)
 {
     if (lbl_804D6950[arg0] == 1) {
         lbl_804D6950[arg0] = 0;
-        return Ground_801C3128(arg0, func_80057638);
+        return Ground_801C3128(arg0, mpLib_80057638);
     }
 
     return false;
@@ -2559,14 +2559,14 @@ bool Ground_801C3260(s32 arg0)
 {
     if (lbl_804D6950[arg0] == 0) {
         lbl_804D6950[arg0] = 1;
-        return Ground_801C3128(arg0, func_80057BC0);
+        return Ground_801C3128(arg0, mpLib_80057BC0);
     }
     return false;
 }
 
 void Ground_801C32AC(s32 arg0)
 {
-    Ground_801C3128(arg0, func_80057424);
+    Ground_801C3128(arg0, mpLib_80057424);
 }
 
 s32 Ground_801C32D4(s32 arg0, s32 arg1)
@@ -2584,7 +2584,7 @@ s32 Ground_801C32D4(s32 arg0, s32 arg1)
     S16Vec3* cur;
     int i;
 
-    func_8004D17C();
+    mpLib_8004D17C();
 
     /// @todo Might be an @c inline starting here.
 
@@ -2635,7 +2635,7 @@ s32 Ground_801C33C0(s32 arg0, s32 arg1)
     S16Vec3* cur;
     int i;
 
-    func_8004D17C();
+    mpLib_8004D17C();
 
     /// @todo Might be an @c inline starting here.
 
@@ -4082,7 +4082,7 @@ void Ground_801C4A08(HSD_GObj* gobj)
 
         if (gobj->hsd_obj != NULL && lbl_804D6950[map_id] == 0) {
             lbl_804D6950[map_id] = 1;
-            Ground_801C3128(map_id, func_80057BC0);
+            Ground_801C3128(map_id, mpLib_80057BC0);
         }
 
         archive = grDatFiles_801C6330(gp->map_id);

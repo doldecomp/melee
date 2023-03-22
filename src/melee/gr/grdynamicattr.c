@@ -102,7 +102,7 @@ int grDynamicAttr_801CA284(Vec3* v, int arg1)
     grDynamicAttr_UnkStruct* cur;
 
     for (cur = lbl_804D6960; cur != NULL; cur = cur->next) {
-        if (func_80054F68(arg1, cur->unk14)) {
+        if (mpLib_80054F68(arg1, cur->unk14)) {
             f32 dx = v->x - cur->unk8.x;
             f32 dy = v->y - cur->unk8.y;
             f32 dx2 = dx * dx;

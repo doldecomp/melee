@@ -258,11 +258,11 @@ void ftDonkey_8010DB3C(HSD_GObj* gobj)
             f32 temp_f3 = donkey_attr->SpecialLw.x6C * fp->facing_dir;
             f32 temp_f6 = temp_f5 + temp_f3;
 
-            if (!func_80056C54(colldata->x14C_ground.index, &fp->cur_pos, 0,
-                               &vec_list[i], 0, 0, temp_f6,
-                               donkey_attr->SpecialLw.x70,
-                               donkey_attr->SpecialLw.x68 * 1.5f,
-                               donkey_attr->SpecialLw.x68))
+            if (!mpLib_80056C54(colldata->x14C_ground.index, &fp->cur_pos, 0,
+                                &vec_list[i], 0, 0, temp_f6,
+                                donkey_attr->SpecialLw.x70,
+                                donkey_attr->SpecialLw.x68 * 1.5f,
+                                donkey_attr->SpecialLw.x68))
             {
                 vec_list[i] = fp->cur_pos;
             }

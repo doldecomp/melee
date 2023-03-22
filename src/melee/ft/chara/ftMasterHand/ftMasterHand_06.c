@@ -98,7 +98,7 @@ void ftMasterHand_8015198C(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_r31 = gobj->user_data;
-        func_80054158(0, &sp14);
+        mpLib_80054158(0, &sp14);
         if (temp_r31->cur_pos.x < sp14.x) {
             ftMasterHand_80151AC8(gobj);
             return;

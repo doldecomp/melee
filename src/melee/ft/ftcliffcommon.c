@@ -85,9 +85,9 @@ void ftCliffCommon_80081370(HSD_GObj* gobj)
     ftCommon_8007EBAC(fp, 0xC, 0);
 
     if (fp->facing_dir > 0.0f) {
-        func_80053ECC(fp->mv.co.cliff.ledge_id, unkParam.x10);
+        mpLib_80053ECC(fp->mv.co.cliff.ledge_id, unkParam.x10);
     } else {
-        func_80053DA4(fp->mv.co.cliff.ledge_id, unkParam.x10);
+        mpLib_80053DA4(fp->mv.co.cliff.ledge_id, unkParam.x10);
     }
     efAsync_Spawn(gobj, (void*) ((u32) gobj->user_data + 0x60C), 2, 0x41C, 0,
                   &unkParam.x10);
@@ -118,11 +118,11 @@ void ftCliffCommon_80081544(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = gobj->user_data;
-    if (func_80054ED8(fp->mv.co.cliff.ledge_id) != 0) {
+    if (mpLib_80054ED8(fp->mv.co.cliff.ledge_id) != 0) {
         if (fp->facing_dir > 0.0f) {
-            func_80053ECC(fp->mv.co.cliff.ledge_id, sp10);
+            mpLib_80053ECC(fp->mv.co.cliff.ledge_id, sp10);
         } else {
-            func_80053DA4(fp->mv.co.cliff.ledge_id, sp10);
+            mpLib_80053DA4(fp->mv.co.cliff.ledge_id, sp10);
         }
         fp->cur_pos.x =
             (f32) ((fp->x68C_transNPos.z * fp->facing_dir) + sp10[0]);
@@ -155,7 +155,7 @@ void ftCliffCommon_80081644(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftCamera_UpdateCameraBox(gobj);
     if ((s32) fp->ground_or_air == GA_Air) {
-        func_8005811C(&fp->x6F0_collData, fp->mv.co.cliff.ledge_id);
+        mpLib_8005811C(&fp->x6F0_collData, fp->mv.co.cliff.ledge_id);
         fp->x890_cameraBox->xC_flag.bits.b0 = 1;
     }
 }

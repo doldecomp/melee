@@ -137,7 +137,7 @@ void ftMasterHand_80151F00(HSD_GObj* gobj)
         ftMasterHand_80151CA8(gobj);
     }
 
-    func_80054158(0, &sp28);
+    mpLib_80054158(0, &sp28);
 
     if (r31_fp->cur_pos.x < sp28.x) {
         ftMasterHand_801520D8(gobj);

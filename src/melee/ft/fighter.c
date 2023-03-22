@@ -2379,8 +2379,8 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         // __assert functions. But I guess these just stop or reset the game.
         // result is written to where r5 points to, which is 'difference' in
         // this case
-        if (func_800567C0(fp->x6F0_collData.x14C_ground.index, &fp->cur_pos,
-                          &difference))
+        if (mpLib_800567C0(fp->x6F0_collData.x14C_ground.index, &fp->cur_pos,
+                           &difference))
         {
             // fp->position += difference
             PSVECAdd(&fp->cur_pos, &difference, &fp->cur_pos);

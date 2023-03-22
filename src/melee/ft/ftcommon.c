@@ -935,8 +935,8 @@ void ftCommon_8007DD7C(HSD_GObj* gobj, Vec3* v)
             }
             arg_gnd = arg_ft->x6F0_collData.x14C_ground.index;
             cur_gnd = cur_ft->x6F0_collData.x14C_ground.index;
-            if (arg_gnd == cur_gnd || cur_gnd == func_8004DB78(arg_gnd) ||
-                cur_gnd == func_8004DC04(arg_gnd))
+            if (arg_gnd == cur_gnd || cur_gnd == mpLib_8004DB78(arg_gnd) ||
+                cur_gnd == mpLib_8004DC04(arg_gnd))
             {
                 ftCommon_8007F8B4(cur_ft, &sp24);
                 vtmp = &cur_ft->x2C4;
@@ -1003,8 +1003,8 @@ void ftCommon_8007DFD0(HSD_GObj* gobj, Vec3* arg1)
     if (!temp_r3->x221F_flag.bits.b3 && temp_r3->ground_or_air == 0) {
         temp_r0 = fp->x6F0_collData.x14C_ground.index;
         temp_r30 = (new_var2 = temp_r3->x6F0_collData.x14C_ground.index);
-        if (temp_r0 == temp_r30 || temp_r30 == func_8004DB78(temp_r0) ||
-            temp_r30 == func_8004DC04(temp_r0))
+        if (temp_r0 == temp_r30 || temp_r30 == mpLib_8004DB78(temp_r0) ||
+            temp_r30 == mpLib_8004DC04(temp_r0))
         {
             ftCommon_8007F8B4(temp_r3, &sp1C);
             tmp = &temp_r3->x2C4;

@@ -161,13 +161,13 @@ void ftBossLib_8015C190(HSD_GObj* arg0)
     Fighter* fp = GET_FIGHTER(arg0);
     Vec3 vec;
 
-    func_80053FF4(0, &vec);
+    mpLib_80053FF4(0, &vec);
     if (fp->cur_pos.x > vec.x) {
         fp->cur_pos.x = vec.x;
         fp->x80_self_vel.x = 0;
     }
 
-    func_80054158(0, &vec);
+    mpLib_80054158(0, &vec);
     if (fp->cur_pos.x < vec.x) {
         fp->cur_pos.x = vec.x;
         fp->x80_self_vel.x = 0;
