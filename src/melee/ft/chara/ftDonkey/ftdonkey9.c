@@ -30,7 +30,7 @@ void ftDonkey_800E06D8(HSD_GObj* gobj)
         ftDonkey_800E07B0(gobj);
     } else {
         vec.x = vec.y = vec.z = 0.0f;
-        func_8026ABD8(fp->x1974_heldItem, &vec, 1.0f);
+        Item_8026ABD8(fp->x1974_heldItem, &vec, 1.0f);
         ft_8008E908(gobj, 0.0f);
     }
 }

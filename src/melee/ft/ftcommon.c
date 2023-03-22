@@ -1760,15 +1760,15 @@ void ftCommon_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
             fp->x2014 = func_8026B54C(arg1);
             ft_80088148(fp, 0x117, 0x7F, 0x40);
             ftCommon_8007EBAC(fp, 0x10, 0);
-            func_8026A8EC(arg1);
+            Item_8026A8EC(arg1);
             return;
         }
     }
 
     vec = lbl_803B74A0;
     func_8026BD0C(arg1);
-    func_8026ABD8(arg1, &vec, 0);
-    func_8026AB54(arg1, gobj, fp->ft_data->x8->unk12);
+    Item_8026ABD8(arg1, &vec, 0);
+    Item_8026AB54(arg1, gobj, fp->ft_data->x8->unk12);
     ftCommon_8007F948(gobj, arg1, func_8026B54C(arg1));
     ft_800D105C(gobj);
     ft_80081C88(gobj, fp->x34_scale.y);

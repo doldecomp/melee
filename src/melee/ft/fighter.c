@@ -1521,7 +1521,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
                 fp->x2014--;
                 if (fp->x2014 == 0) {
                     ftCommon_8007F8E8(gobj);
-                    func_8026A8EC(fp->x197C);
+                    Item_8026A8EC(fp->x197C);
                     ftCommon_8007F9B4(gobj);
                 }
             }
@@ -1560,7 +1560,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
                 Vec3 vec = lbl_803B7488;
 
                 ftCommon_8007F8E8(gobj);
-                func_8026ABD8(fp->x1980, &vec, 0.0f);
+                Item_8026ABD8(fp->x1980, &vec, 0.0f);
                 ftCommon_8007FF74(gobj);
             }
         }
@@ -2705,14 +2705,14 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
               !HSD_Randi(p_ftCommonData->x41C))))
         {
             if (fp->x1978) {
-                func_8026ABD8(fp->x1978, &vec, 1.0f);
+                Item_8026ABD8(fp->x1978, &vec, 1.0f);
             }
-            func_8026ABD8(fp->x1974_heldItem, &vec, 1.0f);
+            Item_8026ABD8(fp->x1974_heldItem, &vec, 1.0f);
         }
         if (fp->x197C) {
             if (HSD_Randi(p_ftCommonData->x418) < arg1) {
                 ftCommon_8007F8E8(fp->gobj);
-                func_8026ABD8(fp->x197C, &vec, 1.0f);
+                Item_8026ABD8(fp->x197C, &vec, 1.0f);
                 ftCommon_8007F9B4(fp->gobj);
             }
         }

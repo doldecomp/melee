@@ -855,13 +855,13 @@ grZakoGenerator_801CAF6C:
 /* 801CAF74 001C7B54  2C 03 00 00 */    cmpwi r3, 0
 /* 801CAF78 001C7B58  41 82 00 20 */    beq grZakoGenerator_801CAF98
 /* 801CAF7C 001C7B5C  7F C3 F3 78 */    mr r3, r30
-/* 801CAF80 001C7B60  48 09 F9 6D */    bl func_8026A8EC
+/* 801CAF80 001C7B60  48 09 F9 6D */    bl Item_8026A8EC
 /* 801CAF84 001C7B64  48 00 00 14 */    b grZakoGenerator_801CAF98
 grZakoGenerator_801CAF88:
 /* 801CAF88 001C7B68  2C 03 00 9F */    cmpwi r3, 0x9f
 /* 801CAF8C 001C7B6C  40 82 00 0C */    bne grZakoGenerator_801CAF98
 /* 801CAF90 001C7B70  7F C3 F3 78 */    mr r3, r30
-/* 801CAF94 001C7B74  48 09 F9 59 */    bl func_8026A8EC
+/* 801CAF94 001C7B74  48 09 F9 59 */    bl Item_8026A8EC
 grZakoGenerator_801CAF98:
 /* 801CAF98 001C7B78  7F FE FB 78 */    mr r30, r31
 grZakoGenerator_801CAF9C:

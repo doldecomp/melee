@@ -502,7 +502,7 @@ void func_8026B7F8(HSD_GObj* gobj)
         RunCallbackUnk(ip->xB8_itemLogicTable->evt_unk, cur, gobj);
 
         if (ip->xDC8_word.flags.x13 && owner == gobj) {
-            func_8026A8EC(cur);
+            Item_8026A8EC(cur);
         }
     }
 }
@@ -693,7 +693,7 @@ static inline void What(HSD_GObj* item_gobj,
                                temp_stateDesc->x8_parameters);
             lb_8000BA0C(item_jobj2, ip->x5D0_animFrameSpeed);
             HSD_JObjReqAnimAll(item_jobj2, 0.0f);
-            func_80268E40(ip, itemStateDesc);
+            Item_80268E40(ip, itemStateDesc);
         }
         HSD_JObjAnimAll(item_jobj2);
         func_80279BE0(item_gobj);
@@ -746,7 +746,7 @@ void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
                                    temp_stateDesc->x8_parameters);
                 lb_8000BA0C(jobj0, ip->x5D0_animFrameSpeed);
                 HSD_JObjReqAnimAll(jobj0, 0.0f);
-                func_80268E40(ip, state_desc);
+                Item_80268E40(ip, state_desc);
             }
 
             HSD_JObjAnimAll(jobj0);
@@ -1284,7 +1284,7 @@ void func_8026C368(HSD_GObj* item_gobj)
 
         default:
             ip->destroy_type = 0;
-            func_8026A8EC(item_gobj);
+            Item_8026A8EC(item_gobj);
         }
     }
 }
