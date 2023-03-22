@@ -203,7 +203,7 @@ void ftMario_SpecialS_Phys(HSD_GObj* gobj)
                         &coords);
 
             coords.x += 3 * fp->facing_dir;
-            func_800119DC(&coords, 120, 0.9, 0.02, M_PI_3);
+            lb_800119DC(&coords, 120, 0.9, 0.02, M_PI_3);
         }
     }
 
@@ -247,7 +247,7 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
             lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, NULL,
                         &coords);
             coords.x += 3 * fp->facing_dir;
-            func_800119DC(&coords, 120, 3, 0.1, M_PI_3);
+            lb_800119DC(&coords, 120, 3, 0.1, M_PI_3);
         }
         ftCommon_8007D494(fp, sa->specials.grav, sa->specials.terminal_vel);
     } else {

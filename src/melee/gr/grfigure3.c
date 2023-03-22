@@ -109,7 +109,7 @@ static bool lbl_8020E6F8(HSD_GObj* arg0)
 static void lbl_8020E700(HSD_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
-    func_800115F4();
+    lb_800115F4();
 }
 
 static void lbl_8020E724(HSD_GObj* arg0) {}

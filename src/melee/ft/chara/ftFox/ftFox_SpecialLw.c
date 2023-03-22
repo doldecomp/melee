@@ -879,8 +879,7 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* gobj)
 
     lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, NULL, &sp14);
 
-    func_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f,
-                  1.0471975803375244f);
+    lb_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f, 1.0471975803375244f);
 
     if ((s32) fp->ground_or_air == GA_Ground) {
         msid = 0x16A;

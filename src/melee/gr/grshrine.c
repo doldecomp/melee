@@ -61,8 +61,8 @@ static void func_80201C64(void)
         u8 unused1[4];
 #endif
 
-        func_80011A50(&v, -1, 0.5f, 0.0f, M_PI / 3, -10000.0f, 10000.0f,
-                      10000.0f, -10000.0f);
+        lb_80011A50(&v, -1, 0.5f, 0.0f, M_PI / 3, -10000.0f, 10000.0f,
+                    10000.0f, -10000.0f);
     }
 }
 
@@ -162,7 +162,7 @@ static bool func_80201F14(HSD_GObj* arg0)
 static void func_80201F1C(HSD_GObj* arg0)
 {
     Ground_801C2FE0(arg0);
-    func_800115F4();
+    lb_800115F4();
 }
 
 static void func_80201F40(HSD_GObj* arg0) {}

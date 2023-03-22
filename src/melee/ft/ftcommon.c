@@ -1375,7 +1375,7 @@ void ftCommon_8007EBAC(Fighter* fp, u32 arg1, u32 arg2)
     if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4) &&
         !fp->x221F_flag.bits.b3 && !fp->x2224_flag.bits.b2)
     {
-        func_80014574(fp->x618_player_id, arg1 + 2, arg1, arg2);
+        lb_80014574(fp->x618_player_id, arg1 + 2, arg1, arg2);
     }
 }
 
@@ -1404,7 +1404,7 @@ void ftCommon_8007ECD4(Fighter* fp, s32 arg1)
 
 void ftCommon_8007ED2C(Fighter* fp)
 {
-    func_800145C0(fp->x618_player_id);
+    lb_800145C0(fp->x618_player_id);
 }
 
 void ftCommon_8007ED50(Fighter* fp, s32 arg1)

@@ -138,7 +138,7 @@ static bool GrTNess_802227E8(HSD_GObj* arg0)
 
 static void GrTNess_802227F0(HSD_GObj* gobj)
 {
-    func_800115F4();
+    lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 

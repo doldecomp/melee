@@ -34,7 +34,7 @@ void func_80031640(HSD_GObj* arg0, s32 arg1)
     case 0:
         break;
     case 1:
-        func_800122C8(&cmsnap_data.unk1, 0, 0, 0);
+        lb_800122C8(&cmsnap_data.unk1, 0, 0, 0);
         cmsnap_data.unk0 = 2;
         break;
     case 2:
@@ -50,5 +50,5 @@ void func_800316B4(void)
     cmsnap_data.unk0 = 0;
     cmsnap_data.unk1 = 0;
     GObj_SetupGXLinkMax(GObj_Create(0x12, 0x12, 0), func_80031640, 4);
-    func_800121FC(&cmsnap_data.unk1, 0x280, 0x1E0, 4, 0x7D6);
+    lb_800121FC(&cmsnap_data.unk1, 0x280, 0x1E0, 4, 0x7D6);
 }

@@ -159,7 +159,7 @@ void grStory_801E3334(HSD_GObj* gobj)
 {
     grStory_801E3418(gobj);
     Ground_801C2FE0(gobj);
-    func_800115F4();
+    lb_800115F4();
 }
 
 void grStory_801E336C(HSD_GObj* arg0) {}

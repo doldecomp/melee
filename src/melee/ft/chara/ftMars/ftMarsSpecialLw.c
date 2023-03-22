@@ -366,7 +366,7 @@ void ftMars_80139140(HSD_GObj* gobj)
             fp->mv.ms.speciallw.x0 = (s32) (temp_r0 * attr->x5C);
 
         lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, 0, &sp18);
-        func_800119DC(&sp18, 0x78, 0.9f, 0.02f, 1.0471975803375244f);
+        lb_800119DC(&sp18, 0x78, 0.9f, 0.02f, 1.0471975803375244f);
 
         {
             enum_t msid;

@@ -190,18 +190,18 @@ void grLib_801C9A70(enum_t arg0, Vec3* v)
 
 void grLib_801C9B20(void* arg1, UnkAnimStruct* arg2, unk_t arg3)
 {
-    func_8000FD48(arg1, arg3, arg2->x4_size);
-    func_80011710(arg2, arg3);
+    lb_8000FD48(arg1, arg3, arg2->x4_size);
+    lb_80011710(arg2, arg3);
 }
 
 void grLib_801C9B6C(void* arg0)
 {
-    func_8000FD18(arg0);
+    lb_8000FD18(arg0);
 }
 
 void grLib_801C9B8C(void* arg0)
 {
-    func_8001044C(arg0, 0, 0, 0.0f, 0, 0, 0, 0);
+    lb_8001044C(arg0, 0, 0, 0.0f, 0, 0, 0, 0);
 }
 
 static void grLib_801C9BC8(HSD_GObj* gobj)

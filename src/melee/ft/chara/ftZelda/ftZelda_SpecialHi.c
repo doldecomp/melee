@@ -81,7 +81,7 @@ void ftZelda_SpecialHi_StartMotion_Helper(Fighter* fp)
             Vec3 vec;
             lb_8000B1CC(jObj, NULL, &vec);
 
-            func_800119DC(&vec, 0x78, 1.5f, 0.02, 60 * (f32) M_PI / 180);
+            lb_800119DC(&vec, 0x78, 1.5f, 0.02, 60 * (f32) M_PI / 180);
         }
     }
 }
@@ -136,7 +136,7 @@ void ftZelda_SpecialAirHi_StartMotion(HSD_GObj* gobj)
             HSD_JObj* jObj = fp->ft_bones[boneIndex].x0_jobj;
 
             lb_8000B1CC(jObj, NULL, &vec);
-            func_800119DC(&vec, 120, 1.5, 0.02, 60 * (f32) M_PI / 180);
+            lb_800119DC(&vec, 120, 1.5, 0.02, 60 * (f32) M_PI / 180);
         }
 
         fp->cb.x21BC_callback_Accessory4 = &ftZelda_801396AC;

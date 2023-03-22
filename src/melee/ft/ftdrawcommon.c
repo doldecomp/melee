@@ -38,9 +38,9 @@ extern void func_800310B8(void);
 extern void func_80031060(void);
 extern void ft_800C2600(void);
 extern void func_8001E2F8(void);
-extern void func_80014770(void);
+extern void lb_80014770(void);
 extern void ft_800B395C(void);
-extern void func_800117F4(void);
+extern void lb_800117F4(void);
 
 static inline void mtx_thing(MtxPtr mtx, Vec3* ptr, f32 val, f32 val2)
 {
@@ -298,7 +298,7 @@ lbl_80080864:
 /* 8008087C 0007D45C  90 01 00 A8 */	stw r0, 0xa8(r1)
 /* 80080880 0007D460  38 A1 00 A8 */	addi r5, r1, 0xa8
 /* 80080884 0007D464  80 DA 02 F0 */	lwz r6, 0x2f0(r26)
-/* 80080888 0007D468  4B F9 0F 6D */	bl func_800117F4
+/* 80080888 0007D468  4B F9 0F 6D */	bl lb_800117F4
 /* 8008088C 0007D46C  2C 03 00 00 */	cmpwi r3, 0
 /* 80080890 0007D470  41 82 00 08 */	beq lbl_80080898
 /* 80080894 0007D474  3B C0 00 01 */	li r30, 1
@@ -328,7 +328,7 @@ lbl_800808D0:
 /* 800808E4 0007D4C4  41 82 00 1C */	beq lbl_80080900
 /* 800808E8 0007D4C8  38 7F 19 30 */	addi r3, r31, 0x1930
 /* 800808EC 0007D4CC  38 9C 00 00 */	addi r4, r28, 0
-/* 800808F0 0007D4D0  4B F9 3E 81 */	bl func_80014770
+/* 800808F0 0007D4D0  4B F9 3E 81 */	bl lb_80014770
 /* 800808F4 0007D4D4  2C 03 00 00 */	cmpwi r3, 0
 /* 800808F8 0007D4D8  41 82 00 08 */	beq lbl_80080900
 /* 800808FC 0007D4DC  3B C0 00 01 */	li r30, 1
@@ -694,8 +694,8 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         while (phi_r25 < fighter->x3E0) {
             spAC = 0.0f; // lbl_804D836C; //change to actual label
             spA8 = 0.0f; // lbl_804D8370; //change to actual label
-            if (func_800117F4(&phi_r26->x2F4, &spAC, &spA8, phi_r26->x3E0,
-                              arg1) != 0)
+            if (lb_800117F4(&phi_r26->x2F4, &spAC, &spA8, phi_r26->x3E0,
+                            arg1) != 0)
             {
                 phi_r30 = 1U;
             }
@@ -708,7 +708,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
     }
     if ((fighter->x21FC_flag.bits.b4 != 0) &&
         (fighter->x2223_flag.bits.b5 != 0) &&
-        (func_80014770(fighter + 0x1930, arg1) != 0))
+        (lb_80014770(fighter + 0x1930, arg1) != 0))
     {
         phi_r30 = 1U;
     }

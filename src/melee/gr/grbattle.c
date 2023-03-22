@@ -216,7 +216,7 @@ static bool func_8021A16C(HSD_GObj* arg0)
 static void func_8021A174(HSD_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
-    func_800115F4();
+    lb_800115F4();
 }
 
 static void func_8021A198(HSD_GObj* arg0) {}

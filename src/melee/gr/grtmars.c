@@ -141,7 +141,7 @@ static bool GrTMars_8022210C(HSD_GObj* arg0)
 
 static void GrTMars_80222114(HSD_GObj* gobj)
 {
-    func_800115F4();
+    lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 

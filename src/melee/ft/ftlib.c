@@ -597,7 +597,7 @@ inline void helper(HSD_GObj* gobj, s32 arg1, s32 arg2, s32 val)
         return;
 
     if (!fp->x221F_flag.bits.b3 && !fp->x2224_flag.bits.b2)
-        func_80014574(fp->x618_player_id, val, arg1, arg2);
+        lb_80014574(fp->x618_player_id, val, arg1, arg2);
 }
 
 void ftLib_80086C18(HSD_GObj* gobj, s32 arg1, s32 arg2)

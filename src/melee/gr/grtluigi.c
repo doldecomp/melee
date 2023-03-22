@@ -133,7 +133,7 @@ bool lbl_80221E28(HSD_GObj* arg0)
 
 void lbl_80221E30(HSD_GObj* arg0)
 {
-    func_800115F4();
+    lb_800115F4();
     Ground_801C2FE0(arg0);
 }
 

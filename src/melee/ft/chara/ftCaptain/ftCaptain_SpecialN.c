@@ -31,9 +31,9 @@ void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
     case FTKIND_GANON:
         if (currentAnimFrame & 1) {
             if ((currentAnimFrame >= 16) && (currentAnimFrame <= 50)) {
-                func_800119DC(&fp->cur_pos, 2, 2.0f, 2.0f, 0.0f);
+                lb_800119DC(&fp->cur_pos, 2, 2.0f, 2.0f, 0.0f);
             } else if ((currentAnimFrame >= 51) && (currentAnimFrame <= 68)) {
-                func_800119DC(&fp->cur_pos, 2, 4.0f, 4.0f, 0.0f);
+                lb_800119DC(&fp->cur_pos, 2, 4.0f, 4.0f, 0.0f);
             }
         }
         break;

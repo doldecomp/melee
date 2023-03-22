@@ -80,7 +80,7 @@ void ftZelda_SpecialLw_StartMotion_Helper(HSD_GObj* gobj)
     fp->gr_vel = fp->gr_vel / attributes->x70;
 
     lb_8000B1CC(fp->ft_bones[0].x0_jobj, NULL, &sp20);
-    func_800119DC(&sp20, 0x78, 0.4, 0.003, 60 * M_PI / 180);
+    lb_800119DC(&sp20, 0x78, 0.4, 0.003, 60 * M_PI / 180);
 
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013ADB4;
 }

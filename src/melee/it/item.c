@@ -832,7 +832,7 @@ void func_8026849C(HSD_GObj* item_gobj)
     HSD_JObjSetScale(temp_jobj, &sp14);
 }
 
-extern void func_80011710(void*, void*);
+extern void lb_80011710(void*, void*);
 
 /// @private
 void func_80268560(HSD_GObj* item_gobj)
@@ -851,12 +851,12 @@ void func_80268560(HSD_GObj* item_gobj)
         HSD_JObj* jobj;
         desc = &article_data->x14_dynamics->dyn_descs[i];
         jobj = item_data->xBBC_dynamicBoneTable->bones[desc->x0_boneID];
-        func_8000FD48(jobj, &item_data->xD4_dynamicBones[i].unk_ptr,
-                      desc->child_count);
+        lb_8000FD48(jobj, &item_data->xD4_dynamicBones[i].unk_ptr,
+                    desc->child_count);
         item_data->xD4_dynamicBones[i].skeleton = jobj;
         item_data->xD4_dynamicBones[i].flags = 0;
-        func_80011710(&article_data->x14_dynamics->dyn_descs[i].x4_params,
-                      &item_data->xD4_dynamicBones[i].unk_ptr);
+        lb_80011710(&article_data->x14_dynamics->dyn_descs[i].x4_params,
+                    &item_data->xD4_dynamicBones[i].unk_ptr);
     }
 }
 
@@ -1876,8 +1876,8 @@ void lbl_8026A788(HSD_GObj* item_gobj)
 
     func_80272304(item_gobj);
     for (i = 0; i < dynamicBonesNum; i++, dynamicBones++) {
-        func_8001044C(&dynamicBones->unk_ptr, &item_data->xB6C,
-                      item_data->xB68, 0.0f, 0, dynamicBones->flags, 0, 1);
+        lb_8001044C(&dynamicBones->unk_ptr, &item_data->xB6C, item_data->xB68,
+                    0.0f, 0, dynamicBones->flags, 0, 1);
     }
 }
 
@@ -2018,7 +2018,7 @@ void func_8026A8EC(HSD_GObj* this)
     {
         int i;
         for (i = 0; i < ip->x374_dynamicBonesNum; i++)
-            func_8000FD18(&ip->xD4_dynamicBones[i].unk_ptr);
+            lb_8000FD18(&ip->xD4_dynamicBones[i].unk_ptr);
     }
 
     func_8026B0B4(this);
