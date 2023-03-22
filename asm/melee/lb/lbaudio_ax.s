@@ -1523,7 +1523,7 @@ func_800243F4:
 /* 80024404 00020FE4  28 05 00 21 */	cmplwi r5, 0x21
 /* 80024408 00020FE8  94 21 FF F8 */	stwu r1, -8(r1)
 /* 8002440C 00020FEC  38 C0 00 CA */	li r6, 0xca
-/* 80024410 00020FF0  41 81 00 8C */	bgt callback_8002449C
+/* 80024410 00020FF0  41 81 00 8C */	bgt lbl_8002449C
 /* 80024414 00020FF4  3C 80 80 3C */	lis r4, jtbl_803BC99C@ha
 /* 80024418 00020FF8  38 84 C9 9C */	addi r4, r4, jtbl_803BC99C@l
 /* 8002441C 00020FFC  54 A5 10 3A */	slwi r5, r5, 2
@@ -1531,91 +1531,91 @@ func_800243F4:
 /* 80024424 00021004  7C 09 03 A6 */	mtctr r0
 /* 80024428 00021008  4E 80 04 20 */	bctr
 
-callback_8002442C:
+lbl_8002442C:
 /* 8002442C 0002100C  38 C0 00 CB */	li r6, 0xcb
 
-callback_80024430:
+lbl_80024430:
 /* 80024430 00021010  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024434:
+lbl_80024434:
 /* 80024434 00021014  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024438:
+lbl_80024438:
 /* 80024438 00021018  38 C6 00 01 */	addi r6, r6, 1
 
-callback_8002443C:
+lbl_8002443C:
 /* 8002443C 0002101C  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024440:
+lbl_80024440:
 /* 80024440 00021020  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024444:
+lbl_80024444:
 /* 80024444 00021024  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024448:
+lbl_80024448:
 /* 80024448 00021028  38 C6 00 01 */	addi r6, r6, 1
 
-callback_8002444C:
+lbl_8002444C:
 /* 8002444C 0002102C  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024450:
+lbl_80024450:
 /* 80024450 00021030  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024454:
+lbl_80024454:
 /* 80024454 00021034  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024458:
+lbl_80024458:
 /* 80024458 00021038  38 C6 00 01 */	addi r6, r6, 1
 
-callback_8002445C:
+lbl_8002445C:
 /* 8002445C 0002103C  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024460:
+lbl_80024460:
 /* 80024460 00021040  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024464:
+lbl_80024464:
 /* 80024464 00021044  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024468:
+lbl_80024468:
 /* 80024468 00021048  38 C6 00 01 */	addi r6, r6, 1
 
-callback_8002446C:
+lbl_8002446C:
 /* 8002446C 0002104C  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024470:
+lbl_80024470:
 /* 80024470 00021050  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024474:
+lbl_80024474:
 /* 80024474 00021054  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024478:
+lbl_80024478:
 /* 80024478 00021058  38 C6 00 01 */	addi r6, r6, 1
 
-callback_8002447C:
+lbl_8002447C:
 /* 8002447C 0002105C  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024480:
+lbl_80024480:
 /* 80024480 00021060  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024484:
+lbl_80024484:
 /* 80024484 00021064  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024488:
+lbl_80024488:
 /* 80024488 00021068  38 C6 00 01 */	addi r6, r6, 1
 
-callback_8002448C:
+lbl_8002448C:
 /* 8002448C 0002106C  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024490:
+lbl_80024490:
 /* 80024490 00021070  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024494:
+lbl_80024494:
 /* 80024494 00021074  38 C6 00 01 */	addi r6, r6, 1
 
-callback_80024498:
+lbl_80024498:
 /* 80024498 00021078  38 C6 00 01 */	addi r6, r6, 1
 
-callback_8002449C:
+lbl_8002449C:
 /* 8002449C 0002107C  38 00 00 7F */	li r0, 0x7f
 /* 800244A0 00021080  54 00 08 3D */	rlwinm. r0, r0, 1, 0, 0x1e
 /* 800244A4 00021084  38 A0 00 40 */	li r5, 0x40
@@ -8349,40 +8349,40 @@ str_lbAudioLoadData:
 
 
 jtbl_803BC99C:
-    .4byte callback_8002442C
-    .4byte callback_80024430
-    .4byte callback_80024484
-    .4byte callback_8002449C
-    .4byte callback_8002447C
-    .4byte callback_80024434
-    .4byte callback_80024490
-    .4byte callback_8002449C
-    .4byte callback_80024498
-    .4byte callback_8002449C
-    .4byte callback_80024438
-    .4byte callback_80024464
-    .4byte callback_80024488
-    .4byte callback_80024468
-    .4byte callback_8002449C
-    .4byte callback_8002443C
-    .4byte callback_80024440
-    .4byte callback_8002449C
-    .4byte callback_80024444
-    .4byte callback_80024480
-    .4byte callback_80024448
-    .4byte callback_8002444C
-    .4byte callback_80024450
-    .4byte callback_8002449C
-    .4byte callback_80024454
-    .4byte callback_80024494
-    .4byte callback_80024458
-    .4byte callback_8002445C
-    .4byte callback_8002448C
-    .4byte callback_80024460
-    .4byte callback_8002446C
-    .4byte callback_80024470
-    .4byte callback_80024474
-    .4byte callback_80024478
+    .4byte lbl_8002442C
+    .4byte lbl_80024430
+    .4byte lbl_80024484
+    .4byte lbl_8002449C
+    .4byte lbl_8002447C
+    .4byte lbl_80024434
+    .4byte lbl_80024490
+    .4byte lbl_8002449C
+    .4byte lbl_80024498
+    .4byte lbl_8002449C
+    .4byte lbl_80024438
+    .4byte lbl_80024464
+    .4byte lbl_80024488
+    .4byte lbl_80024468
+    .4byte lbl_8002449C
+    .4byte lbl_8002443C
+    .4byte lbl_80024440
+    .4byte lbl_8002449C
+    .4byte lbl_80024444
+    .4byte lbl_80024480
+    .4byte lbl_80024448
+    .4byte lbl_8002444C
+    .4byte lbl_80024450
+    .4byte lbl_8002449C
+    .4byte lbl_80024454
+    .4byte lbl_80024494
+    .4byte lbl_80024458
+    .4byte lbl_8002445C
+    .4byte lbl_8002448C
+    .4byte lbl_80024460
+    .4byte lbl_8002446C
+    .4byte lbl_80024470
+    .4byte lbl_80024474
+    .4byte lbl_80024478
 
 
 struct_803BCA24:
