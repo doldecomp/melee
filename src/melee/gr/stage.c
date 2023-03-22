@@ -325,7 +325,7 @@ s32 Stage_80225074(s32 arg0)
     }
 
     tmp = Ground_801C28AC(unk_struct_804D49E8.list_idx, r31, &spC);
-    func_80023F28(spC);
+    lbAudioAx_80023F28(spC);
     Ground_801C5A84(spC);
     Ground_801C5AA4(tmp);
     return arg0;

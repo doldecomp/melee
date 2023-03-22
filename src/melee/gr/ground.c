@@ -2037,7 +2037,7 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
     HSD_ASSERT(2242, bgm!=BGM_Undefined);
 
     if (bgm == -2) {
-        *arg2 = func_8002305C(Player_GetPlayerCharacter(0), HSD_Randi(2));
+        *arg2 = lbAudioAx_8002305C(Player_GetPlayerCharacter(0), HSD_Randi(2));
     } else {
         *arg2 = bgm;
     }
@@ -4538,12 +4538,12 @@ void Ground_801C4FAC(void)
 
 void Ground_801C53EC(u32 arg0)
 {
-    func_800237A8(arg0, 0x7F, 0x40);
+    lbAudioAx_800237A8(arg0, 0x7F, 0x40);
 }
 
 void Ground_801C5414(unk_t arg0, s32 arg1)
 {
-    func_80023870(arg0, 0x7F, 0x40, arg1);
+    lbAudioAx_80023870(arg0, 0x7F, 0x40, arg1);
 }
 
 /// @file
@@ -4566,10 +4566,10 @@ void Ground_801C5440(Ground* gp, s32 i, u32 arg2)
     if (arg2 != 540001) {
         if (gp->x20[i] != -1) {
             Ground* tmp_gp = gp;
-            func_800236B8(tmp_gp->x20[i]);
+            lbAudioAx_800236B8(tmp_gp->x20[i]);
         }
 
-        gp->x20[i] = func_800237A8(arg2, 0x7F, 0x40);
+        gp->x20[i] = lbAudioAx_800237A8(arg2, 0x7F, 0x40);
     } else {
         Ground_801C5544(gp, i);
     }
@@ -4581,7 +4581,7 @@ bool Ground_801C54DC(Ground* gp, s32 i)
         return false;
     }
 
-    if (gp != NULL && gp->x20[i] != -1 && func_80023710(gp->x20[i])) {
+    if (gp != NULL && gp->x20[i] != -1 && lbAudioAx_80023710(gp->x20[i])) {
         return true;
     }
 
@@ -4600,7 +4600,7 @@ void Ground_801C5544(Ground* gp, s32 i)
 
     if (gp->x20[i] != -1) {
         Ground* tmp_gp = gp;
-        func_800236B8(tmp_gp->x20[i]);
+        lbAudioAx_800236B8(tmp_gp->x20[i]);
     }
 
     gp->x20[i] = -1;
@@ -4625,7 +4625,7 @@ void Ground_801C5630(Ground* gp, s32 i, f32 val)
         return;
     }
     if (gp != NULL && gp->x20[i] != -1) {
-        func_80024B58(gp->x20[i], 127 * val);
+        lbAudioAx_80024B58(gp->x20[i], 127 * val);
     }
 }
 
@@ -4635,7 +4635,7 @@ void Ground_801C5694(Ground* gp, s32 i, f32 val)
         return;
     }
     if (gp != NULL && gp->x20[i] != -1) {
-        func_80024B1C(gp->x20[i], 63.5f * (val + 1));
+        lbAudioAx_80024B1C(gp->x20[i], 63.5f * (val + 1));
     }
 }
 

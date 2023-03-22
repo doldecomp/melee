@@ -174,7 +174,7 @@ int main(void)
     HSD_InitComponent();
     GXSetMisc(1, 8);
     *seed_ptr = OSGetTick();
-    func_8002838C();
+    lbAudioAx_8002838C();
     lb_80019AAC(&gmMain_8015FD24);
     HSD_VISetUserPostRetraceCallback(&gmMain_8015FDA0);
     HSD_VISetUserGXDrawDoneCallback(&lbl_803762C4);

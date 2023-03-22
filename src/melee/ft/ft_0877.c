@@ -327,9 +327,9 @@ asm s32 ft_80087D0C(Fighter* fighter, s32 arg1)
 /* 80087D20 00084900  93 A1 00 24 */	stw r29, 0x24(r1)
 /* 80087D24 00084904  3B A3 00 00 */	addi r29, r3, 0
 /* 80087D28 00084908  38 64 00 00 */	addi r3, r4, 0
-/* 80087D2C 0008490C  4B F9 B6 C1 */	bl func_800233EC
+/* 80087D2C 0008490C  4B F9 B6 C1 */	bl lbAudioAx_800233EC
 /* 80087D30 00084910  7C 7F 1B 78 */	mr r31, r3
-/* 80087D34 00084914  4B F9 B3 FD */	bl func_80023130
+/* 80087D34 00084914  4B F9 B3 FD */	bl lbAudioAx_80023130
 /* 80087D38 00084918  3B C3 00 00 */	addi r30, r3, 0
 /* 80087D3C 0008491C  2C 1E 00 0D */	cmpwi r30, 0xd
 /* 80087D40 00084920  41 82 02 44 */	beq lbl_80087F84
@@ -534,11 +534,11 @@ lbl_80087FFC:
 /* 80087FFC 00084BDC  38 7E 00 00 */	addi r3, r30, 0
 /* 80088000 00084BE0  38 81 00 18 */	addi r4, r1, 0x18
 /* 80088004 00084BE4  38 A1 00 14 */	addi r5, r1, 0x14
-/* 80088008 00084BE8  4B F9 B0 C1 */	bl func_800230C8
+/* 80088008 00084BE8  4B F9 B0 C1 */	bl lbAudioAx_800230C8
 /* 8008800C 00084BEC  2C 03 00 00 */	cmpwi r3, 0
 /* 80088010 00084BF0  40 82 00 2C */	bne lbl_8008803C
 /* 80088014 00084BF4  7F C3 F3 78 */	mr r3, r30
-/* 80088018 00084BF8  4B F9 B2 09 */	bl func_80023220
+/* 80088018 00084BF8  4B F9 B2 09 */	bl lbAudioAx_80023220
 /* 8008801C 00084BFC  80 01 00 18 */	lwz r0, 0x18(r1)
 /* 80088020 00084C00  7C 00 1A 14 */	add r0, r0, r3
 /* 80088024 00084C04  7C 1F 00 00 */	cmpw r31, r0
@@ -563,8 +563,8 @@ lbl_8008803C:
 
 s32 ft_80087D0C(Fighter* fighter, s32 arg1)
 {
-    enum_t sfx = func_800233EC(arg1);
-    enum_t ssm_id = func_80023130();
+    enum_t sfx = lbAudioAx_800233EC(arg1);
+    enum_t ssm_id = lbAudioAx_80023130();
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -670,8 +670,8 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
     case 33: {
         int sfx_offset;
         int unused_output;
-        if (func_800230C8(ssm_id, &sfx_offset, &unused_output) == 0 &&
-            sfx >= sfx_offset + func_80023220(ssm_id))
+        if (lbAudioAx_800230C8(ssm_id, &sfx_offset, &unused_output) == 0 &&
+            sfx >= sfx_offset + lbAudioAx_80023220(ssm_id))
         {
             sfx = ft_80087C70(fighter, sfx);
         }
@@ -689,37 +689,37 @@ s32 ft_80087D0C(Fighter* fighter, s32 arg1)
 void ft_8008805C(Fighter* arg0, s32 arg1)
 {
     ft_80087D0C(arg0, arg1);
-    func_80024DC4();
+    lbAudioAx_80024DC4();
 }
 
 void ft_80088080(Fighter* fp)
 {
     fp->x2164 += 1;
-    func_80024FDC();
+    lbAudioAx_80024FDC();
 }
 
 void ft_800880AC(Fighter* fp)
 {
     fp->x2168 += 1;
-    func_80024FF4();
+    lbAudioAx_80024FF4();
 }
 
 void ft_800880D8(Fighter* fp)
 {
-    func_8002500C(fp->x2164);
+    lbAudioAx_8002500C(fp->x2164);
     fp->x2164 = 0;
 }
 
 void ft_80088110(Fighter* fp)
 {
-    func_80025038(fp->x2168);
+    lbAudioAx_80025038(fp->x2168);
     fp->x2168 = 0;
 }
 
 void ft_80088148(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
 {
     sfx_id = ft_80087D0C(fp, sfx_id);
-    fp->x2160 = func_800237A8(sfx_id, sfx_vol, sfx_pan);
+    fp->x2160 = lbAudioAx_800237A8(sfx_id, sfx_vol, sfx_pan);
 
     {
         int rand;
@@ -729,6 +729,6 @@ void ft_80088148(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
             rand = 0;
         }
 
-        func_80024B94(fp->x2160, rand);
+        lbAudioAx_80024B94(fp->x2160, rand);
     }
 }

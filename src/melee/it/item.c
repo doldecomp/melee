@@ -2161,9 +2161,10 @@ void func_8026AE84(Item* item_data, enum_t sfx, int pan, int volume)
 {
     if (sfx != 540000) {
         if (sfx != 540001) {
-            item_data->xD6C = func_800237A8(func_800233EC(sfx), pan, volume);
+            item_data->xD6C =
+                lbAudioAx_800237A8(lbAudioAx_800233EC(sfx), pan, volume);
         } else {
-            item_data->xD6C = func_800237A8(540000, pan, volume);
+            item_data->xD6C = lbAudioAx_800237A8(540000, pan, volume);
         }
     }
 }
@@ -2173,10 +2174,10 @@ void func_8026AF0C(Item* item_data, enum_t sfx, int pan, int volume)
     if (sfx != 540000) {
         if (sfx != 540001) {
             if (item_data->sfx_unk1 != SFX_NONE) {
-                func_800236B8(item_data->sfx_unk1);
+                lbAudioAx_800236B8(item_data->sfx_unk1);
             }
             item_data->sfx_unk1 =
-                func_800237A8(func_800233EC(sfx), pan, volume);
+                lbAudioAx_800237A8(lbAudioAx_800233EC(sfx), pan, volume);
         } else {
             func_8026B034(item_data);
         }
@@ -2188,10 +2189,10 @@ void func_8026AFA0(Item* item_data, enum_t sfx, int pan, int volume)
     if (sfx != 540000) {
         if (sfx != 540001) {
             if (item_data->sfx_unk2 != SFX_NONE) {
-                func_800236B8(item_data->sfx_unk2);
+                lbAudioAx_800236B8(item_data->sfx_unk2);
             }
             item_data->sfx_unk2 =
-                func_800237A8(func_800233EC(sfx), pan, volume);
+                lbAudioAx_800237A8(lbAudioAx_800233EC(sfx), pan, volume);
         } else {
             func_8026B074(item_data);
         }
@@ -2201,7 +2202,7 @@ void func_8026AFA0(Item* item_data, enum_t sfx, int pan, int volume)
 void func_8026B034(Item* item_data)
 {
     if (item_data->sfx_unk1 != SFX_NONE) {
-        func_800236B8(item_data->sfx_unk1);
+        lbAudioAx_800236B8(item_data->sfx_unk1);
     }
 
     item_data->sfx_unk1 = SFX_NONE;
@@ -2210,7 +2211,7 @@ void func_8026B034(Item* item_data)
 void func_8026B074(Item* item_data)
 {
     if (item_data->sfx_unk2 != SFX_NONE) {
-        func_800236B8(item_data->sfx_unk2);
+        lbAudioAx_800236B8(item_data->sfx_unk2);
     }
 
     item_data->sfx_unk2 = SFX_NONE;
@@ -2220,39 +2221,39 @@ void func_8026B074(Item* item_data)
 void func_8026B0B4(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    func_80026510(item_gobj);
+    lbAudioAx_80026510(item_gobj);
 
     if (item_data->xD6C != SFX_NONE) {
-        func_800265C4(item_gobj, item_data->xD6C);
+        lbAudioAx_800265C4(item_gobj, item_data->xD6C);
         item_data->xD6C = SFX_NONE;
     }
 
     if (item_data->sfx_unk1 != SFX_NONE &&
-        func_800265C4(item_gobj, item_data->sfx_unk1) == 1)
+        lbAudioAx_800265C4(item_gobj, item_data->sfx_unk1) == 1)
     {
         if (item_data->sfx_unk1 != SFX_NONE) {
-            func_800236B8(item_data->sfx_unk1);
+            lbAudioAx_800236B8(item_data->sfx_unk1);
         }
         item_data->sfx_unk1 = SFX_NONE;
     }
 
     if (item_data->sfx_unk2 != SFX_NONE &&
-        func_800265C4(item_gobj, item_data->sfx_unk2) == 1)
+        lbAudioAx_800265C4(item_gobj, item_data->sfx_unk2) == 1)
     {
         if (item_data->sfx_unk2 != SFX_NONE) {
-            func_800236B8(item_data->sfx_unk2);
+            lbAudioAx_800236B8(item_data->sfx_unk2);
         }
         item_data->sfx_unk2 = SFX_NONE;
     }
 
     if (item_data->sfx_unk1 != SFX_NONE) {
-        func_800236B8(item_data->sfx_unk1);
+        lbAudioAx_800236B8(item_data->sfx_unk1);
     }
 
     item_data->sfx_unk1 = SFX_NONE;
 
     if (item_data->sfx_unk2 != SFX_NONE) {
-        func_800236B8(item_data->sfx_unk2);
+        lbAudioAx_800236B8(item_data->sfx_unk2);
     }
 
     item_data->sfx_unk2 = SFX_NONE;

@@ -38,9 +38,9 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     r29_fp->mv.mh.unk0.x38 = 0;
     r29_fp->mv.mh.unk0.x3C = 0;
     r29_fp->mv.mh.unk0.x40 = 0;
-    func_800236B8(r29_fp->mv.mh.unk0.x28);
-    func_800236B8(r29_fp->mv.mh.unk0.x2C);
-    func_800236B8(r29_fp->mv.mh.unk0.x30);
+    lbAudioAx_800236B8(r29_fp->mv.mh.unk0.x28);
+    lbAudioAx_800236B8(r29_fp->mv.mh.unk0.x2C);
+    lbAudioAx_800236B8(r29_fp->mv.mh.unk0.x30);
     if (r29_fp->mv.mh.unk0.x20) {
         ftMasterHand_80155D1C(r29_fp->x1A58_interactedFighter);
     }
@@ -87,12 +87,12 @@ void ftMasterHand_801515B8(HSD_GObj* gobj)
         temp_r3 = r31_fp->mv.mh.unk0.x74 + 1;
         r31_fp->mv.mh.unk0.x74 = temp_r3;
         if (temp_r3 <= r4_attributes->x144) {
-            func_8002438C(0x81652);
+            lbAudioAx_8002438C(0x81652);
         } else {
             temp_r3_2 = r31_fp->mv.mh.unk0.x78 + 1;
             r31_fp->mv.mh.unk0.x78 = temp_r3_2;
             if (temp_r3_2 <= r4_attributes->x148) {
-                func_8002438C(0x81653);
+                lbAudioAx_8002438C(0x81653);
             }
         }
         r31_fp->x2200_ftcmd_var0 = 0U;
@@ -128,12 +128,12 @@ void ftMasterHand_801516B4(HSD_GObj* gobj)
         temp_r3 = r31_fp->mv.mh.unk0.x74 + 1;
         r31_fp->mv.mh.unk0.x74 = temp_r3;
         if (temp_r3 <= r4_attributes->x144) {
-            func_8002438C(0x81652);
+            lbAudioAx_8002438C(0x81652);
         } else {
             temp_r3_2 = r31_fp->mv.mh.unk0.x78 + 1;
             r31_fp->mv.mh.unk0.x78 = temp_r3_2;
             if (temp_r3_2 <= r4_attributes->x148) {
-                func_8002438C(0x81653);
+                lbAudioAx_8002438C(0x81653);
             }
         }
         r31_fp->x2200_ftcmd_var0 = 0U;
