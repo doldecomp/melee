@@ -541,8 +541,8 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
                   Player_GetCpuLevel(fp->xC_playerID), 0);
 
     func_80067688(&fp->x60C);
-    func_8007C17C(gobj);
-    func_8007C630(gobj);
+    ft_8007C17C(gobj);
+    ft_8007C630(gobj);
 }
 
 void Fighter_UnkUpdateCostumeJoint_800686E4(HSD_GObj* gobj)
@@ -935,7 +935,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
             ftColl_8007AFF8(gobj);
         }
         if (fp->x2219_flag.bits.b4 != 0) {
-            func_8007C114(gobj);
+            ft_8007C114(gobj);
         }
     }
 
@@ -2558,8 +2558,8 @@ void Fighter_8006C80C(HSD_GObj* gobj)
         }
 
         ftColl_8007AE80(gobj);
-        func_8007C224(gobj);
-        func_8007C6DC(gobj);
+        ft_8007C224(gobj);
+        ft_8007C6DC(gobj);
 
         if (fp->x20A0_accessory) {
             HSD_JObjAnimAll(fp->x20A0_accessory);
@@ -2623,10 +2623,10 @@ void Fighter_8006CB94(HSD_GObj* gobj)
     if (!fp->x221F_flag.bits.b3 && !fp->x2219_flag.bits.b1) {
         ftColl_800765E0();
         ftColl_80078C70(gobj);
-        func_8007C77C(gobj);
+        ft_8007C77C(gobj);
         ftColl_8007925C(gobj);
         ftColl_8007BAC0(gobj);
-        func_8007C4BC(gobj);
+        ft_8007C4BC(gobj);
         ftColl_8007AB48(gobj);
         ftColl_8007AB80(gobj);
         func_8007BBCC_float_output = ftColl_8007BBCC(gobj);

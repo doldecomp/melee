@@ -24,7 +24,7 @@ static f32 const lbl_804D832C = 1.0F;
 extern unk_t func_8016B0B4(void);
 
 #pragma push
-asm void func_8007C630(HSD_GObj* gobj)
+asm void ft_8007C630(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C630 00079210  7C 08 02 A6 */	mflr r0
@@ -76,7 +76,7 @@ lbl_8007C658:
 
 #else
 
-void func_8007C630(HSD_GObj* gobj)
+void ft_8007C630(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -86,7 +86,7 @@ void func_8007C630(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_8007C6DC(HSD_GObj* gobj)
+asm void ft_8007C6DC(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C6DC 000792BC  7C 08 02 A6 */	mflr r0
@@ -136,7 +136,7 @@ lbl_8007C764:
 
 #else
 
-void func_8007C6DC(HSD_GObj* gobj)
+void ft_8007C6DC(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -149,7 +149,7 @@ extern unk_t func_80023870();
 extern unk_t func_802E5EF4();
 
 #pragma push
-asm void func_8007C77C(HSD_GObj* gobj)
+asm void ft_8007C77C(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C77C 0007935C  7C 08 02 A6 */	mflr r0
@@ -276,7 +276,7 @@ lbl_8007C918:
 
 #else
 
-void func_8007C77C(HSD_GObj* gobj)
+void ft_8007C77C(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }

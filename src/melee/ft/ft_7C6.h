@@ -3,8 +3,8 @@
 
 #include <baselib/gobj.h>
 
-void func_8007C630(HSD_GObj* gobj);
-void func_8007C6DC(HSD_GObj* gobj);
-void func_8007C77C(HSD_GObj* gobj);
+void ft_8007C630(HSD_GObj* gobj);
+void ft_8007C6DC(HSD_GObj* gobj);
+void ft_8007C77C(HSD_GObj* gobj);
 
 #endif
