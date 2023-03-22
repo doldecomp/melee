@@ -21,9 +21,11 @@ extern StageInfo stage_info;
 
 static StageCallbacks lbl_803E26F0[4] = {
     { NULL, NULL, NULL, NULL, 0 },
-    { func_801E31C0, func_801E3224, func_801E322C, func_801E3230, 0 },
-    { func_801E3370, func_801E33D8, func_801E33E0, func_801E3414, 0 },
-    { func_801E3234, func_801E332C, func_801E3334, func_801E336C,
+    { grStory_801E31C0, grStory_801E3224, grStory_801E322C, grStory_801E3230,
+      0 },
+    { grStory_801E3370, grStory_801E33D8, grStory_801E33E0, grStory_801E3414,
+      0 },
+    { grStory_801E3234, grStory_801E332C, grStory_801E3334, grStory_801E336C,
       (1 << 30) | (1 << 31) },
 };
 
@@ -38,46 +40,46 @@ StageData lbl_803E274C = {
     (1 << 1) | (1 << 3),
     lbl_803E26F0,
     "/GrSt.dat",
-    func_801E3030,
-    func_801E302C,
-    func_801E30A8,
-    func_801E30AC,
-    func_801E30D0,
-    func_801E36D0,
-    func_801E36D8,
+    grStory_801E3030,
+    grStory_801E302C,
+    grStory_801E30A8,
+    grStory_801E30AC,
+    grStory_801E30D0,
+    grStory_801E36D0,
+    grStory_801E36D8,
     (1 << 0),
     NULL,
     0,
 };
 
-static void func_801E302C(bool _) {}
+static void grStory_801E302C(bool _) {}
 
-void func_801E3030(void)
+void grStory_801E3030(void)
 {
     lbl_804D69B8 = Ground_801C49F8();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
-    func_801E30D8(0);
-    func_801E30D8(1);
-    func_801E30D8(3);
-    func_801E30D8(2);
+    grStory_801E30D8(0);
+    grStory_801E30D8(1);
+    grStory_801E30D8(3);
+    grStory_801E30D8(2);
     Ground_801C39C0();
     Ground_801C3BB4();
 }
 
-void func_801E30A8(void) {}
+void grStory_801E30A8(void) {}
 
-void func_801E30AC(void)
+void grStory_801E30AC(void)
 {
     grZakoGenerator_801CAE04(false);
 }
 
-bool func_801E30D0(void)
+bool grStory_801E30D0(void)
 {
     return false;
 }
 
-HSD_GObj* func_801E30D8(int gobj_id)
+HSD_GObj* grStory_801E30D8(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E26F0[gobj_id];
@@ -108,7 +110,7 @@ HSD_GObj* func_801E30D8(int gobj_id)
     return gobj;
 }
 
-void func_801E31C0(HSD_GObj* gobj)
+void grStory_801E31C0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -121,14 +123,14 @@ void func_801E31C0(HSD_GObj* gobj)
     grMaterial_801C8858(Ground_801C3FA4(gobj, 1), 0x20000000);
 }
 
-bool func_801E3224(HSD_GObj* arg0)
+bool grStory_801E3224(HSD_GObj* arg0)
 {
     return false;
 }
 
-void func_801E322C(HSD_GObj* arg0) {}
+void grStory_801E322C(HSD_GObj* arg0) {}
 
-void func_801E3230(HSD_GObj* arg0) {}
+void grStory_801E3230(HSD_GObj* arg0) {}
 
 inline s32 randi(s32 max)
 {
@@ -136,7 +138,7 @@ inline s32 randi(s32 max)
 }
 
 /* Initialize shyguys */
-void func_801E3234(HSD_GObj* gobj)
+void grStory_801E3234(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -148,19 +150,19 @@ void func_801E3234(HSD_GObj* gobj)
     gp->x10_flags.b5 = true;
 }
 
-bool func_801E332C(HSD_GObj* arg0)
+bool grStory_801E332C(HSD_GObj* arg0)
 {
     return false;
 }
 
-void func_801E3334(HSD_GObj* gobj)
+void grStory_801E3334(HSD_GObj* gobj)
 {
-    func_801E3418(gobj);
+    grStory_801E3418(gobj);
     Ground_801C2FE0(gobj);
     func_800115F4();
 }
 
-void func_801E336C(HSD_GObj* arg0) {}
+void grStory_801E336C(HSD_GObj* arg0) {}
 
 typedef struct {
     u8 x0_fill[0x14];
@@ -170,7 +172,7 @@ typedef struct {
     HSD_JObj* xC8;
 } UnkUserData;
 
-void func_801E3370(HSD_GObj* gobj)
+void grStory_801E3370(HSD_GObj* gobj)
 {
     UnkUserData* data = gobj->user_data;
 
@@ -185,18 +187,18 @@ void func_801E3370(HSD_GObj* gobj)
     data->xC8 = Ground_801C3FA4(gobj, 1);
 }
 
-bool func_801E33D8(HSD_GObj* arg0)
+bool grStory_801E33D8(HSD_GObj* arg0)
 {
     return false;
 }
 
-void func_801E33E0(HSD_GObj* gobj)
+void grStory_801E33E0(HSD_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
-    func_801E366C(gobj);
+    grStory_801E366C(gobj);
 }
 
-void func_801E3414(HSD_GObj* arg0) {}
+void grStory_801E3414(HSD_GObj* arg0) {}
 
 // floating point random number centered at 0
 // with an amplitude of 1
@@ -214,7 +216,7 @@ typedef struct {
 } UnkUserData2;
 
 // Shy guy spawn timer tick callback
-void func_801E3418(HSD_GObj* gobj)
+void grStory_801E3418(HSD_GObj* gobj)
 {
     Vec3 pos;
     s32 spawn_pattern;
@@ -284,7 +286,7 @@ void func_801E3418(HSD_GObj* gobj)
     }
 }
 
-void func_801E366C(HSD_GObj* gobj)
+void grStory_801E366C(HSD_GObj* gobj)
 {
     UnkUserData* data = gobj->user_data;
 
@@ -297,12 +299,12 @@ void func_801E366C(HSD_GObj* gobj)
     }
 }
 
-static bool func_801E36D0(bool arg0)
+static bool grStory_801E36D0(bool arg0)
 {
     return false;
 }
 
-bool func_801E36D8(Vec3* a, int _, HSD_JObj* joint)
+bool grStory_801E36D8(Vec3* a, int _, HSD_JObj* joint)
 {
     Vec3 b;
     func_8000B1CC(joint, NULL, &b);
