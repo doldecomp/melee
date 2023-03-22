@@ -195,7 +195,7 @@ void Fighter_UpdateModelScale(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Vec3 scale;
-    f32 modelScale = Fighter_GetModelScale(fp);
+    f32 modelScale = ftCommon_GetModelScale(fp);
 
     if (fp->x34_scale.z != 1.0f)
         scale.x = fp->x34_scale.z;
@@ -2446,7 +2446,7 @@ void Fighter_UnkApplyTransformation_8006C0F0(HSD_GObj* gobj)
         HSD_MtxInverse(jobj->mtx, mtx1);
         HSD_JObjGetScale(jobj, &scale);
 
-        scale.x = Fighter_GetModelScale(fp);
+        scale.x = ftCommon_GetModelScale(fp);
 
         HSD_JObjGetRotation(jobj, &rotation);
         HSD_JObjGetTranslation(jobj, &translation);

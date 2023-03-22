@@ -87,7 +87,7 @@ void ftCommon_8007EFC0(Fighter*, u32 val);
 void ftCommon_8007EFC8(HSD_GObj*, void (*)(HSD_GObj*));
 void ftCommon_8007F578(HSD_GObj*);
 void ftCommon_8007F5CC(HSD_GObj*, s32);
-f32 Fighter_GetModelScale(Fighter*);
+f32 ftCommon_GetModelScale(Fighter*);
 void ftCommon_8007F6A4(Fighter*, HSD_JObj*);
 void ftCommon_8007F76C(HSD_GObj*);
 void ftCommon_8007F7B4(HSD_GObj*);
@@ -144,7 +144,7 @@ s32 ftCommon_GetParasolStatus(HSD_GObj*);
 void ftCommon_8007EA90(Fighter*, s32);
 void ftCommon_8007ED50(Fighter*, s32);
 void ftCommon_8007EFC0(Fighter*, u32);
-f32 Fighter_GetModelScale(Fighter*);
+f32 ftCommon_GetModelScale(Fighter*);
 void ftCommon_8007FC7C(HSD_GObj*, f32);
 
 /// @todo static

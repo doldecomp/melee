@@ -376,7 +376,7 @@ ftAnim_8006E0F8:
 /* 8006E114 0006ACF4  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
 /* 8006E118 0006ACF8  40 82 00 34 */	bne ftAnim_8006E14C
 /* 8006E11C 0006ACFC  7F 63 DB 78 */	mr r3, r27
-/* 8006E120 0006AD00  48 01 15 75 */	bl Fighter_GetModelScale
+/* 8006E120 0006AD00  48 01 15 75 */	bl ftCommon_GetModelScale
 /* 8006E124 0006AD04  C0 1B 06 8C */	lfs f0, 0x68c(r27)
 /* 8006E128 0006AD08  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8006E12C 0006AD0C  D0 1B 06 8C */	stfs f0, 0x68c(r27)
@@ -489,7 +489,7 @@ ftAnim_8006E29C:
 /* 8006E2B8 0006AE98  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
 /* 8006E2BC 0006AE9C  40 82 00 34 */	bne ftAnim_8006E2F0
 /* 8006E2C0 0006AEA0  7F 63 DB 78 */	mr r3, r27
-/* 8006E2C4 0006AEA4  48 01 13 D1 */	bl Fighter_GetModelScale
+/* 8006E2C4 0006AEA4  48 01 13 D1 */	bl ftCommon_GetModelScale
 /* 8006E2C8 0006AEA8  C0 1B 06 C0 */	lfs f0, 0x6c0(r27)
 /* 8006E2CC 0006AEAC  EC 00 00 72 */	fmuls f0, f0, f1
 /* 8006E2D0 0006AEB0  D0 1B 06 C0 */	stfs f0, 0x6c0(r27)
@@ -752,7 +752,7 @@ ftAnim_8006E618:
 /* 8006E640 0006B220  88 04 00 10 */	lbz r0, 0x10(r4)
 /* 8006E644 0006B224  54 00 20 36 */	slwi r0, r0, 4
 /* 8006E648 0006B228  7F 85 00 2E */	lwzx r28, r5, r0
-/* 8006E64C 0006B22C  48 01 10 49 */	bl Fighter_GetModelScale
+/* 8006E64C 0006B22C  48 01 10 49 */	bl ftCommon_GetModelScale
 /* 8006E650 0006B230  28 1C 00 00 */	cmplwi r28, 0
 /* 8006E654 0006B234  40 82 00 14 */	bne ftAnim_8006E668
 /* 8006E658 0006B238  38 6D 83 7C */	addi r3, r13, lbl_804D3A1C@sda21
@@ -776,7 +776,7 @@ ftAnim_8006E668:
 /* 8006E69C 0006B27C  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
 /* 8006E6A0 0006B280  40 82 00 3C */	bne ftAnim_8006E6DC
 /* 8006E6A4 0006B284  7F 63 DB 78 */	mr r3, r27
-/* 8006E6A8 0006B288  48 01 0F ED */	bl Fighter_GetModelScale
+/* 8006E6A8 0006B288  48 01 0F ED */	bl ftCommon_GetModelScale
 /* 8006E6AC 0006B28C  C0 42 88 B8 */	lfs f2, lbl_804D8298@sda21(r2)
 /* 8006E6B0 0006B290  C0 01 00 38 */	lfs f0, 0x38(r1)
 /* 8006E6B4 0006B294  EC 22 08 24 */	fdivs f1, f2, f1

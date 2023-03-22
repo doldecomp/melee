@@ -32924,7 +32924,7 @@ ftKirby_8010B3C0:
 /* 8010B3C8 00107FA8  4B F7 32 59 */	bl ftCommon_SetAccessory
 ftKirby_8010B3CC:
 /* 8010B3CC 00107FAC  7F E3 FB 78 */	mr r3, r31
-/* 8010B3D0 00107FB0  4B F7 42 C5 */	bl Fighter_GetModelScale
+/* 8010B3D0 00107FB0  4B F7 42 C5 */	bl ftCommon_GetModelScale
 /* 8010B3D4 00107FB4  D0 21 00 30 */	stfs f1, 0x30(r1)
 /* 8010B3D8 00107FB8  D0 21 00 2C */	stfs f1, 0x2c(r1)
 /* 8010B3DC 00107FBC  D0 21 00 28 */	stfs f1, 0x28(r1)
@@ -33048,7 +33048,7 @@ ftKirby_8010B57C:
 /* 8010B584 00108164  4B F7 30 9D */	bl ftCommon_SetAccessory
 ftKirby_8010B588:
 /* 8010B588 00108168  7F E3 FB 78 */	mr r3, r31
-/* 8010B58C 0010816C  4B F7 41 09 */	bl Fighter_GetModelScale
+/* 8010B58C 0010816C  4B F7 41 09 */	bl ftCommon_GetModelScale
 /* 8010B590 00108170  D0 21 00 30 */	stfs f1, 0x30(r1)
 /* 8010B594 00108174  D0 21 00 2C */	stfs f1, 0x2c(r1)
 /* 8010B598 00108178  D0 21 00 28 */	stfs f1, 0x28(r1)

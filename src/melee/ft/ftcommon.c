@@ -1627,7 +1627,7 @@ void ftCommon_8007F5CC(HSD_GObj* gobj, s32 arg1)
     fp->x221E_flag.bits.b3 = arg1;
 }
 
-f32 Fighter_GetModelScale(Fighter* fp)
+f32 ftCommon_GetModelScale(Fighter* fp)
 {
     return fp->x34_scale.y * fp->x110_attr.x19C_ModelScaling;
 }

@@ -458,7 +458,7 @@ void func_80086990(HSD_GObj* gobj, Vec3* v)
 f32 func_800869D4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return Fighter_GetModelScale(fp);
+    return ftCommon_GetModelScale(fp);
 }
 
 f32 func_800869F8(HSD_GObj* gobj)
