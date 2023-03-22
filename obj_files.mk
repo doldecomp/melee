@@ -468,7 +468,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/if/ifmagnify.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/text_4.s.o\
+    $(BUILD_DIR)/asm/melee/un_FC9.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/Runtime/__va_arg.c.o\

@@ -10,7 +10,7 @@
 #include "grstadium.h"
 #include "grzebes.h"
 #include "stage.h"
-#include "text_4.h"
+#include "un_FC9.h"
 
 #include "cm/camera.h"
 #include "ft/ft_877.h"
@@ -1934,7 +1934,7 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 5:
-                    if (func_803048C0(0x11A) &&
+                    if (un_803048C0(0x11A) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -4649,15 +4649,15 @@ static asm void Ground_801C5878(void)
 /* 801C5880 001C2460  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 801C5884 001C2464  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 801C5888 001C2468  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 801C588C 001C246C  48 15 6A 41 */	bl func_8031C2CC
+/* 801C588C 001C246C  48 15 6A 41 */	bl un_8031C2CC
 /* 801C5890 001C2470  4B FA 5C 09 */	bl gm_8016B498
 /* 801C5894 001C2474  2C 03 00 00 */	cmpwi r3, 0
 /* 801C5898 001C2478  41 82 00 20 */	beq lbl_801C58B8
 /* 801C589C 001C247C  3C 60 80 4A */	lis r3, stage_info@ha
 /* 801C58A0 001C2480  3B E3 E6 C8 */	addi r31, r3, stage_info@l
-/* 801C58A4 001C2484  48 15 6A 49 */	bl func_8031C2EC
+/* 801C58A4 001C2484  48 15 6A 49 */	bl un_8031C2EC
 /* 801C58A8 001C2488  7C 7E 1B 78 */	mr r30, r3
-/* 801C58AC 001C248C  48 15 6B A9 */	bl func_8031C454
+/* 801C58AC 001C248C  48 15 6B A9 */	bl un_8031C454
 /* 801C58B0 001C2490  93 DF 06 E4 */	stw r30, 0x6e4(r31)
 /* 801C58B4 001C2494  48 00 00 14 */	b lbl_801C58C8
 lbl_801C58B8:
@@ -4692,7 +4692,7 @@ s32 Ground_801C58E0(s32 arg0, s32 arg1)
 
     Ground_801C2D24(arg1, &sp10);
     result = func_802F2094(0, &sp10, tmp, 0);
-    func_80304A58(tmp);
+    un_80304A58(tmp);
     return result;
 }
 
@@ -4753,14 +4753,14 @@ int Ground_801C5940(void)
 
 void Ground_801C5A28(void)
 {
-    func_803124BC();
-    func_8031234C(0);
-    func_80305918(0, 0, 1);
+    un_803124BC();
+    un_8031234C(0);
+    un_80305918(0, 0, 1);
 }
 
 void Ground_801C5A60(void)
 {
-    func_8031234C(1);
+    un_8031234C(1);
 }
 
 void Ground_801C5A84(s32 arg0)

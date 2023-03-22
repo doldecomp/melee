@@ -9,7 +9,7 @@
 #include "ftcoll.h"
 #include "ftlib.h"
 #include "ftparts.h"
-#include "text_4.h"
+#include "un_FC9.h"
 
 #include "ef/eflib.h"
 #include "gm/gm_601.h"
@@ -702,8 +702,8 @@ void ftCommon_8007D780(Fighter* fp)
         return;
     }
 
-    if (func_803224DC(fp->x8_spawnNum, fp->cur_pos.x,
-                      fp->dmg.x18A4_knockbackMagnitude))
+    if (un_803224DC(fp->x8_spawnNum, fp->cur_pos.x,
+                    fp->dmg.x18A4_knockbackMagnitude))
     {
         fp->dmg.x18A4_knockbackMagnitude = 0;
     }
@@ -716,8 +716,8 @@ void ftCommon_8007D7FC(Fighter* fp)
 {
     f32 fmp;
     if (fp->ground_or_air == GA_Air) {
-        if (func_803224DC(fp->x8_spawnNum, fp->cur_pos.x,
-                          fp->dmg.x18A4_knockbackMagnitude))
+        if (un_803224DC(fp->x8_spawnNum, fp->cur_pos.x,
+                        fp->dmg.x18A4_knockbackMagnitude))
         {
             fp->dmg.x18A4_knockbackMagnitude = 0;
         }
@@ -1584,7 +1584,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         ft_80094818(dst_gobj, 1);
         func_8026B9A8(src->x1974_heldItem, dst_gobj, dst->ft_data->x8->unk10);
     }
-    func_80322314();
+    un_80322314();
     ft_800BFD04(gobj);
     arg1(dst_gobj);
 }

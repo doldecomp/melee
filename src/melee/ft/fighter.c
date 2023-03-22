@@ -17,8 +17,8 @@
 #include "ftparts.h"
 #include "gm_A36.h"
 #include "inlines.h"
-#include "text_4.h"
 #include "types.h"
+#include "un_FC9.h"
 
 #include "cm/camera.h"
 #include "db/db_unknown_001.h"
@@ -2404,7 +2404,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
     }
 
     if (fp->dmg.x18A4_knockbackMagnitude && !fp->x221C_flag.bits.b6 &&
-        !func_80322258(fp->cur_pos.x))
+        !un_80322258(fp->cur_pos.x))
     {
         fp->dmg.x18A4_knockbackMagnitude = 0.0f;
     }

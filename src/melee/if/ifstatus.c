@@ -1,7 +1,7 @@
 #include "if/ifstatus.h"
 
 #include "text_3.h"
-#include "text_4.h"
+#include "un_FC9.h"
 
 #include "gm/gm_601.h"
 #include "if/ifall.h"
@@ -2223,7 +2223,7 @@ asm void func_802F6508(s32)
 /* 802F65DC 002F31BC  2C 03 00 00 */	cmpwi r3, 0
 /* 802F65E0 002F31C0  40 82 00 0C */	bne lbl_802F65EC
 /* 802F65E4 002F31C4  7F E3 FB 78 */	mr r3, r31
-/* 802F65E8 002F31C8  48 00 8D 7D */	bl func_802FF364
+/* 802F65E8 002F31C8  48 00 8D 7D */	bl un_802FF364
 lbl_802F65EC:
 /* 802F65EC 002F31CC  88 7D 00 00 */	lbz r3, 0(r29)
 /* 802F65F0 002F31D0  54 63 DF 7E */	rlwinm r3, r3, 0x1b, 0x1d, 0x1f
