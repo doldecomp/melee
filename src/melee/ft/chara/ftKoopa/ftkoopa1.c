@@ -251,7 +251,7 @@ void ftKoopa_80132E30(HSD_GObj* gobj)
 
     {
         HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
-        func_8007E2F4(fp, 0);
+        ftCommon_8007E2F4(fp, 0);
         func_800DE2A8(gobj, victim_gobj);
         func_800DE7C0(victim_gobj, 0, 0);
         fp->x2200_ftcmd_var0 = 0;
@@ -277,7 +277,7 @@ void ftKoopa_SpecialS_StartMotion(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        func_8007E2D0(fp, 8, ftKoopa_8013302C, NULL, func_800BC7E0);
+        ftCommon_8007E2D0(fp, 8, ftKoopa_8013302C, NULL, func_800BC7E0);
 
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
@@ -303,7 +303,7 @@ void ftKoopa_SpecialAirS_StartMotion(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        func_8007E2D0(fp, 8, ftKoopa_801330E4, NULL, func_800BC8D4);
+        ftCommon_8007E2D0(fp, 8, ftKoopa_801330E4, NULL, func_800BC8D4);
 
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
@@ -326,8 +326,8 @@ void ftKoopa_8013302C(HSD_GObj* gobj)
     }
 
     fp->x2222_flag.bits.b2 = true;
-    func_8007E2F4(fp, 511);
-    func_8007E2FC(gobj);
+    ftCommon_8007E2F4(fp, 511);
+    ftCommon_8007E2FC(gobj);
     fp->mv.kp.unk1.x0 = 0;
     fp->x2200_ftcmd_var0 = 0;
 }
@@ -346,8 +346,8 @@ void ftKoopa_801330E4(HSD_GObj* gobj)
     }
 
     fp->x2222_flag.bits.b2 = true;
-    func_8007E2F4(fp, 511);
-    func_8007E2FC(gobj);
+    ftCommon_8007E2F4(fp, 511);
+    ftCommon_8007E2FC(gobj);
     fp->mv.kp.unk1.x0 = 0;
     fp->x2200_ftcmd_var0 = 0;
 }
@@ -362,7 +362,7 @@ static Fighter_MotionStateChangeFlags const transition_flags1 =
 void ftKoopa_8013319C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, 353, transition_flags1, 0,
                               fp->x894_currentAnimFrame, lbl_804D9ADC,
@@ -370,7 +370,7 @@ void ftKoopa_8013319C(HSD_GObj* gobj)
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        func_8007E2D0(fp, 8, ftKoopa_801330E4, NULL, func_800BC8D4);
+        ftCommon_8007E2D0(fp, 8, ftKoopa_801330E4, NULL, func_800BC8D4);
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
     }
@@ -383,7 +383,7 @@ void ftKoopa_8013322C(HSD_GObj* gobj)
     Fighter* fp0;
     Fighter* fp1 = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp1);
+    ftCommon_8007D7FC(fp1);
 
     Fighter_ChangeMotionState(gobj, 347, transition_flags1, 0,
                               fp1->x894_currentAnimFrame, lbl_804D9ADC,
@@ -391,7 +391,7 @@ void ftKoopa_8013322C(HSD_GObj* gobj)
 
     {
         fp0 = GET_FIGHTER(gobj);
-        func_8007E2D0(fp0, 8, ftKoopa_8013302C, NULL, func_800BC7E0);
+        ftCommon_8007E2D0(fp0, 8, ftKoopa_8013302C, NULL, func_800BC7E0);
         fp0->mv.kp.unk1.x0 = 0;
         fp0->mv.kp.unk1.x8 = 0;
     }
@@ -405,7 +405,7 @@ void ftKoopa_801332C4(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     if (victim_gobj != NULL) {
         func_800DC920(gobj, victim_gobj);
@@ -419,14 +419,14 @@ void ftKoopa_80133324(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, 348, transition_flags1, 0,
                               fp->x894_currentAnimFrame, lbl_804D9ADC,
                               lbl_804D9AD8);
 
-    func_8007E2F4(fp, 511);
-    func_8007E2FC(gobj);
+    ftCommon_8007E2F4(fp, 511);
+    ftCommon_8007E2FC(gobj);
 }
 
 void ftKoopa_80133398(HSD_GObj* gobj)
@@ -434,7 +434,7 @@ void ftKoopa_80133398(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     if (victim_gobj != NULL) {
         func_800DC920(gobj, victim_gobj);
@@ -453,14 +453,14 @@ void ftKoopa_801333F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, 350, transition_flags2, 0,
                               fp->x894_currentAnimFrame, lbl_804D9ADC,
                               lbl_804D9AD8);
 
-    func_8007E2F4(fp, 511);
-    func_8007E2FC(gobj);
+    ftCommon_8007E2F4(fp, 511);
+    ftCommon_8007E2FC(gobj);
     ftAnim_8006F0FC(gobj, lbl_804D9AD8);
     fp->mv.kp.unk1.x0 = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -471,7 +471,7 @@ void ftKoopa_80133484(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     if (victim_gobj != NULL) {
         func_800DC920(gobj, victim_gobj);
@@ -485,7 +485,7 @@ void ftKoopa_801334E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     if ((signed) fp->mv.kp.unk1.xC != 0)
         fp->facing_dir = -fp->facing_dir;
@@ -500,15 +500,15 @@ void ftKoopa_801334E4(HSD_GObj* gobj)
     if (fp->x1A58_interactedFighter != NULL)
         func_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaF);
 
-    func_8007E2F4(fp, 511);
-    func_8007E2FC(gobj);
+    ftCommon_8007E2F4(fp, 511);
+    ftCommon_8007E2FC(gobj);
 }
 
 void ftKoopa_8013359C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     if ((signed) fp->mv.kp.unk1.xC != 0)
         fp->facing_dir = -fp->facing_dir;
@@ -523,8 +523,8 @@ void ftKoopa_8013359C(HSD_GObj* gobj)
     if (fp->x1A58_interactedFighter != NULL)
         func_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaB);
 
-    func_8007E2F4(fp, 511);
-    func_8007E2FC(gobj);
+    ftCommon_8007E2F4(fp, 511);
+    ftCommon_8007E2FC(gobj);
 }
 
 void ftKoopa_80133654(HSD_GObj* gobj)
@@ -585,8 +585,8 @@ void ftKoopa_801336CC(HSD_GObj* gobj)
                 }
 
                 fp0->x2222_flag.bits.b2 = true;
-                func_8007E2F4(fp0, 511);
-                func_8007E2FC(gobj);
+                ftCommon_8007E2F4(fp0, 511);
+                ftCommon_8007E2FC(gobj);
                 fp0->mv.kp.unk1.x0 = 0;
                 fp0->x2200_ftcmd_var0 = 0;
             }
@@ -603,7 +603,7 @@ void ftKoopa_801336CC(HSD_GObj* gobj)
             ftAnim_8006F0FC(gobj, lbl_804D9AD8);
             fp0->mv.kp.unk1.x0 = 0;
             fp0->x2200_ftcmd_var0 = 0;
-            func_8007E2F4(fp0, 511);
+            ftCommon_8007E2F4(fp0, 511);
         }
     }
 }

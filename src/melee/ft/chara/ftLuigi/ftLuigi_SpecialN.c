@@ -91,7 +91,7 @@ void ftLuigi_SpecialN_Coll(HSD_GObj* gobj)
 
     if (func_80082708(gobj) == false) {
         fp = GET_FIGHTER(gobj);
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRN,
                                   FTLUIGI_SPECIALN_COLL_FLAG, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -106,7 +106,7 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* gobj)
 
     if (func_80081D0C(gobj) != false) {
         fp = GET_FIGHTER(gobj);
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALN,
                                   FTLUIGI_SPECIALN_COLL_FLAG, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);

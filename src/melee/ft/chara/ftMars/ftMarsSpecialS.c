@@ -109,8 +109,8 @@ void ftMars_80137618(HSD_GObj* gobj)
         func_80084F3C(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, attr->x20, attr->x24);
-        func_8007CE94(fp, attr->x18);
+        ftCommon_8007D494(fp, attr->x20, attr->x24);
+        ftCommon_8007CE94(fp, attr->x18);
     }
 }
 
@@ -144,7 +144,7 @@ void ftMars_801376E8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, 358, transition_flags, 0,
                               fp->x894_currentAnimFrame, 1, 0);
@@ -156,7 +156,7 @@ void ftMars_80137748(HSD_GObj* gobj)
     fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, 349, transition_flags, 0,
                               fp->x894_currentAnimFrame, 1, 0);
@@ -206,8 +206,8 @@ void ftMars_80137870(HSD_GObj* gobj)
         func_80084F3C(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, attr->x20, attr->x24);
-        func_8007CE94(fp, attr->x18);
+        ftCommon_8007D494(fp, attr->x20, attr->x24);
+        ftCommon_8007CE94(fp, attr->x18);
     }
 }
 
@@ -232,7 +232,7 @@ void ftMars_80137940(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t msid;
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     switch (fp->motion_id) {
     case 350:
@@ -257,7 +257,7 @@ void ftMars_801379D0(HSD_GObj* gobj)
     enum_t msid;
 
     fp->fv.ms.x222C = 0;
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     switch (fp->motion_id) {
     case 359:
@@ -350,7 +350,7 @@ void ftMars_80137BF4(HSD_GObj* gobj)
         func_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, sa->x20, sa->x24);
+        ftCommon_8007D494(fp, sa->x20, sa->x24);
         func_80085204(gobj);
     }
 }
@@ -376,7 +376,7 @@ void ftMars_80137CBC(HSD_GObj* gobj)
     enum_t msid;
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     switch (fp->motion_id) {
     case 352:
         msid = 361;
@@ -404,7 +404,7 @@ void ftMars_80137D60(HSD_GObj* gobj)
     fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     switch (fp->motion_id) {
     case 361:
@@ -485,7 +485,7 @@ void ftMars_80137F30(HSD_GObj* gobj)
         func_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, sa->x20, sa->x24);
+        ftCommon_8007D494(fp, sa->x20, sa->x24);
         func_80085204(gobj);
     }
 }
@@ -511,7 +511,7 @@ void ftMars_80137FF8(HSD_GObj* gobj)
     enum_t msid;
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     switch (fp->motion_id) {
     case 355:
@@ -541,7 +541,7 @@ void ftMars_8013809C(HSD_GObj* gobj)
     fp->fv.ms.x222C = 0;
 
     // Air_SetAsGrounded2
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     switch (fp->motion_id) {
     case 364:

@@ -249,12 +249,12 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
             coords.x += 3 * fp->facing_dir;
             func_800119DC(&coords, 120, 3, 0.1, M_PI_3);
         }
-        func_8007D494(fp, sa->specials.grav, sa->specials.terminal_vel);
+        ftCommon_8007D494(fp, sa->specials.grav, sa->specials.terminal_vel);
     } else {
-        func_8007D4B8(fp);
+        ftCommon_8007D4B8(fp);
     }
 
-    func_8007CE94(fp, sa->specials.vel.x);
+    ftCommon_8007CE94(fp, sa->specials.vel.x);
     ftMario_SpecialS_ReflectThink(gobj);
 }
 
@@ -292,7 +292,7 @@ static usize_t const transition_flags =
 void ftMario_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirS, transition_flags,
                               NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     if ((s32) fp->x2200_ftcmd_var0 == 1U) {
@@ -313,7 +313,7 @@ void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     fp->fv.mr.x2238_isCapeBoost = false;
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialS, transition_flags,
                               NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
 

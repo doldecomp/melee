@@ -493,7 +493,7 @@ lbl_80087F9C:
 /* 80087FB0 00084B90  7C 1F 00 00 */	cmpw r31, r0
 /* 80087FB4 00084B94  41 81 00 18 */	bgt lbl_80087FCC
 /* 80087FB8 00084B98  7F A3 EB 78 */	mr r3, r29
-/* 80087FBC 00084B9C  4B FF 81 89 */	bl func_80080144
+/* 80087FBC 00084B9C  4B FF 81 89 */	bl ftCommon_80080144
 /* 80087FC0 00084BA0  2C 03 00 01 */	cmpwi r3, 1
 /* 80087FC4 00084BA4  40 82 00 08 */	bne lbl_80087FCC
 /* 80087FC8 00084BA8  3B FF 00 66 */	addi r31, r31, 0x66
@@ -506,7 +506,7 @@ lbl_80087FCC:
 /* 80087FE0 00084BC0  7C 1F 00 00 */	cmpw r31, r0
 /* 80087FE4 00084BC4  41 81 00 18 */	bgt lbl_80087FFC
 /* 80087FE8 00084BC8  7F A3 EB 78 */	mr r3, r29
-/* 80087FEC 00084BCC  4B FF 81 59 */	bl func_80080144
+/* 80087FEC 00084BCC  4B FF 81 59 */	bl ftCommon_80080144
 /* 80087FF0 00084BD0  2C 03 00 01 */	cmpwi r3, 1
 /* 80087FF4 00084BD4  41 82 00 08 */	beq lbl_80087FFC
 /* 80087FF8 00084BD8  3B FF FF 9A */	addi r31, r31, -102
@@ -610,13 +610,13 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         /// @todo What a weird comparison, is it part of a macro?
         if (ftKind < FTKIND_PIKACHU && ftKind <= FTKIND_POPO) {
             if (0x1FBFD < sfx && sfx < 0x1FC62 &&
-                func_80080144(fighter) == true)
+                ftCommon_80080144(fighter) == true)
             {
                 sfx += 0x66;
             }
 
             if (0x1FC63 < sfx && sfx < 0x1FCC8 &&
-                func_80080144(fighter) != true)
+                ftCommon_80080144(fighter) != true)
             {
                 sfx -= 0x66;
             }

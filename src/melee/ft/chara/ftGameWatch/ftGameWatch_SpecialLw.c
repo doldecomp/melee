@@ -269,7 +269,7 @@ void ftGameWatch_SpecialLw_IASA(HSD_GObj* gobj)
             if (stick_range > p_ftCommonData->x0) {
                 f32 facing_dir = fp->facing_dir;
 
-                func_8007D9FC(fp);
+                ftCommon_8007D9FC(fp);
 
                 if (facing_dir != fp->facing_dir) {
                     fp->mv.gw.SpecialLw.turnFrames =
@@ -303,7 +303,7 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* gobj)
 
             if (stick_range > p_ftCommonData->x0) {
                 f32 facingDir = fp->facing_dir;
-                func_8007D9FC(fp);
+                ftCommon_8007D9FC(fp);
 
                 if (facingDir != fp->facing_dir) {
                     fp->mv.gw.SpecialLw.turnFrames =
@@ -335,10 +335,10 @@ void ftGameWatch_SpecialAirLw_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
 
-    func_8007D494(fp, sa->x6C_GAMEWATCH_PANIC_FALL_ACCEL,
-                  sa->x70_GAMEWATCH_PANIC_VEL_Y_MAX);
+    ftCommon_8007D494(fp, sa->x6C_GAMEWATCH_PANIC_FALL_ACCEL,
+                      sa->x70_GAMEWATCH_PANIC_VEL_Y_MAX);
 
-    func_8007CE94(fp, sa->x68_GAMEWATCH_PANIC_MOMENTUM_MUL);
+    ftCommon_8007CE94(fp, sa->x68_GAMEWATCH_PANIC_MOMENTUM_MUL);
     ftColl_8007AF10(gobj);
 }
 
@@ -389,7 +389,7 @@ void ftGameWatch_SpecialLw_GroundToAir(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags0,
                               NULL, fp->x894_currentAnimFrame, 1, 0);
 
@@ -405,7 +405,7 @@ void ftGameWatch_SpecialAirLw_AirToGround(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, transition_flags0, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
@@ -530,7 +530,7 @@ void ftGameWatch_SpecialAirLwCatch_Coll(HSD_GObj* gobj)
 void ftGameWatch_SpecialLwCatch_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw_Catch,
                               transition_flags0, NULL,
@@ -541,7 +541,7 @@ void ftGameWatch_SpecialLwCatch_GroundToAir(HSD_GObj* gobj)
 void ftGameWatch_SpecialAirLwCatch_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw_Catch, transition_flags0,
                               NULL, fp->x894_currentAnimFrame, 1, 0);
@@ -646,7 +646,7 @@ void ftGameWatch_SpecialLwShoot_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw_Shoot,
                               transition_flags0, NULL,
@@ -661,7 +661,7 @@ void ftGameWatch_SpecialAirLwShoot_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw_Shoot, transition_flags0,
                               NULL, fp->x894_currentAnimFrame, 1, 0);

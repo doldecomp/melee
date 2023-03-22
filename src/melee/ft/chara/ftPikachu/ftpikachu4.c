@@ -121,10 +121,10 @@ void ftPikachu_80125F78(HSD_GObj* gobj)
         if ((signed) fp->mv.pk.unk4.x0 != 0)
             fp->mv.pk.unk4.x0--;
         else
-            func_8007D494(fp, sa->x64, attr->x170_TerminalVelocity);
+            ftCommon_8007D494(fp, sa->x64, attr->x170_TerminalVelocity);
     }
 
-    func_8007CF58(fp);
+    ftCommon_8007CF58(fp);
 }
 
 void ftPikachu_80125FD8(HSD_GObj* gobj)
@@ -148,7 +148,7 @@ void ftPikachu_80126014(HSD_GObj* gobj)
 void ftPikachu_ActionChange_80126084(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, 0x164, 0xC4C5084, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
@@ -156,7 +156,7 @@ void ftPikachu_ActionChange_80126084(HSD_GObj* gobj)
 void ftPikachu_ActionChange_801260E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 0x161, 0xC4C5084, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
@@ -271,7 +271,7 @@ void ftPikachu_8012642C(HSD_GObj* gobj)
     HSD_JObjSetScale(jobj, &scale);
 
     velocity_vec = fp->x80_self_vel;
-    func_8007E2FC(gobj);
+    ftCommon_8007E2FC(gobj);
     fp->x80_self_vel = velocity_vec;
 
     fp->x6D8.x = fp->x6D8.y = fp->x6D8.z = fp->x6C0.x = fp->x6C0.y =
@@ -283,7 +283,7 @@ void ftPikachu_8012642C(HSD_GObj* gobj)
 
 void ftPikachu_801265D4(HSD_GObj* gobj)
 {
-    func_8007CB74(gobj);
+    ftCommon_8007CB74(gobj);
 }
 
 #ifdef MUST_MATCH
@@ -324,7 +324,7 @@ void ftPikachu_80126614(HSD_GObj* gobj)
         if ((collData->x134_envFlags & 0x3F) ||
             (collData->x134_envFlags & 0xFC0))
         {
-            func_8007D60C(fp);
+            ftCommon_8007D60C(fp);
             ftPikachu_ActionChangeUpdateVel_80127534(gobj);
             return;
         }
@@ -389,7 +389,7 @@ void ftPikachu_801267C8(HSD_GObj* gobj)
             f32 tempf = lbvector_AngleXY(&collData->x14C_ground.normal,
                                          &fp->x80_self_vel);
             if (tempf > (0.017453292f * (90.0f + pika_attr->xA0))) {
-                func_8007D7FC(fp);
+                ftCommon_8007D7FC(fp);
                 ftPikachu_ActionChangeUpdateVel_801274AC(gobj);
                 return;
             }
@@ -439,7 +439,7 @@ void ftPikachu_ActionChange_80126A2C(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, 0x165, 0xC4C508A, 0,
                               fp->x894_currentAnimFrame, 0.0f, 0.0f);
     fp->x2223_flag.bits.b4 = true;
@@ -468,7 +468,7 @@ void ftPikachu_ActionChange_80126AA4(HSD_GObj* gobj)
 #endif
 
     fighter2 = GET_FIGHTER(gobj);
-    func_8007D7FC(fighter2);
+    ftCommon_8007D7FC(fighter2);
     Fighter_ChangeMotionState(gobj, 0x162, 0xC4C508A, 0,
                               fighter2->x894_currentAnimFrame, 0.0f, 0.0f);
 
@@ -525,7 +525,7 @@ void ftPikachu_80126C0C(HSD_GObj* gobj)
             (!func_8009A134(gobj)))
         {
             Fighter* fighter2;
-            func_8007D9FC(fp);
+            ftCommon_8007D9FC(fp);
 
             // store stick angle to compare during zip2 check
             fp->mv.pk.unk4.x10.x = lstick_direction.x;
@@ -562,7 +562,7 @@ void ftPikachu_80126C0C(HSD_GObj* gobj)
             return;
         }
     }
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     ftPikachu_80126E1C(gobj);
 }
 
@@ -591,7 +591,7 @@ void ftPikachu_80126E1C(HSD_GObj* gobj)
 
     if ((final_stick_mag > pika_attr->x8C)) {
         if (fabs_inline(fp->input.x620_lstick_x) > 0.001f) {
-            func_8007D9FC(fp);
+            ftCommon_8007D9FC(fp);
         }
 
         // zip angle = atan2(stick_y, stick_x * facing_direction)
@@ -603,7 +603,7 @@ void ftPikachu_80126E1C(HSD_GObj* gobj)
         fp->mv.pk.unk4.x10.y = fp->input.x624_lstick_y;
     } else {
         // set facing direction if stick x meets a threshold
-        func_8007DA24(fp);
+        ftCommon_8007DA24(fp);
 
         // use max stick_mag and 90°
         final_stick_mag = MAX_STICK_MAG;
@@ -767,11 +767,11 @@ void ftPikachu_80127310(HSD_GObj* gobj)
     ftPikachuAttributes* sa = fp->x2D4_specialAttributes;
 
     if (fp->x2200_ftcmd_var0) {
-        func_8007D4B8(fp);
-        func_8007D440(fp, sa->x9C * fp->x110_attr.x17C_AerialDriftMax);
+        ftCommon_8007D4B8(fp);
+        ftCommon_8007D440(fp, sa->x9C * fp->x110_attr.x17C_AerialDriftMax);
     } else {
         fp->x80_self_vel.y -= (fp->x80_self_vel.y / 9.0f);
-        func_8007CEF4(fp);
+        ftCommon_8007CEF4(fp);
     }
 }
 
@@ -813,7 +813,7 @@ void ftPikachu_801273D4(HSD_GObj* gobj)
 void ftPikachu_ActionChange_8012744C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, 0x166, 0xC4C508A, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }

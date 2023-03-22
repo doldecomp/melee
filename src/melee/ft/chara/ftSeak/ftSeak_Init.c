@@ -183,7 +183,7 @@ void ftSeak_OnKnockbackExit(HSD_GObj* gobj)
 void ftSeak_8011412C(HSD_GObj* gobj) {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21BC_callback_Accessory4 = 0;
-    func_8007EFC8(gobj, &ftZelda_8013B4D8);
+    ftCommon_8007EFC8(gobj, &ftZelda_8013B4D8);
 }
 
 #endif

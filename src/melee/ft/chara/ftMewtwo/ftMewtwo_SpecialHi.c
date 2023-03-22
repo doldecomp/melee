@@ -146,11 +146,11 @@ void ftMewtwo_SpecialAirHiStart_Phys(HSD_GObj* gobj)
         Fighter* fp1 = fp0;
         ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp0);
 
-        func_8007D494(fp1, mewtwoAttrs->x48_MEWTWO_TELEPORT_GRAVITY,
-                      mewtwoAttrs->x4C_MEWTWO_TELEPORT_TERMINAL_VELOCITY);
+        ftCommon_8007D494(fp1, mewtwoAttrs->x48_MEWTWO_TELEPORT_GRAVITY,
+                          mewtwoAttrs->x4C_MEWTWO_TELEPORT_TERMINAL_VELOCITY);
     }
 
-    func_8007CEF4(fp0);
+    ftCommon_8007CEF4(fp0);
 }
 
 /// Mewtwo's grounded Teleport Start Collision callback
@@ -188,7 +188,7 @@ static Fighter_MotionStateChangeFlags const transition_flags1 =
 void ftMewtwo_SpecialHiStart_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRHI_START,
                               transition_flags1, NULL,
@@ -201,7 +201,7 @@ void ftMewtwo_SpecialHiStart_GroundToAir(HSD_GObj* gobj)
 void ftMewtwo_SpecialAirHiStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALHI_START,
                               transition_flags1, NULL,
@@ -239,7 +239,7 @@ void ftMewtwo_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 // Mewtwo's grounded Teleport Zoom Physics callback
 void ftMewtwo_SpecialHi_Phys(HSD_GObj* gobj)
 {
-    func_8007CB74(gobj);
+    ftCommon_8007CB74(gobj);
 }
 
 // Mewtwo's aerial Teleport Zoom Physics callback
@@ -257,7 +257,7 @@ void ftMewtwo_SpecialHi_Coll(HSD_GObj* gobj)
         if (!func_80082708(gobj)) {
             u32 env_flags = collData->x134_envFlags;
             if (env_flags & MPCOLL_RIGHTWALL || env_flags & MPCOLL_LEFTWALL) {
-                func_8007D60C(fp1);
+                ftCommon_8007D60C(fp1);
                 ftMewtwo_SpecialAirHiLost_Action(gobj);
                 return;
             } else {
@@ -352,7 +352,7 @@ void ftMewtwo_SpecialHi_GroundToAir(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRHI, transition_flags1,
                               NULL, fp->x894_currentAnimFrame, 0, 0);
 
@@ -365,7 +365,7 @@ void ftMewtwo_SpecialAirHi_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALHI, transition_flags1,
                               NULL, fp->x894_currentAnimFrame, 0, 0);
 
@@ -435,7 +435,7 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* gobj)
               (f32) M_PI_2) &&
             (func_8009A134(gobj) == false))
         {
-            func_8007D9FC(fp);
+            ftCommon_8007D9FC(fp);
 
             vel = atan2f(fp->input.x624_lstick_y,
                          fp->input.x620_lstick_x * fp->facing_dir);
@@ -460,7 +460,7 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* gobj)
         }
     }
 
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     ftMewtwo_SpecialAirHi_Action(gobj);
 }
 
@@ -499,14 +499,14 @@ void ftMewtwo_SpecialAirHi_Action(HSD_GObj* gobj)
 
         /// @todo Express as a fraction or something.
         if (stick_x > stick_epsilon)
-            func_8007D9FC(fp);
+            ftCommon_8007D9FC(fp);
 
         floatVar = atan2f(fp->input.x624_lstick_y,
                           fp->input.x620_lstick_x * fp->facing_dir);
         fp->mv.mt.SpecialHi.stickX = fp->input.x620_lstick_x;
         fp->mv.mt.SpecialHi.stickY = fp->input.x624_lstick_y;
     } else {
-        func_8007DA24(fp);
+        ftCommon_8007DA24(fp);
         floatVar = M_PI_2;
         fp->mv.mt.SpecialHi.stickX = 0;
         sqrt_stick = fp->mv.mt.SpecialHi.stickY = 1;
@@ -575,13 +575,13 @@ void ftMewtwo_SpecialAirHiLost_Phys(HSD_GObj* gobj)
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
     if (fp->x2200_ftcmd_var0) {
-        func_8007D4B8(fp);
-        func_8007D440(fp, mewtwoAttrs->x64_MEWTWO_TELEPORT_DRIFT *
-                              fp->x110_attr.x17C_AerialDriftMax);
+        ftCommon_8007D4B8(fp);
+        ftCommon_8007D440(fp, mewtwoAttrs->x64_MEWTWO_TELEPORT_DRIFT *
+                                  fp->x110_attr.x17C_AerialDriftMax);
     } else {
         f32 velY = fp->x80_self_vel.y;
         fp->x80_self_vel.y = velY - velY / 10;
-        func_8007CEF4(fp);
+        ftCommon_8007CEF4(fp);
     }
 }
 
@@ -612,7 +612,7 @@ void ftMewtwo_SpecialHiLost_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRHI_LOST,
                               transition_flags0, NULL,
                               fp->x894_currentAnimFrame, 1, 0);

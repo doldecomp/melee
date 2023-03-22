@@ -384,7 +384,7 @@ inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     fp->x80_self_vel.y = 0.0f;
 
@@ -564,7 +564,7 @@ void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* gobj)
                     fp->fv.mt.x2234_shadowBallCharge =
                         (s32) mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
                     fp->mv.mt.SpecialN.x2348 = true;
-                    func_8007EBAC(fp, 0xCU, 0U);
+                    ftCommon_8007EBAC(fp, 0xCU, 0U);
                     func_8000B1CC(fp->ft_bones[0].x0_jobj, &sp34, &sp40);
                     ef_Spawn(0x1B, gobj, &sp40);
                     func_800BFFD0(fp, 0x5C, 0);
@@ -715,7 +715,7 @@ void ftMewtwo_SpecialAirNLoop_Anim(HSD_GObj* gobj)
                     fp->fv.mt.x2234_shadowBallCharge =
                         (s32) mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
                     fp->mv.mt.SpecialN.x2348 = 1;
-                    func_8007EBAC(fp, 0xCU, 0U);
+                    ftCommon_8007EBAC(fp, 0xCU, 0U);
 
                     func_8000B1CC(fp->ft_bones[0].x0_jobj, &sp34, &sp40);
                     ef_Spawn(0x1B, gobj, &sp40);
@@ -1027,7 +1027,7 @@ void ftMewtwo_SpecialNStart_Coll(HSD_GObj* gobj)
 #endif
 
     if (func_80082708(gobj) == false) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRN_START,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -1046,7 +1046,7 @@ void ftMewtwo_SpecialNLoop_Coll(HSD_GObj* gobj)
 #endif
 
     if (func_80082708(gobj) == false) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(
             gobj, MS_MEWTWO_SPECIALAIRN_LOOP,
             (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
@@ -1066,7 +1066,7 @@ void ftMewtwo_SpecialNFull_Coll(HSD_GObj* gobj)
 #endif
 
     if (func_80082708(gobj) == false) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(
             gobj, MS_MEWTWO_SPECIALAIRN_FULL,
             (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
@@ -1086,7 +1086,7 @@ void ftMewtwo_SpecialNCancel_Coll(HSD_GObj* gobj)
 #endif
 
     if (func_80082708(gobj) == false) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRN_CANCEL,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -1105,7 +1105,7 @@ void ftMewtwo_SpecialNEnd_Coll(HSD_GObj* gobj)
 #endif
 
     if (func_80082708(gobj) == false) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRN_END,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -1124,7 +1124,7 @@ void ftMewtwo_SpecialAirNStart_Coll(HSD_GObj* gobj)
 #endif
 
     if (func_80081D0C(gobj) == true) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALN_START,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -1143,7 +1143,7 @@ void ftMewtwo_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 #endif
 
     if (func_80081D0C(gobj) == true) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(
             gobj, MS_MEWTWO_SPECIALN_LOOP,
             (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
@@ -1163,7 +1163,7 @@ void ftMewtwo_SpecialAirNFull_Coll(HSD_GObj* gobj)
 #endif
 
     if (func_80081D0C(gobj) == true) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(
             gobj, MS_MEWTWO_SPECIALN_FULL,
             (FtStateChange_PreserveSfx | FTMEWTWO_SPECIALN_COLL_FLAG), NULL,
@@ -1183,7 +1183,7 @@ void ftMewtwo_SpecialAirNCancel_Coll(HSD_GObj* gobj)
 #endif
 
     if (func_80081D0C(gobj) == true) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALN_CANCEL,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -1202,7 +1202,7 @@ void ftMewtwo_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 #endif
 
     if (func_80081D0C(gobj) == true) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALN_END,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);

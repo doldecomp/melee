@@ -174,8 +174,8 @@ void ftZelda_80139A54(HSD_GObj* gobj)
     vec.x = attributes->x40;
     vec.y = attributes->x44;
 
-    func_8007D494(fp, vec.x, vec.y);
-    func_8007CEF4(fp);
+    ftCommon_8007D494(fp, vec.x, vec.y);
+    ftCommon_8007CEF4(fp);
 }
 
 void ftZelda_80139A98(HSD_GObj* gobj)
@@ -214,7 +214,7 @@ static Fighter_MotionStateChangeFlags const transition_flags1 =
 void ftZelda_80139B44(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
 
     Fighter_ChangeMotionState(gobj, 352, transition_flags1, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
@@ -225,7 +225,7 @@ void ftZelda_80139B44(HSD_GObj* gobj)
 void ftZelda_80139BB0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, 349, transition_flags1, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
@@ -257,7 +257,7 @@ void ftZelda_80139C98(HSD_GObj* gobj) {}
 
 void ftZelda_80139C9C(HSD_GObj* gobj)
 {
-    func_8007CB74(gobj);
+    ftCommon_8007CB74(gobj);
 }
 
 void ftZelda_80139CBC(HSD_GObj* gobj) {}
@@ -273,7 +273,7 @@ void ftZelda_80139CC0(HSD_GObj* gobj)
         if ((env_flags & MPCOLL_RIGHTWALL) != 0 ||
             (env_flags & MPCOLL_LEFTWALL) != 0)
         {
-            func_8007D60C(fp);
+            ftCommon_8007D60C(fp);
             ftZelda_8013A764(gobj);
             return;
         }
@@ -370,7 +370,7 @@ void ftZelda_80139F6C(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
 
     Fighter_ChangeMotionState(gobj, 353, transition_flags1, NULL,
                               fp->x894_currentAnimFrame, 0, 0);
@@ -382,7 +382,7 @@ void ftZelda_80139F6C(HSD_GObj* gobj)
 void ftZelda_80139FE8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, 350, transition_flags1, NULL,
                               fp->x894_currentAnimFrame, 0, 0);
@@ -452,7 +452,7 @@ void ftZelda_8013A058(HSD_GObj* gobj)
               (f32) M_PI_2))
         {
             if (func_8009A134(gobj) == 0) {
-                func_8007D9FC(fp);
+                ftCommon_8007D9FC(fp);
 
                 temp_f5 = atan2f(fp->input.x624_lstick_y,
                                  fp->input.x620_lstick_x * fp->facing_dir);
@@ -481,7 +481,7 @@ void ftZelda_8013A058(HSD_GObj* gobj)
             }
         }
     }
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     ftZelda_8013A244(gobj);
 }
 
@@ -541,14 +541,14 @@ void ftZelda_8013A244(HSD_GObj* gobj)
             temp_f1 = -temp_f1;
         }
         if (temp_f1 > 0.001f) {
-            func_8007D9FC(fp);
+            ftCommon_8007D9FC(fp);
         }
         var_f30 = atan2f(fp->input.x624_lstick_y,
                          fp->input.x620_lstick_x * fp->facing_dir);
         fp->mv.zd.specialhi.x4.x = fp->input.x620_lstick_x;
         fp->mv.zd.specialhi.x4.y = fp->input.x624_lstick_y;
     } else {
-        func_8007DA24(fp);
+        ftCommon_8007DA24(fp);
         var_f30 = (f32) M_PI_2;
         fp->mv.zd.specialhi.x4.x = 0;
         var_f31 = fp->mv.zd.specialhi.x4.y = 1.0;
@@ -619,8 +619,9 @@ void ftZelda_8013A50C(HSD_GObj* gobj)
     ftZelda_DatAttrs* attributes = fp->x2D4_specialAttributes;
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        func_8007D4B8(fp);
-        func_8007D440(fp, attributes->x5C * fp->x110_attr.x17C_AerialDriftMax);
+        ftCommon_8007D4B8(fp);
+        ftCommon_8007D440(fp,
+                          attributes->x5C * fp->x110_attr.x17C_AerialDriftMax);
         return;
     }
 
@@ -629,7 +630,7 @@ void ftZelda_8013A50C(HSD_GObj* gobj)
         fp->x80_self_vel.y = vel_y - vel_y / 10;
     }
 
-    func_8007CEF4(fp);
+    ftCommon_8007CEF4(fp);
 }
 
 void ftZelda_8013A588(HSD_GObj* gobj)
@@ -669,7 +670,7 @@ void ftZelda_8013A5C4(HSD_GObj* gobj)
 void ftZelda_8013A648(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, 354, transition_flags0, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 }

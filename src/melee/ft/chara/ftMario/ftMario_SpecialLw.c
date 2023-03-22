@@ -84,7 +84,7 @@ void ftMario_SpecialLw_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirLw, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->x80_self_vel.y = sa->speciallw.vel_y - sa->speciallw.tap_y_vel_max;
-    func_8007D440(fp, sa->speciallw.air_momentum_x);
+    ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
     doStartMotion(gobj);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
@@ -110,7 +110,7 @@ void ftMario_SpecialAirLw_StartMotion(HSD_GObj* gobj)
         sub_val = sa->speciallw.tap_y_vel_max;
     }
     fp->x80_self_vel.y = (f32) (sa->speciallw.vel_y - sub_val);
-    func_8007D440(fp, sa->speciallw.air_momentum_x);
+    ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
     doStartMotion(gobj);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
@@ -172,11 +172,11 @@ static void doPhys(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
     ftMario_DatAttrs* sa = GetMarioAttr(fp);
     fp->x2208_ftcmd_var2 = 0;
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirLw, transition_flags,
                               NULL, fp->x894_currentAnimFrame, 1, 0);
     ftComm_ClampFallSpeed(fp, sa->speciallw.tap_grav);
-    func_8007D440(fp, sa->speciallw.air_momentum_x);
+    ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
@@ -202,8 +202,8 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
 
     {
         Fighter* fp1 = fp0;
-        func_8007CADC(fp1, 0, sa->speciallw.momentum_x_mul, vel_y);
-        func_8007CB74(gobj);
+        ftCommon_8007CADC(fp1, 0, sa->speciallw.momentum_x_mul, vel_y);
+        ftCommon_8007CB74(gobj);
         if (fp0->x2208_ftcmd_var2 != 0 && (fp0->input.x668 & HSD_BUTTON_B)) {
             vel_y = fp0->x80_self_vel.y;
             fp0->x80_self_vel.y = vel_y + sa->speciallw.tap_y_vel_max;
@@ -231,9 +231,10 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
         ((u32) fp->x2208_ftcmd_var2 != 0U) &&
         ((fp->input.x668 & HSD_BUTTON_B) != 0))
     {
-        func_8007D508(fp, sa->speciallw.tap_y_vel_max, sa->speciallw.tap_grav);
+        ftCommon_8007D508(fp, sa->speciallw.tap_y_vel_max,
+                          sa->speciallw.tap_grav);
     }
-    func_8007D4B8(fp);
+    ftCommon_8007D4B8(fp);
     flt_var = sa->speciallw.air_momentum_x;
     sa_2 = fp->x2D4_specialAttributes;
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
@@ -245,7 +246,7 @@ void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
             flt_var = 0;
         }
     }
-    func_8007D3A8(fp, 0, sa->speciallw.air_momentum_x_mul, flt_var);
+    ftCommon_8007D3A8(fp, 0, sa->speciallw.air_momentum_x_mul, flt_var);
 }
 
 static void doColl(HSD_GObj* gobj)
@@ -302,12 +303,12 @@ static void doAirCollIfUnk(HSD_GObj* gobj)
     fp = getFighter(gobj);
     sa = GetMarioAttr(fp);
     fp->x2208_ftcmd_var2 = 0;
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     fp->x80_self_vel.y = 0;
     fp->fv.mr.x2234_tornadoCharge = 0;
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialLw, transition_flags,
                               NULL, fp->x894_currentAnimFrame, 1, 0);
-    func_8007CC78(ft_tmp = fp, sa->speciallw.momentum_x);
+    ftCommon_8007CC78(ft_tmp = fp, sa->speciallw.momentum_x);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }

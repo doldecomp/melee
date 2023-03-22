@@ -132,7 +132,7 @@ void ftPikachu_ActionChange_80124BB4(HSD_GObj* gobj)
     Fighter* fp;
     if (!func_80082708(gobj)) {
         fp = GET_FIGHTER(gobj);
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x156, 0xc4c5082, 0,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
@@ -143,7 +143,7 @@ void ftPikachu_ActionChange_80124C20(HSD_GObj* gobj)
     Fighter* fp;
     if (func_80081D0C(gobj) == 1) {
         fp = GET_FIGHTER(gobj);
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         fp->x80_self_vel.y = 0.0f;
         Fighter_ChangeMotionState(gobj, 0x155, 0xc4c5082, 0,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);

@@ -45,6 +45,6 @@ void ftDonkey_800E0294(HSD_GObj* gobj)
                               0.0f, 1.0, 0.0f);
     ftAnim_SetAnimRate(gobj, 0.0f);
     if (fp->ground_or_air == GA_Ground) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
     }
 }

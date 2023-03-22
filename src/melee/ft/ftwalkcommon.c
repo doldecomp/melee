@@ -201,9 +201,10 @@ void ftWalkCommon_800E0060(HSD_GObj* gobj)
             }
 
             fp->mv.co.walk.x0 = stick_mul * p_ftCommonData->x440;
-            func_8007C98C(fp, walk_vel, stick_mul, fp->x110_attr.gr_friction);
+            ftCommon_8007C98C(fp, walk_vel, stick_mul,
+                              fp->x110_attr.gr_friction);
         }
 
-        func_8007CB74(gobj);
+        ftCommon_8007CB74(gobj);
     }
 }

@@ -126,9 +126,9 @@ void ftMewtwo_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
     attr* ftAttrs = getFtAttrs(fp);
 
-    func_8007D494(fp, mewtwoAttrs->x78_MEWTWO_DISABLE_GRAVITY,
-                  mewtwoAttrs->x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY);
-    func_8007CE94(fp, ftAttrs->x180_AerialFriction);
+    ftCommon_8007D494(fp, mewtwoAttrs->x78_MEWTWO_DISABLE_GRAVITY,
+                      mewtwoAttrs->x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY);
+    ftCommon_8007CE94(fp, ftAttrs->x180_AerialFriction);
 }
 
 inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)
@@ -147,7 +147,7 @@ void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     fp->x80_self_vel.y = 0.0f;
 
@@ -159,7 +159,7 @@ void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* gobj)
 
     ftMewtwo_SpecialLw_SetCall(gobj);
 
-    func_8007D468(fp);
+    ftCommon_8007D468(fp);
 }
 
 // 0x801464B0
@@ -169,7 +169,7 @@ void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALLW,
                               FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,

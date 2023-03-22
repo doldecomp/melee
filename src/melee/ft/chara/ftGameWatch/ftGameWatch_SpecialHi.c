@@ -122,7 +122,7 @@ void ftGameWatch_SpecialHi_StartMotion(HSD_GObj* gobj)
 
     fp->x74_anim_vel.y = 0.0f;
     fp->x80_self_vel.y = 0.0f;
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
@@ -140,7 +140,7 @@ void ftGameWatch_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     u8 _[24];
 #endif
 
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
@@ -208,7 +208,7 @@ void ftGameWatch_SpecialAirHi_IASA(HSD_GObj* gobj)
 
             temp = stick_range_threshold * facing_dir;
             angle = temp * gawAttrs->x5C_GAMEWATCH_RESCUE_ANGLE_UNK;
-            func_8007D9FC(fp);
+            ftCommon_8007D9FC(fp);
             ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
             fp->x6BC_inputStickangle = -angle;
             fp->x2200_ftcmd_var0 = 1;
@@ -255,7 +255,7 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* gobj)
         if (fp->x80_self_vel.y >= 0.0f) {
             if (func_80081D0C(gobj) != false) {
                 ftGameWatch_ItemRescueRemove(gobj);
-                func_8007D7FC(fp);
+                ftCommon_8007D7FC(fp);
                 func_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 fp->cb.x21E4_callback_OnDeath2 = NULL;
                 fp->cb.x21DC_callback_OnTakeDamage = NULL;

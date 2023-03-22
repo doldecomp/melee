@@ -217,7 +217,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     Player_LoadPlayerCoords(fp->xC_playerID, &player_coords);
     fp->facing_dir = Player_GetFacingDirection(fp->xC_playerID);
 
-    player_coords.x = fp->facing_dir * func_800804EC(fp) + player_coords.x;
+    player_coords.x = fp->facing_dir * ftCommon_800804EC(fp) + player_coords.x;
     x = player_coords.x;
     fp->cur_pos.x = x;
     fp->prev_pos.x = x;
@@ -506,7 +506,7 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
 
     func_800D105C(gobj);
     func_800C09B4(gobj);
-    func_8007E2FC(gobj);
+    ftCommon_8007E2FC(gobj);
     func_80088A50(fp);
     func_800890BC(fp);
     func_800892D4(fp);
@@ -515,11 +515,11 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
 
     if (fp->x2114_SmashAttr.x2135 == -1) {
         if (func_80082A68(gobj) && !fp->x2229_b6)
-            func_8007D6A4(fp);
+            ftCommon_8007D6A4(fp);
         else
-            func_8007D5D4(fp);
+            ftCommon_8007D5D4(fp);
     } else
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
     ftCamera_80076064(fp);
 
     HSD_JObjSetTranslate(GET_JOBJ(gobj), &fp->cur_pos);
@@ -901,7 +901,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
         func_800C61B0(gobj);
     } else {
         if (!fp->x2229_b5_no_normal_motion) {
-            func_8007D92C(gobj);
+            ftCommon_8007D92C(gobj);
         } else {
             OSReport("ellegal flag fp->no_normal_motion\n");
             __assert(__FILE__, 1065, "0");
@@ -973,19 +973,19 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         if ((ftGetParasolStatus(gobj) != -1) &&
             (ftGetParasolStatus(gobj) != 6))
         {
-            func_8007E83C(gobj, 6, 0.0f);
+            ftCommon_8007E83C(gobj, 6, 0.0f);
         }
     }
 
     ftAnim_80070F28(gobj);
     ftAnim_80070E74(gobj);
-    func_8007ECD4(fp, 7);
-    func_8007ECD4(fp, 8);
-    func_8007ECD4(fp, 0x24);
+    ftCommon_8007ECD4(fp, 7);
+    ftCommon_8007ECD4(fp, 8);
+    ftCommon_8007ECD4(fp, 0x24);
 
     if ((arg2 & FtStateChange_SkipUpdateRumble) == 0) {
-        func_8007ECD4(fp, 1);
-        func_8007ECD4(fp, 0x19);
+        ftCommon_8007ECD4(fp, 1);
+        ftCommon_8007ECD4(fp, 0x19);
     }
 
     if (((arg2 & FtStateChange_PreserveColaNimPartHitStatus) == 0) &&
@@ -995,7 +995,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         ftColl_8007B760(gobj, p_ftCommonData->x134);
         fp->x2221_flag.bits.b1 = 0;
     }
-    func_8007E2F4(fp, 0);
+    ftCommon_8007E2F4(fp, 0);
 
     if (fp->dmg.x18F4 != 0) {
         fp->dmg.x18F4 = 0;
@@ -1073,7 +1073,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     if ((arg2 & FtStateChange_SkipUpdateItemVis) == 0) {
         fp->x221E_flag.bits.b3 = 1;
     } else if (fp->x221E_flag.bits.b3 == 0U) {
-        func_8007F578(gobj);
+        ftCommon_8007F578(gobj);
     }
 
     if ((arg2 & FtStateChange_SkipUpdateModelPartVis) == 0) {
@@ -1095,7 +1095,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     if (((arg2 & FtStateChange_PreserveGfx) == 0) &&
         (fp->x2219_flag.bits.b0 != 0U))
     {
-        func_8007DB24(gobj);
+        ftCommon_8007DB24(gobj);
     }
 
     if (((arg2 & FtStateChange_PreserveAccessory) == 0) &&
@@ -1361,7 +1361,8 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                 !fp->x594_animCurrFlags1.bits.b0)
             {
                 !fp;
-                func_8007CC78(fp, fp->x110_attr.x138_DashrunTerminalVelocity);
+                ftCommon_8007CC78(fp,
+                                  fp->x110_attr.x138_DashrunTerminalVelocity);
             }
         }
 
@@ -1512,9 +1513,9 @@ void Fighter_8006A360(HSD_GObj* gobj)
             if (fp->x2014) {
                 fp->x2014--;
                 if (fp->x2014 == 0) {
-                    func_8007F8E8(gobj);
+                    ftCommon_8007F8E8(gobj);
                     func_8026A8EC(fp->x197C);
-                    func_8007F9B4(gobj);
+                    ftCommon_8007F9B4(gobj);
                 }
             }
         }
@@ -1551,9 +1552,9 @@ void Fighter_8006A360(HSD_GObj* gobj)
             if (fp->x2018 <= 0) {
                 Vec3 vec = lbl_803B7488;
 
-                func_8007F8E8(gobj);
+                ftCommon_8007F8E8(gobj);
                 func_8026ABD8(fp->x1980, &vec, 0.0f);
-                func_8007FF74(gobj);
+                ftCommon_8007FF74(gobj);
             }
         }
 
@@ -1628,7 +1629,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
                 if (func_800C0694(fp) == 8) {
                     func_800C0200(fp, 8);
                 }
-                func_8007ECD4(fp, 2);
+                ftCommon_8007ECD4(fp, 2);
             }
         }
 
@@ -1694,7 +1695,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
             }
         }
 
-        func_8007E0E4(gobj);
+        ftCommon_8007E0E4(gobj);
         func_800C0408(gobj);
     }
 }
@@ -2114,10 +2115,10 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
 
         if (!fp->x2219_flag.bits.b5) {
             if (fp->x1980) {
-                func_8007FFD8(fp, p_ftCommonData->x6FC);
+                ftCommon_8007FFD8(fp, p_ftCommonData->x6FC);
             }
             func_800DF0D0(gobj);
-            func_8008031C(gobj);
+            ftCommon_8008031C(gobj);
             Fighter_UnkIncrementCounters_8006ABEC(gobj);
 
             if (fp->cb.x219C_callback_IASA) {
@@ -2170,10 +2171,10 @@ void Fighter_procUpdate(HSD_GObj* gobj)
 
                 if (fp->x2228_flag.bits.b2) {
                     p_kb_vel->x =
-                        func_8007CD6C(p_kb_vel->x, func_8007CDA4(fp));
+                        ftCommon_8007CD6C(p_kb_vel->x, ftCommon_8007CDA4(fp));
                     ;
                     p_kb_vel->y =
-                        func_8007CD6C(p_kb_vel->y, func_8007CDF8(fp));
+                        ftCommon_8007CD6C(p_kb_vel->y, ftCommon_8007CDF8(fp));
                     ;
                 } else {
                     float kb_angle = atan2f(kb_vel_y, kb_vel_x);
@@ -2201,13 +2202,14 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                     fp->xF0_ground_kb_vel = kb_vel_x;
 
                 pAttr = &fp->x110_attr;
-                func_8007CCA0(fp,
-                              /*effective friction - ground multiplier is
-                                 usually 1. last factor was 1 when I looked*/
-                              /*effective friction - ground multiplier is
-                                 usually 1. last factor was 1 when I looked*/
-                              Stage_GetGroundFrictionMultiplier(fp) *
-                                  pAttr->gr_friction * p_ftCommonData->x200);
+                ftCommon_8007CCA0(
+                    fp,
+                    /*effective friction - ground multiplier is
+                       usually 1. last factor was 1 when I looked*/
+                    /*effective friction - ground multiplier is
+                       usually 1. last factor was 1 when I looked*/
+                    Stage_GetGroundFrictionMultiplier(fp) *
+                        pAttr->gr_friction * p_ftCommonData->x200);
 
                 // set knockback velocity to ground_kb_vel * surfaceTangent
                 p_kb_vel->x = pNormal->y * fp->xF0_ground_kb_vel;
@@ -2255,7 +2257,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
 
                 pAttr = &fp->x110_attr;
 
-                func_8007CE4C(
+                ftCommon_8007CE4C(
                     fp,
                     /* effectiveFriction - the last constant variable differs
                        from the one for the knockback friction above*/
@@ -2472,7 +2474,7 @@ void Fighter_8006C27C(HSD_GObj* gobj)
         if (fp->x6F0_collData.x19C) {
             fp->x6F0_collData.x19C--;
             if (!fp->x6F0_collData.x19C) {
-                func_8007D5BC(fp);
+                ftCommon_8007D5BC(fp);
             }
         }
 
@@ -2630,7 +2632,7 @@ void Fighter_8006CB94(HSD_GObj* gobj)
         ftColl_8007AB80(gobj);
         func_8007BBCC_float_output = ftColl_8007BBCC(gobj);
         if (func_8007BBCC_float_output > 0.0f) {
-            func_8007FC7C(gobj, func_8007BBCC_float_output);
+            ftCommon_8007FC7C(gobj, func_8007BBCC_float_output);
         }
     }
 }
@@ -2638,7 +2640,7 @@ void Fighter_8006CB94(HSD_GObj* gobj)
 void Fighter_UnkTakeDamage_8006CC30(Fighter* fp, f32 arg0)
 {
     Fighter_TakeDamage_8006CC7C(fp, arg0);
-    func_8007EA90(fp, arg0);
+    ftCommon_8007EA90(fp, arg0);
 }
 
 void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
@@ -2696,9 +2698,9 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
         }
         if (fp->x197C) {
             if (HSD_Randi(p_ftCommonData->x418) < arg1) {
-                func_8007F8E8(fp->gobj);
+                ftCommon_8007F8E8(fp->gobj);
                 func_8026ABD8(fp->x197C, &vec, 1.0f);
-                func_8007F9B4(fp->gobj);
+                ftCommon_8007F9B4(fp->gobj);
             }
         }
     }
@@ -2709,7 +2711,7 @@ void Fighter_8006CF5C(Fighter* fp, s32 arg1)
     if (!fp->x2224_flag.bits.b2) {
         fp->dmg.x18F0 += arg1;
         func_800BFFD0(fp, 8, 0);
-        func_8007EBAC(fp, 2, 0);
+        ftCommon_8007EBAC(fp, 2, 0);
     }
 }
 
@@ -2875,15 +2877,15 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                     func_8008EC90(gobj);
                     break;
                 case 1:
-                    func_8007DB58(gobj);
+                    ftCommon_8007DB58(gobj);
                     func_8008E908(gobj, 0.0f);
                     break;
                 case 2:
-                    func_8007DB58(gobj);
+                    ftCommon_8007DB58(gobj);
                     func_8008E9D0(gobj);
                     break;
                 case 3:
-                    func_8007DB58(gobj);
+                    ftCommon_8007DB58(gobj);
                     func_8008EB58(gobj);
                     break;
                 }
@@ -2893,7 +2895,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                 func_80090594(fp, fp->dmg.x1860_dealt, damage_bool,
                               motion_state_index, ground_or_air,
                               fp->x1960_vibrateMult);
-                func_8007ED50(fp, fp->dmg.x1838_percentTemp);
+                ftCommon_8007ED50(fp, fp->dmg.x1838_percentTemp);
                 bool1 = damage_bool;
 
             } else {
@@ -2927,7 +2929,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
             if ((fp->dmg.x191C) && (!fp->x1A58_interactedFighter) &&
                 (!fp->x1A60))
             {
-                func_8007DB58(gobj);
+                ftCommon_8007DB58(gobj);
                 func_80099D9C(gobj);
             }
             bool1 = fp->dmg.x1918;
@@ -2937,9 +2939,9 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
             }
             bool1 = fp->dmg.x1914;
             if (fp->x2070.x2073 == 0x46U) {
-                func_8007EBAC(fp, 0xE, 0);
+                ftCommon_8007EBAC(fp, 0xE, 0);
             } else {
-                func_8007EE0C(fp, fp->dmg.x1914);
+                ftCommon_8007EE0C(fp, fp->dmg.x1914);
             }
         } else {
             if (fp->dmg.x1924) {
@@ -2964,12 +2966,12 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
         if (!forceAppliedOnHit && fp->dmg.x1838_percentTemp) {
             Fighter_UnkTakeDamage_8006CC30(fp, fp->dmg.x1838_percentTemp);
             ftKirby_800F5C34(fp);
-            func_800804FC(fp);
+            ftCommon_800804FC(fp);
         }
         func_800C8D00(gobj);
 
         if (bool1) {
-            fp->dmg.x195c_hitlag_frames = func_8007DA74(
+            fp->dmg.x195c_hitlag_frames = ftCommon_8007DA74(
                 bool1, motion_state_index, fp->x1960_vibrateMult);
             if (fp->dmg.x195c_hitlag_frames < fp->x1964) {
                 fp->dmg.x195c_hitlag_frames = fp->x1964;
@@ -3017,7 +3019,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                 (fp->dmg.x1928 * p_ftCommonData->x3E0) + p_ftCommonData->x3E4;
             fp->xF4_ground_attacker_shield_kb_vel =
                 (fp->dmg.x192c < 0.0f) ? eval : -eval;
-            func_8007E2A4(gobj);
+            ftCommon_8007E2A4(gobj);
         }
 
         fp->dmg.x1838_percentTemp = 0.0f;
@@ -3068,7 +3070,7 @@ void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x221F_flag.bits.b3) {
-        func_8008021C(gobj);
+        ftCommon_8008021C(gobj);
         if (fp->cb.x21AC_callback_Cam) {
             fp->cb.x21AC_callback_Cam(gobj);
         }

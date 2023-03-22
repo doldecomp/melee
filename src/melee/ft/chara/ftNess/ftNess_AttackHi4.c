@@ -367,7 +367,7 @@ void ftNess_YoyoApplySmash(HSD_GObj* gobj)
     if (smash_attr->x2128 != 0x7B)
         func_800BFFD0(fp, smashColAnimID, 0);
 
-    func_8007EBAC(fp, 0x24U, 0U);
+    ftCommon_8007EBAC(fp, 0x24U, 0U);
     func_80088510(fp, 0x334A7, 0x7F, 0x40);
 }
 

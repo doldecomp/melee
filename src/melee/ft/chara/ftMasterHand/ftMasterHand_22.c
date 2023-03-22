@@ -163,8 +163,8 @@ void ftMasterHand_801545A0(HSD_GObj* gobj)
     Fighter* temp_r31 = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x176, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
-    func_8007E2D0(temp_r31, 0x80U, &ftMasterHand_80154A2C, 0U,
-                  &ftMasterHand_80155A58);
+    ftCommon_8007E2D0(temp_r31, 0x80U, &ftMasterHand_80154A2C, 0U,
+                      &ftMasterHand_80155A58);
     temp_r31->mv.mh.unk0.x20 = 0;
 }
 

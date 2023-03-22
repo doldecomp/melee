@@ -606,11 +606,11 @@ void ftSeak_8011136C(HSD_GObj* gobj)
     attr* fighter_attr = &fp->x110_attr;
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        func_8007D494(fp, fighter_attr->x16C_Gravity,
-                      fighter_attr->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, fighter_attr->x16C_Gravity,
+                          fighter_attr->x170_TerminalVelocity);
     }
 
-    func_8007CE94(fp, fighter_attr->x180_AerialFriction);
+    ftCommon_8007CE94(fp, fighter_attr->x180_AerialFriction);
 }
 
 void ftSeak_801113C8(HSD_GObj* gobj)
@@ -636,7 +636,7 @@ void ftSeak_80111440(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     {
         Fighter_ChangeMotionState(gobj, 352, transition_flags, NULL,
                                   fp->x894_currentAnimFrame, 1, 0);
@@ -660,7 +660,7 @@ void ftSeak_801114E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 349, transition_flags, NULL,
                               fp->x894_currentAnimFrame, 1.0, 0.0);
 
@@ -978,7 +978,7 @@ void ftSeak_80111CB0(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, 354, transition_flags, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
@@ -1001,7 +1001,7 @@ void ftSeak_80111CB0(HSD_GObj* gobj)
 void ftSeak_80111D54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, 351, transition_flags, NULL,
                               fp->x894_currentAnimFrame, 1, 0);

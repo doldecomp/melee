@@ -112,7 +112,7 @@ void ftMars_801383A8(HSD_GObj* gobj)
     }
     if (phi_r0 != 0) {
         if (abs(fp->input.x620_lstick_x) > attr->x30) {
-            func_8007D9FC(fp);
+            ftCommon_8007D9FC(fp);
             ftParts_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
         }
     }
@@ -152,7 +152,7 @@ void ftMars_801384F0(HSD_GObj* gobj)
     }
     if (phi_r0 != 0) {
         if (abs(fp->input.x620_lstick_x) > attr->x30) {
-            func_8007D9FC(fp);
+            ftCommon_8007D9FC(fp);
             ftParts_80075AF0(fp, 0, (f32) (HALF_PI * fp->facing_dir));
         }
     }
@@ -193,10 +193,10 @@ void ftMars_80138638(HSD_GObj* gobj)
         } else {
             attr = fp->x2D4_specialAttributes;
             attr2 = &fp->x110_attr;
-            func_8007D494(fp, attr->x44, attr->x48);
-            func_8007D344(fp, 0.0f,
-                          attr2->x174_AerialDriftStickMult * attr->x28,
-                          attr2->x17C_AerialDriftMax * attr->x28);
+            ftCommon_8007D494(fp, attr->x44, attr->x48);
+            ftCommon_8007D344(fp, 0.0f,
+                              attr2->x174_AerialDriftStickMult * attr->x28,
+                              attr2->x17C_AerialDriftMax * attr->x28);
         }
     } else {
         func_80084FA8(gobj);
@@ -235,14 +235,15 @@ void ftMars_8013873C(HSD_GObj* gobj)
                 fp->x2208_ftcmd_var2 = 1;
             }
         } else {
-            func_8007D494(fp, attr->x44, attr->x48);
-            func_8007D344(fp, 0.0f,
-                          attr2->x174_AerialDriftStickMult * attr->x28,
-                          attr2->x17C_AerialDriftMax * attr->x28);
+            ftCommon_8007D494(fp, attr->x44, attr->x48);
+            ftCommon_8007D344(fp, 0.0f,
+                              attr2->x174_AerialDriftStickMult * attr->x28,
+                              attr2->x17C_AerialDriftMax * attr->x28);
         }
     } else {
-        func_8007D494(fp, attr2->x16C_Gravity, attr2->x170_TerminalVelocity);
-        func_8007CF58(fp);
+        ftCommon_8007D494(fp, attr2->x16C_Gravity,
+                          attr2->x170_TerminalVelocity);
+        ftCommon_8007CF58(fp);
     }
 }
 

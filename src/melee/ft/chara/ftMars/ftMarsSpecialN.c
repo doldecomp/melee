@@ -99,8 +99,8 @@ void ftMars_8013691C(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_8007C930(fp, attr->x10);
-    func_8007CB74(gobj);
+    ftCommon_8007C930(fp, attr->x10);
+    ftCommon_8007CB74(gobj);
 }
 
 void ftMars_8013695C(HSD_GObj* gobj)
@@ -113,8 +113,8 @@ void ftMars_8013695C(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_8007D4B8(fp);
-    func_8007CE94(fp, attr->x10);
+    ftCommon_8007D4B8(fp);
+    ftCommon_8007CE94(fp, attr->x10);
 }
 
 // 801369A4 00133584
@@ -138,7 +138,7 @@ void ftMars_801369E0(HSD_GObj* gobj)
 void ftMars_80136A1C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, 0x159, 0x0C4C5084, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -149,7 +149,7 @@ void ftMars_80136A1C(HSD_GObj* gobj)
 void ftMars_80136A7C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, 0x155, 0x0C4C5084, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -262,7 +262,7 @@ void ftMars_80136DB4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    func_8007D5D4(gobj->user_data);
+    ftCommon_8007D5D4(gobj->user_data);
     Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C5A86, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
@@ -273,7 +273,7 @@ void ftMars_80136E14(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 0x156, 0x0C4C5A86, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
@@ -462,7 +462,7 @@ void ftMars_801371FC(HSD_GObj* gobj)
     }
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     // MotionStateChange
     Fighter_ChangeMotionState(gobj, thing, 0x0C4C508E, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -488,7 +488,7 @@ void ftMars_801372A8(HSD_GObj* gobj)
     }
 
     // Air_SetAsGrounded2
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     // MotionStateChange
     Fighter_ChangeMotionState(gobj, thing, 0x0C4C508E, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);

@@ -61,10 +61,11 @@ void ftDonkey_8010E35C(HSD_GObj* gobj)
     attr* ft_attr = &fp->x110_attr;
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     if (fp->x2200_ftcmd_var0) {
-        func_8007D494(fp, donkey_attr->SpecialS.x44_AERIAL_GRAVITY,
-                      ft_attr->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, donkey_attr->SpecialS.x44_AERIAL_GRAVITY,
+                          ft_attr->x170_TerminalVelocity);
     }
-    func_8007CE94(fp, donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
+    ftCommon_8007CE94(fp,
+                      donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
     if (fp->x2200_ftcmd_var0 != 0) {
         /// @todo Fix control flow.
     }
@@ -92,7 +93,7 @@ void ftDonkey_8010E428(HSD_GObj* gobj)
 void ftDonkey_8010E464(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 0x17C, 0x0C4C508A, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
     if (fp->x2219_flag.bits.b0 == 1) {
@@ -104,7 +105,7 @@ void ftDonkey_8010E464(HSD_GObj* gobj)
 void ftDonkey_8010E4EC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 0x17B, 0x0C4C508A, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
     if (fp->x2219_flag.bits.b0 == 1) {

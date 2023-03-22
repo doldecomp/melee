@@ -19,7 +19,7 @@ void ftSeak_8011412C(HSD_GObj* fighterObj)
 {
     Fighter* fighter = fighterObj->user_data;
     fighter->cb.x21BC_callback_Accessory4 = 0;
-    func_8007EFC8(fighterObj, &ftZelda_8013B4D8);
+    ftCommon_8007EFC8(fighterObj, &ftZelda_8013B4D8);
 }
 #endif
 

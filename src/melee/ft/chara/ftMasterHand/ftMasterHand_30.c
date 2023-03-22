@@ -96,7 +96,7 @@ void ftMasterHand_801556C4(HSD_GObj* gobj)
         if (fp->x1A58_interactedFighter != 0) {
             HSD_GObj* victim = fp->x1A58_interactedFighter;
             Fighter* victim_fp = GET_FIGHTER(victim);
-            func_8007E2F4(fp, 0);
+            ftCommon_8007E2F4(fp, 0);
             func_800DE2A8(gobj, victim);
             victim_fp->dmg.x1844_direction *= neg1;
             func_800DE7C0(victim, 0, 0);

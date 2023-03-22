@@ -465,11 +465,12 @@ void ftZelda_8013BF50(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->x110_attr;
-        func_8007D494(fp, charAttr->x2C, fighterAttr->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, charAttr->x2C,
+                          fighterAttr->x170_TerminalVelocity);
     }
 
     aerialFriction = fp->x110_attr.x180_AerialFriction;
-    func_8007CE94(fp, aerialFriction);
+    ftCommon_8007CE94(fp, aerialFriction);
 }
 
 // 8013BFB0 - 8013C010 (0x60 bytes)
@@ -495,11 +496,12 @@ void ftZelda_8013BFB0(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->x110_attr;
-        func_8007D494(fp, charAttr->x2C, fighterAttr->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, charAttr->x2C,
+                          fighterAttr->x170_TerminalVelocity);
     }
 
     aerialFriction = fp->x110_attr.x180_AerialFriction;
-    func_8007CE94(fp, aerialFriction);
+    ftCommon_8007CE94(fp, aerialFriction);
 }
 
 // 8013C010 - 8013C070 (0x60 bytes)
@@ -525,11 +527,12 @@ void ftZelda_8013C010(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 = temp_r3 - 1;
     } else {
         fighterAttr = &fp->x110_attr;
-        func_8007D494(fp, charAttr->x2C, fighterAttr->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, charAttr->x2C,
+                          fighterAttr->x170_TerminalVelocity);
     }
 
     aerialFriction = fp->x110_attr.x180_AerialFriction;
-    func_8007CE94(fp, aerialFriction);
+    ftCommon_8007CE94(fp, aerialFriction);
 }
 
 // 8013C070 - 8013C0DC (0x6C bytes)
@@ -540,7 +543,7 @@ void ftZelda_8013C070(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (func_80082708(gobj) == 0) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C5082, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
     }
@@ -554,7 +557,7 @@ void ftZelda_8013C0DC(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (func_80082708(gobj) == 0) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
     }
@@ -567,7 +570,7 @@ void ftZelda_8013C148(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (func_80082708(gobj) == 0) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
     }
@@ -580,7 +583,7 @@ void ftZelda_8013C1B4(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (func_80081D0C(gobj) != 0) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x157, 0x0C4C5082, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
     }
@@ -593,7 +596,7 @@ void ftZelda_8013C220(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (func_80081D0C(gobj) != 0) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x158, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
     }
@@ -606,7 +609,7 @@ void ftZelda_8013C28C(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (func_80081D0C(gobj) != 0) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x159, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
     }

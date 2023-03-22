@@ -60,7 +60,7 @@ void ftZelda_8013AEAC(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     fp->cb.x21BC_callback_Accessory4 = 0;
 
-    func_8007EFC8(gobj, ftSeak_80114758);
+    ftCommon_8007EFC8(gobj, ftSeak_80114758);
 }
 
 // Helper function for both ftZelda_SpecialLw_StartMotion /
@@ -165,8 +165,8 @@ void ftZelda_8013B110(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->x2D4_specialAttributes;
 
-    func_8007D494(fp, attributes->x78, attributes->x7C);
-    func_8007CEF4(fp);
+    ftCommon_8007D494(fp, attributes->x78, attributes->x7C);
+    ftCommon_8007CEF4(fp);
 }
 
 // 8013B154 - 8013B190 (0x3C bytes)
@@ -194,7 +194,7 @@ void ftZelda_8013B1CC(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 0x165, 0x0C4C508E, NULL,
                               fp->x894_currentAnimFrame, 1.0, 0);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013ADB4;
@@ -206,7 +206,7 @@ void ftZelda_8013B238(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 0x163, 0x0C4C508E, NULL,
                               fp->x894_currentAnimFrame, 1.0, 0);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013ADB4;
@@ -258,8 +258,8 @@ void ftZelda_8013B344(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     attributes = fp->x2D4_specialAttributes;
 
-    func_8007D494(fp, attributes->x78, attributes->x7C);
-    func_8007CEF4(fp);
+    ftCommon_8007D494(fp, attributes->x78, attributes->x7C);
+    ftCommon_8007CEF4(fp);
 }
 
 // 8013B388 - 8013B3C4 (0x3C bytes)
@@ -287,7 +287,7 @@ void ftZelda_8013B400(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 0x166, 0x0C4C508E, NULL,
                               fp->x894_currentAnimFrame, 1.0, 0);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AE30;
@@ -300,7 +300,7 @@ void ftZelda_8013B46C(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C508E, NULL,
                               fp->x894_currentAnimFrame, 1.0, 0);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AE30;

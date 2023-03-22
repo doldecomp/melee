@@ -175,10 +175,10 @@ void ftFox_SpecialAirSStart_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
     } else {
-        func_8007D494(fp, foxAttrs->x30_FOX_ILLUSION_UNK2,
-                      ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, foxAttrs->x30_FOX_ILLUSION_UNK2,
+                          ftAttrs->x170_TerminalVelocity);
     }
-    func_8007CE94(fp, foxAttrs->x2C_FOX_ILLUSION_UNK1);
+    ftCommon_8007CE94(fp, foxAttrs->x2C_FOX_ILLUSION_UNK1);
 }
 
 // 0x800EA128
@@ -221,7 +221,7 @@ void ftFox_SpecialSStart_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRS_START,
                               FTFOX_SPECIALS_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -234,7 +234,7 @@ void ftFox_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS_START,
                               FTFOX_SPECIALS_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -404,7 +404,7 @@ void ftFox_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(
         gobj, MS_FOX_SPECIALAIRS,
         (FtStateChange_PreserveColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
@@ -419,7 +419,7 @@ void ftFox_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(
         gobj, MS_FOX_SPECIALS,
         (FtStateChange_PreserveColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
@@ -531,8 +531,8 @@ void ftFox_SpecialSEnd_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
     }
-    func_8007C930(fp, foxAttrs->x38_FOX_ILLUSION_GROUND_FRICTION);
-    func_8007CB74(gobj);
+    ftCommon_8007C930(fp, foxAttrs->x38_FOX_ILLUSION_GROUND_FRICTION);
+    ftCommon_8007CB74(gobj);
     ftFox_SpecialS_SetPhys(gobj);
 }
 
@@ -553,9 +553,9 @@ void ftFox_SpecialAirSEnd_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
     } else
-        func_8007D494(fp, foxAttrs->x48_FOX_ILLUSION_TERMINAL_VELOCITY,
-                      ftAttrs->x170_TerminalVelocity);
-    func_8007CE94(fp, foxAttrs->x40_FOX_ILLUSION_AIR_MUL_X);
+        ftCommon_8007D494(fp, foxAttrs->x48_FOX_ILLUSION_TERMINAL_VELOCITY,
+                          ftAttrs->x170_TerminalVelocity);
+    ftCommon_8007CE94(fp, foxAttrs->x40_FOX_ILLUSION_AIR_MUL_X);
     ftFox_SpecialS_SetPhys(gobj);
 }
 

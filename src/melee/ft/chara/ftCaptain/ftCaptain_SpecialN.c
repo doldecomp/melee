@@ -175,7 +175,7 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* gobj)
             }
             fp->x2219_flag.bits.b0 = 1;
         } else {
-            func_8007DB24(gobj);
+            ftCommon_8007DB24(gobj);
         }
     }
     func_80084FA8(gobj);
@@ -209,7 +209,7 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
             }
             fp->x2219_flag.bits.b0 = 1;
         } else {
-            func_8007DB24(gobj);
+            ftCommon_8007DB24(gobj);
         }
     }
     switch (fp->x2204_ftcmd_var1) {
@@ -238,12 +238,12 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (func_800827A0(gobj) == false) {
         Fighter* fp = GET_FIGHTER(gobj);
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, transition_flags,
                                   NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-        func_8007D468(fp);
+        ftCommon_8007D468(fp);
     }
 }
 
@@ -251,7 +251,7 @@ void ftCaptain_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (func_80081D0C(gobj) != false) {
         Fighter* fp = GET_FIGHTER(gobj);
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, transition_flags,
                                   NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

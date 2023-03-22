@@ -137,7 +137,7 @@ lbl_80080628:
 /* 80080650 0007D230  48 00 00 38 */	b lbl_80080688
 lbl_80080654:
 /* 80080654 0007D234  7F E3 FB 78 */	mr r3, r31
-/* 80080658 0007D238  4B FF F1 AD */	bl func_8007F804
+/* 80080658 0007D238  4B FF F1 AD */	bl ftCommon_8007F804
 /* 8008065C 0007D23C  C0 3F 00 B8 */	lfs f1, 0xb8(r31)
 /* 80080660 0007D240  38 C3 00 00 */	addi r6, r3, 0
 /* 80080664 0007D244  38 BC 00 00 */	addi r5, r28, 0
@@ -168,7 +168,7 @@ lbl_80080698:
 /* 800806BC 0007D29C  48 00 00 34 */	b lbl_800806F0
 lbl_800806C0:
 /* 800806C0 0007D2A0  7F E3 FB 78 */	mr r3, r31
-/* 800806C4 0007D2A4  4B FF F1 41 */	bl func_8007F804
+/* 800806C4 0007D2A4  4B FF F1 41 */	bl ftCommon_8007F804
 /* 800806C8 0007D2A8  C0 3F 00 B8 */	lfs f1, 0xb8(r31)
 /* 800806CC 0007D2AC  38 A3 00 00 */	addi r5, r3, 0
 /* 800806D0 0007D2B0  38 9C 00 00 */	addi r4, r28, 0
@@ -203,7 +203,7 @@ lbl_80080720:
 /* 8008072C 0007D30C  48 00 00 38 */	b lbl_80080764
 lbl_80080730:
 /* 80080730 0007D310  7F E3 FB 78 */	mr r3, r31
-/* 80080734 0007D314  4B FF F0 D1 */	bl func_8007F804
+/* 80080734 0007D314  4B FF F0 D1 */	bl ftCommon_8007F804
 /* 80080738 0007D318  C0 3F 00 B8 */	lfs f1, 0xb8(r31)
 /* 8008073C 0007D31C  38 C3 00 00 */	addi r6, r3, 0
 /* 80080740 0007D320  38 98 00 00 */	addi r4, r24, 0
@@ -225,7 +225,7 @@ lbl_80080770:
 /* 80080774 0007D354  54 00 E7 FF */	rlwinm. r0, r0, 0x1c, 0x1f, 0x1f
 /* 80080778 0007D358  41 82 00 2C */	beq lbl_800807A4
 /* 8008077C 0007D35C  7F E3 FB 78 */	mr r3, r31
-/* 80080780 0007D360  4B FF F0 85 */	bl func_8007F804
+/* 80080780 0007D360  4B FF F0 85 */	bl ftCommon_8007F804
 /* 80080784 0007D364  C0 3F 00 B8 */	lfs f1, 0xb8(r31)
 /* 80080788 0007D368  38 A3 00 00 */	addi r5, r3, 0
 /* 8008078C 0007D36C  38 9C 00 00 */	addi r4, r28, 0
@@ -239,7 +239,7 @@ lbl_800807A4:
 /* 800807A8 0007D388  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
 /* 800807AC 0007D38C  41 82 00 2C */	beq lbl_800807D8
 /* 800807B0 0007D390  7F E3 FB 78 */	mr r3, r31
-/* 800807B4 0007D394  4B FF F0 51 */	bl func_8007F804
+/* 800807B4 0007D394  4B FF F0 51 */	bl ftCommon_8007F804
 /* 800807B8 0007D398  C0 3F 00 B8 */	lfs f1, 0xb8(r31)
 /* 800807BC 0007D39C  38 A3 00 00 */	addi r5, r3, 0
 /* 800807C0 0007D3A0  38 9C 00 00 */	addi r4, r28, 0
@@ -253,7 +253,7 @@ lbl_800807D8:
 /* 800807DC 0007D3BC  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 800807E0 0007D3C0  41 82 00 2C */	beq lbl_8008080C
 /* 800807E4 0007D3C4  7F E3 FB 78 */	mr r3, r31
-/* 800807E8 0007D3C8  4B FF F0 1D */	bl func_8007F804
+/* 800807E8 0007D3C8  4B FF F0 1D */	bl ftCommon_8007F804
 /* 800807EC 0007D3CC  C0 3F 00 B8 */	lfs f1, 0xb8(r31)
 /* 800807F0 0007D3D0  38 A3 00 00 */	addi r5, r3, 0
 /* 800807F4 0007D3D4  38 9C 00 00 */	addi r4, r28, 0
@@ -613,7 +613,7 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             phi_r30 = phi_r30;
             while (phi_r25 < fighter->x119E_hurtboxNum) {
                 if (lbColl_8000A584(phi_r26->x11A0_fighterHurtbox, 1, arg1,
-                                    func_8007F804(fighter),
+                                    ftCommon_8007F804(fighter),
                                     fighter->cur_pos.z) != 0)
                 {
                     phi_r30 = 1U;
@@ -628,7 +628,7 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 phi_r30 = phi_r30;
                 while (phi_r25 < fighter->x119E_hurtboxNum) {
                     if (lbColl_8000A244(phi_r26->x11A0_fighterHurtbox, arg1,
-                                        func_8007F804(fighter),
+                                        ftCommon_8007F804(fighter),
                                         fighter->cur_pos.z) != 0)
                     {
                         phi_r30 = 1U;
@@ -646,7 +646,7 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 phi_r30 = phi_r30;
                 while (phi_r25 < fighter->x119E_hurtboxNum) {
                     if (lbColl_8000A584(phi_r26->x11A0_fighterHurtbox, phi_r24,
-                                        arg1, func_8007F804(fighter),
+                                        arg1, ftCommon_8007F804(fighter),
                                         fighter->cur_pos.z) != 0)
                     {
                         phi_r30 = 1U;
@@ -657,19 +657,22 @@ void func_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             }
         }
         if ((fighter->x2218_flag.bits.b3 != 0) &&
-            (lbColl_8000A95C(fighter + 0x19E4, arg1, func_8007F804(fighter),
+            (lbColl_8000A95C(fighter + 0x19E4, arg1,
+                             ftCommon_8007F804(fighter),
                              fighter->cur_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
         if ((fighter->x2218_flag.bits.b6 != 0) &&
-            (lbColl_8000AB2C(fighter + 0x1A08, arg1, func_8007F804(fighter),
+            (lbColl_8000AB2C(fighter + 0x1A08, arg1,
+                             ftCommon_8007F804(fighter),
                              fighter->cur_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
         if ((fighter->x221B_flag.bits.b0 != 0) &&
-            (lbColl_8000A78C(fighter + 0x19C0, arg1, func_8007F804(fighter),
+            (lbColl_8000A78C(fighter + 0x19C0, arg1,
+                             ftCommon_8007F804(fighter),
                              fighter->cur_pos.z) != 0))
         {
             phi_r30 = 1U;

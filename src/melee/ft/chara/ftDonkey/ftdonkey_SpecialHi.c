@@ -28,7 +28,8 @@ void ftDonkey_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    func_8007CC78(fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
+    ftCommon_8007CC78(fp,
+                      donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
     fp->x80_self_vel.x = fp->gr_vel;
     fp->x80_self_vel.y = 0.0f;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
@@ -52,7 +53,8 @@ void ftDonkey_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    func_8007D440(fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
+    ftCommon_8007D440(fp,
+                      donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
     fp->x80_self_vel.y = donkey_attr->SpecialHi.x4C_AERIAL_VERTICAL_VELOCITY;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     ftAnim_8006EBA4(gobj);
@@ -77,7 +79,7 @@ void ftDonkey_8010FD10(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8007D60C(fp);
+        ftCommon_8007D60C(fp);
         if (donkey_attr->SpecialHi.x64_LANDING_LAG == 0.0f) {
             func_800CC730(gobj);
         } else {
@@ -95,9 +97,9 @@ void ftDonkey_8010FDA4(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
-    func_8007CADC(fp, 0.0f, donkey_attr->SpecialHi.x5C_GROUNDED_MOBILITY,
-                  donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
-    func_8007CB74(gobj);
+    ftCommon_8007CADC(fp, 0.0f, donkey_attr->SpecialHi.x5C_GROUNDED_MOBILITY,
+                      donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
+    ftCommon_8007CB74(gobj);
 }
 
 void ftDonkey_8010FDEC(HSD_GObj* gobj)
@@ -116,10 +118,10 @@ void ftDonkey_8010FDEC(HSD_GObj* gobj)
     } else {
         gravity_scalar = donkey_attr->SpecialHi.x50_AERIAL_GRAVITY;
     }
-    func_8007D494(fp, gravity_scalar * fp->x110_attr.x16C_Gravity,
-                  fp->x110_attr.x170_TerminalVelocity);
-    func_8007D344(fp, 0.0f, donkey_attr->SpecialHi.x60_AERIAL_MOBILITY,
-                  donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
+    ftCommon_8007D494(fp, gravity_scalar * fp->x110_attr.x16C_Gravity,
+                      fp->x110_attr.x170_TerminalVelocity);
+    ftCommon_8007D344(fp, 0.0f, donkey_attr->SpecialHi.x60_AERIAL_MOBILITY,
+                      donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
 }
 
 void ftDonkey_8010FE60(HSD_GObj* gobj)
@@ -128,12 +130,12 @@ void ftDonkey_8010FE60(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
 
     if (!func_80082708(gobj)) {
-        func_8007D60C(fp);
+        ftCommon_8007D60C(fp);
         Fighter_ChangeMotionState(gobj, 0x17E, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialHi(gobj);
-        func_8007D440(fp,
-                      donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
+        ftCommon_8007D440(
+            fp, donkey_attr->SpecialHi.x58_AERIAL_HORIZONTAL_VELOCITY);
     }
 }
 
@@ -149,20 +151,20 @@ void ftDonkey_8010FF14(HSD_GObj* gobj)
 
     if (fp->x80_self_vel.y >= 0.0f) {
         if (func_80081D0C(gobj)) {
-            func_8007D7FC(fp);
+            ftCommon_8007D7FC(fp);
             Fighter_ChangeMotionState(gobj, 0x17D, 0x0C4C5080, NULL,
                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
             ftDonkey_SetCallbacks_SpecialHi(gobj);
-            func_8007CC78(
+            ftCommon_8007CC78(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
         }
     } else {
         if (EnvColl_CheckGroundAndLedge(gobj, 0)) {
-            func_8007D7FC(fp);
+            ftCommon_8007D7FC(fp);
             Fighter_ChangeMotionState(gobj, 0x17D, 0x0C4C5080, NULL,
                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
             ftDonkey_SetCallbacks_SpecialHi(gobj);
-            func_8007CC78(
+            ftCommon_8007CC78(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
         } else if (func_80081298(gobj)) {
             func_80081370(gobj);

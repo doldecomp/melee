@@ -380,7 +380,7 @@ void ftGameWatch_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, transition_flags,
                               NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     GET_FIGHTER(gobj)->cb.x21BC_callback_Accessory4 =
@@ -394,7 +394,7 @@ void ftGameWatch_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
     GET_FIGHTER(gobj)->cb.x21BC_callback_Accessory4 =

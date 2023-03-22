@@ -73,8 +73,8 @@ void ftPikachu_80124FE4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = getFtSpecialAttrsD(fp);
     f32 pika_attr_x34 = sa->x34;
-    func_8007C930(fp, pika_attr_x34);
-    func_8007CB74(gobj);
+    ftCommon_8007C930(fp, pika_attr_x34);
+    ftCommon_8007CB74(gobj);
 }
 
 void ftPikachu_80125024(HSD_GObj* gobj)
@@ -84,9 +84,9 @@ void ftPikachu_80125024(HSD_GObj* gobj)
     struct attr* attr = &fp->x110_attr;
 
     if (fp->x2200_ftcmd_var0)
-        func_8007D494(fp, pika_attr->x38, attr->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, pika_attr->x38, attr->x170_TerminalVelocity);
 
-    func_8007CE94(fp, pika_attr->x34);
+    ftCommon_8007CE94(fp, pika_attr->x34);
 }
 
 void ftPikachu_80125084(HSD_GObj* gobj)
@@ -111,7 +111,7 @@ static const Fighter_MotionStateChangeFlags transition_flags0 =
 void ftPikachu_ActionChange_801250FC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 348, transition_flags0, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -119,7 +119,7 @@ void ftPikachu_ActionChange_801250FC(HSD_GObj* gobj)
 void ftPikachu_ActionChange_8012515C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 343, transition_flags0, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
@@ -135,7 +135,7 @@ void ftPikachu_801251BC(HSD_GObj* gobj)
     ftPikachuAttributes* sa = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8007DB24(gobj);
+        ftCommon_8007DB24(gobj);
         fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124C90;
     }
 
@@ -156,7 +156,7 @@ void ftPikachu_8012525C(HSD_GObj* gobj)
     ftPikachuAttributes* sa = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8007DB24(gobj);
+        ftCommon_8007DB24(gobj);
         fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124C90;
     }
 
@@ -213,7 +213,7 @@ static Fighter_MotionStateChangeFlags const transition_flags1 =
 void ftPikachu_ActionChange_80125414(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 349, transition_flags1, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -221,7 +221,7 @@ void ftPikachu_ActionChange_80125414(HSD_GObj* gobj)
 void ftPikachu_ActionChange_80125474(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 344, transition_flags1, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -273,7 +273,7 @@ void ftPikachu_8012557C(HSD_GObj* gobj)
     }
 
     if (fp->x2200_ftcmd_var0) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         ftPikachu_ActionChange_80125A54(gobj);
     }
 }
@@ -334,7 +334,7 @@ static Fighter_MotionStateChangeFlags const transition_flags2 =
 void ftPikachu_ActionChange_80125774(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 352, transition_flags2, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -342,7 +342,7 @@ void ftPikachu_ActionChange_80125774(HSD_GObj* gobj)
 void ftPikachu_ActionChange_801257D4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 347, transition_flags2, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 }
@@ -358,7 +358,7 @@ void ftPikachu_ActionChange_80125834(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->x2200_ftcmd_var0 = 0;
-        func_8007DB24(gobj);
+        ftCommon_8007DB24(gobj);
         fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124D2C;
     }
 }
@@ -375,7 +375,7 @@ void ftPikachu_ActionChange_801258A0(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->x2200_ftcmd_var0 = 0;
-        func_8007DB24(gobj);
+        ftCommon_8007DB24(gobj);
         fp->cb.x21BC_callback_Accessory4 = &ftPikachu_EfSpawn_80124D2C;
     }
 }
@@ -405,12 +405,12 @@ void ftPikachu_80125958(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
 
     if (fp->x2200_ftcmd_var0 != 0)
-        func_8007D494(fp, pika_attr->x58, pika_attr->x4C);
+        ftCommon_8007D494(fp, pika_attr->x58, pika_attr->x4C);
     else
-        func_8007D494(fp, pika_attr->x48, pika_attr->x4C);
+        ftCommon_8007D494(fp, pika_attr->x48, pika_attr->x4C);
 
     if (fp->x2200_ftcmd_var0 != 0)
-        func_8007CE94(fp, pika_attr->x54);
+        ftCommon_8007CE94(fp, pika_attr->x54);
 }
 
 void ftPikachu_Stub_801259D4(HSD_GObj* arg0) {}
@@ -421,7 +421,7 @@ void ftPikachu_801259D8(HSD_GObj* gobj)
     CollData* collData = &fp->x6F0_collData;
 
     if (func_80081D0C(gobj)) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         ftPikachu_ActionChange_80125CD0(gobj);
     }
 
@@ -453,7 +453,7 @@ void ftPikachu_ActionChange_80125A54(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 350, transition_flags3, 0,
                               fp->x894_currentAnimFrame, 1, 0);
 
-    fp->cb.x21F8_callback = &func_8007F76C;
+    fp->cb.x21F8_callback = &ftCommon_8007F76C;
     fp->cb.x21C0_callback_OnGiveDamage = &ftPikachu_ZeroVelocity_80124F24;
 }
 
@@ -482,8 +482,8 @@ void ftPikachu_80125BB4(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->x2D4_specialAttributes;
-    func_8007C930(fp, sa->x54);
-    func_8007CB74(gobj);
+    ftCommon_8007C930(fp, sa->x54);
+    ftCommon_8007CB74(gobj);
 }
 
 void ftPikachu_80125BF4(HSD_GObj* gobj)
@@ -495,8 +495,8 @@ void ftPikachu_80125BF4(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* sa = fp->x2D4_specialAttributes;
-    func_8007D494(fp, sa->x58, fp->x110_attr.x170_TerminalVelocity);
-    func_8007CE94(fp, sa->x54);
+    ftCommon_8007D494(fp, sa->x58, fp->x110_attr.x170_TerminalVelocity);
+    ftCommon_8007CE94(fp, sa->x54);
 }
 
 void ftPikachu_80125C44(HSD_GObj* gobj)
@@ -509,7 +509,7 @@ void ftPikachu_80125C80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (func_80081D0C(gobj)) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         ftPikachu_ActionChange_80125CD0(gobj);
     }
 }

@@ -35,7 +35,7 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* gobj)
             fp->fv.gw.x2248_manholeGObj = manholeGObj;
             func_8026BB44(fp->x1974_heldItem);
             func_8026B724(fp->x1974_heldItem);
-            func_8007E6DC(gobj, fp->x1974_heldItem, 1);
+            ftCommon_8007E6DC(gobj, fp->x1974_heldItem, 1);
         }
         fp->fv.gw.x2250_manholeGObj2 =
             func_802C65E4(gobj, &sp10, 0x20, fp->facing_dir);

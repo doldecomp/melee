@@ -241,7 +241,7 @@ void ftFox_SpecialN_StartMotion(HSD_GObj* gobj)
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
     HSD_GObj* blasterGObj;
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALN_START, 0, NULL, 0.0f, 1.0f,
                               0.0f);

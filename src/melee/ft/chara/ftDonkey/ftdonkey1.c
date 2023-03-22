@@ -30,7 +30,7 @@ void ftDonkey_800DF980(HSD_GObj* gobj)
 #endif
 
     if (fp->ground_or_air == GA_Air) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
     }
     donkey_attr = getFtSpecialAttrs2CC(fp);
     Fighter_ChangeMotionState(gobj, donkey_attr->motion_state, 0, NULL, 0.0f,

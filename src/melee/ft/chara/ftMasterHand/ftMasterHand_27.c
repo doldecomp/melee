@@ -26,7 +26,7 @@ void ftMasterHand_80155074(HSD_GObj* gobj)
         ftMasterHand_80155D6C(fp->x1A58_interactedFighter, 0x14A);
         if (fp->x1A58_interactedFighter != NULL) {
             HSD_GObj* victim = fp->x1A58_interactedFighter;
-            func_8007E2F4(fp, 0);
+            ftCommon_8007E2F4(fp, 0);
             func_800DE2A8(gobj, victim);
             func_800DE7C0(victim, 0, 0);
         }

@@ -78,9 +78,9 @@ void ftDonkey_800E0868(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Ground) {
         if (!func_80082708(gobj)) {
-            func_8007D5D4(fp);
+            ftCommon_8007D5D4(fp);
         }
     } else if (func_80081D0C(gobj)) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
     }
 }

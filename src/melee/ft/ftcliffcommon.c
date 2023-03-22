@@ -66,13 +66,13 @@ void func_80081370(HSD_GObj* gobj)
     if (facingDirection != ledgeDirection) {
         fp->facing_dir = -facingDirection;
     }
-    func_8007D780(fp);
-    func_8007D5D4(fp);
+    ftCommon_8007D780(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 0xFC, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
-    func_8007D5D4(fp);
-    func_8007EFC0(fp, p_ftCommonData->x5F0);
-    func_8007E2FC(gobj);
+    ftCommon_8007D5D4(fp);
+    ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);
+    ftCommon_8007E2FC(gobj);
     fp->x221D_flag.bits.b7 = 1;
     if (fp->facing_dir > 0.0f) {
         fp->mv.co.cliff.ledge_id = fp->x6F0_collData.x44;
@@ -81,8 +81,8 @@ void func_80081370(HSD_GObj* gobj)
     }
     func_80081544(gobj);
     func_800881D8(fp, fp->ft_data->x4C_collisionData->x28, 0x7F, 0x40);
-    func_8007E2F4(fp, 0x1FF);
-    func_8007EBAC(fp, 0xC, 0);
+    ftCommon_8007E2F4(fp, 0x1FF);
+    ftCommon_8007EBAC(fp, 0xC, 0);
 
     if (fp->facing_dir > 0.0f) {
         func_80053ECC(fp->mv.co.cliff.ledge_id, unkParam.x10);

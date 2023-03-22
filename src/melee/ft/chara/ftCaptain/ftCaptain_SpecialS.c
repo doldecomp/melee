@@ -36,7 +36,7 @@ static void resetCmdVarsGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     u32* vars = (u32*) &fp->x2200_ftcmd_var0;
     vars[0] = vars[1] = vars[2] = vars[3] = 0;
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 }
 
 void ftCaptain_SpecialS_StartMotion(HSD_GObj* gobj)
@@ -117,7 +117,7 @@ void ftCaptain_SpecialAirS_StartMotion(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     setupAirStart(gobj);
     fp->mv.ca.specials.grav = 0;
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
 }
 
 static Fighter_MotionStateChangeFlags const transition_flags =
@@ -132,7 +132,7 @@ static void onDetectGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* sa = getFtSpecialAttrsD(fp);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS, transition_flags, NULL,
                               0, 1, 0);
     setCallbacks(gobj);
@@ -250,7 +250,7 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* gobj)
     ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8007D60C(fp);
+        ftCommon_8007D60C(fp);
         if (captainAttrs->specials_miss_landing_lag == 0) {
             func_800CC730(gobj);
         } else {
@@ -290,7 +290,7 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8007D60C(fp);
+        ftCommon_8007D60C(fp);
 
         if (captainAttrs->specials_hit_landing_lag == 0) {
             func_800CC730(gobj);
@@ -379,12 +379,12 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* gobj)
 
     if (func_80082708(gobj) == false) {
         efLib_DestroyAll(gobj);
-        func_8007D60C(fp);
+        ftCommon_8007D60C(fp);
         if (sa->specials_miss_landing_lag == 0) {
             func_800CC730(gobj);
             return;
         }
-        func_8007D468(fp);
+        ftCommon_8007D468(fp);
         func_80096900(gobj, 1, 1, 0, 1, sa->specials_miss_landing_lag);
         return;
     }
@@ -420,12 +420,12 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* gobj)
     fp = temp_fp;
     if (func_80082708(gobj) == false) {
         efLib_DestroyAll(gobj);
-        func_8007D60C(fp);
+        ftCommon_8007D60C(fp);
         if (0 == captainAttrs->specials_hit_landing_lag) {
             func_800CC730(gobj);
             return;
         }
-        func_8007D468(fp);
+        ftCommon_8007D468(fp);
         func_80096900(gobj, 1, 1, 0, 1,
                       captainAttrs->specials_hit_landing_lag);
     }

@@ -147,7 +147,7 @@ void ftSamus_SpecialN_StartMotion(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     self_vel = &fp->x80_self_vel;
     self_vel->y = 0.0f;
     ftSamus_updateDamageDeathCBs(gobj);
@@ -371,7 +371,7 @@ void ftSamus_80129D48(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!func_80082708(gobj)) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftSamus_updateDamageDeathCBs(gobj);
@@ -383,7 +383,7 @@ void ftSamus_80129DC8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!func_80082708(gobj)) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftSamus_updateDamageDeathCBs(gobj);
@@ -396,7 +396,7 @@ void ftSamus_80129E68(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!func_80082708(gobj)) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftSamus_updateDamageDeathCBs(gobj);
@@ -407,7 +407,7 @@ void ftSamus_80129EE8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!func_80082708(gobj)) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftSamus_updateDamageDeathCBs(gobj);
@@ -418,7 +418,7 @@ void ftSamus_80129F68(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (func_80081D0C(gobj) == 1) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x157, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftSamus_updateDamageDeathCBs(gobj);
@@ -429,7 +429,7 @@ void ftSamus_80129FE8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (func_80081D0C(gobj) == 1) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftSamus_updateDamageDeathCBs(gobj);

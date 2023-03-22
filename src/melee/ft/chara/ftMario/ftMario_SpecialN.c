@@ -160,7 +160,7 @@ void ftMario_SpecialAirN_Coll(HSD_GObj* gobj)
 void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(
         gobj, ftMario_MS_SpecialAirN,
         (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
@@ -172,7 +172,7 @@ void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
 void ftMario_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(
         gobj, ftMario_MS_SpecialN,
         (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,

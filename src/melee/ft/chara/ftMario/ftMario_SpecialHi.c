@@ -107,7 +107,7 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
 
     if (throwflags_b3) {
         if (abs(fp->input.x620_lstick_x) > sa->specialhi.reverse_stick_range) {
-            func_8007D9FC(fp);
+            ftCommon_8007D9FC(fp);
             ftParts_80075AF0(fp, 0, (f32) (M_PI_2 * fp->facing_dir));
         }
     }
@@ -149,8 +149,9 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
         fp->x80_self_vel.y *= sa->specialhi.vel_mul;
         fp->x80_self_vel.z *= sa->specialhi.vel_mul;
     } else {
-        func_8007D494(fp, sa->specialhi.grav, attrs->x170_TerminalVelocity);
-        func_8007CF58(fp);
+        ftCommon_8007D494(fp, sa->specialhi.grav,
+                          attrs->x170_TerminalVelocity);
+        ftCommon_8007CF58(fp);
     }
 }
 

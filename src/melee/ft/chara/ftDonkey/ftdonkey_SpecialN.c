@@ -56,7 +56,7 @@ void ftDonkey_SpecialN_StartMotion(HSD_GObj* gobj)
     fp->mv.dk.specialn.x4 = 0;
     fp->mv.dk.specialn.x14 = -1;
     fp->mv.dk.specialn.x10 = -1;
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     fp->x80_self_vel.y = 0.0f;
     ftDonkey_SetCallbacks_SpecialN(gobj);
     ftAnim_8006EBA4(gobj);
@@ -478,7 +478,7 @@ void ftDonkey_8010F468(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!func_80082708(gobj)) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x176, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialN(gobj);
@@ -490,7 +490,7 @@ void ftDonkey_8010F50C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!func_80082708(gobj)) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x177, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialN(gobj);
@@ -502,7 +502,7 @@ void ftDonkey_8010F5B0(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!func_80082708(gobj)) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x178, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialN(gobj);
@@ -514,7 +514,7 @@ void ftDonkey_8010F654(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (func_800827A0(gobj) == 0) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x179, 0x0C4D508E, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialN(gobj);
@@ -526,7 +526,7 @@ void ftDonkey_8010F6F8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (func_800827A0(gobj) == 0) {
-        func_8007D5D4(fp);
+        ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x17A, 0x0C4D508E, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialN(gobj);
@@ -538,7 +538,7 @@ void ftDonkey_8010F79C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (func_80081D0C(gobj) == 1) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x171, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialN(gobj);
@@ -550,7 +550,7 @@ void ftDonkey_8010F840(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (func_80081D0C(gobj) == 1) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x172, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialN(gobj);
@@ -562,7 +562,7 @@ void ftDonkey_8010F8E4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (func_80081D0C(gobj) == 1) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x173, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialN(gobj);
@@ -574,7 +574,7 @@ void ftDonkey_8010F988(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (func_80081D0C(gobj)) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x174, 0x0C4D508E, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialN(gobj);
@@ -586,7 +586,7 @@ void ftDonkey_8010FA2C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (func_80081D0C(gobj)) {
-        func_8007D7FC(fp);
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x175, 0x0C4D508E, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftDonkey_SetCallbacks_SpecialN(gobj);

@@ -44,7 +44,7 @@ bool ftSamus_80128A1C(HSD_GObj* gobj, unk_t arg1, f32 farg1)
 
     for (i = 0; i < fp->x119E_hurtboxNum; i++) {
         if (lbColl_80008248(arg1, &fp->x11A0_fighterHurtbox[i],
-                            *func_8007F804(fp), farg1, fp->x34_scale.y,
+                            *ftCommon_8007F804(fp), farg1, fp->x34_scale.y,
                             fp->cur_pos.z))
         {
             return true;
@@ -77,7 +77,7 @@ inline void ftSamus_80128B1C_inner(HSD_GObj* gobj, f32 angle)
     fp = GET_FIGHTER(gobj);
     fp->x80_self_vel.x = samus_attr->x8 * cosf(angle);
     fp->x80_self_vel.y = samus_attr->x8 * sinf(angle);
-    func_8007D440(fp, ftAttr->x17C_AerialDriftMax * samus_attr->x10);
+    ftCommon_8007D440(fp, ftAttr->x17C_AerialDriftMax * samus_attr->x10);
 }
 
 void ftSamus_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
@@ -91,13 +91,13 @@ void ftSamus_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
 #endif
 
     fp = fighter2 = GET_FIGHTER(gobj);
-    func_8007DB58(gobj);
+    ftCommon_8007DB58(gobj);
     ftSamus_80128B1C_inner(gobj, angle);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->mv.ss.unk2.x0 = 0;
     if (fp->ground_or_air == GA_Ground) {
-        func_8007D5D4(fighter2);
+        ftCommon_8007D5D4(fighter2);
     }
     Fighter_ChangeMotionState(gobj, 0x156, 0, 0, arg9, argA, 0.0f);
     ftAnim_8006EBA4(gobj);
@@ -199,9 +199,9 @@ void ftSamus_80128E88(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0) {
         f32 samus_attr_xC = samus_attr->xC;
-        func_8007CADC(fp, 0.0f, ftAttr->walk_init_vel * samus_attr_xC,
-                      ftAttr->walk_max_vel * samus_attr_xC);
-        func_8007CB74(gobj);
+        ftCommon_8007CADC(fp, 0.0f, ftAttr->walk_init_vel * samus_attr_xC,
+                          ftAttr->walk_max_vel * samus_attr_xC);
+        ftCommon_8007CB74(gobj);
     } else {
         func_80084F3C(gobj);
     }
@@ -218,11 +218,11 @@ void ftSamus_80128EF8(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_8007D4B8(fp);
-    func_8007D344(fp, 0.0f,
-                  ftAttr->x154_GroundToAirJumpMomentumMultiplier *
-                      samus_attr->x10,
-                  ftAttr->x158_JumpHMaxVelocity * samus_attr->x10);
+    ftCommon_8007D4B8(fp);
+    ftCommon_8007D344(fp, 0.0f,
+                      ftAttr->x154_GroundToAirJumpMomentumMultiplier *
+                          samus_attr->x10,
+                      ftAttr->x158_JumpHMaxVelocity * samus_attr->x10);
 }
 
 void ftSamus_80128F60(HSD_GObj* gobj)
@@ -271,7 +271,7 @@ void ftSamus_80128FD4(HSD_GObj* gobj)
 void ftSamus_80129048(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, 0x156, 0x10, 0, fp->x894_currentAnimFrame,
                               fp->x89C_frameSpeedMul, 0.0f);
 }
@@ -279,7 +279,7 @@ void ftSamus_80129048(HSD_GObj* gobj)
 void ftSamus_801290A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 0x155, 0x10, 0, fp->x894_currentAnimFrame,
                               fp->x89C_frameSpeedMul, 0.0f);
 }

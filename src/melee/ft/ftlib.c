@@ -324,7 +324,7 @@ void ftData_SetScale(HSD_GObj* gobj, f32 val)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x34_scale.y = val;
     Fighter_UpdateModelScale(gobj);
-    func_80080174(fp);
+    ftCommon_80080174(fp);
 }
 
 void func_800866DC(HSD_GObj* gobj, Vec3* v)
@@ -339,14 +339,14 @@ void func_80086724(HSD_GObj* gobj, HSD_GObj* other)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x1974_heldItem != NULL || fp->x1978 != NULL)
-        func_8007E6DC(gobj, other, 1);
+        ftCommon_8007E6DC(gobj, other, 1);
 }
 
 void func_80086764(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x1984_heldItemSpec != NULL)
-        func_8007E82C(gobj);
+        ftCommon_8007E82C(gobj);
 }
 
 HSD_GObj* func_80086794(HSD_GObj* gobj)
@@ -772,9 +772,9 @@ void func_80087140(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x221F_flag.bits.b3) {
         func_800D4F24(gobj, 1);
-        func_8007ED2C(fp);
+        ftCommon_8007ED2C(fp);
         Fighter_UnkProcessDeath_80068354(gobj);
-        func_8007D92C(gobj);
+        ftCommon_8007D92C(gobj);
     }
 }
 
@@ -785,7 +785,7 @@ void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
     func_800C8348(gobj, func_8026B560(item_gobj), func_8026B574(item_gobj));
     func_800D105C(gobj);
     func_80081C88(gobj, fp->x34_scale.y);
-    func_8007EBAC(fp, 0xC, 0);
+    ftCommon_8007EBAC(fp, 0xC, 0);
     func_80030E44(2, &fp->cur_pos);
     func_80088148(fp, 0x121, 0x7F, 0x40);
 }
@@ -928,7 +928,7 @@ s32 func_8008746C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80080144(fp))
+    if (ftCommon_80080144(fp))
         return 0x1FBD1;
 
     return fp->ft_data->x4C_collisionData->x34;

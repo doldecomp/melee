@@ -84,9 +84,9 @@ void ftSamus_8012A420(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     Fighter* fighter2;
-    func_8007D4B8(fp);
+    ftCommon_8007D4B8(fp);
     fighter2 = fp;
-    func_8007CE94(fighter2, samus_attr->x30);
+    ftCommon_8007CE94(fighter2, samus_attr->x30);
 }
 
 void ftSamus_8012A468(HSD_GObj* gobj)
@@ -146,9 +146,9 @@ void ftSamus_8012A580(HSD_GObj* gobj)
     ftSamusAttributes* samus_attr2;
     fp = fighter2 = GET_FIGHTER(gobj);
     samus_attr = getFtSpecialAttrs(fp);
-    func_8007D4B8(fp);
+    ftCommon_8007D4B8(fp);
     samus_attr2 = samus_attr;
-    func_8007CE94(fp, samus_attr2->x30);
+    ftCommon_8007CE94(fp, samus_attr2->x30);
 }
 
 void ftSamus_8012A5C8(HSD_GObj* gobj)

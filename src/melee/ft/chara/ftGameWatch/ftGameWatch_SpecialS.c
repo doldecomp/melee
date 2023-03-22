@@ -274,12 +274,12 @@ void ftGameWatch_SpecialAirS_Phys(HSD_GObj* gobj)
             } else
                 fp->x80_self_vel.y = 0.0f;
         }
-        func_8007D494(fp, gawAttrs->x2C_GAMEWATCH_JUDGE_FRICTION1,
-                      gawAttrs->x30_GAMEWATCH_JUDGE_FRICTION2);
+        ftCommon_8007D494(fp, gawAttrs->x2C_GAMEWATCH_JUDGE_FRICTION1,
+                          gawAttrs->x30_GAMEWATCH_JUDGE_FRICTION2);
     } else {
-        func_8007D4B8(fp);
+        ftCommon_8007D4B8(fp);
     }
-    func_8007CE94(fp, gawAttrs->x24_GAMEWATCH_JUDGE_MOMENTUM_MUL);
+    ftCommon_8007CE94(fp, gawAttrs->x24_GAMEWATCH_JUDGE_MOMENTUM_MUL);
 }
 
 static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj*);
@@ -333,7 +333,7 @@ static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     !gobj;
     Fighter_ChangeMotionState(
         gobj, fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialAirS1,
@@ -355,7 +355,7 @@ static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* gobj)
 #endif
 
     fp->fv.gw.x2234 = 0;
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
     !gobj;
     Fighter_ChangeMotionState(
         gobj, fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1, transition_flags,

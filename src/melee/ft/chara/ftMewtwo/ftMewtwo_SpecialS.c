@@ -12,8 +12,8 @@ void ftMewtwo_SpecialS_SetFlags(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007E2F4(fp, 0x1FF);
-    func_8007E2FC(gobj);
+    ftCommon_8007E2F4(fp, 0x1FF);
+    ftCommon_8007E2FC(gobj);
     fp->x221E_flag.bits.b6 = 0;
     fp->x2222_flag.bits.b2 = 1;
 }
@@ -23,10 +23,10 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x1A58_interactedFighter == NULL) {
-        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
-                      func_800BCF18);
+        ftCommon_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
+                          func_800BCF18);
     } else {
-        func_8007E2F4(fp, 0x1FF);
+        ftCommon_8007E2F4(fp, 0x1FF);
     }
 }
 
@@ -60,10 +60,10 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x1A58_interactedFighter == NULL) {
-        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
-                      func_800BD000);
+        ftCommon_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
+                          func_800BD000);
     } else {
-        func_8007E2F4(fp, 0x1FF);
+        ftCommon_8007E2F4(fp, 0x1FF);
     }
 }
 
@@ -107,7 +107,7 @@ static inline void ftMewtwo_SetGrabVictim(HSD_GObj* gobj)
     if ((u32) fp->x2200_ftcmd_var0 != 0) {
         victimGObj = fp->x1A58_interactedFighter;
         if (victimGObj != NULL) {
-            func_8007E2F4(fp, 0);
+            ftCommon_8007E2F4(fp, 0);
             func_800DE2A8(gobj, victimGObj);
             func_80090780(victimGObj);
             fp->x2200_ftcmd_var0 = 0;
@@ -184,13 +184,13 @@ void ftMewtwo_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRS,
                               FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    func_8007D468(fp);
+    ftCommon_8007D468(fp);
 
     ftMewtwo_SpecialAirS_SetGrab(gobj);
 
@@ -206,7 +206,7 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALS,
                               FTMEWTWO_SPECIALS_COLL_FLAG, NULL,

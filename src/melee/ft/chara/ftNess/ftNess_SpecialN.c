@@ -545,12 +545,12 @@ void ftNess_SpecialAirNStart_Phys(HSD_GObj* gobj)
     if (fp->mv.ns.specialn.gravityDelay != 0) {
         fp->mv.ns.specialn.gravityDelay--;
     } else
-        func_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
-                      fp->x110_attr.x170_TerminalVelocity);
+        ftCommon_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
+                          fp->x110_attr.x170_TerminalVelocity);
 
     {
         f32 airFriction = fp->x110_attr.x180_AerialFriction;
-        func_8007CE94(fp, airFriction);
+        ftCommon_8007CE94(fp, airFriction);
     }
 }
 
@@ -568,13 +568,13 @@ void ftNess_SpecialAirNHold_Phys(HSD_GObj* gobj)
     if (fp->mv.ns.specialn.gravityDelay != 0) {
         fp->mv.ns.specialn.gravityDelay--;
     } else {
-        func_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
-                      fp->x110_attr.x170_TerminalVelocity);
+        ftCommon_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
+                          fp->x110_attr.x170_TerminalVelocity);
     }
 
     {
         f32 airFriction = fp->x110_attr.x180_AerialFriction;
-        func_8007CE94(fp, airFriction);
+        ftCommon_8007CE94(fp, airFriction);
     }
 }
 
@@ -592,13 +592,13 @@ void ftNess_SpecialAirNEnd_Phys(HSD_GObj* gobj)
     if (fp->mv.ns.specialn.gravityDelay != 0) {
         fp->mv.ns.specialn.gravityDelay--;
     } else {
-        func_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
-                      fp->x110_attr.x170_TerminalVelocity);
+        ftCommon_8007D494(fp, sa->x14_PKFLASH_FALL_ACCEL,
+                          fp->x110_attr.x170_TerminalVelocity);
     }
 
     {
         f32 airFriction = fp->x110_attr.x180_AerialFriction;
-        func_8007CE94(fp, airFriction);
+        ftCommon_8007CE94(fp, airFriction);
     }
 }
 
@@ -610,7 +610,7 @@ void ftNess_SpecialNStart_Coll(HSD_GObj* gobj)
     if (func_80082708(gobj))
         return;
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_START,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
@@ -625,7 +625,7 @@ void ftNess_SpecialNHold_Coll(HSD_GObj* gobj)
     if (func_80082708(gobj))
         return;
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_HOLD,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
@@ -640,7 +640,7 @@ void ftNess_SpecialNEnd_Coll(HSD_GObj* gobj)
     if (func_80082708(gobj))
         return;
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_END,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
@@ -655,7 +655,7 @@ void ftNess_SpecialAirNStart_Coll(HSD_GObj* gobj)
     if (!func_80081D0C(gobj))
         return;
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_START,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
@@ -670,7 +670,7 @@ void ftNess_SpecialAirNHold_Coll(HSD_GObj* gobj)
     if (!func_80081D0C(gobj))
         return;
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_HOLD,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
@@ -685,7 +685,7 @@ void ftNess_SpecialAirNEnd_Coll(HSD_GObj* gobj)
     if (!func_80081D0C(gobj))
         return;
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_END,
                               FTNESS_SPECIALN_COLL_FLAG, NULL,
