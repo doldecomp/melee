@@ -32814,9 +32814,9 @@ lbl_803DA920:
     .4byte lbl_80266D70
     .4byte NULL
     .4byte 0x09000000
-    .4byte lbl_8025B850
-    .4byte lbl_8025A998
-    .4byte lbl_8025BB5C
+    .4byte mnStageSel_8025B850
+    .4byte mnStageSel_8025A998
+    .4byte mnStageSel_8025BB5C
     .4byte NULL
     .4byte 0x0A000000
     .4byte NULL
