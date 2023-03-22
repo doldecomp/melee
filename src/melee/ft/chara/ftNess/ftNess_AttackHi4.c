@@ -8,8 +8,8 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "it/it_27CF.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
-#include "lb/lbunknown_001.h"
 #include "mp/mpcoll.h"
 
 #include <dolphin/mtx/types.h>

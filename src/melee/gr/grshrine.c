@@ -4,8 +4,8 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
-#include "lb/lbunknown_001.h"
-#include "lb/lbunknown_003.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 
 #include <math.h>
 #include <dolphin/mtx/types.h>

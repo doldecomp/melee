@@ -5,7 +5,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
 #include "ftSamus/ftsamus.h"
-#include "lb/lbunknown_001.h"
+#include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
 

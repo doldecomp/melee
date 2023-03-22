@@ -15,8 +15,8 @@
 #include "gr/stage.h"
 #include "it/it_266F.h"
 #include "it/item.h"
-#include "lb/lbunknown_001.h"
-#include "pl/pl_unknown_001.h"
+#include "lb/lb_00B0.h"
+#include "pl/pl_0371.h"
 #include "pl/player.h"
 
 #include <common_structs.h>

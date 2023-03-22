@@ -8,7 +8,7 @@
 #include "ft/ftcoll.h"
 #include "ft/inlines.h"
 #include "ftMewtwo/ftmewtwo.h"
-#include "lb/lbunknown_001.h"
+#include "lb/lb_00B0.h"
 #include "melee/ft/types.h"
 
 #include <dolphin/mtx/types.h>

@@ -13,9 +13,9 @@
 #include "ftGameWatch/ftgamewatch.h"
 #include "ftKirby/ftkirby.h"
 #include "gm/gm_1601.h"
-#include "lb/lbunknown_001.h"
-#include "lb/lbunknown_003.h"
-#include "pl/pl_unknown_001.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "pl/pl_0371.h"
 #include "pl/player.h"
 
 #include <dolphin/mtx/types.h>

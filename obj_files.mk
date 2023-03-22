@@ -18,11 +18,11 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/asm/melee/lb/lbcollision.s.o\
     $(BUILD_DIR)/src/melee/lb/lblanguage.c.o\
     $(BUILD_DIR)/src/melee/lb/lbtime.c.o\
-    $(BUILD_DIR)/src/melee/lb/lbunknown_001.c.o\
+    $(BUILD_DIR)/src/melee/lb/lb_00B0.c.o\
     $(BUILD_DIR)/asm/melee/lb/lbunknown_002.s.o\
     $(BUILD_DIR)/src/melee/lb/lbvector.c.o\
     $(BUILD_DIR)/asm/melee/lb/lbshadow.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbunknown_003.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lb_00F9.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbarq.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbmemory.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbheap.s.o\
@@ -30,8 +30,8 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/src/melee/lb/lbarchive.c.o\
     $(BUILD_DIR)/asm/melee/lb/lbarchive.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbdvd.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbunknown_004.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbunknown_005.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lb_0192.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lb_0198.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbsnap.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbgx.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbanim.s.o\
@@ -55,7 +55,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/pl/player.c.o\
-    $(BUILD_DIR)/asm/melee/pl/pl_unknown_001.s.o\
+    $(BUILD_DIR)/asm/melee/pl/pl_0371.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/mp/mpcoll.c.o\
@@ -463,7 +463,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/if/iftime.s.o\
     $(BUILD_DIR)/asm/melee/if/ifstatus_data.s.o\
     $(BUILD_DIR)/src/melee/if/ifstatus.c.o\
-    $(BUILD_DIR)/asm/melee/if/if_unknown_001.s.o\
+    $(BUILD_DIR)/asm/melee/if/if_2F72.s.o\
     $(BUILD_DIR)/asm/melee/if/ifstock.s.o\
     $(BUILD_DIR)/asm/melee/if/ifmagnify.s.o\
 
@@ -842,12 +842,12 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/db/db_data.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_003.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_004.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_005.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_006.s.o\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_007.s.o\
-    $(BUILD_DIR)/src/sysdolphin/baselib/baselib_unknown_008.c.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3A94.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3AA7.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B27.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B2B.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B2E.s.o\
+    $(BUILD_DIR)/src/sysdolphin/baselib/hsd_3B33.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_unknown_001.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B34.s.o\

@@ -9,7 +9,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "lb/lbunknown_001.h"
+#include "lb/lb_00B0.h"
 
 #include <dolphin/mtx/types.h>
 

@@ -2,8 +2,8 @@
 
 #include "lbcollision.h"
 
+#include "lb_00B0.h"
 #include "lbaudio_ax.h"
-#include "lbunknown_001.h"
 #include "lbvector.h"
 
 #include <math.h>

@@ -6,10 +6,10 @@
 #include "gm/gm_1601.h"
 #include "if/ifall.h"
 #include "if/ifstock.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbunknown_001.h"
-#include "lb/lbunknown_003.h"
 
 #include <placeholder.h>
 #include <dolphin/os/os.h>

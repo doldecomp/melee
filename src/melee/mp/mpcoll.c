@@ -4,7 +4,7 @@
 #include "ft/ftlib.h"
 #include "gr/grdynamicattr.h"
 #include "it/item2.h"
-#include "lb/lbunknown_001.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 

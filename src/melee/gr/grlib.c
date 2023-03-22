@@ -6,7 +6,7 @@
 #include "gr/ground.h"
 #include "gr/grrcruise.h"
 #include "it/item2.h"
-#include "lb/lbunknown_003.h"
+#include "lb/lb_00F9.h"
 
 #include <placeholder.h>
 #include <dolphin/mtx/types.h>

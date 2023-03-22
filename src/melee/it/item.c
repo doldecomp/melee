@@ -12,9 +12,9 @@
 #include "ft/ftlib.h"
 #include "gm/gm_1601.h"
 #include "gr/grlib.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbunknown_001.h"
-#include "lb/lbunknown_003.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 

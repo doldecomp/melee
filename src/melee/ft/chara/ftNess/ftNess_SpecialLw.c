@@ -10,7 +10,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
-#include "pl/pl_unknown_001.h"
+#include "pl/pl_0371.h"
 
 // 0x80119E14
 // https://decomp.me/scratch/LwTKg

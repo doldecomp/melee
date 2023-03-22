@@ -6,7 +6,7 @@
 #include "ft/ft_0877.h"
 #include "ftSamus/ftsamus.h"
 #include "it/it_27CF.h"
-#include "lb/lbunknown_001.h"
+#include "lb/lb_00B0.h"
 #include "melee/ft/inlines.h"
 
 #include <dolphin/mtx/types.h>

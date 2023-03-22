@@ -3,6 +3,7 @@
 #include "db/db_2253.h"
 #include "gm/gm_1601.h"
 #include "gm/gmmain_lib.h"
+#include "lb/lb_0198.h"
 #include "lb/lbarq.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
@@ -12,7 +13,6 @@
 #include "lb/lbmthp.h"
 #include "lb/lbsnap.h"
 #include "lb/lbtime.h"
-#include "lb/lbunknown_005.h"
 
 #include <placeholder.h>
 #include <dolphin/card/CARDBios.h>

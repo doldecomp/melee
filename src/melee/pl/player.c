@@ -7,7 +7,7 @@
 #include "gm/gm_1601.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
-#include "pl/pl_unknown_001.h"
+#include "pl/pl_0371.h"
 
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>

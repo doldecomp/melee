@@ -12,7 +12,7 @@
 #include "ft/ftlib.h"
 #include "it/item.h"
 #include "it/item2.h"
-#include "lb/lbunknown_001.h"
+#include "lb/lb_00B0.h"
 
 #include <placeholder.h>
 

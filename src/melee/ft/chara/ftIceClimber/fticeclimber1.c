@@ -10,7 +10,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "it/it_27CF.h"
-#include "lb/lbunknown_001.h"
+#include "lb/lb_00B0.h"
 
 #include <baselib/gobj.h>
 

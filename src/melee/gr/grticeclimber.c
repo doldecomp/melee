@@ -8,8 +8,8 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/types.h"
-#include "lb/lbunknown_001.h"
-#include "lb/lbunknown_003.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 
 #include <dolphin/os/os.h>
 #include <baselib/gobj.h>

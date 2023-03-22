@@ -6,7 +6,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "lb/lbunknown_001.h"
+#include "lb/lb_00B0.h"
 
 MotionState ftSandbag_MotionStateTable[] = {
     { 295, 0, 0x01400000, ftSandbag_8014FC20, ftSandbag_8014FC24,

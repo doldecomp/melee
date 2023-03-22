@@ -8,7 +8,7 @@
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
 #include "mp/mplib.h"
-#include "pl/pl_unknown_001.h"
+#include "pl/pl_0371.h"
 
 bool ftCliffCommon_80081298(HSD_GObj* gobj)
 {

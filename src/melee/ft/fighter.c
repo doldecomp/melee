@@ -31,14 +31,14 @@
 #include "it/it_266F.h"
 #include "it/item.h"
 #include "it/item2.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
 #include "lb/lbmthp.h"
 #include "lb/lbshadow.h"
-#include "lb/lbunknown_001.h"
 #include "lb/lbunknown_002.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
-#include "pl/pl_unknown_001.h"
+#include "pl/pl_0371.h"
 
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>

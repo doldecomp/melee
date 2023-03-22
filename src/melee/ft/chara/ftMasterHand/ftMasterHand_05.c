@@ -6,8 +6,8 @@
 #include "ft/ftbosslib.h"
 #include "ft/inlines.h"
 #include "it/it_27CF.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbunknown_001.h"
 
 u32 ftMasterHand_80151428(Vec3* vec)
 {

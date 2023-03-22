@@ -1,9 +1,9 @@
 #include "lb/lbfile.h"
 
+#include "lb/lb_0192.h"
 #include "lb/lbdvd.h"
 #include "lb/lbheap.h"
 #include "lb/lblanguage.h"
-#include "lb/lbunknown_004.h"
 
 #include <string.h>
 #include <dolphin/dvd/dvd.h>
