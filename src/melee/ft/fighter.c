@@ -835,7 +835,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     HSD_JObj* jobj;
 
     gobj = GObj_Create(4, 8, 0);
-    GObj_SetupGXLink(gobj, &func_80080E18, 5U, 0U);
+    GObj_SetupGXLink(gobj, &ftDrawCommmon_80080E18, 5U, 0U);
     fp = HSD_ObjAlloc(&fighter_alloc_data);
     fp->x2D8_specialAttributes2 = HSD_ObjAlloc(&lbl_80458FFC);
     GObj_InitUserData(gobj, 4U, &Fighter_Unload_8006DABC, fp);
