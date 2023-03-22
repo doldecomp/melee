@@ -205,36 +205,36 @@ extern void func_802FB650(s32);
 
 // functions defined in this file
 
-HudIndex* func_802F4910(void);
-HSD_GObj* func_802F6194(HSD_GObj*, s32);
-void func_802F6508(s32);
-void func_802F665C(s8);
-void func_802F6788(s32);
-void func_802F6804(void);
-void func_802F6898(void);
-void func_802F68F0(void);
-void func_802F6948(s32);
-void func_802F69C0(s32, s32);
-void func_802F6AF8(s32);
-void func_802F6C04(s32);
-void func_802F6D10(s32);
-void func_802F6E1C(int slot);
-void func_802F6E3C(s32);
-void func_802F7220(void);
+HudIndex* ifStatus_802F4910(void);
+HSD_GObj* ifStatus_802F6194(HSD_GObj*, s32);
+void ifStatus_802F6508(s32);
+void ifStatus_802F665C(s8);
+void ifStatus_802F6788(s32);
+void ifStatus_802F6804(void);
+void ifStatus_802F6898(void);
+void ifStatus_802F68F0(void);
+void ifStatus_802F6948(s32);
+void ifStatus_802F69C0(s32, s32);
+void ifStatus_802F6AF8(s32);
+void ifStatus_802F6C04(s32);
+void ifStatus_802F6D10(s32);
+void ifStatus_802F6E1C(int slot);
+void ifStatus_802F6E3C(s32);
+void ifStatus_802F7220(void);
 
 extern HudIndex lbl_804A10C8; // global array of HUD info
 
-void func_802F5B48(void);
-void lbl_802F5DE0(HSD_GObj* player, s32 arg1);
-void lbl_802F5E50(void);
-void func_802F5EC0(void);
-void func_802F61FC(void);
-void func_802F66A4(void);
-void func_802F4B84(void);
-void func_802F6EA4(void);
-void func_802F7034(void);
-void func_802F7134(void);
-void func_802F4EDC(void);
-void func_802F491C(void);
+void ifStatus_802F5B48(void);
+void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1);
+void ifStatus_802F5E50(void);
+void ifStatus_802F5EC0(void);
+void ifStatus_802F61FC(void);
+void ifStatus_802F66A4(void);
+void ifStatus_802F4B84(void);
+void ifStatus_802F6EA4(void);
+void ifStatus_802F7034(void);
+void ifStatus_802F7134(void);
+void ifStatus_802F4EDC(void);
+void ifStatus_802F491C(void);
 
 #endif

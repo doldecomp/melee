@@ -380,7 +380,7 @@ void Player_80032070(int slot, bool bool_arg)
             ft_800D4FF4(player->player_entity[player->transformed[1]]);
         }
 
-        func_802F6E1C(slot);
+        ifStatus_802F6E1C(slot);
         return;
     }
 
@@ -1391,7 +1391,7 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
         }
 
         if (slot == other_slot) {
-            func_802F6D10(other_slot);
+            ifStatus_802F6D10(other_slot);
         } else {
             if (gm_8016B168()) {
                 Player_CheckSlot(slot);
@@ -1404,13 +1404,13 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
                     player_team = player->team;
                     other_player_team = other_player->team;
                     if (player_team == other_player_team) {
-                        func_802F69C0(other_slot, slot);
+                        ifStatus_802F69C0(other_slot, slot);
                         return;
                     }
                 }
             }
 
-            func_802F6AF8(other_slot);
+            ifStatus_802F6AF8(other_slot);
         }
     }
 }
@@ -1476,7 +1476,7 @@ void Player_IncSuicideCount(s32 slot, s32 condition)
         suicide_count = player->suicide_count;
         if (suicide_count < 0xffff) {
             player->suicide_count++;
-            func_802F6C04(slot);
+            ifStatus_802F6C04(slot);
         }
     }
 }
