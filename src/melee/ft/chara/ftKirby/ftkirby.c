@@ -1228,10 +1228,10 @@ void ftKirby_OnLoad(HSD_GObj* gobj)
     fp->x2222_flag.bits.b1 = 1;
     fp->x2D0 = fp->x2D4_specialAttributes;
     fp->fv.kb.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
-    func_8026B3F8(item_list[0], 0x32);
-    func_8026B3F8(item_list[1], 0x33);
-    func_8026B3F8(item_list[2], 0x34);
-    func_8026B3F8(item_list[3], 0x35);
+    it_8026B3F8(item_list[0], 0x32);
+    it_8026B3F8(item_list[1], 0x33);
+    it_8026B3F8(item_list[2], 0x34);
+    it_8026B3F8(item_list[3], 0x35);
 }
 
 void ftKirby_800EE74C(HSD_GObj* gobj)

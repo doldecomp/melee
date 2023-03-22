@@ -113,9 +113,9 @@ void ftPichu_OnLoad(HSD_GObj* gobj)
 
     {
         ftPichuAttributes* attrs = fp->x2D4_specialAttributes;
-        func_8026B3F8(items[0], attrs->xDC);
-        func_8026B3F8(items[1], attrs->x14);
-        func_8026B3F8(items[2], attrs->x18);
+        it_8026B3F8(items[0], attrs->xDC);
+        it_8026B3F8(items[1], attrs->x14);
+        it_8026B3F8(items[2], attrs->x18);
     }
 }
 

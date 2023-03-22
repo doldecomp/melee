@@ -100,10 +100,10 @@ void ftSamus_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftSamusAttributes);
 
-    func_8026B3F8(item_list[0], 0x5DU);
-    func_8026B3F8(item_list[1], 0x5EU);
-    func_8026B3F8(item_list[2], 0x5FU);
-    func_8026B3F8(item_list[3], 0x60U);
+    it_8026B3F8(item_list[0], 0x5DU);
+    it_8026B3F8(item_list[1], 0x5EU);
+    it_8026B3F8(item_list[2], 0x5FU);
+    it_8026B3F8(item_list[3], 0x60U);
 }
 
 void ftSamus_80128428(HSD_GObj* gobj)

@@ -138,11 +138,11 @@ void ftLink_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftLinkAttributes);
 
     link_attr = fp->x2D4_specialAttributes;
-    func_8026B3F8(item_list[0], link_attr->x48);
-    func_8026B3F8(item_list[1], link_attr->x2C);
-    func_8026B3F8(item_list[2], link_attr->xBC);
-    func_8026B3F8(item_list[3], link_attr->xC);
-    func_8026B3F8(item_list[4], link_attr->x10);
+    it_8026B3F8(item_list[0], link_attr->x48);
+    it_8026B3F8(item_list[1], link_attr->x2C);
+    it_8026B3F8(item_list[2], link_attr->xBC);
+    it_8026B3F8(item_list[3], link_attr->xC);
+    it_8026B3F8(item_list[4], link_attr->x10);
     ftParts_800753D4(fp, *lbl_804D6540[fp->x4_fighterKind], item_list[6]);
 }
 
@@ -163,7 +163,7 @@ void ftLink_800EAF58(HSD_GObj* gobj)
 void ftLink_OnItemPickupExt(HSD_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (func_8026B2B4(fp->x1974_heldItem) == 1) {
+    if (it_8026B2B4(fp->x1974_heldItem) == 1) {
         ftParts_80074A4C(gobj, 1, 1);
     }
     ftParts_80074A4C(gobj, 2, 1);
@@ -183,7 +183,7 @@ void ftLink_OnItemVisible(HSD_GObj* gobj)
 void ftLink_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (func_8026B2B4(fp->x1974_heldItem) == 1) {
+    if (it_8026B2B4(fp->x1974_heldItem) == 1) {
         ftParts_80074A4C(gobj, 1, 0);
     }
     ftParts_80074A4C(gobj, 2, 0);

@@ -140,9 +140,9 @@ void ftPopo_OnLoad(HSD_GObj* gobj)
     {
         ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
         fp->x40 = attr->x0;
-        func_8026B3F8(item_list[0], 0x6AU);
-        func_8026B3F8(item_list[1], 0x6BU);
-        func_8026B3F8(item_list[2], 0x71U);
+        it_8026B3F8(item_list[0], 0x6AU);
+        it_8026B3F8(item_list[1], 0x6BU);
+        it_8026B3F8(item_list[2], 0x71U);
     }
 }
 

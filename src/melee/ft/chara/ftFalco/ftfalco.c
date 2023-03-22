@@ -182,9 +182,9 @@ void ftFalco_OnLoad(HSD_GObj* gobj)
     ftFox_OnLoadForFalco(fp);
 
     sa2 = fp->x2D4_specialAttributes;
-    func_8026B3F8(items[0], sa2[7]);
-    func_8026B3F8(items[1], sa2[8]);
-    func_8026B3F8(items[3], 0x39);
+    it_8026B3F8(items[0], sa2[7]);
+    it_8026B3F8(items[1], sa2[8]);
+    it_8026B3F8(items[3], 0x39);
 }
 
 void ftFalco_LoadSpecialAttrs(HSD_GObj* gobj)

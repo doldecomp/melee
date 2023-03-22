@@ -812,7 +812,7 @@ void ftLib_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_ASSERT(1117, itGetKind(item_gobj) == It_Kind_MetalB);
-    ft_800C8348(gobj, func_8026B560(item_gobj), func_8026B574(item_gobj));
+    ft_800C8348(gobj, it_8026B560(item_gobj), it_8026B574(item_gobj));
     ft_800D105C(gobj);
     ft_80081C88(gobj, fp->x34_scale.y);
     ftCommon_8007EBAC(fp, 0xC, 0);

@@ -6,8 +6,8 @@
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "it/it_26B1.h"
 #include "it/it_27CF.h"
-#include "it/item2.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
@@ -231,7 +231,7 @@ void grStory_801E3418(HSD_GObj* gobj)
     UnkUserData2* gp = gobj->user_data;
 
     // Don't trigger if any shy guys are still onscreen
-    if (func_8026B3C0(It_Kind_Heiho) != 0) {
+    if (it_8026B3C0(It_Kind_Heiho) != 0) {
         return;
     }
 

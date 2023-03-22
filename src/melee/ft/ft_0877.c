@@ -51,8 +51,7 @@ s32 ft_800878BC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if ((fp->x1974_heldItem != NULL) &&
-        (func_8026B2B4(fp->x1974_heldItem) == 1))
+    if ((fp->x1974_heldItem != NULL) && (it_8026B2B4(fp->x1974_heldItem) == 1))
     {
         return true;
     }

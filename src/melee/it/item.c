@@ -3,7 +3,7 @@
 #include "item.h"
 
 #include "it_266F.h"
-#include "item2.h"
+#include "it_26B1.h"
 
 #include "cm/camera.h"
 #include "db/db_2253.h"
@@ -187,7 +187,7 @@ void Item_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->xC90_absorbGObj = NULL;
     item_data->xD0C = 0;
 
-    func_8026B390(item_gobj);
+    it_8026B390(item_gobj);
     item_data->xDC8_word.flags.x13 = false;
 
     if (spawnItem->x48_ground_or_air == GA_Air) {
@@ -697,7 +697,7 @@ void Item_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     } else if (ftLib_80086960(spawnItem->x0_parent_gobj)) {
         item_data->x20_team_id = ftLib_80086EB4(spawnItem->x0_parent_gobj);
     } else if (func_80272D1C(spawnItem->x0_parent_gobj)) {
-        item_data->x20_team_id = func_8026B7B0(spawnItem->x0_parent_gobj);
+        item_data->x20_team_id = it_8026B7B0(spawnItem->x0_parent_gobj);
     } else {
         item_data->x20_team_id = -1;
     }
@@ -1186,7 +1186,7 @@ void Item_80268E5C(HSD_GObj* item_gobj, enum_t msid,
     efAsync_80067624(item_gobj, &item_data->xBC0);
 
     if (item_data->xDC8_word.flags.x2 == 1) {
-        func_8026BDCC(item_gobj);
+        it_8026BDCC(item_gobj);
         func_80274EF8(item_gobj);
     }
 
@@ -1459,7 +1459,7 @@ void Item_80269978(HSD_GObj* item_gobj)
         HSD_JObjSetTranslate((HSD_JObj*) HSD_GObjGetHSDObj(item_gobj),
                              &item_data->pos);
         func_8027574C(item_gobj);
-        func_8026C368(item_gobj);
+        it_8026C368(item_gobj);
     }
 }
 
@@ -1882,7 +1882,7 @@ void Item_8026A294(HSD_GObj* item_gobj)
 
         EnterHitlagThink(item_gobj, item_data);
     } else if (item_data->xCA8) {
-        checkHitLag(func_8026B424(item_data->xCA8), item_data);
+        checkHitLag(it_8026B424(item_data->xCA8), item_data);
 
         EnterHitlagThink(item_gobj, item_data);
     }
@@ -2095,7 +2095,7 @@ void Item_8026ABD8(HSD_GObj* this, Vec3* pos, f32 arg2)
     func_80274198(this, 1);
     func_802754D4(this);
 
-    if (func_8026B6C8(this)) {
+    if (it_8026B6C8(this)) {
         func_80275390(this);
     }
 }
@@ -2110,7 +2110,7 @@ void Item_8026AC74(HSD_GObj* this, enum_t drop_gfx, enum_t drop_sfx, f32 arg3)
     func_802741F4(this, 1);
     func_802754D4(this);
 
-    if (func_8026B6C8(this)) {
+    if (it_8026B6C8(this)) {
         func_80275390(this);
     }
 }

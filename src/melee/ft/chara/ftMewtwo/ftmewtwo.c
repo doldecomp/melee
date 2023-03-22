@@ -123,8 +123,8 @@ void ftMewtwo_OnLoad(HSD_GObj* gobj)
         fp->ft_bones[1].flags.bits.b4 = 1;
         fp->x2221_flag.bits.b2 = 1;
     }
-    func_8026B3F8(item_list[0], It_Kind_Mewtwo_Disable);
-    func_8026B3F8(item_list[1], It_Kind_Mewtwo_ShadowBall);
+    it_8026B3F8(item_list[0], It_Kind_Mewtwo_Disable);
+    it_8026B3F8(item_list[1], It_Kind_Mewtwo_ShadowBall);
 }
 
 void ftMewTwo_OnItemPickup(HSD_GObj* gobj, bool bool)

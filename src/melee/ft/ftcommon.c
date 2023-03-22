@@ -13,9 +13,9 @@
 
 #include "ef/eflib.h"
 #include "gm/gm_1601.h"
+#include "it/it_26B1.h"
 #include "it/it_27CF.h"
 #include "it/item.h"
-#include "it/item2.h"
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
@@ -1304,7 +1304,7 @@ s32 ftCommon_GetParasolStatus(HSD_GObj* gobj)
     if (fp->x1974_heldItem != NULL &&
         itGetKind(fp->x1974_heldItem) == It_Kind_Parasol)
     {
-        switch (func_8026B7A4(fp->x1974_heldItem)) {
+        switch (it_8026B7A4(fp->x1974_heldItem)) {
         case 7:
             return 0;
         case 8:
@@ -1324,7 +1324,7 @@ s32 ftCommon_GetParasolStatus(HSD_GObj* gobj)
     if (fp->x1974_heldItem != NULL &&
         itGetKind(fp->x1974_heldItem) == It_Kind_Peach_Parasol)
     {
-        switch (func_8026B7A4(fp->x1974_heldItem)) {
+        switch (it_8026B7A4(fp->x1974_heldItem)) {
         case 1:
             return 4;
         case 0:
@@ -1561,7 +1561,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     }
     dst->x221E_flag.bits.b4 = src->x221E_flag.bits.b4;
     if (src->x197C != NULL) {
-        func_8026B9A8(src->x197C, dst_gobj, dst->ft_data->x8->unk12);
+        it_8026B9A8(src->x197C, dst_gobj, dst->ft_data->x8->unk12);
         func_802950D4(src->x197C, 0);
         ftCommon_8007F948(dst_gobj, src->x197C, src->x2014);
         ftCommon_8007FA00(gobj);
@@ -1569,7 +1569,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         dst->x197C = NULL;
     }
     if (src->x1980 != NULL) {
-        func_8026B9A8(src->x1980, dst_gobj, dst->ft_data->x8->unk12);
+        it_8026B9A8(src->x1980, dst_gobj, dst->ft_data->x8->unk12);
         ftCommon_8007FE84(dst_gobj, src->x1980, src->x2018, src->x2024);
         ftCommon_8007FDA0(gobj);
     } else {
@@ -1583,7 +1583,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         dst->x1974_heldItem = src->x1974_heldItem;
         dst->x221E_flag.bits.b3 = src->x221E_flag.bits.b3;
         ft_80094818(dst_gobj, 1);
-        func_8026B9A8(src->x1974_heldItem, dst_gobj, dst->ft_data->x8->unk10);
+        it_8026B9A8(src->x1974_heldItem, dst_gobj, dst->ft_data->x8->unk10);
     }
     un_80322314();
     ft_800BFD04(gobj);
@@ -1757,7 +1757,7 @@ void ftCommon_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
 #endif
 
         if (fp2->x197C != NULL) {
-            fp->x2014 = func_8026B54C(arg1);
+            fp->x2014 = it_8026B54C(arg1);
             ft_80088148(fp, 0x117, 0x7F, 0x40);
             ftCommon_8007EBAC(fp, 0x10, 0);
             Item_8026A8EC(arg1);
@@ -1766,15 +1766,15 @@ void ftCommon_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
     }
 
     vec = lbl_803B74A0;
-    func_8026BD0C(arg1);
+    it_8026BD0C(arg1);
     Item_8026ABD8(arg1, &vec, 0);
     Item_8026AB54(arg1, gobj, fp->ft_data->x8->unk12);
-    ftCommon_8007F948(gobj, arg1, func_8026B54C(arg1));
+    ftCommon_8007F948(gobj, arg1, it_8026B54C(arg1));
     ft_800D105C(gobj);
     ft_80081C88(gobj, fp->x34_scale.y);
     ft_80088148(fp, 0x117, 0x7F, 0x40);
     ftCommon_8007EBAC(fp, 0x10, 0);
-    func_8026BCF4(arg1);
+    it_8026BCF4(arg1);
     ftCommon_8007FA00(gobj);
 }
 

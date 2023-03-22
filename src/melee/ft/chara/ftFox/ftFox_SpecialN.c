@@ -265,7 +265,7 @@ void ftFox_SpecialN_StartMotion(HSD_GObj* gobj)
     fp->fv.fx.x222C_blasterGObj = blasterGObj;
 
     if (blasterGObj != NULL) {
-        func_8026BAE8(fp->fv.fx.x222C_blasterGObj, 0.8500000238418579f);
+        it_8026BAE8(fp->fv.fx.x222C_blasterGObj, 0.8500000238418579f);
         ftFox_SpecialN_SetCall(gobj);
         return;
     }
@@ -300,7 +300,7 @@ void ftFox_SpecialAirN_StartMotion(
     fp->fv.fx.x222C_blasterGObj = blasterGObj;
 
     if (blasterGObj != NULL) {
-        func_8026BAE8(fp->fv.fx.x222C_blasterGObj, 0.8500000238418579f);
+        it_8026BAE8(fp->fv.fx.x222C_blasterGObj, 0.8500000238418579f);
         ftFox_SpecialN_SetCall(gobj);
         return;
     }
@@ -786,7 +786,7 @@ void ftFox_Throw_Anim(HSD_GObj* gobj)
 
                 fp->fv.fx.x222C_blasterGObj = blasterGObj;
                 if (blasterGObj != NULL) {
-                    func_8026BAE8(
+                    it_8026BAE8(
                         fp->fv.fx.x222C_blasterGObj,
                         (0.8500000238418579f *
                          (fp->x34_scale.y * fp->x110_attr.x19C_ModelScaling)));

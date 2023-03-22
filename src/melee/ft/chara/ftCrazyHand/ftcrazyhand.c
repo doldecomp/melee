@@ -138,9 +138,9 @@ void ftCrazyhand_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftCrazyHandAttributes);
 
     ftBossLib_8015BDB4(gobj);
-    func_8026B3F8(items[0], 0x7F);
-    func_8026B3F8(items[1], 0x80);
-    func_8026B3F8(items[2], 0x81);
+    it_8026B3F8(items[0], 0x7F);
+    it_8026B3F8(items[1], 0x80);
+    it_8026B3F8(items[2], 0x81);
     fp->x2229_b5_no_normal_motion = 1;
     fp->x2229_b6 = 1;
     fp->x2229_b7 = 1;

@@ -117,7 +117,7 @@ void ftLuigi_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftLuigiAttributes);
 
-    func_8026B3F8(item_list[0], It_Kind_Luigi_Fire);
+    it_8026B3F8(item_list[0], It_Kind_Luigi_Fire);
 }
 
 void ftLuigi_OnItemPickup(HSD_GObj* gobj, bool bool)

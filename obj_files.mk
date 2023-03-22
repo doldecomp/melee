@@ -448,7 +448,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/mn/mncharsel.c.o\
     $(BUILD_DIR)/asm/melee/mn/mncharsel.s.o\
     $(BUILD_DIR)/src/melee/it/item.c.o\
-    $(BUILD_DIR)/src/melee/it/item2.c.o\
+    $(BUILD_DIR)/src/melee/it/it_26B1.c.o\
     $(BUILD_DIR)/asm/melee/it/it_266F.s.o\
     $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
 

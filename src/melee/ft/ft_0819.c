@@ -1,8 +1,8 @@
 #include "ft/ft_0819.h"
 
 #include "ft/ft_0877.h"
+#include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/item2.h"
 #include "lb/lb_00F9.h"
 
 #include <placeholder.h>
@@ -142,7 +142,7 @@ asm void ft_80081A00(void)
 /* 80081A90 0007E670  48 00 00 64 */	b lbl_80081AF4
 lbl_80081A94:
 /* 80081A94 0007E674  7F 83 E3 78 */	mr r3, r28
-/* 80081A98 0007E678  48 1E A1 D1 */	bl func_8026BC68
+/* 80081A98 0007E678  48 1E A1 D1 */	bl it_8026BC68
 /* 80081A9C 0007E67C  2C 03 00 00 */	cmpwi r3, 0
 /* 80081AA0 0007E680  41 82 00 50 */	beq lbl_80081AF0
 /* 80081AA4 0007E684  83 BC 00 2C */	lwz r29, 0x2c(r28)

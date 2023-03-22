@@ -202,16 +202,16 @@ void ftGameWatch_OnLoad(HSD_GObj* gobj)
         ft_800BFB4C(gobj, &attr->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
         fp->x5C8 = items[10];
 
-        func_8026B3F8(items[0], It_Kind_GameWatch_Greenhouse);
-        func_8026B3F8(items[1], It_Kind_GameWatch_Manhole);
-        func_8026B3F8(items[2], It_Kind_GameWatch_Fire);
-        func_8026B3F8(items[3], It_Kind_GameWatch_Parachute);
-        func_8026B3F8(items[4], It_Kind_GameWatch_Turtle);
-        func_8026B3F8(items[5], It_Kind_GameWatch_Breath);
-        func_8026B3F8(items[6], It_Kind_GameWatch_Judge);
-        func_8026B3F8(items[7], It_Kind_GameWatch_Panic);
-        func_8026B3F8(items[8], It_Kind_GameWatch_Chef);
-        func_8026B3F8(items[9], It_Kind_GameWatch_Rescue);
+        it_8026B3F8(items[0], It_Kind_GameWatch_Greenhouse);
+        it_8026B3F8(items[1], It_Kind_GameWatch_Manhole);
+        it_8026B3F8(items[2], It_Kind_GameWatch_Fire);
+        it_8026B3F8(items[3], It_Kind_GameWatch_Parachute);
+        it_8026B3F8(items[4], It_Kind_GameWatch_Turtle);
+        it_8026B3F8(items[5], It_Kind_GameWatch_Breath);
+        it_8026B3F8(items[6], It_Kind_GameWatch_Judge);
+        it_8026B3F8(items[7], It_Kind_GameWatch_Panic);
+        it_8026B3F8(items[8], It_Kind_GameWatch_Chef);
+        it_8026B3F8(items[9], It_Kind_GameWatch_Rescue);
     }
 }
 

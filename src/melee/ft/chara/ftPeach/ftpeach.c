@@ -157,11 +157,11 @@ void ftPeach_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftPeachAttributes);
 
-    func_8026B3F8(items[0], It_Kind_Peach_Explode);
-    func_8026B3F8(items[1], It_Kind_Peach_Turnip);
-    func_8026B3F8(items[2], It_Kind_Peach_Parasol);
-    func_8026B3F8(items[3], It_Kind_Peach_Toad);
-    func_8026B3F8(items[4], It_Kind_Peach_ToadSpore);
+    it_8026B3F8(items[0], It_Kind_Peach_Explode);
+    it_8026B3F8(items[1], It_Kind_Peach_Turnip);
+    it_8026B3F8(items[2], It_Kind_Peach_Parasol);
+    it_8026B3F8(items[3], It_Kind_Peach_Toad);
+    it_8026B3F8(items[4], It_Kind_Peach_ToadSpore);
 }
 
 /* static */ void ftPeach_8011D598(HSD_GObj* gobj);

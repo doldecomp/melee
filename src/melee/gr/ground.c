@@ -17,9 +17,9 @@
 #include "ft/ftlib.h"
 #include "gm/gm_1601.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/it_27CF.h"
 #include "it/item.h"
-#include "it/item2.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
@@ -434,8 +434,8 @@ void Ground_801C0800(StructPairWithStageID* pair)
         int i;
         if (stage_info.x6A8 != NULL) {
             for (i = 0; stage_info.x6A8[i] != NULL; i++) {
-                func_8026B40C(stage_info.x6A8[i]->unk4,
-                              stage_info.x6A8[i]->unk0);
+                it_8026B40C(stage_info.x6A8[i]->unk4,
+                            stage_info.x6A8[i]->unk0);
             }
         }
 
@@ -760,7 +760,7 @@ lbl_801C0EA0:
 /* 801C0F38 001BDB18  90 A1 00 14 */	stw r5, 0x14(r1)
 /* 801C0F3C 001BDB1C  90 81 00 18 */	stw r4, 0x18(r1)
 /* 801C0F40 001BDB20  90 01 00 1C */	stw r0, 0x1c(r1)
-/* 801C0F44 001BDB24  48 0A AF 41 */	bl func_8026BE84
+/* 801C0F44 001BDB24  48 0A AF 41 */	bl it_8026BE84
 lbl_801C0F48:
 /* 801C0F48 001BDB28  80 01 00 94 */	lwz r0, 0x94(r1)
 /* 801C0F4C 001BDB2C  CB E1 00 88 */	lfd f31, 0x88(r1)
@@ -3623,7 +3623,7 @@ void Ground_801C42AC(void)
             sp8.x14 = 0x14;
             sp8.x4 = jobj;
             sp8.x1C.bits.b0 = true;
-            func_8026BE84(&sp8);
+            it_8026BE84(&sp8);
         }
     }
 }

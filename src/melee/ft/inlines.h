@@ -7,7 +7,7 @@
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "gr/stage.h"
-#include "it/item2.h"
+#include "it/it_26B1.h"
 #include "lb/lbcollision.h"
 #include "lb/lbrefract.h"
 #include "pl/player.h"
@@ -118,8 +118,8 @@ static inline void Fighter_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag,
                                         bool bool2, bool bool3)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!func_8026B2B4(fp->x1974_heldItem)) {
-        switch (func_8026B320(fp->x1974_heldItem)) {
+    if (!it_8026B2B4(fp->x1974_heldItem)) {
+        switch (it_8026B320(fp->x1974_heldItem)) {
         case 1:
             ftAnim_80070FB4(gobj, bool2, 1);
             break;
@@ -142,7 +142,7 @@ static inline void Fighter_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag,
 static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!func_8026B2B4(fp->x1974_heldItem)) {
+    if (!it_8026B2B4(fp->x1974_heldItem)) {
         ftAnim_80070CC4(gobj, bool);
     }
 }
@@ -150,7 +150,7 @@ static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
 static inline void Fighter_OnItemVisible(HSD_GObj* gobj, bool bool)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!func_8026B2B4(fp->x1974_heldItem)) {
+    if (!it_8026B2B4(fp->x1974_heldItem)) {
         ftAnim_80070C48(gobj, bool);
     }
 }

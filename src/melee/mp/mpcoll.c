@@ -3,7 +3,7 @@
 #include "db/db_2253.h"
 #include "ft/ftlib.h"
 #include "gr/grdynamicattr.h"
-#include "it/item2.h"
+#include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"

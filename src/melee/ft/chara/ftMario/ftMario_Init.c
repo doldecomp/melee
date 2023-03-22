@@ -80,8 +80,8 @@ void ftMario_OnLoad(HSD_GObj* gobj)
     {
         ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
 
-        func_8026B3F8(items[0], It_Kind_Mario_Fire);
-        func_8026B3F8(items[2], sa->specials.cape_kind);
+        it_8026B3F8(items[0], It_Kind_Mario_Fire);
+        it_8026B3F8(items[2], sa->specials.cape_kind);
     }
 }
 

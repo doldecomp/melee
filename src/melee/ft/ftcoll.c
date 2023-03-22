@@ -73,8 +73,8 @@ void ftColl_80076444(HSD_GObj* attacker, HSD_GObj* victim)
 /// Combo Count Logic w/ Item Owner
 void ftColl_8007646C(HSD_GObj* attackItem, HSD_GObj* victim)
 {
-    HSD_GObj* owner = func_8026BC78(attackItem);
-    enum_t msid = func_8026BC84(attackItem);
+    HSD_GObj* owner = it_8026BC78(attackItem);
+    enum_t msid = it_8026BC84(attackItem);
 
     if (ftLib_80086960(owner)) {
         ftColl_800763C0(owner, victim, msid);
@@ -1959,7 +1959,7 @@ lbl_80077DA0:
 lbl_80077DA8:
 /* 80077DA8 00074988  80 7A 00 04 */	lwz r3, 4(r26)
 /* 80077DAC 0007498C  7F 64 DB 78 */	mr r4, r27
-/* 80077DB0 00074990  48 1F 34 25 */	bl func_8026B1D4
+/* 80077DB0 00074990  48 1F 34 25 */	bl it_8026B1D4
 /* 80077DB4 00074994  FF C0 08 90 */	fmr f30, f1
 /* 80077DB8 00074998  80 7C 1A 58 */	lwz r3, 0x1a58(r28)
 /* 80077DBC 0007499C  28 03 00 00 */	cmplwi r3, 0

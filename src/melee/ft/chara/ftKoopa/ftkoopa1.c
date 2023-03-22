@@ -134,7 +134,7 @@ void ftKoopa_OnLoad(HSD_GObj* gobj)
     UNK_T* items = ftDataInfo->x48_items;
 
     PUSH_ATTRS(fp, ftKoopaAttributes);
-    func_8026B3F8(items[0], It_Kind_Koopa_Flame);
+    it_8026B3F8(items[0], It_Kind_Koopa_Flame);
     fp->x2226_flag.bits.b1 = true;
 }
 

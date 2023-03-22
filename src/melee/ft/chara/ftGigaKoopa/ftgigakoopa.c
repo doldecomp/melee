@@ -105,7 +105,7 @@ void ftGigaKoopa_OnLoad(HSD_GObj* gobj)
     void** items = ftdata->x48_items;
 
     ftKoopa_OnLoadForGKoopa(fp);
-    func_8026B3F8(items[0], It_Kind_Koopa_Flame);
+    it_8026B3F8(items[0], It_Kind_Koopa_Flame);
 
     fp->x2226_flag.bits.b1 = true;
     fp->x222A_flag.bits.b0 = true;

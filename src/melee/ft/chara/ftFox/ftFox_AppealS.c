@@ -6,7 +6,7 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 #include "gr/grcorneria.h"
-#include "it/item2.h"
+#include "it/it_26B1.h"
 #include "pl/pl_0371.h"
 
 bool ftFox_AppealS_CheckIfUsed(Fighter* fp)

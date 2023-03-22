@@ -5,7 +5,7 @@
 #include "gr/gricemt.h"
 #include "gr/ground.h"
 #include "gr/grrcruise.h"
-#include "it/item2.h"
+#include "it/it_26B1.h"
 #include "lb/lb_00F9.h"
 
 #include <placeholder.h>

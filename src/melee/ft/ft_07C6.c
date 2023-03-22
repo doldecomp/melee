@@ -10,8 +10,8 @@
 #include "ef/efsync.h"
 #include "ft/ftcoll.h"
 #include "ft/ftlib.h"
+#include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/item2.h"
 #include "lb/lb_00B0.h"
 
 #include <placeholder.h>

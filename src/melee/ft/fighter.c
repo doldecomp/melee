@@ -29,8 +29,8 @@
 #include "gm/gm_1601.h"
 #include "if/ifmagnify.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/item2.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00CE.h"
 #include "lb/lbarchive.h"
@@ -1496,7 +1496,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
                     if (ft_800C0694(fp) == 0x6B) {
                         ft_800C0200(fp, 0x6B);
                     }
-                } else if (fp->x2004 == func_8026B588()) {
+                } else if (fp->x2004 == it_8026B588()) {
                     ft_800880D8(fp);
                 }
             }
@@ -2686,7 +2686,7 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
     bool hold_item_bool = 0;
     Vec3 vec;
 
-    if (fp->x1974_heldItem && !func_8026B2B4(fp->x1974_heldItem)) {
+    if (fp->x1974_heldItem && !it_8026B2B4(fp->x1974_heldItem)) {
         hold_item_bool = 1;
     }
 
@@ -2700,8 +2700,8 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
         if ( ///// giant if condition
             hold_item_bool && temp_bool &&
             ((HSD_Randi(p_ftCommonData->x418) < arg1) ||
-             ((((func_8026B30C(fp->x1974_heldItem) == 3) &&
-                func_8026B594(fp->x1974_heldItem))) &&
+             ((((it_8026B30C(fp->x1974_heldItem) == 3) &&
+                it_8026B594(fp->x1974_heldItem))) &&
               !HSD_Randi(p_ftCommonData->x41C))))
         {
             if (fp->x1978) {
@@ -3117,7 +3117,7 @@ void Fighter_Unload_8006DABC(void* user_data)
 
     ftColl_8007B8E8(fp->gobj);
     efAsync_80067688(&fp->x60C);
-    func_8026B7F8(fp->gobj);
+    it_8026B7F8(fp->gobj);
     Camera_800290D4(fp->x890_cameraBox);
     ft_8009E0D4(fp);
     ftColl_800765AC(fp->gobj);

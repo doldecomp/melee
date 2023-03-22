@@ -33,8 +33,8 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* gobj)
         manholeGObj = fp->x1974_heldItem;
         if (manholeGObj != NULL) {
             fp->fv.gw.x2248_manholeGObj = manholeGObj;
-            func_8026BB44(fp->x1974_heldItem);
-            func_8026B724(fp->x1974_heldItem);
+            it_8026BB44(fp->x1974_heldItem);
+            it_8026B724(fp->x1974_heldItem);
             ftCommon_8007E6DC(gobj, fp->x1974_heldItem, 1);
         }
         fp->fv.gw.x2250_manholeGObj2 =
@@ -66,8 +66,8 @@ void ftGameWatch_ItemManholeRemove(HSD_GObj* gobj)
     if (manholeGObj != NULL) {
         fp->x1974_heldItem = manholeGObj;
         fp->fv.gw.x2248_manholeGObj = NULL;
-        func_8026BB20(fp->x1974_heldItem);
-        func_8026B73C(fp->x1974_heldItem);
+        it_8026BB20(fp->x1974_heldItem);
+        it_8026B73C(fp->x1974_heldItem);
         ft_80094818(gobj, 1);
     }
 }

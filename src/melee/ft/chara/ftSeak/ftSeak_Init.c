@@ -117,10 +117,10 @@ void ftSeak_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftSeakAttributes);
 
-    func_8026B3F8(item_list[0], 0x4FU);
-    func_8026B3F8(item_list[1], 0x50U);
-    func_8026B3F8(item_list[2], 0x55U);
-    func_8026B3F8(item_list[3], 0x61U);
+    it_8026B3F8(item_list[0], 0x4FU);
+    it_8026B3F8(item_list[1], 0x50U);
+    it_8026B3F8(item_list[2], 0x55U);
+    it_8026B3F8(item_list[3], 0x61U);
 }
 
 /* static */ void ftSeak_80111FBC(HSD_GObj* gobj);

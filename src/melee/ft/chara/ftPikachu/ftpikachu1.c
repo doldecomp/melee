@@ -120,9 +120,9 @@ void ftPikachu_OnLoad(HSD_GObj* gobj)
 
     {
         ftPikachuAttributes* pika_attr = fp->x2D4_specialAttributes;
-        func_8026B3F8(item_list[0], pika_attr->xDC);
-        func_8026B3F8(item_list[1], pika_attr->x14);
-        func_8026B3F8(item_list[2], pika_attr->x18);
+        it_8026B3F8(item_list[0], pika_attr->xDC);
+        it_8026B3F8(item_list[1], pika_attr->x14);
+        it_8026B3F8(item_list[2], pika_attr->x18);
     }
 }
 

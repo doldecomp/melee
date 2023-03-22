@@ -2,7 +2,7 @@
 #include "mn/mncharsel.h"
 
 #include "gm/gmmain_lib.h"
-#include "it/item2.h"
+#include "it/it_26B1.h"
 #include "lb/lblanguage.h"
 #include "mn/mntext.h"
 

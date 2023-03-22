@@ -172,8 +172,8 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, ftMasterHand_SpecialAttrs);
 
     ftBossLib_8015BDB4(gobj);
-    func_8026B3F8(items[0], 0x7D);
-    func_8026B3F8(items[1], 0x7E);
+    it_8026B3F8(items[0], 0x7D);
+    it_8026B3F8(items[1], 0x7E);
     fp->x2229_b5_no_normal_motion = 1;
     fp->x2229_b6 = 1;
     fp->x2229_b7 = 1;

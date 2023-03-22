@@ -851,7 +851,7 @@ grZakoGenerator_801CAF5C:
 /* 801CAF68 001C7B48  40 80 00 20 */    bge grZakoGenerator_801CAF88
 grZakoGenerator_801CAF6C:
 /* 801CAF6C 001C7B4C  7F C3 F3 78 */    mr r3, r30
-/* 801CAF70 001C7B50  48 0A 12 79 */    bl func_8026C1E8
+/* 801CAF70 001C7B50  48 0A 12 79 */    bl it_8026C1E8
 /* 801CAF74 001C7B54  2C 03 00 00 */    cmpwi r3, 0
 /* 801CAF78 001C7B58  41 82 00 20 */    beq grZakoGenerator_801CAF98
 /* 801CAF7C 001C7B5C  7F C3 F3 78 */    mr r3, r30

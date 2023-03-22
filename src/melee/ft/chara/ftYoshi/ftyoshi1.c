@@ -217,9 +217,9 @@ void ftYoshi_OnLoad(HSD_GObj* gobj)
     ftYoshi_8012B6E8(fp, temp_r27);
     ftYoshi_8012B6E8(fp, temp_r28);
     PUSH_ATTRS(fp, ftYoshiAttributes);
-    func_8026B3F8(item_list[0], It_Kind_Yoshi_EggThrow);
-    func_8026B3F8(item_list[1], It_Kind_Yoshi_Star);
-    func_8026B3F8(item_list[2], It_Kind_Yoshi_EggLay);
+    it_8026B3F8(item_list[0], It_Kind_Yoshi_EggThrow);
+    it_8026B3F8(item_list[1], It_Kind_Yoshi_Star);
+    it_8026B3F8(item_list[2], It_Kind_Yoshi_EggLay);
     fp->x2226_flag.bits.b1 = 1;
 }
 

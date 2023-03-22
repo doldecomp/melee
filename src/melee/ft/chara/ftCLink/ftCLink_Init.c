@@ -122,12 +122,12 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
     attrs->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x48));
     ftLink_OnLoadForCLink(fp);
     attrs = fp->x2D4_specialAttributes;
-    func_8026B3F8(items[0], attrs->x48);
-    func_8026B3F8(items[1], attrs->x2C);
-    func_8026B3F8(items[2], attrs->xBC);
-    func_8026B3F8(items[3], attrs->xC);
-    func_8026B3F8(items[4], attrs->x10);
-    func_8026B3F8(items[5], It_Kind_CLink_Milk);
+    it_8026B3F8(items[0], attrs->x48);
+    it_8026B3F8(items[1], attrs->x2C);
+    it_8026B3F8(items[2], attrs->xBC);
+    it_8026B3F8(items[3], attrs->xC);
+    it_8026B3F8(items[4], attrs->x10);
+    it_8026B3F8(items[5], It_Kind_CLink_Milk);
     ftParts_800753D4(fp, *lbl_804D6540[fp->x4_fighterKind], items[6]);
 }
 
@@ -140,7 +140,7 @@ void ftCLink_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
 
     Fighter* fp = gobj->user_data;
 
-    if (func_8026B2B4(fp->x1974_heldItem) == true) {
+    if (it_8026B2B4(fp->x1974_heldItem) == true) {
         ftParts_80074A4C(gobj, 1, 1);
     }
 
@@ -167,7 +167,7 @@ void ftCLink_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 
     Fighter* fp = gobj->user_data;
 
-    if (func_8026B2B4(fp->x1974_heldItem) == true) {
+    if (it_8026B2B4(fp->x1974_heldItem) == true) {
         ftParts_80074A4C(gobj, 1, 0);
     }
 

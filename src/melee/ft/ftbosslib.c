@@ -482,12 +482,12 @@ void ftBossLib_8015CA6C(s32 arg0)
     }
 
     func_8015CA6C_inline(arg0);
-    func_8026C3FC();
+    it_8026C3FC();
 }
 
 void ftBossLib_8015CB7C(void)
 {
-    func_8026C42C();
+    it_8026C42C();
 }
 
 void func_8015CB9C_inline(Vec3 spC)
