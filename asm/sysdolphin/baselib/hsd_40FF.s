@@ -12194,7 +12194,7 @@ lbl_8040FF80:
     .4byte 0x80010000
     .4byte 0x807FFFFF
     .4byte 0x808FFFFF
-    .4byte lbl_80244444
+    .4byte mnDiagram2_80244444
     .4byte 0x50000000
     .float 2.0
     .4byte 0x00FFFFF8
