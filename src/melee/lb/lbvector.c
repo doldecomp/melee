@@ -294,7 +294,7 @@ Vec3* lbvector_Lerp(Vec3* a, Vec3* b, Vec3* result, float f)
     return result;
 }
 
-Vec3* func_8000DE38(Mtx m, Vec3* v, float c)
+Vec3* lbVector_8000DE38(Mtx m, Vec3* v, float c)
 {
     float var1;
     float var2;
