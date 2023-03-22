@@ -66,7 +66,7 @@ TEXT_O_FILES +=\
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ef/eflib.s.o\
     $(BUILD_DIR)/asm/melee/ef/efsync.s.o\
-    $(BUILD_DIR)/asm/melee/ef/code_80061D70.s.o\
+    $(BUILD_DIR)/asm/melee/ef/ef_061D.s.o\
     $(BUILD_DIR)/asm/melee/ef/efasync.s.o\
 
 TEXT_O_FILES +=\
