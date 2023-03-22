@@ -5,6 +5,6 @@
 
 #include <dolphin/mtx/types.h>
 
-void func_801FA728(Vec3*);
+void grIceMt_801FA728(Vec3*);
 
 #endif

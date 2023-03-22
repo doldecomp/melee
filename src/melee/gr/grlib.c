@@ -293,7 +293,7 @@ bool grLib_801C9E60(Vec3* v)
     }
 
     if (id == ICEMTN) {
-        func_801FA728(v);
+        grIceMt_801FA728(v);
         return true;
     }
 
