@@ -103,7 +103,7 @@ u32 ft_800DEEE8(Fighter*, Vec2*);
 u8 ft_80087A80(HSD_GObj*);
 u8 ft_80087AA4(HSD_GObj*);
 u8 ft_80087AB4(HSD_GObj*);
-unk_t func_8004B4B0(void);
+unk_t mpColl_8004B4B0(void);
 unk_t ft_80091D58(void);
 unk_t ft_80092450(void);
 unk_t ft_8009A3C8(void);

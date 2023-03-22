@@ -124,7 +124,7 @@ s32 ftNess_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
 
     sp34.x34_flags.bits.b1234 = 5;
 
-    func_8004730C(&sp34, &sp1C); // EnvironmentCollisionCheck_NessYoYo
+    mpColl_8004730C(&sp34, &sp1C); // EnvironmentCollisionCheck_NessYoYo
 
     /// @todo Define flags.
     retval = 0;

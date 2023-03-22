@@ -1069,7 +1069,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     fp->x2225_b1 = 0;
     fp->x2225_b4 = 0;
 
-    func_8004CBF4(&fp->x6F0_collData);
+    mpColl_8004CBF4(&fp->x6F0_collData);
 
     ft_800DEEA8(gobj);
 
