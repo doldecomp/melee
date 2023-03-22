@@ -12,7 +12,7 @@
 #include "text_4.h"
 
 #include "ef/eflib.h"
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "it/code_8027CF30.h"
 #include "it/item.h"
 #include "it/item2.h"
@@ -1342,7 +1342,7 @@ void ftCommon_8007EA90(Fighter* fp, s32 arg1)
     f32 phi_f30;
     Vec3 sp10;
 
-    if (func_8016B0B4() == 0) {
+    if (gm_8016B0B4() == 0) {
         return;
     }
     if (fp->dmg.x1850_forceApplied) {

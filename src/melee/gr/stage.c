@@ -1,6 +1,6 @@
 #include "gr/stage.h"
 
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "gr/ground.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
@@ -298,13 +298,13 @@ s32 Stage_80225074(s32 arg0)
     s32 spC;
     bool tmp;
 
-    if (func_8016B238() != 0) {
+    if (gm_8016B238() != 0) {
         if (stage_info.unk8C.b0 || arg0 == 2) {
             r31 = 0x12;
         } else {
             r31 = 0x11;
         }
-    } else if (func_8016B3A0() != 0) {
+    } else if (gm_8016B3A0() != 0) {
         if (arg0 == 2) {
             r31 = 0x22;
         } else if (arg0 == 1) {

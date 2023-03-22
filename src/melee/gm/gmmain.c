@@ -1,7 +1,7 @@
 #include "text_2.h"
 
 #include "db/db_unknown_001.h"
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lbarq.h"
 #include "lb/lbaudio_ax.h"
@@ -219,7 +219,7 @@ int main(void)
     OSReport("# %s\n", lbl_803EA6C8);
     {
         struct datetime dt;
-        func_801692E8(func_8000AFBC(), &dt);
+        gm_801692E8(func_8000AFBC(), &dt);
         OSReport("# GC Calendar Year %d Month %d Day %d\n", dt.year, dt.month,
                  dt.day);
         OSReport("#             Hour %d Min %d Sec %d \n", dt.hour, dt.minute,

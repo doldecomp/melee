@@ -15,7 +15,7 @@
 #include "cm/camera.h"
 #include "ft/ft_877.h"
 #include "ft/ftlib.h"
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "it/code_80266F3C.h"
 #include "it/code_8027CF30.h"
 #include "it/item.h"
@@ -704,10 +704,10 @@ lbl_801C0E90:
 /* 801C0E98 001BDA78  50 60 07 FE */	rlwimi r0, r3, 0, 0x1f, 0x1f
 /* 801C0E9C 001BDA7C  98 1E 00 00 */	stb r0, 0(r30)
 lbl_801C0EA0:
-/* 801C0EA0 001BDA80  4B FA A3 99 */	bl func_8016B238
+/* 801C0EA0 001BDA80  4B FA A3 99 */	bl gm_8016B238
 /* 801C0EA4 001BDA84  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0EA8 001BDA88  41 82 00 A0 */	beq lbl_801C0F48
-/* 801C0EAC 001BDA8C  4B FA A0 31 */	bl func_8016AEDC
+/* 801C0EAC 001BDA8C  4B FA A0 31 */	bl gm_8016AEDC
 /* 801C0EB0 001BDA90  2C 03 04 B0 */	cmpwi r3, 0x4b0
 /* 801C0EB4 001BDA94  40 81 00 94 */	ble lbl_801C0F48
 /* 801C0EB8 001BDA98  38 9F 00 9C */	addi r4, r31, 0x9c
@@ -1915,7 +1915,7 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 3:
-                    if (func_80164840(9) &&
+                    if (gm_80164840(9) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1924,7 +1924,7 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 4:
-                    if (func_80164840(21) &&
+                    if (gm_80164840(21) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1942,7 +1942,7 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 6:
-                    if (func_80164ABC() &&
+                    if (gm_80164ABC() &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1951,7 +1951,7 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 7:
-                    if (func_80164600() &&
+                    if (gm_80164600() &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -4648,7 +4648,7 @@ static asm void func_801C5878(void)
 /* 801C5884 001C2464  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 801C5888 001C2468  93 C1 00 10 */	stw r30, 0x10(r1)
 /* 801C588C 001C246C  48 15 6A 41 */	bl func_8031C2CC
-/* 801C5890 001C2470  4B FA 5C 09 */	bl func_8016B498
+/* 801C5890 001C2470  4B FA 5C 09 */	bl gm_8016B498
 /* 801C5894 001C2474  2C 03 00 00 */	cmpwi r3, 0
 /* 801C5898 001C2478  41 82 00 20 */	beq lbl_801C58B8
 /* 801C589C 001C247C  3C 60 80 4A */	lis r3, stage_info@ha

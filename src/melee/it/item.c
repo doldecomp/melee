@@ -10,7 +10,7 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "gr/grlib.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbunknown_001.h"
@@ -31,7 +31,7 @@
 /// Check if items are enabled
 bool func_80266F3C(void)
 {
-    if (func_8016AE80() != -1)
+    if (gm_8016AE80() != -1)
         return true;
 
     return false;
@@ -126,7 +126,7 @@ void ItUnkHoldKind(HSD_GObj* item_gobj)
     case 5:
     case 6:
     case 7: {
-        int temp_r3 = func_8017E068();
+        int temp_r3 = gm_8017E068();
         if (temp_r3 >= 0)
             it->xC3C = lbl_804D6D28->x80_float[temp_r3];
     }
@@ -345,7 +345,7 @@ void func_802675A8(HSD_GObj* item_gobj)
         break;
     }
 
-    if (func_8018841C() && item_data->x18 == 1)
+    if (gm_8018841C() && item_data->x18 == 1)
         lbl_804A0C64.x60--;
 }
 
@@ -396,7 +396,7 @@ void func_802676F4(HSD_GObj* item_gobj)
         break;
     }
 
-    if (func_8018841C() && item_data->x18 == 1)
+    if (gm_8018841C() && item_data->x18 == 1)
         lbl_804A0C64.x60++;
 }
 

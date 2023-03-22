@@ -21,7 +21,7 @@
 static f32 const lbl_804D8328 = 0.0F;
 static f32 const lbl_804D832C = 1.0F;
 
-extern unk_t func_8016B0B4(void);
+extern unk_t gm_8016B0B4(void);
 
 #pragma push
 asm void ft_8007C630(HSD_GObj* gobj)
@@ -95,7 +95,7 @@ asm void ft_8007C6DC(HSD_GObj* gobj)
 /* 8007C6E8 000792C8  DB E1 00 28 */	stfd f31, 0x28(r1)
 /* 8007C6EC 000792CC  BF 61 00 14 */	stmw r27, 0x14(r1)
 /* 8007C6F0 000792D0  7C 7B 1B 78 */	mr r27, r3
-/* 8007C6F4 000792D4  48 0E E9 C1 */	bl func_8016B0B4
+/* 8007C6F4 000792D4  48 0E E9 C1 */	bl gm_8016B0B4
 /* 8007C6F8 000792D8  2C 03 00 00 */	cmpwi r3, 0
 /* 8007C6FC 000792DC  41 82 00 68 */	beq lbl_8007C764
 /* 8007C700 000792E0  83 BB 00 2C */	lwz r29, 0x2c(r27)
@@ -158,7 +158,7 @@ asm void ft_8007C77C(HSD_GObj* gobj)
 /* 8007C788 00079368  DB E1 00 48 */	stfd f31, 0x48(r1)
 /* 8007C78C 0007936C  BF 21 00 2C */	stmw r25, 0x2c(r1)
 /* 8007C790 00079370  7C 7E 1B 78 */	mr r30, r3
-/* 8007C794 00079374  48 0E E9 21 */	bl func_8016B0B4
+/* 8007C794 00079374  48 0E E9 21 */	bl gm_8016B0B4
 /* 8007C798 00079378  2C 03 00 00 */	cmpwi r3, 0
 /* 8007C79C 0007937C  41 82 01 7C */	beq lbl_8007C918
 /* 8007C7A0 00079380  83 FE 00 2C */	lwz r31, 0x2c(r30)

@@ -333,7 +333,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gm/gmmain.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/gm/code_801601C4.s.o\
+    $(BUILD_DIR)/asm/melee/gm/gm_601.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gm/gmtitle.s.o\

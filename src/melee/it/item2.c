@@ -4,7 +4,7 @@
 #include "item2.h"
 
 #include "ft/ftlib.h"
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "it/code_80266F3C.h"
 #include "it/code_8027CF30.h"
 #include "it/item.h"
@@ -998,7 +998,7 @@ HSD_GObj* func_8026BE84(BobOmbRain* bobOmbRain)
 
     HSD_GObj* bobOmbGObj = NULL;
 
-    if (func_8016B238() && bobOmbRain->x14 != 6)
+    if (gm_8016B238() && bobOmbRain->x14 != 6)
         return NULL;
 
     bobomb_id = bobOmbRain->x14;

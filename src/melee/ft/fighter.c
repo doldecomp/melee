@@ -26,7 +26,7 @@
 #include "ftCrazyHand/ftcrazyhand.h"
 #include "ftKirby/ftkirby.h"
 #include "ftMasterHand/ftMasterHand_02.h"
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "if/ifmagnify.h"
 #include "it/code_80266F3C.h"
 #include "it/item.h"
@@ -1804,7 +1804,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
             if (ft_800A2040(fp)) {
                 SET_STICKS(fp->input.x620_lstick_x, fp->input.x624_lstick_y,
                            ft_800A17E4(fp), ft_800A1874(fp));
-                if (g_debugLevel < 3 && !func_8016B41C()) {
+                if (g_debugLevel < 3 && !gm_8016B41C()) {
                     SET_STICKS(fp->input.x638_lsubStick_x,
                                fp->input.x63C_lsubStick_y, ft_800A1994(fp),
                                ft_800A1A24(fp));
@@ -1822,7 +1822,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 SET_STICKS(fp->input.x620_lstick_x, fp->input.x624_lstick_y,
                            HSD_PadRumbleData[fp->x618_player_id].nml_stickX,
                            HSD_PadRumbleData[fp->x618_player_id].nml_stickY);
-                if (g_debugLevel < 3 && func_8016B41C() == 0) {
+                if (g_debugLevel < 3 && gm_8016B41C() == 0) {
                     SET_STICKS(
                         fp->input.x638_lsubStick_x, fp->input.x63C_lsubStick_y,
                         HSD_PadRumbleData[fp->x618_player_id].nml_subStickX,
@@ -1867,7 +1867,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                     HSD_PadRumbleData[fp->x618_player_id].button;
             }
 
-            if (func_8016B0FC()) {
+            if (gm_8016B0FC()) {
                 fp->input.x650 = 0.0f;
                 if (ft_800A2040(fp)) {
                     fp->input.x65C_heldInputs =
@@ -2584,7 +2584,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!fp->x221F_flag.bits.b3 && !func_8016B1C4()) {
+    if (!fp->x221F_flag.bits.b3 && !gm_8016B1C4()) {
         ftColl_8007BA0C(gobj);
         if (fp->x221E_flag.bits.b6) {
             ftColl_80078A2C(gobj);

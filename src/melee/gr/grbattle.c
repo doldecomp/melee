@@ -1,6 +1,6 @@
 #include "gr/grbattle.h"
 
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
@@ -108,8 +108,7 @@ static void func_80219CA4(void)
     stage_info.unk8C.b5 = 1;
 
     func_80219D84(0);
-    if (func_8016B3D8() || Stage_80225194() == 0x111 ||
-        Stage_80225194() == 0xF5)
+    if (gm_8016B3D8() || Stage_80225194() == 0x111 || Stage_80225194() == 0xF5)
     {
         func_80219D84(5);
     } else {

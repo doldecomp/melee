@@ -4,7 +4,7 @@
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
 #include "ftKirby/ftkirby.h"
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
 #include "pl/pl_unknown_001.h"
@@ -941,7 +941,7 @@ void Player_SetModelScale(int slot, f32 model_scale)
 
 s32 Player_80033BB8(int slot)
 {
-    return func_8016C5C0(slot);
+    return gm_8016C5C0(slot);
 }
 
 s32 Player_GetStocks(int slot)
@@ -1373,7 +1373,7 @@ void Player_UpdateKOsBySlot(int slot, bool bool_arg, int other_slot)
         if (slot == other_slot) {
             func_802F6D10(other_slot);
         } else {
-            if (func_8016B168()) {
+            if (gm_8016B168()) {
                 Player_CheckSlot(slot);
                 Player_CheckSlot(other_slot);
                 other_player = &player_slots[other_slot];
@@ -1417,7 +1417,7 @@ void Player_UpdateMatchFrameCount(int slot, bool condition)
     player = &player_slots[slot];
 
     if ((condition == 0) && (player->match_frame_count + 0x10000) == 0xffff)
-        player->match_frame_count = func_8016AEDC();
+        player->match_frame_count = gm_8016AEDC();
 }
 
 uint Player_GetSuicideCount(int slot)

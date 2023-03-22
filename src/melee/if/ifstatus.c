@@ -3,7 +3,7 @@
 #include "text_3.h"
 #include "text_4.h"
 
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "if/ifall.h"
 #include "if/ifstock.h"
 #include "lb/lbarchive.h"
@@ -1478,7 +1478,7 @@ lbl_802F5CC4:
 /* 802F5CC4 002F28A4  A8 1F 00 0C */	lha r0, 0xc(r31)
 /* 802F5CC8 002F28A8  2C 00 00 00 */	cmpwi r0, 0
 /* 802F5CCC 002F28AC  40 82 01 00 */	bne lbl_802F5DCC
-/* 802F5CD0 002F28B0  4B E7 51 75 */	bl func_8016AE44
+/* 802F5CD0 002F28B0  4B E7 51 75 */	bl gm_8016AE44
 /* 802F5CD4 002F28B4  88 BF 00 08 */	lbz r5, 8(r31)
 /* 802F5CD8 002F28B8  7C A0 07 74 */	extsb r0, r5
 /* 802F5CDC 002F28BC  1C 80 00 0E */	mulli r4, r0, 0xe
@@ -2016,7 +2016,7 @@ lbl_802F6314:
 /* 802F6314 002F2EF4  38 7C 00 00 */	addi r3, r28, 0
 /* 802F6318 002F2EF8  38 80 00 00 */	li r4, 0
 /* 802F631C 002F2EFC  38 A0 00 00 */	li r5, 0
-/* 802F6320 002F2F00  4B E7 28 15 */	bl func_80168B34
+/* 802F6320 002F2F00  4B E7 28 15 */	bl gm_80168B34
 /* 802F6324 002F2F04  C0 02 E0 B4 */	lfs f0, lbl_804DDA94(r2)
 /* 802F6328 002F2F08  7F 43 D3 78 */	mr r3, r26
 /* 802F632C 002F2F0C  EC 20 08 2A */	fadds f1, f0, f1
@@ -2111,7 +2111,7 @@ lbl_802F646C:
 /* 802F646C 002F304C  7F E3 FB 78 */	mr r3, r31
 /* 802F6470 002F3050  4B D3 BF AD */	bl Player_GetPlayerSlotType
 /* 802F6474 002F3054  54 7A 06 3E */	clrlwi r26, r3, 0x18
-/* 802F6478 002F3058  4B E7 4C F1 */	bl func_8016B168
+/* 802F6478 002F3058  4B E7 4C F1 */	bl gm_8016B168
 /* 802F647C 002F305C  54 7B 06 3E */	clrlwi r27, r3, 0x18
 /* 802F6480 002F3060  38 7F 00 00 */	addi r3, r31, 0
 /* 802F6484 002F3064  4B D3 CE ED */	bl Player_GetTeam
@@ -2122,8 +2122,8 @@ lbl_802F646C:
 /* 802F6498 002F3078  38 9C 00 00 */	addi r4, r28, 0
 /* 802F649C 002F307C  38 BB 00 00 */	addi r5, r27, 0
 /* 802F64A0 002F3080  38 DA 00 00 */	addi r6, r26, 0
-/* 802F64A4 002F3084  4B E6 A3 B1 */	bl func_80160854
-/* 802F64A8 002F3088  4B E6 A4 C1 */	bl func_80160968
+/* 802F64A4 002F3084  4B E6 A3 B1 */	bl gm_80160854
+/* 802F64A8 002F3088  4B E6 A4 C1 */	bl gm_80160968
 /* 802F64AC 002F308C  28 1E 00 00 */	cmplwi r30, 0
 /* 802F64B0 002F3090  90 61 00 20 */	stw r3, 0x20(r1)
 /* 802F64B4 002F3094  40 82 00 0C */	bne lbl_802F64C0
@@ -2181,7 +2181,7 @@ asm void func_802F6508(s32)
 /* 802F6534 002F3114  88 0D B6 C0 */	lbz r0, lbl_804D6D60(r13)
 /* 802F6538 002F3118  7C 00 F8 00 */	cmpw r0, r31
 /* 802F653C 002F311C  40 81 01 00 */	ble lbl_802F663C
-/* 802F6540 002F3120  4B E7 49 11 */	bl func_8016AE50
+/* 802F6540 002F3120  4B E7 49 11 */	bl gm_8016AE50
 /* 802F6544 002F3124  88 03 00 02 */	lbz r0, 2(r3)
 /* 802F6548 002F3128  7C 7D 1B 78 */	mr r29, r3
 /* 802F654C 002F312C  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
@@ -2219,7 +2219,7 @@ asm void func_802F6508(s32)
 /* 802F65CC 002F31AC  88 1D 00 03 */	lbz r0, 3(r29)
 /* 802F65D0 002F31B0  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 802F65D4 002F31B4  41 82 00 18 */	beq lbl_802F65EC
-/* 802F65D8 002F31B8  4B E7 4C 61 */	bl func_8016B238
+/* 802F65D8 002F31B8  4B E7 4C 61 */	bl gm_8016B238
 /* 802F65DC 002F31BC  2C 03 00 00 */	cmpwi r3, 0
 /* 802F65E0 002F31C0  40 82 00 0C */	bne lbl_802F65EC
 /* 802F65E4 002F31C4  7F E3 FB 78 */	mr r3, r31
@@ -2423,7 +2423,7 @@ void func_802F6948(s32 player_idx)
     Placeholder_8016AE50_ret_val* small_thing;
     HudFlags* hud_player_flags;
 
-    small_thing = func_8016AE50();
+    small_thing = gm_8016AE50();
     hud_player = &lbl_804A10C8.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -2442,14 +2442,14 @@ void func_802F69C0(s32 player_idx, s32 arg1)
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
 
-    big_thing = func_8016AE38();
+    big_thing = gm_8016AE38();
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0)) {
         func_802F7C30(arg1);
     }
 
-    big_thing = func_8016AE38();
+    big_thing = gm_8016AE38();
     big_thing->unkD = player_idx;
-    small_thing = func_8016AE50();
+    small_thing = gm_8016AE50();
     hud_player = &lbl_804A10C8.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -2464,7 +2464,7 @@ void func_802F69C0(s32 player_idx, s32 arg1)
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Weird check on a known function addr
@@ -2482,9 +2482,9 @@ void func_802F6AF8(s32 player_idx)
     Placeholder_8016AE50_ret_val* small_thing;
     HudFlags* hud_player_flags;
 
-    big_thing = func_8016AE38();
+    big_thing = gm_8016AE38();
     big_thing->unkD = player_idx;
-    small_thing = func_8016AE50();
+    small_thing = gm_8016AE50();
     hud_player = &lbl_804A10C8.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -2499,7 +2499,7 @@ void func_802F6AF8(s32 player_idx)
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Weird check on a known function addr
@@ -2517,9 +2517,9 @@ void func_802F6C04(s32 player_idx)
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
 
-    big_thing = func_8016AE38();
+    big_thing = gm_8016AE38();
     big_thing->unkD = player_idx;
-    small_thing = func_8016AE50();
+    small_thing = gm_8016AE50();
     hud_player = &lbl_804A10C8.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -2534,7 +2534,7 @@ void func_802F6C04(s32 player_idx)
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Weird check on a known function addr
@@ -2552,9 +2552,9 @@ void func_802F6D10(s32 player_idx)
     Placeholder_8016AE50_ret_val* small_thing;
     HudFlags* hud_player_flags;
 
-    big_thing = func_8016AE38();
+    big_thing = gm_8016AE38();
     big_thing->unkD = player_idx;
-    small_thing = func_8016AE50();
+    small_thing = gm_8016AE50();
     hud_player = &lbl_804A10C8.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -2569,7 +2569,7 @@ void func_802F6D10(s32 player_idx)
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Weird check on a known function addr
@@ -2738,7 +2738,7 @@ asm void func_802F7034(void)
 /* 802F703C 002F3C1C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 802F7040 002F3C20  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 802F7044 002F3C24  7C 7F 1B 78 */	mr r31, r3
-/* 802F7048 002F3C28  4B E7 3D F1 */	bl func_8016AE38
+/* 802F7048 002F3C28  4B E7 3D F1 */	bl gm_8016AE38
 /* 802F704C 002F3C2C  80 83 00 10 */	lwz r4, 0x10(r3)
 /* 802F7050 002F3C30  2C 04 00 00 */	cmpwi r4, 0
 /* 802F7054 002F3C34  41 82 00 0C */	beq lbl_802F7060

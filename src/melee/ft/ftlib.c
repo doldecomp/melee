@@ -12,7 +12,7 @@
 #include "ft/inlines.h"
 #include "ftGameWatch/ftgamewatch.h"
 #include "ftKirby/ftkirby.h"
-#include "gm/code_801601C4.h"
+#include "gm/gm_601.h"
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 #include "pl/pl_unknown_001.h"
@@ -98,7 +98,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
                 continue;
 
             // Skip if same team
-            if (func_8016B168() && fp != NULL &&
+            if (gm_8016B168() && fp != NULL &&
                 cur_fp->x61B_team == fp->x61B_team)
                 continue;
 
@@ -144,7 +144,7 @@ HSD_GObj* ftLib_8008627C(Vec3* v, HSD_GObj* gobj)
 
         cur_fp = cur->user_data;
         // skip if same team
-        if (cur_fp->x221F_flag.bits.b3 || (func_8016B168() && fp != NULL &&
+        if (cur_fp->x221F_flag.bits.b3 || (gm_8016B168() && fp != NULL &&
                                            cur_fp->x61B_team == fp->x61B_team))
         {
             continue;
@@ -191,7 +191,7 @@ HSD_GObj* ftLib_80086368(Vec3* v, HSD_GObj* gobj, f32 facing_dir)
             continue;
 
         cur_fp = cur->user_data;
-        if (cur_fp->x221F_flag.bits.b3 || (func_8016B168() && fp != NULL &&
+        if (cur_fp->x221F_flag.bits.b3 || (gm_8016B168() && fp != NULL &&
                                            cur_fp->x61B_team == fp->x61B_team))
         {
             continue;
@@ -250,7 +250,7 @@ f32 ftLib_800864A8(Vec3* v, HSD_GObj* gobj)
         {
             Fighter* cur_fp = cur->user_data;
             if (cur_fp->x221F_flag.bits.b3 ||
-                (func_8016B168() && fp != NULL &&
+                (gm_8016B168() && fp != NULL &&
                  cur_fp->x61B_team == fp->x61B_team))
             {
                 continue;
@@ -972,7 +972,7 @@ void ftLib_80087610(u8 arg0)
 {
     u8 i;
     for (i = 0; i <= 25; i++) {
-        if (func_80164840(i)) {
+        if (gm_80164840(i)) {
             ftKirby_800EED50(Player_800325C8(i, 0), arg0);
             if ((u8) (i - 18) <= 1)
                 ftKirby_800EED50(Player_800325C8(i, 1), arg0);
