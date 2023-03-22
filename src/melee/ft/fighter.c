@@ -15,10 +15,8 @@
 #include "ftdrawcommon.h"
 #include "ftlib.h"
 #include "ftparts.h"
-#include "gm_1A36.h"
 #include "inlines.h"
 #include "types.h"
-#include "un_2FC9.h"
 
 #include "cm/camera.h"
 #include "db/db_2253.h"
@@ -27,6 +25,7 @@
 #include "ftKirby/ftkirby.h"
 #include "ftMasterHand/ftMasterHand_02.h"
 #include "gm/gm_1601.h"
+#include "gm/gm_1A36.h"
 #include "if/ifmagnify.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -39,6 +38,7 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
+#include "un/un_2FC9.h"
 
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>

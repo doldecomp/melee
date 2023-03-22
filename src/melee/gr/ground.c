@@ -10,7 +10,6 @@
 #include "grstadium.h"
 #include "grzebes.h"
 #include "stage.h"
-#include "un_2FC9.h"
 
 #include "cm/camera.h"
 #include "ft/ft_0877.h"
@@ -28,6 +27,7 @@
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
+#include "un/un_2FC9.h"
 
 #include <placeholder.h>
 #include <trigf.h>

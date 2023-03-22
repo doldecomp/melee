@@ -1,15 +1,12 @@
-/** @file
- * @todo Rename to @c ftUnk1.c
- */
 #include <platform.h>
 
-#include "ft/ft_07C6.h"
+#include "ft_07C6.h"
 
-#include "gm_1A36.h"
+#include "ftcoll.h"
+#include "ftlib.h"
 
 #include "ef/efsync.h"
-#include "ft/ftcoll.h"
-#include "ft/ftlib.h"
+#include "gm/gm_1A36.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"

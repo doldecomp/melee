@@ -9,7 +9,6 @@
 #include "ftcoll.h"
 #include "ftlib.h"
 #include "ftparts.h"
-#include "un_2FC9.h"
 
 #include "ef/eflib.h"
 #include "gm/gm_1601.h"
@@ -19,6 +18,7 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
+#include "un/un_2FC9.h"
 
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>

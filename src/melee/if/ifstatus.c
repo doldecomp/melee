@@ -1,15 +1,15 @@
 #include "if/ifstatus.h"
 
-#include "mn_2295.h"
-#include "un_2FC9.h"
+#include "ifall.h"
+#include "ifstock.h"
 
 #include "gm/gm_1601.h"
-#include "if/ifall.h"
-#include "if/ifstock.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "mn/mn_2295.h"
+#include "un/un_2FC9.h"
 
 #include <placeholder.h>
 #include <dolphin/os/os.h>

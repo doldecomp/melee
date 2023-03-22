@@ -1,10 +1,11 @@
-#include "gr/grlib.h"
+#include "grlib.h"
+
+#include "grbigblue.h"
+#include "gricemt.h"
+#include "ground.h"
+#include "grrcruise.h"
 
 #include "cm/camera.h"
-#include "gr/grbigblue.h"
-#include "gr/gricemt.h"
-#include "gr/ground.h"
-#include "gr/grrcruise.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00F9.h"
 
