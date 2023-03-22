@@ -118,7 +118,7 @@ void func_801E31C0(HSD_GObj* gobj)
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;
-    func_801C8858(Ground_801C3FA4(gobj, 1), 0x20000000);
+    grMaterial_801C8858(Ground_801C3FA4(gobj, 1), 0x20000000);
 }
 
 bool func_801E3224(HSD_GObj* arg0)

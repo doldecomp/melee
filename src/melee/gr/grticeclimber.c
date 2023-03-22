@@ -186,7 +186,7 @@ asm void lbl_80221208(void){
 /* 80221260 0021DE40  38 60 01 36 */	li r3, 0x136
 /* 80221264 0021DE44  4B FA 41 89 */	bl Ground_801C53EC
 /* 80221268 0021DE48  7F C3 F3 78 */	mr r3, r30
-/* 8022126C 0021DE4C  4B FA 7A 71 */	bl func_801C8CDC
+/* 8022126C 0021DE4C  4B FA 7A 71 */	bl grMaterial_801C8CDC
 /* 80221270 0021DE50  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 80221274 0021DE54  83 E1 00 34 */	lwz r31, 0x34(r1)
 /* 80221278 0021DE58  83 C1 00 30 */	lwz r30, 0x30(r1)
@@ -211,14 +211,14 @@ void func_80221288(HSD_GObj* ground_gobj)
     for (i = 0; lbl_803E8B5C[i] != -1; i++) {
         enum_t result_0 = Ground_801C33C0(2, lbl_803E8B5C[i]);
         if (result_0 != -1) {
-            bool result_1 =
-                func_801C8CFC(0, 0, gp, Ground_801C3FA4(ground_gobj, result_0),
-                              0, lbl_80221208, 0);
+            bool result_1 = grMaterial_801C8CFC(
+                0, 0, gp, Ground_801C3FA4(ground_gobj, result_0), 0,
+                lbl_80221208, 0);
 
             if (result_1) {
-                func_801C8DE0(result_1, -1.0F, 0.0F, 0.0F, 1.0F, 0.0F, 0.0F,
-                              4.0F);
-                func_801C8E08(result_1);
+                grMaterial_801C8DE0(result_1, -1.0F, 0.0F, 0.0F, 1.0F, 0.0F,
+                                    0.0F, 4.0F);
+                grMaterial_801C8E08(result_1);
             }
         }
     }

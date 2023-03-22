@@ -986,7 +986,7 @@ lbl_801C1568:
 /* 801C1618 001BE1F8  90 1A 00 34 */	stw r0, 0x34(r26)
 /* 801C161C 001BE1FC  90 1A 00 38 */	stw r0, 0x38(r26)
 /* 801C1620 001BE200  90 1A 00 3C */	stw r0, 0x3c(r26)
-/* 801C1624 001BE204  48 00 7F A1 */	bl func_801C95C4
+/* 801C1624 001BE204  48 00 7F A1 */	bl grMaterial_801C95C4
 /* 801C1628 001BE208  48 00 4C FD */	bl grDatFiles_801C6324
 /* 801C162C 001BE20C  7C 77 1B 79 */	or. r23, r3, r3
 /* 801C1630 001BE210  40 82 00 14 */	bne lbl_801C1644
@@ -1325,7 +1325,7 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
     for (i = 0; i < 8; i++)
         gp->x20[i] = -1;
 
-    func_801C95C4(temp_r30);
+    grMaterial_801C95C4(temp_r30);
     temp_r29 = HSD_JObjLoadJoint(arg0);
     Ground_801C34AC(arg1, temp_r29, arg0);
     phi_f0 = Ground_801C0498();
@@ -1368,7 +1368,7 @@ static void Ground_801C1CD0(HSD_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     Ground* gp = gobj->user_data;
     HSD_JObjAnimAll(jobj);
-    func_801C9698(gobj);
+    grMaterial_801C9698(gobj);
     lbl_804D64AC += 1;
 
     if (gp->x8_callback != NULL)
