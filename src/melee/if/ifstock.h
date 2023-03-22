@@ -3,6 +3,6 @@
 
 #include <platform.h>
 
-void func_802F98E8(void);
+void ifStock_802F98E8(void);
 
 #endif

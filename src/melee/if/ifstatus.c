@@ -2236,19 +2236,19 @@ lbl_802F65EC:
 lbl_802F6608:
 /* 802F6608 002F31E8  57 E3 06 3E */	clrlwi r3, r31, 0x18
 /* 802F660C 002F31EC  38 80 00 00 */	li r4, 0
-/* 802F6610 002F31F0  48 00 32 D9 */	bl func_802F98E8
+/* 802F6610 002F31F0  48 00 32 D9 */	bl ifStock_802F98E8
 /* 802F6614 002F31F4  48 00 00 28 */	b lbl_802F663C
 lbl_802F6618:
 /* 802F6618 002F31F8  28 03 00 02 */	cmplwi r3, 2
 /* 802F661C 002F31FC  40 82 00 14 */	bne lbl_802F6630
 /* 802F6620 002F3200  57 E3 06 3E */	clrlwi r3, r31, 0x18
 /* 802F6624 002F3204  38 80 00 02 */	li r4, 2
-/* 802F6628 002F3208  48 00 32 C1 */	bl func_802F98E8
+/* 802F6628 002F3208  48 00 32 C1 */	bl ifStock_802F98E8
 /* 802F662C 002F320C  48 00 00 10 */	b lbl_802F663C
 lbl_802F6630:
 /* 802F6630 002F3210  57 E3 06 3E */	clrlwi r3, r31, 0x18
 /* 802F6634 002F3214  38 80 00 01 */	li r4, 1
-/* 802F6638 002F3218  48 00 32 B1 */	bl func_802F98E8
+/* 802F6638 002F3218  48 00 32 B1 */	bl ifStock_802F98E8
 lbl_802F663C:
 /* 802F663C 002F321C  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 802F6640 002F3220  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -2374,7 +2374,7 @@ void ifStatus_802F6788(s32 player_idx)
         func_80390228(player_hud->next);
         player_hud->next = NULL;
     }
-    func_802FB650(player_idx & 0xFF);
+    ifStock_802FB650(player_idx & 0xFF);
 }
 
 void ifStatus_802F6804(void)
@@ -2393,7 +2393,7 @@ void ifStatus_802F6804(void)
             func_80390228(v->next);
             v->next = NULL;
         }
-        func_802FB650((s8) i & 0xFF);
+        ifStock_802FB650((s8) i & 0xFF);
         i++;
     } while (i < 6);
 }
@@ -2597,7 +2597,7 @@ void ifStatus_802F6E3C(s32 player_num)
     if (player->next != NULL) {
         func_80390CAC(player->next);
     }
-    func_802FB6AC(player_num);
+    ifStock_802FB6AC(player_num);
 }
 
 extern Thing_803F9628 lbl_803F9628;
