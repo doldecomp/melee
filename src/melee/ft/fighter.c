@@ -2208,8 +2208,8 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                        usually 1. last factor was 1 when I looked*/
                     /*effective friction - ground multiplier is
                        usually 1. last factor was 1 when I looked*/
-                    ft_81B_GetGroundFrictionMultiplier(fp) *
-                        pAttr->gr_friction * p_ftCommonData->x200);
+                    ft_GetGroundFrictionMultiplier(fp) * pAttr->gr_friction *
+                        p_ftCommonData->x200);
 
                 // set knockback velocity to ground_kb_vel * surfaceTangent
                 p_kb_vel->x = pNormal->y * fp->xF0_ground_kb_vel;
@@ -2261,8 +2261,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                     fp,
                     /* effectiveFriction - the last constant variable differs
                        from the one for the knockback friction above*/
-                    ft_81B_GetGroundFrictionMultiplier(fp) *
-                        pAttr->gr_friction *
+                    ft_GetGroundFrictionMultiplier(fp) * pAttr->gr_friction *
                         p_ftCommonData->x3EC_shieldGroundFrictionMultiplier);
 
                 /* effectiveFriction - the last constant variable differs from

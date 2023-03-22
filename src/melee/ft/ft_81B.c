@@ -3823,7 +3823,7 @@ asm bool ft_80084A18(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm f32 ft_81B_GetGroundFrictionMultiplier(Fighter* fp)
+asm f32 ft_GetGroundFrictionMultiplier(Fighter* fp)
 {
     // clang-format off
     nofralloc
