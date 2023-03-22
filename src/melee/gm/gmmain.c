@@ -185,7 +185,7 @@ int main(void)
     lbArq_80014D2C();
     lb_8001C5BC();
     lb_8001D21C();
-    func_8001E290();
+    lbSnap_8001E290();
     gmMainLib_8015FCC0();
     func_8001F87C();
     func_803A6048(0xC000);

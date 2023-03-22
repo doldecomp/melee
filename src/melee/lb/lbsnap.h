@@ -3,6 +3,6 @@
 
 #include <platform.h>
 
-void func_8001E290(void);
+void lbSnap_8001E290(void);
 
 #endif
