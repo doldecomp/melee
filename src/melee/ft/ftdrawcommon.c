@@ -80,7 +80,7 @@ MtxPtr ftDrawCommmon_8008051C(HSD_GObj* arg1, MtxPtr arg2)
     sp54.y = temp_f31;
     sp54.x = temp_f31;
 
-    if (func_80087074(arg1, &sp54)) {
+    if (ftLib_80087074(arg1, &sp54)) {
         temp_r31 = HSD_CObjGetCurrent()->view_mtx;
         PSMTXIdentity(sp18);
 
@@ -479,7 +479,7 @@ lbl_80080AD0:
 /* 80080B10 0007D6F0  D3 E1 00 38 */	stfs f31, 0x38(r1)
 /* 80080B14 0007D6F4  D3 E1 00 34 */	stfs f31, 0x34(r1)
 /* 80080B18 0007D6F8  D3 E1 00 30 */	stfs f31, 0x30(r1)
-/* 80080B1C 0007D6FC  48 00 65 59 */	bl func_80087074
+/* 80080B1C 0007D6FC  48 00 65 59 */	bl ftLib_80087074
 /* 80080B20 0007D700  2C 03 00 00 */	cmpwi r3, 0
 /* 80080B24 0007D704  41 82 00 50 */	beq lbl_80080B74
 /* 80080B28 0007D708  48 2E 97 61 */	bl HSD_CObjGetCurrent
@@ -785,7 +785,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             sp30.y = temp_f31;
             sp30.x = temp_f31;
             phi_r29 = NULL;
-            if (func_80087074(gobj, temp_r4) != 0) {
+            if (ftLib_80087074(gobj, temp_r4) != 0) {
                 temp_r29 = HSD_CObjGetCurrent()->view_mtx;
 
                 PSMTXIdentity(sp48);
@@ -889,7 +889,7 @@ lbl_80080CCC:
 /* 80080D10 0007D8F0  D3 E1 00 30 */	stfs f31, 0x30(r1)
 /* 80080D14 0007D8F4  D3 E1 00 2C */	stfs f31, 0x2c(r1)
 /* 80080D18 0007D8F8  D3 E1 00 28 */	stfs f31, 0x28(r1)
-/* 80080D1C 0007D8FC  48 00 63 59 */	bl func_80087074
+/* 80080D1C 0007D8FC  48 00 63 59 */	bl ftLib_80087074
 /* 80080D20 0007D900  2C 03 00 00 */	cmpwi r3, 0
 /* 80080D24 0007D904  41 82 00 50 */	beq lbl_80080D74
 /* 80080D28 0007D908  48 2E 95 61 */	bl HSD_CObjGetCurrent
@@ -1008,7 +1008,7 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
             sp30.y = temp_f31;
             sp30.x = temp_f31;
 
-            if (func_80087074(gobj, &sp30) != 0) {
+            if (ftLib_80087074(gobj, &sp30) != 0) {
                 temp_r28 = HSD_CObjGetCurrent()->view_mtx;
                 PSMTXIdentity(sp40);
 
@@ -1061,7 +1061,7 @@ asm void ftDrawCommmon_80080E18(HSD_GObj*, long)
 /* 80080E38 0007DA18  54 00 E7 FF */	rlwinm. r0, r0, 0x1c, 0x1f, 0x1f
 /* 80080E3C 0007DA1C  40 82 02 C8 */	bne lbl_80081104
 /* 80080E40 0007DA20  7F 83 E3 78 */	mr r3, r28
-/* 80080E44 0007DA24  48 00 5C 49 */	bl func_80086A8C
+/* 80080E44 0007DA24  48 00 5C 49 */	bl ftLib_80086A8C
 /* 80080E48 0007DA28  2C 03 00 00 */	cmpwi r3, 0
 /* 80080E4C 0007DA2C  41 82 02 B8 */	beq lbl_80081104
 /* 80080E50 0007DA30  4B FB 02 11 */	bl func_80031060

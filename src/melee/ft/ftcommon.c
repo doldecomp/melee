@@ -925,7 +925,7 @@ void ftCommon_8007DD7C(HSD_GObj* gobj, Vec3* v)
     phi_r28 = false;
     for (cur = lbl_804D782C->x20_fighters; cur != NULL; cur = cur->next) {
         temp_r31 = &arg_ft->x2C4;
-        if (cur != gobj && !func_80086FD4(cur, gobj)) {
+        if (cur != gobj && !ftLib_80086FD4(cur, gobj)) {
             cur_ft = cur->user_data;
             if (cur_ft->x221F_flag.bits.b3 || cur_ft->ground_or_air != 0 ||
                 cur_ft->x1A58_interactedFighter != NULL ||
@@ -1361,7 +1361,7 @@ void ftCommon_8007EA90(Fighter* fp, s32 arg1)
     } else {
         phi_f31 = M_PI / 2;
         phi_f30 = p_ftCommonData->x5C0;
-        func_800866DC(fp->gobj, &sp10);
+        ftLib_800866DC(fp->gobj, &sp10);
     }
     temp_r31 = func_802E5F8C(fp->gobj, &sp10, arg1, 1, phi_f31, phi_f30);
     if (fp->dmg.x18c4_source_ply != 6) {

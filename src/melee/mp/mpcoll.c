@@ -42,11 +42,11 @@ void func_80041C8C(CollData* cd)
         if (!(cd->x4_vec.x < 45000.0f) || !(cd->x4_vec.x > -45000.0f) ||
             !(cd->x4_vec.y < 45000.0f) || !(cd->x4_vec.y > -45000.0f))
         {
-            if (func_80086960(cd->x0_gobj) != 0) {
+            if (ftLib_80086960(cd->x0_gobj) != 0) {
                 OSReport(
                     "%s:%d: Error: mpCollPrev() pos(%f,%f) player=%d ms=%d\n",
-                    "mpcoll.c", 203, func_80086BE0(cd->x0_gobj),
-                    func_800874BC(cd->x0_gobj), cd->x4_vec.x, cd->x4_vec.y);
+                    "mpcoll.c", 203, ftLib_80086BE0(cd->x0_gobj),
+                    ftLib_800874BC(cd->x0_gobj), cd->x4_vec.x, cd->x4_vec.y);
             } else {
                 OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n",
                          "mpcoll.c", 212, cd->x0_gobj->classifier,
@@ -707,13 +707,13 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2)
         if (!(arg0->x4_vec.x < 45000.0f) || !(arg0->x4_vec.x > -45000.0f) ||
             !(arg0->x4_vec.y < 45000.0f) || !(arg0->x4_vec.y > -45000.0f))
         {
-            if (func_80086960(arg0->x0_gobj)) {
+            if (ftLib_80086960(arg0->x0_gobj)) {
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "
                          "ply=%d ms=%d\n",
                          "mpcoll.c", 1350, arg0->x1C_vec.x, arg0->x1C_vec.y,
                          arg0->x4_vec.x, arg0->x4_vec.y,
-                         func_80086BE0(arg0->x0_gobj),
-                         func_800874BC(arg0->x0_gobj));
+                         ftLib_80086BE0(arg0->x0_gobj),
+                         ftLib_800874BC(arg0->x0_gobj));
             } else {
                 s32 gobjid = arg0->x0_gobj->classifier;
                 OSReport("%s:%d: Error: mpCollEnd() last(%f,%f) pos(%f,%f) "

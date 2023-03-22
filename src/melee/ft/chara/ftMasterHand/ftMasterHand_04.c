@@ -83,10 +83,10 @@ static void ftMasterHand_801511FC(HSD_GObj* gobj)
 
     switch (fp->mv.mh.unk4.x0) {
     case 0: {
-        HSD_GObj* nearest_enemy = func_8008627C(&fp->cur_pos, gobj);
+        HSD_GObj* nearest_enemy = ftLib_8008627C(&fp->cur_pos, gobj);
 
         if (nearest_enemy != NULL)
-            func_8002E6FC((s32) func_80086BE0(nearest_enemy));
+            func_8002E6FC((s32) ftLib_80086BE0(nearest_enemy));
         else
             func_8002E6FC(0);
 

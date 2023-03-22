@@ -174,12 +174,12 @@ void func_8015C208(HSD_GObj* arg0, Vec3* arg1)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     HSD_GObj* gobj = func_8015C244(arg0, &fp->cur_pos);
-    func_80086644(gobj, arg1);
+    ftLib_80086644(gobj, arg1);
 }
 
 HSD_GObj* func_8015C244(HSD_GObj* arg0, Vec3* arg1)
 {
-    return func_8008627C(arg1, arg0);
+    return ftLib_8008627C(arg1, arg0);
 }
 
 bool func_8015C270(void)
@@ -249,7 +249,7 @@ HSD_GObj* func_8015C3E8(FighterKind kind)
 #endif
 
     for (cur = lbl_804D782C->x20_fighters; cur; cur = cur->next) {
-        if (kind == func_800872A4(cur))
+        if (kind == ftLib_800872A4(cur))
             return cur;
     }
 
@@ -267,7 +267,7 @@ enum_t func_8015C44C(FighterKind kind)
 
     if (gobj != NULL) {
         // DataOffset_MotionStateLoad
-        return func_80086C0C(gobj);
+        return ftLib_80086C0C(gobj);
     } else {
         return ftCo_MS_DeadDown;
     }
@@ -441,7 +441,7 @@ void func_8015CA6C_inline(s32 arg0)
 {
     HSD_GObj* ch_gobj = func_8015C3E8(FTKIND_CREZYH);
     if (ch_gobj)
-        func_80086A4C(ch_gobj, arg0);
+        ftLib_80086A4C(ch_gobj, arg0);
 }
 
 void func_8015CA6C(s32 arg0)
@@ -456,7 +456,7 @@ void func_8015CA6C(s32 arg0)
     {
         HSD_GObj* mh_gobj = func_8015C3E8(FTKIND_MASTERH);
         if (mh_gobj)
-            func_80086A4C(mh_gobj, arg0);
+            ftLib_80086A4C(mh_gobj, arg0);
     }
 
     func_8015CA6C_inline(arg0);

@@ -197,7 +197,7 @@ void ftMars_801365A8(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     s32 result;
     if (!fp->x2219_flag.bits.b0) {
-        result = func_800872A4(gobj);
+        result = ftLib_800872A4(gobj);
         switch (result) {
         case 0x12:
             ef_Spawn(0x4F2, gobj, fp->ft_bones->x0_jobj);
@@ -222,7 +222,7 @@ void ftMars_8013666C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     s32 result;
     if (!fp->x2219_flag.bits.b0) {
-        result = func_800872A4(gobj);
+        result = ftLib_800872A4(gobj);
         switch (result) {
         case 0x12:
             ef_Spawn(0x4F3, gobj, fp->ft_bones->x0_jobj);

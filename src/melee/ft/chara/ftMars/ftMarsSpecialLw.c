@@ -209,7 +209,7 @@ void ftMars_80138E68(HSD_GObj* gobj)
     /// @todo required for some reason
     fp->mv.ms.speciallw.x0;
 
-    if (sv1 > 0 && func_800872A4(gobj) == FTKIND_EMBLEM) {
+    if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
 #ifndef MUST_MATCH
         for (idx = 0; idx < 4; idx++) {
@@ -254,7 +254,7 @@ void ftMars_80138F14(HSD_GObj* gobj)
     /// @todo required for some reason
     fp->mv.ms.speciallw.x0;
 
-    if (sv1 > 0 && func_800872A4(gobj) == FTKIND_EMBLEM) {
+    if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
 /// @todo register swap:
 #ifndef MUST_MATCH
         for (idx = 0; idx < 4; idx++) {
@@ -385,7 +385,7 @@ void ftMars_80139140(HSD_GObj* gobj)
         ft_2 = gobj->user_data;
         ft_2->x2219_flag; // required for regalloc
         if (ft_2->x2219_flag.bits.b0 == 0) {
-            switch (func_800872A4(gobj)) {
+            switch (ftLib_800872A4(gobj)) {
             case 0x12:
                 ef_Spawn(0x4F1, gobj,
                          ft_2->ft_bones[ftParts_8007500C(ft_2, 0x23)].x0_jobj,

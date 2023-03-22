@@ -82,7 +82,7 @@ void ftMasterHand_80153160(HSD_GObj* gobj)
             temp_r29 = ftData->ext_attr;
             ftMasterHand_801533CC(gobj);
 
-            if (func_80087120(gobj) > temp_r29->xEC)
+            if (ftLib_80087120(gobj) > temp_r29->xEC)
                 fp->mv.mh.unk0.x54 = temp_r29->xF0;
             else
                 fp->mv.mh.unk0.x54 = 1;
@@ -187,7 +187,7 @@ void ftMasterHand_801533CC(HSD_GObj* arg0)
     attr = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(arg0, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(arg0);
-    if (func_80087120(arg0) > attr->xEC) {
+    if (ftLib_80087120(arg0) > attr->xEC) {
         ftAnim_SetAnimRate(arg0, attr->xF4);
     }
     fp->x80_self_vel.x = 0.0f;
@@ -203,7 +203,7 @@ static inline void lbl_8015346C_inline(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* attr = ft30->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
-    if (func_80087120(gobj) > attr->xEC) {
+    if (ftLib_80087120(gobj) > attr->xEC) {
         ftAnim_SetAnimRate(gobj, attr->xF4);
     }
     ft30->x80_self_vel.x = 0.0f;
@@ -283,7 +283,7 @@ void ftMasterHand_8015364C(HSD_GObj* arg0, HSD_JObj* arg1, f32 arg2, f32 arg3)
     sp28_leek.x += arg2;
     sp28_leek.y += arg3;
 
-    if (func_80087120(arg0) > attr->xEC)
+    if (ftLib_80087120(arg0) > attr->xEC)
         phi_r29 = 1;
 
     func_802F0AE0(arg0, &sp28_leek, &sp1C_carrot, 0x7E, phi_r29,

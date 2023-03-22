@@ -295,9 +295,9 @@ HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2,
 {
     HSD_GObj* unk_gobj;
 
-    unk_gobj = func_8008627C(vector, item_gobj);
+    unk_gobj = ftLib_8008627C(vector, item_gobj);
     if (unk_gobj != NULL) {
-        func_800866DC(unk_gobj, vector2);
+        ftLib_800866DC(unk_gobj, vector2);
     }
     return unk_gobj;
 }
@@ -305,15 +305,15 @@ HSD_GObj* func_8026B5E4(Vec3* vector, Vec3* vector2,
 #if false
 
 /**
- * @todo Missing third argument passed to #func_80086368.
+ * @todo Missing third argument passed to #ftLib_80086368.
  * @brief Unknown item camera check 2?
  */
 HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj)
 {
-    HSD_GObj* unk_gobj = func_80086368(vector, item_gobj);
+    HSD_GObj* unk_gobj = ftLib_80086368(vector, item_gobj);
 
     if (unk_gobj != NULL)
-        func_800866DC(unk_gobj, vector2);
+        ftLib_800866DC(unk_gobj, vector2);
 
     return unk_gobj;
 }
@@ -331,12 +331,12 @@ asm HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj){
 /* 8026B644 00000010  93 C1 00 18 */  stw r30, 0x18(r1)
 /* 8026B648 00000014  3B C4 00 00 */  addi r30, r4, 0x0
 /* 8026B64C 00000018  38 85 00 00 */  addi r4, r5, 0x0
-/* 8026B650 0000001C  4B E1 AD 19 */  bl func_80086368
+/* 8026B650 0000001C  4B E1 AD 19 */  bl ftLib_80086368
 /* 8026B654 00000020  7C 7F 1B 79 */  mr. r31, r3
 /* 8026B658 00000024  41 82 00 10 */  beq lbl_8026B668
 /* 8026B65C 00000028  38 7F 00 00 */  addi r3, r31, 0x0
 /* 8026B660 0000002C  38 9E 00 00 */  addi r4, r30, 0x0
-/* 8026B664 00000030  4B E1 B0 79 */  bl func_800866DC
+/* 8026B664 00000030  4B E1 B0 79 */  bl ftLib_800866DC
 lbl_8026B668:
 /* 8026B668 00000034  7F E3 FB 78 */  mr r3, r31
 /* 8026B66C 00000038  80 01 00 24 */  lwz r0, 0x24(r1)
@@ -362,7 +362,7 @@ HSD_GObj* func_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj)
  */
 f32 func_8026B684(Vec3* pos)
 {
-    return func_800864A8(pos, NULL);
+    return ftLib_800864A8(pos, NULL);
 }
 
 /**
@@ -370,7 +370,7 @@ f32 func_8026B684(Vec3* pos)
  */
 f32 func_8026B6A8(Vec3* pos, HSD_GObj* arg1)
 {
-    return func_800864A8(pos, arg1);
+    return ftLib_800864A8(pos, arg1);
 }
 
 bool func_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item?
@@ -776,12 +776,12 @@ void func_8026BB44(HSD_GObj* item_gobj)
     func_80272A3C(item_gobj->hsd_obj);
 }
 
-extern void func_80086990(HSD_GObj*, Vec3*);
+extern void ftLib_80086990(HSD_GObj*, Vec3*);
 
 /// Adjust item's position to fp bone
 void func_8026BB68(HSD_GObj* gobj, Vec3* pos)
 {
-    func_80086990(gobj, pos);
+    ftLib_80086990(gobj, pos);
 }
 
 /// Adjust item's position based on ECB?
@@ -817,15 +817,15 @@ void func_8026BBCC(HSD_GObj* item_gobj, Vec3* pos)
     pos->z = coll_data->x1C_vec.z + offset_xz;
 }
 
-extern bool func_80086960(HSD_GObj*);
-extern void func_80086A4C(HSD_GObj*, f32);
+extern bool ftLib_80086960(HSD_GObj*);
+extern void ftLib_80086A4C(HSD_GObj*, f32);
 
 /// Check if item owner is a fighter + decrement hitlag
 void func_8026BC14(HSD_GObj* item_gobj)
 {
     Item* ip = GET_ITEM(item_gobj);
-    if (ip->owner != NULL && func_80086960(ip->owner))
-        func_80086A4C(ip->owner, ip->xCBC_hitlagFrames - 1);
+    if (ip->owner != NULL && ftLib_80086960(ip->owner))
+        ftLib_80086A4C(ip->owner, ip->xCBC_hitlagFrames - 1);
 }
 
 /// @returns #Item::xDD0_flag::bits::b0 of @p item_gobj.
@@ -849,7 +849,7 @@ bool func_8026BC84(HSD_GObj* item_gobj)
     return ip->xD88_attackID;
 }
 
-extern void func_80086644(HSD_GObj*, Vec3*);
+extern void ftLib_80086644(HSD_GObj*, Vec3*);
 
 /// Unknown item ECB / position update
 void func_8026BC90(HSD_GObj* item_gobj, Vec3* pos)
@@ -858,8 +858,8 @@ void func_8026BC90(HSD_GObj* item_gobj, Vec3* pos)
     pos->y = 0;
     pos->x = 0;
 
-    if (item_gobj != NULL && func_80086960(item_gobj))
-        func_80086644(item_gobj, pos);
+    if (item_gobj != NULL && ftLib_80086960(item_gobj))
+        ftLib_80086644(item_gobj, pos);
 }
 
 /// Unsets #Item::xDCD_flag::bits::b2 of @p item_gobj.
@@ -1122,7 +1122,7 @@ HSD_GObj* func_8026BE84(BobOmbRain* bobOmbRain)
     return bobOmbGObj;
 }
 
-extern CollData* func_80086984(HSD_GObj*);
+extern CollData* ftLib_80086984(HSD_GObj*);
 
 CollData* func_8026C100(HSD_GObj* item_gobj) // Get item's CollData pointer
 {
@@ -1130,7 +1130,7 @@ CollData* func_8026C100(HSD_GObj* item_gobj) // Get item's CollData pointer
 
     switch (func_80272D40(item_gobj)) {
     case 0:
-        collDataPtr = func_80086984(item_gobj);
+        collDataPtr = ftLib_80086984(item_gobj);
         break;
     case 1: {
         Item* ip = GET_ITEM(item_gobj);
@@ -1184,7 +1184,7 @@ bool func_8026C1E8(HSD_GObj* item_gobj)
 void func_8026C220(HSD_GObj* item_gobj, HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(item_gobj);
-    ip->xCB0_source_ply = (u8) func_80086BE0(gobj);
+    ip->xCB0_source_ply = (u8) ftLib_80086BE0(gobj);
 }
 
 /// Find the closest item to the given position?

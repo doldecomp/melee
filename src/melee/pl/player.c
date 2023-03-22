@@ -121,7 +121,7 @@ void Player_80031790(int slot)
             /// (transformed) checks to see if the player is in a transformed
             /// state, and calls the function only once depending on the state
             if ((player->player_entity[player->transformed[i]])) {
-                func_800867E8(player->player_entity[player->transformed[i]]);
+                ftLib_800867E8(player->player_entity[player->transformed[i]]);
             }
         }
     }
@@ -141,7 +141,7 @@ void Player_80031848(int slot)
             /// (transformed) checks to see if the player is in a transformed
             /// state, and calls the function only once depending on the state
             if ((player->player_entity[player->transformed[i]])) {
-                func_8008688C(player->player_entity[player->transformed[i]]);
+                ftLib_8008688C(player->player_entity[player->transformed[i]]);
             }
         }
     }
@@ -153,7 +153,7 @@ static void func_8008688C_wrapper(StaticPlayer* player)
         s32 i;
         for (i = 0; i < 2; i++) {
             if ((player->player_entity[player->transformed[i]])) {
-                func_8008688C(player->player_entity[player->transformed[i]]);
+                ftLib_8008688C(player->player_entity[player->transformed[i]]);
             }
         }
     }
@@ -321,7 +321,7 @@ void Player_80031EBC(int slot)
     for (i = 0; i < 2; i++) {
         StaticPlayer* player = &player_slots[slot];
         if ((player->player_entity[player->transformed[i]])) {
-            if (!func_8008701C(player->player_entity[player->transformed[i]]))
+            if (!ftLib_8008701C(player->player_entity[player->transformed[i]]))
             {
                 func_800D4F24(player->player_entity[player->transformed[i]],
                               1);
@@ -363,7 +363,7 @@ void Player_80032070(int slot, bool bool_arg)
 
         if (player->flags.b2 &&
             unkStruct->vec_arr[player->player_character].z == 0 &&
-            func_8008701C(player->player_entity[player->transformed[1]]))
+            ftLib_8008701C(player->player_entity[player->transformed[1]]))
         {
             func_800D4FF4(player->player_entity[player->transformed[1]]);
         }
@@ -372,7 +372,7 @@ void Player_80032070(int slot, bool bool_arg)
         return;
     }
 
-    if (func_800873CC(player->player_entity[player->transformed[0]]))
+    if (ftLib_800873CC(player->player_entity[player->transformed[0]]))
         func_800D4FF4(player->player_entity[player->transformed[1]]);
 }
 
@@ -381,7 +381,7 @@ void Player_8003219C(int slot)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    func_8008701C(player->player_entity[player->transformed[0]]);
+    ftLib_8008701C(player->player_entity[player->transformed[0]]);
 }
 
 bool Player_8003221C(int slot)
@@ -392,7 +392,7 @@ bool Player_8003221C(int slot)
         Player_CheckSlot(slot);
         player = &player_slots[slot];
 
-        if (!func_8008701C(player->player_entity[player->transformed[0]]))
+        if (!ftLib_8008701C(player->player_entity[player->transformed[0]]))
             return true;
     }
 
@@ -579,7 +579,7 @@ void Player_800328D4(int slot, Vec3* arg_vec)
 
     for (i = 0; i < 2; i++)
         if (player->player_entity[player->transformed[i]])
-            func_80087140(player->player_entity[player->transformed[i]]);
+            ftLib_80087140(player->player_entity[player->transformed[i]]);
 }
 
 void Player_80032A04(int slot, Vec3* arg_vec)
@@ -595,8 +595,8 @@ void Player_80032A04(int slot, Vec3* arg_vec)
         player->player_poses.byIndex[player->transformed[i]] = *arg_vec;
 
         if (player->player_entity[player->transformed[i]]) {
-            func_80086664(player->player_entity[player->transformed[i]],
-                          arg_vec);
+            ftLib_80086664(player->player_entity[player->transformed[i]],
+                           arg_vec);
         }
     }
 }
@@ -624,7 +624,7 @@ f32 Player_80032BB0(s32 slot)
     f32 temp;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    temp = func_800869F8(player->player_entity[player->transformed[0]]);
+    temp = ftLib_800869F8(player->player_entity[player->transformed[0]]);
     return temp / player->model_scale;
 }
 
@@ -1098,7 +1098,8 @@ void Player_SetHUDDamage(s32 slot, s32 arg1)
         player = &player_slots[slot];
         player->staminas.byIndex[player->transformed[i]] = arg1;
         if (player->player_entity[player->transformed[i]]) {
-            func_800870F0(player->player_entity[player->transformed[i]], arg1);
+            ftLib_800870F0(player->player_entity[player->transformed[i]],
+                           arg1);
         }
     }
 }
@@ -1733,7 +1734,7 @@ void Player_80036058(s32 slot)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    func_80086F4C(player->player_entity[player->transformed[0]]);
+    ftLib_80086F4C(player->player_entity[player->transformed[0]]);
 }
 
 void Player_800360D8(s32 slot)
@@ -1741,7 +1742,7 @@ void Player_800360D8(s32 slot)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    func_80086F80(player->player_entity[player->transformed[0]]);
+    ftLib_80086F80(player->player_entity[player->transformed[0]]);
 }
 
 void Player_SetStructFunc(s32 slot, void* arg_func)
@@ -1802,7 +1803,7 @@ s32 Player_80036394(s32 slot)
     entity = player->player_entity[player->transformed[0]];
 
     if (entity) {
-        return func_800872A4(entity);
+        return ftLib_800872A4(entity);
     }
     return -1;
 }
@@ -1817,7 +1818,7 @@ s32 Player_80036428(s32 slot)
     entity = player->player_entity[player->transformed[0]];
 
     if (entity) {
-        return func_80087300(entity);
+        return ftLib_80087300(entity);
     }
     return 6;
 }
@@ -1885,7 +1886,8 @@ void Player_80036790(s32 slot, f32 arg1)
 
     for (i = 0; i < 2; i++) {
         if (player->player_entity[player->transformed[i]]) {
-            func_80086A4C(player->player_entity[player->transformed[i]], arg1);
+            ftLib_80086A4C(player->player_entity[player->transformed[i]],
+                           arg1);
         }
     }
 }
@@ -1909,7 +1911,7 @@ void Player_800368F8(s32 slot)
     StaticPlayer* player;
     Player_CheckSlot(slot);
     player = &player_slots[slot];
-    func_80086BB4(player->player_entity[player->transformed[0]]);
+    ftLib_80086BB4(player->player_entity[player->transformed[0]]);
 }
 
 void Player_80036978(s32 slot, s32 arg1)
@@ -1925,7 +1927,8 @@ void Player_80036978(s32 slot, s32 arg1)
     player = &player_slots[slot];
 
     /// @todo Eliminate cast.
-    func_80086B90(player->player_entity[player->transformed[0]], (Vec3*) arg1);
+    ftLib_80086B90(player->player_entity[player->transformed[0]],
+                   (Vec3*) arg1);
 }
 
 void Player_InitOrResetPlayer(s32 slot)
@@ -2104,7 +2107,7 @@ s32 Player_80036EA0(s32 slot)
 
     if (entity)
         /// @todo Eliminate cast.
-        return (s32) func_800865F0(entity);
+        return (s32) ftLib_800865F0(entity);
 
     return 0;
 }

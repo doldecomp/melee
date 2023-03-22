@@ -649,7 +649,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     func_80275504(item_gobj);
     func_80274EF8(item_gobj);
 
-    if (func_80086960(spawnItem->x0_parent_gobj))
+    if (ftLib_80086960(spawnItem->x0_parent_gobj))
         item_data->xDC8_word.flags.x1 = false;
     else
         item_data->xDC8_word.flags.x1 = true;
@@ -674,8 +674,8 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
 
     if (spawnItem->x0_parent_gobj == NULL) {
         item_data->x20_team_id = -1;
-    } else if (func_80086960(spawnItem->x0_parent_gobj)) {
-        item_data->x20_team_id = func_80086EB4(spawnItem->x0_parent_gobj);
+    } else if (ftLib_80086960(spawnItem->x0_parent_gobj)) {
+        item_data->x20_team_id = ftLib_80086EB4(spawnItem->x0_parent_gobj);
     } else if (func_80272D1C(spawnItem->x0_parent_gobj)) {
         item_data->x20_team_id = func_8026B7B0(spawnItem->x0_parent_gobj);
     } else {
@@ -861,7 +861,7 @@ void func_80268560(HSD_GObj* item_gobj)
 }
 
 extern CameraBox* func_80029044(s32);
-extern void func_8008702C(s32);
+extern void ftLib_8008702C(s32);
 extern struct sdata_ItemGXLink lbl_803F1418[];
 extern struct sdata_ItemGXLink lbl_803F2310[];
 extern struct sdata_ItemGXLink lbl_803F2F28[];
@@ -893,11 +893,11 @@ void foobar2(HSD_GObj* gobj)
     Item* it = (Item*) HSD_GObjGetUserData(gobj);
     // Check if item is a character item with an owner
     if (it->kind >= It_Kind_Mario_Fire && it->kind < It_Kind_Unk4 &&
-        func_80086960(it->owner))
+        ftLib_80086960(it->owner))
     {
         it->xDC8_word.flags.xE = 1;
-        it->x378_itemColl.x19C = func_800872A4(it->owner);
-        func_8008702C(it->x378_itemColl.x19C);
+        it->x378_itemColl.x19C = ftLib_800872A4(it->owner);
+        ftLib_8008702C(it->x378_itemColl.x19C);
     }
 }
 
@@ -1617,11 +1617,11 @@ bool func_80269F14(HSD_GObj* item_gobj)
         if (temp_item->kind == 34) {
             if (temp_item->xDCC_flag.b2 == 0) {
                 temp_item->owner = temp_item->xC64_reflectGObj;
-                temp_item->x20_team_id = func_80086EB4(temp_item->owner);
+                temp_item->x20_team_id = ftLib_80086EB4(temp_item->owner);
             }
         } else {
             temp_item->owner = temp_item->xC64_reflectGObj;
-            temp_item->x20_team_id = func_80086EB4(temp_item->owner);
+            temp_item->x20_team_id = ftLib_80086EB4(temp_item->owner);
         }
     }
 
@@ -1898,10 +1898,10 @@ void func_8026A848(HSD_GObj* item_gobj, HSD_GObj* gobj)
         temp_item->kind != 59 && temp_item->kind != 99 &&
         temp_item->kind != 103)
     {
-        if (func_800867CC(gobj) == item_gobj)
-            func_80086764(gobj);
-    } else if (func_800867A0(gobj, item_gobj)) {
-        func_80086724(gobj, item_gobj);
+        if (ftLib_800867CC(gobj) == item_gobj)
+            ftLib_80086764(gobj);
+    } else if (ftLib_800867A0(gobj, item_gobj)) {
+        ftLib_80086724(gobj, item_gobj);
     }
 }
 
@@ -1914,10 +1914,10 @@ void DestroyItemInline(HSD_GObj* this, Item* other_ip)
     if (ip->hold_kind == 8 && ip->kind != 58 && ip->kind != 59 &&
         ip->kind != 99 && ip->kind != 103)
     {
-        if (func_800867CC(other) == this)
-            func_80086764(other);
-    } else if (func_800867A0(other, this)) {
-        func_80086724(other, this);
+        if (ftLib_800867CC(other) == this)
+            ftLib_80086764(other);
+    } else if (ftLib_800867A0(other, this)) {
+        ftLib_80086724(other, this);
     }
 }
 
@@ -1959,7 +1959,7 @@ void func_8026A8EC_inline1(HSD_GObj* this)
     Item* ip = (Item*) HSD_GObjGetUserData(this);
 
     if (ip->xDC8_word.flags.xE) {
-        func_80087050(ip->x378_itemColl.x19C);
+        ftLib_80087050(ip->x378_itemColl.x19C);
         ip->xDC8_word.flags.xE = false;
         ip->x378_itemColl.x19C = -1;
     }
@@ -2007,7 +2007,7 @@ void func_8026A8EC(HSD_GObj* this)
     func_8026A8EC_inline2(this);
 
     if (ip->xDC8_word.flags.x13 && ip->owner != NULL &&
-        func_80086960(ip->owner))
+        ftLib_80086960(ip->owner))
     {
         DestroyItemInline(this, ip);
     }

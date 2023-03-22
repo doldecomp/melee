@@ -24,7 +24,7 @@ void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 
     currentAnimFrame = (s32) fp->x894_currentAnimFrame;
 
-    ftKind = func_800872A4(gobj);
+    ftKind = ftLib_800872A4(gobj);
     switch (ftKind) {
     case FTKIND_CAPTAIN:
         break;
@@ -162,7 +162,7 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* gobj)
     }
     if (flag != false) {
         if (fp->x2219_flag.bits.b0 == 0) {
-            ftKind = func_800872A4(gobj);
+            ftKind = ftLib_800872A4(gobj);
             switch (ftKind) {
             case 2:
                 ef_Spawn(0x48F, gobj, fp->ft_bones[0].x0_jobj,
@@ -196,7 +196,7 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
     }
     if (flag != false) {
         if (fp->x2219_flag.bits.b0 == 0) {
-            ftKind = func_800872A4(gobj);
+            ftKind = ftLib_800872A4(gobj);
             switch (ftKind) {
             case 2:
                 ef_Spawn(0x48F, gobj, fp->ft_bones[0].x0_jobj,

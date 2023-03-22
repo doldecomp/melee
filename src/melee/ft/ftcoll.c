@@ -76,7 +76,7 @@ void ftColl_8007646C(HSD_GObj* attackItem, HSD_GObj* victim)
     HSD_GObj* owner = func_8026BC78(attackItem);
     enum_t msid = func_8026BC84(attackItem);
 
-    if (func_80086960(owner))
+    if (ftLib_80086960(owner))
         ftColl_800763C0(owner, victim, msid);
 }
 
@@ -1577,7 +1577,7 @@ lbl_8007789C:
 /* 800778A0 00074480  7C 00 1A 14 */	add r0, r0, r3
 /* 800778A4 00074484  90 1D 19 A0 */	stw r0, 0x19a0(r29)
 /* 800778A8 00074488  80 7B 05 18 */	lwz r3, 0x518(r27)
-/* 800778AC 0007448C  48 00 F0 B5 */	bl func_80086960
+/* 800778AC 0007448C  48 00 F0 B5 */	bl ftLib_80086960
 /* 800778B0 00074490  2C 03 00 00 */	cmpwi r3, 0
 /* 800778B4 00074494  41 82 00 28 */	beq lbl_800778DC
 /* 800778B8 00074498  80 7B 05 18 */	lwz r3, 0x518(r27)
@@ -2749,7 +2749,7 @@ asm void ftColl_800787B4(void)
 /* 80078804 000753E4  4B FC 93 05 */	bl func_80041B08
 lbl_80078808:
 /* 80078808 000753E8  7F C3 F3 78 */	mr r3, r30
-/* 8007880C 000753EC  48 00 E1 55 */	bl func_80086960
+/* 8007880C 000753EC  48 00 E1 55 */	bl ftLib_80086960
 /* 80078810 000753F0  2C 03 00 00 */	cmpwi r3, 0
 /* 80078814 000753F4  41 82 00 34 */	beq lbl_80078848
 /* 80078818 000753F8  38 00 00 00 */	li r0, 0
@@ -2893,7 +2893,7 @@ asm void ftColl_80078998(void)
 /* 800789C8 000755A8  4B FF DA A5 */	bl ftColl_8007646C
 /* 800789CC 000755AC  83 FF 00 2C */	lwz r31, 0x2c(r31)
 /* 800789D0 000755B0  80 7F 05 18 */	lwz r3, 0x518(r31)
-/* 800789D4 000755B4  48 00 DF 8D */	bl func_80086960
+/* 800789D4 000755B4  48 00 DF 8D */	bl ftLib_80086960
 /* 800789D8 000755B8  2C 03 00 00 */	cmpwi r3, 0
 /* 800789DC 000755BC  41 82 00 34 */	beq lbl_80078A10
 /* 800789E0 000755C0  80 7F 05 18 */	lwz r3, 0x518(r31)
@@ -2952,7 +2952,7 @@ asm void ftColl_80078A2C(HSD_GObj*)
 lbl_80078A68:
 /* 80078A68 00075648  38 79 00 00 */	addi r3, r25, 0
 /* 80078A6C 0007564C  38 9D 00 00 */	addi r4, r29, 0
-/* 80078A70 00075650  48 00 E5 65 */	bl func_80086FD4
+/* 80078A70 00075650  48 00 E5 65 */	bl ftLib_80086FD4
 /* 80078A74 00075654  2C 03 00 00 */	cmpwi r3, 0
 /* 80078A78 00075658  40 82 01 D4 */	bne lbl_80078C4C
 /* 80078A7C 0007565C  80 7D 00 2C */	lwz r3, 0x2c(r29)
@@ -3133,7 +3133,7 @@ void ftColl_80078A2C(HSD_GObj* this_gobj)
     victim_gobj = lbl_804D782C->x20_fighters;
 
     while (victim_gobj != NULL) {
-        if (func_80086FD4(this_gobj, victim_gobj) == false) {
+        if (ftLib_80086FD4(this_gobj, victim_gobj) == false) {
             victim_fp = victim_gobj->user_data;
             if (((!(victim_fp->x2219_flag.bits.b1)) &&
                  ((!victim_fp->x222A_flag.bits.b0) &&
@@ -3648,7 +3648,7 @@ lbl_80079298:
 /* 800792A8 00075E88  41 82 07 E0 */	beq lbl_80079A88
 /* 800792AC 00075E8C  7F E3 FB 78 */	mr r3, r31
 /* 800792B0 00075E90  80 98 05 18 */	lwz r4, 0x518(r24)
-/* 800792B4 00075E94  48 00 DD 21 */	bl func_80086FD4
+/* 800792B4 00075E94  48 00 DD 21 */	bl ftLib_80086FD4
 /* 800792B8 00075E98  2C 03 00 00 */	cmpwi r3, 0
 /* 800792BC 00075E9C  41 82 00 10 */	beq lbl_800792CC
 /* 800792C0 00075EA0  88 18 0D CD */	lbz r0, 0xdcd(r24)
@@ -3677,7 +3677,7 @@ lbl_80079300:
 /* 80079314 00075EF4  28 03 00 00 */	cmplwi r3, 0
 /* 80079318 00075EF8  41 82 00 54 */	beq lbl_8007936C
 /* 8007931C 00075EFC  80 98 05 18 */	lwz r4, 0x518(r24)
-/* 80079320 00075F00  48 00 DC B5 */	bl func_80086FD4
+/* 80079320 00075F00  48 00 DC B5 */	bl ftLib_80086FD4
 /* 80079324 00075F04  2C 03 00 00 */	cmpwi r3, 0
 /* 80079328 00075F08  41 82 00 10 */	beq lbl_80079338
 /* 8007932C 00075F0C  88 18 0D CD */	lbz r0, 0xdcd(r24)
@@ -4768,7 +4768,7 @@ lbl_8007A23C:
 /* 8007A240 00076E20  80 63 00 2C */	lwz r3, 0x2c(r3)
 /* 8007A244 00076E24  81 E3 05 18 */	lwz r15, 0x518(r3)
 /* 8007A248 00076E28  7D E3 7B 78 */	mr r3, r15
-/* 8007A24C 00076E2C  48 00 C7 15 */	bl func_80086960
+/* 8007A24C 00076E2C  48 00 C7 15 */	bl ftLib_80086960
 /* 8007A250 00076E30  2C 03 00 00 */	cmpwi r3, 0
 /* 8007A254 00076E34  41 82 00 18 */	beq lbl_8007A26C
 /* 8007A258 00076E38  80 6F 00 2C */	lwz r3, 0x2c(r15)
@@ -5316,7 +5316,7 @@ lbl_8007A9DC:
 /* 8007AA14 000775F4  4B FC 70 F5 */	bl func_80041B08
 lbl_8007AA18:
 /* 8007AA18 000775F8  7E 03 83 78 */	mr r3, r16
-/* 8007AA1C 000775FC  48 00 BF 45 */	bl func_80086960
+/* 8007AA1C 000775FC  48 00 BF 45 */	bl ftLib_80086960
 /* 8007AA20 00077600  2C 03 00 00 */	cmpwi r3, 0
 /* 8007AA24 00077604  41 82 00 34 */	beq lbl_8007AA58
 /* 8007AA28 00077608  38 00 00 00 */	li r0, 0

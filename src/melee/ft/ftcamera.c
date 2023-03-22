@@ -86,13 +86,13 @@ void ftCamera_UpdateCameraBox(HSD_GObj* gobj)
     camera_box->xC_flag.bits.b0 = false;
 
     // Fighter_GetCameraBonePos
-    func_800866DC(gobj, &camera_box->x1C);
+    ftLib_800866DC(gobj, &camera_box->x1C);
 }
 
 void ftCamera_800762F4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_800866DC(gobj, &fp->x890_cameraBox->x1C);
+    ftLib_800866DC(gobj, &fp->x890_cameraBox->x1C);
 }
 
 void ftCamera_80076320(HSD_GObj* gobj)

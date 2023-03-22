@@ -907,7 +907,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
             __assert(__FILE__, 1065, "0");
         }
     }
-    func_800867E8(gobj);
+    ftLib_800867E8(gobj);
     return gobj;
 }
 
