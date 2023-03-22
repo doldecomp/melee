@@ -13,8 +13,8 @@
 #include "lb/lbmthp.h"
 
 MotionState ftCLink_MotionStateTable[] = {
-    { 295, 0x00240009, 0x0A000000, func_800CEDE0, func_800CEE00, func_800CEE30,
-      func_800CEE50, Fighter_UpdateCameraBox },
+    { 295, 0x00240009, 0x0A000000, ftLink_800CEDE0, ftLink_800CEE00,
+      ftLink_800CEE30, ftLink_800CEE50, Fighter_UpdateCameraBox },
     { 239, 0x00000071, 0x01000000, ftCLink_80149354, ftCLink_8014943C,
       ftCLink_8014945C, ftCLink_8014947C, Fighter_UpdateCameraBox },
     { 240, 0x00000071, 0x01000000, ftCLink_80149354, ftCLink_8014943C,
@@ -51,10 +51,10 @@ MotionState ftCLink_MotionStateTable[] = {
       ftLink_800EB95C, Fighter_UpdateCameraBox },
     { 311, 0x00340414, 0x15000000, ftLink_800EB8E0, NULL, ftLink_800EB93C,
       ftLink_800EB9D4, Fighter_UpdateCameraBox },
-    { 312, 0x00200000, 0x01000000, func_800C3D6C, func_800C4384, func_800C438C,
-      func_800C447C, Fighter_UpdateCameraBox },
-    { 313, 0x00C00000, 0x01000000, func_800C4380, func_800C4388, func_800C4438,
-      func_80082B78, Fighter_UpdateCameraBox },
+    { 312, 0x00200000, 0x01000000, ftLink_800C3D6C, ftLink_800C4384,
+      ftLink_800C438C, ftLink_800C447C, Fighter_UpdateCameraBox },
+    { 313, 0x00C00000, 0x01000000, ftLink_800C4380, ftLink_800C4388,
+      ftLink_800C4438, ftLink_80082B78, Fighter_UpdateCameraBox },
 };
 
 char lbl_803D1240[] = "PlCl.dat";

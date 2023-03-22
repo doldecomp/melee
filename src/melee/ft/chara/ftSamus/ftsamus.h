@@ -82,14 +82,14 @@ void ftSamus_8012B264(HSD_GObj*);
 void ftSamus_8012B3A4(HSD_GObj*);
 void ftSamus_8012B41C(HSD_GObj*);
 void ftSamus_8012B4FC(HSD_GObj*);
-void func_800C3D6C(HSD_GObj*);
-void func_800C4384(HSD_GObj*);
-void func_800C438C(HSD_GObj*);
-void func_800C447C(HSD_GObj*);
-void func_800C4380(HSD_GObj*);
-void func_800C4388(HSD_GObj*);
-void func_800C4438(HSD_GObj*);
-void func_80082B78(HSD_GObj*);
+void ftLink_800C3D6C(HSD_GObj*);
+void ftLink_800C4384(HSD_GObj*);
+void ftLink_800C438C(HSD_GObj*);
+void ftLink_800C447C(HSD_GObj*);
+void ftLink_800C4380(HSD_GObj*);
+void ftLink_800C4388(HSD_GObj*);
+void ftLink_800C4438(HSD_GObj*);
+void ftLink_80082B78(HSD_GObj*);
 
 static inline void ftSamus_updateDamageDeathCBs(HSD_GObj* gobj)
 {

@@ -46,10 +46,10 @@ MotionState ftSamus_MotionStateTable[] = {
       ftSamus_8012B3A8, ftSamus_8012B488, Fighter_UpdateCameraBox },
     { 310, 0x00340514, 0x15000000, ftSamus_8012B264, ftSamus_8012B3A4,
       ftSamus_8012B41C, ftSamus_8012B4FC, Fighter_UpdateCameraBox },
-    { 311, 0x00200000, 0x01000000, func_800C3D6C, func_800C4384, func_800C438C,
-      func_800C447C, Fighter_UpdateCameraBox },
-    { 312, 0x00C00000, 0x01000000, func_800C4380, func_800C4388, func_800C4438,
-      func_80082B78, Fighter_UpdateCameraBox },
+    { 311, 0x00200000, 0x01000000, ftLink_800C3D6C, ftLink_800C4384,
+      ftLink_800C438C, ftLink_800C447C, Fighter_UpdateCameraBox },
+    { 312, 0x00C00000, 0x01000000, ftLink_800C4380, ftLink_800C4388,
+      ftLink_800C4438, ftLink_80082B78, Fighter_UpdateCameraBox },
 };
 
 char lbl_803CE510[] = "PlSs.dat";

@@ -43,7 +43,7 @@ void func_80082B1C(HSD_GObj* gobj);
 void func_80081B38(HSD_GObj* gobj);
 bool func_80082A68(HSD_GObj* gobj);
 void func_800851C0(HSD_GObj*);
-void func_80082B78(HSD_GObj*);
+void ftLink_80082B78(HSD_GObj*);
 void func_80085088(HSD_GObj*);
 bool func_800821DC(void);
 bool func_80084A18(HSD_GObj*);

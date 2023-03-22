@@ -1338,7 +1338,7 @@ lbl_80082B60:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80082B78(HSD_GObj*)
+asm void ftLink_80082B78(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80082B78 0007F758  7C 08 02 A6 */	mflr r0

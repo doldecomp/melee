@@ -51,10 +51,10 @@ void ftCLink_OnItemVisible(HSD_GObj* gobj);
 void ftCLink_OnItemDropExt(HSD_GObj* gobj, bool arg1);
 void ftCLink_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftCLink_OnKnockbackEnter(HSD_GObj* gobj);
-void func_800CEDE0(HSD_GObj*);
-void func_800CEE00(HSD_GObj*);
-void func_800CEE30(HSD_GObj*);
-void func_800CEE50(HSD_GObj*);
+void ftLink_800CEDE0(HSD_GObj*);
+void ftLink_800CEE00(HSD_GObj*);
+void ftLink_800CEE30(HSD_GObj*);
+void ftLink_800CEE50(HSD_GObj*);
 void ftCLink_80149354(HSD_GObj*);
 void ftCLink_8014943C(HSD_GObj*);
 void ftCLink_8014945C(HSD_GObj*);
@@ -121,14 +121,14 @@ void ftLink_800EB95C(HSD_GObj*);
 void ftLink_800EB8E0(HSD_GObj*);
 void ftLink_800EB93C(HSD_GObj*);
 void ftLink_800EB9D4(HSD_GObj*);
-void func_800C3D6C(HSD_GObj*);
-void func_800C4384(HSD_GObj*);
-void func_800C438C(HSD_GObj*);
-void func_800C447C(HSD_GObj*);
-void func_800C4380(HSD_GObj*);
-void func_800C4388(HSD_GObj*);
-void func_800C4438(HSD_GObj*);
-void func_80082B78(HSD_GObj*);
+void ftLink_800C3D6C(HSD_GObj*);
+void ftLink_800C4384(HSD_GObj*);
+void ftLink_800C438C(HSD_GObj*);
+void ftLink_800C447C(HSD_GObj*);
+void ftLink_800C4380(HSD_GObj*);
+void ftLink_800C4388(HSD_GObj*);
+void ftLink_800C4438(HSD_GObj*);
+void ftLink_80082B78(HSD_GObj*);
 
 static inline void checkFighter2244(HSD_GObj* gobj)
 {
