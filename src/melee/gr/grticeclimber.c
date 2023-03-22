@@ -18,63 +18,71 @@
 
 /* static */ StageCallbacks lbl_803E8A98[4] = {
     {
-        lbl_8022109C,
-        lbl_802210C8,
-        lbl_802210D0,
-        lbl_802210D4,
+        grTIceClimber_8022109C,
+        grTIceClimber_802210C8,
+        grTIceClimber_802210D0,
+        grTIceClimber_802210D4,
         0,
     },
     {
-        lbl_8022118C,
-        lbl_802211DC,
-        lbl_802211E4,
-        lbl_80221204,
+        grTIceClimber_8022118C,
+        grTIceClimber_802211DC,
+        grTIceClimber_802211E4,
+        grTIceClimber_80221204,
         0,
     },
     {
-        lbl_802210D8,
-        lbl_8022114C,
-        lbl_80221154,
-        lbl_80221188,
+        grTIceClimber_802210D8,
+        grTIceClimber_8022114C,
+        grTIceClimber_80221154,
+        grTIceClimber_80221188,
         (1 << 30) | (1 << 31),
     },
 };
 
 StageData lbl_803E8AF4 = {
-    47,           lbl_803E8A98, "/GrTIc.dat", lbl_80220F14, func_80220F10,
-    lbl_80220F84, lbl_80220F88, lbl_80220FAC, lbl_80221354, lbl_8022135C,
+    47,
+    lbl_803E8A98,
+    "/GrTIc.dat",
+    grTIceClimber_80220F14,
+    grTIceClimber_80220F10,
+    grTIceClimber_80220F84,
+    grTIceClimber_80220F88,
+    grTIceClimber_80220FAC,
+    grTIceClimber_80221354,
+    grTIceClimber_8022135C,
     (1 << 0),
 };
 
-void func_80220F10(bool arg0) {}
+void grTIceClimber_80220F10(bool arg0) {}
 
-void lbl_80220F14(void)
+void grTIceClimber_80220F14(void)
 {
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
 
-    func_80220FB4(0);
-    func_80220FB4(1);
-    func_80220FB4(2);
+    grTIceClimber_80220FB4(0);
+    grTIceClimber_80220FB4(1);
+    grTIceClimber_80220FB4(2);
     Ground_801C39C0();
     Ground_801C3BB4();
     Ground_801C4210();
     Ground_801C42AC();
 }
 
-void lbl_80220F84(void) {}
+void grTIceClimber_80220F84(void) {}
 
-void lbl_80220F88(void)
+void grTIceClimber_80220F88(void)
 {
     grZakoGenerator_801CAE04(0);
 }
 
-bool lbl_80220FAC(void)
+bool grTIceClimber_80220FAC(void)
 {
     return false;
 }
 
-HSD_GObj* func_80220FB4(int id)
+HSD_GObj* grTIceClimber_80220FB4(int id)
 {
     /// @todo Cannot be moved below @c cb due to an inline
     HSD_GObj* gobj;
@@ -107,61 +115,61 @@ HSD_GObj* func_80220FB4(int id)
     return gobj;
 }
 
-void lbl_8022109C(HSD_GObj* gobj)
+void grTIceClimber_8022109C(HSD_GObj* gobj)
 {
     Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-bool lbl_802210C8(HSD_GObj* arg0)
+bool grTIceClimber_802210C8(HSD_GObj* arg0)
 {
     return false;
 }
 
-void lbl_802210D0(HSD_GObj* arg0) {}
+void grTIceClimber_802210D0(HSD_GObj* arg0) {}
 
-void lbl_802210D4(HSD_GObj* arg0) {}
+void grTIceClimber_802210D4(HSD_GObj* arg0) {}
 
-void lbl_802210D8(HSD_GObj* gobj)
+void grTIceClimber_802210D8(HSD_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
     grAnime_801C7FF8(gobj, 69, 2, 1, 0.0F, 1.0F);
-    func_80221288(gobj);
+    grTIceClimber_80221288(gobj);
 }
 
-bool lbl_8022114C(HSD_GObj* arg0)
+bool grTIceClimber_8022114C(HSD_GObj* arg0)
 {
     return false;
 }
 
-void lbl_80221154(HSD_GObj* arg0)
+void grTIceClimber_80221154(HSD_GObj* arg0)
 {
     lb_800115F4();
     Ground_801C2FE0(arg0);
 }
 
-void lbl_80221188(HSD_GObj* arg0) {}
+void grTIceClimber_80221188(HSD_GObj* arg0) {}
 
-void lbl_8022118C(HSD_GObj* gobj)
+void grTIceClimber_8022118C(HSD_GObj* gobj)
 {
     Ground_JObjInline1(gobj);
 }
 
-bool lbl_802211DC(HSD_GObj* arg0)
+bool grTIceClimber_802211DC(HSD_GObj* arg0)
 {
     return false;
 }
 
-void lbl_802211E4(HSD_GObj* gobj)
+void grTIceClimber_802211E4(HSD_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-void lbl_80221204(HSD_GObj* arg0) {}
+void grTIceClimber_80221204(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_80221208(void){
+asm void grTIceClimber_80221208(void){
     // clang-format off
     nofralloc
 /* 80221208 0021DDE8  7C 08 02 A6 */	mflr r0
@@ -206,7 +214,7 @@ s16 lbl_803E8B5C[] = {
     50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, -1, 0,
 };
 
-void func_80221288(HSD_GObj* ground_gobj)
+void grTIceClimber_80221288(HSD_GObj* ground_gobj)
 {
     Ground* gp = GET_GROUND(ground_gobj);
     int i;
@@ -216,7 +224,7 @@ void func_80221288(HSD_GObj* ground_gobj)
         if (result_0 != -1) {
             bool result_1 = grMaterial_801C8CFC(
                 0, 0, gp, Ground_801C3FA4(ground_gobj, result_0), 0,
-                lbl_80221208, 0);
+                grTIceClimber_80221208, 0);
 
             if (result_1) {
                 grMaterial_801C8DE0(result_1, -1.0F, 0.0F, 0.0F, 1.0F, 0.0F,
@@ -227,12 +235,12 @@ void func_80221288(HSD_GObj* ground_gobj)
     }
 }
 
-bool lbl_80221354(int arg0)
+bool grTIceClimber_80221354(int arg0)
 {
     return false;
 }
 
-bool lbl_8022135C(Vec3* arg0, int arg1, HSD_JObj* arg2)
+bool grTIceClimber_8022135C(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }
