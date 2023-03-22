@@ -10,10 +10,12 @@
 #include <baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E91B0[] = {
-    { lbl_80222D24, lbl_80222D50, lbl_80222D58, lbl_80222D5C, 0 },
-    { lbl_80222DF0, lbl_80222E40, lbl_80222E48, lbl_80222E68, 0 },
-    { lbl_80222D60, lbl_80222DB0, lbl_80222DB8, lbl_80222DEC,
-      (1 << 30) | (1 << 31) },
+    { grTPichu_80222D24, grTPichu_80222D50, grTPichu_80222D58,
+      grTPichu_80222D5C, 0 },
+    { grTPichu_80222DF0, grTPichu_80222E40, grTPichu_80222E48,
+      grTPichu_80222E68, 0 },
+    { grTPichu_80222D60, grTPichu_80222DB0, grTPichu_80222DB8,
+      grTPichu_80222DEC, (1 << 30) | (1 << 31) },
     { NULL, NULL, NULL, NULL, 0 }
 };
 
@@ -21,13 +23,13 @@ StageData lbl_803E920C = {
     (1 << 3) | (1 << 4) | (1 << 5),
     lbl_803E91B0,
     "/GrTPc.dat",
-    lbl_80222B9C,
-    func_80222B98,
-    lbl_80222C0C,
-    lbl_80222C10,
-    lbl_80222C34,
-    lbl_80222E6C,
-    lbl_80222E74,
+    grTPichu_80222B9C,
+    grTPichu_80222B98,
+    grTPichu_80222C0C,
+    grTPichu_80222C10,
+    grTPichu_80222C34,
+    grTPichu_80222E6C,
+    grTPichu_80222E74,
     0,
     NULL,
     0,
@@ -35,34 +37,34 @@ StageData lbl_803E920C = {
 
 extern StageInfo stage_info;
 
-static void func_80222B98(bool arg0) {}
+static void grTPichu_80222B98(bool arg0) {}
 
-static void lbl_80222B9C(void)
+static void grTPichu_80222B9C(void)
 {
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
-    func_80222C3C(0);
-    func_80222C3C(1);
-    func_80222C3C(2);
+    grTPichu_80222C3C(0);
+    grTPichu_80222C3C(1);
+    grTPichu_80222C3C(2);
     Ground_801C39C0();
     Ground_801C3BB4();
     Ground_801C4210();
     Ground_801C42AC();
 }
 
-static void lbl_80222C0C(void) {}
+static void grTPichu_80222C0C(void) {}
 
-static void lbl_80222C10(void)
+static void grTPichu_80222C10(void)
 {
     grZakoGenerator_801CAE04(0);
 }
 
-static bool lbl_80222C34(void)
+static bool grTPichu_80222C34(void)
 {
     return false;
 }
 
-static HSD_GObj* func_80222C3C(int gobj_id)
+static HSD_GObj* grTPichu_80222C3C(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E91B0[gobj_id];
@@ -90,22 +92,22 @@ static HSD_GObj* func_80222C3C(int gobj_id)
     return gobj;
 }
 
-static void lbl_80222D24(HSD_GObj* gobj)
+static void grTPichu_80222D24(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool lbl_80222D50(HSD_GObj* arg0)
+static bool grTPichu_80222D50(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void lbl_80222D58(HSD_GObj* arg0) {}
+static void grTPichu_80222D58(HSD_GObj* arg0) {}
 
-static void lbl_80222D5C(HSD_GObj* arg0) {}
+static void grTPichu_80222D5C(HSD_GObj* arg0) {}
 
-static void lbl_80222D60(HSD_GObj* gobj)
+static void grTPichu_80222D60(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -117,20 +119,20 @@ static void lbl_80222D60(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool lbl_80222DB0(HSD_GObj* arg0)
+static bool grTPichu_80222DB0(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void lbl_80222DB8(HSD_GObj* gobj)
+static void grTPichu_80222DB8(HSD_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void lbl_80222DEC(HSD_GObj* arg0) {}
+static void grTPichu_80222DEC(HSD_GObj* arg0) {}
 
-static void lbl_80222DF0(HSD_GObj* gobj)
+static void grTPichu_80222DF0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -142,24 +144,24 @@ static void lbl_80222DF0(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool lbl_80222E40(HSD_GObj* arg0)
+static bool grTPichu_80222E40(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void lbl_80222E48(HSD_GObj* arg0)
+static void grTPichu_80222E48(HSD_GObj* arg0)
 {
     Ground_801C2FE0(arg0);
 }
 
-static void lbl_80222E68(HSD_GObj* arg0) {}
+static void grTPichu_80222E68(HSD_GObj* arg0) {}
 
-static bool lbl_80222E6C(int arg0)
+static bool grTPichu_80222E6C(int arg0)
 {
     return false;
 }
 
-static bool lbl_80222E74(Vec3* arg0, int arg1, HSD_JObj* arg2)
+static bool grTPichu_80222E74(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }
