@@ -37,7 +37,7 @@ extern void HSD_CObjGetInvViewingMtxPtr(void);
 extern void func_800310B8(void);
 extern void func_80031060(void);
 extern void ft_800C2600(void);
-extern void func_8001E2F8(void);
+extern void lbGx_8001E2F8(void);
 extern void lb_80014770(void);
 extern void ft_800B395C(void);
 extern void lb_800117F4(void);
@@ -345,7 +345,7 @@ lbl_80080900:
 /* 80080924 0007D504  38 DC 00 00 */	addi r6, r28, 0
 /* 80080928 0007D508  38 9F 00 B0 */	addi r4, r31, 0xb0
 /* 8008092C 0007D50C  38 AD 83 E8 */	addi r5, r13, lbl_804D3A88
-/* 80080930 0007D510  4B F9 D9 C9 */	bl func_8001E2F8
+/* 80080930 0007D510  4B F9 D9 C9 */	bl lbGx_8001E2F8
 /* 80080934 0007D514  2C 03 00 00 */	cmpwi r3, 0
 /* 80080938 0007D518  41 82 00 08 */	beq lbl_80080940
 /* 8008093C 0007D51C  3B C0 00 01 */	li r30, 1
@@ -355,7 +355,7 @@ lbl_80080940:
 /* 80080948 0007D528  38 78 00 10 */	addi r3, r24, 0x10
 /* 8008094C 0007D52C  38 9F 00 B0 */	addi r4, r31, 0xb0
 /* 80080950 0007D530  38 AD 83 F0 */	addi r5, r13, lbl_804D3A90
-/* 80080954 0007D534  4B F9 D9 A5 */	bl func_8001E2F8
+/* 80080954 0007D534  4B F9 D9 A5 */	bl lbGx_8001E2F8
 /* 80080958 0007D538  2C 03 00 00 */	cmpwi r3, 0
 /* 8008095C 0007D53C  41 82 00 30 */	beq lbl_8008098C
 /* 80080960 0007D540  3B C0 00 01 */	li r30, 1
@@ -366,7 +366,7 @@ lbl_80080968:
 /* 80080970 0007D550  38 78 00 20 */	addi r3, r24, 0x20
 /* 80080974 0007D554  38 9F 00 B0 */	addi r4, r31, 0xb0
 /* 80080978 0007D558  38 AD 83 EC */	addi r5, r13, lbl_804D3A8C
-/* 8008097C 0007D55C  4B F9 D9 7D */	bl func_8001E2F8
+/* 8008097C 0007D55C  4B F9 D9 7D */	bl lbGx_8001E2F8
 /* 80080980 0007D560  2C 03 00 00 */	cmpwi r3, 0
 /* 80080984 0007D564  41 82 00 08 */	beq lbl_8008098C
 /* 80080988 0007D568  3B C0 00 01 */	li r30, 1
@@ -715,19 +715,19 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
     if (fighter->x21FC_flag.bits.b3 != 0) {
         temp_r24 = &fighter->x294_itPickup;
         if (fighter->ground_or_air == GA_Ground) {
-            if (func_8001E2F8(&temp_r24->x0_ground_light_offset,
+            if (lbGx_8001E2F8(&temp_r24->x0_ground_light_offset,
                               &fighter->cur_pos, &lbl_804D3A88, arg1,
                               fighter->facing_dir) != 0)
             {
                 phi_r30 = 1U;
             }
-            if (func_8001E2F8(&temp_r24->x10_ground_heavy_offset,
+            if (lbGx_8001E2F8(&temp_r24->x10_ground_heavy_offset,
                               &fighter->cur_pos, &lbl_804D3A90, arg1,
                               fighter->facing_dir) != 0)
             {
                 phi_r30 = 1U;
             }
-        } else if (func_8001E2F8(&temp_r24->x20_air_light_offset,
+        } else if (lbGx_8001E2F8(&temp_r24->x20_air_light_offset,
                                  &fighter->cur_pos, &lbl_804D3A8C, arg1,
                                  fighter->facing_dir) != 0)
         {
