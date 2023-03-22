@@ -687,7 +687,8 @@ void func_80043324(CollData* arg0, s32 arg1, s32 arg2)
 #endif
 
     if (arg0->x14C_ground.index != -1) {
-        temp_r3 = func_801CA284(&arg0->x4_vec, arg0->x14C_ground.index);
+        temp_r3 =
+            grDynamicAttr_801CA284(&arg0->x4_vec, arg0->x14C_ground.index);
         if (temp_r3 != 0) {
             arg0->x14C_ground.unk =
                 (arg0->x14C_ground.unk & 0xFFFFFF00) | (temp_r3 & 0xFF);

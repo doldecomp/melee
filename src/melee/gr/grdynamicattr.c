@@ -14,7 +14,7 @@ static grDynamicAttr_UnkStruct lbl_8049EFA0[4];
 static grDynamicAttr_UnkStruct* lbl_804D6960;
 static grDynamicAttr_UnkStruct* lbl_804D6964;
 
-void func_801CA0B4(void)
+void grDynamicAttr_801CA0B4(void)
 {
     s32 i;
     void* prev = NULL;
@@ -27,8 +27,8 @@ void func_801CA0B4(void)
     }
 }
 
-grDynamicAttr_UnkStruct* func_801CA0F8(s32 arg0, Vec3* v, enum_t floor_id,
-                                       f32 f, s32 arg3)
+grDynamicAttr_UnkStruct*
+grDynamicAttr_801CA0F8(s32 arg0, Vec3* v, enum_t floor_id, f32 f, s32 arg3)
 {
 #ifdef MUST_MATCH
     u8 _[8];
@@ -52,7 +52,7 @@ grDynamicAttr_UnkStruct* func_801CA0F8(s32 arg0, Vec3* v, enum_t floor_id,
     return NULL;
 }
 
-void func_801CA1C0(grDynamicAttr_UnkStruct* arg)
+void grDynamicAttr_801CA1C0(grDynamicAttr_UnkStruct* arg)
 {
     grDynamicAttr_UnkStruct* cur;
 
@@ -77,7 +77,7 @@ void func_801CA1C0(grDynamicAttr_UnkStruct* arg)
     }
 }
 
-void func_801CA224(void)
+void grDynamicAttr_801CA224(void)
 {
     grDynamicAttr_UnkStruct* cur;
     grDynamicAttr_UnkStruct* next;
@@ -86,7 +86,7 @@ void func_801CA224(void)
         if (cur->unk1C > 0) {
             cur->unk1C--;
             if (cur->unk1C <= 0) {
-                func_801CA1C0(cur);
+                grDynamicAttr_801CA1C0(cur);
             }
         }
     }
@@ -97,7 +97,7 @@ inline f32 do_sqrtf(f32 x)
     return sqrtf(x);
 }
 
-int func_801CA284(Vec3* v, int arg1)
+int grDynamicAttr_801CA284(Vec3* v, int arg1)
 {
     grDynamicAttr_UnkStruct* cur;
 
