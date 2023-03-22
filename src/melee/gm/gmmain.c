@@ -180,7 +180,7 @@ int main(void)
     HSD_VISetUserGXDrawDoneCallback(&lbl_803762C4);
     HSD_VISetBlack(0);
     lbMemory_8001564C();
-    func_80015F3C();
+    lbHeap_80015F3C();
     func_80018F68();
     lbArq_80014D2C();
     func_8001C5BC();

@@ -175,7 +175,7 @@ void func_8001668C(const char* arg0, HSD_Archive* arg1, s32* arg2)
 inline void qwer(s32 a, const char* arg0, HSD_Archive** arg1, s32* arg2)
 {
     *arg2 = func_800163D8(arg0);
-    *arg1 = func_80015BD0(a, (*arg2 + 0x1F) & 0xFFFFFFE0);
+    *arg1 = lbHeap_80015BD0(a, (*arg2 + 0x1F) & 0xFFFFFFE0);
     func_80016580(arg0, *arg1, arg2, lbFile_8001615C, 0);
 
     do {

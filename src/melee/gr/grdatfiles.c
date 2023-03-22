@@ -151,7 +151,7 @@ UnkArchiveStruct* grDatFiles_801C6478(void* data, s32 length)
 {
     UnkArchiveStruct* arc;
 
-    HSD_Archive* archive = func_80015BD0(0, 0x44);
+    HSD_Archive* archive = lbHeap_80015BD0(0, 0x44);
     lbArchive_InitializeDAT(archive, data, length);
     arc = grDatFiles_801C62B4();
     HSD_ASSERT(290, arc);
