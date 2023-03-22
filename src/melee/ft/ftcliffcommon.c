@@ -29,14 +29,14 @@ bool ftCliffCommon_80081298(HSD_GObj* gobj)
     {
         other_gobj = ft_80082E3C(gobj);
         if (other_gobj == NULL) {
-            func_80040048(fp->xC_playerID, fp->x221F_flag.bits.b4);
+            pl_80040048(fp->xC_playerID, fp->x221F_flag.bits.b4);
             ftCliffCommon_80081370(gobj);
             return true;
         }
         other_fp = other_gobj->user_data;
-        func_8003FFDC(other_fp->xC_playerID, other_fp->x221F_flag.bits.b4,
-                      fp->xC_playerID, fp->x221F_flag.bits.b4,
-                      other_fp->mv.co.cliff.ledge_id);
+        pl_8003FFDC(other_fp->xC_playerID, other_fp->x221F_flag.bits.b4,
+                    fp->xC_playerID, fp->x221F_flag.bits.b4,
+                    other_fp->mv.co.cliff.ledge_id);
         fp->x213C = other_fp->mv.co.cliff.ledge_id;
         return false;
     }

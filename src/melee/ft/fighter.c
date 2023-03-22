@@ -1123,11 +1123,11 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         fp->x213C = -1;
 
         if (fp->x2227_flag.bits.b4 != 0U) {
-            func_8003FE1C(fp->xC_playerID, fp->x221F_flag.bits.b4);
+            pl_8003FE1C(fp->xC_playerID, fp->x221F_flag.bits.b4);
             fp->x2227_flag.bits.b4 = 0;
         }
         fp->x2227_flag.bits.b5 = 0;
-        func_80040330(fp->xC_playerID, fp->x221F_flag.bits.b4, fp->x2140);
+        pl_80040330(fp->xC_playerID, fp->x221F_flag.bits.b4, fp->x2140);
         fp->x2140 = 0.0f;
         fp->x2228_flag.bits.b6 = 0;
         fp->x2180 = 6;
@@ -1212,7 +1212,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         }
 
         if ((arg2 & FtStateChange_SkipUpdateAttackCount) == 0) {
-            func_80037C60(gobj, x2070.x2070_int);
+            pl_80037C60(gobj, x2070.x2070_int);
         }
 
         fp->anim_id = new_motion_state->anim_id;
@@ -1624,7 +1624,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
                 ft_80088640(fp, 0x7D, 0x7F, 0x40);
                 Player_SetHPByIndex(fp->xC_playerID, fp->x221F_flag.bits.b4,
                                     fp->dmg.x1830_percent);
-                func_80040B8C(fp->xC_playerID, fp->x221F_flag.bits.b4, 1);
+                pl_80040B8C(fp->xC_playerID, fp->x221F_flag.bits.b4, 1);
             }
 
             if (fp->dmg.x1830_percent <= 0.0f) {
@@ -1693,7 +1693,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
             ftColl_800764DC(gobj);
 
             if (!fp->x221C_flag.bits.b6) {
-                func_800411C4(fp->xC_playerID, fp->x221F_flag.bits.b4);
+                pl_800411C4(fp->xC_playerID, fp->x221F_flag.bits.b4);
             }
             ft_800DEF38(gobj);
 
@@ -2501,7 +2501,7 @@ void Fighter_8006C27C(HSD_GObj* gobj)
         }
 
         if (fp->ground_or_air == GA_Ground) {
-            func_80041280(fp->xC_playerID, fp->x221F_flag.bits.b4);
+            pl_80041280(fp->xC_playerID, fp->x221F_flag.bits.b4);
         }
 
         if (g_debugLevel >= 3) {
@@ -2674,8 +2674,8 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
         }
         Player_SetHPByIndex(fp->xC_playerID, fp->x221F_flag.bits.b4,
                             fp->dmg.x1830_percent);
-        func_8003EC9C(fp->xC_playerID, fp->x221F_flag.bits.b4,
-                      fp->dmg.x1830_percent, damage_amount);
+        pl_8003EC9C(fp->xC_playerID, fp->x221F_flag.bits.b4,
+                    fp->dmg.x1830_percent, damage_amount);
         ft_800C8C84(fp->gobj);
     }
 }
@@ -2855,9 +2855,9 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                 bool3 = 1;
                 fp->x1998_shieldHealth = p_ftCommonData->x280_unkShieldHealth;
                 /// this function is called when shield is broken
-                func_8003E058(fp->x19BC_shieldDamageTaken3,
-                              fp->x221F_flag.bits.b6, fp->xC_playerID,
-                              fp->x221F_flag.bits.b4);
+                pl_8003E058(fp->x19BC_shieldDamageTaken3,
+                            fp->x221F_flag.bits.b6, fp->xC_playerID,
+                            fp->x221F_flag.bits.b4);
             }
         }
 
@@ -3100,8 +3100,8 @@ void Fighter_8006DA4C(HSD_GObj* gobj)
         Player_80032828(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->cur_pos);
         Player_SetFacingDirectionConditional(
             fp->xC_playerID, fp->x221F_flag.bits.b4, fp->facing_dir);
-        func_8003FAA8(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->cur_pos,
-                      &fp->prev_pos);
+        pl_8003FAA8(fp->xC_playerID, fp->x221F_flag.bits.b4, &fp->cur_pos,
+                    &fp->prev_pos);
     }
 }
 

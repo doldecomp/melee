@@ -983,7 +983,7 @@ void ftNess_AbsorbThink_DecideAction(
 
         Player_SetHPByIndex(fp->xC_playerID, fp->x221F_flag.bits.b4,
                             fp->dmg.x1830_percent);
-        func_80040B8C(fp->xC_playerID, fp->x221F_flag.bits.b4, heal_amount);
+        pl_80040B8C(fp->xC_playerID, fp->x221F_flag.bits.b4, heal_amount);
     }
 
     fp->facing_dir = (f32) fp->AbsorbAttr.x1A40_absorbHitDirection;

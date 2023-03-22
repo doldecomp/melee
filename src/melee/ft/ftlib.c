@@ -983,7 +983,7 @@ s32 ftLib_800874BC(HSD_GObj* gobj)
 void ftLib_800874CC(HSD_GObj* gobj, s32 arg1, s32 arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8003E4A4(fp->xC_playerID, fp->x221F_flag.bits.b4, arg1, arg2);
+    pl_8003E4A4(fp->xC_playerID, fp->x221F_flag.bits.b4, arg1, arg2);
 }
 
 void ftLib_80087508(s8 arg0, u8 arg1)

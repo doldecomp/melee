@@ -655,7 +655,7 @@ void ftCommon_8007D60C(Fighter* fp)
 {
     struct attr* attr = &fp->x110_attr;
     if (fp->x2227_flag.bits.b0 && fp->x1968_jumpsUsed <= 1) {
-        func_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
+        pl_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
     }
     fp->ground_or_air = GA_Air;
     fp->gr_vel = 0;
@@ -708,7 +708,7 @@ void ftCommon_8007D780(Fighter* fp)
         fp->dmg.x18A4_knockbackMagnitude = 0;
     }
     if (fp->x2227_flag.bits.b0 && fp->x1968_jumpsUsed <= 1) {
-        func_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
+        pl_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
     }
 }
 
@@ -722,7 +722,7 @@ void ftCommon_8007D7FC(Fighter* fp)
             fp->dmg.x18A4_knockbackMagnitude = 0;
         }
         if (fp->x2227_flag.bits.b0 && fp->x1968_jumpsUsed <= 1) {
-            func_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
+            pl_8003FC44(fp->xC_playerID, fp->x221F_flag.bits.b4);
         }
     }
     if (fp->x594_animCurrFlags1.bits.b0) {
@@ -885,7 +885,7 @@ s32 ftCommon_8007DC08(Fighter* fp, f32 arg8)
     } else {
         fp->x2224_flag.bits.b5 = 0;
     }
-    func_800402D0(fp->xC_playerID, fp->x221F_flag.bits.b4, phi_r31);
+    pl_800402D0(fp->xC_playerID, fp->x221F_flag.bits.b4, phi_r31);
     return phi_r31;
 }
 
@@ -1213,7 +1213,7 @@ void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
     if (ft_OnItemDropExt[fp->x4_fighterKind] != NULL) {
         ft_OnItemDropExt[fp->x4_fighterKind](gobj, arg2);
     }
-    func_8003EA08(fp->xC_playerID, fp->x221F_flag.bits.b4);
+    pl_8003EA08(fp->xC_playerID, fp->x221F_flag.bits.b4);
     fp->x1974_heldItem = NULL;
 }
 
@@ -1868,7 +1868,7 @@ void ftCommon_8007FF74(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     fp->x1980 = NULL;
     ftCommon_8007ECD4(fp, 2);
-    func_80040460(fp->xC_playerID, fp->x221F_flag.bits.b4);
+    pl_80040460(fp->xC_playerID, fp->x221F_flag.bits.b4);
 }
 
 bool ftCommon_8007FFD8(Fighter* fp, f32 arg8)
@@ -1898,7 +1898,7 @@ bool ftCommon_8007FFD8(Fighter* fp, f32 arg8)
         fp->x2018 = fp->x2018 - arg8;
         phi_r31 = true;
     }
-    func_800402D0(fp->xC_playerID, fp->x221F_flag.bits.b4, phi_r31);
+    pl_800402D0(fp->xC_playerID, fp->x221F_flag.bits.b4, phi_r31);
     return phi_r31;
 }
 

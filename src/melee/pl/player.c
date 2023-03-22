@@ -2071,24 +2071,24 @@ void Player_InitOrResetPlayer(s32 slot)
 void Player_80036CF0(s32 slot)
 {
     Player_InitOrResetPlayer(slot);
-    func_8003891C(slot);
+    pl_8003891C(slot);
 }
 
 void Player_80036D24(s32 slot)
 {
     Player_InitOrResetPlayer(slot);
-    func_80038F10(slot);
+    pl_80038F10(slot);
 }
 
 void Player_InitAllPlayers(void)
 {
     int i;
-    func_8003715C();
-    func_80037590();
+    pl_8003715C();
+    pl_80037590();
 
     for (i = 0; i < PL_SLOT_MAX; i++) {
         Player_InitOrResetPlayer(i);
-        func_8003891C(i);
+        pl_8003891C(i);
     }
 }
 
