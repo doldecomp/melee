@@ -30,7 +30,7 @@ static void setGfx(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     hsd_obj_ptr = gobj->hsd_obj;
 
-    ef_Spawn(0x47C, gobj, hsd_obj_ptr);
+    efSync_Spawn(0x47C, gobj, hsd_obj_ptr);
     fp->x2219_flag.bits.b0 = 1;
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;

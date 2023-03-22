@@ -182,7 +182,7 @@ void ftPikachu_80126144(HSD_GObj* gobj)
         if (fp->x4_fighterKind != FTKIND_PICHU) {
             lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj, 0,
                         &vec);
-            ef_Spawn(0x3F4, gobj, &vec);
+            efSync_Spawn(0x3F4, gobj, &vec);
             fp->x2219_flag.bits.b0 = 1;
             fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
@@ -197,7 +197,7 @@ void ftPikachu_80126144(HSD_GObj* gobj)
             vec2.x += (6.0f * tempf) - 3.0f;
             tempf = HSD_Randf();
             vec2.y += (6.0f * tempf) - 3.0f;
-            ef_Spawn(0x3F4, gobj, &vec2);
+            efSync_Spawn(0x3F4, gobj, &vec2);
             fp->x2219_flag.bits.b0 = 1;
             fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
@@ -224,7 +224,7 @@ void ftPikachu_801262B4(HSD_GObj* gobj)
         if (fp->x4_fighterKind != FTKIND_PICHU) {
             lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 2)].x0_jobj, 0,
                         &vec);
-            ef_Spawn(0x3F4, gobj, &vec);
+            efSync_Spawn(0x3F4, gobj, &vec);
             fp->x2219_flag.bits.b0 = 1;
             fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
@@ -239,7 +239,7 @@ void ftPikachu_801262B4(HSD_GObj* gobj)
             vec2.x += (10.0f * tempf) - 5.0f;
             tempf = HSD_Randf();
             vec2.y += (10.0f * tempf) - 5.0f;
-            ef_Spawn(0x3F4, gobj, &vec2);
+            efSync_Spawn(0x3F4, gobj, &vec2);
             fp->x2219_flag.bits.b0 = 1;
             fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
             fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;

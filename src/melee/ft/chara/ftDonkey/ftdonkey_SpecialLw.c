@@ -165,7 +165,7 @@ void ftDonkey_8010E0CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        ef_Spawn(0x4C6, gobj, fp->ft_bones[1].x0_jobj);
+        efSync_Spawn(0x4C6, gobj, fp->ft_bones[1].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -177,7 +177,7 @@ void ftDonkey_8010E148(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        ef_Spawn(0x4C7, gobj, fp->ft_bones[1].x0_jobj);
+        efSync_Spawn(0x4C7, gobj, fp->ft_bones[1].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

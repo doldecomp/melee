@@ -35,9 +35,9 @@ void ftZelda_801396E0(HSD_GObj* gobj)
         lb_8000B1CC(fp->ft_bones[4].x0_jobj, NULL, &vec);
 
         if (fp->ground_or_air == GA_Ground) {
-            ef_Spawn(0x4F6, gobj, fp->ft_bones->x0_jobj);
+            efSync_Spawn(0x4F6, gobj, fp->ft_bones->x0_jobj);
         } else {
-            ef_Spawn(0x4F7, gobj, fp->ft_bones->x0_jobj);
+            efSync_Spawn(0x4F7, gobj, fp->ft_bones->x0_jobj);
         }
 
         fp->x2219_flag.bits.b0 = true;
@@ -56,7 +56,7 @@ void ftZelda_8013979C(HSD_GObj* gobj)
         lb_8000B1CC(fp->ft_bones[4].x0_jobj, NULL, &vec);
 
         if (!fp->x2219_flag.bits.b0) {
-            ef_Spawn(0x505, gobj, &vec);
+            efSync_Spawn(0x505, gobj, &vec);
             fp->x2219_flag.bits.b0 = true;
         }
     }

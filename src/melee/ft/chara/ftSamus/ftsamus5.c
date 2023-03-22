@@ -28,7 +28,7 @@ void ftSamus_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
     fp->mv.ss.unk5.x0 = 0;
     ftAnim_8006EBA4(gobj);
-    ef_Spawn(0x482, gobj, fp->ft_bones[3].x0_jobj);
+    efSync_Spawn(0x482, gobj, fp->ft_bones[3].x0_jobj);
     fp->fv.ss.x2244 = 1;
 }
 
@@ -50,7 +50,7 @@ void ftSamus_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     fp->x80_self_vel.y = samus_attr->x44;
     ftCommon_8007D440(fp, samus_attr->x40);
     ftAnim_8006EBA4(gobj);
-    ef_Spawn(0x482, gobj, fp->ft_bones[3].x0_jobj);
+    efSync_Spawn(0x482, gobj, fp->ft_bones[3].x0_jobj);
     fp->fv.ss.x2244 = 1;
 }
 

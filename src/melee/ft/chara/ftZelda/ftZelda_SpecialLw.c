@@ -24,7 +24,7 @@ void ftZelda_8013ADB4(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        ef_Spawn(0x4FC, gobj, fp->ft_bones[0x68].x0_jobj);
+        efSync_Spawn(0x4FC, gobj, fp->ft_bones[0x68].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
 
@@ -41,7 +41,7 @@ void ftZelda_8013AE30(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        ef_Spawn(0x4FD, gobj, fp->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x4FD, gobj, fp->ft_bones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = 1;
     }
 

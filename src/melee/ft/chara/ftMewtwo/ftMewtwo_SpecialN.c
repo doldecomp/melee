@@ -563,7 +563,7 @@ void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* gobj)
                     fp->mv.mt.SpecialN.x2348 = true;
                     ftCommon_8007EBAC(fp, 0xCU, 0U);
                     lb_8000B1CC(fp->ft_bones[0].x0_jobj, &sp34, &sp40);
-                    ef_Spawn(0x1B, gobj, &sp40);
+                    efSync_Spawn(0x1B, gobj, &sp40);
                     ft_800BFFD0(fp, 0x5C, 0);
                 }
             }
@@ -716,7 +716,7 @@ void ftMewtwo_SpecialAirNLoop_Anim(HSD_GObj* gobj)
                     ftCommon_8007EBAC(fp, 0xCU, 0U);
 
                     lb_8000B1CC(fp->ft_bones[0].x0_jobj, &sp34, &sp40);
-                    ef_Spawn(0x1B, gobj, &sp40);
+                    efSync_Spawn(0x1B, gobj, &sp40);
                     ft_800BFFD0(fp, 0x5C, 0);
                 }
             }

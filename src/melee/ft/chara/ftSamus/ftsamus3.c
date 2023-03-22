@@ -127,7 +127,7 @@ void ftSamus_801293BC(HSD_GObj* gobj)
         fp->fv.ss.x2230 = 0U;
 
         ftSamus_801291F0(gobj);
-        ef_Spawn(0x486, gobj, &vec1, &fp->facing_dir);
+        efSync_Spawn(0x486, gobj, &vec1, &fp->facing_dir);
         fp->x1974_heldItem = held_item;
     }
 }
@@ -480,7 +480,7 @@ void ftSamus_8012A168(HSD_GObj* gobj, Vec3* spawnlocation)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        ef_Spawn(0x483, gobj, spawnlocation);
+        efSync_Spawn(0x483, gobj, spawnlocation);
         fp->x2219_flag.bits.b0 = 1;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

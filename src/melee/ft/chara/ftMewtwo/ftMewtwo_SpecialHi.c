@@ -33,7 +33,7 @@ void ftMewtwo_SpecialHi_SetStartGFX(HSD_GObj* gobj)
 
         if (!fp1->x2219_flag.bits.b0) {
             lb_8000B1CC(fp1->ft_bones[WaistN].x0_jobj, NULL, &pos);
-            ef_Spawn(0x4E8, gobj, &pos);
+            efSync_Spawn(0x4E8, gobj, &pos);
             fp1->x2219_flag.bits.b0 = true;
         }
     }

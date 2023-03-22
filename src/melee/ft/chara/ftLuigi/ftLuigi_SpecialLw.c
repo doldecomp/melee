@@ -39,7 +39,7 @@ static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* hsd_obj = gobj->hsd_obj;
-    ef_Spawn(0x509, gobj, hsd_obj);
+    efSync_Spawn(0x509, gobj, hsd_obj);
     fp->x2219_flag.bits.b0 = 1;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

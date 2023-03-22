@@ -132,7 +132,7 @@ void ftPikachu_EfSpawn_801277AC(HSD_GObj* gobj)
             pos.y += pika_attr->xD0;
             ef_pos = pos;
             ef_pos.y += pika_attr->xCC;
-            ef_Spawn(0x4C3, gobj, &ef_pos);
+            efSync_Spawn(0x4C3, gobj, &ef_pos);
             {
                 vec.z = 0.0f;
                 vec.x = 0.0f;

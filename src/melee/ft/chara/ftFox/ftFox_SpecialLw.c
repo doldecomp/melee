@@ -18,7 +18,7 @@ void ftFox_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x488, gobj, fp->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x488, gobj, fp->ft_bones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -33,7 +33,7 @@ void ftFox_SpecialLw_CreateStartGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x489, gobj, fp->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x489, gobj, fp->ft_bones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -47,7 +47,7 @@ void ftFox_SpecialLw_CreateReflectGFX(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x48A, gobj, fp->ft_bones[4].x0_jobj);
+        efSync_Spawn(0x48A, gobj, fp->ft_bones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
         fp->x2219_flag.bits.b0 = true;
     }

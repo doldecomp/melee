@@ -2,8 +2,8 @@
 
 .section .text  # 0x8005FDDC - 0x80061D6C
 
-.global ef_Spawn
-ef_Spawn:
+.global efSync_Spawn
+efSync_Spawn:
 /* 8005FDDC 0005C9BC  7C 08 02 A6 */	mflr r0
 /* 8005FDE0 0005C9C0  90 01 00 04 */	stw r0, 4(r1)
 /* 8005FDE4 0005C9C4  94 21 FD 98 */	stwu r1, -0x268(r1)

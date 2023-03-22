@@ -327,7 +327,7 @@ void ftPurin_8013C94C(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (!fp->x2219_flag.bits.b0) {
-        ef_Spawn(1238, gobj, fp->ft_bones[5].x0_jobj);
+        efSync_Spawn(1238, gobj, fp->ft_bones[5].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -2936,7 +2936,7 @@ lbl_8013EA60:
 /* 8013EA98 0013B678  38 DD 00 2C */	addi r6, r29, 0x2c
 /* 8013EA9C 0013B67C  38 E1 00 30 */	addi r7, r1, 0x30
 /* 8013EAA0 0013B680  38 60 03 FF */	li r3, 0x3ff
-/* 8013EAA4 0013B684  4B F2 13 39 */	bl ef_Spawn
+/* 8013EAA4 0013B684  4B F2 13 39 */	bl efSync_Spawn
 lbl_8013EAA8:
 /* 8013EAA8 0013B688  80 BD 23 64 */	lwz r5, 0x2364(r29)
 /* 8013EAAC 0013B68C  38 7D 00 00 */	addi r3, r29, 0
@@ -6024,7 +6024,7 @@ lbl_80141314:
 /* 8014132C 0013DF0C  4C C6 31 82 */	crclr 6
 /* 80141330 0013DF10  38 60 04 06 */	li r3, 0x406
 /* 80141334 0013DF14  D0 01 00 44 */	stfs f0, 0x44(r1)
-/* 80141338 0013DF18  4B F1 EA A5 */	bl ef_Spawn
+/* 80141338 0013DF18  4B F1 EA A5 */	bl efSync_Spawn
 /* 8014133C 0013DF1C  38 60 00 03 */	li r3, 3
 /* 80141340 0013DF20  38 81 00 40 */	addi r4, r1, 0x40
 /* 80141344 0013DF24  4B EE FB 01 */	bl Camera_80030E44
@@ -6084,7 +6084,7 @@ lbl_801413F8:
 /* 80141410 0013DFF0  4C C6 31 82 */	crclr 6
 /* 80141414 0013DFF4  38 60 04 06 */	li r3, 0x406
 /* 80141418 0013DFF8  D0 01 00 34 */	stfs f0, 0x34(r1)
-/* 8014141C 0013DFFC  4B F1 E9 C1 */	bl ef_Spawn
+/* 8014141C 0013DFFC  4B F1 E9 C1 */	bl efSync_Spawn
 /* 80141420 0013E000  38 60 00 03 */	li r3, 3
 /* 80141424 0013E004  38 81 00 30 */	addi r4, r1, 0x30
 /* 80141428 0013E008  4B EE FA 1D */	bl Camera_80030E44
@@ -6608,7 +6608,7 @@ lbl_80141AD0:
 /* 80141AE8 0013E6C8  4C C6 31 82 */	crclr 6
 /* 80141AEC 0013E6CC  38 60 04 06 */	li r3, 0x406
 /* 80141AF0 0013E6D0  D0 01 00 54 */	stfs f0, 0x54(r1)
-/* 80141AF4 0013E6D4  4B F1 E2 E9 */	bl ef_Spawn
+/* 80141AF4 0013E6D4  4B F1 E2 E9 */	bl efSync_Spawn
 /* 80141AF8 0013E6D8  38 60 00 03 */	li r3, 3
 /* 80141AFC 0013E6DC  38 81 00 50 */	addi r4, r1, 0x50
 /* 80141B00 0013E6E0  4B EE F3 45 */	bl Camera_80030E44
@@ -6668,7 +6668,7 @@ lbl_80141BB4:
 /* 80141BCC 0013E7AC  4C C6 31 82 */	crclr 6
 /* 80141BD0 0013E7B0  38 60 04 06 */	li r3, 0x406
 /* 80141BD4 0013E7B4  D0 01 00 44 */	stfs f0, 0x44(r1)
-/* 80141BD8 0013E7B8  4B F1 E2 05 */	bl ef_Spawn
+/* 80141BD8 0013E7B8  4B F1 E2 05 */	bl efSync_Spawn
 /* 80141BDC 0013E7BC  38 60 00 03 */	li r3, 3
 /* 80141BE0 0013E7C0  38 81 00 40 */	addi r4, r1, 0x40
 /* 80141BE4 0013E7C4  4B EE F2 61 */	bl Camera_80030E44
@@ -6802,7 +6802,7 @@ lbl_80141D80:
 /* 80141DC4 0013E9A4  38 DF 00 2C */	addi r6, r31, 0x2c
 /* 80141DC8 0013E9A8  38 E1 00 5C */	addi r7, r1, 0x5c
 /* 80141DCC 0013E9AC  38 60 03 FF */	li r3, 0x3ff
-/* 80141DD0 0013E9B0  4B F1 E0 0D */	bl ef_Spawn
+/* 80141DD0 0013E9B0  4B F1 E0 0D */	bl efSync_Spawn
 /* 80141DD4 0013E9B4  C0 1E 00 44 */	lfs f0, 0x44(r30)
 /* 80141DD8 0013E9B8  D0 1F 23 5C */	stfs f0, 0x235c(r31)
 /* 80141DDC 0013E9BC  48 00 00 C4 */	b lbl_80141EA0
