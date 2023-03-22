@@ -37,7 +37,7 @@ void ftCommon_8007D468(Fighter*);
 void ftCommon_8007D494(Fighter*, f32, f32);
 void ftCommon_8007D4B8(Fighter*);
 void ftCommon_8007D4E4(Fighter*);
-void ftComm_ClampFallSpeed(Fighter*, f32);
+void ftCommon_ClampFallSpeed(Fighter*, f32);
 void ftCommon_8007D508(Fighter*, f32, f32);
 bool ftCommon_8007D528(Fighter*);
 void ftCommon_8007D5BC(Fighter*);

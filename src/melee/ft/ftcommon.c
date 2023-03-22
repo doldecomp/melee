@@ -604,7 +604,7 @@ void ftCommon_8007D4E4(Fighter* fp)
     fp->x80_self_vel.y = -fp->x110_attr.x184_FastfallVelocity;
 }
 
-void ftComm_ClampFallSpeed(Fighter* fp, f32 val)
+void ftCommon_ClampFallSpeed(Fighter* fp, f32 val)
 {
     if (fp->x80_self_vel.y > val) {
         fp->x80_self_vel.y = val;

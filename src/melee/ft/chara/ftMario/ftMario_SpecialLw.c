@@ -175,7 +175,7 @@ static void doPhys(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirLw, transition_flags,
                               NULL, fp->x894_currentAnimFrame, 1, 0);
-    ftComm_ClampFallSpeed(fp, sa->speciallw.tap_grav);
+    ftCommon_ClampFallSpeed(fp, sa->speciallw.tap_grav);
     ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
