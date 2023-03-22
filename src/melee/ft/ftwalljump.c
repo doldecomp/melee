@@ -13,7 +13,7 @@ static int const max_input_frames = 254;
 
 /// UnclePunch Map file: Interrupt_Walljump
 /// @returns: @c true if this function started a walljump, otherwise @c false.
-bool func_8008169C(HSD_GObj* gobj)
+bool ftWallJump_8008169C(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
 

@@ -3,6 +3,6 @@
 
 #include <baselib/gobj.h>
 
-bool func_8008169C(HSD_GObj* gobj);
+bool ftWallJump_8008169C(HSD_GObj* gobj);
 
 #endif
