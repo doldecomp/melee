@@ -172,11 +172,11 @@ void ftNess_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* pos)
     lb_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp20);
     lb_8000B1CC(fp->ft_bones[0x2].x0_jobj, NULL, &sp14);
     *pos = sp20;
-    lbvector_Sub(pos, &sp14);
-    lbvector_Rotate(pos, 4,
+    lbVector_Sub(pos, &sp14);
+    lbVector_Rotate(pos, 4,
                     -atan2f(collData->x14C_ground.normal.x,
                             collData->x14C_ground.normal.y));
-    lbvector_Add(pos, &sp14);
+    lbVector_Add(pos, &sp14);
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -205,11 +205,11 @@ void ftNess_YoyoSetHitPos(HSD_GObj* gobj)
         lb_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp14);
         lb_8000B1CC(fp->ft_bones[0x2].x0_jobj, NULL, &sp20);
         sp2C = sp14;
-        lbvector_Sub(&sp2C, &sp20);
-        lbvector_Rotate(&sp2C, 4,
+        lbVector_Sub(&sp2C, &sp20);
+        lbVector_Rotate(&sp2C, 4,
                         -atan2f(collData->x14C_ground.normal.x,
                                 collData->x14C_ground.normal.y));
-        lbvector_Add(&sp2C, &sp20);
+        lbVector_Add(&sp2C, &sp20);
     }
 
     fp->fv.ns.yoyo_hitbox_pos = sp2C;
@@ -241,11 +241,11 @@ void ftNess_YoyoSetHitPosUnk(HSD_GObj* gobj, f32 pos_unk)
         lb_8000B1CC(fp->ft_bones[0x3D].x0_jobj, NULL, &sp18);
         lb_8000B1CC(fp->ft_bones[0x2].x0_jobj, NULL, &sp24);
         sp3C = sp18;
-        lbvector_Sub(&sp3C, &sp24);
-        lbvector_Rotate(&sp3C, 4,
+        lbVector_Sub(&sp3C, &sp24);
+        lbVector_Rotate(&sp3C, 4,
                         -atan2f(collData->x14C_ground.normal.x,
                                 collData->x14C_ground.normal.y));
-        lbvector_Add(&sp3C, &sp24);
+        lbVector_Add(&sp3C, &sp24);
     }
 
     sp30 = fp->fv.ns.yoyo_hitbox_pos;

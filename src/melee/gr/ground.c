@@ -2274,7 +2274,7 @@ bool Ground_801C2D24(enum_t arg0, Vec3* arg1)
     if (arg0 == 8) {
         Ground_801C2D24(4, arg1);
         Ground_801C2D24(5, &sp20);
-        lbvector_Add(arg1, &sp20);
+        lbVector_Add(arg1, &sp20);
         arg1->x *= 0.5f;
         arg1->y *= 0.5f;
         arg1->z *= 0.5f;
@@ -2284,7 +2284,7 @@ bool Ground_801C2D24(enum_t arg0, Vec3* arg1)
     if (arg0 == 9) {
         Ground_801C2D24(6, arg1);
         Ground_801C2D24(7, &sp14);
-        lbvector_Add(arg1, &sp14);
+        lbVector_Add(arg1, &sp14);
         arg1->x *= 0.5f;
         arg1->y *= 0.5f;
         arg1->z *= 0.5f;
@@ -4057,7 +4057,7 @@ void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
 
     splGetSplinePoint(arg1, arg0);
     func_8000E9F0(&vec0, arg0, arg8);
-    lbvector_Normalize(&vec0);
+    lbVector_Normalize(&vec0);
     y0 = vec0.y;
 
     if (vec0.y < 0.0F)
@@ -4071,8 +4071,8 @@ void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
         vec2.y = 1.0F;
     }
 
-    lbvector_CrossprodNormalized(&vec0, &vec2, &vec1);
-    lbvector_CrossprodNormalized(&vec1, &vec0, &vec2);
+    lbVector_CrossprodNormalized(&vec0, &vec2, &vec1);
+    lbVector_CrossprodNormalized(&vec1, &vec0, &vec2);
     result_y = asinf(vec1.z);
     z1 = vec1.z;
 
@@ -4800,7 +4800,7 @@ static inline f32 fabsf(f32 x)
 
 void Ground_801C5AEC(Vec3* v, Vec3* arg1, Vec3* arg2, Vec3* arg3)
 {
-    lbvector_EulerAnglesFromONB(v, arg1, arg2, arg3);
+    lbVector_EulerAnglesFromONB(v, arg1, arg2, arg3);
 
     if (!(fabsf(v->x) < 30000))
         v->x = 0;

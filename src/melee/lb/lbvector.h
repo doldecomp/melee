@@ -9,42 +9,42 @@
 
 extern inline float sqrtf_accurate(float x);
 
-static float lbvector_Len(Vec3* vec);
-static float lbvector_Len_xy(Vec3* vec);
+static float lbVector_Len(Vec3* vec);
+static float lbVector_Len_xy(Vec3* vec);
 
-float lbvector_Normalize(Vec3* vec);
-float lbvector_NormalizeXY(Vec3* a);
-Vec3* lbvector_Add(Vec3* a, Vec3* b);
-Vec3* lbvector_Add_xy(Vec3* a, Vec3* b);
-Vec3* lbvector_Sub(Vec3* a, Vec3* b);
-Vec3* lbvector_Diff(Vec3* a, Vec3* b, Vec3* result);
-Vec3* lbvector_CrossprodNormalized(Vec3* a, Vec3* b, Vec3* result);
+float lbVector_Normalize(Vec3* vec);
+float lbVector_NormalizeXY(Vec3* a);
+Vec3* lbVector_Add(Vec3* a, Vec3* b);
+Vec3* lbVector_Add_xy(Vec3* a, Vec3* b);
+Vec3* lbVector_Sub(Vec3* a, Vec3* b);
+Vec3* lbVector_Diff(Vec3* a, Vec3* b, Vec3* result);
+Vec3* lbVector_CrossprodNormalized(Vec3* a, Vec3* b, Vec3* result);
 
-float lbvector_Angle(Vec3* a, Vec3* b);
-float lbvector_AngleXY(Vec3* a, Vec3* b);
+float lbVector_Angle(Vec3* a, Vec3* b);
+float lbVector_AngleXY(Vec3* a, Vec3* b);
 
 static float sin(float angle);
 static float cos(float angle);
 
-void lbvector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle);
-void lbvector_Rotate(Vec3* v, int axis, float angle);
+void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle);
+void lbVector_Rotate(Vec3* v, int axis, float angle);
 
 float dummy(void);
-void lbvector_Mirror(Vec3* a, Vec3* b);
-float lbvector_CosAngle(Vec3* a, Vec3* b);
-Vec3* lbvector_Lerp(Vec3* a, Vec3* b, Vec3* result, float f);
+void lbVector_Mirror(Vec3* a, Vec3* b);
+float lbVector_CosAngle(Vec3* a, Vec3* b);
+Vec3* lbVector_Lerp(Vec3* a, Vec3* b, Vec3* result, float f);
 Vec3* lbVector_8000DE38(Mtx m, Vec3* v, float c);
 
-Vec3* lbvector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
+Vec3* lbVector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
                                   Vec3* c);
-Vec3* lbvector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a,
+Vec3* lbVector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a,
                                          Vec3* c);
-Vec3* lbvector_ApplyEulerRotation(Vec3* v, Vec3* angles);
-float lbvector_sqrtf_accurate(float x);
+Vec3* lbVector_ApplyEulerRotation(Vec3* v, Vec3* angles);
+float lbVector_sqrtf_accurate(float x);
 
-Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
+Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
                              Vec3* screenCoords, int d);
-void lbvector_CreateEulerMatrix(Mtx m, Vec3* angles);
-float lbvector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d);
+void lbVector_CreateEulerMatrix(Mtx m, Vec3* angles);
+float lbVector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d);
 
 #endif

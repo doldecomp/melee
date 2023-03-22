@@ -387,7 +387,7 @@ void ftNess_SpecialAirHi_CollisionModVel(
     sp14.y = 0.0f;
     sp14.x = 0.0f;
     sp14.z = 1.0f;
-    lbvector_RotateAboutUnitAxis(&fp->x80_self_vel, &sp14,
+    lbVector_RotateAboutUnitAxis(&fp->x80_self_vel, &sp14,
                                  phi_f1 - fp->mv.ns.specialhi.aerialVel);
     fp->mv.ns.specialhi.aerialVel =
         atan2f(fp->x80_self_vel.y, fp->x80_self_vel.x);
@@ -573,7 +573,7 @@ void ftNess_SpecialHi_Action(
 
         {
             f32 temp_f1_2 =
-                lbvector_Angle(&fp->x6F0_collData.x14C_ground.normal, &sp40);
+                lbVector_Angle(&fp->x6F0_collData.x14C_ground.normal, &sp40);
 
             if (!(temp_f1_2 < (f32) M_PI_2)) {
                 if (!(temp_f1_2 >
@@ -1760,7 +1760,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
         ledgeGrabDir = -1;
     }
     if (ft_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
-        if (lbvector_Angle(&fighter_r31->x6F0_collData.x14C_ground.normal,
+        if (lbVector_Angle(&fighter_r31->x6F0_collData.x14C_ground.normal,
                            &fighter_r31->x80_self_vel) >
             (0.01745329238474369f *
              (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
@@ -1803,13 +1803,13 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
 
     ecbFlag = fighter_r31->x6F0_collData.x134_envFlags;
     if ((ecbFlag & 0x6000) != 0) {
-        if (lbvector_Angle(&fighter_r31->x6F0_collData.x188_ceiling.normal,
+        if (lbVector_Angle(&fighter_r31->x6F0_collData.x188_ceiling.normal,
                            &fighter_r31->x80_self_vel) >
             (0.01745329238474369f *
              (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
         {
             fighter_data3 = gobj->user_data;
-            lbvector_Mirror(&fighter_data3->x80_self_vel,
+            lbVector_Mirror(&fighter_data3->x80_self_vel,
                             &fighter_r31->x6F0_collData.x188_ceiling.normal);
             (new_var = fighter_data3)->x80_self_vel.x *= 0.5f;
             new_var->x80_self_vel.y *= 0.5f;
@@ -1817,7 +1817,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
             temp_f0_2 = new_var->x80_self_vel.y;
             fmuls1 = temp_f1_2 * temp_f1_2;
             fmuls2 = temp_f0_2 * temp_f0_2;
-            lbvector_sqrtf_accurate(fmuls1 + fmuls2);
+            lbVector_sqrtf_accurate(fmuls1 + fmuls2);
             DriftMax = new_var->x110_attr.x17C_AerialDriftMax;
             DriftMax == 0.0f;
             ftCommon_8007D440(new_var, new_var->x110_attr.x17C_AerialDriftMax);
@@ -1839,14 +1839,14 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
 
     } else {
         if ((ecbFlag & 0x3F) != 0) {
-            if (lbvector_Angle(
+            if (lbVector_Angle(
                     &fighter_r31->x6F0_collData.x160_rightwall.normal,
                     &fighter_r31->x80_self_vel) >
                 (0.01745329238474369f *
                  (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
             {
                 fighter_data4 = gobj->user_data;
-                lbvector_Mirror(
+                lbVector_Mirror(
                     &fighter_data4->x80_self_vel,
                     &fighter_r31->x6F0_collData.x160_rightwall.normal);
                 (new_var = fighter_data4)->x80_self_vel.x *= 0.5f;
@@ -1855,7 +1855,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
                 temp_f0_3 = new_var->x80_self_vel.y;
                 fmuls3 = temp_f1_5 * temp_f1_5;
                 fmuls4 = temp_f0_3 * temp_f0_3;
-                lbvector_sqrtf_accurate(fmuls3 + fmuls4);
+                lbVector_sqrtf_accurate(fmuls3 + fmuls4);
                 DriftMax = new_var->x110_attr.x17C_AerialDriftMax;
                 DriftMax == 0.0f;
                 ftCommon_8007D440(new_var,
@@ -1882,14 +1882,14 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
             return;
         }
         if ((ecbFlag & 0xFC0) != 0) {
-            if (lbvector_Angle(
+            if (lbVector_Angle(
                     &fighter_r31->x6F0_collData.x174_leftwall.normal,
                     &fighter_r31->x80_self_vel) >
                 (0.01745329238474369f *
                  (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
             {
                 fighter_data5 = gobj->user_data;
-                lbvector_Mirror(
+                lbVector_Mirror(
                     &fighter_data5->x80_self_vel,
                     &fighter_r31->x6F0_collData.x174_leftwall.normal);
                 (new_var = fighter_data5)->x80_self_vel.x *= 0.5f;
@@ -1898,7 +1898,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
                 temp_f0_4 = new_var->x80_self_vel.y;
                 fmuls5 = temp_f1_8 * temp_f1_8;
                 fmuls6 = temp_f0_4 * temp_f0_4;
-                lbvector_sqrtf_accurate(fmuls5 + fmuls6);
+                lbVector_sqrtf_accurate(fmuls5 + fmuls6);
                 DriftMax = new_var->x110_attr.x17C_AerialDriftMax;
                 DriftMax == 0.0f;
                 ftCommon_8007D440(new_var,

@@ -853,7 +853,7 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
     s32 var_r30;
     s32 ret;
 
-    lbvector_Diff(&arg1->x4_vec, &arg1->x1C_vec, &vel);
+    lbVector_Diff(&arg1->x4_vec, &arg1->x1C_vec, &vel);
     x = fabs_inline(vel.x);
     y = fabs_inline(vel.y);
 
@@ -900,7 +900,7 @@ s32 func_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
     while ((var_r31 < var_r30) && !arg1->x34_flags.bits.b5) {
         func_80042DB0(arg1, 1.0f / (var_r30 - var_r31));
         arg1->x10_vec = arg1->x4_vec;
-        lbvector_Add(&arg1->x4_vec, &vel);
+        lbVector_Add(&arg1->x4_vec, &vel);
         func_80041DD0(arg1, arg2);
         ret = (*arg0)(arg1, arg2);
         func_80058AA0();

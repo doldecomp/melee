@@ -183,7 +183,7 @@ void Stage_80224CAC(Vec3* arg0)
     rot_vec.y = 0.0174532923847F * stage_info.cam_info.fixed_cam_horz_angle;
     rot_vec.z = 0.0F;
 
-    lbvector_ApplyEulerRotation(&another_vec, &rot_vec);
+    lbVector_ApplyEulerRotation(&another_vec, &rot_vec);
 
     {
         Vec3 last_vec;

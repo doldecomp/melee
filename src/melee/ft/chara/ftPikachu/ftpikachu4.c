@@ -385,7 +385,7 @@ void ftPikachu_801267C8(HSD_GObj* gobj)
         bool0 = ftPikachu_GetBool(gobj);
 
         if (bool0) {
-            f32 tempf = lbvector_AngleXY(&collData->x14C_ground.normal,
+            f32 tempf = lbVector_AngleXY(&collData->x14C_ground.normal,
                                          &fp->x80_self_vel);
             if (tempf > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftCommon_8007D7FC(fp);
@@ -399,7 +399,7 @@ void ftPikachu_801267C8(HSD_GObj* gobj)
 
     if (!ftCliffCommon_80081298(gobj)) {
         if (collData->x134_envFlags & 0x6000) {
-            f32 angle = lbvector_AngleXY(&collData->x188_ceiling.normal,
+            f32 angle = lbVector_AngleXY(&collData->x188_ceiling.normal,
                                          &fp->x80_self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPikachu_ActionChangeUpdateVel_80127534(gobj);
@@ -407,7 +407,7 @@ void ftPikachu_801267C8(HSD_GObj* gobj)
         }
 
         if (collData->x134_envFlags & 0x3F) {
-            f32 angle = lbvector_AngleXY(&collData->x160_rightwall.normal,
+            f32 angle = lbVector_AngleXY(&collData->x160_rightwall.normal,
                                          &fp->x80_self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPikachu_ActionChangeUpdateVel_80127534(gobj);
@@ -415,7 +415,7 @@ void ftPikachu_801267C8(HSD_GObj* gobj)
         }
 
         if (collData->x134_envFlags & 0xFC0) {
-            f32 angle = lbvector_AngleXY(&collData->x174_leftwall.normal,
+            f32 angle = lbVector_AngleXY(&collData->x174_leftwall.normal,
                                          &fp->x80_self_vel);
             if (angle > (0.017453292f * (90.0f + pika_attr->xA0))) {
                 ftPikachu_ActionChangeUpdateVel_80127534(gobj);
@@ -519,7 +519,7 @@ void ftPikachu_80126C0C(HSD_GObj* gobj)
         lstick_direction.y = fp->input.x624_lstick_y;
         lstick_direction.z = 0.0f;
 
-        if (!(lbvector_AngleXY(&collData->x14C_ground.normal,
+        if (!(lbVector_AngleXY(&collData->x14C_ground.normal,
                                &lstick_direction) < (f32) M_PI_2) &&
             (!ft_8009A134(gobj)))
         {
@@ -691,7 +691,7 @@ bool ftPikachu_80127064(HSD_GObj* gobj)
         vec2.z = 0.0f;
 
         // get the angular difference between them
-        tempf = lbvector_AngleXY(&vec2, &vec1);
+        tempf = lbVector_AngleXY(&vec2, &vec1);
 
         // if the angular difference > the minimum difference, return 1
         if (tempf > (DEG_TO_RAD * (pika_attr->xA8)))

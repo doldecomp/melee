@@ -3476,7 +3476,7 @@ lbl_80007A34:
 /* 80007A84 00004664  48 33 B3 35 */	bl PSVECNormalize
 /* 80007A88 00004668  38 7E 00 00 */	addi r3, r30, 0
 /* 80007A8C 0000466C  38 81 00 68 */	addi r4, r1, 0x68
-/* 80007A90 00004670  48 00 5D 01 */	bl lbvector_AngleXY
+/* 80007A90 00004670  48 00 5D 01 */	bl lbVector_AngleXY
 /* 80007A94 00004674  D0 3F 00 00 */	stfs f1, 0(r31)
 /* 80007A98 00004678  C0 3E 00 00 */	lfs f1, 0(r30)
 /* 80007A9C 0000467C  C0 1A 00 00 */	lfs f0, 0(r26)
@@ -3597,7 +3597,7 @@ void lbColl_800077A0(Vec3* a, Mtx arg1, Vec3* b, Vec3* c, Vec3* d, Vec3* e,
                 }
             }
 
-            *angle = lbvector_AngleXY(e, &diff_cb);
+            *angle = lbVector_AngleXY(e, &diff_cb);
             d->x = dist * e->x + a->x;
             d->y = dist * e->y + a->y;
             d->z = dist * e->z + a->z;

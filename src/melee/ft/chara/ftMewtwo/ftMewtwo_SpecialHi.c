@@ -314,7 +314,7 @@ void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* gobj)
             return;
 
         if ((collData->x134_envFlags & MPCOLL_CEIL) &&
-            (lbvector_AngleXY(&collData->x188_ceiling.normal,
+            (lbVector_AngleXY(&collData->x188_ceiling.normal,
                               &fp1->x80_self_vel) >
              DEG_TO_RAD *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
@@ -323,7 +323,7 @@ void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
 
         if (collData->x134_envFlags & MPCOLL_RIGHTWALL &&
-            (lbvector_AngleXY(&collData->x160_rightwall.normal,
+            (lbVector_AngleXY(&collData->x160_rightwall.normal,
                               &fp1->x80_self_vel) >
              DEG_TO_RAD *
                  (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP)))
@@ -332,7 +332,7 @@ void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* gobj)
         }
 
         if (collData->x134_envFlags & MPCOLL_LEFTWALL &&
-            lbvector_AngleXY(&collData->x174_leftwall.normal,
+            lbVector_AngleXY(&collData->x174_leftwall.normal,
                              &fp1->x80_self_vel) >
                 DEG_TO_RAD *
                     (90.0f + mewtwoAttrs->x68_MEWTWO_TELEPORT_ANGLE_CLAMP))
@@ -431,7 +431,7 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* gobj)
         stickVec.y = fp->input.x624_lstick_y;
         stickVec.z = 0.0f;
 
-        if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &stickVec) <
+        if (!(lbVector_AngleXY(&collData->x14C_ground.normal, &stickVec) <
               (f32) M_PI_2) &&
             (ft_8009A134(gobj) == false))
         {

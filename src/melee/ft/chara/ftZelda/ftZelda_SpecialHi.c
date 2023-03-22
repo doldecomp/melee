@@ -341,20 +341,20 @@ void ftZelda_80139D60(HSD_GObj* gobj)
 
     if (!ftCliffCommon_80081298(gobj)) {
         if ((coll_data->x134_envFlags & MPCOLL_CEIL) != 0) {
-            f32 angle = lbvector_AngleXY(&coll_data->x188_ceiling.normal,
+            f32 angle = lbVector_AngleXY(&coll_data->x188_ceiling.normal,
                                          &fp->x80_self_vel);
             if (angle > DEG_TO_RAD * (90.0F + sa->x60))
                 ftZelda_8013A764(gobj);
         }
 
         if ((coll_data->x134_envFlags & MPCOLL_RIGHTWALL) != 0) {
-            f32 angle = lbvector_AngleXY(&coll_data->x160_rightwall.normal,
+            f32 angle = lbVector_AngleXY(&coll_data->x160_rightwall.normal,
                                          &fp->x80_self_vel);
             if (angle > (DEG_TO_RAD * (90.0F + sa->x60)))
                 ftZelda_8013A764(gobj);
         }
         if ((coll_data->x134_envFlags & MPCOLL_LEFTWALL) != 0) {
-            f32 angle = lbvector_AngleXY(&coll_data->x174_leftwall.normal,
+            f32 angle = lbVector_AngleXY(&coll_data->x174_leftwall.normal,
                                          &fp->x80_self_vel);
             if (angle > (DEG_TO_RAD * (90.0F + sa->x60)))
                 ftZelda_8013A764(gobj);
@@ -448,7 +448,7 @@ void ftZelda_8013A058(HSD_GObj* gobj)
         inputVector.y = fp->input.x624_lstick_y;
         inputVector.z = 0;
 
-        if (!(lbvector_AngleXY(groundVector, (Vec3*) &inputVector.x) <
+        if (!(lbVector_AngleXY(groundVector, (Vec3*) &inputVector.x) <
               (f32) M_PI_2))
         {
             if (ft_8009A134(gobj) == 0) {

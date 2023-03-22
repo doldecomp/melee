@@ -26,19 +26,19 @@ extern inline float sqrtf_accurate(float x)
     return x;
 }
 
-static float lbvector_Len(Vec3* vec)
+static float lbVector_Len(Vec3* vec)
 {
     return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-static float lbvector_Len_xy(Vec3* vec)
+static float lbVector_Len_xy(Vec3* vec)
 {
     return sqrtf_accurate(vec->x * vec->x + vec->y * vec->y);
 }
 
-float lbvector_Normalize(Vec3* vec)
+float lbVector_Normalize(Vec3* vec)
 {
-    float len = lbvector_Len(vec);
+    float len = lbVector_Len(vec);
     float inv;
 
     if (len == 0.0f)
@@ -50,7 +50,7 @@ float lbvector_Normalize(Vec3* vec)
     return len;
 }
 
-float lbvector_NormalizeXY(Vec3* a)
+float lbVector_NormalizeXY(Vec3* a)
 {
     float len = sqrtf_accurate(a->x * a->x + a->y * a->y);
     float inv;
@@ -63,7 +63,7 @@ float lbvector_NormalizeXY(Vec3* a)
     return len;
 }
 
-Vec3* lbvector_Add(Vec3* a, Vec3* b)
+Vec3* lbVector_Add(Vec3* a, Vec3* b)
 {
     a->x += b->x;
     a->y += b->y;
@@ -71,14 +71,14 @@ Vec3* lbvector_Add(Vec3* a, Vec3* b)
     return a;
 }
 
-Vec3* lbvector_Add_xy(Vec3* a, Vec3* b)
+Vec3* lbVector_Add_xy(Vec3* a, Vec3* b)
 {
     a->x += b->x;
     a->y += b->y;
     return a;
 }
 
-Vec3* lbvector_Sub(Vec3* a, Vec3* b)
+Vec3* lbVector_Sub(Vec3* a, Vec3* b)
 {
     a->x -= b->x;
     a->y -= b->y;
@@ -86,7 +86,7 @@ Vec3* lbvector_Sub(Vec3* a, Vec3* b)
     return a;
 }
 
-Vec3* lbvector_Diff(Vec3* a, Vec3* b, Vec3* result)
+Vec3* lbVector_Diff(Vec3* a, Vec3* b, Vec3* result)
 {
     result->x = a->x - b->x;
     result->y = a->y - b->y;
@@ -94,17 +94,17 @@ Vec3* lbvector_Diff(Vec3* a, Vec3* b, Vec3* result)
     return result;
 }
 
-Vec3* lbvector_CrossprodNormalized(Vec3* a, Vec3* b, Vec3* result)
+Vec3* lbVector_CrossprodNormalized(Vec3* a, Vec3* b, Vec3* result)
 {
     PSVECCrossProduct(a, b, result);
-    lbvector_Normalize(result);
+    lbVector_Normalize(result);
     return result;
 }
 
 // 8000D620 - returns the angle between a and b
-float lbvector_Angle(Vec3* a, Vec3* b)
+float lbVector_Angle(Vec3* a, Vec3* b)
 {
-    float lena_lenb = lbvector_Len(a) * lbvector_Len(b);
+    float lena_lenb = lbVector_Len(a) * lbVector_Len(b);
 
     if (lena_lenb > 0.0000000001f) {
         float cosine = (a->x * b->x + a->y * b->y + a->z * b->z) / lena_lenb;
@@ -119,9 +119,9 @@ float lbvector_Angle(Vec3* a, Vec3* b)
 }
 
 // 8000D790 - returns the angle between a and b
-float lbvector_AngleXY(Vec3* a, Vec3* b)
+float lbVector_AngleXY(Vec3* a, Vec3* b)
 {
-    float lena_lenb = lbvector_Len_xy(a) * lbvector_Len_xy(b);
+    float lena_lenb = lbVector_Len_xy(a) * lbVector_Len_xy(b);
 
     if (lena_lenb) {
         float cosine = (a->x * b->x + a->y * b->y) / lena_lenb;
@@ -166,7 +166,7 @@ static float cos(float angle)
 // Rotates v by angle about the given axis. The axis must have unit length, the
 // angle is in radians. Rotation is oriented such that rotating (1,0,0) about
 // the (0,0,1) axis results in (0,1,0).
-void lbvector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
+void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
 {
     // The implementation is unnecessarily complex. the idea is to reduce the
     // problem to the case where the rotation axis is pointing along the z-axis
@@ -227,7 +227,7 @@ void lbvector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
     }
 }
 
-void lbvector_Rotate(Vec3* v, int axis, float angle)
+void lbVector_Rotate(Vec3* v, int axis, float angle)
 {
     float s = sin(angle);
     float c = cos(angle);
@@ -264,7 +264,7 @@ float dummy(void)
 
 // 8000DC6C - compute a -= 2*<a,b>*b. When b has unit length, this mirrors a at
 // the plane that is perpendicular to b and contains the origin.
-void lbvector_Mirror(Vec3* a, Vec3* unit_mirror_axis)
+void lbVector_Mirror(Vec3* a, Vec3* unit_mirror_axis)
 {
     float f =
         (unit_mirror_axis->x * a->x + unit_mirror_axis->y * a->y) * -2.0f;
@@ -275,7 +275,7 @@ void lbvector_Mirror(Vec3* a, Vec3* unit_mirror_axis)
 
 // 8000DCA8 - returns <a/|a|, b/|b|>, which is the cosine of the angle between
 // a and b.
-float lbvector_CosAngle(Vec3* a, Vec3* b)
+float lbVector_CosAngle(Vec3* a, Vec3* b)
 {
     return (a->x * b->x + a->y * b->y) / (sqrtf(a->x * a->x + a->y * a->y) *
                                           sqrtf(b->x * b->x + b->y * b->y));
@@ -284,13 +284,13 @@ float lbvector_CosAngle(Vec3* a, Vec3* b)
 // 8000DDAC - linearly interpolates between a and b as f goes from 0 to 1,
 // returns a + f*(b-a). The numerical error can be large for f=1 when b is
 // small compared to a.
-Vec3* lbvector_Lerp(Vec3* a, Vec3* b, Vec3* result, float f)
+Vec3* lbVector_Lerp(Vec3* a, Vec3* b, Vec3* result, float f)
 {
-    lbvector_Diff(b, a, result);
+    lbVector_Diff(b, a, result);
     result->x *= f;
     result->y *= f;
     result->z *= f;
-    lbvector_Add(result, a);
+    lbVector_Add(result, a);
     return result;
 }
 
@@ -322,7 +322,7 @@ Vec3* lbVector_8000DE38(Mtx m, Vec3* v, float c)
 // 8000DF0C - computes euler angles phi_x,phi_y,phi_z that rotate the standard
 // basis (e1,e2,e3) onto the orthonormal basis (b,c,a) with 3 rotations about
 // the x,y,z axes in that order.
-Vec3* lbvector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
+Vec3* lbVector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
                                   Vec3* c)
 {
     if (b->z == -1.0f || b->z == 1.0f) {
@@ -342,37 +342,37 @@ Vec3* lbvector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
     return result_angles;
 }
 
-// 8000DFF4 - returns lbvector_EulerAnglesFromONB(result_angles, a, c cross a,
+// 8000DFF4 - returns lbVector_EulerAnglesFromONB(result_angles, a, c cross a,
 // c). When rotating about the x,y,z angles about the euler angles returned
 // from that function in that order, the standard basis (e1,e2,e3) is rotated
 // onto (c cross a,c,a).
-Vec3* lbvector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a, Vec3* c)
+Vec3* lbVector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a, Vec3* c)
 {
     Vec3 b;
 
     PSVECCrossProduct(c, a, &b);
-    lbvector_Normalize(&b);
-    lbvector_EulerAnglesFromONB(result_angles, a, &b, c);
+    lbVector_Normalize(&b);
+    lbVector_EulerAnglesFromONB(result_angles, a, &b, c);
     return result_angles;
 }
 
 // 8000E138
-Vec3* lbvector_ApplyEulerRotation(Vec3* v, Vec3* angles)
+Vec3* lbVector_ApplyEulerRotation(Vec3* v, Vec3* angles)
 {
-    lbvector_Rotate(v, 1, angles->x); // rotate about x-axis
-    lbvector_Rotate(v, 2, angles->y); // rotate about y-axis
-    lbvector_Rotate(v, 4, angles->z); // rotate about z-axis
+    lbVector_Rotate(v, 1, angles->x); // rotate about x-axis
+    lbVector_Rotate(v, 2, angles->y); // rotate about y-axis
+    lbVector_Rotate(v, 4, angles->z); // rotate about z-axis
     return v;
 }
 
 // 8000E19C
-float lbvector_sqrtf_accurate(float x)
+float lbVector_sqrtf_accurate(float x)
 {
     return sqrtf_accurate(x);
 }
 
 // 8000E210
-Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
+Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
                              Vec3* screenCoords, int d)
 {
     /// @todo Unused stack.
@@ -463,7 +463,7 @@ Vec3* lbvector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
 // m = rotation_matrix_z(angles.z) * rotation_matrix_y(angles.y) *
 // rotation_matrix_x(angles.x) Column 4 of m is then set to (0,0,0) because
 // there is no translational component.
-void lbvector_CreateEulerMatrix(Mtx m, Vec3* angles)
+void lbVector_CreateEulerMatrix(Mtx m, Vec3* angles)
 {
     float sx = sin(angles->x);
     float cx = cos(angles->x);
@@ -502,16 +502,16 @@ void lbvector_CreateEulerMatrix(Mtx m, Vec3* angles)
 // direction u with the plane that contains c and is perpendicular to u. Write
 // the result to d. If u is numerically too small, set d=a instead. Return the
 // length of c-d.
-float lbvector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
+float lbVector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
 {
     Vec3 b_a;
     Vec3 c_a;
     float sqrlen_b_a;
     int tooSmall;
 
-    lbvector_Diff(b, a, &b_a);
+    lbVector_Diff(b, a, &b_a);
     sqrlen_b_a = b_a.x * b_a.x + b_a.y * b_a.y + b_a.z * b_a.z;
-    lbvector_Diff(c, a, &c_a);
+    lbVector_Diff(c, a, &c_a);
     if (sqrlen_b_a < 9.9999997473787516e-06f &&
         sqrlen_b_a > -9.9999997473787516e-06f)
         tooSmall = 1;
@@ -519,7 +519,7 @@ float lbvector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
         tooSmall = 0;
     if (tooSmall) {
         *d = *a;
-        return lbvector_Len(&c_a);
+        return lbVector_Len(&c_a);
     } else {
         Vec3 v3;
         float f1 =
@@ -528,7 +528,7 @@ float lbvector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
         d->x = a->x + b_a.x * f1;
         d->y = a->y + b_a.y * f1;
         d->z = a->z + b_a.z * f1;
-        lbvector_Diff(c, d, &v3);
-        return lbvector_Len(&v3);
+        lbVector_Diff(c, d, &v3);
+        return lbVector_Len(&v3);
     }
 }

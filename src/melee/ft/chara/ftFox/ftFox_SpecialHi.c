@@ -333,7 +333,7 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* gobj)
     if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
         if (ftFox_SpecialHi_IsBound(gobj) != false) {
             if ((!(collData->x134_envFlags & 0x18000)) ||
-                (!(lbvector_AngleXY(&collData->x14C_ground.normal,
+                (!(lbVector_AngleXY(&collData->x14C_ground.normal,
                                     &fp->x80_self_vel) <
                    (0.01745329238474369f *
                     (90.0f + foxAttrs->x94_FOX_FIREFOX_BOUND_ANGLE)))))
@@ -355,13 +355,13 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* gobj)
         f32 var;
         do {
             if (envFlags & 0x6000) {
-                var = lbvector_AngleXY(&collData->x188_ceiling.normal,
+                var = lbVector_AngleXY(&collData->x188_ceiling.normal,
                                        &fp->x80_self_vel);
             } else if (envFlags & 0x3F) {
-                var = lbvector_AngleXY(&collData->x160_rightwall.normal,
+                var = lbVector_AngleXY(&collData->x160_rightwall.normal,
                                        &fp->x80_self_vel);
             } else if (envFlags & 0xFC0) {
-                var = lbvector_AngleXY(&collData->x174_leftwall.normal,
+                var = lbVector_AngleXY(&collData->x174_leftwall.normal,
                                        &fp->x80_self_vel);
             } else {
                 if (((!fp->x80_self_vel.x) && (!fp->x80_self_vel.x)) &&
@@ -452,7 +452,7 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* gobj)
         sp20.y = fp->input.x624_lstick_y;
         sp20.z = 0.0f;
 
-        if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &sp20) <
+        if (!(lbVector_AngleXY(&collData->x14C_ground.normal, &sp20) <
               HALF_PI32) &&
             (ft_8009A134(gobj) == false))
         {

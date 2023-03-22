@@ -127,7 +127,7 @@ void ftMasterHand_80151F00(HSD_GObj* gobj)
 #endif
 
     ftLib_800866DC(ftBossLib_8015C244(gobj, &r31_fp->cur_pos), &sp28);
-    lbvector_Diff(&sp28, &r31_fp->cur_pos, &sp1C_resultVector);
+    lbVector_Diff(&sp28, &r31_fp->cur_pos, &sp1C_resultVector);
 
     if (my_lbvector_Len(&sp1C_resultVector) < r30_attributes->x4C)
         ftMasterHand_80151CA8(gobj);

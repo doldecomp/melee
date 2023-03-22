@@ -91,7 +91,7 @@ void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3,
 {
     Fighter* fp = gobj->user_data;
     Vec3 diff;
-    lbvector_Diff(arg1, &fp->cur_pos, &diff);
+    lbVector_Diff(arg1, &fp->cur_pos, &diff);
 
     {
         f32 distance = my_lbvector_Len(&diff);
@@ -99,7 +99,7 @@ void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3,
             *arg2 = 0.0f;
         } else {
             *arg2 = distance;
-            lbvector_Normalize(&diff);
+            lbVector_Normalize(&diff);
             diff.x *= distance * arg4;
             diff.y *= distance * arg4;
             diff.z *= distance * arg4;
