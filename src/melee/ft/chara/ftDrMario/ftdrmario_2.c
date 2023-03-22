@@ -1,7 +1,7 @@
 #include "ftdrmario.h"
 
-#include "ft/code_80081B38.h"
-#include "ft/ftunk_04.h"
+#include "ft/ft_81B.h"
+#include "ft/ft_877.h"
 #include "ftMario/ftMario_SpecialN.h"
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"

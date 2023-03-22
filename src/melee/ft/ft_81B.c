@@ -1,10 +1,10 @@
 #include <platform.h>
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_81B.h"
 
+#include "ft/ft_877.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
-#include "ft/ftunk_04.h"
 #include "ft/ftwalljump.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"

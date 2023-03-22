@@ -30,9 +30,9 @@
 #include "ftMasterHand_30.h"
 #include "types.h"
 
+#include "ft/ft_877.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
-#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 

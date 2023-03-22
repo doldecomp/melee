@@ -4,10 +4,10 @@
 #include "ftMasterHand_31.h"
 #include "ftMasterHand_34.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_81B.h"
+#include "ft/ft_877.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
-#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 
 /// @todo Fix weird forward declaration

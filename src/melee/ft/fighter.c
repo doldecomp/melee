@@ -1,7 +1,11 @@
 #include "ft/fighter.h"
 
-#include "code_80081938.h"
-#include "code_80081B38.h"
+#include "ft_7C1.h"
+#include "ft_7C6.h"
+#include "ft_819.h"
+#include "ft_81B.h"
+#include "ft_852.h"
+#include "ft_877.h"
 #include "ftaction.h"
 #include "ftanim.h"
 #include "ftcamera.h"
@@ -11,10 +15,6 @@
 #include "ftdrawcommon.h"
 #include "ftlib.h"
 #include "ftparts.h"
-#include "ftunk_01.h"
-#include "ftunk_02.h"
-#include "ftunk_03.h"
-#include "ftunk_04.h"
 #include "inlines.h"
 #include "text_2.h"
 #include "text_4.h"
@@ -52,7 +52,7 @@
 /// @todo Move elsewhere.
 #define HALF_PI (1.5707963267948966)
 
-// external vars from asm/melee/ft/ftunk_03.s
+// external vars from asm/melee/ft/ft_852.s
 typedef void (*ft_callback)(HSD_GObj* gobj);
 typedef void (*fn_ptr_t)(void);
 

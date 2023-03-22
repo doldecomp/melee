@@ -4,7 +4,7 @@
 #include "ftdonkey1.h"
 #include "ftdonkey6.h"
 
-#include "ft/ftunk_04.h"
+#include "ft/ft_877.h"
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
 #include "it/code_8027CF30.h"

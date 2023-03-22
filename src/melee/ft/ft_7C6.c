@@ -3,7 +3,7 @@
  */
 #include <platform.h>
 
-#include "ft/ftunk_02.h"
+#include "ft/ft_7C6.h"
 
 #include "text_2.h"
 

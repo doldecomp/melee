@@ -1,11 +1,11 @@
 #include "ftSeak/ftSeak_SpecialS.h"
 
-#include "ft/code_80081B38.h"
 #include "ft/fighter.h"
+#include "ft/ft_81B.h"
+#include "ft/ft_877.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
-#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 #include "ftNess/ftNess.h"
 #include "ftSeak/ftSeak_Init.h"

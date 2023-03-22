@@ -3,8 +3,8 @@
 #include "ftdonkey.h"
 #include "ftdonkey1.h"
 
-#include "ft/code_80081B38.h"
-#include "ft/ftunk_04.h"
+#include "ft/ft_81B.h"
+#include "ft/ft_877.h"
 #include "ft/inlines.h"
 
 void ftDonkey_800E0568(HSD_GObj* gobj)

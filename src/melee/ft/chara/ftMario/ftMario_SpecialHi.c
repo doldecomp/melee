@@ -3,10 +3,10 @@
 #include "inlines.h"
 #include "types.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_81B.h"
+#include "ft/ft_877.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 
 #include <baselib/random.h>

@@ -2,10 +2,10 @@
 
 #include "ftNess.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_81B.h"
+#include "ft/ft_877.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 #include "it/code_8027CF30.h"
 #include "lb/lbcollision.h"

@@ -1,8 +1,8 @@
-#include "ft/ftunk_01.h"
+#include "ft/ft_7C1.h"
 
 #include "fighter.h"
+#include "ft_877.h"
 #include "ftcoll.h"
-#include "ftunk_04.h"
 
 #include "it/item2.h"
 #include "lb/lbunknown_001.h"

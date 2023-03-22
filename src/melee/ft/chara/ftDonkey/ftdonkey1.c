@@ -4,9 +4,9 @@
 #include "ftdonkey4.h"
 #include "ftdonkey6.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_81B.h"
+#include "ft/ft_877.h"
 #include "ft/ftcamera.h"
-#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 
 bool ftDonkey_800DF938(HSD_GObj* gobj)

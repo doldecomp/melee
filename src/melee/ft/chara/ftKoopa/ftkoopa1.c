@@ -1,11 +1,11 @@
 #include "ft/forward.h"
 #include "it/forward.h"
 
+#include "ft/ft_877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
-#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftKoopa/ftkoopa.h"

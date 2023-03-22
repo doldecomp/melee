@@ -3,11 +3,11 @@
 
 #include "ftcoll.h"
 
-#include "code_80081B38.h"
 #include "fighter.h"
+#include "ft_81B.h"
+#include "ft_877.h"
 #include "ftcommon.h"
 #include "ftlib.h"
-#include "ftunk_04.h"
 #include "inlines.h"
 
 #include "ef/efsync.h"

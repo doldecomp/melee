@@ -2,7 +2,7 @@
 
 #include "ftMasterHand_03.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_81B.h"
 #include "ft/ftbosslib.h"
 
 // 80151C04 14E7E4

@@ -4,9 +4,9 @@
 #include "ftMasterHand_05.h"
 
 #include "cm/camera.h"
+#include "ft/ft_877.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
-#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 
 static void ftMasterHand_801511FC(HSD_GObj* gobj);

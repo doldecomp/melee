@@ -1,6 +1,6 @@
 #include "ftMasterHand_26.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_81B.h"
 #include "ft/ftbosslib.h"
 
 // 80154FAC 151B8C

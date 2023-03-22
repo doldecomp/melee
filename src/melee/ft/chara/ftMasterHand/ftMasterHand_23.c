@@ -5,7 +5,7 @@
 #include "ftMasterHand_26.h"
 #include "ftMasterHand_32.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_81B.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"

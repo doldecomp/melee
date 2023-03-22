@@ -3,8 +3,8 @@
 
 #include "ftwalkcommon.h"
 
-#include "code_80081B38.h"
 #include "fighter.h"
+#include "ft_81B.h"
 #include "ftcommon.h"
 #include "inlines.h"
 

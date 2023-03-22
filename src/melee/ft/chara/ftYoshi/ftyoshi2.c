@@ -6,9 +6,9 @@
 
 #include "ef/efasync.h"
 #include "ft/fighter.h"
+#include "ft/ft_877.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
-#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
