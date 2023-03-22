@@ -127,7 +127,7 @@ void ftGameWatch_SpecialHi_StartMotion(HSD_GObj* gobj)
                               0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
-    func_80088510(fp, 0x46D12, 0x7F, 0x40);
+    ft_80088510(fp, 0x46D12, 0x7F, 0x40);
 }
 
 // 0x8014E158 - Mr. Game & Watch's aerial Fire Rescue Motion State handler
@@ -145,7 +145,7 @@ void ftGameWatch_SpecialAirHi_StartMotion(HSD_GObj* gobj)
                               0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
     ftAnim_8006EBA4(gobj);
-    func_80088510(fp, 0x46D12, 0x7F, 0x40);
+    ft_80088510(fp, 0x46D12, 0x7F, 0x40);
 }
 
 // 0x8014E1F8 - Mr. Game & Watch's grounded Fire Rescue Animation callback
@@ -169,11 +169,11 @@ void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* gobj)
     gawAttrs = (GET_FIGHTER(gobj))->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == gawAttrs->x60_GAMEWATCH_RESCUE_LANDING) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 0, 1, 1.0f,
-                      gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+        ft_80096900(gobj, 1, 0, 1, 1.0f,
+                    gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
     }
 }
 
@@ -256,7 +256,7 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* gobj)
             if (ft_80081D0C(gobj) != false) {
                 ftGameWatch_ItemRescueRemove(gobj);
                 ftCommon_8007D7FC(fp);
-                func_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+                ft_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 fp->cb.x21E4_callback_OnDeath2 = NULL;
                 fp->cb.x21DC_callback_OnTakeDamage = NULL;
             }
@@ -266,7 +266,7 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* gobj)
             } else
                 ledgeGrabDir = -1;
             if (ft_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
-                func_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
+                ft_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 return;
             }
             if (ftCliffCommon_80081298(gobj) != false) {

@@ -35,13 +35,13 @@ void ftCLink_80149354(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         checkFighter2244(gobj);
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
 void ftCLink_8014943C(HSD_GObj* gobj)
 {
-    func_800DED30(gobj);
+    ft_800DED30(gobj);
 }
 
 void ftCLink_8014945C(HSD_GObj* gobj)

@@ -365,10 +365,10 @@ void ftNess_YoyoApplySmash(HSD_GObj* gobj)
     smashColAnimID = smash_attr->x2128;
 
     if (smash_attr->x2128 != 0x7B)
-        func_800BFFD0(fp, smashColAnimID, 0);
+        ft_800BFFD0(fp, smashColAnimID, 0);
 
     ftCommon_8007EBAC(fp, 0x24U, 0U);
-    func_80088510(fp, 0x334A7, 0x7F, 0x40);
+    ft_80088510(fp, 0x334A7, 0x7F, 0x40);
 }
 
 static Vec3 const YoyoChargePos = { 0 };
@@ -407,7 +407,7 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* gobj)
         fp->fv.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
     }
 
-    func_80088510(fp, 0x334AA, 0x7F, 0x40);
+    ft_80088510(fp, 0x334AA, 0x7F, 0x40);
     smashChargeFrames = fp->x2114_SmashAttr.x2118_frames;
     fighter_data2 = GET_FIGHTER(gobj);
     ness_attr = getFtSpecialAttrs(fighter_data2);
@@ -481,7 +481,7 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj)
             fp->x2204_ftcmd_var1 = 0U;
             func_802BE5D8(yoyo_GObj, 0.0f);
             fp->fv.ns.x223C = 0.0f;
-            func_80088510(fp, 0x334B0, SFX_VOLUME_MAX, SFX_PAN_MID);
+            ft_80088510(fp, 0x334B0, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
         msid = fp->motion_id;
         if ((msid >= MS_NESS_ATTACKHI4) && (msid <= MS_NESS_ATTACKHI4_RELEASE))
@@ -500,9 +500,9 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj)
             if ((msid >= MS_NESS_ATTACKHI4) &&
                 (msid <= MS_NESS_ATTACKHI4_RELEASE))
             {
-                func_80088510(fp, 0x334B3, SFX_VOLUME_MAX, SFX_PAN_MID);
+                ft_80088510(fp, 0x334B3, SFX_VOLUME_MAX, SFX_PAN_MID);
             } else {
-                func_80088510(fp, 0x334AD, SFX_VOLUME_MAX, SFX_PAN_MID);
+                ft_80088510(fp, 0x334AD, SFX_VOLUME_MAX, SFX_PAN_MID);
             }
         } else if (yoyoSmashFrameCurr2 == yoyoNudgeFrame) {
             func_802BFEC4(yoyo_GObj);
@@ -513,7 +513,7 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj)
     } else if (yoyoSmashFrameCurr == yoyoSpawnFrame) {
         ftNess_YoyoCreateItem(gobj);
         if (fp->fv.ns.yoyo_gobj == NULL) {
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
             return true;
         }
     }
@@ -728,7 +728,7 @@ void ftNess_AttackHi4_Anim(HSD_GObj* gobj)
             }
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         }
     }
 }
@@ -746,7 +746,7 @@ void ftNess_AttackHi4_IASA(HSD_GObj* gobj) // Ness's Up Smash IASA callback
     }
 
     if (fp->x2218_flag.bits.b0 != 0) {
-        func_8008A4D4(gobj);
+        ft_8008A4D4(gobj);
     }
 }
 
@@ -935,7 +935,7 @@ void ftNess_AttackHi4_Release_Anim(
             }
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         }
     }
 }
@@ -947,7 +947,7 @@ void ftNess_AttackHi4_Release_IASA(
 {
     Fighter* fp = gobj->user_data;
     if (fp->x2218_flag.bits.b0 != 0) {
-        func_8008A4D4(gobj);
+        ft_8008A4D4(gobj);
     }
 }
 
@@ -1056,7 +1056,7 @@ void ftNess_AttackHi4_Release_Action(HSD_GObj* gobj)
         fighter_data2->fv.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
     }
 
-    func_80088510(fighter_data2, 0x334AA, SFX_VOLUME_MAX, SFX_PAN_MID);
+    ft_80088510(fighter_data2, 0x334AA, SFX_VOLUME_MAX, SFX_PAN_MID);
 
     ftNess_YoyoApplyDamage(fighter_data2->x2114_SmashAttr.x2118_frames, gobj);
 

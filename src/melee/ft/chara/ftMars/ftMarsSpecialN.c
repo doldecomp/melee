@@ -57,9 +57,9 @@ void ftMars_80136844(HSD_GObj* gobj)
         ftMars_80136E74(gobj);
 
         if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS)
-            func_800BFFD0(gobj->user_data, 0x63, 0);
+            ft_800BFFD0(gobj->user_data, 0x63, 0);
         else
-            func_800BFFD0(gobj->user_data, 0x64, 0);
+            ft_800BFFD0(gobj->user_data, 0x64, 0);
     }
 }
 
@@ -71,9 +71,9 @@ void ftMars_801368AC(HSD_GObj* gobj)
         ftMars_80136EAC(gobj);
 
         if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS)
-            func_800BFFD0(gobj->user_data, 0x63, 0);
+            ft_800BFFD0(gobj->user_data, 0x63, 0);
         else
-            func_800BFFD0(gobj->user_data, 0x64, 0);
+            ft_800BFFD0(gobj->user_data, 0x64, 0);
     }
 }
 
@@ -340,7 +340,7 @@ void ftMars_80136EE4(HSD_GObj* gobj)
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         // MS_014_Wait_PlayerCheck
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
     return;
 }
@@ -404,7 +404,7 @@ void ftMars_80137010(HSD_GObj* gobj)
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         // MS_029_Fall
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
     }
     return;
 }

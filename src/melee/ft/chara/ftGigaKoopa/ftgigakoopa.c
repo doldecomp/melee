@@ -59,7 +59,7 @@ MotionState ftGigaKoopa_MotionStateTable[] = {
 };
 
 MotionState lbl_803D38C8[] = {
-    { 14, 0, 0x01000000, NULL, NULL, func_800C74AC, NULL, NULL },
+    { 14, 0, 0x01000000, NULL, NULL, ft_800C74AC, NULL, NULL },
 };
 
 char lbl_803D38E8[] = "PlGk.dat";

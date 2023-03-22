@@ -11,7 +11,7 @@
 void ftNess_AttackS4_OnReflect(
     HSD_GObj* gobj) // Ness's F-Smash OnReflect callback
 {
-    func_80088148(GET_FIGHTER(gobj), 0xE0U, 0x7FU, 0x40U);
+    ft_80088148(GET_FIGHTER(gobj), 0xE0U, 0x7FU, 0x40U);
 };
 
 // 0x80114C24
@@ -125,7 +125,7 @@ void ftNess_AttackS4_Anim(HSD_GObj* gobj) // Ness's F-Smash Animation callback
                                                 // animation is over
             fighter_data2->fv.ns.bat_gobj = NULL;
         }
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -145,7 +145,7 @@ void ftNess_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
             func_802AD6B8(fp->fv.ns.bat_gobj);
             fp->fv.ns.bat_gobj = NULL;
         }
-        func_8008A4D4(gobj);
+        ft_8008A4D4(gobj);
     }
 };
 

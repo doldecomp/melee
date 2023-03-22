@@ -65,10 +65,10 @@ MotionState ftPeach_MotionStateTable[] = {
       ftPeach_8011E6AC, ftPeach_8011E798, ftCamera_UpdateCameraBox },
     { 315, 0x00340411, 0x12000000, ftPeach_8011EA04, ftPeach_8011EA6C,
       ftPeach_8011EA90, ftPeach_8011EB1C, ftCamera_UpdateCameraBox },
-    { 316, 0x00440058, 0x57800000, func_800CF0B8, func_800CF118, func_800CF1A0,
-      func_800CF258, ftCamera_UpdateCameraBox },
-    { 317, 0x004C0058, 0x57800000, func_800CF424, func_800CF428, func_800CF494,
-      func_800CF4B4, ftCamera_UpdateCameraBox },
+    { 316, 0x00440058, 0x57800000, ft_800CF0B8, ft_800CF118, ft_800CF1A0,
+      ft_800CF258, ftCamera_UpdateCameraBox },
+    { 317, 0x004C0058, 0x57800000, ft_800CF424, ft_800CF428, ft_800CF494,
+      ft_800CF4B4, ftCamera_UpdateCameraBox },
 };
 
 char ftPeach_str_PlPe_dat[] = "PlPe.dat";

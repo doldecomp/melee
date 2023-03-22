@@ -119,10 +119,10 @@ void ftDonkey_8010E840(HSD_GObj* gobj)
         fp->fv.dk.x222C += 1;
         if (fp->fv.dk.x222C >= donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
             Fighter* fighter2 = fp;
-            func_800BFFD0(fighter2, 0x39, 0);
+            ft_800BFFD0(fighter2, 0x39, 0);
             fighter2->fv.dk.x222C = donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS;
             ftDonkey_NullCallbacks(gobj);
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         }
     }
 }
@@ -131,7 +131,7 @@ void ftDonkey_8010E8E0(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftDonkey_NullCallbacks(gobj);
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -184,7 +184,7 @@ void ftDonkey_8010E930(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->fv.dk.x222C = 0;
         ftDonkey_NullCallbacks(gobj);
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -223,7 +223,7 @@ void ftDonkey_8010EB0C(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->fv.dk.x222C = 0;
         ftDonkey_NullCallbacks(gobj);
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -244,10 +244,10 @@ void ftDonkey_8010ECE8(HSD_GObj* gobj)
         fp->fv.dk.x222C += 1;
         if (fp->fv.dk.x222C >= donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS) {
             Fighter* fighter2 = fp;
-            func_800BFFD0(fighter2, 0x39, 0);
+            ft_800BFFD0(fighter2, 0x39, 0);
             fp->fv.dk.x222C = donkey_attr->SpecialN.x2C_MAX_ARM_SWINGS;
             ftDonkey_NullCallbacks(gobj);
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         }
     }
 }
@@ -261,7 +261,7 @@ void ftDonkey_8010ED88(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftDonkey_NullCallbacks(gobj);
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
     }
 }
 
@@ -311,10 +311,10 @@ void ftDonkey_8010EDD8(HSD_GObj* gobj)
         fp->fv.dk.x222C = 0;
         ftDonkey_NullCallbacks(gobj);
         if (donkey_attr->SpecialN.x38_LANDING_LAG == 0.0f) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         } else {
-            func_80096900(gobj, 1, 0, 1, 1.0f,
-                          donkey_attr->SpecialN.x38_LANDING_LAG);
+            ft_80096900(gobj, 1, 0, 1, 1.0f,
+                        donkey_attr->SpecialN.x38_LANDING_LAG);
         }
     }
 }
@@ -348,10 +348,10 @@ void ftDonkey_8010EF7C(HSD_GObj* gobj)
         fp->fv.dk.x222C = 0;
         ftDonkey_NullCallbacks(gobj);
         if (donkey_attr->SpecialN.x38_LANDING_LAG == 0.0f) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         } else {
-            func_80096900(gobj, 1, 0, 1, 1.0f,
-                          donkey_attr->SpecialN.x38_LANDING_LAG);
+            ft_80096900(gobj, 1, 0, 1, 1.0f,
+                        donkey_attr->SpecialN.x38_LANDING_LAG);
         }
     }
 }
@@ -366,7 +366,7 @@ void ftDonkey_8010F098(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (!func_8009917C(gobj)) {
+    if (!ft_8009917C(gobj)) {
         if ((fp->input.x668 & 0x200)) {
             Fighter_ChangeMotionState(gobj, 0x174, 0, NULL, 0.0f, 1.0f, 0.0f);
             fp->mv.dk.specialn.xC = fp->fv.dk.x222C;

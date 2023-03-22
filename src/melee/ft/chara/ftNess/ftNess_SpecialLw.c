@@ -260,7 +260,7 @@ void ftNess_SpecialLwHold_Anim(
     temp_r31->mv.ns.speciallw.x10--;
 
     if ((s32) temp_r31->mv.ns.speciallw.x10 <= 0) {
-        func_80088478(temp_r31, 0x334A1, 0x7F, 0x40);
+        ft_80088478(temp_r31, 0x334A1, 0x7F, 0x40);
         temp_r31->mv.ns.speciallw.x10 = 0x28;
     }
 }
@@ -301,7 +301,7 @@ void ftNess_SpecialAirLwHold_Anim(
     temp_r31->mv.ns.speciallw.x10 = (s32) (temp_r31->mv.ns.speciallw.x10 - 1);
 
     if ((s32) temp_r31->mv.ns.speciallw.x10 <= 0) {
-        func_80088478(temp_r31, 0x334A1, 0x7F, 0x40);
+        ft_80088478(temp_r31, 0x334A1, 0x7F, 0x40);
         temp_r31->mv.ns.speciallw.x10 = 0x28;
     }
 }
@@ -705,7 +705,7 @@ inline void MagnetStateVarCalc(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.ns.speciallw.x10 = fp->mv.ns.speciallw.x10 - 1;
     if ((s32) fp->mv.ns.speciallw.x10 <= 0) {
-        func_80088478(fp, 0x334A1, 0x7F, 0x40);
+        ft_80088478(fp, 0x334A1, 0x7F, 0x40);
         fp->mv.ns.speciallw.x10 = 0x28;
     }
 }
@@ -824,7 +824,7 @@ void ftNess_SpecialAirLwHit_Anim(
         Fighter* fp = GET_FIGHTER(arg0);
         fp->mv.ns.speciallw.x10 = fp->mv.ns.speciallw.x10 - 1;
         if ((signed) fp->mv.ns.speciallw.x10 <= 0) {
-            func_80088478(fp, 0x334A1, 0x7F, 0x40);
+            ft_80088478(fp, 0x334A1, 0x7F, 0x40);
             fp->mv.ns.speciallw.x10 = 0x28;
         }
     }

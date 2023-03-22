@@ -285,7 +285,7 @@ void ftNess_SpecialNEnd_Anim(HSD_GObj* gobj)
     ftParts_8007592C(fp, 0, 0);
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 /// Ness's aerial PK Flash Start Animation callback
@@ -399,11 +399,11 @@ void ftNess_SpecialAirNEnd_Anim(HSD_GObj* gobj)
         f32 landing_lag = sa->x1C_PKFLASH_LANDING_LAG;
 
         if (landing_lag == 0) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
 
-        func_80096900(gobj, 1, 0, true, 1, sa->x1C_PKFLASH_LANDING_LAG);
+        ft_80096900(gobj, 1, 0, true, 1, sa->x1C_PKFLASH_LANDING_LAG);
     }
 }
 

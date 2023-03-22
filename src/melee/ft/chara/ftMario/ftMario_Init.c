@@ -45,8 +45,8 @@ MotionState ftMario_MotionStateTable[states_count] = {
 };
 
 MotionState lbl_803C7260[aux_states_count] = {
-    { 14, 0, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
-    { 15, 0, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
+    { 14, 0, 0x01000000, NULL, NULL, ft_800C7158, NULL, NULL },
+    { 15, 0, 0x01000000, NULL, NULL, ft_800C7200, NULL, NULL },
 };
 
 void ftMario_OnDeath(HSD_GObj* gobj)

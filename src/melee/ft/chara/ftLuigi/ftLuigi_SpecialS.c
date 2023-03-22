@@ -777,14 +777,14 @@ void ftLuigi_SpecialSFly_Action(HSD_GObj* gobj)
 void ftLuigi_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 /// Luigi's aerial Green Missile End Animation callback
 void ftLuigi_SpecialAirSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 /// Luigi's grounded Green Missile End IASA callback
@@ -818,7 +818,7 @@ void ftLuigi_SpecialAirSEnd_Phys(HSD_GObj* gobj)
 void ftLuigi_SpecialSEnd_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 /// Luigi's aerial Green Missile End Collision callback

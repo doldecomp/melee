@@ -216,14 +216,14 @@ void ftGameWatch_SpecialAirS_StartMotion(HSD_GObj* gobj)
 void ftGameWatch_SpecialS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 // 0x8014C8F8 - Mr. Game & Watch's Aerial Judgement Animation callback
 void ftGameWatch_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 // 0x8014C934 - Mr. Game & Watch's Grounded Judgement IASA callback

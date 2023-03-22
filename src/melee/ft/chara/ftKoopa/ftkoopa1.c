@@ -252,8 +252,8 @@ void ftKoopa_80132E30(HSD_GObj* gobj)
     {
         HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
         ftCommon_8007E2F4(fp, 0);
-        func_800DE2A8(gobj, victim_gobj);
-        func_800DE7C0(victim_gobj, 0, 0);
+        ft_800DE2A8(gobj, victim_gobj);
+        ft_800DE7C0(victim_gobj, 0, 0);
         fp->x2200_ftcmd_var0 = 0;
     }
 }
@@ -277,7 +277,7 @@ void ftKoopa_SpecialS_StartMotion(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        ftCommon_8007E2D0(fp, 8, ftKoopa_8013302C, NULL, func_800BC7E0);
+        ftCommon_8007E2D0(fp, 8, ftKoopa_8013302C, NULL, ft_800BC7E0);
 
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
@@ -303,7 +303,7 @@ void ftKoopa_SpecialAirS_StartMotion(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        ftCommon_8007E2D0(fp, 8, ftKoopa_801330E4, NULL, func_800BC8D4);
+        ftCommon_8007E2D0(fp, 8, ftKoopa_801330E4, NULL, ft_800BC8D4);
 
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
@@ -370,7 +370,7 @@ void ftKoopa_8013319C(HSD_GObj* gobj)
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007E2D0(fp, 8, ftKoopa_801330E4, NULL, func_800BC8D4);
+        ftCommon_8007E2D0(fp, 8, ftKoopa_801330E4, NULL, ft_800BC8D4);
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
     }
@@ -391,7 +391,7 @@ void ftKoopa_8013322C(HSD_GObj* gobj)
 
     {
         fp0 = GET_FIGHTER(gobj);
-        ftCommon_8007E2D0(fp0, 8, ftKoopa_8013302C, NULL, func_800BC7E0);
+        ftCommon_8007E2D0(fp0, 8, ftKoopa_8013302C, NULL, ft_800BC7E0);
         fp0->mv.kp.unk1.x0 = 0;
         fp0->mv.kp.unk1.x8 = 0;
     }
@@ -408,11 +408,11 @@ void ftKoopa_801332C4(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     if (victim_gobj != NULL) {
-        func_800DC920(gobj, victim_gobj);
-        func_800CC730(victim_gobj);
+        ft_800DC920(gobj, victim_gobj);
+        ft_800CC730(victim_gobj);
     }
 
-    func_800CC730(gobj);
+    ft_800CC730(gobj);
 }
 
 void ftKoopa_80133324(HSD_GObj* gobj)
@@ -437,11 +437,11 @@ void ftKoopa_80133398(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     if (victim_gobj != NULL) {
-        func_800DC920(gobj, victim_gobj);
-        func_800CC730(victim_gobj);
+        ft_800DC920(gobj, victim_gobj);
+        ft_800CC730(victim_gobj);
     }
 
-    func_800CC730(gobj);
+    ft_800CC730(gobj);
 }
 /// @todo Combine common flags with #transition_flags0.
 static u32 const transition_flags2 =
@@ -474,11 +474,11 @@ void ftKoopa_80133484(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
 
     if (victim_gobj != NULL) {
-        func_800DC920(gobj, victim_gobj);
-        func_800CC730(victim_gobj);
+        ft_800DC920(gobj, victim_gobj);
+        ft_800CC730(victim_gobj);
     }
 
-    func_800CC730(gobj);
+    ft_800CC730(gobj);
 }
 
 void ftKoopa_801334E4(HSD_GObj* gobj)
@@ -498,7 +498,7 @@ void ftKoopa_801334E4(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
 
     if (fp->x1A58_interactedFighter != NULL)
-        func_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaF);
+        ft_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaF);
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -521,7 +521,7 @@ void ftKoopa_8013359C(HSD_GObj* gobj)
         fp->facing_dir = -fp->facing_dir;
 
     if (fp->x1A58_interactedFighter != NULL)
-        func_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaB);
+        ft_800BCE64(fp->x1A58_interactedFighter, ftCo_MS_ThrownKoopaB);
 
     ftCommon_8007E2F4(fp, 511);
     ftCommon_8007E2FC(gobj);
@@ -530,13 +530,13 @@ void ftKoopa_8013359C(HSD_GObj* gobj)
 void ftKoopa_80133654(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 void ftKoopa_80133690(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 static Fighter_MotionStateChangeFlags const transition_flags3 =
@@ -591,7 +591,7 @@ void ftKoopa_801336CC(HSD_GObj* gobj)
                 fp0->x2200_ftcmd_var0 = 0;
             }
 
-            func_800BC9C8(fp1->x1A58_interactedFighter);
+            ft_800BC9C8(fp1->x1A58_interactedFighter);
 
         } else {
             /// @todo Combine @c fp0 with other branch somehow

@@ -153,7 +153,7 @@ void ftLink_800EAF38(void)
 void ftLink_800EAF58(HSD_GObj* gobj)
 {
     ftLink_800EC06C();
-    func_800D94D8(gobj);
+    ft_800D94D8(gobj);
     ftLink_800ECD04(gobj);
     ftLink_800ECD58(gobj);
     ftCLink_80149268(gobj);
@@ -229,7 +229,7 @@ void ftLink_800EB334(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftLinkAttributes* link_attr = fp->ft_data->ext_attr;
 
-    f32 resultf = func_80092ED8(fp->x19A4, link_attr, link_attr->xD8);
+    f32 resultf = ft_80092ED8(fp->x19A4, link_attr, link_attr->xD8);
     fp->gr_vel = resultf * p_ftCommonData->x294;
     if (fp->x19AC < 0.0f) {
         new_ground_vel = fp->gr_vel;
@@ -237,5 +237,5 @@ void ftLink_800EB334(HSD_GObj* gobj)
         new_ground_vel = -fp->gr_vel;
     }
     fp->gr_vel = new_ground_vel;
-    func_80088148(fp, 0x2716AU, 0x7FU, 0x40U);
+    ft_80088148(fp, 0x2716AU, 0x7FU, 0x40U);
 }

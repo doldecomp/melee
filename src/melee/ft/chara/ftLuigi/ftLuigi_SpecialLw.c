@@ -130,7 +130,7 @@ void ftLuigi_SpecialLw_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftLuigi_SpecialLw_SetNULL(gobj);
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -151,11 +151,11 @@ void ftLuigi_SpecialAirLw_Anim(HSD_GObj* gobj)
             int landing_lag = attrs->x94_LUIGI_CYCLONE_LANDING_LAG;
 
             if (landing_lag == 0.0) {
-                func_800CC730(gobj);
+                ft_800CC730(gobj);
                 return;
             }
 
-            func_80096900(gobj, 1, 0, 1, 1, (f32) landing_lag);
+            ft_80096900(gobj, 1, 0, 1, 1, (f32) landing_lag);
         }
     }
 }

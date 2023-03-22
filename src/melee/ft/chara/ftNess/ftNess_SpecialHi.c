@@ -664,7 +664,7 @@ block_stuff : {
             fighter_data3->fv.ns.pkthunder_gfx = false;
         default:
             ftParts_8007592C(fp, 0, 0.0f);
-            func_80097D40(gobj);
+            ft_80097D40(gobj);
             return;
         }
     }
@@ -867,7 +867,7 @@ void ftNess_SpecialHiEnd_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 /// Ness's grounded PK Thunder 2 Animation callback
@@ -1080,13 +1080,12 @@ void ftNess_SpecialAirHiEnd_Anim(HSD_GObj* gobj)
         ftCommon_8007D60C(fp);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
 
-        func_800969D8(gobj, 1, 0, 1, 1,
-                      ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
-                      ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
+        ft_800969D8(gobj, 1, 0, 1, 1, ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
+                    ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
     }
 }
 
@@ -1121,13 +1120,12 @@ void ftNess_SpecialAirHi_Anim(HSD_GObj* gobj)
         ftCommon_8007D60C(fp1);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
 
-        func_800969D8(gobj, 1, 0, 1, 1,
-                      ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
-                      ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
+        ft_800969D8(gobj, 1, 0, 1, 1, ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
+                    ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
     }
 }
 
@@ -1149,13 +1147,13 @@ void ftNess_SpecialAirHiRebound_Anim(HSD_GObj* gobj)
             ftCommon_8007D60C(fp1);
 
             if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-                func_800CC730(gobj);
+                ft_800CC730(gobj);
                 return;
             }
 
-            func_800969D8(gobj, 1, 0, 1, 1.0f,
-                          ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
-                          ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
+            ft_800969D8(gobj, 1, 0, 1, 1.0f,
+                        ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
+                        ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
         }
     }
 }
@@ -1609,7 +1607,7 @@ void ftNess_SpecialHi_Coll(HSD_GObj* gobj)
                     fighter_data2->fv.ns.pkthunder_gfx = false;
                 }
                 ftParts_8007592C(fp0, 0, 0);
-                func_80097D40(gobj);
+                ft_80097D40(gobj);
                 return;
             }
         }
@@ -1787,7 +1785,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
             }
 
             ftParts_8007592C(fighter_r31, 0, 0);
-            func_80097D40(gobj);
+            ft_80097D40(gobj);
             return;
         }
 
@@ -1961,7 +1959,7 @@ void ftNess_SpecialAirHiRebound_Coll(HSD_GObj* gobj)
             fighter_data2->fv.ns.pkthunder_gfx = false;
         }
         ftParts_8007592C(fp, 0, 0.0f);
-        func_80097D40(gobj);
+        ft_80097D40(gobj);
         return;
     }
     if (ftCliffCommon_80081298(gobj) != false) {

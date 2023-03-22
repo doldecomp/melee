@@ -84,7 +84,7 @@ void ftMewtwo_SpecialLw_Anim(HSD_GObj* gobj)
             GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
         }
 
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -96,7 +96,7 @@ void ftMewtwo_SpecialAirLw_Anim(HSD_GObj* gobj)
             func_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
             GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
         }
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
     }
 }
 

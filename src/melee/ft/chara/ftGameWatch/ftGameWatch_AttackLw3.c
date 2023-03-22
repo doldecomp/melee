@@ -68,7 +68,7 @@ void ftGameWatch_ItemManholeRemove(HSD_GObj* gobj)
         fp->fv.gw.x2248_manholeGObj = NULL;
         func_8026BB20(fp->x1974_heldItem);
         func_8026B73C(fp->x1974_heldItem);
-        func_80094818(gobj, 1);
+        ft_80094818(gobj, 1);
     }
 }
 
@@ -127,7 +127,7 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80094790(gobj) == false) {
+    if (ft_80094790(gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
         Fighter_ChangeMotionState(gobj, ftGw_MS_AttackLw3, 0, NULL, 0.0f, 1.0f,
                                   0.0f);
@@ -147,7 +147,7 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800D638C(gobj);
+        ft_800D638C(gobj);
 }
 
 // 0x8014AE78
@@ -158,29 +158,29 @@ void ftGameWatch_AttackLw3_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2218_flag.bits.b0 == 0)
         return;
-    if (func_8008BFC4(gobj) != false)
+    if (ft_8008BFC4(gobj) != false)
         return;
-    if (func_8008C830(gobj) != false)
+    if (ft_8008C830(gobj) != false)
         return;
-    if (func_8008CB44(gobj) != false)
+    if (ft_8008CB44(gobj) != false)
         return;
-    if (func_8008B658(gobj) != false)
+    if (ft_8008B658(gobj) != false)
         return;
-    if (func_8008B980(gobj) != false)
+    if (ft_8008B980(gobj) != false)
         return;
-    if (func_8008BB44(gobj) != false)
+    if (ft_8008BB44(gobj) != false)
         return;
-    if (func_8008A9F8(gobj) != false)
+    if (ft_8008A9F8(gobj) != false)
         return;
-    if (func_800CAED0(gobj) != false)
+    if (ft_800CAED0(gobj) != false)
         return;
-    if (func_800CA094(gobj) != false)
+    if (ft_800CA094(gobj) != false)
         return;
-    if (func_800D5F58(gobj) != false)
+    if (ft_800D5F58(gobj) != false)
         return;
-    if (func_800C97DC(gobj) != false)
+    if (ft_800C97DC(gobj) != false)
         return;
-    if (func_800C9468(gobj) != false)
+    if (ft_800C9468(gobj) != false)
         return;
 }
 

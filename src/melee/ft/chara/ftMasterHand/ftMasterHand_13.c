@@ -52,7 +52,7 @@ void ftMasterHand_80152928(HSD_GObj* gobj)
             temp_r31 = GET_FIGHTER(gobj);
             Fighter_ChangeMotionState(gobj, 0x168, 0, 0, 0.0f, 1.0f, 0.0f);
             ftAnim_8006EBA4(gobj);
-            func_80088148(temp_r31, 0x4E207, 0x7F, 0x40);
+            ft_80088148(temp_r31, 0x4E207, 0x7F, 0x40);
         }
     }
 }

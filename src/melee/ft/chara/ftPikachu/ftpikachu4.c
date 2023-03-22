@@ -361,7 +361,7 @@ bool ftPikachu_GetBool(HSD_GObj* gobj)
     ftPikachuAttributes* pika_attr2 = fighter2->x2D4_specialAttributes;
     if (fighter2->mv.pk.unk4.x18 >= pika_attr2->x88) {
         return 1;
-    } else if (func_8009A134(gobj)) {
+    } else if (ft_8009A134(gobj)) {
         return 0;
     } else {
         return 1;
@@ -521,7 +521,7 @@ void ftPikachu_80126C0C(HSD_GObj* gobj)
 
         if (!(lbvector_AngleXY(&collData->x14C_ground.normal,
                                &lstick_direction) < (f32) M_PI_2) &&
-            (!func_8009A134(gobj)))
+            (!ft_8009A134(gobj)))
         {
             Fighter* fighter2;
             ftCommon_8007D9FC(fp);
@@ -717,7 +717,7 @@ void ftPikachu_80127198(HSD_GObj* gobj)
         return;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -740,7 +740,7 @@ void ftPikachu_80127228(HSD_GObj* gobj)
             fp->x2200_ftcmd_var0 = 2;
         }
     } else if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80096900(gobj, 1, 0, 1, sa->xAC, sa->xB0);
+        ft_80096900(gobj, 1, 0, 1, sa->xAC, sa->xB0);
     }
 }
 
@@ -802,7 +802,7 @@ void ftPikachu_801273D4(HSD_GObj* gobj)
 #endif
 
     if (ft_8008239C(gobj, fp->facing_dir, (f32*) box)) {
-        func_800D5CB0(gobj, 0, pika_attr->xB0);
+        ft_800D5CB0(gobj, 0, pika_attr->xB0);
     } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.
         return;

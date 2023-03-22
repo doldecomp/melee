@@ -80,7 +80,7 @@ void ftCliffCommon_80081370(HSD_GObj* gobj)
         fp->mv.co.cliff.ledge_id = fp->x6F0_collData.x40;
     }
     ftCliffCommon_80081544(gobj);
-    func_800881D8(fp, fp->ft_data->x4C_collisionData->x28, 0x7F, 0x40);
+    ft_800881D8(fp, fp->ft_data->x4C_collisionData->x28, 0x7F, 0x40);
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCommon_8007EBAC(fp, 0xC, 0);
 
@@ -91,13 +91,13 @@ void ftCliffCommon_80081370(HSD_GObj* gobj)
     }
     efAsync_Spawn(gobj, (void*) ((u32) gobj->user_data + 0x60C), 2, 0x41C, 0,
                   &unkParam.x10);
-    func_80088148(fp, 4, 0x7F, 0x40);
+    ft_80088148(fp, 4, 0x7F, 0x40);
 }
 
 void ftCliffCommon_80081504(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8009A804(gobj);
+        ft_8009A804(gobj);
     }
 }
 
@@ -129,7 +129,7 @@ void ftCliffCommon_80081544(HSD_GObj* gobj)
         fp->cur_pos.y = (f32) (sp10[1] + fp->x68C_transNPos.y);
         return;
     }
-    func_800CC730(gobj);
+    ft_800CC730(gobj);
 }
 
 void ftCliffCommon_800815E4(HSD_GObj* gobj)
@@ -144,7 +144,7 @@ void ftCliffCommon_800815E4(HSD_GObj* gobj)
         return;
     }
 
-    if (func_8009EF68(gobj)) {
+    if (ft_8009EF68(gobj)) {
         Fighter* fp = gobj->user_data;
         fp->x2064_ledgeCooldown = p_ftCommonData->x498_ledgeCooldownTime;
     }

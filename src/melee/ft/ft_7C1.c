@@ -22,7 +22,7 @@ void ft_8007C114(HSD_GObj* fighter_gobj)
     if (fp->x1974_heldItem != NULL) {
         switch (itGetKind(fp->x1974_heldItem)) {
         case It_Kind_Hammer:
-            func_800C555C(fighter_gobj);
+            ft_800C555C(fighter_gobj);
             break;
         }
     }

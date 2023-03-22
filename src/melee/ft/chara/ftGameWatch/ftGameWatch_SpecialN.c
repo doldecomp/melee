@@ -257,7 +257,7 @@ void ftGameWatch_SpecialN_Anim(HSD_GObj* gobj)
 
     ftGameWatch_SpecialN_ChefLoop(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -290,7 +290,7 @@ void ftGameWatch_SpecialAirN_Anim(HSD_GObj* gobj)
 
     ftGameWatch_SpecialAirN_ChefLoop(gobj);
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 // 0x8014E87C

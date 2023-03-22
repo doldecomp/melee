@@ -206,7 +206,7 @@ void ftCLink_80149114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     CLinkAttributes* temp_r4 = (void*) fp->ft_data->ext_attr;
-    f32 ftmp = func_80092ED8(fp->x19A4, temp_r4, temp_r4->xD8);
+    f32 ftmp = ft_80092ED8(fp->x19A4, temp_r4, temp_r4->xD8);
     fp->gr_vel = ftmp * p_ftCommonData->x294;
     if (fp->x19AC < 0.0f) {
         ftmp = fp->gr_vel;
@@ -214,7 +214,7 @@ void ftCLink_80149114(HSD_GObj* gobj)
         ftmp = -fp->gr_vel;
     }
     fp->gr_vel = ftmp;
-    func_80088148(fp, 0x111DA, 0x7F, 0x40);
+    ft_80088148(fp, 0x111DA, 0x7F, 0x40);
 }
 
 void ftCLink_8014919C(HSD_GObj* gobj)
@@ -302,6 +302,6 @@ u32 ftCLink_801492F4(HSD_GObj* gobj)
 void ftCLink_80149318(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_800DEAE8(gobj, 0x156, 0x157);
+    ft_800DEAE8(gobj, 0x156, 0x157);
     fp->x2204_ftcmd_var1 = 0;
 }

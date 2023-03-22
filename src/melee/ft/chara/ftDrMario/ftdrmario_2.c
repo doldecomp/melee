@@ -47,13 +47,13 @@ void ftDrMario_80149954(HSD_GObj* gobj)
                 fp->cb.x21E4_callback_OnDeath2 = 0;
             }
         }
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
 void ftDrMario_80149A6C(HSD_GObj* gobj)
 {
-    func_800DED30(gobj);
+    ft_800DED30(gobj);
 }
 
 void ftDrMario_80149A8C(HSD_GObj* gobj)

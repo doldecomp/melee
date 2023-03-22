@@ -280,7 +280,7 @@ bool ftMewtwo_SpecialHi_CheckTimer(HSD_GObj* gobj)
         return true;
     }
 
-    if (func_8009A134(gobj))
+    if (ft_8009A134(gobj))
         return false;
 
     return true;
@@ -391,7 +391,7 @@ static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* gobj)
 
     fp->x221E_flag.bits.b0 = true;
 
-    func_80088148(fp, 0x30DA1, SFX_VOLUME_MAX, SFX_PAN_MID);
+    ft_80088148(fp, 0x30DA1, SFX_VOLUME_MAX, SFX_PAN_MID);
 }
 
 /// Mewtwo's grounded Teleport Zoom Motion State handler
@@ -433,7 +433,7 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* gobj)
 
         if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &stickVec) <
               (f32) M_PI_2) &&
-            (func_8009A134(gobj) == false))
+            (ft_8009A134(gobj) == false))
         {
             ftCommon_8007D9FC(fp);
 
@@ -540,7 +540,7 @@ void ftMewtwo_SpecialHiLost_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 /// Mewtwo's aerial Teleport End Animation callback
@@ -550,9 +550,9 @@ void ftMewtwo_SpecialAirHiLost_Anim(HSD_GObj* gobj)
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80096900(gobj, 1, 0, true,
-                      mewtwoAttrs->x70_MEWTWO_TELEPORT_FREEFALL_MOBILITY,
-                      mewtwoAttrs->x74_MEWTWO_TELEPORT_LANDING_LAG);
+        ft_80096900(gobj, 1, 0, true,
+                    mewtwoAttrs->x70_MEWTWO_TELEPORT_FREEFALL_MOBILITY,
+                    mewtwoAttrs->x74_MEWTWO_TELEPORT_LANDING_LAG);
     }
 }
 
@@ -599,7 +599,7 @@ void ftMewtwo_SpecialAirHiLost_Coll(HSD_GObj* gobj)
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
     if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp))) {
-        func_800D5CB0(gobj, 0, mewtwoAttrs->x74_MEWTWO_TELEPORT_LANDING_LAG);
+        ft_800D5CB0(gobj, 0, mewtwoAttrs->x74_MEWTWO_TELEPORT_LANDING_LAG);
         return;
     }
 

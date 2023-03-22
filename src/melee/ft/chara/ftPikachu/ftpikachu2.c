@@ -58,17 +58,17 @@ void ftPikachu_80124908(HSD_GObj* gobj)
             func_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_800872A4(gobj)) {
             case 12:
-                func_80088148(fp, 0x3a9cc, 0x7F, 0x40);
+                ft_80088148(fp, 0x3a9cc, 0x7F, 0x40);
                 break;
             case 23:
-                func_80088148(fp, 0x382b3, 0x7F, 0x40);
+                ft_80088148(fp, 0x382b3, 0x7F, 0x40);
                 break;
             }
         }
     }
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -95,10 +95,10 @@ void ftPikachu_80124A20(HSD_GObj* gobj)
             func_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_800872A4(gobj)) {
             case 12:
-                func_80088148(fp, 0x3a9cc, 0x7F, 0x40);
+                ft_80088148(fp, 0x3a9cc, 0x7F, 0x40);
                 break;
             case 23:
-                func_80088148(fp, 0x382b3, 0x7F, 0x40);
+                ft_80088148(fp, 0x382b3, 0x7F, 0x40);
                 break;
             }
         }
@@ -106,10 +106,10 @@ void ftPikachu_80124A20(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == pika_attr->x10) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 0, 1, 1.0f, pika_attr->x10);
+        ft_80096900(gobj, 1, 0, 1, 1.0f, pika_attr->x10);
     }
 }
 

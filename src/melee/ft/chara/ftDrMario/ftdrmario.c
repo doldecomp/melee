@@ -227,7 +227,7 @@ void ftDrMario_80149910(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    func_800DEAE8(gobj, 0x155, 0x156);
+    ft_800DEAE8(gobj, 0x155, 0x156);
     fp->x2200_ftcmd_var0 = 1;
     fp->x2204_ftcmd_var1 = 0;
 }

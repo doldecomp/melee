@@ -322,14 +322,14 @@ static void ftGameWatch_AttackAirHi_Action(HSD_GObj*);
 // Motion State
 void ftGameWatch_AttackAir_DecideAction(HSD_GObj* gobj)
 {
-    enum_t msid = func_8008CE68(GET_FIGHTER(gobj));
+    enum_t msid = ft_8008CE68(GET_FIGHTER(gobj));
 
     switch (msid) {
     case ftCo_MS_AttackAirN:
         ftGameWatch_AttackAirN_Action(gobj);
         return;
     case ftCo_MS_AttackAirF:
-        func_8008CFAC(gobj, msid);
+        ft_8008CFAC(gobj, msid);
         return;
     case ftCo_MS_AttackAirB:
         ftGameWatch_AttackAirB_Action(gobj);
@@ -338,7 +338,7 @@ void ftGameWatch_AttackAir_DecideAction(HSD_GObj* gobj)
         ftGameWatch_AttackAirHi_Action(gobj);
         return;
     case ftCo_MS_AttackAirLw:
-        func_8008CFAC(gobj, msid);
+        ft_8008CFAC(gobj, msid);
         return;
     }
 }
@@ -350,7 +350,7 @@ void ftGameWatch_AttackAirN_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8008CFAC(gobj, ftGw_MS_AttackAirN);
+    ft_8008CFAC(gobj, ftGw_MS_AttackAirN);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemParachuteSetup;
 }
 
@@ -359,7 +359,7 @@ void ftGameWatch_AttackAirN_Action(HSD_GObj* gobj)
 // Animation callback
 void ftGameWatch_AttackAirN_Anim(HSD_GObj* gobj)
 {
-    func_8008D010(gobj);
+    ft_8008D010(gobj);
 }
 
 // 0x8014B740
@@ -367,7 +367,7 @@ void ftGameWatch_AttackAirN_Anim(HSD_GObj* gobj)
 // callback
 void ftGameWatch_AttackAirN_IASA(HSD_GObj* gobj)
 {
-    func_8008D08C(gobj);
+    ft_8008D08C(gobj);
 }
 
 // 0x8014B760
@@ -413,7 +413,7 @@ void ftGameWatch_LandingAirN_Action(HSD_GObj* gobj)
         return;
     }
 
-    func_800D5BF8(gobj);
+    ft_800D5BF8(gobj);
     ftGameWatch_OnDamage(gobj);
 }
 
@@ -424,7 +424,7 @@ static void ftGameWatch_AttackAirB_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8008CFAC(gobj, ftGw_MS_AttackAirB);
+    ft_8008CFAC(gobj, ftGw_MS_AttackAirB);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemTurtleSetup;
 }
 
@@ -433,7 +433,7 @@ static void ftGameWatch_AttackAirB_Action(HSD_GObj* gobj)
 // callback
 void ftGameWatch_AttackAirB_Anim(HSD_GObj* gobj)
 {
-    func_8008D010(gobj);
+    ft_8008D010(gobj);
 }
 
 // 0x8014B89C
@@ -441,7 +441,7 @@ void ftGameWatch_AttackAirB_Anim(HSD_GObj* gobj)
 // callback
 void ftGameWatch_AttackAirB_IASA(HSD_GObj* gobj)
 {
-    func_8008D29C(gobj);
+    ft_8008D29C(gobj);
 }
 
 // 0x8014B8BC
@@ -485,7 +485,7 @@ void ftGameWatch_LandingAirB_Action(HSD_GObj* gobj)
         return;
     }
 
-    func_800D5BF8(gobj);
+    ft_800D5BF8(gobj);
     ftGameWatch_OnDamage(gobj);
 }
 
@@ -494,20 +494,20 @@ static void ftGameWatch_AttackAirHi_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8008CFAC(gobj, ftGw_MS_AttackAirHi);
+    ft_8008CFAC(gobj, ftGw_MS_AttackAirHi);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemSparkySetup;
 }
 
 /// Mr. Game & Watch's Up Aerial Animation callback
 void ftGameWatch_AttackAirHi_Anim(HSD_GObj* gobj)
 {
-    func_8008D010(gobj);
+    ft_8008D010(gobj);
 }
 
 /// Mr. Game & Watch's Up Aerial IASA callback
 void ftGameWatch_AttackAirHi_IASA(HSD_GObj* gobj)
 {
-    func_8008D3A4(gobj);
+    ft_8008D3A4(gobj);
 }
 
 /// Mr. Game & Watch's Back Aerial Physics callback
@@ -547,7 +547,7 @@ void ftGameWatch_LandingAirHi_Action(HSD_GObj* gobj)
         return;
     }
 
-    func_800D5BF8(gobj);
+    ft_800D5BF8(gobj);
     ftGameWatch_OnDamage(gobj);
 }
 
@@ -558,8 +558,7 @@ static void ftGameWatch_LandingAirN_Init(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
 
-    func_8008D708(gobj, ftGw_MS_LandingAirN,
-                  fp->x110_attr.x1F8_NAirLandingLag);
+    ft_8008D708(gobj, ftGw_MS_LandingAirN, fp->x110_attr.x1F8_NAirLandingLag);
 }
 
 // 0x8014BB24
@@ -569,7 +568,7 @@ void ftGameWatch_LandingAirN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_800D5D3C(gobj);
+    ft_800D5D3C(gobj);
     if (fp->motion_id != ftGw_MS_LandingAirN) {
         ftGameWatch_OnDamage(gobj);
     }
@@ -586,7 +585,7 @@ void ftGameWatch_LandingAirN_IASA(HSD_GObj* gobj)
 // Physics callback
 void ftGameWatch_LandingAirN_Phys(HSD_GObj* gobj)
 {
-    func_800D5F18(gobj);
+    ft_800D5F18(gobj);
 }
 
 // 0x8014BB94
@@ -596,7 +595,7 @@ void ftGameWatch_LandingAirN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_800D5F38(gobj);
+    ft_800D5F38(gobj);
     if (fp->motion_id != ftGw_MS_LandingAirN) {
         ftGameWatch_OnDamage(gobj);
     }
@@ -609,8 +608,7 @@ void ftGameWatch_LandingAirB_Init(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8008D708(gobj, ftGw_MS_LandingAirB,
-                  fp->x110_attr.x200_BAirLandingLag);
+    ft_8008D708(gobj, ftGw_MS_LandingAirB, fp->x110_attr.x200_BAirLandingLag);
 }
 
 // 0x8014BC0C
@@ -620,7 +618,7 @@ void ftGameWatch_LandingAirB_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_800D5D3C(gobj);
+    ft_800D5D3C(gobj);
     if (fp->motion_id != ftGw_MS_LandingAirB) {
         ftGameWatch_OnDamage(gobj);
     }
@@ -637,7 +635,7 @@ void ftGameWatch_LandingAirB_IASA(HSD_GObj* gobj)
 // Physics callback
 void ftGameWatch_LandingAirB_Phys(HSD_GObj* gobj)
 {
-    func_800D5F18(gobj);
+    ft_800D5F18(gobj);
 }
 
 // 0x8014BC7C
@@ -647,7 +645,7 @@ void ftGameWatch_LandingAirB_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_800D5F38(gobj);
+    ft_800D5F38(gobj);
     if (fp->motion_id != ftGw_MS_LandingAirB) {
         ftGameWatch_OnDamage(gobj);
     }
@@ -660,9 +658,9 @@ void ftGameWatch_LandingAirHi_Init(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_8008D708(gobj, ftGw_MS_LandingAirHi,
-                  fp->x110_attr.x200_BAirLandingLag); // Erroneously using Back
-                                                      // Aerial's landing lag
+    ft_8008D708(gobj, ftGw_MS_LandingAirHi,
+                fp->x110_attr.x200_BAirLandingLag); // Erroneously using Back
+                                                    // Aerial's landing lag
 }
 
 // 0x8014BCF4
@@ -672,7 +670,7 @@ void ftGameWatch_LandingAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_800D5D3C(gobj);
+    ft_800D5D3C(gobj);
     if (fp->motion_id != ftGw_MS_LandingAirHi) {
         ftGameWatch_OnDamage(gobj);
     }
@@ -689,7 +687,7 @@ void ftGameWatch_LandingAirHi_IASA(HSD_GObj* gobj)
 // Physics callback
 void ftGameWatch_LandingAirHi_Phys(HSD_GObj* gobj)
 {
-    func_800D5F18(gobj);
+    ft_800D5F18(gobj);
 }
 
 // 0x8014BD64
@@ -699,7 +697,7 @@ void ftGameWatch_LandingAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_800D5F38(gobj);
+    ft_800D5F38(gobj);
     if (fp->motion_id != ftGw_MS_LandingAirHi) {
         ftGameWatch_OnDamage(gobj);
     }

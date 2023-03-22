@@ -133,7 +133,7 @@ void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         unsetCallbacks(gobj);
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -149,10 +149,10 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         unsetCallbacks(gobj);
         if (0.0 == (f64) sa->speciallw.landing_lag) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 0, true, 1, (f32) sa->speciallw.landing_lag);
+        ft_80096900(gobj, 1, 0, true, 1, (f32) sa->speciallw.landing_lag);
     }
 }
 

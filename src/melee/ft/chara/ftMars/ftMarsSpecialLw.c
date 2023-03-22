@@ -74,7 +74,7 @@ void ftMars_80138AA8(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 void ftMars_80138B64(HSD_GObj* gobj)
@@ -98,7 +98,7 @@ void ftMars_80138B64(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 void ftMars_80138C20(HSD_GObj* gobj) {}
@@ -234,7 +234,7 @@ void ftMars_80138E68(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 // https://decomp.me/scratch/Jx7Ov
@@ -279,7 +279,7 @@ void ftMars_80138F14(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 // 80138FC0 00135BA0

@@ -8,14 +8,14 @@
 
 void ftDonkey_800E0440(HSD_GObj* gobj)
 {
-    s32 result = func_80094EA4(gobj);
+    s32 result = ft_80094EA4(gobj);
     if (result)
         return;
 }
 
 void ftDonkey_800E0464(HSD_GObj* gobj)
 {
-    func_800CB438(gobj);
+    ft_800CB438(gobj);
 }
 
 void ftDonkey_800E0484(HSD_GObj* gobj)

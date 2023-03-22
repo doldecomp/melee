@@ -75,9 +75,9 @@ void ftMars_80137558(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground)
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         else
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
     }
 }
 
@@ -169,10 +169,10 @@ void ftMars_801377B0(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
             // MS_014_Wait_PlayerCheck
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         } else {
             // MS_029_Fall
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         }
     }
 }
@@ -278,8 +278,8 @@ void ftMars_801379D0(HSD_GObj* gobj)
 
 void ftMars_80137A68(HSD_GObj* gobj)
 {
-    func_80089824(gobj);
-    func_800892A0(gobj);
+    ft_80089824(gobj);
+    ft_800892A0(gobj);
 }
 
 void ftMars_80137A9C(HSD_GObj* gobj)
@@ -314,10 +314,10 @@ void ftMars_80137B34(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
             // MS_014_Wait_PlayerCheck
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         } else {
             // MS_029_Fall
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         }
     }
 }
@@ -461,10 +461,10 @@ void ftMars_80137ECC(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->ground_or_air == GA_Ground) {
             // MS_014_Wait_PlayerCheck
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         } else {
             // MS_029_Fall
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         }
     }
 }

@@ -230,7 +230,7 @@ void ftSamus_80129774(HSD_GObj* gobj)
             var_f1 = 0.f;
         }
         index = 5.0f * var_f1;
-        func_80088510(fighter2, lbl_803CE6B8[index], 0x7F, 0x40);
+        ft_80088510(fighter2, lbl_803CE6B8[index], 0x7F, 0x40);
     }
 
     fp->mv.ss.unk3.x4 += 1;
@@ -238,7 +238,7 @@ void ftSamus_80129774(HSD_GObj* gobj)
         fp->mv.ss.unk3.x4 = 0;
         fp->fv.ss.x2230 += 1;
         if (fp->fv.ss.x2230 >= samus_attr->x18) {
-            func_800BFFD0(fp, 0x35, 0);
+            ft_800BFFD0(fp, 0x35, 0);
             fp->fv.ss.x2230 = samus_attr->x18;
             Fighter_ChangeMotionState(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
             ftSamus_UnkAndDestroyAllEF(gobj);
@@ -256,7 +256,7 @@ void ftSamus_80129940(HSD_GObj* gobj)
 
     ftSamus_UnkAndDestroyAllEF(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -269,7 +269,7 @@ void ftSamus_801299D0(HSD_GObj* gobj)
 
     ftSamus_801293BC(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -292,10 +292,10 @@ void ftSamus_80129A98(HSD_GObj* gobj)
     ftSamus_801293BC(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (samus_attr->x24 == 0.0f) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 0, 1, 1.0f, samus_attr->x24);
+        ft_80096900(gobj, 1, 0, 1, 1.0f, samus_attr->x24);
     }
 }
 
@@ -311,7 +311,7 @@ void ftSamus_80129B1C(HSD_GObj* gobj)
     u8 _[32];
 #endif
 
-    if (func_8009917C(gobj)) {
+    if (ft_8009917C(gobj)) {
         fighterObj2 = gobj;
         ftSamus_UnkAndDestroyAllEF(fighterObj2);
     } else {
@@ -387,7 +387,7 @@ void ftSamus_80129DC8(HSD_GObj* gobj)
         Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         ftSamus_updateDamageDeathCBs(gobj);
-        func_80088148(fp, 0x3F7B5U, 0x7FU, 0x40U);
+        ft_80088148(fp, 0x3F7B5U, 0x7FU, 0x40U);
         fp->x2204_ftcmd_var1 = 1;
     }
 }

@@ -56,7 +56,7 @@ void ftMars_801382E8(HSD_GObj* gobj)
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         // MS_035_FallSpecial
-        func_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
+        ft_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }
 }
 
@@ -75,7 +75,7 @@ void ftMars_80138348(HSD_GObj* gobj)
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         // MS_035_FallSpecial
-        func_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
+        ft_80096900(gobj, 0, 1, 0, attr->x28, attr->x2C);
     }
 }
 
@@ -253,7 +253,7 @@ void ftMars_80138884(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attr = fp->x2D4_specialAttributes;
-    func_800D5CB0(gobj, 0, attr->x2C);
+    ft_800D5CB0(gobj, 0, attr->x2C);
 }
 
 // 801388B4 00135494
@@ -268,7 +268,7 @@ void ftMars_801388B4(HSD_GObj* gobj)
             fp->x2204_ftcmd_var1 = 1;
             ft_80083B68(gobj);
         } else {
-            ft_800831CC(gobj, &func_80096CC8, &ftMars_80138884);
+            ft_800831CC(gobj, &ft_80096CC8, &ftMars_80138884);
         }
     } else {
         ft_80084104(gobj);
@@ -287,7 +287,7 @@ void ftMars_80138940(HSD_GObj* gobj)
             fp->x2204_ftcmd_var1 = 1;
             ft_80083B68(gobj);
         } else {
-            ft_800831CC(gobj, &func_80096CC8, &ftMars_80138884);
+            ft_800831CC(gobj, &ft_80096CC8, &ftMars_80138884);
         }
     } else {
         ft_80084104(gobj);

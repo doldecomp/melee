@@ -51,7 +51,7 @@ void ftSamus_8012A380(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 void ftSamus_8012A3BC(HSD_GObj* gobj)
@@ -62,7 +62,7 @@ void ftSamus_8012A3BC(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 void ftSamus_8012A3F8(HSD_GObj* gobj) {}
@@ -92,7 +92,7 @@ void ftSamus_8012A420(HSD_GObj* gobj)
 void ftSamus_8012A468(HSD_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
     }
 }
 
@@ -110,7 +110,7 @@ void ftSamus_8012A4E0(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 void ftSamus_8012A51C(HSD_GObj* gobj)
@@ -121,7 +121,7 @@ void ftSamus_8012A51C(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 void ftSamus_8012A558(HSD_GObj* gobj) {}
@@ -154,7 +154,7 @@ void ftSamus_8012A580(HSD_GObj* gobj)
 void ftSamus_8012A5C8(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
     }
 }
 

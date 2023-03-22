@@ -65,8 +65,8 @@ void ftMasterHand_80151484(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 
     // r3_fp now stored in r28
-    func_800881D8(r3_fp, 0x4E217, 0x7F, 0x40);
-    func_80088148(r3_fp, 0x4E218, 0x7F, 0x40);
+    ft_800881D8(r3_fp, 0x4E217, 0x7F, 0x40);
+    ft_80088148(r3_fp, 0x4E218, 0x7F, 0x40);
     r3_fp->mv.mh.unk0.x74 = 0;
     r3_fp->mv.mh.unk0.x78 = 0;
 }
@@ -109,7 +109,7 @@ void ftMasterHand_801515B8(HSD_GObj* gobj)
     if (temp_r0) {
         return;
     }
-    func_800D4F24(gobj, 0);
+    ft_800D4F24(gobj, 0);
 }
 
 // 801516B4 14E294
@@ -147,6 +147,6 @@ void ftMasterHand_801516B4(HSD_GObj* gobj)
     // temp_cr0_eq = ;
     r31_fp->mv.mh.unk0.x8 = temp_r0;
     if (temp_r0 == 0) {
-        func_800D4F24(gobj, 0);
+        ft_800D4F24(gobj, 0);
     }
 }

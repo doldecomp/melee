@@ -771,7 +771,7 @@ void ftLib_80087140(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x221F_flag.bits.b3) {
-        func_800D4F24(gobj, 1);
+        ft_800D4F24(gobj, 1);
         ftCommon_8007ED2C(fp);
         Fighter_UnkProcessDeath_80068354(gobj);
         ftCommon_8007D92C(gobj);
@@ -782,12 +782,12 @@ void ftLib_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_ASSERT(1117, itGetKind(item_gobj) == It_Kind_MetalB);
-    func_800C8348(gobj, func_8026B560(item_gobj), func_8026B574(item_gobj));
-    func_800D105C(gobj);
+    ft_800C8348(gobj, func_8026B560(item_gobj), func_8026B574(item_gobj));
+    ft_800D105C(gobj);
     ft_80081C88(gobj, fp->x34_scale.y);
     ftCommon_8007EBAC(fp, 0xC, 0);
     func_80030E44(2, &fp->cur_pos);
-    func_80088148(fp, 0x121, 0x7F, 0x40);
+    ft_80088148(fp, 0x121, 0x7F, 0x40);
 }
 
 bool ftLib_80087284(HSD_GObj* gobj)

@@ -12,7 +12,7 @@ void ftGameWatch_Attack100Start_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_800D6B00(gobj, ftGw_MS_Attack100Start);
+    ft_800D6B00(gobj, ftGw_MS_Attack100Start);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemGreenhouseSetup;
 }
 
@@ -61,13 +61,13 @@ void ftGameWatch_Attack100Loop_Action(HSD_GObj* gobj)
 // Animation callback
 void ftGameWatch_Attack100Loop_Anim(HSD_GObj* gobj)
 {
-    func_800D6C60(gobj, ftGameWatch_Attack100End_Action);
+    ft_800D6C60(gobj, ftGameWatch_Attack100End_Action);
 }
 
 // 0x8014C330 - Mr. Game & Watch's Rapid Jab Loop IASA callback
 void ftGameWatch_Attack100Loop_IASA(HSD_GObj* gobj)
 {
-    func_800D6E70(gobj);
+    ft_800D6E70(gobj);
 }
 
 // 0x8014C350 - Mr. Game & Watch's Rapid Jab Loop Physics callback
@@ -96,7 +96,7 @@ void ftGameWatch_Attack100End_Action(HSD_GObj* gobj)
 // 0x8014C3F4 - Mr. Game & Watch's Rapid Jab End Animation callback
 void ftGameWatch_Attack100End_Anim(HSD_GObj* gobj)
 {
-    func_800D6E34(gobj);
+    ft_800D6E34(gobj);
 }
 
 // 0x8014C414 - Mr. Game & Watch's Rapid Jab End IASA callback

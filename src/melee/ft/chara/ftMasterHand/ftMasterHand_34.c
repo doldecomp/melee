@@ -13,7 +13,7 @@ void ftMasterHand_80155D1C(HSD_GObj* gobj)
     fp = gobj->user_data;
     fp->x221E_flag.bits.b0 = 0;
     fp->facing_dir = -fp->facing_dir;
-    func_800DC750(gobj);
+    ft_800DC750(gobj);
 }
 
 // 80155D5C 15293C
@@ -51,7 +51,7 @@ void ftMasterHand_80155D6C(HSD_GObj* gobj, s32 arg1)
     fp->mv.mh.unk4.x0 = 0;
     Fighter_ChangeMotionState(gobj, 0x14A, 0, 0, 0.0f, 1.0f, 0.0f);
     fp->x221E_flag.bits.b0 = 0;
-    fp->cb.x21B0_callback_Accessory1 = &func_800DE508;
+    fp->cb.x21B0_callback_Accessory1 = &ft_800DE508;
     ftCommon_8007E2F4(fp, 0x1FFU);
     ftAnim_8006EBA4(gobj);
 }

@@ -73,10 +73,10 @@ void ftSamus_8012A81C(HSD_GObj* gobj)
         ftSamus_DestroyAllUnsetx2444(gobj);
         ftCommon_8007D60C(fighter2);
         if (samus_attr->x50 == 0.0f) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
+        ft_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
     }
 }
 
@@ -92,10 +92,10 @@ void ftSamus_8012A8C4(HSD_GObj* gobj)
         ftSamus_DestroyAllUnsetx2444(gobj);
         ftCommon_8007D60C(fighter2);
         if (samus_attr->x50 == 0.0f) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
+        ft_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
     }
 }
 
@@ -218,7 +218,7 @@ void ftSamus_8012AC00(HSD_GObj* gobj)
         }
         if (ft_CheckGroundAndLedge(gobj, direction)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
-            func_800D5CB0(gobj, 0, samus_attr->x50);
+            ft_800D5CB0(gobj, 0, samus_attr->x50);
             return;
         }
         if (ftCliffCommon_80081298(gobj)) {
@@ -254,7 +254,7 @@ void ftSamus_8012ACF8(HSD_GObj* gobj)
         }
         if (ft_CheckGroundAndLedge(gobj, direction)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
-            func_800D5CB0(gobj, 0, samus_attr->x50);
+            ft_800D5CB0(gobj, 0, samus_attr->x50);
             return;
         }
         if (ftCliffCommon_80081298(gobj)) {

@@ -40,7 +40,7 @@ void ftMasterHand_80155B80(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 0x148, 0, 0, 0.0f, 1.0f, 0.0f);
     fp->x221E_flag.bits.b0 = 1;
     fp->x2220_flag.bits.b3 = 1;
-    fp->cb.x21B0_callback_Accessory1 = &func_800DB464;
+    fp->cb.x21B0_callback_Accessory1 = &ft_800DB464;
     ftCommon_8007E2F4(fp, 0x1FF);
     fp->x2220_flag.bits.b3 = 1;
     ftAnim_8006EBA4(gobj);

@@ -485,7 +485,7 @@ void ftFox_SpecialAirS_Action(HSD_GObj* gobj)
 void ftFox_SpecialSEnd_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 // 0x800EA944
@@ -497,9 +497,9 @@ void ftFox_SpecialAirSEnd_Anim(HSD_GObj* gobj)
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80096900(gobj, 1, 0, true,
-                      foxAttrs->x4C_FOX_ILLUSION_FREEFALL_MOBILITY,
-                      foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
+        ft_80096900(gobj, 1, 0, true,
+                    foxAttrs->x4C_FOX_ILLUSION_FREEFALL_MOBILITY,
+                    foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
     }
 }
 
@@ -570,7 +570,7 @@ void ftFox_SpecialSEnd_Coll(HSD_GObj* gobj)
 #endif
 
     if (ft_800827A0(gobj) == false) {
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
     }
 }
 
@@ -595,7 +595,7 @@ void ftFox_SpecialAirSEnd_Coll(HSD_GObj* gobj)
         cliffCatchDir = 1;
     }
     if (ft_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
-        func_800D5CB0(gobj, 0, foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
+        ft_800D5CB0(gobj, 0, foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
         return;
     }
     if (ftCliffCommon_80081298(gobj))

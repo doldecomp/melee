@@ -36,7 +36,7 @@ void ftDonkey_800DFB34(HSD_GObj* gobj)
 
 void ftDonkey_800DFB54(HSD_GObj* gobj)
 {
-    if ((!func_80094EA4(gobj)) && (!ftDonkey_800E0378(gobj)) &&
+    if ((!ft_80094EA4(gobj)) && (!ftDonkey_800E0378(gobj)) &&
         (!ftDonkey_800DF938(gobj)))
     {
         ftWalkCommon_800DFEC8(gobj, &ftDonkey_800DFAE4);

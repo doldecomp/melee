@@ -137,7 +137,7 @@ void ftFox_AppealS_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->mv.fx.AppealS.animCount++;
         if ((s32) fp->mv.fx.AppealS.animCount >= 3) {
-            func_8008A324(gobj);
+            ft_8008A324(gobj);
             return;
         }
 

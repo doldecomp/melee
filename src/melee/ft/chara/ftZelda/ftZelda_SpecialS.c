@@ -211,7 +211,7 @@ void ftZelda_8013BA04(HSD_GObj* gobj)
         fp->cb.x21E4_callback_OnDeath2 = 0;
         fp->cb.x21DC_callback_OnTakeDamage = 0;
 
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -348,9 +348,9 @@ void ftZelda_8013BD10(HSD_GObj* gobj)
         }
 
         if (sa->x34 == 0)
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         else
-            func_80096900(gobj, 1, 0, 1, 1, sa->x34);
+            ft_80096900(gobj, 1, 0, 1, 1, sa->x34);
     }
 }
 

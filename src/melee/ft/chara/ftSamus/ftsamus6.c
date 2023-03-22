@@ -192,7 +192,7 @@ lbl_8012B230:
 /* 8012B238 000000E8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8012B23C 000000EC  40 82 00 0C */	bne lbl_8012B248
 /* 8012B240 000000F0  7F A3 EB 78 */	mr r3, r29
-/* 8012B244 000000F4  4B F5 F0 79 */	bl func_8008A2BC
+/* 8012B244 000000F4  4B F5 F0 79 */	bl ft_8008A2BC
 lbl_8012B248:
 /* 8012B248 000000F8  80 01 00 5C */	lwz r0, 0x5c(r1)
 /* 8012B24C 000000FC  83 E1 00 54 */	lwz r31, 0x54(r1)
@@ -219,7 +219,7 @@ void ftSamus_8012B150(HSD_GObj* gobj)
     checkStateVar1(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -285,7 +285,7 @@ lbl_8012B324:
 /* 8012B32C 000000C8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 8012B330 000000CC  40 82 00 0C */	bne lbl_8012B33C
 /* 8012B334 000000D0  7F A3 EB 78 */	mr r3, r29
-/* 8012B338 000000D4  4B FA 13 F9 */	bl func_800CC730
+/* 8012B338 000000D4  4B FA 13 F9 */	bl ft_800CC730
 lbl_8012B33C:
 /* 8012B33C 000000D8  80 01 00 64 */	lwz r0, 0x64(r1)
 /* 8012B340 000000DC  83 E1 00 5C */	lwz r31, 0x5c(r1)
@@ -303,7 +303,7 @@ void ftSamus_8012B264(HSD_GObj* gobj)
 {
     checkStateVar1(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
     }
 }
 #endif
@@ -315,7 +315,7 @@ void ftSamus_8012B358(HSD_GObj* gobj)
     if ((fp->x2208_ftcmd_var2) && (fp->input.x624_lstick_y < samus_attr->x80))
     {
         fp->x2208_ftcmd_var2 = 0;
-        func_800D638C(gobj);
+        ft_800D638C(gobj);
     }
 }
 

@@ -136,7 +136,7 @@ void ftSeak_801101CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.sk.x222C == 6) {
-        func_800BFFD0(fp, 0x56, 0);
+        ft_800BFFD0(fp, 0x56, 0);
     }
 }
 

@@ -51,8 +51,8 @@ void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80096900(gobj, 0, 1, 0, sa->specialhi.freefall_mobility,
-                      sa->specialhi.landing_lag);
+        ft_80096900(gobj, 0, 1, 0, sa->specialhi.freefall_mobility,
+                    sa->specialhi.landing_lag);
     }
 }
 
@@ -159,7 +159,7 @@ void ftMario_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
-    func_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
+    ft_800D5CB0(gobj, 0, sa->specialhi.landing_lag);
 }
 
 void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
@@ -169,7 +169,7 @@ void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
             ft_80083B68(gobj);
         } else {
-            ft_800831CC(gobj, &func_80096CC8, &ftMario_SpecialHi_CheckLanding);
+            ft_800831CC(gobj, &ft_80096CC8, &ftMario_SpecialHi_CheckLanding);
         }
     } else {
         ft_80084104(gobj);

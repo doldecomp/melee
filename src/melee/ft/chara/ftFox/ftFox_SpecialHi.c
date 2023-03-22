@@ -310,7 +310,7 @@ static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* gobj)
 
     if (fp->mv.fx.SpecialHi.unk2 >= foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR)
         return true;
-    else if (func_8009A134(gobj) != false)
+    else if (ft_8009A134(gobj) != false)
         return false;
     else
         return true;
@@ -454,7 +454,7 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* gobj)
 
         if (!(lbvector_AngleXY(&collData->x14C_ground.normal, &sp20) <
               HALF_PI32) &&
-            (func_8009A134(gobj) == false))
+            (ft_8009A134(gobj) == false))
         {
             ftCommon_8007D9FC(fp);
 
@@ -561,7 +561,7 @@ void ftFox_SpecialHiLanding_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 // 0x800E7E78
@@ -573,9 +573,9 @@ void ftFox_SpecialHiFall_Anim(HSD_GObj* gobj)
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80096900(gobj, 1, 0, true,
-                      foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
-                      foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
+        ft_80096900(gobj, 1, 0, true,
+                    foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                    foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
     }
 }
 
@@ -618,9 +618,9 @@ void ftFox_SpecialHiLanding_Coll(HSD_GObj* gobj)
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
     if (ft_80082708(gobj) == false) {
-        func_80096900(gobj, 1, 0, true,
-                      foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
-                      foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
+        ft_80096900(gobj, 1, 0, true,
+                    foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                    foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
     }
 }
 
@@ -706,21 +706,21 @@ void ftFox_SpecialHiBound_Anim(HSD_GObj* gobj)
     if (((u32) fp->x2200_ftcmd_var0 != 0U) &&
         ((s32) fp->ground_or_air == GA_Air))
     {
-        func_80096900(gobj, 1, 0, true,
-                      foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
-                      foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
+        ft_80096900(gobj, 1, 0, true,
+                    foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                    foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
         fp->x1968_jumpsUsed = (u8) ftAttrs->x168_MaxJumps;
         return;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((s32) fp->ground_or_air == GA_Air) {
-            func_80096900(gobj, 1, 0, true,
-                          foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
-                          foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
+            ft_80096900(gobj, 1, 0, true,
+                        foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
+                        foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
             fp->x1968_jumpsUsed = (u8) ftAttrs->x168_MaxJumps;
             return;
         }
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 

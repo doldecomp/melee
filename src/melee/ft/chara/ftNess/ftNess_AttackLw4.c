@@ -39,7 +39,7 @@ void ftNess_AttackLw4_Anim(
             ftNess_AttackLw4_Charge_Action(gobj);
         }
         if (!ftAnim_IsFramesRemaining(gobj)) {
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         }
     }
 }
@@ -54,7 +54,7 @@ void ftNess_AttackLw4_IASA(HSD_GObj* gobj) // Ness's Down Smash IASA callback
         fp->mv.ns.attacklw4.isChargeDisable = true;
     }
     if (fp->x2218_flag.bits.b0 != 0) {
-        func_8008A4D4(gobj);
+        ft_8008A4D4(gobj);
     }
 }
 
@@ -167,7 +167,7 @@ void ftNess_AttackLw4_Release_Anim(
     if (ftNess_YoyoThink_IsRemove(gobj) == false) {
         ftNess_YoyoCheckTimedRehit(gobj);
         if (!ftAnim_IsFramesRemaining(gobj)) {
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         }
     }
 }
@@ -179,7 +179,7 @@ void ftNess_AttackLw4_Release_IASA(
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2218_flag.bits.b0 != 0) {
-        func_8008A4D4(gobj);
+        ft_8008A4D4(gobj);
     }
 }
 

@@ -53,9 +53,9 @@ void ftLuigi_SpecialHi_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80096900(gobj, 0, 1, 0,
-                      luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
-                      luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+        ft_80096900(gobj, 0, 1, 0,
+                    luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
+                    luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }
 }
 
@@ -70,9 +70,9 @@ void ftLuigi_SpecialAirHi_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80096900(gobj, 0, 1, 0,
-                      luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
-                      luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+        ft_80096900(gobj, 0, 1, 0,
+                    luigiAttrs->x50_LUIGI_SUPERJUMP_FREEFALL_MOBILITY,
+                    luigiAttrs->x54_LUIGI_SUPERJUMP_LANDING_LAG);
     }
 }
 
@@ -246,7 +246,7 @@ void ftLuigi_SpecialAirHi_Phys(HSD_GObj* gobj)
 // https://decomp.me/scratch/l7min // Luigi's Super Jump Punch Landing check
 void ftLuigi_SpecialHi_CheckLanding(HSD_GObj* gobj)
 {
-    func_800D5CB0(
+    ft_800D5CB0(
         gobj, 0,
         ((ftLuigiAttributes*) GET_FIGHTER(gobj)->x2D4_specialAttributes)
             ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
@@ -265,7 +265,7 @@ void ftLuigi_SpecialHi_Coll(HSD_GObj* gobj)
             ft_80083B68(gobj);
             return;
         }
-        ft_800831CC(gobj, func_80096CC8, ftLuigi_SpecialHi_CheckLanding);
+        ft_800831CC(gobj, ft_80096CC8, ftLuigi_SpecialHi_CheckLanding);
         return;
     }
     ft_80084104(gobj);
@@ -284,7 +284,7 @@ void ftLuigi_SpecialAirHi_Coll(HSD_GObj* gobj)
             ft_80083B68(gobj);
             return;
         }
-        ft_800831CC(gobj, func_80096CC8, ftLuigi_SpecialHi_CheckLanding);
+        ft_800831CC(gobj, ft_80096CC8, ftLuigi_SpecialHi_CheckLanding);
         return;
     }
     ft_80084104(gobj);

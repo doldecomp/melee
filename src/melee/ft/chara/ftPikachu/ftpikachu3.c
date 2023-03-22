@@ -460,13 +460,13 @@ void ftPikachu_ActionChange_80125A54(HSD_GObj* gobj)
 void ftPikachu_80125B34(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 void ftPikachu_80125B70(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 void ftPikachu_Stub_80125BAC(HSD_GObj* arg0) {}
@@ -502,7 +502,7 @@ void ftPikachu_80125BF4(HSD_GObj* gobj)
 void ftPikachu_80125C44(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 void ftPikachu_80125C80(HSD_GObj* gobj)

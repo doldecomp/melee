@@ -136,7 +136,7 @@ static inline void ftMewtwo_SpecialN_RemoveHeldShadowBall(HSD_GObj* gobj)
         }
     }
     fp2->fv.mt.x2234_shadowBallCharge = 0;
-    func_800BFFAC(fp2);
+    ft_800BFFAC(fp2);
     efLib_DestroyAll(gobj);
 }
 
@@ -186,7 +186,7 @@ void ftMewtwo_SpecialN_OnDeath(HSD_GObj* gobj)
             mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {
             fp2->fv.mt.x2234_shadowBallCharge = 0;
-            func_800BFFAC(fp2);
+            ft_800BFFAC(fp2);
             efLib_DestroyAll(gobj);
         }
     }
@@ -293,10 +293,10 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
         if ((f32) fp->fv.mt.x2234_shadowBallCharge ==
             mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES)
         {
-            func_80088148(fp, 0x30DB6U, SFX_VOLUME_MAX, SFX_PAN_MID);
+            ft_80088148(fp, 0x30DB6U, SFX_VOLUME_MAX, SFX_PAN_MID);
             return;
         }
-        func_80088148(fp, 0x30DB3U, SFX_VOLUME_MAX, SFX_PAN_MID);
+        ft_80088148(fp, 0x30DB3U, SFX_VOLUME_MAX, SFX_PAN_MID);
     }
 }
 
@@ -326,36 +326,32 @@ void ftMewtwo_SpecialN_PlayChargeSFX(HSD_GObj* gobj)
                 (fp->mv.mt.SpecialN.chargeLevel <= 0.75f))
             {
                 fp->mv.mt.SpecialN.chargeLevel = chargeLevel;
-                func_80088510(fp, shadowBallSFX[3], SFX_VOLUME_MAX,
-                              SFX_PAN_MID);
+                ft_80088510(fp, shadowBallSFX[3], SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
             }
             if ((chargeLevel > 0.5f) &&
                 (fp->mv.mt.SpecialN.chargeLevel <= 0.5f))
             {
                 fp->mv.mt.SpecialN.chargeLevel = chargeLevel;
-                func_80088510(fp, shadowBallSFX[2], SFX_VOLUME_MAX,
-                              SFX_PAN_MID);
+                ft_80088510(fp, shadowBallSFX[2], SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
             }
             if ((chargeLevel > 0.25f) &&
                 (fp->mv.mt.SpecialN.chargeLevel <= 0.25f))
             {
                 fp->mv.mt.SpecialN.chargeLevel = chargeLevel;
-                func_80088510(fp, shadowBallSFX[1], SFX_VOLUME_MAX,
-                              SFX_PAN_MID);
+                ft_80088510(fp, shadowBallSFX[1], SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
             }
             if ((chargeLevel > 0.0f) &&
                 (fp->mv.mt.SpecialN.chargeLevel <= 0.0f))
             {
                 fp->mv.mt.SpecialN.chargeLevel = chargeLevel;
-                func_80088510(fp, shadowBallSFX[0], SFX_VOLUME_MAX,
-                              SFX_PAN_MID);
+                ft_80088510(fp, shadowBallSFX[0], SFX_VOLUME_MAX, SFX_PAN_MID);
             }
         } else {
             fp->mv.mt.SpecialN.chargeLevel = (f32) 9.999999747378752e-5f;
-            func_80088510(fp, shadowBallSFX[0], SFX_VOLUME_MAX, SFX_PAN_MID);
+            ft_80088510(fp, shadowBallSFX[0], SFX_VOLUME_MAX, SFX_PAN_MID);
         }
     }
 }
@@ -567,7 +563,7 @@ void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* gobj)
                     ftCommon_8007EBAC(fp, 0xCU, 0U);
                     func_8000B1CC(fp->ft_bones[0].x0_jobj, &sp34, &sp40);
                     ef_Spawn(0x1B, gobj, &sp40);
-                    func_800BFFD0(fp, 0x5C, 0);
+                    ft_800BFFD0(fp, 0x5C, 0);
                 }
             }
         }
@@ -609,7 +605,7 @@ void ftMewtwo_SpecialNCancel_Anim(HSD_GObj* gobj)
     ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -624,7 +620,7 @@ void ftMewtwo_SpecialNEnd_Anim(HSD_GObj* gobj)
     ftMewtwo_SpecialN_ReleaseShadowBall(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 // 0x80147954
@@ -719,7 +715,7 @@ void ftMewtwo_SpecialAirNLoop_Anim(HSD_GObj* gobj)
 
                     func_8000B1CC(fp->ft_bones[0].x0_jobj, &sp34, &sp40);
                     ef_Spawn(0x1B, gobj, &sp40);
-                    func_800BFFD0(fp, 0x5C, 0);
+                    ft_800BFFD0(fp, 0x5C, 0);
                 }
             }
         }
@@ -751,7 +747,7 @@ void ftMewtwo_SpecialAirNCancel_Anim(HSD_GObj* gobj)
     ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
     }
 }
 
@@ -770,11 +766,11 @@ void ftMewtwo_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (0.0f == mewtwoAttrs->x14_MEWTWO_SHADOWBALL_LANDING_LAG) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
-        func_80096900(gobj, 1, 0, true, 1.0f,
-                      mewtwoAttrs->x14_MEWTWO_SHADOWBALL_LANDING_LAG);
+        ft_80096900(gobj, 1, 0, true, 1.0f,
+                    mewtwoAttrs->x14_MEWTWO_SHADOWBALL_LANDING_LAG);
     }
 }
 
@@ -795,7 +791,7 @@ void ftMewtwo_SpecialNLoop_IASA(HSD_GObj* gobj)
     u8 _[48];
 #endif
 
-    if (func_8009917C(gobj) != false) {
+    if (ft_8009917C(gobj) != false) {
         ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
     } else {
         recentInput = fp->input.x668;
@@ -835,7 +831,7 @@ void ftMewtwo_SpecialNFull_IASA(HSD_GObj* gobj)
     u8 _[48];
 #endif
 
-    if (func_8009917C(gobj) != false) {
+    if (ft_8009917C(gobj) != false) {
         ftMewtwo_SpecialN_RemoveShadowBall2(gobj);
     } else {
         recentInput = fp->input.x668;
@@ -1229,7 +1225,7 @@ static inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* gobj)
                           mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES,
                           atan2f(sp20.y - sp2C.y, sp20.x - sp2C.x),
                           fp->facing_dir);
-            func_80088148(fp, 0x30DB3U, SFX_VOLUME_MAX, SFX_PAN_MID);
+            ft_80088148(fp, 0x30DB3U, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
     }
 }

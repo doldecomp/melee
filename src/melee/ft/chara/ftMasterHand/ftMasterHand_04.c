@@ -30,8 +30,8 @@ void ftMasterHand_801510B0(HSD_GObj* gobj)
 
     /// @todo Probably same file if #ftMasterHand_801511FC is getting
     /// implicitly passed.
-    func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, ftMasterHand_801511FC */);
-    // func_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, ftMasterHand_801511FC);
+    ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, ftMasterHand_801511FC */);
+    // ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, ftMasterHand_801511FC);
 
     func_8015C09C(gobj, -1.0f);
 }

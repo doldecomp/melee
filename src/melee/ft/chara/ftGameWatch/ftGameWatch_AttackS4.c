@@ -125,7 +125,7 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* gobj)
 void ftGameWatch_AttackS4_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 // 0x8014AAC4
@@ -136,7 +136,7 @@ void ftGameWatch_AttackS4_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2218_flag.bits.b0 != false)
-        func_8008A4D4(gobj);
+        ft_8008A4D4(gobj);
 }
 
 // 0x8014AAF4

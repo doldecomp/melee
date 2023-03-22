@@ -12,26 +12,26 @@
 #include <dolphin/mtx/types.h>
 
 MotionState ftKirby_MotionStateTable[] = {
-    { 295, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
-      func_800D767C, ftCamera_UpdateCameraBox },
-    { 296, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
-      func_800D767C, ftCamera_UpdateCameraBox },
-    { 297, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
-      func_800D767C, ftCamera_UpdateCameraBox },
-    { 298, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
-      func_800D767C, ftCamera_UpdateCameraBox },
-    { 299, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
-      func_800D767C, ftCamera_UpdateCameraBox },
-    { 300, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
-      func_800D767C, ftCamera_UpdateCameraBox },
-    { 301, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
-      func_800D767C, ftCamera_UpdateCameraBox },
-    { 302, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
-      func_800D767C, ftCamera_UpdateCameraBox },
-    { 303, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
-      func_800D767C, ftCamera_UpdateCameraBox },
-    { 304, 0x0000006A, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
-      func_800D767C, ftCamera_UpdateCameraBox },
+    { 295, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
+      ft_800D767C, ftCamera_UpdateCameraBox },
+    { 296, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
+      ft_800D767C, ftCamera_UpdateCameraBox },
+    { 297, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
+      ft_800D767C, ftCamera_UpdateCameraBox },
+    { 298, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
+      ft_800D767C, ftCamera_UpdateCameraBox },
+    { 299, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
+      ft_800D767C, ftCamera_UpdateCameraBox },
+    { 300, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
+      ft_800D767C, ftCamera_UpdateCameraBox },
+    { 301, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
+      ft_800D767C, ftCamera_UpdateCameraBox },
+    { 302, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
+      ft_800D767C, ftCamera_UpdateCameraBox },
+    { 303, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
+      ft_800D767C, ftCamera_UpdateCameraBox },
+    { 304, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
+      ft_800D767C, ftCamera_UpdateCameraBox },
     { 52, 0x00240005, 0x06000000, ftKirby_800F203C, ftKirby_800F205C,
       ftKirby_800F207C, ftKirby_800F209C, ftCamera_UpdateCameraBox },
     { 52, 0x00240405, 0x06000000, ftKirby_800F2124, ftKirby_800F2160,
@@ -578,10 +578,10 @@ ftKirby_UnkArrayThing* lbl_803C9FC8[FTKIND_MAX] = {
 };
 
 MotionState lbl_803CA04C[] = {
-    { 14, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
-    { 15, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
-    { 16, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
-    { 17, 0, 0x01000000, NULL, NULL, func_800C7414, NULL, NULL },
+    { 14, 0, 0x01000000, NULL, NULL, ft_800C737C, NULL, NULL },
+    { 15, 0, 0x01000000, NULL, NULL, ft_800C737C, NULL, NULL },
+    { 16, 0, 0x01000000, NULL, NULL, ft_800C737C, NULL, NULL },
+    { 17, 0, 0x01000000, NULL, NULL, ft_800C7414, NULL, NULL },
 };
 
 /* static */ void ftKirby_800EE854(void);
@@ -1270,23 +1270,23 @@ void ftKirby_800EE818(HSD_GObj* gobj)
     switch (fp->fv.kb.x2238) {
     case 3:
         if (fp->fv.kb.x22E8 == attr->x190) {
-            func_800BFFD0(fp, 0x3A, 0);
+            ft_800BFFD0(fp, 0x3A, 0);
         }
         break;
     case 13:
         if (fp->fv.kb.x22D4 == attr->x168) {
-            func_800BFFD0(fp, 0x36, 0);
+            ft_800BFFD0(fp, 0x36, 0);
         }
         break;
     case 16:
         if (fp->fv.kb.x22C8 == attr->x384) {
-            func_800BFFD0(fp, 0x5D, 0);
+            ft_800BFFD0(fp, 0x5D, 0);
             return;
         }
         break;
     case 7:
         if (fp->fv.kb.x22E0 == 6) {
-            func_800BFFD0(fp, 0x57, 0);
+            ft_800BFFD0(fp, 0x57, 0);
         }
         break;
     }

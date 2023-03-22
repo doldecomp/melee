@@ -64,7 +64,7 @@ void ftDonkey_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 void ftDonkey_8010FCD4(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -81,10 +81,10 @@ void ftDonkey_8010FD10(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);
         if (donkey_attr->SpecialHi.x64_LANDING_LAG == 0.0f) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         } else {
-            func_80096900(gobj, 1, 0, 1, 1.0f,
-                          donkey_attr->SpecialHi.x64_LANDING_LAG);
+            ft_80096900(gobj, 1, 0, 1, 1.0f,
+                        donkey_attr->SpecialHi.x64_LANDING_LAG);
         }
     }
 }

@@ -148,13 +148,13 @@ void ftMario_SpecialAirS_StartMotion(HSD_GObj* gobj)
 void ftMario_SpecialS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 void ftMario_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 void ftMario_SpecialS_IASA(HSD_GObj* gobj) {}

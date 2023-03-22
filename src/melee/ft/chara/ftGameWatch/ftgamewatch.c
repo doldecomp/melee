@@ -199,7 +199,7 @@ void ftGameWatch_OnLoad(HSD_GObj* gobj)
         ftGameWatchAttributes* attr = fp->x2D4_specialAttributes;
         fp->x34_scale.z = attr->x0_GAMEWATCH_WIDTH;
         fp->x614 = attr->x14_GAMEWATCH_OUTLINE;
-        func_800BFB4C(gobj, &attr->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
+        ft_800BFB4C(gobj, &attr->x4_GAMEWATCH_COLOR[fp->x619_costume_id]);
         fp->x5C8 = items[10];
 
         func_8026B3F8(items[0], It_Kind_GameWatch_Greenhouse);
@@ -276,7 +276,7 @@ void ftGameWatch_8014A77C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x2238_panicCharge >= ftGw_Panic_Full) {
-        func_800BFFD0(fp, 5, 0);
+        ft_800BFFD0(fp, 5, 0);
     }
 }
 

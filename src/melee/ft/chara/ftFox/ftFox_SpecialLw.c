@@ -169,7 +169,7 @@ void ftFox_SpecialAirLwStart_IASA(HSD_GObj* gobj)
 
 bool ftFox_SpecialLwStart_CheckPass(HSD_GObj* gobj)
 {
-    if (func_80099F1C(gobj) != false) {
+    if (ft_80099F1C(gobj) != false) {
         ftFox_SpecialLwStart_Pass(gobj);
         return true;
     }
@@ -182,8 +182,8 @@ static void ftFox_SpecialLw_CreateReflectHit(HSD_GObj* gobj);
 
 void ftFox_SpecialLwStart_Pass(HSD_GObj* gobj)
 {
-    func_8009A184(gobj, MS_FOX_SPECIALAIRLW_START, FTFOX_SPECIALLW_COLL_FLAG,
-                  GET_FIGHTER(gobj)->x894_currentAnimFrame);
+    ft_8009A184(gobj, MS_FOX_SPECIALAIRLW_START, FTFOX_SPECIALLW_COLL_FLAG,
+                GET_FIGHTER(gobj)->x894_currentAnimFrame);
 
     ftFox_SpecialLw_CreateReflectHit(gobj);
 }
@@ -301,7 +301,7 @@ static bool ftFox_SpecialLwLoop_CheckPass(HSD_GObj* gobj);
 void ftFox_SpecialLwLoop_IASA(HSD_GObj* gobj)
 {
     if ((ftFox_SpecialLwTurn_Check(gobj) == false) &&
-        (func_800CAED0(gobj) == false))
+        (ft_800CAED0(gobj) == false))
     {
         if (ftFox_SpecialLwLoop_CheckPass(gobj))
             return;
@@ -310,7 +310,7 @@ void ftFox_SpecialLwLoop_IASA(HSD_GObj* gobj)
 
 void ftFox_SpecialAirLwLoop_IASA(HSD_GObj* gobj)
 {
-    if (ftFox_SpecialLwTurn_Check(gobj) == false && func_800CB870(gobj)) {
+    if (ftFox_SpecialLwTurn_Check(gobj) == false && ft_800CB870(gobj)) {
         /// @remarks Kinda weird, was this stripped or are there side effects?
         return;
     }
@@ -321,7 +321,7 @@ static void ftFox_SpecialLwLoop_Pass(HSD_GObj* gobj);
 
 static bool ftFox_SpecialLwLoop_CheckPass(HSD_GObj* gobj)
 {
-    if (func_80099F1C(gobj) != false) {
+    if (ft_80099F1C(gobj) != false) {
         ftFox_SpecialLwLoop_Pass(gobj);
         return true;
     }
@@ -331,8 +331,8 @@ static bool ftFox_SpecialLwLoop_CheckPass(HSD_GObj* gobj)
 
 static void ftFox_SpecialLwLoop_Pass(HSD_GObj* gobj)
 {
-    func_8009A184(gobj, MS_FOX_SPECIALAIRLW_LOOP, FTFOX_SPECIALLW_COLL_FLAG,
-                  GET_FIGHTER(gobj)->x894_currentAnimFrame);
+    ft_8009A184(gobj, MS_FOX_SPECIALAIRLW_LOOP, FTFOX_SPECIALLW_COLL_FLAG,
+                GET_FIGHTER(gobj)->x894_currentAnimFrame);
 
     ftFox_SpecialLw_CreateReflectHit(gobj);
 }
@@ -658,7 +658,7 @@ bool ftFox_SpecialLwTurn_Check(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if (func_800C97A8(gobj) != false) {
+    if (ft_800C97A8(gobj) != false) {
         if ((s32) fp->ground_or_air == GA_Ground) {
             Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALLW_TURN,
                                       FtStateChange_PreserveGfx, NULL, 0.0f,

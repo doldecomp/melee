@@ -160,7 +160,7 @@ void ftGameWatch_Attack11_Action(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80094790(gobj) == false) {
+    if (ft_80094790(gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
         fp->x2218_flag.bits.b1 = 0;
         Fighter_ChangeMotionState(gobj, ftGw_MS_Attack11, 0, NULL, 0.0f, 1.0f,
@@ -185,14 +185,14 @@ void ftGameWatch_Attack11_Anim(HSD_GObj* gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
 // 0x8014C174 - Mr. Game & Watch's Jab IASA callback
 void ftGameWatch_Attack11_IASA(HSD_GObj* gobj)
 {
-    func_8008ACD8(gobj);
+    ft_8008ACD8(gobj);
 }
 
 // 0x8014C194 - Mr. Game & Watch's Jab Physics callback

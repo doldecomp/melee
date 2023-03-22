@@ -10,7 +10,7 @@
 
 void ftDonkey_800E01BC(HSD_GObj* gobj)
 {
-    func_800C9924(gobj);
+    ft_800C9924(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftDonkey_800DF980(gobj);
     }
@@ -19,7 +19,7 @@ void ftDonkey_800E01BC(HSD_GObj* gobj)
 void ftDonkey_800E0200(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->mv.dk.unk5.x0 && !func_80094EA4(gobj)) {
+    if (fp->mv.dk.unk5.x0 && !ft_80094EA4(gobj)) {
         bool result = ftDonkey_800E0378(gobj);
 
         if (result)

@@ -212,7 +212,7 @@ static void zeroBuffer(void)
 
 void func_801C0378(void)
 {
-    func_800C06C0();
+    ft_800C06C0();
 
     lbl_804D6950 = HSD_MemAlloc(_BUFFER_SZ);
 

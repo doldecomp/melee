@@ -133,9 +133,9 @@ void Fighter_800679B0(void)
     ft_800852B0();
     Fighter_LoadCommonData();
     ft_8008549C();
-    func_8009F4A4();
-    func_800C8064();
-    func_800C8F6C();
+    ft_8009F4A4();
+    ft_800C8064();
+    ft_800C8F6C();
     // @TODO: &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s
     // data section, how does this work?
     HSD_ObjAllocInit(&fighter_bones_alloc_data, /*size*/ 0x8c0, /*align*/ 4);
@@ -459,7 +459,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2028 = 0;
     fp->x202C = 0;
 
-    func_800C88A0(fp);
+    ft_800C88A0(fp);
 
     fp->x2227_flag.bits.b3 = 0;
     fp->x2034 = 0;
@@ -478,7 +478,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->x2225_b0 = 0;
     fp->x2225_b2 = 1;
     fp->x2225_b4 = 0;
-    func_800DEEA8(fp->gobj);
+    ft_800DEEA8(fp->gobj);
     fp->dmg.x18BC = 0.0f;
     fp->dmg.x18B8 = 0.0f;
     fp->x2226_flag.bits.b2 = 0;
@@ -504,12 +504,12 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
     Fighter_UnkInitReset_80067C98(fp);
     HSD_JObjSetTranslate(GET_JOBJ(gobj), &fp->cur_pos);
 
-    func_800D105C(gobj);
-    func_800C09B4(gobj);
+    ft_800D105C(gobj);
+    ft_800C09B4(gobj);
     ftCommon_8007E2FC(gobj);
-    func_80088A50(fp);
-    func_800890BC(fp);
-    func_800892D4(fp);
+    ft_80088A50(fp);
+    ft_800890BC(fp);
+    ft_800892D4(fp);
     ft_80081B38(gobj);
     ft_80081938(gobj);
 
@@ -526,19 +526,19 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
     Fighter_UnkApplyTransformation_8006C0F0(gobj);
     Fighter_UpdateModelScale(gobj);
 
-    func_800BFFAC(fp);
-    func_800C0074(fp);
-    func_800C8438(gobj);
-    func_800C89A0(gobj);
-    func_800C8FC4(gobj);
+    ft_800BFFAC(fp);
+    ft_800C0074(fp);
+    ft_800C8438(gobj);
+    ft_800C89A0(gobj);
+    ft_800C8FC4(gobj);
     ftColl_8007AFF8(gobj);
     ftColl_8007B0C0(gobj, 0);
 
     if (ft_OnDeath[fp->x4_fighterKind])
         ft_OnDeath[fp->x4_fighterKind](gobj);
 
-    func_800A101C(fp, Player_GetCpuType(fp->xC_playerID),
-                  Player_GetCpuLevel(fp->xC_playerID), 0);
+    ft_800A101C(fp, Player_GetCpuType(fp->xC_playerID),
+                Player_GetCpuLevel(fp->xC_playerID), 0);
 
     func_80067688(&fp->x60C);
     ft_8007C17C(gobj);
@@ -711,7 +711,7 @@ void Fighter_UnkInitLoad_80068914(HSD_GObj* gobj, struct S_TEMP1* argdata)
     fp->x61B_team = Player_GetTeam(fp->xC_playerID);
     fp->gobj = gobj;
     fp->ft_data = gFtDataList[fp->x4_fighterKind];
-    func_800D0FA0(gobj);
+    ft_800D0FA0(gobj);
     fp->x2CC = 0;
     fp->x2D0 = 0;
     fp->x18 = 0x155;
@@ -850,18 +850,18 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     ftParts_80074E58(fp);
     ftParts_SetupParts(gobj);
     ftAnim_80070308(gobj);
-    func_800C884C(gobj);
+    ft_800C884C(gobj);
 
     Fighter_80068E64(gobj);
 
     ftParts_800749CC(gobj);
     ftAnim_8007077C(gobj);
-    func_8009CF84(fp);
+    ft_8009CF84(fp);
     ftAnim_8006FE48(gobj);
 
     Fighter_UnkUpdateVecFromBones_8006876C(fp);
 
-    func_8009F578(fp);
+    ft_8009F578(fp);
 
     if (ft_OnLoad[fp->x4_fighterKind]) {
         ft_OnLoad[fp->x4_fighterKind](gobj);
@@ -896,9 +896,9 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     } else if (fp->x4_fighterKind == 0x1C) {
         ftCrazyHand_80155FCC(gobj);
     } else if (input->flags.bits.b1 != 0) {
-        func_800BFD04(gobj);
+        ft_800BFD04(gobj);
     } else if (Player_GetFlagsBit3(fp->xC_playerID) != 0) {
-        func_800C61B0(gobj);
+        ft_800C61B0(gobj);
     } else {
         if (!fp->x2229_b5_no_normal_motion) {
             ftCommon_8007D92C(gobj);
@@ -1065,7 +1065,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
 
     func_8004CBF4(&fp->x6F0_collData);
 
-    func_800DEEA8(gobj);
+    ft_800DEEA8(gobj);
 
     fp->x2114_SmashAttr.x2138_smashSinceHitbox = -1.0f;
     fp->x2224_flag.bits.b4 = 0;
@@ -1089,7 +1089,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     }
 
     if ((arg2 & FtStateChange_SkipUpdateColAnim) == 0) {
-        func_800C0134(fp);
+        ft_800C0134(fp);
     }
 
     if (((arg2 & FtStateChange_PreserveGfx) == 0) &&
@@ -1134,9 +1134,9 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     }
 
     if ((arg2 & FtStateChange_PreserveSfx) == 0) {
-        func_80088884(fp);
-        func_800888E0(fp);
-        func_800887CC(fp);
+        ft_80088884(fp);
+        ft_800888E0(fp);
+        ft_800887CC(fp);
     }
 
     if ((arg2 & FtStateChange_PreserveSwordTrail) == 0) {
@@ -1187,16 +1187,16 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     {
         // load in the union.
         x2070 = fp->x2070;
-        func_800890D0(fp, new_motion_state->move_id);
-        func_800895E0(fp, new_motion_state->x4_flags);
+        ft_800890D0(fp, new_motion_state->move_id);
+        ft_800895E0(fp, new_motion_state->x4_flags);
         fp->x2225_b3 = new_motion_state->x9_flags.bits.b0;
 
         if (fp->x2226_flag.bits.b4 != 0U) {
             if (fp->x2070.x2071_b5 != 0U) {
-                func_800C8B2C(fp, 0x7E, 0);
+                ft_800C8B2C(fp, 0x7E, 0);
             }
             if (fp->x2070.x2071_b6 != 0U) {
-                func_800C8B2C(fp, 0x7F, 0);
+                ft_800C8B2C(fp, 0x7F, 0);
             }
         }
 
@@ -1247,7 +1247,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                 unk_byte_ptr = &fp->x28[fp->anim_id << 1];
             }
             fp->x594_s32 = unk_struct_x18->x10_animCurrFlags;
-            func_8009E7B4(fp, unk_byte_ptr);
+            ft_8009E7B4(fp, unk_byte_ptr);
             if ((arg2 & FtStateChange_SkipUpdateAnim) == 0) {
                 if (otherObj != 0U) {
                     ftData_80085CD8(fp, GET_FIGHTER(otherObj), fp->anim_id);
@@ -1339,7 +1339,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                 } else if (arg8) {
                     ftAction_80073354(gobj);
                 } else {
-                    func_800C0408(gobj);
+                    ft_800C0408(gobj);
                     ftAction_80073240(gobj);
                 }
             } else {
@@ -1414,7 +1414,7 @@ void Fighter_8006A1BC(HSD_GObj* gobj)
             if (fp->dmg.x195c_hitlag_frames <= 0.0f) {
                 fp->dmg.x195c_hitlag_frames = 0.0f;
                 if (fp->x221A_flag.bits.b3) {
-                    func_80090718(fp);
+                    ft_80090718(fp);
                     fp->x221A_flag.bits.b3 = 0;
                 }
                 if ((!fp->dmg.x1954) && !fp->x2219_flag.bits.b7) {
@@ -1423,15 +1423,15 @@ void Fighter_8006A1BC(HSD_GObj* gobj)
                 fp->x221A_flag.bits.b2 = 0;
             }
         }
-        func_800C37A0(gobj);
+        ft_800C37A0(gobj);
 
         while (fp->x200C != 0) {
-            func_800D14E4(gobj);
+            ft_800D14E4(gobj);
             fp->x200C--;
         }
 
         while (fp->x2010 != 0) {
-            func_800D1E80(gobj);
+            ft_800D1E80(gobj);
             fp->x2010--;
         }
 
@@ -1465,8 +1465,8 @@ void Fighter_8006A360(HSD_GObj* gobj)
             if (fp->x1990 == 0 && !fp->x2221_flag.bits.b0) {
                 fp->x198C = fp->x1994 != 0 ? 1 : 0;
 
-                if (func_800C0694(fp) == 9) {
-                    func_800C0200(fp, 9);
+                if (ft_800C0694(fp) == 9) {
+                    ft_800C0200(fp, 9);
                 }
             }
         }
@@ -1476,8 +1476,8 @@ void Fighter_8006A360(HSD_GObj* gobj)
             if (fp->x1994 == 0) {
                 fp->x198C = (fp->x2221_flag.bits.b0 || fp->x1990 != 0) ? 2 : 0;
 
-                if (func_800C0694(fp) == 9) {
-                    func_800C0200(fp, 9);
+                if (ft_800C0694(fp) == 9) {
+                    ft_800C0200(fp, 9);
                 }
             }
         }
@@ -1487,11 +1487,11 @@ void Fighter_8006A360(HSD_GObj* gobj)
                 fp->x2004--;
                 if (fp->x2004 == 0) {
                     fp->x221D_flag.bits.b6 = 0;
-                    if (func_800C0694(fp) == 0x6B) {
-                        func_800C0200(fp, 0x6B);
+                    if (ft_800C0694(fp) == 0x6B) {
+                        ft_800C0200(fp, 0x6B);
                     }
                 } else if (fp->x2004 == func_8026B588()) {
-                    func_800880D8(fp);
+                    ft_800880D8(fp);
                 }
             }
         }
@@ -1502,9 +1502,9 @@ void Fighter_8006A360(HSD_GObj* gobj)
 
             if (fp->x2008 == 0) {
                 if (fp->x2220_flag.bits.b5) {
-                    func_800D1A8C(gobj);
+                    ft_800D1A8C(gobj);
                 } else if (fp->x2220_flag.bits.b6) {
-                    func_800D237C(gobj);
+                    ft_800D237C(gobj);
                 }
             }
         }
@@ -1524,7 +1524,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
             if (fp->x2028) {
                 fp->x2028--;
                 if (!fp->x2028 || fp->x202C <= 0) {
-                    func_800C8540(gobj);
+                    ft_800C8540(gobj);
                 }
             }
         }
@@ -1533,7 +1533,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
             if (fp->x2034) {
                 fp->x2034--;
                 if (!fp->x2034 || fp->x2038 <= 0) {
-                    func_800C9034(gobj);
+                    ft_800C9034(gobj);
                     return;
                 }
             }
@@ -1562,12 +1562,12 @@ void Fighter_8006A360(HSD_GObj* gobj)
             if (fp->x2030) {
                 fp->x2030--;
                 if (fp->x2030 == 0) {
-                    func_800C8A64(gobj);
+                    ft_800C8A64(gobj);
                     return;
                 }
                 if (!fp->x2226_flag.bits.b3 &&
                     fp->x2030 == p_ftCommonData->x7D0 &&
-                    func_800C8B2C(fp, 0x7D, 0))
+                    ft_800C8B2C(fp, 0x7D, 0))
                 {
                     fp->x2226_flag.bits.b7 = 1;
                 }
@@ -1584,9 +1584,9 @@ void Fighter_8006A360(HSD_GObj* gobj)
                         itGetKind(fp->x1974_heldItem) == 0x67)
                     {
                         fp->x2221_flag.bits.b5 = 1;
-                        func_800968C8(gobj);
+                        ft_800968C8(gobj);
                     } else {
-                        func_80095744(gobj, 0);
+                        ft_80095744(gobj, 0);
                     }
                 }
             }
@@ -1614,7 +1614,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
             fp->dmg.x18F0--;
             if (fp->dmg.x1830_percent > 0.0f) {
                 fp->dmg.x1830_percent--;
-                func_80088640(fp, 0x7D, 0x7F, 0x40);
+                ft_80088640(fp, 0x7D, 0x7F, 0x40);
                 Player_SetHPByIndex(fp->xC_playerID, fp->x221F_flag.bits.b4,
                                     fp->dmg.x1830_percent);
                 func_80040B8C(fp->xC_playerID, fp->x221F_flag.bits.b4, 1);
@@ -1626,8 +1626,8 @@ void Fighter_8006A360(HSD_GObj* gobj)
             }
 
             if (fp->dmg.x18F0 == 0) {
-                if (func_800C0694(fp) == 8) {
-                    func_800C0200(fp, 8);
+                if (ft_800C0694(fp) == 8) {
+                    ft_800C0200(fp, 8);
                 }
                 ftCommon_8007ECD4(fp, 2);
             }
@@ -1637,7 +1637,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
             if (itGetKind(fp->x1974_heldItem) != 0x1C) {
                 !fp;
             } else {
-                func_800C511C(gobj);
+                ft_800C511C(gobj);
             }
         }
 
@@ -1682,13 +1682,13 @@ void Fighter_8006A360(HSD_GObj* gobj)
                 fp->dmg.x18ac_time_since_hit++;
             }
             ftAnim_8006EBA4(gobj);
-            func_800D71D8(gobj);
+            ft_800D71D8(gobj);
             ftColl_800764DC(gobj);
 
             if (!fp->x221C_flag.bits.b6) {
                 func_800411C4(fp->xC_playerID, fp->x221F_flag.bits.b4);
             }
-            func_800DEF38(gobj);
+            ft_800DEF38(gobj);
 
             if (fp->cb.x21A0_callback_Anim) {
                 fp->cb.x21A0_callback_Anim(gobj);
@@ -1696,15 +1696,15 @@ void Fighter_8006A360(HSD_GObj* gobj)
         }
 
         ftCommon_8007E0E4(gobj);
-        func_800C0408(gobj);
+        ft_800C0408(gobj);
     }
 }
 
 void Fighter_8006ABA0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!fp->x221F_flag.bits.b3 && func_800A2040(fp)) {
-        func_800B3900(gobj);
+    if (!fp->x221F_flag.bits.b3 && ft_800A2040(fp)) {
+        ft_800B3900(gobj);
     }
 }
 
@@ -1713,32 +1713,32 @@ void Fighter_UnkIncrementCounters_8006ABEC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_800CAE80(gobj)) {
+    if (ft_800CAE80(gobj)) {
         fp->x68A = fp->x685;
         fp->x685 = 0;
     } else if (fp->x685 < 0xFF) {
         fp->x685++;
     }
 
-    if (func_800D6928(fp)) {
+    if (ft_800D6928(fp)) {
         fp->x68B = fp->x686;
         fp->x686 = 0;
     } else if (fp->x686 < 0xFF) {
         fp->x686++;
     }
 
-    if (func_800D688C(fp)) {
+    if (ft_800D688C(fp)) {
         fp->x687 = 0;
     } else if (fp->x687 < 0xFF) {
         fp->x687++;
     }
-    if (func_800964FC(fp)) {
+    if (ft_800964FC(fp)) {
         fp->x688 = 0;
     } else if (fp->x688 < 0xFF) {
         fp->x688++;
     }
 
-    if (func_800D67C4(fp)) {
+    if (ft_800D67C4(fp)) {
         fp->x689 = 0;
     } else if (fp->x689 < 0xFF) {
         fp->x689++;
@@ -1801,20 +1801,20 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 fp->input.x660 = fp->input.x65C_heldInputs;
             }
 
-            if (func_800A2040(fp)) {
+            if (ft_800A2040(fp)) {
                 SET_STICKS(fp->input.x620_lstick_x, fp->input.x624_lstick_y,
-                           func_800A17E4(fp), func_800A1874(fp));
+                           ft_800A17E4(fp), ft_800A1874(fp));
                 if (g_debugLevel < 3 && !func_8016B41C()) {
                     SET_STICKS(fp->input.x638_lsubStick_x,
-                               fp->input.x63C_lsubStick_y, func_800A1994(fp),
-                               func_800A1A24(fp));
+                               fp->input.x63C_lsubStick_y, ft_800A1994(fp),
+                               ft_800A1A24(fp));
                 } else {
                     fp->input.x638_lsubStick_x = 0;
                     fp->input.x63C_lsubStick_y = 0;
                 }
 
-                tempf0 = func_800A1904(fp);
-                tempf1 = func_800A1948(fp);
+                tempf0 = ft_800A1904(fp);
+                tempf1 = ft_800A1948(fp);
 
                 fp->input.x650 = (tempf0 > tempf1) ? tempf0 : tempf1;
 
@@ -1860,8 +1860,8 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 fp->input.x650 = 0.0f;
             }
 
-            if (func_800A2040(fp)) {
-                fp->input.x65C_heldInputs = func_800A198C(fp);
+            if (ft_800A2040(fp)) {
+                fp->input.x65C_heldInputs = ft_800A198C(fp);
             } else {
                 fp->input.x65C_heldInputs =
                     HSD_PadRumbleData[fp->x618_player_id].button;
@@ -1869,7 +1869,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
 
             if (func_8016B0FC()) {
                 fp->input.x650 = 0.0f;
-                if (func_800A2040(fp)) {
+                if (ft_800A2040(fp)) {
                     fp->input.x65C_heldInputs =
                         (fp->input.x65C_heldInputs & 0xD00);
                 } else {
@@ -2117,7 +2117,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
             if (fp->x1980) {
                 ftCommon_8007FFD8(fp, p_ftCommonData->x6FC);
             }
-            func_800DF0D0(gobj);
+            ft_800DF0D0(gobj);
             ftCommon_8008031C(gobj);
             Fighter_UnkIncrementCounters_8006ABEC(gobj);
 
@@ -2157,7 +2157,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         if (fp->x2108)
             fp->x2108 -= 1;
 
-        func_800C0A98(gobj);
+        ft_800C0A98(gobj);
 
         if (fp->cb.x21A4_callback_Phys) {
             fp->cb.x21A4_callback_Phys(gobj);
@@ -2378,7 +2378,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
     fp->cur_pos.z += windOffset.z;
 
     // TODO: do the bitflag tests here tell us if the player is dead?
-    func_800D3158(gobj);
+    ft_800D3158(gobj);
 
     if (fp->x2225_b0) {
         // if position.y crossed
@@ -2398,7 +2398,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
             {
                 // plays this sound you always hear when you get close to the
                 // bottom blast zone
-                func_80088148(fp, 96, 127, 64);
+                ft_80088148(fp, 96, 127, 64);
                 fp->x2225_b0 = 1;
             }
         }
@@ -2511,7 +2511,7 @@ void Fighter_8006C5F4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x221F_flag.bits.b3)
-        func_80089B08(gobj);
+        ft_80089B08(gobj);
 }
 
 void Fighter_CallAcessoryCallbacks_8006C624(HSD_GObj* gobj)
@@ -2590,8 +2590,8 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj)
             ftColl_80078A2C(gobj);
             if (fp->x1A58_interactedFighter) {
                 if (!fp->x2225_b1) {
-                    func_80088148(fp, fp->ft_data->x4C_collisionData->x30,
-                                  0x7F, 0x40);
+                    ft_80088148(fp, fp->ft_data->x4C_collisionData->x30, 0x7F,
+                                0x40);
                 }
                 ftColl_80078754(gobj, fp->x1A58_interactedFighter, 0);
                 fp->cb.x2190_callback_OnGrabFighter_Self(gobj);
@@ -2603,8 +2603,8 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj)
 
             if (fp->x1A60) {
                 if (!fp->x2225_b1) {
-                    func_80088148(fp, fp->ft_data->x4C_collisionData->x30,
-                                  0x7F, 0x40);
+                    ft_80088148(fp, fp->ft_data->x4C_collisionData->x30, 0x7F,
+                                0x40);
                 }
                 func_8027B4A4(gobj, fp->x1A60);
                 if (fp->cb.x2194_callback) {
@@ -2661,7 +2661,7 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, f32 damage_amount)
                             fp->dmg.x1830_percent);
         func_8003EC9C(fp->xC_playerID, fp->x221F_flag.bits.b4,
                       fp->dmg.x1830_percent, damage_amount);
-        func_800C8C84(fp->gobj);
+        ft_800C8C84(fp->gobj);
     }
 }
 
@@ -2676,8 +2676,8 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2, s32 arg3)
         hold_item_bool = 1;
     }
 
-    temp_bool = !((fp->x2220_flag.bits.b3 || fp->x2220_flag.bits.b4 ||
-                   func_8008E984(fp)));
+    temp_bool = !(
+        (fp->x2220_flag.bits.b3 || fp->x2220_flag.bits.b4 || ft_8008E984(fp)));
     vec = vec3_803B7494;
 
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
@@ -2709,7 +2709,7 @@ void Fighter_8006CF5C(Fighter* fp, s32 arg1)
 {
     if (!fp->x2224_flag.bits.b2) {
         fp->dmg.x18F0 += arg1;
-        func_800BFFD0(fp, 8, 0);
+        ft_800BFFD0(fp, 8, 0);
         ftCommon_8007EBAC(fp, 2, 0);
     }
 }
@@ -2863,7 +2863,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
 
             fp->dmg.x189C_unk_num_frames = 0.0f;
             Fighter_UnkTakeDamage_8006CC30(fp, fp->dmg.x1838_percentTemp);
-            func_8008D930(fp);
+            ft_8008D930(fp);
             ftKirby_800F5BA4(fp);
 
             if (fp->cb.x21F0_callback) {
@@ -2873,27 +2873,27 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
             if (!fp->x2229_b7) {
                 switch (fp->x1828) {
                 case 0:
-                    func_8008EC90(gobj);
+                    ft_8008EC90(gobj);
                     break;
                 case 1:
                     ftCommon_8007DB58(gobj);
-                    func_8008E908(gobj, 0.0f);
+                    ft_8008E908(gobj, 0.0f);
                     break;
                 case 2:
                     ftCommon_8007DB58(gobj);
-                    func_8008E9D0(gobj);
+                    ft_8008E9D0(gobj);
                     break;
                 case 3:
                     ftCommon_8007DB58(gobj);
-                    func_8008EB58(gobj);
+                    ft_8008EB58(gobj);
                     break;
                 }
 
                 damage_bool = fp->dmg.x183C_applied;
                 bool2 = 1;
-                func_80090594(fp, fp->dmg.x1860_dealt, damage_bool,
-                              motion_state_index, ground_or_air,
-                              fp->x1960_vibrateMult);
+                ft_80090594(fp, fp->dmg.x1860_dealt, damage_bool,
+                            motion_state_index, ground_or_air,
+                            fp->x1960_vibrateMult);
                 ftCommon_8007ED50(fp, fp->dmg.x1838_percentTemp);
                 bool1 = damage_bool;
 
@@ -2909,15 +2909,15 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                     OSReport("ellegal flag fp->no_reaction_always\n");
                     __assert(__FILE__, 3085, "0");
                 }
-                func_8008E9D0(gobj);
+                ft_8008E9D0(gobj);
             }
         } else if (fp->dmg.x18a0) {
             bool1 = fp->dmg.x1840;
             bool4 = 1;
         } else if (fp->x19A4) {
             if (bool3) {
-                func_80098B20(gobj);
-                func_80088148(fp, 0x82, 0x7F, 0x40);
+                ft_80098B20(gobj);
+                ft_80088148(fp, 0x82, 0x7F, 0x40);
             } else {
                 if (fp->cb.x21C4_callback_OnShieldHit) {
                     fp->cb.x21C4_callback_OnShieldHit(gobj);
@@ -2929,7 +2929,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                 (!fp->x1A60))
             {
                 ftCommon_8007DB58(gobj);
-                func_80099D9C(gobj);
+                ft_80099D9C(gobj);
             }
             bool1 = fp->dmg.x1918;
         } else if (fp->dmg.x1914) {
@@ -2946,7 +2946,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
             if (fp->dmg.x1924) {
                 bool1 = fp->dmg.x1924;
             } else if (fp->ReflectAttr.x1A3C_damageOver) {
-                func_80098C9C(gobj);
+                ft_80098C9C(gobj);
             } else if (fp->ReflectAttr.x1A2C_reflectHitDirection) {
                 if (fp->cb.x21C8_callback_OnReflectHit) {
                     fp->cb.x21C8_callback_OnReflectHit(gobj);
@@ -2967,7 +2967,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
             ftKirby_800F5C34(fp);
             ftCommon_800804FC(fp);
         }
-        func_800C8D00(gobj);
+        ft_800C8D00(gobj);
 
         if (bool1) {
             fp->dmg.x195c_hitlag_frames = ftCommon_8007DA74(
@@ -2994,7 +2994,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                 }
             }
         } else {
-            func_80090718(fp);
+            ft_80090718(fp);
         }
 
         if (fp->x221A_flag.bits.b0 || fp->dmg.x1958) {
@@ -3048,9 +3048,9 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
         fp->dmg.x1950 = 0;
 
         if (!fp->x2219_flag.bits.b6 || fp->dmg.x18F4) {
-            func_800C2FD8(gobj);
+            ft_800C2FD8(gobj);
         }
-        func_800A0DA4(fp);
+        ft_800A0DA4(fp);
     }
 }
 
@@ -3061,7 +3061,7 @@ void Fighter_8006D9AC(HSD_GObj* gobj)
     if (fp->x221F_flag.bits.b3 || fp->x2219_flag.bits.b5)
         return;
 
-    func_8009E0A8(gobj);
+    ft_8009E0A8(gobj);
 }
 
 void Fighter_UnkCallCameraCallback_8006D9EC(HSD_GObj* gobj)
@@ -3104,9 +3104,9 @@ void Fighter_Unload_8006DABC(void* user_data)
     func_80067688(&fp->x60C);
     func_8026B7F8(fp->gobj);
     func_800290D4(fp->x890_cameraBox);
-    func_8009E0D4(fp);
+    ft_8009E0D4(fp);
     ftColl_800765AC(fp->gobj);
-    func_80088C5C(fp->gobj);
+    ft_80088C5C(fp->gobj);
     func_8000EE8C(&fp->x20A4);
 
     if (fp->x20A0_accessory) {

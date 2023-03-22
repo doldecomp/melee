@@ -24,7 +24,7 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* gobj)
 
     if (fp->x1A58_interactedFighter == NULL) {
         ftCommon_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
-                          func_800BCF18);
+                          ft_800BCF18);
     } else {
         ftCommon_8007E2F4(fp, 0x1FF);
     }
@@ -61,7 +61,7 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* gobj)
 
     if (fp->x1A58_interactedFighter == NULL) {
         ftCommon_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
-                          func_800BD000);
+                          ft_800BD000);
     } else {
         ftCommon_8007E2F4(fp, 0x1FF);
     }
@@ -108,8 +108,8 @@ static inline void ftMewtwo_SetGrabVictim(HSD_GObj* gobj)
         victimGObj = fp->x1A58_interactedFighter;
         if (victimGObj != NULL) {
             ftCommon_8007E2F4(fp, 0);
-            func_800DE2A8(gobj, victimGObj);
-            func_80090780(victimGObj);
+            ft_800DE2A8(gobj, victimGObj);
+            ft_80090780(victimGObj);
             fp->x2200_ftcmd_var0 = 0;
         }
     }
@@ -123,7 +123,7 @@ void ftMewtwo_SpecialS_Anim(HSD_GObj* gobj)
     ftMewtwo_SetGrabVictim(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 // 0x801468EC
@@ -134,7 +134,7 @@ void ftMewtwo_SpecialAirS_Anim(HSD_GObj* gobj)
     ftMewtwo_SetGrabVictim(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 // 0x80146980 - Mewtwo's grounded Confusion IASA callback

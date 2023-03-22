@@ -324,16 +324,16 @@ void func_8015C5F8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     switch (HSD_Randi(4)) {
     case 0:
-        func_80088148(fp, 0x4E21A, 0x7F, 0x40);
+        ft_80088148(fp, 0x4E21A, 0x7F, 0x40);
         return;
     case 1:
-        func_80088148(fp, 0x4E21B, 0x7F, 0x40);
+        ft_80088148(fp, 0x4E21B, 0x7F, 0x40);
         return;
     case 2:
-        func_80088148(fp, 0x4E21C, 0x7F, 0x40);
+        ft_80088148(fp, 0x4E21C, 0x7F, 0x40);
         return;
     case 3:
-        func_80088148(fp, 0x4E21D, 0x7F, 0x40);
+        ft_80088148(fp, 0x4E21D, 0x7F, 0x40);
         return;
     }
 }

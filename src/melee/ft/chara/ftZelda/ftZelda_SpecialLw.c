@@ -216,7 +216,7 @@ void ftZelda_8013B238(HSD_GObj* gobj)
 void ftZelda_8013B2A4(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -224,7 +224,7 @@ void ftZelda_8013B2A4(HSD_GObj* gobj)
 void ftZelda_8013B2E0(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
     }
 }
 

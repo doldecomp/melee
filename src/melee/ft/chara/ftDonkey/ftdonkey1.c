@@ -11,7 +11,7 @@
 
 bool ftDonkey_800DF938(HSD_GObj* gobj)
 {
-    if (func_8008A1FC(gobj)) {
+    if (ft_8008A1FC(gobj)) {
         ftDonkey_800DF980(gobj);
         return true;
     }
@@ -39,7 +39,7 @@ void ftDonkey_800DF980(HSD_GObj* gobj)
 
 void ftDonkey_800DF9F0(HSD_GObj* gobj)
 {
-    if ((!func_80094EA4(gobj)) && (!ftDonkey_800E0378(gobj)) &&
+    if ((!ft_80094EA4(gobj)) && (!ftDonkey_800E0378(gobj)) &&
         (!ftDonkey_800E0134(gobj)))
     {
         s32 result = ftDonkey_800DFA98(gobj);

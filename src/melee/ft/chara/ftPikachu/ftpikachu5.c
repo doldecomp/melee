@@ -345,13 +345,13 @@ void ftPikachu_ActionChange_80128000(HSD_GObj* gobj)
 void ftPikachu_80128050(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 void ftPikachu_8012808C(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
 void ftPikachu_801280C8(HSD_GObj* gobj)

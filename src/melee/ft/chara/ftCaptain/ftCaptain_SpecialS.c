@@ -209,7 +209,7 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
 void ftCaptain_SpecialSStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 void ftCaptain_SpecialS_Anim(HSD_GObj* gobj)
@@ -236,7 +236,7 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* gobj)
     }
 
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
 void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* gobj)
@@ -252,10 +252,10 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCommon_8007D60C(fp);
         if (captainAttrs->specials_miss_landing_lag == 0) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         } else {
-            func_80096900(gobj, 1, 1, 0, 1,
-                          captainAttrs->specials_miss_landing_lag);
+            ft_80096900(gobj, 1, 1, 0, 1,
+                        captainAttrs->specials_miss_landing_lag);
         }
     }
 }
@@ -293,10 +293,10 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* gobj)
         ftCommon_8007D60C(fp);
 
         if (captainAttrs->specials_hit_landing_lag == 0) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         } else {
-            func_80096900(gobj, 1, 1, 0, 1,
-                          captainAttrs->specials_hit_landing_lag);
+            ft_80096900(gobj, 1, 1, 0, 1,
+                        captainAttrs->specials_hit_landing_lag);
         }
     }
 }
@@ -381,11 +381,11 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* gobj)
         efLib_DestroyAll(gobj);
         ftCommon_8007D60C(fp);
         if (sa->specials_miss_landing_lag == 0) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
         ftCommon_8007D468(fp);
-        func_80096900(gobj, 1, 1, 0, 1, sa->specials_miss_landing_lag);
+        ft_80096900(gobj, 1, 1, 0, 1, sa->specials_miss_landing_lag);
         return;
     }
 
@@ -401,7 +401,7 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* gobj)
              fp->x6F0_collData.x134_envFlags & MPCOLL_LEFTWALL))
         {
             efLib_DestroyAll(gobj);
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         }
     }
 }
@@ -422,12 +422,11 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* gobj)
         efLib_DestroyAll(gobj);
         ftCommon_8007D60C(fp);
         if (0 == captainAttrs->specials_hit_landing_lag) {
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
             return;
         }
         ftCommon_8007D468(fp);
-        func_80096900(gobj, 1, 1, 0, 1,
-                      captainAttrs->specials_hit_landing_lag);
+        ft_80096900(gobj, 1, 1, 0, 1, captainAttrs->specials_hit_landing_lag);
     }
 }
 
@@ -438,7 +437,7 @@ void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* gobj)
 
     if (ft_80081D0C(gobj) == true) {
         efLib_DestroyAll(gobj);
-        func_800D5CB0(gobj, 0, captainAttrs->specials_miss_landing_lag);
+        ft_800D5CB0(gobj, 0, captainAttrs->specials_miss_landing_lag);
     }
 }
 
@@ -452,6 +451,6 @@ void ftCaptain_SpecialAirS_Coll(HSD_GObj* gobj)
     if (ft_80081D0C(gobj) == true) {
         fp->gr_vel = fp->x80_self_vel.x;
         efLib_DestroyAll(gobj);
-        func_800D5CB0(gobj, 0, captainAttrs->specials_hit_landing_lag);
+        ft_800D5CB0(gobj, 0, captainAttrs->specials_hit_landing_lag);
     }
 }

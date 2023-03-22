@@ -9,7 +9,7 @@
 
 void ftDonkey_800E030C(HSD_GObj* gobj)
 {
-    s32 result = func_80094EA4(gobj);
+    s32 result = ft_80094EA4(gobj);
     if (result)
         return;
 }
@@ -26,7 +26,7 @@ void ftDonkey_800E0350(HSD_GObj* gobj)
 
 bool ftDonkey_800E0378(HSD_GObj* gobj)
 {
-    bool result = func_800CAE80(gobj);
+    bool result = ft_800CAE80(gobj);
 
     if (result) {
         ftDonkey_800E04A4(gobj, result);
@@ -45,5 +45,5 @@ void ftDonkey_800E03C0(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, donkey_attr->motion_state + 7, 0, NULL,
                               0.0f, 1.0, 0.0f);
     ftAnim_SetAnimRate(gobj, 0.0f);
-    func_800CB110(gobj, 1, 1.0f);
+    ft_800CB110(gobj, 1, 1.0f);
 }
