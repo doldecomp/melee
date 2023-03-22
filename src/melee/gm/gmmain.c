@@ -186,10 +186,10 @@ int main(void)
     func_8001C5BC();
     func_8001D21C();
     func_8001E290();
-    func_8015FCC0();
+    gmMainLib_8015FCC0();
     func_8001F87C();
     func_803A6048(0xC000);
-    func_8015FBA4();
+    gmMainLib_8015FBA4();
 
     if (g_debugLevel != DbLKind_Master && lbl_804D6B30 & 0x20 &&
         func_803931A4(-1))

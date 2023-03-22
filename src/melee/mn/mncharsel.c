@@ -61,15 +61,15 @@ void func_8025BD30(void)
         return;
     }
     if (lbLang_IsSavedLanguageJP() != 0) {
-        if (func_8015CC34()->mode == 1) {
-            func_8025BC20(kerning, func_8015CC34()->stock_count);
-        } else if (func_8015CC34()->time_limit != 0) {
-            func_8025BC20(kerning, func_8015CC34()->time_limit);
+        if (gmMainLib_8015CC34()->mode == 1) {
+            func_8025BC20(kerning, gmMainLib_8015CC34()->stock_count);
+        } else if (gmMainLib_8015CC34()->time_limit != 0) {
+            func_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
             func_803A660C(0, 0x4A, 0x53);
         } else {
             func_803A6530(0, 0x4A, 0x51);
         }
-        switch (func_8015CC34()->mode) {
+        switch (gmMainLib_8015CC34()->mode) {
         case Mode_Time:
             func_803A660C(0, 0x4A, 0x4B);
             return;
@@ -84,10 +84,10 @@ void func_8025BD30(void)
             return;
         }
     } else {
-        switch (func_8015CC34()->mode) {
+        switch (gmMainLib_8015CC34()->mode) {
         case Mode_Time:
-            if (func_8015CC34()->time_limit != 0) {
-                func_8025BC20(kerning, func_8015CC34()->time_limit);
+            if (gmMainLib_8015CC34()->time_limit != 0) {
+                func_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
                 func_803A660C(0, 0x4A, 0x53);
             } else {
                 func_803A6530(0, 0x4A, 0x51);
@@ -95,8 +95,8 @@ void func_8025BD30(void)
             func_803A660C(0, 0x4A, 0x4B);
             return;
         case Mode_Stock:
-            func_8025BC20(kerning, func_8015CC34()->stock_count);
-            if (func_8015CC34()->stock_count < 2U) {
+            func_8025BC20(kerning, gmMainLib_8015CC34()->stock_count);
+            if (gmMainLib_8015CC34()->stock_count < 2U) {
                 func_803A660C(0, 0x4A, 0x55);
             } else {
                 func_803A660C(0, 0x4A, 0x54);
@@ -104,8 +104,8 @@ void func_8025BD30(void)
             func_803A660C(0, 0x4A, 0x4C);
             return;
         case Mode_Coin:
-            if (func_8015CC34()->time_limit != 0) {
-                func_8025BC20(kerning, func_8015CC34()->time_limit);
+            if (gmMainLib_8015CC34()->time_limit != 0) {
+                func_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
                 func_803A660C(0, 0x4A, 0x53);
             } else {
                 func_803A6530(0, 0x4A, 0x51);
@@ -113,8 +113,8 @@ void func_8025BD30(void)
             func_803A660C(0, 0x4A, 0x4D);
             return;
         case Mode_Bonus:
-            if (func_8015CC34()->time_limit != 0) {
-                func_8025BC20(kerning, func_8015CC34()->time_limit);
+            if (gmMainLib_8015CC34()->time_limit != 0) {
+                func_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
                 func_803A660C(0, 0x4A, 0x53);
             } else {
                 func_803A6530(0, 0x4A, 0x51);
