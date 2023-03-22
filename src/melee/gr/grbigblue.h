@@ -5,6 +5,6 @@
 
 #include <dolphin/mtx/types.h>
 
-void func_801EF7D8(Vec3*);
+void grBigBlue_801EF7D8(Vec3*);
 
 #endif

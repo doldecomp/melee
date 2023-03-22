@@ -288,7 +288,7 @@ bool grLib_801C9E60(Vec3* v)
     }
 
     if (id == BIGBLUE) {
-        func_801EF7D8(v);
+        grBigBlue_801EF7D8(v);
         return true;
     }
 
