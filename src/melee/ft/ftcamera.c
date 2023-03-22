@@ -53,7 +53,7 @@ void func_80076064(Fighter* fp)
 
 // Fighter_UpdateCameraBox
 // Camera_UpdatePlayerCameraBoxPosition
-void func_800761C8(HSD_GObj* gobj)
+void Fighter_UpdateCameraBox(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     CameraBox* camera_box = fp->x890_cameraBox;
@@ -104,7 +104,7 @@ void func_80076320(HSD_GObj* gobj)
     f32 temp_f31;
 
     camera_box = fp->x890_cameraBox;
-    func_800761C8(gobj); // Fighter_UpdateCameraBox
+    Fighter_UpdateCameraBox(gobj); // Fighter_UpdateCameraBox
     Stage_UnkSetVec3TCam_Offset(&center_pos);
 
     if (!(Stage_GetBlastZoneTopOffset() - center_pos.y != 0.0F)) {
