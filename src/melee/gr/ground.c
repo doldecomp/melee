@@ -4184,7 +4184,7 @@ bool Ground_801C4DD0(void)
     if (stage_id == KONGO) {
         grKongo_801D8270(stage_info.x72C);
     } else if (stage_id == OLDKONGO) {
-        func_802105AC(stage_info.x72C);
+        grOldKongo_802105AC(stage_info.x72C);
     }
 
     return true;
@@ -4197,7 +4197,7 @@ bool Ground_801C4E20(void)
     if (stage_id == KONGO) {
         grKongo_801D828C(stage_info.x72C);
     } else if (stage_id == OLDKONGO) {
-        func_802105C8(stage_info.x72C);
+        grOldKongo_802105C8(stage_info.x72C);
     }
 
     return true;
