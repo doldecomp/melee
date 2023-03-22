@@ -1,4 +1,4 @@
-#include "text_2.h"
+#include "gm_A36.h"
 
 #include "db/db_unknown_001.h"
 #include "gm/gm_601.h"
@@ -236,5 +236,5 @@ int main(void)
     init_spr_unk();
 
     func_80228A64();
-    func_801A4510();
+    gm_801A4510();
 }

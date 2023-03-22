@@ -5,7 +5,7 @@
 
 #include "ft/ft_7C6.h"
 
-#include "text_2.h"
+#include "gm_A36.h"
 
 #include "ef/efsync.h"
 #include "ft/ftcoll.h"
@@ -162,7 +162,7 @@ asm void ft_8007C77C(HSD_GObj* gobj)
 /* 8007C798 00079378  2C 03 00 00 */	cmpwi r3, 0
 /* 8007C79C 0007937C  41 82 01 7C */	beq lbl_8007C918
 /* 8007C7A0 00079380  83 FE 00 2C */	lwz r31, 0x2c(r30)
-/* 8007C7A4 00079384  48 12 84 15 */	bl func_801A4BB8
+/* 8007C7A4 00079384  48 12 84 15 */	bl gm_801A4BB8
 /* 8007C7A8 00079388  88 1F 00 0C */	lbz r0, 0xc(r31)
 /* 8007C7AC 0007938C  54 63 07 FE */	clrlwi r3, r3, 0x1f
 /* 8007C7B0 00079390  54 00 07 FE */	clrlwi r0, r0, 0x1f

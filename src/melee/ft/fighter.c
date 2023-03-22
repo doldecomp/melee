@@ -15,8 +15,8 @@
 #include "ftdrawcommon.h"
 #include "ftlib.h"
 #include "ftparts.h"
+#include "gm_A36.h"
 #include "inlines.h"
-#include "text_2.h"
 #include "text_4.h"
 #include "types.h"
 
@@ -76,7 +76,7 @@ extern s8 lbl_803C26FC[FTKIND_MAX];
 
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
-extern StageInfo stage_info; // from asm/melee/text_2.s
+extern StageInfo stage_info; // from asm/melee/gm_A36.s
 
 extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 
@@ -1885,7 +1885,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                     fp->input.x65C_heldInputs =
                         (fp->input.x65C_heldInputs | 0x80000000);
                 }
-                if (func_801A45E8(0) == 0) {
+                if (gm_801A45E8(0) == 0) {
                     if ((fp->input.x65C_heldInputs & 0x10)) {
                         fp->input.x65C_heldInputs =
                             (fp->input.x65C_heldInputs | 0x80000000 | 0x100);
@@ -2099,8 +2099,7 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
             }
         }
 
-        if (fp->x221D_flag.bits.b4 || fp->x2224_flag.bits.b2 ||
-            func_801A45E8(2))
+        if (fp->x221D_flag.bits.b4 || fp->x2224_flag.bits.b2 || gm_801A45E8(2))
         {
             fp->input.x630 = fp->input.x620_lstick_x;
             fp->input.x634 = fp->input.x624_lstick_y;

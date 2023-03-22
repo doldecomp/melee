@@ -340,7 +340,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gm/gmcamera.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/text_2.s.o\
+    $(BUILD_DIR)/asm/melee/gm_A36.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/ground.c.o\
