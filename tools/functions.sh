@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+function melee_sed {
+    find src asm docs obj_files.mk Makefile -type f -exec sed -i "${@}" {} +
+}
+
 function replace_symbol {
     local find=${1//\//\\\/}
     local find=${find//[.]/\\.}
@@ -77,7 +81,7 @@ function rename_tu {
             mv "$file" "$new_file"
         done
     done
-    melee-sed "s/\b$1\(\.[ch]\)\b/$2\1/g"
+    melee_sed "s/\b$1\(\.[ch]\)\b/$2\1/g"
 }
 
 alias qd='qalc -p 10'
