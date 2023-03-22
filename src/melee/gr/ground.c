@@ -134,7 +134,7 @@ void Ground_801BFFB0(void)
     u32 _[2];
 #endif
 
-    func_801C6288();
+    grDatFiles_801C6288();
     stage_info.x84 = 0;
     stage_info.x6D0 = -1;
     stage_info.x6D2 = 0;
@@ -387,7 +387,7 @@ void Ground_801C0754(StructPairWithStageID* pair)
     stage_info.internal_stage_id = pair->stage_id;
     stage = lbl_803DFEDC[pair->stage_id];
     arg3 = (pair->list_idx == 0x55) ? 0 : 1;
-    func_801C6038(stage->data1, 0, arg3);
+    grDatFiles_801C6038(stage->data1, 0, arg3);
     Ground_801C28CC(stage_info.xA0, pair->list_idx);
     stage_info.x178 = stage->callback5;
     stage_info.x17C = stage->callback6;
@@ -872,7 +872,7 @@ static HSD_Joint* Ground_801C126C(HSD_Joint* node, s32* depth)
 HSD_JObj* Ground_801C13D0(s32 arg0, s32 depth)
 {
     HSD_JObj* result = NULL;
-    UnkArchiveStruct* archive = func_801C6330(arg0);
+    UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
     if (archive != NULL && arg0 < archive->unk4->unkC) {
         HSD_Joint* joint;
         if (depth == 0) {
@@ -987,7 +987,7 @@ lbl_801C1568:
 /* 801C161C 001BE1FC  90 1A 00 38 */	stw r0, 0x38(r26)
 /* 801C1620 001BE200  90 1A 00 3C */	stw r0, 0x3c(r26)
 /* 801C1624 001BE204  48 00 7F A1 */	bl func_801C95C4
-/* 801C1628 001BE208  48 00 4C FD */	bl func_801C6324
+/* 801C1628 001BE208  48 00 4C FD */	bl grDatFiles_801C6324
 /* 801C162C 001BE20C  7C 77 1B 79 */	or. r23, r3, r3
 /* 801C1630 001BE210  40 82 00 14 */	bne lbl_801C1644
 /* 801C1634 001BE214  38 7B 02 18 */	addi r3, r27, 0x218
@@ -1000,7 +1000,7 @@ lbl_801C1644:
 /* 801C164C 001BE22C  7C 1E 00 00 */	cmpw r30, r0
 /* 801C1650 001BE230  40 80 02 4C */	bge lbl_801C189C
 /* 801C1654 001BE234  7F C3 F3 78 */	mr r3, r30
-/* 801C1658 001BE238  48 00 4C D9 */	bl func_801C6330
+/* 801C1658 001BE238  48 00 4C D9 */	bl grDatFiles_801C6330
 /* 801C165C 001BE23C  7C 7D 1B 78 */	mr r29, r3
 /* 801C1660 001BE240  80 63 00 04 */	lwz r3, 4(r3)
 /* 801C1664 001BE244  1F 3E 00 34 */	mulli r25, r30, 0x34
@@ -1469,8 +1469,8 @@ static asm void Ground_801C1E94(void)
 /* 801C1EA8 001BEA88  3B E3 E6 C8 */	addi r31, r3, stage_info@l
 /* 801C1EAC 001BEA8C  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 801C1EB0 001BEA90  93 A1 00 14 */	stw r29, 0x14(r1)
-/* 801C1EB4 001BEA94  48 00 44 71 */	bl func_801C6324
-/* 801C1EB8 001BEA98  48 00 44 6D */	bl func_801C6324
+/* 801C1EB4 001BEA94  48 00 44 71 */	bl grDatFiles_801C6324
+/* 801C1EB8 001BEA98  48 00 44 6D */	bl grDatFiles_801C6324
 /* 801C1EBC 001BEA9C  80 BF 00 88 */	lwz r5, 0x88(r31)
 /* 801C1EC0 001BEAA0  3C 80 80 3E */	lis r4, lbl_803DFEDC@ha
 /* 801C1EC4 001BEAA4  80 63 00 04 */	lwz r3, 4(r3)
@@ -1480,7 +1480,7 @@ static asm void Ground_801C1E94(void)
 /* 801C1ED4 001BEAB4  83 C3 00 0C */	lwz r30, 0xc(r3)
 /* 801C1ED8 001BEAB8  80 64 00 00 */	lwz r3, 0(r4)
 /* 801C1EDC 001BEABC  83 A3 00 04 */	lwz r29, 4(r3)
-/* 801C1EE0 001BEAC0  48 00 44 45 */	bl func_801C6324
+/* 801C1EE0 001BEAC0  48 00 44 45 */	bl grDatFiles_801C6324
 /* 801C1EE4 001BEAC4  2C 1E 00 00 */	cmpwi r30, 0
 /* 801C1EE8 001BEAC8  7F C9 03 A6 */	mtctr r30
 /* 801C1EEC 001BEACC  3B C0 00 00 */	li r30, 0
@@ -1491,7 +1491,7 @@ lbl_801C1EF4:
 /* 801C1EFC 001BEADC  28 00 00 01 */	cmplwi r0, 1
 /* 801C1F00 001BEAE0  40 82 00 24 */	bne lbl_801C1F24
 /* 801C1F04 001BEAE4  7F C3 F3 78 */	mr r3, r30
-/* 801C1F08 001BEAE8  48 00 44 29 */	bl func_801C6330
+/* 801C1F08 001BEAE8  48 00 44 29 */	bl grDatFiles_801C6330
 /* 801C1F0C 001BEAEC  80 63 00 04 */	lwz r3, 4(r3)
 /* 801C1F10 001BEAF0  1C 1E 00 34 */	mulli r0, r30, 0x34
 /* 801C1F14 001BEAF4  80 63 00 08 */	lwz r3, 8(r3)
@@ -1856,7 +1856,7 @@ void Ground_801C2374(HSD_LObj* lobj)
 
 s32 Ground_801C247C(s32 arg0, s32 arg1)
 {
-    UnkArchiveStruct* archive = func_801C6330(arg0);
+    UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
 
     if (archive == NULL)
         __assert(__FILE__, 0x7E1, lbl_804D44F8);
@@ -2327,7 +2327,7 @@ bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
 #endif
 
     bool result = false;
-    UnkArchiveStruct* temp_r3 = func_801C6330(arg1);
+    UnkArchiveStruct* temp_r3 = grDatFiles_801C6330(arg1);
 
     S16Vec3* cur;
     int i;
@@ -2416,7 +2416,7 @@ lbl_801C3088:
 /* 801C3088 001BFC68  7C 1C D0 00 */	cmpw r28, r26
 /* 801C308C 001BFC6C  41 80 FF C8 */	blt lbl_801C3054
 /* 801C3090 001BFC70  7F C3 F3 78 */	mr r3, r30
-/* 801C3094 001BFC74  48 00 32 9D */	bl func_801C6330
+/* 801C3094 001BFC74  48 00 32 9D */	bl grDatFiles_801C6330
 /* 801C3098 001BFC78  28 03 00 00 */	cmplwi r3, 0
 /* 801C309C 001BFC7C  41 82 00 6C */	beq lbl_801C3108
 /* 801C30A0 001BFC80  80 63 00 04 */	lwz r3, 4(r3)
@@ -2500,7 +2500,7 @@ bool Ground_801C3128(s32 arg0, void (*arg1)(s16))
             }
 
             {
-                UnkArchiveStruct* tmp = func_801C6330(arg0);
+                UnkArchiveStruct* tmp = grDatFiles_801C6330(arg0);
 
                 if (tmp != NULL) {
                     cur = tmp->unk4->unk8[arg0].unk20;
@@ -2572,7 +2572,7 @@ s32 Ground_801C32D4(s32 arg0, s32 arg1)
     {
         UnkArchiveStruct* tmp;
 
-        tmp = func_801C6330(arg0);
+        tmp = grDatFiles_801C6330(arg0);
 
         if (tmp != NULL) {
             max = tmp->unk4->unk8[arg0].unk24;
@@ -2619,7 +2619,7 @@ s32 Ground_801C33C0(s32 arg0, s32 arg1)
     {
         UnkArchiveStruct* tmp;
 
-        tmp = func_801C6330(arg0);
+        tmp = grDatFiles_801C6330(arg0);
 
         if (tmp != NULL) {
             max = tmp->unk4->unk8[arg0].unk24;
@@ -2687,7 +2687,7 @@ static asm void Ground_801C34AC(s32, HSD_JObj*, HSD_Joint*)
 /* 801C34C8 001C00A8  3B FE 00 00 */	addi r31, r30, 0
 /* 801C34CC 001C00AC  3B A4 FE A8 */	addi r29, r4, lbl_803DFEA8@l
 /* 801C34D0 001C00B0  3B 80 FF FF */	li r28, -1
-/* 801C34D4 001C00B4  48 00 2E 5D */	bl func_801C6330
+/* 801C34D4 001C00B4  48 00 2E 5D */	bl grDatFiles_801C6330
 /* 801C34D8 001C00B8  28 03 00 00 */	cmplwi r3, 0
 /* 801C34DC 001C00BC  41 82 02 04 */	beq lbl_801C36E0
 /* 801C34E0 001C00C0  28 1E 00 00 */	cmplwi r30, 0
@@ -2889,7 +2889,7 @@ asm void Ground_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
 /* 801C3714 001C02F4  3B A6 FE A8 */	addi r29, r6, lbl_803DFEA8@l
 /* 801C3718 001C02F8  93 81 00 28 */	stw r28, 0x28(r1)
 /* 801C371C 001C02FC  3B 85 00 00 */	addi r28, r5, 0
-/* 801C3720 001C0300  48 00 2C 11 */	bl func_801C6330
+/* 801C3720 001C0300  48 00 2C 11 */	bl grDatFiles_801C6330
 /* 801C3724 001C0304  7C 7E 1B 79 */	or. r30, r3, r3
 /* 801C3728 001C0308  40 82 00 14 */	bne lbl_801C373C
 /* 801C372C 001C030C  38 7D 02 18 */	addi r3, r29, 0x218
@@ -3619,7 +3619,7 @@ bool Ground_801C43C4(void* arg0)
     }* phi_r4;
     int i;
 
-    tmp = func_801C6324()->unk4;
+    tmp = grDatFiles_801C6324()->unk4;
     phi_r4 = tmp->unk20;
     max = tmp->unk24;
     if (arg0 != NULL && max != 0) {
@@ -3724,7 +3724,7 @@ static asm void Ground_801C466C(void)
 /* 801C467C 001C125C  DB E1 00 38 */	stfd f31, 0x38(r1)
 /* 801C4680 001C1260  BF 41 00 20 */	stmw r26, 0x20(r1)
 /* 801C4684 001C1264  3B E3 FE A8 */	addi r31, r3, lbl_803DFEA8@l
-/* 801C4688 001C1268  48 00 1C 9D */	bl func_801C6324
+/* 801C4688 001C1268  48 00 1C 9D */	bl grDatFiles_801C6324
 /* 801C468C 001C126C  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801C4690 001C1270  80 63 00 04 */	lwz r3, 4(r3)
 /* 801C4694 001C1274  38 84 E6 C8 */	addi r4, r4, stage_info@l
@@ -3734,7 +3734,7 @@ static asm void Ground_801C466C(void)
 /* 801C46A4 001C1284  7C 7F 02 14 */	add r3, r31, r0
 /* 801C46A8 001C1288  80 63 00 34 */	lwz r3, 0x34(r3)
 /* 801C46AC 001C128C  83 43 00 04 */	lwz r26, 4(r3)
-/* 801C46B0 001C1290  48 00 1C 75 */	bl func_801C6324
+/* 801C46B0 001C1290  48 00 1C 75 */	bl grDatFiles_801C6324
 /* 801C46B4 001C1294  2C 1C 00 00 */	cmpwi r28, 0
 /* 801C46B8 001C1298  7F 89 03 A6 */	mtctr r28
 /* 801C46BC 001C129C  3B 80 00 00 */	li r28, 0
@@ -3745,7 +3745,7 @@ lbl_801C46C4:
 /* 801C46CC 001C12AC  28 00 00 01 */	cmplwi r0, 1
 /* 801C46D0 001C12B0  40 82 00 28 */	bne lbl_801C46F8
 /* 801C46D4 001C12B4  7F 83 E3 78 */	mr r3, r28
-/* 801C46D8 001C12B8  48 00 1C 59 */	bl func_801C6330
+/* 801C46D8 001C12B8  48 00 1C 59 */	bl grDatFiles_801C6330
 /* 801C46DC 001C12BC  80 83 00 04 */	lwz r4, 4(r3)
 /* 801C46E0 001C12C0  1C 1C 00 34 */	mulli r0, r28, 0x34
 /* 801C46E4 001C12C4  80 84 00 08 */	lwz r4, 8(r4)
@@ -3968,7 +3968,7 @@ extern unk_t lbl_803E06C8[];
 
 unk_t Ground_801C49B4(void)
 {
-    UnkArchiveStruct* archive = func_801C6324();
+    UnkArchiveStruct* archive = grDatFiles_801C6324();
 
     if (stage_info.x6C4 != NULL)
         return Ground_801C20E0(archive, stage_info.x6C4);
@@ -4033,7 +4033,7 @@ void Ground_801C4A08(HSD_GObj* gobj)
             Ground_801C3128(map_id, func_80057BC0);
         }
 
-        archive = func_801C6330(gp->map_id);
+        archive = grDatFiles_801C6330(gp->map_id);
 
         if (archive != NULL)
             Ground_801C36F4(gp->map_id, jobj,
@@ -4726,7 +4726,7 @@ int Ground_801C5940(void)
 
     int vals[vals_count];
 
-    archive = func_801C6324();
+    archive = grDatFiles_801C6324();
     out_idx = 0;
 
     if (archive->unk4->unk4 == 0)
