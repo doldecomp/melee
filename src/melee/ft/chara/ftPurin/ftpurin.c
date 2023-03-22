@@ -346,7 +346,7 @@ inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 
     fp->cb.x21BC_callback_Accessory4 = &ftPurin_8013C94C;
 
-    if (gm_8016B1D8() && func_801D4FF8(fp->xC_playerID))
+    if (gm_8016B1D8() && grStadium_801D4FF8(fp->xC_playerID))
         fp->mv.pr.specialhi.x0 = true;
     else
         fp->mv.pr.specialhi.x0 = false;

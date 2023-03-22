@@ -373,7 +373,7 @@ void Ground_801C06B8(InternalStageId arg0)
         grIzumi_801CD2D4();
         return;
     case PSTADIUM:
-        func_801D511C();
+        grStadium_801D511C();
         return;
     }
 }
@@ -828,7 +828,7 @@ void Ground_801C1158(void)
 {
     switch (stage_info.internal_stage_id) {
     case PSTADIUM:
-        func_801D39A0(Ground_801C2BA4(1));
+        grStadium_801D39A0(Ground_801C2BA4(1));
         break;
     case CORNERIA:
     case VENOM:
