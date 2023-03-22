@@ -3,9 +3,9 @@
  */
 #include <platform.h>
 
-#include "ft/ft_7C6.h"
+#include "ft/ft_07C6.h"
 
-#include "gm_A36.h"
+#include "gm_1A36.h"
 
 #include "ef/efsync.h"
 #include "ft/ftcoll.h"

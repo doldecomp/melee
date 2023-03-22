@@ -6,11 +6,11 @@
 #include "item2.h"
 
 #include "cm/camera.h"
-#include "db/db_253.h"
+#include "db/db_2253.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
-#include "gm/gm_601.h"
+#include "gm/gm_1601.h"
 #include "gr/grlib.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbunknown_001.h"

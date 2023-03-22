@@ -1,7 +1,7 @@
 #include "ftNess/ftNess_AttackS4.h"
 
-#include "ft/ft_81B.h"
-#include "ft/ft_877.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
 #include "ft/inlines.h"
 #include "ftNess/ftNess.h"

@@ -4,14 +4,14 @@
 #include "ftcoll.h"
 
 #include "fighter.h"
-#include "ft_81B.h"
-#include "ft_877.h"
+#include "ft_081B.h"
+#include "ft_0877.h"
 #include "ftcommon.h"
 #include "ftlib.h"
 #include "inlines.h"
 
 #include "ef/efsync.h"
-#include "gm/gm_601.h"
+#include "gm/gm_1601.h"
 #include "gr/stage.h"
 #include "it/code_80266F3C.h"
 #include "it/item.h"

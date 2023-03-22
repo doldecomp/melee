@@ -4,7 +4,7 @@
 #include "ftwalkcommon.h"
 
 #include "fighter.h"
-#include "ft_81B.h"
+#include "ft_081B.h"
 #include "ftcommon.h"
 #include "inlines.h"
 

@@ -1,10 +1,10 @@
 #include "player.h"
 
-#include "ft/ft_877.h"
+#include "ft/ft_0877.h"
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
 #include "ftKirby/ftkirby.h"
-#include "gm/gm_601.h"
+#include "gm/gm_1601.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
 #include "pl/pl_unknown_001.h"

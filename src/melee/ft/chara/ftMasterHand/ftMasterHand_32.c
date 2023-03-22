@@ -3,7 +3,7 @@
 #include "ftMasterHand_22.h"
 #include "ftMasterHand_33.h"
 
-#include "ft/ft_877.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 
 // 80155B70 152750

@@ -4,7 +4,7 @@
 #include "ftMasterHand_05.h"
 
 #include "cm/camera.h"
-#include "ft/ft_877.h"
+#include "ft/ft_0877.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"

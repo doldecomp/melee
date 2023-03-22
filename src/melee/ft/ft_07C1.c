@@ -1,7 +1,7 @@
-#include "ft/ft_7C1.h"
+#include "ft/ft_07C1.h"
 
 #include "fighter.h"
-#include "ft_877.h"
+#include "ft_0877.h"
 #include "ftcoll.h"
 
 #include "it/item2.h"

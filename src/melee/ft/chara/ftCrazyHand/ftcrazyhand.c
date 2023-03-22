@@ -1,7 +1,7 @@
 #include "ftcrazyhand.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_877.h"
+#include "ft/ft_0877.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
 #include "ft/inlines.h"

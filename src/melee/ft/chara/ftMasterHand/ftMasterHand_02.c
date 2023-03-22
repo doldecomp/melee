@@ -21,7 +21,7 @@
 #include "ftMasterHand_29.h"
 #include "ftMasterHand_31.h"
 
-#include "ft/ft_81B.h"
+#include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 #include "ft/inlines.h"
 #include "mp/mplib.h"

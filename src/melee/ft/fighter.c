@@ -1,11 +1,11 @@
 #include "ft/fighter.h"
 
-#include "ft_7C1.h"
-#include "ft_7C6.h"
-#include "ft_819.h"
-#include "ft_81B.h"
-#include "ft_852.h"
-#include "ft_877.h"
+#include "ft_07C1.h"
+#include "ft_07C6.h"
+#include "ft_0819.h"
+#include "ft_081B.h"
+#include "ft_0852.h"
+#include "ft_0877.h"
 #include "ftaction.h"
 #include "ftanim.h"
 #include "ftcamera.h"
@@ -15,18 +15,18 @@
 #include "ftdrawcommon.h"
 #include "ftlib.h"
 #include "ftparts.h"
-#include "gm_A36.h"
+#include "gm_1A36.h"
 #include "inlines.h"
 #include "types.h"
-#include "un_FC9.h"
+#include "un_2FC9.h"
 
 #include "cm/camera.h"
-#include "db/db_253.h"
+#include "db/db_2253.h"
 #include "ef/efasync.h"
 #include "ftCrazyHand/ftcrazyhand.h"
 #include "ftKirby/ftkirby.h"
 #include "ftMasterHand/ftMasterHand_02.h"
-#include "gm/gm_601.h"
+#include "gm/gm_1601.h"
 #include "if/ifmagnify.h"
 #include "it/code_80266F3C.h"
 #include "it/item.h"
@@ -52,7 +52,7 @@
 /// @todo Move elsewhere.
 #define HALF_PI (1.5707963267948966)
 
-// external vars from asm/melee/ft/ft_852.s
+// external vars from asm/melee/ft/ft_0852.s
 typedef void (*ft_callback)(HSD_GObj* gobj);
 typedef void (*fn_ptr_t)(void);
 
@@ -76,7 +76,7 @@ extern s8 lbl_803C26FC[FTKIND_MAX];
 
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
-extern StageInfo stage_info; // from asm/melee/gm_A36.s
+extern StageInfo stage_info; // from asm/melee/gm_1A36.s
 
 extern u8 lbl_804D7849; // asm/sysdolphin/baselib/gobj.s
 

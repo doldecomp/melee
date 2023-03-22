@@ -1,6 +1,6 @@
-#include "ft/ft_819.h"
+#include "ft/ft_0819.h"
 
-#include "ft/ft_877.h"
+#include "ft/ft_0877.h"
 #include "it/item.h"
 #include "it/item2.h"
 #include "lb/lbunknown_003.h"

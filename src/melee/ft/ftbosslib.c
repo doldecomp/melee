@@ -1,7 +1,7 @@
 #include "ftbosslib.h"
 
 #include "fighter.h"
-#include "ft_877.h"
+#include "ft_0877.h"
 #include "ftlib.h"
 
 #include "cm/camera.h"

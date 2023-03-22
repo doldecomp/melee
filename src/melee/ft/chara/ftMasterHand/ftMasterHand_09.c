@@ -3,7 +3,7 @@
 #include "ftMasterHand_03.h"
 #include "ftMasterHand_08.h"
 
-#include "ft/ft_81B.h"
+#include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"

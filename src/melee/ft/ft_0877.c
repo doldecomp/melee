@@ -1,4 +1,4 @@
-#include "ft_877.h"
+#include "ft_0877.h"
 
 #include "fighter.h"
 #include "ftcommon.h"

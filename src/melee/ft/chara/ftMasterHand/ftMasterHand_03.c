@@ -2,7 +2,7 @@
 
 #include "ftMasterHand_02.h"
 
-#include "ft/ft_81B.h"
+#include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 #include "ft/inlines.h"
 

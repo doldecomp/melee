@@ -1,6 +1,6 @@
 #include "ftMasterHand_34.h"
 
-#include "ft/ft_877.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 

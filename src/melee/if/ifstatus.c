@@ -1,9 +1,9 @@
 #include "if/ifstatus.h"
 
-#include "mn_295.h"
-#include "un_FC9.h"
+#include "mn_2295.h"
+#include "un_2FC9.h"
 
-#include "gm/gm_601.h"
+#include "gm/gm_1601.h"
 #include "if/ifall.h"
 #include "if/ifstock.h"
 #include "lb/lbarchive.h"

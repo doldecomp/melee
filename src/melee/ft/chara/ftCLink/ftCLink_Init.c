@@ -2,7 +2,7 @@
 
 #include "ftCLink/ftCLink_Init.h"
 
-#include "ft/ft_877.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"

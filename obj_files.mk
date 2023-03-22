@@ -77,16 +77,16 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftcamera.c.o\
     $(BUILD_DIR)/src/melee/ft/ftcoll.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftcoll.s.o\
-    $(BUILD_DIR)/src/melee/ft/ft_7C1.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_7C6.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_07C1.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_07C6.c.o\
     $(BUILD_DIR)/src/melee/ft/ftcommon.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdrawcommon.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftdrawcommon_data.s.o\
     $(BUILD_DIR)/src/melee/ft/ftcliffcommon.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwalljump.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_819.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_81B.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_852.s.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0819.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_081B.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0852.s.o\
     $(BUILD_DIR)/src/melee/ft/ftdata1.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdata2.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdata3.c.o\
@@ -97,8 +97,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftitempickup.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_Strings.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_877.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_877.s.o\
+    $(BUILD_DIR)/src/melee/ft/ft_0877.c.o\
+    $(BUILD_DIR)/asm/melee/ft/ft_0877.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey1.c.o\
@@ -333,14 +333,14 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gm/gmmain.c.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/gm/gm_601.s.o\
+    $(BUILD_DIR)/asm/melee/gm/gm_1601.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gm/gmtitle.s.o\
     $(BUILD_DIR)/asm/melee/gm/gmcamera.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/gm_A36.s.o\
+    $(BUILD_DIR)/asm/melee/gm_1A36.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/gr/ground.c.o\
@@ -424,10 +424,10 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/gr/stage.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/db/db_253.s.o\
+    $(BUILD_DIR)/asm/melee/db/db_2253.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/mn_295.s.o\
+    $(BUILD_DIR)/asm/melee/mn_2295.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/mn/mnitemsw.s.o\
@@ -468,7 +468,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/if/ifmagnify.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/un_FC9.s.o\
+    $(BUILD_DIR)/asm/melee/un_2FC9.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/Runtime/__va_arg.c.o\

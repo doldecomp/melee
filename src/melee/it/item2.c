@@ -4,7 +4,7 @@
 #include "item2.h"
 
 #include "ft/ftlib.h"
-#include "gm/gm_601.h"
+#include "gm/gm_1601.h"
 #include "it/code_80266F3C.h"
 #include "it/code_8027CF30.h"
 #include "it/item.h"

@@ -2,8 +2,8 @@
 
 #include "ftDonkey/ftdonkey_callbacks.h"
 
-#include "ft/ft_81B.h"
-#include "ft/ft_877.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftdata.h"
