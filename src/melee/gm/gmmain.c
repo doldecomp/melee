@@ -54,7 +54,7 @@ static bool lbl_804D6594;
 static u8 lbl_8046B108[0xF0];
 static HSD_PadRumbleListData lbl_8046B1F8[12];
 
-static void lbl_8015FD24(void)
+static void gmMain_8015FD24(void)
 {
     PADSetSpec(5);
     HSD_PadInit(5, lbl_8046B108, 12, lbl_8046B1F8);
@@ -69,10 +69,10 @@ static void lbl_8015FD24(void)
     HSD_PadLibData.scale_analogLR = 140;
 }
 
-static void lbl_8015FDA0(void) {}
+static void gmMain_8015FDA0(void) {}
 
 // set debug level
-static void func_8015FDA4(void)
+static void gmMain_8015FDA4(void)
 {
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {
         lbl_804D6B20 = true;
@@ -159,7 +159,7 @@ int main(void)
     CARDInit();
     OSInitAlarm();
     func_80225374();
-    func_8015FDA4();
+    gmMain_8015FDA4();
     if (OSGetConsoleSimulatedMemSize() / (1024 * 1024) == 48) {
         OSAllocFromArenaHi(0x01800000, 4);
     }
@@ -175,8 +175,8 @@ int main(void)
     GXSetMisc(1, 8);
     *seed_ptr = OSGetTick();
     func_8002838C();
-    func_80019AAC(&lbl_8015FD24);
-    HSD_VISetUserPostRetraceCallback(&lbl_8015FDA0);
+    func_80019AAC(&gmMain_8015FD24);
+    HSD_VISetUserPostRetraceCallback(&gmMain_8015FDA0);
     HSD_VISetUserGXDrawDoneCallback(&lbl_803762C4);
     HSD_VISetBlack(0);
     func_8001564C();
