@@ -612,7 +612,7 @@ void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 facing_dir)
         player->facing_direction = facing_dir;
 
         if (player->player_entity[player->transformed[i]])
-            func_SetEntityFacingDirection(
+            ft_SetFacingDirection(
                 player->player_entity[player->transformed[i]], facing_dir);
     }
 }

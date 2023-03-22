@@ -1098,7 +1098,7 @@ void ft_800DEF38(HSD_GObj*);
 void ft_800DF0D0(HSD_GObj*);
 void ft_800C555C(HSD_GObj*);
 
-void func_SetEntityFacingDirection(HSD_GObj*, f32 facing_dir);
+void ft_SetFacingDirection(HSD_GObj*, f32 facing_dir);
 
 /// Interrupt_Wait
 void ft_8008A4D4(HSD_GObj*);
