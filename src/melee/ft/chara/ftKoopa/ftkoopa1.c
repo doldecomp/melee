@@ -559,7 +559,7 @@ void ftKoopa_801336CC(HSD_GObj* gobj)
 
             if (fp1->x2200_ftcmd_var0 != 0 && (signed) fp1->mv.kp.unk1.x4 != 0)
             {
-                func_8007ABD0(&fp1->x914[0], koopaAttr->x2C, gobj);
+                ftColl_8007ABD0(&fp1->x914[0], koopaAttr->x2C, gobj);
                 fp1->x2200_ftcmd_var0 = 0;
             }
         }

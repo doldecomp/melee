@@ -155,7 +155,7 @@ void ftNess_AttackS4_Phys(HSD_GObj* gobj) // Ness's F-Smash Physics Callback
 
 {
     func_80084FA8(gobj);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 };
 
 // 0x80114E98

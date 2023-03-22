@@ -358,11 +358,11 @@ void ftLuigi_SpecialSLaunch_Anim(HSD_GObj* gobj)
     if (!fp->mv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
-        func_8007ABD0(&fp->x914[0],
-                      fp->mv.lg.SpecialS.chargeFrames *
-                              sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
-                          sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
-                      gobj);
+        ftColl_8007ABD0(&fp->x914[0],
+                        fp->mv.lg.SpecialS.chargeFrames *
+                                sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
+                            sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
+                        gobj);
     }
 
     if (fp->x2200_ftcmd_var0 != 0) {
@@ -385,11 +385,11 @@ void ftLuigi_SpecialAirSLaunch_Anim(HSD_GObj* gobj)
     if (!fp->mv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
-        func_8007ABD0(&fp->x914[0],
-                      fp->mv.lg.SpecialS.chargeFrames *
-                              sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
-                          sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
-                      gobj);
+        ftColl_8007ABD0(&fp->x914[0],
+                        fp->mv.lg.SpecialS.chargeFrames *
+                                sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
+                            sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
+                        gobj);
     }
 
     if (fp->x2200_ftcmd_var0 != 0)
@@ -533,11 +533,11 @@ void ftLuigi_SpecialSMisfire_Anim(HSD_GObj* gobj)
     if (!fp->mv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
-        func_8007ABD0(&fp->x914[0],
-                      fp->mv.lg.SpecialS.chargeFrames *
-                              sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
-                          sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
-                      gobj);
+        ftColl_8007ABD0(&fp->x914[0],
+                        fp->mv.lg.SpecialS.chargeFrames *
+                                sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
+                            sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
+                        gobj);
     }
 
     if (fp->x2200_ftcmd_var0 != 0) {
@@ -560,11 +560,11 @@ void ftLuigi_SpecialAirSMisfire_Anim(HSD_GObj* gobj)
     if (!fp->mv.lg.SpecialS.isMisfire &&
         fp->x914[0].state == HitCapsule_Enabled)
     {
-        func_8007ABD0(&fp->x914[0],
-                      fp->mv.lg.SpecialS.chargeFrames *
-                              sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
-                          sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
-                      gobj);
+        ftColl_8007ABD0(&fp->x914[0],
+                        fp->mv.lg.SpecialS.chargeFrames *
+                                sa->x14_LUIGI_GREENMISSILE_DAMAGE_SLOPE +
+                            sa->x10_LUIGI_GREENMISSILE_DAMAGE_TILT,
+                        gobj);
     }
 
     if (fp->x2200_ftcmd_var0 != 0)

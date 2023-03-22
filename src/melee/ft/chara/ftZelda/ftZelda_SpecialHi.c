@@ -475,7 +475,7 @@ void ftZelda_8013A058(HSD_GObj* gobj)
                 fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
                 fp->x2223_flag.bits.b4 = 1;
 
-                func_8007B62C(gobj, 2);
+                ftColl_8007B62C(gobj, 2);
                 fp->x221E_flag.bits.b0 = 1;
                 return;
             }
@@ -570,7 +570,7 @@ void ftZelda_8013A244(HSD_GObj* gobj)
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     fp->x2223_flag.bits.b4 = 1;
 
-    func_8007B62C(gobj, 2);
+    ftColl_8007B62C(gobj, 2);
 
     fp->x221E_flag.bits.b0 = 1;
 }

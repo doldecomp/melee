@@ -20,7 +20,7 @@ void ftSamus_80128944(HSD_GObj* gobj, f32 farg1, f32 farg2)
     u8 _[8];
 #endif
 
-    if (!func_8007B868(gobj)) {
+    if (!ftColl_8007B868(gobj)) {
         switch (fp->x2070.x2071_b0_3) {
         case 0:
         case 2:

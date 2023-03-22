@@ -531,8 +531,8 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
     func_800C8438(gobj);
     func_800C89A0(gobj);
     func_800C8FC4(gobj);
-    func_8007AFF8(gobj);
-    func_8007B0C0(gobj, 0);
+    ftColl_8007AFF8(gobj);
+    ftColl_8007B0C0(gobj, 0);
 
     if (ft_OnDeath[fp->x4_fighterKind])
         ft_OnDeath[fp->x4_fighterKind](gobj);
@@ -869,7 +869,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
 
     Fighter_Create_Inline2(gobj);
 
-    func_8007B320(gobj);
+    ftColl_8007B320(gobj);
     fp->x890_cameraBox = func_80029020();
 
     jobj = GET_JOBJ(gobj);
@@ -932,7 +932,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
 
     if ((arg2 & FtStateChange_SkipUpdateHit) == 0) {
         if (fp->x2219_flag.bits.b3 != 0) {
-            func_8007AFF8(gobj);
+            ftColl_8007AFF8(gobj);
         }
         if (fp->x2219_flag.bits.b4 != 0) {
             func_8007C114(gobj);
@@ -945,15 +945,15 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
 
     if ((arg2 & FtStateChange_PreserveColAnimHitStatus) == 0) {
         if (fp->x1988 != 0) {
-            func_8007B62C(gobj, 0);
+            ftColl_8007B62C(gobj, 0);
         }
         if (fp->x221A_flag.bits.b5 != 0) {
-            func_8007B0C0(gobj, 0);
+            ftColl_8007B0C0(gobj, 0);
         }
     }
 
     if (fp->x221A_flag.bits.b6 != 0) {
-        func_8007B4E0(gobj);
+        ftColl_8007B4E0(gobj);
     }
 
     if (((arg2 & FtStateChange_SkipUpdateModel) == 0) &&
@@ -991,8 +991,8 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     if (((arg2 & FtStateChange_PreserveColaNimPartHitStatus) == 0) &&
         (fp->x2221_flag.bits.b1 != 0U))
     {
-        func_8007B6EC(gobj);
-        func_8007B760(gobj, p_ftCommonData->x134);
+        ftColl_8007B6EC(gobj);
+        ftColl_8007B760(gobj, p_ftCommonData->x134);
         fp->x2221_flag.bits.b1 = 0;
     }
     func_8007E2F4(fp, 0);
@@ -1251,7 +1251,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
             if ((arg2 & FtStateChange_SkipUpdateAnim) == 0) {
                 if (otherObj != 0U) {
                     func_80085CD8(fp, GET_FIGHTER(otherObj), fp->anim_id);
-                    func_8007B8CC(fp, otherObj);
+                    ftColl_8007B8CC(fp, otherObj);
                 } else {
                     func_80085CD8(fp, fp, fp->anim_id);
                 }
@@ -1682,7 +1682,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
             }
             func_8006EBA4(gobj);
             func_800D71D8(gobj);
-            func_800764DC(gobj);
+            ftColl_800764DC(gobj);
 
             if (!fp->x221C_flag.bits.b6) {
                 func_800411C4(fp->xC_playerID, fp->x221F_flag.bits.b4);
@@ -2353,7 +2353,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         VEC_CLEAR(windOffset);
     }
 
-    func_80076528(gobj);
+    ftColl_80076528(gobj);
 
     if (fp->cb.x21D0_callback_EveryHitlag) {
         fp->cb.x21D0_callback_EveryHitlag(gobj);
@@ -2408,7 +2408,7 @@ void Fighter_procUpdate(HSD_GObj* gobj)
         fp->dmg.x18A4_knockbackMagnitude = 0.0f;
     }
 
-    func_8007AF28(gobj);
+    ftColl_8007AF28(gobj);
 
     if (g_debugLevel >= 3 && (fpclassify(fp->cur_pos.x) == FP_NAN ||
                               fpclassify(fp->cur_pos.y) == FP_NAN ||
@@ -2555,7 +2555,7 @@ void Fighter_8006C80C(HSD_GObj* gobj)
             }
         }
 
-        func_8007AE80(gobj);
+        ftColl_8007AE80(gobj);
         func_8007C224(gobj);
         func_8007C6DC(gobj);
 
@@ -2583,21 +2583,21 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x221F_flag.bits.b3 && !func_8016B1C4()) {
-        func_8007BA0C(gobj);
+        ftColl_8007BA0C(gobj);
         if (fp->x221E_flag.bits.b6) {
-            func_80078A2C(gobj);
+            ftColl_80078A2C(gobj);
             if (fp->x1A58_interactedFighter) {
                 if (!fp->x2225_b1) {
                     func_80088148(fp, fp->ft_data->x4C_collisionData->x30,
                                   0x7F, 0x40);
                 }
-                func_80078754(gobj, fp->x1A58_interactedFighter, 0);
+                ftColl_80078754(gobj, fp->x1A58_interactedFighter, 0);
                 fp->cb.x2190_callback_OnGrabFighter_Self(gobj);
                 fp->cb.x2198_callback_OnGrabFighter_Victim(
                     fp->x1A58_interactedFighter, gobj);
                 return;
             }
-            func_8007BC90(gobj);
+            ftColl_8007BC90(gobj);
 
             if (fp->x1A60) {
                 if (!fp->x2225_b1) {
@@ -2619,15 +2619,15 @@ void Fighter_8006CB94(HSD_GObj* gobj)
     f32 func_8007BBCC_float_output;
 
     if (!fp->x221F_flag.bits.b3 && !fp->x2219_flag.bits.b1) {
-        func_800765E0();
-        func_80078C70(gobj);
+        ftColl_800765E0();
+        ftColl_80078C70(gobj);
         func_8007C77C(gobj);
-        func_8007925C(gobj);
-        func_8007BAC0(gobj);
+        ftColl_8007925C(gobj);
+        ftColl_8007BAC0(gobj);
         func_8007C4BC(gobj);
-        func_8007AB48(gobj);
-        func_8007AB80(gobj);
-        func_8007BBCC_float_output = func_8007BBCC(gobj);
+        ftColl_8007AB48(gobj);
+        ftColl_8007AB80(gobj);
+        func_8007BBCC_float_output = ftColl_8007BBCC(gobj);
         if (func_8007BBCC_float_output > 0.0f) {
             func_8007FC7C(gobj, func_8007BBCC_float_output);
         }
@@ -2850,7 +2850,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                 !fp->dmg.x1850_forceApplied)
             {
                 fp->dmg.x189C_unk_num_frames = 0.0f;
-                func_8007BE3C(gobj);
+                ftColl_8007BE3C(gobj);
             }
         }
 
@@ -3098,12 +3098,12 @@ void Fighter_Unload_8006DABC(void* user_data)
         ft_OnUserDataRemove[kind](fp->gobj);
     }
 
-    func_8007B8E8(fp->gobj);
+    ftColl_8007B8E8(fp->gobj);
     func_80067688(&fp->x60C);
     func_8026B7F8(fp->gobj);
     func_800290D4(fp->x890_cameraBox);
     func_8009E0D4(fp);
-    func_800765AC(fp->gobj);
+    ftColl_800765AC(fp->gobj);
     func_80088C5C(fp->gobj);
     func_8000EE8C(&fp->x20A4);
 

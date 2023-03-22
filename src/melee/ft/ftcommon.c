@@ -1524,14 +1524,14 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->x2338 = src->x2338;
     dst->x2224_flag.bits.b2 = src->x2224_flag.bits.b2;
     if (src->x221D_flag.bits.b6) {
-        func_8007B7FC(dst, src->x2004);
+        ftColl_8007B7FC(dst, src->x2004);
         func_800C0358(src, dst, 0x6B);
         func_800880D8(src);
     } else {
         func_800C0200(dst, 9);
     }
     if ((src->x198C = 2) && (src->x1990 != 0)) {
-        func_8007B760(dst_gobj, src->x1990);
+        ftColl_8007B760(dst_gobj, src->x1990);
     }
     dst->x2220_flag.bits.b5 = src->x2220_flag.bits.b5;
     dst->x2220_flag.bits.b6 = src->x2220_flag.bits.b6;

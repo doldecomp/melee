@@ -65,7 +65,7 @@ void ftMars_80138AA8(HSD_GObj* gobj)
 
     if (fp->x2204_ftcmd_var1 == 1) {
         fp->x2204_ftcmd_var1 = 2;
-        func_8007B1B8(gobj, &attr->x64, &ftMars_80139140);
+        ftColl_8007B1B8(gobj, &attr->x64, &ftMars_80139140);
         fp->x221B_b1 = true;
         fp->x19B4_shieldUnk = attr->x60;
         fp->x19B8_shieldUnk = attr->x60;
@@ -89,7 +89,7 @@ void ftMars_80138B64(HSD_GObj* gobj)
 
     if (fp->x2204_ftcmd_var1 == 1) {
         fp->x2204_ftcmd_var1 = 2;
-        func_8007B1B8(gobj, &attr->x64, &ftMars_80139140);
+        ftColl_8007B1B8(gobj, &attr->x64, &ftMars_80139140);
         fp->x221B_b1 = true;
         fp->x19B4_shieldUnk = attr->x60;
         fp->x19B8_shieldUnk = attr->x60;
@@ -108,7 +108,7 @@ void ftMars_80138C24(HSD_GObj* gobj) {}
 void ftMars_80138C28(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
-    func_8007AEE0(gobj);
+    ftColl_8007AEE0(gobj);
 }
 
 void ftMars_80138C5C(HSD_GObj* gobj)
@@ -122,7 +122,7 @@ void ftMars_80138C5C(HSD_GObj* gobj)
     MarsAttributes* attr = getFtSpecialAttrsD(fp);
     func_8007D494(fp, attr->x54, attr->x58);
     func_8007CE94(fp, attr->x50);
-    func_8007AEE0(gobj);
+    ftColl_8007AEE0(gobj);
 }
 
 // 80138CC0 001358A0
@@ -162,7 +162,7 @@ void ftMars_80138D38(HSD_GObj* gobj)
         MarsAttributes* attr = getFtSpecialAttrsD(fp);
 
         if (fp->x2204_ftcmd_var1 == 2) {
-            func_8007B1B8(gobj, &attr->x64, &ftMars_80139140);
+            ftColl_8007B1B8(gobj, &attr->x64, &ftMars_80139140);
             fp->x221B_b1 = true;
         }
     }
@@ -187,7 +187,7 @@ void ftMars_80138DD0(HSD_GObj* gobj)
         MarsAttributes* attr = getFtSpecialAttrsD(fp);
 
         if (fp->x2204_ftcmd_var1 == 2) {
-            func_8007B1B8(gobj, &attr->x64, &ftMars_80139140);
+            ftColl_8007B1B8(gobj, &attr->x64, &ftMars_80139140);
             fp->x221B_b1 = true;
         }
     }
@@ -214,7 +214,7 @@ void ftMars_80138E68(HSD_GObj* gobj)
 #ifndef MUST_MATCH
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
-                func_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
+                ftColl_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
             }
         }
 
@@ -224,8 +224,8 @@ void ftMars_80138E68(HSD_GObj* gobj)
         hb = (s32) fp;
         while (idx < 4) {
             if (*(s32*) (hb + 0x914) == HitCapsule_Enabled) {
-                func_8007ABD0((HitCapsule*) (hb + 0x914),
-                              fp->mv.ms.speciallw.x0, gobj);
+                ftColl_8007ABD0((HitCapsule*) (hb + 0x914),
+                                fp->mv.ms.speciallw.x0, gobj);
             }
             idx++;
             hb += 0x138;
@@ -259,7 +259,7 @@ void ftMars_80138F14(HSD_GObj* gobj)
 #ifndef MUST_MATCH
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
-                func_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
+                ftColl_8007ABD0(&fp->x914[idx], fp->mv.ms.speciallw.x0, gobj);
             }
         }
 
@@ -269,8 +269,8 @@ void ftMars_80138F14(HSD_GObj* gobj)
         hb = (s32) fp;
         while (idx < 4) {
             if (*(s32*) (hb + 0x914) == HitCapsule_Enabled) {
-                func_8007ABD0((HitCapsule*) (hb + 0x914),
-                              fp->mv.ms.speciallw.x0, gobj);
+                ftColl_8007ABD0((HitCapsule*) (hb + 0x914),
+                                fp->mv.ms.speciallw.x0, gobj);
             }
             idx++;
             hb += 0x138;

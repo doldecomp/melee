@@ -387,7 +387,7 @@ static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* gobj)
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
     fp->x2223_flag.bits.b4 = true;
 
-    func_8007B62C(gobj, 2);
+    ftColl_8007B62C(gobj, 2);
 
     fp->x221E_flag.bits.b0 = true;
 

@@ -138,7 +138,7 @@ void func_80279BBC(Item* item_data);
 void func_80279BE0(HSD_GObj* item_gobj);
 void func_8027B0C4(HSD_GObj*, SpawnItem*);
 UNK_RET func_8026FAC4(UNK_PARAMS);
-UNK_RET func_80077688(UNK_PARAMS);
+UNK_RET ftColl_80077688(UNK_PARAMS);
 UNK_RET func_8026FC00(UNK_PARAMS);
 UNK_RET func_80272818(UNK_PARAMS);
 

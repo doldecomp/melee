@@ -64,7 +64,7 @@ static inline void spawnEffect(HSD_GObj* gobj)
     Fighter* fp;
     fp = GET_FIGHTER(gobj);
     func_80074B0C(gobj, 0, 0);
-    func_8007B0C0(gobj, 0);
+    ftColl_8007B0C0(gobj, 0);
 
     x1CC = &fp->x110_attr.x1CC;
     bone_idx = func_8007500C(fp, 4);
@@ -147,7 +147,7 @@ asm void ftYoshi_8012C1D4(HSD_GObj*)
 /* 8012C234 00128E14  83 BE 00 2C */	lwz r29, 0x2c(r30)
 /* 8012C238 00128E18  38 7E 00 00 */	addi r3, r30, 0
 /* 8012C23C 00128E1C  38 80 00 02 */	li r4, 2
-/* 8012C240 00128E20  4B F4 EE 81 */	bl func_8007B0C0
+/* 8012C240 00128E20  4B F4 EE 81 */	bl ftColl_8007B0C0
 /* 8012C244 00128E24  80 9D 01 0C */	lwz r4, 0x10c(r29)
 /* 8012C248 00128E28  3C 60 80 3B */	lis r3, lbl_803B75C0@ha
 /* 8012C24C 00128E2C  38 00 00 01 */	li r0, 1
@@ -174,7 +174,7 @@ asm void ftYoshi_8012C1D4(HSD_GObj*)
 /* 8012C2A0 00128E80  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8012C2A4 00128E84  90 01 00 38 */	stw r0, 0x38(r1)
 /* 8012C2A8 00128E88  D0 01 00 48 */	stfs f0, 0x48(r1)
-/* 8012C2AC 00128E8C  4B F4 F3 01 */	bl func_8007B5AC
+/* 8012C2AC 00128E8C  4B F4 F3 01 */	bl ftColl_8007B5AC
 /* 8012C2B0 00128E90  7F C3 F3 78 */	mr r3, r30
 /* 8012C2B4 00128E94  4B F6 61 9D */	bl func_80092450
 /* 8012C2B8 00128E98  88 1F 22 1E */	lbz r0, 0x221e(r31)
@@ -246,7 +246,7 @@ void ftYoshi_8012C49C(HSD_GObj* gobj)
     {
         Fighter* fp0 = GET_FIGHTER(gobj);
         func_80074B0C(gobj, 0, 0);
-        func_8007B0C0(gobj, 0);
+        ftColl_8007B0C0(gobj, 0);
 
         {
             /// @todo Unused stack.
@@ -342,7 +342,7 @@ lbl_8012C680:
 /* 8012C680 00129260  83 9D 00 2C */	lwz r28, 0x2c(r29)
 /* 8012C684 00129264  38 7D 00 00 */	addi r3, r29, 0
 /* 8012C688 00129268  38 80 00 02 */	li r4, 2
-/* 8012C68C 0012926C  4B F4 EA 35 */	bl func_8007B0C0
+/* 8012C68C 0012926C  4B F4 EA 35 */	bl ftColl_8007B0C0
 /* 8012C690 00129270  80 9C 01 0C */	lwz r4, 0x10c(r28)
 /* 8012C694 00129274  3C 60 80 3B */	lis r3, lbl_803B75C0@ha
 /* 8012C698 00129278  38 00 00 01 */	li r0, 1
@@ -369,7 +369,7 @@ lbl_8012C680:
 /* 8012C6EC 001292CC  80 01 00 48 */	lwz r0, 0x48(r1)
 /* 8012C6F0 001292D0  90 01 00 3C */	stw r0, 0x3c(r1)
 /* 8012C6F4 001292D4  D0 01 00 4C */	stfs f0, 0x4c(r1)
-/* 8012C6F8 001292D8  4B F4 EE B5 */	bl func_8007B5AC
+/* 8012C6F8 001292D8  4B F4 EE B5 */	bl ftColl_8007B5AC
 /* 8012C6FC 001292DC  80 7F 19 A4 */	lwz r3, 0x19a4(r31)
 /* 8012C700 001292E0  3C 00 43 30 */	lis r0, 0x4330
 /* 8012C704 001292E4  80 8D AE B4 */	lwz r4, p_ftCommonData
@@ -541,7 +541,7 @@ asm void ftYoshi_8012C914(HSD_GObj*)
 /* 8012C9B0 00129590  83 DF 00 2C */	lwz r30, 0x2c(r31)
 /* 8012C9B4 00129594  38 7F 00 00 */	addi r3, r31, 0
 /* 8012C9B8 00129598  38 80 00 01 */	li r4, 1
-/* 8012C9BC 0012959C  4B F4 E7 05 */	bl func_8007B0C0
+/* 8012C9BC 0012959C  4B F4 E7 05 */	bl ftColl_8007B0C0
 /* 8012C9C0 001295A0  38 00 00 00 */	li r0, 0
 /* 8012C9C4 001295A4  90 1E 23 4C */	stw r0, 0x234c(r30)
 /* 8012C9C8 001295A8  C0 22 A0 4C */	lfs f1, lbl_804D9A2C
@@ -650,7 +650,7 @@ asm void ftYoshi_8012CAD0(HSD_GObj*)
 /* 8012CB2C 0012970C  4B F4 7F E1 */	bl func_80074B0C
 /* 8012CB30 00129710  38 7D 00 00 */	addi r3, r29, 0
 /* 8012CB34 00129714  38 80 00 00 */	li r4, 0
-/* 8012CB38 00129718  4B F4 E5 89 */	bl func_8007B0C0
+/* 8012CB38 00129718  4B F4 E5 89 */	bl ftColl_8007B0C0
 /* 8012CB3C 0012971C  38 7F 00 00 */	addi r3, r31, 0
 /* 8012CB40 00129720  3B DF 01 CC */	addi r30, r31, 0x1cc
 /* 8012CB44 00129724  38 80 00 04 */	li r4, 4

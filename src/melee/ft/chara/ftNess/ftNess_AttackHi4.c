@@ -24,7 +24,7 @@ void ftNess_YoyoUpdateHitPos(HSD_GObj* gobj)
         if (fp->fv.ns.yoyo_hitbox_pos.x != 0.0f ||
             fp->fv.ns.yoyo_hitbox_pos.y != 0.0f)
         {
-            func_8007B8A8(&fp->x914[0], &fp->fv.ns.yoyo_hitbox_pos);
+            ftColl_8007B8A8(&fp->x914[0], &fp->fv.ns.yoyo_hitbox_pos);
         }
     }
 };
@@ -72,7 +72,7 @@ static void ftNess_YoyoApplyDamage(f32 unk_float, HSD_GObj* gobj)
             final_damage =
                 fp->x914->a_offset.z * (damage_mul * charge_duration2 + 1.0f);
 
-            func_8007ABD0(&fp->x914[0], final_damage, gobj);
+            ftColl_8007ABD0(&fp->x914[0], final_damage, gobj);
         }
     }
 };
@@ -415,15 +415,15 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* gobj)
     if ((0.0f != smashChargeFrames) &&
         ((s32) fighter_data2->x914->state == HitCapsule_Enabled))
     {
-        func_8007ABD0(fighter_data2->x914,
-                      (u32) (fighter_data2->x914->a_offset.z *
-                             ((((0.0039059999398887157f *
-                                 ness_attr->xB0_YOYO_DAMAGE_MUL) -
-                                1.0f) *
-                               (smashChargeFrames /
-                                ness_attr->xAC_YOYO_CHARGE_DURATION)) +
-                              1.0f)),
-                      gobj);
+        ftColl_8007ABD0(fighter_data2->x914,
+                        (u32) (fighter_data2->x914->a_offset.z *
+                               ((((0.0039059999398887157f *
+                                   ness_attr->xB0_YOYO_DAMAGE_MUL) -
+                                  1.0f) *
+                                 (smashChargeFrames /
+                                  ness_attr->xAC_YOYO_CHARGE_DURATION)) +
+                                1.0f)),
+                        gobj);
     }
 }
 

@@ -214,7 +214,7 @@ void ftSeak_UpdateHitboxes(HSD_GObj* gobj, Vec3* new_pos, s32 hitbox_id)
         fp->fv.sk.x2238[hitbox_id] = *new_pos;
 
         if (new_pos->x != 0 || new_pos->y != 0) {
-            func_8007B8A8(&fp->x914[hitbox_id], new_pos);
+            ftColl_8007B8A8(&fp->x914[hitbox_id], new_pos);
 
             fp->x914[hitbox_id].x4C = *new_pos;
 

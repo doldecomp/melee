@@ -269,7 +269,7 @@ void ftPikachu_8012557C(HSD_GObj* gobj)
 
     if (fp->x914[0].state == HitCapsule_Enabled) {
         f32 damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
-        func_8007ABD0(&fp->x914[0], damage_amount, gobj);
+        ftColl_8007ABD0(&fp->x914[0], damage_amount, gobj);
     }
 
     if (fp->x2200_ftcmd_var0) {
@@ -290,7 +290,7 @@ void ftPikachu_8012561C(HSD_GObj* gobj)
 
     if (fp->x914[0].state == HitCapsule_Enabled) {
         f32 damage_amount = fp->mv.pk.unk3.x0 * sa->x2C + sa->x28;
-        func_8007ABD0(&fp->x914[0], damage_amount, gobj);
+        ftColl_8007ABD0(&fp->x914[0], damage_amount, gobj);
     }
 
     if (fp->x2200_ftcmd_var0) {

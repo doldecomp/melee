@@ -31,7 +31,7 @@ void func_80037590(void);
 void func_8003E150(void);
 void func_8003E17C(void);
 void func_80038144(void);
-void func_80078710(void);
+void ftColl_80078710(void);
 void func_8003D60C(void);
 void func_80041B08(void);
 void func_8003EB30(void);

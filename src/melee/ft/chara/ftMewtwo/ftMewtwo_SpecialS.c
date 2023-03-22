@@ -155,7 +155,7 @@ void ftMewtwo_SpecialAirS_IASA(HSD_GObj* gobj)
 void ftMewtwo_SpecialS_Phys(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 // 0x801469BC
@@ -164,7 +164,7 @@ void ftMewtwo_SpecialS_Phys(HSD_GObj* gobj)
 void ftMewtwo_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     func_80084EEC(gobj);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* gobj)

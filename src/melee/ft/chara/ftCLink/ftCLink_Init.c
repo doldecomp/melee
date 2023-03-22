@@ -229,7 +229,7 @@ void ftCLink_8014919C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     if (fp->x5F8 == 0) {
         attrs = (void*) fp->x2D4_specialAttributes;
-        func_8007B1B8(gobj, &attrs->xC4, ftCLink_80149114);
+        ftColl_8007B1B8(gobj, &attrs->xC4, ftCLink_80149114);
         fp->x221B_b3 = true;
         fp->x221B_b4 = true;
         fp->x221B_b2 = true;

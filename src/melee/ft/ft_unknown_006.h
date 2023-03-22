@@ -20,7 +20,7 @@ extern char lbl_803C57DC[];
 extern Fighter_CostumeStrings ftMario_CostumeStrings[];
 extern char lbl_803C595C[];
 
-bool func_8007B868(HSD_GObj*);
+bool ftColl_8007B868(HSD_GObj*);
 bool func_8008A1FC(HSD_GObj*);
 bool func_8008A9F8(HSD_GObj*);
 bool func_8008B658(HSD_GObj*);

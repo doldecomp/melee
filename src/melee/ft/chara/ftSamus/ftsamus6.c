@@ -43,7 +43,7 @@ void ftSamus_8012AEBC(HSD_GObj* gobj)
 {
     struct UNK_SAMUS_S2 unk_struct;
     Fighter* fp = GET_FIGHTER(gobj);
-    func_8007B0C0(gobj, 2);
+    ftColl_8007B0C0(gobj, 2);
 
     unk_struct.intvec.x = 2;
     unk_struct.intvec.y = 1;
@@ -51,12 +51,12 @@ void ftSamus_8012AEBC(HSD_GObj* gobj)
     unk_struct.vec1.x = unk_struct.vec1.y = unk_struct.vec1.z = 0.0f;
     unk_struct.vec2.x = unk_struct.vec2.y = unk_struct.vec2.z = 0.0f;
     unk_struct.single_float = 3.0f;
-    func_8007B5AC(fp, &fp->x11A0_fighterHurtbox[0], &unk_struct);
+    ftColl_8007B5AC(fp, &fp->x11A0_fighterHurtbox[0], &unk_struct);
 }
 
 void ftSamus_8012AF38(HSD_GObj* gobj)
 {
-    func_8007B0C0(gobj, 0);
+    ftColl_8007B0C0(gobj, 0);
 }
 
 void ftSamus_SpecialLw_StartMotion_inner(HSD_GObj* gobj)
@@ -118,7 +118,7 @@ inline void checkStateVar1(HSD_GObj* gobj)
         fp->mv.ss.unk6.x0 = 1;
     }
     if ((!fp->x2200_ftcmd_var0) && (fp->mv.ss.unk6.x0)) {
-        func_8007B0C0(gobj, 0);
+        ftColl_8007B0C0(gobj, 0);
         fp->mv.ss.unk6.x0 = 0;
     }
 }
@@ -153,7 +153,7 @@ lbl_8012B190:
 /* 8012B1A4 00000054  40 82 00 60 */	bne lbl_8012B204
 /* 8012B1A8 00000058  38 7D 00 00 */	addi r3, r29, 0x0
 /* 8012B1AC 0000005C  38 80 00 02 */	li r4, 0x2
-/* 8012B1B0 00000060  4B F4 FF 11 */	bl func_8007B0C0
+/* 8012B1B0 00000060  4B F4 FF 11 */	bl ftColl_8007B0C0
 /* 8012B1B4 00000064  38 00 00 02 */	li r0, 0x2
 /* 8012B1B8 00000068  C0 22 A0 28 */	lfs f1, 0.0F
 /* 8012B1BC 0000006C  90 01 00 20 */	stw r0, 0x20(r1)
@@ -172,7 +172,7 @@ lbl_8012B190:
 /* 8012B1F0 000000A0  D0 21 00 3C */	stfs f1, 0x3c(r1)
 /* 8012B1F4 000000A4  D0 21 00 38 */	stfs f1, 0x38(r1)
 /* 8012B1F8 000000A8  D0 01 00 44 */	stfs f0, 0x44(r1)
-/* 8012B1FC 000000AC  4B F5 03 B1 */	bl func_8007B5AC
+/* 8012B1FC 000000AC  4B F5 03 B1 */	bl ftColl_8007B5AC
 /* 8012B200 000000B0  93 FE 23 40 */	stw r31, 0x2340(r30)
 lbl_8012B204:
 /* 8012B204 000000B4  80 1E 22 00 */	lwz r0, 0x2200(r30)
@@ -183,7 +183,7 @@ lbl_8012B204:
 /* 8012B218 000000C8  41 82 00 18 */	beq lbl_8012B230
 /* 8012B21C 000000CC  38 7D 00 00 */	addi r3, r29, 0x0
 /* 8012B220 000000D0  38 80 00 00 */	li r4, 0x0
-/* 8012B224 000000D4  4B F4 FE 9D */	bl func_8007B0C0
+/* 8012B224 000000D4  4B F4 FE 9D */	bl ftColl_8007B0C0
 /* 8012B228 000000D8  38 00 00 00 */	li r0, 0x0
 /* 8012B22C 000000DC  90 1E 23 40 */	stw r0, 0x2340(r30)
 lbl_8012B230:
@@ -246,7 +246,7 @@ asm void ftSamus_8012B264(HSD_GObj*)
 /* 8012B298 00000034  40 82 00 60 */	bne lbl_8012B2F8
 /* 8012B29C 00000038  38 7D 00 00 */	addi r3, r29, 0x0
 /* 8012B2A0 0000003C  38 80 00 02 */	li r4, 0x2
-/* 8012B2A4 00000040  4B F4 FE 1D */	bl func_8007B0C0
+/* 8012B2A4 00000040  4B F4 FE 1D */	bl ftColl_8007B0C0
 /* 8012B2A8 00000044  38 00 00 02 */	li r0, 0x2
 /* 8012B2AC 00000048  C0 22 A0 28 */	lfs f1, 0.0F
 /* 8012B2B0 0000004C  90 01 00 20 */	stw r0, 0x20(r1)
@@ -265,7 +265,7 @@ asm void ftSamus_8012B264(HSD_GObj*)
 /* 8012B2E4 00000080  D0 21 00 3C */	stfs f1, 0x3c(r1)
 /* 8012B2E8 00000084  D0 21 00 38 */	stfs f1, 0x38(r1)
 /* 8012B2EC 00000088  D0 01 00 44 */	stfs f0, 0x44(r1)
-/* 8012B2F0 0000008C  4B F5 02 BD */	bl func_8007B5AC
+/* 8012B2F0 0000008C  4B F5 02 BD */	bl ftColl_8007B5AC
 /* 8012B2F4 00000090  93 FE 23 40 */	stw r31, 0x2340(r30)
 lbl_8012B2F8:
 /* 8012B2F8 00000094  80 1E 22 00 */	lwz r0, 0x2200(r30)
@@ -276,7 +276,7 @@ lbl_8012B2F8:
 /* 8012B30C 000000A8  41 82 00 18 */	beq lbl_8012B324
 /* 8012B310 000000AC  38 7D 00 00 */	addi r3, r29, 0x0
 /* 8012B314 000000B0  38 80 00 00 */	li r4, 0x0
-/* 8012B318 000000B4  4B F4 FD A9 */	bl func_8007B0C0
+/* 8012B318 000000B4  4B F4 FD A9 */	bl ftColl_8007B0C0
 /* 8012B31C 000000B8  38 00 00 00 */	li r0, 0x0
 /* 8012B320 000000BC  90 1E 23 40 */	stw r0, 0x2340(r30)
 lbl_8012B324:

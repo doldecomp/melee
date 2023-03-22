@@ -176,7 +176,7 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
         fp->x2218_flag.bits.b3 = false;
     }
 
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 void ftMario_SpecialS_Phys(HSD_GObj* gobj)

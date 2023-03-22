@@ -267,7 +267,7 @@ void ftDonkey_8010DB3C(HSD_GObj* gobj)
             }
 
             vec_list[i].y += 2.0f;
-            func_8007B8A8(&fp->x914[i], &vec_list[i]);
+            ftColl_8007B8A8(&fp->x914[i], &vec_list[i]);
         }
     }
 }

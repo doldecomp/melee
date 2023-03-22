@@ -340,7 +340,7 @@ static void ftFox_SpecialLwLoop_Pass(HSD_GObj* gobj)
 void ftFox_SpecialLwLoop_Phys(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 static inline void ftFox_SpecialLw_InlinePhys(HSD_GObj* gobj)
@@ -366,7 +366,7 @@ static inline void ftFox_SpecialLw_InlinePhys(HSD_GObj* gobj)
 void ftFox_SpecialAirLwLoop_Phys(HSD_GObj* gobj)
 {
     ftFox_SpecialLw_InlinePhys(gobj);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 /// Fox & Falco's ground -> air Reflector Loop Motion State handler
@@ -558,7 +558,7 @@ void ftFox_SpecialAirLwTurn_IASA(HSD_GObj* gobj)
 void ftFox_SpecialLwTurn_Phys(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 /// Fox & Falco's aerial Reflector Turn Physics callback
@@ -581,7 +581,7 @@ void ftFox_SpecialAirLwTurn_Phys(HSD_GObj* gobj)
     }
 
     func_8007CF58(fp);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 // 0x800E92AC
@@ -786,7 +786,7 @@ void ftFox_SpecialAirLwHit_IASA(HSD_GObj* gobj)
 void ftFox_SpecialLwHit_Phys(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 /// Fox & Falco's aerial Reflector Hit Physics callback
@@ -809,7 +809,7 @@ void ftFox_SpecialAirLwHit_Phys(HSD_GObj* gobj)
     }
 
     func_8007CF58(fp);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 /// Fox & Falco's grounded Reflector Hit Collision callback

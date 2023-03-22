@@ -326,7 +326,7 @@ void ftNess_SpecialLwHold_Phys(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet Hold Physics callback
 {
     func_80084F3C(gobj);
-    func_8007AF10(gobj);
+    ftColl_8007AF10(gobj);
 }
 
 /// Ness's aerial PSI Magnet Hold Physics callback
@@ -352,7 +352,7 @@ void ftNess_SpecialAirLwHold_Phys(HSD_GObj* gobj)
         }
 
         func_8007CF58(fp);
-        func_8007AF10(gobj);
+        ftColl_8007AF10(gobj);
     }
 }
 
@@ -569,7 +569,7 @@ void ftNess_SpecialLwTurn_Phys(
                     // callback - _
 {
     func_80084F3C(gobj);
-    func_8007AF10(gobj);
+    ftColl_8007AF10(gobj);
 }
 
 // 0x8011A95C
@@ -598,7 +598,7 @@ void ftNess_SpecialAirLwTurn_Phys(
     }
 
     func_8007CF58(fp);
-    func_8007AF10(gobj);
+    ftColl_8007AF10(gobj);
 }
 
 // 0x8011A9D0
@@ -848,7 +848,7 @@ void ftNess_SpecialLwHit_Phys(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet Absorb Physics callback
 {
     func_80084F3C(gobj);
-    func_8007AF10(gobj);
+    ftColl_8007AF10(gobj);
 }
 
 // 0x8011AF1C
@@ -876,7 +876,7 @@ void ftNess_SpecialAirLwHit_Phys(
     }
 
     func_8007CF58(fp);
-    func_8007AF10(arg0);
+    ftColl_8007AF10(arg0);
 }
 
 // 0x8011AF90

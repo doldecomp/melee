@@ -152,7 +152,7 @@ void ftZelda_8013AB64(HSD_GObj* gobj)
 void ftZelda_8013AB68(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 // 8013AB9C - 8013AC10 (0x74 bytes)
@@ -178,7 +178,7 @@ void ftZelda_8013AB9C(HSD_GObj* gobj)
     }
 
     func_8007CF58(fp);
-    func_8007AEF8(gobj);
+    ftColl_8007AEF8(gobj);
 }
 
 // 8013AC10 - 8013AC4C (0x3C bytes)

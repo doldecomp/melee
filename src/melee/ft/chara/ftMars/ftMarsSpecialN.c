@@ -307,7 +307,7 @@ void ftMars_80136EE4(HSD_GObj* gobj)
         ndx = 0;
         while (ndx < 4) {
             if (*(s32*) (hb + 0x914) == 1) {
-                func_8007ABD0(
+                ftColl_8007ABD0(
                     (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
@@ -361,7 +361,7 @@ void ftMars_80137010(HSD_GObj* gobj)
         // for (ndx = 0; ndx < 4; ndx++) {
         //     if (fp->x914[ndx].x0 == 1) {
         //         // Hitbox_ApplyDamageStalingAndMore
-        //         func_8007ABD0(&fp->x914[ndx], (f32) (attr->x4 +
+        //         ftColl_8007ABD0(&fp->x914[ndx], (f32) (attr->x4 +
         //         (s32)fp->mv.ms.specialn.x0 / 30 * attr->x8), gobj);
         //     }
         // }
@@ -371,7 +371,7 @@ void ftMars_80137010(HSD_GObj* gobj)
         ndx = 0;
         while (ndx < 4) {
             if (*(s32*) (hb + 0x914) == 1) {
-                func_8007ABD0(
+                ftColl_8007ABD0(
                     (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH

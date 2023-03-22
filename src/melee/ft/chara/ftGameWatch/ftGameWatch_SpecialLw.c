@@ -321,7 +321,7 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* gobj)
 void ftGameWatch_SpecialLw_Phys(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
-    func_8007AF10(gobj);
+    ftColl_8007AF10(gobj);
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Loop Physics callback
@@ -339,7 +339,7 @@ void ftGameWatch_SpecialAirLw_Phys(HSD_GObj* gobj)
                   sa->x70_GAMEWATCH_PANIC_VEL_Y_MAX);
 
     func_8007CE94(fp, sa->x68_GAMEWATCH_PANIC_MOMENTUM_MUL);
-    func_8007AF10(gobj);
+    ftColl_8007AF10(gobj);
 }
 
 /// Mr. Game & Watch's grounded Oil Panic Loop Collision callback
@@ -577,7 +577,7 @@ static inline void ftGameWatch_SpecialLwShoot_ApplyDamage(HSD_GObj* gobj)
     int i;
     for (i = 0; i < 4; i++)
         if (fp->x914[i].state == HitCapsule_Enabled)
-            func_8007ABD0(&fp->x914[i], fp->x2204_ftcmd_var1, gobj);
+            ftColl_8007ABD0(&fp->x914[i], fp->x2204_ftcmd_var1, gobj);
 }
 
 /// Mr. Game & Watch's grounded Oil Panic Release Animation callback
