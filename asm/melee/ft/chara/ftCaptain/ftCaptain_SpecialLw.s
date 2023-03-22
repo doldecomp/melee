@@ -1,8 +1,8 @@
 .include "macros.inc"
 
 .section .text  # 0x80005940 - 0x803B7240
-.global func_800E49DC
-func_800E49DC:
+.global ftCaptain_800E49DC
+ftCaptain_800E49DC:
 /* 800E49DC 000E15BC  7C 08 02 A6 */	mflr r0
 /* 800E49E0 000E15C0  90 01 00 04 */	stw r0, 4(r1)
 /* 800E49E4 000E15C4  94 21 FF F8 */	stwu r1, -8(r1)
@@ -83,8 +83,8 @@ ftCaptain_SpecialHi_StartMotion:
 /* 800E4AF8 000E16D8  7C 08 03 A6 */	mtlr r0
 /* 800E4AFC 000E16DC  4E 80 00 20 */	blr
 
-.global func_800E4B00
-func_800E4B00:
+.global ftCaptain_800E4B00
+ftCaptain_800E4B00:
 /* 800E4B00 000E16E0  7C 08 02 A6 */	mflr r0
 /* 800E4B04 000E16E4  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4B08 000E16E8  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -111,8 +111,8 @@ ftCaptain_800E4B48:
 /* 800E4B58 000E1738  7C 08 03 A6 */	mtlr r0
 /* 800E4B5C 000E173C  4E 80 00 20 */	blr
 
-.global func_800E4B60
-func_800E4B60:
+.global ftCaptain_800E4B60
+ftCaptain_800E4B60:
 /* 800E4B60 000E1740  7C 08 02 A6 */	mflr r0
 /* 800E4B64 000E1744  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4B68 000E1748  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -154,8 +154,8 @@ ftCaptain_800E4BE4:
 /* 800E4BF0 000E17D0  7C 08 03 A6 */	mtlr r0
 /* 800E4BF4 000E17D4  4E 80 00 20 */	blr
 
-.global func_800E4BF8
-func_800E4BF8:
+.global ftCaptain_800E4BF8
+ftCaptain_800E4BF8:
 /* 800E4BF8 000E17D8  7C 08 02 A6 */	mflr r0
 /* 800E4BFC 000E17DC  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4C00 000E17E0  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -258,8 +258,8 @@ ftCaptain_SpecialAirHi_StartMotion:
 /* 800E4D74 000E1954  7C 08 03 A6 */	mtlr r0
 /* 800E4D78 000E1958  4E 80 00 20 */	blr
 
-.global func_800E4D7C
-func_800E4D7C:
+.global ftCaptain_800E4D7C
+ftCaptain_800E4D7C:
 /* 800E4D7C 000E195C  7C 08 02 A6 */	mflr r0
 /* 800E4D80 000E1960  38 80 00 00 */	li r4, 0
 /* 800E4D84 000E1964  90 01 00 04 */	stw r0, 4(r1)
@@ -304,8 +304,8 @@ ftCaptain_800E4E00:
 /* 800E4E14 000E19F4  7C 08 03 A6 */	mtlr r0
 /* 800E4E18 000E19F8  4E 80 00 20 */	blr
 
-.global func_800E4E1C
-func_800E4E1C:
+.global ftCaptain_800E4E1C
+ftCaptain_800E4E1C:
 /* 800E4E1C 000E19FC  7C 08 02 A6 */	mflr r0
 /* 800E4E20 000E1A00  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4E24 000E1A04  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -362,8 +362,8 @@ ftCaptain_800E4ECC:
 /* 800E4EE0 000E1AC0  7C 08 03 A6 */	mtlr r0
 /* 800E4EE4 000E1AC4  4E 80 00 20 */	blr
 
-.global func_800E4EE8
-func_800E4EE8:
+.global ftCaptain_800E4EE8
+ftCaptain_800E4EE8:
 /* 800E4EE8 000E1AC8  7C 08 02 A6 */	mflr r0
 /* 800E4EEC 000E1ACC  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4EF0 000E1AD0  94 21 FF D0 */	stwu r1, -0x30(r1)
@@ -390,8 +390,8 @@ ftCaptain_800E4F30:
 /* 800E4F40 000E1B20  7C 08 03 A6 */	mtlr r0
 /* 800E4F44 000E1B24  4E 80 00 20 */	blr
 
-.global func_800E4F48
-func_800E4F48:
+.global ftCaptain_800E4F48
+ftCaptain_800E4F48:
 /* 800E4F48 000E1B28  7C 08 02 A6 */	mflr r0
 /* 800E4F4C 000E1B2C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4F50 000E1B30  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -432,8 +432,8 @@ ftCaptain_800E4FC8:
 /* 800E4FD4 000E1BB4  7C 08 03 A6 */	mtlr r0
 /* 800E4FD8 000E1BB8  4E 80 00 20 */	blr
 
-.global func_800E4FDC
-func_800E4FDC:
+.global ftCaptain_800E4FDC
+ftCaptain_800E4FDC:
 /* 800E4FDC 000E1BBC  7C 08 02 A6 */	mflr r0
 /* 800E4FE0 000E1BC0  90 01 00 04 */	stw r0, 4(r1)
 /* 800E4FE4 000E1BC4  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -499,8 +499,8 @@ ftCaptain_800E5064:
 /* 800E50D0 000E1CB0  7C 08 03 A6 */	mtlr r0
 /* 800E50D4 000E1CB4  4E 80 00 20 */	blr
 
-.global func_800E50D8
-func_800E50D8:
+.global ftCaptain_800E50D8
+ftCaptain_800E50D8:
 /* 800E50D8 000E1CB8  7C 08 02 A6 */	mflr r0
 /* 800E50DC 000E1CBC  90 01 00 04 */	stw r0, 4(r1)
 /* 800E50E0 000E1CC0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -509,7 +509,7 @@ func_800E50D8:
 /* 800E50EC 000E1CCC  80 1F 00 E0 */	lwz r0, 0xe0(r31)
 /* 800E50F0 000E1CD0  2C 00 00 01 */	cmpwi r0, 1
 /* 800E50F4 000E1CD4  40 82 00 0C */	bne ftCaptain_800E5100
-/* 800E50F8 000E1CD8  4B FF FC 85 */	bl func_800E4D7C
+/* 800E50F8 000E1CD8  4B FF FC 85 */	bl ftCaptain_800E4D7C
 /* 800E50FC 000E1CDC  48 00 00 18 */	b ftCaptain_800E5114
 ftCaptain_800E5100:
 /* 800E5100 000E1CE0  4B F9 D6 09 */	bl func_80082708
@@ -580,8 +580,8 @@ ftCaptain_800E51D8:
 /* 800E51F0 000E1DD0  7C 08 03 A6 */	mtlr r0
 /* 800E51F4 000E1DD4  4E 80 00 20 */	blr
 
-.global func_800E51F8
-func_800E51F8:
+.global ftCaptain_800E51F8
+ftCaptain_800E51F8:
 /* 800E51F8 000E1DD8  7C 08 02 A6 */	mflr r0
 /* 800E51FC 000E1DDC  90 01 00 04 */	stw r0, 4(r1)
 /* 800E5200 000E1DE0  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -591,7 +591,7 @@ func_800E51F8:
 /* 800E5210 000E1DF0  2C 03 00 00 */	cmpwi r3, 0
 /* 800E5214 000E1DF4  40 82 00 0C */	bne ftCaptain_800E5220
 /* 800E5218 000E1DF8  7F E3 FB 78 */	mr r3, r31
-/* 800E521C 000E1DFC  48 00 00 51 */	bl func_800E526C
+/* 800E521C 000E1DFC  48 00 00 51 */	bl ftCaptain_800E526C
 ftCaptain_800E5220:
 /* 800E5220 000E1E00  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 800E5224 000E1E04  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -599,16 +599,16 @@ ftCaptain_800E5220:
 /* 800E522C 000E1E0C  7C 08 03 A6 */	mtlr r0
 /* 800E5230 000E1E10  4E 80 00 20 */	blr
 
-.global func_800E5234
-func_800E5234:
+.global ftCaptain_800E5234
+ftCaptain_800E5234:
 /* 800E5234 000E1E14  4E 80 00 20 */	blr
 
-.global func_800E5238
-func_800E5238:
+.global ftCaptain_800E5238
+ftCaptain_800E5238:
 /* 800E5238 000E1E18  4E 80 00 20 */	blr
 
-.global func_800E523C
-func_800E523C:
+.global ftCaptain_800E523C
+ftCaptain_800E523C:
 /* 800E523C 000E1E1C  7C 08 02 A6 */	mflr r0
 /* 800E5240 000E1E20  90 01 00 04 */	stw r0, 4(r1)
 /* 800E5244 000E1E24  94 21 FF F8 */	stwu r1, -8(r1)
@@ -623,8 +623,8 @@ ftCaptain_800E525C:
 /* 800E5264 000E1E44  7C 08 03 A6 */	mtlr r0
 /* 800E5268 000E1E48  4E 80 00 20 */	blr
 
-.global func_800E526C
-func_800E526C:
+.global ftCaptain_800E526C
+ftCaptain_800E526C:
 /* 800E526C 000E1E4C  7C 08 02 A6 */	mflr r0
 /* 800E5270 000E1E50  3C 80 00 08 */	lis r4, 0x00080002@ha
 /* 800E5274 000E1E54  90 01 00 04 */	stw r0, 4(r1)
@@ -667,8 +667,8 @@ func_800E526C:
 /* 800E5308 000E1EE8  7C 08 03 A6 */	mtlr r0
 /* 800E530C 000E1EEC  4E 80 00 20 */	blr
 
-.global func_800E5310
-func_800E5310:
+.global ftCaptain_800E5310
+ftCaptain_800E5310:
 /* 800E5310 000E1EF0  7C 08 02 A6 */	mflr r0
 /* 800E5314 000E1EF4  90 01 00 04 */	stw r0, 4(r1)
 /* 800E5318 000E1EF8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -701,12 +701,12 @@ ftCaptain_800E536C:
 /* 800E537C 000E1F5C  7C 08 03 A6 */	mtlr r0
 /* 800E5380 000E1F60  4E 80 00 20 */	blr
 
-.global func_800E5384
-func_800E5384:
+.global ftCaptain_800E5384
+ftCaptain_800E5384:
 /* 800E5384 000E1F64  4E 80 00 20 */	blr
 
-.global func_800E5388
-func_800E5388:
+.global ftCaptain_800E5388
+ftCaptain_800E5388:
 /* 800E5388 000E1F68  7C 08 02 A6 */	mflr r0
 /* 800E538C 000E1F6C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E5390 000E1F70  94 21 FF A8 */	stwu r1, -0x58(r1)
@@ -787,8 +787,8 @@ ftCaptain_800E54A0:
 /* 800E54B0 000E2090  7C 08 03 A6 */	mtlr r0
 /* 800E54B4 000E2094  4E 80 00 20 */	blr
 
-.global func_800E54B8
-func_800E54B8:
+.global ftCaptain_800E54B8
+ftCaptain_800E54B8:
 /* 800E54B8 000E2098  7C 08 02 A6 */	mflr r0
 /* 800E54BC 000E209C  90 01 00 04 */	stw r0, 4(r1)
 /* 800E54C0 000E20A0  94 21 FF E0 */	stwu r1, -0x20(r1)
