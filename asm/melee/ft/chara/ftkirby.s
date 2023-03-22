@@ -712,7 +712,7 @@ ftKirby_800EF150:
 /* 800EF168 000EBD48  3B 18 00 10 */	addi r24, r24, 0x10
 /* 800EF16C 000EBD4C  38 61 00 28 */	addi r3, r1, 0x28
 /* 800EF170 000EBD50  38 81 00 24 */	addi r4, r1, 0x24
-/* 800EF174 000EBD54  4B F7 EC 8D */	bl Fighter_GetNextJointInTree
+/* 800EF174 000EBD54  4B F7 EC 8D */	bl ftAnim_GetNextJointInTree
 ftKirby_800EF178:
 /* 800EF178 000EBD58  80 81 00 28 */	lwz r4, 0x28(r1)
 /* 800EF17C 000EBD5C  28 04 00 00 */	cmplwi r4, 0
@@ -843,7 +843,7 @@ ftKirby_800EF320:
 /* 800EF324 000EBF04  3B 18 00 10 */	addi r24, r24, 0x10
 /* 800EF328 000EBF08  38 61 00 28 */	addi r3, r1, 0x28
 /* 800EF32C 000EBF0C  38 81 00 24 */	addi r4, r1, 0x24
-/* 800EF330 000EBF10  4B F7 EA D1 */	bl Fighter_GetNextJointInTree
+/* 800EF330 000EBF10  4B F7 EA D1 */	bl ftAnim_GetNextJointInTree
 ftKirby_800EF334:
 /* 800EF334 000EBF14  80 A1 00 28 */	lwz r5, 0x28(r1)
 /* 800EF338 000EBF18  28 05 00 00 */	cmplwi r5, 0
@@ -954,7 +954,7 @@ ftKirby_800EF490:
 /* 800EF4A8 000EC088  3B 39 00 10 */	addi r25, r25, 0x10
 /* 800EF4AC 000EC08C  38 61 00 24 */	addi r3, r1, 0x24
 /* 800EF4B0 000EC090  38 81 00 20 */	addi r4, r1, 0x20
-/* 800EF4B4 000EC094  4B F7 E9 4D */	bl Fighter_GetNextJointInTree
+/* 800EF4B4 000EC094  4B F7 E9 4D */	bl ftAnim_GetNextJointInTree
 ftKirby_800EF4B8:
 /* 800EF4B8 000EC098  80 81 00 24 */	lwz r4, 0x24(r1)
 /* 800EF4BC 000EC09C  28 04 00 00 */	cmplwi r4, 0
@@ -1080,7 +1080,7 @@ ftKirby_800EF654:
 /* 800EF654 000EC234  3B 39 00 10 */	addi r25, r25, 0x10
 /* 800EF658 000EC238  38 61 00 24 */	addi r3, r1, 0x24
 /* 800EF65C 000EC23C  38 81 00 20 */	addi r4, r1, 0x20
-/* 800EF660 000EC240  4B F7 E7 A1 */	bl Fighter_GetNextJointInTree
+/* 800EF660 000EC240  4B F7 E7 A1 */	bl ftAnim_GetNextJointInTree
 ftKirby_800EF664:
 /* 800EF664 000EC244  80 A1 00 24 */	lwz r5, 0x24(r1)
 /* 800EF668 000EC248  28 05 00 00 */	cmplwi r5, 0

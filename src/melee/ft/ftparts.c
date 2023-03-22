@@ -2573,7 +2573,7 @@ asm void func_800753D4(Fighter*, s32, unk_t)
 lbl_80075418:
 /* 80075418 00071FF8  38 61 00 6C */	addi r3, r1, 0x6c
 /* 8007541C 00071FFC  38 81 00 24 */	addi r4, r1, 0x24
-/* 80075420 00072000  4B FF 89 E1 */	bl Fighter_GetNextJointInTree
+/* 80075420 00072000  4B FF 89 E1 */	bl ftAnim_GetNextJointInTree
 /* 80075424 00072004  3B DE 00 01 */	addi r30, r30, 1
 lbl_80075428:
 /* 80075428 00072008  88 1D 00 03 */	lbz r0, 3(r29)

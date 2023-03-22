@@ -27,7 +27,7 @@ void ftAnim_80070E74(HSD_GObj*);
 void ftAnim_80070F28(HSD_GObj*);
 void ftAnim_80070FB4(HSD_GObj*, s32, s32);
 bool ftAnim_80070FD0(Fighter*);
-void Fighter_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);
+void ftAnim_GetNextJointInTree(HSD_Joint** pjoint, s32* pdepth);
 void ftAnim_8006FA58(Fighter* fp, int, int item);
 void ftAnim_80070010(Fighter* fp, int, int item, f32, f32);
 void ftAnim_8006FF74(Fighter* fp, int);

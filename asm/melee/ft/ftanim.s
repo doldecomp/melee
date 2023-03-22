@@ -153,8 +153,8 @@ ftAnim_8006DDD8:
 /* 8006DDF8 0006A9D8  7C 08 03 A6 */	mtlr r0
 /* 8006DDFC 0006A9DC  4E 80 00 20 */	blr
 
-.global Fighter_GetNextJointInTree
-Fighter_GetNextJointInTree:
+.global ftAnim_GetNextJointInTree
+ftAnim_GetNextJointInTree:
 /* 8006DE00 0006A9E0  7C 08 02 A6 */	mflr r0
 /* 8006DE04 0006A9E4  90 01 00 04 */	stw r0, 4(r1)
 /* 8006DE08 0006A9E8  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -1161,7 +1161,7 @@ ftAnim_8006EBA4:
 /* 8006EBB4 0006B794  7C 7F 1B 78 */	mr r31, r3
 /* 8006EBB8 0006B798  4B FF FD FD */	bl ftAnim_8006E9B4
 /* 8006EBBC 0006B79C  7F E3 FB 78 */	mr r3, r31
-/* 8006EBC0 0006B7A0  48 00 46 81 */	bl func_80073240
+/* 8006EBC0 0006B7A0  48 00 46 81 */	bl ftAction_80073240
 /* 8006EBC4 0006B7A4  7F E3 FB 78 */	mr r3, r31
 /* 8006EBC8 0006B7A8  48 00 1B E9 */	bl ftAnim_800707B0
 /* 8006EBCC 0006B7AC  7F E3 FB 78 */	mr r3, r31
@@ -2198,7 +2198,7 @@ ftAnim_8006FA18:
 /* 8006FA1C 0006C5FC  3B FF 00 10 */	addi r31, r31, 0x10
 /* 8006FA20 0006C600  38 61 00 10 */	addi r3, r1, 0x10
 /* 8006FA24 0006C604  38 81 00 14 */	addi r4, r1, 0x14
-/* 8006FA28 0006C608  4B FF E3 D9 */	bl Fighter_GetNextJointInTree
+/* 8006FA28 0006C608  4B FF E3 D9 */	bl ftAnim_GetNextJointInTree
 ftAnim_8006FA2C:
 /* 8006FA2C 0006C60C  80 01 00 10 */	lwz r0, 0x10(r1)
 /* 8006FA30 0006C610  28 00 00 00 */	cmplwi r0, 0
@@ -2287,7 +2287,7 @@ ftAnim_8006FB4C:
 /* 8006FB50 0006C730  3B BD 00 10 */	addi r29, r29, 0x10
 /* 8006FB54 0006C734  38 61 00 10 */	addi r3, r1, 0x10
 /* 8006FB58 0006C738  38 81 00 14 */	addi r4, r1, 0x14
-/* 8006FB5C 0006C73C  4B FF E2 A5 */	bl Fighter_GetNextJointInTree
+/* 8006FB5C 0006C73C  4B FF E2 A5 */	bl ftAnim_GetNextJointInTree
 ftAnim_8006FB60:
 /* 8006FB60 0006C740  80 01 00 10 */	lwz r0, 0x10(r1)
 /* 8006FB64 0006C744  28 00 00 00 */	cmplwi r0, 0
@@ -2385,7 +2385,7 @@ ftAnim_8006FCA8:
 /* 8006FCAC 0006C88C  3B BD 00 10 */	addi r29, r29, 0x10
 /* 8006FCB0 0006C890  38 61 00 10 */	addi r3, r1, 0x10
 /* 8006FCB4 0006C894  38 81 00 14 */	addi r4, r1, 0x14
-/* 8006FCB8 0006C898  4B FF E1 49 */	bl Fighter_GetNextJointInTree
+/* 8006FCB8 0006C898  4B FF E1 49 */	bl ftAnim_GetNextJointInTree
 ftAnim_8006FCBC:
 /* 8006FCBC 0006C89C  80 01 00 10 */	lwz r0, 0x10(r1)
 /* 8006FCC0 0006C8A0  28 00 00 00 */	cmplwi r0, 0
@@ -2687,7 +2687,7 @@ ftAnim_800700C4:
 /* 800700C8 0006CCA8  3B FF 00 10 */	addi r31, r31, 0x10
 /* 800700CC 0006CCAC  38 61 00 18 */	addi r3, r1, 0x18
 /* 800700D0 0006CCB0  38 81 00 1C */	addi r4, r1, 0x1c
-/* 800700D4 0006CCB4  4B FF DD 2D */	bl Fighter_GetNextJointInTree
+/* 800700D4 0006CCB4  4B FF DD 2D */	bl ftAnim_GetNextJointInTree
 ftAnim_800700D8:
 /* 800700D8 0006CCB8  80 01 00 18 */	lwz r0, 0x18(r1)
 /* 800700DC 0006CCBC  28 00 00 00 */	cmplwi r0, 0
@@ -2757,7 +2757,7 @@ ftAnim_800701BC:
 /* 800701C0 0006CDA0  3B FF 00 10 */	addi r31, r31, 0x10
 /* 800701C4 0006CDA4  38 61 00 18 */	addi r3, r1, 0x18
 /* 800701C8 0006CDA8  38 81 00 1C */	addi r4, r1, 0x1c
-/* 800701CC 0006CDAC  4B FF DC 35 */	bl Fighter_GetNextJointInTree
+/* 800701CC 0006CDAC  4B FF DC 35 */	bl ftAnim_GetNextJointInTree
 ftAnim_800701D0:
 /* 800701D0 0006CDB0  80 01 00 18 */	lwz r0, 0x18(r1)
 /* 800701D4 0006CDB4  28 00 00 00 */	cmplwi r0, 0
@@ -3660,7 +3660,7 @@ ftAnim_80070E30:
 /* 80070E34 0006DA14  3B DE 00 10 */	addi r30, r30, 0x10
 /* 80070E38 0006DA18  38 61 00 14 */	addi r3, r1, 0x14
 /* 80070E3C 0006DA1C  38 81 00 18 */	addi r4, r1, 0x18
-/* 80070E40 0006DA20  4B FF CF C1 */	bl Fighter_GetNextJointInTree
+/* 80070E40 0006DA20  4B FF CF C1 */	bl ftAnim_GetNextJointInTree
 ftAnim_80070E44:
 /* 80070E44 0006DA24  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 80070E48 0006DA28  28 00 00 00 */	cmplwi r0, 0

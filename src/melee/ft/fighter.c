@@ -1335,12 +1335,12 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                     }
                 }
                 if ((arg2 & FtStateChange_UpdateCmd) != 0) {
-                    func_8007349C(gobj);
+                    ftAction_8007349C(gobj);
                 } else if (arg8) {
-                    func_80073354(gobj);
+                    ftAction_80073354(gobj);
                 } else {
                     func_800C0408(gobj);
-                    func_80073240(gobj);
+                    ftAction_80073240(gobj);
                 }
             } else {
                 fp->anim_id = -1;
