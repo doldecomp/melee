@@ -18,7 +18,7 @@ void ftParts_80074E58(Fighter*);
 /// @returns A bone index.
 s32 ftParts_8007500C(Fighter*, s32);
 
-void Fighter_JObjSetRotation(HSD_JObj*, Quaternion*);
+void ftParts_JObjSetRotation(HSD_JObj*, Quaternion*);
 void ftParts_8007592C(Fighter*, s32, f32);
 void ftParts_80075AF0(Fighter*, s32, f32);
 void ftParts_80075CB4(Fighter*, s32, f32);
@@ -30,15 +30,15 @@ void ftParts_80075650(HSD_GObj* gobj, HSD_JObj*, u32*);
 void ftParts_8007487C(unk_t item, u32*, u8 costume_id, u32*, u32*);
 void ftParts_80074CA0(u32*, s32, u32*);
 void ftParts_80074D7C(u32*, s32, u32*);
-void Fighter_SetupParts(HSD_GObj* fighter_obj);
+void ftParts_SetupParts(HSD_GObj* fighter_obj);
 
 /// @returns Blend frames.
 f32 ftParts_80075E78(Fighter*, bool);
 
-void Fighter_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx);
+void ftParts_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx);
 void ftParts_8007462C(void);
 void ftParts_8007482C(void);
-s32 Fighter_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent);
+s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent);
 void ftParts_80074B6C(void);
 void ftParts_80073830(void);
 void ftParts_80075028(void);
@@ -48,7 +48,7 @@ void ftParts_80075304(void);
 void ftParts_800755E8(void);
 void ftParts_800739B8(void);
 void ftParts_80073CA8(void);
-void Fighter_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
+void ftParts_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
                       u32* dobj_index, u32 tree_depth);
 

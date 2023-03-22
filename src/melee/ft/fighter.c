@@ -848,7 +848,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
 
     func_80085B10(fp);
     ftParts_80074E58(fp);
-    Fighter_SetupParts(gobj);
+    ftParts_SetupParts(gobj);
     ftAnim_80070308(gobj);
     func_800C884C(gobj);
 
@@ -1297,7 +1297,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                     HSD_JObjSetTranslate(fp->ft_bones[bone_index].x0_jobj,
                                          &translation);
                     HSD_JObjGetRotation(temp_joint, &quat);
-                    Fighter_JObjSetRotation(fp->ft_bones[bone_index].x0_jobj,
+                    ftParts_JObjSetRotation(fp->ft_bones[bone_index].x0_jobj,
                                             &quat);
                 }
 

@@ -30,13 +30,13 @@ extern HSD_MObjInfo ftMObj;
 void ftParts_80074ACC(void);
 u32 ftParts_8007506C(s32 ftkind, u32 part);
 
-void Fighter_JObjInfoInit(void);
-void Fighter_IntpJObjInfoInit(void);
-void Fighter_PObjInfoInit(void);
+void ftParts_JObjInfoInit(void);
+void ftParts_IntpJObjInfoInit(void);
+void ftParts_PObjInfoInit(void);
 
-HSD_JObjInfo ftJObj = { Fighter_JObjInfoInit };
-HSD_JObjInfo ftIntpJObj = { Fighter_IntpJObjInfoInit };
-HSD_PObjInfo ftPObj = { Fighter_PObjInfoInit };
+HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };
+HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };
+HSD_PObjInfo ftPObj = { ftParts_PObjInfoInit };
 
 // .data
 static char lbl_803C09E0[] = "fighter_class_library";
@@ -120,7 +120,7 @@ static inline f32 _HSD_JObjGetScaleZ(HSD_JObj* jobj)
     return jobj->scale.z;
 }
 
-void Fighter_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
+void ftParts_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
 {
     Fighter* fighter = (Fighter*) lbl_804D7814->user_data;
 
@@ -141,12 +141,12 @@ void Fighter_JObjMakePositionMtx(HSD_JObj* jobj, Mtx mtx, Mtx rmtx)
     }
 }
 
-void Fighter_JObjInfoInit(void)
+void ftParts_JObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftJObj), HSD_CLASS_INFO(&hsdJObj),
                      lbl_803C09E0, lbl_804D3A40, sizeof(HSD_JObjInfo),
                      sizeof(HSD_JObj));
-    HSD_JOBJ_INFO(&ftJObj)->make_pmtx = Fighter_JObjMakePositionMtx;
+    HSD_JOBJ_INFO(&ftJObj)->make_pmtx = ftParts_JObjMakePositionMtx;
 }
 
 #ifdef MWERKS_GEKKO
@@ -180,7 +180,7 @@ void ftParts_80073758(HSD_JObj* arg0)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm s32 Fighter_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint,
+asm s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint,
                              HSD_JObj* parent)
 { // clang-format off
     nofralloc
@@ -211,19 +211,19 @@ asm s32 Fighter_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint,
 
 #else
 
-s32 Fighter_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
+s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-void Fighter_IntpJObjInfoInit(void)
+void ftParts_IntpJObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftIntpJObj), HSD_CLASS_INFO(&hsdJObj),
                      lbl_803C09E0, lbl_803C09F8, sizeof(HSD_JObjInfo),
                      sizeof(HSD_JObj));
-    HSD_JOBJ_INFO(&ftIntpJObj)->load = Fighter_IntpJObjLoad;
+    HSD_JOBJ_INFO(&ftIntpJObj)->load = ftParts_IntpJObjLoad;
 }
 
 #ifdef MWERKS_GEKKO
@@ -851,7 +851,7 @@ void ftParts_80073CA8(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void Fighter_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
+asm void ftParts_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
                               u32 rendermode)
 { // clang-format off
     nofralloc
@@ -906,13 +906,13 @@ lbl_800740D4:
 
 #endif
 
-void Fighter_PObjInfoInit(void)
+void ftParts_PObjInfoInit(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&ftPObj), HSD_CLASS_INFO(&hsdPObj),
                      lbl_803C09E0, lbl_804D3A50, sizeof(HSD_PObjInfo),
                      sizeof(HSD_PObj));
     HSD_POBJ_INFO(&ftPObj)->load = lbRefract_PObjLoad;
-    HSD_POBJ_INFO(&ftPObj)->setup_mtx = Fighter_PObjSetupMtx;
+    HSD_POBJ_INFO(&ftPObj)->setup_mtx = ftParts_PObjSetupMtx;
 }
 
 #ifdef MWERKS_GEKKO
@@ -1156,7 +1156,7 @@ lbl_800743BC:
 
 #endif
 
-void Fighter_SetupParts(HSD_GObj* fighter_obj)
+void ftParts_SetupParts(HSD_GObj* fighter_obj)
 {
     HSD_JObj* jobj = fighter_obj->hsd_obj;
     Fighter* fighter = (Fighter*) fighter_obj->user_data;
@@ -2928,7 +2928,7 @@ void ftParts_80075650(HSD_GObj* gobj, HSD_JObj* arg1, u32* arg2)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void Fighter_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
+asm void ftParts_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 { // clang-format off
     nofralloc
 /* 8007584C 0007242C  7C 08 02 A6 */	mflr r0
@@ -2997,7 +2997,7 @@ lbl_80075908:
 
 #else
 
-void Fighter_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
+void ftParts_JObjSetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
     NOT_IMPLEMENTED;
 }
