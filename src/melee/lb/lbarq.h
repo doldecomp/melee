@@ -3,6 +3,6 @@
 
 #include <platform.h>
 
-void func_80014D2C(void);
+void lbArq_80014D2C(void);
 
 #endif

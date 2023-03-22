@@ -182,7 +182,7 @@ int main(void)
     func_8001564C();
     func_80015F3C();
     func_80018F68();
-    func_80014D2C();
+    lbArq_80014D2C();
     func_8001C5BC();
     func_8001D21C();
     func_8001E290();
