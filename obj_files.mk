@@ -835,13 +835,13 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/baselib_shared_data_002.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/db/db_data.s.o\
+    $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_40FF.s.o\
+
+TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3A94.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3AA7.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B27.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B2B.s.o\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B2E.s.o\
     $(BUILD_DIR)/src/sysdolphin/baselib/hsd_3B33.c.o\
-
-TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/sysdolphin/baselib/hsd_3B34.s.o\
