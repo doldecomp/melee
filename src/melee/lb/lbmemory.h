@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-void func_8001564C(void);
-void func_800154BC(void*, void*);
+void lbMemory_8001564C(void);
+void lbMemory_800154BC(void*, void*);
 
 #endif

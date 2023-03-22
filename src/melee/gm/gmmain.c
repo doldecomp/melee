@@ -179,7 +179,7 @@ int main(void)
     HSD_VISetUserPostRetraceCallback(&gmMain_8015FDA0);
     HSD_VISetUserGXDrawDoneCallback(&lbl_803762C4);
     HSD_VISetBlack(0);
-    func_8001564C();
+    lbMemory_8001564C();
     func_80015F3C();
     func_80018F68();
     lbArq_80014D2C();
@@ -212,7 +212,7 @@ int main(void)
     {
         u32 free_aram_start;
         u32 free_aram_end;
-        func_800154BC(&free_aram_start, &free_aram_end);
+        lbMemory_800154BC(&free_aram_start, &free_aram_end);
         OSReport("# ARAM Free Size %d MB\n",
                  (free_aram_end - free_aram_start) / (1024 * 1024));
     }
