@@ -79,7 +79,8 @@ s32 func_80087944(HSD_GObj* gobj)
 
 s32 func_80087988(HSD_GObj* gobj)
 {
-    if ((ftGetParasolStatus(gobj) == 4) || (ftGetParasolStatus(gobj) == 5))
+    if ((ftCommon_GetParasolStatus(gobj) == 4) ||
+        (ftCommon_GetParasolStatus(gobj) == 5))
         return true;
 
     return false;

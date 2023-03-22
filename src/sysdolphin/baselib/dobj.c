@@ -243,7 +243,8 @@ void HSD_DObjSetDefaultClass(HSD_ClassInfo* info)
         if (!hsdIsDescendantOf(info, &hsdDObj)) {
             // The line number here is totally made up, this function is
             // removed in practice but the string isn't
-            __assert(lbl_804D5C78, 498, "hsdIsDescendantOf(info, &hsdDObj)");
+            __assert(lbl_804D5C78, __LINE__,
+                     "hsdIsDescendantOf(info, &hsdDObj)");
         }
     }
     default_class = info;

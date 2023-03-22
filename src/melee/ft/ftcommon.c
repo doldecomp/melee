@@ -1272,7 +1272,15 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
     f32 val;
 
     Fighter* fp = gobj->user_data;
-    HSD_ASSERT(0x4FC, ftGetParasolStatus(gobj) != FtParasol_None);
+
+#ifdef MUST_MATCH
+#define ftGetParasolStatus ftCommon_GetParasolStatus
+    HSD_ASSERT(1276, ftGetParasolStatus(gobj) != FtParasol_None);
+#undef ftGetParasolStatus
+#else
+    HSD_ASSERT(__LINE__, ftCommon_GetParasolStatus(gobj) != FtParasol_None);
+#endif
+
     if (div == 0) {
         val = fp->x89C_frameSpeedMul;
     } else if (itGetKind(fp->x1974_heldItem) == It_Kind_Parasol) {
@@ -1289,7 +1297,8 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
     }
 }
 
-s32 ftGetParasolStatus(HSD_GObj* gobj)
+/// @was{ftGetParasolStatus}
+s32 ftCommon_GetParasolStatus(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x1974_heldItem != NULL &&
