@@ -694,8 +694,8 @@ static inline void What(HSD_GObj* item_gobj,
             Item_80268E40(ip, itemStateDesc);
         }
         HSD_JObjAnimAll(item_jobj2);
-        func_80279BE0(item_gobj);
-        func_802799E4(item_gobj);
+        it_80279BE0(item_gobj);
+        it_802799E4(item_gobj);
         return;
     }
     HSD_JObjRemoveAnimAll(item_jobj2);
@@ -718,8 +718,8 @@ void it_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
     vec.z = 0.0f;
     vec.y = 0.0f;
     vec.x = 0.0f;
-    func_8027429C(item_gobj, &vec);
-    func_802742F4(item_gobj, arg1, arg2);
+    it_8027429C(item_gobj, &vec);
+    it_802742F4(item_gobj, arg1, arg2);
 
     {
         ItemStateDesc* temp_stateDesc;
@@ -748,8 +748,8 @@ void it_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
             }
 
             HSD_JObjAnimAll(jobj0);
-            func_80279BE0(item_gobj);
-            func_802799E4(item_gobj);
+            it_80279BE0(item_gobj);
+            it_802799E4(item_gobj);
             return;
         }
     }
@@ -769,19 +769,19 @@ void it_8026BAE8(HSD_GObj* item_gobj, f32 scl_mul)
     item_jobj = item_gobj->hsd_obj;
     scl = scl_mul * ip->xCC_item_attr->x60_scale;
     ip->scl = scl;
-    func_80272F7C(item_jobj, scl);
+    it_80272F7C(item_jobj, scl);
 }
 
 /// Clear JObj flags on item model
 void it_8026BB20(HSD_GObj* item_gobj)
 {
-    func_80272A18(item_gobj->hsd_obj);
+    it_80272A18(item_gobj->hsd_obj);
 }
 
 /// Set JObj flags on item model
 void it_8026BB44(HSD_GObj* item_gobj)
 {
-    func_80272A3C(item_gobj->hsd_obj);
+    it_80272A3C(item_gobj->hsd_obj);
 }
 
 extern void ftLib_80086990(HSD_GObj*, Vec3*);
@@ -1016,19 +1016,19 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
 
     switch (bobomb_id) {
     case 1:
-        if (func_8026D324(true)) {
-            bobOmbGObj = func_80286088(bobOmbRain->x0);
+        if (it_8026D324(true)) {
+            bobOmbGObj = it_80286088(bobOmbRain->x0);
         }
 
         break;
 
     case 20:
-        bobOmbGObj = func_80290938(bobOmbRain->x4);
+        bobOmbGObj = it_80290938(bobOmbRain->x4);
         break;
 
     case 8:
-        bobOmbGObj = func_80283AE4(bobOmbRain->x0, &bobOmbRain->x8_vec,
-                                   bobOmbRain->x18);
+        bobOmbGObj =
+            it_80283AE4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
         if (bobOmbGObj != NULL) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1039,81 +1039,81 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
             kind0 = ip->kind;
             switch (kind0) {
             case It_Kind_Heart:
-                func_80283BD4(bobOmbGObj);
+                it_80283BD4(bobOmbGObj);
                 break;
             case It_Kind_Tomato:
-                func_8028428C(bobOmbGObj);
+                it_8028428C(bobOmbGObj);
                 break;
             }
         }
         break;
 
     case 9:
-        bobOmbGObj = func_802841B4(bobOmbRain->x0, &bobOmbRain->x8_vec,
-                                   bobOmbRain->x18);
+        bobOmbGObj =
+            it_802841B4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
         if (bobOmbGObj != NULL) {
             ip = GetItemData(bobOmbGObj);
             kind1 = ip->kind;
 
             switch (kind1) {
             case It_Kind_Heart:
-                func_80283BD4(bobOmbGObj);
+                it_80283BD4(bobOmbGObj);
                 break;
 
             case It_Kind_Tomato:
-                func_8028428C(bobOmbGObj);
+                it_8028428C(bobOmbGObj);
                 break;
             }
         }
         break;
 
     case 4:
-        if (func_8026D324(4)) {
-            bobOmbGObj = func_802896CC(&bobOmbRain->x8_vec);
+        if (it_8026D324(4)) {
+            bobOmbGObj = it_802896CC(&bobOmbRain->x8_vec);
             if (bobOmbGObj != NULL) {
-                func_80274F10(bobOmbGObj);
+                it_80274F10(bobOmbGObj);
             }
         }
         break;
 
     case 12:
-        bobOmbGObj = func_80284D54(&bobOmbRain->x8_vec);
+        bobOmbGObj = it_80284D54(&bobOmbRain->x8_vec);
         if (bobOmbGObj != NULL) {
-            func_80274F10(bobOmbGObj);
+            it_80274F10(bobOmbGObj);
         }
         break;
 
     case 21:
-        bobOmbGObj = func_80291BE0(&bobOmbRain->x8_vec);
+        bobOmbGObj = it_80291BE0(&bobOmbRain->x8_vec);
         if (bobOmbGObj != NULL) {
-            func_80274F10(bobOmbGObj);
+            it_80274F10(bobOmbGObj);
         }
 
         break;
 
     case 25:
-        bobOmbGObj = func_80292D48(&bobOmbRain->x8_vec);
+        bobOmbGObj = it_80292D48(&bobOmbRain->x8_vec);
         if (bobOmbGObj != NULL) {
-            func_80274F10(bobOmbGObj);
+            it_80274F10(bobOmbGObj);
         }
         break;
 
     case 31:
-        bobOmbGObj = func_80294DC0(&bobOmbRain->x8_vec);
+        bobOmbGObj = it_80294DC0(&bobOmbRain->x8_vec);
         if (bobOmbGObj != NULL) {
-            func_80274F10(bobOmbGObj);
+            it_80274F10(bobOmbGObj);
         }
         break;
 
     case 11:
-        bobOmbGObj = func_80284854(&bobOmbRain->x8_vec);
+        bobOmbGObj = it_80284854(&bobOmbRain->x8_vec);
         if (bobOmbGObj != NULL) {
-            func_80274F10(bobOmbGObj);
+            it_80274F10(bobOmbGObj);
         }
         break;
 
     case 6:
-        func_8027D670(&bobOmbRain->x8_vec);
+        it_8027D670(&bobOmbRain->x8_vec);
 
     default:
         bobOmbGObj = NULL;
@@ -1146,7 +1146,7 @@ CollData* it_8026C100(HSD_GObj* item_gobj) // Get item's CollData pointer
 {
     CollData* collDataPtr = NULL;
 
-    switch (func_80272D40(item_gobj)) {
+    switch (it_80272D40(item_gobj)) {
     case 0:
         collDataPtr = ftLib_80086984(item_gobj);
         break;
@@ -1165,18 +1165,18 @@ void it_8026C16C(HSD_GObj* item_gobj, bool is_headless)
     Item* ip = GET_ITEM(item_gobj);
 
     if (ip->xD4C <= 0) {
-        func_802725D4(item_gobj);
+        it_802725D4(item_gobj);
     } else if (is_headless) {
-        func_80272784(item_gobj);
+        it_80272784(item_gobj);
     } else {
-        func_802725D4(item_gobj);
+        it_802725D4(item_gobj);
     }
 }
 
 /// Check if item has a hitbox
 void it_8026C1B4(HSD_GObj* item_gobj)
 {
-    func_80275870(item_gobj);
+    it_80275870(item_gobj);
 }
 
 /// Get unknown var from r13 pointer
@@ -1264,20 +1264,20 @@ void it_8026C368(HSD_GObj* item_gobj)
         ItemKind kind = ip->kind;
         switch (kind) {
         case It_Kind_BombHei:
-            func_8027D730(item_gobj);
+            it_8027D730(item_gobj);
             return;
 
         case It_Kind_MSBomb:
-            func_8028FE90(item_gobj);
+            it_8028FE90(item_gobj);
             return;
 
         case It_Kind_Link_Bomb:
         case It_Kind_CLink_Bomb:
-            func_8029D968(item_gobj);
+            it_8029D968(item_gobj);
             return;
 
         case Pokemon_Marumine:
-            func_802D09D0(item_gobj);
+            it_802D09D0(item_gobj);
             return;
 
         default:

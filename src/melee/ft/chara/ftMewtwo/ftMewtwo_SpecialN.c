@@ -125,7 +125,7 @@ static inline void ftMewtwo_SpecialN_RemoveHeldShadowBall(HSD_GObj* gobj)
 
     if (gobj != NULL) {
         if (fp->fv.mt.x2230_shadowHeldGObj != NULL) {
-            func_802C573C(fp->fv.mt.x2230_shadowHeldGObj);
+            it_802C573C(fp->fv.mt.x2230_shadowHeldGObj);
             fp->fv.mt.x2230_shadowHeldGObj = NULL;
         }
         if (gobj != NULL) {
@@ -172,7 +172,7 @@ void ftMewtwo_SpecialN_OnDeath(HSD_GObj* gobj)
 
         if (gobj != NULL) {
             if (fp->fv.mt.x2230_shadowHeldGObj != NULL) {
-                func_802C573C(fp->fv.mt.x2230_shadowHeldGObj);
+                it_802C573C(fp->fv.mt.x2230_shadowHeldGObj);
                 fp->fv.mt.x2230_shadowHeldGObj = NULL;
             }
             if (gobj != NULL) {
@@ -260,9 +260,9 @@ void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
         } else {
             facingDir = M_PI;
         }
-        func_802C53F0(fp->fv.mt.x2230_shadowHeldGObj, &sp38, (f32) facingDir,
-                      (f32) (u32) fp->fv.mt.x2234_shadowBallCharge,
-                      mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES);
+        it_802C53F0(fp->fv.mt.x2230_shadowHeldGObj, &sp38, (f32) facingDir,
+                    (f32) (u32) fp->fv.mt.x2234_shadowBallCharge,
+                    mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES);
         ftMewtwo_SpecialN_SetRecoil(gobj);
         fp->fv.mt.x2234_shadowBallCharge = 0;
         if (gobj != NULL) {
@@ -472,7 +472,7 @@ void ftMewtwo_SpecialNStart_Anim(HSD_GObj* gobj)
         sp2C.x = 0.0f;
         lb_8000B1CC(fp->ft_bones[0x23].x0_jobj, &sp2C, &sp20);
         sp20.z = 0.0f;
-        shadowHeldGObj = func_802C5000(
+        shadowHeldGObj = it_802C5000(
             gobj, &sp20, 0x23, It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
         fp->fv.mt.x2230_shadowHeldGObj = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
@@ -512,7 +512,7 @@ inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* gobj, Vec3* pos1,
         pos1->x = 0.0f;
         lb_8000B1CC(fp->ft_bones[0x23].x0_jobj, pos1, pos2);
         pos2->z = 0.0f;
-        shadowHeldGObj = func_802C5000(
+        shadowHeldGObj = it_802C5000(
             gobj, pos2, 0x23, It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
         fp->fv.mt.x2230_shadowHeldGObj = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
@@ -589,7 +589,7 @@ inline void ftMewtwo_SpecialN_RemoveShadowBall2(HSD_GObj* gobj)
         Fighter* fp = getFighter(gobj);
 
         if (fp->fv.mt.x2230_shadowHeldGObj != NULL) {
-            func_802C573C(fp->fv.mt.x2230_shadowHeldGObj);
+            it_802C573C(fp->fv.mt.x2230_shadowHeldGObj);
             fp->fv.mt.x2230_shadowHeldGObj = NULL;
         }
         ftMewtwo_SpecialN_ClearGObj(gobj);
@@ -649,7 +649,7 @@ void ftMewtwo_SpecialAirNStart_Anim(HSD_GObj* gobj)
         sp2C.x = 0.0f;
         lb_8000B1CC(fp->ft_bones[0x23].x0_jobj, &sp2C, &sp20);
         sp20.z = 0.0f;
-        shadowHeldGObj = func_802C5000(
+        shadowHeldGObj = it_802C5000(
             gobj, &sp20, 0x23, It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
         fp->fv.mt.x2230_shadowHeldGObj = shadowHeldGObj;
         if (shadowHeldGObj != NULL) {
@@ -1223,10 +1223,10 @@ static inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* gobj)
             lb_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp2C);
             sp2C.z = 0.0f;
             sp20.z = 0.0f;
-            func_802C519C(gobj, &sp20, It_Kind_Mewtwo_ShadowBall,
-                          mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES,
-                          atan2f(sp20.y - sp2C.y, sp20.x - sp2C.x),
-                          fp->facing_dir);
+            it_802C519C(gobj, &sp20, It_Kind_Mewtwo_ShadowBall,
+                        mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES,
+                        atan2f(sp20.y - sp2C.y, sp20.x - sp2C.x),
+                        fp->facing_dir);
             ft_80088148(fp, 0x30DB3U, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
     }

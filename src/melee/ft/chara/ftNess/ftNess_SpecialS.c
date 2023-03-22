@@ -61,8 +61,8 @@ void ftNess_ItemPKFireSpawn(
 
         PKFireRot = PKFireLaunch * fp->facing_dir;
 
-        func_802AA054(gobj, &ItemBonePos, &PKFireVelStruct, fp->facing_dir,
-                      PKFireRot);
+        it_802AA054(gobj, &ItemBonePos, &PKFireVelStruct, fp->facing_dir,
+                    PKFireRot);
     }
 }
 

@@ -202,13 +202,13 @@ bool ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj)
     case 0:
         pos = fp->cur_pos;
         pos.y += 5.0f * fp->x34_scale.y;
-        func_802AB3F0(fp->fv.ns.pkthunder_gobj, &pair, 0);
+        it_802AB3F0(fp->fv.ns.pkthunder_gobj, &pair, 0);
         if (check_distance(&pos, &pair) == true) {
             fp->mv.ns.specialhi.thunderColl = 2;
-            func_802AB3F0(fp->fv.ns.pkthunder_gobj,
-                          &fp->mv.ns.specialhi.collPos1, 0);
-            func_802AB3F0(fp->fv.ns.pkthunder_gobj,
-                          &fp->mv.ns.specialhi.collPos2, 1);
+            it_802AB3F0(fp->fv.ns.pkthunder_gobj,
+                        &fp->mv.ns.specialhi.collPos1, 0);
+            it_802AB3F0(fp->fv.ns.pkthunder_gobj,
+                        &fp->mv.ns.specialhi.collPos2, 1);
             ret = true;
         }
         break;
@@ -216,7 +216,7 @@ bool ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj)
     case 1:
         pos2 = fp->cur_pos;
         pos2.y += 5.0f * fp->x34_scale.y;
-        func_802AB3F0(fp->fv.ns.pkthunder_gobj, &pair2, 0);
+        it_802AB3F0(fp->fv.ns.pkthunder_gobj, &pair2, 0);
         if (!check_distance(&pos2, &pair2)) {
             fp->mv.ns.specialhi.thunderColl = 0;
         }
@@ -282,7 +282,7 @@ void ftNess_SpecialHiTakeDamage(HSD_GObj* gobj) // OnTakeDamage again?
     temp_fp = gobj->user_data;
     fp = temp_fp;
     if (temp_fp->fv.ns.pkthunder_gobj != NULL) {
-        func_802AB9C0(temp_fp->fv.ns.pkthunder_gobj);
+        it_802AB9C0(temp_fp->fv.ns.pkthunder_gobj);
         fp->fv.ns.pkthunder_gobj = NULL;
     }
     fighter_data2 = GET_FIGHTER(gobj);
@@ -761,7 +761,7 @@ void ftNess_SpecialHiStart_Anim(HSD_GObj* gobj)
                 pkt_pos.z = 0.0f;
 
                 pkt_ptr =
-                    func_802AB58C(gobj, &pkt_pos, fighter_data2->facing_dir);
+                    it_802AB58C(gobj, &pkt_pos, fighter_data2->facing_dir);
 
                 fighter_data2->fv.ns.pkthunder_gobj = pkt_ptr;
 
@@ -833,7 +833,7 @@ void ftNess_SpecialHiHold_Anim(
                 fighter_data2->fv.ns.pkthunder_gfx = false;
             }
         }
-    } else if (func_802AB568(fp->fv.ns.pkthunder_gobj) == gobj) {
+    } else if (it_802AB568(fp->fv.ns.pkthunder_gobj) == gobj) {
         if (ftNess_ItemPKThunder_CheckNessCollide(gobj) == true) {
             ftNess_SpecialHi_Action(gobj);
         }
@@ -943,7 +943,7 @@ void ftNess_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 
                 pkt_pos.z = 0.0f;
 
-                pkt_ptr = func_802AB58C(gobj, &pkt_pos, fp2->facing_dir);
+                pkt_ptr = it_802AB58C(gobj, &pkt_pos, fp2->facing_dir);
 
                 fp2->fv.ns.pkthunder_gobj = pkt_ptr;
 
@@ -1015,7 +1015,7 @@ void ftNess_SpecialAirHiHold_Anim(HSD_GObj* gobj)
                 }
             }
         }
-    } else if (func_802AB568(fp0->fv.ns.pkthunder_gobj) == gobj) {
+    } else if (it_802AB568(fp0->fv.ns.pkthunder_gobj) == gobj) {
         if (ftNess_ItemPKThunder_CheckNessCollide(gobj) == true) {
             NessFloatMath_PKThunder2(gobj);
             Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRHI, 0, NULL,

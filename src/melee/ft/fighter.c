@@ -2620,7 +2620,7 @@ void Fighter_UnkProcessGrab_8006CA5C(HSD_GObj* gobj)
                     ft_80088148(fp, fp->ft_data->x4C_collisionData->x30, 0x7F,
                                 0x40);
                 }
-                func_8027B4A4(gobj, fp->x1A60);
+                it_8027B4A4(gobj, fp->x1A60);
                 if (fp->cb.x2194_callback) {
                     fp->cb.x2194_callback(gobj);
                 }

@@ -76,7 +76,7 @@ s32 ftSamus_801292E4(HSD_GObj* gobj)
         vec2.x = 0.0f;
         lb_8000B1CC(fp->ft_bones[50].x0_jobj, &vec2, &vec1);
         vec1.z = 0.0f;
-        result = func_802B55C8(gobj, &vec1, 0x32, 0x5E, fp->facing_dir);
+        result = it_802B55C8(gobj, &vec1, 0x32, 0x5E, fp->facing_dir);
         fp->fv.ss.x222C = result;
         if (result != NULL) {
             ftSamus_updateDamageDeathCBs(gobj);
@@ -116,7 +116,7 @@ void ftSamus_801293BC(HSD_GObj* gobj)
             var_f0 = M_PI;
         }
         x2230 = fp->fv.ss.x2230;
-        func_802B56E4(fp->fv.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
+        it_802B56E4(fp->fv.ss.x222C, &vec1, var_f0, x2230, samus_attr->x18);
         if ((fp->motion_id == 0x15C) || (fp->ground_or_air == GA_Air)) {
             /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -466,9 +466,9 @@ void ftSamus_8012A074(HSD_GObj* gobj)
             u8 _[8];
 #endif
 
-            func_802B62D0(gobj, &position, 0, fp->facing_dir);
+            it_802B62D0(gobj, &position, 0, fp->facing_dir);
         } else {
-            func_802B62D0(gobj, &position, 1, fp->facing_dir);
+            it_802B62D0(gobj, &position, 1, fp->facing_dir);
         }
 
         ftSamus_8012A168(gobj, &position);

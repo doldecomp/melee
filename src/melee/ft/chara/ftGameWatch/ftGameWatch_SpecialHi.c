@@ -28,8 +28,8 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* gobj)
     if (fp->fv.gw.x226C_rescueGObj == NULL) {
         lb_8000B1CC(fp->ft_bones[0].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * ftCommon_GetModelScale(fp)) - sp10.y);
-        rescueGObj = func_802C8038(gobj, &sp10, 0, fp->motion_id - 0x175,
-                                   fp->facing_dir, 2.5f);
+        rescueGObj = it_802C8038(gobj, &sp10, 0, fp->motion_id - 0x175,
+                                 fp->facing_dir, 2.5f);
         fp->fv.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -73,7 +73,7 @@ void ftGameWatch_ItemRescueRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x226C_rescueGObj != NULL) {
-        func_802C8158(fp->fv.gw.x226C_rescueGObj);
+        it_802C8158(fp->fv.gw.x226C_rescueGObj);
         ftGameWatch_ItemRescueSetNULL(gobj);
     }
 }
@@ -84,7 +84,7 @@ static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x226C_rescueGObj != NULL) {
-        func_802C81C8(fp->fv.gw.x226C_rescueGObj);
+        it_802C81C8(fp->fv.gw.x226C_rescueGObj);
     }
 }
 
@@ -94,7 +94,7 @@ static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x226C_rescueGObj != NULL) {
-        func_802C81E8(fp->fv.gw.x226C_rescueGObj);
+        it_802C81E8(fp->fv.gw.x226C_rescueGObj);
     }
 }
 

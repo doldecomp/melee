@@ -28,7 +28,7 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* gobj)
     } else {
         lb_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp10);
         fp->fv.gw.x224C_greenhouseGObj =
-            func_802C61F4(gobj, &sp10, 0x20, fp->facing_dir);
+            it_802C61F4(gobj, &sp10, 0x20, fp->facing_dir);
         if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
             if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
                 fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -55,13 +55,13 @@ void ftGameWatch_Attack11_DecideAction(HSD_GObj* gobj)
     if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
         msid = fp->motion_id;
         if (msid == ftGw_MS_Attack11) {
-            func_802C6430(fp->fv.gw.x224C_greenhouseGObj);
+            it_802C6430(fp->fv.gw.x224C_greenhouseGObj);
         } else if (msid == ftGw_MS_Attack100Start) {
-            func_802C6458(fp->fv.gw.x224C_greenhouseGObj);
+            it_802C6458(fp->fv.gw.x224C_greenhouseGObj);
         } else if (msid == ftGw_MS_Attack100Loop) {
-            func_802C6480(fp->fv.gw.x224C_greenhouseGObj);
+            it_802C6480(fp->fv.gw.x224C_greenhouseGObj);
         } else if (msid == ftGw_MS_Attack100End) {
-            func_802C64A8(fp->fv.gw.x224C_greenhouseGObj);
+            it_802C64A8(fp->fv.gw.x224C_greenhouseGObj);
         }
 
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
@@ -102,7 +102,7 @@ void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* gobj)
 #endif
 
     if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
-        func_802C6328(fp->fv.gw.x224C_greenhouseGObj);
+        it_802C6328(fp->fv.gw.x224C_greenhouseGObj);
         ftGameWatch_ItemGreenhouseSetFlag(gobj);
     }
 }
@@ -114,7 +114,7 @@ void ftGameWatch_ItemGreenhouseEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
-        func_802C6374(fp->fv.gw.x224C_greenhouseGObj);
+        it_802C6374(fp->fv.gw.x224C_greenhouseGObj);
     }
 }
 
@@ -123,7 +123,7 @@ void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
-        func_802C6394(fp->fv.gw.x224C_greenhouseGObj);
+        it_802C6394(fp->fv.gw.x224C_greenhouseGObj);
     }
 }
 

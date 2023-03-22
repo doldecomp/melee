@@ -55,7 +55,7 @@ void ftPikachu_80124908(HSD_GObj* gobj)
                      fp->cur_pos.x;
             sp14.y = (pika_attr->x4 * fp->x34_scale.y) + fp->cur_pos.y;
             sp14.z = 0.0f;
-            func_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
+            it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_800872A4(gobj)) {
             case 12:
                 ft_80088148(fp, 0x3a9cc, 0x7F, 0x40);
@@ -92,7 +92,7 @@ void ftPikachu_80124A20(HSD_GObj* gobj)
                      fp->cur_pos.x;
             sp14.y = (pika_attr->xC * fp->x34_scale.y) + fp->cur_pos.y;
             sp14.z = 0.0f;
-            func_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
+            it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_800872A4(gobj)) {
             case 12:
                 ft_80088148(fp, 0x3a9cc, 0x7F, 0x40);

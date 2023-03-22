@@ -81,10 +81,10 @@ void ftMasterHand_80152D44(HSD_GObj* arg0)
     if (!ftAnim_IsFramesRemaining(arg0)) {
         temp_r31 = arg0->user_data;
         ftMasterHand_80152F80(arg0);
-        func_802F046C(temp_r31->mv.mh.unk0.x34);
-        func_802F046C(temp_r31->mv.mh.unk0.x38);
-        func_802F046C(temp_r31->mv.mh.unk0.x3C);
-        func_802F046C(temp_r31->mv.mh.unk0.x40);
+        it_802F046C(temp_r31->mv.mh.unk0.x34);
+        it_802F046C(temp_r31->mv.mh.unk0.x38);
+        it_802F046C(temp_r31->mv.mh.unk0.x3C);
+        it_802F046C(temp_r31->mv.mh.unk0.x40);
         temp_r31->mv.mh.unk0.x34 = 0;
         temp_r31->mv.mh.unk0.x38 = 0;
         temp_r31->mv.mh.unk0.x3C = 0;
@@ -125,16 +125,16 @@ void ftMasterHand_80152E28(HSD_GObj* gobj)
     if (fp->x2200_ftcmd_var0 != 0) {
         lb_8000B1CC(fp->ft_bones[11].x0_jobj, 0, &sp10);
         fp->mv.mh.unk0.x34 =
-            func_802F0340(gobj, &sp10, &sp10, 0xB, 0x7D, fp->facing_dir);
+            it_802F0340(gobj, &sp10, &sp10, 0xB, 0x7D, fp->facing_dir);
         lb_8000B1CC(fp->ft_bones[16].x0_jobj, 0, &sp10);
         fp->mv.mh.unk0.x38 =
-            func_802F0340(gobj, &sp10, &sp10, 0x10, 0x7D, fp->facing_dir);
+            it_802F0340(gobj, &sp10, &sp10, 0x10, 0x7D, fp->facing_dir);
         lb_8000B1CC(fp->ft_bones[21].x0_jobj, 0, &sp10);
         fp->mv.mh.unk0.x3C =
-            func_802F0340(gobj, &sp10, &sp10, 0x15, 0x7D, fp->facing_dir);
+            it_802F0340(gobj, &sp10, &sp10, 0x15, 0x7D, fp->facing_dir);
         lb_8000B1CC(fp->ft_bones[26].x0_jobj, 0, &sp10);
         fp->mv.mh.unk0.x40 =
-            func_802F0340(gobj, &sp10, &sp10, 0x1A, 0x7D, fp->facing_dir);
+            it_802F0340(gobj, &sp10, &sp10, 0x1A, 0x7D, fp->facing_dir);
         fp->mv.mh.unk0.x28 = lbAudioAx_800237A8(0x4E204, 0x7F, 0x40);
         fp->mv.mh.unk0.x2C = lbAudioAx_800237A8(0x4E205, 0x7F, 0x40);
         fp->mv.mh.unk0.x30 = lbAudioAx_800237A8(0x4E206, 0x7F, 0x40);

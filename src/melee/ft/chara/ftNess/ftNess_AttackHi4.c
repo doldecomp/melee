@@ -354,7 +354,7 @@ void ftNess_YoyoApplySmash(HSD_GObj* gobj)
         posX = sp18.x;
         sp18.x = posX * fp->facing_dir;
         sp18.y = yoyo_attr->x30_YOYO_RELEASE_VEL_Y;
-        func_802BFE5C(temp_yoyo, &sp18, posX);
+        it_802BFE5C(temp_yoyo, &sp18, posX);
     }
 
     colAnimID = 0x77;
@@ -408,7 +408,7 @@ void ftNess_YoyoSetChargeDamage(HSD_GObj* gobj)
         article = item_data->xC4_article_data;
         yoyo_attr = article->x4_specialAttributes;
         sp30 = YoyoChargePos;
-        func_802C0010(yoyo_GObj, &sp30);
+        it_802C0010(yoyo_GObj, &sp30);
         fp->fv.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
     }
 
@@ -479,12 +479,12 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj)
         yoyo_attr = yoyo_article->x4_specialAttributes;
         if ((u32) fp->x2204_ftcmd_var1 == 1U) {
             fp->x2204_ftcmd_var1 = 0U;
-            func_802BE5D8(yoyo_GObj, 1.0f);
+            it_802BE5D8(yoyo_GObj, 1.0f);
             fp->fv.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
         }
         if ((u32) fp->x2204_ftcmd_var1 == 2U) {
             fp->x2204_ftcmd_var1 = 0U;
-            func_802BE5D8(yoyo_GObj, 0.0f);
+            it_802BE5D8(yoyo_GObj, 0.0f);
             fp->fv.ns.x223C = 0.0f;
             ft_80088510(fp, 0x334B0, SFX_VOLUME_MAX, SFX_PAN_MID);
         }
@@ -500,7 +500,7 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj)
         yoyoSmashFrameCurr2 = fp->mv.ns.attackhi4.yoyoCurrentFrame;
         if (yoyoSmashFrameCurr2 == yoyoRotFrame) {
             sp14 = YoyoThinkPos;
-            func_802C0010(yoyo_GObj, &sp14);
+            it_802C0010(yoyo_GObj, &sp14);
             msid = fp->motion_id;
             if ((msid >= MS_NESS_ATTACKHI4) &&
                 (msid <= MS_NESS_ATTACKHI4_RELEASE))
@@ -510,10 +510,10 @@ bool ftNess_YoyoThink_IsRemove(HSD_GObj* gobj)
                 ft_80088510(fp, 0x334AD, SFX_VOLUME_MAX, SFX_PAN_MID);
             }
         } else if (yoyoSmashFrameCurr2 == yoyoNudgeFrame) {
-            func_802BFEC4(yoyo_GObj);
+            it_802BFEC4(yoyo_GObj);
         }
         if ((s32) fp->mv.ns.attackhi4.yoyoCurrentFrame == yoyoDespawnFrame) {
-            func_802BE958(fp->fv.ns.yoyo_gobj);
+            it_802BE958(fp->fv.ns.yoyo_gobj);
         }
     } else if (yoyoSmashFrameCurr == yoyoSpawnFrame) {
         ftNess_YoyoCreateItem(gobj);
@@ -565,7 +565,7 @@ void ftNess_YoyoCreateItem(HSD_GObj* gobj)
 
     lb_8000B1CC(fp->ft_bones[0x2A].x0_jobj, NULL, &sp10);
     fp->fv.ns.yoyo_gobj =
-        func_802BE9D8(fp->facing_dir, gobj, &sp10, fp->motion_id);
+        it_802BE9D8(fp->facing_dir, gobj, &sp10, fp->motion_id);
     fp->x1984_heldItemSpec = fp->fv.ns.yoyo_gobj;
     if (fp->fv.ns.yoyo_gobj != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
@@ -597,7 +597,7 @@ void ftNess_YoyoItemDespawn(HSD_GObj* gobj)
 #endif
 
     if (fp->fv.ns.yoyo_gobj != NULL) {
-        func_802BE958(fp->fv.ns.yoyo_gobj);
+        it_802BE958(fp->fv.ns.yoyo_gobj);
         fp = gobj->user_data;
         ftNess_YoyoItemSetUnk2(gobj);
         fp->fv.ns.yoyo_gobj = NULL;
@@ -608,7 +608,7 @@ void ftNess_YoyoItemSetUnk(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.ns.yoyo_gobj != NULL) {
-        func_802BE598(fp->fv.ns.yoyo_gobj);
+        it_802BE598(fp->fv.ns.yoyo_gobj);
     }
 }
 
@@ -617,7 +617,7 @@ void ftNess_YoyoItemSetUnk2(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.ns.yoyo_gobj) {
-        func_802BE5B8(fp->fv.ns.yoyo_gobj);
+        it_802BE5B8(fp->fv.ns.yoyo_gobj);
     }
 }
 
@@ -792,12 +792,12 @@ void ftNess_AttackHi4_Coll(
     if (((s32) fp->ground_or_air == GA_Air) &&
         ((yoyo_GObj = GetFighterData_x222C(gobj)) != NULL))
     {
-        func_802BE958(yoyo_GObj);
+        it_802BE958(yoyo_GObj);
 
         fp = gobj->user_data;
 
         if (fp->fv.ns.yoyo_gobj != NULL) {
-            func_802BE5B8(fp->fv.ns.yoyo_gobj);
+            it_802BE5B8(fp->fv.ns.yoyo_gobj);
         }
         fp->fv.ns.yoyo_gobj = NULL;
     }
@@ -888,10 +888,10 @@ void ftNess_AttackHi4_Charge_Coll(
         ((yoyo_GObj = GetFighterData_x222C(gobj)) != NULL))
 
     {
-        func_802BE958(yoyo_GObj);
+        it_802BE958(yoyo_GObj);
         fp = GET_FIGHTER(gobj);
         if (fp->fv.ns.yoyo_gobj != NULL) {
-            func_802BE5B8(fp->fv.ns.yoyo_gobj);
+            it_802BE5B8(fp->fv.ns.yoyo_gobj);
         }
         fp->fv.ns.yoyo_gobj = NULL;
     }
@@ -1015,10 +1015,10 @@ void ftNess_AttackHi4_Release_Coll(
     if (((s32) fp->ground_or_air == GA_Air) &&
         ((yoyo_GObj = GetFighterData_x222C(gobj)) != NULL))
     {
-        func_802BE958(yoyo_GObj);
+        it_802BE958(yoyo_GObj);
         fp = GET_FIGHTER(gobj);
         if (fp->fv.ns.yoyo_gobj != NULL) {
-            func_802BE5B8(fp->fv.ns.yoyo_gobj);
+            it_802BE5B8(fp->fv.ns.yoyo_gobj);
         }
         fp->fv.ns.yoyo_gobj = NULL;
     }
@@ -1058,7 +1058,7 @@ void ftNess_AttackHi4_Release_Action(HSD_GObj* gobj)
     if ((yoyo_GObj = fighter_data2->fv.ns.yoyo_gobj) != NULL) {
         yoyo_attr = GetYoyoAttr(yoyo_GObj);
         sp34 = YoyoChargePos;
-        func_802C0010(yoyo_GObj, &sp34);
+        it_802C0010(yoyo_GObj, &sp34);
         fighter_data2->fv.ns.x223C = yoyo_attr->x18_SPIN_TEXANIM_SPEED;
     }
 

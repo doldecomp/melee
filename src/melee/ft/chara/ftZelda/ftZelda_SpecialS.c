@@ -109,7 +109,7 @@ void ftZelda_8013B780(HSD_GObj* gobj)
         sp24.x = (temp_f2 * fp->facing_dir) + sp24.x;
         sp24.y += attributes->x24;
 
-        temp_r3 = func_802C3BAC(gobj, &sp24, fp->facing_dir, temp_f2);
+        temp_r3 = it_802C3BAC(gobj, &sp24, fp->facing_dir, temp_f2);
         fp->fv.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
@@ -155,7 +155,7 @@ void ftZelda_8013B89C(HSD_GObj* gobj)
         sp20.x = (temp_f2 * fp->facing_dir) + sp20.x;
         sp20.y += attributes->x24;
 
-        temp_r3_u32 = func_802C3BAC(gobj, &sp20, fp->facing_dir, temp_f2);
+        temp_r3_u32 = it_802C3BAC(gobj, &sp20, fp->facing_dir, temp_f2);
         fp->fv.zd.x222C = temp_r3_u32;
 
         if (temp_r3_u32 != 0) {
@@ -181,7 +181,7 @@ void ftZelda_8013B89C(HSD_GObj* gobj)
                                       temp_f1);
         }
     } else {
-        temp_r3 = func_802C3AF0(fp->fv.zd.x222C);
+        temp_r3 = it_802C3AF0(fp->fv.zd.x222C);
 
         if (temp_r3 != gobj) {
             fp->fv.zd.x222C = NULL;
@@ -243,7 +243,7 @@ void ftZelda_8013BA8C(HSD_GObj* gobj)
         sp24.x = (temp_f2 * fp->facing_dir) + sp24.x;
         sp24.y += attributes->x24;
 
-        temp_r3 = func_802C3BAC(gobj, &sp24, fp->facing_dir, temp_f2);
+        temp_r3 = it_802C3BAC(gobj, &sp24, fp->facing_dir, temp_f2);
         fp->fv.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
@@ -288,7 +288,7 @@ void ftZelda_8013BBA8(HSD_GObj* gobj)
         sp20.x = temp_f2 * fp->facing_dir + sp20.x;
         sp20.y += attributes->x24;
 
-        temp_r3 = func_802C3BAC(gobj, &sp20, fp->facing_dir, temp_f2);
+        temp_r3 = it_802C3BAC(gobj, &sp20, fp->facing_dir, temp_f2);
         fp->fv.zd.x222C = temp_r3;
 
         if (temp_r3 != 0) {
@@ -313,7 +313,7 @@ void ftZelda_8013BBA8(HSD_GObj* gobj)
                                       temp_f1);
         }
     } else {
-        temp_r3 = func_802C3AF0(fp->fv.zd.x222C);
+        temp_r3 = it_802C3AF0(fp->fv.zd.x222C);
 
         if (temp_r3 != gobj) {
             fp->fv.zd.x222C = NULL;

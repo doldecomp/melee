@@ -34,7 +34,7 @@ void ftSamus_8012ADF0(HSD_GObj* gobj)
         vec.x += (vec_x * fp->facing_dir);
         vec.y += samus_attr->x74_vec.y;
         vec.z += samus_attr->x74_vec.z;
-        func_802B4AC8(gobj, &vec, fp->facing_dir, vec_x);
+        it_802B4AC8(gobj, &vec, fp->facing_dir, vec_x);
         fp->cb.x21BC_callback_Accessory4 = 0;
     }
 }

@@ -279,7 +279,7 @@ void grStory_801E3418(HSD_GObj* gobj)
             gp->xC4 = 1;
         }
         for (i = 0; i < gp->xC4; i++) {
-            func_802D8618(i, &pos, temp_r29, 25.0f * i);
+            it_802D8618(i, &pos, temp_r29, 25.0f * i);
             // Jitter the vertical position of the each subsequent shy guy
             pos.y = 3.0f * frand_amp1() + lbl_804D69B8->vars[spawn_pattern];
         }

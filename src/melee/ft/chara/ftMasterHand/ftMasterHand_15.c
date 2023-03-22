@@ -292,8 +292,8 @@ void ftMasterHand_8015364C(HSD_GObj* arg0, HSD_JObj* arg1, f32 arg2, f32 arg3)
         phi_r29 = 1;
     }
 
-    func_802F0AE0(arg0, &sp28_leek, &sp1C_carrot, 0x7E, phi_r29,
-                  fp->facing_dir, attr->xD4, attr->xD8);
+    it_802F0AE0(arg0, &sp28_leek, &sp1C_carrot, 0x7E, phi_r29, fp->facing_dir,
+                attr->xD4, attr->xD8);
 }
 
 // 80153730 150310

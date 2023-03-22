@@ -23,7 +23,7 @@ void ftDrMario_80149954(HSD_GObj* gobj)
     if (fp->x2200_ftcmd_var0 == 1 && fp->fv.mr.x2240 == 0U) {
         lb_8000B1CC(fp->ft_bones->x0_jobj, 0, &sp18);
         tmp = ftMario_SpecialN_VitaminRandom(gobj);
-        tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
+        tmp = it_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
         fp->fv.mr.x2240 = tmp;
         if (tmp != 0) {
             fp->cb.x21E4_callback_OnDeath2 = ftDrMario_80149540;
@@ -36,7 +36,7 @@ void ftDrMario_80149954(HSD_GObj* gobj)
         if (gobj != NULL) {
             fp = gobj->user_data;
             if (fp != NULL && fp->fv.mr.x2240 != 0) {
-                func_802C0DBC(fp->fv.mr.x2240);
+                it_802C0DBC(fp->fv.mr.x2240);
                 fp->fv.mr.x2240 = 0;
             }
         }

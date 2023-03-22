@@ -3599,7 +3599,7 @@ s32 Ground_801C4210(void)
 
     for (i = 199; i < 220; i++) {
         if (stage_info.x280[i] != NULL &&
-            func_8027B5B0(It_Kind_Mato, 0, stage_info.x280[i], 0, 0) != NULL)
+            it_8027B5B0(It_Kind_Mato, 0, stage_info.x280[i], 0, 0) != NULL)
         {
             count++;
         }
@@ -4760,7 +4760,7 @@ s32 Ground_801C58E0(s32 arg0, s32 arg1)
     Vec3 sp10;
 
     Ground_801C2D24(arg1, &sp10);
-    result = func_802F2094(0, &sp10, tmp, 0);
+    result = it_802F2094(0, &sp10, tmp, 0);
     un_80304A58(tmp);
     return result;
 }

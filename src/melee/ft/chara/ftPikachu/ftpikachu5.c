@@ -71,7 +71,7 @@ bool ftPikachu_8012765C(HSD_GObj* gobj)
     }
 
     if (state_var) {
-        func_802B1FE8(state_var, &vec);
+        it_802B1FE8(state_var, &vec);
     } else {
         return false;
     }
@@ -81,9 +81,9 @@ bool ftPikachu_8012765C(HSD_GObj* gobj)
                                           fabs_inline(pika_attr->xBC), vec.y);
 
         if ((final_y_pos < pika_attr->xC8) && fp->mv.pk.unk4.x0 != 0 &&
-            !func_802B1DEC(fp->mv.pk.unk4.x0))
+            !it_802B1DEC(fp->mv.pk.unk4.x0))
         {
-            func_802B1FC8(fp->mv.pk.unk4.x0);
+            it_802B1FC8(fp->mv.pk.unk4.x0);
             return true;
         }
     }
@@ -138,8 +138,8 @@ void ftPikachu_EfSpawn_801277AC(HSD_GObj* gobj)
                 vec.x = 0.0f;
                 vec.y = pika_attr->xC0;
                 fp->mv.pk.unk4.x0 =
-                    func_802B1DF8(gobj, &pos, &vec, pika_attr->xD4,
-                                  pika_attr->xD8, pika_attr->xDC);
+                    it_802B1DF8(gobj, &pos, &vec, pika_attr->xD4,
+                                pika_attr->xD8, pika_attr->xDC);
             }
         }
     }

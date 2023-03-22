@@ -203,7 +203,7 @@ void ftPopo_8011F190(HSD_GObj* gobj)
         return;
     }
 
-    func_802C17DC(fp->fv.nn.x222C);
+    it_802C17DC(fp->fv.nn.x222C);
     ftPopo_8011F16C(gobj, fp->fv.nn.x222C);
 }
 
@@ -290,7 +290,7 @@ void ftPopo_8011F3D8(HSD_GObj* gobj)
         fp1 = GET_FIGHTER(gobj);
         if (fp1->fv.nn.x222C != 0U) {
             Fighter* fp2;
-            func_802C17DC(fp1->fv.nn.x222C);
+            it_802C17DC(fp1->fv.nn.x222C);
             fp2 = GET_FIGHTER(gobj);
             if ((u32) fp1->fv.nn.x222C == (u32) fp2->fv.nn.x222C) {
                 fp2->fv.nn.x222C = 0U;
@@ -324,7 +324,7 @@ asm void ftPopo_8011F454(HSD_GObj*)
 /* 8011F48C 0011C06C  80 7E 22 2C */	lwz r3, 0x222c(r30)
 /* 8011F490 0011C070  28 03 00 00 */	cmplwi r3, 0
 /* 8011F494 0011C074  41 82 00 2C */	beq lbl_8011F4C0
-/* 8011F498 0011C078  48 1A 23 45 */	bl func_802C17DC
+/* 8011F498 0011C078  48 1A 23 45 */	bl it_802C17DC
 /* 8011F49C 0011C07C  80 9C 00 2C */	lwz r4, 0x2c(r28)
 /* 8011F4A0 0011C080  80 7E 22 2C */	lwz r3, 0x222c(r30)
 /* 8011F4A4 0011C084  80 04 22 2C */	lwz r0, 0x222c(r4)
@@ -396,7 +396,7 @@ asm void ftPopo_8011F500(HSD_GObj*)
 /* 8011F580 0011C160  EC 02 00 2A */	fadds f0, f2, f0
 /* 8011F584 0011C164  D0 01 00 20 */	stfs f0, 0x20(r1)
 /* 8011F588 0011C168  C0 3F 00 2C */	lfs f1, 0x2c(r31)
-/* 8011F58C 0011C16C  48 1A 20 05 */	bl func_802C1590
+/* 8011F58C 0011C16C  48 1A 20 05 */	bl it_802C1590
 /* 8011F590 0011C170  90 7F 22 2C */	stw r3, 0x222c(r31)
 /* 8011F594 0011C174  3C 80 00 02 */	lis r4, 0x0001FBE5@ha
 /* 8011F598 0011C178  38 7F 00 00 */	addi r3, r31, 0
@@ -421,7 +421,7 @@ lbl_8011F5D4:
 /* 8011F5DC 0011C1BC  80 7F 22 2C */	lwz r3, 0x222c(r31)
 /* 8011F5E0 0011C1C0  28 03 00 00 */	cmplwi r3, 0
 /* 8011F5E4 0011C1C4  41 82 00 8C */	beq lbl_8011F670
-/* 8011F5E8 0011C1C8  48 1A 21 11 */	bl func_802C16F8
+/* 8011F5E8 0011C1C8  48 1A 21 11 */	bl it_802C16F8
 /* 8011F5EC 0011C1CC  38 00 00 00 */	li r0, 0
 /* 8011F5F0 0011C1D0  90 1F 22 00 */	stw r0, 0x2200(r31)
 /* 8011F5F4 0011C1D4  80 1F 00 04 */	lwz r0, 4(r31)

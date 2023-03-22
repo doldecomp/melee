@@ -112,7 +112,7 @@ lbl_8014E5E4:
 /* 8014E60C 0014B1EC  90 BD 22 40 */	stw r5, 0x2240(r29)
 /* 8014E610 0014B1F0  38 A0 00 7A */	li r5, 0x7a
 /* 8014E614 0014B1F4  C0 3F 00 2C */	lfs f1, 0x2c(r31)
-/* 8014E618 0014B1F8  48 17 9D 65 */	bl func_802C837C
+/* 8014E618 0014B1F8  48 17 9D 65 */	bl it_802C837C
 lbl_8014E61C:
 /* 8014E61C 0014B1FC  38 00 00 00 */	li r0, 0
 /* 8014E620 0014B200  90 1F 21 BC */	stw r0, 0x21bc(r31)
@@ -185,7 +185,7 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* gobj)
             temp_fp->fv.gw.x2244_chefVar2 = temp_fp->fv.gw.x2240_chefVar1;
             temp_r6 = temp_r5;
             temp_fp->fv.gw.x2240_chefVar1 = temp_r5;
-            func_802C837C(gobj, &sp44, 0x7A, temp_r6, fp->facing_dir);
+            it_802C837C(gobj, &sp44, 0x7A, temp_r6, fp->facing_dir);
         }
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }

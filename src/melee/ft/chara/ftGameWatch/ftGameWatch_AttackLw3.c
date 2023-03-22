@@ -38,7 +38,7 @@ void ftGameWatch_ItemManholeSetup(HSD_GObj* gobj)
             ftCommon_8007E6DC(gobj, fp->x1974_heldItem, 1);
         }
         fp->fv.gw.x2250_manholeGObj2 =
-            func_802C65E4(gobj, &sp10, 0x20, fp->facing_dir);
+            it_802C65E4(gobj, &sp10, 0x20, fp->facing_dir);
     }
     if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
@@ -84,7 +84,7 @@ void ftGameWatch_ItemManholeOnDamage(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
-        func_802C6718(fp->fv.gw.x2250_manholeGObj2);
+        it_802C6718(fp->fv.gw.x2250_manholeGObj2);
         ftGameWatch_ItemManholeRemove(gobj);
     }
 }
@@ -95,7 +95,7 @@ static void ftGameWatch_ItemManholeEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
-        func_802C6764(fp->fv.gw.x2250_manholeGObj2);
+        it_802C6764(fp->fv.gw.x2250_manholeGObj2);
     }
 }
 
@@ -104,7 +104,7 @@ static void ftGameWatch_ItemManholeExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x2250_manholeGObj2 != NULL) {
-        func_802C6784(fp->fv.gw.x2250_manholeGObj2);
+        it_802C6784(fp->fv.gw.x2250_manholeGObj2);
     }
 }
 

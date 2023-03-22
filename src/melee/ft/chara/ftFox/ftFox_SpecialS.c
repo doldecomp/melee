@@ -250,11 +250,9 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
     if ((u32) fp->x2208_ftcmd_var2 == 1U) {
         fp->x2208_ftcmd_var2 = 0U;
         if ((s32) fp->x4_fighterKind == FTKIND_FOX) {
-            ghostGObj =
-                func_8029CEB4(gobj, &fp->cur_pos, 0x38, fp->facing_dir);
+            ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, 0x38, fp->facing_dir);
         } else {
-            ghostGObj =
-                func_8029CEB4(gobj, &fp->cur_pos, 0x39, fp->facing_dir);
+            ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, 0x39, fp->facing_dir);
         }
         if (ghostGObj != NULL) {
             fp->mv.fx.SpecialS.ghostGObj = ghostGObj;

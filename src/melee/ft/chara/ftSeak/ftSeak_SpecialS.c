@@ -406,7 +406,7 @@ void ftSeak_CheckAndDestroyChain(HSD_GObj* gobj)
         return;
     }
 
-    func_802BB20C(fp->fv.sk.x2234);
+    it_802BB20C(fp->fv.sk.x2234);
 
     fp = gobj->user_data;
 
@@ -422,7 +422,7 @@ void ftSeak_80110EE8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.sk.x2234) {
-        func_802BAEEC(fp->fv.sk.x2234);
+        it_802BAEEC(fp->fv.sk.x2234);
     }
 }
 
@@ -431,7 +431,7 @@ void ftSeak_ChainSomething(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.sk.x2234) {
-        func_802BAF0C(fp->fv.sk.x2234);
+        it_802BAF0C(fp->fv.sk.x2234);
         fp->mv.sk.specials.x20 = 2;
     }
 }
@@ -538,7 +538,7 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
 
         lb_8000B1CC(fp2->ft_bones[26].x0_jobj, NULL, &vec1);
 
-        fp2->fv.sk.x2234 = func_802BB290(gobj, &vec1, fp2->facing_dir);
+        fp2->fv.sk.x2234 = it_802BB290(gobj, &vec1, fp2->facing_dir);
 
         fp2->x1984_heldItemSpec = fp2->fv.sk.x2234;
 
@@ -576,7 +576,7 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
                 f32 x;
                 x = vec0.x;
                 vec0.x *= item_data->facing_dir;
-                func_802BCFC4(item_gobj, &vec0.x, chainSegment, item_data, x);
+                it_802BCFC4(item_gobj, &vec0.x, chainSegment, item_data, x);
             }
         }
     }
@@ -910,7 +910,7 @@ void ftSeak_80111A48(HSD_GObj* gobj)
             item_gobj = fp->fv.sk.x2234;
 
             if (temp_r3 == specialAttributes->x24) {
-                func_802BCF84(item_gobj);
+                it_802BCF84(item_gobj);
             }
 
             /// @todo Split inner function
@@ -919,7 +919,7 @@ void ftSeak_80111A48(HSD_GObj* gobj)
 
         if (temp_r3 == temp_f1) {
             item_gobj = fp->fv.sk.x2234;
-            func_802BB20C(item_gobj);
+            it_802BB20C(item_gobj);
         } else {
         inner_ret:
             ftSeak_80110BCC(gobj);
@@ -951,13 +951,13 @@ void ftSeak_80111B1C(HSD_GObj* gobj)
         if (stateVar1 < temp_f1) {
             item_gobj = fp->fv.sk.x2234;
             if (stateVar1 == specialAttributes->x24) {
-                func_802BCF84(item_gobj);
+                it_802BCF84(item_gobj);
             }
             goto inner_ret;
         }
         if (stateVar1 == temp_f1) {
             item_gobj = fp->fv.sk.x2234;
-            func_802BB20C(item_gobj);
+            it_802BB20C(item_gobj);
         } else {
         inner_ret:
             ftSeak_80110BCC(gobj);

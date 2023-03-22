@@ -1239,31 +1239,31 @@ void ftCommon_8007E82C(HSD_GObj* gobj)
     fp->x1984_heldItemSpec = NULL;
 }
 
-void func_8028B718(HSD_GObj*, f32);
-void func_8028B780(HSD_GObj*, f32);
-void func_8028B7E8(HSD_GObj*, f32);
-void func_8028B850(HSD_GObj*, f32);
-void func_8028B648(HSD_GObj*, f32);
-void func_8028B6B0(HSD_GObj*, f32);
-void func_8028B618(HSD_GObj*, f32);
-void func_802BDD40(HSD_GObj*, f32);
-void func_802BDDB4(HSD_GObj*, f32);
+void it_8028B718(HSD_GObj*, f32);
+void it_8028B780(HSD_GObj*, f32);
+void it_8028B7E8(HSD_GObj*, f32);
+void it_8028B850(HSD_GObj*, f32);
+void it_8028B648(HSD_GObj*, f32);
+void it_8028B6B0(HSD_GObj*, f32);
+void it_8028B618(HSD_GObj*, f32);
+void it_802BDD40(HSD_GObj*, f32);
+void it_802BDDB4(HSD_GObj*, f32);
 static void (*parasol_table_1[7])(HSD_GObj*, f32) = {
-    func_8028B718, func_8028B780, func_8028B7E8, func_8028B850,
-    func_8028B648, func_8028B6B0, func_8028B618,
+    it_8028B718, it_8028B780, it_8028B7E8, it_8028B850,
+    it_8028B648, it_8028B6B0, it_8028B618,
 };
 static s32 parasol_table_2[7] = {
     7, 8, 9, 10, 5, 6, 4,
 };
 static void (*parasol_table_3[7])(HSD_GObj*, f32) = {
-    NULL, NULL, NULL, NULL, func_802BDD40, NULL, func_802BDDB4,
+    NULL, NULL, NULL, NULL, it_802BDD40, NULL, it_802BDDB4,
 };
 static s32 parasol_table_4[7] = {
     -1, -1, -1, -1, 1, -1, 2,
 };
 
-s32 func_8028B08C(void*, s32);
-s32 func_802BDA40(void*, s32);
+s32 it_8028B08C(void*, s32);
+s32 it_802BDA40(void*, s32);
 
 static const int FtParasol_None = -1;
 
@@ -1285,10 +1285,10 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
         val = fp->x89C_frameSpeedMul;
     } else if (itGetKind(fp->x1974_heldItem) == It_Kind_Parasol) {
         val = fp->x89C_frameSpeedMul *
-              (func_8028B08C(fp->x1974_heldItem, parasol_table_2[arg1]) / div);
+              (it_8028B08C(fp->x1974_heldItem, parasol_table_2[arg1]) / div);
     } else {
         val = fp->x89C_frameSpeedMul *
-              (func_802BDA40(fp->x1974_heldItem, parasol_table_4[arg1]) / div);
+              (it_802BDA40(fp->x1974_heldItem, parasol_table_4[arg1]) / div);
     }
     if (itGetKind(fp->x1974_heldItem) == It_Kind_Parasol) {
         parasol_table_1[arg1](fp->x1974_heldItem, val);
@@ -1363,7 +1363,7 @@ void ftCommon_8007EA90(Fighter* fp, s32 arg1)
         phi_f30 = p_ftCommonData->x5C0;
         ftLib_800866DC(fp->gobj, &sp10);
     }
-    temp_r31 = func_802E5F8C(fp->gobj, &sp10, arg1, 1, phi_f31, phi_f30);
+    temp_r31 = it_802E5F8C(fp->gobj, &sp10, arg1, 1, phi_f31, phi_f30);
     if (fp->dmg.x18c4_source_ply != 6) {
         Player_SetUnk98(fp->dmg.x18c4_source_ply,
                         temp_r31 + Player_GetUnk98(fp->dmg.x18c4_source_ply));
@@ -1435,7 +1435,7 @@ void ftCommon_8007EEC8(Fighter* fp, s32 arg1, s32 arg2)
     {
         f32 multiplier = 1.0 / 256;
         f32 tmp = arg2 * multiplier;
-        func_80284FC4(fp->x1974_heldItem, arg1, tmp);
+        it_80284FC4(fp->x1974_heldItem, arg1, tmp);
     }
 }
 
@@ -1444,7 +1444,7 @@ void ftCommon_8007EF5C(Fighter* fp, s32 arg1)
     if (fp->x1974_heldItem != NULL && fp->x1974_heldItem->classifier == 6 &&
         itGetKind(fp->x1974_heldItem) == It_Kind_Sword)
     {
-        func_80285024(fp->x1974_heldItem, arg1);
+        it_80285024(fp->x1974_heldItem, arg1);
     }
 }
 
@@ -1562,7 +1562,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->x221E_flag.bits.b4 = src->x221E_flag.bits.b4;
     if (src->x197C != NULL) {
         it_8026B9A8(src->x197C, dst_gobj, dst->ft_data->x8->unk12);
-        func_802950D4(src->x197C, 0);
+        it_802950D4(src->x197C, 0);
         ftCommon_8007F948(dst_gobj, src->x197C, src->x2014);
         ftCommon_8007FA00(gobj);
     } else {
@@ -1738,8 +1738,8 @@ void ftCommon_8007FA00(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_80294EB0(fp->x197C, &vec[1], &vec[0]);
-    func_80294E78(fp->x197C, fp->x34_scale.y * vec[2].x);
+    it_80294EB0(fp->x197C, &vec[1], &vec[0]);
+    it_80294E78(fp->x197C, fp->x34_scale.y * vec[2].x);
 }
 
 void ftCommon_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
@@ -1800,8 +1800,8 @@ void ftCommon_8007FC7C(HSD_GObj* gobj, f32 arg8)
         fp->x2024 = sp20 + arg8;
         ftCommon_8007FDA0(gobj);
     } else {
-        item_gobj = func_8029A748(gobj, &fp->cur_pos, fp->ft_data->x8->unk12,
-                                  fp->facing_dir);
+        item_gobj = it_8029A748(gobj, &fp->cur_pos, fp->ft_data->x8->unk12,
+                                fp->facing_dir);
         if (item_gobj != NULL) {
             ftCommon_8007FE84(gobj, item_gobj, sp20, arg8);
             ftCommon_8007FDA0(gobj);
@@ -1841,8 +1841,8 @@ void ftCommon_8007FDA0(HSD_GObj* gobj)
     sp20.x *= temp_f1;
     sp20.y *= temp_f1;
     sp20.z *= temp_f1;
-    func_8029A8F4(fp->x1980, &sp20, temp_f1);
-    func_8029A89C(fp->x1980, phi_f31 * temp_r30[1].x * fp->x34_scale.y);
+    it_8029A8F4(fp->x1980, &sp20, temp_f1);
+    it_8029A89C(fp->x1980, phi_f31 * temp_r30[1].x * fp->x34_scale.y);
 }
 
 void ftCommon_8007FE84(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2, f32 arg3)
@@ -1926,7 +1926,7 @@ void ftCommon_80080174(Fighter* fp)
 #endif
 
     if (fp->x197C != NULL) {
-        func_80294E78(fp->x197C, fp->x34_scale.y * fp->x110_attr.x23C);
+        it_80294E78(fp->x197C, fp->x34_scale.y * fp->x110_attr.x23C);
     }
     if (fp->x1980 != NULL) {
         v = &fp->x110_attr.x240;
@@ -1935,7 +1935,7 @@ void ftCommon_80080174(Fighter* fp)
         {
             phi_f2 = phi_f3;
         }
-        func_8029A89C(fp->x1980, phi_f2 * v[1].x * fp->x34_scale.y);
+        it_8029A89C(fp->x1980, phi_f2 * v[1].x * fp->x34_scale.y);
     }
 }
 

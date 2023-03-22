@@ -47,9 +47,9 @@ void ftMario_SpecialS_CreateCape(HSD_GObj* gobj)
                     &coords);
 
         {
-            HSD_GObj* cape = func_802B2560(gobj, fp->facing_dir, &coords,
-                                           ftParts_8007500C(fp, 49),
-                                           sa->specials.cape_kind);
+            HSD_GObj* cape =
+                it_802B2560(gobj, fp->facing_dir, &coords,
+                            ftParts_8007500C(fp, 49), sa->specials.cape_kind);
 
             fp->fv.mr.x223C_capeGObj = cape;
         }
@@ -74,7 +74,7 @@ void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.mr.x223C_capeGObj != NULL) {
-        func_802B2674(fp->fv.mr.x223C_capeGObj);
+        it_802B2674(fp->fv.mr.x223C_capeGObj);
         ftMario_SpecialS_SetNULL(gobj);
     }
 }
@@ -83,7 +83,7 @@ void ftMario_SpecialS_EnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.mr.x223C_capeGObj != NULL) {
-        func_802B26C0(fp->fv.mr.x223C_capeGObj);
+        it_802B26C0(fp->fv.mr.x223C_capeGObj);
     }
 }
 
@@ -91,7 +91,7 @@ void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.mr.x223C_capeGObj != NULL) {
-        func_802B26E0(fp->fv.mr.x223C_capeGObj);
+        it_802B26E0(fp->fv.mr.x223C_capeGObj);
     }
 }
 

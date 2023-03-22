@@ -38,8 +38,8 @@ void ftNess_AttackS4_Action(
 
     ftAnim_8006EBA4(gobj);
 
-    baseballBatGObj = func_802AD478(gobj, &fp->cur_pos,
-                                    0x2A /* Item Hold Bone */, fp->facing_dir);
+    baseballBatGObj = it_802AD478(gobj, &fp->cur_pos,
+                                  0x2A /* Item Hold Bone */, fp->facing_dir);
 
     fp->fv.ns.bat_gobj = baseballBatGObj;
 
@@ -74,7 +74,7 @@ void ftNess_ItemNessBatRemove(HSD_GObj* gobj) // Remove Baseball Bat
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.ns.bat_gobj != NULL) {
-        func_802AD6B8(fp->fv.ns.bat_gobj);
+        it_802AD6B8(fp->fv.ns.bat_gobj);
         fp->fv.ns.bat_gobj = NULL;
     }
 };
@@ -120,7 +120,7 @@ void ftNess_AttackS4_Anim(HSD_GObj* gobj) // Ness's F-Smash Animation callback
         Fighter* fighter_data2;
         fighter_data2 = GET_FIGHTER(gobj);
         if (fighter_data2->fv.ns.bat_gobj != NULL) {
-            func_802AD6B8(
+            it_802AD6B8(
                 fighter_data2->fv.ns.bat_gobj); // Despawn the Baseball Bat if
                                                 // animation is over
             fighter_data2->fv.ns.bat_gobj = NULL;
@@ -142,7 +142,7 @@ void ftNess_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
 
     if (fp->x2218_flag.bits.b0 != 0) {
         if (fp->fv.ns.bat_gobj != NULL) {
-            func_802AD6B8(fp->fv.ns.bat_gobj);
+            it_802AD6B8(fp->fv.ns.bat_gobj);
             fp->fv.ns.bat_gobj = NULL;
         }
         ft_8008A4D4(gobj);

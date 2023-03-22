@@ -146,7 +146,7 @@ void ft_8007C6DC(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 extern unk_t lbAudioAx_80023870();
-extern unk_t func_802E5EF4();
+extern unk_t it_802E5EF4();
 
 #pragma push
 asm void ft_8007C77C(HSD_GObj* gobj)
@@ -225,7 +225,7 @@ lbl_8007C868:
 /* 8007C87C 0007945C  2C 03 00 00 */	cmpwi r3, 0
 /* 8007C880 00079460  41 82 00 7C */	beq lbl_8007C8FC
 /* 8007C884 00079464  80 7B 00 04 */	lwz r3, 4(r27)
-/* 8007C888 00079468  48 26 96 6D */	bl func_802E5EF4
+/* 8007C888 00079468  48 26 96 6D */	bl it_802E5EF4
 /* 8007C88C 0007946C  7C 7D 1B 78 */	mr r29, r3
 /* 8007C890 00079470  88 7F 00 0C */	lbz r3, 0xc(r31)
 /* 8007C894 00079474  4B FB 74 CD */	bl Player_GetCoins

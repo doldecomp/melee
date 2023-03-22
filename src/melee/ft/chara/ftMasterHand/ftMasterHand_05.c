@@ -30,10 +30,10 @@ inline void func_80151484_inline1(HSD_GObj* gobj)
     r29_fp->x80_self_vel.z = 0.0f;
     r29_fp->x80_self_vel.y = 0.0f;
     r29_fp->x80_self_vel.x = 0.0f;
-    func_802F046C(r29_fp->mv.mh.unk0.x34);
-    func_802F046C(r29_fp->mv.mh.unk0.x38);
-    func_802F046C(r29_fp->mv.mh.unk0.x3C);
-    func_802F046C(r29_fp->mv.mh.unk0.x40);
+    it_802F046C(r29_fp->mv.mh.unk0.x34);
+    it_802F046C(r29_fp->mv.mh.unk0.x38);
+    it_802F046C(r29_fp->mv.mh.unk0.x3C);
+    it_802F046C(r29_fp->mv.mh.unk0.x40);
     r29_fp->mv.mh.unk0.x34 = 0;
     r29_fp->mv.mh.unk0.x38 = 0;
     r29_fp->mv.mh.unk0.x3C = 0;

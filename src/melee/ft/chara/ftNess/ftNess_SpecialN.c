@@ -67,7 +67,7 @@ void ftNess_ItemPKFlushSetNULL(HSD_GObj* gobj)
         }
 
         if (fp->fv.ns.pkflash_gobj != NULL) {
-            func_802AAA50(fp->fv.ns.pkflash_gobj);
+            it_802AAA50(fp->fv.ns.pkflash_gobj);
             fp->fv.ns.pkflash_gobj = NULL;
         }
 
@@ -201,7 +201,7 @@ void ftNess_SpecialNStart_Anim(HSD_GObj* gobj)
             vec.y += 3 * fp->x34_scale.y;
 
             {
-                HSD_GObj* pk_flash = func_802AA8C0(
+                HSD_GObj* pk_flash = it_802AA8C0(
                     gobj, &vec, It_Kind_Ness_PKFlush, fp->facing_dir);
 
                 fp->fv.ns.pkflash_gobj = pk_flash;
@@ -250,12 +250,12 @@ void ftNess_SpecialNHold_Anim(HSD_GObj* gobj)
         return;
     }
 
-    if (func_802AA7E4(fp->fv.ns.pkflash_gobj) != gobj) {
+    if (it_802AA7E4(fp->fv.ns.pkflash_gobj) != gobj) {
         fp->fv.ns.pkflash_gobj = NULL;
         return;
     }
 
-    if (func_802AA7F0(fp->fv.ns.pkflash_gobj) == true &&
+    if (it_802AA7F0(fp->fv.ns.pkflash_gobj) == true &&
         fp->motion_id != MS_NESS_SPECIALN_HOLD_RELEASE)
     {
         Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALN_HOLD_RELEASE, 0, NULL,
@@ -326,8 +326,8 @@ void ftNess_SpecialAirNStart_Anim(HSD_GObj* gobj)
 
                 {
                     HSD_GObj* flash_GObj =
-                        func_802AA8C0(gobj, &vec, It_Kind_Ness_PKFlush,
-                                      fighter_data2->facing_dir);
+                        it_802AA8C0(gobj, &vec, It_Kind_Ness_PKFlush,
+                                    fighter_data2->facing_dir);
                     fighter_data2->fv.ns.pkflash_gobj = flash_GObj;
                     if (flash_GObj != NULL) {
                         fighter_data2->cb.x21E4_callback_OnDeath2 =
@@ -373,12 +373,12 @@ void ftNess_SpecialAirNHold_Anim(HSD_GObj* gobj)
                                       0);
         }
     } else {
-        if (func_802AA7E4(fp->fv.ns.pkflash_gobj) != gobj) {
+        if (it_802AA7E4(fp->fv.ns.pkflash_gobj) != gobj) {
             fp->fv.ns.pkflash_gobj = NULL;
             return;
         }
 
-        if (func_802AA7F0(fp->fv.ns.pkflash_gobj) == true &&
+        if (it_802AA7F0(fp->fv.ns.pkflash_gobj) == true &&
             fp->motion_id != MS_NESS_SPECIALAIRN_HOLD_RELEASE)
         {
             Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRN_HOLD_RELEASE,

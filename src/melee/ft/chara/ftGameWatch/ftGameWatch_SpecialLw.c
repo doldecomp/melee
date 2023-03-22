@@ -29,8 +29,7 @@ void ftGameWatch_ItemPanicSetup(HSD_GObj* gobj)
 
         lb_8000B1CC(fp->ft_bones[TopN].x0_jobj, NULL, &vec);
 
-        fp->fv.gw.x2268_panicGObj =
-            func_802C7D60(gobj, &vec, 0, fp->facing_dir);
+        fp->fv.gw.x2268_panicGObj = it_802C7D60(gobj, &vec, 0, fp->facing_dir);
     }
 
     if (fp->fv.gw.x2268_panicGObj != NULL) {
@@ -60,7 +59,7 @@ void ftGameWatch_ItemPanicRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x2268_panicGObj != NULL) {
-        func_802C7E94(fp->fv.gw.x2268_panicGObj);
+        it_802C7E94(fp->fv.gw.x2268_panicGObj);
         ftGameWatch_ItemPanicSetFlag(gobj);
     }
 }
@@ -71,7 +70,7 @@ void ftGameWatch_ItemPanicEnterHitlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x2268_panicGObj != NULL) {
-        func_802C7EE0(fp->fv.gw.x2268_panicGObj);
+        it_802C7EE0(fp->fv.gw.x2268_panicGObj);
     }
 }
 
@@ -81,7 +80,7 @@ void ftGameWatch_ItemPanicExitHitlag(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.gw.x2268_panicGObj != NULL) {
-        func_802C7F00(fp->fv.gw.x2268_panicGObj);
+        it_802C7F00(fp->fv.gw.x2268_panicGObj);
     }
 }
 

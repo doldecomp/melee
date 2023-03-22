@@ -394,7 +394,7 @@ void ftZelda_8013B5EC(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->fv.zd.x222C != NULL) {
-        func_802C3D44(fp->fv.zd.x222C);
+        it_802C3D44(fp->fv.zd.x222C);
         fp->fv.zd.x222C = NULL;
     }
 
