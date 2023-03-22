@@ -178,7 +178,7 @@ void ftMars_80138638(HSD_GObj* gobj)
 
     if (fp->ground_or_air == GA_Air) {
         if (fp->x2208_ftcmd_var2 == 0) {
-            func_80085154(gobj);
+            ft_80085154(gobj);
             if (fp->x80_self_vel.x < 0.0f) {
                 num = -1;
             } else {
@@ -199,7 +199,7 @@ void ftMars_80138638(HSD_GObj* gobj)
                               attr2->x17C_AerialDriftMax * attr->x28);
         }
     } else {
-        func_80084FA8(gobj);
+        ft_80084FA8(gobj);
     }
 }
 
@@ -219,7 +219,7 @@ void ftMars_8013873C(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 != 0) {
         if (fp->x2208_ftcmd_var2 == 0) {
-            func_80085154(gobj);
+            ft_80085154(gobj);
             fp->x80_self_vel.x *= attr->x40;
             fp->x80_self_vel.y *= attr->x40;
             fp->x80_self_vel.z *= attr->x40;
@@ -263,15 +263,15 @@ void ftMars_801388B4(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
-            func_80083B68(gobj);
+            ft_80083B68(gobj);
         } else if (fp->x2204_ftcmd_var1 == 0) {
             fp->x2204_ftcmd_var1 = 1;
-            func_80083B68(gobj);
+            ft_80083B68(gobj);
         } else {
-            func_800831CC(gobj, &func_80096CC8, &ftMars_80138884);
+            ft_800831CC(gobj, &func_80096CC8, &ftMars_80138884);
         }
     } else {
-        func_80084104(gobj);
+        ft_80084104(gobj);
     }
 }
 
@@ -282,14 +282,14 @@ void ftMars_80138940(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     if (fp->ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
-            func_80083B68(gobj);
+            ft_80083B68(gobj);
         } else if (fp->x2204_ftcmd_var1 == 0) {
             fp->x2204_ftcmd_var1 = 1;
-            func_80083B68(gobj);
+            ft_80083B68(gobj);
         } else {
-            func_800831CC(gobj, &func_80096CC8, &ftMars_80138884);
+            ft_800831CC(gobj, &func_80096CC8, &ftMars_80138884);
         }
     } else {
-        func_80084104(gobj);
+        ft_80084104(gobj);
     }
 }

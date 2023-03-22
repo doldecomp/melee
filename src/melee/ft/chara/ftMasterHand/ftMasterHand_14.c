@@ -50,7 +50,7 @@ void ftMasterHand_80152C70(HSD_GObj* arg0)
 // https://decomp.me/scratch/ZDCi1
 void ftMasterHand_80152CB4(HSD_GObj* arg0)
 {
-    func_80085134(arg0);
+    ft_80085134(arg0);
 }
 
 // 80152CD4 14F8B4
@@ -104,7 +104,7 @@ void ftMasterHand_80152DC0(HSD_GObj* arg0)
 // https://decomp.me/scratch/BwM1c
 void ftMasterHand_80152E04(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 80152E24 14FA04

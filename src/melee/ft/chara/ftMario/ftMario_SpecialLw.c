@@ -277,14 +277,14 @@ void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
 #endif
 
     if (fp->ground_or_air == GA_Ground) {
-        if (func_80082888(gobj, &coll_box) == false) {
+        if (ft_80082888(gobj, &coll_box) == false) {
             doPhys(gobj);
             fp->mv.mr.SpecialLw.isUnkColl = false;
         } else {
             fp->mv.mr.SpecialLw.isUnkColl = true;
         }
     } else {
-        if (func_800824A0(gobj, &coll_box) == false) {
+        if (ft_800824A0(gobj, &coll_box) == false) {
             doPhys(gobj);
             fp->mv.mr.SpecialLw.isUnkColl = false;
         } else {
@@ -321,7 +321,7 @@ void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj)
 #endif
 
     Fighter* fp = GET_FIGHTER(gobj);
-    if (func_800824A0(gobj, &coll_box)) {
+    if (ft_800824A0(gobj, &coll_box)) {
         doAirCollIfUnk(gobj);
         fp->mv.mr.SpecialLw.isUnkColl = true;
     } else {

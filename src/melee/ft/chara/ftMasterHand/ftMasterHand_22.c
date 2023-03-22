@@ -34,7 +34,7 @@ void ftMasterHand_80154278(HSD_GObj* arg0)
 // 801542BC 150E9C
 void ftMasterHand_801542BC(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 801542DC 150EBC
@@ -129,7 +129,7 @@ void ftMasterHand_8015442C(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    func_80085134(gobj);
+    ft_80085134(gobj);
     func_8015C208(gobj, &sp28_pos);
     sp28_pos.x += attr->x108;
     sp28_pos.y += attr->x10C;
@@ -197,7 +197,7 @@ void ftMasterHand_80154670(HSD_GObj* arg0)
 // 801546B4 151294
 void ftMasterHand_801546B4(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 801546D4 1512B4
@@ -250,7 +250,7 @@ void ftMasterHand_801547D8(HSD_GObj* gobj)
 
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->ft_data->ext_attr;
-    func_80085134(gobj);
+    ft_80085134(gobj);
     func_8015BE40(gobj, &r31_fp->mv.mh.unk0.xC, &r31_fp->mv.mh.unk0.x18,
                   r30_attributes->x2C, r30_attributes->x28);
 }
@@ -316,7 +316,7 @@ void ftMasterHand_801549A8(HSD_GObj* arg0)
 
     temp_r31 = arg0->user_data;
     temp_r30 = temp_r31->ft_data->ext_attr;
-    func_80085134(arg0);
+    ft_80085134(arg0);
     func_8015BE40(arg0, &temp_r31->mv.mh.unk0.xC, &temp_r31->mv.mh.unk0.x18,
                   temp_r30->x2C, temp_r30->x28);
 }

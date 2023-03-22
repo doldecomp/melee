@@ -784,7 +784,7 @@ void func_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
     HSD_ASSERT(1117, itGetKind(item_gobj) == It_Kind_MetalB);
     func_800C8348(gobj, func_8026B560(item_gobj), func_8026B574(item_gobj));
     func_800D105C(gobj);
-    func_80081C88(gobj, fp->x34_scale.y);
+    ft_80081C88(gobj, fp->x34_scale.y);
     ftCommon_8007EBAC(fp, 0xC, 0);
     func_80030E44(2, &fp->cur_pos);
     func_80088148(fp, 0x121, 0x7F, 0x40);

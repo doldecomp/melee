@@ -757,7 +757,7 @@ void ftNess_AttackHi4_Phys(HSD_GObj* gobj) // Ness's Up Smash Physics callback
     Vec3 sp10;
     Fighter* fp;
 
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     fp = GET_FIGHTER(gobj);
     ftNess_YoyoSetUnkPos(gobj, &sp10);
     fp->fv.ns.yoyo_hitbox_pos = sp10;
@@ -781,7 +781,7 @@ void ftNess_AttackHi4_Coll(
 
     fp = gobj->user_data;
 
-    func_80084104(gobj);
+    ft_80084104(gobj);
 
     if (((s32) fp->ground_or_air == GA_Air) &&
         ((yoyo_GObj = GetFighterData_x222C(gobj)) != NULL))
@@ -865,7 +865,7 @@ void ftNess_AttackHi4_Charge_IASA(
 void ftNess_AttackHi4_Charge_Phys(
     HSD_GObj* gobj) // Ness's Up Smash Charge Physics callback
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x80116104
@@ -877,7 +877,7 @@ void ftNess_AttackHi4_Charge_Coll(
     HSD_GObj* yoyo_GObj;
 
     fp = getFighter(gobj);
-    func_80084104(gobj);
+    ft_80084104(gobj);
     if (((s32) fp->ground_or_air == GA_Air) &&
         ((yoyo_GObj = GetFighterData_x222C(gobj)) != NULL))
 
@@ -967,7 +967,7 @@ void ftNess_AttackHi4_Release_Phys(
     f32 phi_f31;
 
     fp = GET_FIGHTER(gobj);
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     yoyoSmashFrameCurr = fp->mv.ns.attackhi4.yoyoCurrentFrame;
     if (yoyoSmashFrameCurr < 0x18) {
         phi_f31 = 0.10000000149011612f * ((f32) yoyoSmashFrameCurr - 14.0f);
@@ -1004,7 +1004,7 @@ void ftNess_AttackHi4_Release_Coll(
     HSD_GObj* yoyo_GObj;
 
     fp = getFighter(gobj);
-    func_80084104(gobj);
+    ft_80084104(gobj);
 
     if (((s32) fp->ground_or_air == GA_Air) &&
         ((yoyo_GObj = GetFighterData_x222C(gobj)) != NULL))

@@ -155,7 +155,7 @@ void ftFox_SpecialSStart_Phys(HSD_GObj* gobj)
     if (fp->mv.fx.SpecialS.gravityDelay != 0) {
         fp->mv.fx.SpecialS.gravityDelay--;
     }
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x800EA0BC
@@ -186,7 +186,7 @@ void ftFox_SpecialAirSStart_Phys(HSD_GObj* gobj)
 // Start Collision callback
 void ftFox_SpecialSStart_Coll(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftFox_SpecialSStart_GroundToAir(gobj);
     }
 }
@@ -352,7 +352,7 @@ static inline void ftFox_SpecialS_SetPhys(HSD_GObj* gobj)
 // Dash Physics callback
 void ftFox_SpecialS_Phys(HSD_GObj* gobj)
 {
-    func_80085088(gobj);
+    ft_80085088(gobj);
 
     ftFox_SpecialS_SetPhys(gobj);
 }
@@ -361,7 +361,7 @@ void ftFox_SpecialS_Phys(HSD_GObj* gobj)
 // https://decomp.me/scratch/uC46r
 void ftFox_SpecialAirS_Phys(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 
     ftFox_SpecialS_SetPhys(gobj);
 }
@@ -371,7 +371,7 @@ void ftFox_SpecialAirS_Phys(HSD_GObj* gobj)
 // Dash Collision callback
 void ftFox_SpecialS_Coll(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftFox_SpecialS_GroundToAir(gobj);
     }
 }
@@ -569,7 +569,7 @@ void ftFox_SpecialSEnd_Coll(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (func_800827A0(gobj) == false) {
+    if (ft_800827A0(gobj) == false) {
         func_800CC730(gobj);
     }
 }

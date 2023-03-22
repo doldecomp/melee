@@ -154,7 +154,7 @@ void ftNess_AttackS4_IASA(HSD_GObj* gobj) // Ness's F-Smash IASA Callback
 void ftNess_AttackS4_Phys(HSD_GObj* gobj) // Ness's F-Smash Physics Callback
 
 {
-    func_80084FA8(gobj);
+    ft_80084FA8(gobj);
     ftColl_8007AEF8(gobj);
 };
 
@@ -162,5 +162,5 @@ void ftNess_AttackS4_Phys(HSD_GObj* gobj) // Ness's F-Smash Physics Callback
 // https://decomp.me/scratch/nJ4hj
 void ftNess_AttackS4_Coll(HSD_GObj* gobj) // Ness's F-Smash Collision Callback
 {
-    func_80084104(gobj);
+    ft_80084104(gobj);
 };

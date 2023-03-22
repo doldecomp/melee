@@ -41,7 +41,7 @@ void ftMasterHand_80154E14(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
 
-    func_80085134(gobj);
+    ft_80085134(gobj);
     func_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, attr->x2C,
                   attr->x28);
 }

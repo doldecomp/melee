@@ -29,7 +29,7 @@ void ftMasterHand_801538A8(HSD_GObj* arg0)
 // 801538EC 1504CC
 void ftMasterHand_801538EC(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 8015390C 1504EC

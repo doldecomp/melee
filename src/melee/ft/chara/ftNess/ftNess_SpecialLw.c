@@ -153,7 +153,7 @@ void ftNess_SpecialAirLwStart_IASA(
 /// Ness's grounded PSI Magnet Start Physics callback
 void ftNess_SpecialLwStart_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 /// Ness's aerial PSI Magnet Start Physics callback
@@ -184,7 +184,7 @@ void ftNess_SpecialAirLwStart_Phys(HSD_GObj* gobj)
 void ftNess_SpecialLwStart_Coll(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet Start Collision callback
 {
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftNess_SpecialLwStart_GroundToAir(gobj);
     }
 }
@@ -194,7 +194,7 @@ void ftNess_SpecialLwStart_Coll(
 void ftNess_SpecialAirLwStart_Coll(
     HSD_GObj* gobj) // Ness's aerial PSI Magnet Start Collision callback
 {
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftNess_SpecialAirLwStart_AirToGround(gobj);
     }
 }
@@ -325,7 +325,7 @@ void ftNess_SpecialAirLwHold_IASA(
 void ftNess_SpecialLwHold_Phys(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet Hold Physics callback
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftColl_8007AF10(gobj);
 }
 
@@ -361,7 +361,7 @@ void ftNess_SpecialAirLwHold_Phys(HSD_GObj* gobj)
 void ftNess_SpecialLwHold_Coll(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet Hold Collision callback
 {
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftNess_SpecialLwHold_GroundToAir(gobj);
     }
 }
@@ -371,7 +371,7 @@ void ftNess_SpecialLwHold_Coll(
 void ftNess_SpecialAirLwHold_Coll(
     HSD_GObj* gobj) // Ness's aerial PSI Magnet Hold Collision callback
 {
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftNess_SpecialAirLwHold_AirToGround(gobj);
     }
 }
@@ -568,7 +568,7 @@ void ftNess_SpecialLwTurn_Phys(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet Turnaround Physics
                     // callback - _
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftColl_8007AF10(gobj);
 }
 
@@ -607,7 +607,7 @@ void ftNess_SpecialLwTurn_Coll(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet Turnaround Collision
                     // callback - _
 {
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftNess_SpecialLwTurn_GroundToAir(gobj);
     }
 }
@@ -618,7 +618,7 @@ void ftNess_SpecialAirLwTurn_Coll(
     HSD_GObj* gobj) // Ness's aerial PSI Magnet Turnaround Collision
                     // callback - _
 {
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftNess_SpecialAirLwTurn_AirToGround(gobj);
     }
 }
@@ -847,7 +847,7 @@ void ftNess_SpecialAirLwHit_IASA(
 void ftNess_SpecialLwHit_Phys(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet Absorb Physics callback
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftColl_8007AF10(gobj);
 }
 
@@ -884,7 +884,7 @@ void ftNess_SpecialAirLwHit_Phys(
 void ftNess_SpecialLwHit_Coll(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet Absorb Collision callback
 {
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftNess_SpecialLwHit_GroundToAir(gobj);
     }
 }
@@ -894,7 +894,7 @@ void ftNess_SpecialLwHit_Coll(
 void ftNess_SpecialAirLwHit_Coll(
     HSD_GObj* gobj) // Ness's aerial PSI Magnet Absorb Collision callback
 {
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftNess_SpecialAirLwHit_AirToGround(gobj);
     }
 }
@@ -1050,7 +1050,7 @@ void ftNess_SpecialAirLwEnd_IASA(
 void ftNess_SpecialLwEnd_Phys(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet End Physics callback
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x8011B30C
@@ -1083,7 +1083,7 @@ void ftNess_SpecialAirLwEnd_Phys(
 void ftNess_SpecialLwEnd_Coll(
     HSD_GObj* gobj) // Ness's grounded PSI Magnet End Collision callback
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftNess_SpecialLwEnd_GroundToAir(gobj);
 }
 
@@ -1092,7 +1092,7 @@ void ftNess_SpecialLwEnd_Coll(
 void ftNess_SpecialAirLwEnd_Coll(
     HSD_GObj* gobj) // Ness's aerial PSI Magnet End Collision callback
 {
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftNess_SpecialAirLwEnd_AirToGround(gobj);
     }
 }

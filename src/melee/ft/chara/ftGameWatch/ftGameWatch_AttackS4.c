@@ -144,7 +144,7 @@ void ftGameWatch_AttackS4_IASA(HSD_GObj* gobj)
 // callback
 void ftGameWatch_AttackS4_Phys(HSD_GObj* gobj)
 {
-    func_80084FA8(gobj);
+    ft_80084FA8(gobj);
 }
 
 // 0x8014AB14
@@ -152,6 +152,6 @@ void ftGameWatch_AttackS4_Phys(HSD_GObj* gobj)
 // Mr. Game & Watch's Forward Smash Collision callback
 void ftGameWatch_AttackS4_Coll(HSD_GObj* gobj)
 {
-    func_80084104(gobj);
+    ft_80084104(gobj);
     ftGameWatch_8014A538(gobj);
 }

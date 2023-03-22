@@ -21,7 +21,7 @@ static f32 const lbl_804D83B4 = 0.5F;
 static f64 const lbl_804D83B8 = 0.0F;
 
 #pragma push
-asm void func_80081B38(HSD_GObj* gobj)
+asm void ft_80081B38(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80081B38 0007E718  7C 08 02 A6 */	mflr r0
@@ -116,7 +116,7 @@ lbl_80081C6C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80081C88(HSD_GObj* dst_gobj, f32 scl_y)
+asm void ft_80081C88(HSD_GObj* dst_gobj, f32 scl_y)
 { // clang-format off
     nofralloc
 /* 80081C88 0007E868  80 83 00 2C */	lwz r4, 0x2c(r3)
@@ -160,10 +160,10 @@ lbl_80081CE0:
 
 #ifdef MWERKS_GEKKO
 
-extern void func_80081A00(void);
+extern void ft_80081A00(void);
 
 #pragma push
-asm bool func_80081D0C(HSD_GObj* gobj)
+asm bool ft_80081D0C(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80081D0C 0007E8EC  7C 08 02 A6 */	mflr r0
@@ -198,7 +198,7 @@ asm bool func_80081D0C(HSD_GObj* gobj)
 /* 80081D80 0007E960  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80081D84 0007E964  80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 80081D88 0007E968  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 80081D8C 0007E96C  4B FF FC 75 */	bl func_80081A00
+/* 80081D8C 0007E96C  4B FF FC 75 */	bl ft_80081A00
 /* 80081D90 0007E970  2C 03 00 00 */	cmpwi r3, 0
 /* 80081D94 0007E974  41 82 00 0C */	beq lbl_80081DA0
 /* 80081D98 0007E978  38 60 00 00 */	li r3, 0
@@ -226,7 +226,7 @@ lbl_80081DB4:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80081DD4(void)
+asm void ft_80081DD4(void)
 { // clang-format off
     nofralloc
 /* 80081DD4 0007E9B4  7C 08 02 A6 */	mflr r0
@@ -302,7 +302,7 @@ lbl_80081EC8:
 /* 80081ED8 0007EAB8  90 1F 00 B4 */	stw r0, 0xb4(r31)
 /* 80081EDC 0007EABC  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 80081EE0 0007EAC0  90 1F 00 B8 */	stw r0, 0xb8(r31)
-/* 80081EE4 0007EAC4  4B FF FB 1D */	bl func_80081A00
+/* 80081EE4 0007EAC4  4B FF FB 1D */	bl ft_80081A00
 /* 80081EE8 0007EAC8  2C 03 00 00 */	cmpwi r3, 0
 /* 80081EEC 0007EACC  41 82 00 0C */	beq lbl_80081EF8
 /* 80081EF0 0007EAD0  38 60 00 00 */	li r3, 0
@@ -330,7 +330,7 @@ lbl_80081F0C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80081F2C(void)
+asm void ft_80081F2C(void)
 { // clang-format off
     nofralloc
 /* 80081F2C 0007EB0C  7C 08 02 A6 */	mflr r0
@@ -406,7 +406,7 @@ lbl_80082020:
 /* 80082030 0007EC10  90 1F 00 B4 */	stw r0, 0xb4(r31)
 /* 80082034 0007EC14  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 80082038 0007EC18  90 1F 00 B8 */	stw r0, 0xb8(r31)
-/* 8008203C 0007EC1C  4B FF F9 C5 */	bl func_80081A00
+/* 8008203C 0007EC1C  4B FF F9 C5 */	bl ft_80081A00
 /* 80082040 0007EC20  2C 03 00 00 */	cmpwi r3, 0
 /* 80082044 0007EC24  41 82 00 0C */	beq lbl_80082050
 /* 80082048 0007EC28  38 60 00 00 */	li r3, 0
@@ -434,7 +434,7 @@ lbl_80082064:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80082084(void)
+asm void ft_80082084(void)
 { // clang-format off
     nofralloc
 /* 80082084 0007EC64  7C 08 02 A6 */	mflr r0
@@ -510,7 +510,7 @@ lbl_80082178:
 /* 80082188 0007ED68  90 1F 00 B4 */	stw r0, 0xb4(r31)
 /* 8008218C 0007ED6C  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 80082190 0007ED70  90 1F 00 B8 */	stw r0, 0xb8(r31)
-/* 80082194 0007ED74  4B FF F8 6D */	bl func_80081A00
+/* 80082194 0007ED74  4B FF F8 6D */	bl ft_80081A00
 /* 80082198 0007ED78  2C 03 00 00 */	cmpwi r3, 0
 /* 8008219C 0007ED7C  41 82 00 0C */	beq lbl_800821A8
 /* 800821A0 0007ED80  38 60 00 00 */	li r3, 0
@@ -538,7 +538,7 @@ lbl_800821BC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool func_800821DC(void)
+asm bool ft_800821DC(void)
 { // clang-format off
     nofralloc
 /* 800821DC 0007EDBC  7C 08 02 A6 */	mflr r0
@@ -573,7 +573,7 @@ asm bool func_800821DC(void)
 /* 80082250 0007EE30  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80082254 0007EE34  80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 80082258 0007EE38  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 8008225C 0007EE3C  4B FF F7 A5 */	bl func_80081A00
+/* 8008225C 0007EE3C  4B FF F7 A5 */	bl ft_80081A00
 /* 80082260 0007EE40  2C 03 00 00 */	cmpwi r3, 0
 /* 80082264 0007EE44  41 82 00 0C */	beq lbl_80082270
 /* 80082268 0007EE48  38 60 00 00 */	li r3, 0
@@ -652,7 +652,7 @@ lbl_80082338:
 /* 80082348 0007EF28  90 1F 00 B4 */	stw r0, 0xb4(r31)
 /* 8008234C 0007EF2C  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 80082350 0007EF30  90 1F 00 B8 */	stw r0, 0xb8(r31)
-/* 80082354 0007EF34  4B FF F6 AD */	bl func_80081A00
+/* 80082354 0007EF34  4B FF F6 AD */	bl ft_80081A00
 /* 80082358 0007EF38  2C 03 00 00 */	cmpwi r3, 0
 /* 8008235C 0007EF3C  41 82 00 0C */	beq lbl_80082368
 /* 80082360 0007EF40  38 60 00 00 */	li r3, 0
@@ -680,8 +680,8 @@ lbl_8008237C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool func_8008239C(HSD_GObj* gobj, s32 facing_direction,
-                       f32* height_attributes)
+asm bool ft_8008239C(HSD_GObj* gobj, s32 facing_direction,
+                     f32* height_attributes)
 { // clang-format off
     nofralloc
 /* 8008239C 0007EF7C  7C 08 02 A6 */	mflr r0
@@ -707,7 +707,7 @@ asm bool func_8008239C(HSD_GObj* gobj, s32 facing_direction,
 /* 800823EC 0007EFCC  80 1F 00 B8 */	lwz r0, 0xb8(r31)
 /* 800823F0 0007EFD0  90 1F 06 FC */	stw r0, 0x6fc(r31)
 /* 800823F4 0007EFD4  C0 3F 00 2C */	lfs f1, 0x2c(r31)
-/* 800823F8 0007EFD8  48 00 04 41 */	bl func_80082838
+/* 800823F8 0007EFD8  48 00 04 41 */	bl ft_80082838
 /* 800823FC 0007EFDC  80 1F 20 64 */	lwz r0, 0x2064(r31)
 /* 80082400 0007EFE0  3B 83 00 00 */	addi r28, r3, 0
 /* 80082404 0007EFE4  2C 00 00 00 */	cmpwi r0, 0
@@ -737,7 +737,7 @@ lbl_80082448:
 /* 80082458 0007F038  90 1F 00 B4 */	stw r0, 0xb4(r31)
 /* 8008245C 0007F03C  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 80082460 0007F040  90 1F 00 B8 */	stw r0, 0xb8(r31)
-/* 80082464 0007F044  4B FF F5 9D */	bl func_80081A00
+/* 80082464 0007F044  4B FF F5 9D */	bl ft_80081A00
 /* 80082468 0007F048  2C 03 00 00 */	cmpwi r3, 0
 /* 8008246C 0007F04C  41 82 00 0C */	beq lbl_80082478
 /* 80082470 0007F050  38 60 00 00 */	li r3, 0
@@ -760,8 +760,7 @@ lbl_8008248C:
 
 #else
 
-bool func_8008239C(HSD_GObj* gobj, s32 facing_direction,
-                   f32* height_attributes)
+bool ft_8008239C(HSD_GObj* gobj, s32 facing_direction, f32* height_attributes)
 {
     NOT_IMPLEMENTED;
 }
@@ -771,7 +770,7 @@ bool func_8008239C(HSD_GObj* gobj, s32 facing_direction,
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool func_800824A0(HSD_GObj*, ftCollisionBox*)
+asm bool ft_800824A0(HSD_GObj*, ftCollisionBox*)
 { // clang-format off
     nofralloc
 /* 800824A0 0007F080  7C 08 02 A6 */	mflr r0
@@ -798,7 +797,7 @@ asm bool func_800824A0(HSD_GObj*, ftCollisionBox*)
 /* 800824F4 0007F0D4  80 1E 00 B8 */	lwz r0, 0xb8(r30)
 /* 800824F8 0007F0D8  90 1E 06 FC */	stw r0, 0x6fc(r30)
 /* 800824FC 0007F0DC  C0 3E 00 2C */	lfs f1, 0x2c(r30)
-/* 80082500 0007F0E0  48 00 03 39 */	bl func_80082838
+/* 80082500 0007F0E0  48 00 03 39 */	bl ft_80082838
 /* 80082504 0007F0E4  38 83 00 00 */	addi r4, r3, 0
 /* 80082508 0007F0E8  38 7D 00 00 */	addi r3, r29, 0
 /* 8008250C 0007F0EC  4B FC 4E 01 */	bl func_8004730C
@@ -810,7 +809,7 @@ asm bool func_800824A0(HSD_GObj*, ftCollisionBox*)
 /* 80082524 0007F104  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80082528 0007F108  80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 8008252C 0007F10C  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 80082530 0007F110  4B FF F4 D1 */	bl func_80081A00
+/* 80082530 0007F110  4B FF F4 D1 */	bl ft_80081A00
 /* 80082534 0007F114  2C 03 00 00 */	cmpwi r3, 0
 /* 80082538 0007F118  41 82 00 0C */	beq lbl_80082544
 /* 8008253C 0007F11C  38 60 00 00 */	li r3, 0
@@ -838,7 +837,7 @@ lbl_80082558:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80082578(void)
+asm void ft_80082578(void)
 {
     // clang-format off
     nofralloc
@@ -872,7 +871,7 @@ asm void func_80082578(void)
 /* 800825E4 0007F1C4  90 1F 00 B4 */	stw r0, 0xb4(r31)
 /* 800825E8 0007F1C8  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 800825EC 0007F1CC  90 1F 00 B8 */	stw r0, 0xb8(r31)
-/* 800825F0 0007F1D0  4B FF F4 11 */	bl func_80081A00
+/* 800825F0 0007F1D0  4B FF F4 11 */	bl ft_80081A00
 /* 800825F4 0007F1D4  2C 03 00 00 */	cmpwi r3, 0
 /* 800825F8 0007F1D8  41 82 00 0C */	beq lbl_80082604
 /* 800825FC 0007F1DC  38 60 00 00 */	li r3, 0
@@ -900,7 +899,7 @@ lbl_8008261C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80082638(void)
+asm void ft_80082638(void)
 {
     // clang-format off
     nofralloc
@@ -927,7 +926,7 @@ asm void func_80082638(void)
 /* 80082688 0007F268  80 1F 00 B8 */	lwz r0, 0xb8(r31)
 /* 8008268C 0007F26C  90 1F 06 FC */	stw r0, 0x6fc(r31)
 /* 80082690 0007F270  C0 3F 00 2C */	lfs f1, 0x2c(r31)
-/* 80082694 0007F274  48 00 01 A5 */	bl func_80082838
+/* 80082694 0007F274  48 00 01 A5 */	bl ft_80082838
 /* 80082698 0007F278  38 83 00 00 */	addi r4, r3, 0
 /* 8008269C 0007F27C  38 7E 00 00 */	addi r3, r30, 0
 /* 800826A0 0007F280  4B FC 53 69 */	bl func_80047A08
@@ -938,7 +937,7 @@ asm void func_80082638(void)
 /* 800826B4 0007F294  90 1F 00 B4 */	stw r0, 0xb4(r31)
 /* 800826B8 0007F298  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 800826BC 0007F29C  90 1F 00 B8 */	stw r0, 0xb8(r31)
-/* 800826C0 0007F2A0  4B FF F3 41 */	bl func_80081A00
+/* 800826C0 0007F2A0  4B FF F3 41 */	bl ft_80081A00
 /* 800826C4 0007F2A4  2C 03 00 00 */	cmpwi r3, 0
 /* 800826C8 0007F2A8  41 82 00 0C */	beq lbl_800826D4
 /* 800826CC 0007F2AC  38 60 00 00 */	li r3, 0
@@ -966,7 +965,7 @@ lbl_800826EC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool func_80082708(HSD_GObj* gobj)
+asm bool ft_80082708(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80082708 0007F2E8  7C 08 02 A6 */	mflr r0
@@ -1016,7 +1015,7 @@ lbl_80082788:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool func_800827A0(HSD_GObj* gobj)
+asm bool ft_800827A0(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 800827A0 0007F380  7C 08 02 A6 */	mflr r0
@@ -1066,7 +1065,7 @@ lbl_80082820:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80082838(void)
+asm void ft_80082838(void)
 { // clang-format off
     nofralloc
 /* 80082838 0007F418  C0 02 89 CC */	lfs f0, lbl_804D83AC(r2)
@@ -1097,7 +1096,7 @@ lbl_80082880:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool func_80082888(HSD_GObj*, ftCollisionBox*)
+asm bool ft_80082888(HSD_GObj*, ftCollisionBox*)
 { // clang-format off
     nofralloc
 /* 80082888 0007F468  7C 08 02 A6 */	mflr r0
@@ -1171,7 +1170,7 @@ lbl_80082960:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80082978(void)
+asm void ft_80082978(void)
 {
     // clang-format off
     nofralloc
@@ -1246,7 +1245,7 @@ lbl_80082A50:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool func_80082A68(HSD_GObj* gobj)
+asm bool ft_80082A68(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80082A68 0007F648  7C 08 02 A6 */	mflr r0
@@ -1303,7 +1302,7 @@ lbl_80082B04:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80082B1C(HSD_GObj* gobj)
+asm void ft_80082B1C(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80082B1C 0007F6FC  7C 08 02 A6 */	mflr r0
@@ -1373,7 +1372,7 @@ asm void ftLink_80082B78(HSD_GObj*)
 /* 80082BEC 0007F7CC  90 1D 00 B4 */	stw r0, 0xb4(r29)
 /* 80082BF0 0007F7D0  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 80082BF4 0007F7D4  90 1D 00 B8 */	stw r0, 0xb8(r29)
-/* 80082BF8 0007F7D8  4B FF EE 09 */	bl func_80081A00
+/* 80082BF8 0007F7D8  4B FF EE 09 */	bl ft_80081A00
 /* 80082BFC 0007F7DC  2C 03 00 00 */	cmpwi r3, 0
 /* 80082C00 0007F7E0  41 82 00 0C */	beq lbl_80082C0C
 /* 80082C04 0007F7E4  38 00 00 00 */	li r0, 0
@@ -1416,7 +1415,7 @@ lbl_80082C54:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80082C74(HSD_GObj*, HSD_GObjEvent)
+asm void ft_80082C74(HSD_GObj*, HSD_GObjEvent)
 { // clang-format off
     nofralloc
 /* 80082C74 0007F854  7C 08 02 A6 */	mflr r0
@@ -1449,7 +1448,7 @@ asm void func_80082C74(HSD_GObj*, HSD_GObjEvent)
 /* 80082CE0 0007F8C0  90 1D 00 B4 */	stw r0, 0xb4(r29)
 /* 80082CE4 0007F8C4  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 80082CE8 0007F8C8  90 1D 00 B8 */	stw r0, 0xb8(r29)
-/* 80082CEC 0007F8CC  4B FF ED 15 */	bl func_80081A00
+/* 80082CEC 0007F8CC  4B FF ED 15 */	bl ft_80081A00
 /* 80082CF0 0007F8D0  2C 03 00 00 */	cmpwi r3, 0
 /* 80082CF4 0007F8D4  41 82 00 0C */	beq lbl_80082D00
 /* 80082CF8 0007F8D8  38 00 00 00 */	li r0, 0
@@ -1481,7 +1480,7 @@ lbl_80082D2C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80082D40(void)
+asm void ft_80082D40(void)
 {
     // clang-format off
     nofralloc
@@ -1517,7 +1516,7 @@ asm void func_80082D40(void)
 /* 80082DB4 0007F994  90 1D 00 B4 */	stw r0, 0xb4(r29)
 /* 80082DB8 0007F998  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 80082DBC 0007F99C  90 1D 00 B8 */	stw r0, 0xb8(r29)
-/* 80082DC0 0007F9A0  4B FF EC 41 */	bl func_80081A00
+/* 80082DC0 0007F9A0  4B FF EC 41 */	bl ft_80081A00
 /* 80082DC4 0007F9A4  2C 03 00 00 */	cmpwi r3, 0
 /* 80082DC8 0007F9A8  41 82 00 0C */	beq lbl_80082DD4
 /* 80082DCC 0007F9AC  38 00 00 00 */	li r0, 0
@@ -1560,7 +1559,7 @@ lbl_80082E1C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm HSD_GObj* func_80082E3C(HSD_GObj* gobj)
+asm HSD_GObj* ft_80082E3C(HSD_GObj* gobj)
 {
     // clang-format off
     nofralloc
@@ -1635,7 +1634,7 @@ lbl_80082F04:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80082F28(void)
+asm void ft_80082F28(void)
 {
     // clang-format off
     nofralloc
@@ -1695,7 +1694,7 @@ lbl_80082FD8:
 /* 80082FE8 0007FBC8  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80082FEC 0007FBCC  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 80082FF0 0007FBD0  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 80082FF4 0007FBD4  4B FF EA 0D */	bl func_80081A00
+/* 80082FF4 0007FBD4  4B FF EA 0D */	bl ft_80081A00
 /* 80082FF8 0007FBD8  2C 03 00 00 */	cmpwi r3, 0
 /* 80082FFC 0007FBDC  41 82 00 0C */	beq lbl_80083008
 /* 80083000 0007FBE0  38 00 00 00 */	li r0, 0
@@ -1747,7 +1746,7 @@ lbl_80083070:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083090(void)
+asm void ft_80083090(void)
 {
     // clang-format off
     nofralloc
@@ -1810,7 +1809,7 @@ lbl_8008314C:
 /* 8008315C 0007FD3C  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80083160 0007FD40  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 80083164 0007FD44  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 80083168 0007FD48  4B FF E8 99 */	bl func_80081A00
+/* 80083168 0007FD48  4B FF E8 99 */	bl ft_80081A00
 /* 8008316C 0007FD4C  2C 03 00 00 */	cmpwi r3, 0
 /* 80083170 0007FD50  41 82 00 0C */	beq lbl_8008317C
 /* 80083174 0007FD54  38 00 00 00 */	li r0, 0
@@ -1847,8 +1846,8 @@ lbl_800831B8:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800831CC(HSD_GObj* arg0, HSD_GObjPredicate arg1,
-                       HSD_GObjEvent arg2)
+asm void ft_800831CC(HSD_GObj* arg0, HSD_GObjPredicate arg1,
+                     HSD_GObjEvent arg2)
 { // clang-format off
     nofralloc
 /* 800831CC 0007FDAC  7C 08 02 A6 */	mflr r0
@@ -1910,7 +1909,7 @@ lbl_80083288:
 /* 80083298 0007FE78  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 8008329C 0007FE7C  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 800832A0 0007FE80  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 800832A4 0007FE84  4B FF E7 5D */	bl func_80081A00
+/* 800832A4 0007FE84  4B FF E7 5D */	bl ft_80081A00
 /* 800832A8 0007FE88  2C 03 00 00 */	cmpwi r3, 0
 /* 800832AC 0007FE8C  41 82 00 0C */	beq lbl_800832B8
 /* 800832B0 0007FE90  38 00 00 00 */	li r0, 0
@@ -1951,7 +1950,7 @@ lbl_80083304:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083318(void)
+asm void ft_80083318(void)
 {
     // clang-format off
     nofralloc
@@ -2014,7 +2013,7 @@ lbl_800833D4:
 /* 800833E4 0007FFC4  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 800833E8 0007FFC8  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 800833EC 0007FFCC  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 800833F0 0007FFD0  4B FF E6 11 */	bl func_80081A00
+/* 800833F0 0007FFD0  4B FF E6 11 */	bl ft_80081A00
 /* 800833F4 0007FFD4  2C 03 00 00 */	cmpwi r3, 0
 /* 800833F8 0007FFD8  41 82 00 0C */	beq lbl_80083404
 /* 800833FC 0007FFDC  38 00 00 00 */	li r0, 0
@@ -2055,7 +2054,7 @@ lbl_80083450:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083464(void)
+asm void ft_80083464(void)
 {
     // clang-format off
     nofralloc
@@ -2118,7 +2117,7 @@ lbl_80083520:
 /* 80083530 00080110  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80083534 00080114  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 80083538 00080118  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 8008353C 0008011C  4B FF E4 C5 */	bl func_80081A00
+/* 8008353C 0008011C  4B FF E4 C5 */	bl ft_80081A00
 /* 80083540 00080120  2C 03 00 00 */	cmpwi r3, 0
 /* 80083544 00080124  41 82 00 0C */	beq lbl_80083550
 /* 80083548 00080128  38 00 00 00 */	li r0, 0
@@ -2159,7 +2158,7 @@ lbl_8008359C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800835B0(void)
+asm void ft_800835B0(void)
 {
     // clang-format off
     nofralloc
@@ -2222,7 +2221,7 @@ lbl_8008366C:
 /* 8008367C 0008025C  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80083680 00080260  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 80083684 00080264  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 80083688 00080268  4B FF E3 79 */	bl func_80081A00
+/* 80083688 00080268  4B FF E3 79 */	bl ft_80081A00
 /* 8008368C 0008026C  2C 03 00 00 */	cmpwi r3, 0
 /* 80083690 00080270  41 82 00 0C */	beq lbl_8008369C
 /* 80083694 00080274  38 00 00 00 */	li r0, 0
@@ -2267,7 +2266,7 @@ lbl_800836F8:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_8008370C(void)
+asm void ft_8008370C(void)
 {
     // clang-format off
     nofralloc
@@ -2325,7 +2324,7 @@ lbl_800837B4:
 /* 800837C4 000803A4  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 800837C8 000803A8  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 800837CC 000803AC  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 800837D0 000803B0  4B FF E2 31 */	bl func_80081A00
+/* 800837D0 000803B0  4B FF E2 31 */	bl ft_80081A00
 /* 800837D4 000803B4  2C 03 00 00 */	cmpwi r3, 0
 /* 800837D8 000803B8  41 82 00 0C */	beq lbl_800837E4
 /* 800837DC 000803BC  38 00 00 00 */	li r0, 0
@@ -2366,7 +2365,7 @@ lbl_80083830:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083844(void)
+asm void ft_80083844(void)
 {
     // clang-format off
     nofralloc
@@ -2400,7 +2399,7 @@ asm void func_80083844(void)
 /* 800838B0 00080490  90 1D 00 B4 */	stw r0, 0xb4(r29)
 /* 800838B4 00080494  80 1E 00 0C */	lwz r0, 0xc(r30)
 /* 800838B8 00080498  90 1D 00 B8 */	stw r0, 0xb8(r29)
-/* 800838BC 0008049C  4B FF E1 45 */	bl func_80081A00
+/* 800838BC 0008049C  4B FF E1 45 */	bl ft_80081A00
 /* 800838C0 000804A0  2C 03 00 00 */	cmpwi r3, 0
 /* 800838C4 000804A4  41 82 00 0C */	beq lbl_800838D0
 /* 800838C8 000804A8  38 00 00 00 */	li r0, 0
@@ -2432,7 +2431,7 @@ lbl_800838FC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083910(void)
+asm void ft_80083910(void)
 {
     // clang-format off
     nofralloc
@@ -2490,7 +2489,7 @@ lbl_800839B8:
 /* 800839C8 000805A8  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 800839CC 000805AC  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 800839D0 000805B0  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 800839D4 000805B4  4B FF E0 2D */	bl func_80081A00
+/* 800839D4 000805B4  4B FF E0 2D */	bl ft_80081A00
 /* 800839D8 000805B8  2C 03 00 00 */	cmpwi r3, 0
 /* 800839DC 000805BC  41 82 00 0C */	beq lbl_800839E8
 /* 800839E0 000805C0  38 00 00 00 */	li r0, 0
@@ -2531,7 +2530,7 @@ lbl_80083A34:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083A48(void)
+asm void ft_80083A48(void)
 {
     // clang-format off
     nofralloc
@@ -2581,7 +2580,7 @@ lbl_80083AD8:
 /* 80083AE8 000806C8  90 1F 00 B4 */	stw r0, 0xb4(r31)
 /* 80083AEC 000806CC  80 1B 00 0C */	lwz r0, 0xc(r27)
 /* 80083AF0 000806D0  90 1F 00 B8 */	stw r0, 0xb8(r31)
-/* 80083AF4 000806D4  4B FF DF 0D */	bl func_80081A00
+/* 80083AF4 000806D4  4B FF DF 0D */	bl ft_80081A00
 /* 80083AF8 000806D8  2C 03 00 00 */	cmpwi r3, 0
 /* 80083AFC 000806DC  41 82 00 0C */	beq lbl_80083B08
 /* 80083B00 000806E0  38 00 00 00 */	li r0, 0
@@ -2622,7 +2621,7 @@ lbl_80083B54:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083B68(HSD_GObj* gobj)
+asm void ft_80083B68(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80083B68 00080748  7C 08 02 A6 */	mflr r0
@@ -2655,7 +2654,7 @@ asm void func_80083B68(HSD_GObj* gobj)
 /* 80083BD4 000807B4  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80083BD8 000807B8  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 80083BDC 000807BC  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 80083BE0 000807C0  4B FF DE 21 */	bl func_80081A00
+/* 80083BE0 000807C0  4B FF DE 21 */	bl ft_80081A00
 /* 80083BE4 000807C4  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 80083BE8 000807C8  83 E1 00 2C */	lwz r31, 0x2c(r1)
 /* 80083BEC 000807CC  83 C1 00 28 */	lwz r30, 0x28(r1)
@@ -2670,7 +2669,7 @@ asm void func_80083B68(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083C00(void)
+asm void ft_80083C00(void)
 {
     // clang-format off
     nofralloc
@@ -2706,7 +2705,7 @@ asm void func_80083C00(void)
 /* 80083C74 00080854  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80083C78 00080858  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 80083C7C 0008085C  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 80083C80 00080860  4B FF DD 81 */	bl func_80081A00
+/* 80083C80 00080860  4B FF DD 81 */	bl ft_80081A00
 /* 80083C84 00080864  2C 03 00 00 */	cmpwi r3, 0
 /* 80083C88 00080868  41 82 00 0C */	beq lbl_80083C94
 /* 80083C8C 0008086C  38 00 00 00 */	li r0, 0
@@ -2742,7 +2741,7 @@ lbl_80083CC4:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083CE4(void)
+asm void ft_80083CE4(void)
 {
     // clang-format off
     nofralloc
@@ -2779,7 +2778,7 @@ asm void func_80083CE4(void)
 /* 80083D5C 0008093C  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80083D60 00080940  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 80083D64 00080944  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 80083D68 00080948  4B FF DC 99 */	bl func_80081A00
+/* 80083D68 00080948  4B FF DC 99 */	bl ft_80081A00
 /* 80083D6C 0008094C  2C 03 00 00 */	cmpwi r3, 0
 /* 80083D70 00080950  41 82 00 0C */	beq lbl_80083D7C
 /* 80083D74 00080954  38 00 00 00 */	li r0, 0
@@ -2815,7 +2814,7 @@ lbl_80083DAC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083DCC(void)
+asm void ft_80083DCC(void)
 { // clang-format off
     nofralloc
 /* 80083DCC 000809AC  7C 08 02 A6 */	mflr r0
@@ -2848,7 +2847,7 @@ asm void func_80083DCC(void)
 /* 80083E38 00080A18  90 1E 00 B4 */	stw r0, 0xb4(r30)
 /* 80083E3C 00080A1C  80 1F 00 0C */	lwz r0, 0xc(r31)
 /* 80083E40 00080A20  90 1E 00 B8 */	stw r0, 0xb8(r30)
-/* 80083E44 00080A24  4B FF DB BD */	bl func_80081A00
+/* 80083E44 00080A24  4B FF DB BD */	bl ft_80081A00
 /* 80083E48 00080A28  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 80083E4C 00080A2C  83 E1 00 2C */	lwz r31, 0x2c(r1)
 /* 80083E50 00080A30  83 C1 00 28 */	lwz r30, 0x28(r1)
@@ -2863,7 +2862,7 @@ asm void func_80083DCC(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083E64(void)
+asm void ft_80083E64(void)
 {
     // clang-format off
     nofralloc
@@ -2921,7 +2920,7 @@ lbl_80083F08:
 /* 80083F28 00080B08  90 1B 00 B4 */	stw r0, 0xb4(r27)
 /* 80083F2C 00080B0C  80 1C 00 0C */	lwz r0, 0xc(r28)
 /* 80083F30 00080B10  90 1B 00 B8 */	stw r0, 0xb8(r27)
-/* 80083F34 00080B14  4B FF DA CD */	bl func_80081A00
+/* 80083F34 00080B14  4B FF DA CD */	bl ft_80081A00
 /* 80083F38 00080B18  2C 03 00 00 */	cmpwi r3, 0
 /* 80083F3C 00080B1C  41 82 00 0C */	beq lbl_80083F48
 /* 80083F40 00080B20  38 00 00 00 */	li r0, 0
@@ -2953,7 +2952,7 @@ lbl_80083F74:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80083F88(HSD_GObj* gobj)
+asm void ft_80083F88(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80083F88 00080B68  7C 08 02 A6 */	mflr r0
@@ -3011,7 +3010,7 @@ lbl_80084020:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_8008403C(HSD_GObj*, HSD_GObjEvent)
+asm void ft_8008403C(HSD_GObj*, HSD_GObjEvent)
 { // clang-format off
     nofralloc
 /* 8008403C 00080C1C  7C 08 02 A6 */	mflr r0
@@ -3074,7 +3073,7 @@ lbl_800840E4:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80084104(HSD_GObj* gobj)
+asm void ft_80084104(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80084104 00080CE4  7C 08 02 A6 */	mflr r0
@@ -3132,7 +3131,7 @@ lbl_8008419C:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800841B8(void)
+asm void ft_800841B8(void)
 {
     // clang-format off
     nofralloc
@@ -3196,7 +3195,7 @@ lbl_80084260:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80084280(HSD_GObj*)
+asm void ft_80084280(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80084280 00080E60  7C 08 02 A6 */	mflr r0
@@ -3308,7 +3307,7 @@ lbl_800843E0:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800843FC(void)
+asm void ft_800843FC(void)
 {
     // clang-format off
     nofralloc
@@ -3384,7 +3383,7 @@ lbl_800844D0:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800844EC(void)
+asm void ft_800844EC(void)
 {
     // clang-format off
     nofralloc
@@ -3449,7 +3448,7 @@ lbl_80084598:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800845B4(void)
+asm void ft_800845B4(void)
 {
     // clang-format off
     nofralloc
@@ -3529,7 +3528,7 @@ lbl_80084694:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800846B0(void)
+asm void ft_800846B0(void)
 {
     // clang-format off
     nofralloc
@@ -3617,7 +3616,7 @@ lbl_800847B0:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800847D0(void)
+asm void ft_800847D0(void)
 {
     // clang-format off
     nofralloc
@@ -3700,7 +3699,7 @@ lbl_800848C0:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800848DC(void)
+asm void ft_800848DC(void)
 {
     // clang-format off
     nofralloc
@@ -3785,7 +3784,7 @@ lbl_800849CC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800849EC(Fighter*, Fighter*)
+asm void ft_800849EC(Fighter*, Fighter*)
 { // clang-format off
     nofralloc
 /* 800849EC 000815CC  7C 08 02 A6 */	mflr r0
@@ -3805,7 +3804,7 @@ asm void func_800849EC(Fighter*, Fighter*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool func_80084A18(HSD_GObj*)
+asm bool ft_80084A18(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80084A18 000815F8  7C 08 02 A6 */	mflr r0
@@ -3853,7 +3852,7 @@ lbl_80084A70:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80084A80(void)
+asm void ft_80084A80(void)
 {
     // clang-format off
     nofralloc
@@ -3974,7 +3973,7 @@ lbl_80084BE8:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80084BFC(void)
+asm void ft_80084BFC(void)
 { // clang-format off
     nofralloc
 /* 80084BFC 000817DC  7C 08 02 A6 */	mflr r0
@@ -3987,7 +3986,7 @@ asm void func_80084BFC(void)
 /* 80084C18 000817F8  38 A8 00 00 */	addi r5, r8, 0
 /* 80084C1C 000817FC  7C 06 03 78 */	mr r6, r0
 /* 80084C20 00081800  38 60 00 00 */	li r3, 0
-/* 80084C24 00081804  4B FF FE 5D */	bl func_80084A80
+/* 80084C24 00081804  4B FF FE 5D */	bl ft_80084A80
 /* 80084C28 00081808  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80084C2C 0008180C  38 21 00 08 */	addi r1, r1, 8
 /* 80084C30 00081810  7C 08 03 A6 */	mtlr r0
@@ -3998,7 +3997,7 @@ asm void func_80084BFC(void)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80084C38(void)
+asm void ft_80084C38(void)
 { // clang-format off
     nofralloc
 /* 80084C38 00081818  7C 08 02 A6 */	mflr r0
@@ -4011,7 +4010,7 @@ asm void func_80084C38(void)
 /* 80084C54 00081834  38 A8 00 00 */	addi r5, r8, 0
 /* 80084C58 00081838  7C 06 03 78 */	mr r6, r0
 /* 80084C5C 0008183C  38 60 00 01 */	li r3, 1
-/* 80084C60 00081840  4B FF FE 21 */	bl func_80084A80
+/* 80084C60 00081840  4B FF FE 21 */	bl ft_80084A80
 /* 80084C64 00081844  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80084C68 00081848  38 21 00 08 */	addi r1, r1, 8
 /* 80084C6C 0008184C  7C 08 03 A6 */	mtlr r0
@@ -4022,7 +4021,7 @@ asm void func_80084C38(void)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80084C74(void)
+asm void ft_80084C74(void)
 { // clang-format off
     nofralloc
 /* 80084C74 00081854  7C 08 02 A6 */	mflr r0
@@ -4035,7 +4034,7 @@ asm void func_80084C74(void)
 /* 80084C90 00081870  38 A8 00 00 */	addi r5, r8, 0
 /* 80084C94 00081874  7C 06 03 78 */	mr r6, r0
 /* 80084C98 00081878  38 60 00 02 */	li r3, 2
-/* 80084C9C 0008187C  4B FF FD E5 */	bl func_80084A80
+/* 80084C9C 0008187C  4B FF FD E5 */	bl ft_80084A80
 /* 80084CA0 00081880  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80084CA4 00081884  38 21 00 08 */	addi r1, r1, 8
 /* 80084CA8 00081888  7C 08 03 A6 */	mtlr r0
@@ -4046,7 +4045,7 @@ asm void func_80084C74(void)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80084CB0(void)
+asm void ft_80084CB0(void)
 { // clang-format off
     nofralloc
 /* 80084CB0 00081890  C0 03 07 98 */	lfs f0, 0x798(r3)
@@ -4068,7 +4067,7 @@ asm void func_80084CB0(void)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool func_80084CE4(Fighter* attacker, Fighter* victim)
+asm bool ft_80084CE4(Fighter* attacker, Fighter* victim)
 {
     // clang-format off
     nofralloc
@@ -4132,7 +4131,7 @@ lbl_80084DA0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_80084DB0(HSD_GObj*)
+asm void ft_80084DB0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80084DB0 00081990  7C 08 02 A6 */	mflr r0
@@ -4171,7 +4170,7 @@ lbl_80084DFC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80084E1C(void)
+asm void ft_80084E1C(void)
 {
     // clang-format off
     nofralloc
@@ -4240,7 +4239,7 @@ lbl_80084EBC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80084EEC(HSD_GObj* gobj)
+asm void ft_80084EEC(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80084EEC 00081ACC  7C 08 02 A6 */	mflr r0
@@ -4270,7 +4269,7 @@ asm void func_80084EEC(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80084F3C(HSD_GObj* gobj)
+asm void ft_80084F3C(HSD_GObj* gobj)
 {
     // clang-format off
     nofralloc
@@ -4307,12 +4306,12 @@ lbl_80084F88:
 #pragma pop
 #endif
 
-void func_80085030(void);
+void ft_80085030(void);
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80084FA8(HSD_GObj* gobj)
+asm void ft_80084FA8(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80084FA8 00081B88  7C 08 02 A6 */	mflr r0
@@ -4335,7 +4334,7 @@ lbl_80084FD4:
 /* 80084FE8 00081BC8  EC 21 00 32 */	fmuls f1, f1, f0
 lbl_80084FEC:
 /* 80084FEC 00081BCC  C0 45 00 2C */	lfs f2, 0x2c(r5)
-/* 80084FF0 00081BD0  48 00 00 41 */	bl func_80085030
+/* 80084FF0 00081BD0  48 00 00 41 */	bl ft_80085030
 /* 80084FF4 00081BD4  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80084FF8 00081BD8  38 21 00 08 */	addi r1, r1, 8
 /* 80084FFC 00081BDC  7C 08 03 A6 */	mtlr r0
@@ -4347,7 +4346,7 @@ lbl_80084FEC:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80085004(void)
+asm void ft_80085004(void)
 { // clang-format off
     nofralloc
 /* 80085004 00081BE4  7C 08 02 A6 */	mflr r0
@@ -4356,7 +4355,7 @@ asm void func_80085004(void)
 /* 80085010 00081BF0  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 80085014 00081BF4  C0 45 00 30 */	lfs f2, 0x30(r5)
 /* 80085018 00081BF8  C0 25 01 28 */	lfs f1, 0x128(r5)
-/* 8008501C 00081BFC  48 00 00 15 */	bl func_80085030
+/* 8008501C 00081BFC  48 00 00 15 */	bl ft_80085030
 /* 80085020 00081C00  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 80085024 00081C04  38 21 00 08 */	addi r1, r1, 8
 /* 80085028 00081C08  7C 08 03 A6 */	mtlr r0
@@ -4368,7 +4367,7 @@ asm void func_80085004(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80085030(void)
+asm void ft_80085030(void)
 {
     // clang-format off
     nofralloc
@@ -4400,13 +4399,13 @@ lbl_8008506C:
 #pragma pop
 #endif
 
-void func_80085030(void);
-void func_800850E0(void);
+void ft_80085030(void);
+void ft_800850E0(void);
 
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80085088(HSD_GObj*)
+asm void ft_80085088(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 80085088 00081C68  7C 08 02 A6 */	mflr r0
@@ -4415,7 +4414,7 @@ asm void func_80085088(HSD_GObj*)
 /* 80085094 00081C74  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 80085098 00081C78  C0 45 00 2C */	lfs f2, 0x2c(r5)
 /* 8008509C 00081C7C  C0 25 01 28 */	lfs f1, 0x128(r5)
-/* 800850A0 00081C80  48 00 00 41 */	bl func_800850E0
+/* 800850A0 00081C80  48 00 00 41 */	bl ft_800850E0
 /* 800850A4 00081C84  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800850A8 00081C88  38 21 00 08 */	addi r1, r1, 8
 /* 800850AC 00081C8C  7C 08 03 A6 */	mtlr r0
@@ -4427,7 +4426,7 @@ asm void func_80085088(HSD_GObj*)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800850B4(void)
+asm void ft_800850B4(void)
 { // clang-format off
     nofralloc
 /* 800850B4 00081C94  7C 08 02 A6 */	mflr r0
@@ -4436,7 +4435,7 @@ asm void func_800850B4(void)
 /* 800850C0 00081CA0  80 A3 00 2C */	lwz r5, 0x2c(r3)
 /* 800850C4 00081CA4  C0 45 00 30 */	lfs f2, 0x30(r5)
 /* 800850C8 00081CA8  C0 25 01 28 */	lfs f1, 0x128(r5)
-/* 800850CC 00081CAC  48 00 00 15 */	bl func_800850E0
+/* 800850CC 00081CAC  48 00 00 15 */	bl ft_800850E0
 /* 800850D0 00081CB0  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800850D4 00081CB4  38 21 00 08 */	addi r1, r1, 8
 /* 800850D8 00081CB8  7C 08 03 A6 */	mtlr r0
@@ -4448,7 +4447,7 @@ asm void func_800850B4(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800850E0(void)
+asm void ft_800850E0(void)
 {
     // clang-format off
     nofralloc
@@ -4482,7 +4481,7 @@ lbl_80085118:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80085134(HSD_GObj* gobj)
+asm void ft_80085134(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80085134 00081D14  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -4500,7 +4499,7 @@ asm void func_80085134(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80085154(HSD_GObj* gobj)
+asm void ft_80085154(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80085154 00081D34  7C 08 02 A6 */	mflr r0
@@ -4537,7 +4536,7 @@ asm void func_80085154(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800851C0(HSD_GObj*)
+asm void ft_800851C0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 800851C0 00081DA0  80 63 00 2C */	lwz r3, 0x2c(r3)
@@ -4551,7 +4550,7 @@ asm void func_800851C0(HSD_GObj*)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800851D0(void)
+asm void ft_800851D0(void)
 {
     // clang-format off
     nofralloc
@@ -4576,7 +4575,7 @@ lbl_800851F8:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80085204(HSD_GObj* gobj)
+asm void ft_80085204(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80085204 00081DE4  80 63 00 2C */	lwz r3, 0x2c(r3)

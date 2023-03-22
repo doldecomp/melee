@@ -58,10 +58,10 @@ void ftDrMario_80149A6C(HSD_GObj* gobj)
 
 void ftDrMario_80149A8C(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDrMario_80149AAC(HSD_GObj* gobj)
 {
-    func_80084280(gobj);
+    ft_80084280(gobj);
 }

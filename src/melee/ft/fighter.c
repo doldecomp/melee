@@ -510,11 +510,11 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
     func_80088A50(fp);
     func_800890BC(fp);
     func_800892D4(fp);
-    func_80081B38(gobj);
-    func_80081938(gobj);
+    ft_80081B38(gobj);
+    ft_80081938(gobj);
 
     if (fp->x2114_SmashAttr.x2135 == -1) {
-        if (func_80082A68(gobj) && !fp->x2229_b6)
+        if (ft_80082A68(gobj) && !fp->x2229_b6)
             ftCommon_8007D6A4(fp);
         else
             ftCommon_8007D5D4(fp);
@@ -1435,7 +1435,7 @@ void Fighter_8006A1BC(HSD_GObj* gobj)
             fp->x2010--;
         }
 
-        func_800819A8(gobj);
+        ft_800819A8(gobj);
         fp->x2219_flag.bits.b6 = fp->x2219_flag.bits.b5;
     }
 }

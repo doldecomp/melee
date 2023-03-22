@@ -111,7 +111,7 @@ void ftMasterHand_80150F68(HSD_GObj* gobj)
     r4_ftdata = r31_fp->ft_data;
     r30_ft_attributes = r4_ftdata->ext_attr;
 
-    func_80085134(gobj);
+    ft_80085134(gobj);
     func_8015BE40(gobj, &r31_fp->mv.mh.unk0.xC, &r31_fp->mv.mh.unk0.x18,
                   r30_ft_attributes->x2C, r30_ft_attributes->x28);
 }

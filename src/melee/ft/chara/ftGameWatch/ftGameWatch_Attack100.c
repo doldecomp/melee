@@ -34,13 +34,13 @@ void ftGameWatch_Attack100Start_IASA(HSD_GObj* gobj)
 // 0x8014C264 - Mr. Game & Watch's Rapid Jab Start Physics callback
 void ftGameWatch_Attack100Start_Phys(HSD_GObj* gobj)
 {
-    func_80084FA8(gobj);
+    ft_80084FA8(gobj);
 }
 
 // 0x8014C284 - Mr. Game & Watch's Rapid Jab Start Collision callback
 void ftGameWatch_Attack100Start_Coll(HSD_GObj* gobj)
 {
-    func_80084104(gobj);
+    ft_80084104(gobj);
     ftGameWatch_8014A538(gobj);
 }
 
@@ -73,13 +73,13 @@ void ftGameWatch_Attack100Loop_IASA(HSD_GObj* gobj)
 // 0x8014C350 - Mr. Game & Watch's Rapid Jab Loop Physics callback
 void ftGameWatch_Attack100Loop_Phys(HSD_GObj* gobj)
 {
-    func_80084FA8(gobj);
+    ft_80084FA8(gobj);
 }
 
 // 0x8014C370 - Mr. Game & Watch's Rapid Jab Loop Collision callback
 void ftGameWatch_Attack100Loop_Coll(HSD_GObj* gobj)
 {
-    func_80084104(gobj);
+    ft_80084104(gobj);
     ftGameWatch_8014A538(gobj);
 }
 
@@ -108,12 +108,12 @@ void ftGameWatch_Attack100End_IASA(HSD_GObj* gobj)
 // 0x8014C418 - Mr. Game & Watch's Rapid Jab End Physics callback
 void ftGameWatch_Attack100End_Phys(HSD_GObj* gobj)
 {
-    func_80084FA8(gobj);
+    ft_80084FA8(gobj);
 }
 
 // 0x8014C438 - Mr. Game & Watch's Rapid Jab End Collision callback
 void ftGameWatch_Attack100End_Coll(HSD_GObj* gobj)
 {
-    func_80084104(gobj);
+    ft_80084104(gobj);
     ftGameWatch_8014A538(gobj);
 }

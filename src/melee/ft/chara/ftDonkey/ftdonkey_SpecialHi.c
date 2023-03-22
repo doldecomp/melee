@@ -129,7 +129,7 @@ void ftDonkey_8010FE60(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
 
-    if (!func_80082708(gobj)) {
+    if (!ft_80082708(gobj)) {
         ftCommon_8007D60C(fp);
         Fighter_ChangeMotionState(gobj, 0x17E, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -150,7 +150,7 @@ void ftDonkey_8010FF14(HSD_GObj* gobj)
 #endif
 
     if (fp->x80_self_vel.y >= 0.0f) {
-        if (func_80081D0C(gobj)) {
+        if (ft_80081D0C(gobj)) {
             ftCommon_8007D7FC(fp);
             Fighter_ChangeMotionState(gobj, 0x17D, 0x0C4C5080, NULL,
                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);

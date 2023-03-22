@@ -52,7 +52,7 @@ void ftDonkey_8010E338(HSD_GObj* gobj) {}
 
 void ftDonkey_8010E33C(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_8010E35C(HSD_GObj* gobj)
@@ -75,17 +75,17 @@ void ftDonkey_8010E3BC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0) {
-        if (!func_800827A0(gobj)) {
+        if (!ft_800827A0(gobj)) {
             ftDonkey_8010E464(gobj);
         }
-    } else if (!func_80082708(gobj)) {
+    } else if (!ft_80082708(gobj)) {
         ftDonkey_8010E464(gobj);
     }
 }
 
 void ftDonkey_8010E428(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj)) {
+    if (ft_80081D0C(gobj)) {
         ftDonkey_8010E4EC(gobj);
     }
 }

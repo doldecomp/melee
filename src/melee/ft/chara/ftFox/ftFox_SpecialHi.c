@@ -131,7 +131,7 @@ void ftFox_SpecialHiHoldAir_IASA(HSD_GObj* gobj)
 
 void ftFox_SpecialHiHold_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftFox_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
@@ -157,7 +157,7 @@ void ftFox_SpecialHiHoldAir_Phys(HSD_GObj* gobj)
 
 void ftFox_SpecialHiHold_Coll(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftFox_SpecialHiHold_GroundToAir(gobj);
     }
 }
@@ -290,7 +290,7 @@ void ftFox_SpecialHi_Coll(HSD_GObj* gobj)
 
     fp->mv.fx.SpecialHi.unk2 += 1;
 
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftFox_SpecialHi_GroundToAir(gobj);
         return;
     }
@@ -606,7 +606,7 @@ void ftFox_SpecialHiLanding_Phys(HSD_GObj* gobj)
 // 0x800E7F20 - Fox & Falco's aerial Firefox/Firebird End Physics callback
 void ftFox_SpecialHiFall_Phys(HSD_GObj* gobj)
 {
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
 }
 
 // 0x800E7F40
@@ -617,7 +617,7 @@ void ftFox_SpecialHiLanding_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         func_80096900(gobj, 1, 0, true,
                       foxAttrs->x8C_FOX_FIREFOX_FREEFALL_MOBILITY,
                       foxAttrs->x90_FOX_FIREFOX_LANDING_LAG);
@@ -739,11 +739,11 @@ void ftFox_SpecialHiBound_Phys(HSD_GObj* gobj)
     bool ground_or_air = ftGetGroundAir(fp);
 
     if (ground_or_air == GA_Air) {
-        func_800851C0(gobj);
+        ft_800851C0(gobj);
         ftCommon_8007CF58(fp);
         return;
     }
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x800E824C
@@ -773,7 +773,7 @@ void ftFox_SpecialHiBound_Coll(HSD_GObj* gobj)
 
     else
     {
-        func_80084104(gobj);
+        ft_80084104(gobj);
     }
 }
 

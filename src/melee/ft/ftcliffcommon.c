@@ -27,7 +27,7 @@ bool ftCliffCommon_80081298(HSD_GObj* gobj)
     if (((fp->x6F0_collData.x134_envFlags & 0x03000000) != 0) &&
         (((fp->x2228_flag.bits.b2 & 1) == 0)))
     {
-        other_gobj = func_80082E3C(gobj);
+        other_gobj = ft_80082E3C(gobj);
         if (other_gobj == NULL) {
             func_80040048(fp->xC_playerID, fp->x221F_flag.bits.b4);
             ftCliffCommon_80081370(gobj);
@@ -139,8 +139,8 @@ void ftCliffCommon_800815E4(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (func_800821DC()) {
-        func_80082B1C(gobj);
+    if (ft_800821DC()) {
+        ft_80082B1C(gobj);
         return;
     }
 

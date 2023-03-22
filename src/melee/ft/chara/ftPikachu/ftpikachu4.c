@@ -102,7 +102,7 @@ void ftPikachu_Stub_80125F54(HSD_GObj* arg0) {}
 
 void ftPikachu_80125F58(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftPikachu_80125F78(HSD_GObj* gobj)
@@ -129,7 +129,7 @@ void ftPikachu_80125F78(HSD_GObj* gobj)
 
 void ftPikachu_80125FD8(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftPikachu_ActionChange_80126084(gobj);
 }
 
@@ -319,8 +319,7 @@ void ftPikachu_80126614(HSD_GObj* gobj)
 #endif
 
     /// @todo Eliminate cast (by changing type of field)
-    if (!func_80082888(gobj, (ftCollisionBox*) &pika_attr->height_attributes))
-    {
+    if (!ft_80082888(gobj, (ftCollisionBox*) &pika_attr->height_attributes)) {
         if ((collData->x134_envFlags & 0x3F) ||
             (collData->x134_envFlags & 0xFC0))
         {
@@ -753,7 +752,7 @@ void ftPikachu_801272E0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0)
-        func_80084F3C(gobj);
+        ft_80084F3C(gobj);
 }
 
 void ftPikachu_80127310(HSD_GObj* gobj)
@@ -784,7 +783,7 @@ void ftPikachu_8012738C(HSD_GObj* gobj)
     ///       #ftPikachuAttributes::height_attributes)
     ftCollisionBox* box = (ftCollisionBox*) &pika_attr->height_attributes;
 
-    if (!func_80082888(gobj, box))
+    if (!ft_80082888(gobj, box))
         ftPikachu_ActionChange_8012744C(gobj);
 }
 
@@ -802,7 +801,7 @@ void ftPikachu_801273D4(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (func_8008239C(gobj, fp->facing_dir, (f32*) box)) {
+    if (ft_8008239C(gobj, fp->facing_dir, (f32*) box)) {
         func_800D5CB0(gobj, 0, pika_attr->xB0);
     } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.

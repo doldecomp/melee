@@ -14,7 +14,7 @@ static f32 const lbl_804D83A0 = -1.0F;
 static f32 const lbl_804D83A4 = 1.0F;
 
 #pragma push
-asm void func_80081938(HSD_GObj* gobj)
+asm void ft_80081938(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80081938 0007E518  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -50,7 +50,7 @@ asm void func_80081938(HSD_GObj* gobj)
 
 #else
 
-void func_80081938(HSD_GObj* gobj)
+void ft_80081938(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -60,7 +60,7 @@ void func_80081938(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800819A8(HSD_GObj* gobj)
+asm void ft_800819A8(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 800819A8 0007E588  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -90,7 +90,7 @@ asm void func_800819A8(HSD_GObj* gobj)
 
 #else
 
-void func_800819A8(HSD_GObj* gobj)
+void ft_800819A8(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -100,7 +100,7 @@ void func_800819A8(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80081A00(void)
+asm void ft_80081A00(void)
 { // clang-format off
     nofralloc
 /* 80081A00 0007E5E0  7C 08 02 A6 */	mflr r0
@@ -193,7 +193,7 @@ lbl_80081B24:
 
 #else
 
-void func_80081A00(void)
+void ft_80081A00(void)
 {
     NOT_IMPLEMENTED;
 }

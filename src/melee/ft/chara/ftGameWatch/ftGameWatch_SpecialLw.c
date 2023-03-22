@@ -320,7 +320,7 @@ void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* gobj)
 /// Mr. Game & Watch's grounded Oil Panic Loop Physics callback
 void ftGameWatch_SpecialLw_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftColl_8007AF10(gobj);
 }
 
@@ -345,14 +345,14 @@ void ftGameWatch_SpecialAirLw_Phys(HSD_GObj* gobj)
 /// Mr. Game & Watch's grounded Oil Panic Loop Collision callback
 void ftGameWatch_SpecialLw_Coll(HSD_GObj* gobj)
 {
-    if (func_800827A0(gobj) == false)
+    if (ft_800827A0(gobj) == false)
         ftGameWatch_SpecialLw_GroundToAir(gobj);
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Loop Collision callback
 void ftGameWatch_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != false)
+    if (ft_80081D0C(gobj) != false)
         ftGameWatch_SpecialAirLw_AirToGround(gobj);
 }
 
@@ -503,26 +503,26 @@ void ftGameWatch_SpecialAirLwCatch_IASA(HSD_GObj* gobj) {}
 /// Mr. Game & Watch's grounded Oil Panic Fill Physics callback
 void ftGameWatch_SpecialLwCatch_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Fill Physics callback
 void ftGameWatch_SpecialAirLwCatch_Phys(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 /// Mr. Game & Watch's grounded Oil Panic Fill Collision callback
 void ftGameWatch_SpecialLwCatch_Coll(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftGameWatch_SpecialLwCatch_GroundToAir(gobj);
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Fill Collision callback
 void ftGameWatch_SpecialAirLwCatch_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj))
+    if (ft_80081D0C(gobj))
         ftGameWatch_SpecialAirLwCatch_AirToGround(gobj);
 }
 
@@ -618,26 +618,26 @@ void ftGameWatch_SpecialAirLwShoot_IASA(HSD_GObj* gobj) {}
 /// Mr. Game & Watch's grounded Oil Panic Release Physics callback
 void ftGameWatch_SpecialLwShoot_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Release Physics callback
 void ftGameWatch_SpecialAirLwShoot_Phys(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 /// Mr. Game & Watch's grounded Oil Panic Release Collision callback
 void ftGameWatch_SpecialLwShoot_Coll(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftGameWatch_SpecialLwShoot_GroundToAir(gobj);
 }
 
 /// Mr. Game & Watch's aerial Oil Panic Release Collision callback
 void ftGameWatch_SpecialAirLwShoot_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj))
+    if (ft_80081D0C(gobj))
         ftGameWatch_SpecialAirLwShoot_AirToGround(gobj);
 }
 

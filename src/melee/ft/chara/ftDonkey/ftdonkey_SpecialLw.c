@@ -32,12 +32,12 @@ void ftDonkey_8010DD14(HSD_GObj* gobj) {}
 
 void ftDonkey_8010DD18(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_8010DD38(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         func_800CC730(gobj);
 }
 
@@ -64,12 +64,12 @@ void ftDonkey_8010DDDC(HSD_GObj* gobj)
 
 void ftDonkey_8010DDF8(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_8010DE18(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj)) {
+    if (!ft_80082708(gobj)) {
         func_800CC730(gobj);
     }
 }
@@ -122,12 +122,12 @@ void ftDonkey_8010DF98(HSD_GObj* gobj) {}
 
 void ftDonkey_8010DF9C(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_8010DFBC(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj)) {
+    if (!ft_80082708(gobj)) {
         func_800CC730(gobj);
     }
 }
@@ -148,12 +148,12 @@ void ftDonkey_8010E06C(HSD_GObj* gobj) {}
 
 void ftDonkey_8010E070(HSD_GObj* gobj)
 {
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
 }
 
 void ftDonkey_8010E090(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj)) {
+    if (ft_80081D0C(gobj)) {
         func_8008A2BC(gobj);
     }
 }

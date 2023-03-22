@@ -692,55 +692,55 @@ void ftFox_SpecialAirNEnd_IASA(HSD_GObj* gobj)
 // 0x800E6B5C - Fox & Falco's grounded Blaster Start Physics callback
 void ftFox_SpecialNStart_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x800E6B7C - Fox & Falco's grounded Blaster Loop Physics callback
 void ftFox_SpecialNLoop_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x800E6B9C - Fox & Falco's grounded Blaster End Physics callback
 void ftFox_SpecialNEnd_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x800E6BBC - Fox & Falco's aerial Blaster Start Physics callback
 void ftFox_SpecialAirNStart_Phys(HSD_GObj* gobj)
 {
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
 }
 
 // 0x800E6BDC - Fox & Falco's aerial Blaster Loop Physics callback
 void ftFox_SpecialAirNLoop_Phys(HSD_GObj* gobj)
 {
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
 }
 
 // 0x800E6BFC - Fox & Falco's aerial Blaster End Physics callback
 void ftFox_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 {
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
 }
 
 // 0x800E6C1C - Fox & Falco's grounded Blaster Start Collision callback
 void ftFox_SpecialNStart_Coll(HSD_GObj* gobj)
 {
-    func_80083F88(gobj);
+    ft_80083F88(gobj);
 }
 
 // 0x800E6C3C - Fox & Falco's grounded Blaster Loop Collision callback
 void ftFox_SpecialNLoop_Coll(HSD_GObj* gobj)
 {
-    func_80083F88(gobj);
+    ft_80083F88(gobj);
 }
 
 // 0x800E6C1C - Fox & Falco's grounded Blaster End Collision callback
 void ftFox_SpecialNEnd_Coll(HSD_GObj* gobj)
 {
-    func_80083F88(gobj);
+    ft_80083F88(gobj);
 }
 
 // 0x800E6C7C - Fox & Falco's aerial Blaster Start Collision callback

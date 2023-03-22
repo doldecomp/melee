@@ -106,7 +106,7 @@ void ftMars_80137618(HSD_GObj* gobj)
 
     if (fp->ground_or_air == GA_Ground) {
         // Physics_Friction
-        func_80084F3C(gobj);
+        ft_80084F3C(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
         ftCommon_8007D494(fp, attr->x20, attr->x24);
@@ -120,11 +120,11 @@ void ftMars_8013767C(HSD_GObj* gobj)
 
     if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (!func_800827A0(gobj))
+        if (!ft_800827A0(gobj))
             ftMars_801376E8(gobj);
     } else {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
-        if (func_80081D0C(gobj)) {
+        if (ft_80081D0C(gobj)) {
             // MarthSideBAir->Ground
             ftMars_80137748(gobj);
         }
@@ -203,7 +203,7 @@ void ftMars_80137870(HSD_GObj* gobj)
 
     if (fp->ground_or_air == GA_Ground) {
         // Physics_Friction
-        func_80084F3C(gobj);
+        ft_80084F3C(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
         ftCommon_8007D494(fp, attr->x20, attr->x24);
@@ -217,9 +217,9 @@ void ftMars_801378D4(HSD_GObj* gobj)
 
     if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (!func_800827A0(gobj))
+        if (!ft_800827A0(gobj))
             ftMars_80137940(gobj);
-    } else if (func_80081D0C(gobj)) {
+    } else if (ft_80081D0C(gobj)) {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
 
         // MarthSideB2Air->Ground
@@ -347,11 +347,11 @@ void ftMars_80137BF4(HSD_GObj* gobj)
 
     if (fp->ground_or_air == GA_Ground) {
         // somethingFriction
-        func_80084FA8(gobj);
+        ft_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
         ftCommon_8007D494(fp, sa->x20, sa->x24);
-        func_80085204(gobj);
+        ft_80085204(gobj);
     }
 }
 
@@ -361,11 +361,11 @@ void ftMars_80137C50(HSD_GObj* gobj)
 
     if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (!func_800827A0(gobj))
+        if (!ft_800827A0(gobj))
             ftMars_80137CBC(gobj);
     } else {
         // EnvironmentCollision_CheckForGroundOnly_NoLedgeGrab
-        if (func_80081D0C(gobj))
+        if (ft_80081D0C(gobj))
             ftMars_80137D60(gobj);
     }
 }
@@ -482,11 +482,11 @@ void ftMars_80137F30(HSD_GObj* gobj)
 
     if (fp->ground_or_air == GA_Ground) {
         // somethingFriction
-        func_80084FA8(gobj);
+        ft_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
         ftCommon_8007D494(fp, sa->x20, sa->x24);
-        func_80085204(gobj);
+        ft_80085204(gobj);
     }
 }
 
@@ -496,11 +496,11 @@ void ftMars_80137F8C(HSD_GObj* gobj)
 
     if (fp->ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (func_800827A0(gobj) == 0)
+        if (ft_800827A0(gobj) == 0)
             ftMars_80137FF8(gobj);
     } else {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
-        if (func_80081D0C(gobj) != 0)
+        if (ft_80081D0C(gobj) != 0)
             ftMars_8013809C(gobj);
     }
 }

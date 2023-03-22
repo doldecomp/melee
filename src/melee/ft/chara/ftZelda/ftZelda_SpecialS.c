@@ -427,19 +427,19 @@ void ftZelda_8013BED8(HSD_GObj* gobj)
         fp->mv.zd.specials.x8 -= 1;
     }
 
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 8013BED8 - 8013BF30 (0x20 bytes)
 void ftZelda_8013BF10(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 8013BF30 - 8013BF50 (0x20 bytes)
 void ftZelda_8013BF30(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 8013BF50 - 8013BFB0 (0x60 bytes)
@@ -542,7 +542,7 @@ void ftZelda_8013C070(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (func_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == 0) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x15A, 0x0C4C5082, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
@@ -556,7 +556,7 @@ void ftZelda_8013C0DC(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (func_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == 0) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
@@ -569,7 +569,7 @@ void ftZelda_8013C148(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (func_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == 0) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x15C, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
@@ -582,7 +582,7 @@ void ftZelda_8013C1B4(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (func_80081D0C(gobj) != 0) {
+    if (ft_80081D0C(gobj) != 0) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x157, 0x0C4C5082, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
@@ -595,7 +595,7 @@ void ftZelda_8013C220(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (func_80081D0C(gobj) != 0) {
+    if (ft_80081D0C(gobj) != 0) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x158, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);
@@ -608,7 +608,7 @@ void ftZelda_8013C28C(HSD_GObj* gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
-    if (func_80081D0C(gobj) != 0) {
+    if (ft_80081D0C(gobj) != 0) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x159, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0, 0);

@@ -121,7 +121,7 @@ void ftMars_8013695C(HSD_GObj* gobj)
 // https://decomp.me/scratch/bR5HF
 void ftMars_801369A4(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftMars_80136A1C(gobj);
 }
 
@@ -129,7 +129,7 @@ void ftMars_801369A4(HSD_GObj* gobj)
 // https://decomp.me/scratch/cCPAH
 void ftMars_801369E0(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj))
+    if (ft_80081D0C(gobj))
         ftMars_80136A7C(gobj);
 }
 
@@ -228,21 +228,21 @@ void ftMars_80136CC4(HSD_GObj* gobj)
 // https://decomp.me/scratch/Q3NsK
 void ftMars_80136CFC(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 80136D1C 001338FC
 // https://decomp.me/scratch/LVDnG
 void ftMars_80136D1C(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 // 80136D3C 0013391C
 // https://decomp.me/scratch/XmmUv
 void ftMars_80136D3C(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == 0) {
         ftMars_80136DB4(gobj);
     }
 }
@@ -251,7 +251,7 @@ void ftMars_80136D3C(HSD_GObj* gobj)
 // https://decomp.me/scratch/tjkA9
 void ftMars_80136D78(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != 0) {
+    if (ft_80081D0C(gobj) != 0) {
         ftMars_80136E14(gobj);
     }
 }
@@ -420,21 +420,21 @@ void ftMars_80137140(HSD_GObj* gobj) {}
 void ftMars_80137144(HSD_GObj* gobj)
 {
     // Physics_Friction
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 80137164 00133D44
 // https://decomp.me/scratch/8OwY9
 void ftMars_80137164(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 // 80137184 00133D64
 // https://decomp.me/scratch/cIi5D
 void ftMars_80137184(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == 0) {
         ftMars_801371FC(gobj);
     }
 }
@@ -443,7 +443,7 @@ void ftMars_80137184(HSD_GObj* gobj)
 // https://decomp.me/scratch/rpVpQ
 void ftMars_801371C0(HSD_GObj* arg0)
 {
-    if (func_80081D0C(arg0) != 0) {
+    if (ft_80081D0C(arg0) != 0) {
         ftMars_801372A8(arg0);
     }
 }

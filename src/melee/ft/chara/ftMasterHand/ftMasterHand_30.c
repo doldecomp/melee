@@ -37,7 +37,7 @@ void ftMasterHand_80155580(HSD_GObj* gobj)
 // 801555C4 1521A4
 void ftMasterHand_801555C4(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 801555E4 1521C4
@@ -70,7 +70,7 @@ void ftMasterHand_8015565C(HSD_GObj* gobj)
 // 801556A0 152280
 void ftMasterHand_801556A0(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 801556C0 1522A0
@@ -122,7 +122,7 @@ void ftMasterHand_801557B0(HSD_GObj* gobj)
 // 801557F4 1523D4
 void ftMasterHand_801557F4(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 80155814 1523F4
@@ -158,7 +158,7 @@ void ftMasterHand_801558A0(HSD_GObj* gobj)
 // 801558E4 1524C4
 void ftMasterHand_801558E4(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 80155904 1524E4
@@ -195,7 +195,7 @@ void ftMasterHand_801559D4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* attr = fp->ft_data->ext_attr;
-    func_80085134(gobj);
+    ft_80085134(gobj);
     func_8015BE40(gobj, &fp->mv.mh.unk0.xC, &fp->mv.mh.unk0.x18, attr->x2C,
                   attr->x28);
 }

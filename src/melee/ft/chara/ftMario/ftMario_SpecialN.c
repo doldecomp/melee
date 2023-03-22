@@ -72,12 +72,12 @@ void ftMario_SpecialN_IASA(HSD_GObj* gobj)
 
 void ftMario_SpecialN_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftMario_SpecialN_Coll(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == false)
+    if (ft_80082708(gobj) == false)
         ftMario_SpecialN_GroundToAir(gobj);
 }
 
@@ -148,12 +148,12 @@ void ftMario_SpecialAirN_IASA(HSD_GObj* gobj)
 
 void ftMario_SpecialAirN_Phys(HSD_GObj* gobj)
 {
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
 }
 
 void ftMario_SpecialAirN_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj))
+    if (ft_80081D0C(gobj))
         ftMario_SpecialAirN_AirToGround(gobj);
 }
 

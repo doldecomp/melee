@@ -29,7 +29,7 @@ void ftDonkey_800E0200(HSD_GObj* gobj)
 
 void ftDonkey_800E0254(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_800E0274(HSD_GObj* gobj)

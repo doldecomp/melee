@@ -162,7 +162,7 @@ void ftZelda_80139A30(HSD_GObj* gobj) {}
 
 void ftZelda_80139A34(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftZelda_80139A54(HSD_GObj* gobj)
@@ -180,7 +180,7 @@ void ftZelda_80139A54(HSD_GObj* gobj)
 
 void ftZelda_80139A98(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftZelda_80139B44(gobj);
 }
 
@@ -268,7 +268,7 @@ void ftZelda_80139CC0(HSD_GObj* gobj)
     CollData* collData = &fp->x6F0_collData;
     u32 env_flags;
 
-    if (func_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == 0) {
         env_flags = collData->x134_envFlags;
         if ((env_flags & MPCOLL_RIGHTWALL) != 0 ||
             (env_flags & MPCOLL_LEFTWALL) != 0)
@@ -605,7 +605,7 @@ void ftZelda_8013A4E8(HSD_GObj* gobj) {}
 
 void ftZelda_8013A4EC(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftZelda_8013A50C(HSD_GObj* gobj)
@@ -635,7 +635,7 @@ void ftZelda_8013A50C(HSD_GObj* gobj)
 
 void ftZelda_8013A588(HSD_GObj* gobj)
 {
-    if (func_800827A0(gobj) == 0)
+    if (ft_800827A0(gobj) == 0)
         ftZelda_8013A648(gobj);
 }
 

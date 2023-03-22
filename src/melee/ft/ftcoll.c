@@ -3040,7 +3040,7 @@ lbl_80078B7C:
 /* 80078BB0 00075790  41 82 00 78 */	beq lbl_80078C28
 /* 80078BB4 00075794  38 7E 00 00 */	addi r3, r30, 0
 /* 80078BB8 00075798  38 9C 00 00 */	addi r4, r28, 0
-/* 80078BBC 0007579C  48 00 C1 29 */	bl func_80084CE4
+/* 80078BBC 0007579C  48 00 C1 29 */	bl ft_80084CE4
 /* 80078BC0 000757A0  2C 03 00 00 */	cmpwi r3, 0
 /* 80078BC4 000757A4  40 82 00 88 */	bne lbl_80078C4C
 /* 80078BC8 000757A8  38 7E 00 00 */	addi r3, r30, 0
@@ -3168,8 +3168,8 @@ void ftColl_80078A2C(HSD_GObj* this_gobj)
                                             victim_fp->x34_scale.y,
                                             victim_fp->cur_pos.z) != 0)
                                     {
-                                        if (func_80084CE4(this_fp,
-                                                          victim_fp) == false)
+                                        if (ft_80084CE4(this_fp, victim_fp) ==
+                                            false)
                                         {
                                             ftColl_80076808(this_fp, this_hit,
                                                             0, victim_fp, 0);

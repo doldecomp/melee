@@ -6,9 +6,9 @@
 
 #include <baselib/gobj.h>
 
-void func_80081938(HSD_GObj* gobj);
-void func_800819A8(HSD_GObj* gobj);
+void ft_80081938(HSD_GObj* gobj);
+void ft_800819A8(HSD_GObj* gobj);
 
-void func_80081A00(void);
+void ft_80081A00(void);
 
 #endif

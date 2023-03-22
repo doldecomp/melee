@@ -27,7 +27,7 @@ void ftMasterHand_80152670(HSD_GObj* arg0)
 // https://decomp.me/scratch/SGiGG
 void ftMasterHand_801526B4(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 801526D4 14F2B4
@@ -78,7 +78,7 @@ void ftMasterHand_801527B8(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->ft_data->ext_attr;
 
-    func_80085134(gobj);
+    ft_80085134(gobj);
 
     tmp = ++r31_fp->mv.mh.unk0.x0;
     if (tmp > r30_attributes->xB0 &&

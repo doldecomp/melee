@@ -190,7 +190,7 @@ void ftFox_SpecialLwStart_Pass(HSD_GObj* gobj)
 
 void ftFox_SpecialLwStart_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftFox_SpecialAirLwStart_Phys(HSD_GObj* gobj)
@@ -216,13 +216,13 @@ void ftFox_SpecialAirLwStart_Phys(HSD_GObj* gobj)
 
 void ftFox_SpecialLwStart_Coll(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == false)
+    if (ft_80082708(gobj) == false)
         ftFox_SpecialLwStart_GroundToAir(gobj);
 }
 
 void ftFox_SpecialAirLwStart_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != false)
+    if (ft_80081D0C(gobj) != false)
         ftFox_SpecialAirLwStart_AirToGround(gobj);
 }
 
@@ -339,7 +339,7 @@ static void ftFox_SpecialLwLoop_Pass(HSD_GObj* gobj)
 
 void ftFox_SpecialLwLoop_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
 }
 
@@ -374,7 +374,7 @@ static void ftFox_SpecialLwLoop_GroundToAir(HSD_GObj* gobj);
 
 void ftFox_SpecialLwLoop_Coll(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == false)
+    if (ft_80082708(gobj) == false)
         ftFox_SpecialLwLoop_GroundToAir(gobj);
 }
 
@@ -383,7 +383,7 @@ static void ftFox_SpecialAirLwLoop_AirToGround(HSD_GObj* gobj);
 
 void ftFox_SpecialAirLwLoop_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != false)
+    if (ft_80081D0C(gobj) != false)
         ftFox_SpecialAirLwLoop_AirToGround(gobj);
 }
 
@@ -557,7 +557,7 @@ void ftFox_SpecialAirLwTurn_IASA(HSD_GObj* gobj)
 // Physics callback
 void ftFox_SpecialLwTurn_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
 }
 
@@ -589,7 +589,7 @@ void ftFox_SpecialAirLwTurn_Phys(HSD_GObj* gobj)
 // Collision callback
 void ftFox_SpecialLwTurn_Coll(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftFox_SpecialLwTurn_GroundToAir(gobj);
     }
 }
@@ -599,7 +599,7 @@ void ftFox_SpecialLwTurn_Coll(HSD_GObj* gobj)
 // Collision callback
 void ftFox_SpecialAirLwTurn_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftFox_SpecialAirLwTurn_GroundToAir(gobj);
     }
 }
@@ -785,7 +785,7 @@ void ftFox_SpecialAirLwHit_IASA(HSD_GObj* gobj)
 // Physics callback
 void ftFox_SpecialLwHit_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
 }
 
@@ -815,14 +815,14 @@ void ftFox_SpecialAirLwHit_Phys(HSD_GObj* gobj)
 /// Fox & Falco's grounded Reflector Hit Collision callback
 void ftFox_SpecialLwHit_Coll(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftFox_SpecialLwHit_GroundToAir(gobj);
 }
 
 /// Fox & Falco's aerial Reflector Hit Collision callback
 void ftFox_SpecialAirLwHit_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj))
+    if (ft_80081D0C(gobj))
         ftFox_SpecialAirLwHit_AirToGround(gobj);
 }
 
@@ -936,7 +936,7 @@ void ftFox_SpecialAirLwEnd_IASA(HSD_GObj* gobj)
 // 0x800E9BD0 - Fox & Falco's grounded Reflector End Physics callback
 void ftFox_SpecialLwEnd_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 /// Fox & Falco's aerial Reflector End Physics callback
@@ -965,7 +965,7 @@ void ftFox_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
 // Collision callback
 void ftFox_SpecialLwEnd_Coll(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftFox_SpecialLwEnd_GroundToAir(gobj);
     }
 }
@@ -975,7 +975,7 @@ void ftFox_SpecialLwEnd_Coll(HSD_GObj* gobj)
 // Collision callback
 void ftFox_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftFox_SpecialAirLwEnd_AirToGround(gobj);
     }
 }

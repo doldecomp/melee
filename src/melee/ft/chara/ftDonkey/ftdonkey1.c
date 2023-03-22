@@ -51,10 +51,10 @@ void ftDonkey_800DF9F0(HSD_GObj* gobj)
 
 void ftDonkey_800DFA50(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_800DFA70(HSD_GObj* gobj)
 {
-    func_8008403C(gobj, &ftDonkey_800E0294);
+    ft_8008403C(gobj, &ftDonkey_800E0294);
 }

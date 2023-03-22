@@ -31,7 +31,7 @@ void ftMasterHand_8015303C(HSD_GObj* arg0)
 // 80153080 14FC60
 void ftMasterHand_80153080(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 801530A0 14FC80
@@ -146,7 +146,7 @@ void ftMasterHand_80153254(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    func_80085134(gobj);
+    ft_80085134(gobj);
     if (fp->x2208_ftcmd_var2 != 0) {
         attr = fp->ft_data->ext_attr;
         func_8015C208(gobj, &sp28_pos);
@@ -236,7 +236,7 @@ void ftMasterHand_80153548(HSD_GObj* arg0)
 // 8015358C 15016C
 void ftMasterHand_8015358C(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 801535AC 15018C

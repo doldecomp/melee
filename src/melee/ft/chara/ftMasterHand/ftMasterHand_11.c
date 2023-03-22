@@ -44,7 +44,7 @@ void ftMasterHand_80152414(HSD_GObj* gobj)
 // https://decomp.me/scratch/Oin6U
 void ftMasterHand_80152458(HSD_GObj* arg0)
 {
-    func_80085134(arg0);
+    ft_80085134(arg0);
 }
 
 // 80152478 14F058
@@ -94,7 +94,7 @@ void ftMasterHand_80152588(HSD_GObj* gobj)
     ftData* r4_ftData = fp->ft_data;
     ftMasterHand_SpecialAttrs* r31_attributes = r4_ftData->ext_attr;
 
-    func_80085134(gobj);
+    ft_80085134(gobj);
     func_8015C010(gobj, r31_attributes->xA4);
     func_8015C190(gobj);
 }

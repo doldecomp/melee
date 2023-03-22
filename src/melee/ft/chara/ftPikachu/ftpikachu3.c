@@ -91,13 +91,13 @@ void ftPikachu_80125024(HSD_GObj* gobj)
 
 void ftPikachu_80125084(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftPikachu_ActionChange_801250FC(gobj);
 }
 
 void ftPikachu_801250C0(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj))
+    if (ft_80081D0C(gobj))
         ftPikachu_ActionChange_8012515C(gobj);
 }
 
@@ -182,23 +182,23 @@ void ftPikachu_8012532C(HSD_GObj* gobj)
 
 void ftPikachu_8012535C(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftPikachu_8012537C(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftPikachu_8012539C(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftPikachu_ActionChange_80125414(gobj);
 }
 
 void ftPikachu_801253D8(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj))
+    if (ft_80081D0C(gobj))
         ftPikachu_ActionChange_80125474(gobj);
 }
 
@@ -304,23 +304,23 @@ void ftPikachu_Stub_801256B8(HSD_GObj* arg0) {}
 
 void ftPikachu_801256BC(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftPikachu_801256DC(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftPikachu_801256FC(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftPikachu_ActionChange_80125774(gobj);
 }
 
 void ftPikachu_80125738(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj))
+    if (ft_80081D0C(gobj))
         ftPikachu_ActionChange_801257D4(gobj);
 }
 
@@ -420,7 +420,7 @@ void ftPikachu_801259D8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     CollData* collData = &fp->x6F0_collData;
 
-    if (func_80081D0C(gobj)) {
+    if (ft_80081D0C(gobj)) {
         ftCommon_8007D7FC(fp);
         ftPikachu_ActionChange_80125CD0(gobj);
     }
@@ -501,14 +501,14 @@ void ftPikachu_80125BF4(HSD_GObj* gobj)
 
 void ftPikachu_80125C44(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         func_800CC730(gobj);
 }
 
 void ftPikachu_80125C80(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (func_80081D0C(gobj)) {
+    if (ft_80081D0C(gobj)) {
         ftCommon_8007D7FC(fp);
         ftPikachu_ActionChange_80125CD0(gobj);
     }

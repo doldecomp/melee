@@ -332,7 +332,7 @@ void ftSamus_8012B3A8(HSD_GObj* gobj)
                           ft_attr->walk_max_vel * samus_attr->x5C);
         ftCommon_8007CB74(gobj);
     } else {
-        func_80084F3C(gobj);
+        ft_80084F3C(gobj);
     }
 }
 
@@ -364,12 +364,12 @@ void ftSamus_8012B488(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0) {
         /// @todo Remove cast
-        if (!func_80082888(gobj,
-                           (ftCollisionBox*) &samus_attr->height_attributes))
+        if (!ft_80082888(gobj,
+                         (ftCollisionBox*) &samus_attr->height_attributes))
         {
             ftSamus_8012B570(gobj);
         }
-    } else if (!func_800827A0(gobj)) {
+    } else if (!ft_800827A0(gobj)) {
         ftSamus_8012B570(gobj);
     }
 }
@@ -386,12 +386,12 @@ void ftSamus_8012B4FC(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0) {
         /// @todo Remove cast
-        if (func_800824A0(gobj,
-                          (ftCollisionBox*) &samus_attr->height_attributes))
+        if (ft_800824A0(gobj,
+                        (ftCollisionBox*) &samus_attr->height_attributes))
         {
             ftSamus_8012B668(gobj);
         }
-    } else if (func_80081D0C(gobj)) {
+    } else if (ft_80081D0C(gobj)) {
         ftSamus_8012B668(gobj);
     }
 }

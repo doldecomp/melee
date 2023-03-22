@@ -689,7 +689,7 @@ void ftCommon_8007D6A4(Fighter* fp)
     fp->x2227_flag.bits.b0 = 0;
     fp->x6F0_collData.x19C = 0;
     fp->x6F0_collData.x130_flags &= 0xFFFFFFEF;
-    if (!func_80084A18(fp->gobj)) {
+    if (!ft_80084A18(fp->gobj)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID,
                  fp->motion_id);
         HSD_ASSERT(686, 0);
@@ -741,7 +741,7 @@ void ftCommon_8007D7FC(Fighter* fp)
     fp->x2227_flag.bits.b0 = 0;
     fp->x6F0_collData.x19C = 0;
     fp->x6F0_collData.x130_flags &= 0xFFFFFFEF;
-    if (!func_80084A18(fp->gobj)) {
+    if (!ft_80084A18(fp->gobj)) {
         OSReport("fighter ground no under Id! %d %d\n", fp->xC_playerID,
                  fp->motion_id);
         HSD_ASSERT(0x2AE, 0);
@@ -1576,8 +1576,8 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     }
     func_800D105C(dst_gobj);
     ftCamera_80076064(dst);
-    func_800849EC(src, dst);
-    func_80081C88(dst_gobj, src->x34_scale.y);
+    ft_800849EC(src, dst);
+    ft_80081C88(dst_gobj, src->x34_scale.y);
     if (src->x1974_heldItem != NULL) {
         dst->x1974_heldItem = src->x1974_heldItem;
         dst->x221E_flag.bits.b3 = src->x221E_flag.bits.b3;
@@ -1724,7 +1724,7 @@ void ftCommon_8007F9B4(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     fp->x197C = NULL;
     func_800D105C(gobj);
-    func_80081C88(gobj, fp->x34_scale.y);
+    ft_80081C88(gobj, fp->x34_scale.y);
 }
 
 void ftCommon_8007FA00(HSD_GObj* gobj)
@@ -1770,7 +1770,7 @@ void ftCommon_8007FA58(HSD_GObj* gobj, HSD_GObj* arg1)
     func_8026AB54(arg1, gobj, fp->ft_data->x8->unk12);
     ftCommon_8007F948(gobj, arg1, func_8026B54C(arg1));
     func_800D105C(gobj);
-    func_80081C88(gobj, fp->x34_scale.y);
+    ft_80081C88(gobj, fp->x34_scale.y);
     func_80088148(fp, 0x117, 0x7F, 0x40);
     ftCommon_8007EBAC(fp, 0x10, 0);
     func_8026BCF4(arg1);

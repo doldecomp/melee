@@ -172,12 +172,12 @@ void ftSamus_8012AB0C(HSD_GObj* gobj)
         fp->x80_self_vel.x = samus_attr->x38 * fp->facing_dir;
     }
     if (fp->ground_or_air == 1) {
-        func_800851C0(gobj);
+        ft_800851C0(gobj);
         ftCommon_8007D344(fp, 0.0f, samus_attr->x3C, samus_attr->x40);
         ftCommon_8007D268(fp);
         return;
     }
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftSamus_8012ABB4(HSD_GObj* gobj)
@@ -190,7 +190,7 @@ void ftSamus_8012ABB4(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
     ftCommon_8007D344(fp, 0.0f, samus_attr->x3C, samus_attr->x40);
 }
 
@@ -208,7 +208,7 @@ void ftSamus_8012AC00(HSD_GObj* gobj)
         int direction;
 
         if (fp->x80_self_vel.y >= 0.0f) {
-            func_80081D0C(gobj);
+            ft_80081D0C(gobj);
             return;
         }
         if (fp->facing_dir == 1.0f) {
@@ -226,7 +226,7 @@ void ftSamus_8012AC00(HSD_GObj* gobj)
             ftCliffCommon_80081370(gobj);
         }
     } else {
-        func_80084104(gobj);
+        ft_80084104(gobj);
     }
 }
 
@@ -244,7 +244,7 @@ void ftSamus_8012ACF8(HSD_GObj* gobj)
         int direction;
 
         if (fp->x80_self_vel.y >= 0.0f) {
-            func_80081D0C(gobj);
+            ft_80081D0C(gobj);
             return;
         }
         if (fp->facing_dir == 1.0f) {
@@ -262,6 +262,6 @@ void ftSamus_8012ACF8(HSD_GObj* gobj)
             ftCliffCommon_80081370(gobj);
         }
     } else {
-        func_80084104(gobj);
+        ft_80084104(gobj);
     }
 }

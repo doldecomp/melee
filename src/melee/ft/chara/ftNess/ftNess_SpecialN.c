@@ -516,19 +516,19 @@ inline void GravityDelay(HSD_GObj* gobj)
 void ftNess_SpecialNStart_Phys(HSD_GObj* gobj)
 {
     GravityDelay(gobj);
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 /// Ness's grounded PK Flash Charge Physics callback
 void ftNess_SpecialNHold_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 /// Ness's grounded PK Flash Release Physics callback
 void ftNess_SpecialNEnd_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 /// Ness's aerial PK Flash Start Physics callback
@@ -607,7 +607,7 @@ void ftNess_SpecialNStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80082708(gobj))
+    if (ft_80082708(gobj))
         return;
 
     ftCommon_8007D5D4(fp);
@@ -622,7 +622,7 @@ void ftNess_SpecialNHold_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80082708(gobj))
+    if (ft_80082708(gobj))
         return;
 
     ftCommon_8007D5D4(fp);
@@ -637,7 +637,7 @@ void ftNess_SpecialNEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80082708(gobj))
+    if (ft_80082708(gobj))
         return;
 
     ftCommon_8007D5D4(fp);
@@ -652,7 +652,7 @@ void ftNess_SpecialAirNStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!func_80081D0C(gobj))
+    if (!ft_80081D0C(gobj))
         return;
 
     ftCommon_8007D7FC(fp);
@@ -667,7 +667,7 @@ void ftNess_SpecialAirNHold_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!func_80081D0C(gobj))
+    if (!ft_80081D0C(gobj))
         return;
 
     ftCommon_8007D7FC(fp);
@@ -682,7 +682,7 @@ void ftNess_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!func_80081D0C(gobj))
+    if (!ft_80081D0C(gobj))
         return;
 
     ftCommon_8007D7FC(fp);

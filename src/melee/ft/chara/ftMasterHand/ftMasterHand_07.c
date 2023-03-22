@@ -17,7 +17,7 @@ void ftMasterHand_80151B14(HSD_GObj* arg0)
 // https://decomp.me/scratch/zvSIb
 void ftMasterHand_80151B50(HSD_GObj* arg0)
 {
-    func_80085134(arg0);
+    ft_80085134(arg0);
 }
 
 // 80151B70 14E750

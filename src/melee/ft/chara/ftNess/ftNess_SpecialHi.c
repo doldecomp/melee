@@ -1233,7 +1233,7 @@ void ftNess_SpecialHiStart_Phys(
     HSD_GObj* gobj) // Ness's grounded PK Thunder Start Physics callback
 {
     ThunderPhysTimer(gobj);
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x80118FDC
@@ -1241,14 +1241,14 @@ void ftNess_SpecialHiStart_Phys(
 void ftNess_SpecialHiHold_Phys(HSD_GObj* gobj) // Ness's grounded PK Thunder
                                                // Control Loop Physics callback
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x80118FFC
 // This is identical to 0x80118FDC so there's no link bruh
 void ftNess_SpecialHiEnd_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 static const f32 vel_epsilon = 0.0001f;
@@ -1493,7 +1493,7 @@ void ftNess_SpecialHiStart_Coll(
     Fighter* fp;
 
     fp = gobj->user_data;
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftCommon_8007D60C(fp);
         Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRHI_START,
                                   FTNESS_SPECIALHI_COLL_FLAG, NULL,
@@ -1510,7 +1510,7 @@ void ftNess_SpecialHiHold_Coll(
     Fighter* fp;
 
     fp = gobj->user_data;
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftCommon_8007D60C(fp);
         Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRHI_HOLD,
                                   FTNESS_SPECIALHI_COLL_FLAG, NULL,
@@ -1526,7 +1526,7 @@ void ftNess_SpecialHiEnd_Coll(
     Fighter* fp;
 
     fp = gobj->user_data;
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftCommon_8007D60C(fp);
         Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRHI_END,
                                   FTNESS_SPECIALHI_COLL_FLAG, NULL,
@@ -1545,7 +1545,7 @@ void ftNess_SpecialHi_Coll(HSD_GObj* gobj)
     Fighter* fp0;
 
     fp0 = gobj->user_data;
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         u32 env_flags = fp0->x6F0_collData.x134_envFlags;
 
         if ((env_flags & 0b111111) || (env_flags & 0b111111 << 6)) {
@@ -1657,7 +1657,7 @@ void ftNess_SpecialAirHiStart_Coll(
     Fighter* fp;
 
     fp = gobj->user_data;
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALHI_START,
                                   FTNESS_SPECIALHI_COLL_FLAG, NULL,
@@ -1674,7 +1674,7 @@ void ftNess_SpecialAirHiHold_Coll(
     Fighter* fp;
 
     fp = gobj->user_data;
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALHI_HOLD,
                                   FTNESS_SPECIALHI_COLL_FLAG, NULL,
@@ -1690,7 +1690,7 @@ void ftNess_SpecialAirHiEnd_Coll(
     Fighter* fp;
 
     fp = gobj->user_data;
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALHI_END,
                                   FTNESS_SPECIALHI_COLL_FLAG, NULL,

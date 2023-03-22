@@ -147,7 +147,7 @@ void ftZelda_8013B0EC(HSD_GObj* gobj)
 // 8013B0F0 - 8013B110 (0x20 bytes)
 void ftZelda_8013B0F0(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 8013B110 - 8013B154 (0x44 bytes)
@@ -173,7 +173,7 @@ void ftZelda_8013B110(HSD_GObj* gobj)
 // https://decomp.me/scratch/8ceOO
 void ftZelda_8013B154(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == 0) {
         ftZelda_8013B1CC(gobj);
     }
 }
@@ -182,7 +182,7 @@ void ftZelda_8013B154(HSD_GObj* gobj)
 // https://decomp.me/scratch/8ceOO
 void ftZelda_8013B190(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != 0) {
+    if (ft_80081D0C(gobj) != 0) {
         ftZelda_8013B238(gobj);
     }
 }
@@ -240,7 +240,7 @@ void ftZelda_8013B320(HSD_GObj* gobj)
 // 8013B324 - 8013B344 (0x20 bytes)
 void ftZelda_8013B324(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 8013B344 - 8013B388 (0x44 bytes)
@@ -266,7 +266,7 @@ void ftZelda_8013B344(HSD_GObj* gobj)
 // https://decomp.me/scratch/t8hrY
 void ftZelda_8013B388(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == 0) {
         ftZelda_8013B400(gobj);
     }
 }
@@ -275,7 +275,7 @@ void ftZelda_8013B388(HSD_GObj* gobj)
 // https://decomp.me/scratch/t8hrY
 void ftZelda_8013B3C4(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != 0) {
+    if (ft_80081D0C(gobj) != 0) {
         ftZelda_8013B46C(gobj);
     }
 }

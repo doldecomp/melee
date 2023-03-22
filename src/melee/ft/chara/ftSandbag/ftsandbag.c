@@ -99,10 +99,10 @@ void ftSandbag_8014FC24(HSD_GObj* arg0) {}
 
 void ftSandbag_8014FC28(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftSandbag_8014FC48(HSD_GObj* gobj)
 {
-    func_80083F88(gobj);
+    ft_80083F88(gobj);
 }

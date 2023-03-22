@@ -288,13 +288,13 @@ void ftLuigi_SpecialLw_Coll(HSD_GObj* gobj)
 #endif
 
     if (fp->ground_or_air == GA_Ground) {
-        if (!func_80082888(gobj, &ftLuigi_SpecialLw_CollisionBox)) {
+        if (!ft_80082888(gobj, &ftLuigi_SpecialLw_CollisionBox)) {
             ftLuigi_SpecialLw_GroundToAir(gobj);
             fp->mv.lg.SpecialLw.isUnkColl = false;
         } else {
             fp->mv.lg.SpecialLw.isUnkColl = true;
         }
-    } else if (func_800824A0(gobj, &ftLuigi_SpecialLw_CollisionBox) == false) {
+    } else if (ft_800824A0(gobj, &ftLuigi_SpecialLw_CollisionBox) == false) {
         ftLuigi_SpecialLw_GroundToAir(gobj);
         fp->mv.lg.SpecialLw.isUnkColl = false;
     } else {
@@ -330,7 +330,7 @@ void ftLuigi_SpecialAirLw_Coll(HSD_GObj* gobj)
     u8 _[24];
 #endif
 
-    if (func_800824A0(gobj, &ftLuigi_SpecialLw_CollisionBox) != false) {
+    if (ft_800824A0(gobj, &ftLuigi_SpecialLw_CollisionBox) != false) {
         ftLuigi_SpecialAirLw_AirToGround(gobj);
         fp->mv.lg.SpecialLw.isUnkColl = true;
     } else {

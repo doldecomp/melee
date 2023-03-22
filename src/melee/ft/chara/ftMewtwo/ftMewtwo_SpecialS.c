@@ -154,7 +154,7 @@ void ftMewtwo_SpecialAirS_IASA(HSD_GObj* gobj)
 // callback
 void ftMewtwo_SpecialS_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
 }
 
@@ -163,7 +163,7 @@ void ftMewtwo_SpecialS_Phys(HSD_GObj* gobj)
 // callback
 void ftMewtwo_SpecialAirS_Phys(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
     ftColl_8007AEF8(gobj);
 }
 
@@ -223,13 +223,13 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* gobj)
 // 0x80146BB8 - Mewtwo's grounded Confusion Collision callback
 void ftMewtwo_SpecialS_Coll(HSD_GObj* gobj)
 {
-    func_8008403C(gobj, ftMewtwo_SpecialS_GroundToAir);
+    ft_8008403C(gobj, ftMewtwo_SpecialS_GroundToAir);
 }
 
 // 0x80146BE0 - Mewtwo's aerial Confusion Collision callback
 void ftMewtwo_SpecialAirS_Coll(HSD_GObj* gobj)
 {
-    func_80082C74(gobj, ftMewtwo_SpecialAirS_AirToGround);
+    ft_80082C74(gobj, ftMewtwo_SpecialAirS_AirToGround);
 }
 
 // 0x80146C08

@@ -155,12 +155,12 @@ void ftFox_AppealS_IASA(HSD_GObj* gobj)
 
 void ftFox_AppealS_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftFox_AppealS_Coll(HSD_GObj* gobj)
 {
-    func_80084280(gobj);
+    ft_80084280(gobj);
 }
 
 static void ftFox_AppealS_OnTakeDamage(HSD_GObj* gobj)

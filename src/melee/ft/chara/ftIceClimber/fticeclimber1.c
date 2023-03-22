@@ -271,17 +271,17 @@ void ftPopo_8011F394(HSD_GObj* arg0) {}
 
 void ftPopo_8011F398(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftPopo_8011F3B8(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftPopo_8011F3D8(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj)) {
+    if (!ft_80082708(gobj)) {
         Fighter* fp1;
         fp1 = GET_FIGHTER(gobj);
         if (fp1->fv.nn.x222C != 0U) {
@@ -313,7 +313,7 @@ asm void ftPopo_8011F454(HSD_GObj*)
 /* 8011F470 0011C050  7C 7C 1B 78 */	mr r28, r3
 /* 8011F474 0011C054  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8011F478 0011C058  83 BF 02 D4 */	lwz r29, 0x2d4(r31)
-/* 8011F47C 0011C05C  4B F6 28 91 */	bl func_80081D0C
+/* 8011F47C 0011C05C  4B F6 28 91 */	bl ft_80081D0C
 /* 8011F480 0011C060  2C 03 00 00 */	cmpwi r3, 0
 /* 8011F484 0011C064  41 82 00 5C */	beq lbl_8011F4E0
 /* 8011F488 0011C068  83 DC 00 2C */	lwz r30, 0x2c(r28)

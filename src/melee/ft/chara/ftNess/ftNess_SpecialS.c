@@ -124,7 +124,7 @@ void ftNess_SpecialAirS_Anim(
 void ftNess_SpecialS_Phys(
     HSD_GObj* gobj) // Ness's grounded PK Fire Physics callback
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x80116E0C
@@ -132,7 +132,7 @@ void ftNess_SpecialS_Phys(
 void ftNess_SpecialAirS_Phys(
     HSD_GObj* gobj) // Ness's aerial PK Fire Physics callback
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 // 0x80116E2C
@@ -140,7 +140,7 @@ void ftNess_SpecialAirS_Phys(
 void ftNess_SpecialS_Coll(
     HSD_GObj* gobj) // Ness's grounded PK Fire Collision callback
 {
-    if (func_800827A0(gobj) == false) {
+    if (ft_800827A0(gobj) == false) {
         func_800CC730(gobj);
     }
 }
@@ -154,7 +154,7 @@ void ftNess_SpecialAirS_Coll(
     ftNessAttributes* ness_attr;
 
     ness_attr = fp->x2D4_specialAttributes;
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         func_800D5CB0(gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
     }
 }

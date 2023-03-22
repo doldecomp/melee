@@ -225,7 +225,7 @@ void ftGameWatch_SpecialHi_Phys(HSD_GObj* gobj)
 // 0x8014E394 - Mr. Game & Watch's aerial Fire Rescue Physics callback
 void ftGameWatch_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
-    func_80085154(gobj);
+    ft_80085154(gobj);
 }
 
 // 0x8014E3B4 - Mr. Game & Watch's grounded Fire Rescue Collision callback
@@ -253,7 +253,7 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* gobj)
 
     if (fp->x894_currentAnimFrame > 4.0f) {
         if (fp->x80_self_vel.y >= 0.0f) {
-            if (func_80081D0C(gobj) != false) {
+            if (ft_80081D0C(gobj) != false) {
                 ftGameWatch_ItemRescueRemove(gobj);
                 ftCommon_8007D7FC(fp);
                 func_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);

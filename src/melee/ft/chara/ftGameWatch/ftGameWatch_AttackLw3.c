@@ -189,7 +189,7 @@ void ftGameWatch_AttackLw3_IASA(HSD_GObj* gobj)
 // callback
 void ftGameWatch_AttackLw3_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x8014AF8C
@@ -197,6 +197,6 @@ void ftGameWatch_AttackLw3_Phys(HSD_GObj* gobj)
 // callback
 void ftGameWatch_AttackLw3_Coll(HSD_GObj* gobj)
 {
-    func_80084104(gobj);
+    ft_80084104(gobj);
     ftGameWatch_8014A538(gobj);
 }

@@ -73,13 +73,13 @@ void ftLuigi_SpecialAirN_IASA(HSD_GObj* gobj)
 // 0x80142834 - Luigi's grounded Fireball Physics callback
 void ftLuigi_SpecialN_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x80142854 - Luigi's aerial Fireball Physics callback
 void ftLuigi_SpecialAirN_Phys(HSD_GObj* gobj)
 {
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
 }
 
 // 0x80142874
@@ -89,7 +89,7 @@ void ftLuigi_SpecialN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
 
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRN,
@@ -104,7 +104,7 @@ void ftLuigi_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp;
 
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALN,

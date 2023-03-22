@@ -375,7 +375,7 @@ void ftGameWatch_AttackAirN_IASA(HSD_GObj* gobj)
 // callback
 void ftGameWatch_AttackAirN_Phys(HSD_GObj* gobj)
 {
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
 }
 
 // 0x8014B780
@@ -383,7 +383,7 @@ void ftGameWatch_AttackAirN_Phys(HSD_GObj* gobj)
 // Collision callback
 void ftGameWatch_AttackAirN_Coll(HSD_GObj* gobj)
 {
-    func_80082C74(gobj, ftGameWatch_LandingAirN_Action);
+    ft_80082C74(gobj, ftGameWatch_LandingAirN_Action);
 }
 
 static void ftGameWatch_LandingAirN_Init(HSD_GObj*);
@@ -449,7 +449,7 @@ void ftGameWatch_AttackAirB_IASA(HSD_GObj* gobj)
 // callback
 void ftGameWatch_AttackAirB_Phys(HSD_GObj* gobj)
 {
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
 }
 
 // 0x8014B8DC
@@ -457,7 +457,7 @@ void ftGameWatch_AttackAirB_Phys(HSD_GObj* gobj)
 // callback
 void ftGameWatch_AttackAirB_Coll(HSD_GObj* gobj)
 {
-    func_80082C74(gobj, ftGameWatch_LandingAirB_Action);
+    ft_80082C74(gobj, ftGameWatch_LandingAirB_Action);
 }
 
 /// Mr. Game & Watch - LandingAirB Think
@@ -513,13 +513,13 @@ void ftGameWatch_AttackAirHi_IASA(HSD_GObj* gobj)
 /// Mr. Game & Watch's Back Aerial Physics callback
 void ftGameWatch_AttackAirHi_Phys(HSD_GObj* gobj)
 {
-    func_80084DB0(gobj);
+    ft_80084DB0(gobj);
 }
 
 /// Mr. Game & Watch's Back Aerial Collision callback
 void ftGameWatch_AttackAirHi_Coll(HSD_GObj* gobj)
 {
-    func_80082C74(gobj, ftGameWatch_LandingAirHi_Action);
+    ft_80082C74(gobj, ftGameWatch_LandingAirHi_Action);
 }
 
 /// Mr. Game & Watch - LandingAirHi Think

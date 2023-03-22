@@ -33,7 +33,7 @@ void ftMasterHand_80151D5C(HSD_GObj* gobj)
 // https://decomp.me/scratch/LHwFj
 void ftMasterHand_80151DA0(HSD_GObj* arg0)
 {
-    func_80085134(arg0);
+    ft_80085134(arg0);
 }
 
 void ftMasterHand_80151DC0(HSD_GObj* arg0) {}
@@ -67,7 +67,7 @@ void ftMasterHand_80151E4C(HSD_GObj* gobj)
 // https://decomp.me/scratch/HeWua
 void ftMasterHand_80151E90(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 void ftMasterHand_80151EB0(HSD_GObj* arg0) {}
@@ -164,7 +164,7 @@ void ftMasterHand_80152090(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r4_ftData = r31_fp->ft_data;
     r30_attributes = r4_ftData->ext_attr;
-    func_80085134(gobj);
+    ft_80085134(gobj);
     r31_fp->x80_self_vel.x = r30_attributes->x40_pos.z;
 }
 

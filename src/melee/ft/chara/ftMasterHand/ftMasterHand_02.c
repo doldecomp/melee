@@ -384,7 +384,7 @@ void ftMasterHand_8015082C(HSD_GObj* gobj)
 // https://decomp.me/scratch/7A7RI
 void ftMasterHand_80150870(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 // 80150890 0014D470

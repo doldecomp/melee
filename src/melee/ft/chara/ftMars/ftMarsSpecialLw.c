@@ -107,7 +107,7 @@ void ftMars_80138C24(HSD_GObj* gobj) {}
 
 void ftMars_80138C28(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftColl_8007AEE0(gobj);
 }
 
@@ -129,7 +129,7 @@ void ftMars_80138C5C(HSD_GObj* gobj)
 // https://decomp.me/scratch/PQPYD
 void ftMars_80138CC0(HSD_GObj* gobj)
 {
-    if (func_800827A0(gobj) == 0) {
+    if (ft_800827A0(gobj) == 0) {
         ftMars_80138D38(gobj);
     }
 }
@@ -138,7 +138,7 @@ void ftMars_80138CC0(HSD_GObj* gobj)
 // https://decomp.me/scratch/ZAAJM
 void ftMars_80138CFC(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != 0) {
+    if (ft_80081D0C(gobj) != 0) {
         ftMars_80138DD0(gobj);
     }
 }
@@ -292,21 +292,21 @@ void ftMars_80138FC4(HSD_GObj* gobj) {}
 // https://decomp.me/scratch/u66PG
 void ftMars_80138FC8(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 80138FE8 00135BC8
 // https://decomp.me/scratch/QnjxB
 void ftMars_80138FE8(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 // 80139008 00135BE8
 // https://decomp.me/scratch/2SGFK
 void ftMars_80139008(HSD_GObj* gobj)
 {
-    if (func_80082708(gobj) == 0) {
+    if (ft_80082708(gobj) == 0) {
         ftMars_80139080(gobj);
     }
 }
@@ -315,7 +315,7 @@ void ftMars_80139008(HSD_GObj* gobj)
 // https://decomp.me/scratch/3W48X
 void ftMars_80139044(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != 0) {
+    if (ft_80081D0C(gobj) != 0) {
         ftMars_801390E0(gobj);
     }
 }

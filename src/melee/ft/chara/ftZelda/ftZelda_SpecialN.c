@@ -151,7 +151,7 @@ void ftZelda_8013AB64(HSD_GObj* gobj)
 // 8013AB68 - 8013AB9C (0x34 bytes)
 void ftZelda_8013AB68(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
 }
 
@@ -185,7 +185,7 @@ void ftZelda_8013AB9C(HSD_GObj* gobj)
 // https://decomp.me/scratch/CT7dz
 void ftZelda_8013AC10(HSD_GObj* gobj)
 {
-    if (!func_80082708(gobj))
+    if (!ft_80082708(gobj))
         ftZelda_8013AC88(gobj);
 }
 
@@ -193,7 +193,7 @@ void ftZelda_8013AC10(HSD_GObj* gobj)
 // https://decomp.me/scratch/CT7dz
 void ftZelda_8013AC4C(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != 0) {
+    if (ft_80081D0C(gobj) != 0) {
         ftZelda_8013AD1C(gobj);
     }
 }

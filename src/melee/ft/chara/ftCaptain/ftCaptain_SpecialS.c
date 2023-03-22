@@ -311,12 +311,12 @@ void ftCaptain_SpecialAirS_IASA(HSD_GObj* gobj) {}
 
 void ftCaptain_SpecialSStart_Phys(HSD_GObj* gobj)
 {
-    func_80084FA8(gobj);
+    ft_80084FA8(gobj);
 }
 
 void ftCaptain_SpecialS_Phys(HSD_GObj* gobj)
 {
-    func_80084FA8(gobj);
+    ft_80084FA8(gobj);
 }
 
 void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* gobj)
@@ -329,7 +329,7 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_80085134(gobj);
+    ft_80085134(gobj);
     if (fp->x2204_ftcmd_var1 == 1) {
         fp->mv.ca.specials.grav -= captainAttrs->specials_grav;
 
@@ -351,7 +351,7 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_80085134(gobj);
+    ft_80085134(gobj);
     fp->mv.ca.specials.grav -= captainAttrs->specials_grav;
 
     if (fp->mv.ca.specials.grav < -captainAttrs->specials_terminal_vel)
@@ -373,11 +373,11 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* gobj)
     ftCaptain_DatAttrs* sa = sa = fp->x2D4_specialAttributes;
 
     if (fp->x2208_ftcmd_var2 == 0) {
-        func_80084104(gobj);
+        ft_80084104(gobj);
         return;
     }
 
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         efLib_DestroyAll(gobj);
         ftCommon_8007D60C(fp);
         if (sa->specials_miss_landing_lag == 0) {
@@ -418,7 +418,7 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* gobj)
 #endif
 
     fp = temp_fp;
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         efLib_DestroyAll(gobj);
         ftCommon_8007D60C(fp);
         if (0 == captainAttrs->specials_hit_landing_lag) {
@@ -436,7 +436,7 @@ void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
 
-    if (func_80081D0C(gobj) == true) {
+    if (ft_80081D0C(gobj) == true) {
         efLib_DestroyAll(gobj);
         func_800D5CB0(gobj, 0, captainAttrs->specials_miss_landing_lag);
     }
@@ -449,7 +449,7 @@ void ftCaptain_SpecialAirS_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = getFtSpecialAttrsD(fp);
 
-    if (func_80081D0C(gobj) == true) {
+    if (ft_80081D0C(gobj) == true) {
         fp->gr_vel = fp->x80_self_vel.x;
         efLib_DestroyAll(gobj);
         func_800D5CB0(gobj, 0, captainAttrs->specials_hit_landing_lag);

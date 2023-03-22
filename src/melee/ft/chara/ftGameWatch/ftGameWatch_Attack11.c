@@ -198,12 +198,12 @@ void ftGameWatch_Attack11_IASA(HSD_GObj* gobj)
 // 0x8014C194 - Mr. Game & Watch's Jab Physics callback
 void ftGameWatch_Attack11_Phys(HSD_GObj* gobj)
 {
-    func_80084FA8(gobj);
+    ft_80084FA8(gobj);
 }
 
 // 0x8014C1B4 - Mr. Game & Watch's Jab Collision callback
 void ftGameWatch_Attack11_Coll(HSD_GObj* gobj)
 {
-    func_80084104(gobj);
+    ft_80084104(gobj);
     ftGameWatch_8014A538(gobj);
 }

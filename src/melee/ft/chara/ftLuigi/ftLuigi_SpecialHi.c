@@ -215,10 +215,10 @@ void ftLuigi_SpecialAirHi_IASA(HSD_GObj* gobj)
 void ftLuigi_SpecialHi_Phys(HSD_GObj* gobj)
 {
     if ((s32) GET_FIGHTER(gobj)->ground_or_air == GA_Air) {
-        func_80085154(gobj);
+        ft_80085154(gobj);
         return;
     }
-    func_80084FA8(gobj);
+    ft_80084FA8(gobj);
 }
 
 // 0x80144420
@@ -231,7 +231,7 @@ void ftLuigi_SpecialAirHi_Phys(HSD_GObj* gobj)
     attr* ftAttrs = &fp->x110_attr;
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
-        func_80085154(gobj);
+        ft_80085154(gobj);
         fp->x80_self_vel.x *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
         fp->x80_self_vel.y *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
         fp->x80_self_vel.z *= luigiAttrs->x6C_LUIGI_SUPERJUMP_VEL_Y;
@@ -262,13 +262,13 @@ void ftLuigi_SpecialHi_Coll(HSD_GObj* gobj)
     if ((s32) fp->ground_or_air == GA_Air) {
         if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
         {
-            func_80083B68(gobj);
+            ft_80083B68(gobj);
             return;
         }
-        func_800831CC(gobj, func_80096CC8, ftLuigi_SpecialHi_CheckLanding);
+        ft_800831CC(gobj, func_80096CC8, ftLuigi_SpecialHi_CheckLanding);
         return;
     }
-    func_80084104(gobj);
+    ft_80084104(gobj);
 }
 
 // 0x80144554
@@ -281,11 +281,11 @@ void ftLuigi_SpecialAirHi_Coll(HSD_GObj* gobj)
     if ((s32) fp->ground_or_air == GA_Air) {
         if (((u32) fp->x2200_ftcmd_var0 == 0U) || (fp->x80_self_vel.y >= 0.0f))
         {
-            func_80083B68(gobj);
+            ft_80083B68(gobj);
             return;
         }
-        func_800831CC(gobj, func_80096CC8, ftLuigi_SpecialHi_CheckLanding);
+        ft_800831CC(gobj, func_80096CC8, ftLuigi_SpecialHi_CheckLanding);
         return;
     }
-    func_80084104(gobj);
+    ft_80084104(gobj);
 }

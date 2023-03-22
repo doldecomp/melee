@@ -30,7 +30,7 @@ void ftMasterHand_80152174(HSD_GObj* gobj)
 // https://decomp.me/scratch/yyAcs
 void ftMasterHand_801521B8(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 void ftMasterHand_801521D8(HSD_GObj* arg0) {}
@@ -81,7 +81,7 @@ void ftMasterHand_801522BC(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r4_ftData = r31_fp->ft_data;
     r30_attributes = r4_ftData->ext_attr;
-    func_80085134(gobj);
+    ft_80085134(gobj);
 
     if ((--r31_fp->mv.mh.unk0.x0 > r30_attributes->x84) ||
         (r31_fp->mv.mh.unk0.x0 < 0.0f))

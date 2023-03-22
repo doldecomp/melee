@@ -203,7 +203,7 @@ void ftSamus_80128E88(HSD_GObj* gobj)
                           ftAttr->walk_max_vel * samus_attr_xC);
         ftCommon_8007CB74(gobj);
     } else {
-        func_80084F3C(gobj);
+        ft_80084F3C(gobj);
     }
 }
 
@@ -237,12 +237,12 @@ void ftSamus_80128F60(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0) {
         /// @todo Remove cast.
-        if (!func_80082888(gobj,
-                           (ftCollisionBox*) &samus_attr->height_attributes))
+        if (!ft_80082888(gobj,
+                         (ftCollisionBox*) &samus_attr->height_attributes))
         {
             ftSamus_80129048(gobj);
         }
-    } else if (!func_800827A0(gobj)) {
+    } else if (!ft_800827A0(gobj)) {
         ftSamus_80129048(gobj);
     }
 }
@@ -258,12 +258,12 @@ void ftSamus_80128FD4(HSD_GObj* gobj)
 #endif
 
     if (fp->x2200_ftcmd_var0) {
-        if (func_800824A0(gobj,
-                          (ftCollisionBox*) &samus_attr->height_attributes))
+        if (ft_800824A0(gobj,
+                        (ftCollisionBox*) &samus_attr->height_attributes))
         {
             ftSamus_801290A4(gobj);
         }
-    } else if (func_80081D0C(gobj)) {
+    } else if (ft_80081D0C(gobj)) {
         ftSamus_801290A4(gobj);
     }
 }

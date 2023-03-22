@@ -118,7 +118,7 @@ void ftMasterHand_80152A50(HSD_GObj* gobj)
     f32 len;
 
     fp = gobj->user_data;
-    func_80085134(gobj);
+    ft_80085134(gobj);
     if (fp->mv.mh.unk13.x4) {
         ftData = fp->ft_data;
         attr = ftData->ext_attr;

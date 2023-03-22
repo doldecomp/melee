@@ -178,7 +178,7 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* gobj)
             ftCommon_8007DB24(gobj);
         }
     }
-    func_80084FA8(gobj);
+    ft_80084FA8(gobj);
 }
 
 void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
@@ -214,7 +214,7 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
     }
     switch (fp->x2204_ftcmd_var1) {
     case 0:
-        func_80084EEC(gobj);
+        ft_80084EEC(gobj);
         break;
 
     case 1:
@@ -223,7 +223,7 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
         break;
 
     case 2:
-        func_80084DB0(gobj);
+        ft_80084DB0(gobj);
     }
 }
 
@@ -236,7 +236,7 @@ static Fighter_MotionStateChangeFlags const transition_flags =
 
 void ftCaptain_SpecialN_Coll(HSD_GObj* gobj)
 {
-    if (func_800827A0(gobj) == false) {
+    if (ft_800827A0(gobj) == false) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialAirN, transition_flags,
@@ -249,7 +249,7 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* gobj)
 
 void ftCaptain_SpecialAirN_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialN, transition_flags,

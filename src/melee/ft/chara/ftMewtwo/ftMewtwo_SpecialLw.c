@@ -115,7 +115,7 @@ void ftMewtwo_SpecialAirLw_IASA(HSD_GObj* gobj)
 // 0x8014639C - Mewtwo's grounded Disable Physics callback
 void ftMewtwo_SpecialLw_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x801463BC
@@ -183,13 +183,13 @@ void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 // 0x80146544 - Mewtwo's grounded Disable Collision callback
 void ftMewtwo_SpecialLw_Coll(HSD_GObj* gobj)
 {
-    func_8008403C(gobj, ftMewtwo_SpecialLw_GroundToAir);
+    ft_8008403C(gobj, ftMewtwo_SpecialLw_GroundToAir);
 }
 
 // 0x8014656C - Mewtwo's aerial Disable Collision callback
 void ftMewtwo_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
-    func_80082C74(gobj, ftMewtwo_SpecialAirLw_AirToGround);
+    ft_80082C74(gobj, ftMewtwo_SpecialAirLw_AirToGround);
 }
 
 // 0x80146594

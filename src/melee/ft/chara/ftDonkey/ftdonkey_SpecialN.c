@@ -425,59 +425,59 @@ void ftDonkey_8010F324(HSD_GObj* gobj) {}
 
 void ftDonkey_8010F328(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_8010F348(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_8010F368(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_8010F388(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_8010F3A8(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftDonkey_8010F3C8(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftDonkey_8010F3E8(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftDonkey_8010F408(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftDonkey_8010F428(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftDonkey_8010F448(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftDonkey_8010F468(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!func_80082708(gobj)) {
+    if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x176, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -489,7 +489,7 @@ void ftDonkey_8010F50C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!func_80082708(gobj)) {
+    if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x177, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -501,7 +501,7 @@ void ftDonkey_8010F5B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (!func_80082708(gobj)) {
+    if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x178, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -513,7 +513,7 @@ void ftDonkey_8010F654(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_800827A0(gobj) == 0) {
+    if (ft_800827A0(gobj) == 0) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x179, 0x0C4D508E, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -525,7 +525,7 @@ void ftDonkey_8010F6F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_800827A0(gobj) == 0) {
+    if (ft_800827A0(gobj) == 0) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, 0x17A, 0x0C4D508E, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -537,7 +537,7 @@ void ftDonkey_8010F79C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80081D0C(gobj) == 1) {
+    if (ft_80081D0C(gobj) == 1) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x171, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -549,7 +549,7 @@ void ftDonkey_8010F840(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80081D0C(gobj) == 1) {
+    if (ft_80081D0C(gobj) == 1) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x172, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -561,7 +561,7 @@ void ftDonkey_8010F8E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80081D0C(gobj) == 1) {
+    if (ft_80081D0C(gobj) == 1) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x173, 0x0C4C5080, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -573,7 +573,7 @@ void ftDonkey_8010F988(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80081D0C(gobj)) {
+    if (ft_80081D0C(gobj)) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x174, 0x0C4D508E, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -585,7 +585,7 @@ void ftDonkey_8010FA2C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (func_80081D0C(gobj)) {
+    if (ft_80081D0C(gobj)) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, 0x175, 0x0C4D508E, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);

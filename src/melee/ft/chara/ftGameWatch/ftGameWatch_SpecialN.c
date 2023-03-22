@@ -338,13 +338,13 @@ void ftGameWatch_SpecialAirN_IASA(HSD_GObj* gobj)
 // 0x8014E984 - Mr. Game & Watch's grounded Chef Physics callback
 void ftGameWatch_SpecialN_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x8014E9A4 - Mr. Game & Watch's aerial Chef Physics callback
 void ftGameWatch_SpecialAirN_Phys(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 // 0x8014E9C4
@@ -352,7 +352,7 @@ void ftGameWatch_SpecialAirN_Phys(HSD_GObj* gobj)
 // Collision callback
 void ftGameWatch_SpecialN_Coll(HSD_GObj* gobj)
 {
-    if (func_800827A0(gobj) == false)
+    if (ft_800827A0(gobj) == false)
         ftGameWatch_SpecialN_GroundToAir(gobj);
 }
 
@@ -361,7 +361,7 @@ void ftGameWatch_SpecialN_Coll(HSD_GObj* gobj)
 // callback
 void ftGameWatch_SpecialAirN_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != false)
+    if (ft_80081D0C(gobj) != false)
         ftGameWatch_SpecialAirN_AirToGround(gobj);
 }
 

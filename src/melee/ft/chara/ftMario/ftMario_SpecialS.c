@@ -207,7 +207,7 @@ void ftMario_SpecialS_Phys(HSD_GObj* gobj)
         }
     }
 
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
     ftMario_SpecialS_ReflectThink(gobj);
 }
 
@@ -260,14 +260,14 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
 
 void ftMario_SpecialS_Coll(HSD_GObj* gobj)
 {
-    if (func_800827A0(gobj) == false) {
+    if (ft_800827A0(gobj) == false) {
         ftMario_SpecialS_GroundToAir(gobj);
     }
 }
 
 void ftMario_SpecialAirS_Coll(HSD_GObj* gobj)
 {
-    if (func_80081D0C(gobj) != false) {
+    if (ft_80081D0C(gobj) != false) {
         ftMario_SpecialAirS_AirToGround(gobj);
     }
 }

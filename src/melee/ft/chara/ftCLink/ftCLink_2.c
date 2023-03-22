@@ -46,10 +46,10 @@ void ftCLink_8014943C(HSD_GObj* gobj)
 
 void ftCLink_8014945C(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftCLink_8014947C(HSD_GObj* gobj)
 {
-    func_80084280(gobj);
+    ft_80084280(gobj);
 }

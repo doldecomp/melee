@@ -356,27 +356,27 @@ void ftPikachu_8012808C(HSD_GObj* gobj)
 
 void ftPikachu_801280C8(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftPikachu_801280E8(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftPikachu_80128108(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftPikachu_80128128(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftPikachu_80128148(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftPikachu_80128168(HSD_GObj* gobj)
@@ -391,50 +391,50 @@ void ftPikachu_80128168(HSD_GObj* gobj)
 
 void ftPikachu_801281AC(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 void ftPikachu_801281CC(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 void ftPikachu_PrepCallActionChange_801281EC(HSD_GObj* gobj)
 {
-    func_8008403C(gobj, &ftPikachu_ActionChange_801279EC);
+    ft_8008403C(gobj, &ftPikachu_ActionChange_801279EC);
 }
 
 void ftPikachu_PrepCallActionChange_80128214(HSD_GObj* gobj)
 {
-    func_80082C74(gobj, &ftPikachu_ActionChange_8012798C);
+    ft_80082C74(gobj, &ftPikachu_ActionChange_8012798C);
 }
 
 void ftPikachu_PrepCallActionChange_8012823C(HSD_GObj* gobj)
 {
-    func_8008403C(gobj, &ftPikachu_ActionChange_80127ACC);
+    ft_8008403C(gobj, &ftPikachu_ActionChange_80127ACC);
 }
 
 void ftPikachu_PrepCallActionChange_80128264(HSD_GObj* gobj)
 {
-    func_80082C74(gobj, &ftPikachu_ActionChange_80127A54);
+    ft_80082C74(gobj, &ftPikachu_ActionChange_80127A54);
 }
 
 void ftPikachu_PrepCallActionChange_8012828C(HSD_GObj* gobj)
 {
-    func_8008403C(gobj, &ftPikachu_ActionChange_80127BAC);
+    ft_8008403C(gobj, &ftPikachu_ActionChange_80127BAC);
 }
 
 void ftPikachu_PrepCallActionChange_801282B4(HSD_GObj* gobj)
 {
-    func_80082C74(gobj, &ftPikachu_ActionChange_80127B4C);
+    ft_80082C74(gobj, &ftPikachu_ActionChange_80127B4C);
 }
 
 void ftPikachu_PrepCallActionChange_801282DC(HSD_GObj* gobj)
 {
-    func_8008403C(gobj, &ftPikachu_ActionChange_80127C74);
+    ft_8008403C(gobj, &ftPikachu_ActionChange_80127C74);
 }
 
 void ftPikachu_PrepCallActionChange_80128304(HSD_GObj* gobj)
 {
-    func_80082C74(gobj, &ftPikachu_ActionChange_80127C14);
+    ft_80082C74(gobj, &ftPikachu_ActionChange_80127C14);
 }

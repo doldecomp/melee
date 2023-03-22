@@ -957,61 +957,61 @@ void ftMewtwo_SpecialAirNEnd_IASA(HSD_GObj* gobj)
 // 0x801484C0 - Mewtwo's grounded Shadow Ball Start Physics callback
 void ftMewtwo_SpecialNStart_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x801484E0 - Mewtwo's grounded Shadow Ball Loop Physics callback
 void ftMewtwo_SpecialNLoop_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x80148500 - Mewtwo's grounded Shadow Ball Full Charge Physics callback
 void ftMewtwo_SpecialNFull_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x80148520 - Mewtwo's grounded Shadow Ball Cancel Physics callback
 void ftMewtwo_SpecialNCancel_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x80148540 - Mewtwo's grounded Shadow Ball End Physics callback
 void ftMewtwo_SpecialNEnd_Phys(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
 // 0x80148560 - Mewtwo's aerial Shadow Ball Start Physics callback
 void ftMewtwo_SpecialAirNStart_Phys(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 // 0x80148580 - Mewtwo's aerial Shadow Ball Loop Physics callback
 void ftMewtwo_SpecialAirNLoop_Phys(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 // 0x801485A0 - Mewtwo's aerial Shadow Ball Full Charge Physics callback
 void ftMewtwo_SpecialAirNFull_Phys(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 // 0x801485C0 - Mewtwo's aerial Shadow Ball Cancel Physics callback
 void ftMewtwo_SpecialAirNCancel_Phys(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 // 0x801485E0 - Mewtwo's aerial Shadow Ball End Physics callback
 void ftMewtwo_SpecialAirNEnd_Phys(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
 // 0x80148600
@@ -1026,7 +1026,7 @@ void ftMewtwo_SpecialNStart_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRN_START,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
@@ -1045,7 +1045,7 @@ void ftMewtwo_SpecialNLoop_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(
             gobj, MS_MEWTWO_SPECIALAIRN_LOOP,
@@ -1065,7 +1065,7 @@ void ftMewtwo_SpecialNFull_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(
             gobj, MS_MEWTWO_SPECIALAIRN_FULL,
@@ -1085,7 +1085,7 @@ void ftMewtwo_SpecialNCancel_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRN_CANCEL,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
@@ -1104,7 +1104,7 @@ void ftMewtwo_SpecialNEnd_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80082708(gobj) == false) {
+    if (ft_80082708(gobj) == false) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRN_END,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
@@ -1123,7 +1123,7 @@ void ftMewtwo_SpecialAirNStart_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80081D0C(gobj) == true) {
+    if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALN_START,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
@@ -1142,7 +1142,7 @@ void ftMewtwo_SpecialAirNLoop_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80081D0C(gobj) == true) {
+    if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(
             gobj, MS_MEWTWO_SPECIALN_LOOP,
@@ -1162,7 +1162,7 @@ void ftMewtwo_SpecialAirNFull_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80081D0C(gobj) == true) {
+    if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(
             gobj, MS_MEWTWO_SPECIALN_FULL,
@@ -1182,7 +1182,7 @@ void ftMewtwo_SpecialAirNCancel_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80081D0C(gobj) == true) {
+    if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALN_CANCEL,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,
@@ -1201,7 +1201,7 @@ void ftMewtwo_SpecialAirNEnd_Coll(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    if (func_80081D0C(gobj) == true) {
+    if (ft_80081D0C(gobj) == true) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALN_END,
                                   FTMEWTWO_SPECIALN_COLL_FLAG, NULL,

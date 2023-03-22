@@ -26,7 +26,7 @@ void ftMasterHand_80151C40(HSD_GObj* gobj)
 // https://decomp.me/scratch/P5GL1
 void ftMasterHand_80151C84(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
 void ftMasterHand_80151CA4(HSD_GObj* arg0) {}

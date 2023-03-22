@@ -132,9 +132,9 @@ void ftMario_SpecialHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Air)
-        func_80085154(gobj);
+        ft_80085154(gobj);
     else
-        func_80084FA8(gobj);
+        ft_80084FA8(gobj);
 }
 
 void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
@@ -144,7 +144,7 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
     attr* attrs = &fp->x110_attr;
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        func_80085154(gobj);
+        ft_80085154(gobj);
         fp->x80_self_vel.x *= sa->specialhi.vel_mul;
         fp->x80_self_vel.y *= sa->specialhi.vel_mul;
         fp->x80_self_vel.z *= sa->specialhi.vel_mul;
@@ -167,13 +167,12 @@ void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
-            func_80083B68(gobj);
+            ft_80083B68(gobj);
         } else {
-            func_800831CC(gobj, &func_80096CC8,
-                          &ftMario_SpecialHi_CheckLanding);
+            ft_800831CC(gobj, &func_80096CC8, &ftMario_SpecialHi_CheckLanding);
         }
     } else {
-        func_80084104(gobj);
+        ft_80084104(gobj);
     }
 }
 
