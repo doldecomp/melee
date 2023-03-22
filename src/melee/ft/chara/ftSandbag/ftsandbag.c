@@ -9,8 +9,8 @@
 #include "lb/lbunknown_001.h"
 
 MotionState ftSandbag_MotionStateTable[] = {
-    { 295, 0, 0x01400000, func_8014FC20, func_8014FC24, func_8014FC28,
-      func_8014FC48, func_800761C8 },
+    { 295, 0, 0x01400000, ftSandbag_8014FC20, ftSandbag_8014FC24,
+      ftSandbag_8014FC28, ftSandbag_8014FC48, func_800761C8 },
 };
 
 char lbl_803D39B8[] = "PlSb.dat";
@@ -39,10 +39,10 @@ void ftSandbag_OnLoad(HSD_GObj* gobj)
     fp->x2228_flag.bits.b2 = 1;
     fp->x2226_flag.bits.b0 = 1;
 
-    func_8014FA30(fp);
+    ftSandbag_8014FA30(fp);
 }
 
-void func_8014FA30(Fighter* fp)
+void ftSandbag_8014FA30(Fighter* fp)
 {
     FighterBone* bones = fp->ft_bones;
     func_8000C1C0(bones[5].x0_jobj, bones[12].x0_jobj);
@@ -82,7 +82,7 @@ void ftSandbag_OnKnockbackEnter(HSD_GObj* arg0) {}
 
 void ftSandbag_OnKnockbackExit(HSD_GObj* arg0) {}
 
-void func_8014FBA4(HSD_GObj* gobj)
+void ftSandbag_8014FBA4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -93,16 +93,16 @@ void func_8014FBA4(HSD_GObj* gobj)
     func_8007EFC0(fp, p_ftCommonData->x5F0);
 }
 
-void func_8014FC20(HSD_GObj* arg0) {}
+void ftSandbag_8014FC20(HSD_GObj* arg0) {}
 
-void func_8014FC24(HSD_GObj* arg0) {}
+void ftSandbag_8014FC24(HSD_GObj* arg0) {}
 
-void func_8014FC28(HSD_GObj* gobj)
+void ftSandbag_8014FC28(HSD_GObj* gobj)
 {
     func_80084F3C(gobj);
 }
 
-void func_8014FC48(HSD_GObj* gobj)
+void ftSandbag_8014FC48(HSD_GObj* gobj)
 {
     func_80083F88(gobj);
 }
