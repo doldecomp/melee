@@ -86,7 +86,7 @@ HSD_GObj* func_80220FB4(int id)
         Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
         gp->x8_callback = NULL;
         gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
 
         if (cb->callback3 != NULL)
             gp->x1C_callback = cb->callback3;

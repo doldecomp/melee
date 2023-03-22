@@ -82,7 +82,7 @@ static HSD_GObj* GrTNess_80222674(int id)
         gp = gobj->user_data;
         gp->x8_callback = NULL;
         gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
         if (cb->callback3 != 0U) {
             gp->x1C_callback = cb->callback3;
         }

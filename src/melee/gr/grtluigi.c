@@ -89,7 +89,7 @@ HSD_GObj* func_80221CB4(int arg0)
         gp = gobj->user_data;
         gp->x8_callback = 0;
         gp->xC_callback = 0;
-        GObj_SetupGXLink(gobj, &func_801C5DB0, 3, 0);
+        GObj_SetupGXLink(gobj, &grDisplay_801C5DB0, 3, 0);
         if (cb->callback3 != 0U) {
             gp->x1C_callback = cb->callback3;
         }

@@ -90,7 +90,7 @@ static HSD_GObj* func_80201D20(s32 arg0)
         gp = gobj->user_data;
         gp->x8_callback = NULL;
         gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
         if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
         }
