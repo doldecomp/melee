@@ -370,7 +370,7 @@ void Ground_801C06B8(InternalStageId arg0)
 
     switch (arg0) {
     case IZUMI:
-        func_801CD2D4();
+        grIzumi_801CD2D4();
         return;
     case PSTADIUM:
         func_801D511C();
