@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-void func_801D8270(s32);
-void func_801D828C(s32);
+void grKongo_801D8270(s32);
+void grKongo_801D828C(s32);
 
 #endif

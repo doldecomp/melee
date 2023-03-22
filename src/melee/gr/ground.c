@@ -4124,7 +4124,7 @@ bool Ground_801C4DD0(void)
     InternalStageId stage_id = stage_info.internal_stage_id;
 
     if (stage_id == KONGO)
-        func_801D8270(stage_info.x72C);
+        grKongo_801D8270(stage_info.x72C);
     else if (stage_id == OLDKONGO)
         func_802105AC(stage_info.x72C);
 
@@ -4136,7 +4136,7 @@ bool Ground_801C4E20(void)
     InternalStageId stage_id = stage_info.internal_stage_id;
 
     if (stage_id == KONGO)
-        func_801D828C(stage_info.x72C);
+        grKongo_801D828C(stage_info.x72C);
     else if (stage_id == OLDKONGO)
         func_802105C8(stage_info.x72C);
 
