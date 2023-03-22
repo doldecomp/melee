@@ -1403,7 +1403,7 @@ void func_802697D4(HSD_GObj* item_gobj)
     }
     if ((item_data->xDD1_flag.bits.b1 != 0) && (item_data->ground_or_air == 1))
     {
-        func_801C9E60(&item_data->x58_vec_unk);
+        grLib_801C9E60(&item_data->x58_vec_unk);
     }
     PSVECAdd(&item_data->pos, &item_data->x58_vec_unk, &item_data->pos);
     func_80273484(item_gobj);

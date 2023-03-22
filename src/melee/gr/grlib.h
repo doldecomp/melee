@@ -7,31 +7,31 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-struct UnkGeneratorStruct* func_801C96F8(s32, s8, S32Vec3*);
-void func_801C97DC(s32, s32, HSD_JObj*);
-void func_801C9808(s32, s32, HSD_JObj*);
-void func_801C9834(struct UnkGeneratorStruct* arg0);
-void func_801C9854(s32);
-void func_801C9874(struct UnkGeneratorStruct*);
-void func_801C98A0(HSD_JObj*);
-void func_801C9908(HSD_JObj*);
-void func_801C99C0(s32, s32, HSD_JObj*, s32);
-Vec3* func_801C9A10(void);
-void func_801C9A70(enum_t, Vec3*);
-void func_801C9B20(void* arg1, UnkAnimStruct* arg2, void* arg3);
-void func_801C9B6C(void*);
-void func_801C9B8C(void*);
-static void func_801C9BC8(HSD_GObj*);
-static void func_801C9C40(HSD_GObj*);
-HSD_GObj* func_801C9CEC(s32);
-s16 func_801C9E40(void);
-void func_801C9E50(s16);
-bool func_801C9E60(Vec3*);
-bool func_801C9EE8(void);
-Vec3* func_801C9A10(void);
+struct UnkGeneratorStruct* grLib_801C96F8(s32, s8, S32Vec3*);
+void grLib_801C97DC(s32, s32, HSD_JObj*);
+void grLib_801C9808(s32, s32, HSD_JObj*);
+void grLib_801C9834(struct UnkGeneratorStruct* arg0);
+void grLib_801C9854(s32);
+void grLib_801C9874(struct UnkGeneratorStruct*);
+void grLib_801C98A0(HSD_JObj*);
+void grLib_801C9908(HSD_JObj*);
+void grLib_801C99C0(s32, s32, HSD_JObj*, s32);
+Vec3* grLib_801C9A10(void);
+void grLib_801C9A70(enum_t, Vec3*);
+void grLib_801C9B20(void* arg1, UnkAnimStruct* arg2, void* arg3);
+void grLib_801C9B6C(void*);
+void grLib_801C9B8C(void*);
+static void grLib_801C9BC8(HSD_GObj*);
+static void grLib_801C9C40(HSD_GObj*);
+HSD_GObj* grLib_801C9CEC(s32);
+s16 grLib_801C9E40(void);
+void grLib_801C9E50(s16);
+bool grLib_801C9E60(Vec3*);
+bool grLib_801C9EE8(void);
+Vec3* grLib_801C9A10(void);
 
 /// @remarks Only called from yorster and inishie1
-bool func_801C9EE8(void);
-bool func_801C96E8(HSD_GObj* arg0);
+bool grLib_801C9EE8(void);
+bool grLib_801C96E8(HSD_GObj* arg0);
 
 #endif

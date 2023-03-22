@@ -292,7 +292,7 @@ void func_801E366C(HSD_GObj* gobj)
         return;
 
     if (data->xC8 != NULL) {
-        func_801C97DC(0x2C, 0, data->xC8);
+        grLib_801C97DC(0x2C, 0, data->xC8);
         data->xC4 = HSD_Randi(20) + 10;
     }
 }

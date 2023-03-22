@@ -118,7 +118,7 @@ static void func_80219CA4(void)
     func_80219D84(6);
     Ground_801C39C0();
     Ground_801C3BB4();
-    func_801C9A10();
+    grLib_801C9A10();
     lbl_804D6AC8 = 0;
 }
 
@@ -174,16 +174,16 @@ static void func_80219E6C(HSD_GObj* gobj)
     if (lbl_804D6AC8 == 0)
         return;
 
-    func_801C9A70(0, &v);
+    grLib_801C9A70(0, &v);
     HSD_JObjSetTranslate(Ground_801C2CF4(0), &v);
 
-    func_801C9A70(1, &v);
+    grLib_801C9A70(1, &v);
     HSD_JObjSetTranslate(Ground_801C2CF4(1), &v);
 
-    func_801C9A70(2, &v);
+    grLib_801C9A70(2, &v);
     HSD_JObjSetTranslate(Ground_801C2CF4(2), &v);
 
-    func_801C9A70(3, &v);
+    grLib_801C9A70(3, &v);
     HSD_JObjSetTranslate(Ground_801C2CF4(3), &v);
 }
 
@@ -392,7 +392,7 @@ static void func_8021A3BC(HSD_GObj* gobj)
     case 2:
         bg_gobj = Ground_801C2BA4(gp->xCC);
         HSD_ASSERT(546, bg_gobj);
-        if (func_801C96E8(bg_gobj)) {
+        if (grLib_801C96E8(bg_gobj)) {
             Ground_801C4A08(bg_gobj);
             HSD_JObjSetFlagsAll(jobj, 0x10);
             gp->xC4 = 0;
