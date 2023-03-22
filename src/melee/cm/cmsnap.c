@@ -11,7 +11,7 @@ typedef struct {
 } _cmsnap_data;
 static _cmsnap_data cmsnap_data;
 
-void func_800315C8(void)
+void cmSnap_800315C8(void)
 {
     if (cmsnap_data.unk0 != 0) {
         __assert("cmsnap.c", 0x55, "_p(status) == CmSnapStatus_Sleep");
@@ -19,7 +19,7 @@ void func_800315C8(void)
     cmsnap_data.unk0 = 1;
 }
 
-s32 func_80031618(void)
+s32 cmSnap_80031618(void)
 {
     if (cmsnap_data.unk0 != 5) {
         return 0;
@@ -28,7 +28,7 @@ s32 func_80031618(void)
     return cmsnap_data.unk1;
 }
 
-void func_80031640(HSD_GObj* arg0, s32 arg1)
+void cmSnap_80031640(HSD_GObj* arg0, s32 arg1)
 {
     switch (cmsnap_data.unk0) {
     case 0:
@@ -45,10 +45,10 @@ void func_80031640(HSD_GObj* arg0, s32 arg1)
     }
 }
 
-void func_800316B4(void)
+void cmSnap_800316B4(void)
 {
     cmsnap_data.unk0 = 0;
     cmsnap_data.unk1 = 0;
-    GObj_SetupGXLinkMax(GObj_Create(0x12, 0x12, 0), func_80031640, 4);
+    GObj_SetupGXLinkMax(GObj_Create(0x12, 0x12, 0), cmSnap_80031640, 4);
     lb_800121FC(&cmsnap_data.unk1, 0x280, 0x1E0, 4, 0x7D6);
 }
