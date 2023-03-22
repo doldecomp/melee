@@ -637,8 +637,8 @@ void Player_SetScale(s32 slot, f32 scale)
     player->model_scale = scale;
     for (i = 0; i < 2; i++) {
         if (player->player_entity[player->transformed[i]]) {
-            ftData_SetScale(player->player_entity[player->transformed[i]],
-                            scale);
+            ftLib_SetScale(player->player_entity[player->transformed[i]],
+                           scale);
         }
     }
 }

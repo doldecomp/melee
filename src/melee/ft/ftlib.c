@@ -319,7 +319,7 @@ void ftLib_80086684(HSD_GObj* gobj, Vec3* pos)
     *pos = fp->prev_pos;
 }
 
-void ftData_SetScale(HSD_GObj* gobj, f32 val)
+void ftLib_SetScale(HSD_GObj* gobj, f32 val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x34_scale.y = val;

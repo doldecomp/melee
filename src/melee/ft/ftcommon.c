@@ -1547,7 +1547,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->x2220_flag.bits.b5 = src->x2220_flag.bits.b5;
     dst->x2220_flag.bits.b6 = src->x2220_flag.bits.b6;
     dst->x2008 = src->x2008;
-    ftData_SetScale(dst_gobj, src->x34_scale.y);
+    ftLib_SetScale(dst_gobj, src->x34_scale.y);
     if (src->x2223_flag.bits.b7) {
         func_800C8348(dst_gobj, src->x2028, src->x202C);
         func_800C8540(gobj);

@@ -20,7 +20,7 @@ void* ftLib_80086630(HSD_GObj*, s32);
 void ftLib_80086644(HSD_GObj*, Vec3*);
 void ftLib_80086664(HSD_GObj*, Vec3*);
 void ftLib_80086684(HSD_GObj*, Vec3*);
-void ftData_SetScale(HSD_GObj*, f32);
+void ftLib_SetScale(HSD_GObj*, f32);
 void ftLib_800866DC(HSD_GObj*, Vec3*);
 void ftLib_80086724(HSD_GObj*, HSD_GObj*);
 void ftLib_80086764(HSD_GObj*);
