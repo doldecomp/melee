@@ -3606,7 +3606,7 @@ void Ground_801C438C(f32 val)
 
 void Ground_801C43A4(unk_t arg0)
 {
-    func_801DA3F4(arg0);
+    grZebes_801DA3F4(arg0);
 }
 
 bool Ground_801C43C4(void* arg0)
