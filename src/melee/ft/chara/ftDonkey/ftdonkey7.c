@@ -3,7 +3,7 @@
 #include "ftdonkey.h"
 #include "ftdonkey6.h"
 
-#include "ft/ft_unknown_006.h"
+#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 
 void ftDonkey_800E0440(HSD_GObj* gobj)

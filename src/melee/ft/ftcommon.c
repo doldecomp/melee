@@ -4,11 +4,11 @@
 
 #include "code_80081B38.h"
 #include "fighter.h"
-#include "ft_unknown_006.h"
 #include "ftcamera.h"
 #include "ftcoll.h"
 #include "ftlib.h"
 #include "ftparts.h"
+#include "ftunk_04.h"
 #include "text_4.h"
 
 #include "ef/eflib.h"

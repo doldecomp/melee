@@ -4,8 +4,8 @@
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
-#include "ft/ft_unknown_006.h"
 #include "ft/ftcoll.h"
+#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 #include "ftLuigi/ftluigi.h"
 

@@ -1,7 +1,7 @@
 #include "ftwalljump.h"
 
 #include "fighter.h"
-#include "ft_unknown_006.h"
+#include "ftunk_04.h"
 #include "inlines.h"
 
 #include "mp/mplib.h"

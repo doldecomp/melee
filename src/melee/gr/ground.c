@@ -13,8 +13,8 @@
 #include "text_4.h"
 
 #include "cm/camera.h"
-#include "ft/ft_unknown_006.h"
 #include "ft/ftlib.h"
+#include "ft/ftunk_04.h"
 #include "gm/code_801601C4.h"
 #include "it/code_80266F3C.h"
 #include "it/code_8027CF30.h"

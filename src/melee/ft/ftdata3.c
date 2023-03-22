@@ -1,8 +1,8 @@
 #include <platform.h>
 
-#include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
+#include "ft/ftunk_04.h"
 #include "ft/types.h"
 #include "ftCrazyHand/ftcrazyhand.h"
 #include "ftKirby/ftkirby.h"

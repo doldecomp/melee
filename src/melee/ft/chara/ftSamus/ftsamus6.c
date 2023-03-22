@@ -2,8 +2,8 @@
 
 #include "ft/code_80081B38.h"
 #include "ft/fighter.h"
-#include "ft/ft_unknown_006.h"
 #include "ft/ftcoll.h"
+#include "ft/ftunk_04.h"
 #include "ftSamus/ftsamus.h"
 #include "lb/lbunknown_001.h"
 

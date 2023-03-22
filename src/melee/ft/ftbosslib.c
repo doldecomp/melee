@@ -1,8 +1,8 @@
 #include "ftbosslib.h"
 
 #include "fighter.h"
-#include "ft_unknown_006.h"
 #include "ftlib.h"
+#include "ftunk_04.h"
 
 #include "cm/camera.h"
 #include "ft/inlines.h"

@@ -3,7 +3,7 @@
 #include "ftsamus.h"
 
 #include "ft/code_80081B38.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ftunk_04.h"
 
 void ftSamus_ClearThrowFlagsUnk(HSD_GObj* gobj)
 {

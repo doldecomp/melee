@@ -77,8 +77,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftcamera.c.o\
     $(BUILD_DIR)/src/melee/ft/ftcoll.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftcoll.s.o\
-    $(BUILD_DIR)/src/melee/ft/code_8007C114.c.o\
-    $(BUILD_DIR)/src/melee/ft/code_8007C630.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftunk_01.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftunk_02.c.o\
     $(BUILD_DIR)/src/melee/ft/ftcommon.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdrawcommon.c.o\
     $(BUILD_DIR)/asm/melee/ft/ftdrawcommon_data.s.o\
@@ -97,7 +97,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftitempickup.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_Strings.c.o\
-    $(BUILD_DIR)/src/melee/ft/ft_unknown_006.c.o\
+    $(BUILD_DIR)/src/melee/ft/ftunk_04.c.o\
     $(BUILD_DIR)/asm/melee/ft/ft_unknown_006.s.o\
 
 TEXT_O_FILES +=\

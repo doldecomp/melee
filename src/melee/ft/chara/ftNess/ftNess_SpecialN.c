@@ -1,9 +1,9 @@
 #include "ftNess/ftNess_SpecialN.h"
 
 #include "ft/code_80081B38.h"
-#include "ft/ft_unknown_006.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
+#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 #include "ftNess/ftNess.h"
 #include "it/code_8027CF30.h"

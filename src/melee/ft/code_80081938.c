@@ -1,6 +1,6 @@
 #include "ft/code_80081938.h"
 
-#include "ft/ft_unknown_006.h"
+#include "ft/ftunk_04.h"
 #include "it/item.h"
 #include "it/item2.h"
 #include "lb/lbunknown_003.h"

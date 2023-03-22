@@ -2,10 +2,10 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
+#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 

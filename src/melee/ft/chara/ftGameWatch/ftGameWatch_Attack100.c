@@ -1,7 +1,7 @@
 #include "forward.h"
 
 #include "ft/code_80081B38.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ftunk_04.h"
 #include "ft/inlines.h"
 #include "ftGameWatch/ftgamewatch.h"
 

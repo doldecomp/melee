@@ -1,8 +1,8 @@
 #include "player.h"
 
-#include "ft/ft_unknown_006.h"
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
+#include "ft/ftunk_04.h"
 #include "ftKirby/ftkirby.h"
 #include "gm/code_801601C4.h"
 #include "if/ifstatus.h"

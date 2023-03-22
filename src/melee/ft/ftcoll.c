@@ -5,9 +5,9 @@
 
 #include "code_80081B38.h"
 #include "fighter.h"
-#include "ft_unknown_006.h"
 #include "ftcommon.h"
 #include "ftlib.h"
+#include "ftunk_04.h"
 #include "inlines.h"
 
 #include "ef/efsync.h"

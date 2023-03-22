@@ -4,9 +4,9 @@
 
 #include "ef/efasync.h"
 #include "ft/code_80081B38.h"
-#include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
+#include "ft/ftunk_04.h"
 #include "mp/mplib.h"
 #include "pl/pl_unknown_001.h"
 
