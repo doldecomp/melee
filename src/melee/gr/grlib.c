@@ -283,7 +283,7 @@ bool grLib_801C9E60(Vec3* v)
     InternalStageId id = stage_info.internal_stage_id;
 
     if (id == RCRUISE) {
-        func_80201918(v);
+        grRCruise_80201918(v);
         return true;
     }
 
