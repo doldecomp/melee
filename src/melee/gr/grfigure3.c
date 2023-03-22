@@ -10,48 +10,59 @@
 #include <baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E63D8[3] = {
-    { lbl_8020E690, lbl_8020E6BC, lbl_8020E6C4, lbl_8020E6C8, 0UL },
-    { lbl_8020E6CC, lbl_8020E6F8, lbl_8020E700, lbl_8020E724, 0xC0000000 },
-    { lbl_8020E728, lbl_8020E778, lbl_8020E780, lbl_8020E784, 0UL }
+    { grFigure3_8020E690, grFigure3_8020E6BC, grFigure3_8020E6C4,
+      grFigure3_8020E6C8, 0UL },
+    { grFigure3_8020E6CC, grFigure3_8020E6F8, grFigure3_8020E700,
+      grFigure3_8020E724, 0xC0000000 },
+    { grFigure3_8020E728, grFigure3_8020E778, grFigure3_8020E780,
+      grFigure3_8020E784, 0UL }
 };
 
-StageData lbl_803E6420 = { 0x00000046,   lbl_803E63D8,  "/GrEF3.dat",
-                           lbl_8020E508, func_8020E504, lbl_8020E578,
-                           lbl_8020E57C, lbl_8020E5A0,  lbl_8020E788,
-                           lbl_8020E790, 0x00000001,    NULL,
+StageData lbl_803E6420 = { 0x00000046,
+                           lbl_803E63D8,
+                           "/GrEF3.dat",
+                           grFigure3_8020E508,
+                           grFigure3_8020E504,
+                           grFigure3_8020E578,
+                           grFigure3_8020E57C,
+                           grFigure3_8020E5A0,
+                           grFigure3_8020E788,
+                           grFigure3_8020E790,
+                           0x00000001,
+                           NULL,
                            0UL };
 
 void* lbl_804D6A80;
 
 extern StageInfo stage_info;
 
-static void func_8020E504(int number) {}
+static void grFigure3_8020E504(int number) {}
 
-static void lbl_8020E508(void)
+static void grFigure3_8020E508(void)
 {
     lbl_804D6A80 = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
-    func_8020E5A8(0);
-    func_8020E5A8(2);
-    func_8020E5A8(1);
+    grFigure3_8020E5A8(0);
+    grFigure3_8020E5A8(2);
+    grFigure3_8020E5A8(1);
     Ground_801C39C0();
     Ground_801C3BB4();
 }
 
-static void lbl_8020E578(void) {}
+static void grFigure3_8020E578(void) {}
 
-static void lbl_8020E57C(void)
+static void grFigure3_8020E57C(void)
 {
     grZakoGenerator_801CAE04(false);
 }
 
-static bool lbl_8020E5A0(void)
+static bool grFigure3_8020E5A0(void)
 {
     return false;
 }
 
-static HSD_GObj* func_8020E5A8(int gobj_id)
+static HSD_GObj* grFigure3_8020E5A8(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E63D8[gobj_id];
@@ -80,41 +91,41 @@ static HSD_GObj* func_8020E5A8(int gobj_id)
     return gobj;
 }
 
-static void lbl_8020E690(HSD_GObj* gobj)
+static void grFigure3_8020E690(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool lbl_8020E6BC(HSD_GObj* arg0)
+static bool grFigure3_8020E6BC(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void lbl_8020E6C4(HSD_GObj* gobj) {}
+static void grFigure3_8020E6C4(HSD_GObj* gobj) {}
 
-static void lbl_8020E6C8(HSD_GObj* arg0) {}
+static void grFigure3_8020E6C8(HSD_GObj* arg0) {}
 
-static void lbl_8020E6CC(HSD_GObj* gobj)
+static void grFigure3_8020E6CC(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
 }
 
-static bool lbl_8020E6F8(HSD_GObj* arg0)
+static bool grFigure3_8020E6F8(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void lbl_8020E700(HSD_GObj* gobj)
+static void grFigure3_8020E700(HSD_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
     lb_800115F4();
 }
 
-static void lbl_8020E724(HSD_GObj* arg0) {}
+static void grFigure3_8020E724(HSD_GObj* arg0) {}
 
-static void lbl_8020E728(HSD_GObj* gobj)
+static void grFigure3_8020E728(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -126,21 +137,21 @@ static void lbl_8020E728(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool lbl_8020E778(HSD_GObj* arg0)
+static bool grFigure3_8020E778(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void lbl_8020E780(HSD_GObj* gobj) {}
+static void grFigure3_8020E780(HSD_GObj* gobj) {}
 
-static void lbl_8020E784(HSD_GObj* arg0) {}
+static void grFigure3_8020E784(HSD_GObj* arg0) {}
 
-static bool lbl_8020E788(int number)
+static bool grFigure3_8020E788(int number)
 {
     return false;
 }
 
-static bool lbl_8020E790(Vec3* vector, int number, HSD_JObj* jobj)
+static bool grFigure3_8020E790(Vec3* vector, int number, HSD_JObj* jobj)
 {
     return true;
 }
