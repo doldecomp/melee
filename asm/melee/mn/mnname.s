@@ -1066,7 +1066,7 @@ mnName_802382D8:
 /* 802382DC 00234EBC  2C 1F 00 78 */	cmpwi r31, 0x78
 /* 802382E0 00234EC0  41 80 FF C0 */	blt mnName_802382A0
 /* 802382E4 00234EC4  57 C3 06 3E */	clrlwi r3, r30, 0x18
-/* 802382E8 00234EC8  48 00 63 49 */	bl func_8023E630
+/* 802382E8 00234EC8  48 00 63 49 */	bl mnNameNew_8023E630
 /* 802382EC 00234ECC  48 00 02 38 */	b mnName_80238524
 mnName_802382F0:
 /* 802382F0 00234ED0  38 60 00 03 */	li r3, 3
@@ -1256,7 +1256,7 @@ mnName_8023857C:
 /* 8023857C 0023515C  4B FF FC 01 */	bl mnName_8023817C
 /* 80238580 00235160  48 00 00 10 */	b mnName_80238590
 mnName_80238584:
-/* 80238584 00235164  48 00 3F C9 */	bl func_8023C54C
+/* 80238584 00235164  48 00 3F C9 */	bl mnNameNew_8023C54C
 /* 80238588 00235168  48 00 00 08 */	b mnName_80238590
 mnName_8023858C:
 /* 8023858C 0023516C  4B FF F9 ED */	bl mnName_80237F78
@@ -5061,14 +5061,14 @@ lbl_803EE330:
     .4byte NULL
 .global jtbl_803EE33C
 jtbl_803EE33C:
-    .4byte lbl_8023C758
-    .4byte lbl_8023C76C
-    .4byte lbl_8023C7A4
-    .4byte lbl_8023C7E0
-    .4byte lbl_8023C81C
-    .4byte lbl_8023C8A4
-    .4byte lbl_8023C930
-    .4byte lbl_8023C930
+    .4byte mnNameNew_8023C758
+    .4byte mnNameNew_8023C76C
+    .4byte mnNameNew_8023C7A4
+    .4byte mnNameNew_8023C7E0
+    .4byte mnNameNew_8023C81C
+    .4byte mnNameNew_8023C8A4
+    .4byte mnNameNew_8023C930
+    .4byte mnNameNew_8023C930
     .asciz "Can't get user_data.\n"
     .balign 4
     .asciz "mnnamenew.c"
