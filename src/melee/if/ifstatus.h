@@ -197,10 +197,10 @@ extern void func_802FB6AC(s32);
 extern Placeholder_8016AE38_ret_val* gm_8016AE38(void);
 extern Placeholder_8016AE50_ret_val* gm_8016AE50(void);
 extern void gm_8016B8D4(s32, s32);
-extern void func_802F7C30(s32);
-extern void func_802F7AF8(s32);
-extern void func_802F7D08(s32);
-extern void func_802F7BB4(s32);
+extern void if_802F7C30(s32);
+extern void if_802F7AF8(s32);
+extern void if_802F7D08(s32);
+extern void if_802F7BB4(s32);
 extern void func_802FB650(s32);
 
 // functions defined in this file

@@ -2445,7 +2445,7 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
 
     big_thing = gm_8016AE38();
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0)) {
-        func_802F7C30(arg1);
+        if_802F7C30(arg1);
     }
 
     big_thing = gm_8016AE38();
@@ -2470,9 +2470,9 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
 
     /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&func_802F7BB4 != NULL))
+        (&if_802F7BB4 != NULL))
     {
-        func_802F7BB4(player_idx);
+        if_802F7BB4(player_idx);
     }
 }
 
@@ -2505,9 +2505,9 @@ void ifStatus_802F6AF8(s32 player_idx)
 
     /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&func_802F7AF8 != NULL))
+        (&if_802F7AF8 != NULL))
     {
-        func_802F7AF8(player_idx);
+        if_802F7AF8(player_idx);
     }
 }
 
@@ -2540,9 +2540,9 @@ void ifStatus_802F6C04(s32 player_idx)
 
     /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&func_802F7C30 != NULL))
+        (&if_802F7C30 != NULL))
     {
-        func_802F7C30(player_idx);
+        if_802F7C30(player_idx);
     }
 }
 
@@ -2575,9 +2575,9 @@ void ifStatus_802F6D10(s32 player_idx)
 
     /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&func_802F7D08 != NULL))
+        (&if_802F7D08 != NULL))
     {
-        func_802F7D08(player_idx);
+        if_802F7D08(player_idx);
     }
 }
 

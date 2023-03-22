@@ -26,7 +26,7 @@ lbl_803F95C0:
 lbl_803F9628:
     .4byte NULL
     .4byte NULL
-    .4byte lbl_802F74D0
+    .4byte if_802F74D0
     .4byte 0x0007C860
     .4byte 0x08000000
     .4byte NULL
@@ -36,7 +36,7 @@ lbl_803F9628:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte lbl_802F73C4
+    .4byte if_802F73C4
     .4byte 0x0000C351
     .4byte NULL
     .4byte NULL
@@ -46,7 +46,7 @@ lbl_803F9628:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte lbl_802F74D0
+    .4byte if_802F74D0
     .4byte 0x0007C85E
     .4byte NULL
     .4byte NULL
@@ -56,7 +56,7 @@ lbl_803F9628:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte lbl_802F73C4
+    .4byte if_802F73C4
     .4byte 0x0007C85D
     .4byte NULL
     .4byte NULL
@@ -66,7 +66,7 @@ lbl_803F9628:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte lbl_802F73C4
+    .4byte if_802F73C4
     .4byte 0x0007C857
     .4byte 0x0A000000
     .4byte NULL
@@ -76,7 +76,7 @@ lbl_803F9628:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte lbl_802F74D0
+    .4byte if_802F74D0
     .4byte 0x0007C855
     .4byte 0x08000000
     .4byte NULL
@@ -86,7 +86,7 @@ lbl_803F9628:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte lbl_802F74D0
+    .4byte if_802F74D0
     .4byte 0x00009C48
     .4byte NULL
     .4byte NULL
@@ -96,7 +96,7 @@ lbl_803F9628:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte lbl_802F74D0
+    .4byte if_802F74D0
     .4byte 0x00009C46
     .4byte NULL
     .4byte NULL
