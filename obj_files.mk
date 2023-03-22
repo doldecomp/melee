@@ -40,10 +40,10 @@ TEXT_O_FILES :=\
     $(BUILD_DIR)/asm/melee/lb/lbbgflash.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/lb/lbrefract_shared_data.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lbrefract_data.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbrefract1.s.o\
     $(BUILD_DIR)/asm/melee/lb/lbrefract2.s.o\
-    $(BUILD_DIR)/asm/melee/lb/lbrefract3_data.s.o\
+    $(BUILD_DIR)/asm/melee/lb/lbrefract3.s.o\
     $(BUILD_DIR)/src/melee/lb/lbrefract3.c.o\
 
 TEXT_O_FILES +=\
