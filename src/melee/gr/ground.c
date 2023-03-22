@@ -832,7 +832,7 @@ void Ground_801C1158(void)
         break;
     case CORNERIA:
     case VENOM:
-        func_801E2A6C();
+        grCorneria_801E2A6C();
         break;
     }
 }

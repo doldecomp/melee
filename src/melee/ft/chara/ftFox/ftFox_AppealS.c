@@ -13,7 +13,7 @@ bool ftFox_AppealS_CheckIfUsed(Fighter* fp)
 {
     s32* attackCount = Player_GetTotalAttackCountPtr((s32) fp->xC_playerID);
     if ((func_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0U) &&
-        (func_801E2D14() != false))
+        (grCorneria_801E2D14() != false))
     {
         return true;
     }
@@ -42,7 +42,7 @@ bool ftFox_AppealS_CheckInput(HSD_GObj* gobj)
     s32 ftKind = fp->x4_fighterKind;
 
     if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) &&
-        (func_801E2CE8() != false) &&
+        (grCorneria_801E2CE8() != false) &&
         ((fp->input.x65C_heldInputs & HSD_BUTTON_DPAD_DOWN) == false) &&
         ((u8) fp->x682 == true))
     {
@@ -122,13 +122,13 @@ void ftFox_AppealS_Anim(HSD_GObj* gobj)
 
         switch (ftKind) {
         case FTKIND_FOX:
-            if (func_801E2B80() != false)
+            if (grCorneria_801E2B80() != false)
                 fp->cb.x21E0_callback_OnDeath = ftFox_AppealS_OnTakeDamage;
 
             break;
 
         case FTKIND_FALCO:
-            if (func_801E2C34() != false)
+            if (grCorneria_801E2C34() != false)
                 fp->cb.x21E0_callback_OnDeath = ftFox_AppealS_OnTakeDamage;
 
             break;
@@ -167,6 +167,6 @@ static void ftFox_AppealS_OnTakeDamage(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    func_801E2AF4();
+    grCorneria_801E2AF4();
     fp->cb.x21E0_callback_OnDeath = NULL;
 }
