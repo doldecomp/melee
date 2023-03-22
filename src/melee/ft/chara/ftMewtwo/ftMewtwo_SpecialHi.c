@@ -165,7 +165,7 @@ void ftMewtwo_SpecialAirHiStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (EnvColl_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp))) {
+    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp))) {
         ftMewtwo_SpecialAirHiStart_AirToGround(gobj);
         return;
     }
@@ -303,7 +303,7 @@ void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* gobj)
         CollData* collData = collData = getFtColl(fp1);
         fp0->mv.mt.SpecialHi.unk4++;
 
-        if (EnvColl_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp0))) {
+        if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp0))) {
             if (ftMewtwo_SpecialHi_CheckTimer(gobj)) {
                 ftMewtwo_SpecialAirHi_AirToGround(gobj);
                 return;
@@ -598,7 +598,7 @@ void ftMewtwo_SpecialAirHiLost_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-    if (EnvColl_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp))) {
+    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_O(fp))) {
         func_800D5CB0(gobj, 0, mewtwoAttrs->x74_MEWTWO_TELEPORT_LANDING_LAG);
         return;
     }

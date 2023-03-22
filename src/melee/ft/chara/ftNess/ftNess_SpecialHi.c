@@ -1761,7 +1761,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
     } else {
         ledgeGrabDir = -1;
     }
-    if (EnvColl_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
+    if (ft_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
         if (lbvector_Angle(&fighter_r31->x6F0_collData.x14C_ground.normal,
                            &fighter_r31->x80_self_vel) >
             (0.01745329238474369f *
@@ -1941,7 +1941,7 @@ void ftNess_SpecialAirHiRebound_Coll(HSD_GObj* gobj)
     enum_t msid;
 
     fp = gobj->user_data;
-    if (EnvColl_CheckGroundAndLedge(gobj, 0) == true) {
+    if (ft_CheckGroundAndLedge(gobj, 0) == true) {
         fp->x80_self_vel.z = 0.0f;
         fp->x80_self_vel.y = 0.0f;
         fp->x80_self_vel.x = 0.0f;

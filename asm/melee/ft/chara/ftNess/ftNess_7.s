@@ -29,7 +29,7 @@ lbl_80119930:
 /* 80119930 00116510  38 80 FF FF */	li r4, -1
 lbl_80119934:
 /* 80119934 00116514  7F C3 F3 78 */	mr r3, r30
-/* 80119938 00116518  4B F6 89 6D */	bl EnvColl_CheckGroundAndLedge
+/* 80119938 00116518  4B F6 89 6D */	bl ft_CheckGroundAndLedge
 /* 8011993C 0011651C  2C 03 00 00 */	cmpwi r3, 0
 /* 80119940 00116520  41 82 00 B4 */	beq lbl_801199F4
 /* 80119944 00116524  38 7F 08 44 */	addi r3, r31, 0x844
@@ -320,7 +320,7 @@ ftNess_SpecialAirHiRebound_Coll:
 /* 80119D70 00116950  93 A1 00 1C */	stw r29, 0x1c(r1)
 /* 80119D74 00116954  7C 7D 1B 78 */	mr r29, r3
 /* 80119D78 00116958  83 C3 00 2C */	lwz r30, 0x2c(r3)
-/* 80119D7C 0011695C  4B F6 85 29 */	bl EnvColl_CheckGroundAndLedge
+/* 80119D7C 0011695C  4B F6 85 29 */	bl ft_CheckGroundAndLedge
 /* 80119D80 00116960  2C 03 00 01 */	cmpwi r3, 1
 /* 80119D84 00116964  40 82 00 5C */	bne lbl_80119DE0
 /* 80119D88 00116968  C0 02 9D 54 */	lfs f0, lbl_804D9734/*0.0f*/@sda21(r2)

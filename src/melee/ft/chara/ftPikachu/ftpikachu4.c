@@ -137,7 +137,7 @@ void ftPikachu_80126014(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (EnvColl_CheckGroundAndLedge(gobj, fp->facing_dir < 0 ? -1 : +1)) {
+    if (ft_CheckGroundAndLedge(gobj, fp->facing_dir < 0 ? -1 : +1)) {
         ftPikachu_ActionChange_801260E4(gobj);
     } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.
@@ -381,7 +381,7 @@ void ftPikachu_801267C8(HSD_GObj* gobj)
 #endif
 
     fp->mv.pk.unk4.x18++;
-    if (EnvColl_CheckGroundAndLedge(gobj, fp->facing_dir < 0.0f ? -1 : 1)) {
+    if (ft_CheckGroundAndLedge(gobj, fp->facing_dir < 0.0f ? -1 : 1)) {
         bool0 = ftPikachu_GetBool(gobj);
 
         if (bool0) {

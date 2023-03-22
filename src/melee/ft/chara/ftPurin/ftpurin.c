@@ -558,7 +558,7 @@ asm void ftPurin_8013CCE4(HSD_GObj*)
 /* 8013CCF0 001398D0  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8013CCF4 001398D4  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8013CCF8 001398D8  3B E3 00 00 */	addi r31, r3, 0
-/* 8013CCFC 001398DC  4B F4 55 A9 */	bl EnvColl_CheckGroundAndLedge
+/* 8013CCFC 001398DC  4B F4 55 A9 */	bl ft_CheckGroundAndLedge
 /* 8013CD00 001398E0  2C 03 00 00 */	cmpwi r3, 0
 /* 8013CD04 001398E4  41 82 00 10 */	beq lbl_8013CD14
 /* 8013CD08 001398E8  7F E3 FB 78 */	mr r3, r31

@@ -30,7 +30,7 @@ void ft_80084DB0(HSD_GObj*);
 void ft_80082C74(HSD_GObj*, HSD_GObjEvent);
 
 /// @todo Name does not follow our conventions.
-bool EnvColl_CheckGroundAndLedge(HSD_GObj* gobj, s32 direction);
+bool ft_CheckGroundAndLedge(HSD_GObj* gobj, s32 direction);
 
 void ft_80083F88(HSD_GObj* gobj);
 void ft_80085154(HSD_GObj* gobj);

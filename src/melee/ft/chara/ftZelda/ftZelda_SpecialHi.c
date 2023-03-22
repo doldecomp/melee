@@ -195,7 +195,7 @@ void ftZelda_80139AD4(HSD_GObj* gobj)
     else
         ledge_grab_dir = +1;
 
-    if (EnvColl_CheckGroundAndLedge(gobj, ledge_grab_dir))
+    if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir))
         ftZelda_80139BB0(gobj);
     else if (!ftCliffCommon_80081298(gobj))
         return;
@@ -331,7 +331,7 @@ void ftZelda_80139D60(HSD_GObj* gobj)
         else
             ledge_grab_dir = +1;
 
-        if (EnvColl_CheckGroundAndLedge(gobj, ledge_grab_dir)) {
+        if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir)) {
             if (ftZelda_80139D60_Helper(gobj)) {
                 ftZelda_80139FE8(gobj);
                 return;
@@ -657,7 +657,7 @@ void ftZelda_8013A5C4(HSD_GObj* gobj)
         else
             ledge_grab_dir = +1;
 
-        if (EnvColl_CheckGroundAndLedge(gobj, ledge_grab_dir) != 0) {
+        if (ft_CheckGroundAndLedge(gobj, ledge_grab_dir) != 0) {
             func_800D5CB0(gobj, 0, attributes->x6C);
             return;
         }

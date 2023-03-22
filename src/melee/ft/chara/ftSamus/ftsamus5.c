@@ -216,7 +216,7 @@ void ftSamus_8012AC00(HSD_GObj* gobj)
         } else {
             direction = -1;
         }
-        if (EnvColl_CheckGroundAndLedge(gobj, direction)) {
+        if (ft_CheckGroundAndLedge(gobj, direction)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
             func_800D5CB0(gobj, 0, samus_attr->x50);
             return;
@@ -252,7 +252,7 @@ void ftSamus_8012ACF8(HSD_GObj* gobj)
         } else {
             direction = -1;
         }
-        if (EnvColl_CheckGroundAndLedge(gobj, direction)) {
+        if (ft_CheckGroundAndLedge(gobj, direction)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
             func_800D5CB0(gobj, 0, samus_attr->x50);
             return;

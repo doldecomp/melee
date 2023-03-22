@@ -601,7 +601,7 @@ lbl_80082284:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool EnvColl_CheckGroundAndLedge(HSD_GObj* gobj, s32 direction)
+asm bool ft_CheckGroundAndLedge(HSD_GObj* gobj, s32 direction)
 {
     // clang-format off
     nofralloc

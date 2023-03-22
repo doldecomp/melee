@@ -205,7 +205,7 @@ void ftFox_SpecialAirSStart_Coll(HSD_GObj* gobj)
         cliffCatchDir = 1;
     }
 
-    if (EnvColl_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
+    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
         ftFox_SpecialAirSStart_AirToGround(gobj);
         return;
     }
@@ -389,7 +389,7 @@ void ftFox_SpecialAirS_Coll(HSD_GObj* gobj)
     } else {
         cliffCatchDir = 1;
     }
-    if (EnvColl_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
+    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
         ftFox_SpecialAirS_AirToGround(gobj);
         return;
     }
@@ -594,7 +594,7 @@ void ftFox_SpecialAirSEnd_Coll(HSD_GObj* gobj)
     } else {
         cliffCatchDir = 1;
     }
-    if (EnvColl_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
+    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
         func_800D5CB0(gobj, 0, foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
         return;
     }

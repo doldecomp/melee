@@ -159,7 +159,7 @@ void ftDonkey_8010FF14(HSD_GObj* gobj)
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
         }
     } else {
-        if (EnvColl_CheckGroundAndLedge(gobj, 0)) {
+        if (ft_CheckGroundAndLedge(gobj, 0)) {
             ftCommon_8007D7FC(fp);
             Fighter_ChangeMotionState(gobj, 0x17D, 0x0C4C5080, NULL,
                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);

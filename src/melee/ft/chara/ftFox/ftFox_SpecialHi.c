@@ -173,7 +173,7 @@ void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* gobj)
     else
         facingDir = 1;
 
-    if (EnvColl_CheckGroundAndLedge(gobj, facingDir) != false) {
+    if (ft_CheckGroundAndLedge(gobj, facingDir) != false) {
         ftFox_SpecialHiHoldAir_AirToGround(gobj);
         return;
     }
@@ -330,7 +330,7 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* gobj)
     ftFoxAttributes* foxAttrs = foxAttrs = getFtSpecialAttrs(fp);
     CollData* collData = collData = getFtColl(fp);
 
-    if (EnvColl_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
+    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
         if (ftFox_SpecialHi_IsBound(gobj) != false) {
             if ((!(collData->x134_envFlags & 0x18000)) ||
                 (!(lbvector_AngleXY(&collData->x14C_ground.normal,
@@ -634,7 +634,7 @@ void ftFox_SpecialHiFall_Coll(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    if (EnvColl_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
+    if (ft_CheckGroundAndLedge(gobj, CLIFFCATCH_BOTH) != false) {
         ftFox_SpecialHiFall_Action(gobj);
         return;
     }
@@ -761,7 +761,7 @@ void ftFox_SpecialHiBound_Coll(HSD_GObj* gobj)
             cliffCatchDir = 1;
         }
 
-        if (EnvColl_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
+        if (ft_CheckGroundAndLedge(gobj, cliffCatchDir) != false) {
             ftCommon_8007D7FC(fp);
             return;
         }
