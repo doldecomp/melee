@@ -1,6 +1,6 @@
 [workspace]
 members = [
+    "tools/dadosod",
     "tools/flags",
     "tools/issues",
 ]
-
