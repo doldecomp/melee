@@ -175,7 +175,7 @@ int main(void)
     GXSetMisc(1, 8);
     *seed_ptr = OSGetTick();
     func_8002838C();
-    func_80019AAC(&gmMain_8015FD24);
+    lb_80019AAC(&gmMain_8015FD24);
     HSD_VISetUserPostRetraceCallback(&gmMain_8015FDA0);
     HSD_VISetUserGXDrawDoneCallback(&lbl_803762C4);
     HSD_VISetBlack(0);
@@ -183,8 +183,8 @@ int main(void)
     lbHeap_80015F3C();
     lbDvd_80018F68();
     lbArq_80014D2C();
-    func_8001C5BC();
-    func_8001D21C();
+    lb_8001C5BC();
+    lb_8001D21C();
     func_8001E290();
     gmMainLib_8015FCC0();
     func_8001F87C();

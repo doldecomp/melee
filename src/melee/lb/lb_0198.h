@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
-void func_80019AAC(Event);
-void func_8001C5BC(void);
-void func_8001D21C(void);
+void lb_80019AAC(Event);
+void lb_8001C5BC(void);
+void lb_8001D21C(void);
 
 #endif
