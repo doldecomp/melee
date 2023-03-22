@@ -278,7 +278,7 @@ void ftMasterHand_8015364C(HSD_GObj* arg0, HSD_JObj* arg1, f32 arg2, f32 arg3)
 
     attr = fp->ft_data->ext_attr;
     phi_r29 = 0;
-    func_8000B1CC(arg1, 0, &sp28_leek);
+    lb_8000B1CC(arg1, 0, &sp28_leek);
     sp1C_carrot = sp28_leek;
     sp28_leek.x += arg2;
     sp28_leek.y += arg3;

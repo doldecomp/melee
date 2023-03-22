@@ -21,7 +21,7 @@ static s32 lbl_803BA000[] = { 6, 6, 6, 6, 1, 2, 3, 0 };
 static s32 lbl_803BA020[] = { 28, 29, 30, 31 };
 static s32 lbl_803BA030[] = { 7, 4, 5, 6 };
 
-bool func_8000B074(HSD_JObj* jobj)
+bool lb_8000B074(HSD_JObj* jobj)
 {
     HSD_AObj* aobj = jobj->aobj;
 
@@ -31,7 +31,7 @@ bool func_8000B074(HSD_JObj* jobj)
     return false;
 }
 
-bool func_8000B09C(HSD_JObj* jobj)
+bool lb_8000B09C(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
         if (jobj->aobj != NULL && !(jobj->aobj->flags & AOBJ_NO_ANIM)) {
@@ -60,7 +60,7 @@ bool func_8000B09C(HSD_JObj* jobj)
     return false;
 }
 
-bool func_8000B134(HSD_JObj* jobj)
+bool lb_8000B134(HSD_JObj* jobj)
 {
     while (jobj != NULL) {
         if (jobj->aobj != NULL && (jobj->aobj->flags & AOBJ_REWINDED)) {
@@ -97,7 +97,7 @@ inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
     return jobj->parent;
 }
 
-void func_8000B1CC(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
+void lb_8000B1CC(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
 {
     Quaternion r;
     Vec3 s;
@@ -134,7 +134,7 @@ void func_8000B1CC(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
     PSMTXMUltiVec(arg0->mtx, arg1, arg2);
 }
 
-void func_8000B4FC(HSD_JObj* jobj, HSD_Joint* joint)
+void lb_8000B4FC(HSD_JObj* jobj, HSD_Joint* joint)
 {
     if (jobj == NULL || joint == NULL) {
         return;
@@ -150,7 +150,7 @@ void func_8000B4FC(HSD_JObj* jobj, HSD_Joint* joint)
     }
 }
 
-void func_8000B5DC(HSD_JObj* jobj, HSD_Joint* joint)
+void lb_8000B5DC(HSD_JObj* jobj, HSD_Joint* joint)
 {
     if (jobj == NULL || joint == NULL) {
         return;
@@ -165,7 +165,7 @@ void func_8000B5DC(HSD_JObj* jobj, HSD_Joint* joint)
     }
 }
 
-void func_8000B6A4(HSD_JObj* jobj, HSD_Joint* joint)
+void lb_8000B6A4(HSD_JObj* jobj, HSD_Joint* joint)
 {
     if (jobj == NULL || joint == NULL) {
         return;
@@ -177,7 +177,7 @@ void func_8000B6A4(HSD_JObj* jobj, HSD_Joint* joint)
     }
 }
 
-void func_8000B760(HSD_JObj* jobj, HSD_Joint* joint)
+void lb_8000B760(HSD_JObj* jobj, HSD_Joint* joint)
 {
     if (jobj == NULL || joint == NULL) {
         return;
@@ -188,7 +188,7 @@ void func_8000B760(HSD_JObj* jobj, HSD_Joint* joint)
     }
 }
 
-void func_8000B804(HSD_JObj* jobj, HSD_Joint* joint)
+void lb_8000B804(HSD_JObj* jobj, HSD_Joint* joint)
 {
     if (jobj == NULL || joint == NULL) {
         return;
@@ -201,11 +201,11 @@ void func_8000B804(HSD_JObj* jobj, HSD_Joint* joint)
     HSD_JObjClearFlags(jobj, JOBJ_USE_QUATERNION);
     HSD_JObjSetFlags(jobj, JOBJ_MTX_DIRTY);
 
-    func_8000B804(jobj->next, joint->next);
-    func_8000B804(jobj->child, joint->child);
+    lb_8000B804(jobj->next, joint->next);
+    lb_8000B804(jobj->child, joint->child);
 }
 
-static void lbl_8000B9D8(HSD_JObj* jobj, f32** arg1, s32 arg2)
+static void lb_8000B9D8(HSD_JObj* jobj, f32** arg1, s32 arg2)
 {
     f32* tmp = *arg1;
     if (arg2 != 0) {
@@ -213,14 +213,14 @@ static void lbl_8000B9D8(HSD_JObj* jobj, f32** arg1, s32 arg2)
     }
 }
 
-void func_8000BA0C(HSD_JObj* jobj, f32 arg8)
+void lb_8000BA0C(HSD_JObj* jobj, f32 arg8)
 {
     f32* sp10 = &arg8;
-    HSD_JObjWalkTree(jobj, lbl_8000B9D8, &sp10);
+    HSD_JObjWalkTree(jobj, lb_8000B9D8, &sp10);
 }
 
 // lbDObjSetRateAll
-void func_8000BA44(HSD_DObj* dobj, f32 val)
+void lb_8000BA44(HSD_DObj* dobj, f32 val)
 {
     if (dobj == NULL) {
         return;
@@ -252,7 +252,7 @@ void func_8000BA44(HSD_DObj* dobj, f32 val)
 
 // lbDObjReqAnimAll
 // (exact copy of above, but with HSD_AObjReqAnim)
-void func_8000BB24(HSD_DObj* dobj, f32 val)
+void lb_8000BB24(HSD_DObj* dobj, f32 val)
 {
     if (dobj == NULL) {
         return;
@@ -303,7 +303,7 @@ static HSD_JObj* lbFindJObjWithAObj(HSD_JObj* jobj)
 }
 
 // lbGetJObjFramerate
-f32 func_8000BD28(HSD_JObj* jobj)
+f32 lb_8000BD28(HSD_JObj* jobj)
 {
     jobj = lbFindJObjWithAObj(jobj);
     if (jobj != NULL) {
@@ -313,7 +313,7 @@ f32 func_8000BD28(HSD_JObj* jobj)
 }
 
 // lbGetJObjCurrFrame
-f32 func_8000BDB4(HSD_JObj* jobj)
+f32 lb_8000BDB4(HSD_JObj* jobj)
 {
     jobj = lbFindJObjWithAObj(jobj);
     if (jobj != NULL) {
@@ -323,7 +323,7 @@ f32 func_8000BDB4(HSD_JObj* jobj)
 }
 
 // lbGetJObjEndFrame
-f32 func_8000BE40(HSD_JObj* jobj)
+f32 lb_8000BE40(HSD_JObj* jobj)
 {
     jobj = lbFindJObjWithAObj(jobj);
     if (jobj != NULL) {
@@ -332,7 +332,7 @@ f32 func_8000BE40(HSD_JObj* jobj)
     return 0;
 }
 
-static HSD_AnimJoint* func_8000BECC(HSD_AnimJoint* animjoint)
+static HSD_AnimJoint* lb_8000BECC(HSD_AnimJoint* animjoint)
 {
     HSD_AnimJoint* tmp;
     if (animjoint == NULL) {
@@ -341,28 +341,28 @@ static HSD_AnimJoint* func_8000BECC(HSD_AnimJoint* animjoint)
     if (animjoint->aobjdesc != NULL) {
         return animjoint;
     }
-    tmp = func_8000BECC(animjoint->child);
+    tmp = lb_8000BECC(animjoint->child);
     if (tmp != NULL) {
         return tmp;
     }
-    tmp = func_8000BECC(animjoint->next);
+    tmp = lb_8000BECC(animjoint->next);
     if (tmp != NULL) {
         return tmp;
     }
     return NULL;
 }
 
-f32 func_8000BFF0(HSD_AnimJoint* animjoint)
+f32 lb_8000BFF0(HSD_AnimJoint* animjoint)
 {
-    animjoint = func_8000BECC(animjoint);
+    animjoint = lb_8000BECC(animjoint);
     if (animjoint != NULL) {
         return animjoint->aobjdesc->end_frame;
     }
     return 0;
 }
 
-void func_8000C07C(HSD_JObj* jobj, s32 i, HSD_AnimJoint** arg3,
-                   HSD_MatAnimJoint** arg4, HSD_ShapeAnimJoint** arg5)
+void lb_8000C07C(HSD_JObj* jobj, s32 i, HSD_AnimJoint** arg3,
+                 HSD_MatAnimJoint** arg4, HSD_ShapeAnimJoint** arg5)
 {
     HSD_AnimJoint* phi_r4;
     HSD_MatAnimJoint* phi_r5;
@@ -386,12 +386,12 @@ void func_8000C07C(HSD_JObj* jobj, s32 i, HSD_AnimJoint** arg3,
     HSD_JObjAddAnimAll(jobj, phi_r4, phi_r5, phi_r6);
 }
 
-void func_8000C0E8(HSD_JObj* jobj, s32 i, DynamicModelDesc* arg2)
+void lb_8000C0E8(HSD_JObj* jobj, s32 i, DynamicModelDesc* arg2)
 {
-    func_8000C07C(jobj, i, arg2->anims, arg2->matanims, arg2->shapeanims);
+    lb_8000C07C(jobj, i, arg2->anims, arg2->matanims, arg2->shapeanims);
 }
 
-void func_8000C160(void* mem, int size)
+void lb_8000C160(void* mem, int size)
 {
     u8* bytes = mem;
     while (size--) {
@@ -399,7 +399,7 @@ void func_8000C160(void* mem, int size)
     }
 }
 
-void func_8000C1C0(HSD_JObj* jobj, HSD_JObj* constraint)
+void lb_8000C1C0(HSD_JObj* jobj, HSD_JObj* constraint)
 {
     HSD_RObj* robj = HSD_RObjAlloc();
     HSD_RObjSetFlags(robj, 0x90000001);
@@ -407,7 +407,7 @@ void func_8000C1C0(HSD_JObj* jobj, HSD_JObj* constraint)
     HSD_JObjPrependRObj(jobj, robj);
 }
 
-void func_8000C228(HSD_JObj* jobj, HSD_JObj* constraint)
+void lb_8000C228(HSD_JObj* jobj, HSD_JObj* constraint)
 {
     HSD_RObj* robj = HSD_RObjAlloc();
     HSD_RObjSetFlags(robj, 0x90000002);
@@ -415,7 +415,7 @@ void func_8000C228(HSD_JObj* jobj, HSD_JObj* constraint)
     HSD_JObjPrependRObj(jobj, robj);
 }
 
-void func_8000C290(HSD_JObj* jobj, HSD_JObj* constraint)
+void lb_8000C290(HSD_JObj* jobj, HSD_JObj* constraint)
 {
     HSD_RObj* robj = HSD_RObjAlloc();
     HSD_RObjSetFlags(robj, 0x90000004);
@@ -423,10 +423,10 @@ void func_8000C290(HSD_JObj* jobj, HSD_JObj* constraint)
     HSD_JObjPrependRObj(jobj, robj);
 }
 
-void func_8000C2F8(HSD_JObj* jobj, HSD_JObj* constraint)
+void lb_8000C2F8(HSD_JObj* jobj, HSD_JObj* constraint)
 {
-    func_8000C1C0(jobj, constraint);
-    func_8000C290(jobj, constraint);
+    lb_8000C1C0(jobj, constraint);
+    lb_8000C290(jobj, constraint);
 }
 
 inline HSD_RObj* robj_next(HSD_RObj* robj)
@@ -437,7 +437,7 @@ inline HSD_RObj* robj_next(HSD_RObj* robj)
     return NULL;
 }
 
-void func_8000C390(HSD_JObj* jobj)
+void lb_8000C390(HSD_JObj* jobj)
 {
     HSD_RObj* next;
     HSD_RObj* cur = HSD_JObjGetRObj(jobj);
@@ -455,7 +455,7 @@ void func_8000C390(HSD_JObj* jobj)
     }
 }
 
-void func_8000C420(HSD_JObj* jobj, u32 flags, f32 limit)
+void lb_8000C420(HSD_JObj* jobj, u32 flags, f32 limit)
 {
     HSD_RObj* robj = HSD_RObjAlloc();
     HSD_RObjSetFlags(robj, flags | 0xA0000000);
@@ -469,7 +469,7 @@ void func_8000C420(HSD_JObj* jobj, u32 flags, f32 limit)
 
 #pragma push
 // https://decomp.me/scratch/atKIC
-asm void func_8000C490(HSD_JObj*, HSD_JObj*, HSD_JObj*, f32, f32)
+asm void lb_8000C490(HSD_JObj*, HSD_JObj*, HSD_JObj*, f32, f32)
 { // clang-format off
     nofralloc
 /* 8000C490 00009070  7C 08 02 A6 */	mflr r0
@@ -693,15 +693,15 @@ lbl_8000C7A4:
 
 #else
 
-void func_8000C490(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2, f32 arg3,
-                   f32 arg4)
+void lb_8000C490(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2, f32 arg3,
+                 f32 arg4)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
+void lb_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
 {
     dst->rotate = src->rotate;
     dst->scale = src->scale;
@@ -716,7 +716,7 @@ void func_8000C7BC(HSD_JObj* src, HSD_JObj* dst)
 
 #ifdef MWERKS_GEKKO
 
-asm void func_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, f32, f32)
+asm void lb_8000C868(HSD_Joint*, HSD_JObj*, HSD_JObj*, f32, f32)
 { // clang-format off
     nofralloc
 /* 8000C868 00009448  7C 08 02 A6 */	mflr r0
@@ -925,8 +925,8 @@ lbl_8000CB3C:
 
 #else
 
-void func_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, f32 arg3,
-                   f32 arg4)
+void lb_8000C868(HSD_Joint* arg0, HSD_JObj* arg1, HSD_JObj* arg2, f32 arg3,
+                 f32 arg4)
 {
     NOT_IMPLEMENTED;
 }
@@ -968,17 +968,17 @@ static s32 lbGetFreeColorRegImpl(s32 i0, HSD_TevDesc* tevdesc, HSD_TExp* texp1,
 }
 
 // lbGetFreeColorRegister
-s32 func_8000CC5C(s32 i0, HSD_MObj* mobj, HSD_TExp* texp)
+s32 lb_8000CC5C(s32 i0, HSD_MObj* mobj, HSD_TExp* texp)
 {
     return lbGetFreeColorRegImpl(i0, &mobj->tevdesc->desc, mobj->texp, texp);
 }
 
-s32 func_8000CC8C(s32 i)
+s32 lb_8000CC8C(s32 i)
 {
     return lbl_803B9FC0[i];
 }
 
-s32 func_8000CCA4(s32 i)
+s32 lb_8000CCA4(s32 i)
 {
     return lbl_803B9FE0[i];
 }
@@ -1006,17 +1006,17 @@ static s32 lbGetFreeAlphaRegImpl(s32 i0, HSD_TevDesc* cur, HSD_TExp* arg2,
 }
 
 // lbGetFreeAlphaRegister
-s32 func_8000CD60(s32 i0, HSD_MObj* mobj, HSD_TExp* texp)
+s32 lb_8000CD60(s32 i0, HSD_MObj* mobj, HSD_TExp* texp)
 {
     return lbGetFreeAlphaRegImpl(i0, &mobj->tevdesc->desc, mobj->texp, texp);
 }
 
-s32 func_8000CD90(s32 i)
+s32 lb_8000CD90(s32 i)
 {
     return lbl_803BA000[i];
 }
 
-s32 func_8000CDA8(s32 i)
+s32 lb_8000CDA8(s32 i)
 {
     return lbl_803BA020[i];
 }
@@ -1029,7 +1029,7 @@ inline HSD_LObj* lobj_next(HSD_LObj* lobj)
     return lobj->next;
 }
 
-HSD_LObj* func_8000CDC0(HSD_LObj* cur)
+HSD_LObj* lb_8000CDC0(HSD_LObj* cur)
 {
     while (cur != NULL) {
         if (!(cur->flags & ((1 << 0) | (1 << 1))) &&
@@ -1044,14 +1044,14 @@ HSD_LObj* func_8000CDC0(HSD_LObj* cur)
 #endif
 }
 
-void func_8000CE30(HSD_DObj* dobj, HSD_DObj* next)
+void lb_8000CE30(HSD_DObj* dobj, HSD_DObj* next)
 {
     if (dobj != NULL) {
         dobj->next = next;
     }
 }
 
-void func_8000CE40(HSD_JObj* jobj, HSD_DObj* dobj)
+void lb_8000CE40(HSD_JObj* jobj, HSD_DObj* dobj)
 {
     if (jobj != NULL) {
         jobj->u.dobj = dobj;

@@ -208,7 +208,7 @@ void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* gobj)
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         mewtwoAttrs = getFtSpecialAttrsD(fp);
 
-        func_8000B1CC(fp->ft_bones[0x1B].x0_jobj, NULL, &sp18);
+        lb_8000B1CC(fp->ft_bones[0x1B].x0_jobj, NULL, &sp18);
 
         sp18.x += (mewtwoAttrs->x80_MEWTWO_DISABLE_OFFSET_X * fp->facing_dir);
         sp18.y += mewtwoAttrs->x84_MEWTWO_DISABLE_OFFSET_Y;

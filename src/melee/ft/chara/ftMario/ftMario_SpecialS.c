@@ -43,8 +43,8 @@ void ftMario_SpecialS_CreateCape(HSD_GObj* gobj)
 #endif
 
         fp->x2208_ftcmd_var2 = true;
-        func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 49)].x0_jobj, NULL,
-                      &coords);
+        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 49)].x0_jobj, NULL,
+                    &coords);
 
         {
             HSD_GObj* cape = func_802B2560(gobj, fp->facing_dir, &coords,
@@ -199,8 +199,8 @@ void ftMario_SpecialS_Phys(HSD_GObj* gobj)
 
         if (fp->x2200_ftcmd_var0 == 1U) {
             fp->x2200_ftcmd_var0 = 2U;
-            func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, NULL,
-                          &coords);
+            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, NULL,
+                        &coords);
 
             coords.x += 3 * fp->facing_dir;
             func_800119DC(&coords, 120, 0.9, 0.02, M_PI_3);
@@ -244,8 +244,8 @@ void ftMario_SpecialAirS_Phys(HSD_GObj* gobj)
             } else {
                 fp->x80_self_vel.y = 0;
             }
-            func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, NULL,
-                          &coords);
+            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 4)].x0_jobj, NULL,
+                        &coords);
             coords.x += 3 * fp->facing_dir;
             func_800119DC(&coords, 120, 3, 0.1, M_PI_3);
         }

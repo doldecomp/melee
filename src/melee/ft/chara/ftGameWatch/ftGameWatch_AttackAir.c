@@ -21,7 +21,7 @@ void ftGameWatch_ItemParachuteSetup(HSD_GObj* gobj)
     if (fp->fv.gw.x2258_parachuteGObj != NULL) {
         ftGameWatch_ItemParachuteOnLand(gobj);
     } else {
-        func_8000B1CC(fp->ft_bones[1].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->ft_bones[1].x0_jobj, NULL, &sp10);
         fp->fv.gw.x2258_parachuteGObj =
             func_802C6C38(gobj, &sp10, 1, fp->facing_dir);
         if (fp->fv.gw.x2258_parachuteGObj != NULL) {
@@ -113,7 +113,7 @@ void ftGameWatch_ItemTurtleSetup(HSD_GObj* gobj)
     if (fp->fv.gw.x225C_turtleGObj != NULL) {
         ftGameWatch_ItemTurtleOnLand(gobj);
     } else {
-        func_8000B1CC(fp->ft_bones[0x11].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->ft_bones[0x11].x0_jobj, NULL, &sp10);
         fp->fv.gw.x225C_turtleGObj =
             func_802C6F40(gobj, &sp10, 0x11, fp->facing_dir);
         if (fp->fv.gw.x225C_turtleGObj != NULL) {
@@ -204,7 +204,7 @@ void ftGameWatch_ItemSparkySetup(HSD_GObj* gobj)
     if (fp->fv.gw.x2260_sparkyGObj != NULL) {
         ftGameWatch_ItemSparkyOnLand(gobj);
     } else {
-        func_8000B1CC(fp->ft_bones[0x15].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->ft_bones[0x15].x0_jobj, NULL, &sp10);
         fp->fv.gw.x2260_sparkyGObj =
             func_802C720C(gobj, &sp10, 0x15, fp->facing_dir);
         if (fp->fv.gw.x2260_sparkyGObj != NULL) {

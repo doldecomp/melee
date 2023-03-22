@@ -102,7 +102,7 @@ void ftZelda_8013B780(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        func_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp24);
+        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp24);
 
         sp24.z = 0;
         temp_f2 = attributes->x20;
@@ -148,7 +148,7 @@ void ftZelda_8013B89C(HSD_GObj* gobj)
 
     if ((fp->x2200_ftcmd_var0 == 1U) && (fp->fv.zd.x222C == 0U)) {
         fp->x2200_ftcmd_var0 = 0U;
-        func_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp20);
+        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp20);
 
         sp20.z = 0;
         temp_f2 = attributes->x20;
@@ -235,7 +235,7 @@ void ftZelda_8013BA8C(HSD_GObj* gobj)
     attributes = fp->x2D4_specialAttributes;
     if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        func_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp24);
+        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp24);
 
         sp24.z = 0;
         temp_f2 = attributes->x20;
@@ -280,7 +280,7 @@ void ftZelda_8013BBA8(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 == 1U && fp->fv.zd.x222C == 0U) {
         fp->x2200_ftcmd_var0 = 0U;
-        func_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp20);
+        lb_8000B1CC(fp->ft_bones[0x59].x0_jobj, NULL, &sp20);
 
         sp20.z = 0;
         temp_f2 = attributes->x20;

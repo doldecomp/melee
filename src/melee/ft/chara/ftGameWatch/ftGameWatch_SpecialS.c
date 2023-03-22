@@ -25,8 +25,8 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* gobj)
 
     if (GET_FIGHTER(gobj)->x2204_ftcmd_var1 != 0U) {
         fp->x2204_ftcmd_var1 = 0;
-        func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x31)].x0_jobj, NULL,
-                      &sp20);
+        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x31)].x0_jobj, NULL,
+                    &sp20);
         fp->fv.gw.x2264_judgementGObj = func_802C7774(
             fp->facing_dir, gobj, &sp20, ftParts_8007500C(fp, 0x31),
             fp->fv.gw.x222C_judgeVar1);
@@ -34,8 +34,8 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* gobj)
             sp14.z = 0.0f;
             sp14.x = 0.0f;
             sp14.y = 5.0f;
-            func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x1F)].x0_jobj,
-                          &sp14, &sp20);
+            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x1F)].x0_jobj,
+                        &sp14, &sp20);
             func_8028FAF4(gobj, &sp20);
         }
         if (fp->fv.gw.x2264_judgementGObj != NULL) {

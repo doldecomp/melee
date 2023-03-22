@@ -105,8 +105,8 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
     }
 
     if (flag_res != 0) {
-        func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x17)].x0_jobj, NULL,
-                      &coords);
+        lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x17)].x0_jobj, NULL,
+                    &coords);
         if (fp->x4_fighterKind == FTKIND_MARIO) {
             func_8029B6F8(fp->facing_dir, gobj, &coords, 0x30);
             ef_Spawn(0x47a, gobj,

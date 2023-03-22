@@ -175,7 +175,7 @@ static bool func_80201F44(bool arg0)
 static bool func_80201F4C(Vec3* a, int _, HSD_JObj* joint)
 {
     Vec3 b;
-    func_8000B1CC(joint, 0, &b);
+    lb_8000B1CC(joint, 0, &b);
 
     if (a->y > b.y)
         return true;

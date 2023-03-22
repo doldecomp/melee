@@ -307,7 +307,7 @@ static bool grStory_801E36D0(bool arg0)
 bool grStory_801E36D8(Vec3* a, int _, HSD_JObj* joint)
 {
     Vec3 b;
-    func_8000B1CC(joint, NULL, &b);
+    lb_8000B1CC(joint, NULL, &b);
 
     if (a->y + 1.0f > b.y) {
         return true;

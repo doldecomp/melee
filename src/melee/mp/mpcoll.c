@@ -160,12 +160,12 @@ void func_80041EE4(CollData* cd)
     cd->x54 = 0.0f;
     cd->x58 = 0.0f;
     cd->x5C = 0.0f;
-    func_8000C160(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
-    func_8000C160(&cd->xC4_ecb, sizeof(ftECB));
-    func_8000C160(&cd->xE4_ecb, sizeof(ftECB));
-    func_8000C160(&cd->x104, 0x2C);
-    func_8000C160(&cd->x84_ecb, sizeof(ftECB));
-    func_8000C160(&cd->x64_ecb, sizeof(ftECB));
+    lb_8000C160(&cd->xA4_ecbCurrCorrect, sizeof(ftECB));
+    lb_8000C160(&cd->xC4_ecb, sizeof(ftECB));
+    lb_8000C160(&cd->xE4_ecb, sizeof(ftECB));
+    lb_8000C160(&cd->x104, 0x2C);
+    lb_8000C160(&cd->x84_ecb, sizeof(ftECB));
+    lb_8000C160(&cd->x64_ecb, sizeof(ftECB));
 }
 
 // 80042078 https://decomp.me/scratch/hM7h8
@@ -321,12 +321,12 @@ void func_800424DC(CollData* cd, u32 flags)
     {
         f32 temp_x = cd->x4_vec.x;
         f32 temp_y = cd->x4_vec.y;
-        func_8000B1CC(cd->x10C_joint[0], NULL, &vec);
+        lb_8000B1CC(cd->x10C_joint[0], NULL, &vec);
         left_x = right_x = vec.x - temp_x;
         bottom_y = top_y = vec.y - temp_y;
 
 #define EXPAND_ECB_FOR(joint)                                                 \
-    func_8000B1CC(joint, NULL, &vec);                                         \
+    lb_8000B1CC(joint, NULL, &vec);                                           \
     dx = vec.x - temp_x;                                                      \
     dy = vec.y - temp_y;                                                      \
     update_min_max(&left_x, &right_x, dx);                                    \

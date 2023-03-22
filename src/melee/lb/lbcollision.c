@@ -3671,7 +3671,7 @@ asm bool lbColl_80007BCC(HitCapsule*, HitResult* shield_hit, unk_t, s32, f32,
 /* 80007C1C 000047FC  80 7F 00 00 */	lwz r3, 0(r31)
 /* 80007C20 00004800  38 9F 00 14 */	addi r4, r31, 0x14
 /* 80007C24 00004804  38 BF 00 08 */	addi r5, r31, 8
-/* 80007C28 00004808  48 00 35 A5 */	bl func_8000B1CC
+/* 80007C28 00004808  48 00 35 A5 */	bl lb_8000B1CC
 /* 80007C2C 0000480C  28 1C 00 00 */	cmplwi r28, 0
 /* 80007C30 00004810  41 82 00 08 */	beq lbl_80007C38
 /* 80007C34 00004814  D3 FF 00 10 */	stfs f31, 0x10(r31)
@@ -3779,7 +3779,7 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
     Mtx sp38;
 
     if (!(((u8) M2C_FIELD(shield_hit, u8*, 4) >> 7U) & 1)) {
-        func_8000B1CC(shield_hit->bone, &shield_hit->offset, &shield_hit->pos);
+        lb_8000B1CC(shield_hit->bone, &shield_hit->offset, &shield_hit->pos);
         if (arg2 != NULL) {
             shield_hit->pos.z = arg6;
         }
@@ -4029,11 +4029,11 @@ asm bool lbColl_80007ECC(HitCapsule*, HurtCapsule*, Mtx, f32 hit_scl_y,
 /* 80007F24 00004B04  80 7D 00 20 */	lwz r3, 0x20(r29)
 /* 80007F28 00004B08  38 9D 00 04 */	addi r4, r29, 4
 /* 80007F2C 00004B0C  38 BD 00 28 */	addi r5, r29, 0x28
-/* 80007F30 00004B10  48 00 32 9D */	bl func_8000B1CC
+/* 80007F30 00004B10  48 00 32 9D */	bl lb_8000B1CC
 /* 80007F34 00004B14  80 7D 00 20 */	lwz r3, 0x20(r29)
 /* 80007F38 00004B18  38 9D 00 10 */	addi r4, r29, 0x10
 /* 80007F3C 00004B1C  38 BD 00 34 */	addi r5, r29, 0x34
-/* 80007F40 00004B20  48 00 32 8D */	bl func_8000B1CC
+/* 80007F40 00004B20  48 00 32 8D */	bl lb_8000B1CC
 /* 80007F44 00004B24  28 1E 00 00 */	cmplwi r30, 0
 /* 80007F48 00004B28  41 82 00 0C */	beq lbl_80007F54
 /* 80007F4C 00004B2C  D3 FD 00 3C */	stfs f31, 0x3c(r29)
@@ -4132,8 +4132,8 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
 
     if ((enum Tangibility) arg1->tangibility == Vulnerable) {
         if (!(((u8) M2C_FIELD(arg1, u8*, 0x24) >> 7U) & 1)) {
-            func_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
-            func_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
+            lb_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
+            lb_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
             if (arg2 != NULL) {
                 arg1->b_pos.z = hurt_pos_z;
                 arg1->a_pos.z = hurt_pos_z;
@@ -4213,11 +4213,11 @@ asm bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32)
 /* 800080B8 00004C98  80 7F 00 20 */	lwz r3, 0x20(r31)
 /* 800080BC 00004C9C  38 9F 00 04 */	addi r4, r31, 4
 /* 800080C0 00004CA0  38 BF 00 28 */	addi r5, r31, 0x28
-/* 800080C4 00004CA4  48 00 31 09 */	bl func_8000B1CC
+/* 800080C4 00004CA4  48 00 31 09 */	bl lb_8000B1CC
 /* 800080C8 00004CA8  80 7F 00 20 */	lwz r3, 0x20(r31)
 /* 800080CC 00004CAC  38 9F 00 10 */	addi r4, r31, 0x10
 /* 800080D0 00004CB0  38 BF 00 34 */	addi r5, r31, 0x34
-/* 800080D4 00004CB4  48 00 30 F9 */	bl func_8000B1CC
+/* 800080D4 00004CB4  48 00 30 F9 */	bl lb_8000B1CC
 /* 800080D8 00004CB8  28 1C 00 00 */	cmplwi r28, 0
 /* 800080DC 00004CBC  41 82 00 0C */	beq lbl_800080E8
 /* 800080E0 00004CC0  D3 FF 00 3C */	stfs f31, 0x3c(r31)
@@ -4339,8 +4339,8 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, UNK_T arg2, s32 arg3,
 
     if ((enum Tangibility) arg1->tangibility != Intangible) {
         if (!(((u8) M2C_FIELD(arg1, u8*, 0x24) >> 7U) & 1)) {
-            func_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
-            func_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
+            lb_8000B1CC(arg1->bone, &arg1->a_offset, &arg1->a_pos);
+            lb_8000B1CC(arg1->bone, &arg1->b_offset, &arg1->b_pos);
             if (arg2 != NULL) {
                 arg1->b_pos.z = arg6;
                 arg1->a_pos.z = arg6;
@@ -4420,11 +4420,11 @@ asm bool lbColl_80008248(HitCapsule*, HurtCapsule*, Mtx, f32, f32, f32)
 /* 80008294 00004E74  80 7D 00 20 */	lwz r3, 0x20(r29)
 /* 80008298 00004E78  38 9D 00 04 */	addi r4, r29, 4
 /* 8000829C 00004E7C  38 BD 00 28 */	addi r5, r29, 0x28
-/* 800082A0 00004E80  48 00 2F 2D */	bl func_8000B1CC
+/* 800082A0 00004E80  48 00 2F 2D */	bl lb_8000B1CC
 /* 800082A4 00004E84  80 7D 00 20 */	lwz r3, 0x20(r29)
 /* 800082A8 00004E88  38 9D 00 10 */	addi r4, r29, 0x10
 /* 800082AC 00004E8C  38 BD 00 34 */	addi r5, r29, 0x34
-/* 800082B0 00004E90  48 00 2F 1D */	bl func_8000B1CC
+/* 800082B0 00004E90  48 00 2F 1D */	bl lb_8000B1CC
 /* 800082B4 00004E94  28 1E 00 00 */	cmplwi r30, 0
 /* 800082B8 00004E98  41 82 00 0C */	beq lbl_800082C4
 /* 800082BC 00004E9C  D3 FD 00 3C */	stfs f31, 0x3c(r29)
@@ -4509,8 +4509,8 @@ lbl_80008364:
 inline void checkPos(HurtCapsule* hurt, Mtx mtx, f32 arg5)
 {
     if (!hurt->skip_update_pos) {
-        func_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
-        func_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
+        lb_8000B1CC(hurt->bone, &hurt->a_offset, &hurt->a_pos);
+        lb_8000B1CC(hurt->bone, &hurt->b_offset, &hurt->b_pos);
 
         if (mtx != NULL) {
             hurt->b_pos.z = arg5;
@@ -4576,8 +4576,8 @@ void lbColl_800083C4(HurtCapsule* arg0)
     if (arg0->skip_update_pos)
         return;
 
-    func_8000B1CC(arg0->bone, &arg0->a_offset, &arg0->a_pos);
-    func_8000B1CC(arg0->bone, &arg0->b_offset, &arg0->b_pos);
+    lb_8000B1CC(arg0->bone, &arg0->a_offset, &arg0->a_pos);
+    lb_8000B1CC(arg0->bone, &arg0->b_offset, &arg0->b_pos);
     arg0->skip_update_pos = true;
 }
 
@@ -7067,11 +7067,11 @@ lbl_8000A2A4:
 /* 8000A2B8 00006E98  80 7C 00 20 */	lwz r3, 0x20(r28)
 /* 8000A2BC 00006E9C  38 9C 00 04 */	addi r4, r28, 4
 /* 8000A2C0 00006EA0  38 BC 00 28 */	addi r5, r28, 0x28
-/* 8000A2C4 00006EA4  48 00 0F 09 */	bl func_8000B1CC
+/* 8000A2C4 00006EA4  48 00 0F 09 */	bl lb_8000B1CC
 /* 8000A2C8 00006EA8  80 7C 00 20 */	lwz r3, 0x20(r28)
 /* 8000A2CC 00006EAC  38 9C 00 10 */	addi r4, r28, 0x10
 /* 8000A2D0 00006EB0  38 BC 00 34 */	addi r5, r28, 0x34
-/* 8000A2D4 00006EB4  48 00 0E F9 */	bl func_8000B1CC
+/* 8000A2D4 00006EB4  48 00 0E F9 */	bl lb_8000B1CC
 /* 8000A2D8 00006EB8  28 1D 00 00 */	cmplwi r29, 0
 /* 8000A2DC 00006EBC  41 82 00 0C */	beq lbl_8000A2E8
 /* 8000A2E0 00006EC0  D3 FC 00 3C */	stfs f31, 0x3c(r28)
@@ -7316,11 +7316,11 @@ lbl_8000A5E4:
 /* 8000A5F8 000071D8  80 7C 00 20 */	lwz r3, 0x20(r28)
 /* 8000A5FC 000071DC  38 9C 00 04 */	addi r4, r28, 4
 /* 8000A600 000071E0  38 BC 00 28 */	addi r5, r28, 0x28
-/* 8000A604 000071E4  48 00 0B C9 */	bl func_8000B1CC
+/* 8000A604 000071E4  48 00 0B C9 */	bl lb_8000B1CC
 /* 8000A608 000071E8  80 7C 00 20 */	lwz r3, 0x20(r28)
 /* 8000A60C 000071EC  38 9C 00 10 */	addi r4, r28, 0x10
 /* 8000A610 000071F0  38 BC 00 34 */	addi r5, r28, 0x34
-/* 8000A614 000071F4  48 00 0B B9 */	bl func_8000B1CC
+/* 8000A614 000071F4  48 00 0B B9 */	bl lb_8000B1CC
 /* 8000A618 000071F8  28 1D 00 00 */	cmplwi r29, 0
 /* 8000A61C 000071FC  41 82 00 0C */	beq lbl_8000A628
 /* 8000A620 00007200  D3 FC 00 3C */	stfs f31, 0x3c(r28)
@@ -7462,7 +7462,7 @@ lbl_8000A7D0:
 /* 8000A7E4 000073C4  80 7D 00 00 */	lwz r3, 0(r29)
 /* 8000A7E8 000073C8  38 9D 00 14 */	addi r4, r29, 0x14
 /* 8000A7EC 000073CC  38 BD 00 08 */	addi r5, r29, 8
-/* 8000A7F0 000073D0  48 00 09 DD */	bl func_8000B1CC
+/* 8000A7F0 000073D0  48 00 09 DD */	bl lb_8000B1CC
 /* 8000A7F4 000073D4  28 1E 00 00 */	cmplwi r30, 0
 /* 8000A7F8 000073D8  41 82 00 08 */	beq lbl_8000A800
 /* 8000A7FC 000073DC  D3 FD 00 10 */	stfs f31, 0x10(r29)
@@ -7601,7 +7601,7 @@ lbl_8000A9A0:
 /* 8000A9B4 00007594  80 7D 00 00 */	lwz r3, 0(r29)
 /* 8000A9B8 00007598  38 9D 00 14 */	addi r4, r29, 0x14
 /* 8000A9BC 0000759C  38 BD 00 08 */	addi r5, r29, 8
-/* 8000A9C0 000075A0  48 00 08 0D */	bl func_8000B1CC
+/* 8000A9C0 000075A0  48 00 08 0D */	bl lb_8000B1CC
 /* 8000A9C4 000075A4  28 1E 00 00 */	cmplwi r30, 0
 /* 8000A9C8 000075A8  41 82 00 08 */	beq lbl_8000A9D0
 /* 8000A9CC 000075AC  D3 FD 00 10 */	stfs f31, 0x10(r29)
@@ -7745,7 +7745,7 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
     }
     if (var_r0 == (u32) arg1) {
         if (!(((u8) M2C_FIELD(arg0, u8*, 4) >> 7U) & 1)) {
-            func_8000B1CC(arg0->bone, &arg0->offset, &arg0->pos);
+            lb_8000B1CC(arg0->bone, &arg0->offset, &arg0->pos);
             if (arg2 != NULL) {
                 arg0->pos.z = pos_z;
             }
@@ -7831,7 +7831,7 @@ lbl_8000AB70:
 /* 8000AB84 00007764  80 7D 00 00 */	lwz r3, 0(r29)
 /* 8000AB88 00007768  38 9D 00 14 */	addi r4, r29, 0x14
 /* 8000AB8C 0000776C  38 BD 00 08 */	addi r5, r29, 8
-/* 8000AB90 00007770  48 00 06 3D */	bl func_8000B1CC
+/* 8000AB90 00007770  48 00 06 3D */	bl lb_8000B1CC
 /* 8000AB94 00007774  28 1E 00 00 */	cmplwi r30, 0
 /* 8000AB98 00007778  41 82 00 08 */	beq lbl_8000ABA0
 /* 8000AB9C 0000777C  D3 FD 00 10 */	stfs f31, 0x10(r29)

@@ -1099,12 +1099,12 @@ void func_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc)
         } else {
             bonestruct_arg = item_jobj->child;
         }
-        func_8000B804(bonestruct_arg, item_data->xC8_joint->child);
+        lb_8000B804(bonestruct_arg, item_data->xC8_joint->child);
     }
     func_80268BE0(item_jobj, itemStateDesc->x0_anim_joint,
                   itemStateDesc->x4_matanim_joint,
                   itemStateDesc->x8_parameters, item_data);
-    func_8000BA0C(item_jobj, item_data->x5D0_animFrameSpeed);
+    lb_8000BA0C(item_jobj, item_data->x5D0_animFrameSpeed);
     HSD_JObjReqAnimAll(item_jobj, 0.0f);
 }
 
@@ -1114,10 +1114,10 @@ void func_80268DD4(HSD_GObj* item_gobj, f32 frame)
     HSD_JObj* item_jobj;
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
     item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
-    func_8000BA0C(item_jobj, item_data->x5D0_animFrameSpeed);
+    lb_8000BA0C(item_jobj, item_data->x5D0_animFrameSpeed);
     HSD_JObjReqAnimAll(item_jobj, frame);
     HSD_JObjAnimAll(item_jobj);
-    item_data->x5CC_currentAnimFrame = func_8000BDB4(item_jobj);
+    item_data->x5CC_currentAnimFrame = lb_8000BDB4(item_jobj);
 }
 
 /// Copy item script
@@ -1288,7 +1288,7 @@ void func_802694CC(HSD_GObj* item_gobj)
     HSD_JObj* item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
     HSD_JObjAnimAll(item_jobj);
-    item_data->x5CC_currentAnimFrame = func_8000BDB4(item_jobj);
+    item_data->x5CC_currentAnimFrame = lb_8000BDB4(item_jobj);
     func_802799E4(item_gobj);
 }
 

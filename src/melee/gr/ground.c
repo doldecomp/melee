@@ -2292,7 +2292,7 @@ bool Ground_801C2D24(enum_t arg0, Vec3* arg1)
     }
 
     if (stage_info.x280[arg0] != NULL) {
-        func_8000B1CC(stage_info.x280[arg0], NULL, arg1);
+        lb_8000B1CC(stage_info.x280[arg0], NULL, arg1);
         return true;
     }
 
@@ -4149,22 +4149,22 @@ void Ground_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
     Vec3 vec;
     stage_info.unk8C.b3 = true;
 
-    func_8000B1CC(arg0, NULL, &vec);
+    lb_8000B1CC(arg0, NULL, &vec);
     stage_info.x130 = vec;
 
-    func_8000B1CC(arg1, NULL, &vec);
+    lb_8000B1CC(arg1, NULL, &vec);
     stage_info.x13C = vec;
 
-    func_8000B1CC(arg2, NULL, &vec);
+    lb_8000B1CC(arg2, NULL, &vec);
     stage_info.x148 = vec;
 
-    func_8000B1CC(arg3, NULL, &vec);
+    lb_8000B1CC(arg3, NULL, &vec);
     stage_info.x154 = vec;
 
-    func_8000B1CC(arg4, NULL, &vec);
+    lb_8000B1CC(arg4, NULL, &vec);
     stage_info.x160 = vec;
 
-    func_8000B1CC(arg5, NULL, &vec);
+    lb_8000B1CC(arg5, NULL, &vec);
     stage_info.x16C = vec;
 }
 

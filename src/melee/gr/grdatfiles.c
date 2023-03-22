@@ -105,7 +105,7 @@ static void grDatFiles_801C6228(UnkStageDat* arg0)
 
 void grDatFiles_801C6288(void)
 {
-    func_8000C160(&lbl_8049EE10, 0x30);
+    lb_8000C160(&lbl_8049EE10, 0x30);
 }
 
 static UnkArchiveStruct* grDatFiles_801C62B4(void)

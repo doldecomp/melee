@@ -190,7 +190,7 @@ void ftNess_SpecialNStart_Anim(HSD_GObj* gobj)
             u8 _[20];
 #endif
 
-            func_8000B1CC(fp->ft_bones[L2ndNa].x0_jobj, NULL, &vec);
+            lb_8000B1CC(fp->ft_bones[L2ndNa].x0_jobj, NULL, &vec);
             vec.z = 0;
             vec.y += 3 * fp->x34_scale.y;
 
@@ -310,8 +310,8 @@ void ftNess_SpecialAirNStart_Anim(HSD_GObj* gobj)
                 u8 _[20];
 #endif
 
-                func_8000B1CC(fighter_data2->ft_bones[L2ndNa].x0_jobj, NULL,
-                              &vec);
+                lb_8000B1CC(fighter_data2->ft_bones[L2ndNa].x0_jobj, NULL,
+                            &vec);
                 vec.z = 0;
                 vec.y += 3 * fighter_data2->x34_scale.y;
 

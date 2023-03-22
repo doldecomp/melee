@@ -198,7 +198,7 @@ void ftMewtwo_SpecialN_GetPos(Fighter* fp, Vec3* sp38)
     sp2C.z = 2.0f;
     sp2C.y = 0.0f;
     sp2C.x = 0.0f;
-    func_8000B1CC(fp->ft_bones[0x23].x0_jobj, &sp2C, sp38);
+    lb_8000B1CC(fp->ft_bones[0x23].x0_jobj, &sp2C, sp38);
     sp38->z = 0.0f;
 }
 
@@ -469,7 +469,7 @@ void ftMewtwo_SpecialNStart_Anim(HSD_GObj* gobj)
         sp2C.z = 2.0f;
         sp2C.y = 0.0f;
         sp2C.x = 0.0f;
-        func_8000B1CC(fp->ft_bones[0x23].x0_jobj, &sp2C, &sp20);
+        lb_8000B1CC(fp->ft_bones[0x23].x0_jobj, &sp2C, &sp20);
         sp20.z = 0.0f;
         shadowHeldGObj = func_802C5000(
             gobj, &sp20, 0x23, It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
@@ -509,7 +509,7 @@ inline void ftMewtwo_SpecialN_CreateHeldShadow(HSD_GObj* gobj, Vec3* pos1,
         pos1->z = 2.0f;
         pos1->y = 0.0f;
         pos1->x = 0.0f;
-        func_8000B1CC(fp->ft_bones[0x23].x0_jobj, pos1, pos2);
+        lb_8000B1CC(fp->ft_bones[0x23].x0_jobj, pos1, pos2);
         pos2->z = 0.0f;
         shadowHeldGObj = func_802C5000(
             gobj, pos2, 0x23, It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
@@ -561,7 +561,7 @@ void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* gobj)
                         (s32) mewtwoAttrs->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
                     fp->mv.mt.SpecialN.x2348 = true;
                     ftCommon_8007EBAC(fp, 0xCU, 0U);
-                    func_8000B1CC(fp->ft_bones[0].x0_jobj, &sp34, &sp40);
+                    lb_8000B1CC(fp->ft_bones[0].x0_jobj, &sp34, &sp40);
                     ef_Spawn(0x1B, gobj, &sp40);
                     ft_800BFFD0(fp, 0x5C, 0);
                 }
@@ -645,7 +645,7 @@ void ftMewtwo_SpecialAirNStart_Anim(HSD_GObj* gobj)
         sp2C.z = 2.0f;
         sp2C.y = 0.0f;
         sp2C.x = 0.0f;
-        func_8000B1CC(fp->ft_bones[0x23].x0_jobj, &sp2C, &sp20);
+        lb_8000B1CC(fp->ft_bones[0x23].x0_jobj, &sp2C, &sp20);
         sp20.z = 0.0f;
         shadowHeldGObj = func_802C5000(
             gobj, &sp20, 0x23, It_Kind_Mewtwo_ShadowBall, fp->facing_dir);
@@ -713,7 +713,7 @@ void ftMewtwo_SpecialAirNLoop_Anim(HSD_GObj* gobj)
                     fp->mv.mt.SpecialN.x2348 = 1;
                     ftCommon_8007EBAC(fp, 0xCU, 0U);
 
-                    func_8000B1CC(fp->ft_bones[0].x0_jobj, &sp34, &sp40);
+                    lb_8000B1CC(fp->ft_bones[0].x0_jobj, &sp34, &sp40);
                     ef_Spawn(0x1B, gobj, &sp40);
                     ft_800BFFD0(fp, 0x5C, 0);
                 }
@@ -1217,8 +1217,8 @@ static inline void ftMewtwo_SpecialN_LaunchShadowBall(HSD_GObj* gobj)
         ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
         if ((u32) fp->x220C_ftcmd_var3 == 1U) {
             fp->x220C_ftcmd_var3 = 0;
-            func_8000B1CC(fp->ft_bones[0x23].x0_jobj, NULL, &sp20);
-            func_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp2C);
+            lb_8000B1CC(fp->ft_bones[0x23].x0_jobj, NULL, &sp20);
+            lb_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp2C);
             sp2C.z = 0.0f;
             sp20.z = 0.0f;
             func_802C519C(gobj, &sp20, It_Kind_Mewtwo_ShadowBall,

@@ -651,8 +651,8 @@ f32 func_8026B960(HSD_GObj* item_gobj)
 
 #endif
 
-extern void func_8000B804(HSD_JObj*, HSD_Joint*);
-extern void func_8000BA0C(HSD_JObj*, f32);
+extern void lb_8000B804(HSD_JObj*, HSD_Joint*);
+extern void lb_8000BA0C(HSD_JObj*, f32);
 extern void HSD_JObjRemoveAnimAll(HSD_JObj*);
 
 static inline void What(HSD_GObj* item_gobj,
@@ -675,13 +675,13 @@ static inline void What(HSD_GObj* item_gobj,
                     item_jobj = NULL;
                 } else
                     item_jobj = item_jobj2->child;
-                func_8000B804(item_jobj, temp_joint->child);
+                lb_8000B804(item_jobj, temp_joint->child);
             }
             temp_stateDesc = ip->xD0_itemStateDesc;
             HSD_JObjAddAnimAll(item_jobj2, temp_stateDesc->x0_anim_joint,
                                temp_stateDesc->x4_matanim_joint,
                                temp_stateDesc->x8_parameters);
-            func_8000BA0C(item_jobj2, ip->x5D0_animFrameSpeed);
+            lb_8000BA0C(item_jobj2, ip->x5D0_animFrameSpeed);
             HSD_JObjReqAnimAll(item_jobj2, 0.0f);
             func_80268E40(ip, itemStateDesc);
         }
@@ -728,13 +728,13 @@ void func_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
                 if (ip->xC8_joint != NULL) {
                     jobj1 = (jobj0 == NULL) ? NULL : jobj0->child;
 
-                    func_8000B804(jobj1, ip->xC8_joint->child);
+                    lb_8000B804(jobj1, ip->xC8_joint->child);
                 }
                 temp_stateDesc = ip->xD0_itemStateDesc;
                 HSD_JObjAddAnimAll(jobj0, temp_stateDesc->x0_anim_joint,
                                    temp_stateDesc->x4_matanim_joint,
                                    temp_stateDesc->x8_parameters);
-                func_8000BA0C(jobj0, ip->x5D0_animFrameSpeed);
+                lb_8000BA0C(jobj0, ip->x5D0_animFrameSpeed);
                 HSD_JObjReqAnimAll(jobj0, 0.0f);
                 func_80268E40(ip, state_desc);
             }

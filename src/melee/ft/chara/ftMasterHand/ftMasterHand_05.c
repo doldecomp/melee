@@ -14,8 +14,8 @@ u32 ftMasterHand_80151428(Vec3* vec)
     HSD_GObj* fetched_gobj = ftBossLib_8015C3E8(0x1B);
 
     if (fetched_gobj) {
-        func_8000B1CC(
-            ((Fighter*) fetched_gobj->user_data)->ft_bones[5].x0_jobj, 0, vec);
+        lb_8000B1CC(((Fighter*) fetched_gobj->user_data)->ft_bones[5].x0_jobj,
+                    0, vec);
         return 1;
     }
     return 0;

@@ -24,7 +24,7 @@ void ftGameWatch_ItemTorchSetup(HSD_GObj* gobj)
 #endif
 
     fp = getFighter(gobj);
-    func_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp10);
+    lb_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp10);
     fp->fv.gw.x2254_fireGObj =
         func_802C68F8(gobj, &sp10, 0x20, fp->facing_dir);
     if (fp->fv.gw.x2254_fireGObj != NULL) {

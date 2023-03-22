@@ -754,8 +754,8 @@ void ftNess_SpecialHiStart_Anim(HSD_GObj* gobj)
             Fighter* fighter_data2 = gobj->user_data;
             HSD_GObj* pkt_ptr = fighter_data2->fv.ns.pkthunder_gobj;
             if (pkt_ptr == NULL) {
-                func_8000B1CC(fighter_data2->ft_bones[24].x0_jobj, NULL,
-                              &pkt_pos);
+                lb_8000B1CC(fighter_data2->ft_bones[24].x0_jobj, NULL,
+                            &pkt_pos);
 
                 pkt_pos.z = 0.0f;
 
@@ -937,7 +937,7 @@ void ftNess_SpecialAirHiStart_Anim(HSD_GObj* gobj)
             pkt_ptr = fp2->fv.ns.pkthunder_gobj;
 
             if (pkt_ptr == 0) {
-                func_8000B1CC(fp2->ft_bones[24].x0_jobj, NULL, &pkt_pos);
+                lb_8000B1CC(fp2->ft_bones[24].x0_jobj, NULL, &pkt_pos);
 
                 pkt_pos.z = 0.0f;
 

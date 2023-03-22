@@ -121,16 +121,16 @@ void ftMasterHand_80152E28(HSD_GObj* gobj)
     Vec3 sp10;
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        func_8000B1CC(fp->ft_bones[11].x0_jobj, 0, &sp10);
+        lb_8000B1CC(fp->ft_bones[11].x0_jobj, 0, &sp10);
         fp->mv.mh.unk0.x34 =
             func_802F0340(gobj, &sp10, &sp10, 0xB, 0x7D, fp->facing_dir);
-        func_8000B1CC(fp->ft_bones[16].x0_jobj, 0, &sp10);
+        lb_8000B1CC(fp->ft_bones[16].x0_jobj, 0, &sp10);
         fp->mv.mh.unk0.x38 =
             func_802F0340(gobj, &sp10, &sp10, 0x10, 0x7D, fp->facing_dir);
-        func_8000B1CC(fp->ft_bones[21].x0_jobj, 0, &sp10);
+        lb_8000B1CC(fp->ft_bones[21].x0_jobj, 0, &sp10);
         fp->mv.mh.unk0.x3C =
             func_802F0340(gobj, &sp10, &sp10, 0x15, 0x7D, fp->facing_dir);
-        func_8000B1CC(fp->ft_bones[26].x0_jobj, 0, &sp10);
+        lb_8000B1CC(fp->ft_bones[26].x0_jobj, 0, &sp10);
         fp->mv.mh.unk0.x40 =
             func_802F0340(gobj, &sp10, &sp10, 0x1A, 0x7D, fp->facing_dir);
         fp->mv.mh.unk0.x28 = func_800237A8(0x4E204, 0x7F, 0x40);

@@ -571,8 +571,8 @@ void Fighter_UnkUpdateVecFromBones_8006876C(Fighter* fp)
 
     fp->x1A6C = (vec.y / 8.55f);
 
-    func_8000B1CC(jobj, 0, &vec);
-    func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 1)].x0_jobj, 0, &vec2);
+    lb_8000B1CC(jobj, 0, &vec);
+    lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 1)].x0_jobj, 0, &vec2);
     fp->x1A70.x = vec2.x - vec.x;
     fp->x1A70.y = vec2.y - vec.y;
     fp->x1A70.z = vec2.z - vec.z;

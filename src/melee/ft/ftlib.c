@@ -332,7 +332,7 @@ void ftLib_800866DC(HSD_GObj* gobj, Vec3* v)
     Fighter* fp = GET_FIGHTER(gobj);
     struct attr* r4 = &fp->x110_attr;
     s32 i = fp->ft_data->x0->x16C_idx;
-    func_8000B1CC(ftLib_80086630(gobj, i), &r4->x280, v);
+    lb_8000B1CC(ftLib_80086630(gobj, i), &r4->x280, v);
 }
 
 void ftLib_80086724(HSD_GObj* gobj, HSD_GObj* other)

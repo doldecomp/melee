@@ -77,7 +77,7 @@ static asm void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* gobj)
 /* 8014E58C 0014B16C  38 81 00 38 */	addi r4, r1, 0x38
 /* 8014E590 0014B170  7C 65 00 2E */	lwzx r3, r5, r0
 /* 8014E594 0014B174  38 A1 00 44 */	addi r5, r1, 0x44
-/* 8014E598 0014B178  4B EB CC 35 */	bl func_8000B1CC
+/* 8014E598 0014B178  4B EB CC 35 */	bl lb_8000B1CC
 /* 8014E59C 0014B17C  38 60 00 00 */	li r3, 0
 /* 8014E5A0 0014B180  83 BE 00 2C */	lwz r29, 0x2c(r30)
 /* 8014E5A4 0014B184  20 03 00 05 */	subfic r0, r3, 5
@@ -169,8 +169,8 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* gobj)
             sp38.x = 2.5f;
             sp38.y = 6.5f;
             sp38.z = 0.0f;
-            func_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x1F)].x0_jobj,
-                          &sp38, &sp44);
+            lb_8000B1CC(fp->ft_bones[ftParts_8007500C(fp, 0x1F)].x0_jobj,
+                        &sp38, &sp44);
             temp_fp = GET_FIGHTER(gobj);
             i = 5;
             for (i -= 5; i < 5; i++) {

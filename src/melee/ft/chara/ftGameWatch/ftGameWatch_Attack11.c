@@ -26,7 +26,7 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* gobj)
     if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
         ftGameWatch_Attack11_DecideAction(gobj);
     } else {
-        func_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->ft_bones[0x20].x0_jobj, NULL, &sp10);
         fp->fv.gw.x224C_greenhouseGObj =
             func_802C61F4(gobj, &sp10, 0x20, fp->facing_dir);
         if (fp->fv.gw.x224C_greenhouseGObj != NULL) {
