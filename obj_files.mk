@@ -86,7 +86,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftwalljump.c.o\
     $(BUILD_DIR)/src/melee/ft/code_80081938.c.o\
     $(BUILD_DIR)/src/melee/ft/code_80081B38.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_unknown_005.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftunk_03.s.o\
     $(BUILD_DIR)/src/melee/ft/ftdata1.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdata2.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdata3.c.o\
@@ -98,7 +98,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_Strings.c.o\
     $(BUILD_DIR)/src/melee/ft/ftunk_04.c.o\
-    $(BUILD_DIR)/asm/melee/ft/ft_unknown_006.s.o\
+    $(BUILD_DIR)/asm/melee/ft/ftunk_04.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftDonkey/ftdonkey1.c.o\

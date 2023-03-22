@@ -18,7 +18,7 @@ function reverse_symbol {
 }
 
 function rename_module_symbols_asm {
-    sed -rn 's/^(func|lbl)_([0-9A-F]{8})\b:$/\1_\2/pg' "$1" | while read line; do
+    sed -rn 's/^(func|lbl)_([0-9A-F]{8})\b:$/\1_\2/pg' "$1" | while read -r line; do
         new_line="$2_${line#*_}"
         replace_symbol "$line" "$new_line"
     done
@@ -81,7 +81,7 @@ function rename_tu {
             mv "$file" "$new_file"
         done
     done
-    melee_sed "s/\b$1\(\.[ch]\)\b/$2\1/g"
+    melee_sed "s/\b$1\(\.[csh]\)\b/$2\1/g"
 }
 
 alias qd='qalc -p 10'

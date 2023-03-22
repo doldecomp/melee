@@ -52,7 +52,7 @@
 /// @todo Move elsewhere.
 #define HALF_PI (1.5707963267948966)
 
-// external vars from asm/melee/ft/ft_unknown_005.s
+// external vars from asm/melee/ft/ftunk_03.s
 typedef void (*ft_callback)(HSD_GObj* gobj);
 typedef void (*fn_ptr_t)(void);
 
