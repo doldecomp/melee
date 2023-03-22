@@ -32,10 +32,10 @@
 #include "it/item.h"
 #include "it/item2.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00CE.h"
 #include "lb/lbarchive.h"
 #include "lb/lbmthp.h"
 #include "lb/lbshadow.h"
-#include "lb/lbunknown_002.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 #include "pl/pl_0371.h"
@@ -2019,10 +2019,9 @@ void Fighter_Spaghetti_8006AD10(HSD_GObj* gobj)
                 fp->x671_timer_lstick_tilt_y = 0xFE;
             }
 
-            if (func_8000D148(
-                    fp->input.x628_lstick_x2, fp->input.x62C_lstick_y2,
-                    fp->input.x620_lstick_x, fp->input.x624_lstick_y, 0.0f,
-                    0.0f, p_ftCommonData->x8_someStickThreshold))
+            if (lb_8000D148(fp->input.x628_lstick_x2, fp->input.x62C_lstick_y2,
+                            fp->input.x620_lstick_x, fp->input.x624_lstick_y,
+                            0.0f, 0.0f, p_ftCommonData->x8_someStickThreshold))
             {
                 fp->x67A_y = 0;
                 fp->x679_x = 0;
