@@ -17355,10 +17355,10 @@ lbl_801B27CC:
 /* 801B27F4 001AF3D4  3C C0 80 17 */	lis r6, gm_8016BE80@ha
 /* 801B27F8 001AF3D8  88 1F 00 0C */	lbz r0, 0xc(r31)
 /* 801B27FC 001AF3DC  51 20 1F 38 */	rlwimi r0, r9, 3, 0x1c, 0x1c
-/* 801B2800 001AF3E0  3C A0 80 1A */	lis r5, func_801A31FC@ha
+/* 801B2800 001AF3E0  3C A0 80 1A */	lis r5, gmCamera_801A31FC@ha
 /* 801B2804 001AF3E4  98 1F 00 0C */	stb r0, 0xc(r31)
-/* 801B2808 001AF3E8  3C 80 80 1A */	lis r4, func_801A3098@ha
-/* 801B280C 001AF3EC  3C 60 80 1A */	lis r3, func_801A30E4@ha
+/* 801B2808 001AF3E8  3C 80 80 1A */	lis r4, gmCamera_801A3098@ha
+/* 801B280C 001AF3EC  3C 60 80 1A */	lis r3, gmCamera_801A30E4@ha
 /* 801B2810 001AF3F0  54 08 EF FE */	rlwinm r8, r0, 0x1d, 0x1f, 0x1f
 /* 801B2814 001AF3F4  88 1E 00 00 */	lbz r0, 0(r30)
 /* 801B2818 001AF3F8  51 00 0F BC */	rlwimi r0, r8, 1, 0x1e, 0x1e
@@ -17369,11 +17369,11 @@ lbl_801B27CC:
 /* 801B282C 001AF40C  50 08 3E 30 */	rlwimi r8, r0, 7, 0x18, 0x18
 /* 801B2830 001AF410  38 C6 BE 80 */	addi r6, r6, gm_8016BE80@l
 /* 801B2834 001AF414  99 1E 00 05 */	stb r8, 5(r30)
-/* 801B2838 001AF418  38 A5 31 FC */	addi r5, r5, func_801A31FC@l
-/* 801B283C 001AF41C  38 84 30 98 */	addi r4, r4, func_801A3098@l
+/* 801B2838 001AF418  38 A5 31 FC */	addi r5, r5, gmCamera_801A31FC@l
+/* 801B283C 001AF41C  38 84 30 98 */	addi r4, r4, gmCamera_801A3098@l
 /* 801B2840 001AF420  89 1E 00 01 */	lbz r8, 1(r30)
 /* 801B2844 001AF424  50 08 2E B4 */	rlwimi r8, r0, 5, 0x1a, 0x1a
-/* 801B2848 001AF428  38 63 30 E4 */	addi r3, r3, func_801A30E4@l
+/* 801B2848 001AF428  38 63 30 E4 */	addi r3, r3, gmCamera_801A30E4@l
 /* 801B284C 001AF42C  99 1E 00 01 */	stb r8, 1(r30)
 /* 801B2850 001AF430  89 1E 00 01 */	lbz r8, 1(r30)
 /* 801B2854 001AF434  50 08 26 F6 */	rlwimi r8, r0, 4, 0x1b, 0x1b
@@ -32989,9 +32989,9 @@ lbl_803DA920:
     .4byte lbl_801ACC90
     .4byte NULL
     .4byte 0x2C000000
-    .4byte lbl_801A34FC
-    .4byte lbl_801A3634
-    .4byte func_801A367C
+    .4byte gmCamera_801A34FC
+    .4byte gmCamera_801A3634
+    .4byte gmCamera_801A367C
     .4byte NULL
     .4byte 0x2D000000
     .4byte NULL
