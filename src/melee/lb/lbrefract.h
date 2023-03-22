@@ -51,15 +51,15 @@ typedef struct _RefractCallbackData {
 
 void lbRefract_80021CE8(void*, s32);
 
-extern RefractCallbackTypeA lbl_80021F34;
-extern RefractCallbackTypeA lbl_80021F70;
+extern RefractCallbackTypeA lbRefract_80021F34;
+extern RefractCallbackTypeA lbRefract_80021F70;
 
-extern RefractCallbackTypeB lbl_80021FB4;
-extern RefractCallbackTypeB lbl_80021FB4;
+extern RefractCallbackTypeB lbRefract_80021FB4;
+extern RefractCallbackTypeB lbRefract_80021FB4;
 
-extern RefractCallbackTypeC lbl_80021FF8;
-extern RefractCallbackTypeC lbl_8002206C;
-extern RefractCallbackTypeC lbl_80022120;
+extern RefractCallbackTypeC lbRefract_80021FF8;
+extern RefractCallbackTypeC lbRefract_8002206C;
+extern RefractCallbackTypeC lbRefract_80022120;
 
 s32 lbRefract_8002219C(RefractCallbackData*, s32, u32, u16, u16);
 

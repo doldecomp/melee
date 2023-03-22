@@ -195,7 +195,7 @@ lbRefract_80021ED4:
 /* 80021F30 0001EB10  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/VElQJ
-lbl_80021F34:
+lbRefract_80021F34:
 /* 80021F34 0001EB14  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80021F38 0001EB18  54 A6 F0 BE */	srwi r6, r5, 2
 /* 80021F3C 0001EB1C  80 E3 00 00 */	lwz r7, 0(r3)
@@ -213,7 +213,7 @@ lbl_80021F34:
 /* 80021F6C 0001EB4C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/xCKEK
-lbl_80021F70:
+lbRefract_80021F70:
 /* 80021F70 0001EB50  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80021F74 0001EB54  54 A9 F0 BE */	srwi r9, r5, 2
 /* 80021F78 0001EB58  81 43 00 00 */	lwz r10, 0(r3)
@@ -233,7 +233,7 @@ lbl_80021F70:
 /* 80021FB0 0001EB90  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/sveP4
-lbl_80021FB4:
+lbRefract_80021FB4:
 /* 80021FB4 0001EB94  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80021FB8 0001EB98  54 AA F0 BE */	srwi r10, r5, 2
 /* 80021FBC 0001EB9C  81 63 00 00 */	lwz r11, 0(r3)
@@ -253,7 +253,7 @@ lbl_80021FB4:
 /* 80021FF4 0001EBD4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/kcNXw
-lbl_80021FF8:
+lbRefract_80021FF8:
 /* 80021FF8 0001EBD8  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80021FFC 0001EBDC  54 AA F0 BE */	srwi r10, r5, 2
 /* 80022000 0001EBE0  81 63 00 00 */	lwz r11, 0(r3)
@@ -288,7 +288,7 @@ lbRefract_80022058:
 /* 80022068 0001EC48  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/ZzShG
-lbl_8002206C:
+lbRefract_8002206C:
 /* 8002206C 0001EC4C  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80022070 0001EC50  54 AA F0 BE */	srwi r10, r5, 2
 /* 80022074 0001EC54  81 63 00 00 */	lwz r11, 0(r3)
@@ -345,7 +345,7 @@ lbRefract_80022118:
 /* 8002211C 0001ECFC  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/K9xQ4
-lbl_80022120:
+lbRefract_80022120:
 /* 80022120 0001ED00  80 03 00 10 */	lwz r0, 0x10(r3)
 /* 80022124 0001ED04  54 AA F0 BE */	srwi r10, r5, 2
 /* 80022128 0001ED08  81 63 00 00 */	lwz r11, 0(r3)
@@ -415,31 +415,31 @@ lbRefract_80022204:
 /* 80022208 0001EDE8  40 80 00 74 */	bge lbRefract_8002227C
 /* 8002220C 0001EDEC  48 00 00 4C */	b lbRefract_80022258
 lbRefract_80022210:
-/* 80022210 0001EDF0  3C 60 80 02 */	lis r3, lbl_80021F34@ha
-/* 80022214 0001EDF4  38 03 1F 34 */	addi r0, r3, lbl_80021F34@l
-/* 80022218 0001EDF8  3C 60 80 02 */	lis r3, lbl_80021FF8@ha
+/* 80022210 0001EDF0  3C 60 80 02 */	lis r3, lbRefract_80021F34@ha
+/* 80022214 0001EDF4  38 03 1F 34 */	addi r0, r3, lbRefract_80021F34@l
+/* 80022218 0001EDF8  3C 60 80 02 */	lis r3, lbRefract_80021FF8@ha
 /* 8002221C 0001EDFC  90 1D 00 18 */	stw r0, 0x18(r29)
-/* 80022220 0001EE00  38 03 1F F8 */	addi r0, r3, lbl_80021FF8@l
+/* 80022220 0001EE00  38 03 1F F8 */	addi r0, r3, lbRefract_80021FF8@l
 /* 80022224 0001EE04  90 1D 00 1C */	stw r0, 0x1c(r29)
 /* 80022228 0001EE08  57 E0 18 34 */	rlwinm r0, r31, 3, 0, 0x1a
 /* 8002222C 0001EE0C  90 1D 00 10 */	stw r0, 0x10(r29)
 /* 80022230 0001EE10  48 00 00 54 */	b lbRefract_80022284
 lbRefract_80022234:
-/* 80022234 0001EE14  3C 60 80 02 */	lis r3, lbl_80021F70@ha
-/* 80022238 0001EE18  38 03 1F 70 */	addi r0, r3, lbl_80021F70@l
-/* 8002223C 0001EE1C  3C 60 80 02 */	lis r3, lbl_8002206C@ha
+/* 80022234 0001EE14  3C 60 80 02 */	lis r3, lbRefract_80021F70@ha
+/* 80022238 0001EE18  38 03 1F 70 */	addi r0, r3, lbRefract_80021F70@l
+/* 8002223C 0001EE1C  3C 60 80 02 */	lis r3, lbRefract_8002206C@ha
 /* 80022240 0001EE20  90 1D 00 18 */	stw r0, 0x18(r29)
-/* 80022244 0001EE24  38 03 20 6C */	addi r0, r3, lbl_8002206C@l
+/* 80022244 0001EE24  38 03 20 6C */	addi r0, r3, lbRefract_8002206C@l
 /* 80022248 0001EE28  90 1D 00 1C */	stw r0, 0x1c(r29)
 /* 8002224C 0001EE2C  57 E0 18 34 */	rlwinm r0, r31, 3, 0, 0x1a
 /* 80022250 0001EE30  90 1D 00 10 */	stw r0, 0x10(r29)
 /* 80022254 0001EE34  48 00 00 30 */	b lbRefract_80022284
 lbRefract_80022258:
-/* 80022258 0001EE38  3C 60 80 02 */	lis r3, lbl_80021FB4@ha
-/* 8002225C 0001EE3C  38 03 1F B4 */	addi r0, r3, lbl_80021FB4@l
-/* 80022260 0001EE40  3C 60 80 02 */	lis r3, lbl_80022120@ha
+/* 80022258 0001EE38  3C 60 80 02 */	lis r3, lbRefract_80021FB4@ha
+/* 8002225C 0001EE3C  38 03 1F B4 */	addi r0, r3, lbRefract_80021FB4@l
+/* 80022260 0001EE40  3C 60 80 02 */	lis r3, lbRefract_80022120@ha
 /* 80022264 0001EE44  90 1D 00 18 */	stw r0, 0x18(r29)
-/* 80022268 0001EE48  38 03 21 20 */	addi r0, r3, lbl_80022120@l
+/* 80022268 0001EE48  38 03 21 20 */	addi r0, r3, lbRefract_80022120@l
 /* 8002226C 0001EE4C  90 1D 00 1C */	stw r0, 0x1c(r29)
 /* 80022270 0001EE50  57 E0 20 32 */	rlwinm r0, r31, 4, 0, 0x19
 /* 80022274 0001EE54  90 1D 00 10 */	stw r0, 0x10(r29)
