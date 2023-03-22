@@ -87,7 +87,7 @@ void ftSeak_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
 
         if (fp->mv.sk.specials.x14) {
             HSD_JObj* bone = fp->x8AC_animSkeleton;
-            ftAnim_8006F4C8(fp, 1, func_80085E50(fp, arg1));
+            ftAnim_8006F4C8(fp, 1, ftData_80085E50(fp, arg1));
             ftAnim_80070710(bone, f);
             ftAnim_8006FB88(fp, 1, fp->x108_costume_joint->child);
             HSD_JObjAnimAll(bone);

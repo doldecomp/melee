@@ -272,19 +272,19 @@ void Player_80031AD0(int slot)
 void Player_80031CB0(enum_t id, int slot)
 {
     if (ftMapping_list[id].internal_id != -1)
-        func_800855C8(ftMapping_list[id].internal_id, slot);
+        ftData_800855C8(ftMapping_list[id].internal_id, slot);
 
     if (hasExtraFighterId(&ftMapping_list[id]))
-        func_800855C8(ftMapping_list[id].extra_internal_id, slot);
+        ftData_800855C8(ftMapping_list[id].extra_internal_id, slot);
 }
 
 void Player_80031D2C(enum_t id, int slot)
 {
     if (ftMapping_list[id].internal_id != -1)
-        func_8008578C(ftMapping_list[id].internal_id, slot);
+        ftData_8008578C(ftMapping_list[id].internal_id, slot);
 
     if (hasExtraFighterId(&ftMapping_list[id]))
-        func_8008578C(ftMapping_list[id].extra_internal_id, slot);
+        ftData_8008578C(ftMapping_list[id].extra_internal_id, slot);
 }
 
 void Player_80031DA8(s32 param_1, s32 param_2)

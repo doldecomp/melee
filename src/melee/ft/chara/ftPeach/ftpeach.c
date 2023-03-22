@@ -152,8 +152,8 @@ void ftPeach_OnLoad(HSD_GObj* gobj)
     ftPeachAttributes* extAtrrs = fp->ft_data->ext_attr;
     void** items = fp->ft_data->x48_items;
 
-    extAtrrs->unk0 = func_8001E8F8(func_80085E50(fp, 18));
-    extAtrrs->unk4 = func_8001E8F8(func_80085E50(fp, 19));
+    extAtrrs->unk0 = func_8001E8F8(ftData_80085E50(fp, 18));
+    extAtrrs->unk4 = func_8001E8F8(ftData_80085E50(fp, 19));
 
     PUSH_ATTRS(fp, ftPeachAttributes);
 

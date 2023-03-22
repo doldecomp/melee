@@ -724,12 +724,12 @@ bool func_8008701C(HSD_GObj* gobj)
 
 void func_8008702C(s32 arg0)
 {
-    func_80085560(arg0, 1);
+    ftData_80085560(arg0, 1);
 }
 
 void func_80087050(s32 arg0)
 {
-    func_80085560(arg0, -1);
+    ftData_80085560(arg0, -1);
 }
 
 bool func_80087074(HSD_GObj* gobj, Vec3* v)
@@ -948,24 +948,24 @@ void func_800874CC(HSD_GObj* gobj, s32 arg1, s32 arg2)
 
 void func_80087508(s8 arg0, u8 arg1)
 {
-    func_8008572C(arg0);
+    ftData_8008572C(arg0);
     func_8006737C(lbl_803C26FC[arg0]);
-    func_80085820(arg0, arg1);
-    func_80085A14(arg0);
-    func_800857E0(arg0);
+    ftData_80085820(arg0, arg1);
+    ftData_80085A14(arg0);
+    ftData_800857E0(arg0);
 }
 
 void func_80087574(s8 arg)
 {
     u8 i;
-    func_8008572C(arg);
+    ftData_8008572C(arg);
     func_8006737C(lbl_803C26FC[arg]);
 
     for (i = 0; i < CostumeListsForeachCharacter[arg].unk4; i++)
-        func_80085820(arg, i);
+        ftData_80085820(arg, i);
 
-    func_80085A14(arg);
-    func_800857E0(arg);
+    ftData_80085A14(arg);
+    ftData_800857E0(arg);
 }
 
 void func_80087610(u8 arg0)

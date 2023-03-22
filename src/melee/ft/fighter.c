@@ -818,12 +818,12 @@ static void Fighter_Create_Inline2(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2229_b5_no_normal_motion) {
-        fp->x2EC = func_8001E8F8(func_80085E50(fp, 0x23));
+        fp->x2EC = func_8001E8F8(ftData_80085E50(fp, 0x23));
         if (!fp->x2228_flag.bits.b2) {
-            fp->x2DC = func_8001E8F8(func_80085E50(fp, 7));
-            fp->x2E0 = func_8001E8F8(func_80085E50(fp, 8));
-            fp->x2E4 = func_8001E8F8(func_80085E50(fp, 9));
-            fp->x2E8 = func_8001E8F8(func_80085E50(fp, 0x25));
+            fp->x2DC = func_8001E8F8(ftData_80085E50(fp, 7));
+            fp->x2E0 = func_8001E8F8(ftData_80085E50(fp, 8));
+            fp->x2E4 = func_8001E8F8(ftData_80085E50(fp, 9));
+            fp->x2E8 = func_8001E8F8(ftData_80085E50(fp, 0x25));
         }
     }
 }
@@ -839,14 +839,14 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     fp = HSD_ObjAlloc(&fighter_alloc_data);
     fp->x2D8_specialAttributes2 = HSD_ObjAlloc(&lbl_80458FFC);
     GObj_InitUserData(gobj, 4U, &Fighter_Unload_8006DABC, fp);
-    func_8008572C(input->fighterKind);
+    ftData_8008572C(input->fighterKind);
     Fighter_UnkInitLoad_80068914(gobj, input);
     func_8006737C(lbl_803C26FC[fp->x4_fighterKind]);
-    func_80085820(fp->x4_fighterKind, fp->x619_costume_id);
+    ftData_80085820(fp->x4_fighterKind, fp->x619_costume_id);
 
     Fighter_UnkUpdateCostumeJoint_800686E4(gobj);
 
-    func_80085B10(fp);
+    ftData_80085B10(fp);
     ftParts_80074E58(fp);
     ftParts_SetupParts(gobj);
     ftAnim_80070308(gobj);
@@ -1250,10 +1250,10 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
             func_8009E7B4(fp, unk_byte_ptr);
             if ((arg2 & FtStateChange_SkipUpdateAnim) == 0) {
                 if (otherObj != 0U) {
-                    func_80085CD8(fp, GET_FIGHTER(otherObj), fp->anim_id);
+                    ftData_80085CD8(fp, GET_FIGHTER(otherObj), fp->anim_id);
                     ftColl_8007B8CC(fp, otherObj);
                 } else {
-                    func_80085CD8(fp, fp, fp->anim_id);
+                    ftData_80085CD8(fp, fp, fp->anim_id);
                 }
                 fp->x3EC = unk_struct_x18->xC;
                 fp->x3F0 = 0;
@@ -3115,7 +3115,7 @@ void Fighter_Unload_8006DABC(void* user_data)
 
     HSD_JObjRemoveAll(fp->x8AC_animSkeleton);
     HSD_JObjUnref(fp->x2184);
-    func_800859A8(fp);
+    ftData_800859A8(fp);
     HSD_LObjRemoveAll(fp->x588);
     Player_80031FB0(fp->xC_playerID, fp->x221F_flag.bits.b4);
 
