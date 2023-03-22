@@ -43,7 +43,7 @@ void ftMasterHand_80155B80(HSD_GObj* gobj)
     fp->cb.x21B0_callback_Accessory1 = &func_800DB464;
     func_8007E2F4(fp, 0x1FF);
     fp->x2220_flag.bits.b3 = 1;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftMasterHand_80155C20(HSD_GObj* gobj)

@@ -21,7 +21,7 @@ void ftMasterHand_80154A78(HSD_GObj* gobj)
     attr = fp->ft_data->ext_attr;
     fp->x2204_ftcmd_var1 = 0;
     Fighter_ChangeMotionState(gobj, 0x17A, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp->x2222_flag.bits.b2 = 1;
     func_8007E2F4(fp, 0x1FFU);
     func_8007E2FC(gobj);

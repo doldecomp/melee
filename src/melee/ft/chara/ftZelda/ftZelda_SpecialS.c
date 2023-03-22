@@ -44,7 +44,7 @@ void ftZelda_SpecialS_StartMotion(HSD_GObj* gobj)
     fighter2->mv.zd.specials.xC = attributes->x1C;
     fighter2->cb.x21E4_callback_OnDeath2 = 0;
     fighter2->cb.x21DC_callback_OnTakeDamage = 0;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 8013B6D8 - 8013B780 (0xA8 bytes)
@@ -78,7 +78,7 @@ void ftZelda_SpecialAirS_StartMotion(HSD_GObj* gobj)
     fighter2->mv.zd.specials.xC = attributes->x1C;
     fighter2->cb.x21E4_callback_OnDeath2 = 0;
     fighter2->cb.x21DC_callback_OnTakeDamage = 0;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 8013B780 - 8013B89C (0x11C bytes)

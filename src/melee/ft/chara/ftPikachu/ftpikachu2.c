@@ -21,7 +21,7 @@ void ftPikachu_SpecialN_StartMotion(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftPikachu_SpecialAirN_StartMotion(HSD_GObj* gobj)
@@ -32,7 +32,7 @@ void ftPikachu_SpecialAirN_StartMotion(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftPikachu_80124908(HSD_GObj* gobj)

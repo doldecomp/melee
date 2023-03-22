@@ -49,7 +49,7 @@ void ftMewtwo_SpecialS_StartMotion(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     ftMewtwo_SpecialS_SetGrab(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialS_ReflectThink;
@@ -93,7 +93,7 @@ void ftMewtwo_SpecialAirS_StartMotion(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRS, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     ftMewtwo_SpecialAirS_SetGrab(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialS_ReflectThink;

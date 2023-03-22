@@ -19,7 +19,7 @@ void ftLuigi_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALHI, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 /// Luigi's aerial Super Jump Punch Motion State handler
@@ -39,7 +39,7 @@ void ftLuigi_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     fp->x80_self_vel.x *= luigiAttrs->x64_LUIGI_SUPERJUMP_VEL_X;
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRHI, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 /// Luigi's grounded Super Jump Punch Animation callback

@@ -154,7 +154,7 @@ void ftSamus_SpecialN_StartMotion(HSD_GObj* gobj)
     fp->mv.ss.unk3.x0 = 0;
     fp->mv.ss.unk3.x4 = 0;
     fp->mv.ss.unk3.x8 = 0.0f;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftSamus_SpecialAirN_StartMotion(HSD_GObj* gobj)
@@ -175,7 +175,7 @@ void ftSamus_SpecialAirN_StartMotion(HSD_GObj* gobj)
     fp->mv.ss.unk3.x0 = 1;
     fp->mv.ss.unk3.x4 = 0;
     fp->mv.ss.unk3.x8 = 0.0f;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftSamus_80129684(HSD_GObj* gobj)

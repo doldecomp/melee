@@ -76,7 +76,7 @@ void ftWalkCommon_800DFCA4(HSD_GObj* gobj, ftCommon_MotionState msid,
     walk_type = ftWalkCommon_GetWalkType_800DFBF8_fake(gobj);
     new_msid = msid + walk_type;
     Fighter_ChangeMotionState(gobj, new_msid, ms_flags, 0, arg8, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp->mv.co.walk.x0 = fp->gr_vel;
     fp->mv.co.walk.x4 = msid;
     fp->mv.co.walk.x8 = arg9;
@@ -151,7 +151,7 @@ void ftWalkCommon_800DFEC8(HSD_GObj* gobj, void (*arg_cb)(HSD_GObj*, f32))
             HSD_ASSERT(71, 0);
         }
 
-        float_result = func_8006F484(gobj);
+        float_result = ftAnim_8006F484(gobj);
         init_animFrame = fp->x894_currentAnimFrame;
         quotient = init_animFrame / float_result;
         adjusted_animFrame =

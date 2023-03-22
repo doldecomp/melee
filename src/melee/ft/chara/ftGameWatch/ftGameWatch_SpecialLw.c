@@ -154,7 +154,7 @@ void ftGameWatch_SpecialLw_StartMotion(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, 0, NULL, 0, 1, 0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialLw_SetVars(gobj);
 }
 
@@ -173,7 +173,7 @@ void ftGameWatch_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, 0, NULL, 0, 1, 0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialLw_SetVars(gobj);
 }
 
@@ -441,7 +441,7 @@ void ftGameWatch_SpecialLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, transition_flags1, NULL,
                               anim_frame - 1, 1, 0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
 }
 
@@ -450,7 +450,7 @@ void ftGameWatch_SpecialAirLw_UpdateAction(HSD_GObj* gobj, f32 anim_frame)
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags1,
                               NULL, anim_frame - 1, 1, 0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
 }
 
@@ -470,7 +470,7 @@ void ftGameWatch_SpecialLwCatch_Anim(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw, transition_flags1, NULL,
                               4, 1, 0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
 }
 
@@ -490,7 +490,7 @@ void ftGameWatch_SpecialAirLwCatch_Anim(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw, transition_flags1,
                               NULL, 4, 1, 0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(gobj);
 }
 
@@ -683,7 +683,7 @@ void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLw_Shoot, 0, NULL, 0, 1, 0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -720,7 +720,7 @@ void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirLw_Shoot, 0, NULL, 0, 1,
                               0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);

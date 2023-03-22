@@ -82,7 +82,7 @@ void ftFox_SpecialLw_StartMotion(HSD_GObj* gobj)
 #endif
 
     Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALLW_START, 0, NULL, 0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     ftFox_SpecialLw_SetVars(gobj);
 }
@@ -97,7 +97,7 @@ void ftFox_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRLW_START, 0, NULL, 0.0f,
                               1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     ftFox_SpecialLw_SetVars(gobj);
 }

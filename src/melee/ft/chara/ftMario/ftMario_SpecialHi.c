@@ -20,7 +20,7 @@ void ftMario_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftMario_SpecialAirHi_StartMotion(HSD_GObj* gobj)
@@ -39,7 +39,7 @@ void ftMario_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     fp->x80_self_vel.x = fp->x80_self_vel.x * sa->specialhi.vel_x;
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirHi, 0, NULL, 0.0f,
                               1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 0x800E1B24

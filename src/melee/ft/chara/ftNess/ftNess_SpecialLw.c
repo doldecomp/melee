@@ -34,7 +34,7 @@ void ftNess_SpecialLwStart_Action(HSD_GObj* gobj) // Ness's grounded PSI Magnet
         (s32) ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
     temp_fp->mv.ns.speciallw.x10 = 0;
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALLW_START, 0, NULL, 0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 0x80119E90
@@ -62,7 +62,7 @@ void ftNess_SpecialAirLwStart_Action(
     temp_fp->x80_self_vel.x /= ness_attr->x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
     Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRLW_START, 0, NULL, 0.0f,
                               1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 0x80119F20

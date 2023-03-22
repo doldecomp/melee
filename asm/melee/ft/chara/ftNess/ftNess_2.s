@@ -40,7 +40,7 @@ ftNess_AttackS4_Action:
 /* 80114C68 00111848  FC 60 08 90 */	fmr f3, f1
 /* 80114C6C 0011184C  4B F5 47 41 */	bl Fighter_ChangeMotionState
 /* 80114C70 00111850  7F C3 F3 78 */	mr r3, r30
-/* 80114C74 00111854  4B F5 9F 31 */	bl func_8006EBA4
+/* 80114C74 00111854  4B F5 9F 31 */	bl ftAnim_8006EBA4
 /* 80114C78 00111858  C0 3F 00 2C */	lfs f1, 0x2c(r31)
 /* 80114C7C 0011185C  38 7E 00 00 */	addi r3, r30, 0
 /* 80114C80 00111860  38 9F 00 B0 */	addi r4, r31, 0xb0

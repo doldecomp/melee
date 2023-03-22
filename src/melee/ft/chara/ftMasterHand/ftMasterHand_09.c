@@ -43,7 +43,7 @@ void ftMasterHand_80151DC0(HSD_GObj* arg0) {}
 void ftMasterHand_80151DC4(HSD_GObj* arg0)
 {
     Fighter_ChangeMotionState(arg0, 0x15E, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+    ftAnim_8006EBA4(arg0);
 }
 
 // 80151E10 14E9F0
@@ -77,7 +77,7 @@ void ftMasterHand_80151EB0(HSD_GObj* arg0) {}
 void ftMasterHand_80151EB4(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 0x15F, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 80151F00 14EAE0
@@ -139,7 +139,7 @@ void ftMasterHand_80151F00(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, 0x15F, 0, 0, 0.0f, 1.0f, 0.0f);
-        func_8006EBA4(gobj);
+        ftAnim_8006EBA4(gobj);
     }
 }
 
@@ -176,6 +176,6 @@ void ftMasterHand_801520D8(HSD_GObj* gobj)
 {
     Fighter* r31_fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x160, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     r31_fp->x80_self_vel.x = 0.0f;
 }

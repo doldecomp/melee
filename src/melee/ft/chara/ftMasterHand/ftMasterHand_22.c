@@ -73,7 +73,7 @@ void ftMasterHand_80154360(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(gobj, 0x175, 0, 0, 0.0f, 1.0f, 0.0f);
-        func_8006EBA4(gobj);
+        ftAnim_8006EBA4(gobj);
     }
 }
 
@@ -162,7 +162,7 @@ void ftMasterHand_801545A0(HSD_GObj* gobj)
 {
     Fighter* temp_r31 = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x176, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     func_8007E2D0(temp_r31, 0x80U, &ftMasterHand_80154A2C, 0U,
                   &ftMasterHand_80155A58);
     temp_r31->mv.mh.unk0.x20 = 0;
@@ -217,7 +217,7 @@ void ftMasterHand_801546D8(HSD_GObj* gobj)
     // temp_f1 = ;
     temp_r30 = r31_fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x17D, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     r31_fp->mv.mh.unk0.xC.x = temp_r30->x30_pos2.x;
     r31_fp->mv.mh.unk0.xC.y = temp_r30->x30_pos2.y;
     r31_fp->mv.mh.unk0.xC.z = 0.0f;
@@ -271,7 +271,7 @@ void ftMasterHand_8015483C(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x177, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     r31_fp->mv.mh.unk0.x24 = r30_attributes->x120;
     r31_fp->x2200_ftcmd_var0 = 1;
     r31_fp->x80_self_vel.x = 0.0f;

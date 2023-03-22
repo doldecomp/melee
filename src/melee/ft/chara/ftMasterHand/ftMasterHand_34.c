@@ -53,7 +53,7 @@ void ftMasterHand_80155D6C(HSD_GObj* gobj, s32 arg1)
     fp->x221E_flag.bits.b0 = 0;
     fp->cb.x21B0_callback_Accessory1 = &func_800DE508;
     func_8007E2F4(fp, 0x1FFU);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 80155E08 1529E8

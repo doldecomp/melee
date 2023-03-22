@@ -399,7 +399,7 @@ inline void ftMewtwo_SpecialN_ChangeAction(HSD_GObj* gobj)
     fp->mv.mt.SpecialN.releaseLag = releaseLag;
     fp->mv.mt.SpecialN.chargeLevel = 0.0f;
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 0x80147320
@@ -440,7 +440,7 @@ inline void ftMewtwo_SpecialAirN_ChangeAction(HSD_GObj* gobj)
 
     fp->x80_self_vel.y *= 0.5f;
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 0x801473F4

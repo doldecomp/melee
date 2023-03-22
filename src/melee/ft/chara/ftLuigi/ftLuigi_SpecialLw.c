@@ -65,7 +65,7 @@ void ftLuigi_SpecialLw_StartMotion(HSD_GObj* gobj)
     GET_FIGHTER(gobj)->x2208_ftcmd_var2 = 0;
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRLW, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp2->x80_self_vel.y = (f32) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM -
                                  luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX);
     func_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
@@ -98,7 +98,7 @@ void ftLuigi_SpecialAirLw_StartMotion(HSD_GObj* gobj)
     GET_FIGHTER(gobj)->x2208_ftcmd_var2 = 0;
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRLW, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     if (fp2->fv.lg.x222C_cycloneCharge != 0) {
         cycloneVar = 0.0f;
     } else

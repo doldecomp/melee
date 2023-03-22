@@ -849,15 +849,15 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     func_80085B10(fp);
     func_80074E58(fp);
     Fighter_SetupParts(gobj);
-    func_80070308(gobj);
+    ftAnim_80070308(gobj);
     func_800C884C(gobj);
 
     Fighter_80068E64(gobj);
 
     func_800749CC(gobj);
-    func_8007077C(gobj);
+    ftAnim_8007077C(gobj);
     func_8009CF84(fp);
-    func_8006FE48(gobj);
+    ftAnim_8006FE48(gobj);
 
     Fighter_UnkUpdateVecFromBones_8006876C(fp);
 
@@ -965,7 +965,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     if (((arg2 & FtStateChange_SkipUpdateMatAnim) == 0) &&
         ((fp->x221E_flag.bits.b7) != 0))
     {
-        func_80070654(gobj);
+        ftAnim_80070654(gobj);
     }
 
     if ((arg2 & FtStateChange_SkipUpdateParasol) == 0) {
@@ -977,8 +977,8 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
         }
     }
 
-    func_80070F28(gobj);
-    func_80070E74(gobj);
+    ftAnim_80070F28(gobj);
+    ftAnim_80070E74(gobj);
     func_8007ECD4(fp, 7);
     func_8007ECD4(fp, 8);
     func_8007ECD4(fp, 0x24);
@@ -1260,12 +1260,12 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
 
                 if (arg8) {
                     if (fp->x590 != 0U) {
-                        func_8006EBE8(gobj, arg8 - arg9, arg9,
-                                      (argA == -1.0f) ? 0.0f
-                                      : (argA)        ? argA
-                                                      : *unk_byte_ptr);
+                        ftAnim_8006EBE8(gobj, arg8 - arg9, arg9,
+                                        (argA == -1.0f) ? 0.0f
+                                        : (argA)        ? argA
+                                                        : *unk_byte_ptr);
                     }
-                    func_8006E9B4(gobj);
+                    ftAnim_8006E9B4(gobj);
                     if (fp->x594_animCurrFlags1.bits.b0 != 0U) {
                         fp->x6B0.x = fp->x6B0.y = fp->x6B0.z = 0.0F;
                         fp->x6A4_transNOffset.x = fp->x6A4_transNOffset.y =
@@ -1281,15 +1281,15 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
                     fp->x3E4 = -arg8;
                 } else {
                     if (fp->x590 != 0U) {
-                        func_8006EBE8(gobj, arg8, arg9,
-                                      (argA == -1.0f) ? 0.0f
-                                      : (argA)        ? argA
-                                                      : *unk_byte_ptr);
+                        ftAnim_8006EBE8(gobj, arg8, arg9,
+                                        (argA == -1.0f) ? 0.0f
+                                        : (argA)        ? argA
+                                                        : *unk_byte_ptr);
                     }
                     fp->x3E4 = 0.0f;
                 }
 
-                func_8006E9B4(gobj);
+                ftAnim_8006E9B4(gobj);
                 if ((bone_index != 0) && (*unk_byte_ptr != 0U)) {
                     HSD_JObj* temp_joint = fp->ft_bones[bone_index].x4_jobj2;
 
@@ -1349,8 +1349,8 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
 
         if (fp->anim_id == -1) {
             fp->x594_s32 = 0;
-            func_80070758(jobj);
-            func_80070758(fp->x8AC_animSkeleton);
+            ftAnim_80070758(jobj);
+            ftAnim_80070758(fp->x8AC_animSkeleton);
             fp->x3EC = 0;
             fp->x8A4_animBlendFrames = 0;
             fp->x8A8_unk = 0;
@@ -1662,13 +1662,13 @@ void Fighter_8006A360(HSD_GObj* gobj)
             }
             if (fp->x2223_flag.bits.b0) {
                 if (fp->x104 == 0x14U) {
-                    func_8006F0FC(gobj, 0.0f);
+                    ftAnim_8006F0FC(gobj, 0.0f);
                 } else {
                     fp->x89C_frameSpeedMul += fp->x8A0_unk;
                 }
                 fp->x104--;
                 if (fp->x104 == 0) {
-                    func_8006F0FC(gobj, fp->x89C_frameSpeedMul);
+                    ftAnim_8006F0FC(gobj, fp->x89C_frameSpeedMul);
                     fp->x104 = 0x14U;
                 }
             }
@@ -1680,7 +1680,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
             if (fp->dmg.x18ac_time_since_hit != -1) {
                 fp->dmg.x18ac_time_since_hit++;
             }
-            func_8006EBA4(gobj);
+            ftAnim_8006EBA4(gobj);
             func_800D71D8(gobj);
             ftColl_800764DC(gobj);
 
@@ -2328,7 +2328,8 @@ void Fighter_procUpdate(HSD_GObj* gobj)
                 bit = 0;
 
             /// @todo @c incompatible-pointer-types because bad headers
-            if (bit || func_80070FD0(fp) || fp->x594_animCurrFlags1.bits.b7) {
+            if (bit || ftAnim_80070FD0(fp) || fp->x594_animCurrFlags1.bits.b7)
+            {
                 // fp->xB0_position += fp->xD4_unk_vel
                 PSVECAdd(&fp->cur_pos, &fp->xD4_unk_vel, &fp->cur_pos);
                 /// @todo We set this velocity to 0 after applying it.

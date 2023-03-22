@@ -31,5 +31,5 @@ void ftMasterHand_80155C94(HSD_GObj* gobj)
     fp->x221E_flag.bits.b0 = true;
     func_8007E2F4(fp, 0x1FF);
     fp->x2220_flag.bits.b3 = true;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }

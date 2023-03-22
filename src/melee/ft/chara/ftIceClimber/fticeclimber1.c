@@ -218,7 +218,7 @@ void ftPopo_SpecialN_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 341, 0, NULL, lbl_804D9838, lbl_804D983C,
                               lbl_804D9838);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftPopo_8011F500;
 }
 
@@ -249,7 +249,7 @@ void ftPopo_SpecialAirN_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 342, 0, NULL, lbl_804D9838, lbl_804D983C,
                               lbl_804D9838);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftPopo_8011F500;
 }
 

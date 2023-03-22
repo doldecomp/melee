@@ -84,7 +84,7 @@ void ftFox_SpecialS_StartMotion(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS_START, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 0x800E9F6C
@@ -108,7 +108,7 @@ void ftFox_SpecialAirS_StartMotion(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRS_START, 0, NULL, 0.0f,
                               1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
 }

@@ -48,7 +48,7 @@ void ftCaptain_SpecialS_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftCa_MS_SpecialS_Start, 0, NULL, 0, 1, 0);
 
     setCallbacks(gobj);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     switch (func_800872A4(gobj)) {
     case FTKIND_CAPTAIN:
@@ -88,7 +88,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
                               0);
 
     setCallbacks(gobj);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     switch (func_800872A4(gobj)) {
     case FTKIND_CAPTAIN:

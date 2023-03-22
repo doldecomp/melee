@@ -52,7 +52,7 @@ void ftMario_SpecialN_StartMotion(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
 }
 
@@ -127,7 +127,7 @@ void ftMario_SpecialAirN_StartMotion(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirN, 0, NULL, 0.0f,
                               1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
 }
 

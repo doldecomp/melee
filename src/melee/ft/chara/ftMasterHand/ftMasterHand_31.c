@@ -33,6 +33,6 @@ void ftMasterHand_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
     ft_1->x221E_flag.bits.b0 = 1;
     ft_1->x2220_flag.bits.b3 = 1;
     func_8007E2F4(ft_1, 0x1FFU);
-    func_8006EBA4(gobj_1);
+    ftAnim_8006EBA4(gobj_1);
     func_8007E2FC(gobj_1);
 }

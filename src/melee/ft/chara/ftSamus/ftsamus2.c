@@ -100,7 +100,7 @@ void ftSamus_80128B1C(HSD_GObj* gobj, f32 angle, f32 arg9, f32 argA)
         func_8007D5D4(fighter2);
     }
     Fighter_ChangeMotionState(gobj, 0x156, 0, 0, arg9, argA, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftSamus_80128C04(HSD_GObj* gobj)

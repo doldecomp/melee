@@ -93,7 +93,7 @@ void ftZelda_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 0.0f, 1.0, 0.0f);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     ftZelda_SpecialLw_StartMotion_Helper(gobj);
 }
@@ -106,7 +106,7 @@ void ftZelda_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 0x165, 0, NULL, 0.0f, 1.0, 0.0f);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     ftZelda_SpecialLw_StartMotion_Helper(gobj);
 }

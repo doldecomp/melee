@@ -60,7 +60,7 @@ void ftZelda_SpecialN_StartMotion(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
 
     Fighter_ChangeMotionState(gobj, 0x155, 0, NULL, temp_f1, 1.0, temp_f1);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     startActionHelper(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A830;
 }
@@ -79,7 +79,7 @@ void ftZelda_SpecialAirN_StartMotion(HSD_GObj* gobj)
     fp->x80_self_vel.x = fp->x80_self_vel.x / sa->x8;
 
     Fighter_ChangeMotionState(gobj, 0x156, 0, NULL, 0, 1.0, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     startActionHelper(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013A8AC;

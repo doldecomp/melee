@@ -272,7 +272,7 @@ void ftKoopa_SpecialS_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 347, 0, 0, lbl_804D9AD8, lbl_804D9ADC,
                               lbl_804D9AD8);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -298,7 +298,7 @@ void ftKoopa_SpecialAirS_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 353, 0, 0, lbl_804D9AD8, lbl_804D9ADC,
                               lbl_804D9AD8);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -461,7 +461,7 @@ void ftKoopa_801333F8(HSD_GObj* gobj)
 
     func_8007E2F4(fp, 511);
     func_8007E2FC(gobj);
-    func_8006F0FC(gobj, lbl_804D9AD8);
+    ftAnim_8006F0FC(gobj, lbl_804D9AD8);
     fp->mv.kp.unk1.x0 = 0;
     fp->x2200_ftcmd_var0 = 0;
 }
@@ -600,7 +600,7 @@ void ftKoopa_801336CC(HSD_GObj* gobj)
                                       fp0->x894_currentAnimFrame, lbl_804D9ADC,
                                       lbl_804D9AD8);
 
-            func_8006F0FC(gobj, lbl_804D9AD8);
+            ftAnim_8006F0FC(gobj, lbl_804D9AD8);
             fp0->mv.kp.unk1.x0 = 0;
             fp0->x2200_ftcmd_var0 = 0;
             func_8007E2F4(fp0, 511);

@@ -59,7 +59,7 @@ void ftDonkey_SpecialN_StartMotion(HSD_GObj* gobj)
     func_8007D7FC(fp);
     fp->x80_self_vel.y = 0.0f;
     ftDonkey_SetCallbacks_SpecialN(gobj);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftDonkey_SpecialAirN_StartMotion(HSD_GObj* gobj)
@@ -92,7 +92,7 @@ void ftDonkey_SpecialAirN_StartMotion(HSD_GObj* gobj)
     fp->mv.dk.specialn.x10 = -1;
 
     ftDonkey_SetCallbacks_SpecialN(gobj);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftDonkey_8010E7B4(HSD_GObj* gobj)
@@ -372,7 +372,7 @@ void ftDonkey_8010F098(HSD_GObj* gobj)
             fp->mv.dk.specialn.xC = fp->fv.dk.x222C;
             fp->fv.dk.x222C = 0;
             ftDonkey_SetCallbacks_SpecialN(gobj);
-            func_8006EBA4(gobj);
+            ftAnim_8006EBA4(gobj);
         }
         if ((fp->input.x668 & 0x80000000)) {
             fp->mv.dk.specialn.x0 = 1;
@@ -406,7 +406,7 @@ void ftDonkey_8010F1E8(HSD_GObj* gobj)
         fp->mv.dk.specialn.xC = fp->fv.dk.x222C;
         fp->fv.dk.x222C = 0;
         ftDonkey_SetCallbacks_SpecialN(gobj);
-        func_8006EBA4(gobj);
+        ftAnim_8006EBA4(gobj);
     }
     if ((fp->input.x668 & 0x80000000)) {
         fp->mv.dk.specialn.x0 = 1;

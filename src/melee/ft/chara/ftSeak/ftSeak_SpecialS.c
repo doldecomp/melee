@@ -87,32 +87,32 @@ void ftSeak_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
 
         if (fp->mv.sk.specials.x14) {
             HSD_JObj* bone = fp->x8AC_animSkeleton;
-            func_8006F4C8(fp, 1, func_80085E50(fp, arg1));
-            func_80070710(bone, f);
-            func_8006FB88(fp, 1, fp->x108_costume_joint->child);
+            ftAnim_8006F4C8(fp, 1, func_80085E50(fp, arg1));
+            ftAnim_80070710(bone, f);
+            ftAnim_8006FB88(fp, 1, fp->x108_costume_joint->child);
             HSD_JObjAnimAll(bone);
 
             if (fp->mv.sk.specials.x14 < 1) {
-                func_80070108(fp, 1, item[2], 1 - fp->mv.sk.specials.x14,
-                              fp->mv.sk.specials.x14);
+                ftAnim_80070108(fp, 1, item[2], 1 - fp->mv.sk.specials.x14,
+                                fp->mv.sk.specials.x14);
             }
 
             if (arg2 < 1) {
-                func_8006FE9C(fp, 1, arg2, 1 - arg2);
+                ftAnim_8006FE9C(fp, 1, arg2, 1 - arg2);
                 return;
             }
 
-            func_8006FF74(fp, 1);
+            ftAnim_8006FF74(fp, 1);
             return;
         }
     }
 
     if (arg2 < 1) {
-        func_80070010(fp, 1, item[2], arg2, 1 - arg2);
+        ftAnim_80070010(fp, 1, item[2], arg2, 1 - arg2);
         return;
     }
 
-    func_8006FA58(fp, 1, item[2]);
+    ftAnim_8006FA58(fp, 1, item[2]);
 }
 
 void ftSeak_80110788(HSD_GObj* gobj)
@@ -476,7 +476,7 @@ void ftSeak_80110F70(HSD_GObj* gobj)
 void ftSeak_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 349, 0, NULL, 0.0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftSeak_80110F70(gobj);
 }
 
@@ -486,7 +486,7 @@ void ftSeak_SpecialAirS_StartMotion(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0;
 
     Fighter_ChangeMotionState(gobj, 352, 0, NULL, 0.0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftSeak_80110F70(gobj);
 }
 

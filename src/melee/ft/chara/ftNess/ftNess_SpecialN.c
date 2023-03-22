@@ -124,7 +124,7 @@ void ftNess_SpecialNStart_Action(HSD_GObj* gobj)
         fp1->cb.x21DC_callback_OnTakeDamage = NULL;
     }
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 /// Ness's aerial PK Flash Start Motion State handler
@@ -166,7 +166,7 @@ void ftNess_SpecialAirNStart_Action(HSD_GObj* gobj)
         temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
     }
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 /// Ness's grounded PK Flash Start Animation callback

@@ -20,7 +20,7 @@ void ftPikachu_SpecialS_StartMotion(HSD_GObj* gobj)
 
     fp->gr_vel /= sa->x30;
     Fighter_ChangeMotionState(gobj, 343, 0, 0, 0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftPikachu_SpecialAirS_StartMotion(HSD_GObj* gobj)
@@ -38,7 +38,7 @@ void ftPikachu_SpecialAirS_StartMotion(HSD_GObj* gobj)
     fp->x80_self_vel.x /= sa->x30;
     fp->x80_self_vel.y = 0;
     Fighter_ChangeMotionState(gobj, 348, 0, 0, 0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftPikachu_ZeroVelocity_80124F24(HSD_GObj* gobj)

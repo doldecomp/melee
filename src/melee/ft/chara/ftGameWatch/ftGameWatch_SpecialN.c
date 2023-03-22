@@ -212,7 +212,7 @@ void ftGameWatch_SpecialN_StartMotion(HSD_GObj* gobj)
     GET_FIGHTER(gobj)->x80_self_vel.y = 0.0f;
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialN_SetVars(gobj);
 }
 
@@ -224,7 +224,7 @@ void ftGameWatch_SpecialAirN_StartMotion(HSD_GObj* gobj)
     GET_FIGHTER(gobj)->x80_self_vel.y = 0.0f;
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialN_SetVars(gobj);
 }
 
@@ -417,7 +417,7 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* gobj, f32 anim_frame)
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialN, transition_flags, NULL,
                               anim_frame - 1.0f, 1.0f, 0.0f);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
 #ifdef MUST_MATCH
     /// @todo Repeated assignment
@@ -446,7 +446,7 @@ void ftGameWatch_SpecialAirN_Loop(HSD_GObj* gobj, f32 anim_frame)
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirN, transition_flags,
                               NULL, anim_frame - 1.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
 #ifdef MUST_MATCH
     fp = fp = GET_FIGHTER(gobj);

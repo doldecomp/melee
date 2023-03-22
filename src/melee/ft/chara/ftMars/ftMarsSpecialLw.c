@@ -19,7 +19,7 @@ void ftMars_SpecialLw_StartMotion(HSD_GObj* gobj)
     fp0->x80_self_vel.y = 0;
 
     Fighter_ChangeMotionState(gobj, 369, 0, NULL, 0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp1 = GET_FIGHTER(gobj);
@@ -43,7 +43,7 @@ void ftMars_SpecialAirLw_StartMotion(HSD_GObj* gobj)
     }
 
     Fighter_ChangeMotionState(gobj, 371, 0, NULL, 0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp;

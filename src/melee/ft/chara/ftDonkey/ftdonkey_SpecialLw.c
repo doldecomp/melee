@@ -14,7 +14,7 @@ void ftDonkey_SpecialLw_StartMotion(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.dk.speciallw.x0 = 0;
     Fighter_ChangeMotionState(gobj, 0x17F, 0, NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftDonkey_8010DCD8(HSD_GObj* gobj)

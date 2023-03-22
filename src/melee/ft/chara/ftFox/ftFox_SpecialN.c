@@ -249,7 +249,7 @@ void ftFox_SpecialN_StartMotion(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     fp->gr_vel = 0.0f;
     fp->x80_self_vel.z = 0.0f;
@@ -290,7 +290,7 @@ void ftFox_SpecialAirN_StartMotion(
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     fp->mv.fx.SpecialN.isBlasterLoop = false;
     blasterGObj = func_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,

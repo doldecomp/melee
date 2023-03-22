@@ -76,7 +76,7 @@ void ftMewtwo_SpecialHi_StartMotion(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALHI_START, 0, NULL, 0, 1,
                               0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     fp0->x2200_ftcmd_var0 = 0;
     fp0->mv.mt.SpecialHi.unk4 = 0;
@@ -99,7 +99,7 @@ void ftMewtwo_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRHI_START, 0, NULL, 0,
                               1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     fp->x2200_ftcmd_var0 = 0;
     fp->mv.mt.SpecialHi.unk4 = 0;
@@ -451,7 +451,7 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* gobj)
             Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALHI, 0, NULL, 35,
                                       1, 0);
 
-            func_8006EBA4(gobj);
+            ftAnim_8006EBA4(gobj);
 
             ftAnim_SetAnimRate(gobj, 0);
 
@@ -525,7 +525,7 @@ void ftMewtwo_SpecialAirHi_Action(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRHI, 0, NULL, 35, 1, 0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     ftAnim_SetAnimRate(gobj, 0);
     ftMewtwo_SpecialHi_SetVars(gobj);
@@ -639,7 +639,7 @@ void ftMewtwo_SpecialHiLost_Action(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALHI_LOST, 0, NULL, 0, 1,
                               0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     ftMewtwo_SpecialHiLost_SetVars(gobj);
 
@@ -655,7 +655,7 @@ void ftMewtwo_SpecialAirHiLost_Action(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_MEWTWO_SPECIALAIRHI_LOST, 0, NULL, 0, 1,
                               0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     ftMewtwo_SpecialHiLost_SetVars(gobj);
 

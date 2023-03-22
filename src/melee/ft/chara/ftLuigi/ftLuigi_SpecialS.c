@@ -62,7 +62,7 @@ void ftLuigi_SpecialS_StartMotion(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALS_START, 0, NULL, 0, 1, 0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 /// Luigi's aerial Green Missile Motion State handler
@@ -83,7 +83,7 @@ void ftLuigi_SpecialAirS_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRS_START, 0, NULL, 0, 1,
                               0);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 /// Luigi's Green Missile OnGiveDamage callback

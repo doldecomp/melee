@@ -87,7 +87,7 @@ void ftSamus_SpecialLw_StartMotion(HSD_GObj* gobj)
         return;
     }
     Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftSamus_SpecialLw_StartMotion_inner(gobj);
 }
 
@@ -105,7 +105,7 @@ void ftSamus_SpecialAirLw_StartMotion(HSD_GObj* gobj)
     fp->x80_self_vel.y = samus_attr->x58;
 
     Fighter_ChangeMotionState(gobj, 0x164, 0, NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftSamus_SpecialLw_StartMotion_inner(gobj);
 }
 

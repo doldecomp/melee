@@ -268,14 +268,14 @@ void ftPurin_OnItemPickup(HSD_GObj* gobj, bool bool)
         case 2:
             break;
         case 3:
-            func_80070FB4(gobj, 0, 0);
+            ftAnim_80070FB4(gobj, 0, 0);
             break;
         case 4:
-            func_80070FB4(gobj, 0, 1);
+            ftAnim_80070FB4(gobj, 0, 1);
             break;
         }
         if (bool) {
-            func_80070C48(gobj, 0);
+            ftAnim_80070C48(gobj, 0);
         }
     }
 }
@@ -285,7 +285,7 @@ void ftPurin_OnItemInvisible(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x1974_heldItem) {
         if (!func_8026B2B4(fp->x1974_heldItem)) {
-            func_80070CC4(gobj, 0);
+            ftAnim_80070CC4(gobj, 0);
         }
     }
 }
@@ -295,7 +295,7 @@ void ftPurin_OnItemVisible(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x1974_heldItem) {
         if (!func_8026B2B4(fp->x1974_heldItem)) {
-            func_80070C48(gobj, 0);
+            ftAnim_80070C48(gobj, 0);
         }
     }
 }
@@ -371,7 +371,7 @@ inline void startHi(HSD_GObj* gobj, int left_id, int right_id)
 
     ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, left_id, right_id);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     fighter = (Fighter*) HSD_GObjGetUserData(gobj);
 
@@ -387,7 +387,7 @@ void ftPurin_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, 365, 367);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftPurin_SpecialHi_SetVars(gobj);
 }
 
@@ -395,7 +395,7 @@ void ftPurin_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, 366, 368);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftPurin_SpecialHi_SetVars(gobj);
 }
 
@@ -699,7 +699,7 @@ lbl_8013CED8:
 /* 8013CEF4 00139AD4  4B F2 C4 B9 */	bl Fighter_ChangeMotionState
 lbl_8013CEF8:
 /* 8013CEF8 00139AD8  7F E3 FB 78 */	mr r3, r31
-/* 8013CEFC 00139ADC  4B F3 1C A9 */	bl func_8006EBA4
+/* 8013CEFC 00139ADC  4B F3 1C A9 */	bl ftAnim_8006EBA4
 /* 8013CF00 00139AE0  80 9F 00 2C */	lwz r4, 0x2c(r31)
 /* 8013CF04 00139AE4  38 00 00 00 */	li r0, 0
 /* 8013CF08 00139AE8  3C 60 80 14 */	lis r3, ftPurin_8013CE7C@ha
@@ -750,7 +750,7 @@ lbl_8013CF78:
 /* 8013CF94 00139B74  4B F2 C4 19 */	bl Fighter_ChangeMotionState
 lbl_8013CF98:
 /* 8013CF98 00139B78  7F E3 FB 78 */	mr r3, r31
-/* 8013CF9C 00139B7C  4B F3 1C 09 */	bl func_8006EBA4
+/* 8013CF9C 00139B7C  4B F3 1C 09 */	bl ftAnim_8006EBA4
 /* 8013CFA0 00139B80  80 9F 00 2C */	lwz r4, 0x2c(r31)
 /* 8013CFA4 00139B84  38 00 00 00 */	li r0, 0
 /* 8013CFA8 00139B88  3C 60 80 14 */	lis r3, ftPurin_8013CE7C@ha
@@ -1027,7 +1027,7 @@ asm void ftPurin_SpecialS_StartMotion(HSD_GObj*)
 /* 8013D264 00139E44  C0 42 A2 58 */	lfs f2, lbl_804D9C38(r2)
 /* 8013D268 00139E48  4B F2 C1 45 */	bl Fighter_ChangeMotionState
 /* 8013D26C 00139E4C  7F C3 F3 78 */	mr r3, r30
-/* 8013D270 00139E50  4B F3 19 35 */	bl func_8006EBA4
+/* 8013D270 00139E50  4B F3 19 35 */	bl ftAnim_8006EBA4
 /* 8013D274 00139E54  38 00 00 00 */	li r0, 0
 /* 8013D278 00139E58  90 1F 22 0C */	stw r0, 0x220c(r31)
 /* 8013D27C 00139E5C  90 1F 22 08 */	stw r0, 0x2208(r31)
@@ -1063,7 +1063,7 @@ asm void ftPurin_SpecialAirS_StartMotion(HSD_GObj*)
 /* 8013D2D0 00139EB0  C0 42 A2 58 */	lfs f2, lbl_804D9C38(r2)
 /* 8013D2D4 00139EB4  4B F2 C0 D9 */	bl Fighter_ChangeMotionState
 /* 8013D2D8 00139EB8  7F C3 F3 78 */	mr r3, r30
-/* 8013D2DC 00139EBC  4B F3 18 C9 */	bl func_8006EBA4
+/* 8013D2DC 00139EBC  4B F3 18 C9 */	bl ftAnim_8006EBA4
 /* 8013D2E0 00139EC0  38 00 00 00 */	li r0, 0
 /* 8013D2E4 00139EC4  90 1F 22 0C */	stw r0, 0x220c(r31)
 /* 8013D2E8 00139EC8  90 1F 22 08 */	stw r0, 0x2208(r31)
@@ -2080,7 +2080,7 @@ lbl_8013DEF0:
 /* 8013DF18 0013AAF8  90 1F 22 08 */	stw r0, 0x2208(r31)
 /* 8013DF1C 0013AAFC  90 1F 22 04 */	stw r0, 0x2204(r31)
 /* 8013DF20 0013AB00  90 1F 22 00 */	stw r0, 0x2200(r31)
-/* 8013DF24 0013AB04  4B F3 0C 81 */	bl func_8006EBA4
+/* 8013DF24 0013AB04  4B F3 0C 81 */	bl ftAnim_8006EBA4
 /* 8013DF28 0013AB08  7F A3 EB 78 */	mr r3, r29
 /* 8013DF2C 0013AB0C  4B FF FD 39 */	bl ftPurin_8013DC64
 /* 8013DF30 0013AB10  C0 02 A2 68 */	lfs f0, lbl_804D9C48(r2)
@@ -2137,7 +2137,7 @@ lbl_8013DFA8:
 /* 8013DFD0 0013ABB0  90 1F 22 08 */	stw r0, 0x2208(r31)
 /* 8013DFD4 0013ABB4  90 1F 22 04 */	stw r0, 0x2204(r31)
 /* 8013DFD8 0013ABB8  90 1F 22 00 */	stw r0, 0x2200(r31)
-/* 8013DFDC 0013ABBC  4B F3 0B C9 */	bl func_8006EBA4
+/* 8013DFDC 0013ABBC  4B F3 0B C9 */	bl ftAnim_8006EBA4
 /* 8013DFE0 0013ABC0  7F A3 EB 78 */	mr r3, r29
 /* 8013DFE4 0013ABC4  4B FF FC 81 */	bl ftPurin_8013DC64
 /* 8013DFE8 0013ABC8  C0 1E 00 3C */	lfs f0, 0x3c(r30)
@@ -4460,7 +4460,7 @@ asm void ftPurin_8013FF04(HSD_GObj*)
 /* 8013FF7C 0013CB5C  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 8013FF80 0013CB60  7F A3 EB 78 */	mr r3, r29
 /* 8013FF84 0013CB64  90 05 21 F8 */	stw r0, 0x21f8(r5)
-/* 8013FF88 0013CB68  4B F2 EC 1D */	bl func_8006EBA4
+/* 8013FF88 0013CB68  4B F2 EC 1D */	bl ftAnim_8006EBA4
 /* 8013FF8C 0013CB6C  80 9F 23 6C */	lwz r4, 0x236c(r31)
 /* 8013FF90 0013CB70  3C 00 43 30 */	lis r0, 0x4330
 /* 8013FF94 0013CB74  C8 42 A2 90 */	lfd f2, lbl_804D9C70(r2)
@@ -4562,7 +4562,7 @@ asm void ftPurin_80140064(HSD_GObj*)
 /* 801400DC 0013CCBC  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 801400E0 0013CCC0  7F A3 EB 78 */	mr r3, r29
 /* 801400E4 0013CCC4  90 05 21 F8 */	stw r0, 0x21f8(r5)
-/* 801400E8 0013CCC8  4B F2 EA BD */	bl func_8006EBA4
+/* 801400E8 0013CCC8  4B F2 EA BD */	bl ftAnim_8006EBA4
 /* 801400EC 0013CCCC  80 9F 23 6C */	lwz r4, 0x236c(r31)
 /* 801400F0 0013CCD0  3C 00 43 30 */	lis r0, 0x4330
 /* 801400F4 0013CCD4  C8 42 A2 90 */	lfd f2, lbl_804D9C70(r2)
@@ -4786,7 +4786,7 @@ asm void ftPurin_80140350(HSD_GObj*)
 /* 801403C8 0013CFA8  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 801403CC 0013CFAC  7F A3 EB 78 */	mr r3, r29
 /* 801403D0 0013CFB0  90 05 21 F8 */	stw r0, 0x21f8(r5)
-/* 801403D4 0013CFB4  4B F2 E7 D1 */	bl func_8006EBA4
+/* 801403D4 0013CFB4  4B F2 E7 D1 */	bl ftAnim_8006EBA4
 /* 801403D8 0013CFB8  80 9F 23 6C */	lwz r4, 0x236c(r31)
 /* 801403DC 0013CFBC  3C 00 43 30 */	lis r0, 0x4330
 /* 801403E0 0013CFC0  C8 42 A2 90 */	lfd f2, lbl_804D9C70(r2)
@@ -4888,7 +4888,7 @@ asm void ftPurin_801404B0(HSD_GObj*)
 /* 80140528 0013D108  90 85 21 C0 */	stw r4, 0x21c0(r5)
 /* 8014052C 0013D10C  7F A3 EB 78 */	mr r3, r29
 /* 80140530 0013D110  90 05 21 F8 */	stw r0, 0x21f8(r5)
-/* 80140534 0013D114  4B F2 E6 71 */	bl func_8006EBA4
+/* 80140534 0013D114  4B F2 E6 71 */	bl ftAnim_8006EBA4
 /* 80140538 0013D118  80 9F 23 6C */	lwz r4, 0x236c(r31)
 /* 8014053C 0013D11C  3C 00 43 30 */	lis r0, 0x4330
 /* 80140540 0013D120  C8 42 A2 90 */	lfd f2, lbl_804D9C70(r2)

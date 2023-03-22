@@ -44,7 +44,7 @@ void ftMasterHand_801526D8(HSD_GObj* arg0)
 
     temp_r31 = arg0->user_data;
     Fighter_ChangeMotionState(arg0, 0x166, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+    ftAnim_8006EBA4(arg0);
     temp_r31->mv.mh.unk0.x0 = 0.0f;
 }
 

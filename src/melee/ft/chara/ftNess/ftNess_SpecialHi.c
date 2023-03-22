@@ -461,7 +461,7 @@ void ftNess_SpecialHi_StartMotion(HSD_GObj* gobj) // Ness's grounded PK Thunder
         fp->mv.ns.specialhi.aerialVel = (f32) phi_f0;
         fp->mv.ns.specialhi.facingDir = (f32) 1.0f;
         fp->mv.ns.specialhi.unkVar = (f32) 0.0f;
-        func_8006EBA4(gobj);
+        ftAnim_8006EBA4(gobj);
     }
 }
 
@@ -540,7 +540,7 @@ void ftNess_SpecialAirHiStart_Action(
     fp->mv.ns.specialhi.facingDir = (f32) 1.0f;
     fp->mv.ns.specialhi.unkVar = (f32) 0.0f;
     fp->x80_self_vel.y = 0.0f;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 /// @todo Rewrite this.
@@ -1832,7 +1832,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
             Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRHI_HITWALL,
                                       FtStateChange_PreserveGfx, NULL, 0.0f,
                                       1.0f, 0.0f);
-            func_8006EBA4(gobj);
+            ftAnim_8006EBA4(gobj);
             spC4.x = atan2f(-fighter_r31->x6F0_collData.x188_ceiling.normal.x,
                             fighter_r31->x6F0_collData.x188_ceiling.normal.y);
             ef_Spawn(0x406, gobj, &new_var->cur_pos, &spC4);
@@ -1870,7 +1870,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
                 Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRHI_HITWALL,
                                           FtStateChange_PreserveGfx, NULL,
                                           0.0f, 1.0f, 0.0f);
-                func_8006EBA4(gobj);
+                ftAnim_8006EBA4(gobj);
                 spB8.x =
                     atan2f(-fighter_r31->x6F0_collData.x160_rightwall.normal.x,
                            fighter_r31->x6F0_collData.x160_rightwall.normal.y);
@@ -1912,7 +1912,7 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
                 Fighter_ChangeMotionState(gobj, MS_NESS_SPECIALAIRHI_HITWALL,
                                           FtStateChange_PreserveGfx, NULL,
                                           0.0f, 1.0f, 0.0f);
-                func_8006EBA4(gobj);
+                ftAnim_8006EBA4(gobj);
                 spAC.x =
                     atan2f(-fighter_r31->x6F0_collData.x174_leftwall.normal.x,
                            fighter_r31->x6F0_collData.x174_leftwall.normal.y);

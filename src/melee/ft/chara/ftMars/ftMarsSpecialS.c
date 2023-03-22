@@ -33,7 +33,7 @@ void ftMars_SpecialS_StartMotion(HSD_GObj* gobj)
         }
     }
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftMars_SpecialAirS_StartMotion(HSD_GObj* gobj)
@@ -66,7 +66,7 @@ void ftMars_SpecialAirS_StartMotion(HSD_GObj* gobj)
         }
     }
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftMars_80137558(HSD_GObj* gobj)

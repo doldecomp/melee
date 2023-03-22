@@ -23,7 +23,7 @@ void ftMasterHand_80152BCC(HSD_GObj* arg0)
 
     temp_r31 = arg0->user_data;
     Fighter_ChangeMotionState(arg0, 0x169, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+    ftAnim_8006EBA4(arg0);
     temp_r31->mv.mh.unk0.x28 = -1;
     temp_r31->mv.mh.unk0.x2C = -1;
     temp_r31->mv.mh.unk0.x30 = -1;
@@ -65,7 +65,7 @@ void ftMasterHand_80152CD8(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     Fighter_ChangeMotionState(arg0, 0x16A, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+    ftAnim_8006EBA4(arg0);
     fp->cb.x21BC_callback_Accessory4 = &ftMasterHand_80152E28;
     fp->x2200_ftcmd_var0 = 1;
 }
@@ -146,7 +146,7 @@ void ftMasterHand_80152F80(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, 0x16B, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     func_800236B8(fp->mv.mh.unk0.x28);
     func_800236B8(fp->mv.mh.unk0.x2C);
     func_800236B8(fp->mv.mh.unk0.x30);

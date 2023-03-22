@@ -61,7 +61,7 @@ void ftMasterHand_80154E78(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, 0x17B, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp->x2200_ftcmd_var0 = 0;
 }
 

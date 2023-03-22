@@ -24,7 +24,7 @@ void ftMars_SpecialN_StartMotion(HSD_GObj* gobj)
 
     fp->gr_vel /= attrs->xC;
     Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftMars_SpecialAirN_StartMotion(HSD_GObj* gobj)
@@ -46,7 +46,7 @@ void ftMars_SpecialAirN_StartMotion(HSD_GObj* gobj)
     }
 
     Fighter_ChangeMotionState(gobj, 0x159, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 80136844 00133424

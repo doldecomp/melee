@@ -19,7 +19,7 @@ void ftMars_SpecialHi_StartMotion(HSD_GObj* gobj)
     // MotionStateChange
     Fighter_ChangeMotionState(gobj, 0x16F, 0, NULL, 0.0f, 1.0f, 0.0f);
     // MS_AnimationFrameUpdate&More
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 8013826C 00134E4C
@@ -43,7 +43,7 @@ void ftMars_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     // MotionStateChange
     Fighter_ChangeMotionState(gobj, 0x170, 0, NULL, 0.0f, 1.0f, 0.0f);
     // MS_AnimationFrameUpdate&More
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 801382E8 00134EC8

@@ -16,7 +16,7 @@ void ftDonkey_SpecialS_StartMotion(HSD_GObj* gobj)
 #endif
 
     Fighter_ChangeMotionState(gobj, 0x17B, 0, NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     Fighter_UnsetCmdVar0(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010E0CC;
 }
@@ -28,7 +28,7 @@ void ftDonkey_SpecialAirS_StartMotion(HSD_GObj* gobj)
     fp->x80_self_vel.x /= donkey_attr->SpecialS.x3C_MIN_STICK_X_MOMENTUM;
     fp->x80_self_vel.y = 0.0f;
     Fighter_ChangeMotionState(gobj, 0x17C, 0, NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     Fighter_UnsetCmdVar0(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDonkey_8010E148;
 }

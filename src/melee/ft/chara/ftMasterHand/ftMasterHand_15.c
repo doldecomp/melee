@@ -56,7 +56,7 @@ void ftMasterHand_801530A4(HSD_GObj* gobj)
     s32 rand;
 
     Fighter_ChangeMotionState(gobj, 0x16C, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     rand = HSD_Randi(attr->xE8 - attr->xE4);
     fp->mv.mh.unk0.x50 = attr->xE4 + rand;
     fp->x2200_ftcmd_var0 = 0;
@@ -186,7 +186,7 @@ void ftMasterHand_801533CC(HSD_GObj* arg0)
     fp = arg0->user_data;
     attr = fp->ft_data->ext_attr;
     Fighter_ChangeMotionState(arg0, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+    ftAnim_8006EBA4(arg0);
     if (func_80087120(arg0) > attr->xEC) {
         ftAnim_SetAnimRate(arg0, attr->xF4);
     }
@@ -202,7 +202,7 @@ static inline void lbl_8015346C_inline(HSD_GObj* gobj)
     Fighter* ft30 = gobj->user_data;
     ftMasterHand_SpecialAttrs* attr = ft30->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x16D, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     if (func_80087120(gobj) > attr->xEC) {
         ftAnim_SetAnimRate(gobj, attr->xF4);
     }
@@ -300,5 +300,5 @@ void ftMasterHand_80153730(HSD_GObj* arg0)
 #endif
 
     Fighter_ChangeMotionState(arg0, 0x16E, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+    ftAnim_8006EBA4(arg0);
 }

@@ -86,7 +86,7 @@ void ftCaptain_SpecialN_StartMotion(HSD_GObj* gobj)
                               0.0f);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftCaptain_SpecialAirN_StartMotion(HSD_GObj* gobj)
@@ -105,7 +105,7 @@ void ftCaptain_SpecialAirN_StartMotion(HSD_GObj* gobj)
                               0.0f);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftCaptain_SpecialN_Anim(HSD_GObj* gobj)

@@ -36,7 +36,7 @@ void ftNess_AttackS4_Action(
     Fighter_ChangeMotionState(gobj, MS_NESS_ATTACKS4, 0, NULL, 0.0f, 1.0f,
                               0.0f);
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     baseballBatGObj = func_802AD478(gobj, &fp->cur_pos,
                                     0x2A /* Item Hold Bone */, fp->facing_dir);

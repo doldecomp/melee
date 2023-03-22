@@ -38,5 +38,5 @@ void ftMasterHand_8015381C(HSD_GObj* gobj)
 void ftMasterHand_80153820(HSD_GObj* arg0)
 {
     Fighter_ChangeMotionState(arg0, 0x16F, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+    ftAnim_8006EBA4(arg0);
 }

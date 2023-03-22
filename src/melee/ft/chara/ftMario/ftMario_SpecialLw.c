@@ -82,7 +82,7 @@ void ftMario_SpecialLw_StartMotion(HSD_GObj* gobj)
 
     setCmdVar2(gobj);
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirLw, 0, NULL, 0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp->x80_self_vel.y = sa->speciallw.vel_y - sa->speciallw.tap_y_vel_max;
     func_8007D440(fp, sa->speciallw.air_momentum_x);
     doStartMotion(gobj);
@@ -103,7 +103,7 @@ void ftMario_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 
     setCmdVar2(gobj);
     Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirLw, 0, NULL, 0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     if ((s32) fp->fv.mr.x2234_tornadoCharge != 0) {
         sub_val = 0;
     } else {

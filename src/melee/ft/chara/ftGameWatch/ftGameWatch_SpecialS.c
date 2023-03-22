@@ -183,7 +183,7 @@ void ftGameWatch_SpecialS_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj,
                               fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1, 0,
                               NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialS_SetVars(gobj);
 }
 
@@ -206,7 +206,7 @@ void ftGameWatch_SpecialAirS_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj,
                               fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialAirS1,
                               0, NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ftGameWatch_SpecialS_SetVars(gobj);
 }
 

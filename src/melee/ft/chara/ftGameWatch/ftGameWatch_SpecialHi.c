@@ -126,7 +126,7 @@ void ftGameWatch_SpecialHi_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     func_80088510(fp, 0x46D12, 0x7F, 0x40);
 }
 
@@ -144,7 +144,7 @@ void ftGameWatch_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftGameWatch_SpecialHi_SetVars(gobj);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     func_80088510(fp, 0x46D12, 0x7F, 0x40);
 }
 

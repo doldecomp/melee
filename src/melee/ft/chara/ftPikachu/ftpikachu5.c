@@ -150,7 +150,7 @@ void ftPikachu_SpecialLw_StartMotion(HSD_GObj* gobj)
     fp->mv.pk.unk4.x4 = 1;
     fp->mv.pk.unk4.x0 = 0;
     Fighter_ChangeMotionState(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftPikachu_SpecialAirLw_StartMotion(HSD_GObj* gobj)
@@ -161,7 +161,7 @@ void ftPikachu_SpecialAirLw_StartMotion(HSD_GObj* gobj)
     fp->mv.pk.unk4.x4 = 1;
     fp->mv.pk.unk4.x0 = 0;
     Fighter_ChangeMotionState(gobj, 0x16B, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftPikachu_ActionChange_8012798C(HSD_GObj* gobj)

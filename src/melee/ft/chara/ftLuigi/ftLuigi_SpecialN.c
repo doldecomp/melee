@@ -22,7 +22,7 @@ void ftLuigi_SpecialN_StartMotion(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
 }
 
@@ -35,7 +35,7 @@ void ftLuigi_SpecialAirN_StartMotion(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     Fighter_ChangeMotionState(gobj, MS_LUIGI_SPECIALAIRN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
 }
 

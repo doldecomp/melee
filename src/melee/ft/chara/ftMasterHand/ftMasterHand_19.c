@@ -44,7 +44,7 @@ void ftMasterHand_80153B90(HSD_GObj* arg0)
     Vec3 sp10;
 
     Fighter_ChangeMotionState(arg0, 0x172, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+    ftAnim_8006EBA4(arg0);
     temp_r31->mv.mh.unk0.x0 = temp_r30->x6C;
     func_8015C208(arg0, &sp10);
     temp_r31->cur_pos.x = sp10.x;

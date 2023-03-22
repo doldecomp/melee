@@ -32,7 +32,7 @@ void ftDonkey_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp->x80_self_vel.x = fp->gr_vel;
     fp->x80_self_vel.y = 0.0f;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ef_Spawn(0x4CA, gobj, fp->ft_bones[0].x0_jobj);
 }
 
@@ -55,7 +55,7 @@ void ftDonkey_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     func_8007D440(fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
     fp->x80_self_vel.y = donkey_attr->SpecialHi.x4C_AERIAL_VERTICAL_VELOCITY;
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     ef_Spawn(0x4CA, gobj, fp->ft_bones[0].x0_jobj);
 }
 

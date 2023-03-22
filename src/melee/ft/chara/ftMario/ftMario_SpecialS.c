@@ -107,7 +107,7 @@ bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
 static void changeAction(HSD_GObj* gobj, ftMario_MotionState msid)
 {
     Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0, 1, 0);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 
     {
         Fighter* fp = GET_FIGHTER(gobj);

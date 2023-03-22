@@ -41,7 +41,7 @@ void ftMasterHand_80151CA8(HSD_GObj* gobj)
     temp_r31 = gobj->user_data;
     temp_r30 = temp_r31->ft_data->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x161, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
     temp_r31->cur_pos.y =
         temp_r30->x50.x; // TODO: The code matches, but is this right?
     temp_r31->x80_self_vel.x = 0.0f;

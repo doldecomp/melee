@@ -41,5 +41,5 @@ void ftMasterHand_80151BB8(HSD_GObj* arg0)
 #endif
 
     Fighter_ChangeMotionState(arg0, 0x15D, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+    ftAnim_8006EBA4(arg0);
 }

@@ -142,7 +142,7 @@ ftCaptain_SpecialLw_StartMotion:
 /* 800E408C 000E0C6C  FC 60 08 90 */	fmr f3, f1
 /* 800E4090 000E0C70  4B F8 53 1D */	bl Fighter_ChangeMotionState
 /* 800E4094 000E0C74  7F C3 F3 78 */	mr r3, r30
-/* 800E4098 000E0C78  4B F8 AB 0D */	bl func_8006EBA4
+/* 800E4098 000E0C78  4B F8 AB 0D */	bl ftAnim_8006EBA4
 /* 800E409C 000E0C7C  3C 60 80 0E */	lis r3, ftCaptain_800E400C@ha
 /* 800E40A0 000E0C80  38 03 40 0C */	addi r0, r3, ftCaptain_800E400C@l
 /* 800E40A4 000E0C84  3C 60 80 06 */	lis r3, efLib_PauseAll@ha
@@ -181,7 +181,7 @@ ftCaptain_SpecialAirLw_StartMotion:
 /* 800E411C 000E0CFC  FC 60 08 90 */	fmr f3, f1
 /* 800E4120 000E0D00  4B F8 52 8D */	bl Fighter_ChangeMotionState
 /* 800E4124 000E0D04  7F C3 F3 78 */	mr r3, r30
-/* 800E4128 000E0D08  4B F8 AA 7D */	bl func_8006EBA4
+/* 800E4128 000E0D08  4B F8 AA 7D */	bl ftAnim_8006EBA4
 /* 800E412C 000E0D0C  3C 60 80 06 */	lis r3, efLib_PauseAll@ha
 /* 800E4130 000E0D10  38 03 BA 40 */	addi r0, r3, efLib_PauseAll@l
 /* 800E4134 000E0D14  3C 60 80 06 */	lis r3, efLib_ResumeAll@ha
