@@ -68,7 +68,7 @@ void ftMasterHand_80155194(HSD_GObj* gobj)
     fp = gobj->user_data;
     gobj_2 = func_8015C3E8(0x1C);
     if (func_8015C31C() == 0) {
-        func_8015A2B0(gobj_2);
+        ftCrazyHand_8015A2B0(gobj_2);
     }
     fp->x1A5C = gobj_2;
     Fighter_ChangeMotionState(gobj, 0x17E, 0, 0, 0.0f, 1.0f, 0.0f);

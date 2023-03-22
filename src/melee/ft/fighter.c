@@ -894,7 +894,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     if (fp->x4_fighterKind == 0x1B) {
         ftMasterHand_8014FE10(gobj);
     } else if (fp->x4_fighterKind == 0x1C) {
-        func_80155FCC(gobj);
+        ftCrazyHand_80155FCC(gobj);
     } else if (input->flags.bits.b1 != 0) {
         func_800BFD04(gobj);
     } else if (Player_GetFlagsBit3(fp->xC_playerID) != 0) {
@@ -2901,7 +2901,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
                     ftMasterHand_8014FE58(gobj);
                     break;
                 case 0x1C:
-                    func_80156014(gobj);
+                    ftCrazyHand_80156014(gobj);
                     break;
                 default:
                     OSReport("ellegal flag fp->no_reaction_always\n");

@@ -54,7 +54,7 @@ void ftMasterHand_801552F8(HSD_GObj* gobj)
     gobj_2 = func_8015C3E8(0x1CU);
 
     if (func_8015C31C() == 0)
-        func_8015A3F4(gobj_2);
+        ftCrazyHand_8015A3F4(gobj_2);
 
     fp->x1A5C = gobj_2;
     Fighter_ChangeMotionState(gobj, 0x17F, 0, 0, 0.0f, 1.0f, 0.0f);
