@@ -116,7 +116,7 @@ HSD_GObj* func_8022089C(int id)
 void lbl_80220984(HSD_GObj* gobj)
 {
     Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 bool lbl_802209B0(HSD_GObj* arg0)

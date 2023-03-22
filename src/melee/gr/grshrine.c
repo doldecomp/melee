@@ -109,7 +109,7 @@ static HSD_GObj* func_80201D20(s32 arg0)
 static void func_80201E08(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool func_80201E34(HSD_GObj* arg0)
@@ -124,7 +124,7 @@ static void func_80201E40(HSD_GObj* arg0) {}
 static void func_80201E44(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;
 }
 
@@ -148,7 +148,7 @@ static void func_80201E9C(HSD_GObj* gobj)
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
     Ground_801C10B8(gobj, func_80201E98);
     Ground_801C2FE0(gobj);
     gp->x10_flags.b5 = true;

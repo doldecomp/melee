@@ -94,7 +94,7 @@ static HSD_GObj* func_8020E080(int gobj_id)
 static void lbl_8020E168(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool lbl_8020E194(HSD_GObj* arg0)
@@ -134,7 +134,7 @@ static void lbl_8020E200(HSD_GObj* gobj)
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool lbl_8020E250(HSD_GObj* arg0)

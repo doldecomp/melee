@@ -92,7 +92,7 @@ static HSD_GObj* func_802202CC(int gobj_id)
 static void lbl_802203B4(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool lbl_802203E0(HSD_GObj* arg0)
@@ -113,7 +113,7 @@ static void lbl_802203F0(HSD_GObj* gobj)
 
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, false);
+    grAnime_801C8138(gobj, gp->map_id, false);
 }
 
 static bool lbl_80220440(HSD_GObj* arg0)
@@ -138,7 +138,7 @@ static void lbl_80220480(HSD_GObj* gobj)
 
     Ground* gp = GET_GROUND(gobj);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, false);
+    grAnime_801C8138(gobj, gp->map_id, false);
 }
 
 static bool lbl_802204D0(HSD_GObj* arg0)

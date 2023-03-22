@@ -109,7 +109,7 @@ HSD_GObj* func_80221CB4(int arg0)
 void lbl_80221D9C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 bool lbl_80221DC8(HSD_GObj* arg0)

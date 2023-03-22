@@ -169,7 +169,7 @@ static void func_80219E6C(HSD_GObj* gobj)
     Ground* gp = gobj->user_data;
     enum_t id = gp->map_id;
 
-    func_801C8138(gobj, id, 0);
+    grAnime_801C8138(gobj, id, 0);
 
     if (lbl_804D6AC8 == 0)
         return;
@@ -205,7 +205,7 @@ static void func_8021A11C(HSD_GObj* gobj)
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool func_8021A16C(HSD_GObj* arg0)
@@ -230,7 +230,7 @@ static void func_8021A19C(HSD_GObj* gobj)
 
     Ground* gp = gobj->user_data;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;
 }
 
@@ -255,7 +255,7 @@ static void func_8021A20C(HSD_GObj* gobj)
     /// @todo Missing cast
     unk_t hsd_obj = gobj->hsd_obj;
 
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
     func_801C94D8(hsd_obj);
     gp->x11_flags.b012 = 2;
 }
@@ -278,7 +278,7 @@ static void func_8021A274(HSD_GObj* gobj)
 
     Ground* gp = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
     func_801C94D8(hsd_obj);
     gp->x11_flags.b012 = 2;
 }
@@ -301,7 +301,7 @@ static void func_8021A2DC(HSD_GObj* gobj)
 
     Ground* gp = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
     func_801C94D8(hsd_obj);
     gobj;
     gp->x11_flags.b012 = 2;
@@ -355,14 +355,14 @@ static void func_8021A3BC(HSD_GObj* gobj)
     case 0:
         if (gp->xD0-- < 0) {
             gp->xC4 = 1;
-            func_801C8138(gobj, gp->map_id, 0);
+            grAnime_801C8138(gobj, gp->map_id, 0);
         }
         break;
     case 1:
         if (HSD_JObjGetFlags(jobj) & 0x10) {
             HSD_JObjClearFlagsAll(jobj, 0x10);
         }
-        if (func_801C83D0(gobj, 0, 7)) {
+        if (grAnime_801C83D0(gobj, 0, 7)) {
             if (gp->xC8 == -1) {
                 u32 i;
                 for (i = 0; i < BATTLE_BG_MAX; i++) {

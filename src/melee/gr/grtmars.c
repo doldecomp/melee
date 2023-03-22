@@ -103,7 +103,7 @@ static HSD_GObj* GrTMars_80221F98(int id)
 static void GrTMars_80222080(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool GrTMars_802220AC(HSD_GObj* arg0)
@@ -131,7 +131,7 @@ static void GrTMars_802220BC(HSD_GObj* gobj)
 #endif
 
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool GrTMars_8022210C(HSD_GObj* arg0)
@@ -157,7 +157,7 @@ static void GrTMars_8022214C(HSD_GObj* gobj)
 #endif
 
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
 static bool GrTMars_8022219C(HSD_GObj* arg0)
