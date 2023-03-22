@@ -28,52 +28,52 @@ static const int BATTLE_BG_MAX = 3;
 
 static StageCallbacks lbl_803E7DA0[7] = {
     {
-        func_80219E6C,
-        func_8021A10C,
-        func_8021A114,
-        func_8021A118,
+        grBattle_80219E6C,
+        grBattle_8021A10C,
+        grBattle_8021A114,
+        grBattle_8021A118,
         0,
     },
     {
-        func_8021A20C,
-        func_8021A264,
-        func_8021A26C,
-        func_8021A270,
+        grBattle_8021A20C,
+        grBattle_8021A264,
+        grBattle_8021A26C,
+        grBattle_8021A270,
         0,
     },
     {
-        func_8021A274,
-        func_8021A2CC,
-        func_8021A2D4,
-        func_8021A2D8,
+        grBattle_8021A274,
+        grBattle_8021A2CC,
+        grBattle_8021A2D4,
+        grBattle_8021A2D8,
         0,
     },
     {
-        func_8021A344,
-        func_8021A3B4,
-        func_8021A3BC,
-        func_8021A60C,
+        grBattle_8021A344,
+        grBattle_8021A3B4,
+        grBattle_8021A3BC,
+        grBattle_8021A60C,
         0,
     },
     {
-        func_8021A2DC,
-        func_8021A334,
-        func_8021A33C,
-        func_8021A340,
+        grBattle_8021A2DC,
+        grBattle_8021A334,
+        grBattle_8021A33C,
+        grBattle_8021A340,
         0,
     },
     {
-        func_8021A19C,
-        func_8021A1FC,
-        func_8021A204,
-        func_8021A208,
+        grBattle_8021A19C,
+        grBattle_8021A1FC,
+        grBattle_8021A204,
+        grBattle_8021A208,
         0,
     },
     {
-        func_8021A11C,
-        func_8021A16C,
-        func_8021A174,
-        func_8021A198,
+        grBattle_8021A11C,
+        grBattle_8021A16C,
+        grBattle_8021A174,
+        grBattle_8021A198,
         0xC0000000,
     },
 };
@@ -84,57 +84,57 @@ StageData lbl_803E7E38 = {
     0x00000024,
     lbl_803E7DA0,
     "/GrNBa.dat",
-    func_80219CA4,
-    func_80219C98,
-    func_80219D54,
-    func_80219D58,
-    func_80219D7C,
-    func_8021A610,
-    func_8021A618,
+    grBattle_80219CA4,
+    grBattle_80219C98,
+    grBattle_80219D54,
+    grBattle_80219D58,
+    grBattle_80219D7C,
+    grBattle_8021A610,
+    grBattle_8021A618,
     0x00000001,
     NULL,
     0,
 };
 
-static void func_80219C98(int arg0)
+static void grBattle_80219C98(int arg0)
 {
     lbl_804D6AC8 = 1;
 }
 
-static void func_80219CA4(void)
+static void grBattle_80219CA4(void)
 {
     lbl_804D6ACC = Ground_801C49F8();
     stage_info.unk8C.b4 = 1;
     stage_info.unk8C.b5 = 1;
 
-    func_80219D84(0);
+    grBattle_80219D84(0);
     if (gm_8016B3D8() || Stage_80225194() == 0x111 || Stage_80225194() == 0xF5)
     {
-        func_80219D84(5);
+        grBattle_80219D84(5);
     } else {
-        func_80219D84(3);
-        func_80219D84(1);
+        grBattle_80219D84(3);
+        grBattle_80219D84(1);
     }
-    func_80219D84(6);
+    grBattle_80219D84(6);
     Ground_801C39C0();
     Ground_801C3BB4();
     grLib_801C9A10();
     lbl_804D6AC8 = 0;
 }
 
-static void func_80219D54(void) {}
+static void grBattle_80219D54(void) {}
 
-static void func_80219D58(void)
+static void grBattle_80219D58(void)
 {
     grZakoGenerator_801CAE04(false);
 }
 
-static bool func_80219D7C(void)
+static bool grBattle_80219D7C(void)
 {
     return false;
 }
 
-static HSD_GObj* func_80219D84(int gobj_id)
+static HSD_GObj* grBattle_80219D84(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E7DA0[gobj_id];
@@ -166,7 +166,7 @@ static HSD_GObj* func_80219D84(int gobj_id)
     return gobj;
 }
 
-static void func_80219E6C(HSD_GObj* gobj)
+static void grBattle_80219E6C(HSD_GObj* gobj)
 {
     Vec3 v;
     Ground* gp = gobj->user_data;
@@ -191,16 +191,16 @@ static void func_80219E6C(HSD_GObj* gobj)
     HSD_JObjSetTranslate(Ground_801C2CF4(3), &v);
 }
 
-bool func_8021A10C(HSD_GObj* arg0)
+bool grBattle_8021A10C(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void func_8021A114(HSD_GObj* arg0) {}
+static void grBattle_8021A114(HSD_GObj* arg0) {}
 
-static void func_8021A118(HSD_GObj* arg0) {}
+static void grBattle_8021A118(HSD_GObj* arg0) {}
 
-static void func_8021A11C(HSD_GObj* gobj)
+static void grBattle_8021A11C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -212,20 +212,20 @@ static void func_8021A11C(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool func_8021A16C(HSD_GObj* arg0)
+static bool grBattle_8021A16C(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void func_8021A174(HSD_GObj* gobj)
+static void grBattle_8021A174(HSD_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
     lb_800115F4();
 }
 
-static void func_8021A198(HSD_GObj* arg0) {}
+static void grBattle_8021A198(HSD_GObj* arg0) {}
 
-static void func_8021A19C(HSD_GObj* gobj)
+static void grBattle_8021A19C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -238,16 +238,16 @@ static void func_8021A19C(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-static bool func_8021A1FC(HSD_GObj* arg0)
+static bool grBattle_8021A1FC(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void func_8021A204(HSD_GObj* arg0) {}
+static void grBattle_8021A204(HSD_GObj* arg0) {}
 
-static void func_8021A208(HSD_GObj* arg0) {}
+static void grBattle_8021A208(HSD_GObj* arg0) {}
 
-static void func_8021A20C(HSD_GObj* gobj)
+static void grBattle_8021A20C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -264,16 +264,16 @@ static void func_8021A20C(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-static bool func_8021A264(HSD_GObj* arg0)
+static bool grBattle_8021A264(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void func_8021A26C(HSD_GObj* arg0) {}
+static void grBattle_8021A26C(HSD_GObj* arg0) {}
 
-static void func_8021A270(HSD_GObj* arg0) {}
+static void grBattle_8021A270(HSD_GObj* arg0) {}
 
-static void func_8021A274(HSD_GObj* gobj)
+static void grBattle_8021A274(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -287,16 +287,16 @@ static void func_8021A274(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-static bool func_8021A2CC(HSD_GObj* arg0)
+static bool grBattle_8021A2CC(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void func_8021A2D4(HSD_GObj* arg0) {}
+static void grBattle_8021A2D4(HSD_GObj* arg0) {}
 
-static void func_8021A2D8(HSD_GObj* arg0) {}
+static void grBattle_8021A2D8(HSD_GObj* arg0) {}
 
-static void func_8021A2DC(HSD_GObj* gobj)
+static void grBattle_8021A2DC(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -311,16 +311,16 @@ static void func_8021A2DC(HSD_GObj* gobj)
     gp->x11_flags.b012 = 2;
 }
 
-static bool func_8021A334(HSD_GObj* arg0)
+static bool grBattle_8021A334(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void func_8021A33C(HSD_GObj* arg0) {}
+static void grBattle_8021A33C(HSD_GObj* arg0) {}
 
-static void func_8021A340(HSD_GObj* arg0) {}
+static void grBattle_8021A340(HSD_GObj* arg0) {}
 
-static void func_8021A344(HSD_GObj* gobj)
+static void grBattle_8021A344(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -336,12 +336,12 @@ static void func_8021A344(HSD_GObj* gobj)
     HSD_JObjSetFlagsAll(jobj, 0x10);
 }
 
-static bool func_8021A3B4(HSD_GObj* arg0)
+static bool grBattle_8021A3B4(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void func_8021A3BC(HSD_GObj* gobj)
+static void grBattle_8021A3BC(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -386,7 +386,7 @@ static void func_8021A3BC(HSD_GObj* gobj)
             HSD_ASSERT(535, bg_gobj);
             grMaterial_801C9604(bg_gobj, lbl_804D6ACC->unk4, 0);
 
-            bg_gobj = func_80219D84(gp->xC8);
+            bg_gobj = grBattle_80219D84(gp->xC8);
             HSD_ASSERT(539, bg_gobj);
             grMaterial_801C9604(bg_gobj, lbl_804D6ACC->unk0, 0);
 
@@ -406,14 +406,14 @@ static void func_8021A3BC(HSD_GObj* gobj)
     }
 }
 
-static void func_8021A60C(HSD_GObj* arg0) {}
+static void grBattle_8021A60C(HSD_GObj* arg0) {}
 
-static bool func_8021A610(int arg0)
+static bool grBattle_8021A610(int arg0)
 {
     return false;
 }
 
-static bool func_8021A618(Vec3* arg0, int arg1, HSD_JObj* arg2)
+static bool grBattle_8021A618(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }
