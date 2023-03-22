@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 function melee_sed {
-    find src asm docs obj_files.mk Makefile -type f -exec sed -i "${@}" {} +
+    find src asm docs obj_files.mk ldscript.lcf Makefile -type f -exec sed -i "${@}" {} +
 }
 
 function replace_symbol {
