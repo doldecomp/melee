@@ -16,11 +16,19 @@ static StageCallbacks lbl_803E6328[3] = {
     { lbl_8020E494, lbl_8020E4E4, lbl_8020E4EC, lbl_8020E4F0, 0UL }
 };
 
-StageData lbl_803E6370 = {
-    0x00000045,   lbl_803E6328, "/GrEF2.dat", func_8020E274, lbl_8020E270,
-    lbl_8020E2E4, lbl_8020E2E8, lbl_8020E30C, lbl_8020E4F4,  lbl_8020E4FC,
-    0x00000001,   NULL,         0UL
-};
+StageData lbl_803E6370 = { 0x00000045,
+                           lbl_803E6328,
+                           "/GrEF2.dat",
+                           func_8020E274,
+                           grFigure1_8020E270,
+                           lbl_8020E2E4,
+                           lbl_8020E2E8,
+                           lbl_8020E30C,
+                           lbl_8020E4F4,
+                           lbl_8020E4FC,
+                           0x00000001,
+                           NULL,
+                           0UL };
 
 void* lbl_804D6A78;
 
