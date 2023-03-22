@@ -1183,7 +1183,7 @@ void func_80268E5C(HSD_GObj* item_gobj, enum_t msid,
     item_data->msid = msid;
     item_data->xDC8_word.flags.x14 = 0;
     HSD_JObjSetTranslate(item_gobj->hsd_obj, &item_data->pos);
-    func_80067624(item_gobj, &item_data->xBC0);
+    efAsync_80067624(item_gobj, &item_data->xBC0);
 
     if (item_data->xDC8_word.flags.x2 == 1) {
         func_8026BDCC(item_gobj);
@@ -1467,7 +1467,7 @@ void func_80269978(HSD_GObj* item_gobj)
 void lbl_80269A9C(HSD_GObj* item_gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    func_80067624(item_gobj, &item_data->xBC0);
+    efAsync_80067624(item_gobj, &item_data->xBC0);
     if (item_data->xDC8_word.flags.x9 == 0) {
         if (item_data->on_accessory != NULL) {
             item_data->on_accessory(item_gobj);
@@ -2061,7 +2061,7 @@ void func_8026A8EC(HSD_GObj* this)
     }
 
     func_8026B0B4(this);
-    func_80067688(&ip->xBC0);
+    efAsync_80067688(&ip->xBC0);
     func_80390228(this);
 }
 

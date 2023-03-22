@@ -545,7 +545,7 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
     ft_800A101C(fp, Player_GetCpuType(fp->xC_playerID),
                 Player_GetCpuLevel(fp->xC_playerID), 0);
 
-    func_80067688(&fp->x60C);
+    efAsync_80067688(&fp->x60C);
     ft_8007C17C(gobj);
     ft_8007C630(gobj);
 }
@@ -847,7 +847,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     GObj_InitUserData(gobj, 4U, &Fighter_Unload_8006DABC, fp);
     ftData_8008572C(input->fighterKind);
     Fighter_UnkInitLoad_80068914(gobj, input);
-    func_8006737C(lbl_803C26FC[fp->x4_fighterKind]);
+    efAsync_8006737C(lbl_803C26FC[fp->x4_fighterKind]);
     ftData_80085820(fp->x4_fighterKind, fp->x619_costume_id);
 
     Fighter_UnkUpdateCostumeJoint_800686E4(gobj);
@@ -934,7 +934,7 @@ void Fighter_ChangeMotionState(HSD_GObj* gobj, s32 new_motion_state_index,
     fp->x30_facingDirectionRepeated = fp->facing_dir;
 
     HSD_JObjSetTranslate(jobj, &fp->cur_pos);
-    func_80067624(gobj, &fp->x60C);
+    efAsync_80067624(gobj, &fp->x60C);
 
     if ((arg2 & FtStateChange_SkipUpdateHit) == 0) {
         if (fp->x2219_flag.bits.b3 != 0) {
@@ -2563,7 +2563,7 @@ void Fighter_8006C80C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x221F_flag.bits.b3) {
-        func_80067624(gobj, &fp->x60C);
+        efAsync_80067624(gobj, &fp->x60C);
         Fighter_UnkApplyTransformation_8006C0F0(gobj);
 
         if (!fp->x2219_flag.bits.b5) {
@@ -3117,7 +3117,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     }
 
     ftColl_8007B8E8(fp->gobj);
-    func_80067688(&fp->x60C);
+    efAsync_80067688(&fp->x60C);
     func_8026B7F8(fp->gobj);
     Camera_800290D4(fp->x890_cameraBox);
     ft_8009E0D4(fp);
