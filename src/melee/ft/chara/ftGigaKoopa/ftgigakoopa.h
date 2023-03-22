@@ -13,17 +13,17 @@ extern Fighter_CostumeStrings lbl_803D3988[];
 extern char lbl_803D3948[];
 extern Fighter_DemoStrings lbl_803D3954;
 
-void ftGKoopa_OnDeath(HSD_GObj*);
-void func_8014F698(HSD_GObj*);
-void ftGKoopa_OnLoad(HSD_GObj*);
-void ftGKoopa_OnItemPickup(HSD_GObj*, bool);
-void ftGKoopa_OnItemInvisible(HSD_GObj*);
-void ftGKoopa_OnItemVisible(HSD_GObj*);
-void ftGKoopa_OnItemDrop(HSD_GObj*, bool);
-void ftGKoopa_LoadSpecialAttrs(HSD_GObj*);
-void ftGKoopa_OnKnockbackEnter(HSD_GObj*);
-void ftGKoopa_OnKnockbackExit(HSD_GObj*);
-void func_8014F98C(s32, s32*, s32*);
+void ftGigaKoopa_OnDeath(HSD_GObj*);
+void ftGigaKoopa_8014F698(HSD_GObj*);
+void ftGigaKoopa_OnLoad(HSD_GObj*);
+void ftGigaKoopa_OnItemPickup(HSD_GObj*, bool);
+void ftGigaKoopa_OnItemInvisible(HSD_GObj*);
+void ftGigaKoopa_OnItemVisible(HSD_GObj*);
+void ftGigaKoopa_OnItemDrop(HSD_GObj*, bool);
+void ftGigaKoopa_LoadSpecialAttrs(HSD_GObj*);
+void ftGigaKoopa_OnKnockbackEnter(HSD_GObj*);
+void ftGigaKoopa_OnKnockbackExit(HSD_GObj*);
+void ftGigaKoopa_8014F98C(s32, s32*, s32*);
 char* ftGigaKoopa_GetMotionFileString(enum_t);
 
 #endif

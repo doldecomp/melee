@@ -135,7 +135,7 @@ HSD_GObjEvent ft_OnLoad[FTKIND_MAX] = {
     ftDrMario_OnLoad,    ftFalco_OnLoad,     ftPichu_OnLoad,
     ftGameWatch_OnLoad,  ftGanon_OnLoad,     ftRoy_OnLoad,
     ftMasterhand_OnLoad, ftCrazyhand_OnLoad, ftZakoBoy_OnLoad,
-    ftZakoGirl_OnLoad,   ftGKoopa_OnLoad,    ftSandbag_OnLoad,
+    ftZakoGirl_OnLoad,   ftGigaKoopa_OnLoad, ftSandbag_OnLoad,
 };
 
 HSD_GObjEvent ft_OnDeath[FTKIND_MAX] = {
@@ -149,7 +149,7 @@ HSD_GObjEvent ft_OnDeath[FTKIND_MAX] = {
     ftDrMario_OnDeath,    ftFalco_OnDeath,     ftPichu_OnDeath,
     ftGameWatch_OnDeath,  ftGanon_OnDeath,     ftRoy_OnDeath,
     ftMasterhand_OnDeath, ftCrazyhand_OnDeath, ftZakoBoy_OnDeath,
-    ftZakoGirl_OnDeath,   ftGKoopa_OnDeath,    ftSandbag_OnDeath,
+    ftZakoGirl_OnDeath,   ftGigaKoopa_OnDeath, ftSandbag_OnDeath,
 };
 
 HSD_GObjEvent ft_OnUserDataRemove[FTKIND_MAX] = {
@@ -560,7 +560,7 @@ Fighter_ItemEvent ft_OnItemPickupExt[FTKIND_MAX] = {
     NULL,
     ftZakoBoy_OnItemPickup,
     ftZakoGirl_OnItemPickup,
-    ftGKoopa_OnItemPickup,
+    ftGigaKoopa_OnItemPickup,
     NULL,
 };
 
@@ -596,7 +596,7 @@ HSD_GObjEvent ft_OnItemInvisible[FTKIND_MAX] = {
     NULL,
     ftZakoBoy_OnItemInvisible,
     ftZakoGirl_OnItemInvisible,
-    ftGKoopa_OnItemInvisible,
+    ftGigaKoopa_OnItemInvisible,
     NULL,
 };
 
@@ -632,7 +632,7 @@ HSD_GObjEvent ft_OnItemVisible[FTKIND_MAX] = {
     NULL,
     ftZakoBoy_OnItemVisible,
     ftZakoGirl_OnItemVisible,
-    ftGKoopa_OnItemVisible,
+    ftGigaKoopa_OnItemVisible,
     NULL,
 };
 
@@ -668,7 +668,7 @@ Fighter_ItemEvent ft_OnItemDropExt[FTKIND_MAX] = {
     NULL,
     ftZakoBoy_OnItemDrop,
     ftZakoGirl_OnItemDrop,
-    ftGKoopa_OnItemDrop,
+    ftGigaKoopa_OnItemDrop,
     NULL,
 };
 
@@ -704,7 +704,7 @@ Fighter_ItemEvent ft_OnItemPickup[FTKIND_MAX] = {
     NULL,
     ftZakoBoy_OnItemPickup,
     ftZakoGirl_OnItemPickup,
-    ftGKoopa_OnItemPickup,
+    ftGigaKoopa_OnItemPickup,
     NULL,
 };
 
@@ -740,7 +740,7 @@ Fighter_ItemEvent ft_OnItemDrop[FTKIND_MAX] = {
     NULL,
     ftZakoBoy_OnItemDrop,
     ftZakoGirl_OnItemDrop,
-    ftGKoopa_OnItemDrop,
+    ftGigaKoopa_OnItemDrop,
     NULL,
 };
 
@@ -848,7 +848,7 @@ HSD_GObjEvent ft_OnKnockbackEnter[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
-    ftGKoopa_OnKnockbackEnter,
+    ftGigaKoopa_OnKnockbackEnter,
     ftSandbag_OnKnockbackEnter,
 };
 
@@ -884,7 +884,7 @@ HSD_GObjEvent ft_OnKnockbackExit[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
-    ftGKoopa_OnKnockbackExit,
+    ftGigaKoopa_OnKnockbackExit,
     ftSandbag_OnKnockbackExit,
 };
 
@@ -920,7 +920,7 @@ HSD_GObjEvent lbl_803C1DB4[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
-    func_8014F698,
+    ftGigaKoopa_8014F698,
     NULL,
 };
 
@@ -976,7 +976,7 @@ HSD_GObjEvent ft_LoadSpecialAttrs[FTKIND_MAX] = {
     ftGameWatch_LoadSpecialAttrs, ftGanon_LoadSpecialAttrs,
     ftRoy_LoadSpecialAttrs,       ftMasterHand_LoadSpecialAttrs,
     ftCrazyHand_LoadSpecialAttrs, ftZakoBoy_LoadSpecialAttrs,
-    ftZakoGirl_LoadSpecialAttrs,  ftGKoopa_LoadSpecialAttrs,
+    ftZakoGirl_LoadSpecialAttrs,  ftGigaKoopa_LoadSpecialAttrs,
     ftSandbag_LoadSpecialAttrs,
 };
 
@@ -1308,7 +1308,7 @@ Fighter_UnkPtrEvent lbl_803C2570[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
-    func_8014F98C,
+    ftGigaKoopa_8014F98C,
     NULL,
 };
 

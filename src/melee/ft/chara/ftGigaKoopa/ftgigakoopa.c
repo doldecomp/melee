@@ -77,7 +77,7 @@ Fighter_CostumeStrings lbl_803D3988[] = {
     { lbl_803D3904, lbl_803D3910, lbl_803D3928 },
 };
 
-void ftGKoopa_OnDeath(HSD_GObj* gobj)
+void ftGigaKoopa_OnDeath(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -93,12 +93,12 @@ void ftGKoopa_OnDeath(HSD_GObj* gobj)
     fp->fv.gk.x2230 = koopaAttr->x18;
 }
 
-void func_8014F698(HSD_GObj* gobj)
+void ftGigaKoopa_8014F698(HSD_GObj* gobj)
 {
     ftKoopa_80132A64(gobj);
 }
 
-void ftGKoopa_OnLoad(HSD_GObj* gobj)
+void ftGigaKoopa_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
@@ -111,42 +111,42 @@ void ftGKoopa_OnLoad(HSD_GObj* gobj)
     fp->x222A_flag.bits.b0 = true;
 }
 
-void ftGKoopa_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftGigaKoopa_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
     Fighter_OnItemPickup(gobj, bool, true, true);
 }
 
-void ftGKoopa_OnItemInvisible(HSD_GObj* gobj)
+void ftGigaKoopa_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, true);
 }
 
-void ftGKoopa_OnItemVisible(HSD_GObj* gobj)
+void ftGigaKoopa_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, true);
 }
 
-void ftGKoopa_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftGigaKoopa_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
-void ftGKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
+void ftGigaKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     ftKoopa_LoadSpecialAttrs(gobj);
 }
 
-void ftGKoopa_OnKnockbackEnter(HSD_GObj* gobj)
+void ftGigaKoopa_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, true);
 }
 
-void ftGKoopa_OnKnockbackExit(HSD_GObj* gobj)
+void ftGigaKoopa_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, true);
 }
 
-void func_8014F98C(s32 arg0, s32* arg1, s32* arg2)
+void ftGigaKoopa_8014F98C(s32 arg0, s32* arg1, s32* arg2)
 {
     if (arg0 == 0xF) {
         *arg2 = 0xE;
