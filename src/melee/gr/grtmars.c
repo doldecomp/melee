@@ -14,63 +14,63 @@ extern StageInfo stage_info;
 
 static StageCallbacks lbl_803E8EB0[4] = {
     {
-        GrTMars_80222080,
-        GrTMars_802220AC,
-        GrTMars_802220B4,
-        GrTMars_802220B8,
+        grTMars_80222080,
+        grTMars_802220AC,
+        grTMars_802220B4,
+        grTMars_802220B8,
     },
     {
-        GrTMars_8022214C,
-        GrTMars_8022219C,
-        GrTMars_802221A4,
-        GrTMars_802221C4,
+        grTMars_8022214C,
+        grTMars_8022219C,
+        grTMars_802221A4,
+        grTMars_802221C4,
     },
     {
-        GrTMars_802220BC,
-        GrTMars_8022210C,
-        GrTMars_80222114,
-        GrTMars_80222148,
+        grTMars_802220BC,
+        grTMars_8022210C,
+        grTMars_80222114,
+        grTMars_80222148,
         0xC0000000,
     },
 };
 
 StageData lbl_803E8F0C = {
-    0x00000034,       lbl_803E8EB0,     "/GrTMs.dat",     GrTMars_80221EF8,
-    GrTMars_80221EF4, GrTMars_80221F68, GrTMars_80221F6C, GrTMars_80221F90,
-    GrTMars_802221C8, GrTMars_802221D0, 0x00000001,
+    0x00000034,       lbl_803E8EB0,     "/GrTMs.dat",     grTMars_80221EF8,
+    grTMars_80221EF4, grTMars_80221F68, grTMars_80221F6C, grTMars_80221F90,
+    grTMars_802221C8, grTMars_802221D0, 0x00000001,
 };
 
-static void GrTMars_80221EF4(int arg0) {}
+static void grTMars_80221EF4(int arg0) {}
 
-static void GrTMars_80221EF8(void)
+static void grTMars_80221EF8(void)
 {
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
-    GrTMars_80221F98(0);
-    GrTMars_80221F98(1);
-    GrTMars_80221F98(2);
+    grTMars_80221F98(0);
+    grTMars_80221F98(1);
+    grTMars_80221F98(2);
     Ground_801C39C0();
     Ground_801C3BB4();
     Ground_801C4210();
     Ground_801C42AC();
 }
 
-static void GrTMars_80221F68(void)
+static void grTMars_80221F68(void)
 {
     return;
 }
 
-static void GrTMars_80221F6C(void)
+static void grTMars_80221F6C(void)
 {
     grZakoGenerator_801CAE04(0);
 }
 
-static bool GrTMars_80221F90(void)
+static bool grTMars_80221F90(void)
 {
     return false;
 }
 
-static HSD_GObj* GrTMars_80221F98(int id)
+static HSD_GObj* grTMars_80221F98(int id)
 {
     HSD_GObj* gobj;
     Ground* gp;
@@ -100,28 +100,28 @@ static HSD_GObj* GrTMars_80221F98(int id)
     return gobj;
 }
 
-static void GrTMars_80222080(HSD_GObj* gobj)
+static void grTMars_80222080(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool GrTMars_802220AC(HSD_GObj* arg0)
+static bool grTMars_802220AC(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void GrTMars_802220B4(HSD_GObj* arg0)
+static void grTMars_802220B4(HSD_GObj* arg0)
 {
     return;
 }
 
-static void GrTMars_802220B8(HSD_GObj* arg0)
+static void grTMars_802220B8(HSD_GObj* arg0)
 {
     return;
 }
 
-static void GrTMars_802220BC(HSD_GObj* gobj)
+static void grTMars_802220BC(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
@@ -134,20 +134,20 @@ static void GrTMars_802220BC(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool GrTMars_8022210C(HSD_GObj* arg0)
+static bool grTMars_8022210C(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void GrTMars_80222114(HSD_GObj* gobj)
+static void grTMars_80222114(HSD_GObj* gobj)
 {
     lb_800115F4();
     Ground_801C2FE0(gobj);
 }
 
-static void GrTMars_80222148(HSD_GObj* arg0) {}
+static void grTMars_80222148(HSD_GObj* arg0) {}
 
-static void GrTMars_8022214C(HSD_GObj* gobj)
+static void grTMars_8022214C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
@@ -160,24 +160,24 @@ static void GrTMars_8022214C(HSD_GObj* gobj)
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool GrTMars_8022219C(HSD_GObj* arg0)
+static bool grTMars_8022219C(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void GrTMars_802221A4(HSD_GObj* gobj)
+static void grTMars_802221A4(HSD_GObj* gobj)
 {
     Ground_801C2FE0(gobj);
 }
 
-static void GrTMars_802221C4(HSD_GObj* arg0) {}
+static void grTMars_802221C4(HSD_GObj* arg0) {}
 
-static bool GrTMars_802221C8(int arg0)
+static bool grTMars_802221C8(int arg0)
 {
     return false;
 }
 
-static bool GrTMars_802221D0(Vec3* arg0, int arg1, HSD_JObj* arg2)
+static bool grTMars_802221D0(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }
