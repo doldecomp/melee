@@ -2,11 +2,11 @@
 
 .section .text  # 0x80005940 - 0x803B7240
 
-.global func_80224110
-func_80224110:
+.global grTGameWatch_80224110
+grTGameWatch_80224110:
 /* 80224110 00220CF0  4E 80 00 20 */	blr
-.global lbl_80224114
-lbl_80224114:
+.global grTGameWatch_80224114
+grTGameWatch_80224114:
 /* 80224114 00220CF4  7C 08 02 A6 */	mflr r0
 /* 80224118 00220CF8  3C 60 80 4A */	lis r3, stage_info@ha
 /* 8022411C 00220CFC  90 01 00 04 */	stw r0, 4(r1)
@@ -22,11 +22,11 @@ lbl_80224114:
 /* 80224144 00220D24  88 05 00 00 */	lbz r0, 0(r5)
 /* 80224148 00220D28  50 80 17 7A */	rlwimi r0, r4, 2, 0x1d, 0x1d
 /* 8022414C 00220D2C  98 05 00 00 */	stb r0, 0(r5)
-/* 80224150 00220D30  48 00 00 65 */	bl func_802241B4
+/* 80224150 00220D30  48 00 00 65 */	bl grTGameWatch_802241B4
 /* 80224154 00220D34  38 60 00 01 */	li r3, 1
-/* 80224158 00220D38  48 00 00 5D */	bl func_802241B4
+/* 80224158 00220D38  48 00 00 5D */	bl grTGameWatch_802241B4
 /* 8022415C 00220D3C  38 60 00 02 */	li r3, 2
-/* 80224160 00220D40  48 00 00 55 */	bl func_802241B4
+/* 80224160 00220D40  48 00 00 55 */	bl grTGameWatch_802241B4
 /* 80224164 00220D44  4B F9 F8 5D */	bl Ground_801C39C0
 /* 80224168 00220D48  4B F9 FA 4D */	bl Ground_801C3BB4
 /* 8022416C 00220D4C  4B FA 00 A5 */	bl Ground_801C4210
@@ -35,11 +35,11 @@ lbl_80224114:
 /* 80224178 00220D58  38 21 00 08 */	addi r1, r1, 8
 /* 8022417C 00220D5C  7C 08 03 A6 */	mtlr r0
 /* 80224180 00220D60  4E 80 00 20 */	blr
-.global lbl_80224184
-lbl_80224184:
+.global grTGameWatch_80224184
+grTGameWatch_80224184:
 /* 80224184 00220D64  4E 80 00 20 */	blr
-.global lbl_80224188
-lbl_80224188:
+.global grTGameWatch_80224188
+grTGameWatch_80224188:
 /* 80224188 00220D68  7C 08 02 A6 */	mflr r0
 /* 8022418C 00220D6C  38 60 00 00 */	li r3, 0
 /* 80224190 00220D70  90 01 00 04 */	stw r0, 4(r1)
@@ -49,13 +49,13 @@ lbl_80224188:
 /* 802241A0 00220D80  38 21 00 08 */	addi r1, r1, 8
 /* 802241A4 00220D84  7C 08 03 A6 */	mtlr r0
 /* 802241A8 00220D88  4E 80 00 20 */	blr
-.global lbl_802241AC
-lbl_802241AC:
+.global grTGameWatch_802241AC
+grTGameWatch_802241AC:
 /* 802241AC 00220D8C  38 60 00 00 */	li r3, 0
 /* 802241B0 00220D90  4E 80 00 20 */	blr
 
-.global func_802241B4
-func_802241B4:
+.global grTGameWatch_802241B4
+grTGameWatch_802241B4:
 /* 802241B4 00220D94  7C 08 02 A6 */	mflr r0
 /* 802241B8 00220D98  90 01 00 04 */	stw r0, 4(r1)
 /* 802241BC 00220D9C  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -71,7 +71,7 @@ func_802241B4:
 /* 802241E4 00220DC4  7F BF 02 14 */	add r29, r31, r0
 /* 802241E8 00220DC8  4B F9 D2 E9 */	bl Ground_801C14D0
 /* 802241EC 00220DCC  7C 7E 1B 79 */	or. r30, r3, r3
-/* 802241F0 00220DD0  41 82 00 70 */	beq lbl_80224260
+/* 802241F0 00220DD0  41 82 00 70 */	beq grTGameWatch_80224260
 /* 802241F4 00220DD4  83 FE 00 2C */	lwz r31, 0x2c(r30)
 /* 802241F8 00220DD8  38 00 00 00 */	li r0, 0
 /* 802241FC 00220DDC  3C 60 80 1C */	lis r3, grDisplay_801C5DB0@ha
@@ -84,31 +84,31 @@ func_802241B4:
 /* 80224218 00220DF8  48 16 C4 85 */	bl GObj_SetupGXLink
 /* 8022421C 00220DFC  80 1D 00 0C */	lwz r0, 0xc(r29)
 /* 80224220 00220E00  28 00 00 00 */	cmplwi r0, 0
-/* 80224224 00220E04  41 82 00 08 */	beq lbl_8022422C
+/* 80224224 00220E04  41 82 00 08 */	beq grTGameWatch_8022422C
 /* 80224228 00220E08  90 1F 00 1C */	stw r0, 0x1c(r31)
-lbl_8022422C:
+grTGameWatch_8022422C:
 /* 8022422C 00220E0C  81 9D 00 00 */	lwz r12, 0(r29)
 /* 80224230 00220E10  28 0C 00 00 */	cmplwi r12, 0
-/* 80224234 00220E14  41 82 00 10 */	beq lbl_80224244
+/* 80224234 00220E14  41 82 00 10 */	beq grTGameWatch_80224244
 /* 80224238 00220E18  7D 88 03 A6 */	mtlr r12
 /* 8022423C 00220E1C  38 7E 00 00 */	addi r3, r30, 0
 /* 80224240 00220E20  4E 80 00 21 */	blrl
-lbl_80224244:
+grTGameWatch_80224244:
 /* 80224244 00220E24  80 9D 00 08 */	lwz r4, 8(r29)
 /* 80224248 00220E28  28 04 00 00 */	cmplwi r4, 0
-/* 8022424C 00220E2C  41 82 00 2C */	beq lbl_80224278
+/* 8022424C 00220E2C  41 82 00 2C */	beq grTGameWatch_80224278
 /* 80224250 00220E30  38 7E 00 00 */	addi r3, r30, 0
 /* 80224254 00220E34  38 A0 00 04 */	li r5, 4
 /* 80224258 00220E38  48 16 BA FD */	bl func_8038FD54
-/* 8022425C 00220E3C  48 00 00 1C */	b lbl_80224278
-lbl_80224260:
+/* 8022425C 00220E3C  48 00 00 1C */	b grTGameWatch_80224278
+grTGameWatch_80224260:
 /* 80224260 00220E40  38 DC 00 00 */	addi r6, r28, 0
 /* 80224264 00220E44  4C C6 31 82 */	crclr 6
 /* 80224268 00220E48  38 7F 00 90 */	addi r3, r31, 0x90
 /* 8022426C 00220E4C  38 9F 00 B4 */	addi r4, r31, 0xb4
 /* 80224270 00220E50  38 A0 00 C3 */	li r5, 0xc3
 /* 80224274 00220E54  48 12 14 35 */	bl OSReport
-lbl_80224278:
+grTGameWatch_80224278:
 /* 80224278 00220E58  7F C3 F3 78 */	mr r3, r30
 /* 8022427C 00220E5C  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 80224280 00220E60  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -118,8 +118,8 @@ lbl_80224278:
 /* 80224290 00220E70  38 21 00 20 */	addi r1, r1, 0x20
 /* 80224294 00220E74  7C 08 03 A6 */	mtlr r0
 /* 80224298 00220E78  4E 80 00 20 */	blr
-.global lbl_8022429C
-lbl_8022429C:
+.global grTGameWatch_8022429C
+grTGameWatch_8022429C:
 /* 8022429C 00220E7C  7C 08 02 A6 */	mflr r0
 /* 802242A0 00220E80  38 A0 00 00 */	li r5, 0
 /* 802242A4 00220E84  90 01 00 04 */	stw r0, 4(r1)
@@ -131,18 +131,18 @@ lbl_8022429C:
 /* 802242BC 00220E9C  38 21 00 08 */	addi r1, r1, 8
 /* 802242C0 00220EA0  7C 08 03 A6 */	mtlr r0
 /* 802242C4 00220EA4  4E 80 00 20 */	blr
-.global lbl_802242C8
-lbl_802242C8:
+.global grTGameWatch_802242C8
+grTGameWatch_802242C8:
 /* 802242C8 00220EA8  38 60 00 00 */	li r3, 0
 /* 802242CC 00220EAC  4E 80 00 20 */	blr
-.global lbl_802242D0
-lbl_802242D0:
+.global grTGameWatch_802242D0
+grTGameWatch_802242D0:
 /* 802242D0 00220EB0  4E 80 00 20 */	blr
-.global lbl_802242D4
-lbl_802242D4:
+.global grTGameWatch_802242D4
+grTGameWatch_802242D4:
 /* 802242D4 00220EB4  4E 80 00 20 */	blr
-.global lbl_802242D8
-lbl_802242D8:
+.global grTGameWatch_802242D8
+grTGameWatch_802242D8:
 /* 802242D8 00220EB8  7C 08 02 A6 */	mflr r0
 /* 802242DC 00220EBC  90 01 00 04 */	stw r0, 4(r1)
 /* 802242E0 00220EC0  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -163,12 +163,12 @@ lbl_802242D8:
 /* 8022431C 00220EFC  38 21 00 20 */	addi r1, r1, 0x20
 /* 80224320 00220F00  7C 08 03 A6 */	mtlr r0
 /* 80224324 00220F04  4E 80 00 20 */	blr
-.global lbl_80224328
-lbl_80224328:
+.global grTGameWatch_80224328
+grTGameWatch_80224328:
 /* 80224328 00220F08  38 60 00 00 */	li r3, 0
 /* 8022432C 00220F0C  4E 80 00 20 */	blr
-.global lbl_80224330
-lbl_80224330:
+.global grTGameWatch_80224330
+grTGameWatch_80224330:
 /* 80224330 00220F10  7C 08 02 A6 */	mflr r0
 /* 80224334 00220F14  90 01 00 04 */	stw r0, 4(r1)
 /* 80224338 00220F18  94 21 FF E8 */	stwu r1, -0x18(r1)
@@ -182,11 +182,11 @@ lbl_80224330:
 /* 80224358 00220F38  38 21 00 18 */	addi r1, r1, 0x18
 /* 8022435C 00220F3C  7C 08 03 A6 */	mtlr r0
 /* 80224360 00220F40  4E 80 00 20 */	blr
-.global lbl_80224364
-lbl_80224364:
+.global grTGameWatch_80224364
+grTGameWatch_80224364:
 /* 80224364 00220F44  4E 80 00 20 */	blr
-.global lbl_80224368
-lbl_80224368:
+.global grTGameWatch_80224368
+grTGameWatch_80224368:
 /* 80224368 00220F48  7C 08 02 A6 */	mflr r0
 /* 8022436C 00220F4C  90 01 00 04 */	stw r0, 4(r1)
 /* 80224370 00220F50  94 21 FF E0 */	stwu r1, -0x20(r1)
@@ -207,12 +207,12 @@ lbl_80224368:
 /* 802243AC 00220F8C  38 21 00 20 */	addi r1, r1, 0x20
 /* 802243B0 00220F90  7C 08 03 A6 */	mtlr r0
 /* 802243B4 00220F94  4E 80 00 20 */	blr
-.global lbl_802243B8
-lbl_802243B8:
+.global grTGameWatch_802243B8
+grTGameWatch_802243B8:
 /* 802243B8 00220F98  38 60 00 00 */	li r3, 0
 /* 802243BC 00220F9C  4E 80 00 20 */	blr
-.global lbl_802243C0
-lbl_802243C0:
+.global grTGameWatch_802243C0
+grTGameWatch_802243C0:
 /* 802243C0 00220FA0  7C 08 02 A6 */	mflr r0
 /* 802243C4 00220FA4  90 01 00 04 */	stw r0, 4(r1)
 /* 802243C8 00220FA8  94 21 FF F8 */	stwu r1, -8(r1)
@@ -221,15 +221,15 @@ lbl_802243C0:
 /* 802243D4 00220FB4  38 21 00 08 */	addi r1, r1, 8
 /* 802243D8 00220FB8  7C 08 03 A6 */	mtlr r0
 /* 802243DC 00220FBC  4E 80 00 20 */	blr
-.global lbl_802243E0
-lbl_802243E0:
+.global grTGameWatch_802243E0
+grTGameWatch_802243E0:
 /* 802243E0 00220FC0  4E 80 00 20 */	blr
-.global lbl_802243E4
-lbl_802243E4:
+.global grTGameWatch_802243E4
+grTGameWatch_802243E4:
 /* 802243E4 00220FC4  38 60 00 00 */	li r3, 0
 /* 802243E8 00220FC8  4E 80 00 20 */	blr
-.global lbl_802243EC
-lbl_802243EC:
+.global grTGameWatch_802243EC
+grTGameWatch_802243EC:
 /* 802243EC 00220FCC  38 60 00 01 */	li r3, 1
 /* 802243F0 00220FD0  4E 80 00 20 */	blr
 
@@ -238,20 +238,20 @@ lbl_802243EC:
     .balign 8
 .global lbl_803E96F8
 lbl_803E96F8:
-    .4byte lbl_8022429C
-    .4byte lbl_802242C8
-    .4byte lbl_802242D0
-    .4byte lbl_802242D4
+    .4byte grTGameWatch_8022429C
+    .4byte grTGameWatch_802242C8
+    .4byte grTGameWatch_802242D0
+    .4byte grTGameWatch_802242D4
     .4byte NULL
-    .4byte lbl_80224368
-    .4byte lbl_802243B8
-    .4byte lbl_802243C0
-    .4byte lbl_802243E0
+    .4byte grTGameWatch_80224368
+    .4byte grTGameWatch_802243B8
+    .4byte grTGameWatch_802243C0
+    .4byte grTGameWatch_802243E0
     .4byte NULL
-    .4byte lbl_802242D8
-    .4byte lbl_80224328
-    .4byte lbl_80224330
-    .4byte lbl_80224364
+    .4byte grTGameWatch_802242D8
+    .4byte grTGameWatch_80224328
+    .4byte grTGameWatch_80224330
+    .4byte grTGameWatch_80224364
     .4byte 0xC0000000
     .4byte NULL
     .4byte NULL
@@ -267,13 +267,13 @@ lbl_803E9754:
     .4byte 0x0000003F
     .4byte lbl_803E96F8
     .4byte lbl_803E9748
-    .4byte lbl_80224114
-    .4byte func_80224110
-    .4byte lbl_80224184
-    .4byte lbl_80224188
-    .4byte lbl_802241AC
-    .4byte lbl_802243E4
-    .4byte lbl_802243EC
+    .4byte grTGameWatch_80224114
+    .4byte grTGameWatch_80224110
+    .4byte grTGameWatch_80224184
+    .4byte grTGameWatch_80224188
+    .4byte grTGameWatch_802241AC
+    .4byte grTGameWatch_802243E4
+    .4byte grTGameWatch_802243EC
     .4byte 0x00000001
     .4byte NULL
     .4byte NULL
