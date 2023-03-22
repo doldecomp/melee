@@ -873,7 +873,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     fp->x890_cameraBox = func_80029020();
 
     jobj = GET_JOBJ(gobj);
-    func_8000ED54(&fp->x20A4, jobj);
+    lbShadow_8000ED54(&fp->x20A4, jobj);
     func_8038FD54(gobj, &Fighter_8006A1BC, 0);
     func_8038FD54(gobj, &Fighter_8006A360, 1);
     func_8038FD54(gobj, &Fighter_8006ABA0, 2);
@@ -3106,7 +3106,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     ft_8009E0D4(fp);
     ftColl_800765AC(fp->gobj);
     ft_80088C5C(fp->gobj);
-    func_8000EE8C(&fp->x20A4);
+    lbShadow_8000EE8C(&fp->x20A4);
 
     if (fp->x20A0_accessory) {
         HSD_JObjRemoveAll(fp->x20A0_accessory);

@@ -4056,7 +4056,7 @@ void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
     f32 y0;
 
     splGetSplinePoint(arg1, arg0);
-    func_8000E9F0(&vec0, arg0, arg8);
+    lbShadow_8000E9F0(&vec0, arg0, arg8);
     lbVector_Normalize(&vec0);
     y0 = vec0.y;
 
