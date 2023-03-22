@@ -348,63 +348,63 @@ void Stage_802251B4(InternalStageId idx, s32 arg1)
 
 void Stage_802251E8(InternalStageId idx, s32* _)
 {
-    StructPairWithStageID local_data;
+    StructPairWithStageID lbl_data;
 
     unk_struct_804D49E8.list_idx = idx;
     unk_struct_804D49E8.unk_struct = &unk_arr_803E9960[idx];
 
-    local_data = unk_struct_804D49F0;
+    lbl_data = unk_struct_804D49F0;
 
-    local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = unk_struct_804D49E8.list_idx;
+    lbl_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
+    lbl_data.list_idx = unk_struct_804D49E8.list_idx;
 
-    Ground_801C0754(&local_data);
+    Ground_801C0754(&lbl_data);
 }
 
 void Stage_8022524C(void)
 {
-    StructPairWithStageID local_data;
+    StructPairWithStageID lbl_data;
 
-    local_data = unk_struct_804D49F0;
+    lbl_data = unk_struct_804D49F0;
 
-    local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = unk_struct_804D49E8.list_idx;
+    lbl_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
+    lbl_data.list_idx = unk_struct_804D49E8.list_idx;
 
-    Ground_801C0800(&local_data);
+    Ground_801C0800(&lbl_data);
 }
 
 void Stage_80225298(void)
 {
-    StructPairWithStageID local_data;
+    StructPairWithStageID lbl_data;
 
-    local_data = unk_struct_804D49F0;
+    lbl_data = unk_struct_804D49F0;
 
-    local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = unk_struct_804D49E8.list_idx;
+    lbl_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
+    lbl_data.list_idx = unk_struct_804D49E8.list_idx;
 
-    Ground_801C0F78(&local_data);
+    Ground_801C0F78(&lbl_data);
 }
 
 void Stage_802252E4(InternalStageId idx, HSD_GObj* _)
 {
-    StructPairWithStageID local_data;
+    StructPairWithStageID lbl_data;
 
-    local_data = unk_struct_804D49F0;
+    lbl_data = unk_struct_804D49F0;
 
-    local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = idx;
+    lbl_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
+    lbl_data.list_idx = idx;
 
-    Ground_801C0FB8(&local_data);
+    Ground_801C0FB8(&lbl_data);
 }
 
 void Stage_8022532C(InternalStageId idx, s32 arg1)
 {
-    StructPairWithStageID local_data;
+    StructPairWithStageID lbl_data;
 
-    local_data = unk_struct_804D49F0;
+    lbl_data = unk_struct_804D49F0;
 
-    local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
-    local_data.list_idx = idx;
+    lbl_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
+    lbl_data.list_idx = idx;
 
-    Ground_801C1074(&local_data, arg1);
+    Ground_801C1074(&lbl_data, arg1);
 }

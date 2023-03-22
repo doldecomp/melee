@@ -89,10 +89,10 @@ lbl_8002235C:
 /* 80022384 0001EF64  38 A0 00 03 */	li r5, 3
 /* 80022388 0001EF68  38 C0 00 20 */	li r6, 0x20
 /* 8002238C 0001EF6C  38 E0 00 20 */	li r7, 0x20
-/* 80022390 0001EF70  4B FF FE 0D */	bl local_8002219C
+/* 80022390 0001EF70  4B FF FE 0D */	bl lbl_8002219C
 /* 80022394 0001EF74  38 61 00 0C */	addi r3, r1, 0xc
 /* 80022398 0001EF78  38 98 00 00 */	addi r4, r24, 0
-/* 8002239C 0001EF7C  4B FF F9 4D */	bl local_80021CE8
+/* 8002239C 0001EF7C  4B FF F9 4D */	bl lbl_80021CE8
 /* 800223A0 0001EF80  80 BA 00 00 */	lwz r5, 0(r26)
 /* 800223A4 0001EF84  38 7E 00 F4 */	addi r3, r30, 0xf4
 /* 800223A8 0001EF88  80 9E 00 48 */	lwz r4, 0x48(r30)
@@ -296,7 +296,7 @@ lbl_80022608:
 /* 8002264C 0001F22C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/BDJjp
-local_80022650:
+lbl_80022650:
 /* 80022650 0001F230  7C 08 02 A6 */	mflr r0
 /* 80022654 0001F234  3C 60 80 3C */	lis r3, struct_803BB0B0@ha
 /* 80022658 0001F238  90 01 00 04 */	stw r0, 4(r1)
@@ -520,7 +520,7 @@ lbl_8002292C:
 /* 8002293C 0001F51C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/iVwXp
-local_80022940:
+lbl_80022940:
 /* 80022940 0001F520  7C 08 02 A6 */	mflr r0
 /* 80022944 0001F524  3C 60 80 3C */	lis r3, struct_803BB0B0@ha
 /* 80022948 0001F528  90 01 00 04 */	stw r0, 4(r1)
@@ -793,7 +793,7 @@ struct_803BB194:
     .balign 4
     .asciz "lbRefData"
     .balign 4
-    .4byte local_80022650
+    .4byte lbl_80022650
     .4byte NULL
     .4byte NULL
     .4byte NULL
@@ -810,7 +810,7 @@ struct_803BB194:
     .4byte NULL
     .4byte NULL
     .4byte NULL
-    .4byte local_80022940
+    .4byte lbl_80022940
     .4byte NULL
     .4byte NULL
     .4byte NULL

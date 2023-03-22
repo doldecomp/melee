@@ -3,7 +3,7 @@
 .section .text
 
 # https://decomp.me/scratch/uF4oA
-local_8001E560:
+lbl_8001E560:
 /* 8001E560 0001B140  7C 08 02 A6 */	mflr r0
 /* 8001E564 0001B144  90 01 00 04 */	stw r0, 4(r1)
 /* 8001E568 0001B148  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -54,7 +54,7 @@ lbl_8001E5E4:
 
 
 # https://decomp.me/scratch/JF7uV
-local_8001E60C:
+lbl_8001E60C:
 /* 8001E60C 0001B1EC  7C 08 02 A6 */	mflr r0
 /* 8001E610 0001B1F0  90 01 00 04 */	stw r0, 4(r1)
 /* 8001E614 0001B1F4  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -143,7 +143,7 @@ lbl_8001E714:
 /* 8001E738 0001B318  48 34 6B F5 */	bl HSD_AObjSetEndFrame
 /* 8001E73C 0001B31C  38 7D 00 00 */	addi r3, r29, 0
 /* 8001E740 0001B320  38 9E 00 00 */	addi r4, r30, 0
-/* 8001E744 0001B324  4B FF FE 1D */	bl local_8001E560
+/* 8001E744 0001B324  4B FF FE 1D */	bl lbl_8001E560
 /* 8001E748 0001B328  38 83 00 00 */	addi r4, r3, 0
 /* 8001E74C 0001B32C  38 7F 00 00 */	addi r3, r31, 0
 /* 8001E750 0001B330  48 34 59 05 */	bl HSD_AObjSetFObj
@@ -222,7 +222,7 @@ lbl_8001E824:
 /* 8001E848 0001B428  48 34 6A E5 */	bl HSD_AObjSetEndFrame
 /* 8001E84C 0001B42C  38 7D 00 00 */	addi r3, r29, 0
 /* 8001E850 0001B430  38 9E 00 00 */	addi r4, r30, 0
-/* 8001E854 0001B434  4B FF FD B9 */	bl local_8001E60C
+/* 8001E854 0001B434  4B FF FD B9 */	bl lbl_8001E60C
 /* 8001E858 0001B438  38 83 00 00 */	addi r4, r3, 0
 /* 8001E85C 0001B43C  38 7F 00 00 */	addi r3, r31, 0
 /* 8001E860 0001B440  48 34 57 F5 */	bl HSD_AObjSetFObj

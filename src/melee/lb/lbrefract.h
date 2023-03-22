@@ -49,7 +49,7 @@ typedef struct _RefractCallbackData {
 
 } RefractCallbackData;
 
-void local_80021CE8(void*, s32);
+void lbl_80021CE8(void*, s32);
 
 extern RefractCallbackTypeA callback_80021F34;
 extern RefractCallbackTypeA callback_80021F70;
@@ -61,6 +61,6 @@ extern RefractCallbackTypeC callback_80021FF8;
 extern RefractCallbackTypeC callback_8002206C;
 extern RefractCallbackTypeC callback_80022120;
 
-s32 local_8002219C(RefractCallbackData*, s32, u32, u16, u16);
+s32 lbl_8002219C(RefractCallbackData*, s32, u32, u16, u16);
 
 #endif

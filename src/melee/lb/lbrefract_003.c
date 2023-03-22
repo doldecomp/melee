@@ -58,7 +58,7 @@ f32 atan2f(f32 y, f32 x)
     return y;
 }
 
-static f32 local_80022DF8(f32);
+static f32 lbl_80022DF8(f32);
 f32 atanf(f32);
 
 #if MUST_MATCH
@@ -119,7 +119,7 @@ lbl_80022D9C:
 f32 acosf(f32 x)
 {
     f32 result = -(x * x - ONE);
-    result = local_80022DF8(result) * x;
+    result = lbl_80022DF8(result) * x;
     result = atanf(result);
     result = PI_2 - result;
     return result;
@@ -129,10 +129,10 @@ f32 acosf(f32 x)
 
 f32 asinf(f32 x)
 {
-    return atanf(x * local_80022DF8(-(x * x - ONE)));
+    return atanf(x * lbl_80022DF8(-(x * x - ONE)));
 }
 
-static inline f32 local_80022DF8(f32 x)
+static inline f32 lbl_80022DF8(f32 x)
 {
     if (x > ZERO) {
         f32 guess;
