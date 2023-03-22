@@ -61,7 +61,10 @@ pub struct GPRTracker<'a> {
 }
 
 impl<'a> GPRTracker<'a> {
-    pub fn new(symbols: &'a mut BTreeMap<u32, Symbol>, detect_functions: bool) -> Self {
+    pub fn new(
+        symbols: &'a mut BTreeMap<u32, Symbol>,
+        detect_functions: bool,
+    ) -> Self {
         let mut data = Self {
             r2_addr: 0,
             r13_addr: 0,
@@ -81,14 +84,24 @@ impl<'a> GPRTracker<'a> {
         self.ins_labels.insert(ins, label);
     }
 
-    pub fn analyze_text_section(&mut self, dol_file: &Dol, code: &[u8], code_address: u32) {
+    pub fn analyze_text_section(
+        &mut self,
+        dol_file: &Dol,
+        code: &[u8],
+        code_address: u32,
+    ) {
         // register -> value
         let mut registers = BTreeMap::<u32, u32>::new();
         // register -> `lis` instruction address
         let mut lis_address = BTreeMap::<u32, u32>::new();
 
         for ins in ppc750cl::disasm_iter(code, code_address) {
-            self.track_ins_register(dol_file, &ins, &mut registers, &mut lis_address);
+            self.track_ins_register(
+                dol_file,
+                &ins,
+                &mut registers,
+                &mut lis_address,
+            );
         }
     }
 
@@ -113,7 +126,10 @@ impl<'a> GPRTracker<'a> {
                 {
                     self.label_names.insert(
                         branch_dest,
-                        Symbol::with_name(format!("func_{:08X}", branch_dest), branch_dest),
+                        Symbol::with_name(
+                            format!("func_{:08X}", branch_dest),
+                            branch_dest,
+                        ),
                     );
                 }
             }
@@ -124,7 +140,8 @@ impl<'a> GPRTracker<'a> {
             lis_address.insert(r_d, ins.addr);
         } else if self.is_low_addi(ins, registers)
             || self.is_low_ori(ins, registers)
-            || (is_load_store(ins) && registers.contains_key(&(ins.field_rA() as u32)))
+            || (is_load_store(ins)
+                && registers.contains_key(&(ins.field_rA() as u32)))
         {
             // Detect split load (low part)
             // addi rD, rA, simm
@@ -167,7 +184,11 @@ impl<'a> GPRTracker<'a> {
                 self.labels.insert(target_address);
 
                 if !self.label_names.contains_key(&target_address)
-                    && !is_label_addr_in_src_section(dol_file, target_address, ins.addr)
+                    && !is_label_addr_in_src_section(
+                        dol_file,
+                        target_address,
+                        ins.addr,
+                    )
                 {
                     self.label_names.insert(
                         target_address.clone(),
@@ -245,9 +266,15 @@ impl<'a> GPRTracker<'a> {
         }
     }
 
-    pub fn analyze_data_section(&mut self, dol_file: &Dol, data: &[u8], data_address: u32) {
+    pub fn analyze_data_section(
+        &mut self,
+        dol_file: &Dol,
+        data: &[u8],
+        data_address: u32,
+    ) {
         let data_address_end = data_address + data.len() as u32;
-        let mut section_labels = SectionLabels::from(data_address, data_address_end, &self.labels);
+        let mut section_labels =
+            SectionLabels::from(data_address, data_address_end, &self.labels);
 
         let mut offset = 0u32;
         while (offset as usize) < data.len() {
@@ -261,7 +288,8 @@ impl<'a> GPRTracker<'a> {
             }
 
             let mut label_pos = 0u32;
-            let label_data = &data[offset as usize..(offset + label_size) as usize];
+            let label_data =
+                &data[offset as usize..(offset + label_size) as usize];
             while label_pos < label_size {
                 let unaligned = align(data_address + offset + label_pos, 4)
                     - (data_address + offset + label_pos);
@@ -292,8 +320,10 @@ impl<'a> GPRTracker<'a> {
                             data_address + offset + label_pos,
                         )
                     {
-                        self.label_names
-                            .insert(word, Symbol::with_name(self.get_label_for(word), word));
+                        self.label_names.insert(
+                            word,
+                            Symbol::with_name(self.get_label_for(word), word),
+                        );
                     }
                 }
 
@@ -320,7 +350,8 @@ impl<'a> GPRTracker<'a> {
                 .filter(|s| {
                     s.size > 0
                         && s.virtual_address >= code_address
-                        && s.virtual_address + s.size < code_address + code.len() as u32
+                        && s.virtual_address + s.size
+                            < code_address + code.len() as u32
                 })
                 .collect()
         } else {
@@ -328,9 +359,9 @@ impl<'a> GPRTracker<'a> {
         };
 
         let get_symbol = |addr: u32| {
-            code_symbols
-                .iter()
-                .find(|s| addr >= s.virtual_address && addr < s.virtual_address + s.size)
+            code_symbols.iter().find(|s| {
+                addr >= s.virtual_address && addr < s.virtual_address + s.size
+            })
         };
 
         let mut skip_count = 0u32;
@@ -356,7 +387,11 @@ impl<'a> GPRTracker<'a> {
 
             if self.labels.contains(&ins_addr) {
                 if self.label_names.contains_key(&ins_addr) {
-                    writeln!(dst, "\n.global {}", self.get_label_for(ins_addr))?;
+                    writeln!(
+                        dst,
+                        "\n.global {}",
+                        self.get_label_for(ins_addr)
+                    )?;
                 }
 
                 writeln!(dst, "{}:", self.get_label_for(ins_addr))?;
@@ -384,7 +419,10 @@ impl<'a> GPRTracker<'a> {
         Ok(())
     }
 
-    fn format_instruction(&self, ins: &Ins) -> Result<String, Box<dyn std::error::Error>> {
+    fn format_instruction(
+        &self,
+        ins: &Ins,
+    ) -> Result<String, Box<dyn std::error::Error>> {
         if ins.op == Opcode::Illegal {
             return Ok(if ins.code == 0 {
                 // Most likely alignment bytes
@@ -494,7 +532,8 @@ impl<'a> GPRTracker<'a> {
     {
         let data_address_end = data_address + data.len() as u32;
 
-        let mut section_labels = SectionLabels::from(data_address, data_address_end, &self.labels);
+        let mut section_labels =
+            SectionLabels::from(data_address, data_address_end, &self.labels);
 
         let data_symbols = if remove_symbols_data {
             self.label_names
@@ -510,9 +549,9 @@ impl<'a> GPRTracker<'a> {
         };
 
         let get_symbol = |addr: u32| {
-            data_symbols
-                .iter()
-                .find(|s| addr >= s.virtual_address && addr < s.virtual_address + s.size)
+            data_symbols.iter().find(|s| {
+                addr >= s.virtual_address && addr < s.virtual_address + s.size
+            })
         };
 
         let mut offset = 0u32;
@@ -531,7 +570,8 @@ impl<'a> GPRTracker<'a> {
                 {
                     section_labels.label_access_index += next_label_pos;
                 } else {
-                    section_labels.label_access_index = section_labels.labels.len()
+                    section_labels.label_access_index =
+                        section_labels.labels.len()
                 }
 
                 continue;
@@ -554,22 +594,35 @@ impl<'a> GPRTracker<'a> {
             if label_size == 1 {
                 writeln!(dst, "\t.byte 0x{:02X}", data[offset as usize])?;
             } else if label_size == 2 {
-                writeln!(dst, "\t.2byte 0x{:04X}", read_u16(data, offset as usize))?;
+                writeln!(
+                    dst,
+                    "\t.2byte 0x{:04X}",
+                    read_u16(data, offset as usize)
+                )?;
             } else {
                 // size > 2
                 let mut label_pos = 0u32;
-                let label_data = &data[offset as usize..(offset + label_size) as usize];
+                let label_data =
+                    &data[offset as usize..(offset + label_size) as usize];
                 while label_pos < label_size {
                     let section_off = label_address + label_pos;
                     let diff = align(section_off, 4) - section_off;
                     if diff > 0 {
-                        let pad_end = std::cmp::min(label_pos + diff, label_size);
-                        let pad = &label_data[label_pos as usize..pad_end as usize];
+                        let pad_end =
+                            std::cmp::min(label_pos + diff, label_size);
+                        let pad =
+                            &label_data[label_pos as usize..pad_end as usize];
 
-                        if pad.len() as u32 == diff && pad.iter().all(|&v| v == 0x0u8) {
+                        if pad.len() as u32 == diff
+                            && pad.iter().all(|&v| v == 0x0u8)
+                        {
                             writeln!(dst, "\t.balign 4")?;
                         } else {
-                            writeln!(dst, "\t.byte {}", hex_string(pad).unwrap())?;
+                            writeln!(
+                                dst,
+                                "\t.byte {}",
+                                hex_string(pad).unwrap()
+                            )?;
                         }
 
                         label_pos += pad.len() as u32;
@@ -590,12 +643,20 @@ impl<'a> GPRTracker<'a> {
                         if word == 0 {
                             writeln!(dst, "\t.4byte 0")?;
                         } else {
-                            writeln!(dst, "\t.4byte {}", self.get_label_for(word))?;
+                            writeln!(
+                                dst,
+                                "\t.4byte {}",
+                                self.get_label_for(word)
+                            )?;
                         }
                     } else {
                         let end_slice = &label_data[label_pos as usize..];
                         if end_slice.len() > 0 {
-                            writeln!(dst, "\t.byte {}", hex_string(end_slice).unwrap())?;
+                            writeln!(
+                                dst,
+                                "\t.byte {}",
+                                hex_string(end_slice).unwrap()
+                            )?;
                             label_pos += end_slice.len() as u32;
                             assert_eq!(label_pos, label_size);
                         }
@@ -620,7 +681,8 @@ impl<'a> GPRTracker<'a> {
         W: IoWrite,
     {
         let data_address_end = data_address + section_size;
-        let mut section_labels = SectionLabels::from(data_address, data_address_end, &self.labels);
+        let mut section_labels =
+            SectionLabels::from(data_address, data_address_end, &self.labels);
 
         let mut offset = 0u32;
         while offset < section_size {
@@ -649,7 +711,9 @@ impl<'a> GPRTracker<'a> {
     #[inline]
     fn is_low_addi(&self, ins: &Ins, registers: &BTreeMap<u32, u32>) -> bool {
         let field_r_a = ins.field_rA() as u32;
-        return ins.op == Opcode::Addi && field_r_a != 0 && registers.contains_key(&field_r_a);
+        return ins.op == Opcode::Addi
+            && field_r_a != 0
+            && registers.contains_key(&field_r_a);
     }
 
     #[inline]
@@ -672,7 +736,11 @@ struct SectionLabels {
 }
 
 impl SectionLabels {
-    pub fn from(section_start: u32, section_end: u32, labels: &BTreeSet<u32>) -> Self {
+    pub fn from(
+        section_start: u32,
+        section_end: u32,
+        labels: &BTreeSet<u32>,
+    ) -> Self {
         Self {
             section_end,
             labels: labels
@@ -686,12 +754,15 @@ impl SectionLabels {
 
     /// @return u32 - size of the current label
     pub fn get_label_size(&mut self, label_address: u32) -> u32 {
-        if let Some(&nearest_label) = self.labels.get(self.label_access_index) {
+        if let Some(&nearest_label) = self.labels.get(self.label_access_index)
+        {
             if label_address == nearest_label {
                 // Find the next nearest label so we can, calculate the size
                 self.label_access_index += 1;
 
-                if let Some(&next_nearest_label) = self.labels.get(self.label_access_index) {
+                if let Some(&next_nearest_label) =
+                    self.labels.get(self.label_access_index)
+                {
                     assert!(next_nearest_label > label_address);
                     // Gap between labels
                     next_nearest_label - label_address
@@ -824,7 +895,11 @@ pub fn combine_split_load_value(mut hi_addr: u32, lo_load: &Ins) -> u32 {
 }
 
 // Check if label address belong to the same section than the instruction
-pub fn is_label_addr_in_src_section(dol: &Dol, label_addr: u32, src_addr: u32) -> bool {
+pub fn is_label_addr_in_src_section(
+    dol: &Dol,
+    label_addr: u32,
+    src_addr: u32,
+) -> bool {
     for section in &dol.header.sections {
         let start = section.target;
         let size = section.size;

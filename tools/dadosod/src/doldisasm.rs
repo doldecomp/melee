@@ -21,7 +21,7 @@ pub struct DolCmd {
     dol_file_path: PathBuf,
 
     /// path to where every thing would be placed (assembly file, lfc, etc..)
-    #[argh(option, short='o')]
+    #[argh(option, short = 'o')]
     output_path: Option<PathBuf>,
 
     /// path of the map file
@@ -46,7 +46,8 @@ impl DolCmd {
         let section_name_map = calculate_section_names(&mut dol_file);
         assert_eq!(section_name_map.len(), dol_file.header.sections.len());
 
-        let mut symbols_map = if let Some(map_file_path) = &self.map_file_path {
+        let mut symbols_map = if let Some(map_file_path) = &self.map_file_path
+        {
             let map_file = File::open(&map_file_path)?;
             print!("Reading Symbols .. ");
             let map = Symbol::from_csv(map_file)?;
@@ -56,7 +57,10 @@ impl DolCmd {
             let mut map = BTreeMap::default();
             map.insert(
                 dol_file.header.entry_point,
-                Symbol::with_name("__start".into(), dol_file.header.entry_point),
+                Symbol::with_name(
+                    "__start".into(),
+                    dol_file.header.entry_point,
+                ),
             );
             map
         };
@@ -76,15 +80,24 @@ impl DolCmd {
         }
 
         // Analyse sections
-        let mut tracker = GPRTracker::new(&mut symbols_map, self.detect_functions);
+        let mut tracker =
+            GPRTracker::new(&mut symbols_map, self.detect_functions);
 
         for section in &dol_file.header.sections {
             let section_data = dol_file.section_data(section);
 
             if section.kind == DolSectionType::Text {
-                tracker.analyze_text_section(&dol_file, &section_data, section.target);
+                tracker.analyze_text_section(
+                    &dol_file,
+                    &section_data,
+                    section.target,
+                );
             } else if section.kind == DolSectionType::Data {
-                tracker.analyze_data_section(&dol_file, &section_data, section.target);
+                tracker.analyze_data_section(
+                    &dol_file,
+                    &section_data,
+                    section.target,
+                );
             }
         }
 
@@ -105,7 +118,12 @@ impl DolCmd {
         {
             println!("\nWriting Macro File");
             let mut macro_file = create_file(&include_path.join("macros.s"))?;
-            write_macro_file(&mut macro_file, &dol_file, &section_name_map, &tracker)?;
+            write_macro_file(
+                &mut macro_file,
+                &dol_file,
+                &section_name_map,
+                &tracker,
+            )?;
         }
 
         let grouped_symbols = if self.write_translation_unit {
@@ -114,10 +132,14 @@ impl DolCmd {
                 |mut init: HashMap<String, Vec<&Symbol>>, ref item| {
                     if let Some(translation_unit) = &item.translation_unit {
                         if !translation_unit.is_empty() && item.size > 0 {
-                            if let Some(entry) = init.get_mut(translation_unit) {
+                            if let Some(entry) = init.get_mut(translation_unit)
+                            {
                                 entry.push(item);
                             } else {
-                                init.insert(translation_unit.clone(), vec![*item]);
+                                init.insert(
+                                    translation_unit.clone(),
+                                    vec![*item],
+                                );
                             }
                         }
                     }
@@ -128,7 +150,8 @@ impl DolCmd {
             HashMap::new()
         };
 
-        let remove_symbols_data = self.write_translation_unit && grouped_symbols.len() > 0;
+        let remove_symbols_data =
+            self.write_translation_unit && grouped_symbols.len() > 0;
 
         if grouped_symbols.len() > 0 {
             println!("\nWriting Translation Units");
@@ -144,7 +167,10 @@ impl DolCmd {
 
                 let mut last_section_index = -1i32;
                 for symbol in symbols {
-                    let section = dol_file.header.section_at(symbol.virtual_address).unwrap();
+                    let section = dol_file
+                        .header
+                        .section_at(symbol.virtual_address)
+                        .unwrap();
 
                     if section.kind == DolSectionType::Bss {
                         continue;
@@ -160,12 +186,19 @@ impl DolCmd {
                     if last_section_index != si as i32 {
                         let section_flags = get_section_flags(section.kind);
                         let section_name = &section_name_map[&si];
-                        writeln!(tu_file, ".section {}, {}", section_name, section_flags)?;
+                        writeln!(
+                            tu_file,
+                            ".section {}, {}",
+                            section_name, section_flags
+                        )?;
                     }
 
                     last_section_index = si as i32;
 
-                    let data = dol_file.virtual_data_at(symbol.virtual_address, symbol.size)?;
+                    let data = dol_file.virtual_data_at(
+                        symbol.virtual_address,
+                        symbol.size,
+                    )?;
                     match section.kind {
                         DolSectionType::Text => tracker.write_text_section(
                             &mut tu_file,
@@ -192,7 +225,8 @@ impl DolCmd {
         println!("\nWriting Sections Files");
         for (si, section) in dol_file.header.sections.iter().enumerate() {
             let section_name = &section_name_map[&si];
-            let section_file_name = format!("{}.s", section_name.replace(".", ""));
+            let section_file_name =
+                format!("{}.s", section_name.replace(".", ""));
             let section_file_path = asm_path.join(&section_file_name);
             let mut section_file = create_file(&section_file_path)?;
             let start = section.target;
@@ -225,14 +259,23 @@ impl DolCmd {
                     section.offset,
                     remove_symbols_data,
                 )?,
-                DolSectionType::Bss => tracker.write_bss_section(&mut section_file, size, start)?,
+                DolSectionType::Bss => tracker.write_bss_section(
+                    &mut section_file,
+                    size,
+                    start,
+                )?,
             }
         }
 
         {
             println!("\nWriting Linker Script");
-            let mut linker_script_file = create_file(output_path.join("ldscript.lcf"))?;
-            write_linker_script_file(&mut linker_script_file, &dol_file, &section_name_map)?;
+            let mut linker_script_file =
+                create_file(output_path.join("ldscript.lcf"))?;
+            write_linker_script_file(
+                &mut linker_script_file,
+                &dol_file,
+                &section_name_map,
+            )?;
         }
 
         println!("Finished");
@@ -477,7 +520,8 @@ fn calculate_section_names(dol_file: &mut Dol) -> BTreeMap<usize, String> {
         .position(|s| s.kind == DolSectionType::Bss)
         .unwrap();
 
-    let section_after_bss_count = sections.iter().skip(bss_section_index + 1).count();
+    let section_after_bss_count =
+        sections.iter().skip(bss_section_index + 1).count();
 
     if section_after_bss_count == 2 {
         // The Wii/GC SDK generate a little bit of content for the `.sdata` and `.sdata2` section
@@ -589,11 +633,12 @@ fn calculate_section_names(dol_file: &mut Dol) -> BTreeMap<usize, String> {
         //     [2] .extabindex (optional)
         //     [3] .text (required)
 
-        let text_section_index = if sections[init_section_index + 1].kind == DolSectionType::Text {
-            init_section_index + 1
-        } else {
-            init_section_index + 3
-        };
+        let text_section_index =
+            if sections[init_section_index + 1].kind == DolSectionType::Text {
+                init_section_index + 1
+            } else {
+                init_section_index + 3
+            };
 
         last_text_section_index = text_section_index;
 
@@ -617,7 +662,8 @@ fn calculate_section_names(dol_file: &mut Dol) -> BTreeMap<usize, String> {
                     // We have to add a `_`, because if manually linking those data section
                     // the linker would throw error because does section are suppose to be auto-generated
                     names_map.insert(init_section_index + 1, "extab_".into());
-                    names_map.insert(init_section_index + 2, "extabindex_".into());
+                    names_map
+                        .insert(init_section_index + 2, "extabindex_".into());
                 } else {
                     println!("WARNING! Unknown section type was found between the two expected data section");
                 }
@@ -625,7 +671,10 @@ fn calculate_section_names(dol_file: &mut Dol) -> BTreeMap<usize, String> {
         } else {
             println!(
                 "WARNING! Unknown Section ({:?}, {:#X}, 0x{:08X}, {:#X})",
-                text_section.kind, text_section.offset, text_section.target, text_section.size
+                text_section.kind,
+                text_section.offset,
+                text_section.target,
+                text_section.size
             );
         }
     } else {
