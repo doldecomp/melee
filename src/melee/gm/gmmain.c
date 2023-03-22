@@ -1,6 +1,6 @@
 #include "gm_A36.h"
 
-#include "db/db_unknown_001.h"
+#include "db/db_253.h"
 #include "gm/gm_601.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lbarq.h"
@@ -158,7 +158,7 @@ int main(void)
     PADInit();
     CARDInit();
     OSInitAlarm();
-    func_80225374();
+    db_80225374();
     gmMain_8015FDA4();
     if (OSGetConsoleSimulatedMemSize() / (1024 * 1024) == 48) {
         OSAllocFromArenaHi(0x01800000, 4);
@@ -168,7 +168,7 @@ int main(void)
     HSD_SetInitParameter(HSD_INIT_RENDER_MODE_OBJ, &GXNtsc480IntDf);
     HSD_SetInitParameter(HSD_INIT_FIFO_SIZE, 0x40000);
     HSD_SetInitParameter(HSD_INIT_HEAP_MAX_NUM, 4);
-    func_80228C4C();
+    db_80228C4C();
     HSD_AllocateXFB(2, &GXNtsc480IntDf);
     HSD_GXSetFifoObj(GXInit(HSD_AllocateFifo(0x40000), 0x40000));
     HSD_InitComponent();
@@ -201,7 +201,7 @@ int main(void)
         }
     }
 
-    func_8022886C();
+    db_8022886C();
     OSReport("# ---------------------------------------------\n");
     OSReport("#    Super Smash Bros. Melee\n");
     OSReport("#\n");
@@ -228,13 +228,13 @@ int main(void)
     OSReport("#\n\n");
     lbl_804D6594 = false;
     if (lbl_804D6594) {
-        func_80225D2C();
+        db_80225D2C();
     } else {
-        func_80225D40();
+        db_80225D40();
     }
 
     init_spr_unk();
 
-    func_80228A64();
+    db_80228A64();
     gm_801A4510();
 }

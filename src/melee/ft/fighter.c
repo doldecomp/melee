@@ -21,7 +21,7 @@
 #include "un_FC9.h"
 
 #include "cm/camera.h"
-#include "db/db_unknown_001.h"
+#include "db/db_253.h"
 #include "ef/efasync.h"
 #include "ftCrazyHand/ftcrazyhand.h"
 #include "ftKirby/ftkirby.h"

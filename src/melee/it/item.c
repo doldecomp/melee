@@ -6,7 +6,7 @@
 #include "item2.h"
 
 #include "cm/camera.h"
-#include "db/db_unknown_001.h"
+#include "db/db_253.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ft/ftlib.h"
@@ -206,9 +206,9 @@ void func_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->jumped_on = NULL;
 
     if (item_data->owner != NULL)
-        func_80225DD8(item_gobj, item_data->owner);
+        db_80225DD8(item_gobj, item_data->owner);
     else
-        func_80225D64(item_gobj, item_data->owner);
+        db_80225D64(item_gobj, item_data->owner);
 
     func_8027B0C4(item_gobj, spawnItem);
     func_80279B64(item_data);
@@ -513,7 +513,7 @@ void func_80267978(HSD_GObj* item_gobj)
     item_data->xBC_itemStateContainer = item_data->xB8_itemLogicTable->states;
 }
 
-extern unk_t func_80225B20(void);
+extern unk_t db_80225B20(void);
 
 /// @private
 void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
@@ -669,7 +669,7 @@ void func_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
 
     item_data->xDAA_byte = 1;
 
-    if (func_80225B20() != NULL)
+    if (db_80225B20() != NULL)
         item_data->xDAA_flag.bits.b4 = true;
 
     if (spawnItem->x0_parent_gobj == NULL) {
@@ -1625,7 +1625,7 @@ bool func_80269F14(HSD_GObj* item_gobj)
         }
     }
 
-    func_80225DD8(item_gobj, temp_item->owner);
+    db_80225DD8(item_gobj, temp_item->owner);
     temp_item->xD90 = temp_item->xC74;
     temp_item->xD94 = temp_item->xC78;
     temp_item->xD9C = temp_item->xC80;
