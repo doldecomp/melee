@@ -39,7 +39,7 @@ void ftMasterHand_80153D2C(HSD_GObj* gobj)
 
     Fighter_ChangeMotionState(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
-    func_8015C208(gobj, &sp1C);
+    ftBossLib_8015C208(gobj, &sp1C);
     fp->cur_pos.x = sp1C.x;
     fp->cur_pos.y = attr->x70;
 
@@ -107,7 +107,7 @@ void ftMasterHand_80154114(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        ftBossLib_8015BD20(arg0);
     }
 }
 
@@ -124,9 +124,9 @@ void ftMasterHand_80154158(HSD_GObj* gobj)
 
     if (--r3_fp->mv.mh.unk0.x0 > 0.0f) {
         ftMasterHand_SpecialAttrs* r4_attributes = r3_fp->ft_data->ext_attr;
-        func_8015BF74(gobj, r4_attributes->x58);
+        ftBossLib_8015BF74(gobj, r4_attributes->x58);
     } else {
         r3_fp->x80_self_vel.x = 0.0f;
     }
-    func_8015C190(gobj);
+    ftBossLib_8015C190(gobj);
 }

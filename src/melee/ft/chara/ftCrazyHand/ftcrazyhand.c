@@ -137,7 +137,7 @@ void ftCrazyhand_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftCrazyHandAttributes);
 
-    func_8015BDB4(gobj);
+    ftBossLib_8015BDB4(gobj);
     func_8026B3F8(items[0], 0x7F);
     func_8026B3F8(items[1], 0x80);
     func_8026B3F8(items[2], 0x81);
@@ -159,14 +159,14 @@ void ftCrazyhand_OnLoad(HSD_GObj* gobj)
     fp->mv.mh.unk0.x40 = -1;
     fp->mv.mh.unk0.x1C = 0.0f;
     fp->mv.mh.unk0.x20 = 0;
-    fp->fv.mh.x222C = func_8015C244(gobj, &fp->cur_pos);
+    fp->fv.mh.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
     fp->fv.mh.x2238 = 1.0f;
     fp->fv.mh.x224C = 0;
     fp->fv.mh.x2250 = 0x159;
     fp->fv.mh.x2254 = 0;
     fp->x1A98 = 1;
-    func_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.ch.x2238,
-                  ftData_attr->x0, ftData_attr->x8, ftData_attr->x4);
+    ftBossLib_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.ch.x2238,
+                       ftData_attr->x0, ftData_attr->x8, ftData_attr->x4);
 }
 
 void ftCrazyHand_LoadSpecialAttrs(HSD_GObj* gobj)

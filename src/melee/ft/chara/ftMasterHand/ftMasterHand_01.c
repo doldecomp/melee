@@ -171,7 +171,7 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj)
 
     PUSH_ATTRS(fp, ftMasterHand_SpecialAttrs);
 
-    func_8015BDB4(gobj);
+    ftBossLib_8015BDB4(gobj);
     func_8026B3F8(items[0], 0x7D);
     func_8026B3F8(items[1], 0x7E);
     fp->x2229_b5_no_normal_motion = 1;
@@ -192,12 +192,12 @@ void ftMasterhand_OnLoad(HSD_GObj* gobj)
     fp->mv.mh.unk0.x30 = -1;
     fp->mv.mh.unk0.x1C = 0.0f;
     fp->mv.mh.unk0.x20 = 0;
-    fp->fv.mh.x222C = func_8015C244(gobj, &fp->cur_pos);
+    fp->fv.mh.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
     fp->fv.mh.x2238 = 1.0f;
     fp->fv.mh.x224C = 0;
     fp->fv.mh.x2250 = 0x15B;
     fp->fv.mh.x2254 = 0;
     fp->x1A98 = 1;
-    func_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.mh.x2238,
-                  ftData_attr->x18, ftData_attr->x20, ftData_attr->x1C);
+    ftBossLib_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.mh.x2238,
+                       ftData_attr->x18, ftData_attr->x20, ftData_attr->x1C);
 }

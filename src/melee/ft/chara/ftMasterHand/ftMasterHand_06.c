@@ -13,7 +13,7 @@ void ftMasterHand_801517B0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!Player_GetPlayerSlotType(fp->xC_playerID))
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
 }
 
 // 801517F4 14E3D4
@@ -50,7 +50,7 @@ void ftMasterHand_801518B0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
@@ -117,7 +117,7 @@ void ftMasterHand_80151A44(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
@@ -130,8 +130,8 @@ void ftMasterHand_80151A88(HSD_GObj* gobj)
 
     r5_fp = gobj->user_data;
     r6_attributes = r5_fp->ft_data->ext_attr;
-    func_8015BE40(gobj, &r5_fp->mv.mh.unk0.xC, &r5_fp->mv.mh.unk0.x18,
-                  r6_attributes->x2C, r6_attributes->x28);
+    ftBossLib_8015BE40(gobj, &r5_fp->mv.mh.unk0.xC, &r5_fp->mv.mh.unk0.x18,
+                       r6_attributes->x2C, r6_attributes->x28);
 }
 
 void ftMasterHand_80151AC4(HSD_GObj* arg0) {}

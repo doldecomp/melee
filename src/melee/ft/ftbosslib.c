@@ -28,17 +28,18 @@ static float get_zero(void)
     return 0.0f;
 }
 
-void func_8015BD20(HSD_GObj* gobj)
+void ftBossLib_8015BD20(HSD_GObj* gobj)
 {
     return;
 }
 
-void func_8015BD24(s32 arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4, s32 arg5)
+void ftBossLib_8015BD24(s32 arg0, f32* arg1, f32 arg2, s32 arg3, s32 arg4,
+                        s32 arg5)
 {
     *arg1 = ((s32) (arg3 / arg0) + HSD_Randi(arg4 - arg5) + arg5) / arg2;
 }
 
-void func_8015BDB4(HSD_GObj* arg0)
+void ftBossLib_8015BDB4(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     Gm_PKind kind = Player_GetPlayerSlotType(fp->xC_playerID);
@@ -85,7 +86,8 @@ static inline float my_lbvector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-void func_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3, f32 arg4)
+void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3,
+                        f32 arg4)
 {
     Fighter* fp = gobj->user_data;
     Vec3 diff;
@@ -108,12 +110,12 @@ void func_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3, f32 arg4)
     fp->x80_self_vel.y = diff.y;
 }
 
-void func_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
+void ftBossLib_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
 {
     Fighter* fp = gobj->user_data;
     Vec3 vec;
 
-    func_8015C208(gobj, &vec);
+    ftBossLib_8015C208(gobj, &vec);
 
     {
         f32 x_diff = vec.x - fp->cur_pos.x;
@@ -125,11 +127,11 @@ void func_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
     }
 }
 
-void func_8015C010(HSD_GObj* gobj, f32 x_diff_max)
+void ftBossLib_8015C010(HSD_GObj* gobj, f32 x_diff_max)
 {
     Vec3 vec;
     Fighter* fp = gobj->user_data;
-    func_8015C208(gobj, &vec);
+    ftBossLib_8015C208(gobj, &vec);
 
     {
         f32 x_diff = vec.x - fp->cur_pos.x;
@@ -141,7 +143,7 @@ void func_8015C010(HSD_GObj* gobj, f32 x_diff_max)
     }
 }
 
-void func_8015C09C(HSD_GObj* gobj, f32 facing_dir)
+void ftBossLib_8015C09C(HSD_GObj* gobj, f32 facing_dir)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);
@@ -152,7 +154,7 @@ void func_8015C09C(HSD_GObj* gobj, f32 facing_dir)
     HSD_JObjSetRotation(jobj, &quat);
 }
 
-void func_8015C190(HSD_GObj* arg0)
+void ftBossLib_8015C190(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     Vec3 vec;
@@ -170,68 +172,68 @@ void func_8015C190(HSD_GObj* arg0)
     }
 }
 
-void func_8015C208(HSD_GObj* arg0, Vec3* arg1)
+void ftBossLib_8015C208(HSD_GObj* arg0, Vec3* arg1)
 {
     Fighter* fp = GET_FIGHTER(arg0);
-    HSD_GObj* gobj = func_8015C244(arg0, &fp->cur_pos);
+    HSD_GObj* gobj = ftBossLib_8015C244(arg0, &fp->cur_pos);
     ftLib_80086644(gobj, arg1);
 }
 
-HSD_GObj* func_8015C244(HSD_GObj* arg0, Vec3* arg1)
+HSD_GObj* ftBossLib_8015C244(HSD_GObj* arg0, Vec3* arg1)
 {
     return ftLib_8008627C(arg1, arg0);
 }
 
-bool func_8015C270(void)
+bool ftBossLib_8015C270(void)
 {
     /// @todo Get msid
-    if (func_8015C44C(FTKIND_MASTERH) == 0x157)
+    if (ftBossLib_8015C44C(FTKIND_MASTERH) == 0x157)
         return 1;
 
     return 0;
 }
 
-bool func_8015C2A8(void)
+bool ftBossLib_8015C2A8(void)
 {
     /// @todo Get msid
-    if (func_8015C44C(FTKIND_CREZYH) == 0x183)
+    if (ftBossLib_8015C44C(FTKIND_CREZYH) == 0x183)
         return true;
 
     return false;
 }
 
-bool func_8015C2E0(void)
+bool ftBossLib_8015C2E0(void)
 {
     /// @todo Get ASIDs
-    enum_t msid = func_8015C44C(FTKIND_MASTERH);
+    enum_t msid = ftBossLib_8015C44C(FTKIND_MASTERH);
     if (msid == 0x158 || msid == 0x159)
         return true;
 
     return false;
 }
 
-bool func_8015C31C(void)
+bool ftBossLib_8015C31C(void)
 {
     /// @todo Get ASIDs
-    enum_t msid = func_8015C44C(FTKIND_CREZYH);
+    enum_t msid = ftBossLib_8015C44C(FTKIND_CREZYH);
     if (msid == 0x181 || msid == 0x182)
         return true;
 
     return false;
 }
 
-bool func_8015C358(void)
+bool ftBossLib_8015C358(void)
 {
-    HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
+    HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
     if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3)
         return true;
 
     return false;
 }
 
-bool func_8015C3A0(void)
+bool ftBossLib_8015C3A0(void)
 {
-    HSD_GObj* gobj = func_8015C3E8(FTKIND_CREZYH);
+    HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
     if (gobj && GET_FIGHTER(gobj)->x221F_flag.bits.b3)
         return true;
 
@@ -239,7 +241,7 @@ bool func_8015C3A0(void)
 }
 
 /// get_fighter_gobj(FighterKind)
-HSD_GObj* func_8015C3E8(FighterKind kind)
+HSD_GObj* ftBossLib_8015C3E8(FighterKind kind)
 {
     HSD_GObj* cur;
 
@@ -256,9 +258,9 @@ HSD_GObj* func_8015C3E8(FighterKind kind)
     return NULL;
 }
 
-enum_t func_8015C44C(FighterKind kind)
+enum_t ftBossLib_8015C44C(FighterKind kind)
 {
-    HSD_GObj* gobj = func_8015C3E8(kind);
+    HSD_GObj* gobj = ftBossLib_8015C3E8(kind);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -273,9 +275,9 @@ enum_t func_8015C44C(FighterKind kind)
     }
 }
 
-s32 func_8015C4C4(void)
+s32 ftBossLib_8015C4C4(void)
 {
-    HSD_GObj* gobj = func_8015C3E8(FTKIND_CREZYH);
+    HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -288,9 +290,9 @@ s32 func_8015C4C4(void)
     return 0;
 }
 
-s32 func_8015C530(enum_t arg0)
+s32 ftBossLib_8015C530(enum_t arg0)
 {
-    HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
+    HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -319,7 +321,7 @@ s32 func_8015C530(enum_t arg0)
     }
 }
 
-void func_8015C5F8(HSD_GObj* gobj)
+void ftBossLib_8015C5F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     switch (HSD_Randi(4)) {
@@ -338,7 +340,7 @@ void func_8015C5F8(HSD_GObj* gobj)
     }
 }
 
-ftMasterHand_SpecialAttrs* func_8015C6BC(void)
+ftMasterHand_SpecialAttrs* ftBossLib_8015C6BC(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -346,7 +348,7 @@ ftMasterHand_SpecialAttrs* func_8015C6BC(void)
 #endif
 
     {
-        HSD_GObj* gobj = func_8015C3E8(FTKIND_MASTERH);
+        HSD_GObj* gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
         if (gobj == NULL)
             return NULL;
 
@@ -367,70 +369,70 @@ ftMasterHand_SpecialAttrs* func_8015C6BC(void)
     }
 }
 
-s32 func_8015C74C(void)
+s32 ftBossLib_8015C74C(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[24];
 #endif
 
-    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
     if (attr == NULL)
         return -1;
 
     return attr->x164;
 }
 
-s32 func_8015C7EC(void)
+s32 ftBossLib_8015C7EC(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[24];
 #endif
 
-    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
     if (attr == NULL)
         return -1;
 
     return attr->x168;
 }
 
-s32 func_8015C88C(void)
+s32 ftBossLib_8015C88C(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[24];
 #endif
 
-    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
     if (attr == NULL)
         return -1;
 
     return attr->x16C;
 }
 
-s32 func_8015C92C(void)
+s32 ftBossLib_8015C92C(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[24];
 #endif
 
-    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
     if (attr == NULL)
         return -1;
 
     return attr->x170;
 }
 
-s32 func_8015C9CC(void)
+s32 ftBossLib_8015C9CC(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[24];
 #endif
 
-    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
     if (attr == NULL)
         return -1;
 
@@ -439,12 +441,12 @@ s32 func_8015C9CC(void)
 
 void func_8015CA6C_inline(s32 arg0)
 {
-    HSD_GObj* ch_gobj = func_8015C3E8(FTKIND_CREZYH);
+    HSD_GObj* ch_gobj = ftBossLib_8015C3E8(FTKIND_CREZYH);
     if (ch_gobj)
         ftLib_80086A4C(ch_gobj, arg0);
 }
 
-void func_8015CA6C(s32 arg0)
+void ftBossLib_8015CA6C(s32 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -454,7 +456,7 @@ void func_8015CA6C(s32 arg0)
     Player_80036790(0, arg0);
 
     {
-        HSD_GObj* mh_gobj = func_8015C3E8(FTKIND_MASTERH);
+        HSD_GObj* mh_gobj = ftBossLib_8015C3E8(FTKIND_MASTERH);
         if (mh_gobj)
             ftLib_80086A4C(mh_gobj, arg0);
     }
@@ -463,20 +465,20 @@ void func_8015CA6C(s32 arg0)
     func_8026C3FC();
 }
 
-void func_8015CB7C(void)
+void ftBossLib_8015CB7C(void)
 {
     func_8026C42C();
 }
 
 void func_8015CB9C_inline(Vec3 spC)
 {
-    ftMasterHand_SpecialAttrs* attr = func_8015C6BC();
+    ftMasterHand_SpecialAttrs* attr = ftBossLib_8015C6BC();
     spC.z += attr == NULL ? -1 : attr->x178;
     func_8002EA64(&spC);
     func_8002F0E4(0xA);
 }
 
-void func_8015CB9C(s32 arg0)
+void ftBossLib_8015CB9C(s32 arg0)
 {
     Vec3 vec;
     Player_LoadPlayerCoords(arg0, &vec);
@@ -484,7 +486,7 @@ void func_8015CB9C(s32 arg0)
     func_8015CB9C_inline(vec);
 }
 
-void func_8015CC14(void)
+void ftBossLib_8015CC14(void)
 {
     func_8002F474();
 }

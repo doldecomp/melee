@@ -235,11 +235,11 @@ void ftMasterHand_80150230(HSD_GObj* gobj)
             u8 _[20];
 #endif
 
-            func_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.mh.x2238,
-                          attr->x18, attr->x20, attr->x1C);
-            if (func_8015C44C(0x1C) == 0x180) {
+            ftBossLib_8015BD24(fp->x1A98, &fp->fv.mh.x223C, fp->fv.mh.x2238,
+                               attr->x18, attr->x20, attr->x1C);
+            if (ftBossLib_8015C44C(0x1C) == 0x180) {
                 // Crazy Hand Combo Attack
-                switch (func_8015C4C4()) {
+                switch (ftBossLib_8015C4C4()) {
                 case 0x179:
                     vec.x = attr->x124_pos.x;
                     vec.y = attr->x124_pos.y;
@@ -376,7 +376,7 @@ void ftMasterHand_8015082C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
@@ -497,7 +497,7 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
                ((r6_button & HSD_BUTTON_DPAD_UP)))
     {
         // Crazy Hand Combo Attack
-        switch (func_8015C4C4()) {
+        switch (ftBossLib_8015C4C4()) {
         case 0x179: {
             sp10_pos.x = r31_attributes->x124_pos.x;
             sp10_pos.y = r31_attributes->x124_pos.y;

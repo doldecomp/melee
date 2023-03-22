@@ -19,7 +19,7 @@ void ftMasterHand_80151C40(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
 }
 
 // 80151C84 14E864

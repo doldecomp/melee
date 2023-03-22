@@ -26,7 +26,7 @@ void ftMasterHand_80151B70(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
 }
 
 void ftMasterHand_80151BB4(HSD_GObj* arg0) {}

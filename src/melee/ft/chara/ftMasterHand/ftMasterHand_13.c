@@ -72,7 +72,7 @@ void ftMasterHand_80152A0C(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
-        func_8015BD20(arg0);
+        ftBossLib_8015BD20(arg0);
 }
 
 // 80152A50 14F630
@@ -122,7 +122,7 @@ void ftMasterHand_80152A50(HSD_GObj* gobj)
     if (fp->mv.mh.unk13.x4) {
         ftData = fp->ft_data;
         attr = ftData->ext_attr;
-        func_8015C208(gobj, &sp28_pos);
+        ftBossLib_8015C208(gobj, &sp28_pos);
         sp28_pos.x += attr->x98;
         sp28_pos.y += attr->x9C;
         sp28_pos.z = 0.0f;

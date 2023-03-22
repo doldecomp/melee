@@ -10,7 +10,7 @@ void ftMasterHand_801539EC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
 }
 
 void ftMasterHand_80153A30(HSD_GObj* gobj)
@@ -18,7 +18,7 @@ void ftMasterHand_80153A30(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* sa = fp->ft_data->ext_attr;
 
-    func_8015BF74(gobj, sa->x58);
+    ftBossLib_8015BF74(gobj, sa->x58);
 }
 
 void ftMasterHand_80153A60(HSD_GObj* gobj) {}

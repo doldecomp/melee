@@ -112,8 +112,8 @@ void ftMasterHand_80150F68(HSD_GObj* gobj)
     r30_ft_attributes = r4_ftdata->ext_attr;
 
     ft_80085134(gobj);
-    func_8015BE40(gobj, &r31_fp->mv.mh.unk0.xC, &r31_fp->mv.mh.unk0.x18,
-                  r30_ft_attributes->x2C, r30_ft_attributes->x28);
+    ftBossLib_8015BE40(gobj, &r31_fp->mv.mh.unk0.xC, &r31_fp->mv.mh.unk0.x18,
+                       r30_ft_attributes->x2C, r30_ft_attributes->x28);
 }
 
 // 80150FC8 0014DBA8

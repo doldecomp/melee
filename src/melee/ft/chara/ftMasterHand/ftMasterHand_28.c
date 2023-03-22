@@ -12,7 +12,7 @@ void ftMasterHand_8015521C(HSD_GObj* gobj)
 {
     Fighter* fp;
 
-    if ((func_8015C31C() != 0) || (func_8015C3A0() != 0) ||
+    if ((ftBossLib_8015C31C() != 0) || (ftBossLib_8015C3A0() != 0) ||
         (!ftAnim_IsFramesRemaining(gobj)))
     {
         fp = gobj->user_data;
@@ -27,7 +27,7 @@ void ftMasterHand_80155290(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
-        func_8015BD20(arg0);
+        ftBossLib_8015BD20(arg0);
 }
 
 // 801552D4 151EB4
@@ -51,9 +51,9 @@ void ftMasterHand_801552F8(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     fp->x2204_ftcmd_var1 = 0;
-    gobj_2 = func_8015C3E8(0x1CU);
+    gobj_2 = ftBossLib_8015C3E8(0x1CU);
 
-    if (func_8015C31C() == 0)
+    if (ftBossLib_8015C31C() == 0)
         ftCrazyHand_8015A3F4(gobj_2);
 
     fp->x1A5C = gobj_2;

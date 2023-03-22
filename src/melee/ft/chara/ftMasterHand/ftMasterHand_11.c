@@ -36,7 +36,7 @@ void ftMasterHand_80152414(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
@@ -82,7 +82,7 @@ void ftMasterHand_80152544(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
@@ -95,8 +95,8 @@ void ftMasterHand_80152588(HSD_GObj* gobj)
     ftMasterHand_SpecialAttrs* r31_attributes = r4_ftData->ext_attr;
 
     ft_80085134(gobj);
-    func_8015C010(gobj, r31_attributes->xA4);
-    func_8015C190(gobj);
+    ftBossLib_8015C010(gobj, r31_attributes->xA4);
+    ftBossLib_8015C190(gobj);
 }
 
 // 801525DC 14F1BC

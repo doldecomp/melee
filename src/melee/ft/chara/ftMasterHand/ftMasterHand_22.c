@@ -28,7 +28,7 @@ void ftMasterHand_80154278(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
-        func_8015BD20(arg0);
+        ftBossLib_8015BD20(arg0);
 }
 
 // 801542BC 150E9C
@@ -82,7 +82,7 @@ void ftMasterHand_801543E8(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        ftBossLib_8015BD20(arg0);
     }
 }
 
@@ -130,7 +130,7 @@ void ftMasterHand_8015442C(HSD_GObj* gobj)
 #endif
 
     ft_80085134(gobj);
-    func_8015C208(gobj, &sp28_pos);
+    ftBossLib_8015C208(gobj, &sp28_pos);
     sp28_pos.x += attr->x108;
     sp28_pos.y += attr->x10C;
     sp28_pos.z = 0.0f;
@@ -190,7 +190,7 @@ void ftMasterHand_80154670(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        ftBossLib_8015BD20(arg0);
     }
 }
 
@@ -237,7 +237,7 @@ void ftMasterHand_80154794(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        ftBossLib_8015BD20(arg0);
     }
 }
 
@@ -251,8 +251,8 @@ void ftMasterHand_801547D8(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->ft_data->ext_attr;
     ft_80085134(gobj);
-    func_8015BE40(gobj, &r31_fp->mv.mh.unk0.xC, &r31_fp->mv.mh.unk0.x18,
-                  r30_attributes->x2C, r30_attributes->x28);
+    ftBossLib_8015BE40(gobj, &r31_fp->mv.mh.unk0.xC, &r31_fp->mv.mh.unk0.x18,
+                       r30_attributes->x2C, r30_attributes->x28);
 }
 
 // 80154838 151418
@@ -303,7 +303,7 @@ void ftMasterHand_80154964(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        ftBossLib_8015BD20(arg0);
     }
 }
 
@@ -317,8 +317,9 @@ void ftMasterHand_801549A8(HSD_GObj* arg0)
     temp_r31 = arg0->user_data;
     temp_r30 = temp_r31->ft_data->ext_attr;
     ft_80085134(arg0);
-    func_8015BE40(arg0, &temp_r31->mv.mh.unk0.xC, &temp_r31->mv.mh.unk0.x18,
-                  temp_r30->x2C, temp_r30->x28);
+    ftBossLib_8015BE40(arg0, &temp_r31->mv.mh.unk0.xC,
+                       &temp_r31->mv.mh.unk0.x18, temp_r30->x2C,
+                       temp_r30->x28);
 }
 
 // 80154A08 1515E8

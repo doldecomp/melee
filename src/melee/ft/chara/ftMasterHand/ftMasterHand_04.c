@@ -33,7 +33,7 @@ void ftMasterHand_801510B0(HSD_GObj* gobj)
     ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, ftMasterHand_801511FC */);
     // ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, ftMasterHand_801511FC);
 
-    func_8015C09C(gobj, -1.0f);
+    ftBossLib_8015C09C(gobj, -1.0f);
 }
 
 // 80151168 14DD48
@@ -54,7 +54,7 @@ void ftMasterHand_801511B0(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     if (!Player_GetPlayerSlotType(fp->xC_playerID))
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
 }
 
 // 801511F4 14DDD4

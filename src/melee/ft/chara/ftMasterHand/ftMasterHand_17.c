@@ -23,7 +23,7 @@ void ftMasterHand_801538A8(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
-        func_8015BD20(arg0);
+        ftBossLib_8015BD20(arg0);
 }
 
 // 801538EC 1504CC
@@ -48,7 +48,7 @@ static void ftMasterHand_80153910(HSD_GObj* arg0)
 
     Fighter_ChangeMotionState(arg0, 0x170, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(arg0);
-    func_8015C208(arg0, &sp10);
+    ftBossLib_8015C208(arg0, &sp10);
     fp->cur_pos.x = sp10.x;
     fp->cur_pos.y = attr->x5C;
     fp->x80_self_vel.z = 0.0f;
