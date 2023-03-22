@@ -9,14 +9,14 @@
 #include <baselib/pobj.h>
 #include <baselib/tobj.h>
 
-void func_800222A4(void);
-void func_8002247C(HSD_CObj*);
-void func_80022560(void);
-void func_800225D4(void);
+void lbRefract_800222A4(void);
+void lbRefract_8002247C(HSD_CObj*);
+void lbRefract_80022560(void);
+void lbRefract_800225D4(void);
 s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc);
-void func_80022998(s32, s32);
-void func_80022BB8(void);
-void func_80022BD0(void);
+void lbRefract_80022998(s32, s32);
+void lbRefract_80022BB8(void);
+void lbRefract_80022BD0(void);
 
 #pragma region lbrefract_003
 
@@ -49,7 +49,7 @@ typedef struct _RefractCallbackData {
 
 } RefractCallbackData;
 
-void lbl_80021CE8(void*, s32);
+void lbRefract_80021CE8(void*, s32);
 
 extern RefractCallbackTypeA lbl_80021F34;
 extern RefractCallbackTypeA lbl_80021F70;
@@ -61,6 +61,6 @@ extern RefractCallbackTypeC lbl_80021FF8;
 extern RefractCallbackTypeC lbl_8002206C;
 extern RefractCallbackTypeC lbl_80022120;
 
-s32 lbl_8002219C(RefractCallbackData*, s32, u32, u16, u16);
+s32 lbRefract_8002219C(RefractCallbackData*, s32, u32, u16, u16);
 
 #endif
