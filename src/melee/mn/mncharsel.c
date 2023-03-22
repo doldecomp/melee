@@ -11,7 +11,7 @@
 extern CSSData* lbl_804D6CB0;
 extern SIS* lbl_804D1124[];
 
-TextKerning* func_8025BC20(TextKerning* arg0, u32 arg1)
+TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1)
 {
     TextKerning* kerning;
     u32 render_zeroes;
@@ -46,7 +46,7 @@ TextKerning* func_8025BC20(TextKerning* arg0, u32 arg1)
     return ++arg0;
 }
 
-void func_8025BD30(void)
+void mnCharSel_8025BD30(void)
 {
     TextKerning* kerning;
 
@@ -62,9 +62,9 @@ void func_8025BD30(void)
     }
     if (lbLang_IsSavedLanguageJP() != 0) {
         if (gmMainLib_8015CC34()->mode == 1) {
-            func_8025BC20(kerning, gmMainLib_8015CC34()->stock_count);
+            mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->stock_count);
         } else if (gmMainLib_8015CC34()->time_limit != 0) {
-            func_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
+            mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
             func_803A660C(0, 0x4A, 0x53);
         } else {
             func_803A6530(0, 0x4A, 0x51);
@@ -87,7 +87,7 @@ void func_8025BD30(void)
         switch (gmMainLib_8015CC34()->mode) {
         case Mode_Time:
             if (gmMainLib_8015CC34()->time_limit != 0) {
-                func_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
+                mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
                 func_803A660C(0, 0x4A, 0x53);
             } else {
                 func_803A6530(0, 0x4A, 0x51);
@@ -95,7 +95,7 @@ void func_8025BD30(void)
             func_803A660C(0, 0x4A, 0x4B);
             return;
         case Mode_Stock:
-            func_8025BC20(kerning, gmMainLib_8015CC34()->stock_count);
+            mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->stock_count);
             if (gmMainLib_8015CC34()->stock_count < 2U) {
                 func_803A660C(0, 0x4A, 0x55);
             } else {
@@ -105,7 +105,7 @@ void func_8025BD30(void)
             return;
         case Mode_Coin:
             if (gmMainLib_8015CC34()->time_limit != 0) {
-                func_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
+                mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
                 func_803A660C(0, 0x4A, 0x53);
             } else {
                 func_803A6530(0, 0x4A, 0x51);
@@ -114,7 +114,7 @@ void func_8025BD30(void)
             return;
         case Mode_Bonus:
             if (gmMainLib_8015CC34()->time_limit != 0) {
-                func_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
+                mnCharSel_8025BC20(kerning, gmMainLib_8015CC34()->time_limit);
                 func_803A660C(0, 0x4A, 0x53);
             } else {
                 func_803A6530(0, 0x4A, 0x51);
