@@ -65,7 +65,7 @@ f32 ft_800A1948(Fighter*);
 f32 ft_800A1994(Fighter*);
 f32 ft_800A1A24(Fighter*);
 f32 ft_800DA824(Fighter*);
-f32 scaleBy154_8008D8D8(f32);
+f32 ft_ScaleBy154(f32);
 HSD_GObj* ft_800BE7E0(unk_t);
 s32 ft_800877F8(HSD_GObj*, s32);
 s32 ft_80087818(HSD_GObj*, s32);
