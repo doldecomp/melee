@@ -214,7 +214,7 @@ bool Stage_80224DC8(s32 arg)
 
 void Stage_80224E38(Vec3* arg0, s32 arg1)
 {
-    func_801C2D24(arg1 + 4, arg0);
+    Ground_801C2D24(arg1 + 4, arg0);
 }
 
 void Stage_80224E64(enum_t arg0, Vec3* arg_vec)
@@ -262,7 +262,7 @@ void Stage_80224E64(enum_t arg0, Vec3* arg_vec)
         arg_vec->x = 0.0F;
         return;
     }
-    func_801C2D24(arg0, arg_vec);
+    Ground_801C2D24(arg0, arg_vec);
 }
 
 s32 Stage_80224FDC(Vec3* arg0)
@@ -272,7 +272,7 @@ s32 Stage_80224FDC(Vec3* arg0)
     s32 counter2;
 
     while (counter != 0) {
-        if (func_801C2D24(HSD_Randi(counter) + 0x7F, arg0)) {
+        if (Ground_801C2D24(HSD_Randi(counter) + 0x7F, arg0)) {
             return 1;
         }
         counter += -1;
@@ -281,7 +281,7 @@ s32 Stage_80224FDC(Vec3* arg0)
     counter2 = 4;
     while (counter2 != 0) {
         rand_output = HSD_Randi(counter2);
-        counter2 = func_801C2D24(rand_output, arg0);
+        counter2 = Ground_801C2D24(rand_output, arg0);
 
         if (counter2 != 0) {
             return 1;
@@ -324,10 +324,10 @@ s32 Stage_80225074(s32 arg0)
         __assert(__FILE__, 526, "0");
     }
 
-    tmp = func_801C28AC(unk_struct_804D49E8.list_idx, r31, &spC);
+    tmp = Ground_801C28AC(unk_struct_804D49E8.list_idx, r31, &spC);
     func_80023F28(spC);
-    func_801C5A84(spC);
-    func_801C5AA4(tmp);
+    Ground_801C5A84(spC);
+    Ground_801C5AA4(tmp);
     return arg0;
 }
 
@@ -343,7 +343,7 @@ s32 Stage_8022519C(InternalStageId idx)
 
 void Stage_802251B4(InternalStageId idx, s32 arg1)
 {
-    func_801C06B8(unk_arr_803E9960[idx].stage_id);
+    Ground_801C06B8(unk_arr_803E9960[idx].stage_id);
 }
 
 void Stage_802251E8(InternalStageId idx, s32* _)
@@ -358,7 +358,7 @@ void Stage_802251E8(InternalStageId idx, s32* _)
     local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
     local_data.list_idx = unk_struct_804D49E8.list_idx;
 
-    func_801C0754(&local_data);
+    Ground_801C0754(&local_data);
 }
 
 void Stage_8022524C(void)
@@ -370,7 +370,7 @@ void Stage_8022524C(void)
     local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
     local_data.list_idx = unk_struct_804D49E8.list_idx;
 
-    func_801C0800(&local_data);
+    Ground_801C0800(&local_data);
 }
 
 void Stage_80225298(void)
@@ -382,7 +382,7 @@ void Stage_80225298(void)
     local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
     local_data.list_idx = unk_struct_804D49E8.list_idx;
 
-    func_801C0F78(&local_data);
+    Ground_801C0F78(&local_data);
 }
 
 void Stage_802252E4(InternalStageId idx, HSD_GObj* _)
@@ -394,7 +394,7 @@ void Stage_802252E4(InternalStageId idx, HSD_GObj* _)
     local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
     local_data.list_idx = idx;
 
-    func_801C0FB8(&local_data);
+    Ground_801C0FB8(&local_data);
 }
 
 void Stage_8022532C(InternalStageId idx, s32 arg1)
@@ -406,5 +406,5 @@ void Stage_8022532C(InternalStageId idx, s32 arg1)
     local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
     local_data.list_idx = idx;
 
-    func_801C1074(&local_data, arg1);
+    Ground_801C1074(&local_data, arg1);
 }

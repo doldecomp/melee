@@ -44,10 +44,10 @@ static void lbl_80222B9C(void)
     func_80222C3C(0);
     func_80222C3C(1);
     func_80222C3C(2);
-    func_801C39C0();
-    func_801C3BB4();
-    func_801C4210();
-    func_801C42AC();
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Ground_801C4210();
+    Ground_801C42AC();
 }
 
 static void lbl_80222C0C(void) {}
@@ -67,7 +67,7 @@ static HSD_GObj* func_80222C3C(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E91B0[gobj_id];
 
-    gobj = func_801C14D0(gobj_id);
+    gobj = Ground_801C14D0(gobj_id);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         gp->x8_callback = NULL;
@@ -113,7 +113,7 @@ static void lbl_80222D60(HSD_GObj* gobj)
 #endif
 
     Ground* gp = GET_GROUND(gobj);
-    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -125,7 +125,7 @@ static bool lbl_80222DB0(HSD_GObj* arg0)
 static void lbl_80222DB8(HSD_GObj* gobj)
 {
     func_800115F4();
-    func_801C2FE0(gobj);
+    Ground_801C2FE0(gobj);
 }
 
 static void lbl_80222DEC(HSD_GObj* arg0) {}
@@ -138,7 +138,7 @@ static void lbl_80222DF0(HSD_GObj* gobj)
 #endif
 
     Ground* gp = GET_GROUND(gobj);
-    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -149,7 +149,7 @@ static bool lbl_80222E40(HSD_GObj* arg0)
 
 static void lbl_80222E48(HSD_GObj* arg0)
 {
-    func_801C2FE0(arg0);
+    Ground_801C2FE0(arg0);
 }
 
 static void lbl_80222E68(HSD_GObj* arg0) {}

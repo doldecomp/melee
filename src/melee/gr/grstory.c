@@ -54,15 +54,15 @@ static void func_801E302C(bool _) {}
 
 void func_801E3030(void)
 {
-    lbl_804D69B8 = func_801C49F8();
+    lbl_804D69B8 = Ground_801C49F8();
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
     func_801E30D8(0);
     func_801E30D8(1);
     func_801E30D8(3);
     func_801E30D8(2);
-    func_801C39C0();
-    func_801C3BB4();
+    Ground_801C39C0();
+    Ground_801C3BB4();
 }
 
 void func_801E30A8(void) {}
@@ -82,7 +82,7 @@ HSD_GObj* func_801E30D8(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E26F0[gobj_id];
 
-    gobj = func_801C14D0(gobj_id);
+    gobj = Ground_801C14D0(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -118,7 +118,7 @@ void func_801E31C0(HSD_GObj* gobj)
     Ground* gp = gobj->user_data;
     func_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;
-    func_801C8858(func_801C3FA4(gobj, 1), 0x20000000);
+    func_801C8858(Ground_801C3FA4(gobj, 1), 0x20000000);
 }
 
 bool func_801E3224(HSD_GObj* arg0)
@@ -139,7 +139,7 @@ inline s32 randi(s32 max)
 void func_801E3234(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C7FF8(gobj, 0, 7, 0, 0.0f, 1.0f);
     func_801C7FF8(gobj, 5, 7, 1, 0.0f, 1.0f);
 
@@ -156,7 +156,7 @@ bool func_801E332C(HSD_GObj* arg0)
 void func_801E3334(HSD_GObj* gobj)
 {
     func_801E3418(gobj);
-    func_801C2FE0(gobj);
+    Ground_801C2FE0(gobj);
     func_800115F4();
 }
 
@@ -179,10 +179,10 @@ void func_801E3370(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_801C2ED0(gobj->hsd_obj, data->x14);
+    Ground_801C2ED0(gobj->hsd_obj, data->x14);
     func_801C8138(gobj, data->x14, 0);
     data->xC4 = 0;
-    data->xC8 = func_801C3FA4(gobj, 1);
+    data->xC8 = Ground_801C3FA4(gobj, 1);
 }
 
 bool func_801E33D8(HSD_GObj* arg0)
@@ -192,7 +192,7 @@ bool func_801E33D8(HSD_GObj* arg0)
 
 void func_801E33E0(HSD_GObj* gobj)
 {
-    func_801C2FE0(gobj);
+    Ground_801C2FE0(gobj);
     func_801E366C(gobj);
 }
 

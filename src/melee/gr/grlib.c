@@ -49,7 +49,7 @@ UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
             return NULL;
         }
         phi_r30->x8 = *arg2;
-        scale = func_801C0498();
+        scale = Ground_801C0498();
         phi_r30->x24 *= scale;
         phi_r30->x28 *= scale;
         phi_r30->x2C *= scale;
@@ -155,10 +155,10 @@ void func_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
 
 Vec3* func_801C9A10(void)
 {
-    func_801C2D24(0, &lbl_8049EF58[0]);
-    func_801C2D24(1, &lbl_8049EF58[1]);
-    func_801C2D24(2, &lbl_8049EF58[2]);
-    func_801C2D24(3, &lbl_8049EF58[3]);
+    Ground_801C2D24(0, &lbl_8049EF58[0]);
+    Ground_801C2D24(1, &lbl_8049EF58[1]);
+    Ground_801C2D24(2, &lbl_8049EF58[2]);
+    Ground_801C2D24(3, &lbl_8049EF58[3]);
     return lbl_8049EF58;
 }
 

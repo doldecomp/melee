@@ -1180,7 +1180,7 @@ func_802FC7C0:
 /* 802FC7D0 002F93B0  7C 7F 1B 78 */	mr r31, r3
 /* 802FC7D4 002F93B4  80 02 E1 80 */	lwz r0, lbl_804DDB60@sda21(r2)
 /* 802FC7D8 002F93B8  90 01 00 0C */	stw r0, 0xc(r1)
-/* 802FC7DC 002F93BC  4B EC 3E 29 */	bl func_801C0604
+/* 802FC7DC 002F93BC  4B EC 3E 29 */	bl Ground_801C0604
 /* 802FC7E0 002F93C0  28 03 00 00 */	cmplwi r3, 0
 /* 802FC7E4 002F93C4  41 82 00 10 */	beq lbl_802FC7F4
 /* 802FC7E8 002F93C8  80 03 00 00 */	lwz r0, 0(r3)
@@ -1190,7 +1190,7 @@ lbl_802FC7F4:
 /* 802FC7F4 002F93D4  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 802FC7F8 002F93D8  90 1F 00 04 */	stw r0, 4(r31)
 lbl_802FC7FC:
-/* 802FC7FC 002F93DC  4B EC 3E 1D */	bl func_801C0618
+/* 802FC7FC 002F93DC  4B EC 3E 1D */	bl Ground_801C0618
 /* 802FC800 002F93E0  28 03 00 00 */	cmplwi r3, 0
 /* 802FC804 002F93E4  41 82 00 10 */	beq lbl_802FC814
 /* 802FC808 002F93E8  80 03 00 00 */	lwz r0, 0(r3)
@@ -1200,7 +1200,7 @@ lbl_802FC814:
 /* 802FC814 002F93F4  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 802FC818 002F93F8  90 1F 00 08 */	stw r0, 8(r31)
 lbl_802FC81C:
-/* 802FC81C 002F93FC  4B EC 3E 11 */	bl func_801C062C
+/* 802FC81C 002F93FC  4B EC 3E 11 */	bl Ground_801C062C
 /* 802FC820 002F9400  28 03 00 00 */	cmplwi r3, 0
 /* 802FC824 002F9404  41 82 00 10 */	beq lbl_802FC834
 /* 802FC828 002F9408  80 03 00 00 */	lwz r0, 0(r3)
@@ -1210,7 +1210,7 @@ lbl_802FC834:
 /* 802FC834 002F9414  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 802FC838 002F9418  90 1F 00 0C */	stw r0, 0xc(r31)
 lbl_802FC83C:
-/* 802FC83C 002F941C  4B EC 3E 05 */	bl func_801C0640
+/* 802FC83C 002F941C  4B EC 3E 05 */	bl Ground_801C0640
 /* 802FC840 002F9420  28 03 00 00 */	cmplwi r3, 0
 /* 802FC844 002F9424  41 82 00 10 */	beq lbl_802FC854
 /* 802FC848 002F9428  80 03 00 00 */	lwz r0, 0(r3)
@@ -1357,15 +1357,15 @@ lbl_803F97E8:
     .4byte NULL
 .global lbl_803F9828
 lbl_803F9828:
-    .4byte func_801C0604
-    .4byte func_801C0690
-    .4byte func_801C0618
-    .4byte func_801C0654
-    .4byte func_801C06A4
-    .4byte func_801C0668
-    .4byte func_801C062C
-    .4byte func_801C067C
-    .4byte func_801C0640
+    .4byte Ground_801C0604
+    .4byte Ground_801C0690
+    .4byte Ground_801C0618
+    .4byte Ground_801C0654
+    .4byte Ground_801C06A4
+    .4byte Ground_801C0668
+    .4byte Ground_801C062C
+    .4byte Ground_801C067C
+    .4byte Ground_801C0640
 .global lbl_803F984C
 lbl_803F984C:
     .4byte NULL

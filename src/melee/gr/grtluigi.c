@@ -59,10 +59,10 @@ void lbl_80221C14(void)
     func_80221CB4(0);
     func_80221CB4(1);
     func_80221CB4(2);
-    func_801C39C0();
-    func_801C3BB4();
-    func_801C4210();
-    func_801C42AC();
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Ground_801C4210();
+    Ground_801C42AC();
 }
 
 void lbl_80221C84(void) {}
@@ -84,7 +84,7 @@ HSD_GObj* func_80221CB4(int arg0)
     Ground* gp;
 
     cb = &lbl_803E8DF0[arg0];
-    gobj = func_801C14D0(arg0);
+    gobj = Ground_801C14D0(arg0);
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = 0;
@@ -134,7 +134,7 @@ bool lbl_80221E28(HSD_GObj* arg0)
 void lbl_80221E30(HSD_GObj* arg0)
 {
     func_800115F4();
-    func_801C2FE0(arg0);
+    Ground_801C2FE0(arg0);
 }
 
 void lbl_80221E64(HSD_GObj* arg0) {}
@@ -151,7 +151,7 @@ bool lbl_80221EB8(HSD_GObj* arg0)
 
 void lbl_80221EC0(HSD_GObj* gobj)
 {
-    func_801C2FE0(gobj);
+    Ground_801C2FE0(gobj);
 }
 
 void lbl_80221EE0(HSD_GObj* arg0) {}

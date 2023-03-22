@@ -49,10 +49,10 @@ static void GrTMars_80221EF8(void)
     GrTMars_80221F98(0);
     GrTMars_80221F98(1);
     GrTMars_80221F98(2);
-    func_801C39C0();
-    func_801C3BB4();
-    func_801C4210();
-    func_801C42AC();
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Ground_801C4210();
+    Ground_801C42AC();
 }
 
 static void GrTMars_80221F68(void)
@@ -77,7 +77,7 @@ static HSD_GObj* GrTMars_80221F98(int id)
     StageCallbacks* callbacks;
 
     callbacks = &lbl_803E8EB0[id];
-    gobj = func_801C14D0(id);
+    gobj = Ground_801C14D0(id);
 
     if (gobj != NULL) {
         gp = gobj->user_data;
@@ -130,7 +130,7 @@ static void GrTMars_802220BC(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -142,7 +142,7 @@ static bool GrTMars_8022210C(HSD_GObj* arg0)
 static void GrTMars_80222114(HSD_GObj* gobj)
 {
     func_800115F4();
-    func_801C2FE0(gobj);
+    Ground_801C2FE0(gobj);
 }
 
 static void GrTMars_80222148(HSD_GObj* arg0) {}
@@ -156,7 +156,7 @@ static void GrTMars_8022214C(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -167,7 +167,7 @@ static bool GrTMars_8022219C(HSD_GObj* arg0)
 
 static void GrTMars_802221A4(HSD_GObj* gobj)
 {
-    func_801C2FE0(gobj);
+    Ground_801C2FE0(gobj);
 }
 
 static void GrTMars_802221C4(HSD_GObj* arg0) {}

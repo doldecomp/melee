@@ -56,10 +56,10 @@ void lbl_80220F14(void)
     func_80220FB4(0);
     func_80220FB4(1);
     func_80220FB4(2);
-    func_801C39C0();
-    func_801C3BB4();
-    func_801C4210();
-    func_801C42AC();
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Ground_801C4210();
+    Ground_801C42AC();
 }
 
 void lbl_80220F84(void) {}
@@ -80,7 +80,7 @@ HSD_GObj* func_80220FB4(int id)
     HSD_GObj* gobj;
 
     StageCallbacks* cb = &lbl_803E8A98[id];
-    gobj = func_801C14D0(id);
+    gobj = Ground_801C14D0(id);
 
     if (gobj != NULL) {
         Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
@@ -134,7 +134,7 @@ bool lbl_8022114C(HSD_GObj* arg0)
 void lbl_80221154(HSD_GObj* arg0)
 {
     func_800115F4();
-    func_801C2FE0(arg0);
+    Ground_801C2FE0(arg0);
 }
 
 void lbl_80221188(HSD_GObj* arg0) {}
@@ -151,7 +151,7 @@ bool lbl_802211DC(HSD_GObj* arg0)
 
 void lbl_802211E4(HSD_GObj* gobj)
 {
-    func_801C2FE0(gobj);
+    Ground_801C2FE0(gobj);
 }
 
 void lbl_80221204(HSD_GObj* arg0) {}
@@ -184,7 +184,7 @@ asm void lbl_80221208(void){
 /* 80221258 0021DE38  38 80 00 00 */	li r4, 0
 /* 8022125C 0021DE3C  4B E0 FB E9 */	bl func_80030E44
 /* 80221260 0021DE40  38 60 01 36 */	li r3, 0x136
-/* 80221264 0021DE44  4B FA 41 89 */	bl func_801C53EC
+/* 80221264 0021DE44  4B FA 41 89 */	bl Ground_801C53EC
 /* 80221268 0021DE48  7F C3 F3 78 */	mr r3, r30
 /* 8022126C 0021DE4C  4B FA 7A 71 */	bl func_801C8CDC
 /* 80221270 0021DE50  80 01 00 3C */	lwz r0, 0x3c(r1)
@@ -209,10 +209,10 @@ void func_80221288(HSD_GObj* ground_gobj)
     int i;
 
     for (i = 0; lbl_803E8B5C[i] != -1; i++) {
-        enum_t result_0 = func_801C33C0(2, lbl_803E8B5C[i]);
+        enum_t result_0 = Ground_801C33C0(2, lbl_803E8B5C[i]);
         if (result_0 != -1) {
             bool result_1 =
-                func_801C8CFC(0, 0, gp, func_801C3FA4(ground_gobj, result_0),
+                func_801C8CFC(0, 0, gp, Ground_801C3FA4(ground_gobj, result_0),
                               0, lbl_80221208, 0);
 
             if (result_1) {

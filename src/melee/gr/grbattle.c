@@ -103,7 +103,7 @@ static void func_80219C98(int arg0)
 
 static void func_80219CA4(void)
 {
-    lbl_804D6ACC = func_801C49F8();
+    lbl_804D6ACC = Ground_801C49F8();
     stage_info.unk8C.b4 = 1;
     stage_info.unk8C.b5 = 1;
 
@@ -116,8 +116,8 @@ static void func_80219CA4(void)
         func_80219D84(1);
     }
     func_80219D84(6);
-    func_801C39C0();
-    func_801C3BB4();
+    Ground_801C39C0();
+    Ground_801C3BB4();
     func_801C9A10();
     lbl_804D6AC8 = 0;
 }
@@ -139,7 +139,7 @@ static HSD_GObj* func_80219D84(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E7DA0[gobj_id];
 
-    gobj = func_801C14D0(gobj_id);
+    gobj = Ground_801C14D0(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -175,16 +175,16 @@ static void func_80219E6C(HSD_GObj* gobj)
         return;
 
     func_801C9A70(0, &v);
-    HSD_JObjSetTranslate(func_801C2CF4(0), &v);
+    HSD_JObjSetTranslate(Ground_801C2CF4(0), &v);
 
     func_801C9A70(1, &v);
-    HSD_JObjSetTranslate(func_801C2CF4(1), &v);
+    HSD_JObjSetTranslate(Ground_801C2CF4(1), &v);
 
     func_801C9A70(2, &v);
-    HSD_JObjSetTranslate(func_801C2CF4(2), &v);
+    HSD_JObjSetTranslate(Ground_801C2CF4(2), &v);
 
     func_801C9A70(3, &v);
-    HSD_JObjSetTranslate(func_801C2CF4(3), &v);
+    HSD_JObjSetTranslate(Ground_801C2CF4(3), &v);
 }
 
 bool func_8021A10C(HSD_GObj* arg0)
@@ -204,7 +204,7 @@ static void func_8021A11C(HSD_GObj* gobj)
 #endif
 
     Ground* gp = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -215,7 +215,7 @@ static bool func_8021A16C(HSD_GObj* arg0)
 
 static void func_8021A174(HSD_GObj* gobj)
 {
-    func_801C2FE0(gobj);
+    Ground_801C2FE0(gobj);
     func_800115F4();
 }
 
@@ -229,7 +229,7 @@ static void func_8021A19C(HSD_GObj* gobj)
 #endif
 
     Ground* gp = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;
 }
@@ -366,7 +366,7 @@ static void func_8021A3BC(HSD_GObj* gobj)
             if (gp->xC8 == -1) {
                 u32 i;
                 for (i = 0; i < BATTLE_BG_MAX; i++) {
-                    if (func_801C2BA4(sp28[i])) {
+                    if (Ground_801C2BA4(sp28[i])) {
                         gp->xC8 = sp28[i];
                         break;
                     }
@@ -378,7 +378,7 @@ static void func_8021A3BC(HSD_GObj* gobj)
                 temp_r0_2 = sp28[HSD_Randi(BATTLE_BG_MAX)];
             } while ((tmp = gp->xCC) == (gp->xC8 = temp_r0_2));
 
-            bg_gobj = func_801C2BA4(tmp);
+            bg_gobj = Ground_801C2BA4(tmp);
             HSD_ASSERT(535, bg_gobj);
             func_801C9604(bg_gobj, lbl_804D6ACC->unk4, 0);
 
@@ -390,10 +390,10 @@ static void func_8021A3BC(HSD_GObj* gobj)
         }
         break;
     case 2:
-        bg_gobj = func_801C2BA4(gp->xCC);
+        bg_gobj = Ground_801C2BA4(gp->xCC);
         HSD_ASSERT(546, bg_gobj);
         if (func_801C96E8(bg_gobj)) {
-            func_801C4A08(bg_gobj);
+            Ground_801C4A08(bg_gobj);
             HSD_JObjSetFlagsAll(jobj, 0x10);
             gp->xC4 = 0;
             gp->xD0 = HSD_Randi(1200) + 2400;

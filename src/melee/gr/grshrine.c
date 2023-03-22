@@ -46,12 +46,12 @@ static void func_80201C64(void)
     u8 unused0[8];
 #endif
 
-    lbl_804D6A18 = func_801C49F8();
+    lbl_804D6A18 = Ground_801C49F8();
     func_80201D20(0);
     func_80201D20(1);
     func_80201D20(2);
-    func_801C39C0();
-    func_801C3BB4();
+    Ground_801C39C0();
+    Ground_801C3BB4();
 
     {
         Vec3 v = { 0.5F, 0.0F, 0.0F };
@@ -83,7 +83,7 @@ static HSD_GObj* func_80201D20(s32 arg0)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &lbl_803E50E8[arg0];
 
-    gobj = func_801C14D0(arg0);
+    gobj = Ground_801C14D0(arg0);
 
     if (gobj != NULL) {
         Ground* gp;
@@ -147,10 +147,10 @@ static void func_80201E9C(HSD_GObj* gobj)
 #endif
 
     Ground* gp = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     func_801C8138(gobj, gp->map_id, 0);
-    func_801C10B8(gobj, func_80201E98);
-    func_801C2FE0(gobj);
+    Ground_801C10B8(gobj, func_80201E98);
+    Ground_801C2FE0(gobj);
     gp->x10_flags.b5 = true;
 }
 
@@ -161,7 +161,7 @@ static bool func_80201F14(HSD_GObj* arg0)
 
 static void func_80201F1C(HSD_GObj* arg0)
 {
-    func_801C2FE0(arg0);
+    Ground_801C2FE0(arg0);
     func_800115F4();
 }
 
