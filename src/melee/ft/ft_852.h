@@ -8,7 +8,7 @@
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
-void func_800852B0(void);
-void func_8008549C(void);
+void ft_800852B0(void);
+void ft_8008549C(void);
 
 #endif

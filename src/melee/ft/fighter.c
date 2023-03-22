@@ -130,9 +130,9 @@ void Fighter_800679B0(void)
     /// @warning don't hardcode the allocation sizes
     HSD_ObjAllocInit(&fighter_alloc_data, sizeof(Fighter), /*align*/ 4);
     HSD_ObjAllocInit(&lbl_80458FFC, /*size*/ 0x424, /*align*/ 4);
-    func_800852B0();
+    ft_800852B0();
     Fighter_LoadCommonData();
-    func_8008549C();
+    ft_8008549C();
     func_8009F4A4();
     func_800C8064();
     func_800C8F6C();
