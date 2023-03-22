@@ -9,7 +9,7 @@
 #include "ft/inlines.h"
 #include "ftNess/ftNess.h"
 #include "ftSeak/ftSeak_Init.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 #include "lb/lbunknown_001.h"
 
 #include <common_structs.h>

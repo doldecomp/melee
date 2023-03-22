@@ -6,7 +6,7 @@
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 #include "it/item2.h"
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"

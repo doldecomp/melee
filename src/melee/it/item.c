@@ -2,7 +2,7 @@
 
 #include "item.h"
 
-#include "code_80266F3C.h"
+#include "it_266F.h"
 #include "item2.h"
 
 #include "cm/camera.h"

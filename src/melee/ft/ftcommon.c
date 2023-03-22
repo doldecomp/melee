@@ -13,7 +13,7 @@
 
 #include "ef/eflib.h"
 #include "gm/gm_1601.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 #include "it/item.h"
 #include "it/item2.h"
 #include "lb/lbunknown_003.h"

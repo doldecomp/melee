@@ -7,7 +7,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 
 // 0x800E9DF8
 // https://decomp.me/scratch/5Qwzg // Create Fox Illusion / Falco Phantasm GFX

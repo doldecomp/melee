@@ -2,7 +2,7 @@
 #define MELEE_FT_CHARA_FTCLINK_FTCLINK_H
 
 #include "ft/fighter.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 
 #include <baselib/gobj.h>
 

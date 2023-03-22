@@ -7,7 +7,7 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 #include "lb/lbcollision.h"
 #include "lb/lbunknown_001.h"
 #include "mp/mpcoll.h"

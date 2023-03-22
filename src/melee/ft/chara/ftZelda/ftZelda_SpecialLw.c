@@ -10,7 +10,7 @@
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ftSeak/ftSeak_SpecialLw.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 #include "lb/lbunknown_001.h"
 #include "lb/lbunknown_003.h"
 

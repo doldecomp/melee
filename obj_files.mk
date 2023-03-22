@@ -455,8 +455,8 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/mn/mncharsel.s.o\
     $(BUILD_DIR)/src/melee/it/item.c.o\
     $(BUILD_DIR)/src/melee/it/item2.c.o\
-    $(BUILD_DIR)/asm/melee/it/code_80266F3C.s.o\
-    $(BUILD_DIR)/asm/melee/it/code_8027CF30.s.o\
+    $(BUILD_DIR)/asm/melee/it/it_266F.s.o\
+    $(BUILD_DIR)/asm/melee/it/it_27CF.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/if/ifall.s.o\

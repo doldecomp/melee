@@ -7,7 +7,7 @@
 #include "ft/ft_0877.h"
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 
 bool ftDonkey_800DFA98(HSD_GObj* gobj)
 {

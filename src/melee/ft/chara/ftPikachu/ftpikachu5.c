@@ -7,7 +7,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 
 #include <dolphin/mtx/types.h>
 

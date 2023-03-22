@@ -28,7 +28,7 @@
 #include "ftMasterHand/ftMasterHand_02.h"
 #include "gm/gm_1601.h"
 #include "if/ifmagnify.h"
-#include "it/code_80266F3C.h"
+#include "it/it_266F.h"
 #include "it/item.h"
 #include "it/item2.h"
 #include "lb/lbarchive.h"

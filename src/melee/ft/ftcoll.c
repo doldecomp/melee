@@ -13,7 +13,7 @@
 #include "ef/efsync.h"
 #include "gm/gm_1601.h"
 #include "gr/stage.h"
-#include "it/code_80266F3C.h"
+#include "it/it_266F.h"
 #include "it/item.h"
 #include "lb/lbunknown_001.h"
 #include "pl/pl_unknown_001.h"

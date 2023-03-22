@@ -3,7 +3,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ftMario/ftMario_SpecialN.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 #include "lb/lbunknown_001.h"
 
 #include <dolphin/mtx/types.h>

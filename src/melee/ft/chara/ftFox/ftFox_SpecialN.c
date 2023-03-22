@@ -5,7 +5,7 @@
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 #include "it/item.h"
 #include "lb/lbunknown_001.h"
 

@@ -5,7 +5,7 @@
 #include "ft/ftcoll.h"
 #include "ft/inlines.h"
 #include "ftNess/ftNess.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 
 // 0x80114BF4
 void ftNess_AttackS4_OnReflect(

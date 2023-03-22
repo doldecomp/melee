@@ -9,7 +9,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 #include "lb/lbunknown_001.h"
 
 #include <baselib/gobj.h>

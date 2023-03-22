@@ -6,7 +6,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftMario/ftMario_Init.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 
 MotionState ftDrMario_MotionStateTable[] = {
     { 239, 0x00000071, 0x01000000, ftDrMario_80149954, ftDrMario_80149A6C,
