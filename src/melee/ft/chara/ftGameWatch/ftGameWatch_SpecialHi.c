@@ -269,9 +269,7 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* gobj)
             }
             if (ft_CheckGroundAndLedge(gobj, ledgeGrabDir) != false) {
                 ft_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
-                return;
-            }
-            if (ftCliffCommon_80081298(gobj) != false) {
+            } else if (ftCliffCommon_80081298(gobj) != false) {
                 ftCliffCommon_80081370(gobj);
             }
         }
