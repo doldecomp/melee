@@ -10,7 +10,7 @@
 
 MotionState ftSandbag_MotionStateTable[] = {
     { 295, 0, 0x01400000, ftSandbag_8014FC20, ftSandbag_8014FC24,
-      ftSandbag_8014FC28, ftSandbag_8014FC48, Fighter_UpdateCameraBox },
+      ftSandbag_8014FC28, ftSandbag_8014FC48, ftCamera_UpdateCameraBox },
 };
 
 char lbl_803D39B8[] = "PlSb.dat";

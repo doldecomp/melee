@@ -1564,7 +1564,7 @@ void func_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         dst->x1980 = NULL;
     }
     func_800D105C(dst_gobj);
-    func_80076064(dst);
+    ftCamera_80076064(dst);
     func_800849EC(src, dst);
     func_80081C88(dst_gobj, src->x34_scale.y);
     if (src->x1974_heldItem != NULL) {

@@ -163,7 +163,7 @@ MotionState MotionStateList[] = {
         func_800D575C,
         func_800D58F4,
         func_800D5A08,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 14
@@ -174,7 +174,7 @@ MotionState MotionStateList[] = {
         func_8008A4D4,
         func_8008A644,
         func_8008A678,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 15
@@ -185,7 +185,7 @@ MotionState MotionStateList[] = {
         func_800C9614,
         func_800C9768,
         func_800C9788,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 16
@@ -196,7 +196,7 @@ MotionState MotionStateList[] = {
         func_800C9614,
         func_800C9768,
         func_800C9788,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 17
@@ -207,7 +207,7 @@ MotionState MotionStateList[] = {
         func_800C9614,
         func_800C9768,
         func_800C9788,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 18
@@ -218,7 +218,7 @@ MotionState MotionStateList[] = {
         func_800C99F8,
         func_800C9BEC,
         func_800C9C0C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 19
@@ -229,7 +229,7 @@ MotionState MotionStateList[] = {
         func_800C9ED8,
         func_800C9EFC,
         func_800CA024,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 20
@@ -240,7 +240,7 @@ MotionState MotionStateList[] = {
         func_800CA230,
         func_800CA53C,
         func_800CA5D0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 21
@@ -251,7 +251,7 @@ MotionState MotionStateList[] = {
         func_800CA830,
         func_800CA95C,
         func_800CAA2C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 22
@@ -262,7 +262,7 @@ MotionState MotionStateList[] = {
         func_800CAA6C,
         func_800CAB84,
         func_800CABA4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 23
@@ -273,7 +273,7 @@ MotionState MotionStateList[] = {
         func_800CADB0,
         func_800CAE18,
         func_800CAE60,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 24
@@ -284,7 +284,7 @@ MotionState MotionStateList[] = {
         func_800CB5FC,
         func_800CB6AC,
         func_800CB6CC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 25
@@ -295,7 +295,7 @@ MotionState MotionStateList[] = {
         func_800CB334,
         func_800CB474,
         func_800CB4B0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 26
@@ -306,7 +306,7 @@ MotionState MotionStateList[] = {
         func_800CB334,
         func_800CB474,
         func_800CB4B0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 27
@@ -317,7 +317,7 @@ MotionState MotionStateList[] = {
         func_800CC4F8,
         func_800CC634,
         func_800CC700,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 28
@@ -328,7 +328,7 @@ MotionState MotionStateList[] = {
         func_800CC4F8,
         func_800CC634,
         func_800CC700,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 29
@@ -339,7 +339,7 @@ MotionState MotionStateList[] = {
         func_800CCD34,
         func_800CCD58,
         func_800CCD78,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 30
@@ -350,7 +350,7 @@ MotionState MotionStateList[] = {
         func_800CCD34,
         func_800CCD58,
         func_800CCD78,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 31
@@ -361,7 +361,7 @@ MotionState MotionStateList[] = {
         func_800CCD34,
         func_800CCD58,
         func_800CCD78,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 32
@@ -372,7 +372,7 @@ MotionState MotionStateList[] = {
         func_800CCE50,
         func_800CCE74,
         func_800CCE94,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 33
@@ -383,7 +383,7 @@ MotionState MotionStateList[] = {
         func_800CCE50,
         func_800CCD58,
         func_800CCD78,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 34
@@ -394,7 +394,7 @@ MotionState MotionStateList[] = {
         func_800CCE50,
         func_800CCD58,
         func_800CCD78,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 35
@@ -405,7 +405,7 @@ MotionState MotionStateList[] = {
         func_80096AF4,
         func_80096B44,
         func_80096C98,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 36
@@ -416,7 +416,7 @@ MotionState MotionStateList[] = {
         func_80096AF4,
         func_80096B44,
         func_80096C98,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 37
@@ -427,7 +427,7 @@ MotionState MotionStateList[] = {
         func_80096AF4,
         func_80096B44,
         func_80096C98,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 38
@@ -438,7 +438,7 @@ MotionState MotionStateList[] = {
         func_80090828,
         func_8009093C,
         func_8009095C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 39
@@ -449,7 +449,7 @@ MotionState MotionStateList[] = {
         func_800D60B8,
         func_800D623C,
         func_800D625C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 40
@@ -460,7 +460,7 @@ MotionState MotionStateList[] = {
         func_800D6474,
         func_800D6584,
         func_800D65B8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 41
@@ -471,7 +471,7 @@ MotionState MotionStateList[] = {
         func_800D6694,
         func_800D6784,
         func_800D67A4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 42
@@ -482,7 +482,7 @@ MotionState MotionStateList[] = {
         func_800D5D78,
         func_800D5F18,
         func_800D5F38,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 43
@@ -493,7 +493,7 @@ MotionState MotionStateList[] = {
         func_800D5D78,
         func_800D5F18,
         func_800D5F38,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 44
@@ -504,7 +504,7 @@ MotionState MotionStateList[] = {
         func_8008ACD8,
         func_8008ADF0,
         func_8008AE10,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 45
@@ -515,7 +515,7 @@ MotionState MotionStateList[] = {
         func_8008B07C,
         func_8008ADF0,
         func_8008AE10,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 46
@@ -526,7 +526,7 @@ MotionState MotionStateList[] = {
         func_8008B390,
         func_8008ADF0,
         func_8008AE10,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 47
@@ -537,7 +537,7 @@ MotionState MotionStateList[] = {
         NULL,
         func_800D6E98,
         func_800D6EF8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 48
@@ -548,7 +548,7 @@ MotionState MotionStateList[] = {
         func_800D6E70,
         func_800D6EB8,
         func_800D6F18,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 49
@@ -559,7 +559,7 @@ MotionState MotionStateList[] = {
         NULL,
         func_800D6ED8,
         func_800D6F38,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 50
@@ -570,7 +570,7 @@ MotionState MotionStateList[] = {
         func_8008B5AC,
         func_8008B600,
         func_8008B638,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 51
@@ -581,7 +581,7 @@ MotionState MotionStateList[] = {
         func_8008B910,
         func_8008B940,
         func_8008B960,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 52
@@ -592,7 +592,7 @@ MotionState MotionStateList[] = {
         func_8008B910,
         func_8008B940,
         func_8008B960,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 53
@@ -603,7 +603,7 @@ MotionState MotionStateList[] = {
         func_8008B910,
         func_8008B940,
         func_8008B960,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 54
@@ -614,7 +614,7 @@ MotionState MotionStateList[] = {
         func_8008B910,
         func_8008B940,
         func_8008B960,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 55
@@ -625,7 +625,7 @@ MotionState MotionStateList[] = {
         func_8008B910,
         func_8008B940,
         func_8008B960,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 56
@@ -636,7 +636,7 @@ MotionState MotionStateList[] = {
         func_8008BAD4,
         func_8008BB04,
         func_8008BB24,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 57
@@ -647,7 +647,7 @@ MotionState MotionStateList[] = {
         func_8008BD80,
         func_8008BF84,
         func_8008BFA4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 58
@@ -658,7 +658,7 @@ MotionState MotionStateList[] = {
         func_8008C55C,
         func_8008C7F0,
         func_8008C810,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 59
@@ -669,7 +669,7 @@ MotionState MotionStateList[] = {
         func_8008C55C,
         func_8008C7F0,
         func_8008C810,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 60
@@ -680,7 +680,7 @@ MotionState MotionStateList[] = {
         func_8008C55C,
         func_8008C7F0,
         func_8008C810,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 61
@@ -691,7 +691,7 @@ MotionState MotionStateList[] = {
         func_8008C55C,
         func_8008C7F0,
         func_8008C810,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 62
@@ -702,7 +702,7 @@ MotionState MotionStateList[] = {
         func_8008C55C,
         func_8008C7F0,
         func_8008C810,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 63
@@ -713,7 +713,7 @@ MotionState MotionStateList[] = {
         func_8008CAD4,
         func_8008CB04,
         func_8008CB24,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 64
@@ -724,7 +724,7 @@ MotionState MotionStateList[] = {
         func_8008CCF8,
         func_8008CD28,
         func_8008CD48,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 65
@@ -735,7 +735,7 @@ MotionState MotionStateList[] = {
         func_8008D08C,
         func_8008D5B4,
         func_8008D5D4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 66
@@ -746,7 +746,7 @@ MotionState MotionStateList[] = {
         func_8008D194,
         func_8008D5B4,
         func_8008D5D4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 67
@@ -757,7 +757,7 @@ MotionState MotionStateList[] = {
         func_8008D29C,
         func_8008D5B4,
         func_8008D5D4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 68
@@ -768,7 +768,7 @@ MotionState MotionStateList[] = {
         func_8008D3A4,
         func_8008D5B4,
         func_8008D5D4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 69
@@ -779,7 +779,7 @@ MotionState MotionStateList[] = {
         func_8008D4AC,
         func_8008D5B4,
         func_8008D5D4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 70
@@ -790,7 +790,7 @@ MotionState MotionStateList[] = {
         func_8008D7AC,
         func_8008D7B0,
         func_8008D7D0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 71
@@ -801,7 +801,7 @@ MotionState MotionStateList[] = {
         func_8008D7AC,
         func_8008D7B0,
         func_8008D7D0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 72
@@ -812,7 +812,7 @@ MotionState MotionStateList[] = {
         func_8008D7AC,
         func_8008D7B0,
         func_8008D7D0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 73
@@ -823,7 +823,7 @@ MotionState MotionStateList[] = {
         func_8008D7AC,
         func_8008D7B0,
         func_8008D7D0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 74
@@ -834,7 +834,7 @@ MotionState MotionStateList[] = {
         func_8008D7AC,
         func_8008D7B0,
         func_8008D7D0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 75
@@ -845,7 +845,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 76
@@ -856,7 +856,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 77
@@ -867,7 +867,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 78
@@ -878,7 +878,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 79
@@ -889,7 +889,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 80
@@ -900,7 +900,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 81
@@ -911,7 +911,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 82
@@ -922,7 +922,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 83
@@ -933,7 +933,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 84
@@ -944,7 +944,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 85
@@ -955,7 +955,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 86
@@ -966,7 +966,7 @@ MotionState MotionStateList[] = {
         func_8008FA44,
         func_8008FB18,
         func_8008FB64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 87
@@ -977,7 +977,7 @@ MotionState MotionStateList[] = {
         func_8008FF48,
         func_8008FF84,
         func_800900EC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 88
@@ -988,7 +988,7 @@ MotionState MotionStateList[] = {
         func_8008FF48,
         func_8008FF84,
         func_800900EC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 89
@@ -999,7 +999,7 @@ MotionState MotionStateList[] = {
         func_8008FF48,
         func_8008FF84,
         func_800900EC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 90
@@ -1010,7 +1010,7 @@ MotionState MotionStateList[] = {
         func_8008FF48,
         func_8008FF84,
         func_800900EC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 91
@@ -1021,7 +1021,7 @@ MotionState MotionStateList[] = {
         func_80090324,
         func_8009035C,
         func_800904C0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 92
@@ -1032,7 +1032,7 @@ MotionState MotionStateList[] = {
         func_80094B20,
         func_80094B24,
         func_80094B44,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 93
@@ -1043,7 +1043,7 @@ MotionState MotionStateList[] = {
         func_80094B20,
         func_80094B24,
         func_80094B44,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 94
@@ -1054,7 +1054,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096228,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 95
@@ -1065,7 +1065,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096228,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 96
@@ -1076,7 +1076,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096228,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 97
@@ -1087,7 +1087,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096228,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 98
@@ -1098,7 +1098,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096144,
         func_80096208,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 99
@@ -1109,7 +1109,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096208,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 100
@@ -1120,7 +1120,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_800961B0,
         func_8009634C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 101
@@ -1131,7 +1131,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_800961B0,
         func_8009634C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 102
@@ -1142,7 +1142,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_800961B0,
         func_8009634C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 103
@@ -1153,7 +1153,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_800961B0,
         func_8009634C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 104
@@ -1164,7 +1164,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096470,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 105
@@ -1175,7 +1175,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096470,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 106
@@ -1186,7 +1186,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096470,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 107
@@ -1197,7 +1197,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096470,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 108
@@ -1208,7 +1208,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096228,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 109
@@ -1219,7 +1219,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096228,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 110
@@ -1230,7 +1230,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096228,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 111
@@ -1241,7 +1241,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096228,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 112
@@ -1252,7 +1252,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_800961B0,
         func_8009634C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 113
@@ -1263,7 +1263,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_800961B0,
         func_8009634C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 114
@@ -1274,7 +1274,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_800961B0,
         func_8009634C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 115
@@ -1285,7 +1285,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_800961B0,
         func_8009634C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 116
@@ -1296,7 +1296,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096470,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 117
@@ -1307,7 +1307,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096470,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 118
@@ -1318,7 +1318,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096470,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 119
@@ -1329,7 +1329,7 @@ MotionState MotionStateList[] = {
         func_80096120,
         func_80096124,
         func_80096470,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 120
@@ -1340,7 +1340,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD3B0,
         ftCaptain_800CD3D0,
         ftCaptain_800CD3F0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 121
@@ -1351,7 +1351,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD3B0,
         ftCaptain_800CD3D0,
         ftCaptain_800CD3F0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 122
@@ -1362,7 +1362,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD3B0,
         ftCaptain_800CD3D0,
         ftCaptain_800CD3F0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 123
@@ -1373,7 +1373,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD3B0,
         ftCaptain_800CD3D0,
         ftCaptain_800CD3F0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 124
@@ -1384,7 +1384,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD478,
         ftCaptain_800CD498,
         ftCaptain_800CD4B8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 125
@@ -1395,7 +1395,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD478,
         ftCaptain_800CD498,
         ftCaptain_800CD4B8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 126
@@ -1406,7 +1406,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD478,
         ftCaptain_800CD498,
         ftCaptain_800CD4B8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 127
@@ -1417,7 +1417,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD478,
         ftCaptain_800CD498,
         ftCaptain_800CD4B8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 128
@@ -1428,7 +1428,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD540,
         ftCaptain_800CD560,
         ftCaptain_800CD580,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 129
@@ -1439,7 +1439,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD540,
         ftCaptain_800CD560,
         ftCaptain_800CD580,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 130
@@ -1450,7 +1450,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD540,
         ftCaptain_800CD560,
         ftCaptain_800CD580,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 131
@@ -1461,7 +1461,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD540,
         ftCaptain_800CD560,
         ftCaptain_800CD580,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 132
@@ -1472,7 +1472,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD7C4,
         ftCaptain_800CD7E4,
         ftCaptain_800CD804,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 133
@@ -1483,7 +1483,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD7C4,
         ftCaptain_800CD7E4,
         ftCaptain_800CD804,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 134
@@ -1494,7 +1494,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD7C4,
         ftCaptain_800CD7E4,
         ftCaptain_800CD804,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 135
@@ -1505,7 +1505,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD7C4,
         ftCaptain_800CD7E4,
         ftCaptain_800CD804,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 136
@@ -1516,7 +1516,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD8AC,
         ftCaptain_800CD8CC,
         ftCaptain_800CD8EC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 137
@@ -1527,7 +1527,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD8AC,
         ftCaptain_800CD8CC,
         ftCaptain_800CD8EC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 138
@@ -1538,7 +1538,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD8AC,
         ftCaptain_800CD8CC,
         ftCaptain_800CD8EC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 139
@@ -1549,7 +1549,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CD8AC,
         ftCaptain_800CD8CC,
         ftCaptain_800CD8EC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 140
@@ -1560,7 +1560,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CDB34,
         ftCaptain_800CDB54,
         ftCaptain_800CDB74,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 141
@@ -1571,7 +1571,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CDB34,
         ftCaptain_800CDB54,
         ftCaptain_800CDB74,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 142
@@ -1582,7 +1582,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CDB34,
         ftCaptain_800CDB54,
         ftCaptain_800CDB74,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 143
@@ -1593,7 +1593,7 @@ MotionState MotionStateList[] = {
         ftCaptain_800CDB34,
         ftCaptain_800CDB54,
         ftCaptain_800CDB74,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 144
@@ -1604,7 +1604,7 @@ MotionState MotionStateList[] = {
         func_800CF118,
         func_800CF1A0,
         func_800CF258,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 145
@@ -1615,7 +1615,7 @@ MotionState MotionStateList[] = {
         func_800CF2BC,
         func_800CF380,
         func_800CF3A0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 146
@@ -1626,7 +1626,7 @@ MotionState MotionStateList[] = {
         func_800CF428,
         func_800CF494,
         func_800CF4B4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 147
@@ -1637,7 +1637,7 @@ MotionState MotionStateList[] = {
         func_800CF52C,
         func_800CF54C,
         func_800CF56C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 148
@@ -1648,7 +1648,7 @@ MotionState MotionStateList[] = {
         func_800CE348,
         func_800CE350,
         func_800CE390,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 149
@@ -1659,7 +1659,7 @@ MotionState MotionStateList[] = {
         func_800CE34C,
         func_800CE370,
         func_800CE3B8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 150
@@ -1670,7 +1670,7 @@ MotionState MotionStateList[] = {
         func_800CE348,
         func_800CE350,
         func_800CE390,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 151
@@ -1681,7 +1681,7 @@ MotionState MotionStateList[] = {
         func_800CE34C,
         func_800CE370,
         func_800CE3B8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 152
@@ -1692,7 +1692,7 @@ MotionState MotionStateList[] = {
         func_800CEC50,
         func_800CEC58,
         func_800CEC98,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 153
@@ -1703,7 +1703,7 @@ MotionState MotionStateList[] = {
         func_800CEC54,
         func_800CEC78,
         func_800CECC0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 154
@@ -1714,7 +1714,7 @@ MotionState MotionStateList[] = {
         func_800D2E0C,
         func_800D2E2C,
         func_800D2E4C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 155
@@ -1725,7 +1725,7 @@ MotionState MotionStateList[] = {
         func_800D2F34,
         func_800D2F54,
         func_800D2F74,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 156
@@ -1736,7 +1736,7 @@ MotionState MotionStateList[] = {
         func_800D30FC,
         func_800D3100,
         func_800D3120,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 157
@@ -1747,7 +1747,7 @@ MotionState MotionStateList[] = {
         func_800D30FC,
         func_800D3100,
         func_800D3120,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 158
@@ -1758,7 +1758,7 @@ MotionState MotionStateList[] = {
         func_800D7AEC,
         func_800D7B4C,
         func_800D7B8C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 159
@@ -1769,7 +1769,7 @@ MotionState MotionStateList[] = {
         func_800D8024,
         func_800D8064,
         func_800D80A4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 160
@@ -1780,7 +1780,7 @@ MotionState MotionStateList[] = {
         func_800D843C,
         func_800D8444,
         func_800D8484,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 161
@@ -1791,7 +1791,7 @@ MotionState MotionStateList[] = {
         func_800D88F8,
         func_800D8900,
         func_800D8940,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 162
@@ -1802,7 +1802,7 @@ MotionState MotionStateList[] = {
         func_800D7B1C,
         func_800D7B6C,
         func_800D7BB4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 163
@@ -1813,7 +1813,7 @@ MotionState MotionStateList[] = {
         func_800D8044,
         func_800D8084,
         func_800D80CC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 164
@@ -1824,7 +1824,7 @@ MotionState MotionStateList[] = {
         func_800D8440,
         func_800D8464,
         func_800D84AC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 165
@@ -1835,7 +1835,7 @@ MotionState MotionStateList[] = {
         func_800D88FC,
         func_800D8920,
         func_800D8968,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 166
@@ -1846,7 +1846,7 @@ MotionState MotionStateList[] = {
         func_800D7AEC,
         func_800D7B4C,
         func_800D7B8C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 167
@@ -1857,7 +1857,7 @@ MotionState MotionStateList[] = {
         func_800D8024,
         func_800D8064,
         func_800D80A4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 168
@@ -1868,7 +1868,7 @@ MotionState MotionStateList[] = {
         func_800D843C,
         func_800D8444,
         func_800D8484,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 169
@@ -1879,7 +1879,7 @@ MotionState MotionStateList[] = {
         func_800D88F8,
         func_800D8900,
         func_800D8940,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 170
@@ -1890,7 +1890,7 @@ MotionState MotionStateList[] = {
         func_800D7B1C,
         func_800D7B6C,
         func_800D7BB4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 171
@@ -1901,7 +1901,7 @@ MotionState MotionStateList[] = {
         func_800D8044,
         func_800D8084,
         func_800D80CC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 172
@@ -1912,7 +1912,7 @@ MotionState MotionStateList[] = {
         func_800D8440,
         func_800D8464,
         func_800D84AC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 173
@@ -1923,7 +1923,7 @@ MotionState MotionStateList[] = {
         func_800D88FC,
         func_800D8920,
         func_800D8968,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 174
@@ -1934,7 +1934,7 @@ MotionState MotionStateList[] = {
         func_80096DF8,
         func_80096E48,
         func_80096ED0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 175
@@ -1945,7 +1945,7 @@ MotionState MotionStateList[] = {
         func_80097074,
         func_80097098,
         func_800970B8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 176
@@ -1956,7 +1956,7 @@ MotionState MotionStateList[] = {
         func_80097074,
         func_80097098,
         func_800970B8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 177
@@ -1967,7 +1967,7 @@ MotionState MotionStateList[] = {
         func_80097458,
         func_8009747C,
         func_8009749C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 178
@@ -1978,7 +1978,7 @@ MotionState MotionStateList[] = {
         func_80092758,
         func_80092870,
         func_800928AC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 179
@@ -1989,7 +1989,7 @@ MotionState MotionStateList[] = {
         func_80092A78,
         func_80092B70,
         func_80092BAC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 180
@@ -2000,7 +2000,7 @@ MotionState MotionStateList[] = {
         func_80092CFC,
         func_80092E10,
         func_80092E30,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 181
@@ -2011,7 +2011,7 @@ MotionState MotionStateList[] = {
         func_80093624,
         func_80093628,
         func_8009365C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 182
@@ -2022,7 +2022,7 @@ MotionState MotionStateList[] = {
         func_80093EC0,
         func_8009403C,
         func_80094078,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 183
@@ -2033,7 +2033,7 @@ MotionState MotionStateList[] = {
         func_80097E1C,
         func_80097E20,
         func_80097E40,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 184
@@ -2044,7 +2044,7 @@ MotionState MotionStateList[] = {
         func_8009802C,
         func_8009807C,
         func_8009809C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 185
@@ -2055,7 +2055,7 @@ MotionState MotionStateList[] = {
         func_8009F2B0,
         func_8009F2B4,
         func_8009F2D4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 186
@@ -2066,7 +2066,7 @@ MotionState MotionStateList[] = {
         func_800981D0,
         func_800981D4,
         func_800981F4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 187
@@ -2077,7 +2077,7 @@ MotionState MotionStateList[] = {
         func_800985F0,
         func_800985F4,
         func_80098614,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 188
@@ -2088,7 +2088,7 @@ MotionState MotionStateList[] = {
         func_800983BC,
         func_800983C0,
         func_800983E0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 189
@@ -2099,7 +2099,7 @@ MotionState MotionStateList[] = {
         func_800983BC,
         func_800983C0,
         func_800983E0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 190
@@ -2110,7 +2110,7 @@ MotionState MotionStateList[] = {
         func_800C8C40,
         func_800C8C44,
         func_800C8C64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 191
@@ -2121,7 +2121,7 @@ MotionState MotionStateList[] = {
         func_80097E1C,
         func_80097E20,
         func_80097E40,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 192
@@ -2132,7 +2132,7 @@ MotionState MotionStateList[] = {
         func_8009802C,
         func_8009807C,
         func_8009809C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 193
@@ -2143,7 +2143,7 @@ MotionState MotionStateList[] = {
         func_8009F2B0,
         func_8009F2B4,
         func_8009F2D4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 194
@@ -2154,7 +2154,7 @@ MotionState MotionStateList[] = {
         func_800981D0,
         func_800981D4,
         func_800981F4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 195
@@ -2165,7 +2165,7 @@ MotionState MotionStateList[] = {
         func_800985F0,
         func_800985F4,
         func_80098614,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 196
@@ -2176,7 +2176,7 @@ MotionState MotionStateList[] = {
         func_800983BC,
         func_800983C0,
         func_800983E0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 197
@@ -2187,7 +2187,7 @@ MotionState MotionStateList[] = {
         func_800983BC,
         func_800983C0,
         func_800983E0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 198
@@ -2198,7 +2198,7 @@ MotionState MotionStateList[] = {
         func_800C8C40,
         func_800C8C44,
         func_800C8C64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 199
@@ -2209,7 +2209,7 @@ MotionState MotionStateList[] = {
         func_800988E4,
         func_800988E8,
         func_80098908,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 200
@@ -2220,7 +2220,7 @@ MotionState MotionStateList[] = {
         func_80098ADC,
         func_80098AE0,
         func_80098B00,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 201
@@ -2231,7 +2231,7 @@ MotionState MotionStateList[] = {
         func_80098ADC,
         func_80098AE0,
         func_80098B00,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 202
@@ -2242,7 +2242,7 @@ MotionState MotionStateList[] = {
         func_800C2180,
         func_800C22C0,
         func_800C2348,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 203
@@ -2253,7 +2253,7 @@ MotionState MotionStateList[] = {
         func_800C2180,
         func_800C22C0,
         func_800C2348,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 204
@@ -2264,7 +2264,7 @@ MotionState MotionStateList[] = {
         func_800C25AC,
         func_800C25B0,
         func_800C25D0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 205
@@ -2275,7 +2275,7 @@ MotionState MotionStateList[] = {
         func_80098C50,
         func_80098C54,
         func_80098C74,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 206
@@ -2286,7 +2286,7 @@ MotionState MotionStateList[] = {
         func_80098DF0,
         func_80098DF4,
         func_80098E14,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 207
@@ -2297,7 +2297,7 @@ MotionState MotionStateList[] = {
         func_80098EF8,
         func_80098EFC,
         func_80098F1C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 208
@@ -2308,7 +2308,7 @@ MotionState MotionStateList[] = {
         func_80098EF8,
         func_80098EFC,
         func_80098F1C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 209
@@ -2319,7 +2319,7 @@ MotionState MotionStateList[] = {
         func_80098FCC,
         func_80098FD0,
         func_80098FF0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 210
@@ -2330,7 +2330,7 @@ MotionState MotionStateList[] = {
         func_80098FCC,
         func_80098FD0,
         func_80098FF0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 211
@@ -2341,7 +2341,7 @@ MotionState MotionStateList[] = {
         func_80099138,
         func_8009913C,
         func_8009915C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 212
@@ -2352,7 +2352,7 @@ MotionState MotionStateList[] = {
         func_800D8D80,
         func_800D8D88,
         func_800D8E08,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 213
@@ -2363,7 +2363,7 @@ MotionState MotionStateList[] = {
         func_800D9F90,
         func_800D9F94,
         func_800D9FDC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 214
@@ -2374,7 +2374,7 @@ MotionState MotionStateList[] = {
         func_800D8D84,
         func_800D8DD0,
         func_800D8E6C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 215
@@ -2385,7 +2385,7 @@ MotionState MotionStateList[] = {
         func_800D9F90,
         func_800D9F94,
         func_800D9FDC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 216
@@ -2396,7 +2396,7 @@ MotionState MotionStateList[] = {
         func_800DA31C,
         func_800DA3D0,
         func_800DA418,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 217
@@ -2407,7 +2407,7 @@ MotionState MotionStateList[] = {
         func_800DA5A4,
         func_800DA5A8,
         func_800DA5F0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 218
@@ -2418,7 +2418,7 @@ MotionState MotionStateList[] = {
         func_800DA780,
         func_800DA784,
         func_800DA7E4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 219
@@ -2429,7 +2429,7 @@ MotionState MotionStateList[] = {
         func_800DD92C,
         func_800DD930,
         func_800DD990,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 220
@@ -2440,7 +2440,7 @@ MotionState MotionStateList[] = {
         func_800DDA5C,
         func_800DDA60,
         func_800DDAC0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 221
@@ -2462,7 +2462,7 @@ MotionState MotionStateList[] = {
         func_800DDD00,
         func_800DDD04,
         func_800DDD64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 223
@@ -2473,7 +2473,7 @@ MotionState MotionStateList[] = {
         func_800DAC74,
         func_800DADE8,
         func_800DAE94,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 224
@@ -2484,7 +2484,7 @@ MotionState MotionStateList[] = {
         func_800DBA4C,
         func_800DBA6C,
         func_800DBA8C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 225
@@ -2495,7 +2495,7 @@ MotionState MotionStateList[] = {
         func_800DC328,
         func_800DC32C,
         func_800DC34C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 226
@@ -2506,7 +2506,7 @@ MotionState MotionStateList[] = {
         func_800DB008,
         func_800DB00C,
         func_800DB1F8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 227
@@ -2517,7 +2517,7 @@ MotionState MotionStateList[] = {
         func_800DBD30,
         func_800DBD50,
         func_800DBE9C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 228
@@ -2528,7 +2528,7 @@ MotionState MotionStateList[] = {
         func_800DC4AC,
         func_800DC4B0,
         func_800DC5EC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 229
@@ -2539,7 +2539,7 @@ MotionState MotionStateList[] = {
         func_800DC82C,
         func_800DC830,
         func_800DC890,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 230
@@ -2550,7 +2550,7 @@ MotionState MotionStateList[] = {
         func_800DC160,
         func_800DC224,
         func_800DC264,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 231
@@ -2561,7 +2561,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         NULL,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 232
@@ -2572,7 +2572,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         NULL,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 233
@@ -2583,7 +2583,7 @@ MotionState MotionStateList[] = {
         func_800996F0,
         func_80099714,
         func_80099734,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 234
@@ -2594,7 +2594,7 @@ MotionState MotionStateList[] = {
         func_800996F0,
         func_80099714,
         func_80099734,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 235
@@ -2605,7 +2605,7 @@ MotionState MotionStateList[] = {
         func_80099A14,
         func_80099A18,
         func_80099A38,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 236
@@ -2616,7 +2616,7 @@ MotionState MotionStateList[] = {
         func_80099C24,
         func_80099CEC,
         func_80099D48,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 237
@@ -2638,7 +2638,7 @@ MotionState MotionStateList[] = {
         func_80099EBC,
         func_80099EC0,
         func_80099EFC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 239
@@ -2649,7 +2649,7 @@ MotionState MotionStateList[] = {
         func_800DE6BC,
         func_800DE6C0,
         func_800DE6C4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 240
@@ -2660,7 +2660,7 @@ MotionState MotionStateList[] = {
         func_800DE6E8,
         func_800DE6EC,
         func_800DE6F0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 241
@@ -2682,7 +2682,7 @@ MotionState MotionStateList[] = {
         func_800DE78C,
         func_800DE790,
         func_800DE794,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 243
@@ -2693,7 +2693,7 @@ MotionState MotionStateList[] = {
         func_800DE78C,
         func_800DE790,
         func_800DE794,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 244
@@ -2704,7 +2704,7 @@ MotionState MotionStateList[] = {
         func_8009A2E4,
         func_8009A388,
         func_8009A3A8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 245
@@ -2715,7 +2715,7 @@ MotionState MotionStateList[] = {
         func_8009A4A4,
         func_8009A5F4,
         func_8009A5F8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 246
@@ -2726,7 +2726,7 @@ MotionState MotionStateList[] = {
         func_8009A72C,
         func_8009A74C,
         func_8009A750,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 247
@@ -2737,7 +2737,7 @@ MotionState MotionStateList[] = {
         func_800C1B64,
         func_800C1B84,
         func_800C1BA4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 248
@@ -2748,7 +2748,7 @@ MotionState MotionStateList[] = {
         func_800C1B64,
         func_800C1B84,
         func_800C1BA4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 249
@@ -2759,7 +2759,7 @@ MotionState MotionStateList[] = {
         func_8009EF40,
         func_8009EF44,
         func_8009EF48,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 250
@@ -2770,7 +2770,7 @@ MotionState MotionStateList[] = {
         func_8009F0B8,
         func_8009F0BC,
         func_8009F0C0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 251
@@ -2781,7 +2781,7 @@ MotionState MotionStateList[] = {
         func_8009F43C,
         func_8009F440,
         func_8009F460,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 252
@@ -2880,7 +2880,7 @@ MotionState MotionStateList[] = {
         func_8009B2B4,
         func_8009B2B8,
         func_8009B2D8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 261
@@ -2891,7 +2891,7 @@ MotionState MotionStateList[] = {
         func_8009B460,
         func_8009B464,
         func_8009B4A0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 262
@@ -2902,7 +2902,7 @@ MotionState MotionStateList[] = {
         func_8009B2B4,
         func_8009B2B8,
         func_8009B2D8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 263
@@ -2913,7 +2913,7 @@ MotionState MotionStateList[] = {
         func_8009B460,
         func_8009B464,
         func_8009B4A0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 264
@@ -2924,7 +2924,7 @@ MotionState MotionStateList[] = {
         func_800DED30,
         func_800DEE44,
         func_800DEE64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 265
@@ -2935,7 +2935,7 @@ MotionState MotionStateList[] = {
         func_800DED30,
         func_800DEE44,
         func_800DEE64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 266
@@ -2946,7 +2946,7 @@ MotionState MotionStateList[] = {
         func_8009CA00,
         func_8009CA04,
         func_8009CA08,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 267
@@ -2957,7 +2957,7 @@ MotionState MotionStateList[] = {
         func_8009CA00,
         func_8009CA04,
         func_8009CA08,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 268
@@ -2968,7 +2968,7 @@ MotionState MotionStateList[] = {
         func_8009CA00,
         func_8009CA04,
         func_8009CA08,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 269
@@ -2979,7 +2979,7 @@ MotionState MotionStateList[] = {
         func_8009CA00,
         func_8009CA04,
         func_8009CA08,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 270
@@ -2990,7 +2990,7 @@ MotionState MotionStateList[] = {
         func_8009CA00,
         func_8009CA04,
         func_8009CA08,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 271
@@ -3001,7 +3001,7 @@ MotionState MotionStateList[] = {
         func_800DE6BC,
         func_800DE6C0,
         func_800DE6C4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 272
@@ -3012,7 +3012,7 @@ MotionState MotionStateList[] = {
         func_800DE6E8,
         func_800DE6EC,
         func_800DE6F0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 273
@@ -3023,7 +3023,7 @@ MotionState MotionStateList[] = {
         func_800DE714,
         func_800DE718,
         func_800DE71C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 274
@@ -3034,7 +3034,7 @@ MotionState MotionStateList[] = {
         func_800DE78C,
         func_800DE790,
         func_800DE794,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 275
@@ -3045,7 +3045,7 @@ MotionState MotionStateList[] = {
         func_8009CB08,
         func_8009CB0C,
         func_8009CB10,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 276
@@ -3056,7 +3056,7 @@ MotionState MotionStateList[] = {
         func_800BBC7C,
         func_800BBC80,
         func_800BBC84,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 277
@@ -3067,7 +3067,7 @@ MotionState MotionStateList[] = {
         func_800BC304,
         func_800BC308,
         func_800BC340,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 278
@@ -3078,7 +3078,7 @@ MotionState MotionStateList[] = {
         func_800BC8C8,
         func_800BC8CC,
         func_800BC8D0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 279
@@ -3089,7 +3089,7 @@ MotionState MotionStateList[] = {
         func_800BCAE8,
         func_800BCAEC,
         func_800BCAF0,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 280
@@ -3100,7 +3100,7 @@ MotionState MotionStateList[] = {
         func_800BCCF4,
         func_800BCCF8,
         func_800BCCFC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 281
@@ -3111,7 +3111,7 @@ MotionState MotionStateList[] = {
         func_800BCEDC,
         func_800BCEE0,
         func_800BCEE4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 282
@@ -3122,7 +3122,7 @@ MotionState MotionStateList[] = {
         func_800BCEEC,
         func_800BCEF0,
         func_800BCEF4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 283
@@ -3133,7 +3133,7 @@ MotionState MotionStateList[] = {
         func_800BC9BC,
         func_800BC9C0,
         func_800BC9C4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 284
@@ -3144,7 +3144,7 @@ MotionState MotionStateList[] = {
         func_800BCC14,
         func_800BCC18,
         func_800BCC1C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 285
@@ -3155,7 +3155,7 @@ MotionState MotionStateList[] = {
         func_800BCDD4,
         func_800BCDD8,
         func_800BCDDC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 286
@@ -3166,7 +3166,7 @@ MotionState MotionStateList[] = {
         func_800BCEFC,
         func_800BCF00,
         func_800BCF04,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 287
@@ -3177,7 +3177,7 @@ MotionState MotionStateList[] = {
         func_800BCF0C,
         func_800BCF10,
         func_800BCF14,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 288
@@ -3188,7 +3188,7 @@ MotionState MotionStateList[] = {
         func_800BD390,
         func_800BD394,
         func_800BD398,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 289
@@ -3199,7 +3199,7 @@ MotionState MotionStateList[] = {
         func_800BD7BC,
         func_800BD9D8,
         func_800BD9DC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 290
@@ -3210,7 +3210,7 @@ MotionState MotionStateList[] = {
         func_800BDDC8,
         func_800BDDCC,
         func_800BDF10,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 291
@@ -3221,7 +3221,7 @@ MotionState MotionStateList[] = {
         func_800BE25C,
         func_800BE260,
         func_800BE3A4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 292
@@ -3232,7 +3232,7 @@ MotionState MotionStateList[] = {
         func_800BE61C,
         func_800BE620,
         func_800BE6A8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 293
@@ -3243,7 +3243,7 @@ MotionState MotionStateList[] = {
         func_8009EC0C,
         func_8009EC3C,
         func_8009EC40,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 294
@@ -3254,7 +3254,7 @@ MotionState MotionStateList[] = {
         func_800C0FC8,
         func_800C1194,
         func_800C11E4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 295
@@ -3265,7 +3265,7 @@ MotionState MotionStateList[] = {
         func_800C134C,
         func_800C1350,
         func_800C1354,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 296
@@ -3276,7 +3276,7 @@ MotionState MotionStateList[] = {
         func_800C14B0,
         func_800C1574,
         func_800C15B4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 297
@@ -3287,7 +3287,7 @@ MotionState MotionStateList[] = {
         func_800C334C,
         func_800C3350,
         func_800C3370,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 298
@@ -3298,7 +3298,7 @@ MotionState MotionStateList[] = {
         func_800C343C,
         func_800C3440,
         func_800C3460,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 299
@@ -3309,7 +3309,7 @@ MotionState MotionStateList[] = {
         func_800C34F4,
         func_800C34F8,
         func_800C3518,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 300
@@ -3320,7 +3320,7 @@ MotionState MotionStateList[] = {
         func_800C46E0,
         func_800C46E4,
         func_800C4704,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 301
@@ -3331,7 +3331,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         NULL,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 302
@@ -3342,7 +3342,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         NULL,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 303
@@ -3353,7 +3353,7 @@ MotionState MotionStateList[] = {
         func_800BD180,
         func_800BD184,
         func_800BD188,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 304
@@ -3364,7 +3364,7 @@ MotionState MotionStateList[] = {
         func_800BD190,
         func_800BD194,
         func_800BD198,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 305
@@ -3397,7 +3397,7 @@ MotionState MotionStateList[] = {
         func_800C5074,
         func_800C50D4,
         func_800C50F4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 308
@@ -3408,7 +3408,7 @@ MotionState MotionStateList[] = {
         func_800C56DC,
         func_800C572C,
         func_800C574C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 309
@@ -3419,7 +3419,7 @@ MotionState MotionStateList[] = {
         func_800C59EC,
         func_800C5A10,
         func_800C5A30,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 310
@@ -3430,7 +3430,7 @@ MotionState MotionStateList[] = {
         func_800C5C74,
         func_800C5C94,
         func_800C5CB4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 311
@@ -3441,7 +3441,7 @@ MotionState MotionStateList[] = {
         func_800C5E94,
         func_800C5F40,
         func_800C5F60,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 312
@@ -3452,7 +3452,7 @@ MotionState MotionStateList[] = {
         func_800C5B44,
         func_800C5B48,
         func_800C5B68,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 313
@@ -3463,7 +3463,7 @@ MotionState MotionStateList[] = {
         func_800C6084,
         func_800C6088,
         func_800C60A8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 314
@@ -3474,7 +3474,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         func_800D18A4,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 315
@@ -3485,7 +3485,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         func_800D1A64,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 316
@@ -3496,7 +3496,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         func_800D1CE8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 317
@@ -3507,7 +3507,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         func_800D1E58,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 318
@@ -3518,7 +3518,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         func_800D2194,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 319
@@ -3529,7 +3529,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         func_800D2354,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 320
@@ -3540,7 +3540,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         func_800D25D8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 321
@@ -3551,7 +3551,7 @@ MotionState MotionStateList[] = {
         NULL,
         NULL,
         func_800D2748,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 322
@@ -3562,7 +3562,7 @@ MotionState MotionStateList[] = {
         func_800C63B4,
         func_800C63B8,
         func_800C6404,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 323
@@ -3573,7 +3573,7 @@ MotionState MotionStateList[] = {
         func_800C673C,
         func_800C6740,
         func_800C6950,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 324
@@ -3584,7 +3584,7 @@ MotionState MotionStateList[] = {
         func_800C6D34,
         func_800C6D38,
         func_800C6E90,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 325
@@ -3595,7 +3595,7 @@ MotionState MotionStateList[] = {
         func_800913DC,
         func_800913E0,
         func_8009144C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 326
@@ -3606,7 +3606,7 @@ MotionState MotionStateList[] = {
         func_800919D8,
         func_800919DC,
         func_800919FC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 327
@@ -3617,7 +3617,7 @@ MotionState MotionStateList[] = {
         ftMasterHand_80155B74,
         ftMasterHand_80155B78,
         ftMasterHand_80155B7C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 328
@@ -3628,7 +3628,7 @@ MotionState MotionStateList[] = {
         ftMasterHand_80155C88,
         ftMasterHand_80155C8C,
         ftMasterHand_80155C90,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 329
@@ -3639,7 +3639,7 @@ MotionState MotionStateList[] = {
         ftMasterHand_80155D60,
         ftMasterHand_80155D64,
         ftMasterHand_80155D68,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 330
@@ -3650,7 +3650,7 @@ MotionState MotionStateList[] = {
         ftMasterHand_80155E0C,
         ftMasterHand_80155E10,
         ftMasterHand_80155E14,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 331
@@ -3661,7 +3661,7 @@ MotionState MotionStateList[] = {
         ftKirby_8010AA20,
         ftKirby_8010AA24,
         ftKirby_8010AA28,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 332
@@ -3672,7 +3672,7 @@ MotionState MotionStateList[] = {
         ftKirby_8010B0A0,
         ftKirby_8010B0A4,
         ftKirby_8010B0DC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 333
@@ -3683,7 +3683,7 @@ MotionState MotionStateList[] = {
         func_800C77B0,
         func_800C77B4,
         func_800C77B8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 334
@@ -3694,7 +3694,7 @@ MotionState MotionStateList[] = {
         func_800C7AD4,
         func_800C7AD8,
         func_800C7ADC,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 335
@@ -3705,7 +3705,7 @@ MotionState MotionStateList[] = {
         func_800C8004,
         func_800C8008,
         func_800C8028,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 336
@@ -3716,7 +3716,7 @@ MotionState MotionStateList[] = {
         ftCrazyHand_8015B664,
         ftCrazyHand_8015B668,
         ftCrazyHand_8015B66C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 337
@@ -3727,7 +3727,7 @@ MotionState MotionStateList[] = {
         ftCrazyHand_8015B76C,
         ftCrazyHand_8015B770,
         ftCrazyHand_8015B774,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 338
@@ -3738,7 +3738,7 @@ MotionState MotionStateList[] = {
         ftCrazyHand_8015B844,
         ftCrazyHand_8015B848,
         ftCrazyHand_8015B84C,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 339
@@ -3749,7 +3749,7 @@ MotionState MotionStateList[] = {
         ftCrazyHand_8015B8F0,
         ftCrazyHand_8015B8F4,
         ftCrazyHand_8015B8F8,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
     {
         // 340
@@ -3760,7 +3760,7 @@ MotionState MotionStateList[] = {
         func_800C9208,
         func_800C925C,
         func_800C9260,
-        Fighter_UpdateCameraBox,
+        ftCamera_UpdateCameraBox,
     },
 };
 

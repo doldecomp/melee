@@ -520,7 +520,7 @@ void Fighter_UnkProcessDeath_80068354(HSD_GObj* gobj)
             func_8007D5D4(fp);
     } else
         func_8007D5D4(fp);
-    func_80076064(fp);
+    ftCamera_80076064(fp);
 
     HSD_JObjSetTranslate(GET_JOBJ(gobj), &fp->cur_pos);
     Fighter_UnkApplyTransformation_8006C0F0(gobj);
