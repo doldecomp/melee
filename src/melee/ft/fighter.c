@@ -1601,7 +1601,7 @@ void Fighter_8006A360(HSD_GObj* gobj)
 
         if (!fp->x221F_flag.bits.b4 && Camera_80031144() == 1.0f) {
             if (fp->dmg.x1830_percent < p_ftCommonData->x7B0) {
-                if (func_802FC998(fp->xC_playerID) &&
+                if (ifMagnify_802FC998(fp->xC_playerID) &&
                     (Player_GetMoreFlagsBit3(fp->xC_playerID) != 0))
                 {
                     fp->dmg.x1910++;
@@ -2582,7 +2582,7 @@ void Fighter_8006C80C(HSD_GObj* gobj)
         if (fp->ground_or_air == GA_Air &&
             fp->cur_pos.y < Stage_GetCamBoundsBottomOffset())
         {
-            if (func_802FB6E8(fp->xC_playerID) == 3) {
+            if (ifMagnify_802FB6E8(fp->xC_playerID) == 3) {
                 Vec3 cam_offset;
                 Stage_UnkSetVec3TCam_Offset(&cam_offset);
 
