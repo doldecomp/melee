@@ -1798,8 +1798,8 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* gobj)
         return;
     }
 
-    if (func_80081298(gobj)) {
-        func_80081370(gobj);
+    if (ftCliffCommon_80081298(gobj)) {
+        ftCliffCommon_80081370(gobj);
         return;
     }
 
@@ -1964,7 +1964,7 @@ void ftNess_SpecialAirHiRebound_Coll(HSD_GObj* gobj)
         func_80097D40(gobj);
         return;
     }
-    if (func_80081298(gobj) != false) {
-        func_80081370(gobj);
+    if (ftCliffCommon_80081298(gobj) != false) {
+        ftCliffCommon_80081370(gobj);
     }
 }

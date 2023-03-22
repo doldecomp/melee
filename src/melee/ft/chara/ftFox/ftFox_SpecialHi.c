@@ -178,7 +178,7 @@ void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* gobj)
         return;
     }
 
-    if (func_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj))
         return;
 }
 
@@ -350,7 +350,7 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* gobj)
      * sliver of sense but it matches so whatever :D
      * @todo This match is definitely fake.
      */
-    if (func_80081298(gobj) == false) {
+    if (ftCliffCommon_80081298(gobj) == false) {
         s32 envFlags = collData->x134_envFlags;
         f32 var;
         do {
@@ -638,7 +638,7 @@ void ftFox_SpecialHiFall_Coll(HSD_GObj* gobj)
         ftFox_SpecialHiFall_Action(gobj);
         return;
     }
-    if (func_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj))
         return;
 }
 
@@ -766,7 +766,7 @@ void ftFox_SpecialHiBound_Coll(HSD_GObj* gobj)
             return;
         }
 
-        if (func_80081298(gobj) != false) {
+        if (ftCliffCommon_80081298(gobj) != false) {
             return;
         }
     }

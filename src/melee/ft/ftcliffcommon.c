@@ -10,7 +10,7 @@
 #include "mp/mplib.h"
 #include "pl/pl_unknown_001.h"
 
-bool func_80081298(HSD_GObj* gobj)
+bool ftCliffCommon_80081298(HSD_GObj* gobj)
 {
     Fighter* other_fp;
     HSD_GObj* other_gobj;
@@ -30,7 +30,7 @@ bool func_80081298(HSD_GObj* gobj)
         other_gobj = func_80082E3C(gobj);
         if (other_gobj == NULL) {
             func_80040048(fp->xC_playerID, fp->x221F_flag.bits.b4);
-            func_80081370(gobj);
+            ftCliffCommon_80081370(gobj);
             return true;
         }
         other_fp = other_gobj->user_data;
@@ -49,7 +49,7 @@ typedef struct _UnkParameterStruct {
     u8 data_filler_1[0x1];
 } UnkParameterStruct;
 
-void func_80081370(HSD_GObj* gobj)
+void ftCliffCommon_80081370(HSD_GObj* gobj)
 {
     f32 facingDirection;
     f32 ledgeDirection;
@@ -79,7 +79,7 @@ void func_80081370(HSD_GObj* gobj)
     } else {
         fp->mv.co.cliff.ledge_id = fp->x6F0_collData.x40;
     }
-    func_80081544(gobj);
+    ftCliffCommon_80081544(gobj);
     func_800881D8(fp, fp->ft_data->x4C_collisionData->x28, 0x7F, 0x40);
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCommon_8007EBAC(fp, 0xC, 0);
@@ -94,16 +94,16 @@ void func_80081370(HSD_GObj* gobj)
     func_80088148(fp, 4, 0x7F, 0x40);
 }
 
-void func_80081504(HSD_GObj* gobj)
+void ftCliffCommon_80081504(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_8009A804(gobj);
     }
 }
 
-void func_80081540(HSD_GObj* arg0) {}
+void ftCliffCommon_80081540(HSD_GObj* arg0) {}
 
-void func_80081544(HSD_GObj* gobj)
+void ftCliffCommon_80081544(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -132,7 +132,7 @@ void func_80081544(HSD_GObj* gobj)
     func_800CC730(gobj);
 }
 
-void func_800815E4(HSD_GObj* gobj)
+void ftCliffCommon_800815E4(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -150,7 +150,7 @@ void func_800815E4(HSD_GObj* gobj)
     }
 }
 
-void func_80081644(HSD_GObj* gobj)
+void ftCliffCommon_80081644(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCamera_UpdateCameraBox(gobj);

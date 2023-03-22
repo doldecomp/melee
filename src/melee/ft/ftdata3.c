@@ -2788,11 +2788,11 @@ MotionState MotionStateList[] = {
         216,
         0x00900070,
         0x01000000,
-        func_80081504,
-        func_80081540,
-        func_80081544,
-        func_800815E4,
-        func_80081644,
+        ftCliffCommon_80081504,
+        ftCliffCommon_80081540,
+        ftCliffCommon_80081544,
+        ftCliffCommon_800815E4,
+        ftCliffCommon_80081644,
     },
     {
         // 253
@@ -2803,7 +2803,7 @@ MotionState MotionStateList[] = {
         func_8009A8FC,
         func_8009A96C,
         func_8009A98C,
-        func_80081644,
+        ftCliffCommon_80081644,
     },
     {
         // 254
@@ -2814,7 +2814,7 @@ MotionState MotionStateList[] = {
         func_8009ACA4,
         func_8009ACA8,
         func_8009ADA4,
-        func_80081644,
+        ftCliffCommon_80081644,
     },
     {
         // 255
@@ -2825,7 +2825,7 @@ MotionState MotionStateList[] = {
         func_8009ACA4,
         func_8009ACA8,
         func_8009ADA4,
-        func_80081644,
+        ftCliffCommon_80081644,
     },
     {
         // 256
@@ -2836,7 +2836,7 @@ MotionState MotionStateList[] = {
         func_8009AF90,
         func_8009AF94,
         func_8009AFB4,
-        func_80081644,
+        ftCliffCommon_80081644,
     },
     {
         // 257
@@ -2847,7 +2847,7 @@ MotionState MotionStateList[] = {
         func_8009AF90,
         func_8009AF94,
         func_8009AFB4,
-        func_80081644,
+        ftCliffCommon_80081644,
     },
     {
         // 258
@@ -2858,7 +2858,7 @@ MotionState MotionStateList[] = {
         func_8009B12C,
         func_8009B130,
         func_8009B150,
-        func_80081644,
+        ftCliffCommon_80081644,
     },
     {
         // 259
@@ -2869,7 +2869,7 @@ MotionState MotionStateList[] = {
         func_8009B12C,
         func_8009B130,
         func_8009B150,
-        func_80081644,
+        ftCliffCommon_80081644,
     },
     {
         // 260

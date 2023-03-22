@@ -166,8 +166,8 @@ void ftDonkey_8010FF14(HSD_GObj* gobj)
             ftDonkey_SetCallbacks_SpecialHi(gobj);
             ftCommon_8007CC78(
                 fp, donkey_attr->SpecialHi.x54_GROUNDED_HORIZONTAL_VELOCITY);
-        } else if (func_80081298(gobj)) {
-            func_80081370(gobj);
+        } else if (ftCliffCommon_80081298(gobj)) {
+            ftCliffCommon_80081370(gobj);
         }
     }
 }

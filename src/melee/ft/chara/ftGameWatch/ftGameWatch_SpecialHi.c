@@ -269,8 +269,8 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* gobj)
                 func_800D5CB0(gobj, 0, gawAttrs->x60_GAMEWATCH_RESCUE_LANDING);
                 return;
             }
-            if (func_80081298(gobj) != false) {
-                func_80081370(gobj);
+            if (ftCliffCommon_80081298(gobj) != false) {
+                ftCliffCommon_80081370(gobj);
             }
         }
     }

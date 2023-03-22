@@ -221,9 +221,9 @@ void ftSamus_8012AC00(HSD_GObj* gobj)
             func_800D5CB0(gobj, 0, samus_attr->x50);
             return;
         }
-        if (func_80081298(gobj)) {
+        if (ftCliffCommon_80081298(gobj)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
-            func_80081370(gobj);
+            ftCliffCommon_80081370(gobj);
         }
     } else {
         func_80084104(gobj);
@@ -257,9 +257,9 @@ void ftSamus_8012ACF8(HSD_GObj* gobj)
             func_800D5CB0(gobj, 0, samus_attr->x50);
             return;
         }
-        if (func_80081298(gobj)) {
+        if (ftCliffCommon_80081298(gobj)) {
             ftSamus_DestroyAllUnsetx2444(gobj);
-            func_80081370(gobj);
+            ftCliffCommon_80081370(gobj);
         }
     } else {
         func_80084104(gobj);

@@ -170,7 +170,7 @@ void ftMewtwo_SpecialAirHiStart_Coll(HSD_GObj* gobj)
         return;
     }
 
-    if (func_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj))
         return;
 }
 
@@ -310,7 +310,7 @@ void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* gobj)
             }
         }
 
-        if (func_80081298(gobj))
+        if (ftCliffCommon_80081298(gobj))
             return;
 
         if ((collData->x134_envFlags & MPCOLL_CEIL) &&
@@ -603,7 +603,7 @@ void ftMewtwo_SpecialAirHiLost_Coll(HSD_GObj* gobj)
         return;
     }
 
-    if (func_80081298(gobj))
+    if (ftCliffCommon_80081298(gobj))
         return;
 }
 

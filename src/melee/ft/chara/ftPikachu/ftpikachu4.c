@@ -139,7 +139,7 @@ void ftPikachu_80126014(HSD_GObj* gobj)
 
     if (EnvColl_CheckGroundAndLedge(gobj, fp->facing_dir < 0 ? -1 : +1)) {
         ftPikachu_ActionChange_801260E4(gobj);
-    } else if (!func_80081298(gobj)) {
+    } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.
         return;
     }
@@ -398,7 +398,7 @@ void ftPikachu_801267C8(HSD_GObj* gobj)
         }
     }
 
-    if (!func_80081298(gobj)) {
+    if (!ftCliffCommon_80081298(gobj)) {
         if (collData->x134_envFlags & 0x6000) {
             f32 angle = lbvector_AngleXY(&collData->x188_ceiling.normal,
                                          &fp->x80_self_vel);
@@ -804,7 +804,7 @@ void ftPikachu_801273D4(HSD_GObj* gobj)
 
     if (func_8008239C(gobj, fp->facing_dir, (f32*) box)) {
         func_800D5CB0(gobj, 0, pika_attr->xB0);
-    } else if (!func_80081298(gobj)) {
+    } else if (!ftCliffCommon_80081298(gobj)) {
         /// @todo Fix weird control flow.
         return;
     };

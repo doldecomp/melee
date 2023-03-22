@@ -197,7 +197,7 @@ void ftZelda_80139AD4(HSD_GObj* gobj)
 
     if (EnvColl_CheckGroundAndLedge(gobj, ledge_grab_dir))
         ftZelda_80139BB0(gobj);
-    else if (!func_80081298(gobj))
+    else if (!ftCliffCommon_80081298(gobj))
         return;
 }
 
@@ -339,7 +339,7 @@ void ftZelda_80139D60(HSD_GObj* gobj)
         }
     }
 
-    if (!func_80081298(gobj)) {
+    if (!ftCliffCommon_80081298(gobj)) {
         if ((coll_data->x134_envFlags & MPCOLL_CEIL) != 0) {
             f32 angle = lbvector_AngleXY(&coll_data->x188_ceiling.normal,
                                          &fp->x80_self_vel);
@@ -663,7 +663,7 @@ void ftZelda_8013A5C4(HSD_GObj* gobj)
         }
     }
 
-    if (!func_80081298(gobj))
+    if (!ftCliffCommon_80081298(gobj))
         return;
 }
 
