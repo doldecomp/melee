@@ -627,7 +627,7 @@ s32 gmMainLib_8015D818(u32 arg0)
     if ((signed) gmMainLib_8015D94C(arg0) == 0) {
         struct gmm_x1868* base = &lbl_804D3EE0->thing;
         u32* q = &base->x1B80[arg0];
-        *q = func_8000AFBC();
+        *q = lbTime_8000AFBC();
         gmMainLib_8015D888(arg0);
         gmMainLib_8015D8FC(arg0);
         return 1;
@@ -699,7 +699,7 @@ asm bool gmMainLib_8015D984(u32 arg0)
 /* 8015D9AC 0015A58C  57 C0 10 3A */	slwi r0, r30, 2
 /* 8015D9B0 0015A590  7C 63 02 14 */	add r3, r3, r0
 /* 8015D9B4 0015A594  3B E3 00 6C */	addi r31, r3, 0x6c
-/* 8015D9B8 0015A598  4B EA D6 05 */	bl func_8000AFBC
+/* 8015D9B8 0015A598  4B EA D6 05 */	bl lbTime_8000AFBC
 /* 8015D9BC 0015A59C  90 7F 00 00 */	stw r3, 0(r31)
 /* 8015D9C0 0015A5A0  7F C3 F3 78 */	mr r3, r30
 /* 8015D9C4 0015A5A4  48 00 00 31 */	bl gmMainLib_8015D9F4
@@ -732,7 +732,7 @@ bool gmMainLib_8015D984(u32 arg0)
     if (gmMainLib_8015DA90(arg0) == 0) {
         u32* base = &lbl_804D3EE0->x6C[0];
         u32* qwe = &base[arg0];
-        *qwe = func_8000AFBC();
+        *qwe = lbTime_8000AFBC();
 
         gmMainLib_8015D9F4(arg0);
         gmMainLib_8015DA40(arg0);
@@ -804,7 +804,7 @@ void gmMainLib_8015DB18(void)
 void gmMainLib_8015DB2C(u8 arg0, s32 arg2)
 {
     struct gmm_x0* gmmthing = lbl_804D3EE0;
-    gmmthing->x39[arg0] = func_8000AF74(lbl_804D3EE0->x39[arg0], 1);
+    gmmthing->x39[arg0] = lbTime_8000AF74(lbl_804D3EE0->x39[arg0], 1);
 }
 
 u8 gmMainLib_8015DB6C(u8 arg0)
