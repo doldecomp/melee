@@ -1,6 +1,6 @@
 #include "if/ifstatus.h"
 
-#include "text_3.h"
+#include "mn_295.h"
 #include "un_FC9.h"
 
 #include "gm/gm_601.h"
@@ -610,7 +610,7 @@ lbl_802F5044:
 /* 802F5044 002F1C24  38 7E 00 00 */	addi r3, r30, 0
 /* 802F5048 002F1C28  38 80 00 01 */	li r4, 1
 /* 802F504C 002F1C2C  38 A0 04 00 */	li r5, 0x400
-/* 802F5050 002F1C30  4B F3 A3 89 */	bl func_8022F3D8
+/* 802F5050 002F1C30  4B F3 A3 89 */	bl mn_8022F3D8
 /* 802F5054 002F1C34  3C 60 66 66 */	lis r3, 0x66666667@ha
 /* 802F5058 002F1C38  A8 FF 00 0A */	lha r7, 0xa(r31)
 /* 802F505C 002F1C3C  3B 83 66 67 */	addi r28, r3, 0x66666667@l

@@ -427,7 +427,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/db/db_unknown_001.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/asm/melee/text_3.s.o\
+    $(BUILD_DIR)/asm/melee/mn_295.s.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/mn/mnitemsw.s.o\
