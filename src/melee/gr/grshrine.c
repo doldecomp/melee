@@ -70,7 +70,7 @@ static void func_80201CF0(void) {}
 
 static void func_80201CF4(void)
 {
-    func_801CAE04(false);
+    grZakoGenerator_801CAE04(false);
 }
 
 static bool func_80201D18(void)

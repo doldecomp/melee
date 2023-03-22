@@ -62,7 +62,7 @@ static void GrTMars_80221F68(void)
 
 static void GrTMars_80221F6C(void)
 {
-    func_801CAE04(0);
+    grZakoGenerator_801CAE04(0);
 }
 
 static bool GrTMars_80221F90(void)

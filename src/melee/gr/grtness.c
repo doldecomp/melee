@@ -64,7 +64,7 @@ static void GrTNess_80222644(void)
 
 static void GrTNess_80222648(void)
 {
-    func_801CAE04(false);
+    grZakoGenerator_801CAE04(false);
 }
 
 static bool GrTNess_8022266C(void)

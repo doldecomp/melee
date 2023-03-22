@@ -69,7 +69,7 @@ void func_801E30A8(void) {}
 
 void func_801E30AC(void)
 {
-    func_801CAE04(false);
+    grZakoGenerator_801CAE04(false);
 }
 
 bool func_801E30D0(void)

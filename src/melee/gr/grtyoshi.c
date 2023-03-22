@@ -51,7 +51,7 @@ static void lbl_80223B4C(void)
 static void lbl_80223BBC(void) {}
 static void lbl_80223BC0(void)
 {
-    func_801CAE04(false);
+    grZakoGenerator_801CAE04(false);
 }
 static bool lbl_80223BE4(void)
 {

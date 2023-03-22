@@ -126,7 +126,7 @@ static void func_80219D54(void) {}
 
 static void func_80219D58(void)
 {
-    func_801CAE04(false);
+    grZakoGenerator_801CAE04(false);
 }
 
 static bool func_80219D7C(void)
