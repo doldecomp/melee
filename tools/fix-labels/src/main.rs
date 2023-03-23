@@ -2,6 +2,7 @@ use anyhow::{Context, Result};
 use clap::Parser;
 use goblin::{elf::Elf, elf32::sym::STB_LOCAL};
 use lazy_static::lazy_static;
+use melee_utils::{replace, walk_src};
 use regex::{Regex, RegexBuilder};
 use std::{fs::File, io::Read, path::PathBuf, usize};
 
@@ -12,7 +13,7 @@ struct Args {
 }
 
 lazy_static! {
-    static ref UNK_FUNC_RE: Regex = Regex::new(r"^\w+_([[:xdigit:]]{8})$")
+    static ref UNK_FUNC_RE: Regex = Regex::new(r"^\w+_80([[:xdigit:]]{6})$")
         .expect("Failed to parse UNK_FUNC_RE.");
 }
 
@@ -39,12 +40,12 @@ fn main() -> Result<()> {
         })
         .next()
         .context("Failed to find the text section.")?;
-    let text_range =
-        text_section.sh_addr..(text_section.sh_addr + text_section.sh_size);
+    let text_range = (text_section.sh_addr + text_section.sh_size / 1024 * 10)
+        ..(text_section.sh_addr + text_section.sh_size / 1024 * 11);
 
-    let syms = RegexBuilder::new(&format!(
-        r"\b\w+_({})\b",
-        elf.syms
+    let regex = RegexBuilder::new(&format!(r"\b\w+_80({})\b", {
+        let vec = elf
+            .syms
             .iter()
             .filter(|sym| {
                 text_range.contains(&sym.st_value)
@@ -59,8 +60,8 @@ fn main() -> Result<()> {
 
                 Ok(name)
             })
-            .filter_map(|res| res
-                .and_then(|name| {
+            .filter_map(|res| {
+                res.and_then(|name| {
                     UNK_FUNC_RE
                         .captures(&name)
                         .map(|capture| {
@@ -69,19 +70,25 @@ fn main() -> Result<()> {
                                 .map(|group| group.as_str().to_owned())
                                 .context(
                                     "Failed to get the first capture group \
-                                        from UNK_FUNC_RE.",
+                                            from UNK_FUNC_RE.",
                                 )
                         })
                         .transpose()
                 })
-                .transpose())
-            .collect::<Result<Vec<_>>>()?
-            .join("|"),
-    ))
+                .transpose()
+            })
+            .collect::<Result<Vec<_>>>()?;
+        assert!(vec.len() > 0);
+        vec.join("|")
+    }))
     .size_limit(usize::MAX)
     .build()?;
 
-    println!("{syms}");
+    println!("{regex:?}");
+    for path in walk_src()? {
+        // TODO They are local symbols so we can just replace per file
+        replace(&regex, ".L$1", &path)?;
+    }
 
     Ok(())
 }
