@@ -8,6 +8,9 @@ license = "AGPL-3.0-or-later"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+anyhow = "1.0.70"
+env_logger = "0.10.0"
 goblin = "0.6.1"
+log = "0.4.17"
 melee-utils = { version = "0.1.0", path = "../utils" }
 regex = "1.7.2"

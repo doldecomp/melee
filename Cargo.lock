@@ -383,7 +383,10 @@ dependencies = [
 name = "melee-fix-labels"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
+ "env_logger",
  "goblin",
+ "log",
  "melee-utils",
  "regex",
 ]
