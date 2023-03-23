@@ -22,7 +22,7 @@ lazy_static! {
     pub static ref SRC_FILES: GlobSet = GlobSetBuilder::new()
         .add(
             Glob::new(&format!(
-                "{}/{{asm,docs,src}}/**/*.{{s,c,h,dox,md}}",
+                "{}/{{asm,src,docs}}/**/*.{{s,c,h,dox,md}}",
                 *ROOT_STR
             ))
             .expect("Failed to create source files glob.")
