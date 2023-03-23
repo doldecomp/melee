@@ -175,7 +175,7 @@ TEXT_O_FILES +=\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftpopo_init.c.o\
-    $(BUILD_DIR)/asm/melee/ft/chara/fticeclimber.s.o\
+    $(BUILD_DIR)/asm/melee/ft/chara/ftpopo.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftnana.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftnana.s.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftnana2.c.o\
