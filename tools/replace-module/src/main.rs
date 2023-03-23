@@ -9,7 +9,7 @@ use std::{fs, io::Read};
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
-struct Opts {
+struct Args {
     module: String,
     symbols: Option<String>,
 }
@@ -21,9 +21,9 @@ lazy_static! {
 
 fn main() -> Result<()> {
     env_logger::builder().format_timestamp_nanos().init();
-    let cli: Opts = Opts::parse();
+    let args: Args = Args::parse();
 
-    let symbols = match &cli.symbols.filter(|s| s != "-") {
+    let symbols = match &args.symbols.filter(|s| s != "-") {
         Some(path) => {
             let mut contents = String::new();
             fs::File::open(path)
@@ -51,6 +51,6 @@ fn main() -> Result<()> {
 
     let regex = Regex::new(&format!(r"\b(?:lbl|func)_({})\b", addrs))?;
 
-    info!("Module is \"{}\" and regex is `{}`.", &cli.module, regex);
-    replace_all(&regex, format!("{}_$1", &cli.module))
+    info!("Module is \"{}\" and regex is `{}`.", &args.module, regex);
+    replace_all(&regex, format!("{}_$1", &args.module))
 }
