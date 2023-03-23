@@ -12,5 +12,5 @@ anyhow = "1.0.70"
 env_logger = "0.10.0"
 goblin = "0.6.1"
 log = "0.4.17"
-melee-utils = { version = "0.1.0", path = "../utils" }
+melee-utils = { version = "0.1.0", path = "../rust-utils" }
 regex = "1.7.2"

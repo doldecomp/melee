@@ -13,6 +13,6 @@ globset = "0.4.10"
 itertools = "0.10.5"
 lazy_static = "1.4.0"
 log = "0.4.17"
-melee-utils = { version = "0.1.0", path = "../utils" }
+melee-utils = { version = "0.1.0", path = "../rust-utils" }
 regex = "1.7.2"
 walkdir = "2.3.3"
