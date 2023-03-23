@@ -1,4 +1,4 @@
-#include "fticeclimber2_nana.h"
+#include "ftnana.h"
 
 #include "fticeclimber.h"
 

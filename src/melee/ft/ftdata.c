@@ -27,7 +27,7 @@
 #include "ftGigaKoopa/ftgigakoopa.h"
 #include "ftIceClimber/fticeclimber.h"
 #include "ftIceClimber/fticeclimber1.h"
-#include "ftIceClimber/fticeclimber2_nana.h"
+#include "ftIceClimber/ftnana.h"
 #include "ftKirby/ftkirby.h"
 #include "ftKoopa/ftkoopa.h"
 #include "ftLink/ftlink.h"
