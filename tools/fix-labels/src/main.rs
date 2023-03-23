@@ -32,29 +32,40 @@ fn main() -> Result<()> {
     let text_section = elf
         .section_headers
         .iter()
-        .find(|sh| {
-            let sh_name = elf.shdr_strtab.get_at(sh.sh_name).unwrap();
-            sh_name == ".text"
+        .filter(|sh| {
+            let name = elf.shdr_strtab.get_at(sh.sh_name);
+            name == Some(".text")
         })
-        .context("Failed to find .text section")?;
+        .next()
+        .context("Failed to find the text section.")?;
+    let text_range =
+        text_section.sh_addr..(text_section.sh_addr + text_section.sh_size);
 
-    for symbol in elf.syms.iter() {
-        if symbol.st_value >= text_section.sh_addr
-            && symbol.st_value < text_section.sh_addr + text_section.sh_size
-        {
-            let name = elf.strtab.get_at(symbol.st_name).unwrap();
-            if symbol.st_bind() == STB_GLOBAL {
-                continue;
-            }
+    elf.syms
+        .iter()
+        .filter(|sym| {
+            text_range.contains(&sym.st_value) && sym.st_bind() == STB_GLOBAL
+        })
+        .try_for_each(|sym| -> Result<_> {
+            let name = elf
+                .strtab
+                .get_at(sym.st_name)
+                .context("Failed to get the symbol name.")?
+                .to_owned();
 
-            let new_name = if let Some(captures) = UNK_FUNC_RE.captures(name) {
-                format!(".L{}", captures.get(1).unwrap().as_str())
-            } else {
-                format!(".L{}", name)
-            };
+            let new_name = format!(
+                ".L{}",
+                UNK_FUNC_RE
+                    .captures(&name)
+                    .map(|c| c.get(1).map(|m| m.as_str()).context(
+                        "Failed to get the first capture group \
+                        from UNK_FUNC_RE."
+                    ))
+                    .transpose()?
+                    .unwrap_or(&name)
+            );
 
-            println!("{} -> {}", name, new_name);
-        }
-    }
-    Ok(())
+            println!("{name} -> {new_name}");
+            Ok(())
+        })
 }
