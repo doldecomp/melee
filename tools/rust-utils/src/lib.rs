@@ -1,4 +1,3 @@
-// TODO: thiserror
 use anyhow::{Context, Result};
 use globset::{Glob, GlobSet, GlobSetBuilder};
 use lazy_static::lazy_static;

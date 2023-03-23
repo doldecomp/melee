@@ -1,7 +1,11 @@
 use anyhow::{Context, Result};
 use clap::Parser;
-use goblin::elf::{sym::STB_GLOBAL, Elf};
+use goblin::{
+    elf::{sym::STB_GLOBAL, Elf},
+    elf64::sym::STB_LOCAL,
+};
 use lazy_static::lazy_static;
+use log::trace;
 use regex::Regex;
 use std::{fs::File, io::Read, path::PathBuf};
 
@@ -17,6 +21,7 @@ lazy_static! {
 }
 
 fn main() -> Result<()> {
+    env_logger::builder().format_timestamp_nanos().init();
     let args = Args::parse();
 
     let mut elf_file =
@@ -44,7 +49,7 @@ fn main() -> Result<()> {
     elf.syms
         .iter()
         .filter(|sym| {
-            text_range.contains(&sym.st_value) && sym.st_bind() == STB_GLOBAL
+            text_range.contains(&sym.st_value) && sym.st_bind() == STB_LOCAL
         })
         .try_for_each(|sym| -> Result<_> {
             let name = elf
