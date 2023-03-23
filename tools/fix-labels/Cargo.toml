@@ -1,0 +1,13 @@
+[package]
+name = "melee-fix-labels"
+version = "0.1.0"
+edition = "2021"
+authors = ["Robin Avery <robin@ribbanya.dev>"]
+license = "AGPL-3.0-or-later"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+goblin = "0.6.1"
+melee-utils = { version = "0.1.0", path = "../utils" }
+regex = "1.7.2"
