@@ -174,11 +174,13 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/chara/ftpeach.s.o\
 
 TEXT_O_FILES +=\
-    $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftpopo_init.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftPopo/ftpopo_init.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftpopo.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftnana.c.o\
+
+TEXT_O_FILES +=\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNana/ftnana.c.o\
     $(BUILD_DIR)/asm/melee/ft/chara/ftnana.s.o\
-    $(BUILD_DIR)/src/melee/ft/chara/ftIceClimber/ftnana2.c.o\
+    $(BUILD_DIR)/src/melee/ft/chara/ftNana/ftnana2.c.o\
 
 TEXT_O_FILES +=\
     $(BUILD_DIR)/src/melee/ft/chara/ftPikachu/ftpikachu1.c.o\

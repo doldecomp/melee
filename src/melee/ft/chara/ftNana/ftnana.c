@@ -1,12 +1,12 @@
 #include "ftnana.h"
 
-#include "fticeclimber.h"
-
 #include "ft/fighter.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftPopo/fticeclimber.h"
+#include "ftPopo/ftpopo_init.h"
 
 #include <dolphin/mtx/types.h>
 
