@@ -384,6 +384,7 @@ name = "melee-fix-labels"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "clap",
  "env_logger",
  "goblin",
  "log",

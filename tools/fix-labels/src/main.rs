@@ -1,19 +1,22 @@
+use anyhow::{Context, Result};
+use clap::Parser;
 use goblin::elf::{sym::STB_GLOBAL, Elf};
 use regex::Regex;
-use std::env;
 use std::fs::File;
 use std::io::Read;
+use std::path::PathBuf;
 
-fn main() {
-    let args: Vec<String> = env::args().collect();
-    if args.len() < 2 {
-        println!("Usage: {} <elf_file>", args[0]);
-        return;
-    }
+#[derive(Parser)]
+#[command(author, version, about, long_about = None)]
+struct Args {
+    elf: PathBuf,
+}
 
-    let elf_file_path = &args[1];
+fn main() -> Result<()> {
+    let args = Args::parse();
+
     let mut elf_file =
-        File::open(elf_file_path).expect("Failed to open ELF file");
+        File::open(&args.elf).context("Failed to open ELF file")?;
 
     let mut elf_data = Vec::new();
     elf_file
@@ -51,4 +54,5 @@ fn main() {
             println!("{} -> {}", name, new_name);
         }
     }
+    Ok(())
 }

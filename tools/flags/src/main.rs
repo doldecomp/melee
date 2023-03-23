@@ -5,7 +5,7 @@ use regex::Regex;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
-struct Cli {
+struct Args {
     flags: Vec<String>,
 
     #[arg(short, long)]
@@ -109,13 +109,13 @@ static {type_str} const flags{i} = {flags_str};"
 }
 
 fn main() -> anyhow::Result<()> {
-    let cli = Cli::parse();
+    let args = Args::parse();
 
-    let output = cli
+    let output = args
         .flags
         .iter()
         .enumerate()
-        .map(|(i, flags)| format_output(i, &flags, cli.signed))
+        .map(|(i, flags)| format_output(i, &flags, args.signed))
         .collect::<Vec<_>>()
         .join("\n\n");
 
