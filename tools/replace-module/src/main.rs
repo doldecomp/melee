@@ -1,9 +1,9 @@
 use anyhow::{Context, Result};
 use clap::Parser;
-use globset::{Glob, GlobSet, GlobSetBuilder};
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use log::{debug, info};
+use melee_utils::{replace_all, SRC_FILES};
 use regex::Regex;
 use std::{fs, io::Read, path::Path};
 use walkdir::WalkDir;
@@ -16,11 +16,6 @@ struct Opts {
 }
 
 lazy_static! {
-    static ref GLOBSET: GlobSet = GlobSetBuilder::new()
-        .add(Glob::new("./{asm,docs,src}/**/*.{s,c,h,dox,md}").unwrap())
-        .add(Glob::new("./obj_files.mk").unwrap())
-        .build()
-        .unwrap();
     static ref SYMBOL_RE: Regex =
         Regex::new(r"(?:lbl|func)_([[:xdigit:]]{8})").unwrap();
 }
@@ -56,26 +51,7 @@ fn main() -> Result<()> {
         .join("|");
 
     let regex = Regex::new(&format!(r"\b(?:lbl|func)_({})\b", addrs))?;
-    info!("Regex is `{}`.", regex);
+    info!("Module is \"{}\" and regex is `{}`.", &cli.module, regex);
 
-    for entry in WalkDir::new(".") {
-        let entry = entry?;
-        let path_buf = entry.path().to_path_buf();
-        if entry.file_type().is_file() && GLOBSET.is_match(&path_buf) {
-            replace_symbols(&cli.module, &regex, &path_buf)?;
-        }
-    }
-
-    Ok(())
-}
-
-fn replace_symbols(module: &str, regex: &Regex, path: &Path) -> Result<()> {
-    let content = fs::read_to_string(path)?;
-    debug!("Searching {:?}.", path);
-
-    let expr = format!("{module}_$1");
-    let replaced = regex.replace_all(&content, expr);
-    fs::write(path, replaced.as_ref())?;
-
-    Ok(())
+    replace_all(&regex, format!("{}_$1", &cli.module))
 }
