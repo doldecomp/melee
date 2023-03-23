@@ -40,13 +40,13 @@ pub fn set_current_dir() -> anyhow::Result<()> {
         .context("Failed to change directory to project root.")
 }
 
-pub fn replace_all(from: &Regex, to: String) -> Result<()> {
-    replace_all_with(from, |_| to.to_string())
+pub fn replace_all<'to>(from: &Regex, to: &'to str) -> Result<()> {
+    replace_all_with(from, |_| to)
 }
 
-pub fn replace_all_with<F>(from: &Regex, to: F) -> Result<()>
+pub fn replace_all_with<'to, F>(from: &Regex, to: F) -> Result<()>
 where
-    F: Fn(&Path) -> String,
+    F: Fn(&Path) -> &'to str,
 {
     for entry in WalkDir::new(&*ROOT) {
         let entry = entry?;

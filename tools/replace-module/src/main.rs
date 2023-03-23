@@ -53,5 +53,5 @@ fn main() -> Result<()> {
     ))?;
 
     info!("Module is \"{}\" and regex is `{}`.", &args.prefix, regex);
-    replace_all(&regex, format!("{}_$1", &args.prefix))
+    replace_all(&regex, &format!("{}_$1", &args.prefix))
 }
