@@ -14,13 +14,13 @@ void ftGameWatch_ItemParachuteSetup(HSD_GObj* fighter_gobj)
     Vec3 sp10;
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
+    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
         ftGameWatch_ItemParachuteOnLand(fighter_gobj);
     } else {
         func_8000B1CC(fp->x5E8_fighterBones[1].x0_jobj, NULL, &sp10);
-        fp->sa.gaw.x2258_parachuteGObj =
+        fp->ev.gw.x2258_parachuteGObj =
             func_802C6C38(fighter_gobj, &sp10, 1, fp->facing_dir);
-        if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
+        if (fp->ev.gw.x2258_parachuteGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
             fp->cb.x21D4_callback_EnterHitlag =
@@ -38,10 +38,10 @@ void ftGameWatch_ItemParachuteOnLand(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
+    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
         if (fp->action_id == AS_GAMEWATCH_LANDINGAIRN) {
-            func_802C6E50(fp->sa.gaw.x2258_parachuteGObj);
+            func_802C6E50(fp->ev.gw.x2258_parachuteGObj);
         }
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
@@ -60,20 +60,18 @@ void ftGameWatch_ItemParachuteSetFlag(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
-    fp->sa.gaw.x2258_parachuteGObj = NULL;
+    fp->ev.gw.x2258_parachuteGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-// 0x8014B12C
-// https://decomp.me/scratch/KYJBx // Remove Parachute item
+/// Remove Parachute item
 void ftGameWatch_ItemParachuteRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* parachuteGObj;
 
-    if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
-        func_802C6D6C(fp->sa.gaw.x2258_parachuteGObj);
+    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
+        func_802C6D6C(fp->ev.gw.x2258_parachuteGObj);
         ftGameWatch_ItemParachuteSetFlag(fighter_gobj);
     }
 }
@@ -99,16 +97,20 @@ static void ftGameWatch_ItemTurtleOnLand(HSD_GObj*);
 void ftGameWatch_ItemTurtleSetup(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
-    HSD_GObj* turtleGObj;
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (fp->sa.gaw.x225C_turtleGObj != NULL) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
+    if (fp->ev.gw.x225C_turtleGObj != NULL) {
         ftGameWatch_ItemTurtleOnLand(fighter_gobj);
     } else {
         func_8000B1CC(fp->x5E8_fighterBones[0x11].x0_jobj, NULL, &sp10);
-        fp->sa.gaw.x225C_turtleGObj =
+        fp->ev.gw.x225C_turtleGObj =
             func_802C6F40(fighter_gobj, &sp10, 0x11, fp->facing_dir);
-        if (fp->sa.gaw.x225C_turtleGObj != NULL) {
+        if (fp->ev.gw.x225C_turtleGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
             fp->cb.x21D4_callback_EnterHitlag =
@@ -126,12 +128,12 @@ static void ftGameWatch_ItemTurtleOnLand(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x225C_turtleGObj != NULL) {
+    if (fp->ev.gw.x225C_turtleGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
 
         // Deliberate ASID mismatch to prevent item animation from freezing???
         if (fp->action_id == AS_GAMEWATCH_LANDINGAIRN)
-            func_802C7158(fp->sa.gaw.x225C_turtleGObj);
+            func_802C7158(fp->ev.gw.x225C_turtleGObj);
 
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
@@ -150,7 +152,7 @@ void ftGameWatch_ItemTurtleSetFlag(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
-    fp->sa.gaw.x225C_turtleGObj = NULL;
+    fp->ev.gw.x225C_turtleGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -160,10 +162,9 @@ void ftGameWatch_ItemTurtleSetFlag(HSD_GObj* fighter_gobj)
 void ftGameWatch_ItemTurtleRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* turtleGObj;
 
-    if (fp->sa.gaw.x225C_turtleGObj != NULL) {
-        func_802C7074(fp->sa.gaw.x225C_turtleGObj);
+    if (fp->ev.gw.x225C_turtleGObj != NULL) {
+        func_802C7074(fp->ev.gw.x225C_turtleGObj);
         ftGameWatch_ItemTurtleSetFlag(fighter_gobj);
     }
 }
@@ -183,21 +184,24 @@ bool ftGameWatch_ItemCheckTurtleRemove(HSD_GObj* fighter_gobj)
     return true;
 }
 
-// 0x8014B3A8
-// https://decomp.me/scratch/Ax8pD // Create Sparky Item
+/// Create Sparky Item
 void ftGameWatch_ItemSparkySetup(HSD_GObj* fighter_gobj)
 {
     Vec3 sp10;
-    HSD_GObj* sparkyGObj;
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
+    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
         ftGameWatch_ItemSparkyOnLand(fighter_gobj);
     } else {
         func_8000B1CC(fp->x5E8_fighterBones[0x15].x0_jobj, NULL, &sp10);
-        fp->sa.gaw.x2260_sparkyGObj =
+        fp->ev.gw.x2260_sparkyGObj =
             func_802C720C(fighter_gobj, &sp10, 0x15, fp->facing_dir);
-        if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
+        if (fp->ev.gw.x2260_sparkyGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
             fp->cb.x21D4_callback_EnterHitlag =
@@ -215,11 +219,11 @@ void ftGameWatch_ItemSparkyOnLand(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
+    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
         ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
 
         if (fp->action_id == AS_GAMEWATCH_LANDINGAIRN)
-            func_802C7424(fp->sa.gaw.x2260_sparkyGObj);
+            func_802C7424(fp->ev.gw.x2260_sparkyGObj);
 
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
@@ -238,7 +242,7 @@ void ftGameWatch_ItemSparkySetFlag(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_AttackAir_ExitItemHitlag(fighter_gobj);
-    fp->sa.gaw.x2260_sparkyGObj = NULL;
+    fp->ev.gw.x2260_sparkyGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -248,10 +252,9 @@ void ftGameWatch_ItemSparkySetFlag(HSD_GObj* fighter_gobj)
 void ftGameWatch_ItemSparkyRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* sparkyGObj;
 
-    if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
-        func_802C7340(fp->sa.gaw.x2260_sparkyGObj);
+    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
+        func_802C7340(fp->ev.gw.x2260_sparkyGObj);
         ftGameWatch_ItemSparkySetFlag(fighter_gobj);
     }
 }
@@ -262,14 +265,14 @@ void ftGameWatch_AttackAir_EnterItemHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
-        func_802C6DB8(fp->sa.gaw.x2258_parachuteGObj);
+    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
+        func_802C6DB8(fp->ev.gw.x2258_parachuteGObj);
     }
-    if (fp->sa.gaw.x225C_turtleGObj != NULL) {
-        func_802C70C0(fp->sa.gaw.x225C_turtleGObj);
+    if (fp->ev.gw.x225C_turtleGObj != NULL) {
+        func_802C70C0(fp->ev.gw.x225C_turtleGObj);
     }
-    if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
-        func_802C738C(fp->sa.gaw.x2260_sparkyGObj);
+    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
+        func_802C738C(fp->ev.gw.x2260_sparkyGObj);
     }
 }
 
@@ -278,14 +281,14 @@ static void ftGameWatch_AttackAir_ExitItemHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
-        func_802C6DD8(fp->sa.gaw.x2258_parachuteGObj);
+    if (fp->ev.gw.x2258_parachuteGObj != NULL) {
+        func_802C6DD8(fp->ev.gw.x2258_parachuteGObj);
     }
-    if (fp->sa.gaw.x225C_turtleGObj != NULL) {
-        func_802C70E0(fp->sa.gaw.x225C_turtleGObj);
+    if (fp->ev.gw.x225C_turtleGObj != NULL) {
+        func_802C70E0(fp->ev.gw.x225C_turtleGObj);
     }
-    if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
-        func_802C73AC(fp->sa.gaw.x2260_sparkyGObj);
+    if (fp->ev.gw.x2260_sparkyGObj != NULL) {
+        func_802C73AC(fp->ev.gw.x2260_sparkyGObj);
     }
 }
 
@@ -379,23 +382,24 @@ void ftGameWatch_AttackAirN_Coll(HSD_GObj* fighter_gobj)
 
 static void ftGameWatch_LandingAirN_Init(HSD_GObj*);
 
-// 0x8014B7A8
-// https://decomp.me/scratch/Y3A1Z // Mr. Game & Watch - LandingAirN Think
+/// Mr. Game & Watch - LandingAirN Think
 void ftGameWatch_LandingAirN_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    HSD_GObj* parachute;
-    HSD_GObj* turtle;
-    HSD_GObj* sparky;
 
-    if (fp->sa.gaw.x2258_parachuteGObj != NULL)
-        func_802C6DD8(fp->sa.gaw.x2258_parachuteGObj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
-    if (fp->sa.gaw.x225C_turtleGObj != NULL)
-        func_802C70E0(fp->sa.gaw.x225C_turtleGObj);
+    if (fp->ev.gw.x2258_parachuteGObj != NULL)
+        func_802C6DD8(fp->ev.gw.x2258_parachuteGObj);
 
-    if (fp->sa.gaw.x2260_sparkyGObj != NULL)
-        func_802C73AC(fp->sa.gaw.x2260_sparkyGObj);
+    if (fp->ev.gw.x225C_turtleGObj != NULL)
+        func_802C70E0(fp->ev.gw.x225C_turtleGObj);
+
+    if (fp->ev.gw.x2260_sparkyGObj != NULL)
+        func_802C73AC(fp->ev.gw.x2260_sparkyGObj);
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
         ftGameWatch_LandingAirN_Init(fighter_gobj);
@@ -450,36 +454,36 @@ void ftGameWatch_AttackAirB_Coll(HSD_GObj* fighter_gobj)
     func_80082C74(fighter_gobj, ftGameWatch_LandingAirB_Action);
 }
 
-// 0x8014B904
-// https://decomp.me/scratch/Y3A1Z // Mr. Game & Watch - LandingAirB Think
+/// Mr. Game & Watch - LandingAirB Think
 void ftGameWatch_LandingAirB_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    HSD_GObj* parachute;
-    HSD_GObj* turtle;
-    HSD_GObj* sparky;
 
-    if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
-        func_802C6DD8(fp->sa.gaw.x2258_parachuteGObj);
-    }
-    if (fp->sa.gaw.x225C_turtleGObj != NULL) {
-        func_802C70E0(fp->sa.gaw.x225C_turtleGObj);
-    }
-    if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
-        func_802C73AC(fp->sa.gaw.x2260_sparkyGObj);
-    }
-    if ((u32) fp->x2200_ftcmd_var0 != 0U) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    if (fp->ev.gw.x2258_parachuteGObj != NULL)
+        func_802C6DD8(fp->ev.gw.x2258_parachuteGObj);
+
+    if (fp->ev.gw.x225C_turtleGObj != NULL)
+        func_802C70E0(fp->ev.gw.x225C_turtleGObj);
+
+    if (fp->ev.gw.x2260_sparkyGObj != NULL)
+        func_802C73AC(fp->ev.gw.x2260_sparkyGObj);
+
+    if ((u32) fp->x2200_ftcmd_var0 != 0) {
         ftGameWatch_LandingAirB_Init(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemTurtleOnLand;
         return;
     }
+
     func_800D5BF8(fighter_gobj);
     ftGameWatch_OnDamage(fighter_gobj);
 }
 
-// 0x8014B99C
-// https://decomp.me/scratch/iunEP // Mr. Game & Watch's Up Aerial Action State
-// handler
+/// Mr. Game & Watch's Up Aerial Action State handler
 static void ftGameWatch_AttackAirHi_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -488,60 +492,55 @@ static void ftGameWatch_AttackAirHi_Action(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemSparkySetup;
 }
 
-// 0x8014B9D8
-// https://decomp.me/scratch/AxMcb // Mr. Game & Watch's Up Aerial Animation
-// callback
+/// Mr. Game & Watch's Up Aerial Animation callback
 void ftGameWatch_AttackAirHi_Anim(HSD_GObj* fighter_gobj)
 {
     func_8008D010(fighter_gobj);
 }
 
-// 0x8014B9F8
-// https://decomp.me/scratch/PnNzC // Mr. Game & Watch's Up Aerial IASA callback
+/// Mr. Game & Watch's Up Aerial IASA callback
 void ftGameWatch_AttackAirHi_IASA(HSD_GObj* fighter_gobj)
 {
     func_8008D3A4(fighter_gobj);
 }
 
-// 0x8014BA18
-// https://decomp.me/scratch/EBIVr // Mr. Game & Watch's Back Aerial Physics
-// callback
+/// Mr. Game & Watch's Back Aerial Physics callback
 void ftGameWatch_AttackAirHi_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084DB0(fighter_gobj);
 }
 
-// 0x8014BA38
-// https://decomp.me/scratch/aIqYH // Mr. Game & Watch's Back Aerial Collision
-// callback
+/// Mr. Game & Watch's Back Aerial Collision callback
 void ftGameWatch_AttackAirHi_Coll(HSD_GObj* fighter_gobj)
 {
     func_80082C74(fighter_gobj, ftGameWatch_LandingAirHi_Action);
 }
 
-// 0x8014BA60
-// https://decomp.me/scratch/Y3A1Z // Mr. Game & Watch - LandingAirHi Think
+/// Mr. Game & Watch - LandingAirHi Think
 void ftGameWatch_LandingAirHi_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    HSD_GObj* parachute;
-    HSD_GObj* turtle;
-    HSD_GObj* sparky;
 
-    if (fp->sa.gaw.x2258_parachuteGObj != NULL) {
-        func_802C6DD8(fp->sa.gaw.x2258_parachuteGObj);
-    }
-    if (fp->sa.gaw.x225C_turtleGObj != NULL) {
-        func_802C70E0(fp->sa.gaw.x225C_turtleGObj);
-    }
-    if (fp->sa.gaw.x2260_sparkyGObj != NULL) {
-        func_802C73AC(fp->sa.gaw.x2260_sparkyGObj);
-    }
-    if ((u32) fp->x2200_ftcmd_var0 != 0U) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    if (fp->ev.gw.x2258_parachuteGObj != NULL)
+        func_802C6DD8(fp->ev.gw.x2258_parachuteGObj);
+
+    if (fp->ev.gw.x225C_turtleGObj != NULL)
+        func_802C70E0(fp->ev.gw.x225C_turtleGObj);
+
+    if (fp->ev.gw.x2260_sparkyGObj != NULL)
+        func_802C73AC(fp->ev.gw.x2260_sparkyGObj);
+
+    if (fp->x2200_ftcmd_var0 != 0) {
         ftGameWatch_LandingAirHi_Init(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemSparkyOnLand;
         return;
     }
+
     func_800D5BF8(fighter_gobj);
     ftGameWatch_OnDamage(fighter_gobj);
 }

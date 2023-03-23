@@ -21,13 +21,11 @@ u32 PPCMfl2cr(void);
 void PPCMtl2cr(u32);
 void PPCMtdec(u32);
 void PPCSync(void);
-void PPCHalt(void);
+ATTRIBUTE_NORETURN void PPCHalt(void);
 u32 PPCMfhid2(void);
 void PPCMtwpar(u32);
 void PPCDisableSpeculation(void);
 void PPCSetFpNonIEEEMode(void);
-void PPCSync(void);
-void PPCHalt(void);
 void PPCMthid2(u32);
 
 #endif

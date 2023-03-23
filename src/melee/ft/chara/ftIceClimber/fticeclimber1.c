@@ -1,16 +1,18 @@
-#include <melee/ft/chara/ftIceClimber/fticeclimber1.h>
+#include "fticeclimber1.h"
 
-#include <melee/ft/chara/ftIceClimber/fticeclimber.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
-#include <sysdolphin/baselib/gobj.h>
+#include "fticeclimber.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/forward.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
+
+#include <baselib/gobj.h>
 
 ActionState as_table_iceclimber[] = {
     { 295, 0x00340111, 0x12800000, lbl_8011F318, lbl_8011F390, lbl_8011F398,
@@ -122,7 +124,11 @@ void ftIceClimber_OnLoadForNana(Fighter* fp)
 
 void ftIceClimber_OnLoad(HSD_GObj* fighter_gobj)
 {
-    s32 unused;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     void** item_list = fp->x10C_ftData->x48_items;
     fp->x2222_flag.bits.b5 = 1;
@@ -143,12 +149,12 @@ void ftIceClimber_OnDeath(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0U, 0);
     func_80074A4C(fighter_gobj, 1U, 0);
-    fp->sa.nana.x2234 = 0;
-    fp->sa.nana.x222C = 0;
-    fp->sa.nana.x2230.bits.b0 = false;
-    fp->sa.nana.x2238 = 0;
-    fp->sa.nana.x224C = 0;
-    fp->sa.nana.x2250 = 0.0f;
+    fp->ev.nn.x2234 = 0;
+    fp->ev.nn.x222C = 0;
+    fp->ev.nn.x2230.bits.b0 = false;
+    fp->ev.nn.x2238 = 0;
+    fp->ev.nn.x224C = 0;
+    fp->ev.nn.x2250 = 0.0f;
 }
 
 void ftIceClimber_8011F060(HSD_GObj* fighter_gobj)
@@ -178,10 +184,10 @@ void func_8011F16C(HSD_GObj* fighter_gobj, uint i)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
 
-    if (i != fp->sa.nana.x222C)
+    if (i != fp->ev.nn.x222C)
         return;
 
-    fp->sa.nana.x222C = 0;
+    fp->ev.nn.x222C = 0;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -190,11 +196,11 @@ void func_8011F190(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
 
-    if (fp->sa.nana.x222C == 0)
+    if (fp->ev.nn.x222C == 0)
         return;
 
-    func_802C17DC(fp->sa.nana.x222C);
-    func_8011F16C(fighter_gobj, fp->sa.nana.x222C);
+    func_802C17DC(fp->ev.nn.x222C);
+    func_8011F16C(fighter_gobj, fp->ev.nn.x222C);
 }
 
 extern f32 const lbl_804D9838;
@@ -203,9 +209,9 @@ extern f32 const lbl_804D983C;
 void ftIceClimber_SpecialN_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
-    fp->x2210_ThrowFlags.flags = FLAGS_ZERO;
+    fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sa.nana.x222C = 0;
+    fp->ev.nn.x222C = 0;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 341, 0, NULL, lbl_804D9838,
                                        lbl_804D983C, lbl_804D9838);
@@ -220,22 +226,22 @@ void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
     ftIceClimberAttributes* icattr = fp->x2D4_specialAttributes;
 
-    fp->x2210_ThrowFlags.flags = FLAGS_ZERO;
+    fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->sa.nana.x222C = 0;
+    fp->ev.nn.x222C = 0;
 
-    if ((s32) fp->sa.nana.x224C == false) {
+    if ((s32) fp->ev.nn.x224C == false) {
         fp->x80_self_vel.y = icattr->x4;
-        fp->sa.nana.x224C = true;
-        fp->sa.nana.x2250 = lbl_804D9838;
+        fp->ev.nn.x224C = true;
+        fp->ev.nn.x2250 = lbl_804D9838;
     } else {
-        fp->sa.nana.x2250 = lbl_804D9840;
+        fp->ev.nn.x2250 = lbl_804D9840;
     }
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, 342, 0, NULL, lbl_804D9838,
@@ -276,12 +282,12 @@ void lbl_8011F3D8(HSD_GObj* fighter_gobj)
     if (!func_80082708(fighter_gobj)) {
         Fighter* fp1;
         fp1 = GET_FIGHTER(fighter_gobj);
-        if (fp1->sa.nana.x222C != 0U) {
+        if (fp1->ev.nn.x222C != 0U) {
             Fighter* fp2;
-            func_802C17DC(fp1->sa.nana.x222C);
+            func_802C17DC(fp1->ev.nn.x222C);
             fp2 = GET_FIGHTER(fighter_gobj);
-            if ((u32) fp1->sa.nana.x222C == (u32) fp2->sa.nana.x222C) {
-                fp2->sa.nana.x222C = 0U;
+            if ((u32) fp1->ev.nn.x222C == (u32) fp2->ev.nn.x222C) {
+                fp2->ev.nn.x222C = 0U;
                 fp2->cb.x21E4_callback_OnDeath2 = 0U;
                 fp2->cb.x21DC_callback_OnTakeDamage = 0U;
             }

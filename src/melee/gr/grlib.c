@@ -15,7 +15,7 @@
 
 extern StageInfo stage_info;
 extern u8 lbl_804D7849;
-extern struct _UnkGeneratorStruct* lbl_804D78FC;
+extern struct UnkGeneratorStruct* lbl_804D78FC;
 
 static Vec3 lbl_8049EF58[6];
 

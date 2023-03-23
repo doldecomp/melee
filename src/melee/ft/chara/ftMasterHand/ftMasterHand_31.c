@@ -1,8 +1,7 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_31.h>
+#include "ftMasterHand_31.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
 
 // 80155A58 152638
 // https://decomp.me/scratch/Q3fan
@@ -13,7 +12,7 @@ void lbl_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     ft_1 = gobj_1->user_data;

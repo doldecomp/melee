@@ -1,13 +1,15 @@
-#include <melee/ft/chara/ftCaptain/ftCaptain.h>
+#include "ftCaptain.h"
 
-#include <melee/ft/chara/ftCaptain/ftCaptain.h>
-#include <melee/ft/chara/ftCaptain/ftCaptain_SpecialN.h>
-#include <melee/ft/chara/ftCaptain/ftCaptain_SpecialHi.h>
-#include <melee/ft/chara/ftCaptain/ftCaptain_SpecialLw.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ftCaptain_SpecialHi.h"
+#include "ftCaptain_SpecialLw.h"
+#include "ftCaptain_SpecialN.h"
+#include "ftCaptain_SpecialS.h"
+#include "types.h"
+
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState as_table_captain[] = {
     { 295, 0x00440842, 0x41000000, func_800CD390, func_800CD3B0, func_800CD3D0,
@@ -93,79 +95,52 @@ Fighter_CostumeStrings lbl_803C773C[] = {
     { lbl_803C7650, lbl_803C765C, NULL }, { lbl_803C7678, lbl_803C7684, NULL },
 };
 
-// ftCaptain_OnDeath
-// OnRespawn/OnDeath (same function I've seen called differently)
-// https://decomp.me/scratch/XZ1Jx
 void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, 0);
-    fp->sa.captain.x2230_isSpecialSGFX = 0;
-    fp->sa.captain.x222C_isSpecialSStartGFX = 0;
+    fp->ev.ca.during_specials = 0;
+    fp->ev.ca.during_specials_start = false;
 }
 
-// lbl_800E28C8
-// https://decomp.me/scratch/IoniN
-void lbl_800E28C8(HSD_GObj* fighter_gobj)
+void ftCaptain_800E28C8(HSD_GObj* fighter_gobj)
 {
     ftCaptain_SpecialS_RemoveGFX(fighter_gobj);
 }
 
-// func_800e28e8
-// Used for both OnItemPickup and OnItemCatch
-// https://decomp.me/scratch/MeDCx
-void ftCaptain_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftCaptain_OnItemPickup(HSD_GObj* fighter_gobj, bool arg1)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(fighter_gobj, arg1, 1, 1);
 }
 
-// ftCaptain_OnItemInvisible
-// OnMakeItemInvisible
-// https://decomp.me/scratch/maRvM
 void ftCaptain_OnItemInvisible(HSD_GObj* fighter_gobj)
 {
     Fighter_OnItemInvisible(fighter_gobj, 1);
 }
 
-// ftCaptain_OnItemVisible
-// OnMakeInvisible
-// https://decomp.me/scratch/95tCp
 void ftCaptain_OnItemVisible(HSD_GObj* fighter_gobj)
 {
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-// ftCaptain_OnItemDrop
-// Used for both OnItemRelease and OnUnknownItemRelated
-// https://decomp.me/scratch/PCT5B
+/// @remarks Used for both OnItemRelease and OnUnknownItemRelated
 void ftCaptain_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-// ftCaptain_OnLoadForGanon
-// https://decomp.me/scratch/9AwRw
 void ftCaptain_OnLoadForGanon(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftCaptainAttributes);
 }
 
-// ftCaptain_OnLoad
-// OnLoad
-// https://decomp.me/scratch/aZ4Wn
 void ftCaptain_OnLoad(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftCaptainAttributes* sA2;
-
-    fp->x2224_flag.bits.b7 = 1;
-
+    fp->x2224_flag.bits.b7 = true;
     PUSH_ATTRS(fp, ftCaptainAttributes);
 }
 
-// ftCaptain_LoadSpecialAttrs
-// ResetAttribute
-// https://decomp.me/scratch/mKLYI
 void ftCaptain_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
 {
     COPY_ATTRS(fighter_gobj, ftCaptainAttributes);

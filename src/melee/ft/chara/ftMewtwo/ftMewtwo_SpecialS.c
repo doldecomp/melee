@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
+#include "ftmewtwo.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
 
 // 0x8014665C
 // https://decomp.me/scratch/ktG8y // Set flags
@@ -18,12 +19,7 @@ void ftMewtwo_SpecialS_SetFlags(HSD_GObj* fighter_gobj)
 
 static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
 {
-/// @todo Fix double assignment.
-#ifdef MUST_MATCH
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-#else
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-#endif
 
     if (fp->x1A58_interactedFighter == NULL) {
         func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
@@ -38,14 +34,17 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
 // handler
 void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-    f32 var;
-    f32 var2;
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->mewtwoVars.SpecialS.isConfusionReflect = false;
+    fp->sv.mt.SpecialS.isConfusionReflect = false;
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS, 0,
                                        NULL, 0.0f, 1.0f, 0.0f);
@@ -57,12 +56,7 @@ void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 
 static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
 {
-/// @todo Fix double assignment.
-#ifdef MUST_MATCH
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-#else
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-#endif
 
     if (fp->x1A58_interactedFighter == NULL) {
         func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
@@ -77,24 +71,23 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
 // handler
 void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
-/// @todo Fix double assignment.
-#ifdef MUST_MATCH
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
-#else
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-#endif
 
-    ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
-    f32 var;
+    ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2204_ftcmd_var1 = 0;
-    fp->mewtwoVars.SpecialS.isConfusionReflect = false;
+    fp->sv.mt.SpecialS.isConfusionReflect = false;
 
-    if (fp->sa.mewtwo.x223C_isConfusionBoost == false) {
+    if (fp->ev.mt.x223C_isConfusionBoost == false) {
         fp->x80_self_vel.y = mewtwoAttrs->x18_MEWTWO_CONFUSION_AIR_BOOST;
-        fp->sa.mewtwo.x223C_isConfusionBoost = true;
+        fp->ev.mt.x223C_isConfusionBoost = true;
     }
 
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS, 0,
@@ -175,7 +168,7 @@ void ftMewtwo_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->mewtwoVars.SpecialS.isConfusionReflect != false) {
+    if (fp->sv.mt.SpecialS.isConfusionReflect != false) {
         fp->x2218_flag.bits.b3 = 1;
         fp->x2218_flag.bits.b4 = 1;
         fp->cb.x21C8_callback_OnReflectHit = ftMewtwo_SpecialS_OnReflect;
@@ -220,7 +213,7 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
     ftMewtwo_SpecialS_SetGrab(fighter_gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialS_ReflectThink;
-    fp->sa.mewtwo.x223C_isConfusionBoost = false;
+    fp->ev.mt.x223C_isConfusionBoost = false;
 
     ftMewtwo_SpecialS_SetReflect(fighter_gobj);
 }
@@ -254,16 +247,16 @@ void ftMewtwo_SpecialS_ReflectThink(HSD_GObj* fighter_gobj)
                                           // returns instead of just NULL? //
         fp->x2218_flag.bits.b4 =
             1; // Here it is... the reason Confusion cannot change ownership.
-        fp->mewtwoVars.SpecialS.isConfusionReflect = true;
+        fp->sv.mt.SpecialS.isConfusionReflect = true;
         fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
         return;
 
     case CONFUSION_REFLECT_OFF:
-        if (fp->mewtwoVars.SpecialS.isConfusionReflect != false) {
+        if (fp->sv.mt.SpecialS.isConfusionReflect != false) {
             fp->x2218_flag.bits.b3 = 0;
             fp->x2218_flag.bits.b4 = 0;
             fp->cb.x21C8_callback_OnReflectHit = NULL;
-            fp->mewtwoVars.SpecialS.isConfusionReflect = false;
+            fp->sv.mt.SpecialS.isConfusionReflect = false;
         }
         fp->x2204_ftcmd_var1 = CONFUSION_REFLECT_NONE;
         return;

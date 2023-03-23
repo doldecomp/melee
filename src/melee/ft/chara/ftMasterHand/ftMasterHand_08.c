@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_08.h>
+#include "ftMasterHand_08.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
+#include "ftMasterHand_03.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
 
 // 80151C04 14E7E4
 // https://decomp.me/scratch/ODVZ4
@@ -35,7 +36,7 @@ void lbl_80151CA4(HSD_GObj* arg0) {}
 void func_80151CA8(HSD_GObj* gobj)
 {
     Fighter* temp_r31;
-    MasterHandAttributes* temp_r30;
+    ftMasterHand_SpecialAttrs* temp_r30;
 
     temp_r31 = gobj->user_data;
     temp_r30 = temp_r31->x10C_ftData->ext_attr;

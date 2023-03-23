@@ -1,4 +1,4 @@
-#include <sysdolphin/baselib/lobj.h>
+#include "lobj.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
@@ -843,7 +843,7 @@ void HSD_LObjSetCurrentAll(HSD_LObj* lobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u32 unused;
+    u32 _;
 #endif
 
     LObjRemoveAll();
@@ -871,7 +871,7 @@ void func_803668EC(HSD_LObj* lobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     LObjReplaceAll(lobj);

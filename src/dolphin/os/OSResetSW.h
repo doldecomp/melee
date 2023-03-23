@@ -2,6 +2,7 @@
 #define DOLPHIN_OS_OSRESETSW_H
 
 #include <dolphin/gx/types.h>
+#include <dolphin/os/forward.h>
 #include <Runtime/platform.h>
 
 struct _OSResetSW_Unk1;

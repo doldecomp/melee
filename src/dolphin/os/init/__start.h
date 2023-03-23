@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_OS_INIT___START_H
 #define DOLPHIN_OS_INIT___START_H
 
-#include <dolphin/os/OSReset.h>
+#include "dolphin/os/OSReset.h"
 #include <Runtime/__mem.h>
 #include <Runtime/platform.h>
 
@@ -18,8 +18,6 @@
 extern void InitMetroTRK(void);
 
 u16 Pad3Button AT_ADDRESS(PAD3_BUTTON_ADDR);
-
-static u8 Debug_BBA = 0;
 
 extern int main(int argc, char* argv[]);
 extern void exit(int);

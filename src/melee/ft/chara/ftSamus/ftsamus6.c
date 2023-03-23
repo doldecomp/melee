@@ -16,7 +16,7 @@ void ftSamus_8012ADF0(HSD_GObj* fighter_gobj)
 
 /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2210_ThrowFlags.b0) {
@@ -64,7 +64,7 @@ void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.b0 = 0;
-    fp->x2340_stateVar1 = 0;
+    fp->sv.ss.unk6.x0 = 0;
     if (fp->x894_currentAnimFrame == 3.0f) {
         fp->x2204_ftcmd_var1 = 1;
     }
@@ -98,7 +98,7 @@ void ftSamus_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp->x80_self_vel.x *= samus_attr->x70;
@@ -114,13 +114,13 @@ inline void checkStateVar1(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if ((fp->x2200_ftcmd_var0) && (!fp->x2340_stateVar1)) {
+    if ((fp->x2200_ftcmd_var0) && (!fp->sv.ss.unk6.x0)) {
         ftSamus_8012AEBC(fighter_gobj);
-        fp->x2340_stateVar1 = 1;
+        fp->sv.ss.unk6.x0 = 1;
     }
-    if ((!fp->x2200_ftcmd_var0) && (fp->x2340_stateVar1)) {
+    if ((!fp->x2200_ftcmd_var0) && (fp->sv.ss.unk6.x0)) {
         func_8007B0C0(fighter_gobj, 0);
-        fp->x2340_stateVar1 = 0;
+        fp->sv.ss.unk6.x0 = 0;
     }
 }
 
@@ -345,7 +345,7 @@ void ftSamus_8012B41C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
     func_8007D4B8(fp);
     func_8007D3A8(fp, 0.0f,
@@ -360,7 +360,7 @@ void ftSamus_8012B488(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2200_ftcmd_var0) {
@@ -382,7 +382,7 @@ void ftSamus_8012B4FC(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2200_ftcmd_var0) {
@@ -401,7 +401,7 @@ void ftSamus_UnkSetStateAndCb(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
     fp->x2204_ftcmd_var1 = 2;
-    fp->x2340_stateVar1 = 0;
+    fp->sv.ss.unk6.x0 = 0;
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012ADF0;
 }
 

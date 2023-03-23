@@ -1,19 +1,21 @@
-#include <melee/ft/chara/ftSamus/ftsamus1.h>
+#include "ftsamus1.h"
 
-#include <melee/ft/chara/ftSamus/ftsamus.h>
-#include <melee/ft/chara/ftSamus/ftsamus3.h>
-#include <melee/ft/chara/ftSamus/ftsamus4.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ftsamus.h"
+#include "ftsamus3.h"
+#include "ftsamus4.h"
+#include "types.h"
+
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "lb/lbunknown_001.h"
 
 ActionState as_table_samus[] = {
-    { 295, FLAGS_ZERO, 0x01000000, ftSamus_80128C04, ftSamus_80128D3C,
-      ftSamus_80128E88, ftSamus_80128F60, func_800761C8 },
-    { 296, FLAGS_ZERO, 0x01000000, ftSamus_80128CA0, ftSamus_80128E68,
-      ftSamus_80128EF8, ftSamus_80128FD4, func_800761C8 },
+    { 295, 0, 0x01000000, ftSamus_80128C04, ftSamus_80128D3C, ftSamus_80128E88,
+      ftSamus_80128F60, func_800761C8 },
+    { 296, 0, 0x01000000, ftSamus_80128CA0, ftSamus_80128E68, ftSamus_80128EF8,
+      ftSamus_80128FD4, func_800761C8 },
     { 297, 0x00340111, 0x12000000, ftSamus_80129684, ftSamus_80129B18,
       ftSamus_80129C88, ftSamus_80129D48, func_800761C8 },
     { 298, 0x00340111, 0x12000000, ftSamus_80129774, ftSamus_80129B1C,
@@ -79,12 +81,12 @@ void ftSamus_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, 0);
-    fp->sa.samus.x222C = 0;
-    fp->sa.samus.x2230 = 0;
-    fp->sa.samus.x2238 = 0;
-    fp->sa.samus.x2244 = 0;
-    fp->sa.samus.x223C = 0;
-    fp->sa.samus.x2240 = 0;
+    fp->ev.ss.x222C = 0;
+    fp->ev.ss.x2230 = 0;
+    fp->ev.ss.x2238 = 0;
+    fp->ev.ss.x2244 = 0;
+    fp->ev.ss.x223C = 0;
+    fp->ev.ss.x2240 = 0;
 }
 
 void ftSamus_OnLoad(HSD_GObj* fighter_gobj)
@@ -133,7 +135,7 @@ void ftSamus_80128628(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* attr = fp->x2D4_specialAttributes;
-    s32 samus_x2230 = fp->sa.samus.x2230;
+    s32 samus_x2230 = fp->ev.ss.x2230;
     if (samus_x2230 == attr->x18) {
         func_800BFFD0(fp, 0x35, 0);
     }

@@ -7,6 +7,7 @@
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSThread.h>
+#include <MetroTRK/intrinsics.h>
 #include <placeholder.h>
 #include <string.h>
 
@@ -415,7 +416,7 @@ void __OSDispatchInterrupt(OSException exception, OSContext* context)
 }
 
 #ifdef MWERKS_GEKKO
-static asm void ExternalInterruptHandler(OSException unused, OSContext* ctx)
+static asm void ExternalInterruptHandler(OSException _, OSContext* ctx)
 { // clang-format off
     nofralloc
     stw r0, 0(r4)
@@ -439,7 +440,7 @@ static asm void ExternalInterruptHandler(OSException unused, OSContext* ctx)
     b __OSDispatchInterrupt
 } // clang-format on
 #else
-static void ExternalInterruptHandler(OSException unused, OSContext* ctx)
+static void ExternalInterruptHandler(OSException _, OSContext* ctx)
 {
     NOT_IMPLEMENTED;
 }

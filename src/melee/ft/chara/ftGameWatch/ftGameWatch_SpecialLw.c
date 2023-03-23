@@ -9,85 +9,85 @@
 #include <melee/lb/lbunknown_001.h>
 #include <sysdolphin/baselib/gobjproc.h>
 
-// 0x8014CBF4
-// https://decomp.me/scratch/c9uUz // Create Oil Panic Item //
+/// Create Oil Panic Item
 void ftGameWatch_ItemPanicSetup(HSD_GObj* fighter_gobj)
 {
-    Vec3 sp1C;
-    HSD_GObjEvent cb_OnDeath2;
-    HSD_GObjEvent cb_OnTakeDamage;
-    HSD_GObjEvent cb_EnterHitlag;
-    HSD_GObjEvent cb_ExitHitlag;
-
     Fighter* fp = getFighter(fighter_gobj);
 
-    if (fp->sa.gaw.x2268_panicGObj == NULL) {
-        func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp1C);
+    if (fp->ev.gw.x2268_panicGObj == NULL) {
+        /// @todo Can't move below @c _.
+        Vec3 vec;
 
-        fp->sa.gaw.x2268_panicGObj =
-            func_802C7D60(fighter_gobj, &sp1C, 0, fp->facing_dir);
+        /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 _[16];
+#endif
+
+        func_8000B1CC(fp->x5E8_fighterBones[TopN].x0_jobj, NULL, &vec);
+
+        fp->ev.gw.x2268_panicGObj =
+            func_802C7D60(fighter_gobj, &vec, 0, fp->facing_dir);
     }
-    if (fp->sa.gaw.x2268_panicGObj != NULL) {
+
+    if (fp->ev.gw.x2268_panicGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
     }
+
     fp->cb.x21D4_callback_EnterHitlag = ftGameWatch_ItemPanicEnterHitlag;
     fp->cb.x21D8_callback_ExitHitlag = ftGameWatch_ItemPanicExitHitlag;
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-// 0x8014CC9C
-// https://decomp.me/scratch/Cdp6X // Set Oil Panic flags + clear pointers
+/// Set Oil Panic flags + clear pointers
 void ftGameWatch_ItemPanicSetFlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_ItemPanicExitHitlag(fighter_gobj);
-    fp->sa.gaw.x2268_panicGObj = NULL;
+    fp->ev.gw.x2268_panicGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-// 0x8014CCD8
-// https://decomp.me/scratch/UDMIR // Remove Oil Panic item
+/// Remove Oil Panic item
 void ftGameWatch_ItemPanicRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2268_panicGObj != NULL) {
-        func_802C7E94(fp->sa.gaw.x2268_panicGObj);
+    if (fp->ev.gw.x2268_panicGObj != NULL) {
+        func_802C7E94(fp->ev.gw.x2268_panicGObj);
         ftGameWatch_ItemPanicSetFlag(fighter_gobj);
     }
 }
 
-// 0x8014CD38 - Apply hitlag to Oil Panic item
+/// Apply hitlag to Oil Panic item
 void ftGameWatch_ItemPanicEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2268_panicGObj != NULL)
-        func_802C7EE0(fp->sa.gaw.x2268_panicGObj);
+    if (fp->ev.gw.x2268_panicGObj != NULL)
+        func_802C7EE0(fp->ev.gw.x2268_panicGObj);
 }
 
-// 0x8014CD68 - Remove hitlag for Oil Panic item
+/// Remove hitlag for Oil Panic item
 void ftGameWatch_ItemPanicExitHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2268_panicGObj != NULL)
-        func_802C7F00(fp->sa.gaw.x2268_panicGObj);
+    if (fp->ev.gw.x2268_panicGObj != NULL)
+        func_802C7F00(fp->ev.gw.x2268_panicGObj);
 }
 
-// 0x8014CD98
-// https://decomp.me/scratch/QwezP // Check if Mr. Game & Watch is in any of his
-// Oil Panic Action States
+/// Check if Mr. Game & Watch is in any of his Oil Panic Action States
 bool ftGameWatch_ItemCheckPanicRemove(HSD_GObj* fighter_gobj)
 {
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
     /// @todo @c enum
-    enum_t asid = (GET_FIGHTER(fighter_gobj))->action_id;
+    enum_t asid = fp->action_id;
 
-    if ((asid >= AS_GAMEWATCH_SPECIALLW_SHOOT) &&
-        (asid <= AS_GAMEWATCH_SPECIALAIRLW_SHOOT))
+    if (asid >= AS_GAMEWATCH_SPECIALLW_SHOOT &&
+        asid <= AS_GAMEWATCH_SPECIALAIRLW_SHOOT)
     {
         return false;
     }
@@ -95,17 +95,16 @@ bool ftGameWatch_ItemCheckPanicRemove(HSD_GObj* fighter_gobj)
     return true;
 }
 
-// 0x8014CDC0
-// https://decomp.me/scratch/bF0RR // Update Oil Panic charge level indicator
-// models
+/// Update Oil Panic charge level indicator models
 void ftGameWatch_SpecialLw_UpdateBucketModel(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_80074B0C(fighter_gobj, 5, 2);
 
-    switch (fp->sa.gaw.x2238_panicCharge) {
+    switch (fp->ev.gw.x2238_panicCharge) {
     case GAMEWATCH_PANIC_EMPTY:
+        /// @todo @c enum for parts
         func_80074B0C(fighter_gobj, 6, -1);
         func_80074B0C(fighter_gobj, 7, -1);
         func_80074B0C(fighter_gobj, 8, -1);
@@ -134,43 +133,45 @@ inline void ftGameWatch_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->gameWatchVars.SpecialLw.isRelease = false;
-    fp->gameWatchVars.SpecialLw.turnFrames = 0;
+    fp->sv.gw.SpecialLw.isRelease = false;
+    fp->sv.gw.SpecialLw.turnFrames = 0;
 }
 
-// 0x8014CEF0
-// https://decomp.me/scratch/P6t9i // Mr. Game & Watch's Oil Panic Start Action
-// State handler
+/// Mr. Game & Watch's Oil Panic Start Action State handler
 void ftGameWatch_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
         ftGameWatch_SpecialLwShoot_ReleaseOil(fighter_gobj);
         return;
     }
-    fp->x80_self_vel.y = 0.0f;
+
+    fp->x80_self_vel.y = 0;
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
+                                       NULL, 0, 1, 0);
+
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialLw_SetVars(fighter_gobj);
 }
 
-// 0x8014CF78
-// https://decomp.me/scratch/NxM32
 void ftGameWatch_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
+    ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
 
-    if (fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
         ftGameWatch_SpecialAirLwShoot_ReleaseOil(fighter_gobj);
         return;
     }
-    fp->x80_self_vel.x /= gawAttrs->x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE;
-    fp->x80_self_vel.y = 0.0f;
+
+    fp->x80_self_vel.x /= sa->x64_GAMEWATCH_PANIC_MOMENTUM_PRESERVE;
+    fp->x80_self_vel.y = 0;
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW,
-                                       0, NULL, 0.0f, 1.0f, 0.0f);
+                                       0, NULL, 0, 1, 0);
+
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialLw_SetVars(fighter_gobj);
 }
@@ -179,36 +180,38 @@ static inline void ftGameWatch_SpecialLw_UpdateVars(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     u32 ftcmd_var = fp->x2200_ftcmd_var0;
-    ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
-    if (ftcmd_var == 1U) {
-        fp->x2200_ftcmd_var0 = 2U;
+    ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
+
+    if (ftcmd_var == 1) {
+        fp->x2200_ftcmd_var0 = 2;
         ftColl_CreateAbsorbHit(fighter_gobj,
-                               &gawAttrs->x80_GAMEWATCH_PANIC_ABSORPTION);
-    } else if (ftcmd_var == 0U) {
-        fp->x2218_flag.bits.b6 = 0;
+                               &sa->x80_GAMEWATCH_PANIC_ABSORPTION);
+    } else if (ftcmd_var == 0) {
+        fp->x2218_flag.bits.b6 = false;
     }
 
-    if ((u32) fp->x2200_ftcmd_var0 != 0U)
+    if (fp->x2200_ftcmd_var0 != 0)
         ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
 }
 
-// 0x8014D014
-// https://decomp.me/scratch/UxcJl // Mr. Game & Watch's grounded Oil Panic Loop
-// Animation callback
+static int const anim_update_frame = 38;
+
+/// Mr. Game & Watch's grounded Oil Panic Loop Animation callback
 void ftGameWatch_SpecialLw_Anim(HSD_GObj* fighter_gobj)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirLw_Anim.
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 unused[8];
-#endif
-
-    if ((38.0f == fp->x894_currentAnimFrame) &&
-        ((s32) fp->gameWatchVars.SpecialLw.isRelease == false))
+    /// @todo Frame number constant
+    if (fp->x894_currentAnimFrame == anim_update_frame &&
+        !fp->sv.gw.SpecialLw.isRelease)
     {
-        ftGameWatch_SpecialLw_UpdateAction(fighter_gobj, 5.0f);
+        ftGameWatch_SpecialLw_UpdateAction(fighter_gobj, 5);
     }
 
     ftGameWatch_SpecialLw_UpdateVars(fighter_gobj);
@@ -217,138 +220,136 @@ void ftGameWatch_SpecialLw_Anim(HSD_GObj* fighter_gobj)
         func_8008A2BC(fighter_gobj);
 }
 
-// 0x8014D014
-// https://decomp.me/scratch/u5lmv // Mr. Game & Watch's aerial Oil Panic Loop
-// Animation callback
+/// Mr. Game & Watch's aerial Oil Panic Loop Animation callback
 void ftGameWatch_SpecialAirLw_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
-    if ((38.0f == fp->x894_currentAnimFrame) &&
-        ((s32) fp->gameWatchVars.SpecialLw.isRelease == false))
+    if (fp->x894_currentAnimFrame == anim_update_frame &&
+        !fp->sv.gw.SpecialLw.isRelease)
     {
-        ftGameWatch_SpecialAirLw_UpdateAction(fighter_gobj, 5.0f);
+        ftGameWatch_SpecialAirLw_UpdateAction(fighter_gobj, 5);
     }
 
     ftGameWatch_SpecialLw_UpdateVars(fighter_gobj);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_800CC730(fighter_gobj);
-    }
 }
 
-// 0x8014D1AC
-// https://decomp.me/scratch/U5Cl2 // Mr. Game & Watch's grounded Oil Panic Loop
-// IASA callback
+/// Mr. Game & Watch's grounded Oil Panic Loop IASA callback
 void ftGameWatch_SpecialLw_IASA(HSD_GObj* fighter_gobj)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirLw_IASA.
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    f32 facingDir;
-    f32 stick_range;
-    s32 turnFrames;
-    ftGameWatchAttributes* gawAttrs;
 
-    fp = GET_FIGHTER(fighter_gobj);
-    turnFrames = fp->gameWatchVars.SpecialLw.turnFrames;
-    gawAttrs = getFtSpecialAttrs(fp);
-    if (turnFrames > 0) {
-        fp->gameWatchVars.SpecialLw.turnFrames = turnFrames - 1;
-    } else {
-        stick_range = fp->input.x620_lstick_x;
-        if (stick_range < 0.0f) {
-            stick_range = -stick_range;
-        }
-        if (stick_range > p_ftCommonData->x0) {
-            facingDir = fp->facing_dir;
-            func_8007D9FC(fp);
-            if (facingDir != fp->facing_dir) {
-                fp->gameWatchVars.SpecialLw.turnFrames =
-                    (s32) gawAttrs->x7C_GAMEWATCH_PANIC_TURN_FRAMES;
+    {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
+        int turn_frames = fp->sv.gw.SpecialLw.turnFrames;
+        ftGameWatchAttributes* sa = getFtSpecialAttrsD(fp);
+
+        if (turn_frames > 0) {
+            fp->sv.gw.SpecialLw.turnFrames = turn_frames - 1;
+        } else {
+            f32 stick_range = fp->input.x620_lstick_x;
+
+            if (stick_range < 0)
+                stick_range = -stick_range;
+
+            if (stick_range > p_ftCommonData->x0) {
+                f32 facing_dir = fp->facing_dir;
+
+                func_8007D9FC(fp);
+
+                if (facing_dir != fp->facing_dir) {
+                    fp->sv.gw.SpecialLw.turnFrames =
+                        sa->x7C_GAMEWATCH_PANIC_TURN_FRAMES;
+                }
             }
         }
     }
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
-        fp->gameWatchVars.SpecialLw.isRelease = true;
-    }
+
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
+        fp->sv.gw.SpecialLw.isRelease = true;
 }
 
-// 0x8014D264
-// https://decomp.me/scratch/XVThc // Mr. Game & Watch's aerial Oil Panic Loop
-// IASA callback
+/// Mr. Game & Watch's aerial Oil Panic Loop IASA callback
 void ftGameWatch_SpecialAirLw_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    f32 facingDir;
-    f32 stick_range;
-    s32 turnFrames;
-    ftGameWatchAttributes* gawAttrs;
 
-    fp = GET_FIGHTER(fighter_gobj);
-    turnFrames = fp->gameWatchVars.SpecialLw.turnFrames;
-    gawAttrs = getFtSpecialAttrs(fp);
-    if (turnFrames > 0) {
-        fp->gameWatchVars.SpecialLw.turnFrames = turnFrames - 1;
-    } else {
-        stick_range = fp->input.x620_lstick_x;
-        if (stick_range < 0.0f) {
-            stick_range = -stick_range;
-        }
-        if (stick_range > p_ftCommonData->x0) {
-            facingDir = fp->facing_dir;
-            func_8007D9FC(fp);
-            if (facingDir != fp->facing_dir) {
-                fp->gameWatchVars.SpecialLw.turnFrames =
-                    (s32) gawAttrs->x7C_GAMEWATCH_PANIC_TURN_FRAMES;
+    {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
+        int turnFrames = fp->sv.gw.SpecialLw.turnFrames;
+        ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
+
+        if (turnFrames > 0) {
+            fp->sv.gw.SpecialLw.turnFrames = turnFrames - 1;
+        } else {
+            f32 stick_range = fp->input.x620_lstick_x;
+
+            if (stick_range < 0)
+                stick_range = -stick_range;
+
+            if (stick_range > p_ftCommonData->x0) {
+                f32 facingDir = fp->facing_dir;
+                func_8007D9FC(fp);
+
+                if (facingDir != fp->facing_dir) {
+                    fp->sv.gw.SpecialLw.turnFrames =
+                        sa->x7C_GAMEWATCH_PANIC_TURN_FRAMES;
+                }
             }
         }
     }
-    if ((fp->input.x65C_heldInputs & HSD_BUTTON_B) == false) {
-        fp->gameWatchVars.SpecialLw.isRelease = true;
-    }
+
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
+        fp->sv.gw.SpecialLw.isRelease = true;
 }
 
-// 0x8014D31C
-// https://decomp.me/scratch/aC057 // Mr. Game & Watch's grounded Oil Panic Loop
-// Physics callback
+/// Mr. Game & Watch's grounded Oil Panic Loop Physics callback
 void ftGameWatch_SpecialLw_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084F3C(fighter_gobj);
     func_8007AF10(fighter_gobj);
 }
 
-// 0x8014D350
-// https://decomp.me/scratch/3eki5 // Mr. Game & Watch's aerial Oil Panic Loop
-// Physics callback
+/// Mr. Game & Watch's aerial Oil Panic Loop Physics callback
 void ftGameWatch_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
-    f32 fall_accel;
-    f32 momentum_mul;
-    f32 termnial_velocity;
-    f32 unk;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
 
-    func_8007D494(fp, gawAttrs->x6C_GAMEWATCH_PANIC_FALL_ACCEL,
-                  gawAttrs->x70_GAMEWATCH_PANIC_VEL_Y_MAX);
-    func_8007CE94(fp, gawAttrs->x68_GAMEWATCH_PANIC_MOMENTUM_MUL);
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
+
+    func_8007D494(fp, sa->x6C_GAMEWATCH_PANIC_FALL_ACCEL,
+                  sa->x70_GAMEWATCH_PANIC_VEL_Y_MAX);
+
+    func_8007CE94(fp, sa->x68_GAMEWATCH_PANIC_MOMENTUM_MUL);
     func_8007AF10(fighter_gobj);
 }
 
-// 0x8014D3B4
-// https://decomp.me/scratch/yrY9J // Mr. Game & Watch's grounded Oil Panic Loop
-// Collision callback
+/// Mr. Game & Watch's grounded Oil Panic Loop Collision callback
 void ftGameWatch_SpecialLw_Coll(HSD_GObj* fighter_gobj)
 {
     if (func_800827A0(fighter_gobj) == false)
         ftGameWatch_SpecialLw_GroundToAir(fighter_gobj);
 }
 
-// 0x8014D3F0 - Mr. Game & Watch's aerial Oil Panic Loop Collision callback
+/// Mr. Game & Watch's aerial Oil Panic Loop Collision callback
 void ftGameWatch_SpecialAirLw_Coll(HSD_GObj* fighter_gobj)
 {
     if (func_80081D0C(fighter_gobj) != false)
@@ -359,51 +360,59 @@ static inline void ftGameWatch_SpecialLw_UpdateVarsColl(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     u32 ftcmd_var = fp->x2200_ftcmd_var0;
-    ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
-    if (ftcmd_var == 2U) {
+    ftGameWatchAttributes* sa = fp->x2D4_specialAttributes;
+
+    if (ftcmd_var == 2) {
         ftColl_CreateAbsorbHit(fighter_gobj,
-                               &gawAttrs->x80_GAMEWATCH_PANIC_ABSORPTION);
-    } else if (ftcmd_var == 0U) {
-        fp->x2218_flag.bits.b6 = 0;
+                               &sa->x80_GAMEWATCH_PANIC_ABSORPTION);
+    } else if (ftcmd_var == 0) {
+        fp->x2218_flag.bits.b6 = false;
     }
-    if ((u32) fp->x2200_ftcmd_var0 != 0U) {
+
+    if (fp->x2200_ftcmd_var0 != 0)
         ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
-    }
 }
 
-// 0x8014D42C
-// https://decomp.me/scratch/I9dd1
+static Fighter_ActionStateChangeFlags const transition_flags0 =
+    FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
+    FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateMatAnim |
+    FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
+    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
+    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
+    FtStateChange_Unk_27;
+
 void ftGameWatch_SpecialLw_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_8007D5D4(fp);
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW,
-                                       FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                                       transition_flags0, NULL,
+                                       fp->x894_currentAnimFrame, 1, 0);
+
     ftGameWatch_SpecialLw_UpdateVarsColl(fighter_gobj);
 }
 
-// 0x8014D4DC
-// https://decomp.me/scratch/xk6So
 void ftGameWatch_SpecialAirLw_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_8007D7FC(fp);
+
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW,
-                                       FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+                                       transition_flags0, NULL,
+                                       fp->x894_currentAnimFrame, 1, 0);
+
     ftGameWatch_SpecialLw_UpdateVarsColl(fighter_gobj);
 }
 
@@ -411,150 +420,143 @@ static inline void
 ftGameWatch_SpecialLw_UpdateVarsAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftGameWatchAttributes* gawAttrs = getFtSpecialAttrs(fp);
-    if ((u32) fp->x2200_ftcmd_var0 >= 1U) {
-        fp->x2200_ftcmd_var0 = 2U;
+    ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
+
+    if (fp->x2200_ftcmd_var0 >= 1) {
+        fp->x2200_ftcmd_var0 = 2;
+
         ftColl_CreateAbsorbHit(fighter_gobj,
-                               &gawAttrs->x80_GAMEWATCH_PANIC_ABSORPTION);
+                               &sa->x80_GAMEWATCH_PANIC_ABSORPTION);
     }
 
-    if ((u32) fp->x2200_ftcmd_var0 != 0U)
+    if (fp->x2200_ftcmd_var0 != 0)
         ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
 }
 
-// 0x8014D58C
-// https://decomp.me/scratch/qFKjA
-void ftGameWatch_SpecialLw_UpdateAction(HSD_GObj* fighter_gobj, f32 animFrame)
+/// @todo Combine common flags with #transition_flags0.
+static Fighter_ActionStateChangeFlags const transition_flags1 =
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
+    FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
+    FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
+    FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
+
+void ftGameWatch_SpecialLw_UpdateAction(HSD_GObj* fighter_gobj, f32 anim_frame)
 {
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW,
-                                       FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL,
-                                       animFrame - 1.0f, 1.0f, 0.0f);
+                                       transition_flags1, NULL, anim_frame - 1,
+                                       1, 0);
+
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(fighter_gobj);
 }
 
-// 0x8014D620
-// https://decomp.me/scratch/N583p
 void ftGameWatch_SpecialAirLw_UpdateAction(HSD_GObj* fighter_gobj,
-                                           f32 animFrame)
+                                           f32 anim_frame)
 {
     Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW,
-                                       FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL,
-                                       animFrame - 1.0f, 1.0f, 0.0f);
+                                       transition_flags1, NULL, anim_frame - 1,
+                                       1, 0);
+
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialLw_UpdateVarsAction(fighter_gobj);
 }
 
-// 0x8014D6B4
-// https://decomp.me/scratch/WEwao // Mr. Game & Watch's grounded Oil Panic Fill
-// Action State handler
+/// Mr. Game & Watch's grounded Oil Panic Fill Action State handler
 void ftGameWatch_SpecialLwCatch_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if ((s32) fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
-            func_8008A2BC(fighter_gobj);
-            return;
-        }
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW,
-                                           FTGAMEWATCH_SPECIALLW_UPDATE_FLAG,
-                                           NULL, 4.0f, 1.0f, 0.0f);
-        func_8006EBA4(fighter_gobj);
-        ftGameWatch_SpecialLw_UpdateVarsAction(fighter_gobj);
+    if (ftAnim_IsFramesRemaining(fighter_gobj))
+        return;
+
+    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+        func_8008A2BC(fighter_gobj);
+        return;
     }
+
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALLW,
+                                       transition_flags1, NULL, 4, 1, 0);
+
+    func_8006EBA4(fighter_gobj);
+    ftGameWatch_SpecialLw_UpdateVarsAction(fighter_gobj);
 }
 
-// 0x8014D774 - Mr. Game & Watch's aerial Oil Panic Fill Animation callback
+/// Mr. Game & Watch's aerial Oil Panic Fill Animation callback
 void ftGameWatch_SpecialAirLwCatch_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if ((s32) fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
-            func_800CC730(fighter_gobj);
-            return;
-        }
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW,
-            FTGAMEWATCH_SPECIALLW_UPDATE_FLAG, NULL, 4.0f, 1.0f, 0.0f);
-        func_8006EBA4(fighter_gobj);
-        ftGameWatch_SpecialLw_UpdateVarsAction(fighter_gobj);
+    if (ftAnim_IsFramesRemaining(fighter_gobj))
+        return;
+
+    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL) {
+        func_800CC730(fighter_gobj);
+        return;
     }
+
+    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW,
+                                       transition_flags1, NULL, 4, 1, 0);
+
+    func_8006EBA4(fighter_gobj);
+    ftGameWatch_SpecialLw_UpdateVarsAction(fighter_gobj);
 }
 
-// 0x8014D834 - Mr. Game & Watch's grounded Oil Panic Fill IASA callback
-void ftGameWatch_SpecialLwCatch_IASA(HSD_GObj* fighter_gobj)
-{
-    return;
-}
+/// Mr. Game & Watch's grounded Oil Panic Fill IASA callback
+void ftGameWatch_SpecialLwCatch_IASA(HSD_GObj* fighter_gobj) {}
 
-// 0x8014D838 - Mr. Game & Watch's aerial Oil Panic Fill IASA callback
-void ftGameWatch_SpecialAirLwCatch_IASA(HSD_GObj* fighter_gobj)
-{
-    return;
-}
+/// Mr. Game & Watch's aerial Oil Panic Fill IASA callback
+void ftGameWatch_SpecialAirLwCatch_IASA(HSD_GObj* fighter_gobj) {}
 
-// 0x8014D83C - Mr. Game & Watch's grounded Oil Panic Fill Physics callback
+/// Mr. Game & Watch's grounded Oil Panic Fill Physics callback
 void ftGameWatch_SpecialLwCatch_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084F3C(fighter_gobj);
 }
 
-// 0x8014D85C - Mr. Game & Watch's aerial Oil Panic Fill Physics callback
+/// Mr. Game & Watch's aerial Oil Panic Fill Physics callback
 void ftGameWatch_SpecialAirLwCatch_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084EEC(fighter_gobj);
 }
 
-// 0x8014D87C
-// https://decomp.me/scratch/Me11F // Mr. Game & Watch's grounded Oil Panic Fill
-// Collision callback
+/// Mr. Game & Watch's grounded Oil Panic Fill Collision callback
 void ftGameWatch_SpecialLwCatch_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == false) {
+    if (!func_80082708(fighter_gobj))
         ftGameWatch_SpecialLwCatch_GroundToAir(fighter_gobj);
-    }
 }
 
-// 0x8014D8B8 - Mr. Game & Watch's aerial Oil Panic Fill Collision callback
+/// Mr. Game & Watch's aerial Oil Panic Fill Collision callback
 void ftGameWatch_SpecialAirLwCatch_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != false) {
+    if (func_80081D0C(fighter_gobj))
         ftGameWatch_SpecialAirLwCatch_AirToGround(fighter_gobj);
-    }
 }
 
-// 0x8014D8F4
-// https://decomp.me/scratch/zwOYe // Mr. Game & Watch's ground -> air Oil Panic
-// Fill Action State handler
+/// Mr. Game & Watch's ground -> air Oil Panic Fill Action State handler
 void ftGameWatch_SpecialLwCatch_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj,
-                                       AS_GAMEWATCH_SPECIALAIRLW_CATCH,
-                                       FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW_CATCH, transition_flags0, NULL,
+        fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 0x8014D954 - Mr. Game & Watch's air -> ground Oil Panic Fill Action State
-// handler
+/// Mr. Game & Watch's air -> ground Oil Panic Fill Action State handler
 void ftGameWatch_SpecialAirLwCatch_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-
     func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj,
-                                       AS_GAMEWATCH_SPECIALLW_CATCH,
-                                       FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, AS_GAMEWATCH_SPECIALLW_CATCH, transition_flags0, NULL,
+        fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 0x8014D9B4
-// https://decomp.me/scratch/iEZQY // Check to enter grounded or aerial Oil
-// Panic Fill
+/// Check to enter grounded or aerial Oil Panic Fill
 void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -562,19 +564,18 @@ void ftGameWatch_AbsorbThink_DecideAction(HSD_GObj* fighter_gobj)
     /// @todo @c enum
     enum_t asid;
 
-    fp->sa.gaw.x2238_panicCharge += fp->AbsorbAttr.x1A48_hitsTaken;
-    fp->sa.gaw.x223C_panicDamage += fp->AbsorbAttr.x1A44_damageTaken;
+    fp->ev.gw.x2238_panicCharge += fp->AbsorbAttr.x1A48_hitsTaken;
+    fp->ev.gw.x223C_panicDamage += fp->AbsorbAttr.x1A44_damageTaken;
 
-    if ((s32) fp->sa.gaw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
+    if (fp->ev.gw.x2238_panicCharge >= GAMEWATCH_PANIC_FULL)
         func_800BFFD0(fp, 5, 0);
 
-    if ((s32) fp->xE0_ground_or_air == GA_Ground)
+    if (fp->xE0_ground_or_air == GA_Ground)
         asid = AS_GAMEWATCH_SPECIALLW_CATCH;
     else
         asid = AS_GAMEWATCH_SPECIALAIRLW_CATCH;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, asid, 0, NULL, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(fighter_gobj, asid, 0, NULL, 0, 1, 0);
     ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
 }
 
@@ -582,31 +583,35 @@ static inline void
 ftGameWatch_SpecialLwShoot_ApplyDamage(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    int i;
 
+    int i;
     for (i = 0; i < 4; i++)
         if (fp->x914[i].state == HitCapsule_Enabled)
             func_8007ABD0(&fp->x914[i], fp->x2204_ftcmd_var1, fighter_gobj);
 }
 
-// 0x8014DA60
-// https://decomp.me/scratch/LhPOm // Mr. Game & Watch's grounded Oil Panic
-// Release Animation callback
+/// Mr. Game & Watch's grounded Oil Panic Release Animation callback
 void ftGameWatch_SpecialLwShoot_Anim(HSD_GObj* fighter_gobj)
 {
-    /// @todo Shared @c inline with #ftGameWatch_SpecialAirLwShoot_Anim.
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
+    /// @todo Shared @c inline with #ftGameWatch_SpecialAirLwShoot_Anim.
     ftGameWatch_SpecialLwShoot_ApplyDamage(fighter_gobj);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
 }
 
-// 0x8014DAF0 - Mr. Game & Watch's aerial Oil Panic Release Animation callback
+/// Mr. Game & Watch's aerial Oil Panic Release Animation callback
 void ftGameWatch_SpecialAirLwShoot_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     ftGameWatch_SpecialLwShoot_ApplyDamage(fighter_gobj);
 
@@ -614,135 +619,141 @@ void ftGameWatch_SpecialAirLwShoot_Anim(HSD_GObj* fighter_gobj)
         func_800CC730(fighter_gobj);
 }
 
-// 0x8014DB80 - Mr. Game & Watch's grounded Oil Panic Release IASA callback
-void ftGameWatch_SpecialLwShoot_IASA(HSD_GObj* fighter_gobj)
-{
-    return;
-}
+/// Mr. Game & Watch's grounded Oil Panic Release IASA callback
+void ftGameWatch_SpecialLwShoot_IASA(HSD_GObj* fighter_gobj) {}
 
-// 0x8014DB84 - Mr. Game & Watch's aerial Oil Panic Release IASA callback
-void ftGameWatch_SpecialAirLwShoot_IASA(HSD_GObj* fighter_gobj)
-{
-    return;
-}
+/// Mr. Game & Watch's aerial Oil Panic Release IASA callback
+void ftGameWatch_SpecialAirLwShoot_IASA(HSD_GObj* fighter_gobj) {}
 
-// 0x8014DB88 - Mr. Game & Watch's grounded Oil Panic Release Physics callback
+/// Mr. Game & Watch's grounded Oil Panic Release Physics callback
 void ftGameWatch_SpecialLwShoot_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084F3C(fighter_gobj);
 }
 
-// 0x8014DBA8 - Mr. Game & Watch's aerial Oil Panic Release Physics callback
+/// Mr. Game & Watch's aerial Oil Panic Release Physics callback
 void ftGameWatch_SpecialAirLwShoot_Phys(HSD_GObj* fighter_gobj)
 {
     func_80084EEC(fighter_gobj);
 }
 
-// 0x8014DBC8
-// https://decomp.me/scratch/SvQLD // Mr. Game & Watch's grounded Oil Panic
-// Release Collision callback
+/// Mr. Game & Watch's grounded Oil Panic Release Collision callback
 void ftGameWatch_SpecialLwShoot_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == false)
+    if (!func_80082708(fighter_gobj))
         ftGameWatch_SpecialLwShoot_GroundToAir(fighter_gobj);
 }
 
-// 0x8014DC04 - Mr. Game & Watch's aerial Oil Panic Release Collision callback
+/// Mr. Game & Watch's aerial Oil Panic Release Collision callback
 void ftGameWatch_SpecialAirLwShoot_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != false) {
+    if (func_80081D0C(fighter_gobj))
         ftGameWatch_SpecialAirLwShoot_AirToGround(fighter_gobj);
-    }
 }
 
-// 0x8014DC40
-// https://decomp.me/scratch/f6Yx0 // Mr. Game & Watch's ground -> air Oil Panic
-// Release Action State handler
+/// Mr. Game & Watch's ground -> air Oil Panic Release Action State handler
 void ftGameWatch_SpecialLwShoot_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj,
-                                       AS_GAMEWATCH_SPECIALAIRLW_SHOOT,
-                                       FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW_SHOOT, transition_flags0, NULL,
+        fp->x894_currentAnimFrame, 1, 0);
 
     ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemPanicSetup;
 }
 
-// 0x8014DCB4 - Mr. Game & Watch's air -> ground Oil Panic Release Action State
-// handler
+/// Mr. Game & Watch's air -> ground Oil Panic Release Action State handler
 void ftGameWatch_SpecialAirLwShoot_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     func_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj,
-                                       AS_GAMEWATCH_SPECIALLW_SHOOT,
-                                       FTGAMEWATCH_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, AS_GAMEWATCH_SPECIALLW_SHOOT, transition_flags0, NULL,
+        fp->x894_currentAnimFrame, 1, 0);
 
     ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemPanicSetup;
 }
 
-// 0x8014DD28
-// https://decomp.me/scratch/ZWXFH // Enter SpecialLwShoot and calculate damage
+/// Enter SpecialLwShoot and calculate damage
 void ftGameWatch_SpecialLwShoot_ReleaseOil(HSD_GObj* fighter_gobj)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirLwShoot_ReleaseOil
     /// @todo Please for the love of god stop copy-pasting code
-    ftGameWatchAttributes* gawAttrs;
-    Fighter* fp;
-    void (*cb_Accessory4)(HSD_GObj*);
-    f32 panicDamage;
 
     Fighter_ActionStateChange_800693AC(
-        fighter_gobj, AS_GAMEWATCH_SPECIALLW_SHOOT, 0, NULL, 0.0f, 1.0f, 0.0f);
+        fighter_gobj, AS_GAMEWATCH_SPECIALLW_SHOOT, 0, NULL, 0, 1, 0);
+
     func_8006EBA4(fighter_gobj);
 
-    fp = GET_FIGHTER(fighter_gobj);
-    gawAttrs = getFtSpecialAttrs(fp);
+    {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->x2204_ftcmd_var1 = (u32) ((f32) fp->sa.gaw.x223C_panicDamage *
-                                  gawAttrs->x78_GAMEWATCH_PANIC_DAMAGE_MUL);
-    panicDamage =
-        (f32) fp->x2204_ftcmd_var1 + gawAttrs->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
-    fp->x2204_ftcmd_var1 = (u32) panicDamage;
-    fp->sa.gaw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
-    fp->sa.gaw.x223C_panicDamage = 0;
+        {
+            ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
-    ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemPanicSetup;
+            fp->x2204_ftcmd_var1 = fp->ev.gw.x223C_panicDamage *
+                                   sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
+
+            {
+                f32 panicDamage =
+                    fp->x2204_ftcmd_var1 + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
+
+                fp->x2204_ftcmd_var1 = panicDamage;
+                fp->ev.gw.x2238_panicCharge = GAMEWATCH_PANIC_EMPTY;
+                fp->ev.gw.x223C_panicDamage = 0;
+            }
+        }
+
+        ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
+        fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemPanicSetup;
+    }
 }
 
-// 0x8014DE0C - Enter SpecialAirLwShoot and calculate damage
+/// Enter SpecialAirLwShoot and calculate damage
 void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* fighter_gobj)
 {
-    ftGameWatchAttributes* gawAttrs;
-    Fighter* fp;
-    void (*cb_Accessory4)(HSD_GObj*);
-    f32 panicDamage;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj,
-                                       AS_GAMEWATCH_SPECIALAIRLW_SHOOT, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, AS_GAMEWATCH_SPECIALAIRLW_SHOOT, 0, NULL, 0, 1, 0);
+
     func_8006EBA4(fighter_gobj);
 
-    fp = GET_FIGHTER(fighter_gobj);
-    gawAttrs = getFtSpecialAttrs(fp);
+    {
+        Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->x2204_ftcmd_var1 = (u32) ((f32) fp->sa.gaw.x223C_panicDamage *
-                                  gawAttrs->x78_GAMEWATCH_PANIC_DAMAGE_MUL);
-    panicDamage =
-        (f32) fp->x2204_ftcmd_var1 + gawAttrs->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
-    fp->x2204_ftcmd_var1 = (u32) panicDamage;
-    fp->sa.gaw.x2238_panicCharge = 0;
-    fp->sa.gaw.x223C_panicDamage = 0;
+        {
+            ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
-    ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemPanicSetup;
+            fp->x2204_ftcmd_var1 = fp->ev.gw.x223C_panicDamage *
+                                   sa->x78_GAMEWATCH_PANIC_DAMAGE_MUL;
+
+            {
+                f32 panicDamage =
+                    fp->x2204_ftcmd_var1 + sa->x74_GAMEWATCH_PANIC_DAMAGE_ADD;
+                fp->x2204_ftcmd_var1 = panicDamage;
+            }
+
+            fp->ev.gw.x2238_panicCharge = 0;
+            fp->ev.gw.x223C_panicDamage = 0;
+        }
+
+        ftGameWatch_SpecialLw_UpdateBucketModel(fighter_gobj);
+        fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemPanicSetup;
+    }
 }

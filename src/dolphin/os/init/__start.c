@@ -6,7 +6,7 @@
 
 void __check_pad3(void)
 {
-    if (FLAGS_ALL(Pad3Button, RESET_BUTTON_MASK))
+    if ((Pad3Button & RESET_BUTTON_MASK) == RESET_BUTTON_MASK)
         OSResetSystem(OS_RESET_RESTART, 0, false);
 }
 

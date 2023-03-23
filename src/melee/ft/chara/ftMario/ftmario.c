@@ -11,8 +11,8 @@
 #include <sysdolphin/baselib/random.h>
 
 ActionState as_table_mario[] = {
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { 295, 0x00340111, 0x12000000, ftMario_SpecialN_Anim, ftMario_SpecialN_IASA,
       ftMario_SpecialN_Phys, ftMario_SpecialN_Coll, func_800761C8 },
     { 296, 0x00340511, 0x12000000, ftMario_SpecialAirN_Anim,
@@ -38,20 +38,20 @@ ActionState as_table_mario[] = {
 };
 
 ActionState lbl_803C7260[] = {
-    { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
-    { 15, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
+    { 14, 0, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
+    { 15, 0, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };
 
 void ftMario_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     func_80074A4C(gobj, 0, 0);
-    fp->sa.mario.x222C_vitaminCurr = 9;
-    fp->sa.mario.x2230_vitaminPrev = 9;
-    fp->sa.mario.x2234_tornadoCharge = false;
-    fp->sa.mario.x2238_isCapeBoost = false;
-    fp->sa.mario.x223C_capeGObj = NULL;
-    fp->sa.mario.x2240 = 0;
+    fp->ev.mr.x222C_vitaminCurr = 9;
+    fp->ev.mr.x2230_vitaminPrev = 9;
+    fp->ev.mr.x2234_tornadoCharge = false;
+    fp->ev.mr.x2238_isCapeBoost = false;
+    fp->ev.mr.x223C_capeGObj = NULL;
+    fp->ev.mr.x2240 = 0;
 }
 
 void ftMario_OnLoadForDrMario(Fighter* fp)

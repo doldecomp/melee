@@ -130,11 +130,11 @@ typedef struct _HSD_MatAnim {
     struct _HSD_RenderAnim* renderanim;
 } HSD_MatAnim;
 
-typedef struct _HSD_MatAnimJoint {
-    struct _HSD_MatAnimJoint* child;
-    struct _HSD_MatAnimJoint* next;
-    struct _HSD_MatAnim* matanim;
-} HSD_MatAnimJoint;
+struct HSD_MatAnimJoint {
+    HSD_MatAnimJoint* child;
+    HSD_MatAnimJoint* next;
+    HSD_MatAnim* matanim;
+};
 
 typedef struct _HSD_MObjInfo {
     HSD_ClassInfo parent;

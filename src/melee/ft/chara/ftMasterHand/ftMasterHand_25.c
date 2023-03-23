@@ -1,23 +1,23 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_25.h>
+#include "ftMasterHand_25.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_22.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_23.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftcommon.h>
+#include "ftMasterHand_03.h"
+#include "ftMasterHand_22.h"
+#include "ftMasterHand_23.h"
+#include "ftMasterHand_34.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftbosslib.h"
+#include "ft/ftcommon.h"
 
 // 80154D78 151958
 // https://decomp.me/scratch/DzZiN
 void lbl_80154D78(HSD_GObj* gobj)
 {
-    s32 unused[2];
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter* fp = gobj->user_data;
+        Fighter* fp = GET_FIGHTER(gobj);
 
-        if (fp->masterhandVars.x2360 == 1)
+        if (fp->sv.mh.unk0.x20 == 1)
             func_80154A78(gobj);
         else
             func_801546D8(gobj);
@@ -38,11 +38,11 @@ void lbl_80154DD0(HSD_GObj* arg0)
 void lbl_80154E14(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
 
     func_80085134(gobj);
-    func_8015BE40(gobj, &fp->masterhandVars.x234C_pos,
-                  &fp->masterhandVars.x2358, attr->x2C, attr->x28);
+    func_8015BE40(gobj, &fp->sv.mh.unk0.xC, &fp->sv.mh.unk0.x18, attr->x2C,
+                  attr->x28);
 }
 
 // 80154E74 151A54
@@ -68,24 +68,20 @@ void func_80154E78(HSD_GObj* gobj)
 // https://decomp.me/scratch/6H8xW
 void lbl_80154ED8(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    HSD_GObj* gobj_2;
-    Fighter* ft_2;
-    s32 unused[2];
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    fp = gobj->user_data;
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = 0;
         func_80155D6C(fp->x1A58_interactedFighter, 0x14A);
         if (fp->x1A58_interactedFighter != 0) {
-            gobj_2 = fp->x1A58_interactedFighter;
-            ft_2 = gobj_2->user_data;
+            HSD_GObj* victim = fp->x1A58_interactedFighter;
+            Fighter* victim_fp = GET_FIGHTER(victim);
             func_8007E2F4(fp, 0);
-            func_800DE2A8(gobj, gobj_2);
-            ft_2->dmg.x1844_direction *= -1.0f;
-            func_800DE7C0(gobj_2, 0, 0);
+            func_800DE2A8(gobj, victim);
+            victim_fp->dmg.x1844_direction *= -1.0f;
+            func_800DE7C0(victim, 0, 0);
         }
-        fp->masterhandVars.x2360 = 0;
+        fp->sv.mh.unk0.x20 = 0;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         func_80151018(gobj);

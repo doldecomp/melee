@@ -155,7 +155,7 @@ Fighter_CostumeStrings lbl_803CC020[] = {
 void ftDonkey_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    fp->sa.dk.x222C = 0;
+    fp->ev.dk.x222C = 0;
     func_80074A4C(fighter_gobj, 0, 0);
 }
 
@@ -190,7 +190,7 @@ void func_8010D96C(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* attr = fp->x2D4_specialAttributes;
 
-    if (fp->sa.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS)
+    if (fp->ev.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS)
         func_800BFFD0(fp, 0x39, 0);
 }
 
@@ -233,7 +233,7 @@ void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (fp->x2210_ThrowFlags.b3) {
@@ -243,7 +243,7 @@ void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj)
         bool1 = false;
     }
 
-    if (bool1 && FLAGS_ANY(colldata->x134_envFlags, 0x18000)) {
+    if (bool1 && (colldata->x134_envFlags & 0x18000)) {
         Vec3 vec_list[4];
 
         int i;

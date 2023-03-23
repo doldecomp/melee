@@ -23,7 +23,7 @@ bool func_8000B074(HSD_JObj* jobj)
 {
     HSD_AObj* aobj = jobj->aobj;
 
-    if (aobj != NULL && FLAGS_NONE(aobj->flags, AOBJ_NO_ANIM))
+    if (aobj != NULL && !(aobj->flags & AOBJ_NO_ANIM))
         return true;
 
     return false;
@@ -384,7 +384,7 @@ void func_8000C07C(HSD_JObj* jobj, s32 i, HSD_AnimJoint** arg3,
     HSD_JObjAddAnimAll(jobj, phi_r4, phi_r5, phi_r6);
 }
 
-void func_8000C0E8(HSD_JObj* jobj, s32 i, struct _DynamicModelDesc* arg2)
+void func_8000C0E8(HSD_JObj* jobj, s32 i, DynamicModelDesc* arg2)
 {
     func_8000C07C(jobj, i, arg2->anims, arg2->matanims, arg2->shapeanims);
 }
@@ -1030,15 +1030,16 @@ inline HSD_LObj* lobj_next(HSD_LObj* lobj)
 HSD_LObj* func_8000CDC0(HSD_LObj* cur)
 {
     while (cur != NULL) {
-        if (FLAGS_NONE(cur->flags, (1 << 0) | (1 << 1)) &&
-            FLAGS_NONE(HSD_LObjGetFlags(cur), 1 << 5))
+        if (!(cur->flags & ((1 << 0) | (1 << 1))) &&
+            !(HSD_LObjGetFlags(cur) & (1 << 5)))
         {
             return cur;
         }
         cur = lobj_next(cur);
     }
-
-    /// @todo Missing return statement
+#ifndef MUST_MATCH
+    return NULL;
+#endif
 }
 
 void func_8000CE30(HSD_DObj* dobj, HSD_DObj* next)

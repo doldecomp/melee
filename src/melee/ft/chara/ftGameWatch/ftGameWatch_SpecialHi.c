@@ -1,12 +1,12 @@
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include "ftgamewatch.h"
 
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj);
 static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj);
@@ -20,12 +20,12 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj)
     HSD_GObj* rescueGObj;
 
     fp = GET_FIGHTER(fighter_gobj);
-    if (fp->sa.gaw.x226C_rescueGObj == NULL) {
+    if (fp->ev.gw.x226C_rescueGObj == NULL) {
         func_8000B1CC(fp->x5E8_fighterBones[0].x0_jobj, NULL, &sp10);
         sp10.y = -((2.5f * Fighter_GetModelScale(fp)) - sp10.y);
         rescueGObj = func_802C8038(fighter_gobj, &sp10, 0,
                                    fp->action_id - 0x175, fp->facing_dir, 2.5f);
-        fp->sa.gaw.x226C_rescueGObj = rescueGObj;
+        fp->ev.gw.x226C_rescueGObj = rescueGObj;
         if (rescueGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
@@ -57,7 +57,7 @@ void ftGameWatch_ItemRescueSetNULL(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->sa.gaw.x226C_rescueGObj = NULL;
+    fp->ev.gw.x226C_rescueGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -67,8 +67,8 @@ void ftGameWatch_ItemRescueRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x226C_rescueGObj != NULL) {
-        func_802C8158(fp->sa.gaw.x226C_rescueGObj);
+    if (fp->ev.gw.x226C_rescueGObj != NULL) {
+        func_802C8158(fp->ev.gw.x226C_rescueGObj);
         ftGameWatch_ItemRescueSetNULL(fighter_gobj);
     }
 }
@@ -78,8 +78,8 @@ static void ftGameWatch_ItemRescueEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x226C_rescueGObj != NULL) {
-        func_802C81C8(fp->sa.gaw.x226C_rescueGObj);
+    if (fp->ev.gw.x226C_rescueGObj != NULL) {
+        func_802C81C8(fp->ev.gw.x226C_rescueGObj);
     }
 }
 
@@ -88,8 +88,8 @@ static void ftGameWatch_ItemRescueExitHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x226C_rescueGObj != NULL) {
-        func_802C81E8(fp->sa.gaw.x226C_rescueGObj);
+    if (fp->ev.gw.x226C_rescueGObj != NULL) {
+        func_802C81E8(fp->ev.gw.x226C_rescueGObj);
     }
 }
 
@@ -112,7 +112,7 @@ void ftGameWatch_SpecialHi_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[16];
+    u8 _[16];
 #endif
 
     fp->x74_anim_vel.y = 0.0f;
@@ -132,7 +132,7 @@ void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[24];
+    u8 _[24];
 #endif
 
     func_8007D60C(fp);
@@ -154,9 +154,12 @@ void ftGameWatch_SpecialHi_Anim(HSD_GObj* fighter_gobj)
 // Animation callback
 void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     ftGameWatchAttributes* gawAttrs;
-    f32 temp;
 
     gawAttrs = (GET_FIGHTER(fighter_gobj))->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
@@ -237,7 +240,7 @@ void ftGameWatch_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);

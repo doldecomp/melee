@@ -62,8 +62,8 @@ ActionState as_table_luigi[] = {
 };
 
 ActionState lbl_803D0868[] = {
-    { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
-    { 15, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
+    { 14, 0, 0x01000000, NULL, NULL, func_800C7158, NULL, NULL },
+    { 15, 0, 0x01000000, NULL, NULL, func_800C7200, NULL, NULL },
 };
 
 char lbl_803D08A8[] = "PlLg.dat";
@@ -105,7 +105,7 @@ void ftLuigi_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, false);
-    fp->sa.luigi.x2234 = 0;
+    fp->ev.lg.x2234 = 0;
 }
 
 void ftLuigi_OnLoad(HSD_GObj* fighter_gobj)

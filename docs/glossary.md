@@ -15,6 +15,9 @@ Short for "attack."
 @section glossary_cam cam
 Short for "camera."
 
+@section glossary_cb cb
+Short for "callback."
+
 @section glossary_chan chan
 Short for "channel."
 
@@ -43,8 +46,18 @@ Short for "dynamic."
 @section glossary_ecb ECB
 Stands for "environmental collision box."
 
+@section glossary_ev EV
+Stands for "Entity Variables." Used by #HSD_GObj::user_data structs (such as
+#Fighter::ev) to store polymorphic variables.
+
 @section glossary_ft ft
 Short for "fighter."
+
+@section glossary_gr gr
+Short for "ground."
+
+@section glossary_grav grav
+Short for "gravity."
 
 @section glossary_id id
 Short for "identifier." Not an acronym.
@@ -100,8 +113,15 @@ Short for "sound effect(s)."
 @section glossary_spd spd
 Short for "speed."
 
+@section glossary_sq sq
+Short for "square."
+
 @section glossary_src src
 Short for "source."
+
+@section glossary_sv SV
+Stands for "State Variables." Used by #HSD_GObj::user_data structs (such as
+#Fighter::sv) to store polymorphic variables specific to an #ActionState.
 
 @section glossary_sz sz
 Short for "size."

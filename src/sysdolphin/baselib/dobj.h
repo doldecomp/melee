@@ -1,39 +1,39 @@
-#ifndef _dobj_h_
-#define _dobj_h_
+#ifndef SYSDOLPHIN_BASELIB_DOBJ_H
+#define SYSDOLPHIN_BASELIB_DOBJ_H
 
-#include <Runtime/platform.h>
+#include "baselib/class.h"
+#include "baselib/fobj.h"
+#include "baselib/forward.h"
+#include "baselib/mobj.h"
 
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/fobj.h>
-#include <sysdolphin/baselib/forward.h>
-#include <sysdolphin/baselib/mobj.h>
+#include <platform.h>
 
-struct _HSD_DObj {
+struct HSD_DObj {
     HSD_Class parent;
-    struct _HSD_DObj* next; // 0x04
-    HSD_MObj* mobj;         // 0x08
-    HSD_PObj* pobj;         // 0x0C
-    HSD_AObj* aobj;         // 0x10
-    u32 flags;              // 0x14
+    HSD_DObj* next; // 0x04
+    HSD_MObj* mobj; // 0x08
+    HSD_PObj* pobj; // 0x0C
+    HSD_AObj* aobj; // 0x10
+    u32 flags;      // 0x14
 };
 
-typedef struct _HSD_DObjDesc {
+struct HSD_DObjDesc {
     char* class_name;
-    struct _HSD_DObjDesc* next;
-    struct _HSD_MObjDesc* mobjdesc;
-    struct _HSD_PObjDesc* pobjdesc;
-} HSD_DObjDesc;
+    HSD_DObjDesc* next;
+    HSD_MObjDesc* mobjdesc;
+    HSD_PObjDesc* pobjdesc;
+};
 
-typedef struct _HSD_DObjInfo {
+struct HSD_DObjInfo {
     HSD_ClassInfo parent;
     void (*disp)(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode); // 0x3C
     int (*load)(HSD_DObj* dobj, HSD_DObjDesc* desc);                  // 0x40
-} HSD_DObjInfo;
+};
 
-typedef struct _HSD_ShapeAnimDObj {
-    struct _HSD_ShapeAnimDObj* next;
-    struct _HSD_ShapeAnim* shapeanim;
-} HSD_ShapeAnimDObj;
+struct HSD_ShapeAnimDObj {
+    HSD_ShapeAnimDObj* next;
+    HSD_ShapeAnim* shapeanim;
+};
 
 #define HSD_DOBJ(o) ((HSD_DObj*) (o))
 #define HSD_DOBJ_INFO(i) ((HSD_DObjInfo*) (i))

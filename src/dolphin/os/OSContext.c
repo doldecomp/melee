@@ -7,7 +7,7 @@
 #include <placeholder.h>
 
 #ifdef MWERKS_GEKKO
-asm void __OSLoadFPUContext(u32 unused, register OSContext* fpuctx)
+asm void __OSLoadFPUContext(u32 _, register OSContext* fpuctx)
 { // clang-format off
     nofralloc
     lhz r5, fpuctx->state
@@ -89,7 +89,7 @@ done:
     blr
 } // clang-format on
 #else
-void __OSLoadFPUContext(u32 unused, OSContext* fpuctx)
+void __OSLoadFPUContext(u32 _, OSContext* fpuctx)
 {
     NOT_IMPLEMENTED;
 }
@@ -197,7 +197,7 @@ asm void OSLoadFPUContext(register OSContext* fpuctx)
     b __OSLoadFPUContext
 } // clang-format on
 #else
-void OSLoadFPUContext(u32 unused1, u32 unused2, OSContext* fpuctx)
+void OSLoadFPUContext(OSContext* fpuctx)
 {
     NOT_IMPLEMENTED;
 }
@@ -531,7 +531,7 @@ void OSDumpContext(const OSContext* context)
 }
 
 #ifdef MWERKS_GEKKO
-asm void OSSwitchFPUContext(OSException unused, register OSContext* ctx)
+asm void OSSwitchFPUContext(OSException _, register OSContext* ctx)
 { // clang-format off
     nofralloc
     mfmsr r5
@@ -571,7 +571,7 @@ restore_and_exit:
     rfi
 } // clang-format on
 #else
-void OSSwitchFPUContext(OSException unused, OSContext* ctx)
+void OSSwitchFPUContext(OSException _, OSContext* ctx)
 {
     NOT_IMPLEMENTED;
 }

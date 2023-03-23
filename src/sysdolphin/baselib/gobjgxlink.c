@@ -1,18 +1,21 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 
+#ifdef MUST_MATCH
 #pragma push
 #pragma dont_inline on
+#endif
 void GObj_GXReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
 {
     u32 link = gobj->gx_link;
 
     gobj->prev_gx = hiprio_gobj;
-    if (hiprio_gobj != NULL)
-    { // If there is a higher priority GObj, make gobj the next in GX order
+    if (hiprio_gobj != NULL) {
+        // If there is a higher priority GObj, make gobj the next in GX order
         gobj->next_gx = hiprio_gobj->next_gx;
         hiprio_gobj->next_gx = gobj;
-    } else { // If there's not a higher priority GObj of this type, this gobj
-             // becomes the highest priority
+    } else {
+        // If there's not a higher priority GObj of this type, this gobj
+        // becomes the highest priority
         gobj->next_gx = lbl_804D7824[link];
         lbl_804D7824[link] = gobj;
     }
@@ -23,7 +26,9 @@ void GObj_GXReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
         lbl_804D7820[gobj->gx_link] = gobj;
     }
 }
+#ifdef MUST_MATCH
 #pragma pop
+#endif
 
 void GObj_SetupGXLink(HSD_GObj* gobj, void (*render_cb)(HSD_GObj*, s32),
                       u8 gx_link, u32 priority)
@@ -141,9 +146,13 @@ void func_80390908(HSD_GObj* gobj, u8 gx_link, u8 priority)
 
 void func_803909D8(HSD_GObj* gobj, HSD_GObj* other)
 {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[12];
+#endif
+
     u8 link;
     u8 prio;
-    u32 unused[3];
 
     prio = other->render_priority;
     link = other->gx_link;

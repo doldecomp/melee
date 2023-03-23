@@ -7,9 +7,6 @@
 #include <dolphin/os/OSContext.h>
 #include <Runtime/platform.h>
 
-typedef void (*__OSExceptionHandler)(OSException exception,
-                                     struct OSContext* context);
-
 extern vu32 __DIRegs[0x10] AT_ADDRESS(0xCC006000);
 
 __OSExceptionHandler __OSGetExceptionHandler(u8);

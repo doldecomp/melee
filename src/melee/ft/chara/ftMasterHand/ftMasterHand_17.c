@@ -1,9 +1,9 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_17.h>
+#include "ftMasterHand_17.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_18.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
+#include "ftMasterHand_18.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
 
 static void func_80153910(HSD_GObj*);
 
@@ -39,13 +39,10 @@ void lbl_8015390C(HSD_GObj* gobj)
 // https://decomp.me/scratch/AYDbj
 static void func_80153910(HSD_GObj* arg0)
 {
-    Fighter* fp;
-    MasterHandAttributes* attr;
+    Fighter* fp = GET_FIGHTER(arg0);
+    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
     Vec3 sp10;
-    s32 unk;
 
-    fp = arg0->user_data;
-    attr = fp->x10C_ftData->ext_attr;
     Fighter_ActionStateChange_800693AC(arg0, 0x170, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(arg0);
     func_8015C208(arg0, &sp10);
@@ -60,11 +57,8 @@ static void func_80153910(HSD_GObj* arg0)
 // https://decomp.me/scratch/DVyVs
 void lbl_801539A4(HSD_GObj* arg0)
 {
-    Fighter* temp_r4;
-    s32 unk;
-
     if (!ftAnim_IsFramesRemaining(arg0)) {
-        temp_r4 = arg0->user_data;
+        Fighter* temp_r4 = GET_FIGHTER(arg0);
         temp_r4->x80_self_vel.x = 0.0f;
         func_80153A64(arg0);
     }

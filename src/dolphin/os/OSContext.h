@@ -32,14 +32,12 @@ any_t OSGetStackPointer(void);
 void OSSwitchFiber(void*, void*);
 void OSSwitchFiberEx(u32, u32, u32, u32, void*, void*);
 void OSClearContext(OSContext*);
-void OSInitContext(register OSContext* ctx, register u32 pc,
-                   register u32 newsp);
+void OSInitContext(OSContext* ctx, u32 pc, u32 newsp);
 void OSDumpContext(const OSContext*);
 void __OSContextInit(void);
-
-void __OSLoadFPUContext(u32 unused, register OSContext* fpuctx);
-void OSLoadFPUContext(register OSContext* fpuctx);
-void OSSwitchFPUContext(OSException unused, register OSContext* ctx);
+void __OSLoadFPUContext(u32 _, OSContext* fpuctx);
+void OSLoadFPUContext(OSContext* fpuctx);
+void OSSwitchFPUContext(OSException _, OSContext* ctx);
 void __OSSaveFPUContext(u32 unused1, u32 unused2, OSContext* fpuctx);
 
 #endif

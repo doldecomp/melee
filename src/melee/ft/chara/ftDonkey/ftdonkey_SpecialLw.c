@@ -1,16 +1,17 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialLw.h>
+#include "ftdonkey_SpecialLw.h"
 
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftDonkey/ftdonkey.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
+#include "ftdonkey.h"
+
+#include "ef/efasync.h"
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
 
 void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    fp->x2340_stateVar1 = 0;
+    fp->sv.dk.speciallw.x0 = 0;
     Fighter_ActionStateChange_800693AC(fighter_gobj, 0x17F, 0, NULL, 0.0f, 1.0f,
                                        0.0f);
     func_8006EBA4(fighter_gobj);
@@ -18,10 +19,13 @@ void ftDonkey_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DCD8(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2]; // needs either unused filler, or arg params
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         ftDonkey_8010DE88(fighter_gobj);
-    }
 }
 
 void ftDonkey_8010DD14(HSD_GObj* fighter_gobj) {}
@@ -41,8 +45,8 @@ void ftDonkey_8010DD74(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if (fp->x2340_stateVar1) {
-            fp->x2340_stateVar1 = 0;
+        if (fp->sv.dk.speciallw.x0) {
+            fp->sv.dk.speciallw.x0 = 0;
             ftDonkey_8010DE88(fighter_gobj);
         } else {
             ftDonkey_8010DFF8(fighter_gobj);
@@ -54,7 +58,7 @@ void ftDonkey_8010DDDC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->input.x668 & 0x200) {
-        fp->x2340_stateVar1 = 1;
+        fp->sv.dk.speciallw.x0 = 1;
     }
 }
 
@@ -82,7 +86,7 @@ void ftDonkey_8010DE88_inner(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     if (!fp->x2219_flag.bits.b0) {
@@ -107,10 +111,13 @@ void ftDonkey_8010DE88(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010DF5C(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    if (!ftAnim_IsFramesRemaining(fighter_gobj))
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 void ftDonkey_8010DF98(HSD_GObj* fighter_gobj) {}

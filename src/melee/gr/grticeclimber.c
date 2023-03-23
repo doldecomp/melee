@@ -21,14 +21,14 @@
         lbl_802210C8,
         lbl_802210D0,
         lbl_802210D4,
-        FLAGS_ZERO,
+        0,
     },
     {
         lbl_8022118C,
         lbl_802211DC,
         lbl_802211E4,
         lbl_80221204,
-        FLAGS_ZERO,
+        0,
     },
     {
         lbl_802210D8,

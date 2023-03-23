@@ -1,12 +1,14 @@
+#include "ftfox.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftlib.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "it/item.h"
+#include "lb/lbunknown_001.h"
+
 #include <dolphin/os/os.h>
-#include <melee/ft/chara/ftFox/ftfox.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/it/item.h>
-#include <melee/lb/lbunknown_001.h>
 
 void ftFox_FtGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 {
@@ -42,7 +44,10 @@ void ftFox_ItGetHoldJoint(HSD_GObj* fighter_gobj, Vec3* pos)
 // function
 void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     func_800892A0(fighter_gobj);
     func_80089824(fighter_gobj);
@@ -53,7 +58,7 @@ void ftFox_SpecialN_OnChangeAction(HSD_GObj* fighter_gobj)
 // pointer
 bool ftFox_CheckRemoveBlaster(HSD_GObj* fighter_gobj)
 {
-    if (GET_FIGHTER(fighter_gobj)->sa.fox.x222C_blasterGObj == NULL) {
+    if (GET_FIGHTER(fighter_gobj)->ev.fx.x222C_blasterGObj == NULL) {
         return true;
     }
     return false;
@@ -131,8 +136,8 @@ void ftFox_ClearBlaster(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.fox.x222C_blasterGObj != NULL) {
-        fp->sa.fox.x222C_blasterGObj = NULL;
+    if (fp->ev.fx.x222C_blasterGObj != NULL) {
+        fp->ev.fx.x222C_blasterGObj = NULL;
     }
     ftFox_SpecialN_SetNULL(fighter_gobj);
 }
@@ -142,11 +147,15 @@ void ftFox_ClearBlaster(HSD_GObj* fighter_gobj)
 void ftFox_RemoveBlaster(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* blasterGObj;
 
-    if (fp->sa.fox.x222C_blasterGObj != NULL) {
-        func_802AEAB4(fp->sa.fox.x222C_blasterGObj);
-        fp->sa.fox.x222C_blasterGObj = NULL;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
+    if (fp->ev.fx.x222C_blasterGObj != NULL) {
+        func_802AEAB4(fp->ev.fx.x222C_blasterGObj);
+        fp->ev.fx.x222C_blasterGObj = NULL;
     }
     if (func_800E5534(fighter_gobj) == false) {
         ftFox_SpecialN_SetNULL(fighter_gobj);
@@ -164,7 +173,12 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
      * #ftFox_SpecialAirNLoop_Anim.
      */
     Vec3 sp2C;
-    s32 unused;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
     ftFoxAttributes* foxAttrs;
     Fighter* fp;
     f64 launchAngle;
@@ -192,7 +206,7 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
         func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj,
                       &sp2C, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
 
-        func_802AE1D0(fp->sa.fox.x222C_blasterGObj);
+        func_802AE1D0(fp->ev.fx.x222C_blasterGObj);
         ftKind = func_800872A4(fighter_gobj);
 
         switch (ftKind) {
@@ -242,15 +256,15 @@ void ftFox_SpecialN_StartAction(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x = 0.0f;
 
-    fp->foxVars.SpecialN.isBlasterLoop = false;
+    fp->sv.fx.SpecialN.isBlasterLoop = false;
 
     blasterGObj = func_802AE8A8(fp->facing_dir, fighter_gobj, &fp->xB0_pos,
                                 func_8007500C(fp, 0x31),
                                 foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
-    fp->sa.fox.x222C_blasterGObj = blasterGObj;
+    fp->ev.fx.x222C_blasterGObj = blasterGObj;
 
     if (blasterGObj != NULL) {
-        func_8026BAE8(fp->sa.fox.x222C_blasterGObj, 0.8500000238418579f);
+        func_8026BAE8(fp->ev.fx.x222C_blasterGObj, 0.8500000238418579f);
         ftFox_SpecialN_SetCall(fighter_gobj);
         return;
     }
@@ -278,14 +292,14 @@ void ftFox_SpecialAirN_StartAction(
 
     func_8006EBA4(fighter_gobj);
 
-    fp->foxVars.SpecialN.isBlasterLoop = false;
+    fp->sv.fx.SpecialN.isBlasterLoop = false;
     blasterGObj = func_802AE8A8(fp->facing_dir, fighter_gobj, &fp->xB0_pos,
                                 func_8007500C(fp, 0x31),
                                 foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
-    fp->sa.fox.x222C_blasterGObj = blasterGObj;
+    fp->ev.fx.x222C_blasterGObj = blasterGObj;
 
     if (blasterGObj != NULL) {
-        func_8026BAE8(fp->sa.fox.x222C_blasterGObj, 0.8500000238418579f);
+        func_8026BAE8(fp->ev.fx.x222C_blasterGObj, 0.8500000238418579f);
         ftFox_SpecialN_SetCall(fighter_gobj);
         return;
     }
@@ -300,22 +314,25 @@ void ftFox_SpecialAirN_StartAction(
 void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* blasterGObj;
 
-    func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
-    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->sa.fox.x222C_blasterGObj != NULL))
-    {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
+    func_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
+    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->ev.fx.x222C_blasterGObj != NULL)) {
         fp->x220C_ftcmd_var3 = 0U;
-        func_802AE538(fp->sa.fox.x222C_blasterGObj);
+        func_802AE538(fp->ev.fx.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_FOX_SPECIALN_LOOP,
-            (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f,
-            0.0f);
+            (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx), NULL,
+            0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
-        func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
+        func_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
     }
 }
 
@@ -326,31 +343,31 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* temp_r28 = fighter_gobj->user_data;
 
-    func_802ADDD0(temp_r28->sa.fox.x222C_blasterGObj, 1);
+    func_802ADDD0(temp_r28->ev.fx.x222C_blasterGObj, 1);
     if (((u32) temp_r28->x220C_ftcmd_var3 == 1U) &&
-        (temp_r28->sa.fox.x222C_blasterGObj != NULL))
+        (temp_r28->ev.fx.x222C_blasterGObj != NULL))
     {
         temp_r28->x220C_ftcmd_var3 = 0U;
-        func_802AE538(temp_r28->sa.fox.x222C_blasterGObj);
+        func_802AE538(temp_r28->ev.fx.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if ((s32) temp_r28->foxVars.SpecialN.isBlasterLoop == true) {
+        if ((s32) temp_r28->sv.fx.SpecialN.isBlasterLoop == true) {
             temp_r28->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_FOX_SPECIALN_LOOP,
-                (FIGHTER_ATTACKCOUNT_NOUPDATE | FIGHTER_MODEL_NOUPDATE |
-                 FIGHTER_GFX_PRESERVE),
+                (FtStateChange_SkipUpdateAttackCount |
+                 FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
                 NULL, 0.0f, 1.0f, 0.0f);
             temp_r28->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
-            temp_r28->foxVars.SpecialN.isBlasterLoop = false;
-            func_802ADDD0(temp_r28->sa.fox.x222C_blasterGObj, 1);
+            temp_r28->sv.fx.SpecialN.isBlasterLoop = false;
+            func_802ADDD0(temp_r28->ev.fx.x222C_blasterGObj, 1);
         } else {
             HSD_GObj* temp;
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_FOX_SPECIALN_END,
-                (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f,
-                1.0f, 0.0f);
-            temp = temp_r28->sa.fox.x222C_blasterGObj;
+                (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
+                NULL, 0.0f, 1.0f, 0.0f);
+            temp = temp_r28->ev.fx.x222C_blasterGObj;
             temp_r28->x2204_ftcmd_var1 = 1;
             func_802ADDD0(temp, 1);
         }
@@ -358,12 +375,12 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
     }
     {
         Vec3 sp2C;
-        Fighter* unused;
         ftFoxAttributes* foxAttrs;
         Fighter* fp;
         f64 launchAngle;
         FighterKind ftKind;
 
+        /// @todo Fake assignment.
 #ifdef MUST_MATCH
         fp = fp = GET_FIGHTER(fighter_gobj);
 #else
@@ -371,10 +388,16 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
 #endif
 
         foxAttrs = getFtSpecialAttrs(fp);
-        unused = GET_FIGHTER(fighter_gobj);
 
-        if ((u32) fp->x2208_ftcmd_var2 != 0U) {
-            fp->x2208_ftcmd_var2 = 0U;
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        {
+            Fighter* _ = GET_FIGHTER(fighter_gobj);
+        }
+#endif
+
+        if (fp->x2208_ftcmd_var2 != 0) {
+            fp->x2208_ftcmd_var2 = 0;
             ftFox_FtGetHoldJoint(fighter_gobj, &sp2C);
             sp2C.z = 0.0f;
 
@@ -387,7 +410,7 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
             func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL,
                           fighter_gobj, &sp2C,
                           foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
-            func_802AE1D0(fp->sa.fox.x222C_blasterGObj);
+            func_802AE1D0(fp->ev.fx.x222C_blasterGObj);
             ftKind = func_800872A4(fighter_gobj);
             switch (ftKind) {
             case FTKIND_FOX:
@@ -408,8 +431,8 @@ static inline void ftFox_SpecialN_RemoveBlasterNULL(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.fox.x222C_blasterGObj != NULL) {
-        fp->sa.fox.x222C_blasterGObj = NULL;
+    if (fp->ev.fx.x222C_blasterGObj != NULL) {
+        fp->ev.fx.x222C_blasterGObj = NULL;
     }
     ftFox_SpecialN_SetNULL(fighter_gobj);
 }
@@ -420,18 +443,22 @@ static inline void ftFox_SpecialN_RemoveBlasterNULL(HSD_GObj* fighter_gobj)
 void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
-    HSD_GObj* blasterGObj;
 
-    func_802ADDD0(fp->sa.fox.x222C_blasterGObj, fp->x2204_ftcmd_var1);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
+    func_802ADDD0(fp->ev.fx.x222C_blasterGObj, fp->x2204_ftcmd_var1);
 
     if ((u32) fp->x2204_ftcmd_var1 == 2U)
         func_80094818(fighter_gobj, 0);
 
     if (((u32) fp->x220C_ftcmd_var3 == 2U) &&
-        (fp->sa.fox.x222C_blasterGObj != NULL))
+        (fp->ev.fx.x222C_blasterGObj != NULL))
     {
         fp->x220C_ftcmd_var3 = 0U;
-        func_802AE608(fp->sa.fox.x222C_blasterGObj);
+        func_802AE608(fp->ev.fx.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftFox_SpecialN_RemoveBlasterNULL(fighter_gobj);
@@ -445,22 +472,25 @@ void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    HSD_GObj* blasterGObj;
 
-    func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
-    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->sa.fox.x222C_blasterGObj != NULL))
-    {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
+    func_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
+    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->ev.fx.x222C_blasterGObj != NULL)) {
         fp->x220C_ftcmd_var3 = 0U;
-        func_802AE538(fp->sa.fox.x222C_blasterGObj);
+        func_802AE538(fp->ev.fx.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         Fighter_ActionStateChange_800693AC(
             fighter_gobj, AS_FOX_SPECIALAIRN_LOOP,
-            (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f, 1.0f,
-            0.0f);
+            (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx), NULL,
+            0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
-        func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
+        func_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
     }
 }
 
@@ -471,35 +501,35 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
+    func_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
     if (((u32) fp->x220C_ftcmd_var3 == 1U) &&
-        (fp->sa.fox.x222C_blasterGObj != NULL))
+        (fp->ev.fx.x222C_blasterGObj != NULL))
     {
         fp->x220C_ftcmd_var3 = 0U;
-        func_802AE538(fp->sa.fox.x222C_blasterGObj);
+        func_802AE538(fp->ev.fx.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if ((s32) fp->foxVars.SpecialN.isBlasterLoop == true) {
+        if ((s32) fp->sv.fx.SpecialN.isBlasterLoop == true) {
             fp->cb.x21EC_callback = ftFox_SpecialN_OnChangeAction;
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_FOX_SPECIALAIRN_LOOP,
-                (FIGHTER_ATTACKCOUNT_NOUPDATE | FIGHTER_MODEL_NOUPDATE |
-                 FIGHTER_GFX_PRESERVE),
+                (FtStateChange_SkipUpdateAttackCount |
+                 FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
                 NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(fighter_gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFox_CreateBlasterShot;
-            fp->foxVars.SpecialN.isBlasterLoop = false;
-            func_802ADDD0(fp->sa.fox.x222C_blasterGObj, 1);
+            fp->sv.fx.SpecialN.isBlasterLoop = false;
+            func_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
         } else {
             HSD_GObj* temp;
 
             Fighter_ActionStateChange_800693AC(
                 fighter_gobj, AS_FOX_SPECIALAIRN_END,
-                (FIGHTER_MODEL_NOUPDATE | FIGHTER_GFX_PRESERVE), NULL, 0.0f,
-                1.0f, 0.0f);
+                (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
+                NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(fighter_gobj);
 
-            temp = fp->sa.fox.x222C_blasterGObj;
+            temp = fp->ev.fx.x222C_blasterGObj;
             fp->x2204_ftcmd_var1 = 1;
             func_802ADDD0(temp, 1);
         }
@@ -507,10 +537,10 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
     }
     {
         Vec3 sp2C;
-        Fighter* unused;
         ftFoxAttributes* foxAttrs;
         Fighter* fp;
 
+        /// @todo Fake assignment.
 #ifdef MUST_MATCH
         fp = fp = GET_FIGHTER(fighter_gobj);
 #else
@@ -518,7 +548,13 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 #endif
 
         foxAttrs = getFtSpecialAttrs(fp);
-        unused = GET_FIGHTER(fighter_gobj);
+
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        {
+            Fighter* _ = GET_FIGHTER(fighter_gobj);
+        }
+#endif
 
         if ((u32) fp->x2208_ftcmd_var2 != 0U) {
             f64 launchAngle;
@@ -540,7 +576,7 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
             func_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL,
                           fighter_gobj, &sp2C,
                           foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
-            func_802AE1D0(fp->sa.fox.x222C_blasterGObj);
+            func_802AE1D0(fp->ev.fx.x222C_blasterGObj);
 
             ftKind = func_800872A4(fighter_gobj);
             switch (ftKind) {
@@ -566,15 +602,15 @@ void ftFox_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = getFighter(fighter_gobj);
     ftFoxAttributes* foxAttrs = getFtSpecialAttrs(fp);
 
-    func_802ADDD0(fp->sa.fox.x222C_blasterGObj, fp->x2204_ftcmd_var1);
+    func_802ADDD0(fp->ev.fx.x222C_blasterGObj, fp->x2204_ftcmd_var1);
     if ((u32) fp->x2204_ftcmd_var1 == 2U) {
         func_80094818(fighter_gobj, 0);
     }
     if (((u32) fp->x220C_ftcmd_var3 == 2U) &&
-        ((u32) fp->sa.fox.x222C_blasterGObj != 0U))
+        ((u32) fp->ev.fx.x222C_blasterGObj != 0U))
     {
         fp->x220C_ftcmd_var3 = 0U;
-        func_802AE608(fp->sa.fox.x222C_blasterGObj);
+        func_802AE608(fp->ev.fx.x222C_blasterGObj);
     }
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftFox_SpecialN_RemoveBlasterNULL(fighter_gobj);
@@ -582,7 +618,7 @@ void ftFox_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
             func_800CC730(fighter_gobj);
             return;
         }
-        func_80096900(fighter_gobj, 1, 0, IS_INTERRUPTIBLE, 1.0f,
+        func_80096900(fighter_gobj, 1, 0, true, 1.0f,
                       foxAttrs->x18_FOX_BLASTER_LANDING_LAG);
     }
 }
@@ -595,7 +631,7 @@ void ftFox_SpecialNStart_IASA(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
-        fp->foxVars.SpecialN.isBlasterLoop = true;
+        fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
 
@@ -607,7 +643,7 @@ void ftFox_SpecialNLoop_IASA(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
-        fp->foxVars.SpecialN.isBlasterLoop = true;
+        fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
 
@@ -625,7 +661,7 @@ void ftFox_SpecialAirNStart_IASA(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
-        fp->foxVars.SpecialN.isBlasterLoop = true;
+        fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
 
@@ -637,7 +673,7 @@ void ftFox_SpecialAirNLoop_IASA(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
-        fp->foxVars.SpecialN.isBlasterLoop = true;
+        fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
 
@@ -730,22 +766,22 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
 
     if ((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) {
         if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-            fp->sa.fox.x222C_blasterGObj = NULL;
+            fp->ev.fx.x222C_blasterGObj = NULL;
             ftFox_SpecialN_SetNULL(fighter_gobj);
             return;
         }
         switch (fp->x2204_ftcmd_var1) {
         case 1:
-            if (fp->sa.fox.x222C_blasterGObj == NULL) {
+            if (fp->ev.fx.x222C_blasterGObj == NULL) {
                 HSD_GObj* blasterGObj =
                     func_802AE8A8(fp->facing_dir, fighter_gobj, &fp->xB0_pos,
                                   func_8007500C(fp, 0x31),
                                   foxAttrs->x20_FOX_BLASTER_GUN_ITKIND);
 
-                fp->sa.fox.x222C_blasterGObj = blasterGObj;
+                fp->ev.fx.x222C_blasterGObj = blasterGObj;
                 if (blasterGObj != NULL) {
                     func_8026BAE8(
-                        fp->sa.fox.x222C_blasterGObj,
+                        fp->ev.fx.x222C_blasterGObj,
                         (0.8500000238418579f *
                          (fp->x34_scale.y * fp->x110_attr.x19C_ModelScaling)));
                     ftFox_SpecialN_SetCall(fighter_gobj);
@@ -754,16 +790,16 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
             } else {
                 s32 flag;
 
-                func_802ADDD0(fp->sa.fox.x222C_blasterGObj,
+                func_802ADDD0(fp->ev.fx.x222C_blasterGObj,
                               fp->x2204_ftcmd_var1);
                 switch (fp->x220C_ftcmd_var3) {
                 case 1:
                     fp->x220C_ftcmd_var3 = 0;
-                    func_802AE538(fp->sa.fox.x222C_blasterGObj);
+                    func_802AE538(fp->ev.fx.x222C_blasterGObj);
                     break;
                 case 2:
                     fp->x220C_ftcmd_var3 = 0;
-                    func_802AE608(fp->sa.fox.x222C_blasterGObj);
+                    func_802AE608(fp->ev.fx.x222C_blasterGObj);
                     break;
                 }
                 if (fp->x2210_ThrowFlags.b0 != 0) {
@@ -799,7 +835,7 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
                                       foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
                         break;
                     }
-                    func_802AE1D0(fp->sa.fox.x222C_blasterGObj);
+                    func_802AE1D0(fp->ev.fx.x222C_blasterGObj);
                     switch (ftGetAction(fp)) {
                     case ASID_THROWHI:
                     case ASID_THROWLW: {
@@ -835,8 +871,8 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
                 break;
             }
         case 2:
-            if (fp->sa.fox.x222C_blasterGObj != NULL) {
-                fp->sa.fox.x222C_blasterGObj = NULL;
+            if (fp->ev.fx.x222C_blasterGObj != NULL) {
+                fp->ev.fx.x222C_blasterGObj = NULL;
                 ftFox_SpecialN_SetNULL(fighter_gobj);
                 switch (func_800872A4(fighter_gobj)) {
                 case FTKIND_FOX:
@@ -849,7 +885,7 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
             }
             break;
         case 0:
-            fp->sa.fox.x222C_blasterGObj = NULL;
+            fp->ev.fx.x222C_blasterGObj = NULL;
             ftFox_SpecialN_SetNULL(fighter_gobj);
             func_80094818(fighter_gobj, 0);
             break;

@@ -1,12 +1,13 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_30.h>
+#include "ftMasterHand_30.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_31.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/ft/ftcommon.h>
+#include "ftMasterHand_03.h"
+#include "ftMasterHand_31.h"
+#include "ftMasterHand_34.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftbosslib.h"
+#include "ft/ftcommon.h"
 
 /// @todo Fix weird forward declaration
 extern const f32 neg1;
@@ -79,27 +80,28 @@ void lbl_801556C0(HSD_GObj* gobj)
 // https://decomp.me/scratch/Uuy48
 void lbl_801556C4(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    HSD_GObj* gobj_2;
-    Fighter* ft_2;
-    Fighter* ft_3;
-    s32 unused[4];
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    fp = gobj->user_data;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = 0;
         func_80155D6C(fp->x1A58_interactedFighter, 0x14A);
         if (fp->x1A58_interactedFighter != 0) {
-            gobj_2 = fp->x1A58_interactedFighter;
-            ft_2 = gobj_2->user_data;
+            HSD_GObj* victim = fp->x1A58_interactedFighter;
+            Fighter* victim_fp = GET_FIGHTER(victim);
             func_8007E2F4(fp, 0);
-            func_800DE2A8(gobj, gobj_2);
-            ft_2->dmg.x1844_direction *= neg1;
-            func_800DE7C0(gobj_2, 0, 0);
+            func_800DE2A8(gobj, victim);
+            victim_fp->dmg.x1844_direction *= neg1;
+            func_800DE7C0(victim, 0, 0);
         }
     }
-    if ((func_8015C31C() != 0) || (!ftAnim_IsFramesRemaining(gobj))) {
-        ft_3 = gobj->user_data;
+
+    if (func_8015C31C() || !ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* ft_3 = GET_FIGHTER(gobj);
         Fighter_UnkSetFlag_8006CFBC(gobj);
         ft_3->x1A5C = 0;
         func_80151018(gobj);
@@ -167,7 +169,7 @@ void lbl_80155904(HSD_GObj* gobj)
 void lbl_80155908(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if ((--fp->masterhandVars.x2364 <= 0.0f) && (fp->x2200_ftcmd_var0 != 0)) {
+    if ((--fp->sv.mh.unk0.x24 <= 0.0f) && (fp->x2200_ftcmd_var0 != 0)) {
         func_80155D1C(fp->x1A58_interactedFighter);
         fp->x2200_ftcmd_var0 = 0;
     }
@@ -189,10 +191,10 @@ void lbl_80155990(HSD_GObj* gobj)
 void lbl_801559D4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    MasterHandAttributes* attr = fp->x10C_ftData->ext_attr;
+    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
     func_80085134(gobj);
-    func_8015BE40(gobj, &fp->masterhandVars.x234C_pos,
-                  &fp->masterhandVars.x2358, attr->x2C, attr->x28);
+    func_8015BE40(gobj, &fp->sv.mh.unk0.xC, &fp->sv.mh.unk0.x18, attr->x2C,
+                  attr->x28);
 }
 
 // 80155A34 152614
@@ -201,7 +203,7 @@ void lbl_80155A34(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if (fp->masterhandVars.x2358 == 0.0f) {
+    if (fp->sv.mh.unk0.x18 == 0.0f) {
         fp->x80_self_vel.z = 0.0f;
         fp->x80_self_vel.y = 0.0f;
         fp->x80_self_vel.x = 0.0f;

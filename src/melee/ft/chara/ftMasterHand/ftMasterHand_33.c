@@ -1,7 +1,8 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_33.h>
+#include "ftMasterHand/ftMasterHand_33.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/ftcommon.h>
+#include "ft/fighter.h"
+#include "ft/ftanim.h"
+#include "ft/ftcommon.h"
 
 // 80155C88 152868
 void func_80155C88(HSD_GObj* gobj)

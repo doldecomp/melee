@@ -1,19 +1,20 @@
-#include <melee/ft/chara/ftGanon/ftganon.h>
+#include "ftganon.h"
 
-#include <melee/ft/chara/ftCaptain/ftCaptain.h>
-#include <melee/ft/chara/ftGanon/ftganon.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCaptain/ftCaptain.h"
+#include "ftCaptain/ftCaptain_SpecialN.h"
+#include "ftCaptain/ftCaptain_SpecialS.h"
 
 ActionState as_table_ganon[] = {
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { 301, 0x00340211, 0x12000000, ftCaptain_SpecialN_Anim,
       ftCaptain_SpecialN_IASA, ftCaptain_SpecialN_Phys, ftCaptain_SpecialN_Coll,
       func_800761C8 },
@@ -88,8 +89,8 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, -1);
-    fp->sa.captain.x2230_isSpecialSGFX = false;
-    fp->sa.captain.x222C_isSpecialSStartGFX = false;
+    fp->ev.gn.during_specials = false;
+    fp->ev.gn.during_specials_start = false;
 }
 
 void ftGanon_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
@@ -124,12 +125,12 @@ void ftGanon_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftGanon_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0f);
-    ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 3, 3, 0);
+    ftAnim_ApplyPartAnim(gobj, 4, 3, 0);
 }
 
 void ftGanon_OnKnockbackExit(HSD_GObj* gobj)
 {
-    ftAnim_ApplyPartAnim(gobj, 3, 2, 0.0f);
-    ftAnim_ApplyPartAnim(gobj, 4, 2, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 3, 2, 0);
+    ftAnim_ApplyPartAnim(gobj, 4, 2, 0);
 }

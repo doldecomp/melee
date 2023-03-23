@@ -1,10 +1,10 @@
-#include <melee/ft/chara/ftGameWatch/ftgamewatch.h>
+#include "ftgamewatch.h"
 
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftparts.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftparts.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj);
 static void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fighter_gobj);
@@ -21,10 +21,10 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj)
         fp->x2204_ftcmd_var1 = 0;
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 0x31)].x0_jobj,
                       NULL, &sp20);
-        fp->sa.gaw.x2264_judgementGObj =
+        fp->ev.gw.x2264_judgementGObj =
             func_802C7774(fp->facing_dir, fighter_gobj, &sp20,
-                          func_8007500C(fp, 0x31), fp->sa.gaw.x222C_judgeVar1);
-        if ((s32) fp->sa.gaw.x222C_judgeVar1 == 6) {
+                          func_8007500C(fp, 0x31), fp->ev.gw.x222C_judgeVar1);
+        if ((s32) fp->ev.gw.x222C_judgeVar1 == 6) {
             sp14.z = 0.0f;
             sp14.x = 0.0f;
             sp14.y = 5.0f;
@@ -33,7 +33,7 @@ void ftGameWatch_ItemJudgementSetup(HSD_GObj* fighter_gobj)
                 &sp20);
             func_8028FAF4(fighter_gobj, &sp20);
         }
-        if (fp->sa.gaw.x2264_judgementGObj != NULL) {
+        if (fp->ev.gw.x2264_judgementGObj != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
         }
@@ -51,7 +51,7 @@ void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     ftGameWatch_ItemJudgementExitHitlag(fighter_gobj);
-    fp->sa.gaw.x2264_judgementGObj = NULL;
+    fp->ev.gw.x2264_judgementGObj = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
@@ -62,8 +62,8 @@ void ftGameWatch_ItemJudgementRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2264_judgementGObj != NULL) {
-        func_802C7A84(fp->sa.gaw.x2264_judgementGObj);
+    if (fp->ev.gw.x2264_judgementGObj != NULL) {
+        func_802C7A84(fp->ev.gw.x2264_judgementGObj);
         ftGameWatch_ItemJudgementSetFlag(fighter_gobj);
     }
 }
@@ -73,16 +73,16 @@ void ftGameWatch_ItemJudgementRemove(HSD_GObj* fighter_gobj)
 static void ftGameWatch_ItemJudgementEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->sa.gaw.x2264_judgementGObj != NULL)
-        func_802C7AD0(fp->sa.gaw.x2264_judgementGObj);
+    if (fp->ev.gw.x2264_judgementGObj != NULL)
+        func_802C7AD0(fp->ev.gw.x2264_judgementGObj);
 }
 
 // 0x8014C65C - Remove hitlag for Judgement item
 static void ftGameWatch_ItemJudgementExitHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->sa.gaw.x2264_judgementGObj != NULL)
-        func_802C7AF0(fp->sa.gaw.x2264_judgementGObj);
+    if (fp->ev.gw.x2264_judgementGObj != NULL)
+        func_802C7AF0(fp->ev.gw.x2264_judgementGObj);
 }
 
 // 0x8014C68C
@@ -99,40 +99,57 @@ bool ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj)
     return true;
 }
 
-// 0x8014C6B4 - shououts to EstexNT
-// https://decomp.me/scratch/Dn1jh // Roll Judgement RNG value
-s32 ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj)
+int ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj)
 {
+    /// @todo #getFighter can be factored out somehow.
     Fighter* fp = getFighter(fighter_gobj);
-    ftGameWatchAttributes* gawAttrs = getFtSpecialAttrs(fp);
-    ftGameWatchJudge sp3C;
-    ftGameWatchJudge sp18;
-    s32 randomInt;
-    s32 judgeVar;
-    s32 returnRNG;
-    s32 i;
+    ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
-    judgeVar = 9;
-    for (judgeVar -= 9, i = 0, randomInt = 0; judgeVar < 9; judgeVar++) {
-        if ((judgeVar != fp->sa.gaw.x222C_judgeVar1) &&
-            (judgeVar != fp->sa.gaw.x2230_judgeVar2))
-        {
-            (&sp3C)->rollVar[i] = judgeVar;
-            randomInt += gawAttrs->x34_GAMEWATCH_JUDGE_ROLL[judgeVar];
-            (&sp18)->rollVar[i] = randomInt;
-            i++;
+    ftGameWatchJudge gw_judge0;
+    ftGameWatchJudge gw_judge1;
+    size_t i;
+    int rand;
+
+    {
+        int const judge_max = 9;
+        int judge = judge_max;
+
+        for (judge -= judge_max, i = 0, rand = 0; judge < judge_max; judge++) {
+            if (judge != fp->ev.gw.x222C_judgeVar1 &&
+                judge != fp->ev.gw.x2230_judgeVar2)
+            {
+                gw_judge0.rollVar[i] = judge;
+                rand += sa->x34_GAMEWATCH_JUDGE_ROLL[judge];
+                gw_judge1.rollVar[i] = rand;
+                i++;
+            }
         }
     }
-    randomInt = HSD_Randi(randomInt);
-    for (i = 0; i < 9; i++) {
-        if (randomInt < (&sp18)->rollVar[i]) {
-            returnRNG = sp3C.rollVar[i];
-            break;
+
+    rand = HSD_Randi(rand);
+
+    {
+        int result;
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
+#endif
+        for (i = 0; i < ARRAY_SIZE(gw_judge1.rollVar); i++) {
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+            /// @remarks If this condition is never hit, @c result is
+            ///          uninitialized and its value is undefined.
+            if (rand < gw_judge1.rollVar[i]) {
+                result = gw_judge0.rollVar[i];
+                break;
+            }
         }
+
+        fp->ev.gw.x2230_judgeVar2 = fp->ev.gw.x222C_judgeVar1;
+        fp->ev.gw.x222C_judgeVar1 = result;
+        return result;
     }
-    fp->sa.gaw.x2230_judgeVar2 = fp->sa.gaw.x222C_judgeVar1;
-    fp->sa.gaw.x222C_judgeVar1 = returnRNG;
-    return returnRNG;
 }
 
 static inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* fighter_gobj)
@@ -148,14 +165,18 @@ static inline void ftGameWatch_SpecialS_SetVars(HSD_GObj* fighter_gobj)
 void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 asid;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
     GET_FIGHTER(fighter_gobj)->x80_self_vel.y = 0.0f;
 
     /// @todo Shared @c inline with #ftGameWatch_SpecialAirS_StartAction.
     ftGameWatch_SpecialS_GetRandomInt(fighter_gobj);
     Fighter_ActionStateChange_800693AC(
-        fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1, 0,
+        fighter_gobj, fp->ev.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1, 0,
         NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialS_SetVars(fighter_gobj);
@@ -167,14 +188,18 @@ void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
-    s32 asid;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
     GET_FIGHTER(fighter_gobj)->x80_self_vel.x /=
         gawAttrs->x20_GAMEWATCH_JUDGE_MOMENTUM_PRESERVE;
 
     ftGameWatch_SpecialS_GetRandomInt(fighter_gobj);
     Fighter_ActionStateChange_800693AC(
-        fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1, 0,
+        fighter_gobj, fp->ev.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1, 0,
         NULL, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialS_SetVars(fighter_gobj);
@@ -229,13 +254,17 @@ void ftGameWatch_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     u32 ftcmd_var = fp->x2200_ftcmd_var0;
     ftGameWatchAttributes* gawAttrs = fp->x2D4_specialAttributes;
-    f32 ftGameWatchPhys[4];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
 
     if (ftcmd_var >= 1U) {
         if (ftcmd_var == 1) {
             fp->x2200_ftcmd_var0 = 2;
-            if ((s32) fp->sa.gaw.x2234 == 0) {
-                fp->sa.gaw.x2234 = 1;
+            if ((s32) fp->ev.gw.x2234 == 0) {
+                fp->ev.gw.x2234 = 1;
                 fp->x80_self_vel.y = gawAttrs->x28_GAMEWATCH_JUDGE_VEL_Y;
             } else
                 fp->x80_self_vel.y = 0.0f;
@@ -271,7 +300,7 @@ static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.gaw.x2264_judgementGObj != NULL) {
+    if (fp->ev.gw.x2264_judgementGObj != NULL) {
         fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
         fp->cb.x21DC_callback_OnTakeDamage = ftGameWatch_OnDamage;
     }
@@ -287,12 +316,16 @@ static inline void ftGameWatch_SpecialS_SetCall(HSD_GObj* fighter_gobj)
 static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 ASID;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
     func_8007D5D4(fp);
     !fighter_gobj;
     Fighter_ActionStateChange_800693AC(
-        fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1,
+        fighter_gobj, fp->ev.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALAIRS1,
         FTGAMEWATCH_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f,
         0.0f);
     if ((u32) fp->x2200_ftcmd_var0 == 1) {
@@ -305,13 +338,17 @@ static void ftGameWatch_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 static void ftGameWatch_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    s32 ASID;
 
-    fp->sa.gaw.x2234 = 0;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
+
+    fp->ev.gw.x2234 = 0;
     func_8007D7FC(fp);
     !fighter_gobj;
     Fighter_ActionStateChange_800693AC(
-        fighter_gobj, fp->sa.gaw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1,
+        fighter_gobj, fp->ev.gw.x222C_judgeVar1 + AS_GAMEWATCH_SPECIALS1,
         FTGAMEWATCH_SPECIALS_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f,
         0.0f);
     ftGameWatch_SpecialS_SetCall(fighter_gobj);

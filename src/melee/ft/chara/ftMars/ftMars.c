@@ -1,13 +1,14 @@
-#include <melee/ft/chara/ftMars/ftMars.h>
+#include "ftMars.h"
+
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftlib.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 #include <common_structs.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftlib.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
 
 ActionState as_table_mars[] = {
     { 295, 0x00340211, 0x12000000, lbl_80136844, lbl_80136914, lbl_8013691C,
@@ -26,42 +27,42 @@ ActionState as_table_mars[] = {
       lbl_801371C0, func_800761C8 },
     { 302, 0x00340611, 0x12000000, lbl_80137010, lbl_80137140, lbl_80137164,
       lbl_801371C0, func_800761C8 },
-    { 303, 0x00340212, 0x13000000, lbl_80137558, lbl_801375B8, lbl_80137618,
-      lbl_8013767C, func_800761C8 },
-    { 304, 0x00340212, 0x13000000, lbl_801377B0, lbl_80137810, lbl_80137870,
-      lbl_801378D4, func_800761C8 },
-    { 305, 0x00340212, 0x13000000, lbl_801377B0, lbl_80137810, lbl_80137870,
-      lbl_801378D4, func_800761C8 },
-    { 306, 0x00340212, 0x13000000, lbl_80137B34, lbl_80137B94, lbl_80137BF4,
-      lbl_80137C50, func_800761C8 },
-    { 307, 0x00340212, 0x13000000, lbl_80137B34, lbl_80137B94, lbl_80137BF4,
-      lbl_80137C50, func_800761C8 },
-    { 308, 0x00340212, 0x13000000, lbl_80137B34, lbl_80137B94, lbl_80137BF4,
-      lbl_80137C50, func_800761C8 },
-    { 309, 0x00340212, 0x13000000, lbl_80137ECC, lbl_80137F2C, lbl_80137F30,
-      lbl_80137F8C, func_800761C8 },
-    { 310, 0x00340212, 0x13000000, lbl_80137ECC, lbl_80137F2C, lbl_80137F30,
-      lbl_80137F8C, func_800761C8 },
-    { 311, 0x00340212, 0x13000000, lbl_80137ECC, lbl_80137F2C, lbl_80137F30,
-      lbl_80137F8C, func_800761C8 },
-    { 312, 0x00340612, 0x13000000, lbl_80137558, lbl_801375B8, lbl_80137618,
-      lbl_8013767C, func_800761C8 },
-    { 313, 0x00340612, 0x13000000, lbl_801377B0, lbl_80137810, lbl_80137870,
-      lbl_801378D4, func_800761C8 },
-    { 314, 0x00340612, 0x13000000, lbl_801377B0, lbl_80137810, lbl_80137870,
-      lbl_801378D4, func_800761C8 },
-    { 315, 0x00340612, 0x13000000, lbl_80137B34, lbl_80137B94, lbl_80137BF4,
-      lbl_80137C50, func_800761C8 },
-    { 316, 0x00340612, 0x13000000, lbl_80137B34, lbl_80137B94, lbl_80137BF4,
-      lbl_80137C50, func_800761C8 },
-    { 317, 0x00340612, 0x13000000, lbl_80137B34, lbl_80137B94, lbl_80137BF4,
-      lbl_80137C50, func_800761C8 },
-    { 318, 0x00340612, 0x13000000, lbl_80137ECC, lbl_80137F2C, lbl_80137F30,
-      lbl_80137F8C, func_800761C8 },
-    { 319, 0x00340612, 0x13000000, lbl_80137ECC, lbl_80137F2C, lbl_80137F30,
-      lbl_80137F8C, func_800761C8 },
-    { 320, 0x00340612, 0x13000000, lbl_80137ECC, lbl_80137F2C, lbl_80137F30,
-      lbl_80137F8C, func_800761C8 },
+    { 303, 0x00340212, 0x13000000, ftMars_80137558, ftMars_801375B8,
+      ftMars_80137618, ftMars_8013767C, func_800761C8 },
+    { 304, 0x00340212, 0x13000000, ftMars_801377B0, ftMars_80137810,
+      ftMars_80137870, ftMars_801378D4, func_800761C8 },
+    { 305, 0x00340212, 0x13000000, ftMars_801377B0, ftMars_80137810,
+      ftMars_80137870, ftMars_801378D4, func_800761C8 },
+    { 306, 0x00340212, 0x13000000, ftMars_80137B34, ftMars_80137B94,
+      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+    { 307, 0x00340212, 0x13000000, ftMars_80137B34, ftMars_80137B94,
+      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+    { 308, 0x00340212, 0x13000000, ftMars_80137B34, ftMars_80137B94,
+      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+    { 309, 0x00340212, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
+      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
+    { 310, 0x00340212, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
+      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
+    { 311, 0x00340212, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
+      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
+    { 312, 0x00340612, 0x13000000, ftMars_80137558, ftMars_801375B8,
+      ftMars_80137618, ftMars_8013767C, func_800761C8 },
+    { 313, 0x00340612, 0x13000000, ftMars_801377B0, ftMars_80137810,
+      ftMars_80137870, ftMars_801378D4, func_800761C8 },
+    { 314, 0x00340612, 0x13000000, ftMars_801377B0, ftMars_80137810,
+      ftMars_80137870, ftMars_801378D4, func_800761C8 },
+    { 315, 0x00340612, 0x13000000, ftMars_80137B34, ftMars_80137B94,
+      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+    { 316, 0x00340612, 0x13000000, ftMars_80137B34, ftMars_80137B94,
+      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+    { 317, 0x00340612, 0x13000000, ftMars_80137B34, ftMars_80137B94,
+      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+    { 318, 0x00340612, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
+      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
+    { 319, 0x00340612, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
+      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
+    { 320, 0x00340612, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
+      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
     { 321, 0x00340213, 0x14000000, lbl_801382E8, lbl_801383A8, lbl_80138638,
       lbl_801388B4, func_800761C8 },
     { 322, 0x00340613, 0x14000000, lbl_80138348, lbl_801384F0, lbl_8013873C,
@@ -117,7 +118,7 @@ void ftMars_OnDeath(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     func_80074A4C(gobj, 0, 0);
     func_80074A4C(gobj, 1, 0);
-    fp->sa.mars.x222C = 0;
+    fp->ev.ms.x222C = 0;
 }
 
 // 801362B0 00132E90
@@ -244,5 +245,5 @@ void lbl_80136730(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->x2200_ftcmd_var0 = 0;
-    fp->x2340_stateVar1 = 0;
+    fp->sv.ms.specialn.x0 = 0;
 }

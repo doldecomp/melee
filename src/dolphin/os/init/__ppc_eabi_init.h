@@ -4,7 +4,7 @@
 #include <Runtime/platform.h>
 
 void __init_user(void);
-void _ExitProcess(void);
+ATTRIBUTE_NORETURN void _ExitProcess(void);
 
 SECTION_INIT void __init_hardware(void);
 SECTION_INIT void __flush_cache(void* address, size_t size);

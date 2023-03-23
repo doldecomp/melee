@@ -1,24 +1,28 @@
-#include <melee/ft/chara/ftDrMario/ftdrmario.h>
+#include "ftdrmario.h"
 
-#include <melee/ft/chara/ftMario/ftmario.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ftMario/ftmario.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
 
 void func_80149954(HSD_GObj* gobj)
 {
     Vec3 sp18;
     Fighter* fp;
     u32 tmp;
-    int unused2[3];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[12];
+#endif
 
     fp = gobj->user_data;
-    if (fp->x2200_ftcmd_var0 == 1 && fp->sa.mario.x2240 == 0U) {
+    if (fp->x2200_ftcmd_var0 == 1 && fp->ev.mr.x2240 == 0U) {
         func_8000B1CC(fp->x5E8_fighterBones->x0_jobj, 0, &sp18);
         tmp = ftMario_SpecialN_VitaminRandom(gobj);
         tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
-        fp->sa.mario.x2240 = tmp;
+        fp->ev.mr.x2240 = tmp;
         if (tmp != 0) {
             fp->cb.x21E4_callback_OnDeath2 = func_80149540;
             fp->cb.x21DC_callback_OnTakeDamage = func_80149540;
@@ -29,9 +33,9 @@ void func_80149954(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (gobj != NULL) {
             fp = gobj->user_data;
-            if (fp != NULL && fp->sa.mario.x2240 != 0) {
-                func_802C0DBC(fp->sa.mario.x2240);
-                fp->sa.mario.x2240 = 0;
+            if (fp != NULL && fp->ev.mr.x2240 != 0) {
+                func_802C0DBC(fp->ev.mr.x2240);
+                fp->ev.mr.x2240 = 0;
             }
         }
         if (gobj != NULL) {

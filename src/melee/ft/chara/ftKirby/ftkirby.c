@@ -471,10 +471,10 @@ ftKirby_UnkArrayThing* lbl_803C9FC8[FTKIND_MAX] = {
 };
 
 ActionState lbl_803CA04C[] = {
-    { 14, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
-    { 15, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
-    { 16, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
-    { 17, FLAGS_ZERO, 0x01000000, NULL, NULL, func_800C7414, NULL, NULL },
+    { 14, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
+    { 15, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
+    { 16, 0, 0x01000000, NULL, NULL, func_800C737C, NULL, NULL },
+    { 17, 0, 0x01000000, NULL, NULL, func_800C7414, NULL, NULL },
 };
 
 /* static */ void lbl_800EE854(void);
@@ -1073,13 +1073,13 @@ void ftKirby_OnDeath(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     func_80074A4C(fighter_gobj, 0, 0);
     func_80074A4C(fighter_gobj, 1, 0);
-    fp->sa.kirby.x222C = 0;
-    fp->sa.kirby.x2230 = (s32) (HSD_Randi(5) + 1);
-    fp->sa.kirby.x223C = 0;
-    fp->sa.kirby.x2238 = 4;
-    fp->sa.kirby.x2244 = 0;
-    fp->sa.kirby.x228C = 0;
-    fp->sa.kirby.x2290 = 0;
+    fp->ev.kb.x222C = 0;
+    fp->ev.kb.x2230 = (s32) (HSD_Randi(5) + 1);
+    fp->ev.kb.x223C = 0;
+    fp->ev.kb.x2238 = 4;
+    fp->ev.kb.x2244 = 0;
+    fp->ev.kb.x228C = 0;
+    fp->ev.kb.x2290 = 0;
     if (Player_GetFlagsBit1(fp->xC_playerID) &&
         Player_GetUnk4D(fp->xC_playerID) != 4)
     {
@@ -1096,7 +1096,7 @@ void ftKirby_OnLoad(HSD_GObj* fighter_gobj)
 
     fp->x2222_flag.bits.b1 = 1;
     fp->x2D0 = fp->x2D4_specialAttributes;
-    fp->sa.kirby.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
+    fp->ev.kb.x2234.bits.b0 = Player_GetFlagsAEBit1(fp->xC_playerID);
     func_8026B3F8(item_list[0], 0x32);
     func_8026B3F8(item_list[1], 0x33);
     func_8026B3F8(item_list[2], 0x34);
@@ -1133,28 +1133,28 @@ void ftKirby_800EE7B8(HSD_GObj* fighter_gobj)
 
 void func_800EE818(HSD_GObj* fighter_gobj)
 {
-    s32 unused[2];
+    s32 _[2];
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftKirbyAttributes* attr = fp->x2D4_specialAttributes;
-    switch (fp->sa.kirby.x2238) {
+    switch (fp->ev.kb.x2238) {
     case 3:
-        if (fp->sa.kirby.x22E8 == attr->x190) {
+        if (fp->ev.kb.x22E8 == attr->x190) {
             func_800BFFD0(fp, 0x3A, 0);
         }
         break;
     case 13:
-        if (fp->sa.kirby.x22D4 == attr->x168) {
+        if (fp->ev.kb.x22D4 == attr->x168) {
             func_800BFFD0(fp, 0x36, 0);
         }
         break;
     case 16:
-        if (fp->sa.kirby.x22C8 == attr->x384) {
+        if (fp->ev.kb.x22C8 == attr->x384) {
             func_800BFFD0(fp, 0x5D, 0);
             return;
         }
         break;
     case 7:
-        if (fp->sa.kirby.x22E0 == 6) {
+        if (fp->ev.kb.x22E0 == 6) {
             func_800BFFD0(fp, 0x57, 0);
         }
         break;

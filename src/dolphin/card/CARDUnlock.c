@@ -1,10 +1,11 @@
-#include <dolphin/card/CARDUnlock.h>
+#include "CARDUnlock.h"
+
+#include "CARDMount.h"
 
 #include <dolphin/card.h>
-#include <dolphin/card/CARDMount.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSCache.h>
-#include <MSL/rand.h>
+#include <rand.h>
 #include <string.h>
 
 static u8 CardData[] ATTRIBUTE_ALIGN(32) = {
@@ -216,10 +217,14 @@ s32 __CARDUnlock(s32 chan, u8 flashID[12])
     s32 rlen;
     u32 rshift;
 
-    u8 fsts;
     u32 wk, wk1;
     u32 Ans1 = 0;
-    u32 Ans2 = 0;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     u32* dp;
     u8 rbuf[64];
     u32 para1A = 0;
@@ -240,7 +245,6 @@ s32 __CARDUnlock(s32 chan, u8 flashID[12])
     input = (u8*) OSRoundUp32B(input);
     output = input + 32;
 
-    fsts = 0;
     init_val = GetInitVal();
 
     dummy = DummyLen();

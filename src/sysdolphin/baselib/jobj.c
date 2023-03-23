@@ -403,7 +403,7 @@ void HSD_JObjAddAnim(HSD_JObj* jobj, HSD_AnimJoint* an_joint,
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     bool has_dobj;
@@ -902,7 +902,7 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
 
                 /// @todo Unused stack.
 #ifdef MUST_MATCH
-                u8 unused[8];
+                u8 _[8];
 #endif
 
                 HSD_CObj* cobj;
@@ -1036,7 +1036,7 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (jobj == NULL || joint == NULL)
@@ -1060,7 +1060,7 @@ void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     while (jobj != NULL && joint != NULL) {
@@ -1075,14 +1075,12 @@ void HSD_JObjResolveRefsAll(HSD_JObj* jobj, HSD_Joint* joint)
 
 char lbl_80406918[] = "HSD_OBJ(o)->ref_count_individual != 0";
 
-static inline int iref_INC(void* o)
+static inline void iref_INC(void* o)
 {
     HSD_OBJ(o)->ref_count_individual += 1;
     HSD_OBJ(o)->ref_count_individual != 0
         ? (void) 0
         : __assert(lbl_804068E4, 0x9E, lbl_80406918);
-
-    /// @todo Missing return statement
 }
 
 static inline bool iref_none(void* o)
@@ -1660,7 +1658,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     f32 var_f4_3;
@@ -1671,7 +1669,7 @@ void resolveIKJoint1(HSD_JObj* jobj)
     Vec3 sp98;
     Vec3 sp8C;
     Vec3 sp80;
-    struct _HSD_IKHint* new_var;
+    HSD_IKHint* new_var;
     Vec3 sp74;
     Vec3 sp68;
     Vec3 sp5C;
@@ -1721,8 +1719,16 @@ void resolveIKJoint1(HSD_JObj* jobj)
         PSVECSubtract(&var_r28->translate, &spB0, &sp8C);
         temp_f31 = PSVECDotProduct(&sp8C, &sp8C);
 
-        /// @todo @c sometimes-uninitialized
+        /// @todo Variables @c var_f27 and @c var_f28 are used uninitialized
+        ///       whenever 'if' condition is false.
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wsometimes-uninitialized"
+#endif
         if (temp_f31 > var_f5) {
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
             sp68 = sp8C;
             if (HSD_RObjGetGlobalPosition(jobj->robj, 3, &sp5C)) {
                 PSVECSubtract(&sp5C, &spB0, &sp5C);
@@ -1806,7 +1812,7 @@ void resolveIKJoint2(HSD_JObj* jobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     HSD_JObj* var_r29;

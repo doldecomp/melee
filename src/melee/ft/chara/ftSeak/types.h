@@ -1,8 +1,7 @@
 #ifndef MELEE_FT_CHARA_FTSEAK_TYPES_H
 #define MELEE_FT_CHARA_FTSEAK_TYPES_H
 
-#include <melee/ft/types.h>
-#include <Runtime/platform.h>
+#include <platform.h>
 
 /// @sz{74}
 typedef struct _ftSeakAttributes {
@@ -52,5 +51,52 @@ typedef struct itChainSegment {
     f32 x4C;
     f32 x50;
 } itChainSegment;
+
+union ftSeak_StateVars {
+    struct ftSeak_SpecialNVars {
+        s32 x0;
+        s32 x4;
+        s32 x8;
+        s32 xC;
+        s32 x10;
+        s32 x14;
+        s32 x18;
+        s32 x1C;
+        s32 x20;
+        s32 x24;
+        s32 x28;
+        s32 x2C;
+    } specialn;
+
+    struct ftSeak_SpecialSVars {
+        s32 x0;
+        s32 x4;
+        s32 x8;
+        s32 xC;
+        f32 x10;
+        f32 x14;
+        f32 x18;
+        s32 x1C;
+        s32 x20;
+        s32 x24;
+        s32 x28;
+        s32 x2C;
+    } specials;
+
+    struct ftSeakSpecialHi {
+        s32 x0;
+        s32 x4;
+        s32 x8;
+        s32 xC;
+        s32 x10;
+        s32 x14;
+        s32 x18;
+        s32 x1C;
+        s32 x20;
+        s32 x24;
+        s32 x28;
+        s32 x2C;
+    } specialhi;
+};
 
 #endif

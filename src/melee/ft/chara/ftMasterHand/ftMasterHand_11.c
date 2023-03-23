@@ -1,8 +1,7 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_11.h>
+#include "ftMasterHand_11.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
 
 void lbl_8015236C(HSD_GObj* arg0) {}
 
@@ -19,7 +18,7 @@ void lbl_80152370(HSD_GObj* arg0)
 void lbl_801523BC(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
-    MasterHandAttributes* r30_attributes;
+    ftMasterHand_SpecialAttrs* r30_attributes;
 
     if (ftAnim_IsFramesRemaining(gobj))
         return;
@@ -27,7 +26,7 @@ void lbl_801523BC(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
     func_8015247C(gobj);
-    r31_fp->masterhandVars.x2348 = r30_attributes->xA0;
+    r31_fp->sv.mh.unk0.x8 = r30_attributes->xA0;
 }
 
 // 80152414 14EFF4
@@ -65,11 +64,9 @@ void func_8015247C(HSD_GObj* gobj)
 // https://decomp.me/scratch/zoAeT
 void lbl_801524C8(HSD_GObj* gobj)
 {
-    Fighter* temp_r4;
-    u32 unk[2];
+    Fighter* temp_r4 = GET_FIGHTER(gobj);
 
-    temp_r4 = gobj->user_data;
-    if (!--temp_r4->masterhandVars.x2348) {
+    if (!--temp_r4->sv.mh.unk0.x8) {
         func_801525E0(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -92,12 +89,10 @@ void lbl_80152544(HSD_GObj* gobj)
 // https://decomp.me/scratch/2eorR
 void lbl_80152588(HSD_GObj* gobj)
 {
-    ftData* r4_ftData;
-    MasterHandAttributes* r31_attributes;
-    u32 unk[2];
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftData* r4_ftData = fp->x10C_ftData;
+    ftMasterHand_SpecialAttrs* r31_attributes = r4_ftData->ext_attr;
 
-    r4_ftData = ((Fighter*) gobj->user_data)->x10C_ftData;
-    r31_attributes = r4_ftData->ext_attr;
     func_80085134(gobj);
     func_8015C010(gobj, r31_attributes->xA4);
     func_8015C190(gobj);
@@ -113,9 +108,8 @@ void lbl_801525DC(HSD_GObj* gobj)
 // https://decomp.me/scratch/WHp9s
 void func_801525E0(HSD_GObj* gobj)
 {
-    u32 unk[2];
-
-    ((Fighter*) gobj->user_data)->x80_self_vel.x = 0.0f;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x80_self_vel.x = 0.0f;
     Fighter_ActionStateChange_800693AC(gobj, 0x165, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }

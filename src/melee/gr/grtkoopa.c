@@ -11,11 +11,11 @@
 extern StageInfo stage_info;
 
 static StageCallbacks lbl_803E8C70[4] = {
-    { lbl_802217D4, lbl_80221800, lbl_80221808, lbl_8022180C, FLAGS_ZERO },
-    { lbl_802218A0, lbl_802218F0, lbl_802218F8, lbl_80221918, FLAGS_ZERO },
+    { lbl_802217D4, lbl_80221800, lbl_80221808, lbl_8022180C, 0 },
+    { lbl_802218A0, lbl_802218F0, lbl_802218F8, lbl_80221918, 0 },
     { lbl_80221810, lbl_80221860, lbl_80221868, lbl_8022189C,
       (1 << 30) | (1 << 31) },
-    { NULL, NULL, NULL, NULL, FLAGS_ZERO }
+    { NULL, NULL, NULL, NULL, 0 }
 };
 
 StageData lbl_803E8CCC = {
@@ -106,7 +106,7 @@ static void lbl_80221810(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -131,7 +131,7 @@ static void lbl_802218A0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;

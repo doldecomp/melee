@@ -1,0 +1,16 @@
+[package]
+name = "melee-issues"
+version = "0.1.0"
+edition = "2021"
+authors = ["Robin Avery <robin@ribbanya.dev>"]
+license = "AGPL-3.0-or-later"
+
+[dependencies]
+anyhow = "1.0.69"
+clang-sys = { version = "1.6.0", features = ["clang_15_0"] }
+env_logger = "0.10.0"
+exitcode = "1.1.2"
+glob = "0.3.1"
+itertools = "0.10.5"
+log = "0.4.17"
+string-interner = "0.14.0"

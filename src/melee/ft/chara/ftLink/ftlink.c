@@ -1,21 +1,21 @@
-#include <melee/ft/chara/ftLink/ftlink.h>
+#include "ftlink.h"
 
-#include <melee/ft/chara/ftCLink/ftclink.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/forward.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/lb/lbmthp.h>
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/forward.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftdata.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "ftCLink/ftclink.h"
+#include "lb/lbmthp.h"
 
 ActionState as_table_link[] = {
     { 295, 0x00240009, 0x0A000000, func_800CEDE0, func_800CEE00, func_800CEE30,
       func_800CEE50, func_800761C8 },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { -1, FLAGS_ZERO, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
+    { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { 296, 0x00340111, 0x12000000, func_800ED15C, func_800EDD88, func_800EDFD8,
       func_800EE098, func_800761C8 },
     { 297, 0x003C0111, 0x12000000, func_800ED480, func_800EDE30, func_800EDFF8,
@@ -96,7 +96,7 @@ bool func_800EAD64(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.link.x2234)
+    if (fp->ev.lk.x2234)
         return true;
 
     return false;
@@ -110,13 +110,13 @@ void ftLink_OnDeath(HSD_GObj* fighter_gobj)
     func_80074A4C(fighter_gobj, 1, 0);
     func_80074A4C(fighter_gobj, 2, 0);
 
-    fp->sa.link.x222C = 0;
-    fp->sa.link.x2234 = 0;
-    fp->sa.link.x2238 = 0;
-    fp->sa.link.x223C = 0;
-    fp->sa.link.x2240 = 0;
-    fp->sa.link.x2238 = 0;
-    fp->sa.link.x2244 = 0;
+    fp->ev.lk.x222C = 0;
+    fp->ev.lk.x2234 = 0;
+    fp->ev.lk.x2238 = 0;
+    fp->ev.lk.x223C = 0;
+    fp->ev.lk.x2240 = 0;
+    fp->ev.lk.x2238 = 0;
+    fp->ev.lk.x2244 = 0;
 }
 
 void ftLink_OnLoadForCLink(Fighter* fp)
@@ -192,7 +192,11 @@ void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 
 void ftLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 

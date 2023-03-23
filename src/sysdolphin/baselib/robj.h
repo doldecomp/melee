@@ -12,29 +12,29 @@
 #define REFTYPE_JOBJ 0x10000000
 #define REFTYPE_IKHINT 0x40000000
 
-typedef struct _HSD_Rvalue {
+struct HSD_Rvalue {
     struct _HSD_Rvalue* next;
     u32 flags;
     HSD_JObj* jobj;
-} HSD_Rvalue;
+};
 
-typedef struct _HSD_RvalueList {
+struct HSD_RvalueList {
     u32 flags;
-    struct _HSD_Joint* joint;
+    struct HSD_Joint* joint;
     struct _HSD_RvalueList* next;
-} HSD_RvalueList;
+};
 
-typedef struct _HSD_IKHint {
+struct HSD_IKHint {
     f32 bone_length;
     f32 rotate_x;
-} HSD_IKHint;
+};
 
-typedef struct _HSD_IKHintDesc {
+struct HSD_IKHintDesc {
     f32 bone_length;
     f32 rotate_x;
-} HSD_IKHintDesc;
+};
 
-typedef struct _HSD_Exp {
+struct HSD_Exp {
     union {
         f32 (*func)(void);
         u8* bytecode;
@@ -42,31 +42,31 @@ typedef struct _HSD_Exp {
     struct _HSD_Rvalue* rvalue;
     u32 nb_args;
     u8 is_bytecode;
-} HSD_Exp;
+};
 
-typedef struct _HSD_ExpDesc {
+struct HSD_ExpDesc {
     f32 (*func)(void);
     struct _HSD_RvalueList* rvalue;
-} HSD_ExpDesc;
+};
 
-typedef struct _HSD_ByteCodeExpDesc {
+struct HSD_ByteCodeExpDesc {
     u8* bytecode;
     struct _HSD_RvalueList* rvalue;
-} HSD_ByteCodeExpDesc;
+};
 
 struct HSD_RObj {
     HSD_RObj* next;
     u32 flags;
     union {
         HSD_JObj* jobj;
-        struct _HSD_Exp exp;
+        HSD_Exp exp;
         f32 limit;
-        struct _HSD_IKHint ik_hint;
+        HSD_IKHint ik_hint;
     } u;
     HSD_AObj* aobj;
 };
 
-typedef struct _HSD_RObjDesc {
+struct HSD_RObjDesc {
     struct _HSD_RObjDesc* next;
     u32 flags; // 0x04
     union {
@@ -74,15 +74,15 @@ typedef struct _HSD_RObjDesc {
         struct _HSD_ExpDesc* exp;
         struct _HSD_ByteCodeExpDesc* bcexp;
         struct _HSD_IKHintDesc* ik_hint;
-        struct _HSD_Joint* joint;
+        struct HSD_Joint* joint;
         f32 limit;
     } u;
-} HSD_RObjDesc;
+};
 
-typedef struct _HSD_RObjAnimJoint {
-    struct _HSD_RObjAnimJoint* next;
+struct HSD_RObjAnimJoint {
+    HSD_RObjAnimJoint* next;
     HSD_AObjDesc* aobjdesc;
-} HSD_RObjAnimJoint;
+};
 
 void _HSD_RObjForgetMemory(any_t low, any_t high);
 void HSD_RObjInitAllocData(void);

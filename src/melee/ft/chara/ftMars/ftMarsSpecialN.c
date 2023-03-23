@@ -9,14 +9,15 @@
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
 
-// 80136744 00133324
-// ftMars_SpecialN
-// https://decomp.me/scratch/i9Tn0
 void ftMars_SpecialN_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->x2D4_specialAttributes;
-    u32 unused, unused2; // need to eat more stack
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp->cb.x21EC_callback = &lbl_80136730;
 
@@ -25,14 +26,15 @@ void ftMars_SpecialN_StartAction(HSD_GObj* gobj)
     func_8006EBA4(gobj);
 }
 
-// 801367B8 00133398
-// ftMars_SpecialNAir
-// https://decomp.me/scratch/4vPWj
 void ftMars_SpecialAirN_StartAction(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->x2D4_specialAttributes;
-    u32 unused, unused2; // need to eat more stack
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     fp->cb.x21EC_callback = &lbl_80136730;
 
@@ -86,25 +88,29 @@ void lbl_80136918(HSD_GObj* gobj)
     return;
 }
 
-// 8013691C 001334FC
-// https://decomp.me/scratch/rfZA7
 void lbl_8013691C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attr = fp->x2D4_specialAttributes;
-    u32 unused, unused2; // gobble stack space
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     func_8007C930(fp, attr->x10);
     func_8007CB74(gobj);
 }
 
-// 8013695C 0013353C
-// https://decomp.me/scratch/dKnHk
 void lbl_8013695C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attr = fp->x2D4_specialAttributes;
-    u32 unused, unused2;
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     func_8007D4B8(fp);
     func_8007CE94(fp, attr->x10);
@@ -148,47 +154,49 @@ void func_80136A7C(HSD_GObj* gobj)
                                        fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-// 80136ADC 001336BC
-// Animation_MarthNeutralBCharge
-// https://decomp.me/scratch/jR5uM
 void lbl_80136ADC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32* specialAttrs = fp->x2D4_specialAttributes;
     Vec3 sp28;
-    /// @todo Fake unused
-    s32 unused[7];
 
-    if (fp->x2340_stateVar1 % 30 == 0) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[28];
+#endif
+
+    if (fp->sv.ms.specialn.x0 % 30 == 0) {
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
                       &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
 
-    fp->x2340_stateVar1++;
+    fp->sv.ms.specialn.x0++;
 
-    if ((s32) fp->x2340_stateVar1 > *specialAttrs * 30) {
+    if ((s32) fp->sv.ms.specialn.x0 > *specialAttrs * 30) {
         fp->x2200_ftcmd_var0 = 1;
         func_80137354(gobj);
     }
 }
 
-// 80136BB4 00133794
-// https://decomp.me/scratch/3bMh4
 void lbl_80136BB4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->x2D4_specialAttributes;
     Vec3 sp28;
-    s32 unused[7];
 
-    if ((s32) fp->x2340_stateVar1 % 30 == 0) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[28];
+#endif
+
+    if ((s32) fp->sv.ms.specialn.x0 % 30 == 0) {
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
                       &sp28);
         func_800119DC(&sp28, 10, 0.5f, 0.05f, 60 * M_PI / 180);
     }
-    fp->x2340_stateVar1++;
-    if ((s32) fp->x2340_stateVar1 > attrs->x0 * 30) {
+    fp->sv.ms.specialn.x0++;
+    if ((s32) fp->sv.ms.specialn.x0 > attrs->x0 * 30) {
         fp->x2200_ftcmd_var0 = 1;
         func_801373B8(gobj);
     }
@@ -306,9 +314,9 @@ void lbl_80136EE4(HSD_GObj* gobj)
                     (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
-                    (f32) (attr->x4 + fp->x2340_stateVar1 / 30 * attr->x8),
+                    (f32) (attr->x4 + fp->sv.ms.specialn.x0 / 30 * attr->x8),
 #else
-                    attr->x4 + fp->x2340_stateVar1 / 30.0F * attr->x8,
+                    attr->x4 + fp->sv.ms.specialn.x0 / 30.0F * attr->x8,
 #endif
 
                     gobj);
@@ -319,7 +327,12 @@ void lbl_80136EE4(HSD_GObj* gobj)
     }
     if (fp->x894_currentAnimFrame == 9.0f) {
         Vec3 position;
-        s32 unused1, unused2, unused3, unused4, unused5;
+
+        /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 _[20];
+#endif
+
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,
@@ -352,7 +365,7 @@ void lbl_80137010(HSD_GObj* gobj)
         //     if (fp->x914[ndx].x0 == 1) {
         //         // Hitbox_ApplyDamageStalingAndMore
         //         func_8007ABD0(&fp->x914[ndx], (f32) (attr->x4 +
-        //         (s32)fp->x2340_stateVar1 / 30 * attr->x8), gobj);
+        //         (s32)fp->sv.ms.specialn.x0 / 30 * attr->x8), gobj);
         //     }
         // }
 
@@ -365,9 +378,9 @@ void lbl_80137010(HSD_GObj* gobj)
                     (HitCapsule*) (hb + 0x914),
 
 #if MUST_MATCH
-                    (f32) (attr->x4 + fp->x2340_stateVar1 / 30 * attr->x8),
+                    (f32) (attr->x4 + fp->sv.ms.specialn.x0 / 30 * attr->x8),
 #else
-                    attr->x4 + fp->x2340_stateVar1 / 30.0F * attr->x8,
+                    attr->x4 + fp->sv.ms.specialn.x0 / 30.0F * attr->x8,
 #endif
 
                     gobj);
@@ -378,7 +391,12 @@ void lbl_80137010(HSD_GObj* gobj)
     }
     if (fp->x894_currentAnimFrame == 9.0f) {
         Vec3 position;
-        s32 unused1, unused2, unused3, unused4, unused5;
+
+        /// @todo Unused stack.
+#ifdef MUST_MATCH
+        u8 _[20];
+#endif
+
         // JObj_GetWorldPos(r3=JObj,r4=UnkPointer,r5=StoreResult)
         //         Fighter_BonePersonalToCommon
         func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, 0,

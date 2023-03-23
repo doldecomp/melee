@@ -40,7 +40,7 @@ static void func_801C1D38(HSD_GObj*);
 static void func_801C2BBC(HSD_GObj*, s32);
 static void func_801C2BD4(void* arg0);
 HSD_GObj* func_801C14D0(int);
-static void func_801C34AC(s32, HSD_JObj*, struct _HSD_Joint*);
+static void func_801C34AC(s32, HSD_JObj*, struct HSD_Joint*);
 static void func_801C28CC(void*, s32);
 
 f32 func_801C0498(void);

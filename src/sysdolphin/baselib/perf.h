@@ -7,7 +7,7 @@ typedef struct _HSD_PerfStat {
     f32 cpu_time;
     f32 draw_time;
     f32 total_time;
-    u32 unused;
+    u32 _;
     u32 count[32];
 } HSD_PerfStat;
 

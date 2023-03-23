@@ -1,104 +1,109 @@
+#include "melee/ft/inlines.h"
 #include <melee/ft/chara/ftMars/ftMars.h>
 
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
 
-// 8013741C 00133FFC
-// https://decomp.me/scratch/DLE90
 void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    s32 thing;
-    s32 unused1, unused2, unused3, unused4;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
-    ((Fighter*) gobj->user_data)->x80_self_vel.y = 0.0f;
-    fp = gobj->user_data;
-    fp->x2204_ftcmd_var1 = 0;
-    fp->x2200_ftcmd_var0 = 0;
-    fp->x2340_stateVar1 = 0;
-
-    if (fp->xE0_ground_or_air == GA_Ground) {
-        thing = 0x15D;
-    } else {
-        thing = 0x166;
-    }
-
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
-}
-
-// 801374A0 00134080
-// https://decomp.me/scratch/vI96P
-void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
-    Fighter* ft2;
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 thing;
-    s32 unused1, unused2;
-
-    fp->x80_self_vel.x = fp->x80_self_vel.x / attr->x14;
-    if ((s32) fp->sa.mars.x222C == 0) {
-        fp->sa.mars.x222C = 1;
-        fp->x80_self_vel.y = attr->x1C;
-    } else {
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
         fp->x80_self_vel.y = 0.0f;
     }
 
-    ft2 = gobj->user_data;
-    ft2->x2204_ftcmd_var1 = 0;
-    ft2->x2200_ftcmd_var0 = 0;
-    ft2->x2340_stateVar1 = 0;
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->x2204_ftcmd_var1 = 0;
+        fp->x2200_ftcmd_var0 = 0;
+        fp->sv.ms.specials.x0 = 0;
 
-    if (ft2->xE0_ground_or_air == GA_Ground) {
-        thing = 0x15D;
-    } else {
-        thing = 0x166;
+        {
+            enum_t asid;
+            if (fp->xE0_ground_or_air == GA_Ground)
+                asid = 349;
+            else
+                asid = 358;
+
+            Fighter_ActionStateChange_800693AC(gobj, asid, 0, 0, 0, 1, 0);
+        }
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
 }
 
-// 80137558 00134138
-// https://decomp.me/scratch/jDGXt
-void lbl_80137558(HSD_GObj* gobj)
+void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing = ftAnim_IsFramesRemaining(gobj);
-    if (thing == 0) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            func_8008A2BC(gobj);
-        } else {
-            func_800CC730(gobj);
-        }
-    }
-}
+    Fighter* fp0 = GET_FIGHTER(gobj);
+    MarsAttributes* attr = getFtSpecialAttrsD(fp0);
 
-// 801375B8 00134198
-// https://decomp.me/scratch/tqS1E
-void lbl_801375B8(HSD_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
-    if (fp->x2200_ftcmd_var0 != 0) {
-        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & 0x300) != 0) {
-            func_80137A9C(gobj);
-        }
+    fp0->x80_self_vel.x = fp0->x80_self_vel.x / attr->x14;
+    if ((signed) fp0->ev.ms.x222C == 0) {
+        fp0->ev.ms.x222C = 1;
+        fp0->x80_self_vel.y = attr->x1C;
     } else {
-        if ((fp->input.x668 & 0x300) != 0) {
-            fp->x2204_ftcmd_var1 = 1;
+        fp0->x80_self_vel.y = 0;
+    }
+
+    {
+        Fighter* fp1 = GET_FIGHTER(gobj);
+        fp1->x2204_ftcmd_var1 = 0;
+        fp1->x2200_ftcmd_var0 = 0;
+        fp1->sv.ms.specials.x0 = 0;
+
+        {
+            enum_t asid;
+            if (fp1->xE0_ground_or_air == GA_Ground)
+                asid = 349;
+            else
+                asid = 358;
+
+            Fighter_ActionStateChange_800693AC(gobj, asid, 0, 0, 0, 1, 0);
         }
+    }
+
+    func_8006EBA4(gobj);
+}
+
+void ftMars_80137558(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        if (fp->xE0_ground_or_air == GA_Ground)
+            func_8008A2BC(gobj);
+        else
+            func_800CC730(gobj);
     }
 }
 
-// 80137618 001341F8
-// https://decomp.me/scratch/BqYoF
-void lbl_80137618(HSD_GObj* gobj)
+void ftMars_801375B8(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->x2200_ftcmd_var0 != 0) {
+        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
+            ftMars_80137A9C(gobj);
+    } else {
+        if ((fp->input.x668 & HSD_BUTTON_AB) != 0)
+            fp->x2204_ftcmd_var1 = 1;
+    }
+}
+
+void ftMars_80137618(HSD_GObj* gobj)
+{
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[16];
+#endif
+
+    Fighter* fp = GET_FIGHTER(gobj);
     MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 unused1, unused2, unused3, unused4;
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // Physics_Friction
@@ -110,60 +115,58 @@ void lbl_80137618(HSD_GObj* gobj)
     }
 }
 
-// 8013767C 0013425C
-// Collision_MarthSideBAir
-// https://decomp.me/scratch/GBmCn
-void lbl_8013767C(HSD_GObj* gobj)
+void ftMars_8013767C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 unused1, unused2;
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (func_800827A0(gobj) == 0) {
-            func_801376E8(gobj);
-        }
+        if (!func_800827A0(gobj))
+            ftMars_801376E8(gobj);
     } else {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
-        if (func_80081D0C(gobj) != 0) {
+        if (func_80081D0C(gobj)) {
             // MarthSideBAir->Ground
-            func_80137748(gobj);
+            ftMars_80137748(gobj);
         }
     }
 }
 
-// 801376E8 001342C8
-// https://decomp.me/scratch/wulEU
-void func_801376E8(HSD_GObj* gobj)
+static Fighter_ActionStateChangeFlags const transition_flags =
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |
+    FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
+    FtStateChange_UpdateCmd | FtStateChange_PreserveSwordTrail |
+    FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
+    FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
+    FtStateChange_Unk_27;
+
+void ftMars_801376E8(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x166, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, 358, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 80137748 00134328
-// MarthSideBAirToGround
-// https://decomp.me/scratch/fpZ5r
-void func_80137748(HSD_GObj* gobj)
+void ftMars_80137748(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    fp->sa.mars.x222C = 0;
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->ev.ms.x222C = 0;
+
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, 0x15D, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, 349, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 801377B0 00134390
-// https://decomp.me/scratch/baBIS
-void lbl_801377B0(HSD_GObj* gobj)
+void ftMars_801377B0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    // FrameTimerCheck
+    Fighter* fp = GET_FIGHTER(gobj);
+
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
@@ -175,29 +178,29 @@ void lbl_801377B0(HSD_GObj* gobj)
     }
 }
 
-// 80137810 001343F0
-// https://decomp.me/scratch/wl5uM
-void lbl_80137810(HSD_GObj* gobj)
+void ftMars_80137810(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+
     if (fp->x2200_ftcmd_var0 != 0) {
-        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & 0x300) != 0) {
-            func_80137E0C(gobj);
-        }
+        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
+            ftMars_80137E0C(gobj);
     } else {
-        if ((fp->input.x668 & 0x300) != 0) {
+        if ((fp->input.x668 & HSD_BUTTON_AB) != 0) {
             fp->x2204_ftcmd_var1 = 1;
         }
     }
 }
 
-// 80137870 00134450
-// https://decomp.me/scratch/iRZdQ
-void lbl_80137870(HSD_GObj* gobj)
+void ftMars_80137870(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 unused1, unused2, unused3, unused4;
+    Fighter* fp = GET_FIGHTER(gobj);
+    MarsAttributes* attr = getFtSpecialAttrsD(fp);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // Physics_Friction
@@ -209,113 +212,105 @@ void lbl_80137870(HSD_GObj* gobj)
     }
 }
 
-// 801378D4 001344B4
-// Collision_MarthSideB2Air
-// https://decomp.me/scratch/MqEA1
-void lbl_801378D4(HSD_GObj* gobj)
+void ftMars_801378D4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 unused1, unused2;
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (func_800827A0(gobj) == 0) {
-            func_80137940(gobj);
-        }
+        if (!func_800827A0(gobj))
+            ftMars_80137940(gobj);
+    } else if (func_80081D0C(gobj)) {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
-    } else if (func_80081D0C(gobj) != 0) {
+
         // MarthSideB2Air->Ground
-        func_801379D0(gobj);
+        ftMars_801379D0(gobj);
     }
 }
 
-// 80137940 00134520
-// https://decomp.me/scratch/HjsYm
-void func_80137940(HSD_GObj* gobj)
+void ftMars_80137940(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
+    Fighter* fp = GET_FIGHTER(gobj);
+    enum_t asid;
 
     func_8007D5D4(fp);
+
     switch (fp->action_id) {
-    case 0x15E:
-        thing = 0x167;
+    case 350:
+        asid = 359;
         break;
-    case 0x15F:
-        thing = 0x168;
+    case 351:
+        asid = 360;
         break;
-        // default:
-        // thing uninitialized
+#ifndef MUST_MATCH
+    default:
+        HSD_ASSERT(__LINE__, false);
+#endif
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 801379D0 001345B0
-// MarthSideB2AirToGround
-// https://decomp.me/scratch/711pp
-void func_801379D0(HSD_GObj* gobj)
+void ftMars_801379D0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    s32 thing;
+    enum_t asid;
 
-    fp->sa.mars.x222C = 0;
+    fp->ev.ms.x222C = 0;
     func_8007D7FC(fp);
+
     switch (fp->action_id) {
-    case 0x167:
-        thing = 0x15E;
+    case 359:
+        asid = 350;
         break;
-    case 0x168:
-        thing = 0x15F;
+    case 360:
+        asid = 351;
         break;
-        // default:
-        // thing uninitialized
+#ifndef MUST_MATCH
+    default:
+        HSD_ASSERT(__LINE__, false);
+#endif
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 80137A68 00134648
-// https://decomp.me/scratch/5NC31
-void lbl_80137A68(HSD_GObj* gobj)
+void ftMars_80137A68(HSD_GObj* gobj)
 {
     func_80089824(gobj);
     func_800892A0(gobj);
 }
 
-// 80137A9C 0013467C
-// https://decomp.me/scratch/CVXJ2
-void func_80137A9C(HSD_GObj* gobj)
+void ftMars_80137A9C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    s32 thing;
+    enum_t asid;
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->cb.x21EC_callback = &lbl_80137A68;
+    fp->cb.x21EC_callback = &ftMars_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            thing = 0x15E;
-        } else {
-            thing = 0x167;
-        }
+        if (fp->xE0_ground_or_air == GA_Ground)
+            asid = 350;
+        else
+            asid = 359;
     } else {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            thing = 0x15F;
-        } else {
-            thing = 0x168;
-        }
+        if (fp->xE0_ground_or_air == GA_Ground)
+            asid = 351;
+        else
+            asid = 360;
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(
+        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
 }
 
-// 80137B34 00134714
-// https://decomp.me/scratch/nDoR1
-void lbl_80137B34(HSD_GObj* gobj)
+void ftMars_80137B34(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
+
     // FrameTimerCheck
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground) {
@@ -328,151 +323,139 @@ void lbl_80137B34(HSD_GObj* gobj)
     }
 }
 
-// 80137B94 00134774
-// https://decomp.me/scratch/5TRaz
-void lbl_80137B94(HSD_GObj* gobj)
+void ftMars_80137B94(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2200_ftcmd_var0 != 0) {
-        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & 0x300) != 0) {
-            func_80138148(gobj);
-        }
+        if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
+            ftMars_80138148(gobj);
     } else {
-        if ((fp->input.x668 & 0x300) != 0) {
+        if ((fp->input.x668 & HSD_BUTTON_AB) != 0)
             fp->x2204_ftcmd_var1 = 1;
-        }
     }
 }
 
-// 80137BF4 001347D4
-// https://decomp.me/scratch/vI7hc
-void lbl_80137BF4(HSD_GObj* gobj)
+void ftMars_80137BF4(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 unused1, unused2, unused3, unused4;
+    Fighter* fp = GET_FIGHTER(gobj);
+    MarsAttributes* sa = getFtSpecialAttrsD(fp);
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // somethingFriction
         func_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, attr->x20, attr->x24);
+        func_8007D494(fp, sa->x20, sa->x24);
         func_80085204(gobj);
     }
 }
 
-// 80137C50 00134830
-// https://decomp.me/scratch/uvl0U
-void lbl_80137C50(HSD_GObj* gobj)
+void ftMars_80137C50(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 unused1, unused2;
+    Fighter* fp = GET_FIGHTER(gobj);
+
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (func_800827A0(gobj) == 0) {
-            func_80137CBC(gobj);
-        }
+        if (!func_800827A0(gobj))
+            ftMars_80137CBC(gobj);
     } else {
         // EnvironmentCollision_CheckForGroundOnly_NoLedgeGrab
-        if (func_80081D0C(gobj) != 0) {
-            func_80137D60(gobj);
-        }
+        if (func_80081D0C(gobj))
+            ftMars_80137D60(gobj);
     }
 }
 
-// 80137CBC 0013489C
-// https://decomp.me/scratch/vJNoz
-void func_80137CBC(HSD_GObj* gobj)
+void ftMars_80137CBC(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
+    Fighter* fp = GET_FIGHTER(gobj);
+    enum_t asid;
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
     switch (fp->action_id) {
-    case 0x160:
-        thing = 0x169;
+    case 352:
+        asid = 361;
         break;
-    case 0x162:
-        thing = 0x16B;
+    case 354:
+        asid = 363;
         break;
-    case 0x161:
-        thing = 0x16A;
+    case 353:
+        asid = 362;
         break;
-        // default:
-        // thing uninitialized
+#ifndef MUST_MATCH
+    default:
+        HSD_ASSERT(__LINE__, false);
+#endif
     }
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 80137D60 00134940
-// https://decomp.me/scratch/yYIRO
-void func_80137D60(HSD_GObj* gobj)
+void ftMars_80137D60(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
-    fp->sa.mars.x222C = 0;
-    // // Air_SetAsGrounded2
+    Fighter* fp = GET_FIGHTER(gobj);
+    enum_t asid;
+    fp->ev.ms.x222C = 0;
+
+    // Air_SetAsGrounded2
     func_8007D7FC(fp);
+
     switch (fp->action_id) {
-    case 0x169:
-        thing = 0x160;
+    case 361:
+        asid = 352;
         break;
-    case 0x16B:
-        thing = 0x162;
+    case 363:
+        asid = 354;
         break;
-    case 0x16A:
-        thing = 0x161;
+    case 362:
+        asid = 353;
         break;
     }
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 80137E0C 001349EC
-// https://decomp.me/scratch/zlWGu
-void func_80137E0C(HSD_GObj* gobj)
+void ftMars_80137E0C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
+    Fighter* fp = GET_FIGHTER(gobj);
+    enum_t asid;
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->cb.x21EC_callback = &lbl_80137A68;
+    fp->cb.x21EC_callback = &ftMars_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            thing = 0x160;
-        } else {
-            thing = 0x169;
-        }
+        if (fp->xE0_ground_or_air == GA_Ground)
+            asid = 352;
+        else
+            asid = 361;
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
-            if (fp->xE0_ground_or_air == GA_Ground) {
-                thing = 0x162;
-            } else {
-                thing = 0x16B;
-            }
+            if (fp->xE0_ground_or_air == GA_Ground)
+                asid = 354;
+            else
+                asid = 363;
         } else {
-            if (fp->xE0_ground_or_air == GA_Ground) {
-                thing = 0x161;
-            } else {
-                thing = 0x16A;
-            }
+            if (fp->xE0_ground_or_air == GA_Ground)
+                asid = 353;
+            else
+                asid = 362;
         }
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f,
-                                       0.0f);
+
+    Fighter_ActionStateChange_800693AC(
+        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
 }
 
-// 80137ECC 00134AAC
-// https://decomp.me/scratch/5uXTE
-void lbl_80137ECC(HSD_GObj* gobj)
+void ftMars_80137ECC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     // FrameTimerCheck
@@ -487,133 +470,127 @@ void lbl_80137ECC(HSD_GObj* gobj)
     }
 }
 
-// 80137F2C 00134B0C
-void lbl_80137F2C(HSD_GObj* gobj) {}
+void ftMars_80137F2C(HSD_GObj* gobj) {}
 
-// 80137F30 00134B10
-// https://decomp.me/scratch/zDuRP
-void lbl_80137F30(HSD_GObj* gobj)
+void ftMars_80137F30(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    MarsAttributes* attr = fp->x2D4_specialAttributes;
-    s32 unused[4];
+    Fighter* fp = GET_FIGHTER(gobj);
+    MarsAttributes* sa = getFtSpecialAttrsD(fp);
+
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // somethingFriction
         func_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, attr->x20, attr->x24);
+        func_8007D494(fp, sa->x20, sa->x24);
         func_80085204(gobj);
     }
 }
 
-// 80137F8C 00134B6C
-// https://decomp.me/scratch/qwYn8
-void lbl_80137F8C(HSD_GObj* gobj)
+void ftMars_80137F8C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 unused[2];
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (func_800827A0(gobj) == 0) {
-            func_80137FF8(gobj);
-        }
+        if (func_800827A0(gobj) == 0)
+            ftMars_80137FF8(gobj);
     } else {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
-        if (func_80081D0C(gobj) != 0) {
-            func_8013809C(gobj);
-        }
+        if (func_80081D0C(gobj) != 0)
+            ftMars_8013809C(gobj);
     }
 }
 
-// 80137FF8 00134BD8
-// https://decomp.me/scratch/9o4hn
-void func_80137FF8(HSD_GObj* gobj)
+void ftMars_80137FF8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    s32 thing;
+    enum_t asid;
+
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     func_8007D5D4(fp);
+
     switch (fp->action_id) {
-    case 0x163:
-        thing = 0x16C;
+    case 355:
+        asid = 364;
         break;
-    case 0x165:
-        thing = 0x16E;
+    case 357:
+        asid = 366;
         break;
-    case 0x164:
-        thing = 0x16D;
+    case 356:
+        asid = 365;
         break;
-        // default:
-        // thing uninitialized
+#ifndef MUST_MATCH
+    default:
+        HSD_ASSERT(__LINE__, false);
+#endif
     }
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 8013809C 00134C7C
-// https://decomp.me/scratch/qwafK
-void func_8013809C(HSD_GObj* gobj)
+void ftMars_8013809C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    s32 thing;
+    Fighter* fp = GET_FIGHTER(gobj);
+    enum_t asid;
 
-    fp->sa.mars.x222C = 0;
+    fp->ev.ms.x222C = 0;
+
     // Air_SetAsGrounded2
     func_8007D7FC(fp);
+
     switch (fp->action_id) {
-    case 0x16C:
-        thing = 0x163;
+    case 364:
+        asid = 355;
         break;
-    case 0x16E:
-        thing = 0x165;
+    case 366:
+        asid = 357;
         break;
-    case 0x16D:
-        thing = 0x164;
+    case 365:
+        asid = 356;
         break;
-        // default:
-        // thing uninitialized
+#ifndef MUST_MATCH
+    default:
+        HSD_ASSERT(__LINE__, false);
+#endif
     }
-    // ActionStateChange
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x0C4E508C, 0,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+
+    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
+                                       fp->x894_currentAnimFrame, 1, 0);
 }
 
-// 80138148 00134D28
-// https://decomp.me/scratch/V6aHf
-void func_80138148(HSD_GObj* gobj)
+void ftMars_80138148(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    s32 thing;
+    enum_t asid;
 
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
-    fp->cb.x21EC_callback = &lbl_80137A68;
+    fp->cb.x21EC_callback = &ftMars_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground) {
-            thing = 0x163;
-        } else {
-            thing = 0x16C;
-        }
+        if (fp->xE0_ground_or_air == GA_Ground)
+            asid = 355;
+        else
+            asid = 364;
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
-            if (fp->xE0_ground_or_air == GA_Ground) {
-                thing = 0x165;
-            } else {
-                thing = 0x16E;
-            }
+            if (fp->xE0_ground_or_air == GA_Ground)
+                asid = 357;
+            else
+                asid = 366;
         } else {
-            if (fp->xE0_ground_or_air == GA_Ground) {
-                thing = 0x164;
-            } else {
-                thing = 0x16D;
-            }
+            if (fp->xE0_ground_or_air == GA_Ground)
+                asid = 356;
+            else
+                asid = 365;
         }
     }
-    Fighter_ActionStateChange_800693AC(gobj, thing, 0x02000000, 0, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ActionStateChange_800693AC(
+        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
 }

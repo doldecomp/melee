@@ -13,8 +13,8 @@
 static void* lbl_804D6A18;
 
 static StageCallbacks lbl_803E50E8[3] = {
-    { func_80201E08, func_80201E34, func_80201E3C, func_80201E40, FLAGS_ZERO },
-    { func_80201E44, func_80201E88, func_80201E90, func_80201E94, FLAGS_ZERO },
+    { func_80201E08, func_80201E34, func_80201E3C, func_80201E40, 0 },
+    { func_80201E44, func_80201E88, func_80201E90, func_80201E94, 0 },
     { func_80201E9C, func_80201F14, func_80201F1C, func_80201F40,
       (1 << 30) | (1 << 31) },
 };
@@ -141,7 +141,7 @@ static void func_80201E9C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     Ground* gp = gobj->user_data;
@@ -170,7 +170,7 @@ static bool func_80201F44(bool arg0)
     return false;
 }
 
-static bool func_80201F4C(Vec3* a, int unused, HSD_JObj* joint)
+static bool func_80201F4C(Vec3* a, int _, HSD_JObj* joint)
 {
     Vec3 b;
     func_8000B1CC(joint, 0, &b);

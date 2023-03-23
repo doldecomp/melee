@@ -24,7 +24,7 @@ void ftDonkey_800DF980(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     if (fp->xE0_ground_or_air == GA_Air) {

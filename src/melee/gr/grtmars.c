@@ -126,7 +126,7 @@ static void GrTMars_802220BC(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -152,7 +152,7 @@ static void GrTMars_8022214C(HSD_GObj* gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[8];
+    u8 _[8];
 #endif
 
     func_801C2ED0(gobj->hsd_obj, gp->map_id);

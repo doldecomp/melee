@@ -1,15 +1,14 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_06.h>
+#include "ftMasterHand_06.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/mp/mplib.h>
+#include "ft/code_80081B38.h"
+#include "ft/ftbosslib.h"
+#include "mp/mplib.h"
 
 // 801517B0 14E390
 // https://decomp.me/scratch/ayfDz
 void lbl_801517B0(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!Player_GetPlayerSlotType(fp->xC_playerID))
         func_8015BD20(gobj);
 }
@@ -18,11 +17,8 @@ void lbl_801517B0(HSD_GObj* gobj)
 // https://decomp.me/scratch/TjBLH
 void lbl_801517F4(HSD_GObj* gobj)
 {
-    MasterHandAttributes* r3_attributes;
-    Fighter* r4_fp;
-
-    r4_fp = gobj->user_data;
-    r3_attributes = r4_fp->x10C_ftData->ext_attr;
+    Fighter* r4_fp = GET_FIGHTER(gobj);
+    ftMasterHand_SpecialAttrs* r3_attributes = r4_fp->x10C_ftData->ext_attr;
     r4_fp->x80_self_vel.y += r3_attributes->x150;
     r4_fp->x80_self_vel.z += r3_attributes->x158;
 }
@@ -69,13 +65,13 @@ void lbl_80151914(HSD_GObj* arg0) {}
 void func_80151918(HSD_GObj* gobj)
 {
     Fighter* r8_fp;
-    MasterHandAttributes* r7_attributes;
+    ftMasterHand_SpecialAttrs* r7_attributes;
 
     r8_fp = gobj->user_data;
     r7_attributes = r8_fp->x10C_ftData->ext_attr;
-    r8_fp->masterhandVars.x234C_pos.x = (r8_fp->xB0_pos.x - r7_attributes->x3C);
-    r8_fp->masterhandVars.x234C_pos.y = r7_attributes->x38;
-    r8_fp->masterhandVars.x234C_pos.z = 0.0f;
+    r8_fp->sv.mh.unk0.xC.x = (r8_fp->xB0_pos.x - r7_attributes->x3C);
+    r8_fp->sv.mh.unk0.xC.y = r7_attributes->x38;
+    r8_fp->sv.mh.unk0.xC.z = 0.0f;
 
     Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
@@ -85,11 +81,15 @@ void func_80151918(HSD_GObj* gobj)
 // https://decomp.me/scratch/9npQJ
 void lbl_8015198C(HSD_GObj* gobj)
 {
-    MasterHandAttributes* temp_r7;
+    ftMasterHand_SpecialAttrs* temp_r7;
     Fighter* temp_r31;
     Fighter* temp_r8;
     Vec3 sp14;
-    u32 unk[2];
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_r31 = gobj->user_data;
@@ -100,9 +100,9 @@ void lbl_8015198C(HSD_GObj* gobj)
         }
         temp_r8 = gobj->user_data;
         temp_r7 = temp_r8->x10C_ftData->ext_attr;
-        temp_r8->masterhandVars.x234C_pos.x = temp_r8->xB0_pos.x - temp_r7->x3C;
-        temp_r8->masterhandVars.x234C_pos.y = temp_r7->x38;
-        temp_r8->masterhandVars.x234C_pos.z = 0.0f;
+        temp_r8->sv.mh.unk0.xC.x = temp_r8->xB0_pos.x - temp_r7->x3C;
+        temp_r8->sv.mh.unk0.xC.y = temp_r7->x38;
+        temp_r8->sv.mh.unk0.xC.z = 0.0f;
         Fighter_ActionStateChange_800693AC(gobj, 0x15B, 0, 0, 0.0f, 1.0f, 0.0f);
         func_8006EBA4(gobj);
     }
@@ -123,13 +123,12 @@ void lbl_80151A44(HSD_GObj* gobj)
 void lbl_80151A88(HSD_GObj* gobj)
 {
     Fighter* r5_fp;
-    MasterHandAttributes* r6_attributes;
+    ftMasterHand_SpecialAttrs* r6_attributes;
 
     r5_fp = gobj->user_data;
     r6_attributes = r5_fp->x10C_ftData->ext_attr;
-    func_8015BE40(gobj, &r5_fp->masterhandVars.x234C_pos,
-                  &r5_fp->masterhandVars.x2358, r6_attributes->x2C,
-                  r6_attributes->x28);
+    func_8015BE40(gobj, &r5_fp->sv.mh.unk0.xC, &r5_fp->sv.mh.unk0.x18,
+                  r6_attributes->x2C, r6_attributes->x28);
 }
 
 void lbl_80151AC4(HSD_GObj* arg0) {}

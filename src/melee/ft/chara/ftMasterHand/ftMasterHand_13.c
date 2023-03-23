@@ -1,10 +1,11 @@
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_13.h>
+#include "ftMasterHand_13.h"
 
-#include <melee/ft/chara/ftMasterHand/ftMasterHand.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftbosslib.h>
-#include <melee/lb/lbvector.h>
+#include "ftMasterHand_03.h"
+
+#include "ft/code_80081B38.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftbosslib.h"
+#include "lb/lbvector.h"
 
 // 8015287C 14F45C
 void lbl_8015287C(HSD_GObj* gobj)
@@ -16,16 +17,18 @@ void lbl_8015287C(HSD_GObj* gobj)
 // https://decomp.me/scratch/is1xu
 void func_80152880(HSD_GObj* gobj)
 {
-    Fighter* fp;
-    MasterHandAttributes* attr;
-    s32 unk[2];
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
 
-    fp = gobj->user_data;
-    attr = fp->x10C_ftData->ext_attr;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
     Fighter_ActionStateChange_800693AC(gobj, 0x167, 0, 0, 0.0f, 1.0f, 0.0f);
     func_8006EBA4(gobj);
-    fp->masterhandVars.x2340_unk = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
-    fp->x2344_f32 = 0.0f;
+    fp->sv.mh.unk13.x0 = attr->x94 + HSD_Randi(attr->x90 - attr->x94);
+    fp->sv.mh.unk13.x4 = 0.0f;
 }
 
 // 80152928 14F508
@@ -34,17 +37,16 @@ void lbl_80152928(HSD_GObj* gobj)
 {
     Fighter* temp_r31;
     Fighter* temp_r4;
-    u32 unk[2];
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        temp_r4 = gobj->user_data;
-        temp_r4->x2344_f32 = 1.0f;
+        temp_r4 = GET_FIGHTER(gobj);
+        temp_r4->sv.mh.unk13.x4 = 1.0f;
 
-        if (--temp_r4->masterhandVars.x2340_unk < 0.0f) {
-            temp_r4->x2344_f32 = 0.0f;
+        if (--temp_r4->sv.mh.unk13.x0 < 0.0f) {
+            temp_r4->sv.mh.unk13.x4 = 0.0f;
             temp_r4->x80_self_vel.x = 0.0f;
             temp_r4->x80_self_vel.y = 0.0f;
-            temp_r31 = gobj->user_data;
+            temp_r31 = GET_FIGHTER(gobj);
             Fighter_ActionStateChange_800693AC(gobj, 0x168, 0, 0, 0.0f, 1.0f,
                                                0.0f);
             func_8006EBA4(gobj);
@@ -77,7 +79,12 @@ static inline float my_sqrtf(float x)
 {
     static const double _half = .5;
     static const double _three = 3.0;
-    s32 unused = 0; // fakematch
+
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4] = { 0 };
+#endif
+
     volatile float y;
     if (x > 0.0f) {
         double guess = __frsqrte((double) x); // returns an approximation to
@@ -101,7 +108,7 @@ static inline float my_lbvector_Len(Vec3* vec)
 void lbl_80152A50(HSD_GObj* gobj)
 {
     Fighter* fp;
-    MasterHandAttributes* attr;
+    ftMasterHand_SpecialAttrs* attr;
     f32 speed;
     ftData* ftData;
     Vec3 sp28_pos;
@@ -110,7 +117,7 @@ void lbl_80152A50(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     func_80085134(gobj);
-    if (fp->x2344_f32) {
+    if (fp->sv.mh.unk13.x4) {
         ftData = fp->x10C_ftData;
         attr = ftData->ext_attr;
         func_8015C208(gobj, &sp28_pos);

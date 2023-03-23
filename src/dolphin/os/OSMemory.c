@@ -48,7 +48,6 @@ static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
 }
 
 #ifdef MWERKS_GEKKO
-
 asm void Config24MB(void)
 { // clang-format off
     nofralloc
@@ -85,18 +84,15 @@ asm void Config24MB(void)
     mtspr 0x1a, r3
     rfi
 } // clang-format on
-
 #else
 
 void Config24MB(void)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 asm void Config48MB(void)
 { // clang-format off
     nofralloc
@@ -133,18 +129,15 @@ asm void Config48MB(void)
     mtsrr0 r3
     rfi
 } // clang-format on
-
 #else
 
 void Config48MB(void)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 #ifdef MWERKS_GEKKO
-
 asm void RealMode(register Event)
 { // clang-format off
     nofralloc
@@ -155,20 +148,22 @@ asm void RealMode(register Event)
     mtsrr1 r3
     rfi
 } // clang-format on
-
 #else
 
 void RealMode(Event arg0)
 {
     NOT_IMPLEMENTED;
 }
-
 #endif
 
 void __OSInitMemoryProtection(void)
 {
-    u32 unused[10];
-    size_t simulated_mem = OSGetConsoleSimulatedMemSize();
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[40];
+#endif
+
+    u32 simulated_mem = OSGetConsoleSimulatedMemSize();
     bool intr = OSDisableInterrupts();
     if (simulated_mem <= 24 * 1024 * 1024) {
         RealMode(Config24MB);

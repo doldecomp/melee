@@ -1,34 +1,35 @@
-#include <melee/ft/chara/ftPurin/ftpurin.h>
+#include "ftpurin.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_005.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gr/grstadium.h>
-#include <melee/it/item2.h>
-#include <melee/mp/mplib.h>
-#include <MSL/trigf.h>
-#include <sysdolphin/baselib/gobj.h>
+#include "cm/camera.h"
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_005.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcamera.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftcoll.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "gm/code_801601C4.h"
+#include "gr/grstadium.h"
+#include "it/item2.h"
+#include "mp/mplib.h"
+
+#include <baselib/gobj.h>
+#include <trigf.h>
 
 ActionState as_table_purin[] = {
-    { 295, FLAGS_ZERO, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
+    { 295, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
-    { 296, FLAGS_ZERO, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
+    { 296, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
-    { 297, FLAGS_ZERO, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
+    { 297, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
-    { 298, FLAGS_ZERO, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
+    { 298, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
-    { 299, FLAGS_ZERO, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
+    { 299, 0, 0x01000000, func_800D7590, func_800D7614, func_800D7634,
       func_800D767C, func_800761C8 },
     { 300, 0x00340211, 0x12000000, lbl_8013E014, lbl_8013FF00, lbl_80140620,
       lbl_80140FA4, func_800761C8 },
@@ -160,81 +161,79 @@ void ftPurin_OnUserDataRemove(HSD_GObj* fighter_gobj)
 
 void func_8013C360(HSD_GObj* fighter_gobj)
 {
-    s32 unused;
-
-    HSD_Joint** joint_list = lbl_8045A1E0;
+    HSD_Joint** joints = lbl_8045A1E0;
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (lbl_803D05B4[fp->x619_costume_id]) {
-        void** item_list = fp->x10C_ftData->x48_items;
-        void** item_list_shifted = item_list[1];
-        if (!joint_list[fp->x619_costume_id]) {
+        UNK_T* items = fp->x10C_ftData->x48_items;
+        UNK_T* items_shifted = items[1];
+        if (!joints[fp->x619_costume_id]) {
             UnkCostumeStruct* costume_list =
                 CostumeListsForeachCharacter[fp->x4_fighterKind].costume_list;
-            joint_list[fp->x619_costume_id] = HSD_ArchiveGetPublicAddress(
+            joints[fp->x619_costume_id] = HSD_ArchiveGetPublicAddress(
                 costume_list[fp->x619_costume_id].x14_archive,
                 lbl_803D05B4[fp->x619_costume_id]);
         }
 
-        fp->sa.purin.x2244 = HSD_ObjAlloc(&lbl_80459080);
+        fp->ev.pr.x2244 = HSD_ObjAlloc(&lbl_80459080);
         func_80074148();
-        fp->sa.purin.x223C = HSD_JObjLoadJoint(joint_list[fp->x619_costume_id]);
-        fp->x2225_b2 = 1;
+        fp->ev.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
+        fp->x2225_b2 = true;
         func_80074170();
-        func_80075650(fighter_gobj, fp->sa.purin.x223C, &fp->sa.purin.x2240);
+        func_80075650(fighter_gobj, fp->ev.pr.x223C, &fp->ev.pr.x2240);
 
-        func_8007487C(&item_list_shifted[1], &fp->sa.purin.x2248,
-                      fp->x619_costume_id, &fp->sa.purin.x2240,
-                      &fp->sa.purin.x2240);
+        func_8007487C(&items_shifted[1], &fp->ev.pr.x2248, fp->x619_costume_id,
+                      &fp->ev.pr.x2240, &fp->ev.pr.x2240);
         func_8009DC54(fp);
         return;
     }
 
-    fp->sa.purin.x223C = 0;
+    fp->ev.pr.x223C = 0;
 }
 
 void func_8013C494(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.purin.x223C != NULL) {
-        HSD_JObjRemoveAll(fp->sa.purin.x223C);
-        fp->sa.purin.x223C = NULL;
-        HSD_ObjFree(&lbl_80459080, fp->sa.purin.x2244);
-        fp->sa.purin.x2244 = NULL;
+    if (fp->ev.pr.x223C != NULL) {
+        HSD_JObjRemoveAll(fp->ev.pr.x223C);
+        fp->ev.pr.x223C = NULL;
+        HSD_ObjFree(&lbl_80459080, fp->ev.pr.x2244);
+        fp->ev.pr.x2244 = NULL;
     }
 }
 
 void func_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx)
 {
-    s32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.purin.x223C && fp->x2225_b2) {
+    if (fp->ev.pr.x223C && fp->x2225_b2) {
         Mtx* mtx;
         HSD_JObj* jobj;
         HSD_JObj* bone_jobj = fp->x5E8_fighterBones[6].x0_jobj;
         HSD_JObjGetMtx(fp->x5E8_fighterBones[6].x0_jobj);
         mtx = (0, &bone_jobj->mtx);
-        jobj = fp->sa.purin.x223C;
-        HSD_JObjCopyMtx(fp->sa.purin.x223C, *mtx);
+        jobj = fp->ev.pr.x223C;
+        HSD_JObjCopyMtx(fp->ev.pr.x223C, *mtx);
         jobj->flags |= 0x03800000;
         HSD_JObjSetMtxDirty(jobj);
 
-        HSD_JObjDispAll(fp->sa.purin.x223C, vmtx, func_80390EB8(arg1), 0);
+        HSD_JObjDispAll(fp->ev.pr.x223C, vmtx, func_80390EB8(arg1), 0);
     }
 }
 
 void func_8013C614(Fighter* fp, int arg1, bool arg2)
 {
-    if (fp->sa.purin.x223C) {
-        if (arg2) {
-            func_80074CA0(&fp->sa.purin.x2248, arg1, &fp->sa.purin.x2240);
-            return;
-        }
-
-        func_80074D7C(&fp->sa.purin.x2248, arg1, &fp->sa.purin.x2240);
+    if (fp->ev.pr.x223C) {
+        if (arg2)
+            func_80074CA0(&fp->ev.pr.x2248, arg1, &fp->ev.pr.x2240);
+        else
+            func_80074D7C(&fp->ev.pr.x2248, arg1, &fp->ev.pr.x2240);
     }
 }
 
@@ -242,8 +241,8 @@ void* func_8013C664(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.purin.x223C)
-        return fp->sa.purin.x223C;
+    if (fp->ev.pr.x223C)
+        return fp->ev.pr.x223C;
 
     return fighter_gobj;
 }
@@ -345,9 +344,9 @@ inline void ftPurin_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &lbl_8013C94C;
 
     if (func_8016B1D8() && func_801D4FF8(fp->xC_playerID))
-        fp->x2340_stateVar1 = true;
+        fp->sv.pr.specialhi.x0 = true;
     else
-        fp->x2340_stateVar1 = false;
+        fp->sv.pr.specialhi.x0 = false;
 }
 
 inline void

@@ -1,15 +1,19 @@
-#include <melee/ft/chara/ftZelda/ftzelda4.h>
+#include "ftzelda4.h"
 
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialLw.h>
-#include <melee/ft/chara/ftZelda/ftzelda.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
+#include "ftzelda.h"
+
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/code_80081B38.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcommon.h"
+#include "ftSeak/ftSeak_SpecialLw.h"
+#include "it/code_8027CF30.h"
+#include "lb/lbunknown_001.h"
+#include "lb/lbunknown_003.h"
+
+#include <Runtime/platform.h>
 
 // 8013ADB4 - 8013AE30 (0x7C bytes)
 // https://decomp.me/scratch/LbMVE
@@ -156,7 +160,7 @@ void ftZelda_8013B110(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -249,7 +253,7 @@ void ftZelda_8013B344(HSD_GObj* fighter_gobj)
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
-    u8 unused[4];
+    u8 _[4];
 #endif
 
     fp = GET_FIGHTER(fighter_gobj);
@@ -308,22 +312,24 @@ void ftZelda_8013B46C(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/wpEbJ
 void ftZelda_8013B4D8(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    ftZeldaAttributes* attributes;
-    s32 var_r4;
-    s32 unused[1];
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
 
-    fp = GET_FIGHTER(fighter_gobj);
-    attributes = fp->x2D4_specialAttributes;
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[4];
+#endif
 
-    if (fp->xE0_ground_or_air == 0) {
-        var_r4 = 0x164;
-    } else {
-        var_r4 = 0x166;
+    {
+        enum_t asid;
+        if (fp->xE0_ground_or_air == 0)
+            asid = 0x164;
+        else
+            asid = 0x166;
+
+        Fighter_ActionStateChange_800693AC(fighter_gobj, asid, 0, NULL, sa->x80,
+                                           1.0, 0);
     }
-
-    Fighter_ActionStateChange_800693AC(fighter_gobj, var_r4, 0, NULL,
-                                       attributes->x80, 1.0, 0);
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AE30;
 }
 
@@ -338,7 +344,7 @@ s32 ftZelda_8013B540(HSD_GObj* fighter_gobj)
     actionStateIndex = fp->action_id;
 
     if (((actionStateIndex == 0x158) || (actionStateIndex == 0x15B)) &&
-        (fp->sa.zelda.x222C != 0U))
+        (fp->ev.zd.x222C != 0U))
     {
         return 1;
     }
@@ -348,26 +354,23 @@ s32 ftZelda_8013B540(HSD_GObj* fighter_gobj)
 // 8013B574 - 8013B5C4 (0x50 bytes)
 // https://decomp.me/scratch/tgIRc (fork of below)
 // https://decomp.me/scratch/pTAiQ
-s32 ftZelda_8013B574(HSD_GObj* fighter_gobj)
+bool ftZelda_8013B574(HSD_GObj* fighter_gobj)
 {
-    s32 temp_r0;
-    Fighter* fp; // r3
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp = GET_FIGHTER(fighter_gobj);
-
-    if (fp->sa.zelda.x222C != 0) {
+    if (fp->ev.zd.x222C != 0) {
         switch (fp->action_id) {
         case 0x15C:
         case 0x159:
             if (fp->x2204_ftcmd_var1 == 1) {
                 fp->x2204_ftcmd_var1 = 0;
-                return 1;
+                return true;
             }
             break;
         }
     }
 
-    return 0;
+    return false;
 }
 
 // 8013B5C4 - 8013B5EC ( bytes)
@@ -377,8 +380,8 @@ void ftZelda_8013B5C4(HSD_GObj* fighter_gobj)
     Fighter* fp;
 
     fp = GET_FIGHTER(fighter_gobj);
-    if (fp->sa.zelda.x222C != 0) {
-        fp->sa.zelda.x222C = 0;
+    if (fp->ev.zd.x222C != 0) {
+        fp->ev.zd.x222C = 0;
     }
 
     fp->cb.x21E4_callback_OnDeath2 = 0;
@@ -391,9 +394,9 @@ void ftZelda_8013B5EC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->sa.zelda.x222C != NULL) {
-        func_802C3D44(fp->sa.zelda.x222C);
-        fp->sa.zelda.x222C = NULL;
+    if (fp->ev.zd.x222C != NULL) {
+        func_802C3D44(fp->ev.zd.x222C);
+        fp->ev.zd.x222C = NULL;
     }
 
     fp->cb.x21E4_callback_OnDeath2 = 0;

@@ -1,5 +1,14 @@
-#include <melee/lb/lbcollision.h>
+#include "lbcollision.h"
 
+#include "forward.h"
+#include "lbaudio_ax.h"
+#include "lbunknown_001.h"
+#include "lbvector.h"
+
+#include <baselib/baselib_shared_data_003.h>
+#include <baselib/mtx.h>
+#include <baselib/state.h>
+#include <baselib/tev.h>
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXDisplayList.h>
 #include <dolphin/gx/GXGeometry.h>
@@ -8,15 +17,7 @@
 #include <dolphin/gx/GXTev.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <math.h>
-#include <melee/lb/forward.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbvector.h>
 #include <MetroTRK/intrinsics.h>
-#include <sysdolphin/baselib/baselib_shared_data_003.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/tev.h>
 
 /// @todo Toggle for WIP functions
 #if 0
@@ -3761,7 +3762,6 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
 {
     Vec3 sp74;
     Vec3 sp68;
-    int* sp8;
     HSD_JObj* temp_r29;
     HSD_JObj* temp_r29_2;
     Vec3* temp_r5;
@@ -3807,7 +3807,14 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
     } else {
         var_f1 = arg0->scl * arg4;
     }
-    sp8 = &arg0->x70;
+
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+    {
+        int* sp8 = &arg0->x70;
+    }
+#endif
+
     temp_r5 = &shield_hit->pos;
     return lbColl_80006E58(&arg0->x58, &arg0->x4C, temp_r5, temp_r5, &sp74,
                            &sp68, (f32(*)[4]) var_r9, &arg0->x64, var_f1,
@@ -4108,7 +4115,6 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
 {
     Vec3 sp70;
     Vec3 sp64;
-    int* sp8;
     HSD_JObj* temp_r31;
     HSD_JObj* temp_r31_2;
     Mtx* var_r9;
@@ -4149,7 +4155,12 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
         } else {
             var_f1 = arg0->scl * hit_scl_y;
         }
-        sp8 = &arg0->x70;
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        {
+            int* sp8 = &arg0->x70;
+        }
+#endif
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
                                &arg1->b_pos, &sp70, &sp64, *var_r9, &arg0->x64,
                                var_f1, arg1->scl, 3.0f * hurt_scl_y);
@@ -4163,7 +4174,8 @@ f32 const lbl_804D7A40 = 5;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32){
+asm bool lbColl_8000805C(HitCapsule*, HurtCapsule*, unk_t, s32, f32, f32, f32)
+{
     // clang-format off
     nofralloc
 /* 8000805C 00004C3C  7C 08 02 A6 */	mflr r0
@@ -4305,12 +4317,12 @@ lbl_8000821C:
 #pragma pop
 #else
 
-s32 lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, void* arg2, s32 arg3,
-                    f32 arg4, f32 arg5, f32 arg6)
+bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, UNK_T arg2, s32 arg3,
+                     f32 arg4, f32 arg5, f32 arg6)
 {
     Vec3 sp74;
     Vec3 sp68;
-    s32* sp8;
+    f32* sp38 = NULL;
     HSD_JObj* temp_r29;
     HSD_JObj* temp_r29_2;
     f32* var_r9;
@@ -4337,7 +4349,7 @@ s32 lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, void* arg2, s32 arg3,
         if (arg2 != NULL) {
             temp_r29 = arg1->bone;
             if (temp_r29 == NULL) {
-                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
             }
             lbColl_JObjSetupMatrix(temp_r29);
             PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r29->mtx[0],
@@ -4348,7 +4360,7 @@ s32 lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, void* arg2, s32 arg3,
         } else {
             temp_r29_2 = arg1->bone;
             if (temp_r29_2 == NULL) {
-                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
             }
             lbColl_JObjSetupMatrix(temp_r29_2);
             var_r9 = temp_r29_2->mtx[0];
@@ -4358,7 +4370,12 @@ s32 lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, void* arg2, s32 arg3,
         } else {
             var_f1 = arg0->scl * arg4;
         }
-        sp8 = &arg0->x70;
+/// @todo Unused assignment.
+#ifdef MUST_MATCH
+        {
+            int* sp8 = &arg0->x70;
+        }
+#endif
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
                                &arg1->b_pos, &sp74, &sp68, (f32(*)[4]) var_r9,
                                &arg0->x64, var_f1, arg1->scl, 3.0f * arg5);
@@ -4649,7 +4666,7 @@ void lbColl_80008440(HitCapsule* arg0)
     if (8U < 0xCU) {
         do {
             M2C_FIELD(var_r5, Fighter**, 0x74) = NULL;
-            var_r5 += (s32*) 2;
+            var_r5 += 2;
             var_ctr -= 1;
         } while (var_ctr != 0);
     }
@@ -4795,8 +4812,8 @@ void lbColl_CopyHitCapsule(HitCapsule* src, HitCapsule* dst)
     HitVictim* var_r7;
     HitVictim* var_r8;
     HitVictim* var_r9;
-    s32 temp_r0;
-    s32 temp_r0_2;
+    UNK_T temp_r0;
+    UNK_T temp_r0_2;
     s32 var_ctr;
 
     dst->victims_1[0].victim = src->victims_1[0].victim;
@@ -5013,7 +5030,7 @@ loop_1:
             } else if (arg1 < 9) {
             block_9:
                 arg0->victims_1[var_r7].x4 =
-                    (int) (s8) ((u16) M2C_FIELD(arg0, u16*, 0x40) >> 4U);
+                    (UNK_T) (M2C_FIELD(arg0, u16*, 0x40) >> 4U);
             }
         }
         return 0;
@@ -5072,7 +5089,7 @@ loop_1:
             if (arg1 < 9) {
             block_30:
                 arg0->victims_1[var_r0].x4 =
-                    (int) (s8) ((u16) M2C_FIELD(arg0, u16*, 0x40) >> 4U);
+                    (UNK_T) (M2C_FIELD(arg0, u16*, 0x40) >> 4U);
             } else {
                 goto block_31;
             }
@@ -6149,7 +6166,7 @@ lbl_8000968C:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm UNK_RET lbColl_800096B4(UNK_PARAMS)
+asm void lbColl_800096B4(MtxPtr, UNK_T, UNK_T, UNK_T, UNK_T, f32)
 { // clang-format off
     nofralloc
 /* 800096B4 00006294  7C 08 02 A6 */	mflr r0
@@ -7679,9 +7696,14 @@ lbl_8000AB0C:
 #pragma pop
 
 #else
-
 bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
 {
+/// @todo Combine these into #Vec3 instances.
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-but-set-variable"
+#endif
+    f32 sp9C;
     f32 sp98;
     f32 sp94;
     f32 sp90;
@@ -7694,6 +7716,11 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
     f32 sp74;
     f32 sp70;
     s32 sp6C;
+    f32 sp3C;
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+
     Vec3 sp30;
     Vec3 sp24;
     HSD_JObj* temp_r31;
@@ -7707,7 +7734,7 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
     } else {
         var_r0 = 2U;
     }
-    if (var_r0 == arg1) {
+    if (var_r0 == (u32) arg1) {
         if (!(((u8) M2C_FIELD(arg0, u8*, 4) >> 7U) & 1)) {
             func_8000B1CC(arg0->bone, &arg0->offset, &arg0->pos);
             if (arg2 != NULL) {
@@ -7722,7 +7749,7 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
             }
             lbColl_JObjSetupMatrix(temp_r31);
             PSMTXConcat((f32(*)[4]) arg2, (f32(*)[4]) temp_r31->mtx[0],
-                        (f32(*)[4]) & sp9C[0]);
+                        (f32(*)[4]) & sp9C);
         }
         temp_f31 = arg0->size;
         sp84 = arg0->pos.x;
@@ -7732,29 +7759,30 @@ bool lbColl_8000A95C(HitResult* arg0, void* arg1, Mtx* arg2, f32 pos_z)
         sp94 = arg0->pos.y;
         sp98 = arg0->pos.z;
         if (arg2 != NULL) {
-            var_r31 = &sp9C[0];
+            var_r31 = &sp9C;
         } else {
             temp_r31_2 = arg0->bone;
             if (temp_r31_2 == NULL) {
-                __assert(&lbl_804D3700, 0x478U, &lbl_804D3708);
+                __assert(lbl_804D3700, 0x478U, lbl_804D3708);
             }
             lbColl_JObjSetupMatrix(temp_r31_2);
             var_r31 = temp_r31_2->mtx[0];
         }
-        HSD_MtxInverse((f32(*)[4]) var_r31, (f32(*)[4]) & sp3C[0]);
-        PSMTXMUltiVec((f32(*)[4]) & sp3C[0], (Vec3*) &sp90, &sp24);
-        PSMTXMUltiVec((f32(*)[4]) & sp3C[0], (Vec3*) &sp84, &sp30);
-        sp78 = (s32) sp30;
-        sp6C = (s32) sp24;
+        HSD_MtxInverse((f32(*)[4]) var_r31, (f32(*)[4]) & sp3C);
+        PSMTXMUltiVec((f32(*)[4]) & sp3C, (Vec3*) &sp90, &sp24);
+        PSMTXMUltiVec((f32(*)[4]) & sp3C, (Vec3*) &sp84, &sp30);
+        sp78 = (s32) sp30.x;
+        sp6C = (s32) sp24.x;
         sp7C = sp30.y;
         sp70 = sp24.y;
         sp80 = sp30.z;
         sp74 = sp24.z;
         lbColl_800096B4((f32(*)[4]) var_r31, &sp6C, &sp78, &lbl_804D36CC,
                         &lbl_804D36D0, temp_f31);
-        return 1;
+        return true;
     }
-    return 0;
+
+    return false;
 }
 
 #endif

@@ -1,13 +1,16 @@
-#include <melee/ft/chara/ftYoshi/ftyoshi2.h>
+#include "ftyoshi2.h"
 
-#include <melee/ef/efasync.h>
-#include <melee/ft/chara/ftYoshi/ftyoshi1.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/itkind.h>
+#include "ftyoshi1.h"
+
+#include "ef/efasync.h"
+#include "ft/fighter.h"
+#include "ft/ft_unknown_006.h"
+#include "ft/ftcoll.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+#include "it/itkind.h"
+
+#include <stddef.h>
 
 char lbl_803CEA98[] = "PlYs.dat";
 char lbl_803CEAA4[] = "ftDataYoshi";
@@ -70,11 +73,13 @@ static inline void spawnEffect(HSD_GObj* fighter_gobj)
 
 void lbl_8012C030(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    u32 unused[2];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp = GET_FIGHTER(fighter_gobj);
-    fp->x2340_f32 += lbl_804D9A28;
+    fp->sv.ys.unk2.x0 += lbl_804D9A28;
     func_80092BCC(fighter_gobj);
     if (func_800925A4(fighter_gobj)) {
         spawnEffect(fighter_gobj);
@@ -191,15 +196,19 @@ asm void func_8012C1D4(HSD_GObj*)
 
 void lbl_8012C2F4(HSD_GObj* fighter_gobj)
 {
-    u32 unused[3];
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[12];
+#endif
+
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    fp->x2340_f32 += lbl_804D9A28;
+    fp->sv.ys.unk2.x0 += lbl_804D9A28;
     func_80092BCC(fighter_gobj);
 
     if (func_800925A4(fighter_gobj)) {
         spawnEffect(fighter_gobj);
-    } else if (fp->x234C_stateVar4_s32 != 0 ||
+    } else if (fp->sv.ys.unk2.xC != 0 ||
                (!(fp->x221B_b0 & 1) && !(fp->x2218_flag.bits.b3)))
     {
         func_80092BE8(fighter_gobj);
@@ -230,42 +239,51 @@ void lbl_8012C47C(HSD_GObj* arg0)
 
 void func_8012C49C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    s32* x1CC;
-    s32 bone_idx;
-    Fighter* fp2;
-    HSD_JObj* jobj;
-    u32 unused[4];
+    Fighter_ActionStateChange_800693AC(
+        fighter_gobj, 0x157, 0, NULL, lbl_804D9A2C, lbl_804D9A28, lbl_804D9A2C);
 
-    f32 temp_f1 = lbl_804D9A2C;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x157, 0, NULL, temp_f1,
-                                       lbl_804D9A28, temp_f1);
+    {
+        Fighter* fp0 = GET_FIGHTER(fighter_gobj);
+        func_80074B0C(fighter_gobj, 0, 0);
+        func_8007B0C0(fighter_gobj, 0);
 
-    fp = fighter_gobj->user_data;
-    func_80074B0C(fighter_gobj, 0, 0);
-    func_8007B0C0(fighter_gobj, 0);
+        {
+            /// @todo Unused stack.
+#ifdef MUST_MATCH
+            u8 _[8];
+#endif
 
-    x1CC = &fp->x110_attr.x1CC;
-    bone_idx = func_8007500C(fp, 4);
-    fp2 = fighter_gobj->user_data;
-    jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
-    efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CF, jobj, x1CC);
+            s32* x1CC = &fp0->x110_attr.x1CC;
+
+            ssize_t bone_idx = func_8007500C(fp0, 4);
+            Fighter* fp1 = GET_FIGHTER(fighter_gobj);
+
+            /// @todo Why is this still using @c fp0?
+            HSD_JObj* jobj = fp0->x5E8_fighterBones[bone_idx].x0_jobj;
+
+            efAsync_Spawn(fighter_gobj, &fp1->x60C, 4U, 0x4CF, jobj, x1CC);
+        }
+    }
 }
 
 void lbl_8012C54C(HSD_GObj* fighter_gobj)
 {
-    Fighter* fp;
-    s32 unused[2];
-    fp = fighter_gobj->user_data;
-    fp->x2340_f32 = fp->x2340_f32 + lbl_804D9A28;
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    fp->sv.ys.unk2.x0 = fp->sv.ys.unk2.x0 + lbl_804D9A28;
+
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0)
         func_8008A2BC(fighter_gobj);
-    }
 }
 
 void lbl_8012C59C(HSD_GObj* arg0)
 {
     if (!func_80099794(arg0)) {
+        /// @todo Weird control flow.
         return;
     }
 }
@@ -406,7 +424,7 @@ void lbl_8012C7A4(HSD_GObj* fighter_gobj)
 
     func_80093BC0(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        if (fp->x234C_stateVar4_s32) {
+        if (fp->sv.ys.unk2.xC) {
             func_80092BE8(fighter_gobj);
         } else {
             func_800928CC(fighter_gobj);
@@ -466,9 +484,9 @@ void func_8012C850(HSD_GObj* fighter_gobj)
     fp->x221C_flag.bits.b1 = true;
     fp->x221C_flag.bits.b2 = true;
 
-    fp->x2354_stateVar6_f32 = p_ftCommonData->x2A4;
+    fp->sv.ys.unk2.x14 = p_ftCommonData->x2A4;
     temp_r5 = p_ftCommonData;
-    fp->x2358_stateVar7 = temp_r5->x2B4;
+    fp->sv.ys.unk2.x18 = temp_r5->x2B4;
     func_8009370C(fighter_gobj, lbl_8012CACC, temp_r5);
 }
 
