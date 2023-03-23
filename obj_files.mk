@@ -93,7 +93,7 @@ TEXT_O_FILES +=\
     $(BUILD_DIR)/asm/melee/ft/ftdata.s.o\
     $(BUILD_DIR)/src/melee/ft/ftlib.c.o\
     $(BUILD_DIR)/src/melee/ft/ftwaitanim.c.o\
-    $(BUILD_DIR)/src/melee/ft/ftunk07.c.o\
+    $(BUILD_DIR)/src/melee/ft/ft_3C54.c.o\
     $(BUILD_DIR)/src/melee/ft/ftitempickup.c.o\
     $(BUILD_DIR)/src/melee/ft/ftdynamics.c.o\
     $(BUILD_DIR)/src/melee/ft/chara/ftMario/ftMario_Strings.c.o\
