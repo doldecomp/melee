@@ -40,8 +40,9 @@ fn main() -> Result<()> {
         })
         .next()
         .context("Failed to find the text section.")?;
-    let text_range = (text_section.sh_addr + text_section.sh_size / 1024 * 10)
-        ..(text_section.sh_addr + text_section.sh_size / 1024 * 11);
+
+    let text_range =
+        (text_section.sh_addr + 0xA0B8)..(text_section.sh_addr + 0xFF74);
 
     let regex = RegexBuilder::new(&format!(r"\b\w+_80({})\b", {
         let vec = elf
