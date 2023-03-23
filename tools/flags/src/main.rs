@@ -65,6 +65,10 @@ fn parse_input(s: &str) -> anyhow::Result<u64> {
 fn format_output(i: usize, flags: &str, signed: bool) -> String {
     match parse_input(flags) {
         Ok(parsed_flags) => {
+            const I32_MAX: u64 = i32::MAX as u64;
+            const U32_MAX: u64 = u32::MAX as u64;
+            const I64_MAX: u64 = i64::MAX as u64;
+
             let flags_str = if parsed_flags == 0 {
                 "0".to_string()
             } else {
@@ -74,10 +78,10 @@ fn format_output(i: usize, flags: &str, signed: bool) -> String {
 
                         if parsed_flags & mask != 0 {
                             let one_str = match mask {
-                                0..=0x7FFFFFFF => "1",
-                                0..=0xFFFFFFFF => "1U",
-                                0..=0x7FFFFFFFFFFFFFFF => "1L",
-                                _ => "1UL",
+                                0..=I32_MAX => "1",
+                                0..=U32_MAX => "1U",
+                                0..=I64_MAX => "1L",
+                                0..=u64::MAX => "1UL",
                             };
                             Some(format!("({one_str} << {i})").to_string())
                         } else {
@@ -89,10 +93,10 @@ fn format_output(i: usize, flags: &str, signed: bool) -> String {
             };
 
             let type_str = match (parsed_flags, signed) {
-                (0..=0x7FFFFFFF, true) => "i32",
-                (0..=0xFFFFFFFF, _) => "u32",
-                (0..=0x7FFFFFFFFFFFFFFF, true) => "i64",
-                _ => "u64",
+                (0..=I32_MAX, true) => "i32",
+                (0..=U32_MAX, _) => "u32",
+                (0..=I64_MAX, true) => "i64",
+                (0..=u64::MAX, _) => "u64",
             };
 
             format!(
