@@ -21,7 +21,7 @@ lazy_static! {
 
 fn main() -> Result<()> {
     env_logger::builder().format_timestamp_nanos().init();
-    let args: Args = Args::parse();
+    let args = Args::parse();
 
     let symbols = match &args.symbols.filter(|s| s != "-") {
         Some(path) => {
@@ -52,6 +52,6 @@ fn main() -> Result<()> {
             .join("|")
     ))?;
 
-    info!("Module is \"{}\" and regex is `{}`.", &args.prefix, regex);
+    info!("Prefix is \"{}\" and regex is `{}`.", &args.prefix, regex);
     replace_all(&regex, &format!("{}_$1", &args.prefix))
 }

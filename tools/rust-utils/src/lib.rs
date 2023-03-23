@@ -4,9 +4,9 @@ use globset::{Glob, GlobSet, GlobSetBuilder};
 use lazy_static::lazy_static;
 use log::debug;
 use regex::Regex;
-use std::env;
-use std::fs::OpenOptions;
 use std::{
+    env,
+    fs::OpenOptions,
     io::{Read, Seek, Write},
     path::{Path, PathBuf},
 };
