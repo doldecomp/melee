@@ -387,6 +387,7 @@ dependencies = [
  "clap",
  "env_logger",
  "goblin",
+ "lazy_static",
  "log",
  "melee-utils",
  "regex",

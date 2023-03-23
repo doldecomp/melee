@@ -1,15 +1,19 @@
 use anyhow::{Context, Result};
 use clap::Parser;
 use goblin::elf::{sym::STB_GLOBAL, Elf};
+use lazy_static::lazy_static;
 use regex::Regex;
-use std::fs::File;
-use std::io::Read;
-use std::path::PathBuf;
+use std::{fs::File, io::Read, path::PathBuf};
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 struct Args {
     elf: PathBuf,
+}
+
+lazy_static! {
+    static ref UNK_FUNC_RE: Regex = Regex::new(r"\w+_([0-9a-fA-F]{8})")
+        .expect("Failed to parse UNK_FUNC_RE.");
 }
 
 fn main() -> Result<()> {
@@ -21,9 +25,9 @@ fn main() -> Result<()> {
     let mut elf_data = Vec::new();
     elf_file
         .read_to_end(&mut elf_data)
-        .expect("Failed to read ELF file");
+        .context("Failed to read ELF file")?;
 
-    let elf = Elf::parse(&elf_data).expect("Failed to parse ELF file");
+    let elf = Elf::parse(&elf_data).context("Failed to parse ELF file")?;
 
     let text_section = elf
         .section_headers
@@ -32,9 +36,7 @@ fn main() -> Result<()> {
             let sh_name = elf.shdr_strtab.get_at(sh.sh_name).unwrap();
             sh_name == ".text"
         })
-        .expect("Failed to find .text section");
-
-    let re = Regex::new(r"\w+_([0-9a-fA-F]{8})").unwrap();
+        .context("Failed to find .text section")?;
 
     for symbol in elf.syms.iter() {
         if symbol.st_value >= text_section.sh_addr
@@ -45,7 +47,7 @@ fn main() -> Result<()> {
                 continue;
             }
 
-            let new_name = if let Some(captures) = re.captures(name) {
+            let new_name = if let Some(captures) = UNK_FUNC_RE.captures(name) {
                 format!(".L{}", captures.get(1).unwrap().as_str())
             } else {
                 format!(".L{}", name)

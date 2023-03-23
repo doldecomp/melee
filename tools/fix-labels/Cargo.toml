@@ -9,9 +9,10 @@ license = "AGPL-3.0-or-later"
 
 [dependencies]
 anyhow = "1.0.70"
-clap = "4.1.11"
+clap = { version = "4.1.11", features = ["derive"] }
 env_logger = "0.10.0"
 goblin = "0.6.1"
+lazy_static = "1.4.0"
 log = "0.4.17"
 melee-utils = { version = "0.1.0", path = "../rust-utils" }
 regex = "1.7.2"
