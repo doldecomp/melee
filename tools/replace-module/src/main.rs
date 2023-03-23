@@ -3,7 +3,7 @@ use clap::Parser;
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use log::info;
-use melee_utils::replace_all;
+use melee_utils::{replace, walk_src};
 use regex::Regex;
 use std::{fs, io::Read};
 
@@ -53,5 +53,10 @@ fn main() -> Result<()> {
     ))?;
 
     info!("Prefix is \"{}\" and regex is `{}`.", &args.prefix, regex);
-    replace_all(&regex, &format!("{}_$1", &args.prefix))
+    let to = format!("{}_$1", &args.prefix);
+    for path in walk_src()? {
+        replace(&regex, &to, &path)?;
+    }
+
+    Ok(())
 }

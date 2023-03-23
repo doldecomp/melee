@@ -39,23 +39,22 @@ pub fn set_current_dir() -> anyhow::Result<()> {
         .context("Failed to change directory to project root.")
 }
 
-pub fn replace_all<'to>(from: &Regex, to: &'to str) -> Result<()> {
-    replace_all_with(from, |_| to)
-}
-
-pub fn replace_all_with<'to, F>(from: &Regex, to: F) -> Result<()>
-where
-    F: Fn(&Path) -> &'to str,
-{
-    for entry in WalkDir::new(&*ROOT) {
-        let entry = entry?;
-        let path = entry.path();
-        if entry.file_type().is_file() && SRC_FILES.is_match(path) {
-            debug!("Replacing in {path:?}.");
-            replace(from, &to(path), path)?;
-        }
-    }
-    Ok(())
+pub fn walk_src() -> Result<Vec<PathBuf>> {
+    WalkDir::new(&*ROOT)
+        .into_iter()
+        .filter_map(|res| {
+            res.map(|entry| {
+                let path = entry.path();
+                if entry.file_type().is_file() && SRC_FILES.is_match(path) {
+                    Some(path.to_owned())
+                } else {
+                    None
+                }
+            })
+            .context("Failed to resolve WalkDir entry.")
+            .transpose()
+        })
+        .collect::<Result<Vec<_>>>()
 }
 
 pub fn replace(from: &Regex, to: &str, path: &Path) -> Result<()> {

@@ -1,11 +1,8 @@
 use anyhow::{Context, Result};
 use clap::Parser;
-use goblin::{
-    elf::{sym::STB_GLOBAL, Elf},
-    elf64::sym::STB_LOCAL,
-};
+use goblin::{elf::Elf, elf32::sym::STB_LOCAL};
 use lazy_static::lazy_static;
-use log::trace;
+use melee_utils::{replace, walk_src};
 use regex::Regex;
 use std::{fs::File, io::Read, path::PathBuf};
 
