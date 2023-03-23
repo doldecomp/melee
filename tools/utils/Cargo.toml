@@ -7,7 +7,6 @@ license = "AGPL-3.0-or-later"
 
 [dependencies]
 anyhow = "1.0.70"
-env_logger = "0.10.0"
 globset = "0.4.10"
 lazy_static = "1.4.0"
 log = "0.4.17"

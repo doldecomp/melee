@@ -150,7 +150,6 @@ impl<'a> GPRTracker<'a> {
 
             let mut is_ori = false;
             let mut is_addi = false;
-            let mut is_load_store = false;
             let hi_load_reg = if ins.op == Opcode::Addi {
                 is_addi = true;
                 ins.field_rA() as u32
@@ -158,7 +157,6 @@ impl<'a> GPRTracker<'a> {
                 is_ori = true;
                 ins.field_rS() as u32
             } else {
-                is_load_store = true;
                 ins.field_rA() as u32
             };
 

@@ -10,7 +10,7 @@ use std::{fs, io::Read};
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    module: String,
+    prefix: String,
     symbols: Option<String>,
 }
 
@@ -43,14 +43,15 @@ fn main() -> Result<()> {
         }
     };
 
-    let addrs = SYMBOL_RE
-        .captures_iter(&symbols)
-        .map(|c| c[1].to_owned())
-        .unique()
-        .join("|");
+    let regex = Regex::new(&format!(
+        r"\b(?:lbl|func)_({})\b",
+        SYMBOL_RE
+            .captures_iter(&symbols)
+            .map(|c| c[1].to_owned())
+            .unique()
+            .join("|")
+    ))?;
 
-    let regex = Regex::new(&format!(r"\b(?:lbl|func)_({})\b", addrs))?;
-
-    info!("Module is \"{}\" and regex is `{}`.", &args.module, regex);
-    replace_all(&regex, format!("{}_$1", &args.module))
+    info!("Module is \"{}\" and regex is `{}`.", &args.prefix, regex);
+    replace_all(&regex, format!("{}_$1", &args.prefix))
 }
