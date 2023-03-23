@@ -2,11 +2,10 @@ use anyhow::{Context, Result};
 use clap::Parser;
 use itertools::Itertools;
 use lazy_static::lazy_static;
-use log::{debug, info};
-use melee_utils::{replace_all, SRC_FILES};
+use log::info;
+use melee_utils::replace_all;
 use regex::Regex;
-use std::{fs, io::Read, path::Path};
-use walkdir::WalkDir;
+use std::{fs, io::Read};
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
@@ -51,7 +50,7 @@ fn main() -> Result<()> {
         .join("|");
 
     let regex = Regex::new(&format!(r"\b(?:lbl|func)_({})\b", addrs))?;
-    info!("Module is \"{}\" and regex is `{}`.", &cli.module, regex);
 
+    info!("Module is \"{}\" and regex is `{}`.", &cli.module, regex);
     replace_all(&regex, format!("{}_$1", &cli.module))
 }
