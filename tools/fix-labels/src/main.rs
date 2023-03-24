@@ -85,10 +85,14 @@ fn main() -> Result<()> {
     .size_limit(usize::MAX)
     .build()?;
 
-    println!("{regex:?}");
-    for path in walk_src()? {
+    // println!("{regex:?}");
+    for path in walk_src()?
+        .into_iter()
+        .filter(|p| p.extension().map(|e| e.to_str()).flatten() == Some("s"))
+    {
         // TODO They are local symbols so we can just replace per file
-        replace(&regex, ".L$1", &path)?;
+        // replace(&regex, ".L$1", &path)?;
+        println!("{path:?}");
     }
 
     Ok(())
