@@ -1,12 +1,14 @@
 use anyhow::{Context, Result};
+use internment::Intern;
 use lazy_static::lazy_static;
-use log::debug;
-use regex::Regex;
+use log::{debug, trace};
+use regex::{Match, Regex};
 use std::{
     fs::File,
     io::{BufRead, BufReader},
     path::Path,
 };
+use MetrowerksSymbolName::{Named, Relative};
 
 lazy_static! {
     static ref LINKER_SYM_RE: Regex = Regex::new(
@@ -17,8 +19,14 @@ lazy_static! {
         # Linker depth
         (?P<depth>[[:digit:]]+)\]\x20
 
-        # Name of the symbol (word with dots allowed, optional @ prefix)
-        (?P<name>@?[\.[:word:]]+)\x20
+        # Name of the symbol (word with dots allowed, or @ + number)
+        (?:
+            (?P<name>[\.[:word:]]+) |
+            @(?P<label>[[:digit:]]+)
+        )
+        # Data symbols can be instanced with $ and then a number
+        (?:\$(?P<instance>[[:digit:]]+))?
+        \x20
 
         # Source of a symbol is either the linker or a file
         (?:
@@ -26,8 +34,8 @@ lazy_static! {
 
             # Non-linker symbols have a type and a scope
             \(
-            (?P<type>func|object|notype),
-            (?P<scope>global|local)
+            (?P<type>section|object|func|notype),
+            (?P<scope>global|local|weak)
             \)\x20found\x20in\x20
             (?P<file>[\.[:word:]]+?)
             \.(?P<ext>\w+)\.o\x20
@@ -98,58 +106,125 @@ lazy_static! {
     .expect("Failed to compile SYMBOL_RE.");
 }
 
-enum MetrowerksSymbolSource<'a> {
+#[derive(Debug)]
+enum MetrowerksSymbolSource {
     Linker,
-    Object { file: &'a str, ext: &'a str },
+    Object {
+        file: Intern<String>,
+        ext: Intern<String>,
+    },
 }
 
-#[derive(Default, Debug)]
-enum MetrowerksSymbolName<'a> {
+#[derive(Default, Debug, PartialEq, Eq, Hash)]
+enum MetrowerksSymbolName {
     #[default]
     Unknown,
     Relative {
         label: usize,
     },
     Named {
-        name: &'a str,
+        name: Intern<String>,
     },
 }
 
 #[derive(Default, Debug)]
-struct MetrowerksSymbol<'a> {
+struct MetrowerksSymbol {
     depth: usize,
     addr: usize,
     size: usize,
     virt_addr: usize,
     align: Option<usize>,
-    name: MetrowerksSymbolName<'a>,
-    parent: Option<&'a MetrowerksSymbol<'a>>,
+    name: MetrowerksSymbolName,
+    instance: Option<usize>,
+    parent: Option<Intern<MetrowerksSymbol>>,
     file: String,
     ext: String,
 }
 
 #[derive(Default, Debug)]
-struct MetrowerksSection<'a> {
-    name: String,
-    syms: Vec<MetrowerksSymbol<'a>>,
+struct MetrowerksSection {
+    name: Intern<String>,
+    syms: Vec<MetrowerksSymbol>,
 }
 
 #[derive(Default, Debug)]
-struct MetrowerksMap<'a> {
-    sections: Vec<MetrowerksSection<'a>>,
+struct MetrowerksMap {
+    sections: Vec<MetrowerksSection>,
 }
 
-impl<'a> MetrowerksMap<'a> {
-    pub fn parse(path: &Path) -> Result<MetrowerksMap<'a>> {
+impl MetrowerksMap {
+    pub fn parse(path: &Path) -> Result<MetrowerksMap> {
         let file = File::open(path)?;
         let reader = BufReader::new(file);
-        // let mut map = MetrowerksMap::default();
-        // let mut section = &MetrowerksSection::default();
 
-        for res in reader.lines() {
+        // TODO skip head line by match
+        for res in reader.lines().skip(1) {
             let line = res?;
-            if LINKER_SYM_RE.is_match(&line) {
-                debug!("{}", line);
+            match LINKER_SYM_RE.captures(&line) {
+                None => break,
+                Some(caps) => {
+                    let depth = caps
+                        .name("depth")
+                        .context("Failed to parse the symbol depth.")?
+                        .as_str()
+                        .parse::<usize>()?;
+
+                    let name = Intern::new({
+                        match (caps.name("name"), caps.name("label")) {
+                            (Some(name), None) => Named {
+                                name: Intern::new(name.as_str().to_owned()),
+                            },
+                            (None, Some(label)) => Relative {
+                                label: label.as_str().parse::<usize>()?,
+                            },
+                            _ => unreachable!("Unexpected name group value."),
+                        }
+                    });
+
+                    let instance = caps
+                        .name("instance")
+                        .map(|s| s.as_str().parse::<usize>())
+                        .transpose()?;
+
+                    let src: MetrowerksSymbolSource = {
+                        match caps.name("linker").map(|m| m.as_str()) {
+                            Some("linker") => {
+                                debug_assert_eq!(caps.name("file"), None);
+                                debug_assert_eq!(caps.name("ext"), None);
+
+                                MetrowerksSymbolSource::Linker
+                            }
+                            Some(_) => unreachable!(
+                                "Unexpected value of \"linker\" group."
+                            ),
+                            None => {
+                                let get_group = |field: &str| -> Result<&str> {
+                                    caps.name(field)
+                                        .map(|r#match| r#match.as_str())
+                                        .with_context(|| {
+                                            format!(
+                                                "Failed to get the {field} \
+                                                of a symbol."
+                                            )
+                                        })
+                                };
+
+                                MetrowerksSymbolSource::Object {
+                                    file: Intern::from_ref(get_group("file")?),
+                                    ext: Intern::from_ref(get_group("ext")?),
+                                }
+                            }
+                        }
+                    };
+                    trace!(
+                        r"{{
+    depth: {depth},
+    src: {src:#?}
+    name: {name:#?},
+    instance: {instance:#?},
+}}"
+                    );
+                }
             }
         }
 
@@ -166,7 +241,7 @@ mod tests {
     fn init_logger() {
         let _ = env_logger::builder()
             .is_test(true)
-            .filter_level(log::LevelFilter::Debug)
+            .filter_level(log::LevelFilter::Trace)
             .try_init();
     }
 
