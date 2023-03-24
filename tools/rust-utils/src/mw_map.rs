@@ -1,18 +1,33 @@
-use anyhow::{Context, Result};
+use anyhow::{anyhow, bail, Context, Result};
 use internment::Intern;
 use lazy_static::lazy_static;
 use log::{debug, trace};
-use regex::{Match, Regex};
+use regex::{Match, Regex, RegexSet};
 use std::{
     fs::File,
-    io::{BufRead, BufReader},
+    io::{BufRead, BufReader, BufWriter, Lines},
     path::Path,
 };
-use MetrowerksSymbolName::{Named, Relative};
 
-lazy_static! {
-    static ref LINKER_SYM_RE: Regex = Regex::new(
-        r"(?xm) # Ignore whitespace, multiline
+macro_rules! regex_expect {
+    ($regex:expr) => {
+        $regex.expect(&format!("Failed to compile {}.", stringify!($regex)))
+    };
+}
+
+macro_rules! create_regex {
+    ($name:ident, $regex:expr) => {
+        lazy_static! {
+            static ref $name: Regex = Regex::new($regex)
+                .expect(&format!("Failed to compile {}.", stringify!($name)));
+        }
+    };
+}
+
+create_regex!(EMPTY_RE, "^$");
+create_regex!(
+    LINKER_SYM_RE,
+    r"(?xm) # Ignore whitespace, multiline
         # Start of line with leading spaces
         ^\x20*
 
@@ -40,10 +55,10 @@ lazy_static! {
             (?P<file>[\.[:word:]]+?)
             \.(?P<ext>\w+)\.o\x20
         )$"
-    )
-    .expect("Failed to compile SYMBOL_RE.");
-    static ref SECTION_SYM_RE: Regex = Regex::new(
-        r"(?xm) # Ignore whitespace, multiline
+);
+create_regex!(
+    SECTION_SYM_RE,
+    r"(?xm) # Ignore whitespace, multiline
 
         # Start of line with two spaces
         ^\x20{2}
@@ -102,12 +117,10 @@ lazy_static! {
 
         # End of line
         $"
-    )
-    .expect("Failed to compile SYMBOL_RE.");
-}
+);
 
 #[derive(Debug)]
-enum MetrowerksSymbolSource {
+enum SymSrc {
     Linker,
     Object {
         file: Intern<String>,
@@ -116,7 +129,7 @@ enum MetrowerksSymbolSource {
 }
 
 #[derive(Default, Debug, PartialEq, Eq, Hash)]
-enum MetrowerksSymbolName {
+enum SymName {
     #[default]
     Unknown,
     Relative {
@@ -128,120 +141,163 @@ enum MetrowerksSymbolName {
 }
 
 #[derive(Default, Debug)]
-struct MetrowerksSymbol {
+struct LinkerSym {
     depth: usize,
-    addr: usize,
-    size: usize,
-    virt_addr: usize,
-    align: Option<usize>,
-    name: MetrowerksSymbolName,
+    name: SymName,
     instance: Option<usize>,
-    parent: Option<Intern<MetrowerksSymbol>>,
+    parent: Option<Intern<Sym>>,
     file: String,
     ext: String,
 }
 
 #[derive(Default, Debug)]
-struct MetrowerksSection {
-    name: Intern<String>,
-    syms: Vec<MetrowerksSymbol>,
+struct SectionSym {
+    addr: usize,
+    size: usize,
+    virt_addr: usize,
+    align: Option<usize>,
+    name: SymName,
+    file: String,
+    ext: String,
 }
 
 #[derive(Default, Debug)]
-struct MetrowerksMap {
-    sections: Vec<MetrowerksSection>,
+struct Sym {
+    depth: usize,
+    addr: usize,
+    size: usize,
+    virt_addr: usize,
+    align: Option<usize>,
+    name: SymName,
+    instance: Option<usize>,
+    parent: Option<Intern<Sym>>,
+    file: String,
+    ext: String,
 }
 
-impl MetrowerksMap {
-    pub fn parse(path: &Path) -> Result<MetrowerksMap> {
-        let file = File::open(path)?;
-        let reader = BufReader::new(file);
+#[derive(Default, Debug)]
+struct Section {
+    name: Intern<String>,
+    syms: Vec<Sym>,
+}
 
-        // TODO skip head line by match
-        for res in reader.lines().skip(1) {
-            let line = res?;
-            match LINKER_SYM_RE.captures(&line) {
-                None => break,
-                Some(caps) => {
-                    let depth = caps
-                        .name("depth")
-                        .context("Failed to parse the symbol depth.")?
-                        .as_str()
-                        .parse::<usize>()?;
+#[derive(Default, Debug)]
+struct Map {
+    sections: Vec<Section>,
+}
 
-                    let name = Intern::new({
-                        match (caps.name("name"), caps.name("label")) {
-                            (Some(name), None) => Named {
-                                name: Intern::new(name.as_str().to_owned()),
-                            },
-                            (None, Some(label)) => Relative {
-                                label: label.as_str().parse::<usize>()?,
-                            },
-                            _ => unreachable!("Unexpected name group value."),
+enum State {
+    PreLinker,
+    LinkerSym,
+    PreSection,
+    Section,
+    SectionSym,
+    PreMemoryMap,
+    MemoryMap,
+    PreLinkerGenSym,
+    LinkGenSym,
+}
+
+impl State {
+    fn regex(&self) -> Option<&Regex> {
+        use State::*;
+
+        match self {
+            PreLinker => None,
+            _ => todo!(),
+        }
+    }
+}
+
+fn parse_linker(
+    lines: &mut impl Iterator<Item = Result<String, std::io::Error>>,
+) -> Result<Vec<LinkerSym>> {
+    for res in lines {
+        match LINKER_SYM_RE.captures(&res?) {
+            None => break,
+            Some(caps) => {
+                let depth = caps
+                    .name("depth")
+                    .context("Failed to parse the symbol depth.")?
+                    .as_str()
+                    .parse::<usize>()?;
+
+                let name = Intern::new({
+                    use SymName::*;
+                    match ["name", "label"]
+                        .map(|s| caps.name(s).map(|m| m.as_str()))
+                    {
+                        [Some(name), None] => Named {
+                            name: Intern::from_ref(name),
+                        },
+                        [None, Some(label)] => Relative {
+                            label: label.parse::<usize>()?,
+                        },
+                        _ => unreachable!("Unexpected name group value."),
+                    }
+                });
+
+                let instance = caps
+                    .name("instance")
+                    .map(|s| s.as_str().parse::<usize>())
+                    .transpose()?;
+
+                let src = {
+                    use SymSrc::*;
+                    match ["linker", "file", "ext"]
+                        .map(|s| caps.name(s).map(|m| m.as_str()))
+                    {
+                        [Some("linker"), None, None] => Ok(Linker),
+                        [None, Some(file), Some(ext)] => Ok(Object {
+                            file: Intern::from_ref(file),
+                            ext: Intern::from_ref(ext),
+                        }),
+                        [None, None, None] => {
+                            Err(anyhow!("Failed to parse the symbol name."))
                         }
-                    });
-
-                    let instance = caps
-                        .name("instance")
-                        .map(|s| s.as_str().parse::<usize>())
-                        .transpose()?;
-
-                    let src: MetrowerksSymbolSource = {
-                        match caps.name("linker").map(|m| m.as_str()) {
-                            Some("linker") => {
-                                debug_assert_eq!(caps.name("file"), None);
-                                debug_assert_eq!(caps.name("ext"), None);
-
-                                MetrowerksSymbolSource::Linker
-                            }
-                            Some(_) => unreachable!(
-                                "Unexpected value of \"linker\" group."
-                            ),
-                            None => {
-                                let get_group = |field: &str| -> Result<&str> {
-                                    caps.name(field)
-                                        .map(|r#match| r#match.as_str())
-                                        .with_context(|| {
-                                            format!(
-                                                "Failed to get the {field} \
-                                                of a symbol."
-                                            )
-                                        })
-                                };
-
-                                MetrowerksSymbolSource::Object {
-                                    file: Intern::from_ref(get_group("file")?),
-                                    ext: Intern::from_ref(get_group("ext")?),
-                                }
-                            }
+                        [_, _, _] => {
+                            unreachable!("Unexpected linker group.")
                         }
-                    };
-                    trace!(
-                        r"{{
+                    }
+                }?;
+
+                trace!(
+                    r"{{
     depth: {depth},
     src: {src:#?}
     name: {name:#?},
     instance: {instance:#?},
 }}"
-                    );
-                }
+                );
             }
         }
+    }
+    todo!()
+}
+impl Map {
+    pub fn parse(map_path: &Path) -> Result<Map> {
+        let file = File::open(map_path)?;
+        let reader = BufReader::new(file);
+        // let writer = BufWriter::new(File::open())
 
+        // TODO skip head line by match
+        let lines = reader.lines();
+
+        parse_linker(&mut lines.skip(1))?;
         todo!()
     }
 }
 
 #[cfg(test)]
 mod tests {
+    use super::Map;
     use crate::ROOT;
-
-    use super::MetrowerksMap;
+    use log::trace;
 
     fn init_logger() {
         let _ = env_logger::builder()
             .is_test(true)
-            .filter_level(log::LevelFilter::Trace)
+            .filter_level(log::LevelFilter::Debug)
             .try_init();
     }
 
@@ -249,12 +305,11 @@ mod tests {
     fn test_parse_map() {
         init_logger();
         let path = &*ROOT.join("build/ssbm.us.1.2/GALE01.map");
+        let result = Map::parse(path);
 
-        // Call the parse function and handle any errors.
-        let result = MetrowerksMap::parse(path);
         match result {
             Ok(parsed_map) => {
-                println!("Parsed map: {:#?}", parsed_map);
+                trace!("Parsed map: {:#?}", parsed_map);
             }
             Err(e) => {
                 panic!("Error parsing map: {}", e);
