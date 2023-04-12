@@ -44,6 +44,7 @@ lbl_804DEB80:
 .section .text
 
 # https://decomp.me/scratch/taZ05 // 21700 (0%) // no dependencies
+.global func_803B3408
 func_803B3408:
 /* 803B3408 003AFFE8  94 21 FF 68 */	stwu r1, -0x98(r1)
 /* 803B340C 003AFFEC  39 40 00 00 */	li r10, 0
