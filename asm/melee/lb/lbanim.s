@@ -3,6 +3,7 @@
 .section .text
 
 # https://decomp.me/scratch/uF4oA
+.global local_8001E560
 local_8001E560:
 /* 8001E560 0001B140  7C 08 02 A6 */	mflr r0
 /* 8001E564 0001B144  90 01 00 04 */	stw r0, 4(r1)
