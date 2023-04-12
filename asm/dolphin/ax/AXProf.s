@@ -6,7 +6,7 @@
 __AXGetCurrentProfile:
 /* 8035B678 00358258  80 0D BE FC */	lwz r0, __AXProfileInitialized@sda21(r13)
 /* 8035B67C 0035825C  28 00 00 00 */	cmplwi r0, 0
-/* 8035B680 00358260  41 82 00 38 */	beq lbl_8035B6B8
+/* 8035B680 00358260  41 82 00 38 */	beq .L_8035B6B8
 /* 8035B684 00358264  80 6D BE F8 */	lwz r3, __AXCurrentProfile@sda21(r13)
 /* 8035B688 00358268  80 8D BE F4 */	lwz r4, __AXMaxProfiles@sda21(r13)
 /* 8035B68C 0035826C  38 03 00 01 */	addi r0, r3, 1
@@ -20,7 +20,7 @@ __AXGetCurrentProfile:
 /* 8035B6AC 0035828C  7C 00 28 50 */	subf r0, r0, r5
 /* 8035B6B0 00358290  90 0D BE F8 */	stw r0, __AXCurrentProfile@sda21(r13)
 /* 8035B6B4 00358294  4E 80 00 20 */	blr
-lbl_8035B6B8:
+.L_8035B6B8:
 /* 8035B6B8 00358298  38 60 00 00 */	li r3, 0
 /* 8035B6BC 0035829C  4E 80 00 20 */	blr
 
