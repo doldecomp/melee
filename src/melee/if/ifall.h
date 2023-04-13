@@ -1,7 +1,7 @@
 #ifndef MELEE_IF_IFALL_H
 #define MELEE_IF_IFALL_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 void ifAll_802F3424(void);
 void ifAll_802F3690(void);

@@ -1,9 +1,10 @@
 #ifndef _WCHAR_IO_H_
 #define _WCHAR_IO_H_
 
+#include <platform.h>
+
 #include <common_structs.h>
 #include <stdio.h>
-#include <Runtime/platform.h>
 
 enum __file_kinds {
     __closed_file,

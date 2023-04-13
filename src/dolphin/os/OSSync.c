@@ -1,9 +1,9 @@
+#include <__mem.h>
 #include <placeholder.h>
 #include <string.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSSync.h>
 #include <MetroTRK/intrinsics.h>
-#include <Runtime/__mem.h>
 
 #define OS_SYS_CALL_HANDLER ((void*) 0x80000C00)
 #define OS_HANDLER_SLOT_SIZE (0x100)

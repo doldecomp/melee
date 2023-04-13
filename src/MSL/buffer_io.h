@@ -1,7 +1,7 @@
 #ifndef _BUFFER_IO_H_
 #define _BUFFER_IO_H_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef struct _BufferIoUnkFlagStruct {
     /* 0x00 */ struct {

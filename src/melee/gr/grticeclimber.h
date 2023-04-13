@@ -1,10 +1,10 @@
 #ifndef MELEE_GR_GRTICECLIMBER_H
 #define MELEE_GR_GRTICECLIMBER_H
 
+#include <platform.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
 
 extern s16 lbl_803E8B5C[];
 

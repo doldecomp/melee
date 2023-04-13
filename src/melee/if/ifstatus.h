@@ -1,12 +1,13 @@
 #ifndef MELEE_IF_IFSTATUS_H
 #define MELEE_IF_IFSTATUS_H
 
+#include <platform.h>
+
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 typedef struct _HudFlags {
     u8 explode_animation : 1;

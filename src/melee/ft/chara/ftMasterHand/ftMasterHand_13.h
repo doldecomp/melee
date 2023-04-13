@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_13_H
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_13_H
 
+#include <platform.h>
+
 #include <sysdolphin/baselib/gobj.h>
-#include <Runtime/platform.h>
 
 void ftMasterHand_80152880(HSD_GObj*);
 void ftMasterHand_80152A50(HSD_GObj* gobj);

@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_BASELIB_SHARED_DATA_003_H
 #define SYSDOLPHIN_BASELIB_BASELIB_SHARED_DATA_003_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 extern u32 lbl_804D78D0;
 extern u32 lbl_804D78D4;

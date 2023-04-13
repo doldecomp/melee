@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_DVD_FORWARD_H
 #define DOLPHIN_DVD_FORWARD_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef struct DVDCommandBlock DVDCommandBlock;
 

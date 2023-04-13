@@ -1,8 +1,9 @@
 #ifndef DOLPHIN_GX_FORWARD_H
 #define DOLPHIN_GX_FORWARD_H
 
+#include <platform.h>
+
 #include <dolphin/gx/GXEnum.h>
-#include <Runtime/platform.h>
 
 typedef struct GXTexObj GXTexObj;
 typedef struct GXColor GXColor;

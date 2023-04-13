@@ -1,10 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER2_NANA_H
 #define MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER2_NANA_H
 
+#include <platform.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <melee/ft/types.h>
-#include <Runtime/platform.h>
 
 extern ActionState ftNana_MotionStateTable[];
 extern char lbl_803CDB78[];

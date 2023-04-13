@@ -1,10 +1,10 @@
 #ifndef SYSDOLPHIN_BASELIB_SISLIB_H
 #define SYSDOLPHIN_BASELIB_SISLIB_H
 
+#include <platform.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <sysdolphin/baselib/archive.h>
-#include <Runtime/platform.h>
 
 typedef struct {
     unk_t x0;

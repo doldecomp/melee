@@ -1,10 +1,10 @@
+#include <platform.h>
 #include <dolphin/pad/forward.h>
 
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/pad/Pad.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/rumble.h>
-#include <Runtime/platform.h>
 
 extern PadLibData HSD_PadLibData;
 

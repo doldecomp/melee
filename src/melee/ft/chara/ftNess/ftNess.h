@@ -1,12 +1,13 @@
 #ifndef _ftness_h_
 #define _ftness_h_
 
+#include <platform.h>
+
 #include <math.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/it/item.h>
 #include <melee/lb/lbvector.h>
-#include <Runtime/platform.h>
 
 typedef enum ftNessAction {
     AS_NESS_ATTACKS4 = ASID_MAX,
@@ -122,8 +123,8 @@ typedef struct ftNessAttributes {
     f32 x60_PK_THUNDER_2_KNOCKDOWN_ANGLE; // Angle to determine whether to
                                           // enter PK Thunder 2 or DownBound
                                           // state (Ground Only)
-    f32 x64_PK_THUNDER_2_WALLHUG_ANGLE; // Surface angle to determine whether
-                                        // PK Thunder 2 wallhugs or bounces
+    f32 x64_PK_THUNDER_2_WALLHUG_ANGLE;   // Surface angle to determine whether
+                                          // PK Thunder 2 wallhugs or bounces
     f32 x68_PK_THUNDER_2_UNK2;
     f32 x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND; // Amount of animation blend
                                               // frames Ness goes through when

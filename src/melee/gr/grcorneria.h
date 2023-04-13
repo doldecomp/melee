@@ -1,7 +1,7 @@
 #ifndef MELEE_GR_GRCORNERIA_H
 #define MELEE_GR_GRCORNERIA_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 bool grCorneria_801E2D14(void);
 bool grCorneria_801E2CE8(void);

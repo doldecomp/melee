@@ -1,7 +1,7 @@
 #ifndef _lblanguage_h_
 #define _lblanguage_h_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 enum_t lbLang_GetLanguageSetting(void);
 enum_t lbLang_SetLanguageSetting(enum_t language);

@@ -1,7 +1,7 @@
 #ifndef __DOLPHIN_OSTIME_H_
 #define __DOLPHIN_OSTIME_H_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef s64 OSTime;
 typedef u32 OSTick;

@@ -1,11 +1,11 @@
 #include "dolphin/gx/forward.h"
 
+#include <__mem.h>
 #include <common_structs.h>
 #include <placeholder.h>
 #include <dolphin/gx/__GXBump.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/GXTexture.h>
-#include <Runtime/__mem.h>
 
 #ifdef MWERKS_GEKKO
 

@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_OS_FORWARD_H
 #define DOLPHIN_OS_FORWARD_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef u16 OSError;
 typedef s16 __OSInterrupt;

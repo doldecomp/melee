@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB_FORWARD_H
 #define SYSDOLPHIN_BASELIB_FORWARD_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef struct DynamicModelDesc DynamicModelDesc;
 typedef struct HSD_AnimJoint HSD_AnimJoint;

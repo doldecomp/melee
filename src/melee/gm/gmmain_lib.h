@@ -1,8 +1,9 @@
 #ifndef _gmmain_lib_h_
 #define _gmmain_lib_h_
 
+#include <platform.h>
+
 #include <common_structs.h>
-#include <Runtime/platform.h>
 
 struct gmm_x1CB0 {
     u8 padding_x0[0x16 - 0x0];

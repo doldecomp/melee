@@ -1,6 +1,7 @@
 #ifndef MELEE_IT_TYPES_H
 #define MELEE_IT_TYPES_H
 
+#include <platform.h>
 #include <melee/it/forward.h>
 
 #include <common_structs.h>
@@ -23,7 +24,6 @@
 #include <melee/it/itPKThunder.h>
 #include <melee/it/itYoyo.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 /// @todo Size unknown.
 struct ItemStateTable {
@@ -737,7 +737,7 @@ struct SpawnItem {
     HSD_GObj* x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness'
                                // PK Fire Pillar has this set to PK Fire
                                // Spark's item GObj
-    ItemKind kind; // 0x8, ID of the item to spawn
+    ItemKind kind;             // 0x8, ID of the item to spawn
 
     /// @at{C} @sz{4}
     /// @brief Defines the behavior of the item, such as thrown and pickup.

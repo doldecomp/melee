@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_AR_ARQ_H
 #define DOLPHIN_AR_ARQ_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 #define ARQ_CHUNK_SIZE_DEFAULT 4096
 

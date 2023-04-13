@@ -1,7 +1,7 @@
 #ifndef MSL_CONSOLE_IO_H
 #define MSL_CONSOLE_IO_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 s32 func_80325F18(void);
 s32 __write_console(s32, s32 arg1, s32* arg2);

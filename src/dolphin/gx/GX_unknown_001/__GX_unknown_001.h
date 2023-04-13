@@ -3,7 +3,7 @@
 #ifndef DOLPHIN_GX_GX_UNKNOWN_001___GX_UNKNOWN_001_H
 #define DOLPHIN_GX_GX_UNKNOWN_001___GX_UNKNOWN_001_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 /* 004DAE6C */ extern const f32 lbl_804DE28C;
 /* 004DAE68 */ extern const f32 lbl_804DE288;

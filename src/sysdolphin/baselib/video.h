@@ -1,8 +1,9 @@
 #ifndef _video_h_
 #define _video_h_
 
+#include <platform.h>
+
 #include <dolphin/gx/types.h>
-#include <Runtime/platform.h>
 
 #define HSD_VI_XFB_MAX 3
 

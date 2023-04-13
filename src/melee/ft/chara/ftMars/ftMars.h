@@ -1,9 +1,10 @@
 #ifndef _ftmars_h_
 #define _ftmars_h_
 
+#include <platform.h>
+
 #include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
-#include <Runtime/platform.h>
 
 extern ActionState ftMars_MotionStateTable[];
 extern char lbl_803CF820[];

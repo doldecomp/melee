@@ -1,7 +1,7 @@
 #ifndef _AMCEXI2STUBS_H_
 #define _AMCEXI2STUBS_H_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 void EXI2_Init(void);
 void EXI2_EnableInterrupts(void);
