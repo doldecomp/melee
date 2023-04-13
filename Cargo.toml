@@ -2,6 +2,7 @@
 members = [
     "tools/dadosod",
     "tools/diff-symbols",
+    "tools/fix-labels",
     "tools/flags",
     "tools/issues",
     "tools/replace-symbols",
