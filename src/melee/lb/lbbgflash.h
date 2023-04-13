@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void func_80021C48(u32, u32);
+void lbBgFlash_80021C48(u32, u32);
 
 #endif

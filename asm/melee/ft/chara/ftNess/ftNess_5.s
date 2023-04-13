@@ -31,7 +31,7 @@ lbl_80116BC0:
 /* 80116BCC 001137AC  38 A1 00 20 */	addi r5, r1, 0x20
 /* 80116BD0 001137B0  38 80 00 00 */	li r4, 0
 /* 80116BD4 001137B4  80 63 02 A0 */	lwz r3, 0x2a0(r3)
-/* 80116BD8 001137B8  4B EF 45 F5 */	bl func_8000B1CC
+/* 80116BD8 001137B8  4B EF 45 F5 */	bl lb_8000B1CC
 /* 80116BDC 001137BC  C0 7E 00 30 */	lfs f3, 0x30(r30)
 /* 80116BE0 001137C0  C0 5F 00 2C */	lfs f2, 0x2c(r31)
 /* 80116BE4 001137C4  C0 21 00 20 */	lfs f1, 0x20(r1)
@@ -71,7 +71,7 @@ lbl_80116C28:
 /* 80116C60 00113840  D0 01 00 18 */	stfs f0, 0x18(r1)
 /* 80116C64 00113844  C0 3F 00 2C */	lfs f1, 0x2c(r31)
 /* 80116C68 00113848  EC 5F 00 72 */	fmuls f2, f31, f1
-/* 80116C6C 0011384C  48 19 33 E9 */	bl func_802AA054
+/* 80116C6C 0011384C  48 19 33 E9 */	bl it_802AA054
 lbl_80116C70:
 /* 80116C70 00113850  80 01 00 54 */	lwz r0, 0x54(r1)
 /* 80116C74 00113854  CB E1 00 48 */	lfd f31, 0x48(r1)
@@ -83,8 +83,8 @@ lbl_80116C70:
 /* 80116C8C 0011386C  7C 08 03 A6 */	mtlr r0
 /* 80116C90 00113870  4E 80 00 20 */	blr
 
-.global ftNess_SpecialS_StartAction
-ftNess_SpecialS_StartAction:
+.global ftNess_SpecialS_StartMotion
+ftNess_SpecialS_StartMotion:
 /* 80116C94 00113874  7C 08 02 A6 */	mflr r0
 /* 80116C98 00113878  38 80 01 64 */	li r4, 0x164
 /* 80116C9C 0011387C  90 01 00 04 */	stw r0, 4(r1)
@@ -101,9 +101,9 @@ ftNess_SpecialS_StartAction:
 /* 80116CC8 001138A8  C0 22 9D 38 */	lfs f1, lbl_804D9718/*0.0f*/@sda21(r2)
 /* 80116CCC 001138AC  C0 42 9D 3C */	lfs f2, lbl_804D971C/*1.0f*/@sda21(r2)
 /* 80116CD0 001138B0  FC 60 08 90 */	fmr f3, f1
-/* 80116CD4 001138B4  4B F5 26 D9 */	bl Fighter_ActionStateChange_800693AC
+/* 80116CD4 001138B4  4B F5 26 D9 */	bl Fighter_ChangeMotionState
 /* 80116CD8 001138B8  7F C3 F3 78 */	mr r3, r30
-/* 80116CDC 001138BC  4B F5 7E C9 */	bl func_8006EBA4
+/* 80116CDC 001138BC  4B F5 7E C9 */	bl ftAnim_8006EBA4
 /* 80116CE0 001138C0  3C 60 80 11 */	lis r3, ftNess_ItemPKFireSpawn@ha
 /* 80116CE4 001138C4  38 03 6B 70 */	addi r0, r3, ftNess_ItemPKFireSpawn@l
 /* 80116CE8 001138C8  90 1F 21 BC */	stw r0, 0x21bc(r31)
@@ -133,9 +133,9 @@ ftNess_SpecialAirS_Action:
 # SPLIT NO EARLIER THAN HERE
 /* 80116D3C 0011391C  C0 42 9D 3C */	lfs f2, lbl_804D971C/*1.0f*/@sda21(r2)
 /* 80116D40 00113920  FC 60 08 90 */	fmr f3, f1
-/* 80116D44 00113924  4B F5 26 69 */	bl Fighter_ActionStateChange_800693AC
+/* 80116D44 00113924  4B F5 26 69 */	bl Fighter_ChangeMotionState
 /* 80116D48 00113928  7F C3 F3 78 */	mr r3, r30
-/* 80116D4C 0011392C  4B F5 7E 59 */	bl func_8006EBA4
+/* 80116D4C 0011392C  4B F5 7E 59 */	bl ftAnim_8006EBA4
 /* 80116D50 00113930  3C 60 80 11 */	lis r3, ftNess_ItemPKFireSpawn@ha
 /* 80116D54 00113934  38 03 6B 70 */	addi r0, r3, ftNess_ItemPKFireSpawn@l
 /* 80116D58 00113938  90 1F 21 BC */	stw r0, 0x21bc(r31)

@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-s32 func_8000D148(f32, f32, f32, f32, f32, f32, f32);
+s32 lb_8000D148(f32, f32, f32, f32, f32, f32, f32);
 
 #endif

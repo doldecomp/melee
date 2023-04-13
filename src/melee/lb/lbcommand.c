@@ -85,7 +85,7 @@ void Command_08(CommandInfo* info)
 void Command_09(CommandInfo* info)
 {
     Command_09_Struct* cmd = info->u.Command_09;
-    func_80021C48(cmd->param_1, cmd->param_2);
+    lbBgFlash_80021C48(cmd->param_1, cmd->param_2);
     info->u.data_position += 1;
 }
 

@@ -14,57 +14,59 @@
 
 #include <baselib/gobj.h>
 
-ActionState as_table_iceclimber[] = {
-    { 295, 0x00340111, 0x12800000, lbl_8011F318, lbl_8011F390, lbl_8011F398,
-      lbl_8011F3D8, func_800761C8 },
-    { 296, 0x00340511, 0x12800000, lbl_8011F354, lbl_8011F394, lbl_8011F3B8,
-      lbl_8011F454, func_800761C8 },
-    { 297, 0x00340212, 0x13800000, lbl_8011FC78, lbl_8011FF40, lbl_80120080,
-      lbl_80120660, func_800761C8 },
-    { 298, 0x00340212, 0x13800000, lbl_8011FCD0, lbl_8011FF90, lbl_80120230,
-      lbl_80120854, func_800761C8 },
-    { 299, 0x00340612, 0x13800000, lbl_8011FD9C, lbl_8011FFE0, lbl_801203E0,
-      lbl_80120A48, func_800761C8 },
-    { 300, 0x00340612, 0x13800000, lbl_8011FE48, lbl_80120030, lbl_80120520,
-      lbl_80120C58, func_800761C8 },
-    { 301, 0x00340213, 0x14000000, lbl_801212C4, lbl_801214D4, lbl_801215DC,
-      lbl_80121740, func_800761C8 },
-    { 302, 0x00340213, 0x14000000, lbl_80121944, lbl_80121AC8, lbl_80121AD0,
-      lbl_80121C34, func_800761C8 },
-    { 303, 0x00340213, 0x14000000, lbl_801223B8, lbl_8012248C, lbl_80122494,
-      lbl_80122664, func_800761C8 },
-    { 304, 0x00340213, 0x14000000, lbl_80121E10, lbl_80121EB0, lbl_80121EB8,
-      lbl_80121F2C, func_800761C8 },
-    { 305, 0x00340213, 0x14000000, lbl_80122110, lbl_801221AC, lbl_801221B4,
-      lbl_80122228, func_800761C8 },
-    { 306, 0x00340613, 0x14000000, lbl_801213CC, lbl_80121558, lbl_80121680,
-      lbl_8012177C, func_800761C8 },
-    { 307, 0x00340613, 0x14000000, lbl_801219F4, lbl_80121ACC, lbl_80121B74,
-      lbl_80121C70, func_800761C8 },
-    { 308, 0x00340613, 0x14000000, lbl_80122410, lbl_80122490, lbl_80122538,
-      lbl_801226A0, func_800761C8 },
-    { 309, 0x00340613, 0x14000000, lbl_80121E4C, lbl_80121EB4, lbl_80121ED8,
-      lbl_80121F68, func_800761C8 },
-    { 310, 0x00340613, 0x14000000, lbl_8012214C, lbl_801221B0, lbl_801221D4,
-      lbl_80122264, func_800761C8 },
-    { 311, 0x00340014, 0x15800000, lbl_80122A0C, lbl_80122B0C, lbl_80122B14,
-      lbl_80122C18, func_800761C8 },
-    { 312, 0x00340414, 0x15800000, lbl_80122A8C, lbl_80122B10, lbl_80122B34,
-      lbl_80122D04, func_800761C8 },
-    { 313, 0x00340212, 0x13800000, lbl_80123CA4, lbl_80123E58, lbl_80123E60,
-      lbl_80123F98, func_800761C8 },
-    { 314, 0x00340612, 0x13800000, lbl_80123D68, lbl_80123E5C, lbl_80123EFC,
-      lbl_801241A0, func_800761C8 },
-    { 315, 0x00340213, 0x14000000, lbl_80123348, lbl_80123388, lbl_80123390,
-      lbl_801233F0, func_800761C8 },
-    { 316, 0x00340213, 0x14000000, lbl_80123448, lbl_801234E4, lbl_801234EC,
-      lbl_801235BC, func_800761C8 },
-    { 317, 0x00340213, 0x14000000, NULL, NULL, NULL, NULL, func_800761C8 },
-    { 318, 0x00340613, 0x14000000, lbl_80123384, lbl_8012338C, lbl_801233EC,
-      lbl_801233F4, func_800761C8 },
-    { 319, 0x00340613, 0x14000000, lbl_80123484, lbl_801234E8, lbl_8012350C,
-      lbl_801235F8, func_800761C8 },
-    { 320, 0x00340613, 0x14000000, NULL, NULL, NULL, NULL, func_800761C8 },
+ActionState ftPopo_MotionStateTable[] = {
+    { 295, 0x00340111, 0x12800000, ftPopo_8011F318, ftPopo_8011F390,
+      ftPopo_8011F398, ftPopo_8011F3D8, ftCamera_UpdateCameraBox },
+    { 296, 0x00340511, 0x12800000, ftPopo_8011F354, ftPopo_8011F394,
+      ftPopo_8011F3B8, ftPopo_8011F454, ftCamera_UpdateCameraBox },
+    { 297, 0x00340212, 0x13800000, ftPopo_8011FC78, ftPopo_8011FF40,
+      ftPopo_80120080, ftPopo_80120660, ftCamera_UpdateCameraBox },
+    { 298, 0x00340212, 0x13800000, ftPopo_8011FCD0, ftPopo_8011FF90,
+      ftPopo_80120230, ftPopo_80120854, ftCamera_UpdateCameraBox },
+    { 299, 0x00340612, 0x13800000, ftPopo_8011FD9C, ftPopo_8011FFE0,
+      ftPopo_801203E0, ftPopo_80120A48, ftCamera_UpdateCameraBox },
+    { 300, 0x00340612, 0x13800000, ftPopo_8011FE48, ftPopo_80120030,
+      ftPopo_80120520, ftPopo_80120C58, ftCamera_UpdateCameraBox },
+    { 301, 0x00340213, 0x14000000, ftPopo_801212C4, ftPopo_801214D4,
+      ftPopo_801215DC, ftPopo_80121740, ftCamera_UpdateCameraBox },
+    { 302, 0x00340213, 0x14000000, ftPopo_80121944, ftPopo_80121AC8,
+      ftPopo_80121AD0, ftPopo_80121C34, ftCamera_UpdateCameraBox },
+    { 303, 0x00340213, 0x14000000, ftPopo_801223B8, ftPopo_8012248C,
+      ftPopo_80122494, ftPopo_80122664, ftCamera_UpdateCameraBox },
+    { 304, 0x00340213, 0x14000000, ftPopo_80121E10, ftPopo_80121EB0,
+      ftPopo_80121EB8, ftPopo_80121F2C, ftCamera_UpdateCameraBox },
+    { 305, 0x00340213, 0x14000000, ftPopo_80122110, ftPopo_801221AC,
+      ftPopo_801221B4, ftPopo_80122228, ftCamera_UpdateCameraBox },
+    { 306, 0x00340613, 0x14000000, ftPopo_801213CC, ftPopo_80121558,
+      ftPopo_80121680, ftPopo_8012177C, ftCamera_UpdateCameraBox },
+    { 307, 0x00340613, 0x14000000, ftPopo_801219F4, ftPopo_80121ACC,
+      ftPopo_80121B74, ftPopo_80121C70, ftCamera_UpdateCameraBox },
+    { 308, 0x00340613, 0x14000000, ftPopo_80122410, ftPopo_80122490,
+      ftPopo_80122538, ftPopo_801226A0, ftCamera_UpdateCameraBox },
+    { 309, 0x00340613, 0x14000000, ftPopo_80121E4C, ftPopo_80121EB4,
+      ftPopo_80121ED8, ftPopo_80121F68, ftCamera_UpdateCameraBox },
+    { 310, 0x00340613, 0x14000000, ftPopo_8012214C, ftPopo_801221B0,
+      ftPopo_801221D4, ftPopo_80122264, ftCamera_UpdateCameraBox },
+    { 311, 0x00340014, 0x15800000, ftPopo_80122A0C, ftPopo_80122B0C,
+      ftPopo_80122B14, ftPopo_80122C18, ftCamera_UpdateCameraBox },
+    { 312, 0x00340414, 0x15800000, ftPopo_80122A8C, ftPopo_80122B10,
+      ftPopo_80122B34, ftPopo_80122D04, ftCamera_UpdateCameraBox },
+    { 313, 0x00340212, 0x13800000, ftNana_80123CA4, ftNana_80123E58,
+      ftNana_80123E60, ftNana_80123F98, ftCamera_UpdateCameraBox },
+    { 314, 0x00340612, 0x13800000, ftNana_80123D68, ftNana_80123E5C,
+      ftNana_80123EFC, ftNana_801241A0, ftCamera_UpdateCameraBox },
+    { 315, 0x00340213, 0x14000000, ftNana_80123348, ftNana_80123388,
+      ftNana_80123390, ftNana_801233F0, ftCamera_UpdateCameraBox },
+    { 316, 0x00340213, 0x14000000, ftNana_80123448, ftNana_801234E4,
+      ftNana_801234EC, ftNana_801235BC, ftCamera_UpdateCameraBox },
+    { 317, 0x00340213, 0x14000000, NULL, NULL, NULL, NULL,
+      ftCamera_UpdateCameraBox },
+    { 318, 0x00340613, 0x14000000, ftNana_80123384, ftNana_8012338C,
+      ftNana_801233EC, ftNana_801233F4, ftCamera_UpdateCameraBox },
+    { 319, 0x00340613, 0x14000000, ftNana_80123484, ftNana_801234E8,
+      ftNana_8012350C, ftNana_801235F8, ftCamera_UpdateCameraBox },
+    { 320, 0x00340613, 0x14000000, NULL, NULL, NULL, NULL,
+      ftCamera_UpdateCameraBox },
 };
 
 char lbl_803CD610[] = "PlPp.dat";
@@ -97,32 +99,32 @@ Fighter_CostumeStrings lbl_803CD7C4[] = {
     { lbl_803CD6F4, lbl_803CD700, lbl_803CD718 },
 };
 
-void ftIceClimber_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftPopo_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
 {
     Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
 }
 
-void ftIceClimber_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftPopo_OnItemInvisible(HSD_GObj* fighter_gobj)
 {
     Fighter_OnItemInvisible(fighter_gobj, 1);
 }
 
-void ftIceClimber_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftPopo_OnItemVisible(HSD_GObj* fighter_gobj)
 {
     Fighter_OnItemVisible(fighter_gobj, 1);
 }
 
-void ftIceClimber_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftPopo_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftIceClimber_OnLoadForNana(Fighter* fp)
+void ftPopo_OnLoadForNana(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftIceClimberAttributes);
 }
 
-void ftIceClimber_OnLoad(HSD_GObj* fighter_gobj)
+void ftPopo_OnLoad(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -138,17 +140,17 @@ void ftIceClimber_OnLoad(HSD_GObj* fighter_gobj)
     {
         ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
         fp->x40 = attr->x0;
-        func_8026B3F8(item_list[0], 0x6AU);
-        func_8026B3F8(item_list[1], 0x6BU);
-        func_8026B3F8(item_list[2], 0x71U);
+        it_8026B3F8(item_list[0], 0x6AU);
+        it_8026B3F8(item_list[1], 0x6BU);
+        it_8026B3F8(item_list[2], 0x71U);
     }
 }
 
-void ftIceClimber_OnDeath(HSD_GObj* fighter_gobj)
+void ftPopo_OnDeath(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    func_80074A4C(fighter_gobj, 0U, 0);
-    func_80074A4C(fighter_gobj, 1U, 0);
+    ftParts_80074A4C(fighter_gobj, 0U, 0);
+    ftParts_80074A4C(fighter_gobj, 1U, 0);
     fp->ev.nn.x2234 = 0;
     fp->ev.nn.x222C = 0;
     fp->ev.nn.x2230.bits.b0 = false;
@@ -157,30 +159,30 @@ void ftIceClimber_OnDeath(HSD_GObj* fighter_gobj)
     fp->ev.nn.x2250 = 0.0f;
 }
 
-void ftIceClimber_8011F060(HSD_GObj* fighter_gobj)
+void ftPopo_8011F060(HSD_GObj* fighter_gobj)
 {
-    func_8011F190(fighter_gobj);
-    func_80122898(fighter_gobj);
-    func_80121164(fighter_gobj);
-    func_8011F68C(fighter_gobj);
+    ftPopo_8011F190(fighter_gobj);
+    ftPopo_80122898(fighter_gobj);
+    ftPopo_80121164(fighter_gobj);
+    ftPopo_8011F68C(fighter_gobj);
 }
 
-void ftIceClimber_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftPopo_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
 {
     COPY_ATTRS(fighter_gobj, ftIceClimberAttributes);
 }
 
-void ftIceClimber_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftPopo_OnKnockbackEnter(HSD_GObj* fighter_gobj)
 {
     Fighter_OnKnockbackEnter(fighter_gobj, true);
 }
 
-void ftIceClimber_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftPopo_OnKnockbackExit(HSD_GObj* fighter_gobj)
 {
     Fighter_OnKnockbackExit(fighter_gobj, true);
 }
 
-void func_8011F16C(HSD_GObj* fighter_gobj, uint i)
+void ftPopo_8011F16C(HSD_GObj* fighter_gobj, uint i)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
 
@@ -192,37 +194,37 @@ void func_8011F16C(HSD_GObj* fighter_gobj, uint i)
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-void func_8011F190(HSD_GObj* fighter_gobj)
+void ftPopo_8011F190(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
 
     if (fp->ev.nn.x222C == 0)
         return;
 
-    func_802C17DC(fp->ev.nn.x222C);
-    func_8011F16C(fighter_gobj, fp->ev.nn.x222C);
+    it_802C17DC(fp->ev.nn.x222C);
+    ftPopo_8011F16C(fighter_gobj, fp->ev.nn.x222C);
 }
 
 extern f32 const lbl_804D9838;
 extern f32 const lbl_804D983C;
 
-void ftIceClimber_SpecialN_StartAction(HSD_GObj* fighter_gobj)
+void ftPopo_SpecialN_StartMotion(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
     fp->x2210_ThrowFlags.flags = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->ev.nn.x222C = 0;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 341, 0, NULL, lbl_804D9838,
-                                       lbl_804D983C, lbl_804D9838);
+    Fighter_ChangeMotionState(fighter_gobj, 341, 0, NULL, lbl_804D9838,
+                              lbl_804D983C, lbl_804D9838);
 
-    func_8006EBA4(fighter_gobj);
-    fp->cb.x21BC_callback_Accessory4 = &lbl_8011F500;
+    ftAnim_8006EBA4(fighter_gobj);
+    fp->cb.x21BC_callback_Accessory4 = &ftPopo_8011F500;
 }
 
 extern f32 const lbl_804D9840;
 
-void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
+void ftPopo_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -244,47 +246,47 @@ void ftIceClimber_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
         fp->ev.nn.x2250 = lbl_804D9840;
     }
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 342, 0, NULL, lbl_804D9838,
-                                       lbl_804D983C, lbl_804D9838);
+    Fighter_ChangeMotionState(fighter_gobj, 342, 0, NULL, lbl_804D9838,
+                              lbl_804D983C, lbl_804D9838);
 
-    func_8006EBA4(fighter_gobj);
-    fp->cb.x21BC_callback_Accessory4 = &lbl_8011F500;
+    ftAnim_8006EBA4(fighter_gobj);
+    fp->cb.x21BC_callback_Accessory4 = &ftPopo_8011F500;
 }
 
-void lbl_8011F318(HSD_GObj* gobj)
+void ftPopo_8011F318(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
 }
 
-void lbl_8011F354(HSD_GObj* gobj)
+void ftPopo_8011F354(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj))
-        func_800CC730(gobj);
+        ft_800CC730(gobj);
 }
 
-void lbl_8011F390(HSD_GObj* arg0) {}
+void ftPopo_8011F390(HSD_GObj* arg0) {}
 
-void lbl_8011F394(HSD_GObj* arg0) {}
+void ftPopo_8011F394(HSD_GObj* arg0) {}
 
-void lbl_8011F398(HSD_GObj* gobj)
+void ftPopo_8011F398(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
-void lbl_8011F3B8(HSD_GObj* gobj)
+void ftPopo_8011F3B8(HSD_GObj* gobj)
 {
-    func_80084EEC(gobj);
+    ft_80084EEC(gobj);
 }
 
-void lbl_8011F3D8(HSD_GObj* fighter_gobj)
+void ftPopo_8011F3D8(HSD_GObj* fighter_gobj)
 {
-    if (!func_80082708(fighter_gobj)) {
+    if (!ft_80082708(fighter_gobj)) {
         Fighter* fp1;
         fp1 = GET_FIGHTER(fighter_gobj);
         if (fp1->ev.nn.x222C != 0U) {
             Fighter* fp2;
-            func_802C17DC(fp1->ev.nn.x222C);
+            it_802C17DC(fp1->ev.nn.x222C);
             fp2 = GET_FIGHTER(fighter_gobj);
             if ((u32) fp1->ev.nn.x222C == (u32) fp2->ev.nn.x222C) {
                 fp2->ev.nn.x222C = 0U;
@@ -292,13 +294,13 @@ void lbl_8011F3D8(HSD_GObj* fighter_gobj)
                 fp2->cb.x21DC_callback_OnTakeDamage = 0U;
             }
         }
-        func_800CC730(fighter_gobj);
+        ft_800CC730(fighter_gobj);
     }
 }
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8011F454(HSD_GObj*)
+asm void ftPopo_8011F454(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F454 0011C034  7C 08 02 A6 */	mflr r0
@@ -311,14 +313,14 @@ asm void lbl_8011F454(HSD_GObj*)
 /* 8011F470 0011C050  7C 7C 1B 78 */	mr r28, r3
 /* 8011F474 0011C054  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8011F478 0011C058  83 BF 02 D4 */	lwz r29, 0x2d4(r31)
-/* 8011F47C 0011C05C  4B F6 28 91 */	bl func_80081D0C
+/* 8011F47C 0011C05C  4B F6 28 91 */	bl ft_80081D0C
 /* 8011F480 0011C060  2C 03 00 00 */	cmpwi r3, 0
 /* 8011F484 0011C064  41 82 00 5C */	beq lbl_8011F4E0
 /* 8011F488 0011C068  83 DC 00 2C */	lwz r30, 0x2c(r28)
 /* 8011F48C 0011C06C  80 7E 22 2C */	lwz r3, 0x222c(r30)
 /* 8011F490 0011C070  28 03 00 00 */	cmplwi r3, 0
 /* 8011F494 0011C074  41 82 00 2C */	beq lbl_8011F4C0
-/* 8011F498 0011C078  48 1A 23 45 */	bl func_802C17DC
+/* 8011F498 0011C078  48 1A 23 45 */	bl it_802C17DC
 /* 8011F49C 0011C07C  80 9C 00 2C */	lwz r4, 0x2c(r28)
 /* 8011F4A0 0011C080  80 7E 22 2C */	lwz r3, 0x222c(r30)
 /* 8011F4A4 0011C084  80 04 22 2C */	lwz r0, 0x222c(r4)
@@ -336,7 +338,7 @@ lbl_8011F4C0:
 /* 8011F4D0 0011C0B0  C0 02 9E 58 */	lfs f0, lbl_804D9838
 /* 8011F4D4 0011C0B4  D0 1F 22 50 */	stfs f0, 0x2250(r31)
 /* 8011F4D8 0011C0B8  C0 3D 00 08 */	lfs f1, 8(r29)
-/* 8011F4DC 0011C0BC  4B FB 67 D5 */	bl func_800D5CB0
+/* 8011F4DC 0011C0BC  4B FB 67 D5 */	bl ft_800D5CB0
 lbl_8011F4E0:
 /* 8011F4E0 0011C0C0  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8011F4E4 0011C0C4  83 E1 00 2C */	lwz r31, 0x2c(r1)
@@ -352,7 +354,7 @@ lbl_8011F4E0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8011F500(HSD_GObj*)
+asm void ftPopo_8011F500(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F500 0011C0E0  7C 08 02 A6 */	mflr r0
@@ -374,7 +376,7 @@ asm void lbl_8011F500(HSD_GObj*)
 /* 8011F540 0011C120  83 DF 02 D4 */	lwz r30, 0x2d4(r31)
 /* 8011F544 0011C124  38 80 00 00 */	li r4, 0
 /* 8011F548 0011C128  80 63 00 00 */	lwz r3, 0(r3)
-/* 8011F54C 0011C12C  4B EE BC 81 */	bl func_8000B1CC
+/* 8011F54C 0011C12C  4B EE BC 81 */	bl lb_8000B1CC
 /* 8011F550 0011C130  C0 5E 00 0C */	lfs f2, 0xc(r30)
 /* 8011F554 0011C134  7F A3 EB 78 */	mr r3, r29
 /* 8011F558 0011C138  C0 3F 00 2C */	lfs f1, 0x2c(r31)
@@ -390,19 +392,19 @@ asm void lbl_8011F500(HSD_GObj*)
 /* 8011F580 0011C160  EC 02 00 2A */	fadds f0, f2, f0
 /* 8011F584 0011C164  D0 01 00 20 */	stfs f0, 0x20(r1)
 /* 8011F588 0011C168  C0 3F 00 2C */	lfs f1, 0x2c(r31)
-/* 8011F58C 0011C16C  48 1A 20 05 */	bl func_802C1590
+/* 8011F58C 0011C16C  48 1A 20 05 */	bl it_802C1590
 /* 8011F590 0011C170  90 7F 22 2C */	stw r3, 0x222c(r31)
 /* 8011F594 0011C174  3C 80 00 02 */	lis r4, 0x0001FBE5@ha
 /* 8011F598 0011C178  38 7F 00 00 */	addi r3, r31, 0
 /* 8011F59C 0011C17C  38 84 FB E5 */	addi r4, r4, 0x0001FBE5@l
 /* 8011F5A0 0011C180  38 A0 00 7F */	li r5, 0x7f
 /* 8011F5A4 0011C184  38 C0 00 40 */	li r6, 0x40
-/* 8011F5A8 0011C188  4B F6 8B A1 */	bl func_80088148
+/* 8011F5A8 0011C188  4B F6 8B A1 */	bl ft_80088148
 /* 8011F5AC 0011C18C  80 1F 22 2C */	lwz r0, 0x222c(r31)
 /* 8011F5B0 0011C190  28 00 00 00 */	cmplwi r0, 0
 /* 8011F5B4 0011C194  41 82 00 14 */	beq lbl_8011F5C8
-/* 8011F5B8 0011C198  3C 60 80 12 */	lis r3, ftIceClimber_8011F060@ha
-/* 8011F5BC 0011C19C  38 03 F0 60 */	addi r0, r3, ftIceClimber_8011F060@l
+/* 8011F5B8 0011C198  3C 60 80 12 */	lis r3, ftPopo_8011F060@ha
+/* 8011F5BC 0011C19C  38 03 F0 60 */	addi r0, r3, ftPopo_8011F060@l
 /* 8011F5C0 0011C1A0  90 1F 21 E4 */	stw r0, 0x21e4(r31)
 /* 8011F5C4 0011C1A4  90 1F 21 DC */	stw r0, 0x21dc(r31)
 lbl_8011F5C8:
@@ -415,7 +417,7 @@ lbl_8011F5D4:
 /* 8011F5DC 0011C1BC  80 7F 22 2C */	lwz r3, 0x222c(r31)
 /* 8011F5E0 0011C1C0  28 03 00 00 */	cmplwi r3, 0
 /* 8011F5E4 0011C1C4  41 82 00 8C */	beq lbl_8011F670
-/* 8011F5E8 0011C1C8  48 1A 21 11 */	bl func_802C16F8
+/* 8011F5E8 0011C1C8  48 1A 21 11 */	bl it_802C16F8
 /* 8011F5EC 0011C1CC  38 00 00 00 */	li r0, 0
 /* 8011F5F0 0011C1D0  90 1F 22 00 */	stw r0, 0x2200(r31)
 /* 8011F5F4 0011C1D4  80 1F 00 04 */	lwz r0, 4(r31)
@@ -426,7 +428,7 @@ lbl_8011F5D4:
 /* 8011F608 0011C1E8  38 84 FC 5D */	addi r4, r4, 0x0001FC5D@l
 /* 8011F60C 0011C1EC  38 A0 00 7F */	li r5, 0x7f
 /* 8011F610 0011C1F0  38 C0 00 40 */	li r6, 0x40
-/* 8011F614 0011C1F4  4B F6 8B C5 */	bl func_800881D8
+/* 8011F614 0011C1F4  4B F6 8B C5 */	bl ft_800881D8
 /* 8011F618 0011C1F8  48 00 00 1C */	b lbl_8011F634
 lbl_8011F61C:
 /* 8011F61C 0011C1FC  3C 80 00 02 */	lis r4, 0x0001FC2A@ha
@@ -434,14 +436,14 @@ lbl_8011F61C:
 /* 8011F624 0011C204  38 84 FC 2A */	addi r4, r4, 0x0001FC2A@l
 /* 8011F628 0011C208  38 A0 00 7F */	li r5, 0x7f
 /* 8011F62C 0011C20C  38 C0 00 40 */	li r6, 0x40
-/* 8011F630 0011C210  4B F6 8B A9 */	bl func_800881D8
+/* 8011F630 0011C210  4B F6 8B A9 */	bl ft_800881D8
 lbl_8011F634:
 /* 8011F634 0011C214  3C 80 00 02 */	lis r4, 0x0001FBE8@ha
 /* 8011F638 0011C218  38 7F 00 00 */	addi r3, r31, 0
 /* 8011F63C 0011C21C  38 84 FB E8 */	addi r4, r4, 0x0001FBE8@l
 /* 8011F640 0011C220  38 A0 00 7F */	li r5, 0x7f
 /* 8011F644 0011C224  38 C0 00 40 */	li r6, 0x40
-/* 8011F648 0011C228  4B F6 8B 01 */	bl func_80088148
+/* 8011F648 0011C228  4B F6 8B 01 */	bl ft_80088148
 /* 8011F64C 0011C22C  80 9D 00 2C */	lwz r4, 0x2c(r29)
 /* 8011F650 0011C230  80 7F 22 2C */	lwz r3, 0x222c(r31)
 /* 8011F654 0011C234  80 04 22 2C */	lwz r0, 0x222c(r4)
@@ -467,7 +469,7 @@ extern f32 const lbl_804D9848;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8011F68C(HSD_GObj*)
+asm void ftPopo_8011F68C(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8011F68C 0011C26C  7C 08 02 A6 */	mflr r0
@@ -480,7 +482,7 @@ asm void func_8011F68C(HSD_GObj*)
 /* 8011F6A8 0011C288  83 C3 00 2C */	lwz r30, 0x2c(r3)
 /* 8011F6AC 0011C28C  C0 22 9E 68 */	lfs f1, lbl_804D9848
 /* 8011F6B0 0011C290  38 7E 00 00 */	addi r3, r30, 0
-/* 8011F6B4 0011C294  4B F5 62 79 */	bl func_8007592C
+/* 8011F6B4 0011C294  4B F5 62 79 */	bl ftParts_8007592C
 /* 8011F6B8 0011C298  7F E3 FB 78 */	mr r3, r31
 /* 8011F6BC 0011C29C  4B F4 D9 01 */	bl Fighter_UnkSetFlag_8006CFBC
 /* 8011F6C0 0011C2A0  80 7E 1A 5C */	lwz r3, 0x1a5c(r30)
@@ -503,7 +505,7 @@ lbl_8011F6DC:
 #pragma pop
 #endif
 
-bool func_8011F6FC(HSD_GObj* fighter_gobj)
+bool ftPopo_8011F6FC(HSD_GObj* fighter_gobj)
 {
     if (fighter_gobj != NULL) {
         Fighter* fp = GET_FIGHTER(fighter_gobj);

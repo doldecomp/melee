@@ -3,7 +3,7 @@
 
 #include <Runtime/platform.h>
 
-f32 func_8001E8F8(u32);
-void func_8001F87C(void);
+f32 lbMthp_8001E8F8(u32);
+void lbMthp_8001F87C(void);
 
 #endif

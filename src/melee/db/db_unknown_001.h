@@ -6,13 +6,13 @@
 
 extern enum_t g_debugLevel;
 
-void func_80225374(void);
-void func_80228C4C(void);
-void func_8022886C(void);
-void func_80225D2C(void);
-void func_80225D40(void);
-void func_80228A64(void);
-void func_80225DD8(HSD_GObj* item, HSD_GObj* owner);
-void func_80225D64(HSD_GObj* item, HSD_GObj* owner);
+void db_80225374(void);
+void db_80228C4C(void);
+void db_8022886C(void);
+void db_80225D2C(void);
+void db_80225D40(void);
+void db_80228A64(void);
+void db_80225DD8(HSD_GObj* item, HSD_GObj* owner);
+void db_80225D64(HSD_GObj* item, HSD_GObj* owner);
 
 #endif

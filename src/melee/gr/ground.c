@@ -51,10 +51,10 @@ static StageData lbl_803DFEA8 = {
     0,
     NULL,
     NULL,
-    func_801BFFA8,
-    func_801BFFAC,
-    func_801BFFA8,
-    func_801BFFA8,
+    Ground_801BFFA8,
+    Ground_801BFFAC,
+    Ground_801BFFA8,
+    Ground_801BFFA8,
     NULL,
     NULL,
     NULL,
@@ -109,9 +109,9 @@ static StageData* lbl_803DFEDC[] = {
 
 static u8* lbl_804D6950;
 
-static void func_801BFFA8(void) {}
+static void Ground_801BFFA8(void) {}
 
-static void func_801BFFAC(bool _) {}
+static void Ground_801BFFAC(bool _) {}
 
 static void zeroStageInfoArrays(void)
 {
@@ -124,14 +124,14 @@ static void zeroStageInfoArrays(void)
         stage_info.x280[i] = NULL;
 }
 
-void func_801BFFB0(void)
+void Ground_801BFFB0(void)
 {
     /// @todo Unused stack
 #ifdef MUST_MATCH
     u32 _[2];
 #endif
 
-    func_801C6288();
+    grDatFiles_801C6288();
     stage_info.x84 = 0;
     stage_info.x6D0 = -1;
     stage_info.x6D2 = 0;
@@ -207,21 +207,21 @@ static void zeroBuffer(void)
         lbl_804D6950[i] = 0;
 }
 
-void func_801C0378(void)
+void Ground_801C0378(void)
 {
-    func_800C06C0();
+    ft_800C06C0();
 
     lbl_804D6950 = HSD_MemAlloc(_BUFFER_SZ);
 
     zeroBuffer();
 }
 
-void func_801C0478(void* ptr)
+void Ground_801C0478(void* ptr)
 {
     HSD_Free(ptr);
 }
 
-f32 func_801C0498(void)
+f32 Ground_801C0498(void)
 {
     UnkStage6B0* temp_r3 = stage_info.x6B0;
 
@@ -233,7 +233,7 @@ f32 func_801C0498(void)
 
 static char get_userdata_ground[] = "%s:%d: couldn t get user data(Ground)\n";
 
-void func_801C04BC(f32 arg8)
+void Ground_801C04BC(f32 arg8)
 {
     UnkStage6B0* temp_r3 = stage_info.x6B0;
 
@@ -243,152 +243,152 @@ void func_801C04BC(f32 arg8)
         HSD_ASSERT(521, 0);
 }
 
-s32 func_801C0508(void)
+s32 Ground_801C0508(void)
 {
     UnkStage6B0* temp_r3 = stage_info.x6B0;
     return temp_r3 != NULL ? temp_r3->x4 : 128;
 }
 
-void func_801C052C(s32* arg0)
+void Ground_801C052C(s32* arg0)
 {
     UnkStage6B0* x = stage_info.x6B0;
     x->xB8 = *arg0;
 }
 
-void func_801C0544(s32* arg0)
+void Ground_801C0544(s32* arg0)
 {
     UnkStage6B0* x = stage_info.x6B0;
     x->xC0 = *arg0;
 }
 
-void func_801C055C(s32* arg0)
+void Ground_801C055C(s32* arg0)
 {
     UnkStage6B0* x = stage_info.x6B0;
     x->xD0 = *arg0;
 }
 
-void func_801C0574(s32* arg0)
+void Ground_801C0574(s32* arg0)
 {
     UnkStage6B0* x = stage_info.x6B0;
     x->xD8 = *arg0;
 }
 
-void func_801C058C(s32* arg0)
+void Ground_801C058C(s32* arg0)
 {
     UnkStage6B0* x = stage_info.x6B0;
     x->xC4 = *arg0;
 }
 
-void func_801C05A4(s32* arg0)
+void Ground_801C05A4(s32* arg0)
 {
     UnkStage6B0* x = stage_info.x6B0;
     x->xCC = *arg0;
 }
 
-void func_801C05BC(s32* arg0)
+void Ground_801C05BC(s32* arg0)
 {
     UnkStage6B0* x = stage_info.x6B0;
     x->xD4 = *arg0;
 }
 
-void func_801C05D4(s32* arg0)
+void Ground_801C05D4(s32* arg0)
 {
     UnkStage6B0* x = stage_info.x6B0;
     x->xBC = *arg0;
 }
 
-void func_801C05EC(s32* arg0)
+void Ground_801C05EC(s32* arg0)
 {
     UnkStage6B0* x = stage_info.x6B0;
     x->xC8 = *arg0;
 }
 
-s32* func_801C0604(void)
+s32* Ground_801C0604(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xB8;
 }
 
-s32* func_801C0618(void)
+s32* Ground_801C0618(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xC0;
 }
 
-s32* func_801C062C(void)
+s32* Ground_801C062C(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xD0;
 }
 
-s32* func_801C0640(void)
+s32* Ground_801C0640(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xD8;
 }
 
-s32* func_801C0654(void)
+s32* Ground_801C0654(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xC4;
 }
 
-s32* func_801C0668(void)
+s32* Ground_801C0668(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xCC;
 }
 
-s32* func_801C067C(void)
+s32* Ground_801C067C(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xD4;
 }
 
-s32* func_801C0690(void)
+s32* Ground_801C0690(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xBC;
 }
 
-s32* func_801C06A4(void)
+s32* Ground_801C06A4(void)
 {
     UnkStage6B0* x = stage_info.x6B0;
     return &x->xC8;
 }
 
-void func_801C06B8(InternalStageId arg0)
+void Ground_801C06B8(InternalStageId arg0)
 {
     if (lbl_803DFEDC[arg0] == NULL)
         return;
 
     if (lbl_803DFEDC[arg0]->data1 != NULL)
-        func_800178E8(4, lbl_803DFEDC[arg0]->data1, 4, 4, 0, 1, 7, 16, 0);
+        lbDvd_800178E8(4, lbl_803DFEDC[arg0]->data1, 4, 4, 0, 1, 7, 16, 0);
 
     switch (arg0) {
     case IZUMI:
-        func_801CD2D4();
+        grIzumi_801CD2D4();
         return;
     case PSTADIUM:
-        func_801D511C();
+        grStadium_801D511C();
         return;
     }
 }
 
-void func_801C0754(StructPairWithStageID* pair)
+void Ground_801C0754(StructPairWithStageID* pair)
 {
     StageData* stage;
     s32 arg3;
 
-    func_801BFFB0();
+    Ground_801BFFB0();
     stage_info.internal_stage_id = pair->stage_id;
     stage = lbl_803DFEDC[pair->stage_id];
     arg3 = (pair->list_idx == 0x55) ? 0 : 1;
-    func_801C6038(stage->data1, 0, arg3);
-    func_801C28CC(stage_info.xA0, pair->list_idx);
+    grDatFiles_801C6038(stage->data1, 0, arg3);
+    Ground_801C28CC(stage_info.xA0, pair->list_idx);
     stage_info.x178 = stage->callback5;
     stage_info.x17C = stage->callback6;
-    func_801C5878();
+    Ground_801C5878();
 }
 
 extern struct {
@@ -402,30 +402,29 @@ extern struct {
     }* x1D4;
 }* lbl_804D6D38;
 
-void func_801C0800(StructPairWithStageID* pair)
+void Ground_801C0800(StructPairWithStageID* pair)
 {
     StageData* stage_data = lbl_803DFEDC[pair->stage_id];
 
-    func_801C38D0(stage_info.x6B0->x8, stage_info.x6B0->x14,
-                  stage_info.x6B0->x1C, stage_info.x6B0->x18);
-    func_801C38EC(stage_info.x6B0->x10, stage_info.x6B0->xC);
-    func_801C3970(stage_info.x6B0->x28);
-    func_801C3900(stage_info.x6B0->x2E, stage_info.x6B0->x30,
-                  stage_info.x6B0->x34, stage_info.x6B0->x38,
-                  stage_info.x6B0->x3C, stage_info.x6B0->x40,
-                  stage_info.x6B0->x44, stage_info.x6B0->x48);
-    func_801C392C(stage_info.x6B0->x50, stage_info.x6B0->x54,
-                  stage_info.x6B0->x58, stage_info.x6B0->x5C,
-                  stage_info.x6B0->x60, stage_info.x6B0->x64);
-    func_801C3960(stage_info.x6B0->x20);
-    func_801C3950(stage_info.x6B0->x24);
+    Ground_801C38D0(stage_info.x6B0->x8, stage_info.x6B0->x14,
+                    stage_info.x6B0->x1C, stage_info.x6B0->x18);
+    Ground_801C38EC(stage_info.x6B0->x10, stage_info.x6B0->xC);
+    Ground_801C3970(stage_info.x6B0->x28);
+    Ground_801C3900(stage_info.x6B0->x2E, stage_info.x6B0->x30,
+                    stage_info.x6B0->x34, stage_info.x6B0->x38,
+                    stage_info.x6B0->x3C, stage_info.x6B0->x40,
+                    stage_info.x6B0->x44, stage_info.x6B0->x48);
+    Ground_801C392C(stage_info.x6B0->x50, stage_info.x6B0->x54,
+                    stage_info.x6B0->x58, stage_info.x6B0->x5C,
+                    stage_info.x6B0->x60, stage_info.x6B0->x64);
+    Ground_801C3960(stage_info.x6B0->x20);
+    Ground_801C3950(stage_info.x6B0->x24);
 
     {
         int i;
         if (stage_info.x6A8 != NULL)
             for (i = 0; stage_info.x6A8[i] != NULL; i++)
-                func_8026B40C(stage_info.x6A8[i]->unk4,
-                              stage_info.x6A8[i]->unk0);
+                it_8026B40C(stage_info.x6A8[i]->unk4, stage_info.x6A8[i]->unk0);
 
         if (stage_info.x6B4 != NULL)
             for (i = 1; stage_info.x6B4[i] != 0; i++)
@@ -435,14 +434,14 @@ void func_801C0800(StructPairWithStageID* pair)
     if (stage_info.x6B8 != NULL && stage_info.x6BC != NULL)
         psInitDataBankLoad(0x1E, stage_info.x6B8, stage_info.x6BC, 0, 0);
 
-    func_8004D288(stage_info.x6AC);
-    func_80058820();
-    func_801C1E94();
-    func_801C466C();
+    mpLib_8004D288(stage_info.x6AC);
+    mpLib_80058820();
+    Ground_801C1E94();
+    Ground_801C466C();
     stage_data->callback0();
 }
 
-static bool func_801C0A70(Vec3* pos)
+static bool Ground_801C0A70(Vec3* pos)
 {
     if (HSD_Randi(2) != 0) {
         InternalStageId enabled_stages[] = {
@@ -520,7 +519,7 @@ extern u32 lbl_803B7DEC[];
 #ifdef MWERKS_GEKKO
 
 #pragma push
-static asm void func_801C0C2C(HSD_GObj* arg0)
+static asm void Ground_801C0C2C(HSD_GObj* arg0)
 { // clang-format off
     nofralloc
 /* 801C0C2C 001BD80C  7C 08 02 A6 */	mflr r0
@@ -543,16 +542,16 @@ static asm void func_801C0C2C(HSD_GObj* arg0)
 /* 801C0C70 001BD850  54 60 07 FF */	clrlwi. r0, r3, 0x1f
 /* 801C0C74 001BD854  41 82 02 2C */	beq lbl_801C0EA0
 lbl_801C0C78:
-/* 801C0C78 001BD858  48 00 4B 2D */	bl func_801C57A4
+/* 801C0C78 001BD858  48 00 4B 2D */	bl Ground_801C57A4
 /* 801C0C7C 001BD85C  7C 7D 1B 79 */	or. r29, r3, r3
 /* 801C0C80 001BD860  41 82 02 20 */	beq lbl_801C0EA0
 /* 801C0C84 001BD864  7F A3 EB 78 */	mr r3, r29
-/* 801C0C88 001BD868  4B EC 63 95 */	bl func_8008701C
+/* 801C0C88 001BD868  4B EC 63 95 */	bl ftLib_8008701C
 /* 801C0C8C 001BD86C  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0C90 001BD870  40 82 02 10 */	bne lbl_801C0EA0
 /* 801C0C94 001BD874  38 7D 00 00 */	addi r3, r29, 0
 /* 801C0C98 001BD878  38 81 00 50 */	addi r4, r1, 0x50
-/* 801C0C9C 001BD87C  4B EC 59 A9 */	bl func_80086644
+/* 801C0C9C 001BD87C  4B EC 59 A9 */	bl ftLib_80086644
 /* 801C0CA0 001BD880  88 1E 00 00 */	lbz r0, 0(r30)
 /* 801C0CA4 001BD884  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
 /* 801C0CA8 001BD888  41 82 00 F8 */	beq lbl_801C0DA0
@@ -565,7 +564,7 @@ lbl_801C0C78:
 lbl_801C0CC4:
 /* 801C0CC4 001BD8A4  38 7D 00 00 */	addi r3, r29, 0
 /* 801C0CC8 001BD8A8  38 81 00 44 */	addi r4, r1, 0x44
-/* 801C0CCC 001BD8AC  48 00 20 59 */	bl func_801C2D24
+/* 801C0CCC 001BD8AC  48 00 20 59 */	bl Ground_801C2D24
 /* 801C0CD0 001BD8B0  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0CD4 001BD8B4  41 82 00 98 */	beq lbl_801C0D6C
 /* 801C0CD8 001BD8B8  C0 41 00 50 */	lfs f2, 0x50(r1)
@@ -639,7 +638,7 @@ lbl_801C0DA0:
 lbl_801C0DC4:
 /* 801C0DC4 001BD9A4  38 7C 00 00 */	addi r3, r28, 0
 /* 801C0DC8 001BD9A8  38 81 00 38 */	addi r4, r1, 0x38
-/* 801C0DCC 001BD9AC  48 00 1F 59 */	bl func_801C2D24
+/* 801C0DCC 001BD9AC  48 00 1F 59 */	bl Ground_801C2D24
 /* 801C0DD0 001BD9B0  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0DD4 001BD9B4  41 82 00 98 */	beq lbl_801C0E6C
 /* 801C0DD8 001BD9B8  C0 41 00 50 */	lfs f2, 0x50(r1)
@@ -701,10 +700,10 @@ lbl_801C0E90:
 /* 801C0E98 001BDA78  50 60 07 FE */	rlwimi r0, r3, 0, 0x1f, 0x1f
 /* 801C0E9C 001BDA7C  98 1E 00 00 */	stb r0, 0(r30)
 lbl_801C0EA0:
-/* 801C0EA0 001BDA80  4B FA A3 99 */	bl func_8016B238
+/* 801C0EA0 001BDA80  4B FA A3 99 */	bl gm_8016B238
 /* 801C0EA4 001BDA84  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0EA8 001BDA88  41 82 00 A0 */	beq lbl_801C0F48
-/* 801C0EAC 001BDA8C  4B FA A0 31 */	bl func_8016AEDC
+/* 801C0EAC 001BDA8C  4B FA A0 31 */	bl gm_8016AEDC
 /* 801C0EB0 001BDA90  2C 03 04 B0 */	cmpwi r3, 0x4b0
 /* 801C0EB4 001BDA94  40 81 00 94 */	ble lbl_801C0F48
 /* 801C0EB8 001BDA98  38 9F 00 9C */	addi r4, r31, 0x9c
@@ -714,7 +713,7 @@ lbl_801C0EA0:
 /* 801C0EC8 001BDAA8  40 81 00 80 */	ble lbl_801C0F48
 /* 801C0ECC 001BDAAC  90 64 00 00 */	stw r3, 0(r4)
 /* 801C0ED0 001BDAB0  38 61 00 2C */	addi r3, r1, 0x2c
-/* 801C0ED4 001BDAB4  4B FF FB 9D */	bl func_801C0A70
+/* 801C0ED4 001BDAB4  4B FF FB 9D */	bl Ground_801C0A70
 /* 801C0ED8 001BDAB8  2C 03 00 00 */	cmpwi r3, 0
 /* 801C0EDC 001BDABC  41 82 00 6C */	beq lbl_801C0F48
 /* 801C0EE0 001BDAC0  3C 60 80 3B */	lis r3, lbl_803B7DEC@ha
@@ -742,7 +741,7 @@ lbl_801C0EA0:
 /* 801C0F38 001BDB18  90 A1 00 14 */	stw r5, 0x14(r1)
 /* 801C0F3C 001BDB1C  90 81 00 18 */	stw r4, 0x18(r1)
 /* 801C0F40 001BDB20  90 01 00 1C */	stw r0, 0x1c(r1)
-/* 801C0F44 001BDB24  48 0A AF 41 */	bl func_8026BE84
+/* 801C0F44 001BDB24  48 0A AF 41 */	bl it_8026BE84
 lbl_801C0F48:
 /* 801C0F48 001BDB28  80 01 00 94 */	lwz r0, 0x94(r1)
 /* 801C0F4C 001BDB2C  CB E1 00 88 */	lfd f31, 0x88(r1)
@@ -761,19 +760,19 @@ lbl_801C0F48:
 
 #else
 
-static void func_801C0C2C(HSD_GObj* arg0)
+static void Ground_801C0C2C(HSD_GObj* arg0)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-void func_801C0F78(StructPairWithStageID* pair)
+void Ground_801C0F78(StructPairWithStageID* pair)
 {
     lbl_803DFEDC[pair->stage_id]->callback2();
 }
 
-void func_801C0FB8(StructPairWithStageID* pair)
+void Ground_801C0FB8(StructPairWithStageID* pair)
 {
     struct {
         void* unk0;
@@ -791,15 +790,15 @@ void func_801C0FB8(StructPairWithStageID* pair)
     }
     stage_info.x6A4 = NULL;
 
-    func_8038FD54(GObj_Create(3, 5, 0), func_801C0C2C, 10);
+    func_8038FD54(GObj_Create(3, 5, 0), Ground_801C0C2C, 10);
 }
 
-void func_801C1074(StructPairWithStageID* pair, s32 arg1)
+void Ground_801C1074(StructPairWithStageID* pair, s32 arg1)
 {
     lbl_803DFEDC[pair->stage_id]->callback1(arg1);
 }
 
-void func_801C10B8(HSD_GObj* arg0, HSD_GObjEvent arg1)
+void Ground_801C10B8(HSD_GObj* arg0, HSD_GObjEvent arg1)
 {
     struct {
         void* unk0;
@@ -819,22 +818,22 @@ void func_801C10B8(HSD_GObj* arg0, HSD_GObjEvent arg1)
     }
 }
 
-void func_801C1154(void) {}
+void Ground_801C1154(void) {}
 
-void func_801C1158(void)
+void Ground_801C1158(void)
 {
     switch (stage_info.internal_stage_id) {
     case PSTADIUM:
-        func_801D39A0(func_801C2BA4(1));
+        grStadium_801D39A0(Ground_801C2BA4(1));
         break;
     case CORNERIA:
     case VENOM:
-        func_801E2A6C();
+        grCorneria_801E2A6C();
         break;
     }
 }
 
-void func_801C11AC(HSD_GObj* gobj)
+void Ground_801C11AC(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
     Vec3 scale;
@@ -846,7 +845,7 @@ void func_801C11AC(HSD_GObj* gobj)
     HSD_JObjSetScale(jobj, &scale);
 }
 
-static HSD_Joint* func_801C126C(HSD_Joint* node, s32* depth)
+static HSD_Joint* Ground_801C126C(HSD_Joint* node, s32* depth)
 {
     HSD_Joint* result;
     *depth -= 1;
@@ -854,29 +853,29 @@ static HSD_Joint* func_801C126C(HSD_Joint* node, s32* depth)
         return node;
     }
     if (node->child != NULL) {
-        if ((result = func_801C126C(node->child, depth)) != NULL) {
+        if ((result = Ground_801C126C(node->child, depth)) != NULL) {
             return result;
         }
     }
     if (node->next != NULL) {
-        if ((result = func_801C126C(node->next, depth)) != NULL) {
+        if ((result = Ground_801C126C(node->next, depth)) != NULL) {
             return result;
         }
     }
     return NULL;
 }
 
-HSD_JObj* func_801C13D0(s32 arg0, s32 depth)
+HSD_JObj* Ground_801C13D0(s32 arg0, s32 depth)
 {
     HSD_JObj* result = NULL;
-    UnkArchiveStruct* archive = func_801C6330(arg0);
+    UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
     if (archive != NULL && arg0 < archive->unk4->unkC) {
         HSD_Joint* joint;
         if (depth == 0) {
             joint = archive->unk4->unk8[arg0].unk0;
         } else {
             s32 tmp_depth = depth;
-            joint = func_801C126C(archive->unk4->unk8[arg0].unk0, &tmp_depth);
+            joint = Ground_801C126C(archive->unk4->unk8[arg0].unk0, &tmp_depth);
         }
         result = HSD_JObjLoadJoint(joint);
     }
@@ -891,7 +890,7 @@ extern u8 lbl_804D7849;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm HSD_GObj* func_801C14D0(int gobj_id)
+asm HSD_GObj* Ground_801C14D0(int gobj_id)
 { // clang-format off
     nofralloc
 /* 801C14D0 001BE0B0  7C 08 02 A6 */	mflr r0
@@ -935,8 +934,8 @@ lbl_801C154C:
 /* 801C1560 001BE140  38 60 00 00 */	li r3, 0
 /* 801C1564 001BE144  48 00 04 A8 */	b lbl_801C1A0C
 lbl_801C1568:
-/* 801C1568 001BE148  3C 60 80 1C */	lis r3, func_801C0478@ha
-/* 801C156C 001BE14C  38 A3 04 78 */	addi r5, r3, func_801C0478@l
+/* 801C1568 001BE148  3C 60 80 1C */	lis r3, Ground_801C0478@ha
+/* 801C156C 001BE14C  38 A3 04 78 */	addi r5, r3, Ground_801C0478@l
 /* 801C1570 001BE150  38 7F 00 00 */	addi r3, r31, 0
 /* 801C1574 001BE154  38 80 00 03 */	li r4, 3
 /* 801C1578 001BE158  48 1C F5 F1 */	bl GObj_InitUserData
@@ -982,8 +981,8 @@ lbl_801C1568:
 /* 801C1618 001BE1F8  90 1A 00 34 */	stw r0, 0x34(r26)
 /* 801C161C 001BE1FC  90 1A 00 38 */	stw r0, 0x38(r26)
 /* 801C1620 001BE200  90 1A 00 3C */	stw r0, 0x3c(r26)
-/* 801C1624 001BE204  48 00 7F A1 */	bl func_801C95C4
-/* 801C1628 001BE208  48 00 4C FD */	bl func_801C6324
+/* 801C1624 001BE204  48 00 7F A1 */	bl grMaterial_801C95C4
+/* 801C1628 001BE208  48 00 4C FD */	bl grDatFiles_801C6324
 /* 801C162C 001BE20C  7C 77 1B 79 */	or. r23, r3, r3
 /* 801C1630 001BE210  40 82 00 14 */	bne lbl_801C1644
 /* 801C1634 001BE214  38 7B 02 18 */	addi r3, r27, 0x218
@@ -996,7 +995,7 @@ lbl_801C1644:
 /* 801C164C 001BE22C  7C 1E 00 00 */	cmpw r30, r0
 /* 801C1650 001BE230  40 80 02 4C */	bge lbl_801C189C
 /* 801C1654 001BE234  7F C3 F3 78 */	mr r3, r30
-/* 801C1658 001BE238  48 00 4C D9 */	bl func_801C6330
+/* 801C1658 001BE238  48 00 4C D9 */	bl grDatFiles_801C6330
 /* 801C165C 001BE23C  7C 7D 1B 78 */	mr r29, r3
 /* 801C1660 001BE240  80 63 00 04 */	lwz r3, 4(r3)
 /* 801C1664 001BE244  1F 3E 00 34 */	mulli r25, r30, 0x34
@@ -1008,7 +1007,7 @@ lbl_801C1644:
 /* 801C167C 001BE25C  38 7E 00 00 */	addi r3, r30, 0
 /* 801C1680 001BE260  38 97 00 00 */	addi r4, r23, 0
 /* 801C1684 001BE264  38 B8 00 00 */	addi r5, r24, 0
-/* 801C1688 001BE268  48 00 1E 25 */	bl func_801C34AC
+/* 801C1688 001BE268  48 00 1E 25 */	bl Ground_801C34AC
 /* 801C168C 001BE26C  80 7C 06 B0 */	lwz r3, 0x6b0(r28)
 /* 801C1690 001BE270  28 03 00 00 */	cmplwi r3, 0
 /* 801C1694 001BE274  41 82 00 0C */	beq lbl_801C16A0
@@ -1107,14 +1106,14 @@ lbl_801C1798:
 /* 801C17F4 001BE3D4  80 04 00 08 */	lwz r0, 8(r4)
 /* 801C17F8 001BE3D8  7C 60 CA 14 */	add r3, r0, r25
 /* 801C17FC 001BE3DC  80 63 00 10 */	lwz r3, 0x10(r3)
-/* 801C1800 001BE3E0  4B E5 23 15 */	bl func_80013B14
+/* 801C1800 001BE3E0  4B E5 23 15 */	bl lb_80013B14
 /* 801C1804 001BE3E4  3B 63 00 00 */	addi r27, r3, 0
 /* 801C1808 001BE3E8  88 8D C1 AB */	lbz r4, lbl_804D784B
 /* 801C180C 001BE3EC  38 77 00 00 */	addi r3, r23, 0
 /* 801C1810 001BE3F0  38 BB 00 00 */	addi r5, r27, 0
 /* 801C1814 001BE3F4  48 1C F2 5D */	bl func_80390A70
-/* 801C1818 001BE3F8  3C 60 80 1C */	lis r3, lbl_801C5F60@ha
-/* 801C181C 001BE3FC  38 83 5F 60 */	addi r4, r3, lbl_801C5F60@l
+/* 801C1818 001BE3F8  3C 60 80 1C */	lis r3, grDisplay_801C5F60@ha
+/* 801C181C 001BE3FC  38 83 5F 60 */	addi r4, r3, grDisplay_801C5F60@l
 /* 801C1820 001BE400  38 77 00 00 */	addi r3, r23, 0
 /* 801C1824 001BE404  38 A0 00 05 */	li r5, 5
 /* 801C1828 001BE408  48 1C EF 35 */	bl GObj_SetupGXLinkMax
@@ -1124,7 +1123,7 @@ lbl_801C1798:
 /* 801C1838 001BE418  38 7B 00 00 */	addi r3, r27, 0
 /* 801C183C 001BE41C  90 17 00 20 */	stw r0, 0x20(r23)
 /* 801C1840 001BE420  92 FA 00 18 */	stw r23, 0x18(r26)
-/* 801C1844 001BE424  48 00 13 91 */	bl func_801C2BD4
+/* 801C1844 001BE424  48 00 13 91 */	bl Ground_801C2BD4
 lbl_801C1848:
 /* 801C1848 001BE428  88 8D C1 A9 */	lbz r4, lbl_804D7849
 /* 801C184C 001BE42C  38 7F 00 00 */	addi r3, r31, 0
@@ -1139,10 +1138,10 @@ lbl_801C1848:
 lbl_801C1870:
 /* 801C1870 001BE450  7F E3 FB 78 */	mr r3, r31
 /* 801C1874 001BE454  A8 97 00 00 */	lha r4, 0(r23)
-/* 801C1878 001BE458  48 00 27 2D */	bl func_801C3FA4
+/* 801C1878 001BE458  48 00 27 2D */	bl Ground_801C3FA4
 /* 801C187C 001BE45C  28 03 00 00 */	cmplwi r3, 0
 /* 801C1880 001BE460  41 82 00 08 */	beq lbl_801C1888
-/* 801C1884 001BE464  4B E4 E1 75 */	bl func_8000F9F8
+/* 801C1884 001BE464  4B E4 E1 75 */	bl lb_8000F9F8
 lbl_801C1888:
 /* 801C1888 001BE468  3B 18 FF FF */	addi r24, r24, -1
 /* 801C188C 001BE46C  3A F7 00 02 */	addi r23, r23, 2
@@ -1236,19 +1235,19 @@ lbl_801C19C4:
 /* 801C19CC 001BE5AC  38 B7 00 00 */	addi r5, r23, 0
 /* 801C19D0 001BE5B0  48 1C F0 A1 */	bl func_80390A70
 lbl_801C19D4:
-/* 801C19D4 001BE5B4  3C 60 80 1C */	lis r3, func_801C1CD0@ha
-/* 801C19D8 001BE5B8  38 83 1C D0 */	addi r4, r3, func_801C1CD0@l
+/* 801C19D4 001BE5B4  3C 60 80 1C */	lis r3, Ground_801C1CD0@ha
+/* 801C19D8 001BE5B8  38 83 1C D0 */	addi r4, r3, Ground_801C1CD0@l
 /* 801C19DC 001BE5BC  38 7F 00 00 */	addi r3, r31, 0
 /* 801C19E0 001BE5C0  38 A0 00 01 */	li r5, 1
 /* 801C19E4 001BE5C4  48 1C E3 71 */	bl func_8038FD54
-/* 801C19E8 001BE5C8  3C 60 80 1C */	lis r3, func_801C1D38@ha
-/* 801C19EC 001BE5CC  38 83 1D 38 */	addi r4, r3, func_801C1D38@l
+/* 801C19E8 001BE5C8  3C 60 80 1C */	lis r3, Ground_801C1D38@ha
+/* 801C19EC 001BE5CC  38 83 1D 38 */	addi r4, r3, Ground_801C1D38@l
 /* 801C19F0 001BE5D0  38 7F 00 00 */	addi r3, r31, 0
 /* 801C19F4 001BE5D4  38 A0 00 04 */	li r5, 4
 /* 801C19F8 001BE5D8  48 1C E3 5D */	bl func_8038FD54
 /* 801C19FC 001BE5DC  38 7F 00 00 */	addi r3, r31, 0
 /* 801C1A00 001BE5E0  38 9E 00 00 */	addi r4, r30, 0
-/* 801C1A04 001BE5E4  48 00 11 B9 */	bl func_801C2BBC
+/* 801C1A04 001BE5E4  48 00 11 B9 */	bl Ground_801C2BBC
 /* 801C1A08 001BE5E8  7F E3 FB 78 */	mr r3, r31
 lbl_801C1A0C:
 /* 801C1A0C 001BE5EC  BA E1 00 AC */	lmw r23, 0xac(r1)
@@ -1261,7 +1260,7 @@ lbl_801C1A0C:
 
 #else
 
-HSD_GObj* func_801C14D0(int gobj_id)
+HSD_GObj* Ground_801C14D0(int gobj_id)
 {
     NOT_IMPLEMENTED;
 }
@@ -1271,7 +1270,7 @@ HSD_GObj* func_801C14D0(int gobj_id)
 char get_jobj[] = "%s:%d: couldn t get jobj\n";
 char get_gobj[] = "%s:%d: couldn t get gobj!\n";
 
-HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
+HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
 {
     HSD_GObj* temp_r30;
     HSD_JObj* temp_r29;
@@ -1305,7 +1304,7 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
         return NULL;
     }
 
-    GObj_InitUserData(temp_r30, 3, func_801C0478, gp);
+    GObj_InitUserData(temp_r30, 3, Ground_801C0478, gp);
     gp->map_id = arg1;
     gp->gobj = temp_r30;
     gp->x10_flags.b0 = 0;
@@ -1321,10 +1320,10 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
     for (i = 0; i < 8; i++)
         gp->x20[i] = -1;
 
-    func_801C95C4(temp_r30);
+    grMaterial_801C95C4(temp_r30);
     temp_r29 = HSD_JObjLoadJoint(arg0);
-    func_801C34AC(arg1, temp_r29, arg0);
-    phi_f0 = func_801C0498();
+    Ground_801C34AC(arg1, temp_r29, arg0);
+    phi_f0 = Ground_801C0498();
     sp18 = lbl_803B7E0C;
     sp18.scale.z = phi_f0;
     sp18.scale.y = phi_f0;
@@ -1347,14 +1346,14 @@ HSD_GObj* func_801C1A20(HSD_Joint* arg0, s32 arg1)
     }
 
     func_80390A70(temp_r30, lbl_804D7849, temp_r3_4);
-    func_8038FD54(temp_r30, func_801C1CD0, 1);
-    func_8038FD54(temp_r30, func_801C1D38, 4);
+    func_8038FD54(temp_r30, Ground_801C1CD0, 1);
+    func_8038FD54(temp_r30, Ground_801C1D38, 4);
     return temp_r30;
 }
 
 extern s32 lbl_804D64AC;
 
-static void func_801C1CD0(HSD_GObj* gobj)
+static void Ground_801C1CD0(HSD_GObj* gobj)
 {
     /// @todo Unused stack space
 #ifdef MUST_MATCH
@@ -1364,14 +1363,14 @@ static void func_801C1CD0(HSD_GObj* gobj)
     HSD_JObj* jobj = gobj->hsd_obj;
     Ground* gp = gobj->user_data;
     HSD_JObjAnimAll(jobj);
-    func_801C9698(gobj);
+    grMaterial_801C9698(gobj);
     lbl_804D64AC += 1;
 
     if (gp->x8_callback != NULL)
         gp->x8_callback(gobj);
 }
 
-static void func_801C1D38(HSD_GObj* gobj)
+static void Ground_801C1D38(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
@@ -1379,58 +1378,58 @@ static void func_801C1D38(HSD_GObj* gobj)
         gp->xC_callback(gobj);
 }
 
-void func_801C1D6C(u32 arg0)
+void Ground_801C1D6C(u32 arg0)
 {
     stage_info.x84 |= arg0;
 }
 
-u32 func_801C1D84(void)
+u32 Ground_801C1D84(void)
 {
     return stage_info.x84 & 0x330;
 }
 
-u32 func_801C1D98(void)
+u32 Ground_801C1D98(void)
 {
     return stage_info.x84 & 0x20;
 }
 
-u32 func_801C1DAC(void)
+u32 Ground_801C1DAC(void)
 {
     return stage_info.x84 & 0x100;
 }
 
-u32 func_801C1DC0(void)
+u32 Ground_801C1DC0(void)
 {
     return stage_info.x84 & 0x80;
 }
 
-s16 func_801C1DD4(void)
+s16 Ground_801C1DD4(void)
 {
     return stage_info.x6D0;
 }
 
-void func_801C1DE4(s32* arg0, s32* arg1)
+void Ground_801C1DE4(s32* arg0, s32* arg1)
 {
     *arg0 = stage_info.x6D4;
     *arg1 = stage_info.x6D2;
 }
 
-void func_801C1E00(s32 arg0)
+void Ground_801C1E00(s32 arg0)
 {
     stage_info.unk8C.b2 = arg0;
 }
 
-s32 func_801C1E18(void)
+s32 Ground_801C1E18(void)
 {
     return stage_info.unk8C.b2;
 }
 
-static void func_801C1E2C(HSD_GObj* gobj)
+static void Ground_801C1E2C(HSD_GObj* gobj)
 {
     bool stage_is_something;
     HSD_JObj* jobj;
 
-    if (func_80030A78())
+    if (Camera_80030A78())
         return;
 
     stage_is_something = stage_info.unk8C.b2;
@@ -1444,7 +1443,7 @@ static void func_801C1E2C(HSD_GObj* gobj)
         HSD_FogSet(gobj->hsd_obj);
 }
 
-void* func_801C1E84(void)
+void* Ground_801C1E84(void)
 {
     return stage_info.x12C;
 }
@@ -1454,7 +1453,7 @@ extern u8 lbl_804D7848;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-static asm void func_801C1E94(void)
+static asm void Ground_801C1E94(void)
 { // clang-format off
     nofralloc
 /* 801C1E94 001BEA74  7C 08 02 A6 */	mflr r0
@@ -1465,8 +1464,8 @@ static asm void func_801C1E94(void)
 /* 801C1EA8 001BEA88  3B E3 E6 C8 */	addi r31, r3, stage_info@l
 /* 801C1EAC 001BEA8C  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 801C1EB0 001BEA90  93 A1 00 14 */	stw r29, 0x14(r1)
-/* 801C1EB4 001BEA94  48 00 44 71 */	bl func_801C6324
-/* 801C1EB8 001BEA98  48 00 44 6D */	bl func_801C6324
+/* 801C1EB4 001BEA94  48 00 44 71 */	bl grDatFiles_801C6324
+/* 801C1EB8 001BEA98  48 00 44 6D */	bl grDatFiles_801C6324
 /* 801C1EBC 001BEA9C  80 BF 00 88 */	lwz r5, 0x88(r31)
 /* 801C1EC0 001BEAA0  3C 80 80 3E */	lis r4, lbl_803DFEDC@ha
 /* 801C1EC4 001BEAA4  80 63 00 04 */	lwz r3, 4(r3)
@@ -1476,7 +1475,7 @@ static asm void func_801C1E94(void)
 /* 801C1ED4 001BEAB4  83 C3 00 0C */	lwz r30, 0xc(r3)
 /* 801C1ED8 001BEAB8  80 64 00 00 */	lwz r3, 0(r4)
 /* 801C1EDC 001BEABC  83 A3 00 04 */	lwz r29, 4(r3)
-/* 801C1EE0 001BEAC0  48 00 44 45 */	bl func_801C6324
+/* 801C1EE0 001BEAC0  48 00 44 45 */	bl grDatFiles_801C6324
 /* 801C1EE4 001BEAC4  2C 1E 00 00 */	cmpwi r30, 0
 /* 801C1EE8 001BEAC8  7F C9 03 A6 */	mtctr r30
 /* 801C1EEC 001BEACC  3B C0 00 00 */	li r30, 0
@@ -1487,7 +1486,7 @@ lbl_801C1EF4:
 /* 801C1EFC 001BEADC  28 00 00 01 */	cmplwi r0, 1
 /* 801C1F00 001BEAE0  40 82 00 24 */	bne lbl_801C1F24
 /* 801C1F04 001BEAE4  7F C3 F3 78 */	mr r3, r30
-/* 801C1F08 001BEAE8  48 00 44 29 */	bl func_801C6330
+/* 801C1F08 001BEAE8  48 00 44 29 */	bl grDatFiles_801C6330
 /* 801C1F0C 001BEAEC  80 63 00 04 */	lwz r3, 4(r3)
 /* 801C1F10 001BEAF0  1C 1E 00 34 */	mulli r0, r30, 0x34
 /* 801C1F14 001BEAF4  80 63 00 08 */	lwz r3, 8(r3)
@@ -1516,8 +1515,8 @@ lbl_801C1F34:
 /* 801C1F64 001BEB44  38 7E 00 00 */	addi r3, r30, 0
 /* 801C1F68 001BEB48  38 BD 00 00 */	addi r5, r29, 0
 /* 801C1F6C 001BEB4C  48 1C EB 05 */	bl func_80390A70
-/* 801C1F70 001BEB50  3C 60 80 1C */	lis r3, func_801C1E2C@ha
-/* 801C1F74 001BEB54  38 83 1E 2C */	addi r4, r3, func_801C1E2C@l
+/* 801C1F70 001BEB50  3C 60 80 1C */	lis r3, Ground_801C1E2C@ha
+/* 801C1F74 001BEB54  38 83 1E 2C */	addi r4, r3, Ground_801C1E2C@l
 /* 801C1F78 001BEB58  38 7E 00 00 */	addi r3, r30, 0
 /* 801C1F7C 001BEB5C  38 A0 00 00 */	li r5, 0
 /* 801C1F80 001BEB60  38 C0 00 00 */	li r6, 0
@@ -1539,14 +1538,14 @@ lbl_801C1FA0:
 /* 801C1FB8 001BEB98  88 7D 00 18 */	lbz r3, 0x18(r29)
 /* 801C1FBC 001BEB9C  88 9D 00 19 */	lbz r4, 0x19(r29)
 /* 801C1FC0 001BEBA0  88 BD 00 1A */	lbz r5, 0x1a(r29)
-/* 801C1FC4 001BEBA4  4B E6 E7 7D */	bl func_80030740
+/* 801C1FC4 001BEBA4  4B E6 E7 7D */	bl Camera_80030740
 /* 801C1FC8 001BEBA8  93 DF 01 2C */	stw r30, 0x12c(r31)
 /* 801C1FCC 001BEBAC  48 00 00 14 */	b lbl_801C1FE0
 lbl_801C1FD0:
 /* 801C1FD0 001BEBB0  38 60 00 00 */	li r3, 0
 /* 801C1FD4 001BEBB4  38 80 00 00 */	li r4, 0
 /* 801C1FD8 001BEBB8  38 A0 00 00 */	li r5, 0
-/* 801C1FDC 001BEBBC  4B E6 E7 65 */	bl func_80030740
+/* 801C1FDC 001BEBBC  4B E6 E7 65 */	bl Camera_80030740
 lbl_801C1FE0:
 /* 801C1FE0 001BEBC0  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 801C1FE4 001BEBC4  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -1560,25 +1559,25 @@ lbl_801C1FE0:
 
 #else
 
-static void func_801C1E94(void)
+static void Ground_801C1E94(void)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-void func_801C1FFC(void)
+void Ground_801C1FFC(void)
 {
     if (stage_info.x12C != NULL && stage_info.x12C->ptr != NULL) {
-        func_80030740(stage_info.x12C->ptr->color.r,
-                      stage_info.x12C->ptr->color.g,
-                      stage_info.x12C->ptr->color.b);
+        Camera_80030740(stage_info.x12C->ptr->color.r,
+                        stage_info.x12C->ptr->color.g,
+                        stage_info.x12C->ptr->color.b);
     } else {
-        func_80030740(0, 0, 0);
+        Camera_80030740(0, 0, 0);
     }
 }
 
-void func_801C205C(GXColor* color)
+void Ground_801C205C(GXColor* color)
 {
     if (stage_info.x12C != NULL && color != NULL &&
         stage_info.x12C->ptr != NULL)
@@ -1587,7 +1586,7 @@ void func_801C205C(GXColor* color)
     }
 }
 
-bool func_801C2090(GXColor* color)
+bool Ground_801C2090(GXColor* color)
 {
     if (stage_info.x12C != NULL && color != NULL &&
         stage_info.x12C->ptr != NULL)
@@ -1598,7 +1597,7 @@ bool func_801C2090(GXColor* color)
     return false;
 }
 
-f32 func_801C20D0(void)
+f32 Ground_801C20D0(void)
 {
     return stage_info.cam_info.cam_vertical_tilt;
 }
@@ -1610,7 +1609,7 @@ char plightset[10] = "*lightset";
 #ifdef MWERKS_GEKKO
 
 #pragma push
-static asm unk_t func_801C20E0(UnkArchiveStruct*, unk_t)
+static asm unk_t Ground_801C20E0(UnkArchiveStruct*, unk_t)
 { // clang-format off
     nofralloc
 /* 801C20E0 001BECC0  7C 08 02 A6 */	mflr r0
@@ -1812,20 +1811,20 @@ lbl_801C2360:
 
 #else
 
-static unk_t func_801C20E0(UnkArchiveStruct* arg0, unk_t arg1)
+static unk_t Ground_801C20E0(UnkArchiveStruct* arg0, unk_t arg1)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-void func_801C2374(HSD_LObj* lobj)
+void Ground_801C2374(HSD_LObj* lobj)
 {
     Vec3 vec;
     f32 vec_mul;
 
     HSD_LObj* cur = lobj;
-    vec_mul = func_801C0498();
+    vec_mul = Ground_801C0498();
 
     while (cur != NULL) {
         Vec3* vec_ptr;
@@ -1850,9 +1849,9 @@ void func_801C2374(HSD_LObj* lobj)
     }
 }
 
-s32 func_801C247C(s32 arg0, s32 arg1)
+s32 Ground_801C247C(s32 arg0, s32 arg1)
 {
-    UnkArchiveStruct* archive = func_801C6330(arg0);
+    UnkArchiveStruct* archive = grDatFiles_801C6330(arg0);
 
     if (archive == NULL)
         __assert(__FILE__, 0x7E1, lbl_804D44F8);
@@ -1868,7 +1867,7 @@ static const int BGM_Undefined = -1;
 
 #define RANDI_MAX (100)
 
-static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
+static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
 {
     bool temp_r25;
 
@@ -1912,7 +1911,7 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 3:
-                    if (func_80164840(9) &&
+                    if (gm_80164840(9) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1921,7 +1920,7 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 4:
-                    if (func_80164840(21) &&
+                    if (gm_80164840(21) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1930,7 +1929,7 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 5:
-                    if (func_803048C0(0x11A) &&
+                    if (un_803048C0(0x11A) &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1939,7 +1938,7 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 6:
-                    if (func_80164ABC() &&
+                    if (gm_80164ABC() &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -1948,7 +1947,7 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                     }
                     break;
                 case 7:
-                    if (func_80164600() &&
+                    if (gm_80164600() &&
                         (phi_r30->x16 > HSD_Randi(RANDI_MAX) || temp_r25))
                     {
                         arg1 |= 2;
@@ -2008,16 +2007,16 @@ static bool func_801C24F8(s32 arg0, u32 arg1, s32* arg2)
     HSD_ASSERT(2242, bgm!=BGM_Undefined);
 
     if (bgm == -2)
-        *arg2 = func_8002305C(Player_GetPlayerCharacter(0), HSD_Randi(2));
+        *arg2 = lbAudioAx_8002305C(Player_GetPlayerCharacter(0), HSD_Randi(2));
     else
         *arg2 = bgm;
 
     return result;
 }
 
-bool func_801C28AC(s32 arg0, u32 arg1, s32* arg2)
+bool Ground_801C28AC(s32 arg0, u32 arg1, s32* arg2)
 {
-    return func_801C24F8(arg0, arg1, arg2);
+    return Ground_801C24F8(arg0, arg1, arg2);
 }
 
 #ifdef MWERKS_GEKKO
@@ -2028,7 +2027,7 @@ static char msg1[] =
 static char msg2[] = " stageid=%d\n";
 
 #pragma push
-static asm void func_801C28CC(unk_t, s32)
+static asm void Ground_801C28CC(unk_t, s32)
 { // clang-format off
     nofralloc
 /* 801C28CC 001BF4AC  7C 08 02 A6 */	mflr r0
@@ -2178,19 +2177,19 @@ lbl_801C2AC4:
 
 #else
 
-static void func_801C28CC(unk_t arg0, s32 arg1)
+static void Ground_801C28CC(unk_t arg0, s32 arg1)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-u8* func_801C2AD8(void)
+u8* Ground_801C2AD8(void)
 {
     return stage_info.xA0;
 }
 
-f32 func_801C2AE8(s32 arg0)
+f32 Ground_801C2AE8(s32 arg0)
 {
     UnkBgmStruct* phi_r5 = stage_info.x6B0->xB0;
     int i;
@@ -2205,19 +2204,19 @@ f32 func_801C2AE8(s32 arg0)
     }
 }
 
-HSD_GObj* func_801C2BA4(s32 i)
+HSD_GObj* Ground_801C2BA4(s32 i)
 {
     return stage_info.x180[i];
 }
 
-static void func_801C2BBC(HSD_GObj* arg0, s32 i)
+static void Ground_801C2BBC(HSD_GObj* arg0, s32 i)
 {
     stage_info.x180[i] = arg0;
 }
 
 static const int Gr_CObj_Max = 4;
 
-static void func_801C2BD4(void* arg0)
+static void Ground_801C2BD4(void* arg0)
 {
     int i;
     for (i = 0; i < 4; i++) {
@@ -2235,7 +2234,7 @@ static void func_801C2BD4(void* arg0)
     HSD_ASSERT(0x94D, i!=Gr_CObj_Max);
 }
 
-bool func_801C2C8C(void* arg0)
+bool Ground_801C2C8C(void* arg0)
 {
     int i;
     for (i = 0; i < 4; i++) {
@@ -2246,17 +2245,17 @@ bool func_801C2C8C(void* arg0)
     return false;
 }
 
-HSD_JObj* func_801C2CF4(s32 i)
+HSD_JObj* Ground_801C2CF4(s32 i)
 {
     return stage_info.x280[i];
 }
 
-void func_801C2D0C(s32 i, HSD_JObj* jobj)
+void Ground_801C2D0C(s32 i, HSD_JObj* jobj)
 {
     stage_info.x280[i] = jobj;
 }
 
-bool func_801C2D24(enum_t arg0, Vec3* arg1)
+bool Ground_801C2D24(enum_t arg0, Vec3* arg1)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -2267,9 +2266,9 @@ bool func_801C2D24(enum_t arg0, Vec3* arg1)
 #endif
 
     if (arg0 == 8) {
-        func_801C2D24(4, arg1);
-        func_801C2D24(5, &sp20);
-        lbvector_Add(arg1, &sp20);
+        Ground_801C2D24(4, arg1);
+        Ground_801C2D24(5, &sp20);
+        lbVector_Add(arg1, &sp20);
         arg1->x *= 0.5f;
         arg1->y *= 0.5f;
         arg1->z *= 0.5f;
@@ -2277,9 +2276,9 @@ bool func_801C2D24(enum_t arg0, Vec3* arg1)
     }
 
     if (arg0 == 9) {
-        func_801C2D24(6, arg1);
-        func_801C2D24(7, &sp14);
-        lbvector_Add(arg1, &sp14);
+        Ground_801C2D24(6, arg1);
+        Ground_801C2D24(7, &sp14);
+        lbVector_Add(arg1, &sp14);
         arg1->x *= 0.5f;
         arg1->y *= 0.5f;
         arg1->z *= 0.5f;
@@ -2287,23 +2286,23 @@ bool func_801C2D24(enum_t arg0, Vec3* arg1)
     }
 
     if (stage_info.x280[arg0] != NULL) {
-        func_8000B1CC(stage_info.x280[arg0], NULL, arg1);
+        lb_8000B1CC(stage_info.x280[arg0], NULL, arg1);
         return true;
     }
 
     if ((unsigned) arg0 - 1 <= 2)
-        return func_801C2D24(0, arg1);
+        return Ground_801C2D24(0, arg1);
 
     if ((unsigned) arg0 - 5 <= 2)
-        return func_801C2D24(4, arg1);
+        return Ground_801C2D24(4, arg1);
 
     if (arg0 == 0x7F) {
-        if (func_801C2D24(0x94, arg1)) {
+        if (Ground_801C2D24(0x94, arg1)) {
             arg1->y += 50;
             return true;
         }
 
-        return func_801C2D24(0, arg1);
+        return Ground_801C2D24(0, arg1);
     }
 
     if (arg0 == 4) {
@@ -2314,7 +2313,7 @@ bool func_801C2D24(enum_t arg0, Vec3* arg1)
     return false;
 }
 
-bool func_801C2ED0(HSD_JObj* jobj, s32 arg1)
+bool Ground_801C2ED0(HSD_JObj* jobj, s32 arg1)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -2322,7 +2321,7 @@ bool func_801C2ED0(HSD_JObj* jobj, s32 arg1)
 #endif
 
     bool result = false;
-    UnkArchiveStruct* temp_r3 = func_801C6330(arg1);
+    UnkArchiveStruct* temp_r3 = grDatFiles_801C6330(arg1);
 
     S16Vec3* cur;
     int i;
@@ -2333,9 +2332,9 @@ bool func_801C2ED0(HSD_JObj* jobj, s32 arg1)
         max = temp_r3->unk4->unk8[arg1].unk24;
 
         for (i = 0; i < max; i++, cur++) {
-            func_800552B0(cur->x, jobj, cur->z);
-            func_80055E9C(cur->x);
-            func_80057424(cur->x);
+            mpLib_800552B0(cur->x, jobj, cur->z);
+            mpLib_80055E9C(cur->x);
+            mpLib_80057424(cur->x);
             result = true;
         }
     }
@@ -2345,14 +2344,14 @@ bool func_801C2ED0(HSD_JObj* jobj, s32 arg1)
 
     for (i = 0; i < max; i++, cur++) {
         if (cur->y == arg1) {
-            func_800552B0(cur->x, jobj, cur->z);
-            func_80055E9C(cur->x);
-            func_80057424(cur->x);
+            mpLib_800552B0(cur->x, jobj, cur->z);
+            mpLib_80055E9C(cur->x);
+            mpLib_80057424(cur->x);
             result = true;
         }
     }
 
-    func_801C3214(arg1);
+    Ground_801C3214(arg1);
     return result;
 }
 
@@ -2360,7 +2359,7 @@ bool func_801C2ED0(HSD_JObj* jobj, s32 arg1)
 static s16 lbl_804D6954;
 
 #pragma push
-asm void func_801C2FE0(HSD_GObj*)
+asm void Ground_801C2FE0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 801C2FE0 001BFBC0  7C 08 02 A6 */	mflr r0
@@ -2375,7 +2374,7 @@ asm void func_801C2FE0(HSD_GObj*)
 /* 801C3004 001BFBE4  28 00 00 00 */	cmplwi r0, 0
 /* 801C3008 001BFBE8  40 82 01 08 */	bne lbl_801C3110
 /* 801C300C 001BFBEC  3B A0 00 00 */	li r29, 0
-/* 801C3010 001BFBF0  4B E8 A1 6D */	bl func_8004D17C
+/* 801C3010 001BFBF0  4B E8 A1 6D */	bl mpLib_8004D17C
 /* 801C3014 001BFBF4  A8 CD B2 B4 */	lha r6, lbl_804D6954
 /* 801C3018 001BFBF8  3C A0 80 4A */	lis r5, stage_info@ha
 /* 801C301C 001BFBFC  3C 80 80 3E */	lis r4, lbl_803DFEDC@ha
@@ -2397,7 +2396,7 @@ lbl_801C3054:
 /* 801C3058 001BFC38  7C 00 F0 00 */	cmpw r0, r30
 /* 801C305C 001BFC3C  40 82 00 24 */	bne lbl_801C3080
 /* 801C3060 001BFC40  A8 7B 00 00 */	lha r3, 0(r27)
-/* 801C3064 001BFC44  4B E9 2E 39 */	bl func_80055E9C
+/* 801C3064 001BFC44  4B E9 2E 39 */	bl mpLib_80055E9C
 /* 801C3068 001BFC48  A8 1B 00 00 */	lha r0, 0(r27)
 /* 801C306C 001BFC4C  3B A0 00 01 */	li r29, 1
 /* 801C3070 001BFC50  A8 8D B2 B4 */	lha r4, lbl_804D6954
@@ -2411,7 +2410,7 @@ lbl_801C3088:
 /* 801C3088 001BFC68  7C 1C D0 00 */	cmpw r28, r26
 /* 801C308C 001BFC6C  41 80 FF C8 */	blt lbl_801C3054
 /* 801C3090 001BFC70  7F C3 F3 78 */	mr r3, r30
-/* 801C3094 001BFC74  48 00 32 9D */	bl func_801C6330
+/* 801C3094 001BFC74  48 00 32 9D */	bl grDatFiles_801C6330
 /* 801C3098 001BFC78  28 03 00 00 */	cmplwi r3, 0
 /* 801C309C 001BFC7C  41 82 00 6C */	beq lbl_801C3108
 /* 801C30A0 001BFC80  80 63 00 04 */	lwz r3, 4(r3)
@@ -2430,7 +2429,7 @@ lbl_801C30C0:
 /* 801C30D0 001BFCB0  7C 1F 02 AE */	lhax r0, r31, r0
 /* 801C30D4 001BFCB4  7C 05 00 00 */	cmpw r5, r0
 /* 801C30D8 001BFCB8  41 82 00 20 */	beq lbl_801C30F8
-/* 801C30DC 001BFCBC  4B E9 2D C1 */	bl func_80055E9C
+/* 801C30DC 001BFCBC  4B E9 2D C1 */	bl mpLib_80055E9C
 /* 801C30E0 001BFCC0  A8 1C 00 00 */	lha r0, 0(r28)
 /* 801C30E4 001BFCC4  3B A0 00 01 */	li r29, 1
 /* 801C30E8 001BFCC8  A8 8D B2 B4 */	lha r4, lbl_804D6954
@@ -2459,14 +2458,14 @@ lbl_801C3114:
 
 #else
 
-void func_801C2FE0(HSD_GObj* arg0)
+void Ground_801C2FE0(HSD_GObj* arg0)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-bool func_801C3128(s32 arg0, void (*arg1)(s16))
+bool Ground_801C3128(s32 arg0, void (*arg1)(s16))
 {
     /// @todo Unused variable; is this an argument?
 #ifdef MUST_MATCH
@@ -2475,7 +2474,7 @@ bool func_801C3128(s32 arg0, void (*arg1)(s16))
 
     bool result;
 
-    func_8004D17C();
+    mpLib_8004D17C();
     result = false;
 
     {
@@ -2495,7 +2494,7 @@ bool func_801C3128(s32 arg0, void (*arg1)(s16))
             }
 
             {
-                UnkArchiveStruct* tmp = func_801C6330(arg0);
+                UnkArchiveStruct* tmp = grDatFiles_801C6330(arg0);
 
                 if (tmp != NULL) {
                     cur = tmp->unk4->unk8[arg0].unk20;
@@ -2512,33 +2511,33 @@ bool func_801C3128(s32 arg0, void (*arg1)(s16))
     return result;
 }
 
-bool func_801C3214(int arg0)
+bool Ground_801C3214(int arg0)
 {
     if (lbl_804D6950[arg0] == 1) {
         lbl_804D6950[arg0] = 0;
-        return func_801C3128(arg0, func_80057638);
+        return Ground_801C3128(arg0, mpLib_80057638);
     }
 
     return false;
 }
 
-bool func_801C3260(s32 arg0)
+bool Ground_801C3260(s32 arg0)
 {
     if (lbl_804D6950[arg0] == 0) {
         lbl_804D6950[arg0] = 1;
-        return func_801C3128(arg0, func_80057BC0);
+        return Ground_801C3128(arg0, mpLib_80057BC0);
     }
     return false;
 }
 
-void func_801C32AC(s32 arg0)
+void Ground_801C32AC(s32 arg0)
 {
-    func_801C3128(arg0, func_80057424);
+    Ground_801C3128(arg0, mpLib_80057424);
 }
 
-s32 func_801C32D4(s32 arg0, s32 arg1)
+s32 Ground_801C32D4(s32 arg0, s32 arg1)
 {
-    /// @todo Shared @c inline with #func_801C33C0.
+    /// @todo Shared @c inline with #Ground_801C33C0.
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -2551,7 +2550,7 @@ s32 func_801C32D4(s32 arg0, s32 arg1)
     S16Vec3* cur;
     int i;
 
-    func_8004D17C();
+    mpLib_8004D17C();
 
     /// @todo Might be an @c inline starting here.
 
@@ -2567,7 +2566,7 @@ s32 func_801C32D4(s32 arg0, s32 arg1)
     {
         UnkArchiveStruct* tmp;
 
-        tmp = func_801C6330(arg0);
+        tmp = grDatFiles_801C6330(arg0);
 
         if (tmp != NULL) {
             max = tmp->unk4->unk8[arg0].unk24;
@@ -2582,9 +2581,9 @@ s32 func_801C32D4(s32 arg0, s32 arg1)
     return result;
 }
 
-s32 func_801C33C0(s32 arg0, s32 arg1)
+s32 Ground_801C33C0(s32 arg0, s32 arg1)
 {
-    /// @attention @c x and @c z being swapped compared to #func_801C32D4
+    /// @attention @c x and @c z being swapped compared to #Ground_801C32D4
     ///            is the only difference.
 
     /// @todo Unused stack.
@@ -2598,7 +2597,7 @@ s32 func_801C33C0(s32 arg0, s32 arg1)
     S16Vec3* cur;
     int i;
 
-    func_8004D17C();
+    mpLib_8004D17C();
 
     /// @todo Might be an @c inline starting here.
 
@@ -2614,7 +2613,7 @@ s32 func_801C33C0(s32 arg0, s32 arg1)
     {
         UnkArchiveStruct* tmp;
 
-        tmp = func_801C6330(arg0);
+        tmp = grDatFiles_801C6330(arg0);
 
         if (tmp != NULL) {
             max = tmp->unk4->unk8[arg0].unk24;
@@ -2669,7 +2668,7 @@ char unkmsg[] = "%s:%d:Error (root=%08x joint=%08x)\n";
 #ifdef MWERKS_GEKKO
 
 #pragma push
-static asm void func_801C34AC(s32, HSD_JObj*, HSD_Joint*)
+static asm void Ground_801C34AC(s32, HSD_JObj*, HSD_Joint*)
 { // clang-format off
     nofralloc
 /* 801C34AC 001C008C  7C 08 02 A6 */	mflr r0
@@ -2682,7 +2681,7 @@ static asm void func_801C34AC(s32, HSD_JObj*, HSD_Joint*)
 /* 801C34C8 001C00A8  3B FE 00 00 */	addi r31, r30, 0
 /* 801C34CC 001C00AC  3B A4 FE A8 */	addi r29, r4, lbl_803DFEA8@l
 /* 801C34D0 001C00B0  3B 80 FF FF */	li r28, -1
-/* 801C34D4 001C00B4  48 00 2E 5D */	bl func_801C6330
+/* 801C34D4 001C00B4  48 00 2E 5D */	bl grDatFiles_801C6330
 /* 801C34D8 001C00B8  28 03 00 00 */	cmplwi r3, 0
 /* 801C34DC 001C00BC  41 82 02 04 */	beq lbl_801C36E0
 /* 801C34E0 001C00C0  28 1E 00 00 */	cmplwi r30, 0
@@ -2860,7 +2859,7 @@ lbl_801C36E0:
 
 #else
 
-static void func_801C34AC(s32 arg0, HSD_JObj* arg1, HSD_Joint* arg2)
+static void Ground_801C34AC(s32 arg0, HSD_JObj* arg1, HSD_Joint* arg2)
 {
     NOT_IMPLEMENTED;
 }
@@ -2870,7 +2869,7 @@ static void func_801C34AC(s32 arg0, HSD_JObj* arg1, HSD_Joint* arg2)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
+asm void Ground_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
 { // clang-format off
     nofralloc
 /* 801C36F4 001C02D4  7C 08 02 A6 */	mflr r0
@@ -2884,7 +2883,7 @@ asm void func_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
 /* 801C3714 001C02F4  3B A6 FE A8 */	addi r29, r6, lbl_803DFEA8@l
 /* 801C3718 001C02F8  93 81 00 28 */	stw r28, 0x28(r1)
 /* 801C371C 001C02FC  3B 85 00 00 */	addi r28, r5, 0
-/* 801C3720 001C0300  48 00 2C 11 */	bl func_801C6330
+/* 801C3720 001C0300  48 00 2C 11 */	bl grDatFiles_801C6330
 /* 801C3724 001C0304  7C 7E 1B 79 */	or. r30, r3, r3
 /* 801C3728 001C0308  40 82 00 14 */	bne lbl_801C373C
 /* 801C372C 001C030C  38 7D 02 18 */	addi r3, r29, 0x218
@@ -2994,40 +2993,40 @@ lbl_801C3860:
 
 #else
 
-void func_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
+void Ground_801C36F4(s32 map_id, HSD_JObj* jobj, void* unk)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-void func_801C3880(f32 val)
+void Ground_801C3880(f32 val)
 {
     stage_info.cam_info.cam_bounds_top = val;
 }
 
-void func_801C3890(f32 val)
+void Ground_801C3890(f32 val)
 {
     stage_info.cam_info.cam_bounds_bottom = val;
 }
 
-void func_801C38A0(f32 val)
+void Ground_801C38A0(f32 val)
 {
     stage_info.cam_info.cam_bounds_left = val;
 }
 
-void func_801C38AC(f32 val)
+void Ground_801C38AC(f32 val)
 {
     stage_info.cam_info.cam_bounds_right = val;
 }
 
-void func_801C38BC(f32 x, f32 y)
+void Ground_801C38BC(f32 x, f32 y)
 {
     stage_info.cam_info.cam_x_offset = x;
     stage_info.cam_info.cam_y_offset = y;
 }
 
-void func_801C38D0(f32 tilt, f32 pan, f32 a, f32 b)
+void Ground_801C38D0(f32 tilt, f32 pan, f32 a, f32 b)
 {
     stage_info.cam_info.cam_vertical_tilt = tilt;
     stage_info.cam_info.cam_pan_degrees = pan;
@@ -3035,14 +3034,14 @@ void func_801C38D0(f32 tilt, f32 pan, f32 a, f32 b)
     stage_info.cam_info.x24 = b;
 }
 
-void func_801C38EC(f32 depth, f32 zoom)
+void Ground_801C38EC(f32 depth, f32 zoom)
 {
     stage_info.cam_info.cam_max_depth = depth;
     stage_info.cam_info.cam_zoom_rate = zoom;
 }
 
-void func_801C3900(f32 arg8, f32 arg9, f32 argA, f32 argB, f32 up, f32 down,
-                   f32 left, f32 right)
+void Ground_801C3900(f32 arg8, f32 arg9, f32 argA, f32 argB, f32 up, f32 down,
+                     f32 left, f32 right)
 {
     stage_info.cam_info.x3C = arg8;
     stage_info.cam_info.pausecam_zpos_min = arg9;
@@ -3054,7 +3053,7 @@ void func_801C3900(f32 arg8, f32 arg9, f32 argA, f32 argB, f32 up, f32 down,
     stage_info.cam_info.cam_angle_right = right;
 }
 
-void func_801C392C(f32 x, f32 y, f32 z, f32 fov, f32 vert, f32 horz)
+void Ground_801C392C(f32 x, f32 y, f32 z, f32 fov, f32 vert, f32 horz)
 {
     stage_info.cam_info.fixed_cam_pos.x = x;
     stage_info.cam_info.fixed_cam_pos.y = y;
@@ -3064,42 +3063,42 @@ void func_801C392C(f32 x, f32 y, f32 z, f32 fov, f32 vert, f32 horz)
     stage_info.cam_info.fixed_cam_horz_angle = horz;
 }
 
-void func_801C3950(f32 zoom)
+void Ground_801C3950(f32 zoom)
 {
     stage_info.cam_info.cam_fixed_zoom = zoom;
 }
 
-void func_801C3960(f32 ratio)
+void Ground_801C3960(f32 ratio)
 {
     stage_info.cam_info.cam_track_ratio = ratio;
 }
 
-void func_801C3970(f32 smooth)
+void Ground_801C3970(f32 smooth)
 {
     stage_info.cam_info.cam_track_smooth = smooth;
 }
 
-void func_801C3980(f32 top)
+void Ground_801C3980(f32 top)
 {
     stage_info.blast_zone.top = top;
 }
 
-void func_801C3990(f32 bottom)
+void Ground_801C3990(f32 bottom)
 {
     stage_info.blast_zone.bottom = bottom;
 }
 
-void func_801C39A0(f32 left)
+void Ground_801C39A0(f32 left)
 {
     stage_info.blast_zone.left = left;
 }
 
-void func_801C39B0(f32 right)
+void Ground_801C39B0(f32 right)
 {
     stage_info.blast_zone.right = right;
 }
 
-void func_801C39C0(void)
+void Ground_801C39C0(void)
 {
     Vec3 sp20;
     Vec3 sp14;
@@ -3111,8 +3110,8 @@ void func_801C39C0(void)
     f32 phi_f1;
     f32 phi_f2;
 
-    if (func_801C2D24(0x95, &sp20) && func_801C2D24(0x96, &sp14) &&
-        func_801C2D24(0x94, &sp8))
+    if (Ground_801C2D24(0x95, &sp20) && Ground_801C2D24(0x96, &sp14) &&
+        Ground_801C2D24(0x94, &sp8))
     {
         if (sp20.x < sp14.x) {
             phi_f3 = sp20.x - sp8.x;
@@ -3207,7 +3206,7 @@ void func_801C39C0(void)
     stage_info.cam_info.cam_y_offset = phi_f2;
 }
 
-void func_801C3BB4(void)
+void Ground_801C3BB4(void)
 {
     Vec3 sp1C;
     Vec3 sp10;
@@ -3222,7 +3221,7 @@ void func_801C3BB4(void)
     f32 top;
     f32 bot;
 
-    if (func_801C2D24(0x97, &sp1C) && func_801C2D24(0x98, &sp10)) {
+    if (Ground_801C2D24(0x97, &sp1C) && Ground_801C2D24(0x98, &sp10)) {
         if (sp1C.x < sp10.x) {
             lft = sp1C.x - stage_info.cam_info.cam_x_offset;
             rgt = sp10.x - stage_info.cam_info.cam_x_offset;
@@ -3297,7 +3296,7 @@ void func_801C3BB4(void)
     stage_info.blast_zone.right = rgt;
 }
 
-s32 func_801C3D44(s32 arg0, f32 arg8, f32 arg9)
+s32 Ground_801C3D44(s32 arg0, f32 arg8, f32 arg9)
 {
     stage_info.unk8C.b6 = 1;
     stage_info.x70C = 0.5f * arg8;
@@ -3312,7 +3311,7 @@ s32 func_801C3D44(s32 arg0, f32 arg8, f32 arg9)
     return stage_info.x714;
 }
 
-s32 func_801C3DB4(s32 arg0, f32 arg8, f32 arg9)
+s32 Ground_801C3DB4(s32 arg0, f32 arg8, f32 arg9)
 {
     stage_info.unk8C.b7 = 1;
     stage_info.x718 = 0.5f * arg8;
@@ -3326,7 +3325,7 @@ s32 func_801C3DB4(s32 arg0, f32 arg8, f32 arg9)
     return stage_info.x720;
 }
 
-static HSD_AObj* func_801C3E18(HSD_JObj* jobj)
+static HSD_AObj* Ground_801C3E18(HSD_JObj* jobj)
 {
     HSD_AObj* result;
     if (jobj == NULL) {
@@ -3335,20 +3334,20 @@ static HSD_AObj* func_801C3E18(HSD_JObj* jobj)
     if (jobj->aobj != NULL) {
         return jobj->aobj;
     }
-    result = func_801C3E18(jobj->child);
+    result = Ground_801C3E18(jobj->child);
     if (result != NULL) {
         return result;
     }
-    result = func_801C3E18(jobj->next);
+    result = Ground_801C3E18(jobj->next);
     if (result != NULL) {
         return result;
     }
     return NULL;
 }
 
-f32 func_801C3F20(HSD_JObj* arg0)
+f32 Ground_801C3F20(HSD_JObj* arg0)
 {
-    HSD_AObj* aobj = func_801C3E18(arg0);
+    HSD_AObj* aobj = Ground_801C3E18(arg0);
 
     if (aobj != NULL)
         return aobj->curr_frame;
@@ -3359,7 +3358,7 @@ f32 func_801C3F20(HSD_JObj* arg0)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm HSD_JObj* func_801C3FA4(HSD_GObj*, s32 depth){
+asm HSD_JObj* Ground_801C3FA4(HSD_GObj*, s32 depth){
     // clang-format off
     nofralloc
 /* 801C3FA4 001C0B84  80 63 00 28 */	lwz r3, 0x28(r3)
@@ -3479,7 +3478,7 @@ lbl_801C40EC:
 
 #else
 
-HSD_JObj* func_801C3FA4(HSD_GObj* arg0, s32 depth)
+HSD_JObj* Ground_801C3FA4(HSD_GObj* arg0, s32 depth)
 {
     NOT_IMPLEMENTED;
 }
@@ -3514,7 +3513,7 @@ static inline HSD_JObj* jobjGetNext(HSD_JObj* jobj)
 }
 
 /// @todo Why isn't this emitted to @c jobj.c?
-HSD_JObj* func_801C4100(HSD_JObj* jobj)
+HSD_JObj* Ground_801C4100(HSD_JObj* jobj)
 {
     if (!(jobj->flags & JOBJ_INSTANCE) && jobjGetChild(jobj) != NULL)
         return jobjGetChild(jobj);
@@ -3533,7 +3532,7 @@ HSD_JObj* func_801C4100(HSD_JObj* jobj)
     }
 }
 
-s32 func_801C4210(void)
+s32 Ground_801C4210(void)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -3548,7 +3547,7 @@ s32 func_801C4210(void)
 
     for (i = 199; i < 220; i++) {
         if (stage_info.x280[i] != NULL &&
-            func_8027B5B0(It_Kind_Mato, 0, stage_info.x280[i], 0, 0) != NULL)
+            it_8027B5B0(It_Kind_Mato, 0, stage_info.x280[i], 0, 0) != NULL)
         {
             count++;
         }
@@ -3560,7 +3559,7 @@ s32 func_801C4210(void)
     return count;
 }
 
-void func_801C42AC(void)
+void Ground_801C42AC(void)
 {
     BobOmbRain sp8;
     HSD_JObj* jobj;
@@ -3572,12 +3571,12 @@ void func_801C42AC(void)
             sp8.x14 = 0x14;
             sp8.x4 = jobj;
             sp8.x1C.bits.b0 = true;
-            func_8026BE84(&sp8);
+            it_8026BE84(&sp8);
         }
     }
 }
 
-void func_801C4338(void)
+void Ground_801C4338(void)
 {
     stage_info.x6D4--;
     if (stage_info.x6D4 == 0) {
@@ -3585,24 +3584,24 @@ void func_801C4338(void)
     }
 }
 
-void func_801C4368(f32* arg0, f32* arg1)
+void Ground_801C4368(f32* arg0, f32* arg1)
 {
     *arg0 = stage_info.x724;
     *arg1 = stage_info.x724 - stage_info.x728;
 }
 
-void func_801C438C(f32 val)
+void Ground_801C438C(f32 val)
 {
     stage_info.x728 = stage_info.x724;
     stage_info.x724 = val;
 }
 
-void func_801C43A4(unk_t arg0)
+void Ground_801C43A4(unk_t arg0)
 {
-    func_801DA3F4(arg0);
+    grZebes_801DA3F4(arg0);
 }
 
-bool func_801C43C4(void* arg0)
+bool Ground_801C43C4(void* arg0)
 {
     UnkStageDat* tmp;
     int max;
@@ -3612,7 +3611,7 @@ bool func_801C43C4(void* arg0)
     }* phi_r4;
     int i;
 
-    tmp = func_801C6324()->unk4;
+    tmp = grDatFiles_801C6324()->unk4;
     phi_r4 = tmp->unk20;
     max = tmp->unk24;
     if (arg0 != NULL && max != 0) {
@@ -3631,7 +3630,7 @@ bool func_801C43C4(void* arg0)
     return false;
 }
 
-void func_801C445C(HSD_LObj* lobj)
+void Ground_801C445C(HSD_LObj* lobj)
 {
     Vec3 pos0;
     Vec3 pos1;
@@ -3691,12 +3690,12 @@ void func_801C445C(HSD_LObj* lobj)
     }
 }
 
-static void lbl_801C461C(HSD_GObj* gobj)
+static void Ground_801C461C(HSD_GObj* gobj)
 {
-    func_801C445C(gobj->hsd_obj);
+    Ground_801C445C(gobj->hsd_obj);
 }
 
-static void lbl_801C4640(HSD_GObj* gobj)
+static void Ground_801C4640(HSD_GObj* gobj)
 {
     func_803668EC(gobj->hsd_obj);
     HSD_LObjSetupInit(HSD_CObjGetCurrent());
@@ -3707,7 +3706,7 @@ extern u8 lbl_804D784A;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-static asm void func_801C466C(void)
+static asm void Ground_801C466C(void)
 { // clang-format off
     nofralloc
 /* 801C466C 001C124C  7C 08 02 A6 */	mflr r0
@@ -3717,7 +3716,7 @@ static asm void func_801C466C(void)
 /* 801C467C 001C125C  DB E1 00 38 */	stfd f31, 0x38(r1)
 /* 801C4680 001C1260  BF 41 00 20 */	stmw r26, 0x20(r1)
 /* 801C4684 001C1264  3B E3 FE A8 */	addi r31, r3, lbl_803DFEA8@l
-/* 801C4688 001C1268  48 00 1C 9D */	bl func_801C6324
+/* 801C4688 001C1268  48 00 1C 9D */	bl grDatFiles_801C6324
 /* 801C468C 001C126C  3C 80 80 4A */	lis r4, stage_info@ha
 /* 801C4690 001C1270  80 63 00 04 */	lwz r3, 4(r3)
 /* 801C4694 001C1274  38 84 E6 C8 */	addi r4, r4, stage_info@l
@@ -3727,7 +3726,7 @@ static asm void func_801C466C(void)
 /* 801C46A4 001C1284  7C 7F 02 14 */	add r3, r31, r0
 /* 801C46A8 001C1288  80 63 00 34 */	lwz r3, 0x34(r3)
 /* 801C46AC 001C128C  83 43 00 04 */	lwz r26, 4(r3)
-/* 801C46B0 001C1290  48 00 1C 75 */	bl func_801C6324
+/* 801C46B0 001C1290  48 00 1C 75 */	bl grDatFiles_801C6324
 /* 801C46B4 001C1294  2C 1C 00 00 */	cmpwi r28, 0
 /* 801C46B8 001C1298  7F 89 03 A6 */	mtctr r28
 /* 801C46BC 001C129C  3B 80 00 00 */	li r28, 0
@@ -3738,13 +3737,13 @@ lbl_801C46C4:
 /* 801C46CC 001C12AC  28 00 00 01 */	cmplwi r0, 1
 /* 801C46D0 001C12B0  40 82 00 28 */	bne lbl_801C46F8
 /* 801C46D4 001C12B4  7F 83 E3 78 */	mr r3, r28
-/* 801C46D8 001C12B8  48 00 1C 59 */	bl func_801C6330
+/* 801C46D8 001C12B8  48 00 1C 59 */	bl grDatFiles_801C6330
 /* 801C46DC 001C12BC  80 83 00 04 */	lwz r4, 4(r3)
 /* 801C46E0 001C12C0  1C 1C 00 34 */	mulli r0, r28, 0x34
 /* 801C46E4 001C12C4  80 84 00 08 */	lwz r4, 8(r4)
 /* 801C46E8 001C12C8  7C 84 02 14 */	add r4, r4, r0
 /* 801C46EC 001C12CC  80 84 00 18 */	lwz r4, 0x18(r4)
-/* 801C46F0 001C12D0  4B FF D9 F1 */	bl func_801C20E0
+/* 801C46F0 001C12D0  4B FF D9 F1 */	bl Ground_801C20E0
 /* 801C46F4 001C12D4  48 00 00 14 */	b lbl_801C4708
 lbl_801C46F8:
 /* 801C46F8 001C12D8  3B 5A 00 14 */	addi r26, r26, 0x14
@@ -3772,7 +3771,7 @@ lbl_801C4740:
 /* 801C4740 001C1320  48 00 00 00 */	b lbl_801C4740
 lbl_801C4744:
 /* 801C4744 001C1324  7F 83 E3 78 */	mr r3, r28
-/* 801C4748 001C1328  4B E4 D3 7D */	bl func_80011AC4
+/* 801C4748 001C1328  4B E4 D3 7D */	bl lb_80011AC4
 /* 801C474C 001C132C  7C 7D 1B 79 */	or. r29, r3, r3
 /* 801C4750 001C1330  40 82 00 1C */	bne lbl_801C476C
 /* 801C4754 001C1334  38 7F 08 48 */	addi r3, r31, 0x848
@@ -3787,8 +3786,8 @@ lbl_801C476C:
 /* 801C4770 001C1350  38 7E 00 00 */	addi r3, r30, 0
 /* 801C4774 001C1354  38 BD 00 00 */	addi r5, r29, 0
 /* 801C4778 001C1358  48 1C C2 F9 */	bl func_80390A70
-/* 801C477C 001C135C  3C 60 80 1C */	lis r3, lbl_801C4640@ha
-/* 801C4780 001C1360  38 83 46 40 */	addi r4, r3, lbl_801C4640@l
+/* 801C477C 001C135C  3C 60 80 1C */	lis r3, Ground_801C4640@ha
+/* 801C4780 001C1360  38 83 46 40 */	addi r4, r3, Ground_801C4640@l
 /* 801C4784 001C1364  38 7E 00 00 */	addi r3, r30, 0
 /* 801C4788 001C1368  38 A0 00 00 */	li r5, 0
 /* 801C478C 001C136C  38 C0 00 00 */	li r6, 0
@@ -3878,7 +3877,7 @@ lbl_801C48BC:
 /* 801C48BC 001C149C  80 7B 00 00 */	lwz r3, 0(r27)
 /* 801C48C0 001C14A0  80 63 00 04 */	lwz r3, 4(r3)
 /* 801C48C4 001C14A4  80 63 00 00 */	lwz r3, 0(r3)
-/* 801C48C8 001C14A8  4B FF FA FD */	bl func_801C43C4
+/* 801C48C8 001C14A8  4B FF FA FD */	bl Ground_801C43C4
 /* 801C48CC 001C14AC  2C 03 00 00 */	cmpwi r3, 0
 /* 801C48D0 001C14B0  41 82 00 68 */	beq lbl_801C4938
 /* 801C48D4 001C14B4  80 7A 00 48 */	lwz r3, 0x48(r26)
@@ -3923,8 +3922,8 @@ lbl_801C4950:
 lbl_801C4958:
 /* 801C4958 001C1538  7F A3 EB 78 */	mr r3, r29
 /* 801C495C 001C153C  48 1A 0D 1D */	bl HSD_LObjAnimAll
-/* 801C4960 001C1540  3C 60 80 1C */	lis r3, lbl_801C461C@ha
-/* 801C4964 001C1544  38 83 46 1C */	addi r4, r3, lbl_801C461C@l
+/* 801C4960 001C1540  3C 60 80 1C */	lis r3, Ground_801C461C@ha
+/* 801C4964 001C1544  38 83 46 1C */	addi r4, r3, Ground_801C461C@l
 /* 801C4968 001C1548  38 7E 00 00 */	addi r3, r30, 0
 /* 801C496C 001C154C  38 A0 00 00 */	li r5, 0
 /* 801C4970 001C1550  48 1C B3 E5 */	bl func_8038FD54
@@ -3939,14 +3938,14 @@ lbl_801C4958:
 
 #else
 
-static void func_801C466C(void)
+static void Ground_801C466C(void)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-HSD_GObj* func_801C498C(void)
+HSD_GObj* Ground_801C498C(void)
 {
     HSD_GObj* gobj;
     for (gobj = lbl_804D782C->xC; gobj != NULL; gobj = gobj->next) {
@@ -3959,17 +3958,17 @@ HSD_GObj* func_801C498C(void)
 
 extern unk_t lbl_803E06C8[];
 
-unk_t func_801C49B4(void)
+unk_t Ground_801C49B4(void)
 {
-    UnkArchiveStruct* archive = func_801C6324();
+    UnkArchiveStruct* archive = grDatFiles_801C6324();
 
     if (stage_info.x6C4 != NULL)
-        return func_801C20E0(archive, stage_info.x6C4);
+        return Ground_801C20E0(archive, stage_info.x6C4);
 
     return &lbl_803E06C8;
 }
 
-void* func_801C49F8(void)
+void* Ground_801C49F8(void)
 {
     return stage_info.x6C0;
 }
@@ -3987,7 +3986,7 @@ static inline void removeStageGObj(HSD_GObj* gobj)
 }
 
 // Stage destroy ground gobj
-void func_801C4A08(HSD_GObj* gobj)
+void Ground_801C4A08(HSD_GObj* gobj)
 {
     UnkArchiveStruct* archive;
     Ground* gp;
@@ -4014,7 +4013,7 @@ void func_801C4A08(HSD_GObj* gobj)
         if (stage_info.x180[map_id] == gobj)
             stage_info.x180[map_id] = NULL;
 
-        func_801C55AC(gp);
+        Ground_801C55AC(gp);
 
         if (gp->x18 != NULL) {
             removeStageGObj(gp->x18);
@@ -4023,19 +4022,19 @@ void func_801C4A08(HSD_GObj* gobj)
 
         if (gobj->hsd_obj != NULL && lbl_804D6950[map_id] == 0) {
             lbl_804D6950[map_id] = 1;
-            func_801C3128(map_id, func_80057BC0);
+            Ground_801C3128(map_id, mpLib_80057BC0);
         }
 
-        archive = func_801C6330(gp->map_id);
+        archive = grDatFiles_801C6330(gp->map_id);
 
         if (archive != NULL)
-            func_801C36F4(gp->map_id, jobj, archive->unk4->unk8[map_id].unk0);
+            Ground_801C36F4(gp->map_id, jobj, archive->unk4->unk8[map_id].unk0);
     }
 
     func_80390228(gobj);
 }
 
-void func_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
+void Ground_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
 {
     Vec3 vec0;
     Vec3 vec1;
@@ -4048,8 +4047,8 @@ void func_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
     f32 y0;
 
     splGetSplinePoint(arg1, arg0);
-    func_8000E9F0(&vec0, arg0, arg8);
-    lbvector_Normalize(&vec0);
+    lbShadow_8000E9F0(&vec0, arg0, arg8);
+    lbVector_Normalize(&vec0);
     y0 = vec0.y;
 
     if (vec0.y < 0.0F)
@@ -4063,8 +4062,8 @@ void func_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
         vec2.y = 1.0F;
     }
 
-    lbvector_CrossprodNormalized(&vec0, &vec2, &vec1);
-    lbvector_CrossprodNormalized(&vec1, &vec0, &vec2);
+    lbVector_CrossprodNormalized(&vec0, &vec2, &vec1);
+    lbVector_CrossprodNormalized(&vec1, &vec0, &vec2);
     result_y = asinf(vec1.z);
     z1 = vec1.z;
 
@@ -4096,7 +4095,7 @@ void func_801C4B50(s32 arg0, s32 arg1, Vec3* result, f32 arg8)
     result->z = result_z;
 }
 
-bool func_801C4D70(s32 arg0, Vec3* arg1, f32 arg8)
+bool Ground_801C4D70(s32 arg0, Vec3* arg1, f32 arg8)
 {
     stage_info.x72C = arg0;
     stage_info.x730 = *arg1;
@@ -4104,59 +4103,59 @@ bool func_801C4D70(s32 arg0, Vec3* arg1, f32 arg8)
     return true;
 }
 
-bool func_801C4DA0(Vec3* arg0, f32* arg1)
+bool Ground_801C4DA0(Vec3* arg0, f32* arg1)
 {
     *arg0 = stage_info.x730;
     *arg1 = stage_info.x73C;
     return true;
 }
 
-bool func_801C4DD0(void)
+bool Ground_801C4DD0(void)
 {
     InternalStageId stage_id = stage_info.internal_stage_id;
 
     if (stage_id == KONGO)
-        func_801D8270(stage_info.x72C);
+        grKongo_801D8270(stage_info.x72C);
     else if (stage_id == OLDKONGO)
-        func_802105AC(stage_info.x72C);
+        grOldKongo_802105AC(stage_info.x72C);
 
     return true;
 }
 
-bool func_801C4E20(void)
+bool Ground_801C4E20(void)
 {
     InternalStageId stage_id = stage_info.internal_stage_id;
 
     if (stage_id == KONGO)
-        func_801D828C(stage_info.x72C);
+        grKongo_801D828C(stage_info.x72C);
     else if (stage_id == OLDKONGO)
-        func_802105C8(stage_info.x72C);
+        grOldKongo_802105C8(stage_info.x72C);
 
     return true;
 }
 
-void func_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
-                   HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5)
+void Ground_801C4E70(HSD_JObj* arg0, HSD_JObj* arg1, HSD_JObj* arg2,
+                     HSD_JObj* arg3, HSD_JObj* arg4, HSD_JObj* arg5)
 {
     Vec3 vec;
     stage_info.unk8C.b3 = true;
 
-    func_8000B1CC(arg0, NULL, &vec);
+    lb_8000B1CC(arg0, NULL, &vec);
     stage_info.x130 = vec;
 
-    func_8000B1CC(arg1, NULL, &vec);
+    lb_8000B1CC(arg1, NULL, &vec);
     stage_info.x13C = vec;
 
-    func_8000B1CC(arg2, NULL, &vec);
+    lb_8000B1CC(arg2, NULL, &vec);
     stage_info.x148 = vec;
 
-    func_8000B1CC(arg3, NULL, &vec);
+    lb_8000B1CC(arg3, NULL, &vec);
     stage_info.x154 = vec;
 
-    func_8000B1CC(arg4, NULL, &vec);
+    lb_8000B1CC(arg4, NULL, &vec);
     stage_info.x160 = vec;
 
-    func_8000B1CC(arg5, NULL, &vec);
+    lb_8000B1CC(arg5, NULL, &vec);
     stage_info.x16C = vec;
 }
 
@@ -4166,7 +4165,7 @@ extern char lbl_804D452C[8];
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_801C4FAC(void)
+asm void Ground_801C4FAC(void)
 { // clang-format off
     nofralloc
 /* 801C4FAC 001C1B8C  7C 08 02 A6 */	mflr r0
@@ -4461,27 +4460,27 @@ lbl_801C53CC:
 
 #else
 
-void func_801C4FAC(void)
+void Ground_801C4FAC(void)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-void func_801C53EC(u32 arg0)
+void Ground_801C53EC(u32 arg0)
 {
-    func_800237A8(arg0, 0x7F, 0x40);
+    lbAudioAx_800237A8(arg0, 0x7F, 0x40);
 }
 
-void func_801C5414(unk_t arg0, s32 arg1)
+void Ground_801C5414(unk_t arg0, s32 arg1)
 {
-    func_80023870(arg0, 0x7F, 0x40, arg1);
+    lbAudioAx_80023870(arg0, 0x7F, 0x40, arg1);
 }
 
 /// @file
 /// @todo Don't hardcode 8
 
-void func_801C5440(Ground* gp, s32 i, u32 arg2)
+void Ground_801C5440(Ground* gp, s32 i, u32 arg2)
 {
     if (i < 0 || i >= 8)
         return;
@@ -4495,27 +4494,27 @@ void func_801C5440(Ground* gp, s32 i, u32 arg2)
     if (arg2 != 540001) {
         if (gp->x20[i] != -1) {
             Ground* tmp_gp = gp;
-            func_800236B8(tmp_gp->x20[i]);
+            lbAudioAx_800236B8(tmp_gp->x20[i]);
         }
 
-        gp->x20[i] = func_800237A8(arg2, 0x7F, 0x40);
+        gp->x20[i] = lbAudioAx_800237A8(arg2, 0x7F, 0x40);
     } else {
-        func_801C5544(gp, i);
+        Ground_801C5544(gp, i);
     }
 }
 
-bool func_801C54DC(Ground* gp, s32 i)
+bool Ground_801C54DC(Ground* gp, s32 i)
 {
     if (i < 0 || i >= 8)
         return false;
 
-    if (gp != NULL && gp->x20[i] != -1 && func_80023710(gp->x20[i]))
+    if (gp != NULL && gp->x20[i] != -1 && lbAudioAx_80023710(gp->x20[i]))
         return true;
 
     return false;
 }
 
-void func_801C5544(Ground* gp, s32 i)
+void Ground_801C5544(Ground* gp, s32 i)
 {
     if (i < 0 || i >= 8)
         return;
@@ -4525,13 +4524,13 @@ void func_801C5544(Ground* gp, s32 i)
 
     if (gp->x20[i] != -1) {
         Ground* tmp_gp = gp;
-        func_800236B8(tmp_gp->x20[i]);
+        lbAudioAx_800236B8(tmp_gp->x20[i]);
     }
 
     gp->x20[i] = -1;
 }
 
-static void func_801C55AC(Ground* gp)
+static void Ground_801C55AC(Ground* gp)
 {
     int i;
 
@@ -4539,30 +4538,30 @@ static void func_801C55AC(Ground* gp)
         return;
 
     for (i = 0; i < 8; i++)
-        func_801C5544(gp, i);
+        Ground_801C5544(gp, i);
 }
 
-void func_801C5630(Ground* gp, s32 i, f32 val)
+void Ground_801C5630(Ground* gp, s32 i, f32 val)
 {
     if (i < 0 || i >= 8) {
         return;
     }
     if (gp != NULL && gp->x20[i] != -1) {
-        func_80024B58(gp->x20[i], 127 * val);
+        lbAudioAx_80024B58(gp->x20[i], 127 * val);
     }
 }
 
-void func_801C5694(Ground* gp, s32 i, f32 val)
+void Ground_801C5694(Ground* gp, s32 i, f32 val)
 {
     if (i < 0 || i >= 8) {
         return;
     }
     if (gp != NULL && gp->x20[i] != -1) {
-        func_80024B1C(gp->x20[i], 63.5f * (val + 1));
+        lbAudioAx_80024B1C(gp->x20[i], 63.5f * (val + 1));
     }
 }
 
-bool func_801C5700(int i)
+bool Ground_801C5700(int i)
 {
     if (stage_info.x178 != NULL) {
         return stage_info.x178(i);
@@ -4570,61 +4569,61 @@ bool func_801C5700(int i)
     return false;
 }
 
-void func_801C5740(s32 arg0)
+void Ground_801C5740(s32 arg0)
 {
     stage_info.x6D8 = arg0;
 }
 
-void func_801C5750(void)
+void Ground_801C5750(void)
 {
     stage_info.x6D8 = 0;
 }
 
-s32 func_801C5764(void)
+s32 Ground_801C5764(void)
 {
     return stage_info.x6D8;
 }
 
-s16 func_801C5774(void)
+s16 Ground_801C5774(void)
 {
     return stage_info.x6DC;
 }
 
-void func_801C5784(s32 arg0)
+void Ground_801C5784(s32 arg0)
 {
     stage_info.x740 = arg0;
 }
 
-s32 func_801C5794(void)
+s32 Ground_801C5794(void)
 {
     return stage_info.x740;
 }
 
-HSD_GObj* func_801C57A4(void)
+HSD_GObj* Ground_801C57A4(void)
 {
     return Player_GetEntity(0);
 }
 
-HSD_GObj* func_801C57C8(void)
+HSD_GObj* Ground_801C57C8(void)
 {
     return Player_GetEntityAtIndex(0, 1);
 }
 
-f32 func_801C57F0(void)
+f32 Ground_801C57F0(void)
 {
     return stage_info.x6E0;
 }
 
-void func_801C5800(void)
+void Ground_801C5800(void)
 {
     if (stage_info.x6B0->x4C_fixed_cam) {
-        func_8002F8F4();
+        Camera_8002F8F4();
     } else {
-        func_8002F474();
+        Camera_8002F474();
     }
 }
 
-s32 func_801C5840(void)
+s32 Ground_801C5840(void)
 {
     s32 i = HSD_Randi(1);
     return stage_info.x6E4[i];
@@ -4633,7 +4632,7 @@ s32 func_801C5840(void)
 #ifdef MWERKS_GEKKO
 #pragma push
 
-static asm void func_801C5878(void)
+static asm void Ground_801C5878(void)
 { // clang-format off
     nofralloc
 /* 801C5878 001C2458  7C 08 02 A6 */	mflr r0
@@ -4641,15 +4640,15 @@ static asm void func_801C5878(void)
 /* 801C5880 001C2460  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 801C5884 001C2464  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 801C5888 001C2468  93 C1 00 10 */	stw r30, 0x10(r1)
-/* 801C588C 001C246C  48 15 6A 41 */	bl func_8031C2CC
-/* 801C5890 001C2470  4B FA 5C 09 */	bl func_8016B498
+/* 801C588C 001C246C  48 15 6A 41 */	bl un_8031C2CC
+/* 801C5890 001C2470  4B FA 5C 09 */	bl gm_8016B498
 /* 801C5894 001C2474  2C 03 00 00 */	cmpwi r3, 0
 /* 801C5898 001C2478  41 82 00 20 */	beq lbl_801C58B8
 /* 801C589C 001C247C  3C 60 80 4A */	lis r3, stage_info@ha
 /* 801C58A0 001C2480  3B E3 E6 C8 */	addi r31, r3, stage_info@l
-/* 801C58A4 001C2484  48 15 6A 49 */	bl func_8031C2EC
+/* 801C58A4 001C2484  48 15 6A 49 */	bl un_8031C2EC
 /* 801C58A8 001C2488  7C 7E 1B 78 */	mr r30, r3
-/* 801C58AC 001C248C  48 15 6B A9 */	bl func_8031C454
+/* 801C58AC 001C248C  48 15 6B A9 */	bl un_8031C454
 /* 801C58B0 001C2490  93 DF 06 E4 */	stw r30, 0x6e4(r31)
 /* 801C58B4 001C2494  48 00 00 14 */	b lbl_801C58C8
 lbl_801C58B8:
@@ -4669,22 +4668,22 @@ lbl_801C58C8:
 
 #else
 
-static void func_801C5878(void)
+static void Ground_801C5878(void)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-s32 func_801C58E0(s32 arg0, s32 arg1)
+s32 Ground_801C58E0(s32 arg0, s32 arg1)
 {
     s32 tmp = arg0;
     s32 result;
     Vec3 sp10;
 
-    func_801C2D24(arg1, &sp10);
-    result = func_802F2094(0, &sp10, tmp, 0);
-    func_80304A58(tmp);
+    Ground_801C2D24(arg1, &sp10);
+    result = it_802F2094(0, &sp10, tmp, 0);
+    un_80304A58(tmp);
     return result;
 }
 
@@ -4696,7 +4695,7 @@ static inline s32 randi(s32 max)
     return 0;
 }
 
-int func_801C5940(void)
+int Ground_801C5940(void)
 {
     struct {
         u8 x0_pad[0x4];
@@ -4718,7 +4717,7 @@ int func_801C5940(void)
 
     int vals[vals_count];
 
-    archive = func_801C6324();
+    archive = grDatFiles_801C6324();
     out_idx = 0;
 
     if (archive->unk4->unk4 == 0)
@@ -4743,39 +4742,39 @@ int func_801C5940(void)
     return vals[randi(out_idx)];
 }
 
-void func_801C5A28(void)
+void Ground_801C5A28(void)
 {
-    func_803124BC();
-    func_8031234C(0);
-    func_80305918(0, 0, 1);
+    un_803124BC();
+    un_8031234C(0);
+    un_80305918(0, 0, 1);
 }
 
-void func_801C5A60(void)
+void Ground_801C5A60(void)
 {
-    func_8031234C(1);
+    un_8031234C(1);
 }
 
-void func_801C5A84(s32 arg0)
+void Ground_801C5A84(s32 arg0)
 {
     stage_info.x98 = arg0;
 }
 
-s32 func_801C5A94(void)
+s32 Ground_801C5A94(void)
 {
     return stage_info.x98;
 }
 
-void func_801C5AA4(bool arg0)
+void Ground_801C5AA4(bool arg0)
 {
     stage_info.unk8C.b1 = arg0;
 }
 
-bool func_801C5ABC(void)
+bool Ground_801C5ABC(void)
 {
     return stage_info.unk8C.b1;
 }
 
-u32 func_801C5AD0(s32 i)
+u32 Ground_801C5AD0(s32 i)
 {
     return lbl_803DFEDC[i]->flags2;
 }
@@ -4790,9 +4789,9 @@ static inline f32 fabsf(f32 x)
     }
 }
 
-void func_801C5AEC(Vec3* v, Vec3* arg1, Vec3* arg2, Vec3* arg3)
+void Ground_801C5AEC(Vec3* v, Vec3* arg1, Vec3* arg2, Vec3* arg3)
 {
-    lbvector_EulerAnglesFromONB(v, arg1, arg2, arg3);
+    lbVector_EulerAnglesFromONB(v, arg1, arg2, arg3);
 
     if (!(fabsf(v->x) < 30000))
         v->x = 0;

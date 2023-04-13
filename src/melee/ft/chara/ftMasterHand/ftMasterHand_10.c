@@ -8,35 +8,35 @@
 
 // 80152138 14ED18
 // https://decomp.me/scratch/NAMEj
-void lbl_80152138(HSD_GObj* arg0)
+void ftMasterHand_80152138(HSD_GObj* arg0)
 {
     if (!ftAnim_IsFramesRemaining(arg0)) {
-        func_80151018(arg0);
+        ftMasterHand_80151018(arg0);
     }
 }
 
 // 80152174 14ED54
 // https://decomp.me/scratch/6NWxd
-void lbl_80152174(HSD_GObj* gobj)
+void ftMasterHand_80152174(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
 }
 
 // 801521B8 14ED98
 // https://decomp.me/scratch/yyAcs
-void lbl_801521B8(HSD_GObj* gobj)
+void ftMasterHand_801521B8(HSD_GObj* gobj)
 {
-    func_80085134(gobj);
+    ft_80085134(gobj);
 }
 
-void lbl_801521D8(HSD_GObj* arg0) {}
+void ftMasterHand_801521D8(HSD_GObj* arg0) {}
 
 // 801521DC 14EDBC
 // https://decomp.me/scratch/0Dq4d
-void lbl_801521DC(HSD_GObj* arg0)
+void ftMasterHand_801521DC(HSD_GObj* arg0)
 {
     Fighter* temp_r31 = GET_FIGHTER(arg0);
 
@@ -45,33 +45,33 @@ void lbl_801521DC(HSD_GObj* arg0)
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(arg0, 0x162, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(arg0);
+    Fighter_ChangeMotionState(arg0, 0x162, 0, 0, 0.0f, 1.0f, 0.0f);
+    ftAnim_8006EBA4(arg0);
     temp_r31->sv.mh.unk0.x0 = 107.0f;
 }
 
 // 8015223C 14EE1C
 // https://decomp.me/scratch/sZYJl
-void lbl_8015223C(HSD_GObj* arg0)
+void ftMasterHand_8015223C(HSD_GObj* arg0)
 {
     if (!ftAnim_IsFramesRemaining(arg0)) {
-        func_80151018(arg0);
+        ftMasterHand_80151018(arg0);
     }
 }
 
 // 80152278 14EE58
 // https://decomp.me/scratch/KNhTn
-void lbl_80152278(HSD_GObj* gobj)
+void ftMasterHand_80152278(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(gobj);
+        ftBossLib_8015BD20(gobj);
     }
 }
 
 // 801522BC 14EE9C
 // https://decomp.me/scratch/hAUig
-void lbl_801522BC(HSD_GObj* gobj)
+void ftMasterHand_801522BC(HSD_GObj* gobj)
 {
     Fighter* r31_fp;
     ftData* r4_ftData;
@@ -80,14 +80,14 @@ void lbl_801522BC(HSD_GObj* gobj)
     r31_fp = gobj->user_data;
     r4_ftData = r31_fp->x10C_ftData;
     r30_attributes = r4_ftData->ext_attr;
-    func_80085134(gobj);
+    ft_80085134(gobj);
 
     if ((--r31_fp->sv.mh.unk0.x0 > r30_attributes->x84) ||
         (r31_fp->sv.mh.unk0.x0 < 0.0f))
     {
         r31_fp->x80_self_vel.x = 0.0f;
     } else {
-        func_8015C010(gobj, r30_attributes->x80);
+        ftBossLib_8015C010(gobj, r30_attributes->x80);
     }
-    func_8015C190(gobj);
+    ftBossLib_8015C190(gobj);
 }

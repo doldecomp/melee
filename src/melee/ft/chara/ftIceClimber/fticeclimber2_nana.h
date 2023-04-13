@@ -5,7 +5,7 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
 
-extern ActionState as_table_nana[];
+extern ActionState ftNana_MotionStateTable[];
 extern char lbl_803CDB78[];
 extern char lbl_803CDB84[];
 extern Fighter_CostumeStrings lbl_803CDD2C[];

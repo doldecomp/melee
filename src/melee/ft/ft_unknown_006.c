@@ -6,33 +6,33 @@
 
 #define TEST(expr) (expr) ? true : false
 
-/* static */ s32 func_800C06B4(Fighter*);
+/* static */ s32 ft_800C06B4(Fighter*);
 
-s32 func_800877F8(HSD_GObj* fighter_gobj, s32 arg1)
+s32 ft_800877F8(HSD_GObj* fighter_gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->input.x65C_heldInputs & arg1);
 }
 
-s32 func_80087818(HSD_GObj* fighter_gobj, s32 arg1)
+s32 ft_80087818(HSD_GObj* fighter_gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->input.x668 & arg1);
 }
 
-s32 func_80087838(HSD_GObj* fighter_gobj)
+s32 ft_80087838(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->x221D_flag.bits.b7 & 1);
 }
 
-s32 func_80087858(HSD_GObj* fighter_gobj)
+s32 ft_80087858(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     return TEST(fp->x2227_flag.bits.b1 & 1);
 }
 
-s32 func_80087878(HSD_GObj* fighter_gobj, s32 arg1)
+s32 ft_80087878(HSD_GObj* fighter_gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
@@ -43,18 +43,17 @@ s32 func_80087878(HSD_GObj* fighter_gobj, s32 arg1)
     return false;
 }
 
-s32 func_800878BC(HSD_GObj* fighter_gobj)
+s32 ft_800878BC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if ((fp->x1974_heldItem != NULL) &&
-        (func_8026B2B4(fp->x1974_heldItem) == 1))
+    if ((fp->x1974_heldItem != NULL) && (it_8026B2B4(fp->x1974_heldItem) == 1))
         return true;
 
     return false;
 }
 
-s32 func_80087900(HSD_GObj* fighter_gobj)
+s32 ft_80087900(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
@@ -64,7 +63,7 @@ s32 func_80087900(HSD_GObj* fighter_gobj)
     return false;
 }
 
-s32 func_80087944(HSD_GObj* fighter_gobj)
+s32 ft_80087944(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
@@ -74,7 +73,7 @@ s32 func_80087944(HSD_GObj* fighter_gobj)
     return false;
 }
 
-s32 func_80087988(HSD_GObj* fighter_gobj)
+s32 ft_80087988(HSD_GObj* fighter_gobj)
 {
     if ((ftGetParasolStatus(fighter_gobj) == 4) ||
         (ftGetParasolStatus(fighter_gobj) == 5))
@@ -83,7 +82,7 @@ s32 func_80087988(HSD_GObj* fighter_gobj)
     return false;
 }
 
-s32 func_800879D8(HSD_GObj* fighter_gobj)
+s32 ft_800879D8(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
@@ -93,7 +92,7 @@ s32 func_800879D8(HSD_GObj* fighter_gobj)
     return false;
 }
 
-s32 func_800879F8(HSD_GObj* fighter_gobj)
+s32 ft_800879F8(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
@@ -103,50 +102,50 @@ s32 func_800879F8(HSD_GObj* fighter_gobj)
     return false;
 }
 
-s32 func_80087A18(HSD_GObj* fighter_gobj)
+s32 ft_80087A18(HSD_GObj* fighter_gobj)
 {
     s32 var1;
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->x2226_flag.bits.b4) &&
-        ((var1 = func_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) &&
+        ((var1 = ft_800C06B4(fp), ((var1 == 0x7B) != 0)) || (var1 == 0x80)) &&
         ((fp->x2226_flag.bits.b5)))
         return true;
 
     return false;
 }
 
-u8 func_80087A80(HSD_GObj* fighter_gobj)
+u8 ft_80087A80(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x2114_SmashAttr.x2134_vibrateFrame;
 }
 
-f32 func_80087A8C(HSD_GObj* fighter_gobj)
+f32 ft_80087A8C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x2114_SmashAttr.x2138_smashSinceHitbox;
 }
 
-s32 func_80087A98(HSD_GObj* fighter_gobj)
+s32 ft_80087A98(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x213C;
 }
 
-u8 func_80087AA4(HSD_GObj* fighter_gobj)
+u8 ft_80087AA4(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x2227_flag.bits.b5;
 }
 
-u8 func_80087AB4(HSD_GObj* fighter_gobj)
+u8 ft_80087AB4(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x1968_jumpsUsed;
 }
 
-void func_80087AC0(HSD_GObj* fighter_gobj, s32 arg1)
+void ft_80087AC0(HSD_GObj* fighter_gobj, s32 arg1)
 {
     s32 var0;
     u8 var1;
@@ -163,7 +162,7 @@ void func_80087AC0(HSD_GObj* fighter_gobj, s32 arg1)
     fp->x221E_flag.bits.b0 = var2;
 }
 
-s32 func_80087AEC(HSD_GObj* fighter_gobj)
+s32 ft_80087AEC(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
@@ -175,7 +174,7 @@ s32 func_80087AEC(HSD_GObj* fighter_gobj)
     return false;
 }
 
-s32 func_80087B34(HSD_GObj* fighter_gobj)
+s32 ft_80087B34(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 atk_shield_kb_x = fp->x98_atk_shield_kb.x;
@@ -203,27 +202,27 @@ s32 func_80087B34(HSD_GObj* fighter_gobj)
     return 2;
 }
 
-void func_80087BAC(HSD_GObj* fighter_gobj, s32 arg1)
+void ft_80087BAC(HSD_GObj* fighter_gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x2228_flag.bits.b5 = arg1;
 }
 
-void func_80087BC0(HSD_GObj* fighter_gobj, s8 arg1)
+void ft_80087BC0(HSD_GObj* fighter_gobj, s8 arg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     u64 var0 = fp->x1A98;
-    func_800A101C(fp, arg1, var0, fp->x1A9C);
+    ft_800A101C(fp, arg1, var0, fp->x1A9C);
 }
 
-void func_80087BEC(HSD_GObj* fighter_gobj, u8 arg1)
+void ft_80087BEC(HSD_GObj* fighter_gobj, u8 arg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     u64 var0 = fp->x1A94;
-    func_800A101C(fp, var0, arg1, fp->x1A9C);
+    ft_800A101C(fp, var0, arg1, fp->x1A9C);
 }
 
-s32 func_80087C1C(void)
+s32 ft_80087C1C(void)
 {
     HSD_GObj* fighter_gobj;
     s32 ftKind;
@@ -240,19 +239,19 @@ s32 func_80087C1C(void)
     return result;
 }
 
-s32 func_80087C58(HSD_GObj* fighter_gobj)
+s32 ft_80087C58(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     return fp->x1988;
 }
 
-void func_80087C64(HSD_GObj* fighter_gobj, s32 arg1)
+void ft_80087C64(HSD_GObj* fighter_gobj, s32 arg1)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x1988 = arg1;
 }
 
-s32 func_80087C70(Fighter* fp, s32 arg1)
+s32 ft_80087C70(Fighter* fp, s32 arg1)
 {
     u8 temp_r3;
     u8 temp_r3_2;
@@ -295,7 +294,7 @@ s32 func_80087C70(Fighter* fp, s32 arg1)
 #ifdef MUST_MATCH
 
 #pragma push
-asm s32 func_80087D0C(Fighter* fighter, s32 arg1)
+asm s32 ft_80087D0C(Fighter* fighter, s32 arg1)
 { // clang-format off
     nofralloc
 /* 80087D0C 000848EC  7C 08 02 A6 */	mflr r0
@@ -306,9 +305,9 @@ asm s32 func_80087D0C(Fighter* fighter, s32 arg1)
 /* 80087D20 00084900  93 A1 00 24 */	stw r29, 0x24(r1)
 /* 80087D24 00084904  3B A3 00 00 */	addi r29, r3, 0
 /* 80087D28 00084908  38 64 00 00 */	addi r3, r4, 0
-/* 80087D2C 0008490C  4B F9 B6 C1 */	bl func_800233EC
+/* 80087D2C 0008490C  4B F9 B6 C1 */	bl lbAudioAx_800233EC
 /* 80087D30 00084910  7C 7F 1B 78 */	mr r31, r3
-/* 80087D34 00084914  4B F9 B3 FD */	bl func_80023130
+/* 80087D34 00084914  4B F9 B3 FD */	bl lbAudioAx_80023130
 /* 80087D38 00084918  3B C3 00 00 */	addi r30, r3, 0
 /* 80087D3C 0008491C  2C 1E 00 0D */	cmpwi r30, 0xd
 /* 80087D40 00084920  41 82 02 44 */	beq lbl_80087F84
@@ -461,7 +460,7 @@ lbl_80087F34:
 lbl_80087F48:
 /* 80087F48 00084B28  38 7D 00 00 */	addi r3, r29, 0
 /* 80087F4C 00084B2C  38 9F 00 00 */	addi r4, r31, 0
-/* 80087F50 00084B30  4B FF FD 21 */	bl func_80087C70
+/* 80087F50 00084B30  4B FF FD 21 */	bl ft_80087C70
 /* 80087F54 00084B34  88 1D 22 23 */	lbz r0, 0x2223(r29)
 /* 80087F58 00084B38  38 83 00 00 */	addi r4, r3, 0
 /* 80087F5C 00084B3C  54 00 07 FF */	clrlwi. r0, r0, 0x1f
@@ -473,7 +472,7 @@ lbl_80087F68:
 lbl_80087F70:
 /* 80087F70 00084B50  38 7D 00 00 */	addi r3, r29, 0
 /* 80087F74 00084B54  38 9F 00 00 */	addi r4, r31, 0
-/* 80087F78 00084B58  4B FF FC F9 */	bl func_80087C70
+/* 80087F78 00084B58  4B FF FC F9 */	bl ft_80087C70
 /* 80087F7C 00084B5C  7C 7F 1B 78 */	mr r31, r3
 /* 80087F80 00084B60  48 00 00 BC */	b lbl_8008803C
 lbl_80087F84:
@@ -492,7 +491,7 @@ lbl_80087F9C:
 /* 80087FB0 00084B90  7C 1F 00 00 */	cmpw r31, r0
 /* 80087FB4 00084B94  41 81 00 18 */	bgt lbl_80087FCC
 /* 80087FB8 00084B98  7F A3 EB 78 */	mr r3, r29
-/* 80087FBC 00084B9C  4B FF 81 89 */	bl func_80080144
+/* 80087FBC 00084B9C  4B FF 81 89 */	bl ftCommon_80080144
 /* 80087FC0 00084BA0  2C 03 00 01 */	cmpwi r3, 1
 /* 80087FC4 00084BA4  40 82 00 08 */	bne lbl_80087FCC
 /* 80087FC8 00084BA8  3B FF 00 66 */	addi r31, r31, 0x66
@@ -505,7 +504,7 @@ lbl_80087FCC:
 /* 80087FE0 00084BC0  7C 1F 00 00 */	cmpw r31, r0
 /* 80087FE4 00084BC4  41 81 00 18 */	bgt lbl_80087FFC
 /* 80087FE8 00084BC8  7F A3 EB 78 */	mr r3, r29
-/* 80087FEC 00084BCC  4B FF 81 59 */	bl func_80080144
+/* 80087FEC 00084BCC  4B FF 81 59 */	bl ftCommon_80080144
 /* 80087FF0 00084BD0  2C 03 00 01 */	cmpwi r3, 1
 /* 80087FF4 00084BD4  41 82 00 08 */	beq lbl_80087FFC
 /* 80087FF8 00084BD8  3B FF FF 9A */	addi r31, r31, -102
@@ -513,18 +512,18 @@ lbl_80087FFC:
 /* 80087FFC 00084BDC  38 7E 00 00 */	addi r3, r30, 0
 /* 80088000 00084BE0  38 81 00 18 */	addi r4, r1, 0x18
 /* 80088004 00084BE4  38 A1 00 14 */	addi r5, r1, 0x14
-/* 80088008 00084BE8  4B F9 B0 C1 */	bl func_800230C8
+/* 80088008 00084BE8  4B F9 B0 C1 */	bl lbAudioAx_800230C8
 /* 8008800C 00084BEC  2C 03 00 00 */	cmpwi r3, 0
 /* 80088010 00084BF0  40 82 00 2C */	bne lbl_8008803C
 /* 80088014 00084BF4  7F C3 F3 78 */	mr r3, r30
-/* 80088018 00084BF8  4B F9 B2 09 */	bl func_80023220
+/* 80088018 00084BF8  4B F9 B2 09 */	bl lbAudioAx_80023220
 /* 8008801C 00084BFC  80 01 00 18 */	lwz r0, 0x18(r1)
 /* 80088020 00084C00  7C 00 1A 14 */	add r0, r0, r3
 /* 80088024 00084C04  7C 1F 00 00 */	cmpw r31, r0
 /* 80088028 00084C08  41 80 00 14 */	blt lbl_8008803C
 /* 8008802C 00084C0C  38 7D 00 00 */	addi r3, r29, 0
 /* 80088030 00084C10  38 9F 00 00 */	addi r4, r31, 0
-/* 80088034 00084C14  4B FF FC 3D */	bl func_80087C70
+/* 80088034 00084C14  4B FF FC 3D */	bl ft_80087C70
 /* 80088038 00084C18  7C 7F 1B 78 */	mr r31, r3
 lbl_8008803C:
 /* 8008803C 00084C1C  7F E3 FB 78 */	mr r3, r31
@@ -540,10 +539,10 @@ lbl_8008803C:
 
 #else
 
-s32 func_80087D0C(Fighter* fighter, s32 arg1)
+s32 ft_80087D0C(Fighter* fighter, s32 arg1)
 {
-    enum_t sfx = func_800233EC(arg1);
-    enum_t ssm_id = func_80023130();
+    enum_t sfx = lbAudioAx_800233EC(arg1);
+    enum_t ssm_id = lbAudioAx_80023130();
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -578,7 +577,7 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         case 0x185:
         case 0x17F:
         case 0x173:
-            sfx = func_80087C70(
+            sfx = ft_80087C70(
                 fighter,
                 sfx); // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
             if (fighter->x2223_flag.bits.b7) {
@@ -599,7 +598,7 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         case 0x14F:
         case 0x14C:
             // Player_AdjustSFXIDForSizeModifier(r3=fighter,r4=sfx)
-            sfx = func_80087C70(fighter, sfx);
+            sfx = ft_80087C70(fighter, sfx);
             break;
         }
         break;
@@ -609,13 +608,13 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
         /// @todo What a weird comparison, is it part of a macro?
         if (ftKind < FTKIND_PIKACHU && ftKind <= FTKIND_POPO) {
             if (0x1FBFD < sfx && sfx < 0x1FC62 &&
-                func_80080144(fighter) == true)
+                ftCommon_80080144(fighter) == true)
             {
                 sfx += 0x66;
             }
 
             if (0x1FC63 < sfx && sfx < 0x1FCC8 &&
-                func_80080144(fighter) != true)
+                ftCommon_80080144(fighter) != true)
             {
                 sfx -= 0x66;
             }
@@ -649,10 +648,10 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
     case 33: {
         int sfx_offset;
         int unused_output;
-        if (func_800230C8(ssm_id, &sfx_offset, &unused_output) == 0 &&
-            sfx >= sfx_offset + func_80023220(ssm_id))
+        if (lbAudioAx_800230C8(ssm_id, &sfx_offset, &unused_output) == 0 &&
+            sfx >= sfx_offset + lbAudioAx_80023220(ssm_id))
         {
-            sfx = func_80087C70(fighter, sfx);
+            sfx = ft_80087C70(fighter, sfx);
         }
         break;
     }
@@ -665,40 +664,40 @@ s32 func_80087D0C(Fighter* fighter, s32 arg1)
 
 #endif
 
-void func_8008805C(Fighter* arg0, s32 arg1)
+void ft_8008805C(Fighter* arg0, s32 arg1)
 {
-    func_80087D0C(arg0, arg1);
-    func_80024DC4();
+    ft_80087D0C(arg0, arg1);
+    lbAudioAx_80024DC4();
 }
 
-void func_80088080(Fighter* fp)
+void ft_80088080(Fighter* fp)
 {
     fp->x2164 += 1;
-    func_80024FDC();
+    lbAudioAx_80024FDC();
 }
 
-void func_800880AC(Fighter* fp)
+void ft_800880AC(Fighter* fp)
 {
     fp->x2168 += 1;
-    func_80024FF4();
+    lbAudioAx_80024FF4();
 }
 
-void func_800880D8(Fighter* fp)
+void ft_800880D8(Fighter* fp)
 {
-    func_8002500C(fp->x2164);
+    lbAudioAx_8002500C(fp->x2164);
     fp->x2164 = 0;
 }
 
-void func_80088110(Fighter* fp)
+void ft_80088110(Fighter* fp)
 {
-    func_80025038(fp->x2168);
+    lbAudioAx_80025038(fp->x2168);
     fp->x2168 = 0;
 }
 
-void func_80088148(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
+void ft_80088148(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
 {
-    sfx_id = func_80087D0C(fp, sfx_id);
-    fp->x2160 = func_800237A8(sfx_id, sfx_vol, sfx_pan);
+    sfx_id = ft_80087D0C(fp, sfx_id);
+    fp->x2160 = lbAudioAx_800237A8(sfx_id, sfx_vol, sfx_pan);
 
     {
         int rand;
@@ -707,6 +706,6 @@ void func_80088148(Fighter* fp, enum_t sfx_id, int sfx_vol, int sfx_pan)
         else
             rand = 0;
 
-        func_80024B94(fp->x2160, rand);
+        lbAudioAx_80024B94(fp->x2160, rand);
     }
 }

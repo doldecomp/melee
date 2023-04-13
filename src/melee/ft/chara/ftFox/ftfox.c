@@ -6,104 +6,104 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 
-ActionState as_table_fox[] = {
+ActionState ftFox_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftFox_SpecialNStart_Anim,
       ftFox_SpecialNStart_IASA, ftFox_SpecialNStart_Phys,
-      ftFox_SpecialNStart_Coll, func_800761C8 },
+      ftFox_SpecialNStart_Coll, ftCamera_UpdateCameraBox },
     { 296, 0x003C0111, 0x12000000, ftFox_SpecialNLoop_Anim,
       ftFox_SpecialNLoop_IASA, ftFox_SpecialNLoop_Phys, ftFox_SpecialNLoop_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 297, 0x00340111, 0x12000000, ftFox_SpecialNEnd_Anim,
       ftFox_SpecialNEnd_IASA, ftFox_SpecialNEnd_Phys, ftFox_SpecialNEnd_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 298, 0x00340511, 0x12000000, ftFox_SpecialAirNStart_Anim,
       ftFox_SpecialAirNStart_IASA, ftFox_SpecialAirNStart_Phys,
-      ftFox_SpecialAirNStart_Coll, func_800761C8 },
+      ftFox_SpecialAirNStart_Coll, ftCamera_UpdateCameraBox },
     { 299, 0x003C0511, 0x12000000, ftFox_SpecialAirNLoop_Anim,
       ftFox_SpecialAirNLoop_IASA, ftFox_SpecialAirNLoop_Phys,
-      ftFox_SpecialAirNLoop_Coll, func_800761C8 },
+      ftFox_SpecialAirNLoop_Coll, ftCamera_UpdateCameraBox },
     { 300, 0x00340511, 0x12000000, ftFox_SpecialAirNEnd_Anim,
       ftFox_SpecialAirNEnd_IASA, ftFox_SpecialAirNEnd_Phys,
-      ftFox_SpecialAirNEnd_Coll, func_800761C8 },
+      ftFox_SpecialAirNEnd_Coll, ftCamera_UpdateCameraBox },
     { 301, 0x00340212, 0x13000000, ftFox_SpecialSStart_Anim,
       ftFox_SpecialSStart_IASA, ftFox_SpecialSStart_Phys,
-      ftFox_SpecialSStart_Coll, func_800761C8 },
+      ftFox_SpecialSStart_Coll, ftCamera_UpdateCameraBox },
     { 302, 0x00340212, 0x13000000, ftFox_SpecialS_Anim, ftFox_SpecialS_IASA,
-      ftFox_SpecialS_Phys, ftFox_SpecialS_Coll, func_800761C8 },
+      ftFox_SpecialS_Phys, ftFox_SpecialS_Coll, ftCamera_UpdateCameraBox },
     { 303, 0x00340212, 0x13000000, ftFox_SpecialSEnd_Anim,
       ftFox_SpecialSEnd_IASA, ftFox_SpecialSEnd_Phys, ftFox_SpecialSEnd_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 304, 0x00340612, 0x13000000, ftFox_SpecialAirSStart_Anim,
       ftFox_SpecialAirSStart_IASA, ftFox_SpecialAirSStart_Phys,
-      ftFox_SpecialAirSStart_Coll, func_800761C8 },
+      ftFox_SpecialAirSStart_Coll, ftCamera_UpdateCameraBox },
     { 305, 0x00340612, 0x13000000, ftFox_SpecialAirS_Anim,
       ftFox_SpecialAirS_IASA, ftFox_SpecialAirS_Phys, ftFox_SpecialAirS_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 306, 0x00340612, 0x13000000, ftFox_SpecialAirSEnd_Anim,
       ftFox_SpecialAirSEnd_IASA, ftFox_SpecialAirSEnd_Phys,
-      ftFox_SpecialAirSEnd_Coll, func_800761C8 },
+      ftFox_SpecialAirSEnd_Coll, ftCamera_UpdateCameraBox },
     { 307, 0x00340213, 0x14000000, ftFox_SpecialHiHold_Anim,
       ftFox_SpecialHiHold_IASA, ftFox_SpecialHiHold_Phys,
-      ftFox_SpecialHiHold_Coll, func_800761C8 },
+      ftFox_SpecialHiHold_Coll, ftCamera_UpdateCameraBox },
     { 308, 0x00340613, 0x14000000, ftFox_SpecialHiHoldAir_Anim,
       ftFox_SpecialHiHoldAir_IASA, ftFox_SpecialHiHoldAir_Phys,
-      ftFox_SpecialHiHoldAir_Coll, func_800761C8 },
+      ftFox_SpecialHiHoldAir_Coll, ftCamera_UpdateCameraBox },
     { 309, 0x00340213, 0x14000000, ftFox_SpecialHi_Anim, ftFox_SpecialHi_IASA,
-      ftFox_SpecialHi_Phys, ftFox_SpecialHi_Coll, func_800761C8 },
+      ftFox_SpecialHi_Phys, ftFox_SpecialHi_Coll, ftCamera_UpdateCameraBox },
     { 309, 0x00340613, 0x14000000, ftFox_SpecialAirHi_Anim,
       ftFox_SpecialAirHi_IASA, ftFox_SpecialAirHi_Phys, ftFox_SpecialAirHi_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 310, 0x00340213, 0x14000000, ftFox_SpecialHiLanding_Anim,
       ftFox_SpecialHiLanding_IASA, ftFox_SpecialHiLanding_Phys,
-      ftFox_SpecialHiLanding_Coll, func_800761C8 },
+      ftFox_SpecialHiLanding_Coll, ftCamera_UpdateCameraBox },
     { 311, 0x00340613, 0x14000000, ftFox_SpecialHiFall_Anim,
       ftFox_SpecialHiFall_IASA, ftFox_SpecialHiFall_Phys,
-      ftFox_SpecialHiFall_Coll, func_800761C8 },
+      ftFox_SpecialHiFall_Coll, ftCamera_UpdateCameraBox },
     { 312, 0x00340613, 0x14000000, ftFox_SpecialHiBound_Anim,
       ftFox_SpecialHiBound_IASA, ftFox_SpecialHiBound_Phys,
-      ftFox_SpecialHiBound_Coll, func_800761C8 },
+      ftFox_SpecialHiBound_Coll, ftCamera_UpdateCameraBox },
     { 313, 0x00341014, 0x15000000, ftFox_SpecialLwStart_Anim,
       ftFox_SpecialLwStart_IASA, ftFox_SpecialLwStart_Phys,
-      ftFox_SpecialLwStart_Coll, func_800761C8 },
+      ftFox_SpecialLwStart_Coll, ftCamera_UpdateCameraBox },
     { 314, 0x003C1014, 0x15000000, ftFox_SpecialLwLoop_Anim,
       ftFox_SpecialLwLoop_IASA, ftFox_SpecialLwLoop_Phys,
-      ftFox_SpecialLwLoop_Coll, func_800761C8 },
+      ftFox_SpecialLwLoop_Coll, ftCamera_UpdateCameraBox },
     { 315, 0x00341014, 0x15000000, ftFox_SpecialLwHit_Anim,
       ftFox_SpecialLwHit_IASA, ftFox_SpecialLwHit_Phys, ftFox_SpecialLwHit_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 316, 0x00341014, 0x15000000, ftFox_SpecialLwEnd_Anim,
       ftFox_SpecialLwEnd_IASA, ftFox_SpecialLwEnd_Phys, ftFox_SpecialLwEnd_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 314, 0x00341014, 0x15000000, ftFox_SpecialLwTurn_Anim,
       ftFox_SpecialLwTurn_IASA, ftFox_SpecialLwTurn_Phys,
-      ftFox_SpecialLwTurn_Coll, func_800761C8 },
+      ftFox_SpecialLwTurn_Coll, ftCamera_UpdateCameraBox },
     { 317, 0x00341414, 0x15000000, ftFox_SpecialAirLwStart_Anim,
       ftFox_SpecialAirLwStart_IASA, ftFox_SpecialAirLwStart_Phys,
-      ftFox_SpecialAirLwStart_Coll, func_800761C8 },
+      ftFox_SpecialAirLwStart_Coll, ftCamera_UpdateCameraBox },
     { 318, 0x003C1414, 0x15000000, ftFox_SpecialAirLwLoop_Anim,
       ftFox_SpecialAirLwLoop_IASA, ftFox_SpecialAirLwLoop_Phys,
-      ftFox_SpecialAirLwLoop_Coll, func_800761C8 },
+      ftFox_SpecialAirLwLoop_Coll, ftCamera_UpdateCameraBox },
     { 319, 0x00341414, 0x15000000, ftFox_SpecialAirLwHit_Anim,
       ftFox_SpecialAirLwHit_IASA, ftFox_SpecialAirLwHit_Phys,
-      ftFox_SpecialAirLwHit_Coll, func_800761C8 },
+      ftFox_SpecialAirLwHit_Coll, ftCamera_UpdateCameraBox },
     { 320, 0x00341414, 0x15000000, ftFox_SpecialAirLwEnd_Anim,
       ftFox_SpecialAirLwEnd_IASA, ftFox_SpecialAirLwEnd_Phys,
-      ftFox_SpecialAirLwEnd_Coll, func_800761C8 },
+      ftFox_SpecialAirLwEnd_Coll, ftCamera_UpdateCameraBox },
     { 318, 0x00341414, 0x15000000, ftFox_SpecialAirLwTurn_Anim,
       ftFox_SpecialAirLwTurn_IASA, ftFox_SpecialAirLwTurn_Phys,
-      ftFox_SpecialAirLwTurn_Coll, func_800761C8 },
+      ftFox_SpecialAirLwTurn_Coll, ftCamera_UpdateCameraBox },
     { 321, 0x00000072, 0x01000000, ftFox_AppealS_Anim, ftFox_AppealS_IASA,
-      ftFox_AppealS_Phys, ftFox_AppealS_Coll, func_800761C8 },
+      ftFox_AppealS_Phys, ftFox_AppealS_Coll, ftCamera_UpdateCameraBox },
     { 322, 0x00000072, 0x01000000, ftFox_AppealS_Anim, ftFox_AppealS_IASA,
-      ftFox_AppealS_Phys, ftFox_AppealS_Coll, func_800761C8 },
+      ftFox_AppealS_Phys, ftFox_AppealS_Coll, ftCamera_UpdateCameraBox },
     { 323, 0x00000072, 0x01000000, ftFox_AppealS_Anim, ftFox_AppealS_IASA,
-      ftFox_AppealS_Phys, ftFox_AppealS_Coll, func_800761C8 },
+      ftFox_AppealS_Phys, ftFox_AppealS_Coll, ftCamera_UpdateCameraBox },
     { 324, 0x00000072, 0x01000000, ftFox_AppealS_Anim, ftFox_AppealS_IASA,
-      ftFox_AppealS_Phys, ftFox_AppealS_Coll, func_800761C8 },
+      ftFox_AppealS_Phys, ftFox_AppealS_Coll, ftCamera_UpdateCameraBox },
     { 325, 0x00000072, 0x01000000, ftFox_AppealS_Anim, ftFox_AppealS_IASA,
-      ftFox_AppealS_Phys, ftFox_AppealS_Coll, func_800761C8 },
+      ftFox_AppealS_Phys, ftFox_AppealS_Coll, ftCamera_UpdateCameraBox },
     { 326, 0x00000072, 0x01000000, ftFox_AppealS_Anim, ftFox_AppealS_IASA,
-      ftFox_AppealS_Phys, ftFox_AppealS_Coll, func_800761C8 },
+      ftFox_AppealS_Phys, ftFox_AppealS_Coll, ftCamera_UpdateCameraBox },
 };
 
 char lbl_803C7BE8[] = "PlFx.dat";
@@ -136,7 +136,7 @@ Fighter_CostumeStrings lbl_803C7D9C[] = {
     { lbl_803C7CCC, lbl_803C7CD8, lbl_803C7CF0 },
 };
 
-bool func_800E5534(HSD_GObj* gobj)
+bool ftFox_800E5534(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
 
@@ -148,10 +148,10 @@ void ftFox_OnDeath(HSD_GObj* gobj)
     Fighter* fp = (Fighter*) gobj->user_data;
 
     fp->ev.fx.x222C_blasterGObj = 0;
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
 }
 
-void func_800E5588(HSD_GObj* gobj)
+void ftFox_800E5588(HSD_GObj* gobj)
 {
     ftFox_RemoveBlaster(gobj);
 }
@@ -192,9 +192,9 @@ void ftFox_OnLoad(HSD_GObj* gobj)
 
     {
         ftFoxAttributes* fox_attr = fp->x2D4_specialAttributes;
-        func_8026B3F8(item_list[0], fox_attr->x1C_FOX_BLASTER_SHOT_ITKIND);
-        func_8026B3F8(item_list[1], fox_attr->x20_FOX_BLASTER_GUN_ITKIND);
-        func_8026B3F8(item_list[2], It_Kind_Fox_Illusion);
+        it_8026B3F8(item_list[0], fox_attr->x1C_FOX_BLASTER_SHOT_ITKIND);
+        it_8026B3F8(item_list[1], fox_attr->x20_FOX_BLASTER_GUN_ITKIND);
+        it_8026B3F8(item_list[2], It_Kind_Fox_Illusion);
     }
 }
 

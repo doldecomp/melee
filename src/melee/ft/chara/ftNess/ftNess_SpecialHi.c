@@ -198,13 +198,13 @@ bool ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* fighter_gobj)
     case 0:
         pos = fp->xB0_pos;
         pos.y += 5.0f * fp->x34_scale.y;
-        func_802AB3F0(fp->ev.ns.x2244_pkThunderGObj, &pair, 0);
+        it_802AB3F0(fp->ev.ns.x2244_pkThunderGObj, &pair, 0);
         if (check_distance(&pos, &pair) == true) {
             fp->sv.ns.specialhi.thunderColl = 2;
-            func_802AB3F0(fp->ev.ns.x2244_pkThunderGObj,
-                          &fp->sv.ns.specialhi.collPos1, 0);
-            func_802AB3F0(fp->ev.ns.x2244_pkThunderGObj,
-                          &fp->sv.ns.specialhi.collPos2, 1);
+            it_802AB3F0(fp->ev.ns.x2244_pkThunderGObj,
+                        &fp->sv.ns.specialhi.collPos1, 0);
+            it_802AB3F0(fp->ev.ns.x2244_pkThunderGObj,
+                        &fp->sv.ns.specialhi.collPos2, 1);
             ret = true;
         }
         break;
@@ -212,7 +212,7 @@ bool ftNess_ItemPKThunder_CheckNessCollide(HSD_GObj* fighter_gobj)
     case 1:
         pos2 = fp->xB0_pos;
         pos2.y += 5.0f * fp->x34_scale.y;
-        func_802AB3F0(fp->ev.ns.x2244_pkThunderGObj, &pair2, 0);
+        it_802AB3F0(fp->ev.ns.x2244_pkThunderGObj, &pair2, 0);
         if (!check_distance(&pos2, &pair2)) {
             fp->sv.ns.specialhi.thunderColl = 0;
         }
@@ -262,7 +262,7 @@ void ftNess_ItemPKThunderRemove(HSD_GObj* fighter_gobj) // OnTakeDamage?
     default:
         temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
         temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
-        func_8007592C(temp_fp, 0, 0.0f);
+        ftParts_8007592C(temp_fp, 0, 0.0f);
     }
 }
 
@@ -278,7 +278,7 @@ void ftNess_SpecialHiTakeDamage(HSD_GObj* fighter_gobj) // OnTakeDamage again?
     temp_fp = fighter_gobj->user_data;
     fp = temp_fp;
     if (temp_fp->ev.ns.x2244_pkThunderGObj != NULL) {
-        func_802AB9C0(temp_fp->ev.ns.x2244_pkThunderGObj);
+        it_802AB9C0(temp_fp->ev.ns.x2244_pkThunderGObj);
         fp->ev.ns.x2244_pkThunderGObj = NULL;
     }
     fighter_data2 = GET_FIGHTER(fighter_gobj);
@@ -298,7 +298,7 @@ void ftNess_SpecialHiTakeDamage(HSD_GObj* fighter_gobj) // OnTakeDamage again?
     default:
         temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
         temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
-        func_8007592C(temp_fp, 0, 0.0f);
+        ftParts_8007592C(temp_fp, 0, 0.0f);
     }
 }
 
@@ -384,7 +384,7 @@ void ftNess_SpecialAirHi_CollisionModVel(
     sp14.y = 0.0f;
     sp14.x = 0.0f;
     sp14.z = 1.0f;
-    lbvector_RotateAboutUnitAxis(&fp->x80_self_vel, &sp14,
+    lbVector_RotateAboutUnitAxis(&fp->x80_self_vel, &sp14,
                                  phi_f1 - fp->sv.ns.specialhi.aerialVel);
     fp->sv.ns.specialhi.aerialVel =
         atan2f(fp->x80_self_vel.y, fp->x80_self_vel.x);
@@ -392,7 +392,7 @@ void ftNess_SpecialAirHi_CollisionModVel(
 
 // 0x80118120
 // https://decomp.me/scratch/ARLRd
-void ftNess_SpecialHi_StartAction(
+void ftNess_SpecialHi_StartMotion(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder Start Action State
                             // handler
 {
@@ -407,8 +407,8 @@ void ftNess_SpecialHi_StartAction(
     ftNessAttributes* temp_attr;
     f64 phi_f0;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALHI_START, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALHI_START, 0, NULL,
+                              0.0f, 1.0f, 0.0f);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -440,7 +440,7 @@ void ftNess_SpecialHi_StartAction(
         temp_fp->sv.ns.specialhi.unkVar3 = 0.0f;
         temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
         temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
-        func_8007592C(temp_fp, 0, 0.0f);
+        ftParts_8007592C(temp_fp, 0, 0.0f);
         fp->sv.ns.specialhi.thunderColl = 1;
         fp->sv.ns.specialhi.gravityDelay =
             (s32) ness_attr->x48_PK_THUNDER_GRAVITY_DELAY;
@@ -459,7 +459,7 @@ void ftNess_SpecialHi_StartAction(
         fp->sv.ns.specialhi.aerialVel = (f32) phi_f0;
         fp->sv.ns.specialhi.facingDir = (f32) 1.0f;
         fp->sv.ns.specialhi.unkVar = (f32) 0.0f;
-        func_8006EBA4(fighter_gobj);
+        ftAnim_8006EBA4(fighter_gobj);
     }
 }
 
@@ -489,8 +489,8 @@ void ftNess_SpecialAirHiStart_Action(
 
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRHI_START,
-                                       0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI_START, 0, NULL,
+                              0.0f, 1.0f, 0.0f);
     fp->x220C_ftcmd_var3 = 0;
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
@@ -519,7 +519,7 @@ void ftNess_SpecialAirHiStart_Action(
     temp_fp->sv.ns.specialhi.unkVar3 = 0.0f;
     temp_fp->cb.x21E4_callback_OnDeath2 = NULL;
     temp_fp->cb.x21DC_callback_OnTakeDamage = NULL;
-    func_8007592C(temp_fp, 0, 0.0f);
+    ftParts_8007592C(temp_fp, 0, 0.0f);
     fp->sv.ns.specialhi.thunderColl = 1;
     fp->sv.ns.specialhi.gravityDelay =
         (s32) ness_attr->x48_PK_THUNDER_GRAVITY_DELAY;
@@ -539,7 +539,7 @@ void ftNess_SpecialAirHiStart_Action(
     fp->sv.ns.specialhi.facingDir = (f32) 1.0f;
     fp->sv.ns.specialhi.unkVar = (f32) 0.0f;
     fp->x80_self_vel.y = 0.0f;
-    func_8006EBA4(fighter_gobj);
+    ftAnim_8006EBA4(fighter_gobj);
 }
 
 /// @todo Rewrite this.
@@ -572,7 +572,7 @@ void ftNess_SpecialHi_Action(
 
         {
             f32 temp_f1_2 =
-                lbvector_Angle(&fp->x6F0_collData.x14C_ground.normal, &sp40);
+                lbVector_Angle(&fp->x6F0_collData.x14C_ground.normal, &sp40);
 
             if (!(temp_f1_2 < (f32) M_PI_2)) {
                 if (!(temp_f1_2 >
@@ -607,9 +607,9 @@ void ftNess_SpecialHi_Action(
                         u8 _[4];
 #endif
 
-                        Fighter_ActionStateChange_800693AC(
-                            fighter_gobj, AS_NESS_SPECIALHI, 0, NULL, 0.0f,
-                            1.0f, 0.0f);
+                        Fighter_ChangeMotionState(fighter_gobj,
+                                                  AS_NESS_SPECIALHI, 0, NULL,
+                                                  0.0f, 1.0f, 0.0f);
                         fp->xEC_ground_vel =
                             (f32) (ness_attr->x54_PK_THUNDER_2_MOMENTUM *
                                    fp->facing_dir);
@@ -618,11 +618,12 @@ void ftNess_SpecialHi_Action(
                         fp->sv.ns.specialhi.unkVar =
                             (f32) ness_attr2->x58_PK_THUNDER_2_UNK1;
                         fighter_data2 = GET_FIGHTER(fighter_gobj);
-                        func_8007592C(fighter_data2, 0,
-                                      (fighter_data2->facing_dir *
-                                       atan2f(fighter_data2->x80_self_vel.x,
-                                              fighter_data2->x80_self_vel.y)) -
-                                          1.5707963705062866f);
+                        ftParts_8007592C(
+                            fighter_data2, 0,
+                            (fighter_data2->facing_dir *
+                             atan2f(fighter_data2->x80_self_vel.x,
+                                    fighter_data2->x80_self_vel.y)) -
+                                1.5707963705062866f);
                         fighter_data2 = fp;
                         fighter_data2->cb.x21E4_callback_OnDeath2 = NULL;
                         fighter_data2->cb.x21DC_callback_OnTakeDamage = NULL;
@@ -636,7 +637,7 @@ void ftNess_SpecialHi_Action(
         }
     }
     fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
-    func_8007D60C(fp);
+    ftCommon_8007D60C(fp);
     ftNess_SpecialAirHi_Action(fighter_gobj);
     return;
 
@@ -662,8 +663,8 @@ block_stuff : {
             efLib_DestroyAll(fighter_gobj);
             fighter_data3->ev.ns.x224C_thunderGFX = false;
         default:
-            func_8007592C(fp, 0, 0.0f);
-            func_80097D40(fighter_gobj);
+            ftParts_8007592C(fp, 0, 0.0f);
+            ft_80097D40(fighter_gobj);
             return;
         }
     }
@@ -717,13 +718,13 @@ void ftNess_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
 #endif
 
     NessFloatMath_PKThunder2(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRHI, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
     fighter_data2 = GET_FIGHTER(fighter_gobj);
     temp_attr = getFtSpecialAttrs(fighter_data2);
     fighter_data2->sv.ns.specialhi.unkVar = temp_attr->x58_PK_THUNDER_2_UNK1;
     fighter_data3 = GET_FIGHTER(fighter_gobj);
-    func_8007592C(
+    ftParts_8007592C(
         fighter_data3, 0,
         (fighter_data3->facing_dir *
          atan2f(fighter_data3->x80_self_vel.x, fighter_data3->x80_self_vel.y)) -
@@ -746,20 +747,20 @@ void ftNess_SpecialHiStart_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALHI_HOLD,
-                                           0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALHI_HOLD, 0, NULL,
+                                  0.0f, 1.0f, 0.0f);
 
         {
             Fighter* fighter_data2 = fighter_gobj->user_data;
             HSD_GObj* pkt_ptr = fighter_data2->ev.ns.x2244_pkThunderGObj;
             if (pkt_ptr == NULL) {
-                func_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj,
-                              NULL, &pkt_pos);
+                lb_8000B1CC(fighter_data2->x5E8_fighterBones[24].x0_jobj, NULL,
+                            &pkt_pos);
 
                 pkt_pos.z = 0.0f;
 
-                pkt_ptr = func_802AB58C(fighter_gobj, &pkt_pos,
-                                        fighter_data2->facing_dir);
+                pkt_ptr = it_802AB58C(fighter_gobj, &pkt_pos,
+                                      fighter_data2->facing_dir);
 
                 fighter_data2->ev.ns.x2244_pkThunderGObj = pkt_ptr;
 
@@ -777,7 +778,7 @@ void ftNess_SpecialHiStart_Anim(HSD_GObj* fighter_gobj)
 
         ftNess_SpecialHiStopGFX(fighter_gobj);
 
-        ef_Spawn(0x4EE, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        efSync_Spawn(0x4EE, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
 
         fp->ev.ns.x224C_thunderGFX = true;
     }
@@ -812,8 +813,8 @@ void ftNess_SpecialHiHold_Anim(
         if (((s32) fp->sv.ns.specialhi.thunderTimerLoop1 <= 0) &&
             ((s32) fp->sv.ns.specialhi.thunderTimerLoop2 <= 0))
         {
-            Fighter_ActionStateChange_800693AC(
-                fighter_gobj, AS_NESS_SPECIALHI_END, 0, NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALHI_END, 0,
+                                      NULL, 0.0f, 1.0f, 0.0f);
             fighter_data2 = fighter_gobj->user_data;
             ASID = fighter_data2->action_id;
             switch (ASID) {
@@ -830,14 +831,14 @@ void ftNess_SpecialHiHold_Anim(
                 fighter_data2->ev.ns.x224C_thunderGFX = false;
             }
         }
-    } else if (func_802AB568(fp->ev.ns.x2244_pkThunderGObj) == fighter_gobj) {
+    } else if (it_802AB568(fp->ev.ns.x2244_pkThunderGObj) == fighter_gobj) {
         if (ftNess_ItemPKThunder_CheckNessCollide(fighter_gobj) == true) {
             ftNess_SpecialHi_Action(fighter_gobj);
         }
     } else {
         fp->ev.ns.x2244_pkThunderGObj = NULL;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALHI_END,
-                                           0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALHI_END, 0, NULL,
+                                  0.0f, 1.0f, 0.0f);
         fighter_data3 = fighter_gobj->user_data;
         ASID2 = fighter_data3->action_id;
         switch (ASID2) {
@@ -865,7 +866,7 @@ void ftNess_SpecialHiEnd_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
-        func_8008A2BC(fighter_gobj);
+        ft_8008A2BC(fighter_gobj);
 }
 
 /// Ness's grounded PK Thunder 2 Animation callback
@@ -884,14 +885,14 @@ void ftNess_SpecialHi_Anim(HSD_GObj* fighter_gobj)
         if (temp_fp->sv.ns.specialhi.jibakuGFX == 1) {
             Fighter* fp = fighter_gobj->user_data;
             ftNess_SpecialHiStopGFX(fighter_gobj);
-            ef_Spawn(0x4EF, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
+            efSync_Spawn(0x4EF, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
             fp->ev.ns.x224C_thunderGFX = true;
         }
     }
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALHI_END,
-                                           0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALHI_END, 0, NULL,
+                                  0.0f, 1.0f, 0.0f);
         {
             Fighter* fp = fighter_gobj->user_data;
             enum_t asid = fp->action_id;
@@ -927,21 +928,19 @@ void ftNess_SpecialAirHiStart_Anim(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_NESS_SPECIALAIRHI_HOLD, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI_HOLD, 0,
+                                  NULL, 0.0f, 1.0f, 0.0f);
 
         {
             Fighter* fp2 = fighter_gobj->user_data;
             pkt_ptr = fp2->ev.ns.x2244_pkThunderGObj;
 
             if (pkt_ptr == 0) {
-                func_8000B1CC(fp2->x5E8_fighterBones[24].x0_jobj, NULL,
-                              &pkt_pos);
+                lb_8000B1CC(fp2->x5E8_fighterBones[24].x0_jobj, NULL, &pkt_pos);
 
                 pkt_pos.z = 0.0f;
 
-                pkt_ptr =
-                    func_802AB58C(fighter_gobj, &pkt_pos, fp2->facing_dir);
+                pkt_ptr = it_802AB58C(fighter_gobj, &pkt_pos, fp2->facing_dir);
 
                 fp2->ev.ns.x2244_pkThunderGObj = pkt_ptr;
 
@@ -958,7 +957,7 @@ void ftNess_SpecialAirHiStart_Anim(HSD_GObj* fighter_gobj)
 
         ftNess_SpecialHiStopGFX(fighter_gobj);
 
-        ef_Spawn(0x4EE, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        efSync_Spawn(0x4EE, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
 
         fp->ev.ns.x224C_thunderGFX = true;
     }
@@ -991,8 +990,8 @@ void ftNess_SpecialAirHiHold_Anim(HSD_GObj* fighter_gobj)
         if (fp0->sv.ns.specialhi.thunderTimerLoop1 <= 0 &&
             fp0->sv.ns.specialhi.thunderTimerLoop2 <= 0)
         {
-            Fighter_ActionStateChange_800693AC(
-                fighter_gobj, AS_NESS_SPECIALAIRHI_END, 0, NULL, 0, 1, 0);
+            Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI_END, 0,
+                                      NULL, 0, 1, 0);
             {
                 Fighter* fp1 = fighter_gobj->user_data;
                 enum_t asid = fp1->action_id;
@@ -1011,11 +1010,11 @@ void ftNess_SpecialAirHiHold_Anim(HSD_GObj* fighter_gobj)
                 }
             }
         }
-    } else if (func_802AB568(fp0->ev.ns.x2244_pkThunderGObj) == fighter_gobj) {
+    } else if (it_802AB568(fp0->ev.ns.x2244_pkThunderGObj) == fighter_gobj) {
         if (ftNess_ItemPKThunder_CheckNessCollide(fighter_gobj) == true) {
             NessFloatMath_PKThunder2(fighter_gobj);
-            Fighter_ActionStateChange_800693AC(
-                fighter_gobj, AS_NESS_SPECIALAIRHI, 0, NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI, 0,
+                                      NULL, 0.0f, 1.0f, 0.0f);
 
             {
                 Fighter* fp1 = fighter_gobj->user_data;
@@ -1028,11 +1027,11 @@ void ftNess_SpecialAirHiHold_Anim(HSD_GObj* fighter_gobj)
 
                 {
                     Fighter* fp4 = fighter_gobj->user_data;
-                    func_8007592C(fp4, 0,
-                                  fp4->facing_dir *
-                                          atan2f(fp4->x80_self_vel.x,
-                                                 fp4->x80_self_vel.y) -
-                                      (f32) M_PI_2);
+                    ftParts_8007592C(fp4, 0,
+                                     fp4->facing_dir *
+                                             atan2f(fp4->x80_self_vel.x,
+                                                    fp4->x80_self_vel.y) -
+                                         (f32) M_PI_2);
                 }
 
                 fp1->cb.x21E4_callback_OnDeath2 = NULL;
@@ -1042,8 +1041,8 @@ void ftNess_SpecialAirHiHold_Anim(HSD_GObj* fighter_gobj)
         }
     } else {
         fp0->ev.ns.x2244_pkThunderGObj = NULL;
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_NESS_SPECIALAIRHI_END, 0, NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI_END, 0,
+                                  NULL, 0.0f, 1.0f, 0.0f);
         {
             Fighter* fp1 = fighter_gobj->user_data;
             enum_t asid = fp1->action_id;
@@ -1077,16 +1076,16 @@ void ftNess_SpecialAirHiEnd_Anim(HSD_GObj* fighter_gobj)
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         fp->x1968_jumpsUsed = fp->x110_attr.x168_MaxJumps;
-        func_8007D60C(fp);
+        ftCommon_8007D60C(fp);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-            func_800CC730(fighter_gobj);
+            ft_800CC730(fighter_gobj);
             return;
         }
 
-        func_800969D8(fighter_gobj, 1, 0, 1, 1,
-                      ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
-                      ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
+        ft_800969D8(fighter_gobj, 1, 0, 1, 1,
+                    ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
+                    ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
     }
 }
 
@@ -1106,7 +1105,7 @@ void ftNess_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
     if (fp1->sv.ns.specialhi.jibakuGFX == 1) {
         fp0 = fighter_gobj->user_data;
         ftNess_SpecialHiStopGFX(fighter_gobj);
-        ef_Spawn(0x4EF, fighter_gobj, fp0->x5E8_fighterBones[4].x0_jobj);
+        efSync_Spawn(0x4EF, fighter_gobj, fp0->x5E8_fighterBones[4].x0_jobj);
         fp0->ev.ns.x224C_thunderGFX = true;
     }
 
@@ -1118,16 +1117,16 @@ void ftNess_SpecialAirHi_Anim(HSD_GObj* fighter_gobj)
             phi_f1 = -temp_f1;
 
         fp1->x80_self_vel.y = (f32) -phi_f1;
-        func_8007D60C(fp1);
+        ftCommon_8007D60C(fp1);
 
         if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-            func_800CC730(fighter_gobj);
+            ft_800CC730(fighter_gobj);
             return;
         }
 
-        func_800969D8(fighter_gobj, 1, 0, 1, 1,
-                      ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
-                      ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
+        ft_800969D8(fighter_gobj, 1, 0, 1, 1,
+                    ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
+                    ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
     }
 }
 
@@ -1146,16 +1145,16 @@ void ftNess_SpecialAirHiRebound_Anim(HSD_GObj* fighter_gobj)
         ftNessAttributes* ness_attr = fp0->x2D4_specialAttributes;
 
         if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-            func_8007D60C(fp1);
+            ftCommon_8007D60C(fp1);
 
             if (ness_attr->x70_PK_THUNDER_2_LANDING_LAG == 0) {
-                func_800CC730(fighter_gobj);
+                ft_800CC730(fighter_gobj);
                 return;
             }
 
-            func_800969D8(fighter_gobj, 1, 0, 1, 1.0f,
-                          ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
-                          ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
+            ft_800969D8(fighter_gobj, 1, 0, 1, 1.0f,
+                        ness_attr->x70_PK_THUNDER_2_LANDING_LAG,
+                        ness_attr->x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND);
         }
     }
 }
@@ -1233,7 +1232,7 @@ void ftNess_SpecialHiStart_Phys(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder Start Physics callback
 {
     ThunderPhysTimer(fighter_gobj);
-    func_80084F3C(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
 }
 
 // 0x80118FDC
@@ -1242,14 +1241,14 @@ void ftNess_SpecialHiHold_Phys(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Thunder Control Loop Physics
                             // callback
 {
-    func_80084F3C(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
 }
 
 // 0x80118FFC
 // This is identical to 0x80118FDC so there's no link bruh
 void ftNess_SpecialHiEnd_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084F3C(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
 }
 
 static const f32 vel_epsilon = 0.0001f;
@@ -1286,14 +1285,14 @@ void ftNess_SpecialHi_Phys(HSD_GObj* fighter_gobj)
     }
 
     fp0->sv.ns.specialhi.unkVector1 = fp0->x80_self_vel;
-    func_8007CB74(fighter_gobj);
+    ftCommon_8007CB74(fighter_gobj);
 
     {
         Fighter* fp = fighter_gobj->user_data;
-        func_8007592C(fp, 0,
-                      fp->facing_dir *
-                              atan2f(fp->x80_self_vel.x, fp->x80_self_vel.y) -
-                          (f32) M_PI_2);
+        ftParts_8007592C(
+            fp, 0,
+            fp->facing_dir * atan2f(fp->x80_self_vel.x, fp->x80_self_vel.y) -
+                (f32) M_PI_2);
     }
 }
 
@@ -1312,13 +1311,13 @@ void ftNess_SpecialAirHiStart_Phys(HSD_GObj* fighter_gobj)
     if (gravity_timer != 0) {
         fp->sv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
-        func_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                      fp->x110_attr.x170_TerminalVelocity);
+        ftCommon_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
+                          fp->x110_attr.x170_TerminalVelocity);
     }
 
     {
         f32 friction = fp->x110_attr.x180_AerialFriction;
-        func_8007CE94(fp, friction);
+        ftCommon_8007CE94(fp, friction);
     }
 }
 
@@ -1340,13 +1339,13 @@ void ftNess_SpecialAirHiHold_Phys(
     if (gravity_timer != 0) {
         fp->sv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
-        func_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                      fp->x110_attr.x170_TerminalVelocity);
+        ftCommon_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
+                          fp->x110_attr.x170_TerminalVelocity);
     }
 
     {
         f32 friction = fp->x110_attr.x180_AerialFriction;
-        func_8007CE94(fp, friction);
+        ftCommon_8007CE94(fp, friction);
     }
 }
 
@@ -1365,13 +1364,13 @@ void ftNess_SpecialAirHiEnd_Phys(HSD_GObj* fighter_gobj)
     if (gravity_timer != 0) {
         fp->sv.ns.specialhi.gravityDelay = gravity_timer - 1;
     } else {
-        func_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
-                      fp->x110_attr.x170_TerminalVelocity);
+        ftCommon_8007D494(fp, ness_attr->x50_PK_THUNDER_FALL_ACCEL,
+                          fp->x110_attr.x170_TerminalVelocity);
     }
 
     {
         f32 friction = fp->x110_attr.x180_AerialFriction;
-        func_8007CE94(fp, friction);
+        ftCommon_8007CE94(fp, friction);
     }
 }
 
@@ -1384,7 +1383,7 @@ inline void ftNess_atan2(HSD_GObj* fighter_gobj)
     u8 _[4] = { 0 };
 #endif
 
-    func_8007592C(
+    ftParts_8007592C(
         fighter_data2, 0,
         (fighter_data2->facing_dir *
          atan2f(fighter_data2->x80_self_vel.x, fighter_data2->x80_self_vel.y)) -
@@ -1481,9 +1480,9 @@ void ftNess_SpecialAirHiRebound_Phys(
 
     fighter_attr = &fp->x110_attr;
     fighter_attr == NULL;
-    func_8007D494(fp, fp->x110_attr.x16C_Gravity,
-                  fp->x110_attr.x170_TerminalVelocity);
-    func_8007CE94(fp, fighter_attr->x180_AerialFriction);
+    ftCommon_8007D494(fp, fp->x110_attr.x16C_Gravity,
+                      fp->x110_attr.x170_TerminalVelocity);
+    ftCommon_8007CE94(fp, fighter_attr->x180_AerialFriction);
 }
 
 // 0x80119460
@@ -1495,12 +1494,11 @@ void ftNess_SpecialHiStart_Coll(
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    if (func_80082708(fighter_gobj) == false) {
-        func_8007D60C(fp);
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_NESS_SPECIALAIRHI_START,
-            FTNESS_SPECIALHI_COLL_FLAG, NULL, fp->x894_currentAnimFrame, 1.0f,
-            0.0f);
+    if (ft_80082708(fighter_gobj) == false) {
+        ftCommon_8007D60C(fp);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI_START,
+                                  FTNESS_SPECIALHI_COLL_FLAG, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -1513,11 +1511,11 @@ void ftNess_SpecialHiHold_Coll(
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    if (func_80082708(fighter_gobj) == false) {
-        func_8007D60C(fp);
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_NESS_SPECIALAIRHI_HOLD, FTNESS_SPECIALHI_COLL_FLAG,
-            NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    if (ft_80082708(fighter_gobj) == false) {
+        ftCommon_8007D60C(fp);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI_HOLD,
+                                  FTNESS_SPECIALHI_COLL_FLAG, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -1529,11 +1527,11 @@ void ftNess_SpecialHiEnd_Coll(
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    if (func_80082708(fighter_gobj) == false) {
-        func_8007D60C(fp);
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_NESS_SPECIALAIRHI_END, FTNESS_SPECIALHI_COLL_FLAG,
-            NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    if (ft_80082708(fighter_gobj) == false) {
+        ftCommon_8007D60C(fp);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI_END,
+                                  FTNESS_SPECIALHI_COLL_FLAG, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -1548,11 +1546,11 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj)
     Fighter* fp0;
 
     fp0 = fighter_gobj->user_data;
-    if (func_80082708(fighter_gobj) == false) {
+    if (ft_80082708(fighter_gobj) == false) {
         u32 env_flags = fp0->x6F0_collData.x134_envFlags;
 
         if ((env_flags & 0b111111) || (env_flags & 0b111111 << 6)) {
-            func_8007D60C(fp0);
+            ftCommon_8007D60C(fp0);
             {
                 Fighter* fp1 = fighter_gobj->user_data;
                 ftNessAttributes* temp_attr = fp1->x2D4_specialAttributes;
@@ -1571,20 +1569,19 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj)
                 fp1->sv.ns.specialhi.unkVar3 = 0;
                 fp1->cb.x21E4_callback_OnDeath2 = NULL;
                 fp1->cb.x21DC_callback_OnTakeDamage = NULL;
-                func_8007592C(fp1, 0, 0);
+                ftParts_8007592C(fp1, 0, 0);
             }
 
-            Fighter_ActionStateChange_800693AC(
-                fighter_gobj, AS_NESS_SPECIALAIRHI_END,
-                FTNESS_SPECIALHI_COLL_FLAG, NULL, fp0->x894_currentAnimFrame, 1,
-                0);
+            Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI_END,
+                                      FTNESS_SPECIALHI_COLL_FLAG, NULL,
+                                      fp0->x894_currentAnimFrame, 1, 0);
             return;
         }
 
-        func_8007D60C(fp0);
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRHI,
-                                           FTNESS_JIBAKU_COLL_FLAG, NULL,
-                                           fp0->x894_currentAnimFrame, 1, 0);
+        ftCommon_8007D60C(fp0);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRHI,
+                                  FTNESS_JIBAKU_COLL_FLAG, NULL,
+                                  fp0->x894_currentAnimFrame, 1, 0);
         return;
     }
 
@@ -1612,8 +1609,8 @@ void ftNess_SpecialHi_Coll(HSD_GObj* fighter_gobj)
                     efLib_DestroyAll(fighter_gobj);
                     fighter_data2->ev.ns.x224C_thunderGFX = false;
                 }
-                func_8007592C(fp0, 0, 0);
-                func_80097D40(fighter_gobj);
+                ftParts_8007592C(fp0, 0, 0);
+                ft_80097D40(fighter_gobj);
                 return;
             }
         }
@@ -1661,11 +1658,11 @@ void ftNess_SpecialAirHiStart_Coll(
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    if (func_80081D0C(fighter_gobj) != false) {
-        func_8007D7FC(fp);
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_NESS_SPECIALHI_START, FTNESS_SPECIALHI_COLL_FLAG,
-            NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    if (ft_80081D0C(fighter_gobj) != false) {
+        ftCommon_8007D7FC(fp);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALHI_START,
+                                  FTNESS_SPECIALHI_COLL_FLAG, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -1678,11 +1675,11 @@ void ftNess_SpecialAirHiHold_Coll(
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    if (func_80081D0C(fighter_gobj) != false) {
-        func_8007D7FC(fp);
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_NESS_SPECIALHI_HOLD, FTNESS_SPECIALHI_COLL_FLAG,
-            NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    if (ft_80081D0C(fighter_gobj) != false) {
+        ftCommon_8007D7FC(fp);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALHI_HOLD,
+                                  FTNESS_SPECIALHI_COLL_FLAG, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -1694,11 +1691,11 @@ void ftNess_SpecialAirHiEnd_Coll(
     Fighter* fp;
 
     fp = fighter_gobj->user_data;
-    if (func_80081D0C(fighter_gobj) != false) {
-        func_8007D7FC(fp);
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_NESS_SPECIALHI_END, FTNESS_SPECIALHI_COLL_FLAG,
-            NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    if (ft_80081D0C(fighter_gobj) != false) {
+        ftCommon_8007D7FC(fp);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALHI_END,
+                                  FTNESS_SPECIALHI_COLL_FLAG, NULL,
+                                  fp->x894_currentAnimFrame, 1.0f, 0.0f);
     }
 }
 
@@ -1765,8 +1762,8 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
     } else {
         ledgeGrabDir = -1;
     }
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, ledgeGrabDir) != false) {
-        if (lbvector_Angle(&fighter_r31->x6F0_collData.x14C_ground.normal,
+    if (ft_CheckGroundAndLedge(fighter_gobj, ledgeGrabDir) != false) {
+        if (lbVector_Angle(&fighter_r31->x6F0_collData.x14C_ground.normal,
                            &fighter_r31->x80_self_vel) >
             (0.01745329238474369f *
              (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
@@ -1790,32 +1787,32 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
                 fighter_data2->ev.ns.x224C_thunderGFX = false;
             }
 
-            func_8007592C(fighter_r31, 0, 0);
-            func_80097D40(fighter_gobj);
+            ftParts_8007592C(fighter_r31, 0, 0);
+            ft_80097D40(fighter_gobj);
             return;
         }
 
-        func_8007D7FC(fighter_r31);
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_NESS_SPECIALHI, FTNESS_JIBAKU_COLL_FLAG, NULL,
-            fighter_r31->x894_currentAnimFrame, 1, 0);
+        ftCommon_8007D7FC(fighter_r31);
+        Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALHI,
+                                  FTNESS_JIBAKU_COLL_FLAG, NULL,
+                                  fighter_r31->x894_currentAnimFrame, 1, 0);
         return;
     }
 
-    if (func_80081298(fighter_gobj)) {
-        func_80081370(fighter_gobj);
+    if (ftCliffCommon_80081298(fighter_gobj)) {
+        ftCliffCommon_80081370(fighter_gobj);
         return;
     }
 
     ecbFlag = fighter_r31->x6F0_collData.x134_envFlags;
     if ((ecbFlag & 0x6000) != 0) {
-        if (lbvector_Angle(&fighter_r31->x6F0_collData.x188_ceiling.normal,
+        if (lbVector_Angle(&fighter_r31->x6F0_collData.x188_ceiling.normal,
                            &fighter_r31->x80_self_vel) >
             (0.01745329238474369f *
              (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
         {
             fighter_data3 = fighter_gobj->user_data;
-            lbvector_Mirror(&fighter_data3->x80_self_vel,
+            lbVector_Mirror(&fighter_data3->x80_self_vel,
                             &fighter_r31->x6F0_collData.x188_ceiling.normal);
             (new_var = fighter_data3)->x80_self_vel.x *= 0.5f;
             new_var->x80_self_vel.y *= 0.5f;
@@ -1823,10 +1820,10 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
             temp_f0_2 = new_var->x80_self_vel.y;
             fmuls1 = temp_f1_2 * temp_f1_2;
             fmuls2 = temp_f0_2 * temp_f0_2;
-            lbvector_sqrtf_accurate(fmuls1 + fmuls2);
+            lbVector_sqrtf_accurate(fmuls1 + fmuls2);
             DriftMax = new_var->x110_attr.x17C_AerialDriftMax;
             DriftMax == 0.0f;
-            func_8007D440(new_var, new_var->x110_attr.x17C_AerialDriftMax);
+            ftCommon_8007D440(new_var, new_var->x110_attr.x17C_AerialDriftMax);
             if (new_var->x80_self_vel.x >= 0.0f) {
                 phi_f0 = 1.0f;
             } else {
@@ -1834,25 +1831,25 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
             }
             new_var->facing_dir = phi_f0;
             ftNess_SpecialHiStopGFX(fighter_gobj);
-            Fighter_ActionStateChange_800693AC(
+            Fighter_ChangeMotionState(
                 fighter_gobj, AS_NESS_SPECIALAIRHI_HITWALL,
                 FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f, 0.0f);
-            func_8006EBA4(fighter_gobj);
+            ftAnim_8006EBA4(fighter_gobj);
             spC4.x = atan2f(-fighter_r31->x6F0_collData.x188_ceiling.normal.x,
                             fighter_r31->x6F0_collData.x188_ceiling.normal.y);
-            ef_Spawn(0x406, fighter_gobj, &new_var->xB0_pos, &spC4);
+            efSync_Spawn(0x406, fighter_gobj, &new_var->xB0_pos, &spC4);
         }
 
     } else {
         if ((ecbFlag & 0x3F) != 0) {
-            if (lbvector_Angle(
+            if (lbVector_Angle(
                     &fighter_r31->x6F0_collData.x160_rightwall.normal,
                     &fighter_r31->x80_self_vel) >
                 (0.01745329238474369f *
                  (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
             {
                 fighter_data4 = fighter_gobj->user_data;
-                lbvector_Mirror(
+                lbVector_Mirror(
                     &fighter_data4->x80_self_vel,
                     &fighter_r31->x6F0_collData.x160_rightwall.normal);
                 (new_var = fighter_data4)->x80_self_vel.x *= 0.5f;
@@ -1861,10 +1858,11 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
                 temp_f0_3 = new_var->x80_self_vel.y;
                 fmuls3 = temp_f1_5 * temp_f1_5;
                 fmuls4 = temp_f0_3 * temp_f0_3;
-                lbvector_sqrtf_accurate(fmuls3 + fmuls4);
+                lbVector_sqrtf_accurate(fmuls3 + fmuls4);
                 DriftMax = new_var->x110_attr.x17C_AerialDriftMax;
                 DriftMax == 0.0f;
-                func_8007D440(new_var, new_var->x110_attr.x17C_AerialDriftMax);
+                ftCommon_8007D440(new_var,
+                                  new_var->x110_attr.x17C_AerialDriftMax);
                 if (fighter_data4->x80_self_vel.x >= 0.0f) {
                     phi_f0 = 1.0f;
                 } else {
@@ -1872,14 +1870,15 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
                 }
                 fighter_data4->facing_dir = phi_f0;
                 ftNess_SpecialHiStopGFX(fighter_gobj);
-                Fighter_ActionStateChange_800693AC(
+                Fighter_ChangeMotionState(
                     fighter_gobj, AS_NESS_SPECIALAIRHI_HITWALL,
                     FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f, 0.0f);
-                func_8006EBA4(fighter_gobj);
+                ftAnim_8006EBA4(fighter_gobj);
                 spB8.x =
                     atan2f(-fighter_r31->x6F0_collData.x160_rightwall.normal.x,
                            fighter_r31->x6F0_collData.x160_rightwall.normal.y);
-                ef_Spawn(0x406, fighter_gobj, &fighter_data4->xB0_pos, &spB8);
+                efSync_Spawn(0x406, fighter_gobj, &fighter_data4->xB0_pos,
+                             &spB8);
                 return;
             }
             ftNess_SpecialAirHi_CollisionModVel(fighter_gobj,
@@ -1887,13 +1886,13 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
             return;
         }
         if ((ecbFlag & 0xFC0) != 0) {
-            if (lbvector_Angle(&fighter_r31->x6F0_collData.x174_leftwall.normal,
+            if (lbVector_Angle(&fighter_r31->x6F0_collData.x174_leftwall.normal,
                                &fighter_r31->x80_self_vel) >
                 (0.01745329238474369f *
                  (90.0f + ness_attr->x64_PK_THUNDER_2_WALLHUG_ANGLE)))
             {
                 fighter_data5 = fighter_gobj->user_data;
-                lbvector_Mirror(
+                lbVector_Mirror(
                     &fighter_data5->x80_self_vel,
                     &fighter_r31->x6F0_collData.x174_leftwall.normal);
                 (new_var = fighter_data5)->x80_self_vel.x *= 0.5f;
@@ -1902,10 +1901,11 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
                 temp_f0_4 = new_var->x80_self_vel.y;
                 fmuls5 = temp_f1_8 * temp_f1_8;
                 fmuls6 = temp_f0_4 * temp_f0_4;
-                lbvector_sqrtf_accurate(fmuls5 + fmuls6);
+                lbVector_sqrtf_accurate(fmuls5 + fmuls6);
                 DriftMax = new_var->x110_attr.x17C_AerialDriftMax;
                 DriftMax == 0.0f;
-                func_8007D440(new_var, new_var->x110_attr.x17C_AerialDriftMax);
+                ftCommon_8007D440(new_var,
+                                  new_var->x110_attr.x17C_AerialDriftMax);
                 if (fighter_data5->x80_self_vel.x >= 0.0f) {
                     phi_f0 = 1.0f;
                 } else {
@@ -1913,14 +1913,15 @@ void ftNess_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
                 }
                 fighter_data5->facing_dir = phi_f0;
                 ftNess_SpecialHiStopGFX(fighter_gobj);
-                Fighter_ActionStateChange_800693AC(
+                Fighter_ChangeMotionState(
                     fighter_gobj, AS_NESS_SPECIALAIRHI_HITWALL,
                     FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f, 0.0f);
-                func_8006EBA4(fighter_gobj);
+                ftAnim_8006EBA4(fighter_gobj);
                 spAC.x =
                     atan2f(-fighter_r31->x6F0_collData.x174_leftwall.normal.x,
                            fighter_r31->x6F0_collData.x174_leftwall.normal.y);
-                ef_Spawn(0x406, fighter_gobj, &fighter_data5->xB0_pos, &spAC);
+                efSync_Spawn(0x406, fighter_gobj, &fighter_data5->xB0_pos,
+                             &spAC);
                 return;
             }
             ftNess_SpecialAirHi_CollisionModVel(fighter_gobj,
@@ -1942,7 +1943,7 @@ void ftNess_SpecialAirHiRebound_Coll(HSD_GObj* fighter_gobj)
     enum_t asid;
 
     fp = fighter_gobj->user_data;
-    if (EnvColl_CheckGroundAndLedge(fighter_gobj, 0) == true) {
+    if (ft_CheckGroundAndLedge(fighter_gobj, 0) == true) {
         fp->x80_self_vel.z = 0.0f;
         fp->x80_self_vel.y = 0.0f;
         fp->x80_self_vel.x = 0.0f;
@@ -1961,11 +1962,11 @@ void ftNess_SpecialAirHiRebound_Coll(HSD_GObj* fighter_gobj)
             efLib_DestroyAll(fighter_gobj);
             fighter_data2->ev.ns.x224C_thunderGFX = false;
         }
-        func_8007592C(fp, 0, 0.0f);
-        func_80097D40(fighter_gobj);
+        ftParts_8007592C(fp, 0, 0.0f);
+        ft_80097D40(fighter_gobj);
         return;
     }
-    if (func_80081298(fighter_gobj) != false) {
-        func_80081370(fighter_gobj);
+    if (ftCliffCommon_80081298(fighter_gobj) != false) {
+        ftCliffCommon_80081370(fighter_gobj);
     }
 }

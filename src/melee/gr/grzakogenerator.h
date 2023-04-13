@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void func_801CAE04(bool);
+void grZakoGenerator_801CAE04(bool);
 
 #endif

@@ -21,9 +21,9 @@ void ftGameWatch_ItemGreenhouseSetup(HSD_GObj* fighter_gobj)
     if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
         ftGameWatch_Attack11_DecideAction(fighter_gobj);
     } else {
-        func_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
+        lb_8000B1CC(fp->x5E8_fighterBones[0x20].x0_jobj, NULL, &sp10);
         fp->ev.gw.x224C_greenhouseGObj =
-            func_802C61F4(fighter_gobj, &sp10, 0x20, fp->facing_dir);
+            it_802C61F4(fighter_gobj, &sp10, 0x20, fp->facing_dir);
         if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
             if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
                 fp->cb.x21E4_callback_OnDeath2 = ftGameWatch_OnDamage;
@@ -50,13 +50,13 @@ void ftGameWatch_Attack11_DecideAction(HSD_GObj* fighter_gobj)
     if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
         ASID = fp->action_id;
         if (ASID == AS_GAMEWATCH_ATTACK11) {
-            func_802C6430(fp->ev.gw.x224C_greenhouseGObj);
+            it_802C6430(fp->ev.gw.x224C_greenhouseGObj);
         } else if (ASID == AS_GAMEWATCH_ATTACK100START) {
-            func_802C6458(fp->ev.gw.x224C_greenhouseGObj);
+            it_802C6458(fp->ev.gw.x224C_greenhouseGObj);
         } else if (ASID == AS_GAMEWATCH_ATTACK100LOOP) {
-            func_802C6480(fp->ev.gw.x224C_greenhouseGObj);
+            it_802C6480(fp->ev.gw.x224C_greenhouseGObj);
         } else if (ASID == AS_GAMEWATCH_ATTACK100END) {
-            func_802C64A8(fp->ev.gw.x224C_greenhouseGObj);
+            it_802C64A8(fp->ev.gw.x224C_greenhouseGObj);
         }
 
         if (fp->cb.x21E4_callback_OnDeath2 == NULL) {
@@ -96,7 +96,7 @@ void ftGameWatch_ItemGreenhouseRemove(HSD_GObj* fighter_gobj)
 #endif
 
     if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
-        func_802C6328(fp->ev.gw.x224C_greenhouseGObj);
+        it_802C6328(fp->ev.gw.x224C_greenhouseGObj);
         ftGameWatch_ItemGreenhouseSetFlag(fighter_gobj);
     }
 }
@@ -108,7 +108,7 @@ void ftGameWatch_ItemGreenhouseEnterHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
-        func_802C6374(fp->ev.gw.x224C_greenhouseGObj);
+        it_802C6374(fp->ev.gw.x224C_greenhouseGObj);
     }
 }
 
@@ -117,7 +117,7 @@ void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     if (fp->ev.gw.x224C_greenhouseGObj != NULL) {
-        func_802C6394(fp->ev.gw.x224C_greenhouseGObj);
+        it_802C6394(fp->ev.gw.x224C_greenhouseGObj);
     }
 }
 
@@ -155,12 +155,12 @@ void ftGameWatch_Attack11_Action(HSD_GObj* fighter_gobj)
     u8 _[4];
 #endif
 
-    if (func_80094790(fighter_gobj) == false) {
+    if (ft_80094790(fighter_gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
         fp->x2218_flag.bits.b1 = 0;
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_ATTACK11,
-                                           0, NULL, 0.0f, 1.0f, 0.0f);
-        func_8006EBA4(fighter_gobj);
+        Fighter_ChangeMotionState(fighter_gobj, AS_GAMEWATCH_ATTACK11, 0, NULL,
+                                  0.0f, 1.0f, 0.0f);
+        ftAnim_8006EBA4(fighter_gobj);
         fp->x196C_hitlag_mult = (f32) fp->x110_attr.x18C_Jab_2InputWindow;
         fp->x1970 = 44;
         fp->x2218_flag.bits.b2 = 0;
@@ -180,25 +180,25 @@ void ftGameWatch_Attack11_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_8008A2BC(fighter_gobj);
+        ft_8008A2BC(fighter_gobj);
     }
 }
 
 // 0x8014C174 - Mr. Game & Watch's Jab IASA callback
 void ftGameWatch_Attack11_IASA(HSD_GObj* fighter_gobj)
 {
-    func_8008ACD8(fighter_gobj);
+    ft_8008ACD8(fighter_gobj);
 }
 
 // 0x8014C194 - Mr. Game & Watch's Jab Physics callback
 void ftGameWatch_Attack11_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084FA8(fighter_gobj);
+    ft_80084FA8(fighter_gobj);
 }
 
 // 0x8014C1B4 - Mr. Game & Watch's Jab Collision callback
 void ftGameWatch_Attack11_Coll(HSD_GObj* fighter_gobj)
 {
-    func_80084104(fighter_gobj);
+    ft_80084104(fighter_gobj);
     ftGameWatch_8014A538(fighter_gobj);
 }

@@ -8,7 +8,7 @@
 #include "ftCaptain/ftCaptain_SpecialN.h"
 #include "ftCaptain/ftCaptain_SpecialS.h"
 
-ActionState as_table_ganon[] = {
+ActionState ftGanon_MotionStateTable[] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
@@ -17,44 +17,44 @@ ActionState as_table_ganon[] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { 301, 0x00340211, 0x12000000, ftCaptain_SpecialN_Anim,
       ftCaptain_SpecialN_IASA, ftCaptain_SpecialN_Phys, ftCaptain_SpecialN_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 302, 0x00340611, 0x12000000, ftCaptain_SpecialAirN_Anim,
       ftCaptain_SpecialAirN_IASA, ftCaptain_SpecialAirN_Phys,
-      ftCaptain_SpecialAirN_Coll, func_800761C8 },
+      ftCaptain_SpecialAirN_Coll, ftCamera_UpdateCameraBox },
     { 303, 0x00340212, 0x13000000, ftCaptain_SpecialSStart_Anim,
       ftCaptain_SpecialSStart_IASA, ftCaptain_SpecialSStart_Phys,
-      ftCaptain_SpecialSStart_Coll, func_800761C8 },
+      ftCaptain_SpecialSStart_Coll, ftCamera_UpdateCameraBox },
     { 304, 0x00340212, 0x13000000, ftCaptain_SpecialS_Anim,
       ftCaptain_SpecialS_IASA, ftCaptain_SpecialS_Phys, ftCaptain_SpecialS_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 305, 0x00340612, 0x13000000, ftCaptain_SpecialAirSStart_Anim,
       ftCaptain_SpecialAirSStart_IASA, ftCaptain_SpecialAirSStart_Phys,
-      ftCaptain_SpecialAirSStart_Coll, func_800761C8 },
+      ftCaptain_SpecialAirSStart_Coll, ftCamera_UpdateCameraBox },
     { 306, 0x00340612, 0x13000000, ftCaptain_SpecialAirS_Anim,
       ftCaptain_SpecialAirS_IASA, ftCaptain_SpecialAirS_Phys,
-      ftCaptain_SpecialAirS_Coll, func_800761C8 },
-    { 307, 0x00340013, 0x14000000, func_800E4B00, func_800E4B60, func_800E4BF8,
-      func_800E4E1C, func_800761C8 },
-    { 308, 0x00340413, 0x14000000, func_800E4EE8, func_800E4F48, func_800E4FDC,
-      func_800E50D8, func_800761C8 },
-    { 309, 0x00340013, 0x14000000, func_800E51F8, func_800E5234, func_800E5238,
-      func_800E523C, func_800761C8 },
-    { 310, 0x00340013, 0x14000000, func_800E5310, func_800E5384, func_800E5388,
-      func_800E54B8, func_800761C8 },
-    { 311, 0x00340214, 0x15000000, func_800E415C, NULL, func_800E4408,
-      func_800E46B8, func_800761C8 },
-    { 312, 0x00340214, 0x15000000, func_800E4268, NULL, func_800E449C,
-      func_800E47B0, func_800761C8 },
-    { 313, 0x00340614, 0x15000000, func_800E42E0, NULL, func_800E45E4,
-      func_800E48BC, func_800761C8 },
-    { 314, 0x00340614, 0x15000000, func_800E4354, NULL, func_800E4618,
-      func_800E493C, func_800761C8 },
-    { 316, 0x00340614, 0x15000000, func_800E4390, NULL, func_800E4678,
-      func_800E495C, func_800761C8 },
-    { 315, 0x00340214, 0x15000000, func_800E42A4, NULL, func_800E455C,
-      func_800E4838, func_800761C8 },
-    { 317, 0x00340614, 0x15000000, func_800E43CC, NULL, func_800E4698,
-      func_800E49DC, func_800761C8 },
+      ftCaptain_SpecialAirS_Coll, ftCamera_UpdateCameraBox },
+    { 307, 0x00340013, 0x14000000, ftCaptain_800E4B00, ftCaptain_800E4B60,
+      ftCaptain_800E4BF8, ftCaptain_800E4E1C, ftCamera_UpdateCameraBox },
+    { 308, 0x00340413, 0x14000000, ftCaptain_800E4EE8, ftCaptain_800E4F48,
+      ftCaptain_800E4FDC, ftCaptain_800E50D8, ftCamera_UpdateCameraBox },
+    { 309, 0x00340013, 0x14000000, ftCaptain_800E51F8, ftCaptain_800E5234,
+      ftCaptain_800E5238, ftCaptain_800E523C, ftCamera_UpdateCameraBox },
+    { 310, 0x00340013, 0x14000000, ftCaptain_800E5310, ftCaptain_800E5384,
+      ftCaptain_800E5388, ftCaptain_800E54B8, ftCamera_UpdateCameraBox },
+    { 311, 0x00340214, 0x15000000, ftCaptain_800E415C, NULL, ftCaptain_800E4408,
+      ftCaptain_800E46B8, ftCamera_UpdateCameraBox },
+    { 312, 0x00340214, 0x15000000, ftCaptain_800E4268, NULL, ftCaptain_800E449C,
+      ftCaptain_800E47B0, ftCamera_UpdateCameraBox },
+    { 313, 0x00340614, 0x15000000, ftCaptain_800E42E0, NULL, ftCaptain_800E45E4,
+      ftCaptain_800E48BC, ftCamera_UpdateCameraBox },
+    { 314, 0x00340614, 0x15000000, ftCaptain_800E4354, NULL, ftCaptain_800E4618,
+      ftCaptain_800E493C, ftCamera_UpdateCameraBox },
+    { 316, 0x00340614, 0x15000000, ftCaptain_800E4390, NULL, ftCaptain_800E4678,
+      ftCaptain_800E495C, ftCamera_UpdateCameraBox },
+    { 315, 0x00340214, 0x15000000, ftCaptain_800E42A4, NULL, ftCaptain_800E455C,
+      ftCaptain_800E4838, ftCamera_UpdateCameraBox },
+    { 317, 0x00340614, 0x15000000, ftCaptain_800E43CC, NULL, ftCaptain_800E4698,
+      ftCaptain_800E49DC, ftCamera_UpdateCameraBox },
 };
 
 char lbl_803D2CD8[] = "PlGn.dat";
@@ -87,8 +87,8 @@ Fighter_CostumeStrings lbl_803D2E40[] = {
 void ftGanon_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_80074A4C(gobj, 0, 0);
-    func_80074A4C(gobj, 1, -1);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, -1);
     fp->ev.gn.during_specials = false;
     fp->ev.gn.during_specials_start = false;
 }

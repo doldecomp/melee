@@ -1,176 +1,176 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbtime.h>
 
-GameRules* func_8015CC34(void)
+GameRules* gmMainLib_8015CC34(void)
 {
     return &lbl_804D3EE0->x1850;
 }
 
-void* func_8015CC40(void)
+void* gmMainLib_8015CC40(void)
 {
     return &lbl_804D3EE0->thing.x1868;
 }
 
-void* func_8015CC4C(void)
+void* gmMainLib_8015CC4C(void)
 {
     return &lbl_804D3EE0->thing.x2FF8;
 }
 
-struct gmm_x1CB0* func_8015CC58(void)
+struct gmm_x1CB0* gmMainLib_8015CC58(void)
 {
     return &lbl_804D3EE0->thing.x1CB0;
 }
 
-void* func_8015CC64(s32 arg0)
+void* gmMainLib_8015CC64(s32 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0];
 }
 
-void* func_8015CC78(void)
+void* gmMainLib_8015CC78(void)
 {
     return &lbl_804D3EE0->thing.x1CD4;
 }
 
-void* func_8015CC84(void)
+void* gmMainLib_8015CC84(void)
 {
     return &lbl_804D3EE0->thing.x1CD2;
 }
 
-void* func_8015CC90(void)
+void* gmMainLib_8015CC90(void)
 {
     return &lbl_804D3EE0->thing.x1CD0;
 }
 
-void* func_8015CC9C(s32 arg0)
+void* gmMainLib_8015CC9C(s32 arg0)
 {
     struct gmm_x2FF8* base = &lbl_804D3EE0->thing.x2FF8[0];
     struct gmm_x2FF8_inner* inner = &base[arg0 / 19].inner[0];
     return &inner[arg0 % 19];
 }
 
-void* func_8015CCE4(void)
+void* gmMainLib_8015CCE4(void)
 {
     return &lbl_804D3EE0->x44;
 }
 
-void* func_8015CCF0(void)
+void* gmMainLib_8015CCF0(void)
 {
     return &lbl_804D3EE0->thing.x1A48;
 }
 
-void* func_8015CCFC(void)
+void* gmMainLib_8015CCFC(void)
 {
     return &lbl_804D3EE0->thing.x1A4C;
 }
 
-void* func_8015CD08(void)
+void* gmMainLib_8015CD08(void)
 {
     return &lbl_804D3EE0->thing.x1A30;
 }
 
-void* func_8015CD14(void)
+void* gmMainLib_8015CD14(void)
 {
     return &lbl_804D3EE0->thing.x1A34;
 }
 
-void* func_8015CD20(void)
+void* gmMainLib_8015CD20(void)
 {
     return &lbl_804D3EE0->thing.x1A38;
 }
 
-void* func_8015CD2C(void)
+void* gmMainLib_8015CD2C(void)
 {
     return &lbl_804D3EE0->thing.x1A18;
 }
 
-void* func_8015CD38(void)
+void* gmMainLib_8015CD38(void)
 {
     return &lbl_804D3EE0->thing.x1A1C;
 }
 
-void* func_8015CD44(void)
+void* gmMainLib_8015CD44(void)
 {
     return &lbl_804D3EE0->thing.x1A20;
 }
 
-void* func_8015CD50(void)
+void* gmMainLib_8015CD50(void)
 {
     return &lbl_804D3EE0->thing.x1A24;
 }
 
-void* func_8015CD5C(void)
+void* gmMainLib_8015CD5C(void)
 {
     return &lbl_804D3EE0->thing.x1A28;
 }
 
-void* func_8015CD68(void)
+void* gmMainLib_8015CD68(void)
 {
     return &lbl_804D3EE0->thing.x1A2C;
 }
 
-void* func_8015CD74(void)
+void* gmMainLib_8015CD74(void)
 {
     return &lbl_804D3EE0->thing.x1A3C;
 }
 
-void* func_8015CD80(void)
+void* gmMainLib_8015CD80(void)
 {
     return &lbl_804D3EE0->thing.x1A44;
 }
 
-void* func_8015CD8C(void)
+void* gmMainLib_8015CD8C(void)
 {
     return &lbl_804D3EE0->thing.x1A50;
 }
 
-void* func_8015CD98(void)
+void* gmMainLib_8015CD98(void)
 {
     return &lbl_804D3EE0->thing.x1A54;
 }
 
-void* func_8015CDA4(void)
+void* gmMainLib_8015CDA4(void)
 {
     return &lbl_804D3EE0->thing.x1A58;
 }
 
-void* func_8015CDB0(void)
+void* gmMainLib_8015CDB0(void)
 {
     return &lbl_804D3EE0->thing.x1A5C;
 }
 
-void* func_8015CDBC(void)
+void* gmMainLib_8015CDBC(void)
 {
     return &lbl_804D3EE0->thing.x1A60;
 }
 
-void* func_8015CDC8(void)
+void* gmMainLib_8015CDC8(void)
 {
     return &lbl_804D3EE0->x51C;
 }
 
-void* func_8015CDD4(void)
+void* gmMainLib_8015CDD4(void)
 {
     return &lbl_804D3EE0->x522;
 }
 
-void* func_8015CDE0(void)
+void* gmMainLib_8015CDE0(void)
 {
     return &lbl_804D3EE0->x528;
 }
 
-void func_8015CDEC(void)
+void gmMainLib_8015CDEC(void)
 {
     s32 i;
     for (i = 0; i < 6; ++i) {
-        s8* ptr = func_8015CE44(i, 0x78);
+        s8* ptr = gmMainLib_8015CE44(i, 0x78);
         if (ptr != 0) {
             *ptr = 5;
         }
     }
 }
 
-s8* func_8015CE44(s32 arg0, s32 arg1)
+s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
 {
     if (arg1 == 0x78) {
         if (arg0 < 4) {
@@ -184,12 +184,12 @@ s8* func_8015CE44(s32 arg0, s32 arg1)
     }
 }
 
-void func_8015CEB4(s32 arg0)
+void gmMainLib_8015CEB4(s32 arg0)
 {
     lbl_804D3EE0->thing.x1A68 |= (1LL << arg0);
 }
 
-s32 func_8015CEFC(s32 arg0)
+s32 gmMainLib_8015CEFC(s32 arg0)
 {
     if (lbl_804D3EE0->thing.x1A68 & (1LL << arg0)) {
         return 1;
@@ -198,22 +198,22 @@ s32 func_8015CEFC(s32 arg0)
     }
 }
 
-s32 func_8015CF5C(s32 arg0)
+s32 gmMainLib_8015CF5C(s32 arg0)
 {
     return lbl_804D3EE0->thing.x1A70[arg0];
 }
 
-void func_8015CF70(s32 arg0, s32 arg1)
+void gmMainLib_8015CF70(s32 arg0, s32 arg1)
 {
     lbl_804D3EE0->thing.x1A70[arg0] = arg1;
 }
 
-void func_8015CF84(void)
+void gmMainLib_8015CF84(void)
 {
     lbl_804D3EE0->thing.x1B3C = 1;
 }
 
-s32 func_8015CF94(void)
+s32 gmMainLib_8015CF94(void)
 {
     if (lbl_804D3EE0->thing.x1B3C) {
         return 1;
@@ -226,18 +226,18 @@ s32 func_8015CFAC(void)
     return 0;
 }
 
-s8* func_8015CFB4(u8 arg0)
+s8* gmMainLib_8015CFB4(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x78;
 }
 
-s32 func_8015CFCC(u8 arg0)
+s32 gmMainLib_8015CFCC(u8 arg0)
 {
-    return (1 << arg0) & func_8015ED98()->xC;
+    return (1 << arg0) & gmMainLib_8015ED98()->xC;
 }
 
-void func_8015D00C(u8 arg0)
+void gmMainLib_8015D00C(u8 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -246,10 +246,10 @@ void func_8015D00C(u8 arg0)
 
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7A.bits.b0 = true;
-    func_8015ED98()->xC |= 1 << arg0;
+    gmMainLib_8015ED98()->xC |= 1 << arg0;
 }
 
-s32* func_8015D06C(u8 arg0)
+s32* gmMainLib_8015D06C(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x84;
@@ -258,7 +258,7 @@ s32* func_8015D06C(u8 arg0)
 #ifdef MUST_MATCH
 
 #pragma push
-asm s32* func_8015D084(s32 arg0)
+asm s32* gmMainLib_8015D084(s32 arg0)
 {
     // clang-format off
     nofralloc
@@ -267,7 +267,7 @@ asm s32* func_8015D084(s32 arg0)
 /* 8015D08C 00159C6C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8015D090 00159C70  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8015D094 00159C74  7C 7F 1B 78 */	mr r31, r3
-/* 8015D098 00159C78  48 00 1D 25 */	bl func_8015EDBC
+/* 8015D098 00159C78  48 00 1D 25 */	bl gmMainLib_8015EDBC
 /* 8015D09C 00159C7C  57 E4 15 BA */	rlwinm r4, r31, 2, 0x16, 0x1d
 /* 8015D0A0 00159C80  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8015D0A4 00159C84  38 03 00 00 */	addi r0, r3, 0
@@ -283,32 +283,32 @@ asm s32* func_8015D084(s32 arg0)
 #else
 
 // needs a @frank patch
-s32* func_8015D084(s32 arg0)
+s32* gmMainLib_8015D084(s32 arg0)
 {
-    return &func_8015EDBC()->xB0[arg0 & 0xFF];
+    return &gmMainLib_8015EDBC()->xB0[arg0 & 0xFF];
 }
 
 #endif
 
-s32* func_8015D0C0(u8 arg0)
+s32* gmMainLib_8015D0C0(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x88;
 }
 
-s32 func_8015D0D8(u8 arg0)
+s32 gmMainLib_8015D0D8(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.bits.b4;
 }
 
-s32 func_8015D0F4(u8 arg0)
+s32 gmMainLib_8015D0F4(u8 arg0)
 {
-    s32 x10 = func_8015ED98()->x10;
+    s32 x10 = gmMainLib_8015ED98()->x10;
     return x10 & (1 << arg0);
 }
 
-void func_8015D134(u8 arg0)
+void gmMainLib_8015D134(u8 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -317,46 +317,46 @@ void func_8015D134(u8 arg0)
 
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b4 = true;
-    func_8015ED98()->x10 |= 1 << arg0;
+    gmMainLib_8015ED98()->x10 |= 1 << arg0;
 }
 
-s8* func_8015D194(u8 arg0)
+s8* gmMainLib_8015D194(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x80;
 }
 
-s32 func_8015D1AC(u8 arg0)
+s32 gmMainLib_8015D1AC(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.bits.b789;
 }
 
-void func_8015D1C8(u8 arg0, s32 arg1)
+void gmMainLib_8015D1C8(u8 arg0, s32 arg1)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b789 = arg1;
 }
 
-s32* func_8015D1E8(u8 arg0)
+s32* gmMainLib_8015D1E8(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x8C;
 }
 
-s32 func_8015D200(u8 arg0)
+s32 gmMainLib_8015D200(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.bits.b5;
 }
 
-s32 func_8015D21C(u8 arg0)
+s32 gmMainLib_8015D21C(u8 arg0)
 {
-    s32 x14 = func_8015ED98()->x14;
+    s32 x14 = gmMainLib_8015ED98()->x14;
     return x14 & (1 << arg0);
 }
 
-void func_8015D25C(u8 arg0)
+void gmMainLib_8015D25C(u8 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -365,46 +365,46 @@ void func_8015D25C(u8 arg0)
 
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b5 = true;
-    func_8015ED98()->x14 |= 1 << arg0;
+    gmMainLib_8015ED98()->x14 |= 1 << arg0;
 }
 
-s8* func_8015D2BC(u8 arg0)
+s8* gmMainLib_8015D2BC(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x81;
 }
 
-s32 func_8015D2D4(u8 arg0)
+s32 gmMainLib_8015D2D4(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.bits.b10_to_12;
 }
 
-void func_8015D2F0(u8 arg0, s32 arg1)
+void gmMainLib_8015D2F0(u8 arg0, s32 arg1)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b10_to_12 = arg1;
 }
 
-s32* func_8015D310(u8 arg0)
+s32* gmMainLib_8015D310(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x90;
 }
 
-s32 func_8015D328(u8 arg0)
+s32 gmMainLib_8015D328(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.bits.b6;
 }
 
-s32 func_8015D344(u8 arg0)
+s32 gmMainLib_8015D344(u8 arg0)
 {
-    s32 x18 = func_8015ED98()->x18;
+    s32 x18 = gmMainLib_8015ED98()->x18;
     return x18 & (1 << arg0);
 }
 
-void func_8015D384(u8 arg0)
+void gmMainLib_8015D384(u8 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -413,28 +413,28 @@ void func_8015D384(u8 arg0)
 
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b6 = true;
-    func_8015ED98()->x18 |= 1 << arg0;
+    gmMainLib_8015ED98()->x18 |= 1 << arg0;
 }
 
-s8* func_8015D3E4(u8 arg0)
+s8* gmMainLib_8015D3E4(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x82;
 }
 
-s32 func_8015D3FC(u8 arg0)
+s32 gmMainLib_8015D3FC(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.bits.b13_to_15;
 }
 
-void func_8015D418(u8 arg0, s32 arg1)
+void gmMainLib_8015D418(u8 arg0, s32 arg1)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b13_to_15 = arg1;
 }
 
-s32* func_8015D438(u8 arg0)
+s32* gmMainLib_8015D438(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x94;
@@ -443,7 +443,7 @@ s32* func_8015D438(u8 arg0)
 #ifdef MUST_MATCH
 
 #pragma push
-asm s32* func_8015D450(s32 arg0)
+asm s32* gmMainLib_8015D450(s32 arg0)
 {
     // clang-format off
     nofralloc
@@ -452,7 +452,7 @@ asm s32* func_8015D450(s32 arg0)
 /* 8015D458 0015A038  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 8015D45C 0015A03C  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 8015D460 0015A040  7C 7F 1B 78 */	mr r31, r3
-/* 8015D464 0015A044  48 00 19 59 */	bl func_8015EDBC
+/* 8015D464 0015A044  48 00 19 59 */	bl gmMainLib_8015EDBC
 /* 8015D468 0015A048  57 E4 15 BA */	rlwinm r4, r31, 2, 0x16, 0x1d
 /* 8015D46C 0015A04C  83 E1 00 14 */	lwz r31, 0x14(r1)
 /* 8015D470 0015A050  38 03 00 00 */	addi r0, r3, 0
@@ -468,32 +468,32 @@ asm s32* func_8015D450(s32 arg0)
 #else
 
 // needs a @frank patch
-s32* func_8015D450(s32 arg0)
+s32* gmMainLib_8015D450(s32 arg0)
 {
-    return &func_8015EDBC()->x4C[arg0 & 255];
+    return &gmMainLib_8015EDBC()->x4C[arg0 & 255];
 }
 
 #endif
 
-s32 func_8015D48C(u8 arg0)
+s32 gmMainLib_8015D48C(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.bits.b0;
 }
 
-s32 func_8015D4A8(u8 arg0)
+s32 gmMainLib_8015D4A8(u8 arg0)
 {
-    s32 x1C = func_8015ED98()->x1C;
+    s32 x1C = gmMainLib_8015ED98()->x1C;
     return x1C & (1 << arg0);
 }
 
-void func_8015D4E8(u8 arg0, s32 arg1)
+void gmMainLib_8015D4E8(u8 arg0, s32 arg1)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b0 = arg1;
 }
 
-s32 lbl_8015D508(void)
+s32 gmMainLib_8015D508(void)
 {
     struct gmm_x1868* base = &lbl_804D3EE0->thing;
     s32 i;
@@ -506,11 +506,11 @@ s32 lbl_8015D508(void)
     return 1;
 }
 
-s32 func_8015D5DC(void)
+s32 gmMainLib_8015D5DC(void)
 {
     s32 i;
     for (i = 0; i < 0x19; i++) {
-        s32 j = func_8015EDB0()->x4;
+        s32 j = gmMainLib_8015EDB0()->x4;
         s32 k = 1 << (u8) i;
         if ((j & k) == 0) {
             return 0;
@@ -519,11 +519,11 @@ s32 func_8015D5DC(void)
     return 1;
 }
 
-s32 func_8015D640(void)
+s32 gmMainLib_8015D640(void)
 {
     s32 i;
     for (i = 0; i < 0x19; i++) {
-        s32 j = func_8015EDBC()->x8;
+        s32 j = gmMainLib_8015EDBC()->x8;
         s32 k = 1 << (u8) i;
         if ((j & k) == 0) {
             return 0;
@@ -532,157 +532,157 @@ s32 func_8015D640(void)
     return 1;
 }
 
-s32* func_8015D6A4(u8 arg0)
+s32* gmMainLib_8015D6A4(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x98;
 }
 
-s32 func_8015D6BC(u8 arg0)
+s32 gmMainLib_8015D6BC(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.bits.b1;
 }
 
-void func_8015D6D8(u8 arg0, s32 arg1)
+void gmMainLib_8015D6D8(u8 arg0, s32 arg1)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b1 = arg1;
 }
 
-s32* func_8015D6F8(u8 arg0)
+s32* gmMainLib_8015D6F8(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x9C;
 }
 
-s32 func_8015D710(u8 arg0)
+s32 gmMainLib_8015D710(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.bits.b2;
 }
 
-void func_8015D72C(u8 arg0, s32 arg1)
+void gmMainLib_8015D72C(u8 arg0, s32 arg1)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b2 = arg1;
 }
 
-s16* func_8015D74C(u8 arg0)
+s16* gmMainLib_8015D74C(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].xA0;
 }
 
-s32 func_8015D764(u8 arg0)
+s32 gmMainLib_8015D764(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.bits.b3;
 }
 
-void func_8015D780(u8 arg0)
+void gmMainLib_8015D780(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.bits.b3 = 1;
 }
 
-s16* func_8015D7A4(u8 arg0)
+s16* gmMainLib_8015D7A4(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].xA2;
 }
 
-s32* func_8015D7BC(u8 arg0)
+s32* gmMainLib_8015D7BC(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].xA4;
 }
 
-s32* func_8015D7D4(u8 arg0)
+s32* gmMainLib_8015D7D4(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].xA8;
 }
 
-s16* func_8015D7EC(u8 arg0)
+s16* gmMainLib_8015D7EC(u8 arg0)
 {
     struct gmm_x1F2C* base = &lbl_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7E;
 }
 
-void* func_8015D804(s32 arg0)
+void* gmMainLib_8015D804(s32 arg0)
 {
     struct gmm_x1868* thing = &lbl_804D3EE0->thing;
     return &thing->x1B80[arg0];
 }
 
-s32 func_8015D818(u32 arg0)
+s32 gmMainLib_8015D818(u32 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[40];
 #endif
 
-    if ((signed) func_8015D94C(arg0) == 0) {
+    if ((signed) gmMainLib_8015D94C(arg0) == 0) {
         struct gmm_x1868* base = &lbl_804D3EE0->thing;
         u32* q = &base->x1B80[arg0];
-        *q = func_8000AFBC();
-        func_8015D888(arg0);
-        func_8015D8FC(arg0);
+        *q = lbTime_8000AFBC();
+        gmMainLib_8015D888(arg0);
+        gmMainLib_8015D8FC(arg0);
         return 1;
     }
     return 0;
 }
 
-void func_8015D888(u32 arg0)
+void gmMainLib_8015D888(u32 arg0)
 {
     u32* thing = &lbl_804D3EE0->thing.x1B40[0];
     thing[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
-void func_8015D8B0(u32 arg0)
+void gmMainLib_8015D8B0(u32 arg0)
 {
     u32* thing = &lbl_804D3EE0->thing.x1B40[0];
     thing[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
-s32 func_8015D8D8(u32 arg0)
+s32 gmMainLib_8015D8D8(u32 arg0)
 {
     u32* thing = &lbl_804D3EE0->thing.x1B40[0];
     return thing[arg0 / 32] & (1 << (arg0 % 32));
 }
 
-void func_8015D8FC(u32 arg0)
+void gmMainLib_8015D8FC(u32 arg0)
 {
     u32* thing = &lbl_804D3EE0->thing.x1B4C[0];
     thing[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
-void func_8015D924(u32 arg0)
+void gmMainLib_8015D924(u32 arg0)
 {
     u32* thing = &lbl_804D3EE0->thing.x1B4C[0];
     thing[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
-u32 func_8015D94C(u32 arg0)
+u32 gmMainLib_8015D94C(u32 arg0)
 {
     u32* thing = &lbl_804D3EE0->thing.x1B4C[0];
     u32 flag = thing[arg0 / 32];
     return flag & (1 << (arg0 % 32));
 }
 
-u32* func_8015D970(ssize_t idx)
+u32* gmMainLib_8015D970(ssize_t idx)
 {
     u32* base = &lbl_804D3EE0->x6C[0];
     return &base[idx];
 }
 
-void func_8015D9F4(u32 arg0);
-void func_8015DA40(u32 arg0);
+void gmMainLib_8015D9F4(u32 arg0);
+void gmMainLib_8015DA40(u32 arg0);
 
 #ifdef MUST_MATCH
 #pragma push
-asm bool func_8015D984(u32 arg0)
+asm bool gmMainLib_8015D984(u32 arg0)
 { // clang-format off
     nofralloc
 /* 8015D984 0015A564  7C 08 02 A6 */	mflr r0
@@ -691,19 +691,19 @@ asm bool func_8015D984(u32 arg0)
 /* 8015D990 0015A570  93 E1 00 24 */	stw r31, 0x24(r1)
 /* 8015D994 0015A574  93 C1 00 20 */	stw r30, 0x20(r1)
 /* 8015D998 0015A578  7C 7E 1B 78 */	mr r30, r3
-/* 8015D99C 0015A57C  48 00 00 F5 */	bl func_8015DA90
+/* 8015D99C 0015A57C  48 00 00 F5 */	bl gmMainLib_8015DA90
 /* 8015D9A0 0015A580  2C 03 00 00 */	cmpwi r3, 0
 /* 8015D9A4 0015A584  40 82 00 34 */	bne lbl_8015D9D8
 /* 8015D9A8 0015A588  80 6D 88 40 */	lwz r3, lbl_804D3EE0
 /* 8015D9AC 0015A58C  57 C0 10 3A */	slwi r0, r30, 2
 /* 8015D9B0 0015A590  7C 63 02 14 */	add r3, r3, r0
 /* 8015D9B4 0015A594  3B E3 00 6C */	addi r31, r3, 0x6c
-/* 8015D9B8 0015A598  4B EA D6 05 */	bl func_8000AFBC
+/* 8015D9B8 0015A598  4B EA D6 05 */	bl lbTime_8000AFBC
 /* 8015D9BC 0015A59C  90 7F 00 00 */	stw r3, 0(r31)
 /* 8015D9C0 0015A5A0  7F C3 F3 78 */	mr r3, r30
-/* 8015D9C4 0015A5A4  48 00 00 31 */	bl func_8015D9F4
+/* 8015D9C4 0015A5A4  48 00 00 31 */	bl gmMainLib_8015D9F4
 /* 8015D9C8 0015A5A8  7F C3 F3 78 */	mr r3, r30
-/* 8015D9CC 0015A5AC  48 00 00 75 */	bl func_8015DA40
+/* 8015D9CC 0015A5AC  48 00 00 75 */	bl gmMainLib_8015DA40
 /* 8015D9D0 0015A5B0  38 60 00 01 */	li r3, 1
 /* 8015D9D4 0015A5B4  48 00 00 08 */	b lbl_8015D9DC
 lbl_8015D9D8:
@@ -721,20 +721,20 @@ lbl_8015D9DC:
 #else
 // https://decomp.me/scratch/CJy8X
 // register swap
-bool func_8015D984(u32 arg0)
+bool gmMainLib_8015D984(u32 arg0)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
 
-    if (func_8015DA90(arg0) == 0) {
+    if (gmMainLib_8015DA90(arg0) == 0) {
         u32* base = &lbl_804D3EE0->x6C[0];
         u32* qwe = &base[arg0];
-        *qwe = func_8000AFBC();
+        *qwe = lbTime_8000AFBC();
 
-        func_8015D9F4(arg0);
-        func_8015DA40(arg0);
+        gmMainLib_8015D9F4(arg0);
+        gmMainLib_8015DA40(arg0);
         return true;
     }
 
@@ -742,76 +742,76 @@ bool func_8015D984(u32 arg0)
 }
 #endif
 
-void func_8015D9F4(u32 arg0)
+void gmMainLib_8015D9F4(u32 arg0)
 {
     s32* base = &lbl_804D3EE0->x44;
     base[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
-s32 func_8015DA1C(u32 arg0)
+s32 gmMainLib_8015DA1C(u32 arg0)
 {
     s32* base = &lbl_804D3EE0->x44;
     return (1 << (arg0 % 32)) & base[arg0 / 32];
 }
 
-void func_8015DA40(u32 arg0)
+void gmMainLib_8015DA40(u32 arg0)
 {
     u32* base = &lbl_804D3EE0->thing.x1B58[0];
     base[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
-void func_8015DA68(u32 arg0)
+void gmMainLib_8015DA68(u32 arg0)
 {
     u32* base = &lbl_804D3EE0->thing.x1B58[0];
     base[arg0 / 32] &= ~(1 << (arg0 % 32));
 }
 
-u32 func_8015DA90(u32 arg0)
+u32 gmMainLib_8015DA90(u32 arg0)
 {
     u32* base = &lbl_804D3EE0->thing.x1B58[0];
     u32* qwe = &base[arg0 / 32];
     return *qwe & (1 << (arg0 % 32));
 }
 
-void func_8015DAB4(u32 arg0)
+void gmMainLib_8015DAB4(u32 arg0)
 {
     u32* base = &lbl_804D3EE0->thing.x1C88[0];
     base[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
-s32 func_8015DADC(u32 arg0)
+s32 gmMainLib_8015DADC(u32 arg0)
 {
     u32* base = &lbl_804D3EE0->thing.x1C88[0];
     return (1 << (arg0 % 32)) & base[arg0 / 32];
 }
 
-u8 func_8015DB00(void)
+u8 gmMainLib_8015DB00(void)
 {
     return lbl_804D3EE0->x1;
 }
 
-void func_8015DB0C(u8 arg0)
+void gmMainLib_8015DB0C(u8 arg0)
 {
     lbl_804D3EE0->x1 = arg0;
 }
 
-void func_8015DB18(void)
+void gmMainLib_8015DB18(void)
 {
     lbl_804D3EE0->x1 += 1;
 }
 
-void func_8015DB2C(u8 arg0, s32 arg2)
+void gmMainLib_8015DB2C(u8 arg0, s32 arg2)
 {
     struct gmm_x0* gmmthing = lbl_804D3EE0;
-    gmmthing->x39[arg0] = func_8000AF74(lbl_804D3EE0->x39[arg0], 1);
+    gmmthing->x39[arg0] = lbTime_8000AF74(lbl_804D3EE0->x39[arg0], 1);
 }
 
-u8 func_8015DB6C(u8 arg0)
+u8 gmMainLib_8015DB6C(u8 arg0)
 {
     return lbl_804D3EE0->x39[arg0];
 }
 
-void func_8015DB80(void)
+void gmMainLib_8015DB80(void)
 {
     int i;
     for (i = 0; i < 11; i++) {

@@ -11,49 +11,49 @@
 #include <melee/it/itkind.h>
 #include <melee/lb/lbmthp.h>
 
-ActionState as_table_clink[] = {
-    { 295, 0x00240009, 0x0A000000, func_800CEDE0, func_800CEE00, func_800CEE30,
-      func_800CEE50, func_800761C8 },
-    { 239, 0x00000071, 0x01000000, func_80149354, func_8014943C, func_8014945C,
-      func_8014947C, func_800761C8 },
-    { 240, 0x00000071, 0x01000000, func_80149354, func_8014943C, func_8014945C,
-      func_8014947C, func_800761C8 },
-    { 296, 0x00340111, 0x12000000, func_800ED15C, func_800EDD88, func_800EDFD8,
-      func_800EE098, func_800761C8 },
-    { 297, 0x003C0111, 0x12000000, func_800ED480, func_800EDE30, func_800EDFF8,
-      func_800EE120, func_800761C8 },
-    { 298, 0x00340111, 0x12000000, func_800ED5B4, func_800EDEAC, func_800EE018,
-      func_800EE1A8, func_800761C8 },
-    { 299, 0x00340511, 0x12000000, func_800ED72C, func_800EDEB0, func_800EE038,
-      func_800EE2E0, func_800761C8 },
-    { 300, 0x003C0511, 0x12000000, func_800EDA58, func_800EDF58, func_800EE058,
-      func_800EE368, func_800761C8 },
-    { 301, 0x00340511, 0x12000000, func_800EDB8C, func_800EDFD4, func_800EE078,
-      func_800EE3F0, func_800761C8 },
-    { 302, 0x00340112, 0x13000000, func_800EC54C, NULL, func_800EC88C,
-      func_800EC94C, func_800761C8 },
-    { 303, 0x00340112, 0x13000000, func_800EC588, func_800EC71C, func_800EC8AC,
-      func_800EC9C4, func_800761C8 },
-    { 304, 0x00340112, 0x13000000, func_800EC5F8, NULL, func_800EC8CC,
-      func_800ECA1C, func_800761C8 },
-    { 305, 0x00340512, 0x13000000, func_800EC634, NULL, func_800EC8EC,
-      func_800ECA88, func_800761C8 },
-    { 306, 0x00340512, 0x13000000, func_800EC670, func_800EC810, func_800EC90C,
-      func_800ECB00, func_800761C8 },
-    { 307, 0x00340512, 0x13000000, func_800EC6E0, NULL, func_800EC92C,
-      func_800ECB58, func_800761C8 },
-    { 308, 0x00340213, 0x14000000, func_800EBC10, func_800EBCAC, func_800EBD30,
-      func_800EBDC0, func_800761C8 },
-    { 309, 0x00340213, 0x14000000, func_800EBC4C, func_800EBCB0, func_800EBCB4,
-      func_800EBDFC, func_800761C8 },
-    { 310, 0x00340014, 0x15000000, func_800EB8A4, NULL, func_800EB91C,
-      func_800EB95C, func_800761C8 },
-    { 311, 0x00340414, 0x15000000, func_800EB8E0, NULL, func_800EB93C,
-      func_800EB9D4, func_800761C8 },
-    { 312, 0x00200000, 0x01000000, func_800C3D6C, func_800C4384, func_800C438C,
-      func_800C447C, func_800761C8 },
-    { 313, 0x00C00000, 0x01000000, func_800C4380, func_800C4388, func_800C4438,
-      func_80082B78, func_800761C8 },
+ActionState ftCLink_MotionStateTable[] = {
+    { 295, 0x00240009, 0x0A000000, ftLink_800CEDE0, ftLink_800CEE00,
+      ftLink_800CEE30, ftLink_800CEE50, ftCamera_UpdateCameraBox },
+    { 239, 0x00000071, 0x01000000, ftCLink_80149354, ftCLink_8014943C,
+      ftCLink_8014945C, ftCLink_8014947C, ftCamera_UpdateCameraBox },
+    { 240, 0x00000071, 0x01000000, ftCLink_80149354, ftCLink_8014943C,
+      ftCLink_8014945C, ftCLink_8014947C, ftCamera_UpdateCameraBox },
+    { 296, 0x00340111, 0x12000000, ftLink_800ED15C, ftLink_800EDD88,
+      ftLink_800EDFD8, ftLink_800EE098, ftCamera_UpdateCameraBox },
+    { 297, 0x003C0111, 0x12000000, ftLink_800ED480, ftLink_800EDE30,
+      ftLink_800EDFF8, ftLink_800EE120, ftCamera_UpdateCameraBox },
+    { 298, 0x00340111, 0x12000000, ftLink_800ED5B4, ftLink_800EDEAC,
+      ftLink_800EE018, ftLink_800EE1A8, ftCamera_UpdateCameraBox },
+    { 299, 0x00340511, 0x12000000, ftLink_800ED72C, ftLink_800EDEB0,
+      ftLink_800EE038, ftLink_800EE2E0, ftCamera_UpdateCameraBox },
+    { 300, 0x003C0511, 0x12000000, ftLink_800EDA58, ftLink_800EDF58,
+      ftLink_800EE058, ftLink_800EE368, ftCamera_UpdateCameraBox },
+    { 301, 0x00340511, 0x12000000, ftLink_800EDB8C, ftLink_800EDFD4,
+      ftLink_800EE078, ftLink_800EE3F0, ftCamera_UpdateCameraBox },
+    { 302, 0x00340112, 0x13000000, ftLink_800EC54C, NULL, ftLink_800EC88C,
+      ftLink_800EC94C, ftCamera_UpdateCameraBox },
+    { 303, 0x00340112, 0x13000000, ftLink_800EC588, ftLink_800EC71C,
+      ftLink_800EC8AC, ftLink_800EC9C4, ftCamera_UpdateCameraBox },
+    { 304, 0x00340112, 0x13000000, ftLink_800EC5F8, NULL, ftLink_800EC8CC,
+      ftLink_800ECA1C, ftCamera_UpdateCameraBox },
+    { 305, 0x00340512, 0x13000000, ftLink_800EC634, NULL, ftLink_800EC8EC,
+      ftLink_800ECA88, ftCamera_UpdateCameraBox },
+    { 306, 0x00340512, 0x13000000, ftLink_800EC670, ftLink_800EC810,
+      ftLink_800EC90C, ftLink_800ECB00, ftCamera_UpdateCameraBox },
+    { 307, 0x00340512, 0x13000000, ftLink_800EC6E0, NULL, ftLink_800EC92C,
+      ftLink_800ECB58, ftCamera_UpdateCameraBox },
+    { 308, 0x00340213, 0x14000000, ftLink_800EBC10, ftLink_800EBCAC,
+      ftLink_800EBD30, ftLink_800EBDC0, ftCamera_UpdateCameraBox },
+    { 309, 0x00340213, 0x14000000, ftLink_800EBC4C, ftLink_800EBCB0,
+      ftLink_800EBCB4, ftLink_800EBDFC, ftCamera_UpdateCameraBox },
+    { 310, 0x00340014, 0x15000000, ftLink_800EB8A4, NULL, ftLink_800EB91C,
+      ftLink_800EB95C, ftCamera_UpdateCameraBox },
+    { 311, 0x00340414, 0x15000000, ftLink_800EB8E0, NULL, ftLink_800EB93C,
+      ftLink_800EB9D4, ftCamera_UpdateCameraBox },
+    { 312, 0x00200000, 0x01000000, ftLink_800C3D6C, ftLink_800C4384,
+      ftLink_800C438C, ftLink_800C447C, ftCamera_UpdateCameraBox },
+    { 313, 0x00C00000, 0x01000000, ftLink_800C4380, ftLink_800C4388,
+      ftLink_800C4438, ftLink_80082B78, ftCamera_UpdateCameraBox },
 };
 
 char lbl_803D1240[] = "PlCl.dat";
@@ -93,9 +93,9 @@ Fighter_CostumeStrings lbl_803D1458[] = {
 void ftCLink_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_80074A4C(gobj, 0, 0);
-    func_80074A4C(gobj, 1, 0);
-    func_80074A4C(gobj, 2, 0);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
+    ftParts_80074A4C(gobj, 2, 0);
     fp->ev.cl.x222C = 0;
     fp->ev.cl.x2234 = 0;
     fp->ev.cl.x2238 = 0;
@@ -118,16 +118,16 @@ void ftCLink_OnLoad(HSD_GObj* gobj)
     void** items = ftdata->x48_items;
 
     fp->x2224_flag.bits.b7 = true;
-    attrs->x54 = func_8001E8F8(func_80085E50(fp, 0x48));
+    attrs->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x48));
     ftLink_OnLoadForCLink(fp);
     attrs = fp->x2D4_specialAttributes;
-    func_8026B3F8(items[0], attrs->x48);
-    func_8026B3F8(items[1], attrs->x2C);
-    func_8026B3F8(items[2], attrs->xBC);
-    func_8026B3F8(items[3], attrs->xC);
-    func_8026B3F8(items[4], attrs->x10);
-    func_8026B3F8(items[5], It_Kind_CLink_Milk);
-    func_800753D4(fp, *lbl_804D6540[fp->x4_fighterKind], items[6]);
+    it_8026B3F8(items[0], attrs->x48);
+    it_8026B3F8(items[1], attrs->x2C);
+    it_8026B3F8(items[2], attrs->xBC);
+    it_8026B3F8(items[3], attrs->xC);
+    it_8026B3F8(items[4], attrs->x10);
+    it_8026B3F8(items[5], It_Kind_CLink_Milk);
+    ftParts_800753D4(fp, *lbl_804D6540[fp->x4_fighterKind], items[6]);
 }
 
 void ftCLink_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
@@ -139,10 +139,10 @@ void ftCLink_OnItemPickupExt(HSD_GObj* gobj, bool arg1)
 
     Fighter* fp = gobj->user_data;
 
-    if (func_8026B2B4(fp->x1974_heldItem) == true)
-        func_80074A4C(gobj, 1, 1);
+    if (it_8026B2B4(fp->x1974_heldItem) == true)
+        ftParts_80074A4C(gobj, 1, 1);
 
-    func_80074A4C(gobj, 2, 1);
+    ftParts_80074A4C(gobj, 2, 1);
     ftCLink_OnItemPickup(gobj, arg1);
 }
 
@@ -165,10 +165,10 @@ void ftCLink_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 
     Fighter* fp = gobj->user_data;
 
-    if (func_8026B2B4(fp->x1974_heldItem) == true)
-        func_80074A4C(gobj, 1, 0);
+    if (it_8026B2B4(fp->x1974_heldItem) == true)
+        ftParts_80074A4C(gobj, 1, 0);
 
-    func_80074A4C(gobj, 2, 0);
+    ftParts_80074A4C(gobj, 2, 0);
     ftCLink_OnItemDrop(gobj, arg1);
 }
 
@@ -201,11 +201,11 @@ void ftCLink_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void func_80149114(HSD_GObj* gobj)
+void ftCLink_80149114(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     CLinkAttributes* temp_r4 = (void*) fp->x10C_ftData->ext_attr;
-    f32 ftmp = func_80092ED8(fp->x19A4, temp_r4, temp_r4->xD8);
+    f32 ftmp = ft_80092ED8(fp->x19A4, temp_r4, temp_r4->xD8);
     fp->xEC_ground_vel = ftmp * p_ftCommonData->x294;
     if (fp->x19AC < 0.0f) {
         ftmp = fp->xEC_ground_vel;
@@ -213,10 +213,10 @@ void func_80149114(HSD_GObj* gobj)
         ftmp = -fp->xEC_ground_vel;
     }
     fp->xEC_ground_vel = ftmp;
-    func_80088148(fp, 0x111DA, 0x7F, 0x40);
+    ft_80088148(fp, 0x111DA, 0x7F, 0x40);
 }
 
-void func_8014919C(HSD_GObj* gobj)
+void ftCLink_8014919C(HSD_GObj* gobj)
 {
     CLinkAttributes* attrs;
 
@@ -228,14 +228,14 @@ void func_8014919C(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     if (fp->x5F8 == 0) {
         attrs = (void*) fp->x2D4_specialAttributes;
-        func_8007B1B8(gobj, &attrs->xC4, func_80149114);
+        ftColl_8007B1B8(gobj, &attrs->xC4, ftCLink_80149114);
         fp->x221B_b3 = true;
         fp->x221B_b4 = true;
         fp->x221B_b2 = true;
     }
 }
 
-bool func_8014920C(HSD_GObj* gobj)
+bool ftCLink_8014920C(HSD_GObj* gobj)
 {
     s32 temp_r0;
     Fighter* fp;
@@ -257,7 +257,7 @@ bool func_8014920C(HSD_GObj* gobj)
     return false;
 }
 
-void func_80149268(HSD_GObj* gobj)
+void ftCLink_80149268(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -267,7 +267,7 @@ void func_80149268(HSD_GObj* gobj)
     checkFighter2244(gobj);
 }
 
-void func_801492C4(HSD_GObj* gobj)
+void ftCLink_801492C4(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -285,7 +285,7 @@ void func_801492C4(HSD_GObj* gobj)
     }
 }
 
-u32 func_801492F4(HSD_GObj* gobj)
+u32 ftCLink_801492F4(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -298,9 +298,9 @@ u32 func_801492F4(HSD_GObj* gobj)
     return 0;
 }
 
-void func_80149318(HSD_GObj* gobj)
+void ftCLink_80149318(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_800DEAE8(gobj, 0x156, 0x157);
+    ft_800DEAE8(gobj, 0x156, 0x157);
     fp->x2204_ftcmd_var1 = 0;
 }

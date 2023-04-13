@@ -9,7 +9,7 @@ static int const max_input_frames = 254;
 
 /// UnclePunch Map file: Interrupt_Walljump
 /// @returns: @c true if this function started a walljump, otherwise @c false.
-bool func_8008169C(HSD_GObj* fighter_gobj)
+bool ftWallJump_8008169C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp0 = GET_FIGHTER(fighter_gobj);
 
@@ -48,8 +48,8 @@ bool func_8008169C(HSD_GObj* fighter_gobj)
                     ecb.y += fp0->xB0_pos.y;
                     ecb.z += fp0->xB0_pos.z;
                     // compute distance to the wall?
-                    if (!func_800567C0(coll_data->x174_leftwall.index, &ecb,
-                                       &wall_pos))
+                    if (!mpLib_800567C0(coll_data->x174_leftwall.index, &ecb,
+                                        &wall_pos))
                         wall_pos.x = 0.0f;
                 } else {
                     // compute absolte position of the ECB's right vertex?
@@ -60,8 +60,8 @@ bool func_8008169C(HSD_GObj* fighter_gobj)
                     ecb.y += fp0->xB0_pos.y;
                     ecb.z += fp0->xB0_pos.z;
                     // compute distance to the wall?
-                    if (!func_800567C0(coll_data->x160_rightwall.index, &ecb,
-                                       &wall_pos))
+                    if (!mpLib_800567C0(coll_data->x160_rightwall.index, &ecb,
+                                        &wall_pos))
                         wall_pos.x = 0.0f;
                 }
 
@@ -97,9 +97,9 @@ bool func_8008169C(HSD_GObj* fighter_gobj)
                 fp0->x670_timer_lstick_tilt_x < p_ftCommonData->x770)
             {
                 // do a walljump!
-                func_800C1E64(fighter_gobj, ASID_PASSIVEWALLJUMP,
-                              p_ftCommonData->x774, fp0->x1969_walljumpUsed,
-                              fp0->x2110_walljumpWallSide);
+                ft_800C1E64(fighter_gobj, ASID_PASSIVEWALLJUMP,
+                            p_ftCommonData->x774, fp0->x1969_walljumpUsed,
+                            fp0->x2110_walljumpWallSide);
 
                 fp0->x210C_walljumpInputTimer = max_input_frames;
                 if (fp0->x1969_walljumpUsed < 255)

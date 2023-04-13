@@ -5,7 +5,7 @@
 #include "ft/ftbosslib.h"
 
 // 80153D28 150908
-void lbl_80153D28(HSD_GObj* gobj)
+void ftMasterHand_80153D28(HSD_GObj* gobj)
 {
     return;
 }
@@ -16,7 +16,7 @@ static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
     return gobj->hsd_obj;
 }
 
-void lbl_80153D2C(HSD_GObj* gobj)
+void ftMasterHand_80153D2C(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER and #GET_JOBJ both cause regswaps here,
     ///       but they probably shouldn't.
@@ -32,9 +32,9 @@ void lbl_80153D2C(HSD_GObj* gobj)
     u8 _[4];
 #endif
 
-    Fighter_ActionStateChange_800693AC(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
-    func_8015C208(gobj, &sp1C);
+    Fighter_ChangeMotionState(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
+    ftAnim_8006EBA4(gobj);
+    ftBossLib_8015C208(gobj, &sp1C);
     fp->xB0_pos.x = sp1C.x;
     fp->xB0_pos.y = attr->x70;
 
@@ -68,7 +68,7 @@ void lbl_80153D2C(HSD_GObj* gobj)
 
 // 80153F8C 150B6C
 // https://decomp.me/scratch/w6kte
-void lbl_80153F8C(HSD_GObj* gobj_arg)
+void ftMasterHand_80153F8C(HSD_GObj* gobj_arg)
 {
     HSD_GObj* gobj = gobj_arg;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -93,22 +93,22 @@ void lbl_80153F8C(HSD_GObj* gobj_arg)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->x80_self_vel.x = 0.0f;
-        func_80151018(gobj);
+        ftMasterHand_80151018(gobj);
     }
 }
 
 // 80154114 150CF4
-void lbl_80154114(HSD_GObj* arg0)
+void ftMasterHand_80154114(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        func_8015BD20(arg0);
+        ftBossLib_8015BD20(arg0);
     }
 }
 
 // 80154158 150D38
 // https://decomp.me/scratch/rgPDD
-void lbl_80154158(HSD_GObj* gobj)
+void ftMasterHand_80154158(HSD_GObj* gobj)
 {
     Fighter* r3_fp = GET_FIGHTER(gobj);
 
@@ -119,9 +119,9 @@ void lbl_80154158(HSD_GObj* gobj)
 
     if (--r3_fp->sv.mh.unk0.x0 > 0.0f) {
         ftMasterHand_SpecialAttrs* r4_attributes = r3_fp->x10C_ftData->ext_attr;
-        func_8015BF74(gobj, r4_attributes->x58);
+        ftBossLib_8015BF74(gobj, r4_attributes->x58);
     } else {
         r3_fp->x80_self_vel.x = 0.0f;
     }
-    func_8015C190(gobj);
+    ftBossLib_8015C190(gobj);
 }

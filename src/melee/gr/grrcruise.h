@@ -4,6 +4,6 @@
 #include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
 
-void func_80201918(Vec3*);
+void grRCruise_80201918(Vec3*);
 
 #endif

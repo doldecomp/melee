@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void func_8022F3D8(void);
+void mn_8022F3D8(void);
 
 #endif

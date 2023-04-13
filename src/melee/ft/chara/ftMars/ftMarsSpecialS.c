@@ -5,7 +5,7 @@
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
 
-void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
+void ftMars_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -30,14 +30,14 @@ void ftMars_SpecialS_StartAction(HSD_GObj* gobj)
             else
                 asid = 358;
 
-            Fighter_ActionStateChange_800693AC(gobj, asid, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, asid, 0, 0, 0, 1, 0);
         }
     }
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
-void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
+void ftMars_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
     MarsAttributes* attr = getFtSpecialAttrsD(fp0);
@@ -63,11 +63,11 @@ void ftMars_SpecialAirS_StartAction(HSD_GObj* gobj)
             else
                 asid = 358;
 
-            Fighter_ActionStateChange_800693AC(gobj, asid, 0, 0, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, asid, 0, 0, 0, 1, 0);
         }
     }
 
-    func_8006EBA4(gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
 void ftMars_80137558(HSD_GObj* gobj)
@@ -76,9 +76,9 @@ void ftMars_80137558(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground)
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         else
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
     }
 }
 
@@ -107,11 +107,11 @@ void ftMars_80137618(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // Physics_Friction
-        func_80084F3C(gobj);
+        ft_80084F3C(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, attr->x20, attr->x24);
-        func_8007CE94(fp, attr->x18);
+        ftCommon_8007D494(fp, attr->x20, attr->x24);
+        ftCommon_8007CE94(fp, attr->x18);
     }
 }
 
@@ -121,11 +121,11 @@ void ftMars_8013767C(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (!func_800827A0(gobj))
+        if (!ft_800827A0(gobj))
             ftMars_801376E8(gobj);
     } else {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
-        if (func_80081D0C(gobj)) {
+        if (ft_80081D0C(gobj)) {
             // MarthSideBAir->Ground
             ftMars_80137748(gobj);
         }
@@ -145,10 +145,10 @@ void ftMars_801376E8(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, 358, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 358, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80137748(HSD_GObj* gobj)
@@ -157,10 +157,10 @@ void ftMars_80137748(HSD_GObj* gobj)
     fp->ev.ms.x222C = 0;
 
     // Air_SetAsGrounded2
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(gobj, 349, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, 349, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_801377B0(HSD_GObj* gobj)
@@ -170,10 +170,10 @@ void ftMars_801377B0(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         } else {
             // AS_029_Fall
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         }
     }
 }
@@ -204,11 +204,11 @@ void ftMars_80137870(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // Physics_Friction
-        func_80084F3C(gobj);
+        ft_80084F3C(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, attr->x20, attr->x24);
-        func_8007CE94(fp, attr->x18);
+        ftCommon_8007D494(fp, attr->x20, attr->x24);
+        ftCommon_8007CE94(fp, attr->x18);
     }
 }
 
@@ -218,9 +218,9 @@ void ftMars_801378D4(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (!func_800827A0(gobj))
+        if (!ft_800827A0(gobj))
             ftMars_80137940(gobj);
-    } else if (func_80081D0C(gobj)) {
+    } else if (ft_80081D0C(gobj)) {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
 
         // MarthSideB2Air->Ground
@@ -233,7 +233,7 @@ void ftMars_80137940(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t asid;
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     switch (fp->action_id) {
     case 350:
@@ -248,8 +248,8 @@ void ftMars_80137940(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_801379D0(HSD_GObj* gobj)
@@ -258,7 +258,7 @@ void ftMars_801379D0(HSD_GObj* gobj)
     enum_t asid;
 
     fp->ev.ms.x222C = 0;
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     switch (fp->action_id) {
     case 359:
@@ -273,14 +273,14 @@ void ftMars_801379D0(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80137A68(HSD_GObj* gobj)
 {
-    func_80089824(gobj);
-    func_800892A0(gobj);
+    ft_80089824(gobj);
+    ft_800892A0(gobj);
 }
 
 void ftMars_80137A9C(HSD_GObj* gobj)
@@ -303,8 +303,8 @@ void ftMars_80137A9C(HSD_GObj* gobj)
         else
             asid = 360;
     }
-    Fighter_ActionStateChange_800693AC(
-        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,
+                              0, 0, 1, 0);
 }
 
 void ftMars_80137B34(HSD_GObj* gobj)
@@ -315,10 +315,10 @@ void ftMars_80137B34(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         } else {
             // AS_029_Fall
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         }
     }
 }
@@ -348,11 +348,11 @@ void ftMars_80137BF4(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // somethingFriction
-        func_80084FA8(gobj);
+        ft_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, sa->x20, sa->x24);
-        func_80085204(gobj);
+        ftCommon_8007D494(fp, sa->x20, sa->x24);
+        ft_80085204(gobj);
     }
 }
 
@@ -362,11 +362,11 @@ void ftMars_80137C50(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (!func_800827A0(gobj))
+        if (!ft_800827A0(gobj))
             ftMars_80137CBC(gobj);
     } else {
         // EnvironmentCollision_CheckForGroundOnly_NoLedgeGrab
-        if (func_80081D0C(gobj))
+        if (ft_80081D0C(gobj))
             ftMars_80137D60(gobj);
     }
 }
@@ -377,7 +377,7 @@ void ftMars_80137CBC(HSD_GObj* gobj)
     enum_t asid;
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
     switch (fp->action_id) {
     case 352:
         asid = 361;
@@ -394,8 +394,8 @@ void ftMars_80137CBC(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80137D60(HSD_GObj* gobj)
@@ -405,7 +405,7 @@ void ftMars_80137D60(HSD_GObj* gobj)
     fp->ev.ms.x222C = 0;
 
     // Air_SetAsGrounded2
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     switch (fp->action_id) {
     case 361:
@@ -419,8 +419,8 @@ void ftMars_80137D60(HSD_GObj* gobj)
         break;
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80137E0C(HSD_GObj* gobj)
@@ -451,8 +451,8 @@ void ftMars_80137E0C(HSD_GObj* gobj)
         }
     }
 
-    Fighter_ActionStateChange_800693AC(
-        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,
+                              0, 0, 1, 0);
 }
 
 void ftMars_80137ECC(HSD_GObj* gobj)
@@ -462,10 +462,10 @@ void ftMars_80137ECC(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->xE0_ground_or_air == GA_Ground) {
             // AS_014_Wait_PlayerCheck
-            func_8008A2BC(gobj);
+            ft_8008A2BC(gobj);
         } else {
             // AS_029_Fall
-            func_800CC730(gobj);
+            ft_800CC730(gobj);
         }
     }
 }
@@ -483,11 +483,11 @@ void ftMars_80137F30(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // somethingFriction
-        func_80084FA8(gobj);
+        ft_80084FA8(gobj);
     } else {
         // subtractF1FromVerticalVelocityAndCheckForTerminalVelocity
-        func_8007D494(fp, sa->x20, sa->x24);
-        func_80085204(gobj);
+        ftCommon_8007D494(fp, sa->x20, sa->x24);
+        ft_80085204(gobj);
     }
 }
 
@@ -497,11 +497,11 @@ void ftMars_80137F8C(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (func_800827A0(gobj) == 0)
+        if (ft_800827A0(gobj) == 0)
             ftMars_80137FF8(gobj);
     } else {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
-        if (func_80081D0C(gobj) != 0)
+        if (ft_80081D0C(gobj) != 0)
             ftMars_8013809C(gobj);
     }
 }
@@ -512,7 +512,7 @@ void ftMars_80137FF8(HSD_GObj* gobj)
     enum_t asid;
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
     switch (fp->action_id) {
     case 355:
@@ -530,8 +530,8 @@ void ftMars_80137FF8(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_8013809C(HSD_GObj* gobj)
@@ -542,7 +542,7 @@ void ftMars_8013809C(HSD_GObj* gobj)
     fp->ev.ms.x222C = 0;
 
     // Air_SetAsGrounded2
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
     switch (fp->action_id) {
     case 364:
@@ -560,8 +560,8 @@ void ftMars_8013809C(HSD_GObj* gobj)
 #endif
     }
 
-    Fighter_ActionStateChange_800693AC(gobj, asid, transition_flags, 0,
-                                       fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, transition_flags, 0,
+                              fp->x894_currentAnimFrame, 1, 0);
 }
 
 void ftMars_80138148(HSD_GObj* gobj)
@@ -591,6 +591,6 @@ void ftMars_80138148(HSD_GObj* gobj)
                 asid = 365;
         }
     }
-    Fighter_ActionStateChange_800693AC(
-        gobj, asid, FtStateChange_SkipUpdateAttackCount, 0, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,
+                              0, 0, 1, 0);
 }

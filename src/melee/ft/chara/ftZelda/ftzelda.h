@@ -6,7 +6,7 @@
 
 #include "ft/types.h"
 
-extern ActionState as_table_zelda[];
+extern ActionState ftZelda_MotionStateTable[];
 extern char lbl_803CFC98[];
 extern char lbl_803CFCA4[];
 extern Fighter_CostumeStrings lbl_803CFEB0[];
@@ -30,8 +30,8 @@ void ftZelda_OnKnockbackExit(HSD_GObj* fighter_gobj);
 void ftZelda_801396AC(HSD_GObj* fighter_gobj);
 void ftZelda_801396E0(HSD_GObj* fighter_gobj);
 void ftZelda_8013979C(HSD_GObj* fighter_gobj);
-void ftZelda_SpecialHi_StartAction(HSD_GObj* fighter_gobj);
-void ftZelda_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj);
+void ftZelda_SpecialHi_StartMotion(HSD_GObj* fighter_gobj);
+void ftZelda_SpecialAirHi_StartMotion(HSD_GObj* fighter_gobj);
 void ftZelda_801399B4(HSD_GObj* arg0);
 void ftZelda_801399F0(HSD_GObj* arg0);
 void ftZelda_80139A2C(HSD_GObj* arg0);
@@ -69,8 +69,8 @@ void ftZelda_8013A764(HSD_GObj* fighter_gobj);
 // ftzelda 3
 void ftZelda_8013A830(HSD_GObj* fighter_gobj);
 void ftZelda_8013A8AC(HSD_GObj* fighter_gobj);
-void ftZelda_SpecialN_StartAction(HSD_GObj* fighter_gobj);
-void ftZelda_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
+void ftZelda_SpecialN_StartMotion(HSD_GObj* fighter_gobj);
+void ftZelda_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj);
 void ftZelda_8013AA38(HSD_GObj* fighter_gobj);
 void ftZelda_8013AACC(HSD_GObj* fighter_gobj);
 void ftZelda_8013AB60(HSD_GObj* fighter_gobj);
@@ -87,8 +87,8 @@ void ftZelda_8013ADB0(HSD_GObj* fighter_gobj);
 void ftZelda_8013ADB4(HSD_GObj* fighter_gobj);
 void ftZelda_8013AE30(HSD_GObj* fighter_gobj);
 void ftZelda_8013AEAC(HSD_GObj* fighter_gobj);
-void ftZelda_SpecialLw_StartAction(HSD_GObj* fighter_gobj);
-void ftZelda_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj);
+void ftZelda_SpecialLw_StartMotion(HSD_GObj* fighter_gobj);
+void ftZelda_SpecialAirLw_StartMotion(HSD_GObj* fighter_gobj);
 void ftZelda_8013B068(HSD_GObj* fighter_gobj);
 void ftZelda_8013B0A8(HSD_GObj* fighter_gobj);
 void ftZelda_8013B0E8(HSD_GObj* arg0);
@@ -116,8 +116,8 @@ void ftZelda_8013B5C4(HSD_GObj* fighter_gobj);
 void ftZelda_8013B5EC(HSD_GObj* fighter_gobj);
 
 // ftzelda 5
-void ftZelda_SpecialS_StartAction(HSD_GObj* fighter_gobj);
-void ftZelda_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
+void ftZelda_SpecialS_StartMotion(HSD_GObj* fighter_gobj);
+void ftZelda_SpecialAirS_StartMotion(HSD_GObj* fighter_gobj);
 void ftZelda_8013B780(HSD_GObj* fighter_gobj);
 void ftZelda_8013B89C(HSD_GObj* fighter_gobj);
 void ftZelda_8013BA04(HSD_GObj* fighter_gobj);

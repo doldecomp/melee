@@ -97,7 +97,7 @@ static inline ftMarioAttributes* GetMarioAttr(Fighter* fp)
     return mario_attr;
 }
 
-extern ActionState as_table_mario[];
+extern ActionState ftMario_MotionStateTable[];
 extern ActionState lbl_803C7260[];
 
 // ftmario1
@@ -112,18 +112,18 @@ void ftMario_OnItemDrop(HSD_GObj*, bool);
 void ftMario_LoadSpecialAttrs(HSD_GObj*);
 void ftMario_OnKnockbackEnter(HSD_GObj*);
 void ftMario_OnKnockbackExit(HSD_GObj*);
-void ftMario_func_800E0CAC(s32, s32*, s32*);
-unk_t ftMario_func_800E0CE0(enum_t arg0);
+void ftMario_800E0CAC(s32, s32*, s32*);
+unk_t ftMario_GetMotionFileString(enum_t arg0);
 
 // ftmario2
 int ftMario_SpecialN_VitaminRandom(HSD_GObj*);
-void ftMario_SpecialN_StartAction(HSD_GObj*);
+void ftMario_SpecialN_StartMotion(HSD_GObj*);
 void ftMario_SpecialN_Anim(HSD_GObj*);
 void ftMario_SpecialN_IASA(HSD_GObj*);
 void ftMario_SpecialN_Phys(HSD_GObj*);
 void ftMario_SpecialN_Coll(HSD_GObj*);
 void ftMario_SpecialN_ItemFireSpawn(HSD_GObj*);
-void ftMario_SpecialAirN_StartAction(HSD_GObj*);
+void ftMario_SpecialAirN_StartMotion(HSD_GObj*);
 void ftMario_SpecialAirN_Anim(HSD_GObj*);
 void ftMario_SpecialAirN_IASA(HSD_GObj*);
 void ftMario_SpecialAirN_Phys(HSD_GObj*);
@@ -139,8 +139,8 @@ void ftMario_SpecialS_EnterHitlag(HSD_GObj*);
 void ftMario_SpecialS_ExitHitlag(HSD_GObj*);
 void ftMario_SpecialS_ExitHitlag(HSD_GObj*);
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj*);
-void ftMario_SpecialS_StartAction(HSD_GObj*);
-void ftMario_SpecialAirS_StartAction(HSD_GObj*);
+void ftMario_SpecialS_StartMotion(HSD_GObj*);
+void ftMario_SpecialAirS_StartMotion(HSD_GObj*);
 void ftMario_SpecialS_Anim(HSD_GObj*);
 void ftMario_SpecialAirS_Anim(HSD_GObj*);
 void ftMario_SpecialS_IASA(HSD_GObj*);
@@ -153,8 +153,8 @@ void ftMario_SpecialS_GroundToAir(HSD_GObj*);
 void ftMario_SpecialAirS_AirToGround(HSD_GObj*);
 
 // ftmario4
-void ftMario_SpecialHi_StartAction(HSD_GObj*);
-void ftMario_SpecialAirHi_StartAction(HSD_GObj*);
+void ftMario_SpecialHi_StartMotion(HSD_GObj*);
+void ftMario_SpecialAirHi_StartMotion(HSD_GObj*);
 void ftMario_SpecialHi_Anim(HSD_GObj*);
 void ftMario_SpecialAirHi_Anim(HSD_GObj*);
 void ftMario_SpecialHi_IASA(HSD_GObj*);
@@ -167,8 +167,8 @@ void ftMario_SpecialAirHi_Coll(HSD_GObj*);
 
 // ftmario5
 void ftMario_SpecialLw_UpdateRot(HSD_GObj*);
-void ftMario_SpecialLw_StartAction(HSD_GObj*);
-void ftMario_SpecialAirLw_StartAction(HSD_GObj*);
+void ftMario_SpecialLw_StartMotion(HSD_GObj*);
+void ftMario_SpecialAirLw_StartMotion(HSD_GObj*);
 void ftMario_SpecialLw_Anim(HSD_GObj*);
 void ftMario_SpecialAirLw_Anim(HSD_GObj*);
 void ftMario_SpecialLw_IASA(HSD_GObj*);

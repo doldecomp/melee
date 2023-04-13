@@ -12,76 +12,76 @@ extern StageInfo stage_info;
 
 static StageCallbacks lbl_803E9030[4] = {
     {
-        GrTNess_8022275C,
-        GrTNess_80222788,
-        GrTNess_80222790,
-        GrTNess_80222794,
+        grTNess_8022275C,
+        grTNess_80222788,
+        grTNess_80222790,
+        grTNess_80222794,
     },
     {
-        GrTNess_80222828,
-        GrTNess_80222878,
-        GrTNess_80222880,
-        GrTNess_802228A0,
+        grTNess_80222828,
+        grTNess_80222878,
+        grTNess_80222880,
+        grTNess_802228A0,
     },
     {
-        GrTNess_80222798,
-        GrTNess_802227E8,
-        GrTNess_802227F0,
-        GrTNess_80222824,
+        grTNess_80222798,
+        grTNess_802227E8,
+        grTNess_802227F0,
+        grTNess_80222824,
         0xC0000000,
     },
 };
 
 StageData lbl_803E908C = {
-    0x00000036,       lbl_803E9030,     "/GrTNs.dat",     GrTNess_802225D4,
-    GrTNess_802225D0, GrTNess_80222644, GrTNess_80222648, GrTNess_8022266C,
-    GrTNess_802228A4, GrTNess_802228AC, 0x00000001,
+    0x00000036,       lbl_803E9030,     "/GrTNs.dat",     grTNess_802225D4,
+    grTNess_802225D0, grTNess_80222644, grTNess_80222648, grTNess_8022266C,
+    grTNess_802228A4, grTNess_802228AC, 0x00000001,
 };
 
-static void GrTNess_802225D0(int arg0)
+static void grTNess_802225D0(int arg0)
 {
     return;
 }
 
-static void GrTNess_802225D4(void)
+static void grTNess_802225D4(void)
 {
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
-    GrTNess_80222674(0);
-    GrTNess_80222674(1);
-    GrTNess_80222674(2);
-    func_801C39C0();
-    func_801C3BB4();
-    func_801C4210();
-    func_801C42AC();
+    grTNess_80222674(0);
+    grTNess_80222674(1);
+    grTNess_80222674(2);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Ground_801C4210();
+    Ground_801C42AC();
 }
 
-static void GrTNess_80222644(void)
+static void grTNess_80222644(void)
 {
     return;
 }
 
-static void GrTNess_80222648(void)
+static void grTNess_80222648(void)
 {
-    func_801CAE04(false);
+    grZakoGenerator_801CAE04(false);
 }
 
-static bool GrTNess_8022266C(void)
+static bool grTNess_8022266C(void)
 {
     return false;
 }
 
-static HSD_GObj* GrTNess_80222674(int id)
+static HSD_GObj* grTNess_80222674(int id)
 {
     HSD_GObj* gobj;
     Ground* gp;
     StageCallbacks* cb = &lbl_803E9030[id];
-    gobj = func_801C14D0(id);
+    gobj = Ground_801C14D0(id);
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = NULL;
         gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, func_801C5DB0, 3, 0);
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
         if (cb->callback3 != 0U) {
             gp->x1C_callback = cb->callback3;
         }
@@ -97,28 +97,28 @@ static HSD_GObj* GrTNess_80222674(int id)
     return gobj;
 }
 
-static void GrTNess_8022275C(HSD_GObj* gobj)
+static void grTNess_8022275C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    func_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool GrTNess_80222788(HSD_GObj* arg0)
+static bool grTNess_80222788(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void GrTNess_80222790(HSD_GObj* arg0)
+static void grTNess_80222790(HSD_GObj* arg0)
 {
     return;
 }
 
-static void GrTNess_80222794(HSD_GObj* arg0)
+static void grTNess_80222794(HSD_GObj* arg0)
 {
     return;
 }
 
-static void GrTNess_80222798(HSD_GObj* gobj)
+static void grTNess_80222798(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -126,27 +126,27 @@ static void GrTNess_80222798(HSD_GObj* gobj)
 #endif
 
     Ground* gp = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, 0);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool GrTNess_802227E8(HSD_GObj* arg0)
+static bool grTNess_802227E8(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void GrTNess_802227F0(HSD_GObj* gobj)
+static void grTNess_802227F0(HSD_GObj* gobj)
 {
-    func_800115F4();
-    func_801C2FE0(gobj);
+    lb_800115F4();
+    Ground_801C2FE0(gobj);
 }
 
-static void GrTNess_80222824(HSD_GObj* arg0)
+static void grTNess_80222824(HSD_GObj* arg0)
 {
     return;
 }
 
-static void GrTNess_80222828(HSD_GObj* gobj)
+static void grTNess_80222828(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -154,31 +154,31 @@ static void GrTNess_80222828(HSD_GObj* gobj)
 #endif
 
     Ground* gp = gobj->user_data;
-    func_801C2ED0(gobj->hsd_obj, gp->map_id);
-    func_801C8138(gobj, gp->map_id, 0);
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
-static bool GrTNess_80222878(HSD_GObj* arg0)
+static bool grTNess_80222878(HSD_GObj* arg0)
 {
     return false;
 }
 
-static void GrTNess_80222880(HSD_GObj* gobj)
+static void grTNess_80222880(HSD_GObj* gobj)
 {
-    func_801C2FE0(gobj);
+    Ground_801C2FE0(gobj);
 }
 
-static void GrTNess_802228A0(HSD_GObj* arg0)
+static void grTNess_802228A0(HSD_GObj* arg0)
 {
     return;
 }
 
-static bool GrTNess_802228A4(int arg0)
+static bool grTNess_802228A4(int arg0)
 {
     return false;
 }
 
-static bool GrTNess_802228AC(Vec3* arg0, int arg1, HSD_JObj* arg2)
+static bool grTNess_802228AC(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }

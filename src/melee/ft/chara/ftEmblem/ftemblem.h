@@ -4,7 +4,7 @@
 #include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
 
-extern ActionState as_table_roy[];
+extern ActionState ftRoy_MotionStateTable[];
 extern char lbl_803D3280[];
 extern char lbl_803D328C[];
 extern Fighter_CostumeStrings lbl_803D34A8[];

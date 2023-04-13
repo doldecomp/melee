@@ -31,7 +31,7 @@ Fighter_CostumeStrings lbl_803D3558[] = {
 
 void ftZakoBoy_OnDeath(HSD_GObj* gobj)
 {
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
 }
 
 void ftZakoBoy_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)

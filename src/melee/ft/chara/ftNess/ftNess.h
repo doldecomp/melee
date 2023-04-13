@@ -160,7 +160,7 @@ typedef struct ftNessAttributes {
 
 } ftNessAttributes;
 
-extern ActionState as_table_ness[];
+extern ActionState ftNess_MotionStateTable[];
 extern char lbl_803CCAD0[];
 extern char lbl_803CCADC[];
 extern Fighter_CostumeStrings lbl_803CCC84[];
@@ -299,7 +299,7 @@ void ftNess_AttackLw4_Release_Action(HSD_GObj* gobj);
 // PK Fire callbacks (SpecialS)
 
 void ftNess_ItemPKFireSpawn(HSD_GObj* gobj);
-void ftNess_SpecialS_StartAction(HSD_GObj* gobj);
+void ftNess_SpecialS_StartMotion(HSD_GObj* gobj);
 void ftNess_SpecialAirS_Action(HSD_GObj* gobj);
 void ftNess_SpecialS_Anim(HSD_GObj* gobj);
 void ftNess_SpecialAirS_Anim(HSD_GObj* gobj);
@@ -349,7 +349,7 @@ void ftNess_ItemPKThunderRemove(HSD_GObj* gobj);
 void ftNess_SpecialHiTakeDamage(HSD_GObj* gobj);
 void ftNess_ItemPKThunderCheckOwn(HSD_GObj* gobj, HSD_GObj* gobj2);
 void ftNess_SpecialAirHi_CollisionModVel(HSD_GObj* gobj, CollData* coll_data);
-void ftNess_SpecialHi_StartAction(HSD_GObj* gobj);
+void ftNess_SpecialHi_StartMotion(HSD_GObj* gobj);
 void ftNess_SpecialAirHiStart_Action(HSD_GObj* gobj);
 void ftNess_SpecialHi_Action(HSD_GObj* gobj);
 void ftNess_SpecialAirHi_Action(HSD_GObj* gobj);

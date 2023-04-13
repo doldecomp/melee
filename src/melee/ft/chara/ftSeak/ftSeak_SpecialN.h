@@ -4,8 +4,8 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
 
-void ftSeak_SpecialN_StartAction(HSD_GObj*);
-void ftSeak_SpecialAirN_StartAction(HSD_GObj*);
+void ftSeak_SpecialN_StartMotion(HSD_GObj*);
+void ftSeak_SpecialAirN_StartMotion(HSD_GObj*);
 void ftSeak_80112248(HSD_GObj*);
 
 #endif

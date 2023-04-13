@@ -22,7 +22,7 @@ static UnkArchiveStruct lbl_8049EE10[4];
 /// @todo Bad split?
 /* static */ extern UnkStageDat lbl_803E0924;
 
-void func_801C5FC0(HSD_Archive* archive, void* data, u32 length)
+void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, u32 length)
 {
     HSD_Archive* map_ptcl;
     HSD_Archive* map_texg;
@@ -34,17 +34,18 @@ void func_801C5FC0(HSD_Archive* archive, void* data, u32 length)
         psInitDataBankLocate(map_ptcl, map_texg, NULL);
 }
 
-void func_801C6038(void* arg0, s32 arg1, s32 arg2)
+void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)
 {
-    UnkArchiveStruct* temp_r3 = func_801C62B4();
+    UnkArchiveStruct* temp_r3 = grDatFiles_801C62B4();
     if (arg0 != NULL) {
         HSD_Archive* sp14;
         s32 phi_r28;
         void* r4 = arg0;
         if (arg2 != 0) {
-            phi_r28 = func_800171CC(&sp14, r4, &temp_r3->unk4, "map_head", 0);
+            phi_r28 =
+                lbArchive_800171CC(&sp14, r4, &temp_r3->unk4, "map_head", 0);
         } else {
-            sp14 = func_80016DBC(r4, &temp_r3->unk4, "map_head", 0);
+            sp14 = lbArchive_80016DBC(r4, &temp_r3->unk4, "map_head", 0);
             phi_r28 = 0;
         }
         temp_r3->unk8 = 0;
@@ -71,7 +72,7 @@ void func_801C6038(void* arg0, s32 arg1, s32 arg2)
                 psInitDataBank(0x40, stage_info.x6B8, stage_info.x6BC, 0, 0);
             }
         }
-        func_801C6228(temp_r3->unk4);
+        grDatFiles_801C6228(temp_r3->unk4);
     } else {
         temp_r3->unk4 = &lbl_803E0924;
         if (arg1 == 0) {
@@ -89,7 +90,7 @@ void func_801C6038(void* arg0, s32 arg1, s32 arg2)
     }
 }
 
-static void func_801C6228(UnkStageDat* arg0)
+static void grDatFiles_801C6228(UnkStageDat* arg0)
 {
     if (arg0 != NULL && arg0->unk28 != NULL && arg0->unk2C != 0) {
         s32 i;
@@ -102,12 +103,12 @@ static void func_801C6228(UnkStageDat* arg0)
     }
 }
 
-void func_801C6288(void)
+void grDatFiles_801C6288(void)
 {
-    func_8000C160(&lbl_8049EE10, 0x30);
+    lb_8000C160(&lbl_8049EE10, 0x30);
 }
 
-static UnkArchiveStruct* func_801C62B4(void)
+static UnkArchiveStruct* grDatFiles_801C62B4(void)
 {
     s32 i;
     for (i = 0; i < 4; i++) {
@@ -123,12 +124,12 @@ static UnkArchiveStruct* func_801C62B4(void)
 #endif
 }
 
-UnkArchiveStruct* func_801C6324(void)
+UnkArchiveStruct* grDatFiles_801C6324(void)
 {
     return lbl_8049EE10;
 }
 
-UnkArchiveStruct* func_801C6330(s32 arg0)
+UnkArchiveStruct* grDatFiles_801C6330(s32 arg0)
 {
     if (arg0 >= 0) {
         s32 i;
@@ -146,19 +147,19 @@ UnkArchiveStruct* func_801C6330(s32 arg0)
     return NULL;
 }
 
-UnkArchiveStruct* func_801C6478(void* data, s32 length)
+UnkArchiveStruct* grDatFiles_801C6478(void* data, s32 length)
 {
     UnkArchiveStruct* arc;
 
-    HSD_Archive* archive = func_80015BD0(0, 0x44);
+    HSD_Archive* archive = lbHeap_80015BD0(0, 0x44);
     lbArchive_InitializeDAT(archive, data, length);
-    arc = func_801C62B4();
+    arc = grDatFiles_801C62B4();
     HSD_ASSERT(290, arc);
     arc->unk0 = archive;
     arc->unk4 = HSD_ArchiveGetPublicAddress(archive, "map_head");
     arc->unk8 = 1;
 
-    func_801C6228(arc->unk4);
+    grDatFiles_801C6228(arc->unk4);
 
     return arc;
 }

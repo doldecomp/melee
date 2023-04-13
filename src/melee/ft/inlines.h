@@ -116,23 +116,23 @@ static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
                                         bool bool3)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (!func_8026B2B4(fp->x1974_heldItem)) {
-        switch (func_8026B320(fp->x1974_heldItem)) {
+    if (!it_8026B2B4(fp->x1974_heldItem)) {
+        switch (it_8026B320(fp->x1974_heldItem)) {
         case 1:
-            func_80070FB4(fighter_gobj, bool2, 1);
+            ftAnim_80070FB4(fighter_gobj, bool2, 1);
             break;
         case 2:
-            func_80070FB4(fighter_gobj, bool2, 0);
+            ftAnim_80070FB4(fighter_gobj, bool2, 0);
             break;
         case 3:
-            func_80070FB4(fighter_gobj, bool2, 2);
+            ftAnim_80070FB4(fighter_gobj, bool2, 2);
             break;
         case 4:
-            func_80070FB4(fighter_gobj, bool2, 3);
+            ftAnim_80070FB4(fighter_gobj, bool2, 3);
             break;
         }
         if (catchItemFlag) {
-            func_80070C48(fighter_gobj, bool3);
+            ftAnim_80070C48(fighter_gobj, bool3);
         }
     }
 }
@@ -140,38 +140,38 @@ static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
 static inline void Fighter_OnItemInvisible(HSD_GObj* gobj, bool bool)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!func_8026B2B4(fp->x1974_heldItem)) {
-        func_80070CC4(gobj, bool);
+    if (!it_8026B2B4(fp->x1974_heldItem)) {
+        ftAnim_80070CC4(gobj, bool);
     }
 }
 
 static inline void Fighter_OnItemVisible(HSD_GObj* gobj, bool bool)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (!func_8026B2B4(fp->x1974_heldItem)) {
-        func_80070C48(gobj, bool);
+    if (!it_8026B2B4(fp->x1974_heldItem)) {
+        ftAnim_80070C48(gobj, bool);
     }
 }
 
 static inline void Fighter_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag,
                                       bool bool2, bool bool3)
 {
-    func_80070FB4(gobj, bool2, -1);
+    ftAnim_80070FB4(gobj, bool2, -1);
     if (dropItemFlag) {
-        func_80070CC4(gobj, bool3);
+        ftAnim_80070CC4(gobj, bool3);
     }
 }
 
 static inline void Fighter_OnKnockbackEnter(HSD_GObj* gobj, s32 arg1)
 {
-    func_800704F0(gobj, arg1, 3.0f);
-    func_800704F0(gobj, 0, 3.0f);
+    ftAnim_800704F0(gobj, arg1, 3.0f);
+    ftAnim_800704F0(gobj, 0, 3.0f);
 }
 
 static inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1)
 {
-    func_800704F0(gobj, arg1, 0.0f);
-    func_800704F0(gobj, 0, 0.0f);
+    ftAnim_800704F0(gobj, arg1, 0.0f);
+    ftAnim_800704F0(gobj, 0, 0.0f);
 }
 
 static inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)

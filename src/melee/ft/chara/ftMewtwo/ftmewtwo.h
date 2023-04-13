@@ -121,7 +121,7 @@ typedef struct _ftMewtwoAttributes {
 
 } ftMewtwoAttributes;
 
-extern ActionState as_table_mewtwo[];
+extern ActionState ftMewtwo_MotionStateTable[];
 extern char lbl_803D0D80[];
 extern char lbl_803D0D8C[];
 extern Fighter_CostumeStrings lbl_803D0F5C[];
@@ -139,8 +139,8 @@ void ftMewtwo_OnTakeDamage(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialHi_SetStartGFX(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialHi_SetEndGFX(HSD_GObj* fighter_gobj);
-void ftMewtwo_SpecialHi_StartAction(HSD_GObj* fighter_gobj);
-void ftMewtwo_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialHi_StartMotion(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirHi_StartMotion(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialHiStart_Anim(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirHiStart_Anim(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialHiStart_IASA(HSD_GObj* fighter_gobj);
@@ -179,8 +179,8 @@ void ftMewtwo_SpecialAirHiLost_Action(HSD_GObj* fighter_gobj);
 
 void ftMewtwo_SpecialLw_ClearDisableGObj(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* fighter_gobj);
-void ftMewtwo_SpecialLw_StartAction(HSD_GObj* fighter_gobj);
-void ftMewtwo_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialLw_StartMotion(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirLw_StartMotion(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialLw_Anim(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirLw_Anim(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialLw_IASA(HSD_GObj* fighter_gobj);
@@ -196,8 +196,8 @@ void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* fighter_gobj);
 // Side Special - Confusion (SpecialS/SpecialAirS) //
 
 void ftMewtwo_SpecialS_SetFlags(HSD_GObj* fighter_gobj);
-void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj);
-void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialS_StartMotion(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirS_StartMotion(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialAirS_Anim(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialS_IASA(HSD_GObj* fighter_gobj);
@@ -222,8 +222,8 @@ void ftMewtwo_SpecialN_OnTakeDamage(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialN_OnDeath(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialN_ReleaseShadowBall(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialN_PlayChargeSFX(HSD_GObj* fighter_gobj);
-void ftMewtwo_SpecialN_StartAction(HSD_GObj* fighter_gobj);
-void ftMewtwo_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialN_StartMotion(HSD_GObj* fighter_gobj);
+void ftMewtwo_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialNStart_Anim(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialNLoop_Anim(HSD_GObj* fighter_gobj);
 void ftMewtwo_SpecialNFull_Anim(HSD_GObj* fighter_gobj);

@@ -4,7 +4,7 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
 
-void ftSeak_SpecialHi_StartAction(HSD_GObj*);
-void ftSeak_SpecialAirHi_StartAction(HSD_GObj*);
+void ftSeak_SpecialHi_StartMotion(HSD_GObj*);
+void ftSeak_SpecialAirHi_StartMotion(HSD_GObj*);
 
 #endif
