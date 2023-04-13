@@ -1,12 +1,12 @@
-#include <melee/ef/eflib.h>
-#include <melee/ft/chara/ftMars/ftMars.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
+#include "ef/eflib.h"
+#include "ft/chara/ftMars/ftMars.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 
 void ftMars_SpecialN_StartMotion(HSD_GObj* gobj)
 {

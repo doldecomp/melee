@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialHi.h>
+#include "ft/chara/ftSeak/ftSeak_SpecialHi.h"
 
 f32 const lbl_804D9660 = 0.0F;
 f32 const lbl_804D9664 = 1.0F;

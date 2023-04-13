@@ -1,25 +1,27 @@
+#include "ft/ft_07C1.h"
+
+#include "ft/fighter.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcoll.h"
+#include "it/it_26B1.h"
+#include "lb/lb_00B0.h"
+
 #include <placeholder.h>
-#include <melee/ft/code_8007C114.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbunknown_001.h>
 
 #ifdef MWERKS_GEKKO
 static f32 const lbl_804D8320 = 0.0F;
 static f32 const lbl_804D8324 = 1.0F;
 #endif
 
-void ft_8007C224(HSD_GObj* fighter_gobj);
+void ft_8007C224(HSD_GObj* gobj);
 
-void ft_8007C114(HSD_GObj* fighter_gobj)
+void ft_8007C114(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->x1974_heldItem != NULL) {
         switch (itGetKind(fp->x1974_heldItem)) {
         case It_Kind_Hammer:
-            ft_800C555C(fighter_gobj);
+            ft_800C555C(gobj);
             break;
         }
     }
@@ -29,7 +31,7 @@ void ft_8007C114(HSD_GObj* fighter_gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_8007C17C(HSD_GObj* fighter_gobj)
+asm void ft_8007C17C(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C17C 00078D5C  7C 08 02 A6 */	mflr r0
@@ -79,7 +81,7 @@ asm void ft_8007C17C(HSD_GObj* fighter_gobj)
 
 #else
 
-void ft_8007C17C(HSD_GObj* fighter_gobj)
+void ft_8007C17C(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -89,7 +91,7 @@ void ft_8007C17C(HSD_GObj* fighter_gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_8007C224(HSD_GObj* fighter_gobj)
+asm void ft_8007C224(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C224 00078E04  7C 08 02 A6 */	mflr r0
@@ -149,7 +151,7 @@ lbl_8007C2CC:
 
 #else
 
-void ft_8007C224(HSD_GObj* fighter_gobj)
+void ft_8007C224(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -306,7 +308,7 @@ void ft_8007C2E0(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_8007C4BC(HSD_GObj* fighter_gobj)
+asm void ft_8007C4BC(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C4BC 0007909C  7C 08 02 A6 */	mflr r0
@@ -417,7 +419,7 @@ lbl_8007C61C:
 
 #else
 
-void ft_8007C4BC(HSD_GObj* fighter_gobj)
+void ft_8007C4BC(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }

@@ -3,11 +3,12 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/tobj.h>
-#include <melee/pl/player.h>
+#include "pl/player.h"
+
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/jobj.h>
+#include <baselib/tobj.h>
 
 typedef struct _HudFlags {
     u8 explode_animation : 1;

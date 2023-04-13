@@ -1,14 +1,15 @@
 #include "player.h"
 
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftdata.h"
 #include "ft/ftlib.h"
 #include "ftKirby/ftkirby.h"
-#include "gm/code_801601C4.h"
+#include "gm/gm_1601.h"
 #include "if/ifstatus.h"
 #include "lb/lbarchive.h"
-#include "pl/pl_unknown_001.h"
+#include "pl/pl_0371.h"
 
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <baselib/gobjplink.h>
 
@@ -443,7 +444,7 @@ void Player_SetPlayerCharacter(s32 slot, s32 value)
     player->player_character = value;
 }
 
-s32 Player_GetPlayerSlotType(s32 slot)
+enum_t Player_GetPlayerSlotType(s32 slot)
 {
     s32 slot_type;
     StaticPlayer* player;
@@ -477,7 +478,7 @@ s32 Player_8003248C(s32 slot, bool arg1)
     return slot_type;
 }
 
-void Player_SetSlottype(s32 slot, s32 value)
+void Player_SetSlottype(s32 slot, enum_t value)
 {
     StaticPlayer* player;
     Player_CheckSlot(slot);

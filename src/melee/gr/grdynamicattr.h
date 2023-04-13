@@ -2,7 +2,7 @@
 #define MELEE_GR_GRDYNAMICATTR_H
 
 #include <platform.h>
-#include <melee/gr/forward.h>
+#include "gr/forward.h"
 
 #include <dolphin/mtx/types.h>
 

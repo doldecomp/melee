@@ -1,14 +1,14 @@
 #include <platform.h>
 
-#include <melee/ft/chara/ftCrazyHand/ftcrazyhand.h>
-#include <melee/ft/chara/ftKirby/ftkirby.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_32.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_33.h>
-#include <melee/ft/chara/ftMasterHand/ftMasterHand_34.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/types.h>
+#include "ft/chara/ftCrazyHand/ftcrazyhand.h"
+#include "ft/chara/ftKirby/ftkirby.h"
+#include "ft/chara/ftMasterHand/ftMasterHand_32.h"
+#include "ft/chara/ftMasterHand/ftMasterHand_33.h"
+#include "ft/chara/ftMasterHand/ftMasterHand_34.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcamera.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/types.h"
 
 ActionState MotionStateList[] = {
     {

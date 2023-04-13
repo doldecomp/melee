@@ -1,9 +1,10 @@
 #ifndef _mtx_h_
 #define _mtx_h_
 
+#include "lb/lbrefract.h"
+
 #include <math.h>
-#include <sysdolphin/baselib/objalloc.h>
-#include <melee/lb/lbrefract.h>
+#include <baselib/objalloc.h>
 
 void HSD_MtxInverse(Mtx src, Mtx dest);
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest);

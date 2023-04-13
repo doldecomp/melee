@@ -1,8 +1,9 @@
 #ifndef _grshrine_h_
 #define _grshrine_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/gr/stage.h>
+#include "gr/stage.h"
+
+#include <baselib/gobj.h>
 
 static void grShrine_80201C60(int);
 static void grShrine_80201C64(void);

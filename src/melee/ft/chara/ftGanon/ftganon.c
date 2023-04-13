@@ -1,6 +1,6 @@
 #include "ftganon.h"
 
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
@@ -93,9 +93,9 @@ void ftGanon_OnDeath(HSD_GObj* gobj)
     fp->ev.gn.during_specials_start = false;
 }
 
-void ftGanon_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftGanon_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, true, true);
+    Fighter_OnItemPickup(gobj, bool, true, true);
 }
 
 void ftGanon_OnItemInvisible(HSD_GObj* gobj)

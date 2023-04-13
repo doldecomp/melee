@@ -1,4 +1,4 @@
-#include "gr/ground.h"
+#include "ground.h"
 
 #include "grcorneria.h"
 #include "grdatfiles.h"
@@ -10,28 +10,28 @@
 #include "grstadium.h"
 #include "grzebes.h"
 #include "stage.h"
-#include "text_4.h"
 
 #include "cm/camera.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftlib.h"
-#include "gm/code_801601C4.h"
-#include "it/code_80266F3C.h"
-#include "it/code_8027CF30.h"
+#include "gm/gm_1601.h"
+#include "it/it_266F.h"
+#include "it/it_27CF.h"
 #include "it/item.h"
-#include "it/itkind.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbdvd.h"
 #include "lb/lbshadow.h"
-#include "lb/lbunknown_001.h"
-#include "lb/lbunknown_003.h"
 #include "lb/lbvector.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
+#include "un/un_2FC9.h"
 
 #include <placeholder.h>
 #include <trigf.h>
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
 #include <baselib/fog.h>

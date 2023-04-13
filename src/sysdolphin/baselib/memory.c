@@ -1,9 +1,9 @@
 #include <platform.h>
 
 #include <dolphin/os/OSAlloc.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/initialize.h>
-#include <sysdolphin/baselib/memory.h>
+#include <baselib/debug.h>
+#include <baselib/initialize.h>
+#include <baselib/memory.h>
 
 void HSD_Free(any_t ptr)
 {

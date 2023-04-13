@@ -1,8 +1,9 @@
 #ifndef _ftpichu_h_
 #define _ftpichu_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
+#include "ft/fighter.h"
+
+#include <baselib/gobj.h>
 
 typedef struct _ftPichuAttributes {
     /* 0x00 */ u32 x0_padding[(0x14 - 0x0) / 4];

@@ -80,8 +80,8 @@ extern char lbl_803D4824[];
 extern Fighter_CostumeStrings lbl_803D4868[];
 extern char lbl_803D485C[];
 
-void ftCrazyhand_OnDeath(HSD_GObj* fighter_gobj);
-void ftCrazyhand_OnLoad(HSD_GObj* fighter_gobj);
+void ftCrazyhand_OnDeath(HSD_GObj* gobj);
+void ftCrazyhand_OnLoad(HSD_GObj* gobj);
 void ftCrazyHand_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftCrazyHand_80155FCC(HSD_GObj*);
 void ftCrazyHand_80156014(HSD_GObj*);

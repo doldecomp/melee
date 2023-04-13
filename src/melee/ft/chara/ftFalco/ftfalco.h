@@ -1,8 +1,9 @@
 #ifndef _ftfalco_h_
 #define _ftfalco_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
+#include "ft/fighter.h"
+
+#include <baselib/gobj.h>
 
 extern ActionState ftFalco_MotionStateTable[];
 extern char lbl_803D1CA8[];

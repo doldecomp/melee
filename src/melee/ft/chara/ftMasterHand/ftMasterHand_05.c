@@ -2,11 +2,11 @@
 
 #include "ftMasterHand_34.h"
 
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftbosslib.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbunknown_001.h"
 
 u32 ftMasterHand_80151428(Vec3* vec)
 {

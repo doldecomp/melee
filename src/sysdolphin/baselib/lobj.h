@@ -9,6 +9,7 @@
 #include "baselib/wobj.h"
 
 #include <dolphin/gx/GXLight.h>
+#include <dolphin/mtx/types.h>
 
 struct HSD_LightPoint {
     f32 cutoff;

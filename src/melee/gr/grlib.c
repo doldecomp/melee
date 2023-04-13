@@ -1,16 +1,20 @@
+#include "grlib.h"
+
+#include "grbigblue.h"
+#include "gricemt.h"
+#include "ground.h"
+#include "grrcruise.h"
+
+#include "cm/camera.h"
+#include "it/it_26B1.h"
+#include "lb/lb_00F9.h"
+
 #include <placeholder.h>
-#include <sysdolphin/baselib/baselib_unknown_002.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/psappsrt.h>
-#include <melee/cm/camera.h>
-#include <melee/gr/grbigblue.h>
-#include <melee/gr/gricemt.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grrcruise.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbunknown_003.h>
+#include <dolphin/mtx/types.h>
+#include <baselib/baselib_unknown_002.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/psappsrt.h>
 
 extern StageInfo stage_info;
 extern u8 lbl_804D7849;

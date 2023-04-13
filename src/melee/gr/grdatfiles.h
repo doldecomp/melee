@@ -1,7 +1,7 @@
 #ifndef _grdatfiles_h_
 #define _grdatfiles_h_
 
-#include <melee/gr/stage.h>
+#include "gr/stage.h"
 
 // Appears to be related to stage audio
 typedef struct _UnkBgmStruct {

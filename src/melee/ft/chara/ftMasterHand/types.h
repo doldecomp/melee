@@ -2,7 +2,7 @@
 #define MELEE_FT_CHARA_FTMASTERHAND_TYPES_H
 
 #include <platform.h>
-#include "forward.h"
+#include "ftMasterHand/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx/types.h>

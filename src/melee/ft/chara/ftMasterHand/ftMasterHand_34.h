@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 void ftMasterHand_80155D1C(HSD_GObj*);
 void ftMasterHand_80155D6C(HSD_GObj*, s32);

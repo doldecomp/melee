@@ -1,16 +1,17 @@
-#include <melee/ft/chara/ftSamus/ftsamus.h>
-#include <melee/ft/chara/ftSamus/ftsamus6.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/lb/lbunknown_001.h>
+#include "ft/chara/ftSamus/ftsamus6.h"
 
-void ftSamus_8012ADF0(HSD_GObj* fighter_gobj)
+#include "ft/chara/ftSamus/ftsamus.h"
+#include "ft/fighter.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcoll.h"
+#include "lb/lb_00B0.h"
+
+void ftSamus_8012ADF0(HSD_GObj* gobj)
 {
     Vec3 vec;
     bool bool1;
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
 /// @todo Unused stack.
@@ -31,16 +32,16 @@ void ftSamus_8012ADF0(HSD_GObj* fighter_gobj)
         vec.x += (vec_x * fp->facing_dir);
         vec.y += samus_attr->x74_vec.y;
         vec.z += samus_attr->x74_vec.z;
-        it_802B4AC8(fighter_gobj, &vec, fp->facing_dir, vec_x);
+        it_802B4AC8(gobj, &vec, fp->facing_dir, vec_x);
         fp->cb.x21BC_callback_Accessory4 = 0;
     }
 }
 
-void ftSamus_8012AEBC(HSD_GObj* fighter_gobj)
+void ftSamus_8012AEBC(HSD_GObj* gobj)
 {
     struct UNK_SAMUS_S2 unk_struct;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftColl_8007B0C0(fighter_gobj, 2);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftColl_8007B0C0(gobj, 2);
 
     unk_struct.intvec.x = 2;
     unk_struct.intvec.y = 1;
@@ -51,14 +52,14 @@ void ftSamus_8012AEBC(HSD_GObj* fighter_gobj)
     ftColl_8007B5AC(fp, &fp->x11A0_fighterHurtbox[0], &unk_struct);
 }
 
-void ftSamus_8012AF38(HSD_GObj* fighter_gobj)
+void ftSamus_8012AF38(HSD_GObj* gobj)
 {
-    ftColl_8007B0C0(fighter_gobj, 0);
+    ftColl_8007B0C0(gobj, 0);
 }
 
-void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* fighter_gobj)
+void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
     fp->x2208_ftcmd_var2 = 0;
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
@@ -70,28 +71,27 @@ void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012ADF0;
 }
 
-void ftSamus_SpecialLw_StartMotion(HSD_GObj* fighter_gobj)
+void ftSamus_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
     fp->xEC_ground_vel *= samus_attr->x6C;
     if (fp->action_id == 0x28) {
-        Fighter_ChangeMotionState(fighter_gobj, 0x163, 0, NULL, 3.0f, 1.0f,
-                                  0.0f);
-        ftSamus_SpecialLw_StartAction_inner(fighter_gobj);
+        Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 3.0f, 1.0f, 0.0f);
+        ftSamus_SpecialLw_StartAction_inner(gobj);
         fp->x2204_ftcmd_var1 = 2;
-        ftSamus_8012B5F0(fighter_gobj);
+        ftSamus_8012B5F0(gobj);
         return;
     }
-    Fighter_ChangeMotionState(fighter_gobj, 0x163, 0, NULL, 0.0f, 1.0f, 0.0f);
-    ftAnim_8006EBA4(fighter_gobj);
-    ftSamus_SpecialLw_StartAction_inner(fighter_gobj);
+    Fighter_ChangeMotionState(gobj, 0x163, 0, NULL, 0.0f, 1.0f, 0.0f);
+    ftAnim_8006EBA4(gobj);
+    ftSamus_SpecialLw_StartAction_inner(gobj);
 }
 
-void ftSamus_SpecialAirLw_StartMotion(HSD_GObj* fighter_gobj)
+void ftSamus_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -102,21 +102,21 @@ void ftSamus_SpecialAirLw_StartMotion(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.x *= samus_attr->x70;
     fp->x80_self_vel.y = samus_attr->x58;
 
-    Fighter_ChangeMotionState(fighter_gobj, 0x164, 0, NULL, 0.0f, 1.0f, 0.0f);
-    ftAnim_8006EBA4(fighter_gobj);
-    ftSamus_SpecialLw_StartAction_inner(fighter_gobj);
+    Fighter_ChangeMotionState(gobj, 0x164, 0, NULL, 0.0f, 1.0f, 0.0f);
+    ftAnim_8006EBA4(gobj);
+    ftSamus_SpecialLw_StartAction_inner(gobj);
 }
 
-inline void checkStateVar1(HSD_GObj* fighter_gobj)
+inline void checkStateVar1(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
     if ((fp->x2200_ftcmd_var0) && (!fp->sv.ss.unk6.x0)) {
-        ftSamus_8012AEBC(fighter_gobj);
+        ftSamus_8012AEBC(gobj);
         fp->sv.ss.unk6.x0 = 1;
     }
     if ((!fp->x2200_ftcmd_var0) && (fp->sv.ss.unk6.x0)) {
-        ftColl_8007B0C0(fighter_gobj, 0);
+        ftColl_8007B0C0(gobj, 0);
         fp->sv.ss.unk6.x0 = 0;
     }
 }
@@ -204,20 +204,20 @@ lbl_8012B248:
 
 #else
 
-void ftSamus_8012B150(HSD_GObj* fighter_gobj)
+void ftSamus_8012B150(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
     if (fp->x2204_ftcmd_var1 == 1) {
         fp->x2204_ftcmd_var1 = 2;
-        ftSamus_8012B5F0(fighter_gobj);
+        ftSamus_8012B5F0(gobj);
         return;
     }
 
-    checkStateVar1(fighter_gobj);
+    checkStateVar1(gobj);
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        ft_8008A2BC(fighter_gobj);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
     }
 }
 
@@ -297,31 +297,31 @@ lbl_8012B33C:
 
 #else
 
-void ftSamus_8012B264(HSD_GObj* fighter_gobj)
+void ftSamus_8012B264(HSD_GObj* gobj)
 {
-    checkStateVar1(fighter_gobj);
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        ft_800CC730(fighter_gobj);
+    checkStateVar1(gobj);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_800CC730(gobj);
     }
 }
 #endif
 
-void ftSamus_8012B358(HSD_GObj* fighter_gobj)
+void ftSamus_8012B358(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
     if ((fp->x2208_ftcmd_var2) && (fp->input.x624_lstick_y < samus_attr->x80))
     {
         fp->x2208_ftcmd_var2 = 0;
-        ft_800D638C(fighter_gobj);
+        ft_800D638C(gobj);
     }
 }
 
-void ftSamus_8012B3A4(HSD_GObj* fighter_gobj) {}
+void ftSamus_8012B3A4(HSD_GObj* gobj) {}
 
-void ftSamus_8012B3A8(HSD_GObj* fighter_gobj)
+void ftSamus_8012B3A8(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     attr* ft_attr = &fp->x110_attr;
 
@@ -329,15 +329,15 @@ void ftSamus_8012B3A8(HSD_GObj* fighter_gobj)
         ftCommon_8007CADC(fp, 0.0f,
                           ft_attr->x110_WalkInitialVelocity * samus_attr->x64,
                           ft_attr->x118_WalkMaximumVelocity * samus_attr->x5C);
-        ftCommon_8007CB74(fighter_gobj);
+        ftCommon_8007CB74(gobj);
     } else {
-        ft_80084F3C(fighter_gobj);
+        ft_80084F3C(gobj);
     }
 }
 
-void ftSamus_8012B41C(HSD_GObj* fighter_gobj)
+void ftSamus_8012B41C(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
     attr* ft_attr = &fp->x110_attr;
 
@@ -351,9 +351,9 @@ void ftSamus_8012B41C(HSD_GObj* fighter_gobj)
                       ft_attr->x17C_AerialDriftMax * samus_attr->x60);
 }
 
-void ftSamus_8012B488(HSD_GObj* fighter_gobj)
+void ftSamus_8012B488(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -363,19 +363,19 @@ void ftSamus_8012B488(HSD_GObj* fighter_gobj)
 
     if (fp->x2200_ftcmd_var0) {
         /// @todo Remove cast
-        if (!ft_80082888(fighter_gobj,
+        if (!ft_80082888(gobj,
                          (ftCollisionBox*) &samus_attr->height_attributes))
         {
-            ftSamus_8012B570(fighter_gobj);
+            ftSamus_8012B570(gobj);
         }
-    } else if (!ft_800827A0(fighter_gobj)) {
-        ftSamus_8012B570(fighter_gobj);
+    } else if (!ft_800827A0(gobj)) {
+        ftSamus_8012B570(gobj);
     }
 }
 
-void ftSamus_8012B4FC(HSD_GObj* fighter_gobj)
+void ftSamus_8012B4FC(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -385,49 +385,49 @@ void ftSamus_8012B4FC(HSD_GObj* fighter_gobj)
 
     if (fp->x2200_ftcmd_var0) {
         /// @todo Remove cast
-        if (ft_800824A0(fighter_gobj,
+        if (ft_800824A0(gobj,
                         (ftCollisionBox*) &samus_attr->height_attributes))
         {
-            ftSamus_8012B668(fighter_gobj);
+            ftSamus_8012B668(gobj);
         }
-    } else if (ft_80081D0C(fighter_gobj)) {
-        ftSamus_8012B668(fighter_gobj);
+    } else if (ft_80081D0C(gobj)) {
+        ftSamus_8012B668(gobj);
     }
 }
 
-void ftSamus_UnkSetStateAndCb(HSD_GObj* fighter_gobj)
+void ftSamus_UnkSetStateAndCb(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
     fp->x2204_ftcmd_var1 = 2;
     fp->sv.ss.unk6.x0 = 0;
     fp->cb.x21BC_callback_Accessory4 = &ftSamus_8012ADF0;
 }
 
-void ftSamus_8012B570(HSD_GObj* fighter_gobj)
+void ftSamus_8012B570(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(fighter_gobj, 0x164, 0x0C4C509C, NULL,
+    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    ftSamus_UnkSetStateAndCb(fighter_gobj);
+    ftSamus_UnkSetStateAndCb(gobj);
 }
 
-void ftSamus_8012B5F0(HSD_GObj* fighter_gobj)
+void ftSamus_8012B5F0(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
     fp->x80_self_vel.y = samus_attr->x54;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(fighter_gobj, 0x164, 0x0C4C509C, NULL,
+    Fighter_ChangeMotionState(gobj, 0x164, 0x0C4C509C, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->cb.x21BC_callback_Accessory4 = ftSamus_8012ADF0;
 }
 
-void ftSamus_8012B668(HSD_GObj* fighter_gobj)
+void ftSamus_8012B668(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(fighter_gobj, 0x163, 0x0C4C509C, NULL,
+    Fighter_ChangeMotionState(gobj, 0x163, 0x0C4C509C, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    ftSamus_UnkSetStateAndCb(fighter_gobj);
+    ftSamus_UnkSetStateAndCb(gobj);
 }

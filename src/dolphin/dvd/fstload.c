@@ -32,9 +32,9 @@ void cb(s32 param_1, DVDCommandBlock* block)
                                  OSRoundUp32B(bb2->_08), bb2->_04, cb);
             break;
         }
-    } else if (param_1 == -1)
-        ; // nothing
-    else if (param_1 == -4) {
+    } else if (param_1 == -1) {
+        // nothing
+    } else if (param_1 == -4) {
         status = 0;
         DVDReset();
         DVDReadDiskID(block, idTmp, cb);

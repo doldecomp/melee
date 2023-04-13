@@ -2,10 +2,10 @@
 #define MELEE_FT_CHARA_FTZELDA_FTZELDA2_H
 
 #include <platform.h>
-#include <melee/ft/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include "ft/forward.h"
+#include <baselib/forward.h>
 
-bool ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj);
+bool ftZelda_80139D60_Helper(HSD_GObj* gobj);
 void ftZelda_SpecialHi_StartAction_Helper(Fighter* fp);
 
 #endif

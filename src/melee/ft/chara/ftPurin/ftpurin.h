@@ -3,9 +3,9 @@
 
 #include "melee/ft/forward.h"
 
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-#include <melee/lb/lbvector.h>
+#include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "lb/lbvector.h"
 
 typedef struct _ftPurinAttributes {
     f32 x0;
@@ -32,21 +32,21 @@ extern Fighter_DemoStrings lbl_803D04F8;
 
 /// functions
 
-void ftPurin_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
-void ftPurin_OnDeath(HSD_GObj* fighter_gobj);
-void ftPurin_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1);
-void ftPurin_OnItemInvisible(HSD_GObj* fighter_gobj);
-void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
-void ftPurin_OnItemVisible(HSD_GObj* fighter_gobj);
-void ftPurin_OnKnockbackEnter(HSD_GObj* fighter_gobj);
-void ftPurin_OnKnockbackExit(HSD_GObj* fighter_gobj);
-void ftPurin_OnLoad(HSD_GObj* fighter_gobj);
-void ftPurin_OnUserDataRemove(HSD_GObj* fighter_gobj);
+void ftPurin_LoadSpecialAttrs(HSD_GObj* gobj);
+void ftPurin_OnDeath(HSD_GObj* gobj);
+void ftPurin_OnItemDrop(HSD_GObj* gobj, bool bool1);
+void ftPurin_OnItemInvisible(HSD_GObj* gobj);
+void ftPurin_OnItemPickup(HSD_GObj* gobj, bool bool);
+void ftPurin_OnItemVisible(HSD_GObj* gobj);
+void ftPurin_OnKnockbackEnter(HSD_GObj* gobj);
+void ftPurin_OnKnockbackExit(HSD_GObj* gobj);
+void ftPurin_OnLoad(HSD_GObj* gobj);
+void ftPurin_OnUserDataRemove(HSD_GObj* gobj);
 void ftPurin_SpecialAirHi_StartMotion(HSD_GObj*);
 void ftPurin_SpecialAirLw_StartMotion(HSD_GObj*);
 void ftPurin_SpecialAirN_StartMotion(HSD_GObj*);
 void ftPurin_SpecialAirS_StartMotion(HSD_GObj*);
-void ftPurin_SpecialHi_SetVars(HSD_GObj* fighter_gobj);
+void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj);
 void ftPurin_SpecialHi_StartMotion(HSD_GObj*);
 void ftPurin_SpecialLw_StartMotion(HSD_GObj*);
 void ftPurin_SpecialN_StartMotion(HSD_GObj*);
@@ -56,9 +56,9 @@ void ft_800D7614(HSD_GObj*);
 void ft_800D7634(HSD_GObj*);
 void ft_800D767C(HSD_GObj*);
 void ftPurin_8013C2F8(void);
-void ftPurin_8013C360(HSD_GObj* fighter_gobj);
-void ftPurin_8013C494(HSD_GObj* fighter_gobj);
-void ftPurin_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx);
+void ftPurin_8013C360(HSD_GObj* gobj);
+void ftPurin_8013C494(HSD_GObj* gobj);
+void ftPurin_8013C4F0(HSD_GObj* gobj, int arg1, Mtx vmtx);
 void ftPurin_8013C614(Fighter* fp, int arg1, bool arg2);
 void ftPurin_8013CD34(HSD_GObj*);
 void ftPurin_8013CDD8(HSD_GObj*);
@@ -152,6 +152,6 @@ void ftPurin_80141FB8(HSD_GObj*);
 void ftPurin_80142070(HSD_GObj*);
 void ftPurin_801420D0(HSD_GObj*);
 void ftPurin_8014222C(HSD_GObj*);
-void* ftPurin_8013C664(HSD_GObj* fighter_gobj);
+void* ftPurin_8013C664(HSD_GObj* gobj);
 
 #endif

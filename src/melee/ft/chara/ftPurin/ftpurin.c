@@ -3,18 +3,18 @@
 #include "cm/camera.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/code_80081B38.h"
 #include "ft/fighter.h"
-#include "ft/ft_unknown_005.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0852.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "gm/code_801601C4.h"
+#include "gm/gm_1601.h"
 #include "gr/grstadium.h"
-#include "it/item2.h"
+#include "it/it_26B1.h"
 #include "mp/mplib.h"
 
 #include <trigf.h>
@@ -149,20 +149,20 @@ void ftPurin_8013C2F8(void)
     lbl_8045A1E0[4] = NULL;
 }
 
-void ftPurin_OnDeath(HSD_GObj* fighter_gobj)
+void ftPurin_OnDeath(HSD_GObj* gobj)
 {
-    ftParts_80074A4C(fighter_gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
 }
 
-void ftPurin_OnUserDataRemove(HSD_GObj* fighter_gobj)
+void ftPurin_OnUserDataRemove(HSD_GObj* gobj)
 {
-    ftPurin_8013C494(fighter_gobj);
+    ftPurin_8013C494(gobj);
 }
 
-void ftPurin_8013C360(HSD_GObj* fighter_gobj)
+void ftPurin_8013C360(HSD_GObj* gobj)
 {
     HSD_Joint** joints = lbl_8045A1E0;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (lbl_803D05B4[fp->x619_costume_id]) {
         UNK_T* items = fp->x10C_ftData->x48_items;
@@ -180,7 +180,7 @@ void ftPurin_8013C360(HSD_GObj* fighter_gobj)
         fp->ev.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
         fp->x2225_b2 = true;
         ftParts_80074170();
-        ftParts_80075650(fighter_gobj, fp->ev.pr.x223C, &fp->ev.pr.x2240);
+        ftParts_80075650(gobj, fp->ev.pr.x223C, &fp->ev.pr.x2240);
 
         ftParts_8007487C(&items_shifted[1], &fp->ev.pr.x2248,
                          fp->x619_costume_id, &fp->ev.pr.x2240,
@@ -192,9 +192,9 @@ void ftPurin_8013C360(HSD_GObj* fighter_gobj)
     fp->ev.pr.x223C = 0;
 }
 
-void ftPurin_8013C494(HSD_GObj* fighter_gobj)
+void ftPurin_8013C494(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->ev.pr.x223C != NULL) {
         HSD_JObjRemoveAll(fp->ev.pr.x223C);
@@ -204,14 +204,14 @@ void ftPurin_8013C494(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPurin_8013C4F0(HSD_GObj* fighter_gobj, int arg1, Mtx vmtx)
+void ftPurin_8013C4F0(HSD_GObj* gobj, int arg1, Mtx vmtx)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->ev.pr.x223C && fp->x2225_b2) {
         Mtx* mtx;
@@ -239,29 +239,29 @@ void ftPurin_8013C614(Fighter* fp, int arg1, bool arg2)
     }
 }
 
-void* ftPurin_8013C664(HSD_GObj* fighter_gobj)
+void* ftPurin_8013C664(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->ev.pr.x223C) {
         return fp->ev.pr.x223C;
     }
 
-    return fighter_gobj;
+    return gobj;
 }
 
-void ftPurin_OnLoad(HSD_GObj* fighter_gobj)
+void ftPurin_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     PUSH_ATTRS(fp, ftPurinAttributes);
     fp->x2222_flag.bits.b1 = 1;
     fp->x2D0 = fp->x2D4_specialAttributes;
-    ftPurin_8013C360(fighter_gobj);
+    ftPurin_8013C360(gobj);
 }
 
-void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftPurin_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!it_8026B2B4(fp->x1974_heldItem)) {
         switch (it_8026B320(fp->x1974_heldItem)) {
         case 1:
@@ -269,63 +269,63 @@ void ftPurin_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
         case 2:
             break;
         case 3:
-            ftAnim_80070FB4(fighter_gobj, 0, 0);
+            ftAnim_80070FB4(gobj, 0, 0);
             break;
         case 4:
-            ftAnim_80070FB4(fighter_gobj, 0, 1);
+            ftAnim_80070FB4(gobj, 0, 1);
             break;
         }
         if (bool) {
-            ftAnim_80070C48(fighter_gobj, 0);
+            ftAnim_80070C48(gobj, 0);
         }
     }
 }
 
-void ftPurin_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftPurin_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x1974_heldItem) {
         if (!it_8026B2B4(fp->x1974_heldItem)) {
-            ftAnim_80070CC4(fighter_gobj, 0);
+            ftAnim_80070CC4(gobj, 0);
         }
     }
 }
 
-void ftPurin_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftPurin_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x1974_heldItem) {
         if (!it_8026B2B4(fp->x1974_heldItem)) {
-            ftAnim_80070C48(fighter_gobj, 0);
+            ftAnim_80070C48(gobj, 0);
         }
     }
 }
 
-void ftPurin_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
+void ftPurin_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(fighter_gobj, bool1, 0, 0);
+    Fighter_OnItemDrop(gobj, bool1, 0, 0);
 }
 
-void ftPurin_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftPurin_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftPurinAttributes);
+    COPY_ATTRS(gobj, ftPurinAttributes);
 }
 
-void ftPurin_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftPurin_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftPurin_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftPurin_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(gobj, 1);
 }
-void ftPurin_8013C94C(HSD_GObj* fighter_gobj)
+void ftPurin_8013C94C(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
 
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(1238, fighter_gobj, fp->x5E8_fighterBones[5].x0_jobj);
+        efSync_Spawn(1238, gobj, fp->x5E8_fighterBones[5].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -338,9 +338,9 @@ extern f32 const lbl_804D9C10;
 extern f32 const lbl_804D9C14;
 extern f32 const lbl_804D9C18;
 
-inline void ftPurin_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
+inline void ftPurin_SpecialHi_SetVars(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
 
     fp->x2200_ftcmd_var0 = 0;
 
@@ -353,55 +353,54 @@ inline void ftPurin_SpecialHi_SetVars(HSD_GObj* fighter_gobj)
     }
 }
 
-inline void
-ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* fighter_gobj,
-                                               u32 left_id, u32 right_id)
+inline void ftPurin_SpecialHi_SetActionFromFacingDirection(HSD_GObj* gobj,
+                                                           u32 left_id,
+                                                           u32 right_id)
 {
-    Fighter* fighter = getFighter(fighter_gobj);
+    Fighter* fighter = getFighter(gobj);
 
     if (lbl_804D9C10 == fighter->facing_dir) {
-        Fighter_ChangeMotionState(fighter_gobj, left_id, 0, NULL, lbl_804D9C14,
+        Fighter_ChangeMotionState(gobj, left_id, 0, NULL, lbl_804D9C14,
                                   lbl_804D9C18, lbl_804D9C14);
     } else {
-        Fighter_ChangeMotionState(fighter_gobj, right_id, 0, NULL,
-                                  lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
+        Fighter_ChangeMotionState(gobj, right_id, 0, NULL, lbl_804D9C14,
+                                  lbl_804D9C18, lbl_804D9C14);
     }
 }
 
-inline void startHi(HSD_GObj* fighter_gobj, int left_id, int right_id)
+inline void startHi(HSD_GObj* gobj, int left_id, int right_id)
 {
     Fighter* fighter;
 
-    ftPurin_SpecialHi_SetActionFromFacingDirection(fighter_gobj, left_id,
-                                                   right_id);
+    ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, left_id, right_id);
 
-    ftAnim_8006EBA4(fighter_gobj);
+    ftAnim_8006EBA4(gobj);
 
-    fighter = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
+    fighter = (Fighter*) HSD_GObjGetUserData(gobj);
 
     if (lbl_804D9C10 == fighter->facing_dir) {
-        Fighter_ChangeMotionState(fighter_gobj, left_id, 0, NULL, lbl_804D9C14,
+        Fighter_ChangeMotionState(gobj, left_id, 0, NULL, lbl_804D9C14,
                                   lbl_804D9C18, lbl_804D9C14);
     } else {
-        Fighter_ChangeMotionState(fighter_gobj, right_id, 0, NULL,
-                                  lbl_804D9C14, lbl_804D9C18, lbl_804D9C14);
+        Fighter_ChangeMotionState(gobj, right_id, 0, NULL, lbl_804D9C14,
+                                  lbl_804D9C18, lbl_804D9C14);
     }
 }
 
-void ftPurin_SpecialHi_StartMotion(HSD_GObj* fighter_gobj)
+void ftPurin_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
-    ftPurin_SpecialHi_SetActionFromFacingDirection(fighter_gobj, 365, 367);
+    ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, 365, 367);
 
-    ftAnim_8006EBA4(fighter_gobj);
-    ftPurin_SpecialHi_SetVars(fighter_gobj);
+    ftAnim_8006EBA4(gobj);
+    ftPurin_SpecialHi_SetVars(gobj);
 }
 
-void ftPurin_SpecialAirHi_StartMotion(HSD_GObj* fighter_gobj)
+void ftPurin_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
-    ftPurin_SpecialHi_SetActionFromFacingDirection(fighter_gobj, 366, 368);
+    ftPurin_SpecialHi_SetActionFromFacingDirection(gobj, 366, 368);
 
-    ftAnim_8006EBA4(fighter_gobj);
-    ftPurin_SpecialHi_SetVars(fighter_gobj);
+    ftAnim_8006EBA4(gobj);
+    ftPurin_SpecialHi_SetVars(gobj);
 }
 
 #ifdef MWERKS_GEKKO
@@ -582,18 +581,18 @@ lbl_8013CD20:
 #pragma pop
 #endif
 
-void ftPurin_8013CD34(HSD_GObj* fighter_gobj)
+void ftPurin_8013CD34(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
 
     ftCommon_8007D5D4(fp);
 
     if (lbl_804D9C10 == fp->facing_dir) {
-        Fighter_ChangeMotionState(fighter_gobj, 366, 0x0C4C508A, NULL,
+        Fighter_ChangeMotionState(gobj, 366, 0x0C4C508A, NULL,
                                   fp->x894_currentAnimFrame, lbl_804D9C18,
                                   lbl_804D9C14);
     } else {
-        Fighter_ChangeMotionState(fighter_gobj, 368, 0x0C4C508A, NULL,
+        Fighter_ChangeMotionState(gobj, 368, 0x0C4C508A, NULL,
                                   fp->x894_currentAnimFrame, lbl_804D9C18,
                                   lbl_804D9C14);
     }

@@ -1,8 +1,8 @@
 #ifndef _grfigure2_h_
 #define _grfigure2_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 static void grFigure2_8020E274(void);
 static void grFigure2_8020E2E4(void);

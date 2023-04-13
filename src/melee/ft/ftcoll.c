@@ -1,33 +1,35 @@
 #include <platform.h>
-#include <melee/lb/forward.h>
+#include "lb/forward.h"
+
+#include "ft/ftcoll.h"
+
+#include "ef/efsync.h"
+#include "ft/fighter.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
+#include "ft/ftlib.h"
+#include "gm/gm_1601.h"
+#include "gr/stage.h"
+#include "it/it_266F.h"
+#include "it/item.h"
+#include "lb/lb_00B0.h"
+#include "pl/pl_0371.h"
+#include "pl/player.h"
 
 #include <common_structs.h>
 #include <math.h>
 #include <runtime.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gr/stage.h>
-#include <melee/it/code_80266F3C.h>
-#include <melee/it/item.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/pl/pl_unknown_001.h>
-#include <melee/pl/player.h>
+#include <baselib/archive.h>
+#include <baselib/controller.h>
+#include <baselib/dobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
 #include <MSL/trigf.h>
 
 /// Combo Count Logic
@@ -112,9 +114,9 @@ inline void comboCount_Push(Fighter* fp)
 }
 
 /// Combo count something + adjust TopN
-void ftColl_80076528(HSD_GObj* fighter_gobj)
+void ftColl_80076528(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     u16 temp_r3 = fp->x2092;
 
     if (temp_r3 != 0) {

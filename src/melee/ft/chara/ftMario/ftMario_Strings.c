@@ -1,6 +1,6 @@
-#include <melee/ft/forward.h>
+#include "ft/forward.h"
 
-#include <melee/ft/types.h>
+#include "ft/types.h"
 
 char lbl_803C57D0[] = "PlMr.dat";
 char lbl_803C57DC[] = "ftDataMario";

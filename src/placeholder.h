@@ -31,4 +31,12 @@
 #endif
 #endif
 
+#ifndef UNK_SIZE_ARRAY
+#if defined(__MWERKS__) && !defined(M2CTX)
+#define UNK_SIZE_ARRAY []
+#else
+#define UNK_SIZE_ARRAY [0]
+#endif
+#endif
+
 #endif

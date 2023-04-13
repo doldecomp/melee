@@ -1,7 +1,7 @@
 #include "ftbosslib.h"
 
 #include "fighter.h"
-#include "ft_unknown_006.h"
+#include "ft_0877.h"
 #include "ftlib.h"
 
 #include "cm/camera.h"
@@ -108,12 +108,12 @@ void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3,
     fp->x80_self_vel.y = diff.y;
 }
 
-void ftBossLib_8015BF74(HSD_GObj* fighter_gobj, f32 x_diff_max)
+void ftBossLib_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     Vec3 vec;
 
-    ftBossLib_8015C208(fighter_gobj, &vec);
+    ftBossLib_8015C208(gobj, &vec);
 
     {
         f32 x_diff = vec.x - fp->xB0_pos.x;
@@ -126,11 +126,11 @@ void ftBossLib_8015BF74(HSD_GObj* fighter_gobj, f32 x_diff_max)
     }
 }
 
-void ftBossLib_8015C010(HSD_GObj* fighter_gobj, f32 x_diff_max)
+void ftBossLib_8015C010(HSD_GObj* gobj, f32 x_diff_max)
 {
     Vec3 vec;
-    Fighter* fp = fighter_gobj->user_data;
-    ftBossLib_8015C208(fighter_gobj, &vec);
+    Fighter* fp = gobj->user_data;
+    ftBossLib_8015C208(gobj, &vec);
 
     {
         f32 x_diff = vec.x - fp->xB0_pos.x;
@@ -143,10 +143,10 @@ void ftBossLib_8015C010(HSD_GObj* fighter_gobj, f32 x_diff_max)
     }
 }
 
-void ftBossLib_8015C09C(HSD_GObj* fighter_gobj, f32 facing_dir)
+void ftBossLib_8015C09C(HSD_GObj* gobj, f32 facing_dir)
 {
-    HSD_JObj* jobj = GET_JOBJ(fighter_gobj);
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     Quaternion quat = { 0 };
 
     fp->facing_dir = facing_dir;

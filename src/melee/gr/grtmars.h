@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 static void grTMars_80221EF4(int);
 static void grTMars_80221EF8(void);

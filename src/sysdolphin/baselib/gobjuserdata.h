@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 #define HSD_GOBJ_USER_DATA_NONE (u8) - 1
 

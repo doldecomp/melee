@@ -1,8 +1,9 @@
-#include <melee/ft/chara/ftFox/ftfox.h>
-#include <melee/ft/chara/ftFox/ftFox_SpecialN.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/chara/ftFox/ftfox.h"
+
+#include "ft/chara/ftFox/ftFox_SpecialN.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState ftFox_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftFox_SpecialNStart_Anim,
@@ -154,9 +155,9 @@ void ftFox_800E5588(HSD_GObj* gobj)
     ftFox_RemoveBlaster(gobj);
 }
 
-void ftFox_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftFox_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
 void ftFox_OnItemInvisible(HSD_GObj* gobj)
@@ -210,11 +211,11 @@ void ftFox_OnKnockbackEnter(HSD_GObj* gobj)
     ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
 }
 
-void ftFox_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftFox_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
-    ftAnim_ApplyPartAnim(fighter_gobj, 3, 2, 0.0f);
-    ftAnim_ApplyPartAnim(fighter_gobj, 4, 2, 0.0f);
+    Fighter_OnKnockbackExit(gobj, 1);
+    ftAnim_ApplyPartAnim(gobj, 3, 2, 0.0f);
+    ftAnim_ApplyPartAnim(gobj, 4, 2, 0.0f);
 }
 
 //// End of File

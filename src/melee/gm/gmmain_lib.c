@@ -1,5 +1,6 @@
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lbtime.h>
+#include "gm/gmmain_lib.h"
+
+#include "lb/lbtime.h"
 
 GameRules* gmMainLib_8015CC34(void)
 {

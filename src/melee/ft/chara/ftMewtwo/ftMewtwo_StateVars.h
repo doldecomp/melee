@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 typedef struct ftMewtwoSpecialHi {
     s32 travelFrames; // 0x2340 - Number of frames Teleport's zoom animation

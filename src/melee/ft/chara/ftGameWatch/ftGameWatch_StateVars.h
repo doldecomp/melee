@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 typedef union ftGameWatch_StateVars {
     struct ftGameWatch_Attack11Vars {

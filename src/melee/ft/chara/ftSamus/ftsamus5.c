@@ -1,23 +1,24 @@
-#include <melee/ef/eflib.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/chara/ftSamus/ftsamus.h>
-#include <melee/ft/chara/ftSamus/ftsamus5.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftparts.h>
+#include "ft/chara/ftSamus/ftsamus5.h"
 
-void ftSamus_SpecialHi_StartMotion(HSD_GObj* fighter_gobj)
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/chara/ftSamus/ftsamus.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcliffcommon.h"
+#include "ft/ftparts.h"
+
+void ftSamus_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter_ChangeMotionState(fighter_gobj, 0x161, 0, NULL, 0.0f, 1.0f, 0.0f);
-    ftSamus_updateDamageDeathCBs(fighter_gobj);
+    Fighter_ChangeMotionState(gobj, 0x161, 0, NULL, 0.0f, 1.0f, 0.0f);
+    ftSamus_updateDamageDeathCBs(gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     ftCommon_8007D7FC(fp);
@@ -26,18 +27,18 @@ void ftSamus_SpecialHi_StartMotion(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->sv.ss.unk5.x0 = 0;
-    ftAnim_8006EBA4(fighter_gobj);
-    efSync_Spawn(0x482, fighter_gobj, fp->x5E8_fighterBones[3].x0_jobj);
+    ftAnim_8006EBA4(gobj);
+    efSync_Spawn(0x482, gobj, fp->x5E8_fighterBones[3].x0_jobj);
     fp->ev.ss.x2244 = 1;
 }
 
-void ftSamus_SpecialAirHi_StartMotion(HSD_GObj* fighter_gobj)
+void ftSamus_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
-    Fighter_ChangeMotionState(fighter_gobj, 0x162, 0, NULL, 0.0f, 1.0f, 0.0f);
-    ftSamus_updateDamageDeathCBs(fighter_gobj);
+    Fighter_ChangeMotionState(gobj, 0x162, 0, NULL, 0.0f, 1.0f, 0.0f);
+    ftSamus_updateDamageDeathCBs(gobj);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     ftCommon_8007D60C(fp);
@@ -48,61 +49,61 @@ void ftSamus_SpecialAirHi_StartMotion(HSD_GObj* fighter_gobj)
     fp->sv.ss.unk5.x0 = 0;
     fp->x80_self_vel.y = samus_attr->x44;
     ftCommon_8007D440(fp, samus_attr->x40);
-    ftAnim_8006EBA4(fighter_gobj);
-    efSync_Spawn(0x482, fighter_gobj, fp->x5E8_fighterBones[3].x0_jobj);
+    ftAnim_8006EBA4(gobj);
+    efSync_Spawn(0x482, gobj, fp->x5E8_fighterBones[3].x0_jobj);
     fp->ev.ss.x2244 = 1;
 }
 
-void ftSamus_DestroyAllUnsetx2444(HSD_GObj* fighter_gobj)
+void ftSamus_DestroyAllUnsetx2444(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    efLib_DestroyAll(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
+    efLib_DestroyAll(gobj);
     fp->ev.ss.x2244 = 0;
 }
 
-void ftSamus_8012A81C(HSD_GObj* fighter_gobj)
+void ftSamus_8012A81C(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr;
     ftSamusAttributes* samus_attr2;
     samus_attr = samus_attr2 = fp->x2D4_specialAttributes;
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter2 = fp;
-        ftSamus_DestroyAllUnsetx2444(fighter_gobj);
+        ftSamus_DestroyAllUnsetx2444(gobj);
         ftCommon_8007D60C(fighter2);
         if (samus_attr->x50 == 0.0f) {
-            ft_800CC730(fighter_gobj);
+            ft_800CC730(gobj);
             return;
         }
-        ft_80096900(fighter_gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
+        ft_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
     }
 }
 
-void ftSamus_8012A8C4(HSD_GObj* fighter_gobj)
+void ftSamus_8012A8C4(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr;
     ftSamusAttributes* samus_attr2;
     samus_attr = samus_attr2 = fp->x2D4_specialAttributes;
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fighter2 = fp;
-        ftSamus_DestroyAllUnsetx2444(fighter_gobj);
+        ftSamus_DestroyAllUnsetx2444(gobj);
         ftCommon_8007D60C(fighter2);
         if (samus_attr->x50 == 0.0f) {
-            ft_800CC730(fighter_gobj);
+            ft_800CC730(gobj);
             return;
         }
-        ft_80096900(fighter_gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
+        ft_80096900(gobj, 1, 1, 0, samus_attr->x48, samus_attr->x50);
     }
 }
 
-void ftSamus_8012A96C(HSD_GObj* fighter_gobj)
+void ftSamus_8012A96C(HSD_GObj* gobj)
 {
     f32 mag;
     f32 lstick_x;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -129,11 +130,11 @@ void ftSamus_8012A96C(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSamus_8012AA3C(HSD_GObj* fighter_gobj)
+void ftSamus_8012AA3C(HSD_GObj* gobj)
 {
     f32 mag;
     f32 lstick_x;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -160,9 +161,9 @@ void ftSamus_8012AA3C(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSamus_8012AB0C(HSD_GObj* fighter_gobj)
+void ftSamus_8012AB0C(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = getFtSpecialAttrs(fp);
 
     if (fp->x2200_ftcmd_var0) {
@@ -171,17 +172,17 @@ void ftSamus_8012AB0C(HSD_GObj* fighter_gobj)
         fp->x80_self_vel.x = samus_attr->x38 * fp->facing_dir;
     }
     if (fp->xE0_ground_or_air == 1) {
-        ft_800851C0(fighter_gobj);
+        ft_800851C0(gobj);
         ftCommon_8007D344(fp, 0.0f, samus_attr->x3C, samus_attr->x40);
         ftCommon_8007D268(fp);
         return;
     }
-    ft_80084F3C(fighter_gobj);
+    ft_80084F3C(gobj);
 }
 
-void ftSamus_8012ABB4(HSD_GObj* fighter_gobj)
+void ftSamus_8012ABB4(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -189,13 +190,13 @@ void ftSamus_8012ABB4(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    ft_80084DB0(fighter_gobj);
+    ft_80084DB0(gobj);
     ftCommon_8007D344(fp, 0.0f, samus_attr->x3C, samus_attr->x40);
 }
 
-void ftSamus_8012AC00(HSD_GObj* fighter_gobj)
+void ftSamus_8012AC00(HSD_GObj* gobj)
 {
-    Fighter* fp = getFighter(fighter_gobj);
+    Fighter* fp = getFighter(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -207,7 +208,7 @@ void ftSamus_8012AC00(HSD_GObj* fighter_gobj)
         int direction;
 
         if (fp->x80_self_vel.y >= 0.0f) {
-            ft_80081D0C(fighter_gobj);
+            ft_80081D0C(gobj);
             return;
         }
         if (fp->facing_dir == 1.0f) {
@@ -215,23 +216,23 @@ void ftSamus_8012AC00(HSD_GObj* fighter_gobj)
         } else {
             direction = -1;
         }
-        if (ft_CheckGroundAndLedge(fighter_gobj, direction)) {
-            ftSamus_DestroyAllUnsetx2444(fighter_gobj);
-            ft_800D5CB0(fighter_gobj, 0, samus_attr->x50);
+        if (ft_CheckGroundAndLedge(gobj, direction)) {
+            ftSamus_DestroyAllUnsetx2444(gobj);
+            ft_800D5CB0(gobj, 0, samus_attr->x50);
             return;
         }
-        if (ftCliffCommon_80081298(fighter_gobj)) {
-            ftSamus_DestroyAllUnsetx2444(fighter_gobj);
-            ftCliffCommon_80081370(fighter_gobj);
+        if (ftCliffCommon_80081298(gobj)) {
+            ftSamus_DestroyAllUnsetx2444(gobj);
+            ftCliffCommon_80081370(gobj);
         }
     } else {
-        ft_80084104(fighter_gobj);
+        ft_80084104(gobj);
     }
 }
 
-void ftSamus_8012ACF8(HSD_GObj* fighter_gobj)
+void ftSamus_8012ACF8(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
 
     /// @todo Unused stack.
@@ -243,7 +244,7 @@ void ftSamus_8012ACF8(HSD_GObj* fighter_gobj)
         int direction;
 
         if (fp->x80_self_vel.y >= 0.0f) {
-            ft_80081D0C(fighter_gobj);
+            ft_80081D0C(gobj);
             return;
         }
         if (fp->facing_dir == 1.0f) {
@@ -251,16 +252,16 @@ void ftSamus_8012ACF8(HSD_GObj* fighter_gobj)
         } else {
             direction = -1;
         }
-        if (ft_CheckGroundAndLedge(fighter_gobj, direction)) {
-            ftSamus_DestroyAllUnsetx2444(fighter_gobj);
-            ft_800D5CB0(fighter_gobj, 0, samus_attr->x50);
+        if (ft_CheckGroundAndLedge(gobj, direction)) {
+            ftSamus_DestroyAllUnsetx2444(gobj);
+            ft_800D5CB0(gobj, 0, samus_attr->x50);
             return;
         }
-        if (ftCliffCommon_80081298(fighter_gobj)) {
-            ftSamus_DestroyAllUnsetx2444(fighter_gobj);
-            ftCliffCommon_80081370(fighter_gobj);
+        if (ftCliffCommon_80081298(gobj)) {
+            ftSamus_DestroyAllUnsetx2444(gobj);
+            ftCliffCommon_80081370(gobj);
         }
     } else {
-        ft_80084104(fighter_gobj);
+        ft_80084104(gobj);
     }
 }

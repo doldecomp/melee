@@ -2,11 +2,11 @@
 #define MELEE_FT_FTCOMMON_H
 
 #include <platform.h>
-#include <melee/ft/forward.h>
+#include "ft/forward.h"
 
 #include <dolphin/mtx.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 
 void ftCommon_8007C930(Fighter*, f32);
 void ftCommon_8007C98C(Fighter*, f32 vel, f32, f32 gr_friction);
@@ -68,7 +68,7 @@ void ftCommon_8007E3EC(HSD_GObj*);
 void ftCommon_8007E5AC(Fighter*);
 void ftCommon_SetAccessory(Fighter*, HSD_Joint*);
 void ftCommon_8007E690(Fighter*, HSD_AnimJoint*);
-void ftCommon_8007E6DC(HSD_GObj*, HSD_GObj* item_gobj, s32);
+void ftCommon_8007E6DC(HSD_GObj*, HSD_GObj* gobj, s32);
 void ftCommon_8007E79C(HSD_GObj*, s32);
 void ftCommon_8007E7E4(HSD_GObj*, s32);
 void ftCommon_8007E82C(HSD_GObj*);
@@ -102,7 +102,7 @@ void ftCommon_8007FA00(HSD_GObj*);
 void ftCommon_8007FA58(HSD_GObj*, HSD_GObj*);
 void ftCommon_8007FC7C(HSD_GObj*, f32);
 void ftCommon_8007FDA0(HSD_GObj*);
-void ftCommon_8007FE84(HSD_GObj*, HSD_GObj* item_gobj, s32, f32);
+void ftCommon_8007FE84(HSD_GObj*, HSD_GObj* gobj, s32, f32);
 void ftCommon_8007FF74(HSD_GObj*);
 bool ftCommon_8007FFD8(Fighter*, f32);
 bool ftCommon_80080144(Fighter*);

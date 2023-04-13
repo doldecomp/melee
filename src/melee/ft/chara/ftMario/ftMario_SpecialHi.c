@@ -1,9 +1,8 @@
 #include "ftmario.h"
 
-#include "ft/code_80081B38.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
 #include "ft/ftparts.h"
-#include "it/itkind.h"
 
 #include <baselib/random.h>
 

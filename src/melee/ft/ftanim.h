@@ -1,16 +1,16 @@
 #ifndef MELEE_FT_FTANIM_H
 #define MELEE_FT_FTANIM_H
 
-#include <melee/ft/forward.h>
+#include "ft/forward.h"
 
 #include <placeholder.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 void ftAnim_8006E9B4(HSD_GObj*);
 void ftAnim_8006EBA4(HSD_GObj*);
-void ftAnim_8006EBE8(HSD_GObj* fighter_gobj, f32, f32, f32);
-void ftAnim_8006F0FC(HSD_GObj* fighter_gobj, f32);
+void ftAnim_8006EBE8(HSD_GObj* gobj, f32, f32, f32);
+void ftAnim_8006F0FC(HSD_GObj* gobj, f32);
 void ftAnim_SetAnimRate(HSD_GObj*, f32);
 bool ftAnim_IsFramesRemaining(HSD_GObj*);
 f32 ftAnim_8006F484(void*);

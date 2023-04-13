@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/archive.h>
+#include <baselib/archive.h>
 
 void lbDvd_80018F68(void);
 void lbDvd_800178E8(s32, char*, s32, s32, s32, s32, s32, s32, s32);

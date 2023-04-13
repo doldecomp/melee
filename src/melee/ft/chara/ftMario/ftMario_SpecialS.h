@@ -2,8 +2,8 @@
 #define MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALS_H
 
 #include <platform.h>
-#include <melee/ft/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include "ft/forward.h"
+#include <baselib/forward.h>
 
 void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, enum_t asid);
 void ftMario_SpecialS_SetCall(Fighter* fp);

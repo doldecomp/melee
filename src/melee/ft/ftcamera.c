@@ -1,6 +1,7 @@
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftlib.h>
+#include "ft/ftcamera.h"
+
+#include "ft/fighter.h"
+#include "ft/ftlib.h"
 
 struct UnkFloat6_Camera {
     Vec3 x0;

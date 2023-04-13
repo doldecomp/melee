@@ -1,10 +1,11 @@
-#include <melee/ft/forward.h>
+#include "ft/forward.h"
 
-#include <melee/ft/chara/ftNess/ftNess.h>
-#include <melee/ft/chara/ftNess/ftNess_SpecialLw.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/chara/ftNess/ftNess.h"
+
+#include "ft/chara/ftNess/ftNess_SpecialLw.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState ftNess_MotionStateTable[] = {
     { 62, 0x00241A09, 0x0A000000, ftNess_AttackS4_Anim, ftNess_AttackS4_IASA,
@@ -193,9 +194,9 @@ f32 ftNess_GetAbsorbHeal(Fighter* fp)
         ->x94_PSI_MAGNET_HEAL_MUL;
 }
 
-void ftNess_OnItemPickup(HSD_GObj* fighter_gobj, bool catchItemFlag)
+void ftNess_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag)
 {
-    Fighter_OnItemPickup(fighter_gobj, catchItemFlag, 1, 1);
+    Fighter_OnItemPickup(gobj, catchItemFlag, 1, 1);
 }
 
 void ftNess_OnItemInvisible(HSD_GObj* gobj)
@@ -223,7 +224,7 @@ void ftNess_OnKnockbackEnter(HSD_GObj* gobj)
     Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftNess_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftNess_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(gobj, 1);
 }

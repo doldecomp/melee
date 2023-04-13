@@ -1,23 +1,22 @@
 #include "ftcommon.h"
 
-#include "code_80081B38.h"
 #include "fighter.h"
-#include "ft_unknown_006.h"
+#include "ft_081B.h"
+#include "ft_0877.h"
 #include "ftcamera.h"
 #include "ftcoll.h"
 #include "ftlib.h"
 #include "ftparts.h"
-#include "text_4.h"
 
 #include "ef/eflib.h"
-#include "gm/code_801601C4.h"
-#include "it/code_8027CF30.h"
+#include "gm/gm_1601.h"
+#include "it/it_26B1.h"
+#include "it/it_27CF.h"
 #include "it/item.h"
-#include "it/item2.h"
-#include "it/itkind.h"
-#include "lb/lbunknown_003.h"
+#include "lb/lb_00F9.h"
 #include "mp/mplib.h"
-#include "pl/pl_unknown_001.h"
+#include "pl/pl_0371.h"
+#include "un/un_2FC9.h"
 
 #include <dolphin/os/os.h>
 #include <baselib/rumble.h>

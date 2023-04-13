@@ -2,7 +2,7 @@
 #define MELEE_GR_GRTFALCO_H
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
 #include <dolphin/mtx/types.h>
 

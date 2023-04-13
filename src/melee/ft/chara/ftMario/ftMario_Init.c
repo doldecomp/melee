@@ -1,14 +1,14 @@
 #include <platform.h>
 
-#include <sysdolphin/baselib/random.h>
-#include <melee/ft/chara/ftMario/ftmario.h>
-#include <melee/ft/chara/ftMario/ftmario2.h>
-#include <melee/ft/chara/ftMario/ftMario_SpecialN.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/itkind.h>
+#include "ft/chara/ftMario/ftmario.h"
+#include "ft/chara/ftMario/ftmario2.h"
+#include "ft/chara/ftMario/ftMario_SpecialN.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
+
+#include <baselib/random.h>
 
 ActionState ftMario_MotionStateTable[] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
@@ -86,9 +86,9 @@ void ftMario_OnTakeDamage(HSD_GObj* gobj)
     ftMario_SpecialS_RemoveCape(gobj);
 }
 
-void ftMario_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftMario_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
 void ftMario_OnItemInvisible(HSD_GObj* gobj)

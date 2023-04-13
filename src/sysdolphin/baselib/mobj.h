@@ -2,12 +2,12 @@
 #define _mobj_h_
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/class.h>
-#include <sysdolphin/baselib/texp.h>
-#include <sysdolphin/baselib/tobj.h>
+#include <baselib/aobj.h>
+#include <baselib/class.h>
+#include <baselib/texp.h>
+#include <baselib/tobj.h>
 
 #define MOBJ_ANIM 0x4
 #define TOBJ_ANIM 0x10

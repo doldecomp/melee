@@ -3,9 +3,10 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
+#include "ft/ftcommon.h"
+#include "ft/types.h"
+
+#include <baselib/gobj.h>
 
 typedef struct _ftLinkAttributes {
     s32 x0;
@@ -34,25 +35,25 @@ extern Fighter_CostumeStrings lbl_803C82B0[];
 extern char lbl_803C8224[];
 extern Fighter_DemoStrings lbl_803C82A0;
 
-void ftLink_OnItemDrop(HSD_GObj* fighter_gobj, bool arg1);
-void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftLink_OnItemDrop(HSD_GObj* gobj, bool arg1);
+void ftLink_OnItemPickup(HSD_GObj* gobj, bool bool);
 void ftLink_800EC06C(void);
 void ftLink_800ECD04(HSD_GObj*);
 void ftLink_800ECD58(HSD_GObj*);
 void ftLink_OnLoadForCLink(Fighter* fp);
-void ftLink_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
+void ftLink_LoadSpecialAttrs(HSD_GObj* gobj);
 void ftLink_800EAF58(HSD_GObj*);
-bool ftLink_800EAD64(HSD_GObj* fighter_gobj);
-void ftLink_OnKnockbackEnter(HSD_GObj* fighter_gobj);
-void ftLink_OnKnockbackExit(HSD_GObj* fighter_gobj);
-void ftLink_800EB334(HSD_GObj* fighter_gobj);
-void ftLink_OnDeath(HSD_GObj* fighter_gobj);
-void ftLink_OnLoad(HSD_GObj* fighter_gobj);
+bool ftLink_800EAD64(HSD_GObj* gobj);
+void ftLink_OnKnockbackEnter(HSD_GObj* gobj);
+void ftLink_OnKnockbackExit(HSD_GObj* gobj);
+void ftLink_800EB334(HSD_GObj* gobj);
+void ftLink_OnDeath(HSD_GObj* gobj);
+void ftLink_OnLoad(HSD_GObj* gobj);
 void ftLink_800EAF38(void);
-void ftLink_OnItemPickupExt(HSD_GObj* fighter_gobj, int arg1);
-void ftLink_OnItemInvisible(HSD_GObj* fighter_gobj);
-void ftLink_OnItemVisible(HSD_GObj* fighter_gobj);
-void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, bool arg1);
+void ftLink_OnItemPickupExt(HSD_GObj* gobj, int arg1);
+void ftLink_OnItemInvisible(HSD_GObj* gobj);
+void ftLink_OnItemVisible(HSD_GObj* gobj);
+void ftLink_OnItemDropExt(HSD_GObj* gobj, bool arg1);
 void ftLink_800EDFD8(HSD_GObj*);
 void ftLink_800EE098(HSD_GObj*);
 void ftLink_800ED15C(HSD_GObj*);

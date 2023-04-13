@@ -1,5 +1,5 @@
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
 
 extern HSD_ObjAllocData gobjproc_alloc_data;
 

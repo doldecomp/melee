@@ -4,43 +4,43 @@
 #ifndef MELEE_FT_CODE_80081B38_H
 #define MELEE_FT_CODE_80081B38_H
 
-#include <placeholder.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <melee/ft/fighter.h>
+#include "ft/fighter.h"
 
-HSD_GObj* ft_80082E3C(HSD_GObj* fighter_gobj);
+#include <placeholder.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
+
+HSD_GObj* ft_80082E3C(HSD_GObj* gobj);
 f32 ft_GetGroundFrictionMultiplier(Fighter* fp);
-bool ft_8008239C(HSD_GObj* fighter_gobj, s32 facing_direction,
-                 f32* height_attributes);
-void ft_80084FA8(HSD_GObj* fighter_gobj);
-void ft_80084EEC(HSD_GObj* fighter_gobj);
-bool ft_800827A0(HSD_GObj* fighter_gobj);
-bool ft_80081D0C(HSD_GObj* fighter_gobj);
-void ft_80085134(HSD_GObj* fighter_gobj);
+bool ft_8008239C(HSD_GObj* gobj, s32 facing_direction, f32* height_attributes);
+void ft_80084FA8(HSD_GObj* gobj);
+void ft_80084EEC(HSD_GObj* gobj);
+bool ft_800827A0(HSD_GObj* gobj);
+bool ft_80081D0C(HSD_GObj* gobj);
+void ft_80085134(HSD_GObj* gobj);
 
 /// CollisionCheck_StopLedge
-void ft_80084104(HSD_GObj* fighter_gobj);
+void ft_80084104(HSD_GObj* gobj);
 
-bool ft_80082708(HSD_GObj* fighter_gobj);
-void ft_80084F3C(HSD_GObj* fighter_gobj);
+bool ft_80082708(HSD_GObj* gobj);
+void ft_80084F3C(HSD_GObj* gobj);
 void ft_80084280(HSD_GObj*);
 void ft_8008403C(HSD_GObj*, HSD_GObjEvent);
 void ft_80084DB0(HSD_GObj*);
 void ft_80082C74(HSD_GObj*, HSD_GObjEvent);
 
 /// @todo Name does not follow our conventions.
-bool ft_CheckGroundAndLedge(HSD_GObj* fighter_gobj, s32 direction);
+bool ft_CheckGroundAndLedge(HSD_GObj* gobj, s32 direction);
 
-void ft_80083F88(HSD_GObj* fighter_gobj);
-void ft_80085154(HSD_GObj* fighter_gobj);
-void ft_80083B68(HSD_GObj* fighter_gobj);
+void ft_80083F88(HSD_GObj* gobj);
+void ft_80085154(HSD_GObj* gobj);
+void ft_80083B68(HSD_GObj* gobj);
 bool ft_800824A0(HSD_GObj*, struct _ftCollisionBox*);
 bool ft_80082888(HSD_GObj*, struct _ftCollisionBox*);
-void ft_80085204(HSD_GObj* fighter_gobj);
-void ft_80082B1C(HSD_GObj* fighter_gobj);
-void ft_80081B38(HSD_GObj* fighter_gobj);
-bool ft_80082A68(HSD_GObj* fighter_gobj);
+void ft_80085204(HSD_GObj* gobj);
+void ft_80082B1C(HSD_GObj* gobj);
+void ft_80081B38(HSD_GObj* gobj);
+bool ft_80082A68(HSD_GObj* gobj);
 void ft_800851C0(HSD_GObj*);
 void ftLink_80082B78(HSD_GObj*);
 void ft_80085088(HSD_GObj*);

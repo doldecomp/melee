@@ -1,10 +1,10 @@
 #include "ftMasterHand_14.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
-#include "lb/lbunknown_001.h"
 
 // 80152BC8 14F7A8
 void ftMasterHand_80152BC8(HSD_GObj* gobj)

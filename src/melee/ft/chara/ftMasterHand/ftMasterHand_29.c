@@ -2,7 +2,7 @@
 
 #include "ftMasterHand_03.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 #include "ftCrazyHand/ftcrazyhand.h"
 

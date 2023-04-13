@@ -1,21 +1,24 @@
+#include "if/ifstatus.h"
+
+#include "ifall.h"
+#include "ifstock.h"
+
+#include "gm/gm_1601.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
+#include "mn/mn_2295.h"
+#include "un/un_2FC9.h"
+
 #include <placeholder.h>
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/if/ifall.h>
-#include <melee/if/ifstatus.h>
-#include <melee/if/ifstock.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/text_3.h>
-#include <melee/text_4.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
 
 HudIndex* ifStatus_802F4910(void)
 {

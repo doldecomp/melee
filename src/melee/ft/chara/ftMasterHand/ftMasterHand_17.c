@@ -2,7 +2,7 @@
 
 #include "ftMasterHand_18.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 
 static void ftMasterHand_80153910(HSD_GObj*);

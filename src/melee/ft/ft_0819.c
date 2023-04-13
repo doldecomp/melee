@@ -1,10 +1,12 @@
+#include "ft/ft_0819.h"
+
+#include "ft/ft_0877.h"
+#include "it/it_26B1.h"
+#include "it/item.h"
+#include "lb/lb_00F9.h"
+
 #include <placeholder.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/code_80081938.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/it/item.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbunknown_003.h>
+#include <baselib/gobj.h>
 
 #ifdef MWERKS_GEKKO
 
@@ -12,7 +14,7 @@ static f32 const lbl_804D83A0 = -1.0F;
 static f32 const lbl_804D83A4 = 1.0F;
 
 #pragma push
-asm void ft_80081938(HSD_GObj* fighter_gobj)
+asm void ft_80081938(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 80081938 0007E518  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -48,7 +50,7 @@ asm void ft_80081938(HSD_GObj* fighter_gobj)
 
 #else
 
-void ft_80081938(HSD_GObj* fighter_gobj)
+void ft_80081938(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -58,7 +60,7 @@ void ft_80081938(HSD_GObj* fighter_gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_800819A8(HSD_GObj* fighter_gobj)
+asm void ft_800819A8(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 800819A8 0007E588  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -88,7 +90,7 @@ asm void ft_800819A8(HSD_GObj* fighter_gobj)
 
 #else
 
-void ft_800819A8(HSD_GObj* fighter_gobj)
+void ft_800819A8(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }

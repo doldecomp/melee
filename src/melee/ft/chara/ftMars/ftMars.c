@@ -2,7 +2,7 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftlib.h"
 #include "ft/ftparts.h"
@@ -123,9 +123,9 @@ void ftMars_OnDeath(HSD_GObj* gobj)
 
 // 801362B0 00132E90
 // ftMars_OnItemPickup
-void ftMars_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftMars_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 0, 1);
+    Fighter_OnItemPickup(gobj, bool, 0, 1);
 }
 
 // 80136390 00132F70

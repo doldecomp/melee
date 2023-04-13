@@ -2,7 +2,7 @@
 #define MELEE_FT_CHARA_FTMASTERHAND_FTMASTERHAND_26_H
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
 void ftMasterHand_80155014(HSD_GObj*);
 

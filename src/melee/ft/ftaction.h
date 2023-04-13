@@ -1,7 +1,7 @@
 #ifndef MELEE_FT_FTACTION_H
 #define MELEE_FT_FTACTION_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 void ftAction_80073240(HSD_GObj*);
 void ftAction_80073354(HSD_GObj*);

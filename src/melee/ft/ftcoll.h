@@ -3,9 +3,10 @@
 
 #include <platform.h>
 
+#include "ft/fighter.h"
+
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <melee/ft/fighter.h>
+#include <baselib/gobjproc.h>
 
 void ftColl_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
                      s32 attackID); // Combo Count Logic //
@@ -13,16 +14,14 @@ void ftColl_80076444(HSD_GObj* attacker,
                      HSD_GObj* victim); // Combo Count Logic + Get Attack ID //
 void ftColl_8007646C(HSD_GObj* attackItem,
                      HSD_GObj* victim); // Combo Count Logic w/ Item Owner //
-void ftColl_800764DC(
-    HSD_GObj* fighter_gobj); // Check to end combo for victim //
-void ftColl_80076528(
-    HSD_GObj* fighter_gobj); // Combo count something + adjust TopN //
+void ftColl_800764DC(HSD_GObj* gobj);   // Check to end combo for victim //
+void ftColl_80076528(HSD_GObj* gobj); // Combo count something + adjust TopN //
 void ftColl_800765AC(HSD_GObj* victim); // Clear victim pointer from attacker
                                         // upon freeing memory? //
 void ftColl_800765E0(void); // Reset hitbox and phantom collision count? //
 f32 ftColl_800765F0(Fighter* fp, HSD_GObj* victim,
                     f32 unk_floatvar); // Unk knockback related ? //
-bool ftColl_8007B868(HSD_GObj* fighter_gobj);
+bool ftColl_8007B868(HSD_GObj* gobj);
 
 void ftColl_80076528(HSD_GObj*);
 void ftColl_800765E0(void);
@@ -35,7 +34,7 @@ void ftColl_8007AB80(HSD_GObj*);
 void ftColl_8007ABD0(HitCapsule*, u32 damageAmount, HSD_GObj*);
 void ftColl_8007AE80(HSD_GObj*);
 void ftColl_8007AEE0(HSD_GObj*);
-void ftColl_8007AF28(HSD_GObj* fighter_gobj);
+void ftColl_8007AF28(HSD_GObj* gobj);
 void ftColl_8007AFF8(HSD_GObj*);
 void ftColl_8007B0C0(HSD_GObj*, int);
 void ftColl_8007B1B8(HSD_GObj*, f32*, HSD_GObjEvent);

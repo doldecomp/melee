@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTKIRBY_FTKIRBY_H
 #define MELEE_FT_CHARA_FTKIRBY_FTKIRBY_H
 
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/types.h>
-#include <melee/lb/lbvector.h>
+#include "ft/ftcommon.h"
+#include "ft/types.h"
+#include "lb/lbvector.h"
 
 typedef struct _ftKirbyAttributes {
     f32 x0;
@@ -39,15 +39,15 @@ void ftKirby_800EED50(s32, s32);
 void ftKirby_800F1D24(HSD_GObj*);
 void ftKirby_800F5BA4(Fighter*);
 void ftKirby_800F5C34(Fighter*);
-void ftKirby_800F5D04(HSD_GObj* fighter_gobj, bool);
-void ftKirby_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftKirby_800F5D04(HSD_GObj* gobj, bool);
+void ftKirby_OnItemPickup(HSD_GObj* gobj, bool bool);
 void ftKirby_800EEB00(HSD_GObj*, void*);
 void ftKirby_800EEB1C(HSD_GObj*, void*);
-void ftKirby_800EE74C(HSD_GObj* fighter_gobj);
-void ftKirby_800EE7B8(HSD_GObj* fighter_gobj);
+void ftKirby_800EE74C(HSD_GObj* gobj);
+void ftKirby_800EE7B8(HSD_GObj* gobj);
 void ftKirby_800EE528(void);
-void ftKirby_OnDeath(HSD_GObj* fighter_gobj);
-void ftKirby_OnLoad(HSD_GObj* fighter_gobj);
+void ftKirby_OnDeath(HSD_GObj* gobj);
+void ftKirby_OnLoad(HSD_GObj* gobj);
 void ftKirby_800F203C(HSD_GObj*);
 void ftKirby_800F205C(HSD_GObj*);
 void ftKirby_800F207C(HSD_GObj*);
@@ -888,14 +888,14 @@ void ftKirby_8010D204(HSD_GObj*);
 void ftKirby_800F9A54(HSD_GObj*);
 void ftKirby_8010B4A0(HSD_GObj*);
 void ftKirby_800FA958(HSD_GObj*);
-/* static */ s32 ftKirby_800F1BAC(HSD_GObj* fighter_gobj, s32, bool);
-/* static */ void ftKirby_800F5524(HSD_GObj* fighter_gobj);
-/* static */ void ftKirby_800F22D4(HSD_GObj* fighter_gobj);
-/* static */ void ftKirby_800F5318(HSD_GObj* fighter_gobj);
-/* static */ void ftKirby_800F9090(HSD_GObj* fighter_gobj);
-/* static */ void ftKirby_800F19AC(HSD_GObj* fighter_gobj);
-/* static */ void ftKirby_800F1A8C(HSD_GObj* fighter_gobj);
-void ftKirby_800EE818(HSD_GObj* fighter_gobj);
+/* static */ s32 ftKirby_800F1BAC(HSD_GObj* gobj, s32, bool);
+/* static */ void ftKirby_800F5524(HSD_GObj* gobj);
+/* static */ void ftKirby_800F22D4(HSD_GObj* gobj);
+/* static */ void ftKirby_800F5318(HSD_GObj* gobj);
+/* static */ void ftKirby_800F9090(HSD_GObj* gobj);
+/* static */ void ftKirby_800F19AC(HSD_GObj* gobj);
+/* static */ void ftKirby_800F1A8C(HSD_GObj* gobj);
+void ftKirby_800EE818(HSD_GObj* gobj);
 void ftKirby_SpecialS_StartMotion(HSD_GObj*);
 void ftKirby_SpecialAirHi_StartMotion(HSD_GObj*);
 void ftKirby_SpecialAirLw_StartMotion(HSD_GObj*);

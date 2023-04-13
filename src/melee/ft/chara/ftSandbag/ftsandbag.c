@@ -1,11 +1,11 @@
 #include "ftsandbag.h"
 
-#include "ft/code_80081B38.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
-#include "lb/lbunknown_001.h"
+#include "lb/lb_00B0.h"
 
 ActionState ftSandbag_MotionStateTable[] = {
     { 295, 0, 0x01400000, ftSandbag_8014FC20, ftSandbag_8014FC24,

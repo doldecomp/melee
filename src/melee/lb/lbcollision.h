@@ -1,13 +1,14 @@
 #ifndef MELEE_LB_LBCOLLISION_H
 #define MELEE_LB_LBCOLLISION_H
 
-#include <melee/ft/forward.h>
-#include <melee/lb/forward.h>
+#include "ft/forward.h"
+#include "lb/forward.h"
 
 #include "dolphin/mtx/types.h"
 
 #include <placeholder.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <dolphin/mtx/types.h>
+#include <baselib/jobj.h>
 
 struct HitResult {
     HSD_JObj* bone;

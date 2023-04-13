@@ -1,6 +1,6 @@
 #include "ftMasterHand_31.h"
 
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 
 // 80155A58 152638

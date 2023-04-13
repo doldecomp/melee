@@ -1,6 +1,7 @@
-#include <melee/ft/chara/ftZakoBoy/ftzakoboy.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/chara/ftZakoBoy/ftzakoboy.h"
+
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 char lbl_803D34E8[] = "PlBo.dat";
 char lbl_803D34F4[] = "ftDataBoy";
@@ -33,9 +34,9 @@ void ftZakoBoy_OnDeath(HSD_GObj* gobj)
     ftParts_80074A4C(gobj, 0, 0);
 }
 
-void ftZakoBoy_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftZakoBoy_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);
+    Fighter_OnItemPickup(gobj, bool, 0, 0);
 }
 
 void ftZakoBoy_OnItemInvisible(HSD_GObj* gobj)
@@ -48,9 +49,9 @@ void ftZakoBoy_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 0);
 }
 
-void ftZakoBoy_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
+void ftZakoBoy_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(fighter_gobj, bool1, 0, 0);
+    Fighter_OnItemDrop(gobj, bool1, 0, 0);
 }
 
 void ftZakoBoy_OnLoad(HSD_GObj* gobj)

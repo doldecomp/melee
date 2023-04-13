@@ -5,7 +5,7 @@
 
 #include <dolphin/gx/types.h>
 #include <dolphin/os/OSAlloc.h>
-#include <sysdolphin/baselib/video.h>
+#include <baselib/video.h>
 
 #define HSD_DEFAULT_FIFO_SIZE (256 * 1024)
 #define HSD_DEFAULT_XFB_MAX_NUM 2

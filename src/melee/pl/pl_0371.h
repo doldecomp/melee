@@ -4,7 +4,7 @@
 #ifndef MELEE_PL_PL_UNKNOWN_001_H
 #define MELEE_PL_PL_UNKNOWN_001_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 void pl_80037C60(HSD_GObj*, s32);
 void pl_8003E058(s32, s32, s32, s32);

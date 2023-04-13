@@ -1,9 +1,10 @@
-#include <melee/ft/chara/ftEmblem/ftemblem.h>
-#include <melee/ft/chara/ftMars/ftMars.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/chara/ftEmblem/ftemblem.h"
+
+#include "ft/chara/ftMars/ftMars.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState ftRoy_MotionStateTable[] = {
     { 295, 0x00340211, 0x12000000, ftMars_80136844, ftMars_80136914,
@@ -115,9 +116,9 @@ void ftRoy_OnDeath(HSD_GObj* gobj)
     fp->ev.ms.x222C = 0;
 }
 
-void ftRoy_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftRoy_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 0, 1);
+    Fighter_OnItemPickup(gobj, bool, 0, 1);
 }
 
 void ftRoy_OnItemInvisible(HSD_GObj* gobj)

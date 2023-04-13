@@ -1,6 +1,6 @@
 #include "ftMasterHand_11.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 
 void ftMasterHand_8015236C(HSD_GObj* arg0) {}

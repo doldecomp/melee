@@ -1,11 +1,10 @@
 #include "ftgigakoopa.h"
 
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftKoopa/ftkoopa.h"
-#include "it/itkind.h"
 
 ActionState ftGigaKoopa_MotionStateTable[] = {
     { 295, 0x00340011, 0x12000000, ftKoopa_80134F48, ftKoopa_801351B0,
@@ -75,17 +74,17 @@ Fighter_CostumeStrings lbl_803D3988[] = {
     { lbl_803D3904, lbl_803D3910, lbl_803D3928 },
 };
 
-void ftGigaKoopa_OnDeath(HSD_GObj* fighter_gobj)
+void ftGigaKoopa_OnDeath(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* koopaAttr = fp->x2D4_specialAttributes;
 
-    ftParts_80074A4C(fighter_gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
     fp->dmg.x18B0 = koopaAttr->x0;
     fp->ev.gk.x222C = koopaAttr->x10;
     fp->ev.gk.x2230 = koopaAttr->x18;
@@ -109,9 +108,9 @@ void ftGigaKoopa_OnLoad(HSD_GObj* gobj)
     fp->x222A_flag.bits.b0 = true;
 }
 
-void ftGigaKoopa_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftGigaKoopa_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, true, true);
+    Fighter_OnItemPickup(gobj, bool, true, true);
 }
 
 void ftGigaKoopa_OnItemInvisible(HSD_GObj* gobj)

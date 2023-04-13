@@ -2,7 +2,7 @@
 #define _UTIL_H_
 
 #include <math.h>
-#include <sysdolphin/baselib/objalloc.h>
+#include <baselib/objalloc.h>
 
 // functions
 void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest);
