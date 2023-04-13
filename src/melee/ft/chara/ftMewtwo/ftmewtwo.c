@@ -1,6 +1,4 @@
 #include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
-
-#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
@@ -48,8 +46,8 @@ ActionState ftMewtwo_MotionStateTable[] = {
       ftMewtwo_SpecialHiStart_IASA, ftMewtwo_SpecialHiStart_Phys,
       ftMewtwo_SpecialHiStart_Coll, ftCamera_UpdateCameraBox },
     { 309, 0x00340013, 0x14000000, ftMewtwo_SpecialHi_Anim,
-      ftMewtwo_SpecialHi_IASA, ftMewtwo_SpecialHi_Phys, ftMewtwo_SpecialHi_Coll,
-      ftCamera_UpdateCameraBox },
+      ftMewtwo_SpecialHi_IASA, ftMewtwo_SpecialHi_Phys,
+      ftMewtwo_SpecialHi_Coll, ftCamera_UpdateCameraBox },
     { 308, 0x00340013, 0x14000000, ftMewtwo_SpecialHiLost_Anim,
       ftMewtwo_SpecialHiLost_IASA, ftMewtwo_SpecialHiLost_Phys,
       ftMewtwo_SpecialHiLost_Coll, ftCamera_UpdateCameraBox },
@@ -63,8 +61,8 @@ ActionState ftMewtwo_MotionStateTable[] = {
       ftMewtwo_SpecialAirHiLost_IASA, ftMewtwo_SpecialAirHiLost_Phys,
       ftMewtwo_SpecialAirHiLost_Coll, ftCamera_UpdateCameraBox },
     { 312, 0x00340114, 0x15000000, ftMewtwo_SpecialLw_Anim,
-      ftMewtwo_SpecialLw_IASA, ftMewtwo_SpecialLw_Phys, ftMewtwo_SpecialLw_Coll,
-      ftCamera_UpdateCameraBox },
+      ftMewtwo_SpecialLw_IASA, ftMewtwo_SpecialLw_Phys,
+      ftMewtwo_SpecialLw_Coll, ftCamera_UpdateCameraBox },
     { 313, 0x00340514, 0x15000000, ftMewtwo_SpecialAirLw_Anim,
       ftMewtwo_SpecialAirLw_IASA, ftMewtwo_SpecialAirLw_Phys,
       ftMewtwo_SpecialAirLw_Coll, ftCamera_UpdateCameraBox },
@@ -161,8 +159,9 @@ void ftMewTwo_80144F58(HSD_GObj* fighter_gobj)
     ftMewtwoAttributes* attr = fp->x2D4_specialAttributes;
     f32 attr_value = attr->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
-    if (fp->ev.mt.x2234_shadowBallCharge == attr_value)
+    if (fp->ev.mt.x2234_shadowBallCharge == attr_value) {
         ft_800BFFD0(fp, 0x5C, 0);
+    }
 }
 
 void ftMewTwo_LoadSpecialAttrs(HSD_GObj* fighter_gobj)

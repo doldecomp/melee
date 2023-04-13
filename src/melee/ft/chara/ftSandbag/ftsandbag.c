@@ -85,8 +85,9 @@ void ftSandbag_8014FBA4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->xE0_ground_or_air == GA_Air)
+    if (fp->xE0_ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
+    }
 
     Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     ftCommon_8007EFC0(fp, p_ftCommonData->x5F0);

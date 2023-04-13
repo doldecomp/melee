@@ -1,6 +1,5 @@
-#include <dolphin/os/OSAlloc.h>
-
 #include <dolphin/os/os.h>
+#include <dolphin/os/OSAlloc.h>
 #include <Runtime/platform.h>
 
 static Heap* HeapArray;
@@ -9,7 +8,7 @@ static any_t ArenaStart;
 static any_t ArenaEnd;
 volatile OSHeapHandle __OSCurrHeap = -1;
 
-#define InRange(addr, start, end)                                              \
+#define InRange(addr, start, end)                                             \
     ((u8*) (start) <= (u8*) (addr) && (u8*) (addr) < (u8*) (end))
 #define OFFSET(addr, align) (((uintptr_t) (addr) & ((align) -1)))
 
@@ -21,20 +20,23 @@ static any_t DLAddFront(HeapCell* neighbor, HeapCell* cell)
 {
     cell->next = neighbor;
     cell->prev = NULL;
-    if (neighbor != NULL)
+    if (neighbor != NULL) {
         neighbor->prev = cell;
+    }
     return cell;
 }
 
 /// Removes @p cell from @p list and returns @p list. */
 static HeapCell* DLExtract(HeapCell* list, HeapCell* cell)
 {
-    if (cell->next != NULL)
+    if (cell->next != NULL) {
         cell->next->prev = cell->prev;
-    if (cell->prev == NULL)
+    }
+    if (cell->prev == NULL) {
         list = cell->next;
-    else
+    } else {
         cell->prev->next = cell->next;
+    }
 
     return list;
 }
@@ -48,8 +50,9 @@ static HeapCell* DLInsert(HeapCell* list, HeapCell* cell, unk_t _)
     HeapCell* after = list;
 
     while (after != NULL) {
-        if (cell <= after)
+        if (cell <= after) {
             break;
+        }
         before = after;
         after = after->next;
     }
@@ -61,8 +64,9 @@ static HeapCell* DLInsert(HeapCell* list, HeapCell* cell, unk_t _)
             cell->size += after->size;
             after = after->next;
             cell->next = after;
-            if (after != NULL)
+            if (after != NULL) {
                 after->prev = cell;
+            }
         }
     }
     if (before != NULL) {
@@ -70,8 +74,9 @@ static HeapCell* DLInsert(HeapCell* list, HeapCell* cell, unk_t _)
         if ((u8*) before + before->size == (u8*) cell) {
             before->size += cell->size;
             before->next = after;
-            if (after != NULL)
+            if (after != NULL) {
                 after->prev = before;
+            }
         }
         return list;
     }
@@ -86,12 +91,15 @@ any_t OSAllocFromHeap(OSHeapHandle heap, size_t size)
     size_t leftoverSpace;
 
     // find first cell with enough capacity
-    for (cell = hd->free; cell != NULL; cell = cell->next)
-        if ((signed) sizeAligned <= (signed) cell->size)
+    for (cell = hd->free; cell != NULL; cell = cell->next) {
+        if ((signed) sizeAligned <= (signed) cell->size) {
             break;
+        }
+    }
 
-    if (cell == NULL)
+    if (cell == NULL) {
         return NULL;
+    }
 
     leftoverSpace = cell->size - sizeAligned;
     if (leftoverSpace < MINOBJSIZE) {
@@ -105,12 +113,14 @@ any_t OSAllocFromHeap(OSHeapHandle heap, size_t size)
         newcell->size = leftoverSpace;
         newcell->prev = cell->prev;
         newcell->next = cell->next;
-        if (newcell->next != NULL)
+        if (newcell->next != NULL) {
             newcell->next->prev = newcell;
-        if (newcell->prev != NULL)
+        }
+        if (newcell->prev != NULL) {
             newcell->prev->next = newcell;
-        else
+        } else {
             hd->free = newcell;
+        }
     }
 
     // add the cell to the beginning of the allocated list
@@ -127,12 +137,14 @@ void OSFreeToHeap(OSHeapHandle heap, any_t ptr)
 
     // remove cell from the allocated list
     // hd->allocated = DLExtract(hd->allocated, cell);
-    if (cell->next != NULL)
+    if (cell->next != NULL) {
         cell->next->prev = cell->prev;
-    if (cell->prev == NULL)
+    }
+    if (cell->prev == NULL) {
         list = cell->next;
-    else
+    } else {
         cell->prev->next = cell->next;
+    }
 
     hd->allocated = list;
     hd->free = DLInsert(hd->free, cell, list);
@@ -206,10 +218,10 @@ size_t OSCheckHeap(OSHeapHandle heap)
     int total = 0;
     int totalFree = 0;
 
-#define CHECK(line, condition)                                                 \
-    if (!(condition)) {                                                        \
-        OSReport("OSCheckHeap: Failed " #condition " in %d", line);            \
-        return -1;                                                             \
+#define CHECK(line, condition)                                                \
+    if (!(condition)) {                                                       \
+        OSReport("OSCheckHeap: Failed " #condition " in %d", line);           \
+        return -1;                                                            \
     }
 
     CHECK(893, HeapArray)

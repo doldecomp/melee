@@ -66,7 +66,7 @@ void mpColl_800439FC(CollData* arg0);
 void mpColl_80043ADC(CollData* arg0);
 bool mpColl_80043BBC(CollData* arg0, s32* arg1);
 void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2);
-void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3,
-                     f32 arg4);
+void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2,
+                     f32 arg3, f32 arg4);
 
 #endif

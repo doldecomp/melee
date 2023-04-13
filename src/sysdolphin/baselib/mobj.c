@@ -5,8 +5,9 @@
 #include "state.h"
 #include "tev.h"
 #include "texp.h"
-#include <dolphin/os/os.h>
+
 #include <string.h>
+#include <dolphin/os/os.h>
 
 static HSD_ClassInfo* default_class;
 static HSD_MObj* current_mobj;
@@ -23,20 +24,23 @@ void HSD_MObjSetCurrent(HSD_MObj* mobj)
 
 void HSD_MObjSetFlags(HSD_MObj* mobj, u32 flags)
 {
-    if (mobj != NULL)
+    if (mobj != NULL) {
         mobj->rendermode |= flags;
+    }
 }
 
 void HSD_MObjClearFlags(HSD_MObj* mobj, u32 flags)
 {
-    if (mobj != NULL)
+    if (mobj != NULL) {
         mobj->rendermode &= ~flags;
+    }
 }
 
 void HSD_MObjRemoveAnimByFlags(HSD_MObj* mobj, u32 flags)
 {
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
 
     if (flags & MOBJ_ANIM) {
         HSD_AObjRemove(mobj->aobj);
@@ -49,8 +53,9 @@ void HSD_MObjRemoveAnimByFlags(HSD_MObj* mobj, u32 flags)
 
 void HSD_MObjAddAnim(HSD_MObj* mobj, HSD_MatAnim* matanim)
 {
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
 
     if (matanim != NULL) {
         if (mobj->aobj != NULL) {
@@ -63,8 +68,9 @@ void HSD_MObjAddAnim(HSD_MObj* mobj, HSD_MatAnim* matanim)
 
 void HSD_MObjReqAnimByFlags(HSD_MObj* mobj, f32 startframe, u32 flags)
 {
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
     if (flags & MOBJ_ANIM) {
         HSD_AObjReqAnim(mobj->aobj, startframe);
     }
@@ -80,8 +86,9 @@ static void MObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_MObj* mobj = obj;
 
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
 
     switch (type) {
     case HSD_A_M_AMBIENT_R:
@@ -134,8 +141,9 @@ static void MObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 
 void HSD_MObjAnim(HSD_MObj* mobj)
 {
-    if (mobj == NULL)
+    if (mobj == NULL) {
         return;
+    }
     HSD_AObjInterpretAnim(mobj->aobj, mobj, MObjUpdateFunc);
     HSD_TObjAnimAll(mobj->tobj);
 }
@@ -194,8 +202,9 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
     HSD_ASSERT(416, list);
     *list = NULL;
     for (tobj = tobj_top; tobj != NULL; tobj = tobj->next) {
-        if (tobj_coord(tobj) == TEX_COORD_TOON)
+        if (tobj_coord(tobj) == TEX_COORD_TOON) {
             toon = tobj;
+        }
     }
 
     if (mobj->rendermode & RENDER_VERTEX) {
@@ -266,8 +275,9 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
         exp_3 = HSD_TExpTev(list);
         HSD_TExpColorOp(exp_3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_ENABLE);
-        HSD_TExpColorIn(exp_3, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
-                        HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, cnst);
+        HSD_TExpColorIn(exp_3, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
+                        HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB,
+                        cnst);
         spec = exp_3;
 
         for (tobj_3 = tobj_top; tobj_3 != NULL; tobj_3 = tobj_3->next) {
@@ -312,12 +322,14 @@ HSD_TExp* MObjMakeTExp(HSD_MObj* mobj, HSD_TObj* tobj_top, HSD_TExp** list)
         exp_2 = HSD_TExpTev(list);
         HSD_TExpColorOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_ENABLE);
-        HSD_TExpColorIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
-                        HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB, ext);
+        HSD_TExpColorIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
+                        HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_RGB,
+                        ext);
         HSD_TExpAlphaOp(exp_2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
                         GX_ENABLE);
-        HSD_TExpAlphaIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO,
-                        HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A, alpha);
+        HSD_TExpAlphaIn(exp_2, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_0,
+                        HSD_TEXP_ZERO, HSD_TE_0, HSD_TEXP_ZERO, HSD_TE_A,
+                        alpha);
         return exp_2;
     }
 

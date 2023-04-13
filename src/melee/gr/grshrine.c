@@ -1,14 +1,13 @@
-#include <melee/gr/grshrine.h>
-
-#include <dolphin/os/os.h>
 #include <math.h>
+#include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grshrine.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 
 static void* lbl_804D6A18;
 
@@ -61,8 +60,8 @@ static void grShrine_80201C64(void)
         u8 unused1[4];
 #endif
 
-        lb_80011A50(&v, -1, 0.5f, 0.0f, M_PI / 3, -10000.0f, 10000.0f, 10000.0f,
-                    -10000.0f);
+        lb_80011A50(&v, -1, 0.5f, 0.0f, M_PI / 3, -10000.0f, 10000.0f,
+                    10000.0f, -10000.0f);
     }
 }
 
@@ -177,8 +176,9 @@ static bool grShrine_80201F4C(Vec3* a, int _, HSD_JObj* joint)
     Vec3 b;
     lb_8000B1CC(joint, 0, &b);
 
-    if (a->y > b.y)
+    if (a->y > b.y) {
         return true;
-    else
+    } else {
         return false;
+    }
 }

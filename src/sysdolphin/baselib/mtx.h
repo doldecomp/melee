@@ -3,7 +3,6 @@
 
 #include <math.h>
 #include <sysdolphin/baselib/objalloc.h>
-
 #include <melee/lb/lbrefract.h>
 
 void HSD_MtxInverse(Mtx src, Mtx dest);

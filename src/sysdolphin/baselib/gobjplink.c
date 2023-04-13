@@ -1,8 +1,7 @@
-#include <sysdolphin/baselib/gobjplink.h>
-
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/gobjuserdata.h>
 
@@ -46,8 +45,8 @@ inline void gobj_first_higher_prio(HSD_GObj* gobj)
     while (var_r4 != NULL && var_r4->p_priority < gobj->p_priority) {
         var_r4 = var_r4->next;
     }
-    GObj_PReorder(gobj,
-                  var_r4 != NULL ? var_r4->prev : plinklow_gobjs[gobj->p_link]);
+    GObj_PReorder(gobj, var_r4 != NULL ? var_r4->prev
+                                       : plinklow_gobjs[gobj->p_link]);
 }
 
 extern char lbl_804084B8[];

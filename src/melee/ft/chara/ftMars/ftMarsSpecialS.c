@@ -1,6 +1,6 @@
 #include "melee/ft/inlines.h"
-#include <melee/ft/chara/ftMars/ftMars.h>
 
+#include <melee/ft/chara/ftMars/ftMars.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
@@ -25,10 +25,11 @@ void ftMars_SpecialS_StartMotion(HSD_GObj* gobj)
 
         {
             enum_t asid;
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->xE0_ground_or_air == GA_Ground) {
                 asid = 349;
-            else
+            } else {
                 asid = 358;
+            }
 
             Fighter_ChangeMotionState(gobj, asid, 0, 0, 0, 1, 0);
         }
@@ -58,10 +59,11 @@ void ftMars_SpecialAirS_StartMotion(HSD_GObj* gobj)
 
         {
             enum_t asid;
-            if (fp1->xE0_ground_or_air == GA_Ground)
+            if (fp1->xE0_ground_or_air == GA_Ground) {
                 asid = 349;
-            else
+            } else {
                 asid = 358;
+            }
 
             Fighter_ChangeMotionState(gobj, asid, 0, 0, 0, 1, 0);
         }
@@ -75,10 +77,11 @@ void ftMars_80137558(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->xE0_ground_or_air == GA_Ground) {
             ft_8008A2BC(gobj);
-        else
+        } else {
             ft_800CC730(gobj);
+        }
     }
 }
 
@@ -88,10 +91,13 @@ void ftMars_801375B8(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 != 0) {
         if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
+        {
             ftMars_80137A9C(gobj);
+        }
     } else {
-        if ((fp->input.x668 & HSD_BUTTON_AB) != 0)
+        if ((fp->input.x668 & HSD_BUTTON_AB) != 0) {
             fp->x2204_ftcmd_var1 = 1;
+        }
     }
 }
 
@@ -121,8 +127,9 @@ void ftMars_8013767C(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (!ft_800827A0(gobj))
+        if (!ft_800827A0(gobj)) {
             ftMars_801376E8(gobj);
+        }
     } else {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
         if (ft_80081D0C(gobj)) {
@@ -184,7 +191,9 @@ void ftMars_80137810(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 != 0) {
         if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
+        {
             ftMars_80137E0C(gobj);
+        }
     } else {
         if ((fp->input.x668 & HSD_BUTTON_AB) != 0) {
             fp->x2204_ftcmd_var1 = 1;
@@ -218,8 +227,9 @@ void ftMars_801378D4(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (!ft_800827A0(gobj))
+        if (!ft_800827A0(gobj)) {
             ftMars_80137940(gobj);
+        }
     } else if (ft_80081D0C(gobj)) {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
 
@@ -293,15 +303,17 @@ void ftMars_80137A9C(HSD_GObj* gobj)
     fp->cb.x21EC_callback = &ftMars_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->xE0_ground_or_air == GA_Ground) {
             asid = 350;
-        else
+        } else {
             asid = 359;
+        }
     } else {
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->xE0_ground_or_air == GA_Ground) {
             asid = 351;
-        else
+        } else {
             asid = 360;
+        }
     }
     Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,
                               0, 0, 1, 0);
@@ -329,10 +341,13 @@ void ftMars_80137B94(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 != 0) {
         if (fp->x2204_ftcmd_var1 == 0 && (fp->input.x668 & HSD_BUTTON_AB) != 0)
+        {
             ftMars_80138148(gobj);
+        }
     } else {
-        if ((fp->input.x668 & HSD_BUTTON_AB) != 0)
+        if ((fp->input.x668 & HSD_BUTTON_AB) != 0) {
             fp->x2204_ftcmd_var1 = 1;
+        }
     }
 }
 
@@ -362,12 +377,14 @@ void ftMars_80137C50(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (!ft_800827A0(gobj))
+        if (!ft_800827A0(gobj)) {
             ftMars_80137CBC(gobj);
+        }
     } else {
         // EnvironmentCollision_CheckForGroundOnly_NoLedgeGrab
-        if (ft_80081D0C(gobj))
+        if (ft_80081D0C(gobj)) {
             ftMars_80137D60(gobj);
+        }
     }
 }
 
@@ -433,21 +450,24 @@ void ftMars_80137E0C(HSD_GObj* gobj)
     fp->cb.x21EC_callback = &ftMars_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->xE0_ground_or_air == GA_Ground) {
             asid = 352;
-        else
+        } else {
             asid = 361;
+        }
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->xE0_ground_or_air == GA_Ground) {
                 asid = 354;
-            else
+            } else {
                 asid = 363;
+            }
         } else {
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->xE0_ground_or_air == GA_Ground) {
                 asid = 353;
-            else
+            } else {
                 asid = 362;
+            }
         }
     }
 
@@ -497,12 +517,14 @@ void ftMars_80137F8C(HSD_GObj* gobj)
 
     if (fp->xE0_ground_or_air == GA_Ground) {
         // EnvironmentCollision_StopAtLedge
-        if (ft_800827A0(gobj) == 0)
+        if (ft_800827A0(gobj) == 0) {
             ftMars_80137FF8(gobj);
+        }
     } else {
         // EnvironmentCollision_CheckForGroundOnly(NoLedgeGrab)
-        if (ft_80081D0C(gobj) != 0)
+        if (ft_80081D0C(gobj) != 0) {
             ftMars_8013809C(gobj);
+        }
     }
 }
 
@@ -574,21 +596,24 @@ void ftMars_80138148(HSD_GObj* gobj)
     fp->cb.x21EC_callback = &ftMars_80137A68;
 
     if (fp->input.x624_lstick_y > p_ftCommonData->x21C) {
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->xE0_ground_or_air == GA_Ground) {
             asid = 355;
-        else
+        } else {
             asid = 364;
+        }
     } else {
         if (fp->input.x624_lstick_y < -p_ftCommonData->x21C) {
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->xE0_ground_or_air == GA_Ground) {
                 asid = 357;
-            else
+            } else {
                 asid = 366;
+            }
         } else {
-            if (fp->xE0_ground_or_air == GA_Ground)
+            if (fp->xE0_ground_or_air == GA_Ground) {
                 asid = 356;
-            else
+            } else {
                 asid = 365;
+            }
         }
     }
     Fighter_ChangeMotionState(gobj, asid, FtStateChange_SkipUpdateAttackCount,

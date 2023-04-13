@@ -1,9 +1,10 @@
 #ifndef _gobj_h_
 #define _gobj_h_
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
+
 #include <sysdolphin/baselib/objalloc.h>
+#include <Runtime/platform.h>
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF
@@ -11,7 +12,7 @@
 #define HSD_GOBJ_CLASS_STAGE 0x3
 #define HSD_GOBJ_CLASS_FIGHTER 0x4
 #define HSD_GOBJ_CLASS_ITEM 0x6
-#define HSD_GOBJ_CLASS_ITEMLINK                                                \
+#define HSD_GOBJ_CLASS_ITEMLINK                                               \
     0x7 // Used by chain-type items in-game to link multiple parts together
 #define HSD_GOBJ_CLASS_EFFECT 0x8
 

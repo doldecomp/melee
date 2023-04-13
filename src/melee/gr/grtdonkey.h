@@ -1,8 +1,8 @@
 #ifndef _grtdonkey_h_
 #define _grtdonkey_h_
 
-#include <melee/gr/stage.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/gr/stage.h>
 
 static void grTDonkey_80220228(int);
 static void grTDonkey_8022022C(void);

@@ -1,5 +1,4 @@
 #include <MSL/ctype.h>
-
 #include <Runtime/platform.h>
 
 static const u8 LowercaseTable[] = {
@@ -54,14 +53,16 @@ static const u8 UppercaseTable[] = {
 
 int toupper(int c)
 {
-    if (c == -1)
+    if (c == -1) {
         return -1;
+    }
     return UppercaseTable[c & 0xFF];
 }
 
 int tolower(int c)
 {
-    if (c == -1)
+    if (c == -1) {
         return -1;
+    }
     return LowercaseTable[c & 0xFF];
 }

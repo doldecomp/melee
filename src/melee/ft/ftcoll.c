@@ -1,9 +1,17 @@
-#include <melee/ft/ftcoll.h>
+#include <melee/lb/forward.h>
 
 #include <common_structs.h>
+#include <math.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
-#include <math.h>
+#include <sysdolphin/baselib/archive.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjuserdata.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
@@ -15,21 +23,12 @@
 #include <melee/gr/stage.h>
 #include <melee/it/code_80266F3C.h>
 #include <melee/it/item.h>
-#include <melee/lb/forward.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/pl/pl_unknown_001.h>
 #include <melee/pl/player.h>
 #include <MSL/trigf.h>
 #include <Runtime/platform.h>
 #include <Runtime/runtime.h>
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjuserdata.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 /// Combo Count Logic
 void ftColl_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID)
@@ -73,8 +72,9 @@ void ftColl_8007646C(HSD_GObj* attackItem, HSD_GObj* victim)
     HSD_GObj* owner = it_8026BC78(attackItem);
     enum_t asid = it_8026BC84(attackItem);
 
-    if (ftLib_80086960(owner))
+    if (ftLib_80086960(owner)) {
         ftColl_800763C0(owner, victim, asid);
+    }
 }
 
 /// Check to end combo for victim
@@ -83,14 +83,16 @@ void ftColl_800764DC(HSD_GObj* gobj)
     /// @todo #GET_FIGHTER adds an instruction
     Fighter* fp1 = gobj->user_data;
 
-    if (fp1->x2098 != 0)
+    if (fp1->x2098 != 0) {
         fp1->x2098--;
+    }
 
     if (fp1->x2094 != NULL) {
         Fighter* fp2 = fp1->x2094->user_data;
 
-        if (!fp2->x221C_flag.bits.b6 && fp2->x2098 == 0)
+        if (!fp2->x221C_flag.bits.b6 && fp2->x2098 == 0) {
             fp1->x2094 = NULL;
+        }
     }
 }
 
@@ -133,8 +135,9 @@ void ftColl_800765AC(HSD_GObj* victim)
     while (cur != NULL) {
         Fighter* fp = GET_FIGHTER(cur);
 
-        if (victim == fp->x2094)
+        if (victim == fp->x2094) {
             fp->x2094 = NULL;
+        }
 
         cur = cur->next;
     }
@@ -154,11 +157,13 @@ f32 ftColl_800765F0(Fighter* fp, HSD_GObj* victim, f32 arg2)
 {
     HSD_GObj* cur = fp->x1A58_interactedFighter;
 
-    if (cur != NULL && !fp->x221B_b5 && cur != victim)
+    if (cur != NULL && !fp->x221B_b5 && cur != victim) {
         arg2 *= p_ftCommonData->x128;
+    }
 
-    if (fp->action_id == ASID_DAMAGEICE)
+    if (fp->action_id == ASID_DAMAGEICE) {
         arg2 *= p_ftCommonData->x714;
+    }
 
     return arg2 * fp->dmg.x182c_behavior;
 }
@@ -3097,8 +3102,9 @@ inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
 {
     f32 grab_dist = victim_fp->xB0_pos.x - this_fp->xB0_pos.x;
 
-    if (grab_dist < F32_MAX)
+    if (grab_dist < F32_MAX) {
         grab_dist = -grab_dist;
+    }
 
     if (grab_dist < this_fp->unk_grab_val) {
         HSD_GObj* grabbed_fighter = victim_fp->x0_fighter;
@@ -3159,7 +3165,8 @@ void ftColl_80078A2C(HSD_GObj* this_gobj)
                                 {
                                     if (lbColl_80007ECC(
                                             this_hit,
-                                            &victim_fp->x11A0_fighterHurtbox[j],
+                                            &victim_fp
+                                                 ->x11A0_fighterHurtbox[j],
                                             *ftCommon_8007F804(victim_fp),
                                             this_fp->x34_scale.y,
                                             victim_fp->x34_scale.y,

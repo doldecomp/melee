@@ -4,8 +4,9 @@
 #ifndef MELEE_FT_FT_UNKNOWN_006_H
 #define MELEE_FT_FT_UNKNOWN_006_H
 
-#include "ft/fighter.h"
 #include "ft/forward.h"
+
+#include "ft/fighter.h"
 
 #include <baselib/gobjproc.h>
 

@@ -1,10 +1,10 @@
 #ifndef MELEE_GR_GRMATERIAL_H
 #define MELEE_GR_GRMATERIAL_H
 
-#include <melee/gr/ground.h>
 #include <placeholder.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/gr/ground.h>
 
 void grMaterial_801C95C4(HSD_GObj*);
 void grMaterial_801C9698(HSD_GObj*);

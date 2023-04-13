@@ -46,7 +46,8 @@ void ftMasterHand_80150D28(HSD_GObj* gobj)
 
 // 80150DC4 0014D9A4
 // https://decomp.me/scratch/vZOBB
-void ftMasterHand_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2, Vec3* arg2_pos)
+void ftMasterHand_80150DC4(HSD_GObj* gobj, void* arg1_stateVar2,
+                           Vec3* arg2_pos)
 {
     Fighter* r32_fp = GET_FIGHTER(gobj);
 

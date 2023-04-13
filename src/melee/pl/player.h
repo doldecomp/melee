@@ -1,10 +1,10 @@
 #ifndef _player_h_
 #define _player_h_
 
-#include <melee/pl/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/pl/types.h>
+#include <Runtime/platform.h>
 
 typedef struct _StaticPlayer {
     /// @at{0} @sz{4}
@@ -90,8 +90,8 @@ typedef struct _StaticPlayer {
 
     /*0xA0-A4*/ s32
         joystick_direction_input_count[2]; // Incremented every time you move
-                                           // the joystick a different direction
-                                           // from neutral.
+                                           // the joystick a different
+                                           // direction from neutral.
 
     /*0xA8*/ int nametag_slot_id;
 
@@ -130,7 +130,8 @@ typedef struct _StaticPlayer {
     /*0xAF*/ s8 unkAF;
 
     /*0xB0*/ HSD_GObj* player_entity[2];
-    /*0xB4*/ /*void* sub_character_entity;*/ // Used for followers, such as Nana
+    /*0xB4*/ /*void* sub_character_entity;*/ // Used for followers, such as
+                                             // Nana
 
     /*0xB8*/ void (*struct_func)(s32 slot);
 

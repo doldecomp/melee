@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALHI_H
 #define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALHI_H
 
-#include <baselib/forward.h>
 #include <platform.h>
+#include <baselib/forward.h>
 
 void ftCaptain_SpecialHi_StartMotion(HSD_GObj*);
 void ftCaptain_SpecialAirHi_StartMotion(HSD_GObj*);

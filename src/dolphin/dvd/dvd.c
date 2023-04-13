@@ -1,6 +1,5 @@
-#include <dolphin/dvd/dvd.h>
-
 #include <cstring.h>
+#include <dolphin/dvd/dvd.h>
 #include <dolphin/dvd/dvderror.h>
 #include <dolphin/dvd/dvdfs.h>
 #include <dolphin/dvd/dvdlow.h>
@@ -174,8 +173,9 @@ static void cbForStateError(u32 intType)
 
     if (Canceling) {
         Canceling = false;
-        if (CancelCallback)
+        if (CancelCallback) {
             (CancelCallback)(0, finished);
+        }
     }
 
     stateReady();
@@ -237,10 +237,12 @@ inline bool CheckCancel(u32 resume)
         executing = &DummyCommandBlock;
 
         finished->state = 10;
-        if (finished->callback)
+        if (finished->callback) {
             finished->callback(-3, finished);
-        if (CancelCallback)
+        }
+        if (CancelCallback) {
             CancelCallback(0, finished);
+        }
         stateReady();
         return true;
     }
@@ -280,14 +282,15 @@ static void cbForStateGettingError(u32 intType)
     if ((errorCategory == 2) || (errorCategory == 3)) {
         resume = 0;
     } else {
-        if (status == 0x01000000)
+        if (status == 0x01000000) {
             resume = 4;
-        else if (status == 0x02000000)
+        } else if (status == 0x02000000) {
             resume = 6;
-        else if (status == 0x03000000)
+        } else if (status == 0x03000000) {
             resume = 3;
-        else
+        } else {
             resume = 5;
+        }
     }
 
     if (CheckCancel(resume)) {
@@ -737,10 +740,12 @@ static void cbForStateBusy(u32 intType)
         executing = &DummyCommandBlock;
 
         finished->state = 10;
-        if (finished->callback)
+        if (finished->callback) {
             finished->callback(-3, finished);
-        if (CancelCallback)
+        }
+        if (CancelCallback) {
             CancelCallback(0, finished);
+        }
         stateReady();
         return;
     }
@@ -768,8 +773,8 @@ static void cbForStateBusy(u32 intType)
                 finished->callback(finished->transferredSize, finished);
             }
             stateReady();
-        } else if (CurrCommand == 9 || CurrCommand == 10 || CurrCommand == 11 ||
-                   CurrCommand == 12)
+        } else if (CurrCommand == 9 || CurrCommand == 10 ||
+                   CurrCommand == 11 || CurrCommand == 12)
         {
             s32 result;
 
@@ -997,7 +1002,8 @@ bool DVDStopStreamAtEndAsync(DVDCommandBlock* block, DVDCBCallback callback)
     return idle;
 }
 
-bool DVDInquiryAsync(DVDCommandBlock* block, void* addr, DVDCBCallback callback)
+bool DVDInquiryAsync(DVDCommandBlock* block, void* addr,
+                     DVDCBCallback callback)
 {
     bool idle;
     block->command = 14;
@@ -1102,8 +1108,9 @@ bool DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback)
     case -1:
     case 0:
     case 10:
-        if (callback)
+        if (callback) {
             callback(0, block);
+        }
         break;
 
     case 1:
@@ -1122,10 +1129,12 @@ bool DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback)
     case 2:
         __DVDDequeueWaitingQueue(block);
         block->state = 10;
-        if (block->callback)
+        if (block->callback) {
             block->callback(-3, block);
-        if (callback)
+        }
+        if (callback) {
             callback(0, block);
+        }
         break;
 
     case 3:
@@ -1134,8 +1143,9 @@ bool DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback)
         case 4:
         case 13:
         case 15:
-            if (callback)
+            if (callback) {
                 callback(0, block);
+            }
             break;
 
         default:
@@ -1160,16 +1170,21 @@ bool DVDCancelAsync(DVDCommandBlock* block, DVDCBCallback callback)
             return false;
         }
 
-        if (block->state == 4)
+        if (block->state == 4) {
             ResumeFromHere = 3;
-        if (block->state == 5)
+        }
+        if (block->state == 5) {
             ResumeFromHere = 4;
-        if (block->state == 6)
+        }
+        if (block->state == 6) {
             ResumeFromHere = 1;
-        if (block->state == 11)
+        }
+        if (block->state == 11) {
             ResumeFromHere = 2;
-        if (block->state == 7)
+        }
+        if (block->state == 7) {
             ResumeFromHere = 7;
+        }
 
         block->state = 10;
         if (block->callback) {
@@ -1239,12 +1254,13 @@ inline bool DVDCancelAllAsync(DVDCBCallback callback)
         DVDCancelAsync(p, NULL);
     }
 
-    if (executing)
+    if (executing) {
         retVal = DVDCancelAsync(executing, callback);
-    else {
+    } else {
         retVal = true;
-        if (callback)
+        if (callback) {
             callback(0, NULL);
+        }
     }
 
     DVDResume();
@@ -1268,8 +1284,9 @@ int DVDCancelAll(void)
     }
 
     for (;;) {
-        if (CancelAllSyncComplete)
+        if (CancelAllSyncComplete) {
             break;
+        }
 
         OSSleepThread(&__DVDThreadQueue);
     }

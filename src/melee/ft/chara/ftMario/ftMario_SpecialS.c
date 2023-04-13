@@ -78,15 +78,17 @@ void ftMario_SpecialS_RemoveCape(HSD_GObj* gobj)
 void ftMario_SpecialS_EnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.mr.x223C_capeGObj != NULL)
+    if (fp->ev.mr.x223C_capeGObj != NULL) {
         it_802B26C0(fp->ev.mr.x223C_capeGObj);
+    }
 }
 
 void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->ev.mr.x223C_capeGObj != NULL)
+    if (fp->ev.mr.x223C_capeGObj != NULL) {
         it_802B26E0(fp->ev.mr.x223C_capeGObj);
+    }
 }
 
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
@@ -94,8 +96,9 @@ bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t asid = fp->action_id;
 
-    if (asid >= AS_MARIO_SPECIALS && asid <= AS_MARIO_SPECIALAIRS)
+    if (asid >= AS_MARIO_SPECIALS && asid <= AS_MARIO_SPECIALAIRS) {
         return false;
+    }
 
     return true;
 }
@@ -143,14 +146,16 @@ void ftMario_SpecialAirS_StartMotion(HSD_GObj* gobj)
 
 void ftMario_SpecialS_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftMario_SpecialAirS_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 void ftMario_SpecialS_IASA(HSD_GObj* gobj) {}
@@ -164,7 +169,8 @@ void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj)
 
     if (fp->x2204_ftcmd_var1 == 1U && !fp->sv.mr.SpecialS.isReflect) {
         fp->sv.mr.SpecialS.isReflect = true;
-        ftColl_CreateReflectHit(gobj, &sa_tmp->x60_MARIO_CAPE_REFLECTION, NULL);
+        ftColl_CreateReflectHit(gobj, &sa_tmp->x60_MARIO_CAPE_REFLECTION,
+                                NULL);
     } else if ((fp->x2204_ftcmd_var1 == 0U) &&
                fp->sv.mr.SpecialS.isReflect == true)
     {

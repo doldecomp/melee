@@ -1,17 +1,16 @@
-#include <melee/gr/grbattle.h>
-
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/gm/code_801601C4.h>
 #include <melee/gr/granime.h>
+#include <melee/gr/grbattle.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/grlib.h>
 #include <melee/gr/grmaterial.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 extern StageInfo stage_info;
 
@@ -145,14 +144,17 @@ static HSD_GObj* grBattle_80219D84(int gobj_id)
         gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
 
-        if (callbacks->callback3 != NULL)
+        if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
+        }
 
-        if (callbacks->callback0 != NULL)
+        if (callbacks->callback0 != NULL) {
             callbacks->callback0(gobj);
+        }
 
-        if (callbacks->callback2 != NULL)
+        if (callbacks->callback2 != NULL) {
             func_8038FD54(gobj, callbacks->callback2, 4);
+        }
 
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 232, gobj_id);
@@ -169,8 +171,9 @@ static void grBattle_80219E6C(HSD_GObj* gobj)
 
     grAnime_801C8138(gobj, id, 0);
 
-    if (lbl_804D6AC8 == 0)
+    if (lbl_804D6AC8 == 0) {
         return;
+    }
 
     grLib_801C9A70(0, &v);
     HSD_JObjSetTranslate(Ground_801C2CF4(0), &v);

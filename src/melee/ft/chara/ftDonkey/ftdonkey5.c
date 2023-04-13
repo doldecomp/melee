@@ -1,7 +1,6 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey5.h>
-
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey1.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey5.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey6.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
@@ -20,8 +19,9 @@ void ftDonkey_800E0200(HSD_GObj* fighter_gobj)
     if (fp->sv.dk.unk5.x0 && !ft_80094EA4(fighter_gobj)) {
         bool result = ftDonkey_800E0378(fighter_gobj);
 
-        if (result)
+        if (result) {
             return;
+        }
     }
 }
 

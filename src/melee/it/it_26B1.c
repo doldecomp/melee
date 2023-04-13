@@ -1,16 +1,18 @@
-#include "item2.h"
+#include <baselib/forward.h>
 
 #include "common_structs.h"
+#include "item2.h"
+
 #include "ft/ftlib.h"
 #include "gm/code_801601C4.h"
 #include "it/code_80266F3C.h"
 #include "it/code_8027CF30.h"
 #include "it/item.h"
 #include "it/itkind.h"
-#include <baselib/forward.h>
-#include <baselib/gobj.h>
+
 #include <math.h>
 #include <placeholder.h>
+#include <baselib/gobj.h>
 
 static inline float _sqrtfItem(float x)
 {
@@ -67,8 +69,9 @@ bool it_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy
 {
     Item* temp_item = item_gobj->user_data;
 
-    if (temp_item->xCC_item_attr->x0_is_heavy)
+    if (temp_item->xCC_item_attr->x0_is_heavy) {
         return true;
+    }
 
     return false;
 }
@@ -137,7 +140,8 @@ void it_8026B390(HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word ON
     temp_item->xDC8_word.flags.x15 = 1;
 }
 
-void it_8026B3A8(HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word OFF
+void it_8026B3A8(
+    HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word OFF
 {
     Item* temp_item;
 
@@ -156,8 +160,9 @@ int it_8026B3C0(ItemKind kind) // Count identical item GObj entities?
     while (unkItemGObj != NULL) {
         temp_item = unkItemGObj->user_data;
 
-        if (temp_item->kind == kind)
+        if (temp_item->kind == kind) {
             ++i;
+        }
 
         unkItemGObj = unkItemGObj->next;
     }
@@ -185,7 +190,8 @@ f32 it_8026B424(s32 damage) // Item Damage Math
 {
     ItemCommonData* itCommonData = lbl_804D6D28;
 
-    return (f32) (s32) (((f32) damage * itCommonData->xB8) + itCommonData->xBC);
+    return (f32) (s32) (((f32) damage * itCommonData->xB8) +
+                        itCommonData->xBC);
 }
 
 s32 it_8026B47C(HSD_GObj* item_gobj) // Get heal value of healing items
@@ -274,8 +280,9 @@ bool it_8026B594(HSD_GObj* item_gobj)
     case It_Kind_StarRod:
     case It_Kind_LipStick:
     case It_Kind_F_Flower:
-        if (ip->xD4C <= 0)
+        if (ip->xD4C <= 0) {
             return true;
+        }
 
     default:
     case It_Kind_Harisen: // Why though
@@ -472,8 +479,9 @@ s32 it_8026B7E8(HSD_GObj* item_gobj) // Get bit 1 of 0xDC8 word
 inline void RunCallbackUnk(HSD_GObjInteraction proc, HSD_GObj* gobj0,
                            HSD_GObj* gobj1)
 {
-    if (proc != NULL)
+    if (proc != NULL) {
         proc(gobj0, gobj1);
+    }
 }
 
 /// Remove item from player on death?
@@ -490,8 +498,9 @@ void it_8026B7F8(HSD_GObj* fighter_gobj)
         owner = ip->owner;
         RunCallbackUnk(ip->xB8_itemLogicTable->evt_unk, cur, fighter_gobj);
 
-        if (ip->xDC8_word.flags.x13 && owner == fighter_gobj)
+        if (ip->xDC8_word.flags.x13 && owner == fighter_gobj) {
             Item_8026A8EC(cur);
+        }
     }
 }
 
@@ -507,22 +516,26 @@ bool it_8026B894(HSD_GObj* item_gobj, HSD_GObj* ref_gobj)
         result = true;
     }
 
-    if (ip->xC64_reflectGObj == ref_gobj)
+    if (ip->xC64_reflectGObj == ref_gobj) {
         ip->xC64_reflectGObj = NULL;
+    }
 
-    if (ip->xC90_absorbGObj == ref_gobj)
+    if (ip->xC90_absorbGObj == ref_gobj) {
         ip->xC90_absorbGObj = NULL;
+    }
 
     if (ip->xCEC_fighterGObj == ref_gobj) {
         ip->xCEC_fighterGObj = NULL;
         ip->xCB0_source_ply = 6;
     }
 
-    if (ip->xCF4_fighterGObjUnk == ref_gobj)
+    if (ip->xCF4_fighterGObjUnk == ref_gobj) {
         ip->xCF4_fighterGObjUnk = NULL;
+    }
 
-    if (ip->toucher == ref_gobj)
+    if (ip->toucher == ref_gobj) {
         ip->toucher = NULL;
+    }
 
     return result;
 }
@@ -666,8 +679,9 @@ static inline void What(HSD_GObj* item_gobj,
             if (temp_joint != NULL) {
                 if (item_jobj2 == NULL) {
                     item_jobj = NULL;
-                } else
+                } else {
                     item_jobj = item_jobj2->child;
+                }
                 lb_8000B804(item_jobj, temp_joint->child);
             }
             temp_stateDesc = ip->xD0_itemStateDesc;
@@ -817,8 +831,9 @@ extern void ftLib_80086A4C(HSD_GObj*, f32);
 void it_8026BC14(HSD_GObj* item_gobj)
 {
     Item* ip = GET_ITEM(item_gobj);
-    if (ip->owner != NULL && ftLib_80086960(ip->owner))
+    if (ip->owner != NULL && ftLib_80086960(ip->owner)) {
         ftLib_80086A4C(ip->owner, ip->xCBC_hitlagFrames - 1);
+    }
 }
 
 /// @returns #Item::xDD0_flag::bits::b0 of @p item_gobj.
@@ -851,8 +866,9 @@ void it_8026BC90(HSD_GObj* item_gobj, Vec3* pos)
     pos->y = 0;
     pos->x = 0;
 
-    if (item_gobj != NULL && ftLib_80086960(item_gobj))
+    if (item_gobj != NULL && ftLib_80086960(item_gobj)) {
         ftLib_80086644(item_gobj, pos);
+    }
 }
 
 /// Unsets #Item::xDCD_flag::bits::b2 of @p item_gobj.
@@ -991,15 +1007,17 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
 
     HSD_GObj* bobOmbGObj = NULL;
 
-    if (gm_8016B238() && bobOmbRain->x14 != 6)
+    if (gm_8016B238() && bobOmbRain->x14 != 6) {
         return NULL;
+    }
 
     bobomb_id = bobOmbRain->x14;
 
     switch (bobomb_id) {
     case 1:
-        if (it_8026D324(true))
+        if (it_8026D324(true)) {
             bobOmbGObj = it_80286088(bobOmbRain->x0);
+        }
 
         break;
 
@@ -1051,40 +1069,46 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
     case 4:
         if (it_8026D324(4)) {
             bobOmbGObj = it_802896CC(&bobOmbRain->x8_vec);
-            if (bobOmbGObj != NULL)
+            if (bobOmbGObj != NULL) {
                 it_80274F10(bobOmbGObj);
+            }
         }
         break;
 
     case 12:
         bobOmbGObj = it_80284D54(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL)
+        if (bobOmbGObj != NULL) {
             it_80274F10(bobOmbGObj);
+        }
         break;
 
     case 21:
         bobOmbGObj = it_80291BE0(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL)
+        if (bobOmbGObj != NULL) {
             it_80274F10(bobOmbGObj);
+        }
 
         break;
 
     case 25:
         bobOmbGObj = it_80292D48(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL)
+        if (bobOmbGObj != NULL) {
             it_80274F10(bobOmbGObj);
+        }
         break;
 
     case 31:
         bobOmbGObj = it_80294DC0(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL)
+        if (bobOmbGObj != NULL) {
             it_80274F10(bobOmbGObj);
+        }
         break;
 
     case 11:
         bobOmbGObj = it_80284854(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL)
+        if (bobOmbGObj != NULL) {
             it_80274F10(bobOmbGObj);
+        }
         break;
 
     case 6:
@@ -1139,12 +1163,13 @@ void it_8026C16C(HSD_GObj* item_gobj, bool is_headless)
 {
     Item* ip = GET_ITEM(item_gobj);
 
-    if (ip->xD4C <= 0)
+    if (ip->xD4C <= 0) {
         it_802725D4(item_gobj);
-    else if (is_headless)
+    } else if (is_headless) {
         it_80272784(item_gobj);
-    else
+    } else {
         it_802725D4(item_gobj);
+    }
 }
 
 /// Check if item has a hitbox
@@ -1265,8 +1290,9 @@ void it_8026C368(HSD_GObj* item_gobj)
 void it_8026C3FC(void)
 {
     HSD_GObj* cur;
-    for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next)
+    for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
         it_8026B724(cur);
+    }
 }
 
 /// Toggle bits in 0xDC8 for all active item GObjs?
@@ -1276,10 +1302,12 @@ void it_8026C42C(void)
     for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
 
-        if (ip->xDC8_word.flags.x7)
+        if (ip->xDC8_word.flags.x7) {
             ip->xDC8_word.flags.x5 = true;
+        }
 
-        if (ip->xDC8_word.flags.x3)
+        if (ip->xDC8_word.flags.x3) {
             ip->xDC8_word.flags.x3 = false;
+        }
     }
 }

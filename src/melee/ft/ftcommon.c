@@ -7,6 +7,7 @@
 #include "ftcoll.h"
 #include "ftlib.h"
 #include "ftparts.h"
+#include "text_4.h"
 
 #include "ef/eflib.h"
 #include "gm/code_801601C4.h"
@@ -17,10 +18,9 @@
 #include "lb/lbunknown_003.h"
 #include "mp/mplib.h"
 #include "pl/pl_unknown_001.h"
-#include "text_4.h"
 
-#include <baselib/rumble.h>
 #include <dolphin/os/os.h>
+#include <baselib/rumble.h>
 
 const Vec3 lbl_803B74A0 = { 0 };
 
@@ -224,7 +224,7 @@ char lbl_803C0D64[] = "fp->kind == Ft_Kind_Sandbag";
 // Not sure why this is needed
 // Maybe __FILE__ is allocated separate from ordinary string literals?
 #undef HSD_ASSERT
-#define HSD_ASSERT(line, cond)                                                 \
+#define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(lbl_803C0D58, line, #cond))
 
 asm f32 ftCommon_8007CDA4(Fighter*)
@@ -464,8 +464,8 @@ void ftCommon_8007D174(Fighter* fp, f32 arg8, f32 arg9, f32 argA, f32 argB)
                 if (arg8 + phi_f2 >
                     fp->x110_attr.x188_HorizontalAirMobilityConstant)
                 {
-                    phi_f2 =
-                        fp->x110_attr.x188_HorizontalAirMobilityConstant - arg8;
+                    phi_f2 = fp->x110_attr.x188_HorizontalAirMobilityConstant -
+                             arg8;
                 }
             }
         } else if (arg8 + arg9 < argA) {
@@ -505,7 +505,8 @@ void ftCommon_8007D28C(Fighter* fp, f32 arg8)
     } else {
         phi_f3 = -temp_r4->x178_AerialDriftBase;
     }
-    ftCommon_8007D174(fp, arg8, tmp + phi_f3, f5 * temp_r4->x17C_AerialDriftMax,
+    ftCommon_8007D174(fp, arg8, tmp + phi_f3,
+                      f5 * temp_r4->x17C_AerialDriftMax,
                       temp_r4->x180_AerialFriction);
 }
 
@@ -1083,8 +1084,8 @@ HSD_GObj* ftCommon_8007E2A4(HSD_GObj* gobj)
     CollData* colldata = &fp->x6F0_collData;
     fp->x98_atk_shield_kb.x =
         colldata->x14C_ground.normal.y * fp->xF4_ground_attacker_shield_kb_vel;
-    fp->x98_atk_shield_kb.y =
-        -colldata->x14C_ground.normal.x * fp->xF4_ground_attacker_shield_kb_vel;
+    fp->x98_atk_shield_kb.y = -colldata->x14C_ground.normal.x *
+                              fp->xF4_ground_attacker_shield_kb_vel;
     return gobj;
 }
 
@@ -1386,8 +1387,9 @@ void ftCommon_8007EC30(u32 arg0, u32 arg1)
 
 void ftCommon_8007ECD4(Fighter* fp, s32 arg1)
 {
-    if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4))
+    if (Player_8003544C(fp->xC_playerID, fp->x221F_flag.bits.b4)) {
         func_80378280(fp->x618_player_id, arg1 + 2);
+    }
 }
 
 void ftCommon_8007ED2C(Fighter* fp)
@@ -1570,7 +1572,8 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
         dst->x1974_heldItem = src->x1974_heldItem;
         dst->x221E_flag.bits.b3 = src->x221E_flag.bits.b3;
         ft_80094818(dst_gobj, 1);
-        it_8026B9A8(src->x1974_heldItem, dst_gobj, dst->x10C_ftData->x8->unk10);
+        it_8026B9A8(src->x1974_heldItem, dst_gobj,
+                    dst->x10C_ftData->x8->unk10);
     }
     un_80322314();
     ft_800BFD04(gobj);
@@ -1917,8 +1920,8 @@ void ftCommon_80080174(Fighter* fp)
     }
     if (fp->x1980 != NULL) {
         v = &fp->x110_attr.x240;
-        if ((phi_f2 = p_ftCommonData->x710 * fp->x2024 + p_ftCommonData->x708) >
-            (phi_f3 = p_ftCommonData->x70C))
+        if ((phi_f2 = p_ftCommonData->x710 * fp->x2024 +
+                      p_ftCommonData->x708) > (phi_f3 = p_ftCommonData->x70C))
         {
             phi_f2 = phi_f3;
         }

@@ -1,8 +1,7 @@
+#include <placeholder.h>
 #include <dolphin/ai/ai.h>
-
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/OSTime.h>
-#include <placeholder.h>
 
 static AISCallback __AIS_Callback;
 static AIDCallback __AID_Callback;
@@ -102,8 +101,9 @@ void AISetDSPSampleRate(u32 rate)
     u8 right;
     u32 sampleRate;
 
-    if (rate == AIGetDSPSampleRate())
+    if (rate == AIGetDSPSampleRate()) {
         return;
+    }
 
     __AIRegs[0] &= ~0x40;
     if (rate == 0) {
@@ -132,8 +132,9 @@ u32 AIGetDSPSampleRate(void)
 
 void AISetStreamSampleRate(u32 rate)
 {
-    if (rate == 1)
+    if (rate == 1) {
         __AI_set_stream_sample_rate(rate);
+    }
 }
 
 static void __AI_set_stream_sample_rate(u32 rate)
@@ -192,8 +193,9 @@ u8 AIGetStreamVolRight(void)
 
 void AIInit(u8* stack)
 {
-    if (__AI_init_flag == true)
+    if (__AI_init_flag == true) {
         return;
+    }
 
     bound_32KHz = OSNanosecondsToTicks(31524);
     bound_48KHz = OSNanosecondsToTicks(42024);
@@ -289,8 +291,9 @@ static inline void waitForAIRegs(void)
 {
     u32 temp = __AIRegs[2];
 
-    while (temp == __AIRegs[2])
+    while (temp == __AIRegs[2]) {
         continue;
+    }
 }
 
 static void __AI_SRC_INIT(void)
@@ -343,6 +346,7 @@ static void __AI_SRC_INIT(void)
         }
     }
 
-    while (rise48 + temp > OSGetTime())
+    while (rise48 + temp > OSGetTime()) {
         continue;
+    }
 }

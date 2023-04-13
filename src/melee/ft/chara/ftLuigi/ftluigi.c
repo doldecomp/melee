@@ -1,13 +1,13 @@
 #include <melee/ft/chara/ftLuigi/ftluigi.h>
-
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 
 ActionState ftLuigi_MotionStateTable[] = {
-    { 295, 0x00340111, 0x12000000, ftLuigi_SpecialN_Anim, ftLuigi_SpecialN_IASA,
-      ftLuigi_SpecialN_Phys, ftLuigi_SpecialN_Coll, ftCamera_UpdateCameraBox },
+    { 295, 0x00340111, 0x12000000, ftLuigi_SpecialN_Anim,
+      ftLuigi_SpecialN_IASA, ftLuigi_SpecialN_Phys, ftLuigi_SpecialN_Coll,
+      ftCamera_UpdateCameraBox },
     { 296, 0x00340511, 0x12000000, ftLuigi_SpecialAirN_Anim,
       ftLuigi_SpecialAirN_IASA, ftLuigi_SpecialAirN_Phys,
       ftLuigi_SpecialAirN_Coll, ftCamera_UpdateCameraBox },

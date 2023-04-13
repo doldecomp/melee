@@ -2,7 +2,9 @@
 
 #include "fighter.h"
 #include "ft_unknown_006.h"
+
 #include "mp/mplib.h"
+
 #include <baselib/gobj.h>
 
 static int const max_input_frames = 254;
@@ -50,7 +52,9 @@ bool ftWallJump_8008169C(HSD_GObj* fighter_gobj)
                     // compute distance to the wall?
                     if (!mpLib_800567C0(coll_data->x174_leftwall.index, &ecb,
                                         &wall_pos))
+                    {
                         wall_pos.x = 0.0f;
+                    }
                 } else {
                     // compute absolte position of the ECB's right vertex?
                     ecb.x = coll_data->xA4_ecbCurrCorrect.right.x;
@@ -62,7 +66,9 @@ bool ftWallJump_8008169C(HSD_GObj* fighter_gobj)
                     // compute distance to the wall?
                     if (!mpLib_800567C0(coll_data->x160_rightwall.index, &ecb,
                                         &wall_pos))
+                    {
                         wall_pos.x = 0.0f;
+                    }
                 }
 
                 {
@@ -102,8 +108,9 @@ bool ftWallJump_8008169C(HSD_GObj* fighter_gobj)
                             fp0->x2110_walljumpWallSide);
 
                 fp0->x210C_walljumpInputTimer = max_input_frames;
-                if (fp0->x1969_walljumpUsed < 255)
+                if (fp0->x1969_walljumpUsed < 255) {
                     fp0->x1969_walljumpUsed++;
+                }
                 return true;
             }
         } else {

@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTSEAK_FTSEAK_SPECIALLW_H
 #define MELEE_FT_CHARA_FTSEAK_FTSEAK_SPECIALLW_H
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 void ftSeak_SpecialLw_StartMotion(HSD_GObj*);
 void ftSeak_SpecialAirLw_StartMotion(HSD_GObj*);

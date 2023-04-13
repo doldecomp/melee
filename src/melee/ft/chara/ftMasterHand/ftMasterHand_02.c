@@ -419,7 +419,8 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
         sp10_pos.y = r31_attributes->x40_pos.y;
         sp10_pos.z = 0.0f;
         ftMasterHand_80150DC4(gobj, &ftMasterHand_80151DC4, &sp10_pos);
-    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_UP)) {
+    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_UP))
+    {
         // Drill
         sp10_pos.x = r31_attributes->x88_pos.x;
         sp10_pos.y = r31_attributes->x88_pos.y;
@@ -433,18 +434,21 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
         sp10_pos.y = r31_attributes->xA8_pos.y;
         sp10_pos.z = 0.0f;
         ftMasterHand_80150DC4(gobj, &ftMasterHand_80152370, &sp10_pos);
-    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_DOWN))
+    } else if ((r6_button & HSD_BUTTON_R) &&
+               (r6_button & HSD_BUTTON_DPAD_DOWN))
     {
         // Ground Slap
         sp10_pos.x = r31_attributes->xBC_pos.x;
         sp10_pos.y = r31_attributes->xBC_pos.y;
         sp10_pos.z = 0.0f;
         ftMasterHand_80150DC4(gobj, &ftMasterHand_801526D8, &sp10_pos);
-    } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_LEFT))
+    } else if ((r6_button & HSD_BUTTON_R) &&
+               (r6_button & HSD_BUTTON_DPAD_LEFT))
     {
         // Poke
         ftMasterHand_80152880(gobj);
-    } else if ((r6_button & HSD_BUTTON_A) && (r6_button & HSD_BUTTON_DPAD_UP)) {
+    } else if ((r6_button & HSD_BUTTON_A) && (r6_button & HSD_BUTTON_DPAD_UP))
+    {
         // Jet
         ftMasterHand_80153820(gobj);
     } else if ((r6_button & HSD_BUTTON_A) &&
@@ -452,11 +456,13 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
     {
         // Ram
         ftMasterHand_801541C8(gobj, &ftMasterHand_80153B90);
-    } else if ((r6_button & HSD_BUTTON_A) && (r6_button & HSD_BUTTON_DPAD_DOWN))
+    } else if ((r6_button & HSD_BUTTON_A) &&
+               (r6_button & HSD_BUTTON_DPAD_DOWN))
     {
         // Crush
         ftMasterHand_801541C8(gobj, &ftMasterHand_80153D2C);
-    } else if ((r6_button & HSD_BUTTON_B) && (r6_button & HSD_BUTTON_DPAD_UP)) {
+    } else if ((r6_button & HSD_BUTTON_B) && (r6_button & HSD_BUTTON_DPAD_UP))
+    {
         // Lasers
         f32 rand;
         rand = HSD_Randf();
@@ -472,7 +478,8 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
     {
         // Gun
         ftMasterHand_801530A4(gobj);
-    } else if ((r6_button & HSD_BUTTON_Z) && ((r6_button & HSD_BUTTON_DPAD_UP)))
+    } else if ((r6_button & HSD_BUTTON_Z) &&
+               ((r6_button & HSD_BUTTON_DPAD_UP)))
     {
         // Grab
         r4_fp->ev.mh.x2250 = 0x17B;

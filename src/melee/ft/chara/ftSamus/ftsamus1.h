@@ -1,9 +1,10 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_FTSAMUS1_H
 #define MELEE_FT_CHARA_FTSAMUS_FTSAMUS1_H
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
-#include <sysdolphin/baselib/forward.h>
 
 extern ActionState ftSamus_MotionStateTable[];
 extern char lbl_803CE510[];

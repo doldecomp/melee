@@ -1,8 +1,7 @@
-#include <dolphin/gx/GXBump.h>
-
 #include <common_structs.h>
-#include <dolphin/gx/__GXInit.h>
 #include <placeholder.h>
+#include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/GXBump.h>
 
 #ifdef MWERKS_GEKKO
 

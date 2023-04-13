@@ -2,9 +2,9 @@
 #define SYSDOLPHIN_BASELIB_PSSTRUCTS_H
 
 #include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <Runtime/platform.h>
 
 typedef unk_t HSD_PSAppSRT;
 
@@ -272,7 +272,8 @@ void psInitDataBankLocate(HSD_Archive* cmdBank, HSD_Archive* texBank,
                           int* formBank);
 
 void psInitDataBankRelocate(int* cmdBank, int* texBank, int* formBank,
-                            int* newCmdBank, int* newTexBank, int* newFormBank);
+                            int* newCmdBank, int* newTexBank,
+                            int* newFormBank);
 
 void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
                     int* formBank);
@@ -283,10 +284,10 @@ void psRemoveParticle(void);
 
 HSD_Particle* psGenerateParticle0(HSD_Particle* p, int linkNo, int bank,
                                   u32 kind, u16 texGroup, u8* list, int life,
-                                  float x, float y, float z, float vx, float vy,
-                                  float vz, float size, float grav, float fric,
-                                  int palflag, struct _generator* gp,
-                                  int flgInterpret);
+                                  float x, float y, float z, float vx,
+                                  float vy, float vz, float size, float grav,
+                                  float fric, int palflag,
+                                  struct _generator* gp, int flgInterpret);
 
 HSD_Particle* psGenerateParticleID0(HSD_Particle* p, int linkNo, int bank,
                                     int id, int flgInterpret);

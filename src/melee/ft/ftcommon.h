@@ -1,11 +1,12 @@
 #ifndef MELEE_FT_FTCOMMON_H
 #define MELEE_FT_FTCOMMON_H
 
-#include <dolphin/mtx.h>
 #include <melee/ft/forward.h>
-#include <Runtime/platform.h>
+
+#include <dolphin/mtx.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <Runtime/platform.h>
 
 void ftCommon_8007C930(Fighter*, f32);
 void ftCommon_8007C98C(Fighter*, f32 vel, f32, f32 gr_friction);

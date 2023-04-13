@@ -10,8 +10,9 @@ u32 HSD_PObjGetFlags(HSD_PObj* pobj)
 
 void HSD_PObjRemoveAnimByFlags(HSD_PObj* pobj, u32 flags)
 {
-    if (pobj == NULL)
+    if (pobj == NULL) {
         return;
+    }
 
     if (flags & POBJ_ANIM && pobj_type(pobj) == POBJ_SHAPEANIM) {
         struct unk_struct_pobj* unk_struct = pobj->u.x14_unk;
@@ -24,8 +25,9 @@ void HSD_PObjRemoveAnimAllByFlags(HSD_PObj* pobj, u32 flags)
 {
     HSD_PObj* pp;
 
-    if (pobj == NULL)
+    if (pobj == NULL) {
         return;
+    }
 
     for (pp = pobj; pp != NULL; pp = pp->next) {
         HSD_PObjRemoveAnimByFlags(pp, flags);

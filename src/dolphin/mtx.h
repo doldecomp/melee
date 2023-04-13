@@ -9,7 +9,8 @@ void C_MTXPerspective(Mtx44 m, f32 fovY, f32 aspect, f32 n, f32 f);
 void C_MTXIdentity(Mtx m);
 void C_MTXCopy(const Mtx src, Mtx dst);
 void C_MTXConcat(const Mtx a, const Mtx b, Mtx ab);
-void C_MTXConcatArray(const Mtx a, const Mtx* srcBase, Mtx* dstBase, u32 count);
+void C_MTXConcatArray(const Mtx a, const Mtx* srcBase, Mtx* dstBase,
+                      u32 count);
 void C_MTXTranspose(const Mtx src, Mtx xPose);
 void C_MTXFrustum(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f);
 u32 C_MTXInverse(const Mtx src, Mtx inv);
@@ -18,7 +19,8 @@ u32 C_MTXInvXpose(const Mtx src, Mtx invX);
 void PSMTXIdentity(Mtx m);
 void PSMTXCopy(const Mtx src, Mtx dst);
 void PSMTXConcat(const Mtx a, const Mtx b, Mtx ab);
-void PSMTXConcatArray(const Mtx a, const Mtx* srcBase, Mtx* dstBase, u32 count);
+void PSMTXConcatArray(const Mtx a, const Mtx* srcBase, Mtx* dstBase,
+                      u32 count);
 void PSMTXTranspose(const Mtx src, Mtx xPose);
 u32 PSMTXInverse(const Mtx src, Mtx inv);
 u32 PSMTXInvXpose(const Mtx src, Mtx invX);

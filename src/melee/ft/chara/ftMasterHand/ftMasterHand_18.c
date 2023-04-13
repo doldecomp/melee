@@ -6,8 +6,9 @@
 void ftMasterHand_801539EC(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(arg0);
+    }
 }
 
 // 80153A30 150610

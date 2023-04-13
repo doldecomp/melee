@@ -1,7 +1,7 @@
-#include <melee/ft/chara/ftNess/ftNess.h>
-
-#include <melee/ft/chara/ftNess/ftNess_SpecialLw.h>
 #include <melee/ft/forward.h>
+
+#include <melee/ft/chara/ftNess/ftNess.h>
+#include <melee/ft/chara/ftNess/ftNess_SpecialLw.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
@@ -35,8 +35,8 @@ ActionState ftNess_MotionStateTable[] = {
       ftNess_SpecialNHold_IASA, ftNess_SpecialNHold_Phys,
       ftNess_SpecialNHold_Coll, ftCamera_UpdateCameraBox },
     { 302, 0x00340111, 0x12000000, ftNess_SpecialNEnd_Anim,
-      ftNess_SpecialNEnd_IASA, ftNess_SpecialNEnd_Phys, ftNess_SpecialNEnd_Coll,
-      ftCamera_UpdateCameraBox },
+      ftNess_SpecialNEnd_IASA, ftNess_SpecialNEnd_Phys,
+      ftNess_SpecialNEnd_Coll, ftCamera_UpdateCameraBox },
     { 303, 0x00340511, 0x12000000, ftNess_SpecialAirNStart_Anim,
       ftNess_SpecialAirNStart_IASA, ftNess_SpecialAirNStart_Phys,
       ftNess_SpecialAirNStart_Coll, ftCamera_UpdateCameraBox },
@@ -63,8 +63,9 @@ ActionState ftNess_MotionStateTable[] = {
     { 311, 0x00340113, 0x14000000, ftNess_SpecialHiEnd_Anim,
       ftNess_SpecialHiEnd_IASA, ftNess_SpecialHiEnd_Phys,
       ftNess_SpecialHiEnd_Coll, ftCamera_UpdateCameraBox },
-    { 312, 0x00340113, 0x14000000, ftNess_SpecialHi_Anim, ftNess_SpecialHi_IASA,
-      ftNess_SpecialHi_Phys, ftNess_SpecialHi_Coll, ftCamera_UpdateCameraBox },
+    { 312, 0x00340113, 0x14000000, ftNess_SpecialHi_Anim,
+      ftNess_SpecialHi_IASA, ftNess_SpecialHi_Phys, ftNess_SpecialHi_Coll,
+      ftCamera_UpdateCameraBox },
     { 313, 0x00340513, 0x14000000, ftNess_SpecialAirHiStart_Anim,
       ftNess_SpecialAirHiStart_IASA, ftNess_SpecialAirHiStart_Phys,
       ftNess_SpecialAirHiStart_Coll, ftCamera_UpdateCameraBox },

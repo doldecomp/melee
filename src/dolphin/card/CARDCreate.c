@@ -1,17 +1,16 @@
-#include <dolphin/card/CARDCreate.h>
-
 #include <cstring.h>
+#include <string.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDBlock.h>
+#include <dolphin/card/CARDCreate.h>
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDOpen.h>
 #include <Runtime/__mem.h>
-#include <string.h>
 
-#define CARDSetIconSpeed(stat, n, f)                                           \
-    ((stat)->iconSpeed =                                                       \
-         (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |         \
+#define CARDSetIconSpeed(stat, n, f)                                          \
+    ((stat)->iconSpeed =                                                      \
+         (((stat)->iconSpeed & ~(CARD_STAT_SPEED_MASK << (2 * (n)))) |        \
           ((f) << (2 * (n)))))
 
 static void CreateCallbackFat(s32 chan, s32 result)
@@ -109,8 +108,9 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size,
     fat = __CARDGetFatBlock(card);
 
     /// @todo #CARDControl::sectorSize is probably #size_t.
-    if ((unsigned) card->sectorSize * fat[CARD_FAT_FREEBLOCKS] < size)
+    if ((unsigned) card->sectorSize * fat[CARD_FAT_FREEBLOCKS] < size) {
         return __CARDPutControlBlock(card, CARD_RESULT_INSSPACE);
+    }
 
     /// @todo Eliminate cast to #CARDCallback.
     card->apiCallback =
@@ -129,8 +129,9 @@ s32 CARDCreateAsync(s32 chan, const char* fileName, u32 size,
     result = __CARDAllocBlock(chan, size / card->sectorSize,
                               (CARDCallback) CreateCallbackFat);
 
-    if (result < 0)
+    if (result < 0) {
         return __CARDPutControlBlock(card, result);
+    }
 
     return result;
 }

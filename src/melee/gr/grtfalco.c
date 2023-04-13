@@ -1,13 +1,12 @@
-#include <melee/gr/grtfalco.h>
-
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grtfalco.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/lb/lbunknown_003.h>
 #include <melee/mp/mplib.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 
 /* static */ StageCallbacks lbl_803E8918[4] = {
     {
@@ -96,14 +95,17 @@ HSD_GObj* grTFalco_8022089C(int id)
         gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
 
-        if (cb->callback3 != NULL)
+        if (cb->callback3 != NULL) {
             gp->x1C_callback = cb->callback3;
+        }
 
-        if (cb->callback0 != NULL)
+        if (cb->callback0 != NULL) {
             cb->callback0(gobj);
+        }
 
-        if (cb->callback2 != NULL)
+        if (cb->callback2 != NULL) {
             func_8038FD54(gobj, cb->callback2, 4);
+        }
 
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtfalco.c", 201, id);
@@ -170,17 +172,21 @@ bool grTFalco_80220ACC(enum_t arg0)
         if (i != -1 && i == 0) {
             i = mpLib_80054C6C(arg0);
 
-            if (i == (1 << 0))
+            if (i == (1 << 0)) {
                 return lbl_804D6AF8->unk_0;
+            }
 
-            if (i == (1 << 1))
+            if (i == (1 << 1)) {
                 return lbl_804D6AF8->unk_4;
+            }
 
-            if (i == (1 << 2))
+            if (i == (1 << 2)) {
                 return lbl_804D6AF8->unk_8;
+            }
 
-            if (i == (1 << 3))
+            if (i == (1 << 3)) {
                 return lbl_804D6AF8->unk_C;
+            }
 
             return false;
         }

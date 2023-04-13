@@ -121,8 +121,9 @@ void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SetGrabVictim(fighter_gobj);
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 // 0x801468EC
@@ -132,8 +133,9 @@ void ftMewtwo_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
 {
     ftMewtwo_SetGrabVictim(fighter_gobj);
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_800CC730(fighter_gobj);
+    }
 }
 
 // 0x80146980 - Mewtwo's grounded Confusion IASA callback
@@ -158,7 +160,8 @@ void ftMewtwo_SpecialS_Phys(HSD_GObj* fighter_gobj)
 }
 
 // 0x801469BC
-// https://decomp.me/scratch/o5TC6 // Mewtwo's aerial Confusion Physics callback
+// https://decomp.me/scratch/o5TC6 // Mewtwo's aerial Confusion Physics
+// callback
 void ftMewtwo_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 {
     ft_80084EEC(fighter_gobj);

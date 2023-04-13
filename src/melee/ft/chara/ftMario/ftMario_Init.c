@@ -1,5 +1,5 @@
+#include <sysdolphin/baselib/random.h>
 #include <melee/ft/chara/ftMario/ftmario.h>
-
 #include <melee/ft/chara/ftMario/ftmario2.h>
 #include <melee/ft/chara/ftMario/ftMario_SpecialN.h>
 #include <melee/ft/ft_unknown_006.h>
@@ -8,18 +8,19 @@
 #include <melee/ft/types.h>
 #include <melee/it/itkind.h>
 #include <Runtime/platform.h>
-#include <sysdolphin/baselib/random.h>
 
 ActionState ftMario_MotionStateTable[] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
-    { 295, 0x00340111, 0x12000000, ftMario_SpecialN_Anim, ftMario_SpecialN_IASA,
-      ftMario_SpecialN_Phys, ftMario_SpecialN_Coll, ftCamera_UpdateCameraBox },
+    { 295, 0x00340111, 0x12000000, ftMario_SpecialN_Anim,
+      ftMario_SpecialN_IASA, ftMario_SpecialN_Phys, ftMario_SpecialN_Coll,
+      ftCamera_UpdateCameraBox },
     { 296, 0x00340511, 0x12000000, ftMario_SpecialAirN_Anim,
       ftMario_SpecialAirN_IASA, ftMario_SpecialAirN_Phys,
       ftMario_SpecialAirN_Coll, ftCamera_UpdateCameraBox },
-    { 297, 0x00341012, 0x13000000, ftMario_SpecialS_Anim, ftMario_SpecialS_IASA,
-      ftMario_SpecialS_Phys, ftMario_SpecialS_Coll, ftCamera_UpdateCameraBox },
+    { 297, 0x00341012, 0x13000000, ftMario_SpecialS_Anim,
+      ftMario_SpecialS_IASA, ftMario_SpecialS_Phys, ftMario_SpecialS_Coll,
+      ftCamera_UpdateCameraBox },
     { 298, 0x00341012, 0x13000000, ftMario_SpecialAirS_Anim,
       ftMario_SpecialAirS_IASA, ftMario_SpecialAirS_Phys,
       ftMario_SpecialAirS_Coll, ftCamera_UpdateCameraBox },
@@ -122,10 +123,12 @@ void ftMario_OnKnockbackExit(HSD_GObj* gobj)
 void ftMario_800E0CAC(s32 arg0, s32* arg1, s32* arg2)
 {
     if (arg0 != 10) {
-        if (arg0 >= 10)
+        if (arg0 >= 10) {
             return;
-        if (arg0 < 9)
+        }
+        if (arg0 < 9) {
             return;
+        }
         *arg2 = 0xe;
         *arg1 = 0xe;
     } else {

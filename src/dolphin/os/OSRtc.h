@@ -2,6 +2,7 @@
 #define DOLPHIN_OS_OSRTC
 
 #include <dolphin/os/forward.h>
+
 #include <Runtime/platform.h>
 
 typedef struct OSSram {

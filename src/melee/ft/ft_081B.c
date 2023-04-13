@@ -1,5 +1,5 @@
+#include <placeholder.h>
 #include <melee/ft/code_80081B38.h>
-
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcliffcommon.h>
 #include <melee/ft/ftcommon.h>
@@ -7,7 +7,6 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <MSL/trigf.h>
-#include <placeholder.h>
 #include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO
@@ -1845,7 +1844,8 @@ lbl_800831B8:
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_800831CC(HSD_GObj* arg0, HSD_GObjPredicate arg1, HSD_GObjEvent arg2)
+asm void ft_800831CC(HSD_GObj* arg0, HSD_GObjPredicate arg1,
+                     HSD_GObjEvent arg2)
 { // clang-format off
     nofralloc
 /* 800831CC 0007FDAC  7C 08 02 A6 */	mflr r0

@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_TYPES_H
 #define MELEE_FT_CHARA_FTCAPTAIN_TYPES_H
 
-#include "ftCaptain/forward.h"
 #include <platform.h>
+#include "ftCaptain/forward.h"
 
 struct ftCaptain_EntityVars {
     /* 0x222C */ uint during_specials_start;

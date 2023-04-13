@@ -1,17 +1,16 @@
-#include <sysdolphin/baselib/initialize.h>
-
+#include <stdarg.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/vi/vi.h>
-#include <stdarg.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/id.h>
+#include <sysdolphin/baselib/initialize.h>
 #include <sysdolphin/baselib/leak.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/mtx.h>
@@ -165,8 +164,8 @@ static void HSD_OSInit(void)
     memReport.total = OSGetPhysicalMemSize();
     memReport.system = memReport.total - (u32) OSGetArenaHi() +
                        (u32) OSGetArenaLo() - memReport.xfb - memReport.gxfifo;
-    old_arena_lo = (u32) OSInitAlloc((void*) old_arena_lo, (void*) old_arena_hi,
-                                     iparam_heap_max_num);
+    old_arena_lo = (u32) OSInitAlloc(
+        (void*) old_arena_lo, (void*) old_arena_hi, iparam_heap_max_num);
     OSSetArenaLo((void*) old_arena_lo);
 
     new_arena_lo = OSRoundUp32B(old_arena_lo);
@@ -223,7 +222,8 @@ OSHeapHandle HSD_CreateMainHeap(void* lo, void* hi)
         hsd_heap_next_arena_hi = hi;
     }
     OSDestroyHeap(current_heap);
-    current_heap = OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
+    current_heap =
+        OSCreateHeap(hsd_heap_next_arena_lo, hsd_heap_next_arena_hi);
     OSSetCurrentHeap(current_heap);
     HSD_ObjSetHeap((u32) hsd_heap_next_arena_hi - (u32) hsd_heap_next_arena_lo,
                    NULL);
@@ -250,8 +250,9 @@ void HSD_StartRender(HSD_RenderPass pass)
 void func_803755A8(void)
 {
     // Does nothing, but need to force a comparison to make this match
-    if (current_render_pass == HSD_RP_OFFSCREEN)
+    if (current_render_pass == HSD_RP_OFFSCREEN) {
         current_render_pass == 0;
+    }
 }
 
 static void HSD_ObjInit(void)
@@ -332,7 +333,8 @@ void HSD_ObjDumpStat(void)
     HSD_ObjAllocInfo* i;
     for (i = objs; i->name != NULL; i++) {
         OSReport("objalloc: %s\tusing %d\tfreed %d\tpeak %d\n", i->name,
-                 HSD_ObjAllocUsed(i), HSD_ObjAllocFree(i), HSD_ObjAllocPeak(i));
+                 HSD_ObjAllocUsed(i), HSD_ObjAllocFree(i),
+                 HSD_ObjAllocPeak(i));
     }
 }
 

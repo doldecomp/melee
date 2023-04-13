@@ -1,8 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_BASELIB_UNKNOWN_002_H
 #define SYSDOLPHIN_BASELIB_BASELIB_UNKNOWN_002_H
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <Runtime/platform.h>
 
 bool func_803931A4(s32);
 void func_80393A54(bool);

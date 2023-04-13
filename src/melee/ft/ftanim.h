@@ -2,6 +2,7 @@
 #define MELEE_FT_FTANIM_H
 
 #include <melee/ft/forward.h>
+
 #include <placeholder.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>

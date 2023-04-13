@@ -1,10 +1,9 @@
-#include <melee/gr/grdynamicattr.h>
-
-#include <dolphin/mtx/types.h>
 #include <math.h>
+#include <dolphin/mtx/types.h>
+#include <sysdolphin/baselib/debug.h>
+#include <melee/gr/grdynamicattr.h>
 #include <melee/mp/mplib.h>
 #include <Runtime/platform.h>
-#include <sysdolphin/baselib/debug.h>
 
 static const s32 GC_Id_None = -1;
 
@@ -106,8 +105,9 @@ int grDynamicAttr_801CA284(Vec3* v, int arg1)
             f32 dx2 = dx * dx;
             f32 dy2 = dy * dy;
 
-            if (do_sqrtf(dx2 + dy2) < cur->unk18)
+            if (do_sqrtf(dx2 + dy2) < cur->unk18) {
                 return cur->unk4;
+            }
         }
     }
 

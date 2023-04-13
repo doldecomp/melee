@@ -1,11 +1,10 @@
-#include <sysdolphin/baselib/jobj.h>
-
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
 #include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/robj.h>
 #include <sysdolphin/baselib/spline.h>
@@ -122,8 +121,9 @@ void HSD_JObjWalkTree(HSD_JObj* jobj, HSD_JObjWalkTreeCallback cb,
 inline bool has_scl(HSD_JObj* jobj)
 {
     bool result = false;
-    if (jobj != NULL && jobj->scl != NULL)
+    if (jobj != NULL && jobj->scl != NULL) {
         result = true;
+    }
     return result;
 }
 
@@ -162,8 +162,8 @@ void HSD_JObjMakeMatrix(HSD_JObj* jobj)
         } else {
             scl = NULL;
         }
-        HSD_MtxSRTQuat(jobj->mtx, &jobj->scale, &jobj->rotate, &jobj->translate,
-                       scl);
+        HSD_MtxSRTQuat(jobj->mtx, &jobj->scale, &jobj->rotate,
+                       &jobj->translate, scl);
     } else {
         if (has_scl(jobj->parent)) {
             scl = jobj->parent->scl;
@@ -1039,8 +1039,9 @@ void HSD_JObjResolveRefs(HSD_JObj* jobj, HSD_Joint* joint)
     u8 _[4];
 #endif
 
-    if (jobj == NULL || joint == NULL)
+    if (jobj == NULL || joint == NULL) {
         return;
+    }
 
     HSD_RObjResolveRefsAll(jobj->robj, joint->robjdesc);
     if (!!(jobj->flags & JOBJ_INSTANCE)) {
@@ -1094,8 +1095,9 @@ static inline bool iref_none(void* o)
 static inline bool iref_DEC_alt(void* o)
 {
     bool ret = iref_none(o);
-    if (ret)
+    if (ret) {
         return ret;
+    }
     HSD_OBJ(o)->ref_count_individual -= 1;
     return HSD_OBJ(o)->ref_count_individual == 0;
 }
@@ -1348,8 +1350,9 @@ static void UpdateParentTrspBits(HSD_JObj* jobj, HSD_JObj* child)
 {
     u32 flags = (child->flags | (child->flags << 10)) & JOBJ_ROOT_MASK;
     while (jobj != NULL) {
-        if (!(flags & ~jobj->flags))
+        if (!(flags & ~jobj->flags)) {
             break;
+        }
         jobj->flags |= flags;
         jobj = jobj->parent;
     }
@@ -1960,9 +1963,9 @@ void HSD_JObjSetupMatrixSub(HSD_JObj* jobj)
                     sp10.x = parent->mtx[0][0];
                     sp10.y = parent->mtx[1][0];
                     sp10.z = parent->mtx[2][0];
-                    PSVECScale(
-                        &sp10, &sp10,
-                        sqrtf(1.0F / (1e-10F + PSVECDotProduct(&sp10, &sp10))));
+                    PSVECScale(&sp10, &sp10,
+                               sqrtf(1.0F / (1e-10F +
+                                             PSVECDotProduct(&sp10, &sp10))));
                     if (parent->scl != NULL) {
                         x_scale = parent->scl->x;
                     }

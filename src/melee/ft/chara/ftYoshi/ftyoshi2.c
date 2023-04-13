@@ -276,8 +276,9 @@ void ftYoshi_8012C54C(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->sv.ys.unk2.x0 = fp->sv.ys.unk2.x0 + lbl_804D9A28;
 
-    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0)
+    if (ftAnim_IsFramesRemaining(fighter_gobj) == 0) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 void ftYoshi_8012C59C(HSD_GObj* arg0)
@@ -777,24 +778,28 @@ f32 ftYoshi_8012CCC4(HSD_GObj* fighter_gobj)
 
 f32 ftYoshi_8012CCD0(HSD_GObj* fighter_gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr =
+        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x18;
 }
 
 f32 ftYoshi_8012CCE0(HSD_GObj* fighter_gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr =
+        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x1C;
 }
 
 f32 ftYoshi_8012CCF0(HSD_GObj* fighter_gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr =
+        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x20;
 }
 
 f32 ftYoshi_8012CD00(HSD_GObj* fighter_gobj)
 {
-    ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
+    ftYoshiAttributes* attr =
+        GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x24;
 }

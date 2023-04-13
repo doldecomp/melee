@@ -32,8 +32,9 @@ enum_t lbLang_GetSavedLanguage(void)
 
 void lbLang_SetSavedLanguage(enum_t language)
 {
-    if (language >= 0 && language < 2)
+    if (language >= 0 && language < 2) {
         gmMainLib_8015CC58()->saved_language = language;
+    }
 }
 
 enum_t lbLang_IsSavedLanguageJP(void)

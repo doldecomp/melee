@@ -3,9 +3,8 @@
 
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx/types.h>
-#include <melee/lb/lbrefract.h>
-
 #include <sysdolphin/baselib/cobj.h>
+#include <melee/lb/lbrefract.h>
 
 extern inline float sqrtf_accurate(float x);
 
@@ -37,7 +36,8 @@ Vec3* lbVector_8000DE38(Mtx m, Vec3* v, float c);
 
 Vec3* lbVector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
                                   Vec3* c);
-Vec3* lbVector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a, Vec3* c);
+Vec3* lbVector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a,
+                                         Vec3* c);
 Vec3* lbVector_ApplyEulerRotation(Vec3* v, Vec3* angles);
 float lbVector_sqrtf_accurate(float x);
 

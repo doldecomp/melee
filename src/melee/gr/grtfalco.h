@@ -1,9 +1,10 @@
 #ifndef MELEE_GR_GRTFALCO_H
 #define MELEE_GR_GRTFALCO_H
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
-#include <sysdolphin/baselib/forward.h>
 
 void grTFalco_80220984(HSD_GObj*);
 bool grTFalco_802209B0(HSD_GObj*);

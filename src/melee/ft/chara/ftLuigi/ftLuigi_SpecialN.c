@@ -1,6 +1,5 @@
-#include <melee/ft/chara/ftLuigi/ftluigi.h>
-
 #include <melee/ef/efsync.h>
+#include <melee/ft/chara/ftLuigi/ftluigi.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
@@ -29,8 +28,8 @@ void ftLuigi_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj)
 
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(fighter_gobj, AS_LUIGI_SPECIALAIRN, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_LUIGI_SPECIALAIRN, 0, NULL,
+                              0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftLuigi_SpecialN_FireSpawn;
 }
@@ -40,30 +39,34 @@ void ftLuigi_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj)
 // callback
 void ftLuigi_SpecialN_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 // 0x80142798 - Luigi's aerial Fireball Animation callback
 void ftLuigi_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_800CC730(fighter_gobj);
+    }
 }
 
 // 0x801427D4
 // https://decomp.me/scratch/JesBp // Luigi's grounded Fireball IASA callback
 void ftLuigi_SpecialN_IASA(HSD_GObj* fighter_gobj)
 {
-    if (GET_FIGHTER(fighter_gobj)->x2200_ftcmd_var0 != 0U)
+    if (GET_FIGHTER(fighter_gobj)->x2200_ftcmd_var0 != 0U) {
         ft_8008A4D4(fighter_gobj);
+    }
 }
 
 // 0x80142804 - Luigi's aerial Fireball IASA callback
 void ftLuigi_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
 {
-    if (GET_FIGHTER(fighter_gobj)->x2200_ftcmd_var0 != 0U)
+    if (GET_FIGHTER(fighter_gobj)->x2200_ftcmd_var0 != 0U) {
         ft_800CCAAC(fighter_gobj);
+    }
 }
 
 // 0x80142834 - Luigi's grounded Fireball Physics callback
@@ -121,8 +124,9 @@ void ftLuigi_SpecialN_FireSpawn(HSD_GObj* fighter_gobj)
     if (fp->x2210_ThrowFlags.b0 != 0) {
         fp->x2210_ThrowFlags.b0 = 0;
         flag = true;
-    } else
+    } else {
         flag = false;
+    }
 
     if (flag != false) {
         lb_8000B1CC(fp->x5E8_fighterBones[ftParts_8007500C(fp, 0x17)].x0_jobj,

@@ -1,6 +1,5 @@
-#include <dolphin/os/OSFont.h>
-
 #include <placeholder.h>
+#include <dolphin/os/OSFont.h>
 
 #ifdef MWERKS_GEKKO
 

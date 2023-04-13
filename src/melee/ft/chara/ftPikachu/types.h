@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTPIKACHU_TYPES_H
 #define MELEE_FT_CHARA_FTPIKACHU_TYPES_H
 
-#include <dolphin/mtx/types.h>
 #include <platform.h>
+
+#include <dolphin/mtx/types.h>
 
 typedef struct _ftPikachuAttributes {
     f32 x0;

@@ -60,8 +60,9 @@ void ftMario_SpecialN_StartMotion(HSD_GObj* gobj)
 // 0x800E0E18
 void ftMario_SpecialN_Anim(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 // 0x800E0E54
@@ -69,8 +70,9 @@ void ftMario_SpecialN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x2200_ftcmd_var0 != 0)
+    if (fp->x2200_ftcmd_var0 != 0) {
         ft_8008A4D4(gobj);
+    }
 }
 
 // 0x800E0E84
@@ -82,8 +84,9 @@ void ftMario_SpecialN_Phys(HSD_GObj* gobj)
 // 0x800E0EA4
 void ftMario_SpecialN_Coll(HSD_GObj* gobj)
 {
-    if (ft_80082708(gobj) == false)
+    if (ft_80082708(gobj) == false) {
         ftMario_SpecialN_GroundToAir(gobj);
+    }
 }
 
 // 0x800E0EE0
@@ -122,7 +125,8 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
                 &fp->facing_dir);
         } else {
             rand_val_800E0D1C = ftMario_SpecialN_VitaminRandom(gobj);
-            it_802C0510(gobj, &coords, rand_val_800E0D1C, 0x31, fp->facing_dir);
+            it_802C0510(gobj, &coords, rand_val_800E0D1C, 0x31,
+                        fp->facing_dir);
         }
     }
 }

@@ -1,8 +1,8 @@
 #ifndef _FTMEWTWO_STATEVARS_H_
 #define _FTMEWTWO_STATEVARS_H_
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 typedef struct ftMewtwoSpecialHi {
     s32 travelFrames; // 0x2340 - Number of frames Teleport's zoom animation

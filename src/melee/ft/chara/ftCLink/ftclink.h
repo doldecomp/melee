@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTCLINK_FTCLINK_H
 #define MELEE_FT_CHARA_FTCLINK_FTCLINK_H
 
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/ft/fighter.h>
 #include <melee/it/code_8027CF30.h>
-#include <sysdolphin/baselib/gobj.h>
 
 /// @todo this is #ftLinkAttributes.
 typedef struct _CLinkAttributes {
@@ -133,8 +133,9 @@ static inline void checkFighter2244(HSD_GObj* gobj)
 {
     Fighter* fp;
 
-    if (gobj == NULL)
+    if (gobj == NULL) {
         return;
+    }
 
     fp = gobj->user_data;
     if (fp != NULL && fp->ev.cl.x2244 != 0) {
@@ -142,8 +143,9 @@ static inline void checkFighter2244(HSD_GObj* gobj)
         fp->ev.cl.x2244 = 0;
     }
 
-    if (gobj == NULL)
+    if (gobj == NULL) {
         gobj == NULL;
+    }
 }
 
 #endif

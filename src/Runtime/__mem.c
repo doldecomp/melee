@@ -10,12 +10,12 @@ void* memset(void* dst, int val, unsigned long /*size_t*/ n)
 #ifdef __MWERKS__
 #define INCREMENT_ASSIGN(ptr, type, value) (*++((type*) (ptr)) = (value))
 #else
-#define INCREMENT_ASSIGN(ptr, type, value)                                     \
-    do {                                                                       \
-        type* __INCREMENT_ASSIGN_tmp;                                          \
-        (ptr) = ((type*) (ptr)) + 1;                                           \
-        __INCREMENT_ASSIGN_tmp = ((type*) (ptr));                              \
-        *__INCREMENT_ASSIGN_tmp = (value);                                     \
+#define INCREMENT_ASSIGN(ptr, type, value)                                    \
+    do {                                                                      \
+        type* __INCREMENT_ASSIGN_tmp;                                         \
+        (ptr) = ((type*) (ptr)) + 1;                                          \
+        __INCREMENT_ASSIGN_tmp = ((type*) (ptr));                             \
+        *__INCREMENT_ASSIGN_tmp = (value);                                    \
     } while (false);
 #endif
 
@@ -37,8 +37,9 @@ void __fill_mem(void* dst, int val, unsigned long n)
             } while (--i);
         }
 
-        if (v)
+        if (v) {
             v |= v << 24 | v << 16 | v << 8;
+        }
 
         dst = ((unsigned long*) (((unsigned char*) dst) + 1)) - 1;
 
@@ -47,8 +48,9 @@ void __fill_mem(void* dst, int val, unsigned long n)
         if (i) {
             do {
                 int j;
-                for (j = 0; j < 8; j++)
+                for (j = 0; j < 8; j++) {
                     INCREMENT_ASSIGN(dst, unsigned long, v);
+                }
             } while (--i);
         }
 
@@ -64,10 +66,11 @@ void __fill_mem(void* dst, int val, unsigned long n)
         n &= 3;
     }
 
-    if (n)
+    if (n) {
         do {
             INCREMENT_ASSIGN(dst, unsigned char, v);
         } while (--n);
+    }
 
     return;
 }
@@ -83,14 +86,16 @@ void* memcpy(void* dst, const void* src, unsigned long /* size_t */ n)
         s = (const unsigned char*) src - 1;
         d = (unsigned char*) dst - 1;
         n++;
-        while (--n != 0)
+        while (--n != 0) {
             *++d = *++s;
+        }
     } else {
         s = (const unsigned char*) src + n;
         d = (unsigned char*) dst + n;
         n++;
-        while (--n != 0)
+        while (--n != 0) {
             *--d = *--s;
+        }
     }
     return dst;
 }

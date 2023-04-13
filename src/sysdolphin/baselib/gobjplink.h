@@ -1,8 +1,8 @@
 #ifndef SYSDOLPHIN_BASELIB_GOBJPLINK_H
 #define SYSDOLPHIN_BASELIB_GOBJPLINK_H
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 void func_80390228(HSD_GObj*);
 void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,

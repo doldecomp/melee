@@ -30,8 +30,9 @@ void ftMasterHand_8015550C(HSD_GObj* gobj)
 void ftMasterHand_80155580(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(gobj);
+    }
 }
 
 // 801555C4 1521A4
@@ -64,8 +65,9 @@ void ftMasterHand_801555E8(HSD_GObj* gobj)
 void ftMasterHand_8015565C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(gobj);
+    }
 }
 
 // 801556A0 152280
@@ -116,8 +118,9 @@ void ftMasterHand_801556C4(HSD_GObj* gobj)
 void ftMasterHand_801557B0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(gobj);
+    }
 }
 
 // 801557F4 1523D4
@@ -144,16 +147,18 @@ void ftMasterHand_80155818(HSD_GObj* gobj)
 // https://decomp.me/scratch/ln57J
 void ftMasterHand_80155864(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMasterHand_80151018(gobj);
+    }
 }
 
 // 801558A0 152480
 void ftMasterHand_801558A0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(gobj);
+    }
 }
 
 // 801558E4 1524C4
@@ -178,16 +183,18 @@ void ftMasterHand_80155908(HSD_GObj* gobj)
         fp->x2200_ftcmd_var0 = 0;
     }
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMasterHand_80151018(gobj);
+    }
 }
 
 // 80155990 152570
 void ftMasterHand_80155990(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(gobj);
+    }
 }
 
 // 801559D4 1525B4
@@ -197,8 +204,8 @@ void ftMasterHand_801559D4(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
     ft_80085134(gobj);
-    ftBossLib_8015BE40(gobj, &fp->sv.mh.unk0.xC, &fp->sv.mh.unk0.x18, attr->x2C,
-                       attr->x28);
+    ftBossLib_8015BE40(gobj, &fp->sv.mh.unk0.xC, &fp->sv.mh.unk0.x18,
+                       attr->x2C, attr->x28);
 }
 
 // 80155A34 152614

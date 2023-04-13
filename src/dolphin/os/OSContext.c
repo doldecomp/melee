@@ -1,10 +1,9 @@
-#include <dolphin/os/OSContext.h>
-
+#include <placeholder.h>
 #include <dolphin/db/db.h>
 #include <dolphin/os/os.h>
+#include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
-#include <placeholder.h>
 
 #ifdef MWERKS_GEKKO
 asm void __OSLoadFPUContext(u32 _, register OSContext* fpuctx)
@@ -401,8 +400,9 @@ void OSClearContext(register OSContext* context)
 {
     context->mode = 0;
     context->state = 0;
-    if (context == __OSFPUContext)
+    if (context == __OSFPUContext) {
         __OSFPUContext = NULL;
+    }
 }
 
 #ifdef MWERKS_GEKKO
@@ -514,7 +514,8 @@ void OSDumpContext(const OSContext* context)
         OSReport("\n\nPSFs----------\n");
         for (i = 0; i < 32; i += 2) {
             OSReport("ps%d \t= 0x%x \t ps%d \t= 0x%x\n", i,
-                     (u32) context->psfs[i], i + 1, (u32) context->psfs[i + 1]);
+                     (u32) context->psfs[i], i + 1,
+                     (u32) context->psfs[i + 1]);
         }
 
         OSClearContext(&fpuContext);

@@ -68,8 +68,9 @@ void ftMasterHand_801529D0(HSD_GObj* arg0)
 void ftMasterHand_80152A0C(HSD_GObj* arg0)
 {
     Fighter* fp = arg0->user_data;
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(arg0);
+    }
 }
 
 // 80152A50 14F630

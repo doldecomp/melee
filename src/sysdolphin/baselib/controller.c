@@ -1,6 +1,5 @@
-#include <sysdolphin/baselib/controller.h>
-
 #include <dolphin/os/OSInterrupt.h>
+#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/rumble.h>
 
 extern PadLibData HSD_PadLibData;

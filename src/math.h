@@ -71,18 +71,20 @@ static inline s32 __fpclassifyd(double x)
 {
     switch (__HI(x) & 0x7ff00000) {
     case 0x7ff00000:
-        return ((__HI(x) & 0x000fffff) || (__LO(x) & 0xffffffff)) ? FP_NAN
-                                                                  : FP_INFINITE;
+        return ((__HI(x) & 0x000fffff) || (__LO(x) & 0xffffffff))
+                   ? FP_NAN
+                   : FP_INFINITE;
     case 0:
-        return ((__HI(x) & 0x000fffff) || (__LO(x) & 0xffffffff)) ? FP_SUBNORMAL
-                                                                  : FP_ZERO;
+        return ((__HI(x) & 0x000fffff) || (__LO(x) & 0xffffffff))
+                   ? FP_SUBNORMAL
+                   : FP_ZERO;
     default:
         return FP_NORMAL;
     }
 }
 
-#define fpclassify(x)                                                          \
-    ((sizeof(x) == sizeof(float)) ? __fpclassifyf((float) (x))                 \
+#define fpclassify(x)                                                         \
+    ((sizeof(x) == sizeof(float)) ? __fpclassifyf((float) (x))                \
                                   : __fpclassifyd((double) (x)))
 
 static inline f32 fabs_inline(f32 x)

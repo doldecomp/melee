@@ -1,8 +1,8 @@
 #include "melee/ft/inlines.h"
-#include <melee/ft/chara/ftLuigi/ftluigi.h>
 
 #include <melee/ef/eflib.h>
 #include <melee/ef/efsync.h>
+#include <melee/ft/chara/ftLuigi/ftluigi.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcommon.h>
@@ -100,8 +100,9 @@ void ftLuigi_SpecialAirLw_StartMotion(HSD_GObj* fighter_gobj)
     ftAnim_8006EBA4(fighter_gobj);
     if (fp2->ev.lg.x222C_cycloneCharge != 0) {
         cycloneVar = 0.0f;
-    } else
+    } else {
         cycloneVar = luigiAttrs->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX;
+    }
     fp2->x80_self_vel.y =
         (f32) (luigiAttrs->x70_LUIGI_CYCLONE_TAP_MOMENTUM - cycloneVar);
     ftCommon_8007D440(fp, luigiAttrs->x78_LUIGI_CYCLONE_MOMENTUM_X_AIR);
@@ -199,12 +200,13 @@ void ftLuigi_SpecialLw_Phys(HSD_GObj* fighter_gobj)
                 attrs->x84_LUIGI_CYCLONE_FRICTION_END;
             var2 += fp->sv.lg.SpecialLw.groundVelX;
 
-            if (var2 < 0)
+            if (var2 < 0) {
                 var2 = 0;
+            }
         }
 
-        ftCommon_8007CADC(fp, 0, attrs->x7C_LUIGI_CYCLONE_MOMENTUM_X_MUL_GROUND,
-                          var2);
+        ftCommon_8007CADC(
+            fp, 0, attrs->x7C_LUIGI_CYCLONE_MOMENTUM_X_MUL_GROUND, var2);
     }
 
     ftCommon_8007CB74(fighter_gobj);
@@ -247,8 +249,9 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* fighter_gobj)
                     attrs1->x84_LUIGI_CYCLONE_FRICTION_END;
                 spd_x += fp->sv.lg.SpecialLw.groundVelX;
 
-                if (spd_x < 0)
+                if (spd_x < 0) {
                     spd_x = 0;
+                }
             }
         }
 

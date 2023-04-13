@@ -1,7 +1,6 @@
-#include <melee/lb/lbvector.h>
-
-#include <dolphin/mtx.h>
 #include <math.h>
+#include <dolphin/mtx.h>
+#include <melee/lb/lbvector.h>
 
 // exactly the same as the one from math.h, but with one extra iteration
 extern inline float sqrtf_accurate(float x)
@@ -17,7 +16,8 @@ extern inline float sqrtf_accurate(float x)
                 (_three - guess * guess * x); // now have 24 sig bits
         guess = _half * guess *
                 (_three - guess * guess * x); // now have 32 sig bits
-        guess = _half * guess * (_three - guess * guess * x); // extra iteration
+        guess =
+            _half * guess * (_three - guess * guess * x); // extra iteration
         y = (float) (x * guess);
         return y;
     }
@@ -39,8 +39,9 @@ float lbVector_Normalize(Vec3* vec)
     float len = lbvector_Len(vec);
     float inv;
 
-    if (len == 0.0f)
+    if (len == 0.0f) {
         return 0.0f;
+    }
     inv = 1.0f / len;
     vec->x *= inv;
     vec->y *= inv;
@@ -53,8 +54,9 @@ float lbVector_NormalizeXY(Vec3* a)
     float len = sqrtf_accurate(a->x * a->x + a->y * a->y);
     float inv;
 
-    if (len == 0.0f)
+    if (len == 0.0f) {
         return 0.0f;
+    }
     inv = 1.0f / len;
     a->x *= inv;
     a->y *= inv;
@@ -106,10 +108,12 @@ float lbVector_Angle(Vec3* a, Vec3* b)
 
     if (lena_lenb > 0.0000000001f) {
         float cosine = (a->x * b->x + a->y * b->y + a->z * b->z) / lena_lenb;
-        if (cosine > 1.0f)
+        if (cosine > 1.0f) {
             cosine = 1.0f;
-        if (cosine < -1.0f)
+        }
+        if (cosine < -1.0f) {
             cosine = -1.0f;
+        }
 
         return acosf(cosine); // acos
     }
@@ -123,10 +127,12 @@ float lbVector_AngleXY(Vec3* a, Vec3* b)
 
     if (lena_lenb) {
         float cosine = (a->x * b->x + a->y * b->y) / lena_lenb;
-        if (cosine > 1.0f)
+        if (cosine > 1.0f) {
             cosine = 1.0f;
-        if (cosine < -1.0f)
+        }
+        if (cosine < -1.0f) {
             cosine = -1.0f;
+        }
         return acosf(cosine); // acos
     }
     return 0.0f;
@@ -139,10 +145,11 @@ float lbVector_AngleXY(Vec3* a, Vec3* b)
 
 static float sin(float angle)
 {
-    if (angle > M_PI)
+    if (angle > M_PI) {
         angle -= 2 * M_PI;
-    else if (angle < -M_PI)
+    } else if (angle < -M_PI) {
         angle += 2 * M_PI;
+    }
     return 0.9878619909286499f * angle -
            0.15527099370956421f * angle * angle * angle +
            0.0056429998949170113f * angle * angle * angle * angle * angle;
@@ -151,10 +158,11 @@ static float sin(float angle)
 static float cos(float angle)
 {
     angle += M_PI / 2;
-    if (angle > M_PI)
+    if (angle > M_PI) {
         angle -= 2 * M_PI;
-    else if (angle < -M_PI)
+    } else if (angle < -M_PI) {
         angle += 2 * M_PI;
+    }
     return 0.9878619909286499f * angle -
            0.15527099370956421f * angle * angle * angle +
            0.0056429998949170113f * angle * angle * angle * angle * angle;
@@ -264,14 +272,15 @@ float dummy(void)
 // the plane that is perpendicular to b and contains the origin.
 void lbVector_Mirror(Vec3* a, Vec3* unit_mirror_axis)
 {
-    float f = (unit_mirror_axis->x * a->x + unit_mirror_axis->y * a->y) * -2.0f;
+    float f =
+        (unit_mirror_axis->x * a->x + unit_mirror_axis->y * a->y) * -2.0f;
 
     a->x += unit_mirror_axis->x * f;
     a->y += unit_mirror_axis->y * f;
 }
 
-// 8000DCA8 - returns <a/|a|, b/|b|>, which is the cosine of the angle between a
-// and b.
+// 8000DCA8 - returns <a/|a|, b/|b|>, which is the cosine of the angle between
+// a and b.
 float lbVector_CosAngle(Vec3* a, Vec3* b)
 {
     return (a->x * b->x + a->y * b->y) / (sqrtf(a->x * a->x + a->y * a->y) *
@@ -279,8 +288,8 @@ float lbVector_CosAngle(Vec3* a, Vec3* b)
 }
 
 // 8000DDAC - linearly interpolates between a and b as f goes from 0 to 1,
-// returns a + f*(b-a). The numerical error can be large for f=1 when b is small
-// compared to a.
+// returns a + f*(b-a). The numerical error can be large for f=1 when b is
+// small compared to a.
 Vec3* lbVector_Lerp(Vec3* a, Vec3* b, Vec3* result, float f)
 {
     lbVector_Diff(b, a, result);
@@ -296,10 +305,11 @@ Vec3* lbVector_8000DE38(Mtx m, Vec3* v, float c)
     float var1;
     float var2;
 
-    if (c > 1.0f)
+    if (c > 1.0f) {
         c = 1.0f;
-    else if (c < 0.0f)
+    } else if (c < 0.0f) {
         c = 0.0f;
+    }
 
     var1 = m[0][0] * 2.0f - m[0][3] * 4.0f + m[1][2] * 2.0f;
     var2 = m[0][0] * -3.0f + m[0][3] * 4.0f - m[1][2];
@@ -340,9 +350,9 @@ Vec3* lbVector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
 }
 
 // 8000DFF4 - returns lbVector_EulerAnglesFromONB(result_angles, a, c cross a,
-// c). When rotating about the x,y,z angles about the euler angles returned from
-// that function in that order, the standard basis (e1,e2,e3) is rotated onto (c
-// cross a,c,a).
+// c). When rotating about the x,y,z angles about the euler angles returned
+// from that function in that order, the standard basis (e1,e2,e3) is rotated
+// onto (c cross a,c,a).
 Vec3* lbVector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a, Vec3* c)
 {
     Vec3 b;
@@ -511,15 +521,18 @@ float lbVector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
     lbVector_Diff(c, a, &c_a);
     if (sqrlen_b_a < 9.9999997473787516e-06f &&
         sqrlen_b_a > -9.9999997473787516e-06f)
+    {
         tooSmall = 1;
-    else
+    } else {
         tooSmall = 0;
+    }
     if (tooSmall) {
         *d = *a;
         return lbvector_Len(&c_a);
     } else {
         Vec3 v3;
-        float f1 = (b_a.x * c_a.x + b_a.y * c_a.y + b_a.z * c_a.z) / sqrlen_b_a;
+        float f1 =
+            (b_a.x * c_a.x + b_a.y * c_a.y + b_a.z * c_a.z) / sqrlen_b_a;
 
         d->x = a->x + b_a.x * f1;
         d->y = a->y + b_a.y * f1;

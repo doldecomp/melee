@@ -1,12 +1,11 @@
-#include <melee/gr/grtcaptain.h>
-
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grtcaptain.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E8608[] = {
     { grTCaptain_8021FDEC, grTCaptain_8021FE18, grTCaptain_8021FE20,
@@ -74,14 +73,17 @@ static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
         gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
 
-        if (callbacks->callback3 != NULL)
+        if (callbacks->callback3 != NULL) {
             gp->x1C_callback = callbacks->callback3;
+        }
 
-        if (callbacks->callback0 != NULL)
+        if (callbacks->callback0 != NULL) {
             callbacks->callback0(gobj);
+        }
 
-        if (callbacks->callback2 != NULL)
+        if (callbacks->callback2 != NULL) {
             func_8038FD54(gobj, callbacks->callback2, 4);
+        }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtcaptain.c", 215,
                  gobj_id);

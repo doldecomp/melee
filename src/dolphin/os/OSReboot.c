@@ -1,11 +1,10 @@
-#include <dolphin/os/OSReboot.h>
-
+#include <placeholder.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSReboot.h>
 #include <dolphin/os/OSReset.h>
 #include <MetroTRK/intrinsics.h>
-#include <placeholder.h>
 
 #ifdef MWERKS_GEKKO
 static unk_t Header[0x20 / sizeof(unk_t)];

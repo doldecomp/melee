@@ -2,6 +2,7 @@
 #define DOLPHIN_GX_GXPIXEL_H
 
 #include <dolphin/gx/forward.h>
+
 #include <dolphin/mtx/types.h>
 #include <Runtime/platform.h>
 

@@ -32,8 +32,9 @@ void ftMasterHand_80155074(HSD_GObj* gobj)
         fp->sv.mh.unk0.x20 = 0;
     }
 
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ftMasterHand_80151018(gobj);
+    }
 }
 
 // 8015512C 151D0C

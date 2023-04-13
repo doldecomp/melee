@@ -7,8 +7,8 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/ftparts.h"
 
-#include <baselib/gobjproc.h>
 #include <trigf.h>
+#include <baselib/gobjproc.h>
 
 /// @todo Move elsewhere.
 #define HALF_PI32 (1.5707963705062866f)
@@ -168,18 +168,20 @@ void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* fighter_gobj)
     s32 facingDir;
 
     /// @todo Ternary operator should be possible here somehow.
-    if (fp->facing_dir < 0.0f)
+    if (fp->facing_dir < 0.0f) {
         facingDir = -1;
-    else
+    } else {
         facingDir = 1;
+    }
 
     if (ft_CheckGroundAndLedge(fighter_gobj, facingDir) != false) {
         ftFox_SpecialHiHoldAir_AirToGround(fighter_gobj);
         return;
     }
 
-    if (ftCliffCommon_80081298(fighter_gobj))
+    if (ftCliffCommon_80081298(fighter_gobj)) {
         return;
+    }
 }
 
 void ftFox_SpecialHiHold_GroundToAir(HSD_GObj* fighter_gobj)
@@ -259,8 +261,9 @@ void ftFox_SpecialHi_Phys(HSD_GObj* fighter_gobj)
 
     fp->sv.fx.SpecialHi.unk++;
 
-    if (fp->sv.fx.SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END)
+    if (fp->sv.fx.SpecialHi.unk >= foxAttrs->x70_FOX_FIREFOX_DURATION_END) {
         ftCommon_8007C930(fp, foxAttrs->x78_FOX_FIREFOX_REVERSE_ACCEL);
+    }
 
     ftCommon_8007CB74(fighter_gobj);
 }
@@ -308,12 +311,13 @@ static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
-    if (fp->sv.fx.SpecialHi.unk2 >= foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR)
+    if (fp->sv.fx.SpecialHi.unk2 >= foxAttrs->x6C_FOX_FIREFOX_BOUNCE_VAR) {
         return true;
-    else if (ft_8009A134(fighter_gobj) != false)
+    } else if (ft_8009A134(fighter_gobj) != false) {
         return false;
-    else
+    } else {
         return true;
+    }
 }
 
 /// @todo Rework this entire match.
@@ -373,10 +377,11 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 
             if (var < (0.01745329238474369f *
                        (90.0f + foxAttrs->x94_FOX_FIREFOX_BOUND_ANGLE)))
-
+            {
                 goto facingDir;
-            else
+            } else {
                 continue;
+            }
 
         } while (false); // What?
 
@@ -384,14 +389,15 @@ void ftFox_SpecialAirHi_Coll(HSD_GObj* fighter_gobj)
 
         {
         facingDir:
-            if (fp->x80_self_vel.x >= 0.0f)
+            if (fp->x80_self_vel.x >= 0.0f) {
                 facingDir = 1.0f;
-            else
+            } else {
                 facingDir = -1.0f;
+            }
 
             fp->facing_dir = facingDir;
-            fp->sv.fx.SpecialHi.rotateModel =
-                atan2f(fp->x80_self_vel.y, fp->x80_self_vel.x * fp->facing_dir);
+            fp->sv.fx.SpecialHi.rotateModel = atan2f(
+                fp->x80_self_vel.y, fp->x80_self_vel.x * fp->facing_dir);
             ftFox_SpecialHi_RotateModel(fighter_gobj);
         }
     }
@@ -543,8 +549,8 @@ void ftFox_SpecialAirHi_Action(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.x =
         fp->facing_dir * (foxAttrs->x74_FOX_FIREFOX_SPEED *
                           cosf(fp->sv.fx.SpecialHi.rotateModel));
-    fp->x80_self_vel.y =
-        foxAttrs->x74_FOX_FIREFOX_SPEED * sinf(fp->sv.fx.SpecialHi.rotateModel);
+    fp->x80_self_vel.y = foxAttrs->x74_FOX_FIREFOX_SPEED *
+                         sinf(fp->sv.fx.SpecialHi.rotateModel);
     ftFox_SpecialHi_RotateModel(fighter_gobj);
     fp->cb.x21F8_callback = ftCommon_8007F76C;
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialHi_CreateLaunchGFX;
@@ -561,8 +567,9 @@ void ftFox_SpecialHiLanding_Anim(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 // 0x800E7E78
@@ -639,8 +646,9 @@ void ftFox_SpecialHiFall_Coll(HSD_GObj* fighter_gobj)
         ftFox_SpecialHiFall_Action(fighter_gobj);
         return;
     }
-    if (ftCliffCommon_80081298(fighter_gobj))
+    if (ftCliffCommon_80081298(fighter_gobj)) {
         return;
+    }
 }
 
 // 0x800E7FF0

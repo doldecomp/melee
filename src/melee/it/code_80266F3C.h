@@ -3,10 +3,10 @@
 #ifndef MELEE_IT_CODE_80266F3C_H
 #define MELEE_IT_CODE_80266F3C_H
 
-#include <melee/it/types.h>
 #include <placeholder.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/it/types.h>
 
 extern HSD_ObjAllocUnk4 lbl_804A0E30;
 extern HSD_ObjAllocUnk5 lbl_804A0E50;

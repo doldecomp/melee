@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey_callbacks.h>
+#include <melee/ft/forward.h>
 
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey1.h>
@@ -8,13 +8,13 @@
 #include <melee/ft/chara/ftDonkey/ftdonkey7.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey8.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey9.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_callbacks.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialHi.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialLw.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialN.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_SpecialS.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey_walk.h>
 #include <melee/ft/code_80081B38.h>
-#include <melee/ft/forward.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftcoll.h>
@@ -190,8 +190,9 @@ void ftDonkey_8010D96C(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftDonkeyAttributes* attr = fp->x2D4_specialAttributes;
 
-    if (fp->ev.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS)
+    if (fp->ev.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS) {
         ft_800BFFD0(fp, 0x39, 0);
+    }
 }
 
 void ftDonkey_OnLoad(HSD_GObj* fighter_gobj)

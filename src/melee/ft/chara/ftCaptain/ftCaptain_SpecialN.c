@@ -3,15 +3,15 @@
 #include "ftCaptain.h"
 #include "types.h"
 
-#include "ft/types.h"
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
+#include "ft/types.h"
 #include "lb/lbunknown_003.h"
+
 #include <trigf.h>
 
 /// Create Aesthetic Wind Effect for Warlock Punch
@@ -141,8 +141,8 @@ void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
         fp->x2200_ftcmd_var0 = 0U;
         vel = ftCaptain_SpecialN_GetAngleVel(fp);
         fp->x80_self_vel.y = (f32) (captainAttrs->specialn_vel_x * sinf(vel));
-        fp->x80_self_vel.x =
-            (f32) (captainAttrs->specialn_vel_x * (fp->facing_dir * cosf(vel)));
+        fp->x80_self_vel.x = (f32) (captainAttrs->specialn_vel_x *
+                                    (fp->facing_dir * cosf(vel)));
     }
 }
 

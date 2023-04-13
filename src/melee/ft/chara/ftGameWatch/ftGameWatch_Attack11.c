@@ -67,7 +67,8 @@ void ftGameWatch_Attack11_DecideAction(HSD_GObj* fighter_gobj)
         }
         fp->cb.x21D4_callback_EnterHitlag =
             ftGameWatch_ItemGreenhouseEnterHitlag;
-        fp->cb.x21D8_callback_ExitHitlag = ftGameWatch_ItemGreenhouseExitHitlag;
+        fp->cb.x21D8_callback_ExitHitlag =
+            ftGameWatch_ItemGreenhouseExitHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
 }
@@ -122,8 +123,8 @@ void ftGameWatch_ItemGreenhouseExitHitlag(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014C034
-// https://decomp.me/scratch/Nkgz4 // Check if Mr. Game & Watch is in any of his
-// jab action states
+// https://decomp.me/scratch/Nkgz4 // Check if Mr. Game & Watch is in any of
+// his jab action states
 bool ftGameWatch_ItemGreenhouse_CheckAll(HSD_GObj* fighter_gobj)
 {
     s32 ASID = GET_FIGHTER(fighter_gobj)->action_id;

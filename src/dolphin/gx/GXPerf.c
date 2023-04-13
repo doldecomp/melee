@@ -1,7 +1,6 @@
-#include <dolphin/gx/GXPerf.h>
-
-#include <dolphin/gx/__GXInit.h>
 #include <placeholder.h>
+#include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/GXPerf.h>
 
 #ifdef MWERKS_GEKKO
 

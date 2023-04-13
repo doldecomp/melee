@@ -1,15 +1,14 @@
-#include <sysdolphin/baselib/__baselib.h>
-#include <sysdolphin/baselib/sobjlib.h>
-
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXMisc.h>
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/__baselib.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/objalloc.h>
 #include <sysdolphin/baselib/pobj.h>
+#include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tev.h>
 

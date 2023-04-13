@@ -2,10 +2,9 @@
 #define _ftcoll_h_
 
 #include <dolphin/mtx/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobjproc.h>
-
 #include <melee/ft/fighter.h>
+#include <Runtime/platform.h>
 
 void ftColl_800763C0(HSD_GObj* attacker, HSD_GObj* victim,
                      s32 attackID); // Combo Count Logic //
@@ -59,7 +58,8 @@ void ftColl_8007B8A8(HitCapsule*, Vec3*);
 /// Enable Reflect Bubble Update
 void ftColl_8007AEF8(HSD_GObj*);
 
-void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*, HSD_GObjEvent on_reflect);
+void ftColl_CreateReflectHit(HSD_GObj*, ReflectDesc*,
+                             HSD_GObjEvent on_reflect);
 void ftColl_CreateAbsorbHit(HSD_GObj*, AbsorbDesc*);
 void ftColl_8007AF10(HSD_GObj*);
 void ftColl_8007B5AC(void* arg0, void* arg1, void* arg2);
@@ -67,7 +67,8 @@ void ftColl_8007B7FC(Fighter*, s32);
 void ftColl_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID);
 void ftColl_80076640(void);
 void ftColl_80076764(void);
-void ftColl_80076808(Fighter* attacker, HitCapsule*, int, Fighter* victim, int);
+void ftColl_80076808(Fighter* attacker, HitCapsule*, int, Fighter* victim,
+                     int);
 void ftColl_800768A0(void);
 bool ftColl_8007699C(Fighter*, HitCapsule*, Fighter*, HitCapsule*);
 void ftColl_800784B4(void);

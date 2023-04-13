@@ -1,8 +1,8 @@
 #ifndef _grtkoopa_h_
 #define _grtkoopa_h_
 
-#include <melee/gr/stage.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/gr/stage.h>
 
 static void grTKoopa_80221648(int);
 static void grTKoopa_8022164C(void);

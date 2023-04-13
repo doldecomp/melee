@@ -2,8 +2,8 @@
  * @todo Should be called @c OS.c.
  */
 #include "stddef.h"
-#include <dolphin/os/OSInit.h>
 
+#include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db/db.h>
 #include <dolphin/dvd/dvd.h>
@@ -15,6 +15,7 @@
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSExi.h>
+#include <dolphin/os/OSInit.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSLink.h>
 #include <dolphin/os/OSMemory.h>
@@ -26,7 +27,6 @@
 #include <dolphin/os/OSTime.h>
 #include <MetroTRK/dolphin_trk.h>
 #include <MetroTRK/intrinsics.h>
-#include <placeholder.h>
 #include <Runtime/__mem.h>
 #include <Runtime/platform.h>
 
@@ -152,8 +152,8 @@ extern volatile struct {
  */
 void OSInit(void)
 {
-    // pretty sure this is the min(/max) amount of pointers etc for the stack to
-    // match
+    // pretty sure this is the min(/max) amount of pointers etc for the stack
+    // to match
     BI2Debug* DebugInfo;
     void* debugArenaLo;
     u32 inputConsoleType;
@@ -214,7 +214,8 @@ void OSInit(void)
         // set up bottom of heap (ArenaLo)
         // grab address from BootInfo if it exists, otherwise use default
         // __ArenaLo
-        OSSetArenaLo(BootInfo->arenaLo == NULL ? __ArenaLo : BootInfo->arenaLo);
+        OSSetArenaLo(BootInfo->arenaLo == NULL ? __ArenaLo
+                                               : BootInfo->arenaLo);
 
         // if the input arenaLo is null, and debug flag location exists (and
         // flag is < 2), set arenaLo to just past the end of the db stack
@@ -228,7 +229,8 @@ void OSInit(void)
         // set up top of heap (ArenaHi)
         // grab address from BootInfo if it exists, otherwise use default
         // __ArenaHi
-        OSSetArenaHi(BootInfo->arenaHi == NULL ? __ArenaHi : BootInfo->arenaHi);
+        OSSetArenaHi(BootInfo->arenaHi == NULL ? __ArenaHi
+                                               : BootInfo->arenaHi);
 
         // OS INIT AND REPORT
 
@@ -265,7 +267,8 @@ void OSInit(void)
         OSReport("Kernel built : %s %s\n", "Nov 12 2001", "01:46:17");
         OSReport("Console Type : ");
 
-        if (BootInfo == NULL || (inputConsoleType = BootInfo->consoleType) == 0)
+        if (BootInfo == NULL ||
+            (inputConsoleType = BootInfo->consoleType) == 0)
         {
             // default console type
             inputConsoleType = OS_CONSOLE_ARTHUR;
@@ -350,7 +353,8 @@ void OSExceptionInit(void)
         DBPrintf("Installing OSDBIntegrator\n");
         memcpy(destAddr, (void*) __OSDBINTSTART,
                (u32) __OSDBINTEND - (u32) __OSDBINTSTART);
-        DCFlushRangeNoSync(destAddr, (u32) __OSDBINTEND - (u32) __OSDBINTSTART);
+        DCFlushRangeNoSync(destAddr,
+                           (u32) __OSDBINTEND - (u32) __OSDBINTSTART);
         __sync();
         ICInvalidateRange(destAddr, (u32) __OSDBINTEND - (u32) __OSDBINTSTART);
     }
@@ -390,8 +394,8 @@ void OSExceptionInit(void)
         }
 
         // Install the modified handler.
-        destAddr =
-            (void*) OSPhysicalToCached(__OSExceptionLocations[(u32) exception]);
+        destAddr = (void*) OSPhysicalToCached(
+            __OSExceptionLocations[(u32) exception]);
         memcpy(destAddr, handlerStart, handlerSize);
         DCFlushRangeNoSync(destAddr, handlerSize);
         __sync();

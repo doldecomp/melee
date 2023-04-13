@@ -1,6 +1,5 @@
-#include <melee/ft/chara/ftNess/ftNess_AttackS4.h>
-
 #include <melee/ft/chara/ftNess/ftNess.h>
+#include <melee/ft/chara/ftNess/ftNess_AttackS4.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftcoll.h>
@@ -121,9 +120,10 @@ void ftNess_AttackS4_Anim(
         Fighter* fighter_data2;
         fighter_data2 = GET_FIGHTER(fighter_gobj);
         if (fighter_data2->ev.ns.x2248_baseballBatGObj != NULL) {
-            it_802AD6B8(fighter_data2->ev.ns
-                            .x2248_baseballBatGObj); // Despawn the Baseball Bat
-                                                     // if animation is over
+            it_802AD6B8(
+                fighter_data2->ev.ns
+                    .x2248_baseballBatGObj); // Despawn the Baseball Bat
+                                             // if animation is over
             fighter_data2->ev.ns.x2248_baseballBatGObj = NULL;
         }
         ft_8008A2BC(fighter_gobj);

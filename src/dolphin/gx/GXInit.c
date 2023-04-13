@@ -1,5 +1,4 @@
-#include <dolphin/gx/GXInit.h>
-
+#include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXBump.h>
@@ -10,6 +9,7 @@
 #include <dolphin/gx/GXBump.h>
 #include <dolphin/gx/GXFrameBuf.h>
 #include <dolphin/gx/GXGeometry.h>
+#include <dolphin/gx/GXInit.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXPerf.h>
 #include <dolphin/gx/GXPixel.h>
@@ -17,7 +17,6 @@
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/vi/vi.h>
-#include <placeholder.h>
 
 GXContext __GXContext;
 GXContexts __GXContexts = { &__GXContext, NULL };

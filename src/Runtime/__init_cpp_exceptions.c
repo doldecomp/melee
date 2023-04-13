@@ -1,6 +1,5 @@
-#include <Runtime/__init_cpp_exceptions.h>
-
 #include <placeholder.h>
+#include <Runtime/__init_cpp_exceptions.h>
 #include <Runtime/Gecko_ExceptionPPC.h>
 #include <Runtime/platform.h>
 
@@ -33,8 +32,9 @@ void __fini_cpp_exceptions(void)
 
 void __init_cpp_exceptions(void)
 {
-    if (fragmentID == -2)
+    if (fragmentID == -2) {
         fragmentID = __register_fragment(_eti_init_info_, GetR2());
+    }
 }
 
 #else

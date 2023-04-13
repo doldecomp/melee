@@ -1,3 +1,4 @@
+#include <placeholder.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/dvd/dvd.h>
 #include <dolphin/gx/GXInit.h>
@@ -7,6 +8,13 @@
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/pad/Pad.h>
 #include <dolphin/vi/vi.h>
+#include <sysdolphin/baselib/baselib_unknown_002.h>
+#include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/initialize.h>
+#include <sysdolphin/baselib/rumble.h>
+#include <sysdolphin/baselib/sislib.h>
+#include <sysdolphin/baselib/video.h>
 #include <melee/db/db_unknown_001.h>
 #include <melee/gm/code_801601C4.h>
 #include <melee/gm/gmmain_lib.h>
@@ -21,14 +29,6 @@
 #include <melee/lb/lbtime.h>
 #include <melee/lb/lbunknown_005.h>
 #include <melee/text_2.h>
-#include <placeholder.h>
-#include <sysdolphin/baselib/baselib_unknown_002.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/initialize.h>
-#include <sysdolphin/baselib/rumble.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/video.h>
 
 extern bool lbl_804D6B20;
 extern u16 lbl_804D6B30; // debug flags
@@ -119,12 +119,12 @@ static void gmMain_8015FDA4(void)
 
 static inline void init_spr_unk(void)
 {
-#define MTSPR(spr, val)                                                        \
-    asm { li r3, val }                                                         \
-    asm                                                                        \
-    {                                                                          \
-        oris r3, r3, val                                                       \
-    }                                                                          \
+#define MTSPR(spr, val)                                                       \
+    asm { li r3, val }                                                        \
+    asm                                                                       \
+    {                                                                         \
+        oris r3, r3, val                                                      \
+    }                                                                         \
     asm { mtspr spr, r3 }
 
     MTSPR(0x392, 4);

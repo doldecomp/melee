@@ -1,15 +1,14 @@
-#include <dolphin/os/OSInterrupt.h>
-
+#include <placeholder.h>
+#include <string.h>
 #include <dolphin/ai/ai.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInit.h>
+#include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSThread.h>
 #include <MetroTRK/intrinsics.h>
-#include <placeholder.h>
-#include <string.h>
 
 static OSInterruptHandler* InterruptHandlerTable;
 
@@ -106,7 +105,8 @@ OSInterruptHandler __OSGetInterruptHandler(__OSInterrupt id)
     return InterruptHandlerTable[id];
 }
 
-static void ExternalInterruptHandler(OSException exception, OSContext* context);
+static void ExternalInterruptHandler(OSException exception,
+                                     OSContext* context);
 
 extern volatile struct {
     u32 x0;
@@ -140,16 +140,21 @@ u32 SetInterruptMask(OSInterruptMask mask, OSInterruptMask current)
     case OS_INTR_MEM_3:
     case OS_INTR_MEM_ADDRESS:
         reg = 0;
-        if (!(current & OS_INTRMASK_MEM_0))
+        if (!(current & OS_INTRMASK_MEM_0)) {
             reg |= 0x1;
-        if (!(current & OS_INTRMASK_MEM_1))
+        }
+        if (!(current & OS_INTRMASK_MEM_1)) {
             reg |= 0x2;
-        if (!(current & OS_INTRMASK_MEM_2))
+        }
+        if (!(current & OS_INTRMASK_MEM_2)) {
             reg |= 0x4;
-        if (!(current & OS_INTRMASK_MEM_3))
+        }
+        if (!(current & OS_INTRMASK_MEM_3)) {
             reg |= 0x8;
-        if (!(current & OS_INTRMASK_MEM_ADDRESS))
+        }
+        if (!(current & OS_INTRMASK_MEM_ADDRESS)) {
             reg |= 0x10;
+        }
         __MEMRegs[0x0000000e] = (u16) reg;
         mask &= ~OS_INTRMASK_MEM;
         break;
@@ -158,20 +163,24 @@ u32 SetInterruptMask(OSInterruptMask mask, OSInterruptMask current)
     case OS_INTR_DSP_DSP:
         reg = __DSPRegs[0x00000005];
         reg &= ~0x1F8;
-        if (!(current & OS_INTRMASK_DSP_AI))
+        if (!(current & OS_INTRMASK_DSP_AI)) {
             reg |= 0x10;
-        if (!(current & OS_INTRMASK_DSP_ARAM))
+        }
+        if (!(current & OS_INTRMASK_DSP_ARAM)) {
             reg |= 0x40;
-        if (!(current & OS_INTRMASK_DSP_DSP))
+        }
+        if (!(current & OS_INTRMASK_DSP_DSP)) {
             reg |= 0x100;
+        }
         __DSPRegs[0x00000005] = (u16) reg;
         mask &= ~OS_INTRMASK_DSP;
         break;
     case OS_INTR_AI_AI:
         reg = __AIRegs[0];
         reg &= ~0x2C;
-        if (!(current & OS_INTRMASK_AI_AI))
+        if (!(current & OS_INTRMASK_AI_AI)) {
             reg |= 0x4;
+        }
         __AIRegs[0] = reg;
         mask &= ~OS_INTRMASK_AI;
         break;
@@ -180,12 +189,15 @@ u32 SetInterruptMask(OSInterruptMask mask, OSInterruptMask current)
     case OS_INTR_EXI_0_EXT:
         reg = __EXIRegs[0][0];
         reg &= ~0x2C0F;
-        if (!(current & OS_INTRMASK_EXI_0_EXI))
+        if (!(current & OS_INTRMASK_EXI_0_EXI)) {
             reg |= 0x1;
-        if (!(current & OS_INTRMASK_EXI_0_TC))
+        }
+        if (!(current & OS_INTRMASK_EXI_0_TC)) {
             reg |= 0x4;
-        if (!(current & OS_INTRMASK_EXI_0_EXT))
+        }
+        if (!(current & OS_INTRMASK_EXI_0_EXT)) {
             reg |= 0x400;
+        }
         __EXIRegs[0][0] = reg;
         mask &= ~OS_INTRMASK_EXI_0;
         break;
@@ -194,12 +206,15 @@ u32 SetInterruptMask(OSInterruptMask mask, OSInterruptMask current)
     case OS_INTR_EXI_1_EXT:
         reg = __EXIRegs[1][0];
         reg &= ~0xC0F;
-        if (!(current & OS_INTRMASK_EXI_1_EXI))
+        if (!(current & OS_INTRMASK_EXI_1_EXI)) {
             reg |= 0x1;
-        if (!(current & OS_INTRMASK_EXI_1_TC))
+        }
+        if (!(current & OS_INTRMASK_EXI_1_TC)) {
             reg |= 0x4;
-        if (!(current & OS_INTRMASK_EXI_1_EXT))
+        }
+        if (!(current & OS_INTRMASK_EXI_1_EXT)) {
             reg |= 0x400;
+        }
         __EXIRegs[1][0] = reg;
         mask &= ~OS_INTRMASK_EXI_1;
         break;
@@ -207,10 +222,12 @@ u32 SetInterruptMask(OSInterruptMask mask, OSInterruptMask current)
     case OS_INTR_EXI_2_TC:
         reg = __EXIRegs[2][0];
         reg &= ~0xF;
-        if (!(current & OS_INTRMASK_EXI_2_EXI))
+        if (!(current & OS_INTRMASK_EXI_2_EXI)) {
             reg |= 0x1;
-        if (!(current & OS_INTRMASK_EXI_2_TC))
+        }
+        if (!(current & OS_INTRMASK_EXI_2_TC)) {
             reg |= 0x4;
+        }
         __EXIRegs[2][0] = reg;
         mask &= ~OS_INTRMASK_EXI_2;
         break;
@@ -315,76 +332,103 @@ void __OSDispatchInterrupt(OSException exception, OSContext* context)
 
     if (intsr & 0x00000080) {
         reg = __MEMRegs[15];
-        if (reg & 0x1)
+        if (reg & 0x1) {
             cause |= OS_INTRMASK_MEM_0;
-        if (reg & 0x2)
+        }
+        if (reg & 0x2) {
             cause |= OS_INTRMASK_MEM_1;
-        if (reg & 0x4)
+        }
+        if (reg & 0x4) {
             cause |= OS_INTRMASK_MEM_2;
-        if (reg & 0x8)
+        }
+        if (reg & 0x8) {
             cause |= OS_INTRMASK_MEM_3;
-        if (reg & 0x10)
+        }
+        if (reg & 0x10) {
             cause |= OS_INTRMASK_MEM_ADDRESS;
+        }
     }
 
     if (intsr & 0x00000040) {
         reg = __DSPRegs[5];
-        if (reg & 0x8)
+        if (reg & 0x8) {
             cause |= OS_INTRMASK_DSP_AI;
-        if (reg & 0x20)
+        }
+        if (reg & 0x20) {
             cause |= OS_INTRMASK_DSP_ARAM;
-        if (reg & 0x80)
+        }
+        if (reg & 0x80) {
             cause |= OS_INTRMASK_DSP_DSP;
+        }
     }
 
     if (intsr & 0x00000020) {
         reg = __AIRegs[0];
-        if (reg & 0x8)
+        if (reg & 0x8) {
             cause |= OS_INTRMASK_AI_AI;
+        }
     }
 
     if (intsr & 0x00000010) {
         reg = __EXIRegs[0][0];
-        if (reg & 0x2)
+        if (reg & 0x2) {
             cause |= OS_INTRMASK_EXI_0_EXI;
-        if (reg & 0x8)
+        }
+        if (reg & 0x8) {
             cause |= OS_INTRMASK_EXI_0_TC;
-        if (reg & 0x800)
+        }
+        if (reg & 0x800) {
             cause |= OS_INTRMASK_EXI_0_EXT;
+        }
         reg = __EXIRegs[1][0];
-        if (reg & 0x2)
+        if (reg & 0x2) {
             cause |= OS_INTRMASK_EXI_1_EXI;
-        if (reg & 0x8)
+        }
+        if (reg & 0x8) {
             cause |= OS_INTRMASK_EXI_1_TC;
-        if (reg & 0x800)
+        }
+        if (reg & 0x800) {
             cause |= OS_INTRMASK_EXI_1_EXT;
+        }
         reg = __EXIRegs[2][0];
-        if (reg & 0x2)
+        if (reg & 0x2) {
             cause |= OS_INTRMASK_EXI_2_EXI;
-        if (reg & 0x8)
+        }
+        if (reg & 0x8) {
             cause |= OS_INTRMASK_EXI_2_TC;
+        }
     }
 
-    if (intsr & 0x00002000)
+    if (intsr & 0x00002000) {
         cause |= OS_INTRMASK_PI_HSP;
-    if (intsr & 0x00001000)
+    }
+    if (intsr & 0x00001000) {
         cause |= OS_INTRMASK_PI_DEBUG;
-    if (intsr & 0x00000400)
+    }
+    if (intsr & 0x00000400) {
         cause |= OS_INTRMASK_PI_PE_FINISH;
-    if (intsr & 0x00000200)
+    }
+    if (intsr & 0x00000200) {
         cause |= OS_INTRMASK_PI_PE_TOKEN;
-    if (intsr & 0x00000100)
+    }
+    if (intsr & 0x00000100) {
         cause |= OS_INTRMASK_PI_VI;
-    if (intsr & 0x00000008)
+    }
+    if (intsr & 0x00000008) {
         cause |= OS_INTRMASK_PI_SI;
-    if (intsr & 0x00000004)
+    }
+    if (intsr & 0x00000004) {
         cause |= OS_INTRMASK_PI_DI;
-    if (intsr & 0x00000002)
+    }
+    if (intsr & 0x00000002) {
         cause |= OS_INTRMASK_PI_RSW;
-    if (intsr & 0x00000800)
+    }
+    if (intsr & 0x00000800) {
         cause |= OS_INTRMASK_PI_CP;
-    if (intsr & 0x00000001)
+    }
+    if (intsr & 0x00000001) {
         cause |= OS_INTRMASK_PI_ERROR;
+    }
 
     unmasked = cause & ~(*(OSInterruptMask*) OSPhysicalToCached(0x00C4) |
                          *(OSInterruptMask*) OSPhysicalToCached(0x00C8));
