@@ -1,99 +1,151 @@
+use ahash::AHashMap;
 use anyhow::{Context, Result};
-use clap::Parser;
-use goblin::{elf::Elf, elf32::sym::STB_LOCAL};
-use lazy_static::lazy_static;
-use melee_utils::{replace, walk_src};
-use regex::{Regex, RegexBuilder};
-use std::{fs::File, io::Read, path::PathBuf, usize};
+use cwparse::map::{self, hex, Identifier, Line, Origin};
+use dashmap::DashSet;
+use itertools::Itertools;
+use log::{debug, error, info};
+use melee_utils::{replace, ROOT};
+use memmap2::Mmap;
+use nom::{
+    character::complete::{alphanumeric1, char},
+    combinator::all_consuming,
+    error::{FromExternalError, ParseError},
+    sequence::{pair, preceded},
+    IResult,
+};
+use rayon::{
+    prelude::{
+        IndexedParallelIterator, IntoParallelIterator,
+        IntoParallelRefIterator, ParallelIterator,
+    },
+    str::ParallelString,
+};
+use regex::RegexBuilder;
+use std::{fs::File, num::ParseIntError, str};
 
-#[derive(Parser)]
-#[command(author, version, about, long_about = None)]
-struct Args {
-    elf: PathBuf,
-}
-
-lazy_static! {
-    static ref UNK_FUNC_RE: Regex = Regex::new(r"^\w+_80([[:xdigit:]]{6})$")
-        .expect("Failed to parse UNK_FUNC_RE.");
+fn anon_func<'a, E>(input: &'a str) -> IResult<&'a str, u32, E>
+where
+    E: ParseError<&'a str> + FromExternalError<&'a str, ParseIntError>,
+{
+    all_consuming(preceded(pair(alphanumeric1, char('_')), hex(8)))(input)
 }
 
 fn main() -> Result<()> {
-    env_logger::builder().format_timestamp_nanos().init();
-    let args = Args::parse();
+    env_logger::try_init()?;
 
-    let mut elf_file =
-        File::open(&args.elf).context("Failed to open ELF file")?;
+    let path = &*ROOT.join("build/ssbm.us.1.2/GALE01.map");
+    let file = File::open(path).context("Failed to open the map file.")?;
+    let mmap = unsafe { Mmap::map(&file) }
+        .context("Failed to create the memory map.")?;
+    let input = str::from_utf8(mmap.as_ref())
+        .context("Failed to convert to UTF-8.")?;
+    let lines = input
+        .par_lines()
+        .map(|line| map::line::<()>(line).map(|line| line.1))
+        .collect::<Result<Vec<_>, _>>()
+        .context("Failed to parse lines.")?;
 
-    let mut elf_data = Vec::new();
-    elf_file
-        .read_to_end(&mut elf_data)
-        .context("Failed to read ELF file")?;
+    let asm_files = glob::glob(
+        &*ROOT
+            .join("asm/**/*.s")
+            .to_str()
+            .context("Failed to create the glob.")?,
+    )?
+    .into_iter()
+    .map(|res| {
+        res.context("Failed to get a path from the glob.")
+            .map(|path| {
+                let name = path
+                    .file_name()
+                    .context("Failed to get a filename from the path.")?
+                    .to_string_lossy()
+                    .to_string()
+                    .clone();
 
-    let elf = Elf::parse(&elf_data).context("Failed to parse ELF file")?;
+                Ok((name, path))
+            })?
+    })
+    .collect::<Result<AHashMap<_, _>>>()?;
 
-    let text_section = elf
-        .section_headers
-        .iter()
-        .filter(|sh| {
-            let name = elf.shdr_strtab.get_at(sh.sh_name);
-            name == Some(".text")
+    let to_rename = lines
+        .par_iter()
+        .filter_map(|line| {
+            use cwparse::tree::*;
+
+            match line {
+                Line::TreeNode(Node {
+                    data:
+                        Data::Object(
+                            Identifier::Named { name, .. },
+                            Specifier {
+                                scope: Scope::Local,
+                                origin: Origin { obj, .. },
+                                ..
+                            },
+                        ),
+                    ..
+                }) if obj.ends_with(".s.o") => {
+                    if let Ok(("", virt_addr)) = anon_func::<()>(name) {
+                        Some((&obj[0..obj.len() - 2], *name, virt_addr))
+                    } else {
+                        None
+                    }
+                }
+                _ => None,
+            }
         })
-        .next()
-        .context("Failed to find the text section.")?;
+        .collect::<DashSet<_, ahash::RandomState>>();
 
-    let text_range =
-        (text_section.sh_addr + 0xA0B8)..(text_section.sh_addr + 0xFF74);
+    info!("found {} symbols to replace", to_rename.len());
 
-    let regex = RegexBuilder::new(&format!(r"\b\w+_80({})\b", {
-        let vec = elf
-            .syms
-            .iter()
-            .filter(|sym| {
-                text_range.contains(&sym.st_value)
-                    && sym.st_bind() == STB_LOCAL
-            })
-            .map(|sym| {
-                let name = elf
-                    .strtab
-                    .get_at(sym.st_name)
-                    .context("Failed to get the symbol name.")?
-                    .to_owned();
-
-                Ok(name)
-            })
-            .filter_map(|res| {
-                res.and_then(|name| {
-                    UNK_FUNC_RE
-                        .captures(&name)
-                        .map(|capture| {
-                            capture
-                                .get(1)
-                                .map(|group| group.as_str().to_owned())
-                                .context(
-                                    "Failed to get the first capture group \
-                                            from UNK_FUNC_RE.",
-                                )
-                        })
-                        .transpose()
-                })
-                .transpose()
-            })
-            .collect::<Result<Vec<_>>>()?;
-        assert!(vec.len() > 0);
-        vec.join("|")
-    }))
-    .size_limit(usize::MAX)
-    .build()?;
-
-    // println!("{regex:?}");
-    for path in walk_src()?
+    let replacements = to_rename
         .into_iter()
-        .filter(|p| p.extension().map(|e| e.to_str()).flatten() == Some("s"))
-    {
-        // TODO They are local symbols so we can just replace per file
-        // replace(&regex, ".L$1", &path)?;
-        println!("{path:?}");
+        .sorted_by(|(a, _, _), (b, _, _)| a.cmp(b))
+        .group_by(|(file, _, _)| *file)
+        .into_iter()
+        .map(|(key, group)| {
+            let path = asm_files
+                .get(key)
+                .context("Failed to find asm file.")?
+                .as_path();
+
+            let addrs = group
+                .map(|(_, name, addr)| {
+                    debug!("Found {} in {:#?}.", &name, &path);
+                    format!("{:8X}", addr)
+                })
+                .into_iter()
+                .join("|");
+
+            let pattern = format!(r"\b(?:[[:alnum:]]+)_({})\b", addrs);
+            Ok((pattern, path))
+        })
+        .collect::<Result<Vec<_>>>()?;
+
+    let total = replacements.len();
+    info!("replacing in {} files", total);
+
+    let mut results = Vec::<Result<()>>::with_capacity(total);
+
+    replacements
+        .into_par_iter()
+        .map(|(pattern, path)| {
+            const LIMIT: usize = 1 << 22; // 4 MiB
+
+            let re = RegexBuilder::new(&pattern).size_limit(LIMIT).build()?;
+            replace(&re, r".L_$1", path)
+        })
+        .collect_into_vec(&mut results);
+
+    let mut errors: usize = 0;
+    for res in results {
+        if let Err(err) = res {
+            error!("{}", err);
+            errors += 1;
+        }
     }
+
+    info!("{} succeeded; {} failed", total - errors, errors);
 
     Ok(())
 }
