@@ -7,5 +7,5 @@ members = [
     "tools/issues",
     "tools/replace-module",
     "tools/replace-symbols",
-    "tools/rust-utils"
+    "tools/rust-utils",
 ]
