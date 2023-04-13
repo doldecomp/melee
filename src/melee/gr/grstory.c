@@ -1,18 +1,21 @@
+#include "gr/grstory.h"
+
+#include "gr/granime.h"
+#include "gr/grdisplay.h"
+#include "gr/grlib.h"
+#include "gr/grmaterial.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "it/it_26B1.h"
+#include "it/it_27CF.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+
+#include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/random.h>
-#include <melee/gr/granime.h>
-#include <melee/gr/grdisplay.h>
-#include <melee/gr/grlib.h>
-#include <melee/gr/grmaterial.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grstory.h>
-#include <melee/gr/grzakogenerator.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/random.h>
 
 extern StageInfo stage_info;
 

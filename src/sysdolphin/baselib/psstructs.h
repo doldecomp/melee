@@ -4,8 +4,8 @@
 #include <platform.h>
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/archive.h>
+#include <baselib/jobj.h>
 
 typedef unk_t HSD_PSAppSRT;
 

@@ -2,11 +2,11 @@
 
 #include "ftMasterHand_03.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftlib.h"
-#include "it/code_8027CF30.h"
-#include "lb/lbunknown_001.h"
+#include "it/it_27CF.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
 // 80153000 14FBE0

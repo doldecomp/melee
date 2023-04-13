@@ -2,14 +2,14 @@
 
 #include "ftlink.h"
 
-#include "ft/code_80081B38.h"
 #include "ft/fighter.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
-#include "ftCLink/ftclink.h"
+#include "ftCLink/ftCLink_Init.h"
 #include "lb/lbmthp.h"
 
 ActionState ftLink_MotionStateTable[] = {
@@ -93,9 +93,9 @@ int lbl_803C82EC[31] = { 0 };
 
 Vec3 const lbl_803B7520[3] = { 0 };
 
-bool ftLink_800EAD64(HSD_GObj* fighter_gobj)
+bool ftLink_800EAD64(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->ev.lk.x2234) {
         return true;
@@ -104,13 +104,13 @@ bool ftLink_800EAD64(HSD_GObj* fighter_gobj)
     return false;
 }
 
-void ftLink_OnDeath(HSD_GObj* fighter_gobj)
+void ftLink_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    ftParts_80074A4C(fighter_gobj, 0, 0);
-    ftParts_80074A4C(fighter_gobj, 1, 0);
-    ftParts_80074A4C(fighter_gobj, 2, 0);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
+    ftParts_80074A4C(gobj, 2, 0);
 
     fp->ev.lk.x222C = 0;
     fp->ev.lk.x2234 = 0;
@@ -126,9 +126,9 @@ void ftLink_OnLoadForCLink(Fighter* fp)
     PUSH_ATTRS(fp, ftLinkAttributes);
 }
 
-void ftLink_OnLoad(HSD_GObj* fighter_gobj)
+void ftLink_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
     void** item_list = fp->x10C_ftData->x48_items;
     link_attr->x54 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x48U));
@@ -148,48 +148,48 @@ void ftLink_800EAF38(void)
     ftLink_800EC06C();
 }
 
-void ftLink_800EAF58(HSD_GObj* fighter_gobj)
+void ftLink_800EAF58(HSD_GObj* gobj)
 {
     ftLink_800EC06C();
-    ft_800D94D8(fighter_gobj);
-    ftLink_800ECD04(fighter_gobj);
-    ftLink_800ECD58(fighter_gobj);
-    ftCLink_80149268(fighter_gobj);
+    ft_800D94D8(gobj);
+    ftLink_800ECD04(gobj);
+    ftLink_800ECD58(gobj);
+    ftCLink_80149268(gobj);
 }
 
-void ftLink_OnItemPickupExt(HSD_GObj* fighter_gobj, int arg1)
+void ftLink_OnItemPickupExt(HSD_GObj* gobj, int arg1)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (it_8026B2B4(fp->x1974_heldItem) == 1) {
-        ftParts_80074A4C(fighter_gobj, 1, 1);
+        ftParts_80074A4C(gobj, 1, 1);
     }
-    ftParts_80074A4C(fighter_gobj, 2, 1);
-    ftLink_OnItemPickup(fighter_gobj, arg1);
+    ftParts_80074A4C(gobj, 2, 1);
+    ftLink_OnItemPickup(gobj, arg1);
 }
 
-void ftLink_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftLink_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftLink_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftLink_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftLink_OnItemDropExt(HSD_GObj* fighter_gobj, bool arg1)
+void ftLink_OnItemDropExt(HSD_GObj* gobj, bool arg1)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (it_8026B2B4(fp->x1974_heldItem) == 1) {
-        ftParts_80074A4C(fighter_gobj, 1, 0);
+        ftParts_80074A4C(gobj, 1, 0);
     }
-    ftParts_80074A4C(fighter_gobj, 2, 0);
-    ftLink_OnItemDrop(fighter_gobj, arg1);
+    ftParts_80074A4C(gobj, 2, 0);
+    ftLink_OnItemDrop(gobj, arg1);
 }
 
-void ftLink_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftLink_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
 void ftLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
@@ -202,29 +202,29 @@ void ftLink_OnItemDrop(HSD_GObj* gobj, bool bool1)
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftLink_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftLink_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftLinkAttributes);
+    COPY_ATTRS(gobj, ftLinkAttributes);
     if (fp->x34_scale.y != 1.0f) {
         sA2->x28 *= fp->x34_scale.y;
     }
 }
 
-void ftLink_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftLink_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftLink_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftLink_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftLink_800EB334(HSD_GObj* fighter_gobj)
+void ftLink_800EB334(HSD_GObj* gobj)
 {
     f32 new_ground_vel;
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftLinkAttributes* link_attr = fp->x10C_ftData->ext_attr;
 
     f32 resultf = ft_80092ED8(fp->x19A4, link_attr, link_attr->xD8);

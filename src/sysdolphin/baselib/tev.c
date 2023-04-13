@@ -1,6 +1,6 @@
 #include <placeholder.h>
 #include <dolphin/gx/GXLight.h>
-#include <sysdolphin/baselib/tev.h>
+#include <baselib/tev.h>
 
 extern void* lbl_80405B98;
 

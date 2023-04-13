@@ -3,7 +3,7 @@
 #include "types.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
@@ -110,9 +110,9 @@ void ftPikachu_OnLoadForPichu(Fighter* fp)
     PUSH_ATTRS(fp, ftPikachuAttributes);
 }
 
-void ftPikachu_OnLoad(HSD_GObj* fighter_gobj)
+void ftPikachu_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftPikachuAttributes);
@@ -125,73 +125,73 @@ void ftPikachu_OnLoad(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftPikachu_OnDeath(HSD_GObj* fighter_gobj)
+void ftPikachu_OnDeath(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    ftParts_80074A4C(fighter_gobj, 0, 0);
-    ftParts_80074A4C(fighter_gobj, 1, 0);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
 }
 
-void ftPikachu_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftPikachu_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);
+    Fighter_OnItemPickup(gobj, bool, 0, 0);
 }
 
-void ftPikachu_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftPikachu_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 0);
+    Fighter_OnItemInvisible(gobj, 0);
 }
 
-void ftPikachu_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftPikachu_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 0);
+    Fighter_OnItemVisible(gobj, 0);
 }
 
-void ftPikachu_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
+void ftPikachu_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(fighter_gobj, bool1, 0, 0);
+    Fighter_OnItemDrop(gobj, bool1, 0, 0);
 }
 
-void ftPikachu_8012467C(HSD_GObj* fighter_gobj)
-{
-    /// @todo Unused stack.
-#ifdef MUST_MATCH
-    u8 _[8];
-#endif
-
-    ftParts_80074A4C(fighter_gobj, 1, -1);
-    ftParts_80074B0C(fighter_gobj, 1, 0);
-}
-
-void ftPikachu_801246C0(HSD_GObj* fighter_gobj)
+void ftPikachu_8012467C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    ftParts_80074A4C(fighter_gobj, 1, 0);
-    ftParts_80074B0C(fighter_gobj, 1, 0);
+    ftParts_80074A4C(gobj, 1, -1);
+    ftParts_80074B0C(gobj, 1, 0);
 }
 
-void ftPikachu_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftPikachu_801246C0(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftPikachuAttributes);
+    /// @todo Unused stack.
+#ifdef MUST_MATCH
+    u8 _[8];
+#endif
+
+    ftParts_80074A4C(gobj, 1, 0);
+    ftParts_80074B0C(gobj, 1, 0);
+}
+
+void ftPikachu_LoadSpecialAttrs(HSD_GObj* gobj)
+{
+    COPY_ATTRS(gobj, ftPikachuAttributes);
     if (fp->x34_scale.y != 1.0f) {
         SCALE_HEIGHT_ATTRS(6);
     }
 }
 
-void ftPikachu_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftPikachu_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftPikachu_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftPikachu_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(gobj, 1);
 }

@@ -1,9 +1,10 @@
 #ifndef _ftmario_h_
 #define _ftmario_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcommon.h>
+#include "ft/fighter.h"
+#include "ft/ftcommon.h"
+
+#include <baselib/gobj.h>
 
 typedef enum ftMarioAction {
     AS_MARIO_UNK1 = ASID_MAX,

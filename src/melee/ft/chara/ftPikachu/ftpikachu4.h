@@ -2,8 +2,8 @@
 #define MELEE_FT_CHARA_FTPIKACHU_FTPIKACHU4_H
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
-bool ftPikachu_GetBool(HSD_GObj* fighter_gobj);
+bool ftPikachu_GetBool(HSD_GObj* gobj);
 
 #endif

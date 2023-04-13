@@ -1,17 +1,19 @@
 #include <platform.h>
 
+#include "ft/ftdrawcommon.h"
+
+#include "ft/fighter.h"
+#include "ft/ftcommon.h"
+#include "ft/ftdata.h"
+#include "ft/ftlib.h"
+
 #include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/state.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftdrawcommon.h>
-#include <melee/ft/ftlib.h>
+#include <baselib/cobj.h>
+#include <baselib/debug.h>
+#include <baselib/jobj.h>
+#include <baselib/state.h>
 
 #ifdef MWERKS_GEKKO
 static char lbl_803C0EB0[] = "translate";

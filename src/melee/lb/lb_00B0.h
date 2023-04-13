@@ -1,9 +1,10 @@
 #ifndef _code_8000B074_h_
 #define _code_8000B074_h_
 
+#include "sc/scene.h"
+
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <melee/sc/scene.h>
+#include <baselib/jobj.h>
 
 bool lb_8000B074(HSD_JObj*);
 bool lb_8000B09C(HSD_JObj*);

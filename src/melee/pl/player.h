@@ -3,9 +3,11 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <melee/pl/types.h>
+#include "pl/types.h"
+
+#include <dolphin/mtx/types.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 typedef struct _StaticPlayer {
     /// @at{0} @sz{4}
@@ -181,9 +183,9 @@ bool Player_8003221C(int slot);
 s32 Player_GetPlayerState(s32 slot);
 enum_t Player_GetPlayerCharacter(int slot);
 void Player_SetPlayerCharacter(s32 slot, s32 value);
-s32 Player_GetPlayerSlotType(s32 slot);
+enum_t Player_GetPlayerSlotType(s32 slot);
 s32 Player_8003248C(s32 slot, bool arg1);
-void Player_SetSlottype(s32 slot, s32 value);
+void Player_SetSlottype(s32 slot, enum_t value);
 s8 Player_800325C8(s32 slot, bool b);
 s8 Player_80032610(s32 slot, bool arg1);
 void Player_LoadPlayerCoords(s32 slot, Vec3* out_vec);
@@ -325,8 +327,6 @@ void Player_80036E20(s32 arg0, s32 arg1, s32 arg2);
 s32 Player_80036EA0(s32 slot);
 void Player_80036F34(s32 slot, s32 arg1);
 void Player_80037054(s32 slot, s32 arg1);
-s32 Player_GetPlayerSlotType(s32);
-
 void Player_SetOtherStamina(s32 slot, s32 stamina);
 void Player_SetFlagsAEBit0(s32 slot, u8 bit0);
 s32 Player_80033BB8(int slot);

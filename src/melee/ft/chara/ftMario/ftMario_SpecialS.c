@@ -2,14 +2,13 @@
 
 #include "ftmario.h"
 
-#include "ft/code_80081B38.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
-#include "it/code_8027CF30.h"
-#include "it/itkind.h"
-#include "lb/lbunknown_001.h"
-#include "lb/lbunknown_003.h"
+#include "it/it_27CF.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 
 #include <baselib/random.h>
 

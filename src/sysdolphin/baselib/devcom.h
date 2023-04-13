@@ -2,9 +2,9 @@
 #define SYSDOLPHIN_BASELIB_DEVCOM_H
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
-#include <sysdolphin/baselib/archive.h>
+#include <baselib/archive.h>
 
 void HSD_DevComRequest(int, int, HSD_Archive*, int, int, int,
                        HSD_DevComCallback, int);

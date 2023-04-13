@@ -1,9 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTDONKEY_FTDONKEY_H
 #define MELEE_FT_CHARA_FTDONKEY_FTDONKEY_H
 
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftwalkcommon.h>
-#include <melee/lb/lbvector.h>
+#include "ft/ftcommon.h"
+#include "ft/ftwalkcommon.h"
+#include "lb/lbvector.h"
 
 typedef struct _ftDonkeyAttributes {
     s32 action_state;
@@ -61,29 +61,29 @@ typedef struct _ftDonkeyAttributes {
 
 } ftDonkeyAttributes;
 
-void ftDonkey_800DF980(HSD_GObj* fighter_gobj);
+void ftDonkey_800DF980(HSD_GObj* gobj);
 
-bool ftDonkey_800DFA98(HSD_GObj* fighter_gobj);
+bool ftDonkey_800DFA98(HSD_GObj* gobj);
 
-void ftDonkey_800DFAE4(HSD_GObj* fighter_gobj, f32);
-void ftDonkey_800DFB54(HSD_GObj* fighter_gobj);
+void ftDonkey_800DFAE4(HSD_GObj* gobj, f32);
+void ftDonkey_800DFB54(HSD_GObj* gobj);
 
-void ftDonkey_800E017C(HSD_GObj* fighter_gobj);
-void ftDonkey_800E0294(HSD_GObj* fighter_gobj);
-void ftDonkey_800E05E4(HSD_GObj* fighter_gobj);
-void ftDonkey_800E07B0(HSD_GObj* fighter_gobj);
+void ftDonkey_800E017C(HSD_GObj* gobj);
+void ftDonkey_800E0294(HSD_GObj* gobj);
+void ftDonkey_800E05E4(HSD_GObj* gobj);
+void ftDonkey_800E07B0(HSD_GObj* gobj);
 
-void ftDonkey_8010D774(HSD_GObj* fighter_gobj);
+void ftDonkey_8010D774(HSD_GObj* gobj);
 
-void ftDonkey_8010DB3C(HSD_GObj* fighter_gobj);
-void ftDonkey_8010DE88(HSD_GObj* fighter_gobj);
-void ftDonkey_8010DFF8(HSD_GObj* fighter_gobj);
+void ftDonkey_8010DB3C(HSD_GObj* gobj);
+void ftDonkey_8010DE88(HSD_GObj* gobj);
+void ftDonkey_8010DFF8(HSD_GObj* gobj);
 
-void ftDonkey_8010E0CC(HSD_GObj* fighter_gobj);
-void ftDonkey_8010E148(HSD_GObj* fighter_gobj);
-void ftDonkey_8010E464(HSD_GObj* fighter_gobj);
-void ftDonkey_8010E4EC(HSD_GObj* fighter_gobj);
+void ftDonkey_8010E0CC(HSD_GObj* gobj);
+void ftDonkey_8010E148(HSD_GObj* gobj);
+void ftDonkey_8010E464(HSD_GObj* gobj);
+void ftDonkey_8010E4EC(HSD_GObj* gobj);
 
-void ftDonkey_DestroyAllEffects(HSD_GObj* fighter_gobj);
+void ftDonkey_DestroyAllEffects(HSD_GObj* gobj);
 
 #endif

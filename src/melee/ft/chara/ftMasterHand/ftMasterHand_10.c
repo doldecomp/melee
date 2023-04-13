@@ -3,7 +3,7 @@
 #include "ftMasterHand_03.h"
 #include "ftMasterHand_09.h"
 
-#include "ft/code_80081B38.h"
+#include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 
 // 80152138 14ED18

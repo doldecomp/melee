@@ -3,7 +3,7 @@
 
 #include <platform.h>
 #include <dolphin/gx/forward.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
 void HSD_StateSetZMode(u32, u32, u32);
 void HSD_StateInvalidate(s32);

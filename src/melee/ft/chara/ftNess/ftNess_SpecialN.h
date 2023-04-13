@@ -2,7 +2,7 @@
 #define MELEE_FT_CHARA_FTNESS_FTNESS_SPECIALN_H
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
 void ftNess_ItemPKFlushSetNULL(HSD_GObj*);
 

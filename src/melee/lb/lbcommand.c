@@ -1,5 +1,6 @@
-#include <melee/lb/lbbgflash.h>
-#include <melee/lb/lbcommand.h>
+#include "lb/lbcommand.h"
+
+#include "lb/lbbgflash.h"
 
 extern const f64 lbl_804D79E0;
 

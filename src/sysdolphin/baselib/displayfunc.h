@@ -1,8 +1,8 @@
 #ifndef INCLUDE_SYSDOLPHIN_BASELIB_DISPLAYFUNC_H
 #define INCLUDE_SYSDOLPHIN_BASELIB_DISPLAYFUNC_H
 
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/objalloc.h>
+#include <baselib/jobj.h>
+#include <baselib/objalloc.h>
 
 void _HSD_DispForgetMemory(any_t low, any_t high);
 void HSD_ZListInitAllocData(void);

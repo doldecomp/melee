@@ -2,9 +2,9 @@
 #define _gobj_h_
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
-#include <sysdolphin/baselib/objalloc.h>
+#include <baselib/objalloc.h>
 
 #define HSD_GOBJ_GXLINK_NONE ((u8) 0xFF)
 #define HSD_GOBJ_OBJ_NONE 0xFF

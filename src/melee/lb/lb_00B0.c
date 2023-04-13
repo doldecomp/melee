@@ -1,15 +1,18 @@
+#include "lb/lb_00B0.h"
+
+#include "sc/scene.h"
+
 #include <placeholder.h>
 #include <dolphin/mtx/mtxvec.h>
-#include <sysdolphin/baselib/aobj.h>
-#include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/pobj.h>
-#include <sysdolphin/baselib/quatlib.h>
-#include <sysdolphin/baselib/robj.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/sc/scene.h>
+#include <dolphin/mtx/types.h>
+#include <baselib/aobj.h>
+#include <baselib/dobj.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
+#include <baselib/mobj.h>
+#include <baselib/pobj.h>
+#include <baselib/quatlib.h>
+#include <baselib/robj.h>
 
 static s32 lbl_803B9FC0[] = { 14, 14, 14, 14, 2, 4, 6, 0 };
 static s32 lbl_803B9FE0[] = { 12, 13, 14, 15 };

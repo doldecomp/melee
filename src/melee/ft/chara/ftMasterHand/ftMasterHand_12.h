@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 /// 12 Ground Slap
 void ftMasterHand_801526D8(HSD_GObj* gobj);

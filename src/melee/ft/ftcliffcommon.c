@@ -1,13 +1,14 @@
 #include <platform.h>
 
-#include <melee/ef/efasync.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/mp/mplib.h>
-#include <melee/pl/pl_unknown_001.h>
+#include "ft/ftcliffcommon.h"
+
+#include "ef/efasync.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcamera.h"
+#include "ft/ftcommon.h"
+#include "mp/mplib.h"
+#include "pl/pl_0371.h"
 
 bool ftCliffCommon_80081298(HSD_GObj* gobj)
 {

@@ -12,11 +12,11 @@ The goal of this repo is to **write C code that, after being compiled, matches t
 The details for what produces these different artifacts is out-of-scope. Here’s what some Melee C code looks like ([link](https://github.com/doldecomp/melee/blob/0b3f4aeebc17d8e9c3d8ea792d8d8e412c2ad436/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c#L15-L21)):
 
 ```c
-void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* fighter_gobj)
+void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    ftMewtwo_SpecialHi_SetStartGFX(fighter_gobj);
+    ftMewtwo_SpecialHi_SetStartGFX(gobj);
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 ```
@@ -73,7 +73,7 @@ temp_r31 = *((s32 *) ((u8 *) arg0 + 0x2c))
 …while this accomplishes the goal of getting a 100% match (you could pretty much do every memory access and set like this), we actually can guess what `arg0` is in this case because of the file it’s in. You can do some digging yourself, but that line ends up translating to something like:
 
 ```c
-Fighter* fp = GET_FIGHTER(fighter_gobj);
+Fighter* fp = GET_FIGHTER(gobj);
 ```
 
 ## What was going on with the Context?

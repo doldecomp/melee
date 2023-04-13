@@ -1,19 +1,21 @@
+#include "ft/ftparts.h"
+
+#include "ft/fighter.h"
+#include "ft/ftanim.h"
+#include "ft/ftdata.h"
+#include "lb/lbrefract.h"
+
 #include <placeholder.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/displayfunc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/perf.h>
-#include <sysdolphin/baselib/pobj.h>
-#include <sysdolphin/baselib/util.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftparts.h>
-#include <melee/lb/lbrefract.h>
+#include <baselib/displayfunc.h>
+#include <baselib/jobj.h>
+#include <baselib/mobj.h>
+#include <baselib/mtx.h>
+#include <baselib/perf.h>
+#include <baselib/pobj.h>
+#include <baselib/util.h>
 
 #define MAX_FT_PARTS 140
 
@@ -2749,7 +2751,7 @@ void ftParts_800755E8(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ftParts_80075650(HSD_GObj* fighter_gobj, HSD_JObj*, u32*)
+asm void ftParts_80075650(HSD_GObj* gobj, HSD_JObj*, u32*)
 { // clang-format off
     nofralloc
 /* 80075650 00072230  7C 08 02 A6 */	mflr r0
@@ -2916,7 +2918,7 @@ lbl_80075830:
 
 #else
 
-void ftParts_80075650(HSD_GObj* fighter_gobj, HSD_JObj* arg1, u32* arg2)
+void ftParts_80075650(HSD_GObj* gobj, HSD_JObj* arg1, u32* arg2)
 {
     NOT_IMPLEMENTED;
 }

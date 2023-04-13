@@ -1,10 +1,11 @@
 #ifndef _grtlib_h_
 #define _grtlib_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <melee/gr/stage.h>
-#include <melee/lb/types.h>
+#include "gr/stage.h"
+#include "lb/types.h"
+
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 struct UnkGeneratorStruct* grLib_801C96F8(s32, s8, S32Vec3*);
 void grLib_801C97DC(s32, s32, HSD_JObj*);

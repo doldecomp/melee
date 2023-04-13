@@ -1,9 +1,9 @@
-#include <melee/ft/chara/ftMewtwo/ftmewtwo.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/itkind.h>
+#include "ft/chara/ftMewtwo/ftmewtwo.h"
+
+#include "ft/ft_0877.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState ftMewtwo_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftMewtwo_SpecialNStart_Anim,
@@ -109,9 +109,9 @@ void ftMewtwo_OnDeath(HSD_GObj* gobj)
     fp->ev.mt.x223C_isConfusionBoost = false;
 }
 
-void ftMewtwo_OnLoad(HSD_GObj* fighter_gobj)
+void ftMewtwo_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftMewtwoAttributes);
@@ -124,38 +124,38 @@ void ftMewtwo_OnLoad(HSD_GObj* fighter_gobj)
     it_8026B3F8(item_list[1], It_Kind_Mewtwo_ShadowBall);
 }
 
-void ftMewTwo_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftMewTwo_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
     return;
 }
 
-void ftMewtwo_OnDeath2(HSD_GObj* fighter_gobj)
+void ftMewtwo_OnDeath2(HSD_GObj* gobj)
 {
-    ftMewtwo_SpecialLw_RemoveDisable(fighter_gobj);
-    ftMewtwo_SpecialN_OnTakeDamage(fighter_gobj);
+    ftMewtwo_SpecialLw_RemoveDisable(gobj);
+    ftMewtwo_SpecialN_OnTakeDamage(gobj);
 }
 
-void ftMewtwo_OnTakeDamage(HSD_GObj* fighter_gobj)
+void ftMewtwo_OnTakeDamage(HSD_GObj* gobj)
 {
-    ftMewtwo_SpecialLw_RemoveDisable(fighter_gobj);
-    ftMewtwo_SpecialN_OnDeath(fighter_gobj);
+    ftMewtwo_SpecialLw_RemoveDisable(gobj);
+    ftMewtwo_SpecialN_OnDeath(gobj);
 }
 
-void ftMewTwo_OnItemDrop(HSD_GObj* fighter_gobj, bool bool) {}
+void ftMewTwo_OnItemDrop(HSD_GObj* gobj, bool bool) {}
 
-void ftMewTwo_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftMewTwo_OnItemInvisible(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftMewTwo_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftMewTwo_OnItemVisible(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftMewTwo_80144F58(HSD_GObj* fighter_gobj)
+void ftMewTwo_80144F58(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* attr = fp->x2D4_specialAttributes;
     f32 attr_value = attr->x0_MEWTWO_SHADOWBALL_CHARGE_CYCLES;
 
@@ -164,21 +164,21 @@ void ftMewTwo_80144F58(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftMewTwo_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftMewTwo_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftMewtwoAttributes);
+    COPY_ATTRS(gobj, ftMewtwoAttributes);
     if (fp->x34_scale.y != 1.0f) {
         sA2->x80_MEWTWO_DISABLE_OFFSET_X *= fp->x34_scale.y;
         sA2->x84_MEWTWO_DISABLE_OFFSET_Y *= fp->x34_scale.y;
     }
 }
 
-void ftMewTwo_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftMewTwo_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 2);
+    Fighter_OnKnockbackEnter(gobj, 2);
 }
 
-void ftMewTwo_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftMewTwo_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 2);
+    Fighter_OnKnockbackExit(gobj, 2);
 }

@@ -6,7 +6,7 @@
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "gr/stage.h"
-#include "it/item2.h"
+#include "it/it_26B1.h"
 #include "lb/lbcollision.h"
 #include "lb/lbrefract.h"
 #include "pl/player.h"
@@ -50,15 +50,15 @@
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
 
 /// @deprecated Use #GET_FIGHTER instead.
-static inline Fighter* getFighter(HSD_GObj* fighter_gobj)
+static inline Fighter* getFighter(HSD_GObj* gobj)
 {
-    return fighter_gobj->user_data;
+    return gobj->user_data;
 }
 
 /// @deprecated use #GET_FIGHTER instead.
-static inline Fighter* getFighterPlus(HSD_GObj* fighter_gobj)
+static inline Fighter* getFighterPlus(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     return fp;
 }
 
@@ -113,28 +113,27 @@ static inline f32 stickGetDir(f32 x1, f32 x2)
     }
 }
 /// used for all fighters except Kirby and Purin
-static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
-                                        bool catchItemFlag, bool bool2,
-                                        bool bool3)
+static inline void Fighter_OnItemPickup(HSD_GObj* gobj, bool catchItemFlag,
+                                        bool bool2, bool bool3)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (!it_8026B2B4(fp->x1974_heldItem)) {
         switch (it_8026B320(fp->x1974_heldItem)) {
         case 1:
-            ftAnim_80070FB4(fighter_gobj, bool2, 1);
+            ftAnim_80070FB4(gobj, bool2, 1);
             break;
         case 2:
-            ftAnim_80070FB4(fighter_gobj, bool2, 0);
+            ftAnim_80070FB4(gobj, bool2, 0);
             break;
         case 3:
-            ftAnim_80070FB4(fighter_gobj, bool2, 2);
+            ftAnim_80070FB4(gobj, bool2, 2);
             break;
         case 4:
-            ftAnim_80070FB4(fighter_gobj, bool2, 3);
+            ftAnim_80070FB4(gobj, bool2, 3);
             break;
         }
         if (catchItemFlag) {
-            ftAnim_80070C48(fighter_gobj, bool3);
+            ftAnim_80070C48(gobj, bool3);
         }
     }
 }
@@ -176,9 +175,9 @@ static inline void Fighter_OnKnockbackExit(HSD_GObj* gobj, s32 arg1)
     ftAnim_800704F0(gobj, 0, 0.0f);
 }
 
-static inline void Fighter_UnsetCmdVar0(HSD_GObj* fighter_gobj)
+static inline void Fighter_UnsetCmdVar0(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
 }
 

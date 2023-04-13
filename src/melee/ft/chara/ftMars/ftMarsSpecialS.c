@@ -1,9 +1,8 @@
+#include "ft/chara/ftMars/ftMars.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
 #include "melee/ft/inlines.h"
-
-#include <melee/ft/chara/ftMars/ftMars.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcommon.h>
 
 void ftMars_SpecialS_StartMotion(HSD_GObj* gobj)
 {

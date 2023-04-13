@@ -1,5 +1,5 @@
-#include <sysdolphin/baselib/cobj.h>
-#include <sysdolphin/baselib/displayfunc.h>
+#include <baselib/cobj.h>
+#include <baselib/displayfunc.h>
 #include <MSL/trigf.h>
 
 extern f64 lbl_804DE468; // 0.5

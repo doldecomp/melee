@@ -1,5 +1,6 @@
-#include <melee/ft/chara/ftZakoGirl/ftzakogirl.h>
-#include <melee/ft/ftparts.h>
+#include "ft/chara/ftZakoGirl/ftzakogirl.h"
+
+#include "ft/ftparts.h"
 
 char lbl_803D3568[] = "PlGl.dat";
 char lbl_803D3574[] = "ftDataGirl";
@@ -38,9 +39,9 @@ void ftZakoGirl_OnLoad(HSD_GObj* gobj)
     PUSH_ATTRS(fp, s32);
 }
 
-void ftZakoGirl_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftZakoGirl_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 0, 0);
+    Fighter_OnItemPickup(gobj, bool, 0, 0);
 }
 
 void ftZakoGirl_OnItemInvisible(HSD_GObj* gobj)
@@ -53,9 +54,9 @@ void ftZakoGirl_OnItemVisible(HSD_GObj* gobj)
     Fighter_OnItemVisible(gobj, 0);
 }
 
-void ftZakoGirl_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
+void ftZakoGirl_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(fighter_gobj, bool1, 0, 0);
+    Fighter_OnItemDrop(gobj, bool1, 0, 0);
 }
 
 void ftZakoGirl_LoadSpecialAttrs(HSD_GObj* gobj)

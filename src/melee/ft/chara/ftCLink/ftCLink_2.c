@@ -1,13 +1,13 @@
-#include "ftclink_2.h"
+#include "ftCLink_2.h"
 
-#include "ftclink.h"
+#include "ftCLink_Init.h"
 
-#include "ft/code_80081B38.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
 #include "ft/ftanim.h"
 #include "ft/ftparts.h"
 #include "ftLink/ftlink.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 
 void ftCLink_80149354(HSD_GObj* gobj)
 {

@@ -1,7 +1,7 @@
 #ifndef MELEE_EF_EFASYNC_H
 #define MELEE_EF_EFASYNC_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 void efAsync_8006737C(s8);
 void efAsync_80067624(HSD_GObj*, unk_t*);

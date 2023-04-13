@@ -1,7 +1,7 @@
 #include "ftwalljump.h"
 
 #include "fighter.h"
-#include "ft_unknown_006.h"
+#include "ft_0877.h"
 
 #include "mp/mplib.h"
 
@@ -11,9 +11,9 @@ static int const max_input_frames = 254;
 
 /// UnclePunch Map file: Interrupt_Walljump
 /// @returns: @c true if this function started a walljump, otherwise @c false.
-bool ftWallJump_8008169C(HSD_GObj* fighter_gobj)
+bool ftWallJump_8008169C(HSD_GObj* gobj)
 {
-    Fighter* fp0 = GET_FIGHTER(fighter_gobj);
+    Fighter* fp0 = GET_FIGHTER(gobj);
 
     // is a walljump character? is airborne?
     if (fp0->x2224_flag.bits.b7) {
@@ -103,8 +103,8 @@ bool ftWallJump_8008169C(HSD_GObj* fighter_gobj)
                 fp0->x670_timer_lstick_tilt_x < p_ftCommonData->x770)
             {
                 // do a walljump!
-                ft_800C1E64(fighter_gobj, ASID_PASSIVEWALLJUMP,
-                            p_ftCommonData->x774, fp0->x1969_walljumpUsed,
+                ft_800C1E64(gobj, ASID_PASSIVEWALLJUMP, p_ftCommonData->x774,
+                            fp0->x1969_walljumpUsed,
                             fp0->x2110_walljumpWallSide);
 
                 fp0->x210C_walljumpInputTimer = max_input_frames;

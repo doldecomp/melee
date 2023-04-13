@@ -108,14 +108,14 @@ Fighter_CostumeStrings lbl_803CDD2C[] = {
 
 extern f32 lbl_804D9898;
 
-void ftNana_OnLoad(HSD_GObj* fighter_gobj)
+void ftNana_OnLoad(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->x2222_flag.bits.b4 = true;
     ftPopo_OnLoadForNana(fp);
 
@@ -125,18 +125,18 @@ void ftNana_OnLoad(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftNana_OnDeath(HSD_GObj* fighter_gobj)
+void ftNana_OnDeath(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[4];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* attr = fp->x2D4_specialAttributes;
     fp->dmg.x18B0 = attr->xC8;
-    ftParts_80074A4C(fighter_gobj, 0U, 0);
-    ftParts_80074A4C(fighter_gobj, 1U, 0);
+    ftParts_80074A4C(gobj, 0U, 0);
+    ftParts_80074A4C(gobj, 1U, 0);
     fp->ev.nn.x2234 = 0;
     fp->ev.nn.x222C = 0;
     fp->ev.nn.x2230.bits.b0 = 0;
@@ -145,14 +145,14 @@ void ftNana_OnDeath(HSD_GObj* fighter_gobj)
     fp->ev.nn.x2250 = lbl_804D9898;
 }
 
-/* static */ void ftNana_801238E4(HSD_GObj* fighter_gobj);
+/* static */ void ftNana_801238E4(HSD_GObj* gobj);
 
-void ftNana_80122FAC(HSD_GObj* fighter_gobj)
+void ftNana_80122FAC(HSD_GObj* gobj)
 {
-    ftNana_801238E4(fighter_gobj);
+    ftNana_801238E4(gobj);
 }
 
-void ftNana_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftNana_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftIceClimberAttributes);
+    COPY_ATTRS(gobj, ftIceClimberAttributes);
 }

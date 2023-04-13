@@ -5,25 +5,25 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/code_80081B38.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/types.h"
-#include "lb/lbunknown_003.h"
+#include "lb/lb_00F9.h"
 
 #include <trigf.h>
 
 /// Create Aesthetic Wind Effect for Warlock Punch
-void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialN_CreateWindEffect(HSD_GObj* gobj)
 {
     s32 currentAnimFrame;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     s32 ftKind;
 
     currentAnimFrame = (s32) fp->x894_currentAnimFrame;
 
-    ftKind = ftLib_800872A4(fighter_gobj);
+    ftKind = ftLib_800872A4(gobj);
     switch (ftKind) {
     case FTKIND_CAPTAIN:
         break;
@@ -69,9 +69,9 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
                        (stickRangeMinPos - stickRangeMinNeg));
 }
 
-void ftCaptain_SpecialN_StartMotion(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialN_StartMotion(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -81,16 +81,16 @@ void ftCaptain_SpecialN_StartMotion(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(fighter_gobj, ftCaptain_AS_SpecialN, 0, NULL,
-                              0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftCaptain_AS_SpecialN, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    ftAnim_8006EBA4(fighter_gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
-void ftCaptain_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -100,39 +100,39 @@ void ftCaptain_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(fighter_gobj, ftCaptain_AS_SpecialAirN, 0, NULL,
-                              0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftCaptain_AS_SpecialAirN, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    ftAnim_8006EBA4(fighter_gobj);
+    ftAnim_8006EBA4(gobj);
 }
 
-void ftCaptain_SpecialN_Anim(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialN_Anim(HSD_GObj* gobj)
 {
-    ftCaptain_SpecialN_CreateWindEffect(fighter_gobj);
+    ftCaptain_SpecialN_CreateWindEffect(gobj);
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        ft_8008A2BC(fighter_gobj);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
     }
 }
 
-void ftCaptain_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirN_Anim(HSD_GObj* gobj)
 {
-    ftCaptain_SpecialN_CreateWindEffect(fighter_gobj);
+    ftCaptain_SpecialN_CreateWindEffect(gobj);
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        ft_800CC730(fighter_gobj);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_800CC730(gobj);
     }
 }
 
-void ftCaptain_SpecialN_IASA(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialN_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirN_IASA(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
 
     f32 vel;
@@ -146,13 +146,13 @@ void ftCaptain_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialN_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     s32 ftKind;
     s32 flag;
 
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = GET_FIGHTER(gobj);
     if (fp->x2210_ThrowFlags.b1 != 0) {
         fp->x2210_ThrowFlags.b1 = 0;
         flag = true;
@@ -161,30 +161,28 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* fighter_gobj)
     }
     if (flag != false) {
         if (fp->x2219_flag.bits.b0 == 0) {
-            ftKind = ftLib_800872A4(fighter_gobj);
+            ftKind = ftLib_800872A4(gobj);
             switch (ftKind) {
             case 2:
-                efSync_Spawn(0x48F, fighter_gobj,
-                             fp->x5E8_fighterBones[0].x0_jobj,
+                efSync_Spawn(0x48F, gobj, fp->x5E8_fighterBones[0].x0_jobj,
                              fp->x5E8_fighterBones[0x39].x0_jobj);
                 break;
             case 25:
-                efSync_Spawn(0x50B, fighter_gobj,
-                             fp->x5E8_fighterBones[0].x0_jobj,
+                efSync_Spawn(0x50B, gobj, fp->x5E8_fighterBones[0].x0_jobj,
                              fp->x5E8_fighterBones[0x4E].x0_jobj);
                 break;
             }
             fp->x2219_flag.bits.b0 = 1;
         } else {
-            ftCommon_8007DB24(fighter_gobj);
+            ftCommon_8007DB24(gobj);
         }
     }
-    ft_80084FA8(fighter_gobj);
+    ft_80084FA8(gobj);
 }
 
-void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
 {
-    Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = fp = GET_FIGHTER(gobj);
     ftCaptainAttributes* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
     s32 ftKind;
     s32 flag;
@@ -197,27 +195,25 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
     }
     if (flag != false) {
         if (fp->x2219_flag.bits.b0 == 0) {
-            ftKind = ftLib_800872A4(fighter_gobj);
+            ftKind = ftLib_800872A4(gobj);
             switch (ftKind) {
             case 2:
-                efSync_Spawn(0x48F, fighter_gobj,
-                             fp->x5E8_fighterBones[0].x0_jobj,
+                efSync_Spawn(0x48F, gobj, fp->x5E8_fighterBones[0].x0_jobj,
                              fp->x5E8_fighterBones[0x39].x0_jobj);
                 break;
             case 25:
-                efSync_Spawn(0x50B, fighter_gobj,
-                             fp->x5E8_fighterBones[0].x0_jobj,
+                efSync_Spawn(0x50B, gobj, fp->x5E8_fighterBones[0].x0_jobj,
                              fp->x5E8_fighterBones[0x4E].x0_jobj);
                 break;
             }
             fp->x2219_flag.bits.b0 = 1;
         } else {
-            ftCommon_8007DB24(fighter_gobj);
+            ftCommon_8007DB24(gobj);
         }
     }
     switch (fp->x2204_ftcmd_var1) {
     case 0:
-        ft_80084EEC(fighter_gobj);
+        ft_80084EEC(gobj);
         break;
 
     case 1:
@@ -226,7 +222,7 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
         break;
 
     case 2:
-        ft_80084DB0(fighter_gobj);
+        ft_80084DB0(gobj);
     }
 }
 
@@ -237,12 +233,12 @@ static Fighter_ActionStateChangeFlags const transition_flags =
     FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
     FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
-void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialN_Coll(HSD_GObj* gobj)
 {
-    if (ft_800827A0(fighter_gobj) == false) {
-        Fighter* fp = GET_FIGHTER(fighter_gobj);
+    if (ft_800827A0(gobj) == false) {
+        Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(fighter_gobj, ftCaptain_AS_SpecialAirN,
+        Fighter_ChangeMotionState(gobj, ftCaptain_AS_SpecialAirN,
                                   transition_flags, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
@@ -251,12 +247,12 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftCaptain_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
+void ftCaptain_SpecialAirN_Coll(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(fighter_gobj) != false) {
-        Fighter* fp = GET_FIGHTER(fighter_gobj);
+    if (ft_80081D0C(gobj) != false) {
+        Fighter* fp = GET_FIGHTER(gobj);
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(fighter_gobj, ftCaptain_AS_SpecialN,
+        Fighter_ChangeMotionState(gobj, ftCaptain_AS_SpecialN,
                                   transition_flags, NULL,
                                   fp->x894_currentAnimFrame, 1.0f, 0.0f);
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;

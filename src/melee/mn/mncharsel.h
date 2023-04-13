@@ -2,7 +2,7 @@
 #define _mncharsel_h_
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
 #include <common_structs.h>
 

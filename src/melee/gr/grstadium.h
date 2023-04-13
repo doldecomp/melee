@@ -1,7 +1,7 @@
 #ifndef MELEE_GR_GRSTADIUM_H
 #define MELEE_GR_GRSTADIUM_H
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 void grStadium_801D511C(void);
 void grStadium_801D39A0(HSD_GObj*);

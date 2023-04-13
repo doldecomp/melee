@@ -1,8 +1,9 @@
 #ifndef _ftganon_h_
 #define _ftganon_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
+#include "ft/fighter.h"
+
+#include <baselib/gobj.h>
 
 extern ActionState ftGanon_MotionStateTable[];
 extern char lbl_803D2CD8[];

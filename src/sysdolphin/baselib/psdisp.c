@@ -1,14 +1,15 @@
+#include "lb/lbrefract.h"
+
 #include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXLight.h>
 #include <dolphin/gx/GXMisc.h>
-#include <sysdolphin/baselib/__baselib.h>
-#include <sysdolphin/baselib/fog.h>
-#include <sysdolphin/baselib/lobj.h>
-#include <sysdolphin/baselib/mtx.h>
-#include <sysdolphin/baselib/psdisp.h>
-#include <sysdolphin/baselib/state.h>
-#include <sysdolphin/baselib/util.h>
-#include <melee/lb/lbrefract.h>
+#include <baselib/__baselib.h>
+#include <baselib/fog.h>
+#include <baselib/lobj.h>
+#include <baselib/mtx.h>
+#include <baselib/psdisp.h>
+#include <baselib/state.h>
+#include <baselib/util.h>
 
 typedef struct {
     u8 filename[9];

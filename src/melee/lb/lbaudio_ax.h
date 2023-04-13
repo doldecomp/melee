@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 /// @todo Create an @c enum for SFX IDs.
 #define SFX_NONE -1

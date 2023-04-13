@@ -5,7 +5,7 @@
 #include "ftCaptain_SpecialS.h"
 #include "types.h"
 
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
@@ -94,32 +94,32 @@ Fighter_CostumeStrings lbl_803C773C[] = {
     { lbl_803C7650, lbl_803C765C, NULL }, { lbl_803C7678, lbl_803C7684, NULL },
 };
 
-void ftCaptain_OnDeath(HSD_GObj* fighter_gobj)
+void ftCaptain_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftParts_80074A4C(fighter_gobj, 0, 0);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftParts_80074A4C(gobj, 0, 0);
     fp->ev.ca.during_specials = 0;
     fp->ev.ca.during_specials_start = false;
 }
 
-void ftCaptain_800E28C8(HSD_GObj* fighter_gobj)
+void ftCaptain_800E28C8(HSD_GObj* gobj)
 {
-    ftCaptain_SpecialS_RemoveGFX(fighter_gobj);
+    ftCaptain_SpecialS_RemoveGFX(gobj);
 }
 
-void ftCaptain_OnItemPickup(HSD_GObj* fighter_gobj, bool arg1)
+void ftCaptain_OnItemPickup(HSD_GObj* gobj, bool arg1)
 {
-    Fighter_OnItemPickup(fighter_gobj, arg1, 1, 1);
+    Fighter_OnItemPickup(gobj, arg1, 1, 1);
 }
 
-void ftCaptain_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftCaptain_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftCaptain_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftCaptain_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
 /// @remarks Used for both OnItemRelease and OnUnknownItemRelated
@@ -133,14 +133,14 @@ void ftCaptain_OnLoadForGanon(Fighter* fp)
     PUSH_ATTRS(fp, ftCaptainAttributes);
 }
 
-void ftCaptain_OnLoad(HSD_GObj* fighter_gobj)
+void ftCaptain_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->x2224_flag.bits.b7 = true;
     PUSH_ATTRS(fp, ftCaptainAttributes);
 }
 
-void ftCaptain_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftCaptain_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftCaptainAttributes);
+    COPY_ATTRS(gobj, ftCaptainAttributes);
 }

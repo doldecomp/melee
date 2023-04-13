@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/jobj.h>
 
 bool func_803931A4(s32);
 void func_80393A54(bool);

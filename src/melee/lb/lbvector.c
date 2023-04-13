@@ -1,6 +1,8 @@
+#include "lb/lbvector.h"
+
 #include <math.h>
 #include <dolphin/mtx.h>
-#include <melee/lb/lbvector.h>
+#include <dolphin/mtx/types.h>
 
 // exactly the same as the one from math.h, but with one extra iteration
 extern inline float sqrtf_accurate(float x)
@@ -24,19 +26,19 @@ extern inline float sqrtf_accurate(float x)
     return x;
 }
 
-static float lbvector_Len(Vec3* vec)
+static float lbVector_Len(Vec3* vec)
 {
     return sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-static float lbvector_Len_xy(Vec3* vec)
+static float lbVector_Len_xy(Vec3* vec)
 {
     return sqrtf_accurate(vec->x * vec->x + vec->y * vec->y);
 }
 
 float lbVector_Normalize(Vec3* vec)
 {
-    float len = lbvector_Len(vec);
+    float len = lbVector_Len(vec);
     float inv;
 
     if (len == 0.0f) {
@@ -104,7 +106,7 @@ Vec3* lbVector_CrossprodNormalized(Vec3* a, Vec3* b, Vec3* result)
 // 8000D620 - returns the angle between a and b
 float lbVector_Angle(Vec3* a, Vec3* b)
 {
-    float lena_lenb = lbvector_Len(a) * lbvector_Len(b);
+    float lena_lenb = lbVector_Len(a) * lbVector_Len(b);
 
     if (lena_lenb > 0.0000000001f) {
         float cosine = (a->x * b->x + a->y * b->y + a->z * b->z) / lena_lenb;
@@ -123,7 +125,7 @@ float lbVector_Angle(Vec3* a, Vec3* b)
 // 8000D790 - returns the angle between a and b
 float lbVector_AngleXY(Vec3* a, Vec3* b)
 {
-    float lena_lenb = lbvector_Len_xy(a) * lbvector_Len_xy(b);
+    float lena_lenb = lbVector_Len_xy(a) * lbVector_Len_xy(b);
 
     if (lena_lenb) {
         float cosine = (a->x * b->x + a->y * b->y) / lena_lenb;
@@ -528,7 +530,7 @@ float lbVector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
     }
     if (tooSmall) {
         *d = *a;
-        return lbvector_Len(&c_a);
+        return lbVector_Len(&c_a);
     } else {
         Vec3 v3;
         float f1 =
@@ -538,6 +540,6 @@ float lbVector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
         d->y = a->y + b_a.y * f1;
         d->z = a->z + b_a.z * f1;
         lbVector_Diff(c, d, &v3);
-        return lbvector_Len(&v3);
+        return lbVector_Len(&v3);
     }
 }

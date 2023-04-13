@@ -1,7 +1,7 @@
-#include "ftzelda.h"
+#include "ftZelda_Init.h"
 
 #include "ft/fighter.h"
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
@@ -79,17 +79,17 @@ Fighter_CostumeStrings lbl_803CFEB0[] = {
     { lbl_803CFDD8, lbl_803CFDE4, lbl_803CFE00 },
 };
 
-void ftZelda_OnDeath(HSD_GObj* fighter_gobj)
+void ftZelda_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftParts_80074A4C(fighter_gobj, 0, 0);
-    ftParts_80074A4C(fighter_gobj, 1, 0);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
     fp->ev.zd.x222C = 0;
 }
 
-void ftZelda_OnLoad(HSD_GObj* fighter_gobj)
+void ftZelda_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftZeldaAttributes);
@@ -98,29 +98,29 @@ void ftZelda_OnLoad(HSD_GObj* fighter_gobj)
     it_8026B3F8(item_list[1], 0x6DU);
 }
 
-void ftZelda_801393AC(HSD_GObj* fighter_gobj)
+void ftZelda_801393AC(HSD_GObj* gobj)
 {
-    ftZelda_8013B5EC(fighter_gobj);
+    ftZelda_8013B5EC(gobj);
 }
 
-void ftZelda_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftZelda_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
-void ftZelda_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftZelda_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftZelda_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftZelda_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftZelda_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
+void ftZelda_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(fighter_gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
 void ftZelda_LoadSpecialAttrs(HSD_GObj* gobj)
@@ -129,27 +129,27 @@ void ftZelda_LoadSpecialAttrs(HSD_GObj* gobj)
 }
 
 /// Zelda_RemoveDress
-void ftZelda_801395C8(HSD_GObj* fighter_gobj)
+void ftZelda_801395C8(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    int result = ftParts_80074A74(fighter_gobj, 1);
+    int result = ftParts_80074A74(gobj, 1);
     if (result == -1) {
-        ftParts_80074A4C(fighter_gobj, 1, 0);
+        ftParts_80074A4C(gobj, 1, 0);
     } else {
-        ftParts_80074A4C(fighter_gobj, 1, -1);
+        ftParts_80074A4C(gobj, 1, -1);
     }
 }
 
-void ftZelda_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftZelda_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftZelda_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftZelda_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(gobj, 1);
 }

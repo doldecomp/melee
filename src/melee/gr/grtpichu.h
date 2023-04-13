@@ -1,8 +1,9 @@
 #ifndef _grtpichu_h_
 #define _grtpichu_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/gr/stage.h>
+#include "gr/stage.h"
+
+#include <baselib/gobj.h>
 
 static void grTPichu_80222B98(int);
 static void grTPichu_80222B9C(void);

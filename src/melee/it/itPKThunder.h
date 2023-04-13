@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 typedef struct itPKThunderAttributes {
     f32 x0_PKTHUNDER_LIFETIME;

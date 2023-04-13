@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 void func_80390228(HSD_GObj*);
 void func_8039032C(u32 arg0, HSD_GObj* gobj, u8 p_link, u8 priority,

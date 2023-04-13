@@ -1,11 +1,11 @@
 #include "ftdrmario.h"
 
-#include "ft/ft_unknown_006.h"
+#include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftMario/ftmario.h"
-#include "it/code_8027CF30.h"
+#include "it/it_27CF.h"
 
 ActionState ftDrMario_MotionStateTable[] = {
     { 239, 0x00000071, 0x01000000, ftDrMario_80149954, ftDrMario_80149A6C,
@@ -106,9 +106,9 @@ void ftDrMario_80149540(HSD_GObj* gobj)
     ftDrMario_801497CC(gobj);
 }
 
-void ftDrMario_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftDrMario_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
 void ftDrMario_OnItemInvisible(HSD_GObj* gobj)

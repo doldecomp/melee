@@ -1,12 +1,12 @@
 #ifndef MELEE_IT_CODE_8027CF30_H
 #define MELEE_IT_CODE_8027CF30_H
 
+#include "ft/chara/ftSeak/types.h"
+#include "it/types.h"
+
 #include <placeholder.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <melee/ft/chara/ftSeak/types.h>
-#include <melee/it/itkind.h>
-#include <melee/it/types.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 void it_8027D730(HSD_GObj*);
 HSD_GObj* it_80283AE4(s32, Vec3*, s32);
@@ -147,7 +147,7 @@ HSD_GObj* it_802C4A40(HSD_GObj*, Vec3*, f32);
 void it_802C573C(HSD_GObj*);
 HSD_GObj* it_802C5000(HSD_GObj*, Vec3*, s32, s32, f32);
 void it_802C519C(HSD_GObj*, Vec3*, s32, s32, f32, f32);
-void it_802B4AC8(HSD_GObj* fighter_gobj, Vec3*, f32 facing_dir, f32 x);
+void it_802B4AC8(HSD_GObj* gobj, Vec3*, f32 facing_dir, f32 x);
 void it_802C53F0(HSD_GObj*, Vec3*, f32, f32, f32);
 s32 it_802E5F8C(HSD_GObj*, Vec3*, s32, bool, f32, f32);
 void it_80284FC4(HSD_GObj*, s32, f32);
@@ -163,9 +163,9 @@ void it_802C1590(HSD_GObj*);
 void it_802BB20C(HSD_GObj*);
 void it_802BAEEC(HSD_GObj*);
 void it_802BAF0C(HSD_GObj*);
-void it_802BCFC4(HSD_GObj* item_gobj, f32* arg1, itChainSegment* chainSegment,
+void it_802BCFC4(HSD_GObj* gobj, f32* arg1, itChainSegment* chainSegment,
                  Item* item_data, f32 arg4);
-HSD_GObj* it_802BB290(HSD_GObj* fighter_gobj, Vec3* arg1, f32 facing_dir);
+HSD_GObj* it_802BB290(HSD_GObj* gobj, Vec3* arg1, f32 facing_dir);
 void it_802BCF84(HSD_GObj*);
 
 #endif

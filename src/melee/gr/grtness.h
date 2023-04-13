@@ -2,9 +2,9 @@
 #define _grtness_h_
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/jobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/jobj.h>
 
 static void grTNess_802225D0(int);
 static void grTNess_802225D4(void);

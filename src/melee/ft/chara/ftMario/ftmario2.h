@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <melee/ft/types.h>
+#include "ft/types.h"
 
 extern Fighter_DemoStrings ftMario_DemoMotionFilenames;
 extern char* ftMario_DemoViMotionFilenames[];

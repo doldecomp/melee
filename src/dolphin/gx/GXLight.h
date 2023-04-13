@@ -2,6 +2,7 @@
 #define DOLPHIN_GX_GXLIGHT_H
 
 #include <dolphin/gx/__types.h>
+#include <dolphin/mtx/types.h>
 
 typedef struct _GXLightObj {
     char x0[0xC];  // at 0x00

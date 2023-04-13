@@ -1,8 +1,9 @@
 #ifndef _grtyoshi_h_
 #define _grtyoshi_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/gr/stage.h>
+#include "gr/stage.h"
+
+#include <baselib/gobj.h>
 
 static void grTYoshi_80223B48(int);
 static void grTYoshi_80223B4C(void);

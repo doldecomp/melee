@@ -1,8 +1,9 @@
 #ifndef _ftemblem_h_
 #define _ftemblem_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
+#include "ft/fighter.h"
+
+#include <baselib/gobj.h>
 
 extern ActionState ftRoy_MotionStateTable[];
 extern char lbl_803D3280[];

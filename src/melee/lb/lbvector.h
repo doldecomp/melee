@@ -1,15 +1,16 @@
 #ifndef _lbvector_h_
 #define _lbvector_h_
 
+#include "lb/lbrefract.h"
+
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/cobj.h>
-#include <melee/lb/lbrefract.h>
+#include <baselib/cobj.h>
 
 extern inline float sqrtf_accurate(float x);
 
-static float lbvector_Len(Vec3* vec);
-static float lbvector_Len_xy(Vec3* vec);
+static float lbVector_Len(Vec3* vec);
+static float lbVector_Len_xy(Vec3* vec);
 
 float lbVector_Normalize(Vec3* vec);
 float lbVector_NormalizeXY(Vec3* a);

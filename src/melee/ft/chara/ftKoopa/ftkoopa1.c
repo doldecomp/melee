@@ -1,13 +1,12 @@
-#include <melee/ft/forward.h>
+#include "ft/forward.h"
 
-#include <melee/ft/chara/ftKoopa/ftkoopa.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
-#include <melee/it/itkind.h>
+#include "ft/chara/ftKoopa/ftkoopa.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcamera.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState ftKoopa_MotionStateTable[] = {
     { 295, 0x00340011, 0x12000000, ftKoopa_80134F48, ftKoopa_801351B0,
@@ -139,9 +138,9 @@ void ftKoopa_OnLoad(HSD_GObj* gobj)
 
 void ftKoopa_80132B38(void) {}
 
-void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftKoopa_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, true, true);
+    Fighter_OnItemPickup(gobj, bool, true, true);
 }
 
 void ftKoopa_OnItemInvisible(HSD_GObj* gobj)

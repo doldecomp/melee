@@ -1,16 +1,18 @@
+#include "ft/chara/ftSeak/ftSeak_SpecialS.h"
+
+#include "ft/chara/ftNess/ftNess.h"
+#include "ft/chara/ftSeak/ftSeak_Init.h"
+#include "ft/fighter.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcoll.h"
+#include "ft/ftcommon.h"
+#include "ft/ftdata.h"
+#include "it/it_27CF.h"
+#include "lb/lb_00B0.h"
+
 #include <common_structs.h>
 #include <math.h>
-#include <melee/ft/chara/ftNess/ftNess.h>
-#include <melee/ft/chara/ftSeak/ftSeak_Init.h>
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialS.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftdata.h>
-#include <melee/it/code_8027CF30.h>
-#include <melee/lb/lbunknown_001.h>
 
 /// @todo Fix common data struct
 #define COMMON_DATA_F32 ((f32*) p_ftCommonData)
@@ -65,9 +67,9 @@ void ftSeak_80110490(Fighter* fp)
         COMMON_DATA_F32[275] * (v8 - fp->sv.sk.specials.x14);
 }
 
-void ftSeak_80110610(HSD_GObj* fighter_gobj, s32 arg1, f32 arg2)
+void ftSeak_80110610(HSD_GObj* gobj, s32 arg1, f32 arg2)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     UNK_T* items = fp->x10C_ftData->x48_items;
 
     /// @todo Unused stack.
@@ -118,9 +120,9 @@ void ftSeak_80110610(HSD_GObj* fighter_gobj, s32 arg1, f32 arg2)
     ftAnim_8006FA58(fp, 1, item[2]);
 }
 
-void ftSeak_80110788(HSD_GObj* fighter_gobj)
+void ftSeak_80110788(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->ev.sk.lstick_delta.x =
         fp->input.x620_lstick_x - fp->input.x628_lstick_x2;
     fp->ev.sk.lstick_delta.y =
@@ -201,20 +203,19 @@ void ftSeak_80110788(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSeak_8011097C(HSD_GObj* fighter_gobj)
+void ftSeak_8011097C(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSeak_UpdateHitboxes(HSD_GObj* fighter_gobj, Vec3* new_pos,
-                           s32 hitbox_id)
+void ftSeak_UpdateHitboxes(HSD_GObj* gobj, Vec3* new_pos, s32 hitbox_id)
 {
-    if (fighter_gobj == NULL) {
+    if (gobj == NULL) {
         return;
     }
 
     {
-        Fighter* fp = GET_FIGHTER(fighter_gobj);
+        Fighter* fp = GET_FIGHTER(gobj);
 
         if (!fp->x2200_ftcmd_var0) {
             return;
@@ -237,9 +238,9 @@ void ftSeak_UpdateHitboxes(HSD_GObj* fighter_gobj, Vec3* new_pos,
     }
 }
 
-void ftSeak_ZeroHitboxPositions(HSD_GObj* fighter_gobj)
+void ftSeak_ZeroHitboxPositions(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     int i;
 
     // Zero out the position and last position of 4 hitboxes
@@ -253,9 +254,9 @@ void ftSeak_ZeroHitboxPositions(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSeak_80110AEC(HSD_GObj* fighter_gobj)
+void ftSeak_80110AEC(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     int i;
 
     for (i = 0; i < 4; i++) {
@@ -263,7 +264,7 @@ void ftSeak_80110AEC(HSD_GObj* fighter_gobj)
     }
 
     {
-        Fighter* fp_2 = GET_FIGHTER(fighter_gobj);
+        Fighter* fp_2 = GET_FIGHTER(gobj);
 
         /// @todo The inlines in this file are wrong; this block should be
         ///       #ftSeak_ZeroHitboxPositions.
@@ -280,9 +281,9 @@ void ftSeak_80110AEC(HSD_GObj* fighter_gobj)
     }
 }
 
-inline void ftSeakSpecialS_LoopChainHitCollisions(HSD_GObj* fighter_gobj)
+inline void ftSeakSpecialS_LoopChainHitCollisions(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     int i;
 
     for (i = 0; i < (ssize_t) ARRAY_SIZE(fp->x914); i++) {
@@ -290,19 +291,19 @@ inline void ftSeakSpecialS_LoopChainHitCollisions(HSD_GObj* fighter_gobj)
         lbColl_80008428(&fp->x914[i]);
     }
 
-    ftSeak_ZeroHitboxPositions(fighter_gobj);
+    ftSeak_ZeroHitboxPositions(gobj);
 }
 
-inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* fighter_gobj)
+inline void ftSeakSpecialS_LoopChainHitActivate(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     int i;
 
     for (i = 0; i < (ssize_t) ARRAY_SIZE(fp->x914); i++) {
         lbColl_80008434(&fp->x914[i]);
     }
 
-    ftSeak_ZeroHitboxPositions(fighter_gobj);
+    ftSeak_ZeroHitboxPositions(gobj);
     fp->x2219_flag.bits.b3 = true;
 }
 
@@ -316,9 +317,9 @@ inline f32 sumOfSquares(f32 a, f32 b)
     return a + c;
 }
 
-void ftSeak_80110BCC(HSD_GObj* fighter_gobj)
+void ftSeak_80110BCC(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     HSD_GObj* item_gobj = fp->ev.sk.x2234;
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
 
@@ -348,7 +349,7 @@ void ftSeak_80110BCC(HSD_GObj* fighter_gobj)
                 fp->sv.sk.specials.x1C--;
 
                 if (fp->sv.sk.specials.x1C == 0) {
-                    ftSeakSpecialS_LoopChainHitCollisions(fighter_gobj);
+                    ftSeakSpecialS_LoopChainHitCollisions(gobj);
                 }
             }
 
@@ -363,7 +364,7 @@ void ftSeak_80110BCC(HSD_GObj* fighter_gobj)
                 {
                     if (fp->sv.sk.specials.x1C <= 0) {
                         fp->sv.sk.specials.x1C = specialAttributes->x18;
-                        ftSeakSpecialS_LoopChainHitActivate(fighter_gobj);
+                        ftSeakSpecialS_LoopChainHitActivate(gobj);
                     }
                 } else {
                     s32 var = fp->sv.sk.specials.x20;
@@ -371,7 +372,7 @@ void ftSeak_80110BCC(HSD_GObj* fighter_gobj)
                         fp->sv.sk.specials.x20--;
                     } else {
                         fp->sv.sk.specials.x1C = 0;
-                        ftSeakSpecialS_LoopChainHitCollisions(fighter_gobj);
+                        ftSeakSpecialS_LoopChainHitCollisions(gobj);
                     }
                 }
             }
@@ -379,20 +380,20 @@ void ftSeak_80110BCC(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSeak_80110E4C(HSD_GObj* fighter_gobj)
+void ftSeak_80110E4C(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    ftSeak_ChainSomething(fighter_gobj);
+    ftSeak_ChainSomething(gobj);
 
     fp->ev.sk.x2234 = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-void ftSeak_CheckAndDestroyChain(HSD_GObj* fighter_gobj)
+void ftSeak_CheckAndDestroyChain(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -405,27 +406,27 @@ void ftSeak_CheckAndDestroyChain(HSD_GObj* fighter_gobj)
 
     it_802BB20C(fp->ev.sk.x2234);
 
-    fp = fighter_gobj->user_data;
+    fp = gobj->user_data;
 
-    ftSeak_ChainSomething(fighter_gobj);
+    ftSeak_ChainSomething(gobj);
 
     fp->ev.sk.x2234 = NULL;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
     fp->cb.x21DC_callback_OnTakeDamage = NULL;
 }
 
-void ftSeak_80110EE8(HSD_GObj* fighter_gobj)
+void ftSeak_80110EE8(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->ev.sk.x2234) {
         it_802BAEEC(fp->ev.sk.x2234);
     }
 }
 
-void ftSeak_ChainSomething(HSD_GObj* fighter_gobj)
+void ftSeak_ChainSomething(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->ev.sk.x2234) {
         it_802BAF0C(fp->ev.sk.x2234);
@@ -433,21 +434,21 @@ void ftSeak_ChainSomething(HSD_GObj* fighter_gobj)
     }
 }
 
-f32 ftSeak_80110F58(HSD_GObj* fighter_gobj)
+f32 ftSeak_80110F58(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->input.x620_lstick_x;
 }
 
-f32 ftSeak_80110F64(HSD_GObj* fighter_gobj)
+f32 ftSeak_80110F64(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     return fp->input.x624_lstick_y;
 }
 
-void ftSeak_80110F70(HSD_GObj* fighter_gobj)
+void ftSeak_80110F70(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     fp->x2200_ftcmd_var0 = 0;
 
     fp->sv.sk.specials.x0 = 0;
@@ -488,24 +489,24 @@ void ftSeak_80110F70(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = &ftSeak_8011097C;
 }
 
-void ftSeak_SpecialS_StartMotion(HSD_GObj* fighter_gobj)
+void ftSeak_SpecialS_StartMotion(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(fighter_gobj, 349, 0, NULL, 0.0, 1, 0);
-    ftAnim_8006EBA4(fighter_gobj);
-    ftSeak_80110F70(fighter_gobj);
+    Fighter_ChangeMotionState(gobj, 349, 0, NULL, 0.0, 1, 0);
+    ftAnim_8006EBA4(gobj);
+    ftSeak_80110F70(gobj);
 }
 
-void ftSeak_SpecialAirS_StartMotion(HSD_GObj* fighter_gobj)
+void ftSeak_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->x80_self_vel.y = 0;
 
-    Fighter_ChangeMotionState(fighter_gobj, 352, 0, NULL, 0.0, 1, 0);
-    ftAnim_8006EBA4(fighter_gobj);
-    ftSeak_80110F70(fighter_gobj);
+    Fighter_ChangeMotionState(gobj, 352, 0, NULL, 0.0, 1, 0);
+    ftAnim_8006EBA4(gobj);
+    ftSeak_80110F70(gobj);
 }
 
-bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* fighter_gobj)
+bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -521,7 +522,7 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* fighter_gobj)
 
     Vec3 vec1;
 
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
     fp->sv.sk.specials.x0 += 1;
 
@@ -531,11 +532,11 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* fighter_gobj)
 #ifdef MUST_MATCH
         u8 unused2[12];
 #endif
-        Fighter* fp2 = fighter_gobj->user_data;
+        Fighter* fp2 = gobj->user_data;
 
         lb_8000B1CC(fp2->x5E8_fighterBones[26].x0_jobj, NULL, &vec1);
 
-        fp2->ev.sk.x2234 = it_802BB290(fighter_gobj, &vec1, fp2->facing_dir);
+        fp2->ev.sk.x2234 = it_802BB290(gobj, &vec1, fp2->facing_dir);
 
         fp2->x1984_heldItemSpec = fp2->ev.sk.x2234;
 
@@ -550,9 +551,9 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* fighter_gobj)
 
         if (fp->ev.sk.x2234 == NULL) {
             if (fp->xE0_ground_or_air == GA_Air) {
-                ft_800CC730(fighter_gobj);
+                ft_800CC730(gobj);
             } else {
-                ft_8008A2BC(fighter_gobj);
+                ft_8008A2BC(gobj);
             }
         }
     }
@@ -585,43 +586,43 @@ bool ftSeak_SpecialS_CheckInitChain(HSD_GObj* fighter_gobj)
     return false;
 }
 
-void ftSeak_SpecialS_Anim(HSD_GObj* fighter_gobj)
+void ftSeak_SpecialS_Anim(HSD_GObj* gobj)
 {
-    if (ftSeak_SpecialS_CheckInitChain(fighter_gobj)) {
-        ftSeak_80111830(fighter_gobj);
+    if (ftSeak_SpecialS_CheckInitChain(gobj)) {
+        ftSeak_80111830(gobj);
     }
 }
 
-void ftSeak_80111308(HSD_GObj* fighter_gobj)
+void ftSeak_80111308(HSD_GObj* gobj)
 {
-    if (ftSeak_SpecialS_CheckInitChain(fighter_gobj)) {
-        ftSeak_80111988(fighter_gobj);
+    if (ftSeak_SpecialS_CheckInitChain(gobj)) {
+        ftSeak_80111988(gobj);
     }
 }
 
-void ftSeak_80111344(HSD_GObj* fighter_gobj)
+void ftSeak_80111344(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSeak_80111348(HSD_GObj* fighter_gobj)
+void ftSeak_80111348(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSeak_8011134C(HSD_GObj* fighter_gobj)
+void ftSeak_8011134C(HSD_GObj* gobj)
 {
-    ft_80084F3C(fighter_gobj);
+    ft_80084F3C(gobj);
 }
 
-void ftSeak_8011136C(HSD_GObj* fighter_gobj)
+void ftSeak_8011136C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     attr* fighter_attr = &fp->x110_attr;
 
     if (fp->x2200_ftcmd_var0 != 0) {
@@ -632,17 +633,17 @@ void ftSeak_8011136C(HSD_GObj* fighter_gobj)
     ftCommon_8007CE94(fp, fighter_attr->x180_AerialFriction);
 }
 
-void ftSeak_801113C8(HSD_GObj* fighter_gobj)
+void ftSeak_801113C8(HSD_GObj* gobj)
 {
-    if (!ft_800827A0(fighter_gobj)) {
-        ftSeak_80111440(fighter_gobj);
+    if (!ft_800827A0(gobj)) {
+        ftSeak_80111440(gobj);
     }
 }
 
-void ftSeak_80111404(HSD_GObj* fighter_gobj)
+void ftSeak_80111404(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(fighter_gobj)) {
-        ftSeak_801114E4(fighter_gobj);
+    if (ft_80081D0C(gobj)) {
+        ftSeak_801114E4(gobj);
     }
 }
 
@@ -653,18 +654,18 @@ static Fighter_ActionStateChangeFlags const transition_flags =
     FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
     FtStateChange_Unk_27;
 
-void ftSeak_80111440(HSD_GObj* fighter_gobj)
+void ftSeak_80111440(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D5D4(fp);
     {
-        Fighter_ChangeMotionState(fighter_gobj, 352, transition_flags, NULL,
+        Fighter_ChangeMotionState(gobj, 352, transition_flags, NULL,
                                   fp->x894_currentAnimFrame, 1, 0);
     }
 
     {
-        Fighter* fp2 = GET_FIGHTER(fighter_gobj);
+        Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->ev.sk.x2234 != NULL) {
             fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
@@ -677,16 +678,16 @@ void ftSeak_80111440(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSeak_801114E4(HSD_GObj* fighter_gobj)
+void ftSeak_801114E4(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(fighter_gobj, 349, transition_flags, NULL,
+    Fighter_ChangeMotionState(gobj, 349, transition_flags, NULL,
                               fp->x894_currentAnimFrame, 1.0, 0.0);
 
     {
-        Fighter* fp2 = GET_FIGHTER(fighter_gobj);
+        Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->ev.sk.x2234 != NULL) {
             fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
@@ -699,17 +700,17 @@ void ftSeak_801114E4(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSeak_80111588(HSD_GObj* fighter_gobj)
+void ftSeak_80111588(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
 
-    ftSeak_80110BCC(fighter_gobj);
+    ftSeak_80110BCC(gobj);
 
     fp->sv.sk.specials.x0 += 1;
 
@@ -725,25 +726,25 @@ void ftSeak_80111588(HSD_GObj* fighter_gobj)
         }
 
         if (result) {
-            ftSeak_80111DF8(fighter_gobj);
+            ftSeak_80111DF8(gobj);
             return;
         }
     }
 
-    ftSeak_80110610(fighter_gobj, 305, 1);
+    ftSeak_80110610(gobj, 305, 1);
 }
 
-void ftSeak_80111648(HSD_GObj* fighter_gobj)
+void ftSeak_80111648(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
 
-    ftSeak_80110BCC(fighter_gobj);
+    ftSeak_80110BCC(gobj);
     fp->sv.sk.specials.x0 += 1;
 
     {
@@ -758,76 +759,76 @@ void ftSeak_80111648(HSD_GObj* fighter_gobj)
         }
 
         if (result) {
-            ftSeak_80111EB4(fighter_gobj);
+            ftSeak_80111EB4(gobj);
             return;
         }
     }
 
-    ftSeak_80110610(fighter_gobj, 308, 1);
+    ftSeak_80110610(gobj, 308, 1);
 }
 
-void ftSeak_80111708(HSD_GObj* fighter_gobj)
+void ftSeak_80111708(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
         fp->sv.sk.specials.x4 = true;
     }
 
-    ftSeak_80110788(fighter_gobj);
+    ftSeak_80110788(gobj);
 }
 
-void ftSeak_80111740(HSD_GObj* fighter_gobj)
+void ftSeak_80111740(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
         fp->sv.sk.specials.x4 = true;
     }
 
-    ftSeak_80110788(fighter_gobj);
+    ftSeak_80110788(gobj);
 }
 
-void ftSeak_80111778(HSD_GObj* fighter_gobj)
+void ftSeak_80111778(HSD_GObj* gobj)
 {
-    ft_80084F3C(fighter_gobj);
+    ft_80084F3C(gobj);
 }
 
-void ftSeak_80111798(HSD_GObj* fighter_gobj)
+void ftSeak_80111798(HSD_GObj* gobj)
 {
-    ft_80084EEC(fighter_gobj);
+    ft_80084EEC(gobj);
 }
 
-void ftSeak_801117B8(HSD_GObj* fighter_gobj)
+void ftSeak_801117B8(HSD_GObj* gobj)
 {
-    if (!ft_800827A0(fighter_gobj)) {
-        ftSeak_80111DF8(fighter_gobj);
+    if (!ft_800827A0(gobj)) {
+        ftSeak_80111DF8(gobj);
     }
 }
 
-void ftSeak_801117F4(HSD_GObj* fighter_gobj)
+void ftSeak_801117F4(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(fighter_gobj)) {
-        ftSeak_80111EB4(fighter_gobj);
+    if (ft_80081D0C(gobj)) {
+        ftSeak_80111EB4(gobj);
     }
 }
 
-void ftSeak_80111830(HSD_GObj* fighter_gobj)
+void ftSeak_80111830(HSD_GObj* gobj)
 {
     /// @todo Split into two functions, one with @var fp and one with @var fp2
     Vec3 vec0;
     Vec3 vec1;
     Fighter* fp2;
 
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
-    Fighter_ChangeMotionState(fighter_gobj, 350, 8, NULL, 0.0, 1, 0);
-    ftSeak_80110610(fighter_gobj, 305, 0);
+    Fighter_ChangeMotionState(gobj, 350, 8, NULL, 0.0, 1, 0);
+    ftSeak_80110610(gobj, 305, 0);
 
-    fp2 = fighter_gobj->user_data;
+    fp2 = gobj->user_data;
     fp2->sv.sk.specials.x0 = 0;
 
-    ftSeak_80110AEC(fighter_gobj);
+    ftSeak_80110AEC(gobj);
 
     if (fp2->ev.sk.x2234 != NULL) {
         fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
@@ -854,26 +855,25 @@ void ftSeak_80111830(HSD_GObj* fighter_gobj)
         lb_8000B1CC(fp->x5E8_fighterBones[26].x0_jobj, NULL, &vec1);
 
         {
-            s32 flags =
-                ftNess_YoyoCheckEnvColl(fighter_gobj, &vec0, &vec1, 0.5F);
+            s32 flags = ftNess_YoyoCheckEnvColl(gobj, &vec0, &vec1, 0.5F);
 
             if (flags != 0) {
-                ftSeak_80111DF8(fighter_gobj);
+                ftSeak_80111DF8(gobj);
             }
         }
     }
 }
 
-void ftSeak_80111988(HSD_GObj* fighter_gobj)
+void ftSeak_80111988(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(fighter_gobj, 353, 8, NULL, 0.0, 1.0, 0.0);
-    ftSeak_80110610(fighter_gobj, 308, 0.0);
+    Fighter_ChangeMotionState(gobj, 353, 8, NULL, 0.0, 1.0, 0.0);
+    ftSeak_80110610(gobj, 308, 0.0);
 
     {
-        Fighter* fp = fighter_gobj->user_data;
+        Fighter* fp = gobj->user_data;
         fp->sv.sk.specials.x0 = 0;
 
-        ftSeak_80110AEC(fighter_gobj);
+        ftSeak_80110AEC(gobj);
 
         if (fp->ev.sk.x2234 != NULL) {
             fp->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
@@ -887,14 +887,14 @@ void ftSeak_80111988(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSeak_80111A48(HSD_GObj* fighter_gobj)
+void ftSeak_80111A48(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[36];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
     fp->sv.sk.specials.x0 += 1;
 
@@ -920,23 +920,23 @@ void ftSeak_80111A48(HSD_GObj* fighter_gobj)
             it_802BB20C(item_gobj);
         } else {
         inner_ret:
-            ftSeak_80110BCC(fighter_gobj);
+            ftSeak_80110BCC(gobj);
         }
     }
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        ft_8008A2BC(fighter_gobj);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
     }
 }
 
-void ftSeak_80111B1C(HSD_GObj* fighter_gobj)
+void ftSeak_80111B1C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[36];
 #endif
 
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     ftSeakAttributes* specialAttributes = fp->x2D4_specialAttributes;
     fp->sv.sk.specials.x0 += 1;
 
@@ -958,65 +958,65 @@ void ftSeak_80111B1C(HSD_GObj* fighter_gobj)
             it_802BB20C(item_gobj);
         } else {
         inner_ret:
-            ftSeak_80110BCC(fighter_gobj);
+            ftSeak_80110BCC(gobj);
         }
 
-        if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-            ft_800CC730(fighter_gobj);
+        if (!ftAnim_IsFramesRemaining(gobj)) {
+            ft_800CC730(gobj);
         }
     }
 }
 
-void ftSeak_80111BF0(HSD_GObj* fighter_gobj)
+void ftSeak_80111BF0(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSeak_80111BF4(HSD_GObj* fighter_gobj)
+void ftSeak_80111BF4(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftSeak_80111BF8(HSD_GObj* fighter_gobj)
+void ftSeak_80111BF8(HSD_GObj* gobj)
 {
-    ft_80084F3C(fighter_gobj);
+    ft_80084F3C(gobj);
 }
 
-void ftSeak_80111C18(HSD_GObj* fighter_gobj)
+void ftSeak_80111C18(HSD_GObj* gobj)
 {
-    ft_80084EEC(fighter_gobj);
+    ft_80084EEC(gobj);
 }
 
-void ftSeak_80111C38(HSD_GObj* fighter_gobj)
+void ftSeak_80111C38(HSD_GObj* gobj)
 {
-    if (!ft_800827A0(fighter_gobj)) {
-        ftSeak_80111CB0(fighter_gobj);
+    if (!ft_800827A0(gobj)) {
+        ftSeak_80111CB0(gobj);
     }
 }
 
 // Collision_SheikChainAir
-void ftSeak_80111C74(HSD_GObj* fighter_gobj)
+void ftSeak_80111C74(HSD_GObj* gobj)
 {
-    if (ft_80081D0C(fighter_gobj)) {
-        ftSeak_80111D54(fighter_gobj);
+    if (ft_80081D0C(gobj)) {
+        ftSeak_80111D54(gobj);
     }
 }
 
-void ftSeak_80111CB0(HSD_GObj* fighter_gobj)
+void ftSeak_80111CB0(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
 
-    Fighter_ChangeMotionState(fighter_gobj, 354, transition_flags, NULL,
+    Fighter_ChangeMotionState(gobj, 354, transition_flags, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 
     {
-        Fighter* fp2 = fighter_gobj->user_data;
+        Fighter* fp2 = gobj->user_data;
 
         if (fp2->ev.sk.x2234 != NULL) {
             fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
@@ -1030,16 +1030,16 @@ void ftSeak_80111CB0(HSD_GObj* fighter_gobj)
 }
 
 // AS_SheikRetractChainGround
-void ftSeak_80111D54(HSD_GObj* fighter_gobj)
+void ftSeak_80111D54(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(fighter_gobj, 351, transition_flags, NULL,
+    Fighter_ChangeMotionState(gobj, 351, transition_flags, NULL,
                               fp->x894_currentAnimFrame, 1, 0);
 
     {
-        Fighter* fp2 = GET_FIGHTER(fighter_gobj);
+        Fighter* fp2 = GET_FIGHTER(gobj);
 
         if (fp2->ev.sk.x2234 != NULL) {
             fp2->cb.x21E4_callback_OnDeath2 = &ftSeak_80110198;
@@ -1052,16 +1052,16 @@ void ftSeak_80111D54(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSeak_80111DF8(HSD_GObj* fighter_gobj)
+void ftSeak_80111DF8(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(fighter_gobj, 351, 8, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 351, 8, NULL, 0, 1, 0);
 
     {
-        Fighter* fp = GET_FIGHTER(fighter_gobj);
+        Fighter* fp = GET_FIGHTER(gobj);
         fp->sv.sk.specials.x0 = 0;
 
         if (fp->sv.sk.specials.x1C != 0) {
-            ftSeak_80110AEC(fighter_gobj);
+            ftSeak_80110AEC(gobj);
         }
 
         if (fp->ev.sk.x2234 != NULL) {
@@ -1076,16 +1076,16 @@ void ftSeak_80111DF8(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftSeak_80111EB4(HSD_GObj* fighter_gobj)
+void ftSeak_80111EB4(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(fighter_gobj, 354, 8, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, 354, 8, NULL, 0, 1, 0);
 
     {
-        Fighter* fp = fighter_gobj->user_data;
+        Fighter* fp = gobj->user_data;
         fp->sv.sk.specials.x0 = 0;
 
         if (fp->sv.sk.specials.x1C != 0) {
-            ftSeak_80110AEC(fighter_gobj);
+            ftSeak_80110AEC(gobj);
         }
 
         if (fp->ev.sk.x2234 != NULL) {
@@ -1100,11 +1100,11 @@ void ftSeak_80111EB4(HSD_GObj* fighter_gobj)
     }
 }
 
-bool ftSeak_80111F70(HSD_GObj* fighter_gobj)
+bool ftSeak_80111F70(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fighter_gobj != NULL) {
+    if (gobj != NULL) {
         if (fp->ev.sk.x2230 != 0) {
             return false;
         }
@@ -1115,11 +1115,11 @@ bool ftSeak_80111F70(HSD_GObj* fighter_gobj)
     return true;
 }
 
-int ftSeak_80111FA0(HSD_GObj* fighter_gobj)
+int ftSeak_80111FA0(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
 
-    if (fighter_gobj != NULL) {
+    if (gobj != NULL) {
         return fp->ev.sk.x222C;
     }
 

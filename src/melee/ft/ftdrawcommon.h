@@ -4,7 +4,7 @@
 #include <platform.h>
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 void ftDrawCommmon_80080E18(HSD_GObj*, long);
 MtxPtr ftDrawCommmon_8008051C(HSD_GObj*, MtxPtr);

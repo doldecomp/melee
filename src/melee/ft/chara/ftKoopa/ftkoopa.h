@@ -1,8 +1,9 @@
 #ifndef _ftkoopa_h_
 #define _ftkoopa_h_
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
+#include "ft/fighter.h"
+
+#include <baselib/gobj.h>
 
 typedef struct _ftKoopaAttributes {
     f32 x0;
@@ -89,7 +90,7 @@ void ftKoopa_80133690(HSD_GObj* gobj);
 void ftKoopa_801336CC(HSD_GObj* gobj);
 void ftKoopa_OnLoad(HSD_GObj* gobj);
 void ftKoopa_80132B38(void);
-void ftKoopa_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
+void ftKoopa_OnItemPickup(HSD_GObj* gobj, bool bool);
 void ftKoopa_OnItemInvisible(HSD_GObj* gobj);
 void ftKoopa_OnItemVisible(HSD_GObj* gobj);
 void ftKoopa_OnItemDrop(HSD_GObj* gobj, bool bool1);

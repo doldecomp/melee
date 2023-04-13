@@ -9,31 +9,31 @@
 
 extern ActionState ftYoshi_MotionStateTable[];
 
-void ftYoshi_8012B8A4(HSD_GObj* fighter_gobj);
+void ftYoshi_8012B8A4(HSD_GObj* gobj);
 void ftYoshi_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg);
 void ftYoshi_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
                       f32 start_frame);
-void ftYoshi_8012C49C(HSD_GObj* fighter_gobj);
+void ftYoshi_8012C49C(HSD_GObj* gobj);
 void ftYoshi_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
                       f32 start_frame);
 
 unk_t ftYoshi_8012BECC(void);
-void ftYoshi_8012C850(HSD_GObj* fighter_gobj);
+void ftYoshi_8012C850(HSD_GObj* gobj);
 
-void ftYoshi_8012B918(HSD_GObj* fighter_gobj);
-void ftYoshi_OnDeath(HSD_GObj* fighter_gobj);
-void ftYoshi_OnLoad(HSD_GObj* fighter_gobj);
-void ftYoshi_8012BA8C(HSD_GObj* fighter_gobj);
+void ftYoshi_8012B918(HSD_GObj* gobj);
+void ftYoshi_OnDeath(HSD_GObj* gobj);
+void ftYoshi_OnLoad(HSD_GObj* gobj);
+void ftYoshi_8012BA8C(HSD_GObj* gobj);
 f32 ftYoshi_8012BAC0(Fighter* fp);
-void ftYoshi_OnItemPickup(HSD_GObj* fighter_gobj, bool bool);
-void ftYoshi_OnItemInvisible(HSD_GObj* fighter_gobj);
-void ftYoshi_OnItemVisible(HSD_GObj* fighter_gobj);
-void ftYoshi_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1);
-void ftYoshi_LoadSpecialAttrs(HSD_GObj* fighter_gobj);
-void ftYoshi_OnKnockbackEnter(HSD_GObj* fighter_gobj);
-void ftYoshi_OnKnockbackExit(HSD_GObj* fighter_gobj);
+void ftYoshi_OnItemPickup(HSD_GObj* gobj, bool bool);
+void ftYoshi_OnItemInvisible(HSD_GObj* gobj);
+void ftYoshi_OnItemVisible(HSD_GObj* gobj);
+void ftYoshi_OnItemDrop(HSD_GObj* gobj, bool bool1);
+void ftYoshi_LoadSpecialAttrs(HSD_GObj* gobj);
+void ftYoshi_OnKnockbackEnter(HSD_GObj* gobj);
+void ftYoshi_OnKnockbackExit(HSD_GObj* gobj);
 unk_t ftYoshi_8012BDA0(void);
-void ftYoshi_8012BE3C(HSD_GObj* fighter_gobj);
+void ftYoshi_8012BE3C(HSD_GObj* gobj);
 
 void ftYoshi_8012C030(HSD_GObj*);
 void ftYoshi_8012C114(HSD_GObj*);
@@ -133,7 +133,7 @@ void ftYoshi_8012E850(HSD_GObj*);
 void ftYoshi_8012E8CC(HSD_GObj*);
 void ftYoshi_8012E944(HSD_GObj*);
 void ftYoshi_8012C1D4(HSD_GObj*);
-void ftYoshi_8012C2F4(HSD_GObj* fighter_gobj);
+void ftYoshi_8012C2F4(HSD_GObj* gobj);
 void ftYoshi_8012C3EC(HSD_GObj*);
 void ftYoshi_8012C45C(HSD_GObj*);
 void ftYoshi_8012C47C(HSD_GObj*);

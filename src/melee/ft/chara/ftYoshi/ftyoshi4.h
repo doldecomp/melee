@@ -2,7 +2,7 @@
 #define MELEE_FT_CHARA_FTYOSHI_FTYOSHI4_H
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
 void ftYoshi_SpecialS_StartMotion(HSD_GObj*);
 void ftYoshi_SpecialAirHi_StartMotion(HSD_GObj*);

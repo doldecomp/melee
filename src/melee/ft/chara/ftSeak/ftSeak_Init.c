@@ -1,15 +1,16 @@
-#include <melee/ft/forward.h>
+#include "ft/forward.h"
 
-#include <melee/ft/chara/ftSeak/ftSeak_Init.h>
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialLw.h>
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialN.h>
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialS.h>
-#include <melee/ft/chara/ftSeak/types.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/chara/ftSeak/ftSeak_Init.h"
+
+#include "ft/chara/ftSeak/ftSeak_SpecialLw.h"
+#include "ft/chara/ftSeak/ftSeak_SpecialN.h"
+#include "ft/chara/ftSeak/ftSeak_SpecialS.h"
+#include "ft/chara/ftSeak/types.h"
+#include "ft/fighter.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState ftSeak_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftSeak_80112248, ftSeak_801126C8,
@@ -96,19 +97,19 @@ Fighter_CostumeStrings lbl_803CC558[] = {
     { lbl_803CC488, lbl_803CC494, lbl_803CC4AC },
 };
 
-void ftSeak_OnDeath(HSD_GObj* fighter_gobj)
+void ftSeak_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->ev.sk.x222C = 0;
     fp->ev.sk.x2230 = 0;
     fp->ev.sk.x2234 = 0;
-    ftParts_80074A4C(fighter_gobj, 0, 0);
-    ftParts_80074A4C(fighter_gobj, 1, -1);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, -1);
 }
 
-void ftSeak_OnLoad(HSD_GObj* fighter_gobj)
+void ftSeak_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->x10C_ftData->x48_items;
 
     fp->x2224_flag.bits.b7 = 1;
@@ -121,56 +122,56 @@ void ftSeak_OnLoad(HSD_GObj* fighter_gobj)
     it_8026B3F8(item_list[3], 0x61U);
 }
 
-/* static */ void ftSeak_80111FBC(HSD_GObj* fighter_gobj);
-/* static */ void ftSeak_CheckAndDestroyChain(HSD_GObj* fighter_gobj);
+/* static */ void ftSeak_80111FBC(HSD_GObj* gobj);
+/* static */ void ftSeak_CheckAndDestroyChain(HSD_GObj* gobj);
 
-void ftSeak_80110198(HSD_GObj* fighter_gobj)
+void ftSeak_80110198(HSD_GObj* gobj)
 {
-    ftSeak_80111FBC(fighter_gobj);
-    ftSeak_CheckAndDestroyChain(fighter_gobj);
+    ftSeak_80111FBC(gobj);
+    ftSeak_CheckAndDestroyChain(gobj);
 }
 
-void ftSeak_801101CC(HSD_GObj* fighter_gobj)
+void ftSeak_801101CC(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ev.sk.x222C == 6) {
         ft_800BFFD0(fp, 0x56, 0);
     }
 }
 
-void ftSeak_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
+void ftSeak_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
-    Fighter_OnItemPickup(fighter_gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
-void ftSeak_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftSeak_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftSeak_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftSeak_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftSeak_OnItemDrop(HSD_GObj* fighter_gobj, bool bool1)
+void ftSeak_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
-    Fighter_OnItemDrop(fighter_gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftSeak_LoadSpecialAttrs(HSD_GObj* fighter_gobj)
+void ftSeak_LoadSpecialAttrs(HSD_GObj* gobj)
 {
-    COPY_ATTRS(fighter_gobj, ftSeakAttributes);
+    COPY_ATTRS(gobj, ftSeakAttributes);
 }
 
-void ftSeak_OnKnockbackEnter(HSD_GObj* fighter_gobj)
+void ftSeak_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(fighter_gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, 1);
 }
 
-void ftSeak_OnKnockbackExit(HSD_GObj* fighter_gobj)
+void ftSeak_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(fighter_gobj, 1);
+    Fighter_OnKnockbackExit(gobj, 1);
 }
 
 /// @todo Moved to ftSeak_SpecialN.c
@@ -178,10 +179,10 @@ void ftSeak_OnKnockbackExit(HSD_GObj* fighter_gobj)
 
 // 8011412C - 80114160
 // https://decomp.me/scratch/b1oIZ
-void ftSeak_8011412C(HSD_GObj* fighter_gobj) {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+void ftSeak_8011412C(HSD_GObj* gobj) {
+    Fighter* fp = GET_FIGHTER(gobj);
     fp->cb.x21BC_callback_Accessory4 = 0;
-    ftCommon_8007EFC8(fighter_gobj, &ftZelda_8013B4D8);
+    ftCommon_8007EFC8(gobj, &ftZelda_8013B4D8);
 }
 
 #endif

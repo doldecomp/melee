@@ -1,10 +1,11 @@
 #ifndef MELEE_FT_FTBOSSLIB_H
 #define MELEE_FT_FTBOSSLIB_H
 
-#include <melee/ft/chara/forward.h>
+#include "ftMasterHand/forward.h"
 
-#include <sysdolphin/baselib/gobj.h>
-#include <melee/ft/fighter.h>
+#include "ft/fighter.h"
+
+#include <baselib/gobj.h>
 
 HSD_GObj* ftBossLib_8015C3E8(FighterKind arg0);
 
@@ -16,9 +17,9 @@ void ftBossLib_8015BD20(HSD_GObj*);
 void ftBossLib_8015BD24(s32, f32*, f32, s32, s32, s32);
 void ftBossLib_8015BDB4(HSD_GObj*);
 void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3*, f32*, f32, f32);
-void ftBossLib_8015BF74(HSD_GObj* fighter_gobj, f32 x_diff_max);
+void ftBossLib_8015BF74(HSD_GObj* gobj, f32 x_diff_max);
 void ftBossLib_8015C010(HSD_GObj*, f32);
-void ftBossLib_8015C09C(HSD_GObj* fighter_gobj, f32 facing_dir);
+void ftBossLib_8015C09C(HSD_GObj* gobj, f32 facing_dir);
 void ftBossLib_8015C190(HSD_GObj*);
 void ftBossLib_8015C208(HSD_GObj*, Vec3*);
 HSD_GObj* ftBossLib_8015C244(HSD_GObj*, Vec3*);

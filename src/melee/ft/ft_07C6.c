@@ -3,15 +3,17 @@
  */
 #include <platform.h>
 
+#include "ft/ft_07C6.h"
+
+#include "ef/efsync.h"
+#include "ft/ftcoll.h"
+#include "ft/ftlib.h"
+#include "gm/gm_1A36.h"
+#include "it/it_26B1.h"
+#include "it/item.h"
+#include "lb/lb_00B0.h"
+
 #include <placeholder.h>
-#include <melee/ef/efsync.h>
-#include <melee/ft/code_8007C630.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ftlib.h>
-#include <melee/it/item.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/text_2.h>
 
 #ifdef MWERKS_GEKKO
 
@@ -21,7 +23,7 @@ static f32 const lbl_804D832C = 1.0F;
 extern unk_t gm_8016B0B4(void);
 
 #pragma push
-asm void ft_8007C630(HSD_GObj* fighter_gobj)
+asm void ft_8007C630(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C630 00079210  7C 08 02 A6 */	mflr r0
@@ -73,7 +75,7 @@ lbl_8007C658:
 
 #else
 
-void ft_8007C630(HSD_GObj* fighter_gobj)
+void ft_8007C630(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -83,7 +85,7 @@ void ft_8007C630(HSD_GObj* fighter_gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void ft_8007C6DC(HSD_GObj* fighter_gobj)
+asm void ft_8007C6DC(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C6DC 000792BC  7C 08 02 A6 */	mflr r0
@@ -133,7 +135,7 @@ lbl_8007C764:
 
 #else
 
-void ft_8007C6DC(HSD_GObj* fighter_gobj)
+void ft_8007C6DC(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -146,7 +148,7 @@ extern unk_t lbAudioAx_80023870();
 extern unk_t it_802E5EF4();
 
 #pragma push
-asm void ft_8007C77C(HSD_GObj* fighter_gobj)
+asm void ft_8007C77C(HSD_GObj* gobj)
 { // clang-format off
     nofralloc
 /* 8007C77C 0007935C  7C 08 02 A6 */	mflr r0
@@ -273,7 +275,7 @@ lbl_8007C918:
 
 #else
 
-void ft_8007C77C(HSD_GObj* fighter_gobj)
+void ft_8007C77C(HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }

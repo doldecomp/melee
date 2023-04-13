@@ -2,9 +2,9 @@
 #define _lbfile_h_
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
-#include <sysdolphin/baselib/archive.h>
+#include <baselib/archive.h>
 
 void lbFile_8001615C(int, int, int, bool cancelflag);
 bool lbFile_800161A0(void);

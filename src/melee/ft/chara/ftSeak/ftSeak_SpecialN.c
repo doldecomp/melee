@@ -1,4 +1,4 @@
-#include <melee/ft/chara/ftSeak/ftSeak_SpecialN.h>
+#include "ft/chara/ftSeak/ftSeak_SpecialN.h"
 
 f32 lbl_803CC598[] = {
     -1, -0.75, -0.5, -0.25, 0, +0.25, +0.5, +0.75, +1,

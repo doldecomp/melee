@@ -1,9 +1,9 @@
 #include "forward.h"
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
 #include "ftdata.h"
 
-#include "ft_unknown_006.h"
+#include "ft_0877.h"
 #include "types.h"
 
 #include "ftCaptain/ftCaptain.h"
@@ -11,7 +11,7 @@
 #include "ftCaptain/ftCaptain_SpecialLw.h"
 #include "ftCaptain/ftCaptain_SpecialN.h"
 #include "ftCaptain/ftCaptain_SpecialS.h"
-#include "ftCLink/ftclink.h"
+#include "ftCLink/ftCLink_Init.h"
 #include "ftCrazyHand/ftcrazyhand.h"
 #include "ftDonkey/ftdonkey_callbacks.h"
 #include "ftDonkey/ftdonkey_SpecialHi.h"
@@ -60,7 +60,7 @@
 #include "ftYoshi/ftyoshi4.h"
 #include "ftZakoBoy/ftzakoboy.h"
 #include "ftZakoGirl/ftzakogirl.h"
-#include "ftZelda/ftzelda.h"
+#include "ftZelda/ftZelda_Init.h"
 
 #include <dolphin/mtx/types.h>
 

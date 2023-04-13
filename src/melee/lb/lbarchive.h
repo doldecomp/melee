@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/archive.h>
+#include <baselib/archive.h>
 
 void lbArchive_InitializeDAT(HSD_Archive* archive, u8* data, u32 length);
 void lbArchive_80016EFC(void);

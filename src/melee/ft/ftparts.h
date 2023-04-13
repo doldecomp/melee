@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_FTPARTS_H
 #define MELEE_FT_FTPARTS_H
 
+#include "ft/fighter.h"
+
 #include <dolphin/mtx/types.h>
-#include <melee/ft/fighter.h>
 
 void ftParts_80074B0C(HSD_GObj*, s32, s32);
 void ftParts_80073758(HSD_JObj*);
@@ -25,7 +26,7 @@ s32 ftParts_8007500C(Fighter*, s32);
 void ftParts_800753D4(Fighter*, s32, unk_t);
 f32 ftParts_80075F48(Fighter*, s32);
 s32 ftParts_80074A74(HSD_GObj*, s32);
-void ftParts_80075650(HSD_GObj* fighter_gobj, HSD_JObj*, u32*);
+void ftParts_80075650(HSD_GObj* gobj, HSD_JObj*, u32*);
 void ftParts_8007487C(unk_t item, u32*, u8 costume_id, u32*, u32*);
 void ftParts_80074CA0(u32*, s32, u32*);
 void ftParts_80074D7C(u32*, s32, u32*);

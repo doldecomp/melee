@@ -1,3 +1,19 @@
+#include "gm_1A36.h"
+
+#include "db/db_2253.h"
+#include "gm/gm_1601.h"
+#include "gm/gmmain_lib.h"
+#include "lb/lb_0198.h"
+#include "lb/lbarq.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbdvd.h"
+#include "lb/lbheap.h"
+#include "lb/lblanguage.h"
+#include "lb/lbmemory.h"
+#include "lb/lbmthp.h"
+#include "lb/lbsnap.h"
+#include "lb/lbtime.h"
+
 #include <placeholder.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/dvd/dvd.h>
@@ -8,27 +24,13 @@
 #include <dolphin/os/OSMemory.h>
 #include <dolphin/pad/Pad.h>
 #include <dolphin/vi/vi.h>
-#include <sysdolphin/baselib/baselib_unknown_002.h>
-#include <sysdolphin/baselib/controller.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/initialize.h>
-#include <sysdolphin/baselib/rumble.h>
-#include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/video.h>
-#include <melee/db/db_unknown_001.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gm/gmmain_lib.h>
-#include <melee/lb/lbarq.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbdvd.h>
-#include <melee/lb/lbheap.h>
-#include <melee/lb/lblanguage.h>
-#include <melee/lb/lbmemory.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/lb/lbsnap.h>
-#include <melee/lb/lbtime.h>
-#include <melee/lb/lbunknown_005.h>
-#include <melee/text_2.h>
+#include <baselib/baselib_unknown_002.h>
+#include <baselib/controller.h>
+#include <baselib/debug.h>
+#include <baselib/initialize.h>
+#include <baselib/rumble.h>
+#include <baselib/sislib.h>
+#include <baselib/video.h>
 
 extern bool lbl_804D6B20;
 extern u16 lbl_804D6B30; // debug flags

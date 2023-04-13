@@ -6,7 +6,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 void ftMasterHand_80152138(HSD_GObj* gobj);
 void ftMasterHand_80152174(HSD_GObj* gobj);

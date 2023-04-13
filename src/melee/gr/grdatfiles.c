@@ -1,10 +1,12 @@
-#include <sysdolphin/baselib/archive.h>
-#include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/psstructs.h>
-#include <melee/gr/grdatfiles.h>
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbheap.h>
-#include <melee/lb/lbunknown_001.h>
+#include "gr/grdatfiles.h"
+
+#include "lb/lb_00B0.h"
+#include "lb/lbarchive.h"
+#include "lb/lbheap.h"
+
+#include <baselib/archive.h>
+#include <baselib/debug.h>
+#include <baselib/psstructs.h>
 
 extern StageInfo stage_info;
 

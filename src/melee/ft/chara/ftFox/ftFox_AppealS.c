@@ -1,10 +1,11 @@
-#include <melee/ft/chara/ftFox/ftfox.h>
-#include <melee/ft/chara/ftFox/ftFox_AppealS.h>
-#include <melee/ft/code_80081B38.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/gr/grcorneria.h>
-#include <melee/it/item2.h>
-#include <melee/pl/pl_unknown_001.h>
+#include "ft/chara/ftFox/ftFox_AppealS.h"
+
+#include "ft/chara/ftFox/ftfox.h"
+#include "ft/ft_081B.h"
+#include "ft/ft_0877.h"
+#include "gr/grcorneria.h"
+#include "it/it_26B1.h"
+#include "pl/pl_0371.h"
 
 bool ftFox_AppealS_CheckIfUsed(Fighter* fp)
 {
@@ -34,9 +35,9 @@ static inline bool ftFox_CheckAppealSCount(void)
     return false;
 }
 
-bool ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
+bool ftFox_AppealS_CheckInput(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     s32 ftKind = fp->x4_fighterKind;
 
     if (((ftKind == FTKIND_FOX) || (ftKind == FTKIND_FALCO)) &&
@@ -45,7 +46,7 @@ bool ftFox_AppealS_CheckInput(HSD_GObj* fighter_gobj)
         ((u8) fp->x682 == true))
     {
         if (ftFox_CheckAppealSCount() == 0) {
-            ftFox_AppealS_Action(fighter_gobj);
+            ftFox_AppealS_Action(gobj);
             pl_80040120(fp->xC_playerID, fp->x221F_flag.bits.b4);
             return true;
         }
@@ -74,12 +75,12 @@ static s32 ASID_AppealS[2][3] = {
     { AS_FOX_APPEALS_START_L, AS_FOX_APPEALS_L, AS_FOX_APPEALS_END_L }
 };
 
-void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
+void ftFox_AppealS_Action(HSD_GObj* gobj)
 {
     s32 facingDir;
     s32 actionDir;
     s32 animCount;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     fp->sv.fx.AppealS.animCount = 0;
     facingDir = ftFox_AppealS_GetLR(1.0f, fp->facing_dir);
@@ -90,18 +91,18 @@ void ftFox_AppealS_Action(HSD_GObj* fighter_gobj)
     actionDir = fp->sv.fx.AppealS.facingDir;
     animCount = fp->sv.fx.AppealS.animCount;
 
-    Fighter_ChangeMotionState(fighter_gobj, ASID_AppealS[actionDir][animCount],
-                              0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ASID_AppealS[actionDir][animCount], 0,
+                              NULL, 0.0f, 1.0f, 0.0f);
 }
 
 /// Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback
 static void ftFox_AppealS_OnTakeDamage(HSD_GObj*);
 
-void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
+void ftFox_AppealS_Anim(HSD_GObj* gobj)
 {
     FighterKind ftKind;
     bool flag;
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -134,38 +135,38 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
             break;
         }
     }
-    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->sv.fx.AppealS.animCount++;
         if ((s32) fp->sv.fx.AppealS.animCount >= 3) {
-            ft_8008A324(fighter_gobj);
+            ft_8008A324(gobj);
             return;
         }
 
-        Fighter_ChangeMotionState(fighter_gobj,
+        Fighter_ChangeMotionState(gobj,
                                   ASID_AppealS[fp->sv.fx.AppealS.facingDir]
                                               [fp->sv.fx.AppealS.animCount],
                                   0, NULL, 0.0f, 1.0f, 0.0f);
     }
 }
 
-void ftFox_AppealS_IASA(HSD_GObj* fighter_gobj)
+void ftFox_AppealS_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftFox_AppealS_Phys(HSD_GObj* fighter_gobj)
+void ftFox_AppealS_Phys(HSD_GObj* gobj)
 {
-    ft_80084F3C(fighter_gobj);
+    ft_80084F3C(gobj);
 }
 
-void ftFox_AppealS_Coll(HSD_GObj* fighter_gobj)
+void ftFox_AppealS_Coll(HSD_GObj* gobj)
 {
-    ft_80084280(fighter_gobj);
+    ft_80084280(gobj);
 }
 
-static void ftFox_AppealS_OnTakeDamage(HSD_GObj* fighter_gobj)
+static void ftFox_AppealS_OnTakeDamage(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
 
     grCorneria_801E2AF4();
     fp->cb.x21E0_callback_OnDeath = NULL;

@@ -3,10 +3,11 @@
 
 #include <platform.h>
 
+#include "gr/types.h"
+
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <melee/gr/types.h>
+#include <baselib/gobjproc.h>
 
 f32 Stage_GetCamBoundsLeftOffset(void);
 f32 Stage_GetCamBoundsRightOffset(void);

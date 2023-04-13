@@ -1,28 +1,30 @@
-#include <melee/it/forward.h>
+#include "it/forward.h"
+
+#include "it/item.h"
+
+#include "cm/camera.h"
+#include "db/db_2253.h"
+#include "ef/efasync.h"
+#include "ef/eflib.h"
+#include "ft/ftlib.h"
+#include "gm/gm_1601.h"
+#include "gr/grlib.h"
+#include "it/it_266F.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbaudio_ax.h"
+#include "mp/mpcoll.h"
+#include "mp/mplib.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
 #include <dolphin/os/os.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <melee/cm/camera.h>
-#include <melee/db/db_unknown_001.h>
-#include <melee/ef/efasync.h>
-#include <melee/ef/eflib.h>
-#include <melee/ft/ftlib.h>
-#include <melee/gm/code_801601C4.h>
-#include <melee/gr/grlib.h>
-#include <melee/it/code_80266F3C.h>
-#include <melee/it/item.h>
-#include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lbunknown_001.h>
-#include <melee/lb/lbunknown_003.h>
-#include <melee/mp/mpcoll.h>
-#include <melee/mp/mplib.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
 
 /// Check if items are enabled
 bool Item_80266F3C(void)
@@ -114,9 +116,9 @@ void Item_80266FCC(void)
 }
 
 /// @private
-void ItUnkHoldKind(HSD_GObj* item_gobj)
+void ItUnkHoldKind(HSD_GObj* gobj)
 {
-    Item* it = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* it = (Item*) HSD_GObjGetUserData(gobj);
 
     switch (it->hold_kind) {
     case 4:
@@ -147,10 +149,10 @@ inline void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it)
 }
 
 /// @private
-void Item_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
+void Item_80267130(HSD_GObj* gobj, SpawnItem* spawnItem)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    HSD_JObj* model = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
+    HSD_JObj* model = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
 
     item_data->pos = spawnItem->prev_pos;
     item_data->init_facing_dir = item_data->facing_dir = spawnItem->facing_dir;
@@ -169,13 +171,13 @@ void Item_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     }
 
     HSD_JObjSetFacingDirItem(model, item_data);
-    it_80273500(item_gobj, &spawnItem->vel);
+    it_80273500(gobj, &spawnItem->vel);
 
     item_data->x5CC_currentAnimFrame = 0.0f;
     item_data->x5D0_animFrameSpeed = 1.0f;
 
-    it_802753BC(item_gobj, spawnItem->x3C_damage);
-    it_802753DC(item_gobj);
+    it_802753BC(gobj, spawnItem->x3C_damage);
+    it_802753DC(gobj);
 
     item_data->xC64_reflectGObj = NULL;
     item_data->xDCC_flag.b0 = false;
@@ -183,7 +185,7 @@ void Item_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->xC90_absorbGObj = NULL;
     item_data->xD0C = 0;
 
-    it_8026B390(item_gobj);
+    it_8026B390(gobj);
     item_data->xDC8_word.flags.x13 = false;
 
     if (spawnItem->x48_ground_or_air == GA_Air) {
@@ -192,13 +194,13 @@ void Item_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
         it_802762B0(item_data);
     }
 
-    it_80275E98(item_gobj, spawnItem);
-    it_80274DAC(item_gobj);
+    it_80275E98(gobj, spawnItem);
+    it_80274DAC(gobj);
     HSD_JObjSetTranslate(model, &item_data->pos);
-    it_80274658(item_gobj, lbl_804D6D28->x6C_float);
-    it_802725D4(item_gobj);
-    it_80271508(item_gobj, 0);
-    it_80272280(item_gobj);
+    it_80274658(gobj, lbl_804D6D28->x6C_float);
+    it_802725D4(gobj);
+    it_80271508(gobj, 0);
+    it_80272280(gobj);
 
     item_data->on_accessory = NULL;
     item_data->touched = NULL;
@@ -207,20 +209,20 @@ void Item_80267130(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->jumped_on = NULL;
 
     if (item_data->owner != NULL) {
-        db_80225DD8(item_gobj, item_data->owner);
+        db_80225DD8(gobj, item_data->owner);
     } else {
-        db_80225D64(item_gobj, item_data->owner);
+        db_80225D64(gobj, item_data->owner);
     }
 
-    it_8027B0C4(item_gobj, spawnItem);
+    it_8027B0C4(gobj, spawnItem);
     it_80279B64(item_data);
-    ItUnkHoldKind(item_gobj);
+    ItUnkHoldKind(gobj);
 }
 
 /// Remove Camera Box
-void Item_80267454(HSD_GObj* item_gobj)
+void Item_80267454(HSD_GObj* gobj)
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = gobj->user_data;
 
     if (item_data->xDCD_flag.bits.b01 != 0 &&
 
@@ -301,9 +303,9 @@ void Item_802674AC(SpawnItem* spawnItem)
 }
 
 /// @private
-void Item_802675A8(HSD_GObj* item_gobj)
+void Item_802675A8(HSD_GObj* gobj)
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = gobj->user_data;
 
     switch (item_data->hold_kind) {
     case 0:
@@ -353,9 +355,9 @@ void Item_802675A8(HSD_GObj* item_gobj)
 }
 
 /// @private
-void Item_802676F4(HSD_GObj* item_gobj)
+void Item_802676F4(HSD_GObj* gobj)
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = gobj->user_data;
     switch (item_data->hold_kind) {
     case 0:
         lbl_804A0C64.x0++;
@@ -496,9 +498,9 @@ extern struct ItemLogicTable lbl_803F3100[];
 extern struct ItemLogicTable lbl_803F23CC[];
 extern struct ItemLogicTable lbl_803F4D20[];
 
-void Item_80267978(HSD_GObj* item_gobj)
+void Item_80267978(HSD_GObj* gobj)
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = gobj->user_data;
     if (item_data->kind < It_Kind_Kuriboh) {
         // Common items
         item_data->xC4_article_data =
@@ -530,16 +532,16 @@ void Item_80267978(HSD_GObj* item_gobj)
 extern unk_t db_80225B20(void);
 
 /// @private
-void Item_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
+void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
 {
     ItemAttr* item_attr;
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     item_data->kind = spawnItem->kind;
     item_data->hold_kind = spawnItem->hold_kind;
     item_data->x18 = spawnItem->x10;
     item_data->x1C = lbl_804D6D10++;
-    item_data->entity = item_gobj;
-    Item_80267978(item_gobj);
+    item_data->entity = gobj;
+    Item_80267978(gobj);
     item_data->asid = -1;
     item_data->xC8_joint =
         item_data->xC4_article_data->x10_modelDesc->x0_joint;
@@ -576,7 +578,7 @@ void Item_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_data->xCB8_outDamageDirection = 0.0f;
     item_data->xC68 = 0.0f;
     item_data->xCD0 = 0.0f;
-    it_80275158(item_gobj, lbl_804D6D28->x30);
+    it_80275158(gobj, lbl_804D6D28->x30);
     item_data->xDD0_flag.bits.b3 = false;
     item_data->spin_spd = item_data->xCC_item_attr->xC_spin_speed;
     item_data->xDC8_word.flags.x19 = item_data->xCC_item_attr->x1_3;
@@ -659,9 +661,9 @@ void Item_80267AA8(HSD_GObj* item_gobj, SpawnItem* spawnItem)
     item_attr = item_data->xCC_item_attr;
     item_data->xD84 = item_attr->x80;
 
-    it_80275474(item_gobj);
-    it_80275504(item_gobj);
-    it_80274EF8(item_gobj);
+    it_80275474(gobj);
+    it_80275504(gobj);
+    it_80274EF8(gobj);
 
     if (ftLib_80086960(spawnItem->x0_parent_gobj)) {
         item_data->xDC8_word.flags.x1 = false;
@@ -703,18 +705,18 @@ extern void PSMTXIdentity(Mtx); /* extern */
 extern u8 lbl_804D7849;
 
 /// Setup Item JObj
-void Item_802680CC(HSD_GObj* item_gobj)
+void Item_802680CC(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
 
     if (item_data->xC8_joint != NULL) {
         HSD_JObj* jobj = HSD_JObjLoadJoint(item_data->xC8_joint);
-        func_80390A70(item_gobj, lbl_804D7849, jobj);
+        func_80390A70(gobj, lbl_804D7849, jobj);
     } else {
         HSD_JObj* jobj = HSD_JObjAlloc();
         PSMTXIdentity(jobj->mtx);
         jobj->scl = NULL;
-        func_80390A70(item_gobj, lbl_804D7849, jobj);
+        func_80390A70(gobj, lbl_804D7849, jobj);
     }
 }
 
@@ -722,7 +724,7 @@ extern HSD_DObj* HSD_JObjGetDObj(HSD_JObj*);
 extern void* lbl_803F1F90[];
 
 /// @private
-void Item_8026814C(HSD_GObj* item_gobj)
+void Item_8026814C(HSD_GObj* gobj)
 {
 #ifdef MUST_MATCH
     u8 _[8];
@@ -734,7 +736,7 @@ void Item_8026814C(HSD_GObj* item_gobj)
     HSD_DObj* var_r29;
     HSD_JObj* var_r3;
 
-    var_r30 = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
+    var_r30 = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
     while (var_r30 != NULL) {
         var_r29 = HSD_JObjGetDObj(var_r30);
     loop_2:
@@ -782,7 +784,7 @@ void Item_8026814C(HSD_GObj* item_gobj)
 
 /// @private
 /// @todo Needs some serious cleaning.
-bool Item_802682F0(HSD_GObj* item_gobj)
+bool Item_802682F0(HSD_GObj* gobj)
 {
     s32 var_r4;
     Item* item_data;
@@ -791,13 +793,13 @@ bool Item_802682F0(HSD_GObj* item_gobj)
     HSD_JObj* var_r3_2;
     HSD_JObj* var_r5;
 
-    item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xC4_article_data->x10_modelDesc->x4_bone_count != 0) {
         item_data->xBBC_dynamicBoneTable = HSD_ObjAlloc(&unkAllocData1);
         if (item_data->xBBC_dynamicBoneTable == NULL) {
             return false;
         }
-        var_r5 = item_gobj->hsd_obj;
+        var_r5 = gobj->hsd_obj;
         var_r4 = 0;
         while (var_r5 != NULL) {
             (item_data->xBBC_dynamicBoneTable->bones[var_r4]) = var_r5;
@@ -838,10 +840,10 @@ bool Item_802682F0(HSD_GObj* item_gobj)
 }
 
 /// Set item model scale
-void Item_8026849C(HSD_GObj* item_gobj)
+void Item_8026849C(HSD_GObj* gobj)
 {
-    HSD_JObj* temp_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    HSD_JObj* temp_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     f32 tmp = item_data->scl;
     Vec3 sp14;
     sp14.x = sp14.y = sp14.z = tmp;
@@ -851,10 +853,10 @@ void Item_8026849C(HSD_GObj* item_gobj)
 extern void lb_80011710(void*, void*);
 
 /// @private
-void Item_80268560(HSD_GObj* item_gobj)
+void Item_80268560(HSD_GObj* gobj)
 {
     int i;
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     Article* article_data = item_data->xC4_article_data;
     if (article_data->x14_dynamics == NULL) {
         item_data->x374_dynamicBonesNum = 0;
@@ -1105,10 +1107,10 @@ void Item_80268BE0(HSD_JObj* item_jobj, HSD_AnimJoint* anim_joint,
 }
 
 /// Unk Item AObj-related function
-void Item_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc)
+void Item_80268D34(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc)
 {
-    HSD_JObj* item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    HSD_JObj* item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     HSD_JObjRemoveAnimAll(item_jobj);
     if (item_data->xC8_joint != NULL) {
         unk_t bonestruct_arg;
@@ -1127,11 +1129,11 @@ void Item_80268D34(HSD_GObj* item_gobj, struct ItemStateDesc* itemStateDesc)
 }
 
 /// Advance item animation?
-void Item_80268DD4(HSD_GObj* item_gobj, f32 frame)
+void Item_80268DD4(HSD_GObj* gobj, f32 frame)
 {
     HSD_JObj* item_jobj;
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
+    item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
     lb_8000BA0C(item_jobj, item_data->x5D0_animFrameSpeed);
     HSD_JObjReqAnimAll(item_jobj, frame);
     HSD_JObjAnimAll(item_jobj);
@@ -1148,8 +1150,7 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 
 extern struct r13_ColAnimStruct* lbl_804D6D04;
 
-void Item_80268E5C(HSD_GObj* item_gobj, enum_t asid,
-                   Item_StateChangeFlags flags)
+void Item_80268E5C(HSD_GObj* gobj, enum_t asid, Item_StateChangeFlags flags)
 {
     Vec3 sp4C;
     Vec3 scl;
@@ -1173,21 +1174,21 @@ void Item_80268E5C(HSD_GObj* item_gobj, enum_t asid,
     ItemStateDesc* temp_r23;
     s32 temp_r0;
 
-    item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
-    item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
+    item_data = (Item*) HSD_GObjGetUserData(gobj);
 
     item_data->asid = asid;
     item_data->xDC8_word.flags.x14 = 0;
-    HSD_JObjSetTranslate(item_gobj->hsd_obj, &item_data->pos);
-    efAsync_80067624(item_gobj, &item_data->xBC0);
+    HSD_JObjSetTranslate(gobj->hsd_obj, &item_data->pos);
+    efAsync_80067624(gobj, &item_data->xBC0);
 
     if (item_data->xDC8_word.flags.x2 == 1) {
-        it_8026BDCC(item_gobj);
-        it_80274EF8(item_gobj);
+        it_8026BDCC(gobj);
+        it_80274EF8(gobj);
     }
 
     if ((flags & ITEM_MODEL_UPDATE)) {
-        it_80274740(item_gobj);
+        it_80274740(gobj);
     }
 
     if (!(flags & ITEM_COLANIM_PRESERVE) &&
@@ -1209,7 +1210,7 @@ void Item_80268E5C(HSD_GObj* item_gobj, enum_t asid,
     }
 
     if (!(flags & ITEM_HIT_PRESERVE) && item_data->xDC8_word.flags.x16) {
-        it_802725D4(item_gobj);
+        it_802725D4(gobj);
     }
 
     item_data->xCC8_knockback = 0.0F;
@@ -1229,11 +1230,11 @@ void Item_80268E5C(HSD_GObj* item_gobj, enum_t asid,
         temp_r23 = (new_var3 = item_data->xD0_itemStateDesc);
 
         if (temp_r23 != NULL && (flags & ITEM_ANIM_UPDATE)) {
-            Item_80268D34(item_gobj, temp_r23);
+            Item_80268D34(gobj, temp_r23);
 
             if ((flags & ITEM_UNK_UPDATE)) {
-                item_jobj1_2 = item_gobj->hsd_obj;
-                item_data3 = GetItemData(item_gobj);
+                item_jobj1_2 = gobj->hsd_obj;
+                item_data3 = GetItemData(gobj);
                 item_data3->scl = item_data3->xCC_item_attr->x60_scale;
                 HSD_JObjSetScaleItem(item_data3, item_jobj1_2, &sp4C);
                 item_attr = item_data3->xCC_item_attr;
@@ -1242,8 +1243,7 @@ void Item_80268E5C(HSD_GObj* item_gobj, enum_t asid,
                 item_data3->xBEC = item_data3->xCC_item_attr->x20;
                 item_data3->xBDC = item_data3->xCC_item_attr->x20;
             } else {
-                HSD_JObjSetScaleItem(item_gobj->user_data, item_gobj->hsd_obj,
-                                     &scl);
+                HSD_JObjSetScaleItem(gobj->user_data, gobj->hsd_obj, &scl);
             }
 
             item_data->x52C_item_script = temp_r29->xC_script;
@@ -1256,8 +1256,8 @@ void Item_80268E5C(HSD_GObj* item_gobj, enum_t asid,
         }
 
         HSD_JObjAnimAll(item_jobj);
-        it_80279BE0(item_gobj);
-        it_802799E4(item_gobj);
+        it_80279BE0(gobj);
+        it_802799E4(gobj);
     } else {
         HSD_JObjRemoveAnimAll(item_jobj);
         item_data->x52C_item_script = NULL;
@@ -1275,18 +1275,18 @@ void Item_80268E5C(HSD_GObj* item_gobj, enum_t asid,
     item_data->xDD0_flag.bits.b5 = false;
     item_data->xD09 = 0;
 
-    it_802714C0(item_gobj);
+    it_802714C0(gobj);
 }
 
-void Item_802693E4(HSD_GObj* item_gobj)
+void Item_802693E4(HSD_GObj* gobj)
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = gobj->user_data;
     if (item_data->xDC8_word.flags.x5 != 0) {
-        Item_8026A0A0(item_gobj);
+        Item_8026A0A0(gobj);
         item_data->xDC8_word.flags.x5 = 0;
     }
     if (item_data->xDC8_word.flags.x6 != 0) {
-        Item_8026A0FC(item_gobj);
+        Item_8026A0FC(gobj);
         item_data->xDC8_word.flags.x6 = 0;
     }
     if (item_data->xCBC_hitlagFrames > 0.0f) {
@@ -1298,34 +1298,34 @@ void Item_802693E4(HSD_GObj* item_gobj)
             if ((item_data->xDC8_word.flags.x8 == 0) &&
                 (item_data->xDC8_word.flags.x7 == 0))
             {
-                Item_8026A1E8(item_gobj);
+                Item_8026A1E8(gobj);
             }
         }
     }
 }
 
 /// Advance item animation + script?
-void Item_802694CC(HSD_GObj* item_gobj)
+void Item_802694CC(HSD_GObj* gobj)
 {
-    HSD_JObj* item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(item_gobj);
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    HSD_JObj* item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     HSD_JObjAnimAll(item_jobj);
     item_data->x5CC_currentAnimFrame = lb_8000BDB4(item_jobj);
-    it_802799E4(item_gobj);
+    it_802799E4(gobj);
 }
 
 /// @private
-void Item_80269528(HSD_GObj* item_gobj)
+void Item_80269528(HSD_GObj* gobj)
 {
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xDC8_word.flags.x9 == 0) {
-        Item_802694CC(item_gobj);
-        if (item_data->animated != NULL && item_data->animated(item_gobj)) {
+        Item_802694CC(gobj);
+        if (item_data->animated != NULL && item_data->animated(gobj)) {
             item_data->destroy_type = 0;
-            Item_8026A8EC(item_gobj);
+            Item_8026A8EC(gobj);
             return;
         }
     }
@@ -1336,7 +1336,7 @@ void Item_80269528(HSD_GObj* item_gobj)
             item_data->xD40 = 0.0f;
             it_80279BBC(item_data);
             if (item_data->xDD0_flag.bits.b7 == 0) {
-                it_802756E0(item_gobj);
+                it_802756E0(gobj);
             }
         }
     }
@@ -1346,63 +1346,63 @@ void Item_80269528(HSD_GObj* item_gobj)
         item_data->xD44_lifeTimer -= 1.0f;
         if (item_data->xD44_lifeTimer <= 0.0f) {
             item_data->destroy_type = 0;
-            Item_8026A8EC(item_gobj);
+            Item_8026A8EC(gobj);
             return;
         }
         if (item_data->xD44_lifeTimer <= lbl_804D6D28->x34) {
-            it_802728C8(item_gobj);
+            it_802728C8(gobj);
         }
     }
-    it_802721B8(item_gobj);
-    it_80272298(item_gobj);
-    it_80279BE0(item_gobj);
+    it_802721B8(gobj);
+    it_80272298(gobj);
+    it_80279BE0(gobj);
 }
 
 /// @private
-bool Item_802696CC(HSD_GObj* item_gobj)
+bool Item_802696CC(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     if ((item_data->xDCC_flag.b4567 & 8) &&
         item_data->pos.x > Stage_GetBlastZoneRightOffset())
     {
         item_data->destroy_type = 3;
-        Item_8026A8EC(item_gobj);
+        Item_8026A8EC(gobj);
         return true;
     }
     if ((item_data->xDCC_flag.b4567 & 4) &&
         item_data->pos.x < Stage_GetBlastZoneLeftOffset())
     {
         item_data->destroy_type = 3;
-        Item_8026A8EC(item_gobj);
+        Item_8026A8EC(gobj);
         return true;
     }
     if ((item_data->xDCC_flag.b4567 & 1) && item_data->pos.y > 10000.0f) {
         item_data->destroy_type = 3;
-        Item_8026A8EC(item_gobj);
+        Item_8026A8EC(gobj);
         return true;
     }
     if ((item_data->xDCC_flag.b4567 & 2) &&
         item_data->pos.y < Stage_GetBlastZoneBottomOffset())
     {
         item_data->destroy_type = 3;
-        Item_8026A8EC(item_gobj);
+        Item_8026A8EC(gobj);
         return true;
     }
     return false;
 }
 
-void Item_802697D4(HSD_GObj* item_gobj)
+void Item_802697D4(HSD_GObj* gobj)
 {
     Vec3 sp1C;
 #ifdef MUST_MATCH
     u8 _[12];
 #endif
 
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xDC8_word.flags.x9 == 0 &&
         item_data->physics_updated != NULL)
     {
-        item_data->physics_updated(item_gobj);
+        item_data->physics_updated(gobj);
     }
     if (item_data->xDC8_word.flags.x13 == 0) {
         if (item_data->xDC8_word.flags.x9 == 0) {
@@ -1410,17 +1410,17 @@ void Item_802697D4(HSD_GObj* item_gobj)
             if ((item_data->ground_or_air == 0) &&
                 (item_data->xDCD_flag.bits.b3 == 0))
             {
-                it_8027737C(item_gobj, &sp1C);
+                it_8027737C(gobj, &sp1C);
             }
             PSVECAdd(&item_data->pos, &sp1C, &item_data->pos);
         }
         if (item_data->xDCC_flag.b3 == 1 &&
-            (item_data->xDCC_flag.b4567 & 0xF) && Item_802696CC(item_gobj))
+            (item_data->xDCC_flag.b4567 & 0xF) && Item_802696CC(gobj))
         {
             return;
         }
         if (item_data->xD3C_spinSpeed && item_data->ground_or_air == 1) {
-            it_80274A64(item_gobj);
+            it_80274A64(gobj);
         }
     }
     if ((item_data->xDD1_flag.bits.b1 != 0) && (item_data->ground_or_air == 1))
@@ -1428,11 +1428,9 @@ void Item_802697D4(HSD_GObj* item_gobj)
         grLib_801C9E60(&item_data->x58_vec_unk);
     }
     PSVECAdd(&item_data->pos, &item_data->x58_vec_unk, &item_data->pos);
-    it_80273484(item_gobj);
+    it_80273484(gobj);
     if (item_data->ground_or_air == 0) {
-        if ((item_data->xDCE_flag.bits.b3 != 0) &&
-            (it_8026D604(item_gobj) != 0))
-        {
+        if ((item_data->xDCE_flag.bits.b3 != 0) && (it_8026D604(gobj) != 0)) {
             mpLib_800567C0(item_data->xC30, &item_data->pos,
                            &item_data->x64_vec_unk2);
         } else {
@@ -1441,35 +1439,35 @@ void Item_802697D4(HSD_GObj* item_gobj)
         }
     }
     PSVECAdd(&item_data->pos, &item_data->x64_vec_unk2, &item_data->pos);
-    it_8027346C(item_gobj);
-    it_802714C0(item_gobj);
+    it_8027346C(gobj);
+    it_802714C0(gobj);
 }
 
-void Item_80269978(HSD_GObj* item_gobj)
+void Item_80269978(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    if (item_data->collided != NULL && item_data->collided(item_gobj)) {
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
+    if (item_data->collided != NULL && item_data->collided(gobj)) {
         item_data->destroy_type = 1;
-        Item_8026A8EC(item_gobj);
+        Item_8026A8EC(gobj);
     } else {
-        HSD_JObjSetTranslate((HSD_JObj*) HSD_GObjGetHSDObj(item_gobj),
+        HSD_JObjSetTranslate((HSD_JObj*) HSD_GObjGetHSDObj(gobj),
                              &item_data->pos);
-        it_8027574C(item_gobj);
-        it_8026C368(item_gobj);
+        it_8027574C(gobj);
+        it_8026C368(gobj);
     }
 }
 
 /// @private
-void Item_80269A9C(HSD_GObj* item_gobj)
+void Item_80269A9C(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    efAsync_80067624(item_gobj, &item_data->xBC0);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
+    efAsync_80067624(gobj, &item_data->xBC0);
     if (item_data->xDC8_word.flags.x9 == 0) {
         if (item_data->on_accessory != NULL) {
-            item_data->on_accessory(item_gobj);
+            item_data->on_accessory(gobj);
         }
     }
-    item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xDCD_flag.bits.b01 != 0) {
         CameraBox* cameraBox = item_data->x520_cameraBox;
         if (cameraBox != NULL) {
@@ -1477,24 +1475,24 @@ void Item_80269A9C(HSD_GObj* item_gobj)
             cameraBox->x1C = item_data->pos;
         }
     }
-    it_80271A58(item_gobj);
-    it_80272280(item_gobj);
-    it_802722B0(item_gobj);
+    it_80271A58(gobj);
+    it_80272280(gobj);
+    it_802722B0(gobj);
 }
 
 /// @private
-void Item_80269B60(HSD_GObj* item_gobj)
+void Item_80269B60(HSD_GObj* gobj)
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = gobj->user_data;
     if (item_data->xCFC != 0 && item_data->jumped_on != NULL &&
-        item_data->jumped_on(item_gobj))
+        item_data->jumped_on(gobj))
     {
         item_data->destroy_type = 2;
-        Item_8026A8EC(item_gobj);
+        Item_8026A8EC(gobj);
         return;
     }
-    it_8027137C(item_gobj);
-    it_8027146C(item_gobj);
+    it_8027137C(gobj);
+    it_8027146C(gobj);
 }
 
 /// @private
@@ -1514,7 +1512,7 @@ void Item_80269BE4(HSD_GObj* this)
 }
 
 /// @private
-void Item_80269C5C(HSD_GObj* item_gobj)
+void Item_80269C5C(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1522,9 +1520,9 @@ void Item_80269C5C(HSD_GObj* item_gobj)
 #endif
 
     it_8026F9A0();
-    it_802703E8(item_gobj);
-    it_802706D0(item_gobj);
-    it_80270E30(item_gobj);
+    it_802703E8(gobj);
+    it_802706D0(gobj);
+    it_80270E30(gobj);
 }
 
 /// Add to damage taken
@@ -1538,9 +1536,9 @@ void Item_80269CA0(Item* item_data, s32 damage)
 }
 
 /// @private
-void Item_80269CC4(HSD_GObj* item_gobj)
+void Item_80269CC4(HSD_GObj* gobj)
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
 
     temp_item->xCA0 = 0;
     temp_item->xCA4 = 0;
@@ -1586,11 +1584,11 @@ void Item_80269CC4(HSD_GObj* item_gobj)
 }
 
 /// @private
-bool Item_80269DC8(HSD_GObj* item_gobj)
+bool Item_80269DC8(HSD_GObj* gobj)
 {
     HSD_GObjPredicate shield_bounced;
     HSD_GObjPredicate hit_shield;
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = gobj->user_data;
 
     if (item_data->xDCE_flag.bits.b5 && item_data->ground_or_air == 1 &&
         (item_data->xDCE_flag.bits.b4 ||
@@ -1606,21 +1604,21 @@ bool Item_80269DC8(HSD_GObj* item_gobj)
 
         shield_bounced = item_data->xB8_itemLogicTable->shield_bounced;
 
-        if (shield_bounced != NULL && shield_bounced(item_gobj)) {
+        if (shield_bounced != NULL && shield_bounced(gobj)) {
             item_data->destroy_type = 2;
-            Item_8026A8EC(item_gobj);
+            Item_8026A8EC(gobj);
             return true;
         }
     } else {
         hit_shield = item_data->xB8_itemLogicTable->hit_shield;
 
-        if (it_80274C78(item_gobj)) {
+        if (it_80274C78(gobj)) {
             item_data->xCA8 = item_data->xC50;
         }
 
-        if (hit_shield != NULL && hit_shield(item_gobj)) {
+        if (hit_shield != NULL && hit_shield(gobj)) {
             item_data->destroy_type = 2;
-            Item_8026A8EC(item_gobj);
+            Item_8026A8EC(gobj);
             return true;
         }
     }
@@ -1629,13 +1627,13 @@ bool Item_80269DC8(HSD_GObj* item_gobj)
 }
 
 /// @private
-bool Item_80269F14(HSD_GObj* item_gobj)
+bool Item_80269F14(HSD_GObj* gobj)
 {
     f32 temp_f30;
     bool (*cb_OnReflect)(HSD_GObj*);
     s32 i;
     uint var_r27;
-    Item* temp_item = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* temp_item = (Item*) HSD_GObjGetUserData(gobj);
 
     if (temp_item->xDCC_flag.b1 == 0) {
         if (temp_item->kind == 34) {
@@ -1649,16 +1647,16 @@ bool Item_80269F14(HSD_GObj* item_gobj)
         }
     }
 
-    db_80225DD8(item_gobj, temp_item->owner);
+    db_80225DD8(gobj, temp_item->owner);
     temp_item->xD90 = temp_item->xC74;
     temp_item->xD94 = temp_item->xC78;
     temp_item->xD9C = temp_item->xC80;
     temp_item->xDA4_word = temp_item->xC88;
     temp_item->xDA8_short = temp_item->xC8C;
     cb_OnReflect = temp_item->xB8_itemLogicTable->reflected;
-    if (cb_OnReflect != NULL && cb_OnReflect(item_gobj)) {
+    if (cb_OnReflect != NULL && cb_OnReflect(gobj)) {
         temp_item->destroy_type = 2;
-        Item_8026A8EC(item_gobj);
+        Item_8026A8EC(gobj);
         return true;
     }
     if (temp_item->xDCC_flag.b0 == 0) {
@@ -1673,7 +1671,7 @@ bool Item_80269F14(HSD_GObj* item_gobj)
                 if (var_r27 > lbl_804D6D28->xD8) {
                     var_r27 = lbl_804D6D28->xD8;
                 }
-                it_80272460(&temp_item->x5D4_hitboxes[i], var_r27, item_gobj);
+                it_80272460(&temp_item->x5D4_hitboxes[i], var_r27, gobj);
             }
         }
     }
@@ -1681,28 +1679,28 @@ bool Item_80269F14(HSD_GObj* item_gobj)
 }
 
 /// @private
-void Item_8026A0A0(HSD_GObj* item_gobj)
+void Item_8026A0A0(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xDC8_word.flags.x7 != 0) {
         if ((item_data->xDC8_word.flags.xA == 0) &&
             (item_data->xDC8_word.flags.x8 == 0))
         {
-            Item_8026A1E8(item_gobj);
+            Item_8026A1E8(gobj);
         }
         item_data->xDC8_word.flags.x7 = 0;
     }
 }
 
 /// @private
-void Item_8026A0FC(HSD_GObj* item_gobj)
+void Item_8026A0FC(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xDC8_word.flags.x8 != 0) {
         if ((item_data->xDC8_word.flags.xA == 0) &&
             (item_data->xDC8_word.flags.x7 == 0))
         {
-            Item_8026A1E8(item_gobj);
+            Item_8026A1E8(gobj);
         }
         item_data->xDC8_word.flags.x8 = 0;
     }
@@ -1717,11 +1715,11 @@ void func_8026A158_helper(HSD_GObj* atkCollGObj)
 }
 
 /// @private
-void Item_8026A158(HSD_GObj* item_gobj)
+void Item_8026A158(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->entered_hitlag != NULL) {
-        item_data->entered_hitlag(item_gobj);
+        item_data->entered_hitlag(gobj);
     }
     item_data->xDC8_word.flags.x9 = 1;
     if (item_data->atk_victim != NULL && it_80272D1C(item_data->atk_victim) &&
@@ -1746,11 +1744,11 @@ void func_8026A1E8_inline(HSD_GObj* atkCollGObj)
 }
 
 /// @private
-void Item_8026A1E8(HSD_GObj* item_gobj)
+void Item_8026A1E8(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->exited_hitlag != NULL) {
-        item_data->exited_hitlag(item_gobj);
+        item_data->exited_hitlag(gobj);
     }
     item_data->xDC8_word.flags.x9 = 0;
     if (item_data->atk_victim != NULL && it_80272D1C(item_data->atk_victim) &&
@@ -1761,19 +1759,18 @@ void Item_8026A1E8(HSD_GObj* item_gobj)
 }
 
 /// @private
-bool processCallback(HSD_GObjPredicate cb, HSD_GObj* item_gobj,
-                     Item* item_data)
+bool processCallback(HSD_GObjPredicate cb, HSD_GObj* gobj, Item* item_data)
 {
-    if (cb && cb(item_gobj)) {
+    if (cb && cb(gobj)) {
         item_data->destroy_type = 2;
-        Item_8026A8EC(item_gobj);
+        Item_8026A8EC(gobj);
         return true;
     }
     return false;
 }
 
 /// @private
-bool OnTakeDamageThink(HSD_GObj* item_gobj, Item* item_data)
+bool OnTakeDamageThink(HSD_GObj* gobj, Item* item_data)
 {
     item_data->xC9C += item_data->xCA0;
     if (item_data->xC9C > 999) {
@@ -1781,38 +1778,38 @@ bool OnTakeDamageThink(HSD_GObj* item_gobj, Item* item_data)
     }
     item_data->xCA8 = item_data->xCA0;
     item_data->xDC8_word.flags.xB = 1;
-    return processCallback(item_data->xB8_itemLogicTable->dmg_received,
-                           item_gobj, item_data);
+    return processCallback(item_data->xB8_itemLogicTable->dmg_received, gobj,
+                           item_data);
 }
 
 /// @private
-bool OnClankThink(HSD_GObj* item_gobj, Item* item_data)
+bool OnClankThink(HSD_GObj* gobj, Item* item_data)
 {
     bool (*cb_OnClank)(HSD_GObj*) = item_data->xB8_itemLogicTable->clanked;
-    if (it_80274C78(item_gobj)) {
+    if (it_80274C78(gobj)) {
         item_data->xCA8 = item_data->xC48;
     }
-    return processCallback(cb_OnClank, item_gobj, item_data);
+    return processCallback(cb_OnClank, gobj, item_data);
 }
 
 /// @private
-bool OnGiveDamageThink(HSD_GObj* item_gobj, Item* item_data)
+bool OnGiveDamageThink(HSD_GObj* gobj, Item* item_data)
 {
     bool (*cb_OnGiveDamage)(HSD_GObj*) =
         item_data->xB8_itemLogicTable->dmg_dealt;
-    if (it_80274C78(item_gobj)) {
+    if (it_80274C78(gobj)) {
         item_data->xCA8 = item_data->xC34_damageDealt;
     }
-    return processCallback(cb_OnGiveDamage, item_gobj, item_data);
+    return processCallback(cb_OnGiveDamage, gobj, item_data);
 }
 
 /// @private
-void EnterHitlagThink(HSD_GObj* item_gobj, Item* item_data)
+void EnterHitlagThink(HSD_GObj* gobj, Item* item_data)
 {
     if (!item_data->xDC8_word.flags.x9) {
-        item_data = GetItemData(item_gobj);
+        item_data = GetItemData(gobj);
         if (item_data->entered_hitlag) {
-            item_data->entered_hitlag(item_gobj);
+            item_data->entered_hitlag(gobj);
         }
         item_data->xDC8_word.flags.x9 = 1;
 
@@ -1834,38 +1831,38 @@ void checkHitLag(f32 min_value, Item* item_data)
 }
 
 /// @private
-void Item_8026A294(HSD_GObj* item_gobj)
+void Item_8026A294(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
 
     if ((item_data->xCC8_knockback) || (item_data->xCA0)) {
-        if (OnTakeDamageThink(item_gobj, item_data)) {
+        if (OnTakeDamageThink(gobj, item_data)) {
             return;
         }
     } else if (item_data->xC50) {
-        if (Item_80269DC8(item_gobj)) {
+        if (Item_80269DC8(gobj)) {
             return;
         }
     } else if (item_data->xC48) {
-        if (OnClankThink(item_gobj, item_data)) {
+        if (OnClankThink(gobj, item_data)) {
             return;
         }
     } else if ((item_data->xC34_damageDealt) || (item_data->xC4C)) {
-        if (OnGiveDamageThink(item_gobj, item_data)) {
+        if (OnGiveDamageThink(gobj, item_data)) {
             return;
         }
     } else if (item_data->xC64_reflectGObj != NULL) {
-        if (Item_80269F14(item_gobj)) {
+        if (Item_80269F14(gobj)) {
             return;
         }
     } else if (item_data->xC90_absorbGObj != NULL) {
-        if (processCallback(item_data->xB8_itemLogicTable->absorbed, item_gobj,
+        if (processCallback(item_data->xB8_itemLogicTable->absorbed, gobj,
                             item_data))
         {
             return;
         }
     } else if (item_data->xDCE_flag.bits.b6) {
-        if (processCallback(item_data->touched, item_gobj, item_data)) {
+        if (processCallback(item_data->touched, gobj, item_data)) {
             return;
         }
     }
@@ -1873,14 +1870,14 @@ void Item_8026A294(HSD_GObj* item_gobj)
     if ((item_data->xDC8_word.flags.xD) && (item_data->xCC0 > 0.0f)) {
         checkHitLag(item_data->xCC0, item_data);
 
-        EnterHitlagThink(item_gobj, item_data);
+        EnterHitlagThink(gobj, item_data);
     } else if (item_data->xCA8) {
         checkHitLag(it_8026B424(item_data->xCA8), item_data);
 
-        EnterHitlagThink(item_gobj, item_data);
+        EnterHitlagThink(gobj, item_data);
     }
     if ((item_data->xDC8_word.flags.x4) || (item_data->xDC8_word.flags.x3)) {
-        EnterHitlagThink(item_gobj, item_data);
+        EnterHitlagThink(gobj, item_data);
 
         if (item_data->xDC8_word.flags.x4) {
             item_data->xDC8_word.flags.x8 = 1;
@@ -1890,18 +1887,18 @@ void Item_8026A294(HSD_GObj* item_gobj)
             item_data->xDC8_word.flags.x3 = 0;
         }
     }
-    Item_80269CC4(item_gobj);
+    Item_80269CC4(gobj);
 }
 
 /// @private
-void Item_8026A788(HSD_GObj* item_gobj)
+void Item_8026A788(HSD_GObj* gobj)
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = gobj->user_data;
     int dynamicBonesNum = item_data->x374_dynamicBonesNum;
     Item_DynamicBones* dynamicBones = item_data->xD4_dynamicBones;
     int i;
 
-    it_80272304(item_gobj);
+    it_80272304(gobj);
     for (i = 0; i < dynamicBonesNum; i++, dynamicBones++) {
         lb_8001044C(&dynamicBones->unk_ptr, &item_data->xB6C, item_data->xB68,
                     0.0f, 0, dynamicBones->flags, 0, 1);
@@ -1909,28 +1906,28 @@ void Item_8026A788(HSD_GObj* item_gobj)
 }
 
 /// @private
-void Item_8026A810(HSD_GObj* item_gobj)
+void Item_8026A810(HSD_GObj* gobj)
 {
-    Item* temp_item = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* temp_item = (Item*) HSD_GObjGetUserData(gobj);
 
     if (temp_item->xB8_itemLogicTable->spawned != NULL) {
-        temp_item->xB8_itemLogicTable->spawned(item_gobj);
+        temp_item->xB8_itemLogicTable->spawned(gobj);
     }
 }
 
-void Item_8026A848(HSD_GObj* item_gobj, HSD_GObj* fighter_gobj)
+void Item_8026A848(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
 {
-    Item* temp_item = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* temp_item = (Item*) HSD_GObjGetUserData(gobj);
 
     if (temp_item->hold_kind == 8 && temp_item->kind != 58 &&
         temp_item->kind != 59 && temp_item->kind != 99 &&
         temp_item->kind != 103)
     {
-        if (ftLib_800867CC(fighter_gobj) == item_gobj) {
+        if (ftLib_800867CC(fighter_gobj) == gobj) {
             ftLib_80086764(fighter_gobj);
         }
-    } else if (ftLib_800867A0(fighter_gobj, item_gobj)) {
-        ftLib_80086724(fighter_gobj, item_gobj);
+    } else if (ftLib_800867A0(fighter_gobj, gobj)) {
+        ftLib_80086724(fighter_gobj, gobj);
     }
 }
 
@@ -1952,20 +1949,19 @@ void DestroyItemInline(HSD_GObj* this, Item* other_ip)
 }
 
 /// @private
-void ItemSwitch(HSD_GObj* item_gobj)
+void ItemSwitch(HSD_GObj* gobj)
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     enum_t destroy_type = ip->destroy_type;
 
     switch (destroy_type) {
     case 0:
-        it_8027327C(item_gobj, ip->xCC_item_attr->destroy_gfx,
-                    ip->destroy_sfx);
+        it_8027327C(gobj, ip->xCC_item_attr->destroy_gfx, ip->destroy_sfx);
         break;
 
     case 2:
     case 1:
-        it_8027327C(item_gobj, ip->xCC_item_attr->x68, ip->xD80);
+        it_8027327C(gobj, ip->xCC_item_attr->x68, ip->xD80);
         break;
 
     case 3:
@@ -1984,7 +1980,7 @@ void RunCallback(HSD_GObj* this, HSD_GObjEvent arg1)
 }
 
 /// @private
-/// @todo Decide on it vs ip vs data, gobj vs item_gobj vs this, etc.
+/// @todo Decide on it vs ip vs data, gobj vs gobj vs this, etc.
 void func_8026A8EC_inline1(HSD_GObj* this)
 {
     Item* ip = (Item*) HSD_GObjGetUserData(this);
@@ -1997,16 +1993,16 @@ void func_8026A8EC_inline1(HSD_GObj* this)
 }
 
 /// @private
-void func_8026A8EC_inline2(HSD_GObj* item_gobj)
+void func_8026A8EC_inline2(HSD_GObj* gobj)
 {
-    Item* it = (Item*) HSD_GObjGetUserData(item_gobj);
-    RunCallback(item_gobj, it->xB8_itemLogicTable->destroyed);
+    Item* it = (Item*) HSD_GObjGetUserData(gobj);
+    RunCallback(gobj, it->xB8_itemLogicTable->destroyed);
 }
 
 /// @private
-void func_8026A8EC_inline3(HSD_GObj* item_gobj)
+void func_8026A8EC_inline3(HSD_GObj* gobj)
 {
-    Item* it = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* it = (Item*) HSD_GObjGetUserData(gobj);
 
     if (it->xDCD_flag.bits.b01 != 0 && it->x520_cameraBox != NULL) {
         Camera_800290D4(it->x520_cameraBox);
@@ -2058,18 +2054,18 @@ void Item_8026A8EC(HSD_GObj* this)
     func_80390228(this);
 }
 
-void Item_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
+void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[16];
 #endif
 
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
 
-    it_80273168(item_gobj);
-    it_802742F4(item_gobj, pickup_gfx, pickup_sfx);
-    RunCallback(item_gobj, item_data->xB8_itemLogicTable->picked_up);
+    it_80273168(gobj);
+    it_802742F4(gobj, pickup_gfx, pickup_sfx);
+    RunCallback(gobj, item_data->xB8_itemLogicTable->picked_up);
     Item_8026B074(item_data);
 }
 
@@ -2211,18 +2207,18 @@ void Item_8026B074(Item* item_data)
 }
 
 /// @private
-void Item_8026B0B4(HSD_GObj* item_gobj)
+void Item_8026B0B4(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(item_gobj);
-    lbAudioAx_80026510(item_gobj);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
+    lbAudioAx_80026510(gobj);
 
     if (item_data->xD6C != SFX_NONE) {
-        lbAudioAx_800265C4(item_gobj, item_data->xD6C);
+        lbAudioAx_800265C4(gobj, item_data->xD6C);
         item_data->xD6C = SFX_NONE;
     }
 
     if (item_data->sfx_unk1 != SFX_NONE &&
-        lbAudioAx_800265C4(item_gobj, item_data->sfx_unk1) == 1)
+        lbAudioAx_800265C4(gobj, item_data->sfx_unk1) == 1)
     {
         if (item_data->sfx_unk1 != SFX_NONE) {
             lbAudioAx_800236B8(item_data->sfx_unk1);
@@ -2231,7 +2227,7 @@ void Item_8026B0B4(HSD_GObj* item_gobj)
     }
 
     if (item_data->sfx_unk2 != SFX_NONE &&
-        lbAudioAx_800265C4(item_gobj, item_data->sfx_unk2) == 1)
+        lbAudioAx_800265C4(gobj, item_data->sfx_unk2) == 1)
     {
         if (item_data->sfx_unk2 != SFX_NONE) {
             lbAudioAx_800236B8(item_data->sfx_unk2);
@@ -2254,11 +2250,11 @@ void Item_8026B0B4(HSD_GObj* item_gobj)
 }
 
 /// Check if item is grabbable
-bool Item_IsGrabbable(HSD_GObj* item_gobj)
+bool Item_IsGrabbable(HSD_GObj* gobj)
 {
     Item* temp_item;
 
-    temp_item = item_gobj->user_data;
+    temp_item = gobj->user_data;
 
     if ((temp_item->xDC8_word.flags.x15 != 0) &&
         (temp_item->xB8_itemLogicTable->picked_up != NULL))

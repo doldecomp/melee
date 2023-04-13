@@ -2,7 +2,7 @@
 #define MELEE_FT_CHARA_FTMARIO_FTMARIO_SPECIALLW_H
 
 #include <platform.h>
-#include <sysdolphin/baselib/forward.h>
+#include <baselib/forward.h>
 
 void ftMario_SpecialLw_SetNULL(HSD_GObj* gobj);
 void _ftMario_800E23E4_800E25C4_helper_0(HSD_GObj* gobj);

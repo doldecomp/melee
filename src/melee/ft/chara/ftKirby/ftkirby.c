@@ -1,11 +1,12 @@
-#include <melee/ft/forward.h>
+#include "ft/forward.h"
 
-#include <melee/ft/chara/ftKirby/ftkirby.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ft_unknown_006.h>
-#include <melee/ft/ftcamera.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/types.h>
+#include "ft/chara/ftKirby/ftkirby.h"
+
+#include "ft/fighter.h"
+#include "ft/ft_0877.h"
+#include "ft/ftcamera.h"
+#include "ft/ftparts.h"
+#include "ft/types.h"
 
 ActionState ftKirby_MotionStateTable[] = {
     { 295, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
@@ -1195,11 +1196,11 @@ void ftKirby_800EE528(void)
 
 #endif
 
-void ftKirby_OnDeath(HSD_GObj* fighter_gobj)
+void ftKirby_OnDeath(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftParts_80074A4C(fighter_gobj, 0, 0);
-    ftParts_80074A4C(fighter_gobj, 1, 0);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
     fp->ev.kb.x222C = 0;
     fp->ev.kb.x2230 = (s32) (HSD_Randi(5) + 1);
     fp->ev.kb.x223C = 0;
@@ -1210,13 +1211,13 @@ void ftKirby_OnDeath(HSD_GObj* fighter_gobj)
     if (Player_GetFlagsBit1(fp->xC_playerID) &&
         Player_GetUnk4D(fp->xC_playerID) != 4)
     {
-        ftKirby_800F1BAC(fighter_gobj, Player_GetUnk4D(fp->xC_playerID), 0);
+        ftKirby_800F1BAC(gobj, Player_GetUnk4D(fp->xC_playerID), 0);
     }
 }
 
-void ftKirby_OnLoad(HSD_GObj* fighter_gobj)
+void ftKirby_OnLoad(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->x10C_ftData->x48_items;
 
     PUSH_ATTRS(fp, ftKirbyAttributes);
@@ -1230,26 +1231,26 @@ void ftKirby_OnLoad(HSD_GObj* fighter_gobj)
     it_8026B3F8(item_list[3], 0x35);
 }
 
-void ftKirby_800EE74C(HSD_GObj* fighter_gobj)
+void ftKirby_800EE74C(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftKirby_800F5524(fighter_gobj);
-    ftKirby_800F22D4(fighter_gobj);
-    ftKirby_800F5318(fighter_gobj);
-    ftKirby_800F9090(fighter_gobj);
-    ftKirby_800F19AC(fighter_gobj);
-    ftKirby_800F5D04(fighter_gobj, false);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKirby_800F5524(gobj);
+    ftKirby_800F22D4(gobj);
+    ftKirby_800F5318(gobj);
+    ftKirby_800F9090(gobj);
+    ftKirby_800F19AC(gobj);
+    ftKirby_800F5D04(gobj, false);
     fp->cb.x21E8_callback_OnDeath3 = NULL;
 }
 
-void ftKirby_800EE7B8(HSD_GObj* fighter_gobj)
+void ftKirby_800EE7B8(HSD_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
-    ftKirby_800F5524(fighter_gobj);
-    ftKirby_800F22D4(fighter_gobj);
-    ftKirby_800F5318(fighter_gobj);
-    ftKirby_800F9090(fighter_gobj);
-    ftKirby_800F1A8C(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKirby_800F5524(gobj);
+    ftKirby_800F22D4(gobj);
+    ftKirby_800F5318(gobj);
+    ftKirby_800F9090(gobj);
+    ftKirby_800F1A8C(gobj);
     fp->cb.x21E0_callback_OnDeath = NULL;
 }
 
@@ -1258,10 +1259,10 @@ void ftKirby_800EE7B8(HSD_GObj* fighter_gobj)
 
 #if false
 
-void ftKirby_800EE818(HSD_GObj* fighter_gobj)
+void ftKirby_800EE818(HSD_GObj* gobj)
 {
     s32 _[2];
-    Fighter* fp = GET_FIGHTER(fighter_gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftKirbyAttributes* attr = fp->x2D4_specialAttributes;
     switch (fp->ev.kb.x2238) {
     case 3:
@@ -1288,14 +1289,14 @@ void ftKirby_800EE818(HSD_GObj* fighter_gobj)
     }
 }
 
-void ftKirby_OnItemInvisible(HSD_GObj* fighter_gobj)
+void ftKirby_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(fighter_gobj, 1);
+    Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftKirby_OnItemVisible(HSD_GObj* fighter_gobj)
+void ftKirby_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(fighter_gobj, 1);
+    Fighter_OnItemVisible(gobj, 1);
 }
 
 void ftKirby_OnItemDrop(HSD_GObj* gobj, bool bool1)

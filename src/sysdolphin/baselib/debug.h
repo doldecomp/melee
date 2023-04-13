@@ -18,6 +18,9 @@ ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
     ((cond) ? ((void) 0) : __assert(__FILE__, __LINE__, #cond))
 #endif
 
+#define HSD_ASSERT2(file, line, msg, cond)                                    \
+    ((cond) ? ((void) 0) : __assert((file), (line), (#msg)))
+
 int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3);
 int lbl_8038815C(s32 arg0, s32 arg1, s32* arg2, s32 arg3);
 

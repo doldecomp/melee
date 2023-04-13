@@ -1,6 +1,7 @@
 #include <dolphin/mtx.h>
+#include <dolphin/mtx/types.h>
 #include <dolphin/mtx/vec.h>
-#include <sysdolphin/baselib/mtx.h>
+#include <baselib/mtx.h>
 #include <MSL/trigf.h>
 
 #define EPSILON 0.0000000001f

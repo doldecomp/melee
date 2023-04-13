@@ -1,8 +1,8 @@
 #ifndef MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER_H
 #define MELEE_FT_CHARA_FTICECLIMBER_FTICECLIMBER_H
 
-#include <melee/ft/ftcommon.h>
-#include <melee/lb/lbvector.h>
+#include "ft/ftcommon.h"
+#include "lb/lbvector.h"
 
 typedef struct _ftIceClimberAttributes {
     f32 x0;

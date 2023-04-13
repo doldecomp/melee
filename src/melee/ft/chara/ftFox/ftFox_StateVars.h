@@ -3,7 +3,7 @@
 
 #include <platform.h>
 
-#include <sysdolphin/baselib/gobj.h>
+#include <baselib/gobj.h>
 
 typedef struct ftFoxSpecialN {
     bool isBlasterLoop; // 0x2340 - Check to allow repeated blaster shots
