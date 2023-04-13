@@ -1,9 +1,10 @@
 #ifndef _lbfile_h_
 #define _lbfile_h_
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/archive.h>
+#include <Runtime/platform.h>
 
 void lbFile_8001615C(int, int, int, bool cancelflag);
 bool lbFile_800161A0(void);
@@ -12,7 +13,8 @@ size_t lbFile_8001634C(s32 fileno);
 s32 lbFile_800163D8(const char* basename);
 void lbFile_8001668C(const char* arg0, HSD_Archive* arg1, s32* arg2);
 void lbFile_80016760(const char* arg0, HSD_Archive** arg1, s32* arg2);
-bool lbFile_800168A0(s32 arg0, const char* arg1, HSD_Archive** arg2, s32* arg3);
+bool lbFile_800168A0(s32 arg0, const char* arg1, HSD_Archive** arg2,
+                     s32* arg3);
 char* lbFile_80016204(const char* basename);
 void lbFile_800164A4(s32 arg0, HSD_Archive* arg1, s32* arg2, s32 arg3,
                      HSD_DevComCallback arg4, s32 arg5);

@@ -1,8 +1,7 @@
-#include <dolphin/gx/GXTev.h>
-
+#include <placeholder.h>
 #include <dolphin/gx/__GXInit.h>
 #include <dolphin/gx/__types.h>
-#include <placeholder.h>
+#include <dolphin/gx/GXTev.h>
 
 void GXSetTevOp(GXTevStageID id, GXTevMode mode)
 {

@@ -2,6 +2,7 @@
 #define MELEE_MP_MPLIB_H
 
 #include "ft/fighter.h"
+
 #include <dolphin/mtx/types.h>
 
 typedef void (*mpLib_Callback)(s32, s32, CollData*, s32, s32, f32);
@@ -13,7 +14,8 @@ unk_t mpLib_80056A54(void);
 unk_t mpLib_80056AFC(void);
 
 bool mpLib_800501CC(f32 surface_normal_y, f32 surface_normal_x, f32 right_x,
-                    f32 right_y, Vec3* coll_vec, unk_t, unk_t, unk_t, u32, u32);
+                    f32 right_y, Vec3* coll_vec, unk_t, unk_t, unk_t, u32,
+                    u32);
 
 unk_t mpLib_80056A8C(void);
 unk_t mpLib_80056A1C(void);

@@ -1,6 +1,5 @@
-#include <melee/ft/chara/ftLuigi/ftluigi.h>
-
 #include <melee/ef/efsync.h>
+#include <melee/ft/chara/ftLuigi/ftluigi.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/ft/ftparts.h>
@@ -245,10 +244,10 @@ void ftLuigi_SpecialAirHi_Phys(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/l7min // Luigi's Super Jump Punch Landing check
 void ftLuigi_SpecialHi_CheckLanding(HSD_GObj* fighter_gobj)
 {
-    ft_800D5CB0(
-        fighter_gobj, 0,
-        ((ftLuigiAttributes*) GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes)
-            ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
+    ft_800D5CB0(fighter_gobj, 0,
+                ((ftLuigiAttributes*) GET_FIGHTER(fighter_gobj)
+                     ->x2D4_specialAttributes)
+                    ->x54_LUIGI_SUPERJUMP_LANDING_LAG);
 }
 
 // 0x801444E4

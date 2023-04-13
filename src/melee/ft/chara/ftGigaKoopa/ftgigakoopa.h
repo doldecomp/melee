@@ -1,8 +1,8 @@
 #ifndef _ftgigakoopa_h_
 #define _ftgigakoopa_h_
 
-#include <melee/ft/fighter.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
 
 extern ActionState ftGigaKoopa_MotionStateTable[];
 extern ActionState lbl_803D38C8[];

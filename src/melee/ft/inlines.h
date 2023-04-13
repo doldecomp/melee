@@ -1,6 +1,8 @@
 #ifndef MELEE_FT_INLINES_H
 #define MELEE_FT_INLINES_H
 
+#include <platform.h>
+
 #include "ft/ftanim.h"
 #include "ft/types.h"
 #include "gr/stage.h"
@@ -9,6 +11,9 @@
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
+#include <common_structs.h>
+#include <math.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
@@ -18,32 +23,28 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <common_structs.h>
-#include <dolphin/mtx/types.h>
-#include <math.h>
-#include <platform.h>
 
-#define PUSH_ATTRS(fp, attributeName)                                          \
-    do {                                                                       \
-        void* backup = (fp)->x2D8_specialAttributes2;                          \
-        attributeName* src = (attributeName*) (fp)->x10C_ftData->ext_attr;     \
-        void** attr = &(fp)->x2D4_specialAttributes;                           \
-        *(attributeName*) (fp)->x2D8_specialAttributes2 = *src;                \
-        *attr = backup;                                                        \
+#define PUSH_ATTRS(fp, attributeName)                                         \
+    do {                                                                      \
+        void* backup = (fp)->x2D8_specialAttributes2;                         \
+        attributeName* src = (attributeName*) (fp)->x10C_ftData->ext_attr;    \
+        void** attr = &(fp)->x2D4_specialAttributes;                          \
+        *(attributeName*) (fp)->x2D8_specialAttributes2 = *src;               \
+        *attr = backup;                                                       \
     } while (0)
 
-#define COPY_ATTRS(gobj, attributeName)                                        \
-    Fighter* fp = GET_FIGHTER(gobj);                                           \
-    attributeName* sA2 = (attributeName*) fp->x2D4_specialAttributes;          \
-    attributeName* ext_attr = (attributeName*) fp->x10C_ftData->ext_attr;      \
+#define COPY_ATTRS(gobj, attributeName)                                       \
+    Fighter* fp = GET_FIGHTER(gobj);                                          \
+    attributeName* sA2 = (attributeName*) fp->x2D4_specialAttributes;         \
+    attributeName* ext_attr = (attributeName*) fp->x10C_ftData->ext_attr;     \
     *sA2 = *ext_attr;
 
-#define SCALE_HEIGHT_ATTRS(num_attrs)                                          \
-    {                                                                          \
-        int i;                                                                 \
-        for (i = 0; i < num_attrs; i++) {                                      \
-            sA2->height_attributes[i] *= fp->x34_scale.y;                      \
-        }                                                                      \
+#define SCALE_HEIGHT_ATTRS(num_attrs)                                         \
+    {                                                                         \
+        int i;                                                                \
+        for (i = 0; i < num_attrs; i++) {                                     \
+            sA2->height_attributes[i] *= fp->x34_scale.y;                     \
+        }                                                                     \
     }
 
 #define GET_FIGHTER(gobj) ((Fighter*) HSD_GObjGetUserData(gobj))
@@ -107,8 +108,9 @@ static inline f32 stickGetDir(f32 x1, f32 x2)
 {
     if (x1 < x2) {
         return -x1;
-    } else
+    } else {
         return x1;
+    }
 }
 /// used for all fighters except Kirby and Purin
 static inline void Fighter_OnItemPickup(HSD_GObj* fighter_gobj,
@@ -187,12 +189,12 @@ static inline CollData* Fighter_GetCollData(Fighter* fp)
 
 // Ternary macro for fcmpo-based facing direction check
 
-#define CLIFFCATCH_O(fp)                                                       \
+#define CLIFFCATCH_O(fp)                                                      \
     ((fp)->facing_dir < 0.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
 // Ternary macro for fcmpu-based facing direction check
 
-#define CLIFFCATCH_U(fp)                                                       \
+#define CLIFFCATCH_U(fp)                                                      \
     ((fp)->facing_dir != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
 #endif

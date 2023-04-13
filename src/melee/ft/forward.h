@@ -1,9 +1,10 @@
 #ifndef MELEE_FT_FORWARD_H
 #define MELEE_FT_FORWARD_H
 
-#include <baselib/forward.h>
-#include <dolphin/mtx/types.h>
 #include <platform.h>
+#include <baselib/forward.h>
+
+#include <dolphin/mtx/types.h>
 
 typedef struct ActionState ActionState;
 typedef struct Fighter Fighter;

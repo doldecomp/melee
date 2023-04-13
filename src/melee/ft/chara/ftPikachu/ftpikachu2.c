@@ -1,5 +1,4 @@
 #include "ftpikachu.h"
-
 #include "types.h"
 
 #include "ef/eflib.h"

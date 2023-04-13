@@ -1,11 +1,10 @@
-#include <dolphin/card/CARDWrite.h>
-
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDOpen.h>
 #include <dolphin/card/CARDRdwr.h>
 #include <dolphin/card/CARDRead.h>
+#include <dolphin/card/CARDWrite.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSExi.h>
 
@@ -138,8 +137,9 @@ int CARDWrite(CARDFileInfo* info, void* buf, s32 length, s32 offset)
     int result = CARDWriteAsync(info, buf, length, offset,
                                 (CARDCallback) __CARDSyncCallback);
 
-    if (result < 0)
+    if (result < 0) {
         return result;
+    }
 
     return __CARDSync(info->chan);
 }

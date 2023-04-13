@@ -2,6 +2,7 @@
 #define DOLPHIN_CARD_FORWARD_H
 
 #include <dolphin/os/forward.h>
+
 #include <Runtime/platform.h>
 
 typedef struct CARDFileInfo CARDFileInfo;

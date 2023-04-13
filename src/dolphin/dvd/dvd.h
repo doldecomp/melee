@@ -2,6 +2,7 @@
 #define __DOLPHIN_DVD_H_
 
 #include <dolphin/dvd/forward.h>
+
 #include <Runtime/platform.h>
 
 struct bb2struct {
@@ -71,8 +72,8 @@ bool DVDOpen(char*, DVDFileInfo*);
 bool DVDClose(DVDFileInfo*);
 bool DVDChangeDir(char*);
 bool DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo);
-bool DVDReadAsyncPrio(DVDFileInfo* fileInfo, void* addr, s32 length, s32 offset,
-                      DVDCallback callback, s32 prio);
+bool DVDReadAsyncPrio(DVDFileInfo* fileInfo, void* addr, s32 length,
+                      s32 offset, DVDCallback callback, s32 prio);
 s32 DVDConvertPathToEntrynum(const char* pathPtr);
 void DVDReset(void);
 s32 DVDCancel(DVDCommandBlock* block);
@@ -88,7 +89,7 @@ bool DVDCheckDisk(void);
 void __DVDPrepareResetAsync(DVDCBCallback callback);
 bool DVDSetAutoInvalidation(bool autoInval);
 
-#define DVDReadAsync(fileInfo, addr, length, offset, callback)                 \
+#define DVDReadAsync(fileInfo, addr, length, offset, callback)                \
     DVDReadAsyncPrio((fileInfo), (addr), (length), (offset), (callback), 2)
 
 s32 DVDGetCommandBlockStatus(const DVDCommandBlock* block);

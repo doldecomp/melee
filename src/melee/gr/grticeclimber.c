@@ -1,19 +1,18 @@
-#include <melee/gr/grticeclimber.h>
-
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/grmaterial.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/grticeclimber.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/gr/types.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
-#include <sysdolphin/baselib/gobjproc.h>
 
 /* static */ StageCallbacks lbl_803E8A98[4] = {
     {
@@ -95,14 +94,17 @@ HSD_GObj* grTIceClimber_80220FB4(int id)
         gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
 
-        if (cb->callback3 != NULL)
+        if (cb->callback3 != NULL) {
             gp->x1C_callback = cb->callback3;
+        }
 
-        if (cb->callback0 != NULL)
+        if (cb->callback0 != NULL) {
             cb->callback0(gobj);
+        }
 
-        if (cb->callback2 != NULL)
+        if (cb->callback2 != NULL) {
             func_8038FD54(gobj, cb->callback2, 4);
+        }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grticeclimber.c", 202,
                  id);

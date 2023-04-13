@@ -59,8 +59,9 @@ void ftMasterHand_80155484(HSD_GObj* gobj)
     fp = gobj->user_data;
     gobj_2 = ftBossLib_8015C3E8(0x1CU);
 
-    if (ftBossLib_8015C31C() == 0)
+    if (ftBossLib_8015C31C() == 0) {
         ftCrazyHand_8015A560(gobj_2);
+    }
 
     fp->x1A5C = gobj_2;
     Fighter_ChangeMotionState(gobj, 0x180, 0, 0, 0.0f, 1.0f, 0.0f);

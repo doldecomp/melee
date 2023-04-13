@@ -1,11 +1,10 @@
-#include <melee/gr/grdatfiles.h>
-
-#include <melee/lb/lbarchive.h>
-#include <melee/lb/lbheap.h>
-#include <melee/lb/lbunknown_001.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/psstructs.h>
+#include <melee/gr/grdatfiles.h>
+#include <melee/lb/lbarchive.h>
+#include <melee/lb/lbheap.h>
+#include <melee/lb/lbunknown_001.h>
 
 extern StageInfo stage_info;
 
@@ -30,8 +29,9 @@ void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, u32 length)
     map_ptcl = HSD_ArchiveGetPublicAddress(archive, "map_ptcl");
     map_texg = HSD_ArchiveGetPublicAddress(archive, "map_texg");
 
-    if (map_ptcl != NULL && map_texg != NULL)
+    if (map_ptcl != NULL && map_texg != NULL) {
         psInitDataBankLocate(map_ptcl, map_texg, NULL);
+    }
 }
 
 void grDatFiles_801C6038(void* arg0, s32 arg1, s32 arg2)

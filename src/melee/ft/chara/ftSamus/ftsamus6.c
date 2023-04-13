@@ -1,6 +1,5 @@
-#include <melee/ft/chara/ftSamus/ftsamus6.h>
-
 #include <melee/ft/chara/ftSamus/ftsamus.h>
+#include <melee/ft/chara/ftSamus/ftsamus6.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/fighter.h>
 #include <melee/ft/ft_unknown_006.h>
@@ -311,7 +310,8 @@ void ftSamus_8012B358(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftSamusAttributes* samus_attr = fp->x2D4_specialAttributes;
-    if ((fp->x2208_ftcmd_var2) && (fp->input.x624_lstick_y < samus_attr->x80)) {
+    if ((fp->x2208_ftcmd_var2) && (fp->input.x624_lstick_y < samus_attr->x80))
+    {
         fp->x2208_ftcmd_var2 = 0;
         ft_800D638C(fighter_gobj);
     }

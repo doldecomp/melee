@@ -1,8 +1,9 @@
 #ifndef _object_h_
 #define _object_h_
 
-#include <sysdolphin/baselib/class.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/class.h>
 
 #define HSD_OBJ_NOREF ((u16) -1)
 
@@ -84,16 +85,18 @@ static inline int ref_CNT(void* o)
 static inline bool ref_DEC(void* o)
 {
     bool ret = (u64) (HSD_OBJ(o)->ref_count == HSD_OBJ_NOREF);
-    if (ret)
+    if (ret) {
         return ret;
+    }
     return HSD_OBJ(o)->ref_count-- == 0;
 }
 
 static inline bool iref_DEC(void* o)
 {
     bool ret = (u64) (HSD_OBJ(o)->ref_count_individual == 0);
-    if (ret)
+    if (ret) {
         return ret;
+    }
     HSD_OBJ(o)->ref_count_individual -= 1;
     return HSD_OBJ(o)->ref_count_individual == 0;
 }

@@ -1,10 +1,10 @@
-#include <sysdolphin/baselib/rumble.h>
+#include <dolphin/pad/forward.h>
 
 #include <dolphin/os/OSInterrupt.h>
-#include <dolphin/pad/forward.h>
 #include <dolphin/pad/Pad.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/rumble.h>
+#include <Runtime/platform.h>
 
 extern PadLibData HSD_PadLibData;
 
@@ -33,8 +33,9 @@ void func_80378128(struct Struct804C22E0* a, HSD_PadRumbleListData* b)
     RumbleInfo* r6 = &HSD_PadLibData.rumble_info;
     HSD_PadRumbleListData** r5 = &a->unk8;
 
-    while ((*r5) != b)
+    while ((*r5) != b) {
         r5 = &(*r5)->next;
+    }
     *r5 = b->next;
     a->unk4--;
     b->next = r6->listdatap;
@@ -59,8 +60,9 @@ void func_80378208(void)
 {
     int i;
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         func_80378170(i);
+    }
 }
 
 void func_80378280(u8 a, int b)
@@ -71,8 +73,9 @@ void func_80378280(u8 a, int b)
 
     while (r7 != NULL) {
         HSD_PadRumbleListData* r6 = r7->next;
-        if (r7->id == (unsigned) b)
+        if (r7->id == (unsigned) b) {
             func_80378128(r31, r7);
+        }
         r7 = r6;
     }
     OSRestoreInterrupts(r3);
@@ -100,8 +103,9 @@ void func_80378330(void)
 #endif
 
     int i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         func_80378330_inline(i, 1);
+    }
 }
 
 void func_803783B0(void)
@@ -112,16 +116,19 @@ void func_803783B0(void)
 #endif
 
     int i;
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         func_80378330_inline(i, 0);
+    }
 }
 
-void func_80378430_inline(HSD_PadRumbleListData** r6, HSD_PadRumbleListData* r7)
+void func_80378430_inline(HSD_PadRumbleListData** r6,
+                          HSD_PadRumbleListData* r7)
 {
     HSD_PadRumbleListData* r5;
 
-    while ((r5 = *r6) != NULL && r5->pri <= r7->pri)
+    while ((r5 = *r6) != NULL && r5->pri <= r7->pri) {
         r6 = &r5->next;
+    }
     r7->next = r5;
     *r6 = r7;
 }
@@ -164,13 +171,15 @@ void func_80378524(int a)
 
 int func_80378560(HSD_PadRumbleListData* a, u8* b)
 {
-    if (a->pause == 1)
+    if (a->pause == 1) {
         return 0;
+    }
     while (a->wait == 0) {
         switch ((*(u8*) a->listp >> 5) & 7) {
         case 0:
-            if (a->frame == -2)
+            if (a->frame == -2) {
                 return 1;
+            }
             a->listp = a->headp;
             break;
         case 1:
@@ -194,18 +203,20 @@ int func_80378560(HSD_PadRumbleListData* a, u8* b)
             a->stack = a->listp;
             break;
         case 5:
-            if (--a->loop_count != 0)
+            if (--a->loop_count != 0) {
                 a->listp = a->stack;
-            else
+            } else {
                 a->listp++;
+            }
             break;
         }
     }
     *b = a->status;
     a->wait--;
     if (a->frame != -1 && a->frame != -2) {
-        if (--a->frame == 0)
+        if (--a->frame == 0) {
             return 1;
+        }
     }
     return 0;
 }
@@ -215,8 +226,9 @@ void HSD_PadRumbleInterpret_inline(HSD_PadRumbleListData** r6,
 {
     HSD_PadRumbleListData* r5;
 
-    while ((r5 = *r6) != r29)
+    while ((r5 = *r6) != r29) {
         r6 = &r5->next;
+    }
     *r6 = r29->next;
 }
 
@@ -277,10 +289,12 @@ void HSD_PadRumbleInit(u16 a, void* b)
     r6->max_list = a;
     r6->listdatap = b;
     if (a != 0) {
-        for (i = 0; i < a - 1; i++)
+        for (i = 0; i < a - 1; i++) {
             r6->listdatap[i].next = &r6->listdatap[i + 1];
+        }
         r6->listdatap[i].next = 0;
     }
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 4; i++) {
         lbl_804C22E0[i] = lbl_80406DE0;
+    }
 }

@@ -1,9 +1,11 @@
+#include "forward.h"
+#include <sysdolphin/baselib/forward.h>
+
 #include "ftdata.h"
 
+#include "ft_unknown_006.h"
 #include "types.h"
 
-#include "forward.h"
-#include "ft_unknown_006.h"
 #include "ftCaptain/ftCaptain.h"
 #include "ftCaptain/ftCaptain_SpecialHi.h"
 #include "ftCaptain/ftCaptain_SpecialLw.h"
@@ -61,7 +63,6 @@
 #include "ftZelda/ftzelda.h"
 
 #include <dolphin/mtx/types.h>
-#include <sysdolphin/baselib/forward.h>
 
 typedef struct ftData_UnkCountStruct {
     /// Always zero; could be #NULL or the high part of a 64-bit integer.
@@ -1305,11 +1306,12 @@ Fighter_UnkPtrEvent lbl_803C2570[FTKIND_MAX] = {
 };
 
 ftData_UnkCountStruct lbl_803C25F4[FTKIND_MAX] = {
-    { 0, 16 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 18 }, { 0, 14 }, { 0, 14 },
-    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 },
-    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 16 }, { 0, 14 }, { 0, 14 }, { 0, 14 },
-    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 },
-    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 15 }, { 0, 14 },
+    { 0, 16 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 18 }, { 0, 14 },
+    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 },
+    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 16 },
+    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 },
+    { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 },
+    { 0, 14 }, { 0, 15 }, { 0, 14 },
 };
 
 s8 lbl_803C26FC[FTKIND_MAX] = {

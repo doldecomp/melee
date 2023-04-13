@@ -2,6 +2,7 @@
 #define DOLPHIN_GX_GXFRAMEBUF_H
 
 #include <dolphin/gx/forward.h>
+
 #include <Runtime/platform.h>
 
 extern GXRenderModeObj GXPal528IntDf;

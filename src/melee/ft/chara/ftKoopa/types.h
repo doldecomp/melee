@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTKOOPA_TYPES_H
 #define MELEE_FT_CHARA_FTKOOPA_TYPES_H
 
-#include <placeholder.h>
 #include <platform.h>
+
+#include <placeholder.h>
 
 union ftKoopa_StateVars {
     /// @todo Proper state name.

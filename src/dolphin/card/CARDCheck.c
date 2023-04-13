@@ -1,12 +1,11 @@
-#include <dolphin/card/CARDCheck.h>
-
+#include <string.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
+#include <dolphin/card/CARDCheck.h>
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/os/OSFont.h>
 #include <dolphin/os/OSRtc.h>
 #include <Runtime/__mem.h>
-#include <string.h>
 
 void __CARDCheckSum(void* ptr, int length, u16* checksum, u16* checksumInv)
 {

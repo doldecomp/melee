@@ -1,12 +1,11 @@
-#include <dolphin/card/CARDRename.h>
-
 #include <cstring.h>
+#include <string.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDOpen.h>
+#include <dolphin/card/CARDRename.h>
 #include <dolphin/os/OSTime.h>
-#include <string.h>
 
 s32 CARDRenameAsync(s32 chan, const char* old, const char* new,
                     CARDCallback callback)
@@ -42,8 +41,8 @@ s32 CARDRenameAsync(s32 chan, const char* old, const char* new,
 
         if (memcmp(ent->gameName, card->diskID->gameName,
                    sizeof(ent->gameName)) != 0 ||
-            memcmp(ent->company, card->diskID->company, sizeof(ent->company)) !=
-                0)
+            memcmp(ent->company, card->diskID->company,
+                   sizeof(ent->company)) != 0)
         {
             continue;
         }

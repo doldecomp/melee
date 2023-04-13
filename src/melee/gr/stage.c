@@ -1,7 +1,6 @@
-#include <melee/gr/stage.h>
-
 #include <melee/gm/code_801601C4.h>
 #include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbvector.h>
 #include <melee/mp/mplib.h>

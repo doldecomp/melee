@@ -1,9 +1,9 @@
 #include "lobj.h"
 
+#include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
 #include <dolphin/mtx/vec.h>
-#include <placeholder.h>
 
 void LObjInfoInit(void);
 
@@ -25,15 +25,17 @@ u32 HSD_LObjGetFlags(HSD_LObj* lobj)
 
 void HSD_LObjSetFlags(HSD_LObj* lobj, u32 flags)
 {
-    if (lobj == NULL)
+    if (lobj == NULL) {
         return;
+    }
     lobj->flags |= flags;
 }
 
 void HSD_LObjClearFlags(HSD_LObj* lobj, u32 flags)
 {
-    if (lobj == NULL)
+    if (lobj == NULL) {
         return;
+    }
     lobj->flags &= ~flags;
 }
 
@@ -91,8 +93,9 @@ void LObjUpdateFunc(void* obj, enum_t type, HSD_ObjData* val)
 {
     HSD_LObj* lobj = obj;
 
-    if (lobj == NULL)
+    if (lobj == NULL) {
         return;
+    }
 
     switch (type) {
     case HSD_A_L_VIS:
@@ -210,8 +213,9 @@ void HSD_LObjGetLightVector(HSD_LObj* lobj, Vec3* dir)
     Vec3 position = lbl_803B94A0;
     Vec3 interest = lbl_803B94AC;
 
-    if (lobj == NULL)
+    if (lobj == NULL) {
         return;
+    }
 
     HSD_LObjGetPosition(lobj, &position);
     HSD_LObjGetInterest(lobj, &interest);

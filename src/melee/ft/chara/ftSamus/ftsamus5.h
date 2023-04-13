@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_CHARA_FTSAMUS_FTSAMUS5_H
 #define MELEE_FT_CHARA_FTSAMUS_FTSAMUS5_H
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 void ftSamus_SpecialHi_StartMotion(HSD_GObj* fighter_gobj);
 void ftSamus_8012AA3C(HSD_GObj* fighter_gobj);

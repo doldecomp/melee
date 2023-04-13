@@ -1,7 +1,6 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey9.h>
-
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey1.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey9.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/item.h>
@@ -35,11 +34,13 @@ bool ftDonkey_800E0750(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (ft_8008E984(fp))
+    if (ft_8008E984(fp)) {
         return true;
+    }
 
-    if (ft_8008D8E8(ft_ScaleBy154(fp->dmg.x1850_forceApplied)) < 3)
+    if (ft_8008D8E8(ft_ScaleBy154(fp->dmg.x1850_forceApplied)) < 3) {
         return true;
+    }
 
     return false;
 }

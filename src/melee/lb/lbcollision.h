@@ -1,9 +1,11 @@
 #ifndef MELEE_LB_LBCOLLISION_H
 #define MELEE_LB_LBCOLLISION_H
 
-#include "dolphin/mtx/types.h"
 #include <melee/ft/forward.h>
 #include <melee/lb/forward.h>
+
+#include "dolphin/mtx/types.h"
+
 #include <placeholder.h>
 #include <sysdolphin/baselib/jobj.h>
 
@@ -191,10 +193,11 @@ static inline bool approximatelyZero(f32 x)
 {
     bool result;
 
-    if ((x < 0.00001f) && (x > -0.00001f))
+    if ((x < 0.00001f) && (x > -0.00001f)) {
         result = true;
-    else
+    } else {
         result = false;
+    }
 
     return result;
 }
@@ -202,8 +205,9 @@ static inline bool approximatelyZero(f32 x)
 static inline bool testPlusX(Vec3* a, Vec3* b, Vec3* c, f32 offset)
 {
     f32 x = a->x + offset;
-    if (x < b->x && x < c->x)
+    if (x < b->x && x < c->x) {
         return false;
+    }
 
     return true;
 }
@@ -211,8 +215,9 @@ static inline bool testPlusX(Vec3* a, Vec3* b, Vec3* c, f32 offset)
 static inline bool testPlus(float a, float b, float c, float offset)
 {
     float x = a + offset;
-    if (x < b && x < c)
+    if (x < b && x < c) {
         return false;
+    }
 
     return true;
 }
@@ -220,8 +225,9 @@ static inline bool testPlus(float a, float b, float c, float offset)
 static inline bool testMinusX(Vec3* a, Vec3* b, Vec3* c, f32 offset)
 {
     f32 x = a->x - offset;
-    if (x > b->x && x > c->x)
+    if (x > b->x && x > c->x) {
         return false;
+    }
 
     return true;
 }

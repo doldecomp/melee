@@ -27,8 +27,8 @@ void ftMasterHand_801510B0(HSD_GObj* gobj)
     r31_fp->cb.x21BC_callback_Accessory4 = &ftMasterHand_801511FC;
     r31_fp->sv.mh.unk4.x0 = 0;
 
-    /// @todo Probably same file if #ftMasterHand_801511FC is getting implicitly
-    /// passed.
+    /// @todo Probably same file if #ftMasterHand_801511FC is getting
+    /// implicitly passed.
     ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40 /*, ftMasterHand_801511FC */);
     // ft_800881D8(r31_fp, 0x4E201, 0x7F, 0x40, ftMasterHand_801511FC);
 
@@ -52,8 +52,9 @@ void ftMasterHand_801511B0(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    if (!Player_GetPlayerSlotType(fp->xC_playerID))
+    if (!Player_GetPlayerSlotType(fp->xC_playerID)) {
         ftBossLib_8015BD20(gobj);
+    }
 }
 
 // 801511F4 14DDD4
@@ -84,10 +85,11 @@ static void ftMasterHand_801511FC(HSD_GObj* gobj)
     case 0: {
         HSD_GObj* nearest_enemy = ftLib_8008627C(&fp->xB0_pos, gobj);
 
-        if (nearest_enemy != NULL)
+        if (nearest_enemy != NULL) {
             Camera_8002E6FC((s32) ftLib_80086BE0(nearest_enemy));
-        else
+        } else {
             Camera_8002E6FC(0);
+        }
 
         Camera_8002ED9C(40.0f);
         Camera_8002EEC8(45.0f);

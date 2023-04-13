@@ -4,8 +4,8 @@
 #include "mobj.h"
 #include "shadow.h"
 
-#include <dolphin/gx/GXFrameBuf.h>
 #include <string.h>
+#include <dolphin/gx/GXFrameBuf.h>
 
 extern HSD_ObjAllocData shadow_alloc_data;
 

@@ -1,7 +1,10 @@
 #ifndef MELEE_FT_TYPES_H
 #define MELEE_FT_TYPES_H
 
+#include <platform.h>
+
 #include "common_structs.h"
+
 #include "ft/ftanim.h"
 #include "ftCaptain/types.h"
 #include "ftCommon/types.h"
@@ -26,6 +29,8 @@
 #include "lb/lbrefract.h"
 #include "pl/player.h"
 
+#include <math.h>
+#include <dolphin/mtx/types.h>
 #include <baselib/archive.h>
 #include <baselib/controller.h>
 #include <baselib/dobj.h>
@@ -35,9 +40,6 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
-#include <dolphin/mtx/types.h>
-#include <math.h>
-#include <platform.h>
 
 struct RGBA {
     u8 r;
@@ -693,8 +695,8 @@ struct SpecialAttrs_Mewtwo {
     /* 0x222C */ HSD_GObj* x222C_disableGObj;
     /* 0x2230 */ HSD_GObj*
         x2230_shadowHeldGObj; // GObj of Shadow Ball while in Mewtwo's hands?
-    /* 0x2234 */ s32
-        x2234_shadowBallCharge; // Number of cycles Shadow Ball has been charged
+    /* 0x2234 */ s32 x2234_shadowBallCharge; // Number of cycles Shadow Ball
+                                             // has been charged
     /* 0x2238 */ HSD_GObj* x2238_shadowBallGObj;
     /* 0x223C */ bool x223C_isConfusionBoost;
 };
@@ -847,8 +849,8 @@ struct Fighter {
     /* 0x107 */ s8 x107;
     /* 0x108 */ HSD_Joint* x108_costume_joint;
     /* 0x10C */ ftData* x10C_ftData;
-    // TODO: Ask Psi how many of those are confirmed, only a fraction of them is
-    // used right now
+    // TODO: Ask Psi how many of those are confirmed, only a fraction of them
+    // is used right now
     attr x110_attr;
     /* 0x294 */ itPickup x294_itPickup;
     /* 0x2C4 */ Vec2 x2C4;

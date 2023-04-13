@@ -1,8 +1,9 @@
 #ifndef MELEE_FT_FTCAMERA_H
 #define MELEE_FT_FTCAMERA_H
 
-#include <melee/ft/fighter.h>
 #include <melee/ft/forward.h>
+
+#include <melee/ft/fighter.h>
 
 void ftCamera_80076064(Fighter*);
 void ftCamera_UpdateCameraBox(HSD_GObj* gobj);

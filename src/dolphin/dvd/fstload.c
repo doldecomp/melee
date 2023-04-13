@@ -58,8 +58,9 @@ void __fstLoad(void)
     DVDReset();
     DVDReadDiskID(&_block, idTmp, cb);
 
-    while (DVDGetDriveStatus() != 0)
+    while (DVDGetDriveStatus() != 0) {
         continue;
+    }
 
     info = (void*) 0x80000000;
     info->FSTLocationInRam = bb2->FSTLocationInRam;

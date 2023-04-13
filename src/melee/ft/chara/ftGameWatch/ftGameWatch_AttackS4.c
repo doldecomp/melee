@@ -88,8 +88,9 @@ bool ftGameWatch_ItemCheckTorchRemove(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->action_id == AS_GAMEWATCH_ATTACKS4)
+    if (fp->action_id == AS_GAMEWATCH_ATTACKS4) {
         return false;
+    }
 
     return true;
 }
@@ -115,12 +116,13 @@ void ftGameWatch_AttackS4_Action(HSD_GObj* fighter_gobj)
 }
 
 // 0x8014AA88
-// https://decomp.me/scratch/41MqW // Mr. Game & Watch's Forward Smash Animation
-// callback
+// https://decomp.me/scratch/41MqW // Mr. Game & Watch's Forward Smash
+// Animation callback
 void ftGameWatch_AttackS4_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 // 0x8014AAC4
@@ -130,8 +132,9 @@ void ftGameWatch_AttackS4_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->x2218_flag.bits.b0 != false)
+    if (fp->x2218_flag.bits.b0 != false) {
         ft_8008A4D4(fighter_gobj);
+    }
 }
 
 // 0x8014AAF4

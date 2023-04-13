@@ -2,6 +2,7 @@
 #define DOLPHIN_GX___TYPES_H
 
 #include <dolphin/gx/forward.h>
+
 #include <dolphin/gx/GXEnum.h>
 #include <dolphin/gx/types.h>
 #include <dolphin/mtx/types.h>
@@ -15,8 +16,8 @@
 
 #define GX_WRITE_F32(f) WGPIPE.f32 = (*(f32*) &f);
 
-#define INSERT_FIELD(reg, value, nbits, shift)                                 \
-    (reg) = ((u32) (reg) & ~(((1 << (nbits)) - 1) << (shift))) |               \
+#define INSERT_FIELD(reg, value, nbits, shift)                                \
+    (reg) = ((u32) (reg) & ~(((1 << (nbits)) - 1) << (shift))) |              \
             ((u32) (value) << (shift));
 
 // GXFifoObj private fields

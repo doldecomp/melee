@@ -1,8 +1,8 @@
 #ifndef _FTFOX_STATEVARS_H_
 #define _FTFOX_STATEVARS_H_
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 typedef struct ftFoxSpecialN {
     bool isBlasterLoop; // 0x2340 - Check to allow repeated blaster shots
@@ -46,8 +46,8 @@ typedef struct ftFoxAppealS {
     bool facingDir; // 0x2340 - Fox/Falco's facing direction as a boolean
                     // variable, used to load indexed ASIDs from the AppealS
                     // struct
-    s32 animCount; // 0x2344 - Incremented every time one of the three stages of
-                   // the AppealS animation is completed
+    s32 animCount;  // 0x2344 - Incremented every time one of the three stages
+                   // of the AppealS animation is completed
 
 } ftFoxAppealS;
 

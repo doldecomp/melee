@@ -33,8 +33,9 @@ bool ftFox_SpecialS_CheckGhostRemove(HSD_GObj* fighter_gobj)
     /// @todo @c enum
     enum_t asid = GET_FIGHTER(fighter_gobj)->action_id;
 
-    if (asid >= AS_FOX_SPECIALS_START && asid <= AS_FOX_SPECIALAIRS_END)
+    if (asid >= AS_FOX_SPECIALS_START && asid <= AS_FOX_SPECIALAIRS_END) {
         return false;
+    }
 
     return true;
 }
@@ -57,8 +58,8 @@ void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index,
 }
 
 // 0x800E9ED4
-// https://decomp.me/scratch/bkSg9 // Return float from array @ 0x2374 for Fox &
-// Falco's Illusion/Phantasm
+// https://decomp.me/scratch/bkSg9 // Return float from array @ 0x2374 for Fox
+// & Falco's Illusion/Phantasm
 f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* fighter_gobj, s32 index)
 {
     return getFighter(fighter_gobj)->sv.fx.SpecialS.blendFrames[index];
@@ -210,8 +211,9 @@ void ftFox_SpecialAirSStart_Coll(HSD_GObj* fighter_gobj)
         return;
     }
 
-    if (ftCliffCommon_80081298(fighter_gobj))
+    if (ftCliffCommon_80081298(fighter_gobj)) {
         return;
+    }
 }
 
 // 0x800EA1D4
@@ -304,8 +306,9 @@ void ftFox_SpecialS_IASA(HSD_GObj* fighter_gobj)
         if ((s32) fp->xE0_ground_or_air == GA_Air) {
             ftFox_SpecialAirSEnd_Action(fighter_gobj);
             return;
-        } else
+        } else {
             ftFox_SpecialSEnd_Action(fighter_gobj);
+        }
     }
 }
 
@@ -320,8 +323,9 @@ void ftFox_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
         if ((s32) fp->xE0_ground_or_air == GA_Air) {
             ftFox_SpecialAirSEnd_Action(fighter_gobj);
             return;
-        } else
+        } else {
             ftFox_SpecialSEnd_Action(fighter_gobj);
+        }
     }
 }
 
@@ -331,9 +335,12 @@ static inline void ftFox_SpecialS_SetPhys(HSD_GObj* fighter_gobj)
 
     fp = GET_FIGHTER(fighter_gobj);
 
-    fp->sv.fx.SpecialS.ghostEffectPos[3] = fp->sv.fx.SpecialS.ghostEffectPos[2];
-    fp->sv.fx.SpecialS.ghostEffectPos[2] = fp->sv.fx.SpecialS.ghostEffectPos[1];
-    fp->sv.fx.SpecialS.ghostEffectPos[1] = fp->sv.fx.SpecialS.ghostEffectPos[0];
+    fp->sv.fx.SpecialS.ghostEffectPos[3] =
+        fp->sv.fx.SpecialS.ghostEffectPos[2];
+    fp->sv.fx.SpecialS.ghostEffectPos[2] =
+        fp->sv.fx.SpecialS.ghostEffectPos[1];
+    fp->sv.fx.SpecialS.ghostEffectPos[1] =
+        fp->sv.fx.SpecialS.ghostEffectPos[0];
 
     fp->sv.fx.SpecialS.ghostEffectPos[0] = fp->xB0_pos;
 
@@ -390,8 +397,9 @@ void ftFox_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
         ftFox_SpecialAirS_AirToGround(fighter_gobj);
         return;
     }
-    if (ftCliffCommon_80081298(fighter_gobj))
+    if (ftCliffCommon_80081298(fighter_gobj)) {
         return;
+    }
 }
 
 // 0x800EA698
@@ -481,13 +489,14 @@ void ftFox_SpecialAirS_Action(HSD_GObj* fighter_gobj)
 // End Animation callback
 void ftFox_SpecialSEnd_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 // 0x800EA944
-// https://decomp.me/scratch/YLYPn // Fox & Falco's aerial Illusion/Phantasm End
-// Animation callback
+// https://decomp.me/scratch/YLYPn // Fox & Falco's aerial Illusion/Phantasm
+// End Animation callback
 void ftFox_SpecialAirSEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -534,8 +543,8 @@ void ftFox_SpecialSEnd_Phys(HSD_GObj* fighter_gobj)
 }
 
 // 0x800EAA8C
-// https://decomp.me/scratch/qGaVf // Fox & Falco's aerial Illusion/Phantasm End
-// Physics callback
+// https://decomp.me/scratch/qGaVf // Fox & Falco's aerial Illusion/Phantasm
+// End Physics callback
 void ftFox_SpecialAirSEnd_Phys(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
@@ -549,9 +558,10 @@ void ftFox_SpecialAirSEnd_Phys(HSD_GObj* fighter_gobj)
 
     if (fp->sv.fx.SpecialS.gravityDelay != 0) {
         fp->sv.fx.SpecialS.gravityDelay--;
-    } else
+    } else {
         ftCommon_8007D494(fp, foxAttrs->x48_FOX_ILLUSION_TERMINAL_VELOCITY,
                           ftAttrs->x170_TerminalVelocity);
+    }
     ftCommon_8007CE94(fp, foxAttrs->x40_FOX_ILLUSION_AIR_MUL_X);
     ftFox_SpecialS_SetPhys(fighter_gobj);
 }
@@ -572,8 +582,8 @@ void ftFox_SpecialSEnd_Coll(HSD_GObj* fighter_gobj)
 }
 
 // 0x800EABCC
-// https://decomp.me/scratch/pd3IU // Fox & Falco's aerial Illusion/Phantasm End
-// Collision callback
+// https://decomp.me/scratch/pd3IU // Fox & Falco's aerial Illusion/Phantasm
+// End Collision callback
 void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
@@ -595,8 +605,9 @@ void ftFox_SpecialAirSEnd_Coll(HSD_GObj* fighter_gobj)
         ft_800D5CB0(fighter_gobj, 0, foxAttrs->x50_FOX_ILLUSION_LANDING_LAG);
         return;
     }
-    if (ftCliffCommon_80081298(fighter_gobj))
+    if (ftCliffCommon_80081298(fighter_gobj)) {
         return;
+    }
 };
 
 inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* fighter_gobj)
@@ -608,8 +619,8 @@ inline void ftFox_SpecialSEnd_SetVars(HSD_GObj* fighter_gobj)
 }
 
 // 0x800EAC50
-// https://decomp.me/scratch/ZZTJW // Fox & Falco's grounded Illusion End Action
-// State handler
+// https://decomp.me/scratch/ZZTJW // Fox & Falco's grounded Illusion End
+// Action State handler
 void ftFox_SpecialSEnd_Action(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);

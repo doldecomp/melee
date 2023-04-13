@@ -1,17 +1,16 @@
-#include <melee/ft/ftdrawcommon.h>
-
+#include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftdata.h>
-#include <melee/ft/ftlib.h>
-#include <placeholder.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/state.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftdata.h>
+#include <melee/ft/ftdrawcommon.h>
+#include <melee/ft/ftlib.h>
+#include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO
 static char lbl_803C0EB0[] = "translate";
@@ -654,19 +653,22 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             }
         }
         if ((fighter->x2218_flag.bits.b3 != 0) &&
-            (lbColl_8000A95C(fighter + 0x19E4, arg1, ftCommon_8007F804(fighter),
+            (lbColl_8000A95C(fighter + 0x19E4, arg1,
+                             ftCommon_8007F804(fighter),
                              fighter->xB0_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
         if ((fighter->x2218_flag.bits.b6 != 0) &&
-            (lbColl_8000AB2C(fighter + 0x1A08, arg1, ftCommon_8007F804(fighter),
+            (lbColl_8000AB2C(fighter + 0x1A08, arg1,
+                             ftCommon_8007F804(fighter),
                              fighter->xB0_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
         if ((fighter->x221B_flag.bits.b0 != 0) &&
-            (lbColl_8000A78C(fighter + 0x19C0, arg1, ftCommon_8007F804(fighter),
+            (lbColl_8000A78C(fighter + 0x19C0, arg1,
+                             ftCommon_8007F804(fighter),
                              fighter->xB0_pos.z) != 0))
         {
             phi_r30 = 1U;
@@ -798,8 +800,8 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             ft_8009F7F8(fighter);
         }
         if ((u32) fighter->x20A0_accessory != 0U) {
-            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1),
-                            0);
+            HSD_JObjDispAll(fighter->x20A0_accessory, NULL,
+                            func_80390EB8(arg1), 0);
         }
         ft_800C2600(gobj, arg1);
     }
@@ -1012,7 +1014,8 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
             }
 
             temp_r27 = gobj->hsd_obj;
-            HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, func_80390EB8(arg1), 0);
+            HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, func_80390EB8(arg1),
+                            0);
             if (lbl_803C20CC[fighter->x4_fighterKind] != NULL) {
                 lbl_803C20CC[fighter->x4_fighterKind](gobj, arg1,
                                                       (MtxPtr) phi_r28);
@@ -1021,8 +1024,8 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
             ft_8009F7F8(fighter);
         }
         if (fighter->x20A0_accessory != NULL) {
-            HSD_JObjDispAll(fighter->x20A0_accessory, NULL, func_80390EB8(arg1),
-                            0);
+            HSD_JObjDispAll(fighter->x20A0_accessory, NULL,
+                            func_80390EB8(arg1), 0);
         }
     }
 }

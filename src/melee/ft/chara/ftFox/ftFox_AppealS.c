@@ -1,6 +1,5 @@
-#include <melee/ft/chara/ftFox/ftFox_AppealS.h>
-
 #include <melee/ft/chara/ftFox/ftfox.h>
+#include <melee/ft/chara/ftFox/ftFox_AppealS.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/gr/grcorneria.h>
@@ -27,8 +26,9 @@ static inline bool ftFox_CheckAppealSCount(void)
     for (i = 0; i < 6; i++) {
         attackCount = Player_GetTotalAttackCountPtr(i);
 
-        if (pl_800386D8(attackCount, 0x72))
+        if (pl_800386D8(attackCount, 0x72)) {
             return true;
+        }
     }
 
     return false;
@@ -120,14 +120,16 @@ void ftFox_AppealS_Anim(HSD_GObj* fighter_gobj)
 
         switch (ftKind) {
         case FTKIND_FOX:
-            if (grCorneria_801E2B80() != false)
+            if (grCorneria_801E2B80() != false) {
                 fp->cb.x21E0_callback_OnDeath = ftFox_AppealS_OnTakeDamage;
+            }
 
             break;
 
         case FTKIND_FALCO:
-            if (grCorneria_801E2C34() != false)
+            if (grCorneria_801E2C34() != false) {
                 fp->cb.x21E0_callback_OnDeath = ftFox_AppealS_OnTakeDamage;
+            }
 
             break;
         }

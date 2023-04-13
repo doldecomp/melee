@@ -217,8 +217,8 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     }
 
     ft_tmp = fp;
-    ftCommon_8007CADC(ft_tmp, 0.0f, sa->x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND,
-                      flt_var);
+    ftCommon_8007CADC(ft_tmp, 0.0f,
+                      sa->x44_MARIO_TORNADO_MOMENTUM_X_MUL_GROUND, flt_var);
     ftCommon_8007CB74(gobj);
     if (((u32) fp->x2208_ftcmd_var2 != 0U) &&
         ((fp->input.x668 & HSD_BUTTON_B) != 0))

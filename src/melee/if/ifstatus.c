@@ -1,8 +1,14 @@
-#include <melee/if/ifstatus.h>
-
+#include <placeholder.h>
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
+#include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/gm/code_801601C4.h>
 #include <melee/if/ifall.h>
+#include <melee/if/ifstatus.h>
 #include <melee/if/ifstock.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -10,13 +16,6 @@
 #include <melee/lb/lbunknown_003.h>
 #include <melee/text_3.h>
 #include <melee/text_4.h>
-#include <placeholder.h>
-#include <sysdolphin/baselib/gobj.h>
-#include <sysdolphin/baselib/gobjobject.h>
-#include <sysdolphin/baselib/gobjplink.h>
-#include <sysdolphin/baselib/gobjproc.h>
-#include <sysdolphin/baselib/jobj.h>
-#include <sysdolphin/baselib/random.h>
 
 HudIndex* ifStatus_802F4910(void)
 {
@@ -1577,8 +1576,9 @@ inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
 
 void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1)
 {
-    if (!getPlayerByHUDParent(player)->flags.hide_all_digits)
+    if (!getPlayerByHUDParent(player)->flags.hide_all_digits) {
         func_80391070(player, arg1);
+    }
 }
 
 #ifdef MWERKS_GEKKO

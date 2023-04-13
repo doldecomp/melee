@@ -15,8 +15,9 @@ int wcstombs(void* dst, const void* src, size_t len)
         c = *wsrc++;
         *cdst++ = c;
 
-        if (c == 0x00)
+        if (c == 0x00) {
             break;
+        }
     }
 
     return i;
@@ -30,10 +31,11 @@ int memcmp(const void* str1, const void* str2, size_t len)
 
     while (--len > 0) {
         if (*++s1 != *++s2) {
-            if (*s1 < *s2)
+            if (*s1 < *s2) {
                 return -1;
-            else
+            } else {
                 return 1;
+            }
         }
     }
 
@@ -47,8 +49,9 @@ void* memchr(const void* str, int c, size_t len)
     len++;
 
     while (--len > 0) {
-        if (*++p == val)
+        if (*++p == val) {
             return p;
+        }
     }
 
     return NULL;

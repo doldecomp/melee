@@ -1,13 +1,12 @@
-#include <melee/gr/grfigure2.h>
-
 #include <dolphin/os/os.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/grdisplay.h>
 #include <melee/gr/grfigure1.h>
+#include <melee/gr/grfigure2.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grzakogenerator.h>
 #include <melee/lb/lbunknown_003.h>
-#include <sysdolphin/baselib/gobjgxlink.h>
 
 static StageCallbacks lbl_803E6328[3] = {
     { grFigure2_8020E3FC, grFigure2_8020E428, grFigure2_8020E430,

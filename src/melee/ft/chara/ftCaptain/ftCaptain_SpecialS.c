@@ -1,9 +1,9 @@
+#include <baselib/forward.h>
+
 #include "ftCaptain_SpecialS.h"
 
 #include "ftCaptain.h"
 #include "types.h"
-
-#include "ft/types.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -11,9 +11,9 @@
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
+#include "ft/types.h"
 #include "it/itkind.h"
 
-#include <baselib/forward.h>
 #include <dolphin/mtx/types.h>
 
 void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* fighter_gobj)
@@ -60,7 +60,8 @@ void ftCaptain_SpecialS_StartMotion(HSD_GObj* fighter_gobj)
         break;
 
     case FTKIND_GANON:
-        efSync_Spawn(1293, fighter_gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
+        efSync_Spawn(1293, fighter_gobj,
+                     fp->x5E8_fighterBones[L2ndNb].x0_jobj);
         fp->ev.ca.during_specials_start = true;
         break;
     }
@@ -99,7 +100,8 @@ static inline void setupAirStart(HSD_GObj* fighter_gobj)
         fp->ev.ca.during_specials_start = true;
         break;
     case FTKIND_GANON:
-        efSync_Spawn(1293, fighter_gobj, fp->x5E8_fighterBones[L2ndNb].x0_jobj);
+        efSync_Spawn(1293, fighter_gobj,
+                     fp->x5E8_fighterBones[L2ndNb].x0_jobj);
         fp->ev.ca.during_specials_start = true;
         break;
     }
@@ -161,8 +163,9 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->x2200_ftcmd_var0 == 0)
+    if (fp->x2200_ftcmd_var0 == 0) {
         return;
+    }
 
     {
         HSD_GObj* detected_gobj = fp->x20AC;
@@ -211,8 +214,9 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* fighter_gobj)
 
 void ftCaptain_SpecialSStart_Anim(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
@@ -240,8 +244,9 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* fighter_gobj)
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj)
@@ -361,8 +366,9 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
     ft_80085134(fighter_gobj);
     fp->sv.ca.specials.grav -= captainAttrs->specials_grav;
 
-    if (fp->sv.ca.specials.grav < -captainAttrs->specials_terminal_vel)
+    if (fp->sv.ca.specials.grav < -captainAttrs->specials_terminal_vel) {
         fp->sv.ca.specials.grav = -captainAttrs->specials_terminal_vel;
+    }
 
     fp->x80_self_vel.y = fp->sv.ca.specials.grav;
 }

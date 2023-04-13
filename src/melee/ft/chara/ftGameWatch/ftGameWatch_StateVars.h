@@ -1,8 +1,8 @@
 #ifndef _FTGAMEWATCH_STATEVARS_H_
 #define _FTGAMEWATCH_STATEVARS_H_
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 typedef union ftGameWatch_StateVars {
     struct ftGameWatch_Attack11Vars {

@@ -1,6 +1,5 @@
-#include "ftzelda2.h"
-
 #include "ftzelda.h"
+#include "ftzelda2.h"
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
@@ -34,10 +33,11 @@ void ftZelda_801396E0(HSD_GObj* fighter_gobj)
         Vec3 vec;
         lb_8000B1CC(fp->x5E8_fighterBones[4].x0_jobj, NULL, &vec);
 
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->xE0_ground_or_air == GA_Ground) {
             efSync_Spawn(0x4F6, fighter_gobj, fp->x5E8_fighterBones->x0_jobj);
-        else
+        } else {
             efSync_Spawn(0x4F7, fighter_gobj, fp->x5E8_fighterBones->x0_jobj);
+        }
 
         fp->x2219_flag.bits.b0 = true;
     }
@@ -152,8 +152,9 @@ void ftZelda_801399B4(HSD_GObj* fighter_gobj)
 
 void ftZelda_801399F0(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ftZelda_8013A244(fighter_gobj);
+    }
 }
 
 void ftZelda_80139A2C(HSD_GObj* fighter_gobj) {}
@@ -180,8 +181,9 @@ void ftZelda_80139A54(HSD_GObj* fighter_gobj)
 
 void ftZelda_80139A98(HSD_GObj* fighter_gobj)
 {
-    if (!ft_80082708(fighter_gobj))
+    if (!ft_80082708(fighter_gobj)) {
         ftZelda_80139B44(fighter_gobj);
+    }
 }
 
 void ftZelda_80139AD4(HSD_GObj* fighter_gobj)
@@ -190,15 +192,17 @@ void ftZelda_80139AD4(HSD_GObj* fighter_gobj)
     f32 facing_dir = fp->facing_dir;
     int ledge_grab_dir;
 
-    if (facing_dir < 0)
+    if (facing_dir < 0) {
         ledge_grab_dir = -1;
-    else
+    } else {
         ledge_grab_dir = +1;
+    }
 
-    if (ft_CheckGroundAndLedge(fighter_gobj, ledge_grab_dir))
+    if (ft_CheckGroundAndLedge(fighter_gobj, ledge_grab_dir)) {
         ftZelda_80139BB0(fighter_gobj);
-    else if (!ftCliffCommon_80081298(fighter_gobj))
+    } else if (!ftCliffCommon_80081298(fighter_gobj)) {
         return;
+    }
 }
 
 static Fighter_ActionStateChangeFlags const transition_flags0 =
@@ -238,8 +242,9 @@ void ftZelda_80139C1C(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->sv.zd.specialhi.x0 -= 1;
 
-    if (fp->sv.zd.specialhi.x0 <= 0)
+    if (fp->sv.zd.specialhi.x0 <= 0) {
         ftZelda_8013A6A8(fighter_gobj);
+    }
 }
 
 void ftZelda_80139C58(HSD_GObj* fighter_gobj)
@@ -247,8 +252,9 @@ void ftZelda_80139C58(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->sv.zd.specialhi.x0 -= 1;
 
-    if (fp->sv.zd.specialhi.x0 <= 0)
+    if (fp->sv.zd.specialhi.x0 <= 0) {
         ftZelda_8013A764(fighter_gobj);
+    }
 }
 
 void ftZelda_80139C94(HSD_GObj* fighter_gobj) {}
@@ -283,7 +289,9 @@ void ftZelda_80139CC0(HSD_GObj* fighter_gobj)
         env_flags = collData->x134_envFlags;
         if ((env_flags & MPCOLL_RIGHTWALL) != 0 ||
             (env_flags & MPCOLL_LEFTWALL) != 0)
+        {
             ftZelda_8013A6A8(fighter_gobj);
+        }
     }
 }
 
@@ -296,12 +304,13 @@ bool ftZelda_80139D60_Helper(HSD_GObj* fighter_gobj)
     fighter2 = getFighter(fighter_gobj);
     attributes2 = fighter2->x2D4_specialAttributes;
 
-    if (fighter2->sv.zd.specialhi.xC >= attributes2->x4C)
+    if (fighter2->sv.zd.specialhi.xC >= attributes2->x4C) {
         result = true;
-    else if (ft_8009A134(fighter_gobj))
+    } else if (ft_8009A134(fighter_gobj)) {
         result = false;
-    else
+    } else {
         result = true;
+    }
 
     return result;
 }
@@ -326,10 +335,11 @@ void ftZelda_80139D60(HSD_GObj* fighter_gobj)
     {
         int ledge_grab_dir;
 
-        if (fp->facing_dir < 0)
+        if (fp->facing_dir < 0) {
             ledge_grab_dir = -1;
-        else
+        } else {
             ledge_grab_dir = +1;
+        }
 
         if (ft_CheckGroundAndLedge(fighter_gobj, ledge_grab_dir)) {
             if (ftZelda_80139D60_Helper(fighter_gobj)) {
@@ -343,21 +353,24 @@ void ftZelda_80139D60(HSD_GObj* fighter_gobj)
         if ((coll_data->x134_envFlags & MPCOLL_CEIL) != 0) {
             f32 angle = lbVector_AngleXY(&coll_data->x188_ceiling.normal,
                                          &fp->x80_self_vel);
-            if (angle > DEG_TO_RAD * (90.0F + sa->x60))
+            if (angle > DEG_TO_RAD * (90.0F + sa->x60)) {
                 ftZelda_8013A764(fighter_gobj);
+            }
         }
 
         if ((coll_data->x134_envFlags & MPCOLL_RIGHTWALL) != 0) {
             f32 angle = lbVector_AngleXY(&coll_data->x160_rightwall.normal,
                                          &fp->x80_self_vel);
-            if (angle > (DEG_TO_RAD * (90.0F + sa->x60)))
+            if (angle > (DEG_TO_RAD * (90.0F + sa->x60))) {
                 ftZelda_8013A764(fighter_gobj);
+            }
         }
         if ((coll_data->x134_envFlags & MPCOLL_LEFTWALL) != 0) {
             f32 angle = lbVector_AngleXY(&coll_data->x174_leftwall.normal,
                                          &fp->x80_self_vel);
-            if (angle > (DEG_TO_RAD * (90.0F + sa->x60)))
+            if (angle > (DEG_TO_RAD * (90.0F + sa->x60))) {
                 ftZelda_8013A764(fighter_gobj);
+            }
         }
     }
 }
@@ -583,8 +596,9 @@ void ftZelda_8013A448(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 void ftZelda_8013A484(HSD_GObj* fighter_gobj)
@@ -636,8 +650,9 @@ void ftZelda_8013A50C(HSD_GObj* fighter_gobj)
 
 void ftZelda_8013A588(HSD_GObj* fighter_gobj)
 {
-    if (ft_800827A0(fighter_gobj) == 0)
+    if (ft_800827A0(fighter_gobj) == 0) {
         ftZelda_8013A648(fighter_gobj);
+    }
 }
 
 void ftZelda_8013A5C4(HSD_GObj* fighter_gobj)
@@ -653,10 +668,11 @@ void ftZelda_8013A5C4(HSD_GObj* fighter_gobj)
     {
         int ledge_grab_dir;
 
-        if (fp->facing_dir < 0)
+        if (fp->facing_dir < 0) {
             ledge_grab_dir = -1;
-        else
+        } else {
             ledge_grab_dir = +1;
+        }
 
         if (ft_CheckGroundAndLedge(fighter_gobj, ledge_grab_dir) != 0) {
             ft_800D5CB0(fighter_gobj, 0, attributes->x6C);
@@ -664,8 +680,9 @@ void ftZelda_8013A5C4(HSD_GObj* fighter_gobj)
         }
     }
 
-    if (!ftCliffCommon_80081298(fighter_gobj))
+    if (!ftCliffCommon_80081298(fighter_gobj)) {
         return;
+    }
 }
 
 void ftZelda_8013A648(HSD_GObj* fighter_gobj)

@@ -1,9 +1,10 @@
 #ifndef SYSDOLPHIN_BASELIB_SISLIB_H
 #define SYSDOLPHIN_BASELIB_SISLIB_H
 
-#include <Runtime/platform.h>
-#include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <sysdolphin/baselib/archive.h>
+#include <Runtime/platform.h>
 
 typedef struct {
     unk_t x0;
@@ -54,8 +55,8 @@ void func_803A74F0(unk_t, unk_t);
 void func_803A746C(unk_t, s32, f32, f32);
 s32 func_803A70A0(s32, unk_t, unk_t);
 u32 lbl_803A6FEC(s32, s32, bool);
-void func_803A6B98(unk_t, u32, s32, s32, s32, s32, s32, s32, f64, f64, f64, f64,
-                   f64, f64, f64, f64);
+void func_803A6B98(unk_t, u32, s32, s32, s32, s32, s32, s32, f64, f64, f64,
+                   f64, f64, f64, f64, f64);
 s32 func_803A67EC(unk_t, unk_t);
 s32 func_803A67EC(unk_t, unk_t);
 unk_t func_803A6754(void);

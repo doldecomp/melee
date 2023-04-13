@@ -1,7 +1,6 @@
-#include <dolphin/os/OSTime.h>
-
-#include <dolphin/os/OSInterrupt.h>
 #include <placeholder.h>
+#include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSTime.h>
 
 #ifdef MWERKS_GEKKO
 
@@ -109,8 +108,9 @@ static void GetDates(s32 days, OSCalendarTime* cal)
     p_days = IsLeapYear(year) ? LeapYearDays : YearDays;
     month = OS_TIME_MONTH_MAX;
 
-    while (days < p_days[--month])
+    while (days < p_days[--month]) {
         continue;
+    }
 
     cal->mon = month;
     cal->mday = days - p_days[month] + 1;

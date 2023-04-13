@@ -1,14 +1,13 @@
-#include <melee/mp/mpcoll.h>
-
+#include <placeholder.h>
 #include <dolphin/os/os.h>
 #include <melee/db/db_unknown_001.h>
 #include <melee/ft/ftlib.h>
 #include <melee/gr/grdynamicattr.h>
 #include <melee/lb/lbunknown_001.h>
 #include <melee/lb/lbvector.h>
+#include <melee/mp/mpcoll.h>
 #include <melee/mp/mplib.h>
 #include <MSL/trigf.h>
-#include <placeholder.h>
 
 extern s32 lbl_804D64A0;
 extern s32 lbl_804D64A4;
@@ -46,8 +45,8 @@ void mpColl_80041C8C(CollData* cd)
                     ftLib_800874BC(cd->x0_gobj), cd->x4_vec.x, cd->x4_vec.y);
             } else {
                 OSReport("%s:%d: Error: mpCollPrev() pos(%f,%f) gobj_id=%d\n",
-                         "mpcoll.c", 212, cd->x0_gobj->classifier, cd->x4_vec.x,
-                         cd->x4_vec.y);
+                         "mpcoll.c", 212, cd->x0_gobj->classifier,
+                         cd->x4_vec.x, cd->x4_vec.y);
                 if (cd->x0_gobj->p_link == 9) {
                     OSReport("itkind=%d\n", itGetKind(cd->x0_gobj));
                 }
@@ -202,8 +201,8 @@ void mpColl_80042078(CollData* cd, HSD_GObj* gobj, HSD_JObj* arg1,
 }
 
 // 8004220C https://decomp.me/scratch/nOinn
-void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2, f32 arg3,
-                     f32 arg4)
+void mpColl_8004220C(CollData* cd, HSD_GObj* gobj, f32 arg1, f32 arg2,
+                     f32 arg3, f32 arg4)
 {
     cd->x0_gobj = gobj;
     cd->x104 = 2;
@@ -322,11 +321,11 @@ void mpColl_800424DC(CollData* cd, u32 flags)
         left_x = right_x = vec.x - temp_x;
         bottom_y = top_y = vec.y - temp_y;
 
-#define EXPAND_ECB_FOR(joint)                                                  \
-    lb_8000B1CC(joint, NULL, &vec);                                            \
-    dx = vec.x - temp_x;                                                       \
-    dy = vec.y - temp_y;                                                       \
-    update_min_max(&left_x, &right_x, dx);                                     \
+#define EXPAND_ECB_FOR(joint)                                                 \
+    lb_8000B1CC(joint, NULL, &vec);                                           \
+    dx = vec.x - temp_x;                                                      \
+    dy = vec.y - temp_y;                                                      \
+    update_min_max(&left_x, &right_x, dx);                                    \
     update_min_max(&bottom_y, &top_y, dy);
 
         EXPAND_ECB_FOR(cd->x10C_joint[1]);
@@ -607,7 +606,8 @@ void mpColl_80042DB0(CollData* ecb, f32 time)
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.bottom,
                      &ecb->x84_ecb.bottom);
     Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.left, &ecb->x84_ecb.left);
-    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.right, &ecb->x84_ecb.right);
+    Vec2_Interpolate(time, &ecb->xA4_ecbCurrCorrect.right,
+                     &ecb->x84_ecb.right);
     if (fpclassify(ecb->xA4_ecbCurrCorrect.top.x) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.top.y) == FP_NAN ||
         fpclassify(ecb->xA4_ecbCurrCorrect.bottom.x) == FP_NAN ||
@@ -664,8 +664,9 @@ void func_80043324_inline2(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
         thing = 0;
         mpLib_800581BC(temp_r29, &callback, &thing);
 
-        if (callback != NULL)
+        if (callback != NULL) {
             callback(thing, temp_r29, arg0, arg0->x50, 0, arg8);
+        }
     }
 }
 void func_80043324_inline(CollData* arg0, s32 arg1, s32 arg2, f32 arg8)
@@ -767,10 +768,11 @@ void mpColl_80043558(CollData* arg0, s32 arg1)
 {
     enum_t temp_r3 = mpLib_80054C6C(arg1);
 
-    if (temp_r3 == 1)
+    if (temp_r3 == 1) {
         mpColl_80043268(arg0, arg1, 0, 0.0f);
-    else if (temp_r3 == 2)
+    } else if (temp_r3 == 2) {
         func_80043324_inline2(arg0, arg1, 0, 0.0f);
+    }
 }
 
 #endif
@@ -858,8 +860,9 @@ s32 mpColl_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
     dist_left_x = fabs_inline(dist_left_x);
 
     dist_right_x = arg1->x84_ecb.right.x - arg1->xA4_ecbCurrCorrect.right.x;
-    if (dist_right_x < 0)
+    if (dist_right_x < 0) {
         dist_right_x = -dist_right_x;
+    }
 
     if (dist_left_x < dist_right_x) {
         dist_left_x = dist_right_x;
@@ -870,8 +873,9 @@ s32 mpColl_80043754(s32 (*arg0)(void*, u32), CollData* arg1, u32 arg2)
     dist_top_y = fabs_inline(dist_top_y);
 
     dist_right_y = arg1->x84_ecb.right.y - arg1->xA4_ecbCurrCorrect.right.y;
-    if (dist_right_y < 0)
+    if (dist_right_y < 0) {
         dist_right_y = -dist_right_y;
+    }
 
     if (dist_top_y < dist_right_y) {
         dist_top_y = dist_right_y;
@@ -982,8 +986,8 @@ bool mpColl_80043BBC(CollData* arg0, s32* arg1)
     if ((mpLib_800501CC(new_var,
                         arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.bottom.y,
                         arg0->x4_vec.x + arg0->xA4_ecbCurrCorrect.right.x,
-                        arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y, NULL,
-                        &sp10, NULL, NULL, arg0->x48, arg0->x4C) != 0) &&
+                        arg0->x4_vec.y + arg0->xA4_ecbCurrCorrect.right.y,
+                        NULL, &sp10, NULL, NULL, arg0->x48, arg0->x4C) != 0) &&
         (sp10 != temp_r31))
     {
         *arg1 = sp10;
@@ -1172,7 +1176,8 @@ void mpColl_80043C6C(CollData* arg0, s32 arg1, s32 arg2)
     temp_f1_2 = arg0->x4_vec.y;
     sp24 = temp_f1_2 + arg0->xA4_ecbCurrCorrect.right.y;
     if (mpLib_8004E398(arg1, &sp20, 0, 0, 0, temp_f1_2) != -1) {
-        if (mpLib_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48, arg0->x4C,
+        if (mpLib_800501CC(&arg0->x140, (s32) &sp1C, 0, 0, arg0->x48,
+                           arg0->x4C,
                            -((arg0->x14C_ground.normal.y * var_f31) - sp20),
                            (arg0->x14C_ground.normal.x * var_f31) + sp24) != 0)
         {

@@ -1,8 +1,9 @@
 #ifndef _FTMARIO_STATEVARS_H_
 #define _FTMARIO_STATEVARS_H_
 
-#include <baselib/gobj.h>
 #include <platform.h>
+
+#include <baselib/gobj.h>
 
 typedef struct ftMarioSpecialS {
     /// 0x2340 - bool to check if reflect bubble should be enabled

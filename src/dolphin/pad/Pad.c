@@ -1,8 +1,7 @@
-#include <dolphin/pad/Pad.h>
-
 #include <dolphin/os/OSContext.h>
 #include <dolphin/os/OSRtc.h>
 #include <dolphin/os/OSSerial.h>
+#include <dolphin/pad/Pad.h>
 #include <MetroTRK/intrinsics.h>
 #include <Runtime/__mem.h>
 
@@ -136,8 +135,9 @@ void PADOriginCallback(s32 unused0, s32 arg1)
 
 void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context)
 {
-    if (!(EnabledBits & (PAD_CHAN0_BIT >> chan)))
+    if (!(EnabledBits & (PAD_CHAN0_BIT >> chan))) {
         return;
+    }
 
     if (!(error & (SI_ERROR_UNDER_RUN | SI_ERROR_OVER_RUN |
                    SI_ERROR_NO_RESPONSE | SI_ERROR_COLLISION)))
@@ -145,8 +145,9 @@ void PADOriginUpdateCallback(s32 chan, u32 error, OSContext* context)
         UpdateOrigin(chan);
     }
 
-    if (error & SI_ERROR_NO_RESPONSE)
+    if (error & SI_ERROR_NO_RESPONSE) {
         PADDisable(chan);
+    }
 }
 
 void PADProbeCallback(s32 chan, u32 error, OSContext* context)

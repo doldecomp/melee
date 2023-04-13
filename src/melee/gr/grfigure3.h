@@ -1,8 +1,8 @@
 #ifndef _grfigure3_h_
 #define _grfigure3_h_
 
-#include <melee/gr/stage.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/gr/stage.h>
 
 static void grFigure3_8020E504(int number);
 static void grFigure3_8020E508(void);

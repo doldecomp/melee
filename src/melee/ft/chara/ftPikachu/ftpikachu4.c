@@ -116,10 +116,11 @@ void ftPikachu_80125F78(HSD_GObj* fighter_gobj)
         ftPikachuAttributes* sa = fp->x2D4_specialAttributes;
         attr* attr = &fp->x110_attr;
 
-        if ((signed) fp->sv.pk.unk4.x0 != 0)
+        if ((signed) fp->sv.pk.unk4.x0 != 0) {
             fp->sv.pk.unk4.x0--;
-        else
+        } else {
             ftCommon_8007D494(fp, sa->x64, attr->x170_TerminalVelocity);
+        }
     }
 
     ftCommon_8007CF58(fp);
@@ -127,8 +128,9 @@ void ftPikachu_80125F78(HSD_GObj* fighter_gobj)
 
 void ftPikachu_80125FD8(HSD_GObj* fighter_gobj)
 {
-    if (!ft_80082708(fighter_gobj))
+    if (!ft_80082708(fighter_gobj)) {
         ftPikachu_ActionChange_80126084(fighter_gobj);
+    }
 }
 
 void ftPikachu_80126014(HSD_GObj* fighter_gobj)
@@ -350,7 +352,8 @@ void ftPikachu_80126614(HSD_GObj* fighter_gobj)
         HSD_JObjSetScale(jobj, &scale);
     }
 
-    if ((collData->x134_envFlags & 0x3F) || (collData->x134_envFlags & 0xFC0)) {
+    if ((collData->x134_envFlags & 0x3F) || (collData->x134_envFlags & 0xFC0))
+    {
         ftPikachu_ActionChangeUpdateVel_801274AC(fighter_gobj);
     }
 }
@@ -509,8 +512,9 @@ void ftPikachu_80126C0C(HSD_GObj* fighter_gobj)
                           fp->input.x624_lstick_y * fp->input.x624_lstick_y);
 
     // cap stick magnitude to MAX_STICK_MAG
-    if (stick_mag > MAX_STICK_MAG)
+    if (stick_mag > MAX_STICK_MAG) {
         stick_mag = get_max_and_fill_stack();
+    }
 
     if (!(stick_mag < pika_attr->x8C)) {
         Vec3 lstick_direction;
@@ -586,8 +590,9 @@ void ftPikachu_80126E1C(HSD_GObj* fighter_gobj)
     final_stick_mag = temp_stick_mag;
 
     // cap stick magnitude to MAX_STICK_MAG
-    if (temp_stick_mag > MAX_STICK_MAG)
+    if (temp_stick_mag > MAX_STICK_MAG) {
         final_stick_mag = get_max_and_fill_stack();
+    }
 
     if ((final_stick_mag > pika_attr->x8C)) {
         if (fabs_inline(fp->input.x620_lstick_x) > 0.001f) {
@@ -628,8 +633,9 @@ void ftPikachu_80126E1C(HSD_GObj* fighter_gobj)
     temp_f2_2 = ((pika_attr->x90 * final_stick_mag) + pika_attr->x94) *
                 cosf(some_angle);
     fp->x80_self_vel.x = fp->facing_dir * temp_f2_2;
-    fp->x80_self_vel.y = ((pika_attr->x90 * final_stick_mag) + pika_attr->x94) *
-                         sinf(some_angle);
+    fp->x80_self_vel.y =
+        ((pika_attr->x90 * final_stick_mag) + pika_attr->x94) *
+        sinf(some_angle);
 
     // if second zip
     if (fp->sv.pk.unk4.x8) {
@@ -637,7 +643,8 @@ void ftPikachu_80126E1C(HSD_GObj* fighter_gobj)
         fp->x80_self_vel.x *= pika_attr->x98;
         fp->x80_self_vel.y *= pika_attr->x98;
 
-        Fighter_ChangeMotionState(fighter_gobj, 0x165, 2, 0, 12.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(fighter_gobj, 0x165, 2, 0, 12.0f, 1.0f,
+                                  0.0f);
         ftAnim_8006EBA4(fighter_gobj);
     }
     Fighter_ChangeMotionState(fighter_gobj, 0x165, 0xA, 0, 13.0f, 1.0f, 0.0f);
@@ -668,8 +675,9 @@ bool ftPikachu_80127064(HSD_GObj* fighter_gobj)
 
     // if stick_mag is less than the threshold, push the max stick magnitude
     // onto the stack and return 0
-    if (stick_mag < pika_attr->x8C)
+    if (stick_mag < pika_attr->x8C) {
         return return_and_fill_stack();
+    }
 
     if (!fp->sv.pk.unk4.x8) {
         Vec3 vec1, vec2;
@@ -694,8 +702,9 @@ bool ftPikachu_80127064(HSD_GObj* fighter_gobj)
         tempf = lbVector_AngleXY(&vec2, &vec1);
 
         // if the angular difference > the minimum difference, return 1
-        if (tempf > (DEG_TO_RAD * (pika_attr->xA8)))
+        if (tempf > (DEG_TO_RAD * (pika_attr->xA8))) {
             return true;
+        }
 
         return false;
     }
@@ -751,8 +760,9 @@ void ftPikachu_Stub_801272DC(HSD_GObj* arg0) {}
 void ftPikachu_801272E0(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->x2200_ftcmd_var0)
+    if (fp->x2200_ftcmd_var0) {
         ft_80084F3C(fighter_gobj);
+    }
 }
 
 void ftPikachu_80127310(HSD_GObj* fighter_gobj)
@@ -783,8 +793,9 @@ void ftPikachu_8012738C(HSD_GObj* fighter_gobj)
     ///       #ftPikachuAttributes::height_attributes)
     ftCollisionBox* box = (ftCollisionBox*) &pika_attr->height_attributes;
 
-    if (!ft_80082888(fighter_gobj, box))
+    if (!ft_80082888(fighter_gobj, box)) {
         ftPikachu_ActionChange_8012744C(fighter_gobj);
+    }
 }
 
 void ftPikachu_801273D4(HSD_GObj* fighter_gobj)

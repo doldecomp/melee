@@ -146,38 +146,52 @@ void ftSamus_80128D3C(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    if ((fp->x2204_ftcmd_var1) && (fp->input.x624_lstick_y < samus_attr->x14)) {
+    if ((fp->x2204_ftcmd_var1) && (fp->input.x624_lstick_y < samus_attr->x14))
+    {
         fp->x2204_ftcmd_var1 = 0;
         ft_800D638C(fighter_gobj);
         return;
     }
 
-    if (ft_80096540(fighter_gobj))
+    if (ft_80096540(fighter_gobj)) {
         return;
-    if (ft_800D695C(fighter_gobj))
+    }
+    if (ft_800D695C(fighter_gobj)) {
         return;
-    if (ft_800D6824(fighter_gobj))
+    }
+    if (ft_800D6824(fighter_gobj)) {
         return;
-    if (ft_800D68C0(fighter_gobj))
+    }
+    if (ft_800D68C0(fighter_gobj)) {
         return;
-    if (ft_800D8990(fighter_gobj))
+    }
+    if (ft_800D8990(fighter_gobj)) {
         return;
-    if (ft_8008BFC4(fighter_gobj))
+    }
+    if (ft_8008BFC4(fighter_gobj)) {
         return;
-    if (ft_8008C830(fighter_gobj))
+    }
+    if (ft_8008C830(fighter_gobj)) {
         return;
-    if (ft_8008CB44(fighter_gobj))
+    }
+    if (ft_8008CB44(fighter_gobj)) {
         return;
-    if (ft_8008B658(fighter_gobj))
+    }
+    if (ft_8008B658(fighter_gobj)) {
         return;
-    if (ft_8008B980(fighter_gobj))
+    }
+    if (ft_8008B980(fighter_gobj)) {
         return;
-    if (ft_8008BB44(fighter_gobj))
+    }
+    if (ft_8008BB44(fighter_gobj)) {
         return;
-    if (ft_8008A9F8(fighter_gobj))
+    }
+    if (ft_8008A9F8(fighter_gobj)) {
         return;
-    if (ft_80099794(fighter_gobj))
+    }
+    if (ft_80099794(fighter_gobj)) {
         return;
+    }
 }
 
 void ftSamus_80128E68(HSD_GObj* fighter_gobj)
@@ -274,8 +288,8 @@ void ftSamus_80129048(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(fighter_gobj, 0x156, 0x10, 0,
-                              fp->x894_currentAnimFrame, fp->x89C_frameSpeedMul,
-                              0.0f);
+                              fp->x894_currentAnimFrame,
+                              fp->x89C_frameSpeedMul, 0.0f);
 }
 
 void ftSamus_801290A4(HSD_GObj* fighter_gobj)
@@ -283,8 +297,8 @@ void ftSamus_801290A4(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(fighter_gobj, 0x155, 0x10, 0,
-                              fp->x894_currentAnimFrame, fp->x89C_frameSpeedMul,
-                              0.0f);
+                              fp->x894_currentAnimFrame,
+                              fp->x89C_frameSpeedMul, 0.0f);
 }
 
 int ftSamus_80129100(HSD_GObj* fighter_gobj, s32* arg1, s32* arg2)
@@ -298,8 +312,9 @@ int ftSamus_80129100(HSD_GObj* fighter_gobj, s32* arg1, s32* arg2)
         u8 _[4];
 #endif
 
-        if (!fp->ev.ss.x222C)
+        if (!fp->ev.ss.x222C) {
             return -1;
+        }
 
         *arg1 = fp->ev.ss.x2230;
         *arg2 = samus_attr->x18;

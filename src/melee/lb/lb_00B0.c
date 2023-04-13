@@ -1,8 +1,5 @@
-#include <melee/lb/lbunknown_001.h>
-
-#include <dolphin/mtx/mtxvec.h>
-#include <melee/sc/scene.h>
 #include <placeholder.h>
+#include <dolphin/mtx/mtxvec.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -11,6 +8,8 @@
 #include <sysdolphin/baselib/pobj.h>
 #include <sysdolphin/baselib/quatlib.h>
 #include <sysdolphin/baselib/robj.h>
+#include <melee/lb/lbunknown_001.h>
+#include <melee/sc/scene.h>
 
 static s32 lbl_803B9FC0[] = { 14, 14, 14, 14, 2, 4, 6, 0 };
 static s32 lbl_803B9FE0[] = { 12, 13, 14, 15 };
@@ -23,8 +22,9 @@ bool lb_8000B074(HSD_JObj* jobj)
 {
     HSD_AObj* aobj = jobj->aobj;
 
-    if (aobj != NULL && !(aobj->flags & AOBJ_NO_ANIM))
+    if (aobj != NULL && !(aobj->flags & AOBJ_NO_ANIM)) {
         return true;
+    }
 
     return false;
 }
@@ -443,8 +443,9 @@ void lb_8000C390(HSD_JObj* jobj)
     while (true) {
         cur = HSD_RObjGetByType(cur, REFTYPE_JOBJ, 0);
 
-        if (cur == NULL)
+        if (cur == NULL) {
             break;
+        }
 
         next = robj_next(cur);
         HSD_JObjDeleteRObj(jobj, cur);

@@ -1,10 +1,9 @@
-#include <dolphin/os/OSSerial.h>
-
+#include <placeholder.h>
 #include <dolphin/os/OSExi.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSRtc.h>
+#include <dolphin/os/OSSerial.h>
 #include <dolphin/os/OSTime.h>
-#include <placeholder.h>
 
 extern struct {
     enum_t status;
@@ -14,8 +13,9 @@ extern struct {
 
 bool SIBusy(void)
 {
-    if (lbl_80402358.status != -1)
+    if (lbl_80402358.status != -1) {
         return true;
+    }
 
     return false;
 }
@@ -29,8 +29,9 @@ bool SIIsChanBusy(enum_t status)
 {
     bool result = true;
 
-    if (Packet[status].x0 == -1 && lbl_80402358.status != status)
+    if (Packet[status].x0 == -1 && lbl_80402358.status != status) {
         result = false;
+    }
 
     return result;
 }

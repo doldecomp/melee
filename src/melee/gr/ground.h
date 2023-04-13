@@ -1,9 +1,9 @@
 #ifndef _ground_h_
 #define _ground_h_
 
+#include <sysdolphin/baselib/gobj.h>
 #include <melee/gr/granime.h>
 #include <melee/gr/types.h>
-#include <sysdolphin/baselib/gobj.h>
 
 extern StageInfo stage_info;
 
@@ -17,7 +17,8 @@ void Ground_801C38AC(f32);
 void Ground_801C38BC(f32 x, f32 y);
 void Ground_801C38D0(f32 tilt, f32 pan, f32, f32);
 void Ground_801C38EC(f32 depth, f32 zoom);
-void Ground_801C3900(f32, f32, f32, f32, f32 up, f32 down, f32 left, f32 right);
+void Ground_801C3900(f32, f32, f32, f32, f32 up, f32 down, f32 left,
+                     f32 right);
 void Ground_801C392C(f32 x, f32 y, f32 z, f32 fov, f32 vert, f32 horz);
 void Ground_801C3950(f32 zoom);
 void Ground_801C3960(f32 ratio);

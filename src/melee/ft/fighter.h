@@ -2,17 +2,8 @@
 #define _fighter_h_
 
 #include <common_structs.h>
-#include <dolphin/mtx/types.h>
 #include <math.h>
-#include <melee/ft/ftanim.h>
-#include <melee/ft/inlines.h>
-#include <melee/ft/types.h>
-#include <melee/gr/stage.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbcollision.h>
-#include <melee/lb/lbrefract.h>
-#include <melee/pl/player.h>
-#include <Runtime/platform.h>
+#include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
@@ -22,6 +13,15 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ft/ftanim.h>
+#include <melee/ft/inlines.h>
+#include <melee/ft/types.h>
+#include <melee/gr/stage.h>
+#include <melee/it/item2.h>
+#include <melee/lb/lbcollision.h>
+#include <melee/lb/lbrefract.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 /// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers
@@ -73,8 +73,8 @@ void Fighter_80068E64(HSD_GObj* fighter_gobj);
 HSD_GObj* Fighter_Create(struct S_TEMP1* input);
 void Fighter_ChangeMotionState(HSD_GObj* fighter_gobj,
                                s32 new_action_state_index, s32 flags,
-                               HSD_GObj* otherObj, f32 animStart, f32 animSpeed,
-                               f32 animBlend);
+                               HSD_GObj* otherObj, f32 animStart,
+                               f32 animSpeed, f32 animBlend);
 void Fighter_8006A1BC(HSD_GObj* fighter_gobj);
 void Fighter_8006A360(HSD_GObj* fighter_gobj);
 void Fighter_8006ABA0(HSD_GObj* fighter_gobj);
@@ -105,8 +105,8 @@ void Fighter_Unload_8006DABC(void* user_data);
 void Fighter_UnkProcessDeath_80068354(HSD_GObj*);
 u32 Fighter_NewSpawn_80068E40(void);
 
-void Fighter_ChangeMotionState(HSD_GObj* fighter_gobj, s32 newAction, s32 flags,
-                               HSD_GObj* otherObj, f32 animStart, f32 animSpeed,
-                               f32 animBlend);
+void Fighter_ChangeMotionState(HSD_GObj* fighter_gobj, s32 newAction,
+                               s32 flags, HSD_GObj* otherObj, f32 animStart,
+                               f32 animSpeed, f32 animBlend);
 
 #endif

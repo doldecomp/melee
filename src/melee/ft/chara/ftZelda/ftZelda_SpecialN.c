@@ -104,11 +104,13 @@ void ftZelda_8013AA38(HSD_GObj* fighter_gobj)
                                 &ftZelda_8013ADB0);
     }
 
-    if (fp->x2200_ftcmd_var0 == 0)
+    if (fp->x2200_ftcmd_var0 == 0) {
         fp->x2218_flag.bits.b3 = 0;
+    }
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 // 8013AACC - 8013AB60 (0x94 bytes)
@@ -173,10 +175,11 @@ void ftZelda_8013AB9C(HSD_GObj* fighter_gobj)
         attr* attr = &fp->x110_attr;
         ftZeldaAttributes* sa = fp->x2D4_specialAttributes;
 
-        if (var1 != 0)
+        if (var1 != 0) {
             fp->sv.zd.unk3.x0 = var1 - 1;
-        else
+        } else {
             ftCommon_8007D494(fp, sa->xC, attr->x170_TerminalVelocity);
+        }
     }
 
     ftCommon_8007CF58(fp);
@@ -187,8 +190,9 @@ void ftZelda_8013AB9C(HSD_GObj* fighter_gobj)
 // https://decomp.me/scratch/CT7dz
 void ftZelda_8013AC10(HSD_GObj* fighter_gobj)
 {
-    if (!ft_80082708(fighter_gobj))
+    if (!ft_80082708(fighter_gobj)) {
         ftZelda_8013AC88(fighter_gobj);
+    }
 }
 
 // 8013AC4C - 8013AC88 (0x3C bytes)

@@ -1,9 +1,8 @@
-#include <sysdolphin/baselib/fog.h>
-
 #include <dolphin/gx/GXPixel.h>
 #include <dolphin/gx/GXTransform.h>
 #include <dolphin/mtx.h>
 #include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/fog.h>
 
 static void FogInfoInit(void);
 static void FogAdjInfoInit(void);
@@ -32,8 +31,8 @@ void HSD_FogSet(HSD_Fog* fog)
     if (cobj == NULL) {
         HSD_Panic(__FILE__, 0x4D, "You must specify CObj first.\n");
     }
-    GXSetFog(fog->type, fog->color, fog->start, fog->end, HSD_CObjGetNear(cobj),
-             HSD_CObjGetFar(cobj));
+    GXSetFog(fog->type, fog->color, fog->start, fog->end,
+             HSD_CObjGetNear(cobj), HSD_CObjGetFar(cobj));
 
     if (fog->fog_adj != NULL) {
         GXGetViewportv(v);
@@ -182,8 +181,9 @@ void HSD_FogReqAnimByFlags(HSD_Fog* fog, u32 flags, f32 frame)
 
 void HSD_FogInterpretAnim(HSD_Fog* fog)
 {
-    if (fog != NULL)
+    if (fog != NULL) {
         HSD_AObjInterpretAnim(fog->aobj, fog, FogUpdateFunc);
+    }
 }
 
 void FogUpdateFunc(any_t obj, enum_t type, HSD_ObjData* val)

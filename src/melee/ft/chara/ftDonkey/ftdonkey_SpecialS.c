@@ -1,7 +1,6 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialS.h>
-
 #include <melee/ef/eflib.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey_SpecialS.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 
@@ -34,8 +33,9 @@ void ftDonkey_SpecialAirS_StartMotion(HSD_GObj* fighter_gobj)
 
 void ftDonkey_8010E2BC(HSD_GObj* fighter_gobj)
 {
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_8008A2BC(fighter_gobj);
+    }
 }
 
 void ftDonkey_8010E2F8(HSD_GObj* fighter_gobj)

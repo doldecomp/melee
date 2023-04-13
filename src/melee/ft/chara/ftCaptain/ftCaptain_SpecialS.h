@@ -4,10 +4,10 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALS_H
 #define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_SPECIALS_H
 
+#include <platform.h>
 #include "ft/forward.h"
 
 #include <baselib/gobj.h>
-#include <platform.h>
 
 /**
  * Remove all GFX and set GFX flags to @c false.
@@ -52,8 +52,8 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialAirS_Anim(HSD_GObj* fighter_gobj);
 
 /**
- * Captain Falcon & Ganondorf's grounded Raptor Boost / Gerudo Dragon Start IASA
- * callback.
+ * Captain Falcon & Ganondorf's grounded Raptor Boost / Gerudo Dragon Start
+ * IASA callback.
  */
 void ftCaptain_SpecialSStart_IASA(HSD_GObj* fighter_gobj);
 
@@ -88,8 +88,8 @@ void ftCaptain_SpecialSStart_Phys(HSD_GObj* fighter_gobj);
 void ftCaptain_SpecialS_Phys(HSD_GObj* fighter_gobj);
 
 /**
- * Captain Falcon & Ganondorf's grounded Raptor Boost/Gerudo Dragon Start Action
- * State handler.
+ * Captain Falcon & Ganondorf's grounded Raptor Boost/Gerudo Dragon Start
+ * Action State handler.
  */
 void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* fighter_gobj);
 

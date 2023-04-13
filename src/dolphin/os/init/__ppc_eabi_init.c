@@ -1,9 +1,8 @@
-#include <dolphin/os/init/__ppc_eabi_init.h>
-
+#include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
+#include <dolphin/os/init/__ppc_eabi_init.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSInit.h>
-#include <placeholder.h>
 
 #define MSR_FP 0x2000
 

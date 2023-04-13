@@ -1,19 +1,11 @@
 #ifndef MELEE_IT_TYPES_H
 #define MELEE_IT_TYPES_H
 
-#include <common_structs.h>
-#include <dolphin/mtx/types.h>
-#include <math.h>
-#include <melee/ft/types.h>
-#include <melee/gr/stage.h>
 #include <melee/it/forward.h>
-#include <melee/it/itCommonItems.h>
-#include <melee/it/itkind.h>
-#include <melee/it/itPKFlash.h>
-#include <melee/it/itPKThunder.h>
-#include <melee/it/itYoyo.h>
-#include <melee/pl/player.h>
-#include <Runtime/platform.h>
+
+#include <common_structs.h>
+#include <math.h>
+#include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -23,6 +15,15 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/random.h>
+#include <melee/ft/types.h>
+#include <melee/gr/stage.h>
+#include <melee/it/itCommonItems.h>
+#include <melee/it/itkind.h>
+#include <melee/it/itPKFlash.h>
+#include <melee/it/itPKThunder.h>
+#include <melee/it/itYoyo.h>
+#include <melee/pl/player.h>
+#include <Runtime/platform.h>
 
 /// @todo Size unknown.
 struct ItemStateTable {
@@ -294,19 +295,19 @@ struct itHit {
     s32 x34_shield_damage; // If hitbox damage + shield damage is less than 0
                            // (negative), this will effectively restore shield
                            // health
-    s32 x38_SFX_severity;  // 0x38. hurtbox interaction. 0 = none, 1 = grounded,
-                           // 2 = aerial, 3 = both // What
+    s32 x38_SFX_severity; // 0x38. hurtbox interaction. 0 = none, 1 = grounded,
+                          // 2 = aerial, 3 = both // What
     s32 x3C_SFX_kind;
     UnkFlagStruct x40_flags; // 0x20 -> check against aerial fighters; 0x10 ->
                              // check against grounded fighters
     UnkFlagStruct x41_flags; // 0x8/0x4/0x2 = timed rehit on
                              // item/fighter/shield; 0x1 = can reflect
     UnkFlagStruct x42_flags; // 0x80 = can absorb; 0x20 = hit only fighters
-                             // facing the item; 0x10 = can shield; 0x8 = ignore
-                             // reflect/absorb bubbles(?); 0x4 = ignore
+                             // facing the item; 0x10 = can shield; 0x8 =
+                             // ignore reflect/absorb bubbles(?); 0x4 = ignore
                              // hurtboxes; 0x2 = ignore ungrabbable hurtboxes
-    UnkFlagStruct
-        x43_flags; // 0x80 = interact with items only; 0x20 = interact with all?
+    UnkFlagStruct x43_flags; // 0x80 = interact with items only; 0x20 =
+                             // interact with all?
     s32 x44;
     HSD_JObj* x48_jobj;
     Vec3 pos;
@@ -511,7 +512,7 @@ struct Item {
     f32 xCE4;                    // 0xce4
     f32 xCE8;                    // 0xce8
     HSD_GObj* xCEC_fighterGObj;  // 0xcec
-    HSD_GObj* xCF0_itemGObj;     // 0xcf0, is a fp GObj, but is the owner of the
+    HSD_GObj* xCF0_itemGObj; // 0xcf0, is a fp GObj, but is the owner of the
 
     HSD_GObj* xCF4_fighterGObjUnk;
 
@@ -732,11 +733,11 @@ struct BobOmbRain {
 };
 
 struct SpawnItem {
-    HSD_GObj* x0_parent_gobj; // Primary owner of the item; usually a fp GObj
-    HSD_GObj*
-        x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness' PK Fire
-                         // Pillar has this set to PK Fire Spark's item GObj
-    ItemKind kind;       // 0x8, ID of the item to spawn
+    HSD_GObj* x0_parent_gobj;  // Primary owner of the item; usually a fp GObj
+    HSD_GObj* x4_parent_gobj2; // Secondary owner GObj of the item; e.g. Ness'
+                               // PK Fire Pillar has this set to PK Fire
+                               // Spark's item GObj
+    ItemKind kind; // 0x8, ID of the item to spawn
 
     /// @at{C} @sz{4}
     /// @brief Defines the behavior of the item, such as thrown and pickup.

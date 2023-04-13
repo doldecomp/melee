@@ -1,13 +1,12 @@
 #ifndef _ftgamewatch_h_
 #define _ftgamewatch_h_
 
-#include <melee/ft/ftcommon.h>
-#include <melee/lb/lbvector.h>
-
 #include <common_structs.h>
 #include <melee/ft/fighter.h>
+#include <melee/ft/ftcommon.h>
 #include <melee/it/item.h>
 #include <melee/it/itkind.h>
+#include <melee/lb/lbvector.h>
 
 // Oil Panic Charge Level Macros //
 
@@ -19,21 +18,21 @@
 // Mr. Game & Watch Action State Change Flags //
 
 // Chef (SpecialN/SpecialAirN) //
-#define FTGAMEWATCH_SPECIALN_COLL_FLAG                                         \
-    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |     \
-        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |      \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |            \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
-        FtStateChange_SkipUpdateModelPartVis |                                 \
+#define FTGAMEWATCH_SPECIALN_COLL_FLAG                                        \
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |    \
+        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |     \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // Judgement (SpecialS/SpecialAirS) //
-#define FTGAMEWATCH_SPECIALS_COLL_FLAG                                         \
-    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |     \
-        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |      \
-        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |            \
-        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |               \
-        FtStateChange_SkipUpdateModelPartVis |                                 \
+#define FTGAMEWATCH_SPECIALS_COLL_FLAG                                        \
+    FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateHit |    \
+        FtStateChange_SkipUpdateModel | FtStateChange_SkipUpdateMatAnim |     \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |              \
+        FtStateChange_SkipUpdateModelPartVis |                                \
         FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
 
 // Oil Panic (SpecialLw/SpecialAirLw) //
@@ -118,16 +117,18 @@ typedef struct _ftGameWatchAttributes {
     f32 x2C_GAMEWATCH_JUDGE_FRICTION1;
     f32 x30_GAMEWATCH_JUDGE_FRICTION2;
     s32 x34_GAMEWATCH_JUDGE_ROLL[9]; // Array of BOOLs that toggle respective
-                                     // Judgement numbers ON/OFF. If a number is
-                                     // OFF, it is excluded from RNG rolls. Game
-                                     // panics if less than 2 numbers are ON.
+                                     // Judgement numbers ON/OFF. If a number
+                                     // is OFF, it is excluded from RNG rolls.
+                                     // Game panics if less than 2 numbers are
+                                     // ON.
 
     // UP SPECIAL - FIRE RESCUE //
 
     f32 x58_GAMEWATCH_RESCUE_STICK_RANGE; // Minimum control stick range
-                                          // required for directional influence?
-                                          // Also affects how far Mr. Game &
-                                          // Watch flings horizontally (?)
+                                          // required for directional
+                                          // influence? Also affects how far
+                                          // Mr. Game & Watch flings
+                                          // horizontally (?)
     f32 x5C_GAMEWATCH_RESCUE_ANGLE_UNK; // Radians -- controls how far Mr. Game
                                         // & Watch can angle Fire Rescue?
     f32 x60_GAMEWATCH_RESCUE_LANDING;   // Landing lag / Freefall toggle
@@ -140,8 +141,8 @@ typedef struct _ftGameWatchAttributes {
                                           // value
     f32 x6C_GAMEWATCH_PANIC_FALL_ACCEL;   // Falling acceleration
     f32 x70_GAMEWATCH_PANIC_VEL_Y_MAX;    // Terminal Y velocity?
-    f32 x74_GAMEWATCH_PANIC_DAMAGE_ADD; // Extra damage added to Oil Panic after
-                                        // formula
+    f32 x74_GAMEWATCH_PANIC_DAMAGE_ADD;   // Extra damage added to Oil Panic
+                                        // after formula
     f32 x78_GAMEWATCH_PANIC_DAMAGE_MUL; // Damage multiplier
     f32 x7C_GAMEWATCH_PANIC_TURN_FRAMES;
     AbsorbDesc

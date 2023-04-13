@@ -11,8 +11,8 @@
 #include "ft/types.h"
 #include "it/itkind.h"
 
-#include <dolphin/os/os.h>
 #include <placeholder.h>
+#include <dolphin/os/os.h>
 
 ActionState ftYoshi_MotionStateTable[] = {
     { 37, 0x00100000, 0x01000000, ftYoshi_8012C030, ftYoshi_8012C114,

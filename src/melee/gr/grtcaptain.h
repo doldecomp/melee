@@ -1,8 +1,8 @@
 #ifndef MELEE_GR_GRTCAPTAIN_H
 #define MELEE_GR_GRTCAPTAIN_H
 
-#include <melee/gr/stage.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/gr/stage.h>
 
 static void grTCaptain_8021FC60(int);
 static void grTCaptain_8021FC64(void);

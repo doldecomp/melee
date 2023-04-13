@@ -1,6 +1,6 @@
 #include "stddef.h"
-#include <string.h>
 
+#include <string.h>
 #include <dolphin/os/os.h>
 #include <sysdolphin/baselib/archive.h>
 
@@ -40,7 +40,8 @@ s32 HSD_ArchiveParse(HSD_Archive* archive, u8* src, u32 file_size)
         offset = archive->header.data_size + 0x20;
     }
     if (archive->header.nb_reloc != 0) { // Relocation Size
-        archive->reloc_info = (HSD_ArchiveRelocationInfo*) ((s32) src + offset);
+        archive->reloc_info =
+            (HSD_ArchiveRelocationInfo*) ((s32) src + offset);
         offset = offset + archive->header.nb_reloc * 4;
     }
     if (archive->header.nb_public != 0) { // Root Size
@@ -69,9 +70,10 @@ void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, char* symbols)
         int comparison =
             strcmp(archive->symbols + archive->public_info[i].symbol, symbols);
 
-        if (comparison == 0)
+        if (comparison == 0) {
             // If both strings are equal, we've found the node
             return archive->data + archive->public_info[i].offset;
+        }
     }
 
     return NULL;
@@ -79,8 +81,9 @@ void* HSD_ArchiveGetPublicAddress(HSD_Archive* archive, char* symbols)
 
 char* HSD_ArchiveGetExtern(HSD_Archive* archive, int offset)
 {
-    if (offset < 0 || archive->header.nb_extern <= (unsigned) offset)
+    if (offset < 0 || archive->header.nb_extern <= (unsigned) offset) {
         return NULL;
+    }
 
     return archive->symbols + archive->extern_info[offset].symbol;
 }

@@ -1,5 +1,4 @@
 #include <dolphin/ax/AX.h>
-
 #include <dolphin/ax/AXAlloc.h>
 #include <dolphin/ax/AXCL.h>
 #include <dolphin/ax/AXInit.h>

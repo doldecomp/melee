@@ -1,13 +1,14 @@
 #ifndef _pobj_h_
 #define _pobj_h_
 
+#include <platform.h>
+#include "baselib/forward.h"
+
 #include "baselib/aobj.h"
 #include "baselib/fobj.h"
-#include "baselib/forward.h"
 #include "baselib/object.h"
 
 #include <dolphin/gx/GXEnum.h>
-#include <platform.h>
 
 struct unk_struct_pobj {
     u32 data[8];

@@ -43,10 +43,11 @@ void ftMasterHand_80154B2C(HSD_GObj* gobj)
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
-        if (fp->ev.mh.x2250 == 0x17B)
+        if (fp->ev.mh.x2250 == 0x17B) {
             ftMasterHand_80154E78(gobj);
-        else
+        } else {
             ftMasterHand_80155014(gobj);
+        }
     }
 }
 
@@ -54,8 +55,9 @@ void ftMasterHand_80154B2C(HSD_GObj* gobj)
 void ftMasterHand_80154BB0(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(arg0);
+    }
 }
 
 // 80154BF4 1517D4
@@ -65,8 +67,8 @@ void ftMasterHand_80154BF4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* attr = fp->x10C_ftData->ext_attr;
     ft_80085134(gobj);
-    ftBossLib_8015BE40(gobj, &fp->sv.mh.unk0.xC, &fp->sv.mh.unk0.x18, attr->x2C,
-                       attr->x28);
+    ftBossLib_8015BE40(gobj, &fp->sv.mh.unk0.xC, &fp->sv.mh.unk0.x18,
+                       attr->x2C, attr->x28);
 }
 
 // 80154C54 151834

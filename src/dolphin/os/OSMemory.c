@@ -1,9 +1,8 @@
-#include <dolphin/os/OSMemory.h>
-
+#include <placeholder.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
+#include <dolphin/os/OSMemory.h>
 #include <dolphin/os/OSReset.h>
-#include <placeholder.h>
 
 extern volatile u32 Mem_Size AT_ADDRESS(0x80000028);
 extern volatile u32 Simulated_Mem AT_ADDRESS(0x800000F0);
@@ -39,8 +38,8 @@ static void MEMIntrruptHandler(__OSInterrupt interrupt, OSContext* context)
     __MEMRegs[0x10] = 0;
 
     if (__OSErrorTable[OS_ERROR_PROTECTION]) {
-        __OSErrorTable[OS_ERROR_PROTECTION](OS_ERROR_PROTECTION, context, cause,
-                                            addr);
+        __OSErrorTable[OS_ERROR_PROTECTION](OS_ERROR_PROTECTION, context,
+                                            cause, addr);
         return;
     }
 

@@ -1,8 +1,8 @@
 #ifndef _CMSNAP_H_
 #define _CMSNAP_H_
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 void cmSnap_800315C8(void);
 void cmSnap_800316B4(void);

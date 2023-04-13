@@ -1,9 +1,10 @@
 #ifndef _mncharsel_h_
 #define _mncharsel_h_
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <common_structs.h>
 #include <Runtime/platform.h>
-#include <sysdolphin/baselib/forward.h>
 
 typedef enum _Mode {
     Mode_Time,

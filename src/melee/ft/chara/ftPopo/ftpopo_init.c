@@ -1,10 +1,10 @@
-#include "fticeclimber1.h"
+#include "ft/forward.h"
 
 #include "fticeclimber.h"
+#include "fticeclimber1.h"
 
 #include "ft/code_80081B38.h"
 #include "ft/fighter.h"
-#include "ft/forward.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcamera.h"
 #include "ft/ftparts.h"
@@ -186,8 +186,9 @@ void ftPopo_8011F16C(HSD_GObj* fighter_gobj, uint i)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
 
-    if (i != fp->ev.nn.x222C)
+    if (i != fp->ev.nn.x222C) {
         return;
+    }
 
     fp->ev.nn.x222C = 0;
     fp->cb.x21E4_callback_OnDeath2 = NULL;
@@ -198,8 +199,9 @@ void ftPopo_8011F190(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = (Fighter*) HSD_GObjGetUserData(fighter_gobj);
 
-    if (fp->ev.nn.x222C == 0)
+    if (fp->ev.nn.x222C == 0) {
         return;
+    }
 
     it_802C17DC(fp->ev.nn.x222C);
     ftPopo_8011F16C(fighter_gobj, fp->ev.nn.x222C);
@@ -255,14 +257,16 @@ void ftPopo_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj)
 
 void ftPopo_8011F318(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
+    }
 }
 
 void ftPopo_8011F354(HSD_GObj* gobj)
 {
-    if (!ftAnim_IsFramesRemaining(gobj))
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
+    }
 }
 
 void ftPopo_8011F390(HSD_GObj* arg0) {}
@@ -510,8 +514,9 @@ bool ftPopo_8011F6FC(HSD_GObj* fighter_gobj)
     if (fighter_gobj != NULL) {
         Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-        if (fp != NULL)
+        if (fp != NULL) {
             return fp->x2204_ftcmd_var1;
+        }
     }
 
     return true;

@@ -2,6 +2,7 @@
 #define DOLPHIN_OS_OSCONTEXT_H
 
 #include <dolphin/os/forward.h>
+
 #include <Runtime/platform.h>
 
 struct OSContext {

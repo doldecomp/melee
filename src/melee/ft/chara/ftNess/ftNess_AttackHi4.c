@@ -1,3 +1,5 @@
+#include "lb/forward.h"
+
 #include "ftNess_AttackHi4.h"
 
 #include "ftNess.h"
@@ -7,7 +9,6 @@
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "it/code_8027CF30.h"
-#include "lb/forward.h"
 #include "lb/lbcollision.h"
 #include "lb/lbunknown_001.h"
 #include "mp/mpcoll.h"
@@ -86,12 +87,12 @@ static inline void push_ecb(CollData* a, Vec3* b)
     a->x4_vec = *b;         // curr = new
 }
 
-s32 ftNess_YoyoCheckEnvColl(HSD_GObj* fighter_gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
-                            f32 float_unk)
+s32 ftNess_YoyoCheckEnvColl(HSD_GObj* fighter_gobj, Vec3* ECBUnk,
+                            Vec3* ECBUnk2, f32 float_unk)
 {
     CollData sp34;
-    f32 sp1C[6]; // This is probably some kind of struct, but I don't know which
-                 // one. ECBVar_UnkFloat doesn't make sense.
+    f32 sp1C[6]; // This is probably some kind of struct, but I don't know
+                 // which one. ECBVar_UnkFloat doesn't make sense.
     Fighter* fp = fighter_gobj->user_data;
     f32 y_scale;
     s32 retval;
@@ -116,8 +117,8 @@ s32 ftNess_YoyoCheckEnvColl(HSD_GObj* fighter_gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
     // better code:
     // sp34.x1C_vec = ECBUnk->x0_vec;
     // sp34.x4_vec = ECBUnk2->x0_vec;
-    // guess: there is a "push ECB" function that handles moving current to old,
-    // that got called twice and inlined.
+    // guess: there is a "push ECB" function that handles moving current to
+    // old, that got called twice and inlined.
     push_ecb(&sp34, ECBUnk);
     push_ecb(&sp34, ECBUnk2);
 
@@ -127,17 +128,21 @@ s32 ftNess_YoyoCheckEnvColl(HSD_GObj* fighter_gobj, Vec3* ECBUnk, Vec3* ECBUnk2,
 
     /// @todo Define flags.
     retval = 0;
-    if ((sp34.x134_envFlags & 0x18000) != 0)
+    if ((sp34.x134_envFlags & 0x18000) != 0) {
         retval |= 0x8000;
+    }
 
-    if ((sp34.x134_envFlags & 0x3F) != 0)
+    if ((sp34.x134_envFlags & 0x3F) != 0) {
         retval |= 1;
+    }
 
-    if ((sp34.x134_envFlags & 0xFC0) != 0)
+    if ((sp34.x134_envFlags & 0xFC0) != 0) {
         retval |= 0x40;
+    }
 
-    if ((sp34.x134_envFlags & 0x6000) != 0)
+    if ((sp34.x134_envFlags & 0x6000) != 0) {
         retval |= 0x2000;
+    }
 
     return retval;
 }
@@ -363,8 +368,9 @@ void ftNess_YoyoApplySmash(HSD_GObj* fighter_gobj)
     fp->x2114_SmashAttr.x2128 = colAnimID;
     smashColAnimID = smash_attr->x2128;
 
-    if (smash_attr->x2128 != 0x7B)
+    if (smash_attr->x2128 != 0x7B) {
         ft_800BFFD0(fp, smashColAnimID, 0);
+    }
 
     ftCommon_8007EBAC(fp, 0x24U, 0U);
     ft_80088510(fp, 0x334A7, 0x7F, 0x40);
@@ -610,8 +616,9 @@ void ftNess_YoyoItemSetUnk2(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (fp->ev.ns.x222C_yoyoGObj)
+    if (fp->ev.ns.x222C_yoyoGObj) {
         it_802BE5B8(fp->ev.ns.x222C_yoyoGObj);
+    }
 }
 
 void ftNess_AttackHi4_Action(HSD_GObj* fighter_gobj)
@@ -684,7 +691,8 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj)
         if ((u32) fp->x2200_ftcmd_var0 == 0U) {
             yoyoRehitTimer = fp->sv.ns.attackhi4.yoyoRehitTimer;
             if (yoyoRehitTimer > 0) {
-                fp->sv.ns.attackhi4.yoyoRehitTimer = (s32) (yoyoRehitTimer - 1);
+                fp->sv.ns.attackhi4.yoyoRehitTimer =
+                    (s32) (yoyoRehitTimer - 1);
                 if ((s32) fp->sv.ns.attackhi4.yoyoRehitTimer == 0) {
                     lbColl_80008440(&fp->x914[0]);
                     lbColl_80008434(&fp->x914[0]);
@@ -701,9 +709,10 @@ void ftNess_AttackHi4_Anim(HSD_GObj* fighter_gobj)
 
             fighter_data2 = getFighter(fighter_gobj);
             sp18.x = 0.0f;
-            sp18.y = 0.5f *
-                     (fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.top.y +
-                      fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
+            sp18.y =
+                0.5f *
+                (fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.top.y +
+                 fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
             sp18.z = 0.0f;
             sp18.x += fighter_data2->xB0_pos.x;
             sp18.y += fighter_data2->xB0_pos.y;
@@ -826,8 +835,8 @@ void ftNess_AttackHi4_Charge_Anim(
     {
         item_data = yoyo_GObj->user_data;
         yoyo_attr = item_data->xC4_article_data->x4_specialAttributes;
-        unk_float =
-            (yoyo_attr->x20_UNK_TEXANIM_MOD - yoyo_attr->x1C_UNK_TEXANIM_SPEED);
+        unk_float = (yoyo_attr->x20_UNK_TEXANIM_MOD -
+                     yoyo_attr->x1C_UNK_TEXANIM_SPEED);
         unk_float =
             unk_float * ((f32) temp_fp->sv.ns.attackhi4.yoyoCurrentFrame /
                          temp_ness_attr->xAC_YOYO_CHARGE_DURATION);

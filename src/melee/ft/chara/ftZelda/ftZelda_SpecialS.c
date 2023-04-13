@@ -1,6 +1,5 @@
-#include "ftzelda5.h"
-
 #include "ftzelda.h"
+#include "ftzelda5.h"
 
 #include "ef/efsync.h"
 #include "ft/code_80081B38.h"
@@ -155,7 +154,8 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
         sp20.x = (temp_f2 * fp->facing_dir) + sp20.x;
         sp20.y += attributes->x24;
 
-        temp_r3_u32 = it_802C3BAC(fighter_gobj, &sp20, fp->facing_dir, temp_f2);
+        temp_r3_u32 =
+            it_802C3BAC(fighter_gobj, &sp20, fp->facing_dir, temp_f2);
         fp->ev.zd.x222C = temp_r3_u32;
 
         if (temp_r3_u32 != 0) {
@@ -183,8 +183,9 @@ void ftZelda_8013B89C(HSD_GObj* fighter_gobj)
     } else {
         temp_r3 = it_802C3AF0(fp->ev.zd.x222C);
 
-        if (temp_r3 != fighter_gobj)
+        if (temp_r3 != fighter_gobj) {
             fp->ev.zd.x222C = NULL;
+        }
     }
 }
 
@@ -315,8 +316,9 @@ void ftZelda_8013BBA8(HSD_GObj* fighter_gobj)
     } else {
         temp_r3 = it_802C3AF0(fp->ev.zd.x222C);
 
-        if (temp_r3 != fighter_gobj)
+        if (temp_r3 != fighter_gobj) {
             fp->ev.zd.x222C = NULL;
+        }
     }
 }
 
@@ -348,10 +350,11 @@ void ftZelda_8013BD10(HSD_GObj* fighter_gobj)
             fp->cb.x21DC_callback_OnTakeDamage = 0;
         }
 
-        if (sa->x34 == 0)
+        if (sa->x34 == 0) {
             ft_800CC730(fighter_gobj);
-        else
+        } else {
             ft_80096900(fighter_gobj, 1, 0, 1, 1, sa->x34);
+        }
     }
 }
 

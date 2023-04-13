@@ -2,8 +2,9 @@
 #define MELEE_FT_FTBOSSLIB_H
 
 #include <melee/ft/chara/forward.h>
-#include <melee/ft/fighter.h>
+
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/fighter.h>
 
 HSD_GObj* ftBossLib_8015C3E8(FighterKind arg0);
 

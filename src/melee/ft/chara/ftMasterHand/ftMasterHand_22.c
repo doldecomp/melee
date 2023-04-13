@@ -24,8 +24,9 @@ void ftMasterHand_80154230(HSD_GObj* gobj)
 void ftMasterHand_80154278(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
-    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0)
+    if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
         ftBossLib_8015BD20(arg0);
+    }
 }
 
 // 801542BC 150E9C
@@ -315,7 +316,8 @@ void ftMasterHand_801549A8(HSD_GObj* arg0)
     temp_r30 = temp_r31->x10C_ftData->ext_attr;
     ft_80085134(arg0);
     ftBossLib_8015BE40(arg0, &temp_r31->sv.mh.unk0.xC,
-                       &temp_r31->sv.mh.unk0.x18, temp_r30->x2C, temp_r30->x28);
+                       &temp_r31->sv.mh.unk0.x18, temp_r30->x2C,
+                       temp_r30->x28);
 }
 
 // 80154A08 1515E8

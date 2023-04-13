@@ -1,7 +1,6 @@
 #include <sysdolphin/baselib/cobj.h>
-
-#include <MSL/trigf.h>
 #include <sysdolphin/baselib/displayfunc.h>
+#include <MSL/trigf.h>
 
 extern f64 lbl_804DE468; // 0.5
 extern f32 lbl_804DE470; // 0.5f
@@ -12,8 +11,8 @@ extern f32 lbl_804DE474; // 0.01745329252f
 #ifdef MUST_MATCH
 
 #pragma push
-asm void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
-                             s32 enable_depth)
+asm void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color,
+                             s32 enable_alpha, s32 enable_depth)
 { // clang-format off
     nofralloc
 /* 803676F8 003642D8  7C 08 02 A6 */	mflr r0
@@ -137,9 +136,9 @@ void HSD_CObjEraseScreen(HSD_CObj* cobj, s32 enable_color, s32 enable_alpha,
 
         switch (HSD_CObjGetProjectionType(cobj)) {
         case PROJ_PERSPECTIVE:
-            top_res =
-                (z_val *
-                 tanf(0.5f * DegToRad(cobj->projection_param.perspective.fov)));
+            top_res = (z_val *
+                       tanf(0.5f *
+                            DegToRad(cobj->projection_param.perspective.fov)));
             bottom_res = -top_res;
             right_res = top_res * cobj->projection_param.perspective.aspect;
             left_res = -right_res;
@@ -170,8 +169,9 @@ void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
 {
     HSD_WObj* wobj;
 
-    if (cobj == NULL)
+    if (cobj == NULL) {
         return;
+    }
 
     HSD_AObjRemove(cobj->aobj);
     cobj->aobj = NULL;
@@ -183,8 +183,9 @@ void HSD_CObjRemoveAnimByFlags(HSD_CObj* cobj, u32 flags)
 
 void HSD_CObjRemoveAnim(HSD_CObj* cobj)
 {
-    if (cobj == NULL)
+    if (cobj == NULL) {
         return;
+    }
 
     HSD_CObjRemoveAnimByFlags(cobj, 0x7FF);
 }

@@ -1,8 +1,8 @@
 #ifndef _itPKFlash_h_
 #define _itPKFlash_h_
 
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <Runtime/platform.h>
 
 typedef struct PKFlashVars {
     s32 xDD4_PKFlash;

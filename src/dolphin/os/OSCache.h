@@ -2,6 +2,7 @@
 #define _OSCACHE_H_
 
 #include <dolphin/os/forward.h>
+
 #include <Runtime/platform.h>
 
 void DCFlushRange(void* addr, size_t nbytes);

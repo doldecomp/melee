@@ -33,8 +33,9 @@ HSD_RObj* HSD_RObjGetByType(HSD_RObj* robj, u32 type, u32 subtype)
     bool has_type;
     HSD_RObj* curr;
 
-    if (robj == NULL)
+    if (robj == NULL) {
         return NULL;
+    }
 
     for (curr = robj; curr != NULL; curr = curr->next) {
         if (curr->flags & 0x80000000) {
@@ -173,7 +174,8 @@ void HSD_RObjAddAnimAll(HSD_RObj* robj, HSD_RObjAnimJoint* anim)
         return;
     }
 
-    for (i = robj, j = anim; i != NULL && j != NULL; i = i->next, j = j->next) {
+    for (i = robj, j = anim; i != NULL && j != NULL; i = i->next, j = j->next)
+    {
         HSD_RObjAddAnim(i, j);
     }
 }

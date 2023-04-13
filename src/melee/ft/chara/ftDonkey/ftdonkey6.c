@@ -1,6 +1,5 @@
-#include <melee/ft/chara/ftDonkey/ftdonkey6.h>
-
 #include <melee/ft/chara/ftDonkey/ftdonkey.h>
+#include <melee/ft/chara/ftDonkey/ftdonkey6.h>
 #include <melee/ft/chara/ftDonkey/ftdonkey7.h>
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
@@ -8,8 +7,9 @@
 void ftDonkey_800E030C(HSD_GObj* fighter_gobj)
 {
     s32 result = ft_80094EA4(fighter_gobj);
-    if (result)
+    if (result) {
         return;
+    }
 }
 
 void ftDonkey_800E0330(HSD_GObj* fighter_gobj)

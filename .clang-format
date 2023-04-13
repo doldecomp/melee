@@ -1,22 +1,65 @@
-{ BasedOnStyle: LLVM,
-  DerivePointerAlignment: false,
-  PointerAlignment: Left,
-  UseTab: Never,
-  IndentWidth: 4,
-  TabWidth: 4,
-  BreakBeforeBraces: Custom,
-  BraceWrapping: { AfterFunction: true, AfterControlStatement: MultiLine },
-  AllowShortFunctionsOnASingleLine: Empty,
-  AllowShortIfStatementsOnASingleLine: false,
-  AllowShortEnumsOnASingleLine: false,
-  IndentCaseLabels: false,
-  ColumnLimit: 80,
-  AccessModifierOffset: -4,
-  NamespaceIndentation: All,
-  FixNamespaceComments: false,
-  SpacesInCStyleCastParentheses: false,
-  SpaceAfterCStyleCast: true,
-  Cpp11BracedListStyle: false,
-  KeepEmptyLinesAtTheStartOfBlocks: false,
-  SortIncludes: CaseInsensitive,
-  WhitespaceSensitiveMacros: ['HSD_ASSERT', 'CHECK'] }
+BasedOnStyle: LLVM
+DerivePointerAlignment: false
+PointerAlignment: Left
+UseTab: Never
+IndentWidth: 4
+TabWidth: 4
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true
+  AfterControlStatement: MultiLine
+InsertBraces: true
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+IndentCaseLabels: false
+ColumnLimit: 79
+AccessModifierOffset: -4
+NamespaceIndentation: All
+FixNamespaceComments: false
+SpacesInCStyleCastParentheses: false
+SpaceAfterCStyleCast: true
+Cpp11BracedListStyle: false
+KeepEmptyLinesAtTheStartOfBlocks: false
+SortIncludes: CaseInsensitive
+WhitespaceSensitiveMacros:
+  - 'HSD_ASSERT'
+  - 'CHECK'
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^<platform\.h>$'
+    Priority: -1
+    SortPriority: -6
+  - Regex: '^"forward\.h"$'
+    Priority: -1
+    SortPriority: -5
+  - Regex: '^".*/forward\.h"$'
+    Priority: -1
+    SortPriority: -4
+  - Regex: '^<dolphin(/.*)?/forward\.h>$'
+    Priority: -1
+    SortPriority: -2
+  - Regex: '^<(sysdolphin/)?baselib(/.*)?/forward\.h>$'
+    Priority: -1
+    SortPriority: -1
+  - Regex: '^<(.*/)?forward\.h>$'
+    Priority: -1
+    SortPriority: -3
+  - Regex: '^<[^/]*>$'
+    Priority: 3
+    SortPriority: 3
+  - Regex: '^<dolphin/.*>$'
+    Priority: 3
+    SortPriority: 4
+  - Regex: '^<(sysdolphin/)?baselib/.*>$'
+    Priority: 3
+    SortPriority: 5
+  - Regex: '^<.*>$'
+    Priority: 3
+    SortPriority: 6
+  - Regex: '^"[^/]*"$'
+    Priority: 1
+    SortPriority: 1
+  - Regex: '^.*$'
+    Priority: 2
+    SortPriority: 2

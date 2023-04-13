@@ -1,3 +1,5 @@
+#include "lb/forward.h"
+
 #include "ftdonkey_SpecialN.h"
 
 #include "ftdonkey.h"
@@ -7,7 +9,6 @@
 #include "ft/code_80081B38.h"
 #include "ft/ft_unknown_006.h"
 #include "ft/ftcoll.h"
-#include "lb/forward.h"
 
 void ftDonkey_SetCallbacks_SpecialN(HSD_GObj* fighter_gobj)
 {
@@ -161,11 +162,13 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj)
         }
     }
     if (fp->x914[0].state != HitCapsule_Disabled) {
-        if (fp->sv.dk.specialn.x4 == 0)
+        if (fp->sv.dk.specialn.x4 == 0) {
             fp->sv.dk.specialn.x4 = 1;
+        }
 
-        if (fp->sv.dk.specialn.x10 == -1)
+        if (fp->sv.dk.specialn.x10 == -1) {
             fp->sv.dk.specialn.x10 = fp->x914[0].a_offset.z;
+        }
 
         ftColl_8007ABD0(&fp->x914[0],
                         fp->sv.dk.specialn.x10 +
@@ -173,8 +176,9 @@ void ftDonkey_8010E930(HSD_GObj* fighter_gobj)
                              donkey_attr->SpecialN.x30_DAMAGE_PER_SWING),
                         fighter_gobj);
 
-        if (fp->sv.dk.specialn.x14 == -1)
+        if (fp->sv.dk.specialn.x14 == -1) {
             fp->sv.dk.specialn.x14 = fp->x914[1].a_offset.z;
+        }
 
         ftColl_8007ABD0(&fp->x914[1],
                         fp->sv.dk.specialn.x14 +
@@ -205,8 +209,9 @@ void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj)
 #endif
 
     if (fp->x2200_ftcmd_var0) {
-        if (fp->sv.dk.specialn.x8 == 0)
+        if (fp->sv.dk.specialn.x8 == 0) {
             fp->sv.dk.specialn.x8++;
+        }
     }
 
     if (fp->sv.dk.specialn.x8 == 1) {
@@ -222,7 +227,9 @@ void ftDonkey_8010EB0C(HSD_GObj* fighter_gobj)
 
     if (fp->x914[0].state != HitCapsule_Disabled &&
         (fp->sv.dk.specialn.x4 == 0))
+    {
         fp->sv.dk.specialn.x4 = 1;
+    }
 
     if (fp->sv.dk.specialn.x4 == 1) {
         fp->sv.dk.specialn.x4 = 2;

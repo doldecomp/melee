@@ -1,6 +1,5 @@
-#include <dolphin/os/OSUartExi.h>
-
 #include <placeholder.h>
+#include <dolphin/os/OSUartExi.h>
 #include <Runtime/platform.h>
 
 static u32 Enabled[2];

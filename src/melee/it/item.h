@@ -6,10 +6,10 @@
 #define MELEE_IT_ITEM_H
 
 #include <dolphin/mtx/types.h>
-#include <melee/it/types.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <melee/it/types.h>
+#include <Runtime/platform.h>
 
 extern HSD_ObjAllocData itemAllocData;
 extern HSD_ObjAllocData unkAllocData1;

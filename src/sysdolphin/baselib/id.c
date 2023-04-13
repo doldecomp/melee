@@ -1,6 +1,5 @@
-#include <sysdolphin/baselib/id.h>
-
 #include <string.h>
+#include <sysdolphin/baselib/id.h>
 
 HSD_ObjAllocData hsd_iddata;
 
@@ -49,8 +48,9 @@ void HSD_IDInsertToTable(HSD_IDTable* table, u32 id, void* data)
 
     entry = table->table[hash(id)];
     while (entry != NULL) {
-        if (entry->id == id)
+        if (entry->id == id) {
             break;
+        }
         entry = entry->next;
     }
 

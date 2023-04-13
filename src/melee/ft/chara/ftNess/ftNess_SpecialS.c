@@ -1,5 +1,4 @@
 #include <melee/ft/chara/ftNess/ftNess.h>
-
 #include <melee/ft/code_80081B38.h>
 #include <melee/ft/ft_unknown_006.h>
 #include <melee/it/code_8027CF30.h>

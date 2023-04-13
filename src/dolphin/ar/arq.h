@@ -32,8 +32,9 @@ struct ARQRequest {
 
 void ARQInit(void);
 void ARQReset(void);
-void ARQPostRequest(ARQRequest* task, u32 owner, ARQType type, ARQPrio priority,
-                    u32 source, u32 dest, size_t length, ARQCallback callback);
+void ARQPostRequest(ARQRequest* task, u32 owner, ARQType type,
+                    ARQPrio priority, u32 source, u32 dest, size_t length,
+                    ARQCallback callback);
 size_t ARQGetChunkSize(void);
 
 void __ARQPopTaskQueueHi(void);

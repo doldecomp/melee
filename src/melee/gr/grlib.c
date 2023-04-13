@@ -1,17 +1,16 @@
-#include <melee/gr/grlib.h>
-
-#include <melee/cm/camera.h>
-#include <melee/gr/grbigblue.h>
-#include <melee/gr/gricemt.h>
-#include <melee/gr/ground.h>
-#include <melee/gr/grrcruise.h>
-#include <melee/it/item2.h>
-#include <melee/lb/lbunknown_003.h>
 #include <placeholder.h>
 #include <sysdolphin/baselib/baselib_unknown_002.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/psappsrt.h>
+#include <melee/cm/camera.h>
+#include <melee/gr/grbigblue.h>
+#include <melee/gr/gricemt.h>
+#include <melee/gr/grlib.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/grrcruise.h>
+#include <melee/it/item2.h>
+#include <melee/lb/lbunknown_003.h>
 
 extern StageInfo stage_info;
 extern u8 lbl_804D7849;
@@ -145,10 +144,11 @@ void grLib_801C9908(HSD_JObj* jobj)
 
 void grLib_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
 {
-    if (arg3 != 0)
+    if (arg3 != 0) {
         func_8039EFAC(0, arg0, arg1, arg2);
-    else
+    } else {
         func_8039F6CC(0, arg0, arg1, arg2);
+    }
 }
 
 Vec3* grLib_801C9A10(void)

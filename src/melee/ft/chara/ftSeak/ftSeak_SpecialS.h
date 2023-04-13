@@ -2,8 +2,9 @@
 #define MELEE_FT_CHARA_FTSEAK_FTSEAK_SPECIALS_H
 
 #include <melee/ft/forward.h>
-#include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
+
+#include <Runtime/platform.h>
 
 void ftSeak_80110490(Fighter* fp);
 void ftSeak_80110610(HSD_GObj* fighter_gobj, s32 arg1, f32 arg8);

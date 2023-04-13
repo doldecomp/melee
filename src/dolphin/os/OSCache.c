@@ -1,11 +1,10 @@
-#include <dolphin/os/OSCache.h>
-
+#include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/os/os.h>
+#include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSError.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <MetroTRK/intrinsics.h>
-#include <placeholder.h>
 #include <Runtime/platform.h>
 
 #define MSR_IR 0x00000020
@@ -472,8 +471,8 @@ void DMAErrorHandler(OSError error, OSContext* context, ...)
     OSReport("The following errors have been detected and cleared :\n");
 
     if (hid2 & HID2_DCHERR) {
-        OSReport(
-            "\t- Requested a locked cache tag that was already in the cache\n");
+        OSReport("\t- Requested a locked cache tag that was already in the "
+                 "cache\n");
     }
 
     if (hid2 & HID2_DNCERR) {

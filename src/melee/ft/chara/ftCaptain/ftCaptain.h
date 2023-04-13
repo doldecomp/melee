@@ -1,12 +1,12 @@
 #ifndef MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_H
 #define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_H
 
+#include <platform.h>
 #include "forward.h"
 
 #include "ft/fighter.h"
 
 #include <baselib/gobj.h>
-#include <platform.h>
 
 extern ActionState ftCaptain_MotionStateTable[];
 extern char lbl_803C7598[];

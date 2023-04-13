@@ -1,9 +1,8 @@
-#include <dolphin/os/OSThread.h>
-
+#include <placeholder.h>
 #include <dolphin/os/os.h>
 #include <dolphin/os/OSInterrupt.h>
 #include <dolphin/os/OSMutex.h>
-#include <placeholder.h>
+#include <dolphin/os/OSThread.h>
 
 extern s32 Reschedule;
 extern u32 RunQueueBits;
@@ -147,18 +146,21 @@ void UnsetRun(OSThread* thread)
     queue = thread->queue;
     prev = thread->prev;
 
-    if (next == NULL)
+    if (next == NULL) {
         queue->tail = prev;
-    else
+    } else {
         next->prev = prev;
+    }
 
-    if (prev == NULL)
+    if (prev == NULL) {
         queue->head = next;
-    else
+    } else {
         prev->next = next;
+    }
 
-    if (queue->head == NULL)
+    if (queue->head == NULL) {
         RunQueueBits &= ~(1 << (31 - thread->priority));
+    }
 
     thread->queue = NULL;
 }
@@ -524,8 +526,8 @@ void __OSReschedule(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm bool OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*, OSThread_Unk2*,
-                        u32, s32, u16)
+asm bool OSCreateThread(OSThread*, OSThreadFunc, OSThread_Unk1*,
+                        OSThread_Unk2*, u32, s32, u16)
 { // clang-format off
     nofralloc
 /* 8034B25C 00347E3C  7C 08 02 A6 */	mflr r0

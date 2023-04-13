@@ -33,8 +33,8 @@ void ftNess_SpecialLwStart_Action(
     temp_fp->sv.ns.speciallw.gravityDelay =
         (s32) ness_attr->x84_PSI_MAGNET_FRAMES_BEFORE_GRAVITY;
     temp_fp->sv.ns.speciallw.x10 = 0;
-    Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALLW_START, 0, NULL, 0,
-                              1, 0);
+    Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALLW_START, 0, NULL,
+                              0, 1, 0);
     ftAnim_8006EBA4(fighter_gobj);
 }
 
@@ -62,8 +62,8 @@ void ftNess_SpecialAirLwStart_Action(
     temp_fp->sv.ns.speciallw.x10 = 0;
     temp_fp->x80_self_vel.y = 0.0f;
     temp_fp->x80_self_vel.x /= ness_attr->x88_PSI_MAGNET_MOMENTUM_PRESERVATION;
-    Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRLW_START, 0, NULL,
-                              0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRLW_START, 0,
+                              NULL, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(fighter_gobj);
 }
 
@@ -104,7 +104,8 @@ void ftNess_SpecialLwStart_Anim(
 // 0x8011A000
 // https://decomp.me/scratch/psrOE
 void ftNess_SpecialAirLwStart_Anim(
-    HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Start Animation callback
+    HSD_GObj*
+        fighter_gobj) // Ness's aerial PSI Magnet Start Animation callback
 {
     Fighter* fighter_data2;
     Fighter* fp;
@@ -196,7 +197,8 @@ void ftNess_SpecialLwStart_Coll(
 // 0x8011A1A4
 // https://decomp.me/scratch/eNYIn
 void ftNess_SpecialAirLwStart_Coll(
-    HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Start Collision callback
+    HSD_GObj*
+        fighter_gobj) // Ness's aerial PSI Magnet Start Collision callback
 {
     if (ft_80081D0C(fighter_gobj) != false) {
         ftNess_SpecialAirLwStart_AirToGround(fighter_gobj);
@@ -403,7 +405,8 @@ void ftNess_SpecialLwHold_GroundToAir(
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
-    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj,
+                           &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011A5D4
@@ -428,7 +431,8 @@ void ftNess_SpecialAirLwHold_AirToGround(
     ftCommon_8007D468(fp);
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
-    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj,
+                           &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011A650
@@ -450,7 +454,8 @@ void ftNess_SpecialLwHold_Action(
                               0.0f);
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
-    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj,
+                           &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011A6A8
@@ -472,7 +477,8 @@ void ftNess_SpecialAirLwHold_Action(
                               0.0f);
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
-    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj,
+                           &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 static inline f32 returnStateVar(s32 stateVar)
@@ -512,8 +518,9 @@ void ftNess_SpecialLwTurn_Anim(HSD_GObj* arg0)
     {
         Fighter* fp1 = fp0;
 
-        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B))
+        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B)) {
             fp1->sv.ns.speciallw.isRelease = true;
+        }
 
         if (fp1->sv.ns.speciallw.releaseLag > 0) {
             fp1->sv.ns.speciallw.releaseLag =
@@ -541,8 +548,9 @@ void ftNess_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
     {
         Fighter* fp1 = fp0;
 
-        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B))
+        if (!(fp1->input.x65C_heldInputs & HSD_BUTTON_B)) {
             fp1->sv.ns.speciallw.isRelease = true;
+        }
 
         if (fp1->sv.ns.speciallw.releaseLag > 0) {
             fp1->sv.ns.speciallw.releaseLag =
@@ -551,8 +559,9 @@ void ftNess_SpecialAirLwTurn_Anim(HSD_GObj* arg0)
 
         getAttrStuff(arg0);
 
-        if ((signed) fp1->sv.ns.speciallw.turnFrames <= 0)
+        if ((signed) fp1->sv.ns.speciallw.turnFrames <= 0) {
             ftNess_SpecialLwHold_GroundOrAir(arg0);
+        }
     }
 }
 
@@ -566,8 +575,9 @@ void ftNess_SpecialLwTurn_IASA(
 
 // 0x8011A924
 void ftNess_SpecialAirLwTurn_IASA(
-    HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet Turnaround IASA callback
-                            // - _
+    HSD_GObj*
+        fighter_gobj) // Ness's aerial PSI Magnet Turnaround IASA callback
+                      // - _
 {
     return;
 }
@@ -762,16 +772,16 @@ void ftNess_SpecialLwHit_Anim(
         } else {
             if ((s32) temp_r3_2->xE0_ground_or_air == GA_Ground) {
                 Fighter_ChangeMotionState(arg0, AS_NESS_SPECIALLW_HOLD,
-                                          FtStateChange_PreserveGfx, NULL, 0.0f,
-                                          1.0f, 0.0f);
+                                          FtStateChange_PreserveGfx, NULL,
+                                          0.0f, 1.0f, 0.0f);
 
                 temp_e1 = arg0->user_data;
                 attr = temp_e1->x2D4_specialAttributes;
                 ftColl_CreateAbsorbHit(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
             } else {
                 Fighter_ChangeMotionState(arg0, AS_NESS_SPECIALAIRLW_HOLD,
-                                          FtStateChange_PreserveGfx, NULL, 0.0f,
-                                          1.0f, 0.0f);
+                                          FtStateChange_PreserveGfx, NULL,
+                                          0.0f, 1.0f, 0.0f);
                 temp_e2 = arg0->user_data;
                 attr = temp_e2->x2D4_specialAttributes;
                 ftColl_CreateAbsorbHit(arg0, &attr->x98_PSI_MAGNET_ABSORPTION);
@@ -806,8 +816,9 @@ void ftNess_SpecialAirLwHit_Anim(
 
     Fighter* fp = GET_FIGHTER(arg0);
 
-    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B))
+    if (!(fp->input.x65C_heldInputs & HSD_BUTTON_B)) {
         fp->sv.ns.speciallw.isRelease = true;
+    }
 
     if (fp->sv.ns.speciallw.releaseLag > 0) {
         fp->sv.ns.speciallw.releaseLag = fp->sv.ns.speciallw.releaseLag - 1;
@@ -914,8 +925,8 @@ void ftNess_SpecialAirLwHit_Coll(
 // 0x8011B008
 // https://decomp.me/scratch/LkmRj
 void ftNess_SpecialLwHit_GroundToAir(
-    HSD_GObj* fighter_gobj) // Ness's ground->air PSI Magnet Absorb Action State
-                            // handler
+    HSD_GObj* fighter_gobj) // Ness's ground->air PSI Magnet Absorb Action
+                            // State handler
 {
     Fighter* fp;
     ftNessAttributes* ness_attr;
@@ -932,14 +943,15 @@ void ftNess_SpecialLwHit_GroundToAir(
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
-    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj,
+                           &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011B07C
 // https://decomp.me/scratch/uVIed
 void ftNess_SpecialAirLwHit_AirToGround(
-    HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet Absorb Action State
-                            // handler
+    HSD_GObj* fighter_gobj) // Ness's air->ground PSI Magnet Absorb Action
+                            // State handler
 {
     Fighter* fp;
     ftNessAttributes* ness_attr;
@@ -957,7 +969,8 @@ void ftNess_SpecialAirLwHit_AirToGround(
     ftCommon_8007D468(fp);
     fp = GET_FIGHTER(fighter_gobj);
     ness_attr = fp->x2D4_specialAttributes;
-    ftColl_CreateAbsorbHit(fighter_gobj, &ness_attr->x98_PSI_MAGNET_ABSORPTION);
+    ftColl_CreateAbsorbHit(fighter_gobj,
+                           &ness_attr->x98_PSI_MAGNET_ABSORPTION);
 }
 
 // 0x8011B0F8
@@ -975,8 +988,8 @@ void ftNess_AbsorbThink_DecideAction(
     ftNessAttributes* sa = fp->x2D4_specialAttributes;
 
     {
-        f32 heal_amount =
-            (int) (fp->AbsorbAttr.x1A44_damageTaken * ftNess_GetAbsorbHeal(fp));
+        f32 heal_amount = (int) (fp->AbsorbAttr.x1A44_damageTaken *
+                                 ftNess_GetAbsorbHeal(fp));
 
         fp->dmg.x1830_percent -= heal_amount;
 
@@ -1001,10 +1014,11 @@ void ftNess_AbsorbThink_DecideAction(
         !(fp->x894_currentAnimFrame <= sa->x7C_PSI_MAGNET_UNK2))
     {
         enum_t asid;
-        if (fp->xE0_ground_or_air == GA_Ground)
+        if (fp->xE0_ground_or_air == GA_Ground) {
             asid = AS_NESS_SPECIALLW_HIT;
-        else
+        } else {
             asid = AS_NESS_SPECIALAIRLW_HIT;
+        }
 
         Fighter_ChangeMotionState(gobj, asid, 2, NULL, 0, 1, 0);
         ftColl_CreateAbsorbHit(gobj, &sa->x98_PSI_MAGNET_ABSORPTION);
@@ -1014,7 +1028,8 @@ void ftNess_AbsorbThink_DecideAction(
 // 0x8011B25C
 // https://decomp.me/scratch/H32Eg
 void ftNess_SpecialLwEnd_Anim(
-    HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet End Animation callback
+    HSD_GObj*
+        fighter_gobj) // Ness's grounded PSI Magnet End Animation callback
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -1093,10 +1108,12 @@ void ftNess_SpecialAirLwEnd_Phys(
 // 0x8011B36C
 // https://decomp.me/scratch/5ROxm
 void ftNess_SpecialLwEnd_Coll(
-    HSD_GObj* fighter_gobj) // Ness's grounded PSI Magnet End Collision callback
+    HSD_GObj*
+        fighter_gobj) // Ness's grounded PSI Magnet End Collision callback
 {
-    if (!ft_80082708(fighter_gobj))
+    if (!ft_80082708(fighter_gobj)) {
         ftNess_SpecialLwEnd_GroundToAir(fighter_gobj);
+    }
 }
 
 // 0x8011B3A8
@@ -1153,7 +1170,8 @@ void ftNess_SpecialLwEnd_Action(
 // 0x8011B4E4
 // https://decomp.me/scratch/sbrLt
 void ftNess_SpecialAirLwEnd_Action(
-    HSD_GObj* fighter_gobj) // Ness's aerial PSI Magnet End Action State handler
+    HSD_GObj*
+        fighter_gobj) // Ness's aerial PSI Magnet End Action State handler
 {
     Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRLW_END, 0, NULL,
                               0.0f, 1.0f, 0.0f);

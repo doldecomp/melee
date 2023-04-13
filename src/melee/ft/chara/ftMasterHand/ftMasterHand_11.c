@@ -20,8 +20,9 @@ void ftMasterHand_801523BC(HSD_GObj* gobj)
     Fighter* r31_fp;
     ftMasterHand_SpecialAttrs* r30_attributes;
 
-    if (ftAnim_IsFramesRemaining(gobj))
+    if (ftAnim_IsFramesRemaining(gobj)) {
         return;
+    }
 
     r31_fp = gobj->user_data;
     r30_attributes = r31_fp->x10C_ftData->ext_attr;

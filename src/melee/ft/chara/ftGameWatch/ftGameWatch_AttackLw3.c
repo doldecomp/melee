@@ -124,8 +124,8 @@ void ftGameWatch_AttackLw3_Action(HSD_GObj* fighter_gobj)
 
     if (ft_80094790(fighter_gobj) == false) {
         fp->x2218_flag.bits.b0 = 0;
-        Fighter_ChangeMotionState(fighter_gobj, AS_GAMEWATCH_ATTACKLW3, 0, NULL,
-                                  0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(fighter_gobj, AS_GAMEWATCH_ATTACKLW3, 0,
+                                  NULL, 0.0f, 1.0f, 0.0f);
         ftAnim_8006EBA4(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftGameWatch_ItemManholeSetup;
     }
@@ -141,41 +141,56 @@ void ftGameWatch_AttackLw3_Anim(HSD_GObj* fighter_gobj)
     u8 _[8];
 #endif
 
-    if (!ftAnim_IsFramesRemaining(fighter_gobj))
+    if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         ft_800D638C(fighter_gobj);
+    }
 }
 
 // 0x8014AE78
-// https://decomp.me/scratch/qzCi0 // Mr. Game & Watch's Down Tilt IASA callback
+// https://decomp.me/scratch/qzCi0 // Mr. Game & Watch's Down Tilt IASA
+// callback
 void ftGameWatch_AttackLw3_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
-    if (fp->x2218_flag.bits.b0 == 0)
+    if (fp->x2218_flag.bits.b0 == 0) {
         return;
-    if (ft_8008BFC4(fighter_gobj) != false)
+    }
+    if (ft_8008BFC4(fighter_gobj) != false) {
         return;
-    if (ft_8008C830(fighter_gobj) != false)
+    }
+    if (ft_8008C830(fighter_gobj) != false) {
         return;
-    if (ft_8008CB44(fighter_gobj) != false)
+    }
+    if (ft_8008CB44(fighter_gobj) != false) {
         return;
-    if (ft_8008B658(fighter_gobj) != false)
+    }
+    if (ft_8008B658(fighter_gobj) != false) {
         return;
-    if (ft_8008B980(fighter_gobj) != false)
+    }
+    if (ft_8008B980(fighter_gobj) != false) {
         return;
-    if (ft_8008BB44(fighter_gobj) != false)
+    }
+    if (ft_8008BB44(fighter_gobj) != false) {
         return;
-    if (ft_8008A9F8(fighter_gobj) != false)
+    }
+    if (ft_8008A9F8(fighter_gobj) != false) {
         return;
-    if (ft_800CAED0(fighter_gobj) != false)
+    }
+    if (ft_800CAED0(fighter_gobj) != false) {
         return;
-    if (ft_800CA094(fighter_gobj) != false)
+    }
+    if (ft_800CA094(fighter_gobj) != false) {
         return;
-    if (ft_800D5F58(fighter_gobj) != false)
+    }
+    if (ft_800D5F58(fighter_gobj) != false) {
         return;
-    if (ft_800C97DC(fighter_gobj) != false)
+    }
+    if (ft_800C97DC(fighter_gobj) != false) {
         return;
-    if (ft_800C9468(fighter_gobj) != false)
+    }
+    if (ft_800C9468(fighter_gobj) != false) {
         return;
+    }
 }
 
 // 0x8014AF6C

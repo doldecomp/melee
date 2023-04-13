@@ -1,11 +1,10 @@
 
-#include <melee/mn/mncharsel.h>
-
+#include <sysdolphin/baselib/sislib.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/it/item2.h>
 #include <melee/lb/lblanguage.h>
+#include <melee/mn/mncharsel.h>
 #include <melee/mn/mntext.h>
-#include <sysdolphin/baselib/sislib.h>
 
 extern CSSData* lbl_804D6CB0;
 extern SIS* lbl_804D1124[];

@@ -33,29 +33,29 @@
 #define OS_INTRMASK_PI_DEBUG (0x80000000U >> OS_INTR_PI_DEBUG)
 #define OS_INTRMASK_PI_HSP (0x80000000U >> OS_INTR_PI_HSP)
 
-#define OS_INTRMASK_MEM                                                        \
-    (OS_INTRMASK_MEM_0 | OS_INTRMASK_MEM_1 | OS_INTRMASK_MEM_2 |               \
+#define OS_INTRMASK_MEM                                                       \
+    (OS_INTRMASK_MEM_0 | OS_INTRMASK_MEM_1 | OS_INTRMASK_MEM_2 |              \
      OS_INTRMASK_MEM_3 | OS_INTRMASK_MEM_ADDRESS)
 
 #define OS_INTRMASK_AI (OS_INTRMASK_AI_AI)
 
-#define OS_INTRMASK_DSP                                                        \
+#define OS_INTRMASK_DSP                                                       \
     (OS_INTRMASK_DSP_AI | OS_INTRMASK_DSP_ARAM | OS_INTRMASK_DSP_DSP)
 
-#define OS_INTRMASK_EXI_0                                                      \
+#define OS_INTRMASK_EXI_0                                                     \
     (OS_INTRMASK_EXI_0_EXI | OS_INTRMASK_EXI_0_TC | OS_INTRMASK_EXI_0_EXT)
-#define OS_INTRMASK_EXI_1                                                      \
+#define OS_INTRMASK_EXI_1                                                     \
     (OS_INTRMASK_EXI_1_EXI | OS_INTRMASK_EXI_1_TC | OS_INTRMASK_EXI_1_EXT)
 #define OS_INTRMASK_EXI_2 (OS_INTRMASK_EXI_2_EXI | OS_INTRMASK_EXI_2_TC)
-#define OS_INTRMASK_EXI                                                        \
-    (OS_INTRMASK_EXI_0_EXI | OS_INTRMASK_EXI_0_TC | OS_INTRMASK_EXI_0_EXT |    \
-     OS_INTRMASK_EXI_1_EXI | OS_INTRMASK_EXI_1_TC | OS_INTRMASK_EXI_1_EXT |    \
+#define OS_INTRMASK_EXI                                                       \
+    (OS_INTRMASK_EXI_0_EXI | OS_INTRMASK_EXI_0_TC | OS_INTRMASK_EXI_0_EXT |   \
+     OS_INTRMASK_EXI_1_EXI | OS_INTRMASK_EXI_1_TC | OS_INTRMASK_EXI_1_EXT |   \
      OS_INTRMASK_EXI_2_EXI | OS_INTRMASK_EXI_2_TC)
 
-#define OS_INTRMASK_PI                                                         \
-    (OS_INTRMASK_PI_CP | OS_INTRMASK_PI_SI | OS_INTRMASK_PI_DI |               \
-     OS_INTRMASK_PI_RSW | OS_INTRMASK_PI_ERROR | OS_INTRMASK_PI_VI |           \
-     OS_INTRMASK_PI_PE_TOKEN | OS_INTRMASK_PI_PE_FINISH |                      \
+#define OS_INTRMASK_PI                                                        \
+    (OS_INTRMASK_PI_CP | OS_INTRMASK_PI_SI | OS_INTRMASK_PI_DI |              \
+     OS_INTRMASK_PI_RSW | OS_INTRMASK_PI_ERROR | OS_INTRMASK_PI_VI |          \
+     OS_INTRMASK_PI_PE_TOKEN | OS_INTRMASK_PI_PE_FINISH |                     \
      OS_INTRMASK_PI_DEBUG | OS_INTRMASK_PI_HSP)
 
 #define OS_INTRMASK_PI_PE (OS_INTRMASK_PI_PE_TOKEN | OS_INTRMASK_PI_PE_FINISH)

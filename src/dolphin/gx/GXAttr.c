@@ -1,9 +1,8 @@
-#include <dolphin/gx/GXAttr.h>
-
+#include <placeholder.h>
 #include <dolphin/gx/__GX_unknown_001.h>
 #include <dolphin/gx/__GXInit.h>
+#include <dolphin/gx/GXAttr.h>
 #include <dolphin/gx/GXTransform.h>
-#include <placeholder.h>
 #include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO

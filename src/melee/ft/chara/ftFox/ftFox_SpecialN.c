@@ -198,10 +198,11 @@ void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj)
         ftFox_FtGetHoldJoint(fighter_gobj, &sp2C);
         sp2C.z = 0.0f;
 
-        if (1.0f == fp->facing_dir)
+        if (1.0f == fp->facing_dir) {
             launchAngle = foxAttrs->x10_FOX_BLASTER_ANGLE;
-        else
+        } else {
             launchAngle = M_PI - foxAttrs->x10_FOX_BLASTER_ANGLE;
+        }
 
         it_8029C6A4(launchAngle, foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj,
                     &sp2C, foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
@@ -276,7 +277,8 @@ void ftFox_SpecialN_StartMotion(HSD_GObj* fighter_gobj)
 // 0x800E61A8
 // https://decomp.me/scratch/TUDhU
 void ftFox_SpecialAirN_StartMotion(
-    HSD_GObj* fighter_gobj) // Fox & Falco's aerial Blaster Action State handler
+    HSD_GObj*
+        fighter_gobj) // Fox & Falco's aerial Blaster Action State handler
 {
     Fighter* fp = fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
@@ -321,7 +323,8 @@ void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     it_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
-    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->ev.fx.x222C_blasterGObj != NULL)) {
+    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->ev.fx.x222C_blasterGObj != NULL))
+    {
         fp->x220C_ftcmd_var3 = 0U;
         it_802AE538(fp->ev.fx.x222C_blasterGObj);
     }
@@ -414,8 +417,8 @@ void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj)
             ftKind = ftLib_800872A4(fighter_gobj);
             switch (ftKind) {
             case FTKIND_FOX:
-                ft_80088148(fp, foxSFX[-1.0f == fp->facing_dir], SFX_VOLUME_MAX,
-                            SFX_PAN_MID);
+                ft_80088148(fp, foxSFX[-1.0f == fp->facing_dir],
+                            SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
 
             case FTKIND_FALCO:
@@ -451,8 +454,9 @@ void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj)
 
     it_802ADDD0(fp->ev.fx.x222C_blasterGObj, fp->x2204_ftcmd_var1);
 
-    if ((u32) fp->x2204_ftcmd_var1 == 2U)
+    if ((u32) fp->x2204_ftcmd_var1 == 2U) {
         ft_80094818(fighter_gobj, 0);
+    }
 
     if (((u32) fp->x220C_ftcmd_var3 == 2U) &&
         (fp->ev.fx.x222C_blasterGObj != NULL))
@@ -479,7 +483,8 @@ void ftFox_SpecialAirNStart_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     it_802ADDD0(fp->ev.fx.x222C_blasterGObj, 1);
-    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->ev.fx.x222C_blasterGObj != NULL)) {
+    if ((fp->x220C_ftcmd_var3 == 1U) && (fp->ev.fx.x222C_blasterGObj != NULL))
+    {
         fp->x220C_ftcmd_var3 = 0U;
         it_802AE538(fp->ev.fx.x222C_blasterGObj);
     }
@@ -581,8 +586,8 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
             ftKind = ftLib_800872A4(fighter_gobj);
             switch (ftKind) {
             case FTKIND_FOX:
-                ft_80088148(fp, foxSFX[-1.0f == fp->facing_dir], SFX_VOLUME_MAX,
-                            SFX_PAN_MID);
+                ft_80088148(fp, foxSFX[-1.0f == fp->facing_dir],
+                            SFX_VOLUME_MAX, SFX_PAN_MID);
                 return;
 
             case FTKIND_FALCO:
@@ -595,8 +600,8 @@ void ftFox_SpecialAirNLoop_Anim(HSD_GObj* fighter_gobj)
 }
 
 // 0x800E69BC
-// https://decomp.me/scratch/OAWla // Fox & Falco's aerial Blaster End Animation
-// callback
+// https://decomp.me/scratch/OAWla // Fox & Falco's aerial Blaster End
+// Animation callback
 void ftFox_SpecialAirNEnd_Anim(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = getFighter(fighter_gobj);
@@ -630,7 +635,8 @@ void ftFox_SpecialNStart_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
+    {
         fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -642,7 +648,8 @@ void ftFox_SpecialNLoop_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
+    {
         fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -660,7 +667,8 @@ void ftFox_SpecialAirNStart_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
+    {
         fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -672,7 +680,8 @@ void ftFox_SpecialAirNLoop_IASA(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B)) {
+    if (((u32) fp->x2200_ftcmd_var0 != 0U) && (fp->input.x668 & HSD_BUTTON_B))
+    {
         fp->sv.fx.SpecialN.isBlasterLoop = true;
     }
 }
@@ -822,15 +831,15 @@ void ftFox_Throw_Anim(HSD_GObj* fighter_gobj)
                     case ASID_THROWLW:
 
                         it_8029C6CC(atan2f(sp50.y - sp44.y, sp50.x - sp44.x),
-                                    foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj,
-                                    &sp50,
+                                    foxAttrs->x14_FOX_BLASTER_VEL,
+                                    fighter_gobj, &sp50,
                                     foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
                         break;
 
                     default:
                         it_8029C6A4(atan2f(sp50.y - sp44.y, sp50.x - sp44.x),
-                                    foxAttrs->x14_FOX_BLASTER_VEL, fighter_gobj,
-                                    &sp50,
+                                    foxAttrs->x14_FOX_BLASTER_VEL,
+                                    fighter_gobj, &sp50,
                                     foxAttrs->x1C_FOX_BLASTER_SHOT_ITKIND);
                         break;
                     }
