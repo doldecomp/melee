@@ -1,6 +1,6 @@
 #include "fticeclimber2_nana.h"
 
-#include "fticeclimber.h"
+#include "ftPopo/fticeclimber.h"
 
 #include "ft/fighter.h"
 #include "ft/forward.h"
