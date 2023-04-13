@@ -22,10 +22,6 @@ struct Cli {
 fn main() -> Result<()> {
     env_logger::try_init()?;
     let cli = Cli::parse();
-    // let mut replacements = DashMap::new();
-    // replacements.insert(Arc::from("from1"), Arc::from("to1"));
-    // replacements.insert(Arc::from("from2"), Arc::from("to2"));
-    // Add more replacements as needed
 
     let mut input = String::with_capacity(16);
     if let Some(path) = cli.path.filter(|s| s != "-") {
