@@ -31,12 +31,12 @@ static OSInterruptMask InterruptPrioTable[] = {
 asm bool OSDisableInterrupts(void)
 { // clang-format off
     nofralloc
-entry __RMS_OSDisableInterrupts_begin
+entry __RAS_OSDisableInterrupts_begin
     mfmsr r3
     rlwinm r4, r3, 0, 0x11, 0xf
     mtmsr r4
     rlwinm r3, r3, 0x11, 0x1f, 0x1f
-entry __RMS_OSDisableInterrupts_end
+entry __RAS_OSDisableInterrupts_end
     blr
 } // clang-format on
 #else

@@ -70,8 +70,8 @@ extern volatile s64 __OSLastInterruptTime;
 /// @sz{4}
 extern unk_t lbl_804D738C;
 
-void __RMS_OSDisableInterrupts_begin(void);
-void __RMS_OSDisableInterrupts_end(void);
+void __RAS_OSDisableInterrupts_begin(void);
+void __RAS_OSDisableInterrupts_end(void);
 
 bool OSDisableInterrupts(void);
 bool OSEnableInterrupts(void);
