@@ -1,6 +1,8 @@
 #ifndef _fighter_h_
 #define _fighter_h_
 
+#include <platform.h>
+
 #include <common_structs.h>
 #include <math.h>
 #include <dolphin/mtx/types.h>
@@ -21,7 +23,6 @@
 #include <melee/lb/lbcollision.h>
 #include <melee/lb/lbrefract.h>
 #include <melee/pl/player.h>
-#include <Runtime/platform.h>
 
 /// @todo #lbl_804D64FC..#lbl_804D6550 are initialized to 0 in
 ///       #Fighter_LoadCommonData, probably all pointers

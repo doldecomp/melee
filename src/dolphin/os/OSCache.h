@@ -1,9 +1,8 @@
 #ifndef _OSCACHE_H_
 #define _OSCACHE_H_
 
+#include <platform.h>
 #include <dolphin/os/forward.h>
-
-#include <Runtime/platform.h>
 
 void DCFlushRange(void* addr, size_t nbytes);
 void DCStoreRange(void* addr, size_t nbytes);

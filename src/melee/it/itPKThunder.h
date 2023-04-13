@@ -1,9 +1,10 @@
 #ifndef _itPKThunder_h_
 #define _itPKThunder_h_
 
+#include <platform.h>
+
 #include <dolphin/mtx/types.h>
 #include <sysdolphin/baselib/gobj.h>
-#include <Runtime/platform.h>
 
 typedef struct itPKThunderAttributes {
     f32 x0_PKTHUNDER_LIFETIME;

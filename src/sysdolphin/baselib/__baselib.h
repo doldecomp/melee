@@ -1,7 +1,7 @@
 #ifndef SYSDOLPHIN_BASELIB___BASELIB_H
 #define SYSDOLPHIN_BASELIB___BASELIB_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 typedef struct {
     u8 x0[0x828];
 } __baselib_UnkType001;

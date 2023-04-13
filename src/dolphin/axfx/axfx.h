@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_AXFX_AXFX_H
 #define DOLPHIN_AXFX_AXFX_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 any_t AXFXAllocFunction(size_t size);
 void AXFXFreeFunction(any_t ptr);

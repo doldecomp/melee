@@ -1,3 +1,4 @@
+#include <platform.h>
 #include <melee/lb/forward.h>
 
 #include <common_structs.h>
@@ -27,7 +28,6 @@
 #include <melee/pl/pl_unknown_001.h>
 #include <melee/pl/player.h>
 #include <MSL/trigf.h>
-#include <Runtime/platform.h>
 #include <Runtime/runtime.h>
 
 /// Combo Count Logic

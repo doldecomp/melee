@@ -1,7 +1,7 @@
 #ifndef _random_h_
 #define _random_h_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 s32 HSD_Rand(void);
 f32 HSD_Randf(void);

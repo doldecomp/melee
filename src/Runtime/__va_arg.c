@@ -1,6 +1,7 @@
+#include <platform.h>
+
 #include <placeholder.h>
 #include <stdarg.h>
-#include <Runtime/platform.h>
 
 #ifdef __MWERKS__
 

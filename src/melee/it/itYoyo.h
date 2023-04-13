@@ -1,7 +1,7 @@
 #ifndef _itYoyo_h_
 #define _itYoyo_h_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef struct itYoyoAttributes {
     s32 x0_CHARGE_SPAWN_POS;

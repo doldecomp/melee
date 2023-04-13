@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_MTX_TYPES_H
 #define DOLPHIN_MTX_TYPES_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 /// @sz{8}
 typedef struct Vec2 {

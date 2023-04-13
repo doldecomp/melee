@@ -1,9 +1,10 @@
 #ifndef _objalloc_h_
 #define _objalloc_h_
 
+#include <platform.h>
+
 #include <common_structs.h>
 #include <sysdolphin/baselib/debug.h>
-#include <Runtime/platform.h>
 
 typedef struct _objheap {
     u32 top;

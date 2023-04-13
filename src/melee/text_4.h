@@ -1,7 +1,7 @@
 #ifndef MELEE_TEXT_4_H
 #define MELEE_TEXT_4_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 bool un_80322258(f32 x);
 bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag);

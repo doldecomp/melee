@@ -1,7 +1,7 @@
 #ifndef __DOLPHIN_DB_H__
 #define __DOLPHIN_DB_H__
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef struct {
     u32 bPresent;

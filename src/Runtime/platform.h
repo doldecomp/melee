@@ -1,5 +1,5 @@
-#ifndef INCLUDE_RUNTIME_PLATFORM_H
-#define INCLUDE_RUNTIME_PLATFORM_H
+#ifndef RUNTIME_PLATFORM_H
+#define RUNTIME_PLATFORM_H
 
 #if defined(__MWERKS__) || defined(__GNUC__)
 #define MWERKS_GNUC

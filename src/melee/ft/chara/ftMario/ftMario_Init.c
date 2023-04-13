@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include <sysdolphin/baselib/random.h>
 #include <melee/ft/chara/ftMario/ftmario.h>
 #include <melee/ft/chara/ftMario/ftmario2.h>
@@ -7,7 +9,6 @@
 #include <melee/ft/ftparts.h>
 #include <melee/ft/types.h>
 #include <melee/it/itkind.h>
-#include <Runtime/platform.h>
 
 ActionState ftMario_MotionStateTable[] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },

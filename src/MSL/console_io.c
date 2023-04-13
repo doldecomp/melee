@@ -1,5 +1,6 @@
+#include <platform.h>
+
 #include <MSL/console_io.h>
-#include <Runtime/platform.h>
 
 s32 InitializeUART(u32);
 s32 WriteUARTN(s32, s32);

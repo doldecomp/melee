@@ -1,7 +1,7 @@
 #ifndef DOLPHIN_OS_OSRESET_H
 #define DOLPHIN_OS_OSRESET_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef bool (*OSResetFunction)(bool);
 

@@ -8,7 +8,7 @@
 #ifndef M2C_MACROS_H
 #define M2C_MACROS_H
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 /* Unknown types */
 typedef s32 M2C_UNK;

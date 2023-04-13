@@ -142,8 +142,8 @@ typedef struct _ftGameWatchAttributes {
     f32 x6C_GAMEWATCH_PANIC_FALL_ACCEL;   // Falling acceleration
     f32 x70_GAMEWATCH_PANIC_VEL_Y_MAX;    // Terminal Y velocity?
     f32 x74_GAMEWATCH_PANIC_DAMAGE_ADD;   // Extra damage added to Oil Panic
-                                        // after formula
-    f32 x78_GAMEWATCH_PANIC_DAMAGE_MUL; // Damage multiplier
+                                          // after formula
+    f32 x78_GAMEWATCH_PANIC_DAMAGE_MUL;   // Damage multiplier
     f32 x7C_GAMEWATCH_PANIC_TURN_FRAMES;
     AbsorbDesc
         x80_GAMEWATCH_PANIC_ABSORPTION; // Oil Panic absorption attributes

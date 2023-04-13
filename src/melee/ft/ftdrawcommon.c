@@ -1,3 +1,5 @@
+#include <platform.h>
+
 #include <placeholder.h>
 #include <dolphin/mtx.h>
 #include <dolphin/mtx/mtxvec.h>
@@ -10,7 +12,6 @@
 #include <melee/ft/ftdata.h>
 #include <melee/ft/ftdrawcommon.h>
 #include <melee/ft/ftlib.h>
-#include <Runtime/platform.h>
 
 #ifdef MWERKS_GEKKO
 static char lbl_803C0EB0[] = "translate";

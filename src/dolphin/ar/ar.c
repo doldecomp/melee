@@ -1,7 +1,8 @@
+#include <platform.h>
+
 #include <dolphin/ar/ar.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/os.h>
-#include <Runtime/platform.h>
 
 extern Event __AR_Callback;
 extern u32 __AR_Size;

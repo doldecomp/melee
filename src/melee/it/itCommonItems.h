@@ -1,7 +1,7 @@
 #ifndef _itCommonItems_h_
 #define _itCommonItems_h_
 
-#include <Runtime/platform.h>
+#include <platform.h>
 
 typedef struct BobOmbVars {
     s32 xDD4;

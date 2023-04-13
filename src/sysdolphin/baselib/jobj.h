@@ -1,6 +1,7 @@
 #ifndef _jobj_h_
 #define _jobj_h_
 
+#include <platform.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -10,7 +11,6 @@
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/object.h>
 #include <sysdolphin/baselib/pobj.h>
-#include <Runtime/platform.h>
 
 #define HSD_A_J_ROTX 1
 #define HSD_A_J_ROTY 2

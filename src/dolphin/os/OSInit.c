@@ -1,6 +1,8 @@
 /** @file
  * @todo Should be called @c OS.c.
  */
+#include <platform.h>
+
 #include "stddef.h"
 
 #include <placeholder.h>
@@ -28,7 +30,6 @@
 #include <MetroTRK/dolphin_trk.h>
 #include <MetroTRK/intrinsics.h>
 #include <Runtime/__mem.h>
-#include <Runtime/platform.h>
 
 typedef struct OSBootInfo {
     DVDDiskID DVDDiskID;

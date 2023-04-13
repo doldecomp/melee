@@ -1,5 +1,6 @@
+#include <platform.h>
+
 #include <MSL/math.h>
-#include <Runtime/platform.h>
 
 f32 cos__Ff(f32);
 f32 sin__Ff(f32);

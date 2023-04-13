@@ -1,4 +1,4 @@
-#include <Runtime/platform.h>
+#include <platform.h>
 
 struct {
     enum_t asids[18];
