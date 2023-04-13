@@ -1,10 +1,9 @@
 use ahash::AHashMap;
 use anyhow::{Context, Result};
 use cwparse::map::{self, hex, Identifier, Line, Origin};
-use dashmap::DashSet;
 use itertools::Itertools;
-use log::{debug, error, info};
-use melee_utils::{replace, ROOT};
+use log::{info, trace};
+use melee_utils::{replace_symbols, ROOT};
 use memmap2::Mmap;
 use nom::{
     character::complete::{alphanumeric1, char},
@@ -15,19 +14,24 @@ use nom::{
 };
 use rayon::{
     prelude::{
-        IndexedParallelIterator, IntoParallelIterator,
-        IntoParallelRefIterator, ParallelIterator,
+        IntoParallelIterator, IntoParallelRefIterator, ParallelIterator,
     },
     str::ParallelString,
 };
-use regex::RegexBuilder;
-use std::{fs::File, num::ParseIntError, str};
+use std::{
+    collections::HashMap, fs::File, num::ParseIntError, path::Path, str,
+    sync::Arc,
+};
 
 fn anon_func<'a, E>(input: &'a str) -> IResult<&'a str, u32, E>
 where
     E: ParseError<&'a str> + FromExternalError<&'a str, ParseIntError>,
 {
     all_consuming(preceded(pair(alphanumeric1, char('_')), hex(8)))(input)
+}
+
+fn relative_path<'a>(path: &'a Path) -> &'a Path {
+    path.strip_prefix(&*ROOT).unwrap_or(path.as_ref())
 }
 
 fn main() -> Result<()> {
@@ -86,7 +90,11 @@ fn main() -> Result<()> {
                     ..
                 }) if obj.ends_with(".s.o") => {
                     if let Ok(("", virt_addr)) = anon_func::<()>(name) {
-                        Some((&obj[0..obj.len() - 2], *name, virt_addr))
+                        Some((
+                            &obj[0..obj.len() - 2],
+                            Arc::<str>::from(*name),
+                            virt_addr,
+                        ))
                     } else {
                         None
                     }
@@ -94,11 +102,9 @@ fn main() -> Result<()> {
                 _ => None,
             }
         })
-        .collect::<DashSet<_, ahash::RandomState>>();
+        .collect::<Vec<_>>();
 
-    info!("found {} symbols to replace", to_rename.len());
-
-    let replacements = to_rename
+    to_rename
         .into_iter()
         .sorted_by(|(a, _, _), (b, _, _)| a.cmp(b))
         .group_by(|(file, _, _)| *file)
@@ -109,43 +115,32 @@ fn main() -> Result<()> {
                 .context("Failed to find asm file.")?
                 .as_path();
 
-            let addrs = group
-                .map(|(_, name, addr)| {
-                    debug!("Found {} in {:#?}.", &name, &path);
-                    format!("{:8X}", addr)
+            let replacements = group
+                .map(|(_, from, addr)| {
+                    trace!("found {} in {:#?}", &from, relative_path(path));
+                    let to = format!(".L_{:8X}", addr);
+                    Ok((Arc::<str>::from(from), Arc::from(to)))
                 })
-                .into_iter()
-                .join("|");
+                .collect::<Result<HashMap<_, _, ahash::RandomState>>>()?;
 
-            let pattern = format!(r"\b(?:[[:alnum:]]+)_({})\b", addrs);
-            Ok((pattern, path))
+            Ok((path, replacements))
         })
-        .collect::<Result<Vec<_>>>()?;
-
-    let total = replacements.len();
-    info!("replacing in {} files", total);
-
-    let mut results = Vec::<Result<()>>::with_capacity(total);
-
-    replacements
+        .collect::<Result<Vec<_>>>()?
         .into_par_iter()
-        .map(|(pattern, path)| {
-            const LIMIT: usize = 1 << 22; // 4 MiB
+        .try_for_each(|(path, replacements)| {
+            info!(
+                "replacing {} symbols in {:#?}",
+                replacements.len(),
+                relative_path(path)
+            );
 
-            let re = RegexBuilder::new(&pattern).size_limit(LIMIT).build()?;
-            replace(&re, r".L_$1", path)
-        })
-        .collect_into_vec(&mut results);
-
-    let mut errors: usize = 0;
-    for res in results {
-        if let Err(err) = res {
-            error!("{}", err);
-            errors += 1;
-        }
-    }
-
-    info!("{} succeeded; {} failed", total - errors, errors);
+            replace_symbols(path, &replacements).with_context(|| {
+                format!(
+                    "Failed to replace symbols in {:#?}",
+                    relative_path(path)
+                )
+            })
+        })?;
 
     Ok(())
 }
