@@ -555,7 +555,6 @@ dependencies = [
  "anyhow",
  "clap",
  "cwparse",
- "dashmap",
  "env_logger",
  "glob",
  "itertools",
@@ -564,7 +563,6 @@ dependencies = [
  "memmap2",
  "nom",
  "rayon",
- "regex",
 ]
 
 [[package]]
