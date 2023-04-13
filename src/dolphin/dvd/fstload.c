@@ -33,7 +33,7 @@ void cb(s32 param_1, DVDCommandBlock* block)
             break;
         }
     } else if (param_1 == -1) {
-        ; // nothing
+        // nothing
     } else if (param_1 == -4) {
         status = 0;
         DVDReset();
