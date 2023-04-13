@@ -2,6 +2,7 @@
 name = "melee-diff-symbols"
 version = "0.1.0"
 edition = "2021"
+authors = ["Robin Avery <robin@ribbanya.dev>"]
 license = "AGPL-3.0-or-later"
 
 [dependencies]
