@@ -3,10 +3,10 @@ use clang_sys::{CXDiagnosticSeverity, *};
 use glob::glob;
 use itertools::Itertools;
 use log::{debug, info, warn};
+use melee_utils::set_current_dir;
 use std::{
     cmp::Ordering::{Equal, Greater, Less},
     collections::{HashMap, HashSet},
-    env,
     ffi::{CStr, CString},
     fs::read_to_string,
     path::{Path, PathBuf},
@@ -97,7 +97,7 @@ fn process_issues() -> anyhow::Result<usize> {
     let extra_flags = ["-ferror-limit=0"];
 
     let args: Vec<CString> = read_to_string("compile_flags.txt")
-        .with_context(|| "Failed to read the compile flags.")?
+        .context("Failed to read the compile flags.")?
         .split_whitespace()
         .chain(extra_flags)
         .map(CString::new)
@@ -122,16 +122,6 @@ fn process_issues() -> anyhow::Result<usize> {
     print_info(items, &str_interner)?;
 
     Ok(count)
-}
-
-fn set_current_dir() -> anyhow::Result<()> {
-    env::set_current_dir(
-        Path::new(env!("CARGO_MANIFEST_DIR"))
-            .ancestors()
-            .nth(2)
-            .with_context(|| "Failed to find project root directory.")?,
-    )
-    .with_context(|| "Failed to change directory to project root.")
 }
 
 fn process_index(
@@ -159,8 +149,8 @@ fn process_glob(
     items: &mut HashSet<DiagnosticInfo>,
 ) -> anyhow::Result<()> {
     glob("src/**/*.[ch]")
-        .with_context(|| "Failed to parse the glob.")?
-        .map(|p| p.with_context(|| "Failed to get a real file from the path."))
+        .context("Failed to parse the glob.")?
+        .map(|p| p.context("Failed to get a real file from the path."))
         .try_for_each(|p| {
             process_tu(p?, args, n_args, index, str_interner, items)
         })
