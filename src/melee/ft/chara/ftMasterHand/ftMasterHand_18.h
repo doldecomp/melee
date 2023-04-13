@@ -4,15 +4,15 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/gobj.h>
 
-void func_80153A64(HSD_GObj*);
-void lbl_80153A30(HSD_GObj* gobj);
-void lbl_801539EC(HSD_GObj* arg0);
-void lbl_80153A60(HSD_GObj* gobj);
-void func_80153A64(HSD_GObj* arg0);
+void ftMasterHand_80153A64(HSD_GObj*);
+void ftMasterHand_80153A30(HSD_GObj* gobj);
+void ftMasterHand_801539EC(HSD_GObj* arg0);
+void ftMasterHand_80153A60(HSD_GObj* gobj);
+void ftMasterHand_80153A64(HSD_GObj* arg0);
 
-void lbl_80153A30(HSD_GObj* gobj);
-void lbl_80153A60(HSD_GObj* gobj);
-void func_80153A64(HSD_GObj* arg0);
-void lbl_801539EC(HSD_GObj* arg0);
+void ftMasterHand_80153A30(HSD_GObj* gobj);
+void ftMasterHand_80153A60(HSD_GObj* gobj);
+void ftMasterHand_80153A64(HSD_GObj* arg0);
+void ftMasterHand_801539EC(HSD_GObj* arg0);
 
 #endif

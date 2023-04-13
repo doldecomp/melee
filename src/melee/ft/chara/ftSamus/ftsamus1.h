@@ -5,7 +5,7 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
 
-extern ActionState as_table_samus[];
+extern ActionState ftSamus_MotionStateTable[];
 extern char lbl_803CE510[];
 extern char lbl_803CE51C[];
 extern Fighter_CostumeStrings lbl_803CE678[];

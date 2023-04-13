@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void func_800195D0(void);
+void lb_800195D0(void);
 
 #endif

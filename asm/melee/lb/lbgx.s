@@ -2,8 +2,8 @@
 
 .section .text
 
-.global func_8001E2F8
-func_8001E2F8:
+.global lbGx_8001E2F8
+lbGx_8001E2F8:
 /* 8001E2F8 0001AED8  7C 08 02 A6 */	mflr r0
 /* 8001E2FC 0001AEDC  28 06 00 02 */	cmplwi r6, 2
 /* 8001E300 0001AEE0  90 01 00 04 */	stw r0, 4(r1)

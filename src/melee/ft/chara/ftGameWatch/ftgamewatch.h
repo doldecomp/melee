@@ -149,7 +149,7 @@ typedef struct _ftGameWatchAttributes {
 
 } ftGameWatchAttributes;
 
-extern ActionState as_table_gamewatch[];
+extern ActionState ftGameWatch_MotionStateTable[];
 extern char lbl_803D28E8[];
 extern char lbl_803D28F4[];
 extern Fighter_CostumeStrings lbl_803D29C8[];
@@ -293,8 +293,8 @@ void ftGameWatch_ItemJudgementSetFlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemJudgementRemove(HSD_GObj* fighter_gobj);
 bool ftGameWatch_ItemCheckJudgementRemove(HSD_GObj* fighter_gobj);
 int ftGameWatch_SpecialS_GetRandomInt(HSD_GObj* fighter_gobj);
-void ftGameWatch_SpecialS_StartAction(HSD_GObj* fighter_gobj);
-void ftGameWatch_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialS_StartMotion(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialAirS_StartMotion(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialS_Anim(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirS_Anim(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialS_IASA(HSD_GObj* fighter_gobj);
@@ -310,8 +310,8 @@ void ftGameWatch_ItemRescueSetup(HSD_GObj* fighter_gobj);
 bool ftGameWatch_ItemCheckRescueRemove(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemRescueSetNULL(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemRescueRemove(HSD_GObj* fighter_gobj);
-void ftGameWatch_SpecialHi_StartAction(HSD_GObj* fighter_gobj);
-void ftGameWatch_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialHi_StartMotion(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialAirHi_StartMotion(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialHi_Anim(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirHi_Anim(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialHi_IASA(HSD_GObj* fighter_gobj);
@@ -330,8 +330,8 @@ void ftGameWatch_ItemPanicEnterHitlag(HSD_GObj* fighter_gobj);
 void ftGameWatch_ItemPanicExitHitlag(HSD_GObj* fighter_gobj);
 bool ftGameWatch_ItemCheckPanicRemove(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialLw_UpdateBucketModel(HSD_GObj* fighter_gobj);
-void ftGameWatch_SpecialLw_StartAction(HSD_GObj* fighter_gobj);
-void ftGameWatch_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialLw_StartMotion(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialAirLw_StartMotion(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialLw_Anim(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirLw_Anim(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialLw_IASA(HSD_GObj* fighter_gobj);
@@ -371,8 +371,8 @@ void ftGameWatch_SpecialAirLwShoot_ReleaseOil(HSD_GObj* fighter_gobj);
 
 // Neutral Special - Chef (SpecialN/) //
 
-void ftGameWatch_SpecialN_StartAction(HSD_GObj* fighter_gobj);
-void ftGameWatch_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialN_StartMotion(HSD_GObj* fighter_gobj);
+void ftGameWatch_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialN_Anim(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialAirN_Anim(HSD_GObj* fighter_gobj);
 void ftGameWatch_SpecialN_IASA(HSD_GObj* fighter_gobj);

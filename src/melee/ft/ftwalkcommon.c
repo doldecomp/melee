@@ -6,7 +6,7 @@
 
 #include <dolphin/os/os.h>
 
-s32 ftWalkCommon_GetWalkType_800DFBF8(HSD_GObj* fighter_gobj)
+s32 ftWalkCommon_GetWalkType(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     f32 ground_vel = fp->xEC_ground_vel;
@@ -73,9 +73,9 @@ void ftWalkCommon_800DFCA4(HSD_GObj* fighter_gobj, s32 arg1, s32 arg2, f32 arg8,
     fp->sv.co.walk.x20 = argF;
     walking_state = ftWalkCommon_GetWalkType_800DFBF8_fake(fighter_gobj);
     new_action_state = arg1 + walking_state;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, new_action_state, arg2, 0,
-                                       arg8, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, new_action_state, arg2, 0, arg8,
+                              1.0f, 0.0f);
+    ftAnim_8006EBA4(fighter_gobj);
     fp->sv.co.walk.x0 = fp->xEC_ground_vel;
     fp->sv.co.walk.x4 = arg1;
     fp->sv.co.walk.x8 = arg9;
@@ -93,7 +93,7 @@ void ftWalkCommon_800DFDDC(HSD_GObj* fighter_gobj)
 
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    if (Stage_GetGroundFrictionMultiplier(fp) < 1.0f) {
+    if (ft_GetGroundFrictionMultiplier(fp) < 1.0f) {
         velocity_f2 = fp->sv.co.walk.x0;
     } else {
         velocity_f2 = fp->xEC_ground_vel;
@@ -149,7 +149,7 @@ void ftWalkCommon_800DFEC8(HSD_GObj* fighter_gobj,
             OSReport("couldn't get walk frame\n");
             HSD_ASSERT(71, 0);
         }
-        float_result = func_8006F484(fighter_gobj);
+        float_result = ftAnim_8006F484(fighter_gobj);
         init_animFrame = fp->x894_currentAnimFrame;
         quotient = init_animFrame / float_result;
         adjusted_animFrame =
@@ -204,6 +204,7 @@ void ftWalkCommon_800E0060(HSD_GObj* fighter_gobj)
         }
     }
     fp->sv.co.walk.x0 = temp_f0 * p_ftCommonData->x440;
-    func_8007C98C(fp, velocity_f1, temp_f0, fp->x110_attr.x128_GroundFriction);
-    func_8007CB74(fighter_gobj);
+    ftCommon_8007C98C(fp, velocity_f1, temp_f0,
+                      fp->x110_attr.x128_GroundFriction);
+    ftCommon_8007CB74(fighter_gobj);
 }

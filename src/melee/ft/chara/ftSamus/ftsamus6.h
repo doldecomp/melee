@@ -19,7 +19,7 @@ void ftSamus_UnkSetStateAndCb(HSD_GObj* fighter_gobj);
 void ftSamus_8012AEBC(HSD_GObj* fighter_gobj);
 void ftSamus_8012AF38(HSD_GObj* fighter_gobj);
 void ftSamus_SpecialLw_StartAction_inner(HSD_GObj* fighter_gobj);
-void ftSamus_SpecialLw_StartAction(HSD_GObj* fighter_gobj);
-void ftSamus_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj);
+void ftSamus_SpecialLw_StartMotion(HSD_GObj* fighter_gobj);
+void ftSamus_SpecialAirLw_StartMotion(HSD_GObj* fighter_gobj);
 
 #endif

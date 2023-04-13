@@ -36,7 +36,7 @@ void ftNess_ItemPKFireSpawn(
     }
 
     if (FlagResult != false) {
-        func_8000B1CC(fp->x5E8_fighterBones[42].x0_jobj, NULL, &ItemBonePos);
+        lb_8000B1CC(fp->x5E8_fighterBones[42].x0_jobj, NULL, &ItemBonePos);
 
         ItemBonePos.x += ness_attr->x30_PKFIRE_SPAWN_X * fp->facing_dir;
         ItemBonePos.y += ness_attr->x34_PKFIRE_SPAWN_Y;
@@ -60,14 +60,14 @@ void ftNess_ItemPKFireSpawn(
 
         PKFireRot = PKFireLaunch * fp->facing_dir;
 
-        func_802AA054(fighter_gobj, &ItemBonePos, &PKFireVelStruct,
-                      fp->facing_dir, PKFireRot);
+        it_802AA054(fighter_gobj, &ItemBonePos, &PKFireVelStruct,
+                    fp->facing_dir, PKFireRot);
     }
 }
 
 // 0x80116C94 //
 // https://decomp.me/scratch/XdzmF //
-void ftNess_SpecialS_StartAction(
+void ftNess_SpecialS_StartMotion(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Action State handler //
 {
     Fighter* fp;
@@ -75,9 +75,9 @@ void ftNess_SpecialS_StartAction(
     fp = GET_FIGHTER(fighter_gobj);
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
     fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; _ in PK Fire? //
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALS, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALS, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
+    ftAnim_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 =
         ftNess_ItemPKFireSpawn; // Store PK Fire spawn function //
 }
@@ -92,9 +92,9 @@ void ftNess_SpecialAirS_Action(
     fp = GET_FIGHTER(fighter_gobj);
     fp->x2210_ThrowFlags.flags = 0; // Set projectile summon flag to 0 //
     fp->x2200_ftcmd_var0 = 0;       // Set ftcmd flag0 to 0; _ in PK Fire? //
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_NESS_SPECIALAIRS, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, AS_NESS_SPECIALAIRS, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
+    ftAnim_8006EBA4(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftNess_ItemPKFireSpawn;
 }
 
@@ -104,7 +104,7 @@ void ftNess_SpecialS_Anim(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Animation callback //
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_8008A2BC(fighter_gobj);
+        ft_8008A2BC(fighter_gobj);
     }
 }
 
@@ -114,7 +114,7 @@ void ftNess_SpecialAirS_Anim(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Fire Animation callback //
 {
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_800CC730(fighter_gobj);
+        ft_800CC730(fighter_gobj);
     }
 }
 
@@ -123,7 +123,7 @@ void ftNess_SpecialAirS_Anim(
 void ftNess_SpecialS_Phys(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Physics callback //
 {
-    func_80084F3C(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
 }
 
 // 0x80116E0C //
@@ -131,7 +131,7 @@ void ftNess_SpecialS_Phys(
 void ftNess_SpecialAirS_Phys(
     HSD_GObj* fighter_gobj) // Ness's aerial PK Fire Physics callback //
 {
-    func_80084EEC(fighter_gobj);
+    ft_80084EEC(fighter_gobj);
 }
 
 // 0x80116E2C //
@@ -139,8 +139,8 @@ void ftNess_SpecialAirS_Phys(
 void ftNess_SpecialS_Coll(
     HSD_GObj* fighter_gobj) // Ness's grounded PK Fire Collision callback //
 {
-    if (func_800827A0(fighter_gobj) == false) {
-        func_800CC730(fighter_gobj);
+    if (ft_800827A0(fighter_gobj) == false) {
+        ft_800CC730(fighter_gobj);
     }
 }
 
@@ -153,7 +153,7 @@ void ftNess_SpecialAirS_Coll(
     ftNessAttributes* ness_attr;
 
     ness_attr = fp->x2D4_specialAttributes;
-    if (func_80081D0C(fighter_gobj) != false) {
-        func_800D5CB0(fighter_gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
+    if (ft_80081D0C(fighter_gobj) != false) {
+        ft_800D5CB0(fighter_gobj, 0, ness_attr->x38_PKFIRE_LANDING_LAG);
     }
 }

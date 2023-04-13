@@ -10,7 +10,7 @@ typedef struct _ftPeachAttributes {
     u8 padding[0xB8];
 } ftPeachAttributes;
 
-extern ActionState as_table_peach[];
+extern ActionState ftPeach_MotionStateTable[];
 extern char ftPeach_str_PlPe_dat[];
 extern char ftPeach_str_ftDataPeach[];
 extern Fighter_CostumeStrings ftPeach_str_arr_Costumes[];
@@ -135,13 +135,13 @@ void ftPeach_8011EA04(HSD_GObj*);
 void ftPeach_8011EA6C(HSD_GObj*);
 void ftPeach_8011EA90(HSD_GObj*);
 void ftPeach_8011EB1C(HSD_GObj*);
-void ftPeach_SpecialS_StartAction(HSD_GObj*);
-void ftPeach_SpecialAirHi_StartAction(HSD_GObj*);
-void ftPeach_SpecialAirLw_StartAction(HSD_GObj*);
-void ftPeach_SpecialAirS_StartAction(HSD_GObj*);
-void ftPeach_SpecialAirN_StartAction(HSD_GObj*);
-void ftPeach_SpecialN_StartAction(HSD_GObj*);
-void ftPeach_SpecialLw_StartAction(HSD_GObj*);
-void ftPeach_SpecialHi_StartAction(HSD_GObj*);
+void ftPeach_SpecialS_StartMotion(HSD_GObj*);
+void ftPeach_SpecialAirHi_StartMotion(HSD_GObj*);
+void ftPeach_SpecialAirLw_StartMotion(HSD_GObj*);
+void ftPeach_SpecialAirS_StartMotion(HSD_GObj*);
+void ftPeach_SpecialAirN_StartMotion(HSD_GObj*);
+void ftPeach_SpecialN_StartMotion(HSD_GObj*);
+void ftPeach_SpecialLw_StartMotion(HSD_GObj*);
+void ftPeach_SpecialHi_StartMotion(HSD_GObj*);
 
 #endif

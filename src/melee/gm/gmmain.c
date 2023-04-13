@@ -52,7 +52,7 @@ static bool lbl_804D6594;
 static u8 lbl_8046B108[0xF0];
 static HSD_PadRumbleListData lbl_8046B1F8[12];
 
-static void lbl_8015FD24(void)
+static void gmMain_8015FD24(void)
 {
     PADSetSpec(5);
     HSD_PadInit(5, lbl_8046B108, 12, lbl_8046B1F8);
@@ -67,10 +67,10 @@ static void lbl_8015FD24(void)
     HSD_PadLibData.scale_analogLR = 140;
 }
 
-static void lbl_8015FDA0(void) {}
+static void gmMain_8015FDA0(void) {}
 
 // set debug level
-static void func_8015FDA4(void)
+static void gmMain_8015FDA4(void)
 {
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {
         lbl_804D6B20 = true;
@@ -156,8 +156,8 @@ int main(void)
     PADInit();
     CARDInit();
     OSInitAlarm();
-    func_80225374();
-    func_8015FDA4();
+    db_80225374();
+    gmMain_8015FDA4();
     if (OSGetConsoleSimulatedMemSize() / (1024 * 1024) == 48) {
         OSAllocFromArenaHi(0x01800000, 4);
     }
@@ -166,28 +166,28 @@ int main(void)
     HSD_SetInitParameter(HSD_INIT_RENDER_MODE_OBJ, &GXNtsc480IntDf);
     HSD_SetInitParameter(HSD_INIT_FIFO_SIZE, 0x40000);
     HSD_SetInitParameter(HSD_INIT_HEAP_MAX_NUM, 4);
-    func_80228C4C();
+    db_80228C4C();
     HSD_AllocateXFB(2, &GXNtsc480IntDf);
     HSD_GXSetFifoObj(GXInit(HSD_AllocateFifo(0x40000), 0x40000));
     HSD_InitComponent();
     GXSetMisc(1, 8);
     *seed_ptr = OSGetTick();
-    func_8002838C();
-    func_80019AAC(&lbl_8015FD24);
-    HSD_VISetUserPostRetraceCallback(&lbl_8015FDA0);
+    lbAudioAx_8002838C();
+    lb_80019AAC(&gmMain_8015FD24);
+    HSD_VISetUserPostRetraceCallback(&gmMain_8015FDA0);
     HSD_VISetUserGXDrawDoneCallback(&lbl_803762C4);
     HSD_VISetBlack(0);
-    func_8001564C();
-    func_80015F3C();
-    func_80018F68();
-    func_80014D2C();
-    func_8001C5BC();
-    func_8001D21C();
-    func_8001E290();
-    func_8015FCC0();
-    func_8001F87C();
+    lbMemory_8001564C();
+    lbHeap_80015F3C();
+    lbDvd_80018F68();
+    lbArq_80014D2C();
+    lb_8001C5BC();
+    lb_8001D21C();
+    lbSnap_8001E290();
+    gmMainLib_8015FCC0();
+    lbMthp_8001F87C();
     func_803A6048(0xC000);
-    func_8015FBA4();
+    gmMainLib_8015FBA4();
 
     if (g_debugLevel != DbLKind_Master && lbl_804D6B30 & 0x20 &&
         func_803931A4(-1))
@@ -199,7 +199,7 @@ int main(void)
         }
     }
 
-    func_8022886C();
+    db_8022886C();
     OSReport("# ---------------------------------------------\n");
     OSReport("#    Super Smash Bros. Melee\n");
     OSReport("#\n");
@@ -210,14 +210,14 @@ int main(void)
     {
         u32 free_aram_start;
         u32 free_aram_end;
-        func_800154BC(&free_aram_start, &free_aram_end);
+        lbMemory_800154BC(&free_aram_start, &free_aram_end);
         OSReport("# ARAM Free Size %d MB\n",
                  (free_aram_end - free_aram_start) / (1024 * 1024));
     }
     OSReport("# %s\n", lbl_803EA6C8);
     {
         struct datetime dt;
-        func_801692E8(func_8000AFBC(), &dt);
+        gm_801692E8(lbTime_8000AFBC(), &dt);
         OSReport("# GC Calendar Year %d Month %d Day %d\n", dt.year, dt.month,
                  dt.day);
         OSReport("#             Hour %d Min %d Sec %d \n", dt.hour, dt.minute,
@@ -226,13 +226,13 @@ int main(void)
     OSReport("#\n\n");
     lbl_804D6594 = false;
     if (lbl_804D6594) {
-        func_80225D2C();
+        db_80225D2C();
     } else {
-        func_80225D40();
+        db_80225D40();
     }
 
     init_spr_unk();
 
-    func_80228A64();
-    func_801A4510();
+    db_80228A64();
+    gm_801A4510();
 }

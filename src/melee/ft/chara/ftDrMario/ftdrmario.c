@@ -7,33 +7,33 @@
 #include "ftMario/ftmario.h"
 #include "it/code_8027CF30.h"
 
-ActionState as_table_drmario[] = {
-    { 239, 0x00000071, 0x01000000, func_80149954, func_80149A6C, func_80149A8C,
-      func_80149AAC, func_800761C8 },
-    { 240, 0x00000071, 0x01000000, func_80149954, func_80149A6C, func_80149A8C,
-      func_80149AAC, func_800761C8 },
+ActionState ftDrMario_MotionStateTable[] = {
+    { 239, 0x00000071, 0x01000000, ftDrMario_80149954, ftDrMario_80149A6C,
+      ftDrMario_80149A8C, ftDrMario_80149AAC, ftCamera_UpdateCameraBox },
+    { 240, 0x00000071, 0x01000000, ftDrMario_80149954, ftDrMario_80149A6C,
+      ftDrMario_80149A8C, ftDrMario_80149AAC, ftCamera_UpdateCameraBox },
     { 295, 0x00340111, 0x12000000, ftMario_SpecialN_Anim, ftMario_SpecialN_IASA,
-      ftMario_SpecialN_Phys, ftMario_SpecialN_Coll, func_800761C8 },
+      ftMario_SpecialN_Phys, ftMario_SpecialN_Coll, ftCamera_UpdateCameraBox },
     { 296, 0x00340511, 0x12000000, ftMario_SpecialAirN_Anim,
       ftMario_SpecialAirN_IASA, ftMario_SpecialAirN_Phys,
-      ftMario_SpecialAirN_Coll, func_800761C8 },
+      ftMario_SpecialAirN_Coll, ftCamera_UpdateCameraBox },
     { 297, 0x00341012, 0x13000000, ftMario_SpecialS_Anim, ftMario_SpecialS_IASA,
-      ftMario_SpecialS_Phys, ftMario_SpecialS_Coll, func_800761C8 },
+      ftMario_SpecialS_Phys, ftMario_SpecialS_Coll, ftCamera_UpdateCameraBox },
     { 298, 0x00341012, 0x13000000, ftMario_SpecialAirS_Anim,
       ftMario_SpecialAirS_IASA, ftMario_SpecialAirS_Phys,
-      ftMario_SpecialAirS_Coll, func_800761C8 },
+      ftMario_SpecialAirS_Coll, ftCamera_UpdateCameraBox },
     { 299, 0x00340213, 0x14000000, ftMario_SpecialHi_Anim,
       ftMario_SpecialHi_IASA, ftMario_SpecialHi_Phys, ftMario_SpecialHi_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 300, 0x00340613, 0x14000000, ftMario_SpecialAirHi_Anim,
       ftMario_SpecialAirHi_IASA, ftMario_SpecialAirHi_Phys,
-      ftMario_SpecialAirHi_Coll, func_800761C8 },
+      ftMario_SpecialAirHi_Coll, ftCamera_UpdateCameraBox },
     { 301, 0x00340214, 0x15000000, ftMario_SpecialLw_Anim,
       ftMario_SpecialLw_IASA, ftMario_SpecialLw_Phys, ftMario_SpecialLw_Coll,
-      func_800761C8 },
+      ftCamera_UpdateCameraBox },
     { 302, 0x00340614, 0x15000000, ftMario_SpecialAirLw_Anim,
       ftMario_SpecialAirLw_IASA, ftMario_SpecialAirLw_Phys,
-      ftMario_SpecialAirLw_Coll, func_800761C8 },
+      ftMario_SpecialAirLw_Coll, ftCamera_UpdateCameraBox },
 };
 
 char lbl_803D15D8[] = "PlDr.dat";
@@ -73,7 +73,7 @@ Fighter_CostumeStrings lbl_803D180C[] = {
 void ftDrMario_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
     fp->ev.mr.x2234_tornadoCharge = 0;
     fp->ev.mr.x2238_isCapeBoost = false;
     fp->ev.mr.x223C_capeGObj = NULL;
@@ -95,13 +95,13 @@ void ftDrMario_OnLoad(HSD_GObj* gobj)
     items = fp->x10C_ftData->x48_items;
     ftMario_OnLoadForDrMario(fp);
     sa = fp->x2D4_specialAttributes;
-    func_8026B3F8(items[1], 0x31);
-    func_8026B3F8(items[3], sa->x14);
+    it_8026B3F8(items[1], 0x31);
+    it_8026B3F8(items[3], sa->x14);
 }
 
-void func_80149540(HSD_GObj* gobj)
+void ftDrMario_80149540(HSD_GObj* gobj)
 {
-    func_801497CC(gobj);
+    ftDrMario_801497CC(gobj);
 }
 
 void ftDrMario_OnItemPickup(HSD_GObj* fighter_gobj, bool bool)
@@ -139,7 +139,7 @@ void ftDrMario_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void func_801497CC(HSD_GObj* gobj)
+void ftDrMario_801497CC(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -151,7 +151,7 @@ void func_801497CC(HSD_GObj* gobj)
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL && fp->ev.mr.x2240 != 0) {
-            func_802C0DBC(fp->ev.mr.x2240);
+            it_802C0DBC(fp->ev.mr.x2240);
             fp->ev.mr.x2240 = 0;
         }
     }
@@ -165,7 +165,7 @@ void func_801497CC(HSD_GObj* gobj)
     }
 }
 
-bool func_80149844(HSD_GObj* gobj)
+bool ftDrMario_80149844(HSD_GObj* gobj)
 {
     s32 tmp;
     Fighter* fp;
@@ -187,7 +187,7 @@ bool func_80149844(HSD_GObj* gobj)
     return false;
 }
 
-void func_801498A0(HSD_GObj* gobj)
+void ftDrMario_801498A0(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -206,7 +206,7 @@ void func_801498A0(HSD_GObj* gobj)
     }
 }
 
-u32 func_801498EC(HSD_GObj* gobj)
+u32 ftDrMario_801498EC(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -220,11 +220,11 @@ u32 func_801498EC(HSD_GObj* gobj)
     return 0;
 }
 
-void func_80149910(HSD_GObj* gobj)
+void ftDrMario_80149910(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    func_800DEAE8(gobj, 0x155, 0x156);
+    ft_800DEAE8(gobj, 0x155, 0x156);
     fp->x2200_ftcmd_var0 = 1;
     fp->x2204_ftcmd_var1 = 0;
 }

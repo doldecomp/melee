@@ -145,7 +145,7 @@ typedef struct _ftFoxAttributes {
 
 } ftFoxAttributes;
 
-extern ActionState as_table_fox[];
+extern ActionState ftFox_MotionStateTable[];
 extern char lbl_803C7BE8[];
 extern char lbl_803C7BF4[];
 extern Fighter_CostumeStrings lbl_803C7D9C[];
@@ -154,9 +154,9 @@ extern Fighter_DemoStrings lbl_803C7D8C;
 
 // Fox & Falco Functions //
 
-bool func_800E5534(HSD_GObj* gobj);
+bool ftFox_800E5534(HSD_GObj* gobj);
 void ftFox_OnDeath(HSD_GObj* gobj);
-void func_800E5588(HSD_GObj* gobj);
+void ftFox_800E5588(HSD_GObj* gobj);
 void ftFox_OnItemPickup(HSD_GObj* gobj, bool arg1);
 void ftFox_OnItemInvisible(HSD_GObj* gobj);
 void ftFox_OnItemVisible(HSD_GObj* gobj);
@@ -201,8 +201,8 @@ bool ftFox_CheckBlasterAction(HSD_GObj* fighter_gobj);
 void ftFox_ClearBlaster(HSD_GObj* fighter_gobj);
 void ftFox_RemoveBlaster(HSD_GObj* fighter_gobj);
 void ftFox_CreateBlasterShot(HSD_GObj* fighter_gobj);
-void ftFox_SpecialN_StartAction(HSD_GObj* fighter_gobj);
-void ftFox_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
+void ftFox_SpecialN_StartMotion(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj);
 void ftFox_SpecialNStart_Anim(HSD_GObj* fighter_gobj);
 void ftFox_SpecialNLoop_Anim(HSD_GObj* fighter_gobj);
 void ftFox_SpecialNEnd_Anim(HSD_GObj* fighter_gobj);
@@ -241,10 +241,10 @@ void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* fighter_gobj);
 void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* fighter_gobj);
 
 /// Fox & Falco's grounded Firefox/Firebird Start Action State handler
-void ftFox_SpecialHi_StartAction(HSD_GObj* fighter_gobj);
+void ftFox_SpecialHi_StartMotion(HSD_GObj* fighter_gobj);
 
 /// Fox & Falco's aerial Firefox/Firebird Start Action State handler
-void ftFox_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirHi_StartMotion(HSD_GObj* fighter_gobj);
 
 void ftFox_SpecialHi_RotateModel(HSD_GObj* fighter_gobj);
 
@@ -337,10 +337,10 @@ void ftFox_SpecialLw_CreateStartGFX(HSD_GObj* fighter_gobj);
 void ftFox_SpecialLw_CreateReflectGFX(HSD_GObj* fighter_gobj);
 
 /// Fox & Falco's grounded Reflector Start Action State handler
-void ftFox_SpecialLw_StartAction(HSD_GObj* fighter_gobj);
+void ftFox_SpecialLw_StartMotion(HSD_GObj* fighter_gobj);
 
 /// Fox & Falco's aerial Reflector Start Action State handler
-void ftFox_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirLw_StartMotion(HSD_GObj* fighter_gobj);
 
 void ftFox_SpecialLwStart_Anim(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj);
@@ -444,8 +444,8 @@ u32 ftFox_SpecialS_GetCmdVar2(HSD_GObj* fighter_gobj);
 void ftFox_SpecialS_CopyGhostPosIndexed(HSD_GObj* fighter_gobj, s32 index,
                                         Vec3* ghostPos);
 f32 ftFox_SpecialS_ReturnFloatVarIndexed(HSD_GObj* fighter_gobj, s32 index);
-void ftFox_SpecialS_StartAction(HSD_GObj* fighter_gobj);
-void ftFox_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
+void ftFox_SpecialS_StartMotion(HSD_GObj* fighter_gobj);
+void ftFox_SpecialAirS_StartMotion(HSD_GObj* fighter_gobj);
 void ftFox_SpecialSStart_Anim(HSD_GObj* fighter_gobj);
 void ftFox_SpecialAirSStart_Anim(HSD_GObj* fighter_gobj);
 void ftFox_SpecialSStart_IASA(HSD_GObj* fighter_gobj);

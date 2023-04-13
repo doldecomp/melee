@@ -10,71 +10,71 @@
 
 #include <common_structs.h>
 
-ActionState as_table_mars[] = {
-    { 295, 0x00340211, 0x12000000, lbl_80136844, lbl_80136914, lbl_8013691C,
-      lbl_801369A4, func_800761C8 },
-    { 296, 0x00340211, 0x12000000, lbl_80136ADC, lbl_80136C8C, lbl_80136CFC,
-      lbl_80136D3C, func_800761C8 },
-    { 297, 0x00340211, 0x12000000, lbl_80136EE4, lbl_8013713C, lbl_80137144,
-      lbl_80137184, func_800761C8 },
-    { 298, 0x00340211, 0x12000000, lbl_80136EE4, lbl_8013713C, lbl_80137144,
-      lbl_80137184, func_800761C8 },
-    { 299, 0x00340611, 0x12000000, lbl_801368AC, lbl_80136918, lbl_8013695C,
-      lbl_801369E0, func_800761C8 },
-    { 300, 0x00340611, 0x12000000, lbl_80136BB4, lbl_80136CC4, lbl_80136D1C,
-      lbl_80136D78, func_800761C8 },
-    { 301, 0x00340611, 0x12000000, lbl_80137010, lbl_80137140, lbl_80137164,
-      lbl_801371C0, func_800761C8 },
-    { 302, 0x00340611, 0x12000000, lbl_80137010, lbl_80137140, lbl_80137164,
-      lbl_801371C0, func_800761C8 },
+ActionState ftMars_MotionStateTable[] = {
+    { 295, 0x00340211, 0x12000000, ftMars_80136844, ftMars_80136914,
+      ftMars_8013691C, ftMars_801369A4, ftCamera_UpdateCameraBox },
+    { 296, 0x00340211, 0x12000000, ftMars_80136ADC, ftMars_80136C8C,
+      ftMars_80136CFC, ftMars_80136D3C, ftCamera_UpdateCameraBox },
+    { 297, 0x00340211, 0x12000000, ftMars_80136EE4, ftMars_8013713C,
+      ftMars_80137144, ftMars_80137184, ftCamera_UpdateCameraBox },
+    { 298, 0x00340211, 0x12000000, ftMars_80136EE4, ftMars_8013713C,
+      ftMars_80137144, ftMars_80137184, ftCamera_UpdateCameraBox },
+    { 299, 0x00340611, 0x12000000, ftMars_801368AC, ftMars_80136918,
+      ftMars_8013695C, ftMars_801369E0, ftCamera_UpdateCameraBox },
+    { 300, 0x00340611, 0x12000000, ftMars_80136BB4, ftMars_80136CC4,
+      ftMars_80136D1C, ftMars_80136D78, ftCamera_UpdateCameraBox },
+    { 301, 0x00340611, 0x12000000, ftMars_80137010, ftMars_80137140,
+      ftMars_80137164, ftMars_801371C0, ftCamera_UpdateCameraBox },
+    { 302, 0x00340611, 0x12000000, ftMars_80137010, ftMars_80137140,
+      ftMars_80137164, ftMars_801371C0, ftCamera_UpdateCameraBox },
     { 303, 0x00340212, 0x13000000, ftMars_80137558, ftMars_801375B8,
-      ftMars_80137618, ftMars_8013767C, func_800761C8 },
+      ftMars_80137618, ftMars_8013767C, ftCamera_UpdateCameraBox },
     { 304, 0x00340212, 0x13000000, ftMars_801377B0, ftMars_80137810,
-      ftMars_80137870, ftMars_801378D4, func_800761C8 },
+      ftMars_80137870, ftMars_801378D4, ftCamera_UpdateCameraBox },
     { 305, 0x00340212, 0x13000000, ftMars_801377B0, ftMars_80137810,
-      ftMars_80137870, ftMars_801378D4, func_800761C8 },
+      ftMars_80137870, ftMars_801378D4, ftCamera_UpdateCameraBox },
     { 306, 0x00340212, 0x13000000, ftMars_80137B34, ftMars_80137B94,
-      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+      ftMars_80137BF4, ftMars_80137C50, ftCamera_UpdateCameraBox },
     { 307, 0x00340212, 0x13000000, ftMars_80137B34, ftMars_80137B94,
-      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+      ftMars_80137BF4, ftMars_80137C50, ftCamera_UpdateCameraBox },
     { 308, 0x00340212, 0x13000000, ftMars_80137B34, ftMars_80137B94,
-      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+      ftMars_80137BF4, ftMars_80137C50, ftCamera_UpdateCameraBox },
     { 309, 0x00340212, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
-      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
+      ftMars_80137F30, ftMars_80137F8C, ftCamera_UpdateCameraBox },
     { 310, 0x00340212, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
-      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
+      ftMars_80137F30, ftMars_80137F8C, ftCamera_UpdateCameraBox },
     { 311, 0x00340212, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
-      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
+      ftMars_80137F30, ftMars_80137F8C, ftCamera_UpdateCameraBox },
     { 312, 0x00340612, 0x13000000, ftMars_80137558, ftMars_801375B8,
-      ftMars_80137618, ftMars_8013767C, func_800761C8 },
+      ftMars_80137618, ftMars_8013767C, ftCamera_UpdateCameraBox },
     { 313, 0x00340612, 0x13000000, ftMars_801377B0, ftMars_80137810,
-      ftMars_80137870, ftMars_801378D4, func_800761C8 },
+      ftMars_80137870, ftMars_801378D4, ftCamera_UpdateCameraBox },
     { 314, 0x00340612, 0x13000000, ftMars_801377B0, ftMars_80137810,
-      ftMars_80137870, ftMars_801378D4, func_800761C8 },
+      ftMars_80137870, ftMars_801378D4, ftCamera_UpdateCameraBox },
     { 315, 0x00340612, 0x13000000, ftMars_80137B34, ftMars_80137B94,
-      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+      ftMars_80137BF4, ftMars_80137C50, ftCamera_UpdateCameraBox },
     { 316, 0x00340612, 0x13000000, ftMars_80137B34, ftMars_80137B94,
-      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+      ftMars_80137BF4, ftMars_80137C50, ftCamera_UpdateCameraBox },
     { 317, 0x00340612, 0x13000000, ftMars_80137B34, ftMars_80137B94,
-      ftMars_80137BF4, ftMars_80137C50, func_800761C8 },
+      ftMars_80137BF4, ftMars_80137C50, ftCamera_UpdateCameraBox },
     { 318, 0x00340612, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
-      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
+      ftMars_80137F30, ftMars_80137F8C, ftCamera_UpdateCameraBox },
     { 319, 0x00340612, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
-      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
+      ftMars_80137F30, ftMars_80137F8C, ftCamera_UpdateCameraBox },
     { 320, 0x00340612, 0x13000000, ftMars_80137ECC, ftMars_80137F2C,
-      ftMars_80137F30, ftMars_80137F8C, func_800761C8 },
-    { 321, 0x00340213, 0x14000000, lbl_801382E8, lbl_801383A8, lbl_80138638,
-      lbl_801388B4, func_800761C8 },
-    { 322, 0x00340613, 0x14000000, lbl_80138348, lbl_801384F0, lbl_8013873C,
-      lbl_80138940, func_800761C8 },
-    { 323, 0x00340214, 0x15000000, lbl_80138AA8, lbl_80138C20, lbl_80138C28,
-      lbl_80138CC0, func_800761C8 },
-    { 324, 0x00340214, 0x15000000, lbl_80138E68, lbl_80138FC0, lbl_80138FC8,
-      lbl_80139008, func_800761C8 },
-    { 325, 0x00340614, 0x15000000, lbl_80138B64, lbl_80138C24, lbl_80138C5C,
-      lbl_80138CFC, func_800761C8 },
-    { 326, 0x00340614, 0x15000000, lbl_80138F14, lbl_80138FC4, lbl_80138FE8,
-      lbl_80139044, func_800761C8 },
+      ftMars_80137F30, ftMars_80137F8C, ftCamera_UpdateCameraBox },
+    { 321, 0x00340213, 0x14000000, ftMars_801382E8, ftMars_801383A8,
+      ftMars_80138638, ftMars_801388B4, ftCamera_UpdateCameraBox },
+    { 322, 0x00340613, 0x14000000, ftMars_80138348, ftMars_801384F0,
+      ftMars_8013873C, ftMars_80138940, ftCamera_UpdateCameraBox },
+    { 323, 0x00340214, 0x15000000, ftMars_80138AA8, ftMars_80138C20,
+      ftMars_80138C28, ftMars_80138CC0, ftCamera_UpdateCameraBox },
+    { 324, 0x00340214, 0x15000000, ftMars_80138E68, ftMars_80138FC0,
+      ftMars_80138FC8, ftMars_80139008, ftCamera_UpdateCameraBox },
+    { 325, 0x00340614, 0x15000000, ftMars_80138B64, ftMars_80138C24,
+      ftMars_80138C5C, ftMars_80138CFC, ftCamera_UpdateCameraBox },
+    { 326, 0x00340614, 0x15000000, ftMars_80138F14, ftMars_80138FC4,
+      ftMars_80138FE8, ftMars_80139044, ftCamera_UpdateCameraBox },
 };
 
 char lbl_803CF820[] = "PlMs.dat";
@@ -116,8 +116,8 @@ Fighter_CostumeStrings lbl_803CFA18[] = {
 void ftMars_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    func_80074A4C(gobj, 0, 0);
-    func_80074A4C(gobj, 1, 0);
+    ftParts_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 1, 0);
     fp->ev.ms.x222C = 0;
 }
 
@@ -191,18 +191,18 @@ void ftMars_OnKnockbackExit(HSD_GObj* gobj)
 
 // 801365A8 00133188
 // https://decomp.me/scratch/Jqd2A
-void lbl_801365A8(HSD_GObj* gobj)
+void ftMars_801365A8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32 result;
     if (!fp->x2219_flag.bits.b0) {
-        result = func_800872A4(gobj);
+        result = ftLib_800872A4(gobj);
         switch (result) {
         case 0x12:
-            ef_Spawn(0x4F2, gobj, fp->x5E8_fighterBones->x0_jobj);
+            efSync_Spawn(0x4F2, gobj, fp->x5E8_fighterBones->x0_jobj);
             break;
         case 0x1A:
-            ef_Spawn(0x511, gobj, fp->x5E8_fighterBones->x0_jobj);
+            efSync_Spawn(0x511, gobj, fp->x5E8_fighterBones->x0_jobj);
             break;
         }
         fp->x2219_flag.bits.b0 = 1;
@@ -216,18 +216,18 @@ void lbl_801365A8(HSD_GObj* gobj)
 
 // 8013666C 0013324C
 // https://decomp.me/scratch/Jqd2A
-void lbl_8013666C(HSD_GObj* gobj)
+void ftMars_8013666C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32 result;
     if (!fp->x2219_flag.bits.b0) {
-        result = func_800872A4(gobj);
+        result = ftLib_800872A4(gobj);
         switch (result) {
         case 0x12:
-            ef_Spawn(0x4F3, gobj, fp->x5E8_fighterBones->x0_jobj);
+            efSync_Spawn(0x4F3, gobj, fp->x5E8_fighterBones->x0_jobj);
             break;
         case 0x1A:
-            ef_Spawn(0x512, gobj, fp->x5E8_fighterBones->x0_jobj);
+            efSync_Spawn(0x512, gobj, fp->x5E8_fighterBones->x0_jobj);
             break;
         }
         fp->x2219_flag.bits.b0 = 1;
@@ -241,7 +241,7 @@ void lbl_8013666C(HSD_GObj* gobj)
 
 // 80136730 00133310
 // https://decomp.me/scratch/Jqd2A
-void lbl_80136730(HSD_GObj* gobj)
+void ftMars_80136730(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     fp->x2200_ftcmd_var0 = 0;

@@ -4,7 +4,7 @@
 #include <melee/ft/types.h>
 #include <Runtime/platform.h>
 
-extern Fighter_DemoStrings lbl_803C59D8;
-extern char* lbl_803C5A20[];
+extern Fighter_DemoStrings ftMario_DemoMotionFilenames;
+extern char* ftMario_DemoViMotionFilenames[];
 
 #endif

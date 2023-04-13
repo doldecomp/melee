@@ -30,7 +30,7 @@ Fighter_CostumeStrings lbl_803D35D8[] = {
 
 void ftZakoGirl_OnDeath(HSD_GObj* gobj)
 {
-    func_80074A4C(gobj, 0, 0);
+    ftParts_80074A4C(gobj, 0, 0);
 }
 
 void ftZakoGirl_OnLoad(HSD_GObj* gobj)

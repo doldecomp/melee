@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void func_801CD2D4(void);
+void grIzumi_801CD2D4(void);
 
 #endif

@@ -27,8 +27,8 @@
 .section .text
 
 # https://decomp.me/scratch/2RGzd
-.global func_800222A4
-func_800222A4:
+.global lbRefract_800222A4
+lbRefract_800222A4:
 /* 800222A4 0001EE84  7C 08 02 A6 */	mflr r0
 /* 800222A8 0001EE88  3C 80 80 43 */	lis r4, .L_804336D0@ha
 /* 800222AC 0001EE8C  90 01 00 04 */	stw r0, 4(r1)
@@ -44,7 +44,7 @@ func_800222A4:
 /* 800222D4 0001EEB4  38 BE 01 5C */	addi r5, r30, 0x15c
 /* 800222D8 0001EEB8  38 8D AD 48 */	addi r4, r13, skip8_804D63E8@sda21
 /* 800222DC 0001EEBC  93 F7 00 00 */	stw r31, 0(r23)
-/* 800222E0 0001EEC0  4B FF 49 85 */	bl func_80016C64
+/* 800222E0 0001EEC0  4B FF 49 85 */	bl lbArchive_80016C64
 /* 800222E4 0001EEC4  38 60 01 40 */	li r3, 0x140
 /* 800222E8 0001EEC8  38 80 00 F0 */	li r4, 0xf0
 /* 800222EC 0001EECC  38 A0 00 04 */	li r5, 4
@@ -89,10 +89,10 @@ func_800222A4:
 /* 80022384 0001EF64  38 A0 00 03 */	li r5, 3
 /* 80022388 0001EF68  38 C0 00 20 */	li r6, 0x20
 /* 8002238C 0001EF6C  38 E0 00 20 */	li r7, 0x20
-/* 80022390 0001EF70  4B FF FE 0D */	bl local_8002219C
+/* 80022390 0001EF70  4B FF FE 0D */	bl lbRefract_8002219C
 /* 80022394 0001EF74  38 61 00 0C */	addi r3, r1, 0xc
 /* 80022398 0001EF78  38 98 00 00 */	addi r4, r24, 0
-/* 8002239C 0001EF7C  4B FF F9 4D */	bl local_80021CE8
+/* 8002239C 0001EF7C  4B FF F9 4D */	bl lbRefract_80021CE8
 /* 800223A0 0001EF80  80 BA 00 00 */	lwz r5, 0(r26)
 /* 800223A4 0001EF84  38 7E 00 F4 */	addi r3, r30, 0xf4
 /* 800223A8 0001EF88  80 9E 00 48 */	lwz r4, 0x48(r30)
@@ -161,8 +161,8 @@ func_800222A4:
 .section .text
 
 # https://decomp.me/scratch/aGGLH
-.global func_8002247C
-func_8002247C:
+.global lbRefract_8002247C
+lbRefract_8002247C:
 /* 8002247C 0001F05C  7C 08 02 A6 */	mflr r0
 /* 80022480 0001F060  3C 80 80 43 */	lis r4, .L_804336D0@ha
 /* 80022484 0001F064  90 01 00 04 */	stw r0, 4(r1)
@@ -226,8 +226,8 @@ func_8002247C:
 /* 8002255C 0001F13C  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/ZtsBi
-.global func_80022560
-func_80022560:
+.global lbRefract_80022560
+lbRefract_80022560:
 /* 80022560 0001F140  7C 08 02 A6 */	mflr r0
 /* 80022564 0001F144  3C 60 80 43 */	lis r3, .L_804336D0@ha
 /* 80022568 0001F148  90 01 00 04 */	stw r0, 4(r1)
@@ -260,8 +260,8 @@ func_80022560:
 /* 800225D0 0001F1B0  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/ioqOn
-.global func_800225D4
-func_800225D4:
+.global lbRefract_800225D4
+lbRefract_800225D4:
 /* 800225D4 0001F1B4  7C 08 02 A6 */	mflr r0
 /* 800225D8 0001F1B8  38 60 00 00 */	li r3, 0
 /* 800225DC 0001F1BC  90 01 00 04 */	stw r0, 4(r1)
@@ -558,8 +558,8 @@ lbRefract_PObjLoad:
 .section .text
 
 # https://decomp.me/scratch/n58XM
-.global func_80022998
-func_80022998:
+.global lbRefract_80022998
+lbRefract_80022998:
 /* 80022998 0001F578  7C 08 02 A6 */	mflr r0
 /* 8002299C 0001F57C  3C 60 80 43 */	lis r3, .L_804336D0@ha
 /* 800229A0 0001F580  90 01 00 04 */	stw r0, 4(r1)
@@ -702,8 +702,8 @@ func_80022998:
 /* 80022BB4 0001F794  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/1k4lM
-.global func_80022BB8
-func_80022BB8:
+.global lbRefract_80022BB8
+lbRefract_80022BB8:
 /* 80022BB8 0001F798  3C 60 80 43 */	lis r3, .L_804336D0@ha
 /* 80022BBC 0001F79C  38 83 36 D0 */	addi r4, r3, .L_804336D0@l
 /* 80022BC0 0001F7A0  80 64 00 00 */	lwz r3, 0(r4)
@@ -854,8 +854,8 @@ str_0_804D3868:
 .section .text
 
 # https://decomp.me/scratch/1OXja
-.global func_80022BD0
-func_80022BD0:
+.global lbRefract_80022BD0
+lbRefract_80022BD0:
 /* 80022BD0 0001F7B0  7C 08 02 A6 */	mflr r0
 /* 80022BD4 0001F7B4  3C 60 80 43 */	lis r3, .L_804336D0@ha
 /* 80022BD8 0001F7B8  90 01 00 04 */	stw r0, 4(r1)

@@ -3,8 +3,8 @@
 .section .text
 
 # https://decomp.me/scratch/uF4oA
-.global local_8001E560
-local_8001E560:
+.global lbAnim_8001E560
+lbAnim_8001E560:
 /* 8001E560 0001B140  7C 08 02 A6 */	mflr r0
 /* 8001E564 0001B144  90 01 00 04 */	stw r0, 4(r1)
 /* 8001E568 0001B148  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -114,8 +114,8 @@ local_8001E560:
 /* 8001E6D4 0001B2B4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/FEOFs
-.global func_8001E6D8
-func_8001E6D8:
+.global lbAnim_8001E6D8
+lbAnim_8001E6D8:
 /* 8001E6D8 0001B2B8  7C 08 02 A6 */	mflr r0
 /* 8001E6DC 0001B2BC  90 01 00 04 */	stw r0, 4(r1)
 /* 8001E6E0 0001B2C0  94 21 FF C0 */	stwu r1, -0x40(r1)
@@ -144,7 +144,7 @@ func_8001E6D8:
 /* 8001E738 0001B318  48 34 6B F5 */	bl HSD_AObjSetEndFrame
 /* 8001E73C 0001B31C  38 7D 00 00 */	addi r3, r29, 0
 /* 8001E740 0001B320  38 9E 00 00 */	addi r4, r30, 0
-/* 8001E744 0001B324  4B FF FE 1D */	bl local_8001E560
+/* 8001E744 0001B324  4B FF FE 1D */	bl lbAnim_8001E560
 /* 8001E748 0001B328  38 83 00 00 */	addi r4, r3, 0
 /* 8001E74C 0001B32C  38 7F 00 00 */	addi r3, r31, 0
 /* 8001E750 0001B330  48 34 59 05 */	bl HSD_AObjSetFObj
@@ -193,8 +193,8 @@ func_8001E6D8:
 /* 8001E7E4 0001B3C4  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/1cBn6
-.global func_8001E7E8
-func_8001E7E8:
+.global lbAnim_8001E7E8
+lbAnim_8001E7E8:
 /* 8001E7E8 0001B3C8  7C 08 02 A6 */	mflr r0
 /* 8001E7EC 0001B3CC  90 01 00 04 */	stw r0, 4(r1)
 /* 8001E7F0 0001B3D0  94 21 FF C0 */	stwu r1, -0x40(r1)

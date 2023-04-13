@@ -7,19 +7,19 @@
 
 #include <baselib/random.h>
 
-void ftMario_SpecialHi_StartAction(HSD_GObj* gobj)
+void ftMario_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp;
 
     fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALHI, 0, NULL, 0.0f,
-                                       1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    Fighter_ChangeMotionState(gobj, AS_MARIO_SPECIALHI, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
+    ftAnim_8006EBA4(gobj);
 }
 
-void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
+void ftMario_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftMarioAttributes* sa;
@@ -36,9 +36,9 @@ void ftMario_SpecialAirHi_StartAction(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x =
         (f32) (fp->x80_self_vel.x * sa->x2C_MARIO_SUPERJUMP_VEL_X);
-    Fighter_ActionStateChange_800693AC(gobj, AS_MARIO_SPECIALAIRHI, 0, NULL,
-                                       0.0f, 1.0f, 0.0f);
-    func_8006EBA4(gobj);
+    Fighter_ChangeMotionState(gobj, AS_MARIO_SPECIALAIRHI, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
+    ftAnim_8006EBA4(gobj);
 }
 
 // 0x800E1B24
@@ -50,8 +50,8 @@ void ftMario_SpecialHi_Anim(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        func_80096900(gobj, 0, 1, 0, sa->x18_MARIO_SUPERJUMP_FREEFALL_MOBILITY,
-                      sa->x1C_MARIO_SUPERJUMP_LANDING_LAG);
+        ft_80096900(gobj, 0, 1, 0, sa->x18_MARIO_SUPERJUMP_FREEFALL_MOBILITY,
+                    sa->x1C_MARIO_SUPERJUMP_LANDING_LAG);
     }
 }
 
@@ -118,8 +118,8 @@ inline void ftMario_SpecialHi_CalcAngle(HSD_GObj* gobj)
         if (abs(fp->input.x620_lstick_x) >
             sa->x20_MARIO_SUPERJUMP_REVERSE_STICK_RANGE)
         {
-            func_8007D9FC(fp);
-            func_80075AF0(fp, 0, (f32) (HALF_PI * (f64) fp->facing_dir));
+            ftCommon_8007D9FC(fp);
+            ftParts_80075AF0(fp, 0, (f32) (HALF_PI * (f64) fp->facing_dir));
         }
     }
 }
@@ -147,9 +147,9 @@ void ftMario_SpecialHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->xE0_ground_or_air == GA_Air) {
-        func_80085154(gobj);
+        ft_80085154(gobj);
     } else {
-        func_80084FA8(gobj);
+        ft_80084FA8(gobj);
     }
 }
 
@@ -166,7 +166,7 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
     attr_ptr = &(fp->x110_attr);
 
     if ((u32) fp->x2200_ftcmd_var0 != 0U) {
-        func_80085154(gobj);
+        ft_80085154(gobj);
         fp->x80_self_vel.x =
             (f32) (fp->x80_self_vel.x * sa->x34_MARIO_SUPERJUMP_VEL_MUL);
         fp->x80_self_vel.y =
@@ -175,9 +175,9 @@ void ftMario_SpecialAirHi_Phys(HSD_GObj* gobj)
             (f32) (fp->x80_self_vel.z * sa->x34_MARIO_SUPERJUMP_VEL_MUL);
         return;
     }
-    func_8007D494(fp, sa->x30_MARIO_SUPERJUMP_GRAVITY,
-                  attr_ptr->x170_TerminalVelocity);
-    func_8007CF58(fp);
+    ftCommon_8007D494(fp, sa->x30_MARIO_SUPERJUMP_GRAVITY,
+                      attr_ptr->x170_TerminalVelocity);
+    ftCommon_8007CF58(fp);
 }
 
 // 0x800E1F40
@@ -190,7 +190,7 @@ void ftMario_SpecialHi_CheckLanding(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
 
     sa = (ftMarioAttributes*) fp->x2D4_specialAttributes;
-    func_800D5CB0(gobj, 0, sa->x1C_MARIO_SUPERJUMP_LANDING_LAG);
+    ft_800D5CB0(gobj, 0, sa->x1C_MARIO_SUPERJUMP_LANDING_LAG);
 }
 
 // 0x800E1F70
@@ -202,13 +202,12 @@ void ftMario_SpecialHi_Coll(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     if (fp->xE0_ground_or_air == GA_Air) {
         if (fp->x2200_ftcmd_var0 == 0 || fp->x80_self_vel.y >= 0.0f) {
-            func_80083B68(gobj);
+            ft_80083B68(gobj);
         } else {
-            func_800831CC(gobj, &func_80096CC8,
-                          &ftMario_SpecialHi_CheckLanding);
+            ft_800831CC(gobj, &ft_80096CC8, &ftMario_SpecialHi_CheckLanding);
         }
     } else {
-        func_80084104(gobj);
+        ft_80084104(gobj);
     }
 }
 

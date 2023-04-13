@@ -4,11 +4,11 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
 
-void func_80155014(HSD_GObj*);
+void ftMasterHand_80155014(HSD_GObj*);
 
-void lbl_80154FF0(HSD_GObj* gobj);
-void lbl_80155010(HSD_GObj* gobj);
-void func_80155014(HSD_GObj* gobj);
-void lbl_80154FAC(HSD_GObj* arg0);
+void ftMasterHand_80154FF0(HSD_GObj* gobj);
+void ftMasterHand_80155010(HSD_GObj* gobj);
+void ftMasterHand_80155014(HSD_GObj* gobj);
+void ftMasterHand_80154FAC(HSD_GObj* arg0);
 
 #endif

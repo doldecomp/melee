@@ -4,18 +4,18 @@
 #include <baselib/forward.h>
 
 /// 11 Punch
-void lbl_80152370(HSD_GObj* gobj);
+void ftMasterHand_80152370(HSD_GObj* gobj);
 
-void func_8015247C(HSD_GObj* gobj);
-void func_801525E0(HSD_GObj* gobj);
-void lbl_8015236C(HSD_GObj* gobj);
-void lbl_801523BC(HSD_GObj* gobj);
-void lbl_80152414(HSD_GObj* gobj);
-void lbl_80152458(HSD_GObj* arg0);
-void lbl_80152478(HSD_GObj* gobj);
-void lbl_801524C8(HSD_GObj* gobj);
-void lbl_80152544(HSD_GObj* gobj);
-void lbl_80152588(HSD_GObj* gobj);
-void lbl_801525DC(HSD_GObj* gobj);
+void ftMasterHand_8015247C(HSD_GObj* gobj);
+void ftMasterHand_801525E0(HSD_GObj* gobj);
+void ftMasterHand_8015236C(HSD_GObj* gobj);
+void ftMasterHand_801523BC(HSD_GObj* gobj);
+void ftMasterHand_80152414(HSD_GObj* gobj);
+void ftMasterHand_80152458(HSD_GObj* arg0);
+void ftMasterHand_80152478(HSD_GObj* gobj);
+void ftMasterHand_801524C8(HSD_GObj* gobj);
+void ftMasterHand_80152544(HSD_GObj* gobj);
+void ftMasterHand_80152588(HSD_GObj* gobj);
+void ftMasterHand_801525DC(HSD_GObj* gobj);
 
 #endif

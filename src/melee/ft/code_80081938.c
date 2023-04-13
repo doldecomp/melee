@@ -13,7 +13,7 @@ static f32 const lbl_804D83A0 = -1.0F;
 static f32 const lbl_804D83A4 = 1.0F;
 
 #pragma push
-asm void func_80081938(HSD_GObj* fighter_gobj)
+asm void ft_80081938(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 80081938 0007E518  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -49,7 +49,7 @@ asm void func_80081938(HSD_GObj* fighter_gobj)
 
 #else
 
-void func_80081938(HSD_GObj* fighter_gobj)
+void ft_80081938(HSD_GObj* fighter_gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -59,7 +59,7 @@ void func_80081938(HSD_GObj* fighter_gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_800819A8(HSD_GObj* fighter_gobj)
+asm void ft_800819A8(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 800819A8 0007E588  94 21 FF 88 */	stwu r1, -0x78(r1)
@@ -89,7 +89,7 @@ asm void func_800819A8(HSD_GObj* fighter_gobj)
 
 #else
 
-void func_800819A8(HSD_GObj* fighter_gobj)
+void ft_800819A8(HSD_GObj* fighter_gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -99,7 +99,7 @@ void func_800819A8(HSD_GObj* fighter_gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_80081A00(void)
+asm void ft_80081A00(void)
 { // clang-format off
     nofralloc
 /* 80081A00 0007E5E0  7C 08 02 A6 */	mflr r0
@@ -141,13 +141,13 @@ asm void func_80081A00(void)
 /* 80081A90 0007E670  48 00 00 64 */	b lbl_80081AF4
 lbl_80081A94:
 /* 80081A94 0007E674  7F 83 E3 78 */	mr r3, r28
-/* 80081A98 0007E678  48 1E A1 D1 */	bl func_8026BC68
+/* 80081A98 0007E678  48 1E A1 D1 */	bl it_8026BC68
 /* 80081A9C 0007E67C  2C 03 00 00 */	cmpwi r3, 0
 /* 80081AA0 0007E680  41 82 00 50 */	beq lbl_80081AF0
 /* 80081AA4 0007E684  83 BC 00 2C */	lwz r29, 0x2c(r28)
 /* 80081AA8 0007E688  38 7B 19 30 */	addi r3, r27, 0x1930
 /* 80081AAC 0007E68C  38 9D 0B 54 */	addi r4, r29, 0xb54
-/* 80081AB0 0007E690  4B F9 2B 89 */	bl func_80014638
+/* 80081AB0 0007E690  4B F9 2B 89 */	bl lb_80014638
 /* 80081AB4 0007E694  2C 03 00 00 */	cmpwi r3, 0
 /* 80081AB8 0007E698  41 82 00 38 */	beq lbl_80081AF0
 /* 80081ABC 0007E69C  C0 3D 00 4C */	lfs f1, 0x4c(r29)
@@ -174,7 +174,7 @@ lbl_80081AF4:
 /* 80081B00 0007E6E0  2C 00 00 00 */	cmpwi r0, 0
 /* 80081B04 0007E6E4  41 82 00 1C */	beq lbl_80081B20
 /* 80081B08 0007E6E8  7F C3 F3 78 */	mr r3, r30
-/* 80081B0C 0007E6EC  48 04 55 31 */	bl func_800C703C
+/* 80081B0C 0007E6EC  48 04 55 31 */	bl ft_800C703C
 /* 80081B10 0007E6F0  38 00 00 00 */	li r0, 0
 /* 80081B14 0007E6F4  90 1F 19 50 */	stw r0, 0x1950(r31)
 /* 80081B18 0007E6F8  38 60 00 01 */	li r3, 1
@@ -192,7 +192,7 @@ lbl_80081B24:
 
 #else
 
-void func_80081A00(void)
+void ft_80081A00(void)
 {
     NOT_IMPLEMENTED;
 }

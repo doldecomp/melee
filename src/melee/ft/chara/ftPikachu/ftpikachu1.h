@@ -5,7 +5,7 @@
 #include <Runtime/platform.h>
 #include <sysdolphin/baselib/forward.h>
 
-extern ActionState as_table_pikachu[];
+extern ActionState ftPikachu_MotionStateTable[];
 extern char lbl_803CE0B8[];
 extern char lbl_803CE0C4[];
 extern Fighter_CostumeStrings lbl_803CE2A0[];

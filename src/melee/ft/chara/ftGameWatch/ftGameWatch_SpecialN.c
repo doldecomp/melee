@@ -65,13 +65,13 @@ static asm void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
 /* 8014E574 0014B154  C0 02 A4 60 */	lfs f0, 0.0f
 /* 8014E578 0014B158  D0 21 00 3C */	stfs f1, 0x3c(r1)
 /* 8014E57C 0014B15C  D0 01 00 40 */	stfs f0, 0x40(r1)
-/* 8014E580 0014B160  4B F2 6A 8D */	bl func_8007500C
+/* 8014E580 0014B160  4B F2 6A 8D */	bl ftParts_8007500C
 /* 8014E584 0014B164  80 BF 05 E8 */	lwz r5, 0x5e8(r31)
 /* 8014E588 0014B168  54 60 20 36 */	slwi r0, r3, 4
 /* 8014E58C 0014B16C  38 81 00 38 */	addi r4, r1, 0x38
 /* 8014E590 0014B170  7C 65 00 2E */	lwzx r3, r5, r0
 /* 8014E594 0014B174  38 A1 00 44 */	addi r5, r1, 0x44
-/* 8014E598 0014B178  4B EB CC 35 */	bl func_8000B1CC
+/* 8014E598 0014B178  4B EB CC 35 */	bl lb_8000B1CC
 /* 8014E59C 0014B17C  38 60 00 00 */	li r3, 0
 /* 8014E5A0 0014B180  83 BE 00 2C */	lwz r29, 0x2c(r30)
 /* 8014E5A4 0014B184  20 03 00 05 */	subfic r0, r3, 5
@@ -106,7 +106,7 @@ lbl_8014E5E4:
 /* 8014E60C 0014B1EC  90 BD 22 40 */	stw r5, 0x2240(r29)
 /* 8014E610 0014B1F0  38 A0 00 7A */	li r5, 0x7a
 /* 8014E614 0014B1F4  C0 3F 00 2C */	lfs f1, 0x2c(r31)
-/* 8014E618 0014B1F8  48 17 9D 65 */	bl func_802C837C
+/* 8014E618 0014B1F8  48 17 9D 65 */	bl it_802C837C
 lbl_8014E61C:
 /* 8014E61C 0014B1FC  38 00 00 00 */	li r0, 0
 /* 8014E620 0014B200  90 1F 21 BC */	stw r0, 0x21bc(r31)
@@ -163,9 +163,9 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
             sp38.x = 2.5f;
             sp38.y = 6.5f;
             sp38.z = 0.0f;
-            func_8000B1CC(
-                fp->x5E8_fighterBones[func_8007500C(fp, 0x1F)].x0_jobj, &sp38,
-                &sp44);
+            lb_8000B1CC(
+                fp->x5E8_fighterBones[ftParts_8007500C(fp, 0x1F)].x0_jobj,
+                &sp38, &sp44);
             temp_fp = GET_FIGHTER(fighter_gobj);
             i = 5;
             for (i -= 5; i < 5; i++) {
@@ -180,7 +180,7 @@ static void ftGameWatch_SpecialN_CreateSausage(HSD_GObj* fighter_gobj)
             temp_fp->ev.gw.x2244_chefVar2 = temp_fp->ev.gw.x2240_chefVar1;
             temp_r6 = temp_r5;
             temp_fp->ev.gw.x2240_chefVar1 = temp_r5;
-            func_802C837C(fighter_gobj, &sp44, 0x7A, temp_r6, fp->facing_dir);
+            it_802C837C(fighter_gobj, &sp44, 0x7A, temp_r6, fp->facing_dir);
         }
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }
@@ -202,24 +202,24 @@ static inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* fighter_gobj)
 // 0x8014E644
 // https://decomp.me/scratch/VyJIm // Mr. Game & Watch's grounded Chef Action
 // State handler
-void ftGameWatch_SpecialN_StartAction(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialN_StartMotion(HSD_GObj* fighter_gobj)
 {
     GET_FIGHTER(fighter_gobj)->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, AS_GAMEWATCH_SPECIALN, 0, NULL,
+                              0.0f, 1.0f, 0.0f);
+    ftAnim_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialN_SetVars(fighter_gobj);
 }
 
 // 0x8014E6C0
 // https://decomp.me/scratch/VyJIm // Mr. Game & Watch's aerial Chef Action
 // State handler
-void ftGameWatch_SpecialAirN_StartAction(HSD_GObj* fighter_gobj)
+void ftGameWatch_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj)
 {
     GET_FIGHTER(fighter_gobj)->x80_self_vel.y = 0.0f;
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN,
-                                       0, NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN, 0, NULL,
+                              0.0f, 1.0f, 0.0f);
+    ftAnim_8006EBA4(fighter_gobj);
     ftGameWatch_SpecialN_SetVars(fighter_gobj);
 }
 
@@ -252,7 +252,7 @@ void ftGameWatch_SpecialN_Anim(HSD_GObj* fighter_gobj)
 
     ftGameWatch_SpecialN_ChefLoop(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_8008A2BC(fighter_gobj);
+        ft_8008A2BC(fighter_gobj);
     }
 }
 
@@ -285,7 +285,7 @@ void ftGameWatch_SpecialAirN_Anim(HSD_GObj* fighter_gobj)
 
     ftGameWatch_SpecialAirN_ChefLoop(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
-        func_800CC730(fighter_gobj);
+        ft_800CC730(fighter_gobj);
 }
 
 // 0x8014E87C
@@ -331,13 +331,13 @@ void ftGameWatch_SpecialAirN_IASA(HSD_GObj* fighter_gobj)
 // 0x8014E984 - Mr. Game & Watch's grounded Chef Physics callback
 void ftGameWatch_SpecialN_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084F3C(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
 }
 
 // 0x8014E9A4 - Mr. Game & Watch's aerial Chef Physics callback
 void ftGameWatch_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084EEC(fighter_gobj);
+    ft_80084EEC(fighter_gobj);
 }
 
 // 0x8014E9C4
@@ -345,7 +345,7 @@ void ftGameWatch_SpecialAirN_Phys(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_SpecialN_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_800827A0(fighter_gobj) == false)
+    if (ft_800827A0(fighter_gobj) == false)
         ftGameWatch_SpecialN_GroundToAir(fighter_gobj);
 }
 
@@ -354,7 +354,7 @@ void ftGameWatch_SpecialN_Coll(HSD_GObj* fighter_gobj)
 // callback
 void ftGameWatch_SpecialAirN_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != false)
+    if (ft_80081D0C(fighter_gobj) != false)
         ftGameWatch_SpecialAirN_AirToGround(fighter_gobj);
 }
 
@@ -365,10 +365,10 @@ void ftGameWatch_SpecialN_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN,
-                                       FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN,
+                              FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     GET_FIGHTER(fighter_gobj)->cb.x21BC_callback_Accessory4 =
         &ftGameWatch_SpecialN_CreateSausage;
 }
@@ -380,10 +380,10 @@ void ftGameWatch_SpecialAirN_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN,
-                                       FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(fighter_gobj, AS_GAMEWATCH_SPECIALN,
+                              FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     GET_FIGHTER(fighter_gobj)->cb.x21BC_callback_Accessory4 =
         &ftGameWatch_SpecialN_CreateSausage;
 }
@@ -401,11 +401,11 @@ void ftGameWatch_SpecialN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
     u8 _[4];
 #endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALN,
-                                       FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
-                                       anim_frame - 1.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_GAMEWATCH_SPECIALN,
+                              FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
+                              anim_frame - 1.0f, 1.0f, 0.0f);
 
-    func_8006EBA4(fighter_gobj);
+    ftAnim_8006EBA4(fighter_gobj);
 
 #ifdef MUST_MATCH
     /// @todo Repeated assignment
@@ -432,10 +432,10 @@ void ftGameWatch_SpecialAirN_Loop(HSD_GObj* fighter_gobj, f32 anim_frame)
     u8 _[4];
 #endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN,
-                                       FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
-                                       anim_frame - 1.0f, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, AS_GAMEWATCH_SPECIALAIRN,
+                              FTGAMEWATCH_SPECIALN_COLL_FLAG, NULL,
+                              anim_frame - 1.0f, 1.0f, 0.0f);
+    ftAnim_8006EBA4(fighter_gobj);
 
 #ifdef MUST_MATCH
     fp = fp = GET_FIGHTER(fighter_gobj);

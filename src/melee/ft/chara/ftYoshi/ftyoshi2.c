@@ -60,18 +60,18 @@ static inline void spawnEffect(HSD_GObj* fighter_gobj)
     s32* x1CC;
     Fighter* fp;
     fp = GET_FIGHTER(fighter_gobj);
-    func_80074B0C(fighter_gobj, 0, 0);
-    func_8007B0C0(fighter_gobj, 0);
+    ftParts_80074B0C(fighter_gobj, 0, 0);
+    ftColl_8007B0C0(fighter_gobj, 0);
 
     x1CC = &fp->x110_attr.x1CC;
-    bone_idx = func_8007500C(fp, 4);
+    bone_idx = ftParts_8007500C(fp, 4);
     fp2 = GET_FIGHTER(fighter_gobj);
     jobj = fp->x5E8_fighterBones[bone_idx].x0_jobj;
 
     efAsync_Spawn(fighter_gobj, &fp2->x60C, 4U, 0x4CFU, jobj, x1CC);
 }
 
-void lbl_8012C030(HSD_GObj* fighter_gobj)
+void ftYoshi_8012C030(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -80,34 +80,34 @@ void lbl_8012C030(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->sv.ys.unk2.x0 += lbl_804D9A28;
-    func_80092BCC(fighter_gobj);
-    if (func_800925A4(fighter_gobj)) {
+    ft_80092BCC(fighter_gobj);
+    if (ft_800925A4(fighter_gobj)) {
         spawnEffect(fighter_gobj);
     } else if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_800928CC(fighter_gobj);
+        ft_800928CC(fighter_gobj);
     } else {
-        func_8012B8A4(fighter_gobj);
+        ftYoshi_8012B8A4(fighter_gobj);
     }
 }
 
-void lbl_8012C114(HSD_GObj* fighter_gobj)
+void ftYoshi_8012C114(HSD_GObj* fighter_gobj)
 {
-    if (!func_80093694() && !func_8009515C(fighter_gobj) &&
-        !func_80099794(fighter_gobj) && !func_8009917C(fighter_gobj) &&
-        !func_800D8990(fighter_gobj) && !func_8009A080(fighter_gobj))
+    if (!ft_80093694() && !ft_8009515C(fighter_gobj) &&
+        !ft_80099794(fighter_gobj) && !ft_8009917C(fighter_gobj) &&
+        !ft_800D8990(fighter_gobj) && !ft_8009A080(fighter_gobj))
     {
         return;
     }
 }
 
-void lbl_8012C194(HSD_GObj* arg0)
+void ftYoshi_8012C194(HSD_GObj* arg0)
 {
-    func_80092870(arg0);
+    ft_80092870(arg0);
 }
 
-void lbl_8012C1B4(HSD_GObj* arg0)
+void ftYoshi_8012C1B4(HSD_GObj* arg0)
 {
-    func_800928AC(arg0);
+    ft_800928AC(arg0);
 }
 
 extern f32 const lbl_804D9A2C;
@@ -115,7 +115,7 @@ extern u8 lbl_803B75C0[];
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8012C1D4(HSD_GObj*)
+asm void ftYoshi_8012C1D4(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C1D4 00128DB4  7C 08 02 A6 */	mflr r0
@@ -132,20 +132,20 @@ asm void func_8012C1D4(HSD_GObj*)
 /* 8012C200 00128DE0  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8012C204 00128DE4  FC 60 08 90 */	fmr f3, f1
 /* 8012C208 00128DE8  C0 42 A0 48 */	lfs f2, lbl_804D9A28(r2)
-/* 8012C20C 00128DEC  4B F3 D1 A1 */	bl Fighter_ActionStateChange_800693AC
+/* 8012C20C 00128DEC  4B F3 D1 A1 */	bl Fighter_ChangeMotionState
 /* 8012C210 00128DF0  80 BF 01 08 */	lwz r5, 0x108(r31)
 /* 8012C214 00128DF4  38 7F 00 00 */	addi r3, r31, 0
 /* 8012C218 00128DF8  38 80 00 01 */	li r4, 1
 /* 8012C21C 00128DFC  80 A5 00 08 */	lwz r5, 8(r5)
-/* 8012C220 00128E00  4B F4 38 39 */	bl func_8006FA58
+/* 8012C220 00128E00  4B F4 38 39 */	bl ftAnim_8006FA58
 /* 8012C224 00128E04  38 7E 00 00 */	addi r3, r30, 0
 /* 8012C228 00128E08  38 80 00 00 */	li r4, 0
 /* 8012C22C 00128E0C  38 A0 00 01 */	li r5, 1
-/* 8012C230 00128E10  4B F4 88 DD */	bl func_80074B0C
+/* 8012C230 00128E10  4B F4 88 DD */	bl ftParts_80074B0C
 /* 8012C234 00128E14  83 BE 00 2C */	lwz r29, 0x2c(r30)
 /* 8012C238 00128E18  38 7E 00 00 */	addi r3, r30, 0
 /* 8012C23C 00128E1C  38 80 00 02 */	li r4, 2
-/* 8012C240 00128E20  4B F4 EE 81 */	bl func_8007B0C0
+/* 8012C240 00128E20  4B F4 EE 81 */	bl ftColl_8007B0C0
 /* 8012C244 00128E24  80 9D 01 0C */	lwz r4, 0x10c(r29)
 /* 8012C248 00128E28  3C 60 80 3B */	lis r3, lbl_803B75C0@ha
 /* 8012C24C 00128E2C  38 00 00 01 */	li r0, 1
@@ -172,17 +172,17 @@ asm void func_8012C1D4(HSD_GObj*)
 /* 8012C2A0 00128E80  80 01 00 44 */	lwz r0, 0x44(r1)
 /* 8012C2A4 00128E84  90 01 00 38 */	stw r0, 0x38(r1)
 /* 8012C2A8 00128E88  D0 01 00 48 */	stfs f0, 0x48(r1)
-/* 8012C2AC 00128E8C  4B F4 F3 01 */	bl func_8007B5AC
+/* 8012C2AC 00128E8C  4B F4 F3 01 */	bl ftColl_8007B5AC
 /* 8012C2B0 00128E90  7F C3 F3 78 */	mr r3, r30
-/* 8012C2B4 00128E94  4B F6 61 9D */	bl func_80092450
+/* 8012C2B4 00128E94  4B F6 61 9D */	bl ft_80092450
 /* 8012C2B8 00128E98  88 1F 22 1E */	lbz r0, 0x221e(r31)
 /* 8012C2BC 00128E9C  38 60 00 00 */	li r3, 0
 /* 8012C2C0 00128EA0  50 60 1F 38 */	rlwimi r0, r3, 3, 0x1c, 0x1c
 /* 8012C2C4 00128EA4  98 1F 22 1E */	stb r0, 0x221e(r31)
 /* 8012C2C8 00128EA8  7F C3 F3 78 */	mr r3, r30
-/* 8012C2CC 00128EAC  4B FF F5 D9 */	bl func_8012B8A4
+/* 8012C2CC 00128EAC  4B FF F5 D9 */	bl ftYoshi_8012B8A4
 /* 8012C2D0 00128EB0  7F E3 FB 78 */	mr r3, r31
-/* 8012C2D4 00128EB4  4B F6 5A 85 */	bl func_80091D58
+/* 8012C2D4 00128EB4  4B F6 5A 85 */	bl ft_80091D58
 /* 8012C2D8 00128EB8  80 01 00 6C */	lwz r0, 0x6c(r1)
 /* 8012C2DC 00128EBC  83 E1 00 64 */	lwz r31, 0x64(r1)
 /* 8012C2E0 00128EC0  83 C1 00 60 */	lwz r30, 0x60(r1)
@@ -194,7 +194,7 @@ asm void func_8012C1D4(HSD_GObj*)
 #pragma pop
 #endif
 
-void lbl_8012C2F4(HSD_GObj* fighter_gobj)
+void ftYoshi_8012C2F4(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -204,48 +204,48 @@ void lbl_8012C2F4(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     fp->sv.ys.unk2.x0 += lbl_804D9A28;
-    func_80092BCC(fighter_gobj);
+    ft_80092BCC(fighter_gobj);
 
-    if (func_800925A4(fighter_gobj)) {
+    if (ft_800925A4(fighter_gobj)) {
         spawnEffect(fighter_gobj);
     } else if (fp->sv.ys.unk2.xC != 0 ||
                (!(fp->x221B_b0 & 1) && !(fp->x2218_flag.bits.b3)))
     {
-        func_80092BE8(fighter_gobj);
+        ft_80092BE8(fighter_gobj);
     } else {
-        func_8012B8A4(fighter_gobj);
+        ftYoshi_8012B8A4(fighter_gobj);
     }
 }
 
-void lbl_8012C3EC(HSD_GObj* fighter_gobj)
+void ftYoshi_8012C3EC(HSD_GObj* fighter_gobj)
 {
-    if (!func_8009515C(fighter_gobj) && !func_80099794(fighter_gobj) &&
-        !func_8009917C(fighter_gobj) && !func_800D8990(fighter_gobj) &&
-        !func_8009A080(fighter_gobj))
+    if (!ft_8009515C(fighter_gobj) && !ft_80099794(fighter_gobj) &&
+        !ft_8009917C(fighter_gobj) && !ft_800D8990(fighter_gobj) &&
+        !ft_8009A080(fighter_gobj))
     {
         return;
     }
 }
 
-void lbl_8012C45C(HSD_GObj* arg0)
+void ftYoshi_8012C45C(HSD_GObj* arg0)
 {
-    func_80092B70(arg0);
+    ft_80092B70(arg0);
 }
 
-void lbl_8012C47C(HSD_GObj* arg0)
+void ftYoshi_8012C47C(HSD_GObj* arg0)
 {
-    func_80092BAC(arg0);
+    ft_80092BAC(arg0);
 }
 
-void func_8012C49C(HSD_GObj* fighter_gobj)
+void ftYoshi_8012C49C(HSD_GObj* fighter_gobj)
 {
-    Fighter_ActionStateChange_800693AC(
-        fighter_gobj, 0x157, 0, NULL, lbl_804D9A2C, lbl_804D9A28, lbl_804D9A2C);
+    Fighter_ChangeMotionState(fighter_gobj, 0x157, 0, NULL, lbl_804D9A2C,
+                              lbl_804D9A28, lbl_804D9A2C);
 
     {
         Fighter* fp0 = GET_FIGHTER(fighter_gobj);
-        func_80074B0C(fighter_gobj, 0, 0);
-        func_8007B0C0(fighter_gobj, 0);
+        ftParts_80074B0C(fighter_gobj, 0, 0);
+        ftColl_8007B0C0(fighter_gobj, 0);
 
         {
             /// @todo Unused stack.
@@ -255,7 +255,7 @@ void func_8012C49C(HSD_GObj* fighter_gobj)
 
             s32* x1CC = &fp0->x110_attr.x1CC;
 
-            ssize_t bone_idx = func_8007500C(fp0, 4);
+            ssize_t bone_idx = ftParts_8007500C(fp0, 4);
             Fighter* fp1 = GET_FIGHTER(fighter_gobj);
 
             /// @todo Why is this still using @c fp0?
@@ -266,7 +266,7 @@ void func_8012C49C(HSD_GObj* fighter_gobj)
     }
 }
 
-void lbl_8012C54C(HSD_GObj* fighter_gobj)
+void ftYoshi_8012C54C(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -277,32 +277,32 @@ void lbl_8012C54C(HSD_GObj* fighter_gobj)
     fp->sv.ys.unk2.x0 = fp->sv.ys.unk2.x0 + lbl_804D9A28;
 
     if (ftAnim_IsFramesRemaining(fighter_gobj) == 0)
-        func_8008A2BC(fighter_gobj);
+        ft_8008A2BC(fighter_gobj);
 }
 
-void lbl_8012C59C(HSD_GObj* arg0)
+void ftYoshi_8012C59C(HSD_GObj* arg0)
 {
-    if (!func_80099794(arg0)) {
+    if (!ft_80099794(arg0)) {
         /// @todo Weird control flow.
         return;
     }
 }
 
-void lbl_8012C5C0(HSD_GObj* arg0)
+void ftYoshi_8012C5C0(HSD_GObj* arg0)
 {
-    func_80092E10(arg0);
+    ft_80092E10(arg0);
 }
 
-void lbl_8012C5E0(HSD_GObj* arg0)
+void ftYoshi_8012C5E0(HSD_GObj* arg0)
 {
-    func_80092E30(arg0);
+    ft_80092E30(arg0);
 }
 
 extern f64 const lbl_804D9A30;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8012C600(HSD_GObj*)
+asm void ftYoshi_8012C600(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C600 001291E0  7C 08 02 A6 */	mflr r0
@@ -321,14 +321,14 @@ asm void func_8012C600(HSD_GObj*)
 /* 8012C634 00129214  83 E3 00 2C */	lwz r31, 0x2c(r3)
 /* 8012C638 00129218  FC 60 08 90 */	fmr f3, f1
 /* 8012C63C 0012921C  C0 42 A0 48 */	lfs f2, lbl_804D9A28
-/* 8012C640 00129220  4B F3 CD 6D */	bl Fighter_ActionStateChange_800693AC
-/* 8012C644 00129224  3C 60 80 09 */	lis r3, func_80093240@ha
-/* 8012C648 00129228  38 03 32 40 */	addi r0, r3, func_80093240@l
+/* 8012C640 00129220  4B F3 CD 6D */	bl Fighter_ChangeMotionState
+/* 8012C644 00129224  3C 60 80 09 */	lis r3, ft_80093240@ha
+/* 8012C648 00129228  38 03 32 40 */	addi r0, r3, ft_80093240@l
 /* 8012C64C 0012922C  90 1F 21 D0 */	stw r0, 0x21d0(r31)
 /* 8012C650 00129230  38 00 00 FE */	li r0, 0xfe
-/* 8012C654 00129234  3C 60 80 09 */	lis r3, func_800932DC@ha
+/* 8012C654 00129234  3C 60 80 09 */	lis r3, ft_800932DC@ha
 /* 8012C658 00129238  98 1F 06 70 */	stb r0, 0x670(r31)
-/* 8012C65C 0012923C  38 03 32 DC */	addi r0, r3, func_800932DC@l
+/* 8012C65C 0012923C  38 03 32 DC */	addi r0, r3, ft_800932DC@l
 /* 8012C660 00129240  90 1F 21 D8 */	stw r0, 0x21d8(r31)
 /* 8012C664 00129244  88 1F 22 1C */	lbz r0, 0x221c(r31)
 /* 8012C668 00129248  54 00 DF FF */	rlwinm. r0, r0, 0x1b, 0x1f, 0x1f
@@ -336,12 +336,12 @@ asm void func_8012C600(HSD_GObj*)
 /* 8012C670 00129250  38 7D 00 00 */	addi r3, r29, 0
 /* 8012C674 00129254  38 80 00 00 */	li r4, 0
 /* 8012C678 00129258  38 A0 00 01 */	li r5, 1
-/* 8012C67C 0012925C  4B F4 84 91 */	bl func_80074B0C
+/* 8012C67C 0012925C  4B F4 84 91 */	bl ftParts_80074B0C
 lbl_8012C680:
 /* 8012C680 00129260  83 9D 00 2C */	lwz r28, 0x2c(r29)
 /* 8012C684 00129264  38 7D 00 00 */	addi r3, r29, 0
 /* 8012C688 00129268  38 80 00 02 */	li r4, 2
-/* 8012C68C 0012926C  4B F4 EA 35 */	bl func_8007B0C0
+/* 8012C68C 0012926C  4B F4 EA 35 */	bl ftColl_8007B0C0
 /* 8012C690 00129270  80 9C 01 0C */	lwz r4, 0x10c(r28)
 /* 8012C694 00129274  3C 60 80 3B */	lis r3, lbl_803B75C0@ha
 /* 8012C698 00129278  38 00 00 01 */	li r0, 1
@@ -368,7 +368,7 @@ lbl_8012C680:
 /* 8012C6EC 001292CC  80 01 00 48 */	lwz r0, 0x48(r1)
 /* 8012C6F0 001292D0  90 01 00 3C */	stw r0, 0x3c(r1)
 /* 8012C6F4 001292D4  D0 01 00 4C */	stfs f0, 0x4c(r1)
-/* 8012C6F8 001292D8  4B F4 EE B5 */	bl func_8007B5AC
+/* 8012C6F8 001292D8  4B F4 EE B5 */	bl ftColl_8007B5AC
 /* 8012C6FC 001292DC  80 7F 19 A4 */	lwz r3, 0x19a4(r31)
 /* 8012C700 001292E0  3C 00 43 30 */	lis r0, 0x4330
 /* 8012C704 001292E4  80 8D AE B4 */	lwz r4, p_ftCommonData
@@ -403,9 +403,9 @@ lbl_8012C770:
 /* 8012C770 00129350  D0 1F 00 EC */	stfs f0, 0xec(r31)
 lbl_8012C774:
 /* 8012C774 00129354  7F A3 EB 78 */	mr r3, r29
-/* 8012C778 00129358  4B F6 5C D9 */	bl func_80092450
+/* 8012C778 00129358  4B F6 5C D9 */	bl ft_80092450
 /* 8012C77C 0012935C  7F E3 FB 78 */	mr r3, r31
-/* 8012C780 00129360  4B F6 55 D9 */	bl func_80091D58
+/* 8012C780 00129360  4B F6 55 D9 */	bl ft_80091D58
 /* 8012C784 00129364  80 01 00 7C */	lwz r0, 0x7c(r1)
 /* 8012C788 00129368  83 E1 00 74 */	lwz r31, 0x74(r1)
 /* 8012C78C 0012936C  83 C1 00 70 */	lwz r30, 0x70(r1)
@@ -418,31 +418,31 @@ lbl_8012C774:
 #pragma pop
 #endif
 
-void lbl_8012C7A4(HSD_GObj* fighter_gobj)
+void ftYoshi_8012C7A4(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_80093BC0(fighter_gobj);
+    ft_80093BC0(fighter_gobj);
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if (fp->sv.ys.unk2.xC) {
-            func_80092BE8(fighter_gobj);
+            ft_80092BE8(fighter_gobj);
         } else {
-            func_800928CC(fighter_gobj);
+            ft_800928CC(fighter_gobj);
         }
     }
 }
 
-void lbl_8012C80C(HSD_GObj* arg0) {}
+void ftYoshi_8012C80C(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012C810(HSD_GObj*)
+asm void ftYoshi_8012C810(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C810 001293F0  7C 08 02 A6 */	mflr r0
 /* 8012C814 001293F4  90 01 00 04 */	stw r0, 4(r1)
 /* 8012C818 001293F8  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8012C81C 001293FC  4B F6 6E 0D */	bl func_80093628
+/* 8012C81C 001293FC  4B F6 6E 0D */	bl ft_80093628
 /* 8012C820 00129400  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8012C824 00129404  38 21 00 08 */	addi r1, r1, 8
 /* 8012C828 00129408  7C 08 03 A6 */	mtlr r0
@@ -453,13 +453,13 @@ asm void lbl_8012C810(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012C830(HSD_GObj*)
+asm void ftYoshi_8012C830(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C830 00129410  7C 08 02 A6 */	mflr r0
 /* 8012C834 00129414  90 01 00 04 */	stw r0, 4(r1)
 /* 8012C838 00129418  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8012C83C 0012941C  4B F6 6E 21 */	bl func_8009365C
+/* 8012C83C 0012941C  4B F6 6E 21 */	bl ft_8009365C
 /* 8012C840 00129420  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8012C844 00129424  38 21 00 08 */	addi r1, r1, 8
 /* 8012C848 00129428  7C 08 03 A6 */	mtlr r0
@@ -468,15 +468,15 @@ asm void lbl_8012C830(HSD_GObj*)
 #pragma pop
 #endif
 
-void func_8012C850(HSD_GObj* fighter_gobj)
+void ftYoshi_8012C850(HSD_GObj* fighter_gobj)
 {
     ftCommonData* temp_r5;
     Fighter* fp;
 
     fp = getFighter(fighter_gobj);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, 0x159, 0x10, NULL,
-                                       fp->x894_currentAnimFrame, lbl_804D9A28,
-                                       lbl_804D9A2C);
+    Fighter_ChangeMotionState(fighter_gobj, 0x159, 0x10, NULL,
+                              fp->x894_currentAnimFrame, lbl_804D9A28,
+                              lbl_804D9A2C);
     fp->x672_input_timer_counter = 254;
     fp->x221A_flag.bits.b7 = false;
     fp->x221B_b0 = false;
@@ -487,7 +487,7 @@ void func_8012C850(HSD_GObj* fighter_gobj)
     fp->sv.ys.unk2.x14 = p_ftCommonData->x2A4;
     temp_r5 = p_ftCommonData;
     fp->sv.ys.unk2.x18 = temp_r5->x2B4;
-    func_8009370C(fighter_gobj, lbl_8012CACC, temp_r5);
+    ft_8009370C(fighter_gobj, ftYoshi_8012CACC, temp_r5);
 }
 
 extern char* const lbl_804D3E58;
@@ -495,7 +495,7 @@ extern char* const lbl_804D3E60;
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void func_8012C914(HSD_GObj*)
+asm void ftYoshi_8012C914(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012C914 001294F4  7C 08 02 A6 */	mflr r0
@@ -512,13 +512,13 @@ asm void func_8012C914(HSD_GObj*)
 /* 8012C940 00129520  83 A3 00 2C */	lwz r29, 0x2c(r3)
 /* 8012C944 00129524  FC 60 08 90 */	fmr f3, f1
 /* 8012C948 00129528  C0 42 A0 48 */	lfs f2, lbl_804D9A28
-/* 8012C94C 0012952C  4B F3 CA 61 */	bl Fighter_ActionStateChange_800693AC
+/* 8012C94C 0012952C  4B F3 CA 61 */	bl Fighter_ChangeMotionState
 /* 8012C950 00129530  7F E3 FB 78 */	mr r3, r31
-/* 8012C954 00129534  4B F4 22 51 */	bl func_8006EBA4
+/* 8012C954 00129534  4B F4 22 51 */	bl ftAnim_8006EBA4
 /* 8012C958 00129538  38 00 00 FE */	li r0, 0xfe
 /* 8012C95C 0012953C  98 1D 06 72 */	stb r0, 0x672(r29)
-/* 8012C960 00129540  3C 60 80 13 */	lis r3, lbl_8012CACC@ha
-/* 8012C964 00129544  38 83 CA CC */	addi r4, r3, lbl_8012CACC@l
+/* 8012C960 00129540  3C 60 80 13 */	lis r3, ftYoshi_8012CACC@ha
+/* 8012C964 00129544  38 83 CA CC */	addi r4, r3, ftYoshi_8012CACC@l
 /* 8012C968 00129548  88 1D 22 1C */	lbz r0, 0x221c(r29)
 /* 8012C96C 0012954C  38 A0 00 01 */	li r5, 1
 /* 8012C970 00129550  50 A0 26 F6 */	rlwimi r0, r5, 4, 0x1b, 0x1b
@@ -536,11 +536,11 @@ asm void func_8012C914(HSD_GObj*)
 /* 8012C9A0 00129580  80 AD AE B4 */	lwz r5, p_ftCommonData
 /* 8012C9A4 00129584  C0 05 02 B4 */	lfs f0, 0x2b4(r5)
 /* 8012C9A8 00129588  D0 1D 23 58 */	stfs f0, 0x2358(r29)
-/* 8012C9AC 0012958C  4B F6 6D 61 */	bl func_8009370C
+/* 8012C9AC 0012958C  4B F6 6D 61 */	bl ft_8009370C
 /* 8012C9B0 00129590  83 DF 00 2C */	lwz r30, 0x2c(r31)
 /* 8012C9B4 00129594  38 7F 00 00 */	addi r3, r31, 0
 /* 8012C9B8 00129598  38 80 00 01 */	li r4, 1
-/* 8012C9BC 0012959C  4B F4 E7 05 */	bl func_8007B0C0
+/* 8012C9BC 0012959C  4B F4 E7 05 */	bl ftColl_8007B0C0
 /* 8012C9C0 001295A0  38 00 00 00 */	li r0, 0
 /* 8012C9C4 001295A4  90 1E 23 4C */	stw r0, 0x234c(r30)
 /* 8012C9C8 001295A8  C0 22 A0 4C */	lfs f1, lbl_804D9A2C
@@ -597,14 +597,14 @@ lbl_8012CA7C:
 /* 8012CA88 00129668  48 24 68 61 */	bl HSD_JObjSetMtxDirtySub
 lbl_8012CA8C:
 /* 8012CA8C 0012966C  7F E3 FB 78 */	mr r3, r31
-/* 8012CA90 00129670  4B FF EE 15 */	bl func_8012B8A4
+/* 8012CA90 00129670  4B FF EE 15 */	bl ftYoshi_8012B8A4
 /* 8012CA94 00129674  7F C3 F3 78 */	mr r3, r30
-/* 8012CA98 00129678  4B F6 52 C1 */	bl func_80091D58
+/* 8012CA98 00129678  4B F6 52 C1 */	bl ft_80091D58
 /* 8012CA9C 0012967C  38 7E 00 00 */	addi r3, r30, 0
 /* 8012CAA0 00129680  38 80 00 6E */	li r4, 0x6e
 /* 8012CAA4 00129684  38 A0 00 7F */	li r5, 0x7f
 /* 8012CAA8 00129688  38 C0 00 40 */	li r6, 0x40
-/* 8012CAAC 0012968C  4B F5 B6 9D */	bl func_80088148
+/* 8012CAAC 0012968C  4B F5 B6 9D */	bl ft_80088148
 /* 8012CAB0 00129690  80 01 00 34 */	lwz r0, 0x34(r1)
 /* 8012CAB4 00129694  83 E1 00 2C */	lwz r31, 0x2c(r1)
 /* 8012CAB8 00129698  83 C1 00 28 */	lwz r30, 0x28(r1)
@@ -616,11 +616,11 @@ lbl_8012CA8C:
 #pragma pop
 #endif
 
-void lbl_8012CACC(HSD_GObj* arg0) {}
+void ftYoshi_8012CACC(HSD_GObj* arg0) {}
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012CAD0(HSD_GObj*)
+asm void ftYoshi_8012CAD0(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CAD0 001296B0  7C 08 02 A6 */	mflr r0
@@ -630,30 +630,30 @@ asm void lbl_8012CAD0(HSD_GObj*)
 /* 8012CAE0 001296C0  93 C1 00 30 */	stw r30, 0x30(r1)
 /* 8012CAE4 001296C4  93 A1 00 2C */	stw r29, 0x2c(r1)
 /* 8012CAE8 001296C8  7C 7D 1B 78 */	mr r29, r3
-/* 8012CAEC 001296CC  4B F6 70 D5 */	bl func_80093BC0
+/* 8012CAEC 001296CC  4B F6 70 D5 */	bl ft_80093BC0
 /* 8012CAF0 001296D0  80 9D 00 2C */	lwz r4, 0x2c(r29)
 /* 8012CAF4 001296D4  7F A3 EB 78 */	mr r3, r29
 /* 8012CAF8 001296D8  C0 02 A0 48 */	lfs f0, lbl_804D9A28
 /* 8012CAFC 001296DC  C0 24 23 40 */	lfs f1, 0x2340(r4)
 /* 8012CB00 001296E0  EC 01 00 2A */	fadds f0, f1, f0
 /* 8012CB04 001296E4  D0 04 23 40 */	stfs f0, 0x2340(r4)
-/* 8012CB08 001296E8  4B F6 60 C5 */	bl func_80092BCC
+/* 8012CB08 001296E8  4B F6 60 C5 */	bl ft_80092BCC
 /* 8012CB0C 001296EC  7F A3 EB 78 */	mr r3, r29
-/* 8012CB10 001296F0  4B F6 5A 95 */	bl func_800925A4
+/* 8012CB10 001296F0  4B F6 5A 95 */	bl ft_800925A4
 /* 8012CB14 001296F4  2C 03 00 00 */	cmpwi r3, 0
 /* 8012CB18 001296F8  41 82 00 64 */	beq lbl_8012CB7C
 /* 8012CB1C 001296FC  83 FD 00 2C */	lwz r31, 0x2c(r29)
 /* 8012CB20 00129700  38 7D 00 00 */	addi r3, r29, 0
 /* 8012CB24 00129704  38 80 00 00 */	li r4, 0
 /* 8012CB28 00129708  38 A0 00 00 */	li r5, 0
-/* 8012CB2C 0012970C  4B F4 7F E1 */	bl func_80074B0C
+/* 8012CB2C 0012970C  4B F4 7F E1 */	bl ftParts_80074B0C
 /* 8012CB30 00129710  38 7D 00 00 */	addi r3, r29, 0
 /* 8012CB34 00129714  38 80 00 00 */	li r4, 0
-/* 8012CB38 00129718  4B F4 E5 89 */	bl func_8007B0C0
+/* 8012CB38 00129718  4B F4 E5 89 */	bl ftColl_8007B0C0
 /* 8012CB3C 0012971C  38 7F 00 00 */	addi r3, r31, 0
 /* 8012CB40 00129720  3B DF 01 CC */	addi r30, r31, 0x1cc
 /* 8012CB44 00129724  38 80 00 04 */	li r4, 4
-/* 8012CB48 00129728  4B F4 84 C5 */	bl func_8007500C
+/* 8012CB48 00129728  4B F4 84 C5 */	bl ftParts_8007500C
 /* 8012CB4C 0012972C  80 9F 05 E8 */	lwz r4, 0x5e8(r31)
 /* 8012CB50 00129730  54 60 20 36 */	slwi r0, r3, 4
 /* 8012CB54 00129734  80 BD 00 2C */	lwz r5, 0x2c(r29)
@@ -672,11 +672,11 @@ lbl_8012CB7C:
 /* 8012CB84 00129764  2C 03 00 00 */	cmpwi r3, 0
 /* 8012CB88 00129768  40 82 00 10 */	bne lbl_8012CB98
 /* 8012CB8C 0012976C  7F A3 EB 78 */	mr r3, r29
-/* 8012CB90 00129770  4B F6 5D 3D */	bl func_800928CC
+/* 8012CB90 00129770  4B F6 5D 3D */	bl ft_800928CC
 /* 8012CB94 00129774  48 00 00 0C */	b lbl_8012CBA0
 lbl_8012CB98:
 /* 8012CB98 00129778  7F A3 EB 78 */	mr r3, r29
-/* 8012CB9C 0012977C  4B FF ED 09 */	bl func_8012B8A4
+/* 8012CB9C 0012977C  4B FF ED 09 */	bl ftYoshi_8012B8A4
 lbl_8012CBA0:
 /* 8012CBA0 00129780  80 01 00 3C */	lwz r0, 0x3c(r1)
 /* 8012CBA4 00129784  83 E1 00 34 */	lwz r31, 0x34(r1)
@@ -691,13 +691,13 @@ lbl_8012CBA0:
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012CBBC(HSD_GObj*)
+asm void ftYoshi_8012CBBC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CBBC 0012979C  7C 08 02 A6 */	mflr r0
 /* 8012CBC0 001297A0  90 01 00 04 */	stw r0, 4(r1)
 /* 8012CBC4 001297A4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8012CBC8 001297A8  4B F6 72 F9 */	bl func_80093EC0
+/* 8012CBC8 001297A8  4B F6 72 F9 */	bl ft_80093EC0
 /* 8012CBCC 001297AC  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8012CBD0 001297B0  38 21 00 08 */	addi r1, r1, 8
 /* 8012CBD4 001297B4  7C 08 03 A6 */	mtlr r0
@@ -708,13 +708,13 @@ asm void lbl_8012CBBC(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012CBDC(HSD_GObj*)
+asm void ftYoshi_8012CBDC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CBDC 001297BC  7C 08 02 A6 */	mflr r0
 /* 8012CBE0 001297C0  90 01 00 04 */	stw r0, 4(r1)
 /* 8012CBE4 001297C4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8012CBE8 001297C8  4B F6 74 55 */	bl func_8009403C
+/* 8012CBE8 001297C8  4B F6 74 55 */	bl ft_8009403C
 /* 8012CBEC 001297CC  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8012CBF0 001297D0  38 21 00 08 */	addi r1, r1, 8
 /* 8012CBF4 001297D4  7C 08 03 A6 */	mtlr r0
@@ -725,13 +725,13 @@ asm void lbl_8012CBDC(HSD_GObj*)
 
 #ifdef MWERKS_GEKKO
 #pragma push
-asm void lbl_8012CBFC(HSD_GObj*)
+asm void ftYoshi_8012CBFC(HSD_GObj*)
 { // clang-format off
     nofralloc
 /* 8012CBFC 001297DC  7C 08 02 A6 */	mflr r0
 /* 8012CC00 001297E0  90 01 00 04 */	stw r0, 4(r1)
 /* 8012CC04 001297E4  94 21 FF F8 */	stwu r1, -8(r1)
-/* 8012CC08 001297E8  4B F6 74 71 */	bl func_80094078
+/* 8012CC08 001297E8  4B F6 74 71 */	bl ft_80094078
 /* 8012CC0C 001297EC  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 8012CC10 001297F0  38 21 00 08 */	addi r1, r1, 8
 /* 8012CC14 001297F4  7C 08 03 A6 */	mtlr r0
@@ -740,28 +740,28 @@ asm void lbl_8012CBFC(HSD_GObj*)
 #pragma pop
 #endif
 
-bool func_8012CC1C(HSD_GObj* fighter_gobj)
+bool ftYoshi_8012CC1C(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if ((fp->input.x65C_heldInputs & 0x80000000) &&
         (fp->x1998_shieldHealth >= lbl_804D9A2C))
     {
-        func_800928CC(fighter_gobj);
+        ft_800928CC(fighter_gobj);
         return true;
     }
 
     return false;
 }
 
-void func_8012CC6C(HSD_GObj* fighter_gobj)
+void ftYoshi_8012CC6C(HSD_GObj* fighter_gobj)
 {
-    func_8007500C(GET_FIGHTER(fighter_gobj), 52);
+    ftParts_8007500C(GET_FIGHTER(fighter_gobj), 52);
 }
 
 extern f32 const lbl_804D9A38;
 
-void func_8012CC94(HSD_GObj* fighter_gobj, Vec3* out)
+void ftYoshi_8012CC94(HSD_GObj* fighter_gobj, Vec3* out)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
@@ -770,30 +770,30 @@ void func_8012CC94(HSD_GObj* fighter_gobj, Vec3* out)
     out->z = lbl_804D9A38;
 }
 
-f32 func_8012CCC4(HSD_GObj* fighter_gobj)
+f32 ftYoshi_8012CCC4(HSD_GObj* fighter_gobj)
 {
     return GET_FIGHTER(fighter_gobj)->facing_dir;
 }
 
-f32 func_8012CCD0(HSD_GObj* fighter_gobj)
+f32 ftYoshi_8012CCD0(HSD_GObj* fighter_gobj)
 {
     ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x18;
 }
 
-f32 func_8012CCE0(HSD_GObj* fighter_gobj)
+f32 ftYoshi_8012CCE0(HSD_GObj* fighter_gobj)
 {
     ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x1C;
 }
 
-f32 func_8012CCF0(HSD_GObj* fighter_gobj)
+f32 ftYoshi_8012CCF0(HSD_GObj* fighter_gobj)
 {
     ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x20;
 }
 
-f32 func_8012CD00(HSD_GObj* fighter_gobj)
+f32 ftYoshi_8012CD00(HSD_GObj* fighter_gobj)
 {
     ftYoshiAttributes* attr = GET_FIGHTER(fighter_gobj)->x2D4_specialAttributes;
     return attr->x24;

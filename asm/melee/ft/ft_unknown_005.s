@@ -2,8 +2,8 @@
 
 .section .text  # 0x8008521C - 0x80086194
 
-.global func_8008521C
-func_8008521C:
+.global ft_8008521C
+ft_8008521C:
 /* 8008521C 00081DFC  7C 08 02 A6 */	mflr r0
 /* 80085220 00081E00  90 01 00 04 */	stw r0, 4(r1)
 /* 80085224 00081E04  94 21 FF D8 */	stwu r1, -0x28(r1)
@@ -43,8 +43,8 @@ func_8008521C:
 /* 800852A8 00081E88  7C 08 03 A6 */	mtlr r0
 /* 800852AC 00081E8C  4E 80 00 20 */	blr
 
-.global func_800852B0
-func_800852B0:
+.global ft_800852B0
+ft_800852B0:
 /* 800852B0 00081E90  3C 80 80 46 */	lis r4, gFtDataList@ha
 /* 800852B4 00081E94  3C 60 80 3C */	lis r3, CostumeListsForeachCharacter@ha
 /* 800852B8 00081E98  39 03 0E C0 */	addi r8, r3, CostumeListsForeachCharacter@l
@@ -176,8 +176,8 @@ func_800852B0:
 /* 80085494 00082074  98 0B 00 06 */	stb r0, 6(r11)
 /* 80085498 00082078  4E 80 00 20 */	blr
 
-.global func_8008549C
-func_8008549C:
+.global ft_8008549C
+ft_8008549C:
 /* 8008549C 0008207C  3C 60 80 46 */	lis r3, lbl_8045996C@ha
 /* 800854A0 00082080  38 83 99 6C */	addi r4, r3, lbl_8045996C@l
 /* 800854A4 00082084  38 60 00 00 */	li r3, 0

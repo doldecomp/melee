@@ -151,7 +151,7 @@ typedef struct _CSSData {
     VsModeData data;
 } CSSData;
 
-TextKerning* func_8025BC20(TextKerning* arg0, u32 arg1);
-void func_8025BD30(void);
+TextKerning* mnCharSel_8025BC20(TextKerning* arg0, u32 arg1);
+void mnCharSel_8025BD30(void);
 
 #endif

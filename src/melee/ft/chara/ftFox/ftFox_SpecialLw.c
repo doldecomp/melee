@@ -15,7 +15,7 @@ void ftFox_SpecialLw_CreateLoopGFX(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x488, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        efSync_Spawn(0x488, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -30,7 +30,7 @@ void ftFox_SpecialLw_CreateStartGFX(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x489, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        efSync_Spawn(0x489, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
 
@@ -44,7 +44,7 @@ void ftFox_SpecialLw_CreateReflectGFX(HSD_GObj* fighter_gobj)
     Fighter* fp = fighter_gobj->user_data;
 
     if (fp->x2219_flag.bits.b0 == false) {
-        ef_Spawn(0x48A, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
+        efSync_Spawn(0x48A, fighter_gobj, fp->x5E8_fighterBones[4].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
         fp->x2219_flag.bits.b0 = true;
     }
@@ -71,21 +71,21 @@ static inline void ftFox_SpecialLw_SetVars(HSD_GObj* fighter_gobj)
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateStartGFX;
 }
 
-void ftFox_SpecialLw_StartAction(HSD_GObj* fighter_gobj)
+void ftFox_SpecialLw_StartMotion(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_START, 0,
-                                       NULL, 0, 1, 0);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALLW_START, 0, NULL, 0,
+                              1, 0);
+    ftAnim_8006EBA4(fighter_gobj);
 
     ftFox_SpecialLw_SetVars(fighter_gobj);
 }
 
-void ftFox_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
+void ftFox_SpecialAirLw_StartMotion(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
@@ -93,9 +93,9 @@ void ftFox_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj)
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x /= foxAttrs->xA8_FOX_REFLECTOR_MOMENTUM_PRESERVE_X;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_START,
-                                       0, NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALAIRLW_START, 0, NULL,
+                              0.0f, 1.0f, 0.0f);
+    ftAnim_8006EBA4(fighter_gobj);
 
     ftFox_SpecialLw_SetVars(fighter_gobj);
 }
@@ -121,7 +121,7 @@ void ftFox_SpecialLwStart_Anim(HSD_GObj* fighter_gobj)
             ftFox_SpecialLwLoop_Action(fighter_gobj);
         } else
             ftFox_SpecialAirLwLoop_Action(fighter_gobj);
-        func_8007DB24(fighter_gobj);
+        ftCommon_8007DB24(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateLoopGFX;
     }
 }
@@ -144,7 +144,7 @@ void ftFox_SpecialAirLwStart_Anim(HSD_GObj* fighter_gobj)
             ftFox_SpecialLwLoop_Action(fighter_gobj);
         } else
             ftFox_SpecialAirLwLoop_Action(fighter_gobj);
-        func_8007DB24(fighter_gobj);
+        ftCommon_8007DB24(fighter_gobj);
 
         fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateLoopGFX;
     }
@@ -167,7 +167,7 @@ void ftFox_SpecialAirLwStart_IASA(HSD_GObj* fighter_gobj)
 
 bool ftFox_SpecialLwStart_CheckPass(HSD_GObj* fighter_gobj)
 {
-    if (func_80099F1C(fighter_gobj) != false) {
+    if (ft_80099F1C(fighter_gobj) != false) {
         ftFox_SpecialLwStart_Pass(fighter_gobj);
         return true;
     }
@@ -180,16 +180,16 @@ static void ftFox_SpecialLw_CreateReflectHit(HSD_GObj* fighter_gobj);
 
 void ftFox_SpecialLwStart_Pass(HSD_GObj* fighter_gobj)
 {
-    func_8009A184(fighter_gobj, AS_FOX_SPECIALAIRLW_START,
-                  FTFOX_SPECIALLW_COLL_FLAG,
-                  GET_FIGHTER(fighter_gobj)->x894_currentAnimFrame);
+    ft_8009A184(fighter_gobj, AS_FOX_SPECIALAIRLW_START,
+                FTFOX_SPECIALLW_COLL_FLAG,
+                GET_FIGHTER(fighter_gobj)->x894_currentAnimFrame);
 
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
 
 void ftFox_SpecialLwStart_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084F3C(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
 }
 
 void ftFox_SpecialAirLwStart_Phys(HSD_GObj* fighter_gobj)
@@ -206,22 +206,22 @@ void ftFox_SpecialAirLwStart_Phys(HSD_GObj* fighter_gobj)
     if (fp->sv.fx.SpecialLw.gravityDelay != 0) {
         fp->sv.fx.SpecialLw.gravityDelay--;
     } else {
-        func_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
-                      ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
+                          ftAttrs->x170_TerminalVelocity);
     }
 
-    func_8007CF58(fp);
+    ftCommon_8007CF58(fp);
 }
 
 void ftFox_SpecialLwStart_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == false)
+    if (ft_80082708(fighter_gobj) == false)
         ftFox_SpecialLwStart_GroundToAir(fighter_gobj);
 }
 
 void ftFox_SpecialAirLwStart_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != false)
+    if (ft_80081D0C(fighter_gobj) != false)
         ftFox_SpecialAirLwStart_AirToGround(fighter_gobj);
 }
 
@@ -229,24 +229,24 @@ void ftFox_SpecialLwStart_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_START,
-                                       FTFOX_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALAIRLW_START,
+                              FTFOX_SPECIALLW_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
 void ftFox_SpecialAirLwStart_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_START,
-                                       FTFOX_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALLW_START,
+                              FTFOX_SPECIALLW_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    func_8007D468(fp);
+    ftCommon_8007D468(fp);
 }
 
 void ftFox_SpecialLwLoop_Anim(HSD_GObj* fighter_gobj)
@@ -300,7 +300,7 @@ static bool ftFox_SpecialLwLoop_CheckPass(HSD_GObj* fighter_gobj);
 void ftFox_SpecialLwLoop_IASA(HSD_GObj* fighter_gobj)
 {
     if ((ftFox_SpecialLwTurn_Check(fighter_gobj) == false) &&
-        (func_800CAED0(fighter_gobj) == false))
+        (ft_800CAED0(fighter_gobj) == false))
     {
         if (ftFox_SpecialLwLoop_CheckPass(fighter_gobj))
             return;
@@ -310,7 +310,7 @@ void ftFox_SpecialLwLoop_IASA(HSD_GObj* fighter_gobj)
 void ftFox_SpecialAirLwLoop_IASA(HSD_GObj* fighter_gobj)
 {
     if (ftFox_SpecialLwTurn_Check(fighter_gobj) == false &&
-        func_800CB870(fighter_gobj))
+        ft_800CB870(fighter_gobj))
     {
         /// @remarks Kinda weird, was this stripped or are there side effects?
         return;
@@ -322,7 +322,7 @@ static void ftFox_SpecialLwLoop_Pass(HSD_GObj* fighter_gobj);
 
 static bool ftFox_SpecialLwLoop_CheckPass(HSD_GObj* fighter_gobj)
 {
-    if (func_80099F1C(fighter_gobj) != false) {
+    if (ft_80099F1C(fighter_gobj) != false) {
         ftFox_SpecialLwLoop_Pass(fighter_gobj);
         return true;
     }
@@ -332,17 +332,17 @@ static bool ftFox_SpecialLwLoop_CheckPass(HSD_GObj* fighter_gobj)
 
 static void ftFox_SpecialLwLoop_Pass(HSD_GObj* fighter_gobj)
 {
-    func_8009A184(fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP,
-                  FTFOX_SPECIALLW_COLL_FLAG,
-                  GET_FIGHTER(fighter_gobj)->x894_currentAnimFrame);
+    ft_8009A184(fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP,
+                FTFOX_SPECIALLW_COLL_FLAG,
+                GET_FIGHTER(fighter_gobj)->x894_currentAnimFrame);
 
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
 
 void ftFox_SpecialLwLoop_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084F3C(fighter_gobj);
-    func_8007AEF8(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
+    ftColl_8007AEF8(fighter_gobj);
 }
 
 static inline void ftFox_SpecialLw_InlinePhys(HSD_GObj* fighter_gobj)
@@ -358,17 +358,17 @@ static inline void ftFox_SpecialLw_InlinePhys(HSD_GObj* fighter_gobj)
     if (fp->sv.fx.SpecialLw.gravityDelay != 0) {
         fp->sv.fx.SpecialLw.gravityDelay--;
     } else {
-        func_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
-                      ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
+                          ftAttrs->x170_TerminalVelocity);
     }
 
-    func_8007CF58(fp);
+    ftCommon_8007CF58(fp);
 }
 
 void ftFox_SpecialAirLwLoop_Phys(HSD_GObj* fighter_gobj)
 {
     ftFox_SpecialLw_InlinePhys(fighter_gobj);
-    func_8007AEF8(fighter_gobj);
+    ftColl_8007AEF8(fighter_gobj);
 }
 
 /// Fox & Falco's ground -> air Reflector Loop Action State handler
@@ -376,7 +376,7 @@ static void ftFox_SpecialLwLoop_GroundToAir(HSD_GObj* fighter_gobj);
 
 void ftFox_SpecialLwLoop_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == false)
+    if (ft_80082708(fighter_gobj) == false)
         ftFox_SpecialLwLoop_GroundToAir(fighter_gobj);
 }
 
@@ -385,7 +385,7 @@ static void ftFox_SpecialAirLwLoop_AirToGround(HSD_GObj* fighter_gobj);
 
 void ftFox_SpecialAirLwLoop_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != false)
+    if (ft_80081D0C(fighter_gobj) != false)
         ftFox_SpecialAirLwLoop_AirToGround(fighter_gobj);
 }
 
@@ -393,11 +393,11 @@ static void ftFox_SpecialLwLoop_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP,
-                                       FTFOX_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP,
+                              FTFOX_SPECIALLW_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
@@ -406,13 +406,13 @@ static void ftFox_SpecialAirLwLoop_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_LOOP,
-                                       FTFOX_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALLW_LOOP,
+                              FTFOX_SPECIALLW_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    func_8007D468(fp);
+    ftCommon_8007D468(fp);
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
 
@@ -428,9 +428,9 @@ static void ftFox_SpecialLw_CreateReflectHit(HSD_GObj* fighter_gobj)
 
 static void ftFox_SpecialLwLoop_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_LOOP,
-                                       FtStateChange_PreserveGfx, NULL, 0.0f,
-                                       1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALLW_LOOP,
+                              FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f,
+                              0.0f);
 
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
@@ -438,9 +438,9 @@ static void ftFox_SpecialLwLoop_Action(HSD_GObj* fighter_gobj)
 /// Fox & Falco's aerial Reflector Loop Action State handler
 static void ftFox_SpecialAirLwLoop_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP,
-                                       FtStateChange_PreserveGfx, NULL, 0.0f,
-                                       1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP,
+                              FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f,
+                              0.0f);
 
     ftFox_SpecialLw_CreateReflectHit(fighter_gobj);
 }
@@ -469,9 +469,10 @@ static void ftFox_SpecialLw_Turn(HSD_GObj* fighter_gobj)
         fp->x2200_ftcmd_var0 = 1;
         fp->facing_dir = -fp->facing_dir;
     }
-    func_80075AF0(fp, 0,
-                  -(180 / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES * DEG_TO_RAD -
-                    func_80075F48(fp, 0)));
+    ftParts_80075AF0(
+        fp, 0,
+        -(180 / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES * DEG_TO_RAD -
+          ftParts_80075F48(fp, 0)));
 }
 #ifdef MUST_MATCH
 #pragma pop
@@ -493,10 +494,10 @@ static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* fighter_gobj)
     }
 
     /// @todo Degrees-to-radians constant.
-    func_80075AF0(fp, 0,
-                  -((0.01745329238474369f *
-                     (180.0f / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) -
-                    func_80075F48(fp, 0)));
+    ftParts_80075AF0(fp, 0,
+                     -((0.01745329238474369f *
+                        (180.0f / foxAttrs->x9C_FOX_REFLECTOR_TURN_FRAMES)) -
+                       ftParts_80075F48(fp, 0)));
 }
 
 void ftFox_SpecialLwTurn_Anim(HSD_GObj* fighter_gobj)
@@ -559,8 +560,8 @@ void ftFox_SpecialAirLwTurn_IASA(HSD_GObj* fighter_gobj)
 // Physics callback
 void ftFox_SpecialLwTurn_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084F3C(fighter_gobj);
-    func_8007AEF8(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
+    ftColl_8007AEF8(fighter_gobj);
 }
 
 /// Fox & Falco's aerial Reflector Turn Physics callback
@@ -578,12 +579,12 @@ void ftFox_SpecialAirLwTurn_Phys(HSD_GObj* fighter_gobj)
     if (fp->sv.fx.SpecialLw.gravityDelay != 0) {
         fp->sv.fx.SpecialLw.gravityDelay--;
     } else {
-        func_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
-                      ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
+                          ftAttrs->x170_TerminalVelocity);
     }
 
-    func_8007CF58(fp);
-    func_8007AEF8(fighter_gobj);
+    ftCommon_8007CF58(fp);
+    ftColl_8007AEF8(fighter_gobj);
 }
 
 // 0x800E92AC
@@ -591,7 +592,7 @@ void ftFox_SpecialAirLwTurn_Phys(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftFox_SpecialLwTurn_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == false) {
+    if (ft_80082708(fighter_gobj) == false) {
         ftFox_SpecialLwTurn_GroundToAir(fighter_gobj);
     }
 }
@@ -601,7 +602,7 @@ void ftFox_SpecialLwTurn_Coll(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftFox_SpecialAirLwTurn_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != false) {
+    if (ft_80081D0C(fighter_gobj) != false) {
         ftFox_SpecialAirLwTurn_GroundToAir(fighter_gobj);
     }
 }
@@ -620,10 +621,10 @@ void ftFox_SpecialLwTurn_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_TURN,
-                                       FTFOX_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALAIRLW_TURN,
+                              FTFOX_SPECIALLW_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftFox_SpecialLw_SetReflectVars(fighter_gobj);
 }
 
@@ -634,11 +635,11 @@ void ftFox_SpecialAirLwTurn_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_TURN,
-                                       FTFOX_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    func_8007D468(fp);
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALLW_TURN,
+                              FTFOX_SPECIALLW_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    ftCommon_8007D468(fp);
     ftFox_SpecialLw_SetReflectVars(fighter_gobj);
 }
 
@@ -660,16 +661,16 @@ bool ftFox_SpecialLwTurn_Check(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    if (func_800C97A8(fighter_gobj) != false) {
+    if (ft_800C97A8(fighter_gobj) != false) {
         if ((s32) fp->xE0_ground_or_air == GA_Ground) {
-            Fighter_ActionStateChange_800693AC(
-                fighter_gobj, AS_FOX_SPECIALLW_TURN, FtStateChange_PreserveGfx,
-                NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALLW_TURN,
+                                      FtStateChange_PreserveGfx, NULL, 0.0f,
+                                      1.0f, 0.0f);
             ftFox_SpecialLwTurn_SetVarAll(fighter_gobj);
         } else {
-            Fighter_ActionStateChange_800693AC(
-                fighter_gobj, AS_FOX_SPECIALAIRLW_TURN,
-                FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f, 0.0f);
+            Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALAIRLW_TURN,
+                                      FtStateChange_PreserveGfx, NULL, 0.0f,
+                                      1.0f, 0.0f);
             ftFox_SpecialLwTurn_SetVarAll(fighter_gobj);
         }
         fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateLoopGFX;
@@ -706,14 +707,14 @@ bool ftFox_SpecialLwHit_Check(HSD_GObj* fighter_gobj)
         return false;
     }
     if ((s32) fp->xE0_ground_or_air == GA_Ground) {
-        Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_LOOP,
-                                           FtStateChange_PreserveGfx, NULL,
-                                           0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALLW_LOOP,
+                                  FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f,
+                                  0.0f);
         ftFox_SpecialLwHit_CreateReflectInline(fighter_gobj);
     } else {
-        Fighter_ActionStateChange_800693AC(
-            fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP, FtStateChange_PreserveGfx,
-            NULL, 0.0f, 1.0f, 0.0f);
+        Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALAIRLW_LOOP,
+                                  FtStateChange_PreserveGfx, NULL, 0.0f, 1.0f,
+                                  0.0f);
         ftFox_SpecialLwHit_CreateReflectInline(fighter_gobj);
     }
     return true;
@@ -737,7 +738,7 @@ void ftFox_SpecialLwHit_Anim(HSD_GObj* fighter_gobj)
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
         if (ftFox_SpecialLwHit_Check(fighter_gobj)) {
-            func_8007DB24(fighter_gobj);
+            ftCommon_8007DB24(fighter_gobj);
             fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateLoopGFX;
         }
     }
@@ -765,7 +766,7 @@ void ftFox_SpecialAirLwHit_Anim(HSD_GObj* fighter_gobj)
     if (!ftAnim_IsFramesRemaining(fighter_gobj) &&
         ftFox_SpecialLwHit_Check(fighter_gobj))
     {
-        func_8007DB24(fighter_gobj);
+        ftCommon_8007DB24(fighter_gobj);
         fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateLoopGFX;
     }
 }
@@ -790,8 +791,8 @@ void ftFox_SpecialAirLwHit_IASA(HSD_GObj* fighter_gobj)
 // Physics callback
 void ftFox_SpecialLwHit_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084F3C(fighter_gobj);
-    func_8007AEF8(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
+    ftColl_8007AEF8(fighter_gobj);
 }
 
 /// Fox & Falco's aerial Reflector Hit Physics callback
@@ -809,25 +810,25 @@ void ftFox_SpecialAirLwHit_Phys(HSD_GObj* fighter_gobj)
     if (fp->sv.fx.SpecialLw.gravityDelay != 0) {
         fp->sv.fx.SpecialLw.gravityDelay--;
     } else {
-        func_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
-                      ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
+                          ftAttrs->x170_TerminalVelocity);
     }
 
-    func_8007CF58(fp);
-    func_8007AEF8(fighter_gobj);
+    ftCommon_8007CF58(fp);
+    ftColl_8007AEF8(fighter_gobj);
 }
 
 /// Fox & Falco's grounded Reflector Hit Collision callback
 void ftFox_SpecialLwHit_Coll(HSD_GObj* fighter_gobj)
 {
-    if (!func_80082708(fighter_gobj))
+    if (!ft_80082708(fighter_gobj))
         ftFox_SpecialLwHit_GroundToAir(fighter_gobj);
 }
 
 /// Fox & Falco's aerial Reflector Hit Collision callback
 void ftFox_SpecialAirLwHit_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj))
+    if (ft_80081D0C(fighter_gobj))
         ftFox_SpecialAirLwHit_AirToGround(fighter_gobj);
 }
 
@@ -838,10 +839,10 @@ void ftFox_SpecialLwHit_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_HIT,
-                                       FTFOX_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALAIRLW_HIT,
+                              FTFOX_SPECIALLW_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
     ftFox_SpecialLwHit_SetCall(fighter_gobj);
 }
 
@@ -852,11 +853,11 @@ void ftFox_SpecialAirLwHit_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_HIT,
-                                       FTFOX_SPECIALLW_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    func_8007D468(fp);
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALLW_HIT,
+                              FTFOX_SPECIALLW_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    ftCommon_8007D468(fp);
     ftFox_SpecialLwHit_SetCall(fighter_gobj);
 }
 
@@ -882,18 +883,17 @@ void ftFox_SpecialLwHit_Action(HSD_GObj* fighter_gobj)
 
     fp->facing_dir = fp->ReflectAttr.x1A2C_reflectHitDirection;
 
-    func_8000B1CC(fp->x5E8_fighterBones[func_8007500C(fp, 4)].x0_jobj, NULL,
-                  &sp14);
+    lb_8000B1CC(fp->x5E8_fighterBones[ftParts_8007500C(fp, 4)].x0_jobj, NULL,
+                &sp14);
 
-    func_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f, 1.0471975803375244f);
+    lb_800119DC(&sp14, 0x78, 3.0f, 0.10000000149011612f, 1.0471975803375244f);
 
     if ((s32) fp->xE0_ground_or_air == GA_Ground) {
         ASID = 0x16A;
     } else
         ASID = 0x16F;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, ASID, 0, NULL, 0.0f, 1.0f,
-                                       0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, ASID, 0, NULL, 0.0f, 1.0f, 0.0f);
     ftFox_SpecialLwHit_SetCall(fighter_gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftFox_SpecialLw_CreateReflectGFX;
@@ -908,8 +908,8 @@ void ftFox_SpecialLwEnd_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_8007DB24(fighter_gobj);
-        func_8007D92C(fighter_gobj);
+        ftCommon_8007DB24(fighter_gobj);
+        ftCommon_8007D92C(fighter_gobj);
     }
 }
 
@@ -922,8 +922,8 @@ void ftFox_SpecialAirLwEnd_Anim(HSD_GObj* fighter_gobj)
 #endif
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj)) {
-        func_8007DB24(fighter_gobj);
-        func_8007D92C(fighter_gobj);
+        ftCommon_8007DB24(fighter_gobj);
+        ftCommon_8007D92C(fighter_gobj);
     }
 }
 
@@ -942,7 +942,7 @@ void ftFox_SpecialAirLwEnd_IASA(HSD_GObj* fighter_gobj)
 // 0x800E9BD0 - Fox & Falco's grounded Reflector End Physics callback
 void ftFox_SpecialLwEnd_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084F3C(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
 }
 
 /// Fox & Falco's aerial Reflector End Physics callback
@@ -960,10 +960,10 @@ void ftFox_SpecialAirLwEnd_Phys(HSD_GObj* fighter_gobj)
     if (fp->sv.fx.SpecialLw.gravityDelay != 0) {
         fp->sv.fx.SpecialLw.gravityDelay--;
     } else {
-        func_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
-                      ftAttrs->x170_TerminalVelocity);
+        ftCommon_8007D494(fp, foxAttrs->xAC_FOX_REFLECTOR_FALL_ACCEL,
+                          ftAttrs->x170_TerminalVelocity);
     }
-    func_8007CF58(fp);
+    ftCommon_8007CF58(fp);
 }
 
 // 0x800E9C50
@@ -971,7 +971,7 @@ void ftFox_SpecialAirLwEnd_Phys(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftFox_SpecialLwEnd_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80082708(fighter_gobj) == false) {
+    if (ft_80082708(fighter_gobj) == false) {
         ftFox_SpecialLwEnd_GroundToAir(fighter_gobj);
     }
 }
@@ -981,7 +981,7 @@ void ftFox_SpecialLwEnd_Coll(HSD_GObj* fighter_gobj)
 // Collision callback
 void ftFox_SpecialAirLwEnd_Coll(HSD_GObj* fighter_gobj)
 {
-    if (func_80081D0C(fighter_gobj) != false) {
+    if (ft_80081D0C(fighter_gobj) != false) {
         ftFox_SpecialAirLwEnd_AirToGround(fighter_gobj);
     }
 }
@@ -993,8 +993,8 @@ void ftFox_SpecialLwEnd_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    func_8007D5D4(fp);
-    Fighter_ActionStateChange_800693AC(
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(
         fighter_gobj, AS_FOX_SPECIALAIRLW_END,
         (FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
@@ -1007,12 +1007,12 @@ void ftFox_SpecialAirLwEnd_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = fighter_gobj->user_data;
 
-    func_8007D7FC(fp);
-    Fighter_ActionStateChange_800693AC(
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(
         fighter_gobj, AS_FOX_SPECIALLW_END,
         (FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    func_8007D468(fp);
+    ftCommon_8007D468(fp);
 }
 
 // 0x800E9D88
@@ -1020,13 +1020,13 @@ void ftFox_SpecialAirLwEnd_AirToGround(HSD_GObj* fighter_gobj)
 // Action State handler
 void ftFox_SpecialLwEnd_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALLW_END, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALLW_END, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
 }
 
 // 0x800E9DC0 - Fox & Falco's aerial Reflector End Action State handler
 void ftFox_SpecialAirLwEnd_Action(HSD_GObj* fighter_gobj)
 {
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_FOX_SPECIALAIRLW_END, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_FOX_SPECIALAIRLW_END, 0, NULL,
+                              0.0f, 1.0f, 0.0f);
 }

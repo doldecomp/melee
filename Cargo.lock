@@ -204,10 +204,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8a2dd5a6fe8c6e3502f568a6353e5273bbb15193ad9a89e457b9970798efbea1"
 
 [[package]]
-name = "concolor-override"
+name = "colorchoice"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a855d4a1978dc52fb0536a04d384c2c0c1aa273597f08b77c8c4d3b2eec6037f"
+checksum = "acbf1af155f9b9ef647e42cdc158db4b64a1b61f743629225fde6f3e0be2a7c7"
+
+[[package]]
+name = "concolor-override"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "40a4925288e39d5923e024781971aab940995fa31bab3ffceebbadfc87591e90"
+dependencies = [
+ "colorchoice",
+]
 
 [[package]]
 name = "concolor-query"
@@ -421,9 +430,6 @@ name = "hashbrown"
 version = "0.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8a9ee70c43aaf417c914396645a0fa852624801b24ebb7ae78fe8272889ac888"
-dependencies = [
- "ahash 0.7.6",
-]
 
 [[package]]
 name = "heck"
@@ -451,16 +457,6 @@ name = "humantime"
 version = "2.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9a3a5bfb195931eeb336b2a7b4d761daec841b97f947d34394601737a7bba5e4"
-
-[[package]]
-name = "internment"
-version = "0.7.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2a798d7677f07d6f1e77be484ea8626ddb1566194de399f1206306820c406371"
-dependencies = [
- "hashbrown 0.12.3",
- "parking_lot",
-]
 
 [[package]]
 name = "io-lifetimes"
@@ -538,7 +534,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "melee-fix-labels"
+name = "melee-diff-symbols"
 version = "0.1.0"
 dependencies = [
  "ahash 0.8.3",
@@ -546,6 +542,19 @@ dependencies = [
  "clap",
  "cwparse",
  "dashmap",
+ "melee-utils",
+ "memmap2",
+ "rayon",
+]
+
+[[package]]
+name = "melee-fix-labels"
+version = "0.1.0"
+dependencies = [
+ "ahash 0.8.3",
+ "anyhow",
+ "clap",
+ "cwparse",
  "env_logger",
  "glob",
  "itertools",
@@ -554,7 +563,6 @@ dependencies = [
  "memmap2",
  "nom",
  "rayon",
- "regex",
 ]
 
 [[package]]
@@ -582,15 +590,30 @@ dependencies = [
 ]
 
 [[package]]
+name = "melee-replace-symbols"
+version = "0.1.0"
+dependencies = [
+ "ahash 0.8.3",
+ "anyhow",
+ "clap",
+ "env_logger",
+ "log",
+ "melee-utils",
+ "memmap2",
+ "rayon",
+]
+
+[[package]]
 name = "melee-utils"
 version = "0.1.0"
 dependencies = [
  "anyhow",
  "env_logger",
  "globset",
- "internment",
  "lazy_static",
  "log",
+ "memmap2",
+ "rayon",
  "regex",
  "walkdir",
 ]
@@ -659,16 +682,6 @@ name = "once_cell"
 version = "1.17.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b7e5500299e16ebb147ae15a00a942af264cf3688f47923b8fc2cd5858f23ad3"
-
-[[package]]
-name = "parking_lot"
-version = "0.12.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3742b2c103b9f06bc9fff0a37ff4912935851bee6d36f3c02bcc755bcfec228f"
-dependencies = [
- "lock_api",
- "parking_lot_core",
-]
 
 [[package]]
 name = "parking_lot_core"

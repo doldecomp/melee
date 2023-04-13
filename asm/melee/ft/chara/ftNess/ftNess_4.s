@@ -18,9 +18,9 @@ ftNess_AttackLw4_Release_Action:
 /* 80116B14 001136F4  C0 42 9D 1C */	lfs f2, lbl_804D96FC/*1.0f*/@sda21(r2)
 /* 80116B18 001136F8  C0 62 9D 18 */	lfs f3, lbl_804D96F8/*0.0f*/@sda21(r2)
 # SPLIT NO EARLIER THAN HERE
-/* 80116B1C 001136FC  4B F5 28 91 */	bl Fighter_ActionStateChange_800693AC
+/* 80116B1C 001136FC  4B F5 28 91 */	bl Fighter_ChangeMotionState
 /* 80116B20 00113700  7F C3 F3 78 */	mr r3, r30
-/* 80116B24 00113704  4B F5 80 81 */	bl func_8006EBA4
+/* 80116B24 00113704  4B F5 80 81 */	bl ftAnim_8006EBA4
 /* 80116B28 00113708  7F C3 F3 78 */	mr r3, r30
 /* 80116B2C 0011370C  4B FF EB 55 */	bl ftNess_YoyoSetChargeDamage
 /* 80116B30 00113710  88 1F 22 22 */	lbz r0, 0x2222(r31)

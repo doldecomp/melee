@@ -11,8 +11,8 @@ void ftMewtwo_SpecialS_SetFlags(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8007E2F4(fp, 0x1FF);
-    func_8007E2FC(fighter_gobj);
+    ftCommon_8007E2F4(fp, 0x1FF);
+    ftCommon_8007E2FC(fighter_gobj);
     fp->x221E_flag.bits.b6 = 0;
     fp->x2222_flag.bits.b2 = 1;
 }
@@ -22,17 +22,17 @@ static inline void ftMewtwo_SpecialS_SetGrab(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x1A58_interactedFighter == NULL) {
-        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
-                      func_800BCF18);
+        ftCommon_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
+                          ft_800BCF18);
     } else {
-        func_8007E2F4(fp, 0x1FF);
+        ftCommon_8007E2F4(fp, 0x1FF);
     }
 }
 
 // 0x801466C4
 // https://decomp.me/scratch/X6OTU // Mewtwo's grounded Confusion Action State
 // handler
-void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
+void ftMewtwo_SpecialS_StartMotion(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
@@ -46,9 +46,9 @@ void ftMewtwo_SpecialS_StartAction(HSD_GObj* fighter_gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->sv.mt.SpecialS.isConfusionReflect = false;
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, AS_MEWTWO_SPECIALS, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
+    ftAnim_8006EBA4(fighter_gobj);
 
     ftMewtwo_SpecialS_SetGrab(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialS_ReflectThink;
@@ -59,17 +59,17 @@ static inline void ftMewtwo_SpecialAirS_SetGrab(HSD_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
     if (fp->x1A58_interactedFighter == NULL) {
-        func_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
-                      func_800BD000);
+        ftCommon_8007E2D0(fp, 0x40, ftMewtwo_SpecialS_SetFlags, NULL,
+                          ft_800BD000);
     } else {
-        func_8007E2F4(fp, 0x1FF);
+        ftCommon_8007E2F4(fp, 0x1FF);
     }
 }
 
 // 0x8014677C
 // https://decomp.me/scratch/4DvVc // Mewtwo's aerial Confusion Action State
 // handler
-void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
+void ftMewtwo_SpecialAirS_StartMotion(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
@@ -90,9 +90,9 @@ void ftMewtwo_SpecialAirS_StartAction(HSD_GObj* fighter_gobj)
         fp->ev.mt.x223C_isConfusionBoost = true;
     }
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS, 0,
-                                       NULL, 0.0f, 1.0f, 0.0f);
-    func_8006EBA4(fighter_gobj);
+    Fighter_ChangeMotionState(fighter_gobj, AS_MEWTWO_SPECIALAIRS, 0, NULL,
+                              0.0f, 1.0f, 0.0f);
+    ftAnim_8006EBA4(fighter_gobj);
 
     ftMewtwo_SpecialAirS_SetGrab(fighter_gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialS_ReflectThink;
@@ -106,9 +106,9 @@ static inline void ftMewtwo_SetGrabVictim(HSD_GObj* fighter_gobj)
     if ((u32) fp->x2200_ftcmd_var0 != 0) {
         victimGObj = fp->x1A58_interactedFighter;
         if (victimGObj != NULL) {
-            func_8007E2F4(fp, 0);
-            func_800DE2A8(fighter_gobj, victimGObj);
-            func_80090780(victimGObj);
+            ftCommon_8007E2F4(fp, 0);
+            ft_800DE2A8(fighter_gobj, victimGObj);
+            ft_80090780(victimGObj);
             fp->x2200_ftcmd_var0 = 0;
         }
     }
@@ -122,7 +122,7 @@ void ftMewtwo_SpecialS_Anim(HSD_GObj* fighter_gobj)
     ftMewtwo_SetGrabVictim(fighter_gobj);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
-        func_8008A2BC(fighter_gobj);
+        ft_8008A2BC(fighter_gobj);
 }
 
 // 0x801468EC
@@ -133,7 +133,7 @@ void ftMewtwo_SpecialAirS_Anim(HSD_GObj* fighter_gobj)
     ftMewtwo_SetGrabVictim(fighter_gobj);
 
     if (!ftAnim_IsFramesRemaining(fighter_gobj))
-        func_800CC730(fighter_gobj);
+        ft_800CC730(fighter_gobj);
 }
 
 // 0x80146980 - Mewtwo's grounded Confusion IASA callback
@@ -153,16 +153,16 @@ void ftMewtwo_SpecialAirS_IASA(HSD_GObj* fighter_gobj)
 // callback
 void ftMewtwo_SpecialS_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084F3C(fighter_gobj);
-    func_8007AEF8(fighter_gobj);
+    ft_80084F3C(fighter_gobj);
+    ftColl_8007AEF8(fighter_gobj);
 }
 
 // 0x801469BC
 // https://decomp.me/scratch/o5TC6 // Mewtwo's aerial Confusion Physics callback
 void ftMewtwo_SpecialAirS_Phys(HSD_GObj* fighter_gobj)
 {
-    func_80084EEC(fighter_gobj);
-    func_8007AEF8(fighter_gobj);
+    ft_80084EEC(fighter_gobj);
+    ftColl_8007AEF8(fighter_gobj);
 }
 
 static inline void ftMewtwo_SpecialS_SetReflect(HSD_GObj* fighter_gobj)
@@ -182,13 +182,13 @@ void ftMewtwo_SpecialS_GroundToAir(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8007D5D4(fp);
+    ftCommon_8007D5D4(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALAIRS,
-                                       FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_MEWTWO_SPECIALAIRS,
+                              FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    func_8007D468(fp);
+    ftCommon_8007D468(fp);
 
     ftMewtwo_SpecialAirS_SetGrab(fighter_gobj);
 
@@ -204,11 +204,11 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 {
     Fighter* fp = GET_FIGHTER(fighter_gobj);
 
-    func_8007D7FC(fp);
+    ftCommon_8007D7FC(fp);
 
-    Fighter_ActionStateChange_800693AC(fighter_gobj, AS_MEWTWO_SPECIALS,
-                                       FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
-                                       fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(fighter_gobj, AS_MEWTWO_SPECIALS,
+                              FTMEWTWO_SPECIALS_COLL_FLAG, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     ftMewtwo_SpecialS_SetGrab(fighter_gobj);
 
@@ -221,13 +221,13 @@ void ftMewtwo_SpecialAirS_AirToGround(HSD_GObj* fighter_gobj)
 // 0x80146BB8 - Mewtwo's grounded Confusion Collision callback
 void ftMewtwo_SpecialS_Coll(HSD_GObj* fighter_gobj)
 {
-    func_8008403C(fighter_gobj, ftMewtwo_SpecialS_GroundToAir);
+    ft_8008403C(fighter_gobj, ftMewtwo_SpecialS_GroundToAir);
 }
 
 // 0x80146BE0 - Mewtwo's aerial Confusion Collision callback
 void ftMewtwo_SpecialAirS_Coll(HSD_GObj* fighter_gobj)
 {
-    func_80082C74(fighter_gobj, ftMewtwo_SpecialAirS_AirToGround);
+    ft_80082C74(fighter_gobj, ftMewtwo_SpecialAirS_AirToGround);
 }
 
 // 0x80146C08

@@ -12,68 +12,75 @@ struct {
       1,  2,  4, 5, 0, 1, 2, 3, 5, 0, 1,  2,  3,  4,  0,  0 },
 };
 
-/* static */ void lbl_801566B4(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156688(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_801566E0(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156710(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156740(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156770(void);
-/* static */ void lbl_801567A0(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_801567AC(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_801567DC(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_8015683C(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_8015686C(void);
-/* static */ void lbl_80156878(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156884(void);
-/* static */ void lbl_80156898(void);
-/* static */ void lbl_801568AC(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_80156A5C(void);
-/* static */ void lbl_801568B8(void);
-/* static */ void lbl_801568E8(void);
-/* static */ void lbl_80156918(void);
-/* static */ void lbl_80156948(void);
+/* static */ void ftCrazyHand_801566B4(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156688(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_801566E0(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156710(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156740(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156770(void);
+/* static */ void ftCrazyHand_801567A0(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_801567AC(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_801567DC(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_8015683C(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_8015686C(void);
+/* static */ void ftCrazyHand_80156878(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156884(void);
+/* static */ void ftCrazyHand_80156898(void);
+/* static */ void ftCrazyHand_801568AC(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_80156A5C(void);
+/* static */ void ftCrazyHand_801568B8(void);
+/* static */ void ftCrazyHand_801568E8(void);
+/* static */ void ftCrazyHand_80156918(void);
+/* static */ void ftCrazyHand_80156948(void);
 
 jtbl_t jtbl_803D4900 = {
-    lbl_801566B4, lbl_80156A5C, lbl_80156688, lbl_80156A5C, lbl_801566E0,
-    lbl_80156A5C, lbl_80156710, lbl_80156A5C, lbl_80156740, lbl_80156A5C,
-    lbl_80156A5C, lbl_80156770, lbl_801567A0, lbl_80156A5C, lbl_801567AC,
-    lbl_80156A5C, lbl_801567DC, lbl_80156A5C, lbl_8015683C, lbl_80156A5C,
-    lbl_80156A5C, lbl_80156A5C, lbl_80156A5C, lbl_80156A5C, lbl_80156A5C,
-    lbl_8015686C, lbl_80156878, lbl_80156A5C, lbl_80156A5C, lbl_80156884,
-    lbl_80156898, lbl_801568AC, lbl_80156A5C, lbl_80156A5C, lbl_801568B8,
-    lbl_801568E8, lbl_80156918, lbl_80156948,
+    ftCrazyHand_801566B4, ftCrazyHand_80156A5C, ftCrazyHand_80156688,
+    ftCrazyHand_80156A5C, ftCrazyHand_801566E0, ftCrazyHand_80156A5C,
+    ftCrazyHand_80156710, ftCrazyHand_80156A5C, ftCrazyHand_80156740,
+    ftCrazyHand_80156A5C, ftCrazyHand_80156A5C, ftCrazyHand_80156770,
+    ftCrazyHand_801567A0, ftCrazyHand_80156A5C, ftCrazyHand_801567AC,
+    ftCrazyHand_80156A5C, ftCrazyHand_801567DC, ftCrazyHand_80156A5C,
+    ftCrazyHand_8015683C, ftCrazyHand_80156A5C, ftCrazyHand_80156A5C,
+    ftCrazyHand_80156A5C, ftCrazyHand_80156A5C, ftCrazyHand_80156A5C,
+    ftCrazyHand_80156A5C, ftCrazyHand_8015686C, ftCrazyHand_80156878,
+    ftCrazyHand_80156A5C, ftCrazyHand_80156A5C, ftCrazyHand_80156884,
+    ftCrazyHand_80156898, ftCrazyHand_801568AC, ftCrazyHand_80156A5C,
+    ftCrazyHand_80156A5C, ftCrazyHand_801568B8, ftCrazyHand_801568E8,
+    ftCrazyHand_80156918, ftCrazyHand_80156948,
 };
 
-/* static */ void lbl_8015B2FC(void);
-/* static */ void lbl_8015B35C(void);
-/* static */ void lbl_8015B390(void);
-/* static */ void lbl_8015B3B8(void);
-/* static */ void lbl_8015B3EC(void);
-/* static */ void lbl_8015B404(void);
-/* static */ void lbl_8015B43C(void);
-/* static */ void lbl_8015B46C(void);
-/* static */ void lbl_8015B4AC(void);
-/* static */ void lbl_8015B4BC(void);
+/* static */ void ftCrazyHand_8015B2FC(void);
+/* static */ void ftCrazyHand_8015B35C(void);
+/* static */ void ftCrazyHand_8015B390(void);
+/* static */ void ftCrazyHand_8015B3B8(void);
+/* static */ void ftCrazyHand_8015B3EC(void);
+/* static */ void ftCrazyHand_8015B404(void);
+/* static */ void ftCrazyHand_8015B43C(void);
+/* static */ void ftCrazyHand_8015B46C(void);
+/* static */ void ftCrazyHand_8015B4AC(void);
+/* static */ void ftCrazyHand_8015B4BC(void);
 
 jtbl_t jtbl_803D4998 = {
-    lbl_8015B2FC, lbl_8015B35C, lbl_8015B390, lbl_8015B3B8, lbl_8015B3EC,
-    lbl_8015B404, lbl_8015B43C, lbl_8015B46C, lbl_8015B4AC, lbl_8015B4BC,
+    ftCrazyHand_8015B2FC, ftCrazyHand_8015B35C, ftCrazyHand_8015B390,
+    ftCrazyHand_8015B3B8, ftCrazyHand_8015B3EC, ftCrazyHand_8015B404,
+    ftCrazyHand_8015B43C, ftCrazyHand_8015B46C, ftCrazyHand_8015B4AC,
+    ftCrazyHand_8015B4BC,
 };

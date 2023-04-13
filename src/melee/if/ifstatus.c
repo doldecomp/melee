@@ -18,7 +18,7 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/random.h>
 
-HudIndex* func_802F4910(void)
+HudIndex* ifStatus_802F4910(void)
 {
     return &lbl_804A10C8;
 }
@@ -46,7 +46,7 @@ extern f32 lbl_804DDA50;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F491C(void)
+asm void ifStatus_802F491C(void)
 { // clang-format off
     nofralloc
 /* 802F491C 002F14FC  7C 08 02 A6 */	mflr r0
@@ -225,7 +225,7 @@ lbl_802F4B60:
 
 #else
 
-void func_802F491C(void)
+void ifStatus_802F491C(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -237,7 +237,7 @@ extern f32 lbl_804DDA4C;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F4B84(void)
+asm void ifStatus_802F4B84(void)
 { // clang-format off
     nofralloc
 /* 802F4B84 002F1764  7C 08 02 A6 */	mflr r0
@@ -485,7 +485,7 @@ lbl_802F4EA0:
 
 #else
 
-void func_802F4B84(void)
+void ifStatus_802F4B84(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -504,7 +504,7 @@ extern f32 lbl_804DDA98;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F4EDC(void)
+asm void ifStatus_802F4EDC(void)
 { // clang-format off
     nofralloc
 /* 802F4EDC 002F1ABC  7C 08 02 A6 */	mflr r0
@@ -538,11 +538,11 @@ lbl_802F4F3C:
 /* 802F4F40 002F1B20  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 802F4F44 002F1B24  41 82 00 10 */	beq lbl_802F4F54
 /* 802F4F48 002F1B28  7F E3 FB 78 */	mr r3, r31
-/* 802F4F4C 002F1B2C  4B FF F9 D1 */	bl func_802F491C
+/* 802F4F4C 002F1B2C  4B FF F9 D1 */	bl ifStatus_802F491C
 /* 802F4F50 002F1B30  48 00 0B D8 */	b lbl_802F5B28
 lbl_802F4F54:
 /* 802F4F54 002F1B34  7F C3 F3 78 */	mr r3, r30
-/* 802F4F58 002F1B38  4B D1 61 45 */	bl func_8000B09C
+/* 802F4F58 002F1B38  4B D1 61 45 */	bl lb_8000B09C
 /* 802F4F5C 002F1B3C  88 9F 00 10 */	lbz r4, 0x10(r31)
 /* 802F4F60 002F1B40  3B A3 00 00 */	addi r29, r3, 0
 /* 802F4F64 002F1B44  54 80 E7 FF */	rlwinm. r0, r4, 0x1c, 0x1f, 0x1f
@@ -565,7 +565,7 @@ lbl_802F4F80:
 /* 802F4FA4 002F1B84  7F C3 F3 78 */	mr r3, r30
 /* 802F4FA8 002F1B88  80 F9 02 64 */	lwz r7, 0x264(r25)
 /* 802F4FAC 002F1B8C  38 80 00 01 */	li r4, 1
-/* 802F4FB0 002F1B90  4B D1 70 CD */	bl func_8000C07C
+/* 802F4FB0 002F1B90  4B D1 70 CD */	bl lb_8000C07C
 /* 802F4FB4 002F1B94  7F C3 F3 78 */	mr r3, r30
 /* 802F4FB8 002F1B98  C0 22 E0 6C */	lfs f1, lbl_804DDA4C(r2)
 /* 802F4FBC 002F1B9C  48 07 A9 01 */	bl HSD_JObjReqAnimAll
@@ -608,7 +608,7 @@ lbl_802F5044:
 /* 802F5044 002F1C24  38 7E 00 00 */	addi r3, r30, 0
 /* 802F5048 002F1C28  38 80 00 01 */	li r4, 1
 /* 802F504C 002F1C2C  38 A0 04 00 */	li r5, 0x400
-/* 802F5050 002F1C30  4B F3 A3 89 */	bl func_8022F3D8
+/* 802F5050 002F1C30  4B F3 A3 89 */	bl mn_8022F3D8
 /* 802F5054 002F1C34  3C 60 66 66 */	lis r3, 0x66666667@ha
 /* 802F5058 002F1C38  A8 FF 00 0A */	lha r7, 0xa(r31)
 /* 802F505C 002F1C3C  3B 83 66 67 */	addi r28, r3, 0x66666667@l
@@ -1125,7 +1125,7 @@ lbl_802F5788:
 /* 802F582C 002F240C  98 C3 00 06 */	stb r6, 6(r3)
 lbl_802F5830:
 /* 802F5830 002F2410  7F C3 F3 78 */	mr r3, r30
-/* 802F5834 002F2414  4B D1 58 69 */	bl func_8000B09C
+/* 802F5834 002F2414  4B D1 58 69 */	bl lb_8000B09C
 /* 802F5838 002F2418  2C 03 00 00 */	cmpwi r3, 0
 /* 802F583C 002F241C  41 82 00 64 */	beq lbl_802F58A0
 /* 802F5840 002F2420  3A E0 00 00 */	li r23, 0
@@ -1331,7 +1331,7 @@ lbl_802F5AF4:
 lbl_802F5B08:
 /* 802F5B08 002F26E8  38 7F 00 00 */	addi r3, r31, 0
 /* 802F5B0C 002F26EC  38 9D 00 00 */	addi r4, r29, 0
-/* 802F5B10 002F26F0  4B FF F0 75 */	bl func_802F4B84
+/* 802F5B10 002F26F0  4B FF F0 75 */	bl ifStatus_802F4B84
 /* 802F5B14 002F26F4  88 0D B6 C0 */	lbz r0, lbl_804D6D60(r13)
 /* 802F5B18 002F26F8  28 00 00 05 */	cmplwi r0, 5
 /* 802F5B1C 002F26FC  41 80 00 0C */	blt lbl_802F5B28
@@ -1351,7 +1351,7 @@ lbl_802F5B28:
 
 #else
 
-void func_802F4EDC(void)
+void ifStatus_802F4EDC(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -1364,7 +1364,7 @@ extern char* lbl_803F95C0;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F5B48(void)
+asm void ifStatus_802F5B48(void)
 { // clang-format off
     nofralloc
 /* 802F5B48 002F2728  7C 08 02 A6 */	mflr r0
@@ -1400,7 +1400,7 @@ lbl_802F5B9C:
 /* 802F5BB4 002F2794  28 00 00 C8 */	cmplwi r0, 0xc8
 /* 802F5BB8 002F2798  40 81 00 10 */	ble lbl_802F5BC8
 /* 802F5BBC 002F279C  88 7F 00 08 */	lbz r3, 8(r31)
-/* 802F5BC0 002F27A0  48 00 0B C9 */	bl func_802F6788
+/* 802F5BC0 002F27A0  48 00 0B C9 */	bl ifStatus_802F6788
 /* 802F5BC4 002F27A4  48 00 02 08 */	b lbl_802F5DCC
 lbl_802F5BC8:
 /* 802F5BC8 002F27A8  88 7F 00 08 */	lbz r3, 8(r31)
@@ -1476,7 +1476,7 @@ lbl_802F5CC4:
 /* 802F5CC4 002F28A4  A8 1F 00 0C */	lha r0, 0xc(r31)
 /* 802F5CC8 002F28A8  2C 00 00 00 */	cmpwi r0, 0
 /* 802F5CCC 002F28AC  40 82 01 00 */	bne lbl_802F5DCC
-/* 802F5CD0 002F28B0  4B E7 51 75 */	bl func_8016AE44
+/* 802F5CD0 002F28B0  4B E7 51 75 */	bl gm_8016AE44
 /* 802F5CD4 002F28B4  88 BF 00 08 */	lbz r5, 8(r31)
 /* 802F5CD8 002F28B8  7C A0 07 74 */	extsb r0, r5
 /* 802F5CDC 002F28BC  1C 80 00 0E */	mulli r4, r0, 0xe
@@ -1486,7 +1486,7 @@ lbl_802F5CC4:
 /* 802F5CEC 002F28CC  41 82 00 E0 */	beq lbl_802F5DCC
 /* 802F5CF0 002F28D0  38 65 00 00 */	addi r3, r5, 0
 /* 802F5CF4 002F28D4  7C 63 07 74 */	extsb r3, r3
-/* 802F5CF8 002F28D8  48 00 0C 51 */	bl func_802F6948
+/* 802F5CF8 002F28D8  48 00 0C 51 */	bl ifStatus_802F6948
 /* 802F5CFC 002F28DC  48 00 00 D0 */	b lbl_802F5DCC
 lbl_802F5D00:
 /* 802F5D00 002F28E0  88 7F 00 08 */	lbz r3, 8(r31)
@@ -1557,7 +1557,7 @@ lbl_802F5DCC:
 
 #else
 
-void func_802F5B48(void)
+void ifStatus_802F5B48(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -1575,7 +1575,7 @@ inline HudValue* getPlayerByHUDParent(HSD_GObj* parent)
     return NULL;
 }
 
-void lbl_802F5DE0(HSD_GObj* player, s32 arg1)
+void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1)
 {
     if (!getPlayerByHUDParent(player)->flags.hide_all_digits)
         func_80391070(player, arg1);
@@ -1584,7 +1584,7 @@ void lbl_802F5DE0(HSD_GObj* player, s32 arg1)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void lbl_802F5E50(void)
+asm void ifStatus_802F5E50(void)
 { // clang-format off
     nofralloc
 /* 802F5E50 002F2A30  7C 08 02 A6 */	mflr r0
@@ -1624,7 +1624,7 @@ lbl_802F5EB0:
 
 #else
 
-void lbl_802F5E50(void)
+void ifStatus_802F5E50(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -1634,7 +1634,7 @@ void lbl_802F5E50(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F5EC0(void)
+asm void ifStatus_802F5EC0(void)
 { // clang-format off
     nofralloc
 /* 802F5EC0 002F2AA0  7C 08 02 A6 */	mflr r0
@@ -1661,19 +1661,19 @@ asm void func_802F5EC0(void)
 /* 802F5F14 002F2AF4  38 7F 00 00 */	addi r3, r31, 0
 /* 802F5F18 002F2AF8  38 BE 00 00 */	addi r5, r30, 0
 /* 802F5F1C 002F2AFC  48 09 AB 55 */	bl func_80390A70
-/* 802F5F20 002F2B00  3C 60 80 2F */	lis r3, lbl_802F5DE0@ha
-/* 802F5F24 002F2B04  38 83 5D E0 */	addi r4, r3, lbl_802F5DE0@l
+/* 802F5F20 002F2B00  3C 60 80 2F */	lis r3, ifStatus_802F5DE0@ha
+/* 802F5F24 002F2B04  38 83 5D E0 */	addi r4, r3, ifStatus_802F5DE0@l
 /* 802F5F28 002F2B08  38 7F 00 00 */	addi r3, r31, 0
 /* 802F5F2C 002F2B0C  38 A0 00 0B */	li r5, 0xb
 /* 802F5F30 002F2B10  38 C0 00 00 */	li r6, 0
 /* 802F5F34 002F2B14  48 09 A7 69 */	bl GObj_SetupGXLink
-/* 802F5F38 002F2B18  3C 60 80 2F */	lis r3, func_802F5B48@ha
-/* 802F5F3C 002F2B1C  38 83 5B 48 */	addi r4, r3, func_802F5B48@l
+/* 802F5F38 002F2B18  3C 60 80 2F */	lis r3, ifStatus_802F5B48@ha
+/* 802F5F3C 002F2B1C  38 83 5B 48 */	addi r4, r3, ifStatus_802F5B48@l
 /* 802F5F40 002F2B20  38 7F 00 00 */	addi r3, r31, 0
 /* 802F5F44 002F2B24  38 A0 00 11 */	li r5, 0x11
 /* 802F5F48 002F2B28  48 09 9E 0D */	bl func_8038FD54
-/* 802F5F4C 002F2B2C  3C 60 80 2F */	lis r3, func_802F4EDC@ha
-/* 802F5F50 002F2B30  38 83 4E DC */	addi r4, r3, func_802F4EDC@l
+/* 802F5F4C 002F2B2C  3C 60 80 2F */	lis r3, ifStatus_802F4EDC@ha
+/* 802F5F50 002F2B30  38 83 4E DC */	addi r4, r3, ifStatus_802F4EDC@l
 /* 802F5F54 002F2B34  38 7F 00 00 */	addi r3, r31, 0
 /* 802F5F58 002F2B38  38 A0 00 11 */	li r5, 0x11
 /* 802F5F5C 002F2B3C  48 09 9D F9 */	bl func_8038FD54
@@ -1694,14 +1694,14 @@ lbl_802F5F6C:
 /* 802F5F90 002F2B70  7F C3 F3 78 */	mr r3, r30
 /* 802F5F94 002F2B74  80 FB 02 64 */	lwz r7, 0x264(r27)
 /* 802F5F98 002F2B78  38 80 00 00 */	li r4, 0
-/* 802F5F9C 002F2B7C  4B D1 60 E1 */	bl func_8000C07C
+/* 802F5F9C 002F2B7C  4B D1 60 E1 */	bl lb_8000C07C
 /* 802F5FA0 002F2B80  7F C3 F3 78 */	mr r3, r30
 /* 802F5FA4 002F2B84  C0 22 E0 6C */	lfs f1, lbl_804DDA4C(r2)
 /* 802F5FA8 002F2B88  48 07 99 15 */	bl HSD_JObjReqAnimAll
 /* 802F5FAC 002F2B8C  7F C3 F3 78 */	mr r3, r30
 /* 802F5FB0 002F2B90  48 07 A9 79 */	bl HSD_JObjAnimAll
 /* 802F5FB4 002F2B94  57 A3 06 3E */	clrlwi r3, r29, 0x18
-/* 802F5FB8 002F2B98  4B FF D4 6D */	bl func_802F3424
+/* 802F5FB8 002F2B98  4B FF D4 6D */	bl ifAll_802F3424
 /* 802F5FBC 002F2B9C  28 1E 00 00 */	cmplwi r30, 0
 /* 802F5FC0 002F2BA0  3B A3 00 00 */	addi r29, r3, 0
 /* 802F5FC4 002F2BA4  40 82 00 14 */	bne lbl_802F5FD8
@@ -1754,7 +1754,7 @@ lbl_802F6060:
 lbl_802F606C:
 /* 802F606C 002F2C4C  38 7B 00 00 */	addi r3, r27, 0
 /* 802F6070 002F2C50  38 9A 00 00 */	addi r4, r26, 0
-/* 802F6074 002F2C54  48 00 01 21 */	bl func_802F6194
+/* 802F6074 002F2C54  48 00 01 21 */	bl ifStatus_802F6194
 /* 802F6078 002F2C58  90 7D 00 54 */	stw r3, 0x54(r29)
 /* 802F607C 002F2C5C  83 DD 00 54 */	lwz r30, 0x54(r29)
 /* 802F6080 002F2C60  28 1E 00 00 */	cmplwi r30, 0
@@ -1817,14 +1817,14 @@ lbl_802F6144:
 /* 802F6154 002F2D34  48 06 8A 19 */	bl HSD_TObjAnim
 lbl_802F6158:
 /* 802F6158 002F2D38  80 7C 00 00 */	lwz r3, 0(r28)
-/* 802F615C 002F2D3C  4B FF F9 ED */	bl func_802F5B48
+/* 802F615C 002F2D3C  4B FF F9 ED */	bl ifStatus_802F5B48
 /* 802F6160 002F2D40  A8 1C 00 0A */	lha r0, 0xa(r28)
 /* 802F6164 002F2D44  7C 00 00 34 */	cntlzw r0, r0
 /* 802F6168 002F2D48  54 00 D9 7E */	srwi r0, r0, 5
 /* 802F616C 002F2D4C  7C 00 07 34 */	extsh r0, r0
 /* 802F6170 002F2D50  B0 1C 00 0C */	sth r0, 0xc(r28)
 /* 802F6174 002F2D54  80 7C 00 00 */	lwz r3, 0(r28)
-/* 802F6178 002F2D58  4B FF ED 65 */	bl func_802F4EDC
+/* 802F6178 002F2D58  4B FF ED 65 */	bl ifStatus_802F4EDC
 /* 802F617C 002F2D5C  80 7C 00 00 */	lwz r3, 0(r28)
 /* 802F6180 002F2D60  BB 41 00 38 */	lmw r26, 0x38(r1)
 /* 802F6184 002F2D64  80 01 00 54 */	lwz r0, 0x54(r1)
@@ -1836,7 +1836,7 @@ lbl_802F6158:
 
 #else
 
-void func_802F5EC0(void)
+void ifStatus_802F5EC0(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -1846,7 +1846,7 @@ void func_802F5EC0(void)
 #ifdef MUST_MATCH
 
 #pragma push
-asm HSD_GObj* func_802F6194(HSD_GObj*, s32)
+asm HSD_GObj* ifStatus_802F6194(HSD_GObj*, s32)
 {
     // clang-format off
     nofralloc
@@ -1906,7 +1906,7 @@ static inline HSD_GObj* nth_node(HSD_GObj* node, s32 n)
 
 // 99.81% match
 // https://decomp.me/scratch/XGFpw
-HSD_GObj* func_802F6194(HSD_GObj* node, s32 n)
+HSD_GObj* ifStatus_802F6194(HSD_GObj* node, s32 n)
 {
     HSD_GObj* gx;
 
@@ -1932,7 +1932,7 @@ extern f64 lbl_804DDAA0;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F61FC(void)
+asm void ifStatus_802F61FC(void)
 { // clang-format off
     nofralloc
 /* 802F61FC 002F2DDC  7C 08 02 A6 */	mflr r0
@@ -1951,7 +1951,7 @@ asm void func_802F61FC(void)
 /* 802F6230 002F2E10  3B 83 00 00 */	addi r28, r3, 0
 /* 802F6234 002F2E14  28 04 00 00 */	cmplwi r4, 0
 /* 802F6238 002F2E18  40 82 00 98 */	bne lbl_802F62D0
-/* 802F623C 002F2E1C  4B FF D4 55 */	bl func_802F3690
+/* 802F623C 002F2E1C  4B FF D4 55 */	bl ifAll_802F3690
 /* 802F6240 002F2E20  38 60 00 0E */	li r3, 0xe
 /* 802F6244 002F2E24  38 80 00 0F */	li r4, 0xf
 /* 802F6248 002F2E28  38 A0 00 00 */	li r5, 0
@@ -1982,8 +1982,8 @@ lbl_802F62A0:
 /* 802F62A4 002F2E84  38 79 00 00 */	addi r3, r25, 0
 /* 802F62A8 002F2E88  38 BE 00 00 */	addi r5, r30, 0
 /* 802F62AC 002F2E8C  48 09 A7 C5 */	bl func_80390A70
-/* 802F62B0 002F2E90  3C 60 80 2F */	lis r3, lbl_802F5E50@ha
-/* 802F62B4 002F2E94  38 83 5E 50 */	addi r4, r3, lbl_802F5E50@l
+/* 802F62B0 002F2E90  3C 60 80 2F */	lis r3, ifStatus_802F5E50@ha
+/* 802F62B4 002F2E94  38 83 5E 50 */	addi r4, r3, ifStatus_802F5E50@l
 /* 802F62B8 002F2E98  38 79 00 00 */	addi r3, r25, 0
 /* 802F62BC 002F2E9C  38 A0 00 0B */	li r5, 0xb
 /* 802F62C0 002F2EA0  38 C0 00 00 */	li r6, 0
@@ -2002,7 +2002,7 @@ lbl_802F62D4:
 /* 802F62EC 002F2ECC  81 07 00 08 */	lwz r8, 8(r7)
 /* 802F62F0 002F2ED0  80 FA 02 74 */	lwz r7, 0x274(r26)
 /* 802F62F4 002F2ED4  83 48 00 08 */	lwz r26, 8(r8)
-/* 802F62F8 002F2ED8  4B D1 5D 85 */	bl func_8000C07C
+/* 802F62F8 002F2ED8  4B D1 5D 85 */	bl lb_8000C07C
 /* 802F62FC 002F2EDC  2C 1C 00 1A */	cmpwi r28, 0x1a
 /* 802F6300 002F2EE0  41 82 00 10 */	beq lbl_802F6310
 /* 802F6304 002F2EE4  38 1C FF E3 */	addi r0, r28, -29
@@ -2014,7 +2014,7 @@ lbl_802F6314:
 /* 802F6314 002F2EF4  38 7C 00 00 */	addi r3, r28, 0
 /* 802F6318 002F2EF8  38 80 00 00 */	li r4, 0
 /* 802F631C 002F2EFC  38 A0 00 00 */	li r5, 0
-/* 802F6320 002F2F00  4B E7 28 15 */	bl func_80168B34
+/* 802F6320 002F2F00  4B E7 28 15 */	bl gm_80168B34
 /* 802F6324 002F2F04  C0 02 E0 B4 */	lfs f0, lbl_804DDA94(r2)
 /* 802F6328 002F2F08  7F 43 D3 78 */	mr r3, r26
 /* 802F632C 002F2F0C  EC 20 08 2A */	fadds f1, f0, f1
@@ -2025,7 +2025,7 @@ lbl_802F6314:
 /* 802F6340 002F2F20  7F 43 D3 78 */	mr r3, r26
 /* 802F6344 002F2F24  48 06 88 29 */	bl HSD_TObjAnim
 /* 802F6348 002F2F28  7F E3 FB 78 */	mr r3, r31
-/* 802F634C 002F2F2C  4B FF D0 D9 */	bl func_802F3424
+/* 802F634C 002F2F2C  4B FF D0 D9 */	bl ifAll_802F3424
 /* 802F6350 002F2F30  28 1E 00 00 */	cmplwi r30, 0
 /* 802F6354 002F2F34  3B 43 00 00 */	addi r26, r3, 0
 /* 802F6358 002F2F38  40 82 00 14 */	bne lbl_802F636C
@@ -2109,7 +2109,7 @@ lbl_802F646C:
 /* 802F646C 002F304C  7F E3 FB 78 */	mr r3, r31
 /* 802F6470 002F3050  4B D3 BF AD */	bl Player_GetPlayerSlotType
 /* 802F6474 002F3054  54 7A 06 3E */	clrlwi r26, r3, 0x18
-/* 802F6478 002F3058  4B E7 4C F1 */	bl func_8016B168
+/* 802F6478 002F3058  4B E7 4C F1 */	bl gm_8016B168
 /* 802F647C 002F305C  54 7B 06 3E */	clrlwi r27, r3, 0x18
 /* 802F6480 002F3060  38 7F 00 00 */	addi r3, r31, 0
 /* 802F6484 002F3064  4B D3 CE ED */	bl Player_GetTeam
@@ -2120,8 +2120,8 @@ lbl_802F646C:
 /* 802F6498 002F3078  38 9C 00 00 */	addi r4, r28, 0
 /* 802F649C 002F307C  38 BB 00 00 */	addi r5, r27, 0
 /* 802F64A0 002F3080  38 DA 00 00 */	addi r6, r26, 0
-/* 802F64A4 002F3084  4B E6 A3 B1 */	bl func_80160854
-/* 802F64A8 002F3088  4B E6 A4 C1 */	bl func_80160968
+/* 802F64A4 002F3084  4B E6 A3 B1 */	bl gm_80160854
+/* 802F64A8 002F3088  4B E6 A4 C1 */	bl gm_80160968
 /* 802F64AC 002F308C  28 1E 00 00 */	cmplwi r30, 0
 /* 802F64B0 002F3090  90 61 00 20 */	stw r3, 0x20(r1)
 /* 802F64B4 002F3094  40 82 00 0C */	bne lbl_802F64C0
@@ -2152,7 +2152,7 @@ lbl_802F64C4:
 
 #else
 
-void func_802F61FC(void)
+void ifStatus_802F61FC(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -2162,7 +2162,7 @@ void func_802F61FC(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F6508(s32)
+asm void ifStatus_802F6508(s32)
 { // clang-format off
     nofralloc
 /* 802F6508 002F30E8  7C 08 02 A6 */	mflr r0
@@ -2179,7 +2179,7 @@ asm void func_802F6508(s32)
 /* 802F6534 002F3114  88 0D B6 C0 */	lbz r0, lbl_804D6D60(r13)
 /* 802F6538 002F3118  7C 00 F8 00 */	cmpw r0, r31
 /* 802F653C 002F311C  40 81 01 00 */	ble lbl_802F663C
-/* 802F6540 002F3120  4B E7 49 11 */	bl func_8016AE50
+/* 802F6540 002F3120  4B E7 49 11 */	bl gm_8016AE50
 /* 802F6544 002F3124  88 03 00 02 */	lbz r0, 2(r3)
 /* 802F6548 002F3128  7C 7D 1B 78 */	mr r29, r3
 /* 802F654C 002F312C  54 00 FF FF */	rlwinm. r0, r0, 0x1f, 0x1f, 0x1f
@@ -2210,18 +2210,18 @@ asm void func_802F6508(s32)
 /* 802F65B0 002F3190  98 1C 00 10 */	stb r0, 0x10(r28)
 /* 802F65B4 002F3194  9B FC 00 08 */	stb r31, 8(r28)
 /* 802F65B8 002F3198  98 BC 00 09 */	stb r5, 9(r28)
-/* 802F65BC 002F319C  4B FF FC 41 */	bl func_802F61FC
+/* 802F65BC 002F319C  4B FF FC 41 */	bl ifStatus_802F61FC
 /* 802F65C0 002F31A0  38 7C 00 00 */	addi r3, r28, 0
 /* 802F65C4 002F31A4  38 9E 00 00 */	addi r4, r30, 0
-/* 802F65C8 002F31A8  4B FF F8 F9 */	bl func_802F5EC0
+/* 802F65C8 002F31A8  4B FF F8 F9 */	bl ifStatus_802F5EC0
 /* 802F65CC 002F31AC  88 1D 00 03 */	lbz r0, 3(r29)
 /* 802F65D0 002F31B0  54 00 CF FF */	rlwinm. r0, r0, 0x19, 0x1f, 0x1f
 /* 802F65D4 002F31B4  41 82 00 18 */	beq lbl_802F65EC
-/* 802F65D8 002F31B8  4B E7 4C 61 */	bl func_8016B238
+/* 802F65D8 002F31B8  4B E7 4C 61 */	bl gm_8016B238
 /* 802F65DC 002F31BC  2C 03 00 00 */	cmpwi r3, 0
 /* 802F65E0 002F31C0  40 82 00 0C */	bne lbl_802F65EC
 /* 802F65E4 002F31C4  7F E3 FB 78 */	mr r3, r31
-/* 802F65E8 002F31C8  48 00 8D 7D */	bl func_802FF364
+/* 802F65E8 002F31C8  48 00 8D 7D */	bl un_802FF364
 lbl_802F65EC:
 /* 802F65EC 002F31CC  88 7D 00 00 */	lbz r3, 0(r29)
 /* 802F65F0 002F31D0  54 63 DF 7E */	rlwinm r3, r3, 0x1b, 0x1d, 0x1f
@@ -2233,19 +2233,19 @@ lbl_802F65EC:
 lbl_802F6608:
 /* 802F6608 002F31E8  57 E3 06 3E */	clrlwi r3, r31, 0x18
 /* 802F660C 002F31EC  38 80 00 00 */	li r4, 0
-/* 802F6610 002F31F0  48 00 32 D9 */	bl func_802F98E8
+/* 802F6610 002F31F0  48 00 32 D9 */	bl ifStock_802F98E8
 /* 802F6614 002F31F4  48 00 00 28 */	b lbl_802F663C
 lbl_802F6618:
 /* 802F6618 002F31F8  28 03 00 02 */	cmplwi r3, 2
 /* 802F661C 002F31FC  40 82 00 14 */	bne lbl_802F6630
 /* 802F6620 002F3200  57 E3 06 3E */	clrlwi r3, r31, 0x18
 /* 802F6624 002F3204  38 80 00 02 */	li r4, 2
-/* 802F6628 002F3208  48 00 32 C1 */	bl func_802F98E8
+/* 802F6628 002F3208  48 00 32 C1 */	bl ifStock_802F98E8
 /* 802F662C 002F320C  48 00 00 10 */	b lbl_802F663C
 lbl_802F6630:
 /* 802F6630 002F3210  57 E3 06 3E */	clrlwi r3, r31, 0x18
 /* 802F6634 002F3214  38 80 00 01 */	li r4, 1
-/* 802F6638 002F3218  48 00 32 B1 */	bl func_802F98E8
+/* 802F6638 002F3218  48 00 32 B1 */	bl ifStock_802F98E8
 lbl_802F663C:
 /* 802F663C 002F321C  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 802F6640 002F3220  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -2260,7 +2260,7 @@ lbl_802F663C:
 
 #else
 
-void func_802F6508(s32 arg0)
+void ifStatus_802F6508(s32 arg0)
 {
     NOT_IMPLEMENTED;
 }
@@ -2269,14 +2269,14 @@ void func_802F6508(s32 arg0)
 
 extern s8 lbl_804D6D60;
 
-void func_802F665C(s8 arg0)
+void ifStatus_802F665C(s8 arg0)
 {
     s32 i;
 
-    func_802F343C();
+    ifAll_802F343C();
     lbl_804D6D60 = arg0;
     for (i = 0; i < 6; i++) {
-        func_802F6508(i);
+        ifStatus_802F6508(i);
     }
 }
 
@@ -2285,7 +2285,7 @@ extern char* lbl_803F95AC;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F66A4(void)
+asm void ifStatus_802F66A4(void)
 { // clang-format off
     nofralloc
 /* 802F66A4 002F3284  7C 08 02 A6 */	mflr r0
@@ -2295,7 +2295,7 @@ asm void func_802F66A4(void)
 /* 802F66B4 002F3294  93 E1 00 1C */	stw r31, 0x1c(r1)
 /* 802F66B8 002F3298  3B E3 10 C8 */	addi r31, r3, lbl_804A10C8@l
 /* 802F66BC 002F329C  93 C1 00 18 */	stw r30, 0x18(r1)
-/* 802F66C0 002F32A0  4B FF CF D1 */	bl func_802F3690
+/* 802F66C0 002F32A0  4B FF CF D1 */	bl ifAll_802F3690
 /* 802F66C4 002F32A4  3C A0 80 40 */	lis r5, lbl_803F9598@ha
 /* 802F66C8 002F32A8  80 63 00 00 */	lwz r3, 0(r3)
 /* 802F66CC 002F32AC  3C 80 80 40 */	lis r4, lbl_803F95AC@ha
@@ -2305,7 +2305,7 @@ asm void func_802F66A4(void)
 /* 802F66DC 002F32BC  38 81 00 08 */	addi r4, r1, 8
 /* 802F66E0 002F32C0  38 C1 00 0C */	addi r6, r1, 0xc
 /* 802F66E4 002F32C4  39 00 00 00 */	li r8, 0
-/* 802F66E8 002F32C8  4B D2 04 09 */	bl func_80016AF0
+/* 802F66E8 002F32C8  4B D2 04 09 */	bl lbArchive_80016AF0
 /* 802F66EC 002F32CC  80 81 00 08 */	lwz r4, 8(r1)
 /* 802F66F0 002F32D0  2C 1E 00 00 */	cmpwi r30, 0
 /* 802F66F4 002F32D4  80 64 00 00 */	lwz r3, 0(r4)
@@ -2338,7 +2338,7 @@ asm void func_802F66A4(void)
 /* 802F6760 002F3340  98 0D B6 C0 */	stb r0, lbl_804D6D60(r13)
 /* 802F6764 002F3344  38 7F 00 00 */	addi r3, r31, 0
 /* 802F6768 002F3348  38 80 02 58 */	li r4, 0x258
-/* 802F676C 002F334C  4B D1 59 F5 */	bl func_8000C160
+/* 802F676C 002F334C  4B D1 59 F5 */	bl lb_8000C160
 lbl_802F6770:
 /* 802F6770 002F3350  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 802F6774 002F3354  83 E1 00 1C */	lwz r31, 0x1c(r1)
@@ -2351,14 +2351,14 @@ lbl_802F6770:
 
 #else
 
-void func_802F66A4(void)
+void ifStatus_802F66A4(void)
 {
     NOT_IMPLEMENTED;
 }
 
 #endif
 
-void func_802F6788(s32 player_idx)
+void ifStatus_802F6788(s32 player_idx)
 {
     HudValue* player_hud;
     s8 p_idx = (u8) player_idx;
@@ -2371,10 +2371,10 @@ void func_802F6788(s32 player_idx)
         func_80390228(player_hud->next);
         player_hud->next = NULL;
     }
-    func_802FB650(player_idx & 0xFF);
+    ifStock_802FB650(player_idx & 0xFF);
 }
 
-void func_802F6804(void)
+void ifStatus_802F6804(void)
 {
     s32 i;
     HudValue* v;
@@ -2390,13 +2390,13 @@ void func_802F6804(void)
             func_80390228(v->next);
             v->next = NULL;
         }
-        func_802FB650((s8) i & 0xFF);
+        ifStock_802FB650((s8) i & 0xFF);
         i++;
     } while (i < 6);
 }
 
 // Hide Percentage Digits
-void func_802F6898(void)
+void ifStatus_802F6898(void)
 {
     s32 i;
     HudIndex* v = &lbl_804A10C8;
@@ -2406,7 +2406,7 @@ void func_802F6898(void)
 }
 
 // Show All Percentage Digits
-void func_802F68F0(void)
+void ifStatus_802F68F0(void)
 {
     s32 i;
     HudIndex* v = &lbl_804A10C8;
@@ -2415,13 +2415,13 @@ void func_802F68F0(void)
     }
 }
 
-void func_802F6948(s32 player_idx)
+void ifStatus_802F6948(s32 player_idx)
 {
     HudValue* hud_player;
     Placeholder_8016AE50_ret_val* small_thing;
     HudFlags* hud_player_flags;
 
-    small_thing = func_8016AE50();
+    small_thing = gm_8016AE50();
     hud_player = &lbl_804A10C8.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -2433,21 +2433,21 @@ void func_802F6948(s32 player_idx)
     }
 }
 
-void func_802F69C0(s32 player_idx, s32 arg1)
+void ifStatus_802F69C0(s32 player_idx, s32 arg1)
 {
     HudValue* hud_player;
     HudFlags* hud_player_flags;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
 
-    big_thing = func_8016AE38();
+    big_thing = gm_8016AE38();
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0)) {
-        func_802F7C30(arg1);
+        if_802F7C30(arg1);
     }
 
-    big_thing = func_8016AE38();
+    big_thing = gm_8016AE38();
     big_thing->unkD = player_idx;
-    small_thing = func_8016AE50();
+    small_thing = gm_8016AE50();
     hud_player = &lbl_804A10C8.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -2462,27 +2462,27 @@ void func_802F69C0(s32 player_idx, s32 arg1)
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&func_802F7BB4 != NULL))
+        (&if_802F7BB4 != NULL))
     {
-        func_802F7BB4(player_idx);
+        if_802F7BB4(player_idx);
     }
 }
 
-void func_802F6AF8(s32 player_idx)
+void ifStatus_802F6AF8(s32 player_idx)
 {
     HudValue* hud_player;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
     HudFlags* hud_player_flags;
 
-    big_thing = func_8016AE38();
+    big_thing = gm_8016AE38();
     big_thing->unkD = player_idx;
-    small_thing = func_8016AE50();
+    small_thing = gm_8016AE50();
     hud_player = &lbl_804A10C8.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -2497,27 +2497,27 @@ void func_802F6AF8(s32 player_idx)
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&func_802F7AF8 != NULL))
+        (&if_802F7AF8 != NULL))
     {
-        func_802F7AF8(player_idx);
+        if_802F7AF8(player_idx);
     }
 }
 
-void func_802F6C04(s32 player_idx)
+void ifStatus_802F6C04(s32 player_idx)
 {
     HudValue* hud_player;
     HudFlags* hud_player_flags;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
 
-    big_thing = func_8016AE38();
+    big_thing = gm_8016AE38();
     big_thing->unkD = player_idx;
-    small_thing = func_8016AE50();
+    small_thing = gm_8016AE50();
     hud_player = &lbl_804A10C8.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -2532,27 +2532,27 @@ void func_802F6C04(s32 player_idx)
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&func_802F7C30 != NULL))
+        (&if_802F7C30 != NULL))
     {
-        func_802F7C30(player_idx);
+        if_802F7C30(player_idx);
     }
 }
 
-void func_802F6D10(s32 player_idx)
+void ifStatus_802F6D10(s32 player_idx)
 {
     HudValue* hud_player;
     Placeholder_8016AE38_ret_val* big_thing;
     Placeholder_8016AE50_ret_val* small_thing;
     HudFlags* hud_player_flags;
 
-    big_thing = func_8016AE38();
+    big_thing = gm_8016AE38();
     big_thing->unkD = player_idx;
-    small_thing = func_8016AE50();
+    small_thing = gm_8016AE50();
     hud_player = &lbl_804A10C8.players[player_idx];
     hud_player_flags = &hud_player->flags;
     if (hud_player_flags->explode_animation != 1) {
@@ -2567,23 +2567,23 @@ void func_802F6D10(s32 player_idx)
          (Player_GetPlayerSlotType(player_idx) == 1)) &&
         (Player_GetStocks(player_idx) == 0))
     {
-        func_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
+        gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx) & 0xFF);
     }
 
     /// @todo Weird check on a known function addr
     if ((big_thing->unk24C8.top3 != 1U) && (big_thing->unk24CA.unk4 != 0) &&
-        (&func_802F7D08 != NULL))
+        (&if_802F7D08 != NULL))
     {
-        func_802F7D08(player_idx);
+        if_802F7D08(player_idx);
     }
 }
 
-void func_802F6E1C(int slot)
+void ifStatus_802F6E1C(int slot)
 {
-    func_802F6508(slot);
+    ifStatus_802F6508(slot);
 }
 
-void func_802F6E3C(s32 player_num)
+void ifStatus_802F6E3C(s32 player_num)
 {
     HudValue* player;
 
@@ -2594,7 +2594,7 @@ void func_802F6E3C(s32 player_num)
     if (player->next != NULL) {
         func_80390CAC(player->next);
     }
-    func_802FB6AC(player_num);
+    ifStock_802FB6AC(player_num);
 }
 
 extern Thing_803F9628 lbl_803F9628;
@@ -2603,7 +2603,7 @@ extern f64 lbl_804DDAA8;
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F6EA4(void)
+asm void ifStatus_802F6EA4(void)
 { // clang-format off
     nofralloc
 /* 802F6EA4 002F3A84  7C 08 02 A6 */	mflr r0
@@ -2635,14 +2635,14 @@ lbl_802F6EFC:
 /* 802F6F04 002F3AE4  38 7D 00 00 */	addi r3, r29, 0
 /* 802F6F08 002F3AE8  38 80 00 7F */	li r4, 0x7f
 /* 802F6F0C 002F3AEC  38 A0 00 40 */	li r5, 0x40
-/* 802F6F10 002F3AF0  4B D2 C8 99 */	bl func_800237A8
+/* 802F6F10 002F3AF0  4B D2 C8 99 */	bl lbAudioAx_800237A8
 lbl_802F6F14:
 /* 802F6F14 002F3AF4  2C 1D 00 00 */	cmpwi r29, 0
 /* 802F6F18 002F3AF8  41 80 01 08 */	blt lbl_802F7020
 /* 802F6F1C 002F3AFC  38 7C 00 00 */	addi r3, r28, 0
 /* 802F6F20 002F3B00  38 80 00 7F */	li r4, 0x7f
 /* 802F6F24 002F3B04  38 A0 00 40 */	li r5, 0x40
-/* 802F6F28 002F3B08  4B D2 C8 81 */	bl func_800237A8
+/* 802F6F28 002F3B08  4B D2 C8 81 */	bl lbAudioAx_800237A8
 /* 802F6F2C 002F3B0C  48 00 00 F4 */	b lbl_802F7020
 lbl_802F6F30:
 /* 802F6F30 002F3B10  1C 83 00 28 */	mulli r4, r3, 0x28
@@ -2667,7 +2667,7 @@ lbl_802F6F5C:
 /* 802F6F78 002F3B58  48 07 9E CD */	bl HSD_JObjLoadJoint
 /* 802F6F7C 002F3B5C  3B 83 00 00 */	addi r28, r3, 0
 /* 802F6F80 002F3B60  3C 80 08 00 */	lis r4, 0x800
-/* 802F6F84 002F3B64  4B D1 AC 95 */	bl func_80011C18
+/* 802F6F84 002F3B64  4B D1 AC 95 */	bl lb_80011C18
 /* 802F6F88 002F3B68  88 8D C1 A9 */	lbz r4, lbl_804D7849(r13)
 /* 802F6F8C 002F3B6C  38 7D 00 00 */	addi r3, r29, 0
 /* 802F6F90 002F3B70  38 BC 00 00 */	addi r5, r28, 0
@@ -2688,7 +2688,7 @@ lbl_802F6FC8:
 /* 802F6FC8 002F3BA8  80 BB 00 14 */	lwz r5, 0x14(r27)
 /* 802F6FCC 002F3BAC  38 7C 00 00 */	addi r3, r28, 0
 /* 802F6FD0 002F3BB0  38 80 00 00 */	li r4, 0
-/* 802F6FD4 002F3BB4  4B D1 51 15 */	bl func_8000C0E8
+/* 802F6FD4 002F3BB4  4B D1 51 15 */	bl lb_8000C0E8
 /* 802F6FD8 002F3BB8  7F 83 E3 78 */	mr r3, r28
 /* 802F6FDC 002F3BBC  C0 22 E0 C8 */	lfs f1, lbl_804DDAA8(r2)
 /* 802F6FE0 002F3BC0  48 07 88 DD */	bl HSD_JObjReqAnimAll
@@ -2718,7 +2718,7 @@ lbl_802F7020:
 
 #else
 
-void func_802F6EA4(void)
+void ifStatus_802F6EA4(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -2728,7 +2728,7 @@ void func_802F6EA4(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F7034(void)
+asm void ifStatus_802F7034(void)
 { // clang-format off
     nofralloc
 /* 802F7034 002F3C14  7C 08 02 A6 */	mflr r0
@@ -2736,7 +2736,7 @@ asm void func_802F7034(void)
 /* 802F703C 002F3C1C  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 802F7040 002F3C20  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 802F7044 002F3C24  7C 7F 1B 78 */	mr r31, r3
-/* 802F7048 002F3C28  4B E7 3D F1 */	bl func_8016AE38
+/* 802F7048 002F3C28  4B E7 3D F1 */	bl gm_8016AE38
 /* 802F704C 002F3C2C  80 83 00 10 */	lwz r4, 0x10(r3)
 /* 802F7050 002F3C30  2C 04 00 00 */	cmpwi r4, 0
 /* 802F7054 002F3C34  41 82 00 0C */	beq lbl_802F7060
@@ -2767,7 +2767,7 @@ lbl_802F7094:
 /* 802F70A0 002F3C80  38 68 FF FF */	addi r3, r8, -1
 /* 802F70A4 002F3C84  38 FF 00 00 */	addi r7, r31, 0
 /* 802F70A8 002F3C88  39 00 00 00 */	li r8, 0
-/* 802F70AC 002F3C8C  4B FF FD F9 */	bl func_802F6EA4
+/* 802F70AC 002F3C8C  4B FF FD F9 */	bl ifStatus_802F6EA4
 /* 802F70B0 002F3C90  48 00 00 70 */	b lbl_802F7120
 lbl_802F70B4:
 /* 802F70B4 002F3C94  88 E3 00 08 */	lbz r7, 8(r3)
@@ -2776,7 +2776,7 @@ lbl_802F70B4:
 /* 802F70C0 002F3CA0  38 FF 00 00 */	addi r7, r31, 0
 /* 802F70C4 002F3CA4  38 60 00 00 */	li r3, 0
 /* 802F70C8 002F3CA8  39 00 00 00 */	li r8, 0
-/* 802F70CC 002F3CAC  4B FF FD D9 */	bl func_802F6EA4
+/* 802F70CC 002F3CAC  4B FF FD D9 */	bl ifStatus_802F6EA4
 /* 802F70D0 002F3CB0  48 00 00 50 */	b lbl_802F7120
 lbl_802F70D4:
 /* 802F70D4 002F3CB4  88 03 24 CD */	lbz r0, 0x24cd(r3)
@@ -2787,19 +2787,19 @@ lbl_802F70D4:
 /* 802F70E8 002F3CC8  38 FF 00 00 */	addi r7, r31, 0
 /* 802F70EC 002F3CCC  38 60 00 07 */	li r3, 7
 /* 802F70F0 002F3CD0  39 00 00 00 */	li r8, 0
-/* 802F70F4 002F3CD4  4B FF FD B1 */	bl func_802F6EA4
+/* 802F70F4 002F3CD4  4B FF FD B1 */	bl ifStatus_802F6EA4
 /* 802F70F8 002F3CD8  48 00 00 28 */	b lbl_802F7120
 lbl_802F70FC:
 /* 802F70FC 002F3CDC  38 FF 00 00 */	addi r7, r31, 0
 /* 802F7100 002F3CE0  38 60 00 06 */	li r3, 6
 /* 802F7104 002F3CE4  39 00 00 00 */	li r8, 0
-/* 802F7108 002F3CE8  4B FF FD 9D */	bl func_802F6EA4
+/* 802F7108 002F3CE8  4B FF FD 9D */	bl ifStatus_802F6EA4
 /* 802F710C 002F3CEC  48 00 00 14 */	b lbl_802F7120
 lbl_802F7110:
 /* 802F7110 002F3CF0  38 FF 00 00 */	addi r7, r31, 0
 /* 802F7114 002F3CF4  38 60 00 05 */	li r3, 5
 /* 802F7118 002F3CF8  39 00 00 00 */	li r8, 0
-/* 802F711C 002F3CFC  4B FF FD 89 */	bl func_802F6EA4
+/* 802F711C 002F3CFC  4B FF FD 89 */	bl ifStatus_802F6EA4
 lbl_802F7120:
 /* 802F7120 002F3D00  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 802F7124 002F3D04  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -2811,7 +2811,7 @@ lbl_802F7120:
 
 #else
 
-void func_802F7034(void)
+void ifStatus_802F7034(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -2821,7 +2821,7 @@ void func_802F7034(void)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_802F7134(void)
+asm void ifStatus_802F7134(void)
 { // clang-format off
     nofralloc
 /* 802F7134 002F3D14  7C 08 02 A6 */	mflr r0
@@ -2847,13 +2847,13 @@ asm void func_802F7134(void)
 /* 802F7184 002F3D64  90 1F 00 F4 */	stw r0, 0xf4(r31)
 /* 802F7188 002F3D68  90 1F 01 18 */	stw r0, 0x118(r31)
 /* 802F718C 002F3D6C  90 1F 01 1C */	stw r0, 0x11c(r31)
-/* 802F7190 002F3D70  4B FF C5 01 */	bl func_802F3690
+/* 802F7190 002F3D70  4B FF C5 01 */	bl ifAll_802F3690
 /* 802F7194 002F3D74  80 63 00 00 */	lwz r3, 0(r3)
 /* 802F7198 002F3D78  38 81 00 1C */	addi r4, r1, 0x1c
 /* 802F719C 002F3D7C  38 BF 01 40 */	addi r5, r31, 0x140
 /* 802F71A0 002F3D80  4C C6 31 82 */	crclr 6
 /* 802F71A4 002F3D84  38 C0 00 00 */	li r6, 0
-/* 802F71A8 002F3D88  4B D1 F9 49 */	bl func_80016AF0
+/* 802F71A8 002F3D88  4B D1 F9 49 */	bl lbArchive_80016AF0
 /* 802F71AC 002F3D8C  80 61 00 1C */	lwz r3, 0x1c(r1)
 /* 802F71B0 002F3D90  80 03 00 00 */	lwz r0, 0(r3)
 /* 802F71B4 002F3D94  90 1F 00 14 */	stw r0, 0x14(r31)
@@ -2888,7 +2888,7 @@ asm void func_802F7134(void)
 
 #else
 
-void func_802F7134(void)
+void ifStatus_802F7134(void)
 {
     NOT_IMPLEMENTED;
 }
@@ -2896,7 +2896,7 @@ void func_802F7134(void)
 #endif
 
 // free
-void func_802F7220(void)
+void ifStatus_802F7220(void)
 {
     s32 i;
     for (i = 0; i < 8; i++) {

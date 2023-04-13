@@ -6,7 +6,7 @@
 #include "it/code_8027CF30.h"
 #include "lb/lbunknown_001.h"
 
-void func_80149954(HSD_GObj* gobj)
+void ftDrMario_80149954(HSD_GObj* gobj)
 {
     Vec3 sp18;
     Fighter* fp;
@@ -19,22 +19,22 @@ void func_80149954(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     if (fp->x2200_ftcmd_var0 == 1 && fp->ev.mr.x2240 == 0U) {
-        func_8000B1CC(fp->x5E8_fighterBones->x0_jobj, 0, &sp18);
+        lb_8000B1CC(fp->x5E8_fighterBones->x0_jobj, 0, &sp18);
         tmp = ftMario_SpecialN_VitaminRandom(gobj);
-        tmp = func_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
+        tmp = it_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
         fp->ev.mr.x2240 = tmp;
         if (tmp != 0) {
-            fp->cb.x21E4_callback_OnDeath2 = func_80149540;
-            fp->cb.x21DC_callback_OnTakeDamage = func_80149540;
+            fp->cb.x21E4_callback_OnDeath2 = ftDrMario_80149540;
+            fp->cb.x21DC_callback_OnTakeDamage = ftDrMario_80149540;
         }
     } else if (fp->x2200_ftcmd_var0 == 2) {
-        func_801497CC(gobj);
+        ftDrMario_801497CC(gobj);
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (gobj != NULL) {
             fp = gobj->user_data;
             if (fp != NULL && fp->ev.mr.x2240 != 0) {
-                func_802C0DBC(fp->ev.mr.x2240);
+                it_802C0DBC(fp->ev.mr.x2240);
                 fp->ev.mr.x2240 = 0;
             }
         }
@@ -45,21 +45,21 @@ void func_80149954(HSD_GObj* gobj)
                 fp->cb.x21E4_callback_OnDeath2 = 0;
             }
         }
-        func_8008A2BC(gobj);
+        ft_8008A2BC(gobj);
     }
 }
 
-void func_80149A6C(HSD_GObj* gobj)
+void ftDrMario_80149A6C(HSD_GObj* gobj)
 {
-    func_800DED30(gobj);
+    ft_800DED30(gobj);
 }
 
-void func_80149A8C(HSD_GObj* gobj)
+void ftDrMario_80149A8C(HSD_GObj* gobj)
 {
-    func_80084F3C(gobj);
+    ft_80084F3C(gobj);
 }
 
-void func_80149AAC(HSD_GObj* gobj)
+void ftDrMario_80149AAC(HSD_GObj* gobj)
 {
-    func_80084280(gobj);
+    ft_80084280(gobj);
 }

@@ -164,7 +164,7 @@ format:
 	$(QUIET) tools/newlines.sh
 
 clean:
-	rm -f -d -r build $(ELF2DOL)
+	rm -f -d -r build/ssbm.us.1.2 build/o_files $(ELF2DOL)
 
 ALL_DIRS := $(sort $(dir $(O_FILES)))
 ALL_DIRS += $(patsubst $(BUILD_DIR)/%,$(VANILLA_DIR)/%,$(ALL_DIRS)) \

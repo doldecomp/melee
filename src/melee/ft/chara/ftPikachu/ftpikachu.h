@@ -19,8 +19,8 @@ void ftPikachu_OnKnockbackEnter(HSD_GObj* fighter_gobj);
 void ftPikachu_OnKnockbackExit(HSD_GObj* fighter_gobj);
 
 /// pika2
-void ftPikachu_SpecialN_StartAction(HSD_GObj* fighter_gobj);
-void ftPikachu_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
+void ftPikachu_SpecialN_StartMotion(HSD_GObj* fighter_gobj);
+void ftPikachu_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj);
 void ftPikachu_80124908(HSD_GObj* fighter_gobj);
 void ftPikachu_80124A20(HSD_GObj* fighter_gobj);
 void ftPikachu_80124B74(HSD_GObj* fighter_gobj);
@@ -32,8 +32,8 @@ void ftPikachu_EfSpawn_80124D2C(HSD_GObj* fighter_gobj);
 void ftPikachu_80124DC8(HSD_GObj* fighter_gobj);
 
 // pika3
-void ftPikachu_SpecialS_StartAction(HSD_GObj* fighter_gobj);
-void ftPikachu_SpecialAirS_StartAction(HSD_GObj* fighter_gobj);
+void ftPikachu_SpecialS_StartMotion(HSD_GObj* fighter_gobj);
+void ftPikachu_SpecialAirS_StartMotion(HSD_GObj* fighter_gobj);
 void ftPikachu_ZeroVelocity_80124F24(HSD_GObj* fighter_gobj);
 void ftPikachu_80124F64(HSD_GObj* fighter_gobj);
 void ftPikachu_80124FA0(HSD_GObj* fighter_gobj);
@@ -80,8 +80,8 @@ void ftPikachu_ActionChange_80125D28(HSD_GObj* fighter_gobj);
 
 /// pika4
 void ftPikachu_UpdateVel_80125D80(HSD_GObj* fighter_gobj);
-void ftPikachu_SpecialHi_StartAction(HSD_GObj* fighter_gobj);
-void ftPikachu_SpecialAirHi_StartAction(HSD_GObj* fighter_gobj);
+void ftPikachu_SpecialHi_StartMotion(HSD_GObj* fighter_gobj);
+void ftPikachu_SpecialAirHi_StartMotion(HSD_GObj* fighter_gobj);
 void ftPikachu_80125ED8(HSD_GObj* fighter_gobj);
 void ftPikachu_80125F14(HSD_GObj* fighter_gobj);
 void ftPikachu_80125F58(HSD_GObj* fighter_gobj);
@@ -119,8 +119,8 @@ void ftPikachu_SetState_8012764C(HSD_GObj* fighter_gobj);
 bool ftPikachu_8012765C(HSD_GObj* fighter_gobj);
 void ftPikachu_SetState_8012779C(HSD_GObj* fighter_gobj);
 void ftPikachu_EfSpawn_801277AC(HSD_GObj* fighter_gobj);
-void ftPikachu_SpecialLw_StartAction(HSD_GObj* fighter_gobj);
-void ftPikachu_SpecialAirLw_StartAction(HSD_GObj* fighter_gobj);
+void ftPikachu_SpecialLw_StartMotion(HSD_GObj* fighter_gobj);
+void ftPikachu_SpecialAirLw_StartMotion(HSD_GObj* fighter_gobj);
 void ftPikachu_ActionChange_8012798C(HSD_GObj* fighter_gobj);
 void ftPikachu_ActionChange_801279EC(HSD_GObj* fighter_gobj);
 void ftPikachu_ActionChange_80127A54(HSD_GObj* fighter_gobj);

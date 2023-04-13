@@ -15,7 +15,7 @@ void ftDonkey_8010EC5C(HSD_GObj* fighter_gobj);
 void ftDonkey_8010ECE8(HSD_GObj* fighter_gobj);
 void ftDonkey_8010ED88(HSD_GObj* fighter_gobj);
 void ftDonkey_8010EDD8(HSD_GObj* fighter_gobj);
-void ftDonkey_SpecialN_StartAction(HSD_GObj* fighter_gobj);
+void ftDonkey_SpecialN_StartMotion(HSD_GObj* fighter_gobj);
 void ftDonkey_8010EF7C(HSD_GObj* fighter_gobj);
 void ftDonkey_8010F094(HSD_GObj* fighter_gobj);
 void ftDonkey_8010F098(HSD_GObj* fighter_gobj);
@@ -48,7 +48,7 @@ void ftDonkey_8010F8E4(HSD_GObj* fighter_gobj);
 void ftDonkey_8010F988(HSD_GObj* fighter_gobj);
 void ftDonkey_8010FA2C(HSD_GObj* fighter_gobj);
 void ftDonkey_DestroyAllEffectsPlus(HSD_GObj* fighter_gobj);
-void ftDonkey_SpecialAirN_StartAction(HSD_GObj* fighter_gobj);
+void ftDonkey_SpecialAirN_StartMotion(HSD_GObj* fighter_gobj);
 void ftDonkey_8010E7B4(HSD_GObj* fighter_gobj);
 void ftDonkey_NullCallbacks(HSD_GObj* fighter_gobj);
 

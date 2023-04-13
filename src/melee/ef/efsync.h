@@ -3,6 +3,6 @@
 
 #include <Runtime/platform.h>
 
-void ef_Spawn(s32, ...);
+void efSync_Spawn(s32, ...);
 
 #endif

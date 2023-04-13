@@ -33,8 +33,8 @@
 .section .text
 
 # https://decomp.me/scratch/CWwOc
-.global local_80021CE8
-local_80021CE8:
+.global lbRefract_80021CE8
+lbRefract_80021CE8:
 /* 80021CE8 0001E8C8  7C 08 02 A6 */	mflr r0
 /* 80021CEC 0001E8CC  3C A0 43 30 */	lis r5, 0x4330
 /* 80021CF0 0001E8D0  90 01 00 04 */	stw r0, 4(r1)
@@ -382,8 +382,8 @@ local_80021CE8:
 /* 80022198 0001ED78  4E 80 00 20 */	blr
 
 # https://decomp.me/scratch/MxVsy
-.global local_8002219C
-local_8002219C:
+.global lbRefract_8002219C
+lbRefract_8002219C:
 /* 8002219C 0001ED7C  7C 08 02 A6 */	mflr r0
 /* 800221A0 0001ED80  90 01 00 04 */	stw r0, 4(r1)
 /* 800221A4 0001ED84  94 21 FF D0 */	stwu r1, -0x30(r1)

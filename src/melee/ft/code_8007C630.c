@@ -18,10 +18,10 @@
 static f32 const lbl_804D8328 = 0.0F;
 static f32 const lbl_804D832C = 1.0F;
 
-extern unk_t func_8016B0B4(void);
+extern unk_t gm_8016B0B4(void);
 
 #pragma push
-asm void func_8007C630(HSD_GObj* fighter_gobj)
+asm void ft_8007C630(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 8007C630 00079210  7C 08 02 A6 */	mflr r0
@@ -49,7 +49,7 @@ lbl_8007C658:
 /* 8007C684 00079264  C0 06 00 10 */	lfs f0, 0x10(r6)
 /* 8007C688 00079268  D0 1E 16 14 */	stfs f0, 0x1614(r30)
 /* 8007C68C 0007926C  80 7E 16 18 */	lwz r3, 0x1618(r30)
-/* 8007C690 00079270  4B F8 EB 3D */	bl func_8000B1CC
+/* 8007C690 00079270  4B F8 EB 3D */	bl lb_8000B1CC
 /* 8007C694 00079274  D3 FB 00 10 */	stfs f31, 0x10(r27)
 /* 8007C698 00079278  3B 9C 00 01 */	addi r28, r28, 1
 /* 8007C69C 0007927C  2C 1C 00 02 */	cmpwi r28, 2
@@ -73,7 +73,7 @@ lbl_8007C658:
 
 #else
 
-void func_8007C630(HSD_GObj* fighter_gobj)
+void ft_8007C630(HSD_GObj* fighter_gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -83,7 +83,7 @@ void func_8007C630(HSD_GObj* fighter_gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm void func_8007C6DC(HSD_GObj* fighter_gobj)
+asm void ft_8007C6DC(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 8007C6DC 000792BC  7C 08 02 A6 */	mflr r0
@@ -92,7 +92,7 @@ asm void func_8007C6DC(HSD_GObj* fighter_gobj)
 /* 8007C6E8 000792C8  DB E1 00 28 */	stfd f31, 0x28(r1)
 /* 8007C6EC 000792CC  BF 61 00 14 */	stmw r27, 0x14(r1)
 /* 8007C6F0 000792D0  7C 7B 1B 78 */	mr r27, r3
-/* 8007C6F4 000792D4  48 0E E9 C1 */	bl func_8016B0B4
+/* 8007C6F4 000792D4  48 0E E9 C1 */	bl gm_8016B0B4
 /* 8007C6F8 000792D8  2C 03 00 00 */	cmpwi r3, 0
 /* 8007C6FC 000792DC  41 82 00 68 */	beq lbl_8007C764
 /* 8007C700 000792E0  83 BB 00 2C */	lwz r29, 0x2c(r27)
@@ -114,7 +114,7 @@ lbl_8007C714:
 /* 8007C73C 0007931C  80 1E 16 24 */	lwz r0, 0x1624(r30)
 /* 8007C740 00079320  90 1E 16 30 */	stw r0, 0x1630(r30)
 /* 8007C744 00079324  80 7E 16 18 */	lwz r3, 0x1618(r30)
-/* 8007C748 00079328  4B F8 EA 85 */	bl func_8000B1CC
+/* 8007C748 00079328  4B F8 EA 85 */	bl lb_8000B1CC
 /* 8007C74C 0007932C  3B 9C 00 01 */	addi r28, r28, 1
 /* 8007C750 00079330  D3 FB 00 10 */	stfs f31, 0x10(r27)
 /* 8007C754 00079334  2C 1C 00 02 */	cmpwi r28, 2
@@ -133,7 +133,7 @@ lbl_8007C764:
 
 #else
 
-void func_8007C6DC(HSD_GObj* fighter_gobj)
+void ft_8007C6DC(HSD_GObj* fighter_gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -142,11 +142,11 @@ void func_8007C6DC(HSD_GObj* fighter_gobj)
 
 #ifdef MWERKS_GEKKO
 
-extern unk_t func_80023870();
-extern unk_t func_802E5EF4();
+extern unk_t lbAudioAx_80023870();
+extern unk_t it_802E5EF4();
 
 #pragma push
-asm void func_8007C77C(HSD_GObj* fighter_gobj)
+asm void ft_8007C77C(HSD_GObj* fighter_gobj)
 { // clang-format off
     nofralloc
 /* 8007C77C 0007935C  7C 08 02 A6 */	mflr r0
@@ -155,11 +155,11 @@ asm void func_8007C77C(HSD_GObj* fighter_gobj)
 /* 8007C788 00079368  DB E1 00 48 */	stfd f31, 0x48(r1)
 /* 8007C78C 0007936C  BF 21 00 2C */	stmw r25, 0x2c(r1)
 /* 8007C790 00079370  7C 7E 1B 78 */	mr r30, r3
-/* 8007C794 00079374  48 0E E9 21 */	bl func_8016B0B4
+/* 8007C794 00079374  48 0E E9 21 */	bl gm_8016B0B4
 /* 8007C798 00079378  2C 03 00 00 */	cmpwi r3, 0
 /* 8007C79C 0007937C  41 82 01 7C */	beq lbl_8007C918
 /* 8007C7A0 00079380  83 FE 00 2C */	lwz r31, 0x2c(r30)
-/* 8007C7A4 00079384  48 12 84 15 */	bl func_801A4BB8
+/* 8007C7A4 00079384  48 12 84 15 */	bl gm_801A4BB8
 /* 8007C7A8 00079388  88 1F 00 0C */	lbz r0, 0xc(r31)
 /* 8007C7AC 0007938C  54 63 07 FE */	clrlwi r3, r3, 0x1f
 /* 8007C7B0 00079390  54 00 07 FE */	clrlwi r0, r0, 0x1f
@@ -178,7 +178,7 @@ lbl_8007C7C8:
 /* 8007C7DC 000793BC  54 00 EF FF */	rlwinm. r0, r0, 0x1d, 0x1f, 0x1f
 /* 8007C7E0 000793C0  40 82 01 38 */	bne lbl_8007C918
 /* 8007C7E4 000793C4  7F C3 F3 78 */	mr r3, r30
-/* 8007C7E8 000793C8  4B FF F0 81 */	bl func_8007B868
+/* 8007C7E8 000793C8  4B FF F0 81 */	bl ftColl_8007B868
 /* 8007C7EC 000793CC  2C 03 00 02 */	cmpwi r3, 2
 /* 8007C7F0 000793D0  41 82 01 28 */	beq lbl_8007C918
 /* 8007C7F4 000793D4  80 6D C1 8C */	lwz r3, lbl_804D782C(r13)
@@ -194,7 +194,7 @@ lbl_8007C804:
 /* 8007C818 000793F8  80 9B 05 18 */	lwz r4, 0x518(r27)
 /* 8007C81C 000793FC  38 7E 00 00 */	addi r3, r30, 0
 /* 8007C820 00079400  3B A0 00 00 */	li r29, 0
-/* 8007C824 00079404  48 00 A7 B1 */	bl func_80086FD4
+/* 8007C824 00079404  48 00 A7 B1 */	bl ftLib_80086FD4
 /* 8007C828 00079408  2C 03 00 00 */	cmpwi r3, 0
 /* 8007C82C 0007940C  41 82 00 18 */	beq lbl_8007C844
 /* 8007C830 00079410  88 1B 0D EC */	lbz r0, 0xdec(r27)
@@ -222,7 +222,7 @@ lbl_8007C868:
 /* 8007C87C 0007945C  2C 03 00 00 */	cmpwi r3, 0
 /* 8007C880 00079460  41 82 00 7C */	beq lbl_8007C8FC
 /* 8007C884 00079464  80 7B 00 04 */	lwz r3, 4(r27)
-/* 8007C888 00079468  48 26 96 6D */	bl func_802E5EF4
+/* 8007C888 00079468  48 26 96 6D */	bl it_802E5EF4
 /* 8007C88C 0007946C  7C 7D 1B 78 */	mr r29, r3
 /* 8007C890 00079470  88 7F 00 0C */	lbz r3, 0xc(r31)
 /* 8007C894 00079474  4B FB 74 CD */	bl Player_GetCoins
@@ -240,16 +240,16 @@ lbl_8007C868:
 /* 8007C8C4 000794A4  38 80 00 7F */	li r4, 0x7f
 /* 8007C8C8 000794A8  38 A0 00 40 */	li r5, 0x40
 /* 8007C8CC 000794AC  38 C0 00 1A */	li r6, 0x1a
-/* 8007C8D0 000794B0  4B FA 6F A1 */	bl func_80023870
+/* 8007C8D0 000794B0  4B FA 6F A1 */	bl lbAudioAx_80023870
 /* 8007C8D4 000794B4  D3 E1 00 18 */	stfs f31, 0x18(r1)
 /* 8007C8D8 000794B8  38 BA 00 20 */	addi r5, r26, 0x20
 /* 8007C8DC 000794BC  38 C1 00 18 */	addi r6, r1, 0x18
 /* 8007C8E0 000794C0  4C C6 31 82 */	crclr 6
 /* 8007C8E4 000794C4  38 60 04 32 */	li r3, 0x432
 /* 8007C8E8 000794C8  38 80 00 00 */	li r4, 0
-/* 8007C8EC 000794CC  4B FE 34 F1 */	bl ef_Spawn
+/* 8007C8EC 000794CC  4B FE 34 F1 */	bl efSync_Spawn
 /* 8007C8F0 000794D0  80 7B 00 04 */	lwz r3, 4(r27)
-/* 8007C8F4 000794D4  48 1E DF F9 */	bl func_8026A8EC
+/* 8007C8F4 000794D4  48 1E DF F9 */	bl Item_8026A8EC
 /* 8007C8F8 000794D8  48 00 00 14 */	b lbl_8007C90C
 lbl_8007C8FC:
 /* 8007C8FC 000794DC  3B 39 00 01 */	addi r25, r25, 1
@@ -273,7 +273,7 @@ lbl_8007C918:
 
 #else
 
-void func_8007C77C(HSD_GObj* fighter_gobj)
+void ft_8007C77C(HSD_GObj* fighter_gobj)
 {
     NOT_IMPLEMENTED;
 }

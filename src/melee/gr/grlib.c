@@ -19,7 +19,7 @@ extern struct UnkGeneratorStruct* lbl_804D78FC;
 
 static Vec3 lbl_8049EF58[6];
 
-bool func_801C96E8(HSD_GObj* arg0)
+bool grLib_801C96E8(HSD_GObj* arg0)
 {
     Ground* gp = arg0->user_data;
     return gp->x10_flags.b4;
@@ -28,7 +28,7 @@ bool func_801C96E8(HSD_GObj* arg0)
 UnkGeneratorStruct* func_8039F05C(s8, s8, s32);
 UnkGeneratorMember* psAddGeneratorAppSRT_begin(UnkGeneratorStruct*, s32);
 
-UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
+UnkGeneratorStruct* grLib_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
 {
     UnkGeneratorStruct* temp_r3;
     UnkGeneratorMember* phi_r30;
@@ -47,7 +47,7 @@ UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
             return NULL;
         }
         phi_r30->x8 = *arg2;
-        scale = func_801C0498();
+        scale = Ground_801C0498();
         phi_r30->x24 *= scale;
         phi_r30->x28 *= scale;
         phi_r30->x2C *= scale;
@@ -58,33 +58,33 @@ UnkGeneratorStruct* func_801C96F8(s32 arg0, s8 arg1, S32Vec3* arg2)
     return temp_r3;
 }
 
-void func_801C97DC(s32 arg0, s32 arg1, HSD_JObj* arg2)
+void grLib_801C97DC(s32 arg0, s32 arg1, HSD_JObj* arg2)
 {
     func_8039F6CC(0, arg1, arg0, arg2);
 }
 
-void func_801C9808(s32 arg0, s32 arg1, HSD_JObj* arg2)
+void grLib_801C9808(s32 arg0, s32 arg1, HSD_JObj* arg2)
 {
     func_8039EFAC(0, arg1, arg0, arg2);
 }
 
-void func_801C9834(UnkGeneratorStruct* arg0)
+void grLib_801C9834(UnkGeneratorStruct* arg0)
 {
     func_8039D4DC(arg0);
 }
 
-void func_801C9854(s32 arg0)
+void grLib_801C9854(s32 arg0)
 {
     func_8039D5DC(arg0);
 }
 
-void func_801C9874(UnkGeneratorStruct* arg0)
+void grLib_801C9874(UnkGeneratorStruct* arg0)
 {
     arg0->x16_flags |= 0x80;
     func_8039D4DC(arg0);
 }
 
-void func_801C98A0(HSD_JObj* jobj)
+void grLib_801C98A0(HSD_JObj* jobj)
 {
     UnkGeneratorStruct *cur, *next;
 
@@ -117,7 +117,7 @@ inline HSD_JObj* jobj_next(HSD_JObj* node)
     return node->next;
 }
 
-void func_801C9908(HSD_JObj* jobj)
+void grLib_801C9908(HSD_JObj* jobj)
 {
     UnkGeneratorStruct* cur;
     UnkGeneratorStruct* next;
@@ -139,11 +139,11 @@ void func_801C9908(HSD_JObj* jobj)
     }
 
     for (jobj = jobj_child(jobj); jobj != NULL; jobj = jobj_next(jobj)) {
-        func_801C9908(jobj);
+        grLib_801C9908(jobj);
     }
 }
 
-void func_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
+void grLib_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
 {
     if (arg3 != 0)
         func_8039EFAC(0, arg0, arg1, arg2);
@@ -151,16 +151,16 @@ void func_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
         func_8039F6CC(0, arg0, arg1, arg2);
 }
 
-Vec3* func_801C9A10(void)
+Vec3* grLib_801C9A10(void)
 {
-    func_801C2D24(0, &lbl_8049EF58[0]);
-    func_801C2D24(1, &lbl_8049EF58[1]);
-    func_801C2D24(2, &lbl_8049EF58[2]);
-    func_801C2D24(3, &lbl_8049EF58[3]);
+    Ground_801C2D24(0, &lbl_8049EF58[0]);
+    Ground_801C2D24(1, &lbl_8049EF58[1]);
+    Ground_801C2D24(2, &lbl_8049EF58[2]);
+    Ground_801C2D24(3, &lbl_8049EF58[3]);
     return lbl_8049EF58;
 }
 
-void func_801C9A70(enum_t arg0, Vec3* v)
+void grLib_801C9A70(enum_t arg0, Vec3* v)
 {
     int i;
     switch (arg0) {
@@ -186,43 +186,45 @@ void func_801C9A70(enum_t arg0, Vec3* v)
     *v = lbl_8049EF58[i];
 }
 
-void func_801C9B20(void* arg1, UnkAnimStruct* arg2, unk_t arg3)
+void grLib_801C9B20(void* arg1, UnkAnimStruct* arg2, unk_t arg3)
 {
-    func_8000FD48(arg1, arg3, arg2->x4_size);
-    func_80011710(arg2, arg3);
+    lb_8000FD48(arg1, arg3, arg2->x4_size);
+    lb_80011710(arg2, arg3);
 }
 
-void func_801C9B6C(void* arg0)
+void grLib_801C9B6C(void* arg0)
 {
-    func_8000FD18(arg0);
+    lb_8000FD18(arg0);
 }
 
-void func_801C9B8C(void* arg0)
+void grLib_801C9B8C(void* arg0)
 {
-    func_8001044C(arg0, 0, 0, 0.0f, 0, 0, 0, 0);
+    lb_8001044C(arg0, 0, 0, 0.0f, 0, 0, 0, 0);
 }
 
-static void func_801C9BC8(HSD_GObj* gobj)
+static void grLib_801C9BC8(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObjAnimAll(jobj);
-    func_8002A278(HSD_JObjGetTranslationX(jobj), HSD_JObjGetTranslationY(jobj));
+    Camera_8002A278(HSD_JObjGetTranslationX(jobj),
+                    HSD_JObjGetTranslationY(jobj));
 }
 
-static void func_801C9C40(HSD_GObj* gobj)
+static void grLib_801C9C40(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_AObj* aobj = jobj->aobj;
 
     HSD_JObjAnimAll(jobj);
-    func_8002A278(HSD_JObjGetTranslationX(jobj), HSD_JObjGetTranslationY(jobj));
+    Camera_8002A278(HSD_JObjGetTranslationX(jobj),
+                    HSD_JObjGetTranslationY(jobj));
 
     if (aobj == NULL || aobj->flags & 0x40000000) {
         func_80390228(gobj);
     }
 }
 
-HSD_GObj* func_801C9CEC(s32 idx1)
+HSD_GObj* grLib_801C9CEC(s32 idx1)
 {
     u8 tmp;
     HSD_GObj* gobj;
@@ -250,9 +252,9 @@ HSD_GObj* func_801C9CEC(s32 idx1)
 
     func_80390A70(gobj, lbl_804D7849, jobj);
     if (idx1 == 1) {
-        func_8038FD54(gobj, func_801C9BC8, 1);
+        func_8038FD54(gobj, grLib_801C9BC8, 1);
     } else {
-        func_8038FD54(gobj, func_801C9C40, 1);
+        func_8038FD54(gobj, grLib_801C9C40, 1);
     }
 
     HSD_JObjAddAnimAll(jobj, stage_info.x6CC->anims[idx0], NULL, NULL);
@@ -263,32 +265,32 @@ HSD_GObj* func_801C9CEC(s32 idx1)
     return gobj;
 }
 
-s16 func_801C9E40(void)
+s16 grLib_801C9E40(void)
 {
     return stage_info.x708;
 }
 
-void func_801C9E50(s16 val)
+void grLib_801C9E50(s16 val)
 {
     stage_info.x708 = val;
 }
 
-bool func_801C9E60(Vec3* v)
+bool grLib_801C9E60(Vec3* v)
 {
     InternalStageId id = stage_info.internal_stage_id;
 
     if (id == RCRUISE) {
-        func_80201918(v);
+        grRCruise_80201918(v);
         return true;
     }
 
     if (id == BIGBLUE) {
-        func_801EF7D8(v);
+        grBigBlue_801EF7D8(v);
         return true;
     }
 
     if (id == ICEMTN) {
-        func_801FA728(v);
+        grIceMt_801FA728(v);
         return true;
     }
 
@@ -303,7 +305,7 @@ bool func_801C9E60(Vec3* v)
 
 #pragma push
 /// @todo @c clang-format why
-asm bool func_801C9EE8(void)
+asm bool grLib_801C9EE8(void)
 {
     // clang-format off
     nofralloc
@@ -444,7 +446,7 @@ lbl_801CA090:
 
 #else
 
-bool func_801C9EE8(void)
+bool grLib_801C9EE8(void)
 {
     NOT_IMPLEMENTED;
 }
