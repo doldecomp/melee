@@ -534,6 +534,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "melee-diff-symbols"
+version = "0.1.0"
+dependencies = [
+ "ahash 0.8.3",
+ "anyhow",
+ "clap",
+ "cwparse",
+ "dashmap",
+ "melee-utils",
+ "memmap2",
+ "rayon",
+]
+
+[[package]]
 name = "melee-fix-labels"
 version = "0.1.0"
 dependencies = [
@@ -592,6 +606,20 @@ dependencies = [
  "melee-utils",
  "regex",
  "walkdir",
+]
+
+[[package]]
+name = "melee-replace-symbols"
+version = "0.1.0"
+dependencies = [
+ "ahash 0.8.3",
+ "anyhow",
+ "clap",
+ "env_logger",
+ "log",
+ "melee-utils",
+ "memmap2",
+ "rayon",
 ]
 
 [[package]]
