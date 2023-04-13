@@ -1,7 +1,7 @@
 #include <platform.h>
 
+#include <Gecko_setjmp.h>
 #include <placeholder.h>
-#include <Runtime/Gecko_setjmp.h>
 
 #ifdef MWERKS_GEKKO
 

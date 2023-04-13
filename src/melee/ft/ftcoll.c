@@ -3,6 +3,7 @@
 
 #include <common_structs.h>
 #include <math.h>
+#include <runtime.h>
 #include <dolphin/mtx/types.h>
 #include <dolphin/os/os.h>
 #include <sysdolphin/baselib/archive.h>
@@ -28,7 +29,6 @@
 #include <melee/pl/pl_unknown_001.h>
 #include <melee/pl/player.h>
 #include <MSL/trigf.h>
-#include <Runtime/runtime.h>
 
 /// Combo Count Logic
 void ftColl_800763C0(HSD_GObj* attacker, HSD_GObj* victim, s32 attackID)

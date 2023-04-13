@@ -1,3 +1,4 @@
+#include <__mem.h>
 #include <stddef.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
@@ -5,7 +6,6 @@
 #include <dolphin/card/CARDDir.h>
 #include <dolphin/card/CARDRdwr.h>
 #include <dolphin/os/OSCache.h>
-#include <Runtime/__mem.h>
 
 CARDDir* __CARDGetDirBlock(CARDControl* card)
 {

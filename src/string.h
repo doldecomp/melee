@@ -3,8 +3,8 @@
 
 #include <platform.h>
 
+#include <__mem.h>
 #include <stddef.h>
-#include <Runtime/__mem.h>
 
 void* memset(void* ptr, int value, size_t num);
 int __StringRead(void*, int, int);

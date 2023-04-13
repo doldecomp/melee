@@ -1,10 +1,10 @@
+#include <__mem.h>
 #include <string.h>
 #include <dolphin/dsp/dsp.h>
 #include <dolphin/os/OSArena.h>
 #include <dolphin/os/OSAudioSystem.h>
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSTime.h>
-#include <Runtime/__mem.h>
 
 u8 DSPInitCode[] = {
     0x02, 0x9F, 0x00, 0x10, 0x02, 0x9F, 0x00, 0x33, 0x02, 0x9F, 0x00, 0x34,

@@ -5,6 +5,7 @@
 
 #include "stddef.h"
 
+#include <__mem.h>
 #include <placeholder.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/db/db.h>
@@ -29,7 +30,6 @@
 #include <dolphin/os/OSTime.h>
 #include <MetroTRK/dolphin_trk.h>
 #include <MetroTRK/intrinsics.h>
-#include <Runtime/__mem.h>
 
 typedef struct OSBootInfo {
     DVDDiskID DVDDiskID;

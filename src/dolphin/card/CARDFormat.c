@@ -1,3 +1,4 @@
+#include <__mem.h>
 #include <dolphin/card.h>
 #include <dolphin/card/CARDBios.h>
 #include <dolphin/card/CARDCheck.h>
@@ -6,7 +7,6 @@
 #include <dolphin/os/OSCache.h>
 #include <dolphin/os/OSFont.h>
 #include <dolphin/os/OSRtc.h>
-#include <Runtime/__mem.h>
 
 extern vu16 __VIRegs[59] AT_ADDRESS(0xCC002000);
 
