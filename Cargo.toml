@@ -5,6 +5,7 @@ members = [
     "tools/fix-labels",
     "tools/flags",
     "tools/issues",
+    "tools/replace-module",
     "tools/replace-symbols",
     "tools/rust-utils",
 ]

@@ -581,6 +581,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "melee-replace-module"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "env_logger",
+ "globset",
+ "itertools",
+ "lazy_static",
+ "log",
+ "melee-utils",
+ "regex",
+ "walkdir",
+]
+
+[[package]]
 name = "melee-replace-symbols"
 version = "0.1.0"
 dependencies = [
