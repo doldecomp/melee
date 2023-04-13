@@ -563,6 +563,20 @@ dependencies = [
 ]
 
 [[package]]
+name = "melee-replace-symbols"
+version = "0.1.0"
+dependencies = [
+ "ahash 0.8.3",
+ "anyhow",
+ "clap",
+ "env_logger",
+ "log",
+ "melee-utils",
+ "memmap2",
+ "rayon",
+]
+
+[[package]]
 name = "melee-utils"
 version = "0.1.0"
 dependencies = [

@@ -2,11 +2,15 @@ use anyhow::{Context, Result};
 use globset::{Glob, GlobSet, GlobSetBuilder};
 use lazy_static::lazy_static;
 use log::debug;
+use memmap2::MmapOptions;
 use regex::Regex;
 use std::{
+    borrow::Borrow,
+    collections::HashMap,
     env,
     fs::OpenOptions,
-    io::{Read, Seek, Write},
+    hash::BuildHasher,
+    io::{self, Read, Seek, SeekFrom, Write},
     path::{Path, PathBuf},
 };
 use walkdir::WalkDir;
@@ -67,6 +71,53 @@ pub fn replace(from: &Regex, to: &str, path: impl AsRef<Path>) -> Result<()> {
     file.seek(std::io::SeekFrom::Start(0))?;
     file.set_len(updated_contents.len() as u64)?;
     file.write_all(updated_contents.as_bytes())?;
+
+    Ok(())
+}
+
+fn is_identifier(c: char) -> bool {
+    matches!(c, 'a'..='z' | 'A'..='Z' | '0'..='9' | '_')
+}
+
+pub fn replace_symbols<K, V, S>(
+    path: impl AsRef<Path>,
+    replacements: &HashMap<K, V, S>,
+) -> io::Result<()>
+where
+    K: Eq + PartialEq + std::hash::Hash + Borrow<str>,
+    V: AsRef<str>,
+    S: BuildHasher,
+{
+    let mut file = OpenOptions::new().read(true).write(true).open(path)?;
+    let mmap = unsafe { MmapOptions::new().map_mut(&file)? };
+    let content = String::from_utf8_lossy(&mmap);
+
+    let mut buffer = String::with_capacity(content.len());
+
+    let mut start = 0;
+    while let Some(end) = content[start..].find(|c| !is_identifier(c)) {
+        let old = &content[start..start + end];
+
+        match replacements.get(old) {
+            Some(new) => buffer.push_str(new.as_ref()),
+            None => buffer.push_str(old),
+        }
+
+        start += end;
+        if let Some(next_start) = content[start..].find(is_identifier) {
+            buffer.push_str(&content[start..start + next_start]);
+            start += next_start;
+        } else {
+            break;
+        }
+    }
+    if start < content.len() {
+        buffer.push_str(&content[start..]);
+    }
+
+    file.seek(SeekFrom::Start(0))?;
+    file.write_all(buffer.as_bytes())?;
+    file.set_len(buffer.len() as u64)?;
 
     Ok(())
 }

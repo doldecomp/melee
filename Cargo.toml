@@ -4,5 +4,6 @@ members = [
     "tools/diff-symbols",
     "tools/flags",
     "tools/issues",
+    "tools/replace-symbols",
     "tools/rust-utils",
 ]
