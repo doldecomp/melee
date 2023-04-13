@@ -568,7 +568,7 @@ dependencies = [
 
 [[package]]
 name = "melee-issues"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "clang-sys",
@@ -577,7 +577,24 @@ dependencies = [
  "glob",
  "itertools",
  "log",
+ "melee-utils",
  "string-interner",
+]
+
+[[package]]
+name = "melee-replace-module"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "clap",
+ "env_logger",
+ "globset",
+ "itertools",
+ "lazy_static",
+ "log",
+ "melee-utils",
+ "regex",
+ "walkdir",
 ]
 
 [[package]]
