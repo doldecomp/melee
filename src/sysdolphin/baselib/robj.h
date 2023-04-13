@@ -1,7 +1,7 @@
 #ifndef _robj_h_
 #define _robj_h_
 
-#include "sysdolphin/baselib/forward.h"
+#include <baselib/forward.h>
 
 #include <baselib/aobj.h>
 #include <baselib/fobj.h>
