@@ -1,6 +1,8 @@
 [workspace]
 members = [
     "tools/dadosod",
+    "tools/fix-labels",
     "tools/flags",
     "tools/issues",
+    "tools/rust-utils",
 ]
