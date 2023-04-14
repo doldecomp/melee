@@ -3,6 +3,7 @@
 
 #include "ftCommon/forward.h"
 
+// Mr. Game & Watch Motion State IDs
 typedef enum ftGameWatch_MotionState {
     ftGw_MS_Attack11 = ftCo_MS_Count,
     ftGw_MS_Attack100Start,
@@ -52,9 +53,5 @@ typedef enum ftGameWatch_PanicLevel {
     ftGw_Panic_Mid,
     ftGw_Panic_Full,
 } ftGameWatch_PanicLevel;
-
-// Oil Panic (SpecialLw/SpecialAirLw)
-
-// Mr. Game & Watch Motion State IDs
 
 #endif
