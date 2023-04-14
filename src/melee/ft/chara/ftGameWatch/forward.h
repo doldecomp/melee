@@ -3,7 +3,7 @@
 
 #include "ftCommon/forward.h"
 
-typedef enum ftGameWatchAction {
+typedef enum ftGameWatch_MotionState {
     ftGw_MS_Attack11 = ftCo_MS_Count,
     ftGw_MS_Attack100Start,
     ftGw_MS_Attack100Loop,
@@ -44,7 +44,7 @@ typedef enum ftGameWatchAction {
     ftGw_MS_SpecialAirLw,
     ftGw_MS_SpecialAirLw_Catch,
     ftGw_MS_SpecialAirLw_Shoot,
-} ftGameWatchAction;
+} ftGameWatch_MotionState;
 
 typedef enum ftGameWatch_PanicLevel {
     ftGw_Panic_Empty,
