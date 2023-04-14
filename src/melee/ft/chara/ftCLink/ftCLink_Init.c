@@ -1,6 +1,6 @@
 #include "it/forward.h"
 
-#include "ftCLink/ftCLink_Init.h"
+#include "ftCLink_Init.h"
 
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
