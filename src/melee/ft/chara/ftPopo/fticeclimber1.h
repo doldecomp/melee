@@ -6,7 +6,7 @@
 
 #include "ft/types.h"
 
-extern ActionState ftPopo_MotionStateTable[];
+extern MotionState ftPopo_MotionStateTable[];
 extern char lbl_803CD610[];
 extern char lbl_803CD61C[];
 extern Fighter_CostumeStrings lbl_803CD7C4[];

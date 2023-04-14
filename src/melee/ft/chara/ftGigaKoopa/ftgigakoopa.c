@@ -6,7 +6,7 @@
 #include "ft/types.h"
 #include "ftKoopa/ftkoopa.h"
 
-ActionState ftGigaKoopa_MotionStateTable[] = {
+MotionState ftGigaKoopa_MotionStateTable[] = {
     { 295, 0x00340011, 0x12000000, ftKoopa_80134F48, ftKoopa_801351B0,
       ftKoopa_80135438, ftKoopa_801354F8, ftCamera_UpdateCameraBox },
     { 296, 0x003C0011, 0x12000000, ftKoopa_80134F9C, ftKoopa_801351B4,
@@ -55,7 +55,7 @@ ActionState ftGigaKoopa_MotionStateTable[] = {
       ftKoopa_80134A20, ftCamera_UpdateCameraBox },
 };
 
-ActionState lbl_803D38C8[] = {
+MotionState lbl_803D38C8[] = {
     { 14, 0, 0x01000000, NULL, NULL, ft_800C74AC, NULL, NULL },
 };
 

@@ -5,7 +5,7 @@
 
 #include "ft/types.h"
 
-extern ActionState ftMasterHand_MotionStateTable[];
+extern MotionState ftMasterHand_MotionStateTable[];
 extern char lbl_803D4070[];
 extern char lbl_803D407C[];
 extern Fighter_CostumeStrings lbl_803D40C4[];

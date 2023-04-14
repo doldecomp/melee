@@ -8,7 +8,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-ActionState ftKoopa_MotionStateTable[] = {
+MotionState ftKoopa_MotionStateTable[] = {
     { 295, 0x00340011, 0x12000000, ftKoopa_80134F48, ftKoopa_801351B0,
       ftKoopa_80135438, ftKoopa_801354F8, ftCamera_UpdateCameraBox },
     { 296, 0x003C0011, 0x12000000, ftKoopa_80134F9C, ftKoopa_801351B4,
@@ -310,7 +310,7 @@ void ftKoopa_SpecialAirS_StartMotion(HSD_GObj* gobj)
     }
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags0 =
+static Fighter_MotionStateChangeFlags const transition_flags0 =
     FtStateChange_SkipUpdateMatAnim;
 
 void ftKoopa_8013302C(HSD_GObj* gobj)
@@ -352,7 +352,7 @@ void ftKoopa_801330E4(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags1 =
+static Fighter_MotionStateChangeFlags const transition_flags1 =
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
@@ -547,7 +547,7 @@ void ftKoopa_80133690(HSD_GObj* gobj)
     }
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags3 =
+static Fighter_MotionStateChangeFlags const transition_flags3 =
     FtStateChange_SkipUpdateMatAnim | FtStateChange_Unk_19;
 
 void ftKoopa_801336CC(HSD_GObj* gobj)

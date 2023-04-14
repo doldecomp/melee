@@ -107,7 +107,7 @@ void ftPikachu_801250C0(HSD_GObj* gobj)
     }
 }
 
-static const Fighter_ActionStateChangeFlags transition_flags0 =
+static const Fighter_MotionStateChangeFlags transition_flags0 =
     FtStateChange_PreserveColAnimHitStatus | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_PreserveSfx | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
@@ -214,7 +214,7 @@ void ftPikachu_801253D8(HSD_GObj* gobj)
     }
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags1 =
+static Fighter_MotionStateChangeFlags const transition_flags1 =
     FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_PreserveSfx |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
@@ -338,7 +338,7 @@ void ftPikachu_80125738(HSD_GObj* gobj)
     }
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags2 =
+static Fighter_MotionStateChangeFlags const transition_flags2 =
     FtStateChange_PreserveGfx | FtStateChange_PreserveColAnimHitStatus |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
@@ -449,7 +449,7 @@ void ftPikachu_801259D8(HSD_GObj* gobj)
     }
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags3 =
+static Fighter_MotionStateChangeFlags const transition_flags3 =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit;
 
 void ftPikachu_ActionChange_80125A54(HSD_GObj* gobj)

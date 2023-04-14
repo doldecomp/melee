@@ -467,7 +467,7 @@ void ftMars_801371FC(HSD_GObj* gobj)
 
     // Air_StoreBool_LoseGroundJump_NoECBfor10Frames
     ftCommon_8007D5D4(fp);
-    // ActionStateChange
+    // MotionStateChange
     Fighter_ChangeMotionState(gobj, thing, 0x0C4C508E, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
@@ -493,7 +493,7 @@ void ftMars_801372A8(HSD_GObj* gobj)
 
     // Air_SetAsGrounded2
     ftCommon_8007D7FC(fp);
-    // ActionStateChange
+    // MotionStateChange
     Fighter_ChangeMotionState(gobj, thing, 0x0C4C508E, 0,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 

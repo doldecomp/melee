@@ -5,7 +5,7 @@
 #include "ft/forward.h"
 #include <baselib/forward.h>
 
-void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, enum_t asid);
+void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, enum_t msid);
 void ftMario_SpecialS_SetCall(Fighter* fp);
 void ftMario_SpecialS_ReflectThink(HSD_GObj* gobj);
 void ftMario_SpecialS_UpdateVarsColl(HSD_GObj* gobj);

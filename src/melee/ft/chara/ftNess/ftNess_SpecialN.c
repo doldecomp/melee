@@ -14,9 +14,9 @@ bool ftNess_CheckSpecialNHold(HSD_GObj* gobj)
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL && fp->ev.ns.x2240_flashGObj != NULL) {
-            enum_t asid = fp->action_id;
-            if (asid == AS_NESS_SPECIALN_HOLD ||
-                asid == AS_NESS_SPECIALAIRN_HOLD)
+            enum_t msid = fp->action_id;
+            if (msid == AS_NESS_SPECIALN_HOLD ||
+                msid == AS_NESS_SPECIALAIRN_HOLD)
             {
                 return true;
             }
@@ -91,7 +91,7 @@ f32 return_void3(void)
     return 1.0f;
 }
 
-/// Ness's grounded PK Flash Start Action State handler
+/// Ness's grounded PK Flash Start Motion State handler
 void ftNess_SpecialNStart_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -129,7 +129,7 @@ void ftNess_SpecialNStart_Action(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-/// Ness's aerial PK Flash Start Action State handler
+/// Ness's aerial PK Flash Start Motion State handler
 void ftNess_SpecialAirNStart_Action(HSD_GObj* gobj)
 {
     /// @todo Unused stack.

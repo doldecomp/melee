@@ -207,8 +207,8 @@ bool ftBossLib_8015C2A8(void)
 bool ftBossLib_8015C2E0(void)
 {
     /// @todo Get ASIDs
-    enum_t asid = ftBossLib_8015C44C(FTKIND_MASTERH);
-    if (asid == 0x158 || asid == 0x159) {
+    enum_t msid = ftBossLib_8015C44C(FTKIND_MASTERH);
+    if (msid == 0x158 || msid == 0x159) {
         return true;
     }
 
@@ -218,8 +218,8 @@ bool ftBossLib_8015C2E0(void)
 bool ftBossLib_8015C31C(void)
 {
     /// @todo Get ASIDs
-    enum_t asid = ftBossLib_8015C44C(FTKIND_CREZYH);
-    if (asid == 0x181 || asid == 0x182) {
+    enum_t msid = ftBossLib_8015C44C(FTKIND_CREZYH);
+    if (msid == 0x181 || msid == 0x182) {
         return true;
     }
 
@@ -275,7 +275,7 @@ enum_t ftBossLib_8015C44C(FighterKind kind)
 #endif
 
     if (gobj != NULL) {
-        // DataOffset_ActionStateLoad
+        // DataOffset_MotionStateLoad
         return ftLib_80086C0C(gobj);
     } else {
         return ASID_DEADDOWN;

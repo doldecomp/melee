@@ -10,7 +10,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-ActionState ftCaptain_MotionStateTable[] = {
+MotionState ftCaptain_MotionStateTable[] = {
     { 295, 0x00440842, 0x41000000, ftCaptain_800CD390, ftCaptain_800CD3B0,
       ftCaptain_800CD3D0, ftCaptain_800CD3F0, ftCamera_UpdateCameraBox },
     { 296, 0x00440846, 0x45000000, ftCaptain_800CD458, ftCaptain_800CD478,

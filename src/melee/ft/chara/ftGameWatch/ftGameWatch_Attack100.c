@@ -81,7 +81,7 @@ void ftGameWatch_Attack100Loop_Coll(HSD_GObj* gobj)
     ftGameWatch_8014A538(gobj);
 }
 
-// 0x8014C3A4 - Mr. Game & Watch's Rapid Jab End Action State handler
+// 0x8014C3A4 - Mr. Game & Watch's Rapid Jab End Motion State handler
 void ftGameWatch_Attack100End_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

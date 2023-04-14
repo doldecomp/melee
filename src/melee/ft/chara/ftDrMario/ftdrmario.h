@@ -16,7 +16,7 @@ typedef struct _ftDrMarioAttributes {
     u32 x14;
 } ftDrMarioAttributes;
 
-extern ActionState ftDrMario_MotionStateTable[];
+extern MotionState ftDrMario_MotionStateTable[];
 extern char lbl_803D15D8[];
 extern char lbl_803D15E4[];
 extern Fighter_CostumeStrings lbl_803D180C[];

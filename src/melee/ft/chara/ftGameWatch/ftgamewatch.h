@@ -15,7 +15,7 @@
 #define GAMEWATCH_PANIC_MID 2
 #define GAMEWATCH_PANIC_FULL 3
 
-// Mr. Game & Watch Action State Change Flags //
+// Mr. Game & Watch Motion State Change Flags //
 
 // Chef (SpecialN/SpecialAirN) //
 #define FTGAMEWATCH_SPECIALN_COLL_FLAG                                        \
@@ -37,7 +37,7 @@
 
 // Oil Panic (SpecialLw/SpecialAirLw) //
 
-// Mr. Game & Watch Action State IDs //
+// Mr. Game & Watch Motion State IDs //
 
 typedef enum ftGameWatchAction {
     AS_GAMEWATCH_ATTACK11 = ASID_MAX,
@@ -150,7 +150,7 @@ typedef struct _ftGameWatchAttributes {
 
 } ftGameWatchAttributes;
 
-extern ActionState ftGameWatch_MotionStateTable[];
+extern MotionState ftGameWatch_MotionStateTable[];
 extern char lbl_803D28E8[];
 extern char lbl_803D28F4[];
 extern Fighter_CostumeStrings lbl_803D29C8[];

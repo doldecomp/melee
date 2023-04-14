@@ -145,7 +145,7 @@ bool ftGameWatch_ItemGreenhouse_CheckAttack11(HSD_GObj* gobj)
 }
 
 // 0x8014C07C
-// https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Action State
+// https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Motion State
 // handler
 void ftGameWatch_Attack11_Action(HSD_GObj* gobj)
 {

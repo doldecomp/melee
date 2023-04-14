@@ -60,7 +60,7 @@ void ftMewtwo_SpecialHi_SetEndGFX(HSD_GObj* gobj)
     fp0->cb.x21BC_callback_Accessory4 = NULL;
 }
 
-/// Mewtwo's grounded Teleport Start Action State handler
+/// Mewtwo's grounded Teleport Start Motion State handler
 void ftMewtwo_SpecialHi_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
@@ -81,7 +81,7 @@ void ftMewtwo_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp0->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialHi_CreateGFX;
 }
 
-/// Mewtwo's aerial Teleport Start Action State handler
+/// Mewtwo's aerial Teleport Start Motion State handler
 void ftMewtwo_SpecialAirHi_StartMotion(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -176,17 +176,17 @@ void ftMewtwo_SpecialAirHiStart_Coll(HSD_GObj* gobj)
     }
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags0 =
+static Fighter_MotionStateChangeFlags const transition_flags0 =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |
     FtStateChange_SkipUpdateMatAnim | FtStateChange_SkipUpdateColAnim |
     FtStateChange_UpdateCmd | FtStateChange_SkipUpdateItemVis |
     FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
     FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
-static Fighter_ActionStateChangeFlags const transition_flags1 =
+static Fighter_MotionStateChangeFlags const transition_flags1 =
     transition_flags0 | FtStateChange_PreserveColAnimHitStatus;
 
-/// Mewtwo's ground -> air Teleport Start Action State handler
+/// Mewtwo's ground -> air Teleport Start Motion State handler
 void ftMewtwo_SpecialHiStart_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -199,7 +199,7 @@ void ftMewtwo_SpecialHiStart_GroundToAir(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialHi_CreateGFX;
 }
 
-/// Mewtwo's air -> ground Teleport Start Action State handler
+/// Mewtwo's air -> ground Teleport Start Motion State handler
 void ftMewtwo_SpecialAirHiStart_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -349,7 +349,7 @@ void ftMewtwo_SpecialAirHi_Coll(HSD_GObj* gobj)
     }
 }
 
-/// Mewtwo's ground -> air Teleport Zoom Action State handler
+/// Mewtwo's ground -> air Teleport Zoom Motion State handler
 void ftMewtwo_SpecialHi_GroundToAir(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
@@ -367,7 +367,7 @@ void ftMewtwo_SpecialHi_GroundToAir(HSD_GObj* gobj)
     fp->x221E_flag.bits.b0 = true;
 }
 
-/// Mewtwo's air -> ground Teleport Zoom Action State handler
+/// Mewtwo's air -> ground Teleport Zoom Motion State handler
 void ftMewtwo_SpecialAirHi_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -401,7 +401,7 @@ static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* gobj)
     ft_80088148(fp, 0x30DA1, SFX_VOLUME_MAX, SFX_PAN_MID);
 }
 
-/// Mewtwo's grounded Teleport Zoom Action State handler
+/// Mewtwo's grounded Teleport Zoom Motion State handler
 void ftMewtwo_SpecialHi_Action(HSD_GObj* gobj)
 {
     /// @todo Shared @c inline with #ftMewtwo_SpecialAirHi_Action.
@@ -474,7 +474,7 @@ void ftMewtwo_SpecialHi_Action(HSD_GObj* gobj)
 
 static f32 const stick_epsilon = 0.001;
 
-/// Mewtwo's aerial Teleport Zoom Action State handler
+/// Mewtwo's aerial Teleport Zoom Motion State handler
 void ftMewtwo_SpecialAirHi_Action(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -620,7 +620,7 @@ void ftMewtwo_SpecialAirHiLost_Coll(HSD_GObj* gobj)
     }
 }
 
-/// Mewtwo's ground -> air Teleport End Action State handler
+/// Mewtwo's ground -> air Teleport End Motion State handler
 void ftMewtwo_SpecialHiLost_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -644,7 +644,7 @@ static inline void ftMewtwo_SpecialHiLost_SetVars(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialHi_SetEndGFX;
 }
 
-/// Mewtwo's grounded Teleport End Action State handler
+/// Mewtwo's grounded Teleport End Motion State handler
 void ftMewtwo_SpecialHiLost_Action(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
@@ -660,7 +660,7 @@ void ftMewtwo_SpecialHiLost_Action(HSD_GObj* gobj)
                          mewtwoAttrs->x6C_MEWTWO_TELEPORT_MOMENTUM_END_MUL;
 }
 
-/// Mewtwo's aerial Teleport End Action State handler
+/// Mewtwo's aerial Teleport End Motion State handler
 void ftMewtwo_SpecialAirHiLost_Action(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);

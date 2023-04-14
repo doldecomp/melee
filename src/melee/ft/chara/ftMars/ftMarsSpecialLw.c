@@ -373,15 +373,15 @@ void ftMars_80139140(HSD_GObj* gobj)
         lb_800119DC(&sp18, 0x78, 0.9f, 0.02f, 1.0471975803375244f);
 
         {
-            enum_t asid;
+            enum_t msid;
 
             if (fp->xE0_ground_or_air == GA_Ground) {
-                asid = 0x172;
+                msid = 0x172;
             } else {
-                asid = 0x174;
+                msid = 0x174;
             }
 
-            Fighter_ChangeMotionState(gobj, asid, 0, NULL, 0, 1, 0);
+            Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0, 1, 0);
         }
     }
 

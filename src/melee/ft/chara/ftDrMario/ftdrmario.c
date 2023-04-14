@@ -7,7 +7,7 @@
 #include "ftMario/ftmario.h"
 #include "it/it_27CF.h"
 
-ActionState ftDrMario_MotionStateTable[] = {
+MotionState ftDrMario_MotionStateTable[] = {
     { 239, 0x00000071, 0x01000000, ftDrMario_80149954, ftDrMario_80149A6C,
       ftDrMario_80149A8C, ftDrMario_80149AAC, ftCamera_UpdateCameraBox },
     { 240, 0x00000071, 0x01000000, ftDrMario_80149954, ftDrMario_80149A6C,

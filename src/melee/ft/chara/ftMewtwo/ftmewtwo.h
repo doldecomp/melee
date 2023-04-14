@@ -40,7 +40,7 @@ typedef enum ftMewtwoAction {
 
 #define CONFUSION_REFLECT_OFF 2 // Toggle reflect bubble off.
 
-// Flags used by Mewtwo in Action State Change //
+// Flags used by Mewtwo in Motion State Change //
 
 // SpecialN/SpecialAirN //
 
@@ -119,7 +119,7 @@ typedef struct _ftMewtwoAttributes {
 
 } ftMewtwoAttributes;
 
-extern ActionState ftMewtwo_MotionStateTable[];
+extern MotionState ftMewtwo_MotionStateTable[];
 extern char lbl_803D0D80[];
 extern char lbl_803D0D8C[];
 extern Fighter_CostumeStrings lbl_803D0F5C[];

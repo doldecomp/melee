@@ -6,7 +6,7 @@
 #include "ft/types.h"
 #include "ftFox/ftfox.h"
 
-ActionState ftFalco_MotionStateTable[] = {
+MotionState ftFalco_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftFox_SpecialNStart_Anim,
       ftFox_SpecialNStart_IASA, ftFox_SpecialNStart_Phys,
       ftFox_SpecialNStart_Coll, ftCamera_UpdateCameraBox },

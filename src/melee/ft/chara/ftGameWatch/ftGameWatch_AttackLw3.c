@@ -116,7 +116,7 @@ bool ftGameWatch_ItemCheckManholeRemove(HSD_GObj* gobj)
 }
 
 // 0x8014ADB8
-// https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Action State
+// https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Motion State
 // Handler
 void ftGameWatch_AttackLw3_Action(HSD_GObj* gobj)
 {

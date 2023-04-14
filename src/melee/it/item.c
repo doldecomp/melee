@@ -542,7 +542,7 @@ void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->x1C = lbl_804D6D10++;
     item_data->entity = gobj;
     Item_80267978(gobj);
-    item_data->asid = -1;
+    item_data->msid = -1;
     item_data->xC8_joint =
         item_data->xC4_article_data->x10_modelDesc->x0_joint;
     item_data->xCC_item_attr = item_data->xC4_article_data->x0_common_attr;
@@ -1150,7 +1150,7 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 
 extern struct r13_ColAnimStruct* lbl_804D6D04;
 
-void Item_80268E5C(HSD_GObj* gobj, enum_t asid, Item_StateChangeFlags flags)
+void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
 {
     Vec3 sp4C;
     Vec3 scl;
@@ -1177,7 +1177,7 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t asid, Item_StateChangeFlags flags)
     item_jobj = (HSD_JObj*) HSD_GObjGetHSDObj(gobj);
     item_data = (Item*) HSD_GObjGetUserData(gobj);
 
-    item_data->asid = asid;
+    item_data->msid = msid;
     item_data->xDC8_word.flags.x14 = 0;
     HSD_JObjSetTranslate(gobj->hsd_obj, &item_data->pos);
     efAsync_80067624(gobj, &item_data->xBC0);
@@ -1215,8 +1215,8 @@ void Item_80268E5C(HSD_GObj* gobj, enum_t asid, Item_StateChangeFlags flags)
 
     item_data->xCC8_knockback = 0.0F;
     temp_r30 =
-        (new_var = &item_data->xBC_itemStateContainer->stateTable[asid]);
-    item_data->anim_id = temp_r30->asid;
+        (new_var = &item_data->xBC_itemStateContainer->stateTable[msid]);
+    item_data->anim_id = temp_r30->msid;
     item_data->x5CC_currentAnimFrame = 0.0F;
     temp_r0 = item_data->anim_id;
 

@@ -6,7 +6,7 @@
 #include "ft/ftcamera.h"
 #include "ft/types.h"
 
-ActionState ftCrazyHand_MotionStateTable[] = {
+MotionState ftCrazyHand_MotionStateTable[] = {
     { 295, 0, 0x01000000, ftCrazyHand_80156404, ftCrazyHand_80156A70,
       ftCrazyHand_80156AB4, ftCrazyHand_80156AD4, ftCamera_UpdateCameraBox },
     { 296, 0, 0x01000000, ftCrazyHand_80156404, ftCrazyHand_80156A70,

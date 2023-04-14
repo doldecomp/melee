@@ -24,7 +24,7 @@
 #include "lb/lbmthp.h"
 #include "mp/mplib.h"
 
-ActionState ftDonkey_MotionStateTable[] = {
+MotionState ftDonkey_MotionStateTable[] = {
     { 295, 0x00480000, 0x35400000, NULL, ftDonkey_800DF9F0, ftDonkey_800DFA50,
       ftDonkey_800DFA70, ftCamera_UpdateCameraBox },
     { 296, 0x00484066, 0x35000000, ftDonkey_800DFB34, ftDonkey_800DFB54,

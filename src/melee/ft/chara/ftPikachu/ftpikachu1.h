@@ -6,7 +6,7 @@
 
 #include "ft/types.h"
 
-extern ActionState ftPikachu_MotionStateTable[];
+extern MotionState ftPikachu_MotionStateTable[];
 extern char lbl_803CE0B8[];
 extern char lbl_803CE0C4[];
 extern Fighter_CostumeStrings lbl_803CE2A0[];

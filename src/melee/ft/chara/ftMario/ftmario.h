@@ -19,7 +19,7 @@ typedef enum ftMarioAction {
     AS_MARIO_SPECIALAIRLW,
 } ftMarioAction;
 
-// Flags used by Mario & Dr. Mario in Action State Change //
+// Flags used by Mario & Dr. Mario in Motion State Change //
 
 // SpecialN/SpecialAirN (Fireball / Megavitamin) //
 
@@ -98,8 +98,8 @@ static inline ftMarioAttributes* GetMarioAttr(Fighter* fp)
     return mario_attr;
 }
 
-extern ActionState ftMario_MotionStateTable[];
-extern ActionState lbl_803C7260[];
+extern MotionState ftMario_MotionStateTable[];
+extern MotionState lbl_803C7260[];
 
 // ftmario1
 void ftMario_OnDeath(HSD_GObj*);

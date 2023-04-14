@@ -7,7 +7,7 @@
 
 #include "ft/types.h"
 
-extern ActionState ftYoshi_MotionStateTable[];
+extern MotionState ftYoshi_MotionStateTable[];
 
 void ftYoshi_8012B8A4(HSD_GObj* gobj);
 void ftYoshi_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg);

@@ -5,7 +5,7 @@
 
 #include <baselib/gobj.h>
 
-extern ActionState ftFalco_MotionStateTable[];
+extern MotionState ftFalco_MotionStateTable[];
 extern char lbl_803D1CA8[];
 extern char lbl_803D1CB4[];
 extern Fighter_CostumeStrings lbl_803D1E74[];
