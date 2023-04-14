@@ -1,5 +1,5 @@
 /// @file
-/// @attention Symbols in gobj file are placed correctly.
+/// @attention Symbols in this file are placed correctly.
 /// @defgroup melee_it_item item
 /// @{
 #ifndef MELEE_IT_ITEM_H
