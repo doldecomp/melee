@@ -485,7 +485,7 @@ inline void RunCallbackUnk(HSD_GObjInteraction proc, HSD_GObj* gobj0,
 }
 
 /// Remove item from player on death?
-void it_8026B7F8(HSD_GObj* gobj)
+void it_8026B7F8(HSD_GObj* fighter_gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -496,9 +496,9 @@ void it_8026B7F8(HSD_GObj* gobj)
     for (cur = lbl_804D782C->x24_items; cur != NULL; cur = cur->next) {
         Item* ip = GET_ITEM(cur);
         owner = ip->owner;
-        RunCallbackUnk(ip->xB8_itemLogicTable->evt_unk, cur, gobj);
+        RunCallbackUnk(ip->xB8_itemLogicTable->evt_unk, cur, fighter_gobj);
 
-        if (ip->xDC8_word.flags.x13 && owner == gobj) {
+        if (ip->xDC8_word.flags.x13 && owner == fighter_gobj) {
             Item_8026A8EC(cur);
         }
     }
@@ -785,9 +785,9 @@ void it_8026BB44(HSD_GObj* gobj)
 extern void ftLib_80086990(HSD_GObj*, Vec3*);
 
 /// Adjust item's position to fp bone
-void it_8026BB68(HSD_GObj* gobj, Vec3* pos)
+void it_8026BB68(HSD_GObj* fighter_gobj, Vec3* pos)
 {
-    ftLib_80086990(gobj, pos);
+    ftLib_80086990(fighter_gobj, pos);
 }
 
 /// Adjust item's position based on ECB?

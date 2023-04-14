@@ -72,8 +72,7 @@ bool it_8026B4F0(HSD_GObj* gobj);
 /// Get unknown float from 0x0 of item's special attributes
 f32 it_8026B54C(HSD_GObj* gobj);
 
-/// Identical to #it_8026B54C but likely using a different itAttributes
-/// struct
+/// Identical to #it_8026B54C but likely using a different itAttributes struct
 f32 it_8026B560(HSD_GObj* gobj);
 
 /// Get unknown float from 0x4 of item's special attributes
