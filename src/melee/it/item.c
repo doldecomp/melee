@@ -1982,7 +1982,6 @@ void RunCallback(HSD_GObj* gobj, HSD_GObjEvent arg1)
 }
 
 /// @private
-/// @todo Decide on it vs ip vs data, gobj vs gobj vs gobj, etc.
 void func_8026A8EC_inline1(HSD_GObj* gobj)
 {
     Item* ip = (Item*) HSD_GObjGetUserData(gobj);
