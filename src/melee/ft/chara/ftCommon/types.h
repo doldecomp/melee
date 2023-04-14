@@ -2,7 +2,7 @@
 #define MELEE_FT_CHARA_FTCOMMON_TYPES_H
 
 #include <platform.h>
-#include "forward.h"
+#include "ftCommon/forward.h"
 
 union ftCommon_MotionVars {
     struct ftCommon_CliffVars {
