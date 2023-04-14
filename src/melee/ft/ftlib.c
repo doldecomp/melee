@@ -27,7 +27,7 @@ extern struct {
     u8 unk4;
 } CostumeListsForeachCharacter[];
 
-extern s8 lbl_803C26FC[];
+extern s8 ftData_803C26FC[];
 
 s32 ftLib_800860C4(void)
 {
@@ -989,7 +989,7 @@ void ftLib_800874CC(HSD_GObj* gobj, s32 arg1, s32 arg2)
 void ftLib_80087508(s8 arg0, u8 arg1)
 {
     ftData_8008572C(arg0);
-    efAsync_8006737C(lbl_803C26FC[arg0]);
+    efAsync_8006737C(ftData_803C26FC[arg0]);
     ftData_80085820(arg0, arg1);
     ftData_80085A14(arg0);
     ftData_800857E0(arg0);
@@ -999,7 +999,7 @@ void ftLib_80087574(s8 arg)
 {
     u8 i;
     ftData_8008572C(arg);
-    efAsync_8006737C(lbl_803C26FC[arg]);
+    efAsync_8006737C(ftData_803C26FC[arg]);
 
     for (i = 0; i < CostumeListsForeachCharacter[arg].unk4; i++) {
         ftData_80085820(arg, i);

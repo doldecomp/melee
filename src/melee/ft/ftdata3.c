@@ -10,7 +10,7 @@
 #include "ftMasterHand/ftMasterHand_33.h"
 #include "ftMasterHand/ftMasterHand_34.h"
 
-MotionState MotionStateList[] = {
+MotionState ftData_MotionStateList[] = {
     {
         // 0
         -1,
@@ -3764,7 +3764,7 @@ MotionState MotionStateList[] = {
     },
 };
 
-MotionState lbl_803C52A0[] = {
+MotionState ftData_803C52A0[] = {
     {
         0x0,
         0,

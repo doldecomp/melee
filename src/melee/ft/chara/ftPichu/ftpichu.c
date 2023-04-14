@@ -73,34 +73,34 @@ MotionState ftPichu_MotionStateTable[] = {
       ftCamera_UpdateCameraBox },
 };
 
-char lbl_803D21E8[] = "PlPc.dat";
-char lbl_803D21F4[] = "ftDataPichu";
-char lbl_803D2200[] = "PlPcNr.dat";
-char lbl_803D220C[] = "PlyPichu5K_Share_joint";
-char lbl_803D2224[] = "PlyPichu5K_Share_matanim_joint";
-char lbl_803D2244[] = "PlPcRe.dat";
-char lbl_803D2250[] = "PlyPichu5KRe_Share_joint";
-char lbl_803D226C[] = "PlyPichu5KRe_Share_matanim_joint";
-char lbl_803D2290[] = "PlPcBu.dat";
-char lbl_803D229C[] = "PlyPichu5KBu_Share_joint";
-char lbl_803D22B8[] = "PlyPichu5KBu_Share_matanim_joint";
-char lbl_803D22DC[] = "PlPcGr.dat";
-char lbl_803D22E8[] = "PlyPichu5KGr_Share_joint";
-char lbl_803D2304[] = "PlyPichu5KGr_Share_matanim_joint";
-char lbl_803D2328[] = "PlPcAJ.dat";
+char ftPichu_803D21E8[] = "PlPc.dat";
+char ftPichu_803D21F4[] = "ftDataPichu";
+char ftPichu_803D2200[] = "PlPcNr.dat";
+char ftPichu_803D220C[] = "PlyPichu5K_Share_joint";
+char ftPichu_803D2224[] = "PlyPichu5K_Share_matanim_joint";
+char ftPichu_803D2244[] = "PlPcRe.dat";
+char ftPichu_803D2250[] = "PlyPichu5KRe_Share_joint";
+char ftPichu_803D226C[] = "PlyPichu5KRe_Share_matanim_joint";
+char ftPichu_803D2290[] = "PlPcBu.dat";
+char ftPichu_803D229C[] = "PlyPichu5KBu_Share_joint";
+char ftPichu_803D22B8[] = "PlyPichu5KBu_Share_matanim_joint";
+char ftPichu_803D22DC[] = "PlPcGr.dat";
+char ftPichu_803D22E8[] = "PlyPichu5KGr_Share_joint";
+char ftPichu_803D2304[] = "PlyPichu5KGr_Share_matanim_joint";
+char ftPichu_803D2328[] = "PlPcAJ.dat";
 
-Fighter_DemoStrings lbl_803D23A4 = {
+Fighter_DemoStrings ftPichu_803D23A4 = {
     "ftDemoResultMotionFilePichu",
     "ftDemoIntroMotionFilePichu",
     "ftDemoEndingMotionFilePichu",
     "ftDemoViWaitMotionFilePichu",
 };
 
-Fighter_CostumeStrings lbl_803D23B4[] = {
-    { lbl_803D2200, lbl_803D220C, lbl_803D2224 },
-    { lbl_803D2244, lbl_803D2250, lbl_803D226C },
-    { lbl_803D2290, lbl_803D229C, lbl_803D22B8 },
-    { lbl_803D22DC, lbl_803D22E8, lbl_803D2304 },
+Fighter_CostumeStrings ftPichu_803D23B4[] = {
+    { ftPichu_803D2200, ftPichu_803D220C, ftPichu_803D2224 },
+    { ftPichu_803D2244, ftPichu_803D2250, ftPichu_803D226C },
+    { ftPichu_803D2290, ftPichu_803D229C, ftPichu_803D22B8 },
+    { ftPichu_803D22DC, ftPichu_803D22E8, ftPichu_803D2304 },
 };
 
 void ftPichu_OnLoad(HSD_GObj* gobj)

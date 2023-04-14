@@ -131,24 +131,24 @@ MotionState ftGameWatch_MotionStateTable[] = {
       ftGameWatch_SpecialAirLwShoot_Coll, ftCamera_UpdateCameraBox },
 };
 
-char lbl_803D28E8[] = "PlGw.dat";
-char lbl_803D28F4[] = "ftDataGamewatch";
-char lbl_803D2904[] = "PlGwNr.dat";
-char lbl_803D2910[] = "PlyGamewatch5K_Share_joint";
-char lbl_803D292C[] = "PlGwAJ.dat";
+char ftGameWatch_803D28E8[] = "PlGw.dat";
+char ftGameWatch_803D28F4[] = "ftDataGamewatch";
+char ftGameWatch_803D2904[] = "PlGwNr.dat";
+char ftGameWatch_803D2910[] = "PlyGamewatch5K_Share_joint";
+char ftGameWatch_803D292C[] = "PlGwAJ.dat";
 
-Fighter_DemoStrings lbl_803D29B8 = {
+Fighter_DemoStrings ftGameWatch_803D29B8 = {
     "ftDemoResultMotionFileGamewatch",
     "ftDemoIntroMotionFileGamewatch",
     "ftDemoEndingMotionFileGamewatch",
     "ftDemoViWaitMotionFileGamewatch",
 };
 
-Fighter_CostumeStrings lbl_803D29C8[] = {
-    { lbl_803D2904, lbl_803D2910, NULL },
-    { lbl_803D2904, lbl_803D2910, NULL },
-    { lbl_803D2904, lbl_803D2910, NULL },
-    { lbl_803D2904, lbl_803D2910, NULL },
+Fighter_CostumeStrings ftGameWatch_803D29C8[] = {
+    { ftGameWatch_803D2904, ftGameWatch_803D2910, NULL },
+    { ftGameWatch_803D2904, ftGameWatch_803D2910, NULL },
+    { ftGameWatch_803D2904, ftGameWatch_803D2910, NULL },
+    { ftGameWatch_803D2904, ftGameWatch_803D2910, NULL },
 };
 
 void ftGameWatch_OnDeath(HSD_GObj* gobj)

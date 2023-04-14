@@ -80,7 +80,7 @@ typedef struct ftData_UnkCountStruct {
     int count;
 } ftData_UnkCountStruct;
 
-ftData_UnkCountStruct lbl_803C0FC8[FTKIND_MAX] = {
+ftData_UnkCountStruct ftData_803C0FC8[FTKIND_MAX] = {
     { 0, 303 }, { 0, 327 }, { 0, 318 }, { 0, 337 }, { 0, 479 }, { 0, 316 },
     { 0, 314 }, { 0, 317 }, { 0, 326 }, { 0, 318 }, { 0, 321 }, { 0, 321 },
     { 0, 320 }, { 0, 313 }, { 0, 314 }, { 0, 327 }, { 0, 314 }, { 0, 312 },
@@ -89,7 +89,7 @@ ftData_UnkCountStruct lbl_803C0FC8[FTKIND_MAX] = {
     { 0, 295 }, { 0, 316 }, { 0, 296 },
 };
 
-Event lbl_803C10D0[FTKIND_MAX] = {
+Event ftData_803C10D0[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
@@ -125,7 +125,7 @@ Event lbl_803C10D0[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_OnLoad[FTKIND_MAX] = {
+HSD_GObjEvent ftData_OnLoad[FTKIND_MAX] = {
     ftMario_OnLoad,      ftFox_OnLoad,       ftCaptain_OnLoad,
     ftDonkey_OnLoad,     ftKirby_OnLoad,     ftKoopa_OnLoad,
     ftLink_OnLoad,       ftSeak_OnLoad,      ftNess_OnLoad,
@@ -139,7 +139,7 @@ HSD_GObjEvent ft_OnLoad[FTKIND_MAX] = {
     ftZakoGirl_OnLoad,   ftGigaKoopa_OnLoad, ftSandbag_OnLoad,
 };
 
-HSD_GObjEvent ft_OnDeath[FTKIND_MAX] = {
+HSD_GObjEvent ftData_OnDeath[FTKIND_MAX] = {
     ftMario_OnDeath,      ftFox_OnDeath,       ftCaptain_OnDeath,
     ftDonkey_OnDeath,     ftKirby_OnDeath,     ftKoopa_OnDeath,
     ftLink_OnDeath,       ftSeak_OnDeath,      ftNess_OnDeath,
@@ -153,7 +153,7 @@ HSD_GObjEvent ft_OnDeath[FTKIND_MAX] = {
     ftZakoGirl_OnDeath,   ftGigaKoopa_OnDeath, ftSandbag_OnDeath,
 };
 
-HSD_GObjEvent ft_OnUserDataRemove[FTKIND_MAX] = {
+HSD_GObjEvent ftData_OnUserDataRemove[FTKIND_MAX] = {
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, ftPurin_OnUserDataRemove,
     NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,
@@ -161,7 +161,7 @@ HSD_GObjEvent ft_OnUserDataRemove[FTKIND_MAX] = {
     NULL,
 };
 
-MotionState* MotionStateTableByCharacter[FTKIND_MAX] = {
+MotionState* ftData_CharacterStateTables[FTKIND_MAX] = {
     ftMario_MotionStateTable,
     ftFox_MotionStateTable,
     ftCaptain_MotionStateTable,
@@ -197,15 +197,19 @@ MotionState* MotionStateTableByCharacter[FTKIND_MAX] = {
     ftSandbag_MotionStateTable,
 };
 
-MotionState* lbl_803C1364[FTKIND_MAX] = {
-    lbl_803C7260, NULL, NULL, NULL,         lbl_803CA04C, NULL, NULL,
-    NULL,         NULL, NULL, NULL,         NULL,         NULL, NULL,
-    NULL,         NULL, NULL, lbl_803D0868, NULL,         NULL, NULL,
-    NULL,         NULL, NULL, NULL,         NULL,         NULL, NULL,
-    NULL,         NULL, NULL, lbl_803D38C8, NULL,
+MotionState* ftData_803C1364[FTKIND_MAX] = {
+    lbl_803C7260, NULL,         NULL, NULL,
+    lbl_803CA04C, NULL,         NULL, NULL,
+    NULL,         NULL,         NULL, NULL,
+    NULL,         NULL,         NULL, NULL,
+    NULL,         lbl_803D0868, NULL, NULL,
+    NULL,         NULL,         NULL, NULL,
+    NULL,         NULL,         NULL, NULL,
+    NULL,         NULL,         NULL, ftGigaKoopa_803D38C8,
+    NULL,
 };
 
-HSD_GObjEvent ft_SpecialS[FTKIND_MAX] = {
+HSD_GObjEvent ftData_SpecialS[FTKIND_MAX] = {
     ftMario_SpecialS_StartMotion,
     ftFox_SpecialS_StartMotion,
     ftCaptain_SpecialS_StartMotion,
@@ -241,7 +245,7 @@ HSD_GObjEvent ft_SpecialS[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_SpecialAirHi[FTKIND_MAX] = {
+HSD_GObjEvent ftData_SpecialAirHi[FTKIND_MAX] = {
     ftMario_SpecialAirHi_StartMotion,
     ftFox_SpecialAirHi_StartMotion,
     ftCaptain_SpecialAirHi_StartMotion,
@@ -277,7 +281,7 @@ HSD_GObjEvent ft_SpecialAirHi[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_SpecialAirLw[FTKIND_MAX] = {
+HSD_GObjEvent ftData_SpecialAirLw[FTKIND_MAX] = {
     ftMario_SpecialAirLw_StartMotion,
     ftFox_SpecialAirLw_StartMotion,
     ftCaptain_SpecialAirLw_StartMotion,
@@ -313,7 +317,7 @@ HSD_GObjEvent ft_SpecialAirLw[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_SpecialAirS[FTKIND_MAX] = {
+HSD_GObjEvent ftData_SpecialAirS[FTKIND_MAX] = {
     ftMario_SpecialAirS_StartMotion,
     ftFox_SpecialAirS_StartMotion,
     ftCaptain_SpecialAirS_StartMotion,
@@ -349,7 +353,7 @@ HSD_GObjEvent ft_SpecialAirS[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_SpecialAirN[FTKIND_MAX] = {
+HSD_GObjEvent ftData_SpecialAirN[FTKIND_MAX] = {
     ftMario_SpecialAirN_StartMotion,
     ftFox_SpecialAirN_StartMotion,
     ftCaptain_SpecialAirN_StartMotion,
@@ -385,7 +389,7 @@ HSD_GObjEvent ft_SpecialAirN[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_SpecialN[FTKIND_MAX] = {
+HSD_GObjEvent ftData_SpecialN[FTKIND_MAX] = {
     ftMario_SpecialN_StartMotion,
     ftFox_SpecialN_StartMotion,
     ftCaptain_SpecialN_StartMotion,
@@ -421,7 +425,7 @@ HSD_GObjEvent ft_SpecialN[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_SpecialLw[FTKIND_MAX] = {
+HSD_GObjEvent ftData_SpecialLw[FTKIND_MAX] = {
     ftMario_SpecialLw_StartMotion,
     ftFox_SpecialLw_StartMotion,
     ftCaptain_SpecialLw_StartMotion,
@@ -457,7 +461,7 @@ HSD_GObjEvent ft_SpecialLw[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_SpecialHi[FTKIND_MAX] = {
+HSD_GObjEvent ftData_SpecialHi[FTKIND_MAX] = {
     ftMario_SpecialHi_StartMotion,
     ftFox_SpecialHi_StartMotion,
     ftCaptain_SpecialHi_StartMotion,
@@ -493,7 +497,7 @@ HSD_GObjEvent ft_SpecialHi[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_OnAbsorb[FTKIND_MAX] = {
+HSD_GObjEvent ftData_OnAbsorb[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
@@ -529,7 +533,7 @@ HSD_GObjEvent ft_OnAbsorb[FTKIND_MAX] = {
     NULL,
 };
 
-Fighter_ItemEvent ft_OnItemPickupExt[FTKIND_MAX] = {
+Fighter_ItemEvent ftData_OnItemPickupExt[FTKIND_MAX] = {
     ftMario_OnItemPickup,
     ftFox_OnItemPickup,
     ftCaptain_OnItemPickup,
@@ -565,7 +569,7 @@ Fighter_ItemEvent ft_OnItemPickupExt[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_OnItemInvisible[FTKIND_MAX] = {
+HSD_GObjEvent ftData_OnItemInvisible[FTKIND_MAX] = {
     ftMario_OnItemInvisible,
     ftFox_OnItemInvisible,
     ftCaptain_OnItemInvisible,
@@ -601,7 +605,7 @@ HSD_GObjEvent ft_OnItemInvisible[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_OnItemVisible[FTKIND_MAX] = {
+HSD_GObjEvent ftData_OnItemVisible[FTKIND_MAX] = {
     ftMario_OnItemVisible,
     ftFox_OnItemVisible,
     ftCaptain_OnItemVisible,
@@ -637,7 +641,7 @@ HSD_GObjEvent ft_OnItemVisible[FTKIND_MAX] = {
     NULL,
 };
 
-Fighter_ItemEvent ft_OnItemDropExt[FTKIND_MAX] = {
+Fighter_ItemEvent ftData_OnItemDropExt[FTKIND_MAX] = {
     ftMario_OnItemDrop,
     ftFox_OnItemDrop,
     ftCaptain_OnItemDrop,
@@ -673,7 +677,7 @@ Fighter_ItemEvent ft_OnItemDropExt[FTKIND_MAX] = {
     NULL,
 };
 
-Fighter_ItemEvent ft_OnItemPickup[FTKIND_MAX] = {
+Fighter_ItemEvent ftData_OnItemPickup[FTKIND_MAX] = {
     ftMario_OnItemPickup,
     ftFox_OnItemPickup,
     ftCaptain_OnItemPickup,
@@ -709,7 +713,7 @@ Fighter_ItemEvent ft_OnItemPickup[FTKIND_MAX] = {
     NULL,
 };
 
-Fighter_ItemEvent ft_OnItemDrop[FTKIND_MAX] = {
+Fighter_ItemEvent ftData_OnItemDrop[FTKIND_MAX] = {
     ftMario_OnItemDrop,
     ftFox_OnItemDrop,
     ftCaptain_OnItemDrop,
@@ -745,7 +749,7 @@ Fighter_ItemEvent ft_OnItemDrop[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent lbl_803C1BA4[FTKIND_MAX] = {
+HSD_GObjEvent ftData_803C1BA4[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
@@ -781,7 +785,7 @@ HSD_GObjEvent lbl_803C1BA4[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent lbl_803C1C28[FTKIND_MAX] = {
+HSD_GObjEvent ftData_803C1C28[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
@@ -817,7 +821,7 @@ HSD_GObjEvent lbl_803C1C28[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_OnKnockbackEnter[FTKIND_MAX] = {
+HSD_GObjEvent ftData_OnKnockbackEnter[FTKIND_MAX] = {
     ftMario_OnKnockbackEnter,
     ftFox_OnKnockbackEnter,
     NULL,
@@ -853,7 +857,7 @@ HSD_GObjEvent ft_OnKnockbackEnter[FTKIND_MAX] = {
     ftSandbag_OnKnockbackEnter,
 };
 
-HSD_GObjEvent ft_OnKnockbackExit[FTKIND_MAX] = {
+HSD_GObjEvent ftData_OnKnockbackExit[FTKIND_MAX] = {
     ftMario_OnKnockbackExit,
     ftFox_OnKnockbackExit,
     NULL,
@@ -889,7 +893,7 @@ HSD_GObjEvent ft_OnKnockbackExit[FTKIND_MAX] = {
     ftSandbag_OnKnockbackExit,
 };
 
-HSD_GObjEvent lbl_803C1DB4[FTKIND_MAX] = {
+HSD_GObjEvent ftData_803C1DB4[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
@@ -925,7 +929,7 @@ HSD_GObjEvent lbl_803C1DB4[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent lbl_803C1E38[FTKIND_MAX] = {
+HSD_GObjEvent ftData_803C1E38[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
@@ -961,7 +965,7 @@ HSD_GObjEvent lbl_803C1E38[FTKIND_MAX] = {
     NULL,
 };
 
-HSD_GObjEvent ft_LoadSpecialAttrs[FTKIND_MAX] = {
+HSD_GObjEvent ftData_LoadSpecialAttrs[FTKIND_MAX] = {
     ftMario_LoadSpecialAttrs,     ftFox_LoadSpecialAttrs,
     ftCaptain_LoadSpecialAttrs,   ftDonkey_LoadSpecialAttrs,
     ftKirby_LoadSpecialAttrs,     ftKoopa_LoadSpecialAttrs,
@@ -982,27 +986,43 @@ HSD_GObjEvent ft_LoadSpecialAttrs[FTKIND_MAX] = {
 };
 
 /// Standard Character .dat File Names
-char* lbl_803C1F40[FTKIND_MAX * 2] = {
-    lbl_803C57D0, lbl_803C57DC, lbl_803C7BE8,         lbl_803C7BF4,
-    lbl_803C7598, lbl_803C75A4, lbl_803CBDF8,         lbl_803CBE04,
-    lbl_803CA308, lbl_803CA314, lbl_803CF0A0,         lbl_803CF0AC,
-    lbl_803C80B8, lbl_803C80C4, lbl_803CC360,         lbl_803CC36C,
-    lbl_803CCAD0, lbl_803CCADC, ftPeach_str_PlPe_dat, ftPeach_str_ftDataPeach,
-    lbl_803CD610, lbl_803CD61C, lbl_803CDB78,         lbl_803CDB84,
-    lbl_803CE0B8, lbl_803CE0C4, lbl_803CE510,         lbl_803CE51C,
-    lbl_803CEA98, lbl_803CEAA4, lbl_803D02F0,         lbl_803D02FC,
-    lbl_803D0D80, lbl_803D0D8C, lbl_803D08A8,         lbl_803D08B4,
-    lbl_803CF820, lbl_803CF82C, lbl_803CFC98,         lbl_803CFCA4,
-    lbl_803D1240, lbl_803D124C, lbl_803D15D8,         lbl_803D15E4,
-    lbl_803D1CA8, lbl_803D1CB4, lbl_803D21E8,         lbl_803D21F4,
-    lbl_803D28E8, lbl_803D28F4, lbl_803D2CD8,         lbl_803D2CE4,
-    lbl_803D3280, lbl_803D328C, lbl_803D4070,         lbl_803D407C,
-    lbl_803D4818, lbl_803D4824, lbl_803D34E8,         lbl_803D34F4,
-    lbl_803D3568, lbl_803D3574, lbl_803D38E8,         lbl_803D38F4,
-    lbl_803D39B8, lbl_803D39C4,
+char* ftData_803C1F40[FTKIND_MAX * 2] = {
+    lbl_803C57D0,         lbl_803C57DC,
+    lbl_803C7BE8,         lbl_803C7BF4,
+    lbl_803C7598,         lbl_803C75A4,
+    lbl_803CBDF8,         lbl_803CBE04,
+    lbl_803CA308,         lbl_803CA314,
+    lbl_803CF0A0,         lbl_803CF0AC,
+    lbl_803C80B8,         lbl_803C80C4,
+    lbl_803CC360,         lbl_803CC36C,
+    lbl_803CCAD0,         lbl_803CCADC,
+    ftPeach_str_PlPe_dat, ftPeach_str_ftDataPeach,
+    lbl_803CD610,         lbl_803CD61C,
+    lbl_803CDB78,         lbl_803CDB84,
+    lbl_803CE0B8,         lbl_803CE0C4,
+    lbl_803CE510,         lbl_803CE51C,
+    lbl_803CEA98,         lbl_803CEAA4,
+    lbl_803D02F0,         lbl_803D02FC,
+    lbl_803D0D80,         lbl_803D0D8C,
+    lbl_803D08A8,         lbl_803D08B4,
+    lbl_803CF820,         lbl_803CF82C,
+    lbl_803CFC98,         lbl_803CFCA4,
+    lbl_803D1240,         lbl_803D124C,
+    lbl_803D15D8,         lbl_803D15E4,
+    lbl_803D1CA8,         lbl_803D1CB4,
+    ftPichu_803D21E8,     ftPichu_803D21F4,
+    ftGameWatch_803D28E8, ftGameWatch_803D28F4,
+    ftGanon_803D2CD8,     ftGanon_803D2CE4,
+    lbl_803D3280,         lbl_803D328C,
+    lbl_803D4070,         lbl_803D407C,
+    lbl_803D4818,         lbl_803D4824,
+    lbl_803D34E8,         lbl_803D34F4,
+    lbl_803D3568,         lbl_803D3574,
+    ftGigaKoopa_803D38E8, ftGigaKoopa_803D38F4,
+    lbl_803D39B8,         lbl_803D39C4,
 };
 
-HSD_GObjEvent lbl_803C2048[FTKIND_MAX] = {
+HSD_GObjEvent ftData_803C2048[FTKIND_MAX] = {
     NULL, NULL, NULL, NULL, ftKirby_800EEE9C,
     NULL, NULL, NULL, NULL, NULL,
     NULL, NULL, NULL, NULL, NULL,
@@ -1012,7 +1032,7 @@ HSD_GObjEvent lbl_803C2048[FTKIND_MAX] = {
     NULL, NULL, NULL,
 };
 
-Fighter_UnkMtxEvent lbl_803C20CC[FTKIND_MAX] = {
+Fighter_UnkMtxEvent ftData_803C20CC[FTKIND_MAX] = {
     NULL,
     NULL,
     NULL,
@@ -1050,7 +1070,7 @@ Fighter_UnkMtxEvent lbl_803C20CC[FTKIND_MAX] = {
 
 /// Character model group (e.g. high poly, low poly, metal) visibility change
 /// callbacks
-ftData_UnkModelStruct lbl_803C2150 = {
+ftData_UnkModelStruct ftData_803C2150 = {
     {
         NULL,
         NULL,
@@ -1123,7 +1143,7 @@ ftData_UnkModelStruct lbl_803C2150 = {
     },
 };
 
-HSD_GObjEvent lbl_803C2258[][FTKIND_MAX] = {
+HSD_GObjEvent ftData_803C2258[][FTKIND_MAX] = {
     {
         NULL,
         NULL,
@@ -1172,7 +1192,7 @@ struct {
     Fighter_CostumeStrings* costume_strings[FTKIND_MAX];
     /// Animation .dat Filenames
     char* anim_dat_filenames[FTKIND_MAX];
-} lbl_803C2360 = {
+} ftData_803C2360 = {
     {
         ftMario_CostumeStrings, lbl_803C7D9C,
         lbl_803C773C,           lbl_803CC020,
@@ -1185,27 +1205,31 @@ struct {
         lbl_803D0F5C,           lbl_803D0AB4,
         lbl_803CFA18,           lbl_803CFEB0,
         lbl_803D1458,           lbl_803D180C,
-        lbl_803D1E74,           lbl_803D23B4,
-        lbl_803D29C8,           lbl_803D2E40,
+        lbl_803D1E74,           ftPichu_803D23B4,
+        ftGameWatch_803D29C8,   ftGanon_803D2E40,
         lbl_803D34A8,           lbl_803D40C4,
         lbl_803D4868,           lbl_803D3558,
-        lbl_803D35D8,           lbl_803D3988,
+        lbl_803D35D8,           ftGigaKoopa_803D3988,
         lbl_803D3A24,
     },
     {
-        lbl_803C595C, lbl_803C7D10, lbl_803C76A0, lbl_803CBF88, lbl_803CA4E0,
-        lbl_803CF1E0, lbl_803C8224, lbl_803CC4CC, lbl_803CCBF8, str_PlPeAJ_dat,
-        lbl_803CD738, lbl_803CDCA0, lbl_803CE204, lbl_803CE5EC, lbl_803CEC70,
-        lbl_803D047C, lbl_803D0EC4, lbl_803D09E8, lbl_803CF98C, lbl_803CFE24,
-        lbl_803D13CC, lbl_803D1770, lbl_803D1DE8, lbl_803D2328, lbl_803D292C,
-        lbl_803D2DB4, lbl_803D3410, lbl_803D40B8, lbl_803D485C, lbl_803D3520,
-        lbl_803D35A0, lbl_803D3948, lbl_803D3A18,
+        lbl_803C595C,         lbl_803C7D10,         lbl_803C76A0,
+        lbl_803CBF88,         lbl_803CA4E0,         lbl_803CF1E0,
+        lbl_803C8224,         lbl_803CC4CC,         lbl_803CCBF8,
+        str_PlPeAJ_dat,       lbl_803CD738,         lbl_803CDCA0,
+        lbl_803CE204,         lbl_803CE5EC,         lbl_803CEC70,
+        lbl_803D047C,         lbl_803D0EC4,         lbl_803D09E8,
+        lbl_803CF98C,         lbl_803CFE24,         lbl_803D13CC,
+        lbl_803D1770,         lbl_803D1DE8,         ftPichu_803D2328,
+        ftGameWatch_803D292C, ftGanon_803D2DB4,     lbl_803D3410,
+        lbl_803D40B8,         lbl_803D485C,         lbl_803D3520,
+        lbl_803D35A0,         ftGigaKoopa_803D3948, lbl_803D3A18,
     }
 
 };
 
 /// Demo Lookup Strings
-Fighter_DemoStrings* lbl_803C2468[FTKIND_MAX] = {
+Fighter_DemoStrings* ftData_803C2468[FTKIND_MAX] = {
     &ftMario_DemoMotionFilenames,
     &lbl_803C7D8C,
     &lbl_803C772C,
@@ -1229,19 +1253,19 @@ Fighter_DemoStrings* lbl_803C2468[FTKIND_MAX] = {
     &lbl_803D1448,
     &lbl_803D17FC,
     &lbl_803D1E64,
-    &lbl_803D23A4,
-    &lbl_803D29B8,
-    &lbl_803D2E30,
+    &ftPichu_803D23A4,
+    &ftGameWatch_803D29B8,
+    &ftGanon_803D2E30,
     &lbl_803D3498,
     NULL,
     NULL,
     NULL,
     NULL,
-    &lbl_803D3954,
+    &ftGigaKoopa_803D3954,
     NULL,
 };
 
-Fighter_MotionFileStringGetter lbl_803C24EC[FTKIND_MAX] = {
+Fighter_MotionFileStringGetter ftData_803C24EC[FTKIND_MAX] = {
     ftMario_GetMotionFileString,
     NULL,
     NULL,
@@ -1277,7 +1301,7 @@ Fighter_MotionFileStringGetter lbl_803C24EC[FTKIND_MAX] = {
     NULL,
 };
 
-Fighter_UnkPtrEvent lbl_803C2570[FTKIND_MAX] = {
+Fighter_UnkPtrEvent ftData_803C2570[FTKIND_MAX] = {
     ftMario_800E0CAC,
     NULL,
     NULL,
@@ -1313,7 +1337,7 @@ Fighter_UnkPtrEvent lbl_803C2570[FTKIND_MAX] = {
     NULL,
 };
 
-ftData_UnkCountStruct lbl_803C25F4[FTKIND_MAX] = {
+ftData_UnkCountStruct ftData_803C25F4[FTKIND_MAX] = {
     { 0, 16 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 18 }, { 0, 14 },
     { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 },
     { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 14 }, { 0, 16 },
@@ -1322,7 +1346,7 @@ ftData_UnkCountStruct lbl_803C25F4[FTKIND_MAX] = {
     { 0, 14 }, { 0, 15 }, { 0, 14 },
 };
 
-s8 lbl_803C26FC[FTKIND_MAX] = {
+s8 ftData_803C26FC[FTKIND_MAX] = {
     1,  3,  4,  8, 5, 12, 6, 17, 10, 15, 14, 14, 7,  2,  9,  11, 13,
     18, 16, 17, 6, 1, 3,  7, -1, 19, 49, -1, -1, -1, -1, 12, -1,
 };

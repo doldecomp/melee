@@ -58,9 +58,9 @@ jtbl_t jtbl_803CC604 = {
     ftSeak_80112660, ftSeak_80112650,
 };
 
-f32 const lbl_804D9650 = 0;
-f32 const lbl_804D9654 = 1;
-f32 const lbl_804D9658 = 2;
+f32 const ftSeak_804D9650 = 0;
+f32 const ftSeak_804D9654 = 1;
+f32 const ftSeak_804D9658 = 2;
 
 // Sheik_CheckAndDestroyNeedles
 // 80111FBC - 801120D4 (0x118 bytes)

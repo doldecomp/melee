@@ -1,5 +1,5 @@
-char lbl_803C2720[] = "fighter reference counter error!\n";
-char lbl_803C2744[] = "ftdata.c";
+char ftData_803C2720[] = "fighter reference counter error!\n";
+char ftData_803C2744[] = "ftdata.c";
 
 #ifdef MUST_MATCH
 #pragma push

@@ -6,12 +6,12 @@
 #include <baselib/gobj.h>
 
 extern MotionState ftGigaKoopa_MotionStateTable[];
-extern MotionState lbl_803D38C8[];
-extern char lbl_803D38E8[];
-extern char lbl_803D38F4[];
-extern Fighter_CostumeStrings lbl_803D3988[];
-extern char lbl_803D3948[];
-extern Fighter_DemoStrings lbl_803D3954;
+extern MotionState ftGigaKoopa_803D38C8[];
+extern char ftGigaKoopa_803D38E8[];
+extern char ftGigaKoopa_803D38F4[];
+extern Fighter_CostumeStrings ftGigaKoopa_803D3988[];
+extern char ftGigaKoopa_803D3948[];
+extern Fighter_DemoStrings ftGigaKoopa_803D3954;
 
 void ftGigaKoopa_OnDeath(HSD_GObj*);
 void ftGigaKoopa_8014F698(HSD_GObj*);

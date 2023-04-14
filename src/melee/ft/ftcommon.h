@@ -73,7 +73,7 @@ void ftCommon_8007E79C(HSD_GObj*, s32);
 void ftCommon_8007E7E4(HSD_GObj*, s32);
 void ftCommon_8007E82C(HSD_GObj*);
 void ftCommon_8007E83C(HSD_GObj*, s32, f32 div);
-s32 ftCommon_GetParasolStatus(HSD_GObj*);
+s32 ftGetParasolStatus(HSD_GObj*);
 void ftCommon_8007EA90(Fighter*, s32);
 void ftCommon_8007EBAC(Fighter*, u32, u32);
 void ftCommon_8007EC30(u32, u32);
@@ -140,7 +140,7 @@ void ftCommon_8007E2D0(Fighter*, s16, HSD_GObjEvent, HSD_GObjEvent,
 
 void ftCommon_8007E2FC(HSD_GObj*);
 void ftCommon_8007E83C(HSD_GObj*, s32, f32 div);
-s32 ftCommon_GetParasolStatus(HSD_GObj*);
+s32 ftGetParasolStatus(HSD_GObj*);
 void ftCommon_8007EA90(Fighter*, s32);
 void ftCommon_8007ED50(Fighter*, s32);
 void ftCommon_8007EFC0(Fighter*, u32);

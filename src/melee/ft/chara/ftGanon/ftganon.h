@@ -6,11 +6,11 @@
 #include <baselib/gobj.h>
 
 extern MotionState ftGanon_MotionStateTable[];
-extern char lbl_803D2CD8[];
-extern char lbl_803D2CE4[];
-extern Fighter_CostumeStrings lbl_803D2E40[];
-extern char lbl_803D2DB4[];
-extern Fighter_DemoStrings lbl_803D2E30;
+extern char ftGanon_803D2CD8[];
+extern char ftGanon_803D2CE4[];
+extern Fighter_CostumeStrings ftGanon_803D2E40[];
+extern char ftGanon_803D2DB4[];
+extern Fighter_DemoStrings ftGanon_803D2E30;
 
 void ftGanon_OnDeath(HSD_GObj*);
 void ftGanon_OnItemPickup(HSD_GObj*, bool);

@@ -14,11 +14,11 @@ typedef struct _ftPichuAttributes {
 } ftPichuAttributes;
 
 extern MotionState ftPichu_MotionStateTable[];
-extern char lbl_803D21E8[];
-extern char lbl_803D21F4[];
-extern Fighter_CostumeStrings lbl_803D23B4[];
-extern char lbl_803D2328[];
-extern Fighter_DemoStrings lbl_803D23A4;
+extern char ftPichu_803D21E8[];
+extern char ftPichu_803D21F4[];
+extern Fighter_CostumeStrings ftPichu_803D23B4[];
+extern char ftPichu_803D2328[];
+extern Fighter_DemoStrings ftPichu_803D23A4;
 
 void ftPichu_OnLoad(HSD_GObj*);
 void ftPichu_OnDeath(HSD_GObj*);

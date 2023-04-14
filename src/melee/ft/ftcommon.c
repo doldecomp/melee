@@ -1196,9 +1196,9 @@ void ftCommon_8007E690(Fighter* fp, HSD_AnimJoint* arg1)
     }
 }
 
-extern void (*ft_OnItemDropExt[])(HSD_GObj*, s32);
-extern void (*ft_OnItemDrop[])(HSD_GObj*, s32); // OnItemDrop?
-extern void (*ft_OnItemPickup[])(HSD_GObj*, s32);
+extern void (*ftData_OnItemDropExt[])(HSD_GObj*, s32);
+extern void (*ftData_OnItemDrop[])(HSD_GObj*, s32); // OnItemDrop?
+extern void (*ftData_OnItemPickup[])(HSD_GObj*, s32);
 
 void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
 {
@@ -1210,8 +1210,8 @@ void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
     if (ft_800C5240(gobj)) {
         ft_800C5500(gobj);
     }
-    if (ft_OnItemDropExt[fp->x4_fighterKind] != NULL) {
-        ft_OnItemDropExt[fp->x4_fighterKind](gobj, arg2);
+    if (ftData_OnItemDropExt[fp->x4_fighterKind] != NULL) {
+        ftData_OnItemDropExt[fp->x4_fighterKind](gobj, arg2);
     }
     pl_8003EA08(fp->xC_playerID, fp->x221F_flag.bits.b4);
     fp->x1974_heldItem = NULL;
@@ -1220,16 +1220,16 @@ void ftCommon_8007E6DC(HSD_GObj* gobj, HSD_GObj* item_gobj, s32 arg2)
 void ftCommon_8007E79C(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
-    if (ft_OnItemDrop[fp->x4_fighterKind] != NULL) {
-        ft_OnItemDrop[fp->x4_fighterKind](gobj, arg1);
+    if (ftData_OnItemDrop[fp->x4_fighterKind] != NULL) {
+        ftData_OnItemDrop[fp->x4_fighterKind](gobj, arg1);
     }
 }
 
 void ftCommon_8007E7E4(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
-    if (ft_OnItemPickup[fp->x4_fighterKind] != NULL) {
-        ft_OnItemPickup[fp->x4_fighterKind](gobj, arg1);
+    if (ftData_OnItemPickup[fp->x4_fighterKind] != NULL) {
+        ftData_OnItemPickup[fp->x4_fighterKind](gobj, arg1);
     }
 }
 
@@ -1274,11 +1274,11 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
     Fighter* fp = gobj->user_data;
 
 #ifdef MUST_MATCH
-#define ftGetParasolStatus ftCommon_GetParasolStatus
+#define ftGetParasolStatus ftGetParasolStatus
     HSD_ASSERT(1276, ftGetParasolStatus(gobj) != FtParasol_None);
 #undef ftGetParasolStatus
 #else
-    HSD_ASSERT(__LINE__, ftCommon_GetParasolStatus(gobj) != FtParasol_None);
+    HSD_ASSERT(__LINE__, ftGetParasolStatus(gobj) != FtParasol_None);
 #endif
 
     if (div == 0) {
@@ -1298,7 +1298,7 @@ void ftCommon_8007E83C(HSD_GObj* gobj, s32 arg1, f32 div)
 }
 
 /// @was{ftGetParasolStatus}
-s32 ftCommon_GetParasolStatus(HSD_GObj* gobj)
+s32 ftGetParasolStatus(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x1974_heldItem != NULL &&
@@ -1590,10 +1590,10 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     arg1(dst_gobj);
 }
 
-extern void (*ft_OnItemInvisible[])(HSD_GObj*);
-extern void (*ft_OnItemVisible[])(HSD_GObj*);
-extern void (*ft_OnKnockbackEnter[])(HSD_GObj*);
-extern void (*ft_OnKnockbackExit[])(HSD_GObj*);
+extern void (*ftData_OnItemInvisible[])(HSD_GObj*);
+extern void (*ftData_OnItemVisible[])(HSD_GObj*);
+extern void (*ftData_OnKnockbackEnter[])(HSD_GObj*);
+extern void (*ftData_OnKnockbackExit[])(HSD_GObj*);
 
 void ftCommon_8007F578(HSD_GObj* gobj)
 {
@@ -1601,8 +1601,8 @@ void ftCommon_8007F578(HSD_GObj* gobj)
     if (fp->x1974_heldItem == NULL) {
         return;
     }
-    if (ft_OnItemInvisible[fp->x4_fighterKind] != NULL) {
-        ft_OnItemInvisible[fp->x4_fighterKind](gobj);
+    if (ftData_OnItemInvisible[fp->x4_fighterKind] != NULL) {
+        ftData_OnItemInvisible[fp->x4_fighterKind](gobj);
     }
 }
 
@@ -1620,8 +1620,8 @@ void ftCommon_8007F5CC(HSD_GObj* gobj, s32 arg1)
         if (arg1 == 0) {
             ftCommon_8007F578(gobj);
         } else if (item != NULL) {
-            if (ft_OnItemVisible[fp->x4_fighterKind] != NULL) {
-                ft_OnItemVisible[fp->x4_fighterKind](gobj);
+            if (ftData_OnItemVisible[fp->x4_fighterKind] != NULL) {
+                ftData_OnItemVisible[fp->x4_fighterKind](gobj);
             }
         }
     }
@@ -1668,16 +1668,16 @@ Mtx* ftCommon_8007F804(Fighter* fp)
 void ftCommon_8007F824(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (ft_OnKnockbackEnter[fp->x4_fighterKind] != NULL) {
-        ft_OnKnockbackEnter[fp->x4_fighterKind](gobj);
+    if (ftData_OnKnockbackEnter[fp->x4_fighterKind] != NULL) {
+        ftData_OnKnockbackEnter[fp->x4_fighterKind](gobj);
     }
 }
 
 void ftCommon_8007F86C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (ft_OnKnockbackExit[fp->x4_fighterKind] != NULL) {
-        ft_OnKnockbackExit[fp->x4_fighterKind](gobj);
+    if (ftData_OnKnockbackExit[fp->x4_fighterKind] != NULL) {
+        ftData_OnKnockbackExit[fp->x4_fighterKind](gobj);
     }
 }
 
@@ -1688,26 +1688,26 @@ void ftCommon_8007F8B4(Fighter* fp, Vec3* v)
     v->z = fp->cur_pos.z + fp->xD4_unk_vel.z;
 }
 
-extern void (*lbl_803C1C28[])(HSD_GObj*);
+extern void (*ftData_803C1C28[])(HSD_GObj*);
 
 void ftCommon_8007F8E8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
-        if (lbl_803C1C28[fp->x4_fighterKind] != NULL) {
-            lbl_803C1C28[fp->x4_fighterKind](gobj);
+        if (ftData_803C1C28[fp->x4_fighterKind] != NULL) {
+            ftData_803C1C28[fp->x4_fighterKind](gobj);
         }
     }
 }
 
-extern void (*lbl_803C1BA4[])(HSD_GObj*);
+extern void (*ftData_803C1BA4[])(HSD_GObj*);
 
 inline void _func_8007F948_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
-        if (lbl_803C1BA4[fp->x4_fighterKind] != NULL) {
-            lbl_803C1BA4[fp->x4_fighterKind](gobj);
+        if (ftData_803C1BA4[fp->x4_fighterKind] != NULL) {
+            ftData_803C1BA4[fp->x4_fighterKind](gobj);
         }
     }
 }

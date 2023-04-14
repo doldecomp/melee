@@ -78,11 +78,11 @@ typedef struct _ftGameWatchAttributes {
 } ftGameWatchAttributes;
 
 extern MotionState ftGameWatch_MotionStateTable[];
-extern char lbl_803D28E8[];
-extern char lbl_803D28F4[];
-extern Fighter_CostumeStrings lbl_803D29C8[];
-extern char lbl_803D292C[];
-extern Fighter_DemoStrings lbl_803D29B8;
+extern char ftGameWatch_803D28E8[];
+extern char ftGameWatch_803D28F4[];
+extern Fighter_CostumeStrings ftGameWatch_803D29C8[];
+extern char ftGameWatch_803D292C[];
+extern Fighter_DemoStrings ftGameWatch_803D29B8;
 
 // Mr. Game & Watch Functions
 

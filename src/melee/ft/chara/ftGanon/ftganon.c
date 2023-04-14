@@ -58,31 +58,33 @@ MotionState ftGanon_MotionStateTable[] = {
       ftCaptain_800E4698, ftCaptain_800E49DC, ftCamera_UpdateCameraBox },
 };
 
-char lbl_803D2CD8[] = "PlGn.dat";
-char lbl_803D2CE4[] = "ftDataGanon";
-char lbl_803D2CF0[] = "PlGnNr.dat";
-char lbl_803D2CFC[] = "PlyGanon5K_Share_joint";
-char lbl_803D2D14[] = "PlGnRe.dat";
-char lbl_803D2D20[] = "PlyGanon5KRe_Share_joint";
-char lbl_803D2D3C[] = "PlGnBu.dat";
-char lbl_803D2D48[] = "PlyGanon5KBu_Share_joint";
-char lbl_803D2D64[] = "PlGnGr.dat";
-char lbl_803D2D70[] = "PlyGanon5KGr_Share_joint";
-char lbl_803D2D8C[] = "PlGnLa.dat";
-char lbl_803D2D98[] = "PlyGanon5KLa_Share_joint";
-char lbl_803D2DB4[] = "PlGnAJ.dat";
+char ftGanon_803D2CD8[] = "PlGn.dat";
+char ftGanon_803D2CE4[] = "ftDataGanon";
+char ftGanon_803D2CF0[] = "PlGnNr.dat";
+char ftGanon_803D2CFC[] = "PlyGanon5K_Share_joint";
+char ftGanon_803D2D14[] = "PlGnRe.dat";
+char ftGanon_803D2D20[] = "PlyGanon5KRe_Share_joint";
+char ftGanon_803D2D3C[] = "PlGnBu.dat";
+char ftGanon_803D2D48[] = "PlyGanon5KBu_Share_joint";
+char ftGanon_803D2D64[] = "PlGnGr.dat";
+char ftGanon_803D2D70[] = "PlyGanon5KGr_Share_joint";
+char ftGanon_803D2D8C[] = "PlGnLa.dat";
+char ftGanon_803D2D98[] = "PlyGanon5KLa_Share_joint";
+char ftGanon_803D2DB4[] = "PlGnAJ.dat";
 
-Fighter_DemoStrings lbl_803D2E30 = {
+Fighter_DemoStrings ftGanon_803D2E30 = {
     "ftDemoResultMotionFileGanon",
     "ftDemoIntroMotionFileGanon",
     "ftDemoEndingMotionFileGanon",
     "ftDemoViWaitMotionFileGanon",
 };
 
-Fighter_CostumeStrings lbl_803D2E40[] = {
-    { lbl_803D2CF0, lbl_803D2CFC, NULL }, { lbl_803D2D14, lbl_803D2D20, NULL },
-    { lbl_803D2D3C, lbl_803D2D48, NULL }, { lbl_803D2D64, lbl_803D2D70, NULL },
-    { lbl_803D2D8C, lbl_803D2D98, NULL },
+Fighter_CostumeStrings ftGanon_803D2E40[] = {
+    { ftGanon_803D2CF0, ftGanon_803D2CFC, NULL },
+    { ftGanon_803D2D14, ftGanon_803D2D20, NULL },
+    { ftGanon_803D2D3C, ftGanon_803D2D48, NULL },
+    { ftGanon_803D2D64, ftGanon_803D2D70, NULL },
+    { ftGanon_803D2D8C, ftGanon_803D2D98, NULL },
 };
 
 void ftGanon_OnDeath(HSD_GObj* gobj)

@@ -58,23 +58,23 @@ MotionState ftGigaKoopa_MotionStateTable[] = {
       ftKoopa_80134A20, ftCamera_UpdateCameraBox },
 };
 
-MotionState lbl_803D38C8[] = {
+MotionState ftGigaKoopa_803D38C8[] = {
     { 14, 0, 0x01000000, NULL, NULL, ft_800C74AC, NULL, NULL },
 };
 
-char lbl_803D38E8[] = "PlGk.dat";
-char lbl_803D38F4[] = "ftDataGkoopa";
-char lbl_803D3904[] = "PlGkNr.dat";
-char lbl_803D3910[] = "PlyGkoopa5K_Share_joint";
-char lbl_803D3928[] = "PlyGkoopa5K_Share_matanim_joint";
-char lbl_803D3948[] = "PlGkAJ.dat";
+char ftGigaKoopa_803D38E8[] = "PlGk.dat";
+char ftGigaKoopa_803D38F4[] = "ftDataGkoopa";
+char ftGigaKoopa_803D3904[] = "PlGkNr.dat";
+char ftGigaKoopa_803D3910[] = "PlyGkoopa5K_Share_joint";
+char ftGigaKoopa_803D3928[] = "PlyGkoopa5K_Share_matanim_joint";
+char ftGigaKoopa_803D3948[] = "PlGkAJ.dat";
 
-Fighter_DemoStrings lbl_803D3954 = { 0 };
+Fighter_DemoStrings ftGigaKoopa_803D3954 = { 0 };
 
-char* lbl_803D3984[] = { "ftDemoVi1201V2MotionFileGkoopa" };
+char* ftGigaKoopa_803D3984[] = { "ftDemoVi1201V2MotionFileGkoopa" };
 
-Fighter_CostumeStrings lbl_803D3988[] = {
-    { lbl_803D3904, lbl_803D3910, lbl_803D3928 },
+Fighter_CostumeStrings ftGigaKoopa_803D3988[] = {
+    { ftGigaKoopa_803D3904, ftGigaKoopa_803D3910, ftGigaKoopa_803D3928 },
 };
 
 void ftGigaKoopa_OnDeath(HSD_GObj* gobj)
@@ -164,5 +164,5 @@ char* ftGigaKoopa_GetMotionFileString(enum_t arg0)
         offset = 14;
     }
 
-    return lbl_803D3984[offset - 14];
+    return ftGigaKoopa_803D3984[offset - 14];
 }
