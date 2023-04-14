@@ -1103,7 +1103,7 @@ void ft_SetFacingDirection(HSD_GObj*, f32 facing_dir);
 /// Interrupt_Wait
 void ft_8008A4D4(HSD_GObj*);
 
-/// @todo UnclePunch Map file: MS_203_PassiveWalljump_Walljump
+/// @todo UnclePunch Map file: AS_203_PassiveWalljump_Walljump
 void ft_800C1E64(HSD_GObj* pPlayerEntityStruct, s32, s32, u8, f32);
 
 /// @todo enum params
