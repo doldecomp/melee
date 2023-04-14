@@ -2,7 +2,7 @@
 #define MELEE_FT_CHARA_FTCAPTAIN_FTCAPTAIN_H
 
 #include <platform.h>
-#include "forward.h"
+#include "ftCaptain/forward.h"
 
 #include "ft/fighter.h"
 
