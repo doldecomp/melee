@@ -100,7 +100,7 @@ bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     enum_t msid = fp->motion_id;
 
-    if (msid >= ftMario_MS_SpecialS && msid <= ftMario_MS_SpecialAirS) {
+    if (msid >= ftMr_MS_SpecialS && msid <= ftMr_MS_SpecialAirS) {
         return false;
     }
 
@@ -132,7 +132,7 @@ void ftMario_SpecialS_StartMotion(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x80_self_vel.y = 0;
 
-    changeAction(gobj, ftMario_MS_SpecialS);
+    changeAction(gobj, ftMr_MS_SpecialS);
 }
 
 void ftMario_SpecialAirS_StartMotion(HSD_GObj* gobj)
@@ -145,7 +145,7 @@ void ftMario_SpecialAirS_StartMotion(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
     fp->x80_self_vel.x /= sa->specials.vel_x_decay;
-    changeAction(gobj, ftMario_MS_SpecialAirS);
+    changeAction(gobj, ftMr_MS_SpecialAirS);
 }
 
 void ftMario_SpecialS_Anim(HSD_GObj* gobj)
@@ -298,7 +298,7 @@ void ftMario_SpecialS_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirS, transition_flags,
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirS, transition_flags,
                               NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     if ((s32) fp->x2200_ftcmd_var0 == 1U) {
         fp->x2200_ftcmd_var0 = 2U;
@@ -319,8 +319,8 @@ void ftMario_SpecialAirS_AirToGround(HSD_GObj* gobj)
     fp = gobj->user_data;
     fp->fv.mr.x2238_isCapeBoost = false;
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialS, transition_flags,
-                              NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialS, transition_flags, NULL,
+                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
     ftMario_SpecialS_UpdateVarsColl(gobj);
 }

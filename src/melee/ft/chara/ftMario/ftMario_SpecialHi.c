@@ -18,7 +18,7 @@ void ftMario_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 }
@@ -37,8 +37,8 @@ void ftMario_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     fp->x80_self_vel.y = 0;
     fp->x80_self_vel.x = fp->x80_self_vel.x * sa->specialhi.vel_x;
-    Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirHi, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftAnim_8006EBA4(gobj);
 }
 

@@ -50,7 +50,7 @@ void ftMario_SpecialN_StartMotion(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
@@ -128,8 +128,8 @@ void ftMario_SpecialAirN_StartMotion(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirN, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirN, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
 }
@@ -166,7 +166,7 @@ void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(
-        gobj, ftMario_MS_SpecialAirN,
+        gobj, ftMr_MS_SpecialAirN,
         (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
@@ -178,7 +178,7 @@ void ftMario_SpecialAirN_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(
-        gobj, ftMario_MS_SpecialN,
+        gobj, ftMr_MS_SpecialN,
         (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 

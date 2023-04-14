@@ -5,16 +5,16 @@
 #include "ftCommon/forward.h"
 
 typedef enum ftMario_MotionState {
-    ftMario_MS_Unk_341 = ftCo_MS_Count,
-    ftMario_MS_Unk_342,
-    ftMario_MS_SpecialN,
-    ftMario_MS_SpecialAirN,
-    ftMario_MS_SpecialS,
-    ftMario_MS_SpecialAirS,
-    ftMario_MS_SpecialHi,
-    ftMario_MS_SpecialAirHi,
-    ftMario_MS_SpecialLw,
-    ftMario_MS_SpecialAirLw,
+    ftMr_MS_Unk_341 = ftCo_MS_Count,
+    ftMr_MS_Unk_342,
+    ftMr_MS_SpecialN,
+    ftMr_MS_SpecialAirN,
+    ftMr_MS_SpecialS,
+    ftMr_MS_SpecialAirS,
+    ftMr_MS_SpecialHi,
+    ftMr_MS_SpecialAirHi,
+    ftMr_MS_SpecialLw,
+    ftMr_MS_SpecialAirLw,
     ftMario_MS_Count,
 } ftMario_MotionState;
 

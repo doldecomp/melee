@@ -81,7 +81,7 @@ void ftMario_SpecialLw_StartMotion(HSD_GObj* gobj)
 #endif
 
     setCmdVar2(gobj);
-    Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirLw, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     fp->x80_self_vel.y = sa->speciallw.vel_y - sa->speciallw.tap_y_vel_max;
     ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
@@ -102,7 +102,7 @@ void ftMario_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 #endif
 
     setCmdVar2(gobj);
-    Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirLw, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     if ((s32) fp->fv.mr.x2234_tornadoCharge != 0) {
         sub_val = 0;
@@ -173,7 +173,7 @@ static void doPhys(HSD_GObj* gobj)
     ftMario_DatAttrs* sa = GetMarioAttr(fp);
     fp->x2208_ftcmd_var2 = 0;
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialAirLw, transition_flags,
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirLw, transition_flags,
                               NULL, fp->x894_currentAnimFrame, 1, 0);
     ftCommon_ClampFallSpeed(fp, sa->speciallw.tap_grav);
     ftCommon_8007D440(fp, sa->speciallw.air_momentum_x);
@@ -307,8 +307,8 @@ static void doAirCollIfUnk(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
     fp->x80_self_vel.y = 0;
     fp->fv.mr.x2234_tornadoCharge = 0;
-    Fighter_ChangeMotionState(gobj, ftMario_MS_SpecialLw, transition_flags,
-                              NULL, fp->x894_currentAnimFrame, 1, 0);
+    Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialLw, transition_flags, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
     ftCommon_8007CC78(ft_tmp = fp, sa->speciallw.momentum_x);
     fp->cb.x21D4_callback_EnterHitlag = &efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
