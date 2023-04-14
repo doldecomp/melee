@@ -231,7 +231,7 @@ u32 it_8026C1D4(void);
 bool it_8026C1E8(HSD_GObj* gobj);
 
 /// Get item owner's port number
-void it_8026C220(HSD_GObj* gobj, HSD_GObj* fighter_gobj);
+void it_8026C220(HSD_GObj* gobj, HSD_GObj* arg1);
 
 /// Find the closest item to the given position?
 HSD_GObj* it_8026C258(Vec3* vector, f32 facingDir);

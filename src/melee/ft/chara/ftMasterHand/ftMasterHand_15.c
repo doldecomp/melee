@@ -154,7 +154,7 @@ void ftMasterHand_80153254(HSD_GObj* gobj)
         sp28_pos.x += attr->xDC;
         sp28_pos.y += attr->xE0;
         sp28_pos.z = 0.0f;
-        lbVector_Diff(&sp28_pos, &fp->xB0_pos, &sp1C_vel);
+        lbVector_Diff(&sp28_pos, &fp->cur_pos, &sp1C_vel);
         len = my_lbvector_Len(&sp1C_vel);
         if (len < attr->x2C) {
             fp->x80_self_vel.x = sp1C_vel.x;

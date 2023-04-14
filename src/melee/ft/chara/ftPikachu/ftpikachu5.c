@@ -36,7 +36,7 @@ bool ftPikachu_CheckProperty_801275CC(HSD_GObj* gobj)
 void ftPikachu_80127608(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Camera_80030E44(2, &fp->xB0_pos);
+    Camera_80030E44(2, &fp->cur_pos);
     ftCommon_8007EBAC(fp, 0xB, 0);
 }
 
@@ -73,8 +73,8 @@ bool ftPikachu_8012765C(HSD_GObj* gobj)
         return false;
     }
 
-    if (fabs_inline(fp->xB0_pos.x - vec.x) < fabs_inline(pika_attr->xC4)) {
-        f32 final_y_pos = nested_sum_fabs(fp->xB0_pos.y, pika_attr->xBC,
+    if (fabs_inline(fp->cur_pos.x - vec.x) < fabs_inline(pika_attr->xC4)) {
+        f32 final_y_pos = nested_sum_fabs(fp->cur_pos.y, pika_attr->xBC,
                                           fabs_inline(pika_attr->xBC), vec.y);
 
         if ((final_y_pos < pika_attr->xC8) && fp->sv.pk.unk4.x0 != 0 &&
@@ -124,7 +124,7 @@ void ftPikachu_EfSpawn_801277AC(HSD_GObj* gobj)
         }
 
         if (result && fp->sv.pk.unk4.x0 == 0) {
-            pos = fp->xB0_pos;
+            pos = fp->cur_pos;
 
             pos.y += pika_attr->xD0;
             ef_pos = pos;

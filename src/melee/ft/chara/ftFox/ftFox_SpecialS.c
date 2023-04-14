@@ -250,9 +250,9 @@ static inline void ftFox_SpecialS_CreateGhostItem(HSD_GObj* gobj)
     if ((u32) fp->x2208_ftcmd_var2 == 1U) {
         fp->x2208_ftcmd_var2 = 0U;
         if ((s32) fp->x4_fighterKind == FTKIND_FOX) {
-            ghostGObj = it_8029CEB4(gobj, &fp->xB0_pos, 0x38, fp->facing_dir);
+            ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, 0x38, fp->facing_dir);
         } else {
-            ghostGObj = it_8029CEB4(gobj, &fp->xB0_pos, 0x39, fp->facing_dir);
+            ghostGObj = it_8029CEB4(gobj, &fp->cur_pos, 0x39, fp->facing_dir);
         }
         if (ghostGObj != NULL) {
             fp->sv.fx.SpecialS.ghostGObj = ghostGObj;
@@ -340,7 +340,7 @@ static inline void ftFox_SpecialS_SetPhys(HSD_GObj* gobj)
     fp->sv.fx.SpecialS.ghostEffectPos[1] =
         fp->sv.fx.SpecialS.ghostEffectPos[0];
 
-    fp->sv.fx.SpecialS.ghostEffectPos[0] = fp->xB0_pos;
+    fp->sv.fx.SpecialS.ghostEffectPos[0] = fp->cur_pos;
 
     fp->sv.fx.SpecialS.blendFrames[3] = fp->sv.fx.SpecialS.blendFrames[2];
     fp->sv.fx.SpecialS.blendFrames[2] = fp->sv.fx.SpecialS.blendFrames[1];
@@ -435,10 +435,10 @@ inline void ftFox_SpecialS_SetVars(HSD_GObj* gobj)
     f32 var;
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->sv.fx.SpecialS.ghostEffectPos[3] = fp->xB0_pos;
-    fp->sv.fx.SpecialS.ghostEffectPos[2] = fp->xB0_pos;
-    fp->sv.fx.SpecialS.ghostEffectPos[1] = fp->xB0_pos;
-    fp->sv.fx.SpecialS.ghostEffectPos[0] = fp->xB0_pos;
+    fp->sv.fx.SpecialS.ghostEffectPos[3] = fp->cur_pos;
+    fp->sv.fx.SpecialS.ghostEffectPos[2] = fp->cur_pos;
+    fp->sv.fx.SpecialS.ghostEffectPos[1] = fp->cur_pos;
+    fp->sv.fx.SpecialS.ghostEffectPos[0] = fp->cur_pos;
 
     var = ftParts_80075E78(fp, 0);
 

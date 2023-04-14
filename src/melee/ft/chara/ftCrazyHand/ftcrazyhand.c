@@ -146,9 +146,9 @@ void ftCrazyhand_OnLoad(HSD_GObj* gobj)
     fp->x222A_flag.bits.b0 = 1;
     fp->x222A_flag.bits.b1 = 1;
     fp->x2229_b3 = 1;
-    fp->xB0_pos.x = ftData_attr->x18;
-    fp->xB0_pos.y = ftData_attr->x1C;
-    fp->xB0_pos.z = 0.0f;
+    fp->cur_pos.x = ftData_attr->x18;
+    fp->cur_pos.y = ftData_attr->x1C;
+    fp->cur_pos.z = 0.0f;
     fp->sv.mh.unk0.x28 = 0;
     fp->sv.mh.unk0.x2C = 0;
     fp->sv.mh.unk0.x30 = 0;
@@ -158,7 +158,7 @@ void ftCrazyhand_OnLoad(HSD_GObj* gobj)
     fp->sv.mh.unk0.x40 = -1;
     fp->sv.mh.unk0.x1C = 0.0f;
     fp->sv.mh.unk0.x20 = 0;
-    fp->ev.mh.x222C = ftBossLib_8015C244(gobj, &fp->xB0_pos);
+    fp->ev.mh.x222C = ftBossLib_8015C244(gobj, &fp->cur_pos);
     fp->ev.mh.x2238 = 1.0f;
     fp->ev.mh.x224C = 0;
     fp->ev.mh.x2250 = 0x159;

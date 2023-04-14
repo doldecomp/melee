@@ -848,9 +848,9 @@ void ftSeak_80111830(HSD_GObj* gobj)
         ecb_bot = fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y;
         vec0.y = 0.5F * (ecb_top + ecb_bot);
         vec0.z = 0.0;
-        vec0.x += fp->xB0_pos.x;
-        vec0.y += fp->xB0_pos.y;
-        vec0.z += fp->xB0_pos.z;
+        vec0.x += fp->cur_pos.x;
+        vec0.y += fp->cur_pos.y;
+        vec0.z += fp->cur_pos.z;
 
         lb_8000B1CC(fp->x5E8_fighterBones[26].x0_jobj, NULL, &vec1);
 

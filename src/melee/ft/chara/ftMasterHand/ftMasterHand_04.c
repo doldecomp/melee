@@ -21,9 +21,9 @@ void ftMasterHand_801510B0(HSD_GObj* gobj)
     r30_attributes = r31_fp->x10C_ftData->ext_attr;
     Fighter_ChangeMotionState(gobj, 0x157, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
-    r31_fp->xB0_pos.x = r30_attributes->x30_pos2.x;
-    r31_fp->xB0_pos.y = r30_attributes->x30_pos2.y;
-    r31_fp->xB0_pos.z = 0.0f;
+    r31_fp->cur_pos.x = r30_attributes->x30_pos2.x;
+    r31_fp->cur_pos.y = r30_attributes->x30_pos2.y;
+    r31_fp->cur_pos.z = 0.0f;
     r31_fp->cb.x21BC_callback_Accessory4 = &ftMasterHand_801511FC;
     r31_fp->sv.mh.unk4.x0 = 0;
 
@@ -83,7 +83,7 @@ static void ftMasterHand_801511FC(HSD_GObj* gobj)
 
     switch (fp->sv.mh.unk4.x0) {
     case 0: {
-        HSD_GObj* nearest_enemy = ftLib_8008627C(&fp->xB0_pos, gobj);
+        HSD_GObj* nearest_enemy = ftLib_8008627C(&fp->cur_pos, gobj);
 
         if (nearest_enemy != NULL) {
             Camera_8002E6FC((s32) ftLib_80086BE0(nearest_enemy));

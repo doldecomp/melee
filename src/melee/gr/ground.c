@@ -16,6 +16,7 @@
 #include "ft/ftlib.h"
 #include "gm/gm_1601.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/it_27CF.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
@@ -1990,10 +1991,9 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                 if (arg1 & 1) {
                     bgm = phi_r30->xC;
                 } else if (arg1 & 2) {
-                    /// @todo Weird comparison, but typing
-                    ///       #UnkBgmStruct::x10 as @c signed doesn't match and
-                    ///       neither does typing #BGM_Undefined as @c
-                    ///       unsigned.
+                    /// @todo Weird comparison, but typing #UnkBgmStruct::x10
+                    /// as @c signed doesn't match and neither does typing
+                    /// #BGM_Undefined as @c unsigned.
                     if (phi_r30->x10 != (unsigned) BGM_Undefined) {
                         bgm = phi_r30->x10;
                         result = true;
@@ -2511,7 +2511,7 @@ bool Ground_801C3128(s32 arg0, void (*arg1)(s16))
 
     {
         /// @todo @c cur cannot be swapped below @c max, hinting at a missing
-        ///       @c inline function.
+        /// @c inline function.
         S16Vec3* cur;
         int max = lbl_803DFEDC[stage_info.internal_stage_id]->x30;
         cur = lbl_803DFEDC[stage_info.internal_stage_id]->x2C;

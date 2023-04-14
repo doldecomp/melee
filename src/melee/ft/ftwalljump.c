@@ -46,9 +46,9 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     ecb.x = coll_data->xA4_ecbCurrCorrect.left.x;
                     ecb.y = coll_data->xA4_ecbCurrCorrect.left.y;
                     ecb.z = 0.0f;
-                    ecb.x += fp0->xB0_pos.x;
-                    ecb.y += fp0->xB0_pos.y;
-                    ecb.z += fp0->xB0_pos.z;
+                    ecb.x += fp0->cur_pos.x;
+                    ecb.y += fp0->cur_pos.y;
+                    ecb.z += fp0->cur_pos.z;
                     // compute distance to the wall?
                     if (!mpLib_800567C0(coll_data->x174_leftwall.index, &ecb,
                                         &wall_pos))
@@ -60,9 +60,9 @@ bool ftWallJump_8008169C(HSD_GObj* gobj)
                     ecb.x = coll_data->xA4_ecbCurrCorrect.right.x;
                     ecb.y = coll_data->xA4_ecbCurrCorrect.right.y;
                     ecb.z = 0.0f;
-                    ecb.x += fp0->xB0_pos.x;
-                    ecb.y += fp0->xB0_pos.y;
-                    ecb.z += fp0->xB0_pos.z;
+                    ecb.x += fp0->cur_pos.x;
+                    ecb.y += fp0->cur_pos.y;
+                    ecb.z += fp0->cur_pos.z;
                     // compute distance to the wall?
                     if (!mpLib_800567C0(coll_data->x160_rightwall.index, &ecb,
                                         &wall_pos))

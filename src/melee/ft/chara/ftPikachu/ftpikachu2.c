@@ -49,8 +49,8 @@ void ftPikachu_80124908(HSD_GObj* gobj)
         if (!fp->x2204_ftcmd_var1) {
             fp->x2204_ftcmd_var1 = 1;
             sp14.x = (fp->x34_scale.y * (pika_attr->x0 * fp->facing_dir)) +
-                     fp->xB0_pos.x;
-            sp14.y = (pika_attr->x4 * fp->x34_scale.y) + fp->xB0_pos.y;
+                     fp->cur_pos.x;
+            sp14.y = (pika_attr->x4 * fp->x34_scale.y) + fp->cur_pos.y;
             sp14.z = 0.0f;
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_800872A4(gobj)) {
@@ -86,8 +86,8 @@ void ftPikachu_80124A20(HSD_GObj* gobj)
         if (!fp->x2204_ftcmd_var1) {
             fp->x2204_ftcmd_var1 = 1;
             sp14.x = (fp->x34_scale.y * (pika_attr->x8 * fp->facing_dir)) +
-                     fp->xB0_pos.x;
-            sp14.y = (pika_attr->xC * fp->x34_scale.y) + fp->xB0_pos.y;
+                     fp->cur_pos.x;
+            sp14.y = (pika_attr->xC * fp->x34_scale.y) + fp->cur_pos.y;
             sp14.z = 0.0f;
             it_802B338C(gobj, &sp14, fp->facing_dir, pika_attr->x14);
             switch (ftLib_800872A4(gobj)) {
