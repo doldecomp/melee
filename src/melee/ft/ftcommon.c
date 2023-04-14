@@ -641,7 +641,7 @@ void ftCommon_8007D5D4(Fighter* fp)
     fp->xE0_ground_or_air = GA_Air;
     fp->xEC_ground_vel = 0;
     fp->x98_atk_shield_kb.z = 0;
-    fp->xB0_pos.z = 0;
+    fp->cur_pos.z = 0;
     fp->x74_anim_vel.y = 0;
     fp->x1968_jumpsUsed = 1;
     fp->x6F0_collData.x19C = 0xA;
@@ -699,7 +699,7 @@ void ftCommon_8007D780(Fighter* fp)
         return;
     }
 
-    if (un_803224DC(fp->x8_spawnNum, fp->xB0_pos.x,
+    if (un_803224DC(fp->x8_spawnNum, fp->cur_pos.x,
                     fp->dmg.x18A4_knockbackMagnitude))
     {
         fp->dmg.x18A4_knockbackMagnitude = 0;
@@ -713,7 +713,7 @@ void ftCommon_8007D7FC(Fighter* fp)
 {
     f32 fmp;
     if (fp->xE0_ground_or_air == GA_Air) {
-        if (un_803224DC(fp->x8_spawnNum, fp->xB0_pos.x,
+        if (un_803224DC(fp->x8_spawnNum, fp->cur_pos.x,
                         fp->dmg.x18A4_knockbackMagnitude))
         {
             fp->dmg.x18A4_knockbackMagnitude = 0;
@@ -1460,7 +1460,7 @@ void ftCommon_8007EFC8(HSD_GObj* gobj, void (*arg1)(HSD_GObj*))
     dst->x221F_flag.bits.b4 = tmp_bit;
     Fighter_UnkInitReset_80067C98(dst);
     _func_8007E2FC_inline(dst_gobj);
-    dst->xB0_pos = src->xB0_pos;
+    dst->cur_pos = src->cur_pos;
     dst->xBC_prevPos = src->xBC_prevPos;
     dst->xC8_pos_delta = src->xC8_pos_delta;
     dst->facing_dir = src->facing_dir;
@@ -1672,9 +1672,9 @@ void ftCommon_8007F86C(HSD_GObj* gobj)
 
 void ftCommon_8007F8B4(Fighter* fp, Vec3* v)
 {
-    v->x = fp->xB0_pos.x + fp->xD4_unk_vel.x;
-    v->y = fp->xB0_pos.y + fp->xD4_unk_vel.y;
-    v->z = fp->xB0_pos.z + fp->xD4_unk_vel.z;
+    v->x = fp->cur_pos.x + fp->xD4_unk_vel.x;
+    v->y = fp->cur_pos.y + fp->xD4_unk_vel.y;
+    v->z = fp->cur_pos.z + fp->xD4_unk_vel.z;
 }
 
 extern void (*lbl_803C1C28[])(HSD_GObj*);
@@ -1789,7 +1789,7 @@ void ftCommon_8007FC7C(HSD_GObj* gobj, f32 arg8)
         fp->x2024 = sp20 + arg8;
         ftCommon_8007FDA0(gobj);
     } else {
-        item_gobj = it_8029A748(gobj, &fp->xB0_pos, fp->x10C_ftData->x8->unk12,
+        item_gobj = it_8029A748(gobj, &fp->cur_pos, fp->x10C_ftData->x8->unk12,
                                 fp->facing_dir);
         if (item_gobj != NULL) {
             ftCommon_8007FE84(gobj, item_gobj, sp20, arg8);

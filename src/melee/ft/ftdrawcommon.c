@@ -613,7 +613,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             while (phi_r25 < fighter->x119E_hurtboxNum) {
                 if (lbColl_8000A584(phi_r26->x11A0_fighterHurtbox, 1, arg1,
                                     ftCommon_8007F804(fighter),
-                                    fighter->xB0_pos.z) != 0)
+                                    fighter->cur_pos.z) != 0)
                 {
                     phi_r30 = 1U;
                 }
@@ -628,7 +628,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 while (phi_r25 < fighter->x119E_hurtboxNum) {
                     if (lbColl_8000A244(phi_r26->x11A0_fighterHurtbox, arg1,
                                         ftCommon_8007F804(fighter),
-                                        fighter->xB0_pos.z) != 0)
+                                        fighter->cur_pos.z) != 0)
                     {
                         phi_r30 = 1U;
                     }
@@ -646,7 +646,7 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
                 while (phi_r25 < fighter->x119E_hurtboxNum) {
                     if (lbColl_8000A584(phi_r26->x11A0_fighterHurtbox, phi_r24,
                                         arg1, ftCommon_8007F804(fighter),
-                                        fighter->xB0_pos.z) != 0)
+                                        fighter->cur_pos.z) != 0)
                     {
                         phi_r30 = 1U;
                     }
@@ -658,21 +658,21 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         if ((fighter->x2218_flag.bits.b3 != 0) &&
             (lbColl_8000A95C(fighter + 0x19E4, arg1,
                              ftCommon_8007F804(fighter),
-                             fighter->xB0_pos.z) != 0))
+                             fighter->cur_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
         if ((fighter->x2218_flag.bits.b6 != 0) &&
             (lbColl_8000AB2C(fighter + 0x1A08, arg1,
                              ftCommon_8007F804(fighter),
-                             fighter->xB0_pos.z) != 0))
+                             fighter->cur_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
         if ((fighter->x221B_flag.bits.b0 != 0) &&
             (lbColl_8000A78C(fighter + 0x19C0, arg1,
                              ftCommon_8007F804(fighter),
-                             fighter->xB0_pos.z) != 0))
+                             fighter->cur_pos.z) != 0))
         {
             phi_r30 = 1U;
         }
@@ -715,19 +715,19 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
         temp_r24 = &fighter->x294_itPickup;
         if (fighter->xE0_ground_or_air == GA_Ground) {
             if (lbGx_8001E2F8(&temp_r24->x0_ground_light_offset,
-                              &fighter->xB0_pos, &lbl_804D3A88, arg1,
+                              &fighter->cur_pos, &lbl_804D3A88, arg1,
                               fighter->facing_dir) != 0)
             {
                 phi_r30 = 1U;
             }
             if (lbGx_8001E2F8(&temp_r24->x10_ground_heavy_offset,
-                              &fighter->xB0_pos, &lbl_804D3A90, arg1,
+                              &fighter->cur_pos, &lbl_804D3A90, arg1,
                               fighter->facing_dir) != 0)
             {
                 phi_r30 = 1U;
             }
         } else if (lbGx_8001E2F8(&temp_r24->x20_air_light_offset,
-                                 &fighter->xB0_pos, &lbl_804D3A8C, arg1,
+                                 &fighter->cur_pos, &lbl_804D3A8C, arg1,
                                  fighter->facing_dir) != 0)
         {
             phi_r30 = 1U;

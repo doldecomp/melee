@@ -798,7 +798,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
     } else {
         f = 0.0f;
     }
-    efSync_Spawn(0x406, gobj, &fp->xB0_pos, &f);
+    efSync_Spawn(0x406, gobj, &fp->cur_pos, &f);
     fp->x2219_flag.bits.b0 = true;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;

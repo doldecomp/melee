@@ -315,13 +315,13 @@ void* ftLib_80086630(HSD_GObj* gobj, s32 i)
 void ftLib_80086644(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    *pos = fp->xB0_pos;
+    *pos = fp->cur_pos;
 }
 
 void ftLib_80086664(HSD_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->xB0_pos = *pos;
+    fp->cur_pos = *pos;
 }
 
 void ftLib_80086684(HSD_GObj* gobj, Vec3* pos)
@@ -469,7 +469,7 @@ void ftLib_80086990(HSD_GObj* gobj, Vec3* v)
     Fighter* fp = GET_FIGHTER(gobj);
     f32 tmp = 0.5f * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y +
                       fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
-    vector_add(v, &fp->xB0_pos, 0, tmp, 0);
+    vector_add(v, &fp->cur_pos, 0, tmp, 0);
 }
 
 f32 ftLib_800869D4(HSD_GObj* gobj)
@@ -813,7 +813,7 @@ void ftLib_800871A8(HSD_GObj* gobj, HSD_GObj* item_gobj)
     ft_800D105C(gobj);
     ft_80081C88(gobj, fp->x34_scale.y);
     ftCommon_8007EBAC(fp, 0xC, 0);
-    Camera_80030E44(2, &fp->xB0_pos);
+    Camera_80030E44(2, &fp->cur_pos);
     ft_80088148(fp, 0x121, 0x7F, 0x40);
 }
 

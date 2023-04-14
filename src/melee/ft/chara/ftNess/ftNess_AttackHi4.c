@@ -277,9 +277,9 @@ bool ftNess_YoyoCheckNoObstruct(HSD_GObj* gobj)
     sp20.y = ECB_MUL_Y * (fp->x6F0_collData.xA4_ecbCurrCorrect.top.y +
                           fp->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
     sp20.z = ECB_X;
-    sp20.x += fp->xB0_pos.x;
-    sp20.y += fp->xB0_pos.y;
-    sp20.z += fp->xB0_pos.z;
+    sp20.x += fp->cur_pos.x;
+    sp20.y += fp->cur_pos.y;
+    sp20.z += fp->cur_pos.z;
     sp14 = fp->ev.ns.x2230_yoyoHitboxPos;
 
     if (!ftNess_YoyoCheckEnvColl(gobj, &sp20, &sp14, ECB_MUL_Y)) {
@@ -714,9 +714,9 @@ void ftNess_AttackHi4_Anim(HSD_GObj* gobj)
                 (fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.top.y +
                  fighter_data2->x6F0_collData.xA4_ecbCurrCorrect.bottom.y);
             sp18.z = 0.0f;
-            sp18.x += fighter_data2->xB0_pos.x;
-            sp18.y += fighter_data2->xB0_pos.y;
-            sp18.z += fighter_data2->xB0_pos.z;
+            sp18.x += fighter_data2->cur_pos.x;
+            sp18.y += fighter_data2->cur_pos.y;
+            sp18.z += fighter_data2->cur_pos.z;
             sp24 = fighter_data2->ev.ns.x2230_yoyoHitboxPos;
             if ((ftNess_YoyoCheckEnvColl(gobj, &sp18, &sp24, 0.5f) == 0) &&
                 (sp24 = fighter_data2->ev.ns.x2230_yoyoHitboxPos, sp18 = sp24,

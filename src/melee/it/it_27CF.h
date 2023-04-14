@@ -1,7 +1,7 @@
 #ifndef MELEE_IT_CODE_8027CF30_H
 #define MELEE_IT_CODE_8027CF30_H
 
-#include "ft/chara/ftSeak/types.h"
+#include "ftSeak/types.h"
 #include "it/types.h"
 
 #include <placeholder.h>

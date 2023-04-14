@@ -35,8 +35,8 @@ void ftMasterHand_80153D2C(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 0x173, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
     ftBossLib_8015C208(gobj, &sp1C);
-    fp->xB0_pos.x = sp1C.x;
-    fp->xB0_pos.y = attr->x70;
+    fp->cur_pos.x = sp1C.x;
+    fp->cur_pos.y = attr->x70;
 
     fp->x80_self_vel.z = 0.0f;
     fp->x80_self_vel.y = 0.0f;

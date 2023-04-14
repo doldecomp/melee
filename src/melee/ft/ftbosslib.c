@@ -89,7 +89,7 @@ void ftBossLib_8015BE40(HSD_GObj* gobj, Vec3* arg1, f32* arg2, f32 arg3,
 {
     Fighter* fp = gobj->user_data;
     Vec3 diff;
-    lbVector_Diff(arg1, &fp->xB0_pos, &diff);
+    lbVector_Diff(arg1, &fp->cur_pos, &diff);
 
     {
         f32 distance = my_lbvector_Len(&diff);
@@ -116,7 +116,7 @@ void ftBossLib_8015BF74(HSD_GObj* gobj, f32 x_diff_max)
     ftBossLib_8015C208(gobj, &vec);
 
     {
-        f32 x_diff = vec.x - fp->xB0_pos.x;
+        f32 x_diff = vec.x - fp->cur_pos.x;
         f32 abs_x_diff = fabs_inline(x_diff);
         if (abs_x_diff > x_diff_max) {
             fp->x80_self_vel.x += x_diff > 0 ? x_diff_max : -x_diff_max;
@@ -133,7 +133,7 @@ void ftBossLib_8015C010(HSD_GObj* gobj, f32 x_diff_max)
     ftBossLib_8015C208(gobj, &vec);
 
     {
-        f32 x_diff = vec.x - fp->xB0_pos.x;
+        f32 x_diff = vec.x - fp->cur_pos.x;
         f32 abs_x_diff = fabs_inline(x_diff);
         if (abs_x_diff > x_diff_max) {
             fp->x80_self_vel.x = x_diff > 0 ? x_diff_max : -x_diff_max;
@@ -160,14 +160,14 @@ void ftBossLib_8015C190(HSD_GObj* arg0)
     Vec3 vec;
 
     mpLib_80053FF4(0, &vec);
-    if (fp->xB0_pos.x > vec.x) {
-        fp->xB0_pos.x = vec.x;
+    if (fp->cur_pos.x > vec.x) {
+        fp->cur_pos.x = vec.x;
         fp->x80_self_vel.x = 0;
     }
 
     mpLib_80054158(0, &vec);
-    if (fp->xB0_pos.x < vec.x) {
-        fp->xB0_pos.x = vec.x;
+    if (fp->cur_pos.x < vec.x) {
+        fp->cur_pos.x = vec.x;
         fp->x80_self_vel.x = 0;
     }
 }
@@ -175,7 +175,7 @@ void ftBossLib_8015C190(HSD_GObj* arg0)
 void ftBossLib_8015C208(HSD_GObj* arg0, Vec3* arg1)
 {
     Fighter* fp = GET_FIGHTER(arg0);
-    HSD_GObj* gobj = ftBossLib_8015C244(arg0, &fp->xB0_pos);
+    HSD_GObj* gobj = ftBossLib_8015C244(arg0, &fp->cur_pos);
     ftLib_80086644(gobj, arg1);
 }
 

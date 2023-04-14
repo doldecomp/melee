@@ -46,8 +46,8 @@ void ftMasterHand_80153B90(HSD_GObj* arg0)
     ftAnim_8006EBA4(arg0);
     temp_r31->sv.mh.unk0.x0 = temp_r30->x6C;
     ftBossLib_8015C208(arg0, &sp10);
-    temp_r31->xB0_pos.x = sp10.x;
-    temp_r31->xB0_pos.y = temp_r30->x68;
+    temp_r31->cur_pos.x = sp10.x;
+    temp_r31->cur_pos.y = temp_r30->x68;
     temp_r31->x80_self_vel.z = 0.0f;
     temp_r31->x80_self_vel.y = 0.0f;
     temp_r31->x80_self_vel.x = 0.0f;

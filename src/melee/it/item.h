@@ -83,10 +83,10 @@ void Item_8026AB54(HSD_GObj* gobj, HSD_GObj* pickupGFX, u8 pickupSFX);
 void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, f32 arg2);
 
 /// This is actually another Item Drop function
-void Item_8026AC74(HSD_GObj* this, enum_t drop_gfx, enum_t drop_sfx, f32 arg3);
+void Item_8026AC74(HSD_GObj* gobj, enum_t drop_gfx, enum_t drop_sfx, f32 arg3);
 
 /// Throw Item
-void Item_8026AD20(HSD_GObj* this, s32 drop_gfx, s32 drop_sfx, f32 arg8);
+void Item_8026AD20(HSD_GObj* gobj, s32 drop_gfx, s32 drop_sfx, f32 arg8);
 
 /// Make Item Airborne
 void Item_8026ADC0(HSD_GObj* gobj);
@@ -218,8 +218,8 @@ void EnterHitlagThink(HSD_GObj* gobj, Item* item_data);
 void checkHitLag(f32 min_value, Item* item_data);
 void DestroyItemInline(HSD_GObj* gobj, Item* item_data);
 void ItemSwitch(HSD_GObj* gobj);
-void RunCallback(HSD_GObj* this, HSD_GObjEvent arg1);
-void func_8026A8EC_inline1(HSD_GObj* this);
+void RunCallback(HSD_GObj* gobj, HSD_GObjEvent arg1);
+void func_8026A8EC_inline1(HSD_GObj* gobj);
 void func_8026A8EC_inline2(HSD_GObj* gobj);
 void func_8026A8EC_inline3(HSD_GObj* gobj);
 void foobar(HSD_GObj* gobj);
@@ -230,7 +230,7 @@ void foobar3(HSD_GObj* gobj);
 void Item_8026B0B4(HSD_GObj* gobj);
 
 void Item_OnUserDataRemove(any_t user_data);
-void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* it);
+void HSD_JObjSetFacingDirItem(HSD_JObj* jobj, Item* ip);
 
 #define GET_ITEM(gobj) ((Item*) HSD_GObjGetUserData(gobj))
 

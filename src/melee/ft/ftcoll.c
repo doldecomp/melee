@@ -109,8 +109,8 @@ inline void comboCount_Push(Fighter* fp)
         var_f2 = p_ftCommonData->x4D4;
     }
     temp_f2 = fp->facing_dir * var_f2;
-    fp->xB0_pos.x = -((pos->y * temp_f2) - fp->xB0_pos.x);
-    fp->xB0_pos.y = -((-pos->x * temp_f2) - fp->xB0_pos.y);
+    fp->cur_pos.x = -((pos->y * temp_f2) - fp->cur_pos.x);
+    fp->cur_pos.y = -((-pos->x * temp_f2) - fp->cur_pos.y);
 }
 
 /// Combo count something + adjust TopN
@@ -3102,7 +3102,7 @@ lbl_80078C50:
 
 inline void ftGrabDist(Fighter* this_fp, Fighter* victim_fp)
 {
-    f32 grab_dist = victim_fp->xB0_pos.x - this_fp->xB0_pos.x;
+    f32 grab_dist = victim_fp->cur_pos.x - this_fp->cur_pos.x;
 
     if (grab_dist < F32_MAX) {
         grab_dist = -grab_dist;
@@ -3172,7 +3172,7 @@ void ftColl_80078A2C(HSD_GObj* this_gobj)
                                             *ftCommon_8007F804(victim_fp),
                                             this_fp->x34_scale.y,
                                             victim_fp->x34_scale.y,
-                                            victim_fp->xB0_pos.z) != 0)
+                                            victim_fp->cur_pos.z) != 0)
                                     {
                                         if (ft_80084CE4(this_fp, victim_fp) ==
                                             false)
