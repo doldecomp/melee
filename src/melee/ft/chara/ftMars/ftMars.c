@@ -10,7 +10,7 @@
 
 #include <common_structs.h>
 
-ActionState ftMars_MotionStateTable[] = {
+MotionState ftMars_MotionStateTable[] = {
     { 295, 0x00340211, 0x12000000, ftMars_80136844, ftMars_80136914,
       ftMars_8013691C, ftMars_801369A4, ftCamera_UpdateCameraBox },
     { 296, 0x00340211, 0x12000000, ftMars_80136ADC, ftMars_80136C8C,

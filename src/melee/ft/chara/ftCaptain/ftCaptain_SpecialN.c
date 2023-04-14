@@ -226,7 +226,7 @@ void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
     }
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags =
+static Fighter_MotionStateChangeFlags const transition_flags =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateRumble | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |

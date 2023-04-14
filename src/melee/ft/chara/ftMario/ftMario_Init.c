@@ -10,7 +10,7 @@
 
 #include <baselib/random.h>
 
-ActionState ftMario_MotionStateTable[] = {
+MotionState ftMario_MotionStateTable[] = {
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },
     { 295, 0x00340111, 0x12000000, ftMario_SpecialN_Anim,
@@ -39,7 +39,7 @@ ActionState ftMario_MotionStateTable[] = {
       ftMario_SpecialAirLw_Coll, ftCamera_UpdateCameraBox },
 };
 
-ActionState lbl_803C7260[] = {
+MotionState lbl_803C7260[] = {
     { 14, 0, 0x01000000, NULL, NULL, ft_800C7158, NULL, NULL },
     { 15, 0, 0x01000000, NULL, NULL, ft_800C7200, NULL, NULL },
 };

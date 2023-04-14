@@ -35,7 +35,7 @@
 #include "ft/ftcamera.h"
 #include "ft/types.h"
 
-ActionState ftMasterHand_MotionStateTable[] = {
+MotionState ftMasterHand_MotionStateTable[] = {
     { 295, 0, 0x01000000, ftMasterHand_80150230, ftMasterHand_8015082C,
       ftMasterHand_80150870, ftMasterHand_80150890, ftCamera_UpdateCameraBox },
     { 296, 0, 0x01000000, ftMasterHand_80150230, ftMasterHand_8015082C,

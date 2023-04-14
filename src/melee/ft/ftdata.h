@@ -21,7 +21,7 @@ void ftData_80085820(FighterKind, s32 costume_id);
 void ftData_800859A8(Fighter*);
 void ftData_80085A14(bool);
 void ftData_80085B10(Fighter*);
-void ftData_80085CD8(Fighter*, Fighter*, s32 asid);
+void ftData_80085CD8(Fighter*, Fighter*, s32 msid);
 u32 ftData_80085E50(Fighter*, u32);
 void ftData_80085560(s32, bool);
 

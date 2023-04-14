@@ -153,7 +153,7 @@ HSD_GObjEvent ft_OnUserDataRemove[FTKIND_MAX] = {
     NULL,
 };
 
-ActionState* MotionStateTableByCharacter[FTKIND_MAX] = {
+MotionState* MotionStateTableByCharacter[FTKIND_MAX] = {
     ftMario_MotionStateTable,
     ftFox_MotionStateTable,
     ftCaptain_MotionStateTable,
@@ -189,7 +189,7 @@ ActionState* MotionStateTableByCharacter[FTKIND_MAX] = {
     ftSandbag_MotionStateTable,
 };
 
-ActionState* lbl_803C1364[FTKIND_MAX] = {
+MotionState* lbl_803C1364[FTKIND_MAX] = {
     lbl_803C7260, NULL, NULL, NULL,         lbl_803CA04C, NULL, NULL,
     NULL,         NULL, NULL, NULL,         NULL,         NULL, NULL,
     NULL,         NULL, NULL, lbl_803D0868, NULL,         NULL, NULL,

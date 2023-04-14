@@ -10,7 +10,7 @@
 #include "ft/ftcliffcommon.h"
 #include "ft/types.h"
 
-ActionState MotionStateList[] = {
+MotionState MotionStateList[] = {
     {
         // 0
         -1,
@@ -3764,7 +3764,7 @@ ActionState MotionStateList[] = {
     },
 };
 
-ActionState lbl_803C52A0[] = {
+MotionState lbl_803C52A0[] = {
     {
         0x0,
         0,

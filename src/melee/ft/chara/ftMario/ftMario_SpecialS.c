@@ -93,18 +93,18 @@ void ftMario_SpecialS_ExitHitlag(HSD_GObj* gobj)
 bool ftMario_SpecialS_CheckItemCapeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    enum_t asid = fp->action_id;
+    enum_t msid = fp->action_id;
 
-    if (asid >= AS_MARIO_SPECIALS && asid <= AS_MARIO_SPECIALAIRS) {
+    if (msid >= AS_MARIO_SPECIALS && msid <= AS_MARIO_SPECIALAIRS) {
         return false;
     }
 
     return true;
 }
 
-void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, enum_t asid)
+void ftMario_SpecialS_ChangeAction(HSD_GObj* gobj, enum_t msid)
 {
-    Fighter_ChangeMotionState(gobj, asid, 0, NULL, 0, 1, 0);
+    Fighter_ChangeMotionState(gobj, msid, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 
     {

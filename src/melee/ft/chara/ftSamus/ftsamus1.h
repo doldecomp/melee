@@ -6,7 +6,7 @@
 
 #include "ft/types.h"
 
-extern ActionState ftSamus_MotionStateTable[];
+extern MotionState ftSamus_MotionStateTable[];
 extern char lbl_803CE510[];
 extern char lbl_803CE51C[];
 extern Fighter_CostumeStrings lbl_803CE678[];

@@ -5,7 +5,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-ActionState ftLuigi_MotionStateTable[] = {
+MotionState ftLuigi_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftLuigi_SpecialN_Anim,
       ftLuigi_SpecialN_IASA, ftLuigi_SpecialN_Phys, ftLuigi_SpecialN_Coll,
       ftCamera_UpdateCameraBox },
@@ -62,7 +62,7 @@ ActionState ftLuigi_MotionStateTable[] = {
       ftLuigi_SpecialAirLw_Coll, ftCamera_UpdateCameraBox },
 };
 
-ActionState lbl_803D0868[] = {
+MotionState lbl_803D0868[] = {
     { 14, 0, 0x01000000, NULL, NULL, ft_800C7158, NULL, NULL },
     { 15, 0, 0x01000000, NULL, NULL, ft_800C7200, NULL, NULL },
 };

@@ -20,7 +20,7 @@
 #include <trigf.h>
 #include <baselib/gobj.h>
 
-ActionState ftPurin_MotionStateTable[] = {
+MotionState ftPurin_MotionStateTable[] = {
     { 295, 0, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634, ft_800D767C,
       ftCamera_UpdateCameraBox },
     { 296, 0, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634, ft_800D767C,

@@ -30,7 +30,7 @@ typedef enum ftLuigiAction {
 
 } ftLuigiAction;
 
-// Flags used by Luigi in Action State Change //
+// Flags used by Luigi in Motion State Change //
 
 // SpecialN/SpecialAirN (Fireball)
 
@@ -106,8 +106,8 @@ typedef struct _ftLuigiAttributes {
 
 } ftLuigiAttributes;
 
-extern ActionState ftLuigi_MotionStateTable[];
-extern ActionState lbl_803D0868[];
+extern MotionState ftLuigi_MotionStateTable[];
+extern MotionState lbl_803D0868[];
 extern char lbl_803D08A8[];
 extern char lbl_803D08B4[];
 extern Fighter_CostumeStrings lbl_803D0AB4[];

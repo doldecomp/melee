@@ -40,7 +40,7 @@ void ftFox_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
 }
 
 // 0x800E5D90
-// https://decomp.me/scratch/DRgo9 // Fox & Falco's Blaster OnActionStateChange
+// https://decomp.me/scratch/DRgo9 // Fox & Falco's Blaster OnMotionStateChange
 // function
 void ftFox_SpecialN_OnChangeAction(HSD_GObj* gobj)
 {
@@ -277,7 +277,7 @@ void ftFox_SpecialN_StartMotion(HSD_GObj* gobj)
 // 0x800E61A8
 // https://decomp.me/scratch/TUDhU
 void ftFox_SpecialAirN_StartMotion(
-    HSD_GObj* gobj) // Fox & Falco's aerial Blaster Action State handler
+    HSD_GObj* gobj) // Fox & Falco's aerial Blaster Motion State handler
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;

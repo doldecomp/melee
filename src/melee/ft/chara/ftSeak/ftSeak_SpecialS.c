@@ -647,7 +647,7 @@ void ftSeak_80111404(HSD_GObj* gobj)
     }
 }
 
-static Fighter_ActionStateChangeFlags const transition_flags =
+static Fighter_MotionStateChangeFlags const transition_flags =
     FtStateChange_SkipUpdateHit | FtStateChange_SkipUpdateMatAnim |
     FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd |
     FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |

@@ -319,14 +319,14 @@ void ftZelda_8013B4D8(HSD_GObj* gobj)
 #endif
 
     {
-        enum_t asid;
+        enum_t msid;
         if (fp->xE0_ground_or_air == 0) {
-            asid = 0x164;
+            msid = 0x164;
         } else {
-            asid = 0x166;
+            msid = 0x166;
         }
 
-        Fighter_ChangeMotionState(gobj, asid, 0, NULL, sa->x80, 1.0, 0);
+        Fighter_ChangeMotionState(gobj, msid, 0, NULL, sa->x80, 1.0, 0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZelda_8013AE30;
 }

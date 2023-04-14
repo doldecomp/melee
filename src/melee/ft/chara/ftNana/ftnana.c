@@ -17,7 +17,7 @@ Vec3 lbl_803CD820[] = {
     { 6, 6, 6 },
 };
 
-ActionState ftNana_MotionStateTable[] = {
+MotionState ftNana_MotionStateTable[] = {
     { 295, 0x00340111, 0x12800000, ftPopo_8011F318, ftPopo_8011F390,
       ftPopo_8011F398, ftPopo_8011F3D8, ftCamera_UpdateCameraBox },
     { 296, 0x00340511, 0x12800000, ftPopo_8011F354, ftPopo_8011F394,

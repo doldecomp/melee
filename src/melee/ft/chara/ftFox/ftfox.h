@@ -49,7 +49,7 @@ typedef enum ftFoxAction {
 
 } ftFoxAction;
 
-// Flags used by Fox in Action State Change //
+// Flags used by Fox in Motion State Change //
 
 // SpecialHi (Firefox/Firebird)
 
@@ -145,7 +145,7 @@ typedef struct _ftFoxAttributes {
 
 } ftFoxAttributes;
 
-extern ActionState ftFox_MotionStateTable[];
+extern MotionState ftFox_MotionStateTable[];
 extern char lbl_803C7BE8[];
 extern char lbl_803C7BF4[];
 extern Fighter_CostumeStrings lbl_803C7D9C[];
@@ -170,7 +170,7 @@ bool ftFox_AppealS_CheckIfUsed(Fighter* fp);
 /// Check if Fox/Falco has pressed D-Pad Down
 bool ftFox_AppealS_CheckInput(HSD_GObj* gobj);
 
-/// Fox & Falco's Special Taunt Action State handler
+/// Fox & Falco's Special Taunt Motion State handler
 void ftFox_AppealS_Action(HSD_GObj* gobj);
 
 /// Fox & Falco's Special Taunt Start Animation callback
@@ -240,10 +240,10 @@ void ftFox_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj);
 /// Create Firefox/Firebird Charge GFX
 void ftFox_SpecialHi_CreateChargeGFX(HSD_GObj* gobj);
 
-/// Fox & Falco's grounded Firefox/Firebird Start Action State handler
+/// Fox & Falco's grounded Firefox/Firebird Start Motion State handler
 void ftFox_SpecialHi_StartMotion(HSD_GObj* gobj);
 
-/// Fox & Falco's aerial Firefox/Firebird Start Action State handler
+/// Fox & Falco's aerial Firefox/Firebird Start Motion State handler
 void ftFox_SpecialAirHi_StartMotion(HSD_GObj* gobj);
 
 void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj);
@@ -272,10 +272,10 @@ void ftFox_SpecialHiHold_Coll(HSD_GObj* gobj);
 /// Fox & Falco's aerial Firefox/Firebird Start Collision callback
 void ftFox_SpecialHiHoldAir_Coll(HSD_GObj* gobj);
 
-/// Fox & Falco's ground -> air Firefox/Firebird Start Action State handler
+/// Fox & Falco's ground -> air Firefox/Firebird Start Motion State handler
 void ftFox_SpecialHiHold_GroundToAir(HSD_GObj* gobj);
 
-/// Fox & Falco's air -> ground Firefox/Firebird Start Action State handler
+/// Fox & Falco's air -> ground Firefox/Firebird Start Motion State handler
 void ftFox_SpecialHiHoldAir_AirToGround(HSD_GObj* gobj);
 
 /// Fox & Falco's grounded Firefox/Firebird Launch Animation callback
@@ -302,10 +302,10 @@ void ftFox_SpecialHi_Coll(HSD_GObj* gobj);
 /// Fox & Falco's aerial Firefox/Firebird Launch Collision callback
 void ftFox_SpecialAirHi_Coll(HSD_GObj* gobj);
 
-/// Fox & Falco's Firefox/Firebird Launch ground -> air Action State handler
+/// Fox & Falco's Firefox/Firebird Launch ground -> air Motion State handler
 void ftFox_SpecialHi_GroundToAir(HSD_GObj* gobj);
 
-/// Fox & Falco's grounded Firefox/Firebird Launch Action State handler
+/// Fox & Falco's grounded Firefox/Firebird Launch Motion State handler
 void ftFox_SpecialAirHi_AirToGround(HSD_GObj* gobj);
 
 void ftFox_SpecialAirHi_Action(HSD_GObj* gobj);
@@ -336,10 +336,10 @@ void ftFox_SpecialLw_CreateStartGFX(HSD_GObj* gobj);
 /// Create Reflector Deflect GFX
 void ftFox_SpecialLw_CreateReflectGFX(HSD_GObj* gobj);
 
-/// Fox & Falco's grounded Reflector Start Action State handler
+/// Fox & Falco's grounded Reflector Start Motion State handler
 void ftFox_SpecialLw_StartMotion(HSD_GObj* gobj);
 
-/// Fox & Falco's aerial Reflector Start Action State handler
+/// Fox & Falco's aerial Reflector Start Motion State handler
 void ftFox_SpecialAirLw_StartMotion(HSD_GObj* gobj);
 
 void ftFox_SpecialLwStart_Anim(HSD_GObj* gobj);
@@ -350,7 +350,7 @@ void ftFox_SpecialAirLwStart_IASA(HSD_GObj* gobj);
 /// Check for drop-through platform while in @c SpecialLwStart
 bool ftFox_SpecialLwStart_CheckPass(HSD_GObj* gobj);
 
-/// Fox & Falco's Reflector Start Platform Drop Action State handler
+/// Fox & Falco's Reflector Start Platform Drop Motion State handler
 void ftFox_SpecialLwStart_Pass(HSD_GObj* gobj);
 
 /// Fox & Falco's Reflector Start Physics callback
@@ -365,10 +365,10 @@ void ftFox_SpecialLwStart_Coll(HSD_GObj* gobj);
 /// Fox & Falco's aerial Reflector Start Collision callback
 void ftFox_SpecialAirLwStart_Coll(HSD_GObj* gobj);
 
-/// Fox & Falco's ground -> air Reflector Start Action State handler
+/// Fox & Falco's ground -> air Reflector Start Motion State handler
 void ftFox_SpecialLwStart_GroundToAir(HSD_GObj* gobj);
 
-/// Fox & Falco's air -> ground Reflector Start Action State handler
+/// Fox & Falco's air -> ground Reflector Start Motion State handler
 void ftFox_SpecialAirLwStart_AirToGround(HSD_GObj* gobj);
 
 /// Fox & Falco's grounded Reflector Loop Animation callback

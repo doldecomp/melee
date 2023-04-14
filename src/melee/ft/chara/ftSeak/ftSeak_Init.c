@@ -12,7 +12,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-ActionState ftSeak_MotionStateTable[] = {
+MotionState ftSeak_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftSeak_80112248, ftSeak_801126C8,
       ftSeak_80112878, ftSeak_80112978, ftCamera_UpdateCameraBox },
     { 296, 0x003C0111, 0x12000000, ftSeak_801122D8, ftSeak_801126CC,

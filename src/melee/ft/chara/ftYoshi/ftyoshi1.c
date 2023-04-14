@@ -13,7 +13,7 @@
 #include <placeholder.h>
 #include <dolphin/os/os.h>
 
-ActionState ftYoshi_MotionStateTable[] = {
+MotionState ftYoshi_MotionStateTable[] = {
     { 37, 0x00100000, 0x01000000, ftYoshi_8012C030, ftYoshi_8012C114,
       ftYoshi_8012C194, ftYoshi_8012C1B4, ftCamera_UpdateCameraBox },
     { -1, 0x00180000, 0x01000000, ftYoshi_8012C2F4, ftYoshi_8012C3EC,

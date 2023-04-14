@@ -8,7 +8,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-ActionState ftKirby_MotionStateTable[] = {
+MotionState ftKirby_MotionStateTable[] = {
     { 295, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
       ft_800D767C, ftCamera_UpdateCameraBox },
     { 296, 0x0000006A, 0x01000000, ft_800D7590, ft_800D7614, ft_800D7634,
@@ -574,7 +574,7 @@ ftKirby_UnkArrayThing* lbl_803C9FC8[FTKIND_MAX] = {
     NULL, NULL,          NULL,          NULL,          NULL,
 };
 
-ActionState lbl_803CA04C[] = {
+MotionState lbl_803CA04C[] = {
     { 14, 0, 0x01000000, NULL, NULL, ft_800C737C, NULL, NULL },
     { 15, 0, 0x01000000, NULL, NULL, ft_800C737C, NULL, NULL },
     { 16, 0, 0x01000000, NULL, NULL, ft_800C737C, NULL, NULL },

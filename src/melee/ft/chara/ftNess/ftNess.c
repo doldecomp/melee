@@ -7,7 +7,7 @@
 #include "ft/ftparts.h"
 #include "ft/types.h"
 
-ActionState ftNess_MotionStateTable[] = {
+MotionState ftNess_MotionStateTable[] = {
     { 62, 0x00241A09, 0x0A000000, ftNess_AttackS4_Anim, ftNess_AttackS4_IASA,
       ftNess_AttackS4_Phys, ftNess_AttackS4_Coll, ftCamera_UpdateCameraBox },
     { 66, 0x00240A0A, 0x0B800000, ftNess_AttackHi4_Anim, ftNess_AttackHi4_IASA,

@@ -7,7 +7,7 @@
 
 #include <baselib/gobj.h>
 
-extern ActionState ftMars_MotionStateTable[];
+extern MotionState ftMars_MotionStateTable[];
 extern char lbl_803CF820[];
 extern char lbl_803CF82C[];
 extern Fighter_CostumeStrings lbl_803CFA18[];

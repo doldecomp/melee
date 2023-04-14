@@ -9,7 +9,7 @@
 #include "ft/types.h"
 #include "ftPikachu/ftpikachu.h"
 
-ActionState ftPikachu_MotionStateTable[] = {
+MotionState ftPikachu_MotionStateTable[] = {
     { 295, 0x00340111, 0x12000000, ftPikachu_80124908, ftPikachu_Stub_80124B6C,
       ftPikachu_80124B74, ftPikachu_ActionChange_80124BB4,
       ftCamera_UpdateCameraBox },

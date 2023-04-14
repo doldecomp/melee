@@ -12,7 +12,7 @@
 #include "ftCLink/ftCLink_Init.h"
 #include "lb/lbmthp.h"
 
-ActionState ftLink_MotionStateTable[] = {
+MotionState ftLink_MotionStateTable[] = {
     { 295, 0x00240009, 0x0A000000, ftLink_800CEDE0, ftLink_800CEE00,
       ftLink_800CEE30, ftLink_800CEE50, ftCamera_UpdateCameraBox },
     { -1, 0, 0x01000000, NULL, NULL, NULL, NULL, NULL },

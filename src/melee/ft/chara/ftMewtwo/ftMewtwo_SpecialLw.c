@@ -24,7 +24,7 @@ void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* gobj)
 }
 
 // 0x801461F0
-// https://decomp.me/scratch/WnODY // Mewtwo's grounded Disable Action State
+// https://decomp.me/scratch/WnODY // Mewtwo's grounded Disable Motion State
 // handler
 void ftMewtwo_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
@@ -47,7 +47,7 @@ void ftMewtwo_SpecialLw_StartMotion(HSD_GObj* gobj)
 }
 
 // 0x80146264
-// https://decomp.me/scratch/fX4aP // Mewtwo's aerial Disable Action State
+// https://decomp.me/scratch/fX4aP // Mewtwo's aerial Disable Motion State
 // handler
 void ftMewtwo_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {

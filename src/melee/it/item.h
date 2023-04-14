@@ -56,7 +56,7 @@ void Item_80268DD4(HSD_GObj* gobj, f32 arg8);
 void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc);
 
 /// Item State Change
-void Item_80268E5C(HSD_GObj* gobj, enum_t asid, Item_StateChangeFlags flags);
+void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags);
 
 /// Advance item animation + script?
 void Item_802694CC(HSD_GObj* gobj);

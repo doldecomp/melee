@@ -50,7 +50,7 @@ typedef enum ftNessAction {
 
 } ftNessAction;
 
-// Flags used by Ness in Action State Change
+// Flags used by Ness in Motion State Change
 
 // SpecialN/SpecialAirN (PK Flash)
 #define FTNESS_SPECIALN_COLL_FLAG                                             \
@@ -130,7 +130,7 @@ typedef struct ftNessAttributes {
     f32 x6C_PK_THUNDER_2_FREEFALL_ANIM_BLEND; // Amount of animation blend
                                               // frames Ness goes through when
                                               // entering FallSpecial through
-                                              // his SpecialHi Action States
+                                              // his SpecialHi Motion States
     f32 x70_PK_THUNDER_2_LANDING_LAG; // If set to 0, Ness does not enter
                                       // freefall after aerial PK Thunder, but
                                       // loses his double jump.
@@ -162,7 +162,7 @@ typedef struct ftNessAttributes {
 
 } ftNessAttributes;
 
-extern ActionState ftNess_MotionStateTable[];
+extern MotionState ftNess_MotionStateTable[];
 extern char lbl_803CCAD0[];
 extern char lbl_803CCADC[];
 extern Fighter_CostumeStrings lbl_803CCC84[];
@@ -249,9 +249,9 @@ void ftNess_YoyoItemDespawn(HSD_GObj* gobj);
 void ftNess_YoyoItemSetUnk(HSD_GObj* gobj);
 void ftNess_YoyoItemSetUnk2(HSD_GObj* gobj);
 
-// Up Smash Action State hook
+// Up Smash Motion State hook
 
-/// Ness's Up Smash Action State handler
+/// Ness's Up Smash Motion State handler
 void ftNess_AttackHi4_Action(HSD_GObj* gobj);
 
 // Start rehit timer if target is hit
@@ -277,7 +277,7 @@ void ftNess_AttackHi4_Release_IASA(HSD_GObj* gobj);
 void ftNess_AttackHi4_Release_Phys(HSD_GObj* gobj);
 void ftNess_AttackHi4_Release_Coll(HSD_GObj* gobj);
 
-/// Ness's Up Smash Post-Charge Action State handler
+/// Ness's Up Smash Post-Charge Motion State handler
 void ftNess_AttackHi4_Release_Action(HSD_GObj* gobj);
 
 // Down Smash callbacks (AttackLw4)

@@ -72,10 +72,10 @@ void ftColl_80076444(HSD_GObj* attacker, HSD_GObj* victim)
 void ftColl_8007646C(HSD_GObj* attackItem, HSD_GObj* victim)
 {
     HSD_GObj* owner = it_8026BC78(attackItem);
-    enum_t asid = it_8026BC84(attackItem);
+    enum_t msid = it_8026BC84(attackItem);
 
     if (ftLib_80086960(owner)) {
-        ftColl_800763C0(owner, victim, asid);
+        ftColl_800763C0(owner, victim, msid);
     }
 }
 

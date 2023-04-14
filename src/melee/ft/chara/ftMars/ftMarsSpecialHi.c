@@ -15,7 +15,7 @@ void ftMars_SpecialHi_StartMotion(HSD_GObj* gobj)
     fp->x2204_ftcmd_var1 = 0;
     fp->x2200_ftcmd_var0 = 0;
     fp->x2210_ThrowFlags.flags = 0;
-    // ActionStateChange
+    // MotionStateChange
     Fighter_ChangeMotionState(gobj, 0x16F, 0, NULL, 0.0f, 1.0f, 0.0f);
     // AS_AnimationFrameUpdate&More
     ftAnim_8006EBA4(gobj);
@@ -39,7 +39,7 @@ void ftMars_SpecialAirHi_StartMotion(HSD_GObj* gobj)
     fp->x2210_ThrowFlags.flags = 0;
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x *= attr->x3C;
-    // ActionStateChange
+    // MotionStateChange
     Fighter_ChangeMotionState(gobj, 0x170, 0, NULL, 0.0f, 1.0f, 0.0f);
     // AS_AnimationFrameUpdate&More
     ftAnim_8006EBA4(gobj);

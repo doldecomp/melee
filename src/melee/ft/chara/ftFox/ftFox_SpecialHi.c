@@ -495,7 +495,7 @@ void ftFox_SpecialAirHi_AirToGround(HSD_GObj* gobj)
 
 // 0x800E7C98
 // https://decomp.me/scratch/k5tbJ // Fox & Falco's aerial Firefox/Firebird
-// Launch Action State handler
+// Launch Motion State handler
 void ftFox_SpecialAirHi_Action(HSD_GObj* gobj)
 {
     ftFoxAttributes* foxAttrs;
@@ -653,7 +653,7 @@ void ftFox_SpecialHiFall_Coll(HSD_GObj* gobj)
 
 // 0x800E7FF0
 // https://decomp.me/scratch/IQ1YX // Fox & Falco's aerial Firefox/Firebird End
-// Action State handler
+// Motion State handler
 void ftFox_SpecialHiFall_Action(HSD_GObj* gobj)
 {
     ftCommon_8007D7FC(GET_FIGHTER(gobj));
@@ -666,7 +666,7 @@ void ftFox_SpecialHiFall_Action(HSD_GObj* gobj)
 
 // 0x800E8048
 // https://decomp.me/scratch/rGuhz // Fox & Falco's ground -> air
-// Firefox/Firebird End Action State handler
+// Firefox/Firebird End Motion State handler
 void ftFox_SpecialHiFall_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -806,7 +806,7 @@ inline void ftFox_SpecialHiBound_SetVars(HSD_GObj* gobj)
 
 // 0x800E82E4
 // https://decomp.me/scratch/ckSnm // Fox & Falco's Firefox/Firebird Rebound
-// Action State handler
+// Motion State handler
 void ftFox_SpecialHiBound_Action(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

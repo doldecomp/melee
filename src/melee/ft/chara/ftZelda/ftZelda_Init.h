@@ -6,7 +6,7 @@
 
 #include "ft/types.h"
 
-extern ActionState ftZelda_MotionStateTable[];
+extern MotionState ftZelda_MotionStateTable[];
 extern char lbl_803CFC98[];
 extern char lbl_803CFCA4[];
 extern Fighter_CostumeStrings lbl_803CFEB0[];
