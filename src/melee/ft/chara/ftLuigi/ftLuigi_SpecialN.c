@@ -11,6 +11,10 @@
 
 #include <dolphin/mtx/types.h>
 
+// SpecialN/SpecialAirN (Fireball)
+#define FTLUIGI_SPECIALN_COLL_FLAG                                            \
+    FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim
+
 // 0x8014267C
 // https://decomp.me/scratch/dB9mj // Luigi's grounded Fireball Motion State
 // handler

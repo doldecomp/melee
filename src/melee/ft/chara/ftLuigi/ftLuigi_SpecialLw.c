@@ -9,6 +9,14 @@
 #include "ftLuigi/ftluigi.h"
 #include "melee/ft/inlines.h"
 
+// SpecialLw (Luigi Cyclone)
+#define FTLUIGI_SPECIALLW_FLAG                                                \
+    FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |                 \
+        FtStateChange_SkipUpdateMatAnim | FtStateChange_UpdateCmd |           \
+        FtStateChange_SkipUpdateColAnim | FtStateChange_SkipUpdateItemVis |   \
+        FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |         \
+        FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27
+
 // 0x801445C4
 // https://decomp.me/scratch/TTyNT // Luigi Cyclone Rotation Update
 void ftLuigi_SpecialLw_UpdateRot(HSD_GObj* gobj)
