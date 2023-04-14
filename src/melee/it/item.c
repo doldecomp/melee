@@ -1504,15 +1504,15 @@ void Item_80269B60(HSD_GObj* item_gobj)
 /// @private
 /// @remarks Somewhat arbitrary. Does not run on Hook Shot / Grapple Beam,
 ///          rather items such as the Barrel Cannon.
-void Item_80269BE4(HSD_GObj* this)
+void Item_80269BE4(HSD_GObj* gobj)
 {
-    Item* item_data = this->user_data;
+    Item* item_data = gobj->user_data;
     if (item_data->xDD0_flag.bits.b5) {
-        it_802701BC(this);
+        it_802701BC(gobj);
 
         if (item_data->grab_victim != NULL) {
-            item_data->grab_dealt(this);
-            item_data->grabbed_for_victim(item_data->grab_victim, this);
+            item_data->grab_dealt(gobj);
+            item_data->grabbed_for_victim(item_data->grab_victim, gobj);
         }
     }
 }
@@ -1939,19 +1939,19 @@ void Item_8026A848(HSD_GObj* item_gobj, HSD_GObj* gobj)
 }
 
 /// @private
-void DestroyItemInline(HSD_GObj* this, Item* other_ip)
+void DestroyItemInline(HSD_GObj* gobj, Item* other_ip)
 {
-    Item* ip = this->user_data;
+    Item* ip = gobj->user_data;
     HSD_GObj* other = other_ip->owner;
 
     if (ip->hold_kind == 8 && ip->kind != 58 && ip->kind != 59 &&
         ip->kind != 99 && ip->kind != 103)
     {
-        if (ftLib_800867CC(other) == this) {
+        if (ftLib_800867CC(other) == gobj) {
             ftLib_80086764(other);
         }
-    } else if (ftLib_800867A0(other, this)) {
-        ftLib_80086724(other, this);
+    } else if (ftLib_800867A0(other, gobj)) {
+        ftLib_80086724(other, gobj);
     }
 }
 
@@ -1980,18 +1980,18 @@ void ItemSwitch(HSD_GObj* item_gobj)
 
 /// @private
 /// @todo Could this be a higher-level inline in gobjproc.h or something?
-void RunCallback(HSD_GObj* this, HSD_GObjEvent arg1)
+void RunCallback(HSD_GObj* gobj, HSD_GObjEvent arg1)
 {
     if (arg1 != NULL) {
-        arg1(this);
+        arg1(gobj);
     }
 }
 
 /// @private
-/// @todo Decide on it vs ip vs data, gobj vs item_gobj vs this, etc.
-void func_8026A8EC_inline1(HSD_GObj* this)
+/// @todo Decide on it vs ip vs data, gobj vs item_gobj vs gobj, etc.
+void func_8026A8EC_inline1(HSD_GObj* gobj)
 {
-    Item* ip = (Item*) HSD_GObjGetUserData(this);
+    Item* ip = (Item*) HSD_GObjGetUserData(gobj);
 
     if (ip->xDC8_word.flags.xE) {
         ftLib_80087050(ip->x378_itemColl.x19C);
@@ -2019,36 +2019,36 @@ void func_8026A8EC_inline3(HSD_GObj* item_gobj)
     }
 }
 
-void Item_8026A8EC(HSD_GObj* this)
+void Item_8026A8EC(HSD_GObj* gobj)
 {
-    Item* ip = (Item*) HSD_GObjGetUserData(this);
+    Item* ip = (Item*) HSD_GObjGetUserData(gobj);
 
-    if (!it_80272D1C(this) || ip == NULL) {
+    if (!it_80272D1C(gobj) || ip == NULL) {
         OSReport("===== Not Found Item_Struct!! =====\n");
         __assert("item.c", 2405, "0");
     }
 
-    it_802725D4(this);
-    Item_802675A8(this);
-    func_8026A8EC_inline1(this);
-    efLib_DestroyAll(this);
+    it_802725D4(gobj);
+    Item_802675A8(gobj);
+    func_8026A8EC_inline1(gobj);
+    efLib_DestroyAll(gobj);
 
     if (!ip->xDCF_flag.bits.b2 &&
         (!ip->xDC8_word.flags.x13 || ip->owner == NULL))
     {
-        ItemSwitch(this);
+        ItemSwitch(gobj);
     }
 
-    func_8026A8EC_inline2(this);
+    func_8026A8EC_inline2(gobj);
 
     if (ip->xDC8_word.flags.x13 && ip->owner != NULL &&
         ftLib_80086960(ip->owner))
     {
-        DestroyItemInline(this, ip);
+        DestroyItemInline(gobj, ip);
     }
 
     ip->owner = NULL;
-    func_8026A8EC_inline3(this);
+    func_8026A8EC_inline3(gobj);
 
     {
         int i;
@@ -2057,9 +2057,9 @@ void Item_8026A8EC(HSD_GObj* this)
         }
     }
 
-    Item_8026B0B4(this);
+    Item_8026B0B4(gobj);
     efAsync_80067688(&ip->xBC0);
-    func_80390228(this);
+    func_80390228(gobj);
 }
 
 void Item_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
@@ -2077,57 +2077,57 @@ void Item_8026AB54(HSD_GObj* item_gobj, HSD_GObj* pickup_gfx, u8 pickup_sfx)
     Item_8026B074(item_data);
 }
 
-void Item_8026ABD8(HSD_GObj* this, Vec3* pos, f32 arg2)
+void Item_8026ABD8(HSD_GObj* gobj, Vec3* pos, f32 arg2)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-    Item* item_data = (Item*) HSD_GObjGetUserData(this);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
 
     item_data->xC44 = arg2;
-    it_802731A4(this);
-    it_80273B50(this, pos);
-    RunCallback(this, item_data->xB8_itemLogicTable->dropped);
-    it_80274198(this, 1);
-    it_802754D4(this);
+    it_802731A4(gobj);
+    it_80273B50(gobj, pos);
+    RunCallback(gobj, item_data->xB8_itemLogicTable->dropped);
+    it_80274198(gobj, 1);
+    it_802754D4(gobj);
 
-    if (it_8026B6C8(this)) {
-        it_80275390(this);
+    if (it_8026B6C8(gobj)) {
+        it_80275390(gobj);
     }
 }
 
-void Item_8026AC74(HSD_GObj* this, enum_t drop_gfx, enum_t drop_sfx, f32 arg3)
+void Item_8026AC74(HSD_GObj* gobj, enum_t drop_gfx, enum_t drop_sfx, f32 arg3)
 {
-    Item* item_data = GetItemData(this);
+    Item* item_data = GetItemData(gobj);
     item_data->xC44 = arg3;
-    it_802731A4(this);
-    it_80273748(this, drop_gfx, drop_sfx);
-    RunCallback(this, item_data->xB8_itemLogicTable->dropped);
-    it_802741F4(this, 1);
-    it_802754D4(this);
+    it_802731A4(gobj);
+    it_80273748(gobj, drop_gfx, drop_sfx);
+    RunCallback(gobj, item_data->xB8_itemLogicTable->dropped);
+    it_802741F4(gobj, 1);
+    it_802754D4(gobj);
 
-    if (it_8026B6C8(this)) {
-        it_80275390(this);
+    if (it_8026B6C8(gobj)) {
+        it_80275390(gobj);
     }
 }
 
-void Item_8026AD20(HSD_GObj* this, s32 drop_gfx, s32 drop_sfx, f32 arg8)
+void Item_8026AD20(HSD_GObj* gobj, s32 drop_gfx, s32 drop_sfx, f32 arg8)
 {
-    Item* item_data = GetItemData(this);
-    it_802731E0(this);
+    Item* item_data = GetItemData(gobj);
+    it_802731E0(gobj);
     item_data->xC44 = arg8;
-    it_80273748(this, drop_gfx, drop_sfx);
-    RunCallback(this, item_data->xB8_itemLogicTable->thrown);
-    it_802741F4(this, 1);
-    it_802754D4(this);
+    it_80273748(gobj, drop_gfx, drop_sfx);
+    RunCallback(gobj, item_data->xB8_itemLogicTable->thrown);
+    it_802741F4(gobj, 1);
+    it_802754D4(gobj);
 }
 
-void Item_8026ADC0(HSD_GObj* this)
+void Item_8026ADC0(HSD_GObj* gobj)
 {
-    Item* item_data = (Item*) HSD_GObjGetUserData(this);
+    Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
     if (item_data->xB8_itemLogicTable->entered_air != NULL) {
-        item_data->xB8_itemLogicTable->entered_air(this);
+        item_data->xB8_itemLogicTable->entered_air(gobj);
         item_data->xDC8_word.flags.x1F = true;
     }
 }
