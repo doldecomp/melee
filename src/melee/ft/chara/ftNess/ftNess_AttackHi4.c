@@ -1024,9 +1024,9 @@ void ftNess_AttackHi4_Release_Coll(
     }
 }
 
-static itYoyoAttributes* GetYoyoAttr(HSD_GObj* item_gobj)
+static itYoyoAttributes* GetYoyoAttr(HSD_GObj* gobj)
 {
-    Item* item_data = item_gobj->user_data;
+    Item* item_data = gobj->user_data;
     itYoyoAttributes* yoyo_attr =
         item_data->xC4_article_data->x4_specialAttributes;
     return yoyo_attr;

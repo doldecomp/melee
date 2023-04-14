@@ -39,10 +39,10 @@ static inline float _sqrtfItem(float x)
 }
 
 /// Apply Item Damage -  may not be itHit* ???
-f32 it_8026B1D4(HSD_GObj* item_gobj, itHit* itemHitboxUnk)
+f32 it_8026B1D4(HSD_GObj* gobj, itHit* itemHitboxUnk)
 {
     f32 ret = itemHitboxUnk->xC_damage_staled;
-    const Item* ip = item_gobj->user_data;
+    const Item* ip = gobj->user_data;
     if (ip->xDC8_word.flags.x14 != 0) {
         f32 itemSpeed = _sqrtfItem(ip->x40_vel.x * ip->x40_vel.x +
                                    ip->x40_vel.y * ip->x40_vel.y +
@@ -57,18 +57,18 @@ f32 it_8026B1D4(HSD_GObj* item_gobj, itHit* itemHitboxUnk)
     return ret;
 }
 
-void it_8026B294(HSD_GObj* item_gobj,
+void it_8026B294(HSD_GObj* gobj,
                  Vec3* pos) // Copy Item position vector
 {
     Item* temp_item;
 
-    temp_item = item_gobj->user_data;
+    temp_item = gobj->user_data;
     *pos = temp_item->pos;
 }
 
-bool it_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy
+bool it_8026B2B4(HSD_GObj* gobj) // Check if item is heavy
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
 
     if (temp_item->xCC_item_attr->x0_is_heavy) {
         return true;
@@ -77,76 +77,75 @@ bool it_8026B2B4(HSD_GObj* item_gobj) // Check if item is heavy
     return false;
 }
 
-bool it_8026B2D8(HSD_GObj* item_gobj) // Check if item is heavy again?
+bool it_8026B2D8(HSD_GObj* gobj) // Check if item is heavy again?
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     if (temp_item->xCC_item_attr->x0_is_heavy == 1) {
         return true;
     }
     return false;
 }
 
-s32 itGetKind(HSD_GObj* item_gobj) // Get Item ID
+s32 itGetKind(HSD_GObj* gobj) // Get Item ID
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     return temp_item->kind;
 }
 
-s32 it_8026B30C(HSD_GObj* item_gobj) // Return flag from Item Attributes
+s32 it_8026B30C(HSD_GObj* gobj) // Return flag from Item Attributes
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     return temp_item->xCC_item_attr->x0_78;
 }
 
-s32 it_8026B320(HSD_GObj* item_gobj) // Return item hold kind
+s32 it_8026B320(HSD_GObj* gobj) // Return item hold kind
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     return temp_item->xCC_item_attr->x0_hold_kind;
 }
 
-f32 it_8026B334(HSD_GObj* item_gobj) // Return item damage multiplier
+f32 it_8026B334(HSD_GObj* gobj) // Return item damage multiplier
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     return temp_item->xCC_item_attr->x1C_damage_mul;
 }
 
-void it_8026B344(HSD_GObj* item_gobj,
+void it_8026B344(HSD_GObj* gobj,
                  Vec3* pos) // Unknown item position math, related to velocity?
 {
     Item* ip;
 
-    ip = item_gobj->user_data;
+    ip = gobj->user_data;
     pos->x = (f32) ((ip->facing_dir * ip->xBCC_unk.x) + ip->pos.x);
     pos->y = (f32) (ip->pos.y + ip->xBCC_unk.y);
     pos->z = (f32) ip->pos.z;
 }
 
-f32 it_8026B378(HSD_GObj* item_gobj) // Return item's X-Axis grab range?
+f32 it_8026B378(HSD_GObj* gobj) // Return item's X-Axis grab range?
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     return temp_item->xBD4_grabRange.x;
 }
 
-f32 it_8026B384(HSD_GObj* item_gobj) // Return item's Y-Axis grab range?
+f32 it_8026B384(HSD_GObj* gobj) // Return item's Y-Axis grab range?
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     return temp_item->xBD4_grabRange.y;
 }
 
-void it_8026B390(HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word ON
+void it_8026B390(HSD_GObj* gobj) // Toggle item flag 0x15 in 0xDC8 word ON
 {
     Item* temp_item;
 
-    temp_item = item_gobj->user_data;
+    temp_item = gobj->user_data;
     temp_item->xDC8_word.flags.x15 = 1;
 }
 
-void it_8026B3A8(
-    HSD_GObj* item_gobj) // Toggle item flag 0x15 in 0xDC8 word OFF
+void it_8026B3A8(HSD_GObj* gobj) // Toggle item flag 0x15 in 0xDC8 word OFF
 {
     Item* temp_item;
 
-    temp_item = item_gobj->user_data;
+    temp_item = gobj->user_data;
     temp_item->xDC8_word.flags.x15 = 0;
 }
 
@@ -195,12 +194,12 @@ f32 it_8026B424(s32 damage) // Item Damage Math
                         itCommonData->xBC);
 }
 
-s32 it_8026B47C(HSD_GObj* item_gobj) // Get heal value of healing items
+s32 it_8026B47C(HSD_GObj* gobj) // Get heal value of healing items
 {
     s32 kind;
     Item* temp_item;
 
-    temp_item = item_gobj->user_data;
+    temp_item = gobj->user_data;
     kind = temp_item->kind;
     switch (kind) {
     case It_Kind_Heart:
@@ -218,9 +217,9 @@ s32 it_8026B47C(HSD_GObj* item_gobj) // Get heal value of healing items
     }
 }
 
-bool it_8026B4F0(HSD_GObj* item_gobj) // Check if item is a healing item
+bool it_8026B4F0(HSD_GObj* gobj) // Check if item is a healing item
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     ItemKind kind = temp_item->kind;
 
     switch (kind) {
@@ -236,29 +235,29 @@ bool it_8026B4F0(HSD_GObj* item_gobj) // Check if item is a healing item
     }
 }
 
-f32 it_8026B54C(HSD_GObj* item_gobj) // Get unknown float from 0x0 of item's
-                                     // special attributes
+f32 it_8026B54C(HSD_GObj* gobj) // Get unknown float from 0x0 of item's
+                                // special attributes
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     itUnkAttributes* unk_attr =
         temp_item->xC4_article_data->x4_specialAttributes;
 
     return unk_attr->x0_float;
 }
 
-f32 it_8026B560(HSD_GObj* item_gobj) // Identical to 0x8026B54C but likely
-                                     // using a different itAttributes struct
+f32 it_8026B560(HSD_GObj* gobj) // Identical to 0x8026B54C but likely
+                                // using a different itAttributes struct
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     itUnkAttributes* unk_attr =
         temp_item->xC4_article_data->x4_specialAttributes;
     return unk_attr->x0_float;
 }
 
-f32 it_8026B574(HSD_GObj* item_gobj) // Get unknown float from 0x4 of item's
-                                     // special attributes
+f32 it_8026B574(HSD_GObj* gobj) // Get unknown float from 0x4 of item's
+                                // special attributes
 {
-    Item* temp_item = item_gobj->user_data;
+    Item* temp_item = gobj->user_data;
     itUnkAttributes* unk_attr =
         temp_item->xC4_article_data->x4_specialAttributes;
     return unk_attr->x4_float;
@@ -270,9 +269,9 @@ s32 it_8026B588(void) // Get unknown integer from itCommonData
 }
 
 /// Check if item can fire projectiles
-bool it_8026B594(HSD_GObj* item_gobj)
+bool it_8026B594(HSD_GObj* gobj)
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     ItemKind kind = ip->kind;
 
     switch (kind) {
@@ -292,11 +291,11 @@ bool it_8026B594(HSD_GObj* item_gobj)
 }
 
 HSD_GObj* it_8026B5E4(Vec3* vector, Vec3* vector2,
-                      HSD_GObj* item_gobj) // Unknown item camera check?
+                      HSD_GObj* gobj) // Unknown item camera check?
 {
     HSD_GObj* unk_gobj;
 
-    unk_gobj = ftLib_8008627C(vector, item_gobj);
+    unk_gobj = ftLib_8008627C(vector, gobj);
     if (unk_gobj != NULL) {
         ftLib_800866DC(unk_gobj, vector2);
     }
@@ -309,9 +308,9 @@ HSD_GObj* it_8026B5E4(Vec3* vector, Vec3* vector2,
  * @todo Missing third argument passed to #ftLib_80086368.
  * @brief Unknown item camera check 2?
  */
-HSD_GObj* it_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj)
+HSD_GObj* it_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* gobj)
 {
-    HSD_GObj* unk_gobj = ftLib_80086368(vector, item_gobj);
+    HSD_GObj* unk_gobj = ftLib_80086368(vector, gobj);
 
     if (unk_gobj != NULL)
         ftLib_800866DC(unk_gobj, vector2);
@@ -322,7 +321,7 @@ HSD_GObj* it_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj)
 #elif defined(MWERKS_GEKKO)
 
 #pragma push
-asm HSD_GObj* it_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj){
+asm HSD_GObj* it_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* gobj){
     // clang-format off
     nofralloc
 /* 8026B634 00000000  7C 08 02 A6 */  mflr r0
@@ -351,7 +350,7 @@ lbl_8026B668:
 
 #else
 
-HSD_GObj* it_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* item_gobj)
+HSD_GObj* it_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* gobj)
 {
     NOT_IMPLEMENTED;
 }
@@ -374,14 +373,14 @@ f32 it_8026B6A8(Vec3* pos, HSD_GObj* arg1)
     return ftLib_800864A8(pos, arg1);
 }
 
-bool it_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item?
+bool it_8026B6C8(HSD_GObj* gobj) // Check if item is a stage item?
 {
     s32 kind;
     s32 itemID_2;
     s32 itemID_3;
     Item* ip;
 
-    ip = item_gobj->user_data;
+    ip = gobj->user_data;
     kind = ip->kind;
     if (((kind >= It_Kind_Kuriboh) && (kind < It_Kind_Octarock_Stone)) ||
         ((itemID_2 = ip->kind, ((itemID_2 < It_Kind_Old_Kuri) == false)) &&
@@ -397,24 +396,24 @@ bool it_8026B6C8(HSD_GObj* item_gobj) // Check if item is a stage item?
     return false;
 }
 
-void it_8026B718(HSD_GObj* item_gobj,
+void it_8026B718(HSD_GObj* gobj,
                  f32 hitlagFrames) // Set item's hitlag frames
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     ip->xCBC_hitlagFrames = hitlagFrames;
 }
 
-void it_8026B724(HSD_GObj* item_gobj) // Toggle bit 3 of 0xDC8 word ON
+void it_8026B724(HSD_GObj* gobj) // Toggle bit 3 of 0xDC8 word ON
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     ip->xDC8_word.flags.x3 = true;
 }
 
-void it_8026B73C(HSD_GObj* item_gobj) // Toggle bits in 0xDC8 word
+void it_8026B73C(HSD_GObj* gobj) // Toggle bits in 0xDC8 word
 {
     Item* ip;
 
-    ip = item_gobj->user_data;
+    ip = gobj->user_data;
     if (ip->xDC8_word.flags.x7 != 0) {
         ip->xDC8_word.flags.x5 = 1;
     }
@@ -423,10 +422,10 @@ void it_8026B73C(HSD_GObj* item_gobj) // Toggle bits in 0xDC8 word
     }
 }
 
-bool it_8026B774(HSD_GObj* item_gobj,
+bool it_8026B774(HSD_GObj* gobj,
                  u8 arg1) // Bitwise operations in 0xDC8 word
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
 
     if (((ip->xDC8_word.word >> 0xDU) & 0xF & (1 << arg1)) != 0) {
         return true;
@@ -434,28 +433,28 @@ bool it_8026B774(HSD_GObj* item_gobj,
     return false;
 }
 
-s32 it_8026B7A4(HSD_GObj* item_gobj) // Get Item State ID
+s32 it_8026B7A4(HSD_GObj* gobj) // Get Item State ID
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     return ip->msid;
 }
 
-u8 it_8026B7B0(HSD_GObj* item_gobj) // Get Item Team ID
+u8 it_8026B7B0(HSD_GObj* gobj) // Get Item Team ID
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     return ip->x20_team_id;
 }
 
-s32 it_8026B7BC(HSD_GObj* item_gobj) // Get flag 0x14 of 0xDC8 word
+s32 it_8026B7BC(HSD_GObj* gobj) // Get flag 0x14 of 0xDC8 word
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     return ip->xDC8_word.flags.x14;
 }
 
-s32 it_8026B7CC(HSD_GObj* item_gobj) // Get 0x1C of Item - something to do
-                                     // with stale moves?
+s32 it_8026B7CC(HSD_GObj* gobj) // Get 0x1C of Item - something to do
+                                // with stale moves?
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     return ip->x1C;
 }
 
@@ -471,9 +470,9 @@ s32 it_8026B7E0(void) // Get unknown var from global data
     return lbl_804D6D08;
 }
 
-s32 it_8026B7E8(HSD_GObj* item_gobj) // Get bit 1 of 0xDC8 word
+s32 it_8026B7E8(HSD_GObj* gobj) // Get bit 1 of 0xDC8 word
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     return ip->xDC8_word.flags.x1;
 }
 
@@ -507,9 +506,9 @@ void it_8026B7F8(HSD_GObj* gobj)
 
 /// Remove all GObj interaction references from item
 /// @returns Whether or not @p ref_gobj was the #Item::owner.
-bool it_8026B894(HSD_GObj* item_gobj, HSD_GObj* ref_gobj)
+bool it_8026B894(HSD_GObj* gobj, HSD_GObj* ref_gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     bool result = false;
 
     if (ip->owner == ref_gobj) {
@@ -544,10 +543,10 @@ bool it_8026B894(HSD_GObj* item_gobj, HSD_GObj* ref_gobj)
 /// @todo Inlined ASM due to compiler version generating mismatch
 #ifdef MUST_MATCH
 #pragma push
-asm s32 it_8026B924(register HSD_GObj* item_gobj)
+asm s32 it_8026B924(register HSD_GObj* gobj)
 { // clang-format off
     // Get Item Data
-    lwz r4, 0x2C(item_gobj);
+    lwz r4, 0x2C(gobj);
     // Default return value
     li r3, -1;
     // Get Item ID
@@ -573,10 +572,10 @@ lbl_getVar:
 
 /// Return result of unk item check
 /// @todo Requires @c -g compiler flag / Frank modifications to match.
-s32 it_8026B924(HSD_GObj* item_gobj)
+s32 it_8026B924(HSD_GObj* gobj)
 {
     s32 result;
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     enum_t kind = ip->kind;
     result = -1;
     switch (kind) {
@@ -600,13 +599,13 @@ s32 it_8026B924(HSD_GObj* item_gobj)
 
 #ifdef MUST_MATCH
 #pragma push
-f32 it_8026B960(register HSD_GObj* item_gobj)
+f32 it_8026B960(register HSD_GObj* gobj)
 { // clang-format off
     register s32 kind;
     register f32 unk_timer = -1.0f;
 
     register Item* ip;
-    ip = GET_ITEM(item_gobj);
+    ip = GET_ITEM(gobj);
     kind = ip->kind;
 
     asm {
@@ -634,13 +633,13 @@ lbl_block:
 
 /// Return float result of item kind and state checks
 /// @todo Requires @c -g compiler flag / Frank modifications to match.
-f32 it_8026B960(HSD_GObj* item_gobj)
+f32 it_8026B960(HSD_GObj* gobj)
 {
     s32 kind;
     f32 unk_timer = -1.0f;
     Item* ip;
 
-    ip = item_gobj->user_data;
+    ip = gobj->user_data;
     kind = ip->kind;
     switch (kind) {
     case It_Kind_BombHei:
@@ -662,9 +661,8 @@ extern void lb_8000B804(HSD_JObj*, HSD_Joint*);
 extern void lb_8000BA0C(HSD_JObj*, f32);
 extern void HSD_JObjRemoveAnimAll(HSD_JObj*);
 
-static inline void What(HSD_GObj* item_gobj,
-                        struct ItemStateDesc* itemStateDesc, Item* ip,
-                        HSD_JObj* item_jobj2)
+static inline void What(HSD_GObj* gobj, struct ItemStateDesc* itemStateDesc,
+                        Item* ip, HSD_JObj* item_jobj2)
 {
     struct ItemStateDesc* temp_stateDesc;
     HSD_Joint* temp_joint;
@@ -694,8 +692,8 @@ static inline void What(HSD_GObj* item_gobj,
             Item_80268E40(ip, itemStateDesc);
         }
         HSD_JObjAnimAll(item_jobj2);
-        it_80279BE0(item_gobj);
-        it_802799E4(item_gobj);
+        it_80279BE0(gobj);
+        it_802799E4(gobj);
         return;
     }
     HSD_JObjRemoveAnimAll(item_jobj2);
@@ -703,23 +701,23 @@ static inline void What(HSD_GObj* item_gobj,
 }
 
 /// Transfer item on character transformation (Zelda <-> Sheik)
-void it_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
+void it_8026B9A8(HSD_GObj* gobj, HSD_GObj* arg1, u8 arg2)
 {
     Vec3 vec;
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ItemStateArray* states = ip->xC4_article_data->xC_itemStates;
 
     ItemStateDesc* state_desc;
 
     /// @todo Not enough stack for #GET_JOBJ.
-    HSD_JObj* jobj0 = item_gobj->hsd_obj;
+    HSD_JObj* jobj0 = gobj->hsd_obj;
 
     state_desc = &states->x0_itemStateDesc[ip->anim_id];
     vec.z = 0.0f;
     vec.y = 0.0f;
     vec.x = 0.0f;
-    it_8027429C(item_gobj, &vec);
-    it_802742F4(item_gobj, arg1, arg2);
+    it_8027429C(gobj, &vec);
+    it_802742F4(gobj, arg1, arg2);
 
     {
         ItemStateDesc* temp_stateDesc;
@@ -748,8 +746,8 @@ void it_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
             }
 
             HSD_JObjAnimAll(jobj0);
-            it_80279BE0(item_gobj);
-            it_802799E4(item_gobj);
+            it_80279BE0(gobj);
+            it_802799E4(gobj);
             return;
         }
     }
@@ -759,29 +757,29 @@ void it_8026B9A8(HSD_GObj* item_gobj, HSD_GObj* arg1, u8 arg2)
 }
 
 /// Multiply item's scale
-void it_8026BAE8(HSD_GObj* item_gobj, f32 scl_mul)
+void it_8026BAE8(HSD_GObj* gobj, f32 scl_mul)
 {
     f32 scl;
     Item* ip;
     HSD_JObj* item_jobj;
 
-    ip = item_gobj->user_data;
-    item_jobj = item_gobj->hsd_obj;
+    ip = gobj->user_data;
+    item_jobj = gobj->hsd_obj;
     scl = scl_mul * ip->xCC_item_attr->x60_scale;
     ip->scl = scl;
     it_80272F7C(item_jobj, scl);
 }
 
 /// Clear JObj flags on item model
-void it_8026BB20(HSD_GObj* item_gobj)
+void it_8026BB20(HSD_GObj* gobj)
 {
-    it_80272A18(item_gobj->hsd_obj);
+    it_80272A18(gobj->hsd_obj);
 }
 
 /// Set JObj flags on item model
-void it_8026BB44(HSD_GObj* item_gobj)
+void it_8026BB44(HSD_GObj* gobj)
 {
-    it_80272A3C(item_gobj->hsd_obj);
+    it_80272A3C(gobj->hsd_obj);
 }
 
 extern void ftLib_80086990(HSD_GObj*, Vec3*);
@@ -793,9 +791,9 @@ void it_8026BB68(HSD_GObj* gobj, Vec3* pos)
 }
 
 /// Adjust item's position based on ECB?
-void it_8026BB88(HSD_GObj* item_gobj, Vec3* pos)
+void it_8026BB88(HSD_GObj* gobj, Vec3* pos)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ftECB* ecb = &ip->x378_itemColl.xA4_ecbCurrCorrect;
 
     /// @todo Why is this always zero? Stripped something?
@@ -809,9 +807,9 @@ void it_8026BB88(HSD_GObj* item_gobj, Vec3* pos)
 }
 
 /// Adjust item's ECB position?
-void it_8026BBCC(HSD_GObj* item_gobj, Vec3* pos)
+void it_8026BBCC(HSD_GObj* gobj, Vec3* pos)
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     CollData* coll_data = &ip->x378_itemColl;
     ftECB* ecb = &coll_data->xE4_ecb;
 
@@ -829,168 +827,168 @@ extern bool ftLib_80086960(HSD_GObj*);
 extern void ftLib_80086A4C(HSD_GObj*, f32);
 
 /// Check if item owner is a fighter + decrement hitlag
-void it_8026BC14(HSD_GObj* item_gobj)
+void it_8026BC14(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     if (ip->owner != NULL && ftLib_80086960(ip->owner)) {
         ftLib_80086A4C(ip->owner, ip->xCBC_hitlagFrames - 1);
     }
 }
 
-/// @returns #Item::xDD0_flag::bits::b0 of @p item_gobj.
-bool it_8026BC68(HSD_GObj* item_gobj)
+/// @returns #Item::xDD0_flag::bits::b0 of @p gobj.
+bool it_8026BC68(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     return ip->xDD0_flag.bits.b0;
 }
 
-/// @returns #Item::owner of @p item_gobj.
-HSD_GObj* it_8026BC78(HSD_GObj* item_gobj) // Get item owner
+/// @returns #Item::owner of @p gobj.
+HSD_GObj* it_8026BC78(HSD_GObj* gobj) // Get item owner
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     return ip->owner;
 }
 
-/// @returns #Item::xD88_attackID of @p item_gobj.
-bool it_8026BC84(HSD_GObj* item_gobj)
+/// @returns #Item::xD88_attackID of @p gobj.
+bool it_8026BC84(HSD_GObj* gobj)
 {
-    Item* ip = item_gobj->user_data;
+    Item* ip = gobj->user_data;
     return ip->xD88_attackID;
 }
 
 extern void ftLib_80086644(HSD_GObj*, Vec3*);
 
 /// Unknown item ECB / position update
-void it_8026BC90(HSD_GObj* item_gobj, Vec3* pos)
+void it_8026BC90(HSD_GObj* gobj, Vec3* pos)
 {
     pos->z = 0;
     pos->y = 0;
     pos->x = 0;
 
-    if (item_gobj != NULL && ftLib_80086960(item_gobj)) {
-        ftLib_80086644(item_gobj, pos);
+    if (gobj != NULL && ftLib_80086960(gobj)) {
+        ftLib_80086644(gobj, pos);
     }
 }
 
-/// Unsets #Item::xDCD_flag::bits::b2 of @p item_gobj.
-void it_8026BCF4(HSD_GObj* item_gobj)
+/// Unsets #Item::xDCD_flag::bits::b2 of @p gobj.
+void it_8026BCF4(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ip->xDCD_flag.bits.b2 = false;
 }
 
-/// Sets #Item::xDCD_flag::bits::b2 of @p item_gobj.
-void it_8026BD0C(HSD_GObj* item_gobj)
+/// Sets #Item::xDCD_flag::bits::b2 of @p gobj.
+void it_8026BD0C(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ip->xDCD_flag.bits.b2 = true;
 }
 
-/// Sets #Item::xDD0_flag::bits::b3 of @p item_gobj.
-void it_8026BD24(HSD_GObj* item_gobj)
+/// Sets #Item::xDD0_flag::bits::b3 of @p gobj.
+void it_8026BD24(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ip->xDD0_flag.bits.b3 = true;
 }
 
-/// Sets #Item::xDCC_flag::bits::b3 of @p item_gobj.
-void it_8026BD3C(HSD_GObj* item_gobj)
+/// Sets #Item::xDCC_flag::bits::b3 of @p gobj.
+void it_8026BD3C(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ip->xDCC_flag.b3 = true;
 }
 
-/// Unsets #Item::xDCC_flag::bits::b3 of @p item_gobj.
-void it_8026BD54(HSD_GObj* item_gobj)
+/// Unsets #Item::xDCC_flag::bits::b3 of @p gobj.
+void it_8026BD54(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ip->xDCC_flag.b3 = 0;
 }
 
-/// Sets #Item::xDCD_flag::bits::b3 of @p item_gobj.
-void it_8026BD6C(HSD_GObj* item_gobj)
+/// Sets #Item::xDCD_flag::bits::b3 of @p gobj.
+void it_8026BD6C(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ip->xDCD_flag.bits.b3 = true;
 }
 
-/// Sets #Item::xDCD_flag::bits::b4 of @p item_gobj.
-void it_8026BD84(HSD_GObj* item_gobj)
+/// Sets #Item::xDCD_flag::bits::b4 of @p gobj.
+void it_8026BD84(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ip->xDCD_flag.bits.b4 = true;
 }
 
-/// Sets #Item::xDC8_word::flags::x1A of @p item_gobj.
-void it_8026BD9C(HSD_GObj* item_gobj)
+/// Sets #Item::xDC8_word::flags::x1A of @p gobj.
+void it_8026BD9C(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ip->xDC8_word.flags.x1A = true;
 }
 
 // 0x8026BDB4 // Identical to previous function except for the toggle bit
-void it_8026BDB4(HSD_GObj* item_gobj) // Toggle 0x1A of 0xDC8 word OFF
+void it_8026BDB4(HSD_GObj* gobj) // Toggle 0x1A of 0xDC8 word OFF
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     ip->xDC8_word.flags.x1A = false;
 }
 
 /// Toggles several item flags.
-void it_8026BDCC(HSD_GObj* item_gobj)
+void it_8026BDCC(HSD_GObj* gobj)
 {
     /// @todo Each of these is an inlined function. Some are already defined.
     {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         ip->xDD0_flag.bits.b3 = false;
     }
 
     {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         ip->xDCC_flag.b3 = true;
     }
 
     {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         ip->xDCD_flag.bits.b3 = false;
     }
 
     {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         ip->xDCD_flag.bits.b4 = false;
     }
 
     {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         ip->xDC8_word.flags.x1A = true;
     }
 }
 
 /// Toggle several item flags. The inverse of #it_8026BDCC.
-void it_8026BE28(HSD_GObj* item_gobj)
+void it_8026BE28(HSD_GObj* gobj)
 {
     /// @todo Each of these is an inlined function. Some are already defined.
     {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         ip->xDD0_flag.bits.b3 = true;
     }
 
     {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         ip->xDCC_flag.b3 = false;
     }
 
     {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         ip->xDCD_flag.bits.b3 = true;
     }
 
     {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         ip->xDCD_flag.bits.b4 = true;
     }
 
     {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         ip->xDC8_word.flags.x1A = false;
     }
 }
@@ -1142,16 +1140,16 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
 
 extern CollData* ftLib_80086984(HSD_GObj*);
 
-CollData* it_8026C100(HSD_GObj* item_gobj) // Get item's CollData pointer
+CollData* it_8026C100(HSD_GObj* gobj) // Get item's CollData pointer
 {
     CollData* collDataPtr = NULL;
 
-    switch (it_80272D40(item_gobj)) {
+    switch (it_80272D40(gobj)) {
     case 0:
-        collDataPtr = ftLib_80086984(item_gobj);
+        collDataPtr = ftLib_80086984(gobj);
         break;
     case 1: {
-        Item* ip = GET_ITEM(item_gobj);
+        Item* ip = GET_ITEM(gobj);
         collDataPtr = &ip->x378_itemColl;
         break;
     }
@@ -1160,23 +1158,23 @@ CollData* it_8026C100(HSD_GObj* item_gobj) // Get item's CollData pointer
 }
 
 /// Check if Hammer item's head should break off
-void it_8026C16C(HSD_GObj* item_gobj, bool is_headless)
+void it_8026C16C(HSD_GObj* gobj, bool is_headless)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
 
     if (ip->xD4C <= 0) {
-        it_802725D4(item_gobj);
+        it_802725D4(gobj);
     } else if (is_headless) {
-        it_80272784(item_gobj);
+        it_80272784(gobj);
     } else {
-        it_802725D4(item_gobj);
+        it_802725D4(gobj);
     }
 }
 
 /// Check if item has a hitbox
-void it_8026C1B4(HSD_GObj* item_gobj)
+void it_8026C1B4(HSD_GObj* gobj)
 {
-    it_80275870(item_gobj);
+    it_80275870(gobj);
 }
 
 /// Get unknown var from r13 pointer
@@ -1186,9 +1184,9 @@ u32 it_8026C1D4(void)
 }
 
 /// Check if item has grabbed a GObj?
-bool it_8026C1E8(HSD_GObj* item_gobj)
+bool it_8026C1E8(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
 
     if (ip->grab_victim != NULL ||
         (ip->xDC8_word.flags.x13 && ip->owner != NULL))
@@ -1200,10 +1198,10 @@ bool it_8026C1E8(HSD_GObj* item_gobj)
 }
 
 /// Get item owner's port number
-void it_8026C220(HSD_GObj* item_gobj, HSD_GObj* gobj)
+void it_8026C220(HSD_GObj* gobj, HSD_GObj* fighter_gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
-    ip->xCB0_source_ply = (u8) ftLib_80086BE0(gobj);
+    Item* ip = GET_ITEM(gobj);
+    ip->xCB0_source_ply = (u8) ftLib_80086BE0(fighter_gobj);
 }
 
 /// Find the closest item to the given position?
@@ -1244,9 +1242,9 @@ HSD_GObj* it_8026C258(Vec3* pos, f32 facing_dir)
 }
 
 /// Unknown item position / ECB update
-void it_8026C334(HSD_GObj* item_gobj, Vec3* pos)
+void it_8026C334(HSD_GObj* gobj, Vec3* pos)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
     f32 offset_xz = 0.0f;
     f32 offset_y = ip->x378_itemColl.xA4_ecbCurrCorrect.bottom.y;
 
@@ -1256,33 +1254,33 @@ void it_8026C334(HSD_GObj* item_gobj, Vec3* pos)
 }
 
 /// Run bomb item explosion callbacks
-void it_8026C368(HSD_GObj* item_gobj)
+void it_8026C368(HSD_GObj* gobj)
 {
-    Item* ip = GET_ITEM(item_gobj);
+    Item* ip = GET_ITEM(gobj);
 
     if (ip->x378_itemColl.x34_flags.bits.b7) {
         ItemKind kind = ip->kind;
         switch (kind) {
         case It_Kind_BombHei:
-            it_8027D730(item_gobj);
+            it_8027D730(gobj);
             return;
 
         case It_Kind_MSBomb:
-            it_8028FE90(item_gobj);
+            it_8028FE90(gobj);
             return;
 
         case It_Kind_Link_Bomb:
         case It_Kind_CLink_Bomb:
-            it_8029D968(item_gobj);
+            it_8029D968(gobj);
             return;
 
         case Pokemon_Marumine:
-            it_802D09D0(item_gobj);
+            it_802D09D0(gobj);
             return;
 
         default:
             ip->destroy_type = 0;
-            Item_8026A8EC(item_gobj);
+            Item_8026A8EC(gobj);
         }
     }
 }

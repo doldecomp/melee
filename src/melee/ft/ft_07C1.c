@@ -16,13 +16,13 @@ static f32 const lbl_804D8324 = 1.0F;
 
 void ft_8007C224(HSD_GObj* gobj);
 
-void ft_8007C114(HSD_GObj* fighter_gobj)
+void ft_8007C114(HSD_GObj* gobj)
 {
-    Fighter* fp = fighter_gobj->user_data;
+    Fighter* fp = gobj->user_data;
     if (fp->x1974_heldItem != NULL) {
         switch (itGetKind(fp->x1974_heldItem)) {
         case It_Kind_Hammer:
-            ft_800C555C(fighter_gobj);
+            ft_800C555C(gobj);
             break;
         }
     }
