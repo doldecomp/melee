@@ -15,7 +15,7 @@
 #include <stddef.h>
 #include <baselib/random.h>
 
-void ftMario_SpecialLw_UpdateRot(HSD_GObj* gobj)
+void ftMr_SpecialLw_UpdateRot(HSD_GObj* gobj)
 {
     Fighter* fp;
     fp = GET_FIGHTER(gobj);
@@ -39,8 +39,8 @@ static void setGfx(HSD_GObj* gobj)
 static void setCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = &ftMario_SpecialLw_UpdateRot;
-    fp->cb.x21E4_callback_OnDeath2 = &ftMario_SpecialLw_UpdateRot;
+    fp->cb.x21DC_callback_OnTakeDamage = &ftMr_SpecialLw_UpdateRot;
+    fp->cb.x21E4_callback_OnDeath2 = &ftMr_SpecialLw_UpdateRot;
 }
 
 static void doStartMotion(HSD_GObj* gobj)
@@ -70,7 +70,7 @@ static void setCmdVar2(HSD_GObj* gobj)
     fp->x2208_ftcmd_var2 = 0;
 }
 
-void ftMario_SpecialLw_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftMario_DatAttrs* sa = fp->x2D4_specialAttributes;
@@ -90,7 +90,7 @@ void ftMario_SpecialLw_StartMotion(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-void ftMario_SpecialAirLw_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
     f32 sub_val;
     Fighter* fp = gobj->user_data;
@@ -124,7 +124,7 @@ static void unsetCallbacks(HSD_GObj* gobj)
     fp->cb.x21E4_callback_OnDeath2 = NULL;
 }
 
-void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
+void ftMr_SpecialLw_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -137,7 +137,7 @@ void ftMario_SpecialLw_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
+void ftMr_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMario_DatAttrs* sa = (ftMario_DatAttrs*) fp->x2D4_specialAttributes;
@@ -156,9 +156,9 @@ void ftMario_SpecialAirLw_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftMario_SpecialLw_IASA(HSD_GObj* gobj) {}
+void ftMr_SpecialLw_IASA(HSD_GObj* gobj) {}
 
-void ftMario_SpecialAirLw_IASA(HSD_GObj* gobj) {}
+void ftMr_SpecialAirLw_IASA(HSD_GObj* gobj) {}
 
 static usize_t const transition_flags =
     FtStateChange_PreserveGfx | FtStateChange_SkipUpdateHit |
@@ -181,7 +181,7 @@ static void doPhys(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
+void ftMr_SpecialLw_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -213,7 +213,7 @@ void ftMario_SpecialLw_Phys(HSD_GObj* gobj)
     }
 }
 
-void ftMario_SpecialAirLw_Phys(HSD_GObj* gobj)
+void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     f32 flt_var;
     ftMario_DatAttrs* sa;
@@ -268,7 +268,7 @@ static void doColl(HSD_GObj* gobj)
 
 static ftCollisionBox coll_box = { 12, 0, { -6, +6 }, { +6, +6 } };
 
-void ftMario_SpecialLw_Coll(HSD_GObj* gobj)
+void ftMr_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -314,7 +314,7 @@ static void doAirCollIfUnk(HSD_GObj* gobj)
     fp->cb.x21D8_callback_ExitHitlag = &efLib_ResumeAll;
 }
 
-void ftMario_SpecialAirLw_Coll(HSD_GObj* gobj)
+void ftMr_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH

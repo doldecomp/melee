@@ -61,10 +61,11 @@ extern ft_callback
 extern ft_callback
     ftData_OnDeath[FTKIND_MAX]; // One death callback for every character.
 extern ft_callback ftData_OnAbsorb[FTKIND_MAX];
-extern ft_callback ftData_803C1DB4[FTKIND_MAX]; // probably ft_OnSomething
+extern ft_callback
+    ftData_UnkMotionStates3[FTKIND_MAX]; // probably ft_OnSomething
 extern ft_callback ftData_OnUserDataRemove[FTKIND_MAX];
 
-extern fn_ptr_t ftData_803C10D0[FTKIND_MAX];
+extern fn_ptr_t ftData_Table_Unk1[FTKIND_MAX];
 
 extern struct UnkCostumeList CostumeListsForeachCharacter[FTKIND_MAX];
 
@@ -72,7 +73,7 @@ extern ftData* gFtDataList[FTKIND_MAX];
 extern MotionState ftData_MotionStateList[341];
 extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 
-extern s8 ftData_803C26FC[FTKIND_MAX];
+extern s8 ftData_UnkBytePerCharacter[FTKIND_MAX];
 
 extern HSD_PadStatus HSD_PadRumbleData[4];
 
@@ -145,8 +146,8 @@ void Fighter_800679B0(void)
     g_spawnNumCounter = 1;
 
     for (i = 0; i < FTKIND_MAX; i++) {
-        if (ftData_803C10D0[i]) {
-            ftData_803C10D0[i]();
+        if (ftData_Table_Unk1[i]) {
+            ftData_Table_Unk1[i]();
         }
     }
 }
@@ -847,7 +848,7 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     GObj_InitUserData(gobj, 4U, &Fighter_Unload_8006DABC, fp);
     ftData_8008572C(input->fighterKind);
     Fighter_UnkInitLoad_80068914(gobj, input);
-    efAsync_8006737C(ftData_803C26FC[fp->x4_fighterKind]);
+    efAsync_8006737C(ftData_UnkBytePerCharacter[fp->x4_fighterKind]);
     ftData_80085820(fp->x4_fighterKind, fp->x619_costume_id);
 
     Fighter_UnkUpdateCostumeJoint_800686E4(gobj);
@@ -898,9 +899,9 @@ HSD_GObj* Fighter_Create(struct S_TEMP1* input)
     Fighter_UnkProcessDeath_80068354(gobj);
 
     if (fp->x4_fighterKind == 0x1B) {
-        ftMasterHand_8014FE10(gobj);
+        ftMh_Unk02_8014FE10(gobj);
     } else if (fp->x4_fighterKind == 0x1C) {
-        ftCrazyHand_80155FCC(gobj);
+        ftCh_80155FCC(gobj);
     } else if (input->flags.bits.b1 != 0) {
         ft_800BFD04(gobj);
     } else if (Player_GetFlagsBit3(fp->xC_playerID) != 0) {
@@ -1656,8 +1657,8 @@ void Fighter_8006A360(HSD_GObj* gobj)
             }
         }
 
-        if (ftData_803C1DB4[fp->x4_fighterKind]) {
-            ftData_803C1DB4[fp->x4_fighterKind](gobj);
+        if (ftData_UnkMotionStates3[fp->x4_fighterKind]) {
+            ftData_UnkMotionStates3[fp->x4_fighterKind](gobj);
         }
 
         if (fp->cb.x21CC_callback) {
@@ -2496,7 +2497,7 @@ void Fighter_8006C27C(HSD_GObj* gobj)
 
         if (fp->cb.x21A8_callback_Coll) {
             fp->cb.x21A8_callback_Coll(gobj);
-            ftKirby_800F1D24(gobj);
+            ftKb_800F1D24(gobj);
         }
 
         if (fp->ground_or_air == GA_Ground) {
@@ -2878,7 +2879,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
             fp->dmg.x189C_unk_num_frames = 0.0f;
             Fighter_UnkTakeDamage_8006CC30(fp, fp->dmg.x1838_percentTemp);
             ft_8008D930(fp);
-            ftKirby_800F5BA4(fp);
+            ftKb_800F5BA4(fp);
 
             if (fp->cb.x21F0_callback) {
                 fp->cb.x21F0_callback(gobj);
@@ -2914,10 +2915,10 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
             } else {
                 switch (fp->x4_fighterKind) {
                 case 0x1B:
-                    ftMasterHand_8014FE58(gobj);
+                    ftMh_Unk02_8014FE58(gobj);
                     break;
                 case 0x1C:
-                    ftCrazyHand_80156014(gobj);
+                    ftCh_80156014(gobj);
                     break;
                 default:
                     OSReport("ellegal flag fp->no_reaction_always\n");
@@ -2978,7 +2979,7 @@ void Fighter_UnkProcessShieldHit_8006D1EC(HSD_GObj* gobj)
 
         if (!forceAppliedOnHit && fp->dmg.x1838_percentTemp) {
             Fighter_UnkTakeDamage_8006CC30(fp, fp->dmg.x1838_percentTemp);
-            ftKirby_800F5C34(fp);
+            ftKb_800F5C34(fp);
             ftCommon_800804FC(fp);
         }
         ft_800C8D00(gobj);

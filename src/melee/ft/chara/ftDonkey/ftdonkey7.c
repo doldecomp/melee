@@ -6,7 +6,7 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 
-void ftDonkey_800E0440(HSD_GObj* gobj)
+void ftDk_Unk7_800E0440(HSD_GObj* gobj)
 {
     s32 result = ft_80094EA4(gobj);
     if (result) {
@@ -14,17 +14,17 @@ void ftDonkey_800E0440(HSD_GObj* gobj)
     }
 }
 
-void ftDonkey_800E0464(HSD_GObj* gobj)
+void ftDk_Unk7_800E0464(HSD_GObj* gobj)
 {
     ft_800CB438(gobj);
 }
 
-void ftDonkey_800E0484(HSD_GObj* gobj)
+void ftDk_Unk7_800E0484(HSD_GObj* gobj)
 {
-    ftDonkey_800E0350(gobj);
+    ftDk_Unk6_800E0350(gobj);
 }
 
-void ftDonkey_800E04A4(HSD_GObj* gobj, s32 arg1)
+void ftDk_Unk7_800E04A4(HSD_GObj* gobj, s32 arg1)
 {
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
@@ -39,11 +39,11 @@ void ftDonkey_800E04A4(HSD_GObj* gobj, s32 arg1)
     ftAnim_SetAnimRate(gobj, 0.0f);
 }
 
-void ftDonkey_800E0518(HSD_GObj* gobj)
+void ftDk_Unk7_800E0518(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->mv.dk.unk7.x8 <= 0.0f) {
-        ftDonkey_800E03C0(gobj);
+        ftDk_Unk6_800E03C0(gobj);
     }
     fp->mv.dk.unk7.x8 -= 1.0f;
 }

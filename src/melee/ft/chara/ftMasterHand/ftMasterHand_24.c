@@ -2,7 +2,7 @@
 
 // 80154C78 151858
 // https://decomp.me/scratch/j7foW
-void ftMasterHand_80154C78(HSD_GObj* arg0)
+void ftMh_Unk24_80154C78(HSD_GObj* arg0)
 {
     Fighter* temp_r31;
     ftMasterHand_SpecialAttrs* temp_r30;
@@ -18,7 +18,7 @@ void ftMasterHand_80154C78(HSD_GObj* arg0)
 
 // 80154CF8 1518D8
 // https://decomp.me/scratch/XwAlv
-void ftMasterHand_80154CF8(HSD_GObj* gobj, Fighter* fp)
+void ftMh_Unk24_80154CF8(HSD_GObj* gobj, Fighter* fp)
 {
     Fighter* temp_r31;
     ftMasterHand_SpecialAttrs* temp_r30;

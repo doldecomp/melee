@@ -180,7 +180,7 @@ ftData_8008578C:
 /* 800857C0 000823A0  38 A5 0E C0 */	addi r5, r5, CostumeListsForeachCharacter@l
 /* 800857C4 000823A4  88 A5 00 24 */	lbz r5, 0x24(r5)
 /* 800857C8 000823A8  54 84 06 3E */	clrlwi r4, r4, 0x18
-/* 800857CC 000823AC  48 06 94 69 */	bl ftKirby_800EEC34
+/* 800857CC 000823AC  48 06 94 69 */	bl ftKb_800EEC34
 /* 800857D0 000823B0  80 01 00 0C */	lwz r0, 0xc(r1)
 /* 800857D4 000823B4  38 21 00 08 */	addi r1, r1, 8
 /* 800857D8 000823B8  7C 08 03 A6 */	mtlr r0
@@ -189,10 +189,10 @@ ftData_8008578C:
 .global ftData_800857E0
 ftData_800857E0:
 /* 800857E0 000823C0  7C 08 02 A6 */	mflr r0
-/* 800857E4 000823C4  3C 80 80 3C */	lis r4, ftData_803C2048@ha
+/* 800857E4 000823C4  3C 80 80 3C */	lis r4, ftData_UnkMotionStates5@ha
 /* 800857E8 000823C8  90 01 00 04 */	stw r0, 4(r1)
 /* 800857EC 000823CC  54 63 10 3A */	slwi r3, r3, 2
-/* 800857F0 000823D0  38 04 20 48 */	addi r0, r4, ftData_803C2048@l
+/* 800857F0 000823D0  38 04 20 48 */	addi r0, r4, ftData_UnkMotionStates5@l
 /* 800857F4 000823D4  94 21 FF F8 */	stwu r1, -8(r1)
 /* 800857F8 000823D8  7C 60 1A 14 */	add r3, r0, r3
 /* 800857FC 000823DC  81 83 00 00 */	lwz r12, 0(r3)
@@ -438,9 +438,9 @@ ftData_80085B10:
 /* 80085B48 00082728  48 2F 50 81 */	bl HSD_ObjAlloc
 /* 80085B4C 0008272C  90 7D 05 A0 */	stw r3, 0x5a0(r29)
 /* 80085B50 00082730  38 80 00 00 */	li r4, 0
-/* 80085B54 00082734  3C 60 80 3C */	lis r3, ftData_803C0FC8@ha
+/* 80085B54 00082734  3C 60 80 3C */	lis r3, ftData_Table_Unk0@ha
 /* 80085B58 00082738  90 9D 05 A4 */	stw r4, 0x5a4(r29)
-/* 80085B5C 0008273C  38 63 0F C8 */	addi r3, r3, ftData_803C0FC8@l
+/* 80085B5C 0008273C  38 63 0F C8 */	addi r3, r3, ftData_Table_Unk0@l
 /* 80085B60 00082740  57 C0 18 38 */	slwi r0, r30, 3
 /* 80085B64 00082744  90 9D 05 A8 */	stw r4, 0x5a8(r29)
 /* 80085B68 00082748  7C 83 02 14 */	add r4, r3, r0

@@ -70,7 +70,7 @@ f32 ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
                        (stickRangeMinPos - stickRangeMinNeg));
 }
 
-void ftCaptain_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftCa_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -89,7 +89,7 @@ void ftCaptain_SpecialN_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftCaptain_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftCa_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -108,7 +108,7 @@ void ftCaptain_SpecialAirN_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftCaptain_SpecialN_Anim(HSD_GObj* gobj)
+void ftCa_SpecialN_Anim(HSD_GObj* gobj)
 {
     ftCaptain_SpecialN_CreateWindEffect(gobj);
 
@@ -117,7 +117,7 @@ void ftCaptain_SpecialN_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialAirN_Anim(HSD_GObj* gobj)
+void ftCa_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     ftCaptain_SpecialN_CreateWindEffect(gobj);
 
@@ -126,12 +126,12 @@ void ftCaptain_SpecialAirN_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialN_IASA(HSD_GObj* gobj)
+void ftCa_SpecialN_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftCaptain_SpecialAirN_IASA(HSD_GObj* gobj)
+void ftCa_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
@@ -147,7 +147,7 @@ void ftCaptain_SpecialAirN_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialN_Phys(HSD_GObj* gobj)
+void ftCa_SpecialN_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     s32 ftKind;
@@ -181,7 +181,7 @@ void ftCaptain_SpecialN_Phys(HSD_GObj* gobj)
     ft_80084FA8(gobj);
 }
 
-void ftCaptain_SpecialAirN_Phys(HSD_GObj* gobj)
+void ftCa_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = captainAttrs = getFtSpecialAttrs(fp);
@@ -234,7 +234,7 @@ static Fighter_MotionStateChangeFlags const transition_flags =
     FtStateChange_Unk_19 | FtStateChange_SkipUpdateModelPartVis |
     FtStateChange_SkipUpdateModelFlag | FtStateChange_Unk_27;
 
-void ftCaptain_SpecialN_Coll(HSD_GObj* gobj)
+void ftCa_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (ft_800827A0(gobj) == false) {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -247,7 +247,7 @@ void ftCaptain_SpecialN_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialAirN_Coll(HSD_GObj* gobj)
+void ftCa_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != false) {
         Fighter* fp = GET_FIGHTER(gobj);

@@ -11,23 +11,23 @@
 #include <stddef.h>
 
 static usize_t const states_count = ftMario_MS_Count - ftCo_MS_Count;
-extern MotionState ftMario_MotionStateTable[states_count];
+extern MotionState ftMr_Init_MotionStateTable[states_count];
 
 static usize_t const aux_states_count = 2;
-extern MotionState lbl_803C7260[aux_states_count];
+extern MotionState ftMr_Init_UnkMotionStates0[aux_states_count];
 
-void ftMario_OnDeath(HSD_GObj*);
-void ftMario_OnLoadForDrMario(Fighter*);
-void ftMario_OnLoad(HSD_GObj*);
-void ftMario_OnTakeDamage(HSD_GObj*);
-void ftMario_OnItemPickup(HSD_GObj*, bool);
-void ftMario_OnItemInvisible(HSD_GObj*);
-void ftMario_OnItemVisible(HSD_GObj*);
-void ftMario_OnItemDrop(HSD_GObj*, bool);
-void ftMario_LoadSpecialAttrs(HSD_GObj*);
-void ftMario_OnKnockbackEnter(HSD_GObj*);
-void ftMario_OnKnockbackExit(HSD_GObj*);
-void ftMario_800E0CAC(s32, s32*, s32*);
-char* ftMario_GetMotionFileString(enum_t);
+void ftMr_Init_OnDeath(HSD_GObj*);
+void ftMr_Init_OnLoadForDrMario(Fighter*);
+void ftMr_Init_OnLoad(HSD_GObj*);
+void ftMr_Init_OnTakeDamage(HSD_GObj*);
+void ftMr_Init_OnItemPickup(HSD_GObj*, bool);
+void ftMr_Init_OnItemInvisible(HSD_GObj*);
+void ftMr_Init_OnItemVisible(HSD_GObj*);
+void ftMr_Init_OnItemDrop(HSD_GObj*, bool);
+void ftMr_Init_LoadSpecialAttrs(HSD_GObj*);
+void ftMr_Init_OnKnockbackEnter(HSD_GObj*);
+void ftMr_Init_OnKnockbackExit(HSD_GObj*);
+void ftMr_Init_UnkDemoCallbacks0(s32, s32*, s32*);
+char* ftMr_Init_GetMotionFileString(enum_t);
 
 #endif

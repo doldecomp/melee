@@ -1,16 +1,16 @@
 #include "ftSeak/ftSeak_SpecialHi.h"
 
-f32 const ftSeak_804D9660 = 0.0F;
-f32 const ftSeak_804D9664 = 1.0F;
-f64 const ftSeak_804D9668 = 4503601774854144.0;
-f32 const ftSeak_804D9670 = 0.01745329238474369F;
-f32 const ftSeak_804D9674 = 90.0F;
-f64 const ftSeak_804D9678 = 0.5;
-f64 const ftSeak_804D9680 = 3.0;
-f32 const ftSeak_804D9688 = 1.5707963705062866F;
-f32 const ftSeak_804D968C = 35.0F;
-f32 const ftSeak_804D9690 = 0.0010000000474974513F;
-f32 const ftSeak_804D9694 = 10.0F;
+f32 const ftSk_804D9660 = 0.0F;
+f32 const ftSk_804D9664 = 1.0F;
+f64 const ftSk_804D9668 = 4503601774854144.0;
+f32 const ftSk_804D9670 = 0.01745329238474369F;
+f32 const ftSk_804D9674 = 90.0F;
+f64 const ftSk_804D9678 = 0.5;
+f64 const ftSk_804D9680 = 3.0;
+f32 const ftSk_804D9688 = 1.5707963705062866F;
+f32 const ftSk_804D968C = 35.0F;
+f32 const ftSk_804D9690 = 0.0010000000474974513F;
+f32 const ftSk_804D9694 = 10.0F;
 
 // 80112ED8 - 80112F48 (0x70 bytes)
 

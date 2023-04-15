@@ -5,13 +5,13 @@
 
 #include "ft/types.h"
 
-extern MotionState ftMasterHand_MotionStateTable[];
-extern char lbl_803D4070[];
-extern char lbl_803D407C[];
-extern Fighter_CostumeStrings lbl_803D40C4[];
-extern char lbl_803D40B8[];
+extern MotionState ftMh_Init_MotionStateTable[];
+extern char ftMh_Init_DatFilename[];
+extern char ftMh_Init_DataName[];
+extern Fighter_CostumeStrings ftMh_Init_CostumeStrings[];
+extern char ftMh_Init_AnimDatFilename[];
 
-void ftMasterhand_OnDeath(HSD_GObj* gobj);
-void ftMasterhand_OnLoad(HSD_GObj* gobj);
+void ftMh_Init_OnDeath(HSD_GObj* gobj);
+void ftMh_Init_OnLoad(HSD_GObj* gobj);
 
 #endif

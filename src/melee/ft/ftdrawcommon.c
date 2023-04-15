@@ -512,8 +512,8 @@ lbl_80080B74:
 /* 80080B90 0007D770  38 C0 00 00 */	li r6, 0
 /* 80080B94 0007D774  48 2E FE 49 */	bl HSD_JObjDispAll
 /* 80080B98 0007D778  80 9F 00 04 */	lwz r4, 4(r31)
-/* 80080B9C 0007D77C  3C 60 80 3C */	lis r3, ftData_803C20CC@ha
-/* 80080BA0 0007D780  38 03 20 CC */	addi r0, r3, ftData_803C20CC@l
+/* 80080B9C 0007D77C  3C 60 80 3C */	lis r3, ftData_UnkMtxFunc0@ha
+/* 80080BA0 0007D780  38 03 20 CC */	addi r0, r3, ftData_UnkMtxFunc0@l
 /* 80080BA4 0007D784  54 83 10 3A */	slwi r3, r4, 2
 /* 80080BA8 0007D788  7C 60 1A 14 */	add r3, r0, r3
 /* 80080BAC 0007D78C  81 83 00 00 */	lwz r12, 0(r3)
@@ -796,9 +796,9 @@ void ftDrawCommmon_800805C8(HSD_GObj* gobj, s32 arg1, s32 arg2)
             }
             fighter0 = gobj->hsd_obj;
             HSD_JObjDispAll(fighter0, phi_r29, func_80390EB8(arg1), 0);
-            if (ftData_803C20CC[fighter->x4_fighterKind] != NULL) {
-                ftData_803C20CC[fighter->x4_fighterKind](gobj, arg1,
-                                                         (MtxPtr) phi_r29);
+            if (ftData_UnkMtxFunc0[fighter->x4_fighterKind] != NULL) {
+                ftData_UnkMtxFunc0[fighter->x4_fighterKind](gobj, arg1,
+                                                            (MtxPtr) phi_r29);
             }
             ft_800C8AF0(fighter);
             ft_8009F7F8(fighter);
@@ -920,8 +920,8 @@ lbl_80080D74:
 /* 80080D8C 0007D96C  38 C0 00 00 */	li r6, 0
 /* 80080D90 0007D970  48 2E FC 4D */	bl HSD_JObjDispAll
 /* 80080D94 0007D974  80 9F 00 04 */	lwz r4, 4(r31)
-/* 80080D98 0007D978  3C 60 80 3C */	lis r3, ftData_803C20CC@ha
-/* 80080D9C 0007D97C  38 03 20 CC */	addi r0, r3, ftData_803C20CC@l
+/* 80080D98 0007D978  3C 60 80 3C */	lis r3, ftData_UnkMtxFunc0@ha
+/* 80080D9C 0007D97C  38 03 20 CC */	addi r0, r3, ftData_UnkMtxFunc0@l
 /* 80080DA0 0007D980  54 83 10 3A */	slwi r3, r4, 2
 /* 80080DA4 0007D984  7C 60 1A 14 */	add r3, r0, r3
 /* 80080DA8 0007D988  81 83 00 00 */	lwz r12, 0(r3)
@@ -1020,9 +1020,9 @@ void ftDrawCommmon_80080C28(HSD_GObj* gobj, s32 arg1)
             temp_r27 = gobj->hsd_obj;
             HSD_JObjDispAll(temp_r27, (MtxPtr) phi_r28, func_80390EB8(arg1),
                             0);
-            if (ftData_803C20CC[fighter->x4_fighterKind] != NULL) {
-                ftData_803C20CC[fighter->x4_fighterKind](gobj, arg1,
-                                                         (MtxPtr) phi_r28);
+            if (ftData_UnkMtxFunc0[fighter->x4_fighterKind] != NULL) {
+                ftData_UnkMtxFunc0[fighter->x4_fighterKind](gobj, arg1,
+                                                            (MtxPtr) phi_r28);
             }
             ft_800C8AF0(fighter);
             ft_8009F7F8(fighter);

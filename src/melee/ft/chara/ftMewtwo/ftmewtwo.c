@@ -8,100 +8,97 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-MotionState ftMewtwo_MotionStateTable[] = {
-    { 295, 0x00340111, 0x12000000, ftMewtwo_SpecialNStart_Anim,
-      ftMewtwo_SpecialNStart_IASA, ftMewtwo_SpecialNStart_Phys,
-      ftMewtwo_SpecialNStart_Coll, ftCamera_UpdateCameraBox },
-    { 296, 0x003C0111, 0x12000000, ftMewtwo_SpecialNLoop_Anim,
-      ftMewtwo_SpecialNLoop_IASA, ftMewtwo_SpecialNLoop_Phys,
-      ftMewtwo_SpecialNLoop_Coll, ftCamera_UpdateCameraBox },
-    { 297, 0x003C0111, 0x12000000, ftMewtwo_SpecialNFull_Anim,
-      ftMewtwo_SpecialNFull_IASA, ftMewtwo_SpecialNFull_Phys,
-      ftMewtwo_SpecialNFull_Coll, ftCamera_UpdateCameraBox },
-    { 298, 0x00340111, 0x12000000, ftMewtwo_SpecialNCancel_Anim,
-      ftMewtwo_SpecialNCancel_IASA, ftMewtwo_SpecialNCancel_Phys,
-      ftMewtwo_SpecialNCancel_Coll, ftCamera_UpdateCameraBox },
-    { 299, 0x00340111, 0x12000000, ftMewtwo_SpecialNEnd_Anim,
-      ftMewtwo_SpecialNEnd_IASA, ftMewtwo_SpecialNEnd_Phys,
-      ftMewtwo_SpecialNEnd_Coll, ftCamera_UpdateCameraBox },
-    { 300, 0x00340511, 0x12000000, ftMewtwo_SpecialAirNStart_Anim,
-      ftMewtwo_SpecialAirNStart_IASA, ftMewtwo_SpecialAirNStart_Phys,
-      ftMewtwo_SpecialAirNStart_Coll, ftCamera_UpdateCameraBox },
-    { 301, 0x003C0511, 0x12000000, ftMewtwo_SpecialAirNLoop_Anim,
-      ftMewtwo_SpecialAirNLoop_IASA, ftMewtwo_SpecialAirNLoop_Phys,
-      ftMewtwo_SpecialAirNLoop_Coll, ftCamera_UpdateCameraBox },
-    { 302, 0x003C0511, 0x12000000, ftMewtwo_SpecialAirNFull_Anim,
-      ftMewtwo_SpecialAirNFull_IASA, ftMewtwo_SpecialAirNFull_Phys,
-      ftMewtwo_SpecialAirNFull_Coll, ftCamera_UpdateCameraBox },
-    { 303, 0x00340511, 0x12000000, ftMewtwo_SpecialAirNCancel_Anim,
-      ftMewtwo_SpecialAirNCancel_IASA, ftMewtwo_SpecialAirNCancel_Phys,
-      ftMewtwo_SpecialAirNCancel_Coll, ftCamera_UpdateCameraBox },
-    { 304, 0x00340511, 0x12000000, ftMewtwo_SpecialAirNEnd_Anim,
-      ftMewtwo_SpecialAirNEnd_IASA, ftMewtwo_SpecialAirNEnd_Phys,
-      ftMewtwo_SpecialAirNEnd_Coll, ftCamera_UpdateCameraBox },
-    { 305, 0x00341012, 0x13000000, ftMewtwo_SpecialS_Anim,
-      ftMewtwo_SpecialS_IASA, ftMewtwo_SpecialS_Phys, ftMewtwo_SpecialS_Coll,
+MotionState ftMt_Init_MotionStateTable[] = {
+    { 295, 0x00340111, 0x12000000, ftMt_SpecialNStart_Anim,
+      ftMt_SpecialNStart_IASA, ftMt_SpecialNStart_Phys,
+      ftMt_SpecialNStart_Coll, ftCamera_UpdateCameraBox },
+    { 296, 0x003C0111, 0x12000000, ftMt_SpecialNLoop_Anim,
+      ftMt_SpecialNLoop_IASA, ftMt_SpecialNLoop_Phys, ftMt_SpecialNLoop_Coll,
       ftCamera_UpdateCameraBox },
-    { 306, 0x00341412, 0x13000000, ftMewtwo_SpecialAirS_Anim,
-      ftMewtwo_SpecialAirS_IASA, ftMewtwo_SpecialAirS_Phys,
-      ftMewtwo_SpecialAirS_Coll, ftCamera_UpdateCameraBox },
-    { 307, 0x00340013, 0x14000000, ftMewtwo_SpecialHiStart_Anim,
-      ftMewtwo_SpecialHiStart_IASA, ftMewtwo_SpecialHiStart_Phys,
-      ftMewtwo_SpecialHiStart_Coll, ftCamera_UpdateCameraBox },
-    { 309, 0x00340013, 0x14000000, ftMewtwo_SpecialHi_Anim,
-      ftMewtwo_SpecialHi_IASA, ftMewtwo_SpecialHi_Phys,
-      ftMewtwo_SpecialHi_Coll, ftCamera_UpdateCameraBox },
-    { 308, 0x00340013, 0x14000000, ftMewtwo_SpecialHiLost_Anim,
-      ftMewtwo_SpecialHiLost_IASA, ftMewtwo_SpecialHiLost_Phys,
-      ftMewtwo_SpecialHiLost_Coll, ftCamera_UpdateCameraBox },
-    { 310, 0x00340413, 0x14000000, ftMewtwo_SpecialAirHiStart_Anim,
-      ftMewtwo_SpecialAirHiStart_IASA, ftMewtwo_SpecialAirHiStart_Phys,
-      ftMewtwo_SpecialAirHiStart_Coll, ftCamera_UpdateCameraBox },
-    { 309, 0x00340413, 0x14000000, ftMewtwo_SpecialAirHi_Anim,
-      ftMewtwo_SpecialAirHi_IASA, ftMewtwo_SpecialAirHi_Phys,
-      ftMewtwo_SpecialAirHi_Coll, ftCamera_UpdateCameraBox },
-    { 311, 0x00340413, 0x14000000, ftMewtwo_SpecialAirHiLost_Anim,
-      ftMewtwo_SpecialAirHiLost_IASA, ftMewtwo_SpecialAirHiLost_Phys,
-      ftMewtwo_SpecialAirHiLost_Coll, ftCamera_UpdateCameraBox },
-    { 312, 0x00340114, 0x15000000, ftMewtwo_SpecialLw_Anim,
-      ftMewtwo_SpecialLw_IASA, ftMewtwo_SpecialLw_Phys,
-      ftMewtwo_SpecialLw_Coll, ftCamera_UpdateCameraBox },
-    { 313, 0x00340514, 0x15000000, ftMewtwo_SpecialAirLw_Anim,
-      ftMewtwo_SpecialAirLw_IASA, ftMewtwo_SpecialAirLw_Phys,
-      ftMewtwo_SpecialAirLw_Coll, ftCamera_UpdateCameraBox },
+    { 297, 0x003C0111, 0x12000000, ftMt_SpecialNFull_Anim,
+      ftMt_SpecialNFull_IASA, ftMt_SpecialNFull_Phys, ftMt_SpecialNFull_Coll,
+      ftCamera_UpdateCameraBox },
+    { 298, 0x00340111, 0x12000000, ftMt_SpecialNCancel_Anim,
+      ftMt_SpecialNCancel_IASA, ftMt_SpecialNCancel_Phys,
+      ftMt_SpecialNCancel_Coll, ftCamera_UpdateCameraBox },
+    { 299, 0x00340111, 0x12000000, ftMt_SpecialNEnd_Anim,
+      ftMt_SpecialNEnd_IASA, ftMt_SpecialNEnd_Phys, ftMt_SpecialNEnd_Coll,
+      ftCamera_UpdateCameraBox },
+    { 300, 0x00340511, 0x12000000, ftMt_SpecialAirNStart_Anim,
+      ftMt_SpecialAirNStart_IASA, ftMt_SpecialAirNStart_Phys,
+      ftMt_SpecialAirNStart_Coll, ftCamera_UpdateCameraBox },
+    { 301, 0x003C0511, 0x12000000, ftMt_SpecialAirNLoop_Anim,
+      ftMt_SpecialAirNLoop_IASA, ftMt_SpecialAirNLoop_Phys,
+      ftMt_SpecialAirNLoop_Coll, ftCamera_UpdateCameraBox },
+    { 302, 0x003C0511, 0x12000000, ftMt_SpecialAirNFull_Anim,
+      ftMt_SpecialAirNFull_IASA, ftMt_SpecialAirNFull_Phys,
+      ftMt_SpecialAirNFull_Coll, ftCamera_UpdateCameraBox },
+    { 303, 0x00340511, 0x12000000, ftMt_SpecialAirNCancel_Anim,
+      ftMt_SpecialAirNCancel_IASA, ftMt_SpecialAirNCancel_Phys,
+      ftMt_SpecialAirNCancel_Coll, ftCamera_UpdateCameraBox },
+    { 304, 0x00340511, 0x12000000, ftMt_SpecialAirNEnd_Anim,
+      ftMt_SpecialAirNEnd_IASA, ftMt_SpecialAirNEnd_Phys,
+      ftMt_SpecialAirNEnd_Coll, ftCamera_UpdateCameraBox },
+    { 305, 0x00341012, 0x13000000, ftMt_SpecialS_Anim, ftMt_SpecialS_IASA,
+      ftMt_SpecialS_Phys, ftMt_SpecialS_Coll, ftCamera_UpdateCameraBox },
+    { 306, 0x00341412, 0x13000000, ftMt_SpecialAirS_Anim,
+      ftMt_SpecialAirS_IASA, ftMt_SpecialAirS_Phys, ftMt_SpecialAirS_Coll,
+      ftCamera_UpdateCameraBox },
+    { 307, 0x00340013, 0x14000000, ftMt_SpecialHiStart_Anim,
+      ftMt_SpecialHiStart_IASA, ftMt_SpecialHiStart_Phys,
+      ftMt_SpecialHiStart_Coll, ftCamera_UpdateCameraBox },
+    { 309, 0x00340013, 0x14000000, ftMt_SpecialHi_Anim, ftMt_SpecialHi_IASA,
+      ftMt_SpecialHi_Phys, ftMt_SpecialHi_Coll, ftCamera_UpdateCameraBox },
+    { 308, 0x00340013, 0x14000000, ftMt_SpecialHiLost_Anim,
+      ftMt_SpecialHiLost_IASA, ftMt_SpecialHiLost_Phys,
+      ftMt_SpecialHiLost_Coll, ftCamera_UpdateCameraBox },
+    { 310, 0x00340413, 0x14000000, ftMt_SpecialAirHiStart_Anim,
+      ftMt_SpecialAirHiStart_IASA, ftMt_SpecialAirHiStart_Phys,
+      ftMt_SpecialAirHiStart_Coll, ftCamera_UpdateCameraBox },
+    { 309, 0x00340413, 0x14000000, ftMt_SpecialAirHi_Anim,
+      ftMt_SpecialAirHi_IASA, ftMt_SpecialAirHi_Phys, ftMt_SpecialAirHi_Coll,
+      ftCamera_UpdateCameraBox },
+    { 311, 0x00340413, 0x14000000, ftMt_SpecialAirHiLost_Anim,
+      ftMt_SpecialAirHiLost_IASA, ftMt_SpecialAirHiLost_Phys,
+      ftMt_SpecialAirHiLost_Coll, ftCamera_UpdateCameraBox },
+    { 312, 0x00340114, 0x15000000, ftMt_SpecialLw_Anim, ftMt_SpecialLw_IASA,
+      ftMt_SpecialLw_Phys, ftMt_SpecialLw_Coll, ftCamera_UpdateCameraBox },
+    { 313, 0x00340514, 0x15000000, ftMt_SpecialAirLw_Anim,
+      ftMt_SpecialAirLw_IASA, ftMt_SpecialAirLw_Phys, ftMt_SpecialAirLw_Coll,
+      ftCamera_UpdateCameraBox },
 };
 
-char lbl_803D0D80[] = "PlMt.dat";
-char lbl_803D0D8C[] = "ftDataMewtwo";
-char lbl_803D0D9C[] = "PlMtNr.dat";
-char lbl_803D0DA8[] = "PlyMewtwo5K_Share_joint";
-char lbl_803D0DC0[] = "PlyMewtwo5K_Share_matanim_joint";
-char lbl_803D0DE0[] = "PlMtRe.dat";
-char lbl_803D0DEC[] = "PlyMewtwo5KRe_Share_joint";
-char lbl_803D0E08[] = "PlyMewtwo5KRe_Share_matanim_joint";
-char lbl_803D0E2C[] = "PlMtBu.dat";
-char lbl_803D0E38[] = "PlyMewtwo5KBu_Share_joint";
-char lbl_803D0E54[] = "PlyMewtwo5KBu_Share_matanim_joint";
-char lbl_803D0E78[] = "PlMtGr.dat";
-char lbl_803D0E84[] = "PlyMewtwo5KGr_Share_joint";
-char lbl_803D0EA0[] = "PlyMewtwo5KGr_Share_matanim_joint";
-char lbl_803D0EC4[] = "PlMtAJ.dat";
+char ftMt_Init_DatFilename[] = "PlMt.dat";
+char ftMt_Init_DataName[] = "ftDataMewtwo";
+char ftMt_Init_803D0D9C[] = "PlMtNr.dat";
+char ftMt_Init_803D0DA8[] = "PlyMewtwo5K_Share_joint";
+char ftMt_Init_803D0DC0[] = "PlyMewtwo5K_Share_matanim_joint";
+char ftMt_Init_803D0DE0[] = "PlMtRe.dat";
+char ftMt_Init_803D0DEC[] = "PlyMewtwo5KRe_Share_joint";
+char ftMt_Init_803D0E08[] = "PlyMewtwo5KRe_Share_matanim_joint";
+char ftMt_Init_803D0E2C[] = "PlMtBu.dat";
+char ftMt_Init_803D0E38[] = "PlyMewtwo5KBu_Share_joint";
+char ftMt_Init_803D0E54[] = "PlyMewtwo5KBu_Share_matanim_joint";
+char ftMt_Init_803D0E78[] = "PlMtGr.dat";
+char ftMt_Init_803D0E84[] = "PlyMewtwo5KGr_Share_joint";
+char ftMt_Init_803D0EA0[] = "PlyMewtwo5KGr_Share_matanim_joint";
+char ftMt_Init_AnimDatFilename[] = "PlMtAJ.dat";
 
-Fighter_DemoStrings lbl_803D0F4C = {
+Fighter_DemoStrings ftMt_Init_DemoMotionFilenames = {
     "ftDemoResultMotionFileMewtwo",
     "ftDemoIntroMotionFileMewtwo",
     "ftDemoEndingMotionFileMewtwo",
     "ftDemoViWaitMotionFileMewtwo",
 };
 
-Fighter_CostumeStrings lbl_803D0F5C[] = {
-    { lbl_803D0D9C, lbl_803D0DA8, lbl_803D0DC0 },
-    { lbl_803D0DE0, lbl_803D0DEC, lbl_803D0E08 },
-    { lbl_803D0E2C, lbl_803D0E38, lbl_803D0E54 },
-    { lbl_803D0E78, lbl_803D0E84, lbl_803D0EA0 },
+Fighter_CostumeStrings ftMt_Init_CostumeStrings[] = {
+    { ftMt_Init_803D0D9C, ftMt_Init_803D0DA8, ftMt_Init_803D0DC0 },
+    { ftMt_Init_803D0DE0, ftMt_Init_803D0DEC, ftMt_Init_803D0E08 },
+    { ftMt_Init_803D0E2C, ftMt_Init_803D0E38, ftMt_Init_803D0E54 },
+    { ftMt_Init_803D0E78, ftMt_Init_803D0E84, ftMt_Init_803D0EA0 },
 };
 
-void ftMewtwo_OnDeath(HSD_GObj* gobj)
+void ftMt_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = (Fighter*) gobj->user_data;
     ftParts_80074A4C(gobj, 0, 0);
@@ -112,7 +109,7 @@ void ftMewtwo_OnDeath(HSD_GObj* gobj)
     fp->fv.mt.x223C_isConfusionBoost = false;
 }
 
-void ftMewtwo_OnLoad(HSD_GObj* gobj)
+void ftMt_Init_OnLoad(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     void** item_list = fp->ft_data->x48_items;
@@ -127,36 +124,36 @@ void ftMewtwo_OnLoad(HSD_GObj* gobj)
     it_8026B3F8(item_list[1], It_Kind_Mewtwo_ShadowBall);
 }
 
-void ftMewTwo_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftMt_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
     return;
 }
 
-void ftMewtwo_OnDeath2(HSD_GObj* gobj)
+void ftMt_OnDeath2(HSD_GObj* gobj)
 {
-    ftMewtwo_SpecialLw_RemoveDisable(gobj);
-    ftMewtwo_SpecialN_OnTakeDamage(gobj);
+    ftMt_SpecialLw_RemoveDisable(gobj);
+    ftMt_SpecialN_OnTakeDamage(gobj);
 }
 
-void ftMewtwo_OnTakeDamage(HSD_GObj* gobj)
+void ftMt_OnTakeDamage(HSD_GObj* gobj)
 {
-    ftMewtwo_SpecialLw_RemoveDisable(gobj);
-    ftMewtwo_SpecialN_OnDeath(gobj);
+    ftMt_SpecialLw_RemoveDisable(gobj);
+    ftMt_SpecialN_OnDeath(gobj);
 }
 
-void ftMewTwo_OnItemDrop(HSD_GObj* gobj, bool bool) {}
+void ftMt_Init_OnItemDrop(HSD_GObj* gobj, bool bool) {}
 
-void ftMewTwo_OnItemInvisible(HSD_GObj* gobj)
-{
-    return;
-}
-
-void ftMewTwo_OnItemVisible(HSD_GObj* gobj)
+void ftMt_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftMewTwo_80144F58(HSD_GObj* gobj)
+void ftMt_Init_OnItemVisible(HSD_GObj* gobj)
+{
+    return;
+}
+
+void ftMt_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* attr = fp->x2D4_specialAttributes;
@@ -167,7 +164,7 @@ void ftMewTwo_80144F58(HSD_GObj* gobj)
     }
 }
 
-void ftMewTwo_LoadSpecialAttrs(HSD_GObj* gobj)
+void ftMt_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftMewtwoAttributes);
     if (fp->x34_scale.y != 1.0f) {
@@ -176,12 +173,12 @@ void ftMewTwo_LoadSpecialAttrs(HSD_GObj* gobj)
     }
 }
 
-void ftMewTwo_OnKnockbackEnter(HSD_GObj* gobj)
+void ftMt_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 2);
 }
 
-void ftMewTwo_OnKnockbackExit(HSD_GObj* gobj)
+void ftMt_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 2);
 }

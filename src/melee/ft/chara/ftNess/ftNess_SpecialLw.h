@@ -4,8 +4,8 @@
 #include <platform.h>
 #include <baselib/forward.h>
 
-void ftNess_SpecialAirLwStart_Anim(HSD_GObj* gobj);
-void ftNess_SpecialAirLwStart_Coll(HSD_GObj* gobj);
-void ftNess_SpecialLwStart_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirLwStart_Anim(HSD_GObj* gobj);
+void ftNs_SpecialAirLwStart_Coll(HSD_GObj* gobj);
+void ftNs_SpecialLwStart_Anim(HSD_GObj* gobj);
 
 #endif

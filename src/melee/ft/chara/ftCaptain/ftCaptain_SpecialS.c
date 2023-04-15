@@ -14,7 +14,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* gobj)
+void ftCa_SpecialS_RemoveGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -27,8 +27,8 @@ void ftCaptain_SpecialS_RemoveGFX(HSD_GObj* gobj)
 static void setCallbacks(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = ftCaptain_800E28C8;
-    fp->cb.x21E4_callback_OnDeath2 = ftCaptain_800E28C8;
+    fp->cb.x21DC_callback_OnTakeDamage = ftCa_Init_800E28C8;
+    fp->cb.x21E4_callback_OnDeath2 = ftCa_Init_800E28C8;
 }
 
 static void resetCmdVarsGround(HSD_GObj* gobj)
@@ -39,7 +39,7 @@ static void resetCmdVarsGround(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp);
 }
 
-void ftCaptain_SpecialS_StartMotion(HSD_GObj* gobj)
+void ftCa_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -65,7 +65,7 @@ void ftCaptain_SpecialS_StartMotion(HSD_GObj* gobj)
     fp->fv.ca.during_specials = false;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21F4_callback = ftCaptain_SpecialS_OnDetect;
+    fp->cb.x21F4_callback = ftCa_SpecialS_OnDetect;
 
     {
         Vec3* vel = &fp->x80_self_vel;
@@ -104,7 +104,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
     fp->fv.ca.during_specials = false;
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21F4_callback = ftCaptain_SpecialS_OnDetect;
+    fp->cb.x21F4_callback = ftCa_SpecialS_OnDetect;
 
     {
         Vec3* vel = &fp->x80_self_vel;
@@ -112,7 +112,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialAirS_StartMotion(HSD_GObj* gobj)
+void ftCa_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     setupAirStart(gobj);
@@ -154,7 +154,7 @@ static void onDetectAir(HSD_GObj* gobj)
     fp->x80_self_vel.z = 0;
 }
 
-void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
+void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -207,14 +207,14 @@ void ftCaptain_SpecialS_OnDetect(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialSStart_Anim(HSD_GObj* gobj)
+void ftCa_SpecialSStart_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftCaptain_SpecialS_Anim(HSD_GObj* gobj)
+void ftCa_SpecialS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -242,7 +242,7 @@ void ftCaptain_SpecialS_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* gobj)
+void ftCa_SpecialAirSStart_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -263,7 +263,7 @@ void ftCaptain_SpecialAirSStart_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialAirS_Anim(HSD_GObj* gobj)
+void ftCa_SpecialAirS_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
@@ -304,25 +304,25 @@ void ftCaptain_SpecialAirS_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialSStart_IASA(HSD_GObj* gobj) {}
+void ftCa_SpecialSStart_IASA(HSD_GObj* gobj) {}
 
-void ftCaptain_SpecialS_IASA(HSD_GObj* gobj) {}
+void ftCa_SpecialS_IASA(HSD_GObj* gobj) {}
 
-void ftCaptain_SpecialAirSStart_IASA(HSD_GObj* gobj) {}
+void ftCa_SpecialAirSStart_IASA(HSD_GObj* gobj) {}
 
-void ftCaptain_SpecialAirS_IASA(HSD_GObj* gobj) {}
+void ftCa_SpecialAirS_IASA(HSD_GObj* gobj) {}
 
-void ftCaptain_SpecialSStart_Phys(HSD_GObj* gobj)
+void ftCa_SpecialSStart_Phys(HSD_GObj* gobj)
 {
     ft_80084FA8(gobj);
 }
 
-void ftCaptain_SpecialS_Phys(HSD_GObj* gobj)
+void ftCa_SpecialS_Phys(HSD_GObj* gobj)
 {
     ft_80084FA8(gobj);
 }
 
-void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* gobj)
+void ftCa_SpecialAirSStart_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
@@ -344,7 +344,7 @@ void ftCaptain_SpecialAirSStart_Phys(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialAirS_Phys(HSD_GObj* gobj)
+void ftCa_SpecialAirS_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
@@ -366,7 +366,7 @@ void ftCaptain_SpecialAirS_Phys(HSD_GObj* gobj)
 
 // Captain Falcon & Ganondorf's grounded
 // Raptor Boost / Gerudo Dragon Start Collision callback
-void ftCaptain_SpecialSStart_Coll(HSD_GObj* gobj)
+void ftCa_SpecialSStart_Coll(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -410,7 +410,7 @@ void ftCaptain_SpecialSStart_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialS_Coll(HSD_GObj* gobj)
+void ftCa_SpecialS_Coll(HSD_GObj* gobj)
 {
     Fighter* temp_fp = GET_FIGHTER(gobj);
     Fighter* fp;
@@ -434,7 +434,7 @@ void ftCaptain_SpecialS_Coll(HSD_GObj* gobj)
     }
 }
 
-void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* gobj)
+void ftCa_SpecialAirSStart_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = fp->x2D4_specialAttributes;
@@ -447,7 +447,7 @@ void ftCaptain_SpecialAirSStart_Coll(HSD_GObj* gobj)
 
 // Captain Falcon & Ganondorf's aerial Raptor Boost / Gerudo Dragon Hit
 // Collision callback
-void ftCaptain_SpecialAirS_Coll(HSD_GObj* gobj)
+void ftCa_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCaptain_DatAttrs* captainAttrs = getFtSpecialAttrsD(fp);

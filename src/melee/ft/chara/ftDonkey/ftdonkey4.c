@@ -5,17 +5,17 @@
 #include "ft/ft_0877.h"
 #include "ft/inlines.h"
 
-bool ftDonkey_800E0134(HSD_GObj* gobj)
+bool ftDk_Unk4_800E0134(HSD_GObj* gobj)
 {
     if (ft_800C97A8(gobj)) {
-        ftDonkey_800E017C(gobj);
+        ftDk_Unk4_800E017C(gobj);
         return true;
     }
 
     return false;
 }
 
-void ftDonkey_800E017C(HSD_GObj* gobj)
+void ftDk_Unk4_800E017C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);

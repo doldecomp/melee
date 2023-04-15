@@ -5,15 +5,15 @@
 
 #include <baselib/gobj.h>
 
-void ftMasterHand_80153A64(HSD_GObj*);
-void ftMasterHand_80153A30(HSD_GObj* gobj);
-void ftMasterHand_801539EC(HSD_GObj* arg0);
-void ftMasterHand_80153A60(HSD_GObj* gobj);
-void ftMasterHand_80153A64(HSD_GObj* arg0);
+void ftMh_Unk18_80153A64(HSD_GObj*);
+void ftMh_Unk18_80153A30(HSD_GObj* gobj);
+void ftMh_Unk18_801539EC(HSD_GObj* arg0);
+void ftMh_Unk18_80153A60(HSD_GObj* gobj);
+void ftMh_Unk18_80153A64(HSD_GObj* arg0);
 
-void ftMasterHand_80153A30(HSD_GObj* gobj);
-void ftMasterHand_80153A60(HSD_GObj* gobj);
-void ftMasterHand_80153A64(HSD_GObj* arg0);
-void ftMasterHand_801539EC(HSD_GObj* arg0);
+void ftMh_Unk18_80153A30(HSD_GObj* gobj);
+void ftMh_Unk18_80153A60(HSD_GObj* gobj);
+void ftMh_Unk18_80153A64(HSD_GObj* arg0);
+void ftMh_Unk18_801539EC(HSD_GObj* arg0);
 
 #endif

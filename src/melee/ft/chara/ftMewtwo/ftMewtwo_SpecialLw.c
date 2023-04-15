@@ -11,14 +11,14 @@
 
 // 0x80146198
 // https://decomp.me/scratch/QML6g // Reset Disable Stall flag
-void ftMewtwo_SpecialLw_ClearDisableGObj(HSD_GObj* gobj)
+void ftMt_SpecialLw_ClearDisableGObj(HSD_GObj* gobj)
 {
     GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj = NULL;
 }
 
 // 0x801461A8
 // https://decomp.me/scratch/d5gF6 // Remove Disable projectile
-void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* gobj)
+void ftMt_SpecialLw_RemoveDisable(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj != NULL) {
         it_802C49E0(GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj);
@@ -29,7 +29,7 @@ void ftMewtwo_SpecialLw_RemoveDisable(HSD_GObj* gobj)
 // 0x801461F0
 // https://decomp.me/scratch/WnODY // Mewtwo's grounded Disable Motion State
 // handler
-void ftMewtwo_SpecialLw_StartMotion(HSD_GObj* gobj)
+void ftMt_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -46,13 +46,13 @@ void ftMewtwo_SpecialLw_StartMotion(HSD_GObj* gobj)
                               0.0f);
     ftAnim_8006EBA4(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
+    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
 }
 
 // 0x80146264
 // https://decomp.me/scratch/fX4aP // Mewtwo's aerial Disable Motion State
 // handler
-void ftMewtwo_SpecialAirLw_StartMotion(HSD_GObj* gobj)
+void ftMt_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -70,13 +70,13 @@ void ftMewtwo_SpecialAirLw_StartMotion(HSD_GObj* gobj)
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
+    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
 }
 
 // 0x801462DC
 //  https://decomp.me/scratch/2no6L // Mewtwo's grounded Disable Animation
 //  callback
-void ftMewtwo_SpecialLw_Anim(HSD_GObj* gobj)
+void ftMt_SpecialLw_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj != NULL) {
@@ -89,7 +89,7 @@ void ftMewtwo_SpecialLw_Anim(HSD_GObj* gobj)
 }
 
 // 0x80146338 - Mewtwo's aerial Disable Animation callback
-void ftMewtwo_SpecialAirLw_Anim(HSD_GObj* gobj)
+void ftMt_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (GET_FIGHTER(gobj)->fv.mt.x222C_disableGObj != NULL) {
@@ -101,26 +101,26 @@ void ftMewtwo_SpecialAirLw_Anim(HSD_GObj* gobj)
 }
 
 // 0x80146394 - Mewtwo's grounded Disable IASA callback
-void ftMewtwo_SpecialLw_IASA(HSD_GObj* gobj)
+void ftMt_SpecialLw_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 // 0x80146398 - Mewtwo's aerial Disable IASA callback
-void ftMewtwo_SpecialAirLw_IASA(HSD_GObj* gobj)
+void ftMt_SpecialAirLw_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
 // 0x8014639C - Mewtwo's grounded Disable Physics callback
-void ftMewtwo_SpecialLw_Phys(HSD_GObj* gobj)
+void ftMt_SpecialLw_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 // 0x801463BC
 // https://decomp.me/scratch/haV3L // Mewtwo's aerial Disable Physics callback
-void ftMewtwo_SpecialAirLw_Phys(HSD_GObj* gobj)
+void ftMt_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = getFtSpecialAttrsD(fp);
@@ -135,15 +135,15 @@ inline void ftMewtwo_SpecialLw_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.mt.x222C_disableGObj != NULL) {
-        fp->cb.x21E4_callback_OnDeath2 = ftMewtwo_OnDeath2;
-        fp->cb.x21DC_callback_OnTakeDamage = ftMewtwo_OnTakeDamage;
+        fp->cb.x21E4_callback_OnDeath2 = ftMt_OnDeath2;
+        fp->cb.x21DC_callback_OnTakeDamage = ftMt_OnTakeDamage;
     }
 }
 
 // 0x80146410
 // https://decomp.me/scratch/ktqvT // Mewtwo's ground -> air Disable Action
 // State handler
-void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* gobj)
+void ftMt_SpecialLw_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -155,7 +155,7 @@ void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* gobj)
                               FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
+    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
 
     ftMewtwo_SpecialLw_SetCall(gobj);
 
@@ -165,7 +165,7 @@ void ftMewtwo_SpecialLw_GroundToAir(HSD_GObj* gobj)
 // 0x801464B0
 // https://decomp.me/scratch/xNFhq // Mewtwo's air -> ground Disable Action
 // State handler
-void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* gobj)
+void ftMt_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -175,26 +175,26 @@ void ftMewtwo_SpecialAirLw_AirToGround(HSD_GObj* gobj)
                               FTMEWTWO_SPECIALLW_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMewtwo_SpecialLw_CreateDisable;
+    fp->cb.x21BC_callback_Accessory4 = ftMt_SpecialLw_CreateDisable;
 
     ftMewtwo_SpecialLw_SetCall(gobj);
 }
 
 // 0x80146544 - Mewtwo's grounded Disable Collision callback
-void ftMewtwo_SpecialLw_Coll(HSD_GObj* gobj)
+void ftMt_SpecialLw_Coll(HSD_GObj* gobj)
 {
-    ft_8008403C(gobj, ftMewtwo_SpecialLw_GroundToAir);
+    ft_8008403C(gobj, ftMt_SpecialLw_GroundToAir);
 }
 
 // 0x8014656C - Mewtwo's aerial Disable Collision callback
-void ftMewtwo_SpecialAirLw_Coll(HSD_GObj* gobj)
+void ftMt_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
-    ft_80082C74(gobj, ftMewtwo_SpecialAirLw_AirToGround);
+    ft_80082C74(gobj, ftMt_SpecialAirLw_AirToGround);
 }
 
 // 0x80146594
 // https://decomp.me/scratch/rAoIe // Create Disable projectile
-void ftMewtwo_SpecialLw_CreateDisable(HSD_GObj* gobj)
+void ftMt_SpecialLw_CreateDisable(HSD_GObj* gobj)
 {
     Vec3 sp18;
     Fighter* fp = getFighter(gobj);

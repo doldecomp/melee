@@ -6,23 +6,23 @@
 
 #include "ft/types.h"
 
-extern MotionState ftZelda_MotionStateTable[];
-extern char lbl_803CFC98[];
-extern char lbl_803CFCA4[];
-extern Fighter_CostumeStrings lbl_803CFEB0[];
-extern char lbl_803CFE24[];
-extern Fighter_DemoStrings lbl_803CFEA0;
+extern MotionState ftZd_Init_MotionStateTable[];
+extern char ftZd_Init_DatFilename[];
+extern char ftZd_Init_DataName[];
+extern Fighter_CostumeStrings ftZd_Init_CostumeStrings[];
+extern char ftZd_Init_AnimDatFilename[];
+extern Fighter_DemoStrings ftZd_Init_DemoMotionFilenames;
 
-void ftZelda_OnDeath(HSD_GObj* gobj);
-void ftZelda_OnLoad(HSD_GObj* gobj);
-void ftZelda_801393AC(HSD_GObj* gobj);
-void ftZelda_OnItemPickup(HSD_GObj* gobj, bool bool);
-void ftZelda_OnItemInvisible(HSD_GObj* gobj);
-void ftZelda_OnItemVisible(HSD_GObj* gobj);
-void ftZelda_OnItemDrop(HSD_GObj* gobj, bool bool1);
-void ftZelda_LoadSpecialAttrs(HSD_GObj* gobj);
-void ftZelda_801395C8(HSD_GObj* gobj);
-void ftZelda_OnKnockbackEnter(HSD_GObj* gobj);
-void ftZelda_OnKnockbackExit(HSD_GObj* gobj);
+void ftZd_Init_OnDeath(HSD_GObj* gobj);
+void ftZd_Init_OnLoad(HSD_GObj* gobj);
+void ftZd_Init_801393AC(HSD_GObj* gobj);
+void ftZd_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
+void ftZd_Init_OnItemInvisible(HSD_GObj* gobj);
+void ftZd_Init_OnItemVisible(HSD_GObj* gobj);
+void ftZd_Init_OnItemDrop(HSD_GObj* gobj, bool bool1);
+void ftZd_Init_LoadSpecialAttrs(HSD_GObj* gobj);
+void ftZd_Init_801395C8(HSD_GObj* gobj);
+void ftZd_Init_OnKnockbackEnter(HSD_GObj* gobj);
+void ftZd_Init_OnKnockbackExit(HSD_GObj* gobj);
 
 #endif

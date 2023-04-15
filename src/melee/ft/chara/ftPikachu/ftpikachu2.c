@@ -13,7 +13,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftPikachu_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftPk_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -24,7 +24,7 @@ void ftPikachu_SpecialN_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftPikachu_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftPk_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 0x156, 0, 0, 0.0f, 1.0f, 0.0f);
@@ -35,7 +35,7 @@ void ftPikachu_SpecialAirN_StartMotion(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-void ftPikachu_80124908(HSD_GObj* gobj)
+void ftPk_SpecialN_80124908(HSD_GObj* gobj)
 {
     Vec3 sp14;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -72,7 +72,7 @@ void ftPikachu_80124908(HSD_GObj* gobj)
     }
 }
 
-void ftPikachu_80124A20(HSD_GObj* gobj)
+void ftPk_SpecialN_80124A20(HSD_GObj* gobj)
 {
     Vec3 sp14;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -113,21 +113,21 @@ void ftPikachu_80124A20(HSD_GObj* gobj)
     }
 }
 
-void ftPikachu_Stub_80124B6C(HSD_GObj* arg0) {}
+void ftPk_SpecialN_80124B6C(HSD_GObj* arg0) {}
 
-void ftPikachu_Stub_80124B70(HSD_GObj* arg0) {}
+void ftPk_SpecialN_80124B70(HSD_GObj* arg0) {}
 
-void ftPikachu_80124B74(HSD_GObj* gobj)
+void ftPk_SpecialN_80124B74(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftPikachu_80124B94(HSD_GObj* gobj)
+void ftPk_SpecialN_80124B94(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftPikachu_ActionChange_80124BB4(HSD_GObj* gobj)
+void ftPk_SpecialN_ChangeMotion_Unk0(HSD_GObj* gobj)
 {
     Fighter* fp;
     if (!ft_80082708(gobj)) {
@@ -138,7 +138,7 @@ void ftPikachu_ActionChange_80124BB4(HSD_GObj* gobj)
     }
 }
 
-void ftPikachu_ActionChange_80124C20(HSD_GObj* gobj)
+void ftPk_SpecialN_ChangeMotion_Unk1(HSD_GObj* gobj)
 {
     Fighter* fp;
     if (ft_80081D0C(gobj) == 1) {
@@ -150,7 +150,7 @@ void ftPikachu_ActionChange_80124C20(HSD_GObj* gobj)
     }
 }
 
-void ftPikachu_EfSpawn_80124C90(HSD_GObj* gobj)
+void ftPk_SpecialN_SpawnEffect0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -168,7 +168,7 @@ void ftPikachu_EfSpawn_80124C90(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = 0;
 }
 
-void ftPikachu_EfSpawn_80124D2C(HSD_GObj* gobj)
+void ftPk_SpecialN_SpawnEffect1(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -186,7 +186,7 @@ void ftPikachu_EfSpawn_80124D2C(HSD_GObj* gobj)
     fp->cb.x21BC_callback_Accessory4 = 0;
 }
 
-void ftPikachu_80124DC8(HSD_GObj* gobj)
+void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)
 {
     u8 fighter_x673_byte;
     Fighter* fp = GET_FIGHTER(gobj);

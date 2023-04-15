@@ -42,7 +42,7 @@ void ft_80082B1C(HSD_GObj* gobj);
 void ft_80081B38(HSD_GObj* gobj);
 bool ft_80082A68(HSD_GObj* gobj);
 void ft_800851C0(HSD_GObj*);
-void ftLink_80082B78(HSD_GObj*);
+void ftLk_80082B78(HSD_GObj*);
 void ft_80085088(HSD_GObj*);
 bool ft_800821DC(void);
 bool ft_80084A18(HSD_GObj*);

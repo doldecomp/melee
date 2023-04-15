@@ -3,8 +3,8 @@
 
 #include <baselib/gobj.h>
 
-bool ftDonkey_800E0134(HSD_GObj* gobj);
+bool ftDk_Unk4_800E0134(HSD_GObj* gobj);
 
-bool ftDonkey_800E0134(HSD_GObj* gobj);
+bool ftDk_Unk4_800E0134(HSD_GObj* gobj);
 
 #endif

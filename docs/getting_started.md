@@ -12,11 +12,11 @@ The goal of this repo is to **write C code that, after being compiled, matches t
 The details for what produces these different artifacts is out-of-scope. Here’s what some Melee C code looks like ([link](https://github.com/doldecomp/melee/blob/0b3f4aeebc17d8e9c3d8ea792d8d8e412c2ad436/src/melee/ft/chara/ftMewtwo/ftMewtwo_SpecialHi.c#L15-L21)):
 
 ```c
-void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* gobj)
+void ftMt_SpecialHi_CreateGFX(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftMewtwo_SpecialHi_SetStartGFX(gobj);
+    ftMt_SpecialHi_SetStartGFX(gobj);
     fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 ```
@@ -24,14 +24,14 @@ void ftMewtwo_SpecialHi_CreateGFX(HSD_GObj* gobj)
 and its corresponding PowerPC assembly:
 
 ```asm
-.global ftMewtwo_SpecialHi_CreateGFX
-ftMewtwo_SpecialHi_CreateGFX:
+.global ftMt_SpecialHi_CreateGFX
+ftMt_SpecialHi_CreateGFX:
 /* 801450A0 00000000  7C 08 02 A6 */	mflr r0
 /* 801450A4 00000004  90 01 00 04 */	stw r0, 0x4(r1)
 /* 801450A8 00000008  94 21 FF E8 */	stwu r1, -0x18(r1)
 /* 801450AC 0000000C  93 E1 00 14 */	stw r31, 0x14(r1)
 /* 801450B0 00000010  83 E3 00 2C */	lwz r31, 0x2c(r3)
-/* 801450B4 00000014  48 00 00 21 */	bl ftMewtwo_SpecialHi_SetStartGFX
+/* 801450B4 00000014  48 00 00 21 */	bl ftMt_SpecialHi_SetStartGFX
 /* 801450B8 00000018  38 00 00 00 */	li r0, 0x0
 /* 801450BC 0000001C  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 801450C0 00000020  80 01 00 1C */	lwz r0, 0x1c(r1)

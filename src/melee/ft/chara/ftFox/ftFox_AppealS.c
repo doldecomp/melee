@@ -9,7 +9,7 @@
 #include "it/it_26B1.h"
 #include "pl/pl_0371.h"
 
-bool ftFox_AppealS_CheckIfUsed(Fighter* fp)
+bool ftFx_AppealS_CheckIfUsed(Fighter* fp)
 {
     s32* attackCount = Player_GetTotalAttackCountPtr((s32) fp->xC_playerID);
     if ((pl_800386D8(attackCount, FTFOX_APPEALS_ATTACKID) != 0U) &&
@@ -37,7 +37,7 @@ static inline bool ftFox_CheckAppealSCount(void)
     return false;
 }
 
-bool ftFox_AppealS_CheckInput(HSD_GObj* gobj)
+bool ftFx_AppealS_CheckInput(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     s32 ftKind = fp->x4_fighterKind;
@@ -48,7 +48,7 @@ bool ftFox_AppealS_CheckInput(HSD_GObj* gobj)
         ((u8) fp->x682 == true))
     {
         if (ftFox_CheckAppealSCount() == 0) {
-            ftFox_AppealS_Action(gobj);
+            ftFx_AppealS_Action(gobj);
             pl_80040120(fp->xC_playerID, fp->x221F_flag.bits.b4);
             return true;
         }
@@ -77,7 +77,7 @@ static s32 ASID_AppealS[2][3] = {
     { MS_FOX_APPEALS_START_L, MS_FOX_APPEALS_L, MS_FOX_APPEALS_END_L }
 };
 
-void ftFox_AppealS_Action(HSD_GObj* gobj)
+void ftFx_AppealS_Action(HSD_GObj* gobj)
 {
     s32 facingDir;
     s32 actionDir;
@@ -98,9 +98,9 @@ void ftFox_AppealS_Action(HSD_GObj* gobj)
 }
 
 /// Fox & Falco's Special Taunt OnTakeDamage/OnDeath callback
-static void ftFox_AppealS_OnTakeDamage(HSD_GObj*);
+static void ftFx_AppealS_OnTakeDamage(HSD_GObj*);
 
-void ftFox_AppealS_Anim(HSD_GObj* gobj)
+void ftFx_AppealS_Anim(HSD_GObj* gobj)
 {
     FighterKind ftKind;
     bool flag;
@@ -124,14 +124,14 @@ void ftFox_AppealS_Anim(HSD_GObj* gobj)
         switch (ftKind) {
         case FTKIND_FOX:
             if (grCorneria_801E2B80() != false) {
-                fp->cb.x21E0_callback_OnDeath = ftFox_AppealS_OnTakeDamage;
+                fp->cb.x21E0_callback_OnDeath = ftFx_AppealS_OnTakeDamage;
             }
 
             break;
 
         case FTKIND_FALCO:
             if (grCorneria_801E2C34() != false) {
-                fp->cb.x21E0_callback_OnDeath = ftFox_AppealS_OnTakeDamage;
+                fp->cb.x21E0_callback_OnDeath = ftFx_AppealS_OnTakeDamage;
             }
 
             break;
@@ -151,22 +151,22 @@ void ftFox_AppealS_Anim(HSD_GObj* gobj)
     }
 }
 
-void ftFox_AppealS_IASA(HSD_GObj* gobj)
+void ftFx_AppealS_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftFox_AppealS_Phys(HSD_GObj* gobj)
+void ftFx_AppealS_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftFox_AppealS_Coll(HSD_GObj* gobj)
+void ftFx_AppealS_Coll(HSD_GObj* gobj)
 {
     ft_80084280(gobj);
 }
 
-static void ftFox_AppealS_OnTakeDamage(HSD_GObj* gobj)
+static void ftFx_AppealS_OnTakeDamage(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 

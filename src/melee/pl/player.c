@@ -301,7 +301,7 @@ void Player_80031D2C(enum_t id, int slot)
 
 void Player_80031DA8(s32 param_1, s32 param_2)
 {
-    ftKirby_800EED50(param_1, param_2);
+    ftKb_800EED50(param_1, param_2);
 }
 
 void Player_80031DC8(void func_arg(s32, s32))
@@ -629,7 +629,7 @@ void Player_SetPlayerAndEntityFacingDirection(s32 slot, f32 facing_dir)
         player->facing_direction = facing_dir;
 
         if (player->player_entity[player->transformed[i]]) {
-            ft_SetFacingDirection(
+            ft_0877_SetFacingDirection(
                 player->player_entity[player->transformed[i]], facing_dir);
         }
     }

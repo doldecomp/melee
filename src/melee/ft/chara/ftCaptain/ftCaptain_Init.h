@@ -8,20 +8,20 @@
 
 #include <baselib/gobj.h>
 
-extern MotionState ftCaptain_MotionStateTable[];
-extern char lbl_803C7598[];
-extern char lbl_803C75A4[];
-extern Fighter_CostumeStrings lbl_803C773C[];
-extern char lbl_803C76A0[];
-extern Fighter_DemoStrings lbl_803C772C;
+extern MotionState ftCa_Init_MotionStateTable[];
+extern char ftCa_Init_DatFilename[];
+extern char ftCa_Init_DataName[];
+extern Fighter_CostumeStrings ftCa_Init_CostumeStrings[];
+extern char ftCa_Init_AnimDatFilename[];
+extern Fighter_DemoStrings ftCa_Init_DemoMotionFilenames;
 
-void ftCaptain_800E28C8(HSD_GObj* gobj);
-void ftCaptain_LoadSpecialAttrs(HSD_GObj* gobj);
-void ftCaptain_OnDeath(HSD_GObj* gobj);
-void ftCaptain_OnItemDrop(HSD_GObj* gobj, bool);
-void ftCaptain_OnItemInvisible(HSD_GObj* gobj);
-void ftCaptain_OnItemPickup(HSD_GObj* gobj, bool);
-void ftCaptain_OnItemVisible(HSD_GObj* gobj);
-void ftCaptain_OnLoad(HSD_GObj* gobj);
+void ftCa_Init_800E28C8(HSD_GObj* gobj);
+void ftCa_Init_LoadSpecialAttrs(HSD_GObj* gobj);
+void ftCa_Init_OnDeath(HSD_GObj* gobj);
+void ftCa_Init_OnItemDrop(HSD_GObj* gobj, bool);
+void ftCa_Init_OnItemInvisible(HSD_GObj* gobj);
+void ftCa_Init_OnItemPickup(HSD_GObj* gobj, bool);
+void ftCa_Init_OnItemVisible(HSD_GObj* gobj);
+void ftCa_Init_OnLoad(HSD_GObj* gobj);
 
 #endif

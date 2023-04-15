@@ -30,30 +30,30 @@
 
 // 8014FDD0 0014C9B0
 // https://decomp.me/scratch/HWef2
-void ftMasterHand_LoadSpecialAttrs(HSD_GObj* gobj)
+void ftMh_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftMasterHand_SpecialAttrs);
 }
 
 // 8014FE10 0014C9F0
 // https://decomp.me/scratch/JL2E5
-void ftMasterHand_8014FE10(HSD_GObj* gobj)
+void ftMh_Unk02_8014FE10(HSD_GObj* gobj)
 {
     if (Stage_80225194() == 0xFB) {
-        ftMasterHand_80150144(gobj);
+        ftMh_Unk02_80150144(gobj);
         return;
     }
-    ftMasterHand_801510B0(gobj);
+    ftMh_Unk04_801510B0(gobj);
 }
 
 // 8014FE58 0014CA38
 // https://decomp.me/scratch/kfqG6
-void ftMasterHand_8014FE58(HSD_GObj* gobj)
+void ftMh_Unk02_8014FE58(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftMasterHand_8014FE5C(HSD_GObj* gobj)
+void ftMh_Unk02_8014FE5C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->motion_id == 341) || (fp->motion_id == 342)) {
@@ -70,7 +70,7 @@ void ftMasterHand_8014FE5C(HSD_GObj* gobj)
     fp->fv.mh.x2258 = 341;
 }
 
-void ftMasterHand_8014FF1C(HSD_GObj* gobj)
+void ftMh_Unk02_8014FF1C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->motion_id == 341) || (fp->motion_id == 342)) {
@@ -87,7 +87,7 @@ void ftMasterHand_8014FF1C(HSD_GObj* gobj)
     fp->fv.mh.x2258 = 342;
 }
 
-void ftMasterHand_8014FFDC(HSD_GObj* gobj)
+void ftMh_Unk02_8014FFDC(HSD_GObj* gobj)
 {
     Fighter* r31_fp = GET_FIGHTER(gobj);
 
@@ -125,7 +125,7 @@ void ftMasterHand_8014FFDC(HSD_GObj* gobj)
     r31_fp->fv.mh.x2258 = 0x155;
 }
 
-void ftMasterHand_80150144(HSD_GObj* gobj)
+void ftMh_Unk02_80150144(HSD_GObj* gobj)
 {
     ftMasterHand_SpecialAttrs* r5_attributes;
     Fighter* fp = GET_FIGHTER(gobj);
@@ -163,7 +163,7 @@ struct MasterHandDataStuff {
     u8 x54[6 * 5];
 };
 
-struct MasterHandDataStuff lbl_803D40D0 = {
+struct MasterHandDataStuff ftMh_Unk02_803D40D0 = {
     { 0x0000015D, 0x0000015B, 0x0000015F, 0x00000163, 0x00000166, 0x00000167,
       0x00000162, 0x00000172, 0x00000173, 0x0000016F, 0x0000016A, 0x0000016D,
       0x0000017B, 0x0000017C },
@@ -201,13 +201,13 @@ inline void lbl_80150230_inline_2(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->fv.mh.x2258 == 0x186) {
-        ftMasterHand_8014FF1C(gobj);
+        ftMh_Unk02_8014FF1C(gobj);
     } else {
-        ftMasterHand_8014FE5C(gobj);
+        ftMh_Unk02_8014FE5C(gobj);
     }
 }
 
-void ftMasterHand_80150230(HSD_GObj* gobj)
+void ftMh_Unk02_80150230(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -217,7 +217,7 @@ void ftMasterHand_80150230(HSD_GObj* gobj)
 #endif
 
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
-        ftMasterHand_80150894(gobj);
+        ftMh_Unk02_80150894(gobj);
         if (!ftAnim_IsFramesRemaining(gobj)) {
             if (fp->motion_id == 0x155) {
                 lbl_80150230_inline_1(gobj);
@@ -244,19 +244,19 @@ void ftMasterHand_80150230(HSD_GObj* gobj)
                     vec.x = attr->x124_pos.x;
                     vec.y = attr->x124_pos.y;
                     vec.z = 0.0f;
-                    ftMasterHand_80150DC4(gobj, &ftMasterHand_80155194, &vec);
+                    ftMh_Unk03_80150DC4(gobj, &ftMh_Unk27_80155194, &vec);
                     break;
                 case 0x17A:
                     vec.x = attr->x12C_pos.x;
                     vec.y = attr->x12C_pos.y;
                     vec.z = 0.0f;
-                    ftMasterHand_80150DC4(gobj, &ftMasterHand_801552F8, &vec);
+                    ftMh_Unk03_80150DC4(gobj, &ftMh_Unk28_801552F8, &vec);
                     break;
                 case 0x17B:
                     vec.x = attr->x134_pos.x;
                     vec.y = attr->x134_pos.y;
                     vec.z = 0.0f;
-                    ftMasterHand_80150DC4(gobj, &ftMasterHand_80155484, &vec);
+                    ftMh_Unk03_80150DC4(gobj, &ftMh_Unk29_80155484, &vec);
                     break;
                 case 0x17C:
                     vec.x = attr->x13C_pos.x;
@@ -273,8 +273,8 @@ void ftMasterHand_80150230(HSD_GObj* gobj)
                     fp->fv.mh.x2254 = 0;
                     tmp = 2;
                 } else {
-                    s32 qwe4 =
-                        lbl_803D40D0.x54[fp->fv.mh.x224C * 5 + HSD_Randi(5)];
+                    s32 qwe4 = ftMh_Unk02_803D40D0
+                                   .x54[fp->fv.mh.x224C * 5 + HSD_Randi(5)];
                     tmp = qwe4;
                     if (qwe4 == 2) {
                         fp->fv.mh.x2254 = 0;
@@ -283,9 +283,10 @@ void ftMasterHand_80150230(HSD_GObj* gobj)
                     }
                 }
                 // cast required, don't know why
-                qwe = &((u8_pair*) lbl_803D40D0.x48)[tmp];
-                tmp2 = lbl_803D40D0
-                           .x0[lbl_803D40D0.x38[qwe->a + HSD_Randi(qwe->b)]];
+                qwe = &((u8_pair*) ftMh_Unk02_803D40D0.x48)[tmp];
+                tmp2 = ftMh_Unk02_803D40D0
+                           .x0[ftMh_Unk02_803D40D0
+                                   .x38[qwe->a + HSD_Randi(qwe->b)]];
 
                 fp->fv.mh.x224C = tmp;
                 fp->fv.mh.x2250 = tmp2;
@@ -296,48 +297,48 @@ void ftMasterHand_80150230(HSD_GObj* gobj)
                 case 0x15B: // Stage-Wide Slap
                     mpLib_80053FF4(0, &vec);
                     vec.y = attr->x38;
-                    ftMasterHand_80150DC4(gobj, &ftMasterHand_80151828, &vec);
+                    ftMh_Unk03_80150DC4(gobj, &ftMh_Unk06_80151828, &vec);
                     break;
                 case 0x15D: // Sweep
                     mpLib_80053FF4(0, &vec);
                     vec.y = attr->x50.y;
-                    ftMasterHand_80150DC4(gobj, &ftMasterHand_80151BB8, &vec);
+                    ftMh_Unk03_80150DC4(gobj, &ftMh_Unk07_80151BB8, &vec);
                     break;
                 case 0x15F: // Walk
                     vec.x = attr->x40_pos.x;
                     vec.y = attr->x40_pos.y;
                     vec.z = 0.0f;
-                    ftMasterHand_80150DC4(gobj, &ftMasterHand_80151DC4, &vec);
+                    ftMh_Unk03_80150DC4(gobj, &ftMh_Unk09_80151DC4, &vec);
                     break;
                 case 0x162: // Drill
                     vec.x = attr->x88_pos.x;
                     vec.y = attr->x88_pos.y;
                     vec.z = 0.0f;
-                    ftMasterHand_80150DC4(gobj, &ftMasterHand_801521DC, &vec);
+                    ftMh_Unk03_80150DC4(gobj, &ftMh_Unk10_801521DC, &vec);
                     break;
                 case 0x163: // Punch
                     vec.x = attr->xA8_pos.x;
                     vec.y = attr->xA8_pos.y;
                     vec.z = 0.0f;
-                    ftMasterHand_80150DC4(gobj, &ftMasterHand_80152370, &vec);
+                    ftMh_Unk03_80150DC4(gobj, &ftMh_Unk11_80152370, &vec);
                     break;
                 case 0x166: // Ground Slap
                     vec.x = attr->xBC_pos.x;
                     vec.y = attr->xBC_pos.y;
                     vec.z = 0.0f;
-                    ftMasterHand_80150DC4(gobj, &ftMasterHand_801526D8, &vec);
+                    ftMh_Unk03_80150DC4(gobj, &ftMh_Unk12_801526D8, &vec);
                     break;
                 case 0x167: // Poke
-                    ftMasterHand_80152880(gobj);
+                    ftMh_Unk13_80152880(gobj);
                     break;
                 case 0x16F: // Jet
-                    ftMasterHand_80153820(gobj);
+                    ftMh_Unk16_80153820(gobj);
                     break;
                 case 0x172: // Ram
-                    ftMasterHand_801541C8(gobj, &ftMasterHand_80153B90);
+                    ftMh_Unk21_801541C8(gobj, &ftMh_Unk19_80153B90);
                     break;
                 case 0x173: // Crush
-                    ftMasterHand_801541C8(gobj, &ftMasterHand_80153D2C);
+                    ftMh_Unk21_801541C8(gobj, &ftMh_Unk20_80153D2C);
                     break;
                 case 0x16A: // Lasers
                     rand = HSD_Randf();
@@ -347,16 +348,16 @@ void ftMasterHand_80150230(HSD_GObj* gobj)
                     vec.y = attr->xCC_pos.y * rand * 2.0f + attr->xC4_pos.y -
                             attr->xCC_pos.y;
                     vec.z = 0.0f;
-                    ftMasterHand_80150DC4(gobj, &ftMasterHand_80152BCC, &vec);
+                    ftMh_Unk03_80150DC4(gobj, &ftMh_Unk14_80152BCC, &vec);
                     break;
                 case 0x16D: // Gun
-                    ftMasterHand_801530A4(gobj);
+                    ftMh_Unk15_801530A4(gobj);
                     break;
                 case 0x17B: // Grab
-                    ftMasterHand_801542E0(gobj);
+                    ftMh_Unk22_801542E0(gobj);
                     break;
                 case 0x17C: // Grab
-                    ftMasterHand_801542E0(gobj);
+                    ftMh_Unk22_801542E0(gobj);
                     break;
                 }
             }
@@ -372,7 +373,7 @@ void ftMasterHand_80150230(HSD_GObj* gobj)
 
 // 8015082C 0014D40C
 // https://decomp.me/scratch/rgMOD
-void ftMasterHand_8015082C(HSD_GObj* gobj)
+void ftMh_Unk02_8015082C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -382,13 +383,13 @@ void ftMasterHand_8015082C(HSD_GObj* gobj)
 
 // 80150870 0014D450
 // https://decomp.me/scratch/7A7RI
-void ftMasterHand_80150870(HSD_GObj* gobj)
+void ftMh_Unk02_80150870(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
 // 80150890 0014D470
-void ftMasterHand_80150890(HSD_GObj* gobj)
+void ftMh_Unk02_80150890(HSD_GObj* gobj)
 {
     return;
 }
@@ -398,7 +399,7 @@ void ftMasterHand_80150890(HSD_GObj* gobj)
 #define r6_button (HSD_PadMasterStatus[2].button)
 #include <baselib/controller.h>
 extern HSD_PadStatus HSD_PadMasterStatus[4];
-void ftMasterHand_80150894(HSD_GObj* gobj)
+void ftMh_Unk02_80150894(HSD_GObj* gobj)
 {
     Fighter* r4_fp = GET_FIGHTER(gobj);
     ftMasterHand_SpecialAttrs* r31_attributes = r4_fp->ft_data->ext_attr;
@@ -410,25 +411,25 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
         // Stage-Wide Slap
         mpLib_80053FF4(0, &sp10_pos);
         sp10_pos.y = r31_attributes->x38;
-        ftMasterHand_80150DC4(gobj, &ftMasterHand_80151828, &sp10_pos);
+        ftMh_Unk03_80150DC4(gobj, &ftMh_Unk06_80151828, &sp10_pos);
     } else if (l_pressed && (r6_button & HSD_BUTTON_DPAD_RIGHT)) {
         // Sweep
         mpLib_80053FF4(0, &sp10_pos);
         sp10_pos.y = r31_attributes->x50.y;
-        ftMasterHand_80150DC4(gobj, &ftMasterHand_80151BB8, &sp10_pos);
+        ftMh_Unk03_80150DC4(gobj, &ftMh_Unk07_80151BB8, &sp10_pos);
     } else if (l_pressed && (r6_button & HSD_BUTTON_DPAD_DOWN)) {
         // Walk
         sp10_pos.x = r31_attributes->x40_pos.x;
         sp10_pos.y = r31_attributes->x40_pos.y;
         sp10_pos.z = 0.0f;
-        ftMasterHand_80150DC4(gobj, &ftMasterHand_80151DC4, &sp10_pos);
+        ftMh_Unk03_80150DC4(gobj, &ftMh_Unk09_80151DC4, &sp10_pos);
     } else if ((r6_button & HSD_BUTTON_R) && (r6_button & HSD_BUTTON_DPAD_UP))
     {
         // Drill
         sp10_pos.x = r31_attributes->x88_pos.x;
         sp10_pos.y = r31_attributes->x88_pos.y;
         sp10_pos.z = 0.0f;
-        ftMasterHand_80150DC4(gobj, &ftMasterHand_801521DC, &sp10_pos);
+        ftMh_Unk03_80150DC4(gobj, &ftMh_Unk10_801521DC, &sp10_pos);
     } else if ((r6_button & HSD_BUTTON_R) &&
                (r6_button & HSD_BUTTON_DPAD_RIGHT))
     {
@@ -436,7 +437,7 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
         sp10_pos.x = r31_attributes->xA8_pos.x;
         sp10_pos.y = r31_attributes->xA8_pos.y;
         sp10_pos.z = 0.0f;
-        ftMasterHand_80150DC4(gobj, &ftMasterHand_80152370, &sp10_pos);
+        ftMh_Unk03_80150DC4(gobj, &ftMh_Unk11_80152370, &sp10_pos);
     } else if ((r6_button & HSD_BUTTON_R) &&
                (r6_button & HSD_BUTTON_DPAD_DOWN))
     {
@@ -444,26 +445,26 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
         sp10_pos.x = r31_attributes->xBC_pos.x;
         sp10_pos.y = r31_attributes->xBC_pos.y;
         sp10_pos.z = 0.0f;
-        ftMasterHand_80150DC4(gobj, &ftMasterHand_801526D8, &sp10_pos);
+        ftMh_Unk03_80150DC4(gobj, &ftMh_Unk12_801526D8, &sp10_pos);
     } else if ((r6_button & HSD_BUTTON_R) &&
                (r6_button & HSD_BUTTON_DPAD_LEFT))
     {
         // Poke
-        ftMasterHand_80152880(gobj);
+        ftMh_Unk13_80152880(gobj);
     } else if ((r6_button & HSD_BUTTON_A) && (r6_button & HSD_BUTTON_DPAD_UP))
     {
         // Jet
-        ftMasterHand_80153820(gobj);
+        ftMh_Unk16_80153820(gobj);
     } else if ((r6_button & HSD_BUTTON_A) &&
                (r6_button & HSD_BUTTON_DPAD_RIGHT))
     {
         // Ram
-        ftMasterHand_801541C8(gobj, &ftMasterHand_80153B90);
+        ftMh_Unk21_801541C8(gobj, &ftMh_Unk19_80153B90);
     } else if ((r6_button & HSD_BUTTON_A) &&
                (r6_button & HSD_BUTTON_DPAD_DOWN))
     {
         // Crush
-        ftMasterHand_801541C8(gobj, &ftMasterHand_80153D2C);
+        ftMh_Unk21_801541C8(gobj, &ftMh_Unk20_80153D2C);
     } else if ((r6_button & HSD_BUTTON_B) && (r6_button & HSD_BUTTON_DPAD_UP))
     {
         // Lasers
@@ -475,24 +476,24 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
         sp10_pos.y = r31_attributes->xCC_pos.y * rand * 2.0f +
                      r31_attributes->xC4_pos.y - r31_attributes->xCC_pos.y;
         sp10_pos.z = 0.0f;
-        ftMasterHand_80150DC4(gobj, &ftMasterHand_80152BCC, &sp10_pos);
+        ftMh_Unk03_80150DC4(gobj, &ftMh_Unk14_80152BCC, &sp10_pos);
     } else if ((r6_button & HSD_BUTTON_B) &&
                ((r6_button & HSD_BUTTON_DPAD_RIGHT)))
     {
         // Gun
-        ftMasterHand_801530A4(gobj);
+        ftMh_Unk15_801530A4(gobj);
     } else if ((r6_button & HSD_BUTTON_Z) &&
                ((r6_button & HSD_BUTTON_DPAD_UP)))
     {
         // Grab
         r4_fp->fv.mh.x2250 = 0x17B;
-        ftMasterHand_801542E0(gobj);
+        ftMh_Unk22_801542E0(gobj);
     } else if ((r6_button & HSD_BUTTON_Z) &&
                ((r6_button & HSD_BUTTON_DPAD_RIGHT)))
     {
         // Grab
         r4_fp->fv.mh.x2250 = 0x17C;
-        ftMasterHand_801542E0(gobj);
+        ftMh_Unk22_801542E0(gobj);
     } else if (((r6_button & HSD_BUTTON_Y)) &&
                ((r6_button & HSD_BUTTON_DPAD_UP)))
     {
@@ -502,21 +503,21 @@ void ftMasterHand_80150894(HSD_GObj* gobj)
             sp10_pos.x = r31_attributes->x124_pos.x;
             sp10_pos.y = r31_attributes->x124_pos.y;
             sp10_pos.z = 0.0f;
-            ftMasterHand_80150DC4(gobj, &ftMasterHand_80155194, &sp10_pos);
+            ftMh_Unk03_80150DC4(gobj, &ftMh_Unk27_80155194, &sp10_pos);
             break;
         }
         case 0x17A: {
             sp10_pos.x = r31_attributes->x12C_pos.x;
             sp10_pos.y = r31_attributes->x12C_pos.y;
             sp10_pos.z = 0.0f;
-            ftMasterHand_80150DC4(gobj, &ftMasterHand_801552F8, &sp10_pos);
+            ftMh_Unk03_80150DC4(gobj, &ftMh_Unk28_801552F8, &sp10_pos);
             break;
         }
         case 0x17B: {
             sp10_pos.x = r31_attributes->x134_pos.x;
             sp10_pos.y = r31_attributes->x134_pos.y;
             sp10_pos.z = 0.0f;
-            ftMasterHand_80150DC4(gobj, &ftMasterHand_80155484, &sp10_pos);
+            ftMh_Unk03_80150DC4(gobj, &ftMh_Unk29_80155484, &sp10_pos);
             break;
         }
         case 0x17C: {

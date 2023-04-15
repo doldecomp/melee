@@ -1688,26 +1688,26 @@ void ftCommon_8007F8B4(Fighter* fp, Vec3* v)
     v->z = fp->cur_pos.z + fp->xD4_unk_vel.z;
 }
 
-extern void (*ftData_803C1C28[])(HSD_GObj*);
+extern void (*ftData_UnkMotionStates2[])(HSD_GObj*);
 
 void ftCommon_8007F8E8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
-        if (ftData_803C1C28[fp->x4_fighterKind] != NULL) {
-            ftData_803C1C28[fp->x4_fighterKind](gobj);
+        if (ftData_UnkMotionStates2[fp->x4_fighterKind] != NULL) {
+            ftData_UnkMotionStates2[fp->x4_fighterKind](gobj);
         }
     }
 }
 
-extern void (*ftData_803C1BA4[])(HSD_GObj*);
+extern void (*ftData_UnkMotionStates1[])(HSD_GObj*);
 
 inline void _func_8007F948_inline(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x197C == NULL || fp->x1980 == NULL) {
-        if (ftData_803C1BA4[fp->x4_fighterKind] != NULL) {
-            ftData_803C1BA4[fp->x4_fighterKind](gobj);
+        if (ftData_UnkMotionStates1[fp->x4_fighterKind] != NULL) {
+            ftData_UnkMotionStates1[fp->x4_fighterKind](gobj);
         }
     }
 }

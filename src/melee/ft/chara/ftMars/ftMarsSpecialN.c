@@ -10,7 +10,7 @@
 
 #include <dolphin/mtx/types.h>
 
-void ftMars_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftMs_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->x2D4_specialAttributes;
@@ -20,14 +20,14 @@ void ftMars_SpecialN_StartMotion(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->cb.x21EC_callback = &ftMars_80136730;
+    fp->cb.x21EC_callback = &ftMs_Init_80136730;
 
     fp->gr_vel /= attrs->xC;
     Fighter_ChangeMotionState(gobj, 0x155, 0, 0, 0.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 }
 
-void ftMars_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftMs_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->x2D4_specialAttributes;
@@ -37,7 +37,7 @@ void ftMars_SpecialAirN_StartMotion(HSD_GObj* gobj)
     u8 _[8];
 #endif
 
-    fp->cb.x21EC_callback = &ftMars_80136730;
+    fp->cb.x21EC_callback = &ftMs_Init_80136730;
 
     fp->x80_self_vel.x /= attrs->xC;
 
@@ -51,10 +51,10 @@ void ftMars_SpecialAirN_StartMotion(HSD_GObj* gobj)
 
 // 80136844 00133424
 // https://decomp.me/scratch/Go6FC
-void ftMars_80136844(HSD_GObj* gobj)
+void ftMs_SpecialN_80136844(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMars_80136E74(gobj);
+        ftMs_SpecialN_80136E74(gobj);
 
         if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
             ft_800BFFD0(gobj->user_data, 0x63, 0);
@@ -66,10 +66,10 @@ void ftMars_80136844(HSD_GObj* gobj)
 
 // 801368AC 0013348C
 // https://decomp.me/scratch/XBFKN
-void ftMars_801368AC(HSD_GObj* gobj)
+void ftMs_SpecialN_801368AC(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMars_80136EAC(gobj);
+        ftMs_SpecialN_80136EAC(gobj);
 
         if (((Fighter*) gobj->user_data)->x4_fighterKind == FTKIND_MARS) {
             ft_800BFFD0(gobj->user_data, 0x63, 0);
@@ -80,18 +80,18 @@ void ftMars_801368AC(HSD_GObj* gobj)
 }
 
 // 80136914 001334F4
-void ftMars_80136914(HSD_GObj* gobj)
+void ftMs_SpecialN_80136914(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80136918 001334F8
-void ftMars_80136918(HSD_GObj* gobj)
+void ftMs_SpecialN_80136918(HSD_GObj* gobj)
 {
     return;
 }
 
-void ftMars_8013691C(HSD_GObj* gobj)
+void ftMs_SpecialN_8013691C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attr = fp->x2D4_specialAttributes;
@@ -105,7 +105,7 @@ void ftMars_8013691C(HSD_GObj* gobj)
     ftCommon_8007CB74(gobj);
 }
 
-void ftMars_8013695C(HSD_GObj* gobj)
+void ftMs_SpecialN_8013695C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attr = fp->x2D4_specialAttributes;
@@ -121,25 +121,25 @@ void ftMars_8013695C(HSD_GObj* gobj)
 
 // 801369A4 00133584
 // https://decomp.me/scratch/bR5HF
-void ftMars_801369A4(HSD_GObj* gobj)
+void ftMs_SpecialN_801369A4(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
-        ftMars_80136A1C(gobj);
+        ftMs_SpecialN_80136A1C(gobj);
     }
 }
 
 // 801369E0 001335C0
 // https://decomp.me/scratch/cCPAH
-void ftMars_801369E0(HSD_GObj* gobj)
+void ftMs_SpecialN_801369E0(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
-        ftMars_80136A7C(gobj);
+        ftMs_SpecialN_80136A7C(gobj);
     }
 }
 
 // 80136A1C 001335FC
 // https://decomp.me/scratch/9GhD1
-void ftMars_80136A1C(HSD_GObj* gobj)
+void ftMs_SpecialN_80136A1C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCommon_8007D5D4(fp);
@@ -150,7 +150,7 @@ void ftMars_80136A1C(HSD_GObj* gobj)
 
 // 80136A7C 0013365C
 // https://decomp.me/scratch/GU6fn
-void ftMars_80136A7C(HSD_GObj* gobj)
+void ftMs_SpecialN_80136A7C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
@@ -159,7 +159,7 @@ void ftMars_80136A7C(HSD_GObj* gobj)
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
 
-void ftMars_80136ADC(HSD_GObj* gobj)
+void ftMs_SpecialN_80136ADC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32* specialAttrs = fp->x2D4_specialAttributes;
@@ -179,11 +179,11 @@ void ftMars_80136ADC(HSD_GObj* gobj)
 
     if ((s32) fp->mv.ms.specialn.x0 > *specialAttrs * 30) {
         fp->x2200_ftcmd_var0 = 1;
-        ftMars_80137354(gobj);
+        ftMs_SpecialN_80137354(gobj);
     }
 }
 
-void ftMars_80136BB4(HSD_GObj* gobj)
+void ftMs_SpecialN_80136BB4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     MarsAttributes* attrs = fp->x2D4_specialAttributes;
@@ -201,68 +201,68 @@ void ftMars_80136BB4(HSD_GObj* gobj)
     fp->mv.ms.specialn.x0++;
     if ((s32) fp->mv.ms.specialn.x0 > attrs->x0 * 30) {
         fp->x2200_ftcmd_var0 = 1;
-        ftMars_801373B8(gobj);
+        ftMs_SpecialN_801373B8(gobj);
     }
 }
 
 // 80136C8C 0013386C
 // Interrupt_MarthNeutralBCharge
 // https://decomp.me/scratch/zR8Hv
-void ftMars_80136C8C(HSD_GObj* gobj)
+void ftMs_SpecialN_80136C8C(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if ((fp->input.x65C_heldInputs & 0x200) == 0) {
         fp->x2200_ftcmd_var0 = 0;
-        ftMars_80137354(gobj);
+        ftMs_SpecialN_80137354(gobj);
     }
 }
 
 // 80136CC4 001338A4
 // https://decomp.me/scratch/ykJFN
-void ftMars_80136CC4(HSD_GObj* gobj)
+void ftMs_SpecialN_80136CC4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if ((fp->input.x65C_heldInputs & 0x200) == 0) {
         fp->x2200_ftcmd_var0 = 0;
-        ftMars_801373B8(gobj);
+        ftMs_SpecialN_801373B8(gobj);
     }
 }
 
 // 80136CFC 001338DC
 // https://decomp.me/scratch/Q3NsK
-void ftMars_80136CFC(HSD_GObj* gobj)
+void ftMs_SpecialN_80136CFC(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
 // 80136D1C 001338FC
 // https://decomp.me/scratch/LVDnG
-void ftMars_80136D1C(HSD_GObj* gobj)
+void ftMs_SpecialN_80136D1C(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
 // 80136D3C 0013391C
 // https://decomp.me/scratch/XmmUv
-void ftMars_80136D3C(HSD_GObj* gobj)
+void ftMs_SpecialN_80136D3C(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == 0) {
-        ftMars_80136DB4(gobj);
+        ftMs_SpecialN_80136DB4(gobj);
     }
 }
 
 // 80136D78 00133958
 // https://decomp.me/scratch/tjkA9
-void ftMars_80136D78(HSD_GObj* gobj)
+void ftMs_SpecialN_80136D78(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != 0) {
-        ftMars_80136E14(gobj);
+        ftMs_SpecialN_80136E14(gobj);
     }
 }
 
 // 80136DB4 00133994
 // https://decomp.me/scratch/eJxjC
-void ftMars_80136DB4(HSD_GObj* gobj)
+void ftMs_SpecialN_80136DB4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
@@ -273,7 +273,7 @@ void ftMars_80136DB4(HSD_GObj* gobj)
 
 // 80136E14 001339F4
 // https://decomp.me/scratch/mzQdp
-void ftMars_80136E14(HSD_GObj* gobj)
+void ftMs_SpecialN_80136E14(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
@@ -284,21 +284,21 @@ void ftMars_80136E14(HSD_GObj* gobj)
 
 // 80136E74 00133A54
 // https://decomp.me/scratch/M7HBN
-void ftMars_80136E74(HSD_GObj* gobj)
+void ftMs_SpecialN_80136E74(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 0x156, 0x1200, 0, 0.0f, 1.0f, 0.0f);
 }
 
 // 80136EAC 00133A8C
 // https://decomp.me/scratch/RkI7l
-void ftMars_80136EAC(HSD_GObj* gobj)
+void ftMs_SpecialN_80136EAC(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, 0x15A, 0x1200, 0, 0.0f, 1.0f, 0.0f);
 }
 
 // 80136EE4 00133AC4
 // https://decomp.me/scratch/e4mhD
-void ftMars_80136EE4(HSD_GObj* gobj)
+void ftMs_SpecialN_80136EE4(HSD_GObj* gobj)
 {
     s32 ndx;
     MarsAttributes* attr;
@@ -351,7 +351,7 @@ void ftMars_80136EE4(HSD_GObj* gobj)
 
 // 80137010 00133BF0
 // https://decomp.me/scratch/pIor0
-void ftMars_80137010(HSD_GObj* gobj)
+void ftMs_SpecialN_80137010(HSD_GObj* gobj)
 {
     s32 ndx;
     MarsAttributes* attr;
@@ -414,14 +414,14 @@ void ftMars_80137010(HSD_GObj* gobj)
 }
 
 // 8013713C 00133D1C
-void ftMars_8013713C(HSD_GObj* gobj) {}
+void ftMs_SpecialN_8013713C(HSD_GObj* gobj) {}
 
 // 80137140 00133D20
-void ftMars_80137140(HSD_GObj* gobj) {}
+void ftMs_SpecialN_80137140(HSD_GObj* gobj) {}
 
 // 80137144 00133D24
 // https://decomp.me/scratch/ZIl0O
-void ftMars_80137144(HSD_GObj* gobj)
+void ftMs_SpecialN_80137144(HSD_GObj* gobj)
 {
     // Physics_Friction
     ft_80084F3C(gobj);
@@ -429,32 +429,32 @@ void ftMars_80137144(HSD_GObj* gobj)
 
 // 80137164 00133D44
 // https://decomp.me/scratch/8OwY9
-void ftMars_80137164(HSD_GObj* gobj)
+void ftMs_SpecialN_80137164(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
 // 80137184 00133D64
 // https://decomp.me/scratch/cIi5D
-void ftMars_80137184(HSD_GObj* gobj)
+void ftMs_SpecialN_80137184(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == 0) {
-        ftMars_801371FC(gobj);
+        ftMs_SpecialN_801371FC(gobj);
     }
 }
 
 // 801371C0 00133DA0
 // https://decomp.me/scratch/rpVpQ
-void ftMars_801371C0(HSD_GObj* arg0)
+void ftMs_SpecialN_801371C0(HSD_GObj* arg0)
 {
     if (ft_80081D0C(arg0) != 0) {
-        ftMars_801372A8(arg0);
+        ftMs_SpecialN_801372A8(arg0);
     }
 }
 
 // 801371FC 00133DDC
 // https://decomp.me/scratch/5lf3a
-void ftMars_801371FC(HSD_GObj* gobj)
+void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32 thing;
@@ -480,7 +480,7 @@ void ftMars_801371FC(HSD_GObj* gobj)
 // 801372A8 00133E88
 // MS_MarthNeutralBHitAir->Ground
 // https://decomp.me/scratch/IV8RT
-void ftMars_801372A8(HSD_GObj* gobj)
+void ftMs_SpecialN_801372A8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32 thing;
@@ -506,7 +506,7 @@ void ftMars_801372A8(HSD_GObj* gobj)
 // 80137354 00133F34
 // MS_RoyNeutralBSwing
 // https://decomp.me/scratch/4CbiS
-void ftMars_80137354(HSD_GObj* gobj)
+void ftMs_SpecialN_80137354(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32 thing;
@@ -518,12 +518,12 @@ void ftMars_80137354(HSD_GObj* gobj)
     }
 
     Fighter_ChangeMotionState(gobj, thing, 0, 0, 1.0f, 1.0f, 0.0f);
-    fp->cb.x21BC_callback_Accessory4 = &ftMars_801365A8;
+    fp->cb.x21BC_callback_Accessory4 = &ftMs_Init_801365A8;
 }
 
 // 801373B8 00133F98
 // https://decomp.me/scratch/mXbi4
-void ftMars_801373B8(HSD_GObj* gobj)
+void ftMs_SpecialN_801373B8(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     s32 thing;
@@ -535,5 +535,5 @@ void ftMars_801373B8(HSD_GObj* gobj)
     }
 
     Fighter_ChangeMotionState(gobj, thing, 0, 0, 1.0f, 1.0f, 0.0f);
-    fp->cb.x21BC_callback_Accessory4 = &ftMars_8013666C;
+    fp->cb.x21BC_callback_Accessory4 = &ftMs_Init_8013666C;
 }

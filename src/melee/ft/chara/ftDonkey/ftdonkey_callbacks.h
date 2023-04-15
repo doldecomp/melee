@@ -6,22 +6,22 @@
 
 #include "ft/types.h"
 
-extern MotionState ftDonkey_MotionStateTable[];
-extern char lbl_803CBDF8[];
-extern char lbl_803CBE04[];
-extern Fighter_CostumeStrings lbl_803CC020[];
-extern char lbl_803CBF88[];
-extern Fighter_DemoStrings lbl_803CC010;
+extern MotionState ftDk_Init_MotionStateTable[];
+extern char ftDk_Init_DatFilename[];
+extern char ftDk_Init_DataName[];
+extern Fighter_CostumeStrings ftDk_Init_CostumeStrings[];
+extern char ftDk_Init_AnimDatFilename[];
+extern Fighter_DemoStrings ftDk_Init_DemoMotionFilenames;
 
-void ftDonkey_OnDeath(HSD_GObj* gobj);
-void ftDonkey_OnItemPickup(HSD_GObj* gobj, bool bool);
-void ftDonkey_OnItemInvisible(HSD_GObj* gobj);
-void ftDonkey_OnItemVisible(HSD_GObj* gobj);
-void ftDonkey_OnItemDrop(HSD_GObj* gobj, bool bool1);
-void ftDonkey_8010D96C(HSD_GObj* gobj);
-void ftDonkey_OnLoad(HSD_GObj* gobj);
-void ftDonkey_LoadSpecialAttrs(HSD_GObj* gobj);
-void ftDonkey_OnKnockbackEnter(HSD_GObj* gobj);
-void ftDonkey_OnKnockbackExit(HSD_GObj* gobj);
+void ftDk_Init_OnDeath(HSD_GObj* gobj);
+void ftDk_Init_OnItemPickup(HSD_GObj* gobj, bool bool);
+void ftDk_Init_OnItemInvisible(HSD_GObj* gobj);
+void ftDk_Init_OnItemVisible(HSD_GObj* gobj);
+void ftDk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1);
+void ftDk_Init_UnkMotionStates4(HSD_GObj* gobj);
+void ftDk_Init_OnLoad(HSD_GObj* gobj);
+void ftDk_Init_LoadSpecialAttrs(HSD_GObj* gobj);
+void ftDk_Init_OnKnockbackEnter(HSD_GObj* gobj);
+void ftDk_Init_OnKnockbackExit(HSD_GObj* gobj);
 
 #endif

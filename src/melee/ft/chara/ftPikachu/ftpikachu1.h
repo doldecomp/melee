@@ -6,13 +6,13 @@
 
 #include "ft/types.h"
 
-extern MotionState ftPikachu_MotionStateTable[];
-extern char lbl_803CE0B8[];
-extern char lbl_803CE0C4[];
-extern Fighter_CostumeStrings lbl_803CE2A0[];
-extern char lbl_803CE204[];
-extern Fighter_DemoStrings lbl_803CE290;
+extern MotionState ftPk_Init_MotionStateTable[];
+extern char ftPk_Init_DatFilename[];
+extern char ftPk_Init_DataName[];
+extern Fighter_CostumeStrings ftPk_Init_CostumeStrings[];
+extern char ftPk_Init_AnimDatFilename[];
+extern Fighter_DemoStrings ftPk_Init_DemoMotionFilenames;
 
-void ftPikachu_LoadSpecialAttrs(HSD_GObj*);
+void ftPk_Init_LoadSpecialAttrs(HSD_GObj*);
 
 #endif

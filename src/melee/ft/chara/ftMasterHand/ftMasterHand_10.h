@@ -8,13 +8,13 @@
 
 #include <baselib/gobj.h>
 
-void ftMasterHand_80152138(HSD_GObj* gobj);
-void ftMasterHand_80152174(HSD_GObj* gobj);
-void ftMasterHand_801521B8(HSD_GObj* gobj);
-void ftMasterHand_801521D8(HSD_GObj* gobj);
-void ftMasterHand_801521DC(HSD_GObj* gobj);
-void ftMasterHand_8015223C(HSD_GObj* gobj);
-void ftMasterHand_80152278(HSD_GObj* gobj);
-void ftMasterHand_801522BC(HSD_GObj* gobj);
+void ftMh_Unk10_80152138(HSD_GObj* gobj);
+void ftMh_Unk10_80152174(HSD_GObj* gobj);
+void ftMh_Unk10_801521B8(HSD_GObj* gobj);
+void ftMh_Unk10_801521D8(HSD_GObj* gobj);
+void ftMh_Unk10_801521DC(HSD_GObj* gobj);
+void ftMh_Unk10_8015223C(HSD_GObj* gobj);
+void ftMh_Unk10_80152278(HSD_GObj* gobj);
+void ftMh_Unk10_801522BC(HSD_GObj* gobj);
 
 #endif

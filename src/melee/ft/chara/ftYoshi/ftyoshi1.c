@@ -16,63 +16,63 @@
 #include <placeholder.h>
 #include <dolphin/os/os.h>
 
-MotionState ftYoshi_MotionStateTable[] = {
-    { 37, 0x00100000, 0x01000000, ftYoshi_8012C030, ftYoshi_8012C114,
-      ftYoshi_8012C194, ftYoshi_8012C1B4, ftCamera_UpdateCameraBox },
-    { -1, 0x00180000, 0x01000000, ftYoshi_8012C2F4, ftYoshi_8012C3EC,
-      ftYoshi_8012C45C, ftYoshi_8012C47C, ftCamera_UpdateCameraBox },
-    { 39, 0x00100000, 0x01000000, ftYoshi_8012C54C, ftYoshi_8012C59C,
-      ftYoshi_8012C5C0, ftYoshi_8012C5E0, ftCamera_UpdateCameraBox },
-    { 40, 0x00100000, 0x01000000, ftYoshi_8012C7A4, ftYoshi_8012C80C,
-      ftYoshi_8012C810, ftYoshi_8012C830, ftCamera_UpdateCameraBox },
-    { 37, 0x00101073, 0x01000000, ftYoshi_8012CAD0, ftYoshi_8012CBBC,
-      ftYoshi_8012CBDC, ftYoshi_8012CBFC, ftCamera_UpdateCameraBox },
-    { 295, 0x00340011, 0x12000000, ftYoshi_8012D550, NULL, ftYoshi_8012DC30,
-      ftYoshi_8012DD70, ftCamera_UpdateCameraBox },
-    { 296, 0x00340011, 0x12000000, ftYoshi_8012D658, NULL, ftYoshi_8012DC90,
-      ftYoshi_8012DDE8, ftCamera_UpdateCameraBox },
-    { 296, 0x00340011, 0x12000000, ftYoshi_8012D5C8, NULL, ftYoshi_8012DC70,
-      ftYoshi_8012DDC0, ftCamera_UpdateCameraBox },
-    { 297, 0x00340011, 0x12000000, ftYoshi_8012D948, NULL, ftYoshi_8012DD10,
-      ftYoshi_8012DE88, ftCamera_UpdateCameraBox },
-    { 297, 0x00340011, 0x12000000, ftYoshi_8012D7D8, NULL, ftYoshi_8012DCF0,
-      ftYoshi_8012DE60, ftCamera_UpdateCameraBox },
-    { 298, 0x00340411, 0x12000000, ftYoshi_8012D58C, NULL, ftYoshi_8012DC50,
-      ftYoshi_8012DD98, ftCamera_UpdateCameraBox },
-    { 299, 0x00340411, 0x12000000, ftYoshi_8012D760, NULL, ftYoshi_8012DCD0,
-      ftYoshi_8012DE38, ftCamera_UpdateCameraBox },
-    { 299, 0x00340411, 0x12000000, ftYoshi_8012D6D0, NULL, ftYoshi_8012DCB0,
-      ftYoshi_8012DE10, ftCamera_UpdateCameraBox },
-    { 300, 0x00340411, 0x12000000, ftYoshi_8012DB74, NULL, ftYoshi_8012DD50,
-      ftYoshi_8012DED8, ftCamera_UpdateCameraBox },
-    { 300, 0x00340411, 0x12000000, ftYoshi_8012DA04, NULL, ftYoshi_8012DD30,
-      ftYoshi_8012DEB0, ftCamera_UpdateCameraBox },
-    { 301, 0x00340212, 0x13000000, ftYoshi_8012F654, ftYoshi_80130DB8,
-      ftYoshi_801310C4, ftYoshi_801317DC, ftCamera_UpdateCameraBox },
-    { 302, 0x00340212, 0x13000000, ftYoshi_8012F750, ftYoshi_80130DBC,
-      ftYoshi_801310E8, ftYoshi_8013187C, ftCamera_UpdateCameraBox },
-    { 303, 0x00340212, 0x13000000, ftYoshi_8012FAC4, ftYoshi_80130F7C,
-      ftYoshi_801312EC, ftYoshi_80131B60, ftCamera_UpdateCameraBox },
-    { 304, 0x00340212, 0x13000000, ftYoshi_8012FFF4, ftYoshi_80130FD8,
-      ftYoshi_80131618, ftYoshi_80131E74, ftCamera_UpdateCameraBox },
-    { 305, 0x00340612, 0x13000000, ftYoshi_80130368, ftYoshi_80130FDC,
-      ftYoshi_80131654, ftYoshi_80131ED4, ftCamera_UpdateCameraBox },
-    { 306, 0x00340612, 0x13000000, ftYoshi_80130428, ftYoshi_80130FEC,
-      ftYoshi_8013168C, ftYoshi_80131F80, ftCamera_UpdateCameraBox },
-    { 307, 0x00340612, 0x13000000, ftYoshi_801306A8, ftYoshi_80131050,
-      ftYoshi_80131718, ftYoshi_8013245C, ftCamera_UpdateCameraBox },
-    { 308, 0x00340612, 0x13000000, ftYoshi_80130A24, ftYoshi_801310B4,
-      ftYoshi_801317A4, ftYoshi_801328F0, ftCamera_UpdateCameraBox },
-    { 309, 0x00340113, 0x14000000, ftYoshi_8012E4DC, NULL, ftYoshi_8012E594,
-      ftYoshi_8012E5D4, ftCamera_UpdateCameraBox },
-    { 310, 0x00340513, 0x14000000, ftYoshi_8012E538, NULL, ftYoshi_8012E5B4,
-      ftYoshi_8012E5FC, ftCamera_UpdateCameraBox },
-    { 311, 0x00340214, 0x15000000, ftYoshi_8012E814, NULL, ftYoshi_8012E88C,
-      ftYoshi_8012E924, ftCamera_UpdateCameraBox },
-    { 312, 0x00340214, 0x15000000, ftYoshi_8012EA40, NULL, ftYoshi_8012EA7C,
-      ftYoshi_8012EA9C, ftCamera_UpdateCameraBox },
-    { 313, 0x00340614, 0x15000000, ftYoshi_8012E850, NULL, ftYoshi_8012E8CC,
-      ftYoshi_8012E944, ftCamera_UpdateCameraBox },
+MotionState ftYs_Init_MotionStateTable[] = {
+    { 37, 0x00100000, 0x01000000, ftYs_Unk2_8012C030, ftYs_Unk2_8012C114,
+      ftYs_Unk2_8012C194, ftYs_Unk2_8012C1B4, ftCamera_UpdateCameraBox },
+    { -1, 0x00180000, 0x01000000, ftYs_Unk2_8012C2F4, ftYs_Unk2_8012C3EC,
+      ftYs_Unk2_8012C45C, ftYs_Unk2_8012C47C, ftCamera_UpdateCameraBox },
+    { 39, 0x00100000, 0x01000000, ftYs_Unk2_8012C54C, ftYs_Unk2_8012C59C,
+      ftYs_Unk2_8012C5C0, ftYs_Unk2_8012C5E0, ftCamera_UpdateCameraBox },
+    { 40, 0x00100000, 0x01000000, ftYs_Unk2_8012C7A4, ftYs_Unk2_8012C80C,
+      ftYs_Unk2_8012C810, ftYs_Unk2_8012C830, ftCamera_UpdateCameraBox },
+    { 37, 0x00101073, 0x01000000, ftYs_Unk2_8012CAD0, ftYs_Unk2_8012CBBC,
+      ftYs_Unk2_8012CBDC, ftYs_Unk2_8012CBFC, ftCamera_UpdateCameraBox },
+    { 295, 0x00340011, 0x12000000, ftYs_Unk4_8012D550, NULL,
+      ftYs_Unk4_8012DC30, ftYs_Unk4_8012DD70, ftCamera_UpdateCameraBox },
+    { 296, 0x00340011, 0x12000000, ftYs_Unk4_8012D658, NULL,
+      ftYs_Unk4_8012DC90, ftYs_Unk4_8012DDE8, ftCamera_UpdateCameraBox },
+    { 296, 0x00340011, 0x12000000, ftYs_Unk4_8012D5C8, NULL,
+      ftYs_Unk4_8012DC70, ftYs_Unk4_8012DDC0, ftCamera_UpdateCameraBox },
+    { 297, 0x00340011, 0x12000000, ftYs_Unk4_8012D948, NULL,
+      ftYs_Unk4_8012DD10, ftYs_Unk4_8012DE88, ftCamera_UpdateCameraBox },
+    { 297, 0x00340011, 0x12000000, ftYs_Unk4_8012D7D8, NULL,
+      ftYs_Unk4_8012DCF0, ftYs_Unk4_8012DE60, ftCamera_UpdateCameraBox },
+    { 298, 0x00340411, 0x12000000, ftYs_Unk4_8012D58C, NULL,
+      ftYs_Unk4_8012DC50, ftYs_Unk4_8012DD98, ftCamera_UpdateCameraBox },
+    { 299, 0x00340411, 0x12000000, ftYs_Unk4_8012D760, NULL,
+      ftYs_Unk4_8012DCD0, ftYs_Unk4_8012DE38, ftCamera_UpdateCameraBox },
+    { 299, 0x00340411, 0x12000000, ftYs_Unk4_8012D6D0, NULL,
+      ftYs_Unk4_8012DCB0, ftYs_Unk4_8012DE10, ftCamera_UpdateCameraBox },
+    { 300, 0x00340411, 0x12000000, ftYs_Unk4_8012DB74, NULL,
+      ftYs_Unk4_8012DD50, ftYs_Unk4_8012DED8, ftCamera_UpdateCameraBox },
+    { 300, 0x00340411, 0x12000000, ftYs_Unk4_8012DA04, NULL,
+      ftYs_Unk4_8012DD30, ftYs_Unk4_8012DEB0, ftCamera_UpdateCameraBox },
+    { 301, 0x00340212, 0x13000000, ftYs_Unk4_8012F654, ftYs_Unk4_80130DB8,
+      ftYs_Unk4_801310C4, ftYs_Unk4_801317DC, ftCamera_UpdateCameraBox },
+    { 302, 0x00340212, 0x13000000, ftYs_Unk4_8012F750, ftYs_Unk4_80130DBC,
+      ftYs_Unk4_801310E8, ftYs_Unk4_8013187C, ftCamera_UpdateCameraBox },
+    { 303, 0x00340212, 0x13000000, ftYs_Unk4_8012FAC4, ftYs_Unk4_80130F7C,
+      ftYs_Unk4_801312EC, ftYs_Unk4_80131B60, ftCamera_UpdateCameraBox },
+    { 304, 0x00340212, 0x13000000, ftYs_Unk4_8012FFF4, ftYs_Unk4_80130FD8,
+      ftYs_Unk4_80131618, ftYs_Unk4_80131E74, ftCamera_UpdateCameraBox },
+    { 305, 0x00340612, 0x13000000, ftYs_Unk4_80130368, ftYs_Unk4_80130FDC,
+      ftYs_Unk4_80131654, ftYs_Unk4_80131ED4, ftCamera_UpdateCameraBox },
+    { 306, 0x00340612, 0x13000000, ftYs_Unk4_80130428, ftYs_Unk4_80130FEC,
+      ftYs_Unk4_8013168C, ftYs_Unk4_80131F80, ftCamera_UpdateCameraBox },
+    { 307, 0x00340612, 0x13000000, ftYs_Unk4_801306A8, ftYs_Unk4_80131050,
+      ftYs_Unk4_80131718, ftYs_Unk4_8013245C, ftCamera_UpdateCameraBox },
+    { 308, 0x00340612, 0x13000000, ftYs_Unk4_80130A24, ftYs_Unk4_801310B4,
+      ftYs_Unk4_801317A4, ftYs_Unk4_801328F0, ftCamera_UpdateCameraBox },
+    { 309, 0x00340113, 0x14000000, ftYs_Unk4_8012E4DC, NULL,
+      ftYs_Unk4_8012E594, ftYs_Unk4_8012E5D4, ftCamera_UpdateCameraBox },
+    { 310, 0x00340513, 0x14000000, ftYs_Unk4_8012E538, NULL,
+      ftYs_Unk4_8012E5B4, ftYs_Unk4_8012E5FC, ftCamera_UpdateCameraBox },
+    { 311, 0x00340214, 0x15000000, ftYs_Unk4_8012E814, NULL,
+      ftYs_Unk4_8012E88C, ftYs_Unk4_8012E924, ftCamera_UpdateCameraBox },
+    { 312, 0x00340214, 0x15000000, ftYs_Unk4_8012EA40, NULL,
+      ftYs_Unk4_8012EA7C, ftYs_Unk4_8012EA9C, ftCamera_UpdateCameraBox },
+    { 313, 0x00340614, 0x15000000, ftYs_Unk4_8012E850, NULL,
+      ftYs_Unk4_8012E8CC, ftYs_Unk4_8012E944, ftCamera_UpdateCameraBox },
 };
 
 extern char* lbl_804D3E58;
@@ -82,7 +82,7 @@ extern char* lbl_804D3E70;
 extern char* lbl_804D3E78;
 
 /// https://decomp.me/scratch/ufrFK
-void ftYoshi_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
+void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -126,8 +126,8 @@ void ftYoshi_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg)
     }
 }
 
-void ftYoshi_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
-                      f32 start_frame)
+void ftYs_Init_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
+                        f32 start_frame)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -161,7 +161,7 @@ void ftYoshi_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
     }
 }
 
-void ftYoshi_8012B8A4(HSD_GObj* gobj)
+void ftYs_Init_8012B8A4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
@@ -171,19 +171,19 @@ void ftYoshi_8012B8A4(HSD_GObj* gobj)
 #endif
     f32 tempf = attr->xC * (1.0f - (fp->x1998_shieldHealth /
                                     p_ftCommonData->x260_startShieldHealth));
-    ftYoshi_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, tempf);
-    ftYoshi_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, tempf);
+    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, tempf);
+    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, tempf);
 }
 
-void ftYoshi_8012B918(HSD_GObj* gobj)
+void ftYs_Init_8012B918(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    ftYoshi_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, 0.0f);
-    ftYoshi_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, 0.0f);
+    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5B8, 0.0f);
+    ftYs_Init_8012B804(fp, (struct S_UNK_YOSHI1*) fp->x5BC, 0.0f);
 }
 
-void ftYoshi_OnDeath(HSD_GObj* gobj)
+void ftYs_Init_OnDeath(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074A4C(gobj, 0, 0);
@@ -191,7 +191,7 @@ void ftYoshi_OnDeath(HSD_GObj* gobj)
 }
 
 // https://decomp.me/scratch/5TPxg
-void ftYoshi_OnLoad(HSD_GObj* gobj)
+void ftYs_Init_OnLoad(HSD_GObj* gobj)
 {
     void** item_list;
     ftYoshiAttributes* other_attr;
@@ -214,8 +214,8 @@ void ftYoshi_OnLoad(HSD_GObj* gobj)
     }
 
     other_attr->xC = 0.0f;
-    ftYoshi_8012B6E8(fp, temp_r27);
-    ftYoshi_8012B6E8(fp, temp_r28);
+    ftYs_Init_8012B6E8(fp, temp_r27);
+    ftYs_Init_8012B6E8(fp, temp_r28);
     PUSH_ATTRS(fp, ftYoshiAttributes);
     it_8026B3F8(item_list[0], It_Kind_Yoshi_EggThrow);
     it_8026B3F8(item_list[1], It_Kind_Yoshi_Star);
@@ -223,54 +223,54 @@ void ftYoshi_OnLoad(HSD_GObj* gobj)
     fp->x2226_flag.bits.b1 = 1;
 }
 
-/* static */ void ftYoshi_8012E270(HSD_GObj* gobj);
-/* static */ void ftYoshi_8012DF18(HSD_GObj* gobj);
+/* static */ void ftYs_Unk4_8012E270(HSD_GObj* gobj);
+/* static */ void ftYs_Unk4_8012DF18(HSD_GObj* gobj);
 
-void ftYoshi_8012BA8C(HSD_GObj* gobj)
+void ftYs_Init_8012BA8C(HSD_GObj* gobj)
 {
-    ftYoshi_8012E270(gobj);
-    ftYoshi_8012DF18(gobj);
+    ftYs_Unk4_8012E270(gobj);
+    ftYs_Unk4_8012DF18(gobj);
 }
 
-f32 ftYoshi_8012BAC0(Fighter* fp)
+f32 ftYs_Init_8012BAC0(Fighter* fp)
 {
     ftYoshiAttributes* attr = fp->x2D4_specialAttributes;
     return attr->x120;
 }
 
-void ftYoshi_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftYs_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
     Fighter_OnItemPickup(gobj, bool, 1, 1);
 }
 
-void ftYoshi_OnItemInvisible(HSD_GObj* gobj)
+void ftYs_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, 1);
 }
 
-void ftYoshi_OnItemVisible(HSD_GObj* gobj)
+void ftYs_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 1);
 }
 
-void ftYoshi_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftYs_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, 1, 1);
 }
 
-void ftYoshi_LoadSpecialAttrs(HSD_GObj* gobj)
+void ftYs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftYoshiAttributes);
 }
 
-void ftYoshi_OnKnockbackEnter(HSD_GObj* gobj)
+void ftYs_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, 1);
     ftAnim_ApplyPartAnim(gobj, 3, 3, 0.0f);
     ftAnim_ApplyPartAnim(gobj, 4, 3, 0.0f);
 }
 
-void ftYoshi_OnKnockbackExit(HSD_GObj* gobj)
+void ftYs_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, 1);
     ftAnim_ApplyPartAnim(gobj, 3, 2, 0.0f);
@@ -283,7 +283,7 @@ void ftYoshi_OnKnockbackExit(HSD_GObj* gobj)
 #ifdef MWERKS_GEKKO
 
 #pragma push
-asm unk_t ftYoshi_8012BDA0(void)
+asm unk_t ftYs_Init_8012BDA0(void)
 { // clang-format off
     nofralloc
 /* 8012BDA0 00128980  7C 08 02 A6 */	mflr r0
@@ -330,7 +330,7 @@ asm unk_t ftYoshi_8012BDA0(void)
 
 #endif
 
-void ftYoshi_8012BE3C(HSD_GObj* gobj) {
+void ftYs_Init_8012BE3C(HSD_GObj* gobj) {
     s32* x1CC;
     Fighter* fp = GET_FIGHTER(gobj);
     s32 bone_idx;
@@ -352,10 +352,10 @@ void ftYoshi_8012BE3C(HSD_GObj* gobj) {
 /* static */ extern f32 const lbl_804D9A28;
 
 #pragma push
-asm unk_t ftYoshi_8012BECC(void)
+asm unk_t ftYs_Init_8012BECC(void)
 { // clang-format off
     nofralloc
-ftYoshi_8012BECC:
+ftYs_Init_8012BECC:
 /* 8012BECC 00128AAC  7C 08 02 A6 */	mflr r0
 /* 8012BED0 00128AB0  38 80 01 55 */	li r4, 0x155
 /* 8012BED4 00128AB4  90 01 00 04 */	stw r0, 4(r1)
@@ -434,7 +434,7 @@ lbl_8012BFE0:
 /* 8012BFEC 00128BCC  48 24 72 FD */	bl HSD_JObjSetMtxDirtySub
 lbl_8012BFF0:
 /* 8012BFF0 00128BD0  7F E3 FB 78 */	mr r3, r31
-/* 8012BFF4 00128BD4  4B FF F8 B1 */	bl ftYoshi_8012B8A4
+/* 8012BFF4 00128BD4  4B FF F8 B1 */	bl ftYs_Init_8012B8A4
 /* 8012BFF8 00128BD8  7F C3 F3 78 */	mr r3, r30
 /* 8012BFFC 00128BDC  4B F6 5D 5D */	bl ft_80091D58
 /* 8012C000 00128BE0  38 7E 00 00 */	addi r3, r30, 0

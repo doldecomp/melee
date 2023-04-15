@@ -9,15 +9,15 @@
 #include <dolphin/mtx/types.h>
 
 // 80153AEC 1506CC
-void ftMasterHand_80153AEC(HSD_GObj* gobj)
+void ftMh_Unk19_80153AEC(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftMasterHand_80151018(gobj);
+        ftMh_Unk03_80151018(gobj);
     }
 }
 
 // 80153B28 150708
-void ftMasterHand_80153B28(HSD_GObj* gobj)
+void ftMh_Unk19_80153B28(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -26,20 +26,20 @@ void ftMasterHand_80153B28(HSD_GObj* gobj)
 }
 
 // 80153B6C 15074C
-void ftMasterHand_80153B6C(HSD_GObj* gobj)
+void ftMh_Unk19_80153B6C(HSD_GObj* gobj)
 {
     ft_80085134(gobj);
 }
 
 // 80153B8C 15076C
-void ftMasterHand_80153B8C(HSD_GObj* gobj)
+void ftMh_Unk19_80153B8C(HSD_GObj* gobj)
 {
     return;
 }
 
 // 80153B90 150770
 // https://decomp.me/scratch/vgHNv
-void ftMasterHand_80153B90(HSD_GObj* arg0)
+void ftMh_Unk19_80153B90(HSD_GObj* arg0)
 {
     Fighter* temp_r31 = GET_FIGHTER(arg0);
     ftMasterHand_SpecialAttrs* temp_r30 = temp_r31->ft_data->ext_attr;
@@ -58,18 +58,18 @@ void ftMasterHand_80153B90(HSD_GObj* arg0)
 
 // 80153C48 150828
 // https://decomp.me/scratch/NrDG9
-void ftMasterHand_80153C48(HSD_GObj* arg0)
+void ftMh_Unk19_80153C48(HSD_GObj* arg0)
 {
     if (!ftAnim_IsFramesRemaining(arg0)) {
         Fighter* fp = GET_FIGHTER(arg0);
         fp->x80_self_vel.x = 0.0f;
-        ftMasterHand_80151018(arg0);
+        ftMh_Unk03_80151018(arg0);
     }
 }
 
 // 80153C90 150870
 // https://decomp.me/scratch/ijnCv
-void ftMasterHand_80153C90(HSD_GObj* arg0)
+void ftMh_Unk19_80153C90(HSD_GObj* arg0)
 {
     Fighter* fp = GET_FIGHTER(arg0);
     if (Player_GetPlayerSlotType(fp->xC_playerID) == 0) {
@@ -79,7 +79,7 @@ void ftMasterHand_80153C90(HSD_GObj* arg0)
 
 // 80153CD4 1508B4
 // https://decomp.me/scratch/qCZ0G
-void ftMasterHand_80153CD4(HSD_GObj* gobj)
+void ftMh_Unk19_80153CD4(HSD_GObj* gobj)
 {
     Fighter* r4_fp = GET_FIGHTER(gobj);
     if (--r4_fp->mv.mh.unk0.x0 > 0.0f) {

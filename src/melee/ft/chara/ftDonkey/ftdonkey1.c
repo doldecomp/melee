@@ -9,17 +9,17 @@
 #include "ft/ftcamera.h"
 #include "ft/inlines.h"
 
-bool ftDonkey_800DF938(HSD_GObj* gobj)
+bool ftDk_Init_800DF938(HSD_GObj* gobj)
 {
     if (ft_8008A1FC(gobj)) {
-        ftDonkey_800DF980(gobj);
+        ftDk_Init_800DF980(gobj);
         return true;
     }
 
     return false;
 }
 
-void ftDonkey_800DF980(HSD_GObj* gobj)
+void ftDk_Init_800DF980(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr;
@@ -37,12 +37,12 @@ void ftDonkey_800DF980(HSD_GObj* gobj)
                               1.0f, 0.0f);
 }
 
-void ftDonkey_800DF9F0(HSD_GObj* gobj)
+void ftDk_Init_800DF9F0(HSD_GObj* gobj)
 {
-    if ((!ft_80094EA4(gobj)) && (!ftDonkey_800E0378(gobj)) &&
-        (!ftDonkey_800E0134(gobj)))
+    if ((!ft_80094EA4(gobj)) && (!ftDk_Unk6_800E0378(gobj)) &&
+        (!ftDk_Unk4_800E0134(gobj)))
     {
-        s32 result = ftDonkey_800DFA98(gobj);
+        s32 result = ftDk_Walk_800DFA98(gobj);
 
         if (result) {
             return;
@@ -50,12 +50,12 @@ void ftDonkey_800DF9F0(HSD_GObj* gobj)
     }
 }
 
-void ftDonkey_800DFA50(HSD_GObj* gobj)
+void ftDk_Init_800DFA50(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftDonkey_800DFA70(HSD_GObj* gobj)
+void ftDk_Init_800DFA70(HSD_GObj* gobj)
 {
-    ft_8008403C(gobj, &ftDonkey_800E0294);
+    ft_8008403C(gobj, &ftDk_Unk5_800E0294);
 }

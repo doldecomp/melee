@@ -10,8 +10,8 @@ typedef struct ftData_UnkModelStruct {
     unk_t (*getter[FTKIND_MAX])(HSD_GObj*);
 } ftData_UnkModelStruct;
 
-extern Fighter_UnkMtxEvent ftData_803C20CC[FTKIND_MAX];
-extern ftData_UnkModelStruct ftData_803C2150;
+extern Fighter_UnkMtxEvent ftData_UnkMtxFunc0[FTKIND_MAX];
+extern ftData_UnkModelStruct ftData_UnkIntBoolFunc0;
 
 void ftData_800855C8(enum_t id, int slot);
 void ftData_8008572C(s32);

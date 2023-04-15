@@ -9,17 +9,17 @@
 #include "ft/inlines.h"
 #include "it/it_27CF.h"
 
-bool ftDonkey_800DFA98(HSD_GObj* gobj)
+bool ftDk_Walk_800DFA98(HSD_GObj* gobj)
 {
     if (ftWalkCommon_800DFC70(gobj)) {
-        ftDonkey_800DFAE4(gobj, 0.0f);
+        ftDk_Walk_800DFAE4(gobj, 0.0f);
         return true;
     }
 
     return false;
 }
 
-void ftDonkey_800DFAE4(HSD_GObj* gobj, f32 argf)
+void ftDk_Walk_800DFAE4(HSD_GObj* gobj, f32 argf)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
@@ -29,26 +29,26 @@ void ftDonkey_800DFAE4(HSD_GObj* gobj, f32 argf)
                           1.0f);
 }
 
-void ftDonkey_800DFB34(HSD_GObj* gobj)
+void ftDk_Walk_800DFB34(HSD_GObj* gobj)
 {
     ftWalkCommon_800DFDDC(gobj);
 }
 
-void ftDonkey_800DFB54(HSD_GObj* gobj)
+void ftDk_Walk_800DFB54(HSD_GObj* gobj)
 {
-    if ((!ft_80094EA4(gobj)) && (!ftDonkey_800E0378(gobj)) &&
-        (!ftDonkey_800DF938(gobj)))
+    if ((!ft_80094EA4(gobj)) && (!ftDk_Unk6_800E0378(gobj)) &&
+        (!ftDk_Init_800DF938(gobj)))
     {
-        ftWalkCommon_800DFEC8(gobj, &ftDonkey_800DFAE4);
+        ftWalkCommon_800DFEC8(gobj, &ftDk_Walk_800DFAE4);
     }
 }
 
-void ftDonkey_800DFBB8(HSD_GObj* gobj)
+void ftDk_Walk_800DFBB8(HSD_GObj* gobj)
 {
     ftWalkCommon_800E0060(gobj);
 }
 
-void ftDonkey_800DFBD8(HSD_GObj* gobj)
+void ftDk_Walk_800DFBD8(HSD_GObj* gobj)
 {
-    ftDonkey_800DFA70(gobj);
+    ftDk_Init_800DFA70(gobj);
 }

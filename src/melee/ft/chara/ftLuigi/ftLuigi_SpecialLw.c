@@ -19,7 +19,7 @@
 
 // 0x801445C4
 // https://decomp.me/scratch/TTyNT // Luigi Cyclone Rotation Update
-void ftLuigi_SpecialLw_UpdateRot(HSD_GObj* gobj)
+void ftLg_SpecialLw_UpdateRot(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_8007592C(fp, 0, 0.0f);
@@ -39,8 +39,8 @@ static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* gobj)
 static inline void ftLuigi_SpecialLw_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21DC_callback_OnTakeDamage = ftLuigi_SpecialLw_UpdateRot;
-    fp->cb.x21E4_callback_OnDeath2 = ftLuigi_SpecialLw_UpdateRot;
+    fp->cb.x21DC_callback_OnTakeDamage = ftLg_SpecialLw_UpdateRot;
+    fp->cb.x21E4_callback_OnDeath2 = ftLg_SpecialLw_UpdateRot;
 }
 
 static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* gobj)
@@ -55,7 +55,7 @@ static inline void ftLuigi_SpecialLw_SetGFX(HSD_GObj* gobj)
 
 // 0x801445F0
 // https://decomp.me/scratch/ // Luigi's grounded Cyclone Motion State handler
-void ftLuigi_SpecialLw_StartMotion(HSD_GObj* gobj)
+void ftLg_SpecialLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftLuigiAttributes* luigiAttrs;
@@ -87,7 +87,7 @@ void ftLuigi_SpecialLw_StartMotion(HSD_GObj* gobj)
 // 0x80144708
 // https://decomp.me/scratch/egaIB // Luigi's aerial Cyclone Motion State
 // handler
-void ftLuigi_SpecialAirLw_StartMotion(HSD_GObj* gobj)
+void ftLg_SpecialAirLw_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp;
     ftLuigiAttributes* luigiAttrs;
@@ -130,7 +130,7 @@ static inline void ftLuigi_SpecialLw_SetNULL(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Cyclone Animation callback
-void ftLuigi_SpecialLw_Anim(HSD_GObj* gobj)
+void ftLg_SpecialLw_Anim(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -144,7 +144,7 @@ void ftLuigi_SpecialLw_Anim(HSD_GObj* gobj)
 }
 
 /// Luigi's aerial Cyclone Animation callback
-void ftLuigi_SpecialAirLw_Anim(HSD_GObj* gobj)
+void ftLg_SpecialAirLw_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* attrs = getFtSpecialAttrsD(fp);
@@ -170,10 +170,10 @@ void ftLuigi_SpecialAirLw_Anim(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Cyclone IASA callback
-void ftLuigi_SpecialLw_IASA(HSD_GObj* gobj) {}
+void ftLg_SpecialLw_IASA(HSD_GObj* gobj) {}
 
 /// Luigi's aerial Cyclone IASA callback
-void ftLuigi_SpecialAirLw_IASA(HSD_GObj* gobj) {}
+void ftLg_SpecialAirLw_IASA(HSD_GObj* gobj) {}
 
 static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
 {
@@ -191,7 +191,7 @@ static inline void ftLuigi_SpecialLw_GroundToAir(HSD_GObj* gobj)
 
 // 0x80144958
 // https://decomp.me/scratch/pXs3o // Luigi's grounded Cyclone Physics callback
-void ftLuigi_SpecialLw_Phys(HSD_GObj* gobj)
+void ftLg_SpecialLw_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -228,7 +228,7 @@ void ftLuigi_SpecialLw_Phys(HSD_GObj* gobj)
 
 // 0x80144A74C
 // https://decomp.me/scratch/85hbq // Luigi's aerial Cyclone Physics callback
-void ftLuigi_SpecialAirLw_Phys(HSD_GObj* gobj)
+void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -269,7 +269,7 @@ void ftLuigi_SpecialAirLw_Phys(HSD_GObj* gobj)
     }
 }
 
-static ftCollisionBox ftLuigi_SpecialLw_CollisionBox = {
+static ftCollisionBox ftLg_SpecialLw_CollisionBox = {
     12, 0, { -6, +6 }, { +6, +6 }
 };
 
@@ -289,7 +289,7 @@ static inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* gobj)
 }
 
 /// Luigi's grounded Cyclone Collision callback
-void ftLuigi_SpecialLw_Coll(HSD_GObj* gobj)
+void ftLg_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -299,13 +299,13 @@ void ftLuigi_SpecialLw_Coll(HSD_GObj* gobj)
 #endif
 
     if (fp->ground_or_air == GA_Ground) {
-        if (!ft_80082888(gobj, &ftLuigi_SpecialLw_CollisionBox)) {
+        if (!ft_80082888(gobj, &ftLg_SpecialLw_CollisionBox)) {
             ftLuigi_SpecialLw_GroundToAir(gobj);
             fp->mv.lg.SpecialLw.isUnkColl = false;
         } else {
             fp->mv.lg.SpecialLw.isUnkColl = true;
         }
-    } else if (ft_800824A0(gobj, &ftLuigi_SpecialLw_CollisionBox) == false) {
+    } else if (ft_800824A0(gobj, &ftLg_SpecialLw_CollisionBox) == false) {
         ftLuigi_SpecialLw_GroundToAir(gobj);
         fp->mv.lg.SpecialLw.isUnkColl = false;
     } else {
@@ -332,7 +332,7 @@ static inline void ftLuigi_SpecialAirLw_AirToGround(HSD_GObj* gobj)
 
 // 0x80144CEC
 // https://decomp.me/scratch/fdQ4f // Luigi's aerial Cyclone Collision callback
-void ftLuigi_SpecialAirLw_Coll(HSD_GObj* gobj)
+void ftLg_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -341,7 +341,7 @@ void ftLuigi_SpecialAirLw_Coll(HSD_GObj* gobj)
     u8 _[24];
 #endif
 
-    if (ft_800824A0(gobj, &ftLuigi_SpecialLw_CollisionBox) != false) {
+    if (ft_800824A0(gobj, &ftLg_SpecialLw_CollisionBox) != false) {
         ftLuigi_SpecialAirLw_AirToGround(gobj);
         fp->mv.lg.SpecialLw.isUnkColl = true;
     } else {

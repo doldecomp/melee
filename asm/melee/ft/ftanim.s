@@ -3020,8 +3020,8 @@ ftAnim_800704F0:
 /* 80070570 0006D150  80 7E 00 00 */	lwz r3, 0(r30)
 /* 80070574 0006D154  48 2E E5 F9 */	bl HSD_TObjAnim
 /* 80070578 0006D158  80 1F 00 04 */	lwz r0, 4(r31)
-/* 8007057C 0006D15C  3C 60 80 3C */	lis r3, ftData_803C2258@ha
-/* 80070580 0006D160  38 63 22 58 */	addi r3, r3, ftData_803C2258@l
+/* 8007057C 0006D15C  3C 60 80 3C */	lis r3, ftData_UnkCallbackPairs0@ha
+/* 80070580 0006D160  38 63 22 58 */	addi r3, r3, ftData_UnkCallbackPairs0@l
 /* 80070584 0006D164  54 00 18 38 */	slwi r0, r0, 3
 /* 80070588 0006D168  7C 63 02 14 */	add r3, r3, r0
 /* 8007058C 0006D16C  81 83 00 04 */	lwz r12, 4(r3)
@@ -3110,8 +3110,8 @@ ftAnim_80070654:
 /* 800706AC 0006D28C  7C 1F 00 40 */	cmplw r31, r0
 /* 800706B0 0006D290  41 80 FF D8 */	blt .L_80070688
 /* 800706B4 0006D294  80 9D 00 04 */	lwz r4, 4(r29)
-/* 800706B8 0006D298  3C 60 80 3C */	lis r3, ftData_803C2258@ha
-/* 800706BC 0006D29C  38 03 22 58 */	addi r0, r3, ftData_803C2258@l
+/* 800706B8 0006D298  3C 60 80 3C */	lis r3, ftData_UnkCallbackPairs0@ha
+/* 800706BC 0006D29C  38 03 22 58 */	addi r0, r3, ftData_UnkCallbackPairs0@l
 /* 800706C0 0006D2A0  54 83 18 38 */	slwi r3, r4, 3
 /* 800706C4 0006D2A4  7C 60 1A 14 */	add r3, r0, r3
 /* 800706C8 0006D2A8  81 83 00 00 */	lwz r12, 0(r3)

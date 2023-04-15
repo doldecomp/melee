@@ -1,8 +1,8 @@
 .include "macros.inc"
 
 .section .text  # 0x80005940 - 0x803B7240
-.global ftNess_ItemPKFireSpawn
-ftNess_ItemPKFireSpawn:
+.global ftNs_SpecialS__ItemPKFireSpawn
+ftNs_SpecialS__ItemPKFireSpawn:
 /* 80116B70 00113750  7C 08 02 A6 */	mflr r0
 /* 80116B74 00113754  90 01 00 04 */	stw r0, 4(r1)
 /* 80116B78 00113758  94 21 FF B0 */	stwu r1, -0x50(r1)
@@ -83,8 +83,8 @@ lbl_80116C70:
 /* 80116C8C 0011386C  7C 08 03 A6 */	mtlr r0
 /* 80116C90 00113870  4E 80 00 20 */	blr
 
-.global ftNess_SpecialS_StartMotion
-ftNess_SpecialS_StartMotion:
+.global ftNs_SpecialS_StartMotion
+ftNs_SpecialS_StartMotion:
 /* 80116C94 00113874  7C 08 02 A6 */	mflr r0
 /* 80116C98 00113878  38 80 01 64 */	li r4, 0x164
 /* 80116C9C 0011387C  90 01 00 04 */	stw r0, 4(r1)
@@ -104,8 +104,8 @@ ftNess_SpecialS_StartMotion:
 /* 80116CD4 001138B4  4B F5 26 D9 */	bl Fighter_ChangeMotionState
 /* 80116CD8 001138B8  7F C3 F3 78 */	mr r3, r30
 /* 80116CDC 001138BC  4B F5 7E C9 */	bl ftAnim_8006EBA4
-/* 80116CE0 001138C0  3C 60 80 11 */	lis r3, ftNess_ItemPKFireSpawn@ha
-/* 80116CE4 001138C4  38 03 6B 70 */	addi r0, r3, ftNess_ItemPKFireSpawn@l
+/* 80116CE0 001138C0  3C 60 80 11 */	lis r3, ftNs_SpecialS__ItemPKFireSpawn@ha
+/* 80116CE4 001138C4  38 03 6B 70 */	addi r0, r3, ftNs_SpecialS__ItemPKFireSpawn@l
 /* 80116CE8 001138C8  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 80116CEC 001138CC  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80116CF0 001138D0  83 E1 00 14 */	lwz r31, 0x14(r1)
@@ -114,8 +114,8 @@ ftNess_SpecialS_StartMotion:
 /* 80116CFC 001138DC  7C 08 03 A6 */	mtlr r0
 /* 80116D00 001138E0  4E 80 00 20 */	blr
 
-.global ftNess_SpecialAirS_Action
-ftNess_SpecialAirS_Action:
+.global ftNs_SpecialAirS_Action
+ftNs_SpecialAirS_Action:
 /* 80116D04 001138E4  7C 08 02 A6 */	mflr r0
 /* 80116D08 001138E8  38 80 01 65 */	li r4, 0x165
 /* 80116D0C 001138EC  90 01 00 04 */	stw r0, 4(r1)
@@ -136,8 +136,8 @@ ftNess_SpecialAirS_Action:
 /* 80116D44 00113924  4B F5 26 69 */	bl Fighter_ChangeMotionState
 /* 80116D48 00113928  7F C3 F3 78 */	mr r3, r30
 /* 80116D4C 0011392C  4B F5 7E 59 */	bl ftAnim_8006EBA4
-/* 80116D50 00113930  3C 60 80 11 */	lis r3, ftNess_ItemPKFireSpawn@ha
-/* 80116D54 00113934  38 03 6B 70 */	addi r0, r3, ftNess_ItemPKFireSpawn@l
+/* 80116D50 00113930  3C 60 80 11 */	lis r3, ftNs_SpecialS__ItemPKFireSpawn@ha
+/* 80116D54 00113934  38 03 6B 70 */	addi r0, r3, ftNs_SpecialS__ItemPKFireSpawn@l
 /* 80116D58 00113938  90 1F 21 BC */	stw r0, 0x21bc(r31)
 /* 80116D5C 0011393C  80 01 00 1C */	lwz r0, 0x1c(r1)
 /* 80116D60 00113940  83 E1 00 14 */	lwz r31, 0x14(r1)

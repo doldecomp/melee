@@ -263,7 +263,7 @@ CostumeListsForeachCharacter:
     .4byte 0x06000000
     .4byte lbl_8045A090
     .4byte 0x04000000
-    .4byte lbl_803C82EC
+    .4byte ftLk_803C82EC
     .4byte 0x05000000
     .4byte lbl_80459D18
     .4byte 0x05000000

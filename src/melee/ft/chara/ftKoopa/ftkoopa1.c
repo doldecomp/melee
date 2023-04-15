@@ -10,89 +10,89 @@
 #include "ft/types.h"
 #include "ftKoopa/ftkoopa.h"
 
-MotionState ftKoopa_MotionStateTable[] = {
-    { 295, 0x00340011, 0x12000000, ftKoopa_80134F48, ftKoopa_801351B0,
-      ftKoopa_80135438, ftKoopa_801354F8, ftCamera_UpdateCameraBox },
-    { 296, 0x003C0011, 0x12000000, ftKoopa_80134F9C, ftKoopa_801351B4,
-      ftKoopa_80135458, ftKoopa_80135564, ftCamera_UpdateCameraBox },
-    { 297, 0x00340011, 0x12000000, ftKoopa_80135040, ftKoopa_801352F0,
-      ftKoopa_80135478, ftKoopa_801355D0, ftCamera_UpdateCameraBox },
-    { 298, 0x00340411, 0x12000000, ftKoopa_8013507C, ftKoopa_801352F4,
-      ftKoopa_80135498, ftKoopa_8013563C, ftCamera_UpdateCameraBox },
-    { 299, 0x003C0411, 0x12000000, ftKoopa_801350D0, ftKoopa_801352F8,
-      ftKoopa_801354B8, ftKoopa_801356A8, ftCamera_UpdateCameraBox },
-    { 300, 0x00340411, 0x12000000, ftKoopa_80135174, ftKoopa_80135434,
-      ftKoopa_801354D8, ftKoopa_80135714, ftCamera_UpdateCameraBox },
-    { 301, 0x00340012, 0x13000000, ftKoopa_80133654, NULL, ftKoopa_80134224,
-      ftKoopa_80134388, ftCamera_UpdateCameraBox },
-    { 302, 0x00340012, 0x13000000, ftKoopa_801336CC, ftKoopa_80133BF4,
-      ftKoopa_80134288, ftKoopa_801343D8, ftCamera_UpdateCameraBox },
-    { 303, 0x00340012, 0x13000000, ftKoopa_801336CC, ftKoopa_80133BF4,
-      ftKoopa_80134288, ftKoopa_801343D8, ftCamera_UpdateCameraBox },
-    { 302, 0x00340012, 0x13000000, ftKoopa_801339AC, ftKoopa_80133E4C,
-      ftKoopa_801342C8, ftKoopa_80134428, ftCamera_UpdateCameraBox },
-    { 304, 0x00340012, 0x13000000, ftKoopa_801339B4, NULL, ftKoopa_80134308,
-      ftKoopa_80134478, ftCamera_UpdateCameraBox },
-    { 305, 0x00340012, 0x13000000, ftKoopa_80133A90, NULL, ftKoopa_80134328,
-      ftKoopa_801344A0, ftCamera_UpdateCameraBox },
-    { 306, 0x00340412, 0x13000000, ftKoopa_80133690, NULL, ftKoopa_80134244,
-      ftKoopa_801343B0, ftCamera_UpdateCameraBox },
-    { 307, 0x00340412, 0x13000000, ftKoopa_8013383C, ftKoopa_80133D20,
-      ftKoopa_801342A8, ftKoopa_80134400, ftCamera_UpdateCameraBox },
-    { 308, 0x00340412, 0x13000000, ftKoopa_8013383C, ftKoopa_80133D20,
-      ftKoopa_801342A8, ftKoopa_80134400, ftCamera_UpdateCameraBox },
-    { 307, 0x00340012, 0x13000000, ftKoopa_801339B0, ftKoopa_80134038,
-      ftKoopa_801342E8, ftKoopa_80134450, ftCamera_UpdateCameraBox },
-    { 309, 0x00340412, 0x13000000, ftKoopa_80133AD4, NULL, ftKoopa_80134348,
-      ftKoopa_801344C8, ftCamera_UpdateCameraBox },
-    { 310, 0x00340412, 0x13000000, ftKoopa_80133BB0, NULL, ftKoopa_80134368,
-      ftKoopa_801344F0, ftCamera_UpdateCameraBox },
-    { 311, 0x00340213, 0x14000000, ftKoopa_80135C08, ftKoopa_80135D78,
-      ftKoopa_80135D80, ftKoopa_80135E4C, ftCamera_UpdateCameraBox },
-    { 312, 0x00340613, 0x14000000, ftKoopa_80135C60, ftKoopa_80135D7C,
-      ftKoopa_80135DE0, ftKoopa_80135F6C, ftCamera_UpdateCameraBox },
-    { 313, 0x00340214, 0x15000000, ftKoopa_8013474C, NULL, ftKoopa_801347C4,
-      ftKoopa_801348A0, ftCamera_UpdateCameraBox },
-    { 314, 0x00340614, 0x15000000, ftKoopa_80134788, NULL, ftKoopa_80134804,
-      ftKoopa_801348C0, ftCamera_UpdateCameraBox },
-    { 315, 0x00340214, 0x15000000, ftKoopa_801349C4, NULL, ftKoopa_80134A00,
-      ftKoopa_80134A20, ftCamera_UpdateCameraBox },
+MotionState ftKp_Init_MotionStateTable[] = {
+    { 295, 0x00340011, 0x12000000, ftKp_Unk3_80134F48, ftKp_Unk3_801351B0,
+      ftKp_Unk3_80135438, ftKp_Unk3_801354F8, ftCamera_UpdateCameraBox },
+    { 296, 0x003C0011, 0x12000000, ftKp_Unk3_80134F9C, ftKp_Unk3_801351B4,
+      ftKp_Unk3_80135458, ftKp_Unk3_80135564, ftCamera_UpdateCameraBox },
+    { 297, 0x00340011, 0x12000000, ftKp_Unk3_80135040, ftKp_Unk3_801352F0,
+      ftKp_Unk3_80135478, ftKp_Unk3_801355D0, ftCamera_UpdateCameraBox },
+    { 298, 0x00340411, 0x12000000, ftKp_Unk3_8013507C, ftKp_Unk3_801352F4,
+      ftKp_Unk3_80135498, ftKp_Unk3_8013563C, ftCamera_UpdateCameraBox },
+    { 299, 0x003C0411, 0x12000000, ftKp_Unk3_801350D0, ftKp_Unk3_801352F8,
+      ftKp_Unk3_801354B8, ftKp_Unk3_801356A8, ftCamera_UpdateCameraBox },
+    { 300, 0x00340411, 0x12000000, ftKp_Unk3_80135174, ftKp_Unk3_80135434,
+      ftKp_Unk3_801354D8, ftKp_Unk3_80135714, ftCamera_UpdateCameraBox },
+    { 301, 0x00340012, 0x13000000, ftKp_Init_80133654, NULL,
+      ftKp_Unk3_80134224, ftKp_Unk3_80134388, ftCamera_UpdateCameraBox },
+    { 302, 0x00340012, 0x13000000, ftKp_Init_801336CC, ftKp_Unk3_80133BF4,
+      ftKp_Unk3_80134288, ftKp_Unk3_801343D8, ftCamera_UpdateCameraBox },
+    { 303, 0x00340012, 0x13000000, ftKp_Init_801336CC, ftKp_Unk3_80133BF4,
+      ftKp_Unk3_80134288, ftKp_Unk3_801343D8, ftCamera_UpdateCameraBox },
+    { 302, 0x00340012, 0x13000000, ftKp_Unk3_801339AC, ftKp_Unk3_80133E4C,
+      ftKp_Unk3_801342C8, ftKp_Unk3_80134428, ftCamera_UpdateCameraBox },
+    { 304, 0x00340012, 0x13000000, ftKp_Unk3_801339B4, NULL,
+      ftKp_Unk3_80134308, ftKp_Unk3_80134478, ftCamera_UpdateCameraBox },
+    { 305, 0x00340012, 0x13000000, ftKp_Unk3_80133A90, NULL,
+      ftKp_Unk3_80134328, ftKp_Unk3_801344A0, ftCamera_UpdateCameraBox },
+    { 306, 0x00340412, 0x13000000, ftKp_Init_80133690, NULL,
+      ftKp_Unk3_80134244, ftKp_Unk3_801343B0, ftCamera_UpdateCameraBox },
+    { 307, 0x00340412, 0x13000000, ftKp_Unk3_8013383C, ftKp_Unk3_80133D20,
+      ftKp_Unk3_801342A8, ftKp_Unk3_80134400, ftCamera_UpdateCameraBox },
+    { 308, 0x00340412, 0x13000000, ftKp_Unk3_8013383C, ftKp_Unk3_80133D20,
+      ftKp_Unk3_801342A8, ftKp_Unk3_80134400, ftCamera_UpdateCameraBox },
+    { 307, 0x00340012, 0x13000000, ftKp_Unk3_801339B0, ftKp_Unk3_80134038,
+      ftKp_Unk3_801342E8, ftKp_Unk3_80134450, ftCamera_UpdateCameraBox },
+    { 309, 0x00340412, 0x13000000, ftKp_Unk3_80133AD4, NULL,
+      ftKp_Unk3_80134348, ftKp_Unk3_801344C8, ftCamera_UpdateCameraBox },
+    { 310, 0x00340412, 0x13000000, ftKp_Unk3_80133BB0, NULL,
+      ftKp_Unk3_80134368, ftKp_Unk3_801344F0, ftCamera_UpdateCameraBox },
+    { 311, 0x00340213, 0x14000000, ftKp_Unk3_80135C08, ftKp_Unk3_80135D78,
+      ftKp_Unk3_80135D80, ftKp_Unk3_80135E4C, ftCamera_UpdateCameraBox },
+    { 312, 0x00340613, 0x14000000, ftKp_Unk3_80135C60, ftKp_Unk3_80135D7C,
+      ftKp_Unk3_80135DE0, ftKp_Unk3_80135F6C, ftCamera_UpdateCameraBox },
+    { 313, 0x00340214, 0x15000000, ftKp_Unk3_8013474C, NULL,
+      ftKp_Unk3_801347C4, ftKp_Unk3_801348A0, ftCamera_UpdateCameraBox },
+    { 314, 0x00340614, 0x15000000, ftKp_Unk3_80134788, NULL,
+      ftKp_Unk3_80134804, ftKp_Unk3_801348C0, ftCamera_UpdateCameraBox },
+    { 315, 0x00340214, 0x15000000, ftKp_Unk3_801349C4, NULL,
+      ftKp_Unk3_80134A00, ftKp_Unk3_80134A20, ftCamera_UpdateCameraBox },
 };
 
-char lbl_803CF0A0[] = "PlKp.dat";
-char lbl_803CF0AC[] = "ftDataKoopa";
-char lbl_803CF0B8[] = "PlKpNr.dat";
-char lbl_803CF0C4[] = "PlyKoopa5K_Share_joint";
-char lbl_803CF0DC[] = "PlyKoopa5K_Share_matanim_joint";
-char lbl_803CF0FC[] = "PlKpRe.dat";
-char lbl_803CF108[] = "PlyKoopa5KRe_Share_joint";
-char lbl_803CF124[] = "PlyKoopa5KRe_Share_matanim_joint";
-char lbl_803CF148[] = "PlKpBu.dat";
-char lbl_803CF154[] = "PlyKoopa5KBu_Share_joint";
-char lbl_803CF170[] = "PlyKoopa5KBu_Share_matanim_joint";
-char lbl_803CF194[] = "PlKpBk.dat";
-char lbl_803CF1A0[] = "PlyKoopa5KBk_Share_joint";
-char lbl_803CF1BC[] = "PlyKoopa5KBk_Share_matanim_joint";
-char lbl_803CF1E0[] = "PlKpAJ.dat";
+char ftKp_Init_DatFilename[] = "PlKp.dat";
+char ftKp_Init_DataName[] = "ftDataKoopa";
+char ftKp_Init_803CF0B8[] = "PlKpNr.dat";
+char ftKp_Init_803CF0C4[] = "PlyKoopa5K_Share_joint";
+char ftKp_Init_803CF0DC[] = "PlyKoopa5K_Share_matanim_joint";
+char ftKp_Init_803CF0FC[] = "PlKpRe.dat";
+char ftKp_Init_803CF108[] = "PlyKoopa5KRe_Share_joint";
+char ftKp_Init_803CF124[] = "PlyKoopa5KRe_Share_matanim_joint";
+char ftKp_Init_803CF148[] = "PlKpBu.dat";
+char ftKp_Init_803CF154[] = "PlyKoopa5KBu_Share_joint";
+char ftKp_Init_803CF170[] = "PlyKoopa5KBu_Share_matanim_joint";
+char ftKp_Init_803CF194[] = "PlKpBk.dat";
+char ftKp_Init_803CF1A0[] = "PlyKoopa5KBk_Share_joint";
+char ftKp_Init_803CF1BC[] = "PlyKoopa5KBk_Share_matanim_joint";
+char ftKp_Init_AnimDatFilename[] = "PlKpAJ.dat";
 
-Fighter_DemoStrings lbl_803CF25C = {
+Fighter_DemoStrings ftKp_Init_DemoMotionFilenames = {
     "ftDemoResultMotionFileKoopa",
     "ftDemoIntroMotionFileKoopa",
     "ftDemoEndingMotionFileKoopa",
     "ftDemoViWaitMotionFileKoopa",
 };
 
-Fighter_CostumeStrings lbl_803CF26C[] = {
-    { lbl_803CF0B8, lbl_803CF0C4, lbl_803CF0DC },
-    { lbl_803CF0FC, lbl_803CF108, lbl_803CF124 },
-    { lbl_803CF148, lbl_803CF154, lbl_803CF170 },
-    { lbl_803CF194, lbl_803CF1A0, lbl_803CF1BC },
+Fighter_CostumeStrings ftKp_Init_CostumeStrings[] = {
+    { ftKp_Init_803CF0B8, ftKp_Init_803CF0C4, ftKp_Init_803CF0DC },
+    { ftKp_Init_803CF0FC, ftKp_Init_803CF108, ftKp_Init_803CF124 },
+    { ftKp_Init_803CF148, ftKp_Init_803CF154, ftKp_Init_803CF170 },
+    { ftKp_Init_803CF194, ftKp_Init_803CF1A0, ftKp_Init_803CF1BC },
 };
 
 /* static */ extern const f32 lbl_804D9ADC; // = 1.0F
 /* static */ extern const f32 lbl_804D9AD8; // = 0.0F
 
-void ftKoopa_OnDeath(HSD_GObj* gobj)
+void ftKp_Init_OnDeath(HSD_GObj* gobj)
 {
     /// @todo Unused stack.
 #ifdef MUST_MATCH
@@ -113,19 +113,19 @@ void ftKoopa_OnDeath(HSD_GObj* gobj)
     }
 }
 
-/* static */ void ftKoopa_80134D78(HSD_GObj* gobj);
+/* static */ void ftKp_Unk3_80134D78(HSD_GObj* gobj);
 
-void ftKoopa_80132A64(HSD_GObj* gobj)
+void ftKp_Init_UnkMotionStates3(HSD_GObj* gobj)
 {
-    ftKoopa_80134D78(gobj);
+    ftKp_Unk3_80134D78(gobj);
 }
 
-void ftKoopa_OnLoadForGKoopa(Fighter* fp)
+void ftKp_OnLoadForGKoopa(Fighter* fp)
 {
     PUSH_ATTRS(fp, ftKoopaAttributes);
 }
 
-void ftKoopa_OnLoad(HSD_GObj* gobj)
+void ftKp_Init_OnLoad(HSD_GObj* gobj)
 {
     /// @todo #GET_FIGHTER is 8 bytes too much stack but it should be possible
     Fighter* fp = gobj->user_data;
@@ -138,93 +138,93 @@ void ftKoopa_OnLoad(HSD_GObj* gobj)
     fp->x2226_flag.bits.b1 = true;
 }
 
-void ftKoopa_80132B38(void) {}
+void ftKp_Init_80132B38(void) {}
 
-void ftKoopa_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftKp_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
 {
     Fighter_OnItemPickup(gobj, bool, true, true);
 }
 
-void ftKoopa_OnItemInvisible(HSD_GObj* gobj)
+void ftKp_Init_OnItemInvisible(HSD_GObj* gobj)
 {
     Fighter_OnItemInvisible(gobj, true);
 }
 
-void ftKoopa_OnItemVisible(HSD_GObj* gobj)
+void ftKp_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, true);
 }
 
-void ftKoopa_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftKp_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
 {
     Fighter_OnItemDrop(gobj, bool1, true, true);
 }
 
-void ftKoopa_LoadSpecialAttrs(HSD_GObj* gobj)
+void ftKp_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftKoopaAttributes);
 }
 
-void ftKoopa_OnKnockbackEnter(HSD_GObj* gobj)
+void ftKp_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackEnter(gobj, true);
 }
 
-void ftKoopa_OnKnockbackExit(HSD_GObj* gobj)
+void ftKp_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
     Fighter_OnKnockbackExit(gobj, true);
 }
 
-f32 ftKoopa_80132DC0(HSD_GObj* gobj)
+f32 ftKp_Init_80132DC0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x4C;
 }
 
-f32 ftKoopa_80132DD0(HSD_GObj* gobj)
+f32 ftKp_Init_80132DD0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x48;
 }
 
-f32 ftKoopa_80132DE0(HSD_GObj* gobj)
+f32 ftKp_Init_80132DE0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x44;
 }
 
-f32 ftKoopa_80132DF0(HSD_GObj* gobj)
+f32 ftKp_Init_80132DF0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x40;
 }
 
-f32 ftKoopa_80132E00(HSD_GObj* gobj)
+f32 ftKp_Init_80132E00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x3C;
 }
 
-f32 ftKoopa_80132E10(HSD_GObj* gobj)
+f32 ftKp_Init_80132E10(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x34;
 }
 
-f32 ftKoopa_80132E20(HSD_GObj* gobj)
+f32 ftKp_Init_80132E20(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKoopaAttributes* sa = fp->x2D4_specialAttributes;
     return sa->x38;
 }
 
-void ftKoopa_80132E30(HSD_GObj* gobj)
+void ftKp_Init_80132E30(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -260,7 +260,7 @@ void ftKoopa_80132E30(HSD_GObj* gobj)
     }
 }
 
-void ftKoopa_SpecialS_StartMotion(HSD_GObj* gobj)
+void ftKp_SpecialS_StartMotion(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -279,14 +279,14 @@ void ftKoopa_SpecialS_StartMotion(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        ftCommon_8007E2D0(fp, 8, ftKoopa_8013302C, NULL, ft_800BC7E0);
+        ftCommon_8007E2D0(fp, 8, ftKp_Init_8013302C, NULL, ft_800BC7E0);
 
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
     }
 }
 
-void ftKoopa_SpecialAirS_StartMotion(HSD_GObj* gobj)
+void ftKp_SpecialAirS_StartMotion(HSD_GObj* gobj)
 {
     {
         Fighter* fp = GET_FIGHTER(gobj);
@@ -305,7 +305,7 @@ void ftKoopa_SpecialAirS_StartMotion(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
 
-        ftCommon_8007E2D0(fp, 8, ftKoopa_801330E4, NULL, ft_800BC8D4);
+        ftCommon_8007E2D0(fp, 8, ftKp_Init_801330E4, NULL, ft_800BC8D4);
 
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
@@ -315,7 +315,7 @@ void ftKoopa_SpecialAirS_StartMotion(HSD_GObj* gobj)
 static Fighter_MotionStateChangeFlags const transition_flags0 =
     FtStateChange_SkipUpdateMatAnim;
 
-void ftKoopa_8013302C(HSD_GObj* gobj)
+void ftKp_Init_8013302C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -334,7 +334,7 @@ void ftKoopa_8013302C(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
 }
 
-void ftKoopa_801330E4(HSD_GObj* gobj)
+void ftKp_Init_801330E4(HSD_GObj* gobj)
 {
     Fighter* fp;
 
@@ -361,7 +361,7 @@ static Fighter_MotionStateChangeFlags const transition_flags1 =
     FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag |
     FtStateChange_Unk_27;
 
-void ftKoopa_8013319C(HSD_GObj* gobj)
+void ftKp_Init_8013319C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -372,13 +372,13 @@ void ftKoopa_8013319C(HSD_GObj* gobj)
 
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftCommon_8007E2D0(fp, 8, ftKoopa_801330E4, NULL, ft_800BC8D4);
+        ftCommon_8007E2D0(fp, 8, ftKp_Init_801330E4, NULL, ft_800BC8D4);
         fp->mv.kp.unk1.x0 = 0;
         fp->mv.kp.unk1.x8 = 0;
     }
 }
 
-void ftKoopa_8013322C(HSD_GObj* gobj)
+void ftKp_Init_8013322C(HSD_GObj* gobj)
 {
     /// @todo @c fp0 cannot move below @c fp1, which is very strange.
     ///       Perhaps there is a temporary @c Fighter* somewhere.
@@ -393,7 +393,7 @@ void ftKoopa_8013322C(HSD_GObj* gobj)
 
     {
         fp0 = GET_FIGHTER(gobj);
-        ftCommon_8007E2D0(fp0, 8, ftKoopa_8013302C, NULL, ft_800BC7E0);
+        ftCommon_8007E2D0(fp0, 8, ftKp_Init_8013302C, NULL, ft_800BC7E0);
         fp0->mv.kp.unk1.x0 = 0;
         fp0->mv.kp.unk1.x8 = 0;
     }
@@ -402,7 +402,7 @@ void ftKoopa_8013322C(HSD_GObj* gobj)
     fp1->x2200_ftcmd_var0 = 0;
 }
 
-void ftKoopa_801332C4(HSD_GObj* gobj)
+void ftKp_Init_801332C4(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
@@ -417,7 +417,7 @@ void ftKoopa_801332C4(HSD_GObj* gobj)
     ft_800CC730(gobj);
 }
 
-void ftKoopa_80133324(HSD_GObj* gobj)
+void ftKp_Init_80133324(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -431,7 +431,7 @@ void ftKoopa_80133324(HSD_GObj* gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-void ftKoopa_80133398(HSD_GObj* gobj)
+void ftKp_Init_80133398(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
@@ -451,7 +451,7 @@ static u32 const transition_flags2 =
     FtStateChange_SkipUpdateItemVis | FtStateChange_Unk_19 |
     FtStateChange_SkipUpdateModelPartVis | FtStateChange_SkipUpdateModelFlag;
 
-void ftKoopa_801333F8(HSD_GObj* gobj)
+void ftKp_Init_801333F8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -468,7 +468,7 @@ void ftKoopa_801333F8(HSD_GObj* gobj)
     fp->x2200_ftcmd_var0 = 0;
 }
 
-void ftKoopa_80133484(HSD_GObj* gobj)
+void ftKp_Init_80133484(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_GObj* victim_gobj = fp->x1A58_interactedFighter;
@@ -483,7 +483,7 @@ void ftKoopa_80133484(HSD_GObj* gobj)
     ft_800CC730(gobj);
 }
 
-void ftKoopa_801334E4(HSD_GObj* gobj)
+void ftKp_Init_801334E4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -509,7 +509,7 @@ void ftKoopa_801334E4(HSD_GObj* gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-void ftKoopa_8013359C(HSD_GObj* gobj)
+void ftKp_Init_8013359C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -535,14 +535,14 @@ void ftKoopa_8013359C(HSD_GObj* gobj)
     ftCommon_8007E2FC(gobj);
 }
 
-void ftKoopa_80133654(HSD_GObj* gobj)
+void ftKp_Init_80133654(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftKoopa_80133690(HSD_GObj* gobj)
+void ftKp_Init_80133690(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
@@ -552,7 +552,7 @@ void ftKoopa_80133690(HSD_GObj* gobj)
 static Fighter_MotionStateChangeFlags const transition_flags3 =
     FtStateChange_SkipUpdateMatAnim | FtStateChange_Unk_19;
 
-void ftKoopa_801336CC(HSD_GObj* gobj)
+void ftKp_Init_801336CC(HSD_GObj* gobj)
 {
     Fighter* fp0 = GET_FIGHTER(gobj);
 

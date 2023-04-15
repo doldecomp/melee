@@ -23,7 +23,7 @@ static int pickMegavitamin(Fighter* fp, int* arr, int outpos)
 }
 
 /// Get random Megavitamin color combo for Dr. Mario
-int ftMario_SpecialN_VitaminRandom(HSD_GObj* gobj)
+int ftMr_SpecialN_VitaminRandom(HSD_GObj* gobj)
 {
     Fighter* fp;
     int arr[9];
@@ -45,7 +45,7 @@ int ftMario_SpecialN_VitaminRandom(HSD_GObj* gobj)
     return r3;
 }
 
-void ftMario_SpecialN_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
@@ -53,17 +53,17 @@ void ftMario_SpecialN_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
+    fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }
 
-void ftMario_SpecialN_Anim(HSD_GObj* gobj)
+void ftMr_SpecialN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-void ftMario_SpecialN_IASA(HSD_GObj* gobj)
+void ftMr_SpecialN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
@@ -72,19 +72,19 @@ void ftMario_SpecialN_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMario_SpecialN_Phys(HSD_GObj* gobj)
+void ftMr_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-void ftMario_SpecialN_Coll(HSD_GObj* gobj)
+void ftMr_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
-        ftMario_SpecialN_GroundToAir(gobj);
+        ftMr_SpecialN_GroundToAir(gobj);
     }
 }
 
-void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
+void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
 {
     Vec3 coords;
     Fighter* fp;
@@ -116,14 +116,14 @@ void ftMario_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
                          fp->ft_bones[ftParts_8007500C(fp, 0x17)].x0_jobj,
                          &fp->facing_dir);
         } else {
-            rand_val_800E0D1C = ftMario_SpecialN_VitaminRandom(gobj);
+            rand_val_800E0D1C = ftMr_SpecialN_VitaminRandom(gobj);
             it_802C0510(gobj, &coords, rand_val_800E0D1C, 0x31,
                         fp->facing_dir);
         }
     }
 }
 
-void ftMario_SpecialAirN_StartMotion(HSD_GObj* gobj)
+void ftMr_SpecialAirN_StartMotion(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x2200_ftcmd_var0 = 0;
@@ -131,17 +131,17 @@ void ftMario_SpecialAirN_StartMotion(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftMr_MS_SpecialAirN, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
-    fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
+    fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }
 
-void ftMario_SpecialAirN_Anim(HSD_GObj* gobj)
+void ftMr_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_800CC730(gobj);
     }
 }
 
-void ftMario_SpecialAirN_IASA(HSD_GObj* gobj)
+void ftMr_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2200_ftcmd_var0 != 0) {
@@ -149,19 +149,19 @@ void ftMario_SpecialAirN_IASA(HSD_GObj* gobj)
     }
 }
 
-void ftMario_SpecialAirN_Phys(HSD_GObj* gobj)
+void ftMr_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
 }
 
-void ftMario_SpecialAirN_Coll(HSD_GObj* gobj)
+void ftMr_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
-        ftMario_SpecialAirN_AirToGround(gobj);
+        ftMr_SpecialAirN_AirToGround(gobj);
     }
 }
 
-void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
+void ftMr_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
@@ -170,10 +170,10 @@ void ftMario_SpecialN_GroundToAir(HSD_GObj* gobj)
         (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
+    fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }
 
-void ftMario_SpecialAirN_AirToGround(HSD_GObj* gobj)
+void ftMr_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
@@ -182,5 +182,5 @@ void ftMario_SpecialAirN_AirToGround(HSD_GObj* gobj)
         (FtStateChange_UpdateCmd | FtStateChange_SkipUpdateColAnim), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
-    fp->cb.x21BC_callback_Accessory4 = ftMario_SpecialN_ItemFireSpawn;
+    fp->cb.x21BC_callback_Accessory4 = ftMr_SpecialN_ItemFireSpawn;
 }
