@@ -4,9 +4,11 @@
 #include "ftGw_SpecialN.h"
 
 #include "ftGw_Init.h"
+#include "types.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "it/it_27CF.h"
