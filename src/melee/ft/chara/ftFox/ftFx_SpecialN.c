@@ -76,13 +76,13 @@ s32 ftFx_SpecialN_GetBlasterAction(HSD_GObj* gobj)
         if (fp != NULL) {
             s32 currASID = fp->motion_id;
             switch (currASID) {
-            case MS_FOX_SPECIALN_START:
-            case MS_FOX_SPECIALN_LOOP:
-            case MS_FOX_SPECIALN_END:
-            case MS_FOX_SPECIALAIRN_START:
-            case MS_FOX_SPECIALAIRN_LOOP:
-            case MS_FOX_SPECIALAIRN_END:
-                msid = currASID - MS_FOX_SPECIALN_START;
+            case ftFx_MS_SpecialNStart:
+            case ftFx_MS_SpecialNLoop:
+            case ftFx_MS_SpecialNEnd:
+            case ftFx_MS_SpecialAirNStart:
+            case ftFx_MS_SpecialAirNLoop:
+            case ftFx_MS_SpecialAirNEnd:
+                msid = currASID - ftFx_MS_SpecialNStart;
                 break;
 
             case ftCo_MS_ThrowB:
@@ -104,12 +104,12 @@ bool ftFx_SpecialN_CheckBlasterAction(HSD_GObj* gobj)
         Fighter* fp = GET_FIGHTER(gobj);
         s32 msid = fp->motion_id;
         switch (msid) {
-        case MS_FOX_SPECIALN_START:
-        case MS_FOX_SPECIALN_LOOP:
-        case MS_FOX_SPECIALN_END:
-        case MS_FOX_SPECIALAIRN_START:
-        case MS_FOX_SPECIALAIRN_LOOP:
-        case MS_FOX_SPECIALAIRN_END:
+        case ftFx_MS_SpecialNStart:
+        case ftFx_MS_SpecialNLoop:
+        case ftFx_MS_SpecialNEnd:
+        case ftFx_MS_SpecialAirNStart:
+        case ftFx_MS_SpecialAirNLoop:
+        case ftFx_MS_SpecialAirNEnd:
         case ftCo_MS_ThrowB:
         case ftCo_MS_ThrowHi:
         case ftCo_MS_ThrowLw:
@@ -242,7 +242,7 @@ void ftFx_SpecialN_Enter(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALN_START, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialNStart, 0, NULL, 0.0f, 1.0f,
                               0.0f);
 
     fp->x220C_ftcmd_var3 = 0;
@@ -283,7 +283,7 @@ void ftFx_SpecialAirN_Enter(
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
     HSD_GObj* blasterGObj;
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRN_START, 0, NULL, 0.0f,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirNStart, 0, NULL, 0.0f,
                               1.0f, 0.0f);
 
     fp->x220C_ftcmd_var3 = 0;
@@ -329,7 +329,7 @@ void ftFx_SpecialNStart_Anim(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(
-            gobj, MS_FOX_SPECIALN_LOOP,
+            gobj, ftFx_MS_SpecialNLoop,
             (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx), NULL,
             0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(gobj);
@@ -355,7 +355,7 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((s32) temp_r28->mv.fx.SpecialN.isBlasterLoop == true) {
             temp_r28->cb.x21EC_callback = ftFx_SpecialN_OnChangeAction;
-            Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALN_LOOP,
+            Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialNLoop,
                                       (FtStateChange_SkipUpdateAttackCount |
                                        FtStateChange_SkipUpdateModel |
                                        FtStateChange_PreserveGfx),
@@ -367,7 +367,7 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
         } else {
             HSD_GObj* temp;
             Fighter_ChangeMotionState(
-                gobj, MS_FOX_SPECIALN_END,
+                gobj, ftFx_MS_SpecialNEnd,
                 (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
                 NULL, 0.0f, 1.0f, 0.0f);
             temp = temp_r28->fv.fx.x222C_blasterGObj;
@@ -489,7 +489,7 @@ void ftFx_SpecialAirNStart_Anim(HSD_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter_ChangeMotionState(
-            gobj, MS_FOX_SPECIALAIRN_LOOP,
+            gobj, ftFx_MS_SpecialAirNLoop,
             (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx), NULL,
             0.0f, 1.0f, 0.0f);
         ftFox_SpecialN_SetCall(gobj);
@@ -515,7 +515,7 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if ((s32) fp->mv.fx.SpecialN.isBlasterLoop == true) {
             fp->cb.x21EC_callback = ftFx_SpecialN_OnChangeAction;
-            Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRN_LOOP,
+            Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirNLoop,
                                       (FtStateChange_SkipUpdateAttackCount |
                                        FtStateChange_SkipUpdateModel |
                                        FtStateChange_PreserveGfx),
@@ -528,7 +528,7 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
             HSD_GObj* temp;
 
             Fighter_ChangeMotionState(
-                gobj, MS_FOX_SPECIALAIRN_END,
+                gobj, ftFx_MS_SpecialAirNEnd,
                 (FtStateChange_SkipUpdateModel | FtStateChange_PreserveGfx),
                 NULL, 0.0f, 1.0f, 0.0f);
             ftFox_SpecialN_SetCall(gobj);

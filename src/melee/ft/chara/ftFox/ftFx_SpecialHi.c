@@ -62,8 +62,8 @@ void ftFx_SpecialHi_Enter(HSD_GObj* gobj)
         (s32) foxAttrs->x54_FOX_FIREFOX_GRAVITY_DELAY;
     fp->gr_vel /= foxAttrs->x58_FOX_FIREFOX_VEL_X;
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALHI_HOLD, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiStart, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 
     fp->cb.x21BC_callback_Accessory4 = ftFx_SpecialHi_CreateChargeGFX;
@@ -79,7 +79,7 @@ void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
     fp->x80_self_vel.x /= foxAttrs->x58_FOX_FIREFOX_VEL_X;
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALHI_HOLDAIR, 0, NULL, 0.0f,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirHiStart, 0, NULL, 0.0f,
                               1.0f, 0.0f);
 
     ftAnim_8006EBA4(gobj);
@@ -191,7 +191,7 @@ void ftFx_SpecialHiHold_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALHI_HOLDAIR,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirHiStart,
                               FTFOX_SPECIALHI_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
@@ -203,7 +203,7 @@ void ftFx_SpecialHiHoldAir_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALHI_HOLD,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiStart,
                               FTFOX_SPECIALHI_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
@@ -417,7 +417,7 @@ void ftFx_SpecialHi_GroundToAir(HSD_GObj* gobj)
     ftCommon_8007D60C(fp);
 
     Fighter_ChangeMotionState(
-        gobj, MS_FOX_SPECIALAIRHI,
+        gobj, ftFx_MS_SpecialAirHi,
         (FtStateChange_SkipUpdateHit | FTFOX_SPECIALHI_COLL_FLAG), NULL,
         fp->x894_currentAnimFrame, 1.0f, 0.0f);
 
@@ -466,7 +466,7 @@ void ftFx_SpecialAirHi_AirToGround(HSD_GObj* gobj)
         {
             ftCommon_8007D9FC(fp);
 
-            Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALHI, 0, NULL, 0.0f,
+            Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHi, 0, NULL, 0.0f,
                                       1.0f, 0.0f);
 
             tempAttrs = fp->x2D4_specialAttributes;
@@ -536,7 +536,7 @@ void ftFx_SpecialAirHi_Enter(HSD_GObj* gobj)
         fp->mv.fx.SpecialHi.rotateModel = HALF_PI32;
     }
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRHI, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirHi, 0, NULL, 0.0f, 1.0f,
                               0.0f);
 
     tempAttrs = fp->x2D4_specialAttributes;
@@ -659,7 +659,7 @@ void ftFx_SpecialHiFall_Enter(HSD_GObj* gobj)
 {
     ftCommon_8007D7FC(GET_FIGHTER(gobj));
     Fighter_ChangeMotionState(
-        gobj, MS_FOX_SPECIALHI_LANDING,
+        gobj, ftFx_MS_SpecialHiEnd,
         (FtStateChange_SkipUpdateColAnim | FtStateChange_UpdateCmd), NULL,
         13.0f, 1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
@@ -676,8 +676,8 @@ void ftFx_SpecialHiFall_AirToGround(HSD_GObj* gobj)
     if ((s32) fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
     }
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALHI_LANDING, 0, NULL, 0.0f,
-                              1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiEnd, 0, NULL, 0.0f, 1.0f,
+                              0.0f);
     fp->cb.x21F8_callback = ftCommon_8007F76C;
 }
 
@@ -690,8 +690,8 @@ void ftFx_SpecialHiLanding_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007DB24(gobj);
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALHI_FALL, 0, NULL, 0.0f, 1.0f,
-                              0.0f);
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirHiEnd, 0, NULL, 0.0f,
+                              1.0f, 0.0f);
     fp->cb.x21F8_callback = ftCommon_8007F76C;
 }
 
@@ -813,7 +813,7 @@ void ftFx_SpecialHiBound_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftFoxAttributes* foxAttrs = fp->x2D4_specialAttributes;
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALHI_BOUND, 0, NULL, 0.0f,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialHiBound, 0, NULL, 0.0f,
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
     fp->cb.x21F8_callback = ftCommon_8007F76C;

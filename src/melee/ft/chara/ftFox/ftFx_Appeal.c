@@ -73,8 +73,8 @@ static inline bool ftFox_AppealS_GetLR(f32 x1, f32 x2)
 }
 
 static s32 ASID_AppealS[2][3] = {
-    { MS_FOX_APPEALS_START_R, MS_FOX_APPEALS_R, MS_FOX_APPEALS_END_R },
-    { MS_FOX_APPEALS_START_L, MS_FOX_APPEALS_L, MS_FOX_APPEALS_END_L }
+    { ftFx_MS_AppealRStart, ftFx_MS_AppealR, ftFx_MS_AppealREnd },
+    { ftFx_MS_AppealLStart, ftFx_MS_AppealL, ftFx_MS_AppealLEnd }
 };
 
 void ftFx_AppealS_Enter(HSD_GObj* gobj)

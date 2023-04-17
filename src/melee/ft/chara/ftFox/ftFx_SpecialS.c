@@ -33,7 +33,7 @@ bool ftFx_SpecialS_CheckGhostRemove(HSD_GObj* gobj)
     /// @todo @c enum
     enum_t msid = GET_FIGHTER(gobj)->motion_id;
 
-    if (msid >= MS_FOX_SPECIALS_START && msid <= MS_FOX_SPECIALAIRS_END) {
+    if (msid >= ftFx_MS_SpecialSStart && msid <= ftFx_MS_SpecialAirSEnd) {
         return false;
     }
 
@@ -83,7 +83,7 @@ void ftFx_SpecialSStart_Enter(HSD_GObj* gobj)
 
     fp->gr_vel /= foxAttrs->x28_FOX_ILLUSION_GROUND_VEL_X;
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS_START, 0, NULL, 0.0f, 1.0f,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialSStart, 0, NULL, 0.0f, 1.0f,
                               0.0f);
     ftAnim_8006EBA4(gobj);
 }
@@ -107,7 +107,7 @@ void ftFx_SpecialAirSStart_Enter(HSD_GObj* gobj)
     fp->x80_self_vel.y = 0.0f;
     fp->x80_self_vel.x /= foxAttrs->x28_FOX_ILLUSION_GROUND_VEL_X;
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRS_START, 0, NULL, 0.0f,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirSStart, 0, NULL, 0.0f,
                               1.0f, 0.0f);
     ftAnim_8006EBA4(gobj);
 
@@ -224,7 +224,7 @@ void ftFx_SpecialSStart_GroundToAir(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D60C(fp);
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRS_START,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirSStart,
                               FTFOX_SPECIALS_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
@@ -237,7 +237,7 @@ void ftFx_SpecialAirSStart_AirToGround(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS_START,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialSStart,
                               FTFOX_SPECIALS_COLL_FLAG, NULL,
                               fp->x894_currentAnimFrame, 1.0f, 0.0f);
 }
@@ -409,7 +409,7 @@ void ftFx_SpecialS_GroundToAir(HSD_GObj* gobj)
 
     ftCommon_8007D60C(fp);
     Fighter_ChangeMotionState(
-        gobj, MS_FOX_SPECIALAIRS,
+        gobj, ftFx_MS_SpecialAirS,
         (FtStateChange_PreserveColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
         NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x2208_ftcmd_var2 = 0;
@@ -424,7 +424,7 @@ void ftFx_SpecialAirS_AirToGround(HSD_GObj* gobj)
 
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(
-        gobj, MS_FOX_SPECIALS,
+        gobj, ftFx_MS_SpecialS,
         (FtStateChange_PreserveColAnimHitStatus | FTFOX_SPECIALS_COLL_FLAG),
         NULL, fp->x894_currentAnimFrame, 1.0f, 0.0f);
     fp->x2208_ftcmd_var2 = 0;
@@ -460,7 +460,7 @@ void ftFx_SpecialS_Enter(HSD_GObj* gobj)
     u8 _[28];
 #endif
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialS,
                               FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
                               0.0f);
     ftFox_SpecialS_SetVars(gobj);
@@ -476,7 +476,7 @@ void ftFx_SpecialAirS_Enter(HSD_GObj* gobj)
     u8 _[36];
 #endif
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRS,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirS,
                               FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
                               0.0f);
     ftFox_SpecialS_SetVars(gobj);
@@ -626,7 +626,7 @@ void ftFx_SpecialSEnd_Enter(HSD_GObj* gobj)
 
     fp->gr_vel = foxAttrs->x34_FOX_ILLUSION_GROUND_END_VEL_X * fp->facing_dir;
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALS_END,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialSEnd,
                               FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
                               0.0f);
     ftFox_SpecialSEnd_SetVars(gobj);
@@ -643,7 +643,7 @@ void ftFx_SpecialAirSEnd_Enter(HSD_GObj* gobj)
         foxAttrs->x3C_FOX_ILLUSION_AIR_END_VEL_X * fp->facing_dir;
     fp->x80_self_vel.y = 0.0f;
 
-    Fighter_ChangeMotionState(gobj, MS_FOX_SPECIALAIRS_END,
+    Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirSEnd,
                               FtStateChange_SkipUpdateRumble, NULL, 0.0f, 1.0f,
                               0.0f);
     ftFox_SpecialSEnd_SetVars(gobj);
