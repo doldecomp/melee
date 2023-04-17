@@ -1,7 +1,7 @@
 #ifndef _ftgigakoopa_h_
 #define _ftgigakoopa_h_
 
-#include "ft/fighter.h"
+#include "ft/types.h"
 
 #include <baselib/gobj.h>
 

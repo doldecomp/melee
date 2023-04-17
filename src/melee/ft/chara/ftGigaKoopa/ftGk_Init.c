@@ -7,7 +7,7 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftKoopa/ftkoopa.h"
+#include "ftKoopa/ftKp_Init.h"
 
 MotionState ftGk_Init_MotionStateTable[] = {
     {
@@ -338,7 +338,7 @@ void ftGk_Init_UnkDemoCallbacks0(s32 arg0, s32* arg1, s32* arg2)
     }
 }
 
-/// @warning UB warning: this function may use offset uninitialized
+/// @remarks UB warning: this function may use offset uninitialized
 char* ftGk_Init_GetMotionFileString(enum_t arg0)
 {
     int offset;

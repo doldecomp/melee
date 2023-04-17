@@ -26,7 +26,7 @@
 #include "ftGanon/ftGn_Init.h"
 #include "ftGigaKoopa/ftGk_Init.h"
 #include "ftKirby/ftKb_Init.h"
-#include "ftKoopa/ftkoopa.h"
+#include "ftKoopa/ftKp_Init.h"
 #include "ftLink/ftLk_Init.h"
 #include "ftLuigi/ftLg_Init.h"
 #include "ftMario/ftMr_Init.h"

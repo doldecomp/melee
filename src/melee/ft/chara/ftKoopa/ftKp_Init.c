@@ -1,6 +1,8 @@
 #include "ft/forward.h"
 #include "it/forward.h"
 
+#include "ftKoopa/ftKp_Init.h"
+
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
@@ -8,7 +10,6 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftKoopa/ftkoopa.h"
 
 MotionState ftKp_Init_MotionStateTable[] = {
     {
