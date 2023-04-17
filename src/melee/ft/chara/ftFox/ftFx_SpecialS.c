@@ -1,3 +1,5 @@
+#include "forward.h"
+
 #include "ftFx_Init.h"
 
 #include "ef/eflib.h"
