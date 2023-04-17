@@ -43,4 +43,60 @@ union ftDonkey_MotionVars {
     } unk8;
 };
 
+typedef struct _ftDonkeyAttributes {
+    s32 motion_state;
+    s32 x4_motion_state;
+
+    //// used by ftDk_MS_342.c (maybe Cargo Hold) ////
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    /////////////////////////////////////////////////
+
+    struct {
+        f32 x20_TURN_SPEED;
+        f32 x24_JUMP_STARTUP_LAG;
+        f32 x28_LANDING_LAG;
+    } cargo_hold;
+
+    //// Giant Punch
+    struct {
+        s32 x2C_MAX_ARM_SWINGS;
+        s32 x30_DAMAGE_PER_SWING;
+        f32 x34_PUNCH_HORIZONTAL_VEL;
+        f32 x38_LANDING_LAG;
+    } SpecialN;
+
+    //// Headbutt
+    struct {
+        f32 x3C_MIN_STICK_X_MOMENTUM;
+        f32 x40_MOMENTUM_TRANSITION_MODIFIER;
+        f32 x44_AERIAL_GRAVITY;
+    } SpecialS;
+
+    f32 x48_UNKNOWN;
+
+    //// Spinning Kong
+    struct {
+        f32 x4C_AERIAL_VERTICAL_VELOCITY;
+        f32 x50_AERIAL_GRAVITY;
+        f32 x54_GROUNDED_HORIZONTAL_VELOCITY;
+        f32 x58_AERIAL_HORIZONTAL_VELOCITY;
+        f32 x5C_GROUNDED_MOBILITY;
+        f32 x60_AERIAL_MOBILITY;
+        f32 x64_LANDING_LAG;
+    } SpecialHi;
+
+    /// Hand Slap
+    struct {
+        f32 x68;
+        f32 x6C;
+        f32 x70;
+    } SpecialLw;
+
+} ftDonkeyAttributes;
+
 #endif

@@ -1,6 +1,8 @@
+#include "forward.h"
+
 #include "ftDk_SpecialLw.h"
 
-#include "ftdonkey.h"
+#include "ftDk_Init.h"
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
@@ -13,9 +15,11 @@ void ftDk_SpecialLw_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.dk.speciallw.x0 = 0;
-    Fighter_ChangeMotionState(gobj, 0x17F, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwStart, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
 }
+
+static void doAnim(HSD_GObj* gobj);
 
 void ftDk_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
@@ -23,7 +27,6 @@ void ftDk_SpecialLwStart_Anim(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-
     if (!ftAnim_IsFramesRemaining(gobj)) {
         doAnim(gobj);
     }
@@ -43,6 +46,8 @@ void ftDk_SpecialLwStart_Coll(HSD_GObj* gobj)
     }
 }
 
+static void doTransition(HSD_GObj* gobj);
+
 void ftDk_SpecialLwLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -59,7 +64,7 @@ void ftDk_SpecialLwLoop_Anim(HSD_GObj* gobj)
 void ftDk_SpecialLwLoop_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (fp->input.x668 & 0x200) {
+    if (fp->input.x668 & 512) {
         fp->mv.dk.speciallw.x0 = 1;
     }
 }
@@ -76,37 +81,37 @@ void ftDk_SpecialLwLoop_Coll(HSD_GObj* gobj)
     }
 }
 
-void callback(HSD_GObj* gobj)
+static void callback(HSD_GObj* gobj)
 {
     ft_80089824(gobj);
     ft_800892A0(gobj);
 }
 
-void ftDonkey_8010DE88_inner(HSD_GObj* gobj)
+static void ftDonkey_8010DE88_inner(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-
     if (!fp->x2219_flag.bits.b0) {
-        efAsync_Spawn(gobj, &fp->x60C, 1, 0x4CC, fp->ft_bones[0].x0_jobj);
+        efAsync_Spawn(gobj, &fp->x60C, 1, 1228, fp->ft_bones[TopN].x0_jobj);
         fp->x2219_flag.bits.b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
 }
 
-void doAnim(HSD_GObj* gobj)
+static void callback(HSD_GObj* gobj);
+
+static void doAnim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cb.x21EC_callback = &callback;
+    fp->cb.x21EC_callback = callback;
     fp->x2210_ThrowFlags.flags = 0;
-    Fighter_ChangeMotionState(gobj, 0x180, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwLoop, 0, NULL, 0, 1, 0);
     ftDonkey_8010DE88_inner(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftDk_Init_8010DB3C;
+    fp->cb.x21BC_callback_Accessory4 = ftDk_Init_8010DB3C;
 }
 
 void ftDk_SpecialLwEnd_Anim(HSD_GObj* gobj)
@@ -115,7 +120,6 @@ void ftDk_SpecialLwEnd_Anim(HSD_GObj* gobj)
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
@@ -135,9 +139,9 @@ void ftDk_SpecialLwEnd_Coll(HSD_GObj* gobj)
     }
 }
 
-void doTransition(HSD_GObj* gobj)
+static void doTransition(HSD_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 0x181, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialLwEnd, 0, NULL, 0, 1, 0);
 }
 
 void ftDk_MS_386_Anim(HSD_GObj* gobj)
@@ -165,22 +169,22 @@ void ftDk_SpecialLw_8010E0CC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(0x4C6, gobj, fp->ft_bones[1].x0_jobj);
-        fp->x2219_flag.bits.b0 = 1;
+        efSync_Spawn(1222, gobj, fp->ft_bones[TransN].x0_jobj);
+        fp->x2219_flag.bits.b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->cb.x21BC_callback_Accessory4 = NULL;
 }
 
 void ftDk_SpecialLw_8010E148(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!fp->x2219_flag.bits.b0) {
-        efSync_Spawn(0x4C7, gobj, fp->ft_bones[1].x0_jobj);
-        fp->x2219_flag.bits.b0 = 1;
+        efSync_Spawn(1223, gobj, fp->ft_bones[TransN].x0_jobj);
+        fp->x2219_flag.bits.b0 = true;
     }
     fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
     fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
-    fp->cb.x21BC_callback_Accessory4 = 0;
+    fp->cb.x21BC_callback_Accessory4 = NULL;
 }

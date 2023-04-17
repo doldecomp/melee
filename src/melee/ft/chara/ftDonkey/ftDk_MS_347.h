@@ -5,12 +5,8 @@
 
 bool ftDk_MS_347_800E0378(HSD_GObj* gobj);
 void ftDk_MS_347_Coll(HSD_GObj* gobj);
-void ftDk_MS_347_800E03C0(HSD_GObj* gobj);
-
-void ftDk_MS_347_Phys(HSD_GObj* gobj);
-void ftDk_MS_347_Coll(HSD_GObj* gobj);
-bool ftDk_MS_347_800E0378(HSD_GObj* gobj);
-void ftDk_MS_347_800E03C0(HSD_GObj* gobj);
 void ftDk_MS_347_IASA(HSD_GObj* gobj);
+void ftDk_MS_347_Phys(HSD_GObj* gobj);
+void ftDk_MS_347_800E03C0(HSD_GObj* gobj);
 
 #endif

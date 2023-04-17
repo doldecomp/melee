@@ -1,7 +1,6 @@
 #ifndef MELEE_FT_CHARA_FTDONKEY_FTDONKEY_SPECIALS_H
 #define MELEE_FT_CHARA_FTDONKEY_FTDONKEY_SPECIALS_H
 
-#include <platform.h>
 #include <baselib/forward.h>
 
 void ftDk_SpecialAirS_Enter(HSD_GObj* gobj);

@@ -1,24 +1,26 @@
+#include "forward.h"
+
 #include "ftDonkey/ftDk_SpecialS.h"
+
+#include "ftDk_SpecialLw.h"
 
 #include "ef/eflib.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
+#include "ft/ftcommon.h"
 #include "ft/inlines.h"
-#include "ftDonkey/ftdonkey.h"
 
 void ftDk_SpecialS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-
-    Fighter_ChangeMotionState(gobj, 0x17B, 0, NULL, 0.0f, 1.0f, 0.0f);
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialS, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     Fighter_UnsetCmdVar0(gobj);
-    fp->cb.x21BC_callback_Accessory4 = &ftDk_SpecialLw_8010E0CC;
+    fp->cb.x21BC_callback_Accessory4 = ftDk_SpecialLw_8010E0CC;
 }
 
 void ftDk_SpecialAirS_Enter(HSD_GObj* gobj)
@@ -26,8 +28,8 @@ void ftDk_SpecialAirS_Enter(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     fp->x80_self_vel.x /= donkey_attr->SpecialS.x3C_MIN_STICK_X_MOMENTUM;
-    fp->x80_self_vel.y = 0.0f;
-    Fighter_ChangeMotionState(gobj, 0x17C, 0, NULL, 0.0f, 1.0f, 0.0f);
+    fp->x80_self_vel.y = 0;
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirS, 0, NULL, 0, 1, 0);
     ftAnim_8006EBA4(gobj);
     Fighter_UnsetCmdVar0(gobj);
     fp->cb.x21BC_callback_Accessory4 = &ftDk_SpecialLw_8010E148;
@@ -72,6 +74,8 @@ void ftDk_SpecialAirS_Phys(HSD_GObj* gobj)
     }
 }
 
+static void doAirTransition(HSD_GObj* gobj);
+
 void ftDk_SpecialS_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -84,6 +88,8 @@ void ftDk_SpecialS_Coll(HSD_GObj* gobj)
     }
 }
 
+static void doGroundTransition(HSD_GObj* gobj);
+
 void ftDk_SpecialAirS_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
@@ -95,21 +101,21 @@ void doAirTransition(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, 0x17C, 0x0C4C508A, NULL,
-                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    if (fp->x2219_flag.bits.b0 == 1) {
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialAirS, 0x0C4C508A, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
+    if (fp->x2219_flag.bits.b0 == true) {
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }
 }
 
-void doGroundTransition(HSD_GObj* gobj)
+static void doGroundTransition(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x17B, 0x0C4C508A, NULL,
-                              fp->x894_currentAnimFrame, 1.0f, 0.0f);
-    if (fp->x2219_flag.bits.b0 == 1) {
+    Fighter_ChangeMotionState(gobj, ftDk_MS_SpecialS, 0x0C4C508A, NULL,
+                              fp->x894_currentAnimFrame, 1, 0);
+    if (fp->x2219_flag.bits.b0 == true) {
         fp->cb.x21D4_callback_EnterHitlag = efLib_PauseAll;
         fp->cb.x21D8_callback_ExitHitlag = efLib_ResumeAll;
     }

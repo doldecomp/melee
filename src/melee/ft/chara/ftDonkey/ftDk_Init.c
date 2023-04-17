@@ -2,6 +2,19 @@
 
 #include "ftDonkey/ftDk_Init.h"
 
+#include "ftDk_MS_341.h"
+#include "ftDk_MS_342.h"
+#include "ftDk_MS_345_0.h"
+#include "ftDk_MS_345_1.h"
+#include "ftDk_MS_346.h"
+#include "ftDk_MS_347.h"
+#include "ftDk_MS_348.h"
+#include "ftDk_MS_349.h"
+#include "ftDk_SpecialHi.h"
+#include "ftDk_SpecialLw.h"
+#include "ftDk_SpecialN.h"
+#include "ftDk_SpecialS.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcamera.h"
@@ -9,19 +22,6 @@
 #include "ft/ftdata.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
-#include "ftDonkey/ftDk_MS_341.h"
-#include "ftDonkey/ftDk_MS_342.h"
-#include "ftDonkey/ftDk_MS_345.h"
-#include "ftDonkey/ftDk_MS_346.h"
-#include "ftDonkey/ftDk_MS_347.h"
-#include "ftDonkey/ftDk_MS_348.h"
-#include "ftDonkey/ftDk_MS_349.h"
-#include "ftDonkey/ftDk_SpecialHi.h"
-#include "ftDonkey/ftDk_SpecialLw.h"
-#include "ftDonkey/ftDk_SpecialN.h"
-#include "ftDonkey/ftDk_SpecialS.h"
-#include "ftDonkey/ftDk_Unk05.h"
-#include "ftDonkey/ftdonkey.h"
 #include "lb/lbmthp.h"
 #include "mp/mplib.h"
 
@@ -537,48 +537,46 @@ void ftDk_Init_8010D774(HSD_GObj* gobj)
     ftDk_SpecialHi_DestroyAllEffects(gobj);
 }
 
-void ftDk_Init_OnItemPickup(HSD_GObj* gobj, bool bool)
+void ftDk_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
 {
-    Fighter_OnItemPickup(gobj, bool, 1, 1);
+    Fighter_OnItemPickup(gobj, arg1, 1, 1);
 }
 
 void ftDk_Init_OnItemInvisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter_OnItemInvisible(gobj, true);
 }
 
 void ftDk_Init_OnItemVisible(HSD_GObj* gobj)
 {
-    Fighter_OnItemVisible(gobj, 1);
+    Fighter_OnItemVisible(gobj, true);
 }
 
-void ftDk_Init_OnItemDrop(HSD_GObj* gobj, bool bool1)
+void ftDk_Init_OnItemDrop(HSD_GObj* gobj, bool arg1)
 {
-    Fighter_OnItemDrop(gobj, bool1, 1, 1);
+    Fighter_OnItemDrop(gobj, arg1, true, true);
 }
 
 void ftDk_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftDonkeyAttributes* attr = fp->x2D4_specialAttributes;
-
     if (fp->fv.dk.x222C == attr->SpecialN.x2C_MAX_ARM_SWINGS) {
-        ft_800BFFD0(fp, 0x39, 0);
+        ft_800BFFD0(fp, 57, 0);
     }
 }
 
 void ftDk_Init_OnLoad(HSD_GObj* gobj)
 {
+    /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
     ftDonkeyAttributes* ftData_attr = ftdata->ext_attr;
-
-    ftData_attr->x8 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x128U));
-    ftData_attr->xC = lbMthp_8001E8F8(ftData_80085E50(fp, 0x129U));
-    ftData_attr->x10 = lbMthp_8001E8F8(ftData_80085E50(fp, 0x12AU));
+    ftData_attr->x8 = lbMthp_8001E8F8(ftData_80085E50(fp, 296));
+    ftData_attr->xC = lbMthp_8001E8F8(ftData_80085E50(fp, 297));
+    ftData_attr->x10 = lbMthp_8001E8F8(ftData_80085E50(fp, 298));
     PUSH_ATTRS(fp, ftDonkeyAttributes);
-
-    fp->x2222_flag.bits.b0 = 1;
+    fp->x2222_flag.bits.b0 = true;
     fp->x2CC = fp->x2D4_specialAttributes;
 }
 
@@ -589,36 +587,32 @@ void ftDk_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftDk_Init_OnKnockbackEnter(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackEnter(gobj, 1);
+    Fighter_OnKnockbackEnter(gobj, true);
 }
 
 void ftDk_Init_OnKnockbackExit(HSD_GObj* gobj)
 {
-    Fighter_OnKnockbackExit(gobj, 1);
+    Fighter_OnKnockbackExit(gobj, true);
 }
 
 void ftDk_Init_8010DB3C(HSD_GObj* gobj)
 {
-    bool bool1;
+    bool was_throw_b3;
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = fp->x2D4_specialAttributes;
     CollData* colldata = &fp->x6F0_collData;
-
     /// @todo Unused stack.
 #ifdef MUST_MATCH
     u8 _[8];
 #endif
-
     if (fp->x2210_ThrowFlags.b3) {
         fp->x2210_ThrowFlags.b3 = false;
-        bool1 = true;
+        was_throw_b3 = true;
     } else {
-        bool1 = false;
+        was_throw_b3 = false;
     }
-
-    if (bool1 && (colldata->x134_envFlags & 0x18000)) {
+    if (was_throw_b3 && (colldata->x134_envFlags & 98304)) {
         Vec3 vec_list[4];
-
         int i;
         for (i = 0; i < 4; i++) {
             f32 temp_f5 = (donkey_attr->SpecialLw.x68 * i) -

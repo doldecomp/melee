@@ -14,6 +14,5 @@ void ftDk_SpecialHi_DestroyAllEffects(HSD_GObj* gobj);
 void ftDk_SpecialHi_Enter(HSD_GObj* gobj);
 void ftDk_SpecialHi_IASA(HSD_GObj* gobj);
 void ftDk_SpecialHi_Phys(HSD_GObj* gobj);
-void ftDonkey_SetCallbacks_SpecialHi(HSD_GObj* gobj);
 
 #endif
