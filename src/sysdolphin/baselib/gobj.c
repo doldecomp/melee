@@ -89,10 +89,11 @@ void HSD_GObj_80390CFC(void)
                             HSD_GObjPLink_80390228(proc->gobj);
                         } else {
                             if (HSD_GObj_804CE3E4.b3) {
-                                HSD_GObjPLink_8039032C(HSD_GObj_804CE3E4.type, proc->gobj,
-                                              HSD_GObj_804CE3E4.p_link,
-                                              HSD_GObj_804CE3E4.p_prio,
-                                              HSD_GObj_804CE3E4.gobj);
+                                HSD_GObjPLink_8039032C(
+                                    HSD_GObj_804CE3E4.type, proc->gobj,
+                                    HSD_GObj_804CE3E4.p_link,
+                                    HSD_GObj_804CE3E4.p_prio,
+                                    HSD_GObj_804CE3E4.gobj);
                             }
                             if (HSD_GObj_804CE3E4.b2) {
                                 HSD_GObjProc_8038FE24(proc);
@@ -183,7 +184,8 @@ void HSD_GObj_80391070(HSD_GObj* gobj, s32 arg1)
 
 #ifdef MUST_MATCH
 // don't inline HSD_GObj_80390EB8
-// TODO is there a file boundary between HSD_GObj_80390EB8 and HSD_GObj_80391070?
+// TODO is there a file boundary between HSD_GObj_80390EB8 and
+// HSD_GObj_80391070?
 #pragma push
 #pragma dont_inline on
 #endif

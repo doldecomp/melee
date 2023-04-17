@@ -212,7 +212,7 @@ void ftMt_SpecialS_OnReflect(HSD_GObj* gobj);
 // Neutral Special - Shadow Ball (SpecialN/SpecialAirN) //
 
 s32 ftMt_SpecialN_GetChargeLevel(HSD_GObj* gobj, s32* chargeLevel,
-                                     s32* chargeCycles);
+                                 s32* chargeCycles);
 bool ftMt_SpecialN_CheckShadowBallRemove(HSD_GObj* gobj);
 bool ftMt_SpecialN_CheckShadowBallCancel(HSD_GObj* gobj);
 void ftMt_SpecialN_SetNULL(HSD_GObj* gobj);

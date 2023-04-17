@@ -855,7 +855,8 @@ void ftSk_SpecialS_80111830(HSD_GObj* gobj)
         lb_8000B1CC(fp->x5E8_fighterBones[26].x0_jobj, NULL, &vec1);
 
         {
-            s32 flags = ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &vec0, &vec1, 0.5F);
+            s32 flags =
+                ftNs_AttackHi4_YoyoCheckEnvColl(gobj, &vec0, &vec1, 0.5F);
 
             if (flags != 0) {
                 ftSk_SpecialS_80111DF8(gobj);

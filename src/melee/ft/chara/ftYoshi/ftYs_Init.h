@@ -12,10 +12,10 @@ extern MotionState ftYs_Init_MotionStateTable[];
 void ftYs_Init_8012B8A4(HSD_GObj* gobj);
 void ftYs_Init_8012B6E8(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg);
 void ftYs_Init_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
-                      f32 start_frame);
+                        f32 start_frame);
 void ftYs_Shield_8012C49C(HSD_GObj* gobj);
 void ftYs_Init_8012B804(Fighter* fp, struct S_UNK_YOSHI1* unk_struct_arg,
-                      f32 start_frame);
+                        f32 start_frame);
 
 unk_t ftYs_Init_8012BECC(void);
 void ftYs_Shield_8012C850(HSD_GObj* gobj);

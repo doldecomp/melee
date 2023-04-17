@@ -99,7 +99,8 @@ void ftZd_SpecialN_Anim(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 == 1) {
         fp->x2200_ftcmd_var0 = 2;
-        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZd_SpecialN_8013ADB0);
+        ftColl_CreateReflectHit(gobj, &attributes->x84,
+                                &ftZd_SpecialN_8013ADB0);
     }
 
     if (fp->x2200_ftcmd_var0 == 0) {
@@ -128,7 +129,8 @@ void ftZd_SpecialAirN_Anim(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 == 1U) {
         fp->x2200_ftcmd_var0 = 2U;
-        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZd_SpecialN_8013ADB0);
+        ftColl_CreateReflectHit(gobj, &attributes->x84,
+                                &ftZd_SpecialN_8013ADB0);
     }
 
     if (fp->x2200_ftcmd_var0 == 0U) {
@@ -221,7 +223,8 @@ void ftZd_SpecialN_8013AC88(HSD_GObj* gobj)
     attributes = fighter2->x2D4_specialAttributes;
 
     if (fighter2->x2200_ftcmd_var0 == 2U) {
-        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZd_SpecialN_8013ADB0);
+        ftColl_CreateReflectHit(gobj, &attributes->x84,
+                                &ftZd_SpecialN_8013ADB0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A8AC;
 }
@@ -246,7 +249,8 @@ void ftZd_SpecialN_8013AD1C(HSD_GObj* gobj)
     attributes = fighter2->x2D4_specialAttributes;
 
     if (fighter2->x2200_ftcmd_var0 == 2U) {
-        ftColl_CreateReflectHit(gobj, &attributes->x84, &ftZd_SpecialN_8013ADB0);
+        ftColl_CreateReflectHit(gobj, &attributes->x84,
+                                &ftZd_SpecialN_8013ADB0);
     }
     fp->cb.x21BC_callback_Accessory4 = &ftZd_SpecialN_8013A830;
 }

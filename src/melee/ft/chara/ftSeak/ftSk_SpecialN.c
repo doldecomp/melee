@@ -24,11 +24,12 @@ f32 ftSk_SpecialN_803CC598[] = {
 /* static */ void ftSk_SpecialN_80112408(void);
 
 jtbl_t ftSk_SpecialN_803CC5BC = {
-    ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408, ftSk_SpecialN_80112418,
-    ftSk_SpecialN_80112418, ftSk_SpecialN_80112408, ftSk_SpecialN_80112418, ftSk_SpecialN_80112418,
-    ftSk_SpecialN_80112408, ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
-    ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408, ftSk_SpecialN_80112418,
-    ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
+    ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
+    ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
+    ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
+    ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
+    ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
+    ftSk_SpecialN_80112418, ftSk_SpecialN_80112418, ftSk_SpecialN_80112408,
 };
 
 /* static */ void ftSk_SpecialN_80112660(void);
@@ -51,11 +52,12 @@ jtbl_t ftSk_SpecialN_803CC5BC = {
 /* static */ void ftSk_SpecialN_80112650(void);
 
 jtbl_t ftSk_SpecialN_803CC604 = {
-    ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650, ftSk_SpecialN_80112660,
-    ftSk_SpecialN_80112660, ftSk_SpecialN_80112650, ftSk_SpecialN_80112660, ftSk_SpecialN_80112660,
-    ftSk_SpecialN_80112650, ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
-    ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650, ftSk_SpecialN_80112660,
-    ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
+    ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
+    ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
+    ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
+    ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
+    ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
+    ftSk_SpecialN_80112660, ftSk_SpecialN_80112660, ftSk_SpecialN_80112650,
 };
 
 f32 const ftSk_Init_804D9650 = 0;

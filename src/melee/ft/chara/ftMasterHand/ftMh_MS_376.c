@@ -1,9 +1,9 @@
 #include "ftMh_MS_376.h"
 
-#include "ftMh_MS_389.h"
+#include "ftMh_CaptureWaitMasterHand.h"
 #include "ftMh_MS_372.h"
 #include "ftMh_MS_378.h"
-#include "ftMh_CaptureWaitMasterHand.h"
+#include "ftMh_MS_389.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
@@ -74,7 +74,8 @@ void ftMh_MS_379_Anim(HSD_GObj* gobj)
 
     if (fp->x2200_ftcmd_var0 != 0) {
         fp->x2200_ftcmd_var0 = 0;
-        ftMh_CaptureWaitMasterHand_80155D6C(fp->x1A58_interactedFighter, 0x14A);
+        ftMh_CaptureWaitMasterHand_80155D6C(fp->x1A58_interactedFighter,
+                                            0x14A);
         if (fp->x1A58_interactedFighter != 0) {
             HSD_GObj* victim = fp->x1A58_interactedFighter;
             Fighter* victim_fp = GET_FIGHTER(victim);

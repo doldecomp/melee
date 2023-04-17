@@ -54,7 +54,8 @@ int lbColl_80005BB0(HitCapsule* arg0, int arg1)
     }
 
     return lbAudioAx_80024184(
-        *(lbColl_803B9880 + (temp_r0 * 3) + (arg0->sfx_severity)), 127, 64, -1);
+        *(lbColl_803B9880 + (temp_r0 * 3) + (arg0->sfx_severity)), 127, 64,
+        -1);
 }
 
 f32 const lbColl_804D79F0 = 1e-5;

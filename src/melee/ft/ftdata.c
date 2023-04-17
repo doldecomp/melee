@@ -7,8 +7,8 @@
 #include "types.h"
 
 #include "ftCaptain/ftCa_Init.h"
-#include "ftCaptain/ftCa_SpecialLw.h"
 #include "ftCaptain/ftCa_SpecialHi.h"
+#include "ftCaptain/ftCa_SpecialLw.h"
 #include "ftCaptain/ftCa_SpecialN.h"
 #include "ftCaptain/ftCa_SpecialS.h"
 #include "ftCLink/ftCl_Init.h"
@@ -45,10 +45,10 @@
 #include "ftPopo/fticeclimber1.h"
 #include "ftPurin/ftPr_Init.h"
 #include "ftSamus/ftSs_Init.h"
-#include "ftSamus/ftSs_SpecialN.h"
-#include "ftSamus/ftSs_SpecialS.h"
 #include "ftSamus/ftSs_SpecialHi.h"
 #include "ftSamus/ftSs_SpecialLw_1.h"
+#include "ftSamus/ftSs_SpecialN.h"
+#include "ftSamus/ftSs_SpecialS.h"
 #include "ftSandbag/ftSb_Init.h"
 #include "ftSeak/ftSk_Init.h"
 #include "ftSeak/ftSk_SpecialHi.h"
@@ -118,31 +118,27 @@ Event ftData_Table_Unk1[FTKIND_MAX] = {
 };
 
 HSD_GObjEvent ftData_OnLoad[FTKIND_MAX] = {
-    ftMr_Init_OnLoad,      ftFx_Init_OnLoad,       ftCa_Init_OnLoad,
-    ftDk_Init_OnLoad,     ftKb_Init_OnLoad,     ftKp_Init_OnLoad,
-    ftLk_Init_OnLoad,       ftSk_Init_OnLoad,      ftNs_Init_OnLoad,
-    ftPe_Init_OnLoad,      ftPp_Init_OnLoad,      ftNn_Init_OnLoad,
-    ftPk_Init_OnLoad,    ftSs_Init_OnLoad,     ftYs_Init_OnLoad,
-    ftPr_Init_OnLoad,      ftMt_Init_OnLoad,    ftLg_Init_OnLoad,
-    ftMs_Init_OnLoad,       ftZd_Init_OnLoad,     ftCl_Init_OnLoad,
-    ftDr_Init_OnLoad,    ftFc_Init_OnLoad,     ftPc_Init_OnLoad,
-    ftGw_Init_OnLoad,  ftGn_Init_OnLoad,     ftFe_Init_OnLoad,
-    ftMh_Init_OnLoad, ftCh_Init_OnLoad, ftBo_Init_OnLoad,
-    ftGl_Init_OnLoad,   ftGk_Init_OnLoad, ftSb_Init_OnLoad,
+    ftMr_Init_OnLoad, ftFx_Init_OnLoad, ftCa_Init_OnLoad, ftDk_Init_OnLoad,
+    ftKb_Init_OnLoad, ftKp_Init_OnLoad, ftLk_Init_OnLoad, ftSk_Init_OnLoad,
+    ftNs_Init_OnLoad, ftPe_Init_OnLoad, ftPp_Init_OnLoad, ftNn_Init_OnLoad,
+    ftPk_Init_OnLoad, ftSs_Init_OnLoad, ftYs_Init_OnLoad, ftPr_Init_OnLoad,
+    ftMt_Init_OnLoad, ftLg_Init_OnLoad, ftMs_Init_OnLoad, ftZd_Init_OnLoad,
+    ftCl_Init_OnLoad, ftDr_Init_OnLoad, ftFc_Init_OnLoad, ftPc_Init_OnLoad,
+    ftGw_Init_OnLoad, ftGn_Init_OnLoad, ftFe_Init_OnLoad, ftMh_Init_OnLoad,
+    ftCh_Init_OnLoad, ftBo_Init_OnLoad, ftGl_Init_OnLoad, ftGk_Init_OnLoad,
+    ftSb_Init_OnLoad,
 };
 
 HSD_GObjEvent ftData_OnDeath[FTKIND_MAX] = {
-    ftMr_Init_OnDeath,      ftFx_Init_OnDeath,       ftCa_Init_OnDeath,
-    ftDk_Init_OnDeath,     ftKb_Init_OnDeath,     ftKp_Init_OnDeath,
-    ftLk_Init_OnDeath,       ftSk_Init_OnDeath,      ftNs_Init_OnDeath,
-    ftPe_Init_OnDeath,      ftPp_Init_OnDeath,      ftNn_Init_OnDeath,
-    ftPk_Init_OnDeath,    ftSs_Init_OnDeath,     ftYs_Init_OnDeath,
-    ftPr_Init_OnDeath,      ftMt_Init_OnDeath,    ftLg_Init_OnDeath,
-    ftMs_Init_OnDeath,       ftZd_Init_OnDeath,     ftCl_Init_OnDeath,
-    ftDr_Init_OnDeath,    ftFc_Init_OnDeath,     ftPc_Init_OnDeath,
-    ftGw_Init_OnDeath,  ftGn_Init_OnDeath,     ftFe_Init_OnDeath,
-    ftMh_Init_OnDeath, ftCh_Init_OnDeath, ftBo_Init_OnDeath,
-    ftGl_Init_OnDeath,   ftGk_Init_OnDeath, ftSb_Init_OnDeath,
+    ftMr_Init_OnDeath, ftFx_Init_OnDeath, ftCa_Init_OnDeath, ftDk_Init_OnDeath,
+    ftKb_Init_OnDeath, ftKp_Init_OnDeath, ftLk_Init_OnDeath, ftSk_Init_OnDeath,
+    ftNs_Init_OnDeath, ftPe_Init_OnDeath, ftPp_Init_OnDeath, ftNn_Init_OnDeath,
+    ftPk_Init_OnDeath, ftSs_Init_OnDeath, ftYs_Init_OnDeath, ftPr_Init_OnDeath,
+    ftMt_Init_OnDeath, ftLg_Init_OnDeath, ftMs_Init_OnDeath, ftZd_Init_OnDeath,
+    ftCl_Init_OnDeath, ftDr_Init_OnDeath, ftFc_Init_OnDeath, ftPc_Init_OnDeath,
+    ftGw_Init_OnDeath, ftGn_Init_OnDeath, ftFe_Init_OnDeath, ftMh_Init_OnDeath,
+    ftCh_Init_OnDeath, ftBo_Init_OnDeath, ftGl_Init_OnDeath, ftGk_Init_OnDeath,
+    ftSb_Init_OnDeath,
 };
 
 HSD_GObjEvent ftData_OnUserDataRemove[FTKIND_MAX] = {
@@ -190,11 +186,39 @@ MotionState* ftData_CharacterStateTables[FTKIND_MAX] = {
 };
 
 MotionState* ftData_UnkMotionStates0[FTKIND_MAX] = {
-    ftMr_Init_UnkMotionStates0, NULL, NULL, NULL,         ftKb_Init_UnkMotionStates0, NULL, NULL,
-    NULL,         NULL, NULL, NULL,         NULL,         NULL, NULL,
-    NULL,         NULL, NULL, ftLg_Init_UnkMotionStates0, NULL,         NULL, NULL,
-    NULL,         NULL, NULL, NULL,         NULL,         NULL, NULL,
-    NULL,         NULL, NULL, ftGk_Init_UnkMotionStates0, NULL,
+    ftMr_Init_UnkMotionStates0,
+    NULL,
+    NULL,
+    NULL,
+    ftKb_Init_UnkMotionStates0,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ftLg_Init_UnkMotionStates0,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    ftGk_Init_UnkMotionStates0,
+    NULL,
 };
 
 HSD_GObjEvent ftData_SpecialS[FTKIND_MAX] = {
@@ -954,44 +978,49 @@ HSD_GObjEvent ftData_UnkMotionStates4[FTKIND_MAX] = {
 };
 
 HSD_GObjEvent ftData_LoadSpecialAttrs[FTKIND_MAX] = {
-    ftMr_Init_LoadSpecialAttrs,     ftFx_Init_LoadSpecialAttrs,
-    ftCa_Init_LoadSpecialAttrs,   ftDk_Init_LoadSpecialAttrs,
-    ftKb_Init_LoadSpecialAttrs,     ftKp_Init_LoadSpecialAttrs,
-    ftLk_Init_LoadSpecialAttrs,      ftSk_Init_LoadSpecialAttrs,
-    ftNs_Init_LoadSpecialAttrs,      ftPe_Init_LoadSpecialAttrs,
-    ftPp_Init_LoadSpecialAttrs,      ftNn_Init_LoadSpecialAttrs,
-    ftPk_Init_LoadSpecialAttrs,   ftSs_Init_LoadSpecialAttrs,
-    ftYs_Init_LoadSpecialAttrs,     ftPr_Init_LoadSpecialAttrs,
-    ftMt_Init_LoadSpecialAttrs,    ftLg_Init_LoadSpecialAttrs,
-    ftMs_Init_LoadSpecialAttrs,      ftZd_Init_LoadSpecialAttrs,
-    ftCl_Init_LoadSpecialAttrs,     ftDr_Init_LoadSpecialAttrs,
-    ftFc_Init_LoadSpecialAttrs,     ftPc_Init_LoadSpecialAttrs,
+    ftMr_Init_LoadSpecialAttrs, ftFx_Init_LoadSpecialAttrs,
+    ftCa_Init_LoadSpecialAttrs, ftDk_Init_LoadSpecialAttrs,
+    ftKb_Init_LoadSpecialAttrs, ftKp_Init_LoadSpecialAttrs,
+    ftLk_Init_LoadSpecialAttrs, ftSk_Init_LoadSpecialAttrs,
+    ftNs_Init_LoadSpecialAttrs, ftPe_Init_LoadSpecialAttrs,
+    ftPp_Init_LoadSpecialAttrs, ftNn_Init_LoadSpecialAttrs,
+    ftPk_Init_LoadSpecialAttrs, ftSs_Init_LoadSpecialAttrs,
+    ftYs_Init_LoadSpecialAttrs, ftPr_Init_LoadSpecialAttrs,
+    ftMt_Init_LoadSpecialAttrs, ftLg_Init_LoadSpecialAttrs,
+    ftMs_Init_LoadSpecialAttrs, ftZd_Init_LoadSpecialAttrs,
+    ftCl_Init_LoadSpecialAttrs, ftDr_Init_LoadSpecialAttrs,
+    ftFc_Init_LoadSpecialAttrs, ftPc_Init_LoadSpecialAttrs,
     ftGw_Init_LoadSpecialAttrs, ftGn_Init_LoadSpecialAttrs,
-    ftFe_Init_LoadSpecialAttrs,       ftMh_Init_LoadSpecialAttrs,
+    ftFe_Init_LoadSpecialAttrs, ftMh_Init_LoadSpecialAttrs,
     ftCh_Init_LoadSpecialAttrs, ftBo_Init_LoadSpecialAttrs,
-    ftGl_Init_LoadSpecialAttrs,  ftGk_Init_LoadSpecialAttrs,
+    ftGl_Init_LoadSpecialAttrs, ftGk_Init_LoadSpecialAttrs,
     ftSb_Init_LoadSpecialAttrs,
 };
 
 /// Standard Character .dat File Names
 char* ftData_803C1F40[FTKIND_MAX * 2] = {
-    ftMr_Init_DatFilename, ftMr_Init_DataName, ftFx_Init_DatFilename,         ftFx_Init_DataName,
-    ftCa_Init_DatFilename, ftCa_Init_DataName, ftDk_Init_DatFilename,         ftDk_Init_DataName,
-    ftKb_Init_DatFilename, ftKb_Init_DataName, ftKp_Init_DatFilename,         ftKp_Init_DataName,
-    ftLk_Init_DatFilename, ftLk_Init_DataName, ftSk_Init_DatFilename,         ftSk_Init_DataName,
-    ftNs_Init_DatFilename, ftNs_Init_DataName, ftPe_Init_DatFilename, ftPe_Init_DataName,
-    ftPp_Init_DatFilename, ftPp_Init_DataName, ftNn_Init_DatFilename,         ftNn_Init_DataName,
-    ftPk_Init_DatFilename, ftPk_Init_DataName, ftSs_Init_DatFilename,         ftSs_Init_DataName,
-    ftYs_Init_DatFilename, ftYs_Init_DataName, ftPr_Init_DatFilename,         ftPr_Init_DataName,
-    ftMt_Init_DatFilename, ftMt_Init_DataName, ftLg_Init_DatFilename,         ftLg_Init_DataName,
-    ftMs_Init_DatFilename, ftMs_Init_DataName, ftZd_Init_DatFilename,         ftZd_Init_DataName,
-    ftCl_Init_DatFilename, ftCl_Init_DataName, ftDr_Init_DatFilename,         ftDr_Init_DataName,
-    ftFc_Init_DatFilename, ftFc_Init_DataName, ftPc_Init_DatFilename,         ftPc_Init_DataName,
-    ftGw_Init_DatFilename, ftGw_Init_DataName, ftGn_Init_DatFilename,         ftGn_Init_DataName,
-    ftFe_Init_DatFilename, ftFe_Init_DataName, ftMh_Init_DatFilename,         ftMh_Init_DataName,
-    ftCh_Init_DatFilename, ftCh_Init_DataName, ftBo_Init_DatFilename,         ftBo_Init_DataName,
-    ftGl_Init_DatFilename, ftGl_Init_DataName, ftGk_Init_DatFilename,         ftGk_Init_DataName,
-    ftSb_Init_DatFilename, ftSb_Init_DataName,
+    ftMr_Init_DatFilename, ftMr_Init_DataName,    ftFx_Init_DatFilename,
+    ftFx_Init_DataName,    ftCa_Init_DatFilename, ftCa_Init_DataName,
+    ftDk_Init_DatFilename, ftDk_Init_DataName,    ftKb_Init_DatFilename,
+    ftKb_Init_DataName,    ftKp_Init_DatFilename, ftKp_Init_DataName,
+    ftLk_Init_DatFilename, ftLk_Init_DataName,    ftSk_Init_DatFilename,
+    ftSk_Init_DataName,    ftNs_Init_DatFilename, ftNs_Init_DataName,
+    ftPe_Init_DatFilename, ftPe_Init_DataName,    ftPp_Init_DatFilename,
+    ftPp_Init_DataName,    ftNn_Init_DatFilename, ftNn_Init_DataName,
+    ftPk_Init_DatFilename, ftPk_Init_DataName,    ftSs_Init_DatFilename,
+    ftSs_Init_DataName,    ftYs_Init_DatFilename, ftYs_Init_DataName,
+    ftPr_Init_DatFilename, ftPr_Init_DataName,    ftMt_Init_DatFilename,
+    ftMt_Init_DataName,    ftLg_Init_DatFilename, ftLg_Init_DataName,
+    ftMs_Init_DatFilename, ftMs_Init_DataName,    ftZd_Init_DatFilename,
+    ftZd_Init_DataName,    ftCl_Init_DatFilename, ftCl_Init_DataName,
+    ftDr_Init_DatFilename, ftDr_Init_DataName,    ftFc_Init_DatFilename,
+    ftFc_Init_DataName,    ftPc_Init_DatFilename, ftPc_Init_DataName,
+    ftGw_Init_DatFilename, ftGw_Init_DataName,    ftGn_Init_DatFilename,
+    ftGn_Init_DataName,    ftFe_Init_DatFilename, ftFe_Init_DataName,
+    ftMh_Init_DatFilename, ftMh_Init_DataName,    ftCh_Init_DatFilename,
+    ftCh_Init_DataName,    ftBo_Init_DatFilename, ftBo_Init_DataName,
+    ftGl_Init_DatFilename, ftGl_Init_DataName,    ftGk_Init_DatFilename,
+    ftGk_Init_DataName,    ftSb_Init_DatFilename, ftSb_Init_DataName,
 };
 
 HSD_GObjEvent ftData_UnkMotionStates5[FTKIND_MAX] = {
@@ -1164,35 +1193,44 @@ struct {
     Fighter_CostumeStrings* costume_strings[FTKIND_MAX];
     /// Animation .dat Filenames
     char* anim_dat_filenames[FTKIND_MAX];
-} ftData_803C2360 = {
-    {
-        ftMr_Init_CostumeStrings, ftFx_Init_CostumeStrings,
-        ftCa_Init_CostumeStrings,           ftDk_Init_CostumeStrings,
-        ftKb_Init_CostumeStrings,           ftKp_Init_CostumeStrings,
-        ftLk_Init_CostumeStrings,           ftSk_Init_CostumeStrings,
-        ftNs_Init_CostumeStrings,           ftPe_Init_CostumeStrings,
-        ftPp_Init_CostumeStrings,           ftNn_Init_CostumeStrings,
-        ftPk_Init_CostumeStrings,           ftSs_Init_CostumeStrings,
-        ftYs_Init_CostumeStrings,           ftPr_Init_CostumeStrings,
-        ftMt_Init_CostumeStrings,           ftLg_Init_CostumeStrings,
-        ftMs_Init_CostumeStrings,           ftZd_Init_CostumeStrings,
-        ftCl_Init_CostumeStrings,           ftDr_Init_CostumeStrings,
-        ftFc_Init_CostumeStrings,           ftPc_Init_CostumeStrings,
-        ftGw_Init_CostumeStrings,           ftGn_Init_CostumeStrings,
-        ftFe_Init_CostumeStrings,           ftMh_Init_CostumeStrings,
-        ftCh_Init_CostumeStrings,           ftBo_Init_CostumeStrings,
-        ftGl_Init_CostumeStrings,           ftGk_Init_CostumeStrings,
-        ftSb_Init_CostumeStrings,
-    },
-    {
-        ftMr_Init_AnimDatFilename, ftFx_Init_AnimDatFilename, ftCa_Init_AnimDatFilename, ftDk_Init_AnimDatFilename, ftKb_Init_AnimDatFilename,
-        ftKp_Init_AnimDatFilename, ftLk_Init_AnimDatFilename, ftSk_Init_AnimDatFilename, ftNs_Init_AnimDatFilename, ftPe_Init_AnimDatFilename,
-        ftPp_Init_AnimDatFilename, ftNn_Init_AnimDatFilename, ftPk_Init_AnimDatFilename, ftSs_Init_AnimDatFilename, ftYs_Init_AnimDatFilename,
-        ftPr_Init_AnimDatFilename, ftMt_Init_AnimDatFilename, ftLg_Init_AnimDatFilename, ftMs_Init_AnimDatFilename, ftZd_Init_AnimDatFilename,
-        ftCl_Init_AnimDatFilename, ftDr_Init_AnimDatFilename, ftFc_Init_AnimDatFilename, ftPc_Init_AnimDatFilename, ftGw_Init_AnimDatFilename,
-        ftGn_Init_AnimDatFilename, ftFe_Init_AnimDatFilename, ftMh_Init_AnimDatFilename, ftCh_Init_AnimDatFilename, ftBo_Init_AnimDatFilename,
-        ftGl_Init_AnimDatFilename, ftGk_Init_AnimDatFilename, ftSb_Init_AnimDatFilename,
-    }
+} ftData_803C2360 = { {
+                          ftMr_Init_CostumeStrings, ftFx_Init_CostumeStrings,
+                          ftCa_Init_CostumeStrings, ftDk_Init_CostumeStrings,
+                          ftKb_Init_CostumeStrings, ftKp_Init_CostumeStrings,
+                          ftLk_Init_CostumeStrings, ftSk_Init_CostumeStrings,
+                          ftNs_Init_CostumeStrings, ftPe_Init_CostumeStrings,
+                          ftPp_Init_CostumeStrings, ftNn_Init_CostumeStrings,
+                          ftPk_Init_CostumeStrings, ftSs_Init_CostumeStrings,
+                          ftYs_Init_CostumeStrings, ftPr_Init_CostumeStrings,
+                          ftMt_Init_CostumeStrings, ftLg_Init_CostumeStrings,
+                          ftMs_Init_CostumeStrings, ftZd_Init_CostumeStrings,
+                          ftCl_Init_CostumeStrings, ftDr_Init_CostumeStrings,
+                          ftFc_Init_CostumeStrings, ftPc_Init_CostumeStrings,
+                          ftGw_Init_CostumeStrings, ftGn_Init_CostumeStrings,
+                          ftFe_Init_CostumeStrings, ftMh_Init_CostumeStrings,
+                          ftCh_Init_CostumeStrings, ftBo_Init_CostumeStrings,
+                          ftGl_Init_CostumeStrings, ftGk_Init_CostumeStrings,
+                          ftSb_Init_CostumeStrings,
+                      },
+                      {
+                          ftMr_Init_AnimDatFilename, ftFx_Init_AnimDatFilename,
+                          ftCa_Init_AnimDatFilename, ftDk_Init_AnimDatFilename,
+                          ftKb_Init_AnimDatFilename, ftKp_Init_AnimDatFilename,
+                          ftLk_Init_AnimDatFilename, ftSk_Init_AnimDatFilename,
+                          ftNs_Init_AnimDatFilename, ftPe_Init_AnimDatFilename,
+                          ftPp_Init_AnimDatFilename, ftNn_Init_AnimDatFilename,
+                          ftPk_Init_AnimDatFilename, ftSs_Init_AnimDatFilename,
+                          ftYs_Init_AnimDatFilename, ftPr_Init_AnimDatFilename,
+                          ftMt_Init_AnimDatFilename, ftLg_Init_AnimDatFilename,
+                          ftMs_Init_AnimDatFilename, ftZd_Init_AnimDatFilename,
+                          ftCl_Init_AnimDatFilename, ftDr_Init_AnimDatFilename,
+                          ftFc_Init_AnimDatFilename, ftPc_Init_AnimDatFilename,
+                          ftGw_Init_AnimDatFilename, ftGn_Init_AnimDatFilename,
+                          ftFe_Init_AnimDatFilename, ftMh_Init_AnimDatFilename,
+                          ftCh_Init_AnimDatFilename, ftBo_Init_AnimDatFilename,
+                          ftGl_Init_AnimDatFilename, ftGk_Init_AnimDatFilename,
+                          ftSb_Init_AnimDatFilename,
+                      }
 
 };
 

@@ -360,7 +360,8 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
                                        FtStateChange_SkipUpdateModel |
                                        FtStateChange_PreserveGfx),
                                       NULL, 0.0f, 1.0f, 0.0f);
-            temp_r28->cb.x21BC_callback_Accessory4 = ftFx_SpecialN_CreateBlasterShot;
+            temp_r28->cb.x21BC_callback_Accessory4 =
+                ftFx_SpecialN_CreateBlasterShot;
             temp_r28->sv.fx.SpecialN.isBlasterLoop = false;
             it_802ADDD0(temp_r28->ev.fx.x222C_blasterGObj, 1);
         } else {

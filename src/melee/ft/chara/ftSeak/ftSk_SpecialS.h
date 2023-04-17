@@ -9,7 +9,8 @@ void ftSk_SpecialS_80110490(Fighter* fp);
 void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, f32 arg8);
 void ftSk_SpecialS_80110788(HSD_GObj* gobj);
 void ftSk_SpecialS_8011097C(HSD_GObj* gobj);
-void ftSk_SpecialS_UpdateHitboxes(HSD_GObj* gobj, Vec3* new_position, s32 hitbox_id);
+void ftSk_SpecialS_UpdateHitboxes(HSD_GObj* gobj, Vec3* new_position,
+                                  s32 hitbox_id);
 void ftSk_SpecialS_ZeroHitboxPositions(HSD_GObj* gobj);
 void ftSk_SpecialS_80110AEC(HSD_GObj* gobj);
 void ftSk_SpecialS_80110BCC(HSD_GObj* gobj);

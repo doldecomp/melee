@@ -171,9 +171,11 @@ static UnkBgmStruct grDatFiles_803E07E4 = {
 };
 
 UnkStage6B0 grDatFiles_803E0848 = {
-    1,  0x80, {}, 0x1E,          0,  1,  0x8000, 10, 0,     0, 1, 1, 1,  {},
-    40, 10,   50, 100,           10, 10, 10,     10, false, 0, 0, 0, 30, 10,
-    0,  0,    {}, &grDatFiles_803E07E4, 1,
+    1,  0x80, {}, 0x1E, 0,  1,  0x8000, 10,
+    0,  0,    1,  1,    1,  {}, 40,     10,
+    50, 100,  10, 10,   10, 10, false,  0,
+    0,  0,    30, 10,   0,  0,  {},     &grDatFiles_803E07E4,
+    1,
 };
 
 UnkStageDat grDatFiles_803E0924 = { 0 };

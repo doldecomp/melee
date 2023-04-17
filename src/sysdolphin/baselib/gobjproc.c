@@ -16,14 +16,17 @@ void HSD_GObjProc_8038FC18(HSD_GObjProc* gproc)
         HSD_GObj_804D7830 = gproc->next;
     }
     if (gproc ==
-        HSD_GObj_804D7844[temp_r7 + temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)])
+        HSD_GObj_804D7844[temp_r7 +
+                          temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)])
     {
         if (gproc->prev != NULL && gproc->prev->gobj->p_link == temp_r7) {
-            HSD_GObj_804D7844[temp_r7 + temp_r8 * (HSD_GObjLibInitData.p_link_max +
-                                              1)] = gproc->prev;
+            HSD_GObj_804D7844[temp_r7 +
+                              temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)] =
+                gproc->prev;
         } else {
-            HSD_GObj_804D7844[temp_r7 + temp_r8 * (HSD_GObjLibInitData.p_link_max +
-                                              1)] = NULL;
+            HSD_GObj_804D7844[temp_r7 +
+                              temp_r8 * (HSD_GObjLibInitData.p_link_max + 1)] =
+                NULL;
         }
     }
     if (gproc->prev != NULL) {
@@ -56,7 +59,8 @@ inline void assertProc(HSD_GObjProc* gproc)
     HSD_ASSERT(31, gproc);
 }
 
-HSD_GObjProc* HSD_GObjProc_8038FD54(HSD_GObj* gobj, void (*func)(HSD_GObj*), u8 pri)
+HSD_GObjProc* HSD_GObjProc_8038FD54(HSD_GObj* gobj, void (*func)(HSD_GObj*),
+                                    u8 pri)
 {
     HSD_GObjProc* gproc;
 

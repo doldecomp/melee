@@ -442,7 +442,7 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj);
 bool ftFx_SpecialS_CheckGhostRemove(HSD_GObj* gobj);
 u32 ftFx_SpecialS_GetCmdVar2(HSD_GObj* gobj);
 void ftFx_SpecialS_CopyGhostPosIndexed(HSD_GObj* gobj, s32 index,
-                                        Vec3* ghostPos);
+                                       Vec3* ghostPos);
 f32 ftFx_SpecialS_ReturnFloatVarIndexed(HSD_GObj* gobj, s32 index);
 void ftFx_SpecialSStart_Enter(HSD_GObj* gobj);
 void ftFx_SpecialAirSStart_Enter(HSD_GObj* gobj);

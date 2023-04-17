@@ -295,10 +295,12 @@ void forceStringAllocation(
               // to end up in data by the compiler despite not being used
 {
     if (dobj->pobj == NULL) {
-        __assert(HSD_DObj_804D5C78, 700, "can not find specified pobj in link.\n");
+        __assert(HSD_DObj_804D5C78, 700,
+                 "can not find specified pobj in link.\n");
     }
     if (dobj->pobj == NULL) {
-        __assert(HSD_DObj_804D5C78, 702, "can not find specified pobj in link.");
+        __assert(HSD_DObj_804D5C78, 702,
+                 "can not find specified pobj in link.");
     }
     if (dobj->mobj != mobj) {
         __assert(HSD_DObj_804D5C78, 704, "dobj->mobj == mobj");

@@ -1,9 +1,9 @@
 #include "ftMh_MS_372.h"
 
-#include "ftMh_MS_389.h"
-#include "ftMh_MS_375.h"
 #include "ftMh_CaptureMasterHand_0.h"
 #include "ftMh_CaptureWaitMasterHand.h"
+#include "ftMh_MS_375.h"
+#include "ftMh_MS_389.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"

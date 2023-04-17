@@ -34,7 +34,7 @@ static StageCallbacks grTNs_803E9030[4] = {
 };
 
 StageData grTNs_803E908C = {
-    0x00000036,       grTNs_803E9030,     "/GrTNs.dat",     grTNess_802225D4,
+    0x00000036,       grTNs_803E9030,   "/GrTNs.dat",     grTNess_802225D4,
     grTNess_802225D0, grTNess_80222644, grTNess_80222648, grTNess_8022266C,
     grTNess_802228A4, grTNess_802228AC, 0x00000001,
 };

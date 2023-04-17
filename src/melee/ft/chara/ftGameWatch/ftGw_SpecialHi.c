@@ -30,7 +30,8 @@ void ftGw_SpecialHi_ItemRescueSetup(HSD_GObj* gobj)
             fp->cb.x21E4_callback_OnDeath2 = ftGw_Init_OnDamage;
             fp->cb.x21DC_callback_OnTakeDamage = ftGw_Init_OnDamage;
         }
-        fp->cb.x21D4_callback_EnterHitlag = ftGw_SpecialHi_ItemRescueEnterHitlag;
+        fp->cb.x21D4_callback_EnterHitlag =
+            ftGw_SpecialHi_ItemRescueEnterHitlag;
         fp->cb.x21D8_callback_ExitHitlag = ftGw_SpecialHi_ItemRescueExitHitlag;
         fp->cb.x21BC_callback_Accessory4 = NULL;
     }

@@ -446,17 +446,19 @@ void GXSetVtxAttrFmt(u32 arg0, u32 arg1, s32 arg2, u32 arg3, u8 arg4)
 }
 
 #ifdef MWERKS_GEKKO
-static jtbl_t jtbl_804010F4 = { &GXAttr_8033CA6C, &GXAttr_8033CA8C, &GXAttr_8033CAAC,
-                                &GXAttr_8033CACC, &GXAttr_8033CAEC, &GXAttr_8033CB04,
+static jtbl_t jtbl_804010F4 = { &GXAttr_8033CA6C, &GXAttr_8033CA8C,
+                                &GXAttr_8033CAAC, &GXAttr_8033CACC,
+                                &GXAttr_8033CAEC, &GXAttr_8033CB04,
                                 &GXAttr_8033CB24 };
 
-static jtbl_t jtbl_80401110 = { &GXAttr_8033C8E0, &GXAttr_8033C8EC, &GXAttr_8033C8F8,
-                                &GXAttr_8033C904, &GXAttr_8033C920, &GXAttr_8033C928,
-                                &GXAttr_8033C930, &GXAttr_8033C938, &GXAttr_8033C940,
-                                &GXAttr_8033C948, &GXAttr_8033C950, &GXAttr_8033C958,
-                                &GXAttr_8033C95C, &GXAttr_8033C95C, &GXAttr_8033C95C,
-                                &GXAttr_8033C95C, &GXAttr_8033C95C, &GXAttr_8033C95C,
-                                &GXAttr_8033C95C, &GXAttr_8033C910, &GXAttr_8033C918 };
+static jtbl_t jtbl_80401110 = {
+    &GXAttr_8033C8E0, &GXAttr_8033C8EC, &GXAttr_8033C8F8, &GXAttr_8033C904,
+    &GXAttr_8033C920, &GXAttr_8033C928, &GXAttr_8033C930, &GXAttr_8033C938,
+    &GXAttr_8033C940, &GXAttr_8033C948, &GXAttr_8033C950, &GXAttr_8033C958,
+    &GXAttr_8033C95C, &GXAttr_8033C95C, &GXAttr_8033C95C, &GXAttr_8033C95C,
+    &GXAttr_8033C95C, &GXAttr_8033C95C, &GXAttr_8033C95C, &GXAttr_8033C910,
+    &GXAttr_8033C918
+};
 #endif
 
 void __GXSetVAT(void)
